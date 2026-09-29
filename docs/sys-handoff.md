@@ -46,6 +46,43 @@ Commits on the branch, oldest first:
 6. `a936b2c` Windows root-matching fix plus Windows path test
 7. this handoff document (`docs/sys-handoff.md`)
 
+## 2a. Ideas and decisions from the discussions with the owner
+
+Most technical content lives in `docs/sys-package-plan.md`. These points came out of the
+conversations and are easy to lose:
+
+- **References that count.** The API follows Rust's `std::process::Command` and
+  `Deno.Command`; Deno's `--allow-run` and `--allow-read` are the model for the authority
+  design. `cap-std` does filesystem confinement. `rune-modules` confirmed that a builder API
+  is awkward in a scripting binding, so Rhai gets an options map.
+- **Weaker references.** Lua, QuickJS and mruby only serve as a source of edge cases, not as
+  API or layout templates; Rhai and Cargo already dictate package and test layout.
+  ChaiScript was dropped, it has no sandbox model beyond not registering functions.
+- **No copied tests.** Cases are taken from other runtimes, tests are written from scratch
+  against the Rhai contract. The reason is semantic, not legal: their tests check Ruby, JS
+  or Lua behaviour. Plan appendix A lists what each reference contributed.
+- **Compatibility with `rhai-fs`.** Overlapping functions keep its names and argument order
+  (D12). Phase 4 adds rhai-fs-style streaming handles. Do not create a second, incompatible
+  fs API.
+- **Research is time-boxed.** A prototype with tests beats another day of comparison. Do not
+  expand the precedents survey.
+- **Upstream strategy.** Work stays on the fork for now. The Rhai maintainer historically
+  prefers separate crates such as `rhai-rand` and `rhai-fs`, so an upstream proposal may end
+  up as a `rhai-sys` crate. The package only uses the public plugin API, so extraction is
+  mechanical. Any upstream contact is the owner's call.
+- **Outward story.** "Compared established runtimes, derived a traceable requirements matrix,
+  built a portable, test-driven Rhai library." The matrix is a by-product, not the goal.
+- **Networking later.** A `net` package gets its own feature and plan (phase 5). The stalled
+  `rhai-net` crate covers TCP only.
+- **Effort with AI.** Each phase is roughly one agent session. The owner's time goes into
+  API review after phases 1 and 2, because names are cheap to change before phase 4 and
+  expensive after. The owner has not done that review yet.
+- **Test density.** The repository writes few test functions with many assertions each.
+  Judge coverage by matrix rows and assertions, not by the number of test functions.
+- **Windows.** No VM is possible in the cloud environment. Wine found a real bug and is the
+  day-to-day check. One run on real Windows is still owed, ideally bundled once after
+  phase 2.
+
 ## 3. Code map
 
 | File | Purpose |
