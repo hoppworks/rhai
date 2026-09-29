@@ -18,6 +18,8 @@ pub(crate) mod pkg_core;
 pub(crate) mod pkg_std;
 pub(crate) mod string_basic;
 pub(crate) mod string_more;
+#[cfg(feature = "sys")]
+pub mod sys;
 pub(crate) mod time_basic;
 
 pub use arithmetic::ArithmeticPackage;
@@ -40,6 +42,8 @@ pub use pkg_core::CorePackage;
 pub use pkg_std::StandardPackage;
 pub use string_basic::BasicStringPackage;
 pub use string_more::MoreStringPackage;
+#[cfg(feature = "sys")]
+pub use sys::SysPackage;
 #[cfg(not(feature = "no_time"))]
 pub use time_basic::BasicTimePackage;
 

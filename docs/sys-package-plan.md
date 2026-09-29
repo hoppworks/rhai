@@ -1,8 +1,8 @@
 # Rhai `sys` package: contract, requirements matrix, and plan
 
-Status: draft for review. Branch: `claude/vibrant-sagan-3g1pxn` (this fork only, no upstream
-submission yet). Supersedes the 2026-09-29 precedents survey; that survey is condensed into
-Appendix A.
+Status: decisions D1 to D12 accepted on 2026-09-29; phase 1 implemented on branch
+`claude/vibrant-sagan-3g1pxn` (this fork only, no upstream submission yet). Supersedes the
+2026-09-29 precedents survey; that survey is condensed into Appendix A.
 
 The package gives Rhai scripts access to the host filesystem, environment, and child
 processes. The host decides how much authority a script gets. Nothing in this package is
@@ -33,18 +33,18 @@ Each decision names a recommendation. Items marked "needs owner sign-off" block 
 
 | ID | Topic | Recommendation | Rationale | Status |
 |---|---|---|---|---|
-| D1 | Where the code lives | In-tree at `src/packages/sys/`, behind cargo feature `sys`, not part of `StandardPackage` or the `default` feature set. | Fastest path on this fork. Extracting to a `rhai-sys` crate later is mechanical, because the package only uses the public plugin API. | needs owner sign-off |
-| D2 | Authority model | Host constructs `SysConfig` (fs roots, program allow-list, env policy, limits) and builds `SysPackage::new(config)`. `SysConfig::default()` denies everything; `SysConfig::permissive()` allows everything for trusted scripts. | Matches Deno's permission model and the "explicit authority" conclusion of the survey. Deny-by-default means forgetting to configure is safe. | needs owner sign-off |
-| D3 | Filesystem confinement | Use the `cap-std` crate. Each configured root becomes a `cap_std::fs::Dir`; script paths resolve relative to a root and cannot escape it, including via symlinks. | Hand-rolled `canonicalize` + `starts_with` checks are racy against symlink changes. `cap-std` is maintained by the Bytecode Alliance and is the reference implementation of this idea. Optional dependency, pulled only by `sys`. | proposed |
-| D4 | Process API shape | Options-map style, not a builder: `run(program, args)` and `run(program, args, options)` return a result map; `spawn(program, args, options)` returns a `Child` handle. | Rhai plugin methods on `&mut T` return unit, so builder chaining does not work without cloning. An options map is idiomatic Rhai, trivially serializable, and easy to test. Rune's process module shows the builder style and its awkwardness. | proposed |
-| D5 | Error model | OS and policy failures raise `EvalAltResult::ErrorSystem` carrying a `SysError` (enum: `Denied`, `Io`, `Timeout`, `OutputLimit`, `NotUtf8`). Scripts catch them with `try`/`catch`. A non-zero exit code is data in the result map, never an error. | Mirrors Rust: `Command::output()` succeeds on non-zero exit. Hosts can downcast the boxed error to `SysError` for structured handling. | proposed |
-| D6 | Paths | Strings in, strings out. Non-UTF-8 names raise `SysError::NotUtf8`. No opaque path type in v0.1. | Rhai strings are UTF-8, `OsString` is not. Keep the surface small; a `Path` type can come with rhai-fs compatibility in v0.2. | proposed |
-| D7 | Timeout | Poll `Child::try_wait()` at a coarse interval (10 ms) until the deadline, then kill and mark `timed_out: true`. No extra thread, no extra dependency. | `std` has no `wait` with timeout. Polling is portable and adequate for script use. | proposed |
-| D8 | Windows batch files | Refuse programs ending in `.bat` or `.cmd` unless the config sets `allow_batch_files`. Document MSRV 1.77.2 for the `sys` feature. | CVE-2024-24576: Windows batch arguments pass through `cmd.exe` and were injectable. `std` fixed quoting in 1.77.2; refusing by default removes the whole class. | proposed |
-| D9 | Child drop semantics | `kill_on_drop: true` by default; option to disable. `Child` is `Shared<Locked<...>>` so it works under `sync`. | Scripts are short-lived and error-prone; an orphaned child outliving the script is the surprising outcome. Rust's `Child` neither kills nor reaps on drop, so the package must. | proposed |
-| D10 | Feature gating | `sys` implies `std`. Combining `sys` with `no_std` or a wasm32 target is a `compile_error!`. | Nothing here can work without an OS. Failing loudly beats an empty package. | proposed |
-| D11 | Output encoding | `run` returns `stdout` and `stderr` as strings, lossily converted. `run_raw` returns blobs. | Most scripts want text. Lossy conversion never fails; scripts needing bytes opt in. | proposed |
-| D12 | rhai-fs compatibility | Where a v0.1 function overlaps rhai-fs (`cwd`, `exists`, `create_dir`, `remove_dir`, `remove_file`), keep the same name and argument order. Divergences are listed in the docs. | Two incompatible fs APIs in one ecosystem help nobody. | proposed |
+| D1 | Where the code lives | In-tree at `src/packages/sys/`, behind cargo feature `sys`, not part of `StandardPackage` or the `default` feature set. | Fastest path on this fork. Extracting to a `rhai-sys` crate later is mechanical, because the package only uses the public plugin API. | accepted |
+| D2 | Authority model | Host constructs `SysConfig` (fs roots, program allow-list, env policy, limits) and builds `SysPackage::new(config)`. `SysConfig::default()` denies everything; `SysConfig::permissive()` allows everything for trusted scripts. | Matches Deno's permission model and the "explicit authority" conclusion of the survey. Deny-by-default means forgetting to configure is safe. | accepted |
+| D3 | Filesystem confinement | Use the `cap-std` crate. Each configured root becomes a `cap_std::fs::Dir`; script paths resolve relative to a root and cannot escape it, including via symlinks. | Hand-rolled `canonicalize` + `starts_with` checks are racy against symlink changes. `cap-std` is maintained by the Bytecode Alliance and is the reference implementation of this idea. Optional dependency, pulled only by `sys`. | accepted |
+| D4 | Process API shape | Options-map style, not a builder: `run(program, args)` and `run(program, args, options)` return a result map; `spawn(program, args, options)` returns a `Child` handle. | Rhai plugin methods on `&mut T` return unit, so builder chaining does not work without cloning. An options map is idiomatic Rhai, trivially serializable, and easy to test. Rune's process module shows the builder style and its awkwardness. | accepted |
+| D5 | Error model | OS and policy failures raise `EvalAltResult::ErrorRuntime` whose payload is a `SysError` value (enum: `Denied`, `Io`, `Timeout`, `OutputLimit`, `NotUtf8`) registered as a script type with getters `kind`, `message`, `io_kind`, `op`, `target`. Scripts catch it with `try`/`catch`. A non-zero exit code is data in the result map, never an error. | Mirrors Rust: `Command::output()` succeeds on non-zero exit. Hosts get the value back with `Dynamic::try_cast::<SysError>()`. Rhai's `ErrorSystem` was the first choice but the interpreter marks it uncatchable (`EvalAltResult::is_catchable`), which would defeat script-side handling; `SysError::Io` therefore stores `io::ErrorKind` plus message instead of the non-`Clone` `io::Error`. | accepted, revised during phase 1 |
+| D6 | Paths | Strings in, strings out. Non-UTF-8 names raise `SysError::NotUtf8`. No opaque path type in v0.1. | Rhai strings are UTF-8, `OsString` is not. Keep the surface small; a `Path` type can come with rhai-fs compatibility in v0.2. | accepted |
+| D7 | Timeout | Poll `Child::try_wait()` at a coarse interval (10 ms) until the deadline, then kill and mark `timed_out: true`. No extra thread, no extra dependency. | `std` has no `wait` with timeout. Polling is portable and adequate for script use. | accepted |
+| D8 | Windows batch files | Refuse programs ending in `.bat` or `.cmd` unless the config sets `allow_batch_files`. Document MSRV 1.77.2 for the `sys` feature. | CVE-2024-24576: Windows batch arguments pass through `cmd.exe` and were injectable. `std` fixed quoting in 1.77.2; refusing by default removes the whole class. | accepted |
+| D9 | Child drop semantics | `kill_on_drop: true` by default; option to disable. `Child` is `Shared<Locked<...>>` so it works under `sync`. | Scripts are short-lived and error-prone; an orphaned child outliving the script is the surprising outcome. Rust's `Child` neither kills nor reaps on drop, so the package must. | accepted |
+| D10 | Feature gating | `sys` implies `std`. Combining `sys` with `no_std` or a wasm32 target is a `compile_error!`. | Nothing here can work without an OS. Failing loudly beats an empty package. | accepted |
+| D11 | Output encoding | `run` returns `stdout` and `stderr` as strings, lossily converted. `run_raw` returns blobs. | Most scripts want text. Lossy conversion never fails; scripts needing bytes opt in. | accepted |
+| D12 | rhai-fs compatibility | Where a v0.1 function overlaps rhai-fs (`cwd`, `exists`, `create_dir`, `remove_dir`, `remove_file`), keep the same name and argument order. Divergences are listed in the docs. | Two incompatible fs APIs in one ecosystem help nobody. | accepted |
 
 ## 3. Script-facing contract (v0.1)
 
@@ -140,6 +140,17 @@ let cfg = SysConfig::default()
 
 let mut engine = Engine::new();
 engine.register_global_module(SysPackage::new(cfg).as_shared_module());
+```
+
+Errors are values: a caught `SysError` prints as its message, and `type_of(err)` is
+`"SysError"`.
+
+```rhai
+try {
+    read_file("missing.txt");
+} catch (err) {
+    if err.kind == "Io" && err.io_kind == "NotFound" { /* ... */ }
+}
 ```
 
 ## 4. Requirements and test matrix
@@ -249,7 +260,7 @@ tests are written from scratch against this contract. Phase numbers refer to sec
 | R4 | `sys` + `no_object` | result returned as Array or tuple type instead of Map, or feature marked incompatible | decision pending | 2 |
 | R5 | `type_of` on `Child` | `"Child"` | Rhai time tests | 2 |
 | R6 | `metadata` feature | doc-comments on every function render | Rhai conventions | 4 |
-| R7 | `try { ... } catch (e)` around a denied call | `e` is a string starting with the `SysError` variant name | D5 | 1 |
+| R7 | `try { ... } catch (e)` around a denied call | `e` is a `SysError`; `e.kind` is the variant name, `e.message` starts with it, `e.io_kind` names the `io::ErrorKind` for I/O errors, and the script continues after the catch | D5 | 1 |
 
 ## 5. Test infrastructure
 
@@ -276,8 +287,8 @@ tests are written from scratch against this contract. Phase numbers refer to sec
 
 | Phase | Deliverable | Exit criteria | Effort |
 |---|---|---|---|
-| 0 | This document; D1 and D2 signed off | owner reply | done except sign-off |
-| 1 | `sys` feature, `SysConfig`, `SysError`, env and fs functions, policy enforcement via `cap-std`, tests P1-P12, E1-E3, E5, F1-F18, R1, R2, R7 | `cargo test --features sys` green on Linux; `cargo build` without `sys` unchanged | one session |
+| 0 | This document; D1 and D2 signed off | owner reply | done |
+| 1 | `sys` feature, `SysConfig`, `SysError`, env and fs functions, policy enforcement via `cap-std`, tests P1-P12, E1-E3, E5, F1-F18, R1, R2, R7 | `cargo test --features sys` green on Linux; `cargo build` without `sys` unchanged | done (30 tests in `tests/sys_policy.rs`, `tests/sys_env.rs`, `tests/sys_fs.rs`; verified under `sys`, `sys,sync`, `sys,no_index`, `sys,metadata,serde`, `sys,no_float,only_i32` and a combined minimal set) |
 | 2 | `run`, `run_raw`, `spawn`, `Child`, timeout, output cap, stdin, kill-on-drop, self-reexec fixture, tests X1-X31, R3-R5 | green on Linux and macOS | one session |
 | 3 | Windows pass: batch refusal, quoting, path quirks, non-UTF-8 rows, tests P13, E4, F19-F21, X32-X33; CI matrix rows | CI green on all three OS | half a session plus CI turnaround |
 | 4 | Streaming file handles compatible with rhai-fs (`open_file`, `read_string`, `read_blob`, `write`, `seek`), doc-comments, `examples/sys.rs`, CHANGELOG entry, `README` section | R6; example runs | one session |
@@ -286,17 +297,29 @@ tests are written from scratch against this contract. Phase numbers refer to sec
 Owner time across phases 1 to 4: about three hours, mostly API review after phase 1 and
 after phase 2. Names are cheap to change before phase 4 and expensive after.
 
-## 7. Open questions for the owner
+## 7. Resolved questions
 
-1. D1: in-tree behind `sys`, or a separate workspace crate `rhai-sys` from the start?
-   Recommendation: in-tree.
-2. D2: deny-by-default confirmed? Recommendation: yes.
-3. D9: `kill_on_drop` defaulting to true confirmed? Recommendation: yes.
-4. D8: is documenting MSRV 1.77.2 for the `sys` feature acceptable, given the crate-wide
-   `rust-version` is 1.66? Recommendation: yes, gated features may have their own floor.
-5. R4: under `no_object` there is no Map. Mark `sys` incompatible with `no_object`
-   (`compile_error!`), or return arrays? Recommendation: incompatible; nobody disables
-   maps and wants a process API.
+All five questions put to the owner on 2026-09-29 were answered with the recommendation:
+in-tree behind `sys` (D1), deny-by-default (D2), `kill_on_drop` true (D9), MSRV 1.77.2 for
+the gated feature only (D8), and `sys` incompatible with `no_object` via `compile_error!`
+(R4, now part of D10).
+
+## 8. Implementation notes from phase 1
+
+- Layout: `src/packages/sys/{mod,config,error,env,fs}.rs`. Functions are closures capturing
+  a `Shared<SysState>` and are registered through `FuncRegistration`, because plugin
+  functions written with `#[export_module]` cannot carry per-instance configuration.
+- `SysPackage::new(config)` returns `Result`, failing early when a root cannot be opened.
+  `Package::init` is a no-op for the same reason.
+- Absolute script paths are matched against the root as configured and against its
+  canonical form, so `/tmp/x` works on macOS where `/tmp` is a symlink to `/private/tmp`.
+- Relative paths are checked lexically for `..` escapes before `cap-std` sees them, so the
+  common case fails without touching the filesystem (P6); symlink escapes are caught by
+  `cap-std` and mapped to `Denied` by inspecting its `PermissionDenied` error (P7).
+- `read_file` is lossy on invalid UTF-8; `read_file_blob` is exact. `metadata().modified`
+  is Unix seconds as `INT`, since Rhai's own time type is a monotonic `Instant`.
+- Unrestricted mode opens the nearest existing ancestor of the target as an ambient `Dir`
+  and addresses the rest relatively, so every operation still goes through `cap-std`.
 
 ## Appendix A: precedents, condensed
 

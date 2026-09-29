@@ -1,0 +1,43 @@
+#![cfg(feature = "sys")]
+//! Environment functions (matrix rows E1 to E3, E5).
+
+mod sys_support;
+
+use rhai::packages::sys::{EnvPolicy, SysConfig};
+use sys_support::engine;
+
+// E1, E2: set and unset variables under `All`.
+#[test]
+fn env_var_set_and_unset() {
+    std::env::set_var("RHAI_SYS_TEST_E1", "value");
+    let e = engine(SysConfig::default().env(EnvPolicy::All));
+    assert_eq!(e.eval::<String>(r#"env_var("RHAI_SYS_TEST_E1")"#).unwrap(), "value");
+    assert_eq!(e.eval::<()>(r#"env_var("RHAI_SYS_TEST_DEFINITELY_UNSET")"#).unwrap(), ());
+    assert!(e.eval::<bool>(r#"env_var("RHAI_SYS_TEST_DEFINITELY_UNSET") == ()"#).unwrap());
+}
+
+// Default policy hides everything.
+#[test]
+fn env_default_policy_hides_all() {
+    std::env::set_var("RHAI_SYS_TEST_E_DEFAULT", "value");
+    let e = engine(SysConfig::default());
+    assert_eq!(e.eval::<()>(r#"env_var("RHAI_SYS_TEST_E_DEFAULT")"#).unwrap(), ());
+    assert!(e.eval::<rhai::Map>("env_vars()").unwrap().is_empty());
+}
+
+// E3: `env_vars` under `All` contains a known variable.
+#[test]
+fn env_vars_all() {
+    std::env::set_var("RHAI_SYS_TEST_E3", "three");
+    let e = engine(SysConfig::default().env(EnvPolicy::All));
+    let value = e.eval::<String>(r#"env_vars().RHAI_SYS_TEST_E3"#).unwrap();
+    assert_eq!(value, "three");
+}
+
+// E5: `cwd` matches the host process.
+#[test]
+fn cwd_matches_process() {
+    let e = engine(SysConfig::default());
+    let expected = std::env::current_dir().unwrap();
+    assert_eq!(e.eval::<String>("cwd()").unwrap(), expected.to_str().unwrap());
+}
