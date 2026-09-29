@@ -51,9 +51,12 @@ impl FsState {
                             .map_err(|e| SysError::io("get current directory", ".", &e))?
                             .join(&root.path)
                     };
+                    let given = normalize_absolute(&given);
                     let target = || given.display().to_string();
-                    let canonical = std::fs::canonicalize(&given)
-                        .map_err(|e| SysError::io("open root", target(), &e))?;
+                    let canonical = strip_verbatim(
+                        std::fs::canonicalize(&given)
+                            .map_err(|e| SysError::io("open root", target(), &e))?,
+                    );
                     let dir = Dir::open_ambient_dir(&given, ambient_authority())
                         .map_err(|e| SysError::io("open root", target(), &e))?;
                     opened.push(OpenRoot {
@@ -116,6 +119,38 @@ struct Resolved<'a> {
     rel: PathBuf,
     /// Index of the root, or `usize::MAX` in unrestricted mode.
     root: usize,
+}
+
+/// Turn a Windows verbatim path (`\\?\C:\dir`) back into its ordinary spelling (`C:\dir`),
+/// so that it can be compared with paths scripts write. `std::fs::canonicalize` always
+/// returns the verbatim form on Windows. Other paths are returned unchanged.
+fn strip_verbatim(path: PathBuf) -> PathBuf {
+    #[cfg(windows)]
+    {
+        use std::path::Prefix;
+        let mut components = path.components();
+        if let Some(Component::Prefix(prefix)) = components.next() {
+            let rest: PathBuf = components.collect();
+            match prefix.kind() {
+                Prefix::VerbatimDisk(drive) => {
+                    let mut out = PathBuf::from(format!("{}:\\", drive as char));
+                    out.push(rest);
+                    return out;
+                }
+                Prefix::VerbatimUNC(server, share) => {
+                    let mut out = PathBuf::from(format!(
+                        "\\\\{}\\{}\\",
+                        server.to_string_lossy(),
+                        share.to_string_lossy()
+                    ));
+                    out.push(rest);
+                    return out;
+                }
+                _ => (),
+            }
+        }
+    }
+    path
 }
 
 /// Lexically normalise an absolute path: drop `.`, fold `..`.

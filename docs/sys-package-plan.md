@@ -278,6 +278,21 @@ tests are written from scratch against this contract. Phase numbers refer to sec
   atomic counter. Cleaned up by a guard struct on drop. No `tempfile` dependency.
 - Platform gating: Unix-only rows use `#[cfg(unix)]`, Windows-only rows `#[cfg(windows)]`.
   Every row runs on at least one CI OS.
+- Windows without a Windows machine: the suite runs under Wine. Verified on 2026-09-29 with
+  Wine 9 on Linux: 43 of 43 tests pass, the same as natively on Linux. Wine needs a UTF-8
+  locale, otherwise non-ASCII file names fail with `NotFound`.
+
+  ```bash
+  rustup target add x86_64-pc-windows-gnu
+  apt-get install -y --no-install-recommends wine64 gcc-mingw-w64-x86-64
+  export WINEDEBUG=-all WINEPREFIX=/tmp/rhai-wine LANG=C.UTF-8 LC_ALL=C.UTF-8
+  cargo test --features testing-environ,sys --target x86_64-pc-windows-gnu --no-run \
+      --test sys_policy --test sys_env --test sys_fs
+  for exe in target/x86_64-pc-windows-gnu/debug/deps/sys_*.exe; do wine64 "$exe"; done
+  ```
+
+  Wine is a check, not proof: quoting of process arguments and `cmd.exe` behaviour in
+  phase 2 and 3 still need one run on real Windows via the CI matrix.
 - CI: `.github/workflows/build.yml` gains matrix rows
   `--features testing-environ,sys` and `--features testing-environ,sys,sync,no_index` on
   ubuntu, plus `--features sys` on the existing windows and macos jobs. The wasm32 rows
@@ -321,6 +336,10 @@ the gated feature only (D8), and `sys` incompatible with `no_object` via `compil
 - Inside a confined root, symbolic links must have relative targets. `cap-std` treats an
   absolute link target as an escape even when it points back into the root. Documented in
   the module docs and covered by a test; unrestricted mode is not affected.
+- On Windows, `std::fs::canonicalize` returns verbatim paths (`\\?\C:\...`). Roots store
+  the canonical form with that prefix stripped, and the configured path is lexically
+  normalised, so both spellings match absolute script paths. Found by running the suite
+  under Wine.
 - Unrestricted mode opens the nearest existing ancestor of the target as an ambient `Dir`
   and addresses the rest relatively, so every operation still goes through `cap-std`.
 

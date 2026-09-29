@@ -388,3 +388,35 @@ fn test_empty_and_mixed_writes() {
     assert_eq!(err_kind(&e, r#"append_file("nope/x.bin", blob(1, 1))"#), "Io");
     assert!(!t.exists("nope"));
 }
+
+// F20, F21 and Windows path spellings. These run natively on Windows and under Wine.
+#[cfg(windows)]
+#[test]
+fn test_windows_paths() {
+    let (t, e) = rw();
+    t.write("sub/a.txt", "a");
+
+    // Forward slashes, backslashes and a mix all address the same file.
+    assert_eq!(e.eval::<String>(r#"read_file("sub/a.txt")"#).unwrap(), "a");
+    assert_eq!(e.eval::<String>(r#"read_file("sub\\a.txt")"#).unwrap(), "a");
+    assert_eq!(e.eval::<String>(r#"read_file(".\\sub/a.txt")"#).unwrap(), "a");
+    // Backslash traversal is refused like the forward-slash form.
+    assert_eq!(err_kind(&e, r#"read_file("..\\x.txt")"#), "Denied");
+    assert_eq!(err_kind(&e, r#"read_file("sub\\..\\..\\x.txt")"#), "Denied");
+
+    // Absolute paths with a drive letter, in both spellings.
+    let fwd = format!("{}/sub/a.txt", t.as_script_path());
+    let back = fwd.replace('/', "\\\\");
+    assert_eq!(e.eval::<String>(&format!(r#"read_file("{fwd}")"#)).unwrap(), "a");
+    assert_eq!(e.eval::<String>(&format!(r#"read_file("{back}")"#)).unwrap(), "a");
+
+    // A rooted path without a drive (`\foo`) is not absolute and cannot escape.
+    assert_eq!(err_kind(&e, r#"read_file("\\Windows\\win.ini")"#), "Denied");
+
+    // F21: a reserved device name fails with an I/O error and does not hang.
+    let start = std::time::Instant::now();
+    let kind = err_kind(&e, r#"write_file("CON", "x")"#);
+    assert_eq!(kind, "Io");
+    assert!(start.elapsed().as_secs() < 5);
+    assert!(!t.exists("CON"));
+}
