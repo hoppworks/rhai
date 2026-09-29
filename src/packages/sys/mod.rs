@@ -48,9 +48,20 @@ use crate::packages::Package;
 use crate::{Module, Shared, SharedModule};
 
 /// State shared by every function of one package instance.
-pub(super) struct SysState {
-    pub(super) config: SysConfig,
-    pub(super) fs: fs::FsState,
+///
+/// Private fields are visible to the child modules `env` and `fs`.
+struct SysState {
+    config: SysConfig,
+    fs: fs::FsState,
+}
+
+/// Start a registration for a volatile, non-mutating function with doc-comments.
+#[allow(unused_variables)]
+fn reg(name: &str, comments: &[&str]) -> crate::FuncRegistration {
+    let r = crate::FuncRegistration::new(name).with_volatility(true);
+    #[cfg(feature = "metadata")]
+    let r = r.with_comments(comments);
+    r
 }
 
 /// Package giving scripts access to the environment, filesystem and child processes,

@@ -6,9 +6,8 @@
 //! would leave the root, so the checks here are only the first, lexical line of defence.
 
 use super::config::{FsAccess, FsPolicy};
-use super::env::reg;
 use super::error::SysError;
-use super::SysState;
+use super::{reg, SysState};
 use crate::{Dynamic, EvalAltResult, Map, Module, Shared, INT};
 use cap_std::ambient_authority;
 use cap_std::fs::{Dir, OpenOptions};
@@ -19,7 +18,7 @@ use std::path::{Component, Path, PathBuf};
 type Res<T> = Result<T, Box<EvalAltResult>>;
 
 /// A configured root, opened.
-pub(crate) struct OpenRoot {
+pub(super) struct OpenRoot {
     /// Absolute path as configured (after joining with the current directory).
     given: PathBuf,
     /// Canonical form of `given`, for matching absolute script paths.
@@ -29,7 +28,7 @@ pub(crate) struct OpenRoot {
 }
 
 /// Filesystem policy with roots opened.
-pub(crate) enum FsState {
+pub(super) enum FsState {
     Roots(Vec<OpenRoot>),
     Unrestricted(FsAccess),
 }
@@ -45,14 +44,14 @@ impl FsState {
                         root.path.clone()
                     } else {
                         std::env::current_dir()
-                            .map_err(|e| SysError::io("get current directory", ".", e))?
+                            .map_err(|e| SysError::io("get current directory", ".", &e))?
                             .join(&root.path)
                     };
                     let target = || given.display().to_string();
                     let canonical = std::fs::canonicalize(&given)
-                        .map_err(|e| SysError::io("open root", target(), e))?;
+                        .map_err(|e| SysError::io("open root", target(), &e))?;
                     let dir = Dir::open_ambient_dir(&given, ambient_authority())
-                        .map_err(|e| SysError::io("open root", target(), e))?;
+                        .map_err(|e| SysError::io("open root", target(), &e))?;
                     opened.push(OpenRoot {
                         given,
                         canonical,
@@ -168,7 +167,7 @@ impl FsState {
                     p.to_path_buf()
                 } else {
                     std::env::current_dir()
-                        .map_err(|e| SysError::io("get current directory", ".", e))?
+                        .map_err(|e| SysError::io("get current directory", ".", &e))?
                         .join(p)
                 };
                 let abs = normalize_absolute(&abs);
@@ -193,7 +192,7 @@ impl FsState {
                     },
                 );
                 let dir = Dir::open_ambient_dir(base, ambient_authority())
-                    .map_err(|e| SysError::io("open directory", base.display().to_string(), e))?;
+                    .map_err(|e| SysError::io("open directory", base.display().to_string(), &e))?;
                 Ok(Resolved {
                     dir: DirRef::Owned(dir),
                     rel,
@@ -261,7 +260,7 @@ impl FsState {
 }
 
 /// Map an I/O error from `cap-std`, turning its sandbox-escape error into `Denied`.
-fn map_io(op: &'static str, path: &str, err: io::Error) -> SysError {
+fn map_io(op: &'static str, path: &str, err: &io::Error) -> SysError {
     if err.kind() == io::ErrorKind::PermissionDenied
         && err.to_string().contains("outside of the filesystem")
     {
@@ -291,13 +290,23 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
         state,
         module,
         "read_file",
-        &["/// Read a whole file as a string. Invalid UTF-8 is replaced with U+FFFD."],
+        &[
+            "/// Read a whole file as a string. Invalid UTF-8 is replaced with U+FFFD.",
+            "///",
+            "/// # Example",
+            "///",
+            "/// ```rhai",
+            "/// let text = read_file(\"notes.txt\");",
+            "///",
+            "/// print(text.len());",
+            "/// ```",
+        ],
         |path: &str| -> Res<String> {
             let r = state.fs.resolve(path, Need::Read)?;
             let bytes = r
                 .dir
                 .read(&r.rel)
-                .map_err(|e| map_io("read file", path, e))?;
+                .map_err(|e| map_io("read file", path, &e))?;
             Ok(String::from_utf8_lossy(&bytes).into_owned())
         }
     );
@@ -312,7 +321,7 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
             let r = state.fs.resolve(path, Need::Read)?;
             r.dir
                 .read(&r.rel)
-                .map_err(|e| map_io("read file", path, e).into())
+                .map_err(|e| map_io("read file", path, &e).into())
         }
     );
 
@@ -320,12 +329,22 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
         state,
         module,
         "write_file",
-        &["/// Write a string to a file, creating it or truncating existing content."],
+        &[
+            "/// Write a string to a file, creating it or truncating existing content.",
+            "///",
+            "/// # Example",
+            "///",
+            "/// ```rhai",
+            "/// write_file(\"out.txt\", \"hello\");",
+            "///",
+            "/// print(read_file(\"out.txt\"));      // prints \"hello\"",
+            "/// ```",
+        ],
         |path: &str, data: &str| -> Res<()> {
             let r = state.fs.resolve(path, Need::Write)?;
             r.dir
                 .write(&r.rel, data.as_bytes())
-                .map_err(|e| map_io("write file", path, e).into())
+                .map_err(|e| map_io("write file", path, &e).into())
         }
     );
 
@@ -339,7 +358,7 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
             let r = state.fs.resolve(path, Need::Write)?;
             r.dir
                 .write(&r.rel, &data)
-                .map_err(|e| map_io("write file", path, e).into())
+                .map_err(|e| map_io("write file", path, &e).into())
         }
     );
 
@@ -347,7 +366,16 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
         state,
         module,
         "append_file",
-        &["/// Append a string to a file, creating it when missing."],
+        &[
+            "/// Append a string to a file, creating it when missing.",
+            "///",
+            "/// # Example",
+            "///",
+            "/// ```rhai",
+            "/// append_file(\"log.txt\", \"one\\n\");",
+            "/// append_file(\"log.txt\", \"two\\n\");",
+            "/// ```",
+        ],
         |path: &str, data: &str| -> Res<()> { append(&state.fs, path, data.as_bytes()) }
     );
 
@@ -364,7 +392,15 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
         state,
         module,
         "exists",
-        &["/// Return `true` when the path exists (following symbolic links)."],
+        &[
+            "/// Return `true` when the path exists (following symbolic links).",
+            "///",
+            "/// # Example",
+            "///",
+            "/// ```rhai",
+            "/// if !exists(\"config.toml\") { write_file(\"config.toml\", \"\"); }",
+            "/// ```",
+        ],
         |path: &str| -> Res<bool> { Ok(meta(&state.fs, path)?.is_some()) }
     );
 
@@ -385,12 +421,23 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
     );
 
     with_state!(state, module, "metadata",
-        &["/// Return an object map describing the path: `size`, `is_file`, `is_dir`, `is_symlink`,",
-          "/// `readonly` and `modified` (seconds since the Unix epoch, or `()` when unavailable)."],
+        &[
+            "/// Return an object map describing the path: `size`, `is_file`, `is_dir`, `is_symlink`,",
+            "/// `readonly` and `modified` (seconds since the Unix epoch, or `()` when unavailable).",
+            "///",
+            "/// # Example",
+            "///",
+            "/// ```rhai",
+            "/// let m = metadata(\"data.bin\");",
+            "///",
+            "/// print(m.size);          // prints the size in bytes",
+            "/// print(m.is_dir);        // prints false",
+            "/// ```",
+        ],
         |path: &str| -> Res<Map> {
             let r = state.fs.resolve(path, Need::Read)?;
-            let m = r.dir.metadata(&r.rel).map_err(|e| map_io("read metadata of", path, e))?;
-            let sm = r.dir.symlink_metadata(&r.rel).map_err(|e| map_io("read metadata of", path, e))?;
+            let m = r.dir.metadata(&r.rel).map_err(|e| map_io("read metadata of", path, &e))?;
+            let sm = r.dir.symlink_metadata(&r.rel).map_err(|e| map_io("read metadata of", path, &e))?;
             let modified: Dynamic = match m.modified() {
                 Ok(t) => match t.into_std().duration_since(std::time::UNIX_EPOCH) {
                     Ok(d) => INT::try_from(d.as_secs()).map_or(Dynamic::UNIT, Into::into),
@@ -413,16 +460,26 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
         state,
         module,
         "read_dir",
-        &["/// Return the names of the entries of a directory, sorted, without `.` and `..`."],
+        &[
+            "/// Return the names of the entries of a directory, sorted, without `.` and `..`.",
+            "///",
+            "/// # Example",
+            "///",
+            "/// ```rhai",
+            "/// for name in read_dir(\".\") {",
+            "///     if is_dir(name) { print(name + \"/\"); } else { print(name); }",
+            "/// }",
+            "/// ```",
+        ],
         |path: &str| -> Res<crate::Array> {
             let r = state.fs.resolve(path, Need::Read)?;
             let entries = r
                 .dir
                 .read_dir(&r.rel)
-                .map_err(|e| map_io("read directory", path, e))?;
+                .map_err(|e| map_io("read directory", path, &e))?;
             let mut names = Vec::new();
             for entry in entries {
-                let entry = entry.map_err(|e| map_io("read directory", path, e))?;
+                let entry = entry.map_err(|e| map_io("read directory", path, &e))?;
                 names.push(os_to_string("directory entry", entry.file_name())?);
             }
             names.sort_unstable();
@@ -439,7 +496,7 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
             let r = state.fs.resolve(path, Need::Write)?;
             r.dir
                 .create_dir(&r.rel)
-                .map_err(|e| map_io("create directory", path, e).into())
+                .map_err(|e| map_io("create directory", path, &e).into())
         }
     );
 
@@ -447,12 +504,20 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
         state,
         module,
         "create_dir_all",
-        &["/// Create a directory and every missing parent."],
+        &[
+            "/// Create a directory and every missing parent.",
+            "///",
+            "/// # Example",
+            "///",
+            "/// ```rhai",
+            "/// create_dir_all(\"build/output/logs\");",
+            "/// ```",
+        ],
         |path: &str| -> Res<()> {
             let r = state.fs.resolve(path, Need::Write)?;
             r.dir
                 .create_dir_all(&r.rel)
-                .map_err(|e| map_io("create directory", path, e).into())
+                .map_err(|e| map_io("create directory", path, &e).into())
         }
     );
 
@@ -465,7 +530,7 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
             let r = state.fs.resolve(path, Need::Write)?;
             r.dir
                 .remove_file(&r.rel)
-                .map_err(|e| map_io("remove file", path, e).into())
+                .map_err(|e| map_io("remove file", path, &e).into())
         }
     );
 
@@ -478,7 +543,7 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
             let r = state.fs.resolve(path, Need::Write)?;
             r.dir
                 .remove_dir(&r.rel)
-                .map_err(|e| map_io("remove directory", path, e).into())
+                .map_err(|e| map_io("remove directory", path, &e).into())
         }
     );
 
@@ -486,12 +551,20 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
         state,
         module,
         "remove_dir_all",
-        &["/// Remove a directory and everything below it. Needs `FsAccess::ReadWriteDelete`."],
+        &[
+            "/// Remove a directory and everything below it. Needs `FsAccess::ReadWriteDelete`.",
+            "///",
+            "/// # Example",
+            "///",
+            "/// ```rhai",
+            "/// remove_dir_all(\"build\");",
+            "/// ```",
+        ],
         |path: &str| -> Res<()> {
             let r = state.fs.resolve(path, Need::Delete)?;
             r.dir
                 .remove_dir_all(&r.rel)
-                .map_err(|e| map_io("remove directory", path, e).into())
+                .map_err(|e| map_io("remove directory", path, &e).into())
         }
     );
 
@@ -499,7 +572,15 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
         state,
         module,
         "rename",
-        &["/// Rename or move a file or directory. Both paths must lie inside the same root."],
+        &[
+            "/// Rename or move a file or directory. Both paths must lie inside the same root.",
+            "///",
+            "/// # Example",
+            "///",
+            "/// ```rhai",
+            "/// rename(\"draft.txt\", \"final.txt\");",
+            "/// ```",
+        ],
         |from: &str, to: &str| -> Res<()> {
             let a = state.fs.resolve(from, Need::Write)?;
             let b = state.fs.resolve(to, Need::Write)?;
@@ -511,7 +592,7 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
             }
             a.dir
                 .rename(&a.rel, &b.dir, &b.rel)
-                .map_err(|e| map_io("rename", from, e).into())
+                .map_err(|e| map_io("rename", from, &e).into())
         }
     );
 
@@ -519,14 +600,22 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
         state,
         module,
         "copy_file",
-        &["/// Copy a file. The destination is created or truncated."],
+        &[
+            "/// Copy a file. The destination is created or truncated.",
+            "///",
+            "/// # Example",
+            "///",
+            "/// ```rhai",
+            "/// copy_file(\"template.txt\", \"copy.txt\");",
+            "/// ```",
+        ],
         |from: &str, to: &str| -> Res<()> {
             let a = state.fs.resolve(from, Need::Read)?;
             let b = state.fs.resolve(to, Need::Write)?;
             a.dir
                 .copy(&a.rel, &b.dir, &b.rel)
                 .map(|_| ())
-                .map_err(|e| map_io("copy", from, e).into())
+                .map_err(|e| map_io("copy", from, &e).into())
         }
     );
 }
@@ -536,9 +625,9 @@ fn append(fs: &FsState, path: &str, data: &[u8]) -> Res<()> {
     let mut file = r
         .dir
         .open_with(&r.rel, OpenOptions::new().append(true).create(true))
-        .map_err(|e| map_io("append to file", path, e))?;
+        .map_err(|e| map_io("append to file", path, &e))?;
     file.write_all(data)
-        .map_err(|e| map_io("append to file", path, e))?;
+        .map_err(|e| map_io("append to file", path, &e))?;
     Ok(())
 }
 
@@ -548,6 +637,6 @@ fn meta(fs: &FsState, path: &str) -> Res<Option<cap_std::fs::Metadata>> {
     match r.dir.metadata(&r.rel) {
         Ok(m) => Ok(Some(m)),
         Err(e) if e.kind() == io::ErrorKind::NotFound => Ok(None),
-        Err(e) => Err(map_io("read metadata of", path, e).into()),
+        Err(e) => Err(map_io("read metadata of", path, &e).into()),
     }
 }

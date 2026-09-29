@@ -9,7 +9,7 @@ use sys_support::{engine, err_kind, sys_err, TempDir};
 
 // P1: default config denies every filesystem call.
 #[test]
-fn default_config_denies_fs() {
+fn test_default_config_denies_fs() {
     let e = engine(SysConfig::default());
     let mut scripts = vec![r#"read_file("x")"#, r#"write_file("x", "y")"#, r#"exists("x")"#, r#"create_dir("x")"#, r#"remove_file("x")"#];
     #[cfg(not(feature = "no_index"))]
@@ -21,7 +21,7 @@ fn default_config_denies_fs() {
 
 // P3, P4: read-only root.
 #[test]
-fn read_only_root() {
+fn test_read_only_root() {
     let t = TempDir::new();
     t.write("a.txt", "hello");
     let e = engine(SysConfig::default().fs_root(t.path(), FsAccess::Read));
@@ -38,7 +38,7 @@ fn read_only_root() {
 
 // P5: recursive deletion needs ReadWriteDelete.
 #[test]
-fn remove_dir_all_needs_delete_access() {
+fn test_remove_dir_all_needs_delete_access() {
     let t = TempDir::new();
     t.write("d/inner.txt", "x");
 
@@ -53,7 +53,7 @@ fn remove_dir_all_needs_delete_access() {
 
 // P6: `..` cannot leave the root and nothing outside is touched.
 #[test]
-fn parent_traversal_is_denied() {
+fn test_parent_traversal_is_denied() {
     let outer = TempDir::new();
     outer.write("secret.txt", "s");
     let root = outer.path().join("root");
@@ -75,7 +75,7 @@ fn parent_traversal_is_denied() {
 // P7: a symlink inside the root that points outside is refused by cap-std.
 #[cfg(unix)]
 #[test]
-fn symlink_escape_is_denied() {
+fn test_symlink_escape_is_denied() {
     let outer = TempDir::new();
     outer.write("secret.txt", "s");
     let root = outer.path().join("root");
@@ -92,7 +92,7 @@ fn symlink_escape_is_denied() {
 
 // P8, P9: absolute paths inside and outside a root.
 #[test]
-fn absolute_paths() {
+fn test_absolute_paths() {
     let t = TempDir::new();
     t.write("a.txt", "abs");
     let other = TempDir::new();
@@ -109,7 +109,7 @@ fn absolute_paths() {
 
 // Two roots: relative paths use the first, absolute paths pick the matching one.
 #[test]
-fn multiple_roots() {
+fn test_multiple_roots() {
     let a = TempDir::new();
     a.write("in_a.txt", "A");
     let b = TempDir::new();
@@ -131,7 +131,7 @@ fn multiple_roots() {
 
 // P12: env allow-list.
 #[test]
-fn env_allow_list() {
+fn test_env_allow_list() {
     std::env::set_var("RHAI_SYS_TEST_ALLOWED", "yes");
     std::env::set_var("RHAI_SYS_TEST_HIDDEN", "no");
     let e = engine(SysConfig::default().env(EnvPolicy::AllowList(vec!["RHAI_SYS_TEST_ALLOWED".into()])));
@@ -144,7 +144,7 @@ fn env_allow_list() {
 
 // Unrestricted mode still honours the access level.
 #[test]
-fn unrestricted_respects_access_level() {
+fn test_unrestricted_respects_access_level() {
     let t = TempDir::new();
     t.write("a.txt", "x");
     let e = engine(SysConfig::default().fs_unrestricted(FsAccess::Read));
@@ -156,7 +156,7 @@ fn unrestricted_respects_access_level() {
 
 // A root that does not exist fails at package creation, not at first use.
 #[test]
-fn missing_root_fails_early() {
+fn test_missing_root_fails_early() {
     let t = TempDir::new();
     let missing = t.path().join("nope");
     let err = rhai::packages::sys::SysPackage::new(SysConfig::default().fs_root(&missing, FsAccess::Read)).err().expect("should fail");
@@ -165,7 +165,7 @@ fn missing_root_fails_early() {
 
 // R7: scripts can catch the error and inspect it.
 #[test]
-fn errors_are_catchable() {
+fn test_errors_are_catchable() {
     let t = TempDir::new();
     let e = engine(SysConfig::default().fs_root(t.path(), FsAccess::Read));
     let msg = e
@@ -210,7 +210,7 @@ fn errors_are_catchable() {
 
 // R1: without the package nothing is registered.
 #[test]
-fn plain_engine_has_no_sys_functions() {
+fn test_plain_engine_has_no_sys_functions() {
     let e = Engine::new();
     let err = e.run(r#"read_file("x")"#).unwrap_err();
     assert!(matches!(*err, EvalAltResult::ErrorFunctionNotFound(..)));
@@ -218,7 +218,7 @@ fn plain_engine_has_no_sys_functions() {
 
 // Hosts can downcast the boxed error to `SysError`.
 #[test]
-fn host_can_downcast() {
+fn test_host_can_downcast() {
     let t = TempDir::new();
     let e = engine(SysConfig::default().fs_root(t.path(), FsAccess::Read));
     let err = sys_err(&e, r#"read_file("missing.txt")"#);

@@ -15,7 +15,7 @@ fn rw() -> (TempDir, Engine) {
 
 // F1, F2, F3: read existing, missing and empty files.
 #[test]
-fn read_file_cases() {
+fn test_read_file_cases() {
     let (t, e) = rw();
     t.write("text.txt", "hello\nworld");
     t.write("empty.txt", "");
@@ -32,7 +32,7 @@ fn read_file_cases() {
 // F4: binary content, lossy as string and exact as blob.
 #[cfg(not(feature = "no_index"))]
 #[test]
-fn read_binary() {
+fn test_read_binary() {
     let (t, e) = rw();
     t.write("bin.dat", [0x68, 0x69, 0xFF, 0xFE, 0x00]);
     assert_eq!(e.eval::<String>(r#"read_file("bin.dat")"#).unwrap(), "hi\u{FFFD}\u{FFFD}\0");
@@ -42,9 +42,9 @@ fn read_binary() {
 // F5: large file round trip.
 #[cfg(not(feature = "no_index"))]
 #[test]
-fn large_file_round_trip() {
+fn test_large_file_round_trip() {
     let (t, e) = rw();
-    let data: Vec<u8> = (0..8 * 1024 * 1024).map(|i| (i % 251) as u8).collect();
+    let data: Vec<u8> = (0..8 * 1024 * 1024).map(|i: u32| u8::try_from(i % 251).unwrap()).collect();
     t.write("big.dat", &data);
     let back = e.eval::<rhai::Blob>(r#"read_file_blob("big.dat")"#).unwrap();
     assert_eq!(back, data);
@@ -55,7 +55,7 @@ fn large_file_round_trip() {
 // F6, F7, F8: write truncates, append concatenates, blobs are exact.
 #[cfg(not(feature = "no_index"))]
 #[test]
-fn write_append_blob() {
+fn test_write_append_blob() {
     let (t, e) = rw();
     e.run(r#"write_file("w.txt", "first version, longer")"#).unwrap();
     e.run(r#"write_file("w.txt", "second")"#).unwrap();
@@ -70,7 +70,7 @@ fn write_append_blob() {
 
 // F9: writing into a missing parent fails without leaving a file.
 #[test]
-fn write_into_missing_parent() {
+fn test_write_into_missing_parent() {
     let (t, e) = rw();
     assert_eq!(err_kind(&e, r#"write_file("nope/x.txt", "x")"#), "Io");
     assert!(!t.exists("nope"));
@@ -78,7 +78,7 @@ fn write_into_missing_parent() {
 
 // F10, F11: predicates and metadata.
 #[test]
-fn predicates_and_metadata() {
+fn test_predicates_and_metadata() {
     let (t, e) = rw();
     t.write("f.txt", "12345");
     t.write("d/inner.txt", "");
@@ -111,7 +111,7 @@ fn predicates_and_metadata() {
 // F12, F13: directory listing.
 #[cfg(not(feature = "no_index"))]
 #[test]
-fn read_dir_cases() {
+fn test_read_dir_cases() {
     let (t, e) = rw();
     t.write("b.txt", "");
     t.write("a.txt", "");
@@ -132,7 +132,7 @@ fn read_dir_cases() {
 
 // F14: create_dir needs the parent, create_dir_all does not.
 #[test]
-fn create_dir_cases() {
+fn test_create_dir_cases() {
     let (t, e) = rw();
     assert_eq!(err_kind(&e, r#"create_dir("x/y")"#), "Io");
     assert!(!t.exists("x"));
@@ -145,7 +145,7 @@ fn create_dir_cases() {
 
 // F15: remove_dir refuses a non-empty directory, remove_dir_all does not.
 #[test]
-fn remove_cases() {
+fn test_remove_cases() {
     let (t, e) = rw();
     t.write("d/inner.txt", "");
     t.write("f.txt", "");
@@ -162,7 +162,7 @@ fn remove_cases() {
 
 // F17 plus rename inside one root.
 #[test]
-fn rename_and_copy() {
+fn test_rename_and_copy() {
     let (t, e) = rw();
     t.write("src.txt", "payload");
     e.run(r#"copy_file("src.txt", "dst.txt")"#).unwrap();
@@ -180,7 +180,7 @@ fn rename_and_copy() {
 // F18: unicode file names.
 #[cfg(not(feature = "no_index"))]
 #[test]
-fn unicode_names() {
+fn test_unicode_names() {
     let (t, e) = rw();
     e.run(r#"write_file("grüße-日本.txt", "ok")"#).unwrap();
     assert_eq!(t.read("grüße-日本.txt"), b"ok");
@@ -193,7 +193,7 @@ fn unicode_names() {
 #[cfg(target_os = "linux")]
 #[cfg(not(feature = "no_index"))]
 #[test]
-fn no_handle_leak() {
+fn test_no_handle_leak() {
     let (_t, e) = rw();
     let count = || std::fs::read_dir("/proc/self/fd").unwrap().count();
     e.run(r#"for i in 0..10 { write_file("f" + i, "x"); read_file("f" + i); metadata("f" + i); read_dir("."); }"#).unwrap();
@@ -207,7 +207,7 @@ fn no_handle_leak() {
 // The unrestricted mode works with absolute paths anywhere.
 #[cfg(not(feature = "no_index"))]
 #[test]
-fn unrestricted_round_trip() {
+fn test_unrestricted_round_trip() {
     let t = TempDir::new();
     let e = engine(SysConfig::permissive());
     let base = t.as_script_path();

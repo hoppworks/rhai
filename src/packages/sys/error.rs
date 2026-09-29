@@ -1,5 +1,6 @@
 //! Error type for the `sys` package.
 
+use crate::plugin::*;
 use crate::{Dynamic, EvalAltResult, Module, Position};
 use std::error::Error;
 use std::fmt;
@@ -63,7 +64,7 @@ impl SysError {
     }
 
     /// Build an [`SysError::Io`] from an [`io::Error`].
-    pub(crate) fn io(op: &'static str, target: impl Into<String>, source: io::Error) -> Self {
+    pub(crate) fn io(op: &'static str, target: impl Into<String>, source: &io::Error) -> Self {
         Self::Io {
             op,
             target: target.into(),
@@ -75,28 +76,76 @@ impl SysError {
     /// Register the type and its getters into a module.
     pub(super) fn register(module: &mut Module) {
         module.set_custom_type::<Self>("SysError");
-        module.set_getter_fn("kind", |e: &mut Self| Ok(e.kind().to_string()));
-        module.set_getter_fn("message", |e: &mut Self| Ok(e.to_string()));
-        module.set_getter_fn("io_kind", |e: &mut Self| {
-            Ok(match e {
-                Self::Io { kind, .. } => Dynamic::from(format!("{kind:?}")),
-                _ => Dynamic::UNIT,
-            })
-        });
-        module.set_getter_fn("op", |e: &mut Self| {
-            Ok(match e {
-                Self::Io { op, .. } => Dynamic::from(*op),
-                _ => Dynamic::UNIT,
-            })
-        });
-        module.set_getter_fn("target", |e: &mut Self| {
-            Ok(match e {
-                Self::Io { target, .. } => Dynamic::from(target.clone()),
-                _ => Dynamic::UNIT,
-            })
-        });
-        module.set_native_fn("to_string", |e: &mut Self| Ok(e.to_string()));
-        module.set_native_fn("to_debug", |e: &mut Self| Ok(format!("{e:?}")));
+        combine_with_exported_module!(module, "sys_error", sys_error_functions);
+    }
+}
+
+#[export_module]
+mod sys_error_functions {
+    /// Name of the error variant: `Denied`, `Io`, `Timeout`, `OutputLimit` or `NotUtf8`.
+    ///
+    /// # Example
+    ///
+    /// ```rhai
+    /// try {
+    ///     read_file("missing.txt");
+    /// } catch (err) {
+    ///     print(err.kind);        // prints "Io"
+    /// }
+    /// ```
+    #[rhai_fn(get = "kind", pure)]
+    pub fn kind(err: &mut SysError) -> ImmutableString {
+        err.kind().into()
+    }
+    /// Full error message, the same text that `to_string` and `print` produce.
+    #[rhai_fn(get = "message", pure)]
+    pub fn message(err: &mut SysError) -> ImmutableString {
+        err.to_string().into()
+    }
+    /// For `Io` errors, the name of the underlying `std::io::ErrorKind` such as `NotFound`
+    /// or `PermissionDenied`. `()` for other kinds.
+    ///
+    /// # Example
+    ///
+    /// ```rhai
+    /// try {
+    ///     read_file("missing.txt");
+    /// } catch (err) {
+    ///     if err.io_kind == "NotFound" { print("no such file"); }
+    /// }
+    /// ```
+    #[rhai_fn(get = "io_kind", pure)]
+    pub fn io_kind(err: &mut SysError) -> Dynamic {
+        match err {
+            SysError::Io { kind, .. } => format!("{kind:?}").into(),
+            _ => Dynamic::UNIT,
+        }
+    }
+    /// For `Io` errors, what was attempted, e.g. `read file`. `()` for other kinds.
+    #[rhai_fn(get = "op", pure)]
+    pub fn op(err: &mut SysError) -> Dynamic {
+        match err {
+            SysError::Io { op, .. } => (*op).into(),
+            _ => Dynamic::UNIT,
+        }
+    }
+    /// For `Io` errors, the path or program involved. `()` for other kinds.
+    #[rhai_fn(get = "target", pure)]
+    pub fn target(err: &mut SysError) -> Dynamic {
+        match err {
+            SysError::Io { target, .. } => target.clone().into(),
+            _ => Dynamic::UNIT,
+        }
+    }
+    /// Convert the error into its message.
+    #[rhai_fn(name = "to_string", pure)]
+    pub fn to_string(err: &mut SysError) -> ImmutableString {
+        err.to_string().into()
+    }
+    /// Convert the error into its debug representation.
+    #[rhai_fn(name = "to_debug", pure)]
+    pub fn to_debug(err: &mut SysError) -> ImmutableString {
+        format!("{err:?}").into()
     }
 }
 

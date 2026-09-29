@@ -185,21 +185,21 @@ impl SysConfig {
 
     /// Default timeout in seconds for `run` when the script gives none. `None` means no limit.
     #[must_use]
-    pub fn default_timeout(mut self, seconds: Option<f64>) -> Self {
+    pub const fn default_timeout(mut self, seconds: Option<f64>) -> Self {
         self.default_timeout = seconds;
         self
     }
 
     /// Maximum number of bytes captured per output stream of a child process.
     #[must_use]
-    pub fn max_output(mut self, bytes: usize) -> Self {
+    pub const fn max_output(mut self, bytes: usize) -> Self {
         self.max_output = bytes;
         self
     }
 
     /// Whether a spawned child is killed when the script drops its handle. Default `true`.
     #[must_use]
-    pub fn kill_on_drop(mut self, kill: bool) -> Self {
+    pub const fn kill_on_drop(mut self, kill: bool) -> Self {
         self.kill_on_drop = kill;
         self
     }
@@ -210,7 +210,7 @@ impl SysConfig {
     /// standard library escapes them correctly since 1.77.2 (CVE-2024-24576), but refusing
     /// them by default removes the whole class of problems.
     #[must_use]
-    pub fn allow_batch_files(mut self, allow: bool) -> Self {
+    pub const fn allow_batch_files(mut self, allow: bool) -> Self {
         self.allow_batch_files = allow;
         self
     }

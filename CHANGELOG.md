@@ -22,6 +22,7 @@ New features
 ------------
 
 * New `no_ast` feature that excludes the `AST`, its interpreter, the tokenizer, parser and optimizer for a minimized build.  Under this feature flag, the Rhai Grain VM is the only venue to evaluate a script.
+* New `sys` feature with the `SysPackage` (`rhai::packages::sys`), giving scripts host-controlled access to environment variables and the filesystem. Access is denied by default and granted per directory root, per variable and per program through `SysConfig`; filesystem confinement is enforced by [`cap-std`](https://crates.io/crates/cap-std). Errors are raised as catchable `SysError` values. Child processes follow in a later release.
 
 Enhancements
 ------------
