@@ -233,3 +233,158 @@ fn test_unrestricted_round_trip() {
     e.run(&format!(r#"remove_dir_all("{base}/a")"#)).unwrap();
     assert!(!t.exists("a"));
 }
+
+// Operations on the wrong kind of entry fail with an I/O error, not a panic.
+#[test]
+fn test_wrong_entry_kind() {
+    let (t, e) = rw();
+    t.write("f.txt", "x");
+    t.write("d/inner.txt", "x");
+    assert_eq!(err_kind(&e, r#"read_file("d")"#), "Io");
+    assert_eq!(err_kind(&e, r#"write_file("d", "x")"#), "Io");
+    assert_eq!(err_kind(&e, r#"append_file("d", "x")"#), "Io");
+    assert_eq!(err_kind(&e, r#"remove_file("d")"#), "Io");
+    assert_eq!(err_kind(&e, r#"remove_dir("f.txt")"#), "Io");
+    assert_eq!(err_kind(&e, r#"create_dir("f.txt")"#), "Io");
+    assert_eq!(err_kind(&e, r#"copy_file("d", "e")"#), "Io");
+    assert!(t.exists("d/inner.txt"));
+    assert_eq!(t.read("f.txt"), b"x");
+}
+
+// Symlink and read-only flags in `metadata`; `exists` on a dangling link.
+#[cfg(unix)]
+#[test]
+fn test_metadata_symlink_and_readonly() {
+    use std::os::unix::fs::PermissionsExt;
+    let (t, e) = rw();
+    t.write("target.txt", "12345");
+    // Symlinks inside a confined root must be relative: cap-std treats an absolute link
+    // target as an escape, even when it points back into the root.
+    std::os::unix::fs::symlink("target.txt", t.path().join("link")).unwrap();
+    std::os::unix::fs::symlink("gone", t.path().join("dangling")).unwrap();
+    std::os::unix::fs::symlink(t.path().join("target.txt"), t.path().join("abs_link")).unwrap();
+    std::fs::set_permissions(t.path().join("target.txt"), std::fs::Permissions::from_mode(0o444)).unwrap();
+
+    let m = e.eval::<Map>(r#"metadata("link")"#).unwrap();
+    assert!(m["is_symlink"].as_bool().unwrap());
+    assert!(m["is_file"].as_bool().unwrap());
+    assert_eq!(m["size"].as_int().unwrap(), 5);
+    assert!(m["readonly"].as_bool().unwrap());
+    let m = e.eval::<Map>(r#"metadata("target.txt")"#).unwrap();
+    assert!(!m["is_symlink"].as_bool().unwrap());
+
+    assert_eq!(err_kind(&e, r#"read_file("abs_link")"#), "Denied");
+
+    assert!(!e.eval::<bool>(r#"exists("dangling")"#).unwrap());
+    assert!(!e.eval::<bool>(r#"is_file("dangling")"#).unwrap());
+    let err = sys_err(&e, r#"metadata("dangling")"#);
+    assert!(matches!(err, SysError::Io { kind: std::io::ErrorKind::NotFound, .. }), "{err}");
+    std::fs::set_permissions(t.path().join("target.txt"), std::fs::Permissions::from_mode(0o644)).unwrap();
+}
+
+// F19: a non-UTF-8 file name makes `read_dir` fail with `NotUtf8`.
+#[cfg(all(unix, not(feature = "no_index")))]
+#[test]
+fn test_non_utf8_file_name() {
+    use std::os::unix::ffi::OsStrExt;
+    let (t, e) = rw();
+    t.write("ok.txt", "");
+    std::fs::write(t.path().join(std::ffi::OsStr::from_bytes(b"bad\xFF.txt")), "").unwrap();
+    let err = sys_err(&e, r#"read_dir(".")"#);
+    assert!(matches!(err, SysError::NotUtf8(..)), "{err}");
+    assert_eq!(err_kind(&e, r#"read_dir(".")"#), "NotUtf8");
+}
+
+// Rename overwrites an existing file and moves directories.
+#[cfg(unix)]
+#[test]
+fn test_rename_overwrite_and_directory() {
+    let (t, e) = rw();
+    t.write("a.txt", "A");
+    t.write("b.txt", "B");
+    e.run(r#"rename("a.txt", "b.txt")"#).unwrap();
+    assert!(!t.exists("a.txt"));
+    assert_eq!(t.read("b.txt"), b"A");
+
+    t.write("d/x.txt", "x");
+    e.run(r#"rename("d", "moved")"#).unwrap();
+    assert!(!t.exists("d"));
+    assert_eq!(t.read("moved/x.txt"), b"x");
+}
+
+// Paths with `./`, `sub/./x` and a trailing slash.
+#[test]
+fn test_path_spellings() {
+    let (t, e) = rw();
+    t.write("a.txt", "a");
+    t.write("sub/c.txt", "c");
+    assert_eq!(e.eval::<String>(r#"read_file("./a.txt")"#).unwrap(), "a");
+    assert_eq!(e.eval::<String>(r#"read_file("sub/./c.txt")"#).unwrap(), "c");
+    assert_eq!(e.eval::<String>(r#"read_file("./sub/../a.txt")"#).unwrap(), "a");
+    assert!(e.eval::<bool>(r#"is_dir("sub/")"#).unwrap());
+    assert!(e.eval::<bool>(r#"is_dir(".")"#).unwrap());
+    assert!(e.eval::<bool>(r#"is_dir("")"#).unwrap());
+    #[cfg(not(feature = "no_index"))]
+    assert_eq!(e.eval::<rhai::Array>(r#"read_dir("sub/")"#).unwrap().len(), 1);
+}
+
+// Deep trees and many entries.
+#[cfg(not(feature = "no_index"))]
+#[test]
+fn test_deep_tree_and_many_entries() {
+    let (t, e) = rw();
+    e.run(r#"create_dir_all("l1/l2/l3/l4/l5"); write_file("l1/l2/l3/l4/l5/leaf.txt", "leaf")"#).unwrap();
+    assert_eq!(t.read("l1/l2/l3/l4/l5/leaf.txt"), b"leaf");
+
+    e.run(r#"create_dir("many"); for i in 0..300 { write_file("many/f" + i, ""); }"#).unwrap();
+    let names = e.eval::<rhai::Array>(r#"read_dir("many")"#).unwrap();
+    assert_eq!(names.len(), 300);
+    let names: Vec<String> = names.into_iter().map(|d| d.into_string().unwrap()).collect();
+    let mut sorted = names.clone();
+    sorted.sort();
+    assert_eq!(names, sorted);
+
+    e.run(r#"remove_dir_all("l1"); remove_dir_all("many")"#).unwrap();
+    assert!(!t.exists("l1") && !t.exists("many"));
+}
+
+// Unrestricted mode resolves relative paths against the process directory.
+#[test]
+fn test_unrestricted_relative_paths() {
+    let e = engine(SysConfig::default().fs_unrestricted(FsAccess::Read));
+    assert!(e.eval::<bool>(r#"exists("Cargo.toml")"#).unwrap());
+    assert!(e.eval::<bool>(r#"is_file("Cargo.toml")"#).unwrap());
+    assert!(e.eval::<bool>(r#"is_dir("src")"#).unwrap());
+    assert!(e.eval::<String>(r#"read_file("Cargo.toml")"#).unwrap().contains("[package]"));
+    assert!(e.eval::<bool>(r#"is_file("src/../Cargo.toml")"#).unwrap());
+    #[cfg(not(feature = "no_index"))]
+    assert!(e.eval::<rhai::Array>(r#"read_dir(".")"#).unwrap().iter().any(|d| d.clone().into_string().unwrap() == "Cargo.toml"));
+}
+
+// Unrestricted mode: a missing chain of parents is `NotFound`, not something else.
+#[test]
+fn test_unrestricted_missing_parents() {
+    let t = TempDir::new();
+    let e = engine(SysConfig::permissive());
+    let p = format!("{}/no/such/dir/file.txt", t.as_script_path());
+    let err = sys_err(&e, &format!(r#"read_file("{p}")"#));
+    assert!(matches!(err, SysError::Io { kind: std::io::ErrorKind::NotFound, .. }), "{err}");
+    assert_eq!(err_kind(&e, &format!(r#"write_file("{p}", "x")"#)), "Io");
+    assert!(!t.exists("no"));
+    e.run(&format!(r#"create_dir_all("{}/no/such/dir"); write_file("{p}", "x")"#, t.as_script_path())).unwrap();
+    assert_eq!(t.read("no/such/dir/file.txt"), b"x");
+}
+
+// Empty writes and switching between string and blob content.
+#[cfg(not(feature = "no_index"))]
+#[test]
+fn test_empty_and_mixed_writes() {
+    let (t, e) = rw();
+    e.run(r#"write_file("e.txt", "")"#).unwrap();
+    assert_eq!(t.read("e.txt"), b"");
+    assert_eq!(e.eval::<rhai::INT>(r#"metadata("e.txt").size"#).unwrap(), 0);
+    e.run(r#"write_file("e.txt", "text"); write_file("e.txt", blob(2, 0x00))"#).unwrap();
+    assert_eq!(t.read("e.txt"), [0, 0]);
+    assert_eq!(err_kind(&e, r#"append_file("nope/x.bin", blob(1, 1))"#), "Io");
+    assert!(!t.exists("nope"));
+}

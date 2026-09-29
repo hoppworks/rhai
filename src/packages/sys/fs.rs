@@ -4,6 +4,10 @@
 //! [`Dir`] and all operations take paths relative to it. `cap-std` resolves symbolic
 //! links and `..` components against the real filesystem and refuses anything that
 //! would leave the root, so the checks here are only the first, lexical line of defence.
+//!
+//! One consequence: inside a confined root, symbolic links must have relative targets.
+//! `cap-std` treats an absolute link target as an escape attempt even when it points back
+//! into the root, and the operation fails with [`SysError::Denied`].
 
 use super::config::{FsAccess, FsPolicy};
 use super::error::SysError;

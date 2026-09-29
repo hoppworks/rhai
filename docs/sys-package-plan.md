@@ -318,6 +318,9 @@ the gated feature only (D8), and `sys` incompatible with `no_object` via `compil
   `cap-std` and mapped to `Denied` by inspecting its `PermissionDenied` error (P7).
 - `read_file` is lossy on invalid UTF-8; `read_file_blob` is exact. `metadata().modified`
   is Unix seconds as `INT`, since Rhai's own time type is a monotonic `Instant`.
+- Inside a confined root, symbolic links must have relative targets. `cap-std` treats an
+  absolute link target as an escape even when it points back into the root. Documented in
+  the module docs and covered by a test; unrestricted mode is not affected.
 - Unrestricted mode opens the nearest existing ancestor of the target as an ambient `Dir`
   and addresses the rest relatively, so every operation still goes through `cap-std`.
 

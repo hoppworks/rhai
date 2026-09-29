@@ -231,3 +231,205 @@ fn test_host_can_downcast() {
         other => panic!("{other}"),
     }
 }
+
+// Nested roots: the longest matching root decides the access level.
+#[test]
+fn test_nested_roots_longest_prefix() {
+    let outer = TempDir::new();
+    outer.write("outer.txt", "o");
+    outer.write("inner/inner.txt", "i");
+    let inner = outer.path().join("inner");
+    let e = engine(SysConfig::default().fs_root(outer.path(), FsAccess::Read).fs_root(&inner, FsAccess::ReadWrite));
+    let inner_new = format!("{}/inner/new.txt", outer.as_script_path());
+    e.run(&format!(r#"write_file("{inner_new}", "x")"#)).unwrap();
+    assert!(outer.exists("inner/new.txt"));
+
+    let outer_new = format!("{}/new.txt", outer.as_script_path());
+    assert_eq!(err_kind(&e, &format!(r#"write_file("{outer_new}", "x")"#)), "Denied");
+    // Relative paths resolve against the first root, which is read-only.
+    assert_eq!(err_kind(&e, r#"write_file("inner/other.txt", "x")"#), "Denied");
+    assert_eq!(e.eval::<String>(r#"read_file("inner/inner.txt")"#).unwrap(), "i");
+}
+
+// A root configured through `..` or `.` components still confines correctly.
+#[test]
+fn test_root_with_dot_components() {
+    let t = TempDir::new();
+    t.write("sub/a.txt", "a");
+    t.write("secret.txt", "s");
+    let root = t.path().join("sub").join("..").join("sub");
+    let e = engine(SysConfig::default().fs_root(&root, FsAccess::Read));
+    assert_eq!(e.eval::<String>(r#"read_file("a.txt")"#).unwrap(), "a");
+    let canonical = format!("{}/sub/a.txt", t.as_script_path());
+    assert_eq!(e.eval::<String>(&format!(r#"read_file("{canonical}")"#)).unwrap(), "a");
+    assert_eq!(err_kind(&e, r#"read_file("../secret.txt")"#), "Denied");
+}
+
+// A root that is itself a symlink: both the link path and the real path are accepted.
+#[cfg(unix)]
+#[test]
+fn test_symlinked_root() {
+    let t = TempDir::new();
+    t.write("real/a.txt", "a");
+    let link = t.path().join("link");
+    std::os::unix::fs::symlink(t.path().join("real"), &link).unwrap();
+    let e = engine(SysConfig::default().fs_root(&link, FsAccess::Read));
+    assert_eq!(e.eval::<String>(r#"read_file("a.txt")"#).unwrap(), "a");
+    let via_link = format!("{}/link/a.txt", t.as_script_path());
+    let via_real = format!("{}/real/a.txt", t.as_script_path());
+    assert_eq!(e.eval::<String>(&format!(r#"read_file("{via_link}")"#)).unwrap(), "a");
+    assert_eq!(e.eval::<String>(&format!(r#"read_file("{via_real}")"#)).unwrap(), "a");
+}
+
+// Absolute paths containing `..`: allowed while they stay lexically inside the root.
+#[test]
+fn test_absolute_path_with_parent_components() {
+    let t = TempDir::new();
+    t.write("a.txt", "a");
+    t.write("sub/b.txt", "b");
+    let e = engine(SysConfig::default().fs_root(t.path(), FsAccess::Read));
+    let base = t.as_script_path();
+    assert_eq!(e.eval::<String>(&format!(r#"read_file("{base}/sub/../a.txt")"#)).unwrap(), "a");
+    // Leaving the root and coming back is refused on purpose.
+    let root_name = t.path().file_name().unwrap().to_str().unwrap();
+    assert_eq!(err_kind(&e, &format!(r#"read_file("{base}/../{root_name}/a.txt")"#)), "Denied");
+}
+
+// Copying between roots needs read on the source and write on the destination.
+#[test]
+fn test_copy_across_roots() {
+    let a = TempDir::new();
+    a.write("src.txt", "payload");
+    let b = TempDir::new();
+    let e = engine(SysConfig::default().fs_root(a.path(), FsAccess::Read).fs_root(b.path(), FsAccess::ReadWrite));
+    let dst = format!("{}/dst.txt", b.as_script_path());
+    e.run(&format!(r#"copy_file("src.txt", "{dst}")"#)).unwrap();
+    assert_eq!(b.read("dst.txt"), b"payload");
+    assert_eq!(err_kind(&e, r#"copy_file("src.txt", "copy.txt")"#), "Denied");
+    assert!(!a.exists("copy.txt"));
+}
+
+// Config builder semantics.
+#[test]
+fn test_config_builder() {
+    use rhai::packages::sys::{FsPolicy, ProgramPolicy};
+
+    let t = TempDir::new();
+    t.write("a.txt", "a");
+
+    // `fs_root` after `fs_unrestricted` switches back to confined mode.
+    let e = engine(SysConfig::default().fs_unrestricted(FsAccess::ReadWriteDelete).fs_root(t.path(), FsAccess::Read));
+    let other = TempDir::new();
+    other.write("b.txt", "b");
+    let outside = format!("{}/b.txt", other.as_script_path());
+    assert_eq!(err_kind(&e, &format!(r#"read_file("{outside}")"#)), "Denied");
+    assert_eq!(e.eval::<String>(r#"read_file("a.txt")"#).unwrap(), "a");
+
+    // `permissive` grants everything.
+    let p = SysConfig::permissive();
+    assert_eq!(p.clone().fs_unrestricted(FsAccess::ReadWriteDelete), p);
+    assert!(EnvPolicy::All.allows("ANYTHING"));
+    assert!(!EnvPolicy::None.allows("ANYTHING"));
+    assert!(EnvPolicy::AllowList(vec!["A".into()]).allows("A"));
+    assert!(!EnvPolicy::AllowList(vec!["A".into()]).allows("AB"));
+    assert!(ProgramPolicy::Any.allows("rm"));
+    assert!(!ProgramPolicy::None.allows("rm"));
+    assert!(ProgramPolicy::AllowList(vec!["git".into()]).allows("git"));
+    assert!(!ProgramPolicy::AllowList(vec!["git".into()]).allows("/usr/bin/git"));
+    assert_eq!(FsPolicy::default(), FsPolicy::Roots(Vec::new()));
+    assert!(FsAccess::Read < FsAccess::ReadWrite && FsAccess::ReadWrite < FsAccess::ReadWriteDelete);
+}
+
+// The package can live under a namespace and be shared by several engines.
+#[cfg(not(feature = "no_module"))]
+#[test]
+fn test_static_module_and_sharing() {
+    use rhai::packages::sys::SysPackage;
+    use rhai::packages::Package;
+
+    let t = TempDir::new();
+    t.write("a.txt", "a");
+    let pkg = SysPackage::new(SysConfig::default().fs_root(t.path(), FsAccess::Read)).unwrap();
+
+    let mut e1 = Engine::new();
+    pkg.register_into_engine_as(&mut e1, "sys");
+    assert_eq!(e1.eval::<String>(r#"sys::read_file("a.txt")"#).unwrap(), "a");
+    let err = e1.run(r#"read_file("a.txt")"#).unwrap_err();
+    assert!(matches!(*err, EvalAltResult::ErrorFunctionNotFound(..)));
+
+    let mut e2 = Engine::new();
+    pkg.clone().register_into_engine(&mut e2);
+    assert_eq!(e2.eval::<String>(r#"read_file("a.txt")"#).unwrap(), "a");
+}
+
+// Errors carry the position of the failing call.
+#[cfg(not(feature = "no_position"))]
+#[test]
+fn test_error_position() {
+    let e = engine(SysConfig::default());
+    let err = e.run("let x = 1;\nlet y = 2;\nread_file(\"x\");\n").unwrap_err();
+    assert_eq!(err.position().line(), Some(3));
+}
+
+// Display and `kind` of every variant, plus `to_debug` from a script.
+#[test]
+fn test_error_variants() {
+    let cases = [
+        (SysError::Denied("d".into()), "Denied", "Denied: d"),
+        (SysError::Timeout("t".into()), "Timeout", "Timeout: t"),
+        (SysError::OutputLimit("o".into()), "OutputLimit", "OutputLimit: o"),
+        (SysError::NotUtf8("n".into()), "NotUtf8", "NotUtf8: n"),
+    ];
+    for (err, kind, text) in cases {
+        assert_eq!(err.kind(), kind);
+        assert_eq!(err.to_string(), text);
+    }
+    let t = TempDir::new();
+    let e = engine(SysConfig::default().fs_root(t.path(), FsAccess::Read));
+    let dbg = e
+        .eval::<String>(
+            r#"
+                let d = "";
+                try { read_file("nope"); } catch (err) { d = err.to_debug(); }
+                d
+            "#,
+        )
+        .unwrap();
+    assert!(dbg.starts_with("Io {"), "{dbg}");
+    assert!(dbg.contains("NotFound"), "{dbg}");
+}
+
+// Under `sync` the package can be used from several threads at once.
+#[cfg(feature = "sync")]
+#[test]
+fn test_sync_threads() {
+    let t = TempDir::new();
+    t.write("a.txt", "shared");
+    let e = std::sync::Arc::new(engine(SysConfig::default().fs_root(t.path(), FsAccess::ReadWrite)));
+    let handles: Vec<_> = (0..4)
+        .map(|i| {
+            let e = e.clone();
+            std::thread::spawn(move || {
+                for _ in 0..20 {
+                    assert_eq!(e.eval::<String>(r#"read_file("a.txt")"#).unwrap(), "shared");
+                    e.run(&format!(r#"write_file("t{i}.txt", "{i}")"#)).unwrap();
+                }
+            })
+        })
+        .collect();
+    for h in handles {
+        h.join().unwrap();
+    }
+    assert!(t.exists("t3.txt"));
+}
+
+// Function metadata includes the doc-comments.
+#[cfg(feature = "metadata")]
+#[test]
+fn test_function_metadata() {
+    let e = engine(SysConfig::default());
+    let json = e.gen_fn_metadata_to_json(false).unwrap();
+    assert!(json.contains("\"name\": \"read_file\""), "{json}");
+    assert!(json.contains("# Example"), "{json}");
+    assert!(json.contains("SysError"), "{json}");
+}
