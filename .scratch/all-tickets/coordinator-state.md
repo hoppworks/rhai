@@ -38,8 +38,10 @@ release/platform completion claim. Native Linux proof task active from integrate
 source to close the supporting-filesystem NotUtf8 coverage gap. Windows guest
 supervision adapter implementation/proof is active before further native builds.
 Step 2 owner TCP question remains pending; release/API proposal is unaccepted.
-POSIX process prototype 35a8cf52 proof is not accepted: Expert validated five
-findings; the single correction attempt is now running in its owned worktree.
+POSIX process prototype 35a8cf52 proof is not accepted. Correction disposition
+501fa184c97f records that safe supervision was not established; no fixture was
+executed. This cause is stopped pending owner consultation after its allowed
+Expert escalation and one correction attempt. No new attempt without owner answer.
 
 ## Decisions
 
@@ -71,8 +73,13 @@ Prototype-proof cause: initial report conflicts with the actual fixture's I/O or
 and exceptional-path cleanup. One Expert escalation opened at
 escalations/01-process-prototype-proof.md; answer saved at
 escalations/01-process-prototype-proof.answer.md. All five concerns validated.
-The one allowed correction attempt follows the answer in the responsible context.
-If this fails for the same cause, consult the owner; no second escalation.
+The one allowed correction attempt closed at 501fa184c97f without implementation
+or execution; safe independent scope lifetime remains unestablished. Owner was
+asked whether to allow a further bounded attempt with a reviewed supervision design
+or defer this branch while other tickets continue. Consultation pending.
+Disposition: /Users/hoppworks/projects/rhai-process-prototype/.scratch/process-prototype/evidence/correction-attempt.md.
+No owned live resources reported; historical source/logs remain unaccepted.
+No second escalation or further implementation attempt unless owner overrides budget.
 Do not accept concurrent-I/O/cleanup claims until independent evidence review.
 Inherited VM history remains authoritative.
 
@@ -81,7 +88,8 @@ Inherited VM history remains authoritative.
 Collect native Linux proof and Windows scoped adapter evidence; inspect actual
 coverage before accepting either. Mac combined proof is accepted; do not rerun
 unchanged source merely for another context or platform task.
-Collect and independently review the corrected process prototype.
+Collect owner response to process retry consultation; preserve current stopped
+prototype cause history and do not restart it autonomously.
 TCP authority question remains pending; release/API proposals remain unaccepted.
 Linear is legacy and excluded, with no writes performed there.
 
