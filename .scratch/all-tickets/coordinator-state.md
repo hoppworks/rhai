@@ -14,8 +14,8 @@ Implement all approved local stdlib tickets with strict Engine + real OS + indep
 Existing unchanged accepted evidence remains valid. Unmeasured resource peaks are explicitly unverified in reviews.
 
 ## Current step and remaining gates
-TCP reads525737fd accepted after full seven-file review and affected cancellation proof15; unchanged launch13/14 reused. Proof ../tcp-stream-reads/, review tcp-stream-reads-review.md. Local integration/push pending, writes/half-close and native release still open.
-Process candidate65483bf9 source-only reviewed against sole Expert01. Source gate CLOSED: assertion readers block before readiness; responsible context correcting conditional hold. No native build/fixture/signal executed. Review correction before first execution. Historical bare Rust main must never run; explicit reviewed --fixture modes only.
+TCP reads525737fd accepted after full seven-file review and affected cancellation proof15; unchanged launch13/14 reused. Proof ../tcp-stream-reads/, review tcp-stream-reads-review.md. Integrated and exact remotee0dd28ec verified; clean owned receive checkout retired, proof retained. Writes/half-close newly dispatched, native release still open.
+Process9bf32e45 source gate independently approved after full65483bf + conditional-hold delta. First scoped normal vertical case passed at14:05; proof pending independent assessment, live controls active before original14:18:05. Only explicit reviewed --fixture modes; historical bare Rust main forbidden.
 Windows8f75da53 source/bootstrap gate closed; no new native execution. Unchanged external prerequisite is recorded once, no repeated audit. Process production and TCP writes/half-close remain open after current slices.
 
 ## Decisions and authorization
@@ -23,6 +23,8 @@ German chat; repository English. Local Markdown tickets only; Linear legacy.
 Strict verification, automatic local integration. Owner explicitly authorizes this Session to push integrated task/all-tickets to origin https://github.com/hoppworks/rhai.git; preserve published history. No remote merge. Every future author/committer exactly hoppworks, configured email unchanged, command-local override, no coauthor.
 Owner accepted recommended API/release decisions and recommended process extension; do not reopen answered questions.
 Updated global instructions and campaign snapshot/export rules applied. Retain elapsed time and cause history; no duplicate builds/evidence or default launch cutoff.
+
+TCP write/half-close responsible fresh task at /Users/hoppworks/projects/rhai-tcp-stream-writes, task/tcp-stream-writes basee0dd28ec; brief briefs/tcp-stream-writes.md. Record original60min start/deadline before work.
 
 ## Budgets and cause history
 - TCP original13:17:48–14:17:48UTC inclusive review,900s/invocation,2GiB private storage, jobs2,16 sockets/handles, serial tests. Launches1–14 retained in owned .scratch/tcp-stream-reads/; setup diagnostics classified separately from completed corrections. Launch9 no_index failed; tuple parse only10; launch12 confirmed peer inherited O_NONBLOCK;13 repaired fixture passed. Notifier refinement is source-only test review finding.

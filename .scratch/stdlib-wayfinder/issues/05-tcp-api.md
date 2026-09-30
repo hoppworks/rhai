@@ -34,3 +34,7 @@ The owner accepted the recommended concrete specification in
 [the approved proposal](../../all-tickets/tcp-proposal.md).
 Implementation, documented behavior and strict native/feature/MSRV proof remain
 open campaign requirements. No remote publication is authorized.
+
+## Implementation progress — 2026-09-30
+
+Connect, listener/accept and bounded receive/shared-close slices are accepted on native macOS; latest receive source525737fd integrated6e0b8cd5. See ../../all-tickets/tcp-stream-reads-review.md and ../../tcp-stream-reads/ for exact real-peer and failing-control proof. Write/write_all and directional shutdown remain in progress; native platform, feature and optional MSRV release acceptance remains open. Current Session fork push is explicitly owner-authorized; remote merge remains unauthorized.

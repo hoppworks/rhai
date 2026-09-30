@@ -1,0 +1,9 @@
+# Process source gate review
+
+Candidate9bf32e45, complete adapter65483bf plus conditional assertion hold correction reviewed independently before execution on2026-09-30. Reviewed controller, custodian, copied RPC runner and explicit Rust stream/stall/anchor fixture paths; no skipped affected code. Historical bare main remains forbidden.
+
+Reviewed external sole spawner/reaper, immediately recorded direct child slots, live same-group anchor and unreaped owned leader, one group KILL before anchor loss, exact reaping and descriptor closure, atomic quiet/receipt equality, runtime/tmp identity and exported readback before exact removal. Outer incomplete cleanup retains runtime/live owner and is not accepted success. Darwin ctypes waitid104-byte ABI/constants/symbol matches reviewed local SDK; no-child capability check then actual native normal receipt validates path. Custodian failure recovery is outside claim.
+
+Source findings corrected before execution: stall first1MiB drain/readiness, full capped stderr identity line, active worker snapshot handshake, TERM control, no-child missing os.waitid adapter, success quiet readback, and reader assertion pre-read deadlock. Same sole Expert01 and original cause history/budgets retained; no executed failed correction inferred from source findings. Native gate approved14:04 within original extension13:18:05–14:18:05, prescribed caps retained.
+
+Normal receipt88024 independently read:2MiB input/stdout and transformed stderr checksums,3joins, exact statuses, sentinel live before cleanup, descriptor closure. Assertion receipt91927 independently read:3actual active/held/acknowledged workers, all required live children, runner86, scopeKILL and3joins. Both exact runtime paths independently absent. Further control results pending; prototype acceptance is not production Engine process acceptance or non-macOS/MSRV proof.
