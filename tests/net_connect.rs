@@ -132,11 +132,22 @@ fn open_handle_limit_is_shared_across_package_engines_and_released_on_close() {
     assert!(clone_closed, "a clone shares the closed state");
     second_engine.run(&format!(r#"let again = connect("127.0.0.1", {}); again.close();"#, endpoint.port())).unwrap();
 
-    for _ in 0..2 {
+    // An unclosed stream retained only by this script scope must release its slot
+    // when that scope and its final handle are dropped.
+    let mut drop_scope = Scope::new();
+    second_engine
+        .run_with_scope(&mut drop_scope, &format!(r#"let dropped = connect("127.0.0.1", {});"#, endpoint.port()))
+        .unwrap();
+    drop(drop_scope);
+    second_engine
+        .run(&format!(r#"let after_drop = connect("127.0.0.1", {}); after_drop.close();"#, endpoint.port()))
+        .unwrap();
+
+    for index in 0..4 {
         let mut peer = wait_accept(&listener);
         peer.set_read_timeout(Some(Duration::from_secs(2))).unwrap();
         let mut byte = [0_u8; 1];
-        assert_eq!(peer.read(&mut byte).unwrap(), 0, "closed stream reaches EOF");
+        assert_eq!(peer.read(&mut byte).unwrap(), 0, "stream {index} reaches EOF");
     }
     listener.set_nonblocking(true).unwrap();
     match listener.accept() {
