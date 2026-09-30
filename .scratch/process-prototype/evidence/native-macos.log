@@ -1,0 +1,4 @@
+stream: 2097152 bytes on each output, stdin fully transferred, exit=exit status: 0
+active cancel: first-code pgid=25030 equals child pid; child 25030 reaped=signal: 9 (SIGKILL); escaped descendant 25031 held pipes through group kill, workers honored cancel and joined in 3.649167ms, then exact-PID cleanup succeeded
+cancel after direct exit: child 25032 status=exit status: 0; escaped descendant 25033 still held pipes, but workers joined under cancellation; sentinel 25029 alive; captured 48 bytes; exact cleanup follows
+assertion control passed
