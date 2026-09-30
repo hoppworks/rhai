@@ -51,7 +51,6 @@ impl FsState {
                             .map_err(|e| SysError::io("get current directory", ".", &e))?
                             .join(&root.path)
                     };
-                    let given = normalize_absolute(&given);
                     let target = || given.display().to_string();
                     let canonical = strip_verbatim(
                         std::fs::canonicalize(&given)
@@ -117,6 +116,8 @@ impl Deref for DirRef<'_> {
 struct Resolved<'a> {
     dir: DirRef<'a>,
     rel: PathBuf,
+    /// Original OS path in unrestricted mode; those operations must follow host semantics.
+    host_path: Option<PathBuf>,
     /// Index of the root, or `usize::MAX` in unrestricted mode.
     root: usize,
 }
@@ -153,20 +154,21 @@ fn strip_verbatim(path: PathBuf) -> PathBuf {
     path
 }
 
-/// Lexically normalise an absolute path: drop `.`, fold `..`.
-fn normalize_absolute(path: &Path) -> PathBuf {
-    let mut out = PathBuf::new();
-    for c in path.components() {
-        match c {
-            Component::Prefix(..) | Component::RootDir => out.push(c.as_os_str()),
-            Component::CurDir => (),
-            Component::ParentDir => {
-                out.pop();
-            }
-            Component::Normal(s) => out.push(s),
+/// Return the spelling of a root with a known OS prefix alias, when one exists.
+fn prefix_alias(path: &Path) -> Option<PathBuf> {
+    #[cfg(target_os = "macos")]
+    {
+        let private_var = Path::new("/private/var");
+        let var = Path::new("/var");
+        if let Ok(rest) = path.strip_prefix(private_var) {
+            return Some(var.join(rest));
+        }
+        if let Ok(rest) = path.strip_prefix(var) {
+            return Some(private_var.join(rest));
         }
     }
-    out
+    let _ = path;
+    None
 }
 
 /// Refuse a relative path that lexically climbs above its start.
@@ -209,32 +211,17 @@ impl FsState {
                         .map_err(|e| SysError::io("get current directory", ".", &e))?
                         .join(p)
                 };
-                let abs = normalize_absolute(&abs);
-                // Open the nearest existing ancestor (never the target itself, so that the
-                // target can be removed or renamed) and address the rest relative to it.
-                // This also lets operations that create several levels (`create_dir_all`) work.
-                let mut base = abs.parent().unwrap_or(abs.as_path());
-                while !base.is_dir() {
-                    match base.parent() {
-                        Some(parent) => base = parent,
-                        None => break,
-                    }
-                }
-                let rel = abs.strip_prefix(base).map_or_else(
-                    |_| PathBuf::from("."),
-                    |r| {
-                        if r.as_os_str().is_empty() {
-                            PathBuf::from(".")
-                        } else {
-                            r.to_path_buf()
-                        }
-                    },
-                );
-                let dir = Dir::open_ambient_dir(base, ambient_authority())
-                    .map_err(|e| SysError::io("open directory", base.display().to_string(), &e))?;
+                // Host operations use this original path directly. Lexical folding across a
+                // symlink changes the selected path, so keep a harmless ambient anchor only
+                // to share the resolved-path representation.
+                let anchor = abs.ancestors().last().unwrap_or(Path::new("/"));
+                let dir = Dir::open_ambient_dir(anchor, ambient_authority()).map_err(|e| {
+                    SysError::io("open directory", anchor.display().to_string(), &e)
+                })?;
                 Ok(Resolved {
                     dir: DirRef::Owned(dir),
-                    rel,
+                    rel: PathBuf::from("."),
+                    host_path: Some(abs),
                     root: usize::MAX,
                 })
             }
@@ -242,13 +229,16 @@ impl FsState {
                 let (ix, rel) = if p.is_absolute() {
                     let mut best: Option<(usize, &Path)> = None;
                     for (i, root) in roots.iter().enumerate() {
-                        let hit = p
-                            .strip_prefix(&root.given)
-                            .or_else(|_| p.strip_prefix(&root.canonical));
-                        if let Ok(rel) = hit {
-                            let depth = root.given.components().count();
+                        let mut aliases = vec![root.given.as_path(), root.canonical.as_path()];
+                        let given_alias = prefix_alias(&root.given);
+                        let canonical_alias = prefix_alias(&root.canonical);
+                        aliases.extend(given_alias.iter().map(PathBuf::as_path));
+                        aliases.extend(canonical_alias.iter().map(PathBuf::as_path));
+                        let hit = aliases.iter().find_map(|alias| p.strip_prefix(alias).ok());
+                        if let Some(rel) = hit {
+                            let depth = root.canonical.components().count();
                             let better = best.map_or(true, |(b, ..)| {
-                                depth > roots[b].given.components().count()
+                                depth > roots[b].canonical.components().count()
                             });
                             if better {
                                 best = Some((i, rel));
@@ -291,6 +281,7 @@ impl FsState {
                 Ok(Resolved {
                     dir: DirRef::Borrowed(&root.dir),
                     rel,
+                    host_path: None,
                     root: ix,
                 })
             }
@@ -342,10 +333,11 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
         ],
         |path: &str| -> Res<String> {
             let r = state.fs.resolve(path, Need::Read)?;
-            let bytes = r
-                .dir
-                .read(&r.rel)
-                .map_err(|e| map_io("read file", path, &e))?;
+            let bytes = match &r.host_path {
+                Some(path) => std::fs::read(path),
+                None => r.dir.read(&r.rel),
+            }
+            .map_err(|e| map_io("read file", path, &e))?;
             Ok(String::from_utf8_lossy(&bytes).into_owned())
         }
     );
@@ -358,9 +350,11 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
         &["/// Read a whole file as a BLOB."],
         |path: &str| -> Res<crate::Blob> {
             let r = state.fs.resolve(path, Need::Read)?;
-            r.dir
-                .read(&r.rel)
-                .map_err(|e| map_io("read file", path, &e).into())
+            match &r.host_path {
+                Some(path) => std::fs::read(path),
+                None => r.dir.read(&r.rel),
+            }
+            .map_err(|e| map_io("read file", path, &e).into())
         }
     );
 
@@ -381,9 +375,11 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
         ],
         |path: &str, data: &str| -> Res<()> {
             let r = state.fs.resolve(path, Need::Write)?;
-            r.dir
-                .write(&r.rel, data.as_bytes())
-                .map_err(|e| map_io("write file", path, &e).into())
+            match &r.host_path {
+                Some(path) => std::fs::write(path, data.as_bytes()),
+                None => r.dir.write(&r.rel, data.as_bytes()),
+            }
+            .map_err(|e| map_io("write file", path, &e).into())
         }
     );
 
@@ -395,9 +391,11 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
         &["/// Write a BLOB to a file, creating it or truncating existing content."],
         |path: &str, data: crate::Blob| -> Res<()> {
             let r = state.fs.resolve(path, Need::Write)?;
-            r.dir
-                .write(&r.rel, &data)
-                .map_err(|e| map_io("write file", path, &e).into())
+            match &r.host_path {
+                Some(path) => std::fs::write(path, &data),
+                None => r.dir.write(&r.rel, &data),
+            }
+            .map_err(|e| map_io("write file", path, &e).into())
         }
     );
 
@@ -448,7 +446,7 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
         module,
         "is_file",
         &["/// Return `true` when the path exists and is a regular file."],
-        |path: &str| -> Res<bool> { Ok(meta(&state.fs, path)?.map_or(false, |m| m.is_file())) }
+        |path: &str| -> Res<bool> { Ok(meta(&state.fs, path)?.map_or(false, |m| m.0)) }
     );
 
     with_state!(
@@ -456,7 +454,7 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
         module,
         "is_dir",
         &["/// Return `true` when the path exists and is a directory."],
-        |path: &str| -> Res<bool> { Ok(meta(&state.fs, path)?.map_or(false, |m| m.is_dir())) }
+        |path: &str| -> Res<bool> { Ok(meta(&state.fs, path)?.map_or(false, |m| m.1)) }
     );
 
     with_state!(state, module, "metadata",
@@ -475,21 +473,31 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
         ],
         |path: &str| -> Res<Map> {
             let r = state.fs.resolve(path, Need::Read)?;
-            let m = r.dir.metadata(&r.rel).map_err(|e| map_io("read metadata of", path, &e))?;
-            let sm = r.dir.symlink_metadata(&r.rel).map_err(|e| map_io("read metadata of", path, &e))?;
-            let modified: Dynamic = match m.modified() {
-                Ok(t) => match t.into_std().duration_since(std::time::UNIX_EPOCH) {
+            let (size, is_file, is_dir, is_symlink, readonly, modified) = match &r.host_path {
+                Some(host_path) => {
+                    let m = std::fs::metadata(host_path).map_err(|e| map_io("read metadata of", path, &e))?;
+                    let sm = std::fs::symlink_metadata(host_path).map_err(|e| map_io("read metadata of", path, &e))?;
+                    (m.len(), m.is_file(), m.is_dir(), sm.file_type().is_symlink(), m.permissions().readonly(), m.modified())
+                }
+                None => {
+                    let m = r.dir.metadata(&r.rel).map_err(|e| map_io("read metadata of", path, &e))?;
+                    let sm = r.dir.symlink_metadata(&r.rel).map_err(|e| map_io("read metadata of", path, &e))?;
+                    (m.len(), m.is_file(), m.is_dir(), sm.file_type().is_symlink(), m.permissions().readonly(), m.modified().map(|t| t.into_std()))
+                }
+            };
+            let modified: Dynamic = match modified {
+                Ok(t) => match t.duration_since(std::time::UNIX_EPOCH) {
                     Ok(d) => INT::try_from(d.as_secs()).map_or(Dynamic::UNIT, Into::into),
                     Err(..) => Dynamic::UNIT,
                 },
                 Err(..) => Dynamic::UNIT,
             };
             let mut map = Map::new();
-            map.insert("size".into(), INT::try_from(m.len()).unwrap_or(INT::MAX).into());
-            map.insert("is_file".into(), m.is_file().into());
-            map.insert("is_dir".into(), m.is_dir().into());
-            map.insert("is_symlink".into(), sm.file_type().is_symlink().into());
-            map.insert("readonly".into(), m.permissions().readonly().into());
+            map.insert("size".into(), INT::try_from(size).unwrap_or(INT::MAX).into());
+            map.insert("is_file".into(), is_file.into());
+            map.insert("is_dir".into(), is_dir.into());
+            map.insert("is_symlink".into(), is_symlink.into());
+            map.insert("readonly".into(), readonly.into());
             map.insert("modified".into(), modified);
             Ok(map)
         });
@@ -512,14 +520,26 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
         ],
         |path: &str| -> Res<crate::Array> {
             let r = state.fs.resolve(path, Need::Read)?;
-            let entries = r
-                .dir
-                .read_dir(&r.rel)
-                .map_err(|e| map_io("read directory", path, &e))?;
             let mut names = Vec::new();
-            for entry in entries {
-                let entry = entry.map_err(|e| map_io("read directory", path, &e))?;
-                names.push(os_to_string("directory entry", entry.file_name())?);
+            match &r.host_path {
+                Some(host_path) => {
+                    for entry in std::fs::read_dir(host_path)
+                        .map_err(|e| map_io("read directory", path, &e))?
+                    {
+                        let entry = entry.map_err(|e| map_io("read directory", path, &e))?;
+                        names.push(os_to_string("directory entry", entry.file_name())?);
+                    }
+                }
+                None => {
+                    for entry in r
+                        .dir
+                        .read_dir(&r.rel)
+                        .map_err(|e| map_io("read directory", path, &e))?
+                    {
+                        let entry = entry.map_err(|e| map_io("read directory", path, &e))?;
+                        names.push(os_to_string("directory entry", entry.file_name())?);
+                    }
+                }
             }
             names.sort_unstable();
             Ok(names.into_iter().map(Into::into).collect())
@@ -533,9 +553,11 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
         &["/// Create a directory. The parent must exist."],
         |path: &str| -> Res<()> {
             let r = state.fs.resolve(path, Need::Write)?;
-            r.dir
-                .create_dir(&r.rel)
-                .map_err(|e| map_io("create directory", path, &e).into())
+            match &r.host_path {
+                Some(path) => std::fs::create_dir(path),
+                None => r.dir.create_dir(&r.rel),
+            }
+            .map_err(|e| map_io("create directory", path, &e).into())
         }
     );
 
@@ -554,9 +576,11 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
         ],
         |path: &str| -> Res<()> {
             let r = state.fs.resolve(path, Need::Write)?;
-            r.dir
-                .create_dir_all(&r.rel)
-                .map_err(|e| map_io("create directory", path, &e).into())
+            match &r.host_path {
+                Some(path) => std::fs::create_dir_all(path),
+                None => r.dir.create_dir_all(&r.rel),
+            }
+            .map_err(|e| map_io("create directory", path, &e).into())
         }
     );
 
@@ -567,9 +591,11 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
         &["/// Remove a file."],
         |path: &str| -> Res<()> {
             let r = state.fs.resolve(path, Need::Write)?;
-            r.dir
-                .remove_file(&r.rel)
-                .map_err(|e| map_io("remove file", path, &e).into())
+            match &r.host_path {
+                Some(path) => std::fs::remove_file(path),
+                None => r.dir.remove_file(&r.rel),
+            }
+            .map_err(|e| map_io("remove file", path, &e).into())
         }
     );
 
@@ -580,9 +606,11 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
         &["/// Remove an empty directory."],
         |path: &str| -> Res<()> {
             let r = state.fs.resolve(path, Need::Write)?;
-            r.dir
-                .remove_dir(&r.rel)
-                .map_err(|e| map_io("remove directory", path, &e).into())
+            match &r.host_path {
+                Some(path) => std::fs::remove_dir(path),
+                None => r.dir.remove_dir(&r.rel),
+            }
+            .map_err(|e| map_io("remove directory", path, &e).into())
         }
     );
 
@@ -601,9 +629,11 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
         ],
         |path: &str| -> Res<()> {
             let r = state.fs.resolve(path, Need::Delete)?;
-            r.dir
-                .remove_dir_all(&r.rel)
-                .map_err(|e| map_io("remove directory", path, &e).into())
+            match &r.host_path {
+                Some(path) => std::fs::remove_dir_all(path),
+                None => r.dir.remove_dir_all(&r.rel),
+            }
+            .map_err(|e| map_io("remove directory", path, &e).into())
         }
     );
 
@@ -629,9 +659,11 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
                 ))
                 .into());
             }
-            a.dir
-                .rename(&a.rel, &b.dir, &b.rel)
-                .map_err(|e| map_io("rename", from, &e).into())
+            match (&a.host_path, &b.host_path) {
+                (Some(from), Some(to)) => std::fs::rename(from, to),
+                _ => a.dir.rename(&a.rel, &b.dir, &b.rel),
+            }
+            .map_err(|e| map_io("rename", from, &e).into())
         }
     );
 
@@ -651,29 +683,44 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
         |from: &str, to: &str| -> Res<()> {
             let a = state.fs.resolve(from, Need::Read)?;
             let b = state.fs.resolve(to, Need::Write)?;
-            a.dir
-                .copy(&a.rel, &b.dir, &b.rel)
-                .map(|_| ())
-                .map_err(|e| map_io("copy", from, &e).into())
+            match (&a.host_path, &b.host_path) {
+                (Some(from_path), Some(to_path)) => std::fs::copy(from_path, to_path).map(|_| ()),
+                _ => a.dir.copy(&a.rel, &b.dir, &b.rel).map(|_| ()),
+            }
+            .map_err(|e| map_io("copy", from, &e).into())
         }
     );
 }
 
 fn append(fs: &FsState, path: &str, data: &[u8]) -> Res<()> {
     let r = fs.resolve(path, Need::Write)?;
-    let mut file = r
-        .dir
-        .open_with(&r.rel, OpenOptions::new().append(true).create(true))
-        .map_err(|e| map_io("append to file", path, &e))?;
-    file.write_all(data)
-        .map_err(|e| map_io("append to file", path, &e))?;
+    if let Some(host_path) = &r.host_path {
+        let mut file = std::fs::OpenOptions::new()
+            .append(true)
+            .create(true)
+            .open(host_path)
+            .map_err(|e| map_io("append to file", path, &e))?;
+        file.write_all(data)
+            .map_err(|e| map_io("append to file", path, &e))?;
+    } else {
+        let mut file = r
+            .dir
+            .open_with(&r.rel, OpenOptions::new().append(true).create(true))
+            .map_err(|e| map_io("append to file", path, &e))?;
+        file.write_all(data)
+            .map_err(|e| map_io("append to file", path, &e))?;
+    }
     Ok(())
 }
 
 /// Metadata of a path, `None` when it does not exist.
-fn meta(fs: &FsState, path: &str) -> Res<Option<cap_std::fs::Metadata>> {
+fn meta(fs: &FsState, path: &str) -> Res<Option<(bool, bool)>> {
     let r = fs.resolve(path, Need::Read)?;
-    match r.dir.metadata(&r.rel) {
+    let result = match &r.host_path {
+        Some(path) => std::fs::metadata(path).map(|m| (m.is_file(), m.is_dir())),
+        None => r.dir.metadata(&r.rel).map(|m| (m.is_file(), m.is_dir())),
+    };
+    match result {
         Ok(m) => Ok(Some(m)),
         Err(e) if e.kind() == io::ErrorKind::NotFound => Ok(None),
         Err(e) => Err(map_io("read metadata of", path, &e).into()),

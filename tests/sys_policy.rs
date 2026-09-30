@@ -282,6 +282,66 @@ fn test_symlinked_root() {
     assert_eq!(e.eval::<String>(&format!(r#"read_file("{via_real}")"#)).unwrap(), "a");
 }
 
+#[cfg(target_os = "macos")]
+#[test]
+fn test_root_accepts_macos_system_prefix_aliases() {
+    let t = TempDir::new();
+    t.write("real/a.txt", "payload");
+    std::os::unix::fs::symlink(t.path().join("real"), t.path().join("link")).unwrap();
+    let e = engine(SysConfig::default().fs_root(t.path().join("link"), FsAccess::Read));
+
+    let var_path = format!("{}/real/a.txt", t.as_script_path());
+    let private_path = var_path.replacen("/var/", "/private/var/", 1);
+    assert_eq!(e.eval::<String>(&format!(r#"read_file("{var_path}")"#)).unwrap(), "payload");
+    assert_eq!(e.eval::<String>(&format!(r#"read_file("{private_path}")"#)).unwrap(), "payload");
+    assert_eq!(err_kind(&e, &format!(r#"write_file("{private_path}", "changed")"#)), "Denied");
+    assert_eq!(std::fs::read(t.path().join("real/a.txt")).unwrap(), b"payload");
+}
+
+#[cfg(target_os = "macos")]
+#[test]
+fn test_nested_roots_keep_permissions_through_system_prefix_aliases() {
+    let t = TempDir::new();
+    t.write("inner/marker.txt", "nested payload");
+    let outer_var = t.as_script_path();
+    let outer_private = outer_var.replacen("/var/", "/private/var/", 1);
+    let inner_var = format!("{outer_var}/inner");
+    let inner_private = inner_var.replacen("/var/", "/private/var/", 1);
+    let e = engine(SysConfig::default().fs_root(&outer_var, FsAccess::Read).fs_root(&inner_private, FsAccess::ReadWrite));
+
+    for path in [format!("{inner_var}/marker.txt"), format!("{inner_private}/marker.txt")] {
+        assert_eq!(e.eval::<String>(&format!(r#"read_file("{path}")"#)).unwrap(), "nested payload");
+    }
+    let inner_new = format!("{inner_var}/created.txt");
+    e.run(&format!(r#"write_file("{inner_new}", "nested write")"#)).unwrap();
+    assert_eq!(std::fs::read(t.path().join("inner/created.txt")).unwrap(), b"nested write");
+
+    let outer_new = format!("{outer_private}/outer-created.txt");
+    assert_eq!(err_kind(&e, &format!(r#"write_file("{outer_new}", "denied")"#)), "Denied");
+    assert!(!t.path().join("outer-created.txt").exists());
+}
+
+// Configured root paths are opened using OS symlink/parent semantics.
+#[cfg(unix)]
+#[test]
+fn test_configured_root_symlink_then_parent_uses_os_resolution() {
+    let t = TempDir::new();
+    t.write("lexical/allowed/marker.txt", "lexical sentinel");
+    t.write("real/allowed/marker.txt", "OS-selected root");
+    std::fs::create_dir_all(t.path().join("real/child")).unwrap();
+    std::os::unix::fs::symlink(t.path().join("real/child"), t.path().join("lexical/link")).unwrap();
+
+    let configured = t.path().join("lexical/link/../allowed");
+    let selected = std::fs::canonicalize(t.path().join("real/allowed")).unwrap();
+    assert_eq!(std::fs::canonicalize(&configured).unwrap(), selected);
+    let e = engine(SysConfig::default().fs_root(&configured, FsAccess::ReadWrite));
+
+    assert_eq!(e.eval::<String>(r#"read_file("marker.txt")"#).unwrap(), "OS-selected root");
+    e.run(r#"write_file("created.txt", "script data")"#).unwrap();
+    assert_eq!(std::fs::read(t.path().join("real/allowed/created.txt")).unwrap(), b"script data");
+    assert!(!t.exists("lexical/allowed/created.txt"));
+}
+
 // Absolute paths containing `..`: allowed while they stay lexically inside the root.
 #[test]
 fn test_absolute_path_with_parent_components() {

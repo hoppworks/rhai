@@ -234,6 +234,48 @@ fn test_unrestricted_round_trip() {
     assert!(!t.exists("a"));
 }
 
+#[cfg(unix)]
+#[test]
+fn test_unrestricted_symlinks_follow_host_semantics() {
+    let t = TempDir::new();
+    t.write("actual/absolute.txt", "absolute target");
+    t.write("actual/relative.txt", "relative target");
+    std::fs::create_dir_all(t.path().join("links")).unwrap();
+    std::os::unix::fs::symlink(t.path().join("actual/absolute.txt"), t.path().join("links/absolute")).unwrap();
+    std::os::unix::fs::symlink("../actual/relative.txt", t.path().join("links/relative")).unwrap();
+    let e = engine(SysConfig::permissive());
+    let base = t.as_script_path();
+
+    assert_eq!(e.eval::<String>(&format!(r#"read_file("{base}/links/absolute")"#)).unwrap(), "absolute target");
+    assert_eq!(e.eval::<String>(&format!(r#"read_file("{base}/links/relative")"#)).unwrap(), "relative target");
+    e.run(&format!(r#"write_file("{base}/links/absolute", "changed"); copy_file("{base}/links/relative", "{base}/copied.txt")"#))
+        .unwrap();
+    assert_eq!(std::fs::read(t.path().join("actual/absolute.txt")).unwrap(), b"changed");
+    assert_eq!(std::fs::read(t.path().join("copied.txt")).unwrap(), b"relative target");
+
+    e.run(&format!(r#"remove_file("{base}/links/absolute")"#)).unwrap();
+    assert!(!t.path().join("links/absolute").exists());
+    assert_eq!(std::fs::read(t.path().join("actual/absolute.txt")).unwrap(), b"changed");
+    assert_eq!(std::fs::read(t.path().join("actual/relative.txt")).unwrap(), b"relative target");
+}
+
+#[cfg(unix)]
+#[test]
+fn test_unrestricted_symlink_then_parent_uses_host_resolution() {
+    let t = TempDir::new();
+    t.write("lexical/allowed/marker.txt", "lexical sentinel");
+    t.write("actual/allowed/marker.txt", "OS-selected target");
+    std::fs::create_dir_all(t.path().join("actual/child")).unwrap();
+    std::os::unix::fs::symlink(t.path().join("actual/child"), t.path().join("lexical/link")).unwrap();
+
+    let e = engine(SysConfig::permissive());
+    let path = format!("{}/lexical/link/../allowed", t.as_script_path());
+    assert_eq!(e.eval::<String>(&format!(r#"read_file("{path}/marker.txt")"#)).unwrap(), "OS-selected target");
+    e.run(&format!(r#"write_file("{path}/created.txt", "host path")"#)).unwrap();
+    assert_eq!(std::fs::read(t.path().join("actual/allowed/created.txt")).unwrap(), b"host path");
+    assert!(!t.path().join("lexical/allowed/created.txt").exists());
+}
+
 // Operations on the wrong kind of entry fail with an I/O error, not a panic.
 #[test]
 fn test_wrong_entry_kind() {
@@ -287,9 +329,23 @@ fn test_metadata_symlink_and_readonly() {
 #[test]
 fn test_non_utf8_file_name() {
     use std::os::unix::ffi::OsStrExt;
+    #[cfg(target_os = "macos")]
+    const EILSEQ: i32 = 92;
+    #[cfg(any(target_os = "linux", target_os = "android"))]
+    const EILSEQ: i32 = 84;
+    #[cfg(not(any(target_os = "macos", target_os = "linux", target_os = "android")))]
+    const EILSEQ: i32 = i32::MIN;
+
     let (t, e) = rw();
     t.write("ok.txt", "");
-    std::fs::write(t.path().join(std::ffi::OsStr::from_bytes(b"bad\xFF.txt")), "").unwrap();
+    match std::fs::write(t.path().join(std::ffi::OsStr::from_bytes(b"bad\xFF.txt")), "") {
+        Ok(()) => {}
+        Err(err) if err.raw_os_error() == Some(EILSEQ) => {
+            eprintln!("filesystem rejects non-UTF-8 fixture with EILSEQ: {err}");
+            return;
+        }
+        Err(err) => panic!("failed to create non-UTF-8 fixture: {err}"),
+    }
     let err = sys_err(&e, r#"read_dir(".")"#);
     assert!(matches!(err, SysError::NotUtf8(..)), "{err}");
     assert_eq!(err_kind(&e, r#"read_dir(".")"#), "NotUtf8");
