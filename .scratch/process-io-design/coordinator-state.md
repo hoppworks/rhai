@@ -18,7 +18,14 @@ Close the bounded production Rust I/O design prerequisite from `.scratch/all-tic
 
 ## Current step
 
-Complete accuracy/diff review and commit both design records atomically using command-local Git name configuration. Report immutable commit ref and remaining native gates. Do not push or merge.
+Handoff the committed design and pursue the remaining native Rust proof gates in their authorized implementation phase. This design-only prerequisite is closed; no further work is authorized here beyond documenting the focused Windows feature-set review below. Do not push or merge.
+
+## Handoff
+
+- Design commit: `ef0d8eeedf12f699c79f4f590cd542b69adc9336`.
+- Follow-up review verified the exact windows-sys 0.61.2 namespaces and added `Win32_Storage_FileSystem` and `Win32_Security` to the minimal feature set. The upstream version range is resolver guidance only, not a support/maintenance promise.
+- For the Windows managed `CREATE_SUSPENDED` path, the private owner must retain `PROCESS_INFORMATION`'s process and primary-thread handles: use the thread handle to resume and owned process/job handles for query, wait, and termination. Do not convert this raw-launch path into `std::process::Child`, rediscover a PID/thread, or rely on nightly-only `ChildExt::main_thread_handle`.
+- No build, fixture, or process was launched; no Cargo files changed. Exact Rust 1.77.2 resolution and Windows native proof remain open gates below.
 
 ## Remaining native gates
 
