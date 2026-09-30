@@ -6,6 +6,31 @@
 //! With `no_object`, use the registered free-function forms (for example,
 //! `write_all_string(stream, "hello")`, `peer_addr(stream)`, and
 //! `accept(listener, 500)`) because dot syntax is unavailable.
+//!
+//! # Bounds and shared handles
+//!
+//! All host deadlines must be finite, positive and representable. Script timeout
+//! arguments are positive integer milliseconds and can only shorten the host
+//! ceiling. Each read or write is bounded by the host byte cap (at most 1 MiB);
+//! checked Engine string/blob limits can lower it further. Host caps remain active
+//! under `unchecked`. Blob operations are omitted under `no_index`.
+//!
+//! Stream clones share the socket, receive cursor and closed/half-closed state.
+//! `shutdown_write` sends an outgoing EOF while allowing incoming reads;
+//! `shutdown_read` closes the receive direction. `close` closes both directions
+//! for every clone. A text read decodes its received bytes lossily; a UTF-8 sequence
+//! split across TCP reads is not preserved by separate text calls. Use blob reads
+//! and an incremental decoder when exact bytes or split UTF-8 matter.
+//!
+//! `write_string`/`write_blob` return the count accepted by one socket write.
+//! `write_all_string`/`write_all_blob` continue within one deadline; errors expose
+//! `partial_bytes` for this call. A successful write confirms socket acceptance,
+//! so an application protocol still needs a peer acknowledgement when required.
+//!
+//! Run the bounded loopback example with
+//! `cargo run --example net --features net`. The same example supports
+//! `--features net,no_object`; it grants only its own numeric loopback endpoint,
+//! half-closes after sending, and checks the independent peer bytes and reply.
 
 #[cfg(feature = "no_std")]
 compile_error!("the `net` feature requires `std`; it cannot be combined with `no_std`");
