@@ -47,3 +47,22 @@ No compiler, fixture execution, native operation, created runtime or accepted
 RED/GREEN occurred. These are intermediate source corrections within the
 existing Windows custody chain, not completed failed full-custody attempts.
 Workload entry and exact-job proof remain disabled. Await correction commit.
+
+## Related correction review: 73020670
+
+All four correction files independently reviewed, zero skipped. OCR selected
+the two source files; excluded README and fixture were manually read in full.
+The prior source findings are closed: argument count is checked before Clone,
+caller strings have a cheap character bound before scans and exact UTF8 byte
+limits afterward, staged paths are length-checked then validated using pure
+absolute local-path/component syntax. The fixture compatibility alias remains
+available under its original testing conditional. Exact expected Windows
+quoting cases cover empty arguments, embedded quotes, backslashes before quotes,
+trailing backslashes and shell-looking literal input. Parsed caller byte
+mutation and intended overflow/path diagnostics are explicit.
+
+Independent git diff --check passed for the correction; worktree clean. This
+closes the reviewed source issues only. Compiler, fixture execution and native
+proof remain unrun/unverified. No full-custody acceptance or completed ticket.
+Next source contract: briefs/windows-specification-transfer.md, preserving
+existing frame/queue/watchdog bounds and disabled workload integration.

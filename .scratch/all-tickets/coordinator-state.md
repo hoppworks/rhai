@@ -41,10 +41,10 @@ be resolved before their dependent implementation. No remote publication.
 
 ## Current step
 
-Windows immutable launch specification is committed as 91e474d7 in the separate
-owned Windows worktree. All four changed files were independently source-reviewed,
-zero skipped; OCR-excluded README/fixture were manually read. Related input-bound
-and quoting fixture corrections are active in the same responsible context; see
+Windows immutable launch specification 91e474d7 and related correction 73020670
+are independently source-reviewed across all four files each, zero skips, in
+the separate owned Windows worktree. OCR-excluded README/fixture were manually
+read. Input-bound and quoting source findings are closed; see
 windows-immutable-specification-review.md. No compiler, fixture execution or
 native proof has occurred. Public workload entry and exact-job issuance remain
 disabled. The source-reviewed predecessor is Running renewal 43d2f067, following
@@ -117,9 +117,10 @@ Inherited VM history remains authoritative.
 
 ## Next action
 
-Review the exact related launch-spec correction commit, including fixture and
-README coverage. Then define the bounded specification transport adapter under
-existing frame/queue/lease limits, preserving disabled workload launch. Native
+Launch-spec correction review is complete. The same responsible context is
+continuing the bounded transfer model under briefs/windows-specification-transfer.md.
+Review its exact eventual commit including excluded fixture/README; preserve
+existing frame/queue/lease limits and disabled workload launch. Native
 bootstrap and guest runtime custody remain prerequisites for execution. Do not
 count static corrections as executed TDD or native acceptance.
 
@@ -142,7 +143,8 @@ requirements with new evidence; do not repeat decision/status/verification round
 
 2026-09-30 launch-spec commit continuation: progress. Source changed to 91e474d7;
 independent four-file review identified pre-allocation/pre-scan bounds and exact
-quoting fixture gaps. Related correction dispatched in the responsible context.
+quoting fixture gaps. Related correction 73020670 reviewed and findings closed in source. Bounded
+transfer-model source work dispatched in the same responsible context.
 No build/native operation or temporary resource. Existing custody correction is
 incomplete, with no completed failed full-custody correction/recovery. Independent
 source work remains; goal active and incomplete, not blocked.
