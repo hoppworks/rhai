@@ -74,7 +74,7 @@ Windows8f75da53 source slice remains isolated and stopped; native/bootstrap gate
 closed, no native launches. Accepted source reviews retain exact references under
 Evidence and cause history. No workload or credentials may bypass prerequisites.
 Remote fork push authorized in this Session; task/all-tickets last verified remote
-db590e5132ead0a0d7236d611bb985969fbea08a, independently read back on origin.
+ca7f2868e76042224d3456ee7d3f8d8a3b106dd2, independently read back on origin.
 All future author/committer names exactly lowercase hoppworks, configured email.
 
 ## Decisions
@@ -407,3 +407,27 @@ contains rejected fixture behavior and must never be invoked; only reviewed
 Clean owned TCP listener checkout retired without force after verified integration
 and fork push; proof remains tracked at ../tcp-listener/. Accepted file-read proof
 moved without duplication to ../file-reads/; source/history preserved.
+
+## Goal continuation at 13:51 UTC
+
+Previous turn: progress (immutable source review requirements and retained accepted
+proof committed/pushed; exact fork readback, owned clean resource retirement).
+Both responsible task handles independently confirmed running in this continuation.
+No blocked impasse: authoritative source amendments and live checks changed next action.
+
+TCP launch9 after reviewer changes: checked targets fail timeout fixture assertion;
+unchecked stops compilation at unavailable max_array_size getters. Wrong payload
+control is specifically expected assertion. Responsible context correcting distinct
+fixture deadline and optional-feature gating causes inside original14:17:48 stop.
+Actual waiting read proof now uses a cfg(test) WouldBlock notifier and real Engine
+read/clone-close, with partial count and quota. Final immutable source/proof not yet
+accepted. See tcp-stream-reads-review.md; no old logs promoted to final evidence.
+
+Process3fb742a3 gate remains closed. Amended source direction independently read:
+Darwin ctypes waitid layout/constants matched local SDK signal.h178-189 and
+wait.h; bounded first segment makes stall readiness possible, assertion worker
+snapshot precedes injection, TERM added, controller verifies quiet receipt before
+normal removal. Complete stderr readiness line must be awaited before parsing.
+Await frozen corrected candidate and final source gate before any native execution.
+Original14:18:05 stop and sole Expert01 history remain binding. No fixture/build
+or signaling launched. Windows source/bootstrap gate remains separately closed.
