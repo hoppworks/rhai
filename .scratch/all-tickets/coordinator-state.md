@@ -41,59 +41,19 @@ be resolved before their dependent implementation. No remote publication.
 
 ## Current step
 
-Windows candidate is now 03a56347 on task/windows-scoped-runner. Foundation
-4bf0e3a5 adds ancestor pins, identities and exclusive protected journal creation;
-967500f3 corrects input bounds and incomplete fixture framing. Three files were
-independently reviewed, zero skipped; related corrections retained in
-windows-runtime-backend-review.md. Only whitespace checking ran, no compiler,
-fixture or native/guest run. Candidate is clean, separate and workload entry
-disabled. Exclusive runtime allocation source is now present; remaining source
-requirements are safe staging/deletion and immutable specification/payload
-integration. Running lease
-renewal remains unsupported and explicitly required before payload integration.
-Runtime allocation source substep is committed in 3d7a659b with related review
-corrections 9a68a437 and 08fb7cd5. All three files independently reviewed, zero
-skipped; windows-runtime-allocation-review.md retains coverage and boundaries.
-Intent precedes exclusive allocation; protected ACL and identity verification
-precede identity recording. Retained directories keep their journals and full
-failure paths. This is source observation only: no compile, executed fixture,
-TDD RED/GREEN, native operation or runtime resource. The candidate is clean and
-separate; no product integration or ticket acceptance.
-Handle-based source staging and executable validation are committed in b4c055ee.
-All three changed files were independently source-reviewed, including OCR-excluded
-README and fixture: zero skips, 100% source review; whitespace check passed.
-No compiler, fixture or native run occurred. Related corrections in 03a56347 were independently reviewed across all three
-files, zero skips: full ancestor identity-chain input, specific bound assertions,
-per-file/depth/cancellation fixture source, and documentation accuracy. See
-windows-source-staging-review.md. Candidate is clean, separate and workload
-launch disabled. Source review permits the next source substep, not acceptance.
-Handle-safe disposition is now delegated to the same responsible Windows context
-under briefs/windows-runtime-disposition.md. The live agent was independently confirmed running on continuation. Fixture
-source was authored first and is now dirty in that candidate; intermediate
-path/readback/coverage findings are in windows-runtime-disposition-review.md
-and were delivered for related correction. Await source/fixture report and
-independently review the eventual commit. No compile/fixture/native
-execution is authorized by that source brief.
+Windows immutable launch specification is committed as 91e474d7 in the separate
+owned Windows worktree. All four changed files were independently source-reviewed,
+zero skipped; OCR-excluded README/fixture were manually read. Related input-bound
+and quoting fixture corrections are active in the same responsible context; see
+windows-immutable-specification-review.md. No compiler, fixture execution or
+native proof has occurred. Public workload entry and exact-job issuance remain
+disabled. The source-reviewed predecessor is Running renewal 43d2f067, following
+allocation/staging/disposition source slices referenced in their review files.
 
-Step 1 corrected unrestricted resolution is integrated at 5f87d339 and accepted
-on native macOS: env7/fs24/policy26 pass, exact runtime absent. Red/green
-unlinked-cwd contract and immediate child/marker ownership guards reviewed.
-Affected Linux proof fecbfdd1 accepted on 98f66aca: fs25/policy24 pass, including
-deleted-cwd and NotUtf8. Command/log/applicability reviewed and exact remote
-runtime absence independently confirmed. Previous env/control proof remains valid.
-Windows static candidate 2e65cb45 corrects reviewed ABI and bounded-wait defects,
-but compile/native/independent monitor gates remain unverified, not integrated.
-Step 2 owner TCP question remains pending; release/API proposal is unaccepted.
-POSIX process prototype 35a8cf52 proof is not accepted. Correction disposition
-501fa184c97f records that safe supervision was not established; no fixture was
-executed. The owner explicitly authorized one further bounded attempt after consultation.
-Design 2a3996cd was independently rejected: whole-runner interruption, setup,
-wait and worker bounds incomplete. Review answer is at
-briefs/process-retry-design-review.answer.md. Amendment 937da3c1 supplies direct
-custodian ownership, polling and separate runtime, but explicitly leaves actual
-shared-runner death cleanup unproven. Owner was asked once about a project-local
-runner copy versus deferring the process branch. Stop dependent work until reply.
-No fixture or implementation ran; no global runner/home changes.
+Accepted filesystem/environment production and macOS/Linux proof remain unchanged;
+reuse the applicable evidence. The one further POSIX attempt is authorized and
+unconsumed; the separate pending runner-copy question stops its dependent work.
+TCP/release decisions also remain pending. No remote writes.
 
 ## Decisions
 
@@ -157,75 +117,15 @@ Inherited VM history remains authoritative.
 
 ## Next action
 
-Specification fixture source is now present and helper extraction is dirty in
-the candidate. Related finite-bound/field/diagnostic findings are recorded in
-windows-immutable-specification-review.md and delivered to the same running
-context. Existing fixture helper references must survive the extraction. Await
-the model/parser commit and review all changed files; this draft is unexecuted.
+Review the exact related launch-spec correction commit, including fixture and
+README coverage. Then define the bounded specification transport adapter under
+existing frame/queue/lease limits, preserving disabled workload launch. Native
+bootstrap and guest runtime custody remain prerequisites for execution. Do not
+count static corrections as executed TDD or native acceptance.
 
-Immutable specification source is actively delegated under
-briefs/windows-immutable-specification.md to the same responsible Windows
-context, independently confirmed running. Await its report and review the exact
-commit including excluded fixtures/README. Do not launch workloads or run native
-fixtures. Candidate HEAD is 43d2f067 before this next source step.
-
-Running renewal source 43d2f067 is now independently reviewed across all three
-files, zero skips; see windows-running-lease-renewal-review.md. Whitespace checks
-pass; fixtures and compilation remain unexecuted. Next source requirement is the
-bounded immutable specification followed by monitor integration. Native guest
-custody/bootstrap and product acceptance gates remain unchanged.
-
-Disposition correction 6c37071b closes the three reviewed source findings.
-All three correction files reviewed, zero skips; initial bb7060a2 all four files
-reviewed. Whitespace checks pass. No native/compiler/fixture execution or runtime.
-Next related source substep: Running lease renewal under
-briefs/windows-running-lease-renewal.md, in the same responsible context. Keep
-workload entry and exact-job closure issuance disabled pending full integration.
-
-Disposition source candidate bb7060a2 was reviewed across all four changed files,
-zero skips, including OCR-excluded fixture and README. Related corrections are
-active in the same responsible context: actual partial-removal readback, safe
-pseudoentry handling with finite enumeration, and full 128-bit identity matching.
-See windows-runtime-disposition-review.md. No compilation/fixture/native run or
-runtime resource occurred. Await and review that correction before advancing.
-
-Continue from source-reviewed 03a56347 in the same responsible Windows context
-with handle-safe disposition under
-briefs/windows-runtime-disposition.md, followed by immutable specification and
-monitor integration. Keep payload entry disabled. Correct Running lease renewal
-before payload integration. No native execution until the unchanged bootstrap/
-guest-custody gates pass. Preserve the existing single Windows escalation chain.
-
-Windows custody Expert answer 02-windows-runtime-custody.answer.md is retained.
-It recommends a separate sole-owner monitor, creation-time job-list assignment,
-host round-trip lease, bounded state machine and handle-based runtime custody.
-One bounded local source implementation is delegated under
-briefs/windows-monitor-implementation.md. No guest execution or package build
-is authorized until source review, private bootstrap, launch survival and native
-cleanup gates pass. This is the single Windows custody escalation; no completed
-correction has failed for this cause. Current guest access remains unverified.
-
-Core MSRV evidence integrated as 87099fcc and c5fecde1. The one Cargo 1.66
-invocation used baseline a6241621 instead of requested b031ce8d. It failed while
-parsing resolved thin-vec 0.2.20 (edition 2024), before library compilation.
-Unchanged thin-vec declaration supports only the narrow dependency warning.
-Neither baseline nor integrated compilation is proven. Exact scoped runtime
-absence was independently confirmed. See ../core-msrv-check/proof.md and log.
-No retry, dependency pin or release-policy change was made.
-
-The latest reply repeats authorization for one further bounded process attempt.
-It does not answer the separate project-local runner-copy requirement. Preserve
-that authorization and stop only the dependent process execution until that
-existing question is answered; no additional process attempt has been consumed.
-
-Process amendment collected and its remaining boundary recorded; await owner
-answer before dependent implementation. Corrected
-macOS combined proof is accepted at 5f87d339; do not rerun unchanged source.
-Keep Windows static candidate separate until independent guest cleanup is solved.
-Collect and independently review the process supervision design before the single
-newly authorized implementation attempt. Preserve all prior cause history.
-TCP authority question remains pending; release/API proposals remain unaccepted.
-Linear is legacy and excluded, with no writes performed there.
+Preserve the sole Windows Expert chain and the authorized unconsumed POSIX retry.
+Await existing owner answers for dependent branches; do not repeat questions.
+Linear is legacy and excluded.
 
 ## Open owner decisions
 
@@ -239,6 +139,13 @@ Dependent implementation is stopped. Continue only independent authorized
 requirements with new evidence; do not repeat decision/status/verification rounds.
 
 ## Goal turn classification
+
+2026-09-30 launch-spec commit continuation: progress. Source changed to 91e474d7;
+independent four-file review identified pre-allocation/pre-scan bounds and exact
+quoting fixture gaps. Related correction dispatched in the responsible context.
+No build/native operation or temporary resource. Existing custody correction is
+incomplete, with no completed failed full-custody correction/recovery. Independent
+source work remains; goal active and incomplete, not blocked.
 
 2026-09-30 immutable specification continuation: progress. Previous turn
 implemented and reviewed Running renewal 43d2f067. Current authoritative dirty
