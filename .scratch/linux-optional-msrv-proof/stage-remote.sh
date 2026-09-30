@@ -8,8 +8,8 @@ lock=/Users/hoppworks/projects/rhai-all-tickets/.scratch/optional-msrv-proof/evi
 repo=/Users/hoppworks/projects/rhai-linux-optional-msrv-proof
 skills=/Users/hoppworks/projects/agent-skills/tools
 
-test "$(git -C "$repo" rev-parse HEAD)" = "$source_rev"
-test -z "$(git -C "$repo" status --porcelain=v1 --untracked-files=no)"
+git -C "$repo" cat-file -e "$source_rev^{commit}"
+test -z "$(git -C "$repo" status --porcelain=v1)"
 test "$(shasum -a 256 "$lock" | awk '{print $1}')" = 8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa
 ssh workhorse "test ! -e '$stage' && install -d -m 700 '$stage' '$stage/evidence' '$stage/runner/tools/agentskills'"
 

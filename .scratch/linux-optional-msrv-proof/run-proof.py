@@ -78,7 +78,13 @@ def process_identity(pid):
 def record_process(label, pid):
     row = process_identity(pid)
     if row is None:
-        raise RuntimeError(f'cannot record live process {label} pid={pid}')
+        # A short version command can exit between Popen returning and /proc
+        # sampling. Preserve that fact without inventing a live identity.
+        with (EVIDENCE / 'process-identities.tsv').open('a') as out:
+            out.write(f'{label}\t{pid}\t<exited-before-identity-sample>\n')
+            out.flush()
+            os.fsync(out.fileno())
+        return
     actual_group = int(row.split('\t')[2])
     owned_group = os.getpgid(0)
     if actual_group != owned_group:

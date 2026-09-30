@@ -6,7 +6,7 @@ stage=$PROOF_STAGE
 evidence="$stage/evidence"
 mkdir -p "$evidence"
 exec > >(tee -a "$evidence/outer.log") 2>&1
-trap 'rc=$?; if [[ ! -e "$evidence/outer-status.txt" ]]; then printf "%s\\n" "$rc" > "$evidence/outer-status.txt"; fi' EXIT
+trap 'rc=$?; if [[ ! -e "$evidence/outer-status.txt" ]]; then printf "%s\n" "$rc" > "$evidence/outer-status.txt"; fi' EXIT
 
 deadline_epoch=$(date -u -d '2026-09-30 17:18:30 UTC' +%s)
 now_epoch=$(date -u +%s)
