@@ -99,10 +99,24 @@ fn fixture(mode: &str) {
         "stall" => {
             eprintln!("WORKLOAD_READY pid={} pgid={}", unsafe { getpid() }, unsafe { getpgrp() });
             std::io::stderr().flush().unwrap();
-            println!("STALL_CHECKPOINT");
-            std::io::stdout().flush().unwrap();
+            // Drain only the first bounded segment so the runner can prove both
+            // stream checkpoints and readiness before the final segment stalls.
+            let mut remaining = 1024 * 1024;
+            let mut input = [0u8; 4096];
+            while remaining > 0 {
+                let limit = remaining.min(input.len());
+                let n = std::io::stdin().read(&mut input[..limit]).unwrap();
+                if n == 0 { break; }
+                std::io::stdout().write_all(&input[..n]).unwrap();
+                std::io::stdout().flush().unwrap();
+                let transformed: Vec<u8> = input[..n].iter().map(|byte| byte ^ 0xA5).collect();
+                std::io::stderr().write_all(&transformed).unwrap();
+                std::io::stderr().flush().unwrap();
+                remaining -= n;
+            }
             // Deliberately retain the live process and all three pipes until the
-            // copied runner's own deadline expires and the custodian closes scope.
+            // copied runner's own deadline expires while its final input segment
+            // is withheld; the custodian then closes the still-live scope.
             loop { thread::sleep(Duration::from_secs(60)); }
         }
         "descendant" | "hold" => {

@@ -46,7 +46,7 @@ def quiescent_readback(runtime, identity, custodian_pid):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--binary', required=True)
-    ap.add_argument('--control', choices=('normal', 'cancel', 'assert', 'timeout', 'kill'), default='normal')
+    ap.add_argument('--control', choices=('normal', 'cancel', 'assert', 'timeout', 'term', 'kill'), default='normal')
     args = ap.parse_args()
     runs = ROOT / 'runs'
     runs.mkdir(exist_ok=True)
@@ -56,8 +56,25 @@ def main():
     cmd = [sys.executable, str(ADAPTER / 'custodian.py'), '--runtime', str(runtime),
            '--runner', str(ADAPTER / 'run_scoped.py'), '--binary', args.binary,
            '--control', args.control]
+    started = time.monotonic()
     proc = subprocess.Popen(cmd, close_fds=True, start_new_session=True)
-    deadline = time.monotonic() + OUTER_DEADLINE
+    deadline = started + OUTER_DEADLINE
+
+    def record_incomplete(reason, custody_owner):
+        failure = {'custodian_pid': proc.pid, 'runtime': str(runtime),
+                   'runtime_identity': [identity.st_dev, identity.st_ino],
+                   'outcome': 'incomplete_cleanup_retained', 'reason': reason,
+                   'custody_owner': custody_owner}
+        evidence = ROOT / 'evidence' / ('outer-incomplete-' + str(proc.pid) + '.json')
+        temporary = evidence.with_suffix('.tmp')
+        temporary.write_text(json.dumps(failure, sort_keys=True) + '\n')
+        os.replace(temporary, evidence)
+        if json.loads(evidence.read_text()) != failure:
+            raise RuntimeError('outer incomplete-cleanup evidence readback failed')
+        print('incomplete cleanup: exact custodian PID ' + str(proc.pid) +
+              ' custody owner=' + custody_owner + '; retained runtime ' + str(runtime) +
+              '; readback ' + str(evidence), file=sys.stderr)
+
     try:
         try:
             status = proc.wait(timeout=max(0.0, deadline-time.monotonic()))
@@ -67,26 +84,23 @@ def main():
             try:
                 quiescent_readback(runtime, identity, proc.pid)
             except BaseException as exc:
-                failure = {'custodian_pid': proc.pid, 'runtime': str(runtime),
-                           'runtime_identity': [identity.st_dev, identity.st_ino],
-                           'outcome': 'incomplete_cleanup_retained', 'reason': repr(exc)}
-                evidence = ROOT / 'evidence' / ('outer-incomplete-' + str(proc.pid) + '.json')
-                temporary = evidence.with_suffix('.tmp')
-                temporary.write_text(json.dumps(failure, sort_keys=True) + '\n')
-                os.replace(temporary, evidence)
-                if json.loads(evidence.read_text()) != failure:
-                    raise RuntimeError('outer incomplete-cleanup evidence readback failed') from exc
-                print('incomplete cleanup: exact custodian PID ' + str(proc.pid) +
-                      ' remains the resource owner; retained runtime ' + str(runtime) +
-                      '; readback ' + str(evidence), file=sys.stderr)
+                record_incomplete(repr(exc), 'live-custodian')
                 raise TimeoutError('outer bound expired; runtime and live custodian retained') from exc
             os.kill(proc.pid, 9)
-            proc.wait(timeout=CHILD_REAP_DEADLINE)
+            try:
+                proc.wait(timeout=max(0.0, deadline-time.monotonic()))
+            except subprocess.TimeoutExpired as exc:
+                record_incomplete('quiescent custodian signal sent but exact child status not reaped before outer deadline',
+                                  'outer-controller-awaiting-exact-child-status')
+                raise TimeoutError('outer bound expired after quiescence; retained runtime ' + str(runtime)) from exc
             raise TimeoutError('custodian exceeded its outer bound after quiescence; runtime retained at ' + str(runtime))
         receipt = runtime / 'receipt.json'
         data = json.loads(receipt.read_text())
         if status != 0 or data.get('runtime_identity') != [identity.st_dev, identity.st_ino]:
             raise RuntimeError('custodian status or runtime identity failed; retained ' + str(runtime))
+        quiescent = quiescent_readback(runtime, identity, proc.pid)
+        if quiescent != data:
+            raise RuntimeError('receipt differs from independently read quiescence record; retained ' + str(runtime))
         tmp_st = (runtime / 'tmp').lstat()
         if stat.S_ISLNK(tmp_st.st_mode) or [tmp_st.st_dev, tmp_st.st_ino] != data.get('tmp_identity'):
             raise RuntimeError('runtime tmp identity mismatch; retained ' + str(runtime))

@@ -2,6 +2,8 @@
 """Single-owner POSIX proof custodian. Source gate pending native macOS review."""
 import argparse
 import array
+import ctypes
+import errno
 import hashlib
 import json
 import os
@@ -16,10 +18,96 @@ from pathlib import Path
 POLL = 0.01
 CLEANUP_DEADLINE = 5.0
 MAX_FRAME = 65536
+_WAITID = None
+
+
+class _DarwinSigVal(ctypes.Union):
+    _fields_ = [('sival_int', ctypes.c_int), ('sival_ptr', ctypes.c_void_p)]
+
+
+class _DarwinSigInfo(ctypes.Structure):
+    # Field order and widths match this host's sys/signal.h siginfo_t.
+    _fields_ = [('si_signo', ctypes.c_int), ('si_errno', ctypes.c_int),
+                ('si_code', ctypes.c_int), ('si_pid', ctypes.c_int32),
+                ('si_uid', ctypes.c_uint32), ('si_status', ctypes.c_int),
+                ('si_addr', ctypes.c_void_p), ('si_value', _DarwinSigVal),
+                ('si_band', ctypes.c_long), ('__pad', ctypes.c_ulong * 7)]
+
+
+class _WaitInfo:
+    def __init__(self, pid, code, status):
+        self.si_pid = pid
+        self.si_code = code
+        self.si_status = status
+
+
+def require_waitid_support():
+    """Resolve WNOWAIT and required POSIX primitives before spawning owned children."""
+    global _WAITID
+    for name in ('posix_spawn', 'waitpid', 'killpg', 'set_blocking'):
+        if not callable(getattr(os, name, None)):
+            raise RuntimeError('required POSIX primitive is unavailable: os.' + name)
+    if not callable(getattr(os, 'kill', None)):
+        raise RuntimeError('required POSIX primitive is unavailable: os.kill')
+    for name in ('POSIX_SPAWN_DUP2', 'POSIX_SPAWN_CLOSE', 'WNOHANG'):
+        if not hasattr(os, name):
+            raise RuntimeError('required POSIX constant is unavailable: os.' + name)
+    if not hasattr(signal, 'SIGKILL') or not hasattr(signal, 'SIGTERM'):
+        raise RuntimeError('required POSIX termination signals are unavailable')
+    for name in ('socketpair', 'CMSG_SPACE'):
+        if not hasattr(socket, name):
+            raise RuntimeError('required socket primitive is unavailable: socket.' + name)
+    for name in ('AF_UNIX', 'SOCK_DGRAM', 'SOL_SOCKET', 'SCM_RIGHTS'):
+        if not hasattr(socket, name):
+            raise RuntimeError('required socket constant is unavailable: socket.' + name)
+    if hasattr(os, 'waitid'):
+        if not callable(os.waitid):
+            raise RuntimeError('os.waitid is present but not callable')
+        for name in ('P_PID', 'WEXITED', 'WNOHANG', 'WNOWAIT', 'CLD_EXITED'):
+            if not hasattr(os, name):
+                raise RuntimeError('Python waitid support lacks os.' + name)
+        _WAITID = os.waitid
+        return
+    if sys.platform != 'darwin' or ctypes.sizeof(_DarwinSigInfo) != 104:
+        raise RuntimeError('no reviewed waitid/WNOWAIT ABI for this Python/platform')
+    expected_constants = {'P_PID': 1, 'WEXITED': 0x00000004,
+                          'WNOHANG': 0x00000001, 'WNOWAIT': 0x00000020,
+                          'CLD_EXITED': 1}
+    if any(getattr(os, name, None) != value for name, value in expected_constants.items()):
+        raise RuntimeError('Python wait flags do not match the reviewed Darwin waitid ABI')
+    libc = ctypes.CDLL(None, use_errno=True)
+    # Darwin SDK sys/wait.h and sys/signal.h: P_PID=1, WEXITED=4,
+    # WNOHANG=1, WNOWAIT=0x20; siginfo_t is 104 bytes on arm64/x86_64.
+    native = getattr(libc, 'waitid', None)
+    if native is None:
+        raise RuntimeError('native waitid symbol is unavailable')
+    native.argtypes = (ctypes.c_int, ctypes.c_uint32,
+                       ctypes.POINTER(_DarwinSigInfo), ctypes.c_int)
+    native.restype = ctypes.c_int
+
+    def waitid(pid):
+        info = _DarwinSigInfo()
+        while True:
+            ctypes.set_errno(0)
+            result = native(1, pid, ctypes.byref(info), 0x00000004 | 0x00000001 | 0x00000020)
+            if result == 0:
+                if info.si_pid == 0:
+                    return None
+                return _WaitInfo(info.si_pid, info.si_code, info.si_status)
+            error = ctypes.get_errno()
+            if error == errno.EINTR:
+                continue
+            raise OSError(error, os.strerror(error))
+
+    _WAITID = waitid
 
 
 def waitid_nonreap(pid):
-    return os.waitid(os.P_PID, pid, os.WEXITED | os.WNOWAIT | os.WNOHANG)
+    if _WAITID is None:
+        raise RuntimeError('waitid support was not checked before use')
+    if hasattr(os, 'waitid'):
+        return _WAITID(os.P_PID, pid, os.WEXITED | os.WNOWAIT | os.WNOHANG)
+    return _WAITID(pid)
 
 
 def wait_until_exit(pid, deadline):
@@ -123,6 +211,7 @@ def kill_managed_group(children, leader, records, reason):
 def cleanup_owned(children, leader, records, exclude=(), group_signaled=False):
     deadline = time.monotonic() + CLEANUP_DEADLINE
     errors = []
+    confirmed_group_signal = group_signaled
     if leader is not None and not group_signaled:
         # Keep both direct children unreaped while the live anchor pins the group ID.
         anchor = children.get('anchor')
@@ -136,6 +225,9 @@ def cleanup_owned(children, leader, records, exclude=(), group_signaled=False):
             try:
                 # One KILL avoids TERM destroying the anchor before escalation.
                 os.killpg(leader, signal.SIGKILL)
+                confirmed_group_signal = True
+                records['managed_group_signal'] = 'SIGKILL'
+                records['managed_group_signal_reason'] = 'owned cleanup'
             except ProcessLookupError:
                 errors.append('managed group absent before scope signal')
             except OSError as exc:
@@ -151,7 +243,7 @@ def cleanup_owned(children, leader, records, exclude=(), group_signaled=False):
         if pid is None or role == 'leader' or role in exclude:
             continue
         try:
-            if waitid_nonreap(pid) is None:
+            if waitid_nonreap(pid) is None and not (role == 'anchor' and confirmed_group_signal):
                 os.kill(pid, signal.SIGKILL)
         except ProcessLookupError:
             errors.append(role + ' disappeared before exact signal')
@@ -180,11 +272,12 @@ def cleanup_owned(children, leader, records, exclude=(), group_signaled=False):
 
 
 def main():
+    require_waitid_support()
     ap = argparse.ArgumentParser()
     ap.add_argument('--runtime', required=True)
     ap.add_argument('--runner', required=True)
     ap.add_argument('--binary', required=True)
-    ap.add_argument('--control', choices=('normal', 'cancel', 'assert', 'timeout', 'kill'), default='normal')
+    ap.add_argument('--control', choices=('normal', 'cancel', 'assert', 'timeout', 'term', 'kill'), default='normal')
     args = ap.parse_args()
     runtime = Path(args.runtime)
     st = runtime.lstat()
@@ -314,6 +407,19 @@ def main():
                 kill_managed_group(owned, workload, records, 'live assertion cleanup')
                 send_frame(parent_sock, {'op': 'scope_terminated'}, deadline=min(session_deadline, time.monotonic()+2))
                 continue
+            if event.get('op') == 'assertion_worker_snapshot' and args.control == 'assert':
+                snapshot = {key: event.get(key) for key in
+                            ('workers_started', 'workers_alive', 'active_workers', 'assertion_held_workers',
+                             'assertion_worker_acknowledgements')}
+                expected_workers = sorted(['stdin-writer', 'stderr-reader', 'stdout-reader'])
+                records['assertion_worker_snapshot'] = snapshot
+                if (snapshot['workers_started'] != 3 or snapshot['workers_alive'] != 3
+                        or snapshot['active_workers'] != expected_workers
+                        or snapshot['assertion_held_workers'] != expected_workers
+                        or snapshot['assertion_worker_acknowledgements'] != expected_workers):
+                    raise AssertionError('runner assertion injection did not have all three workers active')
+                send_frame(parent_sock, {'op': 'release_assertion'}, deadline=min(session_deadline, time.monotonic()+2))
+                continue
             if event.get('op') == 'timeout_cleanup_required' and args.control == 'timeout':
                 live = {role: (pid is not None and waitid_nonreap(pid) is None)
                         for role, pid in owned.items() if role != 'runner'}
@@ -331,16 +437,17 @@ def main():
                 records['runner_timeout_workers_joined'] = event['workers_joined']
                 expected_runner_status = 124
                 break
-            if event.get('op') == 'io_live' and args.control == 'kill':
+            if event.get('op') == 'io_live' and args.control in ('term', 'kill'):
                 live = {role: (pid is not None and waitid_nonreap(pid) is None)
                         for role, pid in owned.items() if role != 'runner'}
-                records['runner_kill_precondition'] = live
+                records['runner_interruption_precondition'] = live
                 if not all(live.get(role) for role in ('leader', 'anchor', 'holder', 'sentinel')):
-                    raise AssertionError('runner SIGKILL control resources were not all live')
-                os.kill(runner_pid, signal.SIGKILL)
-                records['runner_interruption'] = 'SIGKILL'
-                records['worker_outcome'] = 'process_terminated_by_runner_SIGKILL'
-                expected_runner_status = -signal.SIGKILL
+                    raise AssertionError('runner signal control resources were not all live')
+                interruption_signal = signal.SIGTERM if args.control == 'term' else signal.SIGKILL
+                os.kill(runner_pid, interruption_signal)
+                records['runner_interruption'] = signal.Signals(interruption_signal).name
+                records['worker_outcome'] = 'process_terminated_by_runner_' + signal.Signals(interruption_signal).name
+                expected_runner_status = -interruption_signal
                 break
             if event.get('op') == 'io_live' and args.control in ('normal', 'cancel', 'timeout'):
                 if args.control == 'timeout':

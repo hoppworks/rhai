@@ -99,14 +99,59 @@ def _drive_io(fds, deadline, sock, cancel_mode=False, assertion_mode=False, time
     first_end = len(payload) // 2
     stop = threading.Event()
     checkpoints = [threading.Event(), threading.Event()]
+    readiness_line = threading.Event()
     live_event = threading.Event()
+    scope_cleanup_done = threading.Event()
+    assertion_prepare = threading.Event()
     assertion_gate = threading.Event()
+    assertion_worker_ready = queue.Queue()
     errors = queue.Queue()
     outputs = [bytearray(), bytearray()]
+    worker_names = ('stdout-reader', 'stderr-reader', 'stdin-writer')
+    active_workers = set()
+    held_workers = set()
+    prepared_workers = set()
+    active_lock = threading.Lock()
+
+    def set_worker_active(name, active):
+        with active_lock:
+            if active:
+                active_workers.add(name)
+            else:
+                active_workers.discard(name)
+
+    def worker_snapshot():
+        with active_lock:
+            active = sorted(active_workers)
+            held = sorted(held_workers)
+        return {'workers_started': len(started), 'workers_alive': sum(thread.is_alive() for thread in threads),
+                'active_workers': active, 'assertion_held_workers': held}
+
+    def hold_for_assertion(name):
+        if not assertion_mode:
+            return
+        with active_lock:
+            if name in prepared_workers:
+                return
+        while not assertion_prepare.wait(0.01):
+            if time.monotonic() >= deadline:
+                raise TimeoutError('assertion preparation deadline')
+        with active_lock:
+            prepared_workers.add(name)
+            held_workers.add(name)
+        assertion_worker_ready.put(name)
+        while not assertion_gate.wait(0.01):
+            if time.monotonic() >= deadline:
+                raise TimeoutError('assertion injection deadline')
+        with active_lock:
+            held_workers.discard(name)
 
     def reader(fd, index):
+        name = worker_names[index]
+        set_worker_active(name, True)
         try:
             while not stop.is_set():
+                hold_for_assertion(worker_names[index])
                 if time.monotonic() >= deadline:
                     raise TimeoutError('reader deadline')
                 ready, _, _ = select.select([fd], [], [], min(0.05, max(0, deadline-time.monotonic())))
@@ -122,11 +167,20 @@ def _drive_io(fds, deadline, sock, cancel_mode=False, assertion_mode=False, time
                     raise ValueError('output exceeds bounded proof payload')
                 outputs[index].extend(block)
                 checkpoints[index].set()
+                if index == 1:
+                    first_line, sep, _ = bytes(outputs[index]).partition(b'\n')
+                    if (sep and len(first_line) > 256) or (not sep and len(outputs[index]) > 256):
+                        raise ValueError('workload readiness line exceeds 256-byte prefix cap')
+                    if sep:
+                        readiness_line.set()
         except BaseException as exc:
             errors.put(exc)
             stop.set()
+        finally:
+            set_worker_active(name, False)
 
     def writer():
+        set_worker_active('stdin-writer', True)
         offset = 0
         try:
             while offset < first_end and not stop.is_set():
@@ -140,18 +194,16 @@ def _drive_io(fds, deadline, sock, cancel_mode=False, assertion_mode=False, time
                         pass
                     except BrokenPipeError:
                         raise OSError('workload closed stdin before checkpoint')
-            while not stop.is_set() and not all(ev.is_set() for ev in checkpoints):
-                if time.monotonic() >= deadline:
-                    raise TimeoutError('output checkpoint deadline')
-                time.sleep(0.005)
+            if not checkpoints[0].wait(max(0, deadline-time.monotonic())):
+                raise TimeoutError('stdout checkpoint deadline')
+            if not checkpoints[1].wait(max(0, deadline-time.monotonic())):
+                raise TimeoutError('stderr checkpoint deadline')
+            if not readiness_line.wait(max(0, deadline-time.monotonic())):
+                raise TimeoutError('complete workload readiness line deadline')
             if stop.is_set():
                 return
-            # Parent sends readiness only after both output streams have yielded the
-            # workload's first-code PID/PGID line; no cancellation control can race it.
-            while not stop.is_set() and not all(ev.is_set() for ev in checkpoints):
-                if time.monotonic() >= deadline:
-                    raise TimeoutError('readiness checkpoint deadline')
-                time.sleep(0.005)
+            # Parent sends readiness only after both stream checkpoints and the
+            # complete bounded stderr identity line; split pipe reads cannot pass.
             ready, sep, _ = bytes(outputs[1]).partition(b'\n')
             fields = ready.decode('ascii', errors='strict').split()
             if (not sep or fields != ['WORKLOAD_READY', f'pid={expected_pid}', f'pgid={expected_pgid}']
@@ -160,9 +212,7 @@ def _drive_io(fds, deadline, sock, cancel_mode=False, assertion_mode=False, time
             _send(sock, json.dumps({'op': 'io_live'}).encode(), deadline)
             live_event.set()
             if assertion_mode:
-                while not assertion_gate.wait(0.01):
-                    if time.monotonic() >= deadline:
-                        raise TimeoutError('live assertion control deadline')
+                hold_for_assertion('stdin-writer')
                 raise AssertionError('intentional live-resource assertion')
             while offset < len(payload) and not stop.is_set():
                 if time.monotonic() >= deadline:
@@ -179,7 +229,14 @@ def _drive_io(fds, deadline, sock, cancel_mode=False, assertion_mode=False, time
                 raise OSError('stdin transfer interrupted')
         except BaseException as exc:
             errors.put(exc)
-            stop.set()
+            held_failure = ((assertion_mode and isinstance(exc, AssertionError)
+                             and str(exc) == 'intentional live-resource assertion')
+                            or (timeout_mode and isinstance(exc, TimeoutError)))
+            if held_failure:
+                if not scope_cleanup_done.wait(7.0):
+                    stop.set()
+            else:
+                stop.set()
         finally:
             if not assertion_mode:
                 fds[0] = None
@@ -193,6 +250,7 @@ def _drive_io(fds, deadline, sock, cancel_mode=False, assertion_mode=False, time
                 except BaseException as exc:
                     errors.put(exc)
                     stop.set()
+            set_worker_active('stdin-writer', False)
 
     threads = [threading.Thread(target=reader, args=(out_fd, 0), daemon=True),
                threading.Thread(target=reader, args=(err_fd, 1), daemon=True),
@@ -218,6 +276,16 @@ def _drive_io(fds, deadline, sock, cancel_mode=False, assertion_mode=False, time
                 event, extra = _recv(sock, deadline)
                 if extra or event.get('op') != 'inject_assertion':
                     raise ValueError('custodian did not authorize the live assertion control')
+                assertion_prepare.set()
+                acknowledgements = [assertion_worker_ready.get(timeout=max(0, deadline-time.monotonic()))
+                                    for _ in worker_names]
+                snapshot = worker_snapshot()
+                snapshot['assertion_worker_acknowledgements'] = sorted(acknowledgements)
+                _send(sock, json.dumps({'op': 'assertion_worker_snapshot', **snapshot},
+                                       separators=(',', ':')).encode(), deadline)
+                event, extra = _recv(sock, deadline)
+                if extra or event.get('op') != 'release_assertion':
+                    raise ValueError('custodian rejected the live worker snapshot')
                 assertion_gate.set()
                 continue
             if not errors.empty():
@@ -225,6 +293,7 @@ def _drive_io(fds, deadline, sock, cancel_mode=False, assertion_mode=False, time
                 if assertion_mode and isinstance(error, AssertionError) and str(error) == 'intentional live-resource assertion':
                     request_scope_cleanup('assertion_cleanup_required')
                     live_assertion = error
+                    scope_cleanup_done.set()
                     break
                 raise error
             threads[2].join(0.01)
@@ -241,6 +310,7 @@ def _drive_io(fds, deadline, sock, cancel_mode=False, assertion_mode=False, time
                 if assertion_mode and isinstance(error, AssertionError) and str(error) == 'intentional live-resource assertion':
                     request_scope_cleanup('assertion_cleanup_required')
                     live_assertion = error
+                    scope_cleanup_done.set()
                     break
                 raise error
             for thread in started:
@@ -252,15 +322,17 @@ def _drive_io(fds, deadline, sock, cancel_mode=False, assertion_mode=False, time
     except TimeoutError as exc:
         if timeout_mode:
             request_scope_cleanup('timeout_cleanup_required')
+            scope_cleanup_done.set()
         timed_out = exc
     finally:
         stop.set()
         if live_assertion is not None or (timed_out is not None and timeout_mode):
-            fds[0] = None
-            try:
-                os.close(in_fd)
-            except OSError:
-                pass
+            if fds[0] is not None:
+                fds[0] = None
+                try:
+                    os.close(in_fd)
+                except OSError:
+                    pass
         join_deadline = time.monotonic() + 5.0
         for thread in started:
             thread.join(max(0, join_deadline-time.monotonic()))
