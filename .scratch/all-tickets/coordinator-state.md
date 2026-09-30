@@ -65,9 +65,9 @@ controls, preserve group identity for final signal, complete bounded outer custo
 and independent cleanup receipt readback before any execution. See
 briefs/process-prototype-continuation.md and retained correction-attempt.md.
 
-Active phase4 file documentation/example: /Users/hoppworks/projects/rhai-file-handle-docs,
-task/file-handle-docs at90c40989. Bounded Worker requirement per briefs/file-handle-docs.md;
-actual30-minute start/stop recorded by Worker, real example + host readback required.
+Phase4 file documentation/example accepted atb9225862; see file-handle-docs-review.md.
+Real sys/sys,no_index example and deliberate wrong host payload proven, exact
+runtime absent. Retain /Users/hoppworks/projects/rhai-file-handle-docs for untracked proof.
 
 Windows8f75da53 source slice remains isolated and stopped; native/bootstrap gate
 closed, no native launches. Accepted source reviews retain exact references under
@@ -164,8 +164,7 @@ is the changed resume condition. The goal is active and remains incomplete.
  16 sockets/handles, jobs2, serial tests. Fresh independent feature requirement.
 - POSIX same correction: explicit extension13:18:05–14:18:05UTC, source gate
  before launches, retained caps in correction-attempt.md. No second Expert chain.
-- File docs/example:30 active minutes from Worker recorded launch, invocation900s,
- 2GiB,4 fixture files/handles, jobs2. No production feature or remote publication.
+- File docs/example completed within13:21:01–13:51:01UTC; no active workload.
 - Retained proof worktrees are necessary for untracked evidence; preserve exactly.
 
 ## Goal turn classification (historical; current state above)
@@ -386,3 +385,7 @@ custody/bootstrap remains closed. TCP stream reads starts fresh next requirement
 Owner explicitly requires lowercase hoppworks for author and committer on all
 future commits. Recorded in AGENTS.md and sent to all three active tasks. Preserve
 configured email and shared settings; use command-local Git name override.
+
+Phase4 documentation/example b9225862 accepted after two selected files plus
+manual prose review; real sys/no_index run, wrong host payload and exact runtime
+absence independently assessed. Source proof reused for docs-only corrections.
