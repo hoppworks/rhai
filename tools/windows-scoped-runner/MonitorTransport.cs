@@ -84,7 +84,7 @@ internal static class MonitorTransport
             // retains those pipe handles. I/O workers may block, but this thread
             // polls the exact monitor process handle and never joins them.
             CloseAndZero(ref monitorInputRead); CloseAndZero(ref monitorOutputWrite);
-            StartPipeForwarder(Console.OpenStandardInput(),new FileStream(clientInputWrite,FileAccess.Write,false),ref clientInputWrite);
+            StartPipeForwarder(Console.OpenStandardInput(),new FileStream(clientInputWrite,FileAccess.Write,false,1),ref clientInputWrite);
             StartPipeForwarder(new FileStream(clientOutputRead,FileAccess.Read,false),Console.OpenStandardOutput(),ref clientOutputRead);
             ulong clientStart=GetTickCount64();
             for(;;)
@@ -159,7 +159,7 @@ internal static class MonitorTransport
         try { reader.Start(); input=IntPtr.Zero; } catch { if(input!=IntPtr.Zero) { CloseHandle(input); input=IntPtr.Zero; } throw; }
         IntPtr outputOwner=output;
         var writer=new Thread(()=>{
-            try { using(var s=new FileStream(outputOwner,FileAccess.Write,1,false)) { for(;;) { byte[] frame; if(outgoing.TryRead(out frame)) s.Write(frame,0,frame.Length); else if(Volatile.Read(ref stopWriter)!=0) break; else Thread.Sleep(10); } }
+            try { using(var s=new FileStream(outputOwner,FileAccess.Write,false,1)) { for(;;) { byte[] frame; if(outgoing.TryRead(out frame)) s.Write(frame,0,frame.Length); else if(Volatile.Read(ref stopWriter)!=0) break; else Thread.Sleep(10); } }
             } catch { Interlocked.Exchange(ref writeFailed,1); } finally { CloseHandle(outputOwner); }
         }); writer.IsBackground=true;
         try { writer.Start(); output=IntPtr.Zero; } catch { if(output!=IntPtr.Zero) { CloseHandle(output); output=IntPtr.Zero; } throw; }
