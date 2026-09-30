@@ -57,11 +57,20 @@ accepts confined-open conversion and registration; two deterministic fixture
 expectations require correction before already planned verification. Original
 60-minute allocation and compiler-diagnostic history remain. No feature acceptance.
 
-POSIX source-only candidate 1366e2b3 is isolated. Original source/review allowance
-started 12:06:47 UTC, 30 active minutes; no executions. Client ancillary-FD handling,
-ready identity, owned children and cleanup were improved. Outer timeout killing
-the sole custodian can still strand its children; source gate stays closed until
-that exceptional path is resolved. Same sole Expert/cause history applies.
+POSIX further source-only retry is stopped at e0f9f992 in the owned process
+worktree, clean and unintegrated; no executions or owned live resources. Source
+review fixes descriptor ownership, readiness and error propagation, but remaining
+anchor SIGTERM identity loss, missing actual timeout/live-assertion controls and
+outer no-quiescence ownership/readback prevent acceptance. Original allowance
+began 12:06:47 UTC, 30 active minutes. Sole Expert/cause history preserved. One
+owner consultation asks for an additional 60-active-minute continuation of the
+same correction. Resume dependent work only on an answer; do not repeat audits
+while pending. Independent TCP listener and file work continue.
+
+Next independent release slice is minimum-compatible core resolution;
+briefs/core-msrv-compatible-resolution.md. Earlier latest thin-vec/edition boundary
+is retained, not a failed core-source proof. Approved release decision permits an
+exact compatible lock, with actual old compiler and explicit proof applicability.
 
 Actual monitor intake `dd8c07dc` and related stopped-state fixture `24c3a19f`
 are independently source-reviewed (six files plus one correction, zero skips).
