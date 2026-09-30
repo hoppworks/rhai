@@ -51,11 +51,13 @@ explicit runner-timeout omissions are disclosed, not inferred as compliant.
 No full net/release acceptance. Next independent slice: authorized listener/accept,
 briefs/tcp-listener.md, fresh 60-active-minute package with explicit timeout/storage.
 
-File handle source is in task/file-handles. Sole fresh Expert source review at
-/Users/hoppworks/projects/rhai-file-handles/.scratch/file-handles/escalations/01-file-open-api.answer.md
-accepts confined-open conversion and registration; two deterministic fixture
-expectations require correction before already planned verification. Original
-60-minute allocation and compiler-diagnostic history remain. No feature acceptance.
+File open/write/cursor foundation is accepted and locally integrated at 260ac238
+(candidate 62f27ac3); see file-handle-open-review.md. Final real-file macOS suites
+pass 27/27 and sync/no_index 18/18, including independent readback, wrong payload
+control and reopen after handle drop. Exact final runtime absence independently
+confirmed. Storage is end-only, full parallel fixture peak is unmeasured. Retain
+owned worktree /Users/hoppworks/projects/rhai-file-handles for untracked proof.
+Next independent slice: bounded streaming reads; whole release remains open.
 
 POSIX further source-only retry is stopped at e0f9f992 in the owned process
 worktree, clean and unintegrated; no executions or owned live resources. Source
@@ -92,8 +94,7 @@ reset. Payload/proof authority and native execution prerequisites stay closed.
 
 Immutable specification `91e474d7`/`73020670` and Running renewal `43d2f067`
 source reviews remain applicable. Accepted filesystem/environment production and
-macOS/Linux proof remain unchanged. The further POSIX attempt is authorized and
-unconsumed; the runner-copy, TCP and release recommendations were accepted by the owner
+macOS/Linux proof remain unchanged. The further POSIX source attempt is stopped pending its recorded extension; the runner-copy, TCP and release recommendations were accepted by the owner
 on 2026-09-30; dependent work may resume. No remote writes.
 
 ## Decisions
