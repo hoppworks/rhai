@@ -51,8 +51,11 @@ Step 2 owner TCP question remains pending; release/API proposal is unaccepted.
 POSIX process prototype 35a8cf52 proof is not accepted. Correction disposition
 501fa184c97f records that safe supervision was not established; no fixture was
 executed. The owner explicitly authorized one further bounded attempt after consultation.
-The responsible process context is drafting a supervision design first; no new
-fixture execution or implementation before independent design review.
+Design 2a3996cd was independently rejected: whole-runner interruption, setup,
+wait and worker bounds incomplete. Review answer is at
+briefs/process-retry-design-review.answer.md. Responsible context is amending
+the design using a project-local custodian/runtime-ownership adapter; no fixture
+execution or implementation before gate review. No global runner/home changes.
 
 ## Decisions
 
@@ -64,6 +67,9 @@ fixture execution or implementation before independent design review.
   contracts, but does not answer unresolved API/scope decisions.
 - Public test seams are already owner-approved in AGENTS.md.
 - Pending owner TCP choice: connect plus separately authorized listeners or connect only.
+- Owner release/API question asks approval of the concrete three-OS/Rust matrix,
+  additive ProcessReport failure variant, rejected negative file reads, and
+  retained resource limits under unchecked. Await reply; no inferred approval.
 - Missing-workflow question was asked before discovering canonical configuration;
   reuse existing selections unless owner explicitly changes them.
 
@@ -96,7 +102,10 @@ an explicit budget override, not a reset. Draft requested at the owned prototype
 worktree evidence/retry-design.md before implementation or execution.
 Disposition: /Users/hoppworks/projects/rhai-process-prototype/.scratch/process-prototype/evidence/correction-attempt.md.
 No owned live resources reported; historical source/logs remain unaccepted.
-One further attempt is owner-authorized; independent design review must precede it.
+One further attempt is owner-authorized. Design-only 2a3996cd was rejected by
+the independent review; minimal custodian direction is proposed, not approved
+implementation. Amendment is active; no new fixture or implementation ran.
+Original cause history and the single new implementation budget remain intact.
 Do not accept concurrent-I/O/cleanup claims until independent evidence review.
 Inherited VM history remains authoritative.
 
@@ -112,7 +121,8 @@ Linear is legacy and excluded, with no writes performed there.
 
 ## Goal turn classification
 
-Previous turn made progress: accepted env fixture branch integrated locally,
-Expert answer persisted, filesystem evidence overclaim found and corrected, and
-prototype single correction dispatched. Current turn continues those requirements
-and prepares the independent native Windows ownership gate.
+Current turn made progress: corrected unrestricted paths and guarded regression
+integrated at 5f87d339; full native macOS proof accepted and affected Linux checks
+dispatched. Windows static review defects corrected but native gates open.
+Owner-authorized process retry design reviewed and rejected before execution;
+responsible context is applying the reviewed custodian amendment.
