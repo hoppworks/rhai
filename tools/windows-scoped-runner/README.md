@@ -133,10 +133,10 @@ disposition is present in source, but no monitor path can create the
 unforgeable exact-job closure proof, so production removal remains fail-closed.
 The fixture authorization tests filesystem-only transitions, not job closure.
 Handle-disposition semantics, compilation, independent native readback, and
-the effect of unrelated external handles remain unverified. The
-running protocol state also cannot issue lease-renewal challenges yet; the
-source watchdog would expire a long-running payload at its short lease if this
-state were connected to one. Client/monitor pipe behavior, breakaway compatibility, ambient
+the effect of unrelated external handles remain unverified. The lease protocol
+model supports fresh Running-state renewal challenges while keeping the absolute
+lifetime fixed; real workload and native transport integration remain
+unproven. Client/monitor pipe behavior, breakaway compatibility, ambient
 job refusal, process and job readback, failure cleanup, host-disconnect survival,
 sleep/resume deadline behavior, and all other native Windows behavior remain
 unverified.
@@ -145,3 +145,30 @@ Do not use this source to launch package builds until the full custody backend
 is implemented and the authorized native acceptance gates pass. No compiler,
 fixture, runtime, Windows build command, or guest command was invoked for this
 source change.
+
+## Immutable launch-specification transfer model
+
+`SpecificationTransfer` is a pure managed protocol model and is not connected
+to `MonitorTransport`, allocation, staging, process creation, lease renewal, or
+workload entry. It transfers one immutable `LaunchSpecification` using
+`SPEC-XFER/1` `BEGIN`, `DATA`, and `END` frames, each terminated by one LF byte.
+The receiver token is supplied by its monitor owner; the transfer receipt does
+not authorize process creation or renew a lease.
+
+The fixed chunk size is 324 input bytes, encoded as at most 432 base64 bytes.
+The largest DATA frame is 486 bytes including token, fields, and LF; the largest
+DATA acknowledgement is 57 bytes. An 8192-byte specification uses 26 DATA
+frames plus BEGIN and END, for 28 frames in each direction. The sender retains
+one outstanding frame and advances only after the corresponding token/kind/
+index acknowledgement. The immutable input limit, 512-byte transport frame
+limit, and 32-frame/8192-byte queue are unchanged. Queue pressure remains a
+bounded try-write/fail-or-retry decision for a future control loop; the watchdog
+must not wait on queue capacity.
+
+The future transport adapter must preserve or validate the original LF
+delimiter and exact frame byte count before dispatch. `MonitorTransport`'s
+current line reader removes LF and optional CR, so its normalized output cannot
+prove that a canonical LF-only frame was received; it must not be passed to
+this model as if the original delimiter were known. Existing lease RESPONSE
+dispatch is unchanged. Fixtures are source-only and have not been executed;
+they prove neither pipe connectivity nor lease, process, job, or native custody.
