@@ -234,6 +234,31 @@ fn test_unrestricted_round_trip() {
     assert!(!t.exists("a"));
 }
 
+#[cfg(unix)]
+#[test]
+fn test_unrestricted_symlinks_follow_host_semantics() {
+    let t = TempDir::new();
+    t.write("actual/absolute.txt", "absolute target");
+    t.write("actual/relative.txt", "relative target");
+    std::fs::create_dir_all(t.path().join("links")).unwrap();
+    std::os::unix::fs::symlink(t.path().join("actual/absolute.txt"), t.path().join("links/absolute")).unwrap();
+    std::os::unix::fs::symlink("../actual/relative.txt", t.path().join("links/relative")).unwrap();
+    let e = engine(SysConfig::permissive());
+    let base = t.as_script_path();
+
+    assert_eq!(e.eval::<String>(&format!(r#"read_file("{base}/links/absolute")"#)).unwrap(), "absolute target");
+    assert_eq!(e.eval::<String>(&format!(r#"read_file("{base}/links/relative")"#)).unwrap(), "relative target");
+    e.run(&format!(r#"write_file("{base}/links/absolute", "changed"); copy_file("{base}/links/relative", "{base}/copied.txt")"#))
+        .unwrap();
+    assert_eq!(std::fs::read(t.path().join("actual/absolute.txt")).unwrap(), b"changed");
+    assert_eq!(std::fs::read(t.path().join("copied.txt")).unwrap(), b"relative target");
+
+    e.run(&format!(r#"remove_file("{base}/links/absolute")"#)).unwrap();
+    assert!(!t.path().join("links/absolute").exists());
+    assert_eq!(std::fs::read(t.path().join("actual/absolute.txt")).unwrap(), b"changed");
+    assert_eq!(std::fs::read(t.path().join("actual/relative.txt")).unwrap(), b"relative target");
+}
+
 // Operations on the wrong kind of entry fail with an I/O error, not a panic.
 #[test]
 fn test_wrong_entry_kind() {
@@ -289,7 +314,16 @@ fn test_non_utf8_file_name() {
     use std::os::unix::ffi::OsStrExt;
     let (t, e) = rw();
     t.write("ok.txt", "");
-    std::fs::write(t.path().join(std::ffi::OsStr::from_bytes(b"bad\xFF.txt")), "").unwrap();
+    let unsupported = match std::fs::write(t.path().join(std::ffi::OsStr::from_bytes(b"bad\xFF.txt")), "") {
+        Ok(()) => false,
+        Err(err) => {
+            eprintln!("filesystem does not support creating the non-UTF-8 fixture: {err}");
+            true
+        }
+    };
+    if unsupported {
+        return;
+    }
     let err = sys_err(&e, r#"read_dir(".")"#);
     assert!(matches!(err, SysError::NotUtf8(..)), "{err}");
     assert_eq!(err_kind(&e, r#"read_dir(".")"#), "NotUtf8");

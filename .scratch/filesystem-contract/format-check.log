@@ -1,0 +1,15 @@
+Diff in /Users/hoppworks/projects/rhai-filesystem-contract/src/eval/mod.rs:34:
+     BreakPoint, Debugger, DebuggerCommand, DebuggerEvent, DebuggerStatus, OnDebuggerCallback,
+     OnDebuggingInit,
+ };
+-#[cfg(feature = "grain")]
+-pub(crate) use eval_context::_call_fn_raw;
+ pub use eval_context::EvalContext;
+ #[cfg(not(feature = "no_ast"))]
+ pub use eval_context::EvalContextFrameGuard;
+Diff in /Users/hoppworks/projects/rhai-filesystem-contract/src/eval/mod.rs:42:
++#[cfg(feature = "grain")]
++pub(crate) use eval_context::_call_fn_raw;
+ pub use switch::RangeCase;
+ 
+ #[cfg(not(feature = "no_module"))]
