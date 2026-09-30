@@ -25,12 +25,26 @@ create payloads, inspect exact process/job handles, or prove transport survival.
 The fixture is deliberately unexecuted.
 
 The monitor currently accepts a valid first host round-trip and then fails
-closed. The source does not create a runtime, journal, evidence store, payload
-job, or payload process. The create/resume states in the fixture are modeled
-transitions only; the second challenge and actual suspended/resume operations
-are not wired to a backend. Every `--source`/`--exe` workload request is refused
-by the public entrypoint. The older payload staging implementation remains as
-unreachable source history and must not be used.
+closed. The new `WindowsCustodyBackend.cs` source slice pins the fixed local
+`C:\RhaiQuality\runs` root and each ancestor through non-reparse directory
+handles that omit delete sharing, and captures volume/file identity. Its
+bounded journal creates a unique external file with a protected current-user
+and SYSTEM DACL, verifies that ACL through the opened handle, and flushes each
+bounded framed record. It is not yet called by the monitor and does not allocate
+a runtime. An incomplete/torn journal record is detectable; no recovery or
+cleanup decision is made from a path alone.
+
+The create/resume states in the protocol fixture are modeled transitions only;
+the second challenge and actual suspended/resume operations are not wired to a
+backend. Every `--source`/`--exe` workload request is refused by the public
+entrypoint. The older payload staging implementation remains as unreachable
+source history and must not be used.
+
+`fixtures/CustodyBackendFixture.cs` is source-only behavioral coverage for
+directory pin identity, rename exclusion, bounded journal writes, external
+placement and independent journal readback. It has not been compiled or run.
+No compiler, runtime, Windows build command, guest command, or fixture process
+was invoked for this change.
 
 The previous source substep's job-list creation fixture remains in
 `fixtures/RunProcessCreationFixtures.ps1` and `fixtures/PayloadFixture.cs`; it
@@ -39,11 +53,15 @@ entrypoint. It has not been run.
 
 ## Remaining custody and proof boundaries
 
-Safe handle-based staging, protected runtime ACL and identity, durable journal,
-local evidence finalization/export, exact job ownership and cleanup, the real
-create-time payload integration, pre-resume host challenge integration,
-termination/finalization budgets, and verified runtime removal remain
-unimplemented. Client/monitor pipe behavior, breakaway compatibility, ambient
+Runtime child allocation and its verified protected ACL/identity, handle-based
+source staging and Windows executable-path validation, intent-before-allocation
+integration, identity-after-allocation journaling, local evidence
+finalization/export, exact job ownership and cleanup, the real create-time
+payload integration, pre-resume host challenge integration, termination and
+finalization budgets, and verified runtime removal remain unimplemented. The
+running protocol state also cannot issue lease-renewal challenges yet; the
+source watchdog would expire a long-running payload at its short lease if this
+state were connected to one. Client/monitor pipe behavior, breakaway compatibility, ambient
 job refusal, process and job readback, failure cleanup, host-disconnect survival,
 sleep/resume deadline behavior, and all other native Windows behavior remain
 unverified.
