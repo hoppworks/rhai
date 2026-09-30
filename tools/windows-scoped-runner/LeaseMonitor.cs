@@ -87,11 +87,23 @@ internal static class LeaseMonitor
         }
         internal bool AcceptResponse(long seq, string nonce, long now)
         {
+            return AcceptResponseCore(seq, nonce, now, true);
+        }
+        // Setup-only transport responses renew the short lease but never mint
+        // a create/resume handshake. Creation must use a later phase-bound
+        // response after staging has completed.
+        internal bool AcceptMaintenanceResponse(long seq, string nonce, long now)
+        {
+            return AcceptResponseCore(seq, nonce, now, false);
+        }
+        private bool AcceptResponseCore(long seq, string nonce, long now, bool allowTransitionHandshake)
+        {
             if (Tick(now) == State.Stopping || outstanding == null || outstanding.Phase!=State || now >= outstanding.Expires ||
                 seq != outstanding.Sequence || !String.Equals(nonce, outstanding.Nonce, StringComparison.Ordinal)) return false;
             outstanding = null;
             leaseDeadline = Math.Min(now + policy.LeaseDuration, started + policy.AbsoluteDeadline);
-            if(State==State.Ready) createHandshake=true;
+            if(!allowTransitionHandshake) { createHandshake=false; resumeHandshake=false; }
+            else if(State==State.Ready) createHandshake=true;
             else if(State==State.Suspended) resumeHandshake=true;
             // Running responses only renew the short lease. They cannot
             // authorize another create or resume transition.

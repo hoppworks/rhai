@@ -146,9 +146,14 @@ internal static class MonitorTransport
         int stopWriter=0;
         try
         {
-        var p=new LeaseMonitor.Protocol(LeaseMonitor.Protocol.ProductionPolicy());
-        long started=(long)GetTickCount64(); p.Start(started);
+        LeaseMonitor.Policy policy=LeaseMonitor.Protocol.ProductionPolicy();
+        long started=(long)GetTickCount64();
+        string token=MonitorSpecificationIntake.CreateMonitorToken();
         var incoming=new LeaseMonitor.BoundedFrameQueue(32,8192); var outgoing=new LeaseMonitor.BoundedFrameQueue(32,8192);
+        var dispatcher=new MonitorSpecificationIntake.Dispatcher(
+            new LeaseMonitor.Protocol(policy), outgoing, ()=> (long)GetTickCount64(), token,
+            started, started+policy.SetupDeadline, policy.ChallengePeriod);
+        if(!dispatcher.Start()) return 78;
         int eof=0, writeFailed=0;
         IntPtr inputOwner=input;
         var reader=new Thread(()=>{
@@ -163,45 +168,17 @@ internal static class MonitorTransport
             } catch { Interlocked.Exchange(ref writeFailed,1); } finally { CloseHandle(outputOwner); }
         }); writer.IsBackground=true;
         try { writer.Start(); output=IntPtr.Zero; } catch { if(output!=IntPtr.Zero) { CloseHandle(output); output=IntPtr.Zero; } throw; }
-        long lastChallenge=(long)GetTickCount64(); LeaseMonitor.Challenge outstanding=null;
-        Queue("MONITOR_READY protocol-only backend=unavailable\n",outgoing);
-        while(p.Tick((long)GetTickCount64())!=LeaseMonitor.State.Stopping && Volatile.Read(ref eof)==0 && Volatile.Read(ref writeFailed)==0 && WaitForSingleObject(client,0)==WAIT_TIMEOUT)
+        while(dispatcher.Poll() && Volatile.Read(ref eof)==0 && Volatile.Read(ref writeFailed)==0 && WaitForSingleObject(client,0)==WAIT_TIMEOUT)
         {
-            long now=(long)GetTickCount64();
-            if(outstanding==null && now-lastChallenge>=2000)
+            if(!dispatcher.TryIssueChallenge()) break;
+            for(int handled=0;handled<16 && !dispatcher.Stopped;handled++)
             {
-                outstanding=p.IssueChallenge(now); lastChallenge=now;
-                if(outstanding!=null && !Queue("CHALLENGE "+outstanding.Sequence+" "+outstanding.Nonce+"\n",outgoing)) p.SignalClientEof(now);
+                byte[] originalFrame; if(!incoming.TryRead(out originalFrame)) break;
+                if(!dispatcher.Dispatch(originalFrame)) break;
             }
-            for(int handled=0;handled<16;handled++)
-            {
-                byte[] raw; if(!incoming.TryRead(out raw)) break;
-                string line;
-                try { line=new UTF8Encoding(false,true).GetString(raw); }
-                catch { p.SignalClientEof(now); break; }
-                string[] parts=line.Split(' '); long seq;
-                if(parts.Length!=3 || parts[0]!="RESPONSE" || !Int64.TryParse(parts[1],out seq)) { p.SignalClientEof(now); break; }
-                // Stale, replayed and prebuffered future responses are ignored;
-                // only the exact currently outstanding phase-bound challenge counts.
-                if(outstanding!=null && p.AcceptResponse(seq,parts[2],(long)GetTickCount64()))
-                {
-                    outstanding=null;
-                    if(p.State==LeaseMonitor.State.Ready && p.AuthorizeCreate((long)GetTickCount64()))
-                    {
-                        Queue("CREATE_AUTHORIZED protocol-only\n",outgoing);
-                        p.SignalClientEof((long)GetTickCount64()); // fail closed: backend is not integrated
-                    }
-                    else if(p.State==LeaseMonitor.State.Suspended && p.AuthorizeResume((long)GetTickCount64()))
-                    {
-                        Queue("RESUME_AUTHORIZED protocol-only\n",outgoing);
-                        p.SignalClientEof((long)GetTickCount64()); // no payload can be resumed in this source substep
-                    }
-                }
-            }
-            if(now-lastChallenge>=2000 && outstanding==null && p.State!=LeaseMonitor.State.Stopping) lastChallenge=now-2000;
             Thread.Sleep(25); // finite watchdog poll; never waits for a pipe or worker join
         }
-        p.SignalClientEof((long)GetTickCount64());
+        dispatcher.Stop();
         // No job/backend exists in this substep, so there is nothing whose
         // termination can be truthfully receipted or whose runtime can be removed.
         return Volatile.Read(ref writeFailed)!=0 ? 79 : 78;
@@ -215,10 +192,18 @@ internal static class MonitorTransport
         }
     }
 
-    private static bool Queue(string text, LeaseMonitor.BoundedFrameQueue q) { return q.TryWrite(Encoding.UTF8.GetBytes(text)); }
-    private static byte[] ReadBoundedFrame(Stream stream,int max)
+    internal static byte[] ReadBoundedFrame(Stream stream,int max)
     {
         var b=new List<byte>(64);
-        for(;;) { int n=stream.ReadByte(); if(n<0) { if(b.Count==0) return null; throw new InvalidDataException("partial protocol frame at EOF"); } if(n=='\n') { if(b.Count>0 && b[b.Count-1]=='\r') b.RemoveAt(b.Count-1); return b.ToArray(); } if(b.Count>=max) throw new InvalidDataException("protocol frame exceeds fixed 512-byte limit"); b.Add((byte)n); }
+        if(stream==null) throw new ArgumentNullException("stream");
+        if(max<1) throw new ArgumentOutOfRangeException("max");
+        for(;;)
+        {
+            int n=stream.ReadByte();
+            if(n<0) { if(b.Count==0) return null; throw new InvalidDataException("partial protocol frame at EOF"); }
+            if(b.Count>=max) throw new InvalidDataException("protocol frame exceeds fixed "+max.ToString()+"-byte limit");
+            b.Add((byte)n);
+            if(n=='\n') return b.ToArray();
+        }
     }
 }

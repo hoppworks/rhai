@@ -1,5 +1,5 @@
 // Pure managed transfer protocol for a bounded immutable launch specification.
-// This model is not connected to MonitorTransport or workload creation.
+// MonitorTransport uses it for intake; it does not authorize workload creation.
 using System;
 using System.Globalization;
 using System.Text;

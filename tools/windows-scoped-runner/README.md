@@ -41,14 +41,14 @@ staged executable path as a bounded absolute local Windows path, without
 checking that the path exists. Unknown fields reject cleanup paths and policy
 overrides; policy continues to come from the fixed monitor policy.
 
-The wire value is not yet adapted to `MonitorTransport`: that transport accepts
-512-byte frames with a 32-frame/8,192-byte queue. A future adapter must carry the
-bounded specification across those existing limits without increasing them.
-No specification is currently accepted by the monitor or connected to workload
+The wire value is now accepted by the monitor through the bounded transport
+intake described below. Intake does not connect the specification to workload
 creation; public workload launch and exact-job proof remain disabled.
 
-The monitor currently accepts a valid first host round-trip and then fails
-closed. The `WindowsCustodyBackend.cs` source slice pins the fixed local
+The monitor accepts setup lease challenges/responses and bounded specification
+intake, then remains in protocol-only setup mode and stops on deadline or
+disconnect because workload custody is unavailable.
+The `WindowsCustodyBackend.cs` source slice pins the fixed local
 `C:\RhaiQuality\runs` root and each ancestor through non-reparse directory
 handles that omit delete sharing, and captures volume/file identity. Its
 bounded journal creates a unique external file with a protected current-user
@@ -124,7 +124,7 @@ entrypoint. It has not been run.
 ## Remaining custody and proof boundaries
 
 Executable-relative syntax checks and staged-file identity checks are present
-in source, but executable launch validation remains unverified. Monitor
+in source, but executable launch validation remains unverified. Monitor-to-custody
 integration, local evidence
 finalization/export, exact job ownership and
 cleanup, the real create-time payload integration, pre-resume host challenge
@@ -148,27 +148,43 @@ source change.
 
 ## Immutable launch-specification transfer model
 
-`SpecificationTransfer` is a pure managed protocol model and is not connected
-to `MonitorTransport`, allocation, staging, process creation, lease renewal, or
-workload entry. It transfers one immutable `LaunchSpecification` using
-`SPEC-XFER/1` `BEGIN`, `DATA`, and `END` frames, each terminated by one LF byte.
-The receiver token is supplied by its monitor owner; the transfer receipt does
-not authorize process creation or renew a lease.
+`MonitorTransport.RunMonitor` now uses `MonitorSpecificationIntake.Dispatcher`
+and `SpecificationTransfer.Receiver` to accept one immutable
+`LaunchSpecification` over the monitor pipe. The reader preserves original
+bytes, including the final LF, and applies the 512-byte bound to the complete
+frame. Partial EOF, CRLF/noncanonical control framing, malformed transfer
+frames, fixed setup-deadline expiry, reader/writer failure, and bounded queue
+admission failure stop intake. The dispatcher checks fresh monotonic time for
+each frame and again before acknowledging a transfer frame. It queues ACKs
+without waiting and keeps the 32-frame/8192-byte limits.
 
-The fixed chunk size is 324 input bytes, encoded as at most 432 base64 bytes.
+The monitor creates and advertises one random 32-lowercase-hex transfer token.
+Completion retains the immutable specification in monitor memory only. It does
+not renew the lease, authorize create/resume, reset deadlines, or allocate a
+runtime. Setup `RESPONSE` frames are checked against the exact outstanding
+phase-bound challenge and may renew the short lease; this intake path uses
+maintenance responses that cannot authorize create or resume. A fresh
+post-staging challenge remains required before any future creation step.
+Allocation, source staging, workload entry, process creation/resume, and exact
+job proof remain disconnected and disabled. No pipe/native acceptance is
+claimed.
+
+`SpecificationTransfer` implements `SPEC-XFER/1` `BEGIN`, `DATA`, and `END`
+frames, each terminated by one LF byte. The receiver token is supplied by its
+monitor owner; the transfer receipt does not authorize process creation or
+renew a lease. The fixed chunk size is 324 input bytes, encoded as at most 432
+base64 bytes.
+
 The largest DATA frame is 486 bytes including token, fields, and LF; the largest
 DATA acknowledgement is 57 bytes. An 8192-byte specification uses 26 DATA
 frames plus BEGIN and END, for 28 frames in each direction. The sender retains
 one outstanding frame and advances only after the corresponding token/kind/
 index acknowledgement. The immutable input limit, 512-byte transport frame
-limit, and 32-frame/8192-byte queue are unchanged. Queue pressure remains a
-bounded try-write/fail-or-retry decision for a future control loop; the watchdog
-must not wait on queue capacity.
+limit, and 32-frame/8192-byte queue are unchanged.
 
-The future transport adapter must preserve or validate the original LF
-delimiter and exact frame byte count before dispatch. `MonitorTransport`'s
-current line reader removes LF and optional CR, so its normalized output cannot
-prove that a canonical LF-only frame was received; it must not be passed to
-this model as if the original delimiter were known. Existing lease RESPONSE
-dispatch is unchanged. Fixtures are source-only and have not been executed;
-they prove neither pipe connectivity nor lease, process, job, or native custody.
+The source fixture covers framing, dispatcher/lease interleaving, maximum-size
+transfer, replay and wrong-token failure, queue pressure, and deadline
+boundaries. It has not been compiled or executed. Source fixtures prove neither
+pipe connectivity nor process, job, or native custody. Native Windows API
+behavior, monitor/client process behavior, compiler compatibility, and all
+full-custody acceptance gates remain unverified.
