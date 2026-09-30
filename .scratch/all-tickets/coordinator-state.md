@@ -46,3 +46,5 @@ Native Rust source19e116a37e7c46d04eb8319a0112870ef46b0101 frozen unaccepted in 
 
 ## Independent combined release step
 Native macOS combined sys/net proof dispatched at baseee737d9d, owned /Users/hoppworks/projects/rhai-combined-package-proof task/combined-package-proof. Original15:36–16:06UTC inclusive review, brief briefs/combined-package-proof.md; meaningful same-Engine coexistence/file+peer readback plus combined feature matrix. Pending process extension stays stopped; this closes independent approved release requirements.
+
+Native Linux TCP gate independently dispatched from base2e945d9f, owned /Users/hoppworks/projects/rhai-linux-tcp-proof task/linux-tcp-proof, original15:38–16:08UTC inclusive review. Brief briefs/linux-tcp-proof.md; already authorized workhorse, remote native scoped custody and private outputs, baseline/sync/no_index real peers plus wrong-byte control. No stopped process or Windows work resumed.
