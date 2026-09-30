@@ -48,9 +48,13 @@ Original framing, real bounded dispatch and maintenance/transition separation
 are implemented. Nothing has compiled or run. Candidate stays isolated.
 
 Next source requirement: connect completed immutable input to monitor-owned
-allocation/staging on a separate worker without blocking the watchdog. Record
-fixed remaining repair limits before this work; retain the sole Expert/cause
-history, disabled workload/proof authority and native execution prerequisites.
+allocation/staging on a separate worker without blocking the watchdog. Remaining
+source allowance is recorded before work in
+briefs/windows-monitor-staging-ownership.md: 11:17–11:47 UTC on 2026-09-30,
+30 active minutes including review, zero execution/build/native launches,
+two consecutive source revisions without requirement progress stop the slice.
+This continues the sole Expert/cause correction; previous effort/history is not
+reset. Payload/proof authority and native execution prerequisites stay closed.
 
 Immutable specification `91e474d7`/`73020670` and Running renewal `43d2f067`
 source reviews remain applicable. Accepted filesystem/environment production and
