@@ -157,6 +157,12 @@ Inherited VM history remains authoritative.
 
 ## Next action
 
+Immutable specification source is actively delegated under
+briefs/windows-immutable-specification.md to the same responsible Windows
+context, independently confirmed running. Await its report and review the exact
+commit including excluded fixtures/README. Do not launch workloads or run native
+fixtures. Candidate HEAD is 43d2f067 before this next source step.
+
 Running renewal source 43d2f067 is now independently reviewed across all three
 files, zero skips; see windows-running-lease-renewal-review.md. Whitespace checks
 pass; fixtures and compilation remain unexecuted. Next source requirement is the
@@ -227,6 +233,13 @@ Dependent implementation is stopped. Continue only independent authorized
 requirements with new evidence; do not repeat decision/status/verification rounds.
 
 ## Goal turn classification
+
+2026-09-30 Running renewal continuation: progress. Authoritative 43d2f067 fixes
+the missing Running challenge path and replaces misleading early-expiry fixture
+coverage with explicit accepted renewals and aligned boundaries. All three files
+were source-reviewed; no compiler/native execution or resources. The existing
+custody correction remains incomplete. Next specification work is confirmed live;
+open owner decisions still stop only their dependent branches. No blocked impasse.
 
 2026-09-30 latest disposition review continuation: progress. Previous turn
 reviewed bb7060a2 and recorded findings in 702260ae. Current authoritative source
