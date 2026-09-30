@@ -247,4 +247,3 @@ test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 18 filtered out; fin
 
 RHAI_CONTROL_CLEANUP Fixtures=0 Processes=0
 RHAI_CONTROL_PASSED
-
