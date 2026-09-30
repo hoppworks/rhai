@@ -34,7 +34,8 @@ correction and focused unrestricted symlink/parent and alias-routing cases are
 running in the responsible context. No full filesystem-ticket acceptance yet.
 Environment isolation 8fa26974: all three Rust files reviewed, targeted real-OS
 assertions and wrong-expectation control accepted for macOS; proof persistence
-pending. Combined suite must run once after local integration because source changes.
+completed in 2221517f and locally integrated into task/all-tickets.
+Combined suite must run once after filesystem integration because source changes.
 POSIX process prototype 35a8cf52 proof is not accepted: Expert validated five
 findings; the single correction attempt is now running in its owned worktree.
 
@@ -71,7 +72,7 @@ Inherited VM history remains authoritative.
 
 ## Next action
 
-Collect filesystem coverage correction and env proof commit; integrate accepted
+Collect filesystem coverage correction; env branch already integrated. Integrate accepted
 branches locally into task/all-tickets and run one scoped combined sys suite.
 Collect and independently review the corrected process prototype.
 TCP authority question remains pending; release/API proposals remain unaccepted.
