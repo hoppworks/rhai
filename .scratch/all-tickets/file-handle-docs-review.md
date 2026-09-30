@@ -18,6 +18,6 @@ error paths release it, scoped source/build/cache/fixtures isolated. Coordinator
 independently confirmed exact runtime agent-build-6o4bxcjz absent. Target end size
 723268KiB is not total runtime or peak; missing storage measurement is disclosed.
 Original13:21:01–13:51:01UTC window retained; no redundant builds for docs-only fixes.
-Proof retained in /Users/hoppworks/projects/rhai-file-handle-docs/.scratch/file-handle-docs/.
+Proof moved without duplication to ../file-handle-docs/ after verified merge/push.
 Author and committer both verified lowercase hoppworks with configured email.
 Native/MSRV/release matrix gates remain open; this closes phase4 docs/example only.

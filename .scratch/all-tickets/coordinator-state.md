@@ -67,7 +67,8 @@ briefs/process-prototype-continuation.md and retained correction-attempt.md.
 
 Phase4 file documentation/example accepted atb9225862; see file-handle-docs-review.md.
 Real sys/sys,no_index example and deliberate wrong host payload proven, exact
-runtime absent. Retain /Users/hoppworks/projects/rhai-file-handle-docs for untracked proof.
+runtime absent. Proof moved to ../file-handle-docs/ after verified push; owned
+clean task/file-handle-docs checkout can now be retired, branch/history retained.
 
 Windows8f75da53 source slice remains isolated and stopped; native/bootstrap gate
 closed, no native launches. Accepted source reviews retain exact references under

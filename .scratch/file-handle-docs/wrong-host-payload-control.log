@@ -1,0 +1,7 @@
+     Running `/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-6o4bxcjz/target/debug/examples/sys`
+
+thread 'main' (51571867) panicked at examples/sys.rs:75:5:
+assertion `left == right` failed
+  left: "Rhaiting data"
+ right: "wrong payload"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
