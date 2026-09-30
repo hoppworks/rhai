@@ -4,6 +4,12 @@ Status: decisions D1 to D12 accepted on 2026-09-29; phase 1 implemented on branc
 `claude/vibrant-sagan-3g1pxn` (this fork only, no upstream submission yet). Supersedes the
 2026-09-29 precedents survey; that survey is condensed into Appendix A.
 
+Review update (2026-09-30): phase 1 is implemented but not accepted under the new
+strict verification contract. Four filesystem/fixture findings remain open. The
+owner-approved [path contract](../.scratch/stdlib-wayfinder/issues/02-filesystem-contract.md#answer)
+clarifies required behavior; historical implementation notes below are not proof
+that those requirements pass.
+
 The package gives Rhai scripts access to the host filesystem, environment, and child
 processes. The host decides how much authority a script gets. Nothing in this package is
 enabled by default.
@@ -66,7 +72,12 @@ Policy: `EnvPolicy::None` (both functions return empty), `EnvPolicy::AllowList(n
 
 All paths are resolved against a configured root. An absolute path must lie inside a root;
 a relative path is resolved against the first root. `..` and symlinks cannot leave a root
-(enforced by `cap-std`, not by string inspection).
+(enforced by `cap-std`, not by string inspection). The host-configured root must
+identify the directory selected by OS path resolution, preserving symlink/parent
+semantics. Unrestricted mode retains ordinary host filesystem path behavior while
+still enforcing the configured access level. Exact alias, traversal, symlink and
+multiple-root rules and regression expectations live in the accepted
+[path contract](../.scratch/stdlib-wayfinder/issues/02-filesystem-contract.md#accepted-path-contract).
 
 ```rhai
 read_file(path)                  // String
@@ -175,6 +186,7 @@ tests are written from scratch against this contract. Phase numbers refer to sec
 | P11 | `cwd` option outside fs roots | `Denied` | own | 2 |
 | P12 | `env_var` not in allow-list | `()` | own | 1 |
 | P13 | `.bat` / `.cmd` program on Windows, default config | `Denied` | CVE-2024-24576 | 3 |
+| P14 | Host root contains symlink followed by `..` | OS-selected root only; lexical substitute untouched | review regression | phase 1 repair |
 
 ### 4.2 Environment (E)
 
@@ -211,6 +223,8 @@ tests are written from scratch against this contract. Phase numbers refer to sec
 | F19 | Non-UTF-8 filename in `read_dir` (Unix) | `NotUtf8` | own | 3 |
 | F20 | Windows path with forward slashes | works | own | 3 |
 | F21 | Windows reserved name (`CON`) | `Io`, does not hang | own | 3 |
+| F22 | Unrestricted absolute/sibling-relative symlinks and symlink/parent paths | Corresponding host operation semantics; grants still enforced | review regression | phase 1 repair |
+| F23 | Supported configured/canonical/macOS-prefix spellings of a root | Same authority and payload; no permission fallback | review regression | phase 1 repair |
 
 ### 4.4 Processes (X)
 
@@ -326,8 +340,9 @@ the gated feature only (D8), and `sys` incompatible with `no_object` via `compil
   functions written with `#[export_module]` cannot carry per-instance configuration.
 - `SysPackage::new(config)` returns `Result`, failing early when a root cannot be opened.
   `Package::init` is a no-op for the same reason.
-- Absolute script paths are matched against the root as configured and against its
-  canonical form, so `/tmp/x` works on macOS where `/tmp` is a symlink to `/private/tmp`.
+- Absolute script paths currently match configured and canonical root prefixes.
+  The review found that equivalent macOS-prefix spellings are not handled consistently;
+  F23 requires repair and proof before this can be claimed as accepted behavior.
 - Relative paths are checked lexically for `..` escapes before `cap-std` sees them, so the
   common case fails without touching the filesystem (P6); symlink escapes are caught by
   `cap-std` and mapped to `Denied` by inspecting its `PermissionDenied` error (P7).
@@ -335,13 +350,18 @@ the gated feature only (D8), and `sys` incompatible with `no_object` via `compil
   is Unix seconds as `INT`, since Rhai's own time type is a monotonic `Instant`.
 - Inside a confined root, symbolic links must have relative targets. `cap-std` treats an
   absolute link target as an escape even when it points back into the root. Documented in
-  the module docs and covered by a test; unrestricted mode is not affected.
+  the module docs and covered by a test. The confined limitation remains accepted;
+  unrestricted symlink handling has a reviewed defect and must satisfy F22.
 - On Windows, `std::fs::canonicalize` returns verbatim paths (`\\?\C:\...`). Roots store
-  the canonical form with that prefix stripped, and the configured path is lexically
-  normalised, so both spellings match absolute script paths. Found by running the suite
-  under Wine.
-- Unrestricted mode opens the nearest existing ancestor of the target as an ambient `Dir`
-  and addresses the rest relatively, so every operation still goes through `cap-std`.
+  the canonical form with that prefix stripped. The current configured-root lexical
+  normalization is not the accepted contract for symlink/parent paths: P14 requires
+  OS-selected root semantics. Wine evidence does not replace native Windows proof.
+- Unrestricted mode currently opens the nearest existing ancestor as an ambient `Dir`.
+  The review demonstrated that this imposes unintended symlink restrictions; F22
+  requires ordinary host semantics. The mechanism is historical, not a design mandate.
+- F19 requires a native filesystem that supports creating the non-UTF-8 fixture.
+  The reviewed APFS fixture-creation failure is a coverage limitation; repair the
+  fixture handling and obtain appropriate native evidence without weakening NotUtf8.
 
 ## Appendix A: precedents, condensed
 

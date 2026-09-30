@@ -14,6 +14,8 @@ with high quality, low maintenance, strict verification, and Rhai conventions.
 - Created map.md and six decision tickets. No production code changed.
 - Owner accepted the concrete acceptance contract; ticket 01 is resolved, indexed
   from the map, and its E2E configuration is recorded in AGENTS.md.
+- Owner accepted the exact filesystem path contract; ticket 02 is resolved and
+  indexed. The sys plan records P14/F22/F23 and historical implementation limits.
 - Read back nine planning/glossary files; local links resolve and dependency graph
   is acyclic. The main checkout is clean after relocating the new own files.
 - Existing evidence: ../../docs/sys-package-plan.md and
@@ -21,9 +23,8 @@ with high quality, low maintenance, strict verification, and Rhai conventions.
 
 ## Current step
 
-Ticket 01 is resolved. Ticket 02 is claimed by the current Codex session. Its
-concrete path-semantics proposal and regression matrix await the owner answer.
-No implementation has started.
+Tickets 01 and 02 are resolved. Four decisions remain open. The next frontier
+ticket by number is issues/03-process-contract.md. No implementation has started.
 
 ## Decisions and constraints
 
@@ -43,6 +44,6 @@ No implementation has started.
 
 ## Next action
 
-Await the owner answer on the concrete contract in issues/02-filesystem-contract.md.
-If accepted, record its resolution and map index; align the existing sys plan where
-needed without implementing fixes. Preserve the cap-std confined-link limitation.
+Next invocation: claim issues/03-process-contract.md and clarify process lifecycle,
+resource-limit interactions and cleanup guarantees. Preserve accepted process API
+choices unless new evidence requires an explicit revision. Do not implement in wayfinder.

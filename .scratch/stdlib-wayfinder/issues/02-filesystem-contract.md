@@ -2,7 +2,7 @@
 
 Type: grilling
 Label: wayfinder:grilling
-Status: claimed
+Status: resolved
 Assignee: current Codex session
 Parent: [Plan a reliable Rhai host standard library](../map.md)
 Blocked by: none
@@ -30,7 +30,7 @@ revised; identify cap-std constraints instead of weakening confinement silently.
 Use ../../../docs/sys-package-plan.md as the existing contract. Production fixes
 follow this decision and the acceptance contract; they are not part of resolution.
 
-## Concrete proposal awaiting owner decision
+## Accepted path contract
 
 ### Authority and path rules
 
@@ -103,3 +103,21 @@ The proposal preserves the accepted confined/permissive split and cap-std limita
 Owner confirmation is requested for this exact contract before closing the decision.
 In particular, it makes ordinary OS symlink semantics explicit for unrestricted mode
 and rejects lexical substitution when selecting the host-configured root.
+
+## Answer
+
+The owner accepted the exact rules and regression expectations above with “ok”
+on 2026-09-30 after the concrete recommendation was presented. The confined-mode
+absolute-symlink limitation and existing multiple-root routing remain unchanged.
+OS-selected configured roots, unrestricted host semantics and equivalent supported
+root spellings are now explicit acceptance requirements.
+
+The existing [sys package plan](../../../docs/sys-package-plan.md) links this
+contract and distinguishes historical implementation notes from required behavior.
+This resolves the path-contract decision only; all four reviewed implementation
+or fixture defects still require test-first repair and strict proof.
+
+### Resolution comment
+
+Owner acceptance recorded. The previous Comments entry records the historical
+pending state. No production source, test or review artifact was changed.

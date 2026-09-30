@@ -46,6 +46,9 @@ blocks implementation. Completing this map does not mean the library is implemen
 - [Define observable acceptance and test structure](issues/01-acceptance-contract.md#answer):
   real Engine/package/OS tests, independent observation, a demonstrated failing
   control and isolated fixtures are binding; concrete commands are in AGENTS.md.
+- [Settle path semantics before repairing filesystem access](issues/02-filesystem-contract.md#answer):
+  OS-selected roots, capability confinement, unrestricted host semantics and
+  consistent supported root spellings are required; reviewed defects remain open.
 
 ## Not yet specified
 
