@@ -1,0 +1,864 @@
+Source revision: 2e945d9f3547a45e73e0fa8a8913847aec58cf1d
+Source archive SHA256: e02c1a6d92962c177693c232bb4be6c5705a84ebfa07d99985c8c141e476a4be  /root/rhai-linux-tcp-proof-task/2e945d9f/source.tar.gz
+Runtime directory: /tmp/agent-build-jpy8qmda
+Runtime owner launcher PID: 1418708
+Linux workhorse 7.2.4-ogc3.1.fc44.x86_64 #1 SMP PREEMPT_DYNAMIC Sun Sep 13 01:41:06 UTC 2026 x86_64 GNU/Linux
+NAME="Bazzite"
+VERSION="44.20260921.0 (Kinoite)"
+RELEASE_TYPE=stable
+ID=bazzite
+ID_LIKE="fedora"
+VERSION_ID=44
+VERSION_CODENAME="Kinoite"
+PRETTY_NAME="Bazzite"
+ANSI_COLOR="0;38;2;138;43;226"
+LOGO=bazzite-logo
+CPE_NAME="cpe:/o:universal-blue:bazzite:44"
+DEFAULT_HOSTNAME="bazzite"
+HOME_URL="https://bazzite.gg"
+DOCUMENTATION_URL="https://docs.bazzite.gg"
+SUPPORT_URL="https://discord.bazzite.gg"
+BUG_REPORT_URL="https://github.com/ublue-os/bazzite/issues/"
+SUPPORT_END=2027-05-19
+VARIANT="Kinoite"
+VARIANT_ID=bazzite-nvidia-open
+OSTREE_VERSION='44.20260921.0'
+BUILD_ID="Stable (F44.20260921)"
+BOOTLOADER_NAME="Bazzite Stable (F44.20260921)"
+IMAGE_ID="bazzite-nvidia-open-44.20260921"
+rustc 1.97.1 (8bab26f4f 2026-07-14)
+binary: rustc
+commit-hash: 8bab26f4f68e0e26f0bb7960be334d5b520ea452
+commit-date: 2026-07-14
+host: x86_64-unknown-linux-gnu
+release: 1.97.1
+LLVM version: 22.1.6
+cargo 1.97.1 (c980f4866 2026-06-30)
+release: 1.97.1
+commit-hash: c980f4866141969fab6254a680546a277789d6f0
+commit-date: 2026-06-30
+host: x86_64-unknown-linux-gnu
+libgit2: 1.9.2 (sys:0.20.4 vendored)
+libcurl: 8.20.0-DEV (sys:0.4.88+curl-8.20.0 vendored ssl:OpenSSL/3.6.2)
+ssl: OpenSSL 3.6.2 7 Apr 2026
+os: Fedora 44.0.0 [64-bit]
+
+File descriptor limit: 4096
+
+Disk before extraction/build:
+Filesystem     1024-blocks       Used Available Capacity Mounted on
+/dev/nvme0n1p3  1950801920 1598529652 301222764      85% /var
+tmpfs             48230488   33665748  14564740      70% /tmp
+
+Commands use --jobs 2 and --test-threads=1. Targets run one at a time.
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+     Locking 130 packages to latest compatible versions
+      Adding getrandom v0.3.4 (available: v0.4.3)
+      Adding hashbrown v0.16.1 (available: v0.17.1)
+      Adding syn v2.0.119 (available: v3.0.6)
+sampled_socket_fd_max=6
+sampled_private_disk_max_bytes=21467136
+
+Generated Cargo.lock SHA256: 4aa2e32287d33184c12e98c7a86a17574dbf3a2361c968c76e9611bfd4396cc3  Cargo.lock
+
+===== features=net target=net_connect =====
+Command: cargo test --locked --jobs 2 --features net --test net_connect -- --test-threads=1 --nocapture
+ Downloading crates ...
+  Downloaded num-traits v0.2.19
+  Downloaded cfg-if v1.0.5
+  Downloaded itoa v1.0.18
+  Downloaded const-random-macro v0.1.16
+  Downloaded crunchy v0.2.4
+  Downloaded version_check v0.9.5
+  Downloaded zmij v1.0.23
+  Downloaded autocfg v1.5.1
+  Downloaded tiny-keccak v2.0.2
+  Downloaded getrandom v0.2.17
+  Downloaded smallvec v1.16.2
+  Downloaded const-random v0.1.18
+  Downloaded smartstring v1.0.1
+  Downloaded rmp-serde v1.3.1
+  Downloaded rmp v0.8.15
+  Downloaded quote v1.0.47
+  Downloaded getrandom v0.3.4
+  Downloaded once_cell v1.21.4
+  Downloaded static_assertions v1.1.0
+  Downloaded bitflags v2.13.2
+  Downloaded ahash v0.8.12
+  Downloaded thin-vec v0.2.20
+  Downloaded unicode-ident v1.0.26
+  Downloaded memchr v2.8.3
+  Downloaded proc-macro2 v1.0.107
+  Downloaded serde v1.0.229
+  Downloaded serde_json v1.0.151
+  Downloaded zerocopy v0.8.59
+  Downloaded libc v0.2.189
+  Downloaded serde_core v1.0.229
+  Downloaded portable-atomic v1.15.0
+  Downloaded syn v2.0.119
+   Compiling autocfg v1.5.1
+   Compiling libc v0.2.189
+   Compiling version_check v0.9.5
+   Compiling crunchy v0.2.4
+   Compiling proc-macro2 v1.0.107
+   Compiling cfg-if v1.0.5
+   Compiling tiny-keccak v2.0.2
+   Compiling num-traits v0.2.19
+   Compiling unicode-ident v1.0.26
+   Compiling portable-atomic v1.15.0
+   Compiling quote v1.0.47
+   Compiling getrandom v0.2.17
+   Compiling serde_core v1.0.229
+   Compiling once_cell v1.21.4
+   Compiling getrandom v0.3.4
+   Compiling zerocopy v0.8.59
+   Compiling const-random-macro v0.1.16
+   Compiling ahash v0.8.12
+   Compiling smartstring v1.0.1
+   Compiling syn v2.0.119
+   Compiling const-random v0.1.18
+   Compiling static_assertions v1.1.0
+   Compiling rhai v1.26.1 (/tmp/agent-build-jpy8qmda/source)
+   Compiling zmij v1.0.23
+   Compiling serde v1.0.229
+   Compiling rhai_codegen v3.2.0 (/tmp/agent-build-jpy8qmda/source/codegen)
+   Compiling serde_json v1.0.151
+   Compiling thin-vec v0.2.20
+   Compiling bitflags v2.13.2
+   Compiling smallvec v1.16.2
+   Compiling rmp v0.8.15
+   Compiling memchr v2.8.3
+   Compiling itoa v1.0.18
+   Compiling rmp-serde v1.3.1
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 8.93s
+     Running tests/net_connect.rs (/tmp/agent-build-jpy8qmda/target/debug/deps/net_connect-f887a3b54f20c303)
+
+running 4 tests
+test authorized_connect_is_observed_and_clone_close_is_shared ... ok
+test denied_and_invalid_endpoints_do_not_reach_peer_and_errors_are_catchable ... ok
+test net_config_rejects_zero_deadline_and_invalid_handle_limits ... ok
+test open_handle_limit_is_shared_across_package_engines_and_released_on_close ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+sampled_socket_fd_max=4
+sampled_private_disk_max_bytes=393986048
+EXIT features=net target=net_connect status=0
+Disk after net/net_connect: tmpfs             48230488 34053680  14176808      71% /tmp
+396832	/tmp/agent-build-jpy8qmda
+
+===== features=net target=net_listen =====
+Command: cargo test --locked --jobs 2 --features net --test net_listen -- --test-threads=1 --nocapture
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+   Compiling rhai v1.26.1 (/tmp/agent-build-jpy8qmda/source)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.18s
+     Running tests/net_listen.rs (/tmp/agent-build-jpy8qmda/target/debug/deps/net_listen-b03b449535252c51)
+
+running 7 tests
+test accepted_stream_uses_the_shared_package_quota_across_engines ... ok
+test authorized_listener_accepts_an_independent_peer ... ok
+test bind_failure_releases_listener_quota ... ok
+test denied_and_invalid_listener_endpoints_never_bind ... ok
+test listener_clones_share_close_and_final_drop_releases_the_bind ... ok
+test no_client_accept_times_out_with_catchable_net_error ... ok
+test quota_retry_deadline_expires_under_a_real_saturated_handle_limit ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.12s
+
+sampled_socket_fd_max=1
+sampled_private_disk_max_bytes=523423744
+EXIT features=net target=net_listen status=0
+Disk after net/net_listen: tmpfs             48230488 34097856  14132632      71% /tmp
+441008	/tmp/agent-build-jpy8qmda
+
+===== features=net target=net_reads =====
+Command: cargo test --locked --jobs 2 --features net --test net_reads -- --test-threads=1 --nocapture
+   Compiling rhai v1.26.1 (/tmp/agent-build-jpy8qmda/source)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.20s
+     Running tests/net_reads.rs (/tmp/agent-build-jpy8qmda/target/debug/deps/net_reads-18195a52533587ca)
+
+running 7 tests
+test accepted_stream_inherits_host_receive_cap ... ok
+test blob_reads_validate_lengths_return_exact_short_prefix_and_obey_host_cap ... ok
+test engine_string_limit_keeps_ascii_and_reports_lossy_expansion_progress ... ok
+test no_data_read_times_out_and_bounded_eof_loop_reports_partial_progress ... ok
+test one_shot_read_returns_an_available_short_prefix_without_waiting_for_more ... ok
+test one_shot_text_read_replaces_a_utf8_character_cut_by_the_available_prefix ... ok
+test stream_read_string_returns_exact_lossy_text_from_peer_bytes ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.24s
+
+sampled_socket_fd_max=3
+sampled_private_disk_max_bytes=568659968
+EXIT features=net target=net_reads status=0
+Disk after net/net_reads: tmpfs             48230488 34142628  14087860      71% /tmp
+485780	/tmp/agent-build-jpy8qmda
+
+===== features=net target=net_writes =====
+Command: cargo test --locked --jobs 2 --features net --test net_writes -- --test-threads=1 --nocapture
+   Compiling rhai v1.26.1 (/tmp/agent-build-jpy8qmda/source)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:11:24
+   |
+11 | fn read_bounded_to_end(mut stream: &TcpStream, max_bytes: usize) -> Vec<u8> {
+   |                        ----^^^^^^
+   |                        |
+   |                        help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:62:10
+   |
+62 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:83:10
+   |
+83 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:208:10
+    |
+208 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:266:10
+    |
+266 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:285:9
+    |
+285 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:289:9
+    |
+289 |     let mut peer = TcpStream::connect(address.parse::<SocketAddr>().unwrap()).unwrap();
+    |         ----^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:306:9
+    |
+306 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()).max_write_bytes(2));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: unused return value of `rhai::Scope::<'_>::remove` that must be used
+   --> tests/net_writes.rs:245:13
+    |
+245 |             scope.remove::<String>("payload");
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` (part of `#[warn(unused)]`) on by default
+help: use `let _ = ...` to ignore the resulting value
+    |
+245 |             let _ = scope.remove::<String>("payload");
+    |             +++++++
+
+warning: `rhai` (test "net_writes") generated 9 warnings (run `cargo fix --test "net_writes" -p rhai` to apply 8 suggestions)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.28s
+     Running tests/net_writes.rs (/tmp/agent-build-jpy8qmda/target/debug/deps/net_writes-8848e5e6c59c6d3c)
+
+running 10 tests
+test accepted_stream_inherits_host_write_cap ... ok
+test accepted_stream_writes_are_read_back_by_the_peer ... ok
+test bounded_write_timeout_reports_partial_bytes_matching_peer_readback ... ok
+test engine_string_limit_rejects_write_before_peer_bytes ... ok
+test host_write_cap_rejects_oversize_input_without_peer_bytes ... ok
+test invalid_host_write_bounds_are_rejected ... ok
+test read_half_close_is_idempotent_and_keeps_stream_open_for_close ... ok
+test script_write_blob_preserves_exact_bytes ... ok
+test script_writes_string_and_write_all_report_real_peer_bytes ... ok
+test write_half_close_keeps_the_read_direction_and_is_idempotent ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+sampled_socket_fd_max=0
+sampled_private_disk_max_bytes=614506496
+EXIT features=net target=net_writes status=0
+Disk after net/net_writes: tmpfs             48230488 34188308  14042180      71% /tmp
+531460	/tmp/agent-build-jpy8qmda
+
+===== features=net,sync target=net_connect =====
+Command: cargo test --locked --jobs 2 --features net\,sync --test net_connect -- --test-threads=1 --nocapture
+ Downloading crates ...
+  Downloaded spin v0.7.2
+   Compiling rhai v1.26.1 (/tmp/agent-build-jpy8qmda/source)
+   Compiling rhai_codegen v3.2.0 (/tmp/agent-build-jpy8qmda/source/codegen)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 5.87s
+     Running tests/net_connect.rs (/tmp/agent-build-jpy8qmda/target/debug/deps/net_connect-e1ccd2f5c18961a1)
+
+running 4 tests
+test authorized_connect_is_observed_and_clone_close_is_shared ... ok
+test denied_and_invalid_endpoints_do_not_reach_peer_and_errors_are_catchable ... ok
+test net_config_rejects_zero_deadline_and_invalid_handle_limits ... ok
+test open_handle_limit_is_shared_across_package_engines_and_released_on_close ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+sampled_socket_fd_max=6
+sampled_private_disk_max_bytes=750256128
+EXIT features=net,sync target=net_connect status=0
+Disk after net,sync/net_connect: tmpfs             48230488 34380976  13849512      72% /tmp
+724128	/tmp/agent-build-jpy8qmda
+
+===== features=net,sync target=net_listen =====
+Command: cargo test --locked --jobs 2 --features net\,sync --test net_listen -- --test-threads=1 --nocapture
+   Compiling rhai v1.26.1 (/tmp/agent-build-jpy8qmda/source)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.25s
+     Running tests/net_listen.rs (/tmp/agent-build-jpy8qmda/target/debug/deps/net_listen-f4ef275bbb1f3773)
+
+running 8 tests
+test accepted_stream_uses_the_shared_package_quota_across_engines ... ok
+test authorized_listener_accepts_an_independent_peer ... ok
+test bind_failure_releases_listener_quota ... ok
+test closing_a_clone_unblocks_an_accept_waiting_on_shared_quota ... ok
+test denied_and_invalid_listener_endpoints_never_bind ... ok
+test listener_clones_share_close_and_final_drop_releases_the_bind ... ok
+test no_client_accept_times_out_with_catchable_net_error ... ok
+test quota_retry_deadline_expires_under_a_real_saturated_handle_limit ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.13s
+
+sampled_socket_fd_max=1
+sampled_private_disk_max_bytes=863186944
+EXIT features=net,sync target=net_listen status=0
+Disk after net,sync/net_listen: tmpfs             48230488 34426660  13803828      72% /tmp
+769812	/tmp/agent-build-jpy8qmda
+
+===== features=net,sync target=net_reads =====
+Command: cargo test --locked --jobs 2 --features net\,sync --test net_reads -- --test-threads=1 --nocapture
+   Compiling rhai v1.26.1 (/tmp/agent-build-jpy8qmda/source)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.31s
+     Running tests/net_reads.rs (/tmp/agent-build-jpy8qmda/target/debug/deps/net_reads-c4aa455c9c7bd6b5)
+
+running 8 tests
+test accepted_stream_inherits_host_receive_cap ... ok
+test blob_reads_validate_lengths_return_exact_short_prefix_and_obey_host_cap ... ok
+test closing_a_clone_cancels_an_outstanding_read_and_releases_quota ... ok
+test engine_string_limit_keeps_ascii_and_reports_lossy_expansion_progress ... ok
+test no_data_read_times_out_and_bounded_eof_loop_reports_partial_progress ... ok
+test one_shot_read_returns_an_available_short_prefix_without_waiting_for_more ... ok
+test one_shot_text_read_replaces_a_utf8_character_cut_by_the_available_prefix ... ok
+test stream_read_string_returns_exact_lossy_text_from_peer_bytes ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.24s
+
+sampled_socket_fd_max=3
+sampled_private_disk_max_bytes=909967360
+EXIT features=net,sync target=net_reads status=0
+Disk after net,sync/net_reads: tmpfs             48230488 34472896  13757592      72% /tmp
+816048	/tmp/agent-build-jpy8qmda
+
+===== features=net,sync target=net_writes =====
+Command: cargo test --locked --jobs 2 --features net\,sync --test net_writes -- --test-threads=1 --nocapture
+   Compiling rhai v1.26.1 (/tmp/agent-build-jpy8qmda/source)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:11:24
+   |
+11 | fn read_bounded_to_end(mut stream: &TcpStream, max_bytes: usize) -> Vec<u8> {
+   |                        ----^^^^^^
+   |                        |
+   |                        help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:62:10
+   |
+62 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:83:10
+   |
+83 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:208:10
+    |
+208 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:266:10
+    |
+266 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:285:9
+    |
+285 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:289:9
+    |
+289 |     let mut peer = TcpStream::connect(address.parse::<SocketAddr>().unwrap()).unwrap();
+    |         ----^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:306:9
+    |
+306 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()).max_write_bytes(2));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: unused return value of `rhai::Scope::<'_>::remove` that must be used
+   --> tests/net_writes.rs:245:13
+    |
+245 |             scope.remove::<String>("payload");
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` (part of `#[warn(unused)]`) on by default
+help: use `let _ = ...` to ignore the resulting value
+    |
+245 |             let _ = scope.remove::<String>("payload");
+    |             +++++++
+
+warning: `rhai` (test "net_writes") generated 9 warnings (run `cargo fix --test "net_writes" -p rhai` to apply 8 suggestions)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.27s
+     Running tests/net_writes.rs (/tmp/agent-build-jpy8qmda/target/debug/deps/net_writes-397593deec2510a8)
+
+running 10 tests
+test accepted_stream_inherits_host_write_cap ... ok
+test accepted_stream_writes_are_read_back_by_the_peer ... ok
+test bounded_write_timeout_reports_partial_bytes_matching_peer_readback ... ok
+test engine_string_limit_rejects_write_before_peer_bytes ... ok
+test host_write_cap_rejects_oversize_input_without_peer_bytes ... ok
+test invalid_host_write_bounds_are_rejected ... ok
+test read_half_close_is_idempotent_and_keeps_stream_open_for_close ... ok
+test script_write_blob_preserves_exact_bytes ... ok
+test script_writes_string_and_write_all_report_real_peer_bytes ... ok
+test write_half_close_keeps_the_read_direction_and_is_idempotent ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+sampled_socket_fd_max=0
+sampled_private_disk_max_bytes=957313024
+EXIT features=net,sync target=net_writes status=0
+Disk after net,sync/net_writes: tmpfs             48230488 34518760  13711728      72% /tmp
+861912	/tmp/agent-build-jpy8qmda
+
+===== features=net,no_index target=net_connect =====
+Command: cargo test --locked --jobs 2 --features net\,no_index --test net_connect -- --test-threads=1 --nocapture
+   Compiling rhai v1.26.1 (/tmp/agent-build-jpy8qmda/source)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 4.52s
+     Running tests/net_connect.rs (/tmp/agent-build-jpy8qmda/target/debug/deps/net_connect-a223615efc21a01b)
+
+running 4 tests
+test authorized_connect_is_observed_and_clone_close_is_shared ... ok
+test denied_and_invalid_endpoints_do_not_reach_peer_and_errors_are_catchable ... ok
+test net_config_rejects_zero_deadline_and_invalid_handle_limits ... ok
+test open_handle_limit_is_shared_across_package_engines_and_released_on_close ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+sampled_socket_fd_max=0
+sampled_private_disk_max_bytes=1091825664
+EXIT features=net,no_index target=net_connect status=0
+Disk after net,no_index/net_connect: tmpfs             48230488 34670800  13559688      72% /tmp
+1013952	/tmp/agent-build-jpy8qmda
+
+===== features=net,no_index target=net_listen =====
+Command: cargo test --locked --jobs 2 --features net\,no_index --test net_listen -- --test-threads=1 --nocapture
+   Compiling rhai v1.26.1 (/tmp/agent-build-jpy8qmda/source)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.16s
+     Running tests/net_listen.rs (/tmp/agent-build-jpy8qmda/target/debug/deps/net_listen-b3599bf7945ed2bd)
+
+running 7 tests
+test accepted_stream_uses_the_shared_package_quota_across_engines ... ok
+test authorized_listener_accepts_an_independent_peer ... ok
+test bind_failure_releases_listener_quota ... ok
+test denied_and_invalid_listener_endpoints_never_bind ... ok
+test listener_clones_share_close_and_final_drop_releases_the_bind ... ok
+test no_client_accept_times_out_with_catchable_net_error ... ok
+test quota_retry_deadline_expires_under_a_real_saturated_handle_limit ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.12s
+
+sampled_socket_fd_max=1
+sampled_private_disk_max_bytes=1156845568
+EXIT features=net,no_index target=net_listen status=0
+Disk after net,no_index/net_listen: tmpfs             48230488 34707756  13522732      72% /tmp
+1050908	/tmp/agent-build-jpy8qmda
+
+===== features=net,no_index target=net_reads =====
+Command: cargo test --locked --jobs 2 --features net\,no_index --test net_reads -- --test-threads=1 --nocapture
+   Compiling rhai v1.26.1 (/tmp/agent-build-jpy8qmda/source)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.19s
+     Running tests/net_reads.rs (/tmp/agent-build-jpy8qmda/target/debug/deps/net_reads-33043ca9962cb761)
+
+running 7 tests
+test accepted_stream_inherits_host_receive_cap ... ok
+test engine_string_limit_keeps_ascii_and_reports_lossy_expansion_progress ... ok
+test no_data_read_times_out_and_bounded_eof_loop_reports_partial_progress ... ok
+test no_index_keeps_string_reads_and_omits_blob_methods ... ok
+test one_shot_read_returns_an_available_short_prefix_without_waiting_for_more ... ok
+test one_shot_text_read_replaces_a_utf8_character_cut_by_the_available_prefix ... ok
+test stream_read_string_returns_exact_lossy_text_from_peer_bytes ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.16s
+
+sampled_socket_fd_max=3
+sampled_private_disk_max_bytes=1194688512
+EXIT features=net,no_index target=net_reads status=0
+Disk after net,no_index/net_reads: tmpfs             48230488 34745220  13485268      73% /tmp
+1088372	/tmp/agent-build-jpy8qmda
+
+===== features=net,no_index target=net_writes =====
+Command: cargo test --locked --jobs 2 --features net\,no_index --test net_writes -- --test-threads=1 --nocapture
+   Compiling rhai v1.26.1 (/tmp/agent-build-jpy8qmda/source)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:11:24
+   |
+11 | fn read_bounded_to_end(mut stream: &TcpStream, max_bytes: usize) -> Vec<u8> {
+   |                        ----^^^^^^
+   |                        |
+   |                        help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:62:10
+   |
+62 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:208:10
+    |
+208 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:266:10
+    |
+266 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:285:9
+    |
+285 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:289:9
+    |
+289 |     let mut peer = TcpStream::connect(address.parse::<SocketAddr>().unwrap()).unwrap();
+    |         ----^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:306:9
+    |
+306 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()).max_write_bytes(2));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: unused return value of `rhai::Scope::<'_>::remove` that must be used
+   --> tests/net_writes.rs:245:13
+    |
+245 |             scope.remove::<String>("payload");
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` (part of `#[warn(unused)]`) on by default
+help: use `let _ = ...` to ignore the resulting value
+    |
+245 |             let _ = scope.remove::<String>("payload");
+    |             +++++++
+
+warning: `rhai` (test "net_writes") generated 8 warnings (run `cargo fix --test "net_writes" -p rhai` to apply 7 suggestions)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.26s
+     Running tests/net_writes.rs (/tmp/agent-build-jpy8qmda/target/debug/deps/net_writes-b162edf9f5b0f3d7)
+
+running 10 tests
+test accepted_stream_inherits_host_write_cap ... ok
+test accepted_stream_writes_are_read_back_by_the_peer ... ok
+test bounded_write_timeout_reports_partial_bytes_matching_peer_readback ... ok
+test engine_string_limit_rejects_write_before_peer_bytes ... ok
+test host_write_cap_rejects_oversize_input_without_peer_bytes ... ok
+test invalid_host_write_bounds_are_rejected ... ok
+test no_index_keeps_string_writes_and_omits_blob_writes ... ok
+test read_half_close_is_idempotent_and_keeps_stream_open_for_close ... ok
+test script_writes_string_and_write_all_report_real_peer_bytes ... ok
+test write_half_close_keeps_the_read_direction_and_is_idempotent ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+sampled_socket_fd_max=0
+sampled_private_disk_max_bytes=1233051648
+EXIT features=net,no_index target=net_writes status=0
+Disk after net,no_index/net_writes: tmpfs             48230488 34783732  13446756      73% /tmp
+1126884	/tmp/agent-build-jpy8qmda
+
+===== wrong independent peer-byte expectation =====
+Command: RHAI_NET_WRONG_WRITE_EXPECTATION=1 cargo test --locked --jobs 2 --features net --test net_writes script_write_blob_preserves_exact_bytes -- --exact --test-threads=1 --nocapture
+   Compiling rhai v1.26.1 (/tmp/agent-build-jpy8qmda/source)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:11:24
+   |
+11 | fn read_bounded_to_end(mut stream: &TcpStream, max_bytes: usize) -> Vec<u8> {
+   |                        ----^^^^^^
+   |                        |
+   |                        help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:62:10
+   |
+62 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:83:10
+   |
+83 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:208:10
+    |
+208 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:266:10
+    |
+266 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:285:9
+    |
+285 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:289:9
+    |
+289 |     let mut peer = TcpStream::connect(address.parse::<SocketAddr>().unwrap()).unwrap();
+    |         ----^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:306:9
+    |
+306 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()).max_write_bytes(2));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: unused return value of `rhai::Scope::<'_>::remove` that must be used
+   --> tests/net_writes.rs:245:13
+    |
+245 |             scope.remove::<String>("payload");
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` (part of `#[warn(unused)]`) on by default
+help: use `let _ = ...` to ignore the resulting value
+    |
+245 |             let _ = scope.remove::<String>("payload");
+    |             +++++++
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+warning: `rhai` (test "net_writes") generated 9 warnings (run `cargo fix --test "net_writes" -p rhai` to apply 8 suggestions)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 5.33s
+     Running tests/net_writes.rs (/tmp/agent-build-jpy8qmda/target/debug/deps/net_writes-8848e5e6c59c6d3c)
+
+running 1 test
+test script_write_blob_preserves_exact_bytes ... 
+thread 'script_write_blob_preserves_exact_bytes' (1426478) panicked at tests/net_writes.rs:101:9:
+assertion `left == right` failed
+  left: [0, 255, 65]
+ right: [0, 254, 65]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+FAILED
+
+failures:
+
+failures:
+    script_write_blob_preserves_exact_bytes
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 9 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--test net_writes`
+sampled_socket_fd_max=0
+sampled_private_disk_max_bytes=1272487936
+EXIT wrong_peer_byte_control=101
+Wrong peer-byte control did not fail at the expected actual-peer assertion.

@@ -1,0 +1,13 @@
+EXIT features=net target=net_connect status=0
+EXIT features=net target=net_listen status=0
+EXIT features=net target=net_reads status=0
+EXIT features=net target=net_writes status=0
+EXIT features=net,sync target=net_connect status=0
+EXIT features=net,sync target=net_listen status=0
+EXIT features=net,sync target=net_reads status=0
+EXIT features=net,sync target=net_writes status=0
+EXIT features=net,no_index target=net_connect status=0
+EXIT features=net,no_index target=net_listen status=0
+EXIT features=net,no_index target=net_reads status=0
+EXIT features=net,no_index target=net_writes status=0
+EXIT wrong_peer_byte_control=101
