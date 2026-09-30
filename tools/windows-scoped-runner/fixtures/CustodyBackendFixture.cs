@@ -53,6 +53,12 @@ internal static class CustodyBackendFixture
                 Expect("journal readback retains both flushed records", records.Length == 2 &&
                     records[0].StartsWith("INTENT|", StringComparison.Ordinal) &&
                     records[1] == "UNKNOWN_GAP|allocation-identity-not-recorded");
+                byte[] validBytes = File.ReadAllBytes(journalPath);
+                Expect("journal reader rejects a missing final newline", RejectsJournal(Path.Combine(fixture, "truncated-newline"),
+                    Slice(validBytes, validBytes.Length - 1)));
+                int firstNewline = Array.IndexOf(validBytes, (byte)'\n');
+                Expect("journal reader rejects a truncated record body", RejectsJournal(Path.Combine(fixture, "truncated-body"),
+                    RemoveByte(validBytes, firstNewline - 1)));
                 Expect("journal is outside runtime candidate path", !journalPath.StartsWith(
                     Path.Combine(fixture, "runtime") + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase));
                 File.Delete(journalPath);
@@ -73,5 +79,33 @@ internal static class CustodyBackendFixture
         try { Directory.Delete(path, false); }
         catch (IOException) { Console.Error.WriteLine("retaining nonempty fixture directory: " + path); }
         catch (UnauthorizedAccessException) { Console.Error.WriteLine("retaining inaccessible fixture directory: " + path); }
+    }
+
+    private static bool RejectsJournal(string path, byte[] bytes)
+    {
+        File.WriteAllBytes(path, bytes);
+        try
+        {
+            WindowsCustodyBackend.ReadJournalForFixture(path);
+            return false;
+        }
+        catch (IOException) { return true; }
+        catch (FormatException) { return true; }
+        finally { File.Delete(path); }
+    }
+
+    private static byte[] Slice(byte[] source, int length)
+    {
+        byte[] result = new byte[length];
+        Buffer.BlockCopy(source, 0, result, 0, length);
+        return result;
+    }
+
+    private static byte[] RemoveByte(byte[] source, int index)
+    {
+        byte[] result = new byte[source.Length - 1];
+        Buffer.BlockCopy(source, 0, result, 0, index);
+        Buffer.BlockCopy(source, index + 1, result, index, source.Length - index - 1);
+        return result;
     }
 }

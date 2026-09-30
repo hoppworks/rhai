@@ -14,6 +14,7 @@ internal static class WindowsCustodyBackend
     internal const string AuthorizedRoot = @"C:\RhaiQuality\runs";
     internal const int MaximumRecordBytes = 4096;
     private const int MaximumRecords = 64;
+    private const int MaximumJournalBytes = MaximumRecords * (MaximumRecordBytes + 15);
     private const int MaximumPathLength = 248;
     private const uint FILE_READ_ATTRIBUTES = 0x0080;
     private const uint READ_CONTROL = 0x00020000;
@@ -114,7 +115,7 @@ internal static class WindowsCustodyBackend
 
         internal bool TryAppend(string record)
         {
-            if (disposed || failed || records >= MaximumRecords || record == null) return false;
+            if (disposed || failed || records >= MaximumRecords || record == null || record.Length > MaximumRecordBytes) return false;
             for (int i = 0; i < record.Length; i++) if (record[i] < 0x20 || record[i] > 0x7e) return false;
             byte[] body = Encoding.ASCII.GetBytes(record);
             if (body.Length == 0 || body.Length > MaximumRecordBytes) return false;
@@ -309,19 +310,46 @@ internal static class WindowsCustodyBackend
     internal static string[] ReadJournalForFixture(string path)
     {
         var result = new List<string>();
-        foreach (string line in File.ReadAllLines(path, Encoding.ASCII))
+        if (new FileInfo(path).Length > MaximumJournalBytes) throw new IOException("fixture journal exceeds the fixed byte bound");
+        byte[] file = File.ReadAllBytes(path);
+        if (file.Length > MaximumJournalBytes) throw new IOException("fixture journal exceeds the fixed byte bound");
+        if (file.Length == 0 || file[file.Length - 1] != (byte)'\n')
+            throw new IOException("fixture observed an incomplete final journal frame");
+        int start = 0;
+        for (int i = 0; i < file.Length; i++)
         {
+            if (file[i] == (byte)'\r') throw new IOException("fixture observed a noncanonical journal line ending");
+            if (file[i] != (byte)'\n') continue;
+            int lineLength = i - start;
+            if (lineLength == 0) throw new IOException("fixture observed an empty journal frame");
+            for (int j = start; j < i; j++)
+                if (file[j] < 0x20 || file[j] > 0x7e) throw new IOException("fixture observed non-ASCII journal framing");
+            string line = Encoding.ASCII.GetString(file, start, lineLength);
             int first = line.IndexOf(':'); int second = first < 0 ? -1 : line.IndexOf(':', first + 1);
-            if (first != 4 || second != 13) throw new IOException("fixture observed malformed journal frame");
+            if (first != 4 || second != 13 || !IsUpperHex(line, 0, 4) || !IsUpperHex(line, 5, 8))
+                throw new IOException("fixture observed malformed journal frame");
             string body = line.Substring(second + 1);
+            if (result.Count >= MaximumRecords || body.Length == 0 || body.Length > MaximumRecordBytes)
+                throw new IOException("fixture observed a journal record outside the fixed bounds");
             byte[] bytes = Encoding.ASCII.GetBytes(body);
+            for (int j = 0; j < body.Length; j++)
+                if (body[j] < 0x20 || body[j] > 0x7e) throw new IOException("fixture observed non-ASCII journal body");
             if (bytes.Length != Convert.ToInt32(line.Substring(0, first), 16) || Crc32(bytes) != Convert.ToUInt32(line.Substring(first + 1, 8), 16))
                 throw new IOException("fixture observed corrupt or torn journal record");
             result.Add(body);
+            start = i + 1;
         }
         return result.ToArray();
     }
 #endif
+
+    private static bool IsUpperHex(string value, int start, int length)
+    {
+        if (start < 0 || start + length > value.Length) return false;
+        for (int i = start; i < start + length; i++)
+            if (!((value[i] >= '0' && value[i] <= '9') || (value[i] >= 'A' && value[i] <= 'F'))) return false;
+        return true;
+    }
 
     private static uint Crc32(byte[] bytes)
     {

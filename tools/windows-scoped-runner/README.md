@@ -42,7 +42,8 @@ source history and must not be used.
 
 `fixtures/CustodyBackendFixture.cs` is source-only behavioral coverage for
 directory pin identity, rename exclusion, bounded journal writes, external
-placement and independent journal readback. It has not been compiled or run.
+placement, independent journal readback, and rejection of truncated frames or
+missing final newlines. It has not been compiled or run.
 No compiler, runtime, Windows build command, guest command, or fixture process
 was invoked for this change.
 
