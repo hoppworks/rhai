@@ -69,6 +69,15 @@ Run only the missing `f32_float` full target row in its own fresh scoped runtime
 ## Next action update
 Prepare atomic local commit of test and proof artifacts for root review. No push or merge.
 
+
+## Newly approved release-verifier follow-up (2026-09-30)
+- Owner explicitly approved the combined package described in `/Users/hoppworks/projects/rhai-all-tickets/.scratch/all-tickets/briefs/release-verifier-followup.md`. Actual dispatch 18:53:29 UTC; hard finish 19:23:29 UTC including root review; execution cutoff 19:18:29 UTC. Preserve prior cause/budget totals above; this package gets exactly one invocation, at most 600 seconds, and reserves five minutes for root review.
+- Only the missing native macOS `f32_float` full eight-target row runs in the private runtime. Reuse the unchanged test source from `c2c76a1fac0ed48c5f7bae189c1eb0569ff7d756` and the seven completed profiles plus wrong-value control/restored baseline from the previous incomplete evidence package. No other feature row/control reruns, product changes, public upstream writes, or merge.
+- Harness-only repair: preserve PID/start identity rows from the exact original `ps` snapshots (no second query to recapture sampled PIDs). Whole-runtime `du -sk` may have one immediate bounded rescan only if every diagnostic names a disappeared file beneath this invocation's exact private Cargo target. Record both raw observations; all other first errors and every second error stop. One-second samples remain sampled maxima, not continuous peak enforcement.
+- Use the same private archive, generated/exported lock, Cargo home/target/tmp, jobs=2, debug=0, incremental=0, serial tests, 1.5-GiB sampled guard, 2-GiB hard limit and <=16 owned descendants. Independent post-launch readback must cover exact runtime, process group and all known PID/start identities; missing identities fail proof.
+- The prior package stopped at 18:17:36 UTC with status89 when a transient Cargo-object ENOENT caused the fail-closed sampler to stop; this was an infrastructure measurement failure, not a product assertion failure. Its cleanup readback found runtime/group/launcher/runner absent but finalizer status1 due 81 unavailable distinct sampled PID start identities. Preserve that failure and raw report. This newly approved package is one fresh slot, not a reset of the earlier attempt.
+- Current action: source-only measurement-harness correction and immutable root review. No new invocation until root accepts the gate; first unexpected result, cutoff or cap stops, with no rerun.
+
 ## Retrospective
 The first test compile caught a harness generic-type typo. The first runtime then exposed inherited nonblocking mode on the accepted peer socket; setting it explicitly to blocking made the bounded exchange deterministic. The false-green control verified the independent host readback assertion. The matrix harness did not enforce a storage stop automatically, so it overshot the 2-GiB sampled cap; the invocation was stopped when observed and exact cleanup was checked. The f32 requirement remains open under the hard stop.
 
