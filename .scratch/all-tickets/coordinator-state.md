@@ -67,7 +67,7 @@ Concrete proposal reviewed: additive max_file_read, finite8MiB default, host zer
 means zero returned bytes, checked nonzero Engine cap further lowers it; unchecked
 retains host cap. Per-call cap truncation and UTF-8 behavior need documentation.
 No change to whole-file APIs. Original60-active-minute allocation including review
-starts at actual agent clock around12:53UTC, not a reset of any older cause.
+starts at actual agent clock12:51:28UTC, stopping13:51:28UTC, not a reset of any older cause.
 Whole release remains open.
 
 POSIX further source-only retry is stopped at e0f9f992 in the owned process
@@ -127,7 +127,7 @@ on 2026-09-30; dependent work may resume. No remote writes.
 
 - Owner clarified Linear is legacy; use only the local Markdown tracker for this effort.
 - Strict verification and automatic local integration are already recorded.
-- Private work overrides automatic push. Never publish or modify remote state.
+- Private work overrides automatic push by default. On 2026-09-30 the owner explicitly authorized pushing the integrated task/all-tickets branch to the existing hoppworks/rhai fork in this Session; no merge or other publication is implied.
 - Preserve all foreign worktrees, the existing planning state and Windows baseline.
 - The implementation request supersedes the earlier planning-only mode for accepted
   contracts, but does not answer unresolved API/scope decisions.
@@ -413,3 +413,12 @@ accepted (fs25/policy24). Windows static review defects corrected but native gat
 Owner-authorized process retry design reviewed and rejected before execution;
 custodian amendment 937da3c1 retains an explicit runner boundary. Open owner
 decisions now stop dependent work. No owned build/fixture processes remain.
+
+## Latest Session authorization and skill intake
+
+Owner explicitly requested pushing to the existing fork on 2026-09-30.
+Push only the integrated task/all-tickets branch to origin (hoppworks/rhai);
+unaccepted isolated candidates remain local. Remote merge is not authorized.
+agent-skills local HEAD and remote HEAD both263e430546d899a041c8d781b9024d357ca56530;
+campaign link resolves to that repository. Current bounded-repair reference read;
+original deadlines and cause history remain binding, no installation required.
