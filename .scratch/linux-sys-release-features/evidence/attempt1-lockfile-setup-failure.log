@@ -1,0 +1,72 @@
+Source revision: e1db9baafaaf30d94085f0cc6f661f363399f193
+Source archive SHA256: af104355b6bf2efccaeb9aa0fbb26e64580a9524c8a436af4238429df435bd1e  /root/rhai-linux-sys-release-features-task/e1db9baa/source.tar
+Runtime directory: /tmp/agent-build-syldwlya
+Runtime owner launcher PID: 1889685
+Linux workhorse 7.2.4-ogc3.1.fc44.x86_64 #1 SMP PREEMPT_DYNAMIC Sun Sep 13 01:41:06 UTC 2026 x86_64 GNU/Linux
+NAME="Bazzite"
+VERSION="44.20260921.0 (Kinoite)"
+RELEASE_TYPE=stable
+ID=bazzite
+ID_LIKE="fedora"
+VERSION_ID=44
+VERSION_CODENAME="Kinoite"
+PRETTY_NAME="Bazzite"
+ANSI_COLOR="0;38;2;138;43;226"
+LOGO=bazzite-logo
+CPE_NAME="cpe:/o:universal-blue:bazzite:44"
+DEFAULT_HOSTNAME="bazzite"
+HOME_URL="https://bazzite.gg"
+DOCUMENTATION_URL="https://docs.bazzite.gg"
+SUPPORT_URL="https://discord.bazzite.gg"
+BUG_REPORT_URL="https://github.com/ublue-os/bazzite/issues/"
+SUPPORT_END=2027-05-19
+VARIANT="Kinoite"
+VARIANT_ID=bazzite-nvidia-open
+OSTREE_VERSION='44.20260921.0'
+BUILD_ID="Stable (F44.20260921)"
+BOOTLOADER_NAME="Bazzite Stable (F44.20260921)"
+IMAGE_ID="bazzite-nvidia-open-44.20260921"
+rustc 1.97.1 (8bab26f4f 2026-07-14)
+binary: rustc
+commit-hash: 8bab26f4f68e0e26f0bb7960be334d5b520ea452
+commit-date: 2026-07-14
+host: x86_64-unknown-linux-gnu
+release: 1.97.1
+LLVM version: 22.1.6
+cargo 1.97.1 (c980f4866 2026-06-30)
+release: 1.97.1
+commit-hash: c980f4866141969fab6254a680546a277789d6f0
+commit-date: 2026-06-30
+host: x86_64-unknown-linux-gnu
+libgit2: 1.9.2 (sys:0.20.4 vendored)
+libcurl: 8.20.0-DEV (sys:0.4.88+curl-8.20.0 vendored ssl:OpenSSL/3.6.2)
+ssl: OpenSSL 3.6.2 7 Apr 2026
+os: Fedora 44.0.0 [64-bit]
+
+Cargo uses --jobs 2 and each test binary uses --test-threads=1.
+Targets are run one at a time.
+
+Disk before extraction/build:
+Filesystem     1024-blocks       Used Available Capacity Mounted on
+/dev/nvme0n1p3  1950801920 1607799164 291982852      85% /var
+tmpfs             48230488   33660828  14569660      70% /tmp
+
+===== generate isolated lockfile =====
+Command: cargo generate-lockfile
+error: failed to load manifest for workspace member `/tmp/agent-build-syldwlya/source/.`
+referenced by workspace at `/tmp/agent-build-syldwlya/source/Cargo.toml`
+
+Caused by:
+  failed to load manifest for dependency `rhai_codegen`
+
+Caused by:
+  failed to read `/tmp/agent-build-syldwlya/source/codegen/Cargo.toml`
+
+Caused by:
+  No such file or directory (os error 2)
+sampled_process_count_max=0
+sampled_private_disk_max_bytes=0
+one_second_samples=0
+preempted_reason=none
+EXIT lockfile_resolution=101
+Private lockfile generation failed.

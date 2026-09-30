@@ -1,0 +1,14 @@
+Remote invocation command:
+  cd /root/rhai-linux-sys-release-features-task/e1db9baa
+  export PROOF_STAGE=/root/rhai-linux-sys-release-features-task/e1db9baa
+  export SOURCE_REVISION=e1db9baafaaf30d94085f0cc6f661f363399f193
+  exec python3 "$PROOF_STAGE/run_scoped.py" --timeout 900 -- bash "$PROOF_STAGE/run-native.sh"
+
+Observed output:
+===== generate isolated lockfile =====
+Command: cargo generate-lockfile
+EXIT lockfile_resolution=101
+Private lockfile generation failed.
+
+SSH invocation exit status: 1
+No feature-matrix target or file-read assertion control was launched.
