@@ -43,8 +43,16 @@ XML parsing and libvirt schema validation do not validate Windows answer-file se
 
 SSH access, host KVM/UEFI/TPM support, resource availability and libvirt domain
 schema were checked live. The domain is defined; its sparse disk and seed ISO are
-created. Windows installation and guest readiness remain pending until explicitly
-recorded below. Rust/MSVC toolchains and native Rhai tests are not installed or run.
+created. The official Pro ISO downloaded completely and matched Microsoft's published
+SHA-256. The serial startup failure was diagnosed and fixed by using a PTY with
+logging under `/var/log/libvirt/qemu/rhai-win11-quality-serial0.log`, the existing
+libvirt log directory. SELinux remains enforcing; no shared service was restarted.
+Diagnosis: ../escalations/01-vm-serial-start.answer.md.
+The VM started and Windows Setup is installing. The product-key screen was skipped
+using its built-in "I don't have a product key" option. Guest readiness is pending.
+The specialize-pass serial marker proves the installed edition/build, not completed
+OOBE or desktop readiness; verify those separately through the console.
+Rust/MSVC toolchains and native Rhai tests are not installed or run.
 
 ## Read-back and resume
 

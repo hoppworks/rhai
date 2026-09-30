@@ -52,8 +52,10 @@ SSH works; KVM/QEMU/libvirt/UEFI/TPM are present. Created the owned domain
 `rhai-win11-quality` (4 vCPUs, 8 GiB, sparse 100 GiB disk) and seed ISO under
 `/var/lib/libvirt/images/rhai-win11-quality`. The owner reports a Windows Pro license. The Enterprise Evaluation download was
 stopped; official multi-edition retail media is downloading for Pro installation.
-Verify the published SHA-256 before boot. Installation and native
-Windows readiness are not yet verified. Details: windows-vm/README.md.
+The published SHA-256 matched the downloaded ISO. The serial-file failure was diagnosed and resolved using PTY plus the canonical
+libvirt log directory, keeping SELinux enforcing. The VM is running and Windows
+Setup is installing. Guest readiness remains unverified. Diagnosis:
+escalations/01-vm-serial-start.answer.md. Details: windows-vm/README.md.
 No existing workloads were stopped, and no host tools were installed.
 
 ## Next action

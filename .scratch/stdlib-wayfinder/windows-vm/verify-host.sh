@@ -7,6 +7,6 @@ printf '%s  %s\n' "$expected" "$root/windows11-pro.iso" | sha256sum --check
 virsh -c qemu:///system dominfo rhai-win11-quality
 virsh -c qemu:///system domblklist rhai-win11-quality
 virsh -c qemu:///system dumpxml rhai-win11-quality
-if [[ -f "$root/serial.log" ]]; then
-  tail -n 20 "$root/serial.log"
+if [[ -f /var/log/libvirt/qemu/rhai-win11-quality-serial0.log ]]; then
+  tail -n 20 /var/log/libvirt/qemu/rhai-win11-quality-serial0.log
 fi

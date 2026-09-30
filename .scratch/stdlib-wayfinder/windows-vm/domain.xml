@@ -19,7 +19,7 @@
     <disk type="file" device="cdrom"><driver name="qemu" type="raw"/><source file="/var/lib/libvirt/images/rhai-win11-quality/windows11-pro.iso"/><target dev="sdb" bus="sata"/><readonly/><boot order="1"/></disk>
     <disk type="file" device="cdrom"><driver name="qemu" type="raw"/><source file="/var/lib/libvirt/images/rhai-win11-quality/seed.iso"/><target dev="sdc" bus="sata"/><readonly/></disk>
     <interface type="network"><source network="default"/><model type="e1000e"/></interface>
-    <serial type="file"><source path="/var/lib/libvirt/images/rhai-win11-quality/serial.log"/><target type="isa-serial" port="0"/></serial>
+    <serial type="pty"><log file="/var/log/libvirt/qemu/rhai-win11-quality-serial0.log" append="on"/><target type="isa-serial" port="0"/></serial>
     <input type="tablet" bus="usb"/><controller type="usb" model="qemu-xhci"/>
     <graphics type="vnc" autoport="yes" listen="127.0.0.1"><listen type="address" address="127.0.0.1"/></graphics>
     <video><model type="vga" vram="16384" heads="1" primary="yes"/></video>
