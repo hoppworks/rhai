@@ -1,0 +1,32 @@
+   Compiling rhai v1.26.1 (/Users/hoppworks/projects/rhai-tcp-stream-writes)
+   Compiling rhai_codegen v3.2.0 (/Users/hoppworks/projects/rhai-tcp-stream-writes/codegen)
+error[E0596]: cannot borrow `peer` as mutable, as it is not declared as mutable
+   --> src/packages/net/stream.rs:843:18
+    |
+843 |             let (peer, _) = loop {
+    |                  ^^^^ not mutable
+...
+857 |             peer.write_all(b"a").unwrap();
+    |             ---- cannot borrow as mutable
+...
+862 |                 peer.read(&mut byte).unwrap(),
+    |                 ---- cannot borrow as mutable
+    |
+help: consider changing this to be mutable
+    |
+843 |             let (mut peer, _) = loop {
+    |                  +++
+
+warning: variable does not need to be mutable
+   --> src/packages/net/stream.rs:953:18
+    |
+953 |             let (mut peer, _) = loop {
+    |                  ----^^^^
+    |                  |
+    |                  help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+For more information about this error, try `rustc --explain E0596`.
+warning: `rhai` (lib test) generated 1 warning
+error: could not compile `rhai` (lib test) due to 1 previous error; 1 warning emitted

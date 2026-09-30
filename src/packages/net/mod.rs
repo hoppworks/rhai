@@ -21,6 +21,7 @@ pub use listener::NetListener;
 pub use stream::NetStream;
 
 pub(super) const MAX_READ_BYTES: usize = 1024 * 1024;
+pub(super) const MAX_WRITE_BYTES: usize = 1024 * 1024;
 
 use crate::packages::Package;
 use crate::{FuncRegistration, Module, Shared, SharedModule};
@@ -74,11 +75,29 @@ impl NetPackage {
                 "read timeout must be finite, positive, and representable",
             ));
         }
+        if config.write_timeout.is_zero()
+            || std::time::Instant::now()
+                .checked_add(config.write_timeout)
+                .is_none()
+        {
+            return Err(NetError::invalid(
+                "configure write timeout",
+                format!("{:?}", config.write_timeout),
+                "write timeout must be finite, positive, and representable",
+            ));
+        }
         if config.max_read_bytes == 0 || config.max_read_bytes > MAX_READ_BYTES {
             return Err(NetError::invalid(
                 "configure read limit",
                 config.max_read_bytes.to_string(),
                 "read limit must be between 1 and 1048576 bytes",
+            ));
+        }
+        if config.max_write_bytes == 0 || config.max_write_bytes > MAX_WRITE_BYTES {
+            return Err(NetError::invalid(
+                "configure write limit",
+                config.max_write_bytes.to_string(),
+                "write limit must be between 1 and 1048576 bytes",
             ));
         }
         if config.max_handles == 0 || config.max_handles > 64 {
@@ -175,6 +194,8 @@ fn connect(
         state.open_handles.clone(),
         state.config.read_timeout,
         state.config.max_read_bytes,
+        state.config.write_timeout,
+        state.config.max_write_bytes,
     ))
 }
 

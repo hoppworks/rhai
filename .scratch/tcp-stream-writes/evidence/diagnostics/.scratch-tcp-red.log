@@ -1,0 +1,201 @@
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+     Locking 130 packages to latest compatible versions
+      Adding getrandom v0.3.4 (available: v0.4.3)
+      Adding hashbrown v0.16.1 (available: v0.17.1)
+      Adding syn v2.0.119 (available: v3.0.6)
+ Downloading crates ...
+  Downloaded const-random-macro v0.1.16
+  Downloaded const-random v0.1.18
+  Downloaded ahash v0.8.12
+  Downloaded version_check v0.9.5
+  Downloaded crunchy v0.2.4
+  Downloaded cfg-if v1.0.5
+  Downloaded smartstring v1.0.1
+  Downloaded itoa v1.0.18
+  Downloaded autocfg v1.5.1
+  Downloaded tiny-keccak v2.0.2
+  Downloaded static_assertions v1.1.0
+  Downloaded getrandom v0.2.17
+  Downloaded zmij v1.0.23
+  Downloaded thin-vec v0.2.20
+  Downloaded once_cell v1.21.4
+  Downloaded rmp-serde v1.3.1
+  Downloaded serde_core v1.0.229
+  Downloaded serde v1.0.229
+  Downloaded proc-macro2 v1.0.107
+  Downloaded memchr v2.8.3
+  Downloaded getrandom v0.3.4
+  Downloaded bitflags v2.13.2
+  Downloaded serde_json v1.0.151
+  Downloaded num-traits v0.2.19
+  Downloaded portable-atomic v1.15.0
+  Downloaded unicode-ident v1.0.26
+  Downloaded smallvec v1.16.2
+  Downloaded syn v2.0.119
+  Downloaded zerocopy v0.8.59
+  Downloaded rmp v0.8.15
+  Downloaded quote v1.0.47
+  Downloaded libc v0.2.189
+ Downloading crates ...
+  Downloaded web-time v1.1.0
+   Compiling autocfg v1.5.1
+   Compiling libc v0.2.189
+   Compiling crunchy v0.2.4
+   Compiling version_check v0.9.5
+   Compiling tiny-keccak v2.0.2
+   Compiling cfg-if v1.0.5
+   Compiling proc-macro2 v1.0.107
+   Compiling num-traits v0.2.19
+   Compiling unicode-ident v1.0.26
+   Compiling portable-atomic v1.15.0
+   Compiling quote v1.0.47
+   Compiling getrandom v0.2.17
+   Compiling serde_core v1.0.229
+   Compiling once_cell v1.21.4
+   Compiling zerocopy v0.8.59
+   Compiling getrandom v0.3.4
+   Compiling const-random-macro v0.1.16
+   Compiling ahash v0.8.12
+   Compiling smartstring v1.0.1
+   Compiling syn v2.0.119
+   Compiling const-random v0.1.18
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqeh67ny/source/repo)
+   Compiling serde v1.0.229
+   Compiling zmij v1.0.23
+   Compiling static_assertions v1.1.0
+   Compiling rhai_codegen v3.2.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqeh67ny/source/repo/codegen)
+   Compiling thin-vec v0.2.20
+   Compiling smallvec v1.16.2
+   Compiling bitflags v2.13.2
+   Compiling serde_json v1.0.151
+   Compiling rmp v0.8.15
+   Compiling itoa v1.0.18
+   Compiling memchr v2.8.3
+   Compiling rmp-serde v1.3.1
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `std::sync::mpsc`
+ --> tests/net_writes.rs:8:5
+  |
+8 | use std::sync::mpsc;
+  |     ^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+error[E0308]: mismatched types
+  --> tests/net_writes.rs:55:13
+   |
+55 |             bytes
+   |             ^^^^^ expected `()`, found `Vec<u8>`
+   |
+   = note: expected unit type `()`
+                 found struct `Vec<u8>`
+
+error[E0308]: mismatched types
+  --> tests/net_writes.rs:68:24
+   |
+68 |     assert_eq!(counts, (5, 6));
+   |                        ^^^^^^ expected `i64`, found `({integer}, {integer})`
+   |
+   = note: expected type `i64`
+             found tuple `({integer}, {integer})`
+
+error[E0308]: mismatched types
+  --> tests/net_writes.rs:69:26
+   |
+69 |     assert_eq!(received, b"hello world");
+   |                          ^^^^^^^^^^^^^^ expected `i64`, found `&[u8; 11]`
+
+error[E0308]: mismatched types
+  --> tests/net_writes.rs:80:13
+   |
+80 |             bytes
+   |             ^^^^^ expected `()`, found `Vec<u8>`
+   |
+   = note: expected unit type `()`
+                 found struct `Vec<u8>`
+
+error[E0308]: mismatched types
+  --> tests/net_writes.rs:75:9
+   |
+75 |       let (count, received) = connected(
+   |  _________^^^^^^^^^^^^^^^^^___-
+   | |         |
+   | |         expected `i64`, found `(_, _)`
+76 | |         NetConfig::default(),
+77 | |         |mut peer| {
+78 | |             let mut bytes = Vec::new();
+...  |
+90 | |         },
+91 | |     );
+   | |_____- this expression has type `i64`
+   |
+   = note: expected type `i64`
+             found tuple `(_, _)`
+
+error[E0599]: no method named `write_timeout` found for struct `NetConfig` in the current scope
+  --> tests/net_writes.rs:99:30
+   |
+99 |         NetConfig::default().write_timeout(Duration::from_millis(50)),
+   |                              ^^^^^^^^^^^^^
+   |
+help: there is a method `read_timeout` with a similar name
+   |
+99 -         NetConfig::default().write_timeout(Duration::from_millis(50)),
+99 +         NetConfig::default().read_timeout(Duration::from_millis(50)),
+   |
+
+error[E0308]: mismatched types
+   --> tests/net_writes.rs:103:13
+    |
+103 |             bytes
+    |             ^^^^^ expected `()`, found `Vec<u8>`
+    |
+    = note: expected unit type `()`
+                  found struct `Vec<u8>`
+
+error[E0610]: `bool` is a primitive type and therefore doesn't have fields
+   --> tests/net_writes.rs:118:20
+    |
+118 |     assert!(result.0);
+    |                    ^
+
+error[E0610]: `bool` is a primitive type and therefore doesn't have fields
+   --> tests/net_writes.rs:119:23
+    |
+119 |     assert_eq!(result.1, "");
+    |                       ^
+
+error[E0277]: can't compare `String` with `&[u8; 0]`
+   --> tests/net_writes.rs:120:5
+    |
+120 |     assert_eq!(peer_bytes, b"");
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^ no implementation for `String == &[u8; 0]`
+    |
+    = help: the trait `PartialEq<&[u8; 0]>` is not implemented for `String`
+    = help: the following other types implement trait `PartialEq<Rhs>`:
+              `&String` implements `PartialEq<ImmutableString>`
+              `String` implements `PartialEq<&ImmutableString>`
+              `String` implements `PartialEq<&str>`
+              `String` implements `PartialEq<ByteStr>`
+              `String` implements `PartialEq<ByteString>`
+              `String` implements `PartialEq<Cow<'_, str>>`
+              `String` implements `PartialEq<ImmutableString>`
+              `String` implements `PartialEq<Path>`
+            and 4 others
+    = note: this error originates in the macro `assert_eq` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+Some errors have detailed explanations: E0277, E0308, E0599, E0610.
+For more information about an error, try `rustc --explain E0277`.
+warning: `rhai` (test "net_writes") generated 1 warning
+error: could not compile `rhai` (test "net_writes") due to 10 previous errors; 1 warning emitted
+warning: build failed, waiting for other jobs to finish...
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)

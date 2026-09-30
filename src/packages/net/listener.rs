@@ -20,6 +20,8 @@ struct SharedListenerState {
     accept_timeout: Duration,
     read_timeout: Duration,
     max_read_bytes: usize,
+    write_timeout: Duration,
+    max_write_bytes: usize,
     address: SocketAddr,
 }
 
@@ -127,6 +129,8 @@ impl NetListener {
                         self.0.open_handles.clone(),
                         self.0.read_timeout,
                         self.0.max_read_bytes,
+                        self.0.write_timeout,
+                        self.0.max_write_bytes,
                     ));
                 }
                 Err(error) if error.kind() == io::ErrorKind::WouldBlock => {
@@ -191,6 +195,8 @@ pub(super) fn listen(
         accept_timeout: state.config.accept_timeout,
         read_timeout: state.config.read_timeout,
         max_read_bytes: state.config.max_read_bytes,
+        write_timeout: state.config.write_timeout,
+        max_write_bytes: state.config.max_write_bytes,
         address,
     })))
 }

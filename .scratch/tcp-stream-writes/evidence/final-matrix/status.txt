@@ -1,0 +1,7 @@
+net=0
+sync=0
+no-index=0
+unchecked=0
+metadata=0
+wrong-control=101
+bundle-exit=1

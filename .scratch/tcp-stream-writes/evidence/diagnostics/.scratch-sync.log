@@ -1,0 +1,27 @@
+ Downloading crates ...
+  Downloaded spin v0.7.2
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-8f7sw7wx/source/repo)
+   Compiling rhai_codegen v3.2.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-8f7sw7wx/source/repo/codegen)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 7.16s
+     Running unittests src/lib.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-8f7sw7wx/target/debug/deps/rhai-436bb671884a1513)
+
+running 1 test
+
+thread '<unnamed>' (51781614) panicked at src/packages/net/stream.rs:931:13:
+assertion `left == right` failed: shared close shuts down peer write side
+  left: 1
+ right: 0
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread 'packages::net::stream::tests::clone_close_cancels_a_write_after_socket_would_block' (51781613) panicked at src/packages/net/stream.rs:1010:21:
+called `Result::unwrap()` on an `Err` value: Any { .. }
+test packages::net::stream::tests::clone_close_cancels_a_write_after_socket_would_block ... FAILED
+
+failures:
+
+failures:
+    packages::net::stream::tests::clone_close_cancels_a_write_after_socket_would_block
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.01s
+
+error: test failed, to rerun pass `--lib`

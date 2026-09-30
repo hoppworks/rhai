@@ -1,0 +1,15 @@
+Cleanup readback — 2026-09-30 14:48 UTC
+
+Scoped runtime paths were checked after their commands returned. Every path below was absent:
+
+- final-matrix: /var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-9l4yb84l
+- actual-WouldBlock single sync test: /var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-qzcqt8ny
+- corrected no-index plus failed combined sync diagnostic: /var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-8hglecvq
+- serial two-test sync diagnostic: /var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-i0j1g4qq
+- bounded saturation final sync proof: /var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-3ka93iem
+
+The no-index source-copy run and later fixture diagnostics retain their exact runtime paths in their `runtime-paths.txt` files. The assertion-control runs are also within completed scoped invocations; see the associated command logs.
+
+One failed diagnostic run at 14:42 UTC used the owned checkout as Cargo's source and left ignored `Cargo.lock` and `target/` paths with modification times 2026-09-30 16:42 Europe/Berlin. Current observed sizes: `target/` 457 MiB; `Cargo.lock` 30,522 bytes. The exact rejected command was `mkdir -p .scratch/tcp-stream-writes/evidence/diagnostics && mv [14 exact root diagnostic logs] .scratch/tcp-stream-writes/evidence/diagnostics/ && rm -rf -- target Cargo.lock`; the tool rejected it before execution with: `rm -f style commands are not permitted. Use a safer approach`. The preceding `mkdir` and `mv` were then run separately and succeeded. The generated paths remain present; no alternate deletion mechanism was used. The successful accepted proofs all used scoped private source, target, and Cargo home paths.
+
+Peak disk use was not measured. Scoped-run limits were 900 seconds and 2 GiB per invocation; accepted builds set `CARGO_BUILD_JOBS=2`. Temporary peer data was confined to ephemeral loopback sockets and finite joined fixture threads.
