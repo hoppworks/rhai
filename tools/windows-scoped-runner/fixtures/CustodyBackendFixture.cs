@@ -142,7 +142,7 @@ internal static class CustodyBackendFixture
             successRecords[1].Contains(successRuntimeIdentity.FileId.ToString("N")) &&
             successRecords[1].Contains(successEvidenceIdentity.FileId.ToString("N")) &&
             successRecords[1].Contains(successJournalIdentity.FileId.ToString("N")));
-        File.Delete(successJournal);
+        RetainPair("successful allocation", successPath, successJournal);
         // Runtime directories are retained: this fixture does not claim a
         // handle-safe removal operation, which belongs to a later backend step.
 
@@ -172,9 +172,8 @@ internal static class CustodyBackendFixture
         string[] collisionRecords = WindowsCustodyBackend.ReadJournalForFixture(collisionJournal);
         Expect("collision journal retains intent without a false identity", collisionRecords.Length == 1 &&
             collisionRecords[0].StartsWith("INTENT|", StringComparison.Ordinal));
-        File.Delete(firstJournal);
-        File.Delete(collisionJournal);
-        // Retain the exact collision owner directory and marker for inspection.
+        RetainPair("collision owner", collisionPath, firstJournal);
+        RetainPair("collision attempt", collisionPath, collisionJournal);
 
         string partialRoot = Path.Combine(fixture, "allocation-partial");
         Directory.CreateDirectory(partialRoot);
@@ -193,8 +192,14 @@ internal static class CustodyBackendFixture
         string[] partialRecords = WindowsCustodyBackend.ReadJournalForFixture(partialJournal);
         Expect("uncertain allocation journal contains intent but no identity receipt", partialRecords.Length == 1 &&
             partialRecords[0].StartsWith("INTENT|", StringComparison.Ordinal));
-        File.Delete(partialJournal);
+        RetainPair("uncertain partial allocation", partialPath, partialJournal);
         // Retain this uncertain directory; identity observation alone does not
         // authorize path-based cleanup or prove safe disposition semantics.
+    }
+
+    private static void RetainPair(string label, string runtimePath, string journalPath)
+    {
+        Console.WriteLine("RETAINED " + label + " runtime=" + runtimePath);
+        Console.WriteLine("RETAINED " + label + " journal=" + journalPath);
     }
 }

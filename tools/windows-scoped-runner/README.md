@@ -50,9 +50,11 @@ placement, independent journal readback, and rejection of truncated frames or
 missing final newlines. It also describes allocation transitions, including
 intent-before-create, collision refusal, ACL and identity verification, ordered
 identity journaling, and retained post-create uncertainty. The fixture has not
-been compiled or run. It deliberately retains runtime directories because this
-slice has no handle-safe runtime disposition; it does not present path-based
-checks followed by deletion as safe cleanup.
+been compiled or run. It deliberately retains every allocation fixture runtime
+and its associated journal, including the uncertain post-create case, and
+prints each exact runtime/journal path pair. This slice has no handle-safe
+runtime disposition; the fixture does not present path-based checks followed
+by deletion as safe cleanup.
 No compiler, runtime, Windows build command, guest command, or fixture process
 was invoked for this change.
 
