@@ -276,6 +276,86 @@ fn test_unrestricted_symlink_then_parent_uses_host_resolution() {
     assert!(!t.path().join("lexical/allowed/created.txt").exists());
 }
 
+// Unrestricted relative paths should use std::fs directly, even when the process cwd no
+// longer has a name. Resolving cwd first adds a precondition host operations do not have.
+#[cfg(unix)]
+#[test]
+fn test_unrestricted_relative_paths_after_cwd_is_unlinked() {
+    use std::io::{Read, Write};
+    use std::process::{Command, Stdio};
+    use std::time::{Duration, Instant};
+
+    const CHILD: &str = "RHAI_SYS_UNLINKED_CWD_CHILD";
+    const READY_ENV: &str = "RHAI_SYS_UNLINKED_CWD_READY";
+    const WAIT_LIMIT: Duration = Duration::from_secs(5);
+
+    if std::env::var_os(CHILD).is_some() {
+        let e = engine(SysConfig::permissive());
+        let ready = std::env::var_os(READY_ENV).expect("parent supplies the ready marker path");
+        std::fs::write(ready, b"").unwrap();
+        let mut release = [0];
+        std::io::stdin().read_exact(&mut release).unwrap();
+
+        let host = std::fs::metadata(".").expect("std::fs should resolve current directory handle");
+        assert!(host.is_dir());
+        assert!(e.eval::<bool>(r#"exists(".")"#).unwrap());
+        assert!(e.eval::<bool>(r#"is_dir(".")"#).unwrap());
+        return;
+    }
+
+    let t = TempDir::new();
+    let ready = t.path().with_extension("ready");
+    let mut child = Command::new(std::env::current_exe().unwrap())
+        .args(["--exact", "test_unrestricted_relative_paths_after_cwd_is_unlinked", "--nocapture"])
+        .env(CHILD, "1")
+        .env(READY_ENV, &ready)
+        .current_dir(t.path())
+        .stdin(Stdio::piped())
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped())
+        .spawn()
+        .unwrap();
+
+    let start = Instant::now();
+    while !ready.exists() {
+        if start.elapsed() >= WAIT_LIMIT {
+            let _ = child.kill();
+            let _ = child.wait();
+            panic!("unlinked-cwd child did not become ready");
+        }
+        std::thread::sleep(Duration::from_millis(10));
+    }
+
+    std::fs::remove_file(&ready).unwrap();
+    if let Err(err) = std::fs::remove_dir(t.path()) {
+        let _ = child.kill();
+        let _ = child.wait();
+        panic!("could not unlink owned cwd fixture: {err}");
+    }
+    if let Err(err) = child.stdin.take().unwrap().write_all(&[1]) {
+        let _ = child.kill();
+        let _ = child.wait();
+        panic!("could not release unlinked-cwd child: {err}");
+    }
+
+    let start = Instant::now();
+    loop {
+        match child.try_wait().unwrap() {
+            Some(status) => {
+                let output = child.wait_with_output().unwrap();
+                assert!(status.success(), "child failed: {}", String::from_utf8_lossy(&output.stderr));
+                break;
+            }
+            None if start.elapsed() < WAIT_LIMIT => std::thread::sleep(Duration::from_millis(10)),
+            None => {
+                let _ = child.kill();
+                let _ = child.wait();
+                panic!("unlinked-cwd child did not finish before deadline");
+            }
+        }
+    }
+}
+
 // Operations on the wrong kind of entry fail with an I/O error, not a panic.
 #[test]
 fn test_wrong_entry_kind() {

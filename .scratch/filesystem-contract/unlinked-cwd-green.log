@@ -1,0 +1,30 @@
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-vfi03nxm/source)
+warning: variant `Owned` is never constructed
+   --> src/packages/sys/fs.rs:102:5
+    |
+100 | enum DirRef<'a> {
+    |      ------ variant in this enum
+101 |     Borrowed(&'a Dir),
+102 |     Owned(Dir),
+    |     ^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 5.67s
+     Running tests/sys_fs.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-vfi03nxm/target/debug/deps/sys_fs-b48cef92015bb960)
+
+running 1 test
+test test_unrestricted_relative_paths_after_cwd_is_unlinked ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 23 filtered out; finished in 0.02s
+

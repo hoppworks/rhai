@@ -16,7 +16,6 @@ use crate::{Dynamic, EvalAltResult, Map, Module, Shared, INT};
 use cap_std::ambient_authority;
 use cap_std::fs::{Dir, OpenOptions};
 use std::io::{self, Write};
-use std::ops::Deref;
 use std::path::{Component, Path, PathBuf};
 
 type Res<T> = Result<T, Box<EvalAltResult>>;
@@ -96,30 +95,25 @@ impl Need {
     }
 }
 
-/// A directory handle that is either borrowed from a root or opened ad hoc.
-enum DirRef<'a> {
-    Borrowed(&'a Dir),
-    Owned(Dir),
-}
-
-impl Deref for DirRef<'_> {
-    type Target = Dir;
-    fn deref(&self) -> &Dir {
-        match self {
-            Self::Borrowed(d) => d,
-            Self::Owned(d) => d,
-        }
-    }
-}
-
-/// A script path resolved to a directory handle plus a relative path inside it.
+/// A script path resolved either to a host path or to a path inside a configured root.
 struct Resolved<'a> {
-    dir: DirRef<'a>,
+    /// Present only for configured, capability-confined roots. Unrestricted operations use
+    /// `host_path` directly and must not acquire an unrelated ambient directory handle.
+    dir: Option<&'a Dir>,
     rel: PathBuf,
     /// Original OS path in unrestricted mode; those operations must follow host semantics.
     host_path: Option<PathBuf>,
     /// Index of the root, or `usize::MAX` in unrestricted mode.
     root: usize,
+}
+
+impl Resolved<'_> {
+    /// Get the directory authority for a configured-root operation.
+    fn dir(&self) -> &Dir {
+        self.dir
+            .as_ref()
+            .expect("confined filesystem path has a root directory")
+    }
 }
 
 /// Turn a Windows verbatim path (`\\?\C:\dir`) back into its ordinary spelling (`C:\dir`),
@@ -204,24 +198,12 @@ impl FsState {
                         need.describe()
                     )));
                 }
-                let abs = if p.is_absolute() {
-                    p.to_path_buf()
-                } else {
-                    std::env::current_dir()
-                        .map_err(|e| SysError::io("get current directory", ".", &e))?
-                        .join(p)
-                };
-                // Host operations use this original path directly. Lexical folding across a
-                // symlink changes the selected path, so keep a harmless ambient anchor only
-                // to share the resolved-path representation.
-                let anchor = abs.ancestors().last().unwrap_or(Path::new("/"));
-                let dir = Dir::open_ambient_dir(anchor, ambient_authority()).map_err(|e| {
-                    SysError::io("open directory", anchor.display().to_string(), &e)
-                })?;
                 Ok(Resolved {
-                    dir: DirRef::Owned(dir),
+                    dir: None,
                     rel: PathBuf::from("."),
-                    host_path: Some(abs),
+                    // `std::fs` accepts relative paths directly. Do not require resolving cwd
+                    // merely to route an unrestricted operation through its host path.
+                    host_path: Some(p.to_path_buf()),
                     root: usize::MAX,
                 })
             }
@@ -279,7 +261,7 @@ impl FsState {
                 };
 
                 Ok(Resolved {
-                    dir: DirRef::Borrowed(&root.dir),
+                    dir: Some(&root.dir),
                     rel,
                     host_path: None,
                     root: ix,
@@ -335,7 +317,7 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
             let r = state.fs.resolve(path, Need::Read)?;
             let bytes = match &r.host_path {
                 Some(path) => std::fs::read(path),
-                None => r.dir.read(&r.rel),
+                None => r.dir().read(&r.rel),
             }
             .map_err(|e| map_io("read file", path, &e))?;
             Ok(String::from_utf8_lossy(&bytes).into_owned())
@@ -352,7 +334,7 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
             let r = state.fs.resolve(path, Need::Read)?;
             match &r.host_path {
                 Some(path) => std::fs::read(path),
-                None => r.dir.read(&r.rel),
+                None => r.dir().read(&r.rel),
             }
             .map_err(|e| map_io("read file", path, &e).into())
         }
@@ -377,7 +359,7 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
             let r = state.fs.resolve(path, Need::Write)?;
             match &r.host_path {
                 Some(path) => std::fs::write(path, data.as_bytes()),
-                None => r.dir.write(&r.rel, data.as_bytes()),
+                None => r.dir().write(&r.rel, data.as_bytes()),
             }
             .map_err(|e| map_io("write file", path, &e).into())
         }
@@ -393,7 +375,7 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
             let r = state.fs.resolve(path, Need::Write)?;
             match &r.host_path {
                 Some(path) => std::fs::write(path, &data),
-                None => r.dir.write(&r.rel, &data),
+                None => r.dir().write(&r.rel, &data),
             }
             .map_err(|e| map_io("write file", path, &e).into())
         }
@@ -480,8 +462,8 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
                     (m.len(), m.is_file(), m.is_dir(), sm.file_type().is_symlink(), m.permissions().readonly(), m.modified())
                 }
                 None => {
-                    let m = r.dir.metadata(&r.rel).map_err(|e| map_io("read metadata of", path, &e))?;
-                    let sm = r.dir.symlink_metadata(&r.rel).map_err(|e| map_io("read metadata of", path, &e))?;
+                    let m = r.dir().metadata(&r.rel).map_err(|e| map_io("read metadata of", path, &e))?;
+                    let sm = r.dir().symlink_metadata(&r.rel).map_err(|e| map_io("read metadata of", path, &e))?;
                     (m.len(), m.is_file(), m.is_dir(), sm.file_type().is_symlink(), m.permissions().readonly(), m.modified().map(|t| t.into_std()))
                 }
             };
@@ -532,7 +514,7 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
                 }
                 None => {
                     for entry in r
-                        .dir
+                        .dir()
                         .read_dir(&r.rel)
                         .map_err(|e| map_io("read directory", path, &e))?
                     {
@@ -555,7 +537,7 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
             let r = state.fs.resolve(path, Need::Write)?;
             match &r.host_path {
                 Some(path) => std::fs::create_dir(path),
-                None => r.dir.create_dir(&r.rel),
+                None => r.dir().create_dir(&r.rel),
             }
             .map_err(|e| map_io("create directory", path, &e).into())
         }
@@ -578,7 +560,7 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
             let r = state.fs.resolve(path, Need::Write)?;
             match &r.host_path {
                 Some(path) => std::fs::create_dir_all(path),
-                None => r.dir.create_dir_all(&r.rel),
+                None => r.dir().create_dir_all(&r.rel),
             }
             .map_err(|e| map_io("create directory", path, &e).into())
         }
@@ -593,7 +575,7 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
             let r = state.fs.resolve(path, Need::Write)?;
             match &r.host_path {
                 Some(path) => std::fs::remove_file(path),
-                None => r.dir.remove_file(&r.rel),
+                None => r.dir().remove_file(&r.rel),
             }
             .map_err(|e| map_io("remove file", path, &e).into())
         }
@@ -608,7 +590,7 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
             let r = state.fs.resolve(path, Need::Write)?;
             match &r.host_path {
                 Some(path) => std::fs::remove_dir(path),
-                None => r.dir.remove_dir(&r.rel),
+                None => r.dir().remove_dir(&r.rel),
             }
             .map_err(|e| map_io("remove directory", path, &e).into())
         }
@@ -631,7 +613,7 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
             let r = state.fs.resolve(path, Need::Delete)?;
             match &r.host_path {
                 Some(path) => std::fs::remove_dir_all(path),
-                None => r.dir.remove_dir_all(&r.rel),
+                None => r.dir().remove_dir_all(&r.rel),
             }
             .map_err(|e| map_io("remove directory", path, &e).into())
         }
@@ -661,7 +643,7 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
             }
             match (&a.host_path, &b.host_path) {
                 (Some(from), Some(to)) => std::fs::rename(from, to),
-                _ => a.dir.rename(&a.rel, &b.dir, &b.rel),
+                _ => a.dir().rename(&a.rel, b.dir(), &b.rel),
             }
             .map_err(|e| map_io("rename", from, &e).into())
         }
@@ -685,7 +667,7 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
             let b = state.fs.resolve(to, Need::Write)?;
             match (&a.host_path, &b.host_path) {
                 (Some(from_path), Some(to_path)) => std::fs::copy(from_path, to_path).map(|_| ()),
-                _ => a.dir.copy(&a.rel, &b.dir, &b.rel).map(|_| ()),
+                _ => a.dir().copy(&a.rel, b.dir(), &b.rel).map(|_| ()),
             }
             .map_err(|e| map_io("copy", from, &e).into())
         }
@@ -704,7 +686,7 @@ fn append(fs: &FsState, path: &str, data: &[u8]) -> Res<()> {
             .map_err(|e| map_io("append to file", path, &e))?;
     } else {
         let mut file = r
-            .dir
+            .dir()
             .open_with(&r.rel, OpenOptions::new().append(true).create(true))
             .map_err(|e| map_io("append to file", path, &e))?;
         file.write_all(data)
@@ -718,7 +700,7 @@ fn meta(fs: &FsState, path: &str) -> Res<Option<(bool, bool)>> {
     let r = fs.resolve(path, Need::Read)?;
     let result = match &r.host_path {
         Some(path) => std::fs::metadata(path).map(|m| (m.is_file(), m.is_dir())),
-        None => r.dir.metadata(&r.rel).map(|m| (m.is_file(), m.is_dir())),
+        None => r.dir().metadata(&r.rel).map(|m| (m.is_file(), m.is_dir())),
     };
     match result {
         Ok(m) => Ok(Some(m)),

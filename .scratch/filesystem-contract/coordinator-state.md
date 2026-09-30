@@ -10,7 +10,7 @@ Implement the four accepted filesystem contract repairs from `.scratch/stdlib-wa
 - Added unrestricted host path dispatch through std filesystem operations, plus symlink read/write/copy/remove public API regression. Targeted test passed once after initial compile corrections; rerun after final edits required.
 
 ## Current
-Implementation and proof updates are committed locally. The non-UTF8 test was rerun with `--nocapture`; this macOS filesystem returns EILSEQ (92), so fixture creation is skipped and `NotUtf8` remains unverified here. The guard skips only EILSEQ raw codes 84 or 92; unrelated I/O errors panic. New unrestricted symlink/parent and nested-root equivalent-alias regressions pass in the scoped build.
+Latest review correction removes the ambient cap-std directory open from unrestricted path resolution and uses relative host paths directly without `current_dir()`. A self-reexecuted public regression fails against pre-fix source then passes; the final scoped build passes all six unrestricted path tests plus the nonUTF8 skip path. The permission edge for opening `/`, a drive root or a share root remains unverified because no safe denied-mount fixture was available.
 
 ## Constraints
 Use `tools/run_scoped.py`, private source copy inside runtime, scoped `CARGO_TARGET_DIR` and `CARGO_HOME`. Do not touch other worktrees or remote state. Preserve test/support layout. No Windows or broader release matrix claims.
@@ -27,5 +27,5 @@ Add/run final proof and capture environment, observed independent host state, fi
 - Detailed proof record: `.scratch/filesystem-contract/proof.md`; all run logs are alongside it.
 
 ## Current state
-All four repair areas are implemented. Focused macOS tests prove OS path selection, unrestricted symlink semantics and equivalent nested-root aliases. The filesystem rejected the non-UTF8 fixture, so that public API behavior is not proven on this host. Windows/other OS and release matrix remain unverified. Local commits: `c17a0702` and `54eef8e9`; no push or merge.
+All four repair areas are implemented. Focused macOS tests prove OS path selection, unrestricted symlink semantics, relative operations after unlinking the child cwd, and equivalent nested-root aliases. The filesystem rejected the non-UTF8 fixture, so that public API behavior is not proven on this host. The direct permission-edge behavior for roots/shares is unverified. Windows/other OS and release matrix remain unverified. Local commits: `c17a0702`, `54eef8e9`, `adc9966f`, and `30821b55`; pending commit for the latest resolver correction. No push or merge.
 - `rustfmt --edition 2021 --config skip_children=true` succeeded for the three changed Rust files; `git diff --check` is clean. Repository-wide `cargo fmt --all -- --check` remains red only for pre-existing formatting in untouched `src/eval/mod.rs` (details in `format-check.log`).
