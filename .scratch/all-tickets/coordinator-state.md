@@ -43,7 +43,8 @@ be resolved before their dependent implementation. No remote publication.
 
 The actual monitor-intake fixture is now present as untracked source. Full
 intermediate review found clock-type, deadline-precondition, maximum-input and
-lease-renewal/ACK coverage gaps. Findings delivered to the same active agent for
+lease-renewal/ACK coverage gaps. The new dispatcher and lease diffs also expose exception/receipt-deadline and
+stale-handshake concerns. Findings delivered to the same active agent for
 related correction; see windows-monitor-specification-intake-review.md. Await
 actual dispatch implementation and immutable commit. Nothing has compiled or run.
 
