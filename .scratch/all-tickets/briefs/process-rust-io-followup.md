@@ -1,6 +1,6 @@
 # Native Rust I/O follow-up proposal
 
-Status: proposed, not authorized; no dependent work or execution before owner response. Sole Expert04 answer in ../escalations/04-rust-parent-custody.answer.md is the design reference. Original source package14:41:34–15:11:34UTC stopped unaccepted19e116a3 with zero builds/measurements. Expert04 read-only15:08:05–15:23:05 completed15:13:37. Preserve that elapsed history; no second Expert.
+Status: authorized by owner "ok go"; actual dispatch18:15:15UTC, hard finish19:15:15UTC including rootreview, execution cutoff19:05:15UTC. Source-only repairs are active; immutable rootgate required before execution. Sole Expert04 answer in ../escalations/04-rust-parent-custody.answer.md is the design reference. Original source package14:41:34–15:11:34UTC stopped unaccepted19e116a3 with zero builds/measurements. Expert04 read-only15:08:05–15:23:05 completed15:13:37. Preserve that elapsed history; no second Expert.
 
 Observable requirement: a real native Rust parent writes and concurrently captures bounded child streams, cancels all three workers without pipe EOF, and leaves no owned child/group/runtime after normal/error/interruption. This closes a prerequisite only; production Engine/API, native Linux/Windows and MSRV remain separate open requirements.
 
