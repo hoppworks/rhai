@@ -1,0 +1,214 @@
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded fs-set-times v0.20.3
+  Downloaded errno v0.3.14
+  Downloaded crunchy v0.2.4
+  Downloaded const-random-macro v0.1.16
+  Downloaded ambient-authority v0.0.2
+  Downloaded cfg-if v1.0.5
+  Downloaded const-random v0.1.18
+  Downloaded version_check v0.9.5
+  Downloaded quote v1.0.41
+  Downloaded byteorder v1.5.0
+  Downloaded autocfg v1.5.1
+  Downloaded rustix-linux-procfs v0.1.1
+  Downloaded rmp-serde v1.3.0
+  Downloaded rmp v0.8.14
+  Downloaded paste v1.0.15
+  Downloaded ipnet v2.12.2
+  Downloaded cap-std v4.0.3
+  Downloaded ryu v1.0.20
+  Downloaded itoa v1.0.15
+  Downloaded once_cell v1.21.4
+  Downloaded bitflags v2.13.2
+  Downloaded ahash v0.8.12
+  Downloaded unicode-ident v1.0.22
+  Downloaded static_assertions v1.1.0
+  Downloaded getrandom v0.3.4
+  Downloaded getrandom v0.2.17
+  Downloaded proc-macro2 v1.0.103
+  Downloaded thin-vec v0.2.19
+  Downloaded cap-primitives v4.0.3
+  Downloaded smartstring v1.0.1
+  Downloaded num-traits v0.2.19
+  Downloaded io-extras v0.19.0
+  Downloaded serde_derive v1.0.229
+  Downloaded smallvec v1.16.2
+  Downloaded serde_core v1.0.229
+  Downloaded zerocopy v0.8.59
+  Downloaded rustix v1.1.5
+  Downloaded syn v3.0.6
+  Downloaded maybe-owned v0.3.4
+  Downloaded memchr v2.8.3
+  Downloaded io-lifetimes v2.0.4
+  Downloaded tiny-keccak v2.0.2
+  Downloaded io-lifetimes v3.0.1
+  Downloaded serde v1.0.229
+  Downloaded portable-atomic v1.15.0
+  Downloaded libc v0.2.189
+  Downloaded syn v2.0.106
+  Downloaded serde_json v1.0.145
+  Downloaded linux-raw-sys v0.12.1
+ Downloading crates ...
+  Downloaded web-time v1.1.0
+   Compiling proc-macro2 v1.0.103
+   Compiling unicode-ident v1.0.22
+   Compiling quote v1.0.41
+   Compiling autocfg v1.5.1
+   Compiling libc v0.2.189
+   Compiling portable-atomic v1.15.0
+   Compiling crunchy v0.2.4
+   Compiling rustix v1.1.5
+   Compiling version_check v0.9.5
+   Compiling serde_core v1.0.229
+   Compiling bitflags v2.13.2
+   Compiling tiny-keccak v2.0.2
+   Compiling cfg-if v1.0.5
+   Compiling linux-raw-sys v0.12.1
+   Compiling io-lifetimes v2.0.4
+   Compiling io-lifetimes v3.0.1
+   Compiling once_cell v1.21.4
+   Compiling syn v3.0.6
+   Compiling num-traits v0.2.19
+   Compiling io-extras v0.19.0
+   Compiling serde v1.0.229
+   Compiling getrandom v0.2.17
+   Compiling getrandom v0.3.4
+   Compiling cap-primitives v4.0.3
+   Compiling zerocopy v0.8.59
+   Compiling serde_derive v1.0.229
+   Compiling const-random-macro v0.1.16
+   Compiling fs-set-times v0.20.3
+   Compiling rustix-linux-procfs v0.1.1
+   Compiling ahash v0.8.12
+   Compiling smartstring v1.0.1
+   Compiling paste v1.0.15
+   Compiling maybe-owned v0.3.4
+   Compiling cap-std v4.0.3
+   Compiling ambient-authority v0.0.2
+   Compiling serde_json v1.0.145
+   Compiling ipnet v2.12.2
+   Compiling const-random v0.1.18
+   Compiling syn v2.0.106
+   Compiling static_assertions v1.1.0
+   Compiling memchr v2.8.3
+   Compiling rhai v1.26.1 (/tmp/agent-build-qnkw2mdf/source)
+   Compiling ryu v1.0.20
+   Compiling itoa v1.0.15
+   Compiling rhai_codegen v3.2.0 (/tmp/agent-build-qnkw2mdf/source/codegen)
+   Compiling smallvec v1.16.2
+   Compiling thin-vec v0.2.19
+   Compiling byteorder v1.5.0
+   Compiling rmp v0.8.14
+   Compiling rmp-serde v1.3.0
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:11:24
+   |
+11 | fn read_bounded_to_end(mut stream: &TcpStream, max_bytes: usize) -> Vec<u8> {
+   |                        ----^^^^^^
+   |                        |
+   |                        help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` on by default
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:62:10
+   |
+62 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:83:10
+   |
+83 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:208:10
+    |
+208 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:266:10
+    |
+266 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:285:9
+    |
+285 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:289:9
+    |
+289 |     let mut peer = TcpStream::connect(address.parse::<SocketAddr>().unwrap()).unwrap();
+    |         ----^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:306:9
+    |
+306 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()).max_write_bytes(2));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: unused return value of `rhai::Scope::<'_>::remove` that must be used
+   --> tests/net_writes.rs:245:13
+    |
+245 |             scope.remove::<String>("payload");
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` on by default
+help: use `let _ = ...` to ignore the resulting value
+    |
+245 |             let _ = scope.remove::<String>("payload");
+    |             +++++++
+
+warning: `rhai` (test "net_writes") generated 9 warnings (run `cargo fix --test "net_writes"` to apply 8 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 17.31s
+  Executable tests/net_connect.rs (/tmp/agent-build-qnkw2mdf/target/debug/deps/net_connect-9603ae26b953665e)
+  Executable tests/net_listen.rs (/tmp/agent-build-qnkw2mdf/target/debug/deps/net_listen-cb2e8689f3f79e60)
+  Executable tests/net_metadata.rs (/tmp/agent-build-qnkw2mdf/target/debug/deps/net_metadata-1f2319320d64f092)
+  Executable tests/net_reads.rs (/tmp/agent-build-qnkw2mdf/target/debug/deps/net_reads-622d70d957abff66)
+  Executable tests/net_writes.rs (/tmp/agent-build-qnkw2mdf/target/debug/deps/net_writes-24bff401a142dcc3)
+  Executable tests/sys_env.rs (/tmp/agent-build-qnkw2mdf/target/debug/deps/sys_env-303e342359c41817)
+  Executable tests/sys_fs.rs (/tmp/agent-build-qnkw2mdf/target/debug/deps/sys_fs-6517cf445f0f20ec)
+  Executable tests/sys_policy.rs (/tmp/agent-build-qnkw2mdf/target/debug/deps/sys_policy-d9f814a2d86ae037)

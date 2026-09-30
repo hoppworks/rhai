@@ -1,0 +1,791 @@
+launch_utc=2026-09-30T17:06:49Z
+launcher_pid=2266462 launcher_pgid=2266462
+execution_deadline=2026-09-30T17:19:00Z runner_timeout_seconds=701
+SOURCE_REVISION 293172363f4929acb166e33e0aa34fff5fc7e1cc
+PRIVATE_RUNTIME /tmp/agent-build-qnkw2mdf
+PRIVATE_RUSTUP_HOME /tmp/agent-build-qnkw2mdf/rustup-home
+PRIVATE_CARGO_HOME /tmp/agent-build-qnkw2mdf/cargo-home
+LOCK_CANDIDATE_BY_REFERENCE /root/rhai-linux-optional-msrv-proof-task/Cargo.lock.accepted sha256=8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa
+LOCK_IDENTITY /tmp/agent-build-qnkw2mdf/source/Cargo.lock sha256=8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa
+ARCHIVE_IDENTITY /root/rhai-linux-optional-msrv-proof-task/source.tar sha256=fe8ad5aa459e525e484d84c7a5a90f144ab142b10a96392ec30f5e75c77a4577
+NATIVE_TARGET Linux x86_64
+HOST_KERNEL Linux workhorse 7.2.4-ogc3.1.fc44.x86_64 #1 SMP PREEMPT_DYNAMIC Sun Sep 13 01:41:06 UTC 2026 x86_64 GNU/Linux
+PROOF_LIMITS absolute_deadline_utc=2026-09-30T17:19:00Z remaining_seconds=730 two_cargo_jobs debug=0 incremental=0 storage_preempt_kib=1572864 storage_hard_kib=2097152 owned_descendants<=16
+INITIAL_PRIVATE_STORAGE 9964 KiB
+COMMAND toolchain-install: /root/.cargo/bin/rustup toolchain install 1.77.2 --profile minimal --no-self-update
+LOG /root/rhai-linux-optional-msrv-proof-task/evidence/toolchain-install.log
+info: syncing channel updates for 1.77.2-x86_64-unknown-linux-gnu
+info: latest update on 2024-04-09 for version 1.77.2 (25ef9e3d8 2024-04-09)
+info: downloading 3 components
+
+  1.77.2-x86_64-unknown-linux-gnu installed - rustc 1.77.2 (25ef9e3d8 2024-04-09)
+
+info: default toolchain set to 1.77.2-x86_64-unknown-linux-gnu
+STATUS toolchain-install: 0
+PRIVATE_RUNTIME_SAMPLED_STORAGE toolchain-install: 469644 KiB; sampled maximum 519176 KiB (1 s du -sk samples)
+COMMAND rustc-version: /tmp/agent-build-qnkw2mdf/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose
+LOG /root/rhai-linux-optional-msrv-proof-task/evidence/rustc-version.log
+rustc 1.77.2 (25ef9e3d8 2024-04-09)
+binary: rustc
+commit-hash: 25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04
+commit-date: 2024-04-09
+host: x86_64-unknown-linux-gnu
+release: 1.77.2
+LLVM version: 17.0.6
+STATUS rustc-version: 0
+PRIVATE_RUNTIME_SAMPLED_STORAGE rustc-version: 469644 KiB; sampled maximum 519176 KiB (1 s du -sk samples)
+COMMAND cargo-version: /tmp/agent-build-qnkw2mdf/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose
+LOG /root/rhai-linux-optional-msrv-proof-task/evidence/cargo-version.log
+cargo 1.77.2 (e52e36006 2024-03-26)
+release: 1.77.2
+commit-hash: e52e360061cacbbeac79f7f1215a7a90b6f08442
+commit-date: 2024-03-26
+host: x86_64-unknown-linux-gnu
+libgit2: 1.7.2 (sys:0.18.2 vendored)
+libcurl: 8.5.0-DEV (sys:0.4.70+curl-8.5.0 vendored ssl:OpenSSL/1.1.1w)
+ssl: OpenSSL 1.1.1w  11 Sep 2023
+os: Linux 44 (Kinoite) [64-bit]
+STATUS cargo-version: 0
+PRIVATE_RUNTIME_SAMPLED_STORAGE cargo-version: 469644 KiB; sampled maximum 519176 KiB (1 s du -sk samples)
+COMMAND compile-test-targets: /tmp/agent-build-qnkw2mdf/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,metadata --no-run --test sys_policy --test sys_env --test sys_fs --test net_connect --test net_listen --test net_reads --test net_writes --test net_metadata
+LOG /root/rhai-linux-optional-msrv-proof-task/evidence/compile-test-targets.log
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded fs-set-times v0.20.3
+  Downloaded errno v0.3.14
+  Downloaded crunchy v0.2.4
+  Downloaded const-random-macro v0.1.16
+  Downloaded ambient-authority v0.0.2
+  Downloaded cfg-if v1.0.5
+  Downloaded const-random v0.1.18
+  Downloaded version_check v0.9.5
+  Downloaded quote v1.0.41
+  Downloaded byteorder v1.5.0
+  Downloaded autocfg v1.5.1
+  Downloaded rustix-linux-procfs v0.1.1
+  Downloaded rmp-serde v1.3.0
+  Downloaded rmp v0.8.14
+  Downloaded paste v1.0.15
+  Downloaded ipnet v2.12.2
+  Downloaded cap-std v4.0.3
+  Downloaded ryu v1.0.20
+  Downloaded itoa v1.0.15
+  Downloaded once_cell v1.21.4
+  Downloaded bitflags v2.13.2
+  Downloaded ahash v0.8.12
+  Downloaded unicode-ident v1.0.22
+  Downloaded static_assertions v1.1.0
+  Downloaded getrandom v0.3.4
+  Downloaded getrandom v0.2.17
+  Downloaded proc-macro2 v1.0.103
+  Downloaded thin-vec v0.2.19
+  Downloaded cap-primitives v4.0.3
+  Downloaded smartstring v1.0.1
+  Downloaded num-traits v0.2.19
+  Downloaded io-extras v0.19.0
+  Downloaded serde_derive v1.0.229
+  Downloaded smallvec v1.16.2
+  Downloaded serde_core v1.0.229
+  Downloaded zerocopy v0.8.59
+  Downloaded rustix v1.1.5
+  Downloaded syn v3.0.6
+  Downloaded maybe-owned v0.3.4
+  Downloaded memchr v2.8.3
+  Downloaded io-lifetimes v2.0.4
+  Downloaded tiny-keccak v2.0.2
+  Downloaded io-lifetimes v3.0.1
+  Downloaded serde v1.0.229
+  Downloaded portable-atomic v1.15.0
+  Downloaded libc v0.2.189
+  Downloaded syn v2.0.106
+  Downloaded serde_json v1.0.145
+  Downloaded linux-raw-sys v0.12.1
+ Downloading crates ...
+  Downloaded web-time v1.1.0
+   Compiling proc-macro2 v1.0.103
+   Compiling unicode-ident v1.0.22
+   Compiling quote v1.0.41
+   Compiling autocfg v1.5.1
+   Compiling libc v0.2.189
+   Compiling portable-atomic v1.15.0
+   Compiling crunchy v0.2.4
+   Compiling rustix v1.1.5
+   Compiling version_check v0.9.5
+   Compiling serde_core v1.0.229
+   Compiling bitflags v2.13.2
+   Compiling tiny-keccak v2.0.2
+   Compiling cfg-if v1.0.5
+   Compiling linux-raw-sys v0.12.1
+   Compiling io-lifetimes v2.0.4
+   Compiling io-lifetimes v3.0.1
+   Compiling once_cell v1.21.4
+   Compiling syn v3.0.6
+   Compiling num-traits v0.2.19
+   Compiling io-extras v0.19.0
+   Compiling serde v1.0.229
+   Compiling getrandom v0.2.17
+   Compiling getrandom v0.3.4
+   Compiling cap-primitives v4.0.3
+   Compiling zerocopy v0.8.59
+   Compiling serde_derive v1.0.229
+   Compiling const-random-macro v0.1.16
+   Compiling fs-set-times v0.20.3
+   Compiling rustix-linux-procfs v0.1.1
+   Compiling ahash v0.8.12
+   Compiling smartstring v1.0.1
+   Compiling paste v1.0.15
+   Compiling maybe-owned v0.3.4
+   Compiling cap-std v4.0.3
+   Compiling ambient-authority v0.0.2
+   Compiling serde_json v1.0.145
+   Compiling ipnet v2.12.2
+   Compiling const-random v0.1.18
+   Compiling syn v2.0.106
+   Compiling static_assertions v1.1.0
+   Compiling memchr v2.8.3
+   Compiling rhai v1.26.1 (/tmp/agent-build-qnkw2mdf/source)
+   Compiling ryu v1.0.20
+   Compiling itoa v1.0.15
+   Compiling rhai_codegen v3.2.0 (/tmp/agent-build-qnkw2mdf/source/codegen)
+   Compiling smallvec v1.16.2
+   Compiling thin-vec v0.2.19
+   Compiling byteorder v1.5.0
+   Compiling rmp v0.8.14
+   Compiling rmp-serde v1.3.0
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:11:24
+   |
+11 | fn read_bounded_to_end(mut stream: &TcpStream, max_bytes: usize) -> Vec<u8> {
+   |                        ----^^^^^^
+   |                        |
+   |                        help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` on by default
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:62:10
+   |
+62 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:83:10
+   |
+83 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:208:10
+    |
+208 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:266:10
+    |
+266 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:285:9
+    |
+285 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:289:9
+    |
+289 |     let mut peer = TcpStream::connect(address.parse::<SocketAddr>().unwrap()).unwrap();
+    |         ----^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:306:9
+    |
+306 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()).max_write_bytes(2));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: unused return value of `rhai::Scope::<'_>::remove` that must be used
+   --> tests/net_writes.rs:245:13
+    |
+245 |             scope.remove::<String>("payload");
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` on by default
+help: use `let _ = ...` to ignore the resulting value
+    |
+245 |             let _ = scope.remove::<String>("payload");
+    |             +++++++
+
+warning: `rhai` (test "net_writes") generated 9 warnings (run `cargo fix --test "net_writes"` to apply 8 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 17.31s
+  Executable tests/net_connect.rs (/tmp/agent-build-qnkw2mdf/target/debug/deps/net_connect-9603ae26b953665e)
+  Executable tests/net_listen.rs (/tmp/agent-build-qnkw2mdf/target/debug/deps/net_listen-cb2e8689f3f79e60)
+  Executable tests/net_metadata.rs (/tmp/agent-build-qnkw2mdf/target/debug/deps/net_metadata-1f2319320d64f092)
+  Executable tests/net_reads.rs (/tmp/agent-build-qnkw2mdf/target/debug/deps/net_reads-622d70d957abff66)
+  Executable tests/net_writes.rs (/tmp/agent-build-qnkw2mdf/target/debug/deps/net_writes-24bff401a142dcc3)
+  Executable tests/sys_env.rs (/tmp/agent-build-qnkw2mdf/target/debug/deps/sys_env-303e342359c41817)
+  Executable tests/sys_fs.rs (/tmp/agent-build-qnkw2mdf/target/debug/deps/sys_fs-6517cf445f0f20ec)
+  Executable tests/sys_policy.rs (/tmp/agent-build-qnkw2mdf/target/debug/deps/sys_policy-d9f814a2d86ae037)
+STATUS compile-test-targets: 0
+PRIVATE_RUNTIME_SAMPLED_STORAGE compile-test-targets: 826684 KiB; sampled maximum 826684 KiB (1 s du -sk samples)
+COMMAND wrong-expectation-control: /tmp/agent-build-qnkw2mdf/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,metadata --test sys_fs test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving -- --exact --nocapture --test-threads=1
+LOG /root/rhai-linux-optional-msrv-proof-task/evidence/wrong-expectation-control.log
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 0.02s
+     Running tests/sys_fs.rs (/tmp/agent-build-qnkw2mdf/target/debug/deps/sys_fs-6517cf445f0f20ec)
+
+running 1 test
+test test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving ... thread 'test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving' panicked at tests/sys_fs.rs:161:5:
+assertion `left == right` failed
+  left: "abc"
+ right: "wrong expectation"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+FAILED
+
+failures:
+
+failures:
+    test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 34 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--test sys_fs`
+STATUS wrong-expectation-control: 101
+PRIVATE_RUNTIME_SAMPLED_STORAGE wrong-expectation-control: 826684 KiB; sampled maximum 826684 KiB (1 s du -sk samples)
+WRONG_EXPECTATION_CONTROL_EXIT 101; assertion verified left=abc right=wrong expectation
+COMMAND restored-targeted-test: /tmp/agent-build-qnkw2mdf/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,metadata --test sys_fs test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving -- --exact --nocapture --test-threads=1
+LOG /root/rhai-linux-optional-msrv-proof-task/evidence/restored-targeted-test.log
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 0.02s
+     Running tests/sys_fs.rs (/tmp/agent-build-qnkw2mdf/target/debug/deps/sys_fs-6517cf445f0f20ec)
+
+running 1 test
+test test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 34 filtered out; finished in 0.01s
+
+STATUS restored-targeted-test: 0
+PRIVATE_RUNTIME_SAMPLED_STORAGE restored-targeted-test: 826684 KiB; sampled maximum 826684 KiB (1 s du -sk samples)
+COMMAND fixture-sys_policy: /tmp/agent-build-qnkw2mdf/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,metadata --test sys_policy -- --test-threads=1 --nocapture
+LOG /root/rhai-linux-optional-msrv-proof-task/evidence/fixture-sys_policy.log
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 0.02s
+     Running tests/sys_policy.rs (/tmp/agent-build-qnkw2mdf/target/debug/deps/sys_policy-d9f814a2d86ae037)
+
+running 24 tests
+test test_absolute_path_with_parent_components ... ok
+test test_absolute_paths ... ok
+test test_config_builder ... ok
+test test_configured_root_symlink_then_parent_uses_os_resolution ... ok
+test test_copy_across_roots ... ok
+test test_default_config_denies_fs ... ok
+test test_env_allow_list ... ok
+test test_error_position ... ok
+test test_error_variants ... ok
+test test_errors_are_catchable ... ok
+test test_function_metadata ... ok
+test test_host_can_downcast ... ok
+test test_missing_root_fails_early ... ok
+test test_multiple_roots ... ok
+test test_nested_roots_longest_prefix ... ok
+test test_parent_traversal_is_denied ... ok
+test test_plain_engine_has_no_sys_functions ... ok
+test test_read_only_root ... ok
+test test_remove_dir_all_needs_delete_access ... ok
+test test_root_with_dot_components ... ok
+test test_static_module_and_sharing ... ok
+test test_symlink_escape_is_denied ... ok
+test test_symlinked_root ... ok
+test test_unrestricted_respects_access_level ... ok
+
+test result: ok. 24 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+STATUS fixture-sys_policy: 0
+PRIVATE_RUNTIME_SAMPLED_STORAGE fixture-sys_policy: 826684 KiB; sampled maximum 826684 KiB (1 s du -sk samples)
+TARGET_TEST_COUNT sys_policy: 24
+COMMAND fixture-sys_env: /tmp/agent-build-qnkw2mdf/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,metadata --test sys_env -- --test-threads=1 --nocapture
+LOG /root/rhai-linux-optional-msrv-proof-task/evidence/fixture-sys_env.log
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 0.02s
+     Running tests/sys_env.rs (/tmp/agent-build-qnkw2mdf/target/debug/deps/sys_env-303e342359c41817)
+
+running 7 tests
+test test_cwd_matches_process ... ok
+test test_env_allow_list_unset_variable ... ok
+test test_env_allow_list_value ... ok
+test test_env_default_policy_hides_all ... ok
+test test_env_var_non_utf8 ... ok
+test test_env_var_set_and_unset ... ok
+test test_env_vars_all ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+
+STATUS fixture-sys_env: 0
+PRIVATE_RUNTIME_SAMPLED_STORAGE fixture-sys_env: 826684 KiB; sampled maximum 826684 KiB (1 s du -sk samples)
+TARGET_TEST_COUNT sys_env: 7
+COMMAND fixture-sys_fs: /tmp/agent-build-qnkw2mdf/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,metadata --test sys_fs -- --test-threads=1 --nocapture
+LOG /root/rhai-linux-optional-msrv-proof-task/evidence/fixture-sys_fs.log
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 0.02s
+     Running tests/sys_fs.rs (/tmp/agent-build-qnkw2mdf/target/debug/deps/sys_fs-6517cf445f0f20ec)
+
+running 35 tests
+test test_create_dir_cases ... ok
+test test_deep_tree_and_many_entries ... ok
+test test_empty_and_mixed_writes ... ok
+test test_file_handle_blob_read_respects_engine_array_limit ... ok
+test test_file_handle_read_blob_preserves_bytes_and_obeys_host_cap ... ok
+test test_file_handle_read_respects_engine_limit_below_host_cap ... ok
+test test_file_handle_read_string_advances_the_shared_cursor ... ok
+test test_file_handle_reads_fail_at_eof_and_on_write_only_handle ... ok
+test test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving ... ok
+test test_file_handle_string_read_requires_complete_utf8 ... ok
+test test_large_file_round_trip ... ok
+test test_metadata_symlink_and_readonly ... ok
+test test_no_handle_leak ... ok
+test test_non_utf8_file_name ... ok
+test test_open_file_checks_grants_before_mutation_and_stays_confined ... ok
+test test_open_file_default_preserves_contents_and_shares_cursor ... independent host readback: "original XYyload"
+ok
+test test_open_file_modes_and_exclusive_create ... ok
+test test_path_spellings ... ok
+test test_predicates_and_metadata ... ok
+test test_read_binary ... ok
+test test_read_dir_cases ... ok
+test test_read_file_cases ... ok
+test test_remove_cases ... ok
+test test_rename_and_copy ... ok
+test test_rename_overwrite_and_directory ... ok
+test test_unicode_names ... ok
+test test_unrestricted_missing_parents ... ok
+test test_unrestricted_relative_paths ... ok
+test test_unrestricted_relative_paths_after_cwd_is_unlinked ... ok
+test test_unrestricted_round_trip ... ok
+test test_unrestricted_symlink_then_parent_uses_host_resolution ... ok
+test test_unrestricted_symlinks_follow_host_semantics ... ok
+test test_write_append_blob ... ok
+test test_write_into_missing_parent ... ok
+test test_wrong_entry_kind ... ok
+
+test result: ok. 35 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.18s
+
+STATUS fixture-sys_fs: 0
+PRIVATE_RUNTIME_SAMPLED_STORAGE fixture-sys_fs: 826684 KiB; sampled maximum 826684 KiB (1 s du -sk samples)
+TARGET_TEST_COUNT sys_fs: 35
+COMMAND fixture-net_connect: /tmp/agent-build-qnkw2mdf/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,metadata --test net_connect -- --test-threads=1 --nocapture
+LOG /root/rhai-linux-optional-msrv-proof-task/evidence/fixture-net_connect.log
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 0.02s
+     Running tests/net_connect.rs (/tmp/agent-build-qnkw2mdf/target/debug/deps/net_connect-9603ae26b953665e)
+
+running 4 tests
+test authorized_connect_is_observed_and_clone_close_is_shared ... ok
+test denied_and_invalid_endpoints_do_not_reach_peer_and_errors_are_catchable ... ok
+test net_config_rejects_zero_deadline_and_invalid_handle_limits ... ok
+test open_handle_limit_is_shared_across_package_engines_and_released_on_close ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+STATUS fixture-net_connect: 0
+PRIVATE_RUNTIME_SAMPLED_STORAGE fixture-net_connect: 826684 KiB; sampled maximum 826684 KiB (1 s du -sk samples)
+TARGET_TEST_COUNT net_connect: 4
+COMMAND fixture-net_listen: /tmp/agent-build-qnkw2mdf/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,metadata --test net_listen -- --test-threads=1 --nocapture
+LOG /root/rhai-linux-optional-msrv-proof-task/evidence/fixture-net_listen.log
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 0.02s
+     Running tests/net_listen.rs (/tmp/agent-build-qnkw2mdf/target/debug/deps/net_listen-cb2e8689f3f79e60)
+
+running 7 tests
+test accepted_stream_uses_the_shared_package_quota_across_engines ... ok
+test authorized_listener_accepts_an_independent_peer ... ok
+test bind_failure_releases_listener_quota ... ok
+test denied_and_invalid_listener_endpoints_never_bind ... ok
+test listener_clones_share_close_and_final_drop_releases_the_bind ... ok
+test no_client_accept_times_out_with_catchable_net_error ... ok
+test quota_retry_deadline_expires_under_a_real_saturated_handle_limit ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.12s
+
+STATUS fixture-net_listen: 0
+PRIVATE_RUNTIME_SAMPLED_STORAGE fixture-net_listen: 826684 KiB; sampled maximum 826684 KiB (1 s du -sk samples)
+TARGET_TEST_COUNT net_listen: 7
+COMMAND fixture-net_reads: /tmp/agent-build-qnkw2mdf/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,metadata --test net_reads -- --test-threads=1 --nocapture
+LOG /root/rhai-linux-optional-msrv-proof-task/evidence/fixture-net_reads.log
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 0.02s
+     Running tests/net_reads.rs (/tmp/agent-build-qnkw2mdf/target/debug/deps/net_reads-622d70d957abff66)
+
+running 7 tests
+test accepted_stream_inherits_host_receive_cap ... ok
+test blob_reads_validate_lengths_return_exact_short_prefix_and_obey_host_cap ... ok
+test engine_string_limit_keeps_ascii_and_reports_lossy_expansion_progress ... ok
+test no_data_read_times_out_and_bounded_eof_loop_reports_partial_progress ... ok
+test one_shot_read_returns_an_available_short_prefix_without_waiting_for_more ... ok
+test one_shot_text_read_replaces_a_utf8_character_cut_by_the_available_prefix ... ok
+test stream_read_string_returns_exact_lossy_text_from_peer_bytes ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.25s
+
+STATUS fixture-net_reads: 0
+PRIVATE_RUNTIME_SAMPLED_STORAGE fixture-net_reads: 826684 KiB; sampled maximum 826684 KiB (1 s du -sk samples)
+TARGET_TEST_COUNT net_reads: 7
+COMMAND fixture-net_writes: /tmp/agent-build-qnkw2mdf/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,metadata --test net_writes -- --test-threads=1 --nocapture
+LOG /root/rhai-linux-optional-msrv-proof-task/evidence/fixture-net_writes.log
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:11:24
+   |
+11 | fn read_bounded_to_end(mut stream: &TcpStream, max_bytes: usize) -> Vec<u8> {
+   |                        ----^^^^^^
+   |                        |
+   |                        help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` on by default
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:62:10
+   |
+62 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:83:10
+   |
+83 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:208:10
+    |
+208 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:266:10
+    |
+266 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:285:9
+    |
+285 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:289:9
+    |
+289 |     let mut peer = TcpStream::connect(address.parse::<SocketAddr>().unwrap()).unwrap();
+    |         ----^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:306:9
+    |
+306 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()).max_write_bytes(2));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: unused return value of `rhai::Scope::<'_>::remove` that must be used
+   --> tests/net_writes.rs:245:13
+    |
+245 |             scope.remove::<String>("payload");
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` on by default
+help: use `let _ = ...` to ignore the resulting value
+    |
+245 |             let _ = scope.remove::<String>("payload");
+    |             +++++++
+
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (test "net_writes") generated 9 warnings (run `cargo fix --test "net_writes"` to apply 8 suggestions)
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 0.02s
+     Running tests/net_writes.rs (/tmp/agent-build-qnkw2mdf/target/debug/deps/net_writes-24bff401a142dcc3)
+
+running 10 tests
+test accepted_stream_inherits_host_write_cap ... ok
+test accepted_stream_writes_are_read_back_by_the_peer ... ok
+test bounded_write_timeout_reports_partial_bytes_matching_peer_readback ... ok
+test engine_string_limit_rejects_write_before_peer_bytes ... ok
+test host_write_cap_rejects_oversize_input_without_peer_bytes ... ok
+test invalid_host_write_bounds_are_rejected ... ok
+test read_half_close_is_idempotent_and_keeps_stream_open_for_close ... ok
+test script_write_blob_preserves_exact_bytes ... ok
+test script_writes_string_and_write_all_report_real_peer_bytes ... ok
+test write_half_close_keeps_the_read_direction_and_is_idempotent ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+STATUS fixture-net_writes: 0
+PRIVATE_RUNTIME_SAMPLED_STORAGE fixture-net_writes: 826684 KiB; sampled maximum 826684 KiB (1 s du -sk samples)
+TARGET_TEST_COUNT net_writes: 10
+COMMAND fixture-net_metadata: /tmp/agent-build-qnkw2mdf/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,metadata --test net_metadata -- --test-threads=1 --nocapture
+LOG /root/rhai-linux-optional-msrv-proof-task/evidence/fixture-net_metadata.log
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 0.02s
+     Running tests/net_metadata.rs (/tmp/agent-build-qnkw2mdf/target/debug/deps/net_metadata-1f2319320d64f092)
+
+running 1 test
+test metadata_exposes_the_documented_tcp_surface ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+STATUS fixture-net_metadata: 0
+PRIVATE_RUNTIME_SAMPLED_STORAGE fixture-net_metadata: 826684 KiB; sampled maximum 826684 KiB (1 s du -sk samples)
+TARGET_TEST_COUNT net_metadata: 1
+EXPORTED_FINAL_LOCK /root/rhai-linux-optional-msrv-proof-task/evidence/Cargo.lock sha256=8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa
+ACCEPTED: Rust 1.77.2 native Linux x86_64 strict Engine/OS fixtures with sys+net+metadata; negative control failed for expected assertion and restored test passed.
+FINAL_PRIVATE_STORAGE_BEFORE_WRAPPER_CLEANUP 826684 KiB
+PEAK_OWNED_DESCENDANTS_SAMPLED 7 (1 s ps PID/PPID ancestry samples)
+run_scoped_status=0
+runtime_cleanup_status=0 runtime=/tmp/agent-build-qnkw2mdf
+outer_status=0
