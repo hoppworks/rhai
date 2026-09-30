@@ -1,87 +1,84 @@
-# Native Linux sys release feature gates: incomplete
+# Native Linux sys release feature gates
 
 ## Result
 
-Neither authorized attempt proves a Linux sys feature gate. Attempt 1 stopped before
-testing because its source archive omitted the `codegen/` workspace member. The
-corrected, single follow-up invocation generated a lockfile and compiled the wrong-
-expectation control, which exited 101 and showed the intended `abc` versus `wrong
-expectation` assertion. The driver then stopped because its panic-line matcher did
-not account for Rust 1.97's test-thread ID inserted between the quoted test name and
-`panicked`. No feature matrix or restored targeted test ran. This is a verifier
-infrastructure error; it is not a product-test failure or feature acceptance.
+The third, explicitly authorized attempt passed the native Linux sys-only matrix:
+eight feature profiles × `sys_env`, `sys_fs`, and `sys_policy`, with all 24 target
+commands exiting 0. Their logs report 500 passing fixture tests. The wrong-value
+control exited 101 on the exact file-read assertion (`abc` versus `wrong
+expectation`), and the restored targeted assertion passed (exit 0). This closes the
+approved Linux sys-only verification slice for the selected source revision. It does
+not establish combined sys/net coverage, MSRV 1.77.2, Windows support, or overall
+release readiness.
 
-No production files were changed. No release acceptance claim is made. The prior
-setup failure and cause history are preserved below and in `evidence/attempt1-*`.
+## Source and native run
 
-## Follow-up source and execution
-
-- Selected production source: `e1db9baafaaf30d94085f0cc6f661f363399f193`.
-- Source archive SHA256:
+- Selected production source: `e1db9baafaaf30d94085f0cc6f661f363399f193`;
+  production files were unchanged.
+- Complete source archive SHA256:
   `c934633c7889e4a427a87d557bbc578146e4db641c4fde2c93ff3fd4f047aa47`.
-- One remote invocation ran on workhorse, Linux x86_64, kernel
-  `7.2.4-ogc3.1.fc44.x86_64`.
+- Frozen follow-up driver/launcher source commit:
+  `3386a82f8b6924b98b570046cb583eadd286f94a`.
+- One native Linux x86_64 invocation on workhorse began at 2026-09-30 18:48:55 UTC
+  with a 600-second cap and absolute cutoff 19:02:48 UTC. It exited at 18:49:50 UTC.
 - Rust: `1.97.1 (8bab26f4f 2026-07-14)`; Cargo:
   `1.97.1 (c980f4866 2026-06-30)`.
-- Absolute deadline: 2026-09-30 18:05:14 UTC; bounded invocation timeout was 752s.
-- Existing `/root/.rustup` was used read-only. Private Cargo home, build target, and
-  runtime were under `/tmp/agent-build-neth2npq`.
-- Cargo generated `Cargo.lock` successfully (SHA256
-  `4aa2e32287d33184c12e98c7a86a17574dbf3a2361c968c76e9611bfd4396cc3`).
-- The wrong-expectation control exited 101 and captured `left: "abc"` and
-  `right: "wrong expectation"`. Rust's output includes the thread id, e.g.
-  `thread 'test_name' (2763223) panicked at ...`; the driver only accepted the
-  substring `thread 'test_name' panicked` and therefore stopped on its own check.
-- Control status file SHA256:
-  `39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c`.
-- Driver, runner, and outer wrapper statuses were all 1 due to that verifier
-  exception. The runtime cleanup status was 0; sampled storage peak was 269192 KiB
-  and six owned descendants were observed. These are sampled maxima, not exhaustive
-  process or peak-use guarantees.
-- Independent readback confirmed the exact launcher PID/start identity
-  (2759568/43555984), all 17 uniquely sampled PID/start identities, and the scoped
-  process group were gone; unknown fast PIDs: 0. The private runtime was absent.
-- Evidence was copied to `evidence/attempt2/`; file hashes were compared with the
-  remote stage before cleanup. The exact owned stage
-  `/root/rhai-linux-sys-release-features-task/followup-e1db9baa` was then removed.
-  No other remote path was touched.
+- Existing `/root/.rustup` was used read-only. Generated and final exported
+  `Cargo.lock` both have SHA256
+  `4aa2e32287d33184c12e98c7a86a17574dbf3a2361c968c76e9611bfd4396cc3`; every test
+  used `--locked`.
+- All eight rows passed: `testing-environ,sys`; `testing-environ,sys,sync`;
+  `testing-environ,sys,no_index`; `testing-environ,sys,metadata,serde`;
+  `testing-environ,sys,only_i32,no_float`; `testing-environ,sys,unchecked`;
+  `testing-environ,sys,no_index,sync,metadata`; and `testing-environ,sys,f32_float`.
+- Target test counts by profile (`sys_env`, `sys_fs`, `sys_policy`) were 7/35/23,
+  7/35/24, 7/24/23, 7/35/24, 7/35/23, 7/33/23, 7/24/25, and 7/35/23 respectively.
+  All corresponding command statuses are 0.
+- Wrong-value log confirms one exact named test panicked with thread ID 3343063,
+  `left: "abc"`, `right: "wrong expectation"`, and `test result: FAILED. 0
+  passed; 1 failed`. Its expected status is 101. The restored targeted command status
+  is 0.
+- Outer, scoped runner, PID cleanup, and runtime cleanup statuses are all 0. The
+  wrapper observed sampled private-storage maximum 958832 KiB and sampled maximum
+  six owned descendants. These one-second samples do not claim continuous process
+  or true peak-resource measurement.
 
-## Gate inventory
+## Attempts and cause history
 
-All planned feature tests were not run. The matrix was `sys_env`, `sys_fs`, and
-`sys_policy` for each feature set below.
+Attempt 1 was setup-incomplete: archive SHA256
+`af104355b6bf2efccaeb9aa0fbb26e64580a9524c8a436af4238429df435bd1e` omitted
+`codegen/Cargo.toml`, so lock generation failed before tests. Its immutable record is
+commit `fd69fa1b20845f16d6280f03e7109b744ff2b6e3` and the earlier section of
+`evidence/attempt1-*`.
 
-| Feature set | Targets | Result |
-|---|---|---|
-| `testing-environ,sys` | `sys_env`, `sys_fs`, `sys_policy` | Not run |
-| `testing-environ,sys,sync` | `sys_env`, `sys_fs`, `sys_policy` | Not run |
-| `testing-environ,sys,no_index` | `sys_env`, `sys_fs`, `sys_policy` | Not run |
-| `testing-environ,sys,metadata,serde` | `sys_env`, `sys_fs`, `sys_policy` | Not run |
-| `testing-environ,sys,only_i32,no_float` | `sys_env`, `sys_fs`, `sys_policy` | Not run |
-| `testing-environ,sys,unchecked` | `sys_env`, `sys_fs`, `sys_policy` | Not run |
-| `testing-environ,sys,no_index,sync,metadata` | `sys_env`, `sys_fs`, `sys_policy` | Not run |
-| `testing-environ,sys,f32_float` | `sys_env`, `sys_fs`, `sys_policy` | Not run |
+Attempt 2 had the complete workspace archive and reached the wrong-value control,
+which produced the intended actual-byte assertion and status 101. Its driver
+expected an outdated panic-line layout without Rust's optional thread-ID token and
+stopped before the matrix. This verifier infrastructure failure is preserved in
+commit `a09d84b26a9f2540da3150984fca1f1397a64f9b` and
+`evidence/attempt2/`; it was not a product-test failure. Attempt 3 made only the
+approved matcher correction plus new fixed deadline/cap and unique stage path.
+There was no automatic rerun.
 
-The corrected passing control for
-`test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving`
-was not run. There is no feature compatibility, fixture behavior, release
-readiness, or MSRV 1.77.2 conclusion.
+## Custody and evidence
 
-## Previous setup attempt
+- The exact attempt-3 stage was
+  `/root/rhai-linux-sys-release-features-task/followup-e1db9baa-attempt3`; the
+  private runtime was `/tmp/agent-build-sdku18v2`.
+- The wrapper recorded launcher PID 3339583/start ticks 43893235 and scoped runner
+  PID 3339651/start ticks 43893241. Its exact PID/start-time and process-group
+  readback passed after runner exit; private runtime cleanup status was 0.
+- Root independently read 57 unique recorded PID/start identities: unknown identities
+  0, matching processes alive 0; process groups 3339583 and 3339653 were empty and
+  the private runtime was absent. After that readback and export-hash comparison,
+  only the exact attempt-3 stage was removed; a second check confirmed the stage
+  and runtime paths absent.
+- Raw logs, 24 fixture statuses, both control statuses, generated/final lockfiles,
+  raw process/storage observations, terminal statuses and readbacks are preserved
+  in `evidence/attempt3/`. All 71 remote evidence-file SHA256 values matched the
+  local export. Manifest SHA256:
+  `2d5a8485dfa47b92ae38625b1cf71c0c20f99ad006f8cc6c47fb77036dd5c045`.
+- The owned worktree remains preserved and clean; no unrelated remote path was
+  removed.
 
-Attempt 1, retained as commit `fd69fa1b20845f16d6280f03e7109b744ff2b6e3`, used
-source archive SHA256
-`af104355b6bf2efccaeb9aa0fbb26e64580a9524c8a436af4238429df435bd1e`. The archive
-omitted `codegen/Cargo.toml`; `cargo generate-lockfile` failed before tests could
-start. Its logs and cleanup readback remain in `evidence/attempt1-*` and
-`evidence/cleanup-readback.log`.
-
-## Evidence
-
-- `evidence/attempt2/` contains the raw per-command logs/statuses, generated lock,
-  process and storage samples, PID readback, runtime readback, and
-  `SHA256SUMS`.
-- `evidence/attempt1-*` and `evidence/cleanup-readback.log` preserve the first
-  attempt and prior cleanup evidence.
-- Corrected source gate commit: `552e957631e299451f7ca83fd5b4506d6a088418`.
-- No retry or source correction was launched after this follow-up.
+No production change, push, merge, or public upstream write is part of this proof.

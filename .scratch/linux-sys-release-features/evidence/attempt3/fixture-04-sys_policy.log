@@ -1,0 +1,41 @@
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+   Compiling rhai v1.26.1 (/tmp/agent-build-sdku18v2/source)
+    Finished `test` profile [unoptimized] target(s) in 0.18s
+     Running tests/sys_policy.rs (/tmp/agent-build-sdku18v2/target/debug/deps/sys_policy-f23db482bee87331)
+
+running 24 tests
+test test_absolute_path_with_parent_components ... ok
+test test_absolute_paths ... ok
+test test_config_builder ... ok
+test test_configured_root_symlink_then_parent_uses_os_resolution ... ok
+test test_copy_across_roots ... ok
+test test_default_config_denies_fs ... ok
+test test_env_allow_list ... ok
+test test_error_position ... ok
+test test_error_variants ... ok
+test test_errors_are_catchable ... ok
+test test_function_metadata ... ok
+test test_host_can_downcast ... ok
+test test_missing_root_fails_early ... ok
+test test_multiple_roots ... ok
+test test_nested_roots_longest_prefix ... ok
+test test_parent_traversal_is_denied ... ok
+test test_plain_engine_has_no_sys_functions ... ok
+test test_read_only_root ... ok
+test test_remove_dir_all_needs_delete_access ... ok
+test test_root_with_dot_components ... ok
+test test_static_module_and_sharing ... ok
+test test_symlink_escape_is_denied ... ok
+test test_symlinked_root ... ok
+test test_unrestricted_respects_access_level ... ok
+
+test result: ok. 24 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
