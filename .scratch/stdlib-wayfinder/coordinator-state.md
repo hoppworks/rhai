@@ -65,8 +65,12 @@ Cause history:
   windows-vm/setup-failure-01.txt. One correction applied: call a separate
   record-windows.cmd through a 96-character Path. The first disk, firmware, TPM
   and serial evidence are preserved on workhorse in failed-install-01/.
-  The second installation uses a new disk and corrected seed. Readiness remains
-  unverified. If this same cause fails again, escalate once before another attempt.
+  The second installation uses a new disk and corrected seed. Specialize succeeded:
+  the live serial log reports RHAI_WINDOWS_READY Microsoft Windows 11 Pro Build=26300.
+  OOBE completed to first sign-in. Windows demands a password change for RhaiTest.
+  No password entered or changed; explicit permission to confirm empty fields is
+  pending under the credential rule. Desktop, baseline and cold boot remain pending.
+  The former Path-length cause is closed.
 - DVD boot: after missed initial prompt, firmware boot-menu selections failed twice.
   See escalations/02-vm-dvd-boot.answer.md. The answer-justified reset timed out.
   Owner then explicitly authorized one additional attempt with automatic DVD
@@ -90,12 +94,16 @@ private. Remove remote branches only after their existing public heads are merge
 into main. Backup: remote-cleanup/fork-before-cleanup.bundle, verified complete.
 No remote mutation yet. Three public heads: claude/vibrant-sagan-3g1pxn 118745c6,
 replace-smartstring-with-compact-str 6a64e7ec, task/stdlib-net-assessment 0c88657b.
-Private HEAD 6165d683 must not be included in remote cleanup.
+Private HEAD 869c9b75 and later private commits must not be included in remote cleanup.
 Candidate worktree /Users/hoppworks/projects/rhai-remote-cleanup, task/remote-cleanup.
 Merge of public assessment head is staged, uncommitted, with .scratch, AGENTS.md,
 CONTEXT.md and docs removed from the index (local files preserved). The first gate
-failed only at macOS non-UTF-8 filename fixture creation, before Rhai. Owner approval
-for this targeted fixture correction is pending; do not merge/push/delete yet.
+failed at macOS non-UTF-8 filename fixture creation, before Rhai. The separately
+run policy target also failed test_symlinked_root at the absolute configured-root
+alias read; this is inherited runtime behavior, not a fixture problem. Results:
+env 6/6, filesystem 20/21, policy 22/23. Owner approval for the fixture correction
+is pending; a runtime repair is also required before the selected gate can pass.
+Do not merge/push/delete while failed checks remain.
 No private changes, remote history rewrite or upstream action is authorized.
 
 ## Next action

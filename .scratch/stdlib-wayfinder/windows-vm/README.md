@@ -58,7 +58,11 @@ failed, one Expert diagnosis and its single reset attempt did not recover boot.
 The owner authorized one further attempt with automatic DVD acknowledgment; this
 reached fresh Setup and installation progress with corroborating disk writes.
 See `../escalations/02-vm-dvd-boot.answer.md` and `boot-failure-02.log`. The product-key screen was skipped
-using its built-in "I don't have a product key" option. Guest readiness is pending.
+using its built-in "I don't have a product key" option. The live serial marker now
+reports `RHAI_WINDOWS_READY Microsoft Windows 11 Pro Build=26300`. OOBE reached
+first sign-in, where Windows requires a password change for the local RhaiTest
+account. No password has been entered or changed. Owner permission to confirm
+empty fields is pending; desktop, clean baseline and cold boot are still unverified.
 The specialize-pass serial marker proves the installed edition/build, not completed
 OOBE or desktop readiness; verify those separately through the console.
 Rust/MSVC toolchains and native Rhai tests are not installed or run.
