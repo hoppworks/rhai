@@ -31,11 +31,22 @@ be resolved before their dependent implementation. No remote publication.
   filesystem 23, policy 26 all pass; invalid-name fixture explicitly unsupported.
   Public API/host readback and preserved failing controls independently reviewed.
 
+- Native Linux sys proof accepted and locally retained from 854d05f2. Source
+  f7aed036 has unchanged relevant code versus accepted macOS source. Linux env7,
+  fs24, policy24 pass; invalid-UTF8 public API and wrong-variant control proven.
+  Exact remote runtime absence independently confirmed; see ../linux-sys-proof/proof.md.
+- File-handle compatibility facts retained from 17991878 in
+  file-handle-compatibility.md. Genuine negative-length/unchecked divergences and
+  release choices remain unresolved; source facts are not acceptance of bugs.
+
 ## Current step
 
 Step 1 is repaired and accepted for the exercised macOS contract cases. No broad
-release/platform completion claim. Native Linux proof task active from integrated
-source to close the supporting-filesystem NotUtf8 coverage gap. Windows guest
+release/platform completion claim. Native Linux proof closes the supporting-filesystem NotUtf8 coverage gap.
+A final source review found an unrelated unrestricted Dir anchor open and
+current_dir conversion; responsible filesystem context is correcting these with
+a safe isolated deleted-cwd regression if feasible. Existing proof applies only
+to the previous source until changed paths are reverified. Windows guest
 supervision adapter implementation/proof is active before further native builds.
 Step 2 owner TCP question remains pending; release/API proposal is unaccepted.
 POSIX process prototype 35a8cf52 proof is not accepted. Correction disposition
@@ -85,8 +96,8 @@ Inherited VM history remains authoritative.
 
 ## Next action
 
-Collect native Linux proof and Windows scoped adapter evidence; inspect actual
-coverage before accepting either. Mac combined proof is accepted; do not rerun
+Collect unrestricted resolution correction and Windows scoped adapter evidence;
+inspect actual coverage before accepting either. Mac combined proof is accepted; do not rerun
 unchanged source merely for another context or platform task.
 Collect owner response to process retry consultation; preserve current stopped
 prototype cause history and do not restart it autonomously.

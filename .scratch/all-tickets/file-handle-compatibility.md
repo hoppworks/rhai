@@ -21,3 +21,13 @@
 **Genuine ticket 06 decisions:** whether the `sys` subset changes the upstream mode/default/seek/length/error behaviors, adds explicit close, or exposes bytes under `no_index`; whether an open handle remains usable after its path is removed/replaced; and whether/how `unchecked` is supported given the observed source incompatibility. Preserve the remaining listed upstream behavior by default as the meaning of “compatible subset.”
 
 **Exact acceptance cases (proposed):** (1) default `open_file` on missing and existing files creates without truncating existing bytes; verify independent host read-back. (2) exercise each documented mode for create/existing/read/write/append/exclusive-create outcomes and deny writes on read-only roots before mutation. (3) from nonzero cursor, omitted/zero and positive-length text/blob reads return expected bytes, advance cursor, honor engine limits, and invalid UTF-8 string read errors while blob read round-trips it. (4) string/blob writes return actual written count and a subsequent seek/read confirms bytes; test append mode, partial/error path as feasible. (5) seek negative/zero/positive and position match stated contract. (6) cloned handle shares cursor and stays valid until last handle drops; after drop, host can reopen/read file; test no explicit close. (7) denied outside-root open and mode-based write leave protected file unchanged. (8) compile and run applicable cases under `sync`, `no_index`, `metadata`, `only_i32`; verify `INT` conversion error when position/count exceeds `INT::MAX` where practical. `unchecked` is a separate compatibility/build question because pinned calls access Rhai limit getters omitted by that feature; do not claim it works without resolving that cfg interaction. Blob assertions are omitted only under `no_index`. These extend—not replace—the plan's existing R6 documentation requirement.
+
+**Review disposition:** this report supplies source facts, not acceptance of upstream
+bugs as the `sys` contract. In particular, the negative-length allocation fallback
+needs a deliberate decision: propose rejecting negative lengths before allocation
+rather than reproducing an attempt to allocate `INT::MAX` bytes. The existing
+checked/unchecked limit API split is independently confirmed in this repository's
+`src/api/limits.rs` at source revision f7aed036; it must be handled explicitly.
+Open-mode defaults, shared cursor, final-drop close and no_index blob omission can
+be preserved as ordinary compatibility choices without reopening their basic scope.
+Ticket 06 remains open for genuine divergences and release gates.
