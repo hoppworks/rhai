@@ -15,11 +15,7 @@ struct TempDir(PathBuf);
 impl TempDir {
     fn new() -> Self {
         static NEXT: AtomicUsize = AtomicUsize::new(0);
-        let path = std::env::temp_dir().join(format!(
-            "rhai-combined-sys-net-{}-{}",
-            std::process::id(),
-            NEXT.fetch_add(1, Ordering::Relaxed)
-        ));
+        let path = std::env::temp_dir().join(format!("rhai-combined-sys-net-{}-{}", std::process::id(), NEXT.fetch_add(1, Ordering::Relaxed)));
         std::fs::create_dir(&path).expect("create unique fixture root");
         Self(path)
     }
@@ -65,9 +61,7 @@ fn sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors(
 
     let root = TempDir::new();
     let listener = TcpListener::bind("127.0.0.1:0").expect("bind OS-selected port");
-    listener
-        .set_nonblocking(true)
-        .expect("configure bounded readiness polling");
+    listener.set_nonblocking(true).expect("configure bounded readiness polling");
     let endpoint = listener.local_addr().expect("read selected endpoint");
     let peer = PeerThread(Some(std::thread::spawn(move || {
         let deadline = Instant::now() + Duration::from_secs(5);
@@ -105,7 +99,7 @@ fn sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors(
                 file.write("filesystem-payload");
                 let stream = connect("127.0.0.1", {});
                 stream.write_all_string("{}");
-                let reply = stream.read_string({});
+                let reply = stream.read_to_end_string({});
                 if reply != "{}" {{ throw "unexpected peer bytes"; }}
                 stream.close();
             "#,

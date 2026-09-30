@@ -71,3 +71,10 @@ Prepare atomic local commit of test and proof artifacts for root review. No push
 
 ## Retrospective
 The first test compile caught a harness generic-type typo. The first runtime then exposed inherited nonblocking mode on the accepted peer socket; setting it explicitly to blocking made the bounded exchange deterministic. The false-green control verified the independent host readback assertion. The matrix harness did not enforce a storage stop automatically, so it overshot the 2-GiB sampled cap; the invocation was stopped when observed and exact cleanup was checked. The f32 requirement remains open under the hard stop.
+
+
+## Source review correction (2026-09-30)
+- Root review identified that source commit `679e7d7f` used TCP `read_string`, which performs a single read and can return a shorter chunk than the full peer reply.
+- Updated the script to `read_to_end_string` with the same cap. The independent peer writes its response and then closes when its thread returns, so the script read reaches EOF.
+- This is a source-only correction. Static formatting and diff checks are permitted; builds, tests, or other runtime launches remain stopped by the storage-cap decision.
+- Prior seven-row/control logs apply only to source `679e7d7f`; corrected source is unverified and must not be presented as accepted. A separately authorized bounded follow-up is required for that assertion.

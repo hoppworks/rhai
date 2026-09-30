@@ -1,10 +1,10 @@
 # Combined sys/net package acceptance — partial
 
-## Result
+## Result for source commit `679e7d7f`
 
 On macOS 27.0 arm64 with Rust/Cargo 1.93.0, the new same-Engine integration test passed with these seven feature sets: baseline `testing-environ,sys,net`; plus `sync`; plus `no_index`; plus `metadata,serde`; plus `only_i32,no_float`; plus `unchecked`; and `no_index,sync,metadata`. The required `f32_float` matrix row is incomplete, so the combined release requirement remains open.
 
-The new test registers `SysPackage` and `NetPackage` in one `Engine`. It creates a confined temporary directory, has a Rhai script write a file and exchange distinct known strings over TCP, reads the file afresh through `std::fs`, and checks both sent and received bytes at an independent loopback peer. The peer is bound to an OS-selected port before script execution, uses bounded socket operations, and is joined through a guard. The test also downcasts missing-file and denied-network runtime errors to `SysError` and `NetError` respectively.
+The tested source at `679e7d7f` registered `SysPackage` and `NetPackage` in one `Engine`. It created a confined temporary directory, had a Rhai script write a file and exchange distinct known strings over TCP, read the file afresh through `std::fs`, and checked both sent and received bytes at an independent loopback peer. Review later identified that the test used `read_string`, a single TCP read that could validly return fewer bytes than the peer wrote. The current source changes that call to `read_to_end_string` with the same length cap; the peer writes then closes, bounding the read at EOF. That corrected source has not been built or executed and is not covered by the prior test results below.
 
 ## False-green control
 
@@ -24,7 +24,7 @@ The shared command shape for every row was:
 cargo test --features <row-features> --test combined_sys_net --test sys_env --test sys_fs --test sys_policy --test net_connect --test net_listen --test net_reads --test net_writes -- --test-threads=1 --nocapture
 ```
 
-Rows 01–07 each completed with exit status 0 and all eight test targets passing. Exact feature strings, commands, and statuses are in `logs/matrix-status.txt`; per-target counts and raw output are in `logs/row-01.log` through `logs/row-07.log`.
+For source commit `679e7d7f`, rows 01–07 each completed with exit status 0 and all eight test targets passing. Exact feature strings, commands, and statuses are in `logs/matrix-status.txt`; per-target counts and raw output are in `logs/row-01.log` through `logs/row-07.log`. Those results do not establish behavior of the corrected current source.
 
 The `f32_float` row started under the same command shape but was interrupted before all targets completed. Its partial log records successful combined, net_connect, net_listen, net_reads, and net_writes targets; it does not record completion for sys_env, sys_fs, or sys_policy. A subsequent scoped attempt to resume that row was stopped immediately and produced no test result. Do not treat this feature combination as accepted. See `logs/row-08.log`, `logs/f32-environment.txt`, and `logs/f32-storage-samples.txt`.
 
