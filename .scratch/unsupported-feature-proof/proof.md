@@ -15,7 +15,7 @@ The accepted exact diagnostics, all from nonzero compiler exits, are recorded in
 
 Rust toolchain: rustc 1.93.0, cargo 1.93.0, host `aarch64-apple-darwin`. Installed targets were `aarch64-apple-darwin`, `wasm32-unknown-unknown`, `wasm32-wasip1`, and `x86_64-unknown-linux-gnu`. No target was installed for this proof.
 
-The base-revision manifest boundary is retained in `logs/prechange-sys-wasm-unknown-boundary.log`: `sys` on `wasm32-unknown-unknown` fails in errno with its unsupported-target diagnostic before the Rhai `sys` guard. The first harness wrapper returned 1 because its separate boundary wording predicate expected `it is` where the compiler printed `it's`; this was a matcher wording issue. The raw compiler outcomes and exact package diagnostics are preserved. The corrected matcher was syntax-checked, but the full matrix was not rerun. See `attempt-history.md` for the overwritten-log recovery and why no other results were rerun.
+The base-revision manifest boundary is retained in `logs/prechange-sys-wasm-unknown-boundary.log`: `sys` on `wasm32-unknown-unknown` fails in errno with its unsupported-target diagnostic before the Rhai `sys` guard. The first harness wrapper returned 1 because its separate boundary wording predicate expected `it is` where the compiler printed `it's`; this was a matcher wording issue. The raw compiler outcomes and exact package diagnostics are preserved. The corrected matcher was syntax-checked, but the full matrix was not rerun. See `attempt-history.md` for the separate preliminary WASI probe runtime, its cleanup status, the unavailable original paths for overwritten setup logs, and the later recovery. No other results were rerun.
 
 ## Native dependency smoke
 
