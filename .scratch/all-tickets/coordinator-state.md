@@ -124,13 +124,20 @@ Inherited VM history remains authoritative.
 
 ## Next action
 
-Monitor intake final source review is complete. Before the next allocation/
-staging integration step, record finite remaining repair scope/time/resources
-under campaign's repair reference, using the existing Expert answer and cause
-history. Inspect backend ownership, cancellation and completion-transfer paths;
-then continue the same responsible context. Do not execute until native
-bootstrap/custody prerequisites are proven. No alternative acceptance or new
-Expert chain. Preserve unconsumed POSIX retry and pending owner decisions.
+The existing windows_monitor_implementation agent is continuing the bounded
+staging handoff slice, not restarted. The first untracked contract fixture at
+tools/windows-scoped-runner/fixtures/MonitorStagingHandoffFixture.cs was read in
+full. Concrete findings sent: StartOnce must await backend entry before stop;
+the fake backend must dispose its acquired owner on cancellation before result
+publication; a 100-ms stopwatch assertion is scheduling-sensitive. Agent design
+uses atomic Published/Accepted/ReleaseRequested ownership, worker-only disposal
+and nonblocking watchdog signals. Review the actual cancellation mechanism into
+StageSourceTree, fresh deadline checks around acceptance, and release ordering
+when source arrives. Accepted allocation may never become payload authority.
+Keep the fixed 11:47 UTC deadline across turns; no budget reset. Do not execute
+until native bootstrap/custody prerequisites are proven. No alternative
+acceptance or new Expert chain. Preserve unconsumed POSIX retry and pending owner
+decisions. No owned runtime resources were created.
 
 ## Open owner decisions
 
@@ -144,6 +151,13 @@ Dependent implementation is stopped. Continue only independent authorized
 requirements with new evidence; do not repeat decision/status/verification rounds.
 
 ## Goal turn classification
+
+2026-09-30 staging ownership continuation: progress. Pre-work finite source
+limits committed in d9fd5e5f. Existing responsible agent resumed; concrete
+ownership design assessed and first real fixture source independently inspected,
+changing the correction action with two lifecycle findings and one timing-test
+finding. No implementation acceptance or executed test claim. Full backlog
+remains incomplete; the bounded live source task is continuing, so goal active.
 
 2026-09-30 actual intake commit continuation: progress. Authoritative source
 changed to dd8c07dc/24c3a19f; independent final review closes original-frame,
