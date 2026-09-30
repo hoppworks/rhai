@@ -17,7 +17,7 @@ in all applicable profiles; unchanged full-suite evidence applies. Meaningful RE
 is missing read_string registration; deliberate wrong payload control compares
 actual abc to wrong expectation and fails at that assertion.
 
-Proof and scripts retained at /Users/hoppworks/projects/rhai-file-reads/.scratch/file-reads/.
+Proof and scripts retained at /Users/hoppworks/projects/rhai-all-tickets/.scratch/file-reads/.
 Original12:51:28–13:51:28UTC allowance and all ten launches preserved. Setup errors,
 one zero-prefill correction and portable error-class correction remain recorded.
 Coordinator independently checked exact logged runtimes agent-build-_1qfzah0,
@@ -26,3 +26,5 @@ Two-job setting and serial tests explicit in scripts. Peak storage and exact
 fixture-count cap compliance were not measured and remain unverified. Native
 macOS behavior only; release/MSRV/other platform gates remain open. Retain owned
 worktree for required untracked proof; no redundant evidence copies.
+
+Accepted proof moved without duplication to the coordinator checkout after verified integration and fork push. Historical command paths remain as executed. Owned source checkout may be retired after clean-status confirmation.

@@ -401,3 +401,9 @@ launch safely. Responsible task correcting source inside original14:18:05 deadli
 no build, fixture, signaling or runtime launch authorized. Historical Rust main
 contains rejected fixture behavior and must never be invoked; only reviewed
 --fixture modes may execute after source approval.
+
+## Accepted resource retirement
+
+Clean owned TCP listener checkout retired without force after verified integration
+and fork push; proof remains tracked at ../tcp-listener/. Accepted file-read proof
+moved without duplication to ../file-reads/; source/history preserved.
