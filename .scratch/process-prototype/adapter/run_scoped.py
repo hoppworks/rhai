@@ -127,15 +127,18 @@ def _drive_io(fds, deadline, sock, cancel_mode=False, assertion_mode=False, time
         return {'workers_started': len(started), 'workers_alive': sum(thread.is_alive() for thread in threads),
                 'active_workers': active, 'assertion_held_workers': held}
 
-    def hold_for_assertion(name):
+    def hold_for_assertion(name, wait_for_prepare=False):
         if not assertion_mode:
+            return
+        if not wait_for_prepare and not assertion_prepare.is_set():
             return
         with active_lock:
             if name in prepared_workers:
                 return
-        while not assertion_prepare.wait(0.01):
-            if time.monotonic() >= deadline:
-                raise TimeoutError('assertion preparation deadline')
+        if wait_for_prepare:
+            while not assertion_prepare.wait(0.01):
+                if time.monotonic() >= deadline:
+                    raise TimeoutError('assertion preparation deadline')
         with active_lock:
             prepared_workers.add(name)
             held_workers.add(name)
@@ -212,7 +215,7 @@ def _drive_io(fds, deadline, sock, cancel_mode=False, assertion_mode=False, time
             _send(sock, json.dumps({'op': 'io_live'}).encode(), deadline)
             live_event.set()
             if assertion_mode:
-                hold_for_assertion('stdin-writer')
+                hold_for_assertion('stdin-writer', wait_for_prepare=True)
                 raise AssertionError('intentional live-resource assertion')
             while offset < len(payload) and not stop.is_set():
                 if time.monotonic() >= deadline:
