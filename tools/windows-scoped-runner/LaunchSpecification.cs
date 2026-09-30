@@ -1,6 +1,7 @@
 // Immutable, bounded launch specification codec. Parsing validates syntax
-// only; it performs no filesystem I/O, allocation, process launch, or authority
-// check. The monitor remains the only source of runtime/evidence identities.
+// only; it performs no filesystem I/O, runtime-directory allocation, process
+// launch, or authority check. The monitor remains the only source of
+// runtime/evidence identities.
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -51,10 +52,10 @@ internal sealed class LaunchSpecification
     internal static LaunchSpecification Create(string source, string executable, string[] args)
     {
         if (args == null) throw Failure(ErrorCode.ArgumentCount, "argument array is required");
+        if (args.Length > MaximumArguments) throw Failure(ErrorCode.ArgumentCount, "argument count exceeds the fixed bound");
         string[] copied;
         try { copied = (string[])args.Clone(); }
         catch (Exception e) { throw new SpecificationException(ErrorCode.ArgumentCount, "unable to snapshot arguments", e); }
-        if (copied.Length > MaximumArguments) throw Failure(ErrorCode.ArgumentCount, "argument count exceeds the fixed bound");
         ValidateText(source, "source directory");
         ValidateText(executable, "relative executable");
         for (int i = 0; i < copied.Length; i++) ValidateText(copied[i], "argument " + i);
@@ -159,9 +160,12 @@ internal sealed class LaunchSpecification
     // shell command and is not wired to workload execution in this source step.
     internal string BuildQuotedCommandLine(string stagedExecutablePath)
     {
-        ValidateText(stagedExecutablePath, "staged executable path");
+        if (stagedExecutablePath == null) throw Failure(ErrorCode.InvalidExecutablePath, "staged executable path is required");
         if (stagedExecutablePath.Length > WindowsCustodyBackend.MaximumPathLengthForSpecification)
             throw Failure(ErrorCode.InvalidExecutablePath, "staged executable path exceeds the fixed path bound");
+        ValidateText(stagedExecutablePath, "staged executable path");
+        try { WindowsCustodyBackend.ValidateLaunchExecutablePathSyntax(stagedExecutablePath); }
+        catch (Exception e) { throw new SpecificationException(ErrorCode.InvalidExecutablePath, "staged executable path syntax is invalid", e); }
         var command = new StringBuilder(Quote(stagedExecutablePath));
         for (int i = 0; i < arguments.Length; i++) command.Append(' ').Append(Quote(arguments[i]));
         if (command.Length > MaximumCommandLineChars) throw Failure(ErrorCode.CommandLineTooLong, "decoded Windows command line exceeds the fixed bound");
@@ -190,6 +194,7 @@ internal sealed class LaunchSpecification
     private static void ValidateText(string value, string description)
     {
         if (value == null) throw Failure(ErrorCode.InvalidCharacters, description + " is required");
+        if (value.Length > MaximumFieldBytes) throw Failure(ErrorCode.FieldTooLarge, description + " exceeds the fixed UTF-8 byte bound");
         for (int i = 0; i < value.Length; i++)
             if (Char.IsControl(value[i])) throw Failure(ErrorCode.InvalidCharacters, description + " contains a control character");
         try { StrictUtf8.GetByteCount(value); }

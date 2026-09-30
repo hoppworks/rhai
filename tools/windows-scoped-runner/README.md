@@ -36,8 +36,10 @@ decoded UTF-8 bytes each; arguments to 32; and the conservatively bounded,
 Windows-quoted command line to 4,096 characters. Source and relative executable
 paths receive syntax-only validation. The parser does no filesystem I/O and
 proves no source identity, existence, authority, staging, or executable
-validity. Unknown fields reject cleanup paths and policy overrides; policy
-continues to come from the fixed monitor policy.
+validity. Its unconnected command-line formatter also checks the eventual
+staged executable path as a bounded absolute local Windows path, without
+checking that the path exists. Unknown fields reject cleanup paths and policy
+overrides; policy continues to come from the fixed monitor policy.
 
 The wire value is not yet adapted to `MonitorTransport`: that transport accepts
 512-byte frames with a 32-frame/8,192-byte queue. A future adapter must carry the

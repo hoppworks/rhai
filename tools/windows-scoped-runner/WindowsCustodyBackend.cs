@@ -1648,6 +1648,9 @@ internal static class WindowsCustodyBackend
     }
 
     internal static void ValidateExecutableRelativePathSyntax(string value) { ParseExecutableRelativePath(value); }
+#if SCOPED_RUNNER_TESTING
+    internal static void ValidateExecutableRelativePathForFixture(string value) { ValidateExecutableRelativePathSyntax(value); }
+#endif
 
     // Pure syntax validation for a launch specification. This deliberately
     // performs no path normalization, existence check, or filesystem access.
@@ -1660,6 +1663,14 @@ internal static class WindowsCustodyBackend
         if (value.IndexOf(':', 2) >= 0) throw new ArgumentException("source directory contains unsupported colon syntax", "value");
         string[] components = value.Substring(3).Split('\\');
         for (int i = 0; i < components.Length; i++) ValidatePathComponent(components[i], "source directory");
+    }
+
+    internal static void ValidateLaunchExecutablePathSyntax(string value)
+    {
+        // An absolute staged executable uses the same bounded local-drive and
+        // component rules as a source directory, with its final component
+        // serving as the executable filename.
+        ValidateLaunchSourceDirectorySyntax(value);
     }
 
     private static string ToAsciiBounded(string value, int maximum)

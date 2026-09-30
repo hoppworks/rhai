@@ -1,5 +1,5 @@
 // Pure managed protocol/model fixture source. It does not read source paths,
-// allocate a runtime, start a monitor, or authorize a workload.
+// allocate a runtime directory, start a monitor, or authorize a workload.
 using System;
 using System.Text;
 
@@ -19,9 +19,16 @@ internal static class LaunchSpecificationFixture
             new[] { new string('x', LaunchSpecification.MaximumFieldBytes) });
         CheckRoundTrip("literal arguments and Unicode", source, executable,
             new[] { "", "literal $HOME %TEMP% `cmd` & |", "snowman ☃ and 漢字" });
-        string quoted = LaunchSpecification.Create(source, executable, new[] { "literal $HOME %TEMP% `cmd` & |" })
-            .BuildQuotedCommandLine(@"C:\staged\runner.exe");
-        Expect("Windows command quoting preserves shell-looking input literally", quoted.Contains("$HOME %TEMP% `cmd` & |"));
+        ExpectQuoted("empty argument quoting", new[] { String.Empty },
+            "\"C:\\staged\\runner.exe\" \"\"");
+        ExpectQuoted("embedded quote quoting", new[] { "a\"b" },
+            "\"C:\\staged\\runner.exe\" \"a\\\"b\"");
+        ExpectQuoted("backslash before embedded quote quoting", new[] { new string(new[] { 'a', '\\', '\"', 'b' }) },
+            "\"C:\\staged\\runner.exe\" \"a" + new string('\\', 3) + "\"b\"");
+        ExpectQuoted("trailing backslash quoting", new[] { "trail\\" },
+            "\"C:\\staged\\runner.exe\" \"trail" + new string('\\', 2) + "\"");
+        ExpectQuoted("shell-looking input remains literal", new[] { "literal $HOME %TEMP% `cmd` & |" },
+            "\"C:\\staged\\runner.exe\" \"literal $HOME %TEMP% `cmd` & |\"");
 
         var original = new[] { "before" };
         LaunchSpecification snapshot = LaunchSpecification.Create(source, executable, original);
@@ -33,8 +40,11 @@ internal static class LaunchSpecificationFixture
         byte[] returnedWire = snapshot.ToWire();
         returnedWire[0] ^= 0xff;
         Expect("returned wire bytes are a defensive copy", snapshot.ToWire()[0] == wire[0]);
+        LaunchSpecification parsedSnapshot = LaunchSpecification.Parse(wire);
+        wire[0] ^= 0xff;
         Expect("parser accepts a syntactically valid nonexistent source without filesystem access",
-            LaunchSpecification.Parse(wire).SourceDirectory == source);
+            parsedSnapshot.SourceDirectory == source);
+        Expect("caller byte mutation does not alter parsed snapshot", parsedSnapshot.RelativeExecutable == executable && parsedSnapshot.Arguments[0] == "before");
         Expect("accepted model exposes only source, relative executable, and literal arguments",
             snapshot.SourceDirectory == source && snapshot.RelativeExecutable == executable && Equal(snapshot.Arguments, new[] { "before" }));
 
@@ -58,7 +68,11 @@ internal static class LaunchSpecificationFixture
         string[] tooMany = new string[LaunchSpecification.MaximumArguments + 1];
         for (int i = 0; i < tooMany.Length; i++) tooMany[i] = "x";
         ExpectCreateError("argument count bound", source, executable, tooMany, LaunchSpecification.ErrorCode.ArgumentCount);
-        ExpectCreateError("argument byte bound", source, executable, new[] { new string('x', LaunchSpecification.MaximumFieldBytes + 1) }, LaunchSpecification.ErrorCode.FieldTooLarge);
+        ExpectCreateError("argument UTF-8 byte bound", source, executable, new[] { new string('漢', (LaunchSpecification.MaximumFieldBytes / 2) + 1) }, LaunchSpecification.ErrorCode.FieldTooLarge);
+        ExpectCreateError("oversized UTF-16 input rejected before scanning", source, executable,
+            new[] { new string('x', LaunchSpecification.MaximumFieldBytes + 1) }, LaunchSpecification.ErrorCode.FieldTooLarge);
+        ExpectCreateError("oversized executable field rejected", source, new string('x', LaunchSpecification.MaximumFieldBytes + 1),
+            new string[0], LaunchSpecification.ErrorCode.FieldTooLarge);
         ExpectCreateError("decoded command line bound", source, executable,
             new[] { new string('x', 900), new string('y', 900), new string('z', 900), new string('q', 900), new string('r', 900) },
             LaunchSpecification.ErrorCode.CommandLineTooLong);
@@ -68,6 +82,9 @@ internal static class LaunchSpecificationFixture
         ExpectCreateError("decoded command line one character over bound", source, executable,
             new[] { exactCommand[0], exactCommand[1], exactCommand[2], exactCommand[3] + "x" },
             LaunchSpecification.ErrorCode.CommandLineTooLong);
+        ExpectCommandPathError("staged executable path length bound", new string('a', WindowsCustodyBackend.MaximumPathLengthForSpecification + 1), LaunchSpecification.ErrorCode.InvalidExecutablePath);
+        ExpectCommandPathError("staged executable must be absolute", @"runner.exe", LaunchSpecification.ErrorCode.InvalidExecutablePath);
+        ExpectCommandPathError("staged executable rejects reserved device component", @"C:\staged\CON\runner.exe", LaunchSpecification.ErrorCode.InvalidExecutablePath);
         ExpectError("encoded input byte bound", new byte[LaunchSpecification.MaximumWireBytes + 1], LaunchSpecification.ErrorCode.InputTooLarge);
 
         byte[] exactBound = FindWireAtExactInputLimit(source, executable);
@@ -82,6 +99,28 @@ internal static class LaunchSpecificationFixture
         LaunchSpecification first = LaunchSpecification.Create(source, executable, args);
         LaunchSpecification second = LaunchSpecification.Parse(first.ToWire());
         Expect(name + " round-trips exactly", second.SourceDirectory == source && second.RelativeExecutable == executable && Equal(args, second.Arguments));
+    }
+
+    private static void ExpectQuoted(string name, string[] args, string expected)
+    {
+        string actual = LaunchSpecification.Create(@"Z:\never-created\source", @"bin\runner.exe", args)
+            .BuildQuotedCommandLine(@"C:\staged\runner.exe");
+        Expect(name, String.Equals(actual, expected, StringComparison.Ordinal));
+    }
+
+    private static void ExpectCommandPathError(string name, string stagedPath, LaunchSpecification.ErrorCode expected)
+    {
+        try
+        {
+            LaunchSpecification.Create(@"Z:\never-created\source", @"bin\runner.exe", new string[0])
+                .BuildQuotedCommandLine(stagedPath);
+            failures++; Console.Error.WriteLine("FAIL " + name + ": accepted");
+        }
+        catch (LaunchSpecification.SpecificationException e)
+        {
+            if (e.Code != expected) { failures++; Console.Error.WriteLine("FAIL " + name + ": expected " + expected + ", got " + e.Code); }
+            else Console.WriteLine("PASS " + name + ": " + e.Code);
+        }
     }
 
     private static byte[] FindWireAtExactInputLimit(string source, string executable)
