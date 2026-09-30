@@ -41,6 +41,12 @@ be resolved before their dependent implementation. No remote publication.
 
 ## Current step
 
+Transfer fixture source is now present in the Windows candidate as an untracked
+file. The same agent is confirmed running. Full intermediate fixture review
+identified finite-loop and sender-ACK/invalid-assembly coverage gaps, delivered
+for related correction; see windows-specification-transfer-review.md. Await the
+model/fixture commit; nothing has compiled or run.
+
 Windows immutable launch specification 91e474d7 and related correction 73020670
 are independently source-reviewed across all four files each, zero skips, in
 the separate owned Windows worktree. OCR-excluded README/fixture were manually
@@ -140,6 +146,14 @@ Dependent implementation is stopped. Continue only independent authorized
 requirements with new evidence; do not repeat decision/status/verification rounds.
 
 ## Goal turn classification
+
+2026-09-30 transfer fixture continuation: progress. Previous turn was a verified
+wait on the live Windows agent. Current authoritative untracked fixture source
+changes state; full source inspection identifies additional bounded-loop and
+ACK/invalid-assembly requirements before final review. Same agent confirmed
+running, not restarted. No compiler/native operation or resource. Incomplete
+full-custody correction has no completed failed correction/recovery; independent
+source work remains, so goal active/incomplete, not blocked.
 
 2026-09-30 transfer continuation: verified wait. Previous turn was progress:
 91e474d7/73020670 source and related independent review changed authoritative
