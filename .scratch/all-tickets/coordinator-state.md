@@ -41,87 +41,40 @@ be resolved before their dependent implementation. No remote publication.
 
 ## Current step
 
+Accepted and integrated: filesystem/environment repairs, TCP connect1a6660ac,
+file open/write/cursor260ac238, core1.66 compatible-resolutione0423fe4,
+TCP listener06d54b2d and bounded file reads8d646051. Evidence/review references:
+tcp-connect-review.md, file-handle-open-review.md,
+core-msrv-compatible-resolution-review.md, tcp-listener-review.md and
+file-handle-reads-review.md. Relevant proof reused after independent source/log
+assessment; native macOS coverage does not close the full release matrix.
 
-Owner decisions are resolved at e45c675c. TCP outgoing-connect foundation is
-accepted and locally integrated at 1a6660ac (candidate a89cb9b3, final-drop
-correction e139ecf4); see tcp-connect-review.md and ../tcp-connect/proof.md.
-Real net/net,sync Engine and peer checks pass 4/4 each; wrong EOF control fails.
-Exact accepted runtime absence independently confirmed. Resource measurement and
-explicit runner-timeout omissions are disclosed, not inferred as compliant.
-No full net/release acceptance. Next independent slice: authorized listener/accept,
-briefs/tcp-listener.md, fresh60-active-minute package with explicit timeout/storage.
-Draft net,sync proof4 connect/7 listener tests reviewed; source findings closed in
-draft. Review requires quota2 for the timeout-release assertion and an exceptional
-path close/join guard for the owned sync worker before immutable final acceptance.
-Original12:34–13:34UTC allowance retained; no acceptance/integration yet.
+Active TCP stream reads: /Users/hoppworks/projects/rhai-tcp-stream-reads,
+task/tcp-stream-reads at90c40989, started13:17:48UTC, stop14:17:48UTC.
+Design approved with actual-byte reads, nonblocking deadline polling, unlocked
+clone close, explicit bounded EOF loop and partial count in catchable NetError.
+Do not silently reduce text input to Engine_limit/3: small ASCII reads must work;
+reject actual lossy-decoded expansion above checked Engine limit with progress.
 
-File open/write/cursor foundation is accepted and locally integrated at 260ac238
-(candidate 62f27ac3); see file-handle-open-review.md. Final real-file macOS suites
-pass 27/27 and sync/no_index 18/18, including independent readback, wrong payload
-control and reopen after handle drop. Exact final runtime absence independently
-confirmed. Storage is end-only, full parallel fixture peak is unmeasured. Retain
-owned worktree /Users/hoppworks/projects/rhai-file-handles for untracked proof.
-Bounded streaming reads now run in a fresh Standard task/file-reads at
-/Users/hoppworks/projects/rhai-file-reads, e365008a; brief briefs/file-handle-reads.md.
-Concrete proposal reviewed: additive max_file_read, finite8MiB default, host zero
-means zero returned bytes, checked nonzero Engine cap further lowers it; unchecked
-retains host cap. Per-call cap truncation and UTF-8 behavior need documentation.
-No change to whole-file APIs. Original60-active-minute allocation including review
-starts at actual agent clock12:51:28UTC, stopping13:51:28UTC, not a reset of any older cause.
-Whole release remains open.
+Active same process-prototype correction continuation: existing owned
+/Users/hoppworks/projects/rhai-process-prototype task/process-prototype e0f9f992,
+started13:18:05UTC, stop14:18:05UTC. Owner acceptance of recommended open answers
+resolves the additional60-active-minute consultation. Sole Expert01 and all cause
+history preserved. Source gate closed: add actual copied-runner timeout/live-failure
+controls, preserve group identity for final signal, complete bounded outer custody
+and independent cleanup receipt readback before any execution. See
+briefs/process-prototype-continuation.md and retained correction-attempt.md.
 
-POSIX further source-only retry is stopped at e0f9f992 in the owned process
-worktree, clean and unintegrated; no executions or owned live resources. Source
-review fixes descriptor ownership, readiness and error propagation, but remaining
-anchor SIGTERM identity loss, missing actual timeout/live-assertion controls and
-outer no-quiescence ownership/readback prevent acceptance. Original allowance
-began 12:06:47 UTC, 30 active minutes. Sole Expert/cause history preserved. One
-owner consultation asks for an additional 60-active-minute continuation of the
-same correction. Resume dependent work only on an answer; do not repeat audits
-while pending. Independent TCP listener and file work continue.
+Active phase4 file documentation/example: /Users/hoppworks/projects/rhai-file-handle-docs,
+task/file-handle-docs at90c40989. Bounded Worker requirement per briefs/file-handle-docs.md;
+actual30-minute start/stop recorded by Worker, real example + host readback required.
 
-Default-core1.66 compatible-resolution proof is accepted and locally integrated
-from20452cab; see core-msrv-compatible-resolution-review.md and
-../core-msrv-compatible-resolution/proof.md, exact tracked Cargo.lock. Full original
-manifest, actual Cargo1.66 native macOS check and Engine42/wrong43 assertion pass.
-Only optional sys source changed since frozen input; default-core evidence applies.
-Exact runtime absence independently confirmed. Sampled storage is not continuous
-peak; two-job launch compliance unverified. Optional/MSRV/native gates remain open.
-
-Listener readiness cause now escalated once to fresh Expert03:
-escalations/03-tcp-accept-readiness.md. Multiple executed race failures were not
-approved calibration. Green candidate8b825577 is not yet accepted: bounded worker
-ResourceLimit retry/cleanup needs source assessment within original13:34UTC stop.
-Expert03 answer retained at escalations/03-tcp-accept-readiness.answer.md:
-outstanding-call readiness is valid, not instrumented OS WouldBlock; explicit
-worker retry deadline is missing. Sole bounded followup stays in responsible
-listener context/original13:34 stop, fixes monotonic deadline and exercises actual
-quota-denied expiry plus sync clone close. Only affected tests rerun; unchanged
-net suites/control evidence reused. No second Expert. Other TCP source and final
-peer/control logs reviewed; exact final listener runtime absence confirmed.
-
-Actual monitor intake `dd8c07dc` and related stopped-state fixture `24c3a19f`
-are independently source-reviewed (six files plus one correction, zero skips).
-Findings are closed in source; see windows-monitor-specification-intake-review.md.
-Original framing, real bounded dispatch and maintenance/transition separation
-are implemented. Nothing has compiled or run. Candidate stays isolated.
-
-Monitor-owned allocation/staging source slice is completed in candidate
-8f75da53, independently reviewed across six files with zero skips; see
-windows-monitor-staging-ownership-review.md. It connects actual intake to a
-single worker and atomic completion/stop handoff. No compilation or execution;
-no integration or full custody acceptance. Fixed source allowance was recorded
-before work in
-briefs/windows-monitor-staging-ownership.md: 11:17–11:47 UTC on 2026-09-30,
-30 active minutes including review, zero execution/build/native launches,
-two consecutive source revisions without requirement progress stop the slice.
-This continues the sole Expert/cause correction; previous effort/history is not
-reset. Payload/proof authority and native execution prerequisites stay closed.
-
-Immutable specification `91e474d7`/`73020670` and Running renewal `43d2f067`
-source reviews remain applicable. Accepted filesystem/environment production and
-macOS/Linux proof remain unchanged. The further POSIX source attempt is stopped pending its recorded extension; the runner-copy, TCP and release recommendations were accepted by the owner
-on 2026-09-30; dependent work may resume. No remote writes.
+Windows8f75da53 source slice remains isolated and stopped; native/bootstrap gate
+closed, no native launches. Accepted source reviews retain exact references under
+Evidence and cause history. No workload or credentials may bypass prerequisites.
+Remote fork push authorized in this Session; task/all-tickets last verified remote
+90c40989, subsequent8a030fa9 push succeeded and awaits exact remote readback.
+All future author/committer names exactly lowercase hoppworks, configured email.
 
 ## Decisions
 
@@ -191,11 +144,12 @@ Inherited VM history remains authoritative.
 
 ## Next action
 
-Resume the unconsumed POSIX retry in its responsible context: amend the actual
-project-local runner custody design and source, submit it for independent review
-before any interruption fixture launches. In parallel, implement the first TCP
-vertical slice against the accepted contract in a fresh owned worktree.
-Existing Windows source slice remains closed; no native/bootstrap launch is allowed.
+Collect TCP read RED/source and file documentation/example proof; independently
+review before integration. Review completed process supervision changes against
+sole Expert01 and gate all execution on safe bounded custody/readback. Preserve
+native Windows stop. Push the Session's accepted integrated commits to authorized
+fork branch, verify exact remote ref, never remote merge. Rewrite active state
+when each requirement closes; retain prior failed checks and cause history.
 
 ## Owner decisions resolved on 2026-09-30
 
@@ -206,29 +160,15 @@ is the changed resume condition. The goal is active and remains incomplete.
 
 ## Active bounded work
 
-- POSIX: the same one further owner-authorized attempt, sole Expert 01 history
-  retained. Source/design amendment and correction: 30 active minutes from actual
-  resumption, no build/fixture launch until coordinator source gate. Use the original
-  remaining limits if stricter; do not reset elapsed time. No default launch-count
-  cutoff, no new escalation chain, stop on hard caps or contradictory evidence.
-  Source-only preparation creates no process workload or runtime. Record exact
-  custody roles, resource/time caps and interruption controls before execution.
-- TCP first slice: numeric endpoint parsing, deny-by-default exact connect grants,
-  catchable structured errors and independent-peer connection/close proof. Fresh
-  feature work, not another process repair. Up to 60 active minutes including review;
-  runtime <=15 minutes per scoped invocation, <=2 GiB private build storage, <=8
-  owned socket resources in fixtures, bounded joins and no shared services. Record
-  every launch and stop after two consecutive launches without diagnosis or closed
-  checks, contradictory evidence or uncovered decisions. Remaining TCP requirements
-  stay open; no package-wide/native-three-OS acceptance claim from this slice.
+- TCP stream reads: original13:17:48–14:17:48UTC, scoped invocation900s,2GiB,
+ 16 sockets/handles, jobs2, serial tests. Fresh independent feature requirement.
+- POSIX same correction: explicit extension13:18:05–14:18:05UTC, source gate
+ before launches, retained caps in correction-attempt.md. No second Expert chain.
+- File docs/example:30 active minutes from Worker recorded launch, invocation900s,
+ 2GiB,4 fixture files/handles, jobs2. No production feature or remote publication.
+- Retained proof worktrees are necessary for untracked evidence; preserve exactly.
 
-- File handle open/write/cursor slice is parallel independent feature work in
-  /Users/hoppworks/projects/rhai-file-handles, task/file-handles. Requirement and
-  finite 60-active-minute/resource caps recorded before work in briefs/file-handle-open.md.
-  Real Engine/host readback/control required. Read/allocation contracts and full
-  native release remain open. No cause/Expert history is reset by this new feature.
-
-## Goal turn classification
+## Goal turn classification (historical; current state above)
 
 2026-09-30 post-staging frontier audit: no progress, blocked observations 1–3
 on consecutive goal turns. Third minimal check found unchanged canonical
