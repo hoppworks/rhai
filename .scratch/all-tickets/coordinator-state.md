@@ -26,6 +26,7 @@ Owner accepted recommended API/release decisions and recommended process extensi
 Updated global instructions and campaign snapshot/export rules applied. Retain elapsed time and cause history; no duplicate builds/evidence or default launch cutoff.
 
 TCP write/half-close responsible fresh task at /Users/hoppworks/projects/rhai-tcp-stream-writes, task/tcp-stream-writes basee0dd28ec; brief briefs/tcp-stream-writes.md. Original start14:05:27UTC, deadline15:05:27UTC inclusive review. Design received; bounded host input, real partial counts and independent directional shutdown required.
+Process Rust I/O design responsible fresh task at /Users/hoppworks/projects/rhai-process-io-design, task/process-io-design baseed56cbf0; brief briefs/process-io-design.md. Original start14:20:09UTC, deadline14:50:09UTC inclusive review. Design-only, no execution or production change. Preliminary review requires correct N/N+1 cap, owned PGID lifetime and active-I/O/custody proof controls.
 
 ## Budgets and cause history
 - TCP original13:17:48–14:17:48UTC inclusive review,900s/invocation,2GiB private storage, jobs2,16 sockets/handles, serial tests. Launches1–14 retained in owned .scratch/tcp-stream-reads/; setup diagnostics classified separately from completed corrections. Launch9 no_index failed; tuple parse only10; launch12 confirmed peer inherited O_NONBLOCK;13 repaired fixture passed. Notifier refinement is source-only test review finding.
@@ -35,6 +36,7 @@ TCP write/half-close responsible fresh task at /Users/hoppworks/projects/rhai-tc
 
 ## Evidence and resources
 Root own /Users/hoppworks/projects/rhai-all-tickets task/all-tickets; latest acceptance ed56cbf0 exact remote verified. TCP writes active; accepted prototype checkout retired. Process I/O design has a separate owned task/process-io-design checkout; preserve foreign primary/planning and all unaccepted work. run_scoped.py via python3; private source/CARGO_HOME/CARGO_TARGET_DIR, export each result before cleanup. No broad process/deletion/config changes.
+Previous goal turn made progress: authoritative current state and Rust design brief committed/pushed3f0665a8 with lowercase author/committer and exact remote readback. Current TCP source review found fixture readiness/EOF/no_index and shutdown-publication races; responsible task is correcting them within its original deadline. Initial test failures have not yet established a product timeout regression.
 
 ## History references
 Complete prior state, accepted details, retired resources, failed checks, escalation and decision history: history-through-f9fe174b.md (preserved without duplication). Cause details: escalations/01-process-prototype-proof.answer.md; tcp-stream-reads-review.md; responsible task state/logs. Historical snapshots are history, this file is authoritative current state.

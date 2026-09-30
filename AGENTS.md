@@ -47,13 +47,13 @@ Acceptance contract approved by the owner on 2026-09-30.
 
 Decision detail: [.scratch/stdlib-wayfinder/issues/01-acceptance-contract.md](.scratch/stdlib-wayfinder/issues/01-acceptance-contract.md).
 
-## Current privacy constraint
+## Current remote authorization
 
-The owner selected fully private work on 2026-09-30. Continue only locally and on
-the authorized workhorse VM host. Do not push this work to the existing public
-hoppworks/rhai fork or any other remote until the owner changes this constraint.
-This overrides automatic push for the current effort. Preserve the existing
-remote history and visibility; do not rewrite or remove published commits.
+The owner initially selected fully private work on 2026-09-30, then explicitly
+authorized pushing this Session's integrated `task/all-tickets` branch to the
+existing `https://github.com/hoppworks/rhai.git` fork. That later instruction
+authorizes these pushes. Continue local and authorized workhorse VM work under
+the recorded scope. Preserve the existing remote history and visibility.
 
 ## Resource lifecycle
 
