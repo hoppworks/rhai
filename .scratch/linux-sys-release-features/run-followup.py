@@ -16,6 +16,7 @@ SOURCE_REV = 'e1db9baafaaf30d94085f0cc6f661f363399f193'
 ARCHIVE_SHA256 = 'c934633c7889e4a427a87d557bbc578146e4db641c4fde2c93ff3fd4f047aa47'
 EVIDENCE = STAGE / 'evidence'
 RUNTIME = pathlib.Path(os.environ['AGENT_RUNTIME_DIR'])
+RUSTUP_HOME = pathlib.Path('/root/.rustup')
 CARGO_HOME = RUNTIME / 'cargo-home'
 SOURCE = RUNTIME / 'source'
 TARGET = RUNTIME / 'target'
@@ -246,7 +247,7 @@ try:
     sampler_thread.start()
     emit(f'SOURCE_REVISION {SOURCE_REV}')
     emit(f'PRIVATE_RUNTIME {RUNTIME}')
-    emit(f'PRIVATE_RUSTUP_HOME {RUSTUP_HOME}')
+    emit(f'EXISTING_RUSTUP_HOME {RUSTUP_HOME} (read-only; no toolchain installation)')
     emit(f'PRIVATE_CARGO_HOME {CARGO_HOME}')
     emit(f'WORKSPACE_MEMBERS codegen_manifest_present=1 source_manifest={SOURCE / "Cargo.toml"}')
     emit(f'ARCHIVE_IDENTITY {archive_path} sha256={ARCHIVE_SHA256}')
@@ -261,11 +262,14 @@ try:
     run('rustc-version', [rustc, '--version', '--verbose'], expected=0)
     run('cargo-version', [cargo, '--version', '--verbose'], expected=0)
 
-    run('generate-lockfile', [cargo, 'generate-lockfile', '--jobs', '2'], expected=0)
+    run('generate-lockfile', [cargo, 'generate-lockfile'], expected=0)
     generated_lock = SOURCE / 'Cargo.lock'
     if not generated_lock.is_file():
         raise RuntimeError('cargo generate-lockfile completed without creating Cargo.lock')
-    emit(f'GENERATED_LOCK_IDENTITY {generated_lock} sha256={hashlib.sha256(generated_lock.read_bytes()).hexdigest()}')
+    shutil.copy2(generated_lock, EVIDENCE / 'Cargo.lock.generated')
+    with (EVIDENCE / 'Cargo.lock.generated').open('rb') as lock_receipt:
+        os.fsync(lock_receipt.fileno())
+    emit(f'GENERATED_LOCK_IDENTITY {EVIDENCE / "Cargo.lock.generated"} sha256={hashlib.sha256(generated_lock.read_bytes()).hexdigest()}')
 
     wrong_env = dict(BASE_ENV)
     wrong_env['RHAI_FILE_READ_WRONG_EXPECTATION'] = '1'

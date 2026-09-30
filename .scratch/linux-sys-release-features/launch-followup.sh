@@ -101,8 +101,9 @@ with (evidence / 'pid-readback.tsv').open('w') as out:
     out.write('label\tpid\tstart_ticks\tmatching_process_alive\n')
     for label, pid, start, alive in checks:
         out.write(f'{label}\t{pid}\t{start}\t{int(alive)}\n')
+    out.write('launcher_self\tintentionally alive until this script exits; root must independently read back absence\n')
     out.write(f'scoped_group_live_processes\t{sorted(live_groups)!r}\n')
-clean = not any(alive for _, _, _, alive in checks) and not live_groups
+clean = not any(alive for label, _, _, alive in checks if label != 'launcher') and not live_groups
 (evidence / 'pid-readback.status').write_text(('0' if clean else '1') + '\n')
 if not clean:
     raise SystemExit('exact owned PID/start-time or scoped process-group cleanup readback failed')

@@ -14,7 +14,8 @@ git -C "$repo" cat-file -e "$source_rev^{commit}"
 git -C "$repo" archive --format=tar "$source_rev" > "$tmp/source.tar"
 actual_archive=$(shasum -a 256 "$tmp/source.tar" | awk '{print $1}')
 test "$actual_archive" = "$expected_archive"
-tar -tf "$tmp/source.tar" | grep -qx 'codegen/Cargo.toml'
+tar -tf "$tmp/source.tar" > "$tmp/archive-members.txt"
+grep -qx 'codegen/Cargo.toml' "$tmp/archive-members.txt"
 
 ssh workhorse "test ! -e '$stage' && install -d -m 700 '$stage' '$stage/evidence' '$stage/runner/tools/agentskills'"
 scp "$tmp/source.tar" workhorse:"$stage/source.tar"
