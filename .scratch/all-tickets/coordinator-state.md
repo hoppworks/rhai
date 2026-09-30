@@ -41,6 +41,24 @@ be resolved before their dependent implementation. No remote publication.
 
 ## Current step
 
+
+Owner decisions are resolved at e45c675c. Active responsible tasks:
+`process_prototype` in the owned process worktree (12:06:47 UTC start, same
+30-active-minute source/review package), `tcp_connect` in task/tcp-connect,
+and `file_handles` in task/file-handles. TCP public API compile RED reached
+E0583 missing net module; first wrapper status was unreliable and is not acceptance.
+Independent early source review required a real wrong-peer assertion control,
+bounded fixtures, exact endpoint mismatch denial, package-wide quota/drop release,
+and corrected Shared/registration setup. Draft net source exists; no acceptance yet.
+File open/write/cursor TDD is starting under its recorded brief.
+
+POSIX client source remains incomplete and cannot execute: broker, exact owned
+children/live I/O and interruption/readback gates remain. Early review corrected
+unbounded/partial protocol operations. Apple's current XNU uipc_proto.c table lists
+SOCK_STREAM and SOCK_DGRAM, not SOCK_SEQPACKET; this source diagnosis was sent for
+supported transport correction before any launch. No failed implementation check
+or new Expert escalation is implied by these informative draft findings.
+
 Actual monitor intake `dd8c07dc` and related stopped-state fixture `24c3a19f`
 are independently source-reviewed (six files plus one correction, zero skips).
 Findings are closed in source; see windows-monitor-specification-intake-review.md.
