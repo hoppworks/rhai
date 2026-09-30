@@ -17,6 +17,7 @@ internal static class MonitorSpecificationIntakeFixture
         OriginalFrameReaderFixtures();
         DispatcherInterleaveFixtures();
         QueueAndTerminalFixtures();
+        StoppedStabilityFixtures();
         MaintenanceHandshakeFixtures();
         AdmissionDeadlineFixtures();
         return failures == 0 ? 0 : 1;
@@ -186,6 +187,27 @@ internal static class MonitorSpecificationIntakeFixture
         bool resumePending = resume != null && resumeProtocol.AcceptResponse(resume.Sequence, resume.Nonce, 2);
         LeaseMonitor.Challenge maintenanceResume = resumePending ? resumeProtocol.IssueChallenge(4) : null;
         Expect("maintenance response clears a previously accepted resume handshake", maintenanceResume != null && resumeProtocol.AcceptMaintenanceResponse(maintenanceResume.Sequence, maintenanceResume.Nonce, 4) && !resumeProtocol.AuthorizeResume(4));
+    }
+
+    private static void StoppedStabilityFixtures()
+    {
+        var clock = new FakeClock(1);
+        var stopped = NewDispatcher(clock, 0, 12, new LeaseMonitor.Policy(2, 30, 12, 60, 5, 5));
+        Expect("stopped-stability dispatcher starts", stopped.Start());
+        Drain(stopped.Outgoing);
+        Expect("pre-stop challenge is queued", stopped.TryIssueChallenge());
+        clock.Now = 12;
+        Expect("setup deadline irreversibly stops dispatcher", !stopped.Poll() && stopped.Stopped && stopped.Protocol.State == LeaseMonitor.State.Stopping);
+        long preStopSequence; string preStopNonce;
+        Expect("queued pre-stop bytes are only the original challenge", TryChallenge(Drain(stopped.Outgoing), out preStopSequence, out preStopNonce));
+
+        LaunchSpecification specification = LaunchSpecification.Create(Source, Executable, new string[0]);
+        Expect("stopped dispatcher rejects a later valid BEGIN", !stopped.Dispatch(Begin(Token, specification)));
+        Expect("stopped dispatcher cannot issue another challenge", !stopped.TryIssueChallenge());
+        Expect("stopped dispatcher cannot poll back to life", !stopped.Poll());
+        Expect("stopped dispatcher cannot restart", !stopped.Start());
+        stopped.Stop();
+        Expect("stopped dispatcher emits no new receipt and retains no specification", Drain(stopped.Outgoing) == null && stopped.CompletedSpecification == null && stopped.Protocol.State == LeaseMonitor.State.Stopping);
     }
 
     private static void AdmissionDeadlineFixtures()
