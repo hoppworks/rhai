@@ -157,6 +157,13 @@ Inherited VM history remains authoritative.
 
 ## Next action
 
+Disposition source candidate bb7060a2 was reviewed across all four changed files,
+zero skips, including OCR-excluded fixture and README. Related corrections are
+active in the same responsible context: actual partial-removal readback, safe
+pseudoentry handling with finite enumeration, and full 128-bit identity matching.
+See windows-runtime-disposition-review.md. No compilation/fixture/native run or
+runtime resource occurred. Await and review that correction before advancing.
+
 Continue from source-reviewed 03a56347 in the same responsible Windows context
 with handle-safe disposition under
 briefs/windows-runtime-disposition.md, followed by immutable specification and

@@ -4,7 +4,27 @@ Baseline: source-reviewed `03a56347` in
 `/Users/hoppworks/projects/rhai-windows-scoped-runner`, task/windows-scoped-runner.
 Brief: `briefs/windows-runtime-disposition.md`. The responsible live context
 is implementing this related source requirement. No compiler/native/fixture
-execution occurred. Final commit review and coverage accounting remain pending.
+execution occurred. Candidate `bb7060a2` was independently source-reviewed:
+four changed files, all four reviewed, zero skipped (100% source coverage).
+OCR selected the backend and monitor; excluded README and fixture were manually
+reviewed as well. Default correctness/security/resource/coverage rules applied.
+Whitespace checking passed; compilation and execution remain unverified.
+
+## Commit findings awaiting related correction
+
+- Partial-removal fixture observes failure/state/root presence but never proves
+  a child was actually removed while other children remain. Require independent
+  post-close inventory observation without assuming enumeration order.
+- Exact `.` and `..` enumeration pseudoentries currently abort the scan. Skip
+  these without opening/deleting them; preserve offset validation and a finite
+  raw-record budget. Empty/malformed names must still fail closed.
+- Enumeration records only a 64-bit ID and compares it with the low half of the
+  held 128-bit identity. Require full 128-bit enumeration identity matching or
+  a proven explicit filesystem restriction before deletion.
+
+These findings were sent to the same responsible context for source corrections.
+Production removal remains unavailable: no monitor issuer constructs the typed
+exact-job closure proof. No complete custody correction has failed.
 
 ## Intermediate source findings
 
@@ -31,3 +51,9 @@ uses a BOOLEAN member.
 [Closing and Deleting Files](https://learn.microsoft.com/en-us/windows/win32/fileio/closing-and-deleting-files)
 documents deferred deletion until outstanding handles close.
 These constrain source review; they do not prove native behavior.
+
+[FILE_ID_BOTH_DIR_INFO](https://learn.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-file_id_both_dir_info)
+documents its 64-bit ID and eight-byte record alignment.
+[FILE_ID_EXTD_DIR_INFO](https://learn.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-file_id_extd_dir_info)
+provides a FILE_ID_128 and information classes 19/20; supported native behavior
+must still be verified before acceptance.
