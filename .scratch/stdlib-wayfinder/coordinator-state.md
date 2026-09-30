@@ -30,7 +30,10 @@ started. Maximum quality takes precedence over effort.
 
 ## Decisions and constraints
 
-- Verification strict; own pushes automatic; Coordinator merges automatic only green.
+- Verification strict; Coordinator merges automatic only green.
+- Owner selected fully private work on 2026-09-30 after public fork visibility
+  was verified. Current effort is local/workhorse only; no further remote pushes.
+  Previously pushed fork HEAD: 0c88657b; existing remote history is preserved.
 - Worktree: /Users/hoppworks/.codex/worktrees/stdlib-net-assessment/rhai.
 - Branch: task/stdlib-net-assessment; origin: https://github.com/hoppworks/rhai.git.
 - No production implementation, merge, upstream action or new library dependency.
@@ -48,15 +51,52 @@ started. Maximum quality takes precedence over effort.
 ## Windows environment provisioning
 
 The owner authorized SSH work on workhorse and a Windows VM on 2026-09-30.
-SSH works; KVM/QEMU/libvirt/UEFI/TPM are present. Created the owned domain
-`rhai-win11-quality` (4 vCPUs, 8 GiB, sparse 100 GiB disk) and seed ISO under
-`/var/lib/libvirt/images/rhai-win11-quality`. The owner reports a Windows Pro license. The Enterprise Evaluation download was
-stopped; official multi-edition retail media is downloading for Pro installation.
-The published SHA-256 matched the downloaded ISO. The serial-file failure was diagnosed and resolved using PTY plus the canonical
-libvirt log directory, keeping SELinux enforcing. The VM is running and Windows
-Setup is installing. Guest readiness remains unverified. Diagnosis:
-escalations/01-vm-serial-start.answer.md. Details: windows-vm/README.md.
+SSH works; KVM/QEMU/libvirt/UEFI/TPM are present. The owned domain is
+`rhai-win11-quality` (4 vCPUs, 8 GiB, sparse 100 GiB disk), with resources under
+`/var/lib/libvirt/images/rhai-win11-quality`. Official Windows 11 retail media
+for Pro downloaded completely and matched Microsoft's published SHA-256.
+
+Cause history:
+- Serial startup: two failures, one Expert escalation, one successful corrected
+  attempt using PTY plus the canonical libvirt log directory. Closed; reuse
+  escalations/01-vm-serial-start.answer.md. SELinux remains enforcing.
+- Windows specialize: first installation failed because RunSynchronous Path
+  exceeded Microsoft's 259-character limit. Guest Panther evidence is
+  windows-vm/setup-failure-01.txt. One correction applied: call a separate
+  record-windows.cmd through a 96-character Path. The first disk, firmware, TPM
+  and serial evidence are preserved on workhorse in failed-install-01/.
+  The second installation uses a new disk and corrected seed. Readiness remains
+  unverified. If this same cause fails again, escalate once before another attempt.
+- DVD boot: after missed initial prompt, firmware boot-menu selections failed twice.
+  See escalations/02-vm-dvd-boot.answer.md. The answer-justified reset timed out.
+  Owner then explicitly authorized one additional attempt with automatic DVD
+  acknowledgment. It succeeded: fresh Windows Setup, sustained ISO reads and
+  17% installation with disk writes. Boot access is proven; desktop is pending.
+
 No existing workloads were stopped, and no host tools were installed.
+Reuse ISO verification and unchanged host evidence. Details: windows-vm/README.md.
+
+## Rules refresh
+
+On 2026-09-30 read global and project AGENTS.md plus current e2e-proof, wayfinder
+and rendered wayfinder-pack. Sources resolve to agent-skills d8dfb0b (clean).
+Reuse accepted unchanged evidence; retain cause attempt/escalation counts.
+Existing owner decisions and privacy constraint remain authoritative.
+
+## Current remote cleanup request
+
+Owner explicitly requested cleaning the existing public fork while new work stays
+private. Remove remote branches only after their existing public heads are merged
+into main. Backup: remote-cleanup/fork-before-cleanup.bundle, verified complete.
+No remote mutation yet. Three public heads: claude/vibrant-sagan-3g1pxn 118745c6,
+replace-smartstring-with-compact-str 6a64e7ec, task/stdlib-net-assessment 0c88657b.
+Private HEAD 6165d683 must not be included in remote cleanup.
+Candidate worktree /Users/hoppworks/projects/rhai-remote-cleanup, task/remote-cleanup.
+Merge of public assessment head is staged, uncommitted, with .scratch, AGENTS.md,
+CONTEXT.md and docs removed from the index (local files preserved). The first gate
+failed only at macOS non-UTF-8 filename fixture creation, before Rhai. Owner approval
+for this targeted fixture correction is pending; do not merge/push/delete yet.
+No private changes, remote history rewrite or upstream action is authorized.
 
 ## Next action
 

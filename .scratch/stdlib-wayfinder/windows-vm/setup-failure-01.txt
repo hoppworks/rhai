@@ -1,0 +1,7 @@
+2026-09-30 07:25:53, Error                 CSI    00000001 (F) 80220005 [Error,Facility=FACILITY_STATE_MANAGEMENT,Code=5] #56# from CWcmScalarInstanceCore::PutCurrentValue(options = 0, value = { type: 8204, bytes ( 640 ): 70006f007700650072007300680065006c006c002e0065007800650020002d004e006f00500072006f00660069006c00650020002d0043006f006d006d0061006e006400200022002400700020003d0020004700650074002d00430069006d0049006e007300740061006e00630065002000570069006e00330032005f004f00... })
+[gle=0x80004005]
+2026-09-30 07:25:53, Error                        [setup.exe] SMI data results dump: Source = Name: Microsoft-Windows-Deployment, Language: neutral, ProcessorArchitecture: amd64, PublicKeyToken: 31bf3856ad364e35, VersionScope: nonSxS, /settings/RunSynchronous/RunSynchronousCommand/[Order="1"]/Path
+2026-09-30 07:25:53, Error                        [setup.exe] SMI data results dump: Description = Value is invalid.
+2026-09-30 07:25:53, Error      [0x060432] IBS    The provided unattend file is not valid; hrResult = 0x80220005
+2026-09-30 07:25:53, Error      [0x060565] IBS    Callback_Unattend_InitEngine:The provided unattend file [C:\WINDOWS\Panther\unattend.xml] is not a valid unattended Setup answer file; hr = 0x1, hrSearched = 0x1, hrDeserialized = 0x0, hrImplicitCtx = 0x0, hrValidated = 0x1, hrResult = 0x80220005
+2026-09-30 07:25:53, Error      [0x0600c2] IBS    Callback_Unattend_InitEngine:An error occurred while finding/loading the unattend file; hr = 0x1, hrResult = 0x80220005[gle=0x00000490]

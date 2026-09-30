@@ -48,7 +48,16 @@ SHA-256. The serial startup failure was diagnosed and fixed by using a PTY with
 logging under `/var/log/libvirt/qemu/rhai-win11-quality-serial0.log`, the existing
 libvirt log directory. SELinux remains enforcing; no shared service was restarted.
 Diagnosis: ../escalations/01-vm-serial-start.answer.md.
-The VM started and Windows Setup is installing. The product-key screen was skipped
+The first installation stopped during specialize: the inline readiness command
+exceeded the documented 259-character RunSynchronous Path limit. Panther evidence
+is in `setup-failure-01.txt`. The corrected answer file calls `record-windows.cmd`
+from the seed ISO through a 96-character command. A second installation is running
+on a fresh disk; the first disk, NVRAM, TPM state and serial log remain on workhorse
+under `failed-install-01/`. After the DVD prompt timed out and firmware menu retries
+failed, one Expert diagnosis and its single reset attempt did not recover boot.
+The owner authorized one further attempt with automatic DVD acknowledgment; this
+reached fresh Setup and installation progress with corroborating disk writes.
+See `../escalations/02-vm-dvd-boot.answer.md` and `boot-failure-02.log`. The product-key screen was skipped
 using its built-in "I don't have a product key" option. Guest readiness is pending.
 The specialize-pass serial marker proves the installed edition/build, not completed
 OOBE or desktop readiness; verify those separately through the console.

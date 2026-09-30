@@ -22,7 +22,7 @@
   </component>
  </settings>
  <settings pass="specialize">
-  <component name="Microsoft-Windows-Deployment" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS"><RunSynchronous><RunSynchronousCommand wcm:action="add"><Order>1</Order><Description>Record native Windows installation</Description><Path>powershell.exe -NoProfile -Command "$p = Get-CimInstance Win32_OperatingSystem; $r = 'RHAI_WINDOWS_READY ' + $p.Caption + ' Build=' + $p.BuildNumber; $r | Out-File ($env:ProgramData + '\rhai-windows-ready.txt'); $s = New-Object System.IO.Ports.SerialPort COM1,115200,None,8,One; $s.Open(); $s.WriteLine($r); $s.Close()"</Path></RunSynchronousCommand></RunSynchronous></component>
+  <component name="Microsoft-Windows-Deployment" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS"><RunSynchronous><RunSynchronousCommand wcm:action="add"><Order>1</Order><Description>Record native Windows installation</Description><Path>cmd.exe /c for %d in (D E F G H) do @if exist %d:\record-windows.cmd call %d:\record-windows.cmd</Path></RunSynchronousCommand></RunSynchronous></component>
   <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS"><ComputerName>RHAI-WIN11</ComputerName><TimeZone>UTC</TimeZone></component>
  </settings>
  <settings pass="oobeSystem">
