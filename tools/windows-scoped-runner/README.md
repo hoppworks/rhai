@@ -14,13 +14,16 @@ host input and monitor output on separate workers; the monitor's watchdog loop
 uses finite polling and does not join those workers or wait on a pipe. The lease
 protocol uses bounded input frames/output queue, a fresh nonce and increasing
 sequence for each outstanding challenge, phase-bound one-use authorization,
-monotonic `GetTickCount64` deadlines, and an irreversible stopping state.
+fresh Running-state lease renewals that cannot authorize create/resume, a
+nonrenewable absolute deadline, monotonic `GetTickCount64` deadlines, and an
+irreversible stopping state.
 
 `LeaseProtocolFixture.cs` is protocol-only behavior source. It covers stale
 nonce/sequence and future responses, one-use and phase-bound create/resume
-authorization, setup and absolute expiry, a live blackholed client, EOF and
-client death, pre-resume expiry, and bounded output backpressure. These cases
-exercise the protocol state model only. They do not launch a monitor process,
+authorization, setup and absolute expiry with timely Running renewals, response
+replay/phase/nonce/sequence rejection, exact lease expiry, a live blackholed
+client, EOF and client death, pre-resume expiry, and bounded output backpressure.
+These cases exercise the protocol state model only. They do not launch a monitor process,
 create payloads, inspect exact process/job handles, or prove transport survival.
 The fixture is deliberately unexecuted.
 

@@ -76,7 +76,9 @@ internal static class LeaseMonitor
         internal Challenge IssueChallenge(long now)
         {
             if (!hasStarted) Start(now);
-            if (Tick(now) == State.Stopping || (State!=State.Ready && State!=State.Suspended) || outstanding != null || now < nextChallenge) return null;
+            if (Tick(now) == State.Stopping ||
+                (State != State.Ready && State != State.Suspended && State != State.Running) ||
+                outstanding != null || now < nextChallenge) return null;
             sequence++;
             byte[] nonce = new byte[16]; using (var rng = RandomNumberGenerator.Create()) rng.GetBytes(nonce);
             outstanding = new Challenge(sequence, BitConverter.ToString(nonce).Replace("-", "").ToLowerInvariant(), now + policy.LeaseDuration, State);
@@ -91,6 +93,8 @@ internal static class LeaseMonitor
             leaseDeadline = Math.Min(now + policy.LeaseDuration, started + policy.AbsoluteDeadline);
             if(State==State.Ready) createHandshake=true;
             else if(State==State.Suspended) resumeHandshake=true;
+            // Running responses only renew the short lease. They cannot
+            // authorize another create or resume transition.
             return true;
         }
         internal bool AuthorizeCreate(long now)
