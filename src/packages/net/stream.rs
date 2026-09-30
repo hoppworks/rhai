@@ -244,14 +244,16 @@ impl NetStream {
                 }
                 Err(error) if error.kind() == io::ErrorKind::WouldBlock => {
                     #[cfg(test)]
-                    if let Some(notifier) = self
-                        .0
-                        .read_wait_notifier
-                        .lock()
-                        .unwrap_or_else(|poisoned| poisoned.into_inner())
-                        .take()
-                    {
-                        let _ = notifier.send(());
+                    if captured > 0 {
+                        if let Some(notifier) = self
+                            .0
+                            .read_wait_notifier
+                            .lock()
+                            .unwrap_or_else(|poisoned| poisoned.into_inner())
+                            .take()
+                        {
+                            let _ = notifier.send(());
+                        }
                     }
                     let remaining = deadline.saturating_duration_since(Instant::now());
                     if remaining.is_zero() {
@@ -477,6 +479,8 @@ mod tests {
                     Err(error) => panic!("peer accept failed: {error}"),
                 }
             };
+            peer.set_nonblocking(false)
+                .expect("accepted peer socket is blocking for bounded fixture I/O");
             peer.write_all(b"a").unwrap();
             release_rx.recv_timeout(Duration::from_secs(2)).unwrap();
             peer.set_read_timeout(Some(Duration::from_secs(1))).unwrap();
