@@ -26,18 +26,18 @@ be resolved before their dependent implementation. No remote publication.
   task/stdlib-net-assessment (3eb2f73b). Created isolated coordinator worktree
   /Users/hoppworks/projects/rhai-all-tickets on task/all-tickets.
 
+- Step 1 implementation repair integrated in 62526323; strict native macOS
+  combined proof: combined-sys-proof.md and combined-sys.log. Environment 7,
+  filesystem 23, policy 26 all pass; invalid-name fixture explicitly unsupported.
+  Public API/host readback and preserved failing controls independently reviewed.
+
 ## Current step
 
-Step 1; filesystem source and all three Rust diffs independently reviewed.
-Its full-suite log cannot distinguish a skipped invalid-UTF8 fixture; coverage
-correction and focused unrestricted symlink/parent and alias-routing cases passed
-in adc9966f. Invalid-UTF8 fixture is explicitly unsupported on this macOS filesystem.
-Final platform-specific errno guard correction pending; combined integration run next.
-No cross-platform filesystem-ticket acceptance yet.
-Environment isolation 8fa26974: all three Rust files reviewed, targeted real-OS
-assertions and wrong-expectation control accepted for macOS; proof persistence
-completed in 2221517f and locally integrated into task/all-tickets.
-Combined suite must run once after filesystem integration because source changes.
+Step 1 is repaired and accepted for the exercised macOS contract cases. No broad
+release/platform completion claim. Native Linux proof task active from integrated
+source to close the supporting-filesystem NotUtf8 coverage gap. Windows guest
+supervision adapter implementation/proof is active before further native builds.
+Step 2 owner TCP question remains pending; release/API proposal is unaccepted.
 POSIX process prototype 35a8cf52 proof is not accepted: Expert validated five
 findings; the single correction attempt is now running in its owned worktree.
 
@@ -78,8 +78,9 @@ Inherited VM history remains authoritative.
 
 ## Next action
 
-Collect filesystem coverage correction; env branch already integrated. Integrate accepted
-branches locally into task/all-tickets and run one scoped combined sys suite.
+Collect native Linux proof and Windows scoped adapter evidence; inspect actual
+coverage before accepting either. Mac combined proof is accepted; do not rerun
+unchanged source merely for another context or platform task.
 Collect and independently review the corrected process prototype.
 TCP authority question remains pending; release/API proposals remain unaccepted.
 Linear is legacy and excluded, with no writes performed there.
