@@ -297,6 +297,29 @@ fn test_root_accepts_macos_system_prefix_aliases() {
     assert_eq!(std::fs::read(t.path().join("real/a.txt")).unwrap(), b"payload");
 }
 
+#[cfg(target_os = "macos")]
+#[test]
+fn test_nested_roots_keep_permissions_through_system_prefix_aliases() {
+    let t = TempDir::new();
+    t.write("inner/marker.txt", "nested payload");
+    let outer_var = t.as_script_path();
+    let outer_private = outer_var.replacen("/var/", "/private/var/", 1);
+    let inner_var = format!("{outer_var}/inner");
+    let inner_private = inner_var.replacen("/var/", "/private/var/", 1);
+    let e = engine(SysConfig::default().fs_root(&outer_var, FsAccess::Read).fs_root(&inner_private, FsAccess::ReadWrite));
+
+    for path in [format!("{inner_var}/marker.txt"), format!("{inner_private}/marker.txt")] {
+        assert_eq!(e.eval::<String>(&format!(r#"read_file("{path}")"#)).unwrap(), "nested payload");
+    }
+    let inner_new = format!("{inner_var}/created.txt");
+    e.run(&format!(r#"write_file("{inner_new}", "nested write")"#)).unwrap();
+    assert_eq!(std::fs::read(t.path().join("inner/created.txt")).unwrap(), b"nested write");
+
+    let outer_new = format!("{outer_private}/outer-created.txt");
+    assert_eq!(err_kind(&e, &format!(r#"write_file("{outer_new}", "denied")"#)), "Denied");
+    assert!(!t.path().join("outer-created.txt").exists());
+}
+
 // Configured root paths are opened using OS symlink/parent semantics.
 #[cfg(unix)]
 #[test]

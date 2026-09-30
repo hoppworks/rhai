@@ -259,6 +259,23 @@ fn test_unrestricted_symlinks_follow_host_semantics() {
     assert_eq!(std::fs::read(t.path().join("actual/relative.txt")).unwrap(), b"relative target");
 }
 
+#[cfg(unix)]
+#[test]
+fn test_unrestricted_symlink_then_parent_uses_host_resolution() {
+    let t = TempDir::new();
+    t.write("lexical/allowed/marker.txt", "lexical sentinel");
+    t.write("actual/allowed/marker.txt", "OS-selected target");
+    std::fs::create_dir_all(t.path().join("actual/child")).unwrap();
+    std::os::unix::fs::symlink(t.path().join("actual/child"), t.path().join("lexical/link")).unwrap();
+
+    let e = engine(SysConfig::permissive());
+    let path = format!("{}/lexical/link/../allowed", t.as_script_path());
+    assert_eq!(e.eval::<String>(&format!(r#"read_file("{path}/marker.txt")"#)).unwrap(), "OS-selected target");
+    e.run(&format!(r#"write_file("{path}/created.txt", "host path")"#)).unwrap();
+    assert_eq!(std::fs::read(t.path().join("actual/allowed/created.txt")).unwrap(), b"host path");
+    assert!(!t.path().join("lexical/allowed/created.txt").exists());
+}
+
 // Operations on the wrong kind of entry fail with an I/O error, not a panic.
 #[test]
 fn test_wrong_entry_kind() {
@@ -314,15 +331,13 @@ fn test_non_utf8_file_name() {
     use std::os::unix::ffi::OsStrExt;
     let (t, e) = rw();
     t.write("ok.txt", "");
-    let unsupported = match std::fs::write(t.path().join(std::ffi::OsStr::from_bytes(b"bad\xFF.txt")), "") {
-        Ok(()) => false,
-        Err(err) => {
-            eprintln!("filesystem does not support creating the non-UTF-8 fixture: {err}");
-            true
+    match std::fs::write(t.path().join(std::ffi::OsStr::from_bytes(b"bad\xFF.txt")), "") {
+        Ok(()) => {}
+        Err(err) if matches!(err.raw_os_error(), Some(84 | 92)) => {
+            eprintln!("filesystem rejects non-UTF-8 fixture with EILSEQ: {err}");
+            return;
         }
-    };
-    if unsupported {
-        return;
+        Err(err) => panic!("failed to create non-UTF-8 fixture: {err}"),
     }
     let err = sys_err(&e, r#"read_dir(".")"#);
     assert!(matches!(err, SysError::NotUtf8(..)), "{err}");
