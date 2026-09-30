@@ -1,0 +1,9 @@
+# Executable TCP documentation acceptance
+
+Accepted fa8904e57506010edd7975bfc0512a5f50d7fb0b inside original15:40–16:10UTC bounds. OCR delegate enumerated all four source/test/manifest files; rules and complete diffs reviewed, scratch evidence separately. Root performed this small example slice after native dispatch thread limit, so source review is self-review; runtime effects are independently observed by the OS peer. No blocking source finding. No dependency/default-feature changes, unsafe code or production behavior change.
+
+Actual wrong-peer example101 reaches byte assertion ping versus pang; restored example0 returns pong and peer reads ping. Public metadata test1/1 and executable0 pass for net,metadata and net,no_object,metadata. All commands/status/logs retained ../tcp-docs-example/. Original docs invocation itself uses --timeout 900; proof shorthand --timeout900 is clarified there. Peer accept/read/write bounded and panic-safe join; numeric loopback only and exact endpoint grant, one handle,16-byte host cap. Half-close before peer EOF/reply preserves receiving. Four source files accounted; formatting/source diff checks pass.
+
+Exact final runtime independently absent; prior setup runtimes absent. Sampled disk below2GiB, true storage peak/memory unmeasured. Two initial pre-Cargo setup anchor failures were initial fault plus one unsuccessful recovery; third corrected script reached intended control and succeeded. No API failed correction or package reset. Documentation reflects accepted timeout/cap/shared lifecycle/lossy text semantics; existing package behavior proof reused because source behavior unchanged.
+
+Native macOS Rust1.93 executable documentation/metadata only. Complete release matrix, optional MSRV, Linux/Windows and process remain open. Metadata assertions verify public JSON names/types; no separate wrong-metadata control claimed.
