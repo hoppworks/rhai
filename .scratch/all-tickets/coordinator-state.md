@@ -92,8 +92,13 @@ Listener readiness cause now escalated once to fresh Expert03:
 escalations/03-tcp-accept-readiness.md. Multiple executed race failures were not
 approved calibration. Green candidate8b825577 is not yet accepted: bounded worker
 ResourceLimit retry/cleanup needs source assessment within original13:34UTC stop.
-No new launch while Expert answer pending. Other TCP source and final peer/control
-logs reviewed; exact final listener runtime absence independently confirmed.
+Expert03 answer retained at escalations/03-tcp-accept-readiness.answer.md:
+outstanding-call readiness is valid, not instrumented OS WouldBlock; explicit
+worker retry deadline is missing. Sole bounded followup stays in responsible
+listener context/original13:34 stop, fixes monotonic deadline and exercises actual
+quota-denied expiry plus sync clone close. Only affected tests rerun; unchanged
+net suites/control evidence reused. No second Expert. Other TCP source and final
+peer/control logs reviewed; exact final listener runtime absence confirmed.
 
 Actual monitor intake `dd8c07dc` and related stopped-state fixture `24c3a19f`
 are independently source-reviewed (six files plus one correction, zero skips).
