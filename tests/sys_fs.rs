@@ -276,6 +276,109 @@ fn test_unrestricted_symlink_then_parent_uses_host_resolution() {
     assert!(!t.path().join("lexical/allowed/created.txt").exists());
 }
 
+// Unrestricted relative paths should use std::fs directly, even when the process cwd no
+// longer has a name. Resolving cwd first adds a precondition host operations do not have.
+#[cfg(unix)]
+#[test]
+fn test_unrestricted_relative_paths_after_cwd_is_unlinked() {
+    use std::io::{Read, Write};
+    use std::path::PathBuf;
+    use std::process::{Child, Command, Output, Stdio};
+    use std::time::{Duration, Instant};
+
+    struct ChildGuard(Option<Child>);
+    impl ChildGuard {
+        fn child(&mut self) -> &mut Child {
+            self.0.as_mut().expect("child guard still owns child")
+        }
+        fn wait_with_output(mut self) -> std::io::Result<Output> {
+            self.0.take().expect("child guard still owns child").wait_with_output()
+        }
+    }
+    impl Drop for ChildGuard {
+        fn drop(&mut self) {
+            if let Some(child) = self.0.as_mut() {
+                if !matches!(child.try_wait(), Ok(Some(_))) {
+                    let _ = child.kill();
+                }
+                let _ = child.wait();
+            }
+        }
+    }
+
+    struct ReadyMarker(PathBuf);
+    impl Drop for ReadyMarker {
+        fn drop(&mut self) {
+            let _ = std::fs::remove_file(&self.0);
+        }
+    }
+
+    const CHILD: &str = "RHAI_SYS_UNLINKED_CWD_CHILD";
+    const READY_ENV: &str = "RHAI_SYS_UNLINKED_CWD_READY";
+    const WAIT_LIMIT: Duration = Duration::from_secs(5);
+
+    if std::env::var_os(CHILD).is_some() {
+        let e = engine(SysConfig::permissive());
+        let ready = std::env::var_os(READY_ENV).expect("parent supplies the ready marker path");
+        std::fs::write(ready, b"").unwrap();
+        let mut release = [0];
+        std::io::stdin().read_exact(&mut release).unwrap();
+
+        let host = std::fs::metadata(".").expect("std::fs should resolve current directory handle");
+        assert!(host.is_dir());
+        assert!(e.eval::<bool>(r#"exists(".")"#).unwrap());
+        assert!(e.eval::<bool>(r#"is_dir(".")"#).unwrap());
+        return;
+    }
+
+    let t = TempDir::new();
+    let ready = t.path().with_extension("ready");
+    let _ready_guard = ReadyMarker(ready.clone());
+    let mut child = ChildGuard(Some(
+        Command::new(std::env::current_exe().unwrap())
+            .args(["--exact", "test_unrestricted_relative_paths_after_cwd_is_unlinked", "--nocapture"])
+            .env(CHILD, "1")
+            .env(READY_ENV, &ready)
+            .current_dir(t.path())
+            .stdin(Stdio::piped())
+            .stdout(Stdio::piped())
+            .stderr(Stdio::piped())
+            .spawn()
+            .unwrap(),
+    ));
+
+    let start = Instant::now();
+    while !ready.exists() {
+        if start.elapsed() >= WAIT_LIMIT {
+            panic!("unlinked-cwd child did not become ready");
+        }
+        std::thread::sleep(Duration::from_millis(10));
+    }
+
+    std::fs::remove_file(&ready).unwrap();
+    if let Err(err) = std::fs::remove_dir(t.path()) {
+        panic!("could not unlink owned cwd fixture: {err}");
+    }
+    if let Err(err) = child.child().stdin.take().unwrap().write_all(&[1]) {
+        panic!("could not release unlinked-cwd child: {err}");
+    }
+
+    let start = Instant::now();
+    loop {
+        match child.child().try_wait().unwrap() {
+            Some(status) => {
+                let output = child.wait_with_output().unwrap();
+                assert!(status.success(), "child failed: {}", String::from_utf8_lossy(&output.stderr));
+                break;
+            }
+            None if start.elapsed() < WAIT_LIMIT => std::thread::sleep(Duration::from_millis(10)),
+            None => {
+                panic!("unlinked-cwd child did not finish before deadline");
+            }
+        }
+    }
+}
+
 // Operations on the wrong kind of entry fail with an I/O error, not a panic.
 #[test]
 fn test_wrong_entry_kind() {
