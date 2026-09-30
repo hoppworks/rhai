@@ -1,0 +1,6 @@
+fe8ad5aa459e525e484d84c7a5a90f144ab142b10a96392ec30f5e75c77a4577  /root/rhai-linux-optional-msrv-proof-task/source.tar
+8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa  /root/rhai-linux-optional-msrv-proof-task/Cargo.lock.accepted
+43a54f18e5912042936d39c3f2954aefd6f1e95e5d49872569c4522fe8d93ef4  /root/rhai-linux-optional-msrv-proof-task/run-proof.py
+d0ac0cf4bd2f97ab6849f28f3c8cb3d9d01520210b16410362e630fb8dca1538  /root/rhai-linux-optional-msrv-proof-task/remote-launch.sh
+9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d  /root/rhai-linux-optional-msrv-proof-task/runner/tools/run_scoped.py
+a3739f4947744303e1adf3fb0875ac743944a272e5b95c94b1baba53029d313f  /root/rhai-linux-optional-msrv-proof-task/runner/tools/agentskills/pyguard.py
