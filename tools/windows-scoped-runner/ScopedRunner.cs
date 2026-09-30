@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 
 internal static class ScopedRunner
 {
@@ -18,7 +19,7 @@ internal static class ScopedRunner
     private const int JobObjectBasicAccountingInformation = 1;
     private const uint WAIT_OBJECT_0 = 0;
     private const uint WAIT_TIMEOUT = 258;
-    private const uint INFINITE = 0xffffffff;
+    private const uint CLEANUP_WAIT_MS = 30000;
 
     [StructLayout(LayoutKind.Sequential)] private struct SecurityAttributes
     {
@@ -38,9 +39,9 @@ internal static class ScopedRunner
     [StructLayout(LayoutKind.Sequential)] private struct BasicAccounting
     {
         public long TotalUserTime, TotalKernelTime, ThisPeriodTotalUserTime, ThisPeriodTotalKernelTime;
-        public uint TotalPageFaultCount; public UIntPtr TotalProcesses, ActiveProcesses, TotalTerminatedProcesses;
+        public uint TotalPageFaultCount, TotalProcesses, ActiveProcesses, TotalTerminatedProcesses;
     }
-    [StructLayout(LayoutKind.Sequential)] private struct JobExtendedLimitInformation
+    [StructLayout(LayoutKind.Sequential)] private struct BasicLimitInformation
     {
         public long PerProcessUserTimeLimit, PerJobUserTimeLimit;
         public uint LimitFlags;
@@ -48,9 +49,17 @@ internal static class ScopedRunner
         public uint ActiveProcessLimit;
         public UIntPtr Affinity;
         public uint PriorityClass, SchedulingClass;
-        public long ReadOperationCount, WriteOperationCount, OtherOperationCount;
-        public UIntPtr ReadTransferCount, WriteTransferCount, OtherTransferCount;
-        public long ProcessMemoryLimit, JobMemoryLimit, PeakProcessMemoryUsed, PeakJobMemoryUsed;
+    }
+    [StructLayout(LayoutKind.Sequential)] private struct IoCounters
+    {
+        public ulong ReadOperationCount, WriteOperationCount, OtherOperationCount;
+        public ulong ReadTransferCount, WriteTransferCount, OtherTransferCount;
+    }
+    [StructLayout(LayoutKind.Sequential)] private struct JobExtendedLimitInformation
+    {
+        public BasicLimitInformation BasicLimitInformation;
+        public IoCounters IoInfo;
+        public UIntPtr ProcessMemoryLimit, JobMemoryLimit, PeakProcessMemoryUsed, PeakJobMemoryUsed;
     }
 
     [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
@@ -73,6 +82,27 @@ internal static class ScopedRunner
 
     private static Exception Win32(string operation) { return new Win32Exception(Marshal.GetLastWin32Error(), operation); }
     private static void Check(bool ok, string operation) { if (!ok) throw Win32(operation); }
+
+    private static void WaitForProcessExit(IntPtr process, string context)
+    {
+        uint result = WaitForSingleObject(process, CLEANUP_WAIT_MS);
+        if (result == WAIT_TIMEOUT) throw new TimeoutException(context + ": process did not exit within 30 seconds");
+        if (result != WAIT_OBJECT_0) throw Win32(context + ": WaitForSingleObject");
+    }
+
+    private static void WaitForJobEmpty(IntPtr job, string context)
+    {
+        var timer = System.Diagnostics.Stopwatch.StartNew();
+        while (timer.ElapsedMilliseconds < CLEANUP_WAIT_MS)
+        {
+            BasicAccounting accounting;
+            Check(QueryInformationJobObject(job, JobObjectBasicAccountingInformation, out accounting,
+                (uint)Marshal.SizeOf(typeof(BasicAccounting)), IntPtr.Zero), context + ": QueryInformationJobObject");
+            if (accounting.ActiveProcesses == 0) return;
+            Thread.Sleep(100);
+        }
+        throw new TimeoutException(context + ": job still has active members after 30 seconds");
+    }
 
     // Windows command-line quoting for one argv item (CreateProcess has no argv API).
     private static string Quote(string value)
@@ -161,7 +191,10 @@ internal static class ScopedRunner
         try
         {
             job = CreateJobObjectW(IntPtr.Zero, null); if (job == IntPtr.Zero) throw Win32("CreateJobObjectW");
-            var limits = new JobExtendedLimitInformation { LimitFlags = JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE };
+            var limits = new JobExtendedLimitInformation
+            {
+                BasicLimitInformation = new BasicLimitInformation { LimitFlags = JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE }
+            };
             Check(SetInformationJobObject(job, 9, ref limits, (uint)Marshal.SizeOf(typeof(JobExtendedLimitInformation))), "SetInformationJobObject");
             environment = EnvironmentBlock(runtime);
             var startup = new StartupInfo { cb = Marshal.SizeOf(typeof(StartupInfo)) };
@@ -176,18 +209,24 @@ internal static class ScopedRunner
             if (wait == WAIT_TIMEOUT)
             {
                 Check(TerminateJobObject(job, 124), "TerminateJobObject on deadline");
-                WaitForSingleObject(pi.hProcess, INFINITE);
+                WaitForProcessExit(pi.hProcess, "deadline cleanup");
+                Check(CloseHandle(pi.hProcess), "CloseHandle after deadline cleanup"); pi.hProcess = IntPtr.Zero;
+                WaitForJobEmpty(job, "deadline cleanup");
                 Console.Error.WriteLine("deadline exceeded; owned job terminated");
                 return 124;
             }
             if (wait != WAIT_OBJECT_0) throw Win32("WaitForSingleObject");
             uint exitCode; Check(GetExitCodeProcess(pi.hProcess, out exitCode), "GetExitCodeProcess");
+            // The accounting ActiveProcesses count may not decrement until the
+            // process object has no external references; release this handle first.
+            Check(CloseHandle(pi.hProcess), "CloseHandle after payload exit"); pi.hProcess = IntPtr.Zero;
             BasicAccounting accounting;
             Check(QueryInformationJobObject(job, JobObjectBasicAccountingInformation, out accounting,
                 (uint)Marshal.SizeOf(typeof(BasicAccounting)), IntPtr.Zero), "QueryInformationJobObject");
-            if (accounting.ActiveProcesses.ToUInt64() != 0)
+            if (accounting.ActiveProcesses != 0)
             {
                 Check(TerminateJobObject(job, 125), "TerminateJobObject for residual members");
+                WaitForJobEmpty(job, "residual-member cleanup");
                 Console.Error.WriteLine("payload exited with residual job members; terminated them");
                 return 125;
             }
@@ -198,8 +237,17 @@ internal static class ScopedRunner
             if (pi.hProcess != IntPtr.Zero && !assigned)
             {
                 // Assignment failure must never leave an unowned suspended payload.
-                TerminateProcess(pi.hProcess, 126);
-                WaitForSingleObject(pi.hProcess, INFINITE);
+                bool terminated = TerminateProcess(pi.hProcess, 126);
+                int terminationError = terminated ? 0 : Marshal.GetLastWin32Error();
+                uint result = WaitForSingleObject(pi.hProcess, CLEANUP_WAIT_MS);
+                if (result == WAIT_TIMEOUT)
+                {
+                    if (!terminated)
+                        throw new Win32Exception(terminationError, "TerminateProcess failed for unassigned suspended payload");
+                    throw new TimeoutException("unassigned suspended payload did not exit within 30 seconds");
+                }
+                if (result != WAIT_OBJECT_0)
+                    throw Win32("WaitForSingleObject for unassigned suspended payload");
             }
             if (pi.hThread != IntPtr.Zero) CloseHandle(pi.hThread);
             if (pi.hProcess != IntPtr.Zero) CloseHandle(pi.hProcess);

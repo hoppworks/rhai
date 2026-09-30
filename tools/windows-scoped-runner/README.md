@@ -20,6 +20,14 @@ on its fixed 30-minute deadline, and terminates the exact suspended process if
 job assignment fails. It refuses assignment fallback. A successful payload exit
 with residual job members returns 125 after terminating those members.
 
+The native struct declarations mirror Microsoft's definitions: accounting process
+counters are `DWORD`/C# `uint`; `JOBOBJECT_BASIC_LIMIT_INFORMATION` uses
+pointer-sized `SIZE_T`/`ULONG_PTR` fields; `IO_COUNTERS` uses six 64-bit
+`ULONGLONG` counters; and the extended memory limits use pointer-sized `SIZE_T`.
+Cleanup waits are bounded to 30 seconds and surface timeout or API failures.
+These declarations and paths have only received static review; ABI and runtime
+behavior still require native validation.
+
 Compile only inside an exact private runtime on the guest, for example with the
 guest's already installed Framework C# compiler, and export compiler output and
 the runner binary only as needed for the proof. That bootstrap path has not been
@@ -44,3 +52,9 @@ to launch package builds until those requirements are implemented and proven.
 Evidence and the current native gate status are recorded in
 `.scratch/windows-scoped-runner/acceptance.md` in the owning worktree. Static
 source review is not native acceptance.
+
+Layout references: [JOBOBJECT_BASIC_ACCOUNTING_INFORMATION](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-jobobject_basic_accounting_information),
+[JOBOBJECT_BASIC_LIMIT_INFORMATION](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-jobobject_basic_limit_information),
+[IO_COUNTERS](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-io_counters),
+[JOBOBJECT_EXTENDED_LIMIT_INFORMATION](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-jobobject_extended_limit_information),
+and [TerminateProcess](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-terminateprocess).

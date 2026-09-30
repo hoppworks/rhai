@@ -29,7 +29,7 @@ desktop image in the baseline README is not evidence of current guest UI state.
 No credential screen was entered, no credentials were requested or handled, and
 the locked local Mac was not unlocked or changed.
 
-Captured ignored files: `guest-preflight.png` and `guest-after-shift.png` in this
+Captured files: `guest-preflight.png` and `guest-after-shift.png` in this
 directory. They document the two black captures. Current proof could not establish
 an interactive desktop or a safe in-guest compiler/supervisor bootstrap path.
 Both are 1280x800 PNG captures with SHA-256
@@ -68,3 +68,19 @@ Native acceptance is blocked by unavailable current guest UI and the unresolved
 independent monitor requirement. Do not proceed to any Windows package build
 using this candidate until the independent lease/cleanup design is implemented
 and all native gates pass. No claim of ready-to-use behavior is made.
+
+## Static correction follow-up
+
+After the initial candidate commit, static review found that the basic job
+accounting counters used pointer-sized fields instead of the Win32 `DWORD`
+layout. The declarations now use `uint` for those four counters; the related
+extended limit declaration explicitly models nested basic-limit, six 64-bit
+I/O counters, and pointer-sized `SIZE_T` values. All `INFINITE` cleanup waits
+were removed. The exact unassigned suspended child is terminated and waited for
+with a 30-second bound; job cleanup polls active membership within the same
+bound. Termination/query failures surface as errors. Microsoft's first-party
+structure/API references are recorded in the candidate README.
+
+This is static correction only: no C# compilation or Windows/native execution
+occurred. The independent monitor/lease and safe runtime deletion design remain
+unresolved, and the black-console evidence above is unchanged.
