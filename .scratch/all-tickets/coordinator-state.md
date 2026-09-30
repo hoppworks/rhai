@@ -437,3 +437,17 @@ Launch10 is reported in progress after diagnostic syntax and unchecked getter
 corrections. Launch9 timeout behavior is unexecuted because the diagnostic tuple
 failed Rhai parsing; premature peer timeout was a root hypothesis, not confirmed
 cause, and must not be counted as measured behavior.
+
+## Timeout history corrected from actual logs
+
+Launch9 checked net/sync/no_index actually failed combined timeout predicates;
+unchecked failed max_array_size compile. Launch10 alone failed diagnostic tuple
+parsing (not launch9); launch11 produced true,false,false and thus reached the
+predicates, without exact caught fields. Launch12 is reported collecting caught
+NetError fields. Prior root classification attributing9 to tuple parsing was
+incorrect and superseded here. No two identical tuple recovery failures occurred.
+Root source diagnosis: newly nonblocking fixture listener accepts a socket but
+helper sets only read_timeout2s, never resets accepted socket blocking mode; on
+Darwin the inherited O_NONBLOCK can return WouldBlock and immediately close peer.
+Sent concrete helper correction for responsible verification; actual field proof
+remains pending. Preserve each launch and original stop, no inference from exit101.
