@@ -2,7 +2,8 @@
 
 Type: grilling
 Label: wayfinder:grilling
-Status: open
+Status: claimed
+Assignee: current Codex session
 Parent: [Plan a reliable Rhai host standard library](../map.md)
 Blocked by: none
 
@@ -28,3 +29,142 @@ versus absolute executable identity and inherited environment in the reviewed-sc
 trust model. Specify fixture-observable cases and platform differences.
 
 Reference: ../../../docs/sys-package-plan.md sections 3.3, 4.4 and 5.
+
+## Proposed contract — awaiting owner review
+
+The owner clarified that effort is secondary to maximum quality. This does not add
+an automatic-retry or durable-recovery requirement. Preserve the accepted API and
+make its lifecycle observable before selecting implementation mechanisms.
+
+### Completion and cancellation
+
+- `run` owns the execution until its output and direct-child exit are collected.
+  A run deadline starts immediately before OS spawn and covers input transfer,
+  execution and output collection, not merely the polling loop. OS spawn itself
+  may not be interruptible; document that limitation rather than promise a hard
+  wall-clock bound. On deadline, stop input, request termination, collect bounded
+  output and reap the child. Return `timed_out: true` only when cleanup succeeds.
+- `Child.wait(seconds)` is an observation deadline: `()` means no final result is
+  available yet. It leaves execution running and allows another wait or kill.
+  `try_wait` must not block waiting for pipe EOF. A final result includes collected
+  output; a process exit alone need not mean output collection has completed.
+- Cache final results or terminal errors. Repeated waits and waits through cloned
+  handles return equivalent snapshots; script mutation of one result cannot alter
+  future results. `kill` is idempotent after completion and uses the owned OS child
+  handle, never an unvalidated PID. A blocking wait must not monopolize the lock
+  needed for another handle to request cancellation.
+- The final script handle triggers termination when `kill_on_drop` is true. Dropping
+  an earlier clone does not. The package retains cleanup ownership until reaping
+  and worker shutdown finish; it must not silently abandon a child or detach a
+  permanently blocked I/O worker. Drop must not wait forever on inherited pipes.
+  With `kill_on_drop: false`, execution continues deliberately; the package still
+  owns eventual output collection and reaping. Validate this lifetime explicitly.
+
+### Input, output and errors
+
+- Drain stdout and stderr while transferring stdin. Close stdin after supplied
+  bytes, or immediately for `()`. `spawn` must not synchronously finish a large input
+  write before returning a cancellable handle. Bound internal queues as well as
+  retained output; do not buffer an unbounded stream before applying its limit.
+- Validate durations and limits before spawning: reject negative, non-finite,
+  overflowing or nonrepresentable values. A zero output limit allows empty output
+  and fails on the first byte. The existing limit remains bytes per stream.
+- At output overflow, retain at most the configured prefix for each stream, request
+  termination and return catchable `SysError::OutputLimit`. A nonzero normal exit
+  remains result data. Byte capture is authoritative; text remains lossy UTF-8.
+- Preserve a primary terminal cause chosen by the supervisor. If deadline and
+  overflow are observed in the same supervision step, prefer `OutputLimit`;
+  otherwise preserve the first committed cause. No ordering between independent
+  stdout/stderr events is promised. Cleanup failures are secondary diagnostics,
+  never a replacement that hides the primary cause.
+- Propose an additive `SysError.process` getter: `()` for unrelated errors, otherwise
+  a report containing retained stdout/stderr, capture-complete flags, available exit
+  status, timeout state and cleanup diagnostics. Raw bytes remain available in the
+  report even when text decoding is lossy; respect feature gates. The current error
+  enum does not contain this report: its Rust compatibility and representation need
+  review under ticket 06 before implementation. This is proposed behavior, not an
+  assertion about existing code.
+- Failures after child creation must take the same owned cleanup path, including
+  worker-start failure and input/output errors. Never report successful cleanup if
+  termination, reaping or worker shutdown is unverified. Exceptional OS failures
+  must retain ownership and expose incomplete cleanup; no absolute completion-time
+  guarantee is claimed for an OS that cannot complete the requested operation.
+
+### Descendants and executable authority
+
+Recommend an explicit initial guarantee for the direct child, with cancellable pipe
+collection even when a descendant retains stdout/stderr. Do not make process-tree
+termination implicit in `kill_on_drop`. Whole-tree supervision needs a separate
+opt-in contract and native platform proof; Windows job objects and Unix process
+groups have distinct semantics. Arbitrary escaped descendants remain outside the
+reviewed-program trust model. This boundary is about an honest, testable guarantee,
+not reducing the quality bar for direct-child supervision.
+
+A descendant holding a pipe must not hang `run` with a finite deadline or block
+`wait(seconds)` beyond its observation deadline. After cancellation, partial output
+is marked incomplete if EOF was not obtained. With no deadline, waiting for output
+may continue indefinitely by explicit configuration. Before implementation, prove
+that the selected MSRV-compatible I/O design can cancel both readers and writers
+on each supported native platform; kill-then-join alone is not an acceptable design.
+
+Keep verbatim program allow-list matching. Recommend host-configured absolute
+executables for stable identity; a name intentionally uses host PATH resolution and
+is not binary identity pinning. Child environment inheritance remains explicit and
+separate from the script environment-read policy; use `env_clear` when the host
+requires a controlled child environment. No shell interpolation is introduced.
+
+### Test-first acceptance cases
+
+Extend the existing self-reexec integration fixture with explicit readiness and
+independent child-written records. Each case calls the public Rhai API through
+Engine. Parent-side observations must verify effects and cleanup independently.
+
+| Case | Required observation |
+| --- | --- |
+| Success, nonzero exit, raw/text output | Exact fixture bytes and independent exit record; nonzero is data |
+| Large stdin with simultaneous stdout/stderr | Completes without deadlock; byte prefixes and exit independently checked |
+| Input EOF and early child exit | EOF observed; input error retained; no orphaned writer or unreaped child |
+| Run deadline during input and output | Child termination/reaping observed, partial output and timeout reported |
+| Timed wait followed by later wait | First returns `()`; child remains alive; later result is stable |
+| Clone/drop and repeated wait/kill | Only final drop terminates; cached results cannot be mutated via a prior map |
+| Wait on one shared handle, kill on another | Cancellation progresses under `sync`; no wait-held lock deadlock |
+| Each stream at N and N+1 bytes; zero cap | Exact boundary behavior, bounded capture, overflow cause and cleanup |
+| Overflow and deadline together | Stable specified precedence without assuming stream event ordering |
+| Descendant retains pipe after direct child exit | Finite deadline returns with incomplete capture; workers end; fixture owns descendant cleanup |
+| Invalid options and denied program | No fixture start record and no process created |
+| Failure after OS spawn | Controlled fault at worker setup/I/O boundary proves cleanup ownership; supplementary injected fault is not a substitute for real-OS acceptance |
+| `kill_on_drop: false` | Child continues after handle drop and is eventually reaped by its retained owner |
+| Native platform differences | Unix signal data and Windows exit data; native cleanup evidence, no Wine-only acceptance |
+
+Fixtures get an external watchdog that fails with diagnostics rather than hanging
+CI, exact resource ownership, and cleanup for every assertion failure. Run lifecycle
+cases repeatedly with varied payload sizes/scheduling; repetition supplements the
+contract assertions and does not establish correctness by itself. Avoid fixed
+sleep-based readiness and timing assertions tighter than scheduler guarantees.
+
+### Implementation gates
+
+1. Owner accepts or revises this contract, especially the direct-child boundary.
+2. Prove cancellation and reaping mechanics in a bounded platform prototype before
+   promising completion semantics. If the prototype contradicts the contract,
+   escalate the concrete contradiction; do not weaken assertions to get green tests.
+3. Implement one failing integration contract at a time; keep OS-specific code behind
+   a small private boundary. Select dependencies only after the prototype exposes a
+   concrete need and after MSRV, maintenance and feature compatibility review.
+4. Execute strict proof with independent read-back on each supported native OS;
+   release feature/MSRV combinations are resolved in ticket 06.
+
+### Primary-source basis
+
+- [Rust Child](https://doc.rust-lang.org/std/process/struct.Child.html): ordinary Child
+  drop does not terminate or reap; repeated waits preserve exit status. The package
+  must supply its own supervision rather than inherit a cleanup guarantee from std.
+- [Microsoft job objects](https://learn.microsoft.com/en-us/windows/win32/procthread/job-objects):
+  job lifetime/termination and child association have platform-specific rules;
+  these are not equivalent to killing a single Child.
+
+## Open owner decision
+
+Accept the proposed direct-child lifecycle and diagnostic contract, or extend the
+initial scope to managed process trees? Recommendation: accept the direct-child
+contract first; require cancellation-safe pipes and full native proof before release.

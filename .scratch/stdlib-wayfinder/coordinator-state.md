@@ -23,8 +23,11 @@ with high quality, low maintenance, strict verification, and Rhai conventions.
 
 ## Current step
 
-Tickets 01 and 02 are resolved. Four decisions remain open. The next frontier
-ticket by number is issues/03-process-contract.md. No implementation has started.
+Tickets 01 and 02 are resolved. Ticket 03 is claimed and contains a concrete
+process lifecycle proposal awaiting owner review. Four decisions remain unresolved.
+No implementation has started. The owner clarified maximum quality, with effort
+secondary; the earlier recovery question was based on a wording misunderstanding
+and is superseded.
 
 ## Decisions and constraints
 
@@ -44,6 +47,8 @@ ticket by number is issues/03-process-contract.md. No implementation has started
 
 ## Next action
 
-Next invocation: claim issues/03-process-contract.md and clarify process lifecycle,
-resource-limit interactions and cleanup guarantees. Preserve accepted process API
-choices unless new evidence requires an explicit revision. Do not implement in wayfinder.
+Review the proposed contract in issues/03-process-contract.md with the owner,
+especially direct-child supervision versus managed process trees. Do not resolve
+ticket 03 until the live exchange settles that boundary. A cancellation/reaping
+prototype is an implementation gate, not completed evidence. Preserve accepted API
+choices unless a concrete contradiction requires revision. Do not implement in wayfinder.
