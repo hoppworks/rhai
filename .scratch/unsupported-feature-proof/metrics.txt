@@ -1,0 +1,6 @@
+elapsed_seconds=52.146
+sample_count=50
+peak_sampled_runtime_bytes=405528576
+preemptive_limit_bytes=1610612736
+lock_sha256=4aa2e32287d33184c12e98c7a86a17574dbf3a2361c968c76e9611bfd4396cc3
+runtime_path=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-1zssqo0x

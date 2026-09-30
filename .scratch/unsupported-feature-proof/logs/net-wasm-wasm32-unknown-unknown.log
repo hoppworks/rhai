@@ -1,0 +1,9 @@
+$ cargo check --no-default-features --locked --features net --target wasm32-unknown-unknown
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-1zssqo0x/source)
+error: the `net` feature is not available on WASM targets
+  --> src/packages/net/mod.rs:39:1
+   |
+39 | compile_error!("the `net` feature is not available on WASM targets");
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: could not compile `rhai` (lib) due to 1 previous error

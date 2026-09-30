@@ -1,0 +1,1349 @@
+$ cargo check --locked --no-default-features --features sys,no_std
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded static_assertions v1.1.0
+  Downloaded thin-vec v0.2.20
+  Downloaded const-random-macro v0.1.16
+  Downloaded maybe-owned v0.3.4
+  Downloaded const-random v0.1.18
+  Downloaded once_cell v1.21.4
+  Downloaded ipnet v2.12.2
+  Downloaded core-error v0.0.0
+  Downloaded cfg-if v1.0.5
+  Downloaded num-traits v0.2.19
+  Downloaded equivalent v1.0.2
+  Downloaded ambient-authority v0.0.2
+  Downloaded fs-set-times v0.20.3
+  Downloaded io-lifetimes v2.0.4
+  Downloaded autocfg v1.5.1
+  Downloaded errno v0.3.14
+  Downloaded smartstring v1.0.1
+  Downloaded tiny-keccak v2.0.2
+  Downloaded smallvec v1.16.2
+  Downloaded hashbrown v0.16.1
+  Downloaded ahash v0.8.12
+  Downloaded io-lifetimes v3.0.1
+  Downloaded crunchy v0.2.4
+  Downloaded io-extras v0.19.0
+  Downloaded cap-primitives v4.0.3
+  Downloaded zerocopy v0.8.59
+  Downloaded syn v2.0.119
+  Downloaded rustix v1.1.5
+  Downloaded quote v1.0.47
+  Downloaded unicode-ident v1.0.26
+  Downloaded getrandom v0.2.17
+  Downloaded libm v0.2.16
+  Downloaded version_check v0.9.5
+  Downloaded proc-macro2 v1.0.107
+  Downloaded cap-std v4.0.3
+  Downloaded foldhash v0.2.0
+  Downloaded allocator-api2 v0.2.21
+  Downloaded bitflags v2.13.2
+  Downloaded libc v0.2.189
+  Downloaded portable-atomic v1.15.0
+ Downloading crates ...
+  Downloaded rmp-serde v1.3.1
+ Downloading crates ...
+  Downloaded serde_json v1.0.151
+ Downloading crates ...
+  Downloaded web-time v1.1.0
+   Compiling version_check v0.9.5
+   Compiling libc v0.2.189
+   Compiling crunchy v0.2.4
+   Compiling autocfg v1.5.1
+   Compiling tiny-keccak v2.0.2
+   Compiling rustix v1.1.5
+   Compiling io-lifetimes v2.0.4
+   Compiling proc-macro2 v1.0.107
+   Compiling io-lifetimes v3.0.1
+    Checking errno v0.3.14
+   Compiling cfg-if v1.0.5
+    Checking bitflags v2.13.2
+   Compiling io-extras v0.19.0
+   Compiling unicode-ident v1.0.26
+   Compiling portable-atomic v1.15.0
+   Compiling quote v1.0.47
+   Compiling getrandom v0.2.17
+   Compiling once_cell v1.21.4
+   Compiling zerocopy v0.8.59
+   Compiling cap-primitives v4.0.3
+   Compiling libm v0.2.16
+    Checking fs-set-times v0.20.3
+   Compiling const-random-macro v0.1.16
+   Compiling smartstring v1.0.1
+   Compiling num-traits v0.2.19
+   Compiling core-error v0.0.0
+   Compiling ahash v0.8.12
+    Checking maybe-owned v0.3.4
+   Compiling cap-std v4.0.3
+    Checking ambient-authority v0.0.2
+    Checking ipnet v2.12.2
+   Compiling syn v2.0.119
+    Checking const-random v0.1.18
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-9gd80296/source)
+    Checking equivalent v1.0.2
+    Checking static_assertions v1.1.0
+    Checking foldhash v0.2.0
+    Checking allocator-api2 v0.2.21
+    Checking hashbrown v0.16.1
+   Compiling rhai_codegen v3.2.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-9gd80296/source/codegen)
+    Checking smallvec v1.16.2
+    Checking thin-vec v0.2.20
+    Checking no-std-compat v0.4.1 (https://gitlab.com/jD91mZM2/no-std-compat.git#47a5dfb6)
+error: the `sys` feature requires `std`; it cannot be combined with `no_std`
+  --> src/packages/sys/mod.rs:31:1
+   |
+31 | compile_error!("the `sys` feature requires `std`; it cannot be combined with `no_std`");
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0432]: unresolved import `std::path`
+ --> src/packages/sys/config.rs:3:10
+  |
+3 | use std::path::{Path, PathBuf};
+  |          ^^^^ could not find `path` in `std`
+
+error[E0432]: unresolved import `std::error`
+ --> src/packages/sys/error.rs:5:10
+  |
+5 | use std::error::Error;
+  |          ^^^^^ could not find `error` in `std`
+
+error[E0432]: unresolved import `std::io`
+ --> src/packages/sys/error.rs:7:5
+  |
+7 | use std::io;
+  |     ^^^^^^^ no `io` in the root
+  |
+help: a similar name exists in the module
+  |
+7 - use std::io;
+7 + use std::i8;
+  |
+help: consider importing one of these modules instead
+  |
+7 | use std::os::unix::io;
+  |          ++++++++++
+7 - use std::io;
+7 + use core::io;
+  |
+
+error[E0432]: unresolved imports `std::io`, `std::io`
+  --> src/packages/sys/fs.rs:18:10
+   |
+18 | use std::io::{self, Read, Seek, SeekFrom, Write};
+   |          ^^   ^^^^ no `io` in the root
+   |          |
+   |          could not find `io` in `std`
+   |          help: a similar name exists in the module: `i8`
+   |
+   = help: consider importing one of these modules instead:
+           std::io
+           std::os::unix::io
+           core::io
+   = note: unresolved item `crate::packages::sys::error::sys_error_functions::io` exists but is inaccessible
+
+error[E0432]: unresolved import `std::path`
+  --> src/packages/sys/fs.rs:19:10
+   |
+19 | use std::path::{Component, Path, PathBuf};
+   |          ^^^^ could not find `path` in `std`
+
+error: cannot find macro `format` in this scope
+    --> src/packages/sys/fs.rs:1012:45
+     |
+1012 |                 return Err(SysError::Denied(format!(
+     |                                             ^^^^^^
+     |
+help: consider importing one of these macros
+     |
+  12 + use crate::format;
+     |
+  12 + use std::format;
+     |
+  12 + use alloc::format;
+     |
+  12 + use no_std_compat::prelude::v1::format;
+     |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/sys/fs.rs:289:40
+    |
+289 |         .map_err(|s| SysError::NotUtf8(format!("{what} {s:?}")))
+    |                                        ^^^^^^
+    |
+help: consider importing one of these macros
+    |
+ 12 + use crate::format;
+    |
+ 12 + use std::format;
+    |
+ 12 + use alloc::format;
+    |
+ 12 + use no_std_compat::prelude::v1::format;
+    |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/sys/fs.rs:281:26
+    |
+281 |         SysError::Denied(format!("path `{path}` escapes its root"))
+    |                          ^^^^^^
+    |
+help: consider importing one of these macros
+    |
+ 12 + use crate::format;
+    |
+ 12 + use std::format;
+    |
+ 12 + use alloc::format;
+    |
+ 12 + use no_std_compat::prelude::v1::format;
+    |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/sys/fs.rs:251:49
+    |
+251 |                     return Err(SysError::Denied(format!(
+    |                                                 ^^^^^^
+    |
+help: consider importing one of these macros
+    |
+ 12 + use crate::format;
+    |
+ 12 + use std::format;
+    |
+ 12 + use alloc::format;
+    |
+ 12 + use no_std_compat::prelude::v1::format;
+    |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/sys/fs.rs:233:53
+    |
+233 |                         return Err(SysError::Denied(format!(
+    |                                                     ^^^^^^
+    |
+help: consider importing one of these macros
+    |
+ 12 + use crate::format;
+    |
+ 12 + use std::format;
+    |
+ 12 + use alloc::format;
+    |
+ 12 + use no_std_compat::prelude::v1::format;
+    |
+
+error: cannot find macro `vec` in this scope
+   --> src/packages/sys/fs.rs:216:43
+    |
+216 |                         let mut aliases = vec![root.given.as_path(), root.canonical.as_path()];
+    |                                           ^^^
+    |
+help: consider importing one of these macros
+    |
+ 12 + use crate::vec;
+    |
+ 12 + use std::vec;
+    |
+ 12 + use alloc::vec;
+    |
+ 12 + use no_std_compat::prelude::v1::vec;
+    |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/sys/fs.rs:198:49
+    |
+198 |                     return Err(SysError::Denied(format!(
+    |                                                 ^^^^^^
+    |
+help: consider importing one of these macros
+    |
+ 12 + use crate::format;
+    |
+ 12 + use std::format;
+    |
+ 12 + use alloc::format;
+    |
+ 12 + use no_std_compat::prelude::v1::format;
+    |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/sys/fs.rs:184:45
+    |
+184 |                 return Err(SysError::Denied(format!("path `{path}` escapes its root")));
+    |                                             ^^^^^^
+    |
+help: consider importing one of these macros
+    |
+ 12 + use crate::format;
+    |
+ 12 + use std::format;
+    |
+ 12 + use alloc::format;
+    |
+ 12 + use no_std_compat::prelude::v1::format;
+    |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/sys/fs.rs:180:49
+    |
+180 |                     return Err(SysError::Denied(format!("path `{path}` escapes its root")));
+    |                                                 ^^^^^^
+    |
+help: consider importing one of these macros
+    |
+ 12 + use crate::format;
+    |
+ 12 + use std::format;
+    |
+ 12 + use alloc::format;
+    |
+ 12 + use no_std_compat::prelude::v1::format;
+    |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/sys/error.rs:148:9
+    |
+148 |         format!("{err:?}").into()
+    |         ^^^^^^
+    |
+help: consider importing one of these macros
+    |
+ 85 +     use crate::format;
+    |
+ 85 +     use std::format;
+    |
+ 85 +     use alloc::format;
+    |
+ 85 +     use no_std_compat::prelude::v1::format;
+    |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/sys/error.rs:120:42
+    |
+120 |             SysError::Io { kind, .. } => format!("{kind:?}").into(),
+    |                                          ^^^^^^
+    |
+help: consider importing one of these macros
+    |
+ 85 +     use crate::format;
+    |
+ 85 +     use std::format;
+    |
+ 85 +     use alloc::format;
+    |
+ 85 +     use no_std_compat::prelude::v1::format;
+    |
+
+error: cannot find macro `format` in this scope
+  --> src/packages/sys/env.rs:73:44
+   |
+73 |             .map_err(|s| SysError::NotUtf8(format!("current directory {s:?}")).into())
+   |                                            ^^^^^^
+   |
+help: consider importing one of these macros
+   |
+ 3 + use crate::format;
+   |
+ 3 + use std::format;
+   |
+ 3 + use alloc::format;
+   |
+ 3 + use no_std_compat::prelude::v1::format;
+   |
+
+error: cannot find macro `vec` in this scope
+   --> src/packages/sys/config.rs:162:69
+    |
+162 |             FsPolicy::Unrestricted(..) => self.fs = FsPolicy::Roots(vec![root]),
+    |                                                                     ^^^
+    |
+help: consider importing one of these macros
+    |
+  3 + use crate::vec;
+    |
+  3 + use std::vec;
+    |
+  3 + use alloc::vec;
+    |
+  3 + use no_std_compat::prelude::v1::vec;
+    |
+
+error[E0425]: cannot find type `Vec` in this scope
+  --> src/packages/sys/config.rs:24:15
+   |
+24 |     AllowList(Vec<String>),
+   |               ^^^ not found in this scope
+   |
+help: consider importing one of these structs
+   |
+ 3 + use crate::Vec;
+   |
+ 3 + use std::vec::Vec;
+   |
+ 3 + use alloc::vec::Vec;
+   |
+ 3 + use no_std_compat::vec::Vec;
+   |
+
+error[E0425]: cannot find type `String` in this scope
+  --> src/packages/sys/config.rs:24:19
+   |
+24 |     AllowList(Vec<String>),
+   |                   ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+ 3 + use crate::String;
+   |
+ 3 + use std::string::String;
+   |
+ 3 + use alloc::string::String;
+   |
+ 3 + use no_std_compat::string::String;
+   |
+   = and 1 other candidate
+
+error[E0425]: cannot find type `Vec` in this scope
+  --> src/packages/sys/config.rs:50:15
+   |
+50 |     AllowList(Vec<String>),
+   |               ^^^ not found in this scope
+   |
+help: consider importing one of these structs
+   |
+ 3 + use crate::Vec;
+   |
+ 3 + use std::vec::Vec;
+   |
+ 3 + use alloc::vec::Vec;
+   |
+ 3 + use no_std_compat::vec::Vec;
+   |
+
+error[E0425]: cannot find type `String` in this scope
+  --> src/packages/sys/config.rs:50:19
+   |
+50 |     AllowList(Vec<String>),
+   |                   ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+ 3 + use crate::String;
+   |
+ 3 + use std::string::String;
+   |
+ 3 + use alloc::string::String;
+   |
+ 3 + use no_std_compat::string::String;
+   |
+   = and 1 other candidate
+
+error[E0425]: cannot find type `Vec` in this scope
+  --> src/packages/sys/config.rs:81:11
+   |
+81 |     Roots(Vec<FsRoot>),
+   |           ^^^ not found in this scope
+   |
+help: consider importing one of these structs
+   |
+ 3 + use crate::Vec;
+   |
+ 3 + use std::vec::Vec;
+   |
+ 3 + use alloc::vec::Vec;
+   |
+ 3 + use no_std_compat::vec::Vec;
+   |
+
+error[E0433]: failed to resolve: use of undeclared type `Vec`
+  --> src/packages/sys/config.rs:89:21
+   |
+89 |         Self::Roots(Vec::new())
+   |                     ^^^ use of undeclared type `Vec`
+   |
+help: consider importing one of these structs
+   |
+ 3 + use crate::Vec;
+   |
+ 3 + use std::vec::Vec;
+   |
+ 3 + use alloc::vec::Vec;
+   |
+ 3 + use no_std_compat::vec::Vec;
+   |
+
+error[E0433]: failed to resolve: could not find `env` in `std`
+  --> src/packages/sys/env.rs:28:20
+   |
+28 |         match std::env::var(name) {
+   |                    ^^^ could not find `env` in `std`
+   |
+help: consider importing this module
+   |
+ 3 + use std::env;
+   |
+help: if you import `env`, refer to it directly
+   |
+28 -         match std::env::var(name) {
+28 +         match env::var(name) {
+   |
+
+error[E0433]: failed to resolve: could not find `env` in `std`
+  --> src/packages/sys/env.rs:49:35
+   |
+49 |         for (name, value) in std::env::vars_os() {
+   |                                   ^^^ could not find `env` in `std`
+   |
+help: consider importing this module
+   |
+ 3 + use std::env;
+   |
+help: if you import `env`, refer to it directly
+   |
+49 -         for (name, value) in std::env::vars_os() {
+49 +         for (name, value) in env::vars_os() {
+   |
+
+error[E0425]: cannot find type `String` in this scope
+  --> src/packages/sys/env.rs:68:48
+   |
+68 |     .set_into_module(module, move || -> Result<String, Box<EvalAltResult>> {
+   |                                                ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+ 3 + use crate::String;
+   |
+ 3 + use std::string::String;
+   |
+ 3 + use alloc::string::String;
+   |
+ 3 + use no_std_compat::string::String;
+   |
+   = and 1 other candidate
+
+error[E0425]: cannot find type `Box` in this scope
+  --> src/packages/sys/env.rs:68:56
+   |
+68 |     .set_into_module(module, move || -> Result<String, Box<EvalAltResult>> {
+   |                                                        ^^^ not found in this scope
+   |
+help: consider importing one of these structs
+   |
+ 3 + use crate::Box;
+   |
+ 3 + use std::boxed::Box;
+   |
+ 3 + use alloc::boxed::Box;
+   |
+ 3 + use no_std_compat::prelude::v1::Box;
+   |
+
+error[E0433]: failed to resolve: could not find `env` in `std`
+  --> src/packages/sys/env.rs:70:18
+   |
+70 |             std::env::current_dir().map_err(|e| SysError::io("get current directory", ".", &e))?;
+   |                  ^^^ could not find `env` in `std`
+   |
+help: consider importing this module
+   |
+ 3 + use std::env;
+   |
+help: if you import `env`, refer to it directly
+   |
+70 -             std::env::current_dir().map_err(|e| SysError::io("get current directory", ".", &e))?;
+70 +             env::current_dir().map_err(|e| SysError::io("get current directory", ".", &e))?;
+   |
+
+error[E0425]: cannot find type `String` in this scope
+  --> src/packages/sys/error.rs:33:12
+   |
+33 |     Denied(String),
+   |            ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+ 3 + use crate::String;
+   |
+ 3 + use std::string::String;
+   |
+ 3 + use alloc::string::String;
+   |
+ 3 + use no_std_compat::string::String;
+   |
+   = and 1 other candidate
+
+error[E0425]: cannot find type `String` in this scope
+  --> src/packages/sys/error.rs:39:17
+   |
+39 |         target: String,
+   |                 ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+ 3 + use crate::String;
+   |
+ 3 + use std::string::String;
+   |
+ 3 + use alloc::string::String;
+   |
+ 3 + use no_std_compat::string::String;
+   |
+   = and 1 other candidate
+
+error[E0425]: cannot find type `String` in this scope
+  --> src/packages/sys/error.rs:43:18
+   |
+43 |         message: String,
+   |                  ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+ 3 + use crate::String;
+   |
+ 3 + use std::string::String;
+   |
+ 3 + use alloc::string::String;
+   |
+ 3 + use no_std_compat::string::String;
+   |
+   = and 1 other candidate
+
+error[E0425]: cannot find type `String` in this scope
+  --> src/packages/sys/error.rs:46:13
+   |
+46 |     Timeout(String),
+   |             ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+ 3 + use crate::String;
+   |
+ 3 + use std::string::String;
+   |
+ 3 + use alloc::string::String;
+   |
+ 3 + use no_std_compat::string::String;
+   |
+   = and 1 other candidate
+
+error[E0425]: cannot find type `String` in this scope
+  --> src/packages/sys/error.rs:48:17
+   |
+48 |     OutputLimit(String),
+   |                 ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+ 3 + use crate::String;
+   |
+ 3 + use std::string::String;
+   |
+ 3 + use alloc::string::String;
+   |
+ 3 + use no_std_compat::string::String;
+   |
+   = and 1 other candidate
+
+error[E0425]: cannot find type `String` in this scope
+  --> src/packages/sys/error.rs:50:13
+   |
+50 |     NotUtf8(String),
+   |             ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+ 3 + use crate::String;
+   |
+ 3 + use std::string::String;
+   |
+ 3 + use alloc::string::String;
+   |
+ 3 + use no_std_compat::string::String;
+   |
+   = and 1 other candidate
+
+error[E0425]: cannot find type `String` in this scope
+  --> src/packages/sys/error.rs:67:58
+   |
+67 |     pub(crate) fn io(op: &'static str, target: impl Into<String>, source: &io::Error) -> Self {
+   |                                                          ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+ 3 + use crate::String;
+   |
+ 3 + use std::string::String;
+   |
+ 3 + use alloc::string::String;
+   |
+ 3 + use no_std_compat::string::String;
+   |
+   = and 1 other candidate
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/sys/error.rs:171:25
+    |
+171 | impl From<SysError> for Box<EvalAltResult> {
+    |                         ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+  3 + use crate::Box;
+    |
+  3 + use std::boxed::Box;
+    |
+  3 + use alloc::boxed::Box;
+    |
+  3 + use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `Box` in this scope
+  --> src/packages/sys/fs.rs:21:25
+   |
+21 | type Res<T> = Result<T, Box<EvalAltResult>>;
+   |                         ^^^ not found in this scope
+   |
+help: consider importing one of these structs
+   |
+12 + use crate::Box;
+   |
+12 + use std::boxed::Box;
+   |
+12 + use alloc::boxed::Box;
+   |
+12 + use no_std_compat::prelude::v1::Box;
+   |
+
+error[E0425]: cannot find type `Vec` in this scope
+  --> src/packages/sys/fs.rs:35:11
+   |
+35 |     Roots(Vec<OpenRoot>),
+   |           ^^^ not found in this scope
+   |
+help: consider importing one of these structs
+   |
+12 + use crate::Vec;
+   |
+12 + use std::vec::Vec;
+   |
+12 + use alloc::vec::Vec;
+   |
+12 + use no_std_compat::vec::Vec;
+   |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+  --> src/packages/sys/fs.rs:39:38
+   |
+39 | type FileHandle = Shared<Locked<std::fs::File>>;
+   |                                      ^^ could not find `fs` in `std`
+   |
+help: consider importing one of these modules
+   |
+12 + use std::fs;
+   |
+12 + use cap_std::fs;
+   |
+help: if you import `fs`, refer to it directly
+   |
+39 - type FileHandle = Shared<Locked<std::fs::File>>;
+39 + type FileHandle = Shared<Locked<fs::File>>;
+   |
+
+error[E0433]: failed to resolve: use of undeclared type `Vec`
+  --> src/packages/sys/fs.rs:46:34
+   |
+46 |                 let mut opened = Vec::with_capacity(roots.len());
+   |                                  ^^^ use of undeclared type `Vec`
+   |
+help: consider importing one of these structs
+   |
+12 + use crate::Vec;
+   |
+12 + use std::vec::Vec;
+   |
+12 + use alloc::vec::Vec;
+   |
+12 + use no_std_compat::vec::Vec;
+   |
+
+error[E0433]: failed to resolve: could not find `env` in `std`
+  --> src/packages/sys/fs.rs:51:30
+   |
+51 |                         std::env::current_dir()
+   |                              ^^^ could not find `env` in `std`
+   |
+help: consider importing this module
+   |
+12 + use std::env;
+   |
+help: if you import `env`, refer to it directly
+   |
+51 -                         std::env::current_dir()
+51 +                         env::current_dir()
+   |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+  --> src/packages/sys/fs.rs:57:30
+   |
+57 |                         std::fs::canonicalize(&given)
+   |                              ^^ could not find `fs` in `std`
+   |
+help: consider importing this module
+   |
+12 + use std::fs;
+   |
+help: if you import `fs`, refer to it directly
+   |
+57 -                         std::fs::canonicalize(&given)
+57 +                         fs::canonicalize(&given)
+   |
+
+error[E0425]: cannot find type `OsString` in module `std::ffi`
+   --> src/packages/sys/fs.rs:287:42
+    |
+287 | fn os_to_string(what: &str, s: std::ffi::OsString) -> Result<String, SysError> {
+    |                                          ^^^^^^^^ not found in `std::ffi`
+    |
+help: consider importing this struct
+    |
+ 12 + use std::ffi::OsString;
+    |
+help: if you import `OsString`, refer to it directly
+    |
+287 - fn os_to_string(what: &str, s: std::ffi::OsString) -> Result<String, SysError> {
+287 + fn os_to_string(what: &str, s: OsString) -> Result<String, SysError> {
+    |
+
+error[E0425]: cannot find type `String` in this scope
+   --> src/packages/sys/fs.rs:287:62
+    |
+287 | fn os_to_string(what: &str, s: std::ffi::OsString) -> Result<String, SysError> {
+    |                                                              ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+ 12 + use crate::String;
+    |
+ 12 + use std::string::String;
+    |
+ 12 + use alloc::string::String;
+    |
+ 12 + use no_std_compat::string::String;
+    |
+    = and 1 other candidate
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+   --> src/packages/sys/fs.rs:376:48
+    |
+376 |     fn apply_to_host(&self, options: &mut std::fs::OpenOptions) {
+    |                                                ^^ could not find `fs` in `std`
+    |
+help: consider importing one of these modules
+    |
+ 12 + use std::fs;
+    |
+ 12 + use std::os::unix::fs;
+    |
+ 12 + use cap_std::fs;
+    |
+help: if you import `fs`, refer to it directly
+    |
+376 -     fn apply_to_host(&self, options: &mut std::fs::OpenOptions) {
+376 +     fn apply_to_host(&self, options: &mut fs::OpenOptions) {
+    |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+   --> src/packages/sys/fs.rs:404:36
+    |
+404 |             let mut options = std::fs::OpenOptions::new();
+    |                                    ^^ could not find `fs` in `std`
+    |
+help: consider importing one of these structs
+    |
+ 12 + use std::fs::OpenOptions;
+    |
+ 12 + use cap_std::fs::OpenOptions;
+    |
+help: if you import `OpenOptions`, refer to it directly
+    |
+404 -             let mut options = std::fs::OpenOptions::new();
+404 +             let mut options = OpenOptions::new();
+    |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+   --> src/packages/sys/fs.rs:436:30
+    |
+436 |     f: impl FnOnce(&mut std::fs::File) -> io::Result<T>,
+    |                              ^^ could not find `fs` in `std`
+    |
+help: consider importing one of these modules
+    |
+ 12 + use std::fs;
+    |
+ 12 + use cap_std::fs;
+    |
+help: if you import `fs`, refer to it directly
+    |
+436 -     f: impl FnOnce(&mut std::fs::File) -> io::Result<T>,
+436 +     f: impl FnOnce(&mut fs::File) -> io::Result<T>,
+    |
+
+error[E0425]: cannot find type `Vec` in this scope
+   --> src/packages/sys/fs.rs:458:10
+    |
+458 | ) -> Res<Vec<u8>> {
+    |          ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+ 12 + use crate::Vec;
+    |
+ 12 + use std::vec::Vec;
+    |
+ 12 + use alloc::vec::Vec;
+    |
+ 12 + use no_std_compat::vec::Vec;
+    |
+
+error[E0433]: failed to resolve: use of undeclared type `Vec`
+   --> src/packages/sys/fs.rs:482:19
+    |
+482 |         return Ok(Vec::new());
+    |                   ^^^ use of undeclared type `Vec`
+    |
+help: consider importing one of these structs
+    |
+ 12 + use crate::Vec;
+    |
+ 12 + use std::vec::Vec;
+    |
+ 12 + use alloc::vec::Vec;
+    |
+ 12 + use no_std_compat::vec::Vec;
+    |
+
+error[E0433]: failed to resolve: use of undeclared type `Vec`
+   --> src/packages/sys/fs.rs:485:21
+    |
+485 |     let mut bytes = Vec::new();
+    |                     ^^^ use of undeclared type `Vec`
+    |
+help: consider importing one of these structs
+    |
+ 12 + use crate::Vec;
+    |
+ 12 + use std::vec::Vec;
+    |
+ 12 + use alloc::vec::Vec;
+    |
+ 12 + use no_std_compat::vec::Vec;
+    |
+
+error[E0425]: cannot find type `String` in this scope
+   --> src/packages/sys/fs.rs:513:85
+    |
+513 |     .set_into_module(module, move |ctx: NativeCallContext, file: FileHandle| -> Res<String> {
+    |                                                                                     ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+ 12 + use crate::String;
+    |
+ 12 + use std::string::String;
+    |
+ 12 + use alloc::string::String;
+    |
+ 12 + use no_std_compat::string::String;
+    |
+    = and 1 other candidate
+
+error[E0433]: failed to resolve: use of undeclared type `String`
+   --> src/packages/sys/fs.rs:525:9
+    |
+525 |         String::from_utf8(bytes).map_err(|e| {
+    |         ^^^^^^ use of undeclared type `String`
+    |
+help: consider importing one of these items
+    |
+ 12 + use crate::String;
+    |
+ 12 + use std::string::String;
+    |
+ 12 + use alloc::string::String;
+    |
+ 12 + use no_std_compat::string::String;
+    |
+    = and 1 other candidate
+
+error[E0425]: cannot find type `String` in this scope
+   --> src/packages/sys/fs.rs:538:95
+    |
+538 |     .set_into_module(module, move |ctx: NativeCallContext, file: FileHandle, len: INT| -> Res<String> {
+    |                                                                                               ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+ 12 + use crate::String;
+    |
+ 12 + use std::string::String;
+    |
+ 12 + use alloc::string::String;
+    |
+ 12 + use no_std_compat::string::String;
+    |
+    = and 1 other candidate
+
+error[E0433]: failed to resolve: use of undeclared type `String`
+   --> src/packages/sys/fs.rs:550:9
+    |
+550 |         String::from_utf8(bytes).map_err(|e| {
+    |         ^^^^^^ use of undeclared type `String`
+    |
+help: consider importing one of these items
+    |
+ 12 + use crate::String;
+    |
+ 12 + use std::string::String;
+    |
+ 12 + use alloc::string::String;
+    |
+ 12 + use no_std_compat::string::String;
+    |
+    = and 1 other candidate
+
+error[E0425]: cannot find type `String` in this scope
+   --> src/packages/sys/fs.rs:689:29
+    |
+689 |         |path: &str| -> Res<String> {
+    |                             ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+ 12 + use crate::String;
+    |
+ 12 + use std::string::String;
+    |
+ 12 + use alloc::string::String;
+    |
+ 12 + use no_std_compat::string::String;
+    |
+    = and 1 other candidate
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+   --> src/packages/sys/fs.rs:692:36
+    |
+692 |                 Some(path) => std::fs::read(path),
+    |                                    ^^ could not find `fs` in `std`
+    |
+help: consider importing this module
+    |
+ 12 + use std::fs;
+    |
+help: if you import `fs`, refer to it directly
+    |
+692 -                 Some(path) => std::fs::read(path),
+692 +                 Some(path) => fs::read(path),
+    |
+
+error[E0433]: failed to resolve: use of undeclared type `String`
+   --> src/packages/sys/fs.rs:696:16
+    |
+696 |             Ok(String::from_utf8_lossy(&bytes).into_owned())
+    |                ^^^^^^ use of undeclared type `String`
+    |
+help: consider importing one of these items
+    |
+ 12 + use crate::String;
+    |
+ 12 + use std::string::String;
+    |
+ 12 + use alloc::string::String;
+    |
+ 12 + use no_std_compat::string::String;
+    |
+    = and 1 other candidate
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+   --> src/packages/sys/fs.rs:709:36
+    |
+709 |                 Some(path) => std::fs::read(path),
+    |                                    ^^ could not find `fs` in `std`
+    |
+help: consider importing this module
+    |
+ 12 + use std::fs;
+    |
+help: if you import `fs`, refer to it directly
+    |
+709 -                 Some(path) => std::fs::read(path),
+709 +                 Some(path) => fs::read(path),
+    |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+   --> src/packages/sys/fs.rs:734:36
+    |
+734 |                 Some(path) => std::fs::write(path, data.as_bytes()),
+    |                                    ^^ could not find `fs` in `std`
+    |
+help: consider importing this module
+    |
+ 12 + use std::fs;
+    |
+help: if you import `fs`, refer to it directly
+    |
+734 -                 Some(path) => std::fs::write(path, data.as_bytes()),
+734 +                 Some(path) => fs::write(path, data.as_bytes()),
+    |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+   --> src/packages/sys/fs.rs:750:36
+    |
+750 |                 Some(path) => std::fs::write(path, &data),
+    |                                    ^^ could not find `fs` in `std`
+    |
+help: consider importing this module
+    |
+ 12 + use std::fs;
+    |
+help: if you import `fs`, refer to it directly
+    |
+750 -                 Some(path) => std::fs::write(path, &data),
+750 +                 Some(path) => fs::write(path, &data),
+    |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+   --> src/packages/sys/fs.rs:833:34
+    |
+833 |                     let m = std::fs::metadata(host_path).map_err(|e| map_io("read metadata of", path, &e))?;
+    |                                  ^^ could not find `fs` in `std`
+    |
+help: consider importing this module
+    |
+ 12 + use std::fs;
+    |
+help: if you import `fs`, refer to it directly
+    |
+833 -                     let m = std::fs::metadata(host_path).map_err(|e| map_io("read metadata of", path, &e))?;
+833 +                     let m = fs::metadata(host_path).map_err(|e| map_io("read metadata of", path, &e))?;
+    |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+   --> src/packages/sys/fs.rs:834:35
+    |
+834 |                     let sm = std::fs::symlink_metadata(host_path).map_err(|e| map_io("read metadata of", path, &e))?;
+    |                                   ^^ could not find `fs` in `std`
+    |
+help: consider importing this module
+    |
+ 12 + use std::fs;
+    |
+help: if you import `fs`, refer to it directly
+    |
+834 -                     let sm = std::fs::symlink_metadata(host_path).map_err(|e| map_io("read metadata of", path, &e))?;
+834 +                     let sm = fs::symlink_metadata(host_path).map_err(|e| map_io("read metadata of", path, &e))?;
+    |
+
+error[E0425]: cannot find value `UNIX_EPOCH` in module `std::time`
+   --> src/packages/sys/fs.rs:844:60
+    |
+844 |                 Ok(t) => match t.duration_since(std::time::UNIX_EPOCH) {
+    |                                                            ^^^^^^^^^^ not found in `std::time`
+    |
+help: consider importing this constant
+    |
+ 12 + use std::time::UNIX_EPOCH;
+    |
+help: if you import `UNIX_EPOCH`, refer to it directly
+    |
+844 -                 Ok(t) => match t.duration_since(std::time::UNIX_EPOCH) {
+844 +                 Ok(t) => match t.duration_since(UNIX_EPOCH) {
+    |
+
+error[E0433]: failed to resolve: use of undeclared type `Vec`
+   --> src/packages/sys/fs.rs:878:29
+    |
+878 |             let mut names = Vec::new();
+    |                             ^^^ use of undeclared type `Vec`
+    |
+help: consider importing one of these structs
+    |
+ 12 + use crate::Vec;
+    |
+ 12 + use std::vec::Vec;
+    |
+ 12 + use alloc::vec::Vec;
+    |
+ 12 + use no_std_compat::vec::Vec;
+    |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+   --> src/packages/sys/fs.rs:881:39
+    |
+881 |                     for entry in std::fs::read_dir(host_path)
+    |                                       ^^ could not find `fs` in `std`
+    |
+help: consider importing one of these modules
+    |
+ 12 + use std::fs;
+    |
+ 12 + use cap_std::fs;
+    |
+help: if you import `fs`, refer to it directly
+    |
+881 -                     for entry in std::fs::read_dir(host_path)
+881 +                     for entry in fs::read_dir(host_path)
+    |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+   --> src/packages/sys/fs.rs:912:36
+    |
+912 |                 Some(path) => std::fs::create_dir(path),
+    |                                    ^^ could not find `fs` in `std`
+    |
+help: consider importing this module
+    |
+ 12 + use std::fs;
+    |
+help: if you import `fs`, refer to it directly
+    |
+912 -                 Some(path) => std::fs::create_dir(path),
+912 +                 Some(path) => fs::create_dir(path),
+    |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+   --> src/packages/sys/fs.rs:935:36
+    |
+935 |                 Some(path) => std::fs::create_dir_all(path),
+    |                                    ^^ could not find `fs` in `std`
+    |
+help: consider importing this module
+    |
+ 12 + use std::fs;
+    |
+help: if you import `fs`, refer to it directly
+    |
+935 -                 Some(path) => std::fs::create_dir_all(path),
+935 +                 Some(path) => fs::create_dir_all(path),
+    |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+   --> src/packages/sys/fs.rs:950:36
+    |
+950 |                 Some(path) => std::fs::remove_file(path),
+    |                                    ^^ could not find `fs` in `std`
+    |
+help: consider importing this module
+    |
+ 12 + use std::fs;
+    |
+help: if you import `fs`, refer to it directly
+    |
+950 -                 Some(path) => std::fs::remove_file(path),
+950 +                 Some(path) => fs::remove_file(path),
+    |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+   --> src/packages/sys/fs.rs:965:36
+    |
+965 |                 Some(path) => std::fs::remove_dir(path),
+    |                                    ^^ could not find `fs` in `std`
+    |
+help: consider importing this module
+    |
+ 12 + use std::fs;
+    |
+help: if you import `fs`, refer to it directly
+    |
+965 -                 Some(path) => std::fs::remove_dir(path),
+965 +                 Some(path) => fs::remove_dir(path),
+    |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+   --> src/packages/sys/fs.rs:988:36
+    |
+988 |                 Some(path) => std::fs::remove_dir_all(path),
+    |                                    ^^ could not find `fs` in `std`
+    |
+help: consider importing this module
+    |
+ 12 + use std::fs;
+    |
+help: if you import `fs`, refer to it directly
+    |
+988 -                 Some(path) => std::fs::remove_dir_all(path),
+988 +                 Some(path) => fs::remove_dir_all(path),
+    |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+    --> src/packages/sys/fs.rs:1018:48
+     |
+1018 |                 (Some(from), Some(to)) => std::fs::rename(from, to),
+     |                                                ^^ could not find `fs` in `std`
+     |
+help: consider importing this module
+     |
+  12 + use std::fs;
+     |
+help: if you import `fs`, refer to it directly
+     |
+1018 -                 (Some(from), Some(to)) => std::fs::rename(from, to),
+1018 +                 (Some(from), Some(to)) => fs::rename(from, to),
+     |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+    --> src/packages/sys/fs.rs:1042:58
+     |
+1042 |                 (Some(from_path), Some(to_path)) => std::fs::copy(from_path, to_path).map(|_| ()),
+     |                                                          ^^ could not find `fs` in `std`
+     |
+help: consider importing this module
+     |
+  12 + use std::fs;
+     |
+help: if you import `fs`, refer to it directly
+     |
+1042 -                 (Some(from_path), Some(to_path)) => std::fs::copy(from_path, to_path).map(|_| ()),
+1042 +                 (Some(from_path), Some(to_path)) => fs::copy(from_path, to_path).map(|_| ()),
+     |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+    --> src/packages/sys/fs.rs:1053:29
+     |
+1053 |         let mut file = std::fs::OpenOptions::new()
+     |                             ^^ could not find `fs` in `std`
+     |
+help: consider importing one of these structs
+     |
+  12 + use std::fs::OpenOptions;
+     |
+  12 + use cap_std::fs::OpenOptions;
+     |
+help: if you import `OpenOptions`, refer to it directly
+     |
+1053 -         let mut file = std::fs::OpenOptions::new()
+1053 +         let mut file = OpenOptions::new()
+     |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+    --> src/packages/sys/fs.rs:1075:28
+     |
+1075 |         Some(path) => std::fs::metadata(path).map(|m| (m.is_file(), m.is_dir())),
+     |                            ^^ could not find `fs` in `std`
+     |
+help: consider importing this module
+     |
+  12 + use std::fs;
+     |
+help: if you import `fs`, refer to it directly
+     |
+1075 -         Some(path) => std::fs::metadata(path).map(|m| (m.is_file(), m.is_dir())),
+1075 +         Some(path) => fs::metadata(path).map(|m| (m.is_file(), m.is_dir())),
+     |
+
+Some errors have detailed explanations: E0425, E0432, E0433.
+For more information about an error, try `rustc --explain E0425`.
+error: could not compile `rhai` (lib) due to 76 previous errors

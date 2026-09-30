@@ -1,0 +1,133 @@
+$ cargo check --no-default-features --locked --features sys --target wasm32-unknown-unknown
+    Checking wasm-bindgen-shared v0.2.129
+   Compiling wasm-bindgen v0.2.129
+   Compiling wasm-bindgen-macro v0.2.129
+    Checking slab v0.4.12
+    Checking futures-core v0.3.34
+    Checking futures-task v0.3.34
+    Checking pin-project-lite v0.2.17
+   Compiling zerocopy v0.8.59
+    Checking futures-util v0.3.34
+   Compiling num-traits v0.2.19
+   Compiling smartstring v1.0.1
+    Checking js-sys v0.3.106
+   Compiling ahash v0.8.12
+    Checking const-random v0.1.18
+    Checking static_assertions v1.1.0
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-1zssqo0x/source)
+    Checking thin-vec v0.2.20
+    Checking bitflags v2.13.2
+    Checking smallvec v1.16.2
+    Checking web-time v1.1.0
+error: the `sys` feature is not available on WASM targets
+  --> src/packages/sys/mod.rs:37:1
+   |
+37 | compile_error!("the `sys` feature is not available on WASM targets");
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0433]: failed to resolve: use of unresolved module or unlinked crate `cap_std`
+  --> src/packages/sys/fs.rs:17:5
+   |
+17 | use cap_std::fs::{Dir, OpenOptions};
+   |     ^^^^^^^ use of unresolved module or unlinked crate `cap_std`
+   |
+   = help: if you wanted to use a crate named `cap_std`, use `cargo add cap_std` to add it to your `Cargo.toml`
+
+error[E0432]: unresolved import `cap_std`
+  --> src/packages/sys/fs.rs:16:5
+   |
+16 | use cap_std::ambient_authority;
+   |     ^^^^^^^ use of unresolved module or unlinked crate `cap_std`
+   |
+   = help: if you wanted to use a crate named `cap_std`, use `cargo add cap_std` to add it to your `Cargo.toml`
+
+error[E0433]: failed to resolve: use of unresolved module or unlinked crate `cap_std`
+   --> src/packages/sys/fs.rs:414:22
+    |
+414 |                 .map(cap_std::fs::File::into_std)
+    |                      ^^^^^^^ use of unresolved module or unlinked crate `cap_std`
+    |
+    = help: if you wanted to use a crate named `cap_std`, use `cargo add cap_std` to add it to your `Cargo.toml`
+help: consider importing this struct
+    |
+ 12 + use std::fs::File;
+    |
+help: if you import `File`, refer to it directly
+    |
+414 -                 .map(cap_std::fs::File::into_std)
+414 +                 .map(File::into_std)
+    |
+
+error[E0282]: type annotations needed
+   --> src/packages/sys/fs.rs:840:131
+    |
+840 | ..., m.permissions().readonly(), m.modified().map(|t| t.into_std()))
+    |                                                    ^  - type must be known at this point
+    |
+help: consider giving this closure parameter an explicit type
+    |
+840 |                     (m.len(), m.is_file(), m.is_dir(), sm.file_type().is_symlink(), m.permissions().readonly(), m.modified().map(|t: /* Type */| t.into_std()))
+    |                                                                                                                                    ++++++++++++
+
+error[E0282]: type annotations needed
+   --> src/packages/sys/fs.rs:844:32
+    |
+844 |                 Ok(t) => match t.duration_since(std::time::UNIX_EPOCH) {
+    |                                ^ cannot infer type
+
+error[E0282]: type annotations needed
+   --> src/packages/sys/fs.rs:845:44
+    |
+845 |                     Ok(d) => INT::try_from(d.as_secs()).map_or(Dynamic::UNIT, Into::into),
+    |                                            ^ cannot infer type
+
+error[E0282]: type annotations needed
+   --> src/packages/sys/fs.rs:852:42
+    |
+852 |             map.insert("is_file".into(), is_file.into());
+    |                                          ^^^^^^^ cannot infer type
+
+error[E0282]: type annotations needed
+   --> src/packages/sys/fs.rs:853:41
+    |
+853 |             map.insert("is_dir".into(), is_dir.into());
+    |                                         ^^^^^^ cannot infer type
+
+error[E0282]: type annotations needed
+   --> src/packages/sys/fs.rs:854:45
+    |
+854 |             map.insert("is_symlink".into(), is_symlink.into());
+    |                                             ^^^^^^^^^^ cannot infer type
+
+error[E0282]: type annotations needed
+   --> src/packages/sys/fs.rs:855:43
+    |
+855 |             map.insert("readonly".into(), readonly.into());
+    |                                           ^^^^^^^^ cannot infer type
+
+error[E0282]: type annotations needed
+   --> src/packages/sys/fs.rs:894:37
+    |
+894 |                         let entry = entry.map_err(|e| map_io("read directory", path, &e))?;
+    |                                     ^^^^^ cannot infer type
+
+error[E0282]: type annotations needed
+    --> src/packages/sys/fs.rs:1076:47
+     |
+1076 |         None => r.dir().metadata(&r.rel).map(|m| (m.is_file(), m.is_dir())),
+     |                                               ^   - type must be known at this point
+     |
+help: consider giving this closure parameter an explicit type
+     |
+1076 |         None => r.dir().metadata(&r.rel).map(|m: /* Type */| (m.is_file(), m.is_dir())),
+     |                                                ++++++++++++
+
+error[E0282]: type annotations needed
+    --> src/packages/sys/fs.rs:1080:19
+     |
+1080 |         Err(e) if e.kind() == io::ErrorKind::NotFound => Ok(None),
+     |                   ^ cannot infer type
+
+Some errors have detailed explanations: E0282, E0432, E0433.
+For more information about an error, try `rustc --explain E0282`.
+error: could not compile `rhai` (lib) due to 14 previous errors

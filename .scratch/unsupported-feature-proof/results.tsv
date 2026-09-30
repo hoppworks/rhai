@@ -1,0 +1,12 @@
+check	exit_status	expected_diagnostic_occurrences	matcher	log
+sys-no_std	101	1	accept	.scratch/unsupported-feature-proof/logs/sys-no_std-attempt3.log
+net-no_std	101	1	accept	.scratch/unsupported-feature-proof/logs/net-no_std.log
+sys-no_object	101	1	accept	.scratch/unsupported-feature-proof/logs/sys-no_object.log
+control-sys-no_object-guard-removed	101	0	reject	.scratch/unsupported-feature-proof/logs/control-sys-no_object-guard-removed.log
+sys-no_object-restored	101	1	accept	.scratch/unsupported-feature-proof/logs/sys-no_object-restored.log
+sys-wasm-wasm32-unknown-unknown	101	1	accept	.scratch/unsupported-feature-proof/logs/sys-wasm-wasm32-unknown-unknown.log
+net-wasm-wasm32-unknown-unknown	101	1	accept	.scratch/unsupported-feature-proof/logs/net-wasm-wasm32-unknown-unknown.log
+sys-net-wasm-wasm32-unknown-unknown	101	2	accept	.scratch/unsupported-feature-proof/logs/sys-net-wasm-wasm32-unknown-unknown.log
+sys-wasm-wasm32-wasip1	101	1	accept	.scratch/unsupported-feature-proof/logs/sys-wasm-wasm32-wasip1.log
+net-wasm-wasm32-wasip1	101	1	accept	.scratch/unsupported-feature-proof/logs/net-wasm-wasm32-wasip1.log
+sys-net-wasm-wasm32-wasip1	101	2	accept	.scratch/unsupported-feature-proof/logs/sys-net-wasm-wasm32-wasip1.log

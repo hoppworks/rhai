@@ -1,0 +1,90 @@
+$ cargo check --no-default-features --features sys --target wasm32-unknown-unknown
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+     Locking 130 packages to latest compatible versions
+      Adding getrandom v0.3.4 (available: v0.4.3)
+      Adding hashbrown v0.16.1 (available: v0.17.1)
+      Adding syn v2.0.119 (available: v3.0.6)
+ Downloading crates ...
+  Downloaded autocfg v1.5.1
+  Downloaded num-traits v0.2.19
+  Downloaded wasm-bindgen-shared v0.2.129
+  Downloaded fs-set-times v0.20.3
+  Downloaded errno v0.3.14
+  Downloaded version_check v0.9.5
+  Downloaded futures-task v0.3.34
+  Downloaded io-lifetimes v3.0.1
+  Downloaded io-extras v0.19.0
+  Downloaded rustversion v1.0.23
+  Downloaded unicode-ident v1.0.26
+  Downloaded ahash v0.8.12
+  Downloaded proc-macro2 v1.0.107
+  Downloaded bitflags v2.13.2
+  Downloaded wasm-bindgen v0.2.129
+  Downloaded cap-primitives v4.0.3
+  Downloaded wasm-bindgen-macro-support v0.2.129
+  Downloaded futures-util v0.3.34
+  Downloaded zerocopy v0.8.59
+  Downloaded syn v3.0.6
+  Downloaded wasm-bindgen-macro v0.2.129
+  Downloaded thin-vec v0.2.20
+  Downloaded static_assertions v1.1.0
+  Downloaded rustix v1.1.5
+  Downloaded portable-atomic v1.15.0
+  Downloaded maybe-owned v0.3.4
+  Downloaded getrandom v0.2.17
+  Downloaded const-random-macro v0.1.16
+  Downloaded bumpalo v3.20.3
+  Downloaded libc v0.2.189
+  Downloaded web-time v1.1.0
+  Downloaded tiny-keccak v2.0.2
+  Downloaded pin-project-lite v0.2.17
+  Downloaded cfg-if v1.0.5
+  Downloaded ipnet v2.12.2
+  Downloaded crunchy v0.2.4
+  Downloaded smallvec v1.16.2
+  Downloaded quote v1.0.47
+  Downloaded io-lifetimes v2.0.4
+  Downloaded futures-core v0.3.34
+  Downloaded const-random v0.1.18
+  Downloaded smartstring v1.0.1
+  Downloaded slab v0.4.12
+  Downloaded js-sys v0.3.106
+  Downloaded ambient-authority v0.0.2
+  Downloaded syn v2.0.119
+  Downloaded once_cell v1.21.4
+  Downloaded cap-std v4.0.3
+ Downloading crates ...
+  Downloaded rmp-serde v1.3.1
+ Downloading crates ...
+  Downloaded serde_json v1.0.151
+   Compiling unicode-ident v1.0.26
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling wasm-bindgen-shared v0.2.129
+   Compiling portable-atomic v1.15.0
+   Compiling rustversion v1.0.23
+   Compiling version_check v0.9.5
+   Compiling crunchy v0.2.4
+   Compiling libc v0.2.189
+   Compiling autocfg v1.5.1
+   Compiling syn v3.0.6
+   Compiling tiny-keccak v2.0.2
+   Compiling bumpalo v3.20.3
+   Compiling io-lifetimes v3.0.1
+   Compiling io-lifetimes v2.0.4
+   Compiling rustix v1.1.5
+   Compiling wasm-bindgen-macro-support v0.2.129
+   Compiling wasm-bindgen v0.2.129
+    Checking once_cell v1.21.4
+    Checking cfg-if v1.0.5
+    Checking errno v0.3.14
+error: The target OS is "unknown" or "none", so it's unsupported by the errno crate.
+ --> /private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-1j2zycvi/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/errno-0.3.14/src/sys.rs:8:1
+  |
+8 | compile_error!("The target OS is \"unknown\" or \"none\", so it's unsupported by the errno crate.");
+  | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: could not compile `errno` (lib) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...
