@@ -62,6 +62,10 @@ separate; no product integration or ticket acceptance.
 Handle-based source staging and executable validation are now running in the
 responsible candidate context under briefs/windows-source-staging.md, from clean
 08fb7cd5. Live agent status was confirmed, not inferred from a state file.
+Draft source and fixture changes are present (roughly 800 backend lines plus
+fixture cases) and being corrected in that context. Intermediate review findings
+are retained in windows-source-staging-review.md. Final commit/independent review
+is pending; do not integrate or claim staging accepted from this draft.
 
 Step 1 corrected unrestricted resolution is integrated at 5f87d339 and accepted
 on native macOS: env7/fs24/policy26 pass, exact runtime absent. Red/green
@@ -197,6 +201,14 @@ Dependent implementation is stopped. Continue only independent authorized
 requirements with new evidence; do not repeat decision/status/verification rounds.
 
 ## Goal turn classification
+
+2026-09-30 staging continuation: progress in authoritative candidate source,
+with test-first fixture source, handle-based copy/validation draft and related
+review corrections. Confirmed live responsible agent and bounded observation
+timeouts are verified waits, not terminal evidence. No fixture/compiler/native
+execution or temporary runtime exists. Final staging commit and full source
+review remain pending; goal stays active and incomplete. No completed failed
+full-custody correction or infrastructure recovery occurred.
 
 2026-09-30 current continuation: progress. Exclusive runtime allocation source
 3d7a659b and reviewed corrections 9a68a437/08fb7cd5 advance the existing Windows
