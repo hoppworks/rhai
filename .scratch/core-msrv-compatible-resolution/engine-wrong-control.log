@@ -1,0 +1,23 @@
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: associated function `get_script_fn_by_hash_mut` is never used
+    --> src/module/mod.rs:1358:19
+     |
+1358 |     pub(crate) fn get_script_fn_by_hash_mut(
+     |                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+     |
+     = note: `#[warn(dead_code)]` on by default
+
+warning: `rhai` (lib) generated 2 warnings
+    Finished dev [unoptimized + debuginfo] target(s) in 0.05s
+     Running `/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-5yr5quw3/target/aarch64-apple-darwin/debug/examples/core_msrv_eval --wrong-result-control`
+thread 'main' panicked at 'assertion failed: `(left == right)`
+  left: `42`,
+ right: `43`: Engine result must match independently specified expectation', examples/core_msrv_eval.rs:6:5
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

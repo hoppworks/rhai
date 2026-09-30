@@ -1,0 +1,15 @@
+error: failed to select a version for `wasm-bindgen`.
+    ... required by package `getrandom v0.3.4`
+    ... which satisfies dependency `getrandom = "^0.3.4"` (locked to 0.3.4) of package `rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-1h9ov34a/source)`
+    ... which satisfies path dependency `oldrhai` (locked to 1.26.1) of package `custom_root v0.1.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-1h9ov34a/source/codegen/tests/custom_root)`
+versions that meet the requirements `^0.2.98` are: 0.2.129, 0.2.127, 0.2.126
+
+all possible versions conflict with previously selected packages.
+
+  previously selected package `wasm-bindgen v0.2.114`
+    ... which satisfies dependency `wasm-bindgen = "=0.2.114"` of package `js-sys v0.3.91`
+    ... which satisfies dependency `js-sys = "^0.3.77"` of package `getrandom v0.3.4`
+    ... which satisfies dependency `getrandom = "^0.3.4"` (locked to 0.3.4) of package `rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-1h9ov34a/source)`
+    ... which satisfies path dependency `oldrhai` (locked to 1.26.1) of package `custom_root v0.1.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-1h9ov34a/source/codegen/tests/custom_root)`
+
+failed to select a version for `wasm-bindgen` which could resolve this conflict

@@ -1,0 +1,7 @@
+    Updating crates.io index
+    Updating js-sys v0.3.82 -> v0.3.91
+      Adding wasm-bindgen v0.2.114 (available: v0.2.129)
+      Adding wasm-bindgen-macro v0.2.114 (available: v0.2.129)
+      Adding wasm-bindgen-macro-support v0.2.114 (available: v0.2.129)
+      Adding wasm-bindgen-shared v0.2.114 (available: v0.2.129)
+note: pass `--verbose` to see 19 unchanged dependencies behind latest
