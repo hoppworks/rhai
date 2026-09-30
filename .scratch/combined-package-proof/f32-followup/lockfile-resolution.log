@@ -1,0 +1,7 @@
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+     Locking 130 packages to latest compatible versions
+      Adding getrandom v0.3.4 (available: v0.4.3)
+      Adding hashbrown v0.16.1 (available: v0.17.1)
+      Adding syn v2.0.119 (available: v3.0.6)

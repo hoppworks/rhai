@@ -1,0 +1,8 @@
+gate_revision=1be277f22ef3f1ceb459386c5634b431fd54d7c1
+source_revision=c2c76a1fac0ed48c5f7bae189c1eb0569ff7d756
+source_archive_sha256=559fde41f983b87ec2a23feeebc4a71637101e78072c19b15d80f20d01536b5d
+runtime=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-i1uryakm
+scoped_supervisor_pid=91223
+scoped_process_group=91223
+invocation_start_utc=2026-09-30T19:09:11Z
+absolute_deadline_utc=2026-09-30T19:18:29Z

@@ -1,0 +1,21 @@
+utc_epoch	runtime_kib	sample
+1790795352.512	16628	whole-runtime du -sk; see du-observations.jsonl
+1790795353.570	19876	whole-runtime du -sk; see du-observations.jsonl
+1790795354.625	20056	whole-runtime du -sk; see du-observations.jsonl
+1790795355.677	22400	whole-runtime du -sk; see du-observations.jsonl
+1790795356.724	26804	whole-runtime du -sk; see du-observations.jsonl
+1790795357.777	32652	whole-runtime du -sk; see du-observations.jsonl
+1790795358.853	60420	whole-runtime du -sk; see du-observations.jsonl
+1790795359.942	75388	whole-runtime du -sk; see du-observations.jsonl
+1790795361.025	87600	whole-runtime du -sk; see du-observations.jsonl
+1790795362.110	107308	whole-runtime du -sk; see du-observations.jsonl
+1790795363.184	111488	whole-runtime du -sk; see du-observations.jsonl
+1790795364.251	133500	whole-runtime du -sk; see du-observations.jsonl
+1790795365.318	172292	whole-runtime du -sk; see du-observations.jsonl
+1790795366.400	180760	whole-runtime du -sk; see du-observations.jsonl
+1790795367.522	181924	whole-runtime du -sk; see du-observations.jsonl
+1790795368.592	191332	whole-runtime du -sk; see du-observations.jsonl
+1790795369.666	202528	whole-runtime du -sk; see du-observations.jsonl
+1790795370.746	274792	whole-runtime du -sk; see du-observations.jsonl
+1790795371.810	313856	whole-runtime du -sk; see du-observations.jsonl
+1790795372.871	313856	whole-runtime du -sk; see du-observations.jsonl
