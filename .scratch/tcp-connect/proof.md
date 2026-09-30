@@ -9,8 +9,8 @@ This proof applies to the local `task/tcp-connect` source at commit `e45c675c` p
 - Meaningful public-API tests first compiled with the `net` feature gate and no implementation. `initial-red.log` records the intended `E0583` missing-module compile failure. The harness source and import were fixed before treating this as API RED. The earlier wrapper status was not reliable because its shell pipeline returned success despite Cargo failure; the compiler log is the evidence.
 - Accepted command, run through `/Users/hoppworks/projects/agent-skills/tools/run_scoped.py` from a copied source tree with private `AGENT_RUNTIME_DIR` CARGO_HOME/TARGET, `CARGO_BUILD_JOBS=2`, and `CARGO_PROFILE_DEV_DEBUG=0`: `cargo test --features net --test net_connect`. `scoped-run-5.log` records 4 passed, 0 failed.
 - The same scoped invocation ran a false-green control against the exact `authorized_connect_is_observed_and_clone_close_is_shared` test with `RHAI_NET_WRONG_EXPECTATION=1`. It failed specifically at the deliberately inverted independently observed peer EOF assertion; diagnostic is in `false-green-control.log`. The normal expectation then passed in the full suite.
-- `cargo test --features 'net,sync' --test net_connect` passed 4/4 (`net-sync.log`). After adding final-drop coverage, the affected net and net,sync suites passed 4/4 each (`final-drop-net.log`, `final-drop-sync.log`); the wrong-expectation control failed at the actual peer EOF assertion (`final-drop-control.log`). All invocations stayed within the 15-minute and 2-GiB caps and runner cleanup removed private runtimes after exporting logs.
-- `rustfmt --check` on the changed Rust files and `git diff --check` passed.
+- `cargo test --features 'net,sync' --test net_connect` passed 4/4 (`net-sync.log`). After adding final-drop coverage, the affected net and net,sync suites passed 4/4 each (`final-drop-net.log`, `final-drop-sync.log`); the wrong-expectation control failed at the actual peer EOF assertion (`final-drop-control.log`). The source-copy test processes completed in the recorded short runs, and the parent independently confirmed the exact final-run temporary paths were absent afterward. The final correction script sets the private Cargo directories but does not pass an explicit 15-minute timeout or measure peak scoped storage; no retained peak-size receipt exists, so compliance with the configured 15-minute and 2-GiB caps is not claimed as measured.
+- `rustfmt --check` on the changed Rust files and `git diff --check` on the source working tree passed before commit. `git diff --check e45c675c..HEAD` is not clean because several committed raw Cargo logs have one trailing blank line at EOF; Rust source files are clean.
 
 ## Observed contracts
 
@@ -22,6 +22,10 @@ All sockets/listeners are locally created fixtures; connect waits, peer reads, a
 
 Listener bind/accept policy, inbound lifecycle, byte transfer, broader resource/release tests, existing sys regressions, Rust 1.66/1.77 MSRV, and native Linux/macOS/Windows matrices remain open. The current tests do not claim those requirements complete. No remote publication or merge was performed.
 
+## Runtime and time accounting
+
+The recorded task artifacts begin at 2026-09-30 14:07 CEST (first task commit); the final implementation commit was at 14:22 CEST and the proof correction at 14:25 CEST. This gives an artifact-bounded interval of about 18 minutes through the accepted correction, not a direct active-time measurement. No retained directory-size or peak-storage receipt exists. Exact runtime-absence check for the final correction was independently performed by the parent.
+
 ## Launch history
 
-`coordinator-state.md` records every scoped launch and diagnosis, including compile/setup failures, harness corrections, post-commit quota-proof correction, and accepted runs. `final-drop-run.sh` is the exact bounded runner invocation used for the correction. Detailed raw outputs are kept alongside this file in `.scratch/tcp-connect/`.
+`coordinator-state.md` records every scoped launch and diagnosis, including compile/setup failures, harness corrections, post-commit quota-proof correction, and accepted runs. `final-drop-run.sh` is the exact scoped-runner invocation used for the correction; it does not itself configure a timeout. Detailed raw outputs are kept alongside this file in `.scratch/tcp-connect/`.
