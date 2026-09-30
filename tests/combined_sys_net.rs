@@ -116,7 +116,12 @@ fn sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors(
     } else {
         b"filesystem-payload".as_slice()
     };
-    assert_eq!(host_file, expected_host_file, "fresh host readback must match independent expected bytes");
+    assert!(
+        host_file == expected_host_file,
+        "fresh host readback must match independent expected bytes; actual={:?}; expected={:?}",
+        String::from_utf8_lossy(&host_file),
+        String::from_utf8_lossy(expected_host_file),
+    );
     let (peer_received, peer_sent) = peer.join();
     assert_eq!(peer_received, CLIENT_BYTES, "independent peer received exact script bytes");
     assert_eq!(peer_sent, PEER_BYTES, "independent peer sent exact expected reply");

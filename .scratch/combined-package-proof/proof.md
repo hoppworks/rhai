@@ -44,3 +44,10 @@ Existing unchanged package evidence is referenced at `.scratch/all-tickets/combi
 - False-green control: `logs/false-green-control.log`
 - Environment and runtime observations: `logs/environment.txt`, `logs/storage-samples.txt`, `logs/f32-environment.txt`, `logs/f32-storage-samples.txt`
 - Scoped invocation scripts: `run-matrix.sh`, `run-targeted.sh`, `run-f32.sh`
+
+
+## Authorized corrected-source follow-up (pending root gate)
+
+The follow-up is limited to the corrected same-Engine test source and bounded native macOS package matrix. The accepted proposal is `.scratch/all-tickets/briefs/combined-package-followup.md`. No follow-up runtime result is accepted until the immutable source gate is reviewed and the single scoped invocation completes within its limits. Required outcomes are the corrected combined test across all eight approved feature profiles; the complete eight-target `f32_float` row; and one exact wrong fresh-host-file expectation failure with status 101 followed by a restored passing baseline.
+
+The new control matcher must establish the exact failing Rust test, host-readback assertion, actual bytes `filesystem-payload`, and injected expected bytes `incorrect filesystem expectation`, while accepting the optional Rust test-thread ID in the quoted panic name. Matching only status 101 or a panic phrase is insufficient. The launcher caps the sole scoped invocation at the smaller of 600 seconds and the remaining absolute deadline. The driver uses the accepted native macOS process ancestry, fail-closed one-second resource sampler, per-case UTC checks, private generated/exported lockfile with `--locked` tests, and independent PID/start/group/runtime cleanup readback. Prior seven full target rows remain applicable only to their unchanged targets and earlier source; they do not verify this corrected combined assertion.
