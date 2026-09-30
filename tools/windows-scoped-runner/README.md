@@ -1,8 +1,8 @@
 # Candidate Windows guest scoped runner
 
-`ScopedRunner.cs` is a static candidate for the authorized `rhai-win11-quality`
-guest. It is **not accepted or ready to run**: the guest console was black during
-this task, so it was not compiled or exercised. No package build was run.
+`ScopedRunner.cs` is a source candidate for the authorized `rhai-win11-quality`
+guest. It is **not accepted or ready to run**. The source has not been compiled
+or exercised, and no package build was run.
 
 The intended call shape is:
 
@@ -10,51 +10,45 @@ The intended call shape is:
 ScopedRunner.exe --source <read-only-source-directory> --exe <relative-executable> -- <arguments...>
 ```
 
-It copies the source tree (rejecting reparse points encountered below its root)
-to a generated `C:\RhaiQuality\runs\scoped-<guid>` runtime, sets `CARGO_HOME`,
-`CARGO_TARGET_DIR`, `TEMP`, and `TMP` below that runtime, and uses the runtime as
-the child working directory. It creates an unnamed job with
-`JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE`, creates the exact payload suspended,
-assigns it before resume, propagates the payload exit code, terminates job members
-on its fixed 30-minute deadline, and terminates the exact suspended process if
-job assignment fails. It refuses assignment fallback. A successful payload exit
-with residual job members returns 125 after terminating those members.
+The candidate copies sources into a generated runtime below
+`C:\RhaiQuality\runs`, sets Cargo and temporary paths below that runtime, and
+uses it as the payload working directory. It creates an unnamed job with
+`JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE`. The payload is created suspended with that
+job in `PROC_THREAD_ATTRIBUTE_JOB_LIST`, membership is checked, and resume is
+allowed only when `ResumeThread` reports the expected previous suspend count of
+one. There is no later assign call. Setup failure terminates the exact job,
+waits for the exact process with a finite timeout, and checks that the job is
+empty; closing the job handle retains kill-on-close as a fallback. The candidate
+also has a fixed 30-minute payload deadline and terminates residual job members
+after payload exit.
 
-The native struct declarations mirror Microsoft's definitions: accounting process
-counters are `DWORD`/C# `uint`; `JOBOBJECT_BASIC_LIMIT_INFORMATION` uses
-pointer-sized `SIZE_T`/`ULONG_PTR` fields; `IO_COUNTERS` uses six 64-bit
-`ULONGLONG` counters; and the extended memory limits use pointer-sized `SIZE_T`.
-Cleanup waits are bounded to 30 seconds and surface timeout or API failures.
-These declarations and paths have only received static review; ABI and runtime
-behavior still require native validation.
+`fixtures/RunProcessCreationFixtures.ps1` and `fixtures/PayloadFixture.cs` are
+Windows-side behavioral fixture sources for job-list creation failure and a
+failure after membership verification but before resume. The harness accepts
+prebuilt runner and payload binaries; it does not compile or bootstrap them.
+It checks expected failure diagnostics and payload non-execution. The test-only
+pre-resume cleanup receipt is produced by the candidate itself, so it is not
+independent process/job read-back. The harness restores the test-root environment
+variable and preserves its exact fixture directory and logs on failure.
 
-Compile only inside an exact private runtime on the guest, for example with the
-guest's already installed Framework C# compiler, and export compiler output and
-the runner binary only as needed for the proof. That bootstrap path has not been
-validated. No compiler, runtime, or Windows build command was invoked in this
-task.
+Do not build or run these fixtures on the guest until the independent launch,
+bounded bootstrap, guest-access and review gates are authorized and satisfied.
+No compiler, fixture, runtime, or Windows build command was invoked for this
+source change. External observation of the exact process handle and job
+membership, the wrong-expectation/restored run, and all native behavior remain
+unverified.
 
-## Blocking supervision requirement
+## Remaining custody work
 
-The job's last-handle close is the kernel process-tree fallback if this runner
-dies; SSH process-group handling is not relied on. However, this implementation
-does not provide the separately owned guest monitor required to verify job
-emptiness after runner/connection death, export diagnostics, and remove only the
-recorded runtime. The runner deliberately leaves runtime data behind rather than
-claiming safe cleanup without independent read-back. It also has no native proof
-of job membership, source/runtime ACLs, descendant behavior, deadline behavior,
-or failure cleanup. The mechanism for an independently supervised guest lease
-and exact runtime cleanup remains a design decision. Do not use this candidate
-to launch package builds until those requirements are implemented and proven.
-
-## Acceptance record
-
-Evidence and the current native gate status are recorded in
-`.scratch/windows-scoped-runner/acceptance.md` in the owning worktree. Static
-source review is not native acceptance.
+This substep does not implement the independent monitor/client split, host lease,
+challenge protocol, journal, independent evidence export, or handle-based source
+staging and runtime removal. The candidate deliberately retains runtime data
+rather than claiming safe cleanup without independent read-back. It has no
+native proof of job membership, ACLs, descendant behavior, deadline handling,
+or failure cleanup. Do not use it to launch package builds until the full custody
+design is implemented and all native gates pass.
 
 Layout references: [JOBOBJECT_BASIC_ACCOUNTING_INFORMATION](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-jobobject_basic_accounting_information),
 [JOBOBJECT_BASIC_LIMIT_INFORMATION](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-jobobject_basic_limit_information),
 [IO_COUNTERS](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-io_counters),
-[JOBOBJECT_EXTENDED_LIMIT_INFORMATION](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-jobobject_extended_limit_information),
-and [TerminateProcess](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-terminateprocess).
+and [JOBOBJECT_EXTENDED_LIMIT_INFORMATION](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-jobobject_extended_limit_information).
