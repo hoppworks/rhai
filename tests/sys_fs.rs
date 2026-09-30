@@ -329,11 +329,18 @@ fn test_metadata_symlink_and_readonly() {
 #[test]
 fn test_non_utf8_file_name() {
     use std::os::unix::ffi::OsStrExt;
+    #[cfg(target_os = "macos")]
+    const EILSEQ: i32 = 92;
+    #[cfg(any(target_os = "linux", target_os = "android"))]
+    const EILSEQ: i32 = 84;
+    #[cfg(not(any(target_os = "macos", target_os = "linux", target_os = "android")))]
+    const EILSEQ: i32 = i32::MIN;
+
     let (t, e) = rw();
     t.write("ok.txt", "");
     match std::fs::write(t.path().join(std::ffi::OsStr::from_bytes(b"bad\xFF.txt")), "") {
         Ok(()) => {}
-        Err(err) if matches!(err.raw_os_error(), Some(84 | 92)) => {
+        Err(err) if err.raw_os_error() == Some(EILSEQ) => {
             eprintln!("filesystem rejects non-UTF-8 fixture with EILSEQ: {err}");
             return;
         }
