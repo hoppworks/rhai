@@ -71,8 +71,8 @@ result = run('resolve', ['cargo', '+stable', 'generate-lockfile', '--config', 'r
 if result:
     sys.exit(result)
 # Keep the complete upstream manifests and workspace. Cargo 1.66 rejects the
-# latest inactive wasm js-sys feature graph, so select its last pre-dep:-syntax
-# release in this exact resolution rather than editing or pruning any manifest.
+# latest inactive wasm js-sys feature graph, so select a compatible release in
+# this exact resolution rather than editing or pruning any manifest.
 # Unlock only js-sys' exact wasm-bindgen dependency family, then let Cargo
 # recompute that family while applying the precise js-sys compatibility version.
 lock = source / 'Cargo.lock'
