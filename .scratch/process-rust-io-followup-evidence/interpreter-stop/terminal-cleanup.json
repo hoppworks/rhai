@@ -1,0 +1,65 @@
+{
+  "case_count": 0,
+  "cleanup": {
+    "exact_runtime_path": "not exported by run_scoped wrapper",
+    "independent_ps_query": "ps -axo pid=,ppid=,pgid=,lstart= filtered to PGID 3132 returned no rows; root independently confirmed PIDs 3132/3133/3134 absent",
+    "owned_pgid_processes_after_terminal": [],
+    "preserve_unknowns": [
+      "sampler PID/start identity",
+      "exact private runtime path",
+      "continuous resource peak: zero samples, therefore unknown"
+    ],
+    "runtime_readback": "no invocation-owned runtime path was retained; wrapper cleanup code validates identity then rmtree in finally",
+    "wrapper_terminal": "returned status 1 without cleanup exception"
+  },
+  "invocation_command": "/usr/bin/python3 /Users/hoppworks/projects/agent-skills/tools/run_scoped.py --timeout 600 -- /usr/bin/python3 /Users/hoppworks/projects/rhai-process-rust-io/.scratch/process-rust-io/adapter/run_native_acceptance.py --source-root /Users/hoppworks/projects/rhai-process-rust-io",
+  "original_identities": [
+    {
+      "pid": 3132,
+      "role": "supervisor/leader",
+      "start_identity": [
+        1790800554,
+        144603
+      ]
+    },
+    {
+      "pid": 3133,
+      "role": "driver",
+      "start_identity": [
+        1790800554,
+        167515
+      ]
+    },
+    {
+      "pid": 3134,
+      "role": "cargo build",
+      "start_identity": [
+        1790800554,
+        220926
+      ]
+    }
+  ],
+  "process_group_leader_pgid": 3132,
+  "raw_files": [
+    {
+      "bytes": 2213,
+      "path": "/Users/hoppworks/projects/rhai-process-rust-io/.scratch/process-rust-io/evidence/native-followup-20260930-193950UTC/run-ledger.json",
+      "sha256": "6849654bafde700db86922eabe55526c37c2c5d0483efd098c08aff97b241d06"
+    },
+    {
+      "bytes": 29,
+      "path": "/Users/hoppworks/projects/rhai-process-rust-io/.scratch/process-rust-io/evidence/native-followup-20260930-193950UTC/native-rust-build.log",
+      "sha256": "d8ffa7e3f4701a51662537e5de16ab791de679a9a0d1af4adea4061c5e3475cf"
+    }
+  ],
+  "resource_samples": 0,
+  "sampled_maxima": null,
+  "sampler": {
+    "failure": "resource sample unknown: PermissionError(1, 'proc_pidinfo identity lookup failed')",
+    "identity": "unknown",
+    "note": "EPERM from proc_pidinfo; no absent/replaced claim is made for sampler PID"
+  },
+  "source_commit": "d45f8ccaad972d17df9fea79b5752cd73dfa02ca",
+  "terminal_error": "RuntimeError(\"resource sample unknown: PermissionError(1, 'proc_pidinfo identity lookup failed')\")",
+  "terminal_status": 1
+}

@@ -1,0 +1,73 @@
+{
+  "builds": [
+    {
+      "log": "native-rust-build.log",
+      "log_sha256": "d8ffa7e3f4701a51662537e5de16ab791de679a9a0d1af4adea4061c5e3475cf",
+      "name": "native-rust",
+      "output_complete": false,
+      "pid": 3134,
+      "seconds": 0.256,
+      "start_identity": [
+        1790800554,
+        220926
+      ],
+      "status": "scoped-owner-pending",
+      "stop_reason": "resource sample unknown: PermissionError(1, 'proc_pidinfo identity lookup failed')",
+      "timed_out": true
+    }
+  ],
+  "case_order": [
+    "normal",
+    "cancel",
+    "missing-wake",
+    "term",
+    "kill",
+    "stdout-4096-4096",
+    "stdout-4096-4097",
+    "stdout-0-0",
+    "stdout-0-1",
+    "stderr-4096-4096",
+    "stderr-4096-4097",
+    "stderr-0-0",
+    "stderr-0-1"
+  ],
+  "cases": [],
+  "driver": {
+    "parent_pid": 3132,
+    "parent_start_identity": [
+      1790800554,
+      144603
+    ],
+    "pid": 3133,
+    "start_identity": [
+      1790800554,
+      167515
+    ]
+  },
+  "elapsed_seconds": 0.265,
+  "failure": "RuntimeError(\"resource sample unknown: PermissionError(1, 'proc_pidinfo identity lookup failed')\")",
+  "limits": {
+    "build_seconds": 300.0,
+    "cargo_jobs": 2,
+    "case_seconds": 45.0,
+    "export_reserve_seconds": 10.0,
+    "invocation_seconds": 600.0,
+    "owned_fixture_process_bound": 7,
+    "owned_fixture_process_limit": 8,
+    "owned_fixture_process_scope": "controller + custodian + runner + leader + anchor + sentinel + optional holder; driver/supervisor excluded",
+    "private_bytes": 1073741824,
+    "process_peak_method": "sampled owned PID/PPID/PGID/lstart graph; sampled maximum only, no continuous-peak claim",
+    "process_resources": 8,
+    "rust_fd_method": "RLIMIT_NOFILE=32 enforced in Rust; three worker handles checked at native_done",
+    "rust_fds": 32,
+    "rust_workers": 3,
+    "sampler": "one live ps/storage sampler at a time, every 250ms; fixture and sampler bound <=8",
+    "sampler_process_bound": 1,
+    "stream_bytes": 2097152
+  },
+  "resource_samples": [],
+  "sampled_private_bytes_max": 0,
+  "sampled_process_max": 0,
+  "sampler_failure": "resource sample unknown: PermissionError(1, 'proc_pidinfo identity lookup failed')",
+  "storage_observations": []
+}
