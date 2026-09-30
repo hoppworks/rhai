@@ -91,6 +91,14 @@ prove adapter cleanup before any new Rust/package build. No prior adapter failur
 
 ## Cause attempts and escalations
 
+Outcome classification under the owner's replacement instructions (2026-09-30):
+501fa184 stopped at a design/supervision boundary without implementation or
+execution; it is not a completed failed implementation correction. The original
+contradictory proof remains rejected. Design review 2a3996cd is also not a failed
+implementation correction. No calibration package or measurement slots have
+been approved. Preserve the earlier consultation and explicit further-attempt
+authorization, with zero completed implementation corrections in this retry.
+
 Prototype-proof cause: initial report conflicts with the actual fixture's I/O ordering
 and exceptional-path cleanup. One Expert escalation opened at
 escalations/01-process-prototype-proof.md; answer saved at
@@ -120,6 +128,16 @@ Collect and independently review the process supervision design before the singl
 newly authorized implementation attempt. Preserve all prior cause history.
 TCP authority question remains pending; release/API proposals remain unaccepted.
 Linear is legacy and excluded, with no writes performed there.
+
+## Open owner decisions
+
+| Question | Affected requirement | Resume condition |
+| --- | --- | --- |
+| Connect only or connect plus separately authorized listeners? | TCP tickets 04/05 implementation | Owner answers the existing scope question, then concrete lifecycle contract is reviewed. |
+| Accept proposed platform/MSRV, additive process report, negative-read rejection and unchecked resource limits? | Ticket 06 and dependent public process/file-handle APIs | Owner answers the existing release/API question. |
+
+Dependent implementation is stopped. Continue only independent authorized
+requirements with new evidence; do not repeat decision/status/verification rounds.
 
 ## Goal turn classification
 
