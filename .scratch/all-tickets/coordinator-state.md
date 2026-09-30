@@ -151,6 +151,19 @@ requirements with new evidence; do not repeat decision/status/verification round
 
 ## Goal turn classification
 
+2026-09-30 post-staging frontier audit: no progress, blocked observation 1.
+Canonical tickets 04 and 06 remain unresolved; 05 explicitly depends on both.
+Production process/file-handle contract decisions remain pending. Prototype
+937da3c1 still explicitly stops implementation at the unanswered runner-copy
+boundary. Agent inventory confirms the Windows and MSRV tasks terminal; the
+prototype agent is pending_init, not an executing proof. Windows source slice
+is complete in 8f75da53 and may not be silently extended or executed without
+the existing native/bootstrap prerequisites and bounded correction authority.
+No independent authorized next action identified; the same pending owner
+decisions/external native prerequisites are the blocker. Goal remains active
+until three consecutive blocked observations; this record is not implementation
+progress or a verified wait. Do not repeat broad audits or pending questions.
+
 2026-09-30 staging completion continuation: progress. Previous goal turn was
 progress through source limits and concrete fixture findings. Current candidate
 8f75da53 implements actual allocation/staging integration and completion/stop
