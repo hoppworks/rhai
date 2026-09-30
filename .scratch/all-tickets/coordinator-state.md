@@ -151,9 +151,12 @@ requirements with new evidence; do not repeat decision/status/verification round
 
 ## Goal turn classification
 
-2026-09-30 post-staging frontier audit: no progress, blocked observations 1–2
-on consecutive goal turns. Second minimal check found unchanged canonical
-ticket states, the same prototype boundary and no executing delegated task.
+2026-09-30 post-staging frontier audit: no progress, blocked observations 1–3
+on consecutive goal turns. Third minimal check found unchanged canonical
+ticket states, candidate 8f75da53, the same prototype boundary and no executing
+delegated task. The blocked threshold is met; goal controller is being marked
+blocked. Resume only after an outstanding decision or external prerequisite
+changes. All prior work and the full objective remain preserved.
 Canonical tickets 04 and 06 remain unresolved; 05 explicitly depends on both.
 Production process/file-handle contract decisions remain pending. Prototype
 937da3c1 still explicitly stops implementation at the unanswered runner-copy
@@ -162,8 +165,7 @@ prototype agent is pending_init, not an executing proof. Windows source slice
 is complete in 8f75da53 and may not be silently extended or executed without
 the existing native/bootstrap prerequisites and bounded correction authority.
 No independent authorized next action identified; the same pending owner
-decisions/external native prerequisites are the blocker. Goal remains active
-until three consecutive blocked observations; this record is not implementation
+decisions/external native prerequisites are the blocker. This record is not implementation
 progress or a verified wait. Do not repeat broad audits or pending questions.
 
 2026-09-30 staging completion continuation: progress. Previous goal turn was
