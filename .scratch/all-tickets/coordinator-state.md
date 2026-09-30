@@ -123,6 +123,28 @@ Inherited VM history remains authoritative.
 
 ## Next action
 
+Windows custody Expert answer 02-windows-runtime-custody.answer.md is retained.
+It recommends a separate sole-owner monitor, creation-time job-list assignment,
+host round-trip lease, bounded state machine and handle-based runtime custody.
+One bounded local source implementation is delegated under
+briefs/windows-monitor-implementation.md. No guest execution or package build
+is authorized until source review, private bootstrap, launch survival and native
+cleanup gates pass. This is the single Windows custody escalation; no completed
+correction has failed for this cause. Current guest access remains unverified.
+
+Core MSRV evidence integrated as 87099fcc and c5fecde1. The one Cargo 1.66
+invocation used baseline a6241621 instead of requested b031ce8d. It failed while
+parsing resolved thin-vec 0.2.20 (edition 2024), before library compilation.
+Unchanged thin-vec declaration supports only the narrow dependency warning.
+Neither baseline nor integrated compilation is proven. Exact scoped runtime
+absence was independently confirmed. See ../core-msrv-check/proof.md and log.
+No retry, dependency pin or release-policy change was made.
+
+The latest reply repeats authorization for one further bounded process attempt.
+It does not answer the separate project-local runner-copy requirement. Preserve
+that authorization and stop only the dependent process execution until that
+existing question is answered; no additional process attempt has been consumed.
+
 Process amendment collected and its remaining boundary recorded; await owner
 answer before dependent implementation. Corrected
 macOS combined proof is accepted at 5f87d339; do not rerun unchanged source.
