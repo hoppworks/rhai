@@ -1,54 +1,54 @@
-# Candidate Windows guest scoped runner
+# Candidate Windows monitor/client custody source
 
-`ScopedRunner.cs` is a source candidate for the authorized `rhai-win11-quality`
-guest. It is **not accepted or ready to run**. The source has not been compiled
-or exercised, and no package build was run.
+This checkout contains intermediate Windows source only. It is **not accepted or
+ready to run**. None of the C# sources or fixtures in this substep has been
+compiled or executed, and no package build, guest run, compiler bootstrap,
+installation, or staging backend operation was performed.
 
-The intended call shape is:
+`ScopedRunner.exe --lease-client` is the only public source entrypoint. It starts
+a detached monitor with an explicit inherited-handle list containing two pipe
+ends and a real restricted handle to the client process. It requests breakaway
+when the client is in a job, clears handle inheritance in the monitor, and the
+monitor refuses ambient job membership before allocation. The client forwards
+host input and monitor output on separate workers; the monitor's watchdog loop
+uses finite polling and does not join those workers or wait on a pipe. The lease
+protocol uses bounded input frames/output queue, a fresh nonce and increasing
+sequence for each outstanding challenge, phase-bound one-use authorization,
+monotonic `GetTickCount64` deadlines, and an irreversible stopping state.
 
-```text
-ScopedRunner.exe --source <read-only-source-directory> --exe <relative-executable> -- <arguments...>
-```
+`LeaseProtocolFixture.cs` is protocol-only behavior source. It covers stale
+nonce/sequence and future responses, one-use and phase-bound create/resume
+authorization, setup and absolute expiry, a live blackholed client, EOF and
+client death, pre-resume expiry, and bounded output backpressure. These cases
+exercise the protocol state model only. They do not launch a monitor process,
+create payloads, inspect exact process/job handles, or prove transport survival.
+The fixture is deliberately unexecuted.
 
-The candidate copies sources into a generated runtime below
-`C:\RhaiQuality\runs`, sets Cargo and temporary paths below that runtime, and
-uses it as the payload working directory. It creates an unnamed job with
-`JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE`. The payload is created suspended with that
-job in `PROC_THREAD_ATTRIBUTE_JOB_LIST`, membership is checked, and resume is
-allowed only when `ResumeThread` reports the expected previous suspend count of
-one. There is no later assign call. Setup failure terminates the exact job,
-waits for the exact process with a finite timeout, and checks that the job is
-empty; closing the job handle retains kill-on-close as a fallback. The candidate
-also has a fixed 30-minute payload deadline and terminates residual job members
-after payload exit.
+The monitor currently accepts a valid first host round-trip and then fails
+closed. The source does not create a runtime, journal, evidence store, payload
+job, or payload process. The create/resume states in the fixture are modeled
+transitions only; the second challenge and actual suspended/resume operations
+are not wired to a backend. Every `--source`/`--exe` workload request is refused
+by the public entrypoint. The older payload staging implementation remains as
+unreachable source history and must not be used.
 
-`fixtures/RunProcessCreationFixtures.ps1` and `fixtures/PayloadFixture.cs` are
-Windows-side behavioral fixture sources for job-list creation failure and a
-failure after membership verification but before resume. The harness accepts
-prebuilt runner and payload binaries; it does not compile or bootstrap them.
-It checks expected failure diagnostics and payload non-execution. The test-only
-pre-resume cleanup receipt is produced by the candidate itself, so it is not
-independent process/job read-back. The harness restores the test-root environment
-variable and preserves its exact fixture directory and logs on failure.
+The previous source substep's job-list creation fixture remains in
+`fixtures/RunProcessCreationFixtures.ps1` and `fixtures/PayloadFixture.cs`; it
+covers the older candidate path only and is not wired to the current public
+entrypoint. It has not been run.
 
-Do not build or run these fixtures on the guest until the independent launch,
-bounded bootstrap, guest-access and review gates are authorized and satisfied.
-No compiler, fixture, runtime, or Windows build command was invoked for this
-source change. External observation of the exact process handle and job
-membership, the wrong-expectation/restored run, and all native behavior remain
+## Remaining custody and proof boundaries
+
+Safe handle-based staging, protected runtime ACL and identity, durable journal,
+local evidence finalization/export, exact job ownership and cleanup, the real
+create-time payload integration, pre-resume host challenge integration,
+termination/finalization budgets, and verified runtime removal remain
+unimplemented. Client/monitor pipe behavior, breakaway compatibility, ambient
+job refusal, process and job readback, failure cleanup, host-disconnect survival,
+sleep/resume deadline behavior, and all other native Windows behavior remain
 unverified.
 
-## Remaining custody work
-
-This substep does not implement the independent monitor/client split, host lease,
-challenge protocol, journal, independent evidence export, or handle-based source
-staging and runtime removal. The candidate deliberately retains runtime data
-rather than claiming safe cleanup without independent read-back. It has no
-native proof of job membership, ACLs, descendant behavior, deadline handling,
-or failure cleanup. Do not use it to launch package builds until the full custody
-design is implemented and all native gates pass.
-
-Layout references: [JOBOBJECT_BASIC_ACCOUNTING_INFORMATION](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-jobobject_basic_accounting_information),
-[JOBOBJECT_BASIC_LIMIT_INFORMATION](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-jobobject_basic_limit_information),
-[IO_COUNTERS](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-io_counters),
-and [JOBOBJECT_EXTENDED_LIMIT_INFORMATION](https://learn.microsoft.com/en-us/windows/win32/api/winnt/ns-winnt-jobobject_extended_limit_information).
+Do not use this source to launch package builds until the full custody backend
+is implemented and the authorized native acceptance gates pass. No compiler,
+fixture, runtime, Windows build command, or guest command was invoked for this
+source change.

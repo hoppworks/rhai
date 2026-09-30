@@ -221,6 +221,16 @@ internal static class ScopedRunner
 
     private static int Main(string[] args)
     {
+        if (args.Length > 0 && args[0] == "--monitor") return LeaseMonitor.MonitorMain(args);
+        if (args.Length == 1 && args[0] == "--lease-client") return MonitorTransport.ClientMain(args);
+        Console.Error.WriteLine("workload launch refused: only --lease-client is available; safe custody backend is not integrated");
+        return 78;
+    }
+
+    // Retained as source history for the previous bounded job-creation step.
+    // The public entrypoint cannot dispatch to this unsafe legacy staging path.
+    private static int LegacyPayloadMain(string[] args)
+    {
 #if SCOPED_RUNNER_TESTING
         bool failBeforeResume = args.Contains("--test-fail-before-resume");
         args = args.Where(a => a != "--test-fail-before-resume" && a != "--test-inject-job-list-failure").ToArray();
