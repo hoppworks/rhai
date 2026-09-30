@@ -10,13 +10,13 @@ Implement the four accepted filesystem contract repairs from `.scratch/stdlib-wa
 - Added unrestricted host path dispatch through std filesystem operations, plus symlink read/write/copy/remove public API regression. Targeted test passed once after initial compile corrections; rerun after final edits required.
 
 ## Current
-Latest review correction removes the ambient cap-std directory open from unrestricted path resolution and uses relative host paths directly without `current_dir()`. A self-reexecuted public regression fails against pre-fix source then passes; the final scoped build passes all six unrestricted path tests plus the nonUTF8 skip path. The permission edge for opening `/`, a drive root or a share root remains unverified because no safe denied-mount fixture was available.
+Latest review correction removes the ambient cap-std directory open from unrestricted path resolution and uses relative host paths directly without `current_dir()`. A self-reexecuted public regression fails against pre-fix source then passes. Follow-up lifecycle correction adds drop guards for the child and exact ready marker; the focused regression passes after this correction. The permission edge for opening `/`, a drive root or a share root remains unverified because no safe denied-mount fixture was available.
 
 ## Constraints
 Use `tools/run_scoped.py`, private source copy inside runtime, scoped `CARGO_TARGET_DIR` and `CARGO_HOME`. Do not touch other worktrees or remote state. Preserve test/support layout. No Windows or broader release matrix claims.
 
 ## Next
-Add/run final proof and capture environment, observed independent host state, fixture capability, false-green result, and cleanup evidence in `.scratch/filesystem-contract/`.
+Report the committed focused correction; no broader build is requested for this test-lifecycle-only change.
 
 ## Completed evidence
 - Final source formatted in the three touched Rust files; `git diff --check` clean.
@@ -27,5 +27,5 @@ Add/run final proof and capture environment, observed independent host state, fi
 - Detailed proof record: `.scratch/filesystem-contract/proof.md`; all run logs are alongside it.
 
 ## Current state
-All four repair areas are implemented. Focused macOS tests prove OS path selection, unrestricted symlink semantics, relative operations after unlinking the child cwd, and equivalent nested-root aliases. The filesystem rejected the non-UTF8 fixture, so that public API behavior is not proven on this host. The direct permission-edge behavior for roots/shares is unverified. Windows/other OS and release matrix remain unverified. Local commits: `c17a0702`, `54eef8e9`, `adc9966f`, and `30821b55`; pending commit for the latest resolver correction. No push or merge.
+All four repair areas are implemented. Focused macOS tests prove OS path selection, unrestricted symlink semantics, relative operations after unlinking the child cwd, and equivalent nested-root aliases. The filesystem rejected the non-UTF8 fixture, so that public API behavior is not proven on this host. The direct permission-edge behavior for roots/shares is unverified. Windows/other OS and release matrix remain unverified. Local commits include `c17a0702`, `54eef8e9`, `adc9966f`, `30821b55`, `7b707cff`, and `8689e79b`. No push or merge.
 - `rustfmt --edition 2021 --config skip_children=true` succeeded for the three changed Rust files; `git diff --check` is clean. Repository-wide `cargo fmt --all -- --check` remains red only for pre-existing formatting in untouched `src/eval/mod.rs` (details in `format-check.log`).
