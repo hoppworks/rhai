@@ -192,7 +192,12 @@ alongside the direct-child foundation; it is not deferred to a later release.
 The contract above supplies the implementation requirements for that choice.
 The exact host-config API and the proposed `SysError.process` representation are
 API candidates for ticket 06, not separately owner-approved spellings. No production
-implementation, OS cancellation prototype or native acceptance proof is complete.
+implementation or native Rust I/O cancellation proof is complete. The Darwin
+controller/custodian prerequisite is accepted at `60d99b58`, with Python parent-side
+I/O and Rust child fixtures; it does not close the production cancellation gate.
+The reviewed private adapter design is recorded in
+`.scratch/process-io-design/design.md`; its native
+Rust, dependency/MSRV and Windows gates remain open.
 
 Additional managed-scope acceptance cases:
 
