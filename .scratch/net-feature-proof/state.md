@@ -63,3 +63,8 @@ Remaining gaps are unchanged: native macOS only; no combined sys feature, Linux/
 ## Final no_object target guards
 
 The four method-syntax integration targets now have `#![cfg(all(feature = "net", not(feature = "no_object")))]`. This prevents an otherwise failing all-target `no_object` invocation, while the dedicated explicit-call suite remains active. Final combined invocation built/ran the four guarded targets (0 tests each, by design) and `net_no_object` (3/3); its second command intentionally failed 1/1 at the independent peer assertion for wrong expectation, hence scoped command status 101 is expected for the combined false-green package. Full log: `logs/noobj-final-guarded.log`. The three other matrix combinations are unchanged because the guard condition is true there.
+
+
+## Handoff
+
+Committed as `9005d769fee70a62ef47749747d39488299fb0dd` on `task/net-feature-proof`; author and committer are `hoppworks <daniel@hoppworks.de>`. Worktree was clean immediately after commit. No push or merge performed.

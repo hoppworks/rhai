@@ -5,7 +5,7 @@
 ## Source and environment
 
 - Starting revision: `59d583f2381efb355349962ac3742bec46aab460`.
-- Final revision: recorded after local commit in `state.md`.
+- Final revision: `9005d769fee70a62ef47749747d39488299fb0dd`.
 - Host: Darwin 27.0.0, `aarch64-apple-darwin`; rustc 1.93.0 (LLVM 21.1.8).
 - Scoped runner: `/Users/hoppworks/projects/agent-skills/tools/run_scoped.py`; each run used a copied checkout, private `CARGO_HOME` and `CARGO_TARGET_DIR`, `CARGO_BUILD_JOBS=2`, and a 900-second runner limit. Full suites used `--test-threads=1`.
 - Final run sampled private source + Cargo home + target storage once per second. Peak sample was **1,258,436 KiB** (below 2 GiB). Peak memory was not measured.
