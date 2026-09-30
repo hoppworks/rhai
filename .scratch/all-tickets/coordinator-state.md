@@ -415,10 +415,11 @@ proof committed/pushed; exact fork readback, owned clean resource retirement).
 Both responsible task handles independently confirmed running in this continuation.
 No blocked impasse: authoritative source amendments and live checks changed next action.
 
-TCP launch9 after reviewer changes: checked targets fail timeout fixture assertion;
+TCP launch9 after reviewer changes: checked targets fail timeout test harness;
 unchecked stops compilation at unavailable max_array_size getters. Wrong payload
-control is specifically expected assertion. Responsible context correcting distinct
-fixture deadline and optional-feature gating causes inside original14:17:48 stop.
+control is specifically expected assertion. Responsible context confirmed Rhai parsing failure in a diagnostic tuple (not a
+completed timeout behavior assertion), and is correcting that distinct syntax
+cause and optional-feature gating inside original14:17:48 stop.
 Actual waiting read proof now uses a cfg(test) WouldBlock notifier and real Engine
 read/clone-close, with partial count and quota. Final immutable source/proof not yet
 accepted. See tcp-stream-reads-review.md; no old logs promoted to final evidence.
@@ -431,3 +432,8 @@ normal removal. Complete stderr readiness line must be awaited before parsing.
 Await frozen corrected candidate and final source gate before any native execution.
 Original14:18:05 stop and sole Expert01 history remain binding. No fixture/build
 or signaling launched. Windows source/bootstrap gate remains separately closed.
+
+Launch10 is reported in progress after diagnostic syntax and unchecked getter
+corrections. Launch9 timeout behavior is unexecuted because the diagnostic tuple
+failed Rhai parsing; premature peer timeout was a root hypothesis, not confirmed
+cause, and must not be counted as measured behavior.
