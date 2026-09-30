@@ -41,14 +41,12 @@ be resolved before their dependent implementation. No remote publication.
 
 ## Current step
 
-Step 1 is repaired and accepted for the exercised macOS contract cases. No broad
-release/platform completion claim. Native Linux proof closes the supporting-filesystem NotUtf8 coverage gap.
-A final source review found an unrelated unrestricted Dir anchor open and
-current_dir conversion; responsible filesystem context is correcting these. Commit 7b707cff supplies a red/green isolated deleted-cwd
-regression and passing macOS unrestricted cases. Review requested immediate child
-and marker ownership guards before accepting its fixture lifecycle. Existing proof applies only
-to the previous source until changed paths are reverified. Windows guest
-supervision adapter implementation/proof is active before further native builds.
+Step 1 corrected unrestricted resolution is integrated at 5f87d339 and accepted
+on native macOS: env7/fs24/policy26 pass, exact runtime absent. Red/green
+unlinked-cwd contract and immediate child/marker ownership guards reviewed.
+Affected Linux fs/policy proof is active; previous env proof remains applicable.
+Windows static candidate 2e65cb45 corrects reviewed ABI and bounded-wait defects,
+but compile/native/independent monitor gates remain unverified, not integrated.
 Step 2 owner TCP question remains pending; release/API proposal is unaccepted.
 POSIX process prototype 35a8cf52 proof is not accepted. Correction disposition
 501fa184c97f records that safe supervision was not established; no fixture was
@@ -78,8 +76,8 @@ fixture execution or implementation before independent design review.
 
 Windows static candidate 97fe3f93 is not accepted or integrated. Native gates and
 independent guest lease/cleanup remain unverified. Review found DWORD accounting
-fields incorrectly declared UIntPtr and unbounded termination waits; responsible
-context is correcting the static defects without native execution. Brief at
+fields incorrectly declared UIntPtr and unbounded termination waits; corrected
+in 2e65cb45 without native execution. Remaining monitor/native gates are open. Brief at
 briefs/windows-scoped-runner.md. Inspect current guest state, preserve baselines,
 prove adapter cleanup before any new Rust/package build. No prior adapter failures.
 
@@ -104,9 +102,9 @@ Inherited VM history remains authoritative.
 
 ## Next action
 
-Collect unrestricted resolution correction and Windows scoped adapter evidence;
-inspect actual coverage before accepting either. Mac combined proof is accepted; do not rerun
-unchanged source merely for another context or platform task.
+Collect updated Linux affected-path proof and process design review. Corrected
+macOS combined proof is accepted at 5f87d339; do not rerun unchanged source.
+Keep Windows static candidate separate until independent guest cleanup is solved.
 Collect and independently review the process supervision design before the single
 newly authorized implementation attempt. Preserve all prior cause history.
 TCP authority question remains pending; release/API proposals remain unaccepted.
