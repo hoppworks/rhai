@@ -1,0 +1,92 @@
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ngaey2l4/source)
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:328:9
+    |
+328 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:342:9
+    |
+342 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:357:9
+    |
+357 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:371:9
+    |
+371 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:385:9
+    |
+385 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:398:9
+    |
+398 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:412:9
+    |
+412 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:425:9
+    |
+425 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: `rhai` (lib test) generated 8 warnings (7 duplicates) (run `cargo fix --lib -p rhai --tests` to apply 1 suggestion)
+warning: `rhai` (lib) generated 8 warnings (1 duplicate) (run `cargo fix --lib -p rhai` to apply 7 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `NetError`
+ --> tests/net_reads.rs:3:38
+  |
+3 | use rhai::packages::net::{NetConfig, NetError, NetPackage};
+  |                                      ^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `Dynamic`
+ --> tests/net_reads.rs:5:12
+  |
+5 | use rhai::{Dynamic, Engine, Scope};
+  |            ^^^^^^^
+
+error[E0599]: no method named `set_max_string_size` found for mutable reference `&mut Engine` in the current scope
+   --> tests/net_reads.rs:279:20
+    |
+279 |             engine.set_max_string_size(1);
+    |                    ^^^^^^^^^^^^^^^^^^^
+    |
+help: there is a method `set_max_strings_interned` with a similar name
+    |
+279 -             engine.set_max_string_size(1);
+279 +             engine.set_max_strings_interned(1);
+    |
+
+For more information about this error, try `rustc --explain E0599`.
+warning: `rhai` (test "net_reads") generated 2 warnings
+error: could not compile `rhai` (test "net_reads") due to 1 previous error; 2 warnings emitted
+warning: build failed, waiting for other jobs to finish...
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)

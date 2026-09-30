@@ -1,0 +1,183 @@
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+     Locking 130 packages to latest compatible versions
+      Adding getrandom v0.3.4 (available: v0.4.3)
+      Adding hashbrown v0.16.1 (available: v0.17.1)
+      Adding syn v2.0.119 (available: v3.0.6)
+ Downloading crates ...
+  Downloaded autocfg v1.5.1
+  Downloaded once_cell v1.21.4
+  Downloaded itoa v1.0.18
+  Downloaded const-random-macro v0.1.16
+  Downloaded cfg-if v1.0.5
+  Downloaded thin-vec v0.2.20
+  Downloaded zmij v1.0.23
+  Downloaded serde_core v1.0.229
+  Downloaded version_check v0.9.5
+  Downloaded const-random v0.1.18
+  Downloaded quote v1.0.47
+  Downloaded static_assertions v1.1.0
+  Downloaded smallvec v1.16.2
+  Downloaded unicode-ident v1.0.26
+  Downloaded rmp v0.8.15
+  Downloaded ahash v0.8.12
+  Downloaded serde v1.0.229
+  Downloaded tiny-keccak v2.0.2
+  Downloaded portable-atomic v1.15.0
+  Downloaded proc-macro2 v1.0.107
+  Downloaded syn v2.0.119
+  Downloaded getrandom v0.2.17
+  Downloaded serde_json v1.0.151
+  Downloaded memchr v2.8.3
+  Downloaded smartstring v1.0.1
+  Downloaded rmp-serde v1.3.1
+  Downloaded num-traits v0.2.19
+  Downloaded crunchy v0.2.4
+  Downloaded getrandom v0.3.4
+  Downloaded bitflags v2.13.2
+  Downloaded zerocopy v0.8.59
+  Downloaded libc v0.2.189
+ Downloading crates ...
+  Downloaded web-time v1.1.0
+   Compiling autocfg v1.5.1
+   Compiling libc v0.2.189
+   Compiling version_check v0.9.5
+   Compiling crunchy v0.2.4
+   Compiling proc-macro2 v1.0.107
+   Compiling cfg-if v1.0.5
+   Compiling tiny-keccak v2.0.2
+   Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.26
+   Compiling portable-atomic v1.15.0
+   Compiling serde_core v1.0.229
+   Compiling zerocopy v0.8.59
+   Compiling once_cell v1.21.4
+   Compiling getrandom v0.3.4
+   Compiling num-traits v0.2.19
+   Compiling smartstring v1.0.1
+   Compiling ahash v0.8.12
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-2w9ctgxb/source)
+   Compiling static_assertions v1.1.0
+   Compiling zmij v1.0.23
+   Compiling serde v1.0.229
+   Compiling serde_json v1.0.151
+   Compiling getrandom v0.2.17
+   Compiling thin-vec v0.2.20
+   Compiling const-random-macro v0.1.16
+   Compiling smallvec v1.16.2
+   Compiling syn v2.0.119
+   Compiling bitflags v2.13.2
+   Compiling rmp v0.8.15
+   Compiling memchr v2.8.3
+   Compiling itoa v1.0.18
+   Compiling const-random v0.1.18
+   Compiling rmp-serde v1.3.1
+   Compiling rhai_codegen v3.2.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-2w9ctgxb/source/codegen)
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:328:9
+    |
+328 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:342:9
+    |
+342 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:357:9
+    |
+357 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:371:9
+    |
+371 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:385:9
+    |
+385 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:398:9
+    |
+398 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:412:9
+    |
+412 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:425:9
+    |
+425 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: `rhai` (lib test) generated 8 warnings (5 duplicates) (run `cargo fix --lib -p rhai --tests` to apply 3 suggestions)
+warning: `rhai` (lib) generated 8 warnings (3 duplicates) (run `cargo fix --lib -p rhai` to apply 5 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `NetError`
+ --> tests/net_reads.rs:3:38
+  |
+3 | use rhai::packages::net::{NetConfig, NetError, NetPackage};
+  |                                      ^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `Dynamic`
+ --> tests/net_reads.rs:5:12
+  |
+5 | use rhai::{Dynamic, Engine, Scope};
+  |            ^^^^^^^
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+warning: `rhai` (test "net_reads") generated 2 warnings (run `cargo fix --test "net_reads" -p rhai` to apply 2 suggestions)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 11.57s
+     Running unittests src/lib.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-2w9ctgxb/target/debug/deps/rhai-eb348775deccde7e)
+
+running 1 test
+test tests::check_struct_sizes ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/net_connect.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-2w9ctgxb/target/debug/deps/net_connect-70e7f2936fb3ab05)
+
+running 4 tests
+test net_config_rejects_zero_deadline_and_invalid_handle_limits ... ok
+test authorized_connect_is_observed_and_clone_close_is_shared ... ok
+test open_handle_limit_is_shared_across_package_engines_and_released_on_close ... ok
+test denied_and_invalid_endpoints_do_not_reach_peer_and_errors_are_catchable ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/net_reads.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-2w9ctgxb/target/debug/deps/net_reads-48f7444caba1800a)
+
+running 7 tests
+test accepted_stream_inherits_host_receive_cap ... ok
+test blob_reads_validate_lengths_return_exact_short_prefix_and_obey_host_cap ... ok
+test one_shot_read_returns_an_available_short_prefix_without_waiting_for_more ... ok
+test one_shot_text_read_replaces_a_utf8_character_cut_by_the_available_prefix ... ok
+test unchecked_mode_keeps_the_host_receive_cap ... ok
+test stream_read_string_returns_exact_lossy_text_from_peer_bytes ... ok
+test no_data_read_times_out_and_bounded_eof_loop_reports_partial_progress ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.24s
+

@@ -1,0 +1,11 @@
+Command: cargo test --features net --test net_reads stream_read_string_returns_exact_lossy_text_from_peer_bytes -- --nocapture
+Host: macOS worktree source snapshot, scoped runner, private CARGO_HOME/target under AGENT_RUNTIME_DIR
+Expected failure (test started before source changes):
+
+running 1 test
+
+thread 'stream_read_string_returns_exact_lossy_text_from_peer_bytes' panicked at tests/net_reads.rs:29:10:
+called `Result::unwrap()` on an `Err` value: ErrorFunctionNotFound("read_string (NetStream, i64)", 1:61)
+test stream_read_string_returns_exact_lossy_text_from_peer_bytes ... FAILED
+
+Result: 0 passed; 1 failed. This is the actual pre-implementation contract RED.

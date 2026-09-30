@@ -14,7 +14,7 @@ Implement all approved local stdlib tickets with strict Engine + real OS + indep
 Existing unchanged accepted evidence remains valid. Unmeasured resource peaks are explicitly unverified in reviews.
 
 ## Current step and remaining gates
-TCP reads candidate4057a537 has native checked/sync/no_index proof (launch13), unchecked and wrong-payload control (launch14). Independent seven-file review found test readiness race: notifier must wait for captured>0 and unit peer must switch blocking. Responsible context correcting only that test path; reuse unaffected proof, run affected sync unit only. Final immutable review/integration pending.
+TCP reads525737fd accepted after full seven-file review and affected cancellation proof15; unchanged launch13/14 reused. Proof ../tcp-stream-reads/, review tcp-stream-reads-review.md. Local integration/push pending, writes/half-close and native release still open.
 Process candidate65483bf9 source-only reviewed against sole Expert01. Source gate CLOSED: assertion readers block before readiness; responsible context correcting conditional hold. No native build/fixture/signal executed. Review correction before first execution. Historical bare Rust main must never run; explicit reviewed --fixture modes only.
 Windows8f75da53 source/bootstrap gate closed; no new native execution. Unchanged external prerequisite is recorded once, no repeated audit. Process production and TCP writes/half-close remain open after current slices.
 

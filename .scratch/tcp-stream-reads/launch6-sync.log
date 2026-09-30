@@ -1,0 +1,51 @@
+ Downloading crates ...
+  Downloaded spin v0.7.2
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_7grhdgc/source)
+   Compiling rhai_codegen v3.2.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_7grhdgc/source/codegen)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 6.84s
+     Running tests/net_connect.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_7grhdgc/target/debug/deps/net_connect-737be1e5cabbed3b)
+
+running 4 tests
+test authorized_connect_is_observed_and_clone_close_is_shared ... ok
+test denied_and_invalid_endpoints_do_not_reach_peer_and_errors_are_catchable ... ok
+test net_config_rejects_zero_deadline_and_invalid_handle_limits ... ok
+test open_handle_limit_is_shared_across_package_engines_and_released_on_close ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/net_listen.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_7grhdgc/target/debug/deps/net_listen-a9381cf1b69b9ed3)
+
+running 8 tests
+test accepted_stream_uses_the_shared_package_quota_across_engines ... ok
+test authorized_listener_accepts_an_independent_peer ... ok
+test bind_failure_releases_listener_quota ... ok
+test closing_a_clone_unblocks_an_accept_waiting_on_shared_quota ... ok
+test denied_and_invalid_listener_endpoints_never_bind ... ok
+test listener_clones_share_close_and_final_drop_releases_the_bind ... ok
+test no_client_accept_times_out_with_catchable_net_error ... ok
+test quota_retry_deadline_expires_under_a_real_saturated_handle_limit ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.13s
+
+     Running tests/net_reads.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_7grhdgc/target/debug/deps/net_reads-d2176c586d1657a7)
+
+running 7 tests
+test accepted_stream_inherits_host_receive_cap ... ok
+test blob_reads_validate_lengths_return_exact_short_prefix_and_obey_host_cap ... ok
+test closing_a_clone_cancels_an_outstanding_read_and_releases_quota ... ok
+test engine_string_limit_keeps_ascii_and_reports_lossy_expansion_progress ... ok
+test no_data_read_times_out_and_bounded_eof_loop_reports_partial_progress ... ok
+test one_shot_read_returns_an_available_short_prefix_without_waiting_for_more ... ok
+test stream_read_string_returns_exact_lossy_text_from_peer_bytes ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.16s
+

@@ -1,0 +1,48 @@
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-hgpxojkg/source)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+  --> tests/net_reads.rs:28:14
+   |
+28 |         let (mut stream, _) = loop {
+   |              ----^^^^^^
+   |              |
+   |              help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+warning: `rhai` (test "net_reads") generated 1 warning (run `cargo fix --test "net_reads" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 4.85s
+     Running unittests src/lib.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-hgpxojkg/target/debug/deps/rhai-a3390a496b9d23f3)
+
+running 2 tests
+test packages::net::stream::tests::clone_close_cancels_a_read_after_partial_progress ... FAILED
+test tests::check_struct_sizes ... ok
+
+failures:
+
+---- packages::net::stream::tests::clone_close_cancels_a_read_after_partial_progress stdout ----
+
+thread 'packages::net::stream::tests::clone_close_cancels_a_read_after_partial_progress' (51654303) panicked at src/packages/net/stream.rs:508:9:
+assertion `left == right` failed: close preserves bytes captured before cancellation
+  left: 0
+ right: 1
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread '<unnamed>' (51654304) panicked at src/packages/net/stream.rs:460:61:
+called `Result::unwrap()` on an `Err` value: Disconnected
+
+
+failures:
+    packages::net::stream::tests::clone_close_cancels_a_read_after_partial_progress
+
+test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--lib`

@@ -1,0 +1,89 @@
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-a4847cob/source)
+warning: unused import: `super::*`
+   --> src/packages/net/stream.rs:446:9
+    |
+446 |     use super::*;
+    |         ^^^^^^^^
+    |
+    = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `crate::packages::net::NetError`
+   --> src/packages/net/stream.rs:447:9
+    |
+447 |     use crate::packages::net::NetError;
+    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `std::io::Write`
+   --> src/packages/net/stream.rs:448:9
+    |
+448 |     use std::io::Write;
+    |         ^^^^^^^^^^^^^^
+
+warning: unused import: `std::net::TcpListener`
+   --> src/packages/net/stream.rs:449:9
+    |
+449 |     use std::net::TcpListener;
+    |         ^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `std::sync::mpsc`
+   --> src/packages/net/stream.rs:450:9
+    |
+450 |     use std::sync::mpsc;
+    |         ^^^^^^^^^^^^^^^
+
+error[E0599]: no method named `max_array_size` found for reference `&Engine` in the current scope
+   --> src/packages/net/stream.rs:333:34
+    |
+333 |         let limit = ctx.engine().max_array_size();
+    |                                  ^^^^^^^^^^^^^^ method not found in `&Engine`
+
+error[E0599]: no method named `max_array_size` found for reference `&Engine` in the current scope
+   --> src/packages/net/stream.rs:348:34
+    |
+348 |         let limit = ctx.engine().max_array_size();
+    |                                  ^^^^^^^^^^^^^^ method not found in `&Engine`
+
+error[E0599]: no method named `max_array_size` found for reference `&Engine` in the current scope
+   --> src/packages/net/stream.rs:361:34
+    |
+361 |         let limit = ctx.engine().max_array_size();
+    |                                  ^^^^^^^^^^^^^^ method not found in `&Engine`
+
+error[E0599]: no method named `max_array_size` found for reference `&Engine` in the current scope
+   --> src/packages/net/stream.rs:373:34
+    |
+373 |         let limit = ctx.engine().max_array_size();
+    |                                  ^^^^^^^^^^^^^^ method not found in `&Engine`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:379:9
+    |
+379 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:392:9
+    |
+392 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:406:9
+    |
+406 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:419:9
+    |
+419 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+For more information about this error, try `rustc --explain E0599`.
+warning: `rhai` (lib) generated 4 warnings
+error: could not compile `rhai` (lib) due to 4 previous errors; 4 warnings emitted
+warning: build failed, waiting for other jobs to finish...
+warning: `rhai` (lib test) generated 9 warnings (4 duplicates)
+error: could not compile `rhai` (lib test) due to 4 previous errors; 9 warnings emitted

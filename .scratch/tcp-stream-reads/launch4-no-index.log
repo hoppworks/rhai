@@ -1,0 +1,31 @@
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4nv0j0s2)
+error[E0425]: cannot find type `Blob` in the crate root
+   --> src/packages/net/stream.rs:98:24
+    |
+ 98 |     ) -> Result<crate::Blob, Box<EvalAltResult>> {
+    |                        ^^^^ not found in the crate root
+    |
+note: found an item that was configured out
+   --> src/lib.rs:316:10
+    |
+315 | #[cfg(not(feature = "no_index"))]
+    |          ---------------------- the item is gated here
+316 | pub type Blob = Vec<u8>;
+    |          ^^^^
+
+error[E0425]: cannot find type `Blob` in the crate root
+   --> src/packages/net/stream.rs:144:24
+    |
+144 |     ) -> Result<crate::Blob, Box<EvalAltResult>> {
+    |                        ^^^^ not found in the crate root
+    |
+note: found an item that was configured out
+   --> src/lib.rs:316:10
+    |
+315 | #[cfg(not(feature = "no_index"))]
+    |          ---------------------- the item is gated here
+316 | pub type Blob = Vec<u8>;
+    |          ^^^^
+
+For more information about this error, try `rustc --explain E0425`.
+error: could not compile `rhai` (lib) due to 2 previous errors

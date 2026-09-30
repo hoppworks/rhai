@@ -1,0 +1,31 @@
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ngaey2l4/source)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 6.65s
+     Running unittests src/lib.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ngaey2l4/target/debug/deps/rhai-7516d83ca73f451b)
+
+running 1 test
+test tests::check_struct_sizes ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/net_reads.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ngaey2l4/target/debug/deps/net_reads-2cad6f43a924d460)
+
+running 7 tests
+test accepted_stream_inherits_host_receive_cap ... ok
+test engine_string_limit_keeps_ascii_and_reports_lossy_expansion_progress ... ok
+test one_shot_text_read_replaces_a_utf8_character_cut_by_the_available_prefix ... ok
+test stream_read_string_returns_exact_lossy_text_from_peer_bytes ... ok
+test no_index_keeps_string_reads_and_omits_blob_methods ... ok
+test one_shot_read_returns_an_available_short_prefix_without_waiting_for_more ... ok
+test no_data_read_times_out_and_bounded_eof_loop_reports_partial_progress ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.15s
+
