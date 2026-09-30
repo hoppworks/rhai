@@ -164,6 +164,12 @@ is the changed resume condition. The goal is active and remains incomplete.
   checks, contradictory evidence or uncovered decisions. Remaining TCP requirements
   stay open; no package-wide/native-three-OS acceptance claim from this slice.
 
+- File handle open/write/cursor slice is parallel independent feature work in
+  /Users/hoppworks/projects/rhai-file-handles, task/file-handles. Requirement and
+  finite 60-active-minute/resource caps recorded before work in briefs/file-handle-open.md.
+  Real Engine/host readback/control required. Read/allocation contracts and full
+  native release remain open. No cause/Expert history is reset by this new feature.
+
 ## Goal turn classification
 
 2026-09-30 post-staging frontier audit: no progress, blocked observations 1–3
