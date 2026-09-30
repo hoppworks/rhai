@@ -68,8 +68,20 @@ Cause history:
   The second installation uses a new disk and corrected seed. Specialize succeeded:
   the live serial log reports RHAI_WINDOWS_READY Microsoft Windows 11 Pro Build=26300.
   OOBE completed to first sign-in. Windows demands a password change for RhaiTest.
-  No password entered or changed; explicit permission to confirm empty fields is
-  pending under the credential rule. Desktop, baseline and cold boot remain pending.
+  Owner authorized confirming empty password fields; Windows accepted them.
+  Desktop verified through the live guest console. Activation UAC has no usable
+  administrator: unattended setup only created RhaiTest in Users. Owner authorized
+  a targeted safe-mode recovery with temporary admin rights on 2026-09-30.
+  Guest shut down cleanly; baseline disk/UEFI/TPM backup created and qemu-img plus
+  SHA256 read-back passed. Cold boot to desktop passed. No restore drill yet.
+  Safe mode enabled the built-in Administrator; its console sign-in succeeded
+  without a password. net localgroup administrators rhaitest /add succeeded;
+  independent group listing includes RhaiTest. Normal boot returned to RhaiTest;
+  Change product key now opens an empty key-entry dialog. Handed input to owner;
+  screenshots paused to keep their key out of evidence. UAC after key submission
+  has not yet been observed. Temporary rights must be removed
+  after activation and toolchain setup; preserve a usable administration path.
+  Activation, post-key UAC, restore drill and native tests remain unverified.
   The former Path-length cause is closed.
 - DVD boot: after missed initial prompt, firmware boot-menu selections failed twice.
   See escalations/02-vm-dvd-boot.answer.md. The answer-justified reset timed out.

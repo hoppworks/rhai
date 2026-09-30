@@ -61,8 +61,17 @@ See `../escalations/02-vm-dvd-boot.answer.md` and `boot-failure-02.log`. The pro
 using its built-in "I don't have a product key" option. The live serial marker now
 reports `RHAI_WINDOWS_READY Microsoft Windows 11 Pro Build=26300`. OOBE reached
 first sign-in, where Windows requires a password change for the local RhaiTest
-account. No password has been entered or changed. Owner permission to confirm
-empty fields is pending; desktop, clean baseline and cold boot are still unverified.
+account. Owner authorized empty fields, which Windows accepted. Desktop and a
+cold boot were verified. A cleanly stopped baseline with disk, UEFI and TPM is
+at `baseline/` on workhorse; image checks and SHA256 read-back passed. Restore
+has not yet been exercised. The missing administration account blocked activation.
+Owner authorized targeted safe-mode recovery and temporary RhaiTest admin rights.
+Built-in Administrator sign-in succeeded in safe mode; adding RhaiTest to
+Administrators succeeded and a fresh group listing confirmed membership. Normal
+boot returned to RhaiTest; Change product key opens its entry dialog. Owner now
+controls key entry; screenshots are paused. Activation and any UAC after key
+submission remain unverified. Remove temporary rights after activation
+and toolchain provisioning, retaining a usable administration path.
 The specialize-pass serial marker proves the installed edition/build, not completed
 OOBE or desktop readiness; verify those separately through the console.
 Rust/MSVC toolchains and native Rhai tests are not installed or run.
