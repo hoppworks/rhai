@@ -12,10 +12,10 @@
 use super::config::{FsAccess, FsPolicy};
 use super::error::SysError;
 use super::{reg, SysState};
-use crate::{Dynamic, EvalAltResult, Locked, Map, Module, Shared, INT};
+use crate::{Dynamic, EvalAltResult, Locked, Map, Module, NativeCallContext, Shared, INT};
 use cap_std::ambient_authority;
 use cap_std::fs::{Dir, OpenOptions};
-use std::io::{self, Seek, SeekFrom, Write};
+use std::io::{self, Read, Seek, SeekFrom, Write};
 use std::path::{Component, Path, PathBuf};
 
 type Res<T> = Result<T, Box<EvalAltResult>>;
@@ -449,8 +449,152 @@ fn with_file_mut<T>(
     f(&mut guard).map_err(|e| SysError::io(action, "file handle", &e).into())
 }
 
-fn register_file_handle(module: &mut Module) {
+fn read_file_bytes(
+    file: &FileHandle,
+    requested: INT,
+    host_limit: usize,
+    engine_limit: usize,
+    action: &'static str,
+) -> Res<Vec<u8>> {
+    if requested < 0 {
+        return Err(SysError::io(
+            action,
+            "file handle",
+            &io::Error::new(
+                io::ErrorKind::InvalidInput,
+                "read length cannot be negative",
+            ),
+        )
+        .into());
+    }
+
+    let mut limit = host_limit;
+    if engine_limit > 0 {
+        limit = limit.min(engine_limit);
+    }
+    if requested > 0 {
+        // A positive INT may not fit usize on 32-bit targets. The host/engine cap is
+        // already representable as usize, so saturating the request at usize::MAX is safe.
+        let requested = usize::try_from(requested).unwrap_or(usize::MAX);
+        limit = limit.min(requested);
+    }
+    if limit == 0 {
+        return Ok(Vec::new());
+    }
+
+    let mut bytes = Vec::new();
+    bytes.try_reserve_exact(limit).map_err(|e| {
+        SysError::io(
+            action,
+            "file handle",
+            &io::Error::new(io::ErrorKind::Other, e),
+        )
+    })?;
+    let count = with_file_mut(file, action, |file| {
+        if requested == 0 && engine_limit == 0 {
+            file.take(limit as u64).read_to_end(&mut bytes)
+        } else {
+            bytes.resize(limit, 0);
+            file.read(&mut bytes)
+        }
+    })?;
+    if requested != 0 || engine_limit != 0 {
+        bytes.truncate(count);
+    }
+    Ok(bytes)
+}
+
+fn register_file_handle(module: &mut Module, max_file_read: usize) {
     module.set_custom_type::<FileHandle>("FileHandle");
+    reg(
+        "read_string",
+        &["/// Read up to the requested bytes from the current cursor as strict UTF-8. A zero or omitted length reads up to EOF or the configured cap."],
+    )
+    .set_into_module(module, move |ctx: NativeCallContext, file: FileHandle| -> Res<String> {
+        #[cfg(not(feature = "unchecked"))]
+        let engine_limit = ctx.engine().max_string_size();
+        #[cfg(feature = "unchecked")]
+        let engine_limit = 0;
+        let bytes = read_file_bytes(
+            &file,
+            0,
+            max_file_read,
+            engine_limit,
+            "read file",
+        )?;
+        String::from_utf8(bytes).map_err(|e| {
+            SysError::io(
+                "read file as string",
+                "file handle",
+                &io::Error::new(io::ErrorKind::InvalidData, e),
+            )
+            .into()
+        })
+    });
+    reg(
+        "read_string",
+        &["/// Read up to `len` bytes from the current cursor as strict UTF-8. A zero length reads up to EOF or the configured cap."],
+    )
+    .set_into_module(module, move |ctx: NativeCallContext, file: FileHandle, len: INT| -> Res<String> {
+        #[cfg(not(feature = "unchecked"))]
+        let engine_limit = ctx.engine().max_string_size();
+        #[cfg(feature = "unchecked")]
+        let engine_limit = 0;
+        let bytes = read_file_bytes(
+            &file,
+            len,
+            max_file_read,
+            engine_limit,
+            "read file",
+        )?;
+        String::from_utf8(bytes).map_err(|e| {
+            SysError::io(
+                "read file as string",
+                "file handle",
+                &io::Error::new(io::ErrorKind::InvalidData, e),
+            )
+            .into()
+        })
+    });
+
+    #[cfg(not(feature = "no_index"))]
+    {
+        reg(
+            "read_blob",
+            &["/// Read up to the requested bytes from the current cursor as a BLOB. A zero or omitted length reads up to EOF or the configured cap."],
+        )
+        .set_into_module(module, move |ctx: NativeCallContext, file: FileHandle| -> Res<crate::Blob> {
+            #[cfg(not(feature = "unchecked"))]
+            let engine_limit = ctx.engine().max_array_size();
+            #[cfg(feature = "unchecked")]
+            let engine_limit = 0;
+            read_file_bytes(
+                &file,
+                0,
+                max_file_read,
+                engine_limit,
+                "read file as blob",
+            )
+        });
+        reg(
+            "read_blob",
+            &["/// Read up to `len` bytes from the current cursor as a BLOB. A zero length reads up to EOF or the configured cap."],
+        )
+        .set_into_module(module, move |ctx: NativeCallContext, file: FileHandle, len: INT| -> Res<crate::Blob> {
+            #[cfg(not(feature = "unchecked"))]
+            let engine_limit = ctx.engine().max_array_size();
+            #[cfg(feature = "unchecked")]
+            let engine_limit = 0;
+            read_file_bytes(
+                &file,
+                len,
+                max_file_read,
+                engine_limit,
+                "read file as blob",
+            )
+        });
+    }
+
     reg(
         "write",
         &["/// Write one string to the file and return the number of bytes written."],
@@ -514,7 +658,7 @@ fn register_file_handle(module: &mut Module) {
 }
 
 pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
-    register_file_handle(module);
+    register_file_handle(module, state.config.max_file_read);
 
     with_state!(state, module, "open_file", &["/// Open a file read/write with the default `w+` mode, creating it without truncating existing content."], |path: &str| -> Res<FileHandle> {
         open_file(&state.fs, path, "w+")
