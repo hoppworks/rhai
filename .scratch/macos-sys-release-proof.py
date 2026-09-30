@@ -193,16 +193,19 @@ OUT.joinpath('run-state.txt').write_text(
 owned_chain = []
 for pid, ppid, pgid, cmd in ancestry():
     owned_chain.append((pid, ppid, pgid, cmd))
-    if 'run_scoped.py' in cmd:
+    if 'run_scoped.py' in cmd and '_supervise' not in cmd:
         break
 else:
-    raise RuntimeError('could not identify run_scoped.py ancestry boundary')
+    raise RuntimeError('could not identify outer run_scoped.py ancestry boundary')
+supervisor_pgid = identity_record(owned_chain[1][0]).get('pgid') if len(owned_chain) > 1 else None
+if not supervisor_pgid:
+    raise RuntimeError('could not capture actual run_scoped supervisor process group')
 with OUT.joinpath('live-identities.txt').open('w') as f:
     for index, (pid, ppid, pgid, cmd) in enumerate(owned_chain):
         role = 'owned-group' if index < len(owned_chain) - 1 else 'runner-launcher'
         record = identity_record(pid)
         if role == 'owned-group':
-            record['owned_pgid'] = str(owned_chain[1][0])
+            record['owned_pgid'] = str(supervisor_pgid)
         f.write(json.dumps({'role': role, **record}) + '\n')
 
 for row, feature in ROWS:

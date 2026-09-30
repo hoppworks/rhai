@@ -3,7 +3,7 @@ set -u
 repo=/Users/hoppworks/projects/rhai-macos-sys-release-features
 evidence="$repo/.scratch/macos-sys-release-evidence"
 runner=/Users/hoppworks/projects/agent-skills/tools/run_scoped.py
-deadline=$(date -j -f '%Y-%m-%d %H:%M:%S' '2026-09-30 17:38:30' '+%s')
+deadline=$(date -u -j -f '%Y-%m-%d %H:%M:%S' '2026-09-30 17:38:30' '+%s')
 now=$(date '+%s')
 remaining=$((deadline - now))
 if [ "$remaining" -le 0 ]; then
