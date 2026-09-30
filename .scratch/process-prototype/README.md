@@ -1,28 +1,23 @@
 # POSIX process lifecycle prototype
 
-This is a bounded native macOS prototype, not the Rhai process implementation. It tests only the OS/process/I/O seam required before production work.
+This is a bounded native macOS prototype, not the Rhai process implementation. It tests the process-group, pipe-I/O, interruption and cleanup seam on one native host.
 
-## Observed
+## Current native proof
 
-- Rust std `CommandExt::process_group(0)` creates an owned Unix process group. The fixture records `getpgrp()` as its first user-code record; it equals the child PID on every run. This avoids a parent-side `setpgid` race and does not require a post-spawn setup window.
-- With a 2 MiB stdin payload, separate nonblocking writer and stdout/stderr reader workers finish without deadlock and capture the exact independent payload on both output streams.
-- An active child with a full, unread stdin pipe can be killed by its negative-PGID group ID. A descendant deliberately placed in its own process group continues to hold inherited stdout/stderr open; a cancellation token lets all three workers join promptly despite the held pipes. The harness then kills that exact recorded PID and waits for it to disappear.
-- The same escaped pipe-holder remains after the managed direct child exits. Explicit cancellation ends collection workers without waiting for EOF; exact-PID cleanup follows. The independent `/bin/sleep` sentinel survives group cancellation and is explicitly reaped by the harness.
-- `Child::wait` reports the direct child's signal status after active cancellation; `try_wait` observes/reaps the direct child that exits while its escaped descendant remains.
-- A deliberately wrong expected record fails, and the original expected record passes.
+The coordinator approved adapter source `9bf32e45d770ce3b021ac7e8f333d0d2bbe11501` before execution. The proof ran on Darwin 27.0 arm64 with Rust/Cargo 1.93.0. Cargo built the copied prototype source inside the shared scoped runner's private runtime (`CARGO_BUILD_JOBS=2`, 0.78 seconds); the executable was exported before that runtime was cleaned and removed after the controls. The historical bare Rust entry point was not run; the custodian invoked only `--fixture stream`, `--fixture stall` and `--fixture anchor`.
 
-## Run and evidence
+All six project-local controls passed. Their durable receipts are under `evidence/`:
 
-Run on native macOS ARM64, Darwin 27.0.0, Rust 1.93.0, Cargo 1.93.0. The command copied the complete prototype source into the private `AGENT_RUNTIME_DIR`, set `CARGO_HOME` and `CARGO_TARGET_DIR` there, built, ran the passing case, then ran `--wrong-assertion` and required its nonzero exit. The required scoped runner was invoked with Python because its executable bit is not set. The exact reproducible invocation is:
+- `custodian-88024-normal.json`: runner and workload exited 0; three workers joined; 2,097,152 input and stdout bytes matched SHA-256 `91d3beb88a9b2f778a6c44a1c53b63d3c79931845a9aef84b3fb414610bd1938`; 2,097,152 stderr bytes matched the expected transformed stream, SHA-256 `6856d04b31b5cc305ceda6e7ec9a9e557c8eeb9e952f15ed0efa2c737b76944a`.
+- `custodian-93052-cancel.json`: workload exited while an independent holder kept output pipes open; the runner canceled and joined all three workers, returned 1, and the same exact byte/hash checks passed.
+- `custodian-91927-assert.json`: leader, anchor, holder and sentinel were live at injection; the snapshot recorded all three workers alive, active, held and acknowledged; the runner returned 86 and all workers joined.
+- `custodian-92369-timeout.json`: the runner's own timeout returned 124 after three workers joined; all four managed resources were live before custodian cleanup.
+- `custodian-92635-term.json` and `custodian-92930-kill.json`: the runner was terminated by SIGTERM and SIGKILL respectively, with exact wait statuses and all managed resources live at injection. Worker joins after abrupt runner termination are not claimed.
 
-```sh
-python3 /Users/hoppworks/projects/agent-skills/tools/run_scoped.py -- sh /Users/hoppworks/projects/rhai-process-prototype/.scratch/process-prototype/run-scoped.sh
-```
+For every custody case, the custodian recorded exact child statuses, closed its owned descriptors, read back the quiescence record and matching receipt, and the controller removed the exact runtime. The coordinator independently recomputed the stream hashes and verified every recorded child PID and runtime absent. The normal receipt does not separately serialize the anchor's PGID; the custodian validated its complete readiness line and `anchor_pgid == workload_pid` before proceeding. The timeout receipt does not serialize the prior stream checkpoint/readiness bytes; those conditions were validated in the unchanged approved protocol before it emitted `io_live`. These are limitations of retained fields, not additional claims from the receipts.
 
-Detailed successful and false-green output is in `evidence/native-macos.log` and `evidence/wrong-assertion.log`. The source has no Cargo dependencies. Build artifacts and caches were removed with the scoped runtime.
+A separate shared-runner timeout check is recorded in `evidence/shared-runner-timeout.txt`: the shared `run_scoped.py --timeout 1` returned 124 for a sleeping Python child. This checks status propagation only, not private fixture cleanup. Earlier correction attempts and their reviews remain in `evidence/correction-attempt.md`; the complete current state and commit reference are in `coordinator-state.md`.
 
-## Rust MSRV assessment and limits
+## Limits
 
-The production Rhai manifest declares Rust 1.66; the requested release gate under discussion is Rust 1.77.2. `CommandExt::process_group` is documented stable since 1.64, and `AsRawFd` since 1.63, so the demonstrated standard-library process-group mechanism fits 1.77.2 by API stabilization. The prototype was compiled only with 1.93.0; an exact 1.77.2 compile was not performed because that toolchain is not installed and installing toolchains would alter the agent home. The prototype uses Rust 2021-compatible `extern` declarations, standard `Read`/`Write` and threads, and no crates.
-
-The FFI constants and `fcntl`/`kill` calls here are macOS-specific scaffolding. This run proves macOS ARM64 only. It does not establish Linux or other Unix behavior, Windows job semantics, existing host process-group behavior, partial setup failure, process-group escape prevention (escape is explicitly possible), deadline/output-limit policy, backpressure benchmarks, bounded retained output, or full Rhai API behavior. Unix process groups do not contain descendants that deliberately leave the group. Production should keep direct-child and managed-group modes distinct, request group membership as part of spawn, and cancel I/O workers independently of EOF. A private OS adapter will need platform bindings for nonblocking setup and group signaling; this prototype did not add dependencies, so dependency selection and MSRV review remain open for implementation.
+These observations apply only to Darwin 27.0 arm64 with Rust 1.93.0. Rust 1.77.2/MSRV, Linux and other Unix targets, Windows, production Rhai Engine process behavior, and broader release coverage remain unverified. The prototype does not establish escaped-descendant containment, custody-failure recovery, partial spawn/setup failure behavior, deadline/output-limit policy, backpressure benchmarks, or bounded retained output. Unix process groups do not contain descendants that deliberately leave the group. Production should keep direct-child and managed-group modes distinct, request group membership as part of spawn, and cancel I/O workers independently of EOF. A production OS adapter still needs platform review, dependency selection and MSRV verification.
