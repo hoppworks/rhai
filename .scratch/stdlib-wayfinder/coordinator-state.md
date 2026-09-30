@@ -23,11 +23,10 @@ with high quality, low maintenance, strict verification, and Rhai conventions.
 
 ## Current step
 
-Tickets 01 and 02 are resolved. Ticket 03 is claimed and contains a concrete
-process lifecycle proposal awaiting owner review. Four decisions remain unresolved.
-No implementation has started. The owner clarified maximum quality, with effort
-secondary; the earlier recovery question was based on a wording misunderstanding
-and is superseded.
+Tickets 01–03 are resolved. The owner explicitly included managed process groups/jobs
+in the first version after reviewing advantages, security and performance effects.
+Three decision tickets remain open. No implementation or native process proof has
+started. Maximum quality takes precedence over effort.
 
 ## Decisions and constraints
 
@@ -47,8 +46,8 @@ and is superseded.
 
 ## Next action
 
-Review the proposed contract in issues/03-process-contract.md with the owner,
-especially direct-child supervision versus managed process trees. Do not resolve
-ticket 03 until the live exchange settles that boundary. A cancellation/reaping
-prototype is an implementation gate, not completed evidence. Preserve accepted API
-choices unless a concrete contradiction requires revision. Do not implement in wayfinder.
+Next invocation: claim issues/04-tcp-authority.md and settle TCP permissions.
+Ticket 06 must review process host-config spelling, error-report compatibility and
+managed-scope native platform release gates. Cancellation/reaping and scope-setup
+prototypes remain implementation gates, not completed evidence. Do not implement
+production code during wayfinder planning.

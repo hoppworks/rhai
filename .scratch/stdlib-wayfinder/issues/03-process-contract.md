@@ -2,8 +2,7 @@
 
 Type: grilling
 Label: wayfinder:grilling
-Status: claimed
-Assignee: current Codex session
+Status: resolved
 Parent: [Plan a reliable Rhai host standard library](../map.md)
 Blocked by: none
 
@@ -30,7 +29,7 @@ trust model. Specify fixture-observable cases and platform differences.
 
 Reference: ../../../docs/sys-package-plan.md sections 3.3, 4.4 and 5.
 
-## Proposed contract — awaiting owner review
+## Lifecycle contract and API candidates
 
 The owner clarified that effort is secondary to maximum quality. This does not add
 an automatic-retry or durable-recovery requirement. Preserve the accepted API and
@@ -92,13 +91,31 @@ make its lifecycle observable before selecting implementation mechanisms.
 
 ### Descendants and executable authority
 
-Recommend an explicit initial guarantee for the direct child, with cancellable pipe
-collection even when a descendant retains stdout/stderr. Do not make process-tree
-termination implicit in `kill_on_drop`. Whole-tree supervision needs a separate
-opt-in contract and native platform proof; Windows job objects and Unix process
-groups have distinct semantics. Arbitrary escaped descendants remain outside the
-reviewed-program trust model. This boundary is about an honest, testable guarantee,
-not reducing the quality bar for direct-child supervision.
+The initial release includes both direct-child supervision and an explicitly
+selected managed process group/job. Host configuration selects the supervision
+scope; scripts cannot downgrade a host-required managed scope. Preserve direct-child
+semantics when managed scope is not selected. Exact configuration spelling is an
+API-review detail, not an existing method.
+
+In managed scope, run deadline, output overflow, explicit kill and final-handle drop
+with `kill_on_drop` terminate the owned group/job as well as the direct child. A
+normal direct-child exit also closes its managed scope before a final result is
+published: managed mode is for a bounded task, not a launcher for persistent services.
+With `kill_on_drop: false`, the retained owner continues supervision until ordinary
+completion, then closes the scope. Use direct-child mode for intentional independent
+background services.
+
+Management means the processes associated with the owned OS group/job, not every
+possible descendant. Windows job objects and Unix process groups have different
+membership and escape rules. Arbitrary escaped descendants remain outside this
+contract; this is not an OS sandbox. Never discover cleanup targets by executable
+name or by an unchecked recursive PID snapshot.
+
+Create and establish the owned scope before the program can start unmanaged work.
+If managed supervision cannot be established, fail the launch and clean up any
+already-created child; never silently fall back to direct-child mode. Native proof
+must cover setup races, existing host job/group contexts and partial setup failures.
+The mechanism and dependency choice remain gated on a bounded platform prototype.
 
 A descendant holding a pipe must not hang `run` with a finite deadline or block
 `wait(seconds)` beyond its observation deadline. After cancellation, partial output
@@ -144,7 +161,8 @@ sleep-based readiness and timing assertions tighter than scheduler guarantees.
 
 ### Implementation gates
 
-1. Owner accepts or revises this contract, especially the direct-child boundary.
+1. The owner selected managed group/job support for the initial release. Preserve
+   both explicit supervision modes and their documented boundaries.
 2. Prove cancellation and reaping mechanics in a bounded platform prototype before
    promising completion semantics. If the prototype contradicts the contract,
    escalate the concrete contradiction; do not weaken assertions to get green tests.
@@ -163,8 +181,31 @@ sleep-based readiness and timing assertions tighter than scheduler guarantees.
   job lifetime/termination and child association have platform-specific rules;
   these are not equivalent to killing a single Child.
 
-## Open owner decision
+## Answer
 
-Accept the proposed direct-child lifecycle and diagnostic contract, or extend the
-initial scope to managed process trees? Recommendation: accept the direct-child
-contract first; require cancellation-safe pipes and full native proof before release.
+On 2026-09-30 the owner explicitly selected managed process group/tree support:
+“soll dabei sein”, referring to the comparison's managed group/tree option. The
+preceding recommendation placed it in the first version as an explicit choice,
+with native tests and no sandbox claim. It is therefore part of initial scope,
+alongside the direct-child foundation; it is not deferred to a later release.
+
+The contract above supplies the implementation requirements for that choice.
+The exact host-config API and the proposed `SysError.process` representation are
+API candidates for ticket 06, not separately owner-approved spellings. No production
+implementation, OS cancellation prototype or native acceptance proof is complete.
+
+Additional managed-scope acceptance cases:
+
+| Case | Required observation |
+| --- | --- |
+| Fixture starts child and grandchild workers | Explicit readiness and independent worker records establish scope membership |
+| Deadline, overflow, kill, final-clone drop | Every associated fixture worker stops; owned handles/workers are cleaned up |
+| Main process exits while workers remain | Managed mode closes the task scope; direct mode preserves its distinct behavior |
+| Scope setup failure or unavailable mechanism | Launch fails without unmanaged work or silent fallback |
+| Host already belongs to a group/job | Fixture-owned cleanup cannot terminate host or unrelated sentinel process |
+| Escaped descendant and retained pipe | Documented membership boundary holds; bounded capture cancellation still completes; fixture cleans up escapee |
+| Managed scope with kill-on-drop disabled | Retained supervisor preserves task lifetime, then performs normal scope cleanup |
+
+Record start latency, capture throughput and retained resource counts for each mode
+with identical fixture workloads and platform/toolchain details. Benchmarks describe
+observed overhead; no performance numbers are promised before measurement.

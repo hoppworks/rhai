@@ -50,6 +50,11 @@ blocks implementation. Completing this map does not mean the library is implemen
   OS-selected roots, capability confinement, unrestricted host semantics and
   consistent supported root spellings are required; reviewed defects remain open.
 
+- [Close process lifecycle and resource-limit ambiguities](issues/03-process-contract.md#answer):
+  the initial release includes direct-child supervision and explicitly selected
+  managed groups/jobs, with cancellation-safe capture, no silent fallback and
+  native cleanup proof. Exact config/error representation is reviewed in ticket 06.
+
 ## Not yet specified
 
 - Exact implementation slices, ordered by the resolved contracts and quality gates.

@@ -27,3 +27,12 @@ or a cross-compile proves native execution. State release blockers explicitly.
 
 Clarify API review and documentation requirements for sys file-handle compatibility
 and TCP. Do not introduce a CI service or enable fork settings without authorization.
+
+## Process API and release obligations from ticket 03
+
+The owner requires managed process groups/jobs in the first version, alongside
+explicit direct-child supervision. Review exact host-config spelling and the proposed
+`SysError.process` report without implying existing Rust enum variants can change
+without compatibility assessment. Native scope setup, cancellation, retained pipes,
+normal completion and cleanup failures must pass on every supported OS. An unavailable
+managed mechanism fails explicitly; silently downgrading supervision is prohibited.

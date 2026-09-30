@@ -138,6 +138,15 @@ Names in the allow-list are compared against the program string as given; the co
 also pin absolute paths. `cwd` is validated against the fs roots. Arguments are always passed
 as a vector, never through a shell.
 
+The initial release also includes host-selected managed process groups/jobs,
+alongside direct-child supervision. Managed mode terminates associated workers on
+cancellation and closes its task scope at normal completion. Scripts cannot downgrade
+host-required supervision; unavailable scope setup fails explicitly. This does not
+sandbox file/network access or guarantee termination of escaped descendants.
+The precise lifecycle, diagnostics and native acceptance contract is recorded in
+[process contract](../.scratch/stdlib-wayfinder/issues/03-process-contract.md#answer).
+Configuration spelling and Rust error compatibility remain API-review work.
+
 ### 3.4 Host API
 
 ```rust
@@ -248,7 +257,7 @@ tests are written from scratch against this contract. Phase numbers refer to sec
 | X16 | stdin string | fixture echoes it back | QuickJS pipes | 2 |
 | X17 | stdin blob 1 MiB | exact round trip, no deadlock while child also writes | own | 2 |
 | X18 | stdin `()` | fixture sees EOF immediately | own | 2 |
-| X19 | Timeout expires | `timed_out == true`, child gone, call returns within timeout + 1 s | own | 2 |
+| X19 | Timeout expires | `timed_out == true`, termination/reaping observed; watchdog bounds the test; OS latency limitations documented | own | 2 |
 | X20 | Timeout not reached | normal result | own | 2 |
 | X21 | `max_output` exceeded | `OutputLimit`, child killed | survey "output cap" | 2 |
 | X22 | Child killed by signal (Unix) | `code == ()`, `signal == 9` | Rust `ExitStatusExt` | 2 |
@@ -257,12 +266,18 @@ tests are written from scratch against this contract. Phase numbers refer to sec
 | X25 | `spawn` then `kill` then `wait` | terminated, no hang | Rune | 2 |
 | X26 | `kill` twice | second is a no-op, no error | own | 2 |
 | X27 | Drop `Child` while running, `kill_on_drop` true | child exits (Linux: verify via `/proc`), no zombie | own | 2 |
-| X28 | Drop `Child`, `kill_on_drop` false | child keeps running; test reaps it | own | 2 |
+| X28 | Drop `Child`, `kill_on_drop` false | child keeps running; retained supervisor eventually reaps it | own | 2 |
 | X29 | Script `throw` while child running | child cleaned up via drop | own | 2 |
 | X30 | 200 sequential `run` calls | no fd or handle leak (Linux: `/proc/self/fd` count stable) | Lua cleanup tests | 2 |
 | X31 | Under `sync` feature, `Child` shared across threads | compiles and works | Rhai `sync` | 2 |
 | X32 | Windows: argument with embedded quote | argv reconstructed correctly | Rust std quoting rules | 3 |
 | X33 | Windows: `.exe` suffix omitted | resolves via `PATH` | own | 3 |
+
+| X34 | Managed scope cancellation | associated child/grandchild workers stop on timeout, overflow, kill and final drop; independent observations | process contract | 2 |
+| X35 | Managed main process exits before workers | owned task scope closes before final result; direct mode remains distinct | process contract | 2 |
+| X36 | Managed scope setup fails | no unmanaged work or silent fallback; partial setup cleaned up | process contract | 2 |
+| X37 | Host group/job and unrelated sentinel | owned scope cleanup leaves host and sentinel intact | process contract | 2 |
+| X38 | Descendant retains pipe or escapes membership | capture cancellation completes; membership limitation explicit; fixture owns escapee cleanup | process contract | 2 |
 
 ### 4.5 Engine integration (R)
 
