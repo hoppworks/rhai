@@ -15,7 +15,8 @@ Existing unchanged accepted evidence remains valid. Unmeasured resource peaks ar
 
 ## Current step and remaining gates
 TCP reads525737fd accepted after full seven-file review and affected cancellation proof15; unchanged launch13/14 reused. Proof ../tcp-stream-reads/, review tcp-stream-reads-review.md. Integrated and exact remotee0dd28ec verified; clean owned receive checkout retired, proof retained. Writes/half-close newly dispatched, native release still open.
-Process9bf32e45 source gate independently approved after full65483bf + conditional-hold delta. First scoped normal vertical case passed at14:05; proof pending independent assessment, live controls active before original14:18:05. Only explicit reviewed --fixture modes; historical bare Rust main forbidden.
+Process native prototype prerequisite60d99b58 accepted: reviewed9bf32 source, normal/assert/timeout/TERM/KILL/cancel receipts and independent byte hashes/exactchild+runtime absence; shared runner124. Evidence ../process-prototype/, process-source-gate-review.md. Sole Expert01 bounded followup completed14:09:42, original extension14:18:05 retained, no more prototype launches needed. Production Engine process/API, optionalMSRV and nonMac remain open. Only explicit fixtures safe; historical baremain forbidden.
+
 Windows8f75da53 source/bootstrap gate closed; no new native execution. Unchanged external prerequisite is recorded once, no repeated audit. Process production and TCP writes/half-close remain open after current slices.
 
 ## Decisions and authorization
@@ -33,10 +34,10 @@ TCP write/half-close responsible fresh task at /Users/hoppworks/projects/rhai-tc
 - Docs bounded13:21:01–13:51:01 complete. No active resources.
 
 ## Evidence and resources
-Root own /Users/hoppworks/projects/rhai-all-tickets task/all-tickets atf9fe174b (pushed; exact latest remote readback next). Active owned process/TCP worktrees by brief; preserve foreign primary/planning and all unaccepted work. run_scoped.py via python3; private source/CARGO_HOME/CARGO_TARGET_DIR, export each result before cleanup. No broad process/deletion/config changes.
+Root own /Users/hoppworks/projects/rhai-all-tickets task/all-tickets; latest acceptance commits push/readback below. Active owned process/TCP worktrees by brief; preserve foreign primary/planning and all unaccepted work. run_scoped.py via python3; private source/CARGO_HOME/CARGO_TARGET_DIR, export each result before cleanup. No broad process/deletion/config changes.
 
 ## History references
 Complete prior state, accepted details, retired resources, failed checks, escalation and decision history: history-through-f9fe174b.md (preserved without duplication). Cause details: escalations/01-process-prototype-proof.answer.md; tcp-stream-reads-review.md; responsible task state/logs. Historical snapshots are history, this file is authoritative current state.
 
 ## Next action
-Review corrected process source and authorize only safe bounded native vertical proof before original stop. Review TCP affected unit proof/final source, merge accepted slice with lowercase identity, preserve proof, push/read back exact fork ref. Continue remaining local ticket acceptance; goal stays active.
+Finalize accepted native prototype integration/fork readback and retire exact clean owned checkout. Collect TCP writes design/RED, implement next independent approved slice; plan production Engine process requirement from accepted prototype without reopening its exhausted historical chain. Preserve nativeWindows prerequisite and original ticket scope. Goal active/incomplete.
