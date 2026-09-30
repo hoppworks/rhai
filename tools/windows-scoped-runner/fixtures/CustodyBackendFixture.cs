@@ -3,6 +3,9 @@
 using System;
 using System.IO;
 using System.Security.Principal;
+using System.Threading;
+using Microsoft.Win32.SafeHandles;
+using System.Runtime.InteropServices;
 
 internal static class CustodyBackendFixture
 {
@@ -64,6 +67,7 @@ internal static class CustodyBackendFixture
                 File.Delete(journalPath);
             }
             AllocationTransitions(fixture);
+            SourceStagingContracts(fixture);
         }
         finally
         {
@@ -201,5 +205,199 @@ internal static class CustodyBackendFixture
     {
         Console.WriteLine("RETAINED " + label + " runtime=" + runtimePath);
         Console.WriteLine("RETAINED " + label + " journal=" + journalPath);
+    }
+
+    // These executable source fixtures are authored before the staging
+    // implementation. They are deliberately not compiled or run in this
+    // source-only step; every allocated runtime and its journal is retained.
+    private static void SourceStagingContracts(string fixture)
+    {
+        Expect("executable syntax rejects DOS device names before source I/O",
+            RejectsExecutableBeforeIo(fixture, new[] { "NUL.txt", @"bin\..\runner.exe", @"C:runner.exe", @"bin\runner.exe:stream" }));
+
+        string successRoot = NewStageCase(fixture, "stage-success");
+        string successSource = Path.Combine(successRoot, "source");
+        Directory.CreateDirectory(Path.Combine(successSource, "bin"));
+        Directory.CreateDirectory(Path.Combine(successSource, "assets", "nested"));
+        File.WriteAllBytes(Path.Combine(successSource, "bin", "runner.exe"), new byte[] { 0x4d, 0x5a, 0x01, 0x02 });
+        File.WriteAllText(Path.Combine(successSource, "assets", "nested", "message.txt"), "independent nested readback");
+        string successRuntime, successJournal;
+        using (WindowsCustodyBackend.RuntimeAllocation allocation = BeginStageAllocation(successRoot, out successRuntime, out successJournal))
+        {
+            bool allocated = allocation.CreateRuntime() && allocation.IsIdentityRecorded;
+            bool staged = allocated && allocation.StageSourceTreeForFixture(successSource, @"bin\runner.exe", CancellationToken.None, null, null);
+            Expect("nested source tree copies and staged executable stays pinned", staged && allocation.IsStaged &&
+                allocation.StagedExecutableIdentity != null && allocation.StagedExecutableHandle != null &&
+                File.ReadAllText(Path.Combine(successRuntime, "assets", "nested", "message.txt")) == "independent nested readback" &&
+                File.ReadAllBytes(Path.Combine(successRuntime, "bin", "runner.exe")).Length == 4);
+        }
+        Expect("successful staging has a flushed completion receipt", HasStagedReceipt(successJournal));
+        RetainPair("successful source staging", successRuntime, successJournal);
+
+        string missingRoot = NewStageCase(fixture, "stage-missing-exe");
+        string missingSource = Path.Combine(missingRoot, "source");
+        Directory.CreateDirectory(missingSource);
+        File.WriteAllText(Path.Combine(missingSource, "readme.txt"), "tree has no executable");
+        ExpectRetainedStageFailure(missingRoot, missingSource, "bin\\runner.exe", "missing executable");
+
+        string directoryExeRoot = NewStageCase(fixture, "stage-directory-exe");
+        string directoryExeSource = Path.Combine(directoryExeRoot, "source");
+        Directory.CreateDirectory(Path.Combine(directoryExeSource, "bin", "runner.exe"));
+        ExpectRetainedStageFailure(directoryExeRoot, directoryExeSource, @"bin\runner.exe", "directory executable");
+
+        string mutationRoot = NewStageCase(fixture, "stage-source-mutation");
+        string mutationSource = PrepareSimpleStageTree(mutationRoot);
+        ExpectRetainedStageFailure(mutationRoot, mutationSource, @"bin\runner.exe", "source mutation",
+            delegate(string sourcePath) { File.WriteAllText(Path.Combine(sourcePath, "added-during-stage.txt"), "changed"); });
+
+        string sharingRoot = NewStageCase(fixture, "stage-sharing-refusal");
+        string sharingSource = PrepareSimpleStageTree(sharingRoot);
+        string lockedPath = Path.Combine(sharingSource, "bin", "runner.exe");
+        using (var exclusiveWriter = new FileStream(lockedPath, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
+            ExpectRetainedStageFailure(sharingRoot, sharingSource, @"bin\runner.exe", "source sharing refusal");
+
+        string sourceReparseRoot = NewStageCase(fixture, "stage-source-reparse");
+        string sourceReparse = PrepareSimpleStageTree(sourceReparseRoot);
+        CreateDirectoryLink(Path.Combine(sourceReparse, "linked"), Path.Combine(sourceReparse, "bin"));
+        ExpectRetainedStageFailure(sourceReparseRoot, sourceReparse, @"bin\runner.exe", "source reparse refusal");
+
+        string destinationCollisionRoot = NewStageCase(fixture, "stage-destination-collision");
+        string collisionSource = PrepareSimpleStageTree(destinationCollisionRoot);
+        string collisionRuntime, collisionJournal;
+        using (WindowsCustodyBackend.RuntimeAllocation allocation = BeginStageAllocation(destinationCollisionRoot, out collisionRuntime, out collisionJournal))
+        {
+            bool allocated = allocation.CreateRuntime();
+            File.WriteAllText(Path.Combine(collisionRuntime, "bin"), "foreign collision");
+            bool refused = allocated && !allocation.StageSourceTreeForFixture(collisionSource, @"bin\runner.exe", CancellationToken.None, null, null) && !allocation.IsStaged;
+            Expect("destination collision is not adopted", refused &&
+                File.ReadAllText(Path.Combine(collisionRuntime, "bin")) == "foreign collision");
+        }
+        Expect("destination collision journal has no staged receipt", !HasStagedReceipt(collisionJournal));
+        RetainPair("destination collision", collisionRuntime, collisionJournal);
+
+        string partialRoot = NewStageCase(fixture, "stage-partial-failure");
+        string partialSource = Path.Combine(partialRoot, "source");
+        Directory.CreateDirectory(Path.Combine(partialSource, "assets", "nested"));
+        Directory.CreateDirectory(Path.Combine(partialSource, "bin"));
+        File.WriteAllText(Path.Combine(partialSource, "assets", "nested", "first.txt"), "copied before injected failure");
+        File.WriteAllBytes(Path.Combine(partialSource, "bin", "runner.exe"), new byte[] { 0x4d, 0x5a });
+        string partialRuntime, partialJournal;
+        using (WindowsCustodyBackend.RuntimeAllocation allocation = BeginStageAllocation(partialRoot, out partialRuntime, out partialJournal))
+        {
+            bool allocated = allocation.CreateRuntime();
+            bool failed = allocated && !allocation.StageSourceTreeForFixture(partialSource, @"bin\runner.exe", CancellationToken.None, null,
+                @"bin\runner.exe") && !allocation.IsStaged;
+            Expect("mid-copy fixture fails after retaining an earlier copied entry", failed &&
+                File.Exists(Path.Combine(partialRuntime, "assets", "nested", "first.txt")));
+        }
+        Expect("partial staging journal has no staged receipt", !HasStagedReceipt(partialJournal));
+        RetainPair("partial staging failure", partialRuntime, partialJournal);
+
+        string inventoryRoot = NewStageCase(fixture, "stage-inventory-bound");
+        string inventorySource = PrepareSimpleStageTree(inventoryRoot);
+        for (int i = 0; i <= WindowsCustodyBackend.MaximumInventoryEntries; i++)
+            File.WriteAllText(Path.Combine(inventorySource, "entry-" + i.ToString("D5") + ".dat"), "bounded entry");
+        ExpectRetainedStageFailure(inventoryRoot, inventorySource, @"bin\runner.exe", "inventory bound");
+
+        string byteBoundRoot = NewStageCase(fixture, "stage-byte-bound");
+        string byteBoundSource = PrepareSimpleStageTree(byteBoundRoot);
+        for (int i = 0; i < 9; i++)
+            using (FileStream large = new FileStream(Path.Combine(byteBoundSource, "large-" + i.ToString("D2") + ".dat"), FileMode.CreateNew, FileAccess.Write, FileShare.None))
+                large.SetLength(WindowsCustodyBackend.MaximumSingleStagedFileBytes);
+        ExpectRetainedStageFailure(byteBoundRoot, byteBoundSource, @"bin\runner.exe", "total byte bound");
+
+        string stagedReparseRoot = NewStageCase(fixture, "stage-destination-reparse");
+        string stagedReparseSource = PrepareSimpleStageTree(stagedReparseRoot);
+        string stagedRuntime, stagedJournal;
+        using (WindowsCustodyBackend.RuntimeAllocation allocation = BeginStageAllocation(stagedReparseRoot, out stagedRuntime, out stagedJournal))
+        {
+            bool allocated = allocation.CreateRuntime();
+            CreateDirectoryLink(Path.Combine(stagedRuntime, "linked"), Path.Combine(stagedReparseSource, "bin"));
+            bool refused = allocated && !allocation.StageSourceTreeForFixture(stagedReparseSource, @"bin\runner.exe", CancellationToken.None, null, null) && !allocation.IsStaged;
+            Expect("staged reparse entry is rejected", refused);
+        }
+        Expect("staged reparse journal has no completion receipt", !HasStagedReceipt(stagedJournal));
+        RetainPair("staged reparse refusal", stagedRuntime, stagedJournal);
+    }
+
+    private static string NewStageCase(string fixture, string label)
+    {
+        string path = Path.Combine(fixture, label + "-" + Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(path);
+        return path;
+    }
+
+    private static string PrepareSimpleStageTree(string root)
+    {
+        string source = Path.Combine(root, "source");
+        Directory.CreateDirectory(Path.Combine(source, "bin"));
+        File.WriteAllBytes(Path.Combine(source, "bin", "runner.exe"), new byte[] { 0x4d, 0x5a, 0x01 });
+        return source;
+    }
+
+    private static WindowsCustodyBackend.RuntimeAllocation BeginStageAllocation(string root, out string runtime, out string journal)
+    {
+        WindowsCustodyBackend.RuntimeAllocation allocation = WindowsCustodyBackend.BeginAllocationForFixture(
+            WindowsCustodyBackend.PinDirectoryForFixture(root), Guid.NewGuid(), false);
+        runtime = allocation.RuntimePath;
+        journal = allocation.JournalPath;
+        return allocation;
+    }
+
+    private static void ExpectRetainedStageFailure(string root, string source, string executable, string label,
+        Action<string> beforeFinalRescan = null)
+    {
+        string runtime, journal;
+        using (WindowsCustodyBackend.RuntimeAllocation allocation = BeginStageAllocation(root, out runtime, out journal))
+        {
+            bool allocated = allocation.CreateRuntime();
+            bool failed = allocated && !allocation.StageSourceTreeForFixture(source, executable, CancellationToken.None, beforeFinalRescan, null) && !allocation.IsStaged;
+            Expect(label + " fails closed", failed);
+        }
+        Expect(label + " journal has no staged receipt", !HasStagedReceipt(journal));
+        RetainPair(label, runtime, journal);
+    }
+
+    private static bool RejectsExecutableBeforeIo(string fixture, string[] invalidExecutables)
+    {
+        string root = NewStageCase(fixture, "stage-invalid-executable");
+        string runtime, journal;
+        bool allRejectedBeforeIo = true;
+        using (WindowsCustodyBackend.RuntimeAllocation allocation = BeginStageAllocation(root, out runtime, out journal))
+        {
+            allRejectedBeforeIo = allocation.CreateRuntime() && allocation.IsIdentityRecorded;
+            for (int i = 0; i < invalidExecutables.Length; i++)
+            {
+                try
+                {
+                    allocation.StageSourceTreeForFixture(Path.Combine(root, "source-that-does-not-exist"),
+                        invalidExecutables[i], CancellationToken.None, null, null);
+                    allRejectedBeforeIo = false;
+                }
+                catch (ArgumentException) { }
+                catch { allRejectedBeforeIo = false; }
+            }
+            allRejectedBeforeIo = allRejectedBeforeIo && allocation.StageStatus == WindowsCustodyBackend.StagingState.NotStarted;
+        }
+        string[] records = WindowsCustodyBackend.ReadJournalForFixture(journal);
+        RetainPair("invalid executable syntax", runtime, journal);
+        return allRejectedBeforeIo && records.Length == 2 && !HasStagedReceipt(journal);
+    }
+
+    private static bool HasStagedReceipt(string journal)
+    {
+        string[] records = WindowsCustodyBackend.ReadJournalForFixture(journal);
+        for (int i = 0; i < records.Length; i++) if (records[i].StartsWith("STAGED|", StringComparison.Ordinal)) return true;
+        return false;
+    }
+
+    [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true, EntryPoint = "CreateSymbolicLinkW")]
+    private static extern bool CreateSymbolicLink(string link, string target, uint flags);
+
+    private static void CreateDirectoryLink(string link, string target)
+    {
+        if (!CreateSymbolicLink(link, target, 1 | 2))
+            throw new IOException("fixture could not create directory reparse point: " + link,
+                new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error()));
     }
 }

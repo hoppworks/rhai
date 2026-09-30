@@ -25,7 +25,7 @@ create payloads, inspect exact process/job handles, or prove transport survival.
 The fixture is deliberately unexecuted.
 
 The monitor currently accepts a valid first host round-trip and then fails
-closed. The new `WindowsCustodyBackend.cs` source slice pins the fixed local
+closed. The `WindowsCustodyBackend.cs` source slice pins the fixed local
 `C:\RhaiQuality\runs` root and each ancestor through non-reparse directory
 handles that omit delete sharing, and captures volume/file identity. Its
 bounded journal creates a unique external file with a protected current-user
@@ -33,10 +33,25 @@ and SYSTEM DACL, verifies that ACL through the opened handle, and flushes each
 bounded framed record. A source-only allocation owner now flushes an intent
 before exclusive `CreateDirectoryW`, supplies a protected user/SYSTEM DACL at
 creation, refuses an existing name, verifies the opened directory handle's
-DACL and file identity, and flushes identity before marking it recorded. This
-is not wired to the monitor; ACL behavior, collision behavior, and journal
-durability are unverified. An incomplete/torn journal record is detectable; no
-recovery or cleanup decision is made from a path alone.
+DACL and file identity, and flushes identity before marking it recorded. It
+also contains a source-only staging operation: it accepts only an
+identity-recorded allocation, bounds the tree to 2,048 entries, depth 32, 64
+MiB per file, and 512 MiB total, creates destination entries exclusively with
+protected user/SYSTEM DACLs, hashes each copied file, rescans the source and
+destination manifests, and writes a durable `STAGED` receipt only after those
+checks. Source file and directory pins stay held through the consistency scan
+and receipt. The staged executable and each parent directory are pinned on the
+allocation owner for its remaining lifetime. Staging is not wired to the
+monitor; ACL behavior, collision behavior, byte copying, and journal durability
+remain unverified. An incomplete/torn journal record is detectable; no recovery
+or cleanup decision is made from a path alone.
+
+The source rescan is a consistency check for an operational input tree, not an
+atomic or hostile-tree snapshot. It detects additions, removals, identity,
+metadata, and content changes observed between the copy manifest and final
+rescan. It does not rule out adversarial same-user mutation in the interval
+after that rescan and before the receipt. No hostile source-tree isolation or
+launch readiness is claimed.
 
 The create/resume states in the protocol fixture are modeled transitions only;
 the second challenge and actual suspended/resume operations are not wired to a
@@ -54,7 +69,11 @@ been compiled or run. It deliberately retains every allocation fixture runtime
 and its associated journal, including the uncertain post-create case, and
 prints each exact runtime/journal path pair. This slice has no handle-safe
 runtime disposition; the fixture does not present path-based checks followed
-by deletion as safe cleanup.
+by deletion as safe cleanup. Its source-tree staging fixtures cover successful
+nested copies, fail-closed source changes and sharing, source/destination
+reparse points, collisions, partial-copy retention, inventory and byte bounds,
+and receipt readback after handles close. They are also uncompiled and
+unexecuted; fixture dependencies and symlink privileges remain native gates.
 No compiler, runtime, Windows build command, guest command, or fixture process
 was invoked for this change.
 
@@ -65,8 +84,8 @@ entrypoint. It has not been run.
 
 ## Remaining custody and proof boundaries
 
-Handle-based source staging and Windows executable-path validation, monitor
-integration, local evidence finalization/export, exact job ownership and
+Windows executable-path validation, monitor integration, local evidence
+finalization/export, exact job ownership and
 cleanup, the real create-time payload integration, pre-resume host challenge
 integration, termination and finalization budgets, and verified runtime
 removal remain unimplemented. The

@@ -6,13 +6,19 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Security.AccessControl;
 using System.Security.Principal;
+using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using Microsoft.Win32.SafeHandles;
 
 internal static class WindowsCustodyBackend
 {
     internal const string AuthorizedRoot = @"C:\RhaiQuality\runs";
     internal const int MaximumRecordBytes = 4096;
+    internal const int MaximumInventoryEntries = 2048;
+    internal const long MaximumTotalStagedBytes = 536870912;
+    internal const long MaximumSingleStagedFileBytes = 67108864;
+    internal const int MaximumSourceDepth = 32;
     private const int MaximumRecords = 64;
     private const int MaximumJournalBytes = MaximumRecords * (MaximumRecordBytes + 15);
     private const int MaximumPathLength = 248;
@@ -22,6 +28,8 @@ internal static class WindowsCustodyBackend
     private const uint GENERIC_WRITE = 0x40000000;
     private const uint FILE_SHARE_READ = 0x00000001;
     private const uint FILE_SHARE_WRITE = 0x00000002;
+    private const uint FILE_SHARE_DELETE = 0x00000004;
+    private const uint GENERIC_READ = 0x80000000;
     private const uint OPEN_EXISTING = 3;
     private const uint CREATE_NEW = 1;
     private const uint FILE_FLAG_WRITE_THROUGH = 0x80000000;
@@ -29,14 +37,23 @@ internal static class WindowsCustodyBackend
     private const uint FILE_FLAG_OPEN_REPARSE_POINT = 0x00200000;
     private const uint FILE_ATTRIBUTE_DIRECTORY = 0x10;
     private const uint FILE_ATTRIBUTE_REPARSE_POINT = 0x400;
+    private const uint FILE_FLAG_SEQUENTIAL_SCAN = 0x08000000;
+    private const uint FILE_FLAG_OVERLAPPED = 0x40000000;
+    private const uint FILE_ATTRIBUTE_NORMAL = 0x00000080;
     private const int FileAttributeTagInfoClass = 9;
     private const int FileIdInfoClass = 18;
     private const int SE_FILE_OBJECT = 1;
     private const uint DACL_SECURITY_INFORMATION = 0x00000004;
+    private const uint FILE_BEGIN = 0;
+    private const int FileStandardInfoClass = 1;
+    private const int FileBasicInfoClass = 0;
+    private const int TransferBufferBytes = 65536;
 
     [StructLayout(LayoutKind.Sequential)] private struct FileAttributeTagInfo { internal uint Attributes, ReparseTag; }
     [StructLayout(LayoutKind.Sequential)] private struct FileIdInfo { internal ulong VolumeSerialNumber, FileIdLow, FileIdHigh; }
     [StructLayout(LayoutKind.Sequential)] private struct SecurityAttributes { internal int Length; internal IntPtr SecurityDescriptor; internal int InheritHandle; }
+    [StructLayout(LayoutKind.Sequential)] private struct FileStandardInfo { internal long AllocationSize, EndOfFile; internal uint NumberOfLinks; [MarshalAs(UnmanagedType.U1)] internal bool DeletePending; [MarshalAs(UnmanagedType.U1)] internal bool Directory; }
+    [StructLayout(LayoutKind.Sequential)] private struct FileBasicInfo { internal long CreationTime, LastAccessTime, LastWriteTime, ChangeTime; internal uint Attributes; }
 
     [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
     private static extern SafeFileHandle CreateFileW(string name, uint access, uint share, ref SecurityAttributes security,
@@ -46,6 +63,14 @@ internal static class WindowsCustodyBackend
     [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
     private static extern SafeFileHandle CreateFileW(string name, uint access, uint share, IntPtr security,
         uint creation, uint flags, IntPtr template);
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern bool GetFileInformationByHandleEx(SafeFileHandle file, int infoClass, out FileStandardInfo info, uint size);
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern bool GetFileInformationByHandleEx(SafeFileHandle file, int infoClass, out FileBasicInfo info, uint size);
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern bool ReadFile(SafeFileHandle file, IntPtr buffer, uint bytesToRead, out uint bytesRead, IntPtr overlapped);
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern bool SetFilePointerEx(SafeFileHandle file, long distance, out long newPosition, uint moveMethod);
     [DllImport("kernel32.dll", SetLastError = true)]
     private static extern bool GetFileInformationByHandleEx(SafeFileHandle file, int infoClass, out FileAttributeTagInfo info, uint size);
     [DllImport("kernel32.dll", SetLastError = true)]
@@ -179,11 +204,14 @@ internal static class WindowsCustodyBackend
             throw new IOException("custody directory must be a bounded local DOS path");
         if (path.Length < 3 || !IsAsciiLetter(path[0]) || path[1] != ':' || path[2] != '\\')
             throw new IOException("custody directory must use an absolute drive-rooted path");
-        string[] rawComponents = path.Substring(3).Split(new[] { '\\' }, StringSplitOptions.RemoveEmptyEntries);
+        string rawTail = path.Substring(3);
+        if (rawTail.EndsWith("\\", StringComparison.Ordinal)) rawTail = rawTail.Substring(0, rawTail.Length - 1);
+        string[] rawComponents = rawTail.Length == 0 ? new string[0] : rawTail.Split(new[] { '\\' }, StringSplitOptions.None);
         for (int i = 0; i < rawComponents.Length; i++)
-            if (rawComponents[i] == "." || rawComponents[i] == ".." || rawComponents[i].IndexOfAny(new[] { ':', '\0' }) >= 0 ||
-                rawComponents[i].EndsWith(".", StringComparison.Ordinal) || rawComponents[i].EndsWith(" ", StringComparison.Ordinal))
-                throw new IOException("custody path contains an unsupported component");
+        {
+            try { ValidatePathComponent(rawComponents[i], "custody path"); }
+            catch (ArgumentException error) { throw new IOException("custody path contains an unsupported component", error); }
+        }
         string full = System.IO.Path.GetFullPath(path);
         if (full.Length > MaximumPathLength || full.Length < 3 || full[1] != ':' || full[2] != '\\')
             throw new IOException("custody directory must be a bounded absolute drive path");
@@ -250,6 +278,29 @@ internal static class WindowsCustodyBackend
     }
 
     internal enum AllocationState { IntentFlushed, Created, Verified, IdentityRecorded, FailedBeforeCreation, FailedRetained }
+    internal enum StagingState { NotStarted, Copying, Verifying, Staged, FailedRetained }
+
+    internal sealed class StagedEntry
+    {
+        internal readonly string RelativePath;
+        internal readonly bool IsDirectory;
+        internal readonly FileIdentity Identity;
+        internal readonly long Length, LastWriteTime;
+        internal readonly uint Attributes;
+        internal readonly string ContentDigest;
+        internal StagedEntry(string path, bool directory, FileIdentity identity, long length, long lastWrite, uint attributes, string digest)
+        {
+            RelativePath = path; IsDirectory = directory; Identity = identity; Length = length;
+            LastWriteTime = lastWrite; Attributes = attributes; ContentDigest = digest;
+        }
+        internal bool SameAs(StagedEntry other)
+        {
+            return other != null && String.Equals(RelativePath, other.RelativePath, StringComparison.OrdinalIgnoreCase) &&
+                IsDirectory == other.IsDirectory && Identity.SameAs(other.Identity) && Length == other.Length &&
+                LastWriteTime == other.LastWriteTime && Attributes == other.Attributes &&
+                String.Equals(ContentDigest, other.ContentDigest, StringComparison.Ordinal);
+        }
+    }
 
     // Owns the pinned parent, journal, and (after creation) runtime handle for
     // the complete allocation attempt. Disposal closes handles only; it never
@@ -264,6 +315,10 @@ internal static class WindowsCustodyBackend
         private readonly bool injectIdentityFailure;
 #endif
         private SafeFileHandle runtimeHandle;
+        private SafeFileHandle stagedExecutableHandle;
+        private readonly List<SafeFileHandle> stagedExecutableParentPins = new List<SafeFileHandle>();
+        private FileIdentity stagedExecutableIdentity;
+        private string stagedExecutableRelativePath;
         private bool disposed;
         internal readonly string RuntimePath;
         internal readonly string JournalPath;
@@ -274,6 +329,11 @@ internal static class WindowsCustodyBackend
         internal string Failure { get; private set; }
         internal bool IsAclVerified { get; private set; }
         internal bool IsIdentityRecorded { get { return State == AllocationState.IdentityRecorded; } }
+        internal StagingState StageStatus { get; private set; }
+        internal bool IsStaged { get { return StageStatus == StagingState.Staged; } }
+        internal SafeFileHandle StagedExecutableHandle { get { return stagedExecutableHandle; } }
+        internal FileIdentity StagedExecutableIdentity { get { return stagedExecutableIdentity; } }
+        internal string StagedExecutableRelativePath { get { return stagedExecutableRelativePath; } }
 
         internal RuntimeAllocation(PinnedDirectory ownedParent, Guid id
 #if SCOPED_RUNNER_TESTING
@@ -356,6 +416,138 @@ internal static class WindowsCustodyBackend
             finally { if (descriptor != IntPtr.Zero) LocalFree(descriptor); }
         }
 
+        internal bool StageSourceTree(string sourceRoot, string executableRelativePath, CancellationToken cancellationToken)
+        {
+            // Syntax is a pure string check and intentionally precedes all I/O.
+            string[] executableComponents = ParseExecutableRelativePath(executableRelativePath);
+            if (disposed || State != AllocationState.IdentityRecorded || StageStatus != StagingState.NotStarted)
+                throw new InvalidOperationException("source staging requires one live identity-recorded allocation");
+            StageStatus = StagingState.Copying;
+            var initial = new List<StagedEntry>();
+            var identities = new HashSet<string>(StringComparer.Ordinal);
+            var sourceFilePins = new List<SafeFileHandle>();
+            var sourceDirectoryPins = new List<PinnedDirectory>();
+            PinnedDirectory sourceAncestors = null;
+            PinnedDirectory sourceRootPin = null;
+            long totalBytes = 0;
+            string phase = "source pin";
+            try
+            {
+                sourceAncestors = PinDirectory(sourceRoot);
+                sourceRootPin = PinSingleDirectory(sourceAncestors.Path, OpenDirectory(sourceAncestors.Path));
+                {
+                    PinnedDirectory source = sourceRootPin;
+                    if (!source.Identity.SameAs(sourceAncestors.Identity))
+                        throw new IOException("source root identity changed between ancestor and mutation-denying pins");
+                    EnsureSourceDoesNotOverlapAllocation(source, parent, runtimeHandle, RuntimePath);
+                    phase = "tree copy";
+                    AddUniqueIdentity(identities, source.Identity, "source root");
+                    StagedEntry sourceRootEntry = ReadDirectoryEntry(source, String.Empty);
+                    initial.Add(sourceRootEntry);
+#if SCOPED_RUNNER_TESTING
+                    string failAt = fixtureFailAtRelativePath;
+#else
+                    string failAt = null;
+#endif
+                    CopyDirectoryTree(source, String.Empty, RuntimePath, 0, sourceRootEntry,
+                        initial, identities, ref totalBytes, cancellationToken, sourceFilePins, sourceDirectoryPins
+#if SCOPED_RUNNER_TESTING
+                        , failAt
+#endif
+                        );
+                    cancellationToken.ThrowIfCancellationRequested();
+#if SCOPED_RUNNER_TESTING
+                    Action<string> hook = fixtureMutationHook;
+                    if (hook != null) hook(source.Path);
+#endif
+                    StageStatus = StagingState.Verifying;
+                    phase = "source consistency scan";
+                    var final = new List<StagedEntry>();
+                    var finalIdentities = new HashSet<string>(StringComparer.Ordinal);
+                    long finalBytes = 0;
+                    AddUniqueIdentity(finalIdentities, source.Identity, "source root");
+                    final.Add(ReadDirectoryEntry(source, String.Empty));
+                    ScanSourceTree(source, String.Empty, 0, final, finalIdentities, ref finalBytes, cancellationToken);
+                    if (finalBytes != totalBytes) throw new IOException("source total byte count changed during the consistency scan");
+                    CompareManifests(initial, final);
+                    phase = "staged tree verification";
+                    Dictionary<string, FileIdentity> destinationIdentities;
+                    ValidateDestinationTree(RuntimePath, runtimeHandle, initial, cancellationToken, out destinationIdentities);
+                    phase = "staged executable pin";
+                    string requestedExecutable = String.Join("\\", executableComponents);
+                    StagedEntry executableEntry = FindExecutableEntry(initial, requestedExecutable);
+                    FileIdentity destinationExecutableIdentity;
+                    if (!destinationIdentities.TryGetValue(requestedExecutable, out destinationExecutableIdentity))
+                        throw new IOException("staged executable disappeared from the destination readback");
+                    stagedExecutableHandle = PinStagedExecutable(RuntimePath, executableComponents, destinationExecutableIdentity,
+                        out stagedExecutableIdentity, stagedExecutableParentPins);
+                    stagedExecutableRelativePath = String.Join("\\", executableComponents);
+                    phase = "staged receipt";
+                    string digest = ManifestDigest(initial);
+                    string receipt = "STAGED|" + invocationId.ToString("N") + "|" + initial.Count.ToString() + "|" +
+                        totalBytes.ToString() + "|" + digest + "|" + HashText(stagedExecutableRelativePath) + "|" + FormatIdentity(stagedExecutableIdentity);
+                    journal.Append(receipt);
+                    StageStatus = StagingState.Staged;
+                    return true;
+                }
+            }
+            catch (Exception error)
+            {
+                StageStatus = StagingState.FailedRetained;
+                string detail = AllocationDiagnostic("staging " + phase + " failed: " + error.Message, RuntimePath, JournalPath) +
+                    "; source=" + BoundPath(sourceRoot);
+                Failure = detail;
+                try
+                {
+                    string reason = error.GetType().Name + ":" + error.Message;
+                    reason = ToAsciiBounded(reason, 256);
+                    journal.TryAppend("STAGE_FAILED|" + invocationId.ToString("N") + "|" + phase.Replace(' ', '_') + "|" + reason);
+                }
+                catch { /* preserve the original uncertain staging result */ }
+                try { SafeCloseStagedExecutable(); } catch { }
+                return false;
+            }
+            finally
+            {
+                // Keep mutation-denying source handles through the final
+                // manifest comparison and durable STAGED receipt, then close
+                // every owned handle independently in reverse traversal order.
+                for (int i = sourceFilePins.Count - 1; i >= 0; i--) try { sourceFilePins[i].Dispose(); } catch { }
+                for (int i = sourceDirectoryPins.Count - 1; i >= 0; i--) try { sourceDirectoryPins[i].DisposeOwned(); } catch { }
+                if (sourceRootPin != null) try { sourceRootPin.DisposeOwned(); } catch { }
+                if (sourceAncestors != null) try { sourceAncestors.DisposeOwned(); } catch { }
+            }
+        }
+
+#if SCOPED_RUNNER_TESTING
+        private Action<string> fixtureMutationHook;
+        internal bool StageSourceTreeForFixture(string sourceRoot, string executableRelativePath, CancellationToken cancellationToken,
+            Action<string> beforeFinalRescan, string failAtRelativePath)
+        {
+            fixtureMutationHook = beforeFinalRescan;
+            fixtureFailAtRelativePath = failAtRelativePath;
+            try { return StageSourceTree(sourceRoot, executableRelativePath, cancellationToken); }
+            finally { fixtureMutationHook = null; fixtureFailAtRelativePath = null; }
+        }
+        private string fixtureFailAtRelativePath;
+#endif
+
+        private void SafeCloseStagedExecutable()
+        {
+            SafeFileHandle executable = stagedExecutableHandle;
+            stagedExecutableHandle = null;
+            stagedExecutableIdentity = null;
+            Exception failure = null;
+            if (executable != null) try { executable.Dispose(); } catch (Exception error) { failure = error; }
+            for (int i = stagedExecutableParentPins.Count - 1; i >= 0; i--)
+            {
+                try { stagedExecutableParentPins[i].Dispose(); }
+                catch (Exception error) { if (failure == null) failure = error; }
+            }
+            stagedExecutableParentPins.Clear();
+            if (failure != null) throw failure;
+        }
+
         public void Dispose()
         {
             if (disposed) return;
@@ -371,7 +563,8 @@ internal static class WindowsCustodyBackend
                 Failure = AllocationDiagnostic("allocation owner disposed before identity receipt; runtime retained", RuntimePath, JournalPath);
             }
             Exception failure = null;
-            try { if (runtimeHandle != null) runtimeHandle.Dispose(); } catch (Exception e) { failure = e; }
+            try { SafeCloseStagedExecutable(); } catch (Exception e) { failure = e; }
+            try { if (runtimeHandle != null) runtimeHandle.Dispose(); } catch (Exception e) { if (failure == null) failure = e; }
             try { journal.Dispose(); } catch (Exception e) { if (failure == null) failure = e; }
             try { parent.DisposeOwned(); } catch (Exception e) { if (failure == null) failure = e; }
             if (failure != null) throw new IOException(AllocationDiagnostic("one or more allocation handles failed to close; runtime retained", RuntimePath, JournalPath), failure);
@@ -493,6 +686,619 @@ internal static class WindowsCustodyBackend
             if (!system || !currentUser) throw new IOException(objectName + " DACL is missing a required principal");
         }
         finally { LocalFree(descriptor); }
+    }
+
+    private static SafeFileHandle OpenSourceFile(string path)
+    {
+        SafeFileHandle handle = CreateFileW(path, GENERIC_READ | READ_CONTROL | FILE_READ_ATTRIBUTES,
+            FILE_SHARE_READ, IntPtr.Zero, OPEN_EXISTING, FILE_FLAG_OPEN_REPARSE_POINT | FILE_FLAG_SEQUENTIAL_SCAN, IntPtr.Zero);
+        if (handle == null || handle.IsInvalid) throw new IOException("CreateFileW(open source file) failed: " + path,
+            new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error()));
+        return handle;
+    }
+
+    private static PinnedDirectory PinSingleDirectory(string path, SafeFileHandle handle)
+    {
+        try { return new PinnedDirectory(path, new List<SafeFileHandle> { handle }); }
+        catch { try { handle.Dispose(); } catch { } throw; }
+    }
+
+    private static StagedEntry ReadDirectoryEntry(PinnedDirectory directory, string relativePath)
+    {
+        FileAttributeTagInfo tag;
+        Check(GetFileInformationByHandleEx(directory.Handle, FileAttributeTagInfoClass, out tag,
+            (uint)Marshal.SizeOf(typeof(FileAttributeTagInfo))), "FileAttributeTagInfo(source directory)");
+        FileBasicInfo basic;
+        Check(GetFileInformationByHandleEx(directory.Handle, FileBasicInfoClass, out basic,
+            (uint)Marshal.SizeOf(typeof(FileBasicInfo))), "FileBasicInfo(source directory)");
+        if ((tag.Attributes & FILE_ATTRIBUTE_REPARSE_POINT) != 0 || (tag.Attributes & FILE_ATTRIBUTE_DIRECTORY) == 0)
+            throw new IOException("source component is not a plain directory: " + directory.Path);
+        return new StagedEntry(relativePath, true, directory.Identity, 0, basic.LastWriteTime, tag.Attributes, String.Empty);
+    }
+
+    private static void CopyDirectoryTree(PinnedDirectory sourceDirectory, string relativeDirectory, string destinationDirectory,
+        int depth, StagedEntry expectedDirectory, List<StagedEntry> manifest, HashSet<string> identities,
+        ref long totalBytes, CancellationToken cancellationToken, List<SafeFileHandle> sourceFilePins,
+        List<PinnedDirectory> sourceDirectoryPins
+#if SCOPED_RUNNER_TESTING
+        , string failAtRelativePath
+#endif
+        )
+    {
+        if (depth > MaximumSourceDepth) throw new IOException("source directory depth exceeds the fixed bound");
+        StagedEntry actualDirectory = ReadDirectoryEntry(sourceDirectory, relativeDirectory);
+        if (!actualDirectory.SameAs(expectedDirectory)) throw new IOException("source directory identity or metadata changed before traversal");
+        foreach (string sourceChildPath in EnumerateBoundedEntries(sourceDirectory.Path, manifest.Count))
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            if (manifest.Count >= MaximumInventoryEntries) throw new IOException("source inventory exceeds the fixed entry bound");
+            string name = Path.GetFileName(sourceChildPath);
+            ValidateSourceComponent(name);
+            string relative = relativeDirectory.Length == 0 ? name : relativeDirectory + "\\" + name;
+            if (relative.Length > MaximumPathLength) throw new IOException("source relative path exceeds the fixed bound: " + relative);
+            string destinationPath = Path.Combine(destinationDirectory, name);
+            SafeFileHandle entry = OpenEntryForInspection(sourceChildPath);
+            bool retainEntry = false;
+            try
+            {
+                FileAttributeTagInfo tag;
+                Check(GetFileInformationByHandleEx(entry, FileAttributeTagInfoClass, out tag,
+                    (uint)Marshal.SizeOf(typeof(FileAttributeTagInfo))), "FileAttributeTagInfo(source entry)");
+                if ((tag.Attributes & FILE_ATTRIBUTE_REPARSE_POINT) != 0)
+                    throw new IOException("source reparse point is refused: " + sourceChildPath);
+                FileIdentity identity = ReadIdentity(entry);
+                AddUniqueIdentity(identities, identity, "source entry " + relative);
+                if ((tag.Attributes & FILE_ATTRIBUTE_DIRECTORY) != 0)
+                {
+                    var childPin = PinSingleDirectory(sourceChildPath, OpenDirectory(sourceChildPath));
+                    try { sourceDirectoryPins.Add(childPin); }
+                    catch { childPin.DisposeOwned(); throw; }
+                    bool destinationCreated = false;
+                    try
+                    {
+                        StagedEntry childEntry = ReadDirectoryEntry(childPin, relative);
+                        if (!childEntry.Identity.SameAs(identity)) throw new IOException("source directory identity changed while opening: " + sourceChildPath);
+                        manifest.Add(childEntry);
+                        if (manifest.Count > MaximumInventoryEntries) throw new IOException("source inventory exceeds the fixed entry bound");
+                        CreateDestinationDirectory(destinationPath);
+                        destinationCreated = true;
+                        using (PinnedDirectory destinationPin = PinSingleDirectory(destinationPath, OpenDirectory(destinationPath)))
+                        {
+                            SecurityIdentifier user;
+                            using (WindowsIdentity current = WindowsIdentity.GetCurrent()) user = current == null ? null : current.User;
+                            if (user == null) throw new IOException("current user SID unavailable while verifying staged directory");
+                            VerifyProtectedDacl(destinationPin.Handle, user, AceFlags.ContainerInherit | AceFlags.ObjectInherit, "staged directory");
+                            CopyDirectoryTree(childPin, relative, destinationPin.Path, depth + 1, childEntry,
+                                manifest, identities, ref totalBytes, cancellationToken
+                                , sourceFilePins, sourceDirectoryPins
+#if SCOPED_RUNNER_TESTING
+                                , failAtRelativePath
+#endif
+                                );
+                        }
+                    }
+                    catch
+                    {
+                        // A newly-created path stays in the retained runtime; no path cleanup is attempted.
+                        if (!destinationCreated) { }
+                        throw;
+                    }
+                    finally { /* source pin remains owned through receipt */ }
+                }
+                else
+                {
+#if SCOPED_RUNNER_TESTING
+                    if (String.Equals(failAtRelativePath, relative, StringComparison.OrdinalIgnoreCase))
+                        throw new IOException("fixture injected failure after a partial source-tree copy");
+#endif
+                    StagedEntry copied = CopySourceFile(entry, identity, sourceChildPath, destinationPath, relative,
+                        tag.Attributes, ref totalBytes, cancellationToken);
+                    sourceFilePins.Add(entry);
+                    retainEntry = true;
+                    manifest.Add(copied);
+                    if (manifest.Count > MaximumInventoryEntries) throw new IOException("source inventory exceeds the fixed entry bound");
+                }
+            }
+            finally { if (!retainEntry) entry.Dispose(); }
+        }
+    }
+
+    private static void ScanSourceTree(PinnedDirectory sourceDirectory, string relativeDirectory, int depth,
+        List<StagedEntry> manifest, HashSet<string> identities, ref long totalBytes, CancellationToken cancellationToken)
+    {
+        if (depth > MaximumSourceDepth) throw new IOException("source directory depth exceeds the fixed bound during verification");
+        foreach (string childPath in EnumerateBoundedEntries(sourceDirectory.Path, manifest.Count))
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            if (manifest.Count >= MaximumInventoryEntries) throw new IOException("source inventory exceeds the fixed entry bound during verification");
+            string name = Path.GetFileName(childPath);
+            ValidateSourceComponent(name);
+            string relative = relativeDirectory.Length == 0 ? name : relativeDirectory + "\\" + name;
+            using (SafeFileHandle entry = OpenEntryForInspection(childPath))
+            {
+                FileAttributeTagInfo tag;
+                Check(GetFileInformationByHandleEx(entry, FileAttributeTagInfoClass, out tag,
+                    (uint)Marshal.SizeOf(typeof(FileAttributeTagInfo))), "FileAttributeTagInfo(source verification)");
+                if ((tag.Attributes & FILE_ATTRIBUTE_REPARSE_POINT) != 0)
+                    throw new IOException("source reparse point appeared during verification: " + childPath);
+                FileIdentity identity = ReadIdentity(entry);
+                AddUniqueIdentity(identities, identity, "source verification entry " + relative);
+                if ((tag.Attributes & FILE_ATTRIBUTE_DIRECTORY) != 0)
+                {
+                    var childPin = PinSingleDirectory(childPath, OpenDirectory(childPath));
+                    try
+                    {
+                        StagedEntry dir = ReadDirectoryEntry(childPin, relative);
+                        if (!dir.Identity.SameAs(identity)) throw new IOException("source directory identity changed during verification: " + childPath);
+                        manifest.Add(dir);
+                        ScanSourceTree(childPin, relative, depth + 1, manifest, identities, ref totalBytes, cancellationToken);
+                    }
+                    finally { childPin.DisposeOwned(); }
+                }
+                else
+                {
+                    StagedEntry file = ScanSourceFile(entry, identity, childPath, relative, tag.Attributes, ref totalBytes, cancellationToken);
+                    manifest.Add(file);
+                }
+            }
+        }
+    }
+
+    private static StagedEntry CopySourceFile(SafeFileHandle source, FileIdentity identity, string sourcePath,
+        string destinationPath, string relativePath, uint attributes, ref long totalBytes, CancellationToken cancellationToken)
+    {
+        FileStandardInfo before;
+        Check(GetFileInformationByHandleEx(source, FileStandardInfoClass, out before,
+            (uint)Marshal.SizeOf(typeof(FileStandardInfo))), "FileStandardInfo(source file)");
+        FileBasicInfo basicBefore;
+        Check(GetFileInformationByHandleEx(source, FileBasicInfoClass, out basicBefore,
+            (uint)Marshal.SizeOf(typeof(FileBasicInfo))), "FileBasicInfo(source file)");
+        if (before.Directory || before.DeletePending || before.NumberOfLinks != 1 || before.EndOfFile < 0 || before.EndOfFile > MaximumSingleStagedFileBytes)
+            throw new IOException("source file size or type is outside the fixed bound: " + sourcePath);
+        if (before.EndOfFile > MaximumTotalStagedBytes - totalBytes)
+            throw new IOException("source tree exceeds the fixed total byte bound");
+        SafeFileHandle destination = CreateDestinationFile(destinationPath);
+        try
+        {
+            SecurityIdentifier user;
+            using (WindowsIdentity current = WindowsIdentity.GetCurrent()) user = current == null ? null : current.User;
+            if (user == null) throw new IOException("current user SID unavailable while verifying staged file");
+            VerifyProtectedDacl(destination, user, AceFlags.None, "staged file");
+            string copiedDigest = TransferAndHash(source, destination, before.EndOfFile, true, cancellationToken);
+            if (!FlushFileBuffers(destination)) throw new IOException("FlushFileBuffers(staged file) failed", new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error()));
+            string sourceDigest = TransferAndHash(source, null, before.EndOfFile, false, cancellationToken);
+            if (!String.Equals(copiedDigest, sourceDigest, StringComparison.Ordinal))
+                throw new IOException("source content changed while the staged copy was being made: " + sourcePath);
+            FileStandardInfo after;
+            Check(GetFileInformationByHandleEx(source, FileStandardInfoClass, out after,
+                (uint)Marshal.SizeOf(typeof(FileStandardInfo))), "FileStandardInfo(source after copy)");
+            FileBasicInfo basicAfter;
+            Check(GetFileInformationByHandleEx(source, FileBasicInfoClass, out basicAfter,
+                (uint)Marshal.SizeOf(typeof(FileBasicInfo))), "FileBasicInfo(source after copy)");
+            if (after.NumberOfLinks != 1 || after.EndOfFile != before.EndOfFile || basicAfter.LastWriteTime != basicBefore.LastWriteTime ||
+                (basicAfter.Attributes & FILE_ATTRIBUTE_REPARSE_POINT) != 0 || !ReadIdentity(source).SameAs(identity))
+                throw new IOException("source metadata or identity changed while staging: " + sourcePath);
+            FileStandardInfo destinationInfo;
+            Check(GetFileInformationByHandleEx(destination, FileStandardInfoClass, out destinationInfo,
+                (uint)Marshal.SizeOf(typeof(FileStandardInfo))), "FileStandardInfo(staged file)");
+            if (destinationInfo.Directory || destinationInfo.EndOfFile != before.EndOfFile || destinationInfo.DeletePending)
+                throw new IOException("staged file size or type differs from its source: " + destinationPath);
+            string destinationDigest = TransferAndHash(destination, null, destinationInfo.EndOfFile, false, cancellationToken);
+            if (!String.Equals(copiedDigest, destinationDigest, StringComparison.Ordinal))
+                throw new IOException("independent destination handle readback did not match the source: " + destinationPath);
+            totalBytes = checked(totalBytes + before.EndOfFile);
+            return new StagedEntry(relativePath, false, identity, before.EndOfFile, basicBefore.LastWriteTime, attributes, copiedDigest);
+        }
+        finally { destination.Dispose(); }
+    }
+
+    private static StagedEntry ScanSourceFile(SafeFileHandle source, FileIdentity identity, string path,
+        string relativePath, uint attributes, ref long totalBytes, CancellationToken cancellationToken)
+    {
+        FileStandardInfo standard;
+        Check(GetFileInformationByHandleEx(source, FileStandardInfoClass, out standard,
+            (uint)Marshal.SizeOf(typeof(FileStandardInfo))), "FileStandardInfo(source verification)");
+        FileBasicInfo basic;
+        Check(GetFileInformationByHandleEx(source, FileBasicInfoClass, out basic,
+            (uint)Marshal.SizeOf(typeof(FileBasicInfo))), "FileBasicInfo(source verification)");
+        if (standard.Directory || standard.DeletePending || standard.NumberOfLinks != 1 || standard.EndOfFile < 0 || standard.EndOfFile > MaximumSingleStagedFileBytes ||
+            standard.EndOfFile > MaximumTotalStagedBytes - totalBytes)
+            throw new IOException("source file violates the fixed staging bounds during verification: " + path);
+        string digest = TransferAndHash(source, null, standard.EndOfFile, false, cancellationToken);
+        FileBasicInfo after;
+        Check(GetFileInformationByHandleEx(source, FileBasicInfoClass, out after,
+            (uint)Marshal.SizeOf(typeof(FileBasicInfo))), "FileBasicInfo(source verification after read)");
+        if (after.LastWriteTime != basic.LastWriteTime || !ReadIdentity(source).SameAs(identity))
+            throw new IOException("source metadata or identity changed during verification: " + path);
+        totalBytes = checked(totalBytes + standard.EndOfFile);
+        return new StagedEntry(relativePath, false, identity, standard.EndOfFile, basic.LastWriteTime, attributes, digest);
+    }
+
+    private static string TransferAndHash(SafeFileHandle source, SafeFileHandle destination, long expectedLength,
+        bool copy, CancellationToken cancellationToken)
+    {
+        long position;
+        Check(SetFilePointerEx(source, 0, out position, FILE_BEGIN), "SetFilePointerEx(source)");
+        byte[] managed = new byte[TransferBufferBytes];
+        IntPtr buffer = Marshal.AllocHGlobal(TransferBufferBytes);
+        try
+        {
+            using (SHA256 hash = SHA256.Create())
+            {
+                long total = 0;
+                while (total < expectedLength)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    uint request = (uint)Math.Min(TransferBufferBytes, expectedLength - total);
+                    uint read;
+                    if (!ReadFile(source, buffer, request, out read, IntPtr.Zero))
+                        throw new IOException("ReadFile(source staging) failed", new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error()));
+                    if (read == 0 || read > request) throw new IOException("ReadFile(source staging) ended before the recorded file length");
+                    Marshal.Copy(buffer, managed, 0, (int)read);
+                    hash.TransformBlock(managed, 0, (int)read, managed, 0);
+                    if (copy) WriteAllHandle(destination, buffer, read);
+                    total = checked(total + read);
+                }
+                if (total != expectedLength) throw new IOException("staging transfer length changed");
+                hash.TransformFinalBlock(new byte[0], 0, 0);
+                return Hex(hash.Hash);
+            }
+        }
+        finally { Marshal.FreeHGlobal(buffer); }
+    }
+
+    private static void WriteAllHandle(SafeFileHandle handle, IntPtr buffer, uint length)
+    {
+        uint offset = 0;
+        while (offset < length)
+        {
+            uint written;
+            if (!WriteFile(handle, IntPtr.Add(buffer, (int)offset), length - offset, out written, IntPtr.Zero))
+                throw new IOException("WriteFile(staged content) failed", new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error()));
+            if (written == 0 || written > length - offset) throw new IOException("WriteFile(staged content) made invalid progress");
+            offset += written;
+        }
+    }
+
+    private static SafeFileHandle OpenEntryForInspection(string path)
+    {
+        SafeFileHandle handle = CreateFileW(path, GENERIC_READ | READ_CONTROL | FILE_READ_ATTRIBUTES,
+            FILE_SHARE_READ, IntPtr.Zero, OPEN_EXISTING,
+            FILE_FLAG_BACKUP_SEMANTICS | FILE_FLAG_OPEN_REPARSE_POINT | FILE_FLAG_SEQUENTIAL_SCAN, IntPtr.Zero);
+        if (handle == null || handle.IsInvalid) throw new IOException("CreateFileW(open source entry) failed: " + path,
+            new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error()));
+        return handle;
+    }
+
+    private static void CreateDestinationDirectory(string path)
+    {
+        SecurityIdentifier user;
+        using (WindowsIdentity current = WindowsIdentity.GetCurrent()) user = current == null ? null : current.User;
+        if (user == null) throw new IOException("current user SID unavailable while creating staged directory");
+        IntPtr descriptor;
+        uint descriptorSize;
+        if (!ConvertStringSecurityDescriptorToSecurityDescriptorW("D:P(A;OICI;FA;;;SY)(A;OICI;FA;;;" + user.Value + ")", 1, out descriptor, out descriptorSize))
+            throw new IOException("unable to build staged directory DACL", new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error()));
+        try
+        {
+            var security = new SecurityAttributes { Length = Marshal.SizeOf(typeof(SecurityAttributes)), SecurityDescriptor = descriptor, InheritHandle = 0 };
+            if (!CreateDirectoryW(path, ref security)) throw new IOException("exclusive staged directory creation failed: " + path,
+                new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error()));
+        }
+        finally { LocalFree(descriptor); }
+    }
+
+    private static SafeFileHandle CreateDestinationFile(string path)
+    {
+        SecurityIdentifier user;
+        using (WindowsIdentity current = WindowsIdentity.GetCurrent()) user = current == null ? null : current.User;
+        if (user == null) throw new IOException("current user SID unavailable while creating staged file");
+        IntPtr descriptor;
+        uint descriptorSize;
+        if (!ConvertStringSecurityDescriptorToSecurityDescriptorW("D:P(A;;FA;;;SY)(A;;FA;;;" + user.Value + ")", 1, out descriptor, out descriptorSize))
+            throw new IOException("unable to build staged file DACL", new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error()));
+        try
+        {
+            var security = new SecurityAttributes { Length = Marshal.SizeOf(typeof(SecurityAttributes)), SecurityDescriptor = descriptor, InheritHandle = 0 };
+            SafeFileHandle handle = CreateFileW(path, GENERIC_READ | GENERIC_WRITE | READ_CONTROL | FILE_READ_ATTRIBUTES, FILE_SHARE_READ,
+                ref security, CREATE_NEW, FILE_ATTRIBUTE_NORMAL | FILE_FLAG_WRITE_THROUGH, IntPtr.Zero);
+            if (handle == null || handle.IsInvalid) throw new IOException("exclusive staged file creation failed: " + path,
+                new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error()));
+            return handle;
+        }
+        finally { LocalFree(descriptor); }
+    }
+
+    private static SafeFileHandle PinStagedExecutable(string runtimePath, string[] components, FileIdentity expectedIdentity,
+        out FileIdentity identity, List<SafeFileHandle> retainedParents)
+    {
+        string current = runtimePath;
+        SecurityIdentifier user;
+        using (WindowsIdentity currentIdentity = WindowsIdentity.GetCurrent()) user = currentIdentity == null ? null : currentIdentity.User;
+        if (user == null) throw new IOException("current user SID unavailable while pinning staged executable");
+        try
+        {
+            for (int i = 0; i < components.Length - 1; i++)
+            {
+                current = Path.Combine(current, components[i]);
+                SafeFileHandle parent = OpenDirectory(current);
+                retainedParents.Add(parent);
+                VerifyProtectedDacl(parent, user, AceFlags.ContainerInherit | AceFlags.ObjectInherit, "staged executable parent");
+            }
+            string executablePath = Path.Combine(current, components[components.Length - 1]);
+            SafeFileHandle executable = OpenSourceFile(executablePath);
+            try
+            {
+            FileAttributeTagInfo tag;
+            Check(GetFileInformationByHandleEx(executable, FileAttributeTagInfoClass, out tag,
+                (uint)Marshal.SizeOf(typeof(FileAttributeTagInfo))), "FileAttributeTagInfo(staged executable)");
+            FileStandardInfo standard;
+            Check(GetFileInformationByHandleEx(executable, FileStandardInfoClass, out standard,
+                (uint)Marshal.SizeOf(typeof(FileStandardInfo))), "FileStandardInfo(staged executable)");
+            if ((tag.Attributes & (FILE_ATTRIBUTE_DIRECTORY | FILE_ATTRIBUTE_REPARSE_POINT)) != 0 || standard.Directory || standard.DeletePending)
+                throw new IOException("staged executable is not a plain file: " + executablePath);
+            VerifyProtectedDacl(executable, user, AceFlags.None, "staged executable");
+            identity = ReadIdentity(executable);
+            if (!identity.SameAs(expectedIdentity)) throw new IOException("staged executable identity changed after tree verification");
+            return executable;
+            }
+            catch { executable.Dispose(); throw; }
+        }
+        finally
+        {
+            // Parent pins remain owned by RuntimeAllocation until its eventual
+            // custody transfer or disposal; the executable handle alone is not
+            // sufficient to keep its path components stable.
+        }
+    }
+
+    private static StagedEntry FindExecutableEntry(List<StagedEntry> manifest, string relativePath)
+    {
+        for (int i = 0; i < manifest.Count; i++)
+            if (String.Equals(manifest[i].RelativePath, relativePath, StringComparison.OrdinalIgnoreCase))
+            {
+                if (manifest[i].IsDirectory) throw new IOException("requested staged executable is a directory");
+                // The manifest spelling is the only accepted spelling; this
+                // also refuses short-name or other path aliases.
+                if (!String.Equals(manifest[i].RelativePath, relativePath, StringComparison.Ordinal))
+                    throw new IOException("requested staged executable uses a path alias or noncanonical spelling");
+                return manifest[i];
+            }
+        throw new IOException("requested executable is absent from the staged source manifest");
+    }
+
+    private static void CompareManifests(List<StagedEntry> before, List<StagedEntry> after)
+    {
+        if (before.Count != after.Count) throw new IOException("source inventory changed during staging");
+        before.Sort(delegate(StagedEntry a, StagedEntry b) { return StringComparer.OrdinalIgnoreCase.Compare(a.RelativePath, b.RelativePath); });
+        after.Sort(delegate(StagedEntry a, StagedEntry b) { return StringComparer.OrdinalIgnoreCase.Compare(a.RelativePath, b.RelativePath); });
+        for (int i = 0; i < before.Count; i++)
+            if (!before[i].SameAs(after[i])) throw new IOException("source manifest changed during staging at: " + before[i].RelativePath);
+    }
+
+    private static void ValidateDestinationTree(string destinationRoot, SafeFileHandle runtimeHandle,
+        List<StagedEntry> sourceManifest, CancellationToken cancellationToken,
+        out Dictionary<string, FileIdentity> identitiesByPath)
+    {
+        var expected = new Dictionary<string, StagedEntry>(StringComparer.OrdinalIgnoreCase);
+        for (int i = 0; i < sourceManifest.Count; i++) expected.Add(sourceManifest[i].RelativePath, sourceManifest[i]);
+        var observed = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        var destinationIdentities = new HashSet<string>(StringComparer.Ordinal);
+        int count = 0;
+        long total = 0;
+        FileIdentity runtimeIdentity = ReadIdentity(runtimeHandle);
+        FileAttributeTagInfo runtimeTag;
+        Check(GetFileInformationByHandleEx(runtimeHandle, FileAttributeTagInfoClass, out runtimeTag,
+            (uint)Marshal.SizeOf(typeof(FileAttributeTagInfo))), "FileAttributeTagInfo(held runtime root)");
+        if ((runtimeTag.Attributes & (FILE_ATTRIBUTE_DIRECTORY | FILE_ATTRIBUTE_REPARSE_POINT)) != FILE_ATTRIBUTE_DIRECTORY)
+            throw new IOException("held runtime handle is not a plain directory");
+        SecurityIdentifier user;
+        using (WindowsIdentity current = WindowsIdentity.GetCurrent()) user = current == null ? null : current.User;
+        if (user == null) throw new IOException("current user SID unavailable while verifying staged tree");
+        VerifyProtectedDacl(runtimeHandle, user, AceFlags.ContainerInherit | AceFlags.ObjectInherit, "staged runtime root");
+        AddUniqueIdentity(destinationIdentities, runtimeIdentity, "staged runtime root");
+        identitiesByPath = new Dictionary<string, FileIdentity>(StringComparer.OrdinalIgnoreCase);
+        ScanDestinationDirectory(destinationRoot, runtimeHandle, String.Empty, 0, expected, observed,
+            destinationIdentities, identitiesByPath, ref count, ref total, user, cancellationToken);
+        if (observed.Count != expected.Count - 1)
+            throw new IOException("staged destination inventory contains missing or unexpected entries");
+    }
+
+    private static void ScanDestinationDirectory(string directoryPath, SafeFileHandle directoryHandle,
+        string relativeDirectory, int depth, Dictionary<string, StagedEntry> expected, HashSet<string> observed,
+        HashSet<string> identities, Dictionary<string, FileIdentity> identitiesByPath,
+        ref int count, ref long total, SecurityIdentifier user, CancellationToken cancellationToken)
+    {
+        if (depth > MaximumSourceDepth) throw new IOException("staged directory depth exceeds the fixed bound");
+        foreach (string path in EnumerateBoundedEntries(directoryPath, count))
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            if (++count > MaximumInventoryEntries) throw new IOException("staged destination inventory exceeds the fixed entry bound");
+            string name = Path.GetFileName(path);
+            ValidateSourceComponent(name);
+            string relative = relativeDirectory.Length == 0 ? name : relativeDirectory + "\\" + name;
+            StagedEntry expectedEntry;
+            if (!expected.TryGetValue(relative, out expectedEntry) || !observed.Add(relative))
+                throw new IOException("staged destination has an unexpected or duplicate entry: " + relative);
+            using (SafeFileHandle entry = OpenEntryForInspection(path))
+            {
+                FileAttributeTagInfo tag;
+                Check(GetFileInformationByHandleEx(entry, FileAttributeTagInfoClass, out tag,
+                    (uint)Marshal.SizeOf(typeof(FileAttributeTagInfo))), "FileAttributeTagInfo(staged entry)");
+                if ((tag.Attributes & FILE_ATTRIBUTE_REPARSE_POINT) != 0)
+                    throw new IOException("staged destination reparse point is refused: " + path);
+                FileIdentity identity = ReadIdentity(entry);
+                AddUniqueIdentity(identities, identity, "staged destination " + relative);
+                identitiesByPath.Add(relative, identity);
+                bool isDirectory = (tag.Attributes & FILE_ATTRIBUTE_DIRECTORY) != 0;
+                if (isDirectory != expectedEntry.IsDirectory) throw new IOException("staged destination entry type differs: " + relative);
+                if (isDirectory)
+                {
+                    var child = PinSingleDirectory(path, OpenDirectory(path));
+                    try
+                    {
+                        if (!child.Identity.SameAs(identity)) throw new IOException("staged directory identity changed while pinning: " + path);
+                        VerifyProtectedDacl(child.Handle, user, AceFlags.ContainerInherit | AceFlags.ObjectInherit, "staged directory");
+                        ScanDestinationDirectory(child.Path, child.Handle, relative, depth + 1, expected, observed, identities, identitiesByPath,
+                            ref count, ref total, user, cancellationToken);
+                    }
+                    finally { child.DisposeOwned(); }
+                }
+                else
+                {
+                    VerifyProtectedDacl(entry, user, AceFlags.None, "staged file");
+                    FileStandardInfo standard;
+                    Check(GetFileInformationByHandleEx(entry, FileStandardInfoClass, out standard,
+                        (uint)Marshal.SizeOf(typeof(FileStandardInfo))), "FileStandardInfo(staged verification)");
+                    if (standard.Directory || standard.DeletePending || standard.NumberOfLinks != 1 || standard.EndOfFile != expectedEntry.Length ||
+                        standard.EndOfFile > MaximumSingleStagedFileBytes || standard.EndOfFile > MaximumTotalStagedBytes - total)
+                        throw new IOException("staged file size violates its manifest or fixed bounds: " + relative);
+                    string digest = TransferAndHash(entry, null, standard.EndOfFile, false, cancellationToken);
+                    if (!String.Equals(digest, expectedEntry.ContentDigest, StringComparison.Ordinal))
+                        throw new IOException("staged file content differs from the source manifest: " + relative);
+                    total = checked(total + standard.EndOfFile);
+                }
+            }
+        }
+    }
+
+    private static string ManifestDigest(List<StagedEntry> entries)
+    {
+        entries.Sort(delegate(StagedEntry a, StagedEntry b) { return StringComparer.OrdinalIgnoreCase.Compare(a.RelativePath, b.RelativePath); });
+        var text = new StringBuilder();
+        for (int i = 0; i < entries.Count; i++)
+        {
+            StagedEntry item = entries[i];
+            text.Append(item.RelativePath).Append('|').Append(item.IsDirectory ? 'D' : 'F').Append('|')
+                .Append(FormatIdentity(item.Identity)).Append('|').Append(item.Length).Append('|')
+                .Append(item.LastWriteTime).Append('|').Append(item.Attributes).Append('|').Append(item.ContentDigest).Append('\n');
+        }
+        using (SHA256 hash = SHA256.Create()) return Hex(hash.ComputeHash(Encoding.UTF8.GetBytes(text.ToString())));
+    }
+
+    private static string HashText(string value)
+    {
+        using (SHA256 hash = SHA256.Create()) return Hex(hash.ComputeHash(Encoding.UTF8.GetBytes(value)));
+    }
+
+    private static string Hex(byte[] bytes)
+    {
+        var value = new StringBuilder(bytes.Length * 2);
+        for (int i = 0; i < bytes.Length; i++) value.Append(bytes[i].ToString("X2"));
+        return value.ToString();
+    }
+
+    private static void AddUniqueIdentity(HashSet<string> seen, FileIdentity identity, string description)
+    {
+        string key = FormatIdentity(identity);
+        if (!seen.Add(key)) throw new IOException("source tree contains an aliased file identity: " + description);
+    }
+
+    private static void EnsureSourceDoesNotOverlapAllocation(PinnedDirectory source, PinnedDirectory evidence,
+        SafeFileHandle runtime, string runtimePath)
+    {
+        if (source.Path.Equals(evidence.Path, StringComparison.OrdinalIgnoreCase) ||
+            IsPathAncestorOrSame(source.Path, evidence.Path) || IsPathAncestorOrSame(source.Path, runtimePath) ||
+            IsPathAncestorOrSame(runtimePath, source.Path))
+            throw new IOException("source root contains or aliases the evidence/runtime root");
+        for (int i = 0; i < evidence.AncestorIdentities.Length; i++)
+            if (source.Identity.SameAs(evidence.AncestorIdentities[i]))
+                throw new IOException("source root identity aliases the evidence root or one of its ancestors");
+        FileIdentity runtimeIdentity = runtime == null ? null : ReadIdentity(runtime);
+        for (int i = 0; i < source.AncestorIdentities.Length; i++)
+        {
+            if (runtimeIdentity != null && source.AncestorIdentities[i].SameAs(runtimeIdentity))
+                throw new IOException("source root is beneath the generated runtime through a filesystem alias");
+        }
+        if (runtimeIdentity != null && source.Identity.SameAs(runtimeIdentity))
+            throw new IOException("source root identity aliases the generated runtime");
+    }
+
+    private static bool IsPathAncestorOrSame(string candidate, string descendant)
+    {
+        string normalizedCandidate = candidate.TrimEnd('\\');
+        string normalizedDescendant = descendant.TrimEnd('\\');
+        return normalizedDescendant.Equals(normalizedCandidate, StringComparison.OrdinalIgnoreCase) ||
+            normalizedDescendant.StartsWith(normalizedCandidate + "\\", StringComparison.OrdinalIgnoreCase);
+    }
+
+    private static string[] ParseExecutableRelativePath(string value)
+    {
+        if (String.IsNullOrEmpty(value) || value.Length > MaximumPathLength || value[0] == '\\' || value[0] == '/' ||
+            value.IndexOf('/') >= 0 || value.IndexOf(':') >= 0 || value.StartsWith("\\\\", StringComparison.Ordinal))
+            throw new ArgumentException("executable path must be a bounded relative Windows path", "value");
+        string[] components = value.Split('\\');
+        for (int i = 0; i < components.Length; i++) ValidatePathComponent(components[i], "executable path");
+        return components;
+    }
+
+    private static void ValidateSourceComponent(string component)
+    {
+        try { ValidatePathComponent(component, "source entry"); }
+        catch (ArgumentException error) { throw new IOException(error.Message, error); }
+    }
+
+    private static void ValidatePathComponent(string component, string description)
+    {
+        if (String.IsNullOrEmpty(component) || component == "." || component == ".." || component.Length > 255 ||
+            component.EndsWith(".", StringComparison.Ordinal) || component.EndsWith(" ", StringComparison.Ordinal))
+            throw new ArgumentException(description + " contains an empty, dot, or unsupported-length component");
+        if (!component.IsNormalized(NormalizationForm.FormC))
+            throw new ArgumentException(description + " contains a noncanonical Unicode component");
+        for (int i = 0; i < component.Length; i++)
+            if (component[i] < 0x20 || "<>:\"/\\|?*".IndexOf(component[i]) >= 0)
+                throw new ArgumentException(description + " contains an illegal Windows filename character");
+        string baseName = component.Split('.')[0].ToUpperInvariant();
+        if (baseName == "CON" || baseName == "PRN" || baseName == "AUX" || baseName == "NUL" ||
+            IsNumberedDeviceName(baseName, "COM") || IsNumberedDeviceName(baseName, "LPT"))
+            throw new ArgumentException(description + " contains a reserved DOS device name");
+    }
+
+    private static List<string> EnumerateBoundedEntries(string directoryPath, int alreadyObserved)
+    {
+        int remaining = MaximumInventoryEntries - alreadyObserved;
+        if (remaining < 0) throw new IOException("inventory exceeds the fixed entry bound: " + directoryPath);
+        var entries = new List<string>(Math.Min(remaining, 64));
+        foreach (string path in Directory.EnumerateFileSystemEntries(directoryPath))
+        {
+            if (entries.Count >= remaining)
+                throw new IOException("directory contains entries beyond the fixed inventory bound: " + directoryPath);
+            entries.Add(path);
+        }
+        entries.Sort(delegate(string left, string right)
+        {
+            int folded = StringComparer.OrdinalIgnoreCase.Compare(Path.GetFileName(left), Path.GetFileName(right));
+            return folded != 0 ? folded : StringComparer.Ordinal.Compare(Path.GetFileName(left), Path.GetFileName(right));
+        });
+        return entries;
+    }
+
+    private static bool IsNumberedDeviceName(string value, string prefix)
+    {
+        if (!value.StartsWith(prefix, StringComparison.Ordinal) || value.Length != prefix.Length + 1) return false;
+        char digit = value[value.Length - 1];
+        return (digit >= '1' && digit <= '9') || digit == '\u00b9' || digit == '\u00b2' || digit == '\u00b3';
+    }
+
+#if SCOPED_RUNNER_TESTING
+    internal static void ValidateExecutableRelativePathForFixture(string value) { ParseExecutableRelativePath(value); }
+#endif
+
+    private static string ToAsciiBounded(string value, int maximum)
+    {
+        var text = new StringBuilder(Math.Min(value.Length, maximum));
+        for (int i = 0; i < value.Length && text.Length < maximum; i++)
+        {
+            char c = value[i];
+            text.Append(c >= 0x20 && c <= 0x7e ? c : '?');
+        }
+        return text.ToString();
+    }
+
+    private static string BoundPath(string path)
+    {
+        if (String.IsNullOrEmpty(path)) return "<unavailable>";
+        return path.Length <= MaximumPathLength ? path : path.Substring(0, MaximumPathLength);
     }
 
     private static void WriteAll(SafeFileHandle handle, byte[] bytes)
