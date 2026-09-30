@@ -68,8 +68,11 @@ per-file/depth/cancellation fixture source, and documentation accuracy. See
 windows-source-staging-review.md. Candidate is clean, separate and workload
 launch disabled. Source review permits the next source substep, not acceptance.
 Handle-safe disposition is now delegated to the same responsible Windows context
-under briefs/windows-runtime-disposition.md. The followup was delivered; await
-source/fixture report and independently review it. No compile/fixture/native
+under briefs/windows-runtime-disposition.md. The live agent was independently confirmed running on continuation. Fixture
+source was authored first and is now dirty in that candidate; intermediate
+path/readback/coverage findings are in windows-runtime-disposition-review.md
+and were delivered for related correction. Await source/fixture report and
+independently review the eventual commit. No compile/fixture/native
 execution is authorized by that source brief.
 
 Step 1 corrected unrestricted resolution is integrated at 5f87d339 and accepted
@@ -204,6 +207,13 @@ Dependent implementation is stopped. Continue only independent authorized
 requirements with new evidence; do not repeat decision/status/verification rounds.
 
 ## Goal turn classification
+
+2026-09-30 disposition continuation: previous turn was progress (source changes
+b4c055ee/03a56347 and independent review). Current live responsible agent was
+confirmed; authored disposition fixture source and intermediate findings change
+the implementation/review action. No compiler/native run or created runtime.
+The Windows full-custody correction remains incomplete with no completed failed
+correction/recovery. Goal stays active and incomplete, not blocked.
 
 2026-09-30 staging continuation: progress. Candidate b4c055ee implements the
 bounded source slice. Three-file source review found identity-chain and fixture assertion gaps;
