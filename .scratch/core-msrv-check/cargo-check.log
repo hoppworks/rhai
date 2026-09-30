@@ -1,0 +1,23 @@
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded cfg-if v1.0.5
+  Downloaded const-random-macro v0.1.16
+  Downloaded version_check v0.9.5
+  Downloaded crunchy v0.2.4
+  Downloaded autocfg v1.5.1
+  Downloaded static_assertions v1.1.0
+  Downloaded const-random v0.1.18
+  Downloaded tiny-keccak v2.0.2
+  Downloaded smallvec v1.16.2
+  Downloaded ahash v0.8.12
+  Downloaded unicode-ident v1.0.26
+  Downloaded thin-vec v0.2.20
+error: failed to parse manifest at `/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-60t9_tg7/cargo-home/registry/src/github.com-1ecc6299db9ec823/thin-vec-0.2.20/Cargo.toml`
+
+Caused by:
+  failed to parse the `edition` key
+
+Caused by:
+  this version of Cargo is older than the `2024` edition, and only supports `2015`, `2018`, and `2021` editions.
