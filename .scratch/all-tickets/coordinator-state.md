@@ -44,15 +44,17 @@ be resolved before their dependent implementation. No remote publication.
 Step 1 is repaired and accepted for the exercised macOS contract cases. No broad
 release/platform completion claim. Native Linux proof closes the supporting-filesystem NotUtf8 coverage gap.
 A final source review found an unrelated unrestricted Dir anchor open and
-current_dir conversion; responsible filesystem context is correcting these with
-a safe isolated deleted-cwd regression if feasible. Existing proof applies only
+current_dir conversion; responsible filesystem context is correcting these. Commit 7b707cff supplies a red/green isolated deleted-cwd
+regression and passing macOS unrestricted cases. Review requested immediate child
+and marker ownership guards before accepting its fixture lifecycle. Existing proof applies only
 to the previous source until changed paths are reverified. Windows guest
 supervision adapter implementation/proof is active before further native builds.
 Step 2 owner TCP question remains pending; release/API proposal is unaccepted.
 POSIX process prototype 35a8cf52 proof is not accepted. Correction disposition
 501fa184c97f records that safe supervision was not established; no fixture was
-executed. This cause is stopped pending owner consultation after its allowed
-Expert escalation and one correction attempt. No new attempt without owner answer.
+executed. The owner explicitly authorized one further bounded attempt after consultation.
+The responsible process context is drafting a supervision design first; no new
+fixture execution or implementation before independent design review.
 
 ## Decisions
 
@@ -74,7 +76,10 @@ Expert escalation and one correction attempt. No new attempt without owner answe
 - Builds must use agent-skills/tools/run_scoped.py and AGENTS.md output isolation.
 - Windows requires proven guest process-tree cleanup before another native build.
 
-Windows scoped-runner task is active in a fresh Standard context, brief at
+Windows static candidate 97fe3f93 is not accepted or integrated. Native gates and
+independent guest lease/cleanup remain unverified. Review found DWORD accounting
+fields incorrectly declared UIntPtr and unbounded termination waits; responsible
+context is correcting the static defects without native execution. Brief at
 briefs/windows-scoped-runner.md. Inspect current guest state, preserve baselines,
 prove adapter cleanup before any new Rust/package build. No prior adapter failures.
 
@@ -87,10 +92,13 @@ escalations/01-process-prototype-proof.answer.md. All five concerns validated.
 The one allowed correction attempt closed at 501fa184c97f without implementation
 or execution; safe independent scope lifetime remains unestablished. Owner was
 asked whether to allow a further bounded attempt with a reviewed supervision design
-or defer this branch while other tickets continue. Consultation pending.
+or defer this branch while other tickets continue. Consultation answered on 2026-09-30: owner selected one further bounded attempt
+with a pre-reviewed supervision design. Prior failures remain recorded; this is
+an explicit budget override, not a reset. Draft requested at the owned prototype
+worktree evidence/retry-design.md before implementation or execution.
 Disposition: /Users/hoppworks/projects/rhai-process-prototype/.scratch/process-prototype/evidence/correction-attempt.md.
 No owned live resources reported; historical source/logs remain unaccepted.
-No second escalation or further implementation attempt unless owner overrides budget.
+One further attempt is owner-authorized; independent design review must precede it.
 Do not accept concurrent-I/O/cleanup claims until independent evidence review.
 Inherited VM history remains authoritative.
 
@@ -99,8 +107,8 @@ Inherited VM history remains authoritative.
 Collect unrestricted resolution correction and Windows scoped adapter evidence;
 inspect actual coverage before accepting either. Mac combined proof is accepted; do not rerun
 unchanged source merely for another context or platform task.
-Collect owner response to process retry consultation; preserve current stopped
-prototype cause history and do not restart it autonomously.
+Collect and independently review the process supervision design before the single
+newly authorized implementation attempt. Preserve all prior cause history.
 TCP authority question remains pending; release/API proposals remain unaccepted.
 Linear is legacy and excluded, with no writes performed there.
 
