@@ -41,6 +41,10 @@ fn test_open_file_default_preserves_contents_and_shares_cursor() {
     eprintln!("independent host readback: {:?}", String::from_utf8_lossy(&actual));
     assert_eq!(actual, expected);
 
+    let reopened_count = e.eval::<INT>(r#"let file = open_file("existing.txt", "r+"); file.seek(0); file.write("O")"#).unwrap();
+    assert_eq!(reopened_count, 1);
+    assert_eq!(t.read("existing.txt"), b"Original XYyload");
+
     e.run(r#"let file = open_file("created.txt"); file.write("created")"#).unwrap();
     assert_eq!(t.read("created.txt"), b"created");
 }
