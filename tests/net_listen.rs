@@ -4,7 +4,7 @@ use rhai::packages::net::{NetConfig, NetPackage};
 use rhai::packages::Package;
 use rhai::{Engine, Scope};
 use std::net::{SocketAddr, TcpStream};
-use std::time::Duration;
+use std::time::{Duration, Instant};
 
 fn build_engine(config: NetConfig) -> Engine {
     let mut engine = Engine::new();
@@ -16,6 +16,23 @@ fn build_engine_with_package(package: &NetPackage) -> Engine {
     let mut engine = Engine::new();
     package.clone().register_into_engine(&mut engine);
     engine
+}
+
+fn retry_accept_until_deadline(engine: &Engine, scope: &mut Scope, deadline: Instant, timeout_ms: rhai::INT) -> Result<(String, usize), String> {
+    let mut resource_denials = 0;
+    while Instant::now() < deadline {
+        let script = format!(
+            r#"let outcome = ""; try {{ listener.accept({timeout_ms}); outcome = "Accepted"; }} catch (err) {{ if err.kind == "ResourceLimit" {{ outcome = "ResourceLimit"; }} else if err.kind == "Io" && err.op == "accept" {{ outcome = "Io"; }} else {{ outcome = "Unexpected:" + err.kind + ":" + err.op; }} }} outcome"#
+        );
+        let outcome = engine.eval_with_scope::<String>(scope, &script).map_err(|error| error.to_string())?;
+        if outcome == "ResourceLimit" {
+            resource_denials += 1;
+            std::thread::yield_now();
+        } else {
+            return Ok((outcome, resource_denials));
+        }
+    }
+    Ok(("QuotaRetryDeadline".to_string(), resource_denials))
 }
 
 #[test]
@@ -124,6 +141,23 @@ fn no_client_accept_times_out_with_catchable_net_error() {
     assert!(started.elapsed() < Duration::from_secs(1), "host deadline bounds wait");
 }
 
+#[test]
+fn quota_retry_deadline_expires_under_a_real_saturated_handle_limit() {
+    let engine = build_engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()).max_handles(1));
+    let mut scope = Scope::new();
+    engine.run_with_scope(&mut scope, r#"let listener = listen("127.0.0.1", 0);"#).unwrap();
+
+    let deadline = Instant::now() + Duration::from_millis(25);
+    let (outcome, denials) = retry_accept_until_deadline(&engine, &mut scope, deadline, 100).unwrap();
+    assert_eq!(outcome, "QuotaRetryDeadline", "quota denial must terminate at the monotonic retry deadline");
+    assert!(denials > 0, "the real listener occupied the only quota slot during retry");
+
+    let address = engine.eval_with_scope::<String>(&mut scope, "listener.local_addr").unwrap();
+    engine.run_with_scope(&mut scope, "listener.close();").unwrap();
+    let rebound = std::net::TcpListener::bind(address.parse::<SocketAddr>().unwrap()).expect("listener.close releases the bound endpoint");
+    drop(rebound);
+}
+
 #[cfg(feature = "sync")]
 #[test]
 fn closing_a_clone_unblocks_an_accept_waiting_on_shared_quota() {
@@ -138,12 +172,10 @@ fn closing_a_clone_unblocks_an_accept_waiting_on_shared_quota() {
 
     let (ready_tx, ready_rx) = std::sync::mpsc::sync_channel(1);
     let (result_tx, result_rx) = std::sync::mpsc::sync_channel(1);
+    let worker_deadline = Instant::now() + Duration::from_secs(6);
     let accept_thread = std::thread::spawn(move || {
         let _ = ready_tx.send(());
-        let result = accept_engine.eval_with_scope::<bool>(
-            &mut accept_scope,
-            r#"let caught = false; let done = false; while !done { try { listener.accept(5000); done = true; } catch (err) { if err.kind == "ResourceLimit" { } else { caught = err.kind == "Io" && err.op == "accept"; done = true; } } } caught"#,
-        );
+        let result = retry_accept_until_deadline(&accept_engine, &mut accept_scope, worker_deadline, 5000);
         let _ = result_tx.send(result);
     });
     let worker_ready = ready_rx.recv_timeout(Duration::from_secs(1));
@@ -176,10 +208,10 @@ fn closing_a_clone_unblocks_an_accept_waiting_on_shared_quota() {
     let mut close_scope = Scope::new();
     close_scope.push("listener", close_clone);
     let close_result = control_engine.run_with_scope(&mut close_scope, "listener.close();");
-    let result = result_rx.recv_timeout(Duration::from_secs(1));
+    let result = result_rx.recv_timeout(Duration::from_secs(12));
     let joined = accept_thread.join();
     let worker_result = match result {
-        Ok(value) => value.map_err(|error| error.to_string()),
+        Ok(value) => value,
         Err(error) => Err(format!("accept worker result unavailable: {error}")),
     };
     assert!(joined.is_ok(), "accept worker joins after clone close");
@@ -187,7 +219,8 @@ fn closing_a_clone_unblocks_an_accept_waiting_on_shared_quota() {
     assert!(close_result.is_ok(), "clone close succeeds");
     assert!(probe_error.is_none(), "quota probe evaluation succeeds: {probe_error:?}");
     assert!(observed_accept_reservation, "accept reserves the shared quota before waiting; last probe was {last_probe_state:?}, worker result was {worker_result:?}");
-    assert!(worker_result.unwrap(), "closed listener produces a catchable accept error");
+    let (worker_outcome, _) = worker_result.unwrap();
+    assert_eq!(worker_outcome, "Io", "closed listener produces a catchable accept error before worker deadline");
 }
 
 #[test]

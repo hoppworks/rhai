@@ -17,3 +17,12 @@ Environment: macOS 27.0 arm64 (`Darwin 27.0.0 arm64`), `rustc 1.93.0 (254b59607 
 ## Scope limits
 
 Native proof covers this local macOS target and `net` plus `net,sync` configurations. It does not prove Windows/Linux, Rust 1.66 core MSRV, other feature combinations, release gates beyond connect/listen acceptance, data-transfer operations, or no_std/WASM diagnostics. Parent full-stack strict suite remains coordinator-level acceptance.
+
+## Bounded retry follow-up
+
+After review identified that the sync test worker's ResourceLimit retry needed its own finite bound, the retry moved to a host-side monotonic `Instant` helper. Each native accept attempt is bounded to 5 seconds for the close regression; the whole retry budget is 6 seconds and the result channel waits at most 12 seconds (retry deadline plus one native-call allowance and margin). The worker retries only actual `ResourceLimit`, treats only catchable `Io` with op `accept` as the expected close result, and returns `QuotaRetryDeadline` distinctly. Cleanup still closes before joining, with assertions after join.
+
+- Real OS quota-expiry check: listener consumes `max_handles(1)`, retries observe at least one actual `ResourceLimit`, then reach the distinct retry-deadline result; closing releases its bound endpoint. [deadline-expiry.log](logs/deadline-expiry.log), exit 0 in [deadline-expiry-exit.txt](logs/deadline-expiry-exit.txt).
+- Bounded sync clone-close check passed after the host deadline correction: [bounded-close.log](logs/bounded-close.log), exit 0 in [bounded-close-exit.txt](logs/bounded-close-exit.txt).
+- One scoped follow-up tree end size: 493888 KiB (not peak) in [bounded-followup-storage-kib.txt](logs/bounded-followup-storage-kib.txt).
+- The prior final full `net` and `net,sync` runs and wrong-peer control remain applicable; only the sync close test fixture and the new host-only expiry test changed.
