@@ -1,0 +1,4 @@
+outer_exec_command_session_id=45597
+command=sh .scratch/launch-macos-sys-release-proof.sh
+terminal_wrapper_status=0
+terminal_wrapper_finished_utc=2026-09-30T17:24:25Z

@@ -1,0 +1,3 @@
+wrong-expectation-control exit=101; exact test executed once; test assertion showed actual left "abc" and expected right "wrong expectation".
+restored-baseline-control exit=0; exact test passed once.
+independent filesystem readback: host file contents were "original XYyload" in each of the eight sys_fs fixture logs.

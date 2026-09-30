@@ -1,0 +1,23 @@
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 0.03s
+     Running tests/sys_env.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_o69dgy3/target/debug/deps/sys_env-7d664e9f26930b30)
+
+running 7 tests
+test test_cwd_matches_process ... ok
+test test_env_allow_list_unset_variable ... ok
+test test_env_allow_list_value ... ok
+test test_env_default_policy_hides_all ... ok
+test test_env_var_non_utf8 ... ok
+test test_env_var_set_and_unset ... ok
+test test_env_vars_all ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s
+

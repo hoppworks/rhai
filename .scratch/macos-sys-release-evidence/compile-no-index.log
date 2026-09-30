@@ -1,0 +1,42 @@
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_o69dgy3/source)
+warning: function `os_to_string` is never used
+   --> src/packages/sys/fs.rs:287:4
+    |
+287 | fn os_to_string(what: &str, s: std::ffi::OsString) -> Result<String, SysError> {
+    |    ^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: variable does not need to be mutable
+  --> tests/sys_policy.rs:14:9
+   |
+14 |     let mut scripts = vec![r#"read_file("x")"#, r#"write_file("x", "y")"#, r#"exists("x")"#, r#"create_dir("x")"#, r#"remove_file("x")"#];
+   |         ----^^^^^^^
+   |         |
+   |         help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+  --> tests/sys_policy.rs:63:9
+   |
+63 |     let mut scripts = vec![r#"read_file("../secret.txt")"#, r#"read_file("sub/../../secret.txt")"#, r#"exists("../secret.txt")"#, r#"writ...
+   |         ----^^^^^^^
+   |         |
+   |         help: remove this `mut`
+
+warning: `rhai` (test "sys_policy") generated 2 warnings (run `cargo fix --test "sys_policy" -p rhai` to apply 2 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 3.92s
+  Executable tests/sys_env.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_o69dgy3/target/debug/deps/sys_env-c02b6289f43dbebb)
+  Executable tests/sys_fs.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_o69dgy3/target/debug/deps/sys_fs-38f6e41a3d4a5ac0)
+  Executable tests/sys_policy.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_o69dgy3/target/debug/deps/sys_policy-cb38790715103e23)

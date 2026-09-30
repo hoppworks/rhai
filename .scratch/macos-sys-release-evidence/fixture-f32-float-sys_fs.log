@@ -1,0 +1,52 @@
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 0.03s
+     Running tests/sys_fs.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_o69dgy3/target/debug/deps/sys_fs-e18876e74624962c)
+
+running 34 tests
+test test_create_dir_cases ... ok
+test test_deep_tree_and_many_entries ... ok
+test test_empty_and_mixed_writes ... ok
+test test_file_handle_blob_read_respects_engine_array_limit ... ok
+test test_file_handle_read_blob_preserves_bytes_and_obeys_host_cap ... ok
+test test_file_handle_read_respects_engine_limit_below_host_cap ... ok
+test test_file_handle_read_string_advances_the_shared_cursor ... ok
+test test_file_handle_reads_fail_at_eof_and_on_write_only_handle ... ok
+test test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving ... ok
+test test_file_handle_string_read_requires_complete_utf8 ... ok
+test test_large_file_round_trip ... ok
+test test_metadata_symlink_and_readonly ... ok
+test test_non_utf8_file_name ... filesystem rejects non-UTF-8 fixture with EILSEQ: Illegal byte sequence (os error 92)
+ok
+test test_open_file_checks_grants_before_mutation_and_stays_confined ... ok
+test test_open_file_default_preserves_contents_and_shares_cursor ... independent host readback: "original XYyload"
+ok
+test test_open_file_modes_and_exclusive_create ... ok
+test test_path_spellings ... ok
+test test_predicates_and_metadata ... ok
+test test_read_binary ... ok
+test test_read_dir_cases ... ok
+test test_read_file_cases ... ok
+test test_remove_cases ... ok
+test test_rename_and_copy ... ok
+test test_rename_overwrite_and_directory ... ok
+test test_unicode_names ... ok
+test test_unrestricted_missing_parents ... ok
+test test_unrestricted_relative_paths ... ok
+test test_unrestricted_relative_paths_after_cwd_is_unlinked ... ok
+test test_unrestricted_round_trip ... ok
+test test_unrestricted_symlink_then_parent_uses_host_resolution ... ok
+test test_unrestricted_symlinks_follow_host_semantics ... ok
+test test_write_append_blob ... ok
+test test_write_into_missing_parent ... ok
+test test_wrong_entry_kind ... ok
+
+test result: ok. 34 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.19s
+

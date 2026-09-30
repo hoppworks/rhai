@@ -1,0 +1,23 @@
+ Downloading crates ...
+  Downloaded serde_derive v1.0.229
+  Downloaded syn v3.0.6
+   Compiling syn v3.0.6
+   Compiling serde v1.0.229
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_o69dgy3/source)
+   Compiling rhai_codegen v3.2.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_o69dgy3/source/codegen)
+   Compiling serde_derive v1.0.229
+   Compiling smallvec v1.16.2
+   Compiling rmp-serde v1.3.0
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 7.16s
+  Executable tests/sys_env.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_o69dgy3/target/debug/deps/sys_env-6a3f1d61d93226ef)
+  Executable tests/sys_fs.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_o69dgy3/target/debug/deps/sys_fs-7f7502f1fd932320)
+  Executable tests/sys_policy.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_o69dgy3/target/debug/deps/sys_policy-36cc79e2f8bae8c2)

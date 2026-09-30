@@ -1,0 +1,35 @@
+label	exit_status	harness_counts	harness_outcome
+compile-baseline	0	-	-
+compile-f32-float	0	-	-
+compile-metadata-serde	0	-	-
+compile-no-index-sync-metadata	0	-	-
+compile-no-index	0	-	-
+compile-only-i32-no-float	0	-	-
+compile-sync	0	-	-
+compile-unchecked	0	-	-
+fixture-baseline-sys_env	0	7	ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s
+fixture-baseline-sys_fs	0	34	ok. 34 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.19s
+fixture-baseline-sys_policy	0	25	ok. 25 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+fixture-f32-float-sys_env	0	7	ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s
+fixture-f32-float-sys_fs	0	34	ok. 34 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.19s
+fixture-f32-float-sys_policy	0	25	ok. 25 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+fixture-metadata-serde-sys_env	0	7	ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s
+fixture-metadata-serde-sys_fs	0	34	ok. 34 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.21s
+fixture-metadata-serde-sys_policy	0	26	ok. 26 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+fixture-no-index-sync-metadata-sys_env	0	7	ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s
+fixture-no-index-sync-metadata-sys_fs	0	24	ok. 24 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.10s
+fixture-no-index-sync-metadata-sys_policy	0	27	ok. 27 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.11s
+fixture-no-index-sys_env	0	7	ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s
+fixture-no-index-sys_fs	0	24	ok. 24 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s
+fixture-no-index-sys_policy	0	25	ok. 25 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+fixture-only-i32-no-float-sys_env	0	7	ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s
+fixture-only-i32-no-float-sys_fs	0	34	ok. 34 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.16s
+fixture-only-i32-no-float-sys_policy	0	25	ok. 25 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+fixture-sync-sys_env	0	7	ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s
+fixture-sync-sys_fs	0	34	ok. 34 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.18s
+fixture-sync-sys_policy	0	26	ok. 26 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.10s
+fixture-unchecked-sys_env	0	7	ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.10s
+fixture-unchecked-sys_fs	0	32	ok. 32 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.19s
+fixture-unchecked-sys_policy	0	25	ok. 25 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+restored-baseline-control	0	1	ok. 1 passed; 0 failed; 0 ignored; 0 measured; 33 filtered out; finished in 0.00s
+wrong-expectation-control	101	1	FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 33 filtered out; finished in 0.01s
