@@ -1,0 +1,35 @@
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 0.04s
+     Running tests/net_reads.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-cnn6m89c/target/debug/deps/net_reads-4ccdfb10a162a8b4)
+
+running 7 tests
+test accepted_stream_inherits_host_receive_cap ... ok
+test blob_reads_validate_lengths_return_exact_short_prefix_and_obey_host_cap ... ok
+test engine_string_limit_keeps_ascii_and_reports_lossy_expansion_progress ... ok
+test no_data_read_times_out_and_bounded_eof_loop_reports_partial_progress ... ok
+test one_shot_read_returns_an_available_short_prefix_without_waiting_for_more ... ok
+test one_shot_text_read_replaces_a_utf8_character_cut_by_the_available_prefix ... ok
+test stream_read_string_returns_exact_lossy_text_from_peer_bytes ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.26s
+
