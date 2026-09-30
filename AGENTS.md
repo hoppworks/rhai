@@ -46,3 +46,11 @@ Acceptance contract approved by the owner on 2026-09-30.
   configuration defines acceptance; it does not certify the inherited implementation.
 
 Decision detail: [.scratch/stdlib-wayfinder/issues/01-acceptance-contract.md](.scratch/stdlib-wayfinder/issues/01-acceptance-contract.md).
+
+## Current privacy constraint
+
+The owner selected fully private work on 2026-09-30. Continue only locally and on
+the authorized workhorse VM host. Do not push this work to the existing public
+hoppworks/rhai fork or any other remote until the owner changes this constraint.
+This overrides automatic push for the current effort. Preserve the existing
+remote history and visibility; do not rewrite or remove published commits.

@@ -30,9 +30,10 @@ blocks implementation. Completing this map does not mean the library is implemen
   Current evidence: [network assessment](../../docs/net-package-assessment.md).
   Prior review has four unresolved sys findings; do not treat inherited phase-complete
   claims as verified acceptance. Review references are in the coordinator state.
-- Workflow remains strict verification, automatic push of own commits, automatic
-  Coordinator merge only after the selected checks pass. Work stays on `hoppworks/rhai`;
-  no upstream contact, PR, or merge is part of charting this map.
+- Workflow remains strict verification and automatic Coordinator merge only after
+  selected checks pass. The owner's 2026-09-30 privacy decision overrides automatic
+  push: this effort stays local and on authorized workhorse; no remote publication,
+  upstream contact, PR, or merge is part of charting this map.
 - Test patterns come from cap-std (path semantics), rustix (operation/platform cases),
   and Tokio (resource lifecycles); write tests against Rhai contracts rather than
   copying another library's expectations. Do not reopen the broad precedent survey.
