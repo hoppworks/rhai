@@ -25,19 +25,19 @@ Strict verification, automatic local integration. Owner explicitly authorizes th
 Owner accepted recommended API/release decisions and recommended process extension; do not reopen answered questions.
 Updated global instructions and campaign snapshot/export rules applied. Retain elapsed time and cause history; no duplicate builds/evidence or default launch cutoff.
 
-TCP write/half-close responsible fresh task at /Users/hoppworks/projects/rhai-tcp-stream-writes, task/tcp-stream-writes basee0dd28ec; brief briefs/tcp-stream-writes.md. Record original60min start/deadline before work.
+TCP write/half-close responsible fresh task at /Users/hoppworks/projects/rhai-tcp-stream-writes, task/tcp-stream-writes basee0dd28ec; brief briefs/tcp-stream-writes.md. Original start14:05:27UTC, deadline15:05:27UTC inclusive review. Design received; bounded host input, real partial counts and independent directional shutdown required.
 
 ## Budgets and cause history
 - TCP original13:17:48–14:17:48UTC inclusive review,900s/invocation,2GiB private storage, jobs2,16 sockets/handles, serial tests. Launches1–14 retained in owned .scratch/tcp-stream-reads/; setup diagnostics classified separately from completed corrections. Launch9 no_index failed; tuple parse only10; launch12 confirmed peer inherited O_NONBLOCK;13 repaired fixture passed. Notifier refinement is source-only test review finding.
-- Process original stopped30min12:06:47–12:36:47, explicit60min extension13:18:05–14:18:05UTC inclusive review. Sole Expert01 validated contradictory historical proof; no second chain or time reset. Caps/build and controls in briefs/process-prototype-continuation.md and owned evidence/correction-attempt.md. Source findings unexecuted; zero completed corrective native implementation checks in extension.
+- Process original stopped30min12:06:47–12:36:47, explicit60min extension13:18:05–14:18:05UTC inclusive review. Sole Expert01 validated contradictory historical proof; closed by six successful native custody controls and shared runner124, handoff14:09:42. No executed failed implementation correction in extension. No second chain or time reset. Caps/build and controls in briefs/process-prototype-continuation.md and ../process-prototype/correction-attempt.md.
 - Windows prior source allowance exhausted11:17–11:47; native custody/bootstrap still unproven. Sole Expert02 and original history remain binding.
 - Docs bounded13:21:01–13:51:01 complete. No active resources.
 
 ## Evidence and resources
-Root own /Users/hoppworks/projects/rhai-all-tickets task/all-tickets; latest acceptance commits push/readback below. Active owned process/TCP worktrees by brief; preserve foreign primary/planning and all unaccepted work. run_scoped.py via python3; private source/CARGO_HOME/CARGO_TARGET_DIR, export each result before cleanup. No broad process/deletion/config changes.
+Root own /Users/hoppworks/projects/rhai-all-tickets task/all-tickets; latest acceptance ed56cbf0 exact remote verified. TCP writes active; accepted prototype checkout retired. Process I/O design has a separate owned task/process-io-design checkout; preserve foreign primary/planning and all unaccepted work. run_scoped.py via python3; private source/CARGO_HOME/CARGO_TARGET_DIR, export each result before cleanup. No broad process/deletion/config changes.
 
 ## History references
 Complete prior state, accepted details, retired resources, failed checks, escalation and decision history: history-through-f9fe174b.md (preserved without duplication). Cause details: escalations/01-process-prototype-proof.answer.md; tcp-stream-reads-review.md; responsible task state/logs. Historical snapshots are history, this file is authoritative current state.
 
 ## Next action
-Accepted prototype integrated (includes127a364f docs), fork007054e8 independently verified. Clean owned prototype checkout retired, source/history/proof remain under ../process-prototype/. Collect TCP writes design/RED, implement next independent approved slice; plan production Engine process requirement from accepted prototype without reopening its closed historical chain. Preserve nativeWindows prerequisite and original ticket scope. Goal active/incomplete.
+Accepted prototype integrated (includes127a364f docs), forked56cbf0 independently verified. Collect TCP writes final proof and review affected source. Select the production Rust I/O cancellation boundary under ticket03 through a bounded source/design task; no production implementation before the native cancellation gate holds. Preserve nativeWindows prerequisite and original ticket scope. Goal active/incomplete.
