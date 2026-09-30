@@ -1,0 +1,530 @@
+launcher_start_utc=2026-09-30T18:16:06Z
+launcher_pid=71380
+launcher_pgid=71380
+absolute_deadline_utc=2026-09-30T18:19:18Z remaining_timeout_seconds=192
+run_scoped_pid=71400
+run_scoped_pid=71400
+PRIVATE_RUNTIME lockfile-resolution-before: 16604 KiB; sampled maximum 0 KiB
+COMMAND lockfile-resolution: /Users/hoppworks/.cargo/bin/cargo generate-lockfile
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+     Locking 130 packages to latest compatible versions
+      Adding getrandom v0.3.4 (available: v0.4.3)
+      Adding hashbrown v0.16.1 (available: v0.17.1)
+      Adding syn v2.0.119 (available: v3.0.6)
+STATUS lockfile-resolution: 0
+PRIVATE_RUNTIME lockfile-resolution-after: 27628 KiB; sampled maximum 24388 KiB
+PRIVATE_RUNTIME wrong-fresh-file-control-before: 27628 KiB; sampled maximum 24388 KiB
+COMMAND wrong-fresh-file-control: /Users/hoppworks/.cargo/bin/cargo test --locked --jobs 2 --features testing-environ,sys,net --test combined_sys_net sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors -- --exact --test-threads=1 --nocapture
+ Downloading crates ...
+  Downloaded crunchy v0.2.4
+  Downloaded once_cell v1.21.4
+  Downloaded memchr v2.8.3
+  Downloaded fs-set-times v0.20.3
+  Downloaded bitflags v2.13.2
+  Downloaded cfg-if v1.0.5
+  Downloaded version_check v0.9.5
+  Downloaded io-lifetimes v3.0.1
+  Downloaded getrandom v0.2.17
+  Downloaded rustix v1.1.5
+  Downloaded zerocopy v0.8.59
+  Downloaded zmij v1.0.23
+  Downloaded serde v1.0.229
+  Downloaded io-extras v0.19.0
+  Downloaded const-random-macro v0.1.16
+  Downloaded libc v0.2.189
+  Downloaded tiny-keccak v2.0.2
+  Downloaded rmp-serde v1.3.1
+  Downloaded serde_json v1.0.151
+  Downloaded portable-atomic v1.15.0
+  Downloaded getrandom v0.3.4
+  Downloaded cap-primitives v4.0.3
+  Downloaded errno v0.3.14
+  Downloaded autocfg v1.5.1
+  Downloaded syn v2.0.119
+  Downloaded static_assertions v1.1.0
+  Downloaded smartstring v1.0.1
+  Downloaded quote v1.0.47
+  Downloaded proc-macro2 v1.0.107
+  Downloaded itoa v1.0.18
+  Downloaded io-lifetimes v2.0.4
+  Downloaded const-random v0.1.18
+  Downloaded ambient-authority v0.0.2
+  Downloaded ahash v0.8.12
+  Downloaded smallvec v1.16.2
+  Downloaded serde_core v1.0.229
+  Downloaded rmp v0.8.15
+  Downloaded num-traits v0.2.19
+  Downloaded ipnet v2.12.2
+  Downloaded cap-std v4.0.3
+  Downloaded unicode-ident v1.0.26
+  Downloaded maybe-owned v0.3.4
+  Downloaded thin-vec v0.2.20
+ Downloading crates ...
+  Downloaded web-time v1.1.0
+   Compiling libc v0.2.189
+   Compiling autocfg v1.5.1
+   Compiling version_check v0.9.5
+   Compiling crunchy v0.2.4
+   Compiling tiny-keccak v2.0.2
+   Compiling proc-macro2 v1.0.107
+   Compiling io-lifetimes v2.0.4
+   Compiling cfg-if v1.0.5
+   Compiling rustix v1.1.5
+   Compiling io-lifetimes v3.0.1
+   Compiling errno v0.3.14
+   Compiling num-traits v0.2.19
+   Compiling quote v1.0.47
+   Compiling bitflags v2.13.2
+   Compiling portable-atomic v1.15.0
+   Compiling io-extras v0.19.0
+   Compiling unicode-ident v1.0.26
+   Compiling getrandom v0.2.17
+   Compiling cap-primitives v4.0.3
+   Compiling getrandom v0.3.4
+   Compiling zerocopy v0.8.59
+   Compiling serde_core v1.0.229
+   Compiling once_cell v1.21.4
+   Compiling const-random-macro v0.1.16
+   Compiling fs-set-times v0.20.3
+   Compiling ahash v0.8.12
+   Compiling smartstring v1.0.1
+   Compiling cap-std v4.0.3
+   Compiling maybe-owned v0.3.4
+   Compiling ipnet v2.12.2
+   Compiling ambient-authority v0.0.2
+   Compiling syn v2.0.119
+   Compiling const-random v0.1.18
+   Compiling zmij v1.0.23
+   Compiling serde v1.0.229
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-trx9e1hu/source)
+   Compiling static_assertions v1.1.0
+   Compiling rhai_codegen v3.2.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-trx9e1hu/source/codegen)
+   Compiling serde_json v1.0.151
+   Compiling smallvec v1.16.2
+   Compiling thin-vec v0.2.20
+   Compiling rmp v0.8.15
+   Compiling itoa v1.0.18
+   Compiling memchr v2.8.3
+   Compiling rmp-serde v1.3.1
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 14.06s
+     Running tests/combined_sys_net.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-trx9e1hu/target/debug/deps/combined_sys_net-a78e496d8d55bedd)
+
+running 1 test
+test sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors ... 
+thread 'sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors' (52325293) panicked at tests/combined_sys_net.rs:119:5:
+fresh host readback must match independent expected bytes; actual="filesystem-payload"; expected="incorrect filesystem expectation"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+FAILED
+
+failures:
+
+failures:
+    sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+error: test failed, to rerun pass `--test combined_sys_net`
+STATUS wrong-fresh-file-control: 101
+PRIVATE_RUNTIME wrong-fresh-file-control-after: 245604 KiB; sampled maximum 218164 KiB
+PRIVATE_RUNTIME restored-baseline-before: 245604 KiB; sampled maximum 218164 KiB
+COMMAND restored-baseline: /Users/hoppworks/.cargo/bin/cargo test --locked --jobs 2 --features testing-environ,sys,net --test combined_sys_net -- --test-threads=1 --nocapture
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 0.06s
+     Running tests/combined_sys_net.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-trx9e1hu/target/debug/deps/combined_sys_net-a78e496d8d55bedd)
+
+running 1 test
+test sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+STATUS restored-baseline: 0
+PRIVATE_RUNTIME restored-baseline-after: 245604 KiB; sampled maximum 218164 KiB
+PRIVATE_RUNTIME combined-sync-before: 245604 KiB; sampled maximum 218164 KiB
+COMMAND combined-sync: /Users/hoppworks/.cargo/bin/cargo test --locked --jobs 2 --features testing-environ,sys,net,sync --test combined_sys_net -- --test-threads=1 --nocapture
+ Downloading crates ...
+  Downloaded spin v0.7.2
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-trx9e1hu/source)
+   Compiling rhai_codegen v3.2.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-trx9e1hu/source/codegen)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 6.38s
+     Running tests/combined_sys_net.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-trx9e1hu/target/debug/deps/combined_sys_net-8def7a0208f1d799)
+
+running 1 test
+test sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+STATUS combined-sync: 0
+PRIVATE_RUNTIME combined-sync-after: 305332 KiB; sampled maximum 270128 KiB
+PRIVATE_RUNTIME combined-no-index-before: 305332 KiB; sampled maximum 270128 KiB
+COMMAND combined-no-index: /Users/hoppworks/.cargo/bin/cargo test --locked --jobs 2 --features testing-environ,sys,net,no_index --test combined_sys_net -- --test-threads=1 --nocapture
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-trx9e1hu/source)
+warning: function `os_to_string` is never used
+   --> src/packages/sys/fs.rs:287:4
+    |
+287 | fn os_to_string(what: &str, s: std::ffi::OsString) -> Result<String, SysError> {
+    |    ^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 5.01s
+     Running tests/combined_sys_net.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-trx9e1hu/target/debug/deps/combined_sys_net-0257966ec41e9901)
+
+running 1 test
+test sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+STATUS combined-no-index: 0
+PRIVATE_RUNTIME combined-no-index-after: 352092 KiB; sampled maximum 320144 KiB
+PRIVATE_RUNTIME combined-metadata-serde-before: 352092 KiB; sampled maximum 320144 KiB
+COMMAND combined-metadata-serde: /Users/hoppworks/.cargo/bin/cargo test --locked --jobs 2 --features testing-environ,sys,net,metadata,serde --test combined_sys_net -- --test-threads=1 --nocapture
+ Downloading crates ...
+  Downloaded serde_derive v1.0.229
+  Downloaded syn v3.0.6
+   Compiling syn v3.0.6
+   Compiling serde v1.0.229
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-trx9e1hu/source)
+   Compiling rhai_codegen v3.2.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-trx9e1hu/source/codegen)
+   Compiling serde_derive v1.0.229
+   Compiling smallvec v1.16.2
+   Compiling rmp-serde v1.3.1
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 35.08s
+     Running tests/combined_sys_net.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-trx9e1hu/target/debug/deps/combined_sys_net-8bb6ac8d4ab35659)
+
+running 1 test
+test sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+STATUS combined-metadata-serde: 0
+PRIVATE_RUNTIME combined-metadata-serde-after: 437084 KiB; sampled maximum 437084 KiB
+PRIVATE_RUNTIME combined-only-i32-no-float-before: 437084 KiB; sampled maximum 437084 KiB
+COMMAND combined-only-i32-no-float: /Users/hoppworks/.cargo/bin/cargo test --locked --jobs 2 --features testing-environ,sys,net,only_i32,no_float --test combined_sys_net -- --test-threads=1 --nocapture
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-trx9e1hu/source)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 4.67s
+     Running tests/combined_sys_net.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-trx9e1hu/target/debug/deps/combined_sys_net-79907a210cd81c3f)
+
+running 1 test
+test sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+STATUS combined-only-i32-no-float: 0
+PRIVATE_RUNTIME combined-only-i32-no-float-after: 476480 KiB; sampled maximum 476468 KiB
+PRIVATE_RUNTIME combined-unchecked-before: 476480 KiB; sampled maximum 476468 KiB
+COMMAND combined-unchecked: /Users/hoppworks/.cargo/bin/cargo test --locked --jobs 2 --features testing-environ,sys,net,unchecked --test combined_sys_net -- --test-threads=1 --nocapture
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-trx9e1hu/source)
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:570:9
+    |
+570 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:583:9
+    |
+583 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:597:9
+    |
+597 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:610:9
+    |
+610 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:625:9
+    |
+625 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:639:9
+    |
+639 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:654:9
+    |
+654 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:668:9
+    |
+668 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:683:9
+    |
+683 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:697:9
+    |
+697 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:712:9
+    |
+712 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:726:9
+    |
+726 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:740:9
+    |
+740 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:753:9
+    |
+753 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:767:9
+    |
+767 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:780:9
+    |
+780 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/sys/fs.rs:583:40
+    |
+583 |         .set_into_module(module, move |ctx: NativeCallContext, file: FileHandle, len: INT| -> Res<crate::Blob> {
+    |                                        ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/sys/fs.rs:566:40
+    |
+566 |         .set_into_module(module, move |ctx: NativeCallContext, file: FileHandle| -> Res<crate::Blob> {
+    |                                        ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/sys/fs.rs:538:36
+    |
+538 |     .set_into_module(module, move |ctx: NativeCallContext, file: FileHandle, len: INT| -> Res<String> {
+    |                                    ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/sys/fs.rs:513:36
+    |
+513 |     .set_into_module(module, move |ctx: NativeCallContext, file: FileHandle| -> Res<String> {
+    |                                    ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: `rhai` (lib) generated 20 warnings (run `cargo fix --lib -p rhai` to apply 20 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 5.72s
+     Running tests/combined_sys_net.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-trx9e1hu/target/debug/deps/combined_sys_net-771d346e0cd0baba)
+
+running 1 test
+test sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+STATUS combined-unchecked: 0
+PRIVATE_RUNTIME combined-unchecked-after: 533624 KiB; sampled maximum 496052 KiB
+PRIVATE_RUNTIME combined-no-index-sync-metadata-before: 533624 KiB; sampled maximum 533624 KiB
+COMMAND combined-no-index-sync-metadata: /Users/hoppworks/.cargo/bin/cargo test --locked --jobs 2 --features testing-environ,sys,net,no_index,sync,metadata --test combined_sys_net -- --test-threads=1 --nocapture
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-trx9e1hu/source)
+   Compiling rhai_codegen v3.2.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-trx9e1hu/source/codegen)
+warning: function `os_to_string` is never used
+   --> src/packages/sys/fs.rs:287:4
+    |
+287 | fn os_to_string(what: &str, s: std::ffi::OsString) -> Result<String, SysError> {
+    |    ^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 6.03s
+     Running tests/combined_sys_net.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-trx9e1hu/target/debug/deps/combined_sys_net-a0d9a2cf4e24b7e5)
+
+running 1 test
+test sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+STATUS combined-no-index-sync-metadata: 0
+PRIVATE_RUNTIME combined-no-index-sync-metadata-after: 588976 KiB; sampled maximum 588976 KiB
+PRIVATE_RUNTIME f32-full-row-before: 588976 KiB; sampled maximum 588976 KiB
+COMMAND f32-full-row: /Users/hoppworks/.cargo/bin/cargo test --locked --jobs 2 --features testing-environ,sys,net,f32_float --test combined_sys_net --test sys_env --test sys_fs --test sys_policy --test net_connect --test net_listen --test net_reads --test net_writes -- --test-threads=1 --nocapture
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-trx9e1hu/source)
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:11:24
+   |
+11 | fn read_bounded_to_end(mut stream: &TcpStream, max_bytes: usize) -> Vec<u8> {
+   |                        ----^^^^^^
+   |                        |
+   |                        help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:62:10
+   |
+62 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:83:10
+   |
+83 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:208:10
+    |
+208 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:266:10
+    |
+266 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:285:9
+    |
+285 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:289:9
+    |
+289 |     let mut peer = TcpStream::connect(address.parse::<SocketAddr>().unwrap()).unwrap();
+    |         ----^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:306:9
+    |
+306 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()).max_write_bytes(2));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: unused return value of `rhai::Scope::<'_>::remove` that must be used
+   --> tests/net_writes.rs:245:13
+    |
+245 |             scope.remove::<String>("payload");
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` (part of `#[warn(unused)]`) on by default
+help: use `let _ = ...` to ignore the resulting value
+    |
+245 |             let _ = scope.remove::<String>("payload");
+    |             +++++++
+
+warning: `rhai` (test "net_writes") generated 9 warnings (run `cargo fix --test "net_writes" -p rhai` to apply 8 suggestions)
+STOP: resource/process sampler failed closed: RuntimeError: du failed closed (1): du: /var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-trx9e1hu/target/debug/deps/sys_fs-b96f83e7308d8775.sys_fs.2d7331700150f206-cgu.3.rcgu.o: No such file or directory
+launcher_finish_utc=2026-09-30T18:17:36Z scoped_status=89
