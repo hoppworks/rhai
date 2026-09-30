@@ -286,16 +286,16 @@ internal static class WindowsCustodyBackend
 #if SCOPED_RUNNER_TESTING
             injectIdentityFailure = failIdentity;
 #endif
-            using (WindowsIdentity identity = WindowsIdentity.GetCurrent())
-            {
-                if (identity == null || identity.User == null) throw new IOException("current user has no SID");
-                userSid = identity.User.Value;
-            }
             DurableJournal created = null;
             string path = null;
             RuntimePath = System.IO.Path.Combine(parent.Path, "scoped-" + id.ToString("N"));
             try
             {
+                using (WindowsIdentity identity = WindowsIdentity.GetCurrent())
+                {
+                    if (identity == null || identity.User == null) throw new IOException("current user has no SID");
+                    userSid = identity.User.Value;
+                }
                 if (RuntimePath.Length > MaximumPathLength) throw new IOException("generated runtime path exceeds the fixed path bound");
                 created = CreateJournal(parent, out path);
                 journal = created;
@@ -309,9 +309,8 @@ internal static class WindowsCustodyBackend
             catch (Exception error)
             {
                 if (created != null) { try { created.Dispose(); } catch { } }
-                string journalStatus = String.IsNullOrEmpty(path) ? "journal path was not created" : "journal retained at " + path + " (framing may be incomplete)";
-                throw new IOException("allocation intent setup failed; runtime was not created or opened; candidate path " + RuntimePath + "; " + journalStatus,
-                    error);
+                string status = String.IsNullOrEmpty(path) ? "journal not created" : "intent framing may be incomplete; runtime was not created or opened";
+                throw new IOException(AllocationDiagnostic("allocation intent setup failed: " + error.Message + "; " + status, RuntimePath, path), error);
             }
         }
 
@@ -330,7 +329,7 @@ internal static class WindowsCustodyBackend
                 if (!CreateDirectoryW(RuntimePath, ref security))
                 {
                     State = AllocationState.FailedBeforeCreation;
-                    Failure = BoundDiagnostic("CreateDirectoryW failed; path was not opened or adopted: " + RuntimePath + "; journal retained at " + JournalPath + "; Win32Error=" + Marshal.GetLastWin32Error());
+                    Failure = AllocationDiagnostic("CreateDirectoryW failed; path was not opened or adopted; Win32Error=" + Marshal.GetLastWin32Error(), RuntimePath, JournalPath);
                     return false; // Includes collisions: never open or adopt the existing name.
                 }
                 directoryCreated = true;
@@ -351,7 +350,7 @@ internal static class WindowsCustodyBackend
             catch (Exception error)
             {
                 State = directoryCreated ? AllocationState.FailedRetained : AllocationState.FailedBeforeCreation;
-                Failure = BoundDiagnostic(error.Message + "; runtime path " + RuntimePath + (directoryCreated ? " retained with uncertain identity/journal status" : " not created by this attempt") + "; journal retained at " + JournalPath);
+                Failure = AllocationDiagnostic(error.Message + "; " + (directoryCreated ? "runtime retained with uncertain identity/journal status" : "runtime not created by this attempt"), RuntimePath, JournalPath);
                 return false;
             }
             finally { if (descriptor != IntPtr.Zero) LocalFree(descriptor); }
@@ -364,18 +363,18 @@ internal static class WindowsCustodyBackend
             if (State == AllocationState.IntentFlushed)
             {
                 State = AllocationState.FailedBeforeCreation;
-                Failure = BoundDiagnostic("allocation owner disposed before runtime creation; candidate was not created by this attempt; journal retained at " + JournalPath);
+                Failure = AllocationDiagnostic("allocation owner disposed before runtime creation; candidate was not created by this attempt", RuntimePath, JournalPath);
             }
             else if (State == AllocationState.Created || State == AllocationState.Verified)
             {
                 State = AllocationState.FailedRetained;
-                Failure = BoundDiagnostic("allocation owner disposed before identity receipt; runtime path retained: " + RuntimePath + "; journal retained at " + JournalPath);
+                Failure = AllocationDiagnostic("allocation owner disposed before identity receipt; runtime retained", RuntimePath, JournalPath);
             }
             Exception failure = null;
             try { if (runtimeHandle != null) runtimeHandle.Dispose(); } catch (Exception e) { failure = e; }
             try { journal.Dispose(); } catch (Exception e) { if (failure == null) failure = e; }
             try { parent.DisposeOwned(); } catch (Exception e) { if (failure == null) failure = e; }
-            if (failure != null) throw new IOException("allocation handles did not all close cleanly; runtime retained", failure);
+            if (failure != null) throw new IOException(AllocationDiagnostic("one or more allocation handles failed to close; runtime retained", RuntimePath, JournalPath), failure);
         }
     }
 
@@ -426,10 +425,15 @@ internal static class WindowsCustodyBackend
         return identity.VolumeSerial.ToString("X16") + ":" + identity.FileId.ToString("N");
     }
 
-    private static string BoundDiagnostic(string value)
+    private static string AllocationDiagnostic(string error, string runtimePath, string journalPath)
     {
-        if (String.IsNullOrEmpty(value)) return "allocation failed";
-        return value.Length <= 512 ? value : value.Substring(0, 512);
+        // Bound only free-form error text. Parent paths are bounded at pin time;
+        // the generated child suffixes are fixed, so the complete diagnostic is
+        // bounded by 2 * MaximumPathLength plus this format/error allowance.
+        if (String.IsNullOrEmpty(error)) error = "allocation failed";
+        error = error.Replace('\r', ' ').Replace('\n', ' ');
+        if (error.Length > 384) error = error.Substring(0, 384);
+        return "error=" + error + "; runtime=" + (runtimePath ?? "<unavailable>") + "; journal=" + (journalPath ?? "<not-created>");
     }
 
     internal static DurableJournal CreateJournal(PinnedDirectory evidenceRoot, out string journalPath)
