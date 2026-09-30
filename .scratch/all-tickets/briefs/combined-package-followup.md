@@ -1,0 +1,11 @@
+# Proposed combined-package follow-up
+
+Status: proposal awaiting an extension answer, no launch authorized by this file.
+
+Original package15:36–16:06UTC stopped early after sampled private disk2,675,624KiB exceeded2GiB. Seven full rows observed green at679e7d7f; f32 incomplete. Root review found single-read assumption unsafe for fragmented TCP, corrected statically at14aceb41 to read_to_end_string with identical cap and peer EOF. Corrected assertion has no runtime proof. Source frozen in /Users/hoppworks/projects/rhai-combined-package-proof. Retain setup correction history and cap violation; no cause/time reset or inferred peak.
+
+Proposed single bounded extension:30 minutes total inclusive independent root review, actual start/deadline recorded only on answer. One private scoped build/run invocation<=600s, jobs2, serial fixtures, private copied source/CARGO_HOME/TARGET, dev/test debug0 and incremental0. Keep2GiB hard storage cap, sample whole runtime every second and terminate before1.5GiB sampled guard threshold; memory/true peaks remain unmeasured. Existing<=16 handle bound preserved. No install, production behavior change or stopped process/Windows work.
+
+Remaining observable acceptance: corrected same-Engine combined contract in all eight approved combinations plus full missing f32 sys/net row. Run the corrected combined target across the seven previous combinations (old unchanged sys/net target matrix remains reusable), then full eight-target f32 row. One wrong fresh host-file expected-value control101 plus correct baseline. All nine normal/control outcomes finite, every launched check recorded; no reruns after unexpected assertion failure, threshold, package exhaustion or unchanged no-progress cause. Reserve export/cleanup/review; stop if next check cannot finish in remaining time. Export every result before scoped exit. Exact runtime/process absence readback required. No additional extension or second Expert chain inferred.
+
+On success integrate corrected source and accepted proof locally, push authorized task/all-tickets exactly, preserve proof and retire only owned clean checkout. On stop retain partial results and remaining gate; no combined matrix completion claim until corrected assertions and f32 full row pass.

@@ -1,0 +1,9 @@
+# Native Linux TCP acceptance
+
+Accepted proof71446daff44735e652a3b73e370952b3c9c1e68e inside original15:38–16:08UTC package. Exact tested source2e945d9f. Nine scratch artifacts, no production or test source changes; run-native.sh and resource sampler reviewed, canonical full log/status table independently inspected. Real Engine/public package/OS peer targets: net28, net+sync30, net+no_index28; all twelve nonzero targets pass. Wrong byte101 occurs at actual peer bytes [0,255,65] vs [0,254,65]; restored target1/1 status0. Initial diagnostic matcher failure did not invalidate underlying matrix; corrected canonical invocation repeats and proves control/readback. No API correction.
+
+Native workhorse Bazzite44 x86_64 Rust1.97.1, not optional MSRV. Private native copied configured runner/helpers and source/CARGO_HOME/TARGET, jobs2, serial targets. Sampled descendant socket FD maximum5; allocated private storage1,279,844,352 bytes below2GiB. True peaks/memory unmeasured; final-only cap checks do not prove continuous hard-limit enforcement. Source lock identity and environment retained ../linux-tcp-proof/proof.md. No source hash-tree duplication requested.
+
+Root independently queried workhorse: /tmp/agent-build-8twb50ak, exact /root/rhai-linux-tcp-proof-task/2e945d9f and /proc/1441067, /proc/1441127 absent. Historical parent staging preserved. Existing package source/check logic unchanged by later root documentation/example additions, so accepted Linux behavior evidence applies to current package code. New net_metadata/example execution on Linux not claimed.
+
+Linux no_object/combined sys/other feature rows, optional MSRV, Windows and process remain open. Complete release unaccepted. Integrate proof and push task/all-tickets, retain canonical evidence then retire only owned clean proof checkout.

@@ -1,0 +1,7 @@
+# Combined sys/net partial source/evidence review
+
+Source679e7d7f, source-only correction14aceb41. All one Rust integration file reviewed via OCRdelegate; scratch raw proof inspected separately. Seven feature rows each have eight nonzero passing targets and intended fresh-host-file wrong expectation101 then correct passes. Native macOS EILSEQ fixture omissions explicit; no nonUTF8 claim. Existing other package behavior source/checks unchanged, so those seven observed rows remain reusable. New coexistence check changes at14aceb41 invalidate prior runtime applicability to corrected check until reverified.
+
+Finding: read_string reads one TCP chunk, so full-reply equality can spuriously fail on fragmentation. Fixed statically to read_to_end_string with same cap; peer closes after write. Corrected source unverified, not integrated as accepted. No other blocking source finding; host downcast confirms distinct structured runtime payloads (not script getter collision proof).
+
+Resource cap breached: sampled2,675,624KiB>2GiB, actual peak unknown. Further launch stopped; already-started separate f32 interrupted. Three recorded scoped runtime paths independently read back absent. No f32 acceptance; partial outputs insufficient full row. Stopped cause retained with concrete extension proposal briefs/combined-package-followup.md; answer needed before further execution. Preserve owned clean checkout/unaccepted source. No complete release claim.
