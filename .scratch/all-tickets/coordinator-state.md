@@ -422,3 +422,21 @@ unaccepted isolated candidates remain local. Remote merge is not authorized.
 agent-skills local HEAD and remote HEAD both263e430546d899a041c8d781b9024d357ca56530;
 campaign link resolves to that repository. Current bounded-repair reference read;
 original deadlines and cause history remain binding, no installation required.
+
+## Latest accepted requirements and resumed work
+
+TCP listener/accept candidate eda030a1 accepted and merged locally; see
+tcp-listener-review.md. Expert03 sole bounded followup passed quota expiry and
+sync clone close; unchanged net suites/control reused. Exact runtime absent.
+File streaming read candidate7131f253 accepted and merged locally; see
+file-handle-reads-review.md. Full sys_fs base34/sync-no_index24/unchecked32,
+affected final blob assertions and wrong payload control assessed. Three exact
+runtimes absent; unmeasured resource-cap compliance explicitly unverified.
+
+Owner's acceptance of all recommendations for open questions authorizes the
+recommended additional60-active-minute continuation for the stopped process
+prototype. The earlier pending consultation is resolved by that explicit blanket
+answer; do not ask again. Same sole Expert and cause history, no replacement
+chain. Begin extension clock at actual resumed launch and record it before work.
+Independent source gate still precedes native execution. Unaccepted Windows
+custody/bootstrap remains closed. TCP stream reads starts fresh next requirement.
