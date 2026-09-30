@@ -42,9 +42,11 @@ process environment/current-directory mutation, shared server reset or remote Gi
 write occurred. Test child success/status is observed by exact-name fixture parents;
 filesystem effects are independently read through std::fs as recorded in test source.
 
-Previous native Linux proof is retained in ../linux-sys-proof/proof.md; affected
-filesystem/policy checks on this corrected source are underway. No new Linux
-completion claim yet. Opening host root/drive/share directories under permission
+Native Linux follow-up on source 98f66aca passed fs25/policy24 including the
+deleted-cwd and NotUtf8 cases. Reviewed command/log/assertion applicability and
+independently confirmed exact runtime absence and retained canonical log existence.
+See ../linux-sys-proof/integrated-filesystem-proof.md. Prior unchanged env/control
+evidence is reused. Opening host root/drive/share directories under permission
 denial was not safely exercised; removing that unrelated open is source-reviewed.
 Process/TCP/file handles, Windows native supervision and the release feature/MSRV
 matrix remain unverified.

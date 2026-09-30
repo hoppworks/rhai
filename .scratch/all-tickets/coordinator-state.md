@@ -44,7 +44,9 @@ be resolved before their dependent implementation. No remote publication.
 Step 1 corrected unrestricted resolution is integrated at 5f87d339 and accepted
 on native macOS: env7/fs24/policy26 pass, exact runtime absent. Red/green
 unlinked-cwd contract and immediate child/marker ownership guards reviewed.
-Affected Linux fs/policy proof is active; previous env proof remains applicable.
+Affected Linux proof fecbfdd1 accepted on 98f66aca: fs25/policy24 pass, including
+deleted-cwd and NotUtf8. Command/log/applicability reviewed and exact remote
+runtime absence independently confirmed. Previous env/control proof remains valid.
 Windows static candidate 2e65cb45 corrects reviewed ABI and bounded-wait defects,
 but compile/native/independent monitor gates remain unverified, not integrated.
 Step 2 owner TCP question remains pending; release/API proposal is unaccepted.
@@ -111,7 +113,7 @@ Inherited VM history remains authoritative.
 
 ## Next action
 
-Collect updated Linux affected-path proof and process design review. Corrected
+Collect amended process supervision design and review its gates. Corrected
 macOS combined proof is accepted at 5f87d339; do not rerun unchanged source.
 Keep Windows static candidate separate until independent guest cleanup is solved.
 Collect and independently review the process supervision design before the single
@@ -123,6 +125,6 @@ Linear is legacy and excluded, with no writes performed there.
 
 Current turn made progress: corrected unrestricted paths and guarded regression
 integrated at 5f87d339; full native macOS proof accepted and affected Linux checks
-dispatched. Windows static review defects corrected but native gates open.
+accepted (fs25/policy24). Windows static review defects corrected but native gates open.
 Owner-authorized process retry design reviewed and rejected before execution;
 responsible context is applying the reviewed custodian amendment.
