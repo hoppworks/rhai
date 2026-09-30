@@ -10,6 +10,8 @@ pub struct NetConfig {
     pub(crate) listen: Vec<SocketAddr>,
     pub(crate) connect_timeout: Duration,
     pub(crate) accept_timeout: Duration,
+    pub(crate) read_timeout: Duration,
+    pub(crate) max_read_bytes: usize,
     pub(crate) max_handles: usize,
 }
 
@@ -20,6 +22,8 @@ impl Default for NetConfig {
             listen: Vec::new(),
             connect_timeout: Duration::from_secs(5),
             accept_timeout: Duration::from_secs(5),
+            read_timeout: Duration::from_secs(5),
+            max_read_bytes: 1024 * 1024,
             max_handles: 64,
         }
     }
@@ -58,6 +62,26 @@ impl NetConfig {
     #[must_use]
     pub fn accept_timeout(mut self, timeout: Duration) -> Self {
         self.accept_timeout = timeout;
+        self
+    }
+
+    /// Set the finite positive host ceiling for script stream reads.
+    ///
+    /// Script methods may request a shorter timeout. Receive storage is always capped at
+    /// 1 MiB, and this setting may lower that cap. Zero is rejected when the package is built.
+    #[must_use]
+    pub fn read_timeout(mut self, timeout: Duration) -> Self {
+        self.read_timeout = timeout;
+        self
+    }
+
+    /// Lower the per-call receive allocation ceiling (at most 1 MiB).
+    ///
+    /// Zero is rejected when the package is built. Engine string/blob limits may lower the
+    /// effective bound further in checked builds.
+    #[must_use]
+    pub fn max_read_bytes(mut self, limit: usize) -> Self {
+        self.max_read_bytes = limit;
         self
     }
 

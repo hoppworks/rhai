@@ -20,6 +20,8 @@ pub use error::NetError;
 pub use listener::NetListener;
 pub use stream::NetStream;
 
+pub(super) const MAX_READ_BYTES: usize = 1024 * 1024;
+
 use crate::packages::Package;
 use crate::{FuncRegistration, Module, Shared, SharedModule};
 use std::net::{IpAddr, SocketAddr, TcpStream};
@@ -59,6 +61,24 @@ impl NetPackage {
                 "configure accept timeout",
                 format!("{:?}", config.accept_timeout),
                 "accept timeout must be finite, positive, and representable",
+            ));
+        }
+        if config.read_timeout.is_zero()
+            || std::time::Instant::now()
+                .checked_add(config.read_timeout)
+                .is_none()
+        {
+            return Err(NetError::invalid(
+                "configure read timeout",
+                format!("{:?}", config.read_timeout),
+                "read timeout must be finite, positive, and representable",
+            ));
+        }
+        if config.max_read_bytes == 0 || config.max_read_bytes > MAX_READ_BYTES {
+            return Err(NetError::invalid(
+                "configure read limit",
+                config.max_read_bytes.to_string(),
+                "read limit must be between 1 and 1048576 bytes",
             ));
         }
         if config.max_handles == 0 || config.max_handles > 64 {
@@ -146,8 +166,16 @@ fn connect(
         Ok(socket) => socket,
         Err(error) => return Err(NetError::io("connect", target, &error).into()),
     };
+    if let Err(error) = socket.set_nonblocking(true) {
+        return Err(NetError::io("connect", target, &error).into());
+    }
     reservation.commit();
-    Ok(NetStream::new(socket, state.open_handles.clone()))
+    Ok(NetStream::new(
+        socket,
+        state.open_handles.clone(),
+        state.config.read_timeout,
+        state.config.max_read_bytes,
+    ))
 }
 
 pub(super) struct HandleReservation {
