@@ -41,7 +41,7 @@ be resolved before their dependent implementation. No remote publication.
 
 ## Current step
 
-Windows candidate is now 08fb7cd5 on task/windows-scoped-runner. Foundation
+Windows candidate is now 03a56347 on task/windows-scoped-runner. Foundation
 4bf0e3a5 adds ancestor pins, identities and exclusive protected journal creation;
 967500f3 corrects input bounds and incomplete fixture framing. Three files were
 independently reviewed, zero skipped; related corrections retained in
@@ -59,13 +59,14 @@ precede identity recording. Retained directories keep their journals and full
 failure paths. This is source observation only: no compile, executed fixture,
 TDD RED/GREEN, native operation or runtime resource. The candidate is clean and
 separate; no product integration or ticket acceptance.
-Handle-based source staging and executable validation are now running in the
-responsible candidate context under briefs/windows-source-staging.md, from clean
-08fb7cd5. Live agent status was confirmed, not inferred from a state file.
-Draft source and fixture changes are present (roughly 800 backend lines plus
-fixture cases) and being corrected in that context. Intermediate review findings
-are retained in windows-source-staging-review.md. Final commit/independent review
-is pending; do not integrate or claim staging accepted from this draft.
+Handle-based source staging and executable validation are committed in b4c055ee.
+All three changed files were independently source-reviewed, including OCR-excluded
+README and fixture: zero skips, 100% source review; whitespace check passed.
+No compiler, fixture or native run occurred. Related corrections in 03a56347 were independently reviewed across all three
+files, zero skips: full ancestor identity-chain input, specific bound assertions,
+per-file/depth/cancellation fixture source, and documentation accuracy. See
+windows-source-staging-review.md. Candidate is clean, separate and workload
+launch disabled. Source review permits the next source substep, not acceptance.
 
 Step 1 corrected unrestricted resolution is integrated at 5f87d339 and accepted
 on native macOS: env7/fs24/policy26 pass, exact runtime absent. Red/green
@@ -149,14 +150,12 @@ Inherited VM history remains authoritative.
 
 ## Next action
 
-Continue the responsible Windows candidate context from 08fb7cd5. The next
-independent source requirement is handle-based staging and executable-path
-validation, followed by handle-safe disposition and immutable specification/
-monitor integration. Keep payload entry disabled until those source requirements
-are met. Use windows-runtime-allocation-review.md and
-windows-runtime-backend-review.md for retained findings and boundaries.
-Correct Running lease renewal before payload integration. No native execution
-until the unchanged bootstrap/guest-custody gates pass.
+Continue from source-reviewed 03a56347 in the same responsible Windows context
+with handle-safe disposition under
+briefs/windows-runtime-disposition.md, followed by immutable specification and
+monitor integration. Keep payload entry disabled. Correct Running lease renewal
+before payload integration. No native execution until the unchanged bootstrap/
+guest-custody gates pass. Preserve the existing single Windows escalation chain.
 
 Windows custody Expert answer 02-windows-runtime-custody.answer.md is retained.
 It recommends a separate sole-owner monitor, creation-time job-list assignment,
@@ -202,13 +201,12 @@ requirements with new evidence; do not repeat decision/status/verification round
 
 ## Goal turn classification
 
-2026-09-30 staging continuation: progress in authoritative candidate source,
-with test-first fixture source, handle-based copy/validation draft and related
-review corrections. Confirmed live responsible agent and bounded observation
-timeouts are verified waits, not terminal evidence. No fixture/compiler/native
-execution or temporary runtime exists. Final staging commit and full source
-review remain pending; goal stays active and incomplete. No completed failed
-full-custody correction or infrastructure recovery occurred.
+2026-09-30 staging continuation: progress. Candidate b4c055ee implements the
+bounded source slice. Three-file source review found identity-chain and fixture assertion gaps;
+03a56347 corrects them and was independently reviewed across three files. This
+is not another full-custody attempt. Disposition brief is prepared for the same
+responsible context. No compiler/fixture/native run, runtime
+resource or ticket acceptance occurred. Goal remains active and incomplete.
 
 2026-09-30 current continuation: progress. Exclusive runtime allocation source
 3d7a659b and reviewed corrections 9a68a437/08fb7cd5 advance the existing Windows

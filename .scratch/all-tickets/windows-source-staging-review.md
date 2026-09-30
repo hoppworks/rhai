@@ -1,11 +1,58 @@
-# Windows source staging review in progress
+# Windows source staging review
 
 Baseline: clean `08fb7cd5` in the owned candidate worktree
 `/Users/hoppworks/projects/rhai-windows-scoped-runner`.
 Implementation brief: `briefs/windows-source-staging.md`.
-The responsible context is actively implementing this related requirement.
-The current draft is uncommitted; final source review and coverage accounting
-must use its eventual commit. No compiler/native/fixture execution occurred.
+The source slice is committed as `b4c055ee`; related review corrections are
+active in the same responsible context. No compiler/native/fixture execution
+occurred. This review does not accept Windows custody or a ticket.
+
+## Committed source review and coverage
+
+OCR commit preview selected WindowsCustodyBackend.cs and excluded README.md
+(unsupported extension) and fixtures/CustodyBackendFixture.cs (default path).
+The default correctness/security/resource/test rules were read. All three
+changed files were manually reviewed, including those exclusions:
+total_files=3, reviewed_files=3, skipped_files=0, coverage_rate=100%.
+This coverage is source review, not executed behavioral coverage.
+`git diff --check 08fb7cd5..b4c055ee` passed. The candidate was clean when collected.
+
+The committed source retains source file pins through final scan/receipt, reads
+and hashes opened source/destination handles, verifies exclusive destination
+ACLs and identity, and retains executable plus parent pins on the owner.
+SafeCloseStagedExecutable now attempts all closures independently. Bounds are
+2,048 entries (including the source root), depth 32, 64 MiB/file and 512 MiB/tree.
+The README explicitly limits the scan to operational consistency rather than
+an atomic or hostile-input snapshot. All native API semantics remain unproven.
+
+Final related corrections requested:
+
+- Supply the full sourceAncestors chain to the identity overlap helper. The
+  single root pin has only its own identity, making the helper's intended
+  ancestor check incomplete. Existing spelling/sharing failures are not proof
+  of that identity-chain invariant.
+- Assert intended failure diagnostics in inventory/total-byte fixtures; generic
+  failure could satisfy them after an unrelated earlier error. Add distinct
+  source cases for per-file/depth limits and cancellation, retained runtime and
+  receipt absence after owner closure. No fixture run is authorized here.
+- Correct README's remaining-boundary wording: executable validation source
+  exists; native and launch acceptance remain pending. Record the total-bound
+  fixture's large source/destination requirement before any native budget.
+
+Correction commit `03a56347` was independently reviewed across all three files:
+total_files=3, reviewed_files=3, skipped_files=0, coverage_rate=100%.
+OCR exclusions and rules are unchanged. `git diff --check b4c055ee..03a56347`
+passed; candidate is clean. The overlap helper now receives sourceAncestors,
+whose leaf identity was compared with the separate root pin. Boundary fixtures
+assert specific diagnostics and identity-recorded setup, then independently
+read the journal after disposal and check runtime retention and absent STAGED.
+Per-file, depth and canceled-token cases are distinct from total/inventory cases.
+README accurately distinguishes present source from pending launch verification.
+No compiler or fixture ran. Native depth/path-length and symlink privilege gates,
+as well as the explicitly budgeted large fixture, still need real verification.
+
+The bounded staging source requirement is ready for the next source substep;
+operational acceptance remains open. Do not integrate the candidate.
 
 ## Draft findings delivered to responsible context
 
