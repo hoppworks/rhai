@@ -33,7 +33,8 @@ started. Maximum quality takes precedence over effort.
 - Verification strict; own pushes automatic; Coordinator merges automatic only green.
 - Worktree: /Users/hoppworks/.codex/worktrees/stdlib-net-assessment/rhai.
 - Branch: task/stdlib-net-assessment; origin: https://github.com/hoppworks/rhai.git.
-- No implementation, merge, upstream action, new dependency, or tool installation.
+- No production implementation, merge, upstream action or new library dependency.
+  Owner explicitly authorized Windows VM provisioning on workhorse.
 - Strict verification config is accepted and recorded in AGENTS.md. No runtime
   acceptance proof has been claimed in this planning step.
 - Four sys review findings remain unresolved: configured-root symlink/parent semantics,
@@ -44,9 +45,21 @@ started. Maximum quality takes precedence over effort.
 - No new research tickets needed yet: prior source inventory and runtime diagnostics
   already answer reuse facts. Delegate research only when a decision exposes a gap.
 
+## Windows environment provisioning
+
+The owner authorized SSH work on workhorse and a Windows VM on 2026-09-30.
+SSH works; KVM/QEMU/libvirt/UEFI/TPM are present. Created the owned domain
+`rhai-win11-quality` (4 vCPUs, 8 GiB, sparse 100 GiB disk) and seed ISO under
+`/var/lib/libvirt/images/rhai-win11-quality`. The owner reports a Windows Pro license. The Enterprise Evaluation download was
+stopped; official multi-edition retail media is downloading for Pro installation.
+Verify the published SHA-256 before boot. Installation and native
+Windows readiness are not yet verified. Details: windows-vm/README.md.
+No existing workloads were stopped, and no host tools were installed.
+
 ## Next action
 
-Next invocation: claim issues/04-tcp-authority.md and settle TCP permissions.
+Current step: finish and verify the owned Windows Pro VM installation.
+After that: claim issues/04-tcp-authority.md and settle TCP permissions.
 Ticket 06 must review process host-config spelling, error-report compatibility and
 managed-scope native platform release gates. Cancellation/reaping and scope-setup
 prototypes remain implementation gates, not completed evidence. Do not implement

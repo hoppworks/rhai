@@ -1,0 +1,29 @@
+<domain type="kvm">
+  <name>rhai-win11-quality</name>
+  <uuid>dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19</uuid>
+  <memory unit="MiB">8192</memory><currentMemory unit="MiB">8192</currentMemory>
+  <vcpu placement="static">4</vcpu>
+  <os firmware="efi">
+    <type arch="x86_64" machine="q35">hvm</type>
+    <firmware><feature enabled="yes" name="secure-boot"/><feature enabled="yes" name="enrolled-keys"/></firmware>
+    <bootmenu enable="yes" timeout="3000"/>
+  </os>
+  <features><acpi/><apic/><smm state="on"/></features>
+  <cpu mode="host-passthrough" check="none" migratable="off"><topology sockets="1" dies="1" cores="4" threads="1"/></cpu>
+  <clock offset="localtime"><timer name="rtc" tickpolicy="catchup"/><timer name="pit" tickpolicy="delay"/><timer name="hpet" present="no"/></clock>
+  <on_poweroff>destroy</on_poweroff><on_reboot>restart</on_reboot><on_crash>preserve</on_crash>
+  <devices>
+    <emulator>/usr/bin/qemu-system-x86_64</emulator>
+    <controller type="sata" index="0"/>
+    <disk type="file" device="disk"><driver name="qemu" type="qcow2"/><source file="/var/lib/libvirt/images/rhai-win11-quality/system.qcow2"/><target dev="sda" bus="sata"/><boot order="2"/></disk>
+    <disk type="file" device="cdrom"><driver name="qemu" type="raw"/><source file="/var/lib/libvirt/images/rhai-win11-quality/windows11-pro.iso"/><target dev="sdb" bus="sata"/><readonly/><boot order="1"/></disk>
+    <disk type="file" device="cdrom"><driver name="qemu" type="raw"/><source file="/var/lib/libvirt/images/rhai-win11-quality/seed.iso"/><target dev="sdc" bus="sata"/><readonly/></disk>
+    <interface type="network"><source network="default"/><model type="e1000e"/></interface>
+    <serial type="file"><source path="/var/lib/libvirt/images/rhai-win11-quality/serial.log"/><target type="isa-serial" port="0"/></serial>
+    <input type="tablet" bus="usb"/><controller type="usb" model="qemu-xhci"/>
+    <graphics type="vnc" autoport="yes" listen="127.0.0.1"><listen type="address" address="127.0.0.1"/></graphics>
+    <video><model type="vga" vram="16384" heads="1" primary="yes"/></video>
+    <tpm model="tpm-crb"><backend type="emulator" version="2.0"/></tpm>
+    <memballoon model="none"/>
+  </devices>
+</domain>
