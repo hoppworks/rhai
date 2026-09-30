@@ -18,6 +18,8 @@ struct SharedListenerState {
     open_handles: Arc<AtomicUsize>,
     max_handles: usize,
     accept_timeout: Duration,
+    read_timeout: Duration,
+    max_read_bytes: usize,
     address: SocketAddr,
 }
 
@@ -111,7 +113,7 @@ impl NetListener {
             };
             match outcome {
                 Ok((stream, _peer)) => {
-                    if let Err(error) = stream.set_nonblocking(false) {
+                    if let Err(error) = stream.set_nonblocking(true) {
                         return Err(super::NetError::io(
                             "accept",
                             self.0.address.to_string(),
@@ -120,7 +122,12 @@ impl NetListener {
                         .into());
                     }
                     reservation.commit();
-                    return Ok(super::NetStream::new(stream, self.0.open_handles.clone()));
+                    return Ok(super::NetStream::new(
+                        stream,
+                        self.0.open_handles.clone(),
+                        self.0.read_timeout,
+                        self.0.max_read_bytes,
+                    ));
                 }
                 Err(error) if error.kind() == io::ErrorKind::WouldBlock => {
                     std::thread::sleep(remaining.min(Duration::from_millis(5)));
@@ -182,6 +189,8 @@ pub(super) fn listen(
         open_handles: state.open_handles.clone(),
         max_handles: state.config.max_handles,
         accept_timeout: state.config.accept_timeout,
+        read_timeout: state.config.read_timeout,
+        max_read_bytes: state.config.max_read_bytes,
         address,
     })))
 }

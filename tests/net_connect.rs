@@ -95,6 +95,12 @@ fn net_config_rejects_zero_deadline_and_invalid_handle_limits() {
     assert_eq!(error.kind(), "InvalidInput");
     let error = NetPackage::new(NetConfig::default().accept_timeout(Duration::ZERO)).err().unwrap();
     assert_eq!(error.kind(), "InvalidInput");
+    let error = NetPackage::new(NetConfig::default().read_timeout(Duration::ZERO)).err().unwrap();
+    assert_eq!(error.kind(), "InvalidInput");
+    let error = NetPackage::new(NetConfig::default().max_read_bytes(0)).err().unwrap();
+    assert_eq!(error.kind(), "InvalidInput");
+    let error = NetPackage::new(NetConfig::default().max_read_bytes(1024 * 1024 + 1)).err().unwrap();
+    assert_eq!(error.kind(), "InvalidInput");
     let error = NetPackage::new(NetConfig::default().max_handles(0)).err().unwrap();
     assert_eq!(error.kind(), "InvalidInput");
     let _: NetError = error;

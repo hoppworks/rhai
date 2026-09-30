@@ -14,6 +14,7 @@ pub struct NetError {
     io_kind: Option<io::ErrorKind>,
     op: &'static str,
     target: String,
+    partial_bytes: usize,
 }
 
 impl NetError {
@@ -28,6 +29,7 @@ impl NetError {
             io_kind: Some(io::ErrorKind::InvalidInput),
             op,
             target: target.into(),
+            partial_bytes: 0,
         }
     }
 
@@ -42,6 +44,7 @@ impl NetError {
             io_kind: None,
             op,
             target: target.into(),
+            partial_bytes: 0,
         }
     }
 
@@ -56,6 +59,7 @@ impl NetError {
             io_kind: None,
             op,
             target: target.into(),
+            partial_bytes: 0,
         }
     }
 
@@ -74,7 +78,13 @@ impl NetError {
             io_kind: Some(source.kind()),
             op,
             target: target.into(),
+            partial_bytes: 0,
         }
+    }
+
+    pub(crate) fn with_partial_bytes(mut self, partial_bytes: usize) -> Self {
+        self.partial_bytes = partial_bytes;
+        self
     }
 
     /// Error category such as `Denied`, `InvalidInput`, `Io` or `Timeout`.
@@ -105,6 +115,12 @@ impl NetError {
     #[must_use]
     pub fn target(&self) -> &str {
         &self.target
+    }
+
+    /// Number of bytes captured before an operation failed.
+    #[must_use]
+    pub fn partial_bytes(&self) -> crate::INT {
+        self.partial_bytes as crate::INT
     }
 
     pub(super) fn register(module: &mut Module) {
@@ -140,6 +156,11 @@ mod net_error_functions {
     #[rhai_fn(get = "target", pure)]
     pub fn target(err: &mut NetError) -> ImmutableString {
         err.target().into()
+    }
+
+    #[rhai_fn(get = "partial_bytes", pure)]
+    pub fn partial_bytes(err: &mut NetError) -> crate::INT {
+        err.partial_bytes()
     }
 
     #[rhai_fn(name = "to_string", pure)]
