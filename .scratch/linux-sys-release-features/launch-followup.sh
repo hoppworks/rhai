@@ -8,13 +8,13 @@ mkdir -p "$evidence"
 exec > >(tee -a "$evidence/outer.log") 2>&1
 trap 'rc=$?; if [[ ! -e "$evidence/outer-status.txt" ]]; then printf "%s\n" "$rc" > "$evidence/outer-status.txt"; fi' EXIT
 
-deadline_epoch=$(date -u -d '2026-09-30 18:05:14 UTC' +%s)
+deadline_epoch=$(date -u -d '2026-09-30 19:02:48 UTC' +%s)
 now_epoch=$(date -u +%s)
 remaining=$((deadline_epoch - now_epoch))
-(( remaining > 900 )) && remaining=900
+(( remaining > 600 )) && remaining=600
 printf 'launch_utc=%s\n' "$(date -u +%FT%TZ)"
 printf 'launcher_pid=%s launcher_pgid=%s\n' "$$" "$(ps -o pgid= -p $$ | tr -d ' ')"
-printf 'absolute_deadline=2026-09-30T18:05:14Z runner_timeout_seconds=%s max_invocation_seconds=900\n' "$remaining"
+printf 'absolute_deadline=2026-09-30T19:02:48Z runner_timeout_seconds=%s max_invocation_seconds=600\n' "$remaining"
 if (( remaining <= 0 )); then
   printf 'launcher_status=124\n' > "$evidence/outer-status.txt"
   exit 124

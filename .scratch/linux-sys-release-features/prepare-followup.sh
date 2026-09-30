@@ -4,7 +4,7 @@ set -euo pipefail
 repo=/Users/hoppworks/projects/rhai-linux-sys-release-features
 source_rev=e1db9baafaaf30d94085f0cc6f661f363399f193
 expected_archive=c934633c7889e4a427a87d557bbc578146e4db641c4fde2c93ff3fd4f047aa47
-stage=/root/rhai-linux-sys-release-features-task/followup-e1db9baa
+stage=/root/rhai-linux-sys-release-features-task/followup-e1db9baa-attempt3
 skills=/Users/hoppworks/projects/agent-skills/tools
 task_dir="$repo/.scratch/linux-sys-release-features"
 tmp=$(mktemp -d /tmp/rhai-linux-sys-source.XXXXXX)
