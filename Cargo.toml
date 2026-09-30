@@ -154,6 +154,10 @@ name = "serde"
 required-features = ["serde"]
 
 [[example]]
+name = "sys"
+required-features = ["sys"]
+
+[[example]]
 name = "definitions"
 required-features = ["metadata", "internals"]
 

@@ -55,6 +55,57 @@ Standard features
 * A [debugging](https://rhai.rs/book/engine/debugging) interface.
 
 
+Host filesystem access
+----------------------
+
+The optional `sys` feature adds [`SysPackage`](src/packages/sys/mod.rs) for granting scripts
+specific filesystem capabilities. Register a package configured with the directories and access
+levels the script needs; the default configuration denies filesystem, environment and program
+access. The feature declares Rust 1.77.2 as its minimum version and requires `std` and object-map
+support, so it cannot build on WASM, `no_std`, or `no_object` targets. Consult the crate's CI and
+release configuration for the current platform and feature matrix.
+
+With `sys` enabled, `open_file(path)` opens a streaming handle in `w+` mode. The mode creates a
+missing file and reads and writes from its current byte cursor, while preserving the contents of
+an existing file. Pass a mode explicitly to select other behavior:
+
+| Mode | Access and open behavior |
+| ---- | ------------------------ |
+| `r` | Read an existing file. |
+| `r+` | Read and write an existing file without truncating it. |
+| `w` | Write, creating or truncating the file. |
+| `wx` | Write a new file; fail if it already exists. |
+| `w+` | Read and write, creating the file without truncating an existing file. |
+| `a` | Append, creating the file if needed. |
+| `ax` | Append to a new file; fail if it already exists. |
+| `a+` | Read and append, creating the file if needed. |
+| `ax+` | Read and append to a new file; fail if it already exists. |
+
+Opening a mode that reads requires read access, and any mode that can create or modify a file
+requires write access. The package checks those grants before opening the file, so a denied write
+does not truncate or create it. `FileHandle` provides `read_string`, `read_blob`, `write`,
+`seek`, and `position`. Reads and writes advance the shared byte cursor. Cloning a handle shares
+the same cursor and file lifetime; there is no script-visible `close` method, and the host file
+is released when the last handle clone is dropped.
+
+For `read_string` and `read_blob`, a positive length requests up to that many bytes, stopping at
+EOF and returning the bytes actually read. An omitted or zero length reads toward EOF, subject to
+the configured cap. Negative lengths produce an error. String reads require strict UTF-8; if the
+bytes read are invalid or end partway through a character, the read reports an error after
+consuming those bytes. The default `max_file_read` host cap is 8 MiB and can be changed with
+`SysConfig::max_file_read`. In checked builds, a nonzero Engine string or array limit may lower
+the effective cap. The `unchecked` feature skips those Engine limits, while the host cap still
+applies. Setting `max_file_read` to zero returns no bytes and leaves the cursor in place.
+`read_blob` is unavailable with `no_index`; string operations remain available.
+
+These streaming handles are separate from whole-file functions such as `read_file`, `read_blob`,
+and `write_file`. Whole-file reads use their own behavior and limits; for example, `read_file`
+replaces invalid UTF-8 with U+FFFD, while `FileHandle.read_string` reports invalid UTF-8.
+
+See [`examples/sys.rs`](examples/sys.rs) for a runnable example that confines a script to a
+temporary directory and verifies the script's write from the host.
+
+
 Protected against attacks
 -------------------------
 
