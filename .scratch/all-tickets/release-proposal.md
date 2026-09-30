@@ -1,6 +1,6 @@
 # Compatibility and release proposal
 
-Status: proposed; ticket 06 remains open pending owner review.
+Status: approved by the owner on 2026-09-30; implementation and strict release proof remain open.
 
 ## Platforms and Rust versions
 
@@ -44,7 +44,11 @@ Captured bytes, completeness, exit and cleanup diagnostics belong to that report
 - Metadata/documentation and examples execute; streaming handle divergences explicit.
 - No completion claim while promised native platforms or feature/MSRV gates lack proof.
 
-## Pending review
+## Owner decision
 
-Owner decides the release matrix and public configuration/error representation.
-TCP authority and lifecycle choices remain separate unresolved tickets 04 and 05.
+The owner accepted the recommended choices on 2026-09-30, prioritizing maximum
+quality regardless of effort. This approves the concrete contract above, including
+connect plus separately authorized listeners. It does not certify implementation,
+relax verification, authorize remote publication or bypass native resource custody.
+
+Negative file-read lengths must fail; resource limits remain enforced under unchecked.

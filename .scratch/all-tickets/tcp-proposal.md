@@ -1,6 +1,6 @@
 # TCP authority and lifecycle proposal
 
-Status: proposed only. Local decision tickets 04 and 05 remain unresolved.
+Status: approved by the owner on 2026-09-30; implementation and strict release proof remain open.
 
 ## Host authority
 
@@ -62,8 +62,9 @@ Status: proposed only. Local decision tickets 04 and 05 remain unresolved.
 - Assertions must fail on a deliberately wrong payload/known-broken state before
   acceptance; changed harnesses invalidate prior controls.
 
-## Pending decisions
+## Owner decision
 
-Owner first chooses connect-only versus connect plus listeners. After that, review
-endpoint policy, deadlines, resource defaults, zero-length read semantics and API
-compatibility as one concrete proposal, then record answers in canonical tickets.
+The owner accepted the recommended choices on 2026-09-30, prioritizing maximum
+quality regardless of effort. This approves the concrete contract above, including
+connect plus separately authorized listeners. It does not certify implementation,
+relax verification, authorize remote publication or bypass native resource custody.

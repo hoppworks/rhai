@@ -71,3 +71,18 @@ Before another native Windows build, supply equivalent guest process-tree owners
 bounded execution, output/cache isolation and cleanup on failure or interruption;
 the release ticket tracks this requirement. Reuse the accepted native baseline
 while its relevant source, assertions and environment remain unchanged.
+
+## Accepted package decisions
+
+On 2026-09-30 the owner accepted the concrete TCP authority/lifecycle and release
+proposals in `.scratch/all-tickets/tcp-proposal.md` and `release-proposal.md`.
+Implement connect and separately authorized listen/accept, with the specified
+bounds and shared lifecycle. Reject negative file reads and preserve resource
+bounds under unchecked. Core MSRV remains 1.66.0; optional sys/net target 1.77.2
+and require strict native Linux/macOS/Windows and the specified feature gates.
+
+The owner permits a project-local copy of the scoped runner solely to establish
+explicit POSIX supervision/runtime custody and whole-runner interruption proof.
+Do not modify the global runner. Independent source review precedes execution;
+record finite controls and limits before launching. Native Windows custody remains
+an independent prerequisite, not waived by these decisions.

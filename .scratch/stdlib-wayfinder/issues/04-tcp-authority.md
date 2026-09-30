@@ -2,7 +2,7 @@
 
 Type: grilling
 Label: wayfinder:grilling
-Status: in progress
+Status: resolved (specification only)
 Assignee: current planning session
 Parent: [Plan a reliable Rhai host standard library](../map.md)
 Blocked by: none
@@ -25,3 +25,10 @@ hostname resolution if offered, and read/write/connect/accept timeout behavior.
 Decide buffer/connection limits and name what these controls actually guarantee.
 Prefer the narrowest useful policy; avoid a generic permissions framework.
 Do not promise HTTP, UDP, TLS or arbitrary-untrusted-script isolation.
+
+## Owner resolution — 2026-09-30
+
+The owner accepted the recommended concrete specification in
+[the approved proposal](../../all-tickets/tcp-proposal.md).
+Implementation, documented behavior and strict native/feature/MSRV proof remain
+open campaign requirements. No remote publication is authorized.

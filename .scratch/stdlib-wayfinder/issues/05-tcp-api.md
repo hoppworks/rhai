@@ -2,7 +2,7 @@
 
 Type: grilling
 Label: wayfinder:grilling
-Status: open
+Status: resolved (specification only)
 Parent: [Plan a reliable Rhai host standard library](../map.md)
 Blocked by: 04, 06
 
@@ -27,3 +27,10 @@ compatibility decisions. Link each promised behavior to a real-peer test scenari
 
 Reference: ../../../docs/net-package-assessment.md and
 ../../../docs/net-assessment/characterization.rs.
+
+## Owner resolution — 2026-09-30
+
+The owner accepted the recommended concrete specification in
+[the approved proposal](../../all-tickets/tcp-proposal.md).
+Implementation, documented behavior and strict native/feature/MSRV proof remain
+open campaign requirements. No remote publication is authorized.

@@ -36,8 +36,8 @@ be resolved before their dependent implementation. No remote publication.
   fs24, policy24 pass; invalid-UTF8 public API and wrong-variant control proven.
   Exact remote runtime absence independently confirmed; see ../linux-sys-proof/proof.md.
 - File-handle compatibility facts retained from 17991878 in
-  file-handle-compatibility.md. Genuine negative-length/unchecked divergences and
-  release choices remain unresolved; source facts are not acceptance of bugs.
+  file-handle-compatibility.md. Negative-length rejection and resource bounds under unchecked are now approved;
+  implementation and strict proof remain open. Source facts do not accept bugs.
 
 ## Current step
 
@@ -62,8 +62,8 @@ reset. Payload/proof authority and native execution prerequisites stay closed.
 Immutable specification `91e474d7`/`73020670` and Running renewal `43d2f067`
 source reviews remain applicable. Accepted filesystem/environment production and
 macOS/Linux proof remain unchanged. The further POSIX attempt is authorized and
-unconsumed; its separate runner-copy decision, TCP and release decisions remain
-pending. No remote writes.
+unconsumed; the runner-copy, TCP and release recommendations were accepted by the owner
+on 2026-09-30; dependent work may resume. No remote writes.
 
 ## Decisions
 
@@ -74,10 +74,16 @@ pending. No remote writes.
 - The implementation request supersedes the earlier planning-only mode for accepted
   contracts, but does not answer unresolved API/scope decisions.
 - Public test seams are already owner-approved in AGENTS.md.
-- Pending owner TCP choice: connect plus separately authorized listeners or connect only.
-- Owner release/API question asks approval of the concrete three-OS/Rust matrix,
-  additive ProcessReport failure variant, rejected negative file reads, and
-  retained resource limits under unchecked. Await reply; no inferred approval.
+- Owner accepted the recommended open choices on 2026-09-30, prioritizing maximum
+  quality regardless of effort: connect plus separately authorized listeners;
+  the complete tcp-proposal.md contract; the release-proposal.md matrix and additive
+  process error/report; reject negative file reads and retain resource limits under
+  unchecked; permit a project-local runner copy with explicit custody.
+- Acceptance of decisions is not implementation or native proof. Existing Windows
+  bootstrap constraints, privacy and all explicit package limits still apply.
+- Replacement global instructions remove default-only launch cutoffs for ordinary
+  repairs within remaining original time/resources. Preserve every launch and cause
+  history; stop after two consecutive launches without diagnosis or a closed check.
 - Missing-workflow question was asked before discovering canonical configuration;
   reuse existing selections unless owner explicitly changes them.
 
@@ -127,27 +133,36 @@ Inherited VM history remains authoritative.
 
 ## Next action
 
-The bounded staging slice finished in 8f75da53; responsible agent is completed,
-not waiting or running. All six final changed files and the immutable whitespace
-check were independently inspected. Draft lifecycle/fixture findings are closed
-in source. See windows-monitor-staging-ownership-review.md for applicability and
-limits. Do not restart the agent or extend this closed-launch slice silently.
-Full custody still lacks payload/job integration, termination/finalization and
-native proof. Existing native bootstrap/custody prerequisites remain closed.
-Revalidate available independent authorized work and pending owner decisions;
-no new Expert chain or replacement package. Preserve the unconsumed POSIX retry.
-No runtime, guest or build resource was created; candidate remains isolated.
+Resume the unconsumed POSIX retry in its responsible context: amend the actual
+project-local runner custody design and source, submit it for independent review
+before any interruption fixture launches. In parallel, implement the first TCP
+vertical slice against the accepted contract in a fresh owned worktree.
+Existing Windows source slice remains closed; no native/bootstrap launch is allowed.
 
-## Open owner decisions
+## Owner decisions resolved on 2026-09-30
 
-| Question | Affected requirement | Resume condition |
-| --- | --- | --- |
-| Connect only or connect plus separately authorized listeners? | TCP tickets 04/05 implementation | Owner answers the existing scope question, then concrete lifecycle contract is reviewed. |
-| Accept proposed platform/MSRV, additive process report, negative-read rejection and unchecked resource limits? | Ticket 06 and dependent public process/file-handle APIs | Owner answers the existing release/API question. |
-| Authorize project-local scoped-runner copy with explicit supervision/runtime custody, or defer process prototype? | Actual whole-runner interruption proof under the prescribed runner workflow | Owner answers the existing runner-copy question; then implementation/source gates may proceed. |
+Tickets 04/05/06 now have approved specifications linked to tcp-proposal.md and
+release-proposal.md. The owner also authorized the proposed project-local scoped
+runner copy. Preserve the historical blocked observations below; the owner's answer
+is the changed resume condition. The goal is active and remains incomplete.
 
-Dependent implementation is stopped. Continue only independent authorized
-requirements with new evidence; do not repeat decision/status/verification rounds.
+## Active bounded work
+
+- POSIX: the same one further owner-authorized attempt, sole Expert 01 history
+  retained. Source/design amendment and correction: 30 active minutes from actual
+  resumption, no build/fixture launch until coordinator source gate. Use the original
+  remaining limits if stricter; do not reset elapsed time. No default launch-count
+  cutoff, no new escalation chain, stop on hard caps or contradictory evidence.
+  Source-only preparation creates no process workload or runtime. Record exact
+  custody roles, resource/time caps and interruption controls before execution.
+- TCP first slice: numeric endpoint parsing, deny-by-default exact connect grants,
+  catchable structured errors and independent-peer connection/close proof. Fresh
+  feature work, not another process repair. Up to 60 active minutes including review;
+  runtime <=15 minutes per scoped invocation, <=2 GiB private build storage, <=8
+  owned socket resources in fixtures, bounded joins and no shared services. Record
+  every launch and stop after two consecutive launches without diagnosis or closed
+  checks, contradictory evidence or uncovered decisions. Remaining TCP requirements
+  stay open; no package-wide/native-three-OS acceptance claim from this slice.
 
 ## Goal turn classification
 

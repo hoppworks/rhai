@@ -2,7 +2,7 @@
 
 Type: grilling
 Label: wayfinder:grilling
-Status: open
+Status: resolved (specification only)
 Parent: [Plan a reliable Rhai host standard library](../map.md)
 Blocked by: none
 
@@ -47,3 +47,10 @@ proof, and clean on success, failure and interruption. The POSIX run_scoped.py r
 cannot clean guest descendants merely by stopping an SSH process. Preserve the
 accepted baseline and diagnostics until replacement evidence is accepted. Validate
 the adapter's interruption cleanup before relying on it for native release gates.
+
+## Owner resolution — 2026-09-30
+
+The owner accepted the recommended concrete specification in
+[the approved proposal](../../all-tickets/release-proposal.md).
+Implementation, documented behavior and strict native/feature/MSRV proof remain
+open campaign requirements. No remote publication is authorized.
