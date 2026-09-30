@@ -41,12 +41,15 @@ be resolved before their dependent implementation. No remote publication.
 
 ## Current step
 
-Specification transfer `53140bcf` is independently source-reviewed across all
-three changed files, zero skips, including excluded README/fixture. Related
-intermediate findings are closed in source; see
-windows-specification-transfer-review.md. Nothing has compiled or run. Next is
-bounded intake through the actual MonitorTransport path, with original framing
-preserved and workload/create/resume/exact-job authority still disabled.
+The actual monitor-intake fixture is now present as untracked source. Full
+intermediate review found clock-type, deadline-precondition, maximum-input and
+lease-renewal/ACK coverage gaps. Findings delivered to the same active agent for
+related correction; see windows-monitor-specification-intake-review.md. Await
+actual dispatch implementation and immutable commit. Nothing has compiled or run.
+
+Specification transfer `53140bcf` remains independently source-reviewed across
+all three files; windows-specification-transfer-review.md closes its findings.
+Workload/create/resume/exact-job authority remains disabled.
 
 Immutable specification `91e474d7`/`73020670` and Running renewal `43d2f067`
 source reviews remain applicable. Accepted filesystem/environment production and
@@ -136,6 +139,14 @@ Dependent implementation is stopped. Continue only independent authorized
 requirements with new evidence; do not repeat decision/status/verification rounds.
 
 ## Goal turn classification
+
+2026-09-30 intake fixture continuation: progress. Previous turn was a verified
+wait on the same live Windows agent. Current authoritative untracked fixture
+source changes state; complete source inspection changes the correction action
+with concrete clock/coverage findings. Agent confirmed running; not restarted.
+No compiler/native operation or owned resource. Full backlog remains incomplete;
+independent implementation continues, so goal active/incomplete, not blocked.
+
 
 2026-09-30 monitor intake continuation: verified wait. Previous turn was
 progress: committed transfer review and actual intake scope at 8fbe043d. The
