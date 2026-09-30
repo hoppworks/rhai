@@ -1,0 +1,3 @@
+sync=0
+correct-blob=0
+wrong-control=101

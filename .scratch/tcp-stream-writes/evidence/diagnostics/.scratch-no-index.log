@@ -1,0 +1,51 @@
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-8f7sw7wx/source/repo)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:245:9
+    |
+245 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()).max_write_bytes(2));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+warning: `rhai` (test "net_writes") generated 1 warning (run `cargo fix --test "net_writes" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 6.11s
+     Running tests/net_writes.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-8f7sw7wx/target/debug/deps/net_writes-e15cc5397d4409d4)
+
+running 7 tests
+
+thread 'no_index_keeps_string_writes_and_omits_blob_writes' (51782609) panicked at tests/net_writes.rs:123:18:
+called `Result::unwrap()` on an `Err` value: ErrorParsing(Reserved("#"), 3:48)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test no_index_keeps_string_writes_and_omits_blob_writes ... FAILED
+test read_half_close_is_idempotent_and_keeps_stream_open_for_close ... ok
+test script_writes_string_and_write_all_report_real_peer_bytes ... ok
+test host_write_cap_rejects_oversize_input_without_peer_bytes ... ok
+test accepted_stream_inherits_host_write_cap ... ok
+test write_half_close_keeps_the_read_direction_and_is_idempotent ... ok
+
+thread 'bounded_write_timeout_reports_partial_bytes_matching_peer_readback' (51782607) panicked at tests/net_writes.rs:186:5:
+assertion `left == right` failed: write did not hit its finite deadline: none:16:-1
+  left: Some("none")
+ right: Some("Timeout")
+test bounded_write_timeout_reports_partial_bytes_matching_peer_readback ... FAILED
+
+failures:
+
+failures:
+    bounded_write_timeout_reports_partial_bytes_matching_peer_readback
+    no_index_keeps_string_writes_and_omits_blob_writes
+
+test result: FAILED. 5 passed; 2 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+error: test failed, to rerun pass `--test net_writes`

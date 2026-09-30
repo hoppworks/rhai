@@ -1,0 +1,26 @@
+ Downloading crates ...
+  Downloaded spin v0.7.2
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-8hglecvq/source)
+   Compiling rhai_codegen v3.2.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-8hglecvq/source/codegen)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 6.91s
+     Running unittests src/lib.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-8hglecvq/target/debug/deps/rhai-436bb671884a1513)
+
+running 2 tests
+test packages::net::stream::tests::clone_close_cancels_a_read_after_partial_progress ... ok
+
+thread 'packages::net::stream::tests::clone_close_cancels_a_write_after_socket_would_block' (51863813) panicked at src/packages/net/stream.rs:1029:14:
+socket write reached WouldBlock: Timeout
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread '<unnamed>' (51863815) panicked at src/packages/net/stream.rs:969:18:
+called `Result::unwrap()` on an `Err` value: Timeout
+test packages::net::stream::tests::clone_close_cancels_a_write_after_socket_would_block ... FAILED
+
+failures:
+
+failures:
+    packages::net::stream::tests::clone_close_cancels_a_write_after_socket_would_block
+
+test result: FAILED. 1 passed; 1 failed; 0 ignored; 0 measured; 1 filtered out; finished in 3.01s
+
+error: test failed, to rerun pass `--lib`
