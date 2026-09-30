@@ -55,3 +55,20 @@ pending at this inspection. Findings delivered in the same responsible context:
 
 No compiler, fixture execution or native resource occurred. These findings are
 within the incomplete correction and await exact final source review.
+
+## Related draft corrections and remaining fixture boundaries
+
+Updated full dispatcher/fixture source and actual MonitorTransport diff were
+read. Production now calls the dispatcher and retains LF-inclusive frames;
+its create/resume calls are removed. Maintenance clears old handshakes;
+FormatException handling, ready/challenge liveness checks and clearing completed
+input on stop are present. These close the corresponding source findings,
+subject to immutable final review; no execution evidence is available.
+
+Two remaining fixture issues were delivered immediately: helper challenge
+interval is hardcoded2000 despite test policy period2, so interleaved renewals
+cannot obtain a frame. Pass the selected policy period. END scripted readings
+are consumed by Start/BEGIN/DATA, putting equality at END's first check rather
+than receipt admission. Arm a clock immediately before END after stable setup
+and assert failed admission leaves no completed input/receipt. Avoid null-result
+exceptions concealing the failing precondition or unrelated coverage.
