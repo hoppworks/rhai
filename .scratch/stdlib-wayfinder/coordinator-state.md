@@ -19,8 +19,8 @@ with high quality, low maintenance, strict verification, and Rhai conventions.
 
 ## Current step
 
-Map charted. No decision ticket claimed or resolved in this charting turn.
-Next session starts with the first unblocked, unclaimed ticket by number.
+Ticket 01 is claimed by the current Codex session. Its concrete acceptance proposal
+is ready for owner review; no ticket is resolved yet.
 
 ## Decisions and constraints
 
@@ -40,5 +40,6 @@ Next session starts with the first unblocked, unclaimed ticket by number.
 
 ## Next action
 
-Read map.md, select and claim issues/01-acceptance-contract.md, agree and record the
-acceptance contract with the owner. Resolve at most one non-research ticket per session.
+Await the owner decision on the concrete proposal in issues/01-acceptance-contract.md.
+If accepted, record the four-item project E2E configuration, resolve this ticket and
+link its answer from the map. Resolve at most one non-research ticket per session.
