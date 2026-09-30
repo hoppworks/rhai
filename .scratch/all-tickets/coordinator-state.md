@@ -35,7 +35,7 @@ Process Rust I/O design accepted at073b0af8 after independent source/design revi
 - Docs bounded13:21:01–13:51:01 complete. No active resources.
 
 ## Evidence and resources
-Root own /Users/hoppworks/projects/rhai-all-tickets task/all-tickets; last pushed6931379a exact remote verified. TCP writes active; accepted prototype checkout retired. Process design source073b0af8 integrated locally; owned clean design checkout eligible for retirement after exact push readback. Preserve foreign primary/planning and all unaccepted work. run_scoped.py via python3; private source/CARGO_HOME/CARGO_TARGET_DIR, export each result before cleanup. No broad process/deletion/config changes.
+Root own /Users/hoppworks/projects/rhai-all-tickets task/all-tickets; process design integrated and pushed635e4040 with exact remote readback and lowercase author/committer. TCP writes active; accepted prototype checkout retired. Process design source073b0af8 and reviewed records retained in root; exactly identified clean owned design checkout retired without force after push verification. Preserve foreign primary/planning and all unaccepted work. run_scoped.py via python3; private source/CARGO_HOME/CARGO_TARGET_DIR, export each result before cleanup. No broad process/deletion/config changes.
 Previous goal turn made progress: authoritative current state and Rust design brief committed/pushed3f0665a8 with lowercase author/committer and exact remote readback. Current TCP source review found fixture readiness/EOF/no_index and shutdown-publication races; responsible task is correcting them within its original deadline. Initial test failures have not yet established a product timeout regression.
 
 ## History references
