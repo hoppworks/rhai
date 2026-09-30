@@ -1,0 +1,4 @@
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-21lztwm3/source)
+    Finished `dev` profile [unoptimized] target(s) in 5.18s
+     Running `/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-21lztwm3/target/debug/examples/net`
+Peer received ping; script received pong.

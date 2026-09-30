@@ -158,6 +158,10 @@ name = "sys"
 required-features = ["sys"]
 
 [[example]]
+name = "net"
+required-features = ["net"]
+
+[[example]]
 name = "definitions"
 required-features = ["metadata", "internals"]
 
