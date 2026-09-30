@@ -5,7 +5,52 @@ use rhai::packages::sys::{SysConfig, SysError, SysPackage};
 use rhai::packages::Package;
 use rhai::{Engine, EvalAltResult};
 use std::path::{Path, PathBuf};
+use std::process::{Command, Stdio};
 use std::sync::atomic::{AtomicUsize, Ordering};
+use std::time::{Duration, Instant};
+
+const ENV_FIXTURE_TEST: &str = "RHAI_SYS_ENV_FIXTURE_TEST";
+
+/// Run one environment assertion in a process whose environment was explicitly built
+/// for that fixture. The child receives the exact test name so it cannot recurse.
+pub fn run_env_fixture(test_name: &str, vars: &[(&str, std::ffi::OsString)]) -> bool {
+    if std::env::var(ENV_FIXTURE_TEST).as_deref() == Ok(test_name) {
+        return true;
+    }
+
+    let mut command = Command::new(std::env::current_exe().expect("test executable"));
+    command
+        .args(["--exact", test_name, "--nocapture"])
+        .env_clear()
+        .env(ENV_FIXTURE_TEST, test_name)
+        .stdin(Stdio::null())
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped());
+    for (name, value) in vars {
+        command.env(name, value);
+    }
+
+    let mut child = command.spawn().expect("spawn isolated environment fixture");
+    let deadline = Instant::now() + Duration::from_secs(30);
+    loop {
+        if let Some(status) = child.try_wait().expect("poll environment fixture") {
+            let output = child.wait_with_output().expect("collect fixture output");
+            assert!(
+                status.success(),
+                "environment fixture {test_name} failed ({status}):\nstdout:\n{}\nstderr:\n{}",
+                String::from_utf8_lossy(&output.stdout),
+                String::from_utf8_lossy(&output.stderr)
+            );
+            return false;
+        }
+        if Instant::now() >= deadline {
+            child.kill().expect("kill timed-out environment fixture");
+            let output = child.wait_with_output().expect("reap timed-out fixture");
+            panic!("environment fixture {test_name} timed out after 30 seconds:\nstdout:\n{}\nstderr:\n{}", String::from_utf8_lossy(&output.stdout), String::from_utf8_lossy(&output.stderr));
+        }
+        std::thread::sleep(Duration::from_millis(10));
+    }
+}
 
 /// A fresh, empty directory under the system temp directory, removed on drop.
 pub struct TempDir(PathBuf);

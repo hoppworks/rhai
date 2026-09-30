@@ -132,8 +132,9 @@ fn test_multiple_roots() {
 // P12: env allow-list.
 #[test]
 fn test_env_allow_list() {
-    std::env::set_var("RHAI_SYS_TEST_ALLOWED", "yes");
-    std::env::set_var("RHAI_SYS_TEST_HIDDEN", "no");
+    if !sys_support::run_env_fixture("test_env_allow_list", &[("RHAI_SYS_TEST_ALLOWED", "yes".into()), ("RHAI_SYS_TEST_HIDDEN", "no".into())]) {
+        return;
+    }
     let e = engine(SysConfig::default().env(EnvPolicy::AllowList(vec!["RHAI_SYS_TEST_ALLOWED".into()])));
     assert_eq!(e.eval::<String>(r#"env_var("RHAI_SYS_TEST_ALLOWED")"#).unwrap(), "yes");
     assert_eq!(e.eval::<()>(r#"env_var("RHAI_SYS_TEST_HIDDEN")"#).unwrap(), ());
