@@ -157,6 +157,12 @@ Inherited VM history remains authoritative.
 
 ## Next action
 
+Running renewal source 43d2f067 is now independently reviewed across all three
+files, zero skips; see windows-running-lease-renewal-review.md. Whitespace checks
+pass; fixtures and compilation remain unexecuted. Next source requirement is the
+bounded immutable specification followed by monitor integration. Native guest
+custody/bootstrap and product acceptance gates remain unchanged.
+
 Disposition correction 6c37071b closes the three reviewed source findings.
 All three correction files reviewed, zero skips; initial bb7060a2 all four files
 reviewed. Whitespace checks pass. No native/compiler/fixture execution or runtime.
