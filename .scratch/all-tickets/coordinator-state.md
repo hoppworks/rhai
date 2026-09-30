@@ -157,6 +157,13 @@ Inherited VM history remains authoritative.
 
 ## Next action
 
+Disposition correction 6c37071b closes the three reviewed source findings.
+All three correction files reviewed, zero skips; initial bb7060a2 all four files
+reviewed. Whitespace checks pass. No native/compiler/fixture execution or runtime.
+Next related source substep: Running lease renewal under
+briefs/windows-running-lease-renewal.md, in the same responsible context. Keep
+workload entry and exact-job closure issuance disabled pending full integration.
+
 Disposition source candidate bb7060a2 was reviewed across all four changed files,
 zero skips, including OCR-excluded fixture and README. Related corrections are
 active in the same responsible context: actual partial-removal readback, safe
@@ -214,6 +221,13 @@ Dependent implementation is stopped. Continue only independent authorized
 requirements with new evidence; do not repeat decision/status/verification rounds.
 
 ## Goal turn classification
+
+2026-09-30 latest disposition review continuation: progress. Previous turn
+reviewed bb7060a2 and recorded findings in 702260ae. Current authoritative source
+6c37071b corrects identity/pseudoentry/partial-readback gaps; all affected source
+was reviewed, no skips. The next concrete requirement is Running lease renewal,
+not native acceptance. No completed full-custody failure or runtime resource.
+Goal remains active and incomplete; independent authorized source work remains.
 
 2026-09-30 disposition continuation: previous turn was progress (source changes
 b4c055ee/03a56347 and independent review). Current live responsible agent was

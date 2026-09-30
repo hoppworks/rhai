@@ -1,4 +1,4 @@
-# Windows runtime disposition review in progress
+# Windows runtime disposition source review
 
 Baseline: source-reviewed `03a56347` in
 `/Users/hoppworks/projects/rhai-windows-scoped-runner`, task/windows-scoped-runner.
@@ -10,7 +10,7 @@ OCR selected the backend and monitor; excluded README and fixture were manually
 reviewed as well. Default correctness/security/resource/coverage rules applied.
 Whitespace checking passed; compilation and execution remain unverified.
 
-## Commit findings awaiting related correction
+## Commit findings and reviewed correction
 
 - Partial-removal fixture observes failure/state/root presence but never proves
   a child was actually removed while other children remain. Require independent
@@ -25,6 +25,20 @@ Whitespace checking passed; compilation and execution remain unverified.
 These findings were sent to the same responsible context for source corrections.
 Production removal remains unavailable: no monitor issuer constructs the typed
 exact-job closure proof. No complete custody correction has failed.
+
+Correction `6c37071b` was independently reviewed across all three changed files:
+backend, fixture and README; zero skipped, 100% source coverage. The complete
+128-bit ID from FILE_ID_EXTD_DIR_INFO is compared with the held entry identity
+and volume; unusable IDs and unsupported class errors refuse deletion. Header
+offsets 88/72 and classes 19/20 match the documented field layout. Exact dot
+entries are skipped without opens/deletion but count toward finite raw-record
+limits and still pass native offset validation. Partial fixture independently
+observes one absent and two remaining named leaves after owner disposal, without
+assuming directory enumeration order. Both commits pass whitespace checking.
+
+This closes the related source findings only. No compilation, executed fixture,
+TDD RED/GREEN, native behavior, exact-job closure, forced interruption or E2E
+acceptance is proven. Candidate stays separate and workload launch disabled.
 
 ## Intermediate source findings
 
