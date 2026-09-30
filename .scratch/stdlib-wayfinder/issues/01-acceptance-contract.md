@@ -2,7 +2,7 @@
 
 Type: grilling
 Label: wayfinder:grilling
-Status: claimed
+Status: resolved
 Assignee: current Codex session
 Parent: [Plan a reliable Rhai host standard library](../map.md)
 Blocked by: none
@@ -37,10 +37,10 @@ read-back/false-green evidence required per behavior, and fixture cleanup expect
 Choose checks for meaningful invariants, not a test count or a coverage percentage.
 Do not install a test framework merely to resolve this ticket.
 
-## Concrete proposal awaiting owner decision
+## Acceptance contract
 
-Prepared 2026-09-30. This is a reviewable proposal, not an accepted resolution or
-a claim that the inherited tests satisfy it.
+Prepared and accepted by the owner on 2026-09-30. This contract defines required
+evidence; it does not claim that the inherited tests satisfy it.
 
 ### Acceptance evidence
 
@@ -77,9 +77,9 @@ Targeted property/fuzz/mutation checks are added only when a concrete invariant 
 risk justifies them. Neither blanket snapshots nor a coverage percentage replaces
 contract, policy or lifecycle cases. No new dependency is needed for this decision.
 
-### Proposed AGENTS.md E2E configuration
+### Project E2E configuration
 
-The following four items will be recorded only after the owner's acceptance:
+The following four items are recorded in the project AGENTS.md:
 
 - **Tool:** Cargo integration tests exercising Engine plus the registered host package
   plus the real OS; no mocked files, sockets or process execution in acceptance proof.
@@ -100,7 +100,7 @@ The following four items will be recorded only after the owner's acceptance:
 
 These commands select real existing targets but are not a green acceptance claim:
 reviewed sys regressions and global env mutation remain to be repaired test-first.
-No strict proof was executed while the project tool configuration is unaccepted.
+No runtime acceptance proof was performed while resolving this planning ticket.
 
 ### Completion evidence for each later implementation slice
 
@@ -115,3 +115,18 @@ they do not establish runtime acceptance.
 The owner is being asked to accept the concrete proposal as the standard-library
 acceptance contract. Leave this ticket claimed until that answer arrives; do not
 resolve it, change project E2E configuration, or begin implementation by inference.
+
+## Answer
+
+The owner accepted the concrete contract above with “ok” on 2026-09-30 in response
+to the explicit question whether to make it binding. The contract is now recorded
+in [AGENTS.md](../../../AGENTS.md), including tool/start/test/safe-reset and the
+required independent observation, failing control and fixture isolation.
+
+This resolves the acceptance-method decision only. Known sys defects, fixture
+repairs, process/TCP implementation and the release platform matrix remain open.
+
+### Resolution comment
+
+Owner acceptance recorded; proposal adopted without a new dependency or production
+change. The earlier Comments entry documents the historical pending state.

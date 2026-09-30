@@ -3,3 +3,46 @@
 - Verification: strict
 - Push: automatic
 - Merge: automatic
+
+## E2E verification
+
+Acceptance contract approved by the owner on 2026-09-30.
+
+- **Tool:** Cargo integration tests through real Rhai scripts, Engine, the registered
+  host package and the real OS. Acceptance proof does not mock files, sockets or
+  process execution.
+- **Start command:** No shared service is required. From the session worktree:
+  `cargo test --features testing-environ,sys,metadata --test sys_policy --test sys_env --test sys_fs --no-run`
+  The test command launches the test executables and their scoped fixtures.
+- **Test command:**
+  `cargo test --features testing-environ,sys,metadata --test sys_policy --test sys_env --test sys_fs`
+  A real test name may filter a targeted regression. Add process and net targets
+  when implemented. The release OS/feature/MSRV matrix remains a separate decision.
+- **Safe data reset:** Fixtures own unique temporary roots, sockets and child
+  processes. Clean up only those resources, using guards and explicit child
+  termination/reaping on exceptional paths. Investigate interrupted-run leftovers
+  by exact recorded path/PID before removal. Never reset shared services, delete
+  another session's fixtures or mutate the parent test environment/current directory.
+
+### Required evidence and test structure
+
+- Exercise the public script API and independently observe the effect: fresh host
+  file reads, an independent TCP peer, or child-written records plus exit/reaping.
+  Read-only behavior is compared with independent fixture truth; it need not create
+  a persistent write. Denied operations must leave protected state unchanged.
+- Demonstrate that the assertion fails for a wrong expectation or known-broken state,
+  restore the correct expectation, and show it passes before claiming acceptance.
+- New behavior starts with a meaningful failing contract test. Preserve bug
+  reproductions as regressions. Keep the existing sys test/support layout; supplement
+  with focused unit tests only where useful. Test counts and coverage percentages
+  are not substitutes for contract, policy and lifecycle evidence.
+- Isolate environment fixtures in child processes; use OS-selected TCP ports,
+  explicit readiness, bounded waits and cleanup/join/reap. Fixed sleeps do not prove
+  readiness. Timeouts fail with diagnostics rather than silently skipping behavior.
+- Record commands, features, OS/Rust versions, observed results, independent read-back,
+  the failing control, cleanup and unverified paths. Compilation or Wine alone does
+  not prove native platform behavior.
+- Existing sys regressions and global environment mutation remain open work. This
+  configuration defines acceptance; it does not certify the inherited implementation.
+
+Decision detail: [.scratch/stdlib-wayfinder/issues/01-acceptance-contract.md](.scratch/stdlib-wayfinder/issues/01-acceptance-contract.md).

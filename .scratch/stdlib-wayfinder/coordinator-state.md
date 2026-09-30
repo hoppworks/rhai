@@ -12,6 +12,8 @@ with high quality, low maintenance, strict verification, and Rhai conventions.
 - Read wayfinder, grilling, domain-modeling, local tracker and ponytail checkpoint.
 - Reused the session-owned worktree and preserved all existing scratch evidence.
 - Created map.md and six decision tickets. No production code changed.
+- Owner accepted the concrete acceptance contract; ticket 01 is resolved, indexed
+  from the map, and its E2E configuration is recorded in AGENTS.md.
 - Read back nine planning/glossary files; local links resolve and dependency graph
   is acyclic. The main checkout is clean after relocating the new own files.
 - Existing evidence: ../../docs/sys-package-plan.md and
@@ -19,8 +21,8 @@ with high quality, low maintenance, strict verification, and Rhai conventions.
 
 ## Current step
 
-Ticket 01 is claimed by the current Codex session. Its concrete acceptance proposal
-is ready for owner review; no ticket is resolved yet.
+Ticket 01 is resolved. Five decisions remain open; the next frontier ticket by
+number is issues/02-filesystem-contract.md. No implementation has started.
 
 ## Decisions and constraints
 
@@ -28,8 +30,8 @@ is ready for owner review; no ticket is resolved yet.
 - Worktree: /Users/hoppworks/.codex/worktrees/stdlib-net-assessment/rhai.
 - Branch: task/stdlib-net-assessment; origin: https://github.com/hoppworks/rhai.git.
 - No implementation, merge, upstream action, new dependency, or tool installation.
-- Strict verification config is still absent; ticket 01 proposes the real non-UI
-  entry point, independent read-back, false-green check and safe fixture reset.
+- Strict verification config is accepted and recorded in AGENTS.md. No runtime
+  acceptance proof has been claimed in this planning step.
 - Four sys review findings remain unresolved: configured-root symlink/parent semantics,
   permissive symlink handling, macOS configured-root aliases, and non-UTF-8 fixtures.
   Review source: /Users/hoppworks/projects/rhai-review-sys-windows;
@@ -40,6 +42,6 @@ is ready for owner review; no ticket is resolved yet.
 
 ## Next action
 
-Await the owner decision on the concrete proposal in issues/01-acceptance-contract.md.
-If accepted, record the four-item project E2E configuration, resolve this ticket and
-link its answer from the map. Resolve at most one non-research ticket per session.
+Next invocation: claim issues/02-filesystem-contract.md and discuss exact root,
+parent-component and symlink behavior using the reviewed regressions. Keep existing
+sys decisions unless the owner explicitly revises them. Do not implement in wayfinder.

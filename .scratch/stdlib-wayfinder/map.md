@@ -43,8 +43,9 @@ blocks implementation. Completing this map does not mean the library is implemen
 
 ## Decisions so far
 
-No child ticket has been resolved during charting. Accepted scope is recorded in Notes;
-previous `sys` decisions remain in the existing contract.
+- [Define observable acceptance and test structure](issues/01-acceptance-contract.md#answer):
+  real Engine/package/OS tests, independent observation, a demonstrated failing
+  control and isolated fixtures are binding; concrete commands are in AGENTS.md.
 
 ## Not yet specified
 
