@@ -55,6 +55,12 @@ existing `https://github.com/hoppworks/rhai.git` fork. That later instruction
 authorizes these pushes. Continue local and authorized workhorse VM work under
 the recorded scope. Preserve the existing remote history and visibility.
 
+The owner subsequently authorized merging this Session's verified work into
+`main` on that same fork. This does not authorize any write or pull request to
+the public upstream repository. Preserve foreign local main checkouts; use a
+verified fast-forward ref update when no merge commit is required, and read back
+the fork's exact main head after pushing.
+
 ## Resource lifecycle
 
 For future POSIX builds and verification, use
