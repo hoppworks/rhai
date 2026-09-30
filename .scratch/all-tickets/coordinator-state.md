@@ -167,6 +167,19 @@ requirements with new evidence; do not repeat decision/status/verification round
 
 ## Goal turn classification
 
+Latest continuation made source progress: Windows creation-time job assignment
+candidate b596feba is committed and source-reviewed in
+windows-job-creation-review.md, with related cleanup/fixture review corrections.
+The full custody task was narrowed to this intermediate source substep after
+the responsible session could not produce the coupled rewrite in one pass.
+No actual native/compiler/fixture run occurred, no completed failed correction
+or infrastructure recovery is counted, and no runtime resources were created.
+Candidate remains separate and must not launch workloads. Next independent
+source work is the monitor/client ownership and bounded host-lease state machine;
+native launch/bootstrap/guest access and full filesystem custody remain gates.
+Core MSRV baseline diagnostic was retained with corrected scope. Pending owner
+decisions continue to stop only dependent work. Goal remains active, not complete.
+
 Current turn made progress: corrected unrestricted paths and guarded regression
 integrated at 5f87d339; full native macOS proof accepted and affected Linux checks
 accepted (fs25/policy24). Windows static review defects corrected but native gates open.
