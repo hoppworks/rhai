@@ -41,17 +41,16 @@ be resolved before their dependent implementation. No remote publication.
 
 ## Current step
 
-The actual monitor-intake fixture is now present as untracked source. Full
-intermediate review found clock-type, deadline-precondition, maximum-input and
-lease-renewal/ACK coverage gaps. The new dispatcher and lease diffs also expose exception/receipt-deadline and
-stale-handshake concerns. Findings delivered to the same active agent for
-related correction; see windows-monitor-specification-intake-review.md. Actual production dispatch is now present in the dirty source; exception and
-maintenance-handshake gaps are corrected, with remaining fixture interval/END
-clock issues delivered. Await immutable commit review. Nothing has compiled or run.
+Actual monitor intake `dd8c07dc` and related stopped-state fixture `24c3a19f`
+are independently source-reviewed (six files plus one correction, zero skips).
+Findings are closed in source; see windows-monitor-specification-intake-review.md.
+Original framing, real bounded dispatch and maintenance/transition separation
+are implemented. Nothing has compiled or run. Candidate stays isolated.
 
-Specification transfer `53140bcf` remains independently source-reviewed across
-all three files; windows-specification-transfer-review.md closes its findings.
-Workload/create/resume/exact-job authority remains disabled.
+Next source requirement: connect completed immutable input to monitor-owned
+allocation/staging on a separate worker without blocking the watchdog. Record
+fixed remaining repair limits before this work; retain the sole Expert/cause
+history, disabled workload/proof authority and native execution prerequisites.
 
 Immutable specification `91e474d7`/`73020670` and Running renewal `43d2f067`
 source reviews remain applicable. Accepted filesystem/environment production and
@@ -121,13 +120,13 @@ Inherited VM history remains authoritative.
 
 ## Next action
 
-Continue the same responsible Windows context under
-briefs/windows-monitor-specification-intake.md. Add actual monitor framing and
-transfer dispatch; keep workload entry disabled. Review the exact commit across
-all changed files. Native bootstrap and guest runtime custody remain prerequisites
-for execution. Do not count authored fixtures as executed TDD or acceptance.
-Preserve the sole Windows Expert chain and unconsumed POSIX retry; do not repeat
-pending questions. Linear is legacy and excluded.
+Monitor intake final source review is complete. Before the next allocation/
+staging integration step, record finite remaining repair scope/time/resources
+under campaign's repair reference, using the existing Expert answer and cause
+history. Inspect backend ownership, cancellation and completion-transfer paths;
+then continue the same responsible context. Do not execute until native
+bootstrap/custody prerequisites are proven. No alternative acceptance or new
+Expert chain. Preserve unconsumed POSIX retry and pending owner decisions.
 
 ## Open owner decisions
 
@@ -141,6 +140,15 @@ Dependent implementation is stopped. Continue only independent authorized
 requirements with new evidence; do not repeat decision/status/verification rounds.
 
 ## Goal turn classification
+
+2026-09-30 actual intake commit continuation: progress. Authoritative source
+changed to dd8c07dc/24c3a19f; independent final review closes original-frame,
+real-dispatch and maintenance-separation source subrequirements. Previous turn
+was progress from concrete draft findings. No compiler/native/fixture operation
+or runtime resource. Full custody and backlog remain incomplete; safe bounded
+source integration remains, so goal active, not blocked. Owner's replacement
+repair rules govern next work; no execution budget/Expert history is reset.
+
 
 2026-09-30 intake fixture continuation: progress. Previous turn was a verified
 wait on the same live Windows agent. Current authoritative untracked fixture

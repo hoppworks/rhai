@@ -1,4 +1,4 @@
-# Monitor specification intake review in progress
+# Monitor specification intake source review
 
 Baseline is source-reviewed `53140bcf`; contract is
 `briefs/windows-monitor-specification-intake.md`. The same responsible agent is
@@ -72,3 +72,36 @@ are consumed by Start/BEGIN/DATA, putting equality at END's first check rather
 than receipt admission. Arm a clock immediately before END after stable setup
 and assert failed admission leaves no completed input/receipt. Avoid null-result
 exceptions concealing the failing precondition or unrelated coverage.
+
+## Immutable final review
+
+Reviewed `dd8c07dc` (six changed files) and related correction `24c3a19f`
+(one fixture). All six source/diff files were read, including manually reviewed
+OCR-excluded README/fixture; zero skipped files. OCR preview selected the four
+production sources and the default rule was read. Final source, whole new
+fixture and README changes were reread, supplementing truncated output with
+bounded reads. Both committed whitespace checks pass; worktree is clean.
+
+Reported clock/type/interval/END-precondition, frame exception, admission
+liveness and stale-handshake findings are closed in source. Actual RunMonitor
+uses the receiver dispatcher; original LF-inclusive frame limit is512. Valid
+maintenance responses clear old transition handshakes; no production
+AuthorizeCreate/AuthorizeResume call remains in these paths. ACK acceptance
+cannot renew the lease. The fixture arms the END clock after successful
+BEGIN/DATA and checks both readings9/12, no receipt and null completed input.
+Ready/challenge admission and stopped stability are now explicit source cases.
+
+The maximum-input helper's ten empty-argument wire overhead is224 bytes under
+the reviewed serializer; the remaining7968 bytes are1992 CJK characters, each
+adding four encoded bytes within field/command bounds. Actual interleave uses
+selected policy period2 and fixed setup120 with finite28-frame pumping. This
+is source arithmetic/review, not a surrogate execution proof.
+
+Closed subrequirements: reviewed original-framing transport adapter, actual
+bounded intake dispatch, maintenance lease separation and source contract
+coverage. No compiler, fixture, native pipe/OS, staging, workload, exact-job or
+cleanup acceptance occurred. PATH exposes no dotnet/csc/mcs compiler; no install
+was attempted. Full Windows custody and product tickets remain open. The next
+source requirement is monitor ownership of allocation/staging on a worker
+without watchdog blocking; fixed repair bounds must be recorded before that
+work. Existing Expert/cause history and native execution gates remain binding.
