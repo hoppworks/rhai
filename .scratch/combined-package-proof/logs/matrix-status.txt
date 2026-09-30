@@ -1,0 +1,15 @@
+row-01 features=testing-environ,sys,net command=cargo test --features testing-environ\,sys\,net --test combined_sys_net --test sys_env --test sys_fs --test sys_policy --test net_connect --test net_listen --test net_reads --test net_writes -- --test-threads=1 --nocapture 
+exit_status=0
+row-02 features=testing-environ,sys,net,sync command=cargo test --features testing-environ\,sys\,net\,sync --test combined_sys_net --test sys_env --test sys_fs --test sys_policy --test net_connect --test net_listen --test net_reads --test net_writes -- --test-threads=1 --nocapture 
+exit_status=0
+row-03 features=testing-environ,sys,net,no_index command=cargo test --features testing-environ\,sys\,net\,no_index --test combined_sys_net --test sys_env --test sys_fs --test sys_policy --test net_connect --test net_listen --test net_reads --test net_writes -- --test-threads=1 --nocapture 
+exit_status=0
+row-04 features=testing-environ,sys,net,metadata,serde command=cargo test --features testing-environ\,sys\,net\,metadata\,serde --test combined_sys_net --test sys_env --test sys_fs --test sys_policy --test net_connect --test net_listen --test net_reads --test net_writes -- --test-threads=1 --nocapture 
+exit_status=0
+row-05 features=testing-environ,sys,net,only_i32,no_float command=cargo test --features testing-environ\,sys\,net\,only_i32\,no_float --test combined_sys_net --test sys_env --test sys_fs --test sys_policy --test net_connect --test net_listen --test net_reads --test net_writes -- --test-threads=1 --nocapture 
+exit_status=0
+row-06 features=testing-environ,sys,net,unchecked command=cargo test --features testing-environ\,sys\,net\,unchecked --test combined_sys_net --test sys_env --test sys_fs --test sys_policy --test net_connect --test net_listen --test net_reads --test net_writes -- --test-threads=1 --nocapture 
+exit_status=0
+row-07 features=testing-environ,sys,net,no_index,sync,metadata command=cargo test --features testing-environ\,sys\,net\,no_index\,sync\,metadata --test combined_sys_net --test sys_env --test sys_fs --test sys_policy --test net_connect --test net_listen --test net_reads --test net_writes -- --test-threads=1 --nocapture 
+exit_status=0
+row-08 features=testing-environ,sys,net,f32_float command=cargo test --features testing-environ\,sys\,net\,f32_float --test combined_sys_net --test sys_env --test sys_fs --test sys_policy --test net_connect --test net_listen --test net_reads --test net_writes -- --test-threads=1 --nocapture 

@@ -1,0 +1,3 @@
+sampled_runtime_kib_max=313856
+sampled_owned_descendants_max=7
+method=one-second whole-runtime du -sk plus one-snapshot ps ancestry; sampled maxima only

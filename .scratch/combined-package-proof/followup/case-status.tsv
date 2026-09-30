@@ -1,0 +1,10 @@
+case	exit_status	end_utc
+lockfile-resolution	0	2026-09-30T18:16:10Z
+wrong-fresh-file-control	101	2026-09-30T18:16:24Z
+restored-baseline	0	2026-09-30T18:16:24Z
+combined-sync	0	2026-09-30T18:16:31Z
+combined-no-index	0	2026-09-30T18:16:36Z
+combined-metadata-serde	0	2026-09-30T18:17:12Z
+combined-only-i32-no-float	0	2026-09-30T18:17:17Z
+combined-unchecked	0	2026-09-30T18:17:23Z
+combined-no-index-sync-metadata	0	2026-09-30T18:17:29Z
