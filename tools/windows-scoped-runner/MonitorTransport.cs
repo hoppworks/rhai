@@ -144,6 +144,7 @@ internal static class MonitorTransport
     private static int RunMonitor(IntPtr input,IntPtr output,IntPtr client)
     {
         int stopWriter=0;
+        MonitorStagingHandoff staging=null;
         try
         {
         LeaseMonitor.Policy policy=LeaseMonitor.Protocol.ProductionPolicy();
@@ -153,6 +154,7 @@ internal static class MonitorTransport
         var dispatcher=new MonitorSpecificationIntake.Dispatcher(
             new LeaseMonitor.Protocol(policy), outgoing, ()=> (long)GetTickCount64(), token,
             started, started+policy.SetupDeadline, policy.ChallengePeriod);
+        staging=MonitorStagingHandoff.CreateProduction();
         if(!dispatcher.Start()) return 78;
         int eof=0, writeFailed=0;
         IntPtr inputOwner=input;
@@ -176,15 +178,30 @@ internal static class MonitorTransport
                 byte[] originalFrame; if(!incoming.TryRead(out originalFrame)) break;
                 if(!dispatcher.Dispatch(originalFrame)) break;
             }
+            if(!dispatcher.Stopped && staging.CanStart && dispatcher.CompletedSpecification!=null &&
+                dispatcher.Poll() && Volatile.Read(ref eof)==0 && Volatile.Read(ref writeFailed)==0 &&
+                WaitForSingleObject(client,0)==WAIT_TIMEOUT)
+            {
+                if(!staging.Start(dispatcher.CompletedSpecification)) { dispatcher.Stop(); break; }
+            }
+            if(staging.IsPublished)
+            {
+                Func<bool> live = () => dispatcher.Poll() && !dispatcher.Stopped &&
+                    Volatile.Read(ref eof)==0 && Volatile.Read(ref writeFailed)==0 &&
+                    WaitForSingleObject(client,0)==WAIT_TIMEOUT;
+                staging.TryAccept(live);
+            }
+            if(staging.IsFailed) { dispatcher.Stop(); break; }
             Thread.Sleep(25); // finite watchdog poll; never waits for a pipe or worker join
         }
         dispatcher.Stop();
-        // No job/backend exists in this substep, so there is nothing whose
-        // termination can be truthfully receipted or whose runtime can be removed.
+        staging.Stop(); // signal only; a worker blocked in I/O keeps ownership
+        // Payload invocation, job creation/resume, and runtime removal remain closed.
         return Volatile.Read(ref writeFailed)!=0 ? 79 : 78;
         }
         finally
         {
+            if(staging!=null) staging.Stop();
             Volatile.Write(ref stopWriter,1);
             if(input!=IntPtr.Zero) CloseHandle(input);
             if(output!=IntPtr.Zero) CloseHandle(output);

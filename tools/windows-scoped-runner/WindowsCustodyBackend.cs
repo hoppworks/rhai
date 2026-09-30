@@ -514,10 +514,10 @@ internal static class WindowsCustodyBackend
         }
 #endif
 
-        // No production caller can authorize removal yet: LeaseMonitor owns no
-        // RuntimeAllocation or exact-job closure proof in this source slice.
-        // The typed future gate is intentionally unconstructible outside that
-        // monitor; a job-empty boolean or PID is never accepted as evidence.
+        // The monitor staging worker can own a RuntimeAllocation, but no
+        // production caller can authorize removal without exact-job closure
+        // proof. The typed future gate is intentionally unconstructible
+        // outside that monitor; a job-empty boolean or PID is never evidence.
         internal bool RemoveRuntimeAfterExactJobClosure(LeaseMonitor.ExactJobClosureProof proof, CancellationToken cancellationToken)
         {
             if (proof == null || !proof.Authorizes(this, RuntimeIdentity))

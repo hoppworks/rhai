@@ -46,8 +46,9 @@ intake described below. Intake does not connect the specification to workload
 creation; public workload launch and exact-job proof remain disabled.
 
 The monitor accepts setup lease challenges/responses and bounded specification
-intake, then remains in protocol-only setup mode and stops on deadline or
-disconnect because workload custody is unavailable.
+intake. Once a complete immutable specification is accepted, it starts the
+monitor-owned staging worker described below. It stops on deadline or disconnect;
+workload custody and process/job control remain unavailable.
 The `WindowsCustodyBackend.cs` source slice pins the fixed local
 `C:\RhaiQuality\runs` root and each ancestor through non-reparse directory
 handles that omit delete sharing, and captures volume/file identity. Its
@@ -64,9 +65,10 @@ protected user/SYSTEM DACLs, hashes each copied file, rescans the source and
 destination manifests, and writes a durable `STAGED` receipt only after those
 checks. Source file and directory pins stay held through the consistency scan
 and receipt. The staged executable and each parent directory are pinned on the
-allocation owner for its remaining lifetime. Staging is not wired to the
-monitor; ACL behavior, collision behavior, byte copying, and journal durability
-remain unverified. An incomplete/torn journal record is detectable; no recovery
+allocation owner for its remaining lifetime. The monitor worker invokes
+allocation and staging after immutable intake; ACL behavior, collision behavior,
+byte copying, and journal durability remain unverified. An incomplete/torn
+journal record is detectable; no recovery
 or cleanup decision is made from a path alone.
 
 The source rescan is a consistency check for an operational input tree, not an
@@ -124,8 +126,8 @@ entrypoint. It has not been run.
 ## Remaining custody and proof boundaries
 
 Executable-relative syntax checks and staged-file identity checks are present
-in source, but executable launch validation remains unverified. Monitor-to-custody
-integration, local evidence
+in source, but executable launch validation remains unverified. Monitor-owned
+allocation/staging handoff is present as source; local evidence
 finalization/export, exact job ownership and
 cleanup, the real create-time payload integration, pre-resume host challenge
 integration, termination and finalization budgets remain unimplemented. Runtime
@@ -159,15 +161,22 @@ each frame and again before acknowledging a transfer frame. It queues ACKs
 without waiting and keeps the 32-frame/8192-byte limits.
 
 The monitor creates and advertises one random 32-lowercase-hex transfer token.
-Completion retains the immutable specification in monitor memory only. It does
-not renew the lease, authorize create/resume, reset deadlines, or allocate a
-runtime. Setup `RESPONSE` frames are checked against the exact outstanding
+Completion retains the immutable specification in monitor memory and starts
+one staging worker. It does not renew the lease, authorize create/resume, or
+reset deadlines. Setup `RESPONSE` frames are checked against the exact outstanding
 phase-bound challenge and may renew the short lease; this intake path uses
 maintenance responses that cannot authorize create or resume. A fresh
 post-staging challenge remains required before any future creation step.
-Allocation, source staging, workload entry, process creation/resume, and exact
-job proof remain disconnected and disabled. No pipe/native acceptance is
-claimed.
+Source allocation and staging now run on a dedicated monitor worker after
+intake. The watchdog uses a one-slot atomic ownership handoff and only signals
+cancellation; a separate signal thread updates the backend token. In-flight
+filesystem calls may finish after stop. Failed or rejected allocations are
+disposed by the worker, retaining their runtime and journal. A successful
+accepted allocation remains pinned until monitor stop requests its return to
+the worker; disposal may be preempted by immediate monitor process exit and is
+not a cleanup receipt. A stalled worker leaves retained or unknown custody.
+Workload entry, process creation/resume, runtime deletion, and exact job proof
+remain disabled. No pipe/native acceptance is claimed.
 
 `SpecificationTransfer` implements `SPEC-XFER/1` `BEGIN`, `DATA`, and `END`
 frames, each terminated by one LF byte. The receiver token is supplied by its

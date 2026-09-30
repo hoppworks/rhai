@@ -14,6 +14,7 @@ internal static class MonitorSpecificationIntakeFixture
 
     public static int Main()
     {
+        MonitorStagingHandoffFixture.Run();
         OriginalFrameReaderFixtures();
         DispatcherInterleaveFixtures();
         QueueAndTerminalFixtures();
