@@ -12,10 +12,10 @@
 use super::config::{FsAccess, FsPolicy};
 use super::error::SysError;
 use super::{reg, SysState};
-use crate::{Dynamic, EvalAltResult, Map, Module, Shared, INT};
+use crate::{Dynamic, EvalAltResult, Locked, Map, Module, Shared, INT};
 use cap_std::ambient_authority;
 use cap_std::fs::{Dir, OpenOptions};
-use std::io::{self, Write};
+use std::io::{self, Seek, SeekFrom, Write};
 use std::path::{Component, Path, PathBuf};
 
 type Res<T> = Result<T, Box<EvalAltResult>>;
@@ -35,6 +35,8 @@ pub(super) enum FsState {
     Roots(Vec<OpenRoot>),
     Unrestricted(FsAccess),
 }
+
+type FileHandle = Shared<Locked<std::fs::File>>;
 
 impl FsState {
     pub(super) fn open(policy: &FsPolicy) -> Result<Self, SysError> {
@@ -297,7 +299,234 @@ macro_rules! with_state {
     }};
 }
 
+#[derive(Default)]
+struct FileMode {
+    read: bool,
+    write: bool,
+    append: bool,
+    create: bool,
+    create_new: bool,
+    truncate: bool,
+}
+
+/// Parse the upstream-compatible modes. The default `w+` deliberately does not truncate an
+/// existing file.
+fn file_mode(mode: &str) -> FileMode {
+    let mut options = FileMode::default();
+    match mode {
+        "r" => options.read = true,
+        "r+" => {
+            options.read = true;
+            options.write = true;
+        }
+        "w" => {
+            options.write = true;
+            options.create = true;
+            options.truncate = true;
+        }
+        "wx" => {
+            options.write = true;
+            options.create_new = true;
+        }
+        "w+" => {
+            options.read = true;
+            options.write = true;
+            options.create = true;
+        }
+        "a" => {
+            options.append = true;
+            options.create = true;
+        }
+        "ax" => {
+            options.append = true;
+            options.create_new = true;
+        }
+        "a+" => {
+            options.read = true;
+            options.append = true;
+            options.create = true;
+        }
+        "ax+" => {
+            options.read = true;
+            options.append = true;
+            options.create_new = true;
+        }
+        // Preserve the upstream invalid-mode behavior: let OpenOptions report that no
+        // access mode was selected.
+        _ => (),
+    }
+    options
+}
+
+impl FileMode {
+    fn needs_write(&self) -> bool {
+        self.write || self.append || self.create || self.create_new || self.truncate
+    }
+
+    fn apply_to_cap(&self, options: &mut OpenOptions) {
+        options
+            .read(self.read)
+            .write(self.write)
+            .append(self.append)
+            .create(self.create)
+            .create_new(self.create_new)
+            .truncate(self.truncate);
+    }
+
+    fn apply_to_host(&self, options: &mut std::fs::OpenOptions) {
+        options
+            .read(self.read)
+            .write(self.write)
+            .append(self.append)
+            .create(self.create)
+            .create_new(self.create_new)
+            .truncate(self.truncate);
+    }
+}
+
+fn open_file(fs: &FsState, path: &str, mode: &str) -> Res<FileHandle> {
+    let mode = file_mode(mode);
+    if mode.read {
+        // Read/write modes must be granted both capabilities before any create or
+        // truncating open reaches the filesystem.
+        fs.resolve(path, Need::Read)?;
+    }
+    let need = if mode.needs_write() {
+        Need::Write
+    } else {
+        // Also route invalid modes through the configured authority before reporting their
+        // empty-access OpenOptions error.
+        Need::Read
+    };
+    let resolved = fs.resolve(path, need)?;
+    let file = match &resolved.host_path {
+        Some(host_path) => {
+            let mut options = std::fs::OpenOptions::new();
+            mode.apply_to_host(&mut options);
+            options.open(host_path)
+        }
+        None => {
+            let mut options = OpenOptions::new();
+            mode.apply_to_cap(&mut options);
+            resolved
+                .dir()
+                .open_with(&resolved.rel, &options)
+                .map(cap_std::fs::File::into_std)
+        }
+    }
+    .map_err(|e| map_io("open file", path, &e))?;
+    Ok(Shared::new(Locked::new(file)))
+}
+
+fn file_lock_error(action: &'static str) -> SysError {
+    SysError::io(
+        action,
+        "file handle",
+        &io::Error::new(
+            io::ErrorKind::Other,
+            "file handle is already borrowed or poisoned",
+        ),
+    )
+}
+
+#[cfg(not(feature = "sync"))]
+fn with_file_mut<T>(
+    file: &FileHandle,
+    action: &'static str,
+    f: impl FnOnce(&mut std::fs::File) -> io::Result<T>,
+) -> Res<T> {
+    let mut guard = file.try_borrow_mut().map_err(|_| file_lock_error(action))?;
+    f(&mut guard).map_err(|e| SysError::io(action, "file handle", &e).into())
+}
+
+#[cfg(feature = "sync")]
+fn with_file_mut<T>(
+    file: &FileHandle,
+    action: &'static str,
+    f: impl FnOnce(&mut std::fs::File) -> io::Result<T>,
+) -> Res<T> {
+    let mut guard = file.write().map_err(|_| file_lock_error(action))?;
+    f(&mut guard).map_err(|e| SysError::io(action, "file handle", &e).into())
+}
+
+fn register_file_handle(module: &mut Module) {
+    module.set_custom_type::<FileHandle>("FileHandle");
+    reg(
+        "write",
+        &["/// Write one string to the file and return the number of bytes written."],
+    )
+    .set_into_module(module, |file: FileHandle, data: &str| -> Res<INT> {
+        let count = with_file_mut(&file, "write file", |file| file.write(data.as_bytes()))?;
+        INT::try_from(count).map_err(|_| {
+            SysError::io(
+                "write file",
+                "file handle",
+                &io::Error::new(io::ErrorKind::Other, "written byte count does not fit INT"),
+            )
+            .into()
+        })
+    });
+
+    #[cfg(not(feature = "no_index"))]
+    reg(
+        "write",
+        &["/// Write one BLOB to the file and return the number of bytes written."],
+    )
+    .set_into_module(module, |file: FileHandle, data: crate::Blob| -> Res<INT> {
+        let count = with_file_mut(&file, "write file", |file| file.write(&data))?;
+        INT::try_from(count).map_err(|_| {
+            SysError::io(
+                "write file",
+                "file handle",
+                &io::Error::new(io::ErrorKind::Other, "written byte count does not fit INT"),
+            )
+            .into()
+        })
+    });
+
+    reg(
+        "seek",
+        &["/// Seek to an absolute byte position, clamping negative positions to zero."],
+    )
+    .set_into_module(module, |file: FileHandle, position: INT| -> Res<()> {
+        let position = u64::try_from(position.max(0)).expect("non-negative INT fits u64");
+        with_file_mut(&file, "seek file", |file| {
+            file.seek(SeekFrom::Start(position))
+        })?;
+        Ok(())
+    });
+
+    reg(
+        "position",
+        &["/// Return the current byte position of the file cursor."],
+    )
+    .set_into_module(module, |file: FileHandle| -> Res<INT> {
+        let position = with_file_mut(&file, "get file position", |file| file.stream_position())?;
+        INT::try_from(position).map_err(|_| {
+            SysError::io(
+                "get file position",
+                "file handle",
+                &io::Error::new(io::ErrorKind::Other, "file position does not fit INT"),
+            )
+            .into()
+        })
+    });
+}
+
 pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
+    register_file_handle(module);
+
+    with_state!(state, module, "open_file", &["/// Open a file read/write with the default `w+` mode, creating it without truncating existing content."], |path: &str| -> Res<FileHandle> {
+        open_file(&state.fs, path, "w+")
+    });
+    with_state!(
+        state,
+        module,
+        "open_file",
+        &["/// Open a file with one of `r`, `r+`, `w`, `wx`, `w+`, `a`, `ax`, `a+` or `ax+`."],
+        |path: &str, mode: &str| -> Res<FileHandle> { open_file(&state.fs, path, mode) }
+    );
+
     with_state!(
         state,
         module,

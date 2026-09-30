@@ -13,6 +13,102 @@ fn rw() -> (TempDir, Engine) {
     (t, e)
 }
 
+#[test]
+fn test_open_file_default_preserves_contents_and_shares_cursor() {
+    let (t, e) = rw();
+    t.write("existing.txt", "original payload");
+
+    let result = e
+        .eval::<Map>(
+            r#"
+                let file = open_file("existing.txt");
+                let clone = file;
+                file.seek(-1);
+                let at_zero = clone.position();
+                file.seek(9);
+                let written = clone.write("XY");
+                let final_position = file.position();
+                #{ at_zero: at_zero, written: written, final_position: final_position }
+            "#,
+        )
+        .unwrap();
+
+    assert_eq!(result["at_zero"].as_int().unwrap(), 0);
+    assert_eq!(result["written"].as_int().unwrap(), 2);
+    assert_eq!(result["final_position"].as_int().unwrap(), 11);
+    let actual = t.read("existing.txt");
+    let expected = if std::env::var_os("RHAI_FILE_HANDLE_WRONG_EXPECTATION").is_some() { b"wrong expectation".as_slice() } else { b"original XYyload".as_slice() };
+    eprintln!("independent host readback: {:?}", String::from_utf8_lossy(&actual));
+    assert_eq!(actual, expected);
+
+    let reopened_count = e.eval::<INT>(r#"let file = open_file("existing.txt", "r+"); file.seek(0); file.write("O")"#).unwrap();
+    assert_eq!(reopened_count, 1);
+    assert_eq!(t.read("existing.txt"), b"Original XYyload");
+
+    e.run(r#"let file = open_file("created.txt"); file.write("created")"#).unwrap();
+    assert_eq!(t.read("created.txt"), b"created");
+}
+
+#[test]
+fn test_open_file_modes_and_exclusive_create() {
+    let (t, e) = rw();
+    for name in ["r.txt", "r-plus.txt", "w.txt", "wx.txt", "w-plus.txt", "a.txt", "ax.txt", "a-plus.txt", "ax-plus.txt"] {
+        t.write(name, "base");
+    }
+
+    assert_eq!(e.eval::<INT>(r#"open_file("r.txt", "r").position()"#).unwrap(), 0);
+    assert_eq!(sys_err(&e, r#"open_file("r.txt", "r").write("x")"#).kind(), "Io");
+
+    assert_eq!(e.eval::<INT>(r#"let f = open_file("r-plus.txt", "r+"); f.seek(1); f.write("X")"#).unwrap(), 1);
+    assert_eq!(t.read("r-plus.txt"), b"bXse");
+
+    assert_eq!(e.eval::<INT>(r#"let f = open_file("w.txt", "w"); f.write("new")"#).unwrap(), 3);
+    assert_eq!(t.read("w.txt"), b"new");
+
+    assert_eq!(sys_err(&e, r#"open_file("wx.txt", "wx")"#).kind(), "Io");
+    assert_eq!(t.read("wx.txt"), b"base");
+    assert_eq!(e.eval::<INT>(r#"open_file("wx-new.txt", "wx").write("new")"#).unwrap(), 3);
+    assert_eq!(t.read("wx-new.txt"), b"new");
+
+    assert_eq!(e.eval::<INT>(r#"open_file("w-plus.txt", "w+").write("new")"#).unwrap(), 3);
+    assert_eq!(t.read("w-plus.txt"), b"newe");
+
+    assert_eq!(e.eval::<INT>(r#"open_file("a.txt", "a").write("+")"#).unwrap(), 1);
+    assert_eq!(t.read("a.txt"), b"base+");
+
+    assert_eq!(sys_err(&e, r#"open_file("ax.txt", "ax")"#).kind(), "Io");
+    assert_eq!(t.read("ax.txt"), b"base");
+    assert_eq!(e.eval::<INT>(r#"open_file("ax-new.txt", "ax").write("new")"#).unwrap(), 3);
+    assert_eq!(t.read("ax-new.txt"), b"new");
+
+    assert_eq!(e.eval::<INT>(r#"open_file("a-plus.txt", "a+").write("+")"#).unwrap(), 1);
+    assert_eq!(t.read("a-plus.txt"), b"base+");
+    assert_eq!(sys_err(&e, r#"open_file("ax-plus.txt", "ax+")"#).kind(), "Io");
+    assert_eq!(t.read("ax-plus.txt"), b"base");
+    assert_eq!(e.eval::<INT>(r#"open_file("ax-plus-new.txt", "ax+").write("+")"#).unwrap(), 1);
+    assert_eq!(t.read("ax-plus-new.txt"), b"+");
+
+    assert_eq!(sys_err(&e, r#"open_file("invalid.txt", "invalid")"#).kind(), "Io");
+    assert!(!t.exists("invalid.txt"));
+}
+
+#[test]
+fn test_open_file_checks_grants_before_mutation_and_stays_confined() {
+    let (root, _) = rw();
+    let outside = TempDir::new();
+    root.write("protected.txt", "preserve me");
+    outside.write("outside.txt", "outside");
+    let engine = engine(SysConfig::default().fs_root(root.path(), FsAccess::Read));
+
+    assert_eq!(engine.eval::<INT>(r#"open_file("protected.txt", "r").position()"#).unwrap(), 0);
+    assert_eq!(sys_err(&engine, r#"open_file("protected.txt", "w")"#).kind(), "Denied");
+    assert_eq!(sys_err(&engine, r#"open_file("missing.txt")"#).kind(), "Denied");
+    assert_eq!(sys_err(&engine, &format!(r#"open_file("{}")"#, outside.as_script_path() + "/outside.txt")).kind(), "Denied");
+    assert_eq!(root.read("protected.txt"), b"preserve me");
+    assert!(!root.exists("missing.txt"));
+    assert_eq!(outside.read("outside.txt"), b"outside");
+}
+
 // F1, F2, F3: read existing, missing and empty files.
 #[test]
 fn test_read_file_cases() {
