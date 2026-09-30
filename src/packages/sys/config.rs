@@ -111,6 +111,7 @@ pub struct SysConfig {
     pub(crate) programs: ProgramPolicy,
     pub(crate) default_timeout: Option<f64>,
     pub(crate) max_output: usize,
+    pub(crate) max_file_read: usize,
     pub(crate) kill_on_drop: bool,
     pub(crate) allow_batch_files: bool,
 }
@@ -123,6 +124,7 @@ impl Default for SysConfig {
             programs: ProgramPolicy::default(),
             default_timeout: None,
             max_output: 8 * 1024 * 1024,
+            max_file_read: 8 * 1024 * 1024,
             kill_on_drop: true,
             allow_batch_files: false,
         }
@@ -194,6 +196,15 @@ impl SysConfig {
     #[must_use]
     pub const fn max_output(mut self, bytes: usize) -> Self {
         self.max_output = bytes;
+        self
+    }
+
+    /// Maximum number of bytes a single file-handle read may return. The default is 8 MiB.
+    /// A value of zero disables bytes from streaming file-handle reads. In checked builds,
+    /// a nonzero Engine string or array limit may lower this cap further.
+    #[must_use]
+    pub const fn max_file_read(mut self, bytes: usize) -> Self {
+        self.max_file_read = bytes;
         self
     }
 

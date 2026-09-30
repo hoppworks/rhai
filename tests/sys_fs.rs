@@ -109,6 +109,195 @@ fn test_open_file_checks_grants_before_mutation_and_stays_confined() {
     assert_eq!(outside.read("outside.txt"), b"outside");
 }
 
+#[test]
+fn test_file_handle_read_string_advances_the_shared_cursor() {
+    let (t, e) = rw();
+    t.write("stream.txt", "alpha beta");
+
+    let result = e
+        .eval::<Map>(
+            r#"
+                let file = open_file("stream.txt", "r");
+                file.seek(2);
+                let clone = file;
+                let part = file.read_string(3);
+                #{ part: part, position: clone.position() }
+            "#,
+        )
+        .unwrap();
+
+    assert_eq!(result["part"].clone().try_cast::<String>().unwrap(), "pha");
+    assert_eq!(result["position"].as_int().unwrap(), 5);
+    assert_eq!(t.read("stream.txt"), b"alpha beta");
+}
+
+#[test]
+fn test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving() {
+    let t = TempDir::new();
+    t.write("stream.txt", "abcdef");
+    let e = engine(SysConfig::default().fs_root(t.path(), FsAccess::ReadWriteDelete).max_file_read(3));
+
+    let max_read_len = INT::MAX.to_string();
+    let script = [
+        r#"
+                let file = open_file("stream.txt", "r");
+                let first = file.read_string("#,
+        max_read_len.as_str(),
+        r#");
+                let after_first = file.position();
+                let second = file.read_string();
+                let before_negative = file.position();
+                let negative_rejected = false;
+                try { file.read_string(-1); } catch (err) { negative_rejected = err.io_kind == "InvalidInput"; }
+                #{ first: first, after_first: after_first, second: second,
+                   before_negative: before_negative, after_negative: file.position(), negative_rejected: negative_rejected }
+            "#,
+    ]
+    .concat();
+    let result = e.eval::<Map>(&script).unwrap();
+    assert_eq!(t.read("stream.txt"), b"abcdef");
+
+    let expected_first = if std::env::var_os("RHAI_FILE_READ_WRONG_EXPECTATION").is_some() { "wrong expectation" } else { "abc" };
+    assert_eq!(result["first"].clone().try_cast::<String>().unwrap(), expected_first);
+    assert_eq!(result["after_first"].as_int().unwrap(), 3);
+    assert_eq!(result["second"].clone().try_cast::<String>().unwrap(), "def");
+    assert_eq!(result["before_negative"].as_int().unwrap(), 6);
+    assert_eq!(result["after_negative"].as_int().unwrap(), 6);
+    assert!(result["negative_rejected"].as_bool().unwrap());
+    assert_eq!(e.eval::<String>(r#"open_file("stream.txt", "r").read_string(100)"#).unwrap(), "abc");
+    assert_eq!(e.eval::<String>(r#"open_file("stream.txt", "r").read_string(0)"#).unwrap(), "abc");
+    assert_eq!(t.read("stream.txt"), b"abcdef");
+
+    let zero = engine(SysConfig::default().fs_root(t.path(), FsAccess::ReadWriteDelete).max_file_read(0));
+    let zero_result = zero
+        .eval::<Map>(r#"let file = open_file("stream.txt", "r"); let value = file.read_string(); #{ value: value, position: file.position() }"#)
+        .unwrap();
+    assert_eq!(zero_result["value"].clone().try_cast::<String>().unwrap(), "");
+    assert_eq!(zero_result["position"].as_int().unwrap(), 0);
+    assert_eq!(t.read("stream.txt"), b"abcdef");
+}
+
+#[test]
+fn test_file_handle_string_read_requires_complete_utf8() {
+    let (t, e) = rw();
+    t.write("invalid-utf8.bin", [0xE2, 0x82, 0xAC, b'x']);
+
+    let result = e
+        .eval::<Map>(
+            r#"
+                let file = open_file("invalid-utf8.bin", "r");
+                let kind = "";
+                try { file.read_string(2); } catch (err) { kind = err.io_kind; }
+                #{ kind: kind, position: file.position() }
+            "#,
+        )
+        .unwrap();
+    assert_eq!(result["kind"].clone().try_cast::<String>().unwrap(), "InvalidData");
+    assert_eq!(result["position"].as_int().unwrap(), 2);
+    assert_eq!(t.read("invalid-utf8.bin"), [0xE2, 0x82, 0xAC, b'x']);
+
+    t.write("malformed-utf8.bin", [0xFF, b'x']);
+    let malformed = e
+        .eval::<Map>(r#"let file = open_file("malformed-utf8.bin", "r"); let kind = ""; try { file.read_string(); } catch (err) { kind = err.io_kind; } #{ kind: kind, position: file.position() }"#)
+        .unwrap();
+    assert_eq!(malformed["kind"].clone().try_cast::<String>().unwrap(), "InvalidData");
+    assert_eq!(malformed["position"].as_int().unwrap(), 2);
+    assert_eq!(t.read("malformed-utf8.bin"), [0xFF, b'x']);
+}
+
+#[cfg(not(feature = "unchecked"))]
+#[test]
+fn test_file_handle_read_respects_engine_limit_below_host_cap() {
+    let t = TempDir::new();
+    t.write("a", "abcdef");
+    let mut e = engine(SysConfig::default().fs_root(t.path(), FsAccess::ReadWriteDelete).max_file_read(5));
+    e.set_max_string_size(2);
+
+    let result = e
+        .eval::<Map>(
+            r#"
+                let file = open_file("a", "r");
+                let part = file.read_string(4);
+                #{ part: part, position: file.position() }
+            "#,
+        )
+        .unwrap();
+    assert_eq!(result["part"].clone().try_cast::<String>().unwrap(), "ab");
+    assert_eq!(result["position"].as_int().unwrap(), 2);
+    assert_eq!(t.read("a"), b"abcdef");
+}
+
+#[cfg(not(feature = "no_index"))]
+#[test]
+fn test_file_handle_read_blob_preserves_bytes_and_obeys_host_cap() {
+    let t = TempDir::new();
+    t.write("blob.bin", [0xFF, 0x00, 0xFE, 0x01]);
+    let e = engine(SysConfig::default().fs_root(t.path(), FsAccess::ReadWriteDelete).max_file_read(3));
+    let result = e
+        .eval::<Map>(
+            r#"
+                let file = open_file("blob.bin", "r");
+                let negative_rejected = false;
+                try { file.read_blob(-1); } catch (err) { negative_rejected = err.io_kind == "InvalidInput"; }
+                let after_negative = file.position();
+                let first = file.read_blob();
+                let second = file.read_blob(9);
+                let eof = file.read_blob();
+                #{ first: first, second: second, eof: eof, position: file.position(), after_negative: after_negative, negative_rejected: negative_rejected }
+            "#,
+        )
+        .unwrap();
+    assert_eq!(result["first"].clone().try_cast::<rhai::Blob>().unwrap(), [0xFF, 0x00, 0xFE]);
+    assert_eq!(result["second"].clone().try_cast::<rhai::Blob>().unwrap(), [0x01]);
+    assert_eq!(result["eof"].clone().try_cast::<rhai::Blob>().unwrap(), Vec::<u8>::new());
+    assert_eq!(result["position"].as_int().unwrap(), 4);
+    assert_eq!(result["after_negative"].as_int().unwrap(), 0);
+    assert!(result["negative_rejected"].as_bool().unwrap());
+    assert_eq!(t.read("blob.bin"), [0xFF, 0x00, 0xFE, 0x01]);
+}
+
+#[test]
+fn test_file_handle_reads_fail_at_eof_and_on_write_only_handle() {
+    let (t, e) = rw();
+    t.write("a", "x");
+    let result = e
+        .eval::<Map>(r#"let file = open_file("a", "r"); let first = file.read_string(); let eof = file.read_string(); #{ first: first, eof: eof, position: file.position() }"#)
+        .unwrap();
+    assert_eq!(result["first"].clone().try_cast::<String>().unwrap(), "x");
+    assert_eq!(result["eof"].clone().try_cast::<String>().unwrap(), "");
+    assert_eq!(result["position"].as_int().unwrap(), 1);
+
+    let error = sys_err(&e, r#"open_file("write-only", "w").read_string()"#);
+    assert!(matches!(error, SysError::Io { .. }), "{error}");
+    assert_eq!(t.read("write-only"), b"");
+}
+
+#[cfg(not(feature = "unchecked"))]
+#[cfg(not(feature = "no_index"))]
+#[test]
+fn test_file_handle_blob_read_respects_engine_array_limit() {
+    let t = TempDir::new();
+    t.write("blob.bin", [0xFF, 0x00, 0xFE, 0x01]);
+    let mut e = engine(SysConfig::default().fs_root(t.path(), FsAccess::ReadWriteDelete).max_file_read(4));
+    e.set_max_array_size(2);
+    let result = e
+        .eval::<Map>(r#"let file = open_file("blob.bin", "r"); let blob = file.read_blob(4); #{ blob: blob, position: file.position() }"#)
+        .unwrap();
+    assert_eq!(result["blob"].clone().try_cast::<rhai::Blob>().unwrap(), [0xFF, 0x00]);
+    assert_eq!(result["position"].as_int().unwrap(), 2);
+    assert_eq!(t.read("blob.bin"), [0xFF, 0x00, 0xFE, 0x01]);
+}
+
+#[cfg(feature = "no_index")]
+#[test]
+fn test_file_handle_blob_read_is_omitted_under_no_index() {
+    let (t, e) = rw();
+    t.write("blob.bin", [0xFF, 0x00]);
+    let error = e.run(r#"open_file("blob.bin", "r").read_blob()"#).unwrap_err();
+    assert!(error.to_string().contains("read_blob"), "{error}");
+    assert_eq!(t.read("blob.bin"), [0xFF, 0x00]);
+}
+
 // F1, F2, F3: read existing, missing and empty files.
 #[test]
 fn test_read_file_cases() {
