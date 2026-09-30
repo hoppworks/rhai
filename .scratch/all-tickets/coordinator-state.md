@@ -41,6 +41,15 @@ be resolved before their dependent implementation. No remote publication.
 
 ## Current step
 
+Windows candidate is now 0999a552 on task/windows-scoped-runner, including
+74138c71 monitor/client launch and bounded lease protocol source. All five source,
+fixture and documentation files were reviewed; related findings corrected in
+the responsible context. See windows-monitor-lease-review.md. Only whitespace
+checking ran; compiler, fixtures, native/guest behavior remain unverified.
+Unsafe workload entry is disabled and candidate remains separate. Next independent
+source requirement is handle-based runtime/staging and durable journal, followed
+by immutable specification and actual payload integration with two host responses.
+
 Step 1 corrected unrestricted resolution is integrated at 5f87d339 and accepted
 on native macOS: env7/fs24/policy26 pass, exact runtime absent. Red/green
 unlinked-cwd contract and immediate child/marker ownership guards reviewed.
@@ -166,6 +175,16 @@ Dependent implementation is stopped. Continue only independent authorized
 requirements with new evidence; do not repeat decision/status/verification rounds.
 
 ## Goal turn classification
+
+2026-09-30 continuation: progress, not a verified wait or no-progress turn.
+Authoritative Windows source changed in 74138c71/0999a552; source review changed
+the next action from monitor/lease construction to safe backend/journal and payload
+integration. No full custody or ticket acceptance is claimed. No compiler,
+fixture, native run or owned temporary process/resource occurred. This remains an
+intermediate part of the existing correction, with no completed failed full
+custody correction or infrastructure recovery; reviewed source defects and their
+corrections are retained in windows-monitor-lease-review.md. Open owner decisions
+continue to stop their dependent branches. Goal remains active and incomplete.
 
 Latest continuation made source progress: Windows creation-time job assignment
 candidate b596feba is committed and source-reviewed in
