@@ -74,8 +74,8 @@ broader release matrix remain release gates.
 
 Final `rustfmt --edition 2021` and `git diff --check` passed before source commit
 `44275bf83dc1cb7f4a9ba707ed73a6c27209d0fc`; exact sync and no-index logs show 2/2 and
-1/1. Evidence/current state is retained here and will be committed as a separate
-documentation-only commit. Source author and committer were verified as
+1/1. Evidence/current state is committed in
+`e4b85bb964fa380b94bff060b96f89c881526895`. Source author and committer were verified as
 `hoppworks <daniel@hoppworks.de>`. The exact cleanup rejection, command and measured
 artifact sizes are retained in `evidence/cleanup-readback.txt`; ignored `target/` and
 `Cargo.lock` remain in the owned checkout for parent classification. No remote push or
