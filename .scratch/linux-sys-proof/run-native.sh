@@ -43,15 +43,18 @@ p.write_bytes(b.replace(old, new))
 PY
 printf '\nFalse assertion control (expect failure): wrong read_dir error variant\n' >> "$log"
 false_status=0
-cargo test --features testing-environ,sys,metadata --test sys_fs test_non_utf8_file_name -- --exact --nocapture >> "$log" 2>&1 || false_status=$?
+cargo test --features testing-environ,sys,metadata --test sys_fs test_non_utf8_file_name -- --exact --nocapture > "$AGENT_RUNTIME_DIR/false-control.log" 2>&1 || false_status=$?
+cat "$AGENT_RUNTIME_DIR/false-control.log" >> "$log"
 printf 'False assertion control exit status: %s\n' "$false_status" >> "$log"
-if [ "$false_status" -eq 0 ]; then
-    printf 'False assertion control unexpectedly passed\n' >> "$log"
-    exit 1
-fi
 
 cp "$AGENT_RUNTIME_DIR/sys_fs.rs.correct" "$test_file"
 cmp -s "$test_file" "$AGENT_RUNTIME_DIR/sys_fs.rs.correct"
+if [ "$false_status" -ne 101 ] \
+    || ! grep -Fq 'NotUtf8: directory entry "bad\xFF.txt"' "$AGENT_RUNTIME_DIR/false-control.log" \
+    || ! grep -Fq 'test test_non_utf8_file_name ... FAILED' "$AGENT_RUNTIME_DIR/false-control.log"; then
+    printf 'False assertion control did not fail at the expected NotUtf8 assertion\n' >> "$log"
+    exit 1
+fi
 printf '\nCorrect assertion restored byte-for-byte; rerun public invalid UTF-8 test\n' >> "$log"
 correct_status=0
 cargo test --features testing-environ,sys,metadata --test sys_fs test_non_utf8_file_name -- --exact --nocapture >> "$log" 2>&1 || correct_status=$?

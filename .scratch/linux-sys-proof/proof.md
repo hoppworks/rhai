@@ -20,6 +20,8 @@ It passed 7 `sys_env`, 24 `sys_fs`, and 24 `sys_policy` tests. The Linux invalid
 
 The full output, source identity, commands, versions, and statuses are retained in [native-linux-sys.log](native-linux-sys.log). The first wrapper attempt also passed the suite and both assertion runs but exited 1 during redundant log self-copy; that harness diagnostic is retained in [attempt1-finalization-diagnostic.log](attempt1-finalization-diagnostic.log). The corrected wrapper run is the accepted run.
 
+The self-copy error happened after Cargo had finished and was limited to evidence export. The first attempt's contract output and statuses remain valid in its retained log; they could have been used without another cold build. The later accepted run independently records the same suite and control results. The retained runner has since been hardened to require exit 101 and both the exact `NotUtf8: directory entry "bad\\xFF.txt"` diagnostic and the named test failure before it accepts the negative control. This harness-only check was validated against the retained log and with `bash -n`; Cargo was not rerun for this export/status-check change.
+
 ## Platform limits and cleanup
 
 This Linux run excludes `test_root_accepts_macos_system_prefix_aliases` and `test_nested_roots_keep_permissions_through_system_prefix_aliases` (`target_os = "macos"`), plus `test_windows_paths` (`cfg(windows)`). The Linux-only `/proc/self/fd` handle-leak check ran. This is not release-matrix evidence and does not certify process, TCP, or file-handle behavior beyond the listed tests.
