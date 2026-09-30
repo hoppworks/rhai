@@ -41,9 +41,11 @@ be resolved before their dependent implementation. No remote publication.
 
 ## Current step
 
-Transfer fixture source is now present in the Windows candidate as an untracked
-file. The same agent is confirmed running. Full intermediate fixture review
-identified finite-loop and sender-ACK/invalid-assembly coverage gaps, delivered
+Transfer fixture and model source are now present in the Windows candidate as
+untracked files. The same agent is confirmed running. Full intermediate fixture review
+identified finite-loop and sender-ACK/invalid-assembly coverage gaps; model
+review additionally found nested-private accessibility, active sender terminality
+and diagnostic precedence gaps. All delivered
 for related correction; see windows-specification-transfer-review.md. Await the
 model/fixture commit; nothing has compiled or run.
 

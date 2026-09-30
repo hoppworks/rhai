@@ -30,3 +30,33 @@ These are source/coverage findings within the existing incomplete Windows
 custody correction. They are not executed RED/GREEN or completed failed
 full-custody corrections. Await the exact source/model commit, review all changed
 files including OCR-excluded fixture/README, and retain workload/exact-job gates.
+
+## Intermediate model review
+
+The complete dirty SpecificationTransfer.cs was independently read when it
+appeared. Fixed 324-byte chunks give 26 DATA frames at 8192 bytes, plus BEGIN/END;
+maximum DATA representation is 486 bytes including LF, DATA ACK is 57. A
+receiver allocates only after token/total/chunk-count checks and END parses
+LaunchSpecification. Single pending sender frame and supplied deadline preserve
+the intended pure source boundary; transport remains unconnected.
+
+Further related findings delivered before commit:
+- Private Sender.PendingKind is referenced by the enclosing AckFields/parser.
+  Move it to the enclosing private scope. This is inferred from the official
+  [C# accessibility-domain reference](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/accessibility-domain),
+  which explicitly demonstrates inaccessible private nested-class members; no
+  compiler was run.
+- Active sender invalid-state ACK/duplicate Start paths bypass Fail, so an
+  invalid transfer may remain startable. Fail active invalid events, preserving
+  stable terminal Completed/Failed rejection, and test the intended state.
+- ParseFrame's control scan precedes delimiter diagnostics, and the fixture's
+  trailing-space base64 value is a framing defect. Align error precedence and
+  use a genuine malformed/noncanonical base64 case.
+- CountChunks must avoid signed overflow on arbitrary internal input.
+- Future MonitorTransport dispatch strips LF/optional CR today; an adapter must
+  preserve/validate original canonical delimiters and byte accounting instead
+  of claiming canonical input after normalization. Document the boundary while
+  keeping existing lease dispatch unchanged.
+
+These change the pre-commit review/correction action; no executed behavioral
+evidence, compiler result or completed full-custody correction is claimed.
