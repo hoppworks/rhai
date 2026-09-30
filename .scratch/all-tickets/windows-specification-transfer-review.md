@@ -1,4 +1,4 @@
-# Specification transfer review in progress
+# Specification transfer source review
 
 Source baseline: source-reviewed `73020670`; contract:
 `briefs/windows-specification-transfer.md`. The same responsible Windows agent
@@ -60,3 +60,32 @@ Further related findings delivered before commit:
 
 These change the pre-commit review/correction action; no executed behavioral
 evidence, compiler result or completed full-custody correction is claimed.
+
+## Final immutable commit review
+
+Reviewed commit `53140bcf` in the separate owned Windows worktree. All three
+changed files were read in full, including the README and fixture excluded by
+OCR. The default OCR rule was read for SpecificationTransfer.cs. Coverage is
+three of three files, zero skips. The source was reread after the final commit;
+`git diff --check` passed and the candidate was clean.
+
+The bounded fixture loop, sender acknowledgement terminality and replay/token
+cases, oversized frame/decimal overflow/short chunk/invalid assembled document
+cases are present. PendingKind now lives in the enclosing internal scope;
+CountChunks uses widened arithmetic. Delimiter diagnostics precede the ASCII
+scan. Invalid active Start/ACK paths fail permanently while completed/failed
+states remain stable. README records Running renewal and the original-framing
+boundary. The intermediate findings are closed in source.
+
+Transfer DATA is at most 486 bytes including LF, ACK at most 57. Exact 8192-byte
+input requires 26 DATA plus BEGIN/END and one outstanding sender frame; queue
+pressure cannot authorize advancement. Receiver allocation follows token/size/
+chunk-count validation and END parses the immutable specification. The supplied
+fixed deadline is checked for every active event; transfer acknowledgements do
+not operate the lease protocol or create/resume capability.
+
+This is source review only. No compiler, fixture, native Windows process, build,
+runtime allocation, transport dispatch, workload start or exact-job proof was
+executed. No full-custody attempt is complete and no product ticket is accepted.
+The candidate remains isolated. Next source requirement is real monitor dispatch
+with original framing preserved and workload authority still closed.

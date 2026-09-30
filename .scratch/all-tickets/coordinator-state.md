@@ -41,27 +41,18 @@ be resolved before their dependent implementation. No remote publication.
 
 ## Current step
 
-Transfer fixture and model source are now present in the Windows candidate as
-untracked files. The same agent is confirmed running. Full intermediate fixture review
-identified finite-loop and sender-ACK/invalid-assembly coverage gaps; model
-review additionally found nested-private accessibility, active sender terminality
-and diagnostic precedence gaps. All delivered
-for related correction; see windows-specification-transfer-review.md. Await the
-model/fixture commit; nothing has compiled or run.
+Specification transfer `53140bcf` is independently source-reviewed across all
+three changed files, zero skips, including excluded README/fixture. Related
+intermediate findings are closed in source; see
+windows-specification-transfer-review.md. Nothing has compiled or run. Next is
+bounded intake through the actual MonitorTransport path, with original framing
+preserved and workload/create/resume/exact-job authority still disabled.
 
-Windows immutable launch specification 91e474d7 and related correction 73020670
-are independently source-reviewed across all four files each, zero skips, in
-the separate owned Windows worktree. OCR-excluded README/fixture were manually
-read. Input-bound and quoting source findings are closed; see
-windows-immutable-specification-review.md. No compiler, fixture execution or
-native proof has occurred. Public workload entry and exact-job issuance remain
-disabled. The source-reviewed predecessor is Running renewal 43d2f067, following
-allocation/staging/disposition source slices referenced in their review files.
-
-Accepted filesystem/environment production and macOS/Linux proof remain unchanged;
-reuse the applicable evidence. The one further POSIX attempt is authorized and
-unconsumed; the separate pending runner-copy question stops its dependent work.
-TCP/release decisions also remain pending. No remote writes.
+Immutable specification `91e474d7`/`73020670` and Running renewal `43d2f067`
+source reviews remain applicable. Accepted filesystem/environment production and
+macOS/Linux proof remain unchanged. The further POSIX attempt is authorized and
+unconsumed; its separate runner-copy decision, TCP and release decisions remain
+pending. No remote writes.
 
 ## Decisions
 
@@ -125,16 +116,13 @@ Inherited VM history remains authoritative.
 
 ## Next action
 
-Launch-spec correction review is complete. The same responsible context is
-continuing the bounded transfer model under briefs/windows-specification-transfer.md.
-Review its exact eventual commit including excluded fixture/README; preserve
-existing frame/queue/lease limits and disabled workload launch. Native
-bootstrap and guest runtime custody remain prerequisites for execution. Do not
-count static corrections as executed TDD or native acceptance.
-
-Preserve the sole Windows Expert chain and the authorized unconsumed POSIX retry.
-Await existing owner answers for dependent branches; do not repeat questions.
-Linear is legacy and excluded.
+Continue the same responsible Windows context under
+briefs/windows-monitor-specification-intake.md. Add actual monitor framing and
+transfer dispatch; keep workload entry disabled. Review the exact commit across
+all changed files. Native bootstrap and guest runtime custody remain prerequisites
+for execution. Do not count authored fixtures as executed TDD or acceptance.
+Preserve the sole Windows Expert chain and unconsumed POSIX retry; do not repeat
+pending questions. Linear is legacy and excluded.
 
 ## Open owner decisions
 
@@ -148,6 +136,14 @@ Dependent implementation is stopped. Continue only independent authorized
 requirements with new evidence; do not repeat decision/status/verification rounds.
 
 ## Goal turn classification
+
+2026-09-30 transfer commit review: progress. Authoritative source is now committed
+at 53140bcf; independent all-file review closed related findings and advanced the
+next requirement to actual monitor intake. No build/fixture/native operation or
+runtime resource occurred. The full custody correction remains incomplete,
+without a completed failed correction/recovery. Independent source work remains;
+goal active/incomplete, not blocked.
+
 
 2026-09-30 transfer fixture continuation: progress. Previous turn was a verified
 wait on the live Windows agent. Current authoritative untracked fixture source
