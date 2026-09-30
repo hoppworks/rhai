@@ -60,3 +60,11 @@ meet an invariant, report the precise boundary without claiming completion or
 opening another Expert chain. Commit atomically as the configured human author;
 report files, commit, actual static checks, unexecuted fixtures and remaining
 native/monitor gates. No product integration, remote writes or ticket acceptance.
+
+Primary API references for source review:
+[SetFileInformationByHandle](https://learn.microsoft.com/en-us/windows/win32/api/fileapi/nf-fileapi-setfileinformationbyhandle),
+[FILE_DISPOSITION_INFO](https://learn.microsoft.com/en-us/windows/win32/api/winbase/ns-winbase-file_disposition_info),
+and [Closing and Deleting Files](https://learn.microsoft.com/en-us/windows/win32/fileio/closing-and-deleting-files).
+Class 4 uses a BOOLEAN field, DELETE access is required, and marking disposition
+is not independently confirmed absence. Existing pins without delete sharing
+must be accounted for; this documentation is not native proof.

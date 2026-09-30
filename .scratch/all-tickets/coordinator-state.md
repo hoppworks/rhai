@@ -67,6 +67,10 @@ files, zero skips: full ancestor identity-chain input, specific bound assertions
 per-file/depth/cancellation fixture source, and documentation accuracy. See
 windows-source-staging-review.md. Candidate is clean, separate and workload
 launch disabled. Source review permits the next source substep, not acceptance.
+Handle-safe disposition is now delegated to the same responsible Windows context
+under briefs/windows-runtime-disposition.md. The followup was delivered; await
+source/fixture report and independently review it. No compile/fixture/native
+execution is authorized by that source brief.
 
 Step 1 corrected unrestricted resolution is integrated at 5f87d339 and accepted
 on native macOS: env7/fs24/policy26 pass, exact runtime absent. Red/green
