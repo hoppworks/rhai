@@ -1,9 +1,8 @@
-//! Optional host-controlled TCP connect access.
+//! Optional host-controlled TCP network access.
 //!
 //! The package starts with no grants. Hosts grant exact numeric socket endpoints with
-//! [`NetConfig::allow_connect`] before registering a [`NetPackage`] with an engine.
-//! This first slice supports outgoing connections and shared close only; listeners and
-//! byte transfer are not included.
+//! [`NetConfig`] before registering a [`NetPackage`] with an engine. Connect and
+//! listen grants are separate and match exact numeric socket endpoints.
 
 #[cfg(feature = "no_std")]
 compile_error!("the `net` feature requires `std`; it cannot be combined with `no_std`");
@@ -13,10 +12,12 @@ compile_error!("the `net` feature is not available on WASM targets");
 
 mod config;
 mod error;
+mod listener;
 mod stream;
 
 pub use config::NetConfig;
 pub use error::NetError;
+pub use listener::NetListener;
 pub use stream::NetStream;
 
 use crate::packages::Package;
@@ -26,7 +27,7 @@ use std::sync::atomic::AtomicUsize;
 use std::sync::Arc;
 
 /// Host policy for outgoing TCP connections.
-struct NetState {
+pub(super) struct NetState {
     config: NetConfig,
     open_handles: Arc<AtomicUsize>,
 }
@@ -49,6 +50,17 @@ impl NetPackage {
                 "connect timeout must be finite, positive, and representable",
             ));
         }
+        if config.accept_timeout.is_zero()
+            || std::time::Instant::now()
+                .checked_add(config.accept_timeout)
+                .is_none()
+        {
+            return Err(NetError::invalid(
+                "configure accept timeout",
+                format!("{:?}", config.accept_timeout),
+                "accept timeout must be finite, positive, and representable",
+            ));
+        }
         if config.max_handles == 0 || config.max_handles > 64 {
             return Err(NetError::invalid(
                 "configure handle limit",
@@ -64,7 +76,9 @@ impl NetPackage {
         let mut module = Module::new();
         NetError::register(&mut module);
         module.set_custom_type::<NetStream>("NetStream");
+        module.set_custom_type::<NetListener>("NetListener");
         stream::register(&mut module);
+        listener::register(&mut module);
 
         let st = state.clone();
         reg(
@@ -73,6 +87,15 @@ impl NetPackage {
         )
         .set_into_module(&mut module, move |address: &str, port: crate::INT| {
             connect(&st, address, port)
+        });
+
+        let st = state.clone();
+        reg(
+            "listen",
+            &["/// Listen on an exact host-granted numeric IP address and port."],
+        )
+        .set_into_module(&mut module, move |address: &str, port: crate::INT| {
+            listener::listen(&st, address, port)
         });
 
         module.build_index();
@@ -118,29 +141,64 @@ fn connect(
         .into());
     }
 
-    let previous = state.open_handles.fetch_update(
-        std::sync::atomic::Ordering::AcqRel,
-        std::sync::atomic::Ordering::Acquire,
-        |open| (open < state.config.max_handles).then_some(open + 1),
-    );
-    if previous.is_err() {
-        return Err(NetError::resource_limit(
-            "connect",
-            target,
-            "host TCP handle limit is reached",
-        )
-        .into());
-    }
+    let reservation = reserve_handle(state, "connect", target.clone())?;
     let socket = match TcpStream::connect_timeout(&endpoint, state.config.connect_timeout) {
         Ok(socket) => socket,
-        Err(error) => {
-            state
-                .open_handles
-                .fetch_sub(1, std::sync::atomic::Ordering::AcqRel);
-            return Err(NetError::io("connect", target, &error).into());
-        }
+        Err(error) => return Err(NetError::io("connect", target, &error).into()),
     };
+    reservation.commit();
     Ok(NetStream::new(socket, state.open_handles.clone()))
+}
+
+pub(super) struct HandleReservation {
+    open_handles: Arc<AtomicUsize>,
+    committed: bool,
+}
+
+impl HandleReservation {
+    pub(super) fn commit(mut self) {
+        self.committed = true;
+    }
+}
+
+impl Drop for HandleReservation {
+    fn drop(&mut self) {
+        if !self.committed {
+            self.open_handles
+                .fetch_sub(1, std::sync::atomic::Ordering::AcqRel);
+        }
+    }
+}
+
+pub(super) fn reserve_handle(
+    state: &NetState,
+    op: &'static str,
+    target: impl Into<String>,
+) -> Result<HandleReservation, Box<crate::EvalAltResult>> {
+    reserve_shared_handle(&state.open_handles, state.config.max_handles, op, target)
+}
+
+pub(super) fn reserve_shared_handle(
+    open_handles: &Arc<AtomicUsize>,
+    max_handles: usize,
+    op: &'static str,
+    target: impl Into<String>,
+) -> Result<HandleReservation, Box<crate::EvalAltResult>> {
+    let target = target.into();
+    let previous = open_handles.fetch_update(
+        std::sync::atomic::Ordering::AcqRel,
+        std::sync::atomic::Ordering::Acquire,
+        |open| (open < max_handles).then_some(open + 1),
+    );
+    if previous.is_err() {
+        return Err(
+            NetError::resource_limit(op, target, "host TCP handle limit is reached").into(),
+        );
+    }
+    Ok(HandleReservation {
+        open_handles: open_handles.clone(),
+        committed: false,
+    })
 }
 
 #[allow(unused_variables)]

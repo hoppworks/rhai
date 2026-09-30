@@ -1,0 +1,104 @@
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+     Locking 130 packages to latest compatible versions
+      Adding getrandom v0.3.4 (available: v0.4.3)
+      Adding hashbrown v0.16.1 (available: v0.17.1)
+      Adding syn v2.0.119 (available: v3.0.6)
+ Downloading crates ...
+  Downloaded cfg-if v1.0.5
+  Downloaded const-random-macro v0.1.16
+  Downloaded crunchy v0.2.4
+  Downloaded itoa v1.0.18
+  Downloaded autocfg v1.5.1
+  Downloaded zmij v1.0.23
+  Downloaded tiny-keccak v2.0.2
+  Downloaded smartstring v1.0.1
+  Downloaded ahash v0.8.12
+  Downloaded version_check v0.9.5
+  Downloaded thin-vec v0.2.20
+  Downloaded rmp-serde v1.3.1
+  Downloaded serde_core v1.0.229
+  Downloaded unicode-ident v1.0.26
+  Downloaded quote v1.0.47
+  Downloaded serde v1.0.229
+  Downloaded once_cell v1.21.4
+  Downloaded num-traits v0.2.19
+  Downloaded zerocopy v0.8.59
+  Downloaded memchr v2.8.3
+  Downloaded serde_json v1.0.151
+  Downloaded proc-macro2 v1.0.107
+  Downloaded spin v0.7.2
+  Downloaded portable-atomic v1.15.0
+  Downloaded smallvec v1.16.2
+  Downloaded getrandom v0.3.4
+  Downloaded syn v2.0.119
+  Downloaded getrandom v0.2.17
+  Downloaded const-random v0.1.18
+  Downloaded bitflags v2.13.2
+  Downloaded rmp v0.8.15
+  Downloaded static_assertions v1.1.0
+  Downloaded libc v0.2.189
+ Downloading crates ...
+  Downloaded web-time v1.1.0
+   Compiling autocfg v1.5.1
+   Compiling libc v0.2.189
+   Compiling crunchy v0.2.4
+   Compiling version_check v0.9.5
+   Compiling proc-macro2 v1.0.107
+   Compiling cfg-if v1.0.5
+   Compiling tiny-keccak v2.0.2
+   Compiling num-traits v0.2.19
+   Compiling unicode-ident v1.0.26
+   Compiling quote v1.0.47
+   Compiling portable-atomic v1.15.0
+   Compiling getrandom v0.2.17
+   Compiling getrandom v0.3.4
+   Compiling once_cell v1.21.4
+   Compiling zerocopy v0.8.59
+   Compiling serde_core v1.0.229
+   Compiling const-random-macro v0.1.16
+   Compiling smartstring v1.0.1
+   Compiling ahash v0.8.12
+   Compiling syn v2.0.119
+   Compiling const-random v0.1.18
+   Compiling static_assertions v1.1.0
+   Compiling serde v1.0.229
+   Compiling zmij v1.0.23
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-8temm34q/source)
+   Compiling rhai_codegen v3.2.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-8temm34q/source/codegen)
+   Compiling serde_json v1.0.151
+   Compiling thin-vec v0.2.20
+   Compiling smallvec v1.16.2
+   Compiling bitflags v2.13.2
+   Compiling rmp v0.8.15
+   Compiling itoa v1.0.18
+   Compiling memchr v2.8.3
+   Compiling rmp-serde v1.3.1
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 17.84s
+     Running tests/net_listen.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-8temm34q/target/debug/deps/net_listen-b902c175f28f1716)
+
+running 1 test
+
+thread 'closing_a_clone_unblocks_an_accept_waiting_on_shared_quota' (51472409) panicked at tests/net_listen.rs:186:5:
+accept reserves the shared quota before waiting; last probe was "Timeout", worker result was Ok(false)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test closing_a_clone_unblocks_an_accept_waiting_on_shared_quota ... FAILED
+
+failures:
+
+failures:
+    closing_a_clone_unblocks_an_accept_waiting_on_shared_quota
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 6 filtered out; finished in 2.00s
+
+error: test failed, to rerun pass `--test net_listen`

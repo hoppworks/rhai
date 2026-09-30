@@ -93,6 +93,8 @@ fn denied_and_invalid_endpoints_do_not_reach_peer_and_errors_are_catchable() {
 fn net_config_rejects_zero_deadline_and_invalid_handle_limits() {
     let error = NetPackage::new(NetConfig::default().connect_timeout(Duration::ZERO)).err().unwrap();
     assert_eq!(error.kind(), "InvalidInput");
+    let error = NetPackage::new(NetConfig::default().accept_timeout(Duration::ZERO)).err().unwrap();
+    assert_eq!(error.kind(), "InvalidInput");
     let error = NetPackage::new(NetConfig::default().max_handles(0)).err().unwrap();
     assert_eq!(error.kind(), "InvalidInput");
     let _: NetError = error;

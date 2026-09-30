@@ -1,0 +1,29 @@
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.03s
+     Running tests/net_listen.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-hph67qpq/target/debug/deps/net_listen-b902c175f28f1716)
+
+running 1 test
+
+thread 'authorized_listener_accepts_an_independent_peer' (51479759) panicked at tests/net_listen.rs:43:5:
+assertion `left == right` failed: accepted peer matches the independently created socket
+  left: "127.0.0.1:57329"
+ right: "127.0.0.1:1"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test authorized_listener_accepts_an_independent_peer ... FAILED
+
+failures:
+
+failures:
+    authorized_listener_accepts_an_independent_peer
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 6 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--test net_listen`
