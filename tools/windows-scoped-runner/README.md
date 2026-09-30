@@ -30,9 +30,13 @@ closed. The new `WindowsCustodyBackend.cs` source slice pins the fixed local
 handles that omit delete sharing, and captures volume/file identity. Its
 bounded journal creates a unique external file with a protected current-user
 and SYSTEM DACL, verifies that ACL through the opened handle, and flushes each
-bounded framed record. It is not yet called by the monitor and does not allocate
-a runtime. An incomplete/torn journal record is detectable; no recovery or
-cleanup decision is made from a path alone.
+bounded framed record. A source-only allocation owner now flushes an intent
+before exclusive `CreateDirectoryW`, supplies a protected user/SYSTEM DACL at
+creation, refuses an existing name, verifies the opened directory handle's
+DACL and file identity, and flushes identity before marking it recorded. This
+is not wired to the monitor; ACL behavior, collision behavior, and journal
+durability are unverified. An incomplete/torn journal record is detectable; no
+recovery or cleanup decision is made from a path alone.
 
 The create/resume states in the protocol fixture are modeled transitions only;
 the second challenge and actual suspended/resume operations are not wired to a
@@ -43,7 +47,12 @@ source history and must not be used.
 `fixtures/CustodyBackendFixture.cs` is source-only behavioral coverage for
 directory pin identity, rename exclusion, bounded journal writes, external
 placement, independent journal readback, and rejection of truncated frames or
-missing final newlines. It has not been compiled or run.
+missing final newlines. It also describes allocation transitions, including
+intent-before-create, collision refusal, ACL and identity verification, ordered
+identity journaling, and retained post-create uncertainty. The fixture has not
+been compiled or run. It deliberately retains runtime directories because this
+slice has no handle-safe runtime disposition; it does not present path-based
+checks followed by deletion as safe cleanup.
 No compiler, runtime, Windows build command, guest command, or fixture process
 was invoked for this change.
 
@@ -54,12 +63,11 @@ entrypoint. It has not been run.
 
 ## Remaining custody and proof boundaries
 
-Runtime child allocation and its verified protected ACL/identity, handle-based
-source staging and Windows executable-path validation, intent-before-allocation
-integration, identity-after-allocation journaling, local evidence
-finalization/export, exact job ownership and cleanup, the real create-time
-payload integration, pre-resume host challenge integration, termination and
-finalization budgets, and verified runtime removal remain unimplemented. The
+Handle-based source staging and Windows executable-path validation, monitor
+integration, local evidence finalization/export, exact job ownership and
+cleanup, the real create-time payload integration, pre-resume host challenge
+integration, termination and finalization budgets, and verified runtime
+removal remain unimplemented. The
 running protocol state also cannot issue lease-renewal challenges yet; the
 source watchdog would expire a long-running payload at its short lease if this
 state were connected to one. Client/monitor pipe behavior, breakaway compatibility, ambient

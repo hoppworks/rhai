@@ -27,7 +27,7 @@ internal static class CustodyBackendFixture
         {
             using (WindowsCustodyBackend.PinnedDirectory pin = WindowsCustodyBackend.PinDirectoryForFixture(fixture))
             {
-                WindowsCustodyBackend.DirectoryIdentity before = pin.Identity;
+                WindowsCustodyBackend.FileIdentity before = pin.Identity;
                 Expect("pinned directory identity is nonempty", before.FileId != Guid.Empty && before.VolumeSerial != 0);
 
                 bool renameBlocked = false;
@@ -63,6 +63,7 @@ internal static class CustodyBackendFixture
                     Path.Combine(fixture, "runtime") + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase));
                 File.Delete(journalPath);
             }
+            AllocationTransitions(fixture);
         }
         finally
         {
@@ -107,5 +108,93 @@ internal static class CustodyBackendFixture
         Buffer.BlockCopy(source, 0, result, 0, index);
         Buffer.BlockCopy(source, index + 1, result, index, source.Length - index - 1);
         return result;
+    }
+
+    private static void AllocationTransitions(string fixture)
+    {
+        string successRoot = Path.Combine(fixture, "allocation-success");
+        Directory.CreateDirectory(successRoot);
+        string successPath;
+        string successJournal;
+        WindowsCustodyBackend.FileIdentity successRuntimeIdentity;
+        WindowsCustodyBackend.FileIdentity successEvidenceIdentity;
+        WindowsCustodyBackend.FileIdentity successJournalIdentity;
+        using (WindowsCustodyBackend.RuntimeAllocation success = WindowsCustodyBackend.BeginAllocationForFixture(
+            WindowsCustodyBackend.PinDirectoryForFixture(successRoot), Guid.NewGuid(), false))
+        {
+            successPath = success.RuntimePath;
+            successJournal = success.JournalPath;
+            Expect("allocation intent is flushed before runtime creation", success.State == WindowsCustodyBackend.AllocationState.IntentFlushed && !Directory.Exists(successPath));
+            Expect("runtime allocation verifies protected ACL and records identity", success.CreateRuntime() &&
+                success.State == WindowsCustodyBackend.AllocationState.IdentityRecorded && success.IsAclVerified &&
+                success.RuntimeIdentity != null && success.EvidenceIdentity != null);
+            successRuntimeIdentity = success.RuntimeIdentity;
+            successEvidenceIdentity = success.EvidenceIdentity;
+            successJournalIdentity = success.JournalIdentity;
+        }
+        string[] successRecords = WindowsCustodyBackend.ReadJournalForFixture(successJournal);
+        Expect("allocation journal orders intent before identity", successRecords.Length == 2 &&
+            successRecords[0].StartsWith("INTENT|", StringComparison.Ordinal) &&
+            successRecords[0].Contains(successPath) && successRecords[0].Contains(successJournal) &&
+            successRecords[0].Contains(successEvidenceIdentity.FileId.ToString("N")) &&
+            successRecords[0].Contains(successJournalIdentity.FileId.ToString("N")) &&
+            successRecords[1].StartsWith("IDENTITY|", StringComparison.Ordinal) &&
+            successRecords[1].Contains(successRuntimeIdentity.FileId.ToString("N")) &&
+            successRecords[1].Contains(successEvidenceIdentity.FileId.ToString("N")) &&
+            successRecords[1].Contains(successJournalIdentity.FileId.ToString("N")));
+        File.Delete(successJournal);
+        // Runtime directories are retained: this fixture does not claim a
+        // handle-safe removal operation, which belongs to a later backend step.
+
+        string collisionRoot = Path.Combine(fixture, "allocation-collision");
+        Directory.CreateDirectory(collisionRoot);
+        Guid collisionId = Guid.NewGuid();
+        string collisionPath;
+        string firstJournal;
+        using (WindowsCustodyBackend.RuntimeAllocation first = WindowsCustodyBackend.BeginAllocationForFixture(
+            WindowsCustodyBackend.PinDirectoryForFixture(collisionRoot), collisionId, false))
+        {
+            collisionPath = first.RuntimePath;
+            firstJournal = first.JournalPath;
+            Expect("first exclusive runtime owner records identity", first.CreateRuntime() && first.State == WindowsCustodyBackend.AllocationState.IdentityRecorded);
+        }
+        File.WriteAllText(Path.Combine(collisionPath, "foreign-marker.txt"), "preserve-existing-owner");
+        string collisionJournal;
+        using (WindowsCustodyBackend.RuntimeAllocation collision = WindowsCustodyBackend.BeginAllocationForFixture(
+            WindowsCustodyBackend.PinDirectoryForFixture(collisionRoot), collisionId, false))
+        {
+            collisionJournal = collision.JournalPath;
+            bool collisionRejected = !collision.CreateRuntime() && collision.State == WindowsCustodyBackend.AllocationState.FailedBeforeCreation;
+            Expect("existing runtime name is refused without adopting its marker", collisionRejected &&
+                File.ReadAllText(Path.Combine(collisionPath, "foreign-marker.txt")) == "preserve-existing-owner" &&
+                collision.Failure.Contains(collisionPath) && collision.Failure.Contains(collisionJournal));
+        }
+        string[] collisionRecords = WindowsCustodyBackend.ReadJournalForFixture(collisionJournal);
+        Expect("collision journal retains intent without a false identity", collisionRecords.Length == 1 &&
+            collisionRecords[0].StartsWith("INTENT|", StringComparison.Ordinal));
+        File.Delete(firstJournal);
+        File.Delete(collisionJournal);
+        // Retain the exact collision owner directory and marker for inspection.
+
+        string partialRoot = Path.Combine(fixture, "allocation-partial");
+        Directory.CreateDirectory(partialRoot);
+        string partialPath;
+        string partialJournal;
+        using (WindowsCustodyBackend.RuntimeAllocation partial = WindowsCustodyBackend.BeginAllocationForFixture(
+            WindowsCustodyBackend.PinDirectoryForFixture(partialRoot), Guid.NewGuid(), true))
+        {
+            partialPath = partial.RuntimePath;
+            partialJournal = partial.JournalPath;
+            bool partialFailed = !partial.CreateRuntime() && partial.State == WindowsCustodyBackend.AllocationState.FailedRetained &&
+                Directory.Exists(partialPath) && partial.RuntimeIdentity != null && !partial.IsIdentityRecorded &&
+                partial.Failure.Contains(partialPath) && partial.Failure.Contains(partialJournal);
+            Expect("post-create journal failure retains exact runtime and incomplete state", partialFailed);
+        }
+        string[] partialRecords = WindowsCustodyBackend.ReadJournalForFixture(partialJournal);
+        Expect("uncertain allocation journal contains intent but no identity receipt", partialRecords.Length == 1 &&
+            partialRecords[0].StartsWith("INTENT|", StringComparison.Ordinal));
+        File.Delete(partialJournal);
+        // Retain this uncertain directory; identity observation alone does not
+        // authorize path-based cleanup or prove safe disposition semantics.
     }
 }
