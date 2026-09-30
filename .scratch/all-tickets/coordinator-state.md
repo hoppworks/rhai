@@ -41,7 +41,7 @@ be resolved before their dependent implementation. No remote publication.
 
 ## Current step
 
-Windows candidate is now 967500f3 on task/windows-scoped-runner. Foundation
+Windows candidate is now 08fb7cd5 on task/windows-scoped-runner. Foundation
 4bf0e3a5 adds ancestor pins, identities and exclusive protected journal creation;
 967500f3 corrects input bounds and incomplete fixture framing. Three files were
 independently reviewed, zero skipped; related corrections retained in
@@ -51,8 +51,14 @@ disabled. Next independent source requirement is exclusive runtime allocation,
 verified ACL/identity and ordered allocation journal integration, then safe
 staging/deletion and immutable specification/payload integration. Running lease
 renewal remains unsupported and explicitly required before payload integration.
-Runtime allocation source substep is now delegated to the responsible context
-under briefs/windows-runtime-allocation.md from the verified clean 967500f3.
+Runtime allocation source substep is committed in 3d7a659b with related review
+corrections 9a68a437 and 08fb7cd5. All three files independently reviewed, zero
+skipped; windows-runtime-allocation-review.md retains coverage and boundaries.
+Intent precedes exclusive allocation; protected ACL and identity verification
+precede identity recording. Retained directories keep their journals and full
+failure paths. This is source observation only: no compile, executed fixture,
+TDD RED/GREEN, native operation or runtime resource. The candidate is clean and
+separate; no product integration or ticket acceptance.
 
 Step 1 corrected unrestricted resolution is integrated at 5f87d339 and accepted
 on native macOS: env7/fs24/policy26 pass, exact runtime absent. Red/green
@@ -136,11 +142,12 @@ Inherited VM history remains authoritative.
 
 ## Next action
 
-Continue the responsible Windows candidate context from 967500f3. Implement
-exclusive runtime allocation with protected verified ACL, pinned identity and
-flushed intent-before-allocation/identity-after-allocation records. Keep staging,
-deletion and payload entry disabled until their own source requirements are met.
-Use windows-runtime-backend-review.md for retained review findings and boundaries.
+Continue the responsible Windows candidate context from 08fb7cd5. The next
+independent source requirement is handle-based staging and executable-path
+validation, followed by handle-safe disposition and immutable specification/
+monitor integration. Keep payload entry disabled until those source requirements
+are met. Use windows-runtime-allocation-review.md and
+windows-runtime-backend-review.md for retained findings and boundaries.
 Correct Running lease renewal before payload integration. No native execution
 until the unchanged bootstrap/guest-custody gates pass.
 
@@ -187,6 +194,15 @@ Dependent implementation is stopped. Continue only independent authorized
 requirements with new evidence; do not repeat decision/status/verification rounds.
 
 ## Goal turn classification
+
+2026-09-30 current continuation: progress. Exclusive runtime allocation source
+3d7a659b and reviewed corrections 9a68a437/08fb7cd5 advance the existing Windows
+custody implementation. Three files reviewed, no skips, whitespace checks clean.
+No native/fixture/compiler execution, created runtime or ticket acceptance.
+No completed failed full-custody correction or infrastructure recovery occurred.
+Owner authorization for the further bounded process attempt remains unconsumed;
+the separate runner-copy decision still stops dependent POSIX work. Independent
+source work remains, so the goal is active and incomplete, not blocked.
 
 2026-09-30 latest continuation: progress. Backend foundation source changed in
 4bf0e3a5/967500f3, all three files independently reviewed and related issues
