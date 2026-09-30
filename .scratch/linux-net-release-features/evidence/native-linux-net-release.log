@@ -1,0 +1,1742 @@
+Source revision: 243404c9e04350422b3d9f4e1cfee866b6b3ff2a
+Runtime directory: /tmp/agent-build-ecwjw3ay
+Launcher PID: 1649643
+Linux workhorse 7.2.4-ogc3.1.fc44.x86_64 #1 SMP PREEMPT_DYNAMIC Sun Sep 13 01:41:06 UTC 2026 x86_64 GNU/Linux
+NAME="Bazzite"
+VERSION="44.20260921.0 (Kinoite)"
+RELEASE_TYPE=stable
+ID=bazzite
+ID_LIKE="fedora"
+VERSION_ID=44
+VERSION_CODENAME="Kinoite"
+PRETTY_NAME="Bazzite"
+ANSI_COLOR="0;38;2;138;43;226"
+LOGO=bazzite-logo
+CPE_NAME="cpe:/o:universal-blue:bazzite:44"
+DEFAULT_HOSTNAME="bazzite"
+HOME_URL="https://bazzite.gg"
+DOCUMENTATION_URL="https://docs.bazzite.gg"
+SUPPORT_URL="https://discord.bazzite.gg"
+BUG_REPORT_URL="https://github.com/ublue-os/bazzite/issues/"
+SUPPORT_END=2027-05-19
+VARIANT="Kinoite"
+VARIANT_ID=bazzite-nvidia-open
+OSTREE_VERSION='44.20260921.0'
+BUILD_ID="Stable (F44.20260921)"
+BOOTLOADER_NAME="Bazzite Stable (F44.20260921)"
+IMAGE_ID="bazzite-nvidia-open-44.20260921"
+rustc 1.97.1 (8bab26f4f 2026-07-14)
+binary: rustc
+commit-hash: 8bab26f4f68e0e26f0bb7960be334d5b520ea452
+commit-date: 2026-07-14
+host: x86_64-unknown-linux-gnu
+release: 1.97.1
+LLVM version: 22.1.6
+cargo 1.97.1 (c980f4866 2026-06-30)
+release: 1.97.1
+commit-hash: c980f4866141969fab6254a680546a277789d6f0
+commit-date: 2026-06-30
+host: x86_64-unknown-linux-gnu
+libgit2: 1.9.2 (sys:0.20.4 vendored)
+libcurl: 8.20.0-DEV (sys:0.4.88+curl-8.20.0 vendored ssl:OpenSSL/3.6.2)
+ssl: OpenSSL 3.6.2 7 Apr 2026
+os: Fedora 44.0.0 [64-bit]
+Private runtime disk cap: 2147483648 bytes; preemptive stop: 1610612736 bytes; sampling interval: 1s.
+Socket descriptor cap: 16; jobs: 2; test threads: 1; Cargo debug: 0; incremental: 0.
+
+===== generate-lockfile =====
+Command: cargo generate-lockfile
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+     Locking 130 packages to latest compatible versions
+      Adding getrandom v0.3.4 (available: v0.4.3)
+      Adding hashbrown v0.16.1 (available: v0.17.1)
+      Adding syn v2.0.119 (available: v3.0.6)
+Generated lockfile: 4aa2e32287d33184c12e98c7a86a17574dbf3a2361c968c76e9611bfd4396cc3  Cargo.lock
+
+===== net_metadata_serde-net_connect =====
+Command: cargo test --locked --jobs 2 --features net,metadata,serde --test net_connect -- --test-threads=1 --nocapture
+ Downloading crates ...
+  Downloaded smallvec v1.16.2
+  Downloaded const-random-macro v0.1.16
+  Downloaded zmij v1.0.23
+  Downloaded crunchy v0.2.4
+  Downloaded tiny-keccak v2.0.2
+  Downloaded cfg-if v1.0.5
+  Downloaded version_check v0.9.5
+  Downloaded itoa v1.0.18
+  Downloaded getrandom v0.2.17
+  Downloaded once_cell v1.21.4
+  Downloaded smartstring v1.0.1
+  Downloaded rmp v0.8.15
+  Downloaded ahash v0.8.12
+  Downloaded bitflags v2.13.2
+  Downloaded unicode-ident v1.0.26
+  Downloaded serde_derive v1.0.229
+  Downloaded serde_core v1.0.229
+  Downloaded thin-vec v0.2.20
+  Downloaded proc-macro2 v1.0.107
+  Downloaded getrandom v0.3.4
+  Downloaded num-traits v0.2.19
+  Downloaded serde v1.0.229
+  Downloaded memchr v2.8.3
+  Downloaded serde_json v1.0.151
+  Downloaded syn v3.0.6
+  Downloaded zerocopy v0.8.59
+  Downloaded syn v2.0.119
+  Downloaded libc v0.2.189
+  Downloaded rmp-serde v1.3.1
+  Downloaded autocfg v1.5.1
+  Downloaded const-random v0.1.18
+  Downloaded static_assertions v1.1.0
+  Downloaded portable-atomic v1.15.0
+  Downloaded quote v1.0.47
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.26
+   Compiling quote v1.0.47
+   Compiling autocfg v1.5.1
+   Compiling libc v0.2.189
+   Compiling crunchy v0.2.4
+   Compiling version_check v0.9.5
+   Compiling serde_core v1.0.229
+   Compiling tiny-keccak v2.0.2
+   Compiling cfg-if v1.0.5
+   Compiling syn v3.0.6
+   Compiling num-traits v0.2.19
+   Compiling serde v1.0.229
+   Compiling portable-atomic v1.15.0
+   Compiling getrandom v0.2.17
+   Compiling serde_derive v1.0.229
+   Compiling getrandom v0.3.4
+   Compiling zerocopy v0.8.59
+   Compiling zmij v1.0.23
+   Compiling once_cell v1.21.4
+   Compiling const-random-macro v0.1.16
+   Compiling ahash v0.8.12
+   Compiling smartstring v1.0.1
+   Compiling serde_json v1.0.151
+   Compiling const-random v0.1.18
+   Compiling syn v2.0.119
+   Compiling static_assertions v1.1.0
+   Compiling memchr v2.8.3
+   Compiling rhai v1.26.1 (/tmp/agent-build-ecwjw3ay/source)
+   Compiling itoa v1.0.18
+   Compiling rhai_codegen v3.2.0 (/tmp/agent-build-ecwjw3ay/source/codegen)
+   Compiling smallvec v1.16.2
+   Compiling thin-vec v0.2.20
+   Compiling bitflags v2.13.2
+   Compiling rmp v0.8.15
+   Compiling rmp-serde v1.3.1
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 9.20s
+     Running tests/net_connect.rs (/tmp/agent-build-ecwjw3ay/target/debug/deps/net_connect-5a45e152485806dc)
+
+running 4 tests
+test authorized_connect_is_observed_and_clone_close_is_shared ... ok
+test denied_and_invalid_endpoints_do_not_reach_peer_and_errors_are_catchable ... ok
+test net_config_rejects_zero_deadline_and_invalid_handle_limits ... ok
+test open_handle_limit_is_shared_across_package_engines_and_released_on_close ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+===== net_metadata_serde-net_listen =====
+Command: cargo test --locked --jobs 2 --features net,metadata,serde --test net_listen -- --test-threads=1 --nocapture
+   Compiling rhai v1.26.1 (/tmp/agent-build-ecwjw3ay/source)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 0.13s
+     Running tests/net_listen.rs (/tmp/agent-build-ecwjw3ay/target/debug/deps/net_listen-8ce97f47da24b628)
+
+running 7 tests
+test accepted_stream_uses_the_shared_package_quota_across_engines ... ok
+test authorized_listener_accepts_an_independent_peer ... ok
+test bind_failure_releases_listener_quota ... ok
+test denied_and_invalid_listener_endpoints_never_bind ... ok
+test listener_clones_share_close_and_final_drop_releases_the_bind ... ok
+test no_client_accept_times_out_with_catchable_net_error ... ok
+test quota_retry_deadline_expires_under_a_real_saturated_handle_limit ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.12s
+
+
+===== net_metadata_serde-net_reads =====
+Command: cargo test --locked --jobs 2 --features net,metadata,serde --test net_reads -- --test-threads=1 --nocapture
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+   Compiling rhai v1.26.1 (/tmp/agent-build-ecwjw3ay/source)
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 0.15s
+     Running tests/net_reads.rs (/tmp/agent-build-ecwjw3ay/target/debug/deps/net_reads-2187a6d8b815c52d)
+
+running 7 tests
+test accepted_stream_inherits_host_receive_cap ... ok
+test blob_reads_validate_lengths_return_exact_short_prefix_and_obey_host_cap ... ok
+test engine_string_limit_keeps_ascii_and_reports_lossy_expansion_progress ... ok
+test no_data_read_times_out_and_bounded_eof_loop_reports_partial_progress ... ok
+test one_shot_read_returns_an_available_short_prefix_without_waiting_for_more ... ok
+test one_shot_text_read_replaces_a_utf8_character_cut_by_the_available_prefix ... ok
+test stream_read_string_returns_exact_lossy_text_from_peer_bytes ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.25s
+
+
+===== net_metadata_serde-net_writes =====
+Command: cargo test --locked --jobs 2 --features net,metadata,serde --test net_writes -- --test-threads=1 --nocapture
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+   Compiling rhai v1.26.1 (/tmp/agent-build-ecwjw3ay/source)
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:11:24
+   |
+11 | fn read_bounded_to_end(mut stream: &TcpStream, max_bytes: usize) -> Vec<u8> {
+   |                        ----^^^^^^
+   |                        |
+   |                        help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:62:10
+   |
+62 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:83:10
+   |
+83 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:208:10
+    |
+208 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:266:10
+    |
+266 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:285:9
+    |
+285 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:289:9
+    |
+289 |     let mut peer = TcpStream::connect(address.parse::<SocketAddr>().unwrap()).unwrap();
+    |         ----^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:306:9
+    |
+306 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()).max_write_bytes(2));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: unused return value of `rhai::Scope::<'_>::remove` that must be used
+   --> tests/net_writes.rs:245:13
+    |
+245 |             scope.remove::<String>("payload");
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` (part of `#[warn(unused)]`) on by default
+help: use `let _ = ...` to ignore the resulting value
+    |
+245 |             let _ = scope.remove::<String>("payload");
+    |             +++++++
+
+warning: `rhai` (test "net_writes") generated 9 warnings (run `cargo fix --test "net_writes" -p rhai` to apply 8 suggestions)
+    Finished `test` profile [unoptimized] target(s) in 0.18s
+     Running tests/net_writes.rs (/tmp/agent-build-ecwjw3ay/target/debug/deps/net_writes-0f655dce663d1a34)
+
+running 10 tests
+test accepted_stream_inherits_host_write_cap ... ok
+test accepted_stream_writes_are_read_back_by_the_peer ... ok
+test bounded_write_timeout_reports_partial_bytes_matching_peer_readback ... ok
+test engine_string_limit_rejects_write_before_peer_bytes ... ok
+test host_write_cap_rejects_oversize_input_without_peer_bytes ... ok
+test invalid_host_write_bounds_are_rejected ... ok
+test read_half_close_is_idempotent_and_keeps_stream_open_for_close ... ok
+test script_write_blob_preserves_exact_bytes ... ok
+test script_writes_string_and_write_all_report_real_peer_bytes ... ok
+test write_half_close_keeps_the_read_direction_and_is_idempotent ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+
+===== net_metadata_serde-net_metadata =====
+Command: cargo test --locked --jobs 2 --features net,metadata,serde --test net_metadata -- --test-threads=1 --nocapture
+   Compiling rhai v1.26.1 (/tmp/agent-build-ecwjw3ay/source)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 0.10s
+     Running tests/net_metadata.rs (/tmp/agent-build-ecwjw3ay/target/debug/deps/net_metadata-293ff6636006b9a2)
+
+running 1 test
+test metadata_exposes_the_documented_tcp_surface ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+===== net_only_i32_no_float-net_connect =====
+Command: cargo test --locked --jobs 2 --features net,only_i32,no_float --test net_connect -- --test-threads=1 --nocapture
+   Compiling rhai v1.26.1 (/tmp/agent-build-ecwjw3ay/source)
+   Compiling serde v1.0.229
+   Compiling rhai_codegen v3.2.0 (/tmp/agent-build-ecwjw3ay/source/codegen)
+   Compiling smallvec v1.16.2
+   Compiling rmp-serde v1.3.1
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 3.56s
+     Running tests/net_connect.rs (/tmp/agent-build-ecwjw3ay/target/debug/deps/net_connect-e114c53bcfcc1577)
+
+running 4 tests
+test authorized_connect_is_observed_and_clone_close_is_shared ... ok
+test denied_and_invalid_endpoints_do_not_reach_peer_and_errors_are_catchable ... ok
+test net_config_rejects_zero_deadline_and_invalid_handle_limits ... ok
+test open_handle_limit_is_shared_across_package_engines_and_released_on_close ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+===== net_only_i32_no_float-net_listen =====
+Command: cargo test --locked --jobs 2 --features net,only_i32,no_float --test net_listen -- --test-threads=1 --nocapture
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+   Compiling rhai v1.26.1 (/tmp/agent-build-ecwjw3ay/source)
+    Finished `test` profile [unoptimized] target(s) in 0.13s
+     Running tests/net_listen.rs (/tmp/agent-build-ecwjw3ay/target/debug/deps/net_listen-8ecbb17f9be35131)
+
+running 7 tests
+test accepted_stream_uses_the_shared_package_quota_across_engines ... ok
+test authorized_listener_accepts_an_independent_peer ... ok
+test bind_failure_releases_listener_quota ... ok
+test denied_and_invalid_listener_endpoints_never_bind ... ok
+test listener_clones_share_close_and_final_drop_releases_the_bind ... ok
+test no_client_accept_times_out_with_catchable_net_error ... ok
+test quota_retry_deadline_expires_under_a_real_saturated_handle_limit ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.11s
+
+
+===== net_only_i32_no_float-net_reads =====
+Command: cargo test --locked --jobs 2 --features net,only_i32,no_float --test net_reads -- --test-threads=1 --nocapture
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+   Compiling rhai v1.26.1 (/tmp/agent-build-ecwjw3ay/source)
+    Finished `test` profile [unoptimized] target(s) in 0.13s
+     Running tests/net_reads.rs (/tmp/agent-build-ecwjw3ay/target/debug/deps/net_reads-eb5448e86b299ce2)
+
+running 7 tests
+test accepted_stream_inherits_host_receive_cap ... ok
+test blob_reads_validate_lengths_return_exact_short_prefix_and_obey_host_cap ... ok
+test engine_string_limit_keeps_ascii_and_reports_lossy_expansion_progress ... ok
+test no_data_read_times_out_and_bounded_eof_loop_reports_partial_progress ... ok
+test one_shot_read_returns_an_available_short_prefix_without_waiting_for_more ... ok
+test one_shot_text_read_replaces_a_utf8_character_cut_by_the_available_prefix ... ok
+test stream_read_string_returns_exact_lossy_text_from_peer_bytes ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.23s
+
+
+===== net_only_i32_no_float-net_writes =====
+Command: cargo test --locked --jobs 2 --features net,only_i32,no_float --test net_writes -- --test-threads=1 --nocapture
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+   Compiling rhai v1.26.1 (/tmp/agent-build-ecwjw3ay/source)
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:11:24
+   |
+11 | fn read_bounded_to_end(mut stream: &TcpStream, max_bytes: usize) -> Vec<u8> {
+   |                        ----^^^^^^
+   |                        |
+   |                        help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:62:10
+   |
+62 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:83:10
+   |
+83 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:208:10
+    |
+208 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:266:10
+    |
+266 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:285:9
+    |
+285 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:289:9
+    |
+289 |     let mut peer = TcpStream::connect(address.parse::<SocketAddr>().unwrap()).unwrap();
+    |         ----^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:306:9
+    |
+306 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()).max_write_bytes(2));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: unused return value of `rhai::Scope::<'_>::remove` that must be used
+   --> tests/net_writes.rs:245:13
+    |
+245 |             scope.remove::<String>("payload");
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` (part of `#[warn(unused)]`) on by default
+help: use `let _ = ...` to ignore the resulting value
+    |
+245 |             let _ = scope.remove::<String>("payload");
+    |             +++++++
+
+warning: `rhai` (test "net_writes") generated 9 warnings (run `cargo fix --test "net_writes" -p rhai` to apply 8 suggestions)
+    Finished `test` profile [unoptimized] target(s) in 0.16s
+     Running tests/net_writes.rs (/tmp/agent-build-ecwjw3ay/target/debug/deps/net_writes-f5ac15271af48cf0)
+
+running 10 tests
+test accepted_stream_inherits_host_write_cap ... ok
+test accepted_stream_writes_are_read_back_by_the_peer ... ok
+test bounded_write_timeout_reports_partial_bytes_matching_peer_readback ... ok
+test engine_string_limit_rejects_write_before_peer_bytes ... ok
+test host_write_cap_rejects_oversize_input_without_peer_bytes ... ok
+test invalid_host_write_bounds_are_rejected ... ok
+test read_half_close_is_idempotent_and_keeps_stream_open_for_close ... ok
+test script_write_blob_preserves_exact_bytes ... ok
+test script_writes_string_and_write_all_report_real_peer_bytes ... ok
+test write_half_close_keeps_the_read_direction_and_is_idempotent ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+
+===== net_unchecked-net_connect =====
+Command: cargo test --locked --jobs 2 --features net,unchecked --test net_connect -- --test-threads=1 --nocapture
+   Compiling rhai v1.26.1 (/tmp/agent-build-ecwjw3ay/source)
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:570:9
+    |
+570 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:583:9
+    |
+583 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:597:9
+    |
+597 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:610:9
+    |
+610 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:625:9
+    |
+625 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:639:9
+    |
+639 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:654:9
+    |
+654 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:668:9
+    |
+668 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:683:9
+    |
+683 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:697:9
+    |
+697 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:712:9
+    |
+712 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:726:9
+    |
+726 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:740:9
+    |
+740 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:753:9
+    |
+753 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:767:9
+    |
+767 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:780:9
+    |
+780 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: `rhai` (lib) generated 16 warnings (run `cargo fix --lib -p rhai` to apply 16 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 4.05s
+     Running tests/net_connect.rs (/tmp/agent-build-ecwjw3ay/target/debug/deps/net_connect-125d6b9b7d7324b7)
+
+running 4 tests
+test authorized_connect_is_observed_and_clone_close_is_shared ... ok
+test denied_and_invalid_endpoints_do_not_reach_peer_and_errors_are_catchable ... ok
+test net_config_rejects_zero_deadline_and_invalid_handle_limits ... ok
+test open_handle_limit_is_shared_across_package_engines_and_released_on_close ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+===== net_unchecked-net_listen =====
+Command: cargo test --locked --jobs 2 --features net,unchecked --test net_listen -- --test-threads=1 --nocapture
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:570:9
+    |
+570 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:583:9
+    |
+583 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:597:9
+    |
+597 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:610:9
+    |
+610 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:625:9
+    |
+625 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:639:9
+    |
+639 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:654:9
+    |
+654 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:668:9
+    |
+668 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:683:9
+    |
+683 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:697:9
+    |
+697 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:712:9
+    |
+712 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:726:9
+    |
+726 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:740:9
+    |
+740 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:753:9
+    |
+753 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:767:9
+    |
+767 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:780:9
+    |
+780 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: `rhai` (lib) generated 16 warnings (run `cargo fix --lib -p rhai` to apply 16 suggestions)
+   Compiling rhai v1.26.1 (/tmp/agent-build-ecwjw3ay/source)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 0.12s
+     Running tests/net_listen.rs (/tmp/agent-build-ecwjw3ay/target/debug/deps/net_listen-94738f4587a32086)
+
+running 7 tests
+test accepted_stream_uses_the_shared_package_quota_across_engines ... ok
+test authorized_listener_accepts_an_independent_peer ... ok
+test bind_failure_releases_listener_quota ... ok
+test denied_and_invalid_listener_endpoints_never_bind ... ok
+test listener_clones_share_close_and_final_drop_releases_the_bind ... ok
+test no_client_accept_times_out_with_catchable_net_error ... ok
+test quota_retry_deadline_expires_under_a_real_saturated_handle_limit ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.12s
+
+
+===== net_unchecked-net_reads =====
+Command: cargo test --locked --jobs 2 --features net,unchecked --test net_reads -- --test-threads=1 --nocapture
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:570:9
+    |
+570 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:583:9
+    |
+583 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:597:9
+    |
+597 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:610:9
+    |
+610 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:625:9
+    |
+625 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:639:9
+    |
+639 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:654:9
+    |
+654 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:668:9
+    |
+668 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:683:9
+    |
+683 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:697:9
+    |
+697 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:712:9
+    |
+712 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:726:9
+    |
+726 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:740:9
+    |
+740 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:753:9
+    |
+753 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:767:9
+    |
+767 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:780:9
+    |
+780 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: `rhai` (lib) generated 16 warnings (run `cargo fix --lib -p rhai` to apply 16 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+   Compiling rhai v1.26.1 (/tmp/agent-build-ecwjw3ay/source)
+warning: unused import: `NetError`
+ --> tests/net_reads.rs:3:38
+  |
+3 | use rhai::packages::net::{NetConfig, NetError, NetPackage};
+  |                                      ^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `Dynamic`
+ --> tests/net_reads.rs:5:12
+  |
+5 | use rhai::{Dynamic, Engine, Scope};
+  |            ^^^^^^^
+
+warning: `rhai` (test "net_reads") generated 2 warnings (run `cargo fix --test "net_reads" -p rhai` to apply 2 suggestions)
+    Finished `test` profile [unoptimized] target(s) in 0.14s
+     Running tests/net_reads.rs (/tmp/agent-build-ecwjw3ay/target/debug/deps/net_reads-36ebcb4e46fadcb2)
+
+running 7 tests
+test accepted_stream_inherits_host_receive_cap ... ok
+test blob_reads_validate_lengths_return_exact_short_prefix_and_obey_host_cap ... ok
+test no_data_read_times_out_and_bounded_eof_loop_reports_partial_progress ... ok
+test one_shot_read_returns_an_available_short_prefix_without_waiting_for_more ... ok
+test one_shot_text_read_replaces_a_utf8_character_cut_by_the_available_prefix ... ok
+test stream_read_string_returns_exact_lossy_text_from_peer_bytes ... ok
+test unchecked_mode_keeps_the_host_receive_cap ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.24s
+
+
+===== net_unchecked-net_writes =====
+Command: cargo test --locked --jobs 2 --features net,unchecked --test net_writes -- --test-threads=1 --nocapture
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:570:9
+    |
+570 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:583:9
+    |
+583 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:597:9
+    |
+597 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:610:9
+    |
+610 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:625:9
+    |
+625 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:639:9
+    |
+639 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:654:9
+    |
+654 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:668:9
+    |
+668 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:683:9
+    |
+683 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:697:9
+    |
+697 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:712:9
+    |
+712 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:726:9
+    |
+726 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:740:9
+    |
+740 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:753:9
+    |
+753 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:767:9
+    |
+767 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/net/stream.rs:780:9
+    |
+780 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: `rhai` (lib) generated 16 warnings (run `cargo fix --lib -p rhai` to apply 16 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+   Compiling rhai v1.26.1 (/tmp/agent-build-ecwjw3ay/source)
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:11:24
+   |
+11 | fn read_bounded_to_end(mut stream: &TcpStream, max_bytes: usize) -> Vec<u8> {
+   |                        ----^^^^^^
+   |                        |
+   |                        help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:62:10
+   |
+62 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:83:10
+   |
+83 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:208:10
+    |
+208 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:266:10
+    |
+266 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:285:9
+    |
+285 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:289:9
+    |
+289 |     let mut peer = TcpStream::connect(address.parse::<SocketAddr>().unwrap()).unwrap();
+    |         ----^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:306:9
+    |
+306 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()).max_write_bytes(2));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: `rhai` (test "net_writes") generated 8 warnings (run `cargo fix --test "net_writes" -p rhai` to apply 8 suggestions)
+    Finished `test` profile [unoptimized] target(s) in 0.17s
+     Running tests/net_writes.rs (/tmp/agent-build-ecwjw3ay/target/debug/deps/net_writes-d8d1e62b4f1c3fb1)
+
+running 9 tests
+test accepted_stream_inherits_host_write_cap ... ok
+test accepted_stream_writes_are_read_back_by_the_peer ... ok
+test bounded_write_timeout_reports_partial_bytes_matching_peer_readback ... ok
+test host_write_cap_rejects_oversize_input_without_peer_bytes ... ok
+test invalid_host_write_bounds_are_rejected ... ok
+test read_half_close_is_idempotent_and_keeps_stream_open_for_close ... ok
+test script_write_blob_preserves_exact_bytes ... ok
+test script_writes_string_and_write_all_report_real_peer_bytes ... ok
+test write_half_close_keeps_the_read_direction_and_is_idempotent ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+
+===== net_no_index_sync_metadata-net_connect =====
+Command: cargo test --locked --jobs 2 --features net,no_index,sync,metadata --test net_connect -- --test-threads=1 --nocapture
+ Downloading crates ...
+  Downloaded spin v0.7.2
+   Compiling rhai v1.26.1 (/tmp/agent-build-ecwjw3ay/source)
+   Compiling rhai_codegen v3.2.0 (/tmp/agent-build-ecwjw3ay/source/codegen)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 4.41s
+     Running tests/net_connect.rs (/tmp/agent-build-ecwjw3ay/target/debug/deps/net_connect-b1bb447c129ef49d)
+
+running 4 tests
+test authorized_connect_is_observed_and_clone_close_is_shared ... ok
+test denied_and_invalid_endpoints_do_not_reach_peer_and_errors_are_catchable ... ok
+test net_config_rejects_zero_deadline_and_invalid_handle_limits ... ok
+test open_handle_limit_is_shared_across_package_engines_and_released_on_close ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+===== net_no_index_sync_metadata-net_listen =====
+Command: cargo test --locked --jobs 2 --features net,no_index,sync,metadata --test net_listen -- --test-threads=1 --nocapture
+   Compiling rhai v1.26.1 (/tmp/agent-build-ecwjw3ay/source)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 0.16s
+     Running tests/net_listen.rs (/tmp/agent-build-ecwjw3ay/target/debug/deps/net_listen-91ba38b2a4e17cfb)
+
+running 8 tests
+test accepted_stream_uses_the_shared_package_quota_across_engines ... ok
+test authorized_listener_accepts_an_independent_peer ... ok
+test bind_failure_releases_listener_quota ... ok
+test closing_a_clone_unblocks_an_accept_waiting_on_shared_quota ... ok
+test denied_and_invalid_listener_endpoints_never_bind ... ok
+test listener_clones_share_close_and_final_drop_releases_the_bind ... ok
+test no_client_accept_times_out_with_catchable_net_error ... ok
+test quota_retry_deadline_expires_under_a_real_saturated_handle_limit ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.13s
+
+
+===== net_no_index_sync_metadata-net_reads =====
+Command: cargo test --locked --jobs 2 --features net,no_index,sync,metadata --test net_reads -- --test-threads=1 --nocapture
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+   Compiling rhai v1.26.1 (/tmp/agent-build-ecwjw3ay/source)
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 0.21s
+     Running tests/net_reads.rs (/tmp/agent-build-ecwjw3ay/target/debug/deps/net_reads-8c1f29f6eca2eff2)
+
+running 8 tests
+test accepted_stream_inherits_host_receive_cap ... ok
+test closing_a_clone_cancels_an_outstanding_read_and_releases_quota ... ok
+test engine_string_limit_keeps_ascii_and_reports_lossy_expansion_progress ... ok
+test no_data_read_times_out_and_bounded_eof_loop_reports_partial_progress ... ok
+test no_index_keeps_string_reads_and_omits_blob_methods ... ok
+test one_shot_read_returns_an_available_short_prefix_without_waiting_for_more ... ok
+test one_shot_text_read_replaces_a_utf8_character_cut_by_the_available_prefix ... ok
+test stream_read_string_returns_exact_lossy_text_from_peer_bytes ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.16s
+
+
+===== net_no_index_sync_metadata-net_writes =====
+Command: cargo test --locked --jobs 2 --features net,no_index,sync,metadata --test net_writes -- --test-threads=1 --nocapture
+   Compiling rhai v1.26.1 (/tmp/agent-build-ecwjw3ay/source)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:11:24
+   |
+11 | fn read_bounded_to_end(mut stream: &TcpStream, max_bytes: usize) -> Vec<u8> {
+   |                        ----^^^^^^
+   |                        |
+   |                        help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:62:10
+   |
+62 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:208:10
+    |
+208 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:266:10
+    |
+266 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:285:9
+    |
+285 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:289:9
+    |
+289 |     let mut peer = TcpStream::connect(address.parse::<SocketAddr>().unwrap()).unwrap();
+    |         ----^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:306:9
+    |
+306 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()).max_write_bytes(2));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: unused return value of `rhai::Scope::<'_>::remove` that must be used
+   --> tests/net_writes.rs:245:13
+    |
+245 |             scope.remove::<String>("payload");
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` (part of `#[warn(unused)]`) on by default
+help: use `let _ = ...` to ignore the resulting value
+    |
+245 |             let _ = scope.remove::<String>("payload");
+    |             +++++++
+
+warning: `rhai` (test "net_writes") generated 8 warnings (run `cargo fix --test "net_writes" -p rhai` to apply 7 suggestions)
+    Finished `test` profile [unoptimized] target(s) in 0.17s
+     Running tests/net_writes.rs (/tmp/agent-build-ecwjw3ay/target/debug/deps/net_writes-262a62372f4d5bb7)
+
+running 10 tests
+test accepted_stream_inherits_host_write_cap ... ok
+test accepted_stream_writes_are_read_back_by_the_peer ... ok
+test bounded_write_timeout_reports_partial_bytes_matching_peer_readback ... ok
+test engine_string_limit_rejects_write_before_peer_bytes ... ok
+test host_write_cap_rejects_oversize_input_without_peer_bytes ... ok
+test invalid_host_write_bounds_are_rejected ... ok
+test no_index_keeps_string_writes_and_omits_blob_writes ... ok
+test read_half_close_is_idempotent_and_keeps_stream_open_for_close ... ok
+test script_writes_string_and_write_all_report_real_peer_bytes ... ok
+test write_half_close_keeps_the_read_direction_and_is_idempotent ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+
+===== net_f32_float-net_connect =====
+Command: cargo test --locked --jobs 2 --features net,f32_float --test net_connect -- --test-threads=1 --nocapture
+   Compiling rhai v1.26.1 (/tmp/agent-build-ecwjw3ay/source)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 4.31s
+     Running tests/net_connect.rs (/tmp/agent-build-ecwjw3ay/target/debug/deps/net_connect-87e92e1e7e7253dc)
+
+running 4 tests
+test authorized_connect_is_observed_and_clone_close_is_shared ... ok
+test denied_and_invalid_endpoints_do_not_reach_peer_and_errors_are_catchable ... ok
+test net_config_rejects_zero_deadline_and_invalid_handle_limits ... ok
+test open_handle_limit_is_shared_across_package_engines_and_released_on_close ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+===== net_f32_float-net_listen =====
+Command: cargo test --locked --jobs 2 --features net,f32_float --test net_listen -- --test-threads=1 --nocapture
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+   Compiling rhai v1.26.1 (/tmp/agent-build-ecwjw3ay/source)
+    Finished `test` profile [unoptimized] target(s) in 0.13s
+     Running tests/net_listen.rs (/tmp/agent-build-ecwjw3ay/target/debug/deps/net_listen-fb86b5f75b5488da)
+
+running 7 tests
+test accepted_stream_uses_the_shared_package_quota_across_engines ... ok
+test authorized_listener_accepts_an_independent_peer ... ok
+test bind_failure_releases_listener_quota ... ok
+test denied_and_invalid_listener_endpoints_never_bind ... ok
+test listener_clones_share_close_and_final_drop_releases_the_bind ... ok
+test no_client_accept_times_out_with_catchable_net_error ... ok
+test quota_retry_deadline_expires_under_a_real_saturated_handle_limit ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.12s
+
+
+===== net_f32_float-net_reads =====
+Command: cargo test --locked --jobs 2 --features net,f32_float --test net_reads -- --test-threads=1 --nocapture
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+   Compiling rhai v1.26.1 (/tmp/agent-build-ecwjw3ay/source)
+    Finished `test` profile [unoptimized] target(s) in 0.15s
+     Running tests/net_reads.rs (/tmp/agent-build-ecwjw3ay/target/debug/deps/net_reads-577412bf0860773f)
+
+running 8 tests
+test accepted_stream_inherits_host_receive_cap ... ok
+test blob_reads_validate_lengths_return_exact_short_prefix_and_obey_host_cap ... ok
+test engine_string_limit_keeps_ascii_and_reports_lossy_expansion_progress ... ok
+test f32_float_timeout_arguments_reject_fractional_and_non_finite_values ... ok
+test no_data_read_times_out_and_bounded_eof_loop_reports_partial_progress ... ok
+test one_shot_read_returns_an_available_short_prefix_without_waiting_for_more ... ok
+test one_shot_text_read_replaces_a_utf8_character_cut_by_the_available_prefix ... ok
+test stream_read_string_returns_exact_lossy_text_from_peer_bytes ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.28s
+
+
+===== net_f32_float-net_writes =====
+Command: cargo test --locked --jobs 2 --features net,f32_float --test net_writes -- --test-threads=1 --nocapture
+   Compiling rhai v1.26.1 (/tmp/agent-build-ecwjw3ay/source)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:11:24
+   |
+11 | fn read_bounded_to_end(mut stream: &TcpStream, max_bytes: usize) -> Vec<u8> {
+   |                        ----^^^^^^
+   |                        |
+   |                        help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:62:10
+   |
+62 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:83:10
+   |
+83 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:208:10
+    |
+208 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:266:10
+    |
+266 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:285:9
+    |
+285 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:289:9
+    |
+289 |     let mut peer = TcpStream::connect(address.parse::<SocketAddr>().unwrap()).unwrap();
+    |         ----^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:306:9
+    |
+306 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()).max_write_bytes(2));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: unused return value of `rhai::Scope::<'_>::remove` that must be used
+   --> tests/net_writes.rs:245:13
+    |
+245 |             scope.remove::<String>("payload");
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` (part of `#[warn(unused)]`) on by default
+help: use `let _ = ...` to ignore the resulting value
+    |
+245 |             let _ = scope.remove::<String>("payload");
+    |             +++++++
+
+warning: `rhai` (test "net_writes") generated 9 warnings (run `cargo fix --test "net_writes" -p rhai` to apply 8 suggestions)
+    Finished `test` profile [unoptimized] target(s) in 0.17s
+     Running tests/net_writes.rs (/tmp/agent-build-ecwjw3ay/target/debug/deps/net_writes-2985344a17c840e9)
+
+running 10 tests
+test accepted_stream_inherits_host_write_cap ... ok
+test accepted_stream_writes_are_read_back_by_the_peer ... ok
+test bounded_write_timeout_reports_partial_bytes_matching_peer_readback ... ok
+test engine_string_limit_rejects_write_before_peer_bytes ... ok
+test host_write_cap_rejects_oversize_input_without_peer_bytes ... ok
+test invalid_host_write_bounds_are_rejected ... ok
+test read_half_close_is_idempotent_and_keeps_stream_open_for_close ... ok
+test script_write_blob_preserves_exact_bytes ... ok
+test script_writes_string_and_write_all_report_real_peer_bytes ... ok
+test write_half_close_keeps_the_read_direction_and_is_idempotent ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+
+===== net_no_object-dedicated =====
+Command: cargo test --locked --jobs 2 --features net,no_object --test net_no_object -- --test-threads=1 --nocapture
+   Compiling rhai v1.26.1 (/tmp/agent-build-ecwjw3ay/source)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 4.15s
+     Running tests/net_no_object.rs (/tmp/agent-build-ecwjw3ay/target/debug/deps/net_no_object-f1c6582c066378d4)
+
+running 3 tests
+test registered_error_getters_are_callable_with_explicit_arguments ... ok
+test registered_listener_functions_work_with_explicit_handle_arguments ... ok
+test registered_stream_functions_work_without_dot_syntax ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+===== net_no_object_metadata-serde =====
+Command: cargo test --locked --jobs 2 --features net,no_object,metadata,serde --test net_metadata -- --test-threads=1 --nocapture
+   Compiling rhai v1.26.1 (/tmp/agent-build-ecwjw3ay/source)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 4.59s
+     Running tests/net_metadata.rs (/tmp/agent-build-ecwjw3ay/target/debug/deps/net_metadata-b464def7761a952a)
+
+running 1 test
+test metadata_exposes_the_documented_tcp_surface ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+===== wrong-peer-byte-control =====
+Command: cargo test --locked --jobs 2 --features net,f32_float --test net_writes script_write_blob_preserves_exact_bytes -- --exact --test-threads=1 --nocapture
+   Compiling rhai v1.26.1 (/tmp/agent-build-ecwjw3ay/source)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:11:24
+   |
+11 | fn read_bounded_to_end(mut stream: &TcpStream, max_bytes: usize) -> Vec<u8> {
+   |                        ----^^^^^^
+   |                        |
+   |                        help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:62:10
+   |
+62 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:83:10
+   |
+83 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:208:10
+    |
+208 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:266:10
+    |
+266 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:285:9
+    |
+285 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:289:9
+    |
+289 |     let mut peer = TcpStream::connect(address.parse::<SocketAddr>().unwrap()).unwrap();
+    |         ----^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:306:9
+    |
+306 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()).max_write_bytes(2));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: unused return value of `rhai::Scope::<'_>::remove` that must be used
+   --> tests/net_writes.rs:245:13
+    |
+245 |             scope.remove::<String>("payload");
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` (part of `#[warn(unused)]`) on by default
+help: use `let _ = ...` to ignore the resulting value
+    |
+245 |             let _ = scope.remove::<String>("payload");
+    |             +++++++
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+warning: `rhai` (test "net_writes") generated 9 warnings (run `cargo fix --test "net_writes" -p rhai` to apply 8 suggestions)
+    Finished `test` profile [unoptimized] target(s) in 4.39s
+     Running tests/net_writes.rs (/tmp/agent-build-ecwjw3ay/target/debug/deps/net_writes-2985344a17c840e9)
+
+running 1 test
+test script_write_blob_preserves_exact_bytes ... 
+thread 'script_write_blob_preserves_exact_bytes' (1661000) panicked at tests/net_writes.rs:101:9:
+assertion `left == right` failed
+  left: [0, 255, 65]
+ right: [0, 254, 65]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+FAILED
+
+failures:
+
+failures:
+    script_write_blob_preserves_exact_bytes
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 9 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--test net_writes`
+
+===== restored-peer-byte-readback =====
+Command: cargo test --locked --jobs 2 --features net,f32_float --test net_writes script_write_blob_preserves_exact_bytes -- --exact --test-threads=1 --nocapture
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:11:24
+   |
+11 | fn read_bounded_to_end(mut stream: &TcpStream, max_bytes: usize) -> Vec<u8> {
+   |                        ----^^^^^^
+   |                        |
+   |                        help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:62:10
+   |
+62 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:83:10
+   |
+83 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:208:10
+    |
+208 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:266:10
+    |
+266 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:285:9
+    |
+285 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:289:9
+    |
+289 |     let mut peer = TcpStream::connect(address.parse::<SocketAddr>().unwrap()).unwrap();
+    |         ----^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:306:9
+    |
+306 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()).max_write_bytes(2));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: unused return value of `rhai::Scope::<'_>::remove` that must be used
+   --> tests/net_writes.rs:245:13
+    |
+245 |             scope.remove::<String>("payload");
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` (part of `#[warn(unused)]`) on by default
+help: use `let _ = ...` to ignore the resulting value
+    |
+245 |             let _ = scope.remove::<String>("payload");
+    |             +++++++
+
+warning: `rhai` (test "net_writes") generated 9 warnings (run `cargo fix --test "net_writes" -p rhai` to apply 8 suggestions)
+    Finished `test` profile [unoptimized] target(s) in 0.02s
+     Running tests/net_writes.rs (/tmp/agent-build-ecwjw3ay/target/debug/deps/net_writes-2985344a17c840e9)
+
+running 1 test
+test script_write_blob_preserves_exact_bytes ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 9 filtered out; finished in 0.00s
+
+
+Sampled maxima (not true peaks): socket_fds=6; private_disk_bytes=862019584.
+Final runtime allocated bytes: 862027776
+Source working-tree status:
+

@@ -1,0 +1,7 @@
+verified_runner_status=0
+rechecked_absent_pids=135
+runtime_absent=/tmp/agent-build-ecwjw3ay
+stage_removed=/root/rhai-net-release-features/243404c9 device_inode=58:102555501
+hash_temp_removed=/tmp/rhai-net-release-features-hashes.txt sha256=fcfd5ceb5721739b81b4df52bef20181f55428880d8c62c4154aac8244bacc43
+stage_absent_after_cleanup=True
+hash_temp_absent_after_cleanup=True
