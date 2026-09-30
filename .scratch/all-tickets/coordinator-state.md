@@ -157,6 +157,12 @@ Inherited VM history remains authoritative.
 
 ## Next action
 
+Specification fixture source is now present and helper extraction is dirty in
+the candidate. Related finite-bound/field/diagnostic findings are recorded in
+windows-immutable-specification-review.md and delivered to the same running
+context. Existing fixture helper references must survive the extraction. Await
+the model/parser commit and review all changed files; this draft is unexecuted.
+
 Immutable specification source is actively delegated under
 briefs/windows-immutable-specification.md to the same responsible Windows
 context, independently confirmed running. Await its report and review the exact
@@ -233,6 +239,14 @@ Dependent implementation is stopped. Continue only independent authorized
 requirements with new evidence; do not repeat decision/status/verification rounds.
 
 ## Goal turn classification
+
+2026-09-30 immutable specification continuation: progress. Previous turn
+implemented and reviewed Running renewal 43d2f067. Current authoritative dirty
+fixture source and pure syntax-helper extraction advance the specification;
+intermediate findings change the required correction before final review.
+The responsible agent is independently confirmed live, not restarted on timeout.
+No compiler/native execution, resource creation or completed full-custody failure.
+Goal remains active and incomplete; this is not a blocked impasse.
 
 2026-09-30 Running renewal continuation: progress. Authoritative 43d2f067 fixes
 the missing Running challenge path and replaces misleading early-expiry fixture
