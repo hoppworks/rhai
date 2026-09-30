@@ -151,7 +151,9 @@ requirements with new evidence; do not repeat decision/status/verification round
 
 ## Goal turn classification
 
-2026-09-30 post-staging frontier audit: no progress, blocked observation 1.
+2026-09-30 post-staging frontier audit: no progress, blocked observations 1–2
+on consecutive goal turns. Second minimal check found unchanged canonical
+ticket states, the same prototype boundary and no executing delegated task.
 Canonical tickets 04 and 06 remain unresolved; 05 explicitly depends on both.
 Production process/file-handle contract decisions remain pending. Prototype
 937da3c1 still explicitly stops implementation at the unanswered runner-copy
