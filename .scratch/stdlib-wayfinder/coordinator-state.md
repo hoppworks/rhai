@@ -21,8 +21,9 @@ with high quality, low maintenance, strict verification, and Rhai conventions.
 
 ## Current step
 
-Ticket 01 is resolved. Five decisions remain open; the next frontier ticket by
-number is issues/02-filesystem-contract.md. No implementation has started.
+Ticket 01 is resolved. Ticket 02 is claimed by the current Codex session. Its
+concrete path-semantics proposal and regression matrix await the owner answer.
+No implementation has started.
 
 ## Decisions and constraints
 
@@ -42,6 +43,6 @@ number is issues/02-filesystem-contract.md. No implementation has started.
 
 ## Next action
 
-Next invocation: claim issues/02-filesystem-contract.md and discuss exact root,
-parent-component and symlink behavior using the reviewed regressions. Keep existing
-sys decisions unless the owner explicitly revises them. Do not implement in wayfinder.
+Await the owner answer on the concrete contract in issues/02-filesystem-contract.md.
+If accepted, record its resolution and map index; align the existing sys plan where
+needed without implementing fixes. Preserve the cap-std confined-link limitation.
