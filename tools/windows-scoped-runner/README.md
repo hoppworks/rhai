@@ -69,9 +69,11 @@ been compiled or run. It deliberately retains every allocation fixture runtime
 and its associated journal, including the uncertain post-create case, and
 prints each exact runtime/journal path pair. The source now includes a bounded,
 bottom-up handle-disposition path using the retained runtime DELETE pin,
-no-follow child opens, protected-ACL and identity checks, durable removal
-intent, and independent pinned-parent absence readback before the removal
-receipt. The public workload path remains disabled, and production removal
+no-follow child opens, protected-ACL and full 128-bit identity checks, durable
+removal intent, and independent pinned-parent absence readback before the
+removal receipt. It uses `FileIdExtdDirectoryInfo`/`RestartInfo`; an unsupported
+class or a filesystem that does not return a usable 128-bit ID fails closed.
+The public workload path remains disabled, and production removal
 fails closed because the monitor does not yet issue an exact-job closure proof.
 The typed fixture authorization exercises filesystem transitions only; it does
 not stand in for process/job custody. These disposition fixtures are source

@@ -406,6 +406,21 @@ internal static class CustodyBackendFixture
                 allocation.DispositionState == WindowsCustodyBackend.RuntimeDispositionState.PartialRetained &&
                 Directory.Exists(partialRuntime) && allocation.Failure != null);
         }
+        string[] partialLeaves =
+        {
+            Path.Combine(partialRuntime, "bin", "runner.exe"),
+            Path.Combine(partialRuntime, "data", "data.txt"),
+            Path.Combine(partialRuntime, "data", "nested", "inner.txt")
+        };
+        int remainingLeaves = 0;
+        int absentLeaves = 0;
+        for (int i = 0; i < partialLeaves.Length; i++)
+        {
+            if (File.Exists(partialLeaves[i])) remainingLeaves++;
+            else absentLeaves++;
+        }
+        Expect("partial disposition independently reads one removed leaf and remaining leaves after owner handles close",
+            Directory.Exists(partialRuntime) && remainingLeaves == 2 && absentLeaves == 1);
         Expect("partial removal never writes successful receipt", !HasRecord(WindowsCustodyBackend.ReadJournalForFixture(partialJournal), "REMOVED|"));
         RetainPair("partial runtime removal", partialRuntime, partialJournal);
 

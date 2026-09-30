@@ -50,14 +50,14 @@ internal static class WindowsCustodyBackend
     private const int FileStandardInfoClass = 1;
     private const int FileBasicInfoClass = 0;
     private const int FileDispositionInfoClass = 4;
-    private const int FileIdBothDirectoryInfoClass = 10;
-    private const int FileIdBothDirectoryRestartInfoClass = 11;
+    private const int FileIdExtdDirectoryInfoClass = 19;
+    private const int FileIdExtdDirectoryRestartInfoClass = 20;
     private const int ERROR_NO_MORE_FILES = 18;
     private const int DirectoryQueryBufferBytes = 65536;
-    private const int FileIdBothHeaderBytes = 104;
-    private const int FileIdBothFileNameLengthOffset = 60;
-    private const int FileIdBothAttributesOffset = 56;
-    private const int FileIdBothIdOffset = 96;
+    private const int FileIdExtdHeaderBytes = 88;
+    private const int FileIdExtdFileNameLengthOffset = 60;
+    private const int FileIdExtdAttributesOffset = 56;
+    private const int FileIdExtdIdOffset = 72;
     private const int TransferBufferBytes = 65536;
 
     [StructLayout(LayoutKind.Sequential)] private struct FileAttributeTagInfo { internal uint Attributes, ReparseTag; }
@@ -68,8 +68,8 @@ internal static class WindowsCustodyBackend
     [StructLayout(LayoutKind.Sequential)] private struct FileDispositionInfo { [MarshalAs(UnmanagedType.U1)] internal bool DeleteFile; }
     private sealed class DirectoryEntrySnapshot
     {
-        internal readonly string Name; internal readonly ulong FileIdLow; internal readonly uint Attributes;
-        internal DirectoryEntrySnapshot(string name, ulong id, uint attributes) { Name = name; FileIdLow = id; Attributes = attributes; }
+        internal readonly string Name; internal readonly Guid FileId; internal readonly uint Attributes;
+        internal DirectoryEntrySnapshot(string name, Guid id, uint attributes) { Name = name; FileId = id; Attributes = attributes; }
     }
 
     [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
@@ -309,9 +309,9 @@ internal static class WindowsCustodyBackend
         return new FileIdentity(info.VolumeSerialNumber, new Guid(bytes));
     }
 
-    // FILE_ID_BOTH_DIR_INFO is a variable-length native record. The offsets
-    // below follow its documented x64/Windows layout; every field and offset
-    // is checked against the fixed buffer before it is read.
+    // FILE_ID_EXTD_DIR_INFO returns the full 128-bit file ID (information
+    // classes 19/20). Its offsets and 88-byte fixed header follow the documented
+    // Windows layout. Validate each variable-length record before reading it.
     private static List<DirectoryEntrySnapshot> ReadDirectoryEntries(SafeFileHandle directory, string path,
         int entryLimit, ref int observed, bool countTowardLimit = true)
     {
@@ -321,9 +321,10 @@ internal static class WindowsCustodyBackend
         try
         {
             bool first = true;
+            int parsedRecords = 0;
             while (true)
             {
-                int infoClass = first ? FileIdBothDirectoryRestartInfoClass : FileIdBothDirectoryInfoClass;
+                int infoClass = first ? FileIdExtdDirectoryRestartInfoClass : FileIdExtdDirectoryInfoClass;
                 first = false;
                 if (!GetFileInformationByHandleEx(directory, infoClass, buffer, DirectoryQueryBufferBytes))
                 {
@@ -336,21 +337,22 @@ internal static class WindowsCustodyBackend
                 int offset = 0;
                 while (true)
                 {
-                    if (offset < 0 || offset > DirectoryQueryBufferBytes - FileIdBothHeaderBytes)
+                    if (offset < 0 || offset > DirectoryQueryBufferBytes - FileIdExtdHeaderBytes)
                         throw new IOException("directory enumeration returned a truncated native record: " + path);
                     uint next = unchecked((uint)Marshal.ReadInt32(buffer, offset));
-                    uint attrs = unchecked((uint)Marshal.ReadInt32(buffer, offset + FileIdBothAttributesOffset));
-                    int nameBytes = Marshal.ReadInt32(buffer, offset + FileIdBothFileNameLengthOffset);
+                    uint attrs = unchecked((uint)Marshal.ReadInt32(buffer, offset + FileIdExtdAttributesOffset));
+                    int nameBytes = Marshal.ReadInt32(buffer, offset + FileIdExtdFileNameLengthOffset);
                     if (nameBytes < 0 || (nameBytes & 1) != 0 || nameBytes > 510 ||
-                        nameBytes > DirectoryQueryBufferBytes - offset - FileIdBothHeaderBytes)
+                        nameBytes > DirectoryQueryBufferBytes - offset - FileIdExtdHeaderBytes)
                         throw new IOException("directory enumeration returned an invalid filename length: " + path);
-                    ulong fileId = unchecked((ulong)Marshal.ReadInt64(buffer, offset + FileIdBothIdOffset));
-                    string name = Marshal.PtrToStringUni(IntPtr.Add(buffer, offset + FileIdBothHeaderBytes), nameBytes / 2);
-                    if (String.IsNullOrEmpty(name) || name == "." || name == "..")
+                    byte[] fileIdBytes = new byte[16];
+                    Marshal.Copy(IntPtr.Add(buffer, offset + FileIdExtdIdOffset), fileIdBytes, 0, fileIdBytes.Length);
+                    Guid fileId = new Guid(fileIdBytes);
+                    string name = Marshal.PtrToStringUni(IntPtr.Add(buffer, offset + FileIdExtdHeaderBytes), nameBytes / 2);
+                    if (String.IsNullOrEmpty(name))
                         throw new IOException("directory enumeration returned an unsupported entry name: " + path);
-                    ValidateSourceComponent(name);
-                    result.Add(new DirectoryEntrySnapshot(name, fileId, attrs));
-                    if (result.Count > entryLimit)
+                    parsedRecords++;
+                    if (parsedRecords > entryLimit)
                         throw new IOException(entryLimit == MaximumInventoryEntries
                             ? "runtime inventory exceeds the fixed entry bound: " + path
                             : "runtime inventory exceeds the fixture limit: " + path);
@@ -362,10 +364,17 @@ internal static class WindowsCustodyBackend
                                 ? "runtime inventory exceeds the fixed entry bound: " + path
                                 : "runtime inventory exceeds the fixture limit: " + path);
                     }
+                    if (name != "." && name != "..")
+                    {
+                        ValidateSourceComponent(name);
+                        result.Add(new DirectoryEntrySnapshot(name, fileId, attrs));
+                    }
+                    // Dot pseudoentries count toward the work bound but are
+                    // neither validated as ordinary names nor opened/deleted.
                     if (next == 0) break;
-                    uint minimumNext = (uint)((FileIdBothHeaderBytes + nameBytes + 7) & ~7);
+                    uint minimumNext = (uint)((FileIdExtdHeaderBytes + nameBytes + 7) & ~7);
                     if ((next & 7) != 0 || next < minimumNext ||
-                        next > DirectoryQueryBufferBytes - offset - FileIdBothHeaderBytes)
+                        next > DirectoryQueryBufferBytes - offset - FileIdExtdHeaderBytes)
                         throw new IOException("directory enumeration returned an invalid next-record offset: " + path);
                     offset = checked(offset + (int)next);
                 }
@@ -373,11 +382,6 @@ internal static class WindowsCustodyBackend
             return result;
         }
         finally { Marshal.FreeHGlobal(buffer); }
-    }
-
-    private static ulong FileIdentityLow64(FileIdentity identity)
-    {
-        return BitConverter.ToUInt64(identity.FileId.ToByteArray(), 0);
     }
 
     private static SafeFileHandle OpenDispositionEntry(string path)
@@ -406,6 +410,15 @@ internal static class WindowsCustodyBackend
         List<DirectoryEntrySnapshot> entries = ReadDirectoryEntries(parent, parentPath, limit, ref observed);
         for (int i = 0; i < entries.Count; i++)
             if (String.Equals(entries[i].Name, name, StringComparison.OrdinalIgnoreCase)) return true;
+        return false;
+    }
+
+    private static bool HasUsable128BitFileId(Guid value)
+    {
+        if (value == Guid.Empty) return false;
+        byte[] bytes = value.ToByteArray();
+        for (int i = 0; i < bytes.Length; i++)
+            if (bytes[i] != 0xff) return true;
         return false;
     }
 
@@ -556,6 +569,8 @@ internal static class WindowsCustodyBackend
                     throw new IOException("recorded runtime identity differs from the held runtime handle");
                 if (!ReadIdentity(parent.Handle).SameAs(EvidenceIdentity))
                     throw new IOException("pinned runtime parent identity differs from the allocation evidence identity");
+                if (!HasUsable128BitFileId(RuntimeIdentity.FileId) || !HasUsable128BitFileId(EvidenceIdentity.FileId))
+                    throw new IOException("runtime disposition requires usable 128-bit IDs for runtime and evidence parent");
                 FileAttributeTagInfo runtimeTag;
                 Check(GetFileInformationByHandleEx(runtimeHandle, FileAttributeTagInfoClass, out runtimeTag,
                     (uint)Marshal.SizeOf(typeof(FileAttributeTagInfo))), "FileAttributeTagInfo(runtime disposition)");
@@ -638,7 +653,8 @@ internal static class WindowsCustodyBackend
                     if ((tag.Attributes & FILE_ATTRIBUTE_REPARSE_POINT) != 0)
                         throw new IOException("runtime reparse point is refused and retained: " + relative);
                     FileIdentity identity = ReadIdentity(entry);
-                    if (identity.VolumeSerial != parentIdentity.VolumeSerial || FileIdentityLow64(identity) != listed.FileIdLow)
+                    if (!HasUsable128BitFileId(listed.FileId) || !HasUsable128BitFileId(identity.FileId) ||
+                        identity.VolumeSerial != parentIdentity.VolumeSerial || identity.FileId != listed.FileId)
                         throw new IOException("runtime entry identity changed between pinned-parent enumeration and no-follow open: " + relative);
                     AddUniqueIdentity(seen, identity, "runtime entry " + relative);
                     bool isDirectory = (tag.Attributes & FILE_ATTRIBUTE_DIRECTORY) != 0;
