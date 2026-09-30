@@ -28,7 +28,15 @@ be resolved before their dependent implementation. No remote publication.
 
 ## Current step
 
-Step 1; preparing a bounded filesystem repair delegation.
+Step 1; filesystem source and all three Rust diffs independently reviewed.
+Its full-suite log cannot distinguish a skipped invalid-UTF8 fixture; coverage
+correction and focused unrestricted symlink/parent and alias-routing cases are
+running in the responsible context. No full filesystem-ticket acceptance yet.
+Environment isolation 8fa26974: all three Rust files reviewed, targeted real-OS
+assertions and wrong-expectation control accepted for macOS; proof persistence
+pending. Combined suite must run once after local integration because source changes.
+POSIX process prototype 35a8cf52 proof is not accepted: Expert validated five
+findings; the single correction attempt is now running in its owned worktree.
 
 ## Decisions
 
@@ -52,9 +60,19 @@ Step 1; preparing a bounded filesystem repair delegation.
 
 ## Cause attempts and escalations
 
-None in this implementation campaign. Inherited VM history remains authoritative.
+Prototype-proof cause: initial report conflicts with the actual fixture's I/O ordering
+and exceptional-path cleanup. One Expert escalation opened at
+escalations/01-process-prototype-proof.md; answer saved at
+escalations/01-process-prototype-proof.answer.md. All five concerns validated.
+The one allowed correction attempt follows the answer in the responsible context.
+If this fails for the same cause, consult the owner; no second escalation.
+Do not accept concurrent-I/O/cleanup claims until independent evidence review.
+Inherited VM history remains authoritative.
 
 ## Next action
 
-Collect the filesystem repair, verify its real-system evidence, and resolve the
-remaining release/API choices without guessing owner scope.
+Collect filesystem coverage correction and env proof commit; integrate accepted
+branches locally into task/all-tickets and run one scoped combined sys suite.
+Collect and independently review the corrected process prototype.
+TCP authority question remains pending; release/API proposals remain unaccepted.
+Linear is legacy and excluded, with no writes performed there.
