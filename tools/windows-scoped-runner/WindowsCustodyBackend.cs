@@ -439,7 +439,9 @@ internal static class WindowsCustodyBackend
                     PinnedDirectory source = sourceRootPin;
                     if (!source.Identity.SameAs(sourceAncestors.Identity))
                         throw new IOException("source root identity changed between ancestor and mutation-denying pins");
-                    EnsureSourceDoesNotOverlapAllocation(source, parent, runtimeHandle, RuntimePath);
+                    // The root pin proves the leaf is still the same object;
+                    // use the complete checked ancestor chain for alias tests.
+                    EnsureSourceDoesNotOverlapAllocation(sourceAncestors, parent, runtimeHandle, RuntimePath);
                     phase = "tree copy";
                     AddUniqueIdentity(identities, source.Identity, "source root");
                     StagedEntry sourceRootEntry = ReadDirectoryEntry(source, String.Empty);
@@ -494,7 +496,7 @@ internal static class WindowsCustodyBackend
             catch (Exception error)
             {
                 StageStatus = StagingState.FailedRetained;
-                string detail = AllocationDiagnostic("staging " + phase + " failed: " + error.Message, RuntimePath, JournalPath) +
+                string detail = AllocationDiagnostic("staging " + phase + " failed: " + error.GetType().Name + ": " + error.Message, RuntimePath, JournalPath) +
                     "; source=" + BoundPath(sourceRoot);
                 Failure = detail;
                 try

@@ -71,9 +71,14 @@ prints each exact runtime/journal path pair. This slice has no handle-safe
 runtime disposition; the fixture does not present path-based checks followed
 by deletion as safe cleanup. Its source-tree staging fixtures cover successful
 nested copies, fail-closed source changes and sharing, source/destination
-reparse points, collisions, partial-copy retention, inventory and byte bounds,
-and receipt readback after handles close. They are also uncompiled and
-unexecuted; fixture dependencies and symlink privileges remain native gates.
+reparse points, collisions, partial-copy retention, inventory, per-file, total
+byte and depth bounds, cancellation, and receipt readback after handles close.
+Failure-boundary cases assert their specific diagnostic, the retained runtime
+and identity record, and absence of a `STAGED` receipt after disposal. The
+aggregate-byte case may require up to 576 MiB of logical source input and 512
+MiB of destination capacity; run it only under a separately bounded native disk
+budget. These fixtures are uncompiled and unexecuted; fixture dependencies and
+symlink privileges remain native gates.
 No compiler, runtime, Windows build command, guest command, or fixture process
 was invoked for this change.
 
@@ -84,7 +89,9 @@ entrypoint. It has not been run.
 
 ## Remaining custody and proof boundaries
 
-Windows executable-path validation, monitor integration, local evidence
+Executable-relative syntax checks and staged-file identity checks are present
+in source, but executable launch validation remains unverified. Monitor
+integration, local evidence
 finalization/export, exact job ownership and
 cleanup, the real create-time payload integration, pre-resume host challenge
 integration, termination and finalization budgets, and verified runtime

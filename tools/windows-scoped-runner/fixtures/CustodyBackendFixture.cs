@@ -207,9 +207,8 @@ internal static class CustodyBackendFixture
         Console.WriteLine("RETAINED " + label + " journal=" + journalPath);
     }
 
-    // These executable source fixtures are authored before the staging
-    // implementation. They are deliberately not compiled or run in this
-    // source-only step; every allocated runtime and its journal is retained.
+    // These executable source contract fixtures are deliberately not compiled
+    // or run in this source-only step; every allocated runtime and journal is retained.
     private static void SourceStagingContracts(string fixture)
     {
         Expect("executable syntax rejects DOS device names before source I/O",
@@ -297,14 +296,45 @@ internal static class CustodyBackendFixture
         string inventorySource = PrepareSimpleStageTree(inventoryRoot);
         for (int i = 0; i <= WindowsCustodyBackend.MaximumInventoryEntries; i++)
             File.WriteAllText(Path.Combine(inventorySource, "entry-" + i.ToString("D5") + ".dat"), "bounded entry");
-        ExpectRetainedStageFailure(inventoryRoot, inventorySource, @"bin\runner.exe", "inventory bound");
+        ExpectRetainedStageFailure(inventoryRoot, inventorySource, @"bin\runner.exe", "inventory bound", null,
+            "fixed inventory bound");
 
         string byteBoundRoot = NewStageCase(fixture, "stage-byte-bound");
         string byteBoundSource = PrepareSimpleStageTree(byteBoundRoot);
+        // Source fixture only: up to 576 MiB logical input and 512 MiB output
+        // may be involved. Native execution requires a separately bounded disk budget.
         for (int i = 0; i < 9; i++)
             using (FileStream large = new FileStream(Path.Combine(byteBoundSource, "large-" + i.ToString("D2") + ".dat"), FileMode.CreateNew, FileAccess.Write, FileShare.None))
                 large.SetLength(WindowsCustodyBackend.MaximumSingleStagedFileBytes);
-        ExpectRetainedStageFailure(byteBoundRoot, byteBoundSource, @"bin\runner.exe", "total byte bound");
+        ExpectRetainedStageFailure(byteBoundRoot, byteBoundSource, @"bin\runner.exe", "total byte bound", null,
+            "source tree exceeds the fixed total byte bound");
+
+        string fileBoundRoot = NewStageCase(fixture, "stage-file-bound");
+        string fileBoundSource = PrepareSimpleStageTree(fileBoundRoot);
+        using (FileStream oversized = new FileStream(Path.Combine(fileBoundSource, "oversized.dat"), FileMode.CreateNew, FileAccess.Write, FileShare.None))
+            oversized.SetLength(WindowsCustodyBackend.MaximumSingleStagedFileBytes + 1);
+        ExpectRetainedStageFailure(fileBoundRoot, fileBoundSource, @"bin\runner.exe", "single file bound", null,
+            "source file size or type is outside the fixed bound");
+
+        string depthRoot = NewStageCase(fixture, "stage-depth-bound");
+        string depthSource = PrepareSimpleStageTree(depthRoot);
+        string nested = depthSource;
+        for (int i = 0; i <= WindowsCustodyBackend.MaximumSourceDepth; i++)
+        {
+            nested = Path.Combine(nested, "d");
+            Directory.CreateDirectory(nested);
+        }
+        ExpectRetainedStageFailure(depthRoot, depthSource, @"bin\runner.exe", "source depth bound", null,
+            "source directory depth exceeds the fixed bound");
+
+        string cancellationRoot = NewStageCase(fixture, "stage-cancellation");
+        string cancellationSource = PrepareSimpleStageTree(cancellationRoot);
+        using (var cancellation = new CancellationTokenSource())
+        {
+            cancellation.Cancel();
+            ExpectRetainedStageFailure(cancellationRoot, cancellationSource, @"bin\runner.exe", "staging cancellation", null,
+                "OperationCanceledException", cancellation.Token);
+        }
 
         string stagedReparseRoot = NewStageCase(fixture, "stage-destination-reparse");
         string stagedReparseSource = PrepareSimpleStageTree(stagedReparseRoot);
@@ -345,16 +375,22 @@ internal static class CustodyBackendFixture
     }
 
     private static void ExpectRetainedStageFailure(string root, string source, string executable, string label,
-        Action<string> beforeFinalRescan = null)
+        Action<string> beforeFinalRescan = null, string expectedDiagnostic = null,
+        CancellationToken cancellationToken = default(CancellationToken))
     {
         string runtime, journal;
         using (WindowsCustodyBackend.RuntimeAllocation allocation = BeginStageAllocation(root, out runtime, out journal))
         {
-            bool allocated = allocation.CreateRuntime();
-            bool failed = allocated && !allocation.StageSourceTreeForFixture(source, executable, CancellationToken.None, beforeFinalRescan, null) && !allocation.IsStaged;
+            bool allocated = allocation.CreateRuntime() && allocation.IsIdentityRecorded;
+            Expect(label + " starts from a recorded allocation", allocated);
+            bool failed = allocated && !allocation.StageSourceTreeForFixture(source, executable, cancellationToken, beforeFinalRescan, null) && !allocation.IsStaged;
             Expect(label + " fails closed", failed);
+            if (expectedDiagnostic != null)
+                Expect(label + " reports its intended failure", allocation.Failure != null && allocation.Failure.IndexOf(expectedDiagnostic, StringComparison.Ordinal) >= 0);
         }
-        Expect(label + " journal has no staged receipt", !HasStagedReceipt(journal));
+        string[] records = WindowsCustodyBackend.ReadJournalForFixture(journal);
+        Expect(label + " retains its exact runtime and identity record", Directory.Exists(runtime) && HasRecord(records, "IDENTITY|"));
+        Expect(label + " journal has no staged receipt after disposal", !HasRecord(records, "STAGED|"));
         RetainPair(label, runtime, journal);
     }
 
@@ -386,8 +422,13 @@ internal static class CustodyBackendFixture
 
     private static bool HasStagedReceipt(string journal)
     {
-        string[] records = WindowsCustodyBackend.ReadJournalForFixture(journal);
-        for (int i = 0; i < records.Length; i++) if (records[i].StartsWith("STAGED|", StringComparison.Ordinal)) return true;
+        return HasRecord(WindowsCustodyBackend.ReadJournalForFixture(journal), "STAGED|");
+    }
+
+    private static bool HasRecord(string[] records, string prefix)
+    {
+        for (int i = 0; i < records.Length; i++)
+            if (records[i].StartsWith(prefix, StringComparison.Ordinal)) return true;
         return false;
     }
 
