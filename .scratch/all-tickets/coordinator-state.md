@@ -47,9 +47,12 @@ Findings are closed in source; see windows-monitor-specification-intake-review.m
 Original framing, real bounded dispatch and maintenance/transition separation
 are implemented. Nothing has compiled or run. Candidate stays isolated.
 
-Next source requirement: connect completed immutable input to monitor-owned
-allocation/staging on a separate worker without blocking the watchdog. Remaining
-source allowance is recorded before work in
+Monitor-owned allocation/staging source slice is completed in candidate
+8f75da53, independently reviewed across six files with zero skips; see
+windows-monitor-staging-ownership-review.md. It connects actual intake to a
+single worker and atomic completion/stop handoff. No compilation or execution;
+no integration or full custody acceptance. Fixed source allowance was recorded
+before work in
 briefs/windows-monitor-staging-ownership.md: 11:17–11:47 UTC on 2026-09-30,
 30 active minutes including review, zero execution/build/native launches,
 two consecutive source revisions without requirement progress stop the slice.
@@ -124,20 +127,16 @@ Inherited VM history remains authoritative.
 
 ## Next action
 
-The existing windows_monitor_implementation agent is continuing the bounded
-staging handoff slice, not restarted. The first untracked contract fixture at
-tools/windows-scoped-runner/fixtures/MonitorStagingHandoffFixture.cs was read in
-full. Concrete findings sent: StartOnce must await backend entry before stop;
-the fake backend must dispose its acquired owner on cancellation before result
-publication; a 100-ms stopwatch assertion is scheduling-sensitive. Agent design
-uses atomic Published/Accepted/ReleaseRequested ownership, worker-only disposal
-and nonblocking watchdog signals. Review the actual cancellation mechanism into
-StageSourceTree, fresh deadline checks around acceptance, and release ordering
-when source arrives. Accepted allocation may never become payload authority.
-Keep the fixed 11:47 UTC deadline across turns; no budget reset. Do not execute
-until native bootstrap/custody prerequisites are proven. No alternative
-acceptance or new Expert chain. Preserve unconsumed POSIX retry and pending owner
-decisions. No owned runtime resources were created.
+The bounded staging slice finished in 8f75da53; responsible agent is completed,
+not waiting or running. All six final changed files and the immutable whitespace
+check were independently inspected. Draft lifecycle/fixture findings are closed
+in source. See windows-monitor-staging-ownership-review.md for applicability and
+limits. Do not restart the agent or extend this closed-launch slice silently.
+Full custody still lacks payload/job integration, termination/finalization and
+native proof. Existing native bootstrap/custody prerequisites remain closed.
+Revalidate available independent authorized work and pending owner decisions;
+no new Expert chain or replacement package. Preserve the unconsumed POSIX retry.
+No runtime, guest or build resource was created; candidate remains isolated.
 
 ## Open owner decisions
 
@@ -151,6 +150,14 @@ Dependent implementation is stopped. Continue only independent authorized
 requirements with new evidence; do not repeat decision/status/verification rounds.
 
 ## Goal turn classification
+
+2026-09-30 staging completion continuation: progress. Previous goal turn was
+progress through source limits and concrete fixture findings. Current candidate
+8f75da53 implements actual allocation/staging integration and completion/stop
+ownership. Six-file final source review closes this subrequirement; zero skips.
+No executed acceptance, full custody or backlog completion. Responsible agent
+is terminal; no verified-wait claim. No new independent scope is started here.
+Goal remains active and incomplete; no blocked audit threshold established.
 
 2026-09-30 staging ownership continuation: progress. Pre-work finite source
 limits committed in d9fd5e5f. Existing responsible agent resumed; concrete
