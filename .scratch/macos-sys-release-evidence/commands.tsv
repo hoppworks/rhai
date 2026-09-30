@@ -1,0 +1,35 @@
+label	command
+compile-baseline	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys --no-run --test sys_policy --test sys_env --test sys_fs
+wrong-expectation-control	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys --test sys_fs test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving -- --exact --nocapture --test-threads=1 [RHAI_FILE_READ_WRONG_EXPECTATION=1]
+restored-baseline-control	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys --test sys_fs test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving -- --exact --nocapture --test-threads=1
+fixture-baseline-sys_policy	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys --test sys_policy -- --test-threads=1 --nocapture
+fixture-baseline-sys_env	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys --test sys_env -- --test-threads=1 --nocapture
+fixture-baseline-sys_fs	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys --test sys_fs -- --test-threads=1 --nocapture
+compile-sync	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys,sync --no-run --test sys_policy --test sys_env --test sys_fs
+fixture-sync-sys_policy	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys,sync --test sys_policy -- --test-threads=1 --nocapture
+fixture-sync-sys_env	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys,sync --test sys_env -- --test-threads=1 --nocapture
+fixture-sync-sys_fs	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys,sync --test sys_fs -- --test-threads=1 --nocapture
+compile-no-index	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys,no_index --no-run --test sys_policy --test sys_env --test sys_fs
+fixture-no-index-sys_policy	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys,no_index --test sys_policy -- --test-threads=1 --nocapture
+fixture-no-index-sys_env	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys,no_index --test sys_env -- --test-threads=1 --nocapture
+fixture-no-index-sys_fs	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys,no_index --test sys_fs -- --test-threads=1 --nocapture
+compile-metadata-serde	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys,metadata,serde --no-run --test sys_policy --test sys_env --test sys_fs
+fixture-metadata-serde-sys_policy	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_policy -- --test-threads=1 --nocapture
+fixture-metadata-serde-sys_env	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_env -- --test-threads=1 --nocapture
+fixture-metadata-serde-sys_fs	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_fs -- --test-threads=1 --nocapture
+compile-only-i32-no-float	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys,only_i32,no_float --no-run --test sys_policy --test sys_env --test sys_fs
+fixture-only-i32-no-float-sys_policy	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys,only_i32,no_float --test sys_policy -- --test-threads=1 --nocapture
+fixture-only-i32-no-float-sys_env	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys,only_i32,no_float --test sys_env -- --test-threads=1 --nocapture
+fixture-only-i32-no-float-sys_fs	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys,only_i32,no_float --test sys_fs -- --test-threads=1 --nocapture
+compile-unchecked	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys,unchecked --no-run --test sys_policy --test sys_env --test sys_fs
+fixture-unchecked-sys_policy	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys,unchecked --test sys_policy -- --test-threads=1 --nocapture
+fixture-unchecked-sys_env	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys,unchecked --test sys_env -- --test-threads=1 --nocapture
+fixture-unchecked-sys_fs	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys,unchecked --test sys_fs -- --test-threads=1 --nocapture
+compile-no-index-sync-metadata	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys,no_index,sync,metadata --no-run --test sys_policy --test sys_env --test sys_fs
+fixture-no-index-sync-metadata-sys_policy	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys,no_index,sync,metadata --test sys_policy -- --test-threads=1 --nocapture
+fixture-no-index-sync-metadata-sys_env	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys,no_index,sync,metadata --test sys_env -- --test-threads=1 --nocapture
+fixture-no-index-sync-metadata-sys_fs	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys,no_index,sync,metadata --test sys_fs -- --test-threads=1 --nocapture
+compile-f32-float	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys,f32_float --no-run --test sys_policy --test sys_env --test sys_fs
+fixture-f32-float-sys_policy	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_policy -- --test-threads=1 --nocapture
+fixture-f32-float-sys_env	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_env -- --test-threads=1 --nocapture
+fixture-f32-float-sys_fs	/Users/hoppworks/.cargo/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_fs -- --test-threads=1 --nocapture

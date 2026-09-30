@@ -1,0 +1,1 @@
+whole private allocation <= 2 GiB; 1 s du -sk sample; preempt at 1.5 GiB; max 16 owned descendants; two Cargo jobs; debug=0; incremental=0; deadline=2026-09-30T17:39:00Z; cleanup reserve to 17:44 UTC

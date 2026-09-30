@@ -1,0 +1,6 @@
+source_revision=efddae9e7a7b18f86d4ff1901ae7c28b4c22fc9f
+lock_sha256=8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa
+runtime=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_o69dgy3
+native_identity=Darwin arm64
+python_pid=49638
+owned_process_identity_source=live-identities.txt

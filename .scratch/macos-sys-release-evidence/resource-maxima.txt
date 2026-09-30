@@ -1,0 +1,3 @@
+sampled_storage_max_kib=783812
+sampled_owned_descendant_max=6
+method=1 second du -sk and ps PID/PPID ancestry; sampled maxima, not physical peaks
