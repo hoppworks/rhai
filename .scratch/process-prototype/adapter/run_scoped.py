@@ -2,7 +2,7 @@
 """Project-local scoped runner client; an external custodian owns all children."""
 import argparse
 import array
-import errno
+import hashlib
 import json
 import math
 import os
@@ -16,6 +16,17 @@ from pathlib import Path
 
 MAX_WIRE = 65536
 MAX_PAYLOAD = 2 * 1024 * 1024
+
+
+class ProofTimeout(TimeoutError):
+    def __init__(self, message, workers_started, workers_joined):
+        super().__init__(message)
+        self.workers_started = workers_started
+        self.workers_joined = workers_joined
+
+
+class WorkerJoinError(RuntimeError):
+    pass
 
 
 def _wait(fd, read, deadline):
@@ -79,7 +90,8 @@ def _recv(sock, deadline, want_fds=0):
         raise
 
 
-def _drive_io(fds, deadline, sock, cancel_mode=False, expected_pid=None, expected_pgid=None):
+def _drive_io(fds, deadline, sock, cancel_mode=False, assertion_mode=False, timeout_mode=False,
+              expected_pid=None, expected_pgid=None):
     in_fd, out_fd, err_fd = fds
     for fd in fds:
         os.set_blocking(fd, False)
@@ -87,6 +99,8 @@ def _drive_io(fds, deadline, sock, cancel_mode=False, expected_pid=None, expecte
     first_end = len(payload) // 2
     stop = threading.Event()
     checkpoints = [threading.Event(), threading.Event()]
+    live_event = threading.Event()
+    assertion_gate = threading.Event()
     errors = queue.Queue()
     outputs = [bytearray(), bytearray()]
 
@@ -144,6 +158,12 @@ def _drive_io(fds, deadline, sock, cancel_mode=False, expected_pid=None, expecte
                     or expected_pid != expected_pgid):
                 raise AssertionError('workload first-code PID/PGID readiness mismatch')
             _send(sock, json.dumps({'op': 'io_live'}).encode(), deadline)
+            live_event.set()
+            if assertion_mode:
+                while not assertion_gate.wait(0.01):
+                    if time.monotonic() >= deadline:
+                        raise TimeoutError('live assertion control deadline')
+                raise AssertionError('intentional live-resource assertion')
             while offset < len(payload) and not stop.is_set():
                 if time.monotonic() >= deadline:
                     raise TimeoutError('writer final-segment deadline')
@@ -161,11 +181,12 @@ def _drive_io(fds, deadline, sock, cancel_mode=False, expected_pid=None, expecte
             errors.put(exc)
             stop.set()
         finally:
-            fds[0] = None
-            try:
-                os.close(in_fd)
-            except OSError:
-                pass
+            if not assertion_mode:
+                fds[0] = None
+                try:
+                    os.close(in_fd)
+                except OSError:
+                    pass
             if cancel_mode:
                 try:
                     _send(sock, json.dumps({'op': 'io_input_closed'}).encode(), deadline)
@@ -177,6 +198,15 @@ def _drive_io(fds, deadline, sock, cancel_mode=False, expected_pid=None, expecte
                threading.Thread(target=reader, args=(err_fd, 1), daemon=True),
                threading.Thread(target=writer, daemon=True)]
     started = []
+    timed_out = None
+    live_assertion = None
+
+    def request_scope_cleanup(op):
+        _send(sock, json.dumps({'op': op}, separators=(',', ':')).encode(), time.monotonic()+2)
+        event, extra = _recv(sock, time.monotonic()+7)
+        if extra or event.get('op') != 'scope_terminated':
+            raise RuntimeError('custodian did not confirm managed-scope termination')
+
     try:
         for thread in threads:
             thread.start()
@@ -184,40 +214,79 @@ def _drive_io(fds, deadline, sock, cancel_mode=False, expected_pid=None, expecte
         while threads[2].is_alive():
             if time.monotonic() >= deadline:
                 raise TimeoutError('I/O worker deadline')
+            if assertion_mode and live_event.is_set() and not assertion_gate.is_set():
+                event, extra = _recv(sock, deadline)
+                if extra or event.get('op') != 'inject_assertion':
+                    raise ValueError('custodian did not authorize the live assertion control')
+                assertion_gate.set()
+                continue
             if not errors.empty():
-                raise errors.get()
+                error = errors.get()
+                if assertion_mode and isinstance(error, AssertionError) and str(error) == 'intentional live-resource assertion':
+                    request_scope_cleanup('assertion_cleanup_required')
+                    live_assertion = error
+                    break
+                raise error
             threads[2].join(0.01)
-        if cancel_mode:
+        if cancel_mode and live_assertion is None:
             event, extra = _recv(sock, deadline)
             if extra or event.get('op') != 'workload_exited':
                 raise ValueError('custodian did not confirm non-reaped workload exit')
             stop.set()
-        while any(thread.is_alive() for thread in started):
+        while live_assertion is None and any(thread.is_alive() for thread in started):
             if time.monotonic() >= deadline:
                 raise TimeoutError('I/O worker deadline')
             if not errors.empty():
-                raise errors.get()
+                error = errors.get()
+                if assertion_mode and isinstance(error, AssertionError) and str(error) == 'intentional live-resource assertion':
+                    request_scope_cleanup('assertion_cleanup_required')
+                    live_assertion = error
+                    break
+                raise error
             for thread in started:
                 thread.join(0.01)
-        if not errors.empty():
+        if live_assertion is None and not errors.empty():
             raise errors.get()
-        if not all(ev.is_set() for ev in checkpoints):
+        if live_assertion is None and not all(ev.is_set() for ev in checkpoints):
             raise AssertionError('overlap checkpoints missing')
+    except TimeoutError as exc:
+        if timeout_mode:
+            request_scope_cleanup('timeout_cleanup_required')
+        timed_out = exc
     finally:
         stop.set()
-        remaining = max(0, min(0.5, deadline-time.monotonic()))
-        join_deadline = time.monotonic() + remaining
+        if live_assertion is not None or (timed_out is not None and timeout_mode):
+            fds[0] = None
+            try:
+                os.close(in_fd)
+            except OSError:
+                pass
+        join_deadline = time.monotonic() + 5.0
         for thread in started:
             thread.join(max(0, join_deadline-time.monotonic()))
         if any(thread.is_alive() for thread in started):
-            raise TimeoutError('I/O worker did not join within cleanup bound')
+            joined = sum(not thread.is_alive() for thread in started)
+            raise WorkerJoinError('I/O worker join failed; joined ' + str(joined) + '/' + str(len(started)))
+    if timed_out is not None:
+        raise ProofTimeout(str(timed_out), len(started), sum(not thread.is_alive() for thread in started))
+    if live_assertion is not None:
+        raise AssertionError('intentional live-resource assertion; workers_started=' + str(len(started)) +
+                             '; workers_joined=' + str(sum(not thread.is_alive() for thread in started)))
     ready, sep, stderr_payload = bytes(outputs[1]).partition(b'\n')
     expected_stderr = bytes(value ^ 0xA5 for value in payload)
     if outputs[0] != payload or stderr_payload != expected_stderr:
         raise AssertionError('overlap/round-trip output contract failed')
+    stats = {'input_bytes': len(payload), 'stdout_bytes': len(outputs[0]),
+             'stderr_bytes': len(stderr_payload),
+             'workers_started': len(started),
+             'workers_joined': sum(not thread.is_alive() for thread in started),
+             'input_sha256': hashlib.sha256(payload).hexdigest(),
+             'stdout_sha256': hashlib.sha256(outputs[0]).hexdigest(),
+             'stderr_sha256': hashlib.sha256(stderr_payload).hexdigest()}
     if cancel_mode:
-        _send(sock, json.dumps({'op': 'io_cancelled', 'workers_joined': len(started)}).encode(), deadline)
-    return {'input_bytes': len(payload), 'stdout_bytes': len(outputs[0]), 'stderr_bytes': len(stderr_payload)}
+        _send(sock, json.dumps({'op': 'io_cancelled', 'workers_joined': len(started),
+                                **stats}, separators=(',', ':')).encode(), deadline)
+    return stats
 
 
 def run_command(command, timeout):
@@ -241,17 +310,46 @@ def run_command(command, timeout):
                 or type(response.get('anchor_pid')) is not int
                 or response.get('anchor_pgid') != response.get('workload_pid')):
             raise ValueError('unexpected custodian pipe response')
-        cancel_mode = os.environ.get('PROCESS_PROTOTYPE_CONTROL') == 'cancel'
-        stats = _drive_io(opened, deadline, sock, cancel_mode,
-                          response['workload_pid'], response['pgid'])
+        control = os.environ.get('PROCESS_PROTOTYPE_CONTROL')
+        cancel_mode = control == 'cancel'
+        assertion_mode = control == 'assert'
+        timeout_mode = control == 'timeout'
+        try:
+            stats = _drive_io(opened, deadline, sock, cancel_mode, assertion_mode, timeout_mode,
+                              response['workload_pid'], response['pgid'])
+        except AssertionError as exc:
+            if assertion_mode and str(exc).startswith('intentional live-resource assertion;'):
+                fields = dict(item.split('=', 1) for item in str(exc).split('; ')[1:])
+                _send(sock, json.dumps({'op': 'assertion_failure',
+                                        'message': 'intentional live-resource assertion',
+                                        'workers_started': int(fields['workers_started']),
+                                        'workers_joined': int(fields['workers_joined'])}).encode(), time.monotonic()+2)
+                return 86
+            raise
         if not cancel_mode:
             _send(sock, json.dumps({'op': 'io_complete', **stats}, separators=(',', ':')).encode(), deadline)
         result, extra = _recv(sock, deadline)
         if extra or result.get('op') != 'result' or type(result.get('status')) is not int or not -255 <= result['status'] <= 255:
             raise ValueError('invalid custodian result')
         return result['status']
+    except ProofTimeout as exc:
+        print('run_scoped: command timed out', file=sys.stderr)
+        if os.environ.get('PROCESS_PROTOTYPE_CONTROL') == 'timeout':
+            try:
+                _send(sock, json.dumps({'op': 'runner_timeout', 'status': 124,
+                                        'workers_started': exc.workers_started,
+                                        'workers_joined': exc.workers_joined}).encode(), time.monotonic()+2)
+            except BaseException as exc:
+                print('run_scoped: could not report timeout to custodian: ' + str(exc), file=sys.stderr)
+        return 124
     except TimeoutError:
         print('run_scoped: command timed out', file=sys.stderr)
+        if os.environ.get('PROCESS_PROTOTYPE_CONTROL') == 'timeout':
+            try:
+                _send(sock, json.dumps({'op': 'runner_timeout', 'status': 124,
+                                        'workers_started': 0, 'workers_joined': 0}).encode(), time.monotonic()+2)
+            except BaseException as exc:
+                print('run_scoped: could not report timeout to custodian: ' + str(exc), file=sys.stderr)
         return 124
     finally:
         for fd in opened:

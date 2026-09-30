@@ -2,6 +2,7 @@
 """Single-owner POSIX proof custodian. Source gate pending native macOS review."""
 import argparse
 import array
+import hashlib
 import json
 import os
 import select
@@ -13,7 +14,6 @@ import time
 from pathlib import Path
 
 POLL = 0.01
-TERM_GRACE = 1.0
 CLEANUP_DEADLINE = 5.0
 MAX_FRAME = 65536
 
@@ -107,52 +107,61 @@ def checked_status(pid, status):
     return {'pid': pid, 'wait_status': status}
 
 
-def cleanup_owned(children, leader, records, exclude=()):
+def kill_managed_group(children, leader, records, reason):
+    anchor = children.get('anchor')
+    if leader is None or anchor is None:
+        raise RuntimeError('managed-group identity slots are incomplete')
+    if waitid_nonreap(leader) is not None:
+        raise RuntimeError('managed-group leader is no longer unreaped/live')
+    if waitid_nonreap(anchor) is not None:
+        raise RuntimeError('managed-group anchor is no longer live')
+    os.killpg(leader, signal.SIGKILL)
+    records['managed_group_signal'] = 'SIGKILL'
+    records['managed_group_signal_reason'] = reason
+
+
+def cleanup_owned(children, leader, records, exclude=(), group_signaled=False):
     deadline = time.monotonic() + CLEANUP_DEADLINE
     errors = []
-    if leader is not None:
-        # WNOWAIT keeps this identity unreaped through its final group signal.
+    if leader is not None and not group_signaled:
+        # Keep both direct children unreaped while the live anchor pins the group ID.
         anchor = children.get('anchor')
         try:
+            # This process is the sole reaper; the live anchor pins the PGID.
             anchor_live = anchor is not None and waitid_nonreap(anchor) is None
         except BaseException as exc:
             anchor_live = False
-            errors.append('anchor liveness observation: ' + repr(exc))
+            errors.append('managed-group liveness observation: ' + repr(exc))
         if anchor_live:
             try:
-                os.killpg(leader, signal.SIGTERM)
+                # One KILL avoids TERM destroying the anchor before escalation.
+                os.killpg(leader, signal.SIGKILL)
             except ProcessLookupError:
-                errors.append('managed group absent before final signal')
+                errors.append('managed group absent before scope signal')
             except OSError as exc:
-                errors.append('group SIGTERM: ' + repr(exc))
-            try:
-                wait_until_exit(leader, min(deadline, time.monotonic() + TERM_GRACE))
-                # The independently live anchor, not leader state, retains PGID identity.
-                if waitid_nonreap(anchor) is None:
-                    os.killpg(leader, signal.SIGKILL)
-                else:
-                    errors.append('anchor exited before final managed-group signal')
-            except OSError as exc:
-                errors.append('group escalation: ' + repr(exc))
+                errors.append('group SIGKILL: ' + repr(exc))
         else:
-            errors.append('group signal withheld because anchor readiness/liveness was lost')
-            try: os.kill(leader, signal.SIGTERM)
-            except OSError as exc: errors.append('leader exact SIGTERM: ' + repr(exc))
+            errors.append('group signal withheld because live anchor identity was lost')
+            try:
+                if waitid_nonreap(leader) is None:
+                    os.kill(leader, signal.SIGKILL)
+            except OSError as exc:
+                errors.append('exact unreaped leader SIGKILL: ' + repr(exc))
     for role, pid in list(children.items()):
         if pid is None or role == 'leader' or role in exclude:
             continue
         try:
             if waitid_nonreap(pid) is None:
-                os.kill(pid, signal.SIGTERM)
+                os.kill(pid, signal.SIGKILL)
         except ProcessLookupError:
             errors.append(role + ' disappeared before exact signal')
         except OSError as exc:
-            errors.append(role + ' SIGTERM: ' + repr(exc))
+            errors.append(role + ' SIGKILL: ' + repr(exc))
     for role, pid in list(children.items()):
         if pid is None or role == 'leader' or role in exclude:
             continue
         try:
-            if wait_until_exit(pid, min(deadline, time.monotonic() + TERM_GRACE)) is None:
+            if wait_until_exit(pid, min(deadline, time.monotonic() + 1.0)) is None:
                 os.kill(pid, signal.SIGKILL)
             records[role] = checked_status(pid, reap_exact(pid, deadline))
         except (OSError, TimeoutError, ChildProcessError) as exc:
@@ -175,7 +184,7 @@ def main():
     ap.add_argument('--runtime', required=True)
     ap.add_argument('--runner', required=True)
     ap.add_argument('--binary', required=True)
-    ap.add_argument('--control', choices=('normal', 'cancel', 'term', 'kill'), default='normal')
+    ap.add_argument('--control', choices=('normal', 'cancel', 'assert', 'timeout', 'kill'), default='normal')
     args = ap.parse_args()
     runtime = Path(args.runtime)
     st = runtime.lstat()
@@ -195,15 +204,25 @@ def main():
     env = dict(os.environ, PROCESS_PROTOTYPE_CUSTODIAN_FD=str(fd),
                PROCESS_PROTOTYPE_MAX_TIMEOUT='20', AGENT_RUNTIME_DIR=str(runtime),
                PROCESS_PROTOTYPE_CONTROL=args.control)
-    runner_argv = [sys.executable, args.runner, '--timeout', '20', '--', args.binary, '--fixture', 'stream']
+    runner_timeout = 8 if args.control == 'timeout' else 20
+    fixture_mode = 'stall' if args.control == 'timeout' else 'stream'
+    runner_argv = [sys.executable, args.runner, '--timeout', str(runner_timeout), '--', args.binary, '--fixture', fixture_mode]
     owned = {'runner': None, 'leader': None, 'anchor': None, 'holder': None, 'sentinel': None}
     records = {'custodian_pid': os.getpid(), 'runtime': str(runtime),
                'runtime_identity': [st.st_dev, st.st_ino],
                'tmp_identity': [tmp_st.st_dev, tmp_st.st_ino], 'children': {}}
+    expected_payload = bytes(range(256)) * (2 * 1024 * 1024 // 256)
+    expected_stderr = bytes(value ^ 0xA5 for value in expected_payload)
+    expected_stream = {'input_bytes': len(expected_payload), 'stdout_bytes': len(expected_payload),
+                       'stderr_bytes': len(expected_payload),
+                       'input_sha256': hashlib.sha256(expected_payload).hexdigest(),
+                       'stdout_sha256': hashlib.sha256(expected_payload).hexdigest(),
+                       'stderr_sha256': hashlib.sha256(expected_stderr).hexdigest()}
     owned_fds = []
     runner_pid = None
     workload = None
     normal_completion = False
+    expected_runner_status = None
     workload_exit = None
     session_deadline = time.monotonic() + 30.0
     req_fds = []
@@ -212,7 +231,7 @@ def main():
         owned['runner'] = runner_pid
         runner_sock.close()
         req, req_fds = recv_frame(parent_sock, min(session_deadline, time.monotonic() + 5))
-        if req_fds or req.get('op') != 'run' or req.get('argv') != [args.binary, '--fixture', 'stream']:
+        if req_fds or req.get('op') != 'run' or req.get('argv') != [args.binary, '--fixture', fixture_mode]:
             raise ValueError('unexpected runner command; refusing spawn')
         timeout = req.get('timeout_seconds')
         if type(timeout) not in (int, float) or timeout <= 0 or timeout > 20:
@@ -264,22 +283,79 @@ def main():
         for x in (in_w, out_r, err_r):
             os.close(x)
             owned_fds.remove(x)
-        deadline = min(session_deadline, time.monotonic() + min(float(timeout), 20.0))
+        deadline = session_deadline
         while True:
             event, extra = recv_frame(parent_sock, deadline)
             if extra:
-                for x in extra: os.close(x)
+                owned_fds.extend(extra)
                 raise ValueError('runner sent unrequested descriptors')
-            if event.get('op') == 'io_live' and args.control in ('term', 'kill'):
-                sig = signal.SIGTERM if args.control == 'term' else signal.SIGKILL
-                os.kill(runner_pid, sig)
-                records['runner_interruption'] = args.control
+            if event.get('op') == 'io_live' and args.control == 'assert':
+                live = {role: (pid is not None and waitid_nonreap(pid) is None)
+                        for role, pid in owned.items() if role != 'runner'}
+                records['live_assertion_precondition'] = live
+                if not all(live.get(role) for role in ('leader', 'anchor', 'holder', 'sentinel')):
+                    raise AssertionError('live assertion control resources were not all live')
+                send_frame(parent_sock, {'op': 'inject_assertion'}, deadline=min(session_deadline, time.monotonic()+2))
+                continue
+            if event.get('op') == 'assertion_failure' and args.control == 'assert':
+                if (event.get('message') != 'intentional live-resource assertion'
+                        or event.get('workers_started') != 3 or event.get('workers_joined') != 3):
+                    raise ValueError('runner did not report expected live assertion and worker joins')
+                records['live_assertion_failure'] = True
+                records['worker_joins'] = event['workers_joined']
+                expected_runner_status = 86
                 break
-            if event.get('op') == 'io_live' and args.control == 'normal':
+            if event.get('op') == 'assertion_cleanup_required' and args.control == 'assert':
+                live = {role: (pid is not None and waitid_nonreap(pid) is None)
+                        for role, pid in owned.items() if role != 'runner'}
+                records['live_assertion_precondition'] = live
+                if not all(live.get(role) for role in ('leader', 'anchor', 'holder', 'sentinel')):
+                    raise AssertionError('live assertion cleanup lost a required live resource')
+                kill_managed_group(owned, workload, records, 'live assertion cleanup')
+                send_frame(parent_sock, {'op': 'scope_terminated'}, deadline=min(session_deadline, time.monotonic()+2))
+                continue
+            if event.get('op') == 'timeout_cleanup_required' and args.control == 'timeout':
+                live = {role: (pid is not None and waitid_nonreap(pid) is None)
+                        for role, pid in owned.items() if role != 'runner'}
+                records['runner_timeout_precondition'] = live
+                if not all(live.get(role) for role in ('leader', 'anchor', 'holder', 'sentinel')):
+                    raise AssertionError('runner timeout cleanup lost a required live resource')
+                kill_managed_group(owned, workload, records, 'runner timeout cleanup')
+                send_frame(parent_sock, {'op': 'scope_terminated'}, deadline=min(session_deadline, time.monotonic()+2))
+                continue
+            if event.get('op') == 'runner_timeout' and args.control == 'timeout':
+                if (event.get('status') != 124 or event.get('workers_started') != 3
+                        or event.get('workers_joined') != 3):
+                    raise ValueError('runner timeout lacked the expected status or worker joins')
+                records['runner_timeout_status'] = event['status']
+                records['runner_timeout_workers_joined'] = event['workers_joined']
+                expected_runner_status = 124
+                break
+            if event.get('op') == 'io_live' and args.control == 'kill':
+                live = {role: (pid is not None and waitid_nonreap(pid) is None)
+                        for role, pid in owned.items() if role != 'runner'}
+                records['runner_kill_precondition'] = live
+                if not all(live.get(role) for role in ('leader', 'anchor', 'holder', 'sentinel')):
+                    raise AssertionError('runner SIGKILL control resources were not all live')
+                os.kill(runner_pid, signal.SIGKILL)
+                records['runner_interruption'] = 'SIGKILL'
+                records['worker_outcome'] = 'process_terminated_by_runner_SIGKILL'
+                expected_runner_status = -signal.SIGKILL
+                break
+            if event.get('op') == 'io_live' and args.control in ('normal', 'cancel', 'timeout'):
+                if args.control == 'timeout':
+                    live = {role: (pid is not None and waitid_nonreap(pid) is None)
+                            for role, pid in owned.items() if role != 'runner'}
+                    records['runner_timeout_precondition'] = live
+                    if not all(live.get(role) for role in ('leader', 'anchor', 'holder', 'sentinel')):
+                        raise AssertionError('runner timeout control resources were not all live')
                 continue
             if event.get('op') == 'io_complete':
-                if event.get('input_bytes') != 2 * 1024 * 1024 or event.get('stdout_bytes') != 2 * 1024 * 1024 or event.get('stderr_bytes') != 2 * 1024 * 1024:
-                    raise ValueError('runner completion counts do not match contract')
+                stream = {key: event.get(key) for key in expected_stream}
+                if stream != expected_stream or event.get('workers_started') != 3 or event.get('workers_joined') != 3:
+                    raise ValueError('runner byte counts/checksums do not match fixture truth')
+                records['stream_readback'] = stream
+                records['worker_joins'] = event['workers_joined']
                 observed = wait_until_exit(workload, deadline)
                 if observed is None:
                     raise TimeoutError('workload exit observation timed out')
@@ -299,6 +375,10 @@ def main():
             if event.get('op') == 'io_cancelled' and args.control == 'cancel':
                 if event.get('workers_joined') != 3:
                     raise AssertionError('runner did not join all I/O workers')
+                stream = {key: event.get(key) for key in expected_stream}
+                if stream != expected_stream or event.get('workers_started') != 3:
+                    raise ValueError('cancel stream byte counts/checksums do not match fixture truth')
+                records['stream_readback'] = stream
                 records['worker_joins'] = event['workers_joined']
                 normal_completion = True
                 records['cooperative_cancel'] = True
@@ -315,7 +395,11 @@ def main():
         except BaseException as exc:
             records.setdefault('error', 'sentinel liveness readback: ' + repr(exc))
         try:
-            records['children'] = cleanup_owned(owned, workload, records['children'], exclude=('runner',) if normal_completion else ())
+            keep_runner = normal_completion or expected_runner_status is not None
+            records['children'] = cleanup_owned(
+                owned, workload, records['children'],
+                exclude=('runner',) if keep_runner else (),
+                group_signaled=records.get('managed_group_signal') == 'SIGKILL')
             if records['children'].get('cleanup_errors'):
                 records.setdefault('cleanup_errors', []).extend(records['children']['cleanup_errors'])
         except BaseException as exc:
@@ -324,28 +408,57 @@ def main():
             try:
                 code, value = workload_exit
                 status = 1 if records.get('cooperative_cancel') else (value if code == os.CLD_EXITED else 128 + value)
+                if not records.get('cooperative_cancel') and status != 0:
+                    records.setdefault('error', 'normal stream workload returned nonzero status ' + str(status))
+                expected_runner_status = status
                 send_frame(parent_sock, {'op': 'result', 'status': status}, deadline=min(session_deadline, time.monotonic()+5))
             except BaseException as exc:
                 records.setdefault('cleanup_errors', []).append('runner result send: ' + repr(exc))
             try:
-                if wait_until_exit(runner_pid, min(session_deadline, time.monotonic() + TERM_GRACE)) is None:
+                if wait_until_exit(runner_pid, min(session_deadline, time.monotonic() + 1.0)) is None:
                     os.kill(runner_pid, signal.SIGKILL)
                 records['children']['runner'] = checked_status(runner_pid, reap_exact(runner_pid, min(session_deadline+CLEANUP_DEADLINE, time.monotonic()+CLEANUP_DEADLINE)))
             except BaseException as exc:
                 records.setdefault('cleanup_errors', []).append('runner cleanup/reap: ' + repr(exc))
+        elif expected_runner_status is not None:
+            try:
+                if wait_until_exit(runner_pid, min(session_deadline, time.monotonic()+1.0)) is None:
+                    os.kill(runner_pid, signal.SIGKILL)
+                records['children']['runner'] = checked_status(runner_pid, reap_exact(runner_pid, time.monotonic()+CLEANUP_DEADLINE))
+            except BaseException as exc:
+                records.setdefault('cleanup_errors', []).append('expected-control runner wait/reap: ' + repr(exc))
         else:
             if runner_pid is not None and owned['runner'] is not None and 'runner' not in records['children']:
                 try: records['children']['runner'] = checked_status(runner_pid, reap_exact(runner_pid, time.monotonic() + CLEANUP_DEADLINE))
                 except (OSError, TimeoutError, ChildProcessError) as exc: records.setdefault('cleanup_errors', []).append('runner reap: ' + repr(exc))
+        if expected_runner_status is not None:
+            runner_record = records['children'].get('runner', {})
+            runner_wait = runner_record.get('wait_status')
+            if runner_wait is None:
+                records.setdefault('error', 'expected-control runner status was not reaped')
+            elif expected_runner_status < 0:
+                if not os.WIFSIGNALED(runner_wait) or os.WTERMSIG(runner_wait) != -expected_runner_status:
+                    records.setdefault('error', 'runner did not terminate by expected signal')
+            elif not os.WIFEXITED(runner_wait) or os.WEXITSTATUS(runner_wait) != expected_runner_status:
+                records.setdefault('error', 'runner did not return expected control status')
+        fd_errors = []
         for x in owned_fds + req_fds:
-            try: os.close(x)
-            except OSError: pass
-        try: parent_sock.close()
-        except OSError: pass
-        try: runner_sock.close()
-        except OSError: pass
+            try:
+                os.close(x)
+            except OSError as exc:
+                fd_errors.append('fd ' + str(x) + ': ' + repr(exc))
+        records['custodian_fds_closed'] = not fd_errors
+        if fd_errors:
+            records.setdefault('cleanup_errors', []).extend(fd_errors)
+        for name, sock in (('custodian protocol socket', parent_sock), ('runner protocol socket', runner_sock)):
+            try:
+                sock.close()
+            except OSError as exc:
+                records['custodian_fds_closed'] = False
+                records.setdefault('cleanup_errors', []).append(name + ' close: ' + repr(exc))
     required = ('runner', 'leader', 'anchor', 'sentinel')
     complete = all(records['children'].get(role, {}).get('wait_status') is not None for role in required)
+    complete = complete and records.get('custodian_fds_closed') is True
     complete = complete and not records.get('cleanup_errors') and not records['children'].get('cleanup_errors') and 'error' not in records
     if owned.get('holder') is not None:
         complete = complete and records['children'].get('holder', {}).get('wait_status') is not None

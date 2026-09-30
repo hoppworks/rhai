@@ -96,6 +96,15 @@ fn fixture(mode: &str) {
                 std::io::stderr().flush().unwrap();
             }
         }
+        "stall" => {
+            eprintln!("WORKLOAD_READY pid={} pgid={}", unsafe { getpid() }, unsafe { getpgrp() });
+            std::io::stderr().flush().unwrap();
+            println!("STALL_CHECKPOINT");
+            std::io::stdout().flush().unwrap();
+            // Deliberately retain the live process and all three pipes until the
+            // copied runner's own deadline expires and the custodian closes scope.
+            loop { thread::sleep(Duration::from_secs(60)); }
+        }
         "descendant" | "hold" => {
             let exe = env::current_exe().unwrap();
             let child = Command::new(exe).arg("--fixture").arg("sleeper").process_group(0).spawn().unwrap();

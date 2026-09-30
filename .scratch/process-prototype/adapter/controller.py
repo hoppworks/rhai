@@ -4,6 +4,7 @@ import argparse
 import json
 import os
 import shutil
+import stat
 import subprocess
 import sys
 import tempfile
@@ -12,7 +13,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ADAPTER = Path(__file__).resolve().parent
-OUTER_DEADLINE = 45.0
+CASE_DEADLINE = 30.0
+CHILD_REAP_DEADLINE = 5.0
+OUTER_CLEANUP_DEADLINE = 10.0
+OUTER_DEADLINE = CASE_DEADLINE + CHILD_REAP_DEADLINE + OUTER_CLEANUP_DEADLINE
 
 
 def quiescent_readback(runtime, identity, custodian_pid):
@@ -26,6 +30,8 @@ def quiescent_readback(runtime, identity, custodian_pid):
     children = data.get('children', {})
     if children.get('cleanup_errors') or data.get('cleanup_errors'):
         raise RuntimeError('cleanup errors in quiescence record; refusing custodian fallback')
+    if data.get('custodian_fds_closed') is not True:
+        raise RuntimeError('custodian descriptors not confirmed closed; refusing fallback')
     for role in ('runner', 'leader', 'anchor', 'sentinel'):
         if type(children.get(role, {}).get('wait_status')) is not int:
             raise RuntimeError('incomplete quiescence readback; refusing custodian fallback')
@@ -40,7 +46,7 @@ def quiescent_readback(runtime, identity, custodian_pid):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--binary', required=True)
-    ap.add_argument('--control', choices=('normal', 'cancel', 'term', 'kill'), default='normal')
+    ap.add_argument('--control', choices=('normal', 'cancel', 'assert', 'timeout', 'kill'), default='normal')
     args = ap.parse_args()
     runs = ROOT / 'runs'
     runs.mkdir(exist_ok=True)
@@ -58,17 +64,32 @@ def main():
         except subprocess.TimeoutExpired:
             # The outer owner never interrupts the sole child reaper until an
             # identity-checked receipt proves every process and descriptor quiescent.
-            quiescent_readback(runtime, identity, proc.pid)
             try:
-                os.kill(proc.pid, 9)
-            except ProcessLookupError:
-                pass
-            status = proc.wait(timeout=5)
-            raise TimeoutError('quiescent custodian fallback; proof incomplete, retained runtime at ' + str(runtime))
+                quiescent_readback(runtime, identity, proc.pid)
+            except BaseException as exc:
+                failure = {'custodian_pid': proc.pid, 'runtime': str(runtime),
+                           'runtime_identity': [identity.st_dev, identity.st_ino],
+                           'outcome': 'incomplete_cleanup_retained', 'reason': repr(exc)}
+                evidence = ROOT / 'evidence' / ('outer-incomplete-' + str(proc.pid) + '.json')
+                temporary = evidence.with_suffix('.tmp')
+                temporary.write_text(json.dumps(failure, sort_keys=True) + '\n')
+                os.replace(temporary, evidence)
+                if json.loads(evidence.read_text()) != failure:
+                    raise RuntimeError('outer incomplete-cleanup evidence readback failed') from exc
+                print('incomplete cleanup: exact custodian PID ' + str(proc.pid) +
+                      ' remains the resource owner; retained runtime ' + str(runtime) +
+                      '; readback ' + str(evidence), file=sys.stderr)
+                raise TimeoutError('outer bound expired; runtime and live custodian retained') from exc
+            os.kill(proc.pid, 9)
+            proc.wait(timeout=CHILD_REAP_DEADLINE)
+            raise TimeoutError('custodian exceeded its outer bound after quiescence; runtime retained at ' + str(runtime))
         receipt = runtime / 'receipt.json'
         data = json.loads(receipt.read_text())
         if status != 0 or data.get('runtime_identity') != [identity.st_dev, identity.st_ino]:
             raise RuntimeError('custodian status or runtime identity failed; retained ' + str(runtime))
+        tmp_st = (runtime / 'tmp').lstat()
+        if stat.S_ISLNK(tmp_st.st_mode) or [tmp_st.st_dev, tmp_st.st_ino] != data.get('tmp_identity'):
+            raise RuntimeError('runtime tmp identity mismatch; retained ' + str(runtime))
         evidence = ROOT / 'evidence' / ('custodian-' + str(proc.pid) + '-' + args.control + '.json')
         temporary = evidence.with_suffix('.tmp')
         temporary.write_text(json.dumps(data, sort_keys=True) + '\n')
@@ -79,6 +100,8 @@ def main():
         if runtime.is_symlink() or (current.st_dev, current.st_ino) != (identity.st_dev, identity.st_ino):
             raise RuntimeError('runtime identity changed; refusing removal: ' + str(runtime))
         shutil.rmtree(runtime)
+        if runtime.exists() or runtime.is_symlink():
+            raise RuntimeError('runtime removal readback failed; inspect ' + str(runtime))
         return 0
     except BaseException:
         # Preserve the exact path and receipt whenever bounded cleanup/readback failed.
