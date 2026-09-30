@@ -80,10 +80,20 @@ owner consultation asks for an additional 60-active-minute continuation of the
 same correction. Resume dependent work only on an answer; do not repeat audits
 while pending. Independent TCP listener and file work continue.
 
-Next independent release slice is minimum-compatible core resolution;
-briefs/core-msrv-compatible-resolution.md. Earlier latest thin-vec/edition boundary
-is retained, not a failed core-source proof. Approved release decision permits an
-exact compatible lock, with actual old compiler and explicit proof applicability.
+Default-core1.66 compatible-resolution proof is accepted and locally integrated
+from20452cab; see core-msrv-compatible-resolution-review.md and
+../core-msrv-compatible-resolution/proof.md, exact tracked Cargo.lock. Full original
+manifest, actual Cargo1.66 native macOS check and Engine42/wrong43 assertion pass.
+Only optional sys source changed since frozen input; default-core evidence applies.
+Exact runtime absence independently confirmed. Sampled storage is not continuous
+peak; two-job launch compliance unverified. Optional/MSRV/native gates remain open.
+
+Listener readiness cause now escalated once to fresh Expert03:
+escalations/03-tcp-accept-readiness.md. Multiple executed race failures were not
+approved calibration. Green candidate8b825577 is not yet accepted: bounded worker
+ResourceLimit retry/cleanup needs source assessment within original13:34UTC stop.
+No new launch while Expert answer pending. Other TCP source and final peer/control
+logs reviewed; exact final listener runtime absence independently confirmed.
 
 Actual monitor intake `dd8c07dc` and related stopped-state fixture `24c3a19f`
 are independently source-reviewed (six files plus one correction, zero skips).
