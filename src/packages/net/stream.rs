@@ -555,12 +555,12 @@ mod net_stream_functions {
         stream.shutdown(std::net::Shutdown::Write, "shutdown_write")
     }
 
-    #[rhai_fn(get = "closed", pure)]
+    #[rhai_fn(name = "closed", get = "closed", pure)]
     pub fn closed(stream: &mut super::NetStream) -> bool {
         stream.is_closed()
     }
 
-    #[rhai_fn(get = "peer_addr", return_raw)]
+    #[rhai_fn(name = "peer_addr", get = "peer_addr", return_raw)]
     pub fn peer_addr(stream: &mut super::NetStream) -> Result<String, Box<crate::EvalAltResult>> {
         stream.peer_addr()
     }

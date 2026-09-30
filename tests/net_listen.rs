@@ -1,4 +1,4 @@
-#![cfg(feature = "net")]
+#![cfg(all(feature = "net", not(feature = "no_object")))]
 
 use rhai::packages::net::{NetConfig, NetPackage};
 use rhai::packages::Package;

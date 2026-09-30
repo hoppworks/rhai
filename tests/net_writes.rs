@@ -1,4 +1,4 @@
-#![cfg(feature = "net")]
+#![cfg(all(feature = "net", not(feature = "no_object")))]
 
 use rhai::packages::net::{NetConfig, NetPackage};
 use rhai::packages::Package;
@@ -85,7 +85,7 @@ fn script_write_blob_preserves_exact_bytes() {
             let mut scope = rhai::Scope::new();
             scope.push("payload", rhai::Blob::from([0_u8, 255, 65]));
             engine
-                .eval_with_scope::<i64>(
+                .eval_with_scope::<rhai::INT>(
                     &mut scope,
                     &format!(
                         r#"let stream = connect("127.0.0.1", {port});
@@ -113,7 +113,7 @@ fn no_index_keeps_string_writes_and_omits_blob_writes() {
         |engine, port| {
             let mut scope = rhai::Scope::new();
             engine
-                .eval_with_scope::<i64>(
+                .eval_with_scope::<rhai::INT>(
                     &mut scope,
                     &format!(
                         r#"let stream = connect("127.0.0.1", {port});
@@ -234,7 +234,7 @@ fn engine_string_limit_rejects_write_before_peer_bytes() {
             scope.push("payload", "four".to_string());
             engine.eval_with_scope::<()>(&mut scope, &format!(r#"let stream = connect("127.0.0.1", {port});"#)).unwrap();
             engine.set_max_string_size(3);
-            let error = engine.eval_with_scope::<i64>(&mut scope, "stream.write_string(payload)").unwrap_err();
+            let error = engine.eval_with_scope::<rhai::INT>(&mut scope, "stream.write_string(payload)").unwrap_err();
             let detail = format!("{error:?}");
             let rejected = match *error {
                 rhai::EvalAltResult::ErrorDataTooLarge(..) => true,
@@ -290,7 +290,7 @@ fn accepted_stream_writes_are_read_back_by_the_peer() {
     peer.set_read_timeout(Some(Duration::from_secs(2))).unwrap();
     peer.set_write_timeout(Some(Duration::from_secs(2))).unwrap();
     let result = engine
-        .eval_with_scope::<i64>(
+        .eval_with_scope::<rhai::INT>(
             &mut scope,
             r#"let stream = listener.accept(500); let count = stream.write_all_string("accepted");
            stream.shutdown_write(); stream.close(); listener.close(); count"#,

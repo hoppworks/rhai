@@ -1,4 +1,4 @@
-#![cfg(feature = "net")]
+#![cfg(all(feature = "net", not(feature = "no_object")))]
 
 use rhai::packages::net::{NetConfig, NetError, NetPackage};
 use rhai::packages::Package;
@@ -97,6 +97,15 @@ fn net_config_rejects_zero_deadline_and_invalid_handle_limits() {
     assert_eq!(error.kind(), "InvalidInput");
     let error = NetPackage::new(NetConfig::default().read_timeout(Duration::ZERO)).err().unwrap();
     assert_eq!(error.kind(), "InvalidInput");
+    for config in [
+        NetConfig::default().connect_timeout(Duration::MAX),
+        NetConfig::default().accept_timeout(Duration::MAX),
+        NetConfig::default().read_timeout(Duration::MAX),
+        NetConfig::default().write_timeout(Duration::MAX),
+    ] {
+        let error = NetPackage::new(config).err().expect("unrepresentable host deadlines are rejected");
+        assert_eq!(error.kind(), "InvalidInput");
+    }
     let error = NetPackage::new(NetConfig::default().max_read_bytes(0)).err().unwrap();
     assert_eq!(error.kind(), "InvalidInput");
     let error = NetPackage::new(NetConfig::default().max_read_bytes(1024 * 1024 + 1)).err().unwrap();

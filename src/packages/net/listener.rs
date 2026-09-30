@@ -230,12 +230,12 @@ mod net_listener_functions {
         listener.close();
     }
 
-    #[rhai_fn(get = "closed")]
+    #[rhai_fn(name = "closed", get = "closed")]
     pub fn closed(listener: &mut super::NetListener) -> bool {
         listener.is_closed()
     }
 
-    #[rhai_fn(get = "local_addr", return_raw)]
+    #[rhai_fn(name = "local_addr", get = "local_addr", return_raw)]
     pub fn local_addr(
         listener: &mut super::NetListener,
     ) -> Result<String, Box<crate::EvalAltResult>> {

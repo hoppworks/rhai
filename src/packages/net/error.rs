@@ -131,34 +131,34 @@ impl NetError {
 
 #[export_module]
 mod net_error_functions {
-    #[rhai_fn(get = "kind", pure)]
+    #[rhai_fn(name = "kind", get = "kind", pure)]
     pub fn kind(err: &mut NetError) -> ImmutableString {
         err.kind().into()
     }
 
-    #[rhai_fn(get = "message", pure)]
+    #[rhai_fn(name = "message", get = "message", pure)]
     pub fn message(err: &mut NetError) -> ImmutableString {
         err.message().into()
     }
 
-    #[rhai_fn(get = "io_kind", pure)]
+    #[rhai_fn(name = "io_kind", get = "io_kind", pure)]
     pub fn io_kind(err: &mut NetError) -> Dynamic {
         err.io_kind()
             .map(|kind| format!("{kind:?}").into())
             .unwrap_or(Dynamic::UNIT)
     }
 
-    #[rhai_fn(get = "op", pure)]
+    #[rhai_fn(name = "op", get = "op", pure)]
     pub fn op(err: &mut NetError) -> ImmutableString {
         err.op().into()
     }
 
-    #[rhai_fn(get = "target", pure)]
+    #[rhai_fn(name = "target", get = "target", pure)]
     pub fn target(err: &mut NetError) -> ImmutableString {
         err.target().into()
     }
 
-    #[rhai_fn(get = "partial_bytes", pure)]
+    #[rhai_fn(name = "partial_bytes", get = "partial_bytes", pure)]
     pub fn partial_bytes(err: &mut NetError) -> crate::INT {
         err.partial_bytes()
     }
