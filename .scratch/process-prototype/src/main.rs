@@ -83,11 +83,17 @@ fn wait_until<F: FnMut() -> bool>(deadline: Instant, mut f: F, what: &str) {
 fn fixture(mode: &str) {
     match mode {
         "stream" => {
-            let mut input = Vec::new();
-            std::io::stdin().read_to_end(&mut input).unwrap();
-            for chunk in input.chunks(4096) {
-                std::io::stdout().write_all(chunk).unwrap();
-                std::io::stderr().write_all(chunk).unwrap();
+            eprintln!("WORKLOAD_READY pid={} pgid={}", unsafe { getpid() }, unsafe { getpgrp() });
+            std::io::stderr().flush().unwrap();
+            let mut input = [0u8; 4096];
+            loop {
+                let n = std::io::stdin().read(&mut input).unwrap();
+                if n == 0 { break; }
+                std::io::stdout().write_all(&input[..n]).unwrap();
+                std::io::stdout().flush().unwrap();
+                let transformed: Vec<u8> = input[..n].iter().map(|byte| byte ^ 0xA5).collect();
+                std::io::stderr().write_all(&transformed).unwrap();
+                std::io::stderr().flush().unwrap();
             }
         }
         "descendant" | "hold" => {
@@ -98,6 +104,11 @@ fn fixture(mode: &str) {
             // This separately owned process deliberately escapes the managed group and holds stdio.
             std::mem::forget(child);
             if mode == "hold" { loop { thread::sleep(Duration::from_secs(60)); } }
+        }
+        "anchor" => {
+            println!("ANCHOR_READY pid={} pgid={}", unsafe { getpid() }, unsafe { getpgrp() });
+            std::io::stdout().flush().unwrap();
+            loop { thread::sleep(Duration::from_secs(60)); }
         }
         "sleeper" => loop { thread::sleep(Duration::from_secs(60)); },
         _ => panic!("unknown fixture"),
