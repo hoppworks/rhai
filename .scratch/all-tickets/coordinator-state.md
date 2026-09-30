@@ -51,6 +51,8 @@ disabled. Next independent source requirement is exclusive runtime allocation,
 verified ACL/identity and ordered allocation journal integration, then safe
 staging/deletion and immutable specification/payload integration. Running lease
 renewal remains unsupported and explicitly required before payload integration.
+Runtime allocation source substep is now delegated to the responsible context
+under briefs/windows-runtime-allocation.md from the verified clean 967500f3.
 
 Step 1 corrected unrestricted resolution is integrated at 5f87d339 and accepted
 on native macOS: env7/fs24/policy26 pass, exact runtime absent. Red/green
