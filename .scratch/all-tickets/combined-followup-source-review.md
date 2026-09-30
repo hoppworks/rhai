@@ -1,0 +1,11 @@
+# Combined sys/net follow-up source gate
+
+Accepted for the single bounded verification invocation at immutable c2c76a1fac0ed48c5f7bae189c1eb0569ff7d756; this is not runtime acceptance. Original 15:36–16:06 package and storage failure remain recorded in combined-package-review.md. Approved follow-up runs 17:54:18–18:24:18 UTC including this review and final acceptance, with execution cutoff 18:19:18 UTC. No clock reset.
+
+OCR range from 14aceb41c3753e4079af279fc98d9cdac404f51e accounts for six files: four code files reviewed against the Python, shell and Rust rule groups; two excluded Markdown files manually reviewed. Coverage 6/6, skipped 0. Full source and every amendment were read. The test keeps real Engine, host-file and independent TCP effects and replaces a fragmentation-sensitive single read with EOF-bounded read-to-end. Wrong file expectation is an explicit fresh-host-read assertion control.
+
+Prelaunch blocking findings were corrected before any runtime: UTC deadline parsing, runner-owned tmp reuse, clean-source verification before output, exclusion of only the exact owned evidence subtree with launcher/driver HEAD agreement, early runtime/group state export, cleanup finalization after launcher exit, and explicit unavailable identities. Earlier source snapshots 03e6c00e/d3c077df/ee930dcc remain review history, not runtime attempts.
+
+The reviewed launcher uses one scoped invocation capped by the remaining absolute cutoff. Cargo inherits the scoped process group; complete git archive includes workspace members. Private source/target/cache/tmp and generated lock are retained only within the runner, with exported logs, lock and per-case statuses. Tests use the frozen generated lock. One-second storage/descendant samples stop on errors or limits; sampled maxima are not continuous resource peaks. The independent finalizer compares exact PID/start identities, group members and runtime absence after the launcher terminates; missing identities fail proof.
+
+Required runtime result: wrong control 101 for the targeted host assertion, restored baseline, eight coexistence profiles and full eight-target f32 row. First unexpected failure, cap or deadline stops; no post-gate source changes or reruns. Existing unchanged individual-target evidence may be reused only for its covered rows. Final runtime acceptance remains pending.
