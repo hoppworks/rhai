@@ -1,0 +1,235 @@
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-j79pdzmx/source)
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:11:24
+   |
+11 | fn read_bounded_to_end(mut stream: &TcpStream, max_bytes: usize) -> Vec<u8> {
+   |                        ----^^^^^^
+   |                        |
+   |                        help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:62:10
+   |
+62 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:83:10
+   |
+83 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:208:10
+    |
+208 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:266:10
+    |
+266 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:285:9
+    |
+285 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:289:9
+    |
+289 |     let mut peer = TcpStream::connect(address.parse::<SocketAddr>().unwrap()).unwrap();
+    |         ----^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:306:9
+    |
+306 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()).max_write_bytes(2));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: unused return value of `rhai::Scope::<'_>::remove` that must be used
+   --> tests/net_writes.rs:245:13
+    |
+245 |             scope.remove::<String>("payload");
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` (part of `#[warn(unused)]`) on by default
+help: use `let _ = ...` to ignore the resulting value
+    |
+245 |             let _ = scope.remove::<String>("payload");
+    |             +++++++
+
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+warning: `rhai` (test "net_writes") generated 9 warnings (run `cargo fix --test "net_writes" -p rhai` to apply 8 suggestions)
+    Finished `test` profile [unoptimized] target(s) in 1.41s
+     Running tests/combined_sys_net.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-j79pdzmx/target/debug/deps/combined_sys_net-a851e55ef3c7f483)
+
+running 1 test
+test sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/net_connect.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-j79pdzmx/target/debug/deps/net_connect-acbd7555c73e89c9)
+
+running 4 tests
+test authorized_connect_is_observed_and_clone_close_is_shared ... ok
+test denied_and_invalid_endpoints_do_not_reach_peer_and_errors_are_catchable ... ok
+test net_config_rejects_zero_deadline_and_invalid_handle_limits ... ok
+test open_handle_limit_is_shared_across_package_engines_and_released_on_close ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests/net_listen.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-j79pdzmx/target/debug/deps/net_listen-e92a69e890fb3272)
+
+running 7 tests
+test accepted_stream_uses_the_shared_package_quota_across_engines ... ok
+test authorized_listener_accepts_an_independent_peer ... ok
+test bind_failure_releases_listener_quota ... ok
+test denied_and_invalid_listener_endpoints_never_bind ... ok
+test listener_clones_share_close_and_final_drop_releases_the_bind ... ok
+test no_client_accept_times_out_with_catchable_net_error ... ok
+test quota_retry_deadline_expires_under_a_real_saturated_handle_limit ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.12s
+
+     Running tests/net_reads.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-j79pdzmx/target/debug/deps/net_reads-67ea4120bc9cabbf)
+
+running 7 tests
+test accepted_stream_inherits_host_receive_cap ... ok
+test blob_reads_validate_lengths_return_exact_short_prefix_and_obey_host_cap ... ok
+test engine_string_limit_keeps_ascii_and_reports_lossy_expansion_progress ... ok
+test no_data_read_times_out_and_bounded_eof_loop_reports_partial_progress ... ok
+test one_shot_read_returns_an_available_short_prefix_without_waiting_for_more ... ok
+test one_shot_text_read_replaces_a_utf8_character_cut_by_the_available_prefix ... ok
+test stream_read_string_returns_exact_lossy_text_from_peer_bytes ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.26s
+
+     Running tests/net_writes.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-j79pdzmx/target/debug/deps/net_writes-dc216d280ccd4146)
+
+running 10 tests
+test accepted_stream_inherits_host_write_cap ... ok
+test accepted_stream_writes_are_read_back_by_the_peer ... ok
+test bounded_write_timeout_reports_partial_bytes_matching_peer_readback ... ok
+test engine_string_limit_rejects_write_before_peer_bytes ... ok
+test host_write_cap_rejects_oversize_input_without_peer_bytes ... ok
+test invalid_host_write_bounds_are_rejected ... ok
+test read_half_close_is_idempotent_and_keeps_stream_open_for_close ... ok
+test script_write_blob_preserves_exact_bytes ... ok
+test script_writes_string_and_write_all_report_real_peer_bytes ... ok
+test write_half_close_keeps_the_read_direction_and_is_idempotent ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+     Running tests/sys_env.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-j79pdzmx/target/debug/deps/sys_env-fb4e63ba8fd1b5a7)
+
+running 7 tests
+test test_cwd_matches_process ... ok
+test test_env_allow_list_unset_variable ... ok
+test test_env_allow_list_value ... ok
+test test_env_default_policy_hides_all ... ok
+test test_env_var_non_utf8 ... ok
+test test_env_var_set_and_unset ... ok
+test test_env_vars_all ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s
+
+     Running tests/sys_fs.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-j79pdzmx/target/debug/deps/sys_fs-17b6180072235136)
+
+running 34 tests
+test test_create_dir_cases ... ok
+test test_deep_tree_and_many_entries ... ok
+test test_empty_and_mixed_writes ... ok
+test test_file_handle_blob_read_respects_engine_array_limit ... ok
+test test_file_handle_read_blob_preserves_bytes_and_obeys_host_cap ... ok
+test test_file_handle_read_respects_engine_limit_below_host_cap ... ok
+test test_file_handle_read_string_advances_the_shared_cursor ... ok
+test test_file_handle_reads_fail_at_eof_and_on_write_only_handle ... ok
+test test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving ... ok
+test test_file_handle_string_read_requires_complete_utf8 ... ok
+test test_large_file_round_trip ... ok
+test test_metadata_symlink_and_readonly ... ok
+test test_non_utf8_file_name ... filesystem rejects non-UTF-8 fixture with EILSEQ: Illegal byte sequence (os error 92)
+ok
+test test_open_file_checks_grants_before_mutation_and_stays_confined ... ok
+test test_open_file_default_preserves_contents_and_shares_cursor ... independent host readback: "original XYyload"
+ok
+test test_open_file_modes_and_exclusive_create ... ok
+test test_path_spellings ... ok
+test test_predicates_and_metadata ... ok
+test test_read_binary ... ok
+test test_read_dir_cases ... ok
+test test_read_file_cases ... ok
+test test_remove_cases ... ok
+test test_rename_and_copy ... ok
+test test_rename_overwrite_and_directory ... ok
+test test_unicode_names ... ok
+test test_unrestricted_missing_parents ... ok
+test test_unrestricted_relative_paths ... ok
+test test_unrestricted_relative_paths_after_cwd_is_unlinked ... ok
+test test_unrestricted_round_trip ... ok
+test test_unrestricted_symlink_then_parent_uses_host_resolution ... ok
+test test_unrestricted_symlinks_follow_host_semantics ... ok
+test test_write_append_blob ... ok
+test test_write_into_missing_parent ... ok
+test test_wrong_entry_kind ... ok
+
+test result: ok. 34 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.18s
+
+     Running tests/sys_policy.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-j79pdzmx/target/debug/deps/sys_policy-e939883820f19fd4)
+
+running 25 tests
+test test_absolute_path_with_parent_components ... ok
+test test_absolute_paths ... ok
+test test_config_builder ... ok
+test test_configured_root_symlink_then_parent_uses_os_resolution ... ok
+test test_copy_across_roots ... ok
+test test_default_config_denies_fs ... ok
+test test_env_allow_list ... ok
+test test_error_position ... ok
+test test_error_variants ... ok
+test test_errors_are_catchable ... ok
+test test_host_can_downcast ... ok
+test test_missing_root_fails_early ... ok
+test test_multiple_roots ... ok
+test test_nested_roots_keep_permissions_through_system_prefix_aliases ... ok
+test test_nested_roots_longest_prefix ... ok
+test test_parent_traversal_is_denied ... ok
+test test_plain_engine_has_no_sys_functions ... ok
+test test_read_only_root ... ok
+test test_remove_dir_all_needs_delete_access ... ok
+test test_root_accepts_macos_system_prefix_aliases ... ok
+test test_root_with_dot_components ... ok
+test test_static_module_and_sharing ... ok
+test test_symlink_escape_is_denied ... ok
+test test_symlinked_root ... ok
+test test_unrestricted_respects_access_level ... ok
+
+test result: ok. 25 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
