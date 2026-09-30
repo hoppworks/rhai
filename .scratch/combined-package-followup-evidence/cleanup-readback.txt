@@ -1,0 +1,338 @@
+runtime_absent=True runtime=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-trx9e1hu
+driver pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+launcher-ancestry pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+launcher-ancestry pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+lockfile-resolution pid=71421 start=Wed Sep 30 20:16:07 2026 readback=absent
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71421 start=Wed Sep 30 20:16:07 2026 readback=absent
+sampled-group-member pid=71427 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71421 start=Wed Sep 30 20:16:07 2026 readback=absent
+sampled-group-member pid=71442 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71421 start=Wed Sep 30 20:16:07 2026 readback=absent
+sampled-group-member pid=71459 start=unavailable readback=identity-missing
+wrong-fresh-file-control pid=71468 start=Wed Sep 30 20:16:10 2026 readback=absent
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71468 start=Wed Sep 30 20:16:10 2026 readback=absent
+sampled-group-member pid=71481 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71468 start=Wed Sep 30 20:16:10 2026 readback=absent
+sampled-group-member pid=71580 start=unavailable readback=identity-missing
+sampled-group-member pid=71581 start=unavailable readback=identity-missing
+sampled-group-member pid=71582 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71468 start=Wed Sep 30 20:16:10 2026 readback=absent
+sampled-group-member pid=71627 start=unavailable readback=identity-missing
+sampled-group-member pid=71631 start=unavailable readback=identity-missing
+sampled-group-member pid=71633 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71468 start=Wed Sep 30 20:16:10 2026 readback=absent
+sampled-group-member pid=71680 start=unavailable readback=identity-missing
+sampled-group-member pid=71681 start=Wed Sep 30 20:16:15 2026 readback=absent
+sampled-group-member pid=71682 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71468 start=Wed Sep 30 20:16:10 2026 readback=absent
+sampled-group-member pid=71725 start=Wed Sep 30 20:16:16 2026 readback=absent
+sampled-group-member pid=71727 start=Wed Sep 30 20:16:16 2026 readback=absent
+sampled-group-member pid=71729 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71468 start=Wed Sep 30 20:16:10 2026 readback=absent
+sampled-group-member pid=71725 start=unavailable readback=identity-missing
+sampled-group-member pid=71737 start=Wed Sep 30 20:16:17 2026 readback=absent
+sampled-group-member pid=71739 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71468 start=Wed Sep 30 20:16:10 2026 readback=absent
+sampled-group-member pid=71766 start=unavailable readback=identity-missing
+sampled-group-member pid=71774 start=unavailable readback=identity-missing
+sampled-group-member pid=71776 start=unavailable readback=identity-missing
+sampled-group-member pid=71777 start=unavailable readback=identity-missing
+sampled-group-member pid=71778 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71468 start=Wed Sep 30 20:16:10 2026 readback=absent
+sampled-group-member pid=71782 start=Wed Sep 30 20:16:19 2026 readback=absent
+sampled-group-member pid=71797 start=unavailable readback=identity-missing
+sampled-group-member pid=71798 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71468 start=Wed Sep 30 20:16:10 2026 readback=absent
+sampled-group-member pid=71782 start=Wed Sep 30 20:16:19 2026 readback=absent
+sampled-group-member pid=71807 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71468 start=Wed Sep 30 20:16:10 2026 readback=absent
+sampled-group-member pid=71782 start=Wed Sep 30 20:16:19 2026 readback=absent
+sampled-group-member pid=71814 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71468 start=Wed Sep 30 20:16:10 2026 readback=absent
+sampled-group-member pid=71822 start=Wed Sep 30 20:16:24 2026 readback=absent
+sampled-group-member pid=71823 start=Wed Sep 30 20:16:24 2026 readback=absent
+sampled-group-member pid=71825 start=unavailable readback=identity-missing
+restored-baseline pid=71843 start=Wed Sep 30 20:16:24 2026 readback=absent
+combined-sync pid=71848 start=Wed Sep 30 20:16:24 2026 readback=absent
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71848 start=Wed Sep 30 20:16:24 2026 readback=absent
+sampled-group-member pid=71852 start=unavailable readback=identity-missing
+sampled-group-member pid=71861 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71848 start=Wed Sep 30 20:16:24 2026 readback=absent
+sampled-group-member pid=71863 start=Wed Sep 30 20:16:25 2026 readback=absent
+sampled-group-member pid=71870 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71848 start=Wed Sep 30 20:16:24 2026 readback=absent
+sampled-group-member pid=71863 start=Wed Sep 30 20:16:25 2026 readback=absent
+sampled-group-member pid=71883 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71848 start=Wed Sep 30 20:16:24 2026 readback=absent
+sampled-group-member pid=71863 start=Wed Sep 30 20:16:25 2026 readback=absent
+sampled-group-member pid=71890 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71848 start=Wed Sep 30 20:16:24 2026 readback=absent
+sampled-group-member pid=71863 start=Wed Sep 30 20:16:25 2026 readback=absent
+sampled-group-member pid=71897 start=unavailable readback=identity-missing
+combined-no-index pid=71939 start=Wed Sep 30 20:16:31 2026 readback=absent
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71939 start=Wed Sep 30 20:16:31 2026 readback=absent
+sampled-group-member pid=71946 start=Wed Sep 30 20:16:31 2026 readback=absent
+sampled-group-member pid=71947 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71939 start=Wed Sep 30 20:16:31 2026 readback=absent
+sampled-group-member pid=71955 start=Wed Sep 30 20:16:32 2026 readback=absent
+sampled-group-member pid=71961 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71939 start=Wed Sep 30 20:16:31 2026 readback=absent
+sampled-group-member pid=71955 start=Wed Sep 30 20:16:32 2026 readback=absent
+sampled-group-member pid=71968 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71939 start=Wed Sep 30 20:16:31 2026 readback=absent
+sampled-group-member pid=71955 start=Wed Sep 30 20:16:32 2026 readback=absent
+sampled-group-member pid=71977 start=unavailable readback=identity-missing
+combined-metadata-serde pid=71996 start=Wed Sep 30 20:16:37 2026 readback=absent
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71996 start=Wed Sep 30 20:16:37 2026 readback=absent
+sampled-group-member pid=72002 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71996 start=Wed Sep 30 20:16:37 2026 readback=absent
+sampled-group-member pid=72007 start=Wed Sep 30 20:16:37 2026 readback=absent
+sampled-group-member pid=72026 start=Wed Sep 30 20:16:38 2026 readback=absent
+sampled-group-member pid=72028 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71996 start=Wed Sep 30 20:16:37 2026 readback=absent
+sampled-group-member pid=72007 start=unavailable readback=identity-missing
+sampled-group-member pid=72039 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71996 start=Wed Sep 30 20:16:37 2026 readback=absent
+sampled-group-member pid=72041 start=Wed Sep 30 20:16:41 2026 readback=absent
+sampled-group-member pid=72047 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71996 start=Wed Sep 30 20:16:37 2026 readback=absent
+sampled-group-member pid=72041 start=Wed Sep 30 20:16:41 2026 readback=absent
+sampled-group-member pid=72060 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71996 start=Wed Sep 30 20:16:37 2026 readback=absent
+sampled-group-member pid=72070 start=unavailable readback=identity-missing
+sampled-group-member pid=72072 start=Wed Sep 30 20:16:46 2026 readback=absent
+sampled-group-member pid=72073 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71996 start=Wed Sep 30 20:16:37 2026 readback=absent
+sampled-group-member pid=72074 start=Wed Sep 30 20:16:46 2026 readback=absent
+sampled-group-member pid=72082 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71996 start=Wed Sep 30 20:16:37 2026 readback=absent
+sampled-group-member pid=72074 start=Wed Sep 30 20:16:46 2026 readback=absent
+sampled-group-member pid=72091 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71996 start=Wed Sep 30 20:16:37 2026 readback=absent
+sampled-group-member pid=72074 start=Wed Sep 30 20:16:46 2026 readback=absent
+sampled-group-member pid=72118 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71996 start=Wed Sep 30 20:16:37 2026 readback=absent
+sampled-group-member pid=72074 start=Wed Sep 30 20:16:46 2026 readback=absent
+sampled-group-member pid=72132 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71996 start=Wed Sep 30 20:16:37 2026 readback=absent
+sampled-group-member pid=72074 start=Wed Sep 30 20:16:46 2026 readback=absent
+sampled-group-member pid=72144 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71996 start=Wed Sep 30 20:16:37 2026 readback=absent
+sampled-group-member pid=72074 start=Wed Sep 30 20:16:46 2026 readback=absent
+sampled-group-member pid=72156 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71996 start=Wed Sep 30 20:16:37 2026 readback=absent
+sampled-group-member pid=72074 start=Wed Sep 30 20:16:46 2026 readback=absent
+sampled-group-member pid=72167 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71996 start=Wed Sep 30 20:16:37 2026 readback=absent
+sampled-group-member pid=72074 start=Wed Sep 30 20:16:46 2026 readback=absent
+sampled-group-member pid=72174 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71996 start=Wed Sep 30 20:16:37 2026 readback=absent
+sampled-group-member pid=72074 start=Wed Sep 30 20:16:46 2026 readback=absent
+sampled-group-member pid=72181 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71996 start=Wed Sep 30 20:16:37 2026 readback=absent
+sampled-group-member pid=72074 start=Wed Sep 30 20:16:46 2026 readback=absent
+sampled-group-member pid=72190 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71996 start=Wed Sep 30 20:16:37 2026 readback=absent
+sampled-group-member pid=72074 start=Wed Sep 30 20:16:46 2026 readback=absent
+sampled-group-member pid=72220 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71996 start=Wed Sep 30 20:16:37 2026 readback=absent
+sampled-group-member pid=72074 start=Wed Sep 30 20:16:46 2026 readback=absent
+sampled-group-member pid=72238 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71996 start=Wed Sep 30 20:16:37 2026 readback=absent
+sampled-group-member pid=72074 start=Wed Sep 30 20:16:46 2026 readback=absent
+sampled-group-member pid=72251 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71996 start=Wed Sep 30 20:16:37 2026 readback=absent
+sampled-group-member pid=72074 start=Wed Sep 30 20:16:46 2026 readback=absent
+sampled-group-member pid=72258 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71996 start=Wed Sep 30 20:16:37 2026 readback=absent
+sampled-group-member pid=72074 start=Wed Sep 30 20:16:46 2026 readback=absent
+sampled-group-member pid=72269 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71996 start=Wed Sep 30 20:16:37 2026 readback=absent
+sampled-group-member pid=72299 start=Wed Sep 30 20:17:12 2026 readback=absent
+sampled-group-member pid=72300 start=unavailable readback=identity-missing
+combined-only-i32-no-float pid=72311 start=Wed Sep 30 20:17:12 2026 readback=absent
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=72311 start=Wed Sep 30 20:17:12 2026 readback=absent
+sampled-group-member pid=72319 start=Wed Sep 30 20:17:12 2026 readback=absent
+sampled-group-member pid=72321 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=72311 start=Wed Sep 30 20:17:12 2026 readback=absent
+sampled-group-member pid=72319 start=Wed Sep 30 20:17:12 2026 readback=absent
+sampled-group-member pid=72330 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=72311 start=Wed Sep 30 20:17:12 2026 readback=absent
+sampled-group-member pid=72319 start=Wed Sep 30 20:17:12 2026 readback=absent
+sampled-group-member pid=72337 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=72311 start=Wed Sep 30 20:17:12 2026 readback=absent
+sampled-group-member pid=72352 start=Wed Sep 30 20:17:17 2026 readback=absent
+sampled-group-member pid=72353 start=unavailable readback=identity-missing
+combined-unchecked pid=72363 start=Wed Sep 30 20:17:17 2026 readback=absent
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=72363 start=Wed Sep 30 20:17:17 2026 readback=absent
+sampled-group-member pid=72370 start=Wed Sep 30 20:17:17 2026 readback=absent
+sampled-group-member pid=72377 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=72363 start=Wed Sep 30 20:17:17 2026 readback=absent
+sampled-group-member pid=72370 start=Wed Sep 30 20:17:17 2026 readback=absent
+sampled-group-member pid=72385 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=72363 start=Wed Sep 30 20:17:17 2026 readback=absent
+sampled-group-member pid=72370 start=Wed Sep 30 20:17:17 2026 readback=absent
+sampled-group-member pid=72396 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=72363 start=Wed Sep 30 20:17:17 2026 readback=absent
+sampled-group-member pid=72370 start=Wed Sep 30 20:17:17 2026 readback=absent
+sampled-group-member pid=72407 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+combined-no-index-sync-metadata pid=72429 start=Wed Sep 30 20:17:23 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=72426 start=unavailable readback=identity-missing
+sampled-group-member pid=72427 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=72429 start=Wed Sep 30 20:17:23 2026 readback=absent
+sampled-group-member pid=72443 start=Wed Sep 30 20:17:24 2026 readback=absent
+sampled-group-member pid=72445 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=72429 start=Wed Sep 30 20:17:23 2026 readback=absent
+sampled-group-member pid=72443 start=Wed Sep 30 20:17:24 2026 readback=absent
+sampled-group-member pid=72453 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=72429 start=Wed Sep 30 20:17:23 2026 readback=absent
+sampled-group-member pid=72443 start=Wed Sep 30 20:17:24 2026 readback=absent
+sampled-group-member pid=72462 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=72429 start=Wed Sep 30 20:17:23 2026 readback=absent
+sampled-group-member pid=72443 start=Wed Sep 30 20:17:24 2026 readback=absent
+sampled-group-member pid=72478 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=72429 start=unavailable readback=identity-missing
+sampled-group-member pid=72494 start=unavailable readback=identity-missing
+f32-full-row pid=72503 start=Wed Sep 30 20:17:30 2026 readback=absent
+sampled-group-member pid=72496 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=72503 start=Wed Sep 30 20:17:30 2026 readback=absent
+sampled-group-member pid=72513 start=Wed Sep 30 20:17:30 2026 readback=absent
+sampled-group-member pid=72515 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=72503 start=Wed Sep 30 20:17:30 2026 readback=absent
+sampled-group-member pid=72513 start=Wed Sep 30 20:17:30 2026 readback=absent
+sampled-group-member pid=72523 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=72503 start=Wed Sep 30 20:17:30 2026 readback=absent
+sampled-group-member pid=72513 start=Wed Sep 30 20:17:30 2026 readback=absent
+sampled-group-member pid=72530 start=unavailable readback=identity-missing
+sampled-group-member pid=71405 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=71407 start=Wed Sep 30 20:16:06 2026 readback=absent
+sampled-group-member pid=72503 start=Wed Sep 30 20:17:30 2026 readback=absent
+sampled-group-member pid=72513 start=unavailable readback=identity-missing
+sampled-group-member pid=72537 start=unavailable readback=identity-missing
+launcher pid=71380 start=Wed Sep 30 20:16:06 2026 readback=absent
+run_scoped pid=71400 start=Wed Sep 30 20:16:06 2026 readback=absent
+scoped_pgid=71405 remaining_members=[]

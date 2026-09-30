@@ -1,0 +1,7 @@
+source_revision=c2c76a1fac0ed48c5f7bae189c1eb0569ff7d756
+source_archive_sha256=559fde41f983b87ec2a23feeebc4a71637101e78072c19b15d80f20d01536b5d
+runtime=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-trx9e1hu
+scoped_supervisor_pid=71405
+scoped_process_group=71405
+invocation_start_utc=2026-09-30T18:16:06Z
+absolute_deadline_utc=2026-09-30T18:19:18Z
