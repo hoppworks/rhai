@@ -4,7 +4,9 @@ set -euo pipefail
 vm=rhai-win11-quality
 uuid=dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19
 root=/var/lib/libvirt/images/rhai-win11-quality
-backup="$root/baseline"
+name=${1:-baseline}
+case "$name" in baseline|ready-baseline) ;; *) exit 2 ;; esac
+backup="$root/$name"
 nvram=/var/lib/libvirt/qemu/nvram/rhai-win11-quality_VARS.qcow2
 tpm="/var/lib/libvirt/swtpm/$uuid"
 [[ "$(virsh -c qemu:///system domuuid "$vm")" == "$uuid" ]]

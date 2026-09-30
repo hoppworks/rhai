@@ -44,7 +44,10 @@ started. Maximum quality takes precedence over effort.
   permissive symlink handling, macOS configured-root aliases, and non-UTF-8 fixtures.
   Review source: /Users/hoppworks/projects/rhai-review-sys-windows;
   captured details: /Users/hoppworks/projects/rhai-review-sys-windows/.scratch.
-- Real Windows verification is outstanding; Wine is diagnostic evidence only.
+- Native Windows baseline now passes (45 tests); the filesystem write control
+  failed as intended and passed after restoration. See windows-vm/README.md and
+  native-baseline.log. Process/TCP and release-matrix proof remain outstanding.
+  Wine is diagnostic evidence only.
 - No new research tickets needed yet: prior source inventory and runtime diagnostics
   already answer reuse facts. Delegate research only when a decision exposes a gap.
 
@@ -77,17 +80,25 @@ Cause history:
   Safe mode enabled the built-in Administrator; its console sign-in succeeded
   without a password. net localgroup administrators rhaitest /add succeeded;
   independent group listing includes RhaiTest. Normal boot returned to RhaiTest;
-  Change product key now opens an empty key-entry dialog. Handed input to owner;
-  screenshots paused to keep their key out of evidence. UAC after key submission
-  has not yet been observed. Temporary rights must be removed
-  after activation and toolchain setup; preserve a usable administration path.
-  Activation, post-key UAC, restore drill and native tests remain unverified.
+  Change product key opened an empty key-entry dialog. Handed input to owner;
+  screenshots were paused to keep their key out of evidence. Temporary rights
+  were limited to activation and toolchain setup and have since been removed.
+  Owner completed activation. A fresh Settings read showed Active and a digital
+  license; PowerShell UAC Yes succeeded. MSVC/SDK and Rust 1.93.0 are installed.
+  Native sys_policy 21/21, sys_env 5/5 and sys_fs 19/19 passed. Independent file-read
+  expectation control failed with 101, exact source bytes were restored, and the
+  correct test passed with 0. No fixture/process leftovers. Temporary RhaiTest
+  admin membership was removed; cold-boot token reports Administrator=False.
+  Built-in Administrator stays disabled in normal mode; the previously proven
+  WinRE/safe-mode recovery path is retained. ready-baseline preserves disk/UEFI/TPM
+  after a clean shutdown; image checks and SHA256 read-back passed. Active VM
+  cold-booted and remains activated. Restore drill remains unverified.
   The former Path-length cause is closed.
 - DVD boot: after missed initial prompt, firmware boot-menu selections failed twice.
   See escalations/02-vm-dvd-boot.answer.md. The answer-justified reset timed out.
   Owner then explicitly authorized one additional attempt with automatic DVD
   acknowledgment. It succeeded: fresh Windows Setup, sustained ISO reads and
-  17% installation with disk writes. Boot access is proven; desktop is pending.
+  17% installation with disk writes. Boot access and the subsequent desktop are proven.
 
 No existing workloads were stopped, and no host tools were installed.
 Reuse ISO verification and unchanged host evidence. Details: windows-vm/README.md.
@@ -95,9 +106,18 @@ Reuse ISO verification and unchanged host evidence. Details: windows-vm/README.m
 ## Rules refresh
 
 On 2026-09-30 read global and project AGENTS.md plus current e2e-proof, wayfinder
-and rendered wayfinder-pack. Sources resolve to agent-skills d8dfb0b (clean).
+and rendered wayfinder-pack. The latest global instructions and changed e2e-proof
+were reread from their actual repo paths at clean agent-skills
+75d0ef5c7c78f0fd3371b4654b5866318c59df3d; wayfinder was unchanged.
 Reuse accepted unchanged evidence; retain cause attempt/escalation counts.
 Existing owner decisions and privacy constraint remain authoritative.
+Future temporary builds use the scoped runner and project output/cache flags.
+Windows guest lifecycle adaptation remains a release requirement before another
+native build. Retained guest build at C:\RhaiQuality\baseline-source-v2 belongs to
+this effort and preserves Cargo.lock, compiled baseline and control diagnostics;
+retain until replacement evidence is accepted or the owner ends this VM effort.
+The failed source copy C:\RhaiQuality\baseline-source is retained for diagnosis
+under the same ownership and cleanup boundary. No shared caches are cleanup targets.
 
 ## Current remote cleanup request
 
@@ -120,8 +140,22 @@ No private changes, remote history rewrite or upstream action is authorized.
 
 ## Next action
 
-Current step: finish and verify the owned Windows Pro VM installation.
-After that: claim issues/04-tcp-authority.md and settle TCP permissions.
+Current step: Windows VM/toolchain provisioning and the first native baseline are
+complete. Owner authorized resuming on 2026-09-30; no key was read or recorded.
+The owned VM is running with RhaiTest as a normal user and activation Active.
+MSVC/SDK and Rust 1.93.0 match the initial macOS comparison baseline; the release
+toolchain decision remains open. Native evidence is windows-vm/README.md and
+native-baseline.log. The first archive failed manifest parsing due to missing
+examples; one correction included them and used batch exit-file read-back, then
+all targets passed. Preserve the first guest execution copy. The original and
+ready backups remain intact; restore drill is not yet proven. Reuse accepted
+unchanged ISO, setup and recovery evidence without repeating those operations.
+
+Claimed issues/04-tcp-authority.md while toolchain installation runs; settle its
+host-authority decisions with the owner, without production implementation.
+Pending owner choice: initial TCP connect plus separately authorized listen/accept
+(recommended), or outgoing connections only. Do not resolve this HITL ticket
+without the answer. Remote cleanup gate/approval remains separate and unchanged.
 Ticket 06 must review process host-config spelling, error-report compatibility and
 managed-scope native platform release gates. Cancellation/reaping and scope-setup
 prototypes remain implementation gates, not completed evidence. Do not implement

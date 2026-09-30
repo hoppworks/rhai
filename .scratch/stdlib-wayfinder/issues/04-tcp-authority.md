@@ -2,7 +2,8 @@
 
 Type: grilling
 Label: wayfinder:grilling
-Status: open
+Status: in progress
+Assignee: current planning session
 Parent: [Plan a reliable Rhai host standard library](../map.md)
 Blocked by: none
 

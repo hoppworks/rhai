@@ -54,3 +54,20 @@ the authorized workhorse VM host. Do not push this work to the existing public
 hoppworks/rhai fork or any other remote until the owner changes this constraint.
 This overrides automatic push for the current effort. Preserve the existing
 remote history and visibility; do not rewrite or remove published commits.
+
+## Resource lifecycle
+
+For future POSIX builds and verification, use
+`/Users/hoppworks/projects/agent-skills/tools/run_scoped.py -- <command>`.
+Set `CARGO_TARGET_DIR="$AGENT_RUNTIME_DIR/target"` and
+`CARGO_HOME="$AGENT_RUNTIME_DIR/cargo-home"` inside that command. The runner sets
+temporary-directory variables. Build from an owned source copy inside the runtime,
+including the changes under test, so Cargo.lock and build.rs-generated source files
+also stay scoped. Keep related compilation, tests and assertion controls in one
+invocation, and export accepted evidence and needed diagnostics before it exits.
+
+The POSIX runner does not supervise Windows guest descendants through SSH.
+Before another native Windows build, supply equivalent guest process-tree ownership,
+bounded execution, output/cache isolation and cleanup on failure or interruption;
+the release ticket tracks this requirement. Reuse the accepted native baseline
+while its relevant source, assertions and environment remain unchanged.
