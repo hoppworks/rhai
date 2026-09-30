@@ -23,7 +23,7 @@ TARGET = RUNTIME / 'target'
 SAMPLE_LOG = EVIDENCE / 'storage-samples.tsv'
 HARD_KIB = 2 * 1024 * 1024
 PREEMPT_KIB = 1536 * 1024
-DEADLINE_UTC = datetime(2026, 9, 30, 18, 5, 14, tzinfo=timezone.utc).timestamp()
+DEADLINE_UTC = datetime(2026, 9, 30, 19, 2, 48, tzinfo=timezone.utc).timestamp()
 MAX_FIXTURE_PROCESSES = 16
 TARGETS = ['sys_env', 'sys_fs', 'sys_policy']
 FEATURE_ROWS = [
@@ -148,7 +148,7 @@ def sampler():
             if size >= HARD_KIB:
                 custody_stop(f'sampled private runtime size {size} KiB reached 2 GiB hard ceiling', 90)
             if time.time() >= DEADLINE_UTC:
-                custody_stop('fixed 2026-09-30 18:05:14 UTC execution deadline reached', 88)
+                custody_stop('fixed 2026-09-30 19:02:48 UTC execution deadline reached', 88)
 
 
 active_process = [None]
@@ -157,7 +157,7 @@ sampler_thread = threading.Thread(target=sampler, name='runtime-storage-sampler'
 
 def run(label, command, env=None, expected=None, control=False):
     if time.monotonic() >= deadline or time.time() >= DEADLINE_UTC:
-        raise TimeoutError('fixed 2026-09-30 18:05:14 UTC execution deadline reached')
+        raise TimeoutError('fixed 2026-09-30 19:02:48 UTC execution deadline reached')
     if not sampler_thread.is_alive():
         sampler_thread.start()
     log = EVIDENCE / f'{label}.log'
@@ -176,7 +176,7 @@ def run(label, command, env=None, expected=None, control=False):
                 stream.write(line)
                 if time.monotonic() >= deadline or time.time() >= DEADLINE_UTC:
                     proc.terminate()
-                    raise TimeoutError('fixed 2026-09-30 18:05:14 UTC execution deadline reached during command')
+                    raise TimeoutError('fixed 2026-09-30 19:02:48 UTC execution deadline reached during command')
             status = proc.wait()
         finally:
             active_process[0] = None
@@ -195,11 +195,15 @@ def run(label, command, env=None, expected=None, control=False):
         raise RuntimeError(f'{label}: expected exit {expected}, got {status}')
     if control:
         text = log.read_text(errors='replace')
-        if 'running 1 test' not in text or 'test result: FAILED' not in text:
+        failed_one_test = re.search(r'^test result: FAILED\.\s+0 passed;\s+1 failed;', text, re.MULTILINE)
+        if 'running 1 test' not in text or failed_one_test is None:
             raise RuntimeError('wrong-expectation control did not execute and fail the targeted test assertion')
         if 'left: "abc"' not in text or 'right: "wrong expectation"' not in text:
             raise RuntimeError('wrong-expectation control lacked the expected assertion values')
-        if f"thread '{CONTROL}' panicked" not in text:
+        exact_test_panic = re.search(
+            rf"^thread '{re.escape(CONTROL)}'(?: \(\d+\))? panicked at ", text, re.MULTILINE
+        )
+        if exact_test_panic is None:
             raise RuntimeError('wrong-expectation control did not panic in the exact file-read test')
     if label == 'restored-targeted-test':
         text = log.read_text(errors='replace')
@@ -221,7 +225,7 @@ try:
     CARGO_HOME.mkdir()
     SOURCE.mkdir()
     if time.time() >= DEADLINE_UTC:
-        raise TimeoutError('fixed 2026-09-30 18:05:14 UTC execution deadline reached before extraction')
+        raise TimeoutError('fixed 2026-09-30 19:02:48 UTC execution deadline reached before extraction')
     subprocess.run(['tar', '-xf', str(archive_path), '-C', str(SOURCE)], check=True,
                    timeout=max(1, DEADLINE_UTC-time.time()))
     workspace = (SOURCE / 'Cargo.toml').read_text()
@@ -253,7 +257,7 @@ try:
     emit(f'ARCHIVE_IDENTITY {archive_path} sha256={ARCHIVE_SHA256}')
     emit(f'NATIVE_TARGET {subprocess.check_output(["uname", "-sm"], text=True).strip()}')
     emit(f'HOST_KERNEL {subprocess.check_output(["uname", "-a"], text=True).strip()}')
-    emit(f'PROOF_LIMITS absolute_deadline_utc=2026-09-30T18:05:14Z remaining_seconds={max(0, int(DEADLINE_UTC-time.time()))} two_cargo_jobs debug=0 incremental=0 storage_preempt_kib={PREEMPT_KIB} storage_hard_kib={HARD_KIB} owned_descendants<={MAX_FIXTURE_PROCESSES}')
+    emit(f'PROOF_LIMITS absolute_deadline_utc=2026-09-30T19:02:48Z remaining_seconds={max(0, int(DEADLINE_UTC-time.time()))} two_cargo_jobs debug=0 incremental=0 storage_preempt_kib={PREEMPT_KIB} storage_hard_kib={HARD_KIB} owned_descendants<={MAX_FIXTURE_PROCESSES}')
     emit(f'INITIAL_PRIVATE_STORAGE {runtime_kib()} KiB')
     rustc = shutil.which('rustc')
     cargo = shutil.which('cargo')
