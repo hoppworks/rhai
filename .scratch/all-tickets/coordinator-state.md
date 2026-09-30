@@ -8,7 +8,7 @@ Complete the private sys/TCP backlog inherited from task/stdlib-net-assessment.
 
 All accepted sys/process/file-handle and TCP contracts are implemented, documented,
 committed and proven under the strict project profile. Open owner decisions must
-be resolved before their dependent implementation. No remote publication.
+be resolved before their dependent implementation. Session-authorized push to the existing fork; no remote merge.
 
 ## Steps
 
@@ -68,13 +68,13 @@ briefs/process-prototype-continuation.md and retained correction-attempt.md.
 Phase4 file documentation/example accepted atb9225862; see file-handle-docs-review.md.
 Real sys/sys,no_index example and deliberate wrong host payload proven, exact
 runtime absent. Proof moved to ../file-handle-docs/ after verified push; owned
-clean task/file-handle-docs checkout can now be retired, branch/history retained.
+clean task/file-handle-docs checkout was retired without force, branch/history retained.
 
 Windows8f75da53 source slice remains isolated and stopped; native/bootstrap gate
 closed, no native launches. Accepted source reviews retain exact references under
 Evidence and cause history. No workload or credentials may bypass prerequisites.
 Remote fork push authorized in this Session; task/all-tickets last verified remote
-90c40989, subsequent8a030fa9 push succeeded and awaits exact remote readback.
+db590e5132ead0a0d7236d611bb985969fbea08a, independently read back on origin.
 All future author/committer names exactly lowercase hoppworks, configured email.
 
 ## Decisions
@@ -145,8 +145,7 @@ Inherited VM history remains authoritative.
 
 ## Next action
 
-Collect TCP read RED/source and file documentation/example proof; independently
-review before integration. Review completed process supervision changes against
+Collect TCP read final source/proof; independently review before integration. Documentation/example requirement is accepted and its owned checkout retired. Review completed process supervision changes against
 sole Expert01 and gate all execution on safe bounded custody/readback. Preserve
 native Windows stop. Push the Session's accepted integrated commits to authorized
 fork branch, verify exact remote ref, never remote merge. Rewrite active state
@@ -390,3 +389,15 @@ configured email and shared settings; use command-local Git name override.
 Phase4 documentation/example b9225862 accepted after two selected files plus
 manual prose review; real sys/no_index run, wrong host payload and exact runtime
 absence independently assessed. Source proof reused for docs-only corrections.
+
+## Process source review at 13:38 UTC
+
+Immutable3fb742a3 remains unaccepted. Full adapter source read before execution:
+timeout stall cannot reach io_live while writer waits on first1MiB; assertion
+worker activity proof can race stop; required runner TERM control is absent;
+controller must verify quiescent receipt on normal success before removal. Native
+Python3.9.6 has no os.waitid (read-only capability check), so current adapter cannot
+launch safely. Responsible task correcting source inside original14:18:05 deadline;
+no build, fixture, signaling or runtime launch authorized. Historical Rust main
+contains rejected fixture behavior and must never be invoked; only reviewed
+--fixture modes may execute after source approval.
