@@ -38,10 +38,11 @@ Per-target raw logs are `evidence/fixture-<target>.log`. These use the existing 
 
 ## Resource custody and cleanup
 
-- `run_scoped.py` created private runtime `/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-cnn6m89c`; source, target artifacts, Rustup toolchain, Cargo registry and temporary files all lived below it. The wrapper owns and removes the entire process group and runtime on completion.
+- `run_scoped.py` created private runtime `/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-cnn6m89c`; source, target artifacts, Rustup toolchain, Cargo registry and temporary files all lived below it. The runner's source supervises its child process group, but this proof did not export driver/child PID identities or independently read back per-process absence.
 - Private runtime storage was sampled once per second with `du -sk`. The maximum sample was 802,248 KiB (about 783 MiB), below the 1,572,864 KiB preemptive threshold and 2,097,152 KiB hard ceiling. Samples are retained in `evidence/storage-samples.tsv`; this is sampled usage, not a continuous true peak.
 - Descendants of the driver were counted from `ps` PID/PPID ancestry once per second. Maximum observed was 10, below the cap of 16; samples are in `evidence/process-samples.tsv`.
-- Post-run cleanup readback: `test -e /var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-cnn6m89c` returned 1 (absent). Thus no scoped Rust installation, Cargo cache, build tree or runtime remains.
+- Post-run cleanup readback: `test -e /var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-cnn6m89c` returned 1 (absent), independently confirmed by the coordinator. This confirms the scoped runtime is gone; it does not establish per-process absence.
+- Execution session `49503` expired before a separately retrievable wrapper terminal exit code was available. The driver's success-only `ACCEPTED` marker was observed and each raw harness outcome was checked, but the wrapper's final status remains unverified.
 
 ## Conclusion and limits
 
