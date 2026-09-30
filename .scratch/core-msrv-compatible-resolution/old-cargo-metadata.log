@@ -1,0 +1,11 @@
+error: failed to select a version for `js-sys`.
+    ... required by package `web-time v1.1.0`
+    ... which satisfies dependency `web-time = "^1.1.0"` (locked to 1.1.0) of package `rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-cdmjphqd/source)`
+    ... which satisfies path dependency `oldrhai` (locked to 1.26.1) of package `custom_root v0.1.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-cdmjphqd/source/codegen/tests/custom_root)`
+versions that meet the requirements `^0.3.20` (locked to 0.3.106) are: 0.3.106
+
+the package `web-time` depends on `js-sys`, with features: `futures-util` but `js-sys` does not have these features.
+ It has an optional dependency with that name, but that dependency uses the "dep:" syntax in the features table, so it does not have an implicit feature with that name.
+
+
+failed to select a version for `js-sys` which could resolve this conflict

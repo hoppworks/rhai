@@ -1,0 +1,5 @@
+error: the argument '--recursive' cannot be used with '--precise <PRECISE>'
+
+Usage: cargo update --offline --recursive [SPEC]...
+
+For more information, try '--help'.
