@@ -42,22 +42,26 @@ be resolved before their dependent implementation. No remote publication.
 ## Current step
 
 
-Owner decisions are resolved at e45c675c. Active responsible tasks:
-`process_prototype` in the owned process worktree (12:06:47 UTC start, same
-30-active-minute source/review package), `tcp_connect` in task/tcp-connect,
-and `file_handles` in task/file-handles. TCP public API compile RED reached
-E0583 missing net module; first wrapper status was unreliable and is not acceptance.
-Independent early source review required a real wrong-peer assertion control,
-bounded fixtures, exact endpoint mismatch denial, package-wide quota/drop release,
-and corrected Shared/registration setup. Draft net source exists; no acceptance yet.
-File open/write/cursor TDD is starting under its recorded brief.
+Owner decisions are resolved at e45c675c. TCP outgoing-connect foundation is
+accepted and locally integrated at 1a6660ac (candidate a89cb9b3, final-drop
+correction e139ecf4); see tcp-connect-review.md and ../tcp-connect/proof.md.
+Real net/net,sync Engine and peer checks pass 4/4 each; wrong EOF control fails.
+Exact accepted runtime absence independently confirmed. Resource measurement and
+explicit runner-timeout omissions are disclosed, not inferred as compliant.
+No full net/release acceptance. Next independent slice: authorized listener/accept,
+briefs/tcp-listener.md, fresh 60-active-minute package with explicit timeout/storage.
 
-POSIX client source remains incomplete and cannot execute: broker, exact owned
-children/live I/O and interruption/readback gates remain. Early review corrected
-unbounded/partial protocol operations. Apple's current XNU uipc_proto.c table lists
-SOCK_STREAM and SOCK_DGRAM, not SOCK_SEQPACKET; this source diagnosis was sent for
-supported transport correction before any launch. No failed implementation check
-or new Expert escalation is implied by these informative draft findings.
+File handle source is in task/file-handles. Sole fresh Expert source review at
+/Users/hoppworks/projects/rhai-file-handles/.scratch/file-handles/escalations/01-file-open-api.answer.md
+accepts confined-open conversion and registration; two deterministic fixture
+expectations require correction before already planned verification. Original
+60-minute allocation and compiler-diagnostic history remain. No feature acceptance.
+
+POSIX source-only candidate 1366e2b3 is isolated. Original source/review allowance
+started 12:06:47 UTC, 30 active minutes; no executions. Client ancillary-FD handling,
+ready identity, owned children and cleanup were improved. Outer timeout killing
+the sole custodian can still strand its children; source gate stays closed until
+that exceptional path is resolved. Same sole Expert/cause history applies.
 
 Actual monitor intake `dd8c07dc` and related stopped-state fixture `24c3a19f`
 are independently source-reviewed (six files plus one correction, zero skips).
