@@ -30,8 +30,10 @@ be resolved before their dependent implementation. No remote publication.
 
 Step 1; filesystem source and all three Rust diffs independently reviewed.
 Its full-suite log cannot distinguish a skipped invalid-UTF8 fixture; coverage
-correction and focused unrestricted symlink/parent and alias-routing cases are
-running in the responsible context. No full filesystem-ticket acceptance yet.
+correction and focused unrestricted symlink/parent and alias-routing cases passed
+in adc9966f. Invalid-UTF8 fixture is explicitly unsupported on this macOS filesystem.
+Final platform-specific errno guard correction pending; combined integration run next.
+No cross-platform filesystem-ticket acceptance yet.
 Environment isolation 8fa26974: all three Rust files reviewed, targeted real-OS
 assertions and wrong-expectation control accepted for macOS; proof persistence
 completed in 2221517f and locally integrated into task/all-tickets.
@@ -59,6 +61,10 @@ findings; the single correction attempt is now running in its owned worktree.
 - Builds must use agent-skills/tools/run_scoped.py and AGENTS.md output isolation.
 - Windows requires proven guest process-tree cleanup before another native build.
 
+Windows scoped-runner task is active in a fresh Standard context, brief at
+briefs/windows-scoped-runner.md. Inspect current guest state, preserve baselines,
+prove adapter cleanup before any new Rust/package build. No prior adapter failures.
+
 ## Cause attempts and escalations
 
 Prototype-proof cause: initial report conflicts with the actual fixture's I/O ordering
@@ -77,3 +83,10 @@ branches locally into task/all-tickets and run one scoped combined sys suite.
 Collect and independently review the corrected process prototype.
 TCP authority question remains pending; release/API proposals remain unaccepted.
 Linear is legacy and excluded, with no writes performed there.
+
+## Goal turn classification
+
+Previous turn made progress: accepted env fixture branch integrated locally,
+Expert answer persisted, filesystem evidence overclaim found and corrected, and
+prototype single correction dispatched. Current turn continues those requirements
+and prepares the independent native Windows ownership gate.
