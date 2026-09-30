@@ -55,9 +55,11 @@ POSIX process prototype 35a8cf52 proof is not accepted. Correction disposition
 executed. The owner explicitly authorized one further bounded attempt after consultation.
 Design 2a3996cd was independently rejected: whole-runner interruption, setup,
 wait and worker bounds incomplete. Review answer is at
-briefs/process-retry-design-review.answer.md. Responsible context is amending
-the design using a project-local custodian/runtime-ownership adapter; no fixture
-execution or implementation before gate review. No global runner/home changes.
+briefs/process-retry-design-review.answer.md. Amendment 937da3c1 supplies direct
+custodian ownership, polling and separate runtime, but explicitly leaves actual
+shared-runner death cleanup unproven. Owner was asked once about a project-local
+runner copy versus deferring the process branch. Stop dependent work until reply.
+No fixture or implementation ran; no global runner/home changes.
 
 ## Decisions
 
@@ -121,7 +123,8 @@ Inherited VM history remains authoritative.
 
 ## Next action
 
-Collect amended process supervision design and review its gates. Corrected
+Process amendment collected and its remaining boundary recorded; await owner
+answer before dependent implementation. Corrected
 macOS combined proof is accepted at 5f87d339; do not rerun unchanged source.
 Keep Windows static candidate separate until independent guest cleanup is solved.
 Collect and independently review the process supervision design before the single
@@ -135,6 +138,7 @@ Linear is legacy and excluded, with no writes performed there.
 | --- | --- | --- |
 | Connect only or connect plus separately authorized listeners? | TCP tickets 04/05 implementation | Owner answers the existing scope question, then concrete lifecycle contract is reviewed. |
 | Accept proposed platform/MSRV, additive process report, negative-read rejection and unchecked resource limits? | Ticket 06 and dependent public process/file-handle APIs | Owner answers the existing release/API question. |
+| Authorize project-local scoped-runner copy with explicit supervision/runtime custody, or defer process prototype? | Actual whole-runner interruption proof under the prescribed runner workflow | Owner answers the existing runner-copy question; then implementation/source gates may proceed. |
 
 Dependent implementation is stopped. Continue only independent authorized
 requirements with new evidence; do not repeat decision/status/verification rounds.
@@ -145,4 +149,5 @@ Current turn made progress: corrected unrestricted paths and guarded regression
 integrated at 5f87d339; full native macOS proof accepted and affected Linux checks
 accepted (fs25/policy24). Windows static review defects corrected but native gates open.
 Owner-authorized process retry design reviewed and rejected before execution;
-responsible context is applying the reviewed custodian amendment.
+custodian amendment 937da3c1 retains an explicit runner boundary. Open owner
+decisions now stop dependent work. No owned build/fixture processes remain.
