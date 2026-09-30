@@ -41,18 +41,16 @@ be resolved before their dependent implementation. No remote publication.
 
 ## Current step
 
-Windows candidate is now 0999a552 on task/windows-scoped-runner, including
-74138c71 monitor/client launch and bounded lease protocol source. All five source,
-fixture and documentation files were reviewed; related findings corrected in
-the responsible context. See windows-monitor-lease-review.md. Only whitespace
-checking ran; compiler, fixtures, native/guest behavior remain unverified.
-Unsafe workload entry is disabled and candidate remains separate. Next independent
-source requirement is handle-based runtime/staging and durable journal, delegated
-to the responsible context under briefs/windows-runtime-backend.md from 0999a552.
-Immutable specification and actual payload integration with two host responses
-follow that source substep. Review also identified that IssueChallenge currently
-excludes Running, so future running workloads cannot renew the lease; correction
-was requested in the responsible context with meaningful fixture source.
+Windows candidate is now 967500f3 on task/windows-scoped-runner. Foundation
+4bf0e3a5 adds ancestor pins, identities and exclusive protected journal creation;
+967500f3 corrects input bounds and incomplete fixture framing. Three files were
+independently reviewed, zero skipped; related corrections retained in
+windows-runtime-backend-review.md. Only whitespace checking ran, no compiler,
+fixture or native/guest run. Candidate is clean, separate and workload entry
+disabled. Next independent source requirement is exclusive runtime allocation,
+verified ACL/identity and ordered allocation journal integration, then safe
+staging/deletion and immutable specification/payload integration. Running lease
+renewal remains unsupported and explicitly required before payload integration.
 
 Step 1 corrected unrestricted resolution is integrated at 5f87d339 and accepted
 on native macOS: env7/fs24/policy26 pass, exact runtime absent. Red/green
@@ -136,6 +134,14 @@ Inherited VM history remains authoritative.
 
 ## Next action
 
+Continue the responsible Windows candidate context from 967500f3. Implement
+exclusive runtime allocation with protected verified ACL, pinned identity and
+flushed intent-before-allocation/identity-after-allocation records. Keep staging,
+deletion and payload entry disabled until their own source requirements are met.
+Use windows-runtime-backend-review.md for retained review findings and boundaries.
+Correct Running lease renewal before payload integration. No native execution
+until the unchanged bootstrap/guest-custody gates pass.
+
 Windows custody Expert answer 02-windows-runtime-custody.answer.md is retained.
 It recommends a separate sole-owner monitor, creation-time job-list assignment,
 host round-trip lease, bounded state machine and handle-based runtime custody.
@@ -179,6 +185,16 @@ Dependent implementation is stopped. Continue only independent authorized
 requirements with new evidence; do not repeat decision/status/verification rounds.
 
 ## Goal turn classification
+
+2026-09-30 latest continuation: progress. Backend foundation source changed in
+4bf0e3a5/967500f3, all three files independently reviewed and related issues
+corrected in the responsible context. Current source requirement advanced from
+root/journal primitives to exclusive runtime allocation and ordered custody
+journal. No ticket acceptance, compiler/native execution or temporary resource
+occurred. Existing full-custody correction remains incomplete, with no completed
+failed full-custody attempt or infrastructure recovery. Open owner decisions
+still stop their dependent branches. Goal remains active and incomplete; safe
+independent source work remains, so this is not an impasse or a blocked turn.
 
 2026-09-30 continuation: progress, not a verified wait or no-progress turn.
 Authoritative Windows source changed in 74138c71/0999a552; source review changed
