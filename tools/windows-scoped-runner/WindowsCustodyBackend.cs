@@ -23,6 +23,7 @@ internal static class WindowsCustodyBackend
     private const int MaximumJournalBytes = MaximumRecords * (MaximumRecordBytes + 15);
     private const int MaximumPathLength = 248;
     private const uint FILE_READ_ATTRIBUTES = 0x0080;
+    private const uint FILE_LIST_DIRECTORY = 0x00000001;
     private const uint DELETE_ACCESS = 0x00010000;
     private const uint READ_CONTROL = 0x00020000;
     private const uint GENERIC_WRITE = 0x40000000;
@@ -36,6 +37,7 @@ internal static class WindowsCustodyBackend
     private const uint FILE_FLAG_BACKUP_SEMANTICS = 0x02000000;
     private const uint FILE_FLAG_OPEN_REPARSE_POINT = 0x00200000;
     private const uint FILE_ATTRIBUTE_DIRECTORY = 0x10;
+    private const uint FILE_ATTRIBUTE_READONLY = 0x1;
     private const uint FILE_ATTRIBUTE_REPARSE_POINT = 0x400;
     private const uint FILE_FLAG_SEQUENTIAL_SCAN = 0x08000000;
     private const uint FILE_FLAG_OVERLAPPED = 0x40000000;
@@ -47,6 +49,15 @@ internal static class WindowsCustodyBackend
     private const uint FILE_BEGIN = 0;
     private const int FileStandardInfoClass = 1;
     private const int FileBasicInfoClass = 0;
+    private const int FileDispositionInfoClass = 4;
+    private const int FileIdBothDirectoryInfoClass = 10;
+    private const int FileIdBothDirectoryRestartInfoClass = 11;
+    private const int ERROR_NO_MORE_FILES = 18;
+    private const int DirectoryQueryBufferBytes = 65536;
+    private const int FileIdBothHeaderBytes = 104;
+    private const int FileIdBothFileNameLengthOffset = 60;
+    private const int FileIdBothAttributesOffset = 56;
+    private const int FileIdBothIdOffset = 96;
     private const int TransferBufferBytes = 65536;
 
     [StructLayout(LayoutKind.Sequential)] private struct FileAttributeTagInfo { internal uint Attributes, ReparseTag; }
@@ -54,6 +65,12 @@ internal static class WindowsCustodyBackend
     [StructLayout(LayoutKind.Sequential)] private struct SecurityAttributes { internal int Length; internal IntPtr SecurityDescriptor; internal int InheritHandle; }
     [StructLayout(LayoutKind.Sequential)] private struct FileStandardInfo { internal long AllocationSize, EndOfFile; internal uint NumberOfLinks; [MarshalAs(UnmanagedType.U1)] internal bool DeletePending; [MarshalAs(UnmanagedType.U1)] internal bool Directory; }
     [StructLayout(LayoutKind.Sequential)] private struct FileBasicInfo { internal long CreationTime, LastAccessTime, LastWriteTime, ChangeTime; internal uint Attributes; }
+    [StructLayout(LayoutKind.Sequential)] private struct FileDispositionInfo { [MarshalAs(UnmanagedType.U1)] internal bool DeleteFile; }
+    private sealed class DirectoryEntrySnapshot
+    {
+        internal readonly string Name; internal readonly ulong FileIdLow; internal readonly uint Attributes;
+        internal DirectoryEntrySnapshot(string name, ulong id, uint attributes) { Name = name; FileIdLow = id; Attributes = attributes; }
+    }
 
     [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
     private static extern SafeFileHandle CreateFileW(string name, uint access, uint share, ref SecurityAttributes security,
@@ -75,6 +92,10 @@ internal static class WindowsCustodyBackend
     private static extern bool GetFileInformationByHandleEx(SafeFileHandle file, int infoClass, out FileAttributeTagInfo info, uint size);
     [DllImport("kernel32.dll", SetLastError = true)]
     private static extern bool GetFileInformationByHandleEx(SafeFileHandle file, int infoClass, out FileIdInfo info, uint size);
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern bool GetFileInformationByHandleEx(SafeFileHandle file, int infoClass, IntPtr buffer, uint size);
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern bool SetFileInformationByHandle(SafeFileHandle file, int infoClass, ref FileDispositionInfo info, uint size);
     [DllImport("kernel32.dll", SetLastError = true)]
     private static extern bool WriteFile(SafeFileHandle file, IntPtr buffer, uint bytesToWrite, out uint bytesWritten, IntPtr overlapped);
     [DllImport("kernel32.dll", SetLastError = true)] private static extern bool FlushFileBuffers(SafeFileHandle file);
@@ -147,6 +168,9 @@ internal static class WindowsCustodyBackend
         private readonly SafeFileHandle handle;
         private int records;
         private bool disposed, failed;
+#if SCOPED_RUNNER_TESTING
+        private bool failNextAppend;
+#endif
         internal readonly string Path;
         internal readonly FileIdentity Identity;
         internal bool IsFaulted { get { return failed; } }
@@ -160,6 +184,9 @@ internal static class WindowsCustodyBackend
         internal bool TryAppend(string record)
         {
             if (disposed || failed || records >= MaximumRecords || record == null || record.Length > MaximumRecordBytes) return false;
+#if SCOPED_RUNNER_TESTING
+            if (failNextAppend) { failNextAppend = false; failed = true; return false; }
+#endif
             for (int i = 0; i < record.Length; i++) if (record[i] < 0x20 || record[i] > 0x7e) return false;
             byte[] body = Encoding.ASCII.GetBytes(record);
             if (body.Length == 0 || body.Length > MaximumRecordBytes) return false;
@@ -174,6 +201,10 @@ internal static class WindowsCustodyBackend
             records++;
             return true;
         }
+
+#if SCOPED_RUNNER_TESTING
+        internal void FailNextAppendForFixture() { if (disposed || failed) throw new InvalidOperationException("journal is not appendable"); failNextAppend = true; }
+#endif
 
         public void Dispose()
         {
@@ -223,15 +254,15 @@ internal static class WindowsCustodyBackend
         try
         {
             string current = drive;
-            handles.Add(OpenDirectory(current));
             string[] components = full.Substring(3).Split(new[] { '\\' }, StringSplitOptions.RemoveEmptyEntries);
+            handles.Add(OpenDirectory(current, false, components.Length == 0));
             for (int i = 0; i < components.Length; i++)
             {
                 if (components[i] == "." || components[i] == ".." || components[i].IndexOfAny(new[] { ':', '\0' }) >= 0 ||
                     components[i].EndsWith(".", StringComparison.Ordinal) || components[i].EndsWith(" ", StringComparison.Ordinal))
                     throw new IOException("custody path contains an unsupported component");
                 current = System.IO.Path.Combine(current, components[i]);
-                handles.Add(OpenDirectory(current));
+                handles.Add(OpenDirectory(current, false, i == components.Length - 1));
             }
             return new PinnedDirectory(full.Length == 3 ? full : full.TrimEnd('\\'), handles);
         }
@@ -247,9 +278,10 @@ internal static class WindowsCustodyBackend
         return (value >= 'A' && value <= 'Z') || (value >= 'a' && value <= 'z');
     }
 
-    private static SafeFileHandle OpenDirectory(string path, bool includeDeleteAccess = false)
+    private static SafeFileHandle OpenDirectory(string path, bool includeDeleteAccess = false, bool includeListAccess = true)
     {
-        uint access = FILE_READ_ATTRIBUTES | READ_CONTROL | (includeDeleteAccess ? DELETE_ACCESS : 0);
+        uint access = FILE_READ_ATTRIBUTES | READ_CONTROL | (includeDeleteAccess ? DELETE_ACCESS : 0) |
+            (includeListAccess ? FILE_LIST_DIRECTORY : 0);
         SafeFileHandle handle = CreateFileW(path, access,
             FILE_SHARE_READ | FILE_SHARE_WRITE, IntPtr.Zero, OPEN_EXISTING,
             FILE_FLAG_BACKUP_SEMANTICS | FILE_FLAG_OPEN_REPARSE_POINT, IntPtr.Zero);
@@ -277,8 +309,116 @@ internal static class WindowsCustodyBackend
         return new FileIdentity(info.VolumeSerialNumber, new Guid(bytes));
     }
 
+    // FILE_ID_BOTH_DIR_INFO is a variable-length native record. The offsets
+    // below follow its documented x64/Windows layout; every field and offset
+    // is checked against the fixed buffer before it is read.
+    private static List<DirectoryEntrySnapshot> ReadDirectoryEntries(SafeFileHandle directory, string path,
+        int entryLimit, ref int observed, bool countTowardLimit = true)
+    {
+        if (IntPtr.Size != 8) throw new IOException("runtime disposition requires the reviewed 64-bit Windows record layout");
+        var result = new List<DirectoryEntrySnapshot>();
+        IntPtr buffer = Marshal.AllocHGlobal(DirectoryQueryBufferBytes);
+        try
+        {
+            bool first = true;
+            while (true)
+            {
+                int infoClass = first ? FileIdBothDirectoryRestartInfoClass : FileIdBothDirectoryInfoClass;
+                first = false;
+                if (!GetFileInformationByHandleEx(directory, infoClass, buffer, DirectoryQueryBufferBytes))
+                {
+                    int error = Marshal.GetLastWin32Error();
+                    if (error == ERROR_NO_MORE_FILES) break;
+                    throw new IOException("pinned directory enumeration failed: " + path,
+                        new System.ComponentModel.Win32Exception(error));
+                }
+
+                int offset = 0;
+                while (true)
+                {
+                    if (offset < 0 || offset > DirectoryQueryBufferBytes - FileIdBothHeaderBytes)
+                        throw new IOException("directory enumeration returned a truncated native record: " + path);
+                    uint next = unchecked((uint)Marshal.ReadInt32(buffer, offset));
+                    uint attrs = unchecked((uint)Marshal.ReadInt32(buffer, offset + FileIdBothAttributesOffset));
+                    int nameBytes = Marshal.ReadInt32(buffer, offset + FileIdBothFileNameLengthOffset);
+                    if (nameBytes < 0 || (nameBytes & 1) != 0 || nameBytes > 510 ||
+                        nameBytes > DirectoryQueryBufferBytes - offset - FileIdBothHeaderBytes)
+                        throw new IOException("directory enumeration returned an invalid filename length: " + path);
+                    ulong fileId = unchecked((ulong)Marshal.ReadInt64(buffer, offset + FileIdBothIdOffset));
+                    string name = Marshal.PtrToStringUni(IntPtr.Add(buffer, offset + FileIdBothHeaderBytes), nameBytes / 2);
+                    if (String.IsNullOrEmpty(name) || name == "." || name == "..")
+                        throw new IOException("directory enumeration returned an unsupported entry name: " + path);
+                    ValidateSourceComponent(name);
+                    result.Add(new DirectoryEntrySnapshot(name, fileId, attrs));
+                    if (result.Count > entryLimit)
+                        throw new IOException(entryLimit == MaximumInventoryEntries
+                            ? "runtime inventory exceeds the fixed entry bound: " + path
+                            : "runtime inventory exceeds the fixture limit: " + path);
+                    if (countTowardLimit)
+                    {
+                        observed++;
+                        if (observed > entryLimit)
+                            throw new IOException(entryLimit == MaximumInventoryEntries
+                                ? "runtime inventory exceeds the fixed entry bound: " + path
+                                : "runtime inventory exceeds the fixture limit: " + path);
+                    }
+                    if (next == 0) break;
+                    uint minimumNext = (uint)((FileIdBothHeaderBytes + nameBytes + 7) & ~7);
+                    if ((next & 7) != 0 || next < minimumNext ||
+                        next > DirectoryQueryBufferBytes - offset - FileIdBothHeaderBytes)
+                        throw new IOException("directory enumeration returned an invalid next-record offset: " + path);
+                    offset = checked(offset + (int)next);
+                }
+            }
+            return result;
+        }
+        finally { Marshal.FreeHGlobal(buffer); }
+    }
+
+    private static ulong FileIdentityLow64(FileIdentity identity)
+    {
+        return BitConverter.ToUInt64(identity.FileId.ToByteArray(), 0);
+    }
+
+    private static SafeFileHandle OpenDispositionEntry(string path)
+    {
+        SafeFileHandle handle = CreateFileW(path, DELETE_ACCESS | READ_CONTROL | FILE_READ_ATTRIBUTES | GENERIC_READ,
+            FILE_SHARE_READ | FILE_SHARE_WRITE, IntPtr.Zero, OPEN_EXISTING,
+            FILE_FLAG_BACKUP_SEMANTICS | FILE_FLAG_OPEN_REPARSE_POINT, IntPtr.Zero);
+        if (handle == null || handle.IsInvalid)
+            throw new IOException("CreateFileW(open no-follow runtime entry) failed: " + path,
+                new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error()));
+        return handle;
+    }
+
+    private static void MarkForDisposition(SafeFileHandle handle, string description)
+    {
+        // FILE_DISPOSITION_INFO.DeleteFile is a native one-byte BOOLEAN.
+        // Information class 4 requires DELETE access and takes effect on close.
+        var info = new FileDispositionInfo { DeleteFile = true };
+        Check(SetFileInformationByHandle(handle, FileDispositionInfoClass, ref info,
+            (uint)Marshal.SizeOf(typeof(FileDispositionInfo))), "SetFileInformationByHandle(FileDispositionInfo) " + description);
+    }
+
+    private static bool DirectoryEntryExists(SafeFileHandle parent, string parentPath, string name, int limit)
+    {
+        int observed = 0;
+        List<DirectoryEntrySnapshot> entries = ReadDirectoryEntries(parent, parentPath, limit, ref observed);
+        for (int i = 0; i < entries.Count; i++)
+            if (String.Equals(entries[i].Name, name, StringComparison.OrdinalIgnoreCase)) return true;
+        return false;
+    }
+
     internal enum AllocationState { IntentFlushed, Created, Verified, IdentityRecorded, FailedBeforeCreation, FailedRetained }
     internal enum StagingState { NotStarted, Copying, Verifying, Staged, FailedRetained }
+    internal enum RuntimeDispositionState { NotStarted, Blocked, Removing, PartialRetained, Unknown, Removed }
+    internal enum DispositionFailurePoint
+    {
+        None
+#if SCOPED_RUNNER_TESTING
+        , AfterFirstDisposition, Readback, IdentityMismatch
+#endif
+    }
 
     internal sealed class StagedEntry
     {
@@ -320,6 +460,8 @@ internal static class WindowsCustodyBackend
         private FileIdentity stagedExecutableIdentity;
         private string stagedExecutableRelativePath;
         private bool disposed;
+        private int dispositionEntries;
+        private int dispositionCount;
         internal readonly string RuntimePath;
         internal readonly string JournalPath;
         internal readonly FileIdentity EvidenceIdentity;
@@ -330,10 +472,216 @@ internal static class WindowsCustodyBackend
         internal bool IsAclVerified { get; private set; }
         internal bool IsIdentityRecorded { get { return State == AllocationState.IdentityRecorded; } }
         internal StagingState StageStatus { get; private set; }
+        internal RuntimeDispositionState DispositionState { get; private set; }
         internal bool IsStaged { get { return StageStatus == StagingState.Staged; } }
         internal SafeFileHandle StagedExecutableHandle { get { return stagedExecutableHandle; } }
         internal FileIdentity StagedExecutableIdentity { get { return stagedExecutableIdentity; } }
         internal string StagedExecutableRelativePath { get { return stagedExecutableRelativePath; } }
+
+#if SCOPED_RUNNER_TESTING
+        internal sealed class NoPayloadAuthorization
+        {
+            private NoPayloadAuthorization() { }
+            internal static NoPayloadAuthorization Create() { return new NoPayloadAuthorization(); }
+        }
+
+        internal static NoPayloadAuthorization NoPayloadAuthorizationForFixture() { return NoPayloadAuthorization.Create(); }
+        internal void FailNextJournalAppendForFixture() { journal.FailNextAppendForFixture(); }
+        internal bool RemoveRuntimeForFixture(NoPayloadAuthorization authorization, CancellationToken cancellationToken,
+            DispositionFailurePoint failurePoint)
+        {
+            return RemoveRuntimeCore(authorization, cancellationToken, failurePoint, MaximumInventoryEntries, MaximumSourceDepth);
+        }
+        internal bool RemoveRuntimeForFixture(NoPayloadAuthorization authorization, CancellationToken cancellationToken,
+            DispositionFailurePoint failurePoint, int fixtureEntryLimit, int fixtureDepthLimit)
+        {
+            if (fixtureEntryLimit < 0 || fixtureDepthLimit < 0) throw new ArgumentOutOfRangeException("fixture limits");
+            return RemoveRuntimeCore(authorization, cancellationToken, failurePoint, fixtureEntryLimit, fixtureDepthLimit);
+        }
+#endif
+
+        // No production caller can authorize removal yet: LeaseMonitor owns no
+        // RuntimeAllocation or exact-job closure proof in this source slice.
+        // The typed future gate is intentionally unconstructible outside that
+        // monitor; a job-empty boolean or PID is never accepted as evidence.
+        internal bool RemoveRuntimeAfterExactJobClosure(LeaseMonitor.ExactJobClosureProof proof, CancellationToken cancellationToken)
+        {
+            if (proof == null || !proof.Authorizes(this, RuntimeIdentity))
+            {
+                Failure = AllocationDiagnostic("runtime disposition lacks a monitor-issued exact-job closure proof", RuntimePath, JournalPath);
+                DispositionState = RuntimeDispositionState.Blocked;
+                return false;
+            }
+            return RemoveRuntimeCore(proof, cancellationToken, 0, MaximumInventoryEntries, MaximumSourceDepth);
+        }
+
+        internal bool RemoveRuntime()
+        {
+            Failure = AllocationDiagnostic("runtime disposition is unavailable until the monitor proves its exact job empty and releases owned process/thread references", RuntimePath, JournalPath);
+            DispositionState = RuntimeDispositionState.Blocked;
+            return false;
+        }
+
+        private bool RemoveRuntimeCore(object authorization, CancellationToken cancellationToken,
+            DispositionFailurePoint failurePoint, int entryLimit, int depthLimit)
+        {
+            if (disposed || State != AllocationState.IdentityRecorded || RuntimeIdentity == null || runtimeHandle == null ||
+                runtimeHandle.IsInvalid || runtimeHandle.IsClosed)
+            {
+                Failure = AllocationDiagnostic("runtime identity is unrecorded or exact runtime ownership is no longer held; data retained", RuntimePath, JournalPath);
+                DispositionState = RuntimeDispositionState.Blocked;
+                return false;
+            }
+#if SCOPED_RUNNER_TESTING
+            if (!(authorization is NoPayloadAuthorization) && !(authorization is LeaseMonitor.ExactJobClosureProof))
+#else
+            if (!(authorization is LeaseMonitor.ExactJobClosureProof))
+#endif
+            {
+                Failure = AllocationDiagnostic("runtime disposition authorization is unavailable", RuntimePath, JournalPath);
+                DispositionState = RuntimeDispositionState.Blocked;
+                return false;
+            }
+
+            DispositionState = RuntimeDispositionState.Removing;
+            bool rootDispositionMarked = false;
+            try
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+#if SCOPED_RUNNER_TESTING
+                if (failurePoint == DispositionFailurePoint.IdentityMismatch || !ReadIdentity(runtimeHandle).SameAs(RuntimeIdentity))
+#else
+                if (!ReadIdentity(runtimeHandle).SameAs(RuntimeIdentity))
+#endif
+                    throw new IOException("recorded runtime identity differs from the held runtime handle");
+                if (!ReadIdentity(parent.Handle).SameAs(EvidenceIdentity))
+                    throw new IOException("pinned runtime parent identity differs from the allocation evidence identity");
+                FileAttributeTagInfo runtimeTag;
+                Check(GetFileInformationByHandleEx(runtimeHandle, FileAttributeTagInfoClass, out runtimeTag,
+                    (uint)Marshal.SizeOf(typeof(FileAttributeTagInfo))), "FileAttributeTagInfo(runtime disposition)");
+                if ((runtimeTag.Attributes & (FILE_ATTRIBUTE_DIRECTORY | FILE_ATTRIBUTE_REPARSE_POINT)) != FILE_ATTRIBUTE_DIRECTORY)
+                    throw new IOException("held runtime is not a plain directory");
+                SecurityIdentifier user;
+                using (WindowsIdentity current = WindowsIdentity.GetCurrent()) user = current == null ? null : current.User;
+                if (user == null) throw new IOException("current user SID unavailable during runtime disposition");
+                VerifyProtectedDacl(runtimeHandle, user, AceFlags.ContainerInherit | AceFlags.ObjectInherit, "runtime disposition root");
+
+                // Release the staged executable and every parent pin independently.
+                // A failed release stops before the durable intent and first mutation.
+                SafeCloseStagedExecutable();
+                if (!ReadIdentity(runtimeHandle).SameAs(RuntimeIdentity))
+                    throw new IOException("runtime identity changed while releasing staged executable pins");
+                journal.Append("REMOVE_INTENT|" + invocationId.ToString("N") + "|" + FormatIdentity(RuntimeIdentity) + "|" + FormatIdentity(EvidenceIdentity));
+
+                dispositionEntries = 0;
+                dispositionCount = 0;
+                var seen = new HashSet<string>(StringComparer.Ordinal);
+                AddUniqueIdentity(seen, RuntimeIdentity, "runtime root");
+                RemoveRuntimeDirectoryContents(RuntimePath, runtimeHandle, String.Empty, 0, seen, user,
+                    cancellationToken, entryLimit, depthLimit, failurePoint);
+
+                cancellationToken.ThrowIfCancellationRequested();
+                MarkForDisposition(runtimeHandle, "runtime root");
+                rootDispositionMarked = true;
+                runtimeHandle.Dispose();
+                runtimeHandle = null;
+#if SCOPED_RUNNER_TESTING
+                if (failurePoint == DispositionFailurePoint.Readback)
+                {
+                    DispositionState = RuntimeDispositionState.Unknown;
+                    throw new IOException("fixture forced independent runtime absence readback failure");
+                }
+#endif
+                if (DirectoryEntryExists(parent.Handle, parent.Path, System.IO.Path.GetFileName(RuntimePath), MaximumInventoryEntries))
+                    throw new IOException("runtime remains visible during independent pinned-parent absence readback");
+                if (!ReadIdentity(parent.Handle).SameAs(EvidenceIdentity))
+                    throw new IOException("pinned runtime parent identity changed before removal receipt");
+
+                journal.Append("REMOVED|" + invocationId.ToString("N") + "|" + FormatIdentity(RuntimeIdentity) + "|" + FormatIdentity(EvidenceIdentity));
+                DispositionState = RuntimeDispositionState.Removed;
+                Failure = null;
+                return true;
+            }
+            catch (Exception error)
+            {
+                if (DispositionState != RuntimeDispositionState.Unknown)
+                    DispositionState = rootDispositionMarked ? RuntimeDispositionState.Unknown : RuntimeDispositionState.PartialRetained;
+                Failure = AllocationDiagnostic("runtime disposition " + (rootDispositionMarked ? "readback or receipt is uncertain" : "stopped; runtime retained or partially removed") +
+                    ": " + error.GetType().Name + ": " + error.Message, RuntimePath, JournalPath);
+                return false;
+            }
+        }
+
+        private void RemoveRuntimeDirectoryContents(string directoryPath, SafeFileHandle directoryHandle, string relativeDirectory,
+            int depth, HashSet<string> seen, SecurityIdentifier user, CancellationToken cancellationToken,
+            int entryLimit, int depthLimit, DispositionFailurePoint failurePoint)
+        {
+            if (depth > depthLimit) throw new IOException("runtime depth exceeds the fixture limit (production bound is fixed)");
+            FileIdentity parentIdentity = ReadIdentity(directoryHandle);
+            List<DirectoryEntrySnapshot> entries = ReadDirectoryEntries(directoryHandle, directoryPath, entryLimit, ref dispositionEntries);
+            for (int i = 0; i < entries.Count; i++)
+            {
+                cancellationToken.ThrowIfCancellationRequested();
+                DirectoryEntrySnapshot listed = entries[i];
+                ValidateSourceComponent(listed.Name);
+                string relative = relativeDirectory.Length == 0 ? listed.Name : relativeDirectory + "\\" + listed.Name;
+                if (relative.Length > MaximumPathLength) throw new IOException("runtime entry path exceeds the fixed path bound: " + relative);
+                string path = System.IO.Path.Combine(directoryPath, listed.Name);
+                if (path.Length > MaximumPathLength) throw new IOException("runtime entry path exceeds the fixed path bound: " + path);
+                SafeFileHandle entry = OpenDispositionEntry(path);
+                bool dispositionRequested = false;
+                try
+                {
+                    FileAttributeTagInfo tag;
+                    Check(GetFileInformationByHandleEx(entry, FileAttributeTagInfoClass, out tag,
+                        (uint)Marshal.SizeOf(typeof(FileAttributeTagInfo))), "FileAttributeTagInfo(runtime entry)");
+                    if ((tag.Attributes & FILE_ATTRIBUTE_REPARSE_POINT) != 0)
+                        throw new IOException("runtime reparse point is refused and retained: " + relative);
+                    FileIdentity identity = ReadIdentity(entry);
+                    if (identity.VolumeSerial != parentIdentity.VolumeSerial || FileIdentityLow64(identity) != listed.FileIdLow)
+                        throw new IOException("runtime entry identity changed between pinned-parent enumeration and no-follow open: " + relative);
+                    AddUniqueIdentity(seen, identity, "runtime entry " + relative);
+                    bool isDirectory = (tag.Attributes & FILE_ATTRIBUTE_DIRECTORY) != 0;
+                    if (isDirectory != ((listed.Attributes & FILE_ATTRIBUTE_DIRECTORY) != 0))
+                        throw new IOException("runtime entry type changed after enumeration: " + relative);
+                    if ((tag.Attributes & FILE_ATTRIBUTE_READONLY) != 0)
+                        throw new IOException("read-only runtime entry is refused without changing attributes: " + relative);
+                    VerifyProtectedDacl(entry, user, isDirectory ? AceFlags.ContainerInherit | AceFlags.ObjectInherit : AceFlags.None,
+                        isDirectory ? "runtime directory entry" : "runtime file entry");
+                    FileStandardInfo standard;
+                    Check(GetFileInformationByHandleEx(entry, FileStandardInfoClass, out standard,
+                        (uint)Marshal.SizeOf(typeof(FileStandardInfo))), "FileStandardInfo(runtime entry)");
+                    if (standard.DeletePending || standard.Directory != isDirectory || (!isDirectory && standard.NumberOfLinks != 1))
+                        throw new IOException("runtime entry has an unexpected type, pending disposition, or hard link: " + relative);
+                    if (isDirectory)
+                        RemoveRuntimeDirectoryContents(path, entry, relative, depth + 1, seen, user,
+                            cancellationToken, entryLimit, depthLimit, failurePoint);
+
+                    cancellationToken.ThrowIfCancellationRequested();
+                    MarkForDisposition(entry, relative);
+                    dispositionRequested = true;
+                    entry.Dispose();
+                    entry = null;
+                    dispositionCount++;
+#if SCOPED_RUNNER_TESTING
+                    if (failurePoint == DispositionFailurePoint.AfterFirstDisposition && dispositionCount == 1)
+                        throw new IOException("fixture injected a partial runtime removal after the first disposition");
+#endif
+                }
+                finally
+                {
+                    if (entry != null) entry.Dispose();
+                }
+                // Each directory's final handle-based readback below proves all
+                // child names absent after their disposition handles closed.
+                if (!dispositionRequested) throw new IOException("runtime entry was not dispositioned: " + relative);
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            List<DirectoryEntrySnapshot> residual = ReadDirectoryEntries(directoryHandle, directoryPath, entryLimit, ref dispositionEntries, false);
+            if (residual.Count != 0) throw new IOException("runtime directory acquired or retained entries during bottom-up removal: " + directoryPath);
+            if (!ReadIdentity(directoryHandle).SameAs(parentIdentity))
+                throw new IOException("pinned runtime directory identity changed during child removal: " + directoryPath);
+        }
 
         internal RuntimeAllocation(PinnedDirectory ownedParent, Guid id
 #if SCOPED_RUNNER_TESTING
@@ -1193,7 +1541,7 @@ internal static class WindowsCustodyBackend
     private static void AddUniqueIdentity(HashSet<string> seen, FileIdentity identity, string description)
     {
         string key = FormatIdentity(identity);
-        if (!seen.Add(key)) throw new IOException("source tree contains an aliased file identity: " + description);
+        if (!seen.Add(key)) throw new IOException("tree contains an aliased file identity: " + description);
     }
 
     private static void EnsureSourceDoesNotOverlapAllocation(PinnedDirectory source, PinnedDirectory evidence,

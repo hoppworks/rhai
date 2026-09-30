@@ -67,9 +67,16 @@ intent-before-create, collision refusal, ACL and identity verification, ordered
 identity journaling, and retained post-create uncertainty. The fixture has not
 been compiled or run. It deliberately retains every allocation fixture runtime
 and its associated journal, including the uncertain post-create case, and
-prints each exact runtime/journal path pair. This slice has no handle-safe
-runtime disposition; the fixture does not present path-based checks followed
-by deletion as safe cleanup. Its source-tree staging fixtures cover successful
+prints each exact runtime/journal path pair. The source now includes a bounded,
+bottom-up handle-disposition path using the retained runtime DELETE pin,
+no-follow child opens, protected-ACL and identity checks, durable removal
+intent, and independent pinned-parent absence readback before the removal
+receipt. The public workload path remains disabled, and production removal
+fails closed because the monitor does not yet issue an exact-job closure proof.
+The typed fixture authorization exercises filesystem transitions only; it does
+not stand in for process/job custody. These disposition fixtures are source
+only and uncompiled/unexecuted. Native disposition, receipt readback, exact-job
+proof production, and end-to-end acceptance remain unverified. Its source-tree staging fixtures cover successful
 nested copies, fail-closed source changes and sharing, source/destination
 reparse points, collisions, partial-copy retention, inventory, per-file, total
 byte and depth bounds, cancellation, and receipt readback after handles close.
@@ -80,7 +87,9 @@ MiB of destination capacity; run it only under a separately bounded native disk
 budget. These fixtures are uncompiled and unexecuted; fixture dependencies and
 symlink privileges remain native gates.
 No compiler, runtime, Windows build command, guest command, or fixture process
-was invoked for this change.
+was invoked for this change. Disposition fixtures intentionally retain and
+print every exact runtime/journal path pair, including partial and uncertain
+states; they do not claim cleanup of those fixture resources.
 
 The previous source substep's job-list creation fixture remains in
 `fixtures/RunProcessCreationFixtures.ps1` and `fixtures/PayloadFixture.cs`; it
@@ -94,8 +103,12 @@ in source, but executable launch validation remains unverified. Monitor
 integration, local evidence
 finalization/export, exact job ownership and
 cleanup, the real create-time payload integration, pre-resume host challenge
-integration, termination and finalization budgets, and verified runtime
-removal remain unimplemented. The
+integration, termination and finalization budgets remain unimplemented. Runtime
+disposition is present in source, but no monitor path can create the
+unforgeable exact-job closure proof, so production removal remains fail-closed.
+The fixture authorization tests filesystem-only transitions, not job closure.
+Handle-disposition semantics, compilation, independent native readback, and
+the effect of unrelated external handles remain unverified. The
 running protocol state also cannot issue lease-renewal challenges yet; the
 source watchdog would expire a long-running payload at its short lease if this
 state were connected to one. Client/monitor pipe behavior, breakaway compatibility, ambient

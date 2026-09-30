@@ -10,6 +10,27 @@ internal static class LeaseMonitor
 {
     internal enum State { Ready, CreateAuthorized, Suspended, ResumeAuthorized, Running, Stopping }
 
+    // Unconstructible in this source slice: a future private monitor path may
+    // issue this only after its owned job reports zero active processes and it
+    // has independently released its retained payload process/thread handles.
+    // No PID, caller boolean, or protocol fixture can manufacture that proof.
+    internal sealed class ExactJobClosureProof
+    {
+        private readonly WindowsCustodyBackend.RuntimeAllocation allocation;
+        private readonly WindowsCustodyBackend.FileIdentity runtimeIdentity;
+        private ExactJobClosureProof(WindowsCustodyBackend.RuntimeAllocation owner,
+            WindowsCustodyBackend.FileIdentity identity)
+        {
+            allocation = owner;
+            runtimeIdentity = identity;
+        }
+        internal bool Authorizes(WindowsCustodyBackend.RuntimeAllocation owner,
+            WindowsCustodyBackend.FileIdentity identity)
+        {
+            return Object.ReferenceEquals(allocation, owner) && runtimeIdentity != null && runtimeIdentity.SameAs(identity);
+        }
+    }
+
     internal sealed class Policy
     {
         internal readonly long ChallengePeriod, LeaseDuration, SetupDeadline, AbsoluteDeadline, TerminationDeadline, FinalizationDeadline;

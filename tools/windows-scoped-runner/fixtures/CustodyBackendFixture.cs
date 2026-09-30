@@ -68,6 +68,7 @@ internal static class CustodyBackendFixture
             }
             AllocationTransitions(fixture);
             SourceStagingContracts(fixture);
+            RuntimeDispositionContracts(fixture);
         }
         finally
         {
@@ -147,8 +148,8 @@ internal static class CustodyBackendFixture
             successRecords[1].Contains(successEvidenceIdentity.FileId.ToString("N")) &&
             successRecords[1].Contains(successJournalIdentity.FileId.ToString("N")));
         RetainPair("successful allocation", successPath, successJournal);
-        // Runtime directories are retained: this fixture does not claim a
-        // handle-safe removal operation, which belongs to a later backend step.
+        // Allocation fixtures retain their runtime and journal; the separate
+        // disposition contracts below exercise only their typed fixture gate.
 
         string collisionRoot = Path.Combine(fixture, "allocation-collision");
         Directory.CreateDirectory(collisionRoot);
@@ -348,6 +349,232 @@ internal static class CustodyBackendFixture
         }
         Expect("staged reparse journal has no completion receipt", !HasStagedReceipt(stagedJournal));
         RetainPair("staged reparse refusal", stagedRuntime, stagedJournal);
+    }
+
+    // Source-only contract coverage. These call the typed fixture capability;
+    // they do not simulate or claim exact-job closure or workload acceptance.
+    private static void RuntimeDispositionContracts(string fixture)
+    {
+        string successRoot = NewStageCase(fixture, "remove-success");
+        string successRuntime, successJournal;
+        string sentinel = Path.Combine(successRoot, "separate-sentinel.txt");
+        File.WriteAllText(sentinel, "must remain unchanged");
+        using (WindowsCustodyBackend.RuntimeAllocation allocation = BeginStageAllocation(successRoot, out successRuntime, out successJournal))
+        {
+            string source = PrepareDispositionTree(successRoot, true);
+            bool staged = allocation.CreateRuntime() && allocation.IsIdentityRecorded &&
+                allocation.StageSourceTreeForFixture(source, @"bin\runner.exe", CancellationToken.None, null, null);
+            Expect("nested runtime removal starts from exact recorded staged identity", staged && allocation.IsStaged);
+            bool missingAuthorization = !allocation.RemoveRuntime() && allocation.DispositionState == WindowsCustodyBackend.RuntimeDispositionState.Blocked;
+            Expect("production disposition refuses without monitor exact-job proof", missingAuthorization);
+            bool removed = allocation.RemoveRuntimeForFixture(WindowsCustodyBackend.RuntimeAllocation.NoPayloadAuthorizationForFixture(),
+                CancellationToken.None, WindowsCustodyBackend.DispositionFailurePoint.None);
+            Expect("nested runtime entries are removed by opened-handle disposition", removed &&
+                allocation.DispositionState == WindowsCustodyBackend.RuntimeDispositionState.Removed &&
+                !Directory.Exists(successRuntime) && File.ReadAllText(sentinel) == "must remain unchanged");
+        }
+        string[] successRecords = WindowsCustodyBackend.ReadJournalForFixture(successJournal);
+        Expect("removal receipt follows independent absence readback", HasRecord(successRecords, "REMOVE_INTENT|") &&
+            HasRecord(successRecords, "REMOVED|") && !Directory.Exists(successRuntime));
+        RetainPair("removed runtime evidence", successRuntime, successJournal);
+
+        string identityRoot = NewStageCase(fixture, "remove-unrecorded-identity");
+        string identityRuntime, identityJournal;
+        using (WindowsCustodyBackend.RuntimeAllocation allocation = WindowsCustodyBackend.BeginAllocationForFixture(
+            WindowsCustodyBackend.PinDirectoryForFixture(identityRoot), Guid.NewGuid(), true))
+        {
+            identityRuntime = allocation.RuntimePath; identityJournal = allocation.JournalPath;
+            Expect("unrecorded identity cannot authorize disposition", !allocation.CreateRuntime() &&
+                !allocation.RemoveRuntimeForFixture(WindowsCustodyBackend.RuntimeAllocation.NoPayloadAuthorizationForFixture(),
+                    CancellationToken.None, WindowsCustodyBackend.DispositionFailurePoint.None) &&
+                allocation.DispositionState != WindowsCustodyBackend.RuntimeDispositionState.Removed);
+        }
+        Expect("unrecorded identity has no removal receipt after handles close",
+            !HasRecord(WindowsCustodyBackend.ReadJournalForFixture(identityJournal), "REMOVED|"));
+        RetainPair("unrecorded identity runtime", identityRuntime, identityJournal);
+
+        string partialRoot = NewStageCase(fixture, "remove-partial");
+        string partialRuntime, partialJournal;
+        using (WindowsCustodyBackend.RuntimeAllocation allocation = BeginStageAllocation(partialRoot, out partialRuntime, out partialJournal))
+        {
+            string source = PrepareDispositionTree(partialRoot, true);
+            Expect("partial removal fixture has recorded staged identity", allocation.CreateRuntime() && allocation.IsIdentityRecorded &&
+                allocation.StageSourceTreeForFixture(source, @"bin\runner.exe", CancellationToken.None, null, null));
+            bool failed = !allocation.RemoveRuntimeForFixture(WindowsCustodyBackend.RuntimeAllocation.NoPayloadAuthorizationForFixture(),
+                CancellationToken.None, WindowsCustodyBackend.DispositionFailurePoint.AfterFirstDisposition);
+            Expect("partial disposition is retained with explicit failure", failed &&
+                allocation.DispositionState == WindowsCustodyBackend.RuntimeDispositionState.PartialRetained &&
+                Directory.Exists(partialRuntime) && allocation.Failure != null);
+        }
+        Expect("partial removal never writes successful receipt", !HasRecord(WindowsCustodyBackend.ReadJournalForFixture(partialJournal), "REMOVED|"));
+        RetainPair("partial runtime removal", partialRuntime, partialJournal);
+
+        string reparseRoot = NewStageCase(fixture, "remove-reparse");
+        string reparseRuntime, reparseJournal;
+        string outside = Path.Combine(reparseRoot, "foreign-target");
+        Directory.CreateDirectory(outside);
+        File.WriteAllText(Path.Combine(outside, "sentinel.txt"), "foreign target intact");
+        using (WindowsCustodyBackend.RuntimeAllocation allocation = BeginStageAllocation(reparseRoot, out reparseRuntime, out reparseJournal))
+        {
+            string source = PrepareDispositionTree(reparseRoot, false);
+            Expect("reparse removal fixture has recorded staged identity", allocation.CreateRuntime() && allocation.IsIdentityRecorded &&
+                allocation.StageSourceTreeForFixture(source, @"bin\runner.exe", CancellationToken.None, null, null));
+            CreateDirectoryLink(Path.Combine(reparseRuntime, "linked"), outside);
+            bool refused = !allocation.RemoveRuntimeForFixture(WindowsCustodyBackend.RuntimeAllocation.NoPayloadAuthorizationForFixture(),
+                CancellationToken.None, WindowsCustodyBackend.DispositionFailurePoint.None);
+            Expect("runtime reparse target is refused and separately owned sentinel remains", refused &&
+                File.ReadAllText(Path.Combine(outside, "sentinel.txt")) == "foreign target intact" &&
+                allocation.DispositionState == WindowsCustodyBackend.RuntimeDispositionState.PartialRetained);
+        }
+        Expect("reparse refusal has no removal receipt after handles close",
+            !HasRecord(WindowsCustodyBackend.ReadJournalForFixture(reparseJournal), "REMOVED|"));
+        RetainPair("reparse runtime removal refusal", reparseRuntime, reparseJournal);
+
+        string sharingRoot = NewStageCase(fixture, "remove-sharing");
+        string sharingRuntime, sharingJournal;
+        using (WindowsCustodyBackend.RuntimeAllocation allocation = BeginStageAllocation(sharingRoot, out sharingRuntime, out sharingJournal))
+        {
+            string source = PrepareDispositionTree(sharingRoot, false);
+            Expect("sharing refusal fixture has recorded staged identity", allocation.CreateRuntime() && allocation.IsIdentityRecorded &&
+                allocation.StageSourceTreeForFixture(source, @"bin\runner.exe", CancellationToken.None, null, null));
+            string locked = Path.Combine(sharingRuntime, "data", "data.txt");
+            using (var held = new FileStream(locked, FileMode.Open, FileAccess.ReadWrite, FileShare.None))
+            {
+                bool refused = !allocation.RemoveRuntimeForFixture(WindowsCustodyBackend.RuntimeAllocation.NoPayloadAuthorizationForFixture(),
+                    CancellationToken.None, WindowsCustodyBackend.DispositionFailurePoint.None);
+                Expect("sharing refusal retains runtime without receipt", refused && Directory.Exists(sharingRuntime) &&
+                    allocation.DispositionState == WindowsCustodyBackend.RuntimeDispositionState.PartialRetained);
+            }
+        }
+        Expect("sharing refusal has no removal receipt", !HasRecord(WindowsCustodyBackend.ReadJournalForFixture(sharingJournal), "REMOVED|"));
+        RetainPair("sharing-refused runtime", sharingRuntime, sharingJournal);
+
+        string readbackRoot = NewStageCase(fixture, "remove-readback-failure");
+        string readbackRuntime, readbackJournal;
+        using (WindowsCustodyBackend.RuntimeAllocation allocation = BeginStageAllocation(readbackRoot, out readbackRuntime, out readbackJournal))
+        {
+            string source = PrepareDispositionTree(readbackRoot, false);
+            Expect("readback failure fixture has recorded staged identity", allocation.CreateRuntime() && allocation.IsIdentityRecorded &&
+                allocation.StageSourceTreeForFixture(source, @"bin\runner.exe", CancellationToken.None, null, null));
+            bool unknown = !allocation.RemoveRuntimeForFixture(WindowsCustodyBackend.RuntimeAllocation.NoPayloadAuthorizationForFixture(),
+                CancellationToken.None, WindowsCustodyBackend.DispositionFailurePoint.Readback);
+            Expect("failed absence readback remains unknown with no successful receipt", unknown &&
+                allocation.DispositionState == WindowsCustodyBackend.RuntimeDispositionState.Unknown);
+        }
+        string[] readbackRecords = WindowsCustodyBackend.ReadJournalForFixture(readbackJournal);
+        Expect("failed readback cannot emit successful removal receipt", HasRecord(readbackRecords, "REMOVE_INTENT|") &&
+            !HasRecord(readbackRecords, "REMOVED|"));
+        RetainPair("unknown removal readback", readbackRuntime, readbackJournal);
+
+        string journalRoot = NewStageCase(fixture, "remove-journal-failure");
+        string journalRuntime, journalPath;
+        using (WindowsCustodyBackend.RuntimeAllocation allocation = BeginStageAllocation(journalRoot, out journalRuntime, out journalPath))
+        {
+            string source = PrepareDispositionTree(journalRoot, true);
+            Expect("journal failure fixture has recorded staged identity", allocation.CreateRuntime() && allocation.IsIdentityRecorded &&
+                allocation.StageSourceTreeForFixture(source, @"bin\runner.exe", CancellationToken.None, null, null));
+            allocation.FailNextJournalAppendForFixture();
+            bool stopped = !allocation.RemoveRuntimeForFixture(WindowsCustodyBackend.RuntimeAllocation.NoPayloadAuthorizationForFixture(),
+                CancellationToken.None, WindowsCustodyBackend.DispositionFailurePoint.None);
+            Expect("failed removal intent stops before mutation", stopped && File.Exists(Path.Combine(journalRuntime, "data", "data.txt")) &&
+                allocation.DispositionState != WindowsCustodyBackend.RuntimeDispositionState.Removed);
+        }
+        Expect("journal failure has no removal receipt after handles close",
+            !HasRecord(WindowsCustodyBackend.ReadJournalForFixture(journalPath), "REMOVED|"));
+        RetainPair("journal failure before removal", journalRuntime, journalPath);
+
+        string boundsRoot = NewStageCase(fixture, "remove-bounds");
+        string boundsRuntime, boundsJournal;
+        using (WindowsCustodyBackend.RuntimeAllocation allocation = BeginStageAllocation(boundsRoot, out boundsRuntime, out boundsJournal))
+        {
+            string source = PrepareDispositionTree(boundsRoot, false);
+            Expect("bounds fixture has recorded staged identity", allocation.CreateRuntime() && allocation.IsIdentityRecorded &&
+                allocation.StageSourceTreeForFixture(source, @"bin\runner.exe", CancellationToken.None, null, null));
+            bool cancelled = !allocation.RemoveRuntimeForFixture(WindowsCustodyBackend.RuntimeAllocation.NoPayloadAuthorizationForFixture(),
+                new CancellationToken(true), WindowsCustodyBackend.DispositionFailurePoint.None);
+            Expect("cancellation before first disposition retains runtime", cancelled && Directory.Exists(boundsRuntime) &&
+                allocation.DispositionState != WindowsCustodyBackend.RuntimeDispositionState.Removed);
+        }
+        Expect("cancellation has no removal receipt after handles close",
+            !HasRecord(WindowsCustodyBackend.ReadJournalForFixture(boundsJournal), "REMOVED|"));
+        RetainPair("cancelled runtime removal", boundsRuntime, boundsJournal);
+
+        string entryBoundRoot = NewStageCase(fixture, "remove-entry-bound");
+        string entryBoundRuntime, entryBoundJournal;
+        using (WindowsCustodyBackend.RuntimeAllocation allocation = BeginStageAllocation(entryBoundRoot, out entryBoundRuntime, out entryBoundJournal))
+        {
+            string source = PrepareDispositionTree(entryBoundRoot, false);
+            Expect("entry-bound fixture has recorded staged identity", allocation.CreateRuntime() && allocation.IsIdentityRecorded &&
+                allocation.StageSourceTreeForFixture(source, @"bin\runner.exe", CancellationToken.None, null, null));
+            bool bounded = !allocation.RemoveRuntimeForFixture(WindowsCustodyBackend.RuntimeAllocation.NoPayloadAuthorizationForFixture(),
+                CancellationToken.None, WindowsCustodyBackend.DispositionFailurePoint.None, 1, WindowsCustodyBackend.MaximumSourceDepth);
+            Expect("runtime inventory limit is enforced before disposition", bounded && allocation.Failure != null &&
+                allocation.Failure.Contains("inventory exceeds the fixture limit") && Directory.Exists(entryBoundRuntime));
+        }
+        Expect("entry-bound failure has no successful receipt", !HasRecord(WindowsCustodyBackend.ReadJournalForFixture(entryBoundJournal), "REMOVED|"));
+        RetainPair("runtime entry-bound refusal", entryBoundRuntime, entryBoundJournal);
+
+        string depthRoot = NewStageCase(fixture, "remove-depth-bound");
+        string depthRuntime, depthJournal;
+        using (WindowsCustodyBackend.RuntimeAllocation allocation = BeginStageAllocation(depthRoot, out depthRuntime, out depthJournal))
+        {
+            string source = PrepareDispositionTree(depthRoot, true);
+            Expect("depth-bound fixture has recorded staged identity", allocation.CreateRuntime() && allocation.IsIdentityRecorded &&
+                allocation.StageSourceTreeForFixture(source, @"bin\runner.exe", CancellationToken.None, null, null));
+            bool bounded = !allocation.RemoveRuntimeForFixture(WindowsCustodyBackend.RuntimeAllocation.NoPayloadAuthorizationForFixture(),
+                CancellationToken.None, WindowsCustodyBackend.DispositionFailurePoint.None,
+                WindowsCustodyBackend.MaximumInventoryEntries, 0);
+            Expect("runtime depth limit is enforced before descent", bounded && allocation.Failure != null &&
+                allocation.Failure.Contains("runtime depth exceeds the fixture limit") && Directory.Exists(depthRuntime));
+        }
+        Expect("depth-bound failure has no successful receipt", !HasRecord(WindowsCustodyBackend.ReadJournalForFixture(depthJournal), "REMOVED|"));
+        RetainPair("runtime depth-bound refusal", depthRuntime, depthJournal);
+
+        string readOnlyRoot = NewStageCase(fixture, "remove-read-only");
+        string readOnlyRuntime, readOnlyJournal;
+        using (WindowsCustodyBackend.RuntimeAllocation allocation = BeginStageAllocation(readOnlyRoot, out readOnlyRuntime, out readOnlyJournal))
+        {
+            string source = PrepareDispositionTree(readOnlyRoot, false);
+            Expect("read-only fixture has recorded staged identity", allocation.CreateRuntime() && allocation.IsIdentityRecorded &&
+                allocation.StageSourceTreeForFixture(source, @"bin\runner.exe", CancellationToken.None, null, null));
+            string readOnlyFile = Path.Combine(readOnlyRuntime, "data", "data.txt");
+            File.SetAttributes(readOnlyFile, File.GetAttributes(readOnlyFile) | FileAttributes.ReadOnly);
+            bool refused = !allocation.RemoveRuntimeForFixture(WindowsCustodyBackend.RuntimeAllocation.NoPayloadAuthorizationForFixture(),
+                CancellationToken.None, WindowsCustodyBackend.DispositionFailurePoint.None);
+            Expect("read-only entry is retained without clearing attributes", refused && Directory.Exists(readOnlyRuntime) &&
+                (File.GetAttributes(readOnlyFile) & FileAttributes.ReadOnly) != 0 && allocation.Failure != null &&
+                allocation.Failure.Contains("read-only runtime entry is refused"));
+        }
+        Expect("read-only refusal has no successful receipt", !HasRecord(WindowsCustodyBackend.ReadJournalForFixture(readOnlyJournal), "REMOVED|"));
+        RetainPair("read-only runtime refusal", readOnlyRuntime, readOnlyJournal);
+
+        string mismatchRoot = NewStageCase(fixture, "remove-identity-mismatch");
+        string mismatchRuntime, mismatchJournal;
+        using (WindowsCustodyBackend.RuntimeAllocation allocation = BeginStageAllocation(mismatchRoot, out mismatchRuntime, out mismatchJournal))
+        {
+            string source = PrepareDispositionTree(mismatchRoot, false);
+            Expect("identity mismatch fixture has recorded staged identity", allocation.CreateRuntime() && allocation.IsIdentityRecorded &&
+                allocation.StageSourceTreeForFixture(source, @"bin\runner.exe", CancellationToken.None, null, null));
+            bool refused = !allocation.RemoveRuntimeForFixture(WindowsCustodyBackend.RuntimeAllocation.NoPayloadAuthorizationForFixture(),
+                CancellationToken.None, WindowsCustodyBackend.DispositionFailurePoint.IdentityMismatch);
+            Expect("runtime identity mismatch refuses disposition", refused && Directory.Exists(mismatchRuntime) &&
+                allocation.DispositionState == WindowsCustodyBackend.RuntimeDispositionState.PartialRetained);
+        }
+        Expect("identity mismatch has no removal receipt after handles close",
+            !HasRecord(WindowsCustodyBackend.ReadJournalForFixture(mismatchJournal), "REMOVED|"));
+        RetainPair("identity mismatch runtime", mismatchRuntime, mismatchJournal);
+    }
+
+    private static string PrepareDispositionTree(string root, bool nested)
+    {
+        string source = Path.Combine(root, "source");
+        Directory.CreateDirectory(Path.Combine(source, "bin"));
+        Directory.CreateDirectory(Path.Combine(source, "data"));
+        if (nested) Directory.CreateDirectory(Path.Combine(source, "data", "nested"));
+        File.WriteAllBytes(Path.Combine(source, "bin", "runner.exe"), new byte[] { 0x4d, 0x5a, 0x01 });
+        File.WriteAllText(Path.Combine(source, "data", "data.txt"), "disposition fixture payload");
+        if (nested) File.WriteAllText(Path.Combine(source, "data", "nested", "inner.txt"), "nested disposition fixture payload");
+        return source;
     }
 
     private static string NewStageCase(string fixture, string label)
