@@ -47,8 +47,12 @@ fixture and documentation files were reviewed; related findings corrected in
 the responsible context. See windows-monitor-lease-review.md. Only whitespace
 checking ran; compiler, fixtures, native/guest behavior remain unverified.
 Unsafe workload entry is disabled and candidate remains separate. Next independent
-source requirement is handle-based runtime/staging and durable journal, followed
-by immutable specification and actual payload integration with two host responses.
+source requirement is handle-based runtime/staging and durable journal, delegated
+to the responsible context under briefs/windows-runtime-backend.md from 0999a552.
+Immutable specification and actual payload integration with two host responses
+follow that source substep. Review also identified that IssueChallenge currently
+excludes Running, so future running workloads cannot renew the lease; correction
+was requested in the responsible context with meaningful fixture source.
 
 Step 1 corrected unrestricted resolution is integrated at 5f87d339 and accepted
 on native macOS: env7/fs24/policy26 pass, exact runtime absent. Red/green
