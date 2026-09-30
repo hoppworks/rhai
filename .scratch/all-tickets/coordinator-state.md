@@ -440,3 +440,9 @@ answer; do not ask again. Same sole Expert and cause history, no replacement
 chain. Begin extension clock at actual resumed launch and record it before work.
 Independent source gate still precedes native execution. Unaccepted Windows
 custody/bootstrap remains closed. TCP stream reads starts fresh next requirement.
+
+## Git attribution correction
+
+Owner explicitly requires lowercase hoppworks for author and committer on all
+future commits. Recorded in AGENTS.md and sent to all three active tasks. Preserve
+configured email and shared settings; use command-local Git name override.

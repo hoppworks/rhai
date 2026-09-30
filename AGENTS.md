@@ -86,3 +86,10 @@ explicit POSIX supervision/runtime custody and whole-runner interruption proof.
 Do not modify the global runner. Independent source review precedes execution;
 record finite controls and limits before launching. Native Windows custody remains
 an independent prerequisite, not waived by these decisions.
+
+## Git attribution
+
+The owner requires author and committer names to be exactly `hoppworks` (lowercase).
+Keep the configured email. Use command-local `git -c user.name=hoppworks` when
+committing or merging; do not modify global or shared configuration. No agent
+co-author trailers or signatures.
