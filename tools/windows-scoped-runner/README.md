@@ -27,6 +27,24 @@ These cases exercise the protocol state model only. They do not launch a monitor
 create payloads, inspect exact process/job handles, or prove transport survival.
 The fixture is deliberately unexecuted.
 
+`LaunchSpecification.cs` adds a pure managed, immutable version-1 specification
+codec, not a launch integration. Its canonical UTF-8 representation is newline
+delimited `RHAI-LAUNCH/1`, followed by base64 UTF-8 `source`, `executable`, an
+`argument-count`, and contiguous indexed `argument-N` records. The full encoded
+input is limited to 8,192 bytes; source/executable/argument fields to 1,024
+decoded UTF-8 bytes each; arguments to 32; and the conservatively bounded,
+Windows-quoted command line to 4,096 characters. Source and relative executable
+paths receive syntax-only validation. The parser does no filesystem I/O and
+proves no source identity, existence, authority, staging, or executable
+validity. Unknown fields reject cleanup paths and policy overrides; policy
+continues to come from the fixed monitor policy.
+
+The wire value is not yet adapted to `MonitorTransport`: that transport accepts
+512-byte frames with a 32-frame/8,192-byte queue. A future adapter must carry the
+bounded specification across those existing limits without increasing them.
+No specification is currently accepted by the monitor or connected to workload
+creation; public workload launch and exact-job proof remain disabled.
+
 The monitor currently accepts a valid first host round-trip and then fails
 closed. The `WindowsCustodyBackend.cs` source slice pins the fixed local
 `C:\RhaiQuality\runs` root and each ancestor through non-reparse directory

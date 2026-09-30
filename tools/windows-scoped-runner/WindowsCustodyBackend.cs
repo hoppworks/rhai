@@ -21,7 +21,8 @@ internal static class WindowsCustodyBackend
     internal const int MaximumSourceDepth = 32;
     private const int MaximumRecords = 64;
     private const int MaximumJournalBytes = MaximumRecords * (MaximumRecordBytes + 15);
-    private const int MaximumPathLength = 248;
+    internal const int MaximumPathLengthForSpecification = 248;
+    private const int MaximumPathLength = MaximumPathLengthForSpecification;
     private const uint FILE_READ_ATTRIBUTES = 0x0080;
     private const uint FILE_LIST_DIRECTORY = 0x00000001;
     private const uint DELETE_ACCESS = 0x00010000;
@@ -1646,9 +1647,20 @@ internal static class WindowsCustodyBackend
         return (digit >= '1' && digit <= '9') || digit == '\u00b9' || digit == '\u00b2' || digit == '\u00b3';
     }
 
-#if SCOPED_RUNNER_TESTING
-    internal static void ValidateExecutableRelativePathForFixture(string value) { ParseExecutableRelativePath(value); }
-#endif
+    internal static void ValidateExecutableRelativePathSyntax(string value) { ParseExecutableRelativePath(value); }
+
+    // Pure syntax validation for a launch specification. This deliberately
+    // performs no path normalization, existence check, or filesystem access.
+    internal static void ValidateLaunchSourceDirectorySyntax(string value)
+    {
+        if (String.IsNullOrEmpty(value) || value.Length > MaximumPathLength || value.Length < 4 ||
+            !((value[0] >= 'A' && value[0] <= 'Z') || (value[0] >= 'a' && value[0] <= 'z')) ||
+            value[1] != ':' || value[2] != '\\' || value.IndexOf('/') >= 0 || value.StartsWith("\\\\", StringComparison.Ordinal))
+            throw new ArgumentException("source directory must be a bounded local drive-rooted path", "value");
+        if (value.IndexOf(':', 2) >= 0) throw new ArgumentException("source directory contains unsupported colon syntax", "value");
+        string[] components = value.Substring(3).Split('\\');
+        for (int i = 0; i < components.Length; i++) ValidatePathComponent(components[i], "source directory");
+    }
 
     private static string ToAsciiBounded(string value, int maximum)
     {
