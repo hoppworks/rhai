@@ -1,6 +1,6 @@
 # Release verifier follow-up proposal
 
-Status: proposal only, not authorized. Existing single-invocation Linux and combined extensions are stopped; this proposal does not reset them or authorize a runtime. Preserve their original budgets, artifacts and infrastructure cause history.
+Status: explicitly authorized by the owner on2026-09-30. Linux package accepted; combined package dispatched18:53:29UTC, hard finish19:23:29UTC including root review. Existing consumed attempts remain preserved; this approval does not reset their histories. Preserve their original budgets, artifacts and infrastructure cause history.
 
 Observable remaining requirements: complete native Linux sys feature rows and complete native macOS combined f32 eight-target row, with reliable exported statuses and exact resource custody. The product assertions executed so far are not failing corrections.
 
