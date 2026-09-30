@@ -14,6 +14,8 @@ pub(crate) mod lang_core;
 pub(crate) mod logic;
 pub(crate) mod map_basic;
 pub(crate) mod math_basic;
+#[cfg(feature = "net")]
+pub mod net;
 pub(crate) mod pkg_core;
 pub(crate) mod pkg_std;
 pub(crate) mod string_basic;

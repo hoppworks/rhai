@@ -77,6 +77,8 @@ grain = []
 ## Enable the `sys` package: host-controlled access to the environment, filesystem and child processes
 ## (requires `std`; incompatible with `no_std`, `no_object` and WASM targets; MSRV 1.77.2).
 sys = ["std", "dep:cap-std"]
+## Enable the optional host-controlled TCP package
+net = ["std"]
 
 #! ### System Configuration Features
 
