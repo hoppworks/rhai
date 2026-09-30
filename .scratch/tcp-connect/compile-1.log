@@ -1,0 +1,205 @@
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+     Locking 130 packages to latest compatible versions
+      Adding getrandom v0.3.4 (available: v0.4.3)
+      Adding hashbrown v0.16.1 (available: v0.17.1)
+      Adding syn v2.0.119 (available: v3.0.6)
+ Downloading crates ...
+  Downloaded once_cell v1.21.4
+  Downloaded static_assertions v1.1.0
+  Downloaded smartstring v1.0.1
+  Downloaded bitflags v2.13.2
+  Downloaded zmij v1.0.23
+  Downloaded portable-atomic v1.15.0
+  Downloaded const-random-macro v0.1.16
+  Downloaded itoa v1.0.18
+  Downloaded rmp v0.8.15
+  Downloaded version_check v0.9.5
+  Downloaded rmp-serde v1.3.1
+  Downloaded serde_core v1.0.229
+  Downloaded crunchy v0.2.4
+  Downloaded num-traits v0.2.19
+  Downloaded autocfg v1.5.1
+  Downloaded ahash v0.8.12
+  Downloaded serde v1.0.229
+  Downloaded unicode-ident v1.0.26
+  Downloaded quote v1.0.47
+  Downloaded thin-vec v0.2.20
+  Downloaded getrandom v0.3.4
+  Downloaded syn v2.0.119
+  Downloaded tiny-keccak v2.0.2
+  Downloaded smallvec v1.16.2
+  Downloaded getrandom v0.2.17
+  Downloaded proc-macro2 v1.0.107
+  Downloaded memchr v2.8.3
+  Downloaded cfg-if v1.0.5
+  Downloaded const-random v0.1.18
+  Downloaded libc v0.2.189
+  Downloaded zerocopy v0.8.59
+  Downloaded serde_json v1.0.151
+ Downloading crates ...
+  Downloaded web-time v1.1.0
+   Compiling autocfg v1.5.1
+   Compiling libc v0.2.189
+   Compiling crunchy v0.2.4
+   Compiling version_check v0.9.5
+   Compiling proc-macro2 v1.0.107
+   Compiling tiny-keccak v2.0.2
+   Compiling cfg-if v1.0.5
+   Compiling num-traits v0.2.19
+   Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.26
+   Compiling portable-atomic v1.15.0
+   Compiling getrandom v0.2.17
+   Compiling zerocopy v0.8.59
+   Compiling serde_core v1.0.229
+   Compiling once_cell v1.21.4
+   Compiling getrandom v0.3.4
+   Compiling const-random-macro v0.1.16
+   Compiling ahash v0.8.12
+   Compiling smartstring v1.0.1
+   Compiling syn v2.0.119
+   Compiling const-random v0.1.18
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-kw_cvan3/source)
+   Compiling zmij v1.0.23
+   Compiling serde v1.0.229
+   Compiling static_assertions v1.1.0
+   Compiling rhai_codegen v3.2.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-kw_cvan3/source/codegen)
+   Compiling thin-vec v0.2.20
+   Compiling bitflags v2.13.2
+   Compiling smallvec v1.16.2
+   Compiling serde_json v1.0.151
+   Compiling rmp v0.8.15
+   Compiling memchr v2.8.3
+   Compiling itoa v1.0.18
+error: cannot find attribute `export_module` in this scope
+  --> src/packages/net/stream.rs:33:3
+   |
+33 | #[export_module]
+   |   ^^^^^^^^^^^^^
+   |
+help: a built-in attribute with a similar name exists
+   |
+33 - #[export_module]
+33 + #[export_stable]
+   |
+help: consider importing one of these attribute macros
+   |
+ 3 + use crate::export_module;
+   |
+ 3 + use rhai_codegen::export_module;
+   |
+
+error: cannot find attribute `rhai_fn` in this scope
+  --> src/packages/net/stream.rs:35:7
+   |
+35 |     #[rhai_fn(get = "closed", pure)]
+   |       ^^^^^^^
+
+error: cannot find macro `combine_with_exported_module` in this scope
+  --> src/packages/net/stream.rs:30:5
+   |
+30 |     combine_with_exported_module!(module, "net_stream", net_stream_functions);
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+help: consider importing one of these macros
+   |
+ 3 + use crate::combine_with_exported_module;
+   |
+ 3 + use rhai_codegen::combine_with_exported_module;
+   |
+
+warning: unused import: `Mutex`
+  --> src/packages/net/mod.rs:25:22
+   |
+25 | use std::sync::{Arc, Mutex};
+   |                      ^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused import: `std::time::Duration`
+  --> src/packages/net/mod.rs:26:5
+   |
+26 | use std::time::Duration;
+   |     ^^^^^^^^^^^^^^^^^^^
+
+warning: unused import: `std::io`
+   --> src/packages/net/mod.rs:100:5
+    |
+100 | use std::io;
+    |     ^^^^^^^
+
+   Compiling rmp-serde v1.3.1
+error[E0277]: the trait bound `fn(&mut NetStream) {...::close}: RhaiNativeFunc<_, _, _, _, true>` is not satisfied
+    --> src/packages/net/stream.rs:28:35
+     |
+  28 |     module.set_native_fn("close", NetStream::close).expect("register NetStream.close");
+     |            -------------          ^^^^^^^^^^^^^^^^ unsatisfied trait bound
+     |            |
+     |            required by a bound introduced by this call
+     |
+     = help: the trait `func::register::RhaiNativeFunc<_, _, _, _, true>` is not implemented for fn item `for<'a> fn(&'a mut NetStream) {NetStream::close}`
+note: required by a bound in `Module::set_native_fn`
+    --> src/module/mod.rs:1637:15
+     |
+1630 |     pub fn set_native_fn<A: 'static, const N: usize, const X: bool, R, FUNC>(
+     |            ------------- required by a bound in this associated function
+...
+1637 |         FUNC: RhaiNativeFunc<A, N, X, R, true> + SendSync + 'static,
+     |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `Module::set_native_fn`
+     = note: the full name for the type has been written to '/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-kw_cvan3/target/debug/deps/rhai-8671c414a519c7ad.long-type-12044472599558844926.txt'
+     = note: consider using `--verbose` to print the full type name to the console
+
+error[E0599]: no method named `expect` found for type `u64` in the current scope
+  --> src/packages/net/stream.rs:28:53
+   |
+28 |     module.set_native_fn("close", NetStream::close).expect("register NetStream.close");
+   |                                                     ^^^^^^ method not found in `u64`
+
+error[E0277]: the trait bound `fn(...) -> bool {...::is_closed}: RhaiNativeFunc<_, _, _, _, true>` is not satisfied
+    --> src/packages/net/stream.rs:29:39
+     |
+  29 |     module.set_native_fn("is_closed", NetStream::is_closed).expect("register NetStream.is_closed");
+     |            -------------              ^^^^^^^^^^^^^^^^^^^^ unsatisfied trait bound
+     |            |
+     |            required by a bound introduced by this call
+     |
+     = help: the trait `func::register::RhaiNativeFunc<_, _, _, _, true>` is not implemented for fn item `for<'a> fn(&'a mut NetStream) -> bool {NetStream::is_closed}`
+note: required by a bound in `Module::set_native_fn`
+    --> src/module/mod.rs:1637:15
+     |
+1630 |     pub fn set_native_fn<A: 'static, const N: usize, const X: bool, R, FUNC>(
+     |            ------------- required by a bound in this associated function
+...
+1637 |         FUNC: RhaiNativeFunc<A, N, X, R, true> + SendSync + 'static,
+     |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `Module::set_native_fn`
+     = note: the full name for the type has been written to '/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-kw_cvan3/target/debug/deps/rhai-8671c414a519c7ad.long-type-5933921331401698092.txt'
+     = note: consider using `--verbose` to print the full type name to the console
+
+error[E0599]: no method named `expect` found for type `u64` in the current scope
+  --> src/packages/net/stream.rs:29:61
+   |
+29 |     module.set_native_fn("is_closed", NetStream::is_closed).expect("register NetStream.is_closed");
+   |                                                             ^^^^^^ method not found in `u64`
+
+error[E0308]: mismatched types
+  --> src/packages/net/mod.rs:58:25
+   |
+58 |                 connect(&st, address, port)
+   |                 ------- ^^^ expected `&Rc<NetState>`, found `&Arc<NetState>`
+   |                 |
+   |                 arguments to this function are incorrect
+   |
+   = note: expected reference `&Rc<NetState>`
+              found reference `&Arc<NetState>`
+note: function defined here
+  --> src/packages/net/mod.rs:75:4
+   |
+75 | fn connect(state: &Shared<NetState>, address: &str, port: crate::INT) -> Result<NetStream, Box<crate::EvalAltResult>> {
+   |    ^^^^^^^ ------------------------
+
+Some errors have detailed explanations: E0277, E0308, E0599.
+For more information about an error, try `rustc --explain E0277`.
+warning: `rhai` (lib) generated 3 warnings
+error: could not compile `rhai` (lib) due to 8 previous errors; 3 warnings emitted

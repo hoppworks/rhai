@@ -1,0 +1,27 @@
+# TCP connect slice state
+
+Goal: implement the approved first TCP vertical slice in `/Users/hoppworks/projects/rhai-tcp-connect` and commit locally. Listener and byte-transfer behaviors remain open.
+
+Start: 2026-09-30 UTC session; hard limit 60 active minutes including coordinator review. Scope: one TDD public-API real-peer test slice plus implementation. Max 15 minutes per scoped invocation, 2 GiB scoped storage, eight live sockets. No shared services or remote writes.
+
+Step 1 (in progress): read task brief, AGENTS.md, approved TCP/release proposals, CONTEXT.md, tdd and e2e-proof skills. Test seam approved: public Rhai script through Engine/registered NetPackage to an independently observed OS TCP peer.
+
+Launches: 0. Active elapsed: <5 minutes. Cause attempts: none. Next: add meaningful RED integration test, record and send source/RED for review before implementation. Use run_scoped.py with source copy and private Cargo home/target. Preserve proof outside runtime.
+
+Step 2 (RED source exists): added `tests/net_connect.rs` with public Engine/NetPackage contract for authorized peer observation, deny/invalid endpoint no-accept, catchable error fields, shared clone close, timeout validation, and wrong-expectation control. API names in test follow approved behavior and package style; not yet implemented.
+
+Launch 1 (RED): prepared the `net` feature and module gate solely to expose the public API seam; next compile is expected to fail because `src/packages/net` is absent. Scoped launch policy: one invocation, <=900s, source copy, CARGO_BUILD_JOBS=2, CARGO_PROFILE_DEV_DEBUG=0, private CARGO_HOME and CARGO_TARGET_DIR, 2 GiB cap. Source storage and launch elapsed to be recorded from command output. Coordinator asked for early source/RED review.
+
+Review update: coordinator identified two acceptance-harness issues before implementation: the control needed to invert the actual independent peer EOF assertion and child lifecycle had to be bounded; the socket read trait import was also missing. Fixed test source accordingly. RED remains E0583 module absence. No API implementation has started.
+
+Review-driven implementation requirements: added a shared package-level stream quota (default 64, host can lower), reservation before connect, release on connect failure/close/final drop, exact-port mismatch denial test, and timeout-category mapping. Scoped launch 2 source compile failed with registration macro imports, native method registration mismatch, and Shared mismatch; diagnosed and corrected before the next check. The shell wrapper then itself returned zsh's readonly `status` assignment error after Cargo; captured compile diagnostics from the persisted log. No test binary or socket fixture was launched by that compile.
+
+Launch 3 outcome: rustfmt check passed; targeted real-peer connect test passed; wrong-expectation control failed specifically at the independently observed EOF assertion as intended and its log was exported. The same scoped script then exited during the full test run before its log export, so cause is unknown from that launch. Next invocation will preserve the suite output even on failure. Elapsed remains within the 60-minute feature cap; scoped runtime cleaned itself.
+
+Launch 4 diagnosis: package and test binary compiled. Suite exposed that Rhai `try/catch` is a statement and the initial tests incorrectly treated it as a boolean expression, yielding `ErrorMismatchOutputType(bool, ())`; corrected scripts now store catch results in a script variable. Peer connect and false-green control had already passed. No implementation correction attributed to this test harness issue.
+
+Launch 5 diagnosis: scoped test launch 4 passed the corrected target and false-green control. Full suite surfaced only invalid use of try/catch as an expression in two policy assertions; converted both to statements with result variables. Retained completed behavior and control evidence; next launch reruns all checks and adds `sync` profile while keeping the same source copy/private runtime.
+
+Step 3 (implementation/proof complete): accepted scoped launch 5 passed `cargo test --features net --test net_connect` (4/4) and `cargo test --features 'net,sync' --test net_connect` (4/4); wrong-expectation control failed at the actual independent peer EOF assertion, then normal suite passed. `rustfmt --check` and `git diff --check` passed. Logs, host/toolchain, scope and remaining gates are captured in `proof.md`. Runner runtime/caches/test processes were private and cleaned by run_scoped.py after exporting logs. Host: aarch64-apple-darwin/Darwin 27.0.0, rustc 1.93.0. Parent cleared current source for atomic local commit and will perform post-commit OCR/source/proof review.
+
+All five scoped launches are recorded in `scoped-run-1.log` through `scoped-run-5.log`, plus `initial-red.log`, `compile-1.log`, per-profile output and control. No push/merge. Current tests use at most four live sockets; fixture caps and bounded waits are respected. Listener/read/write/full-release acceptance and native/MSRV gates remain open.
