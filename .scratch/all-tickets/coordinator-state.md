@@ -56,3 +56,5 @@ Native Windows custody remains the unchanged external prerequisite after exhaust
 
 ## Active independent requirement
 Unsupported feature compiler diagnostics: task/unsupported-feature-proof, owned /Users/hoppworks/projects/rhai-unsupported-feature-proof, base79eca3c0. Fixed16:01:15–16:31:15UTC including root review; brief briefs/unsupported-feature-proof.md. No stopped package resumed; compiler contract proof only, installed targets only, scoped private outputs and finite caps.
+
+Native Linux additional TCP feature verification dispatched independently at base243404c9, task/linux-net-release-features, owned /Users/hoppworks/projects/rhai-linux-net-release-features. Original16:02:41–16:32:41UTC inclusive root review; brief briefs/linux-net-release-features.md. Reuse accepted baseline; new rows and dedicated no_object/metadata only, no stopped combined/process work.
