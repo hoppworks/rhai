@@ -23,11 +23,20 @@ for line in (evidence / 'live-identities.txt').read_text().splitlines():
         parts = raw.split(None, 8)
         current = {'pid': parts[0], 'ppid': parts[1], 'pgid': parts[2],
                    'start': ' '.join(parts[3:8]), 'command': parts[8] if len(parts) > 8 else ''}
-        same = all(str(fields.get(key, '')) == str(current.get(key, '')) for key in ('pid', 'ppid', 'pgid', 'start', 'command'))
-        verdict = 'same process still live' if same else 'PID reused or identity changed'
+        same = all(str(fields.get(key, '')) == str(current.get(key, '')) for key in ('pid', 'start'))
+        verdict = 'same process still live' if same else 'PID reused'
         current = json.dumps(current, sort_keys=True)
     report.append(f"role={fields.get('role')} label={fields.get('label', '')} pid={recorded_pid} cleanup={verdict} current={current}")
+groups = {line_fields.get('owned_pgid') for line_fields in (json.loads(line) for line in (evidence / 'live-identities.txt').read_text().splitlines()) if line_fields.get('owned_pgid')}
+for pgid in groups:
+    result = subprocess.run(['ps', '-axo', 'pid=,pgid='], text=True, capture_output=True, check=True)
+    members = [row.split()[0] for row in result.stdout.splitlines() if len(row.split()) >= 2 and row.split()[1] == pgid]
+    report.append(f'owned_process_group={pgid} remaining_members={members}')
+    if members:
+        raise SystemExit('owned process group still has live members')
 (evidence / 'cleanup-readback.txt').write_text('\n'.join(report) + '\n')
 print('\n'.join(report))
 if runtime.exists():
     raise SystemExit('private runtime remains after wrapper exit')
+if any('cleanup=same process still live' in row for row in report):
+    raise SystemExit('recorded owned process remains live')

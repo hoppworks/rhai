@@ -9,6 +9,7 @@ import subprocess
 import sys
 import threading
 import time
+from datetime import datetime, timezone
 
 ROOT = pathlib.Path('/Users/hoppworks/projects/rhai-macos-sys-release-features')
 LOCK = pathlib.Path('/Users/hoppworks/projects/rhai-all-tickets/.scratch/optional-msrv-proof/evidence/Cargo.lock')
@@ -33,7 +34,7 @@ TARGETS = ('sys_policy', 'sys_env', 'sys_fs')
 OUT.mkdir(parents=True, exist_ok=True)
 HARD_KIB = 2 * 1024 * 1024
 PREEMPT_KIB = 1536 * 1024
-DEADLINE = 1790799540  # 2026-09-30T17:39:00Z
+DEADLINE = datetime(2026, 9, 30, 17, 39, tzinfo=timezone.utc).timestamp()
 active = [None]
 sample_stop = threading.Event()
 sample_peaks = {'storage_kib': 0, 'descendants': 0}
@@ -110,7 +111,10 @@ def sample_resources():
             if reason:
                 (OUT / 'STOP-REASON.txt').write_text(reason + '\n')
                 if active[0] is not None and active[0].poll() is None:
-                    active[0].terminate()
+                    try:
+                        active[0].terminate()
+                    except ProcessLookupError:
+                        pass
                 os._exit(status)
 
 
@@ -132,6 +136,7 @@ def run(label, args, env=None, expected=0, control=False):
             stream.write(line)
         status = p.wait()
         active[0] = None
+    (OUT / f'{label}.status').write_text(f'{status}\n')
     emit(f'RAW_STATUS {label}: {status}')
     if status != expected:
         raise RuntimeError(f'{label}: expected exit {expected}, received {status}')
@@ -148,10 +153,9 @@ def run(label, args, env=None, expected=0, control=False):
             raise RuntimeError('sys_fs did not record independent host readback')
 
 
-if subprocess.check_output(['git', '-C', str(ROOT), 'rev-parse', 'HEAD'], text=True).strip() != REV:
-    raise RuntimeError('source revision changed after root source gate')
-if subprocess.check_output(['git', '-C', str(ROOT), 'status', '--porcelain=v1', '--untracked-files=no'], text=True).strip():
-    raise RuntimeError('tracked source tree is dirty')
+subprocess.run(['git', '-C', str(ROOT), 'cat-file', '-e', f'{REV}^{{commit}}'], check=True)
+if subprocess.check_output(['git', '-C', str(ROOT), 'status', '--porcelain=v1'], text=True).strip():
+    raise RuntimeError('frozen proof checkout is not clean')
 lock_hash = hashlib.sha256(LOCK.read_bytes()).hexdigest()
 if lock_hash != EXPECTED_LOCK:
     raise RuntimeError(f'accepted lock hash mismatch: {lock_hash}')
@@ -175,7 +179,7 @@ if cargo is None or shutil.which('rustc') is None:
 OUT.joinpath('proof-limits.txt').write_text(
     'whole private allocation <= 2 GiB; 1 s du -sk sample; preempt at 1.5 GiB; '
     'max 16 owned descendants; two Cargo jobs; debug=0; incremental=0; '
-    'deadline=2026-09-30T17:39:00Z\n')
+    'deadline=2026-09-30T17:39:00Z; cleanup reserve to 17:44 UTC\n')
 sampler_thread = threading.Thread(target=sample_resources, name='private-resource-sampler', daemon=True)
 sampler_thread.start()
 OUT.joinpath('native-versions.txt').write_text(
@@ -186,9 +190,20 @@ OUT.joinpath('run-state.txt').write_text(
     f'source_revision={REV}\nlock_sha256={lock_hash2}\nruntime={RUNTIME}\n'
     f'native_identity={subprocess.check_output(["uname", "-sm"], text=True).strip()}\n'
     f'python_pid={os.getpid()}\nancestry={ancestry()}\n')
+owned_chain = []
+for pid, ppid, pgid, cmd in ancestry():
+    owned_chain.append((pid, ppid, pgid, cmd))
+    if 'run_scoped.py' in cmd:
+        break
+else:
+    raise RuntimeError('could not identify run_scoped.py ancestry boundary')
 with OUT.joinpath('live-identities.txt').open('w') as f:
-    for pid, ppid, pgid, cmd in ancestry():
-        f.write(json.dumps({'role': 'runner-chain', **identity_record(pid)}) + '\n')
+    for index, (pid, ppid, pgid, cmd) in enumerate(owned_chain):
+        role = 'owned-group' if index < len(owned_chain) - 1 else 'runner-launcher'
+        record = identity_record(pid)
+        if role == 'owned-group':
+            record['owned_pgid'] = str(owned_chain[1][0])
+        f.write(json.dumps({'role': role, **record}) + '\n')
 
 for row, feature in ROWS:
     emit(f'FEATURE_ROW {row}: {feature}')

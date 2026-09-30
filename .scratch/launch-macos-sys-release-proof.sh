@@ -3,7 +3,13 @@ set -u
 repo=/Users/hoppworks/projects/rhai-macos-sys-release-features
 evidence="$repo/.scratch/macos-sys-release-evidence"
 runner=/Users/hoppworks/projects/agent-skills/tools/run_scoped.py
-remaining=1400
+deadline=$(date -j -f '%Y-%m-%d %H:%M:%S' '2026-09-30 17:38:30' '+%s')
+now=$(date '+%s')
+remaining=$((deadline - now))
+if [ "$remaining" -le 0 ]; then
+    printf '%s\n' 'launch refused: absolute execution stop has passed' >&2
+    exit 88
+fi
 set +e
 python3 "$runner" --timeout "$remaining" -- python3 "$repo/.scratch/macos-sys-release-proof.py"
 status=$?
