@@ -47,9 +47,9 @@ Windows candidate is now 08fb7cd5 on task/windows-scoped-runner. Foundation
 independently reviewed, zero skipped; related corrections retained in
 windows-runtime-backend-review.md. Only whitespace checking ran, no compiler,
 fixture or native/guest run. Candidate is clean, separate and workload entry
-disabled. Next independent source requirement is exclusive runtime allocation,
-verified ACL/identity and ordered allocation journal integration, then safe
-staging/deletion and immutable specification/payload integration. Running lease
+disabled. Exclusive runtime allocation source is now present; remaining source
+requirements are safe staging/deletion and immutable specification/payload
+integration. Running lease
 renewal remains unsupported and explicitly required before payload integration.
 Runtime allocation source substep is committed in 3d7a659b with related review
 corrections 9a68a437 and 08fb7cd5. All three files independently reviewed, zero
@@ -59,6 +59,9 @@ precede identity recording. Retained directories keep their journals and full
 failure paths. This is source observation only: no compile, executed fixture,
 TDD RED/GREEN, native operation or runtime resource. The candidate is clean and
 separate; no product integration or ticket acceptance.
+Handle-based source staging and executable validation are now running in the
+responsible candidate context under briefs/windows-source-staging.md, from clean
+08fb7cd5. Live agent status was confirmed, not inferred from a state file.
 
 Step 1 corrected unrestricted resolution is integrated at 5f87d339 and accepted
 on native macOS: env7/fs24/policy26 pass, exact runtime absent. Red/green
