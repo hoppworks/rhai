@@ -1,7 +1,8 @@
 //! Shared logical TCP handle lifecycle.
 
 use crate::plugin::*;
-use crate::Module;
+use crate::{EvalAltResult, Module};
+use std::io;
 use std::net::TcpStream;
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::{Arc, Mutex};
@@ -38,6 +39,25 @@ impl NetStream {
             .map(|socket| socket.is_none())
             .unwrap_or(true)
     }
+
+    fn peer_addr(&mut self) -> Result<String, Box<EvalAltResult>> {
+        let socket = self
+            .0
+            .socket
+            .lock()
+            .unwrap_or_else(|poisoned| poisoned.into_inner());
+        let socket = socket.as_ref().ok_or_else(|| {
+            super::NetError::io(
+                "peer_addr",
+                "closed stream",
+                &io::Error::new(io::ErrorKind::NotConnected, "stream is closed"),
+            )
+        })?;
+        socket
+            .peer_addr()
+            .map(|address| address.to_string())
+            .map_err(|error| super::NetError::io("peer_addr", "TCP stream", &error).into())
+    }
 }
 
 pub(super) fn register(module: &mut Module) {
@@ -54,6 +74,11 @@ mod net_stream_functions {
     #[rhai_fn(get = "closed", pure)]
     pub fn closed(stream: &mut super::NetStream) -> bool {
         stream.is_closed()
+    }
+
+    #[rhai_fn(get = "peer_addr", return_raw)]
+    pub fn peer_addr(stream: &mut super::NetStream) -> Result<String, Box<crate::EvalAltResult>> {
+        stream.peer_addr()
     }
 }
 
