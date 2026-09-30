@@ -49,7 +49,11 @@ Real net/net,sync Engine and peer checks pass 4/4 each; wrong EOF control fails.
 Exact accepted runtime absence independently confirmed. Resource measurement and
 explicit runner-timeout omissions are disclosed, not inferred as compliant.
 No full net/release acceptance. Next independent slice: authorized listener/accept,
-briefs/tcp-listener.md, fresh 60-active-minute package with explicit timeout/storage.
+briefs/tcp-listener.md, fresh60-active-minute package with explicit timeout/storage.
+Draft net,sync proof4 connect/7 listener tests reviewed; source findings closed in
+draft. Review requires quota2 for the timeout-release assertion and an exceptional
+path close/join guard for the owned sync worker before immutable final acceptance.
+Original12:34–13:34UTC allowance retained; no acceptance/integration yet.
 
 File open/write/cursor foundation is accepted and locally integrated at 260ac238
 (candidate 62f27ac3); see file-handle-open-review.md. Final real-file macOS suites
@@ -57,7 +61,14 @@ pass 27/27 and sync/no_index 18/18, including independent readback, wrong payloa
 control and reopen after handle drop. Exact final runtime absence independently
 confirmed. Storage is end-only, full parallel fixture peak is unmeasured. Retain
 owned worktree /Users/hoppworks/projects/rhai-file-handles for untracked proof.
-Next independent slice: bounded streaming reads; whole release remains open.
+Bounded streaming reads now run in a fresh Standard task/file-reads at
+/Users/hoppworks/projects/rhai-file-reads, e365008a; brief briefs/file-handle-reads.md.
+Concrete proposal reviewed: additive max_file_read, finite8MiB default, host zero
+means zero returned bytes, checked nonzero Engine cap further lowers it; unchecked
+retains host cap. Per-call cap truncation and UTF-8 behavior need documentation.
+No change to whole-file APIs. Original60-active-minute allocation including review
+starts at actual agent clock around12:53UTC, not a reset of any older cause.
+Whole release remains open.
 
 POSIX further source-only retry is stopped at e0f9f992 in the owned process
 worktree, clean and unintegrated; no executions or owned live resources. Source
