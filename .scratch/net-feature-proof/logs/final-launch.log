@@ -1,0 +1,8 @@
+noobj-final-compile=0
+noobj-final-green=0
+noobj-peer-wrong=101
+f32-wrong-byte=101
+f32-correct-byte=0
+only_i32-no_float-final=0
+no_index-sync-metadata-final=0
+f32_float-final=0

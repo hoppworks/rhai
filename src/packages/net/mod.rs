@@ -3,6 +3,9 @@
 //! The package starts with no grants. Hosts grant exact numeric socket endpoints with
 //! [`NetConfig`] before registering a [`NetPackage`] with an engine. Connect and
 //! listen grants are separate and match exact numeric socket endpoints.
+//! With `no_object`, use the registered free-function forms (for example,
+//! `write_all_string(stream, "hello")`, `peer_addr(stream)`, and
+//! `accept(listener, 500)`) because dot syntax is unavailable.
 
 #[cfg(feature = "no_std")]
 compile_error!("the `net` feature requires `std`; it cannot be combined with `no_std`");

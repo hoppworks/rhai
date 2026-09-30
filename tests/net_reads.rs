@@ -1,4 +1,4 @@
-#![cfg(feature = "net")]
+#![cfg(all(feature = "net", not(feature = "no_object")))]
 
 use rhai::packages::net::{NetConfig, NetError, NetPackage};
 use rhai::packages::Package;
@@ -106,6 +106,41 @@ fn one_shot_read_returns_an_available_short_prefix_without_waiting_for_more() {
         },
     );
     assert_eq!(actual, "a");
+}
+
+#[cfg(feature = "f32_float")]
+#[test]
+fn f32_float_timeout_arguments_reject_fractional_and_non_finite_values() {
+    let result = connected(
+        NetConfig::default().read_timeout(Duration::from_millis(35)),
+        |mut peer| {
+            peer.write_all(b"Z").unwrap();
+            let mut byte = [0_u8; 1];
+            let _ = peer.read(&mut byte);
+        },
+        |engine, port| {
+            engine
+                .eval::<bool>(&format!(
+                    r#"let stream = connect("127.0.0.1", {port});
+                       let fraction_rejected = false;
+                       try {{ stream.read_string(1, 1.5); }} catch (error) {{ fraction_rejected = true; }}
+                       let nan = 0.0 / 0.0;
+                       let nan_rejected = false;
+                       try {{ stream.read_string(1, nan); }} catch (error) {{ nan_rejected = true; }}
+                       let infinity = 1.0 / 0.0;
+                       let infinity_rejected = false;
+                       try {{ stream.read_string(1, infinity); }} catch (error) {{ infinity_rejected = true; }}
+                       let byte = stream.read_string(1, 100);
+                       let extreme_capped = false;
+                       try {{ stream.read_string(1, {}); }} catch (error) {{ extreme_capped = error.kind == "Timeout"; }}
+                       close(stream);
+                       fraction_rejected && nan_rejected && infinity_rejected && byte == "Z" && extreme_capped"#,
+                    rhai::INT::MAX
+                ))
+                .unwrap()
+        },
+    );
+    assert!(result, "only integer millisecond timeouts are accepted, without consuming peer data");
 }
 
 #[cfg(not(feature = "no_index"))]
