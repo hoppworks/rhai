@@ -1,0 +1,6 @@
+status=101
+expected_diagnostic_count=1
+peak_sampled_runtime_bytes=124112896
+preemptive_limit_bytes=1610612736
+elapsed_seconds=12.542
+runtime_path=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-9gd80296

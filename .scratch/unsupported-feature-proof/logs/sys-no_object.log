@@ -1,0 +1,45 @@
+$ cargo check --no-default-features --features sys,no_object
+   Compiling num-traits v0.2.19
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-1zssqo0x/source)
+error: the `sys` feature requires object maps; it cannot be combined with `no_object`
+  --> src/packages/sys/mod.rs:34:1
+   |
+34 | compile_error!("the `sys` feature requires object maps; it cannot be combined with `no_object`");
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0432]: unresolved import `crate::Map`
+   --> src/packages/sys/env.rs:5:37
+    |
+  5 | use crate::{Dynamic, EvalAltResult, Map, Module, Shared};
+    |                                     ^^^ no `Map` in the root
+    |
+    = help: consider importing one of these items instead:
+            crate::ast::Expr::Map
+            std::iter::Map
+note: found an item that was configured out
+   --> src/lib.rs:325:10
+    |
+324 | #[cfg(not(feature = "no_object"))]
+    |          ----------------------- the item is gated here
+325 | pub type Map = std::collections::BTreeMap<Identifier, Dynamic>;
+    |          ^^^
+
+error[E0432]: unresolved import `crate::Map`
+   --> src/packages/sys/fs.rs:15:45
+    |
+ 15 | use crate::{Dynamic, EvalAltResult, Locked, Map, Module, NativeCallContext, Shared, INT};
+    |                                             ^^^ no `Map` in the root
+    |
+    = help: consider importing one of these items instead:
+            crate::ast::Expr::Map
+            std::iter::Map
+note: found an item that was configured out
+   --> src/lib.rs:325:10
+    |
+324 | #[cfg(not(feature = "no_object"))]
+    |          ----------------------- the item is gated here
+325 | pub type Map = std::collections::BTreeMap<Identifier, Dynamic>;
+    |          ^^^
+
+For more information about this error, try `rustc --explain E0432`.
+error: could not compile `rhai` (lib) due to 3 previous errors

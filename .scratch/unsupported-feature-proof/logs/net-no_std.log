@@ -1,0 +1,1693 @@
+$ cargo check --no-default-features --features net,no_std
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-1zssqo0x/source)
+    Checking bitflags v2.13.2
+error: the `net` feature requires `std`; it cannot be combined with `no_std`
+  --> src/packages/net/mod.rs:36:1
+   |
+36 | compile_error!("the `net` feature requires `std`; it cannot be combined with `no_std`");
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0432]: unresolved import `std::net`
+ --> src/packages/net/config.rs:3:10
+  |
+3 | use std::net::SocketAddr;
+  |          ^^^ could not find `net` in `std`
+
+error[E0432]: unresolved import `std::error`
+ --> src/packages/net/error.rs:5:10
+  |
+5 | use std::error::Error;
+  |          ^^^^^ could not find `error` in `std`
+
+error[E0432]: unresolved import `std::io`
+ --> src/packages/net/error.rs:7:5
+  |
+7 | use std::io;
+  |     ^^^^^^^ no `io` in the root
+  |
+help: a similar name exists in the module
+  |
+7 - use std::io;
+7 + use std::i8;
+  |
+help: consider importing one of these modules instead
+  |
+7 | use std::os::unix::io;
+  |          ++++++++++
+7 - use std::io;
+7 + use core::io;
+  |
+
+error[E0432]: unresolved import `std::io`
+ --> src/packages/net/listener.rs:6:5
+  |
+6 | use std::io;
+  |     ^^^^^^^ no `io` in the root
+  |
+  = note: unresolved item `crate::packages::net::error::net_error_functions::io` exists but is inaccessible
+help: a similar name exists in the module
+  |
+6 - use std::io;
+6 + use std::i8;
+  |
+help: consider importing one of these modules instead
+  |
+6 | use std::os::unix::io;
+  |          ++++++++++
+6 - use std::io;
+6 + use core::io;
+  |
+
+error[E0432]: unresolved import `std::net`
+ --> src/packages/net/listener.rs:7:10
+  |
+7 | use std::net::{IpAddr, SocketAddr, TcpListener};
+  |          ^^^ could not find `net` in `std`
+
+error[E0432]: unresolved import `std::sync::Mutex`
+   --> src/packages/net/listener.rs:9:22
+    |
+  9 | use std::sync::{Arc, Mutex};
+    |                      ^^^^^ no `Mutex` in `generated::sync`
+    |
+    = help: consider importing one of these structs instead:
+            std::sync::Mutex
+            std::sync::nonpoison::Mutex
+note: found an item that was configured out
+   --> /private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-1zssqo0x/cargo-home/git/checkouts/no-std-compat-1a8bbbe2479aaf7a/47a5dfb/src/generated.rs:177:75
+    |
+177 |     #[cfg(all(feature = "alloc", feature = "compat_sync"))] pub use spin::Mutex;
+    |                                  -----------------------                  ^^^^^
+    |                                  |
+    |                                  the item is gated behind the `compat_sync` feature
+
+error[E0432]: unresolved import `std::time::Instant`
+  --> src/packages/net/listener.rs:10:27
+   |
+10 | use std::time::{Duration, Instant};
+   |                           ^^^^^^^ no `Instant` in `generated::time`
+   |
+   = help: consider importing this struct instead:
+           std::time::Instant
+
+error[E0432]: unresolved imports `std::io`, `std::io`
+ --> src/packages/net/stream.rs:5:10
+  |
+5 | use std::io::{self, Read, Write};
+  |          ^^   ^^^^ no `io` in the root
+  |          |
+  |          could not find `io` in `std`
+  |          help: a similar name exists in the module: `i8`
+  |
+  = help: consider importing one of these modules instead:
+          std::io
+          std::os::unix::io
+          core::io
+  = note: unresolved item `crate::packages::net::listener::net_listener_functions::io` exists but is inaccessible
+
+error[E0432]: unresolved import `std::net`
+ --> src/packages/net/stream.rs:6:10
+  |
+6 | use std::net::{Shutdown, TcpStream};
+  |          ^^^ could not find `net` in `std`
+
+error[E0432]: unresolved import `std::sync::Mutex`
+   --> src/packages/net/stream.rs:8:22
+    |
+  8 | use std::sync::{Arc, Mutex};
+    |                      ^^^^^ no `Mutex` in `generated::sync`
+    |
+    = help: consider importing one of these structs instead:
+            std::sync::Mutex
+            std::sync::nonpoison::Mutex
+    = note: unresolved item `crate::packages::net::listener::net_listener_functions::Mutex` exists but is inaccessible
+note: found an item that was configured out
+   --> /private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-1zssqo0x/cargo-home/git/checkouts/no-std-compat-1a8bbbe2479aaf7a/47a5dfb/src/generated.rs:177:75
+    |
+177 |     #[cfg(all(feature = "alloc", feature = "compat_sync"))] pub use spin::Mutex;
+    |                                  -----------------------                  ^^^^^
+    |                                  |
+    |                                  the item is gated behind the `compat_sync` feature
+
+error[E0432]: unresolved import `std::time::Instant`
+ --> src/packages/net/stream.rs:9:27
+  |
+9 | use std::time::{Duration, Instant};
+  |                           ^^^^^^^ no `Instant` in `generated::time`
+  |
+  = help: consider importing this struct instead:
+          std::time::Instant
+  = note: unresolved item `crate::packages::net::listener::net_listener_functions::Instant` exists but is inaccessible
+
+error[E0432]: unresolved import `std::net`
+  --> src/packages/net/mod.rs:56:10
+   |
+56 | use std::net::{IpAddr, SocketAddr, TcpStream};
+   |          ^^^ could not find `net` in `std`
+
+error: cannot find macro `format` in this scope
+   --> src/packages/net/mod.rs:187:18
+    |
+187 |     let target = format!("{address}:{port}");
+    |                  ^^^^^^
+    |
+help: consider importing one of these macros
+    |
+ 46 + use crate::format;
+    |
+ 46 + use std::format;
+    |
+ 46 + use alloc::format;
+    |
+ 46 + use no_std_compat::prelude::v1::format;
+    |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/net/mod.rs:113:17
+    |
+113 |                 format!("{:?}", config.write_timeout),
+    |                 ^^^^^^
+    |
+help: consider importing one of these macros
+    |
+ 46 + use crate::format;
+    |
+ 46 + use std::format;
+    |
+ 46 + use alloc::format;
+    |
+ 46 + use no_std_compat::prelude::v1::format;
+    |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/net/mod.rs:102:17
+    |
+102 |                 format!("{:?}", config.read_timeout),
+    |                 ^^^^^^
+    |
+help: consider importing one of these macros
+    |
+ 46 + use crate::format;
+    |
+ 46 + use std::format;
+    |
+ 46 + use alloc::format;
+    |
+ 46 + use no_std_compat::prelude::v1::format;
+    |
+
+error: cannot find macro `format` in this scope
+  --> src/packages/net/mod.rs:91:17
+   |
+91 |                 format!("{:?}", config.accept_timeout),
+   |                 ^^^^^^
+   |
+help: consider importing one of these macros
+   |
+46 + use crate::format;
+   |
+46 + use std::format;
+   |
+46 + use alloc::format;
+   |
+46 + use no_std_compat::prelude::v1::format;
+   |
+
+error: cannot find macro `format` in this scope
+  --> src/packages/net/mod.rs:80:17
+   |
+80 |                 format!("{:?}", config.connect_timeout),
+   |                 ^^^^^^
+   |
+help: consider importing one of these macros
+   |
+46 + use crate::format;
+   |
+46 + use std::format;
+   |
+46 + use alloc::format;
+   |
+46 + use no_std_compat::prelude::v1::format;
+   |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/net/stream.rs:166:17
+    |
+166 |                 format!("write input exceeds the {limit}-byte per-call limit"),
+    |                 ^^^^^^
+    |
+help: consider importing one of these macros
+    |
+  3 + use crate::format;
+    |
+  3 + use std::format;
+    |
+  3 + use alloc::format;
+    |
+  3 + use no_std_compat::prelude::v1::format;
+    |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/net/listener.rs:154:18
+    |
+154 |     let target = format!("{address}:{port}");
+    |                  ^^^^^^
+    |
+help: consider importing one of these macros
+    |
+  3 + use crate::format;
+    |
+  3 + use std::format;
+    |
+  3 + use alloc::format;
+    |
+  3 + use no_std_compat::prelude::v1::format;
+    |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/net/error.rs:147:25
+    |
+147 |             .map(|kind| format!("{kind:?}").into())
+    |                         ^^^^^^
+    |
+help: consider importing one of these macros
+    |
+135 +     use crate::format;
+    |
+135 +     use std::format;
+    |
+135 +     use alloc::format;
+    |
+135 +     use no_std_compat::prelude::v1::format;
+    |
+
+error[E0425]: cannot find type `Vec` in this scope
+ --> src/packages/net/config.rs:9:25
+  |
+9 |     pub(crate) connect: Vec<SocketAddr>,
+  |                         ^^^ not found in this scope
+  |
+help: consider importing one of these structs
+  |
+3 + use crate::Vec;
+  |
+3 + use std::vec::Vec;
+  |
+3 + use alloc::vec::Vec;
+  |
+3 + use no_std_compat::vec::Vec;
+  |
+
+error[E0425]: cannot find type `Vec` in this scope
+  --> src/packages/net/config.rs:10:24
+   |
+10 |     pub(crate) listen: Vec<SocketAddr>,
+   |                        ^^^ not found in this scope
+   |
+help: consider importing one of these structs
+   |
+ 3 + use crate::Vec;
+   |
+ 3 + use std::vec::Vec;
+   |
+ 3 + use alloc::vec::Vec;
+   |
+ 3 + use no_std_compat::vec::Vec;
+   |
+
+error[E0433]: failed to resolve: use of undeclared type `Vec`
+  --> src/packages/net/config.rs:23:22
+   |
+23 |             connect: Vec::new(),
+   |                      ^^^ use of undeclared type `Vec`
+   |
+help: consider importing one of these structs
+   |
+ 3 + use crate::Vec;
+   |
+ 3 + use std::vec::Vec;
+   |
+ 3 + use alloc::vec::Vec;
+   |
+ 3 + use no_std_compat::vec::Vec;
+   |
+
+error[E0433]: failed to resolve: use of undeclared type `Vec`
+  --> src/packages/net/config.rs:24:21
+   |
+24 |             listen: Vec::new(),
+   |                     ^^^ use of undeclared type `Vec`
+   |
+help: consider importing one of these structs
+   |
+ 3 + use crate::Vec;
+   |
+ 3 + use std::vec::Vec;
+   |
+ 3 + use alloc::vec::Vec;
+   |
+ 3 + use no_std_compat::vec::Vec;
+   |
+
+error[E0425]: cannot find type `String` in this scope
+  --> src/packages/net/error.rs:13:14
+   |
+13 |     message: String,
+   |              ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+ 3 + use crate::String;
+   |
+ 3 + use std::string::String;
+   |
+ 3 + use alloc::string::String;
+   |
+ 3 + use no_std_compat::string::String;
+   |
+   = and 1 other candidate
+
+error[E0425]: cannot find type `String` in this scope
+  --> src/packages/net/error.rs:16:13
+   |
+16 |     target: String,
+   |             ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+ 3 + use crate::String;
+   |
+ 3 + use std::string::String;
+   |
+ 3 + use alloc::string::String;
+   |
+ 3 + use no_std_compat::string::String;
+   |
+   = and 1 other candidate
+
+error[E0425]: cannot find type `String` in this scope
+  --> src/packages/net/error.rs:23:27
+   |
+23 |         target: impl Into<String>,
+   |                           ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+ 3 + use crate::String;
+   |
+ 3 + use std::string::String;
+   |
+ 3 + use alloc::string::String;
+   |
+ 3 + use no_std_compat::string::String;
+   |
+   = and 1 other candidate
+
+error[E0425]: cannot find type `String` in this scope
+  --> src/packages/net/error.rs:24:28
+   |
+24 |         message: impl Into<String>,
+   |                            ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+ 3 + use crate::String;
+   |
+ 3 + use std::string::String;
+   |
+ 3 + use alloc::string::String;
+   |
+ 3 + use no_std_compat::string::String;
+   |
+   = and 1 other candidate
+
+error[E0425]: cannot find type `String` in this scope
+  --> src/packages/net/error.rs:38:27
+   |
+38 |         target: impl Into<String>,
+   |                           ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+ 3 + use crate::String;
+   |
+ 3 + use std::string::String;
+   |
+ 3 + use alloc::string::String;
+   |
+ 3 + use no_std_compat::string::String;
+   |
+   = and 1 other candidate
+
+error[E0425]: cannot find type `String` in this scope
+  --> src/packages/net/error.rs:39:28
+   |
+39 |         message: impl Into<String>,
+   |                            ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+ 3 + use crate::String;
+   |
+ 3 + use std::string::String;
+   |
+ 3 + use alloc::string::String;
+   |
+ 3 + use no_std_compat::string::String;
+   |
+   = and 1 other candidate
+
+error[E0425]: cannot find type `String` in this scope
+  --> src/packages/net/error.rs:53:27
+   |
+53 |         target: impl Into<String>,
+   |                           ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+ 3 + use crate::String;
+   |
+ 3 + use std::string::String;
+   |
+ 3 + use alloc::string::String;
+   |
+ 3 + use no_std_compat::string::String;
+   |
+   = and 1 other candidate
+
+error[E0425]: cannot find type `String` in this scope
+  --> src/packages/net/error.rs:54:28
+   |
+54 |         message: impl Into<String>,
+   |                            ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+ 3 + use crate::String;
+   |
+ 3 + use std::string::String;
+   |
+ 3 + use alloc::string::String;
+   |
+ 3 + use no_std_compat::string::String;
+   |
+   = and 1 other candidate
+
+error[E0425]: cannot find type `String` in this scope
+  --> src/packages/net/error.rs:66:58
+   |
+66 |     pub(crate) fn io(op: &'static str, target: impl Into<String>, source: &io::Error) -> Self {
+   |                                                          ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+ 3 + use crate::String;
+   |
+ 3 + use std::string::String;
+   |
+ 3 + use alloc::string::String;
+   |
+ 3 + use no_std_compat::string::String;
+   |
+   = and 1 other candidate
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/error.rs:192:25
+    |
+192 | impl From<NetError> for Box<EvalAltResult> {
+    |                         ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+  3 + use crate::Box;
+    |
+  3 + use std::boxed::Box;
+    |
+  3 + use alloc::boxed::Box;
+    |
+  3 + use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `String` in this scope
+  --> src/packages/net/listener.rs:48:40
+   |
+48 |     fn local_addr(&mut self) -> Result<String, Box<EvalAltResult>> {
+   |                                        ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+ 3 + use crate::String;
+   |
+ 3 + use std::string::String;
+   |
+ 3 + use alloc::string::String;
+   |
+ 3 + use no_std_compat::string::String;
+   |
+   = and 1 other candidate
+
+error[E0425]: cannot find type `Box` in this scope
+  --> src/packages/net/listener.rs:48:48
+   |
+48 |     fn local_addr(&mut self) -> Result<String, Box<EvalAltResult>> {
+   |                                                ^^^ not found in this scope
+   |
+help: consider importing one of these structs
+   |
+ 3 + use crate::Box;
+   |
+ 3 + use std::boxed::Box;
+   |
+ 3 + use alloc::boxed::Box;
+   |
+ 3 + use no_std_compat::prelude::v1::Box;
+   |
+
+error[E0425]: cannot find type `Box` in this scope
+  --> src/packages/net/listener.rs:70:78
+   |
+70 |     fn accept(&mut self, timeout_ms: crate::INT) -> Result<super::NetStream, Box<EvalAltResult>> {
+   |                                                                              ^^^ not found in this scope
+   |
+help: consider importing one of these structs
+   |
+ 3 + use crate::Box;
+   |
+ 3 + use std::boxed::Box;
+   |
+ 3 + use alloc::boxed::Box;
+   |
+ 3 + use no_std_compat::prelude::v1::Box;
+   |
+
+error[E0433]: failed to resolve: could not find `thread` in `std`
+   --> src/packages/net/listener.rs:137:26
+    |
+137 |                     std::thread::sleep(remaining.min(Duration::from_millis(5)));
+    |                          ^^^^^^ could not find `thread` in `std`
+    |
+help: consider importing this module
+    |
+  3 + use std::thread;
+    |
+help: if you import `thread`, refer to it directly
+    |
+137 -                     std::thread::sleep(remaining.min(Duration::from_millis(5)));
+137 +                     thread::sleep(remaining.min(Duration::from_millis(5)));
+    |
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/listener.rs:153:26
+    |
+153 | ) -> Result<NetListener, Box<EvalAltResult>> {
+    |                          ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+  3 + use crate::Box;
+    |
+  3 + use std::boxed::Box;
+    |
+  3 + use alloc::boxed::Box;
+    |
+  3 + use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/listener.rs:204:43
+    |
+204 | fn accept_timeout(address: SocketAddr) -> Box<EvalAltResult> {
+    |                                           ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+  3 + use crate::Box;
+    |
+  3 + use std::boxed::Box;
+    |
+  3 + use alloc::boxed::Box;
+    |
+  3 + use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/listener.rs:218:6
+    |
+218 | ) -> Box<EvalAltResult> {
+    |      ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+  3 + use crate::Box;
+    |
+  3 + use std::boxed::Box;
+    |
+  3 + use alloc::boxed::Box;
+    |
+  3 + use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `String` in this scope
+   --> src/packages/net/listener.rs:241:17
+    |
+241 |     ) -> Result<String, Box<crate::EvalAltResult>> {
+    |                 ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+229 +     use crate::String;
+    |
+229 +     use std::string::String;
+    |
+229 +     use alloc::string::String;
+    |
+229 +     use no_std_compat::string::String;
+    |
+    = and 1 other candidate
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/listener.rs:241:25
+    |
+241 |     ) -> Result<String, Box<crate::EvalAltResult>> {
+    |                         ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+229 +     use crate::Box;
+    |
+229 +     use std::boxed::Box;
+    |
+229 +     use alloc::boxed::Box;
+    |
+229 +     use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/listener.rs:249:42
+    |
+249 |     ) -> Result<super::super::NetStream, Box<crate::EvalAltResult>> {
+    |                                          ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+229 +     use crate::Box;
+    |
+229 +     use std::boxed::Box;
+    |
+229 +     use alloc::boxed::Box;
+    |
+229 +     use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `String` in this scope
+  --> src/packages/net/stream.rs:45:13
+   |
+45 |     target: String,
+   |             ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+ 3 + use crate::String;
+   |
+ 3 + use std::string::String;
+   |
+ 3 + use alloc::string::String;
+   |
+ 3 + use no_std_compat::string::String;
+   |
+   = and 1 other candidate
+
+error[E0425]: cannot find type `Box` in this scope
+  --> src/packages/net/stream.rs:83:66
+   |
+83 |     fn socket(&self, op: &'static str) -> Result<Arc<TcpStream>, Box<EvalAltResult>> {
+   |                                                                  ^^^ not found in this scope
+   |
+help: consider importing one of these structs
+   |
+ 3 + use crate::Box;
+   |
+ 3 + use std::boxed::Box;
+   |
+ 3 + use alloc::boxed::Box;
+   |
+ 3 + use no_std_compat::prelude::v1::Box;
+   |
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:115:77
+    |
+115 |     fn shutdown(&self, direction: Shutdown, op: &'static str) -> Result<(), Box<EvalAltResult>> {
+    |                                                                             ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+  3 + use crate::Box;
+    |
+  3 + use std::boxed::Box;
+    |
+  3 + use alloc::boxed::Box;
+    |
+  3 + use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0433]: failed to resolve: use of undeclared type `Box`
+   --> src/packages/net/stream.rs:131:13
+    |
+131 |             Box::<EvalAltResult>::from(super::NetError::io(op, self.0.target.clone(), &error))
+    |             ^^^ use of undeclared type `Box`
+    |
+help: consider importing one of these structs
+    |
+  3 + use crate::Box;
+    |
+  3 + use std::boxed::Box;
+    |
+  3 + use alloc::boxed::Box;
+    |
+  3 + use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:144:29
+    |
+144 |     ) -> Result<crate::INT, Box<EvalAltResult>> {
+    |                             ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+  3 + use crate::Box;
+    |
+  3 + use std::boxed::Box;
+    |
+  3 + use alloc::boxed::Box;
+    |
+  3 + use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0433]: failed to resolve: could not find `thread` in `std`
+   --> src/packages/net/stream.rs:256:26
+    |
+256 |                     std::thread::sleep(remaining.min(MAX_POLL_INTERVAL));
+    |                          ^^^^^^ could not find `thread` in `std`
+    |
+help: consider importing this module
+    |
+  3 + use std::thread;
+    |
+help: if you import `thread`, refer to it directly
+    |
+256 -                     std::thread::sleep(remaining.min(MAX_POLL_INTERVAL));
+256 +                     thread::sleep(remaining.min(MAX_POLL_INTERVAL));
+    |
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:268:78
+    |
+268 |     fn write_timeout_error(&self, op: &'static str, partial_bytes: usize) -> Box<EvalAltResult> {
+    |                                                                              ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+  3 + use crate::Box;
+    |
+  3 + use std::boxed::Box;
+    |
+  3 + use alloc::boxed::Box;
+    |
+  3 + use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:284:29
+    |
+284 |     ) -> Result<crate::INT, Box<EvalAltResult>> {
+    |                             ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+  3 + use crate::Box;
+    |
+  3 + use std::boxed::Box;
+    |
+  3 + use alloc::boxed::Box;
+    |
+  3 + use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:305:29
+    |
+305 |     ) -> Result<crate::INT, Box<EvalAltResult>> {
+    |                             ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+  3 + use crate::Box;
+    |
+  3 + use std::boxed::Box;
+    |
+  3 + use alloc::boxed::Box;
+    |
+  3 + use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `String` in this scope
+   --> src/packages/net/stream.rs:327:39
+    |
+327 |     fn peer_addr(&mut self) -> Result<String, Box<EvalAltResult>> {
+    |                                       ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+  3 + use crate::String;
+    |
+  3 + use std::string::String;
+    |
+  3 + use alloc::string::String;
+    |
+  3 + use no_std_compat::string::String;
+    |
+    = and 1 other candidate
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:327:47
+    |
+327 |     fn peer_addr(&mut self) -> Result<String, Box<EvalAltResult>> {
+    |                                               ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+  3 + use crate::Box;
+    |
+  3 + use std::boxed::Box;
+    |
+  3 + use alloc::boxed::Box;
+    |
+  3 + use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `Vec` in this scope
+   --> src/packages/net/stream.rs:341:17
+    |
+341 |     ) -> Result<Vec<u8>, Box<EvalAltResult>> {
+    |                 ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+  3 + use crate::Vec;
+    |
+  3 + use std::vec::Vec;
+    |
+  3 + use alloc::vec::Vec;
+    |
+  3 + use no_std_compat::vec::Vec;
+    |
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:341:26
+    |
+341 |     ) -> Result<Vec<u8>, Box<EvalAltResult>> {
+    |                          ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+  3 + use crate::Box;
+    |
+  3 + use std::boxed::Box;
+    |
+  3 + use alloc::boxed::Box;
+    |
+  3 + use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `String` in this scope
+   --> src/packages/net/stream.rs:361:17
+    |
+361 |     ) -> Result<String, Box<EvalAltResult>> {
+    |                 ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+  3 + use crate::String;
+    |
+  3 + use std::string::String;
+    |
+  3 + use alloc::string::String;
+    |
+  3 + use no_std_compat::string::String;
+    |
+    = and 1 other candidate
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:361:25
+    |
+361 |     ) -> Result<String, Box<EvalAltResult>> {
+    |                         ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+  3 + use crate::Box;
+    |
+  3 + use std::boxed::Box;
+    |
+  3 + use alloc::boxed::Box;
+    |
+  3 + use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0433]: failed to resolve: use of undeclared type `String`
+   --> src/packages/net/stream.rs:386:12
+    |
+386 |         Ok(String::from_utf8_lossy(&bytes).into_owned())
+    |            ^^^^^^ use of undeclared type `String`
+    |
+help: consider importing one of these items
+    |
+  3 + use crate::String;
+    |
+  3 + use std::string::String;
+    |
+  3 + use alloc::string::String;
+    |
+  3 + use no_std_compat::string::String;
+    |
+    = and 1 other candidate
+
+error[E0425]: cannot find type `Vec` in this scope
+   --> src/packages/net/stream.rs:396:17
+    |
+396 |     ) -> Result<Vec<u8>, Box<EvalAltResult>> {
+    |                 ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+  3 + use crate::Vec;
+    |
+  3 + use std::vec::Vec;
+    |
+  3 + use alloc::vec::Vec;
+    |
+  3 + use no_std_compat::vec::Vec;
+    |
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:396:26
+    |
+396 |     ) -> Result<Vec<u8>, Box<EvalAltResult>> {
+    |                          ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+  3 + use crate::Box;
+    |
+  3 + use std::boxed::Box;
+    |
+  3 + use alloc::boxed::Box;
+    |
+  3 + use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0433]: failed to resolve: use of undeclared type `Vec`
+   --> src/packages/net/stream.rs:406:23
+    |
+406 |             return Ok(Vec::new());
+    |                       ^^^ use of undeclared type `Vec`
+    |
+help: consider importing one of these structs
+    |
+  3 + use crate::Vec;
+    |
+  3 + use std::vec::Vec;
+    |
+  3 + use alloc::vec::Vec;
+    |
+  3 + use no_std_compat::vec::Vec;
+    |
+
+error[E0433]: failed to resolve: use of undeclared type `Vec`
+   --> src/packages/net/stream.rs:437:23
+    |
+437 |             return Ok(Vec::new());
+    |                       ^^^ use of undeclared type `Vec`
+    |
+help: consider importing one of these structs
+    |
+  3 + use crate::Vec;
+    |
+  3 + use std::vec::Vec;
+    |
+  3 + use alloc::vec::Vec;
+    |
+  3 + use no_std_compat::vec::Vec;
+    |
+
+error[E0433]: failed to resolve: use of undeclared type `Vec`
+   --> src/packages/net/stream.rs:441:25
+    |
+441 |         let mut bytes = Vec::new();
+    |                         ^^^ use of undeclared type `Vec`
+    |
+help: consider importing one of these structs
+    |
+  3 + use crate::Vec;
+    |
+  3 + use std::vec::Vec;
+    |
+  3 + use alloc::vec::Vec;
+    |
+  3 + use no_std_compat::vec::Vec;
+    |
+
+error[E0433]: failed to resolve: could not find `thread` in `std`
+   --> src/packages/net/stream.rs:493:26
+    |
+493 |                     std::thread::sleep(remaining.min(MAX_POLL_INTERVAL));
+    |                          ^^^^^^ could not find `thread` in `std`
+    |
+help: consider importing this module
+    |
+  3 + use std::thread;
+    |
+help: if you import `thread`, refer to it directly
+    |
+493 -                     std::thread::sleep(remaining.min(MAX_POLL_INTERVAL));
+493 +                     thread::sleep(remaining.min(MAX_POLL_INTERVAL));
+    |
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:505:72
+    |
+505 |     fn timeout_error(&self, op: &'static str, partial_bytes: usize) -> Box<EvalAltResult> {
+    |                                                                        ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+  3 + use crate::Box;
+    |
+  3 + use std::boxed::Box;
+    |
+  3 + use alloc::boxed::Box;
+    |
+  3 + use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:549:71
+    |
+549 |     pub fn shutdown_read(stream: &mut super::NetStream) -> Result<(), Box<crate::EvalAltResult>> {
+    |                                                                       ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+544 +     use crate::Box;
+    |
+544 +     use std::boxed::Box;
+    |
+544 +     use alloc::boxed::Box;
+    |
+544 +     use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0433]: failed to resolve: could not find `net` in `std`
+   --> src/packages/net/stream.rs:550:30
+    |
+550 |         stream.shutdown(std::net::Shutdown::Read, "shutdown_read")
+    |                              ^^^ could not find `net` in `std`
+    |
+help: consider importing this enum
+    |
+544 +     use std::net::Shutdown;
+    |
+help: if you import `Shutdown`, refer to it directly
+    |
+550 -         stream.shutdown(std::net::Shutdown::Read, "shutdown_read")
+550 +         stream.shutdown(Shutdown::Read, "shutdown_read")
+    |
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:554:72
+    |
+554 |     pub fn shutdown_write(stream: &mut super::NetStream) -> Result<(), Box<crate::EvalAltResult>> {
+    |                                                                        ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+544 +     use crate::Box;
+    |
+544 +     use std::boxed::Box;
+    |
+544 +     use alloc::boxed::Box;
+    |
+544 +     use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0433]: failed to resolve: could not find `net` in `std`
+   --> src/packages/net/stream.rs:555:30
+    |
+555 |         stream.shutdown(std::net::Shutdown::Write, "shutdown_write")
+    |                              ^^^ could not find `net` in `std`
+    |
+help: consider importing this enum
+    |
+544 +     use std::net::Shutdown;
+    |
+help: if you import `Shutdown`, refer to it directly
+    |
+555 -         stream.shutdown(std::net::Shutdown::Write, "shutdown_write")
+555 +         stream.shutdown(Shutdown::Write, "shutdown_write")
+    |
+
+error[E0425]: cannot find type `String` in this scope
+   --> src/packages/net/stream.rs:564:63
+    |
+564 |     pub fn peer_addr(stream: &mut super::NetStream) -> Result<String, Box<crate::EvalAltResult>> {
+    |                                                               ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+544 +     use crate::String;
+    |
+544 +     use std::string::String;
+    |
+544 +     use alloc::string::String;
+    |
+544 +     use no_std_compat::string::String;
+    |
+    = and 1 other candidate
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:564:71
+    |
+564 |     pub fn peer_addr(stream: &mut super::NetStream) -> Result<String, Box<crate::EvalAltResult>> {
+    |                                                                       ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+544 +     use crate::Box;
+    |
+544 +     use std::boxed::Box;
+    |
+544 +     use alloc::boxed::Box;
+    |
+544 +     use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:573:29
+    |
+573 |     ) -> Result<crate::INT, Box<crate::EvalAltResult>> {
+    |                             ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+544 +     use crate::Box;
+    |
+544 +     use std::boxed::Box;
+    |
+544 +     use alloc::boxed::Box;
+    |
+544 +     use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:587:29
+    |
+587 |     ) -> Result<crate::INT, Box<crate::EvalAltResult>> {
+    |                             ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+544 +     use crate::Box;
+    |
+544 +     use std::boxed::Box;
+    |
+544 +     use alloc::boxed::Box;
+    |
+544 +     use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:600:29
+    |
+600 |     ) -> Result<crate::INT, Box<crate::EvalAltResult>> {
+    |                             ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+544 +     use crate::Box;
+    |
+544 +     use std::boxed::Box;
+    |
+544 +     use alloc::boxed::Box;
+    |
+544 +     use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:614:29
+    |
+614 |     ) -> Result<crate::INT, Box<crate::EvalAltResult>> {
+    |                             ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+544 +     use crate::Box;
+    |
+544 +     use std::boxed::Box;
+    |
+544 +     use alloc::boxed::Box;
+    |
+544 +     use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:628:29
+    |
+628 |     ) -> Result<crate::INT, Box<crate::EvalAltResult>> {
+    |                             ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+544 +     use crate::Box;
+    |
+544 +     use std::boxed::Box;
+    |
+544 +     use alloc::boxed::Box;
+    |
+544 +     use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:643:29
+    |
+643 |     ) -> Result<crate::INT, Box<crate::EvalAltResult>> {
+    |                             ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+544 +     use crate::Box;
+    |
+544 +     use std::boxed::Box;
+    |
+544 +     use alloc::boxed::Box;
+    |
+544 +     use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:657:29
+    |
+657 |     ) -> Result<crate::INT, Box<crate::EvalAltResult>> {
+    |                             ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+544 +     use crate::Box;
+    |
+544 +     use std::boxed::Box;
+    |
+544 +     use alloc::boxed::Box;
+    |
+544 +     use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:672:29
+    |
+672 |     ) -> Result<crate::INT, Box<crate::EvalAltResult>> {
+    |                             ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+544 +     use crate::Box;
+    |
+544 +     use std::boxed::Box;
+    |
+544 +     use alloc::boxed::Box;
+    |
+544 +     use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:686:30
+    |
+686 |     ) -> Result<crate::Blob, Box<crate::EvalAltResult>> {
+    |                              ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+544 +     use crate::Box;
+    |
+544 +     use std::boxed::Box;
+    |
+544 +     use alloc::boxed::Box;
+    |
+544 +     use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:701:30
+    |
+701 |     ) -> Result<crate::Blob, Box<crate::EvalAltResult>> {
+    |                              ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+544 +     use crate::Box;
+    |
+544 +     use std::boxed::Box;
+    |
+544 +     use alloc::boxed::Box;
+    |
+544 +     use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:715:30
+    |
+715 |     ) -> Result<crate::Blob, Box<crate::EvalAltResult>> {
+    |                              ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+544 +     use crate::Box;
+    |
+544 +     use std::boxed::Box;
+    |
+544 +     use alloc::boxed::Box;
+    |
+544 +     use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:730:30
+    |
+730 |     ) -> Result<crate::Blob, Box<crate::EvalAltResult>> {
+    |                              ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+544 +     use crate::Box;
+    |
+544 +     use std::boxed::Box;
+    |
+544 +     use alloc::boxed::Box;
+    |
+544 +     use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `String` in this scope
+   --> src/packages/net/stream.rs:743:17
+    |
+743 |     ) -> Result<String, Box<crate::EvalAltResult>> {
+    |                 ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+544 +     use crate::String;
+    |
+544 +     use std::string::String;
+    |
+544 +     use alloc::string::String;
+    |
+544 +     use no_std_compat::string::String;
+    |
+    = and 1 other candidate
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:743:25
+    |
+743 |     ) -> Result<String, Box<crate::EvalAltResult>> {
+    |                         ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+544 +     use crate::Box;
+    |
+544 +     use std::boxed::Box;
+    |
+544 +     use alloc::boxed::Box;
+    |
+544 +     use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `String` in this scope
+   --> src/packages/net/stream.rs:757:17
+    |
+757 |     ) -> Result<String, Box<crate::EvalAltResult>> {
+    |                 ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+544 +     use crate::String;
+    |
+544 +     use std::string::String;
+    |
+544 +     use alloc::string::String;
+    |
+544 +     use no_std_compat::string::String;
+    |
+    = and 1 other candidate
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:757:25
+    |
+757 |     ) -> Result<String, Box<crate::EvalAltResult>> {
+    |                         ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+544 +     use crate::Box;
+    |
+544 +     use std::boxed::Box;
+    |
+544 +     use alloc::boxed::Box;
+    |
+544 +     use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `String` in this scope
+   --> src/packages/net/stream.rs:770:17
+    |
+770 |     ) -> Result<String, Box<crate::EvalAltResult>> {
+    |                 ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+544 +     use crate::String;
+    |
+544 +     use std::string::String;
+    |
+544 +     use alloc::string::String;
+    |
+544 +     use no_std_compat::string::String;
+    |
+    = and 1 other candidate
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:770:25
+    |
+770 |     ) -> Result<String, Box<crate::EvalAltResult>> {
+    |                         ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+544 +     use crate::Box;
+    |
+544 +     use std::boxed::Box;
+    |
+544 +     use alloc::boxed::Box;
+    |
+544 +     use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `String` in this scope
+   --> src/packages/net/stream.rs:784:17
+    |
+784 |     ) -> Result<String, Box<crate::EvalAltResult>> {
+    |                 ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+544 +     use crate::String;
+    |
+544 +     use std::string::String;
+    |
+544 +     use alloc::string::String;
+    |
+544 +     use no_std_compat::string::String;
+    |
+    = and 1 other candidate
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:784:25
+    |
+784 |     ) -> Result<String, Box<crate::EvalAltResult>> {
+    |                         ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+544 +     use crate::Box;
+    |
+544 +     use std::boxed::Box;
+    |
+544 +     use alloc::boxed::Box;
+    |
+544 +     use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0433]: failed to resolve: could not find `Instant` in `time`
+  --> src/packages/net/mod.rs:74:27
+   |
+74 |             || std::time::Instant::now()
+   |                           ^^^^^^^ could not find `Instant` in `time`
+   |
+help: consider importing this struct
+   |
+46 + use std::time::Instant;
+   |
+help: if you import `Instant`, refer to it directly
+   |
+74 -             || std::time::Instant::now()
+74 +             || Instant::now()
+   |
+
+error[E0433]: failed to resolve: could not find `Instant` in `time`
+  --> src/packages/net/mod.rs:85:27
+   |
+85 |             || std::time::Instant::now()
+   |                           ^^^^^^^ could not find `Instant` in `time`
+   |
+help: consider importing this struct
+   |
+46 + use std::time::Instant;
+   |
+help: if you import `Instant`, refer to it directly
+   |
+85 -             || std::time::Instant::now()
+85 +             || Instant::now()
+   |
+
+error[E0433]: failed to resolve: could not find `Instant` in `time`
+  --> src/packages/net/mod.rs:96:27
+   |
+96 |             || std::time::Instant::now()
+   |                           ^^^^^^^ could not find `Instant` in `time`
+   |
+help: consider importing this struct
+   |
+46 + use std::time::Instant;
+   |
+help: if you import `Instant`, refer to it directly
+   |
+96 -             || std::time::Instant::now()
+96 +             || Instant::now()
+   |
+
+error[E0433]: failed to resolve: could not find `Instant` in `time`
+   --> src/packages/net/mod.rs:107:27
+    |
+107 |             || std::time::Instant::now()
+    |                           ^^^^^^^ could not find `Instant` in `time`
+    |
+help: consider importing this struct
+    |
+ 46 + use std::time::Instant;
+    |
+help: if you import `Instant`, refer to it directly
+    |
+107 -             || std::time::Instant::now()
+107 +             || Instant::now()
+    |
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/mod.rs:186:24
+    |
+186 | ) -> Result<NetStream, Box<crate::EvalAltResult>> {
+    |                        ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+ 46 + use crate::Box;
+    |
+ 46 + use std::boxed::Box;
+    |
+ 46 + use alloc::boxed::Box;
+    |
+ 46 + use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `String` in this scope
+   --> src/packages/net/mod.rs:253:23
+    |
+253 |     target: impl Into<String>,
+    |                       ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+ 46 + use crate::String;
+    |
+ 46 + use std::string::String;
+    |
+ 46 + use alloc::string::String;
+    |
+ 46 + use no_std_compat::string::String;
+    |
+    = and 1 other candidate
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/mod.rs:254:32
+    |
+254 | ) -> Result<HandleReservation, Box<crate::EvalAltResult>> {
+    |                                ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+ 46 + use crate::Box;
+    |
+ 46 + use std::boxed::Box;
+    |
+ 46 + use alloc::boxed::Box;
+    |
+ 46 + use no_std_compat::prelude::v1::Box;
+    |
+
+error[E0425]: cannot find type `String` in this scope
+   --> src/packages/net/mod.rs:262:23
+    |
+262 |     target: impl Into<String>,
+    |                       ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+ 46 + use crate::String;
+    |
+ 46 + use std::string::String;
+    |
+ 46 + use alloc::string::String;
+    |
+ 46 + use no_std_compat::string::String;
+    |
+    = and 1 other candidate
+
+error[E0425]: cannot find type `Box` in this scope
+   --> src/packages/net/mod.rs:263:32
+    |
+263 | ) -> Result<HandleReservation, Box<crate::EvalAltResult>> {
+    |                                ^^^ not found in this scope
+    |
+help: consider importing one of these structs
+    |
+ 46 + use crate::Box;
+    |
+ 46 + use std::boxed::Box;
+    |
+ 46 + use alloc::boxed::Box;
+    |
+ 46 + use no_std_compat::prelude::v1::Box;
+    |
+
+Some errors have detailed explanations: E0425, E0432, E0433.
+For more information about an error, try `rustc --explain E0425`.
+error: could not compile `rhai` (lib) due to 103 previous errors

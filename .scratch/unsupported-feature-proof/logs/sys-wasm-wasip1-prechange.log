@@ -1,0 +1,22 @@
+$ cargo check --no-default-features --locked --features sys --target wasm32-wasip1
+ Downloading crates ...
+  Downloaded wasi v0.11.1+wasi-snapshot-preview1
+   Compiling libc v0.2.189
+   Compiling rustix v1.1.5
+    Checking errno v0.3.14
+   Compiling io-lifetimes v2.0.4
+   Compiling io-lifetimes v3.0.1
+    Checking bitflags v2.13.2
+   Compiling io-extras v0.19.0
+   Compiling portable-atomic v1.15.0
+   Compiling cap-primitives v4.0.3
+    Checking fs-set-times v0.20.3
+error[E0554]: `#![feature]` may not be used on the stable release channel
+ --> /private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-h4yunwvf/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/fs-set-times-0.20.3/src/lib.rs:7:33
+  |
+7 | #![cfg_attr(target_os = "wasi", feature(wasi_ext))]
+  |                                 ^^^^^^^^^^^^^^^^^
+
+For more information about this error, try `rustc --explain E0554`.
+error: could not compile `fs-set-times` (lib) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...

@@ -1,0 +1,5 @@
+check	exit_status	log
+prechange-sys-wasm-unknown-boundary	101	.scratch/unsupported-feature-proof/logs/prechange-sys-wasm-unknown-boundary.log
+native-sys-smoke-correct	0	.scratch/unsupported-feature-proof/logs/native-sys-smoke-correct.log
+native-sys-smoke-wrong-expectation	101	.scratch/unsupported-feature-proof/logs/native-sys-smoke-wrong-expectation.log
+native-sys-smoke-restored	0	.scratch/unsupported-feature-proof/logs/native-sys-smoke-restored.log
