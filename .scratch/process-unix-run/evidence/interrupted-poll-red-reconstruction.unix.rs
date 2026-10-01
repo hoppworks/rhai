@@ -1097,7 +1097,7 @@ fn supervise(
     let (mut out_eof, mut err_eof) = (false, false);
     let mut status = None;
     loop {
-        let mut expired = timeout.is_some_and(|t| started.elapsed() >= t);
+        let expired = timeout.is_some_and(|t| started.elapsed() >= t);
         if !driver.reaped {
             match driver.child_mut().try_wait() {
                 Ok(s) => {
@@ -1190,16 +1190,8 @@ fn supervise(
             #[cfg(not(test))]
             let e = io::Error::last_os_error();
             if e.kind() == io::ErrorKind::Interrupted {
-                expired = timeout.is_some_and(|t| started.elapsed() >= t);
-                if !expired {
-                    thread::sleep(Duration::from_millis(1));
-                    continue;
-                }
-                // An interrupted poll has no usable readiness result. Let the ordinary
-                // timeout cleanup run without treating indeterminate revents as output.
-                for descriptor in &mut fds {
-                    descriptor.revents = 0;
-                }
+                thread::sleep(Duration::from_millis(1));
+                continue;
             } else {
                 return fail(
                     &mut driver,
