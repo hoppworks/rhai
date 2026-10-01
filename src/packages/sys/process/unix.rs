@@ -2923,7 +2923,10 @@ fn fail(
             Ok(Some(value)) => {
                 driver.observe_reaped(value.clone());
                 status = Some(value);
-                break;
+                // Managed cleanup still owns its bounded passive group-observation budget
+                // after the exact leader has been reaped. The next loop pass observes the
+                // retained PGID without another nonzero signal; direct-child cleanup exits
+                // through the same loop's already-closed branch.
             }
             Ok(None) => thread::sleep(Duration::from_millis(10)),
             Err(error) if error.raw_os_error() == Some(libc::ECHILD) => {
