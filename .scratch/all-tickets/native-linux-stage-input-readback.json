@@ -1,0 +1,21 @@
+{
+  "all_match": true,
+  "sha256": {
+    "/root/rhai-linux-native-io-task/native-linux-io-20261001-060839UTC/launch-linux-native-io.sh": "5f00c87e3fb36f9207bb9ba72509d699a75436580ed6daf2e02008726a4a52bd",
+    "/root/rhai-linux-native-io-task/native-linux-io-20261001-060839UTC/runner/tools/agentskills/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "/root/rhai-linux-native-io-task/native-linux-io-20261001-060839UTC/runner/tools/agentskills/pyguard.py": "a3739f4947744303e1adf3fb0875ac743944a272e5b95c94b1baba53029d313f",
+    "/root/rhai-linux-native-io-task/native-linux-io-20261001-060839UTC/runner/tools/run_scoped.py": "9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d",
+    "/root/rhai-linux-native-io-task/native-linux-io-20261001-060839UTC/source/.scratch/process-prototype/Cargo.toml": "b26b20e622954380ffb94aba823f0863006b34db6be3c7190ddc91939d58ff43",
+    "/root/rhai-linux-native-io-task/native-linux-io-20261001-060839UTC/source/.scratch/process-prototype/src/main.rs": "fc1f6c3ca4b92aa777d57c16f691d0a062fd18f4aed593534cc284520a30f63e",
+    "/root/rhai-linux-native-io-task/native-linux-io-20261001-060839UTC/source/.scratch/process-rust-io/Cargo.toml": "3791ba60a8a4373e3e23b99d2171254cdeb4b9a0c46daf2f9c10161067194fea",
+    "/root/rhai-linux-native-io-task/native-linux-io-20261001-060839UTC/source/.scratch/process-rust-io/adapter/controller.py": "513b9e031a5b4e9ecc3d6e2e53b98e5ce25f607d17f66fd59db82349841aadb2",
+    "/root/rhai-linux-native-io-task/native-linux-io-20261001-060839UTC/source/.scratch/process-rust-io/adapter/custodian.py": "3ac410c579cc849ea258573ec4be4066c496364e7c9874950c296fb2acf916ab",
+    "/root/rhai-linux-native-io-task/native-linux-io-20261001-060839UTC/source/.scratch/process-rust-io/adapter/launch-linux-native-io.sh": "5f00c87e3fb36f9207bb9ba72509d699a75436580ed6daf2e02008726a4a52bd",
+    "/root/rhai-linux-native-io-task/native-linux-io-20261001-060839UTC/source/.scratch/process-rust-io/adapter/process_identity.py": "e0b485322afeb8b03cc4a08f671c00eb3eedd9d58886af4f0b4d469566c05a6a",
+    "/root/rhai-linux-native-io-task/native-linux-io-20261001-060839UTC/source/.scratch/process-rust-io/adapter/run_native_acceptance.py": "7b4d61cedac58fb31807d8300fad032f92c2a2d5f812539e469ef4a6b4d0ebdc",
+    "/root/rhai-linux-native-io-task/native-linux-io-20261001-060839UTC/source/.scratch/process-rust-io/adapter/test_process_identity.py": "d7c1d5cc2f3a5075bad44be9706d3114fd564de416728bfc614856690ad3c05a",
+    "/root/rhai-linux-native-io-task/native-linux-io-20261001-060839UTC/source/.scratch/process-rust-io/src/main.rs": "74e7417077fbea8acf053d5ae40311e4c930c2b17f5d33b114ecf5184a3f7459"
+  },
+  "source_ref": "072e11f715d363435437d00727f8dd30e286632d",
+  "stage": "/root/rhai-linux-native-io-task/native-linux-io-20261001-060839UTC"
+}
