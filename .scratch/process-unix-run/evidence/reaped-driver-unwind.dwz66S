@@ -1,0 +1,622 @@
+runtime_path=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0
+os=macOS-27.0-arm64-arm-64bit
+python=3.9.6 (default, Aug 25 2026, 21:26:21)  [Clang 21.0.0 (clang-2100.3.34.2)]
+head=fd86c9bb7e3770deadf0276decd28a7d73ea1f01
+current_source_manifest={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/fs.rs': 'eae3b9c7828a9282ede7827166fb7a7ffaa2bedfb315a1e9702f211690291d3a', 'src/packages/sys/mod.rs': 'f4adb768333afb9303d4eb40053db90602e220630dd1335042532cfb082f2c6b', 'src/packages/sys/process.rs': 'cce804da530776565acddd5ba3e7b25338d3332378624c8e17d06d97162241bc', 'src/packages/sys/process/unix.rs': '678ff28a121f84f6d6a57ab10dd86f6a6bedb15f32c80bbc9074acc80a32b558'}
+baseline_unix_original_sha256=bad97c6a476fea20d92198838926c6071b0738698751cd8a271db74d108bd447
+baseline_unix_with_only_test_sha256=0c80547b377822577e8c132ded686c0eaa7c5fa949ee5a8a121d88f2bbfd3bcb
+candidate_harness_sha256=fa749dd1ee8b015bccdc5fc2f51efa9982775cd482b15abd5f96ea4c89944d19
+case_argv=['tar', '-xf', '/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0/head.tar', '-C', '/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0/source']
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0/01-extract-head.log
+sampler_status=0 stdout='14328\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=14328
+sampler_status=0 stdout='31600\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=31600
+case_status=0 label=extract-head
+case_log_output_begin label=01-extract-head.log complete=true bytes=0 clipped=false
+
+case_log_output_end
+baseline_private_manifest={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/fs.rs': 'eae3b9c7828a9282ede7827166fb7a7ffaa2bedfb315a1e9702f211690291d3a', 'src/packages/sys/mod.rs': 'f4adb768333afb9303d4eb40053db90602e220630dd1335042532cfb082f2c6b', 'src/packages/sys/process.rs': 'cce804da530776565acddd5ba3e7b25338d3332378624c8e17d06d97162241bc', 'src/packages/sys/process/unix.rs': '0c80547b377822577e8c132ded686c0eaa7c5fa949ee5a8a121d88f2bbfd3bcb'}
+accepted_lock_sha256=8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa
+private_lock_sha256=fb30d25a7f00c2e0d3c8eefb7ee787c21b1043cbe391a3c5aa58209e1afe9e8e
+case_argv=['rustup', 'toolchain', 'install', '1.77.2', '--profile', 'minimal', '--no-self-update']
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0/02-install-rust-1.77.2.log
+sampler_status=0 stdout='17440\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=17440
+sampler_status=0 stdout='17444\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=17444
+sampler_status=0 stdout='17444\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=17444
+sampler_status=0 stdout='17444\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=17444
+sampler_status=0 stdout='18796\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=18796
+sampler_status=0 stdout='51924\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=51924
+sampler_status=0 stdout='62736\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=62736
+sampler_status=0 stdout='74832\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=74832
+sampler_status=0 stdout='83024\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=83024
+sampler_status=0 stdout='86096\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=86096
+sampler_status=0 stdout='166948\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=166948
+sampler_status=0 stdout='207908\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=207908
+sampler_status=0 stdout='219172\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=219172
+sampler_status=0 stdout='227364\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=227364
+sampler_status=0 stdout='228388\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=228388
+sampler_status=0 stdout='236580\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=236580
+sampler_status=0 stdout='237604\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=237604
+sampler_status=0 stdout='267656\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=267656
+sampler_status=0 stdout='410520\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=410520
+sampler_status=0 stdout='531816\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=531816
+sampler_status=0 stdout='484096\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=484096
+sampler_status=0 stdout='484100\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=484100
+case_status=0 label=install-rust-1.77.2
+case_log_output_begin label=02-install-rust-1.77.2.log complete=true bytes=308 clipped=false
+info: syncing channel updates for 1.77.2-aarch64-apple-darwin
+info: latest update on 2024-04-09 for version 1.77.2 (25ef9e3d8 2024-04-09)
+info: downloading 3 components
+
+  1.77.2-aarch64-apple-darwin installed - rustc 1.77.2 (25ef9e3d8 2024-04-09)
+
+info: default toolchain set to 1.77.2-aarch64-apple-darwin
+
+case_log_output_end
+toolchain_install_output=info: syncing channel updates for 1.77.2-aarch64-apple-darwin
+info: latest update on 2024-04-09 for version 1.77.2 (25ef9e3d8 2024-04-09)
+info: downloading 3 components
+
+  1.77.2-aarch64-apple-darwin installed - rustc 1.77.2 (25ef9e3d8 2024-04-09)
+
+info: default toolchain set to 1.77.2-aarch64-apple-darwin
+
+case_argv=['rustup', 'run', '1.77.2', 'rustc', '--version']
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0/03-rustc-version.log
+sampler_status=0 stdout='484100\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=484100
+sampler_status=0 stdout='484104\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=484104
+case_status=0 label=rustc-version
+case_log_output_begin label=03-rustc-version.log complete=true bytes=36 clipped=false
+rustc 1.77.2 (25ef9e3d8 2024-04-09)
+
+case_log_output_end
+rustc_version=rustc 1.77.2 (25ef9e3d8 2024-04-09)
+case_argv=['rustup', 'run', '1.77.2', 'cargo', '--version']
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0/04-cargo-version.log
+sampler_status=0 stdout='484104\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=484104
+sampler_status=0 stdout='484108\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=484108
+case_status=0 label=cargo-version
+case_log_output_begin label=04-cargo-version.log complete=true bytes=36 clipped=false
+cargo 1.77.2 (e52e36006 2024-03-26)
+
+case_log_output_end
+cargo_version=cargo 1.77.2 (e52e36006 2024-03-26)
+case_argv=['rustup', 'run', '1.77.2', 'cargo', 'test', '--locked', '--features', 'testing-environ,sys,metadata', '--lib', 'reaped_driver_unwind_retires_completed_owner_once', '--', '--nocapture']
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0/05-known-broken-baseline-red.log
+sampler_status=0 stdout='484108\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=484108
+sampler_status=0 stdout='485100\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=485100
+sampler_status=0 stdout='487384\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=487384
+sampler_status=0 stdout='487384\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=487384
+sampler_status=0 stdout='490928\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=490928
+sampler_status=0 stdout='493564\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=493564
+sampler_status=0 stdout='519636\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=519636
+sampler_status=0 stdout='530744\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=530744
+sampler_status=0 stdout='541604\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=541604
+sampler_status=0 stdout='546932\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=546932
+sampler_status=0 stdout='552048\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=552048
+sampler_status=0 stdout='566352\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=566352
+sampler_status=0 stdout='572188\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=572188
+sampler_status=0 stdout='574960\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=574960
+sampler_status=0 stdout='587088\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=587088
+sampler_status=0 stdout='594204\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=594204
+sampler_status=0 stdout='605396\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=605396
+sampler_status=0 stdout='607988\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=607988
+sampler_status=0 stdout='607988\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=607988
+sampler_status=0 stdout='613436\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=613436
+sampler_status=0 stdout='648424\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=648424
+sampler_status=0 stdout='655116\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=655116
+sampler_status=0 stdout='661224\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=661224
+sampler_status=0 stdout='661236\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=661236
+sampler_status=0 stdout='661236\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=661236
+sampler_status=0 stdout='661236\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=661236
+sampler_status=0 stdout='661236\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=661236
+sampler_status=0 stdout='661240\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=661240
+sampler_status=0 stdout='661244\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=661244
+sampler_status=0 stdout='662872\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=662872
+sampler_status=0 stdout='666308\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=666308
+sampler_status=0 stdout='671680\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=671680
+sampler_status=0 stdout='672428\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672428
+sampler_status=0 stdout='672428\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672428
+case_status=101 label=known-broken-baseline-red
+case_log_output_begin label=05-known-broken-baseline-red.log complete=true bytes=5530 clipped=false
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded bitflags v2.13.2
+  Downloaded maybe-owned v0.3.4
+  Downloaded fs-set-times v0.20.3
+  Downloaded crunchy v0.2.4
+  Downloaded const-random-macro v0.1.16
+  Downloaded io-lifetimes v2.0.4
+  Downloaded version_check v0.9.5
+  Downloaded rmp v0.8.14
+  Downloaded static_assertions v1.1.0
+  Downloaded rmp-serde v1.3.0
+  Downloaded tiny-keccak v2.0.2
+  Downloaded unicode-ident v1.0.22
+  Downloaded serde_derive v1.0.229
+  Downloaded num-traits v0.2.19
+  Downloaded serde v1.0.229
+  Downloaded cap-primitives v4.0.3
+  Downloaded memchr v2.8.3
+  Downloaded serde_json v1.0.145
+  Downloaded getrandom v0.3.4
+  Downloaded ryu v1.0.20
+  Downloaded portable-atomic v1.15.0
+  Downloaded proc-macro2 v1.0.103
+  Downloaded thin-vec v0.2.19
+  Downloaded smallvec v1.16.2
+  Downloaded serde_core v1.0.229
+  Downloaded zerocopy v0.8.59
+  Downloaded syn v2.0.106
+  Downloaded syn v3.0.6
+  Downloaded cap-std v4.0.3
+  Downloaded rustix v1.1.5
+  Downloaded ahash v0.8.12
+  Downloaded once_cell v1.21.4
+  Downloaded ipnet v2.12.2
+  Downloaded io-extras v0.19.0
+  Downloaded getrandom v0.2.17
+  Downloaded smartstring v1.0.1
+  Downloaded byteorder v1.5.0
+  Downloaded quote v1.0.41
+  Downloaded paste v1.0.15
+  Downloaded io-lifetimes v3.0.1
+  Downloaded const-random v0.1.18
+  Downloaded cfg-if v1.0.5
+  Downloaded itoa v1.0.15
+  Downloaded autocfg v1.5.1
+  Downloaded errno v0.3.14
+  Downloaded ambient-authority v0.0.2
+  Downloaded libc v0.2.189
+   Compiling proc-macro2 v1.0.103
+   Compiling quote v1.0.41
+   Compiling unicode-ident v1.0.22
+   Compiling libc v0.2.189
+   Compiling autocfg v1.5.1
+   Compiling crunchy v0.2.4
+   Compiling version_check v0.9.5
+   Compiling serde_core v1.0.229
+   Compiling io-lifetimes v3.0.1
+   Compiling tiny-keccak v2.0.2
+   Compiling rustix v1.1.5
+   Compiling cfg-if v1.0.5
+   Compiling io-lifetimes v2.0.4
+   Compiling errno v0.3.14
+   Compiling num-traits v0.2.19
+   Compiling syn v3.0.6
+   Compiling bitflags v2.13.2
+   Compiling serde v1.0.229
+   Compiling portable-atomic v1.15.0
+   Compiling paste v1.0.15
+   Compiling io-extras v0.19.0
+   Compiling serde_derive v1.0.229
+   Compiling getrandom v0.2.17
+   Compiling once_cell v1.21.4
+   Compiling zerocopy v0.8.59
+   Compiling cap-primitives v4.0.3
+   Compiling getrandom v0.3.4
+   Compiling const-random-macro v0.1.16
+   Compiling fs-set-times v0.20.3
+   Compiling ahash v0.8.12
+   Compiling smartstring v1.0.1
+   Compiling ambient-authority v0.0.2
+   Compiling byteorder v1.5.0
+   Compiling cap-std v4.0.3
+   Compiling ipnet v2.12.2
+   Compiling maybe-owned v0.3.4
+   Compiling serde_json v1.0.145
+   Compiling rmp v0.8.14
+   Compiling const-random v0.1.18
+   Compiling syn v2.0.106
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0/source)
+   Compiling ryu v1.0.20
+   Compiling static_assertions v1.1.0
+   Compiling itoa v1.0.15
+   Compiling memchr v2.8.3
+   Compiling rhai_codegen v3.2.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0/source/codegen)
+   Compiling rmp-serde v1.3.0
+   Compiling smallvec v1.16.2
+   Compiling thin-vec v0.2.19
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:1093:9
+     |
+1093 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+     |
+     = note: `#[warn(unused_mut)]` on by default
+
+warning: function `try_release_fifo` is never used
+    --> src/packages/sys/process/unix.rs:1930:8
+     |
+1930 |     fn try_release_fifo(path: &Path) -> io::Result<()> {
+     |        ^^^^^^^^^^^^^^^^
+     |
+     = note: `#[warn(dead_code)]` on by default
+
+warning: `rhai` (lib test) generated 3 warnings (run `cargo fix --lib -p rhai --tests` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 33.99s
+     Running unittests src/lib.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0/target/debug/deps/rhai-a1e1031222ea5b3f)
+
+running 1 test
+reaped-driver-unwind child_pid=23322 has_been_waited=true
+thread 'packages::sys::process::unix::tests::reaped_driver_unwind_retires_completed_owner_once' panicked at src/packages/sys/process/unix.rs:1696:13:
+injected caller unwind after child reap and pump completion
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+reaped-driver-unwind child_pid=23322 reap=ESRCH
+thread 'packages::sys::process::unix::tests::reaped_driver_unwind_retires_completed_owner_once' panicked at src/packages/sys/process/unix.rs:1703:9:
+reaped owner slot was not retired
+test packages::sys::process::unix::tests::reaped_driver_unwind_retires_completed_owner_once ... FAILED
+
+failures:
+
+failures:
+    packages::sys::process::unix::tests::reaped_driver_unwind_retires_completed_owner_once
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 8 filtered out; finished in 0.01s
+
+error: test failed, to rerun pass `--lib`
+
+case_log_output_end
+baseline_red_contract=slot retirement fails after real child wait and ESRCH receipt
+candidate_unix_sha256=678ff28a121f84f6d6a57ab10dd86f6a6bedb15f32c80bbc9074acc80a32b558
+case_argv=['rustup', 'run', '1.77.2', 'cargo', 'test', '--locked', '--features', 'testing-environ,sys,metadata', '--lib', 'reaped_driver_unwind_retires_completed_owner_once', '--', '--nocapture']
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0/06-wrong-retirement-control.log
+sampler_status=0 stdout='672428\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672428
+sampler_status=0 stdout='672420\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672420
+sampler_status=0 stdout='672424\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672424
+sampler_status=0 stdout='672424\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672424
+sampler_status=0 stdout='672424\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672424
+sampler_status=0 stdout='672428\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672428
+sampler_status=0 stdout='672428\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672428
+sampler_status=0 stdout='673672\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=673672
+sampler_status=0 stdout='677628\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=677628
+sampler_status=0 stdout='684000\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=684000
+sampler_status=0 stdout='672428\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672428
+case_status=101 label=wrong-retirement-control
+case_log_output_begin label=06-wrong-retirement-control.log complete=true bytes=2350 clipped=false
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0/source)
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:1095:9
+     |
+1095 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+     |
+     = note: `#[warn(unused_mut)]` on by default
+
+warning: function `try_release_fifo` is never used
+    --> src/packages/sys/process/unix.rs:1931:8
+     |
+1931 |     fn try_release_fifo(path: &Path) -> io::Result<()> {
+     |        ^^^^^^^^^^^^^^^^
+     |
+     = note: `#[warn(dead_code)]` on by default
+
+warning: `rhai` (lib test) generated 3 warnings (run `cargo fix --lib -p rhai --tests` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 10.34s
+     Running unittests src/lib.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0/target/debug/deps/rhai-a1e1031222ea5b3f)
+
+running 1 test
+reaped-driver-unwind child_pid=23453 has_been_waited=true
+thread 'packages::sys::process::unix::tests::reaped_driver_unwind_retires_completed_owner_once' panicked at src/packages/sys/process/unix.rs:1698:13:
+injected caller unwind after child reap and pump completion
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+reaped-driver-unwind child_pid=23453 reap=ESRCH
+thread 'packages::sys::process::unix::tests::reaped_driver_unwind_retires_completed_owner_once' panicked at src/packages/sys/process/unix.rs:1705:9:
+wrong-control expected owner slot to remain unretired
+test packages::sys::process::unix::tests::reaped_driver_unwind_retires_completed_owner_once ... FAILED
+
+failures:
+
+failures:
+    packages::sys::process::unix::tests::reaped_driver_unwind_retires_completed_owner_once
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 8 filtered out; finished in 0.01s
+
+error: test failed, to rerun pass `--lib`
+
+case_log_output_end
+case_argv=['rustup', 'run', '1.77.2', 'cargo', 'test', '--locked', '--features', 'testing-environ,sys,metadata', '--lib', 'reaped_driver_unwind_retires_completed_owner_once', '--', '--nocapture']
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0/07-candidate-restored-green.log
+sampler_status=0 stdout='672428\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672428
+sampler_status=0 stdout='672420\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672420
+sampler_status=0 stdout='672424\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672424
+sampler_status=0 stdout='672424\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672424
+sampler_status=0 stdout='672424\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672424
+sampler_status=0 stdout='672424\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672424
+sampler_status=0 stdout='672428\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672428
+sampler_status=0 stdout='673672\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=673672
+sampler_status=0 stdout='679768\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=679768
+sampler_status=0 stdout='686352\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=686352
+sampler_status=0 stdout='672432\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672432
+case_status=0 label=candidate-restored-green
+case_log_output_begin label=07-candidate-restored-green.log complete=true bytes=1983 clipped=false
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0/source)
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:1095:9
+     |
+1095 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+     |
+     = note: `#[warn(unused_mut)]` on by default
+
+warning: function `try_release_fifo` is never used
+    --> src/packages/sys/process/unix.rs:1931:8
+     |
+1931 |     fn try_release_fifo(path: &Path) -> io::Result<()> {
+     |        ^^^^^^^^^^^^^^^^
+     |
+     = note: `#[warn(dead_code)]` on by default
+
+warning: `rhai` (lib test) generated 3 warnings (run `cargo fix --lib -p rhai --tests` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 9.96s
+     Running unittests src/lib.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0/target/debug/deps/rhai-a1e1031222ea5b3f)
+
+running 1 test
+reaped-driver-unwind child_pid=23553 has_been_waited=true
+thread 'packages::sys::process::unix::tests::reaped_driver_unwind_retires_completed_owner_once' panicked at src/packages/sys/process/unix.rs:1698:13:
+injected caller unwind after child reap and pump completion
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+reaped-driver-unwind child_pid=23553 reap=ESRCH
+test packages::sys::process::unix::tests::reaped_driver_unwind_retires_completed_owner_once ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 8 filtered out; finished in 0.01s
+
+
+case_log_output_end
+case_argv=['rustup', 'run', '1.77.2', 'cargo', 'test', '--locked', '--features', 'testing-environ,sys,metadata', '--lib', 'packages::sys::process::unix::tests::', '--', '--test-threads=1', '--nocapture']
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0/08-restored-unix-owner-regressions.log
+sampler_status=0 stdout='672432\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672432
+sampler_status=0 stdout='672452\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672452
+sampler_status=0 stdout='672460\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672460
+sampler_status=0 stdout='672472\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672472
+sampler_status=0 stdout='672440\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672440
+sampler_status=0 stdout='672440\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672440
+sampler_status=0 stdout='672444\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672444
+sampler_status=0 stdout='672436\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672436
+sampler_status=0 stdout='672444\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672444
+sampler_status=0 stdout='672444\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672444
+sampler_status=0 stdout='672448\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672448
+sampler_status=0 stdout='672440\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672440
+case_status=0 label=restored-unix-owner-regressions
+case_log_output_begin label=08-restored-unix-owner-regressions.log complete=true bytes=5192 clipped=false
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:1095:9
+     |
+1095 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+     |
+     = note: `#[warn(unused_mut)]` on by default
+
+warning: function `try_release_fifo` is never used
+    --> src/packages/sys/process/unix.rs:1931:8
+     |
+1931 |     fn try_release_fifo(path: &Path) -> io::Result<()> {
+     |        ^^^^^^^^^^^^^^^^
+     |
+     = note: `#[warn(dead_code)]` on by default
+
+warning: `rhai` (lib test) generated 3 warnings (run `cargo fix --lib -p rhai --tests` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 0.09s
+     Running unittests src/lib.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0/target/debug/deps/rhai-a1e1031222ea5b3f)
+
+running 8 tests
+test packages::sys::process::unix::tests::cleanup_service_progresses_past_a_stalled_owner ... owner_service_child first pid=23558
+owner_service_child second pid=23559
+owner_service_checkpoint first_pid=23558 first_retired=false second_pid=23559 second=ESRCH
+owner_service_final first_pid=23558 second_pid=23559 both=ESRCH
+ok
+test packages::sys::process::unix::tests::inherited_pipe_holder_is_alive_at_timeout_and_fixture_releases_it ... 
+running 1 test
+inherited-pipe fixture holder_pid=23563 alive=true challenge=before:nonce-before-timeout answered=true
+inherited-pipe captured_stdout_ready=true captured_stderr_ready=true
+inherited-pipe timeout child_pid=23561 child_reap=ESRCH holder_pid=23563 holder_live=true stdout_complete=false stderr_complete=false
+inherited-pipe post-return challenge=after:nonce-after-return answered=true
+inherited-pipe holder_pid=23563 probe="stdout=errno=32 stderr=errno=32\n" reap=ESRCH
+test packages::sys::process::unix::tests::inherited_pipe_holder_is_alive_at_timeout_and_fixture_releases_it ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 8 filtered out; finished in 2.07s
+
+inherited-pipe fixture api_returned_after_pre_ack=true
+inherited-pipe outer child_pid=23561 holder_pid=23563 both=ESRCH
+ok
+test packages::sys::process::unix::tests::interrupted_poll_does_not_skip_public_deadline ... interrupted-poll child_pid=23591 reap=ESRCH elapsed_ms=114 injected=68
+ok
+test packages::sys::process::unix::tests::kill_refusal_returns_boundedly_and_retains_real_child_after_package_drop ... 
+running 1 test
+test packages::sys::process::unix::tests::kill_refusal_returns_boundedly_and_retains_real_child_after_package_drop ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 8 filtered out; finished in 1.15s
+
+retained-owner-red child_record=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0/tmp/rhai-process-owner-23557-1790858838019961000/child-record pid=23598
+retained-owner-red child_pid=23598 reap=ESRCH
+ok
+test packages::sys::process::unix::tests::non_consuming_cleanup_wait_failure_publishes_frozen_snapshot ... 
+running 1 test
+retained-owner-wait child_record=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0/tmp/rhai-process-owner-23557-1790858841192140000/child-record pid=23645
+retained-owner-wait child_pid=23645 reap=ESRCH
+test packages::sys::process::unix::tests::non_consuming_cleanup_wait_failure_publishes_frozen_snapshot ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 8 filtered out; finished in 0.14s
+
+retained-owner-wait child_record=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0/tmp/rhai-process-owner-23557-1790858841192140000/child-record pid=23645
+retained-owner-wait child_pid=23645 reap=ESRCH
+ok
+test packages::sys::process::unix::tests::post_spawn_pipe_setup_failure_preserves_cause_and_reaps_child ... 
+running 1 test
+setup-failure child_pid=23753 reap=ESRCH owner_retired=true
+test packages::sys::process::unix::tests::post_spawn_pipe_setup_failure_preserves_cause_and_reaps_child ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 8 filtered out; finished in 0.04s
+
+setup-failure fixture child_pid=23753 reap=ESRCH
+ok
+test packages::sys::process::unix::tests::read_ready_yields_after_budget_for_always_ready_reader ... ok
+test packages::sys::process::unix::tests::reaped_driver_unwind_retires_completed_owner_once ... reaped-driver-unwind child_pid=23762 has_been_waited=true
+thread 'packages::sys::process::unix::tests::reaped_driver_unwind_retires_completed_owner_once' panicked at src/packages/sys/process/unix.rs:1698:13:
+injected caller unwind after child reap and pump completion
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+reaped-driver-unwind child_pid=23762 reap=ESRCH
+ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 11.64s
+
+
+case_log_output_end
+final_private_manifest={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/fs.rs': 'eae3b9c7828a9282ede7827166fb7a7ffaa2bedfb315a1e9702f211690291d3a', 'src/packages/sys/mod.rs': 'f4adb768333afb9303d4eb40053db90602e220630dd1335042532cfb082f2c6b', 'src/packages/sys/process.rs': 'cce804da530776565acddd5ba3e7b25338d3332378624c8e17d06d97162241bc', 'src/packages/sys/process/unix.rs': '678ff28a121f84f6d6a57ab10dd86f6a6bedb15f32c80bbc9074acc80a32b558'}
+exported_baseline_path=/Users/hoppworks/projects/rhai-process-unix-run/.scratch/process-unix-run/evidence/reaped-driver-unwind.baseline-unix.rs
+exported_baseline_sha256=0c80547b377822577e8c132ded686c0eaa7c5fa949ee5a8a121d88f2bbfd3bcb
+exported_candidate_path=/Users/hoppworks/projects/rhai-process-unix-run/.scratch/process-unix-run/evidence/reaped-driver-unwind.candidate-unix.rs
+exported_candidate_sha256=678ff28a121f84f6d6a57ab10dd86f6a6bedb15f32c80bbc9074acc80a32b558
+sampler_status=0 stdout='672440\t/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-b4iqqob0\n' stderr=''
+storage_sample_kib=672440
+sampled_storage_max_kib=686352
+sampled_storage_readings=[14328, 31600, 17440, 17444, 17444, 17444, 18796, 51924, 62736, 74832, 83024, 86096, 166948, 207908, 219172, 227364, 228388, 236580, 237604, 267656, 410520, 531816, 484096, 484100, 484100, 484104, 484104, 484108, 484108, 485100, 487384, 487384, 490928, 493564, 519636, 530744, 541604, 546932, 552048, 566352, 572188, 574960, 587088, 594204, 605396, 607988, 607988, 613436, 648424, 655116, 661224, 661236, 661236, 661236, 661236, 661240, 661244, 662872, 666308, 671680, 672428, 672428, 672428, 672420, 672424, 672424, 672424, 672428, 672428, 673672, 677628, 684000, 672428, 672428, 672420, 672424, 672424, 672424, 672424, 672428, 673672, 679768, 686352, 672432, 672432, 672452, 672460, 672472, 672440, 672440, 672444, 672436, 672444, 672444, 672448, 672440, 672440]

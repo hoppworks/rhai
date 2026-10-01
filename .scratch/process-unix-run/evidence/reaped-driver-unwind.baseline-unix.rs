@@ -30,7 +30,6 @@ struct OwnerRecord {
     phase: OwnerPhase,
     pump_finished: bool,
     reaped: bool,
-    retirement_complete: bool,
     retired: Option<Arc<AtomicBool>>,
     #[cfg(test)]
     service_gate: Option<Arc<AtomicBool>>,
@@ -94,7 +93,6 @@ impl CleanupService {
             phase: OwnerPhase::Launching,
             pump_finished: false,
             reaped: false,
-            retirement_complete: false,
             retired,
             #[cfg(test)]
             service_gate,
@@ -136,7 +134,7 @@ impl Drop for CleanupService {
         self.registry.closing.store(true, Ordering::Release);
         self.registry.changed.notify_all();
         // Dropping the JoinHandle is non-blocking. The worker owns the registry until every
-        // retained child is reaped; quarantined records remain retained for safety.
+        // retained child is reaped or quarantined; it exits itself after package closure.
     }
 }
 
@@ -178,7 +176,20 @@ fn cleanup_worker(registry: Arc<OwnerRegistry>) {
                 Err(_) => (false, false),
             };
             if retire {
-                retire_record(&registry, &record);
+                let retired = record
+                    .lock()
+                    .unwrap_or_else(|poisoned| poisoned.into_inner())
+                    .retired
+                    .clone();
+                if let Some(retired) = retired {
+                    retired.store(true, Ordering::Release);
+                }
+                registry
+                    .records
+                    .lock()
+                    .unwrap_or_else(|poisoned| poisoned.into_inner())
+                    .retain(|candidate| !Arc::ptr_eq(candidate, &record));
+                registry.outstanding.fetch_sub(1, Ordering::AcqRel);
                 progressed = true;
             } else {
                 let mut owner = record
@@ -250,7 +261,12 @@ impl LaunchReservation {
         if !self.active {
             return;
         }
-        retire_record(&self.registry, &self.record);
+        self.registry
+            .records
+            .lock()
+            .unwrap_or_else(|poisoned| poisoned.into_inner())
+            .retain(|candidate| !Arc::ptr_eq(candidate, &self.record));
+        self.registry.outstanding.fetch_sub(1, Ordering::AcqRel);
         self.active = false;
     }
 
@@ -294,17 +310,6 @@ impl Drop for LaunchReservation {
                 self.active = false;
             } else if launching {
                 self.finish();
-            } else {
-                let pump_finished = {
-                    let owner = self
-                        .record
-                        .lock()
-                        .unwrap_or_else(|poisoned| poisoned.into_inner());
-                    owner.reaped && owner.pump_finished
-                };
-                if pump_finished {
-                    self.finish();
-                }
             }
         }
     }
@@ -370,6 +375,7 @@ impl Drop for DriverToken<'_> {
             if self.reaped {
                 // A child already observed as reaped must never be waited or signaled again.
                 self.child.take();
+                self.reservation.active = false;
                 self.completed = true;
                 return;
             }
@@ -393,28 +399,6 @@ impl Drop for DriverToken<'_> {
     }
 }
 
-fn retire_record(registry: &OwnerRegistry, record: &Arc<Mutex<OwnerRecord>>) {
-    let retired_probe = {
-        let mut owner = record
-            .lock()
-            .unwrap_or_else(|poisoned| poisoned.into_inner());
-        if owner.retirement_complete {
-            return;
-        }
-        owner.retirement_complete = true;
-        owner.retired.clone()
-    };
-    if let Some(probe) = retired_probe {
-        probe.store(true, Ordering::Release);
-    }
-    registry
-        .records
-        .lock()
-        .unwrap_or_else(|poisoned| poisoned.into_inner())
-        .retain(|candidate| !Arc::ptr_eq(candidate, record));
-    registry.outstanding.fetch_sub(1, Ordering::AcqRel);
-}
-
 struct PumpGuard {
     record: Arc<Mutex<OwnerRecord>>,
     registry: Arc<OwnerRegistry>,
@@ -430,7 +414,21 @@ impl PumpGuard {
                 record.reaped
             };
             if reaped {
-                retire_record(&self.registry, &self.record);
+                let retired = self
+                    .record
+                    .lock()
+                    .unwrap_or_else(|p| p.into_inner())
+                    .retired
+                    .clone();
+                if let Some(retired) = retired {
+                    retired.store(true, Ordering::Release);
+                }
+                self.registry
+                    .records
+                    .lock()
+                    .unwrap_or_else(|p| p.into_inner())
+                    .retain(|candidate| !Arc::ptr_eq(candidate, &self.record));
+                self.registry.outstanding.fetch_sub(1, Ordering::AcqRel);
             }
             self.registry.changed.notify_all();
             self.finished = true;
@@ -1508,9 +1506,9 @@ mod tests {
     use std::io::{self, Read, Write};
     use std::os::unix::ffi::OsStrExt;
     use std::os::unix::fs::OpenOptionsExt;
-    use std::panic::{catch_unwind, AssertUnwindSafe};
     use std::path::{Path, PathBuf};
     use std::process::{Child, Command, Stdio};
+    use std::panic::{catch_unwind, AssertUnwindSafe};
     use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
     use std::sync::Arc;
     use std::thread;
@@ -1715,6 +1713,7 @@ mod tests {
             "cleanup worker did not stop after unwind retirement",
         );
     }
+
 
     fn assert_pid_present(pid: i32) {
         let result = unsafe { libc::kill(pid, 0) };
