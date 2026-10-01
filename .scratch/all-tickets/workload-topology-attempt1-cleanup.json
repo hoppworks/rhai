@@ -1,0 +1,79 @@
+{
+  "checks": [
+    {
+      "name": "driver",
+      "pid": 252317,
+      "start_identity": [
+        1790355202,
+        48350534
+      ],
+      "original_absent": true
+    },
+    {
+      "name": "supervisor",
+      "pid": 252316,
+      "start_identity": [
+        1790355202,
+        48350532
+      ],
+      "original_absent": true
+    },
+    {
+      "name": "rustup-install-1.77.2",
+      "pid": 252320,
+      "start_identity": [
+        1790355202,
+        48350538
+      ],
+      "original_absent": true
+    },
+    {
+      "name": "native-rust",
+      "pid": 252457,
+      "start_identity": [
+        1790355202,
+        48351269
+      ],
+      "original_absent": true
+    },
+    {
+      "name": "fixture",
+      "pid": 252619,
+      "start_identity": [
+        1790355202,
+        48351514
+      ],
+      "original_absent": true
+    },
+    {
+      "name": "launcher",
+      "pid": 252305,
+      "start_identity": [
+        1790355202,
+        48350526
+      ],
+      "original_absent": true
+    },
+    {
+      "name": "run-scoped",
+      "pid": 252314,
+      "start_identity": [
+        1790355202,
+        48350529
+      ],
+      "original_absent": true
+    }
+  ],
+  "unknown_identity_checks": 0,
+  "runtime_absent": true,
+  "supervisor_pgid": 252316,
+  "group_empty": true,
+  "accepted_topology_cases": 0,
+  "elapsed_seconds": 9.805,
+  "sampler_children": 40,
+  "terminal_sampler_children": 40,
+  "samples": 40,
+  "sampled_bytes_max": 567047179,
+  "sampled_process_max": 7,
+  "continuous_peak_proven": false
+}
