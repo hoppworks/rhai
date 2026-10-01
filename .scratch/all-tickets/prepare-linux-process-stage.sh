@@ -7,7 +7,7 @@ source_rev=ccaa5ab66771e6dc14b9b193612ef3716e429f78
 archive_sha=030bc9630b1348ff1dd540985e3032d2840c4dfb3a462499254758a8d6c8ad91
 lock=/Users/hoppworks/projects/rhai-all-tickets/.scratch/core-msrv-compatible-resolution/Cargo.lock
 skills=/Users/hoppworks/projects/agent-skills/tools
-stage=/root/rhai-linux-process-proof-ccaa5ab
+stage=/root/rhai-linux-process-proof-ccaa5ab-aaf08426
 script_dir=$(cd -- "$(dirname -- "$0")" && pwd)
 
 git -C "$repo" cat-file -e "$source_rev^{commit}"
