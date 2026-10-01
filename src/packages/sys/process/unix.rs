@@ -1455,7 +1455,7 @@ fn fail(
 
 #[cfg(test)]
 mod tests {
-    use super::{read_ready, ExecutionFaults, ReadState};
+    use super::{read_ready, CleanupService, ExecutionFaults, ReadState};
     use crate::packages::sys::{ProcessCause, ProgramPolicy, SysConfig, SysError, SysPackage};
     use crate::packages::Package;
     use crate::{Engine, EvalAltResult};
@@ -1554,6 +1554,130 @@ mod tests {
             EXPECTED_READ_BUDGET
         );
         assert!(output.iter().all(|byte| *byte == b'x'));
+    }
+
+    fn register_completed_service_child(
+        service: &CleanupService,
+        cleanup_guard: &mut ReleaseServiceOwnersOnDrop,
+        retired: Arc<AtomicBool>,
+        service_gate: Arc<AtomicBool>,
+    ) -> i32 {
+        let guard_retired = Arc::clone(&retired);
+        let guard_gate = Arc::clone(&service_gate);
+        let mut reservation = service
+            .reserve(Some(retired), Some(service_gate))
+            .expect("reserve service fairness child");
+        cleanup_guard.owners.push((guard_gate, guard_retired));
+        let child = Command::new("/bin/sh")
+            .args(["-c", "exit 0"])
+            .spawn()
+            .expect("spawn service fairness child");
+        let pid = child.id() as i32;
+        reservation.adopt(child);
+        let mut driver = reservation.drive();
+        driver.relinquish();
+        drop(driver);
+        {
+            let mut owner = reservation.record.lock().unwrap();
+            owner.pump_finished = true;
+            owner.phase = super::OwnerPhase::CleanupPending;
+        }
+        service.registry.changed.notify_all();
+        pid
+    }
+
+    fn wait_for_retired(retired: &AtomicBool, deadline: Instant, message: &str) {
+        while !retired.load(Ordering::Acquire) && Instant::now() < deadline {
+            thread::sleep(Duration::from_millis(5));
+        }
+        assert!(retired.load(Ordering::Acquire), "{message}");
+    }
+
+    fn assert_pid_present(pid: i32) {
+        let result = unsafe { libc::kill(pid, 0) };
+        assert_eq!(
+            result, 0,
+            "expected retained child pid={pid} to remain unreaped"
+        );
+    }
+
+    struct ReleaseServiceOwnersOnDrop {
+        registry: Arc<super::OwnerRegistry>,
+        owners: Vec<(Arc<AtomicBool>, Arc<AtomicBool>)>,
+    }
+
+    impl Drop for ReleaseServiceOwnersOnDrop {
+        fn drop(&mut self) {
+            for (gate, _) in &self.owners {
+                gate.store(true, Ordering::Release);
+            }
+            self.registry.changed.notify_all();
+            let deadline = Instant::now() + Duration::from_secs(3);
+            while self
+                .owners
+                .iter()
+                .any(|(_, retired)| !retired.load(Ordering::Acquire))
+                && Instant::now() < deadline
+            {
+                thread::sleep(Duration::from_millis(5));
+            }
+        }
+    }
+
+    #[test]
+    fn cleanup_service_progresses_past_a_stalled_owner() {
+        let service = CleanupService::new();
+        let registry = service.registry.clone();
+        let mut cleanup_guard = ReleaseServiceOwnersOnDrop {
+            registry: registry.clone(),
+            owners: Vec::new(),
+        };
+        let first_retired = Arc::new(AtomicBool::new(false));
+        let first_gate = Arc::new(AtomicBool::new(false));
+        let first_pid = register_completed_service_child(
+            &service,
+            &mut cleanup_guard,
+            first_retired.clone(),
+            first_gate.clone(),
+        );
+        eprintln!("owner_service_child first pid={first_pid}");
+
+        let second_retired = Arc::new(AtomicBool::new(false));
+        let second_gate = Arc::new(AtomicBool::new(true));
+        let second_pid = register_completed_service_child(
+            &service,
+            &mut cleanup_guard,
+            second_retired.clone(),
+            second_gate.clone(),
+        );
+        eprintln!("owner_service_child second pid={second_pid}");
+        wait_for_retired(
+            &second_retired,
+            Instant::now() + Duration::from_secs(3),
+            "stalled owner prevented another retained child from being reaped",
+        );
+        assert_pid_present(first_pid);
+        assert_pid_reaped(second_pid);
+        eprintln!("owner_service_checkpoint first_pid={first_pid} first_retired={} second_pid={second_pid} second=ESRCH", first_retired.load(Ordering::Acquire));
+        assert!(!first_retired.load(Ordering::Acquire));
+
+        first_gate.store(true, Ordering::Release);
+        registry.changed.notify_all();
+        wait_for_retired(
+            &first_retired,
+            Instant::now() + Duration::from_secs(3),
+            "released retained child was not reaped",
+        );
+        assert_pid_reaped(first_pid);
+        eprintln!("owner_service_final first_pid={first_pid} second_pid={second_pid} both=ESRCH");
+
+        drop(cleanup_guard);
+        drop(service);
+        wait_for_retired(
+            &registry.worker_done,
+            Instant::now() + Duration::from_secs(1),
+            "cleanup worker did not stop after all retained owners retired",
+        );
     }
 
     struct FixtureDir(PathBuf);
