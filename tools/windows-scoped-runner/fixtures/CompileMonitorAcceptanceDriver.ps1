@@ -1,6 +1,7 @@
 param(
     [Parameter(Mandatory = $true)] [string] $SourceRoot,
     [Parameter(Mandatory = $true)] [string] $RunnerPath,
+    [Parameter(Mandatory = $true)] [ValidatePattern('^[0-9a-f]{64}$')] [string] $ExpectedRunnerSha256,
     [Parameter(Mandatory = $true)] [string] $RunRoot
 )
 
@@ -175,6 +176,12 @@ $runwatch = [Diagnostics.Stopwatch]::StartNew()
 $workSucceeded = $false
 try {
 
+# Hashing the retained binary is under the exact-controller deadline too.
+$runnerSourceHash = (Get-FileHash -LiteralPath $RunnerPath -Algorithm SHA256).Hash.ToLowerInvariant()
+if ($runnerSourceHash -cne $ExpectedRunnerSha256) {
+    throw 'Retained runner differs from the independently accepted build SHA-256.'
+}
+
 # Run-root creation, temp redirection, input copies and hashes all happen under
 # the retained exact-owner watchdog and the already-configured controller job.
 if (Test-Path -LiteralPath $run) { throw "RunRoot appeared during preflight; preserve and inspect it: $run" }
@@ -202,7 +209,7 @@ foreach ($relative in ($expected.Keys | Sort-Object)) {
 $runnerCopy = Join-Path $buildRoot 'ScopedRunner.exe'
 Copy-Item -LiteralPath $RunnerPath -Destination $runnerCopy
 $runnerHash = (Get-FileHash -LiteralPath $runnerCopy -Algorithm SHA256).Hash.ToLowerInvariant()
-if ((Get-FileHash -LiteralPath $RunnerPath -Algorithm SHA256).Hash.ToLowerInvariant() -ne $runnerHash) { throw 'Retained runner copy hash mismatch.' }
+if ($runnerHash -cne $ExpectedRunnerSha256 -or $runnerHash -cne $runnerSourceHash) { throw 'Retained runner copy differs from the independently accepted build SHA-256.' }
 $manifest = @("runner_sha256=$runnerHash") + @($expected.Keys | Sort-Object | ForEach-Object { "$($expected[$_])  $_" })
 [IO.File]::WriteAllLines((Join-Path $run 'input-manifest.txt'), [string[]]$manifest, [Text.Encoding]::ASCII)
 
@@ -275,8 +282,8 @@ function Invoke-OwnedProcess([string] $path, [string[]] $arguments, [string] $na
     }
     throw
 } finally {
-    try {
-        if ($script:jobHandle -ne [IntPtr]::Zero) {
+    if ($script:jobHandle -ne [IntPtr]::Zero) {
+        try {
             if ($workSucceeded) {
                 $accounting = [Runtime.InteropServices.Marshal]::AllocHGlobal(48)
                 try {
@@ -289,19 +296,31 @@ function Invoke-OwnedProcess([string] $path, [string[]] $arguments, [string] $na
                     if (!$script:setJobInfo.Invoke($script:jobHandle, 9, $jobInfo, 144)) { throw 'Could not clear kill-on-close after exact accounting.' }
                 } finally { [Runtime.InteropServices.Marshal]::FreeHGlobal($jobInfo) }
             }
-            if (!$script:closeHandle.Invoke($script:jobHandle)) { throw "CloseHandle(job) failed: $([Runtime.InteropServices.Marshal]::GetLastWin32Error())" }
+            if (!$script:closeHandle.Invoke($script:jobHandle)) {
+                $closeError = [Runtime.InteropServices.Marshal]::GetLastWin32Error()
+                # If KILL_ON_JOB_CLOSE was already cleared, terminate the
+                # exactly-accounted job explicitly before failing the controller.
+                if ($workSucceeded -and !$script:terminateJob.Invoke($script:jobHandle, [uint32]0xE0000003)) {
+                    [Environment]::FailFast("CloseHandle(job) and recovery TerminateJobObject failed ($closeError / $([Runtime.InteropServices.Marshal]::GetLastWin32Error())); retain watchdog and owner through process teardown.")
+                }
+                [Environment]::FailFast("CloseHandle(job) failed ($closeError); retain watchdog and owner through process teardown.")
+            }
             $script:jobHandle = [IntPtr]::Zero
+        } catch {
+            # Never unwind into the timer-disposal path with an owned job handle.
+            # FailFast tears down this exact controller; the still-armed watchdog,
+            # retained Process handle, and kill-on-close job remain live until then.
+            [Environment]::FailFast("Job disposition failed; preserving watchdog and owner through controller teardown: $($_.Exception.Message)")
         }
-    } finally {
-        # Keep the exact-owner watchdog armed through accounting and job close.
-        # Only release its retained handle after Dispose confirms callback drain.
-        if ($script:wallTimer) {
-            if (!$script:wallTimer.Dispose($drained)) { [Environment]::FailFast('Watchdog timer refused disposal; preserving owner state through process teardown.') }
-            if (!$drained.WaitOne(5000)) { [Environment]::FailFast('Watchdog callback did not drain; preserving owner state through process teardown.') }
-            $script:wallTimer = $null
-        }
-        $drained.Dispose(); $currentProcess.Dispose()
     }
+    # Only reached after the owned job handle was closed successfully. Keep the
+    # timer and exact Process owner alive until callback drain is confirmed.
+    if ($script:wallTimer) {
+        if (!$script:wallTimer.Dispose($drained)) { [Environment]::FailFast('Watchdog timer refused disposal; preserving owner state through process teardown.') }
+        if (!$drained.WaitOne(5000)) { [Environment]::FailFast('Watchdog callback did not drain; preserving owner state through process teardown.') }
+        $script:wallTimer = $null
+    }
+    $drained.Dispose(); $currentProcess.Dispose()
 }
 if ($workSucceeded) {
     $summary = "COMPILE-ONLY PASS; native driver was not launched; job accounting and disposition passed. Retained run root: $run"

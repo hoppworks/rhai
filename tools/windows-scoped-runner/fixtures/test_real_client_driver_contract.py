@@ -21,10 +21,25 @@ class RealClientDriverSourceScaffolding(unittest.TestCase):
             "MaximumLogBytes", "compile-driver", "compile-fixture",
             "expected-compiler-failure", "MonitorAcceptanceDriverFixture assertions=15",
             "ReadInt32($accounting, 40) -ne 1", "SCOPED_RUNNER_TESTING",
+            "ExpectedRunnerSha256", "runnerSourceHash", "runnerHash -cne $ExpectedRunnerSha256",
+            "FailFast(\"Job disposition failed", "TerminateJobObject",
+            "preserving watchdog and owner through controller teardown",
         ):
             self.assertIn(marker, source)
         self.assertNotIn("RunSourceFixtures.ps1", source)
         self.assertNotIn("Invoke-OwnedProcess (Join-Path $buildRoot 'MonitorAcceptanceDriver.exe')", source)
+
+    def test_runner_provenance_and_failed_disposition_keep_watchdog_owner(self):
+        source = COMPILE_WRAPPER.read_text(encoding="utf-8")
+        self.assertLess(source.index("if ($runnerSourceHash -cne $ExpectedRunnerSha256)"), source.index("New-Item -ItemType Directory -Path $run"))
+        self.assertLess(source.index("if ($runnerHash -cne $ExpectedRunnerSha256"), source.index("$manifest ="))
+        cleanup = source[source.index("} finally {\n    if ($script:jobHandle"):]
+        failure = cleanup.index("Job disposition failed")
+        dispose = cleanup.index("$script:wallTimer.Dispose($drained)")
+        release = cleanup.index("$drained.Dispose(); $currentProcess.Dispose()")
+        self.assertLess(failure, dispose)
+        self.assertLess(failure, release)
+        self.assertIn("recovery TerminateJobObject failed", cleanup)
 
     def test_source_declares_bounded_native_route_and_separate_fixture_seam(self):
         source = DRIVER.read_text(encoding="utf-8")

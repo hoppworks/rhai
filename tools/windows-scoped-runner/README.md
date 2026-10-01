@@ -83,9 +83,11 @@ csc.exe /target:exe /define:SCOPED_RUNNER_TESTING /main:MonitorAcceptanceDriverF
 
 `fixtures/CompileMonitorAcceptanceDriver.ps1` is the separate compile-only
 wrapper candidate. Its inputs are the source checkout, the retained
-`monitor-source-<GUID>\build\ScopedRunner.exe`, and a fresh
+`monitor-source-<GUID>\build\ScopedRunner.exe`, the independently accepted
+build's lowercase SHA-256 as `ExpectedRunnerSha256`, and a fresh
 `C:\RhaiQuality\runs\monitor-driver-<GUID>` root. It verifies the retained
-source tree against the nine production pins, copies and hashes those files
+runner against that supplied accepted-build hash before and after copy,
+verifies the retained source tree against the nine production pins, copies and hashes those files
 plus the driver and pure fixture, compiles the driver and fixture, checks a
 deliberate compiler failure, and runs only the fixture. It retains the runner,
 inputs, outputs, manifest, result and capped compiler/fixture logs. The wrapper
@@ -93,7 +95,10 @@ uses a 4 MiB per-log polling cap, 180-second compiler and fixture waits, and a
 one-hour exact-owner watchdog. Its controller job is no-breakaway, kill-on-close,
 and limited to 1 GiB per process, 2 GiB aggregate and 16 active processes. It
 must query exactly one remaining process before clearing kill-on-close and
-closing the job. This wrapper source has not been compiled or executed on
+closing the job. Any query, flag-change, or close failure terminates the exact
+controller fail-closed before the watchdog or retained process owner is
+released; if close fails after the flag was cleared, it explicitly terminates
+the exactly-accounted job first. This wrapper source has not been compiled or executed on
 Windows; source-presence tests are scaffolding, not custody proof. The accepted
 source-fixture harness stays unchanged and cannot launch the driver from its
 no-breakaway job.
