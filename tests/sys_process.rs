@@ -299,6 +299,8 @@ const MANAGED_LEAF_ENV: &str = "RHAI_SYS_MANAGED_LEAF";
 #[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
 const MANAGED_RELEASE_ENV: &str = "RHAI_SYS_MANAGED_RELEASE";
 #[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+const MANAGED_PIDFD_ACK_ENV: &str = "RHAI_SYS_MANAGED_PIDFD_ACK";
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
 const MANAGED_ESCAPE_FIXTURE_ENV: &str = "RHAI_SYS_MANAGED_ESCAPE_FIXTURE";
 #[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
 const MANAGED_ESCAPE_RECORD_ENV: &str = "RHAI_SYS_MANAGED_ESCAPE_RECORD";
@@ -366,16 +368,17 @@ fn managed_scope_leader_fixture() {
     let worker_record = std::path::PathBuf::from(std::env::var_os(MANAGED_WORKER_ENV).unwrap());
     let leaf_record = std::path::PathBuf::from(std::env::var_os(MANAGED_LEAF_ENV).unwrap());
     let release = std::env::var_os(MANAGED_RELEASE_ENV).unwrap();
+    let closed_io_probe = std::env::var(MANAGED_FIXTURE_ENV).as_deref() == Ok("leader-closed-io");
     let worker = Command::new(std::env::current_exe().unwrap())
         .args(["--exact", "managed_scope_worker_fixture", "--nocapture", "--quiet"])
         .env_clear()
-        .env(MANAGED_FIXTURE_ENV, "worker")
+        .env(MANAGED_FIXTURE_ENV, if closed_io_probe { "worker-closed-io" } else { "worker" })
         .env(MANAGED_WORKER_ENV, &worker_record)
         .env(MANAGED_LEAF_ENV, &leaf_record)
         .env(MANAGED_RELEASE_ENV, &release)
         .stdin(Stdio::null())
-        .stdout(Stdio::inherit())
-        .stderr(Stdio::inherit())
+        .stdout(if closed_io_probe { Stdio::null() } else { Stdio::inherit() })
+        .stderr(if closed_io_probe { Stdio::null() } else { Stdio::inherit() })
         .spawn()
         .expect("start managed worker fixture");
     let worker_pid = worker.id();
@@ -394,6 +397,14 @@ fn managed_scope_leader_fixture() {
         &root.join("leader-record"),
         &format!("pid={leader_pid} pgid={leader_pgid} worker={worker_pid} worker-pgid={} leaf={} leaf-pgid={}\n", worker_fields["pgid"], leaf_fields["pid"], leaf_fields["pgid"]),
     );
+    if closed_io_probe {
+        let ack = std::path::PathBuf::from(std::env::var_os(MANAGED_PIDFD_ACK_ENV).unwrap());
+        let deadline = Instant::now() + Duration::from_secs(5);
+        while !ack.exists() {
+            assert!(Instant::now() < deadline, "PID/start-time observer did not acknowledge live members");
+            std::thread::sleep(Duration::from_millis(2));
+        }
+    }
     // Dropping Child intentionally leaves the worker for the process-scope owner to close.
     drop(worker);
 }
@@ -403,7 +414,7 @@ fn managed_scope_leader_fixture() {
 #[test]
 #[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
 fn managed_scope_worker_fixture() {
-    if std::env::var(MANAGED_FIXTURE_ENV).as_deref() != Ok("worker") {
+    if !matches!(std::env::var(MANAGED_FIXTURE_ENV).as_deref(), Ok("worker") | Ok("worker-closed-io")) {
         return;
     }
     let record = std::path::PathBuf::from(std::env::var_os(MANAGED_WORKER_ENV).unwrap());
@@ -888,6 +899,109 @@ fn managed_record_fields(record: &str) -> std::collections::HashMap<String, i32>
         .collect()
 }
 
+#[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
+struct ManagedPidfds(Vec<(i32, i32, u64)>);
+
+#[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
+impl Drop for ManagedPidfds {
+    fn drop(&mut self) {
+        for (_, fd, _) in self.0.drain(..) {
+            unsafe { libc::close(fd) };
+        }
+    }
+}
+
+#[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_proc_identity(pid: i32) -> Option<(char, i32, i32, u64)> {
+    let stat = std::fs::read_to_string(format!("/proc/{pid}/stat")).ok()?;
+    let fields = stat.rsplit_once(')')?.1.split_whitespace().collect::<Vec<_>>();
+    Some((fields.first()?.chars().next()?, fields.get(1)?.parse().ok()?, fields.get(2)?.parse().ok()?, fields.get(19)?.parse().ok()?))
+}
+
+#[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
+fn acquire_managed_pidfds(root: std::path::PathBuf, runner_pid: i32) -> ManagedPidfds {
+    let deadline = Instant::now() + Duration::from_secs(5);
+    loop {
+        let leader_path = root.join("leader-record");
+        let worker_path = root.join("worker-record");
+        let leaf_path = root.join("leaf-record");
+        if leader_path.exists() && worker_path.exists() && leaf_path.exists() {
+            let leader = managed_record_fields(&std::fs::read_to_string(leader_path).unwrap());
+            let worker = managed_record_fields(&std::fs::read_to_string(worker_path).unwrap());
+            let leaf = managed_record_fields(&std::fs::read_to_string(leaf_path).unwrap());
+            let leader_pid = leader["pid"];
+            let worker_pid = worker["pid"];
+            let leaf_pid = leaf["pid"];
+            let group = leader["pgid"];
+            let identities = [(leader_pid, runner_pid), (worker_pid, leader_pid), (leaf_pid, worker_pid)];
+            let mut held = Vec::new();
+            let mut ready = true;
+            for (pid, expected_parent) in identities {
+                let Some((state, parent, pgid, start)) = managed_proc_identity(pid) else {
+                    ready = false;
+                    break;
+                };
+                if state == 'Z' || pgid != group || parent != expected_parent {
+                    ready = false;
+                    break;
+                }
+                let fd = unsafe { libc::syscall(libc::SYS_pidfd_open, pid, 0) as i32 };
+                if fd < 0 {
+                    ready = false;
+                    break;
+                }
+                match managed_proc_identity(pid) {
+                    Some((after, after_parent, after_group, after_start)) if after != 'Z' && after_parent == parent && after_group == pgid && after_start == start => {
+                        eprintln!("managed_pidfd_acquired pid={pid} start={start} ppid={parent} pgid={pgid}");
+                        held.push((pid, fd, start));
+                    }
+                    _ => {
+                        unsafe { libc::close(fd) };
+                        ready = false;
+                        break;
+                    }
+                }
+            }
+            if ready && held.len() == identities.len() {
+                return ManagedPidfds(held);
+            }
+            for (_, fd, _) in held {
+                unsafe { libc::close(fd) };
+            }
+        }
+        assert!(Instant::now() < deadline, "fixture members were not simultaneously live for pidfd acquisition");
+        std::thread::sleep(Duration::from_millis(2));
+    }
+}
+
+#[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
+fn assert_managed_pidfds_exited(pidfds: &ManagedPidfds) {
+    for (pid, fd, start) in &pidfds.0 {
+        let mut pollfd = libc::pollfd { fd: *fd, events: libc::POLLIN, revents: 0 };
+        let result = unsafe { libc::poll(&mut pollfd, 1, 0) };
+        assert_eq!(result, 1, "managed member pid={pid} start={start} remained live at API return");
+        assert_ne!(pollfd.revents & libc::POLLIN, 0, "pidfd did not report process exit for pid={pid}");
+    }
+}
+
+#[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
+fn assert_managed_pidfd_exited(member: &(i32, i32, u64)) {
+    let (pid, fd, start) = member;
+    let mut pollfd = libc::pollfd { fd: *fd, events: libc::POLLIN, revents: 0 };
+    let result = unsafe { libc::poll(&mut pollfd, 1, 0) };
+    assert_eq!(result, 1, "managed member pid={pid} start={start} had not exited at API return");
+    assert_ne!(pollfd.revents & libc::POLLIN, 0, "pidfd did not report process exit for pid={pid}");
+}
+
+#[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
+fn assert_managed_pidfds_live(pidfds: &ManagedPidfds) {
+    for (pid, fd, start) in pidfds.0.iter().skip(1) {
+        let mut pollfd = libc::pollfd { fd: *fd, events: libc::POLLIN, revents: 0 };
+        let result = unsafe { libc::poll(&mut pollfd, 1, 0) };
+        assert_eq!(result, 0, "control member pid={pid} start={start} unexpectedly exited before API return");
+    }
+}
+
 /// Host-selected managed scope closes workers that outlive a successful leader without touching
 /// an unrelated process in the runner's inherited group.
 #[test]
@@ -958,6 +1072,94 @@ fn managed_run_closes_worker_after_leader_exit_and_preserves_sentinel() {
     assert!(sentinel_live, "managed cleanup terminated unrelated sentinel");
     drop(sentinel);
     assert!(pid_is_absent(sentinel_pid), "fixture-owned sentinel cleanup must reap its exact child");
+}
+
+/// Pipe closure cannot stand in for member termination: the worker deliberately redirects its
+/// captured descriptors, while this observer acquires exact PID/start-time pidfds before return.
+#[test]
+#[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_run_closes_pipe_closed_worker_before_return() {
+    let fixture = ManagedFixture::new();
+    let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let root = fixture.root.as_script_path();
+    let worker_record = fixture.path("worker-record").to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let leaf_record = fixture.path("leaf-record").to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let release = fixture.path("release-worker").to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let ack = fixture.path("pidfd-ack");
+    let observed = std::sync::Arc::new(std::sync::Mutex::new(None));
+    let observer = std::thread::spawn({
+        let root = fixture.root.path().to_path_buf();
+        let runner_pid = std::process::id() as i32;
+        let ack = ack.clone();
+        let observed = observed.clone();
+        move || {
+            let pidfds = acquire_managed_pidfds(root, runner_pid);
+            *observed.lock().unwrap() = Some(pidfds);
+            std::fs::write(ack, "live identities validated and pidfds acquired\n").unwrap();
+        }
+    });
+    let configured = SysConfig::default().programs(ProgramPolicy::AllowList(vec![executable.clone()])).process_scope(ProcessScope::Managed);
+    let engine = engine(configured);
+    let script = format!(
+        r#"run("{executable}", ["--exact", "managed_scope_leader_fixture", "--nocapture", "--quiet"], #{{
+            env_clear: true,
+            env: #{{ {MANAGED_FIXTURE_ENV}: "leader-closed-io", {MANAGED_ROOT_ENV}: "{root}", {MANAGED_WORKER_ENV}: "{worker_record}", {MANAGED_LEAF_ENV}: "{leaf_record}", {MANAGED_RELEASE_ENV}: "{release}", {MANAGED_PIDFD_ACK_ENV}: "{}" }},
+            timeout: 4.0
+        }})"#,
+        ack.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"")
+    );
+    let result = engine.eval::<Map>(&script).unwrap_or_else(|error| {
+        panic!("managed run with closed-pipe worker failed before scope closure: {error:?}");
+    });
+    assert_eq!(result["success"].as_bool().unwrap(), true);
+    assert_eq!(result["code"].as_int().unwrap(), 0);
+    let pidfds = observed.lock().unwrap().take().expect("live PIDfd proof was published before the fixture leader exited");
+    assert_managed_pidfds_exited(&pidfds);
+    observer.join().expect("PIDfd observer completed");
+}
+
+/// Direct scope is the omitted-group-termination control; pipe closure alone leaves both exact
+/// recorded descendants live at API return.
+#[test]
+#[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
+fn direct_run_returns_with_pipe_closed_worker_live_control() {
+    let fixture = ManagedFixture::new();
+    let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let root = fixture.root.as_script_path();
+    let worker_record = fixture.path("worker-record").to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let leaf_record = fixture.path("leaf-record").to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let release = fixture.path("release-worker").to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let ack = fixture.path("pidfd-ack");
+    let observed = std::sync::Arc::new(std::sync::Mutex::new(None));
+    let observer = std::thread::spawn({
+        let root = fixture.root.path().to_path_buf();
+        let runner_pid = std::process::id() as i32;
+        let ack = ack.clone();
+        let observed = observed.clone();
+        move || {
+            let pidfds = acquire_managed_pidfds(root, runner_pid);
+            *observed.lock().unwrap() = Some(pidfds);
+            std::fs::write(ack, "live identities validated and pidfds acquired\n").unwrap();
+        }
+    });
+    let configured = SysConfig::default()
+        .programs(ProgramPolicy::AllowList(vec![executable.clone()]))
+        .process_scope(ProcessScope::DirectChild);
+    let engine = engine(configured);
+    let script = format!(
+        r#"run("{executable}", ["--exact", "managed_scope_leader_fixture", "--nocapture", "--quiet"], #{{
+            env_clear: true,
+            env: #{{ {MANAGED_FIXTURE_ENV}: "leader-closed-io", {MANAGED_ROOT_ENV}: "{root}", {MANAGED_WORKER_ENV}: "{worker_record}", {MANAGED_LEAF_ENV}: "{leaf_record}", {MANAGED_RELEASE_ENV}: "{release}", {MANAGED_PIDFD_ACK_ENV}: "{}" }},
+            timeout: 4.0
+        }})"#,
+        ack.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"")
+    );
+    let result = engine.eval::<Map>(&script).expect("direct process run completes after captured pipes close");
+    assert_eq!(result["success"].as_bool().unwrap(), true);
+    let pidfds = observed.lock().unwrap().take().expect("live PIDfd proof was published before the fixture leader exited");
+    assert_managed_pidfd_exited(&pidfds.0[0]);
+    assert_managed_pidfds_live(&pidfds);
+    observer.join().expect("PIDfd observer completed");
 }
 
 #[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
