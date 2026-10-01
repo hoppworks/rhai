@@ -9,7 +9,427 @@ use std::io::{self, Read, Write};
 use std::os::fd::{AsRawFd, RawFd};
 use std::os::unix::process::{CommandExt, ExitStatusExt};
 use std::process::{Child, Command, Stdio};
+use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
+use std::sync::{Arc, Condvar, Mutex};
+use std::thread::{self, JoinHandle};
 use std::time::{Duration, Instant};
+
+const MAX_RETAINED_EXECUTIONS: usize = 64;
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum OwnerPhase {
+    Launching,
+    Caller,
+    CleanupPending,
+    Service,
+    Quarantined,
+}
+
+struct OwnerRecord {
+    child: Option<Child>,
+    phase: OwnerPhase,
+    pump_finished: bool,
+    reaped: bool,
+    retired: Option<Arc<AtomicBool>>,
+}
+
+struct OwnerRegistry {
+    records: Mutex<Vec<Arc<Mutex<OwnerRecord>>>>,
+    changed: Condvar,
+    outstanding: AtomicUsize,
+    closing: AtomicBool,
+    worker_done: AtomicBool,
+    worker: Mutex<Option<JoinHandle<()>>>,
+}
+
+/// Package-local retained ownership for executions whose caller cannot finish cleanup.
+/// The worker owns only OS child records and synchronization primitives.
+pub(in crate::packages::sys) struct CleanupService {
+    registry: Arc<OwnerRegistry>,
+}
+
+impl CleanupService {
+    pub(in crate::packages::sys) fn new() -> Self {
+        Self {
+            registry: Arc::new(OwnerRegistry {
+                records: Mutex::new(Vec::new()),
+                changed: Condvar::new(),
+                outstanding: AtomicUsize::new(0),
+                closing: AtomicBool::new(false),
+                worker_done: AtomicBool::new(true),
+                worker: Mutex::new(None),
+            }),
+        }
+    }
+
+    fn reserve(&self, retired: Option<Arc<AtomicBool>>) -> io::Result<LaunchReservation> {
+        self.ensure_worker()?;
+        let mut current = self.registry.outstanding.load(Ordering::Acquire);
+        loop {
+            if current >= MAX_RETAINED_EXECUTIONS {
+                return Err(io::Error::new(
+                    io::ErrorKind::WouldBlock,
+                    "process cleanup capacity is full",
+                ));
+            }
+            match self.registry.outstanding.compare_exchange_weak(
+                current,
+                current + 1,
+                Ordering::AcqRel,
+                Ordering::Acquire,
+            ) {
+                Ok(_) => break,
+                Err(next) => current = next,
+            }
+        }
+        let record = Arc::new(Mutex::new(OwnerRecord {
+            child: None,
+            phase: OwnerPhase::Launching,
+            pump_finished: false,
+            reaped: false,
+            retired,
+        }));
+        self.registry
+            .records
+            .lock()
+            .unwrap_or_else(|poisoned| poisoned.into_inner())
+            .push(record.clone());
+        Ok(LaunchReservation {
+            registry: self.registry.clone(),
+            record,
+            active: true,
+        })
+    }
+
+    fn ensure_worker(&self) -> io::Result<()> {
+        let mut worker = self
+            .registry
+            .worker
+            .lock()
+            .unwrap_or_else(|poisoned| poisoned.into_inner());
+        if worker.is_some() {
+            return Ok(());
+        }
+        self.registry.closing.store(false, Ordering::Release);
+        self.registry.worker_done.store(false, Ordering::Release);
+        let registry = self.registry.clone();
+        let handle = thread::Builder::new()
+            .name("rhai-sys-process-cleanup".into())
+            .spawn(move || cleanup_worker(registry))?;
+        *worker = Some(handle);
+        Ok(())
+    }
+}
+
+impl Drop for CleanupService {
+    fn drop(&mut self) {
+        self.registry.closing.store(true, Ordering::Release);
+        self.registry.changed.notify_all();
+        // Dropping the JoinHandle is non-blocking. The worker owns the registry until every
+        // retained child is reaped or quarantined; it exits itself after package closure.
+    }
+}
+
+fn cleanup_worker(registry: Arc<OwnerRegistry>) {
+    loop {
+        let records = registry
+            .records
+            .lock()
+            .unwrap_or_else(|poisoned| poisoned.into_inner())
+            .clone();
+        let mut progressed = false;
+        for record in records {
+            let mut child = {
+                let mut owner = record
+                    .lock()
+                    .unwrap_or_else(|poisoned| poisoned.into_inner());
+                if owner.phase != OwnerPhase::CleanupPending || !owner.pump_finished {
+                    continue;
+                }
+                owner.phase = OwnerPhase::Service;
+                owner.child.take()
+            };
+            let Some(mut child_value) = child.take() else {
+                continue;
+            };
+            let observation = child_value.try_wait();
+            let (retire, quarantined) = match observation {
+                Ok(Some(_)) => (true, false),
+                Ok(None) => (false, false),
+                Err(error) if error.raw_os_error() == Some(libc::ECHILD) => (false, true),
+                Err(_) => (false, false),
+            };
+            if retire {
+                let retired = record
+                    .lock()
+                    .unwrap_or_else(|poisoned| poisoned.into_inner())
+                    .retired
+                    .clone();
+                if let Some(retired) = retired {
+                    retired.store(true, Ordering::Release);
+                }
+                registry
+                    .records
+                    .lock()
+                    .unwrap_or_else(|poisoned| poisoned.into_inner())
+                    .retain(|candidate| !Arc::ptr_eq(candidate, &record));
+                registry.outstanding.fetch_sub(1, Ordering::AcqRel);
+                progressed = true;
+            } else {
+                let mut owner = record
+                    .lock()
+                    .unwrap_or_else(|poisoned| poisoned.into_inner());
+                owner.child = Some(child_value);
+                owner.phase = if quarantined {
+                    OwnerPhase::Quarantined
+                } else {
+                    OwnerPhase::CleanupPending
+                };
+            }
+        }
+        if registry.closing.load(Ordering::Acquire)
+            && registry.outstanding.load(Ordering::Acquire) == 0
+        {
+            registry.worker_done.store(true, Ordering::Release);
+            return;
+        }
+        if !progressed {
+            let guard = registry
+                .records
+                .lock()
+                .unwrap_or_else(|poisoned| poisoned.into_inner());
+            let _ = registry
+                .changed
+                .wait_timeout(guard, Duration::from_millis(20))
+                .unwrap_or_else(|poisoned| poisoned.into_inner());
+        }
+    }
+}
+
+struct LaunchReservation {
+    registry: Arc<OwnerRegistry>,
+    record: Arc<Mutex<OwnerRecord>>,
+    active: bool,
+}
+
+impl LaunchReservation {
+    fn adopt(&mut self, child: Child) {
+        let mut owner = self
+            .record
+            .lock()
+            .unwrap_or_else(|poisoned| poisoned.into_inner());
+        owner.child = Some(child);
+        owner.phase = OwnerPhase::Caller;
+    }
+
+    fn drive(&mut self) -> DriverToken<'_> {
+        let child = {
+            let mut owner = self
+                .record
+                .lock()
+                .unwrap_or_else(|poisoned| poisoned.into_inner());
+            debug_assert_eq!(owner.phase, OwnerPhase::Caller);
+            owner.child.take().expect("adopted process child")
+        };
+        DriverToken {
+            reservation: self,
+            child: Some(child),
+            completed: false,
+            termination_attempted: false,
+            reaped: false,
+            exit_status: None,
+        }
+    }
+
+    fn finish(&mut self) {
+        if !self.active {
+            return;
+        }
+        self.registry
+            .records
+            .lock()
+            .unwrap_or_else(|poisoned| poisoned.into_inner())
+            .retain(|candidate| !Arc::ptr_eq(candidate, &self.record));
+        self.registry.outstanding.fetch_sub(1, Ordering::AcqRel);
+        self.active = false;
+    }
+
+    fn handoff(&mut self, child: Child) {
+        {
+            let mut owner = self
+                .record
+                .lock()
+                .unwrap_or_else(|poisoned| poisoned.into_inner());
+            owner.child = Some(child);
+            owner.phase = OwnerPhase::CleanupPending;
+        }
+        self.registry.changed.notify_all();
+        self.active = false;
+    }
+}
+
+impl Drop for LaunchReservation {
+    fn drop(&mut self) {
+        if self.active {
+            let (child, launching) = {
+                let mut owner = self
+                    .record
+                    .lock()
+                    .unwrap_or_else(|poisoned| poisoned.into_inner());
+                (owner.child.take(), owner.phase == OwnerPhase::Launching)
+            };
+            if let Some(mut child) = child {
+                child.stdin.take();
+                child.stdout.take();
+                child.stderr.take();
+                let _ = child.kill();
+                let mut owner = self
+                    .record
+                    .lock()
+                    .unwrap_or_else(|poisoned| poisoned.into_inner());
+                owner.child = Some(child);
+                owner.phase = OwnerPhase::CleanupPending;
+                owner.pump_finished = true;
+                self.registry.changed.notify_all();
+                self.active = false;
+            } else if launching {
+                self.finish();
+            }
+        }
+    }
+}
+
+struct DriverToken<'a> {
+    reservation: &'a mut LaunchReservation,
+    child: Option<Child>,
+    completed: bool,
+    termination_attempted: bool,
+    reaped: bool,
+    exit_status: Option<std::process::ExitStatus>,
+}
+
+impl DriverToken<'_> {
+    fn child_mut(&mut self) -> &mut Child {
+        self.child.as_mut().expect("active process driver")
+    }
+
+    fn complete(&mut self) {
+        self.completed = true;
+        self.reservation.finish();
+    }
+
+    fn observe_reaped(&mut self, status: std::process::ExitStatus) {
+        self.reaped = true;
+        self.exit_status = Some(status);
+        self.reservation
+            .record
+            .lock()
+            .unwrap_or_else(|p| p.into_inner())
+            .reaped = true;
+    }
+
+    fn relinquish(&mut self) {
+        if let Some(child) = self.child.take() {
+            self.reservation.handoff(child);
+        }
+        self.completed = true;
+    }
+
+    fn quarantine(&mut self) {
+        if let Some(child) = self.child.take() {
+            let mut owner = self
+                .reservation
+                .record
+                .lock()
+                .unwrap_or_else(|poisoned| poisoned.into_inner());
+            owner.child = Some(child);
+            owner.phase = OwnerPhase::Quarantined;
+        }
+        self.reservation.active = false;
+        self.completed = true;
+    }
+
+    fn pump_guard(&self) -> PumpGuard {
+        PumpGuard {
+            record: self.reservation.record.clone(),
+            registry: self.reservation.registry.clone(),
+            finished: false,
+        }
+    }
+}
+
+impl Drop for DriverToken<'_> {
+    fn drop(&mut self) {
+        if !self.completed {
+            if self.reaped {
+                // A child already observed as reaped must never be waited or signaled again.
+                self.child.take();
+                self.reservation.active = false;
+                self.completed = true;
+                return;
+            }
+            if !self.termination_attempted {
+                if let Some(child) = self.child.as_mut() {
+                    let _ = child.kill();
+                }
+            }
+            if let Some(mut child) = self.child.take() {
+                child.stdin.take();
+                child.stdout.take();
+                child.stderr.take();
+                self.reservation
+                    .record
+                    .lock()
+                    .unwrap_or_else(|p| p.into_inner())
+                    .pump_finished = true;
+                self.reservation.handoff(child);
+            }
+        }
+    }
+}
+
+struct PumpGuard {
+    record: Arc<Mutex<OwnerRecord>>,
+    registry: Arc<OwnerRegistry>,
+    finished: bool,
+}
+
+impl PumpGuard {
+    fn finish(&mut self) {
+        if !self.finished {
+            let reaped = {
+                let mut record = self.record.lock().unwrap_or_else(|p| p.into_inner());
+                record.pump_finished = true;
+                record.reaped
+            };
+            if reaped {
+                let retired = self
+                    .record
+                    .lock()
+                    .unwrap_or_else(|p| p.into_inner())
+                    .retired
+                    .clone();
+                if let Some(retired) = retired {
+                    retired.store(true, Ordering::Release);
+                }
+                self.registry
+                    .records
+                    .lock()
+                    .unwrap_or_else(|p| p.into_inner())
+                    .retain(|candidate| !Arc::ptr_eq(candidate, &self.record));
+                self.registry.outstanding.fetch_sub(1, Ordering::AcqRel);
+            }
+            self.registry.changed.notify_all();
+            self.finished = true;
+        }
+    }
+}
+
+impl Drop for PumpGuard {
+    fn drop(&mut self) {
+        self.finish();
+    }
+}
 
 /// Private, per-execution fault adapter used only by host unit tests.
 ///
@@ -43,6 +463,17 @@ impl ExecutionFaults {
             ));
         }
         child.kill()
+    }
+
+    fn retirement_probe(&self) -> Option<Arc<AtomicBool>> {
+        #[cfg(test)]
+        {
+            self.retired.clone()
+        }
+        #[cfg(not(test))]
+        {
+            None
+        }
     }
 }
 
@@ -382,14 +813,21 @@ fn run_map(
             });
         }
     }
+    let mut faults = ExecutionFaults::take_for_execution();
+    let mut reservation = state
+        .cleanup
+        .reserve(faults.retirement_probe())
+        .map_err(|e| SysError::io("reserve process cleanup", program, &e))?;
     // The monotonic deadline begins immediately before process creation.
     let started = Instant::now();
-    let mut faults = ExecutionFaults::take_for_execution();
-    let mut child = command
+    let child = command
         .spawn()
         .map_err(|e| SysError::io("spawn process", program, &e))?;
+    // Put the OS owner in the retained registry before any post-spawn pipe operation.
+    reservation.adopt(child);
+    let driver = reservation.drive();
     let result = supervise(
-        &mut child,
+        driver,
         program,
         options.stdin,
         options.limit,
@@ -492,6 +930,7 @@ fn read_ready<R: Read>(
 ) -> io::Result<ReadState> {
     let mut buf = [0u8; 8192];
     let mut consumed = 0;
+    let mut interrupted = 0;
     loop {
         let remaining = limit.saturating_sub(output.len());
         let count = if remaining == 0 {
@@ -508,19 +947,25 @@ fn read_ready<R: Read>(
                     return Ok(ReadState::Overflow);
                 }
                 consumed += n;
+                interrupted = 0;
                 if consumed >= READ_BUDGET {
                     return Ok(ReadState::Pending);
                 }
             }
             Err(e) if e.kind() == io::ErrorKind::WouldBlock => return Ok(ReadState::Pending),
-            Err(e) if e.kind() == io::ErrorKind::Interrupted => continue,
+            Err(e) if e.kind() == io::ErrorKind::Interrupted => {
+                interrupted += 1;
+                if interrupted >= 8 {
+                    return Ok(ReadState::Pending);
+                }
+            }
             Err(e) => return Err(e),
         }
     }
 }
 
 fn supervise(
-    child: &mut Child,
+    mut driver: DriverToken<'_>,
     program: &str,
     input: Option<Vec<u8>>,
     limit: usize,
@@ -528,6 +973,8 @@ fn supervise(
     started: Instant,
     faults: &mut ExecutionFaults,
 ) -> Result<ProcessReport, (ProcessCause, ProcessReport)> {
+    let mut pump_guard = driver.pump_guard();
+    let child = driver.child_mut();
     let mut stdout = child.stdout.take().unwrap();
     let mut stderr = child.stderr.take().unwrap();
     let mut stdin = child.stdin.take();
@@ -537,7 +984,7 @@ fn supervise(
     for fd in [Some(outfd), Some(errfd), infd].into_iter().flatten() {
         if let Err(e) = set_nonblock(fd) {
             return fail(
-                child,
+                &mut driver,
                 program,
                 ProcessCause::Io {
                     op: "configure process pipe",
@@ -550,6 +997,7 @@ fn supervise(
                 false,
                 false,
                 faults,
+                false,
             );
         }
     }
@@ -561,24 +1009,32 @@ fn supervise(
     let mut status = None;
     loop {
         let expired = timeout.is_some_and(|t| started.elapsed() >= t);
-        match child.try_wait() {
-            Ok(s) => status = s,
-            Err(e) => {
-                return fail(
-                    child,
-                    program,
-                    ProcessCause::Io {
-                        op: "wait for process",
-                        target: program.into(),
-                        kind: e.kind(),
-                        message: e.to_string(),
-                    },
-                    out,
-                    err,
-                    out_eof,
-                    err_eof,
-                    faults,
-                )
+        if !driver.reaped {
+            match driver.child_mut().try_wait() {
+                Ok(s) => {
+                    if let Some(value) = s.as_ref() {
+                        driver.observe_reaped(value.clone());
+                    }
+                    status = s;
+                }
+                Err(e) => {
+                    return fail(
+                        &mut driver,
+                        program,
+                        ProcessCause::Io {
+                            op: "wait for process",
+                            target: program.into(),
+                            kind: e.kind(),
+                            message: e.to_string(),
+                        },
+                        out,
+                        err,
+                        out_eof,
+                        err_eof,
+                        faults,
+                        e.raw_os_error() == Some(libc::ECHILD),
+                    )
+                }
             }
         }
         if status.is_some() && out_eof && err_eof {
@@ -627,10 +1083,11 @@ fn supervise(
         if rc < 0 {
             let e = io::Error::last_os_error();
             if e.kind() == io::ErrorKind::Interrupted {
+                thread::sleep(Duration::from_millis(1));
                 continue;
             }
             return fail(
-                child,
+                &mut driver,
                 program,
                 ProcessCause::Io {
                     op: "poll process pipes",
@@ -643,13 +1100,14 @@ fn supervise(
                 out_eof,
                 err_eof,
                 faults,
+                false,
             );
         }
         if fds[0].revents != 0 {
             match read_ready(&mut stdout, &mut out, limit) {
                 Ok(ReadState::Overflow) => {
                     return fail(
-                        child,
+                        &mut driver,
                         program,
                         ProcessCause::OutputLimit(format!(
                             "process `{program}` exceeded {limit} output bytes"
@@ -659,13 +1117,14 @@ fn supervise(
                         out_eof,
                         err_eof,
                         faults,
+                        false,
                     )
                 }
                 Ok(ReadState::Eof) => out_eof = true,
                 Ok(ReadState::Pending) => {}
                 Err(e) => {
                     return fail(
-                        child,
+                        &mut driver,
                         program,
                         ProcessCause::Io {
                             op: "read process stdout",
@@ -678,6 +1137,7 @@ fn supervise(
                         out_eof,
                         err_eof,
                         faults,
+                        false,
                     )
                 }
             }
@@ -686,7 +1146,7 @@ fn supervise(
             match read_ready(&mut stderr, &mut err, limit) {
                 Ok(ReadState::Overflow) => {
                     return fail(
-                        child,
+                        &mut driver,
                         program,
                         ProcessCause::OutputLimit(format!(
                             "process `{program}` exceeded {limit} output bytes"
@@ -696,13 +1156,14 @@ fn supervise(
                         out_eof,
                         err_eof,
                         faults,
+                        false,
                     )
                 }
                 Ok(ReadState::Eof) => err_eof = true,
                 Ok(ReadState::Pending) => {}
                 Err(e) => {
                     return fail(
-                        child,
+                        &mut driver,
                         program,
                         ProcessCause::Io {
                             op: "read process stderr",
@@ -715,6 +1176,7 @@ fn supervise(
                         out_eof,
                         err_eof,
                         faults,
+                        false,
                     )
                 }
             }
@@ -729,7 +1191,7 @@ fn supervise(
                             || e.kind() == io::ErrorKind::Interrupted => {}
                     Err(e) => {
                         return fail(
-                            child,
+                            &mut driver,
                             program,
                             ProcessCause::Io {
                                 op: "write process stdin",
@@ -742,6 +1204,7 @@ fn supervise(
                             out_eof,
                             err_eof,
                             faults,
+                            false,
                         )
                     }
                 }
@@ -751,7 +1214,7 @@ fn supervise(
         // deadline expiry; otherwise the deadline owns the cancellation.
         if expired {
             let (cause, report) = fail(
-                child,
+                &mut driver,
                 program,
                 ProcessCause::Timeout(format!("process `{program}` exceeded deadline")),
                 out,
@@ -759,6 +1222,7 @@ fn supervise(
                 out_eof,
                 err_eof,
                 faults,
+                false,
             )
             .unwrap_err();
             return if report.timed_out() {
@@ -769,10 +1233,17 @@ fn supervise(
         }
     }
     let status = status.unwrap();
+    driver.observe_reaped(status.clone());
     let exit = status
         .code()
         .map(ProcessExit::Code)
         .or_else(|| status.signal().map(ProcessExit::Signal));
+    drop(stdin);
+    drop(stdout);
+    drop(stderr);
+    pump_guard.finish();
+    driver.completed = true;
+    driver.reservation.active = false;
     Ok(ProcessReport::new(
         out,
         err,
@@ -785,7 +1256,7 @@ fn supervise(
 }
 
 fn fail(
-    child: &mut Child,
+    driver: &mut DriverToken<'_>,
     program: &str,
     cause: ProcessCause,
     out: Vec<u8>,
@@ -793,11 +1264,19 @@ fn fail(
     out_eof: bool,
     err_eof: bool,
     faults: &mut ExecutionFaults,
+    mut identity_lost: bool,
 ) -> Result<ProcessReport, (ProcessCause, ProcessReport)> {
     let is_timeout = matches!(&cause, ProcessCause::Timeout(_));
     let mut diagnostics = vec![];
-    if let Err(e) = faults.kill(child) {
-        if e.kind() != io::ErrorKind::InvalidInput {
+    if identity_lost {
+        diagnostics.push(super::ProcessDiagnostic::new(
+            "reap child",
+            None,
+            "child custody was lost; owner quarantined",
+        ));
+    } else if !driver.reaped {
+        driver.termination_attempted = true;
+        if let Err(e) = faults.kill(driver.child_mut()) {
             diagnostics.push(super::ProcessDiagnostic::new(
                 "kill child",
                 Some(e.kind()),
@@ -805,17 +1284,54 @@ fn fail(
             ));
         }
     }
-    let status = match child.wait() {
-        Ok(s) => Some(s),
-        Err(e) => {
+    let cleanup_deadline = Instant::now() + Duration::from_secs(1);
+    let mut status = driver.exit_status.clone();
+    while !identity_lost && !driver.reaped && Instant::now() < cleanup_deadline {
+        match driver.child_mut().try_wait() {
+            Ok(Some(value)) => {
+                driver.observe_reaped(value.clone());
+                status = Some(value);
+                break;
+            }
+            Ok(None) => thread::sleep(Duration::from_millis(10)),
+            Err(error) if error.raw_os_error() == Some(libc::ECHILD) => {
+                identity_lost = true;
+                diagnostics.push(super::ProcessDiagnostic::new(
+                    "reap child",
+                    Some(error.kind()),
+                    "child custody was lost; owner quarantined",
+                ));
+                break;
+            }
+            Err(error) => {
+                if !diagnostics.iter().any(|d| d.operation() == "reap child") {
+                    diagnostics.push(super::ProcessDiagnostic::new(
+                        "reap child",
+                        Some(error.kind()),
+                        error.to_string(),
+                    ));
+                }
+                thread::sleep(Duration::from_millis(10));
+            }
+        }
+    }
+    if status.is_none() {
+        if !diagnostics.iter().any(|d| d.operation() == "reap child") {
             diagnostics.push(super::ProcessDiagnostic::new(
                 "reap child",
-                Some(e.kind()),
-                e.to_string(),
+                None,
+                "cleanup remains pending under retained process ownership",
             ));
-            None
         }
-    };
+        if identity_lost {
+            driver.quarantine();
+        } else {
+            driver.relinquish();
+        }
+    } else if driver.reaped {
+        driver.completed = true;
+        driver.reservation.active = false;
+    }
     let exit = status.and_then(|s| {
         s.code()
             .map(ProcessExit::Code)

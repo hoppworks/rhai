@@ -5,6 +5,8 @@ use std::io;
 
 #[cfg(unix)]
 mod unix;
+#[cfg(unix)]
+pub(super) use unix::CleanupService;
 
 /// Final status of a process when one is available.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
