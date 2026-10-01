@@ -1,0 +1,271 @@
+phase=owner_suite_and_full_sys_process_resume
+scope=immutable_managed_scope_macos_development_refresh_not_release
+runtime_path=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-z9gj9kfp
+python=3.9.6 (default, Aug 25 2026, 21:26:21)  [Clang 21.0.0 (clang-2100.3.34.2)] platform=macOS-27.0-arm64-arm-64bit
+harness_pid=43703 supervisor_pid=43702 inherited_pgid=43702
+cargo_path=/Users/hoppworks/.rustup/toolchains/stable-aarch64-apple-darwin/bin/cargo cargo_version=cargo 1.93.0 (083ac5135 2025-12-15)
+rustc_path=/Users/hoppworks/.rustup/toolchains/stable-aarch64-apple-darwin/bin/rustc rustc_version=rustc 1.93.0 (254b59607 2026-01-19) | binary: rustc | commit-hash: 254b59607d4417e9dffbc307138ae5c86280fe4c | commit-date: 2026-01-19 | host: aarch64-apple-darwin | release: 1.93.0 | LLVM version: 21.1.8
+rustdoc_path=/Users/hoppworks/.rustup/toolchains/stable-aarch64-apple-darwin/bin/rustdoc rustdoc_version=rustdoc 1.93.0 (254b59607 2026-01-19)
+repo_head=b801968d221a9f7baac592770d3ac7e2b315e8fd
+original_overlay_hashes={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/config.rs': '723da516ad26082ae25ca32b791d629d8b7e29e8c7272b2843ad7d6c3192a845', 'src/packages/sys/mod.rs': 'ee2dfc0900d64481d09d6d20bbd64b75ac05a316e02788cdf58e9fe52c6be0c5', 'src/packages/sys/process.rs': '090094476662417aa94e2ff519cb8038c1d3721e02be6ec166762502bfbff2e2', 'src/packages/sys/process/unix.rs': '11f3c2f23bc91535f6519a9dac94f7558970e6e4992a9b5286de3f350f7aaf67', 'tests/sys_process.rs': '08092b4a2d990b02d53a9d5d46818c10ca3a12138b9846cceeba653bb2310c8f'}
+harness_sha256=f716d6320ac7a13bc06e93a7e56cd5940f89f6917ef9973c9519148744986154
+wrapper_sha256=46c4461dd9f539786e2afc14c409feca43b626550a9741376b9863da9edc6488
+run_scoped_sha256=9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d
+storage_sample_attempt=1 status=0 stdout='0\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-z9gj9kfp' stderr=''
+storage_sample_kib=0
+archive_sha256=ba60259b46c686db02d7f77d52674b34688189924ab7f2237dfecbfeaf9a812a source_ref=b801968d221a9f7baac592770d3ac7e2b315e8fd
+private_overlay_hashes={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/config.rs': '723da516ad26082ae25ca32b791d629d8b7e29e8c7272b2843ad7d6c3192a845', 'src/packages/sys/mod.rs': 'ee2dfc0900d64481d09d6d20bbd64b75ac05a316e02788cdf58e9fe52c6be0c5', 'src/packages/sys/process.rs': '090094476662417aa94e2ff519cb8038c1d3721e02be6ec166762502bfbff2e2', 'src/packages/sys/process/unix.rs': '11f3c2f23bc91535f6519a9dac94f7558970e6e4992a9b5286de3f350f7aaf67', 'tests/sys_process.rs': '08092b4a2d990b02d53a9d5d46818c10ca3a12138b9846cceeba653bb2310c8f'}
+accepted_lock_sha256=8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa private_lock_sha256=2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425
+cargo_argv=['/Users/hoppworks/.rustup/toolchains/stable-aarch64-apple-darwin/bin/cargo', 'test', '--locked', '--test', 'sys_process', '--features', 'testing-environ,sys', 'managed_run_closes_worker_after_leader_exit_and_preserves_sentinel', '--', '--exact', '--nocapture', '--test-threads=1']
+cargo_cwd=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-z9gj9kfp/source
+cargo_log=/Users/hoppworks/projects/rhai-all-tickets/.scratch/all-tickets/macos-process-refresh-evidence/macos-process-refresh.qOlwz9.cargo.wrong-expectation.log
+cargo_pid=43721 cargo_pgid=43702
+storage_sample_attempt=1 status=0 stdout='18576\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-z9gj9kfp' stderr=''
+storage_sample_kib=18576
+storage_sample_attempt=1 status=0 stdout='20052\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-z9gj9kfp' stderr=''
+storage_sample_kib=20052
+storage_sample_attempt=1 status=0 stdout='21848\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-z9gj9kfp' stderr=''
+storage_sample_kib=21848
+storage_sample_attempt=1 status=0 stdout='25004\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-z9gj9kfp' stderr=''
+storage_sample_kib=25004
+storage_sample_attempt=1 status=0 stdout='29448\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-z9gj9kfp' stderr=''
+storage_sample_kib=29448
+storage_sample_attempt=1 status=0 stdout='45036\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-z9gj9kfp' stderr=''
+storage_sample_kib=45036
+storage_sample_attempt=1 status=0 stdout='68316\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-z9gj9kfp' stderr=''
+storage_sample_kib=68316
+storage_sample_attempt=1 status=0 stdout='81596\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-z9gj9kfp' stderr=''
+storage_sample_kib=81596
+storage_sample_attempt=1 status=0 stdout='95604\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-z9gj9kfp' stderr=''
+storage_sample_kib=95604
+storage_sample_attempt=1 status=0 stdout='111384\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-z9gj9kfp' stderr=''
+storage_sample_kib=111384
+storage_sample_attempt=1 status=0 stdout='115052\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-z9gj9kfp' stderr=''
+storage_sample_kib=115052
+storage_sample_attempt=1 status=0 stdout='156368\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-z9gj9kfp' stderr=''
+storage_sample_kib=156368
+storage_sample_attempt=1 status=0 stdout='175788\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-z9gj9kfp' stderr=''
+storage_sample_kib=175788
+storage_sample_attempt=1 status=0 stdout='182416\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-z9gj9kfp' stderr=''
+storage_sample_kib=182416
+storage_sample_attempt=1 status=0 stdout='185640\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-z9gj9kfp' stderr=''
+storage_sample_kib=185640
+storage_sample_attempt=1 status=0 stdout='194992\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-z9gj9kfp' stderr=''
+storage_sample_kib=194992
+storage_sample_attempt=1 status=0 stdout='204448\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-z9gj9kfp' stderr=''
+storage_sample_kib=204448
+storage_sample_attempt=1 status=0 stdout='250596\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-z9gj9kfp' stderr=''
+storage_sample_kib=250596
+cargo_status=101
+cargo_output_begin path=/Users/hoppworks/projects/rhai-all-tickets/.scratch/all-tickets/macos-process-refresh-evidence/macos-process-refresh.qOlwz9.cargo.wrong-expectation.log complete=true bytes=7645 sha256=8bcba2acd9b6b23d4346eea3fcf5e5da1f0c46452622b953d860994ab5637f2a
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded ambient-authority v0.0.2
+  Downloaded ahash v0.8.12
+  Downloaded errno v0.3.14
+  Downloaded crunchy v0.2.4
+  Downloaded version_check v0.9.5
+  Downloaded const-random-macro v0.1.16
+  Downloaded const-random v0.1.18
+  Downloaded itoa v1.0.15
+  Downloaded maybe-owned v0.3.4
+  Downloaded fs-set-times v0.20.3
+  Downloaded cfg-if v1.0.5
+  Downloaded byteorder v1.5.0
+  Downloaded tiny-keccak v2.0.2
+  Downloaded smartstring v1.0.1
+  Downloaded quote v1.0.41
+  Downloaded rmp v0.8.14
+  Downloaded smallvec v1.16.2
+  Downloaded thin-vec v0.2.19
+  Downloaded rmp-serde v1.3.0
+  Downloaded io-extras v0.19.0
+  Downloaded unicode-ident v1.0.22
+  Downloaded num-traits v0.2.19
+  Downloaded serde_core v1.0.229
+  Downloaded proc-macro2 v1.0.103
+  Downloaded bitflags v2.13.2
+  Downloaded serde v1.0.229
+  Downloaded serde_json v1.0.145
+  Downloaded memchr v2.8.3
+  Downloaded cap-primitives v4.0.3
+  Downloaded getrandom v0.3.4
+  Downloaded once_cell v1.21.4
+  Downloaded getrandom v0.2.17
+  Downloaded portable-atomic v1.15.0
+  Downloaded cap-std v4.0.3
+  Downloaded ryu v1.0.20
+  Downloaded paste v1.0.15
+  Downloaded zerocopy v0.8.59
+  Downloaded syn v2.0.106
+  Downloaded ipnet v2.12.2
+  Downloaded io-lifetimes v2.0.4
+  Downloaded static_assertions v1.1.0
+  Downloaded io-lifetimes v3.0.1
+  Downloaded autocfg v1.5.1
+  Downloaded rustix v1.1.5
+  Downloaded libc v0.2.189
+ Downloading crates ...
+  Downloaded web-time v1.1.0
+   Compiling libc v0.2.189
+   Compiling autocfg v1.5.1
+   Compiling crunchy v0.2.4
+   Compiling version_check v0.9.5
+   Compiling proc-macro2 v1.0.103
+   Compiling tiny-keccak v2.0.2
+   Compiling io-lifetimes v2.0.4
+   Compiling io-lifetimes v3.0.1
+   Compiling cfg-if v1.0.5
+   Compiling rustix v1.1.5
+   Compiling errno v0.3.14
+   Compiling num-traits v0.2.19
+   Compiling quote v1.0.41
+   Compiling unicode-ident v1.0.22
+   Compiling portable-atomic v1.15.0
+   Compiling io-extras v0.19.0
+   Compiling bitflags v2.13.2
+   Compiling getrandom v0.2.17
+   Compiling cap-primitives v4.0.3
+   Compiling once_cell v1.21.4
+   Compiling zerocopy v0.8.59
+   Compiling getrandom v0.3.4
+   Compiling serde_core v1.0.229
+   Compiling const-random-macro v0.1.16
+   Compiling fs-set-times v0.20.3
+   Compiling smartstring v1.0.1
+   Compiling ahash v0.8.12
+   Compiling ipnet v2.12.2
+   Compiling ambient-authority v0.0.2
+   Compiling paste v1.0.15
+   Compiling cap-std v4.0.3
+   Compiling maybe-owned v0.3.4
+   Compiling syn v2.0.106
+   Compiling const-random v0.1.18
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-z9gj9kfp/source)
+   Compiling static_assertions v1.1.0
+   Compiling serde v1.0.229
+   Compiling rhai_codegen v3.2.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-z9gj9kfp/source/codegen)
+   Compiling byteorder v1.5.0
+   Compiling thin-vec v0.2.19
+   Compiling serde_json v1.0.145
+   Compiling smallvec v1.16.2
+   Compiling rmp v0.8.14
+   Compiling ryu v1.0.20
+   Compiling memchr v2.8.3
+   Compiling itoa v1.0.15
+   Compiling rmp-serde v1.3.0
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:668:13
+    |
+668 |         let mut wait_operation = "wait for child";
+    |             ----^^^^^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `termination`
+    --> src/packages/sys/process/unix.rs:1106:22
+     |
+1106 |                 let (termination, _operation) = if self.managed {
+     |                      ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_termination`
+     |
+     = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2123:9
+     |
+2123 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2444:9
+     |
+2444 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: methods `numeric_operations_probe`, `quarantine_observations_probe`, and `fail_reservation` are never used
+    --> src/packages/sys/process/unix.rs:1459:8
+     |
+1388 | impl ExecutionFaults {
+     | -------------------- methods in this implementation
+...
+1459 |     fn numeric_operations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1470 |     fn quarantine_observations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1495 |     fn fail_reservation(&self) -> bool {
+     |        ^^^^^^^^^^^^^^^^
+     |
+     = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (lib) generated 5 warnings (run `cargo fix --lib -p rhai` to apply 4 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+   --> tests/sys_process.rs:682:9
+    |
+682 |     let mut holder = command.spawn().expect("start escaped captured-pipe holder");
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: constant `DIRECT_DROP_RECORD_ENV` is never used
+  --> tests/sys_process.rs:34:7
+   |
+34 | const DIRECT_DROP_RECORD_ENV: &str = "RHAI_SYS_DIRECT_DROP_RECORD";
+   |       ^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+warning: `rhai` (test "sys_process") generated 2 warnings (run `cargo fix --test "sys_process" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 17.41s
+     Running tests/sys_process.rs (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-z9gj9kfp/target/debug/deps/sys_process-a4f350212a887c3b)
+
+running 1 test
+test managed_run_closes_worker_after_leader_exit_and_preserves_sentinel ... managed_fixture_started root=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-z9gj9kfp/tmp/rhai-sys-test-44015-managed_run_closes_worker_after_leader_exit_and_preserves_sentinel-0 test_pid=44015 sentinel_pid=44017
+
+thread 'managed_run_closes_worker_after_leader_exit_and_preserves_sentinel' (56817124) panicked at tests/sys_process.rs:1043:9:
+managed run returned a non-Denied error: ErrorRuntime(rhai::packages::sys::error::SysError, 1:1)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+managed-scope sentinel_cleanup pid=44017 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(44019) worker_esrch=true leaf_pid=Some(44020) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(44018) leader_esrch=true
+FAILED
+
+failures:
+
+failures:
+    managed_run_closes_worker_after_leader_exit_and_preserves_sentinel
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 28 filtered out; finished in 0.13s
+
+error: test failed, to rerun pass `--test sys_process`
+
+cargo_output_end
+storage_sample_attempt=1 status=0 stdout='250580\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-z9gj9kfp' stderr=''
+storage_sample_kib=250580
+restored_private_overlay_hashes={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/config.rs': '723da516ad26082ae25ca32b791d629d8b7e29e8c7272b2843ad7d6c3192a845', 'src/packages/sys/mod.rs': 'ee2dfc0900d64481d09d6d20bbd64b75ac05a316e02788cdf58e9fe52c6be0c5', 'src/packages/sys/process.rs': '090094476662417aa94e2ff519cb8038c1d3721e02be6ec166762502bfbff2e2', 'src/packages/sys/process/unix.rs': '11f3c2f23bc91535f6519a9dac94f7558970e6e4992a9b5286de3f350f7aaf67', 'tests/sys_process.rs': '08092b4a2d990b02d53a9d5d46818c10ca3a12138b9846cceeba653bb2310c8f'}
+Traceback (most recent call last):
+  File "/Users/hoppworks/projects/rhai-all-tickets/.scratch/all-tickets/macos-process-refresh.py", line 150, in <module>
+    main()
+  File "/Users/hoppworks/projects/rhai-all-tickets/.scratch/all-tickets/macos-process-refresh.py", line 123, in main
+    raise RuntimeError('wrong-expectation control did not reach intended real API exit assertion')
+RuntimeError: wrong-expectation control did not reach intended real API exit assertion

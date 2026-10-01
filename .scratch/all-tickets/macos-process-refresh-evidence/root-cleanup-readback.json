@@ -1,0 +1,56 @@
+{
+  "pids": [
+    {
+      "pid": 43693,
+      "status": 1,
+      "output": ""
+    },
+    {
+      "pid": 43702,
+      "status": 1,
+      "output": ""
+    },
+    {
+      "pid": 43703,
+      "status": 1,
+      "output": ""
+    },
+    {
+      "pid": 43721,
+      "status": 1,
+      "output": ""
+    },
+    {
+      "pid": 44015,
+      "status": 1,
+      "output": ""
+    },
+    {
+      "pid": 44017,
+      "status": 1,
+      "output": ""
+    },
+    {
+      "pid": 44018,
+      "status": 1,
+      "output": ""
+    },
+    {
+      "pid": 44019,
+      "status": 1,
+      "output": ""
+    },
+    {
+      "pid": 44020,
+      "status": 1,
+      "output": ""
+    }
+  ],
+  "owned_group_members": [],
+  "runtime_exists": false,
+  "sampled_max_kib": 250596,
+  "originals": {
+    "macos-process-refresh.qOlwz9.cargo.wrong-expectation.log": "8bcba2acd9b6b23d4346eea3fcf5e5da1f0c46452622b953d860994ab5637f2a",
+    "macos-process-refresh.qOlwz9": "5f14f1697b039e594e3c659731c652aa4ceb0fe8170d5100a96b2ef91458ada2"
+  }
+}
