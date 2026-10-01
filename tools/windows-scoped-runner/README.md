@@ -103,12 +103,13 @@ no-follow child opens, protected-ACL and full 128-bit identity checks, durable
 removal intent, and independent pinned-parent absence readback before the
 removal receipt. It uses `FileIdExtdDirectoryInfo`/`RestartInfo`; an unsupported
 class or a filesystem that does not return a usable 128-bit ID fails closed.
-The public workload path remains disabled, and production removal
-fails closed because the monitor does not yet issue an exact-job closure proof.
-The typed fixture authorization exercises filesystem transitions only; it does
-not stand in for process/job custody. These disposition fixtures are source
-only and uncompiled/unexecuted. Native disposition, receipt readback, exact-job
-proof production, and end-to-end acceptance remain unverified. Its source-tree staging fixtures cover successful
+The public workload path remains disabled. Production removal remains blocked:
+the monitor records outcome metadata after exact-job closure, but that metadata
+does not capture payload logs, results, or a manifest and cannot authorize
+removal. The typed fixture authorization exercises filesystem transitions only;
+it does not stand in for process/job custody. These disposition fixtures are
+source-only and uncompiled/unexecuted. Native disposition, receipt readback,
+exact-job proof production, and end-to-end acceptance remain unverified. Its source-tree staging fixtures cover successful
 nested copies, fail-closed source changes and sharing, source/destination
 reparse points, collisions, partial-copy retention, inventory, per-file, total
 byte and depth bounds, cancellation, and receipt readback after handles close.
@@ -161,14 +162,20 @@ successful Windows process/job behavior remains unverified.
 
 Executable-relative syntax checks and staged-file identity checks are present
 in source, but executable launch validation remains unverified. Monitor-owned
-allocation/staging handoff and a connected monitor-owned job/process lifecycle
-are present as source; local evidence finalization/export, exact job closure
-proof, runtime cleanup, and termination/finalization budgets remain
-unimplemented. Runtime
-disposition is present in source, but no monitor path can create the
-unforgeable exact-job closure proof, so production removal remains fail-closed.
-The fixture authorization tests filesystem-only transitions, not job closure.
-Handle-disposition semantics, compilation, independent native readback, and
+allocation/staging handoff, exact-job closure, and bounded outcome-metadata
+journaling are present as source. The record distinguishes payload exit,
+supervision outcome, confirmed cleanup, saved metadata, unsaved payload
+evidence, host export false, and runtime removal false. Its private receipt is
+bound to the exact allocation, identity, closure proof, durable exit status,
+supervision outcome, and deadline. The same 30-second monotonic deadline bounds
+the metadata flush and the later removal attempt. That attempt remains
+fail-closed until bounded payload logs, results, and manifest have been saved
+and read back outside the runtime; the current receipt explicitly says that
+payload evidence is not saved. Append, identity, cleanup, and deadline
+uncertainty retain the runtime or leave disposition uncertain. Host export has
+no protocol response contract and remains explicitly unimplemented. Fixtures
+cover the production closure and metadata gate through scripted source seams,
+but remain uncompiled and unexecuted. Handle-disposition semantics, compilation, independent native readback, and
 the effect of unrelated external handles remain unverified. The lease protocol
 model supports fresh Running-state renewal challenges while keeping the absolute
 lifetime fixed; real workload and native transport integration remain

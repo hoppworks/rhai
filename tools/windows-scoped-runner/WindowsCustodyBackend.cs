@@ -21,6 +21,7 @@ internal static class WindowsCustodyBackend
     internal const int MaximumSourceDepth = 32;
     private const int MaximumRecords = 64;
     private const int MaximumJournalBytes = MaximumRecords * (MaximumRecordBytes + 15);
+    private const ulong LocalFinalizationBudgetMs = 30000;
     internal const int MaximumPathLengthForSpecification = 248;
     private const int MaximumPathLength = MaximumPathLengthForSpecification;
     private const uint FILE_READ_ATTRIBUTES = 0x0080;
@@ -104,6 +105,7 @@ internal static class WindowsCustodyBackend
     [DllImport("advapi32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
     private static extern bool ConvertStringSecurityDescriptorToSecurityDescriptorW(string sddl, uint revision, out IntPtr descriptor, out uint size);
     [DllImport("kernel32.dll", SetLastError = true)] private static extern IntPtr LocalFree(IntPtr memory);
+    [DllImport("kernel32.dll")] private static extern ulong GetTickCount64();
     [DllImport("advapi32.dll", SetLastError = true)]
     private static extern uint GetSecurityInfo(SafeFileHandle handle, int objectType, uint info,
         out IntPtr owner, out IntPtr group, out IntPtr dacl, out IntPtr sacl, out IntPtr descriptor);
@@ -425,6 +427,7 @@ internal static class WindowsCustodyBackend
 
     internal enum AllocationState { IntentFlushed, Created, Verified, IdentityRecorded, FailedBeforeCreation, FailedRetained }
     internal enum StagingState { NotStarted, Copying, Verifying, Staged, FailedRetained }
+    internal enum PayloadSupervisionOutcome { PayloadExited, MonitorStopped, TransitionFailed }
     internal enum RuntimeDispositionState { NotStarted, Blocked, Removing, PartialRetained, Unknown, Removed }
     internal enum DispositionFailurePoint
     {
@@ -474,6 +477,12 @@ internal static class WindowsCustodyBackend
         private FileIdentity stagedExecutableIdentity;
         private string stagedExecutableRelativePath;
         private bool disposed;
+        private bool outcomeRecordFlushed;
+        private ulong outcomeFinalizationDeadline;
+        private OutcomeMetadataReceipt outcomeMetadataReceipt;
+        private uint? recordedPayloadExitCode;
+        private PayloadSupervisionOutcome? recordedSupervisionOutcome;
+        private LeaseMonitor.ExactJobClosureProof recordedClosureProof;
         private int dispositionEntries;
         private int dispositionCount;
         internal readonly string RuntimePath;
@@ -498,19 +507,66 @@ internal static class WindowsCustodyBackend
             private NoPayloadAuthorization() { }
             internal static NoPayloadAuthorization Create() { return new NoPayloadAuthorization(); }
         }
+#endif
 
+        internal sealed class OutcomeMetadataReceipt
+        {
+            internal readonly PayloadSupervisionOutcome SupervisionOutcome;
+            internal readonly uint? PayloadExitCode;
+            internal readonly bool LocalMetadataSaved, PayloadEvidenceSaved, HostExported;
+            internal readonly ulong Deadline;
+            private readonly RuntimeAllocation allocation;
+            private readonly FileIdentity runtimeIdentity;
+            private readonly LeaseMonitor.ExactJobClosureProof closureProof;
+            private OutcomeMetadataReceipt(RuntimeAllocation owner, LeaseMonitor.ExactJobClosureProof proof,
+                uint? exitCode, PayloadSupervisionOutcome supervision, ulong deadline)
+            {
+                allocation=owner; runtimeIdentity=owner.RuntimeIdentity; closureProof=proof;
+                PayloadExitCode=exitCode; SupervisionOutcome=supervision;
+                LocalMetadataSaved=true; PayloadEvidenceSaved=false; HostExported=false; Deadline=deadline;
+            }
+            internal static OutcomeMetadataReceipt FromVerifiedOwner(RuntimeAllocation owner,
+                LeaseMonitor.ExactJobClosureProof proof, uint? exitCode, PayloadSupervisionOutcome supervision, ulong deadline)
+            {
+                if(owner==null || !owner.outcomeRecordFlushed || owner.journal==null || owner.journal.IsFaulted ||
+                    owner.RuntimeIdentity==null || deadline==0 || owner.outcomeFinalizationDeadline!=deadline ||
+                    !Nullable.Equals(owner.recordedPayloadExitCode,exitCode) || owner.recordedSupervisionOutcome!=supervision ||
+                    !Object.ReferenceEquals(owner.recordedClosureProof,proof) || proof==null || !proof.Authorizes(owner,owner.RuntimeIdentity))
+                    throw new InvalidOperationException("only the exact durably recorded allocation outcome can mint a metadata receipt");
+                return new OutcomeMetadataReceipt(owner,proof,exitCode,supervision,deadline);
+            }
+            internal bool IsBoundTo(RuntimeAllocation owner, LeaseMonitor.ExactJobClosureProof proof,
+                uint? exitCode, PayloadSupervisionOutcome supervision, ulong deadline)
+            {
+                return AuthorizesMetadata(owner,owner==null ? null : owner.RuntimeIdentity) &&
+                    Object.ReferenceEquals(closureProof,proof) && Nullable.Equals(PayloadExitCode,exitCode) &&
+                    SupervisionOutcome==supervision && Deadline==deadline;
+            }
+            internal bool AuthorizesMetadata(RuntimeAllocation owner, FileIdentity identity)
+            {
+                return Object.ReferenceEquals(allocation,owner) && runtimeIdentity!=null && runtimeIdentity.SameAs(identity) &&
+                    closureProof!=null && closureProof.Authorizes(owner,identity) && LocalMetadataSaved &&
+                    !PayloadEvidenceSaved && !HostExported && owner!=null && owner.outcomeRecordFlushed &&
+                    owner.outcomeFinalizationDeadline==Deadline && Nullable.Equals(owner.recordedPayloadExitCode,PayloadExitCode) &&
+                    owner.recordedSupervisionOutcome==SupervisionOutcome && Object.ReferenceEquals(owner.recordedClosureProof,closureProof);
+            }
+        }
+
+#if SCOPED_RUNNER_TESTING
         internal static NoPayloadAuthorization NoPayloadAuthorizationForFixture() { return NoPayloadAuthorization.Create(); }
+        internal static ulong ExpiredFinalizationDeadlineForFixture()
+        { return GetTickCount64()-1; }
         internal void FailNextJournalAppendForFixture() { journal.FailNextAppendForFixture(); }
         internal bool RemoveRuntimeForFixture(NoPayloadAuthorization authorization, CancellationToken cancellationToken,
             DispositionFailurePoint failurePoint)
         {
-            return RemoveRuntimeCore(authorization, cancellationToken, failurePoint, MaximumInventoryEntries, MaximumSourceDepth);
+            return RemoveRuntimeCore(authorization, cancellationToken, failurePoint, MaximumInventoryEntries, MaximumSourceDepth,0);
         }
         internal bool RemoveRuntimeForFixture(NoPayloadAuthorization authorization, CancellationToken cancellationToken,
             DispositionFailurePoint failurePoint, int fixtureEntryLimit, int fixtureDepthLimit)
         {
             if (fixtureEntryLimit < 0 || fixtureDepthLimit < 0) throw new ArgumentOutOfRangeException("fixture limits");
-            return RemoveRuntimeCore(authorization, cancellationToken, failurePoint, fixtureEntryLimit, fixtureDepthLimit);
+            return RemoveRuntimeCore(authorization, cancellationToken, failurePoint, fixtureEntryLimit, fixtureDepthLimit,0);
         }
 #endif
 
@@ -526,7 +582,74 @@ internal static class WindowsCustodyBackend
                 DispositionState = RuntimeDispositionState.Blocked;
                 return false;
             }
-            return RemoveRuntimeCore(proof, cancellationToken, 0, MaximumInventoryEntries, MaximumSourceDepth);
+            Failure = AllocationDiagnostic("runtime disposition requires bounded payload logs, results, and manifest saved after exact-job closure", RuntimePath, JournalPath);
+            DispositionState = RuntimeDispositionState.Blocked;
+            return false;
+        }
+
+        internal static ulong StartLocalFinalizationDeadline()
+        { return GetTickCount64()+LocalFinalizationBudgetMs; }
+
+        private static void EnsureFinalizationBudget(ulong deadline,string phase)
+        {
+            if(deadline==0) throw new InvalidOperationException("local outcome finalization requires a finite monotonic deadline");
+            if(GetTickCount64()<deadline) return;
+            throw new TimeoutException(phase+" exceeded the shared local finalization deadline");
+        }
+        private static void EnsureRemovalBudget(CancellationToken cancellationToken,ulong deadline,string phase)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
+            if(deadline!=0 && GetTickCount64()>=deadline)
+                throw new TimeoutException(phase+" exceeded the shared local finalization deadline");
+        }
+
+        internal OutcomeMetadataReceipt RecordLocalOutcomeMetadata(LeaseMonitor.ExactJobClosureProof proof,
+            uint? payloadExitCode, PayloadSupervisionOutcome supervision, ulong deadline)
+        {
+            lock(this)
+            {
+                if(outcomeMetadataReceipt!=null)
+                {
+                    if(outcomeMetadataReceipt.IsBoundTo(this,proof,payloadExitCode,supervision,deadline)) return outcomeMetadataReceipt;
+                    throw new InvalidOperationException("outcome metadata receipt is already bound to another proof or deadline");
+                }
+                if(disposed || State!=AllocationState.IdentityRecorded || RuntimeIdentity==null || journal==null || journal.IsFaulted ||
+                    proof==null || !proof.Authorizes(this,RuntimeIdentity))
+                    throw new InvalidOperationException("local outcome requires a live identity-recorded allocation and its exact-job closure proof");
+                if(outcomeRecordFlushed) throw new IOException("outcome metadata was durably written after its finalization deadline; runtime retained");
+                EnsureFinalizationBudget(deadline,"before outcome metadata append");
+                outcomeFinalizationDeadline=deadline;
+                recordedPayloadExitCode=payloadExitCode;
+                recordedSupervisionOutcome=supervision;
+                recordedClosureProof=proof;
+                string exit=payloadExitCode.HasValue ? payloadExitCode.Value.ToString("X8") : "NONE";
+                string record="OUTCOME|"+invocationId.ToString("N")+"|"+FormatIdentity(RuntimeIdentity)+"|payload="+exit+
+                    "|supervision="+supervision.ToString()+"|cleanup=CONFIRMED|local_metadata_saved=1|payload_evidence_saved=0|host_exported=0|runtime_removed=0";
+                journal.Append(record); // DurableJournal bounds, frames, and flushes each record.
+                outcomeRecordFlushed=true;
+                EnsureFinalizationBudget(deadline,"after outcome metadata flush");
+                outcomeMetadataReceipt=OutcomeMetadataReceipt.FromVerifiedOwner(this,proof,payloadExitCode,supervision,deadline);
+                return outcomeMetadataReceipt;
+            }
+        }
+
+        internal bool TryRemoveRuntimeAfterOutcomeMetadata(OutcomeMetadataReceipt receipt, CancellationToken cancellationToken)
+        {
+            if(receipt==null || !receipt.AuthorizesMetadata(this,RuntimeIdentity))
+            {
+                Failure=AllocationDiagnostic("runtime disposition lacks this allocation's exact outcome metadata receipt",RuntimePath,JournalPath);
+                DispositionState=RuntimeDispositionState.Blocked;
+                return false;
+            }
+            if(receipt.Deadline!=outcomeFinalizationDeadline || receipt.Deadline==0)
+            {
+                Failure=AllocationDiagnostic("runtime disposition receipt has no shared local finalization deadline",RuntimePath,JournalPath);
+                DispositionState=RuntimeDispositionState.Blocked;
+                return false;
+            }
+            Failure=AllocationDiagnostic("runtime disposition remains blocked until bounded payload logs, results, and manifest are saved and read back outside the runtime",RuntimePath,JournalPath);
+            DispositionState=RuntimeDispositionState.Blocked;
+            return false;
         }
 
         internal bool RemoveRuntime()
@@ -537,7 +660,7 @@ internal static class WindowsCustodyBackend
         }
 
         private bool RemoveRuntimeCore(object authorization, CancellationToken cancellationToken,
-            DispositionFailurePoint failurePoint, int entryLimit, int depthLimit)
+            DispositionFailurePoint failurePoint, int entryLimit, int depthLimit, ulong deadline)
         {
             if (disposed || State != AllocationState.IdentityRecorded || RuntimeIdentity == null || runtimeHandle == null ||
                 runtimeHandle.IsInvalid || runtimeHandle.IsClosed)
@@ -546,11 +669,7 @@ internal static class WindowsCustodyBackend
                 DispositionState = RuntimeDispositionState.Blocked;
                 return false;
             }
-#if SCOPED_RUNNER_TESTING
-            if (!(authorization is NoPayloadAuthorization) && !(authorization is LeaseMonitor.ExactJobClosureProof))
-#else
-            if (!(authorization is LeaseMonitor.ExactJobClosureProof))
-#endif
+            if (!HasFilesystemFixtureAuthorization(authorization))
             {
                 Failure = AllocationDiagnostic("runtime disposition authorization is unavailable", RuntimePath, JournalPath);
                 DispositionState = RuntimeDispositionState.Blocked;
@@ -562,6 +681,7 @@ internal static class WindowsCustodyBackend
             try
             {
                 cancellationToken.ThrowIfCancellationRequested();
+                EnsureRemovalBudget(cancellationToken,deadline,"before exact runtime disposition");
 #if SCOPED_RUNNER_TESTING
                 if (failurePoint == DispositionFailurePoint.IdentityMismatch || !ReadIdentity(runtimeHandle).SameAs(RuntimeIdentity))
 #else
@@ -588,15 +708,17 @@ internal static class WindowsCustodyBackend
                 if (!ReadIdentity(runtimeHandle).SameAs(RuntimeIdentity))
                     throw new IOException("runtime identity changed while releasing staged executable pins");
                 journal.Append("REMOVE_INTENT|" + invocationId.ToString("N") + "|" + FormatIdentity(RuntimeIdentity) + "|" + FormatIdentity(EvidenceIdentity));
+                EnsureRemovalBudget(cancellationToken,deadline,"after removal intent flush");
 
                 dispositionEntries = 0;
                 dispositionCount = 0;
                 var seen = new HashSet<string>(StringComparer.Ordinal);
                 AddUniqueIdentity(seen, RuntimeIdentity, "runtime root");
                 RemoveRuntimeDirectoryContents(RuntimePath, runtimeHandle, String.Empty, 0, seen, user,
-                    cancellationToken, entryLimit, depthLimit, failurePoint);
+                    cancellationToken, entryLimit, depthLimit, failurePoint,deadline);
 
                 cancellationToken.ThrowIfCancellationRequested();
+                EnsureRemovalBudget(cancellationToken,deadline,"before runtime root disposition");
                 MarkForDisposition(runtimeHandle, "runtime root");
                 rootDispositionMarked = true;
                 runtimeHandle.Dispose();
@@ -610,10 +732,12 @@ internal static class WindowsCustodyBackend
 #endif
                 if (DirectoryEntryExists(parent.Handle, parent.Path, System.IO.Path.GetFileName(RuntimePath), MaximumInventoryEntries))
                     throw new IOException("runtime remains visible during independent pinned-parent absence readback");
+                EnsureRemovalBudget(cancellationToken,deadline,"after runtime absence readback");
                 if (!ReadIdentity(parent.Handle).SameAs(EvidenceIdentity))
                     throw new IOException("pinned runtime parent identity changed before removal receipt");
 
                 journal.Append("REMOVED|" + invocationId.ToString("N") + "|" + FormatIdentity(RuntimeIdentity) + "|" + FormatIdentity(EvidenceIdentity));
+                EnsureRemovalBudget(cancellationToken,deadline,"after removal receipt flush");
                 DispositionState = RuntimeDispositionState.Removed;
                 Failure = null;
                 return true;
@@ -628,16 +752,27 @@ internal static class WindowsCustodyBackend
             }
         }
 
+        private static bool HasFilesystemFixtureAuthorization(object authorization)
+        {
+#if SCOPED_RUNNER_TESTING
+            return authorization is NoPayloadAuthorization;
+#else
+            return false;
+#endif
+        }
+
         private void RemoveRuntimeDirectoryContents(string directoryPath, SafeFileHandle directoryHandle, string relativeDirectory,
             int depth, HashSet<string> seen, SecurityIdentifier user, CancellationToken cancellationToken,
-            int entryLimit, int depthLimit, DispositionFailurePoint failurePoint)
+            int entryLimit, int depthLimit, DispositionFailurePoint failurePoint, ulong deadline)
         {
+            EnsureRemovalBudget(cancellationToken,deadline,"during runtime inventory");
             if (depth > depthLimit) throw new IOException("runtime depth exceeds the fixture limit (production bound is fixed)");
             FileIdentity parentIdentity = ReadIdentity(directoryHandle);
             List<DirectoryEntrySnapshot> entries = ReadDirectoryEntries(directoryHandle, directoryPath, entryLimit, ref dispositionEntries);
             for (int i = 0; i < entries.Count; i++)
             {
                 cancellationToken.ThrowIfCancellationRequested();
+                EnsureRemovalBudget(cancellationToken,deadline,"before runtime entry disposition");
                 DirectoryEntrySnapshot listed = entries[i];
                 ValidateSourceComponent(listed.Name);
                 string relative = relativeDirectory.Length == 0 ? listed.Name : relativeDirectory + "\\" + listed.Name;
@@ -672,9 +807,10 @@ internal static class WindowsCustodyBackend
                         throw new IOException("runtime entry has an unexpected type, pending disposition, or hard link: " + relative);
                     if (isDirectory)
                         RemoveRuntimeDirectoryContents(path, entry, relative, depth + 1, seen, user,
-                            cancellationToken, entryLimit, depthLimit, failurePoint);
+                            cancellationToken, entryLimit, depthLimit, failurePoint,deadline);
 
                     cancellationToken.ThrowIfCancellationRequested();
+                    EnsureRemovalBudget(cancellationToken,deadline,"before runtime entry disposition");
                     MarkForDisposition(entry, relative);
                     dispositionRequested = true;
                     entry.Dispose();
@@ -694,6 +830,7 @@ internal static class WindowsCustodyBackend
                 if (!dispositionRequested) throw new IOException("runtime entry was not dispositioned: " + relative);
             }
             cancellationToken.ThrowIfCancellationRequested();
+            EnsureRemovalBudget(cancellationToken,deadline,"after runtime directory readback");
             List<DirectoryEntrySnapshot> residual = ReadDirectoryEntries(directoryHandle, directoryPath, entryLimit, ref dispositionEntries, false);
             if (residual.Count != 0) throw new IOException("runtime directory acquired or retained entries during bottom-up removal: " + directoryPath);
             if (!ReadIdentity(directoryHandle).SameAs(parentIdentity))

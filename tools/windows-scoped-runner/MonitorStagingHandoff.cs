@@ -54,15 +54,18 @@ internal sealed class MonitorStagingHandoff
         MonitorPayloadJob payload=null;
         Exception operationFailure=null, cleanupFailure=null;
         uint? payloadExitCode=null;
+        WindowsCustodyBackend.PayloadSupervisionOutcome supervisionOutcome=WindowsCustodyBackend.PayloadSupervisionOutcome.TransitionFailed;
         MonitorPayloadJob.ClosureReceipt closureReceipt=null;
         LeaseMonitor.ExactJobClosureProof closureAuthorization=null;
+        WindowsCustodyBackend.RuntimeAllocation.OutcomeMetadataReceipt outcomeMetadata=null;
+        Exception finalizationFailure=null;
         try
         {
             RequestAndWaitForAuthority(protocol,token,monotonicNow,LeaseMonitor.State.Ready);
             payload=MonitorPayloadJob.CreateSuspended(allocation,specification,protocol);
             RequestAndWaitForAuthority(protocol,token,monotonicNow,LeaseMonitor.State.Suspended);
             payload.ResumeAfterHostChallenge(protocol);
-            HoldPayloadUntilStop(payload,protocol,token,monotonicNow);
+            supervisionOutcome=HoldPayloadUntilStop(payload,protocol,token,monotonicNow);
             payloadExitCode=payload.RootExitCode;
         }
         catch(Exception error)
@@ -80,27 +83,50 @@ internal sealed class MonitorStagingHandoff
                     cleanupFailure=error;
                     try { protocol.SignalClientExited(monotonicNow()); }
                     catch(Exception signalError) { cleanupFailure=new AggregateException("exact-job cleanup failed and stop publication also failed",cleanupFailure,signalError); }
-                }
+            }
             if(payload!=null) payloadExitCode=payload.RootExitCode;
-            // The exit outcome and cleanup diagnostics remain separate. A verified
-            // receipt is deliberately not consumed here: local evidence finalize,
-            // export, and runtime removal remain fail-closed in this source slice.
+            if(cleanupFailure==null && closureAuthorization!=null)
+            {
+                ulong finalizationDeadline=WindowsCustodyBackend.RuntimeAllocation.StartLocalFinalizationDeadline();
+                try
+                {
+                    outcomeMetadata=allocation.RecordLocalOutcomeMetadata(closureAuthorization,payloadExitCode,supervisionOutcome,finalizationDeadline);
+                    if(!outcomeMetadata.PayloadEvidenceSaved)
+                        throw new InvalidOperationException("payload logs, results, and manifest were not captured and read back; allocation remains retained");
+                    if(!allocation.TryRemoveRuntimeAfterOutcomeMetadata(outcomeMetadata,CancellationToken.None))
+                        throw new InvalidOperationException(allocation.Failure ?? "runtime disposition failed after local outcome metadata");
+                }
+                catch(Exception error) { finalizationFailure=error; }
+            }
+            // Closure and an outcome metadata record are insufficient for runtime
+            // disposition: bounded payload logs/results/manifest still need capture
+            // and readback. Host export remains false without a response contract.
             GC.KeepAlive(payloadExitCode); GC.KeepAlive(closureReceipt); GC.KeepAlive(closureAuthorization);
+            GC.KeepAlive(supervisionOutcome); GC.KeepAlive(outcomeMetadata);
         }
+        if(operationFailure!=null && cleanupFailure!=null && finalizationFailure!=null)
+            throw new AggregateException("payload transition, exact-job cleanup, and outcome finalization failed",operationFailure,cleanupFailure,finalizationFailure);
         if(operationFailure!=null && cleanupFailure!=null)
             throw new AggregateException("payload transition and exact-job cleanup both failed",operationFailure,cleanupFailure);
+        if(operationFailure!=null && finalizationFailure!=null)
+            throw new AggregateException("payload transition and local finalization failed",operationFailure,finalizationFailure);
+        if(cleanupFailure!=null && finalizationFailure!=null)
+            throw new AggregateException("exact-job cleanup and outcome finalization failed",cleanupFailure,finalizationFailure);
         if(operationFailure!=null) throw operationFailure;
         if(cleanupFailure!=null) throw new InvalidOperationException("exact-job cleanup failed; allocation remains retained or uncertain",cleanupFailure);
+        if(finalizationFailure!=null) throw new InvalidOperationException("local outcome finalization or runtime disposition failed; allocation remains retained or uncertain",finalizationFailure);
     }
 
-    private static void HoldPayloadUntilStop(MonitorPayloadJob payload, LeaseMonitor.Protocol protocol, CancellationToken token, Func<long> monotonicNow)
+    private static WindowsCustodyBackend.PayloadSupervisionOutcome HoldPayloadUntilStop(MonitorPayloadJob payload,
+        LeaseMonitor.Protocol protocol, CancellationToken token, Func<long> monotonicNow)
     {
         while(!token.IsCancellationRequested)
         {
-            if(protocol.Tick(monotonicNow())==LeaseMonitor.State.Stopping) return;
-            if(payload.ObserveRootExit()) return;
+            if(protocol.Tick(monotonicNow())==LeaseMonitor.State.Stopping) return WindowsCustodyBackend.PayloadSupervisionOutcome.MonitorStopped;
+            if(payload.ObserveRootExit()) return WindowsCustodyBackend.PayloadSupervisionOutcome.PayloadExited;
             Thread.Sleep(10);
         }
+        return WindowsCustodyBackend.PayloadSupervisionOutcome.MonitorStopped;
     }
 
     internal static void RequestAndWaitForAuthority(LeaseMonitor.Protocol protocol, CancellationToken token,
