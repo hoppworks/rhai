@@ -8,7 +8,7 @@ use std::ffi::OsStr;
 use std::io::{self, Read, Write};
 use std::os::fd::{AsRawFd, RawFd};
 use std::os::unix::process::{CommandExt, ExitStatusExt};
-use std::process::{Child, Command, Stdio};
+use std::process::{Child, ChildStderr, ChildStdin, ChildStdout, Command, Stdio};
 use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
 use std::sync::{Arc, Condvar, Mutex};
 use std::thread::{self, JoinHandle};
@@ -327,11 +327,6 @@ struct DriverToken<'a> {
 impl DriverToken<'_> {
     fn child_mut(&mut self) -> &mut Child {
         self.child.as_mut().expect("active process driver")
-    }
-
-    fn complete(&mut self) {
-        self.completed = true;
-        self.reservation.finish();
     }
 
     fn observe_reaped(&mut self, status: std::process::ExitStatus) {
@@ -1021,17 +1016,19 @@ fn supervise(
 ) -> Result<ProcessReport, (ProcessCause, ProcessReport)> {
     let mut pump_guard = driver.pump_guard();
     let child = driver.child_mut();
-    let mut stdout = child.stdout.take().unwrap();
-    let mut stderr = child.stderr.take().unwrap();
+    let mut stdout = Some(child.stdout.take().unwrap());
+    let mut stderr = Some(child.stderr.take().unwrap());
     let mut stdin = child.stdin.take();
-    let outfd = stdout.as_raw_fd();
-    let errfd = stderr.as_raw_fd();
+    let outfd = stdout.as_ref().unwrap().as_raw_fd();
+    let errfd = stderr.as_ref().unwrap().as_raw_fd();
     let infd = stdin.as_ref().map(AsRawFd::as_raw_fd);
     for fd in [Some(outfd), Some(errfd), infd].into_iter().flatten() {
         if let Err(e) = set_nonblock(fd) {
             return fail(
                 &mut driver,
-                program,
+                &mut stdin,
+                &mut stdout,
+                &mut stderr,
                 ProcessCause::Io {
                     op: "configure process pipe",
                     target: program.into(),
@@ -1066,7 +1063,9 @@ fn supervise(
                 Err(e) => {
                     return fail(
                         &mut driver,
-                        program,
+                        &mut stdin,
+                        &mut stdout,
+                        &mut stderr,
                         ProcessCause::Io {
                             op: "wait for process",
                             target: program.into(),
@@ -1134,7 +1133,9 @@ fn supervise(
             }
             return fail(
                 &mut driver,
-                program,
+                &mut stdin,
+                &mut stdout,
+                &mut stderr,
                 ProcessCause::Io {
                     op: "poll process pipes",
                     target: program.into(),
@@ -1150,11 +1151,13 @@ fn supervise(
             );
         }
         if fds[0].revents != 0 {
-            match read_ready(&mut stdout, &mut out, limit) {
+            match read_ready(stdout.as_mut().unwrap(), &mut out, limit) {
                 Ok(ReadState::Overflow) => {
                     return fail(
                         &mut driver,
-                        program,
+                        &mut stdin,
+                        &mut stdout,
+                        &mut stderr,
                         ProcessCause::OutputLimit(format!(
                             "process `{program}` exceeded {limit} output bytes"
                         )),
@@ -1171,7 +1174,9 @@ fn supervise(
                 Err(e) => {
                     return fail(
                         &mut driver,
-                        program,
+                        &mut stdin,
+                        &mut stdout,
+                        &mut stderr,
                         ProcessCause::Io {
                             op: "read process stdout",
                             target: program.into(),
@@ -1189,11 +1194,13 @@ fn supervise(
             }
         }
         if fds[1].revents != 0 {
-            match read_ready(&mut stderr, &mut err, limit) {
+            match read_ready(stderr.as_mut().unwrap(), &mut err, limit) {
                 Ok(ReadState::Overflow) => {
                     return fail(
                         &mut driver,
-                        program,
+                        &mut stdin,
+                        &mut stdout,
+                        &mut stderr,
                         ProcessCause::OutputLimit(format!(
                             "process `{program}` exceeded {limit} output bytes"
                         )),
@@ -1210,7 +1217,9 @@ fn supervise(
                 Err(e) => {
                     return fail(
                         &mut driver,
-                        program,
+                        &mut stdin,
+                        &mut stdout,
+                        &mut stderr,
                         ProcessCause::Io {
                             op: "read process stderr",
                             target: program.into(),
@@ -1238,7 +1247,9 @@ fn supervise(
                     Err(e) => {
                         return fail(
                             &mut driver,
-                            program,
+                            &mut stdin,
+                            &mut stdout,
+                            &mut stderr,
                             ProcessCause::Io {
                                 op: "write process stdin",
                                 target: program.into(),
@@ -1261,7 +1272,9 @@ fn supervise(
         if expired {
             let (cause, report) = fail(
                 &mut driver,
-                program,
+                &mut stdin,
+                &mut stdout,
+                &mut stderr,
                 ProcessCause::Timeout(format!("process `{program}` exceeded deadline")),
                 out,
                 err,
@@ -1303,7 +1316,9 @@ fn supervise(
 
 fn fail(
     driver: &mut DriverToken<'_>,
-    program: &str,
+    stdin: &mut Option<ChildStdin>,
+    stdout: &mut Option<ChildStdout>,
+    stderr: &mut Option<ChildStderr>,
     cause: ProcessCause,
     out: Vec<u8>,
     err: Vec<u8>,
@@ -1312,6 +1327,11 @@ fn fail(
     faults: &mut ExecutionFaults,
     mut identity_lost: bool,
 ) -> Result<ProcessReport, (ProcessCause, ProcessReport)> {
+    // Stop every pipe operation before signaling or observing cleanup. No caller-side I/O
+    // endpoint remains active once this execution commits to its primary failure.
+    stdin.take();
+    stdout.take();
+    stderr.take();
     let is_timeout = matches!(&cause, ProcessCause::Timeout(_));
     let mut diagnostics = vec![];
     if identity_lost {
@@ -1332,6 +1352,7 @@ fn fail(
     }
     let cleanup_deadline = Instant::now() + Duration::from_secs(1);
     let mut status = driver.exit_status.clone();
+    let mut interrupted = 0u8;
     while !identity_lost && !driver.reaped && Instant::now() < cleanup_deadline {
         match faults.cleanup_wait(driver.child_mut()) {
             Ok(Some(value)) => {
@@ -1349,15 +1370,27 @@ fn fail(
                 ));
                 break;
             }
-            Err(error) => {
-                if !diagnostics.iter().any(|d| d.operation() == "reap child") {
+            Err(error) if error.kind() == io::ErrorKind::Interrupted => {
+                interrupted = interrupted.saturating_add(1);
+                if interrupted >= 8 {
                     diagnostics.push(super::ProcessDiagnostic::new(
                         "reap child",
                         Some(error.kind()),
-                        error.to_string(),
+                        "cleanup wait remained interrupted; owner retained",
                     ));
+                    break;
                 }
                 thread::sleep(Duration::from_millis(10));
+            }
+            Err(error) => {
+                diagnostics.push(super::ProcessDiagnostic::new(
+                    "reap child",
+                    Some(error.kind()),
+                    error.to_string(),
+                ));
+                // This is an operational, non-consuming failure. Do not retry in the same
+                // foreground pass: freeze the incomplete report and hand the Child to service.
+                break;
             }
         }
     }
