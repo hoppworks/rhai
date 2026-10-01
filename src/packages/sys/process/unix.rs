@@ -31,6 +31,8 @@ struct OwnerRecord {
     pump_finished: bool,
     reaped: bool,
     retired: Option<Arc<AtomicBool>>,
+    #[cfg(test)]
+    service_gate: Option<Arc<AtomicBool>>,
 }
 
 struct OwnerRegistry {
@@ -62,7 +64,11 @@ impl CleanupService {
         }
     }
 
-    fn reserve(&self, retired: Option<Arc<AtomicBool>>) -> io::Result<LaunchReservation> {
+    fn reserve(
+        &self,
+        retired: Option<Arc<AtomicBool>>,
+        #[cfg(test)] service_gate: Option<Arc<AtomicBool>>,
+    ) -> io::Result<LaunchReservation> {
         self.ensure_worker()?;
         let mut current = self.registry.outstanding.load(Ordering::Acquire);
         loop {
@@ -88,6 +94,8 @@ impl CleanupService {
             pump_finished: false,
             reaped: false,
             retired,
+            #[cfg(test)]
+            service_gate,
         }));
         self.registry
             .records
@@ -144,6 +152,14 @@ fn cleanup_worker(registry: Arc<OwnerRegistry>) {
                     .lock()
                     .unwrap_or_else(|poisoned| poisoned.into_inner());
                 if owner.phase != OwnerPhase::CleanupPending || !owner.pump_finished {
+                    continue;
+                }
+                #[cfg(test)]
+                if owner
+                    .service_gate
+                    .as_ref()
+                    .is_some_and(|gate| !gate.load(Ordering::Acquire))
+                {
                     continue;
                 }
                 owner.phase = OwnerPhase::Service;
@@ -440,7 +456,11 @@ struct ExecutionFaults {
     #[cfg(test)]
     refuse_kill_once: bool,
     #[cfg(test)]
+    fail_cleanup_wait_once: bool,
+    #[cfg(test)]
     retired: Option<std::sync::Arc<std::sync::atomic::AtomicBool>>,
+    #[cfg(test)]
+    service_gate: Option<std::sync::Arc<std::sync::atomic::AtomicBool>>,
 }
 
 impl ExecutionFaults {
@@ -474,6 +494,23 @@ impl ExecutionFaults {
         {
             None
         }
+    }
+
+    #[cfg(test)]
+    fn service_gate_probe(&self) -> Option<Arc<AtomicBool>> {
+        self.service_gate.clone()
+    }
+
+    fn cleanup_wait(&mut self, child: &mut Child) -> io::Result<Option<std::process::ExitStatus>> {
+        #[cfg(test)]
+        if self.fail_cleanup_wait_once {
+            self.fail_cleanup_wait_once = false;
+            return Err(io::Error::new(
+                io::ErrorKind::Other,
+                "injected non-consuming cleanup wait failure",
+            ));
+        }
+        child.try_wait()
     }
 }
 
@@ -814,10 +851,19 @@ fn run_map(
         }
     }
     let mut faults = ExecutionFaults::take_for_execution();
-    let mut reservation = state
-        .cleanup
-        .reserve(faults.retirement_probe())
-        .map_err(|e| SysError::io("reserve process cleanup", program, &e))?;
+    let mut reservation = {
+        #[cfg(test)]
+        {
+            state
+                .cleanup
+                .reserve(faults.retirement_probe(), faults.service_gate_probe())
+        }
+        #[cfg(not(test))]
+        {
+            state.cleanup.reserve(faults.retirement_probe())
+        }
+    }
+    .map_err(|e| SysError::io("reserve process cleanup", program, &e))?;
     // The monotonic deadline begins immediately before process creation.
     let started = Instant::now();
     let child = command
@@ -1287,7 +1333,7 @@ fn fail(
     let cleanup_deadline = Instant::now() + Duration::from_secs(1);
     let mut status = driver.exit_status.clone();
     while !identity_lost && !driver.reaped && Instant::now() < cleanup_deadline {
-        match driver.child_mut().try_wait() {
+        match faults.cleanup_wait(driver.child_mut()) {
             Ok(Some(value)) => {
                 driver.observe_reaped(value.clone());
                 status = Some(value);
@@ -1378,11 +1424,28 @@ mod tests {
         NEXT_EXECUTION_FAULTS.with(|next| {
             let previous = next.borrow_mut().replace(ExecutionFaults {
                 refuse_kill_once: true,
+                fail_cleanup_wait_once: false,
                 retired: Some(Arc::clone(&retired)),
+                service_gate: None,
             });
             assert!(previous.is_none(), "an execution fault was already armed");
         });
         retired
+    }
+
+    fn fail_cleanup_wait_for_next_execution() -> (Arc<AtomicBool>, Arc<AtomicBool>) {
+        let retired = Arc::new(AtomicBool::new(false));
+        let service_gate = Arc::new(AtomicBool::new(false));
+        NEXT_EXECUTION_FAULTS.with(|next| {
+            let previous = next.borrow_mut().replace(ExecutionFaults {
+                refuse_kill_once: false,
+                fail_cleanup_wait_once: true,
+                retired: Some(Arc::clone(&retired)),
+                service_gate: Some(Arc::clone(&service_gate)),
+            });
+            assert!(previous.is_none(), "an execution fault was already armed");
+        });
+        (retired, service_gate)
     }
 
     struct AlwaysReadyReader;
@@ -1639,6 +1702,190 @@ mod tests {
             "retained owner did not retire after reap"
         );
         assert_pid_reaped(child_pid);
+    }
+
+    #[cfg(not(feature = "no_float"))]
+    fn run_inner_wait_failure_case() {
+        let record = PathBuf::from(std::env::var_os("RHAI_TEST_OWNER_RECORD").unwrap());
+        let returned = PathBuf::from(std::env::var_os("RHAI_TEST_OWNER_RETURNED").unwrap());
+        let release = PathBuf::from(std::env::var_os("RHAI_TEST_OWNER_RELEASE").unwrap());
+        let (retired, service_gate) = fail_cleanup_wait_for_next_execution();
+        let mut engine = Engine::new();
+        let package = SysPackage::new(
+            SysConfig::default()
+                .programs(ProgramPolicy::Any)
+                .max_output(1024),
+        )
+        .unwrap();
+        package.register_into_engine(&mut engine);
+
+        let shell = format!(
+            "tmp=\"$RHAI_TEST_OWNER_RECORD.tmp\"; printf 'child-pid=%s child-ready=1\\n' \"$$\" > \"$tmp\"; mv \"$tmp\" \"$RHAI_TEST_OWNER_RECORD\"; IFS= read -r value < \"$RHAI_TEST_OWNER_RELEASE\""
+        );
+        let script = format!(
+            "run(\"/bin/sh\", #{{ stdin: {}, timeout: 0.1, max_output: 1024, env: #{{ \"RHAI_TEST_OWNER_RECORD\": {}, \"RHAI_TEST_OWNER_RELEASE\": {} }} }})",
+            quote_rhai(&shell),
+            quote_rhai(record.to_str().unwrap()),
+            quote_rhai(release.to_str().unwrap()),
+        );
+        let started = Instant::now();
+        let result = engine.eval::<crate::Map>(&script);
+        assert!(
+            started.elapsed() < Duration::from_secs(2),
+            "public run blocked after a non-consuming wait failure"
+        );
+        let marker_tmp = returned.with_extension("tmp");
+        fs::write(&marker_tmp, b"public-returned\n").unwrap();
+        fs::rename(&marker_tmp, &returned).unwrap();
+        let record_deadline = Instant::now() + Duration::from_secs(1);
+        let child_pid = loop {
+            if record.exists() {
+                break record_pid(&record).unwrap();
+            }
+            assert!(
+                Instant::now() < record_deadline,
+                "child readiness record missing"
+            );
+            thread::sleep(Duration::from_millis(5));
+        };
+        let error = result.expect_err("deadline must return an incomplete-cleanup error");
+        let sys_error = match error.as_ref() {
+            EvalAltResult::ErrorRuntime(value, _) => value.clone().try_cast::<SysError>().unwrap(),
+            other => panic!("expected SysError::Process, got {other:?}"),
+        };
+        let (cause_snapshot, report_snapshot) = match &sys_error {
+            SysError::Process { cause, report } => {
+                assert!(matches!(cause, ProcessCause::Timeout(_)));
+                (cause.clone(), report.clone())
+            }
+            other => panic!("expected timeout process error, got {other:?}"),
+        };
+        assert!(
+            report_snapshot.exit_code().is_none() && report_snapshot.exit_signal().is_none(),
+            "non-consuming wait failure must publish an unavailable exit snapshot"
+        );
+        assert!(!report_snapshot.timed_out());
+        assert!(!report_snapshot.stdout_complete() && !report_snapshot.stderr_complete());
+        assert!(report_snapshot
+            .cleanup_diagnostics()
+            .iter()
+            .any(|diagnostic| {
+                diagnostic.operation() == "reap child"
+                    && diagnostic
+                        .message()
+                        .contains("injected non-consuming cleanup wait failure")
+            }));
+        assert!(
+            !retired.load(Ordering::Acquire),
+            "owner retired before service observation"
+        );
+
+        println!(
+            "retained-owner-wait child_record={} pid={child_pid}",
+            record.display()
+        );
+        assert_pid_alive(child_pid);
+        service_gate.store(true, Ordering::Release);
+        let cleanup_deadline = Instant::now() + Duration::from_secs(3);
+        while !retired.load(Ordering::Acquire) && Instant::now() < cleanup_deadline {
+            thread::sleep(Duration::from_millis(5));
+        }
+        assert!(
+            retired.load(Ordering::Acquire),
+            "service did not reap and retire the child"
+        );
+        assert_pid_reaped(child_pid);
+        match &sys_error {
+            SysError::Process { cause, report } => {
+                assert_eq!(
+                    cause, &cause_snapshot,
+                    "primary cause changed after cleanup"
+                );
+                assert_eq!(
+                    report, &report_snapshot,
+                    "published report changed after cleanup"
+                );
+            }
+            other => panic!("primary error changed after cleanup: {other:?}"),
+        }
+        println!("retained-owner-wait child_pid={child_pid} reap=ESRCH");
+        drop(error);
+        drop(sys_error);
+        drop(engine);
+        drop(package);
+    }
+
+    #[cfg(not(feature = "no_float"))]
+    #[test]
+    fn non_consuming_cleanup_wait_failure_publishes_frozen_snapshot() {
+        const CHILD_ROLE: &str = "RHAI_TEST_OWNER_WAIT_CHILD_ROLE";
+        const TEST_NAME: &str = "packages::sys::process::unix::tests::non_consuming_cleanup_wait_failure_publishes_frozen_snapshot";
+
+        if std::env::var_os(CHILD_ROLE).is_some() {
+            run_inner_wait_failure_case();
+            return;
+        }
+
+        let fixture = FixtureDir::new();
+        let record = fixture.0.join("child-record");
+        let returned = fixture.0.join("public-returned");
+        let release = fixture.0.join("release.fifo");
+        create_fifo(&release);
+        let nested = Command::new(std::env::current_exe().unwrap())
+            .args(["--exact", TEST_NAME, "--nocapture"])
+            .env(CHILD_ROLE, "inner")
+            .env("RHAI_TEST_OWNER_RECORD", &record)
+            .env("RHAI_TEST_OWNER_RETURNED", &returned)
+            .env("RHAI_TEST_OWNER_RELEASE", &release)
+            .stdout(Stdio::inherit())
+            .stderr(Stdio::inherit())
+            .spawn()
+            .unwrap();
+        let mut nested = NestedTestChild {
+            child: nested,
+            release: release.clone(),
+        };
+        let started = Instant::now();
+        let mut watchdog_released_fixture = false;
+        let status = loop {
+            if let Some(status) = nested.try_wait().unwrap() {
+                break status;
+            }
+            if started.elapsed() >= Duration::from_secs(3)
+                && !returned.exists()
+                && !watchdog_released_fixture
+            {
+                assert!(
+                    record.exists(),
+                    "nested test did not publish child readiness"
+                );
+                let pid = record_pid(&record).unwrap();
+                assert_pid_alive(pid);
+                release_fifo(&release).unwrap();
+                watchdog_released_fixture = true;
+            }
+            if started.elapsed() >= Duration::from_secs(8) {
+                panic!("nested wait-failure test exceeded its external watchdog");
+            }
+            thread::sleep(Duration::from_millis(10));
+        };
+        if record.exists() {
+            let pid = record_pid(&record).unwrap();
+            println!(
+                "retained-owner-wait child_record={} pid={pid}",
+                record.display()
+            );
+            wait_for_pid_reaped(pid);
+            println!("retained-owner-wait child_pid={pid} reap=ESRCH");
+        }
+        assert!(
+            !watchdog_released_fixture,
+            "external watchdog had to release the child"
+        );
+        assert!(
+            status.success(),
+            "nested incomplete-cleanup contract failed: {status}"
+        );
     }
 
     #[cfg(not(feature = "no_float"))]
