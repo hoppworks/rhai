@@ -1,0 +1,33 @@
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-p7pa_4od/source)
+error[E0433]: failed to resolve: use of undeclared type `ProcessExit`
+    --> src/packages/sys/process/unix.rs:3021:40
+     |
+3021 |         assert_eq!(snapshot.exit, Some(ProcessExit::Code(0)));
+     |                                        ^^^^^^^^^^^ use of undeclared type `ProcessExit`
+     |
+help: consider importing this enum through its public re-export
+     |
+2579 +     use crate::packages::sys::ProcessExit;
+     |
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:1817:9
+     |
+1817 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+     |
+     = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2136:9
+     |
+2136 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+For more information about this error, try `rustc --explain E0433`.
+warning: `rhai` (lib test) generated 2 warnings
+error: could not compile `rhai` (lib test) due to 1 previous error; 2 warnings emitted
