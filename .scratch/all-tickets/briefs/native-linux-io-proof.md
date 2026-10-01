@@ -1,0 +1,18 @@
+# Native Linux process I/O prototype proof
+
+Continue the responsible owned checkout /Users/hoppworks/projects/rhai-process-rust-io on task/process-rust-io. Read root coordinator-state.md, process-native-followup-stop-review.md, project AGENTS.md and applicable current campaign repair reference. Accepted macOS source cc4af0e8 / evidence cddc1c38 is integrated byte-identically at root .scratch/process-rust-io with canonical proof; do not rebuild macOS.
+
+## Requirement and authorized scope
+Prove the same thirteen standalone Rust-parent native I/O cases on actual Linux workhorse under direct private Rust/Cargo/rustdoc 1.77.2. Production Engine/API, Windows and broader topology remain open. Standing acceptance of recommendations plus latest Freigabe covers this concrete finite package. Prior cause/Expert04 history remains binding; no second Expert chain or global/home/config/credentials changes. No push/merge from subordinate.
+
+## Package
+Dispatch 2026-10-01 06:08:39 UTC. Initial active-work checkpoint/hard package finish 06:38:39 UTC including immutable root gate and independent acceptance. Execution cutoff 06:28:39 UTC, latest full600s launch 06:18:39 UTC. One <=600s complete13-case native invocation, no reruns, zero unexpected runtime failure allowance. Shared setup+build300s, case45s+10s cleanup reserve, 1GiB private allocation bound, jobs2, at most8 process resources/3workers/32FD. Keep cumulative history and actual observed sampled usage separate. Source/setup work only before root immutable release; do not install toolchain/build/start fixtures yet. Report frozen source and exact planned remote launch for root review.
+
+## Permitted changes
+Add precise Linux /proc PID-start identity, parse comm after final closing parenthesis, preserve list-of-two-integers protocol (e.g. boot btime/startticks), fail closed for malformed/unknown/permission errors, missing process false. Keep Darwin path byte-identical where practical. Resolve host ps/sleep paths and platform-specific private Rust target while preserving direct exact version checks, setup deadline/sampler, all cap/SCM_RIGHTS/custody/hash/join contracts and all13 fixedcases. Native waitid/WNOWAIT first path is already available; any manual Darwin fallback remains platform-gated.
+
+## Remote custody and export
+Authorized SSH alias workhorse has Linux7.2.4 x86_64, /usr/bin/python3 and /root/.cargo/bin/rustup/cargo/rustc. Prior root .scratch/linux-optional-msrv-proof/run-proof.py and linux-optional-msrv-proof brief show private toolchain route. Stage exact source and configured agent-skills run_scoped.py plus required helper under distinct owned /root/rhai-linux-native-io-task/<package>. Actual remote /usr/bin/python3 scoped runner owns remote PGID/runtime; local SSH alone is not custody. Private RUSTUP_HOME/CARGO_HOME, no-self-update, direct1.77.2-x86_64-unknown-linux-gnu binaries. Capture exact remote driver/supervisor/build/custodian/runner/workload identities, full groups, retained per-case receipts and export outside private runtime as cases finish. Precise owned cleanup and connection-loss disposition; retain only needed canonical raw evidence, source and report by path. No unrelated process/path deletion.
+
+## Review and report
+Meaningful identity portability checks at approved adapter seam, no tautological tests/new framework. Commit source as exact hoppworks <daniel@hoppworks.de> author+committer. Send frozen ref, changed paths, intended launch command and source-gate caveats; WAIT for root release before installation/build/fixtures. After release, one recorded invocation then frozen evidence/report, no blind rerun. Reuse accepted fixture source byte-identically. Root independently checks payloads/custody/hash/cleanup before acceptance.
