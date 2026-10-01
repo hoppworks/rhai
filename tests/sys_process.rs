@@ -6,7 +6,7 @@ mod sys_support;
 use rhai::packages::sys::{FsAccess, ProcessCause, ProcessScope, ProgramPolicy, SysConfig, SysError};
 #[cfg(not(feature = "no_index"))]
 use rhai::Blob;
-use rhai::{Dynamic, Engine, Map, Scope};
+use rhai::{Dynamic, Engine, EvalAltResult, Map, Scope};
 #[cfg(not(feature = "no_index"))]
 use std::io::{Read, Write};
 #[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
@@ -414,6 +414,7 @@ fn managed_scope_retained_pipe_leader_fixture() {
     while !root.join("release-leader").exists() && Instant::now() < deadline {
         std::thread::sleep(Duration::from_millis(5));
     }
+    managed_atomic_record(&root.join("leader-exit-record"), &format!("pid={} release_seen={} exit_intent=true\n", std::process::id(), root.join("release-leader").exists()));
     // The direct leader may be terminated by the public API before fixture release. The outer
     // owner releases the escaped holder and independently observes its PID become ESRCH.
     drop(holder);
@@ -527,6 +528,10 @@ impl ManagedEscapedPipeFixture {
 
     fn path(&self, name: &str) -> std::path::PathBuf {
         self.root.path().join(name)
+    }
+
+    fn release_leader(&self) {
+        std::fs::write(self.path("release-leader"), b"release\n").expect("release fixture leader");
     }
 
     fn release_and_wait(&mut self) -> (Option<i32>, Option<i32>, bool, bool) {
@@ -971,6 +976,136 @@ fn managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes() {
     assert_eq!(probe_fields.get("stdout_error"), Some(&libc::EPIPE));
     assert_eq!(probe_fields.get("stderr_result"), Some(&-1), "closed stderr capture endpoint must reject the post-return write");
     assert_eq!(probe_fields.get("stderr_error"), Some(&libc::EPIPE));
+}
+
+/// An uncancelled timed wait remains pending while an escaped holder owns capture writers.
+/// After the direct leader exits naturally, public kill cancels capture collection without
+/// signaling the reaped PID and still publishes an incomplete report.
+#[test]
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_spawn_post_reap_cancel_bounds_escaped_capture() {
+    let mut fixture = ManagedEscapedPipeFixture::new();
+    let mut sentinel = managed_spawn_sentinel();
+    let sentinel_pid = sentinel.0.id() as i32;
+    let sentinel_pgid = unsafe { libc::getpgid(sentinel_pid) };
+    assert_eq!(sentinel_pgid, sentinel_pid, "fixture sentinel owns its group");
+    let (engine, script) = managed_escaped_pipe_spawn_script(&fixture, sentinel_pgid);
+    let child = engine.eval::<Dynamic>(&script).expect("public managed spawn");
+
+    let deadline = Instant::now() + Duration::from_secs(5);
+    while (!fixture.path("leader-record").exists() || !fixture.path("holder-record").exists()) && Instant::now() < deadline {
+        std::thread::sleep(Duration::from_millis(5));
+    }
+    let leader = managed_record_fields(&std::fs::read_to_string(fixture.path("leader-record")).expect("leader readiness"));
+    let holder = managed_record_fields(&std::fs::read_to_string(fixture.path("holder-record")).expect("holder readiness"));
+    let leader_pid = leader["pid"];
+    let holder_pid = holder["pid"];
+    assert_eq!(leader_pid, leader["pgid"]);
+    assert_eq!(holder["pgid"], sentinel_pgid);
+    assert_ne!(leader_pid, holder_pid);
+    assert!(pid_is_alive(holder_pid));
+
+    let mut scope = Scope::new();
+    scope.push_dynamic("child", child);
+    let ordinary_wait = engine.eval_with_scope::<Dynamic>(&mut scope, "child.wait(0.05)");
+    let ordinary_wait_unit = ordinary_wait.as_ref().is_ok_and(Dynamic::is_unit);
+    let holder_live_after_ordinary_wait = pid_is_alive(holder_pid);
+    eprintln!(
+        "managed_post_reap_ordinary_wait root={} test_pid={} leader={} holder={} sentinel={} wait_unit={ordinary_wait_unit} holder_live={holder_live_after_ordinary_wait}",
+        fixture.root.path().display(),
+        std::process::id(),
+        leader_pid,
+        holder_pid,
+        sentinel_pid
+    );
+    assert!(ordinary_wait_unit, "uncancelled timed wait must remain pending while escaped writers hold capture pipes");
+    assert!(holder_live_after_ordinary_wait, "uncancelled timed wait must not terminate the holder");
+
+    fixture.release_leader();
+    let reap_deadline = Instant::now() + Duration::from_secs(3);
+    while !pid_is_absent(leader_pid) && Instant::now() < reap_deadline {
+        std::thread::sleep(Duration::from_millis(5));
+    }
+    let exit_record = std::fs::read_to_string(fixture.path("leader-exit-record"));
+    let exit_record_matches = exit_record
+        .as_deref()
+        .is_ok_and(|record| record.contains(&format!("pid={leader_pid} release_seen=true exit_intent=true")));
+    let leader_try_wait = engine.eval_with_scope::<Dynamic>(&mut scope, "child.try_wait()");
+    let leader_try_wait_typed_error = leader_try_wait.as_ref().err().and_then(|error| match error.as_ref() {
+        EvalAltResult::ErrorRuntime(value, _) => value.clone().try_cast::<SysError>(),
+        _ => None,
+    });
+    if let Some(SysError::Process { cause, report }) = &leader_try_wait_typed_error {
+        eprintln!(
+            "managed_post_reap_typed_error cause={cause:?} exit_code={:?} exit_signal={:?} stdout_complete={} stderr_complete={} timed_out={} stdout_bytes={:?} stderr_bytes={:?} cleanup_diagnostics={:?}",
+            report.exit_code(),
+            report.exit_signal(),
+            report.stdout_complete(),
+            report.stderr_complete(),
+            report.timed_out(),
+            report.stdout_bytes(),
+            report.stderr_bytes(),
+            report.cleanup_diagnostics(),
+        );
+    } else {
+        eprintln!("managed_post_reap_typed_error unexpected={leader_try_wait_typed_error:?}");
+    }
+    let leader_ps = Command::new("/bin/ps").args(["-o", "stat=", "-p", &leader_pid.to_string()]).output();
+    let leader_ps_text = leader_ps.as_ref().map(|output| String::from_utf8_lossy(&output.stdout).trim().to_owned());
+    let leader_esrch_before_kill = pid_is_absent(leader_pid);
+    let holder_live_after_leader_exit = pid_is_alive(holder_pid);
+    eprintln!(
+        "managed_post_reap_leader leader={leader_pid} exit_record_matches={exit_record_matches} exit_record={:?} try_wait_unit={} try_wait_error={:?} ps_status={:?} leader_esrch={leader_esrch_before_kill} holder={holder_pid} holder_live={holder_live_after_leader_exit}",
+        exit_record.as_deref().unwrap_or("<missing>"),
+        leader_try_wait.as_ref().is_ok_and(Dynamic::is_unit),
+        leader_try_wait.as_ref().err().map(ToString::to_string),
+        leader_ps_text
+    );
+    assert!(exit_record_matches, "leader fixture must observe the release before exiting");
+    assert!(leader_try_wait.is_ok(), "natural leader exit with only its zombie remaining must not fail group closure");
+    assert!(leader_esrch_before_kill, "direct leader must exit before public cancellation");
+    assert!(holder_live_after_leader_exit, "escaped holder must survive direct leader exit");
+
+    let post_reap_wait = engine.eval_with_scope::<Dynamic>(&mut scope, "child.wait(0.3)");
+    let post_reap_wait_unit = post_reap_wait.as_ref().is_ok_and(Dynamic::is_unit);
+    let holder_live_after_post_reap_wait = pid_is_alive(holder_pid);
+    let sentinel_live_after_post_reap_wait = sentinel.0.try_wait().unwrap().is_none();
+    eprintln!("managed_post_reap_uncancelled_wait leader={leader_pid} wait_unit={post_reap_wait_unit} holder={holder_pid} holder_live={holder_live_after_post_reap_wait} sentinel={sentinel_pid} sentinel_live={sentinel_live_after_post_reap_wait}");
+    assert!(post_reap_wait_unit, "uncancelled wait after direct-child reap must remain pending while writers remain open");
+    assert!(holder_live_after_post_reap_wait && sentinel_live_after_post_reap_wait, "uncancelled post-reap wait must preserve escaped holder and sentinel");
+
+    let wait_result = engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill(); child.wait(2.0)");
+    let holder_live_after_cancel = pid_is_alive(holder_pid);
+    std::fs::write(fixture.path("holder-challenge"), b"post-reap-probe\n").unwrap();
+    let ack_deadline = Instant::now() + Duration::from_secs(2);
+    while !fixture.path("holder-ack").exists() && Instant::now() < ack_deadline {
+        std::thread::sleep(Duration::from_millis(5));
+    }
+    let probe_text = std::fs::read_to_string(fixture.path("holder-ack")).expect("post-reap holder challenge");
+    let probe = managed_record_fields(&probe_text);
+    let (cleanup_leader, cleanup_holder, leader_esrch, holder_esrch) = fixture.release_and_wait();
+    drop(sentinel);
+    let sentinel_esrch = pid_is_absent(sentinel_pid);
+    eprintln!("managed_escaped_pipe_terminal leader={cleanup_leader:?} leader_esrch={leader_esrch} holder={cleanup_holder:?} holder_esrch={holder_esrch} sentinel={sentinel_pid} sentinel_esrch={sentinel_esrch}");
+    eprintln!("managed_post_reap_cancel root={} test_pid={} leader={} leader_esrch_before_kill={leader_esrch_before_kill} leader_esrch={leader_esrch} holder={} holder_live_after_cancel={holder_live_after_cancel} holder_esrch={holder_esrch} sentinel={sentinel_pid} sentinel_esrch={sentinel_esrch} probe={probe_text:?} wait_unit={}", fixture.root.path().display(), std::process::id(), leader_pid, holder_pid, wait_result.as_ref().is_ok_and(Dynamic::is_unit));
+    assert_eq!(cleanup_leader, Some(leader_pid));
+    assert_eq!(cleanup_holder, Some(holder_pid));
+    assert!(leader_esrch_before_kill && leader_esrch && holder_esrch && sentinel_esrch, "fixture must observe exact process identities absent after cleanup");
+    assert!(holder_live_after_cancel, "public post-reap kill must not signal the escaped holder group");
+    assert_eq!(probe.get("pid"), Some(&holder_pid));
+
+    let result = wait_result.expect("post-reap cancellation must publish the retained process report");
+    assert!(!result.is_unit(), "post-reap cancellation must return a report");
+    let result = result.cast::<Map>();
+    assert_eq!(result["stdout_complete"].as_bool().unwrap(), false);
+    assert_eq!(result["stderr_complete"].as_bool().unwrap(), false);
+    assert_eq!(result["success"].as_bool().unwrap(), true);
+    assert_eq!(probe.get("stdout_result"), Some(&-1), "post-reap cancellation must close the stdout capture endpoint");
+    assert_eq!(probe.get("stdout_error"), Some(&libc::EPIPE));
+    assert_eq!(probe.get("stderr_result"), Some(&-1), "post-reap cancellation must close the stderr capture endpoint");
+    assert_eq!(probe.get("stderr_error"), Some(&libc::EPIPE));
+    assert!(result["stdout"].as_immutable_string_ref().unwrap().contains("escaped-holder-stdout-ready"));
+    assert!(result["stderr"].as_immutable_string_ref().unwrap().contains("escaped-holder-stderr-ready"));
 }
 
 /// Dropping a nonfinal shared Child clone preserves the running group; dropping the final

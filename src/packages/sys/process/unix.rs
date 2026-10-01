@@ -34,6 +34,8 @@ struct OwnerRecord {
     pump_finished: bool,
     reaped: bool,
     retirement_complete: bool,
+    capture_cancel_at: Option<Instant>,
+    capture_closed: bool,
     retired: Option<Arc<AtomicBool>>,
     #[cfg(test)]
     service_gate: Option<Arc<AtomicBool>>,
@@ -72,8 +74,8 @@ struct ChildSnapshot {
 struct SpawnRuntime {
     control: Arc<ChildControl>,
     stdin: Option<ChildStdin>,
-    stdout: ChildStdout,
-    stderr: ChildStderr,
+    stdout: Option<ChildStdout>,
+    stderr: Option<ChildStderr>,
 }
 
 /// A shared handle to a child process launched by the `sys` package.
@@ -172,6 +174,8 @@ impl CleanupService {
             pump_finished: false,
             reaped: false,
             retirement_complete: false,
+            capture_cancel_at: None,
+            capture_closed: false,
             retired,
             #[cfg(test)]
             service_gate,
@@ -330,6 +334,13 @@ fn pump_spawned_record(registry: &OwnerRegistry, record: &Arc<Mutex<OwnerRecord>
         .unwrap_or_else(|p| p.into_inner());
     let mut progressed = false;
 
+    // Stop waiting indefinitely on escaped descendants that retain capture writers
+    // after cancellation. Drain briefly, then close only our readers; this does not
+    // assert EOF and does not release direct-child cleanup ownership.
+    if state.kill_requested && owner.capture_cancel_at.is_none() {
+        owner.capture_cancel_at = Some(Instant::now());
+    }
+
     if state.kill_requested && !state.kill_sent && !owner.reaped {
         runtime.stdin.take();
         note_numeric_operation_owner(&owner);
@@ -405,8 +416,12 @@ fn pump_spawned_record(registry: &OwnerRegistry, record: &Arc<Mutex<OwnerRecord>
     }
 
     let output_limit = state.limit;
-    if !state.stdout_complete {
-        match read_ready(&mut runtime.stdout, &mut state.stdout, output_limit) {
+    if !owner.capture_closed && !state.stdout_complete {
+        match read_ready(
+            runtime.stdout.as_mut().expect("stdout capture is open"),
+            &mut state.stdout,
+            output_limit,
+        ) {
             Ok(ReadState::Eof) => {
                 state.stdout_complete = true;
                 progressed = true;
@@ -432,8 +447,12 @@ fn pump_spawned_record(registry: &OwnerRegistry, record: &Arc<Mutex<OwnerRecord>
             }
         }
     }
-    if !state.stderr_complete {
-        match read_ready(&mut runtime.stderr, &mut state.stderr, output_limit) {
+    if !owner.capture_closed && !state.stderr_complete {
+        match read_ready(
+            runtime.stderr.as_mut().expect("stderr capture is open"),
+            &mut state.stderr,
+            output_limit,
+        ) {
             Ok(ReadState::Eof) => {
                 state.stderr_complete = true;
                 progressed = true;
@@ -460,6 +479,17 @@ fn pump_spawned_record(registry: &OwnerRegistry, record: &Arc<Mutex<OwnerRecord>
         }
     }
 
+    if !owner.capture_closed
+        && owner
+            .capture_cancel_at
+            .is_some_and(|at| at.elapsed() >= POST_CANCEL_CAPTURE_GRACE)
+    {
+        runtime.stdout.take();
+        runtime.stderr.take();
+        owner.capture_closed = true;
+        progressed = true;
+    }
+
     if !owner.reaped {
         note_numeric_operation_owner(&owner);
         let mut wait_operation = "wait for child";
@@ -467,13 +497,15 @@ fn pump_spawned_record(registry: &OwnerRegistry, record: &Arc<Mutex<OwnerRecord>
             match managed_leader_exited(&child) {
                 Ok(false) => Ok(None),
                 Err(error) if error.kind() == io::ErrorKind::Interrupted => Ok(None),
-                Ok(true) => match close_managed_group(child.id()) {
-                    Ok(()) => child.wait().map(Some),
-                    Err(error) => {
-                        wait_operation = "terminate process group";
-                        Err(error)
+                Ok(true) => {
+                    match close_managed_group(child.id(), GroupCloseContext::LeaderExited) {
+                        Ok(()) => child.wait().map(Some),
+                        Err(error) => {
+                            wait_operation = "terminate process group";
+                            Err(error)
+                        }
                     }
-                },
+                }
                 Err(error) => Err(error),
             }
         } else {
@@ -515,7 +547,10 @@ fn pump_spawned_record(registry: &OwnerRegistry, record: &Arc<Mutex<OwnerRecord>
         }
     }
 
-    if owner.reaped && state.stdout_complete && state.stderr_complete {
+    if owner.reaped
+        && (state.stdout_complete || owner.capture_closed)
+        && (state.stderr_complete || owner.capture_closed)
+    {
         state.terminal = true;
         runtime.stdin.take();
         owner.pump_finished = true;
@@ -537,6 +572,8 @@ fn pump_spawned_record(registry: &OwnerRegistry, record: &Arc<Mutex<OwnerRecord>
     owner.spawned = Some(runtime);
     progressed
 }
+
+const POST_CANCEL_CAPTURE_GRACE: Duration = Duration::from_millis(200);
 
 fn note_numeric_operation_owner(owner: &OwnerRecord) {
     #[cfg(test)]
@@ -595,18 +632,82 @@ fn managed_leader_exited(child: &OsChild) -> io::Result<bool> {
     }
 }
 
+#[derive(Clone, Copy, PartialEq, Eq)]
+enum GroupCloseContext {
+    Cancellation,
+    LeaderExited,
+}
+
+/// Accept only the exact, complete one-member process-group listing needed for the
+/// Darwin zombie-leader EPERM case. `proc_listpids` reports bytes, not entries, and
+/// truncates a full buffer, so every shape other than exactly one PID is ambiguous.
+#[cfg(any(target_os = "macos", test))]
+fn group_listing_is_only_leader(
+    bytes: usize,
+    pids: &[libc::pid_t; 2],
+    leader: libc::pid_t,
+) -> bool {
+    bytes == std::mem::size_of::<libc::pid_t>() && pids[0] == leader && pids[1] == 0
+}
+
+#[cfg(any(target_os = "macos", test))]
+fn darwin_eperm_fallback_allowed(
+    context: GroupCloseContext,
+    error: &io::Error,
+    group_listing: io::Result<bool>,
+) -> bool {
+    context == GroupCloseContext::LeaderExited
+        && error.raw_os_error() == Some(libc::EPERM)
+        && group_listing.is_ok_and(|group_is_only_leader| group_is_only_leader)
+}
+
+#[cfg(target_os = "macos")]
+fn darwin_group_is_only_leader(pid: u32) -> io::Result<bool> {
+    // PROC_PGRP_ONLY is the proc_listpids type selecting the process group in typeinfo.
+    const PROC_PGRP_ONLY: u32 = 2;
+    let mut pids = [0 as libc::pid_t; 2];
+    // SAFETY: `pids` points to two initialized pid_t slots and the synchronous API is
+    // given exactly that writable byte capacity.
+    let bytes = unsafe {
+        libc::proc_listpids(
+            PROC_PGRP_ONLY,
+            pid,
+            pids.as_mut_ptr().cast(),
+            std::mem::size_of_val(&pids) as libc::c_int,
+        )
+    };
+    if bytes < 0 {
+        return Err(io::Error::last_os_error());
+    }
+    Ok(group_listing_is_only_leader(
+        bytes as usize,
+        &pids,
+        pid as libc::pid_t,
+    ))
+}
+
 /// Close a managed process group while its leader is still unreaped and pins the PGID.
-fn close_managed_group(pid: u32) -> io::Result<()> {
+/// Darwin may report EPERM for a group containing only its already-exited zombie leader.
+/// That one case is harmless after exact WNOWAIT observation and an untruncated atomic
+/// process-group listing; all live-cancellation and ambiguous cases preserve the error.
+fn close_managed_group(pid: u32, context: GroupCloseContext) -> io::Result<()> {
+    #[cfg(not(target_os = "macos"))]
+    let _ = context;
     // SAFETY: negative pid addresses only the process group created for this owned child.
     if unsafe { libc::kill(-(pid as libc::pid_t), libc::SIGKILL) } == 0 {
         return Ok(());
     }
     let error = io::Error::last_os_error();
     if error.raw_os_error() == Some(libc::ESRCH) {
-        Ok(())
-    } else {
-        Err(error)
+        return Ok(());
     }
+    #[cfg(target_os = "macos")]
+    if error.raw_os_error() == Some(libc::EPERM) && context == GroupCloseContext::LeaderExited {
+        if darwin_eperm_fallback_allowed(context, &error, darwin_group_is_only_leader(pid)) {
+            return Ok(());
+        }
+    }
+    Err(error)
 }
 
 struct ManagedTerminationError {
@@ -618,7 +719,7 @@ struct ManagedTerminationError {
 /// to another same-session group after pre_exec establishes the initial scope, so the group
 /// signal alone does not guarantee that the direct child has stopped.
 fn terminate_managed_child(child: &mut OsChild) -> Result<(), ManagedTerminationError> {
-    let group_error = close_managed_group(child.id()).err();
+    let group_error = close_managed_group(child.id(), GroupCloseContext::Cancellation).err();
     let child_error = child.kill().err();
     if let Some(source) = group_error {
         return Err(ManagedTerminationError {
@@ -675,8 +776,8 @@ impl LaunchReservation {
         owner.spawned = Some(SpawnRuntime {
             control,
             stdin,
-            stdout,
-            stderr,
+            stdout: Some(stdout),
+            stderr: Some(stderr),
         });
         owner.phase = OwnerPhase::Spawned;
         // From this point the retained service owns the child even if the caller unwinds.
@@ -2048,7 +2149,10 @@ fn supervise(
                     Ok(false) => Ok(None),
                     Err(error) if error.kind() == io::ErrorKind::Interrupted => Ok(None),
                     Ok(true) => {
-                        if let Err(error) = close_managed_group(driver.child_mut().id()) {
+                        if let Err(error) = close_managed_group(
+                            driver.child_mut().id(),
+                            GroupCloseContext::LeaderExited,
+                        ) {
                             wait_operation = "terminate process group";
                             Err(error)
                         } else {
@@ -4300,5 +4404,61 @@ os.replace(tmp, sys.argv[2])
             status.success(),
             "nested retained-owner contract failed: {status}"
         );
+    }
+
+    #[test]
+    fn darwin_eperm_fallback_requires_natural_exit_and_exact_group_listing() {
+        let leader = 4101 as libc::pid_t;
+        let eprem = io::Error::from_raw_os_error(libc::EPERM);
+        let other = io::Error::from_raw_os_error(libc::ESRCH);
+
+        assert!(super::darwin_eperm_fallback_allowed(
+            super::GroupCloseContext::LeaderExited,
+            &eprem,
+            Ok(true),
+        ));
+        assert!(!super::darwin_eperm_fallback_allowed(
+            super::GroupCloseContext::Cancellation,
+            &eprem,
+            Ok(true),
+        ));
+        assert!(!super::darwin_eperm_fallback_allowed(
+            super::GroupCloseContext::LeaderExited,
+            &other,
+            Ok(true),
+        ));
+        assert!(!super::darwin_eperm_fallback_allowed(
+            super::GroupCloseContext::LeaderExited,
+            &eprem,
+            Ok(false),
+        ));
+        assert!(!super::darwin_eperm_fallback_allowed(
+            super::GroupCloseContext::LeaderExited,
+            &eprem,
+            Err(io::Error::from_raw_os_error(libc::EIO)),
+        ));
+
+        let mut exact = [leader, 0];
+        assert!(super::group_listing_is_only_leader(
+            std::mem::size_of::<libc::pid_t>(),
+            &exact,
+            leader,
+        ));
+
+        for (bytes, listing) in [
+            (0, [0, 0]),
+            (std::mem::size_of::<libc::pid_t>() * 2, [leader, 4202]),
+            (std::mem::size_of::<libc::pid_t>() * 2, [leader, 0]),
+            (std::mem::size_of::<libc::pid_t>() - 1, [leader, 0]),
+            (std::mem::size_of::<libc::pid_t>() + 1, [leader, 0]),
+            (std::mem::size_of::<libc::pid_t>(), [4202, 0]),
+            (std::mem::size_of::<libc::pid_t>(), [leader, 4202]),
+        ] {
+            exact = listing;
+            assert!(
+                !super::group_listing_is_only_leader(bytes, &exact, leader),
+                "ambiguous process-group listing must preserve EPERM: bytes={bytes}, pids={exact:?}"
+            );
+        }
     }
 }
