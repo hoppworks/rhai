@@ -1,0 +1,196 @@
+info: syncing channel updates for 1.77.2-aarch64-apple-darwin
+info: latest update on 2024-04-09 for version 1.77.2 (25ef9e3d8 2024-04-09)
+info: downloading 3 components
+
+  1.77.2-aarch64-apple-darwin installed - rustc 1.77.2 (25ef9e3d8 2024-04-09)
+
+info: default toolchain set to 1.77.2-aarch64-apple-darwin
+rustc 1.77.2 (25ef9e3d8 2024-04-09)
+cargo 1.77.2 (e52e36006 2024-03-26)
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded cap-std v4.0.3
+  Downloaded ahash v0.8.12
+  Downloaded ambient-authority v0.0.2
+  Downloaded version_check v0.9.5
+  Downloaded maybe-owned v0.3.4
+  Downloaded cfg-if v1.0.5
+  Downloaded tiny-keccak v2.0.2
+  Downloaded static_assertions v1.1.0
+  Downloaded smallvec v1.16.2
+  Downloaded io-extras v0.19.0
+  Downloaded unicode-ident v1.0.22
+  Downloaded proc-macro2 v1.0.103
+  Downloaded serde_core v1.0.229
+  Downloaded serde v1.0.229
+  Downloaded memchr v2.8.3
+  Downloaded num-traits v0.2.19
+  Downloaded serde_json v1.0.145
+  Downloaded cap-primitives v4.0.3
+  Downloaded getrandom v0.3.4
+  Downloaded portable-atomic v1.15.0
+  Downloaded getrandom v0.2.17
+  Downloaded bitflags v2.13.2
+  Downloaded thin-vec v0.2.19
+  Downloaded zerocopy v0.8.59
+  Downloaded syn v2.0.106
+  Downloaded syn v3.0.6
+  Downloaded serde_derive v1.0.229
+  Downloaded rmp-serde v1.3.0
+  Downloaded quote v1.0.41
+  Downloaded once_cell v1.21.4
+  Downloaded rustix v1.1.5
+  Downloaded io-lifetimes v3.0.1
+  Downloaded ryu v1.0.20
+  Downloaded rmp v0.8.14
+  Downloaded ipnet v2.12.2
+  Downloaded io-lifetimes v2.0.4
+  Downloaded byteorder v1.5.0
+  Downloaded autocfg v1.5.1
+  Downloaded smartstring v1.0.1
+  Downloaded paste v1.0.15
+  Downloaded errno v0.3.14
+  Downloaded const-random-macro v0.1.16
+  Downloaded const-random v0.1.18
+  Downloaded fs-set-times v0.20.3
+  Downloaded itoa v1.0.15
+  Downloaded crunchy v0.2.4
+  Downloaded libc v0.2.189
+ Downloading crates ...
+  Downloaded web-time v1.1.0
+   Compiling proc-macro2 v1.0.103
+   Compiling unicode-ident v1.0.22
+   Compiling quote v1.0.41
+   Compiling libc v0.2.189
+   Compiling autocfg v1.5.1
+   Compiling crunchy v0.2.4
+   Compiling version_check v0.9.5
+   Compiling serde_core v1.0.229
+   Compiling rustix v1.1.5
+   Compiling io-lifetimes v2.0.4
+   Compiling io-lifetimes v3.0.1
+   Compiling tiny-keccak v2.0.2
+   Compiling cfg-if v1.0.5
+   Compiling errno v0.3.14
+   Compiling num-traits v0.2.19
+   Compiling syn v3.0.6
+   Compiling portable-atomic v1.15.0
+   Compiling serde v1.0.229
+   Compiling io-extras v0.19.0
+   Compiling bitflags v2.13.2
+   Compiling serde_derive v1.0.229
+   Compiling getrandom v0.2.17
+   Compiling zerocopy v0.8.59
+   Compiling cap-primitives v4.0.3
+   Compiling getrandom v0.3.4
+   Compiling once_cell v1.21.4
+   Compiling const-random-macro v0.1.16
+   Compiling fs-set-times v0.20.3
+   Compiling smartstring v1.0.1
+   Compiling ahash v0.8.12
+   Compiling serde_json v1.0.145
+   Compiling paste v1.0.15
+   Compiling maybe-owned v0.3.4
+   Compiling ipnet v2.12.2
+   Compiling ambient-authority v0.0.2
+   Compiling cap-std v4.0.3
+   Compiling const-random v0.1.18
+   Compiling syn v2.0.106
+   Compiling memchr v2.8.3
+   Compiling itoa v1.0.15
+   Compiling ryu v1.0.20
+   Compiling static_assertions v1.1.0
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-gey1lqqt/source)
+   Compiling rhai_codegen v3.2.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-gey1lqqt/source/codegen)
+   Compiling smallvec v1.16.2
+   Compiling thin-vec v0.2.19
+   Compiling byteorder v1.5.0
+   Compiling rmp v0.8.14
+   Compiling rmp-serde v1.3.0
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: unused import: `fs`
+ --> src/packages/sys/process/unix.rs:3:56
+  |
+3 | use crate::packages::sys::{config::*, error::SysError, fs, SysState};
+  |                                                        ^^
+
+error[E0061]: this function takes 7 arguments but 6 arguments were supplied
+   --> src/packages/sys/process/unix.rs:470:24
+    |
+470 |                   return fail(
+    |                          ^^^^
+471 |                       child,
+472 | /                     ProcessCause::Io {
+473 | |                         op: "wait for process",
+474 | |                         target: program.into(),
+475 | |                         kind: e.kind(),
+476 | |                         message: e.to_string(),
+477 | |                     },
+    | |_____________________- an argument of type `&str` is missing
+    |
+note: function defined here
+   --> src/packages/sys/process/unix.rs:675:4
+    |
+675 | fn fail(
+    |    ^^^^
+676 |     child: &mut Child,
+    |     -----------------
+677 |     program: &str,
+    |     -------------
+678 |     cause: ProcessCause,
+    |     -------------------
+679 |     out: Vec<u8>,
+    |     ------------
+680 |     err: Vec<u8>,
+    |     ------------
+681 |     out_eof: bool,
+    |     -------------
+682 |     err_eof: bool,
+    |     -------------
+help: provide the argument
+    |
+470 ~                 return fail(child, /* &str */, ProcessCause::Io {
+471 +                         op: "wait for process",
+472 +                         target: program.into(),
+473 +                         kind: e.kind(),
+474 +                         message: e.to_string(),
+475 +                     }, err, out, err_eof, out_eof)
+    |
+
+For more information about this error, try `rustc --explain E0061`.
+warning: `rhai` (lib) generated 2 warnings
+error: could not compile `rhai` (lib) due to 1 previous error; 2 warnings emitted
+accepted_lock_sha256=8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa
+private_lock_diff_begin
+--- accepted
++++ private-with-direct-libc
+@@ -483,6 +483,7 @@
+  "getrandom 0.3.4",
+  "hashbrown",
+  "libm",
++ "libc",
+  "no-std-compat",
+  "num-traits",
+  "once_cell",
+
+private_lock_diff_end
+source_head=c19e90d4b5be95f8598ec53dbcf497e09583f3eb
+source_diff_sha256=bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec  /Users/hoppworks/projects/rhai-process-unix-run/Cargo.toml; 46563443aca4d56686ef465902cbe4df359fc67290ac3c90dd74d304bb216afc  /Users/hoppworks/projects/rhai-process-unix-run/src/packages/sys/process/unix.rs
+Traceback (most recent call last):
+  File "/Users/hoppworks/projects/rhai-process-unix-run/.scratch/process-unix-run/verify-harness.py", line 34, in <module>
+    subprocess.run(['rustup','run','1.77.2','cargo','test','--locked','--features','testing-environ,sys,metadata','--test','sys_process','run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data','--','--exact','--nocapture'], cwd=source, env=env, check=True)
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/subprocess.py", line 528, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['rustup', 'run', '1.77.2', 'cargo', 'test', '--locked', '--features', 'testing-environ,sys,metadata', '--test', 'sys_process', 'run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data', '--', '--exact', '--nocapture']' returned non-zero exit status 101.

@@ -3,6 +3,9 @@
 use crate::{Dynamic, ImmutableString, Module, INT};
 use std::io;
 
+#[cfg(unix)]
+mod unix;
+
 /// Final status of a process when one is available.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum ProcessExit {
@@ -130,6 +133,12 @@ impl ProcessReport {
     pub fn cleanup_diagnostic(&self, index: usize) -> Option<&ProcessDiagnostic> {
         self.cleanup_diagnostics.get(index)
     }
+}
+
+/// Register process execution functions supported by this target.
+pub(super) fn register(module: &mut Module, state: &crate::Shared<super::SysState>) {
+    #[cfg(unix)]
+    unix::register(module, state);
 }
 
 /// Primary failure cause for an operation that produced a process report.

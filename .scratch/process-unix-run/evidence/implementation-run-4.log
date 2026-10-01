@@ -1,0 +1,23 @@
+accepted_lock_sha256=8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa
+private_lock_diff_begin
+--- accepted
++++ private-with-direct-libc
+@@ -483,6 +483,7 @@
+  "getrandom 0.3.4",
+  "hashbrown",
+  "libm",
++ "libc",
+  "no-std-compat",
+  "num-traits",
+  "once_cell",
+
+private_lock_diff_end
+source_head=c19e90d4b5be95f8598ec53dbcf497e09583f3eb
+source_file_sha256=bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec  /Users/hoppworks/projects/rhai-process-unix-run/Cargo.toml; eae3b9c7828a9282ede7827166fb7a7ffaa2bedfb315a1e9702f211690291d3a  /Users/hoppworks/projects/rhai-process-unix-run/src/packages/sys/fs.rs; a0a4a34f32b08b57edc8419a49466d2e989ba43c7dc49f28fad7d80958b85419  /Users/hoppworks/projects/rhai-process-unix-run/src/packages/sys/mod.rs; b19d0027fce410396b31a39b391629e7970be2b8fb90080bc80ce9a1b94a334c  /Users/hoppworks/projects/rhai-process-unix-run/src/packages/sys/process.rs; c5a2bbfb36e67412e77550976a8d5c0565a2e07fe7cae42fcc1a91f7a827edd0  /Users/hoppworks/projects/rhai-process-unix-run/src/packages/sys/process/unix.rs; 148dcfcf35caaf42b4c65ebe8f3f069846e7aa24aa6530e3ad4582be4e893036  /Users/hoppworks/projects/rhai-process-unix-run/tests/sys_process.rs
+runtime_path=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-5vbjvz_t
+Traceback (most recent call last):
+  File "/Users/hoppworks/projects/rhai-process-unix-run/.scratch/process-unix-run/verify-harness.py", line 34, in <module>
+    sample_storage()
+NameError: name 'sample_storage' is not defined
+.scratch/process-unix-run/run-verification.sh:4: read-only variable: status
+cleanup_readback=absent runtime=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-5vbjvz_t checked 2026-10-01T08:29Z

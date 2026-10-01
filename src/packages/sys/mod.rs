@@ -85,6 +85,7 @@ impl SysPackage {
         let mut module = Module::new();
         SysError::register(&mut module);
         process::ProcessReport::register(&mut module);
+        process::register(&mut module, &state);
         env::register(&mut module, &state);
         fs::register(&mut module, &state);
         module.build_index();
