@@ -6,7 +6,7 @@ mod sys_support;
 use rhai::packages::sys::{FsAccess, ProcessCause, ProcessScope, ProgramPolicy, SysConfig, SysError};
 #[cfg(not(feature = "no_index"))]
 use rhai::Blob;
-use rhai::Map;
+use rhai::{Dynamic, Engine, Map, Scope};
 #[cfg(not(feature = "no_index"))]
 use std::io::{Read, Write};
 #[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
@@ -25,6 +25,7 @@ const FIXTURE_RECORD_ENV: &str = "RHAI_SYS_PROCESS_FIXTURE_RECORD";
 const LIBTEST_QUIET_START: &[u8] = b"\nrunning 1 test\n";
 const ACTIVE_STDERR_MARKER: &str = "stderr-active-marker\n";
 const ACTIVE_STDERR_OUTPUT: &str = "stderr-active-marker\n";
+const MANAGED_SPAWN_HOLD_ENV: &str = "RHAI_SYS_MANAGED_SPAWN_HOLD";
 
 /// The process API re-executes this test binary so stdout/stderr and exit status come from
 /// an independently supervised OS process rather than a mocked command implementation.
@@ -288,6 +289,62 @@ fn managed_scope_leaf_fixture() {
     }
 }
 
+/// Re-exec fixture for public `spawn` cancellation/drop cases. Unlike the normal-exit fixture,
+/// the direct leader stays alive until the fixture-owned release marker is published.
+#[test]
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_scope_spawn_leader_fixture() {
+    if std::env::var_os(MANAGED_SPAWN_HOLD_ENV).is_none() {
+        return;
+    }
+    let root = std::path::PathBuf::from(std::env::var_os(MANAGED_ROOT_ENV).unwrap());
+    let worker_record = std::path::PathBuf::from(std::env::var_os(MANAGED_WORKER_ENV).unwrap());
+    let leaf_record = std::path::PathBuf::from(std::env::var_os(MANAGED_LEAF_ENV).unwrap());
+    let release = std::env::var_os(MANAGED_RELEASE_ENV).unwrap();
+    let exit_record = root.join("leader-exit-record");
+    let worker = Command::new(std::env::current_exe().unwrap())
+        .args(["--exact", "managed_scope_worker_fixture", "--nocapture", "--quiet"])
+        .env_clear()
+        .env(MANAGED_FIXTURE_ENV, "worker")
+        .env(MANAGED_WORKER_ENV, &worker_record)
+        .env(MANAGED_LEAF_ENV, &leaf_record)
+        .env(MANAGED_RELEASE_ENV, &release)
+        .stdin(Stdio::null())
+        .stdout(Stdio::inherit())
+        .stderr(Stdio::inherit())
+        .spawn()
+        .expect("start managed spawn worker fixture");
+    let worker_pid = worker.id();
+    let deadline = Instant::now() + Duration::from_secs(5);
+    while !worker_record.exists() || !leaf_record.exists() {
+        assert!(Instant::now() < deadline, "managed spawn worker/leaf readiness timed out");
+        std::thread::sleep(Duration::from_millis(5));
+    }
+    let worker_fields = managed_record_fields(&std::fs::read_to_string(&worker_record).unwrap());
+    let leaf_fields = managed_record_fields(&std::fs::read_to_string(&leaf_record).unwrap());
+    let leader_pid = std::process::id() as i32;
+    let leader_pgid = unsafe { libc::getpgrp() };
+    managed_atomic_record(
+        &root.join("leader-record"),
+        &format!("pid={leader_pid} pgid={leader_pgid} worker={worker_pid} worker_pgid={} leaf={} leaf_pgid={}\n", worker_fields["pgid"], leaf_fields["pid"], leaf_fields["pgid"]),
+    );
+    let deadline = Instant::now() + Duration::from_secs(15);
+    while !std::path::Path::new(&release).exists() && Instant::now() < deadline {
+        std::thread::sleep(Duration::from_millis(5));
+    }
+    // On fixture cleanup the worker and leaf observe the same release marker. Reap the exact
+    // worker handle if it has not exited yet; this is fixture custody, not product cleanup.
+    let mut worker = worker;
+    let worker_status = match worker.try_wait().ok().flatten() {
+        Some(status) => Some(status),
+        None => {
+            let _ = worker.kill();
+            worker.wait().ok()
+        }
+    };
+    managed_atomic_record(&exit_record, &format!("leader_pid={leader_pid} worker_pid={worker_pid} worker_status={worker_status:?}\n"));
+}
+
 #[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
 struct ManagedFixture {
     root: TempDir,
@@ -312,14 +369,20 @@ impl Drop for ManagedFixture {
         let deadline = Instant::now() + Duration::from_secs(3);
         let mut worker_pid = None;
         let mut leaf_pid = None;
+        let mut leader_pid = None;
         while Instant::now() < deadline {
             let worker = std::fs::read_to_string(self.path("worker-record")).ok().map(|record| managed_record_fields(&record));
             let leaf = std::fs::read_to_string(self.path("leaf-record")).ok().map(|record| managed_record_fields(&record));
             worker_pid = worker.as_ref().and_then(|record| record.get("pid")).copied();
             leaf_pid = leaf.as_ref().and_then(|record| record.get("pid")).copied();
+            leader_pid = std::fs::read_to_string(self.path("leader-record"))
+                .ok()
+                .map(|record| managed_record_fields(&record))
+                .and_then(|record| record.get("pid").copied());
             let worker_gone = worker.as_ref().and_then(|record| record.get("pid")).map_or(false, |pid| pid_is_absent(*pid));
             let leaf_gone = leaf.as_ref().and_then(|record| record.get("pid")).map_or(true, |pid| pid_is_absent(*pid));
-            if worker_gone && leaf_gone {
+            let leader_gone = leader_pid.map_or(true, pid_is_absent);
+            if worker_gone && leaf_gone && leader_gone {
                 break;
             }
             std::thread::sleep(Duration::from_millis(10));
@@ -329,6 +392,7 @@ impl Drop for ManagedFixture {
             worker_pid.map_or(false, pid_is_absent),
             leaf_pid.map_or(true, pid_is_absent)
         );
+        eprintln!("managed_spawn_fixture_leader_cleanup leader_pid={leader_pid:?} leader_esrch={}", leader_pid.map_or(true, pid_is_absent),);
     }
 }
 
@@ -356,6 +420,11 @@ fn pid_is_absent(pid: i32) -> bool {
     } else {
         false
     }
+}
+
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+fn pid_is_alive(pid: i32) -> bool {
+    (unsafe { libc::kill(pid, 0) }) == 0
 }
 
 #[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
@@ -524,6 +593,183 @@ fn managed_timeout_kills_leader_after_it_changes_process_group() {
     drop(fixture);
     drop(sentinel);
     assert!(pid_is_absent(sentinel_pid), "fixture must reap the exact sentinel");
+}
+
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_spawn_script(fixture: &ManagedFixture) -> (Engine, String) {
+    let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let root = fixture.root.as_script_path();
+    let worker = fixture.path("worker-record").to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let leaf = fixture.path("leaf-record").to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let release = fixture.path("release-worker").to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let config = SysConfig::default()
+        .programs(ProgramPolicy::AllowList(vec![executable.clone()]))
+        .process_scope(ProcessScope::Managed)
+        .max_output(4096)
+        .kill_on_drop(true);
+    let engine = engine(config);
+    let script = format!(
+        r#"spawn("{executable}", ["--exact", "managed_scope_spawn_leader_fixture", "--nocapture", "--quiet"], #{{
+            env_clear: true,
+            env: #{{ {MANAGED_SPAWN_HOLD_ENV}: "1", {MANAGED_ROOT_ENV}: "{root}", {MANAGED_WORKER_ENV}: "{worker}", {MANAGED_LEAF_ENV}: "{leaf}", {MANAGED_RELEASE_ENV}: "{release}" }}
+        }})"#
+    );
+    (engine, script)
+}
+
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_fixture_member_pids(fixture: &ManagedFixture) -> (i32, i32, i32, i32) {
+    let deadline = Instant::now() + Duration::from_secs(5);
+    loop {
+        let leader = std::fs::read_to_string(fixture.path("leader-record")).ok();
+        let worker = std::fs::read_to_string(fixture.path("worker-record")).ok();
+        let leaf = std::fs::read_to_string(fixture.path("leaf-record")).ok();
+        if let (Some(leader), Some(worker), Some(leaf)) = (leader, worker, leaf) {
+            let leader = managed_record_fields(&leader);
+            let worker = managed_record_fields(&worker);
+            let leaf = managed_record_fields(&leaf);
+            let pids = (leader["pid"], worker["pid"], leaf["pid"], leader["pgid"]);
+            assert_eq!(pids.0, pids.3, "managed spawned leader owns its process group");
+            assert_eq!(worker["pgid"], pids.3, "worker inherited the managed group");
+            assert_eq!(leaf["pgid"], pids.3, "leaf inherited the managed group");
+            assert_eq!(leader["worker"], pids.1, "leader record identifies the worker");
+            assert_eq!(leader["leaf"], pids.2, "leader record identifies the leaf");
+            return pids;
+        }
+        assert!(Instant::now() < deadline, "managed spawn fixture readiness timed out");
+        std::thread::sleep(Duration::from_millis(5));
+    }
+}
+
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_spawn_sentinel() -> Sentinel {
+    let mut command = Command::new("/bin/sleep");
+    command.arg("30").stdin(Stdio::null()).stdout(Stdio::null()).stderr(Stdio::null());
+    // SAFETY: the fixture sentinel creates a separate process group in the inherited session.
+    unsafe {
+        command.pre_exec(|| {
+            if libc::setpgid(0, 0) < 0 {
+                return Err(std::io::Error::last_os_error());
+            }
+            Ok(())
+        });
+    }
+    Sentinel(command.spawn().expect("start unrelated managed-scope sentinel"))
+}
+
+/// Public spawn cancellation terminates the direct leader and all recorded group members while
+/// preserving an unrelated process group.
+#[test]
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_spawn_kill_stops_leader_worker_leaf_and_preserves_sentinel() {
+    let fixture = ManagedFixture::new();
+    let mut sentinel = managed_spawn_sentinel();
+    let sentinel_pid = sentinel.0.id() as i32;
+    let sentinel_pgid = unsafe { libc::getpgid(sentinel_pid) };
+    assert_eq!(sentinel_pgid, sentinel_pid);
+    let (engine, script) = managed_spawn_script(&fixture);
+    let child = engine.eval::<Dynamic>(&script).expect("public managed spawn");
+    let pids = managed_fixture_member_pids(&fixture);
+    assert!(pids.0 != sentinel_pid && pids.3 != sentinel_pgid);
+    eprintln!(
+        "managed_spawn_kill_started root={} test_pid={} sentinel_pid={} sentinel_pgid={} leader={} worker={} leaf={} group={}",
+        fixture.root.as_script_path(),
+        std::process::id(),
+        sentinel_pid,
+        sentinel_pgid,
+        pids.0,
+        pids.1,
+        pids.2,
+        pids.3
+    );
+    let mut scope = Scope::new();
+    scope.push_dynamic("child", child);
+    let timed_wait = engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill(); child.wait(0.5)");
+    let leader_esrch = pid_is_absent(pids.0);
+    let worker_esrch = pid_is_absent(pids.1);
+    let leaf_esrch = pid_is_absent(pids.2);
+    let members_gone = leader_esrch && worker_esrch && leaf_esrch;
+    let sentinel_live = sentinel.0.try_wait().unwrap().is_none();
+    eprintln!(
+        "managed_spawn_kill leader={} leader_esrch={leader_esrch} worker={} worker_esrch={worker_esrch} leaf={} leaf_esrch={leaf_esrch} all_esrch={members_gone} sentinel={sentinel_pid} live={sentinel_live} wait_returned={}",
+        pids.0,
+        pids.1,
+        pids.2,
+        timed_wait.is_ok()
+    );
+    assert!(members_gone, "managed spawned members must be gone after public kill");
+    assert!(sentinel_live, "managed spawn kill terminated the unrelated sentinel");
+    let timed_wait = timed_wait.expect("public kill followed by bounded wait");
+    assert!(!timed_wait.is_unit(), "public child.wait must publish the killed child's report");
+    let result = timed_wait.cast::<Map>();
+    assert!(!result["success"].as_bool().unwrap());
+    drop(sentinel);
+    assert!(pid_is_absent(sentinel_pid), "fixture must reap its exact sentinel");
+}
+
+/// Dropping a nonfinal shared Child clone preserves the running group; dropping the final
+/// script-client handle applies `kill_on_drop` to its leader and descendants.
+#[test]
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not() {
+    let fixture = ManagedFixture::new();
+    let mut sentinel = managed_spawn_sentinel();
+    let sentinel_pid = sentinel.0.id() as i32;
+    let (engine, script) = managed_spawn_script(&fixture);
+    let original = engine.eval::<Dynamic>(&script).expect("public managed spawn");
+    let pids = managed_fixture_member_pids(&fixture);
+    let sentinel_pgid = unsafe { libc::getpgid(sentinel_pid) };
+    assert_eq!(sentinel_pgid, sentinel_pid);
+    assert!(pids.0 != sentinel_pid && pids.3 != sentinel_pgid);
+    eprintln!(
+        "managed_spawn_drop_started root={} test_pid={} sentinel_pid={} sentinel_pgid={} leader={} worker={} leaf={} group={}",
+        fixture.root.as_script_path(),
+        std::process::id(),
+        sentinel_pid,
+        sentinel_pgid,
+        pids.0,
+        pids.1,
+        pids.2,
+        pids.3
+    );
+    let mut scope = Scope::new();
+    scope.push_dynamic("nonfinal", original.clone());
+    scope.push_dynamic("final", original.clone());
+    drop(original);
+
+    drop(scope.remove::<Dynamic>("nonfinal"));
+    let still_running = engine
+        .eval_with_scope::<Dynamic>(&mut scope, "final.wait(0.1)")
+        .expect("remaining shared handle performs a bounded wait");
+    assert!(still_running.is_unit(), "nonfinal clone drop cancelled the live managed child");
+    let all_live = [pids.0, pids.1, pids.2].into_iter().all(pid_is_alive);
+    let leader_live = pid_is_alive(pids.0);
+    let worker_live = pid_is_alive(pids.1);
+    let leaf_live = pid_is_alive(pids.2);
+    eprintln!(
+        "managed_spawn_nonfinal_drop leader={} leader_live={leader_live} worker={} worker_live={worker_live} leaf={} leaf_live={leaf_live} all_live={all_live}",
+        pids.0, pids.1, pids.2
+    );
+    assert!(all_live, "dropping a nonfinal Child clone terminated the managed group");
+
+    drop(scope.remove::<Dynamic>("final"));
+    let deadline = Instant::now() + Duration::from_secs(5);
+    while [pids.0, pids.1, pids.2].into_iter().any(|pid| !pid_is_absent(pid)) && Instant::now() < deadline {
+        std::thread::sleep(Duration::from_millis(5));
+    }
+    let leader_esrch = pid_is_absent(pids.0);
+    let worker_esrch = pid_is_absent(pids.1);
+    let leaf_esrch = pid_is_absent(pids.2);
+    let all_gone = leader_esrch && worker_esrch && leaf_esrch;
+    let sentinel_live = sentinel.0.try_wait().unwrap().is_none();
+    eprintln!(
+        "managed_spawn_final_drop leader={} leader_esrch={leader_esrch} worker={} worker_esrch={worker_esrch} leaf={} leaf_esrch={leaf_esrch} all_esrch={all_gone} sentinel={sentinel_pid} live={sentinel_live}",
+        pids.0, pids.1, pids.2,
+    );
+    assert!(all_gone, "dropping final Child clone did not terminate the managed group");
+    assert!(sentinel_live, "final Child drop terminated the unrelated sentinel");
+    drop(sentinel);
+    assert!(pid_is_absent(sentinel_pid), "fixture must reap its exact sentinel");
 }
 
 #[test]
