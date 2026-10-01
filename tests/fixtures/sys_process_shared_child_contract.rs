@@ -193,7 +193,20 @@ fn blocked_input_wait_snapshot(root: &Path) {
     }
     wait_for_state(root, "child.status", "exited", Duration::from_secs(2));
     assert_pid_reaped(pid);
-    eprintln!("shared-child final pid={pid} child_record={:?} reap=ESRCH stable-wait=1 stable-try-wait=1", std::fs::read_to_string(root.join("child.status")).unwrap());
+    engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("kill after completion is idempotent");
+    engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("repeated kill after completion is idempotent");
+    let after_kill_wait = engine.eval_with_scope::<Map>(&mut scope, "child.wait()").unwrap();
+    let after_kill_try_wait = engine.eval_with_scope::<Map>(&mut scope, "child.try_wait()").unwrap();
+    for snapshot in [&after_kill_wait, &after_kill_try_wait] {
+        assert_eq!(snapshot["code"].as_int().unwrap(), 17, "post-completion kill preserves cached exit status");
+        assert!(!snapshot["success"].as_bool().unwrap());
+        assert_eq!(snapshot["stdout"].as_immutable_string_ref().unwrap().as_str(), format!("{LIBTEST_QUIET_START}shared-child-output\n"));
+        assert_eq!(snapshot["stderr"].as_immutable_string_ref().unwrap().as_str(), "shared-child-error\n");
+        assert!(snapshot["stdout_complete"].as_bool().unwrap());
+        assert!(snapshot["stderr_complete"].as_bool().unwrap());
+    }
+    assert_pid_reaped(pid);
+    eprintln!("shared-child final pid={pid} child_record={:?} reap=ESRCH stable-wait=1 stable-try-wait=1 repeated_post_completion_kill=2 cached_snapshot=unchanged", std::fs::read_to_string(root.join("child.status")).unwrap());
 }
 
 fn drop_final_client(root: &Path, kill_on_drop: bool) {
@@ -302,8 +315,8 @@ fn try_issue_probe(
 }
 
 /// Outer tests run every potentially blocking Engine call in this exact owned process group.
-/// On timeout or assertion unwind the guard kills only that group, reaps its direct controller,
-/// then verifies any recorded OS fixture PID is absent before its temp root is dropped.
+/// The scoped runner owns the group watchdog; this guard terminates and reaps only the exact
+/// direct controller, then verifies any recorded OS fixture PID before its temp root is dropped.
 fn run_bounded_controller(scenario: &str) {
     let root = FixtureDir::new();
     let root_path = root.path().to_path_buf();
