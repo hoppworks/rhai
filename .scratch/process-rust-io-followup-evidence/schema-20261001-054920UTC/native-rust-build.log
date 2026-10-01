@@ -1,0 +1,21 @@
+    Updating crates.io index
+     Locking 12 packages to latest compatible versions
+      Adding libc v0.2.171 (available: v0.2.189)
+      Adding serde_json v1.0.140 (available: v1.0.151)
+ Downloading crates ...
+  Downloaded ryu v1.0.23
+  Downloaded itoa v1.0.18
+  Downloaded serde v1.0.229
+  Downloaded serde_core v1.0.229
+  Downloaded memchr v2.8.3
+  Downloaded serde_json v1.0.140
+  Downloaded libc v0.2.171
+   Compiling serde_core v1.0.229
+   Compiling serde v1.0.229
+   Compiling libc v0.2.171
+   Compiling serde_json v1.0.140
+   Compiling memchr v2.8.3
+   Compiling ryu v1.0.23
+   Compiling itoa v1.0.18
+   Compiling process-rust-io-acceptance v0.1.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-zk12jopr/private-source/process-rust-io)
+    Finished `dev` profile [unoptimized] target(s) in 2.53s
