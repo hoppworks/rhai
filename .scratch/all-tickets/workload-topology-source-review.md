@@ -66,3 +66,19 @@ Attempt2 staged readback independently accepted: all15 hashes match frozen
 local inputs, declared manifest and fresh remote sha256sum. Details in
 workload-topology-attempt2-stage-readback.json. Runtime released07:20UTC
 for exactly one invocation with unchanged limits; actual acceptance pending.
+
+Attempt2 runtime disposition: both builds0 and workload lineage/readiness
+observed, but zero accepted cases; custodian pipes frame raised UnboundLocalError
+for branch-local anchor. Canonical raw attempt2 and independent13-identity/group
+cleanup retained; no Rust I/O/join or natural leader0 requirement accepted.
+
+Attempt3 immutable gate: source595c941de042da4f08ceb750119c6c274eb37d13,
+route92e16447af7e6e2b61c6232e5188aba2501da91d. Full correction range
+60dc01eb..92e16447 reviewed: five files total, four OCR-selected plus excluded
+state file reviewed, zero skipped,100% coverage. Canonical owned['anchor'] is
+assigned before the pipes frame on both topology and existing fixture branches;
+remaining bare local anchor uses are confined to the existing branch. Other
+changes only unique attempt3 export/stage and archive parent; original assertion,
+mode, safety caps and07:50 cutoff unchanged. Three new commits exact lowercase
+author/committer; no child ancestor-history import approved. Release staging
+only before independent fifteen-input runtime gate.

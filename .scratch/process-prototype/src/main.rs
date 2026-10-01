@@ -1,6 +1,6 @@
 use std::env;
 use std::io::{Read, Write};
-use std::os::fd::AsRawFd;
+use std::os::fd::{AsRawFd, FromRawFd};
 use std::os::unix::process::CommandExt;
 use std::process::{Child, Command, Stdio};
 use std::sync::atomic::{AtomicBool, Ordering};
@@ -12,7 +12,12 @@ extern "C" {
     fn fcntl(fd: i32, cmd: i32, ...) -> i32;
     fn kill(pid: i32, sig: i32) -> i32;
     fn getpid() -> i32;
+    fn getppid() -> i32;
     fn getpgrp() -> i32;
+    fn getsid(pid: i32) -> i32;
+    fn setpgid(pid: i32, pgid: i32) -> i32;
+    fn close(fd: i32) -> i32;
+    fn read(fd: i32, buffer: *mut u8, count: usize) -> isize;
 }
 const F_GETFL: i32 = 3;
 const F_SETFL: i32 = 4;
@@ -119,6 +124,66 @@ fn fixture(mode: &str) {
             // is withheld; the custodian then closes the still-live scope.
             loop { thread::sleep(Duration::from_secs(60)); }
         }
+        "topology" => {
+            let leader_pid = unsafe { getpid() };
+            eprintln!("WORKLOAD_READY pid={} pgid={}", leader_pid, unsafe { getpgrp() });
+            std::io::stderr().flush().unwrap();
+            let exe = env::current_exe().unwrap();
+            let managed = Command::new(exe).arg("--fixture").arg("topology-managed")
+                .env("PROCESS_PROTOTYPE_TOPOLOGY_LEADER", leader_pid.to_string())
+                .stdin(Stdio::inherit()).spawn().expect("workload managed child spawn failed");
+            assert_ne!(managed.id(), 0, "workload managed child PID is zero");
+            unsafe { close(3); close(4); }
+            let mut remaining = 1024 * 1024;
+            let mut input = [0u8; 8192];
+            while remaining > 0 {
+                let limit = remaining.min(input.len());
+                let n = std::io::stdin().read(&mut input[..limit]).unwrap();
+                if n == 0 { break; }
+                std::io::stdout().write_all(&input[..n]).unwrap();
+                std::io::stdout().flush().unwrap();
+                let transformed: Vec<u8> = input[..n].iter().map(|byte| byte ^ 0xA5).collect();
+                std::io::stderr().write_all(&transformed).unwrap();
+                std::io::stderr().flush().unwrap();
+                remaining -= n;
+            }
+        }
+        "topology-managed" => {
+            let leader_pid: i32 = env::var("PROCESS_PROTOTYPE_TOPOLOGY_LEADER").unwrap().parse().unwrap();
+            assert_eq!(unsafe { getppid() }, leader_pid, "topology managed child parent mismatch");
+            let mut holder = Command::new(env::current_exe().unwrap()).arg("--fixture").arg("topology-holder")
+                .stdin(Stdio::piped()).spawn().expect("workload escaped grandchild spawn failed");
+            let holder_pid = holder.id();
+            let mut holder_gate = holder.stdin.take().expect("holder gate pipe missing");
+            let mut readiness = unsafe { std::fs::File::from_raw_fd(3) };
+            writeln!(readiness, "TOPOLOGY_TREE leader_pid={} managed_pid={} grandchild_pid={}",
+                     leader_pid, unsafe { getpid() }, holder_pid).unwrap();
+            readiness.flush().unwrap();
+            drop(readiness);
+            let mut acknowledged = [0u8; 1];
+            assert_eq!(unsafe { read(4, acknowledged.as_mut_ptr(), 1) }, 1,
+                       "custodian did not acknowledge exact topology identities");
+            assert_eq!(acknowledged[0], b'1');
+            unsafe { close(4); }
+            holder_gate.write_all(b"1").unwrap();
+            holder_gate.flush().unwrap();
+            drop(holder_gate);
+            loop { thread::sleep(Duration::from_secs(60)); }
+        }
+        "topology-holder" => {
+            let mut gate = [0u8; 1];
+            std::io::stdin().read_exact(&mut gate).unwrap();
+            assert_eq!(gate[0], b'1');
+            let pid = unsafe { getpid() };
+            assert_eq!(unsafe { setpgid(0, 0) }, 0, "escaped grandchild setpgid failed");
+            let mut readiness = unsafe { std::fs::File::from_raw_fd(3) };
+            writeln!(readiness, "TOPOLOGY_ESCAPED pid={} pgid={} sid={}", pid,
+                     unsafe { getpgrp() }, unsafe { getsid(0) }).unwrap();
+            readiness.flush().unwrap();
+            drop(readiness);
+            unsafe { close(4); }
+            loop { thread::sleep(Duration::from_secs(60)); }
+        }
         "descendant" | "hold" => {
             let exe = env::current_exe().unwrap();
             let child = Command::new(exe).arg("--fixture").arg("sleeper").process_group(0).spawn().unwrap();
@@ -139,7 +204,17 @@ fn fixture(mode: &str) {
 }
 fn main() {
     let args: Vec<_> = env::args().collect();
-    if args.get(1).map(String::as_str) == Some("--fixture") { fixture(&args[2]); return; }
+    if args.get(1).map(String::as_str) == Some("--fixture") {
+        let mode = &args[2];
+        if mode.starts_with("topology")
+            && (env::var_os("PROCESS_PROTOTYPE_CUSTODIAN_FD").is_none()
+                || env::var("PROCESS_PROTOTYPE_FIXTURE_AUTHORIZATION").ok().as_deref()
+                    != Some("workload-topology-v1")) {
+            panic!("topology fixture lacks explicit custodian authorization");
+        }
+        fixture(mode);
+        return;
+    }
     let wrong = args.get(1).map(String::as_str) == Some("--wrong-assertion");
 
     // First user code immediately exercises the already-established owned process group.

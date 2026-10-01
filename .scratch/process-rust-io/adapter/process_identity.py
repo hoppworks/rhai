@@ -46,6 +46,11 @@ def _darwin_process_start_identity(pid):
 
 def parse_linux_stat(raw, expected_pid):
     """Return Linux /proc stat start ticks, parsing comm through its final ')'."""
+    return parse_linux_process_stat(raw, expected_pid)['start_ticks']
+
+
+def parse_linux_process_stat(raw, expected_pid):
+    """Parse the identity and lineage fields from one Linux /proc stat record."""
     opening = raw.find('(')
     closing = raw.rfind(')')
     if opening <= 0 or closing <= opening or raw[closing + 1:closing + 2] != ' ':
@@ -60,12 +65,14 @@ def parse_linux_stat(raw, expected_pid):
     if len(fields) < 20 or len(fields[0]) != 1:
         raise ValueError('truncated Linux /proc stat fields')
     try:
+        ppid, pgid, sid = (int(fields[index]) for index in (1, 2, 3))
         start_ticks = int(fields[19])
     except ValueError as exc:
         raise ValueError('malformed Linux /proc stat start time') from exc
-    if start_ticks < 0:
-        raise ValueError('negative Linux /proc stat start time')
-    return start_ticks
+    if min(ppid, pgid, sid, start_ticks) < 0:
+        raise ValueError('negative Linux /proc stat identity field')
+    return {'pid': pid, 'ppid': ppid, 'pgid': pgid, 'sid': sid,
+            'state': fields[0], 'start_ticks': start_ticks}
 
 
 def parse_linux_boot_time(raw):
@@ -95,6 +102,21 @@ def _linux_process_start_identity(pid, proc_root=Path('/proc')):
     start_ticks = parse_linux_stat(raw, pid)
     boot_time = parse_linux_boot_time((proc_root / 'stat').read_text())
     return [boot_time, start_ticks]
+
+
+def _linux_process_snapshot(pid, proc_root=Path('/proc')):
+    """Read exact PID lineage and start identity without searching /proc."""
+    pid = int(pid)
+    if pid <= 0:
+        raise ValueError('PID must be positive')
+    try:
+        raw = (proc_root / str(pid) / 'stat').read_text()
+    except FileNotFoundError as exc:
+        raise ProcessLookupError(pid, 'Linux process stat entry is absent') from exc
+    parsed = parse_linux_process_stat(raw, pid)
+    boot_time = parse_linux_boot_time((proc_root / 'stat').read_text())
+    parsed['start_identity'] = [boot_time, parsed.pop('start_ticks')]
+    return parsed
 
 
 def process_start_identity(pid):

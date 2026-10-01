@@ -1,0 +1,83 @@
+{
+  "source": "595c941de042da4f08ceb750119c6c274eb37d13",
+  "route": "92e16447af7e6e2b61c6232e5188aba2501da91d",
+  "stage": "/root/rhai-linux-native-io-task/native-workload-topology-attempt3-20261001-0729UTC",
+  "input_count": 15,
+  "checks": [
+    {
+      "path": "source/.scratch/process-rust-io/Cargo.toml",
+      "sha256": "3791ba60a8a4373e3e23b99d2171254cdeb4b9a0c46daf2f9c10161067194fea",
+      "fresh_remote_match": true
+    },
+    {
+      "path": "source/.scratch/process-rust-io/src/main.rs",
+      "sha256": "b8fa6a059a508358aa73218ddb291b4c34dd5d021859af4d69c19d4d0b4aa3d8",
+      "fresh_remote_match": true
+    },
+    {
+      "path": "source/.scratch/process-rust-io/adapter/controller.py",
+      "sha256": "f5987091462aa5cc7e861e6f98d509ffe70dc4b293c18d0c5d981c2fcbb19434",
+      "fresh_remote_match": true
+    },
+    {
+      "path": "source/.scratch/process-rust-io/adapter/custodian.py",
+      "sha256": "d9162848edee5cf185fb85eb51b73c83fa6e2465a03c36a28df839aa30fea5ba",
+      "fresh_remote_match": true
+    },
+    {
+      "path": "source/.scratch/process-rust-io/adapter/process_identity.py",
+      "sha256": "96591aa4596c0e294a5a036930eaa07a9fc70395507c681b7b8f31aadc0a99a5",
+      "fresh_remote_match": true
+    },
+    {
+      "path": "source/.scratch/process-rust-io/adapter/run_native_acceptance.py",
+      "sha256": "a9e390c6ae6dc8e66587cda2518b44797ff752bd0c1d8e688dadcf7c0db72a4e",
+      "fresh_remote_match": true
+    },
+    {
+      "path": "source/.scratch/process-rust-io/adapter/test_process_identity.py",
+      "sha256": "c912eacdb0259374b47b25917ec36964b0f3769fee64ac1f73e58dc4b8541c8e",
+      "fresh_remote_match": true
+    },
+    {
+      "path": "source/.scratch/process-rust-io/adapter/test_workload_topology_receipt.py",
+      "sha256": "e5f9ef03efad1c274a5d126de51cf766f3fd7c84127badfbb01176038669538c",
+      "fresh_remote_match": true
+    },
+    {
+      "path": "source/.scratch/process-prototype/Cargo.toml",
+      "sha256": "b26b20e622954380ffb94aba823f0863006b34db6be3c7190ddc91939d58ff43",
+      "fresh_remote_match": true
+    },
+    {
+      "path": "source/.scratch/process-prototype/src/main.rs",
+      "sha256": "02ab08fafe888aeb916c65b68bbf2e53256a2170aa93e3681ecbb6e724cb3e89",
+      "fresh_remote_match": true
+    },
+    {
+      "path": "launch-linux-workload-topology.sh",
+      "sha256": "2470105488e8046ddf048e2ac2cf5c4f48304d4c29d018b49d4f6b40fece4412",
+      "fresh_remote_match": true
+    },
+    {
+      "path": "stage-linux-workload-topology.sh",
+      "sha256": "2e381a2df538175eda44aacbe7283054a45e83d0394bd8d3ef48c4fca95287a5",
+      "fresh_remote_match": true
+    },
+    {
+      "path": "runner/tools/run_scoped.py",
+      "sha256": "9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d",
+      "fresh_remote_match": true
+    },
+    {
+      "path": "runner/tools/agentskills/__init__.py",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "fresh_remote_match": true
+    },
+    {
+      "path": "runner/tools/agentskills/pyguard.py",
+      "sha256": "a3739f4947744303e1adf3fb0875ac743944a272e5b95c94b1baba53029d313f",
+      "fresh_remote_match": true
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "checked_utc": "2026-10-01T07:36:42.368760+00:00",
+  "identities": [
+    {
+      "current": null,
+      "identity_status": "exact_identity_absent",
+      "label": "launcher",
+      "pgid": 279204,
+      "pid": 279204,
+      "start_ticks": 48480083
+    },
+    {
+      "current": null,
+      "identity_status": "exact_identity_absent",
+      "label": "run-scoped",
+      "pgid": 279204,
+      "pid": 279215,
+      "start_ticks": 48480085
+    },
+    {
+      "current": null,
+      "identity_status": "exact_identity_absent",
+      "label": "driver-supervisor",
+      "pgid": 279217,
+      "pid": 279217,
+      "start_ticks": 48480087
+    },
+    {
+      "current": null,
+      "identity_status": "exact_identity_absent",
+      "label": "driver",
+      "pgid": 279217,
+      "pid": 279218,
+      "start_ticks": 48480089
+    },
+    {
+      "current": null,
+      "identity_status": "exact_identity_absent",
+      "label": "native-rust-build",
+      "pgid": null,
+      "pid": 279376,
+      "start_ticks": 48480832
+    },
+    {
+      "current": null,
+      "identity_status": "exact_identity_absent",
+      "label": "fixture-build",
+      "pgid": null,
+      "pid": 279596,
+      "start_ticks": 48481028
+    },
+    {
+      "current": null,
+      "identity_status": "exact_identity_absent",
+      "label": "custodian",
+      "pgid": null,
+      "pid": 279616,
+      "start_ticks": 48481042
+    },
+    {
+      "current": null,
+      "identity_status": "exact_identity_absent",
+      "label": "anchor",
+      "pgid": null,
+      "pid": 279621,
+      "start_ticks": 48481049
+    },
+    {
+      "current": null,
+      "identity_status": "exact_identity_absent",
+      "label": "holder",
+      "pgid": null,
+      "pid": 279622,
+      "start_ticks": 48481049
+    },
+    {
+      "current": null,
+      "identity_status": "exact_identity_absent",
+      "label": "leader",
+      "pgid": null,
+      "pid": 279620,
+      "start_ticks": 48481049
+    },
+    {
+      "current": null,
+      "identity_status": "exact_identity_absent",
+      "label": "runner",
+      "pgid": null,
+      "pid": 279619,
+      "start_ticks": 48481049
+    },
+    {
+      "current": null,
+      "identity_status": "exact_identity_absent",
+      "label": "sentinel",
+      "pgid": null,
+      "pid": 279623,
+      "start_ticks": 48481049
+    }
+  ],
+  "launcher_outer_status": 1,
+  "process_groups": [
+    {
+      "members": [],
+      "pgid": 279204
+    },
+    {
+      "members": [],
+      "pgid": 279217
+    }
+  ],
+  "run_scoped_status": 1,
+  "runtime_absent": true,
+  "runtime_path": "/tmp/agent-build-vfu41lw4",
+  "same_handle_wait_status": 1
+}

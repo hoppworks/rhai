@@ -9,6 +9,7 @@ import process_identity
 from process_identity import (
     _linux_process_start_identity,
     parse_linux_boot_time,
+    parse_linux_process_stat,
     parse_linux_stat,
 )
 
@@ -27,6 +28,13 @@ class LinuxProcessIdentityTests(unittest.TestCase):
             parse_linux_stat('4242 (worker) S ' + ' '.join(['1'] * 19), 7)
         with self.assertRaises(ValueError):
             parse_linux_stat('4242 (worker) S 1 2', 4242)
+
+    def test_stat_lineage_fields_preserve_exact_pid_and_parent_group_session(self):
+        suffix = ['S', '123', '4242', '4242'] + ['1'] * 15 + ['987654']
+        self.assertEqual(parse_linux_process_stat(
+            '4242 (worker ) with ) parens) ' + ' '.join(suffix), 4242),
+            {'pid': 4242, 'ppid': 123, 'pgid': 4242, 'sid': 4242,
+             'state': 'S', 'start_ticks': 987654})
 
     def test_boot_time_requires_one_valid_btime(self):
         self.assertEqual(parse_linux_boot_time('cpu 1\nbtime 1700000000\n'), 1700000000)

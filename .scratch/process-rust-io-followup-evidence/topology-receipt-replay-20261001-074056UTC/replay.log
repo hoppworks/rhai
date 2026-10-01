@@ -1,0 +1,60 @@
+[expected-red-old-assertion] exit=1
+Traceback (most recent call last):
+  File "/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4bjlvyla/topology-replay/legacy_assertion.py", line 150, in <module>
+    main()
+  File "/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4bjlvyla/topology-replay/legacy_assertion.py", line 145, in main
+    assert_workload_topology(json.loads(path.read_text()))
+  File "/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4bjlvyla/topology-replay/legacy_assertion.py", line 64, in assert_workload_topology
+    assert topology["worker_joins"] == 3
+KeyError: 'worker_joins'
+[fixed-actual-receipt] exit=0
+workload topology receipt accepted: /var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4bjlvyla/topology-replay/raw-attempt3.json
+[expected-red-workers_joined=2] exit=1
+Traceback (most recent call last):
+  File "/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4bjlvyla/topology-replay/test_workload_topology_receipt.py", line 155, in <module>
+    main()
+  File "/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4bjlvyla/topology-replay/test_workload_topology_receipt.py", line 150, in main
+    assert_workload_topology(json.loads(path.read_text()))
+  File "/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4bjlvyla/topology-replay/test_workload_topology_receipt.py", line 67, in assert_workload_topology
+    assert type(native_io["workers_joined"]) is int and native_io["workers_joined"] == 3
+AssertionError
+[expected-red-wake_to_join_ms=1001] exit=1
+Traceback (most recent call last):
+  File "/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4bjlvyla/topology-replay/test_workload_topology_receipt.py", line 155, in <module>
+    main()
+  File "/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4bjlvyla/topology-replay/test_workload_topology_receipt.py", line 150, in main
+    assert_workload_topology(json.loads(path.read_text()))
+  File "/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4bjlvyla/topology-replay/test_workload_topology_receipt.py", line 69, in assert_workload_topology
+    assert 0 <= native_io["wake_to_join_ms"] <= 1000
+AssertionError
+[expected-red-wrong-pre-escape-sid] exit=1
+Traceback (most recent call last):
+  File "/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4bjlvyla/topology-replay/test_workload_topology_receipt.py", line 155, in <module>
+    main()
+  File "/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4bjlvyla/topology-replay/test_workload_topology_receipt.py", line 150, in main
+    assert_workload_topology(json.loads(path.read_text()))
+  File "/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4bjlvyla/topology-replay/test_workload_topology_receipt.py", line 39, in assert_workload_topology
+    assert escaped_pre["sid"] == leader["sid"]
+AssertionError
+[focused-unit-and-process-identity] exit=0
+test_accepts_exact_workload_lineage_and_reap_evidence (test_workload_topology_receipt.WorkloadTopologyReceiptTests) ... ok
+test_rejects_incomplete_or_late_native_worker_join (test_workload_topology_receipt.WorkloadTopologyReceiptTests) ... ok
+test_rejects_non_pending_worker_or_mismatched_direct_child (test_workload_topology_receipt.WorkloadTopologyReceiptTests) ... ok
+test_rejects_wrong_session_or_wait_status (test_workload_topology_receipt.WorkloadTopologyReceiptTests) ... ok
+test_boot_time_requires_one_valid_btime (test_process_identity.LinuxProcessIdentityTests) ... ok
+test_identity_is_two_integer_protocol_values (test_process_identity.LinuxProcessIdentityTests) ... ok
+test_missing_pid_is_absent_but_missing_boot_metadata_is_unknown (test_process_identity.LinuxProcessIdentityTests) ... ok
+test_permission_and_malformed_identity_are_not_reported_as_absent (test_process_identity.LinuxProcessIdentityTests) ... ok
+test_stat_lineage_fields_preserve_exact_pid_and_parent_group_session (test_process_identity.LinuxProcessIdentityTests) ... ok
+test_stat_rejects_pid_mismatch_and_truncation (test_process_identity.LinuxProcessIdentityTests) ... ok
+test_stat_uses_final_parenthesis_and_field_22 (test_process_identity.LinuxProcessIdentityTests) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.002s
+
+OK
+SHA256 source_assertion 113a7d85333045d89f905df31b594e0d12b7781da24e72b9b521d3239bf545e6 /Users/hoppworks/projects/rhai-process-rust-io/.scratch/process-rust-io/adapter/test_workload_topology_receipt.py
+SHA256 source_process_identity_test c912eacdb0259374b47b25917ec36964b0f3769fee64ac1f73e58dc4b8541c8e /Users/hoppworks/projects/rhai-process-rust-io/.scratch/process-rust-io/adapter/test_process_identity.py
+SHA256 source_process_identity 96591aa4596c0e294a5a036930eaa07a9fc70395507c681b7b8f31aadc0a99a5 /Users/hoppworks/projects/rhai-process-rust-io/.scratch/process-rust-io/adapter/process_identity.py
+SHA256 raw_attempt3_receipt e545dafd06694258e3342a7d9cb9a96e29097341330b6a21ef2df93d6479351e /Users/hoppworks/projects/rhai-process-rust-io/.scratch/process-rust-io/evidence/native-linux-workload-topology-attempt3-20261001-073406UTC/driver-export/custodian-279616-topology-cancel.json
+REPLAY_ALL_EXPECTED_RESULTS=PASS

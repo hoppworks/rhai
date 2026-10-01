@@ -20,6 +20,7 @@ CASES = (
     'stdout-4096-4096', 'stdout-4096-4097', 'stdout-0-0', 'stdout-0-1',
     'stderr-4096-4096', 'stderr-4096-4097', 'stderr-0-0', 'stderr-0-1',
 )
+TOPOLOGY_CASES = ('topology-cancel',)
 INVOCATION_LIMIT = 600.0
 BUILD_LIMIT = 300.0
 CASE_LIMIT = 45.0
@@ -52,7 +53,7 @@ def tree_bytes(path):
 
 
 def args_control_uses_holder(control):
-    return control in ('cancel', 'missing-wake', 'term', 'kill') or control.endswith('-4097') or control.endswith('-0-1')
+    return control in ('cancel', 'missing-wake', 'term', 'kill', 'topology-cancel') or control.endswith('-4097') or control.endswith('-0-1')
 
 
 class ResourceSampler:
@@ -320,7 +321,9 @@ def export_failure(source, export):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--source-root', type=Path, required=True)
+    parser.add_argument('--topology-only', action='store_true')
     args = parser.parse_args()
+    cases = TOPOLOGY_CASES if args.topology_only else CASES
     repo = args.source_root.resolve(strict=True)
     runtime = Path(os.environ['AGENT_RUNTIME_DIR']).resolve(strict=True)
     started = time.monotonic()
@@ -328,7 +331,7 @@ def main():
     build_deadline = started + BUILD_LIMIT
     private = runtime / 'private-source'
     private.mkdir()
-    export = repo / '.scratch/process-rust-io/evidence/native-linux-io-followup-20261001-060839UTC'
+    export = repo / '.scratch/process-rust-io/evidence/native-linux-workload-topology-attempt3-20261001-0729UTC'
     export.mkdir(parents=True, exist_ok=False)
     parent_pid = os.getppid()
     supervisor_pid = parent_pid
@@ -357,7 +360,7 @@ def main():
                       'RUSTC_WORKSPACE_WRAPPER', 'CARGO_HOME_CONFIG',
                       'RUSTUP_TOOLCHAIN'):
         env.pop(inherited, None)
-    ledger = {'cases': [], 'case_order': list(CASES), 'limits': {
+    ledger = {'cases': [], 'case_order': list(cases), 'limits': {
         'invocation_seconds': INVOCATION_LIMIT, 'build_seconds': BUILD_LIMIT,
         'case_seconds': CASE_LIMIT, 'export_reserve_seconds': EXPORT_RESERVE,
         'private_bytes': MAX_PRIVATE_BYTES, 'cargo_jobs': 2,
@@ -438,7 +441,7 @@ def main():
         ledger['binaries'] = [
             {'manifest': 'process-rust-io/Cargo.toml', 'binary_sha256': digest(native_runner)},
             {'manifest': 'process-prototype/Cargo.toml', 'binary_sha256': digest(fixture_binary)}]
-        for index, case in enumerate(CASES):
+        for index, case in enumerate(cases):
             _, sample_failure = sampler.snapshot()
             if sample_failure:
                 raise RuntimeError(sample_failure)
@@ -470,6 +473,14 @@ def main():
             if digest(matches[0]) != digest(out):
                 raise RuntimeError(f'case {case} export readback mismatch')
             receipt_data = json.loads(matches[0].read_text())
+            if case == 'topology-cancel':
+                topology_check_path = rust / 'adapter/test_workload_topology_receipt.py'
+                topology_spec = importlib.util.spec_from_file_location(
+                    'workload_topology_receipt_check', topology_check_path)
+                topology_check = importlib.util.module_from_spec(topology_spec)
+                topology_spec.loader.exec_module(topology_check)
+                topology_check.assert_workload_topology(receipt_data)
+                ledger.setdefault('receipt_assertions', {})[case] = 'workload-topology-v1 accepted'
             controller_identity = receipt_data.get('controller', {})
             if (controller_identity.get('pid') != ledger['driver']['pid']
                     or controller_identity.get('start_identity') != ledger['driver']['start_identity']
@@ -514,7 +525,7 @@ def main():
             if ledger['storage_observations'][-1]['bytes'] > MAX_PRIVATE_BYTES:
                 raise RuntimeError(f'private build/runtime storage exceeded 1 GiB after {case}')
             record(ledger, export)
-        if tuple(item['control'] for item in ledger['cases']) != CASES:
+        if tuple(item['control'] for item in ledger['cases']) != cases:
             raise RuntimeError('fixed native case ledger order mismatch')
         sampler.stop()
         samples, sample_failure = sampler.snapshot()

@@ -1,0 +1,24 @@
+{
+  "driver": {
+    "parent_pid": 279217,
+    "parent_start_identity": [
+      1790355202,
+      48480087
+    ],
+    "pid": 279218,
+    "start_identity": [
+      1790355202,
+      48480089
+    ]
+  },
+  "runtime_path": "/tmp/agent-build-vfu41lw4",
+  "sampler_children": "see sampler-children.json; PIDs captured from direct Popen handles and terminal outcomes recorded after communicate/reap",
+  "supervisor": {
+    "pgid": 279217,
+    "pid": 279217,
+    "start_identity": [
+      1790355202,
+      48480087
+    ]
+  }
+}

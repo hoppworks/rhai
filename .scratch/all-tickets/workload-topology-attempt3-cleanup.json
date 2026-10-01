@@ -1,0 +1,139 @@
+{
+  "checked_utc": "2026-10-01T07:41:46.217543+00:00",
+  "identities": [
+    {
+      "pid": 279220,
+      "expected": [
+        1790355202,
+        48480092
+      ],
+      "current": null,
+      "original_absent": true
+    },
+    {
+      "pid": 279376,
+      "expected": [
+        1790355202,
+        48480832
+      ],
+      "current": null,
+      "original_absent": true
+    },
+    {
+      "pid": 279596,
+      "expected": [
+        1790355202,
+        48481028
+      ],
+      "current": null,
+      "original_absent": true
+    },
+    {
+      "pid": 279218,
+      "expected": [
+        1790355202,
+        48480089
+      ],
+      "current": null,
+      "original_absent": true
+    },
+    {
+      "pid": 279217,
+      "expected": [
+        1790355202,
+        48480087
+      ],
+      "current": null,
+      "original_absent": true
+    },
+    {
+      "pid": 279616,
+      "expected": [
+        1790355202,
+        48481042
+      ],
+      "current": null,
+      "original_absent": true
+    },
+    {
+      "pid": 279621,
+      "expected": [
+        1790355202,
+        48481049
+      ],
+      "current": null,
+      "original_absent": true
+    },
+    {
+      "pid": 279622,
+      "expected": [
+        1790355202,
+        48481049
+      ],
+      "current": null,
+      "original_absent": true
+    },
+    {
+      "pid": 279620,
+      "expected": [
+        1790355202,
+        48481049
+      ],
+      "current": null,
+      "original_absent": true
+    },
+    {
+      "pid": 279619,
+      "expected": [
+        1790355202,
+        48481049
+      ],
+      "current": null,
+      "original_absent": true
+    },
+    {
+      "pid": 279623,
+      "expected": [
+        1790355202,
+        48481049
+      ],
+      "current": null,
+      "original_absent": true
+    },
+    {
+      "pid": 279204,
+      "expected": [
+        1790355202,
+        48480083
+      ],
+      "current": null,
+      "original_absent": true
+    },
+    {
+      "pid": 279215,
+      "expected": [
+        1790355202,
+        48480085
+      ],
+      "current": null,
+      "original_absent": true
+    }
+  ],
+  "groups": {
+    "279204": [],
+    "279217": [],
+    "279616": [],
+    "279619": [],
+    "279620": [],
+    "279621": [],
+    "279622": [],
+    "279623": []
+  },
+  "runtime_absent": true,
+  "verified_manifest_files": 24,
+  "verified_log_hashes": 6,
+  "elapsed_seconds": 9.84,
+  "sampled_private_bytes_max": 565753897,
+  "sampled_process_max": 5,
+  "cumulative_native_seconds": 29.268
+}

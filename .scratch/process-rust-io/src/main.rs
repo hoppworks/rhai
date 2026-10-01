@@ -1006,10 +1006,10 @@ fn run_acceptance() -> io::Result<()> {
     } else {
         (None, STREAM_WORKLOAD + 256, STREAM_WORKLOAD)
     };
-    let mode = if control == "normal" {
-        "stream"
-    } else {
-        "stall"
+    let mode = match control.as_str() {
+        "normal" => "stream",
+        "topology-cancel" => "topology",
+        _ => "stall",
     };
     let deadline = Instant::now() + Duration::from_secs(timeout);
     let exe = env::var("PROCESS_PROTOTYPE_WORKLOAD_BINARY").map_err(io::Error::other)?;
@@ -1038,7 +1038,7 @@ fn run_acceptance() -> io::Result<()> {
     let capture_cap = requested_cap;
     let needs_pending = matches!(
         control.as_str(),
-        "cancel" | "missing-wake" | "term" | "kill"
+        "cancel" | "missing-wake" | "term" | "kill" | "topology-cancel"
     );
     let (mut io, _ready, checkpoint, post_checkpoint_pending) = launch_io(
         stdin,
@@ -1164,7 +1164,7 @@ fn run_acceptance() -> io::Result<()> {
     } else {
         0
     };
-    let cancelled = matches!(control.as_str(), "cancel" | "missing-wake");
+    let cancelled = matches!(control.as_str(), "cancel" | "missing-wake" | "topology-cancel");
     let wake_started = Instant::now();
     let (out, err, sent) = if cancelled {
         io.wake_all();

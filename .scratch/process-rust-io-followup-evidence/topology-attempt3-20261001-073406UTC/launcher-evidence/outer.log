@@ -1,0 +1,4 @@
+launch_utc=2026-10-01T07:33:23Z
+launcher_pid=279204 launcher_pgid=279204
+remaining_seconds=600
+native acceptance stopped: KeyError('worker_joins')

@@ -13,7 +13,7 @@ import socket
 import stat
 import sys
 import time
-from process_identity import process_start_identity
+from process_identity import process_start_identity, _linux_process_snapshot
 from pathlib import Path
 
 POLL = 0.01
@@ -101,6 +101,20 @@ def require_waitid_support():
             raise OSError(error, os.strerror(error))
 
     _WAITID = waitid
+
+
+def enable_linux_child_subreaper():
+    if not sys.platform.startswith('linux') or not hasattr(os, 'waitid'):
+        raise RuntimeError('workload topology case requires Linux waitid and subreaper support')
+    libc = ctypes.CDLL(None, use_errno=True)
+    prctl = libc.prctl
+    prctl.argtypes = (ctypes.c_int, ctypes.c_ulong, ctypes.c_ulong,
+                      ctypes.c_ulong, ctypes.c_ulong)
+    prctl.restype = ctypes.c_int
+    ctypes.set_errno(0)
+    if prctl(36, 1, 0, 0, 0) != 0:  # PR_SET_CHILD_SUBREAPER
+        code = ctypes.get_errno()
+        raise OSError(code, os.strerror(code), 'PR_SET_CHILD_SUBREAPER')
 
 
 def waitid_nonreap(pid):
@@ -225,6 +239,139 @@ def kill_managed_group(children, leader, records, reason):
     records['managed_group_signal_reason'] = reason
 
 
+def cleanup_workload_topology(owned, leader, records):
+    """Signal the pinned workload group, then prove and reap adopted descendants."""
+    anchor = owned.get('anchor')
+    holder = owned.get('holder')
+    if leader is None or anchor is None or holder is None:
+        raise RuntimeError('workload topology custody slots are incomplete')
+    deadline = time.monotonic() + CLEANUP_DEADLINE
+    leader_info = waitid_nonreap(leader)
+    if anchor not in PROCESS_STARTS or holder not in PROCESS_STARTS:
+        # This path is only reachable before the custodian's durable pre-escape
+        # handoff. The fixture cannot escape until the custodian ACKs that file.
+        PROCESS_STARTS[anchor] = _linux_process_snapshot(anchor)['start_identity']
+        PROCESS_STARTS[holder] = _linux_process_snapshot(holder)['start_identity']
+        records.setdefault('workload_topology', {})['incomplete_handoff_cleanup'] = True
+    anchor_snapshot = _linux_process_snapshot(anchor)
+    holder_snapshot = _linux_process_snapshot(holder)
+    if (anchor_snapshot['start_identity'] != PROCESS_STARTS.get(anchor)
+            or holder_snapshot['start_identity'] != PROCESS_STARTS.get(holder)
+            or anchor_snapshot['pgid'] != leader
+            or holder_snapshot['sid'] != anchor_snapshot['sid']):
+        raise RuntimeError('workload topology exact identity/group pin changed before cleanup')
+    holder_in_managed_group = holder_snapshot['pgid'] == anchor_snapshot['pgid']
+    anchor_live = anchor_snapshot['state'] not in ('Z', 'X')
+    if leader_info is None or anchor_live:
+        # Never wait on the managed child before the leader exits and the
+        # subreaper has adopted it. The unreaped leader/anchor keeps this PGID
+        # pinned while the single cleanup signal is sent.
+        os.killpg(anchor_snapshot['pgid'], signal.SIGKILL)
+        records['managed_group_signal'] = 'SIGKILL'
+        records['managed_group_signal_reason'] = (
+            'workload topology after native worker joins' if 'error' not in records
+            else 'workload topology failure cleanup')
+    if leader_info is None:
+        leader_info = wait_until_exit(leader, deadline)
+        if leader_info is None:
+            raise TimeoutError('topology leader did not exit after managed-group signal')
+    if ('error' not in records and (leader_info.si_code != os.CLD_EXITED
+                                    or leader_info.si_status != 0)):
+        raise RuntimeError('topology leader did not exit naturally with status zero')
+    records['topology_leader_exit'] = {'si_code': leader_info.si_code,
+                                       'si_status': leader_info.si_status}
+    records['children']['leader'] = checked_status(leader, reap_exact(leader, deadline))
+    owned['leader'] = None
+    # Reparenting to this explicitly enabled subreaper is observable through
+    # both the exact direct-child wait API and the per-PID parent field.
+    anchor_snapshot = _linux_process_snapshot(anchor)
+    if anchor_snapshot['ppid'] != os.getpid():
+        raise RuntimeError('managed child was not adopted by the custodian subreaper')
+    if wait_until_exit(anchor, deadline) is None:
+        raise TimeoutError('SIGKILLed managed child did not exit')
+    records['children']['anchor'] = checked_status(anchor, reap_exact(anchor, deadline))
+    owned['anchor'] = None
+    holder_snapshot = _linux_process_snapshot(holder)
+    if (holder_snapshot['start_identity'] != PROCESS_STARTS.get(holder)
+            or holder_snapshot['ppid'] != os.getpid()):
+        raise RuntimeError('workload grandchild was not adopted as the same exact child')
+    holder_terminal = waitid_nonreap(holder)
+    if holder_terminal is None:
+        # If the grandchild escaped before failure cleanup, signal only after
+        # its durable PID/start identity and subreaper parent are revalidated.
+        current = _linux_process_snapshot(holder)
+        if current['start_identity'] != PROCESS_STARTS[holder] or current['ppid'] != os.getpid():
+            raise RuntimeError('escaped grandchild exact identity changed before cleanup signal')
+        os.kill(holder, signal.SIGKILL)
+        if wait_until_exit(holder, deadline) is None:
+            raise TimeoutError('exact escaped grandchild SIGKILL did not terminate it')
+    records['children']['holder'] = checked_status(holder, reap_exact(holder, deadline))
+    owned['holder'] = None
+    records['workload_topology_cleanup'] = {
+        'managed_child_adopted_and_reaped': anchor,
+        'escaped_grandchild_adopted_and_exactly_signaled_and_reaped': holder,
+        'escaped_grandchild_signal': 'SIGKILL' if not holder_in_managed_group else 'managed group SIGKILL'}
+    if 'workload_topology' in records:
+        if 'managed_group_signal' in records:
+            records['workload_topology']['managed_group_signal'] = records['managed_group_signal']
+        records['workload_topology']['cleanup'] = dict(records['workload_topology_cleanup'])
+
+
+def cleanup_unreported_workload_topology(owned, leader, records):
+    """Kill the still-pinned pre-ACK group and reap only kernel-owned group children."""
+    if leader is None or PROCESS_STARTS.get(leader) is None:
+        raise RuntimeError('unreported topology has no exact leader identity')
+    pinned = _linux_process_snapshot(leader)
+    if pinned['start_identity'] != PROCESS_STARTS[leader] or pinned['pgid'] != leader:
+        raise RuntimeError('unreported topology leader identity/group pin changed')
+    # The fixture cannot escape this group before the custodian ACK, which is
+    # sent only after both descendant identities have been durably recorded.
+    # Keep the exact leader unreaped until the one group signal is delivered.
+    os.killpg(leader, signal.SIGKILL)
+    records['managed_group_signal'] = 'SIGKILL'
+    records['managed_group_signal_reason'] = 'unreported pre-ACK topology failure'
+    deadline = time.monotonic() + CLEANUP_DEADLINE
+    leader_info = wait_until_exit(leader, deadline)
+    if leader_info is None:
+        raise TimeoutError('unreported topology leader did not exit after group SIGKILL')
+    records['children']['leader'] = checked_status(leader, reap_exact(leader, deadline))
+    owned['leader'] = None
+
+    adopted = []
+    while time.monotonic() < deadline:
+        try:
+            info = os.waitid(os.P_PGID, leader,
+                             os.WEXITED | os.WNOHANG | os.WNOWAIT)
+        except ChildProcessError:
+            info = None
+        if info is not None and info.si_pid:
+            pid = info.si_pid
+            snapshot = _linux_process_snapshot(pid)
+            if snapshot['ppid'] != os.getpid() or snapshot['pgid'] != leader:
+                raise RuntimeError('kernel-reported topology child has unexpected owner/group')
+            status = reap_exact(pid, deadline)
+            PROCESS_STARTS[pid] = snapshot['start_identity']
+            role = ('anchor' if pid == owned.get('anchor') else
+                    'holder' if pid == owned.get('holder') else None)
+            if role is not None:
+                records['children'][role] = checked_status(pid, status)
+                owned[role] = None
+            adopted.append({'pid': pid, 'start_identity': snapshot['start_identity'],
+                            'wait_status': status})
+            continue
+        try:
+            os.killpg(leader, 0)
+        except ProcessLookupError:
+            break
+        time.sleep(POLL)
+    else:
+        raise TimeoutError('unreported topology process group did not become empty')
+    records['unreported_topology_children_reaped'] = adopted
+    records['workload_topology_cleanup'] = {
+        'pre_ack_group_killed_while_leader_pinned': leader,
+        'kernel_wait_owned_children_reaped': len(adopted)}
+
+
 def cleanup_owned(children, leader, records, exclude=(), group_signaled=False):
     deadline = time.monotonic() + CLEANUP_DEADLINE
     errors = []
@@ -295,10 +442,13 @@ def main():
     ap.add_argument('--runtime', required=True)
     ap.add_argument('--native-runner', required=True)
     ap.add_argument('--binary', required=True)
-    ap.add_argument('--control', choices=('normal', 'cancel', 'missing-wake', 'term', 'kill',
+    ap.add_argument('--control', choices=('normal', 'cancel', 'missing-wake', 'term', 'kill', 'topology-cancel',
         'stdout-4096-4096', 'stdout-4096-4097', 'stdout-0-0', 'stdout-0-1',
         'stderr-4096-4096', 'stderr-4096-4097', 'stderr-0-0', 'stderr-0-1'), default='normal')
     args = ap.parse_args()
+    topology_case = args.control == 'topology-cancel'
+    if topology_case:
+        enable_linux_child_subreaper()
     runtime = Path(args.runtime)
     st = runtime.lstat()
     if stat.S_ISLNK(st.st_mode) or not stat.S_ISDIR(st.st_mode):
@@ -335,9 +485,10 @@ def main():
                PROCESS_PROTOTYPE_WORKLOAD_BINARY=args.binary,
                PROCESS_PROTOTYPE_NATIVE_RUNNER_BINARY=args.native_runner)
     runner_timeout = 20
-    fixture_mode = 'stream' if args.control == 'normal' else 'stall'
+    fixture_mode = 'stream' if args.control == 'normal' else ('topology' if topology_case else 'stall')
     runner_argv = [args.native_runner, '--acceptance', '--binary', args.binary, '--case', args.control]
     owned = {'runner': None, 'leader': None, 'anchor': None, 'holder': None, 'sentinel': None}
+    topology_acknowledged = False
     records = {'custodian_pid': os.getpid(), 'runtime': str(runtime),
                'runtime_identity': [st.st_dev, st.st_ino],
                'tmp_identity': [tmp_st.st_dev, tmp_st.st_ino], 'children': {},
@@ -386,43 +537,140 @@ def main():
         # Scope identity is assigned in the spawn attributes before fixture code can execute.
         actions = [(os.POSIX_SPAWN_DUP2, in_r, 0), (os.POSIX_SPAWN_DUP2, out_w, 1), (os.POSIX_SPAWN_DUP2, err_w, 2)]
         readiness_r = readiness_w = None
-        if cap_case:
+        topology_ack_r = topology_ack_w = None
+        if cap_case or topology_case:
             readiness_r, readiness_w = os.pipe()
             owned_fds.extend((readiness_r, readiness_w))
             actions.append((os.POSIX_SPAWN_DUP2, readiness_w, 3))
+        if topology_case:
+            topology_ack_r, topology_ack_w = os.pipe()
+            owned_fds.extend((topology_ack_r, topology_ack_w))
+            actions.append((os.POSIX_SPAWN_DUP2, topology_ack_r, 4))
         fixture_env = dict(os.environ)
         if cap_case:
             fixture_env.update(PROCESS_PROTOTYPE_CUSTODIAN_FD='native-fixture',
                                PROCESS_PROTOTYPE_FIXTURE_AUTHORIZATION='raw-cap-v1')
+        if topology_case:
+            fixture_env.update(PROCESS_PROTOTYPE_CUSTODIAN_FD='native-fixture',
+                               PROCESS_PROTOTYPE_FIXTURE_AUTHORIZATION='workload-topology-v1')
         workload = spawn(req['argv'], fixture_env, actions, setpgroup=0)
         owned['leader'] = workload
-        # The anchor must report its identity before any input is released.
-        anchor_r, anchor_w = os.pipe()
-        owned_fds.extend((anchor_r, anchor_w))
-        anchor_actions = [(os.POSIX_SPAWN_DUP2, anchor_w, 1)]
-        anchor = spawn([args.binary, '--fixture', 'anchor'], dict(os.environ), anchor_actions, setpgroup=workload)
-        owned['anchor'] = anchor
-        os.close(anchor_w); owned_fds.remove(anchor_w)
-        os.set_blocking(anchor_r, False)
-        anchor_line = bytearray()
-        ready_deadline = time.monotonic() + 5
-        while b'\n' not in anchor_line and time.monotonic() < ready_deadline:
-            ready, _, _ = select.select([anchor_r], [], [], min(POLL, ready_deadline-time.monotonic()))
-            if ready:
-                block = os.read(anchor_r, 256-len(anchor_line))
-                if not block or len(anchor_line)+len(block) > 256:
-                    raise ValueError('anchor readiness record missing or over limit')
-                anchor_line.extend(block)
-        os.close(anchor_r); owned_fds.remove(anchor_r)
-        text = bytes(anchor_line).decode('ascii', errors='strict').strip().split()
-        if text != ['ANCHOR_READY', f'pid={anchor}', f'pgid={workload}']:
-            raise ValueError('anchor PID/PGID readiness mismatch')
+        topology_ready = None
+        if topology_case:
+            os.close(readiness_w); owned_fds.remove(readiness_w)
+            os.close(topology_ack_r); owned_fds.remove(topology_ack_r)
+            os.set_blocking(readiness_r, False)
+            ready_deadline = min(session_deadline, time.monotonic() + 5)
+            data = bytearray()
+            while b'\n' not in data and time.monotonic() < ready_deadline:
+                ready, _, _ = select.select([readiness_r], [], [], min(POLL, ready_deadline-time.monotonic()))
+                if ready:
+                    block = os.read(readiness_r, 257-len(data))
+                    if not block or len(data)+len(block) > 256:
+                        raise ValueError('workload topology ownership record missing or over limit')
+                    data.extend(block)
+            first = bytes(data).decode('ascii', errors='strict').strip().split()
+            if len(first) != 4 or first[0] != 'TOPOLOGY_TREE':
+                raise ValueError('workload topology ownership record schema mismatch')
+            def ready_fields(tokens):
+                values = {}
+                for token in tokens[1:]:
+                    key, sep, value = token.partition('=')
+                    if not sep or key in values or not value.isdigit():
+                        raise ValueError('workload topology readiness field is malformed')
+                    values[key] = int(value)
+                return values
+            handoff = ready_fields(first)
+            if (set(handoff) != {'leader_pid', 'managed_pid', 'grandchild_pid'}
+                    or handoff['leader_pid'] != workload):
+                raise ValueError('workload topology lineage PID handoff mismatch')
+            managed_pid = handoff['managed_pid']
+            grandchild_pid = handoff['grandchild_pid']
+            # These PIDs came directly from the workload's bounded readiness
+            # record. Keep them in owned slots before any further fallible read.
+            owned['anchor'] = managed_pid
+            owned['holder'] = grandchild_pid
+            leader_snapshot = _linux_process_snapshot(workload)
+            managed_snapshot = _linux_process_snapshot(managed_pid)
+            grandchild_snapshot = _linux_process_snapshot(grandchild_pid)
+            if (managed_snapshot['ppid'] != workload
+                    or managed_snapshot['pgid'] != workload
+                    or managed_snapshot['sid'] != leader_snapshot['sid']
+                    or grandchild_snapshot['ppid'] != managed_pid
+                    or grandchild_snapshot['pgid'] != workload
+                    or grandchild_snapshot['sid'] != leader_snapshot['sid']):
+                raise ValueError('pre-escape topology identity/group readback mismatch')
+            PROCESS_STARTS[managed_pid] = managed_snapshot['start_identity']
+            PROCESS_STARTS[grandchild_pid] = grandchild_snapshot['start_identity']
+            topology_ready = {'leader': leader_snapshot, 'managed_child': managed_snapshot,
+                              'escaped_grandchild_pre_escape': grandchild_snapshot,
+                              'custodian_subreaper': os.getpid(),
+                              'pre_escape_group_shared': True}
+            records['workload_topology'] = topology_ready
+            handoff_path = runtime / 'topology-handoff.json'
+            handoff_tmp = runtime / '.topology-handoff.tmp'
+            handoff_tmp.write_text(json.dumps(topology_ready, sort_keys=True) + '\n')
+            os.replace(handoff_tmp, handoff_path)
+            if json.loads(handoff_path.read_text()) != topology_ready:
+                raise RuntimeError('pre-escape topology ownership readback mismatch')
+            if os.write(topology_ack_w, b'1') != 1:
+                raise OSError('topology ownership acknowledgement was short')
+            topology_acknowledged = True
+            os.close(topology_ack_w); owned_fds.remove(topology_ack_w)
+            escaped = bytearray()
+            ready_deadline = min(session_deadline, time.monotonic() + 5)
+            while b'\n' not in escaped and time.monotonic() < ready_deadline:
+                ready, _, _ = select.select([readiness_r], [], [], min(POLL, ready_deadline-time.monotonic()))
+                if ready:
+                    block = os.read(readiness_r, 257-len(escaped))
+                    if not block or len(escaped)+len(block) > 256:
+                        raise ValueError('escaped topology confirmation missing or over limit')
+                    escaped.extend(block)
+            second = bytes(escaped).decode('ascii', errors='strict').strip().split()
+            if len(second) != 4 or second[0] != 'TOPOLOGY_ESCAPED':
+                raise ValueError('escaped topology confirmation schema mismatch')
+            escaped_values = ready_fields(second)
+            after_escape = _linux_process_snapshot(grandchild_pid)
+            if (escaped_values != {'pid': grandchild_pid, 'pgid': after_escape['pgid'], 'sid': after_escape['sid']}
+                    or after_escape['ppid'] != managed_pid
+                    or after_escape['start_identity'] != grandchild_snapshot['start_identity']
+                    or after_escape['pgid'] == workload
+                    or after_escape['sid'] != leader_snapshot['sid']):
+                raise ValueError('escaped grandchild identity/lineage confirmation mismatch')
+            topology_ready['escaped_grandchild'] = after_escape
+            handoff_tmp.write_text(json.dumps(topology_ready, sort_keys=True) + '\n')
+            os.replace(handoff_tmp, handoff_path)
+            if json.loads(handoff_path.read_text()) != topology_ready:
+                raise RuntimeError('escaped topology confirmation readback mismatch')
+            os.close(readiness_r); owned_fds.remove(readiness_r)
+        if not topology_case:
+            # The anchor must report its identity before any input is released.
+            anchor_r, anchor_w = os.pipe()
+            owned_fds.extend((anchor_r, anchor_w))
+            anchor_actions = [(os.POSIX_SPAWN_DUP2, anchor_w, 1)]
+            anchor = spawn([args.binary, '--fixture', 'anchor'], dict(os.environ), anchor_actions, setpgroup=workload)
+            owned['anchor'] = anchor
+            os.close(anchor_w); owned_fds.remove(anchor_w)
+            os.set_blocking(anchor_r, False)
+            anchor_line = bytearray()
+            ready_deadline = time.monotonic() + 5
+            while b'\n' not in anchor_line and time.monotonic() < ready_deadline:
+                ready, _, _ = select.select([anchor_r], [], [], min(POLL, ready_deadline-time.monotonic()))
+                if ready:
+                    block = os.read(anchor_r, 256-len(anchor_line))
+                    if not block or len(anchor_line)+len(block) > 256:
+                        raise ValueError('anchor readiness record missing or over limit')
+                    anchor_line.extend(block)
+            os.close(anchor_r); owned_fds.remove(anchor_r)
+            text = bytes(anchor_line).decode('ascii', errors='strict').strip().split()
+            if text != ['ANCHOR_READY', f'pid={anchor}', f'pgid={workload}']:
+                raise ValueError('anchor PID/PGID readiness mismatch')
         sentinel = spawn(['/bin/sleep', '120'], dict(os.environ), (), setpgroup=0)
         owned['sentinel'] = sentinel
         # Cancellation controls hold both output pipes. Overflow cap controls
         # hold only the capped pipe; boundary caps need real EOF on both.
         cap_overflow = cap_case and count > cap
-        if args.control != 'normal' and (not cap_case or cap_overflow):
+        if args.control != 'normal' and not topology_case and (not cap_case or cap_overflow):
             if cap_case and channel == 'stdout':
                 holder_actions = [(os.POSIX_SPAWN_DUP2, out_w, 1)]
             elif cap_case:
@@ -435,7 +683,7 @@ def main():
             os.close(x)
             owned_fds.remove(x)
         send_frame(parent_sock, {'op': 'pipes', 'workload_pid': workload, 'pgid': workload,
-                                 'anchor_pid': anchor, 'anchor_pgid': workload},
+                                 'anchor_pid': owned['anchor'], 'anchor_pgid': workload},
                    (in_w, out_r, err_r), deadline=time.monotonic()+5)
         for x in (in_w, out_r, err_r):
             os.close(x)
@@ -536,16 +784,46 @@ def main():
                         or not isinstance(pending, list) or pending != sorted(set(pending))
                         or any(name not in names for name in pending)):
                     raise ValueError('native runner live snapshot schema or worker states are invalid')
-                if args.control in ('cancel', 'missing-wake', 'term', 'kill') and (
+                if args.control in ('cancel', 'missing-wake', 'term', 'kill', 'topology-cancel') and (
                         active != sorted(names) or pending != sorted(names)):
                     raise ValueError('native cancellation/interruption snapshot lacks fresh EAGAIN acknowledgements')
+                if topology_case:
+                    records['workload_topology']['pre_cancel_workers'] = {
+                        'workers_started': event['workers_started'],
+                        'active_workers': active, 'pending_workers': pending}
                 live = {role: (pid is not None and waitid_nonreap(pid) is None)
-                        for role, pid in owned.items() if role != 'runner'}
+                        for role, pid in owned.items()
+                        if role != 'runner' and pid is not None
+                        and not (topology_case and role == 'holder')}
+                if topology_case:
+                    leader_info = wait_until_exit(owned['leader'], deadline)
+                    if (leader_info is None or leader_info.si_code != os.CLD_EXITED
+                            or leader_info.si_status != 0):
+                        raise AssertionError('topology workload leader did not naturally exit before live snapshot')
+                    anchor_snapshot = _linux_process_snapshot(owned['anchor'])
+                    holder_snapshot = _linux_process_snapshot(owned['holder'])
+                    if (anchor_snapshot['ppid'] != os.getpid()
+                            or waitid_nonreap(owned['anchor']) is not None
+                            or holder_snapshot['ppid'] != owned['anchor']
+                            or holder_snapshot['start_identity'] != PROCESS_STARTS[owned['holder']]
+                            or holder_snapshot['state'] in ('Z', 'X')):
+                        raise AssertionError('workload descendants were not live with exact lineage before cancellation')
+                    records['workload_topology']['adoption_before_cancel'] = {
+                        'managed_child_ppid': anchor_snapshot['ppid'],
+                        'grandchild_ppid': holder_snapshot['ppid'],
+                        'custodian_pid': os.getpid(),
+                        'grandchild_live': True}
+                    records['workload_topology']['pre_cancel_live'] = {
+                        'managed_child': True, 'escaped_grandchild': True,
+                        'sentinel': live.get('sentinel') is True}
+                    if not records['workload_topology']['pre_cancel_live']['sentinel']:
+                        raise AssertionError('unrelated sentinel was not live at topology cancellation')
+                    live.update({'leader': False, 'anchor': True, 'holder': True})
                 records['native_live_snapshot'] = live
                 if not all(live.get(role) for role in ('anchor', 'sentinel')):
                     raise AssertionError('native runner anchor or sentinel was not live')
                 if not live.get('leader'):
-                    if args.control != 'normal' and not args.control.startswith(('stdout-', 'stderr-')):
+                    if args.control != 'normal' and not args.control.startswith(('stdout-', 'stderr-')) and not topology_case:
                         raise AssertionError('native control leader was not live')
                     exited = waitid_nonreap(owned['leader'])
                     if exited is None or exited.si_code != os.CLD_EXITED or exited.si_status != 0:
@@ -554,6 +832,8 @@ def main():
                         'si_code': exited.si_code, 'si_status': exited.si_status}
                 if args.control in ('cancel', 'missing-wake', 'term', 'kill') and not live.get('holder'):
                     raise AssertionError('native cancellation/interruption holder was not live')
+                if topology_case and not live.get('holder'):
+                    raise AssertionError('escaped grandchild was not live through the runner checkpoint')
                 if args.control in ('term', 'kill'):
                     records['runner_interruption_precondition'] = live
                     send_frame(parent_sock, {'op': 'io_live_ack', 'status': 0}, deadline=min(session_deadline, time.monotonic()+2))
@@ -647,7 +927,14 @@ def main():
                             or event.get('stdout_sha256') != hashlib.sha256(expected_payload[:event.get('stdout_bytes', 0)]).hexdigest()
                             or event.get('stderr_sha256') != hashlib.sha256(bytes(value ^ 0xA5 for value in expected_payload[:event.get('stderr_bytes', 0)])).hexdigest()):
                         raise ValueError('native cancellation prefixes differ from the explicit fixture')
-                    if waitid_nonreap(owned['holder']) is not None:
+                    if topology_case:
+                        holder_snapshot = _linux_process_snapshot(owned['holder'])
+                        if (holder_snapshot['state'] in ('Z', 'X')
+                                or holder_snapshot['start_identity'] != PROCESS_STARTS[owned['holder']]
+                                or holder_snapshot['ppid'] != owned['anchor']):
+                            raise AssertionError('workload escaped grandchild did not remain live through worker joins')
+                        records['workload_topology']['grandchild_live_after_worker_joins'] = True
+                    elif waitid_nonreap(owned['holder']) is not None:
                         raise AssertionError('pipe holder did not remain live through worker joins')
                     records['cooperative_cancel'] = True
                     normal_completion = True
@@ -675,7 +962,7 @@ def main():
                     raise AssertionError('independent holder exited before workload')
                 send_frame(parent_sock, {'op': 'workload_exited'}, deadline=deadline)
                 continue
-            if event.get('op') == 'io_cancelled' and args.control == 'cancel':
+            if event.get('op') == 'io_cancelled' and args.control in ('cancel', 'topology-cancel'):
                 if event.get('workers_joined') != 3:
                     raise AssertionError('runner did not join all I/O workers')
                 stream = {key: event.get(key) for key in expected_stream}
@@ -683,6 +970,8 @@ def main():
                     raise ValueError('cancel stream byte counts/checksums do not match fixture truth')
                 records['stream_readback'] = stream
                 records['worker_joins'] = event['workers_joined']
+                if topology_case:
+                    records['workload_topology']['worker_joins'] = event['workers_joined']
                 normal_completion = True
                 records['cooperative_cancel'] = True
                 break
@@ -698,9 +987,18 @@ def main():
         except BaseException as exc:
             records.setdefault('error', 'sentinel liveness readback: ' + repr(exc))
         try:
+            if topology_case and workload is not None:
+                try:
+                    if (topology_acknowledged
+                            and owned.get('anchor') is not None and owned.get('holder') is not None):
+                        cleanup_workload_topology(owned, workload, records)
+                    else:
+                        cleanup_unreported_workload_topology(owned, workload, records)
+                except BaseException as exc:
+                    records.setdefault('cleanup_errors', []).append('workload topology cleanup: ' + repr(exc))
             keep_runner = normal_completion or expected_runner_status is not None
             records['children'] = cleanup_owned(
-                owned, workload, records['children'],
+                owned, owned.get('leader'), records['children'],
                 exclude=('runner',) if keep_runner else (),
                 group_signaled=records.get('managed_group_signal') == 'SIGKILL')
             if records['children'].get('cleanup_errors'):
@@ -763,6 +1061,8 @@ def main():
                 records['custodian_fds_closed'] = False
                 records.setdefault('cleanup_errors', []).append(name + ' close: ' + repr(exc))
     required = ('runner', 'leader', 'anchor', 'sentinel')
+    if topology_case:
+        required += ('holder',)
     complete = all(records['children'].get(role, {}).get('wait_status') is not None for role in required)
     complete = complete and records.get('custodian_fds_closed') is True
     complete = complete and not records.get('cleanup_errors') and not records['children'].get('cleanup_errors') and 'error' not in records

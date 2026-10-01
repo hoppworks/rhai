@@ -1,0 +1,9 @@
+{
+  "retired_exact_owned_stages": [
+    "/root/rhai-linux-native-io-task/native-workload-topology-20261001-0700UTC",
+    "/root/rhai-linux-native-io-task/native-workload-topology-attempt2-20261001-071519UTC"
+  ],
+  "all_frozen_input_hashes_matched_before_retirement": true,
+  "old_launcher_runner_custodian_pids_absent": true
+}
+

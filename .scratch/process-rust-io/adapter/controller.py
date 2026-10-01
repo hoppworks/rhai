@@ -48,7 +48,7 @@ def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument('--binary', required=True)
     ap.add_argument('--native-runner', required=True)
-    ap.add_argument('--control', choices=('normal', 'cancel', 'missing-wake', 'term', 'kill',
+    ap.add_argument('--control', choices=('normal', 'cancel', 'missing-wake', 'term', 'kill', 'topology-cancel',
                                           'stdout-4096-4096', 'stdout-4096-4097', 'stdout-0-0', 'stdout-0-1',
                                           'stderr-4096-4096', 'stderr-4096-4097', 'stderr-0-0', 'stderr-0-1'), default='normal')
     args = ap.parse_args(argv)
