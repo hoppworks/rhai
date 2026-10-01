@@ -118,19 +118,50 @@ was invoked for this change. Disposition fixtures intentionally retain and
 print every exact runtime/journal path pair, including partial and uncertain
 states; they do not claim cleanup of those fixture resources.
 
-The previous source substep's job-list creation fixture remains in
-`fixtures/RunProcessCreationFixtures.ps1` and `fixtures/PayloadFixture.cs`; it
-covers the older candidate path only and is not wired to the current public
-entrypoint. It has not been run.
+`MonitorPayloadJob.cs` adds a monitor-owned, noninheritable unnamed job owner.
+It applies kill-on-last-close without breakaway flags, associates the staged
+payload during `CreateProcessW` through `PROC_THREAD_ATTRIBUTE_JOB_LIST`, keeps
+the exact process/thread/job handles, checks job membership while suspended,
+and requires a second protocol authorization before `ResumeThread`. Setup
+failure stops the protocol, terminates through the exact job when a process was
+created, waits on its exact process handle, releases every initialized
+attribute allocation, and attempts to close exact process/thread/job owners.
+Those owners use `SafeHandle`: failed explicit close retains the exact handle
+for retry or finalization; an abandoned job owner requests exact-job
+termination before its bounded close retry. Setup and cleanup failures are
+retained together. If the kernel continues rejecting close or termination,
+eventual process-exit cleanup is the only remaining OS guarantee; that outcome
+is unknown and is reported as incomplete custody.
+
+`fixtures/MonitorPayloadJobFixture.cs` is source-only coverage for missing and
+phase-stale transition authority, callback failure/exception stop behavior,
+deadlines before and after the callback, atomic stop/resume serialization, and
+injected exact-handle close failures with SafeHandle fallback.
+The fallback case invokes `SafeHandle.Dispose` directly; GC finalization is not
+tested. Its stop/resume race case samples noncompletion for 100 ms after the
+stop-attempt signal; that bounded observation is not a deterministic scheduler
+proof. The fixture has not been compiled or executed and cannot establish
+Windows job, process, finalizer, or native close behavior.
+
+This owner is intentionally not wired into `MonitorTransport`: the current
+intake path grants maintenance renewals only and cannot establish the required
+post-staging create/resume handshakes or transfer the accepted staging owner
+into a process-owner state machine. The existing
+`fixtures/RunProcessCreationFixtures.ps1` still covers only the older
+`ScopedRunner.cs` reference path. The new fixture exercises the protocol and
+injected handle seam only; it does not create a native job or payload. No
+fixture has been compiled or run. The monitor therefore still cannot launch a payload;
+the new source is a creation-time job prerequisite, not workload acceptance.
 
 ## Remaining custody and proof boundaries
 
 Executable-relative syntax checks and staged-file identity checks are present
 in source, but executable launch validation remains unverified. Monitor-owned
-allocation/staging handoff is present as source; local evidence
-finalization/export, exact job ownership and
-cleanup, the real create-time payload integration, pre-resume host challenge
-integration, termination and finalization budgets remain unimplemented. Runtime
+allocation/staging handoff and an unconnected monitor-owned job/process
+creation primitive are present as source; the transport-to-owner state
+transition, local evidence finalization/export, exact job closure proof,
+runtime cleanup, pre-resume host challenge integration, and termination and
+finalization budgets remain unimplemented. Runtime
 disposition is present in source, but no monitor path can create the
 unforgeable exact-job closure proof, so production removal remains fail-closed.
 The fixture authorization tests filesystem-only transitions, not job closure.

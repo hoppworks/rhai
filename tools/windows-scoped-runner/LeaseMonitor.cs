@@ -45,11 +45,13 @@ internal static class LeaseMonitor
 
     internal sealed class Protocol
     {
+        private readonly object sync = new object();
         private readonly Policy policy;
         private long started, leaseDeadline, nextChallenge, sequence;
         private Challenge outstanding;
         private bool hasStarted, createHandshake, resumeHandshake;
-        internal State State { get; private set; }
+        private State state;
+        internal State State { get { lock(sync) return state; } private set { lock(sync) state=value; } }
         internal Protocol(Policy fixedPolicy)
         {
             policy = fixedPolicy ?? throw new ArgumentNullException("fixedPolicy");
@@ -65,16 +67,21 @@ internal static class LeaseMonitor
             if (now >= started + policy.AbsoluteDeadline || now >= leaseDeadline) return true;
             return State != State.Running && now >= started + policy.SetupDeadline;
         }
-        private void Stop() { State = State.Stopping; outstanding = null; }
-        internal void Start(long now) { if(hasStarted) return; hasStarted=true; started = now; leaseDeadline = now + policy.LeaseDuration; nextChallenge = now; }
+        private void Stop() { lock(sync) { State = State.Stopping; outstanding = null; createHandshake=false; resumeHandshake=false; } }
+        internal void Start(long now) { lock(sync) { if(hasStarted) return; hasStarted=true; started = now; leaseDeadline = now + policy.LeaseDuration; nextChallenge = now; } }
         internal State Tick(long now)
         {
+            lock(sync)
+            {
             if (State == State.Stopping) return State;
             if (Expired(now)) { Stop(); return State; }
             return State;
+            }
         }
         internal Challenge IssueChallenge(long now)
         {
+            lock(sync)
+            {
             if (!hasStarted) Start(now);
             if (Tick(now) == State.Stopping ||
                 (State != State.Ready && State != State.Suspended && State != State.Running) ||
@@ -84,6 +91,7 @@ internal static class LeaseMonitor
             outstanding = new Challenge(sequence, BitConverter.ToString(nonce).Replace("-", "").ToLowerInvariant(), now + policy.LeaseDuration, State);
             nextChallenge = now + policy.ChallengePeriod;
             return outstanding;
+            }
         }
         internal bool AcceptResponse(long seq, string nonce, long now)
         {
@@ -98,6 +106,8 @@ internal static class LeaseMonitor
         }
         private bool AcceptResponseCore(long seq, string nonce, long now, bool allowTransitionHandshake)
         {
+            lock(sync)
+            {
             if (Tick(now) == State.Stopping || outstanding == null || outstanding.Phase!=State || now >= outstanding.Expires ||
                 seq != outstanding.Sequence || !String.Equals(nonce, outstanding.Nonce, StringComparison.Ordinal)) return false;
             outstanding = null;
@@ -108,28 +118,61 @@ internal static class LeaseMonitor
             // Running responses only renew the short lease. They cannot
             // authorize another create or resume transition.
             return true;
+            }
         }
         internal bool AuthorizeCreate(long now)
         {
+            lock(sync)
+            {
             if (Tick(now) == State.Stopping || outstanding != null || State != State.Ready || !createHandshake) return false;
             createHandshake=false;
             State = State.CreateAuthorized; return true;
+            }
         }
         internal bool MarkSuspended(long now)
         {
+            lock(sync)
+            {
             if (Tick(now) == State.Stopping || State != State.CreateAuthorized) return false;
             outstanding=null;
             State = State.Suspended; return true;
+            }
         }
         internal bool AuthorizeResume(long now)
         {
+            lock(sync)
+            {
             if (Tick(now) == State.Stopping || outstanding != null || State != State.Suspended || !resumeHandshake) return false;
             resumeHandshake=false;
             State = State.ResumeAuthorized; return true;
+            }
         }
-        internal void MarkRunning(long now) { if (Tick(now) != State.Stopping && State == State.ResumeAuthorized) State = State.Running; }
-        internal void SignalClientEof(long now) { if (Tick(now) != State.Stopping) Stop(); }
-        internal void SignalClientExited(long now) { if (Tick(now) != State.Stopping) Stop(); }
+        internal void MarkRunning(long now) { lock(sync) { if (Tick(now) != State.Stopping && State == State.ResumeAuthorized) State = State.Running; } }
+        // The resume operation runs under the same lock as stop, expiry, and
+        // challenge transitions. Thus a concurrent stop cannot land between
+        // authorizing resume and calling ResumeThread. The caller supplies a
+        // monotonic clock and a synchronous operation over its exact thread.
+        internal bool TryResumeAtomically(Func<long> clock, Func<bool> resume)
+        {
+            if(clock==null || resume==null) throw new ArgumentNullException("resume gate inputs");
+            lock(sync)
+            {
+                try
+                {
+                    long before=clock();
+                    if(Tick(before)==State.Stopping || outstanding!=null || State!=State.Suspended || !resumeHandshake) return false;
+                    resumeHandshake=false;
+                    State=State.ResumeAuthorized;
+                    if(!resume()) { Stop(); return false; }
+                    if(Tick(clock())==State.Stopping) return false;
+                    State=State.Running;
+                    return true;
+                }
+                catch { Stop(); throw; }
+            }
+        }
+        internal void SignalClientEof(long now) { lock(sync) { if (Tick(now) != State.Stopping) Stop(); } }
+        internal void SignalClientExited(long now) { lock(sync) { if (Tick(now) != State.Stopping) Stop(); } }
     }
 
     // Nonblocking producer/consumer seam. Production transport uses separate
