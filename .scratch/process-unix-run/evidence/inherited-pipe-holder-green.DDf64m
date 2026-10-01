@@ -1,0 +1,296 @@
+runtime_path=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-o7t877a1
+os=macOS-27.0-arm64-arm-64bit
+python=3.9.6 (default, Aug 25 2026, 21:26:21)  [Clang 21.0.0 (clang-2100.3.34.2)]
+tool_path_python3=/usr/bin/python3
+tool_path_git=/usr/bin/git
+tool_path_tar=/usr/bin/tar
+tool_path_rustup=/Users/hoppworks/.cargo/bin/rustup
+tool_path_shasum=/usr/bin/shasum
+source_head=01cd37a8ba09cdce3529729abbd2f29174f2fed8
+dirty_input_status=[' M .scratch/process-unix-run/coordinator-state.md', ' M src/packages/sys/process/unix.rs', '?? .scratch/process-unix-run/diagnose-ignored-sigpipe.py', '?? .scratch/process-unix-run/evidence/ignored-sigpipe-diagnostic.txt', '?? .scratch/process-unix-run/evidence/inherited-pipe-holder-green.DDf64m', '?? .scratch/process-unix-run/evidence/inherited-pipe-holder-green.Xl6dDD', '?? .scratch/process-unix-run/evidence/inherited-pipe-holder-green.v79QHJ', '?? .scratch/process-unix-run/inherited-pipe-holder-green.py', '?? .scratch/process-unix-run/run-inherited-pipe-holder-green.sh', '?? .scratch/process-unix-run/verify-raw-probe.py']
+source_manifest={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/mod.rs': 'f4adb768333afb9303d4eb40053db90602e220630dd1335042532cfb082f2c6b', 'src/packages/sys/process.rs': 'cce804da530776565acddd5ba3e7b25338d3332378624c8e17d06d97162241bc', 'src/packages/sys/process/unix.rs': '507387c2ed4517c3311a03c7e90cf9cc822e08986d535806c01ca165bb1babde', 'tests/sys_process.rs': '766cfd5949a4e980a27f194cb66ac49771f570537949757dbeda7ddda7d73fc4'}
+harness_sha256=3057b19fd300cee367ffa1e47489eb7467bc379b304d1b0c47f18a099e43098c
+runner_sha256=9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d
+wrapper_sha256=28e60ccf21a3a7aaff405f1d92d3f808dd9be5549d3f5455437a1f79aed61103
+endpoint_probe_executable=/usr/bin/python3
+endpoint_probe_version=Python 3.9.6
+storage_sample_kib=0
+storage_sample_kib=13832
+case_label=extract-baseline
+case_argv=['tar', '-xf', '/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-o7t877a1/baseline.tar', '-C', '/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-o7t877a1/source']
+case_cwd=/Users/hoppworks/projects/rhai-process-unix-run
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-o7t877a1/extract-baseline.log
+storage_sample_kib=13884
+case_status=0 label=extract-baseline
+case_output_begin label=extract-baseline
+
+case_output_end label=extract-baseline
+storage_sample_kib=16900
+storage_sample_kib=16900
+storage_sample_kib=16900
+storage_sample_kib=16916
+storage_sample_kib=16916
+private_source_manifest={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/mod.rs': 'f4adb768333afb9303d4eb40053db90602e220630dd1335042532cfb082f2c6b', 'src/packages/sys/process.rs': 'cce804da530776565acddd5ba3e7b25338d3332378624c8e17d06d97162241bc', 'src/packages/sys/process/unix.rs': '507387c2ed4517c3311a03c7e90cf9cc822e08986d535806c01ca165bb1babde', 'tests/sys_process.rs': '766cfd5949a4e980a27f194cb66ac49771f570537949757dbeda7ddda7d73fc4'}
+private_source=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-o7t877a1/source
+accepted_lock_sha256=8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa
+private_lock_sha256=fb30d25a7f00c2e0d3c8eefb7ee787c21b1043cbe391a3c5aa58209e1afe9e8e
+case_label=install-rust-1.77.2
+case_argv=['rustup', 'toolchain', 'install', '1.77.2', '--profile', 'minimal', '--no-self-update']
+case_cwd=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-o7t877a1/source
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-o7t877a1/install-rust-1.77.2.log
+storage_sample_kib=16948
+storage_sample_kib=31656
+storage_sample_kib=89048
+storage_sample_kib=217236
+storage_sample_kib=239676
+storage_sample_kib=314784
+storage_sample_kib=448120
+storage_sample_kib=529792
+storage_sample_kib=483604
+case_status=0 label=install-rust-1.77.2
+case_output_begin label=install-rust-1.77.2
+info: syncing channel updates for 1.77.2-aarch64-apple-darwin
+info: latest update on 2024-04-09 for version 1.77.2 (25ef9e3d8 2024-04-09)
+info: downloading 3 components
+
+  1.77.2-aarch64-apple-darwin installed - rustc 1.77.2 (25ef9e3d8 2024-04-09)
+
+info: default toolchain set to 1.77.2-aarch64-apple-darwin
+
+case_output_end label=install-rust-1.77.2
+case_label=rustc-version
+case_argv=['rustup', 'run', '1.77.2', 'rustc', '--version']
+case_cwd=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-o7t877a1/source
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-o7t877a1/rustc-version.log
+storage_sample_kib=483608
+case_status=0 label=rustc-version
+case_output_begin label=rustc-version
+rustc 1.77.2 (25ef9e3d8 2024-04-09)
+
+case_output_end label=rustc-version
+case_label=cargo-version
+case_argv=['rustup', 'run', '1.77.2', 'cargo', '--version']
+case_cwd=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-o7t877a1/source
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-o7t877a1/cargo-version.log
+storage_sample_kib=483612
+case_status=0 label=cargo-version
+case_output_begin label=cargo-version
+cargo 1.77.2 (e52e36006 2024-03-26)
+
+case_output_end label=cargo-version
+rustc_version=rustc 1.77.2 (25ef9e3d8 2024-04-09)
+cargo_version=cargo 1.77.2 (e52e36006 2024-03-26)
+case_label=inherited-pipe-holder-wrong-endpoint-control
+case_argv=['rustup', 'run', '1.77.2', 'cargo', 'test', '--locked', '--features', 'testing-environ,sys,metadata', '--lib', 'packages::sys::process::unix::tests::inherited_pipe_holder_is_alive_at_timeout_and_fixture_releases_it', '--', '--exact', '--nocapture']
+case_cwd=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-o7t877a1/source
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-o7t877a1/inherited-pipe-holder-wrong-endpoint-control.log
+storage_sample_kib=483616
+storage_sample_kib=485920
+storage_sample_kib=486892
+storage_sample_kib=508464
+storage_sample_kib=530452
+storage_sample_kib=541556
+storage_sample_kib=545896
+storage_sample_kib=551064
+storage_sample_kib=565288
+storage_sample_kib=573392
+storage_sample_kib=573492
+storage_sample_kib=573812
+storage_sample_kib=586520
+storage_sample_kib=589768
+storage_sample_kib=594116
+storage_sample_kib=599932
+storage_sample_kib=610728
+storage_sample_kib=615180
+storage_sample_kib=618672
+storage_sample_kib=621752
+storage_sample_kib=624612
+storage_sample_kib=632228
+storage_sample_kib=670124
+storage_sample_kib=688364
+storage_sample_kib=690228
+storage_sample_kib=711736
+storage_sample_kib=713784
+storage_sample_kib=716856
+storage_sample_kib=719928
+storage_sample_kib=727096
+storage_sample_kib=736316
+storage_sample_kib=750656
+storage_sample_kib=770152
+storage_sample_kib=778616
+storage_sample_kib=794276
+storage_sample_kib=803324
+storage_sample_kib=815224
+storage_sample_kib=827960
+storage_sample_kib=839908
+storage_sample_kib=889088
+storage_sample_kib=889088
+case_status=101 label=inherited-pipe-holder-wrong-endpoint-control
+case_output_begin label=inherited-pipe-holder-wrong-endpoint-control
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded ambient-authority v0.0.2
+  Downloaded io-lifetimes v2.0.4
+  Downloaded ahash v0.8.12
+  Downloaded rmp-serde v1.3.0
+  Downloaded const-random v0.1.18
+  Downloaded version_check v0.9.5
+  Downloaded itoa v1.0.15
+  Downloaded maybe-owned v0.3.4
+  Downloaded crunchy v0.2.4
+  Downloaded smartstring v1.0.1
+  Downloaded rmp v0.8.14
+  Downloaded unicode-ident v1.0.22
+  Downloaded thin-vec v0.2.19
+  Downloaded serde_core v1.0.229
+  Downloaded proc-macro2 v1.0.103
+  Downloaded serde_derive v1.0.229
+  Downloaded serde v1.0.229
+  Downloaded memchr v2.8.3
+  Downloaded cap-primitives v4.0.3
+  Downloaded serde_json v1.0.145
+  Downloaded num-traits v0.2.19
+  Downloaded bitflags v2.13.2
+  Downloaded ryu v1.0.20
+  Downloaded portable-atomic v1.15.0
+  Downloaded io-lifetimes v3.0.1
+  Downloaded io-extras v0.19.0
+  Downloaded getrandom v0.3.4
+  Downloaded zerocopy v0.8.59
+  Downloaded syn v3.0.6
+  Downloaded syn v2.0.106
+  Downloaded getrandom v0.2.17
+  Downloaded cfg-if v1.0.5
+  Downloaded smallvec v1.16.2
+  Downloaded once_cell v1.21.4
+  Downloaded ipnet v2.12.2
+  Downloaded rustix v1.1.5
+  Downloaded cap-std v4.0.3
+  Downloaded byteorder v1.5.0
+  Downloaded tiny-keccak v2.0.2
+  Downloaded static_assertions v1.1.0
+  Downloaded quote v1.0.41
+  Downloaded paste v1.0.15
+  Downloaded autocfg v1.5.1
+  Downloaded errno v0.3.14
+  Downloaded fs-set-times v0.20.3
+  Downloaded const-random-macro v0.1.16
+  Downloaded libc v0.2.189
+   Compiling proc-macro2 v1.0.103
+   Compiling libc v0.2.189
+   Compiling unicode-ident v1.0.22
+   Compiling quote v1.0.41
+   Compiling autocfg v1.5.1
+   Compiling crunchy v0.2.4
+   Compiling version_check v0.9.5
+   Compiling serde_core v1.0.229
+   Compiling io-lifetimes v3.0.1
+   Compiling tiny-keccak v2.0.2
+   Compiling io-lifetimes v2.0.4
+   Compiling rustix v1.1.5
+   Compiling cfg-if v1.0.5
+   Compiling errno v0.3.14
+   Compiling syn v3.0.6
+   Compiling num-traits v0.2.19
+   Compiling bitflags v2.13.2
+   Compiling serde v1.0.229
+   Compiling io-extras v0.19.0
+   Compiling paste v1.0.15
+   Compiling portable-atomic v1.15.0
+   Compiling serde_derive v1.0.229
+   Compiling getrandom v0.2.17
+   Compiling cap-primitives v4.0.3
+   Compiling once_cell v1.21.4
+   Compiling zerocopy v0.8.59
+   Compiling getrandom v0.3.4
+   Compiling const-random-macro v0.1.16
+   Compiling fs-set-times v0.20.3
+   Compiling ahash v0.8.12
+   Compiling smartstring v1.0.1
+   Compiling ambient-authority v0.0.2
+   Compiling cap-std v4.0.3
+   Compiling byteorder v1.5.0
+   Compiling ipnet v2.12.2
+   Compiling maybe-owned v0.3.4
+   Compiling serde_json v1.0.145
+   Compiling rmp v0.8.14
+   Compiling const-random v0.1.18
+   Compiling syn v2.0.106
+   Compiling ryu v1.0.20
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-o7t877a1/source)
+   Compiling static_assertions v1.1.0
+   Compiling itoa v1.0.15
+   Compiling memchr v2.8.3
+   Compiling rhai_codegen v3.2.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-o7t877a1/source/codegen)
+   Compiling rmp-serde v1.3.0
+   Compiling smallvec v1.16.2
+   Compiling thin-vec v0.2.19
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:1077:9
+     |
+1077 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+     |
+     = note: `#[warn(unused_mut)]` on by default
+
+warning: function `try_release_fifo` is never used
+    --> src/packages/sys/process/unix.rs:1648:8
+     |
+1648 |     fn try_release_fifo(path: &Path) -> io::Result<()> {
+     |        ^^^^^^^^^^^^^^^^
+     |
+     = note: `#[warn(dead_code)]` on by default
+
+warning: `rhai` (lib test) generated 3 warnings (run `cargo fix --lib -p rhai --tests` to apply 1 suggestion)
+    Finished test [unoptimized + debuginfo] target(s) in 41.97s
+     Running unittests src/lib.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-o7t877a1/target/debug/deps/rhai-c05a975b7fd9eb8a)
+
+running 1 test
+
+running 1 test
+thread 'packages::sys::process::unix::tests::inherited_pipe_holder_is_alive_at_timeout_and_fixture_releases_it' panicked at src/packages/sys/process/unix.rs:2179:91:
+called `Option::unwrap()` on a `None` value
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test packages::sys::process::unix::tests::inherited_pipe_holder_is_alive_at_timeout_and_fixture_releases_it ... FAILED
+
+failures:
+
+failures:
+    packages::sys::process::unix::tests::inherited_pipe_holder_is_alive_at_timeout_and_fixture_releases_it
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 5 filtered out; finished in 0.00s
+
+thread 'packages::sys::process::unix::tests::inherited_pipe_holder_is_alive_at_timeout_and_fixture_releases_it' panicked at src/packages/sys/process/unix.rs:2374:17:
+nested inherited-pipe test exited before holder readiness: exit status: 101
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test packages::sys::process::unix::tests::inherited_pipe_holder_is_alive_at_timeout_and_fixture_releases_it ... FAILED
+
+failures:
+
+failures:
+    packages::sys::process::unix::tests::inherited_pipe_holder_is_alive_at_timeout_and_fixture_releases_it
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 5 filtered out; finished in 2.02s
+
+error: test failed, to rerun pass `--lib`
+
+case_output_end label=inherited-pipe-holder-wrong-endpoint-control
+Traceback (most recent call last):
+  File "/Users/hoppworks/projects/rhai-process-unix-run/.scratch/process-unix-run/inherited-pipe-holder-green.py", line 150, in <module>
+    raise RuntimeError('wrong-endpoint control missed assertion or cleanup receipt')
+RuntimeError: wrong-endpoint control missed assertion or cleanup receipt

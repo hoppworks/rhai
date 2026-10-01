@@ -1626,9 +1626,13 @@ mod tests {
     }
 
     fn release_fifo(path: &Path) -> io::Result<()> {
+        send_fifo_message(path, b"release\n")
+    }
+
+    fn send_fifo_message(path: &Path, message: &[u8]) -> io::Result<()> {
         let deadline = Instant::now() + Duration::from_secs(2);
         loop {
-            match try_release_fifo(path) {
+            match try_write_fifo(path, message) {
                 Ok(()) => return Ok(()),
                 Err(error)
                     if matches!(error.raw_os_error(), Some(libc::ENXIO) | Some(libc::ENOENT))
@@ -1642,11 +1646,15 @@ mod tests {
     }
 
     fn try_release_fifo(path: &Path) -> io::Result<()> {
+        try_write_fifo(path, b"release\n")
+    }
+
+    fn try_write_fifo(path: &Path, message: &[u8]) -> io::Result<()> {
         let mut fifo = OpenOptions::new()
             .write(true)
             .custom_flags(libc::O_NONBLOCK)
             .open(path)?;
-        fifo.write_all(b"release\n")
+        fifo.write_all(message)
     }
 
     fn record_pid(path: &Path) -> io::Result<i32> {
@@ -1658,6 +1666,42 @@ mod tests {
         value
             .parse::<i32>()
             .map_err(|error| io::Error::new(io::ErrorKind::InvalidData, error))
+    }
+
+    fn record_field_pid(path: &Path, field: &str) -> io::Result<i32> {
+        let record = fs::read_to_string(path)?;
+        let prefix = format!("{field}=");
+        let value = record
+            .split_whitespace()
+            .find_map(|part| part.strip_prefix(&prefix))
+            .ok_or_else(|| io::Error::new(io::ErrorKind::InvalidData, "invalid PID record"))?;
+        value
+            .parse::<i32>()
+            .map_err(|error| io::Error::new(io::ErrorKind::InvalidData, error))
+    }
+
+    fn map_bool(map: &crate::Map, key: &str) -> bool {
+        map.get(key)
+            .expect("process result map key missing")
+            .clone()
+            .try_cast::<bool>()
+            .expect("process result map key has wrong type")
+    }
+
+    fn map_int(map: &crate::Map, key: &str) -> crate::INT {
+        map.get(key)
+            .expect("process result map key missing")
+            .clone()
+            .try_cast::<crate::INT>()
+            .expect("process result map key has wrong type")
+    }
+
+    fn map_string<'a>(map: &'a crate::Map, key: &str) -> String {
+        map.get(key)
+            .expect("process result map key missing")
+            .clone()
+            .try_cast::<String>()
+            .expect("process result map key has wrong type")
     }
 
     fn assert_pid_alive(pid: i32) {
@@ -1693,7 +1737,15 @@ mod tests {
     }
 
     fn quote_rhai(value: &str) -> String {
-        format!("\"{}\"", value.replace('\\', "\\\\").replace('"', "\\\""))
+        format!(
+            "\"{}\"",
+            value
+                .replace('\\', "\\\\")
+                .replace('"', "\\\"")
+                .replace('\r', "\\r")
+                .replace('\n', "\\n")
+                .replace('\t', "\\t")
+        )
     }
 
     #[cfg(not(feature = "no_float"))]
@@ -2121,6 +2173,273 @@ mod tests {
             status.success(),
             "nested setup-failure test failed: {status}"
         );
+    }
+
+    #[cfg(not(feature = "no_float"))]
+    fn run_inner_inherited_pipe_holder_case() {
+        let child_record = PathBuf::from(std::env::var_os("RHAI_TEST_OWNER_RECORD").unwrap());
+        let holder_record =
+            PathBuf::from(std::env::var_os("RHAI_TEST_OWNER_HOLDER_RECORD").unwrap());
+        let before_ack = PathBuf::from(std::env::var_os("RHAI_TEST_OWNER_BEFORE_ACK").unwrap());
+        let after_ack = PathBuf::from(std::env::var_os("RHAI_TEST_OWNER_AFTER_ACK").unwrap());
+        let holder_result =
+            PathBuf::from(std::env::var_os("RHAI_TEST_OWNER_HOLDER_RESULT").unwrap());
+        let stdout_probe = PathBuf::from(std::env::var_os("RHAI_TEST_OWNER_STDOUT_PROBE").unwrap());
+        let stderr_probe = PathBuf::from(std::env::var_os("RHAI_TEST_OWNER_STDERR_PROBE").unwrap());
+        let probe_script = r#"import os, sys
+fd = 1 if sys.argv[1] == "stdout" else 2
+payload = b"x" if fd == 1 else b"y"
+try:
+    os.write(fd, payload)
+    result = "write-ok"
+except OSError as exc:
+    result = f"errno={exc.errno}"
+tmp = sys.argv[2] + ".tmp"
+out = os.open(tmp, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+os.write(out, (result + "\n").encode())
+os.close(out)
+os.replace(tmp, sys.argv[2])
+"#;
+        let release = PathBuf::from(std::env::var_os("RHAI_TEST_OWNER_RELEASE").unwrap());
+        let api_started = PathBuf::from(std::env::var_os("RHAI_TEST_OWNER_API_STARTED").unwrap());
+        let api_returned = PathBuf::from(std::env::var_os("RHAI_TEST_OWNER_API_RETURNED").unwrap());
+        let holder_script = concat!(
+            "trap '' PIPE; ",
+            "printf 'holder-ready-stdout\\n'; printf 'holder-ready-stderr\\n' >&2; ",
+            "tmp=\"$RHAI_TEST_OWNER_HOLDER_RECORD.tmp\"; ",
+            "printf 'holder-pid=%s holder-ready=1\\n' \"$$\" > \"$tmp\"; ",
+            "mv \"$tmp\" \"$RHAI_TEST_OWNER_HOLDER_RECORD\"; ",
+            "while IFS= read -r command < \"$RHAI_TEST_OWNER_RELEASE\"; do ",
+            "case \"$command\" in ",
+            "before:*) nonce=\"${command#*:}\"; tmp=\"$RHAI_TEST_OWNER_BEFORE_ACK.tmp\"; printf 'before:%s\\n' \"$nonce\" > \"$tmp\"; mv \"$tmp\" \"$RHAI_TEST_OWNER_BEFORE_ACK\" ;; ",
+            "after:*) nonce=\"${command#*:}\"; tmp=\"$RHAI_TEST_OWNER_AFTER_ACK.tmp\"; printf 'after:%s\\n' \"$nonce\" > \"$tmp\"; mv \"$tmp\" \"$RHAI_TEST_OWNER_AFTER_ACK\" ;; ",
+            "release) break ;; ",
+            "esac; done; ",
+            "/usr/bin/python3 -c \"$RHAI_TEST_OWNER_PROBE_SCRIPT\" stdout \"$RHAI_TEST_OWNER_STDOUT_PROBE\"; ",
+            "/usr/bin/python3 -c \"$RHAI_TEST_OWNER_PROBE_SCRIPT\" stderr \"$RHAI_TEST_OWNER_STDERR_PROBE\"; ",
+            "tmp=\"$RHAI_TEST_OWNER_HOLDER_RESULT.tmp\"; ",
+            "printf 'probes-complete\\n' > \"$tmp\"; ",
+            "mv \"$tmp\" \"$RHAI_TEST_OWNER_HOLDER_RESULT\""
+        );
+        let shell = concat!(
+            "tmp=\"$RHAI_TEST_OWNER_RECORD.tmp\"; ",
+            "printf 'child-pid=%s child-ready=1\\n' \"$$\" > \"$tmp\"; ",
+            "mv \"$tmp\" \"$RHAI_TEST_OWNER_RECORD\"; ",
+            "/bin/sh -c \"$RHAI_TEST_OWNER_HOLDER_SCRIPT\" & ",
+            "while [ ! -f \"$RHAI_TEST_OWNER_HOLDER_RECORD\" ]; do :; done; ",
+            "exit 0"
+        );
+        let mut engine = Engine::new();
+        let package = SysPackage::new(
+            SysConfig::default()
+                .programs(ProgramPolicy::Any)
+                .max_output(1024),
+        )
+        .unwrap();
+        package.register_into_engine(&mut engine);
+        let script = format!(
+            "run(\"/bin/sh\", [\"-c\", {}], #{{ timeout: 2.0, max_output: 1024, env: #{{ \"RHAI_TEST_OWNER_RECORD\": {}, \"RHAI_TEST_OWNER_HOLDER_RECORD\": {}, \"RHAI_TEST_OWNER_BEFORE_ACK\": {}, \"RHAI_TEST_OWNER_AFTER_ACK\": {}, \"RHAI_TEST_OWNER_HOLDER_RESULT\": {}, \"RHAI_TEST_OWNER_STDOUT_PROBE\": {}, \"RHAI_TEST_OWNER_STDERR_PROBE\": {}, \"RHAI_TEST_OWNER_PROBE_SCRIPT\": {}, \"RHAI_TEST_OWNER_RELEASE\": {}, \"RHAI_TEST_OWNER_HOLDER_SCRIPT\": {} }} }})",
+            quote_rhai(shell),
+            quote_rhai(child_record.to_str().unwrap()),
+            quote_rhai(holder_record.to_str().unwrap()),
+            quote_rhai(before_ack.to_str().unwrap()),
+            quote_rhai(after_ack.to_str().unwrap()),
+            quote_rhai(holder_result.to_str().unwrap()),
+            quote_rhai(stdout_probe.to_str().unwrap()),
+            quote_rhai(stderr_probe.to_str().unwrap()),
+            quote_rhai(probe_script),
+            quote_rhai(release.to_str().unwrap()),
+            quote_rhai(holder_script),
+        );
+        assert!(
+            !script.contains('\n') && !script.contains('\r') && !script.contains('\t'),
+            "Rhai string quoting must escape control characters in fixture values"
+        );
+        assert!(
+            script.contains("import os, sys\\nfd = 1"),
+            "multiline helper must survive Rhai string quoting"
+        );
+        fs::write(&api_started, b"api-started\n").unwrap();
+        let started = Instant::now();
+        let result = engine.eval::<crate::Map>(&script).unwrap();
+        let returned_tmp = api_returned.with_extension("tmp");
+        fs::write(&returned_tmp, b"api-returned\n").unwrap();
+        fs::rename(&returned_tmp, &api_returned).unwrap();
+        assert!(
+            started.elapsed() < Duration::from_secs(5),
+            "public run did not return after deadline with inherited pipe holders"
+        );
+        assert!(map_bool(&result, "timed_out"));
+        assert_eq!(map_int(&result, "code"), 0);
+        assert!(map_bool(&result, "success"));
+        assert!(!map_bool(&result, "stdout_complete"));
+        assert!(!map_bool(&result, "stderr_complete"));
+        assert_eq!(map_string(&result, "stdout"), "holder-ready-stdout\n");
+        assert_eq!(map_string(&result, "stderr"), "holder-ready-stderr\n");
+        println!("inherited-pipe captured_stdout_ready=true captured_stderr_ready=true");
+
+        let child_pid = record_pid(&child_record).unwrap();
+        let holder_pid = record_field_pid(&holder_record, "holder-pid").unwrap();
+        assert_pid_reaped(child_pid);
+        assert_pid_alive(holder_pid);
+        assert!(
+            !holder_result.exists(),
+            "holder completed before fixture released its owned control FIFO"
+        );
+        println!(
+            "inherited-pipe timeout child_pid={child_pid} child_reap=ESRCH holder_pid={holder_pid} holder_live=true stdout_complete=false stderr_complete=false"
+        );
+
+        drop(result);
+        drop(engine);
+        drop(package);
+        assert!(
+            before_ack.exists(),
+            "pre-timeout challenge was not answered before the API returned"
+        );
+        assert_eq!(
+            fs::read_to_string(&before_ack).unwrap(),
+            "before:nonce-before-timeout\n"
+        );
+        send_fifo_message(&release, b"after:nonce-after-return\n").unwrap();
+        let ack_deadline = Instant::now() + Duration::from_secs(1);
+        while !after_ack.exists() && Instant::now() < ack_deadline {
+            thread::sleep(Duration::from_millis(5));
+        }
+        assert!(
+            after_ack.exists(),
+            "live holder did not answer fixture probe"
+        );
+        let ack = fs::read_to_string(&after_ack).unwrap();
+        assert_eq!(ack, "after:nonce-after-return\n");
+        println!("inherited-pipe post-return challenge=after:nonce-after-return answered=true");
+        send_fifo_message(&release, b"release\n").unwrap();
+
+        let result_deadline = Instant::now() + Duration::from_secs(2);
+        while !holder_result.exists() && Instant::now() < result_deadline {
+            thread::sleep(Duration::from_millis(5));
+        }
+        assert!(
+            holder_result.exists(),
+            "holder did not publish pipe probe result"
+        );
+        assert_eq!(
+            fs::read_to_string(&holder_result).unwrap(),
+            "probes-complete\n"
+        );
+        let stdout_outcome = fs::read_to_string(&stdout_probe).unwrap();
+        let stderr_outcome = fs::read_to_string(&stderr_probe).unwrap();
+        let pipe_probe = format!(
+            "stdout={} stderr={}\n",
+            stdout_outcome.trim(),
+            stderr_outcome.trim()
+        );
+        wait_for_pid_reaped(holder_pid);
+        println!("inherited-pipe holder_pid={holder_pid} probe={pipe_probe:?} reap=ESRCH");
+        assert_eq!(
+            pipe_probe, "stdout=errno=32 stderr=errno=32\n",
+            "public run must cancel both local pipe read endpoints before returning"
+        );
+    }
+
+    #[cfg(not(feature = "no_float"))]
+    #[test]
+    fn inherited_pipe_holder_is_alive_at_timeout_and_fixture_releases_it() {
+        const CHILD_ROLE: &str = "RHAI_TEST_OWNER_INHERITED_PIPE_CHILD_ROLE";
+        const TEST_NAME: &str = "packages::sys::process::unix::tests::inherited_pipe_holder_is_alive_at_timeout_and_fixture_releases_it";
+
+        if std::env::var_os(CHILD_ROLE).is_some() {
+            run_inner_inherited_pipe_holder_case();
+            return;
+        }
+
+        let fixture = FixtureDir::new();
+        let child_record = fixture.0.join("direct-child");
+        let holder_record = fixture.0.join("pipe-holder");
+        let before_ack = fixture.0.join("before-ack");
+        let after_ack = fixture.0.join("after-ack");
+        let holder_result = fixture.0.join("holder-result");
+        let stdout_probe = fixture.0.join("stdout-probe");
+        let stderr_probe = fixture.0.join("stderr-probe");
+        let api_started = fixture.0.join("api-started");
+        let api_returned = fixture.0.join("api-returned");
+        let release = fixture.0.join("release.fifo");
+        create_fifo(&release);
+        let nested = Command::new(std::env::current_exe().unwrap())
+            .args(["--exact", TEST_NAME, "--nocapture"])
+            .env(CHILD_ROLE, "inner")
+            .env("RHAI_TEST_OWNER_RECORD", &child_record)
+            .env("RHAI_TEST_OWNER_HOLDER_RECORD", &holder_record)
+            .env("RHAI_TEST_OWNER_BEFORE_ACK", &before_ack)
+            .env("RHAI_TEST_OWNER_AFTER_ACK", &after_ack)
+            .env("RHAI_TEST_OWNER_HOLDER_RESULT", &holder_result)
+            .env("RHAI_TEST_OWNER_STDOUT_PROBE", &stdout_probe)
+            .env("RHAI_TEST_OWNER_STDERR_PROBE", &stderr_probe)
+            .env("RHAI_TEST_OWNER_RELEASE", &release)
+            .env("RHAI_TEST_OWNER_API_STARTED", &api_started)
+            .env("RHAI_TEST_OWNER_API_RETURNED", &api_returned)
+            .stdout(Stdio::inherit())
+            .stderr(Stdio::inherit())
+            .spawn()
+            .unwrap();
+        let mut nested = NestedTestChild {
+            child: nested,
+            release: release.clone(),
+            setup_gate: None,
+        };
+        let started = Instant::now();
+        let readiness_deadline = started + Duration::from_secs(4);
+        while !holder_record.exists() || !api_started.exists() {
+            if let Some(status) = nested.try_wait().unwrap() {
+                panic!("nested inherited-pipe test exited before holder readiness: {status}");
+            }
+            assert!(
+                Instant::now() < readiness_deadline,
+                "inherited-pipe holder readiness watchdog expired"
+            );
+            thread::sleep(Duration::from_millis(10));
+        }
+        let holder_pid = record_field_pid(&holder_record, "holder-pid").unwrap();
+        assert_pid_alive(holder_pid);
+        send_fifo_message(&release, b"before:nonce-before-timeout\n").unwrap();
+        let ack_deadline = Instant::now() + Duration::from_secs(1);
+        while !before_ack.exists() && Instant::now() < ack_deadline {
+            thread::sleep(Duration::from_millis(5));
+        }
+        assert!(
+            before_ack.exists(),
+            "holder was not operational before timeout"
+        );
+        assert_eq!(
+            fs::read_to_string(&before_ack).unwrap(),
+            "before:nonce-before-timeout\n"
+        );
+        assert!(
+            !api_returned.exists(),
+            "public API returned before the pre-timeout holder challenge was answered"
+        );
+        println!("inherited-pipe fixture holder_pid={holder_pid} alive=true challenge=before:nonce-before-timeout answered=true");
+
+        let status = loop {
+            if let Some(status) = nested.try_wait().unwrap() {
+                break status;
+            }
+            assert!(
+                started.elapsed() < Duration::from_secs(8),
+                "nested inherited-pipe test exceeded its external watchdog"
+            );
+            thread::sleep(Duration::from_millis(10));
+        };
+        assert!(
+            status.success(),
+            "nested inherited-pipe test failed: {status}"
+        );
+        assert_eq!(fs::read_to_string(&api_returned).unwrap(), "api-returned\n");
+        println!("inherited-pipe fixture api_returned_after_pre_ack=true");
+        wait_for_pid_reaped(holder_pid);
+        let child_pid = record_pid(&child_record).unwrap();
+        wait_for_pid_reaped(child_pid);
+        println!("inherited-pipe outer child_pid={child_pid} holder_pid={holder_pid} both=ESRCH");
     }
 
     #[cfg(not(feature = "no_float"))]
