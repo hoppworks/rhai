@@ -188,6 +188,23 @@ try:
             raise RuntimeError('wrong expectation control did not fail specifically on the intended stdout byte assertion')
     finally:
         fixture.write_bytes(restored)
+    prefix_line = b'const EXPECTED_OUTPUT_BYTE: u8 = b\'o\';'
+    wrong_prefix_line = b'const EXPECTED_OUTPUT_BYTE: u8 = b\'x\';'
+    if restored.count(prefix_line) != 1:
+        raise RuntimeError('wrong-prefix control target must occur exactly once')
+    try:
+        fixture.write_bytes(restored.replace(prefix_line, wrong_prefix_line, 1))
+        status, prefix_control_log = run_bounded(
+            ['rustup', 'run', '1.77.2', 'cargo', 'test', '--locked', '--features', features, '--test', 'sys_process', 'process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps', '--', '--exact', '--nocapture'],
+            source, env, timeout=120, label='wrong-prefix-control')
+        prefix_output = prefix_control_log.read_text(errors='replace')
+        print('wrong_prefix_control_output_begin', flush=True)
+        print(prefix_output[-10000:], flush=True)
+        print('wrong_prefix_control_output_end', flush=True)
+        if status != 101 or 'process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps' not in prefix_output or 'stdout differs at byte' not in prefix_output or 'left: 111' not in prefix_output or 'right: 120' not in prefix_output:
+            raise RuntimeError('wrong-prefix control did not fail specifically on the intended output-byte assertion')
+    finally:
+        fixture.write_bytes(restored)
     restored_hash = hashlib.sha256(fixture.read_bytes()).hexdigest()
     if restored_hash != copied_hashes['tests/sys_process.rs']:
         raise RuntimeError('private fixture was not byte-for-byte restored')

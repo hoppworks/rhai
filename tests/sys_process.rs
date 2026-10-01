@@ -42,6 +42,32 @@ fn process_fixture() {
                 std::thread::sleep(std::time::Duration::from_millis(2));
             }
         }
+        if std::env::var_os("RHAI_SYS_PROCESS_IO_STRESS").is_some() {
+            let expected = std::env::var("RHAI_SYS_PROCESS_IO_BYTES").unwrap().parse::<usize>().unwrap();
+            let out_bytes = std::env::var("RHAI_SYS_PROCESS_STDOUT_BYTES").unwrap().parse::<usize>().unwrap();
+            let err_bytes = std::env::var("RHAI_SYS_PROCESS_STDERR_BYTES").unwrap().parse::<usize>().unwrap();
+            let child_pid = process::id();
+            let record_path = std::path::PathBuf::from(record);
+            std::fs::write(&record_path, format!("child-pid={child_pid} child-ready=1\n")).unwrap();
+            let stdout_writer = std::thread::spawn(move || {
+                std::io::stdout().write_all(&vec![b'o'; out_bytes]).unwrap();
+                std::io::stdout().flush().unwrap();
+            });
+            let stderr_writer = std::thread::spawn(move || {
+                std::io::stderr().write_all(&vec![b'e'; err_bytes]).unwrap();
+                std::io::stderr().flush().unwrap();
+            });
+            let mut input = Vec::new();
+            std::io::stdin().read_to_end(&mut input).unwrap();
+            assert_eq!(input.len(), expected);
+            assert!(input.iter().all(|byte| *byte == b'i'));
+            let complete_record = record_path.with_extension("complete");
+            std::fs::write(&complete_record, format!("child-pid={child_pid} input-bytes={} input-valid=true\n", input.len())).unwrap();
+            std::fs::rename(complete_record, record_path).unwrap();
+            stdout_writer.join().unwrap();
+            stderr_writer.join().unwrap();
+            process::exit(code.parse().unwrap());
+        }
         std::fs::write(record, format!("child-pid={} child-exit={code}\n", process::id())).unwrap();
         if let Ok(count) = std::env::var("RHAI_SYS_PROCESS_INVALID_COUNT") {
             std::io::stdout().write_all(&vec![0xff; count.parse().unwrap()]).unwrap();
@@ -111,6 +137,154 @@ fn assert_child_record(path: &std::path::Path, code: i64) {
     // The API must return only after its owned direct child has been reaped.
     assert_eq!(unsafe { libc::kill(pid, 0) }, -1, "child {pid} is still present");
     assert_eq!(std::io::Error::last_os_error().raw_os_error(), Some(libc::ESRCH));
+}
+
+#[cfg(not(feature = "no_index"))]
+fn assert_io_stress_record(path: &std::path::Path, expected_input: usize, complete_input: bool) {
+    let record = std::fs::read_to_string(path).unwrap();
+    let fields: Vec<_> = record.split_whitespace().collect();
+    assert!(fields.len() == 2 || fields.len() == 3, "stress child record: {record:?}");
+    let pid: libc::pid_t = fields[0].strip_prefix("child-pid=").unwrap().parse().unwrap();
+    if fields.len() == 3 {
+        assert_eq!(fields[1], format!("input-bytes={expected_input}"));
+        assert_eq!(fields[2], "input-valid=true");
+    } else {
+        assert_eq!(fields[1], "child-ready=1");
+    }
+    if complete_input {
+        assert_eq!(fields.len(), 3, "stress child did not validate complete input: {record:?}");
+    }
+    assert_eq!(unsafe { libc::kill(pid, 0) }, -1, "stress child {pid} is still present");
+    assert_eq!(std::io::Error::last_os_error().raw_os_error(), Some(libc::ESRCH));
+}
+
+#[cfg(not(feature = "no_index"))]
+fn io_stress_script(executable: &str, record_path: &str, input_bytes: usize, stdout_bytes: usize, stderr_bytes: usize, limit: usize) -> String {
+    let input = "i".repeat(input_bytes);
+    format!(
+        r#"run_raw("{executable}", ["--exact", "process_fixture", "--nocapture", "--quiet"], #{{
+            env_clear: true,
+            env: #{{ {FIXTURE_ENV}: "0", {FIXTURE_RECORD_ENV}: "{record_path}", RHAI_SYS_PROCESS_IO_STRESS: "1", RHAI_SYS_PROCESS_IO_BYTES: "{input_bytes}", RHAI_SYS_PROCESS_STDOUT_BYTES: "{stdout_bytes}", RHAI_SYS_PROCESS_STDERR_BYTES: "{stderr_bytes}" }},
+            stdin: "{input}", max_output: {limit}, timeout: 5.0
+        }})"#
+    )
+}
+
+#[cfg(not(feature = "no_index"))]
+fn assert_output_limit_error(error: Box<rhai::EvalAltResult>, stream: &str, prefix: &[u8]) {
+    let sys_error = match error.as_ref() {
+        rhai::EvalAltResult::ErrorRuntime(value, _) => value.clone().try_cast::<SysError>().unwrap(),
+        other => panic!("unexpected output-limit error: {other:?}"),
+    };
+    match sys_error {
+        SysError::Process { cause: ProcessCause::OutputLimit(_), report } => match stream {
+            "stdout" => {
+                assert_eq!(report.stdout_bytes(), prefix);
+                assert!(!report.stdout_complete());
+            }
+            "stderr" => {
+                assert_eq!(report.stderr_bytes(), prefix);
+                assert!(!report.stderr_complete());
+            }
+            other => panic!("unknown output stream {other}"),
+        },
+        other => panic!("expected OutputLimit as the primary process cause, got {other:?}"),
+    }
+}
+
+#[test]
+#[cfg(not(feature = "no_index"))]
+fn process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps() {
+    const INPUT_BYTES: usize = 128 * 1024;
+    const CAP: usize = 256 * 1024;
+    const EXPECTED_OUTPUT_BYTE: u8 = b'o';
+    let engine = engine(SysConfig::default().programs(ProgramPolicy::Any));
+    let executable = std::env::current_exe().unwrap();
+    let executable = executable.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let records = TempDir::new();
+    let record_path = records.path().join("exact-cap.txt");
+    let record_literal = record_path.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let script = io_stress_script(&executable, &record_literal, INPUT_BYTES, CAP - LIBTEST_QUIET_START.len(), CAP, CAP);
+    let result = engine.eval::<Map>(&script).unwrap();
+    let stdout = result["stdout"].clone().try_cast::<Blob>().unwrap();
+    let stderr = result["stderr"].clone().try_cast::<Blob>().unwrap();
+    let mut expected_stdout = LIBTEST_QUIET_START.to_vec();
+    expected_stdout.extend(std::iter::repeat(EXPECTED_OUTPUT_BYTE).take(CAP - LIBTEST_QUIET_START.len()));
+    assert_eq!(stdout.len(), expected_stdout.len(), "stdout length mismatch");
+    for (index, (actual, expected)) in stdout.iter().zip(&expected_stdout).enumerate() {
+        assert_eq!(actual, expected, "stdout differs at byte {index}");
+    }
+    assert_eq!(stderr.len(), CAP, "stderr length mismatch");
+    for (index, byte) in stderr.iter().enumerate() {
+        assert_eq!(*byte, b'e', "stderr differs at byte {index}");
+    }
+    assert!(result["success"].as_bool().unwrap());
+    assert!(result["stdout_complete"].as_bool().unwrap());
+    assert!(result["stderr_complete"].as_bool().unwrap());
+    assert_io_stress_record(&records.path().join("exact-cap.txt"), INPUT_BYTES, true);
+}
+
+#[test]
+#[cfg(not(feature = "no_index"))]
+fn process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one() {
+    const INPUT_BYTES: usize = 96 * 1024;
+    const CAP: usize = 4096;
+    let engine = engine(SysConfig::default().programs(ProgramPolicy::Any));
+    let executable = std::env::current_exe().unwrap();
+    let executable = executable.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+
+    for stream in ["stdout", "stderr"] {
+        let records = TempDir::new();
+        let record_path = records.path().join(format!("{stream}-overflow.txt"));
+        let record_literal = record_path.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+        let stdout_payload = if stream == "stdout" { CAP - LIBTEST_QUIET_START.len() + 1 } else { 0 };
+        let stderr_payload = if stream == "stderr" { CAP + 1 } else { 0 };
+        let script = io_stress_script(&executable, &record_literal, INPUT_BYTES, stdout_payload, stderr_payload, CAP);
+        let error = engine.eval::<Map>(&script).unwrap_err();
+        let expected_prefix = if stream == "stdout" {
+            let mut prefix = LIBTEST_QUIET_START.to_vec();
+            prefix.extend(std::iter::repeat(b'o').take(CAP - LIBTEST_QUIET_START.len()));
+            prefix
+        } else {
+            vec![b'e'; CAP]
+        };
+        assert_output_limit_error(error, stream, &expected_prefix);
+        assert_io_stress_record(&record_path, INPUT_BYTES, false);
+    }
+}
+
+#[test]
+#[cfg(not(feature = "no_index"))]
+fn zero_output_cap_reports_output_limit_with_an_empty_retained_prefix() {
+    let engine = engine(SysConfig::permissive().programs(ProgramPolicy::Any));
+    for stream in ["none", "stdout", "stderr"] {
+        let records = TempDir::new();
+        let record_path = records.path().join(format!("zero-cap-{stream}.txt"));
+        let record_literal = record_path.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+        let output = match stream {
+            "none" => "",
+            "stdout" => "; printf x",
+            "stderr" => "; printf x >&2",
+            _ => unreachable!(),
+        };
+        let script = format!(r#"run("/bin/sh", #{{ env_clear: true, env: #{{ RECORD: "{record_literal}" }}, stdin: "printf 'child-pid=%s\\n' \"$$\" > \"$RECORD\"{output}", max_output: 0, timeout: 5.0 }})"#);
+        if stream == "none" {
+            let result = engine.eval::<Map>(&script).unwrap();
+            assert!(result["success"].as_bool().unwrap());
+            assert_eq!(result["code"].as_int().unwrap(), 0);
+            assert!(result["stdout_complete"].as_bool().unwrap());
+            assert!(result["stderr_complete"].as_bool().unwrap());
+            assert!(result["stdout"].as_immutable_string_ref().unwrap().as_str().is_empty());
+            assert!(result["stderr"].as_immutable_string_ref().unwrap().as_str().is_empty());
+        } else {
+            let error = engine.eval::<Map>(&script).unwrap_err();
+            assert_output_limit_error(error, stream, &[]);
+        }
+        let record = std::fs::read_to_string(record_path).unwrap();
+        let pid: libc::pid_t = record.trim().strip_prefix("child-pid=").unwrap().parse().unwrap();
+        assert_eq!(unsafe { libc::kill(pid, 0) }, -1, "zero-cap {stream} child {pid} is still present");
+        assert_eq!(std::io::Error::last_os_error().raw_os_error(), Some(libc::ESRCH));
+    }
 }
 
 #[test]
