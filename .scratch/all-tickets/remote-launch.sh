@@ -88,11 +88,11 @@ with out.open('w', buffering=1) as stream:
         # result when a read lands between truncate and write.
         with tempfile.NamedTemporaryFile(mode='w', dir=heartbeat.parent,
                                          prefix=heartbeat.name + '.',
-                                         delete=False) as stream:
-            heartbeat_tmp = pathlib.Path(stream.name)
-            stream.write(f'{time.time():.6f}\n')
-            stream.flush()
-            os.fsync(stream.fileno())
+                                         delete=False) as heartbeat_stream:
+            heartbeat_tmp = pathlib.Path(heartbeat_stream.name)
+            heartbeat_stream.write(f'{time.time():.6f}\n')
+            heartbeat_stream.flush()
+            os.fsync(heartbeat_stream.fileno())
         os.replace(heartbeat_tmp, heartbeat)
         current = snapshot()
         if current.get(root) is None or current[root][0] != root_identity[0]:
