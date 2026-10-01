@@ -138,3 +138,20 @@ https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-st
 These are unexecuted source review findings, not failed native corrections.
 Existing sole Expert02/history, private ownership, source-only scope and all
 actual resource limits remain unchanged. Runtime removal stays uninvoked.
+
+## Exact-job closure source checkpoint — 2026-10-01
+
+Independently verified fork task/windows-scoped-runner at c08bdd089bfa09d8b2ec61d7fe1f13939eb10951, with author and committer hoppworks <daniel@hoppworks.de>. OCR selected three production files and excluded two fixtures and state. All six paths reviewed; no skipped path. Diff check passed. Immutable input SHA-256 values:
+
+- .scratch/windows-monitor-job-owner/coordinator-state.md: 5273922bf7f0938bbb76e8918821781dd4e5be579d999f427c48bb7608d6bc5a
+- tools/windows-scoped-runner/LeaseMonitor.cs: 72c79f18c96e28f27cd1b7b39b1025da9a250e0608885de7dc48934512a46bfc
+- tools/windows-scoped-runner/MonitorPayloadJob.cs: 8a470c33a82b218dd6fc9f1942f5a6822e861db8107b66649fcc98300108713a
+- tools/windows-scoped-runner/MonitorStagingHandoff.cs: 33351d7af0579fdc1a3913674f0fd4f4b731a2b897e05944bba732bee65dd044
+- tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs: a09228f19b3b66f6c5e6726dd88bb79540e5c5237bc98e9892a54ad56781f329
+- tools/windows-scoped-runner/fixtures/MonitorPayloadJobFixture.cs: d9aae76fd68a2cb52721618cd0746af36892a7951c9d0c4d11867a05e11ca7c0
+
+The same owner worker observes exact root exit and preserves a signaled exit code259 as data. Ordinary completion and stop both terminate residual exact-job members, wait/capture root status, close thread/process handles, query exact-job accounting until empty, then close the job. One absolute30s monotonic deadline applies throughout, including the final job close. All failures accumulate; only all confirmed facts mint a private receipt bound to the same allocation reference/recorded immutable identity. Nested factory checks the owner's private verified flag, rather than exposing an unchecked constructor. Handoff stop-publication exceptions preserve operation/cleanup diagnostics.
+
+Source fixtures now drive the shared production cleanup algorithm through scripted operations. Root corrected a real schedule mismatch:500ms left means five100ms sleeps/queries, with no query at deadline. Failure assertions match their specific nested diagnostics, so null allocation cannot make them pass for an unrelated reason. Custody fixture supplies actual allocation identities and checks owner/identity mismatch without using a valid proof to remove runtime data.
+
+Static checkpoint only: no compilation, executed fixture, Windows kernel operation or native strict proof. Simulated operations do not establish native membership, handle release or cleanup. Outcome finalization, saved/exported evidence and runtime removal remain incomplete and uninvoked. Next source route retains exact worker/allocation ownership and implements bounded local evidence finalization before any exact-proof removal. No native/bootstrap scope or resource limit changed.
