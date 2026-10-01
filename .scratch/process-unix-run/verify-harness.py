@@ -193,6 +193,9 @@ try:
         raise RuntimeError('private fixture was not byte-for-byte restored')
     print('restored_fixture_sha256=' + restored_hash, flush=True)
     run_bounded(['rustup', 'run', '1.77.2', 'cargo', 'test', '--locked', '--features', features, '--test', 'sys_process', '--', '--nocapture'], source, env, expected=0, timeout=180, label='sys-process-restored')
+    run_bounded(
+        ['rustup', 'run', '1.77.2', 'cargo', 'test', '--locked', '--features', 'testing-environ,sys,metadata,no_index', '--test', 'sys_process', 'scalar_run_with_cwd_works_without_collections', '--', '--exact', '--nocapture'],
+        source, env, expected=0, timeout=180, label='no-index-scalar-os-proof')
     final_private_hashes = {name: hashlib.sha256((source / name).read_bytes()).hexdigest() for name in source_inputs}
     if final_private_hashes != copied_hashes:
         raise RuntimeError('private tested source changed after restored verification')

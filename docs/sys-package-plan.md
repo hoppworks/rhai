@@ -118,6 +118,8 @@ r.success       // bool: code == 0
 r.code          // int, or () when killed by a signal (Unix) or timed out
 r.signal        // int on Unix when signaled, else ()
 r.timed_out     // bool
+r.stdout_complete // bool: stdout reached EOF before the run returned
+r.stderr_complete // bool: stderr reached EOF before the run returned
 r.stdout        // String (lossy UTF-8)
 r.stderr        // String
 ```

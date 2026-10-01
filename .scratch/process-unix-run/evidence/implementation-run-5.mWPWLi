@@ -1,0 +1,306 @@
+runtime_path=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4la79nj0
+private_working_directory=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4la79nj0
+os=macOS-27.0-arm64-arm-64bit
+python=3.9.6 (default, Aug 25 2026, 21:26:21)  [Clang 21.0.0 (clang-2100.3.34.2)]
+tool_path_python3=/usr/bin/python3
+tool_path_git=/usr/bin/git
+tool_path_tar=/usr/bin/tar
+tool_path_rustup=/Users/hoppworks/.cargo/bin/rustup
+tool_path_shasum=/usr/bin/shasum
+source_head=06865bd500138edf2fe39d33a8f5e75cb04964d7
+dirty_input_status=[' M .scratch/process-unix-run/coordinator-state.md', ' M src/packages/sys/process/unix.rs', ' M tests/sys_process.rs', '?? .scratch/process-unix-run/evidence/implementation-run-5.Dlt4Po', '?? .scratch/process-unix-run/evidence/implementation-run-5.c81Se4', '?? .scratch/process-unix-run/evidence/implementation-run-5.mWPWLi', '?? .scratch/process-unix-run/evidence/implementation-run-5.ynCbla']
+source_manifest={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/fs.rs': 'eae3b9c7828a9282ede7827166fb7a7ffaa2bedfb315a1e9702f211690291d3a', 'src/packages/sys/mod.rs': 'a0a4a34f32b08b57edc8419a49466d2e989ba43c7dc49f28fad7d80958b85419', 'src/packages/sys/process.rs': 'b19d0027fce410396b31a39b391629e7970be2b8fb90080bc80ce9a1b94a334c', 'src/packages/sys/process/unix.rs': '8faec630606a74f5ab282d35a9682540638c5aa1781c7c286657f0872e46fc20', 'tests/sys_process.rs': 'f8e061bd6d7122acad27fa28a91d4a49c5863cc8c688049ed22c9e30c2bef896', 'tests/sys_process_report.rs': 'b081e8de1174433bd8ef5668945bfdda7b81fdcdeb6ef1b1d92a2c04d6f5c53f', 'tests/sys_support/mod.rs': '96faddd40f6162c4893af1d510b1acd77de645c9e7d2e6454a7ab1dde81f7872'}
+harness_sha256=8ecf47f67cac95071da2cbb31c8a18ca652dfebab6c33afebb1b24a7adb47f9d
+runner_sha256=9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d
+wrapper_sha256=61a008df2c41f3cb850953b6429c4f5a28833aed920cce9fc547427f1cf2e1fe
+storage_sample_kib=0
+storage_sample_kib=13180
+case_argv=['tar', '-xf', '/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4la79nj0/baseline.tar', '-C', '/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4la79nj0/source']
+case_cwd=/Users/hoppworks/projects/rhai-process-unix-run
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4la79nj0/01-extract-baseline.log
+storage_sample_kib=13184
+storage_sample_kib=29380
+case_status=0 label=extract-baseline
+case_log_output_begin label=01-extract-baseline.log complete=true bytes=0 clipped=false
+
+case_log_output_end
+storage_sample_kib=16200
+storage_sample_kib=16200
+storage_sample_kib=16200
+storage_sample_kib=16200
+storage_sample_kib=16200
+storage_sample_kib=16204
+private_source_manifest={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/fs.rs': 'eae3b9c7828a9282ede7827166fb7a7ffaa2bedfb315a1e9702f211690291d3a', 'src/packages/sys/mod.rs': 'a0a4a34f32b08b57edc8419a49466d2e989ba43c7dc49f28fad7d80958b85419', 'src/packages/sys/process.rs': 'b19d0027fce410396b31a39b391629e7970be2b8fb90080bc80ce9a1b94a334c', 'src/packages/sys/process/unix.rs': '8faec630606a74f5ab282d35a9682540638c5aa1781c7c286657f0872e46fc20', 'tests/sys_process.rs': 'f8e061bd6d7122acad27fa28a91d4a49c5863cc8c688049ed22c9e30c2bef896', 'tests/sys_process_report.rs': 'b081e8de1174433bd8ef5668945bfdda7b81fdcdeb6ef1b1d92a2c04d6f5c53f', 'tests/sys_support/mod.rs': '96faddd40f6162c4893af1d510b1acd77de645c9e7d2e6454a7ab1dde81f7872'}
+private_source_cwd=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4la79nj0/source
+accepted_lock_sha256=8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa
+private_lock_diff_begin
+--- accepted
++++ private
+@@ -483,6 +483,7 @@
+  "getrandom 0.3.4",
+  "hashbrown",
+  "libm",
++ "libc",
+  "no-std-compat",
+  "num-traits",
+  "once_cell",
+
+private_lock_diff_end
+private_lock_sha256=fb30d25a7f00c2e0d3c8eefb7ee787c21b1043cbe391a3c5aa58209e1afe9e8e
+case_argv=['rustup', 'toolchain', 'install', '1.77.2', '--profile', 'minimal', '--no-self-update']
+case_cwd=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4la79nj0/source
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4la79nj0/02-install-rust-1.77.2.log
+storage_sample_kib=16236
+storage_sample_kib=32548
+storage_sample_kib=83360
+storage_sample_kib=144620
+storage_sample_kib=239988
+storage_sample_kib=380632
+storage_sample_kib=567932
+storage_sample_kib=482124
+storage_sample_kib=482128
+case_status=0 label=install-rust-1.77.2
+case_log_output_begin label=02-install-rust-1.77.2.log complete=true bytes=308 clipped=false
+info: syncing channel updates for 1.77.2-aarch64-apple-darwin
+info: latest update on 2024-04-09 for version 1.77.2 (25ef9e3d8 2024-04-09)
+info: downloading 3 components
+
+  1.77.2-aarch64-apple-darwin installed - rustc 1.77.2 (25ef9e3d8 2024-04-09)
+
+info: default toolchain set to 1.77.2-aarch64-apple-darwin
+
+case_log_output_end
+case_argv=['rustup', 'run', '1.77.2', 'rustc', '--version']
+case_cwd=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4la79nj0/source
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4la79nj0/03-rustc-version.log
+storage_sample_kib=482128
+storage_sample_kib=482132
+case_status=0 label=rustc-version
+case_log_output_begin label=03-rustc-version.log complete=true bytes=36 clipped=false
+rustc 1.77.2 (25ef9e3d8 2024-04-09)
+
+case_log_output_end
+case_argv=['rustup', 'run', '1.77.2', 'cargo', '--version']
+case_cwd=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4la79nj0/source
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4la79nj0/04-cargo-version.log
+storage_sample_kib=482132
+storage_sample_kib=482136
+case_status=0 label=cargo-version
+case_log_output_begin label=04-cargo-version.log complete=true bytes=36 clipped=false
+cargo 1.77.2 (e52e36006 2024-03-26)
+
+case_log_output_end
+rustc_version=rustc 1.77.2 (25ef9e3d8 2024-04-09)
+cargo_version=cargo 1.77.2 (e52e36006 2024-03-26)
+case_argv=['rustup', 'run', '1.77.2', 'cargo', 'test', '--locked', '--features', 'testing-environ,sys,metadata', '--test', 'sys_process', '--', '--nocapture']
+case_cwd=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4la79nj0/source
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4la79nj0/05-sys-process.log
+storage_sample_kib=482136
+storage_sample_kib=484440
+storage_sample_kib=485632
+storage_sample_kib=493088
+storage_sample_kib=528148
+storage_sample_kib=540200
+storage_sample_kib=551072
+storage_sample_kib=571088
+storage_sample_kib=585156
+storage_sample_kib=595292
+storage_sample_kib=614920
+storage_sample_kib=619232
+storage_sample_kib=659316
+storage_sample_kib=684904
+storage_sample_kib=709088
+storage_sample_kib=717280
+storage_sample_kib=732652
+storage_sample_kib=778616
+storage_sample_kib=789144
+storage_sample_kib=813636
+storage_sample_kib=853836
+storage_sample_kib=1005308
+storage_sample_kib=1051464
+case_status=101 label=sys-process
+case_log_output_begin label=05-sys-process.log complete=true bytes=6196 clipped=false
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded once_cell v1.21.4
+  Downloaded cfg-if v1.0.5
+  Downloaded ambient-authority v0.0.2
+  Downloaded itoa v1.0.15
+  Downloaded const-random-macro v0.1.16
+  Downloaded errno v0.3.14
+  Downloaded fs-set-times v0.20.3
+  Downloaded version_check v0.9.5
+  Downloaded const-random v0.1.18
+  Downloaded maybe-owned v0.3.4
+  Downloaded serde v1.0.229
+  Downloaded tiny-keccak v2.0.2
+  Downloaded quote v1.0.41
+  Downloaded smartstring v1.0.1
+  Downloaded smallvec v1.16.2
+  Downloaded rmp v0.8.14
+  Downloaded serde_derive v1.0.229
+  Downloaded unicode-ident v1.0.22
+  Downloaded serde_core v1.0.229
+  Downloaded crunchy v0.2.4
+  Downloaded thin-vec v0.2.19
+  Downloaded num-traits v0.2.19
+  Downloaded io-extras v0.19.0
+  Downloaded memchr v2.8.3
+  Downloaded cap-primitives v4.0.3
+  Downloaded serde_json v1.0.145
+  Downloaded getrandom v0.3.4
+  Downloaded bitflags v2.13.2
+  Downloaded portable-atomic v1.15.0
+  Downloaded ryu v1.0.20
+  Downloaded ahash v0.8.12
+  Downloaded syn v2.0.106
+  Downloaded zerocopy v0.8.59
+  Downloaded syn v3.0.6
+  Downloaded rmp-serde v1.3.0
+  Downloaded getrandom v0.2.17
+  Downloaded rustix v1.1.5
+  Downloaded cap-std v4.0.3
+  Downloaded ipnet v2.12.2
+  Downloaded paste v1.0.15
+  Downloaded io-lifetimes v3.0.1
+  Downloaded proc-macro2 v1.0.103
+  Downloaded io-lifetimes v2.0.4
+  Downloaded byteorder v1.5.0
+  Downloaded autocfg v1.5.1
+  Downloaded static_assertions v1.1.0
+  Downloaded libc v0.2.189
+ Downloading crates ...
+  Downloaded web-time v1.1.0
+   Compiling proc-macro2 v1.0.103
+   Compiling quote v1.0.41
+   Compiling unicode-ident v1.0.22
+   Compiling libc v0.2.189
+   Compiling autocfg v1.5.1
+   Compiling crunchy v0.2.4
+   Compiling serde_core v1.0.229
+   Compiling version_check v0.9.5
+   Compiling io-lifetimes v2.0.4
+   Compiling tiny-keccak v2.0.2
+   Compiling io-lifetimes v3.0.1
+   Compiling cfg-if v1.0.5
+   Compiling rustix v1.1.5
+   Compiling errno v0.3.14
+   Compiling num-traits v0.2.19
+   Compiling syn v3.0.6
+   Compiling io-extras v0.19.0
+   Compiling bitflags v2.13.2
+   Compiling portable-atomic v1.15.0
+   Compiling serde v1.0.229
+   Compiling serde_derive v1.0.229
+   Compiling getrandom v0.2.17
+   Compiling once_cell v1.21.4
+   Compiling zerocopy v0.8.59
+   Compiling cap-primitives v4.0.3
+   Compiling getrandom v0.3.4
+   Compiling const-random-macro v0.1.16
+   Compiling fs-set-times v0.20.3
+   Compiling ahash v0.8.12
+   Compiling smartstring v1.0.1
+   Compiling ambient-authority v0.0.2
+   Compiling cap-std v4.0.3
+   Compiling maybe-owned v0.3.4
+   Compiling ipnet v2.12.2
+   Compiling paste v1.0.15
+   Compiling serde_json v1.0.145
+   Compiling const-random v0.1.18
+   Compiling syn v2.0.106
+   Compiling static_assertions v1.1.0
+   Compiling memchr v2.8.3
+   Compiling ryu v1.0.20
+   Compiling itoa v1.0.15
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4la79nj0/source)
+   Compiling rhai_codegen v3.2.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4la79nj0/source/codegen)
+   Compiling smallvec v1.16.2
+   Compiling thin-vec v0.2.19
+   Compiling byteorder v1.5.0
+   Compiling rmp v0.8.14
+   Compiling rmp-serde v1.3.0
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: value assigned to `status` is never read
+   --> src/packages/sys/process/unix.rs:486:13
+    |
+486 |     let mut status = None;
+    |             ^^^^^^
+    |
+    = help: maybe it is overwritten before being read?
+    = note: `#[warn(unused_assignments)]` on by default
+
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:481:9
+    |
+481 |     let mut pending = input.unwrap_or_default();
+    |         ----^^^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` on by default
+
+warning: unused variable: `program`
+   --> src/packages/sys/process/unix.rs:706:5
+    |
+706 |     program: &str,
+    |     ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_program`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: `rhai` (lib) generated 4 warnings (run `cargo fix --lib -p rhai` to apply 2 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized + debuginfo] target(s) in 22.06s
+     Running tests/sys_process.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4la79nj0/target/debug/deps/sys_process-aff8fc6efbd0b2a5)
+
+running 7 tests
+test process_fixture ... ok
+thread 'unit_timeout_disables_configured_default_deadline' panicked at tests/sys_process.rs:160:46:
+called `Result::unwrap()` on an `Err` value: ErrorRuntime(rhai::packages::sys::error::SysError, 1:1)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test unit_timeout_disables_configured_default_deadline ... FAILED
+test process_cwd_uses_the_opened_filesystem_capability_after_root_replacement ... ok
+test run_deadline_returns_bounded_partial_output_after_terminating_child ... ok
+test lossy_run_reports_engine_limit_expansion_without_returning_truncated_text ... ok
+test unit_stdin_means_immediate_eof ... ok
+test run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data ... ok
+
+failures:
+
+failures:
+    unit_timeout_disables_configured_default_deadline
+
+test result: FAILED. 6 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.32s
+
+error: test failed, to rerun pass `--test sys_process`
+
+case_log_output_end
+storage_sample_kib=1051464
+sampled_storage_max_kib=1051464
+sampled_storage_readings=[0, 13180, 13184, 29380, 16200, 16200, 16200, 16200, 16200, 16204, 16236, 32548, 83360, 144620, 239988, 380632, 567932, 482124, 482128, 482128, 482132, 482132, 482136, 482136, 484440, 485632, 493088, 528148, 540200, 551072, 571088, 585156, 595292, 614920, 619232, 659316, 684904, 709088, 717280, 732652, 778616, 789144, 813636, 853836, 1005308, 1051464, 1051464]
+Traceback (most recent call last):
+  File "/Users/hoppworks/projects/rhai-process-unix-run/.scratch/process-unix-run/verify-harness.py", line 169, in <module>
+    run_bounded(['rustup', 'run', '1.77.2', 'cargo', 'test', '--locked', '--features', features, '--test', 'sys_process', '--', '--nocapture'], source, env, expected=0, timeout=180, label='sys-process')
+  File "/Users/hoppworks/projects/rhai-process-unix-run/.scratch/process-unix-run/verify-harness.py", line 79, in run_bounded
+    raise RuntimeError(f'{label} returned {status}, expected {expected}')
+RuntimeError: sys-process returned 101, expected 0

@@ -1,7 +1,9 @@
 //! Native Unix child execution for the synchronous run contract.
 use super::{ProcessCause, ProcessExit, ProcessReport};
 use crate::packages::sys::{config::*, error::SysError, SysState};
-use crate::{Array, Blob, Dynamic, ImmutableString, Map, Module, NativeCallContext, Shared, INT};
+#[cfg(not(feature = "no_index"))]
+use crate::{Array, Blob};
+use crate::{Dynamic, ImmutableString, Map, Module, NativeCallContext, Shared, INT};
 use std::ffi::OsStr;
 use std::io::{self, Read, Write};
 use std::os::fd::{AsRawFd, RawFd};
@@ -12,46 +14,45 @@ use std::time::{Duration, Instant};
 type Res<T> = Result<T, Box<crate::EvalAltResult>>;
 
 pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
-    let st = state.clone();
-    crate::packages::sys::reg(
-        "run_raw",
-        &["/// Run a child program and return exact stdout and stderr bytes."],
-    )
-    .set_into_module(
-        module,
-        move |ctx: NativeCallContext, program: &str| -> Res<Map> {
-            run_map(&ctx, &st, program, &[], Map::new(), true)
-        },
-    );
-    let st = state.clone();
-    crate::packages::sys::reg("run_raw", &["/// Run a child program with options."])
-        .set_into_module(
+    #[cfg(not(feature = "no_index"))]
+    {
+        let st = state.clone();
+        crate::packages::sys::reg("run_raw", &["/// Run a child program."]).set_into_module(
             module,
-            move |ctx: NativeCallContext, program: &str, options: Map| -> Res<Map> {
-                run_map(&ctx, &st, program, &[], options, true)
+            move |ctx: NativeCallContext, program: &str| -> Res<Map> {
+                run_map(&ctx, &st, program, &[], Map::new(), true)
             },
         );
-    let st = state.clone();
-    crate::packages::sys::reg(
-        "run_raw",
-        &["/// Run a child program with arguments and options."],
-    )
-    .set_into_module(
-        module,
-        move |ctx: NativeCallContext, program: &str, args: Array, options: Map| -> Res<Map> {
-            let args = parse_args(args)?;
-            run_map(&ctx, &st, program, &args, options, true)
-        },
-    );
-    let st = state.clone();
-    crate::packages::sys::reg("run_raw", &["/// Run a child program with arguments."])
+        let st = state.clone();
+        crate::packages::sys::reg("run_raw", &["/// Run a child program with options."])
+            .set_into_module(
+                module,
+                move |ctx: NativeCallContext, program: &str, options: Map| -> Res<Map> {
+                    run_map(&ctx, &st, program, &[], options, true)
+                },
+            );
+        let st = state.clone();
+        crate::packages::sys::reg(
+            "run_raw",
+            &["/// Run a child program with arguments and options."],
+        )
         .set_into_module(
             module,
-            move |ctx: NativeCallContext, program: &str, args: Array| -> Res<Map> {
+            move |ctx: NativeCallContext, program: &str, args: Array, options: Map| -> Res<Map> {
                 let args = parse_args(args)?;
-                run_map(&ctx, &st, program, &args, Map::new(), true)
+                run_map(&ctx, &st, program, &args, options, true)
             },
         );
+        let st = state.clone();
+        crate::packages::sys::reg("run_raw", &["/// Run a child program with arguments."])
+            .set_into_module(
+                module,
+                move |ctx: NativeCallContext, program: &str, args: Array| -> Res<Map> {
+                    let args = parse_args(args)?;
+                    run_map(&ctx, &st, program, &args, Map::new(), true)
+                },
+            );
+    }
     let st = state.clone();
     crate::packages::sys::reg(
         "run",
@@ -70,28 +71,33 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
             run_map(&ctx, &st, program, &[], options, false)
         },
     );
-    let st = state.clone();
-    crate::packages::sys::reg(
-        "run",
-        &["/// Run a child program with arguments and options."],
-    )
-    .set_into_module(
-        module,
-        move |ctx: NativeCallContext, program: &str, args: Array, options: Map| -> Res<Map> {
-            let args = parse_args(args)?;
-            run_map(&ctx, &st, program, &args, options, false)
-        },
-    );
-    let st = state.clone();
-    crate::packages::sys::reg("run", &["/// Run a child program with arguments."]).set_into_module(
-        module,
-        move |ctx: NativeCallContext, program: &str, args: Array| -> Res<Map> {
-            let args = parse_args(args)?;
-            run_map(&ctx, &st, program, &args, Map::new(), false)
-        },
-    );
+    #[cfg(not(feature = "no_index"))]
+    {
+        let st = state.clone();
+        crate::packages::sys::reg(
+            "run",
+            &["/// Run a child program with arguments and options."],
+        )
+        .set_into_module(
+            module,
+            move |ctx: NativeCallContext, program: &str, args: Array, options: Map| -> Res<Map> {
+                let args = parse_args(args)?;
+                run_map(&ctx, &st, program, &args, options, false)
+            },
+        );
+        let st = state.clone();
+        crate::packages::sys::reg("run", &["/// Run a child program with arguments."])
+            .set_into_module(
+                module,
+                move |ctx: NativeCallContext, program: &str, args: Array| -> Res<Map> {
+                    let args = parse_args(args)?;
+                    run_map(&ctx, &st, program, &args, Map::new(), false)
+                },
+            );
+    }
 }
 
+#[cfg(not(feature = "no_index"))]
 fn parse_args(args: Array) -> Res<Vec<String>> {
     args.into_iter()
         .map(|arg| {
@@ -113,15 +119,9 @@ struct Options {
 }
 
 fn parse_options(state: &SysState, mut options: Map, engine_limit: usize) -> Res<Options> {
-    let known = [
-        "cwd",
-        "env",
-        "env_clear",
-        "env_remove",
-        "stdin",
-        "timeout",
-        "max_output",
-    ];
+    let mut known = vec!["cwd", "env", "env_clear", "stdin", "timeout", "max_output"];
+    #[cfg(not(feature = "no_index"))]
+    known.push("env_remove");
     for key in options.keys() {
         if !known.contains(&key.as_str()) {
             return Err(SysError::Denied(format!("unknown process option `{key}`")).into());
@@ -146,6 +146,7 @@ fn parse_options(state: &SysState, mut options: Map, engine_limit: usize) -> Res
             .try_cast::<bool>()
             .ok_or_else(|| SysError::Denied("process option `env_clear` must be a bool".into()))?,
     };
+    #[cfg(not(feature = "no_index"))]
     let env_remove = match options.remove("env_remove") {
         None => vec![],
         Some(v) => v
@@ -161,6 +162,8 @@ fn parse_options(state: &SysState, mut options: Map, engine_limit: usize) -> Res
             })
             .collect::<Res<Vec<_>>>()?,
     };
+    #[cfg(feature = "no_index")]
+    let env_remove: Vec<String> = Vec::new();
     let env = match options.remove("env") {
         None => vec![],
         Some(v) => v
@@ -179,21 +182,11 @@ fn parse_options(state: &SysState, mut options: Map, engine_limit: usize) -> Res
     let stdin = match options.remove("stdin") {
         None => None,
         Some(v) if v.is_unit() => None,
-        Some(v) => {
-            if let Some(bytes) = v.clone().try_cast::<Blob>() {
-                Some(bytes)
-            } else if let Some(text) = v.try_cast::<ImmutableString>() {
-                Some(text.as_bytes().to_vec())
-            } else {
-                return Err(SysError::Denied(
-                    "process option `stdin` must be a string or blob".into(),
-                )
-                .into());
-            }
-        }
+        Some(v) => Some(parse_stdin(v)?),
     };
     let timeout = match options.remove("timeout") {
         None => state.config.default_timeout,
+        Some(v) if v.is_unit() => None,
         Some(v) => Some(
             v.clone()
                 .try_cast::<INT>()
@@ -255,6 +248,29 @@ fn parse_options(state: &SysState, mut options: Map, engine_limit: usize) -> Res
     })
 }
 
+#[cfg(not(feature = "no_index"))]
+fn parse_stdin(value: Dynamic) -> Res<Vec<u8>> {
+    value
+        .clone()
+        .try_cast::<Blob>()
+        .or_else(|| {
+            value
+                .try_cast::<ImmutableString>()
+                .map(|s| s.as_bytes().to_vec())
+        })
+        .ok_or_else(|| {
+            SysError::Denied("process option `stdin` must be a string or blob".into()).into()
+        })
+}
+
+#[cfg(feature = "no_index")]
+fn parse_stdin(value: Dynamic) -> Res<Vec<u8>> {
+    value
+        .try_cast::<ImmutableString>()
+        .map(|s| s.as_bytes().to_vec())
+        .ok_or_else(|| SysError::Denied("process option `stdin` must be a string".into()).into())
+}
+
 fn run_map(
     ctx: &NativeCallContext,
     state: &Shared<SysState>,
@@ -275,9 +291,15 @@ fn run_map(
     let engine_limit = {
         #[cfg(not(feature = "unchecked"))]
         {
+            #[cfg(not(feature = "no_index"))]
             if raw {
                 ctx.engine().max_array_size()
             } else {
+                ctx.engine().max_string_size()
+            }
+            #[cfg(feature = "no_index")]
+            {
+                let _ = raw;
                 ctx.engine().max_string_size()
             }
         }
@@ -376,6 +398,15 @@ fn run_map(
             .unwrap_or(Dynamic::UNIT),
     );
     map.insert("timed_out".into(), Dynamic::from(report.timed_out()));
+    map.insert(
+        "stdout_complete".into(),
+        Dynamic::from(report.stdout_complete()),
+    );
+    map.insert(
+        "stderr_complete".into(),
+        Dynamic::from(report.stderr_complete()),
+    );
+    #[cfg(not(feature = "no_index"))]
     if raw {
         map.insert(
             "stdout".into(),
@@ -386,6 +417,11 @@ fn run_map(
             Dynamic::from(report.stderr_bytes().to_vec()),
         );
     } else {
+        map.insert("stdout".into(), Dynamic::from(report.stdout()));
+        map.insert("stderr".into(), Dynamic::from(report.stderr()));
+    }
+    #[cfg(feature = "no_index")]
+    {
         map.insert("stdout".into(), Dynamic::from(report.stdout()));
         map.insert("stderr".into(), Dynamic::from(report.stderr()));
     }
@@ -410,18 +446,21 @@ enum ReadState {
     Overflow,
 }
 
+const READ_BUDGET: usize = 64 * 1024;
+
 fn read_ready<R: Read>(
     reader: &mut R,
     output: &mut Vec<u8>,
     limit: usize,
 ) -> io::Result<ReadState> {
     let mut buf = [0u8; 8192];
+    let mut consumed = 0;
     loop {
         let remaining = limit.saturating_sub(output.len());
         let count = if remaining == 0 {
             1
         } else {
-            remaining.min(buf.len())
+            remaining.min(buf.len()).min(READ_BUDGET - consumed)
         };
         match reader.read(&mut buf[..count]) {
             Ok(0) => return Ok(ReadState::Eof),
@@ -430,6 +469,10 @@ fn read_ready<R: Read>(
                 output.extend_from_slice(&buf[..keep]);
                 if n > keep {
                     return Ok(ReadState::Overflow);
+                }
+                consumed += n;
+                if consumed >= READ_BUDGET {
+                    return Ok(ReadState::Pending);
                 }
             }
             Err(e) if e.kind() == io::ErrorKind::WouldBlock => return Ok(ReadState::Pending),
@@ -661,7 +704,7 @@ fn supervise(
         // Drain readable bytes first so observed output overflow wins when it coincides with
         // deadline expiry; otherwise the deadline owns the cancellation.
         if expired {
-            return fail(
+            let (cause, report) = fail(
                 child,
                 program,
                 ProcessCause::Timeout(format!("process `{program}` exceeded deadline")),
@@ -669,7 +712,13 @@ fn supervise(
                 err,
                 out_eof,
                 err_eof,
-            );
+            )
+            .unwrap_err();
+            return if report.timed_out() {
+                Ok(report)
+            } else {
+                Err((cause, report))
+            };
         }
     }
     let status = status.unwrap();
@@ -697,7 +746,7 @@ fn fail(
     out_eof: bool,
     err_eof: bool,
 ) -> Result<ProcessReport, (ProcessCause, ProcessReport)> {
-    let timed_out = matches!(&cause, ProcessCause::Timeout(_));
+    let is_timeout = matches!(&cause, ProcessCause::Timeout(_));
     let mut diagnostics = vec![];
     if let Err(e) = child.kill() {
         if e.kind() != io::ErrorKind::InvalidInput {
@@ -724,6 +773,7 @@ fn fail(
             .map(ProcessExit::Code)
             .or_else(|| s.signal().map(ProcessExit::Signal))
     });
+    let timed_out = is_timeout && diagnostics.is_empty() && exit.is_some();
     Err((
         cause,
         ProcessReport::new(out, err, out_eof, err_eof, exit, timed_out, diagnostics),

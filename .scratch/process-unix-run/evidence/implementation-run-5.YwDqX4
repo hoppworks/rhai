@@ -1,0 +1,726 @@
+runtime_path=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70
+private_working_directory=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70
+os=macOS-27.0-arm64-arm-64bit
+python=3.9.6 (default, Aug 25 2026, 21:26:21)  [Clang 21.0.0 (clang-2100.3.34.2)]
+tool_path_python3=/usr/bin/python3
+tool_path_git=/usr/bin/git
+tool_path_tar=/usr/bin/tar
+tool_path_rustup=/Users/hoppworks/.cargo/bin/rustup
+tool_path_shasum=/usr/bin/shasum
+source_head=06865bd500138edf2fe39d33a8f5e75cb04964d7
+dirty_input_status=[' M .scratch/process-unix-run/coordinator-state.md', ' M .scratch/process-unix-run/verify-harness.py', ' M docs/sys-package-plan.md', ' M src/packages/sys/process/unix.rs', ' M tests/sys_process.rs', '?? .scratch/process-unix-run/evidence/implementation-run-5.2yXnlf', '?? .scratch/process-unix-run/evidence/implementation-run-5.9JzwMi', '?? .scratch/process-unix-run/evidence/implementation-run-5.Dlt4Po', '?? .scratch/process-unix-run/evidence/implementation-run-5.YwDqX4', '?? .scratch/process-unix-run/evidence/implementation-run-5.c81Se4', '?? .scratch/process-unix-run/evidence/implementation-run-5.e11LLA', '?? .scratch/process-unix-run/evidence/implementation-run-5.hvubVi', '?? .scratch/process-unix-run/evidence/implementation-run-5.mWPWLi', '?? .scratch/process-unix-run/evidence/implementation-run-5.mjxlki', '?? .scratch/process-unix-run/evidence/implementation-run-5.ynCbla']
+source_manifest={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/fs.rs': 'eae3b9c7828a9282ede7827166fb7a7ffaa2bedfb315a1e9702f211690291d3a', 'src/packages/sys/mod.rs': 'a0a4a34f32b08b57edc8419a49466d2e989ba43c7dc49f28fad7d80958b85419', 'src/packages/sys/process.rs': 'b19d0027fce410396b31a39b391629e7970be2b8fb90080bc80ce9a1b94a334c', 'src/packages/sys/process/unix.rs': '8b0147abd3cb8bc33755cb0bbd43707def3f1ff0226d5ba4697c8ec02108d3c2', 'tests/sys_process.rs': '3cb6551dc0e662ee669e84e0c8f3243c8348f70d4dc73fd75524b51d23739541', 'tests/sys_process_report.rs': 'b081e8de1174433bd8ef5668945bfdda7b81fdcdeb6ef1b1d92a2c04d6f5c53f', 'tests/sys_support/mod.rs': '96faddd40f6162c4893af1d510b1acd77de645c9e7d2e6454a7ab1dde81f7872'}
+harness_sha256=5db5a4c3994a90907dba87af62f473f7443fb17aeb59b767660c3428790cf76e
+runner_sha256=9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d
+wrapper_sha256=61a008df2c41f3cb850953b6429c4f5a28833aed920cce9fc547427f1cf2e1fe
+storage_sample_kib=0
+storage_sample_kib=13180
+case_argv=['tar', '-xf', '/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/baseline.tar', '-C', '/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/source']
+case_cwd=/Users/hoppworks/projects/rhai-process-unix-run
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/01-extract-baseline.log
+storage_sample_kib=13180
+storage_sample_kib=29380
+case_status=0 label=extract-baseline
+case_log_output_begin label=01-extract-baseline.log complete=true bytes=0 clipped=false
+
+case_log_output_end
+storage_sample_kib=16200
+storage_sample_kib=16200
+storage_sample_kib=16200
+storage_sample_kib=16200
+storage_sample_kib=16204
+storage_sample_kib=16212
+private_source_manifest={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/fs.rs': 'eae3b9c7828a9282ede7827166fb7a7ffaa2bedfb315a1e9702f211690291d3a', 'src/packages/sys/mod.rs': 'a0a4a34f32b08b57edc8419a49466d2e989ba43c7dc49f28fad7d80958b85419', 'src/packages/sys/process.rs': 'b19d0027fce410396b31a39b391629e7970be2b8fb90080bc80ce9a1b94a334c', 'src/packages/sys/process/unix.rs': '8b0147abd3cb8bc33755cb0bbd43707def3f1ff0226d5ba4697c8ec02108d3c2', 'tests/sys_process.rs': '3cb6551dc0e662ee669e84e0c8f3243c8348f70d4dc73fd75524b51d23739541', 'tests/sys_process_report.rs': 'b081e8de1174433bd8ef5668945bfdda7b81fdcdeb6ef1b1d92a2c04d6f5c53f', 'tests/sys_support/mod.rs': '96faddd40f6162c4893af1d510b1acd77de645c9e7d2e6454a7ab1dde81f7872'}
+private_source_cwd=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/source
+accepted_lock_sha256=8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa
+private_lock_diff_begin
+--- accepted
++++ private
+@@ -483,6 +483,7 @@
+  "getrandom 0.3.4",
+  "hashbrown",
+  "libm",
++ "libc",
+  "no-std-compat",
+  "num-traits",
+  "once_cell",
+
+private_lock_diff_end
+private_lock_sha256=fb30d25a7f00c2e0d3c8eefb7ee787c21b1043cbe391a3c5aa58209e1afe9e8e
+case_argv=['rustup', 'toolchain', 'install', '1.77.2', '--profile', 'minimal', '--no-self-update']
+case_cwd=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/source
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/02-install-rust-1.77.2.log
+storage_sample_kib=16244
+storage_sample_kib=48652
+storage_sample_kib=82280
+storage_sample_kib=105832
+storage_sample_kib=128400
+storage_sample_kib=249448
+storage_sample_kib=459436
+storage_sample_kib=482132
+storage_sample_kib=482136
+case_status=0 label=install-rust-1.77.2
+case_log_output_begin label=02-install-rust-1.77.2.log complete=true bytes=308 clipped=false
+info: syncing channel updates for 1.77.2-aarch64-apple-darwin
+info: latest update on 2024-04-09 for version 1.77.2 (25ef9e3d8 2024-04-09)
+info: downloading 3 components
+
+  1.77.2-aarch64-apple-darwin installed - rustc 1.77.2 (25ef9e3d8 2024-04-09)
+
+info: default toolchain set to 1.77.2-aarch64-apple-darwin
+
+case_log_output_end
+case_argv=['rustup', 'run', '1.77.2', 'rustc', '--version']
+case_cwd=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/source
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/03-rustc-version.log
+storage_sample_kib=482136
+storage_sample_kib=482140
+case_status=0 label=rustc-version
+case_log_output_begin label=03-rustc-version.log complete=true bytes=36 clipped=false
+rustc 1.77.2 (25ef9e3d8 2024-04-09)
+
+case_log_output_end
+case_argv=['rustup', 'run', '1.77.2', 'cargo', '--version']
+case_cwd=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/source
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/04-cargo-version.log
+storage_sample_kib=482140
+storage_sample_kib=482144
+case_status=0 label=cargo-version
+case_log_output_begin label=04-cargo-version.log complete=true bytes=36 clipped=false
+cargo 1.77.2 (e52e36006 2024-03-26)
+
+case_log_output_end
+rustc_version=rustc 1.77.2 (25ef9e3d8 2024-04-09)
+cargo_version=cargo 1.77.2 (e52e36006 2024-03-26)
+case_argv=['rustup', 'run', '1.77.2', 'cargo', 'test', '--locked', '--features', 'testing-environ,sys,metadata', '--test', 'sys_process', '--', '--nocapture']
+case_cwd=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/source
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/05-sys-process.log
+storage_sample_kib=482144
+storage_sample_kib=484448
+storage_sample_kib=485640
+storage_sample_kib=488980
+storage_sample_kib=528576
+storage_sample_kib=540300
+storage_sample_kib=549572
+storage_sample_kib=571152
+storage_sample_kib=587384
+storage_sample_kib=606200
+storage_sample_kib=615020
+storage_sample_kib=620356
+storage_sample_kib=663464
+storage_sample_kib=686368
+storage_sample_kib=710104
+storage_sample_kib=716248
+storage_sample_kib=731608
+storage_sample_kib=778604
+storage_sample_kib=785592
+storage_sample_kib=805140
+storage_sample_kib=824752
+storage_sample_kib=861280
+storage_sample_kib=1010116
+storage_sample_kib=1051584
+case_status=0 label=sys-process
+case_log_output_begin label=05-sys-process.log complete=true bytes=5778 clipped=false
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded cap-std v4.0.3
+  Downloaded crunchy v0.2.4
+  Downloaded errno v0.3.14
+  Downloaded ahash v0.8.12
+  Downloaded once_cell v1.21.4
+  Downloaded const-random v0.1.18
+  Downloaded ryu v1.0.20
+  Downloaded num-traits v0.2.19
+  Downloaded version_check v0.9.5
+  Downloaded cfg-if v1.0.5
+  Downloaded ambient-authority v0.0.2
+  Downloaded itoa v1.0.15
+  Downloaded const-random-macro v0.1.16
+  Downloaded maybe-owned v0.3.4
+  Downloaded tiny-keccak v2.0.2
+  Downloaded static_assertions v1.1.0
+  Downloaded autocfg v1.5.1
+  Downloaded paste v1.0.15
+  Downloaded rmp v0.8.14
+  Downloaded smartstring v1.0.1
+  Downloaded unicode-ident v1.0.22
+  Downloaded thin-vec v0.2.19
+  Downloaded serde_derive v1.0.229
+  Downloaded serde_core v1.0.229
+  Downloaded fs-set-times v0.20.3
+  Downloaded cap-primitives v4.0.3
+  Downloaded serde v1.0.229
+  Downloaded memchr v2.8.3
+  Downloaded bitflags v2.13.2
+  Downloaded getrandom v0.3.4
+  Downloaded serde_json v1.0.145
+  Downloaded quote v1.0.41
+  Downloaded proc-macro2 v1.0.103
+  Downloaded portable-atomic v1.15.0
+  Downloaded zerocopy v0.8.59
+  Downloaded getrandom v0.2.17
+  Downloaded smallvec v1.16.2
+  Downloaded syn v2.0.106
+  Downloaded syn v3.0.6
+  Downloaded rmp-serde v1.3.0
+  Downloaded io-lifetimes v3.0.1
+  Downloaded io-lifetimes v2.0.4
+  Downloaded io-extras v0.19.0
+  Downloaded ipnet v2.12.2
+  Downloaded byteorder v1.5.0
+  Downloaded rustix v1.1.5
+  Downloaded libc v0.2.189
+ Downloading crates ...
+  Downloaded web-time v1.1.0
+   Compiling proc-macro2 v1.0.103
+   Compiling unicode-ident v1.0.22
+   Compiling libc v0.2.189
+   Compiling quote v1.0.41
+   Compiling autocfg v1.5.1
+   Compiling crunchy v0.2.4
+   Compiling version_check v0.9.5
+   Compiling serde_core v1.0.229
+   Compiling cfg-if v1.0.5
+   Compiling rustix v1.1.5
+   Compiling io-lifetimes v2.0.4
+   Compiling io-lifetimes v3.0.1
+   Compiling tiny-keccak v2.0.2
+   Compiling syn v3.0.6
+   Compiling errno v0.3.14
+   Compiling num-traits v0.2.19
+   Compiling serde v1.0.229
+   Compiling io-extras v0.19.0
+   Compiling bitflags v2.13.2
+   Compiling portable-atomic v1.15.0
+   Compiling serde_derive v1.0.229
+   Compiling getrandom v0.2.17
+   Compiling once_cell v1.21.4
+   Compiling getrandom v0.3.4
+   Compiling zerocopy v0.8.59
+   Compiling cap-primitives v4.0.3
+   Compiling const-random-macro v0.1.16
+   Compiling fs-set-times v0.20.3
+   Compiling ahash v0.8.12
+   Compiling smartstring v1.0.1
+   Compiling maybe-owned v0.3.4
+   Compiling paste v1.0.15
+   Compiling cap-std v4.0.3
+   Compiling ambient-authority v0.0.2
+   Compiling ipnet v2.12.2
+   Compiling serde_json v1.0.145
+   Compiling const-random v0.1.18
+   Compiling syn v2.0.106
+   Compiling memchr v2.8.3
+   Compiling itoa v1.0.15
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/source)
+   Compiling ryu v1.0.20
+   Compiling static_assertions v1.1.0
+   Compiling rhai_codegen v3.2.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/source/codegen)
+   Compiling smallvec v1.16.2
+   Compiling byteorder v1.5.0
+   Compiling thin-vec v0.2.19
+   Compiling rmp v0.8.14
+   Compiling rmp-serde v1.3.0
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: value assigned to `status` is never read
+   --> src/packages/sys/process/unix.rs:522:13
+    |
+522 |     let mut status = None;
+    |             ^^^^^^
+    |
+    = help: maybe it is overwritten before being read?
+    = note: `#[warn(unused_assignments)]` on by default
+
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:517:9
+    |
+517 |     let mut pending = input.unwrap_or_default();
+    |         ----^^^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` on by default
+
+warning: unused variable: `program`
+   --> src/packages/sys/process/unix.rs:742:5
+    |
+742 |     program: &str,
+    |     ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_program`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: `rhai` (lib) generated 4 warnings (run `cargo fix --lib -p rhai` to apply 2 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized + debuginfo] target(s) in 23.09s
+     Running tests/sys_process.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/target/debug/deps/sys_process-aff8fc6efbd0b2a5)
+
+running 7 tests
+test process_fixture ... ok
+test lossy_run_reports_engine_limit_expansion_without_returning_truncated_text ... ok
+test unit_stdin_means_immediate_eof ... ok
+test process_cwd_uses_the_opened_filesystem_capability_after_root_replacement ... ok
+test run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data ... ok
+test run_deadline_returns_bounded_partial_output_after_terminating_child ... ok
+test unit_timeout_disables_configured_default_deadline ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.27s
+
+
+case_log_output_end
+case_argv=['rustup', 'run', '1.77.2', 'cargo', 'test', '--locked', '--features', 'testing-environ,sys,metadata', '--test', 'sys_process_report', '--', '--nocapture']
+case_cwd=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/source
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/06-sys-process-report.log
+storage_sample_kib=1051584
+storage_sample_kib=1073028
+case_status=0 label=sys-process-report
+case_log_output_begin label=06-sys-process-report.log complete=true bytes=2577 clipped=false
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: value assigned to `status` is never read
+   --> src/packages/sys/process/unix.rs:522:13
+    |
+522 |     let mut status = None;
+    |             ^^^^^^
+    |
+    = help: maybe it is overwritten before being read?
+    = note: `#[warn(unused_assignments)]` on by default
+
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:517:9
+    |
+517 |     let mut pending = input.unwrap_or_default();
+    |         ----^^^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` on by default
+
+warning: unused variable: `program`
+   --> src/packages/sys/process/unix.rs:742:5
+    |
+742 |     program: &str,
+    |     ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_program`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: `rhai` (lib) generated 4 warnings (run `cargo fix --lib -p rhai` to apply 2 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/source)
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized + debuginfo] target(s) in 0.52s
+     Running tests/sys_process_report.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/target/debug/deps/sys_process_report-61b31dbed38cfd1e)
+
+running 7 tests
+test prior_sys_error_variants_keep_display_and_classification ... ok
+test process_report_rust_accessors_cover_absent_code_signal_and_diagnostics ... ok
+test scope_defaults_and_builder ... ok
+test script_mutating_copied_report_blobs_and_collections_does_not_change_snapshot ... ok
+test absent_and_signal_exit_are_readable_through_engine ... ok
+test process_causes_retain_primary_classification_and_snapshot ... ok
+test old_error_variants_keep_rhai_classification_and_have_no_process_report ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+
+case_log_output_end
+case_argv=['rustup', 'run', '1.77.2', 'cargo', 'test', '--locked', '--features', 'testing-environ,sys,metadata', '--test', 'sys_process', 'run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data', '--', '--exact', '--nocapture']
+case_cwd=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/source
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/07-wrong-expectation-control.log
+storage_sample_kib=1073028
+storage_sample_kib=1073032
+case_status=101 label=wrong-expectation-control
+case_log_output_begin label=07-wrong-expectation-control.log complete=true bytes=2701 clipped=false
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: value assigned to `status` is never read
+   --> src/packages/sys/process/unix.rs:522:13
+    |
+522 |     let mut status = None;
+    |             ^^^^^^
+    |
+    = help: maybe it is overwritten before being read?
+    = note: `#[warn(unused_assignments)]` on by default
+
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:517:9
+    |
+517 |     let mut pending = input.unwrap_or_default();
+    |         ----^^^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` on by default
+
+warning: unused variable: `program`
+   --> src/packages/sys/process/unix.rs:742:5
+    |
+742 |     program: &str,
+    |     ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_program`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: `rhai` (lib) generated 4 warnings (run `cargo fix --lib -p rhai` to apply 2 suggestions)
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/source)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized + debuginfo] target(s) in 0.32s
+     Running tests/sys_process.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/target/debug/deps/sys_process-aff8fc6efbd0b2a5)
+
+running 1 test
+thread 'run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data' panicked at tests/sys_process.rs:88:9:
+assertion `left == right` failed
+  left: [10, 114, 117, 110, 110, 105, 110, 103, 32, 49, 32, 116, 101, 115, 116, 10, 0, 65, 255]
+ right: [10, 114, 117, 110, 110, 105, 110, 103, 32, 49, 32, 116, 101, 115, 116, 10, 0, 66, 255]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data ... FAILED
+
+failures:
+
+failures:
+    run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 6 filtered out; finished in 0.11s
+
+error: test failed, to rerun pass `--test sys_process`
+
+case_log_output_end
+wrong_control_output_begin
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: value assigned to `status` is never read
+   --> src/packages/sys/process/unix.rs:522:13
+    |
+522 |     let mut status = None;
+    |             ^^^^^^
+    |
+    = help: maybe it is overwritten before being read?
+    = note: `#[warn(unused_assignments)]` on by default
+
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:517:9
+    |
+517 |     let mut pending = input.unwrap_or_default();
+    |         ----^^^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` on by default
+
+warning: unused variable: `program`
+   --> src/packages/sys/process/unix.rs:742:5
+    |
+742 |     program: &str,
+    |     ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_program`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: `rhai` (lib) generated 4 warnings (run `cargo fix --lib -p rhai` to apply 2 suggestions)
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/source)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized + debuginfo] target(s) in 0.32s
+     Running tests/sys_process.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/target/debug/deps/sys_process-aff8fc6efbd0b2a5)
+
+running 1 test
+thread 'run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data' panicked at tests/sys_process.rs:88:9:
+assertion `left == right` failed
+  left: [10, 114, 117, 110, 110, 105, 110, 103, 32, 49, 32, 116, 101, 115, 116, 10, 0, 65, 255]
+ right: [10, 114, 117, 110, 110, 105, 110, 103, 32, 49, 32, 116, 101, 115, 116, 10, 0, 66, 255]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data ... FAILED
+
+failures:
+
+failures:
+    run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 6 filtered out; finished in 0.11s
+
+error: test failed, to rerun pass `--test sys_process`
+
+wrong_control_output_end
+restored_fixture_sha256=3cb6551dc0e662ee669e84e0c8f3243c8348f70d4dc73fd75524b51d23739541
+case_argv=['rustup', 'run', '1.77.2', 'cargo', 'test', '--locked', '--features', 'testing-environ,sys,metadata', '--test', 'sys_process', '--', '--nocapture']
+case_cwd=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/source
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/08-sys-process-restored.log
+storage_sample_kib=1073032
+storage_sample_kib=1073036
+case_status=0 label=sys-process-restored
+case_log_output_begin label=08-sys-process-restored.log complete=true bytes=2524 clipped=false
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: value assigned to `status` is never read
+   --> src/packages/sys/process/unix.rs:522:13
+    |
+522 |     let mut status = None;
+    |             ^^^^^^
+    |
+    = help: maybe it is overwritten before being read?
+    = note: `#[warn(unused_assignments)]` on by default
+
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:517:9
+    |
+517 |     let mut pending = input.unwrap_or_default();
+    |         ----^^^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` on by default
+
+warning: unused variable: `program`
+   --> src/packages/sys/process/unix.rs:742:5
+    |
+742 |     program: &str,
+    |     ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_program`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: `rhai` (lib) generated 4 warnings (run `cargo fix --lib -p rhai` to apply 2 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/source)
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized + debuginfo] target(s) in 0.32s
+     Running tests/sys_process.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/target/debug/deps/sys_process-aff8fc6efbd0b2a5)
+
+running 7 tests
+test process_fixture ... ok
+test unit_stdin_means_immediate_eof ... ok
+test lossy_run_reports_engine_limit_expansion_without_returning_truncated_text ... ok
+test process_cwd_uses_the_opened_filesystem_capability_after_root_replacement ... ok
+test run_deadline_returns_bounded_partial_output_after_terminating_child ... ok
+test run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data ... ok
+test unit_timeout_disables_configured_default_deadline ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.36s
+
+
+case_log_output_end
+case_argv=['rustup', 'run', '1.77.2', 'cargo', 'test', '--locked', '--features', 'testing-environ,sys,metadata,no_index', '--test', 'sys_process', 'scalar_run_with_cwd_works_without_collections', '--', '--exact', '--nocapture']
+case_cwd=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/source
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/09-no-index-scalar-os-proof.log
+storage_sample_kib=1073036
+storage_sample_kib=1076884
+storage_sample_kib=1099444
+storage_sample_kib=1106612
+storage_sample_kib=1119932
+storage_sample_kib=1150944
+storage_sample_kib=1180704
+storage_sample_kib=1197148
+storage_sample_kib=1211824
+storage_sample_kib=1341920
+storage_sample_kib=1369272
+case_status=101 label=no-index-scalar-os-proof
+case_log_output_begin label=09-no-index-scalar-os-proof.log complete=true bytes=4253 clipped=false
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/source)
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:122:9
+    |
+122 |     let mut known = vec!["cwd", "env", "env_clear", "stdin", "timeout", "max_output"];
+    |         ----^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` on by default
+
+warning: value assigned to `status` is never read
+   --> src/packages/sys/process/unix.rs:522:13
+    |
+522 |     let mut status = None;
+    |             ^^^^^^
+    |
+    = help: maybe it is overwritten before being read?
+    = note: `#[warn(unused_assignments)]` on by default
+
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:517:9
+    |
+517 |     let mut pending = input.unwrap_or_default();
+    |         ----^^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: unused variable: `program`
+   --> src/packages/sys/process/unix.rs:742:5
+    |
+742 |     program: &str,
+    |     ^^^^^^^ help: if this is intentional, prefix it with an underscore: `_program`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: function `os_to_string` is never used
+   --> src/packages/sys/fs.rs:307:4
+    |
+307 | fn os_to_string(what: &str, s: std::ffi::OsString) -> Result<String, SysError> {
+    |    ^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` on by default
+
+warning: `rhai` (lib) generated 6 warnings (run `cargo fix --lib -p rhai` to apply 3 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: unused imports: `FsAccess`, `ProcessCause`, `SysError`
+ --> tests/sys_process.rs:6:27
+  |
+6 | use rhai::packages::sys::{FsAccess, ProcessCause, ProgramPolicy, SysConfig, SysError};
+  |                           ^^^^^^^^  ^^^^^^^^^^^^                            ^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: unused import: `sys_support::TempDir`
+  --> tests/sys_process.rs:15:5
+   |
+15 | use sys_support::TempDir;
+   |     ^^^^^^^^^^^^^^^^^^^^
+
+warning: constant `FIXTURE_ENV` is never used
+  --> tests/sys_process.rs:17:7
+   |
+17 | const FIXTURE_ENV: &str = "RHAI_SYS_PROCESS_FIXTURE";
+   |       ^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: constant `FIXTURE_RECORD_ENV` is never used
+  --> tests/sys_process.rs:18:7
+   |
+18 | const FIXTURE_RECORD_ENV: &str = "RHAI_SYS_PROCESS_FIXTURE_RECORD";
+   |       ^^^^^^^^^^^^^^^^^^
+
+warning: constant `LIBTEST_QUIET_START` is never used
+  --> tests/sys_process.rs:19:7
+   |
+19 | const LIBTEST_QUIET_START: &[u8] = b"\nrunning 1 test\n";
+   |       ^^^^^^^^^^^^^^^^^^^
+
+warning: `rhai` (test "sys_process") generated 5 warnings (run `cargo fix --test "sys_process"` to apply 2 suggestions)
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized + debuginfo] target(s) in 9.74s
+     Running tests/sys_process.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_3pfp70/target/debug/deps/sys_process-d6943f33ab56085d)
+
+running 1 test
+thread 'scalar_run_with_cwd_works_without_collections' panicked at tests/sys_process.rs:332:46:
+called `Result::unwrap()` on an `Err` value: ErrorRuntime(rhai::packages::sys::error::SysError, 1:1)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test scalar_run_with_cwd_works_without_collections ... FAILED
+
+failures:
+
+failures:
+    scalar_run_with_cwd_works_without_collections
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--test sys_process`
+
+case_log_output_end
+storage_sample_kib=1369272
+sampled_storage_max_kib=1369272
+sampled_storage_readings=[0, 13180, 13180, 29380, 16200, 16200, 16200, 16200, 16204, 16212, 16244, 48652, 82280, 105832, 128400, 249448, 459436, 482132, 482136, 482136, 482140, 482140, 482144, 482144, 484448, 485640, 488980, 528576, 540300, 549572, 571152, 587384, 606200, 615020, 620356, 663464, 686368, 710104, 716248, 731608, 778604, 785592, 805140, 824752, 861280, 1010116, 1051584, 1051584, 1073028, 1073028, 1073032, 1073032, 1073036, 1073036, 1076884, 1099444, 1106612, 1119932, 1150944, 1180704, 1197148, 1211824, 1341920, 1369272, 1369272]
+Traceback (most recent call last):
+  File "/Users/hoppworks/projects/rhai-process-unix-run/.scratch/process-unix-run/verify-harness.py", line 196, in <module>
+    run_bounded(
+  File "/Users/hoppworks/projects/rhai-process-unix-run/.scratch/process-unix-run/verify-harness.py", line 79, in run_bounded
+    raise RuntimeError(f'{label} returned {status}, expected {expected}')
+RuntimeError: no-index-scalar-os-proof returned 101, expected 0
