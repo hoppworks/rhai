@@ -1,0 +1,274 @@
+=== correct acceptance ===\n    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded const-random v0.1.18
+  Downloaded autocfg v1.5.1
+  Downloaded version_check v0.9.5
+  Downloaded cfg-if v1.0.5
+  Downloaded errno v0.3.14
+  Downloaded fs-set-times v0.20.3
+  Downloaded maybe-owned v0.3.4
+  Downloaded ambient-authority v0.0.2
+  Downloaded const-random-macro v0.1.16
+  Downloaded itoa v1.0.15
+  Downloaded crunchy v0.2.4
+  Downloaded byteorder v1.5.0
+  Downloaded smartstring v1.0.1
+  Downloaded paste v1.0.15
+  Downloaded unicode-ident v1.0.22
+  Downloaded static_assertions v1.1.0
+  Downloaded serde_derive v1.0.229
+  Downloaded serde_core v1.0.229
+  Downloaded serde v1.0.229
+  Downloaded proc-macro2 v1.0.103
+  Downloaded cap-primitives v4.0.3
+  Downloaded num-traits v0.2.19
+  Downloaded ryu v1.0.20
+  Downloaded serde_json v1.0.145
+  Downloaded once_cell v1.21.4
+  Downloaded portable-atomic v1.15.0
+  Downloaded io-lifetimes v2.0.4
+  Downloaded getrandom v0.3.4
+  Downloaded getrandom v0.2.17
+  Downloaded syn v3.0.6
+  Downloaded zerocopy v0.8.59
+  Downloaded syn v2.0.106
+  Downloaded cap-std v4.0.3
+  Downloaded bitflags v2.13.2
+  Downloaded io-extras v0.19.0
+  Downloaded ahash v0.8.12
+  Downloaded rustix v1.1.5
+  Downloaded tiny-keccak v2.0.2
+  Downloaded thin-vec v0.2.19
+  Downloaded smallvec v1.16.2
+  Downloaded rmp-serde v1.3.0
+  Downloaded rmp v0.8.14
+  Downloaded quote v1.0.41
+  Downloaded ipnet v2.12.2
+  Downloaded io-lifetimes v3.0.1
+  Downloaded memchr v2.8.3
+  Downloaded libc v0.2.189
+ Downloading crates ...
+  Downloaded web-time v1.1.0
+   Compiling proc-macro2 v1.0.103
+   Compiling quote v1.0.41
+   Compiling unicode-ident v1.0.22
+   Compiling libc v0.2.189
+   Compiling autocfg v1.5.1
+   Compiling serde_core v1.0.229
+   Compiling crunchy v0.2.4
+   Compiling version_check v0.9.5
+   Compiling tiny-keccak v2.0.2
+   Compiling io-lifetimes v2.0.4
+   Compiling cfg-if v1.0.5
+   Compiling rustix v1.1.5
+   Compiling io-lifetimes v3.0.1
+   Compiling errno v0.3.14
+   Compiling num-traits v0.2.19
+   Compiling syn v3.0.6
+   Compiling bitflags v2.13.2
+   Compiling portable-atomic v1.15.0
+   Compiling io-extras v0.19.0
+   Compiling serde v1.0.229
+   Compiling serde_derive v1.0.229
+   Compiling getrandom v0.2.17
+   Compiling once_cell v1.21.4
+   Compiling zerocopy v0.8.59
+   Compiling getrandom v0.3.4
+   Compiling cap-primitives v4.0.3
+   Compiling const-random-macro v0.1.16
+   Compiling fs-set-times v0.20.3
+   Compiling ahash v0.8.12
+   Compiling smartstring v1.0.1
+   Compiling ambient-authority v0.0.2
+   Compiling ipnet v2.12.2
+   Compiling paste v1.0.15
+   Compiling cap-std v4.0.3
+   Compiling serde_json v1.0.145
+   Compiling maybe-owned v0.3.4
+   Compiling const-random v0.1.18
+   Compiling syn v2.0.106
+   Compiling static_assertions v1.1.0
+   Compiling itoa v1.0.15
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-6ri77dr5/src)
+   Compiling memchr v2.8.3
+   Compiling ryu v1.0.20
+   Compiling rhai_codegen v3.2.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-6ri77dr5/src/codegen)
+   Compiling smallvec v1.16.2
+   Compiling byteorder v1.5.0
+   Compiling thin-vec v0.2.19
+   Compiling rmp v0.8.14
+   Compiling rmp-serde v1.3.0
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized + debuginfo] target(s) in 41.10s
+     Running tests/sys_process_report.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-6ri77dr5/target/debug/deps/sys_process_report-782e095d0962b1e7)
+
+running 7 tests
+test scope_defaults_and_builder ... ok
+test process_report_rust_accessors_cover_absent_code_signal_and_diagnostics ... ok
+test prior_sys_error_variants_keep_display_and_classification ... ok
+test script_mutating_copied_report_blobs_and_collections_does_not_change_snapshot ... ok
+test absent_and_signal_exit_are_readable_through_engine ... ok
+test process_causes_retain_primary_classification_and_snapshot ... ok
+test old_error_variants_keep_rhai_classification_and_have_no_process_report ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+\n=== false-green wrong expected message ===\nwarning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (lib) generated 1 warning
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-6ri77dr5/src)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized + debuginfo] target(s) in 0.41s
+     Running tests/sys_process_report.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-6ri77dr5/target/debug/deps/sys_process_report-782e095d0962b1e7)
+
+running 7 tests
+test scope_defaults_and_builder ... ok
+test process_report_rust_accessors_cover_absent_code_signal_and_diagnostics ... ok
+test prior_sys_error_variants_keep_display_and_classification ... ok
+test absent_and_signal_exit_are_readable_through_engine ... ok
+test script_mutating_copied_report_blobs_and_collections_does_not_change_snapshot ... ok
+test process_causes_retain_primary_classification_and_snapshot ... FAILED
+test old_error_variants_keep_rhai_classification_and_have_no_process_report ... ok
+
+failures:
+
+---- process_causes_retain_primary_classification_and_snapshot stdout ----
+thread 'process_causes_retain_primary_classification_and_snapshot' panicked at tests/sys_process_report.rs:49:9:
+assertion `left == right` failed
+  left: "Timeout: expired"
+ right: "Timeout: wrong expectation"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    process_causes_retain_primary_classification_and_snapshot
+
+test result: FAILED. 6 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+error: test failed, to rerun pass `--test sys_process_report`
+\n=== restored assertion ===\nwarning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (lib) generated 1 warning
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-6ri77dr5/src)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized + debuginfo] target(s) in 0.35s
+     Running tests/sys_process_report.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-6ri77dr5/target/debug/deps/sys_process_report-782e095d0962b1e7)
+
+running 7 tests
+test scope_defaults_and_builder ... ok
+test prior_sys_error_variants_keep_display_and_classification ... ok
+test process_report_rust_accessors_cover_absent_code_signal_and_diagnostics ... ok
+test script_mutating_copied_report_blobs_and_collections_does_not_change_snapshot ... ok
+test absent_and_signal_exit_are_readable_through_engine ... ok
+test process_causes_retain_primary_classification_and_snapshot ... ok
+test old_error_variants_keep_rhai_classification_and_have_no_process_report ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+\n=== sync no_index ===\n Downloading crates ...
+  Downloaded spin v0.7.2
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-6ri77dr5/src)
+   Compiling serde v1.0.229
+   Compiling rhai_codegen v3.2.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-6ri77dr5/src/codegen)
+   Compiling smallvec v1.16.2
+   Compiling rmp-serde v1.3.0
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: function `os_to_string` is never used
+   --> src/packages/sys/fs.rs:287:4
+    |
+287 | fn os_to_string(what: &str, s: std::ffi::OsString) -> Result<String, SysError> {
+    |    ^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` on by default
+
+warning: `rhai` (lib) generated 2 warnings
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized + debuginfo] target(s) in 10.33s
+     Running tests/sys_process_report.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-6ri77dr5/target/debug/deps/sys_process_report-def2f2b9f21ca901)
+
+running 7 tests
+test process_report_rust_accessors_cover_absent_code_signal_and_diagnostics ... ok
+test scope_defaults_and_builder ... ok
+test prior_sys_error_variants_keep_display_and_classification ... ok
+test no_index_keeps_scalar_and_indexed_diagnostic_access ... ok
+test absent_and_signal_exit_are_readable_through_engine ... ok
+test process_causes_retain_primary_classification_and_snapshot ... ok
+test old_error_variants_keep_rhai_classification_and_have_no_process_report ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+\n

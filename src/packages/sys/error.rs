@@ -1,5 +1,6 @@
 //! Error type for the `sys` package.
 
+use super::process::{ProcessCause, ProcessReport};
 use crate::plugin::*;
 use crate::{Dynamic, EvalAltResult, Module, Position};
 use std::error::Error;
@@ -48,6 +49,13 @@ pub enum SysError {
     OutputLimit(String),
     /// A path, file name or environment value is not valid UTF-8.
     NotUtf8(String),
+    /// A process operation failed; the report preserves the observed partial result.
+    Process {
+        /// Primary process failure.
+        cause: ProcessCause,
+        /// Captured process output and cleanup snapshot.
+        report: ProcessReport,
+    },
 }
 
 impl SysError {
@@ -60,6 +68,7 @@ impl SysError {
             Self::Timeout(..) => "Timeout",
             Self::OutputLimit(..) => "OutputLimit",
             Self::NotUtf8(..) => "NotUtf8",
+            Self::Process { cause, .. } => cause.kind(),
         }
     }
 
@@ -118,6 +127,10 @@ mod sys_error_functions {
     pub fn io_kind(err: &mut SysError) -> Dynamic {
         match err {
             SysError::Io { kind, .. } => format!("{kind:?}").into(),
+            SysError::Process { cause, .. } => cause
+                .io_kind()
+                .map(|kind| format!("{kind:?}").into())
+                .unwrap_or(Dynamic::UNIT),
             _ => Dynamic::UNIT,
         }
     }
@@ -126,6 +139,7 @@ mod sys_error_functions {
     pub fn op(err: &mut SysError) -> Dynamic {
         match err {
             SysError::Io { op, .. } => (*op).into(),
+            SysError::Process { cause, .. } => cause.op().map(Into::into).unwrap_or(Dynamic::UNIT),
             _ => Dynamic::UNIT,
         }
     }
@@ -134,6 +148,10 @@ mod sys_error_functions {
     pub fn target(err: &mut SysError) -> Dynamic {
         match err {
             SysError::Io { target, .. } => target.clone().into(),
+            SysError::Process { cause, .. } => cause
+                .target()
+                .map(|s| s.to_owned().into())
+                .unwrap_or(Dynamic::UNIT),
             _ => Dynamic::UNIT,
         }
     }
@@ -146,6 +164,14 @@ mod sys_error_functions {
     #[rhai_fn(name = "to_debug", pure)]
     pub fn to_debug(err: &mut SysError) -> ImmutableString {
         format!("{err:?}").into()
+    }
+    /// Process snapshot for process errors; `()` for other errors.
+    #[rhai_fn(get = "process", pure)]
+    pub fn process(err: &mut SysError) -> Dynamic {
+        match err {
+            SysError::Process { report, .. } => Dynamic::from(report.clone()),
+            _ => Dynamic::UNIT,
+        }
     }
 }
 
@@ -162,6 +188,7 @@ impl fmt::Display for SysError {
             Self::Timeout(msg) => write!(f, "Timeout: {msg}"),
             Self::OutputLimit(msg) => write!(f, "OutputLimit: {msg}"),
             Self::NotUtf8(msg) => write!(f, "NotUtf8: {msg}"),
+            Self::Process { cause, .. } => cause.display(f),
         }
     }
 }
