@@ -151,10 +151,11 @@ internal static class MonitorTransport
         long started=(long)GetTickCount64();
         string token=MonitorSpecificationIntake.CreateMonitorToken();
         var incoming=new LeaseMonitor.BoundedFrameQueue(32,8192); var outgoing=new LeaseMonitor.BoundedFrameQueue(32,8192);
+        var protocol=new LeaseMonitor.Protocol(policy);
         var dispatcher=new MonitorSpecificationIntake.Dispatcher(
-            new LeaseMonitor.Protocol(policy), outgoing, ()=> (long)GetTickCount64(), token,
+            protocol, outgoing, ()=> (long)GetTickCount64(), token,
             started, started+policy.SetupDeadline, policy.ChallengePeriod);
-        staging=MonitorStagingHandoff.CreateProduction();
+        staging=MonitorStagingHandoff.CreateProduction(protocol,()=> (long)GetTickCount64());
         if(!dispatcher.Start()) return 78;
         int eof=0, writeFailed=0;
         IntPtr inputOwner=input;
@@ -196,7 +197,8 @@ internal static class MonitorTransport
         }
         dispatcher.Stop();
         staging.Stop(); // signal only; a worker blocked in I/O keeps ownership
-        // Payload invocation, job creation/resume, and runtime removal remain closed.
+        // The accepted owner worker owns create/resume and exact-job cleanup.
+        // Runtime removal remains closed until exact-job closure is proven.
         return Volatile.Read(ref writeFailed)!=0 ? 79 : 78;
         }
         finally

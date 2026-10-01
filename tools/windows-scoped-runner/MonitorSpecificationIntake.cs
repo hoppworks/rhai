@@ -1,5 +1,5 @@
 // Production monitor dispatcher for canonical control frames and bounded
-// immutable launch-specification transfer. It performs no workload creation.
+// immutable launch-specification transfer, including requested fresh phases.
 using System;
 using System.Globalization;
 using System.Security.Cryptography;
@@ -62,7 +62,7 @@ internal static class MonitorSpecificationIntake
             Protocol.Start(started);
             long admissionNow = monotonicNow();
             if (!CheckLive(admissionNow)) return false;
-            byte[] ready = Ascii("MONITOR_READY protocol-only token=" + token + "\n");
+            byte[] ready = Ascii("MONITOR_READY token=" + token + "\n");
             return Outgoing.TryWrite(ready) || FailAt(admissionNow);
         }
 
@@ -77,7 +77,7 @@ internal static class MonitorSpecificationIntake
             if (Stopped) return false;
             long now = monotonicNow();
             if (!CheckLive(now)) return false;
-            if (now - lastChallenge < challengeInterval) return true;
+            if (now - lastChallenge < challengeInterval && !Protocol.HasRequestedTransitionChallenge) return true;
             lastChallenge = now;
             LeaseMonitor.Challenge challenge = Protocol.IssueChallenge(now);
             if (challenge == null)
@@ -119,10 +119,10 @@ internal static class MonitorSpecificationIntake
                     sequence.ToString(CultureInfo.InvariantCulture) != fields[1])
                     return FailAt(now);
 
-                // Stale/replayed/prebuffered responses are ignored by the
-                // protocol; accepted setup responses renew only the short
-                // lease and cannot pre-authorize later process creation.
-                Protocol.AcceptMaintenanceResponse(sequence, fields[2], now);
+                // The protocol grants transition authority only when this
+                // response matches an outstanding explicitly requested,
+                // phase-bound challenge. Other valid responses renew lease.
+                Protocol.AcceptResponse(sequence, fields[2], now);
                 return CheckLive(monotonicNow());
             }
             catch (SpecificationTransfer.TransferException)
@@ -148,7 +148,8 @@ internal static class MonitorSpecificationIntake
         private bool CheckLive(long now)
         {
             if (Stopped) return false;
-            if (Protocol.Tick(now) == LeaseMonitor.State.Stopping || now >= setupDeadline)
+            if (Protocol.Tick(now) == LeaseMonitor.State.Stopping ||
+                (Protocol.State != LeaseMonitor.State.Running && now >= setupDeadline))
                 return FailAt(now);
             return true;
         }

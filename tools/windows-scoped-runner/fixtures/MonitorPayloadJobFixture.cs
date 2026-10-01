@@ -20,17 +20,23 @@ internal static class MonitorPayloadJobFixture
         Expect("resume callback is gated without a suspended-phase response",
             !protocol.TryResumeAtomically(delegate { return 3; }, delegate { resumed++; return true; }) && resumed == 0);
 
-        LeaseMonitor.Challenge create = protocol.IssueChallenge(0);
-        Expect("create transition can be authorized once", create != null && protocol.AcceptResponse(create.Sequence, create.Nonce, 1) && protocol.AuthorizeCreate(1) && protocol.MarkSuspended(2));
+        LeaseMonitor.Challenge maintenanceCreate = protocol.IssueChallenge(0);
+        Expect("ordinary ready response cannot authorize create", maintenanceCreate != null && protocol.AcceptResponse(maintenanceCreate.Sequence, maintenanceCreate.Nonce, 1) && !protocol.AuthorizeCreate(1));
+        Expect("create transition can be authorized once", protocol.RequestFreshTransitionChallenge(LeaseMonitor.State.Ready,1));
+        LeaseMonitor.Challenge create = protocol.IssueChallenge(1);
+        Expect("fresh create response advances to suspended", create != null && protocol.AcceptResponse(create.Sequence, create.Nonce, 1) && protocol.AuthorizeCreate(1) && protocol.MarkSuspended(2));
         Expect("create-phase response cannot authorize resume", !protocol.TryResumeAtomically(delegate { return 3; }, delegate { resumed++; return true; }) && resumed == 0);
 
+        Expect("resume requires a newly requested suspended phase challenge", protocol.RequestFreshTransitionChallenge(LeaseMonitor.State.Suspended,2));
         LeaseMonitor.Challenge resume = protocol.IssueChallenge(2);
         Expect("fresh suspended-phase response gates atomic resume", resume != null && protocol.AcceptResponse(resume.Sequence, resume.Nonce, 3) &&
             protocol.TryResumeAtomically(delegate { return 3; }, delegate { resumed++; return true; }) && resumed == 1 && protocol.State == LeaseMonitor.State.Running);
 
         protocol = New();
+        protocol.RequestFreshTransitionChallenge(LeaseMonitor.State.Ready,0);
         create = protocol.IssueChallenge(0);
         protocol.AcceptResponse(create.Sequence, create.Nonce, 1); protocol.AuthorizeCreate(1); protocol.MarkSuspended(2);
+        protocol.RequestFreshTransitionChallenge(LeaseMonitor.State.Suspended,2);
         resume = protocol.IssueChallenge(2); protocol.AcceptResponse(resume.Sequence, resume.Nonce, 3);
         resumed = 0;
         Expect("exact lease deadline blocks callback and stops protocol", !protocol.TryResumeAtomically(delegate { return 8; }, delegate { resumed++; return true; }) && resumed == 0 && protocol.State == LeaseMonitor.State.Stopping);
@@ -112,8 +118,10 @@ internal static class MonitorPayloadJobFixture
     private static LeaseMonitor.Protocol PrepareResume(out LeaseMonitor.Challenge resume)
     {
         LeaseMonitor.Protocol result = New();
+        result.RequestFreshTransitionChallenge(LeaseMonitor.State.Ready,0);
         LeaseMonitor.Challenge create = result.IssueChallenge(0);
         result.AcceptResponse(create.Sequence, create.Nonce, 1); result.AuthorizeCreate(1); result.MarkSuspended(2);
+        result.RequestFreshTransitionChallenge(LeaseMonitor.State.Suspended,2);
         resume = result.IssueChallenge(2); result.AcceptResponse(resume.Sequence, resume.Nonce, 3);
         return result;
     }

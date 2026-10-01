@@ -20,6 +20,9 @@ internal static class MonitorSpecificationIntakeFixture
         QueueAndTerminalFixtures();
         StoppedStabilityFixtures();
         MaintenanceHandshakeFixtures();
+        TransitionChallengeDispatcherFixtures();
+        OwnerWorkerDispatcherLifecycleFixture();
+        RunningDeadlineSemanticsFixture();
         AdmissionDeadlineFixtures();
         return failures == 0 ? 0 : 1;
     }
@@ -176,18 +179,134 @@ internal static class MonitorSpecificationIntakeFixture
         var createProtocol = new LeaseMonitor.Protocol(new LeaseMonitor.Policy(2, 5, 12, 30, 5, 5));
         createProtocol.Start(0);
         LeaseMonitor.Challenge create = createProtocol.IssueChallenge(0);
-        Expect("legacy ready response can create a pending transition handshake", create != null && createProtocol.AcceptResponse(create.Sequence, create.Nonce, 1));
-        LeaseMonitor.Challenge maintenance = createProtocol.IssueChallenge(2);
-        Expect("maintenance response clears a previously accepted create handshake", maintenance != null && createProtocol.AcceptMaintenanceResponse(maintenance.Sequence, maintenance.Nonce, 2) && !createProtocol.AuthorizeCreate(2));
+        Expect("ordinary ready response cannot create transition authority", create != null && createProtocol.AcceptResponse(create.Sequence, create.Nonce, 1) && !createProtocol.AuthorizeCreate(1));
+        Expect("fresh create request is accepted after maintenance", createProtocol.RequestFreshTransitionChallenge(LeaseMonitor.State.Ready,1));
+        create=createProtocol.IssueChallenge(1);
+        Expect("fresh create response grants a pending transition handshake", create != null && createProtocol.AcceptResponse(create.Sequence, create.Nonce, 2));
+        LeaseMonitor.Challenge maintenance = createProtocol.IssueChallenge(3);
+        Expect("dispatcher cannot issue maintenance while create authority awaits owner consumption", maintenance == null && createProtocol.AuthorizeCreate(3));
 
         var resumeProtocol = new LeaseMonitor.Protocol(new LeaseMonitor.Policy(2, 5, 12, 30, 5, 5));
         resumeProtocol.Start(0);
+        resumeProtocol.RequestFreshTransitionChallenge(LeaseMonitor.State.Ready,0);
         LeaseMonitor.Challenge createForResume = resumeProtocol.IssueChallenge(0);
         bool created = createForResume != null && resumeProtocol.AcceptResponse(createForResume.Sequence, createForResume.Nonce, 1) && resumeProtocol.AuthorizeCreate(1) && resumeProtocol.MarkSuspended(1);
+        if(created) resumeProtocol.RequestFreshTransitionChallenge(LeaseMonitor.State.Suspended,2);
         LeaseMonitor.Challenge resume = created ? resumeProtocol.IssueChallenge(2) : null;
         bool resumePending = resume != null && resumeProtocol.AcceptResponse(resume.Sequence, resume.Nonce, 2);
         LeaseMonitor.Challenge maintenanceResume = resumePending ? resumeProtocol.IssueChallenge(4) : null;
-        Expect("maintenance response clears a previously accepted resume handshake", maintenanceResume != null && resumeProtocol.AcceptMaintenanceResponse(maintenanceResume.Sequence, maintenanceResume.Nonce, 4) && !resumeProtocol.AuthorizeResume(4));
+        Expect("dispatcher cannot issue maintenance while resume authority awaits owner consumption", maintenanceResume == null && resumeProtocol.AuthorizeResume(5));
+    }
+
+    private static void TransitionChallengeDispatcherFixtures()
+    {
+        var clock=new FakeClock(0);
+        var dispatcher=NewDispatcher(clock,0,120,new LeaseMonitor.Policy(2,30,120,300,5,5));
+        Expect("transition dispatcher starts",dispatcher.Start()); Drain(dispatcher.Outgoing);
+        Expect("dispatcher emits original setup challenge",dispatcher.TryIssueChallenge());
+        long staleSequence; string staleNonce;
+        Expect("original maintenance challenge is canonical",TryChallenge(Drain(dispatcher.Outgoing),out staleSequence,out staleNonce));
+        clock.Now=1;
+        Expect("owner requests a fresh post-stage create challenge",dispatcher.Protocol.RequestFreshTransitionChallenge(LeaseMonitor.State.Ready,clock.Now));
+        Expect("fresh phase request bypasses ordinary challenge pacing",dispatcher.TryIssueChallenge());
+        long createSequence; string createNonce;
+        Expect("post-stage create challenge is canonical",TryChallenge(Drain(dispatcher.Outgoing),out createSequence,out createNonce));
+        Expect("response to pre-stage maintenance challenge is ignored",dispatcher.Dispatch(Response(staleSequence,staleNonce)) && !dispatcher.Protocol.CanAuthorizeCreate(1));
+        clock.Now=2;
+        Expect("fresh post-stage response grants create authority",dispatcher.Dispatch(Response(createSequence,createNonce)) && dispatcher.Protocol.CanAuthorizeCreate(2));
+        Expect("owner creates suspended payload phase",dispatcher.Protocol.AuthorizeCreate(2) && dispatcher.Protocol.MarkSuspended(2));
+        clock.Now=3;
+        Expect("owner requests fresh suspended resume challenge",dispatcher.Protocol.RequestFreshTransitionChallenge(LeaseMonitor.State.Suspended,clock.Now));
+        Expect("dispatcher emits fresh suspended challenge",dispatcher.TryIssueChallenge());
+        long resumeSequence; string resumeNonce;
+        Expect("suspended challenge is canonical",TryChallenge(Drain(dispatcher.Outgoing),out resumeSequence,out resumeNonce));
+        clock.Now=4;
+        Expect("fresh suspended response grants resume authority",dispatcher.Dispatch(Response(resumeSequence,resumeNonce)) && dispatcher.Protocol.CanAuthorizeResume(4));
+    }
+
+    private static void RunningDeadlineSemanticsFixture()
+    {
+        var clock=new FakeClock(0);
+        var policy=new LeaseMonitor.Policy(2,20,5,30,5,5);
+        var dispatcher=NewDispatcher(clock,0,5,policy);
+        Expect("running deadline fixture starts",dispatcher.Start()); Drain(dispatcher.Outgoing);
+        dispatcher.Protocol.RequestFreshTransitionChallenge(LeaseMonitor.State.Ready,0);
+        Expect("running fixture emits create challenge",dispatcher.TryIssueChallenge());
+        long createSequence; string createNonce;
+        Expect("running fixture create challenge is canonical",TryChallenge(Drain(dispatcher.Outgoing),out createSequence,out createNonce));
+        clock.Now=1;
+        Expect("running fixture accepts create response",dispatcher.Dispatch(Response(createSequence,createNonce)) && dispatcher.Protocol.AuthorizeCreate(1) && dispatcher.Protocol.MarkSuspended(2));
+        clock.Now=2;
+        Expect("running fixture requests fresh resume",dispatcher.Protocol.RequestFreshTransitionChallenge(LeaseMonitor.State.Suspended,clock.Now) && dispatcher.TryIssueChallenge());
+        long resumeSequence; string resumeNonce;
+        Expect("running fixture resume challenge is canonical",TryChallenge(Drain(dispatcher.Outgoing),out resumeSequence,out resumeNonce));
+        clock.Now=3;
+        Expect("running fixture accepts resume response",dispatcher.Dispatch(Response(resumeSequence,resumeNonce)) && dispatcher.Protocol.AuthorizeResume(3));
+        dispatcher.Protocol.MarkRunning(3);
+        clock.Now=6;
+        Expect("dispatcher enforces setup deadline only until Running",dispatcher.Poll() && !dispatcher.Stopped && dispatcher.Protocol.State==LeaseMonitor.State.Running);
+    }
+
+    private static void OwnerWorkerDispatcherLifecycleFixture()
+    {
+        var clock=new FakeClock(0);
+        var policy=new LeaseMonitor.Policy(2,30,120,300,5,5);
+        var dispatcher=NewDispatcher(clock,0,120,policy);
+        Expect("owner-worker lifecycle dispatcher starts",dispatcher.Start()); Drain(dispatcher.Outgoing);
+        var owner=new FixtureOwner();
+        int lifecycleThread=0;
+        var lifecycleFinished=new System.Threading.ManualResetEvent(false);
+        var handoff=MonitorStagingHandoff.CreateForFixture(
+            (spec,token)=>new MonitorStagingHandoff.Result(owner,true,null),
+            (result,spec,token)=>
+            {
+                lifecycleThread=System.Threading.Thread.CurrentThread.ManagedThreadId;
+                Expect("worker retains exact accepted allocation while waiting for create authority",Object.ReferenceEquals(result.Owner,owner));
+                MonitorStagingHandoff.RequestAndWaitForAuthority(dispatcher.Protocol,token,clock.Read,LeaseMonitor.State.Ready);
+                if(!dispatcher.Protocol.AuthorizeCreate(clock.Read()) || !dispatcher.Protocol.MarkSuspended(clock.Read()))
+                    throw new InvalidOperationException("fixture could not traverse suspended create phase");
+                MonitorStagingHandoff.RequestAndWaitForAuthority(dispatcher.Protocol,token,clock.Read,LeaseMonitor.State.Suspended);
+                if(!dispatcher.Protocol.TryResumeAtomically(clock.Read,()=>true))
+                    throw new InvalidOperationException("fixture resume gate was rejected");
+                lifecycleFinished.Set();
+            });
+        Expect("owner-worker lifecycle starts",handoff.Start(LaunchSpecification.Create(Source,Executable,new string[0])));
+        handoff.WaitForPublishedForFixture();
+        Expect("owner-worker staging acceptance succeeds",handoff.TryAcceptForFixture(true));
+        Expect("worker requests post-staging create challenge",PumpOwnerTransition(dispatcher,clock,LeaseMonitor.State.Ready));
+        Expect("worker requests suspended resume challenge",PumpOwnerTransition(dispatcher,clock,LeaseMonitor.State.Suspended));
+        Expect("same accepted worker completes both dispatcher authority gates",lifecycleFinished.WaitOne(5000));
+        handoff.WaitForFixtureWorker();
+        Expect("staged allocation is released by lifecycle owner worker after resume gate",lifecycleThread!=0 && owner.DisposeThread==lifecycleThread && owner.DisposeCount==1 && dispatcher.Protocol.State==LeaseMonitor.State.Running);
+        lifecycleFinished.Dispose();
+    }
+
+    private static bool PumpOwnerTransition(MonitorSpecificationIntake.Dispatcher dispatcher, FakeClock clock, LeaseMonitor.State phase)
+    {
+        DateTime deadline=DateTime.UtcNow.AddSeconds(5);
+        while(DateTime.UtcNow<deadline && !dispatcher.Protocol.HasRequestedTransitionChallenge) System.Threading.Thread.Sleep(1);
+        if(!dispatcher.Protocol.HasRequestedTransitionChallenge || !dispatcher.TryIssueChallenge()) return false;
+        long sequence; string nonce;
+        if(!TryChallenge(Drain(dispatcher.Outgoing),out sequence,out nonce)) return false;
+        clock.Now++;
+        if(!dispatcher.Dispatch(Response(sequence,nonce))) return false;
+        // The owner consumes the response before it can request the next
+        // phase. This fixture exercises the same production wait helper.
+        if(phase==LeaseMonitor.State.Ready)
+        {
+            deadline=DateTime.UtcNow.AddSeconds(5);
+            while(DateTime.UtcNow<deadline && dispatcher.Protocol.State!=LeaseMonitor.State.Suspended && dispatcher.Protocol.State!=LeaseMonitor.State.Stopping) System.Threading.Thread.Sleep(1);
+            return dispatcher.Protocol.State==LeaseMonitor.State.Suspended;
+        }
+        deadline=DateTime.UtcNow.AddSeconds(5);
+        while(DateTime.UtcNow<deadline && dispatcher.Protocol.State!=LeaseMonitor.State.Running && dispatcher.Protocol.State!=LeaseMonitor.State.Stopping) System.Threading.Thread.Sleep(1);
+        return dispatcher.Protocol.State==LeaseMonitor.State.Running;
+    }
+
+    private sealed class FixtureOwner : IDisposable
+    {
+        internal int DisposeCount,DisposeThread;
+        public void Dispose() { DisposeThread=System.Threading.Thread.CurrentThread.ManagedThreadId; System.Threading.Interlocked.Increment(ref DisposeCount); }
     }
 
     private static void StoppedStabilityFixtures()
@@ -271,7 +390,7 @@ internal static class MonitorSpecificationIntakeFixture
     }
     private static bool IsReady(byte[] frame, string token)
     {
-        return frame != null && String.Equals(Encoding.ASCII.GetString(frame), "MONITOR_READY protocol-only token=" + token + "\n", StringComparison.Ordinal);
+        return frame != null && String.Equals(Encoding.ASCII.GetString(frame), "MONITOR_READY token=" + token + "\n", StringComparison.Ordinal);
     }
     private static bool TryChallenge(byte[] frame, out long sequence, out string nonce)
     {
@@ -289,7 +408,13 @@ internal static class MonitorSpecificationIntakeFixture
         return true;
     }
     private static void Expect(string name, bool actual) { if (!actual) { failures++; Console.Error.WriteLine("FAIL " + name); } else Console.WriteLine("PASS " + name); }
-    private sealed class FakeClock { internal long Now; internal FakeClock(long value) { Now = value; } internal long Read() { return Now; } }
+    private sealed class FakeClock
+    {
+        private long now;
+        internal long Now { get { return System.Threading.Interlocked.Read(ref now); } set { System.Threading.Interlocked.Exchange(ref now,value); } }
+        internal FakeClock(long value) { Now = value; }
+        internal long Read() { return Now; }
+    }
     private sealed class ArmedClock
     {
         private readonly long steady; private long[] values = new long[0]; private int position;

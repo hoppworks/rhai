@@ -10,6 +10,7 @@ internal static class MonitorStagingHandoffFixture
         {
             StartOnce(); StopBeforeStart(); WorkerFailure(); StopDuringWork();
             LateCompletion(); SingleHandoff(); RejectedHandoff(); DeadlineCrossing(); WatchdogDoesNotWaitForWorker();
+            AcceptancePendingHidesLifecycleUntilFinalCheck(); AcceptedLifecycleRemainsWorkerOwned();
         }
         finally
         {
@@ -102,12 +103,65 @@ internal static class MonitorStagingHandoffFixture
         backend.Release(); handoff.WaitForFixtureWorker();
     }
 
+    private static void AcceptedLifecycleRemainsWorkerOwned()
+    {
+        var backend=new FakeBackend();
+        int lifecycleThread=0;
+        var lifecycleEntered=new ManualResetEvent(false);
+        var handoff=MonitorStagingHandoff.CreateForFixture(backend.Run,(result,spec,token)=>
+        {
+            Expect("accepted callback receives exact staged owner and immutable specification",
+                Object.ReferenceEquals(result.Owner,backend.Owner) && spec!=null && spec.RelativeExecutable=="bin\\app.exe");
+            lifecycleThread=Thread.CurrentThread.ManagedThreadId;
+            lifecycleEntered.Set();
+            token.WaitHandle.WaitOne(5000);
+        });
+        handoff.Start(LaunchSpecification.Create(@"C:\src",@"bin\app.exe",new string[0]));
+        backend.Release(); handoff.WaitForPublishedForFixture();
+        Expect("accepted lifecycle is dispatched once",handoff.TryAcceptForFixture(true));
+        Expect("owner worker enters accepted lifecycle",lifecycleEntered.WaitOne(5000));
+        handoff.Stop(); handoff.WaitForFixtureWorker();
+        Expect("accepted lifecycle and staged-owner disposal retain one worker identity",
+            lifecycleThread!=0 && lifecycleThread==backend.Owner.DisposeThreadId && backend.Owner.DisposeCount==1);
+        lifecycleEntered.Dispose();
+    }
+
+    private static void AcceptancePendingHidesLifecycleUntilFinalCheck()
+    {
+        var backend=new FakeBackend();
+        var secondCheckEntered=new ManualResetEvent(false);
+        var releaseSecondCheck=new ManualResetEvent(false);
+        var lifecycleEntered=new ManualResetEvent(false);
+        var handoff=MonitorStagingHandoff.CreateForFixture(backend.Run,(result,spec,token)=>lifecycleEntered.Set());
+        handoff.Start(LaunchSpecification.Create(@"C:\src","bin\\app.exe",new string[0]));
+        backend.Release(); handoff.WaitForPublishedForFixture();
+        int liveChecks=0;
+        bool accepted=false;
+        var watchdog=new Thread(() => accepted=handoff.TryAccept(() =>
+        {
+            if(Interlocked.Increment(ref liveChecks)==2)
+            {
+                secondCheckEntered.Set();
+                releaseSecondCheck.WaitOne(5000);
+            }
+            return true;
+        })); watchdog.IsBackground=true; watchdog.Start();
+        Expect("post-CAS live check is held in acceptance-pending",secondCheckEntered.WaitOne(5000));
+        Expect("owner worker acknowledges pending state without exposing lifecycle",handoff.WaitForAcceptanceObservationForFixture()=="AcceptancePending" && !lifecycleEntered.WaitOne(0));
+        handoff.Stop();
+        releaseSecondCheck.Set();
+        Expect("stop wins before lifecycle becomes visible",watchdog.Join(5000) && !accepted);
+        handoff.WaitForFixtureWorker();
+        Expect("pending acceptance disposes staged owner without create continuation",!lifecycleEntered.WaitOne(0) && backend.Owner.DisposeCount==1);
+        secondCheckEntered.Dispose(); releaseSecondCheck.Dispose(); lifecycleEntered.Dispose();
+    }
+
     private static void Expect(string message, bool condition) { if (!condition) throw new InvalidOperationException(message); }
 
     private sealed class FakeOwner : IDisposable
     {
-        internal int DisposeCount;
-        public void Dispose() { Interlocked.Increment(ref DisposeCount); }
+        internal int DisposeCount, DisposeThreadId;
+        public void Dispose() { DisposeThreadId=Thread.CurrentThread.ManagedThreadId; Interlocked.Increment(ref DisposeCount); }
     }
     private sealed class FakeBackend
     {

@@ -1,6 +1,5 @@
-// Independent monitor/client lease protocol source. This protocol-only source
-// deliberately stops before workload allocation until safe backend custody is
-// implemented. Do not treat protocol fixtures as native process proof.
+// Monitor/client lease protocol and phase-bound transition authority. Its
+// source integration does not constitute native process or custody proof.
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
@@ -41,7 +40,7 @@ internal static class LeaseMonitor
         }
     }
 
-    internal sealed class Challenge { internal readonly long Sequence, Expires; internal readonly string Nonce; internal readonly State Phase; internal Challenge(long s, string n, long e, State phase) { Sequence = s; Nonce = n; Expires = e; Phase=phase; } }
+    internal sealed class Challenge { internal readonly long Sequence, Expires; internal readonly string Nonce; internal readonly State Phase; internal readonly bool TransitionRequested; internal Challenge(long s, string n, long e, State phase, bool transition) { Sequence = s; Nonce = n; Expires = e; Phase=phase; TransitionRequested=transition; } }
 
     internal sealed class Protocol
     {
@@ -50,11 +49,13 @@ internal static class LeaseMonitor
         private long started, leaseDeadline, nextChallenge, sequence;
         private Challenge outstanding;
         private bool hasStarted, createHandshake, resumeHandshake;
+        private State requestedTransition;
         private State state;
         internal State State { get { lock(sync) return state; } private set { lock(sync) state=value; } }
         internal Protocol(Policy fixedPolicy)
         {
             policy = fixedPolicy ?? throw new ArgumentNullException("fixedPolicy");
+            requestedTransition=State.Stopping;
             State = State.Ready;
         }
         internal static Policy ProductionPolicy() { return new Policy(2000, 15000, 120000, 1800000, 30000, 30000); }
@@ -67,7 +68,7 @@ internal static class LeaseMonitor
             if (now >= started + policy.AbsoluteDeadline || now >= leaseDeadline) return true;
             return State != State.Running && now >= started + policy.SetupDeadline;
         }
-        private void Stop() { lock(sync) { State = State.Stopping; outstanding = null; createHandshake=false; resumeHandshake=false; } }
+        private void Stop() { lock(sync) { State = State.Stopping; outstanding = null; createHandshake=false; resumeHandshake=false; requestedTransition=State.Stopping; } }
         internal void Start(long now) { lock(sync) { if(hasStarted) return; hasStarted=true; started = now; leaseDeadline = now + policy.LeaseDuration; nextChallenge = now; } }
         internal State Tick(long now)
         {
@@ -85,14 +86,33 @@ internal static class LeaseMonitor
             if (!hasStarted) Start(now);
             if (Tick(now) == State.Stopping ||
                 (State != State.Ready && State != State.Suspended && State != State.Running) ||
-                outstanding != null || now < nextChallenge) return null;
+                outstanding != null || createHandshake || resumeHandshake || now < nextChallenge) return null;
             sequence++;
             byte[] nonce = new byte[16]; using (var rng = RandomNumberGenerator.Create()) rng.GetBytes(nonce);
-            outstanding = new Challenge(sequence, BitConverter.ToString(nonce).Replace("-", "").ToLowerInvariant(), now + policy.LeaseDuration, State);
+            bool transition=requestedTransition==State;
+            outstanding = new Challenge(sequence, BitConverter.ToString(nonce).Replace("-", "").ToLowerInvariant(), now + policy.LeaseDuration, State, transition);
+            if(transition) requestedTransition=State.Stopping;
             nextChallenge = now + policy.ChallengePeriod;
             return outstanding;
             }
         }
+        // Called by the owner worker only after the prerequisite phase is
+        // reached. It invalidates any maintenance challenge that predates the
+        // transition and causes the dispatcher to issue a fresh phase-bound
+        // challenge on its next poll.
+        internal bool RequestFreshTransitionChallenge(State phase, long now)
+        {
+            lock(sync)
+            {
+                if(Tick(now)==State.Stopping || phase!=State.Ready && phase!=State.Suspended || State!=phase) return false;
+                outstanding=null; createHandshake=false; resumeHandshake=false;
+                requestedTransition=phase; nextChallenge=now;
+                return true;
+            }
+        }
+        internal bool HasRequestedTransitionChallenge { get { lock(sync) return requestedTransition==State.Ready || requestedTransition==State.Suspended; } }
+        internal bool CanAuthorizeCreate(long now) { lock(sync) return Tick(now)!=State.Stopping && State==State.Ready && outstanding==null && createHandshake; }
+        internal bool CanAuthorizeResume(long now) { lock(sync) return Tick(now)!=State.Stopping && State==State.Suspended && outstanding==null && resumeHandshake; }
         internal bool AcceptResponse(long seq, string nonce, long now)
         {
             return AcceptResponseCore(seq, nonce, now, true);
@@ -110,11 +130,12 @@ internal static class LeaseMonitor
             {
             if (Tick(now) == State.Stopping || outstanding == null || outstanding.Phase!=State || now >= outstanding.Expires ||
                 seq != outstanding.Sequence || !String.Equals(nonce, outstanding.Nonce, StringComparison.Ordinal)) return false;
+            Challenge accepted=outstanding;
             outstanding = null;
             leaseDeadline = Math.Min(now + policy.LeaseDuration, started + policy.AbsoluteDeadline);
             if(!allowTransitionHandshake) { createHandshake=false; resumeHandshake=false; }
-            else if(State==State.Ready) createHandshake=true;
-            else if(State==State.Suspended) resumeHandshake=true;
+            else if(accepted.TransitionRequested && State==State.Ready) createHandshake=true;
+            else if(accepted.TransitionRequested && State==State.Suspended) resumeHandshake=true;
             // Running responses only renew the short lease. They cannot
             // authorize another create or resume transition.
             return true;

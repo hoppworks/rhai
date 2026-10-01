@@ -41,14 +41,19 @@ staged executable path as a bounded absolute local Windows path, without
 checking that the path exists. Unknown fields reject cleanup paths and policy
 overrides; policy continues to come from the fixed monitor policy.
 
-The wire value is now accepted by the monitor through the bounded transport
-intake described below. Intake does not connect the specification to workload
-creation; public workload launch and exact-job proof remain disabled.
+The wire value is accepted by the monitor through the bounded transport intake
+described below. Accepted staging now requests fresh create and suspended-resume
+host challenges through the dispatcher, then retains the payload job and staged
+allocation on the same owner worker. This source path is uncompiled and does not
+establish native launch or exact-job closure proof.
 
-The monitor accepts setup lease challenges/responses and bounded specification
-intake. Once a complete immutable specification is accepted, it starts the
-monitor-owned staging worker described below. It stops on deadline or disconnect;
-workload custody and process/job control remain unavailable.
+The monitor accepts bounded specification intake and phase-tagged lease
+challenges/responses. Once a complete immutable specification is accepted, it
+starts the monitor-owned staging worker. After staging acceptance, that worker
+requests a fresh create challenge, creates the payload suspended in its private
+job, requests a fresh suspended-phase challenge, resumes, and retains ownership
+until stop or deadline. The watchdog continues polling, dispatching frames, and
+signaling only; it does not create or clean up the payload.
 The `WindowsCustodyBackend.cs` source slice pins the fixed local
 `C:\RhaiQuality\runs` root and each ancestor through non-reparse directory
 handles that omit delete sharing, and captures volume/file identity. Its
@@ -78,9 +83,9 @@ rescan. It does not rule out adversarial same-user mutation in the interval
 after that rescan and before the receipt. No hostile source-tree isolation or
 launch readiness is claimed.
 
-The create/resume states in the protocol fixture are modeled transitions only;
-the second challenge and actual suspended/resume operations are not wired to a
-backend. Every `--source`/`--exe` workload request is refused by the public
+The monitor source now routes fresh create/resume challenges and suspended
+process transitions through its owner worker. Native backend behavior remains
+unverified. Every `--source`/`--exe` workload request is refused by the public
 entrypoint. The older payload staging implementation remains as unreachable
 source history and must not be used.
 
@@ -143,25 +148,23 @@ stop-attempt signal; that bounded observation is not a deterministic scheduler
 proof. The fixture has not been compiled or executed and cannot establish
 Windows job, process, finalizer, or native close behavior.
 
-This owner is intentionally not wired into `MonitorTransport`: the current
-intake path grants maintenance renewals only and cannot establish the required
-post-staging create/resume handshakes or transfer the accepted staging owner
-into a process-owner state machine. The existing
+The owner worker is now wired into `MonitorTransport` for the accepted staging
+transition and retains the payload until protocol stop/deadline. This source
+connection has not been compiled or run. The existing
 `fixtures/RunProcessCreationFixtures.ps1` still covers only the older
 `ScopedRunner.cs` reference path. The new fixture exercises the protocol and
 injected handle seam only; it does not create a native job or payload. No
-fixture has been compiled or run. The monitor therefore still cannot launch a payload;
-the new source is a creation-time job prerequisite, not workload acceptance.
+fixture has been compiled or run. The monitor source contains a launch path, but
+successful Windows process/job behavior remains unverified.
 
 ## Remaining custody and proof boundaries
 
 Executable-relative syntax checks and staged-file identity checks are present
 in source, but executable launch validation remains unverified. Monitor-owned
-allocation/staging handoff and an unconnected monitor-owned job/process
-creation primitive are present as source; the transport-to-owner state
-transition, local evidence finalization/export, exact job closure proof,
-runtime cleanup, pre-resume host challenge integration, and termination and
-finalization budgets remain unimplemented. Runtime
+allocation/staging handoff and a connected monitor-owned job/process lifecycle
+are present as source; local evidence finalization/export, exact job closure
+proof, runtime cleanup, and termination/finalization budgets remain
+unimplemented. Runtime
 disposition is present in source, but no monitor path can create the
 unforgeable exact-job closure proof, so production removal remains fail-closed.
 The fixture authorization tests filesystem-only transitions, not job closure.
@@ -193,21 +196,24 @@ without waiting and keeps the 32-frame/8192-byte limits.
 
 The monitor creates and advertises one random 32-lowercase-hex transfer token.
 Completion retains the immutable specification in monitor memory and starts
-one staging worker. It does not renew the lease, authorize create/resume, or
-reset deadlines. Setup `RESPONSE` frames are checked against the exact outstanding
-phase-bound challenge and may renew the short lease; this intake path uses
-maintenance responses that cannot authorize create or resume. A fresh
-post-staging challenge remains required before any future creation step.
+one staging worker. It does not reset deadlines. `RESPONSE` frames are checked
+against the exact outstanding phase-bound challenge and may renew the short
+lease. Only challenges explicitly requested by the owner worker after staging
+or suspended creation can authorize create or resume; ordinary setup and Running
+responses only renew the lease. The fixed setup deadline applies until Running;
+the lease and absolute deadline continue afterward.
 Source allocation and staging now run on a dedicated monitor worker after
 intake. The watchdog uses a one-slot atomic ownership handoff and only signals
 cancellation; a separate signal thread updates the backend token. In-flight
 filesystem calls may finish after stop. Failed or rejected allocations are
 disposed by the worker, retaining their runtime and journal. A successful
-accepted allocation remains pinned until monitor stop requests its return to
-the worker; disposal may be preempted by immediate monitor process exit and is
-not a cleanup receipt. A stalled worker leaves retained or unknown custody.
-Workload entry, process creation/resume, runtime deletion, and exact job proof
-remain disabled. No pipe/native acceptance is claimed.
+accepted allocation remains pinned on the owner worker while it waits for fresh
+create/resume responses and retains the resumed payload. Stop or deadline
+returns payload and allocation cleanup to that worker; disposal may be
+preempted by immediate monitor process exit and is not a cleanup receipt. A
+stalled worker leaves retained or unknown custody.
+Runtime deletion and exact job proof remain disabled. No pipe/native acceptance
+is claimed.
 
 `SpecificationTransfer` implements `SPEC-XFER/1` `BEGIN`, `DATA`, and `END`
 frames, each terminated by one LF byte. The receiver token is supplied by its

@@ -1,7 +1,6 @@
-// Monitor-owned payload process creation prerequisite. This class is not
-// called by the current transport: its intake dispatcher only grants
-// maintenance renewals, so it cannot establish the post-staging create and
-// resume handshakes required below.
+// Monitor-owned payload process creation and exact-handle lifetime owner.
+// Native creation, resume, cleanup, and host transport behavior remain
+// unverified until the authorized Windows acceptance gates run.
 using System;
 using System.ComponentModel;
 using System.IO;

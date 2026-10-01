@@ -1,4 +1,5 @@
-// Single-worker bridge from completed immutable intake to filesystem custody.
+// Single-worker bridge from completed immutable intake to filesystem custody
+// and the monitor-owned payload transition.
 // The watchdog only changes state and signals; it never performs backend I/O,
 // invokes cancellation callbacks, waits, joins, or disposes an allocation.
 using System;
@@ -6,8 +7,8 @@ using System.Threading;
 
 internal sealed class MonitorStagingHandoff
 {
-    private const int Idle = 0, Running = 1, Published = 2, Accepted = 3,
-        Stopping = 4, ReleaseRequested = 5, Finished = 6, Failed = 7;
+    private const int Idle = 0, Running = 1, Published = 2, AcceptancePending = 3,
+        Accepted = 4, Stopping = 5, ReleaseRequested = 6, Finished = 7, Failed = 8;
 
     internal sealed class Result
     {
@@ -19,6 +20,7 @@ internal sealed class MonitorStagingHandoff
     }
 
     private readonly Func<LaunchSpecification, CancellationToken, Result> run;
+    private readonly Action<Result, LaunchSpecification, CancellationToken> acceptedOperation;
     private readonly ManualResetEvent cancelSignal = new ManualResetEvent(false);
     private readonly ManualResetEvent workerFinished = new ManualResetEvent(false);
     private readonly CancellationTokenSource cancellation = new CancellationTokenSource();
@@ -26,14 +28,80 @@ internal sealed class MonitorStagingHandoff
     private Result slot;
     private int state = Idle, stopRequested;
     private string failure;
+#if SCOPED_RUNNER_TESTING
+    private readonly ManualResetEvent lifecycleObservedForFixture = new ManualResetEvent(false);
+    private readonly ManualResetEvent pendingObservedForFixture = new ManualResetEvent(false);
+#endif
 
-    private MonitorStagingHandoff(Func<LaunchSpecification, CancellationToken, Result> operation)
-    { run = operation ?? throw new ArgumentNullException("operation"); }
+    private MonitorStagingHandoff(Func<LaunchSpecification, CancellationToken, Result> operation,
+        Action<Result, LaunchSpecification, CancellationToken> accepted)
+    { run = operation ?? throw new ArgumentNullException("operation"); acceptedOperation=accepted; }
 
     // Production construction has no caller-supplied backend or path. The
     // immutable specification is the only input to the monitor-owned worker.
-    internal static MonitorStagingHandoff CreateProduction()
-    { return new MonitorStagingHandoff(StageWithBackend); }
+    internal static MonitorStagingHandoff CreateProduction(LeaseMonitor.Protocol protocol, Func<long> monotonicNow)
+    {
+        if(protocol==null || monotonicNow==null) throw new ArgumentNullException("production transition inputs");
+        return new MonitorStagingHandoff(StageWithBackend,
+            (result,spec,token)=>RunAcceptedLifecycle(result,spec,token,protocol,monotonicNow));
+    }
+
+    private static void RunAcceptedLifecycle(Result result, LaunchSpecification specification, CancellationToken token,
+        LeaseMonitor.Protocol protocol, Func<long> monotonicNow)
+    {
+        var allocation=result.Owner as WindowsCustodyBackend.RuntimeAllocation;
+        if(allocation==null) throw new InvalidOperationException("accepted staging owner has an unexpected type");
+        MonitorPayloadJob payload=null;
+        Exception operationFailure=null, cleanupFailure=null;
+        try
+        {
+            RequestAndWaitForAuthority(protocol,token,monotonicNow,LeaseMonitor.State.Ready);
+            payload=MonitorPayloadJob.CreateSuspended(allocation,specification,protocol);
+            RequestAndWaitForAuthority(protocol,token,monotonicNow,LeaseMonitor.State.Suspended);
+            payload.ResumeAfterHostChallenge(protocol);
+            HoldPayloadUntilStop(protocol,token,monotonicNow);
+        }
+        catch(Exception error)
+        {
+            operationFailure=error;
+            protocol.SignalClientExited(monotonicNow());
+        }
+        finally
+        {
+            if(payload!=null)
+                try { payload.Dispose(); }
+                catch(Exception error) { cleanupFailure=error; protocol.SignalClientExited(monotonicNow()); }
+        }
+        if(operationFailure!=null && cleanupFailure!=null)
+            throw new AggregateException("payload transition and exact-job cleanup both failed",operationFailure,cleanupFailure);
+        if(operationFailure!=null) throw operationFailure;
+        if(cleanupFailure!=null) throw new InvalidOperationException("exact-job cleanup failed; allocation remains retained or uncertain",cleanupFailure);
+    }
+
+    private static void HoldPayloadUntilStop(LeaseMonitor.Protocol protocol, CancellationToken token, Func<long> monotonicNow)
+    {
+        while(!token.IsCancellationRequested)
+        {
+            if(protocol.Tick(monotonicNow())==LeaseMonitor.State.Stopping) return;
+            Thread.Sleep(10);
+        }
+    }
+
+    internal static void RequestAndWaitForAuthority(LeaseMonitor.Protocol protocol, CancellationToken token,
+        Func<long> monotonicNow, LeaseMonitor.State phase)
+    {
+        if(!protocol.RequestFreshTransitionChallenge(phase,monotonicNow()))
+            throw new InvalidOperationException("protocol rejected fresh phase-bound host challenge request");
+        for(;;)
+        {
+            token.ThrowIfCancellationRequested();
+            long now=monotonicNow();
+            if(protocol.Tick(now)==LeaseMonitor.State.Stopping)
+                throw new InvalidOperationException("monitor stopped while waiting for phase-bound host challenge");
+            if(phase==LeaseMonitor.State.Ready ? protocol.CanAuthorizeCreate(now) : protocol.CanAuthorizeResume(now)) return;
+            Thread.Sleep(10);
+        }
+    }
 
     private static Result StageWithBackend(LaunchSpecification spec, CancellationToken token)
     {
@@ -90,7 +158,7 @@ internal sealed class MonitorStagingHandoff
             int observed = Volatile.Read(ref state);
             int next;
             if (observed == Idle) next = Finished;
-            else if (observed == Running || observed == Published) next = Stopping;
+            else if (observed == Running || observed == Published || observed == AcceptancePending) next = Stopping;
             else if (observed == Accepted) next = ReleaseRequested;
             else break;
             if (Interlocked.CompareExchange(ref state, next, observed) == observed) break;
@@ -105,9 +173,11 @@ internal sealed class MonitorStagingHandoff
     {
         if (isStillLive == null) throw new ArgumentNullException("isStillLive");
         if (Volatile.Read(ref stopRequested) != 0 || !isStillLive()) { Stop(); return false; }
-        if (Interlocked.CompareExchange(ref state, Accepted, Published) != Published) return false;
+        if (Interlocked.CompareExchange(ref state, AcceptancePending, Published) != Published) return false;
         if (Volatile.Read(ref stopRequested) != 0 || !isStillLive()) { Stop(); return false; }
-        return true;
+        // Lifecycle becomes visible only after the final deadline check.
+        // Stop can still win the pending state before this CAS.
+        return Interlocked.CompareExchange(ref state, Accepted, AcceptancePending) == AcceptancePending;
     }
 
     internal bool IsPublished { get { return Volatile.Read(ref state) == Published; } }
@@ -158,7 +228,34 @@ internal sealed class MonitorStagingHandoff
             for (;;)
             {
                 int observed = Volatile.Read(ref state);
-                if (observed == Published || observed == Accepted) { Thread.Sleep(10); continue; }
+                if (observed == Published || observed == AcceptancePending)
+                {
+#if SCOPED_RUNNER_TESTING
+                    if(observed==AcceptancePending) pendingObservedForFixture.Set();
+#endif
+                    Thread.Sleep(10); continue;
+                }
+                if (observed == Accepted)
+                {
+#if SCOPED_RUNNER_TESTING
+                    lifecycleObservedForFixture.Set();
+#endif
+                    if(acceptedOperation==null) { Thread.Sleep(10); continue; }
+                    Result accepted=Interlocked.Exchange(ref slot,null);
+                    LaunchSpecification acceptedSpecification=specification;
+                    if(acceptedOperation!=null)
+                    {
+                        try { acceptedOperation(accepted,acceptedSpecification,cancellation.Token); }
+                        catch(Exception error)
+                        {
+                            string detail="accepted payload transition failed: "+error.GetType().Name+": "+error.Message;
+                            failure=String.IsNullOrEmpty(failure) ? detail : failure+"; "+detail;
+                        }
+                    }
+                    DisposeOnWorker(accepted==null ? null : accepted.Owner);
+                    Interlocked.Exchange(ref state,Finished);
+                    return;
+                }
                 if (observed == Stopping || observed == ReleaseRequested)
                 {
                     Result owned = Interlocked.Exchange(ref slot, null);
@@ -178,7 +275,10 @@ internal sealed class MonitorStagingHandoff
     private void DisposeOnWorker(IDisposable owner)
     {
         if (owner == null) return;
-        try { owner.Dispose(); }
+        try
+        {
+            owner.Dispose();
+        }
         catch (Exception error)
         {
             string detail = "allocation disposal failed; runtime and journal remain retained or uncertain: " + error.GetType().Name;
@@ -190,7 +290,14 @@ internal sealed class MonitorStagingHandoff
     private static readonly System.Collections.Generic.List<MonitorStagingHandoff> FixtureInstances = new System.Collections.Generic.List<MonitorStagingHandoff>();
     internal static MonitorStagingHandoff CreateForFixture(Func<LaunchSpecification, CancellationToken, Result> operation)
     {
-        var handoff = new MonitorStagingHandoff(operation);
+        var handoff = new MonitorStagingHandoff(operation,null);
+        FixtureInstances.Add(handoff);
+        return handoff;
+    }
+    internal static MonitorStagingHandoff CreateForFixture(Func<LaunchSpecification, CancellationToken, Result> operation,
+        Action<Result,LaunchSpecification,CancellationToken> accepted)
+    {
+        var handoff=new MonitorStagingHandoff(operation,accepted);
         FixtureInstances.Add(handoff);
         return handoff;
     }
@@ -206,12 +313,20 @@ internal sealed class MonitorStagingHandoff
             switch (Volatile.Read(ref state))
             {
                 case Idle: return "Idle"; case Running: return "Running"; case Published: return "Published";
+                case AcceptancePending: return "AcceptancePending";
                 case Accepted: return "Accepted"; case Stopping: return "Stopping"; case ReleaseRequested: return "ReleaseRequested";
                 case Finished: return "Finished"; case Failed: return "Failed"; default: return "Unknown";
             }
         }
     }
     internal bool TryAcceptForFixture(bool live) { return TryAccept(() => live); }
+    internal string WaitForAcceptanceObservationForFixture()
+    {
+        int signaled=WaitHandle.WaitAny(new WaitHandle[] { lifecycleObservedForFixture,pendingObservedForFixture },5000);
+        if(signaled==0) return "Accepted";
+        if(signaled==1) return "AcceptancePending";
+        throw new TimeoutException("owner worker did not observe acceptance state");
+    }
     internal void WaitForFixtureWorker()
     {
         // Fixture-only synchronization; production watchdog never calls this.
