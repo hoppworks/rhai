@@ -627,6 +627,11 @@ fn scalar_run_with_cwd_works_without_collections() {
             panic!("scalar run failed: {detail}");
         }
     };
+    let record = std::fs::read_to_string(&record_path).unwrap();
+    let pid: libc::pid_t = record.trim().strip_prefix("child-pid=").unwrap().parse().unwrap();
+    assert_eq!(unsafe { libc::kill(pid, 0) }, -1, "child {pid} is still present");
+    assert_eq!(std::io::Error::last_os_error().raw_os_error(), Some(libc::ESRCH));
+    eprintln!("no-index scalar child_pid={pid} reap=ESRCH");
     let expected = std::fs::canonicalize(&child_dir).unwrap();
     assert_eq!(result["stdout"].as_immutable_string_ref().unwrap().as_str(), format!("{}\n", expected.display()));
     assert!(result["stdout_complete"].as_bool().unwrap());
@@ -635,8 +640,4 @@ fn scalar_run_with_cwd_works_without_collections() {
     assert_eq!(result["code"].as_int().unwrap(), 0);
     let missing_raw_api = engine.eval::<Map>(r#"run_raw("/bin/pwd")"#).unwrap_err();
     assert!(matches!(missing_raw_api.as_ref(), rhai::EvalAltResult::ErrorFunctionNotFound(name, _) if name.starts_with("run_raw")), "run_raw remains registered: {missing_raw_api:?}");
-    let record = std::fs::read_to_string(&record_path).unwrap();
-    let pid: libc::pid_t = record.trim().strip_prefix("child-pid=").unwrap().parse().unwrap();
-    assert_eq!(unsafe { libc::kill(pid, 0) }, -1, "child {pid} is still present");
-    assert_eq!(std::io::Error::last_os_error().raw_os_error(), Some(libc::ESRCH));
 }
