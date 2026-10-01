@@ -1,0 +1,69 @@
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:1716:9
+     |
+1716 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+     |
+     = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2035:9
+     |
+2035 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: methods `numeric_operations_probe`, `quarantine_observations_probe`, and `fail_reservation` are never used
+    --> src/packages/sys/process/unix.rs:1059:8
+     |
+ 988 | impl ExecutionFaults {
+     | -------------------- methods in this implementation
+...
+1059 |     fn numeric_operations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1070 |     fn quarantine_observations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1095 |     fn fail_reservation(&self) -> bool {
+     |        ^^^^^^^^^^^^^^^^
+     |
+     = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (lib) generated 3 warnings (run `cargo fix --lib -p rhai` to apply 2 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 0.07s
+     Running tests/sys_process.rs (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx/target/debug/deps/sys_process-a4f350212a887c3b)
+
+running 1 test
+test managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not ... managed_spawn_drop_started root=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx/tmp/rhai-sys-test-27626-managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not-0 test_pid=27626 sentinel_pid=27627 sentinel_pgid=27627 leader=27628 worker=27629 leaf=27630 group=27628
+managed_spawn_nonfinal_drop leader=27628 leader_live=true worker=27629 worker_live=true leaf=27630 leaf_live=true all_live=true
+managed_spawn_final_drop leader=27628 leader_esrch=true worker=27629 worker_esrch=false leaf=27630 leaf_esrch=false all_esrch=false sentinel=27627 live=true
+
+thread 'managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not' (55733812) panicked at tests/sys_process.rs:769:5:
+dropping final Child clone did not terminate the managed group
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+managed-scope sentinel_cleanup pid=27627 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(27629) worker_esrch=true leaf_pid=Some(27630) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(27628) leader_esrch=true
+FAILED
+
+failures:
+
+failures:
+    managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 19 filtered out; finished in 5.15s
+
+error: test failed, to rerun pass `--test sys_process`

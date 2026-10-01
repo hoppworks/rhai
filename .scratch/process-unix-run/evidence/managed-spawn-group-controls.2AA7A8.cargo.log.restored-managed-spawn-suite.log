@@ -1,0 +1,85 @@
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx/source)
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:1716:9
+     |
+1716 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+     |
+     = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2035:9
+     |
+2035 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: methods `numeric_operations_probe`, `quarantine_observations_probe`, and `fail_reservation` are never used
+    --> src/packages/sys/process/unix.rs:1059:8
+     |
+ 988 | impl ExecutionFaults {
+     | -------------------- methods in this implementation
+...
+1059 |     fn numeric_operations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1070 |     fn quarantine_observations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1095 |     fn fail_reservation(&self) -> bool {
+     |        ^^^^^^^^^^^^^^^^
+     |
+     = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (lib) generated 3 warnings (run `cargo fix --lib -p rhai` to apply 2 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 6.77s
+     Running tests/sys_process.rs (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx/target/debug/deps/sys_process-a4f350212a887c3b)
+
+running 9 tests
+test managed_run_closes_worker_after_leader_exit_and_preserves_sentinel ... managed_fixture_started root=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx/tmp/rhai-sys-test-27696-managed_run_closes_worker_after_leader_exit_and_preserves_sentinel-0 test_pid=27696 sentinel_pid=27697
+managed_normal_leader pid=27698 pgid=27698 esrch=true
+managed_normal_worker_leaf worker_pid=27699 worker_esrch=true leaf_pid=27700 leaf_esrch=true
+managed_normal_sentinel pid=27697 live=true
+managed-scope sentinel_cleanup pid=27697 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(27699) worker_esrch=true leaf_pid=Some(27700) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(27698) leader_esrch=true
+ok
+test managed_scope_escape_fixture ... ok
+test managed_scope_leader_fixture ... ok
+test managed_scope_leaf_fixture ... ok
+test managed_scope_spawn_leader_fixture ... ok
+test managed_scope_worker_fixture ... ok
+test managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not ... managed_spawn_drop_started root=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx/tmp/rhai-sys-test-27696-managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not-1 test_pid=27696 sentinel_pid=27701 sentinel_pgid=27701 leader=27702 worker=27703 leaf=27704 group=27702
+managed_spawn_nonfinal_drop leader=27702 leader_live=true worker=27703 worker_live=true leaf=27704 leaf_live=true all_live=true
+managed_spawn_final_drop leader=27702 leader_esrch=true worker=27703 worker_esrch=true leaf=27704 leaf_esrch=true all_esrch=true sentinel=27701 live=true
+managed-scope sentinel_cleanup pid=27701 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(27703) worker_esrch=true leaf_pid=Some(27704) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(27702) leader_esrch=true
+ok
+test managed_spawn_kill_stops_leader_worker_leaf_and_preserves_sentinel ... managed_spawn_kill_started root=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx/tmp/rhai-sys-test-27696-managed_spawn_kill_stops_leader_worker_leaf_and_preserves_sentinel-2 test_pid=27696 sentinel_pid=27705 sentinel_pgid=27705 leader=27706 worker=27707 leaf=27708 group=27706
+managed_spawn_kill leader=27706 leader_esrch=true worker=27707 worker_esrch=true leaf=27708 leaf_esrch=true all_esrch=true sentinel=27705 live=true wait_returned=true
+managed-scope sentinel_cleanup pid=27705 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(27707) worker_esrch=true leaf_pid=Some(27708) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(27706) leader_esrch=true
+ok
+test managed_timeout_kills_leader_after_it_changes_process_group ... managed_escape_started root=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx/tmp/rhai-sys-test-27696-managed_timeout_kills_leader_after_it_changes_process_group-3 test_pid=27696 sentinel_pid=27710 sentinel_pgid=27710
+managed_escape_sentinel_live pid=27710 live=true
+managed_escape_leader pid=27711 original_pgid=27711 escaped_pgid=27710 esrch=true
+managed_escape_fixture_cleanup pid=Some(27711) esrch=true
+managed-scope sentinel_cleanup pid=27710 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 11 filtered out; finished in 0.87s
+
