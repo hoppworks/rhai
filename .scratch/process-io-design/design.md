@@ -1,6 +1,6 @@
 # Private Rust process I/O boundary
 
-Status: design prerequisite only. No production code or native Rust proof is included.
+Status: private design; production code remains pending. Native standalone Rust parent I/O is now accepted on macOS and Linux with exact Rust1.77.2: see `.scratch/all-tickets/native-linux-io-proof-review.md` and the current coordinator state. Historical prerequisite descriptions below record the evidence available when this design was written; they do not invalidate the later accepted proof. Workload-spawned descendant topology, production Engine semantics and Windows remain open.
 
 ## Decision
 
