@@ -150,3 +150,10 @@ Root reviewed newly prepared managed-scope-green.py/run-managed-scope-green.sh a
 
 
 Managed harness correction readback: eval result is now retained until after exact leader/sentinel inspection, startup includes test_pid, and full control/restored Cargo logs have separate owned paths. Two remaining pre-launch defects returned to owner: shell wrapper still requires a base Cargo log that the revised harness no longer writes; normal receipt classifier does not emit/probe leader identity and does not link its sentinel receipt to the normal startup sentinel, so it can select the escaped-scenario sentinel. Require exact normal leader/worker/leaf/sentinel linkage and independent ESRCH probes. Requested offline positive classifier baseline plus meaningful wrong/missing identity controls from that valid baseline before freeze. No native launch or failed behavioral correction inferred; cumulative56 remains.
+
+
+## Managed invocation57 source gate
+
+Frozen source identities and current runtime are recorded in coordinator-state.md. Root read back the corrected normal sentinel string use and ran the actual AST receipt/PID-probe branch offline: complete baseline accepted; mismatched sentinel, leaf linkage and a live worker rejected. This validates classification mechanics only. Released the known-broken omitted exact Child.kill control and byte-restored six-test managed suite under unchanged scoped limits. Native result pending.
+
+Run57 terminal accepted narrowly: omitted direct Child.kill fails at leader-still-live assertion while unrelated sentinel survives; restored normal-exit and changed-group deadline public Engine contracts pass. Four fixture entry points account for the other four of six green tests. Root independently read full logs and four equal six-path manifests, then checked all15 exact PIDs ESRCH and exact runtime absent. Raw2608f77e4bac35baac21ab4f7954709a8fc5097a55ce3ca8a70d7fc5fa962e88. macOS27 arm64 Rust1.93 development only; shared managed kill/drop, overflow, setup failures, escaped retained pipes, kill_on_drop:false and release gates remain open.
