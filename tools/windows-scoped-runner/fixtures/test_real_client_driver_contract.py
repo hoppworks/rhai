@@ -6,9 +6,26 @@ ROOT = Path(__file__).resolve().parents[1]
 DRIVER = ROOT / "MonitorAcceptanceDriver.cs"
 FIXTURE = ROOT / "fixtures" / "MonitorAcceptanceDriverFixture.cs"
 README = ROOT / "README.md"
+COMPILE_WRAPPER = ROOT / "fixtures" / "CompileMonitorAcceptanceDriver.ps1"
 
 
 class RealClientDriverSourceScaffolding(unittest.TestCase):
+    def test_compile_wrapper_is_separate_pinned_and_bounded(self):
+        source = COMPILE_WRAPPER.read_text(encoding="utf-8")
+        for marker in (
+            "monitor-driver-[0-9a-f]{32}", "ReparsePoint", "AvailableFreeSpace",
+            "6e1516897be40b66585b25163bac51f9f283cc8b6b2b8ea3218338cc2d4bf019",
+            "33581ea00e1dc536bf4afdd8842c0a9cc3fdd028514e228c8b1ca776d40e1db0",
+            "PSObject]::AsPSObject", "[object[]]::new(2)", "SetValue",
+            "AssignProcessToJobObject", "0x2308", "3600000", "Dispose($drained)",
+            "MaximumLogBytes", "compile-driver", "compile-fixture",
+            "expected-compiler-failure", "MonitorAcceptanceDriverFixture assertions=15",
+            "ReadInt32($accounting, 40) -ne 1", "SCOPED_RUNNER_TESTING",
+        ):
+            self.assertIn(marker, source)
+        self.assertNotIn("RunSourceFixtures.ps1", source)
+        self.assertNotIn("Invoke-OwnedProcess (Join-Path $buildRoot 'MonitorAcceptanceDriver.exe')", source)
+
     def test_source_declares_bounded_native_route_and_separate_fixture_seam(self):
         source = DRIVER.read_text(encoding="utf-8")
         fixture = FIXTURE.read_text(encoding="utf-8")

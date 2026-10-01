@@ -49,7 +49,7 @@ kill-on-close only after the exact client has exited and job accounting reports
 exactly the driver process. If that check or a cleanup API fails, the job
 remains kill-on-close and final status fails.
 
-### Compile and launch custody route (plan only; not executed)
+### Compile and launch custody route (source only; not executed)
 
 The existing `RunSourceFixtures.ps1` output is reusable only when its retained
 `build/ScopedRunner.exe` was produced from the exact nine production-source
@@ -81,15 +81,22 @@ csc.exe /target:exe /main:MonitorAcceptanceDriver /out:<run>\build\MonitorAccept
 csc.exe /target:exe /define:SCOPED_RUNNER_TESTING /main:MonitorAcceptanceDriverFixture /out:<run>\build\MonitorAcceptanceDriverFixture.exe <nine production sources> MonitorAcceptanceDriver.cs MonitorAcceptanceDriverFixture.cs
 ```
 
-Compiler custody must be a separate compile-only invocation following the
-reviewed source-fixture bootstrap: a private unique run root, no-breakaway
-kill-on-close job, 1 GiB per-process and 2 GiB aggregate memory limits,
-16-process limit, exact-owner watchdog within the existing one-hour outer
-bound, exact process waits, job accounting, and fail-closed disposition. It may
-compile and execute the pure parser/control fixture, but it must not launch the
-native acceptance driver or any monitor. The accepted source-fixture harness
-stays unchanged; its no-breakaway job cannot launch the driver. There is not
-yet an accepted compile-only wrapper or native result.
+`fixtures/CompileMonitorAcceptanceDriver.ps1` is the separate compile-only
+wrapper candidate. Its inputs are the source checkout, the retained
+`monitor-source-<GUID>\build\ScopedRunner.exe`, and a fresh
+`C:\RhaiQuality\runs\monitor-driver-<GUID>` root. It verifies the retained
+source tree against the nine production pins, copies and hashes those files
+plus the driver and pure fixture, compiles the driver and fixture, checks a
+deliberate compiler failure, and runs only the fixture. It retains the runner,
+inputs, outputs, manifest, result and capped compiler/fixture logs. The wrapper
+uses a 4 MiB per-log polling cap, 180-second compiler and fixture waits, and a
+one-hour exact-owner watchdog. Its controller job is no-breakaway, kill-on-close,
+and limited to 1 GiB per process, 2 GiB aggregate and 16 active processes. It
+must query exactly one remaining process before clearing kill-on-close and
+closing the job. This wrapper source has not been compiled or executed on
+Windows; source-presence tests are scaffolding, not custody proof. The accepted
+source-fixture harness stays unchanged and cannot launch the driver from its
+no-breakaway job.
 
 Only after that compiler owner has exited, launch the driver directly from a
 separately verified uncontained interactive console process. Do not run it
