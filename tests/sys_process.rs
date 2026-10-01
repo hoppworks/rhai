@@ -1381,7 +1381,7 @@ fn managed_zombie_host_process() {
             let success = report.get("success").and_then(|v| v.as_bool().ok()).unwrap_or(false);
             let stdout_complete = report.get("stdout_complete").and_then(|v| v.as_bool().ok()).unwrap_or(false);
             let stderr_complete = report.get("stderr_complete").and_then(|v| v.as_bool().ok()).unwrap_or(false);
-            format!("success={success} code={code} exit=Some({code}) stdout_complete={stdout_complete} stderr_complete={stderr_complete} cause=none diagnostic=none")
+            format!("api_success={success} api_outcome=success_report code={code} exit=Some({code}) stdout_complete={stdout_complete} stderr_complete={stderr_complete} cause=none diagnostic=none")
         }
         Err(error) => {
             let sys_error = match error.as_ref() {
@@ -1390,16 +1390,23 @@ fn managed_zombie_host_process() {
             };
             match sys_error {
                 Some(SysError::Process { cause: ProcessCause::Io { op, kind, .. }, report }) => {
+                    let cause_op_matches = op == "observe process group closure";
                     let diagnostic = report.cleanup_diagnostics().iter().any(|item| item.operation() == "observe process group closure");
                     format!(
-                        "success=false cause={op} kind={kind:?} exit={:?} stdout_complete={} stderr_complete={} diagnostic={diagnostic}",
+                        "api_success=false api_outcome=typed_process_io cause_op={} cause_op_matches={cause_op_matches} kind={kind:?} exit={:?} stdout_complete={} stderr_complete={} diagnostic={diagnostic} cause_details={:?} cleanup_diagnostics={:?}",
+                        op.replace(' ', "_"),
                         report.exit_code(),
                         report.stdout_complete(),
-                        report.stderr_complete()
+                        report.stderr_complete(),
+                        match error.as_ref() {
+                            rhai::EvalAltResult::ErrorRuntime(value, _) => value.clone().try_cast::<SysError>(),
+                            _ => None,
+                        },
+                        report.cleanup_diagnostics()
                     )
                 }
-                Some(other) => format!("success=false cause=other kind={} diagnostic=unknown error={other:?}", other.kind()),
-                None => format!("success=false cause=non-sys-error diagnostic=unknown error={error:?}"),
+                Some(other) => format!("api_success=false api_outcome=typed_non_process_error kind={} diagnostic=none error={other:?}", other.kind()),
+                None => format!("api_success=false api_outcome=non_sys_error diagnostic=none error={error:?}"),
             }
         }
     };
@@ -1524,7 +1531,7 @@ fn managed_run_reports_while_fixture_reaper_holds_stopped_zombies() {
     assert!(cleanup.contains("held_zombies=true"));
     assert!(cleanup.contains(&format!("worker={} reaped=true", worker_fields["pid"])), "worker was not reaped by the fixture-owned reaper: {cleanup}");
     assert!(cleanup.contains(&format!("leaf={} reaped=true", leaf_fields["pid"])), "leaf was not reaped by the fixture-owned reaper: {cleanup}");
-    eprintln!("managed_held_zombie_boundary host_live_at_return=true leader={} leader_start={leader_start} leader_reaped=true worker={} worker_start={worker_start} worker_state=Z worker_pgid={} leaf={} leaf_start={leaf_start} leaf_state=Z leaf_pgid={} group={group} kill_zero_result={group_result} kill_zero_errno={group_errno} capture_complete=true api_result={api_result:?} held={held:?} reaper_status={status:?}", leader_fields["pid"], worker_fields["pid"], worker_now.2, leaf_fields["pid"], leaf_now.2);
+    eprintln!("managed_held_zombie_boundary host_live_at_return=true leader={} leader_start={leader_start} leader_reaped=true worker={} worker_start={worker_start} worker_state=Z worker_pgid={} leaf={} leaf_start={leaf_start} leaf_state=Z leaf_pgid={} group={group} kill_zero_result={group_result} kill_zero_errno={group_errno} capture_complete=true {api_result} held={held:?} reaper_status={status:?}", leader_fields["pid"], worker_fields["pid"], worker_now.2, leaf_fields["pid"], leaf_now.2);
     eprintln!("managed_held_zombie_cleanup worker={} reaped=true leaf={} reaped=true", worker_fields["pid"], leaf_fields["pid"]);
 }
 
