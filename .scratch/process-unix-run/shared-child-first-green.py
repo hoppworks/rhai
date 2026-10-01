@@ -17,7 +17,8 @@ TOOLCHAIN = Path('/Users/hoppworks/.rustup/toolchains/stable-aarch64-apple-darwi
 CARGO = TOOLCHAIN / 'cargo'
 RUSTC = TOOLCHAIN / 'rustc'
 RUSTDOC = TOOLCHAIN / 'rustdoc'
-TEST_NAME = 'shared_child_contract::spawn_returns_while_large_stdin_is_blocked_and_wait_snapshots_are_stable'
+DROP_TRUE_TEST = 'shared_child_contract::nonfinal_child_clone_drop_keeps_the_real_child_available'
+DROP_FALSE_TEST = 'shared_child_contract::final_drop_honors_both_kill_on_drop_policies'
 GREEN_FILTER = 'shared_child_contract::'
 GREEN_TESTS = [
     'shared_child_contract::spawn_returns_while_large_stdin_is_blocked_and_wait_snapshots_are_stable',
@@ -202,14 +203,8 @@ env.update({
 (RUNTIME / 'rustup-home').mkdir()
 print('parser_compatibility_evidence=run45 commit=a22f053beade6d39f661cdc049ec9fd89dafa648; no parser variants rerun', flush=True)
 
-command = [
-    str(CARGO), 'test', '--locked', '--test', 'sys_process',
-    '--features', 'testing-environ,sys,sync', '--', TEST_NAME,
-    '--exact', '--nocapture', '--test-threads=1',
-]
-
-def controller_roots_are_owned_and_absent(output):
-    matches = re.findall(r'shared-child controller_started scenario=blocked_input_wait_snapshot pid=(\d+) root=(\S+)', output)
+def controller_roots_are_owned_and_absent(output, scenario):
+    matches = re.findall(r'shared-child controller_started scenario=' + re.escape(scenario) + r' pid=(\d+) root=(\S+)', output)
     if len(matches) != 1:
         return False
     root = Path(matches[0][1])
@@ -225,26 +220,41 @@ def controller_roots_are_owned_and_absent(output):
     return valid and not root.exists()
 private_unix = source / 'src/packages/sys/process/unix.rs'
 restored_unix = private_unix.read_bytes()
-control_unix = restored_unix.replace(b'reg("spawn"', b'reg("spawn_control_disabled"').replace(
-    b'reg(\n        "spawn"', b'reg(\n        "spawn_control_disabled"'
+kill_policy = b'if !state.terminal && state.kill_on_drop {'
+
+def run_drop_control(label, scenario, test_name, replacement, expected_diagnostic):
+    if restored_unix.count(kill_policy) != 1:
+        raise RuntimeError('ClientLease kill-on-drop branch was not unique')
+    private_unix.write_bytes(restored_unix.replace(kill_policy, replacement, 1))
+    print(f'{label}_unix_sha256={sha(private_unix)}', flush=True)
+    selected = [str(CARGO), 'test', '--locked', '--test', 'sys_process', '--features',
+                'testing-environ,sys,sync', '--', test_name, '--exact', '--nocapture', '--test-threads=1']
+    status, output = run_cargo(selected, source, env, RUNTIME / f'{label}.log')
+    exact_test = bool(re.search(r'(?m)^    ' + re.escape(test_name) + r'$', output))
+    one_failure = bool(re.search(r'(?m)^test result: FAILED\. 0 passed; 1 failed;', output))
+    intended = expected_diagnostic in output
+    controller = f'shared-child controller_reaped scenario={scenario}' in output
+    controller_reap = bool(re.search(r'shared-child controller_esrch pid=\d+ verified=true', output))
+    roots_absent = controller_roots_are_owned_and_absent(output, scenario)
+    fixture_cleanup = re.findall(r'shared-child fixture_cleanup pid=(\d+) absent=true', output)
+    fixture_absent = len(fixture_cleanup) == 1 and pid_is_esrch(int(fixture_cleanup[0]))
+    print(f'{label} status={status} exact_failed_test={exact_test} one_failure={one_failure} intended_drop_assertion={intended} controller_reaped={controller} controller_esrch={controller_reap} fixture_child_esrch={fixture_absent} fixture_root_owned_absent={roots_absent}', flush=True)
+    private_unix.write_bytes(restored_unix)
+    restored = sha(private_unix) == private_hashes['src/packages/sys/process/unix.rs']
+    print(f'{label}_source_restored={restored}', flush=True)
+    if not (status == 101 and exact_test and one_failure and intended and controller and controller_reap and fixture_absent and roots_absent and restored):
+        raise RuntimeError(f'{label} did not fail at its intended drop-policy contract and clean the exact fixture')
+
+run_drop_control(
+    'drop_true_wrong_control', 'drop_true', DROP_TRUE_TEST,
+    b'if !state.terminal && false {',
+    'did not become absent before watchdog',
 )
-if control_unix == restored_unix or control_unix.count(b'spawn_control_disabled') != 4:
-    raise RuntimeError('wrong-control mutation did not disable all four private spawn overloads')
-private_unix.write_bytes(control_unix)
-print(f'wrong_control_unix_sha256={sha(private_unix)}', flush=True)
-control_status, control_output = run_cargo(command, source, env, RUNTIME / 'cargo-control.log')
-control_failed = bool(re.search(r'(?m)^    ' + re.escape(TEST_NAME) + r'$', control_output))
-control_summary = bool(re.search(r'(?m)^test result: FAILED\. 0 passed; 1 failed;', control_output))
-control_missing_api = 'Function not found: spawn' in control_output
-control_controller = 'shared-child controller_reaped scenario=blocked_input_wait_snapshot' in control_output
-control_reap = bool(re.search(r'shared-child controller_esrch pid=\d+ verified=true', control_output))
-control_root_owned_absent = controller_roots_are_owned_and_absent(control_output)
-control_no_child = 'shared-child blocked-stdin ready pid=' not in control_output
-print(f'wrong_control status={control_status} exact_failed_test={control_failed} one_failure_summary={control_summary} missing_public_spawn={control_missing_api} controller_reaped={control_controller} controller_esrch={control_reap} fixture_root_owned_absent={control_root_owned_absent} no_os_child_started={control_no_child}', flush=True)
-private_unix.write_bytes(restored_unix)
-if sha(private_unix) != private_hashes['src/packages/sys/process/unix.rs']:
-    raise RuntimeError('private production source restoration hash mismatch')
-print('private_source_restored=true', flush=True)
+run_drop_control(
+    'drop_false_wrong_control', 'drop_false', DROP_FALSE_TEST,
+    b'if !state.terminal {',
+    'kill_on_drop=false must leave the child operational after final-client drop',
+)
 
 green_command = [
     str(CARGO), 'test', '--locked', '--test', 'sys_process',
@@ -303,6 +313,6 @@ print('final_private_source_hashes=' + repr(final_private_hashes), flush=True)
 print('final_private_injected_test_hash=' + final_private_test_hash, flush=True)
 print('final_original_overlay_hashes=' + repr(final_original_hashes), flush=True)
 print(f'green status={status} passed={passed} started_tests={started_tests!r} all_tests_passed={all_tests_passed} controller_count={len(controllers)} controller_reaped={controller_reaped} controller_esrch={controller_esrch} fixture_roots_owned_absent={controller_roots_owned_absent} fixture_child_count={len(fixture_records)} fixture_children_esrch={fixture_pids_absent} private_source_unchanged={source_unchanged} original_sources_unchanged={original_unchanged}', flush=True)
-if not (control_status == 101 and control_failed and control_summary and control_missing_api and control_controller and control_reap and control_root_owned_absent and control_no_child and passed and source_unchanged and original_unchanged):
-    raise RuntimeError('shared Child wrong-control/restored Engine proof did not meet its narrow contract')
+if not (passed and source_unchanged and original_unchanged):
+    raise RuntimeError('shared Child restored Engine proof did not meet its narrow contract')
 print('classification=development_only_shared_child_contract; not_msrv_or_release_acceptance; lifecycle_and_platform_requirements_remain_open', flush=True)

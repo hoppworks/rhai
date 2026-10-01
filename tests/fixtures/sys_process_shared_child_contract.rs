@@ -217,7 +217,10 @@ fn drop_final_client(root: &Path, kill_on_drop: bool) {
         wait_for_pid_gone(pid, Duration::from_secs(5));
         eprintln!("shared-child final-drop kill_on_drop=true pid={pid} reap=ESRCH");
     } else {
-        issue_probe(&engine, &mut scope, root, pid, "two");
+        assert!(
+            try_issue_probe(&engine, &mut scope, root, pid, "two", Duration::from_secs(3)),
+            "kill_on_drop=false must leave the child operational after final-client drop"
+        );
         std::fs::write(root.join("release-exit"), "go").unwrap();
         wait_for_state(root, "child.status", "exited", Duration::from_secs(5));
         wait_for_pid_gone(pid, Duration::from_secs(5));
@@ -265,13 +268,37 @@ fn sync_wait_cancel(root: &Path) {
 }
 
 fn issue_probe(engine: &Engine, scope: &mut Scope<'_>, root: &Path, pid: i32, nonce: &str) {
+    assert!(
+        try_issue_probe(engine, scope, root, pid, nonce, Duration::from_secs(3)),
+        "fixture pid={pid} did not answer challenge {nonce}"
+    );
+}
+
+fn try_issue_probe(
+    engine: &Engine,
+    scope: &mut Scope<'_>,
+    root: &Path,
+    pid: i32,
+    nonce: &str,
+    timeout: Duration,
+) -> bool {
     let request = root.join(format!("probe-{nonce}.request"));
     let reply = root.join(format!("probe-{nonce}.reply"));
     std::fs::write(&request, nonce).unwrap();
-    wait_for_file(&reply, Duration::from_secs(3));
-    assert_eq!(std::fs::read_to_string(reply).unwrap(), nonce);
-    assert!(process_exists(pid), "fixture stopped responding to a fresh challenge");
+    let deadline = Instant::now() + timeout;
+    while !reply.exists() {
+        if Instant::now() >= deadline {
+            let _ = (engine, scope);
+            return false;
+        }
+        thread::sleep(Duration::from_millis(5));
+    }
+    if std::fs::read_to_string(reply).ok().as_deref() != Some(nonce) || !process_exists(pid) {
+        let _ = (engine, scope);
+        return false;
+    }
     let _ = (engine, scope); // Keep the live public Engine/Scope at each challenge site.
+    true
 }
 
 /// Outer tests run every potentially blocking Engine call in this exact owned process group.
@@ -368,7 +395,16 @@ impl Drop for ControllerGuard {
         }
         if let Some(pid) = recorded_pid {
             if fixture_live {
-                wait_for_pid_gone(pid, Duration::from_secs(3));
+                // Release only this recorded fixture through its owned synchronization files.
+                // This keeps wrong-control panics bounded without signaling a PID that may have
+                // exited or been reused.
+                let root = self.record.parent().expect("fixture record parent");
+                let _ = std::fs::write(root.join("release-input"), "watchdog");
+                let _ = std::fs::write(root.join("release-exit"), "watchdog");
+                let deadline = Instant::now() + Duration::from_secs(3);
+                while process_exists(pid) && Instant::now() < deadline {
+                    thread::sleep(Duration::from_millis(5));
+                }
             }
             eprintln!("shared-child fixture_cleanup pid={pid} absent={}", !process_exists(pid));
         }
