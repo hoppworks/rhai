@@ -1,0 +1,27 @@
+{
+  "invocation_session_id": 43186,
+  "invocation_exit_status": 1,
+  "build_status": 101,
+  "build_seconds": 2.615,
+  "cases_started": 0,
+  "cases_completed": 0,
+  "runtime_path": "/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4bl1xlop",
+  "runtime_exists_after_scoped_wrapper_exit": false,
+  "driver": {"pid": 59979, "original_start_identity_still_matches": false},
+  "supervisor": {"pid": 59978, "pgid": 59978, "original_start_identity_still_matches": false},
+  "supervisor_process_group_rows_after_exit": [],
+  "sampler_children": {
+    "count": 11,
+    "all_direct_popen_handles_terminal": true,
+    "all_return_codes_present": true,
+    "all_return_codes_zero": true,
+    "all_termination_requests_false": true,
+    "all_kill_requests_false": true
+  },
+  "resource_samples": 11,
+  "sampled_process_max": 8,
+  "sampled_private_bytes_max": 34704713,
+  "sampler_failure": null,
+  "build_failure": "Rust E0133: libc::CMSG_LEN(0) is unsafe and requires an unsafe block at src/main.rs:797",
+  "readback_method": "After the scoped wrapper exited, checked the exact runtime path, exact recorded driver/supervisor start identities, exact supervisor PGID via /bin/ps, and terminal outcomes recorded through each direct Popen child handle."
+}
