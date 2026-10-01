@@ -1,0 +1,526 @@
+phase=development_shared_child_contract
+runtime_path=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b
+python=3.9.6 (default, Aug 25 2026, 21:26:21)  [Clang 21.0.0 (clang-2100.3.34.2)]
+platform=macOS-27.0-arm64-arm-64bit
+runner_pid=47877 supervisor_pid=47876 owned_pgid=47876
+cargo_path=/Users/hoppworks/.rustup/toolchains/stable-aarch64-apple-darwin/bin/cargo cargo_version=cargo 1.93.0 (083ac5135 2025-12-15)
+rustc_path=/Users/hoppworks/.rustup/toolchains/stable-aarch64-apple-darwin/bin/rustc rustc_version=rustc 1.93.0 (254b59607 2026-01-19) | binary: rustc | commit-hash: 254b59607d4417e9dffbc307138ae5c86280fe4c | commit-date: 2026-01-19 | host: aarch64-apple-darwin | release: 1.93.0 | LLVM version: 21.1.8
+rustdoc_path=/Users/hoppworks/.rustup/toolchains/stable-aarch64-apple-darwin/bin/rustdoc rustdoc_version=rustdoc 1.93.0 (254b59607 2026-01-19)
+repo_head=2dfaa1e62811534b613919affb6b28e16d4c7202
+repo_dirty=[' M .scratch/process-unix-run/coordinator-state.md', ' M .scratch/process-unix-run/shared-child-first-green.py', '?? .scratch/process-unix-run/cleanup-rust-archive-partial.py', '?? .scratch/process-unix-run/escalations/07-rustup-install-recovery.md', '?? .scratch/process-unix-run/evidence/quarantine-reservation.ecKi0j', '?? .scratch/process-unix-run/evidence/quarantine-reservation.qyGAZk', '?? .scratch/process-unix-run/evidence/run49-sampler-offline.txt', '?? .scratch/process-unix-run/evidence/rust-1.77.2-procurement.dFUPvK', '?? .scratch/process-unix-run/evidence/shared-child-first-green.23EMc1', '?? .scratch/process-unix-run/evidence/shared-child-first-green.GHCfV0', '?? .scratch/process-unix-run/evidence/shared-child-first-green.WnqVYv', '?? .scratch/process-unix-run/fetch-rust-1.77.2.py', '?? .scratch/process-unix-run/quarantine-reservation-offline.py', '?? .scratch/process-unix-run/quarantine-reservation.py', '?? .scratch/process-unix-run/run-fetch-rust-1.77.2.sh', '?? .scratch/process-unix-run/run-quarantine-reservation-offline.sh', '?? .scratch/process-unix-run/run-quarantine-reservation.sh', '?? .scratch/process-unix-run/verify-run49-sampler.py']
+original_overlay_hashes={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/mod.rs': 'ee2dfc0900d64481d09d6d20bbd64b75ac05a316e02788cdf58e9fe52c6be0c5', 'src/packages/sys/process.rs': '090094476662417aa94e2ff519cb8038c1d3721e02be6ec166762502bfbff2e2', 'src/packages/sys/process/unix.rs': '3503a6755ed1bb16be2a723c48d6dd0a022a9e12a4bb8807ca9046a5bebce3ce', 'src/types/token.rs': '445e710b417bf1326121d909618935af6d3bcf4a4bf6966dadc6cabe67a35db3', 'tests/tokens.rs': '326b3a2a12ebc8defb31ca0f8d78197ad4eb6087bfc4cf4165c6ece82768b2bd', 'tests/sys_process.rs': '483b5180f21923161a42b16076dc6ddb31bb31235ac33103c1b5b25e3dba165d', 'tests/fixtures/sys_process_shared_child_contract.rs': '82079fbf29518cb2382538834d37e90b3c53d01b7cb621cbfdea9b904d31e9c0'}
+test_fixture_hash=82079fbf29518cb2382538834d37e90b3c53d01b7cb621cbfdea9b904d31e9c0
+harness_hash=a6e4db413e787003d3a769bc03f8c5c27269f865bbc071bb583790811691e96b
+run_scoped_hash=9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d
+wrapper_hash=45a0361a59c3effdca9452e67335de45e028f8badd14e9bc76259247b13ad81c
+storage_sample_attempt=1 status=0 stdout='0\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='14660\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+private_source_hashes={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/mod.rs': 'ee2dfc0900d64481d09d6d20bbd64b75ac05a316e02788cdf58e9fe52c6be0c5', 'src/packages/sys/process.rs': '090094476662417aa94e2ff519cb8038c1d3721e02be6ec166762502bfbff2e2', 'src/packages/sys/process/unix.rs': '3503a6755ed1bb16be2a723c48d6dd0a022a9e12a4bb8807ca9046a5bebce3ce', 'src/types/token.rs': '445e710b417bf1326121d909618935af6d3bcf4a4bf6966dadc6cabe67a35db3', 'tests/tokens.rs': '326b3a2a12ebc8defb31ca0f8d78197ad4eb6087bfc4cf4165c6ece82768b2bd', 'tests/sys_process.rs': '483b5180f21923161a42b16076dc6ddb31bb31235ac33103c1b5b25e3dba165d', 'tests/fixtures/sys_process_shared_child_contract.rs': '82079fbf29518cb2382538834d37e90b3c53d01b7cb621cbfdea9b904d31e9c0'}
+private_injected_test_hash=7c0a85ebc2f012f77b0f8d57715debbedfa4737cd67eeb9503524acdd0f4b649
+private_source=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b/source
+accepted_lock_sha256=8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa private_lock_sha256=2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425 private_lock_direct_libc_edge=true
+parser_compatibility_evidence=run45 commit=a22f053beade6d39f661cdc049ec9fd89dafa648; no parser variants rerun
+drop_true_wrong_control_unix_sha256=b7fef9d7102c02c714271309625925584ebb476f3cb8802af7cd7aeb67a03341
+cargo_argv=['/Users/hoppworks/.rustup/toolchains/stable-aarch64-apple-darwin/bin/cargo', 'test', '--locked', '--test', 'sys_process', '--features', 'testing-environ,sys,sync', '--', 'shared_child_contract::nonfinal_child_clone_drop_keeps_the_real_child_available', '--exact', '--nocapture', '--test-threads=1']
+cargo_cwd=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b/source
+cargo_log=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b/drop_true_wrong_control.log
+cargo_pid=47997 cargo_pgid=47876
+storage_sample_attempt=1 status=0 stdout='17816\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='21072\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='21308\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='26996\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='28820\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='57992\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='67152\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='78836\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='83832\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='97956\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='112204\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='114456\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='128516\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='137368\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='170444\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='178256\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='183920\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='185072\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='185072\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='194368\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='197496\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='206116\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='250116\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='250124\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='250124\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='250124\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='250124\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+cargo_status=101
+cargo_output_begin complete=true bytes=7664 clipped=false
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded proc-macro2 v1.0.103
+  Downloaded ambient-authority v0.0.2
+  Downloaded fs-set-times v0.20.3
+  Downloaded maybe-owned v0.3.4
+  Downloaded const-random v0.1.18
+  Downloaded const-random-macro v0.1.16
+  Downloaded cfg-if v1.0.5
+  Downloaded itoa v1.0.15
+  Downloaded crunchy v0.2.4
+  Downloaded errno v0.3.14
+  Downloaded version_check v0.9.5
+  Downloaded byteorder v1.5.0
+  Downloaded tiny-keccak v2.0.2
+  Downloaded quote v1.0.41
+  Downloaded io-lifetimes v3.0.1
+  Downloaded io-lifetimes v2.0.4
+  Downloaded rmp v0.8.14
+  Downloaded static_assertions v1.1.0
+  Downloaded ipnet v2.12.2
+  Downloaded paste v1.0.15
+  Downloaded autocfg v1.5.1
+  Downloaded smallvec v1.16.2
+  Downloaded getrandom v0.2.17
+  Downloaded once_cell v1.21.4
+  Downloaded ryu v1.0.20
+  Downloaded smartstring v1.0.1
+  Downloaded thin-vec v0.2.19
+  Downloaded spin v0.7.2
+  Downloaded getrandom v0.3.4
+  Downloaded num-traits v0.2.19
+  Downloaded rmp-serde v1.3.0
+  Downloaded cap-std v4.0.3
+  Downloaded unicode-ident v1.0.22
+  Downloaded serde_core v1.0.229
+  Downloaded cap-primitives v4.0.3
+  Downloaded ahash v0.8.12
+  Downloaded bitflags v2.13.2
+  Downloaded io-extras v0.19.0
+  Downloaded serde v1.0.229
+  Downloaded memchr v2.8.3
+  Downloaded serde_json v1.0.145
+  Downloaded portable-atomic v1.15.0
+  Downloaded zerocopy v0.8.59
+  Downloaded syn v2.0.106
+  Downloaded rustix v1.1.5
+  Downloaded libc v0.2.189
+ Downloading crates ...
+  Downloaded web-time v1.1.0
+   Compiling libc v0.2.189
+   Compiling autocfg v1.5.1
+   Compiling version_check v0.9.5
+   Compiling crunchy v0.2.4
+   Compiling io-lifetimes v3.0.1
+   Compiling tiny-keccak v2.0.2
+   Compiling rustix v1.1.5
+   Compiling proc-macro2 v1.0.103
+   Compiling io-lifetimes v2.0.4
+   Compiling cfg-if v1.0.5
+   Compiling errno v0.3.14
+   Compiling num-traits v0.2.19
+   Compiling bitflags v2.13.2
+   Compiling unicode-ident v1.0.22
+   Compiling portable-atomic v1.15.0
+   Compiling io-extras v0.19.0
+   Compiling quote v1.0.41
+   Compiling getrandom v0.2.17
+   Compiling cap-primitives v4.0.3
+   Compiling serde_core v1.0.229
+   Compiling once_cell v1.21.4
+   Compiling getrandom v0.3.4
+   Compiling zerocopy v0.8.59
+   Compiling const-random-macro v0.1.16
+   Compiling fs-set-times v0.20.3
+   Compiling ahash v0.8.12
+   Compiling smartstring v1.0.1
+   Compiling maybe-owned v0.3.4
+   Compiling cap-std v4.0.3
+   Compiling ambient-authority v0.0.2
+   Compiling ipnet v2.12.2
+   Compiling paste v1.0.15
+   Compiling syn v2.0.106
+   Compiling const-random v0.1.18
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b/source)
+   Compiling static_assertions v1.1.0
+   Compiling serde v1.0.229
+   Compiling rhai_codegen v3.2.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b/source/codegen)
+   Compiling byteorder v1.5.0
+   Compiling serde_json v1.0.145
+   Compiling smallvec v1.16.2
+   Compiling thin-vec v0.2.19
+   Compiling rmp v0.8.14
+   Compiling memchr v2.8.3
+   Compiling itoa v1.0.15
+   Compiling ryu v1.0.20
+   Compiling rmp-serde v1.3.0
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:1565:9
+     |
+1565 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+     |
+     = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:1882:9
+     |
+1882 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: field `kill_on_drop` is never read
+  --> src/packages/sys/process/unix.rs:66:5
+   |
+50 | struct ChildSnapshot {
+   |        ------------- field in this struct
+...
+66 |     kill_on_drop: bool,
+   |     ^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: methods `numeric_operations_probe`, `quarantine_observations_probe`, and `fail_reservation` are never used
+   --> src/packages/sys/process/unix.rs:912:8
+    |
+841 | impl ExecutionFaults {
+    | -------------------- methods in this implementation
+...
+912 |     fn numeric_operations_probe(&self) -> Option<Arc<AtomicUsize>> {
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+923 |     fn quarantine_observations_probe(&self) -> Option<Arc<AtomicUsize>> {
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+948 |     fn fail_reservation(&self) -> bool {
+    |        ^^^^^^^^^^^^^^^^
+
+warning: `rhai` (lib) generated 4 warnings (run `cargo fix --lib -p rhai` to apply 2 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused `Dynamic` that must be used
+   --> tests/fixtures/sys_process_shared_child_contract.rs:260:5
+    |
+260 |     engine.eval_with_scope::<Dynamic>(&mut cancel_scope, "child.kill()").expect("concurrent public cancellation");
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` (part of `#[warn(unused)]`) on by default
+help: use `let _ = ...` to ignore the resulting value
+    |
+260 |     let _ = engine.eval_with_scope::<Dynamic>(&mut cancel_scope, "child.kill()").expect("concurrent public cancellation");
+    |     +++++++
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+warning: `rhai` (test "sys_process") generated 1 warning
+    Finished `test` profile [unoptimized] target(s) in 23.08s
+     Running tests/sys_process.rs (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b/target/debug/deps/sys_process-d938b5b406122e8a)
+
+running 1 test
+test shared_child_contract::nonfinal_child_clone_drop_keeps_the_real_child_available ... shared-child controller_started scenario=drop_true pid=48577 root=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b/shared-child-fixture-48574-0
+shared-child controller_reaped scenario=drop_true pid=48577 status=exit status: 101
+shared-child controller_esrch pid=48577 verified=true
+
+thread 'shared_child_contract::nonfinal_child_clone_drop_keeps_the_real_child_available' (55312891) panicked at tests/fixtures/sys_process_shared_child_contract.rs:333:17:
+scenario drop_true failed (exit status: 101)
+stdout:
+
+running 1 test
+shared_child_contract::scenario_entry --- FAILED
+
+failures:
+
+failures:
+    shared_child_contract::scenario_entry
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 16 filtered out; finished in 5.03s
+
+
+stderr:
+shared-child nonfinal-drop pid=48578 child_record=ready operational_probe=one
+
+thread 'shared_child_contract::scenario_entry' (55312893) panicked at tests/fixtures/sys_process_shared_child_contract.rs:455:9:
+fixture pid=48578 did not become absent before watchdog
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+shared-child fixture_cleanup pid=48578 absent=true
+FAILED
+
+failures:
+
+failures:
+    shared_child_contract::nonfinal_child_clone_drop_keeps_the_real_child_available
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 16 filtered out; finished in 5.04s
+
+error: test failed, to rerun pass `--test sys_process`
+
+cargo_output_end
+storage_sample_attempt=1 status=0 stdout='250116\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+drop_true_wrong_control status=101 exact_failed_test=True one_failure=True intended_drop_assertion=True controller_reaped=True controller_esrch=True fixture_child_esrch=True fixture_root_owned_absent=True
+drop_true_wrong_control_source_restored=True
+drop_false_wrong_control_unix_sha256=6e05c3c0fba3351d9a3a65c7b9fba1646dd1a7b0b05aee916badfd30b36e7003
+cargo_argv=['/Users/hoppworks/.rustup/toolchains/stable-aarch64-apple-darwin/bin/cargo', 'test', '--locked', '--test', 'sys_process', '--features', 'testing-environ,sys,sync', '--', 'shared_child_contract::final_drop_honors_both_kill_on_drop_policies', '--exact', '--nocapture', '--test-threads=1']
+cargo_cwd=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b/source
+cargo_log=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b/drop_false_wrong_control.log
+cargo_pid=48643 cargo_pgid=47876
+storage_sample_attempt=1 status=0 stdout='250116\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='224100\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='224100\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='224100\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='224104\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='224112\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='231236\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='241608\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='250108\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='250108\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='250108\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+cargo_status=101
+cargo_output_begin complete=true bytes=4490 clipped=false
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b/source)
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:1565:9
+     |
+1565 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+     |
+     = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:1882:9
+     |
+1882 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: field `kill_on_drop` is never read
+  --> src/packages/sys/process/unix.rs:66:5
+   |
+50 | struct ChildSnapshot {
+   |        ------------- field in this struct
+...
+66 |     kill_on_drop: bool,
+   |     ^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: methods `numeric_operations_probe`, `quarantine_observations_probe`, and `fail_reservation` are never used
+   --> src/packages/sys/process/unix.rs:912:8
+    |
+841 | impl ExecutionFaults {
+    | -------------------- methods in this implementation
+...
+912 |     fn numeric_operations_probe(&self) -> Option<Arc<AtomicUsize>> {
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+923 |     fn quarantine_observations_probe(&self) -> Option<Arc<AtomicUsize>> {
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+948 |     fn fail_reservation(&self) -> bool {
+    |        ^^^^^^^^^^^^^^^^
+
+warning: `rhai` (lib) generated 4 warnings (run `cargo fix --lib -p rhai` to apply 2 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused `Dynamic` that must be used
+   --> tests/fixtures/sys_process_shared_child_contract.rs:260:5
+    |
+260 |     engine.eval_with_scope::<Dynamic>(&mut cancel_scope, "child.kill()").expect("concurrent public cancellation");
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` (part of `#[warn(unused)]`) on by default
+help: use `let _ = ...` to ignore the resulting value
+    |
+260 |     let _ = engine.eval_with_scope::<Dynamic>(&mut cancel_scope, "child.kill()").expect("concurrent public cancellation");
+    |     +++++++
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+warning: `rhai` (test "sys_process") generated 1 warning
+    Finished `test` profile [unoptimized] target(s) in 7.72s
+     Running tests/sys_process.rs (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b/target/debug/deps/sys_process-d938b5b406122e8a)
+
+running 1 test
+test shared_child_contract::final_drop_honors_both_kill_on_drop_policies ... shared-child controller_started scenario=drop_false pid=48821 root=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b/shared-child-fixture-48818-0
+shared-child controller_reaped scenario=drop_false pid=48821 status=exit status: 101
+shared-child controller_esrch pid=48821 verified=true
+
+thread 'shared_child_contract::final_drop_honors_both_kill_on_drop_policies' (55313714) panicked at tests/fixtures/sys_process_shared_child_contract.rs:333:17:
+scenario drop_false failed (exit status: 101)
+stdout:
+
+running 1 test
+shared_child_contract::scenario_entry --- FAILED
+
+failures:
+
+failures:
+    shared_child_contract::scenario_entry
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 16 filtered out; finished in 3.02s
+
+
+stderr:
+shared-child nonfinal-drop pid=48822 child_record=ready operational_probe=one
+
+thread 'shared_child_contract::scenario_entry' (55313716) panicked at tests/fixtures/sys_process_shared_child_contract.rs:220:9:
+kill_on_drop=false must leave the child operational after final-client drop
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+shared-child fixture_cleanup pid=48822 absent=true
+FAILED
+
+failures:
+
+failures:
+    shared_child_contract::final_drop_honors_both_kill_on_drop_policies
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 16 filtered out; finished in 3.04s
+
+error: test failed, to rerun pass `--test sys_process`
+
+cargo_output_end
+storage_sample_attempt=1 status=0 stdout='250100\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+drop_false_wrong_control status=101 exact_failed_test=True one_failure=True intended_drop_assertion=True controller_reaped=True controller_esrch=True fixture_child_esrch=True fixture_root_owned_absent=True
+drop_false_wrong_control_source_restored=True
+cargo_argv=['/Users/hoppworks/.rustup/toolchains/stable-aarch64-apple-darwin/bin/cargo', 'test', '--locked', '--test', 'sys_process', '--features', 'testing-environ,sys,sync', '--', 'shared_child_contract::', '--nocapture', '--test-threads=1']
+cargo_cwd=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b/source
+cargo_log=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b/cargo-green.log
+cargo_pid=48884 cargo_pgid=47876
+storage_sample_attempt=1 status=0 stdout='250100\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='224096\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='224096\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='224096\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='224096\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='233384\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='227752\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='234864\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=0 stdout='250116\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+storage_sample_attempt=1 status=1 stdout='250120\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr='du: /private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b/shared-child-fixture-49058-2: No such file or directory'
+storage_sample_attempt=2 status=0 stdout='250120\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+cargo_status=0
+cargo_output_begin complete=true bytes=5203 clipped=false
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b/source)
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:1565:9
+     |
+1565 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+     |
+     = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:1882:9
+     |
+1882 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: methods `numeric_operations_probe`, `quarantine_observations_probe`, and `fail_reservation` are never used
+   --> src/packages/sys/process/unix.rs:912:8
+    |
+841 | impl ExecutionFaults {
+    | -------------------- methods in this implementation
+...
+912 |     fn numeric_operations_probe(&self) -> Option<Arc<AtomicUsize>> {
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+923 |     fn quarantine_observations_probe(&self) -> Option<Arc<AtomicUsize>> {
+    |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+948 |     fn fail_reservation(&self) -> bool {
+    |        ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (lib) generated 3 warnings (run `cargo fix --lib -p rhai` to apply 2 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused `Dynamic` that must be used
+   --> tests/fixtures/sys_process_shared_child_contract.rs:260:5
+    |
+260 |     engine.eval_with_scope::<Dynamic>(&mut cancel_scope, "child.kill()").expect("concurrent public cancellation");
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` (part of `#[warn(unused)]`) on by default
+help: use `let _ = ...` to ignore the resulting value
+    |
+260 |     let _ = engine.eval_with_scope::<Dynamic>(&mut cancel_scope, "child.kill()").expect("concurrent public cancellation");
+    |     +++++++
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+warning: `rhai` (test "sys_process") generated 1 warning
+    Finished `test` profile [unoptimized] target(s) in 8.32s
+     Running tests/sys_process.rs (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b/target/debug/deps/sys_process-d938b5b406122e8a)
+
+running 6 tests
+test shared_child_contract::final_drop_honors_both_kill_on_drop_policies ... shared-child controller_started scenario=drop_false pid=49060 root=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b/shared-child-fixture-49058-0
+shared-child controller_reaped scenario=drop_false pid=49060 status=exit status: 0
+shared-child controller_esrch pid=49060 verified=true
+shared-child scenario=drop_false controller_pid=49060 status=ok fixture_record=Some("pid=49061 state=exited code=0\n")
+shared-child fixture_cleanup pid=49061 absent=true
+ok
+test shared_child_contract::fixture_entry ... ok
+test shared_child_contract::nonfinal_child_clone_drop_keeps_the_real_child_available ... shared-child controller_started scenario=drop_true pid=49062 root=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b/shared-child-fixture-49058-1
+shared-child controller_reaped scenario=drop_true pid=49062 status=exit status: 0
+shared-child controller_esrch pid=49062 verified=true
+shared-child scenario=drop_true controller_pid=49062 status=ok fixture_record=Some("pid=49063 state=ready\n")
+shared-child fixture_cleanup pid=49063 absent=true
+ok
+test shared_child_contract::scenario_entry ... ok
+test shared_child_contract::spawn_returns_while_large_stdin_is_blocked_and_wait_snapshots_are_stable ... shared-child controller_started scenario=blocked_input_wait_snapshot pid=49064 root=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b/shared-child-fixture-49058-2
+shared-child controller_reaped scenario=blocked_input_wait_snapshot pid=49064 status=exit status: 0
+shared-child controller_esrch pid=49064 verified=true
+shared-child scenario=blocked_input_wait_snapshot controller_pid=49064 status=ok fixture_record=Some("pid=49065 state=exited code=17\n")
+shared-child fixture_cleanup pid=49065 absent=true
+ok
+test shared_child_contract::sync_waiter_can_be_cancelled_through_another_shared_child_handle ... shared-child controller_started scenario=sync_wait_cancel pid=49067 root=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b/shared-child-fixture-49058-3
+shared-child controller_reaped scenario=sync_wait_cancel pid=49067 status=exit status: 0
+shared-child controller_esrch pid=49067 verified=true
+shared-child scenario=sync_wait_cancel controller_pid=49067 status=ok fixture_record=Some("pid=49068 state=ready\n")
+shared-child fixture_cleanup pid=49068 absent=true
+ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 11 filtered out; finished in 1.01s
+
+
+cargo_output_end
+storage_sample_attempt=1 status=0 stdout='250120\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-ecxzeg4b' stderr=''
+fixture_child_pid=49061 fixture_child_esrch=True
+fixture_child_pid=49063 fixture_child_esrch=True
+fixture_child_pid=49065 fixture_child_esrch=True
+fixture_child_pid=49068 fixture_child_esrch=True
+final_private_source_hashes={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/mod.rs': 'ee2dfc0900d64481d09d6d20bbd64b75ac05a316e02788cdf58e9fe52c6be0c5', 'src/packages/sys/process.rs': '090094476662417aa94e2ff519cb8038c1d3721e02be6ec166762502bfbff2e2', 'src/packages/sys/process/unix.rs': '3503a6755ed1bb16be2a723c48d6dd0a022a9e12a4bb8807ca9046a5bebce3ce', 'src/types/token.rs': '445e710b417bf1326121d909618935af6d3bcf4a4bf6966dadc6cabe67a35db3', 'tests/tokens.rs': '326b3a2a12ebc8defb31ca0f8d78197ad4eb6087bfc4cf4165c6ece82768b2bd', 'tests/sys_process.rs': '7c0a85ebc2f012f77b0f8d57715debbedfa4737cd67eeb9503524acdd0f4b649', 'tests/fixtures/sys_process_shared_child_contract.rs': '82079fbf29518cb2382538834d37e90b3c53d01b7cb621cbfdea9b904d31e9c0'}
+final_private_injected_test_hash=7c0a85ebc2f012f77b0f8d57715debbedfa4737cd67eeb9503524acdd0f4b649
+final_original_overlay_hashes={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/mod.rs': 'ee2dfc0900d64481d09d6d20bbd64b75ac05a316e02788cdf58e9fe52c6be0c5', 'src/packages/sys/process.rs': '090094476662417aa94e2ff519cb8038c1d3721e02be6ec166762502bfbff2e2', 'src/packages/sys/process/unix.rs': '3503a6755ed1bb16be2a723c48d6dd0a022a9e12a4bb8807ca9046a5bebce3ce', 'src/types/token.rs': '445e710b417bf1326121d909618935af6d3bcf4a4bf6966dadc6cabe67a35db3', 'tests/tokens.rs': '326b3a2a12ebc8defb31ca0f8d78197ad4eb6087bfc4cf4165c6ece82768b2bd', 'tests/sys_process.rs': '483b5180f21923161a42b16076dc6ddb31bb31235ac33103c1b5b25e3dba165d', 'tests/fixtures/sys_process_shared_child_contract.rs': '82079fbf29518cb2382538834d37e90b3c53d01b7cb621cbfdea9b904d31e9c0'}
+green status=0 passed=True started_tests=['shared_child_contract::spawn_returns_while_large_stdin_is_blocked_and_wait_snapshots_are_stable', 'shared_child_contract::nonfinal_child_clone_drop_keeps_the_real_child_available', 'shared_child_contract::final_drop_honors_both_kill_on_drop_policies', 'shared_child_contract::sync_waiter_can_be_cancelled_through_another_shared_child_handle'] all_tests_passed=True controller_count=4 controller_reaped=True controller_esrch=True fixture_roots_owned_absent=True fixture_child_count=4 fixture_children_esrch=True private_source_unchanged=True original_sources_unchanged=True
+classification=development_only_shared_child_contract; not_msrv_or_release_acceptance; lifecycle_and_platform_requirements_remain_open
+exit_available_private_overlay_hashes={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/mod.rs': 'ee2dfc0900d64481d09d6d20bbd64b75ac05a316e02788cdf58e9fe52c6be0c5', 'src/packages/sys/process.rs': '090094476662417aa94e2ff519cb8038c1d3721e02be6ec166762502bfbff2e2', 'src/packages/sys/process/unix.rs': '3503a6755ed1bb16be2a723c48d6dd0a022a9e12a4bb8807ca9046a5bebce3ce', 'src/types/token.rs': '445e710b417bf1326121d909618935af6d3bcf4a4bf6966dadc6cabe67a35db3', 'tests/tokens.rs': '326b3a2a12ebc8defb31ca0f8d78197ad4eb6087bfc4cf4165c6ece82768b2bd', 'tests/sys_process.rs': '7c0a85ebc2f012f77b0f8d57715debbedfa4737cd67eeb9503524acdd0f4b649', 'tests/fixtures/sys_process_shared_child_contract.rs': '82079fbf29518cb2382538834d37e90b3c53d01b7cb621cbfdea9b904d31e9c0'}
+exit_available_original_overlay_hashes={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/mod.rs': 'ee2dfc0900d64481d09d6d20bbd64b75ac05a316e02788cdf58e9fe52c6be0c5', 'src/packages/sys/process.rs': '090094476662417aa94e2ff519cb8038c1d3721e02be6ec166762502bfbff2e2', 'src/packages/sys/process/unix.rs': '3503a6755ed1bb16be2a723c48d6dd0a022a9e12a4bb8807ca9046a5bebce3ce', 'src/types/token.rs': '445e710b417bf1326121d909618935af6d3bcf4a4bf6966dadc6cabe67a35db3', 'tests/tokens.rs': '326b3a2a12ebc8defb31ca0f8d78197ad4eb6087bfc4cf4165c6ece82768b2bd', 'tests/sys_process.rs': '483b5180f21923161a42b16076dc6ddb31bb31235ac33103c1b5b25e3dba165d', 'tests/fixtures/sys_process_shared_child_contract.rs': '82079fbf29518cb2382538834d37e90b3c53d01b7cb621cbfdea9b904d31e9c0'}
+exit_available_private_injected_test_hash=7c0a85ebc2f012f77b0f8d57715debbedfa4737cd67eeb9503524acdd0f4b649

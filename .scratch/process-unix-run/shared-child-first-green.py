@@ -1,3 +1,4 @@
+import atexit
 import hashlib
 import os
 import platform
@@ -52,14 +53,41 @@ def pid_is_esrch(pid):
     return False
 
 
-def sample_storage():
-    result = subprocess.run(['du', '-sk', str(RUNTIME)], capture_output=True, text=True, timeout=5)
-    print(f'storage_sample_status={result.returncode} stdout={result.stdout.strip()!r} stderr={result.stderr.strip()!r}', flush=True)
-    if result.returncode != 0:
-        raise RuntimeError('private runtime storage sample failed')
-    kib = int(result.stdout.split()[0])
-    if kib >= SAMPLED_STOP_KIB:
-        raise RuntimeError(f'sampled private runtime reached existing stop threshold {SAMPLED_STOP_KIB} KiB')
+def sample_storage(deadline=None):
+    for attempt in range(1, 3):
+        remaining = 5.0 if deadline is None else deadline - time.monotonic()
+        if remaining <= 0:
+            raise TimeoutError('private runtime storage sampling exceeded its enclosing deadline')
+        timeout = min(5.0, remaining)
+        try:
+            result = subprocess.run(
+                ['du', '-sk', str(RUNTIME)], capture_output=True, text=True, timeout=timeout
+            )
+        except subprocess.TimeoutExpired as error:
+            stdout = error.stdout.decode(errors='replace') if isinstance(error.stdout, bytes) else error.stdout
+            stderr = error.stderr.decode(errors='replace') if isinstance(error.stderr, bytes) else error.stderr
+            print(f'storage_sample_attempt={attempt} status=timeout timeout_s={timeout:.3f} stdout={stdout!r} stderr={stderr!r}', flush=True)
+            if attempt == 2 or (deadline is not None and time.monotonic() >= deadline):
+                raise RuntimeError('private runtime storage sampling timed out twice') from error
+            time.sleep(min(0.05, max(0.0, deadline - time.monotonic()) if deadline is not None else 0.05))
+            continue
+
+        print(f'storage_sample_attempt={attempt} status={result.returncode} stdout={result.stdout.strip()!r} stderr={result.stderr.strip()!r}', flush=True)
+        if result.returncode != 0:
+            if attempt == 2 or (deadline is not None and time.monotonic() >= deadline):
+                raise RuntimeError('private runtime storage sample failed twice')
+            time.sleep(min(0.05, max(0.0, deadline - time.monotonic()) if deadline is not None else 0.05))
+            continue
+
+        lines = result.stdout.strip().splitlines()
+        fields = lines[0].split(maxsplit=1) if len(lines) == 1 else []
+        if len(fields) != 2 or not fields[0].isdigit() or fields[1] != str(RUNTIME):
+            raise RuntimeError(f'private runtime storage sample had malformed output or path identity: {result.stdout!r}')
+        kib = int(fields[0])
+        if kib >= SAMPLED_STOP_KIB:
+            raise RuntimeError(f'sampled private runtime reached existing stop threshold {SAMPLED_STOP_KIB} KiB')
+        return kib
+    raise RuntimeError('private runtime storage sample produced no successful bounded measurement')
 
 
 def emit_log(path, complete):
@@ -80,19 +108,25 @@ def run_cargo(argv, cwd, env, log_path):
         proc = subprocess.Popen(argv, cwd=cwd, env=env, stdout=log, stderr=subprocess.STDOUT, start_new_session=False)
         print(f'cargo_pid={proc.pid} cargo_pgid={os.getpgid(proc.pid)}', flush=True)
         deadline = time.monotonic() + 540
+        log_emitted = False
         try:
             while proc.poll() is None:
                 if time.monotonic() >= deadline:
                     raise TimeoutError('development RED cargo command reached 540s watchdog')
-                sample_storage()
+                sample_storage(deadline)
                 time.sleep(1)
             status = proc.returncode
+            print(f'cargo_status={status}', flush=True)
+            emit_log(log_path, True)
+            log_emitted = True
+            sample_storage(deadline)
         except BaseException:
-            emit_log(log_path, False)
+            terminal_status = proc.poll()
+            if not log_emitted:
+                if terminal_status is not None:
+                    print(f'cargo_status={terminal_status}', flush=True)
+                emit_log(log_path, terminal_status is not None)
             raise
-    sample_storage()
-    print(f'cargo_status={status}', flush=True)
-    emit_log(log_path, True)
     return status, log_path.read_text(errors='replace')
 
 
@@ -129,12 +163,12 @@ with archive.open('wb') as output:
     while proc.poll() is None:
         if time.monotonic() >= deadline:
             raise TimeoutError('baseline git archive exceeded 90s')
-        sample_storage()
+        sample_storage(deadline)
         time.sleep(0.5)
     stderr = proc.stderr.read().decode(errors='replace')
     if proc.returncode != 0:
         raise RuntimeError(f'git archive status={proc.returncode} stderr={stderr}')
-sample_storage()
+sample_storage(deadline)
 extract = subprocess.run(['tar', '-xf', str(archive), '-C', str(source)], timeout=90, check=False)
 if extract.returncode != 0:
     raise RuntimeError(f'baseline tar extraction status={extract.returncode}')
@@ -158,6 +192,20 @@ injected_test_hash = sha(test_file)
 print('private_source_hashes=' + repr(private_hashes), flush=True)
 print('private_injected_test_hash=' + injected_test_hash, flush=True)
 print('private_source=' + str(source), flush=True)
+
+def export_exit_manifests():
+    try:
+        available_private = {name: sha(source / name) for name in OVERLAYS if (source / name).is_file()}
+        available_original = {name: sha(REPO / name) for name in OVERLAYS if (REPO / name).is_file()}
+        private_test = source / 'tests/sys_process.rs'
+        print('exit_available_private_overlay_hashes=' + repr(available_private), flush=True)
+        print('exit_available_original_overlay_hashes=' + repr(available_original), flush=True)
+        if private_test.is_file():
+            print('exit_available_private_injected_test_hash=' + sha(private_test), flush=True)
+    except BaseException as error:
+        print(f'exit_manifest_export_error={type(error).__name__}: {error}', flush=True)
+
+atexit.register(export_exit_manifests)
 
 accepted_lock = REPO / '.scratch/core-msrv-compatible-resolution/Cargo.lock'
 lock_hash = sha(accepted_lock)
