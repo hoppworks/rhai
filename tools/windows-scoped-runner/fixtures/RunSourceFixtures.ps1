@@ -5,8 +5,8 @@ param(
 
 $ErrorActionPreference = 'Stop'
 
-if ($PSVersionTable.PSVersion.Major -lt 7) {
-    throw 'Use the already-installed PowerShell 7 host; Windows PowerShell 5.1 is outside this harness contract.'
+if ($PSVersionTable.PSVersion -lt [version]'5.1') {
+    throw 'PowerShell 5.1 or later is required; the guest preflight established Windows PowerShell 5.1.'
 }
 if ([IntPtr]::Size -ne 8) { throw 'The accepted Windows guest and job layout require a 64-bit PowerShell process.' }
 
@@ -61,8 +61,14 @@ $env:TMP = $tempRoot
 
 # Bind kernel32 exports through runtime-generated delegates. This emits managed
 # metadata only; no C# compiler or other child is started before ownership.
-$script:delegateAssembly = [Reflection.Emit.AssemblyBuilder]::DefineDynamicAssembly(
-    [Reflection.AssemblyName]::new('RhaiFixtureNativeBindings'), [Reflection.Emit.AssemblyBuilderAccess]::Run)
+$assemblyName = [Reflection.AssemblyName]::new('RhaiFixtureNativeBindings')
+$assemblyAccess = [Reflection.Emit.AssemblyBuilderAccess]::Run
+if ($PSVersionTable.PSEdition -eq 'Desktop') {
+    $script:delegateAssembly = [AppDomain]::CurrentDomain.DefineDynamicAssembly($assemblyName, $assemblyAccess)
+}
+else {
+    $script:delegateAssembly = [Reflection.Emit.AssemblyBuilder]::DefineDynamicAssembly($assemblyName, $assemblyAccess)
+}
 $script:delegateModule = $script:delegateAssembly.DefineDynamicModule('Bindings')
 function New-NativeDelegateType([string] $Name, [Type] $ReturnType, [Type[]] $ParameterTypes) {
     $builder = $script:delegateModule.DefineType($Name,
@@ -85,8 +91,17 @@ function New-NativeDelegateType([string] $Name, [Type] $ReturnType, [Type[]] $Pa
 $script:kernel32 = [Diagnostics.Process]::GetCurrentProcess().Modules |
     Where-Object { $_.ModuleName -ieq 'kernel32.dll' } | Select-Object -First 1 -ExpandProperty BaseAddress
 if ($script:kernel32 -eq [IntPtr]::Zero) { throw 'kernel32 module handle was not available in the current process.' }
+$resolverBuilder = $script:delegateModule.DefineType('Kernel32ExportResolver',
+    [Reflection.TypeAttributes]::Public -bor [Reflection.TypeAttributes]::Abstract -bor [Reflection.TypeAttributes]::Sealed)
+$resolverMethod = $resolverBuilder.DefinePInvokeMethod('GetProcAddress', 'kernel32.dll',
+    [Reflection.MethodAttributes]::Public -bor [Reflection.MethodAttributes]::Static -bor [Reflection.MethodAttributes]::PinvokeImpl,
+    [Reflection.CallingConventions]::Standard, [IntPtr], [Type[]]@([IntPtr], [string]),
+    [Runtime.InteropServices.CallingConvention]::Winapi, [Runtime.InteropServices.CharSet]::Ansi)
+$resolverMethod.SetImplementationFlags([Reflection.MethodImplAttributes]::PreserveSig)
+$script:kernel32Resolver = $resolverBuilder.CreateTypeInfo().AsType()
 function Get-KernelDelegate([string] $Export, [Type] $DelegateType) {
-    $address = [Runtime.InteropServices.NativeLibrary]::GetExport($script:kernel32, $Export)
+    $address = [IntPtr]$script:kernel32Resolver.GetMethod('GetProcAddress').Invoke($null, [object[]]@($script:kernel32, $Export))
+    if ($address -eq [IntPtr]::Zero) { throw "GetProcAddress($Export) failed." }
     return [Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer($address, $DelegateType)
 }
 $script:createJob = Get-KernelDelegate 'CreateJobObjectW' (New-NativeDelegateType 'CreateJobObjectDelegate' ([IntPtr]) ([Type[]]@([IntPtr], [IntPtr])))
