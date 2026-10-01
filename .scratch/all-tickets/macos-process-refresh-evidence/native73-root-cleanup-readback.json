@@ -1,0 +1,59 @@
+{
+  "pids": [
+    {
+      "pid": 50849,
+      "status": 1,
+      "output": ""
+    },
+    {
+      "pid": 50860,
+      "status": 1,
+      "output": ""
+    },
+    {
+      "pid": 50861,
+      "status": 1,
+      "output": ""
+    },
+    {
+      "pid": 50877,
+      "status": 1,
+      "output": ""
+    },
+    {
+      "pid": 51262,
+      "status": 1,
+      "output": ""
+    },
+    {
+      "pid": 51264,
+      "status": 1,
+      "output": ""
+    },
+    {
+      "pid": 51265,
+      "status": 1,
+      "output": ""
+    },
+    {
+      "pid": 51266,
+      "status": 1,
+      "output": ""
+    },
+    {
+      "pid": 51267,
+      "status": 1,
+      "output": ""
+    }
+  ],
+  "owned_group_members": [],
+  "runtime_exists": false,
+  "sampled_max_kib": 250668,
+  "cargo_elapsed_seconds": [
+    "16.640"
+  ],
+  "original_hashes": {
+    "macos-process-refresh.B3sAtB": "acba590a300494dc0e08ae789b39269e9705f6c8112d61eeaa059723ffb515b3",
+    "macos-process-refresh.B3sAtB.cargo.wrong-expectation.log": "79ced691fb0d17dfde9f5f0de3971624fb97d258626464bb435f68a42511ed43"
+  }
+}

@@ -1,8 +1,8 @@
 import hashlib, os, platform, re, shutil, subprocess, sys, time
 from pathlib import Path
 REPO=Path('/Users/hoppworks/projects/rhai-managed-unix-scope-close')
-SOURCE_REF='b801968d221a9f7baac592770d3ac7e2b315e8fd'
-ARCHIVE_SHA='ba60259b46c686db02d7f77d52674b34688189924ab7f2237dfecbfeaf9a812a'
+SOURCE_REF='55e54ebd93a3dda931141d463c8cb12f5a2ea849'
+ARCHIVE_SHA='fb939f8b58ef5ec77c3b36cb3b5e1579f0e846869543dc3a89edfa8e2a746a5a'
 RUNTIME=Path(os.environ['AGENT_RUNTIME_DIR']).resolve()
 BASE=Path(os.environ['RHAI_RESUME_LOG_BASE']).absolute()
 EVIDENCE=Path('/Users/hoppworks/projects/rhai-all-tickets/.scratch/all-tickets/macos-process-refresh-evidence')

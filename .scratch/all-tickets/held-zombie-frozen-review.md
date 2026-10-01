@@ -16,3 +16,11 @@ These checks make the bounded diagnostic reasonable after correction and exact s
 ## Related macOS diagnosis
 
 Actual72 rejected before its intended assertion; new typed SysError diagnostic is required before a further affected native diagnosis. Cause08 Expert/follow-up history and resource limits remain unchanged. No source findings consume a native slot; next actual number73 is unallocated.
+
+## Corrected frozen inputs and staged readback
+
+Root independently reviewed source911fe6fc047cfc5240347ccc4cd11fa56a282ff8: public O asserts recognized successful report or exact closure Io with matching cleanup diagnostic before boundary ACK; driver64a8831611de0d73fe81f875c899fe111beb5848ee7e2058181067f2ac6de596 applies the corresponding gate and outer32 count. Independent git archive44b60f1d1260d90b4bb546aad92ff44f673c3257fc0cd9b1e35faf01c33240d5 resolves the former inconsistent archive. Those two findings are closed source-only.
+
+Root independently read seven SSH workhorse stage hashes at /root/rhai-managed-unix-scope-close-911fe6fc: archive44b60; baseline8bd35; driver64a883; launcher531a075; runner9edd5; empty init e3b0c442; pyguard a3739. Root then checked the actual invocation paths and found linux-process-proof.py and source.tar absent: seven artifact hashes alone do not establish runnable stage wiring. Responsible owner is creating exact copies/aliases to these required names. No native launch consumed by these setup readbacks; root must check those bindings and empty evidence directory before release. macOS73 is terminal/rejected as recorded in native73-review.md; next actual Linux diagnostic74 remains unconsumed until execution starts.
+
+Required basename corrections are independently closed: source.tar SHA44b60 and linux-process-proof.py SHA64a883 match; stage and evidence are real non-symlink directories, evidence empty immediately before release. Root released one bounded actual74 diagnostic under preserved limits. Owner reports attached86682, launcher3855354/PGID3855296, deadline1790895600. No terminal result or native acceptance yet.
