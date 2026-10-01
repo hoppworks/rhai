@@ -5,25 +5,38 @@
 The 11:17–11:47 UTC entry in `windows-monitor-staging-ownership-review.md` is a
 completed SOURCE allowance and records zero execution launches/resources. It is
 not a human-imposed native cap. The current task instruction separately says to
-hold guest/build/native work until root reviews this source and custody harness.
-No historical human native run-count or resource cap was found in the cited
-instructions. Keep prior activity totals intact; do not convert the 30-minute
-source planning estimate into an execution cap.
+hold VM activation until the source/custody harness review, then authorized the
+exact VM activation and read-only guest preflight. Compile/fixture/native work
+still requires an established bounded input-transfer route and current toolchain
+readback. No historical human native run-count or resource cap was found in the
+cited instructions. Keep prior activity totals intact; do not convert the
+30-minute source planning estimate into an execution cap.
 
 Project `AGENTS.md` selects strict verification. The current human scope
 authorizes writes only to the approved `hoppworks/rhai` fork; the public
-original is forbidden. This preparation makes no remote write. The prior
+original is forbidden. The reviewed harness checkpoint was pushed only to
+`origin/task/windows-scoped-runner` at `d9480102a7f1d0cc87a7c294e2898995ed98dfd0`;
+this preflight adds no remote write. The prior
 `acceptance.md` records the authorized
-`rhai-win11-quality` VM on `workhorse`. A current read-only
-`virsh -c qemu:///system domstate rhai-win11-quality` query via `workhorse`
-returned status 0 and `shut off`; the old black-console observation is stale.
-No start, configuration, or guest command was issued. This does not establish a
-safe guest compiler/bootstrap route. The VM inventory documents
+`rhai-win11-quality` VM on `workhorse`. Its earlier shut-off result and black
+console are now superseded by the authorized 2026-10-01 activation. Read-back
+reported `running`, 4 vCPUs, 8 GiB configured memory, enforcing SELinux and DHCP
+lease `192.168.122.125` for MAC `52:54:00:58:9d:bf`. `dumpxml` shows the default
+e1000e network, loopback-only VNC, serial/console PTY `/dev/pts/3`, and no
+QEMU guest-agent channel or shared filesystem. `guest-ping` reports that the
+guest agent is not configured. TCP connects to ports 22, 445, 3389, 5985 and
+5986 all returned closed-or-filtered. No SSH, SMB, RDP or WinRM route exists
+for immutable source transfer or read-only PowerShell/compiler inspection.
+No guest credentials were supplied or handled. The VM inventory documents
 an existing Build Tools compiler at
 `C:\BuildTools\MSBuild\Current\Bin\Roslyn\csc.exe`, Windows 11 Pro x64 and
-SDK 26100. It does not establish current guest reachability or provide a current
-PowerShell 7 path. No credentials, install, bootstrap, admin change, home/config
-change, baseline mutation, or guest command is part of this preparation.
+SDK 26100. Earlier serial entries include a 2026-09-30
+`RHAI_TOOLCHAIN_READY Rust=1.93.0 Target=x86_64-pc-windows-msvc` marker and a
+successful Visual Studio Build Tools installer status; those are historical and
+do not verify current PowerShell 7 or compiler availability. The inventory's
+compiler path remains unverified. Current serial tail shows firmware launching
+Windows Boot Manager without fresh toolchain output. No install, bootstrap,
+admin change, home/config change, baseline mutation, or guest command occurred.
 
 ## Frozen source input and fixture harness
 
@@ -123,11 +136,12 @@ bootstrap/install, or release acceptance.
 
 ## Present status
 
-No PowerShell parser/runtime, compiler, fixture, native API, guest, SSH, UI,
+No PowerShell parser/runtime, compiler, fixture, native API, guest command,
 bootstrap, build, or runtime-removal command has run for this preparation. The
 host has neither `pwsh` nor `powershell` on PATH, so even PowerShell syntax has
 not been parsed locally. `git diff --check` is the only executed source check.
-The authorized VM's current read-only state is `shut off`. The next safe action
-after root reviews the frozen harness is to reconcile an activation/launch path
-against existing authority and custody. No VM start has occurred; do not infer
-guest availability from the state query alone.
+The exact authorized VM is running after activation. No compile or fixture
+launch should occur: current PowerShell/compiler availability cannot be
+independently read and no immutable source-transfer path is established. A
+reviewed host driver and bounded launch path remain prerequisites. No shutdown
+or VM reconfiguration was performed.
