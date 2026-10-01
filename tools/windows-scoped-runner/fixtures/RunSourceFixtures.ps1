@@ -100,7 +100,21 @@ $resolverMethod = $resolverBuilder.DefinePInvokeMethod('GetProcAddress', 'kernel
 $resolverMethod.SetImplementationFlags([Reflection.MethodImplAttributes]::PreserveSig)
 $script:kernel32Resolver = $resolverBuilder.CreateTypeInfo().AsType()
 function Get-KernelDelegate([string] $Export, [Type] $DelegateType) {
-    $address = [IntPtr]$script:kernel32Resolver.GetMethod('GetProcAddress').Invoke($null, [object[]]@($script:kernel32, $Export))
+    # Desktop PowerShell may preserve pipeline results as PSObject wrappers;
+    # MethodInfo.Invoke requires the underlying CLR IntPtr in its argument array.
+    $moduleHandle = [System.Management.Automation.PSObject]::AsPSObject($script:kernel32).BaseObject
+    if ($moduleHandle -isnot [IntPtr] -or $moduleHandle -eq [IntPtr]::Zero) {
+        throw 'kernel32 module handle was not a nonzero CLR IntPtr.'
+    }
+    if ([string]::IsNullOrWhiteSpace($Export)) { throw 'Kernel32 export name is empty.' }
+    $arguments = [object[]]::new(2)
+    $arguments.SetValue([System.Management.Automation.PSObject]::AsPSObject($script:kernel32).BaseObject, 0)
+    $arguments.SetValue([string]$Export, 1)
+    if ($arguments[0].GetType() -ne [IntPtr] -or $arguments[0] -eq [IntPtr]::Zero) {
+        throw 'GetProcAddress argument 0 is not a nonzero CLR IntPtr.'
+    }
+    if ($arguments[1].GetType() -ne [string]) { throw 'GetProcAddress argument 1 is not a CLR String.' }
+    $address = [IntPtr]$script:kernel32Resolver.GetMethod('GetProcAddress').Invoke($null, $arguments)
     if ($address -eq [IntPtr]::Zero) { throw "GetProcAddress($Export) failed." }
     return [Runtime.InteropServices.Marshal]::GetDelegateForFunctionPointer($address, $DelegateType)
 }

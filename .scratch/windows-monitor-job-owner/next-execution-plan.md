@@ -3,19 +3,19 @@
 ## Authority and current boundary
 
 The 11:17–11:47 UTC entry in `windows-monitor-staging-ownership-review.md` is a
-completed SOURCE allowance and records zero execution launches/resources. It is
-not a human-imposed native cap. The current task instruction separately says to
-hold VM activation until the source/custody harness review, then authorized the
-exact VM activation and read-only guest preflight. Compile/fixture/native work
-still requires an established bounded input-transfer route and current toolchain
-readback. No historical human native run-count or resource cap was found in the
-cited instructions. Keep prior activity totals intact; do not convert the
-30-minute source planning estimate into an execution cap.
+completed SOURCE allowance and records zero execution launches/resources; it
+was not a human-imposed native cap. Root accepted the frozen source/custody
+harness for one bounded Windows source-fixture invocation and authorized the
+exact VM activation and read-only preflight. That invocation is limited to the
+source compiler and fixtures; it is not real-client, payload, or native
+acceptance. Preserve earlier work totals and all Expert02 policy/resource caps.
+No historical human native run-count cap was found. The 30-minute source
+planning estimate is not an execution cap.
 
 Project `AGENTS.md` selects strict verification. The current human scope
 authorizes writes only to the approved `hoppworks/rhai` fork; the public
 original is forbidden. The reviewed harness checkpoint was pushed only to
-`origin/task/windows-scoped-runner` at `d9480102a7f1d0cc87a7c294e2898995ed98dfd0`;
+`origin/task/windows-scoped-runner` at `5fe4a08a1dad49d1f24e7fedc0399b54d5c9acc8`;
 this preflight adds no remote write. The prior
 `acceptance.md` records the authorized
 `rhai-win11-quality` VM on `workhorse`. Its earlier shut-off result and black
@@ -141,33 +141,56 @@ hashes in the guest, then run the reviewed harness from the unique run root.
 The archive fetch and compiler/fixture batch have not run.
 
 The guest agent is absent and guest SSH/SMB/RDP/WinRM ports remain
-closed-or-filtered; direct console plus outbound HTTPS is the currently
-established transfer route. SSH/SCP has only copied host-created screenshots
-from the hypervisor. No credentials, attachment, mount, bootstrap, service
-change, or VM baseline modification occurred. The VM remains running. This
-supersedes the earlier no-shell/no-transfer conclusions in this plan; retain
-those as historical observations preceding the authorized desktop wake and
-preflight.
+closed-or-filtered; direct console plus outbound HTTPS is the established
+transfer route. The exact archive for approved owner checkpoint
+`5fe4a08a1dad49d1f24e7fedc0399b54d5c9acc8` was downloaded to the uniquely
+owned `C:\Users\RhaiTest\owner.zip` and extracted to
+`C:\Users\RhaiTest\owner-extract\rhai-5fe4a08a1dad49d1f24e7fedc0399b54d5c9acc8`.
+The archive SHA-256 readback was
+`A174F4AB28492CC1766F387D0451363CB2BB17191422F8A89B949C2D33AD1457`; the
+reviewed harness SHA-256 was
+`611B5236A5A5648B0C2584984F6100553448DECB45FB983DFE6583531F034E2E`. The
+17 required C# source hashes matched the frozen harness dictionary, and
+`Parser.ParseFile` reported `$e.Count = 0`. The guest execution policy list
+returned `Undefined` for MachinePolicy, UserPolicy, Process, CurrentUser and
+LocalMachine. A direct first invocation was rejected before loading the script
+with `PSSecurityException` because the effective default policy disables
+scripts. After that readback, Process scope alone was set to Bypass in the
+existing interactive PowerShell process and read back as Bypass; no persistent
+policy was changed. The same-process script retry loaded but failed in the
+PowerShell 5.1 `Get-KernelDelegate` path before job creation/self-assignment:
+reflection could not convert a `System.Management.Automation.PSObject` argument
+to `System.IntPtr` at the emitted `GetProcAddress` call. No compiler or fixture
+child started and the run directory was not created. This is a harness
+compatibility defect to correct and review before a new attempt. A prior long
+console keystroke entry was interrupted with Ctrl+C before execution; it did
+not create another process. The `C:\RhaiQuality\runs` ancestor was created as a plain directory;
+C: showed 66.18 GB free, and the selected unique child did not exist at the
+preflight check. The harness rechecks path, reparse status, space, and collision
+before compiling. No credentials, mount, bootstrap, service change, or VM
+baseline modification occurred. The VM remains running. Earlier no-shell and
+no-transfer conclusions above are historical observations preceding the
+authorized desktop wake and preflight.
 
 ## Native custody acceptance route after the harness
 
-The current workspace has no host controller fixture that speaks the real
-`--lease-client` protocol, supplies the immutable specification, responds to
-fresh challenges, and independently reads evidence. Do not launch the monitor
-from the source harness and label a disconnect/EOF run as successful protocol
-coverage. Add that bounded driver as the next source subrequirement after review;
-keep its controller process inside the harness job. The compiler/fixture
-harness does not launch `MonitorTransport` and does not grant breakaway. A
-separate source gate must reconcile the monitor's
-`CREATE_BREAKAWAY_FROM_JOB` request against its bounded launcher before a real
-client driver can run. The production payload job remains kill-on-close with no
-breakaway permission. The monitor independently owns the payload job and runtime, and observes client
+The bounded host controller fixture that speaks the real `--lease-client`
+protocol, supplies the immutable specification, responds to fresh challenges,
+and independently reads evidence is frozen at
+`tools/windows-scoped-runner/MonitorAcceptanceDriver.cs` in commit
+`5583d7b3de50bb0f8c2706b837d2d4ba64ff9368` on the separate
+`task/windows-real-client` branch. It is not included in this compiler/fixture
+invocation, which does not launch `MonitorTransport` and does not grant
+breakaway. This source-fixture task makes no claim about running that driver.
+The production payload job remains kill-on-close with no breakaway permission;
+the monitor source owns the payload job and runtime and observes client
 process/pipe death. This monitor lifetime model is the Expert02 route; an SSH or
 PowerShell job alone does not replace it.
 
-Once the driver is present and reviewed, use one finite acceptance batch with
+The separately frozen driver is not part of the one-hour source-fixture batch.
+Any later native monitor acceptance should use the existing Expert02 limits:
 the same 1-hour outer bound, 2 GiB job memory cap, 16-process limit, 2 GiB free
-space preflight, and exact unique run root. Run ordinary-success/residual-child,
+space preflight, and exact unique run root. Cases include ordinary-success/residual-child,
 payload-failure, lease expiry, connection loss while client is alive, client
 death, expired/replayed challenge, suspended-create/resume failure, nested-job
 refusal, output-cap, evidence/readback failure and cleanup-timeout cases. Each
@@ -192,13 +215,19 @@ bootstrap/install, or release acceptance.
 
 ## Present status
 
-No PowerShell parser invocation, compiler, fixture, native API, source archive
-download, bootstrap, package build, or runtime-removal command has run. The
-current host has neither `pwsh` nor `powershell` on PATH, but the Windows guest
-has read-back-confirmed Windows PowerShell 5.1 and Roslyn 4.14.0. `git diff
---check` is the only executed source check. The exact authorized VM is running
-after activation; console evidence is recorded above. The harness compatibility
-adaptation remains mutable and awaits independent source review before guest
-transfer/compile/fixture launch. A reviewed real-client host driver and bounded
-launch path remain prerequisites for later native acceptance. No shutdown or
-VM reconfiguration was performed.
+No compiler, fixture executable, monitor, payload, bootstrap, package build, or
+runtime-removal command has run. The guest parser check and source inventory
+passed as recorded above. The initial pre-load policy rejection consumed no
+compiler/fixture measurement. The subsequent same-process invocation failed
+before bootstrap job creation because of the PowerShell 5.1 `PSObject` to
+`IntPtr` binding defect above. The exact authorized VM remains running. The
+harness source was independently reviewed and transferred at its frozen hash.
+The PowerShell compatibility correction explicitly stores the unwrapped
+`PSObject.BaseObject` and string in a new `Object[2]`, then validates the
+stored CLR types and nonzero handle before `MethodInfo.Invoke`. The corrected
+harness source hash is
+`575ba6b84497b3bc628ff314ac5625e9bff5fbdecf0f4ee1e10142e28dca3ddb`;
+`git diff --check` passes. This source-only candidate needs root review and a
+new immutable input checkpoint before any further invocation. The real-client
+driver is frozen separately as described above. No shutdown or VM
+reconfiguration was performed.
