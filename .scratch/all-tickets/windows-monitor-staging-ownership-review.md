@@ -167,3 +167,12 @@ All five changed paths independently read, hashes matched, diff check passed. Th
 - tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs: 9e3e3ed3f1c2655cb74bc0c109d61a2c0ac77b700d7cb5e2b072f8922a33e5fc
 
 Immutable6152e24677b8202cd6ba354cc0a91c3fe377cc8b independently read back on https://github.com/hoppworks/rhai.git task/windows-scoped-runner, author/committer both hoppworks <daniel@hoppworks.de>; all five immutable hashes match. Next required behavior is actual bounded payload logs/results/manifest capture outside runtime, independent readback and allocation-bound finalization authority. Preserve failure diagnostics too: current cleanup-failure path bypasses outcome append. No removal execution, compiler/native/bootstrap launch, new Expert chain or resource-cap change authorized by this gate.
+
+
+## Mutable capture continuation: independent source findings
+
+The current package is not frozen, compiled, executed, or accepted as evidence capture. Independent review found lifecycle diagnostics falsely used absence of cleanup exceptions as cleanup confirmation and silently ignored changed repeat inputs. The responsible owner now requires an allocation-bound exact closure proof for confirmation and compares diagnostic/proof/deadline repeat binding; these source corrections remain unexecuted and part of the cohesive capture package.
+
+Preliminary review of the new PayloadOutputCapture found pending-I/O disposal was not retained custody: GC.KeepAlive lasts only through the call, while setting disposed prevents retry and no completion observer is retained. Partial constructor failure after pending ConnectNamedPipe and finalization deadline with incomplete cancellation require retained exact channel ownership until terminal completion. Assigned to the same owner under existing Expert02; no extra native/build launch or advisory chain. Successful evidence/removal must independently reject TransitionFailed rather than infer operation success solely from absent exception fields.
+
+Primary API cross-check: [CancelIoEx](https://learn.microsoft.com/en-us/windows/win32/api/ioapiset/nf-ioapiset-cancelioex) requests cancellation without waiting; a raced no-request-found result does not certify completion. [GetOverlappedResult](https://learn.microsoft.com/en-us/windows/win32/api/ioapiset/nf-ioapiset-getoverlappedresult) with nonblocking retrieval distinguishes pending from terminal state. Exact buffer/OVERLAPPED/event custody must survive either race. This is source/API review, not native proof.
