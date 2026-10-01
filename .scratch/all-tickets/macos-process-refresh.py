@@ -38,6 +38,7 @@ def emit(path,complete):
     print(b.decode(errors='replace'),flush=True); print('cargo_output_end',flush=True)
 def run(argv,path,deadline,env,source):
     print('cargo_argv='+repr(argv),flush=True); print('cargo_cwd='+str(source),flush=True); print('cargo_log='+str(path),flush=True)
+    command_start=time.monotonic()
     with path.open('wb') as f:
         p=subprocess.Popen(argv,cwd=source,env=env,stdout=f,stderr=subprocess.STDOUT,start_new_session=False)
         print(f'cargo_pid={p.pid} cargo_pgid={os.getpgid(p.pid)}',flush=True)
@@ -45,7 +46,7 @@ def run(argv,path,deadline,env,source):
             while p.poll() is None:
                 if time.monotonic()>=deadline: raise TimeoutError('aggregate Cargo watchdog expired')
                 sample(deadline); time.sleep(1)
-            status=p.returncode; print(f'cargo_status={status}',flush=True); emit(path,True); sample(deadline)
+            status=p.returncode; print(f'cargo_status={status} cargo_elapsed_seconds={time.monotonic()-command_start:.3f}',flush=True); emit(path,True); sample(deadline)
         except BaseException:
             rc=p.poll()
             if rc is not None: print(f'cargo_status={rc}',flush=True)
