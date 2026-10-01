@@ -16,12 +16,12 @@ actual_archive=$(git -C "$repo" archive --format=tar "$source_rev" | shasum -a 2
 test "$actual_archive" = "$archive_sha"
 test "$(shasum -a 256 "$lock" | awk '{print $1}')" = 8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa
 
-manifest="$(shasum -a 256 "$lock" | awk '{print $1"  Cargo.lock.baseline}')"
-manifest+=$'\n'"$(shasum -a 256 "$script_dir/linux-process-proof.py" | awk '{print $1"  linux-process-proof.py}')"
-manifest+=$'\n'"$(shasum -a 256 "$script_dir/remote-launch.sh" | awk '{print $1"  remote-launch.sh}')"
-manifest+=$'\n'"$(shasum -a 256 "$skills/run_scoped.py" | awk '{print $1"  runner/tools/run_scoped.py}')"
-manifest+=$'\n'"$(shasum -a 256 "$skills/agentskills/__init__.py" | awk '{print $1"  runner/tools/agentskills/__init__.py}')"
-manifest+=$'\n'"$(shasum -a 256 "$skills/agentskills/pyguard.py" | awk '{print $1"  runner/tools/agentskills/pyguard.py}')"
+manifest="$(shasum -a 256 "$lock" | awk '{print $1 "  Cargo.lock.baseline"}')"
+manifest+=$'\n'"$(shasum -a 256 "$script_dir/linux-process-proof.py" | awk '{print $1 "  linux-process-proof.py"}')"
+manifest+=$'\n'"$(shasum -a 256 "$script_dir/remote-launch.sh" | awk '{print $1 "  remote-launch.sh"}')"
+manifest+=$'\n'"$(shasum -a 256 "$skills/run_scoped.py" | awk '{print $1 "  runner/tools/run_scoped.py"}')"
+manifest+=$'\n'"$(shasum -a 256 "$skills/agentskills/__init__.py" | awk '{print $1 "  runner/tools/agentskills/__init__.py"}')"
+manifest+=$'\n'"$(shasum -a 256 "$skills/agentskills/pyguard.py" | awk '{print $1 "  runner/tools/agentskills/pyguard.py"}')"
 
 # Absent-only creation pins an exact fresh target. Partial transfer is left as
 # evidence and cannot be mistaken for a complete package on retry.
