@@ -23,6 +23,14 @@ internal static class CustodyBackendFixture
 
     public static int Main()
     {
+        Expect("evidence budget includes staged source and bytes already saved",
+            WindowsCustodyBackend.RuntimeAllocation.RemainingEvidenceBytes(400,100)==WindowsCustodyBackend.MaximumTotalStagedBytes-500);
+        Expect("full staged source leaves no evidence capacity",
+            WindowsCustodyBackend.RuntimeAllocation.RemainingEvidenceBytes(WindowsCustodyBackend.MaximumTotalStagedBytes,0)==0);
+        bool sharedEvidenceOverflow=false;
+        try { WindowsCustodyBackend.RuntimeAllocation.RemainingEvidenceBytes(400,WindowsCustodyBackend.MaximumTotalStagedBytes); }
+        catch(IOException) { sharedEvidenceOverflow=true; }
+        Expect("evidence budget rejects source plus evidence overflow before writing",sharedEvidenceOverflow);
         string fixture = Path.Combine(Path.GetTempPath(), "rhai-custody-fixture-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(fixture);
         string moved = fixture + ".moved";
@@ -68,6 +76,10 @@ internal static class CustodyBackendFixture
             }
             AllocationTransitions(fixture);
             SourceStagingContracts(fixture);
+            PayloadPendingIoOwnershipContracts();
+            PayloadLogBoundContracts(fixture);
+            PayloadEvidenceCaptureContracts(fixture);
+            PayloadEvidenceFailureContracts(fixture);
             RuntimeDispositionContracts(fixture);
         }
         finally
@@ -226,8 +238,12 @@ internal static class CustodyBackendFixture
         {
             bool allocated = allocation.CreateRuntime() && allocation.IsIdentityRecorded;
             bool staged = allocated && allocation.StageSourceTreeForFixture(successSource, @"bin\runner.exe", CancellationToken.None, null, null);
+            long expectedSourceBytes=new FileInfo(Path.Combine(successSource,"bin","runner.exe")).Length+
+                new FileInfo(Path.Combine(successSource,"assets","nested","message.txt")).Length;
             Expect("nested source tree copies and staged executable stays pinned", staged && allocation.IsStaged &&
                 allocation.StagedExecutableIdentity != null && allocation.StagedExecutableHandle != null &&
+                allocation.StagedSourceBytes==expectedSourceBytes &&
+                WindowsCustodyBackend.RuntimeAllocation.RemainingEvidenceBytes(allocation.StagedSourceBytes,0)==WindowsCustodyBackend.MaximumTotalStagedBytes-expectedSourceBytes &&
                 File.ReadAllText(Path.Combine(successRuntime, "assets", "nested", "message.txt")) == "independent nested readback" &&
                 File.ReadAllBytes(Path.Combine(successRuntime, "bin", "runner.exe")).Length == 4);
         }
@@ -377,17 +393,19 @@ internal static class CustodyBackendFixture
                 fixtureProof!=null && !fixtureProof.Authorizes(null,allocation.RuntimeIdentity) &&
                 !fixtureProof.Authorizes(allocation,new WindowsCustodyBackend.FileIdentity(
                     allocation.RuntimeIdentity.VolumeSerial^1UL,allocation.RuntimeIdentity.FileId)));
+            ulong finalizationDeadline=WindowsCustodyBackend.RuntimeAllocation.StartLocalFinalizationDeadline();
+            allocation.RecordLifecycleDiagnostics(null,null,fixtureProof,finalizationDeadline);
             bool proofOnlyRemovalRefused=!allocation.RemoveRuntimeAfterExactJobClosure(fixtureProof,CancellationToken.None);
             Expect("exact-job proof alone cannot remove a runtime before local outcome finalization",
                 proofOnlyRemovalRefused && allocation.DispositionState==WindowsCustodyBackend.RuntimeDispositionState.Blocked);
-            ulong finalizationDeadline=WindowsCustodyBackend.RuntimeAllocation.StartLocalFinalizationDeadline();
             var localEvidence=allocation.RecordLocalOutcomeMetadata(fixtureProof,0,
                 WindowsCustodyBackend.PayloadSupervisionOutcome.PayloadExited,finalizationDeadline);
             string[] finalizedRecords=WindowsCustodyBackend.ReadJournalForFixture(successJournal);
             Expect("bounded outcome metadata is flushed and honestly marks payload evidence unsaved",
                 localEvidence!=null && localEvidence.LocalMetadataSaved && !localEvidence.PayloadEvidenceSaved && !localEvidence.HostExported &&
                 finalizedRecords.Length>0 && HasRecord(finalizedRecords,"OUTCOME|") &&
-                finalizedRecords[finalizedRecords.Length-1].Contains("|cleanup=CONFIRMED|local_metadata_saved=1|payload_evidence_saved=0|host_exported=0|runtime_removed=0"));
+                HasRecord(finalizedRecords,"LIFECYCLE|") &&
+                finalizedRecords[finalizedRecords.Length-1].Contains("|cleanup=CONFIRMED|diagnostics_saved=1|local_metadata_saved=1|payload_evidence_saved=0|host_exported=0|runtime_removed=0"));
             bool mismatchedOutcomeRejected=false;
             try
             {
@@ -424,6 +442,7 @@ internal static class CustodyBackendFixture
                         new MonitorPayloadJob.ScriptedClosureOperations { ActiveCounts=new uint[] { 0 } });
                     foreignJob.CloseAndVerify();
                     ulong foreignDeadline=WindowsCustodyBackend.RuntimeAllocation.StartLocalFinalizationDeadline();
+                    foreign.RecordLifecycleDiagnostics(null,null,foreignJob.ClosureAuthorization,foreignDeadline);
                     foreignEvidence=foreign.RecordLocalOutcomeMetadata(foreignJob.ClosureAuthorization,null,
                         WindowsCustodyBackend.PayloadSupervisionOutcome.TransitionFailed,foreignDeadline);
                 }
@@ -461,13 +480,15 @@ internal static class CustodyBackendFixture
             var payload=MonitorPayloadJob.ForClosureFixture(allocation,operations);
             payload.CloseAndVerify();
             LeaseMonitor.ExactJobClosureProof proof=payload.ClosureAuthorization;
+            ulong failureDeadline=WindowsCustodyBackend.RuntimeAllocation.StartLocalFinalizationDeadline();
+            allocation.RecordLifecycleDiagnostics(null,null,proof,failureDeadline);
             allocation.FailNextJournalAppendForFixture();
             bool appendFailed=false;
             try
             {
                 allocation.RecordLocalOutcomeMetadata(proof,null,
                     WindowsCustodyBackend.PayloadSupervisionOutcome.TransitionFailed,
-                    WindowsCustodyBackend.RuntimeAllocation.StartLocalFinalizationDeadline());
+                    failureDeadline);
             }
             catch(InvalidOperationException) { appendFailed=true; }
             bool proofOnlyStillRefused=!allocation.RemoveRuntimeAfterExactJobClosure(proof,CancellationToken.None);
@@ -491,20 +512,79 @@ internal static class CustodyBackendFixture
             var payload=MonitorPayloadJob.ForClosureFixture(allocation,
                 new MonitorPayloadJob.ScriptedClosureOperations { ActiveCounts=new uint[] { 0 } });
             payload.CloseAndVerify();
+            ulong expiredDeadline=WindowsCustodyBackend.RuntimeAllocation.ExpiredFinalizationDeadlineForFixture();
             bool expired=false;
+            try { allocation.RecordLifecycleDiagnostics(null,null,payload.ClosureAuthorization,expiredDeadline); }
+            catch(TimeoutException) { expired=true; }
+            bool outcomeRejected=false;
             try
             {
                 allocation.RecordLocalOutcomeMetadata(payload.ClosureAuthorization,null,
-                    WindowsCustodyBackend.PayloadSupervisionOutcome.TransitionFailed,
-                    WindowsCustodyBackend.RuntimeAllocation.ExpiredFinalizationDeadlineForFixture());
+                    WindowsCustodyBackend.PayloadSupervisionOutcome.TransitionFailed,expiredDeadline);
             }
-            catch(TimeoutException) { expired=true; }
-            Expect("expired local outcome deadline withholds receipt and retains runtime",
-                expired && Directory.Exists(outcomeDeadlineRuntime) &&
+            catch(InvalidOperationException) { outcomeRejected=true; }
+            Expect("expired shared finalization deadline prevents diagnostics and withholds outcome receipt",
+                expired && outcomeRejected && Directory.Exists(outcomeDeadlineRuntime) &&
                 !HasRecord(WindowsCustodyBackend.ReadJournalForFixture(outcomeDeadlineJournal),"OUTCOME|") &&
                 !HasRecord(WindowsCustodyBackend.ReadJournalForFixture(outcomeDeadlineJournal),"REMOVED|"));
         }
         RetainPair("expired outcome deadline runtime and journal",outcomeDeadlineRuntime,outcomeDeadlineJournal);
+
+        string noProofRoot=NewStageCase(fixture,"diagnostics-without-proof");
+        string noProofRuntime,noProofJournal;
+        using(WindowsCustodyBackend.RuntimeAllocation allocation=BeginStageAllocation(noProofRoot,out noProofRuntime,out noProofJournal))
+        {
+            bool created=allocation.CreateRuntime() && allocation.IsIdentityRecorded;
+            ulong deadline=WindowsCustodyBackend.RuntimeAllocation.StartLocalFinalizationDeadline();
+            if(created) allocation.RecordLifecycleDiagnostics(null,null,null,deadline);
+            string[] records=WindowsCustodyBackend.ReadJournalForFixture(noProofJournal);
+            bool noProofIsUnconfirmed=records.Length>0 && records[records.Length-1].Contains("cleanup_confirmed=0");
+            bool reboundRejected=false;
+            if(created)
+            {
+                var payload=MonitorPayloadJob.ForClosureFixture(allocation,
+                    new MonitorPayloadJob.ScriptedClosureOperations { ActiveCounts=new uint[] { 0 } });
+                payload.CloseAndVerify();
+                try { allocation.RecordLifecycleDiagnostics(null,null,payload.ClosureAuthorization,deadline); }
+                catch(InvalidOperationException) { reboundRejected=true; }
+            }
+            Expect("diagnostics without exact closure proof remain explicitly unconfirmed and cannot be rebound",
+                created && noProofIsUnconfirmed && reboundRejected && Directory.Exists(noProofRuntime) &&
+                !HasRecord(records,"OUTCOME|") && !HasRecord(records,"REMOVED|"));
+        }
+        RetainPair("no-proof diagnostic runtime and journal",noProofRuntime,noProofJournal);
+
+        string cleanupFailureRoot=NewStageCase(fixture,"cleanup-failure-diagnostics");
+        string cleanupFailureRuntime,cleanupFailureJournal;
+        using(WindowsCustodyBackend.RuntimeAllocation allocation=BeginStageAllocation(cleanupFailureRoot,
+            out cleanupFailureRuntime,out cleanupFailureJournal))
+        {
+            bool created=allocation.CreateRuntime() && allocation.IsIdentityRecorded;
+            Expect("cleanup diagnostic case has recorded allocation",created);
+            var payload=created ? MonitorPayloadJob.ForClosureFixture(allocation,
+                new MonitorPayloadJob.ScriptedClosureOperations { ActiveCounts=new uint[] { 0 } }) : null;
+            if(payload!=null) payload.CloseAndVerify();
+            ulong failureDeadline=WindowsCustodyBackend.RuntimeAllocation.StartLocalFinalizationDeadline();
+            if(created) allocation.RecordLifecycleDiagnostics(new IOException("transition failed"),new IOException("job query failed"),null,failureDeadline);
+            bool failureOutcomeRejected=false;
+            try
+            {
+                allocation.RecordLocalOutcomeMetadata(payload==null ? null : payload.ClosureAuthorization,null,
+                    WindowsCustodyBackend.PayloadSupervisionOutcome.TransitionFailed,failureDeadline);
+            }
+            catch(InvalidOperationException) { failureOutcomeRejected=true; }
+            string[] diagnosticRecords=WindowsCustodyBackend.ReadJournalForFixture(cleanupFailureJournal);
+            bool retained=Directory.Exists(cleanupFailureRuntime) &&
+                failureOutcomeRejected &&
+                HasRecord(diagnosticRecords,"LIFECYCLE|") &&
+                diagnosticRecords[diagnosticRecords.Length-1].Contains("operation=IOException:transition failed") &&
+                diagnosticRecords[diagnosticRecords.Length-1].Contains("cleanup=IOException:job query failed") &&
+                diagnosticRecords[diagnosticRecords.Length-1].Contains("cleanup_confirmed=0") &&
+                !HasRecord(diagnosticRecords,"OUTCOME|") && !HasRecord(diagnosticRecords,"REMOVED|") &&
+                !allocation.RemoveRuntime();
+            Expect("operation and cleanup failures are durably recorded without closure, evidence, or removal authority",retained);
+        }
+        RetainPair("cleanup diagnostic retained runtime and journal",cleanupFailureRuntime,cleanupFailureJournal);
 
         string identityRoot = NewStageCase(fixture, "remove-unrecorded-identity");
         string identityRuntime, identityJournal;
@@ -706,6 +786,179 @@ internal static class CustodyBackendFixture
         Expect("identity mismatch has no removal receipt after handles close",
             !HasRecord(WindowsCustodyBackend.ReadJournalForFixture(mismatchJournal), "REMOVED|"));
         RetainPair("identity mismatch runtime", mismatchRuntime, mismatchJournal);
+    }
+
+    // Drives the production bounded snapshot/readback/receipt and removal path
+    // against a staged fixture tree. This source fixture is intentionally not
+    // compiled or executed in the source-only checkpoint.
+    private static void PayloadEvidenceCaptureContracts(string fixture)
+    {
+        string root=NewStageCase(fixture,"payload-evidence-capture");
+        string source=PrepareDispositionTree(root,true);
+        string runtime,journal;
+        using(WindowsCustodyBackend.RuntimeAllocation allocation=BeginStageAllocation(root,out runtime,out journal))
+        {
+            bool staged=allocation.CreateRuntime() && allocation.StageSourceTreeForFixture(source, @"bin\runner.exe",CancellationToken.None,null,null);
+            Expect("evidence capture fixture owns a complete staged runtime",staged && allocation.IsStaged);
+            if(!staged) { RetainPair("payload evidence capture refusal",runtime,journal); return; }
+            using(WindowsCustodyBackend.RuntimeAllocation.PayloadLogHandles logs=allocation.CreatePayloadLogHandles())
+            {
+                Expect("payload log handles belong to the allocation evidence root",logs.EvidenceIdentity!=null &&
+                    logs.EvidenceIdentity.SameAs(allocation.PayloadEvidenceIdentity));
+            }
+            ulong deadline=WindowsCustodyBackend.RuntimeAllocation.StartLocalFinalizationDeadline();
+            var job=MonitorPayloadJob.ForClosureFixture(allocation,
+                new MonitorPayloadJob.ScriptedClosureOperations { ActiveCounts=new uint[] { 0 } });
+            MonitorPayloadJob.ClosureReceipt closure=job.CloseAndVerify(deadline);
+            LeaseMonitor.ExactJobClosureProof proof=job.ClosureAuthorization;
+            allocation.RecordLifecycleDiagnostics(null,null,proof,deadline);
+            WindowsCustodyBackend.RuntimeAllocation.PayloadEvidenceReceipt evidence=null;
+            try { evidence=allocation.CapturePayloadEvidence(proof,0,
+                WindowsCustodyBackend.PayloadSupervisionOutcome.PayloadExited,deadline); }
+            catch(Exception error) { Console.Error.WriteLine("payload evidence capture fixture failed: "+error); }
+            string snapshot=Path.Combine(allocation.PayloadEvidencePath,"runtime");
+            Expect("production evidence capture receipt binds exact proof and independent snapshot readback",
+                evidence!=null && evidence.CapturedBytes>0 && evidence.Deadline==deadline &&
+                File.ReadAllText(Path.Combine(snapshot,"data","nested","inner.txt"))=="nested disposition fixture payload" &&
+                File.Exists(Path.Combine(snapshot,"bin","runner.exe")) && File.Exists(Path.Combine(allocation.PayloadEvidencePath,"manifest.txt")));
+            bool changedEvidenceOutcomeRejected=false;
+            try { allocation.CapturePayloadEvidence(proof,1,WindowsCustodyBackend.PayloadSupervisionOutcome.PayloadExited,deadline); }
+            catch(InvalidOperationException) { changedEvidenceOutcomeRejected=true; }
+            bool mismatchedEvidenceOutcomeRejected=false;
+            try { allocation.RecordLocalOutcomeMetadata(proof,1,WindowsCustodyBackend.PayloadSupervisionOutcome.PayloadExited,deadline,evidence); }
+            catch(InvalidOperationException) { mismatchedEvidenceOutcomeRejected=true; }
+            var metadata=evidence==null ? null : allocation.RecordLocalOutcomeMetadata(proof,0,
+                WindowsCustodyBackend.PayloadSupervisionOutcome.PayloadExited,deadline,evidence);
+            bool removed=metadata!=null && allocation.TryRemoveRuntimeAfterOutcomeMetadata(metadata,CancellationToken.None);
+            string[] records=WindowsCustodyBackend.ReadJournalForFixture(journal);
+            Expect("evidence receipt cannot be rebound and production removal follows evidence and outcome records",
+                changedEvidenceOutcomeRejected && mismatchedEvidenceOutcomeRejected && removed && !Directory.Exists(runtime) && HasRecord(records,"EVIDENCE|") &&
+                HasRecord(records,"OUTCOME|") && HasRecord(records,"REMOVE_INTENT|") && HasRecord(records,"REMOVED|"));
+            Expect("external snapshot and payload logs remain after runtime removal",
+                Directory.Exists(snapshot) && File.Exists(Path.Combine(allocation.PayloadEvidencePath,"stdout.log")) &&
+                File.Exists(Path.Combine(allocation.PayloadEvidencePath,"stderr.log")));
+            GC.KeepAlive(closure);
+        }
+        RetainPair("payload evidence capture",runtime,journal);
+    }
+
+    private static void PayloadEvidenceFailureContracts(string fixture)
+    {
+        string mutationRoot=NewStageCase(fixture,"payload-evidence-readback-mismatch");
+        string mutationSource=PrepareDispositionTree(mutationRoot,true);
+        string mutationRuntime,mutationJournal;
+        using(WindowsCustodyBackend.RuntimeAllocation allocation=BeginStageAllocation(mutationRoot,out mutationRuntime,out mutationJournal))
+        {
+            bool staged=allocation.CreateRuntime() && allocation.StageSourceTreeForFixture(mutationSource,@"bin\runner.exe",CancellationToken.None,null,null);
+            if(staged)
+            {
+                using(WindowsCustodyBackend.RuntimeAllocation.PayloadLogHandles logs=allocation.CreatePayloadLogHandles()) { }
+                var job=MonitorPayloadJob.ForClosureFixture(allocation,new MonitorPayloadJob.ScriptedClosureOperations { ActiveCounts=new uint[] { 0 } });
+                job.CloseAndVerify();
+                LeaseMonitor.ExactJobClosureProof proof=job.ClosureAuthorization;
+                ulong deadline=WindowsCustodyBackend.RuntimeAllocation.StartLocalFinalizationDeadline();
+                allocation.RecordLifecycleDiagnostics(null,null,proof,deadline);
+                bool mutationExecuted=false;
+                allocation.SetEvidenceReadbackMutationForFixture(snapshot=>{ mutationExecuted=true; File.WriteAllText(Path.Combine(snapshot,"data","nested","inner.txt"),"tampered after copy"); });
+                bool mismatch=false;
+                try { allocation.CapturePayloadEvidence(proof,0,WindowsCustodyBackend.PayloadSupervisionOutcome.PayloadExited,deadline); }
+                catch(IOException error) { mismatch=error.Message.IndexOf("content differs from the source manifest",StringComparison.Ordinal)>=0; }
+                string[] records=WindowsCustodyBackend.ReadJournalForFixture(mutationJournal);
+                Expect("independent payload snapshot readback mismatch withholds evidence receipt and retains runtime",
+                    mutationExecuted && mismatch && Directory.Exists(mutationRuntime) && HasRecord(records,"LIFECYCLE|") &&
+                    !HasRecord(records,"EVIDENCE|") && !HasRecord(records,"OUTCOME|") && !HasRecord(records,"REMOVED|"));
+            }
+            else Expect("readback mismatch fixture staged runtime",false);
+        }
+        RetainPair("payload readback mismatch retained runtime",mutationRuntime,mutationJournal);
+
+        string identityRoot=NewStageCase(fixture,"payload-evidence-identity-mismatch");
+        string identitySource=PrepareDispositionTree(identityRoot,false);
+        string identityRuntime,identityJournal;
+        using(WindowsCustodyBackend.RuntimeAllocation allocation=BeginStageAllocation(identityRoot,out identityRuntime,out identityJournal))
+        {
+            bool staged=allocation.CreateRuntime() && allocation.StageSourceTreeForFixture(identitySource,@"bin\runner.exe",CancellationToken.None,null,null);
+            if(staged)
+            {
+                using(WindowsCustodyBackend.RuntimeAllocation.PayloadLogHandles logs=allocation.CreatePayloadLogHandles()) { }
+                var job=MonitorPayloadJob.ForClosureFixture(allocation,new MonitorPayloadJob.ScriptedClosureOperations { ActiveCounts=new uint[] { 0 } });
+                job.CloseAndVerify();
+                LeaseMonitor.ExactJobClosureProof proof=job.ClosureAuthorization;
+                ulong deadline=WindowsCustodyBackend.RuntimeAllocation.StartLocalFinalizationDeadline();
+                allocation.RecordLifecycleDiagnostics(null,null,proof,deadline);
+                allocation.CorruptEvidenceIdentityForFixture();
+                bool identityMismatch=false;
+                try { allocation.CapturePayloadEvidence(proof,0,WindowsCustodyBackend.PayloadSupervisionOutcome.PayloadExited,deadline); }
+                catch(IOException error) { identityMismatch=error.Message=="payload evidence root identity changed before capture"; }
+                string[] records=WindowsCustodyBackend.ReadJournalForFixture(identityJournal);
+                Expect("payload evidence identity mismatch withholds receipt and retains runtime",
+                    identityMismatch && Directory.Exists(identityRuntime) && !HasRecord(records,"EVIDENCE|") &&
+                    !HasRecord(records,"OUTCOME|") && !HasRecord(records,"REMOVED|"));
+            }
+            else Expect("evidence identity mismatch fixture staged runtime",false);
+        }
+        RetainPair("payload evidence identity mismatch retained runtime",identityRuntime,identityJournal);
+    }
+
+    // These state-only cases use the exact production release predicate. They
+    // do not claim to inject ConnectNamedPipe, CancelIoEx, or GetOverlappedResult.
+    private static void PayloadPendingIoOwnershipContracts()
+    {
+        Expect("inheritable output writers and NUL stdin bind the Unicode CreateFileW entry point",
+            MonitorPayloadJob.CreateFileEntryPointForFixture());
+        Expect("constructor failure after pending connect retains OVERLAPPED storage",
+            !MonitorPayloadJob.CanReleaseCaptureStorageForFixture(true,false,false));
+        Expect("deadline cancellation without terminal observation retains buffers and handles",
+            !MonitorPayloadJob.CanReleaseCaptureStorageForFixture(false,true,false));
+        Expect("terminal cancellation observation permits exact capture resource disposal",
+            MonitorPayloadJob.CanReleaseCaptureStorageForFixture(false,true,true));
+        Expect("already terminal channels permit disposal",
+            MonitorPayloadJob.CanReleaseCaptureStorageForFixture(false,false,true));
+        Expect("unresolved output owner stays strongly held until terminal release",
+            MonitorPayloadJob.PendingOwnerKeeperContractForFixture());
+        ulong setupDeadline=1000,finalizationDeadline=5000;
+        ulong firstCleanup=MonitorPayloadJob.BindCleanupDeadlineForFixture(false,setupDeadline,finalizationDeadline);
+        ulong subsequent=MonitorPayloadJob.BindCleanupDeadlineForFixture(true,firstCleanup,finalizationDeadline+1000);
+        ulong shortened=MonitorPayloadJob.BindCleanupDeadlineForFixture(true,firstCleanup,finalizationDeadline-1000);
+        ulong setupFailure=MonitorPayloadJob.BindCleanupDeadlineForFixture(false,0,setupDeadline);
+        Expect("successful long-lived setup binds its first cleanup to lifecycle deadline while unwind and later calls never extend",
+            firstCleanup==finalizationDeadline && subsequent==firstCleanup && shortened==finalizationDeadline-1000 && setupFailure==setupDeadline);
+        Expect("stdout/stderr append limit rejects overflow without unsigned wraparound",
+            MonitorPayloadJob.CanAppendLogBytesForFixture(64U*1024U*1024U-65536U,65536U) &&
+            !MonitorPayloadJob.CanAppendLogBytesForFixture(64U*1024U*1024U-65535U,65536U) &&
+            !MonitorPayloadJob.CanAppendLogBytesForFixture(64U*1024U*1024U+1U,1U));
+    }
+
+    private static void PayloadLogBoundContracts(string fixture)
+    {
+        string root=NewStageCase(fixture,"payload-log-shared-bound");
+        string source=PrepareDispositionTree(root,false);
+        string runtime,journal;
+        using(WindowsCustodyBackend.RuntimeAllocation allocation=BeginStageAllocation(root,out runtime,out journal))
+        {
+            bool staged=allocation.CreateRuntime() && allocation.StageSourceTreeForFixture(source, @"bin\runner.exe",CancellationToken.None,null,null);
+            Expect("concurrent output accounting starts from a staged allocation",staged && allocation.IsStaged);
+            if(staged)
+            {
+                long charge=(WindowsCustodyBackend.MaximumTotalStagedBytes-allocation.StagedSourceBytes)*3/4;
+                bool[] accepted=new bool[2];
+                var ready=new ManualResetEvent(false);
+                Thread[] writers=new Thread[2];
+                for(int i=0;i<writers.Length;i++)
+                {
+                    int index=i;
+                    writers[i]=new Thread(()=>{ ready.WaitOne(); accepted[index]=allocation.TryChargePayloadLogBytes(charge); });
+                    writers[i].IsBackground=true; writers[i].Start();
+                }
+                ready.Set();
+                bool bothFinished=writers[0].Join(5000) && writers[1].Join(5000);
+                int acceptedCount=(accepted[0]?1:0)+(accepted[1]?1:0);
+                Expect("concurrent stdout/stderr accounting admits one charge before the shared staged-plus-output cap",
+                    bothFinished && acceptedCount==1 && allocation.PayloadLogBytes==charge);
+                ready.Dispose();
+            }
+            RetainPair("payload shared log bound",runtime,journal);
+        }
     }
 
     private static string PrepareDispositionTree(string root, bool nested)

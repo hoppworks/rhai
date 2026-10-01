@@ -20,14 +20,16 @@ internal sealed class MonitorStagingHandoff
     }
 
     private readonly Func<LaunchSpecification, CancellationToken, Result> run;
-    private readonly Action<Result, LaunchSpecification, CancellationToken> acceptedOperation;
+    private Action<Result, LaunchSpecification, CancellationToken> acceptedOperation;
     private readonly ManualResetEvent cancelSignal = new ManualResetEvent(false);
     private readonly ManualResetEvent workerFinished = new ManualResetEvent(false);
     private readonly CancellationTokenSource cancellation = new CancellationTokenSource();
     private LaunchSpecification specification;
     private Result slot;
     private int state = Idle, stopRequested;
+    private long ownerCleanupDeadline;
     private string failure;
+    [System.Runtime.InteropServices.DllImport("kernel32.dll")] private static extern ulong GetTickCount64();
 #if SCOPED_RUNNER_TESTING
     private readonly ManualResetEvent lifecycleObservedForFixture = new ManualResetEvent(false);
     private readonly ManualResetEvent pendingObservedForFixture = new ManualResetEvent(false);
@@ -42,12 +44,13 @@ internal sealed class MonitorStagingHandoff
     internal static MonitorStagingHandoff CreateProduction(LeaseMonitor.Protocol protocol, Func<long> monotonicNow)
     {
         if(protocol==null || monotonicNow==null) throw new ArgumentNullException("production transition inputs");
-        return new MonitorStagingHandoff(StageWithBackend,
-            (result,spec,token)=>RunAcceptedLifecycle(result,spec,token,protocol,monotonicNow));
+        var handoff=new MonitorStagingHandoff(StageWithBackend,null);
+        handoff.acceptedOperation=(result,spec,token)=>RunAcceptedLifecycle(result,spec,token,protocol,monotonicNow,handoff);
+        return handoff;
     }
 
     private static void RunAcceptedLifecycle(Result result, LaunchSpecification specification, CancellationToken token,
-        LeaseMonitor.Protocol protocol, Func<long> monotonicNow)
+        LeaseMonitor.Protocol protocol, Func<long> monotonicNow,MonitorStagingHandoff ownerWorker)
     {
         var allocation=result.Owner as WindowsCustodyBackend.RuntimeAllocation;
         if(allocation==null) throw new InvalidOperationException("accepted staging owner has an unexpected type");
@@ -58,12 +61,14 @@ internal sealed class MonitorStagingHandoff
         MonitorPayloadJob.ClosureReceipt closureReceipt=null;
         LeaseMonitor.ExactJobClosureProof closureAuthorization=null;
         WindowsCustodyBackend.RuntimeAllocation.OutcomeMetadataReceipt outcomeMetadata=null;
+        WindowsCustodyBackend.RuntimeAllocation.PayloadEvidenceReceipt payloadEvidence=null;
         Exception finalizationFailure=null;
+        ulong finalizationDeadline=0;
         try
         {
             RequestAndWaitForAuthority(protocol,token,monotonicNow,LeaseMonitor.State.Ready);
             payload=MonitorPayloadJob.CreateSuspended(allocation,specification,protocol);
-            RequestAndWaitForAuthority(protocol,token,monotonicNow,LeaseMonitor.State.Suspended);
+            RequestAndWaitForAuthority(protocol,token,monotonicNow,LeaseMonitor.State.Suspended,()=>payload.PumpOutput());
             payload.ResumeAfterHostChallenge(protocol);
             supervisionOutcome=HoldPayloadUntilStop(payload,protocol,token,monotonicNow);
             payloadExitCode=payload.RootExitCode;
@@ -76,8 +81,9 @@ internal sealed class MonitorStagingHandoff
         }
         finally
         {
+            finalizationDeadline=ownerWorker.EnsureOwnerCleanupDeadline();
             if(payload!=null)
-                try { closureReceipt=payload.CloseAndVerify(); closureAuthorization=payload.ClosureAuthorization; }
+                try { closureReceipt=payload.CloseAndVerify(finalizationDeadline); closureAuthorization=payload.ClosureAuthorization; }
                 catch(Exception error)
                 {
                     cleanupFailure=error;
@@ -85,24 +91,22 @@ internal sealed class MonitorStagingHandoff
                     catch(Exception signalError) { cleanupFailure=new AggregateException("exact-job cleanup failed and stop publication also failed",cleanupFailure,signalError); }
             }
             if(payload!=null) payloadExitCode=payload.RootExitCode;
-            if(cleanupFailure==null && closureAuthorization!=null)
+            try { allocation.RecordLifecycleDiagnostics(operationFailure,cleanupFailure,closureAuthorization,finalizationDeadline); }
+            catch(Exception error) { finalizationFailure=error; }
+            if(finalizationFailure==null && operationFailure==null && cleanupFailure==null && closureAuthorization!=null)
             {
-                ulong finalizationDeadline=WindowsCustodyBackend.RuntimeAllocation.StartLocalFinalizationDeadline();
                 try
                 {
-                    outcomeMetadata=allocation.RecordLocalOutcomeMetadata(closureAuthorization,payloadExitCode,supervisionOutcome,finalizationDeadline);
-                    if(!outcomeMetadata.PayloadEvidenceSaved)
-                        throw new InvalidOperationException("payload logs, results, and manifest were not captured and read back; allocation remains retained");
+                    payloadEvidence=allocation.CapturePayloadEvidence(closureAuthorization,payloadExitCode,supervisionOutcome,finalizationDeadline);
+                    outcomeMetadata=allocation.RecordLocalOutcomeMetadata(closureAuthorization,payloadExitCode,supervisionOutcome,finalizationDeadline,payloadEvidence);
                     if(!allocation.TryRemoveRuntimeAfterOutcomeMetadata(outcomeMetadata,CancellationToken.None))
                         throw new InvalidOperationException(allocation.Failure ?? "runtime disposition failed after local outcome metadata");
                 }
                 catch(Exception error) { finalizationFailure=error; }
             }
-            // Closure and an outcome metadata record are insufficient for runtime
-            // disposition: bounded payload logs/results/manifest still need capture
-            // and readback. Host export remains false without a response contract.
+            // Host export remains false without a response contract.
             GC.KeepAlive(payloadExitCode); GC.KeepAlive(closureReceipt); GC.KeepAlive(closureAuthorization);
-            GC.KeepAlive(supervisionOutcome); GC.KeepAlive(outcomeMetadata);
+            GC.KeepAlive(supervisionOutcome); GC.KeepAlive(payloadEvidence); GC.KeepAlive(outcomeMetadata);
         }
         if(operationFailure!=null && cleanupFailure!=null && finalizationFailure!=null)
             throw new AggregateException("payload transition, exact-job cleanup, and outcome finalization failed",operationFailure,cleanupFailure,finalizationFailure);
@@ -122,6 +126,11 @@ internal sealed class MonitorStagingHandoff
     {
         while(!token.IsCancellationRequested)
         {
+            if(payload.PumpOutput())
+            {
+                protocol.SignalClientExited(monotonicNow());
+                return WindowsCustodyBackend.PayloadSupervisionOutcome.MonitorStopped;
+            }
             if(protocol.Tick(monotonicNow())==LeaseMonitor.State.Stopping) return WindowsCustodyBackend.PayloadSupervisionOutcome.MonitorStopped;
             if(payload.ObserveRootExit()) return WindowsCustodyBackend.PayloadSupervisionOutcome.PayloadExited;
             Thread.Sleep(10);
@@ -130,12 +139,13 @@ internal sealed class MonitorStagingHandoff
     }
 
     internal static void RequestAndWaitForAuthority(LeaseMonitor.Protocol protocol, CancellationToken token,
-        Func<long> monotonicNow, LeaseMonitor.State phase)
+        Func<long> monotonicNow, LeaseMonitor.State phase,Action ownerPump=null)
     {
         if(!protocol.RequestFreshTransitionChallenge(phase,monotonicNow()))
             throw new InvalidOperationException("protocol rejected fresh phase-bound host challenge request");
         for(;;)
         {
+            if(ownerPump!=null) ownerPump();
             token.ThrowIfCancellationRequested();
             long now=monotonicNow();
             if(protocol.Tick(now)==LeaseMonitor.State.Stopping)
@@ -195,18 +205,47 @@ internal sealed class MonitorStagingHandoff
     internal void Stop()
     {
         Interlocked.Exchange(ref stopRequested, 1);
+        bool stoppedBeforeStart=false;
         for (;;)
         {
             int observed = Volatile.Read(ref state);
             int next;
-            if (observed == Idle) next = Finished;
+            if (observed == Idle) { next = Finished; stoppedBeforeStart=true; }
             else if (observed == Running || observed == Published || observed == AcceptancePending) next = Stopping;
             else if (observed == Accepted) next = ReleaseRequested;
             else break;
             if (Interlocked.CompareExchange(ref state, next, observed) == observed) break;
+            stoppedBeforeStart=false;
         }
+        if(stoppedBeforeStart) workerFinished.Set();
+        EnsureOwnerCleanupDeadline();
         cancelSignal.Set();
     }
+
+    // Cleanup and evidence use one per-invocation absolute deadline. Stop may
+    // establish it first; the accepted lifecycle reuses it if already set.
+    internal ulong EnsureOwnerCleanupDeadline()
+    {
+        long current=Interlocked.Read(ref ownerCleanupDeadline);
+        if(current==0)
+        {
+            ulong proposed=GetTickCount64()+30000UL;
+            Interlocked.CompareExchange(ref ownerCleanupDeadline,unchecked((long)proposed),0);
+            current=Interlocked.Read(ref ownerCleanupDeadline);
+        }
+        return unchecked((ulong)current);
+    }
+
+    internal bool WaitForOwnerUntilCleanupDeadline()
+    {
+        ulong deadline=EnsureOwnerCleanupDeadline();
+        while(!WorkerFinished && GetTickCount64()<deadline) Thread.Sleep(10);
+        return WorkerFinished;
+    }
+#if SCOPED_RUNNER_TESTING
+    internal void SetOwnerCleanupDeadlineForFixture(ulong deadline)
+    { Interlocked.Exchange(ref ownerCleanupDeadline,unchecked((long)deadline)); }
+#endif
 
     // The live callback is a pure fresh-time check by the watchdog. It runs on
     // both sides of the acceptance CAS, so a deadline crossing cannot expose
@@ -223,6 +262,7 @@ internal sealed class MonitorStagingHandoff
     }
 
     internal bool IsPublished { get { return Volatile.Read(ref state) == Published; } }
+    internal bool WorkerFinished { get { return workerFinished.WaitOne(0); } }
     internal bool CanStart { get { return Volatile.Read(ref state) == Idle; } }
     internal bool IsFailed { get { return Volatile.Read(ref state) == Failed; } }
     internal string Failure { get { return failure; } }

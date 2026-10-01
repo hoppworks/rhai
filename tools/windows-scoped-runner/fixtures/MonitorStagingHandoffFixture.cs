@@ -11,6 +11,7 @@ internal static class MonitorStagingHandoffFixture
             StartOnce(); StopBeforeStart(); WorkerFailure(); StopDuringWork();
             LateCompletion(); SingleHandoff(); RejectedHandoff(); DeadlineCrossing(); WatchdogDoesNotWaitForWorker();
             AcceptancePendingHidesLifecycleUntilFinalCheck(); AcceptedLifecycleRemainsWorkerOwned();
+            OwnerCleanupDeadlineAndMonitorRetention();
         }
         finally
         {
@@ -43,7 +44,8 @@ internal static class MonitorStagingHandoffFixture
     {
         var backend = new FakeBackend(); var handoff = MonitorStagingHandoff.CreateForFixture(backend.Run);
         handoff.Stop();
-        Expect("stopped handoff cannot start", !handoff.Start(LaunchSpecification.Create(@"C:\src", @"bin\app.exe", new string[0])) && backend.Calls == 0);
+        Expect("stopped handoff cannot start and unstarted owner is already complete",
+            !handoff.Start(LaunchSpecification.Create(@"C:\src", @"bin\app.exe", new string[0])) && backend.Calls == 0 && handoff.WorkerFinished);
     }
 
     private static void StopDuringWork()
@@ -154,6 +156,33 @@ internal static class MonitorStagingHandoffFixture
         handoff.WaitForFixtureWorker();
         Expect("pending acceptance disposes staged owner without create continuation",!lifecycleEntered.WaitOne(0) && backend.Owner.DisposeCount==1);
         secondCheckEntered.Dispose(); releaseSecondCheck.Dispose(); lifecycleEntered.Dispose();
+    }
+
+    private static void OwnerCleanupDeadlineAndMonitorRetention()
+    {
+        var backend=new FakeBackend();
+        var lifecycleEntered=new ManualResetEvent(false);
+        var diagnosticsRecorded=new ManualResetEvent(false);
+        var handoff=MonitorStagingHandoff.CreateForFixture(backend.Run,(result,spec,token)=>
+        {
+            diagnosticsRecorded.Set();
+            lifecycleEntered.Set();
+            token.WaitHandle.WaitOne(5000);
+        });
+        handoff.Start(LaunchSpecification.Create(@"C:\src",@"bin\app.exe",new string[0]));
+        backend.Release(); handoff.WaitForPublishedForFixture();
+        Expect("cleanup retention lifecycle is accepted",handoff.TryAcceptForFixture(true));
+        Expect("owner reaches its fixture diagnostic callback before worker completion",
+            lifecycleEntered.WaitOne(5000) && diagnosticsRecorded.WaitOne(0) && !handoff.WorkerFinished);
+        ulong original=handoff.EnsureOwnerCleanupDeadline();
+        ulong expired=WindowsCustodyBackend.RuntimeAllocation.ExpiredFinalizationDeadlineForFixture();
+        handoff.SetOwnerCleanupDeadlineForFixture(expired);
+        bool finishedByDeadline=handoff.WaitForOwnerUntilCleanupDeadline();
+        Expect("expired original cleanup deadline exits monitor retention as failure while exact owner remains held",
+            !finishedByDeadline && !handoff.WorkerFinished && diagnosticsRecorded.WaitOne(0));
+        handoff.Stop(); handoff.WaitForFixtureWorker();
+        Expect("stop never starts a later fresh cleanup deadline",original>expired && handoff.EnsureOwnerCleanupDeadline()==expired);
+        lifecycleEntered.Dispose(); diagnosticsRecorded.Dispose();
     }
 
     private static void Expect(string message, bool condition) { if (!condition) throw new InvalidOperationException(message); }

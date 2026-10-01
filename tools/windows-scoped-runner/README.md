@@ -103,13 +103,14 @@ no-follow child opens, protected-ACL and full 128-bit identity checks, durable
 removal intent, and independent pinned-parent absence readback before the
 removal receipt. It uses `FileIdExtdDirectoryInfo`/`RestartInfo`; an unsupported
 class or a filesystem that does not return a usable 128-bit ID fails closed.
-The public workload path remains disabled. Production removal remains blocked:
-the monitor records outcome metadata after exact-job closure, but that metadata
-does not capture payload logs, results, or a manifest and cannot authorize
-removal. The typed fixture authorization exercises filesystem transitions only;
-it does not stand in for process/job custody. These disposition fixtures are
-source-only and uncompiled/unexecuted. Native disposition, receipt readback,
-exact-job proof production, and end-to-end acceptance remain unverified. Its source-tree staging fixtures cover successful
+The public workload path remains disabled. The monitor source now wires exact
+job closure to bounded stdout/stderr capture, a complete runtime snapshot,
+independent evidence readback, outcome recording, and the identity-bound
+removal gate. These steps are source paths only: the disposition fixture seam
+does not stand in for native process/job custody, and no runtime removal was
+executed. The source fixtures are uncompiled and unexecuted; native
+disposition, receipt readback, exact-job proof production, and end-to-end
+acceptance remain unverified. Its source-tree staging fixtures cover successful
 nested copies, fail-closed source changes and sharing, source/destination
 reparse points, collisions, partial-copy retention, inventory, per-file, total
 byte and depth bounds, cancellation, and receipt readback after handles close.
@@ -164,19 +165,23 @@ Executable-relative syntax checks and staged-file identity checks are present
 in source, but executable launch validation remains unverified. Monitor-owned
 allocation/staging handoff, exact-job closure, and bounded outcome-metadata
 journaling are present as source. The record distinguishes payload exit,
-supervision outcome, confirmed cleanup, saved metadata, unsaved payload
-evidence, host export false, and runtime removal false. Its private receipt is
-bound to the exact allocation, identity, closure proof, durable exit status,
-supervision outcome, and deadline. The same 30-second monotonic deadline bounds
-the metadata flush and the later removal attempt. That attempt remains
-fail-closed until bounded payload logs, results, and manifest have been saved
-and read back outside the runtime; the current receipt explicitly says that
-payload evidence is not saved. Append, identity, cleanup, and deadline
-uncertainty retain the runtime or leave disposition uncertain. Host export has
-no protocol response contract and remains explicitly unimplemented. Fixtures
-cover the production closure and metadata gate through scripted source seams,
-but remain uncompiled and unexecuted. Handle-disposition semantics, compilation, independent native readback, and
-the effect of unrelated external handles remain unverified. The lease protocol
+supervision outcome, confirmed cleanup, saved metadata, payload evidence,
+host export false, and runtime removal. The payload uses explicit NUL stdin and
+restricted inherited stdout/stderr named-pipe writers; one owner worker drains
+overlapped reads into bounded external logs. After exact-job closure, the same
+worker inventories and copies the complete runtime tree, checks the independent
+snapshot and manifest readback, and binds an evidence receipt to allocation,
+identity, closure proof, exit status, supervision outcome, and one absolute
+deadline. Runtime disposition is source-wired behind that receipt. An
+incomplete copy, log, readback, diagnostic, or deadline check withholds the
+receipt and retains the runtime. The monitor watchdog polls worker completion
+only through that worker's already established cleanup deadline; unresolved
+overlapped storage remains strongly held until process teardown. Host export
+has no protocol response contract and remains explicitly unimplemented.
+Source fixtures now cover successful snapshot/readback/removal ordering and
+pending-I/O release-state decisions, but remain uncompiled and unexecuted. The
+monitor process, Win32 I/O, ACL, job, filesystem-removal, and end-to-end
+behavior remain unverified. The lease protocol
 model supports fresh Running-state renewal challenges while keeping the absolute
 lifetime fixed; real workload and native transport integration remain
 unproven. Client/monitor pipe behavior, breakaway compatibility, ambient
@@ -216,11 +221,16 @@ filesystem calls may finish after stop. Failed or rejected allocations are
 disposed by the worker, retaining their runtime and journal. A successful
 accepted allocation remains pinned on the owner worker while it waits for fresh
 create/resume responses and retains the resumed payload. Stop or deadline
-returns payload and allocation cleanup to that worker; disposal may be
-preempted by immediate monitor process exit and is not a cleanup receipt. A
-stalled worker leaves retained or unknown custody.
-Runtime deletion and exact job proof remain disabled. No pipe/native acceptance
-is claimed.
+returns payload and allocation cleanup to that worker. The monitor polls worker
+completion through the same absolute cleanup deadline without joining it; then
+it exits with failure and process teardown releases unresolved kernel I/O. Setup
+unwind uses the setup deadline, while successful setup binds its first cleanup
+request to the lifecycle cleanup deadline; later cleanup calls can only shorten
+that deadline. A stalled worker or pending I/O never becomes a cleanup receipt.
+Exact-job proof, evidence, outcome, and runtime-removal gates are wired in
+source, but no native execution or runtime deletion was performed. Their
+successful Windows behavior remains unverified; no pipe/native acceptance is
+claimed.
 
 `SpecificationTransfer` implements `SPEC-XFER/1` `BEGIN`, `DATA`, and `END`
 frames, each terminated by one LF byte. The receiver token is supplied by its

@@ -203,7 +203,15 @@ internal static class MonitorTransport
         }
         finally
         {
-            if(staging!=null) staging.Stop();
+            if(staging!=null)
+            {
+                staging.Stop();
+                // Keep this independent monitor process alive through the
+                // owner's already established cleanup deadline. The watchdog
+                // only polls; it never joins, performs I/O, or starts a fresh
+                // cleanup budget after an earlier lifecycle deadline exists.
+                staging.WaitForOwnerUntilCleanupDeadline();
+            }
             Volatile.Write(ref stopWriter,1);
             if(input!=IntPtr.Zero) CloseHandle(input);
             if(output!=IntPtr.Zero) CloseHandle(output);

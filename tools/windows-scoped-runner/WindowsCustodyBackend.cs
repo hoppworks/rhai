@@ -1,5 +1,5 @@
-// Bounded Windows filesystem-custody foundation. This source is not wired to
-// workload launch; callers must not infer runtime allocation or deletion safety.
+// Bounded Windows filesystem custody used by the monitor-owned payload worker.
+// Source fixtures do not establish native runtime or deletion behavior.
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -470,6 +470,7 @@ internal static class WindowsCustodyBackend
         private readonly string userSid;
 #if SCOPED_RUNNER_TESTING
         private readonly bool injectIdentityFailure;
+        private Action<string> fixtureEvidenceAfterCopy;
 #endif
         private SafeFileHandle runtimeHandle;
         private SafeFileHandle stagedExecutableHandle;
@@ -478,6 +479,20 @@ internal static class WindowsCustodyBackend
         private string stagedExecutableRelativePath;
         private bool disposed;
         private bool outcomeRecordFlushed;
+        private bool lifecycleDiagnosticsFlushed;
+        private bool lifecycleOperationFailed;
+        private bool lifecycleCleanupFailed;
+        private ulong lifecycleDiagnosticsDeadline;
+        private LeaseMonitor.ExactJobClosureProof lifecycleClosureProof;
+        private string lifecycleOperationDiagnostic, lifecycleCleanupDiagnostic;
+        private long stagedSourceBytes;
+        private long payloadLogBytes;
+        private string payloadEvidencePath;
+        private FileIdentity payloadEvidenceIdentity;
+        private FileIdentity payloadStdoutIdentity,payloadStderrIdentity;
+        private bool evidenceCaptureStarted;
+        private bool evidenceCaptureComplete;
+        private PayloadEvidenceReceipt payloadEvidenceReceipt;
         private ulong outcomeFinalizationDeadline;
         private OutcomeMetadataReceipt outcomeMetadataReceipt;
         private uint? recordedPayloadExitCode;
@@ -497,6 +512,70 @@ internal static class WindowsCustodyBackend
         internal StagingState StageStatus { get; private set; }
         internal RuntimeDispositionState DispositionState { get; private set; }
         internal bool IsStaged { get { return StageStatus == StagingState.Staged; } }
+        internal long StagedSourceBytes { get { return stagedSourceBytes; } }
+        internal static long RemainingEvidenceBytes(long stagedBytes, long alreadySavedBytes)
+        {
+            if(stagedBytes<0 || stagedBytes>MaximumTotalStagedBytes || alreadySavedBytes<0 || alreadySavedBytes>MaximumTotalStagedBytes-stagedBytes)
+                throw new IOException("staged source plus payload evidence exceeds the shared fixed storage bound");
+            return MaximumTotalStagedBytes-stagedBytes-alreadySavedBytes;
+        }
+
+        internal sealed class PayloadLogHandles : IDisposable
+        {
+            internal readonly SafeFileHandle StandardOutput, StandardError;
+            internal readonly string EvidencePath;
+            internal readonly FileIdentity EvidenceIdentity;
+            internal PayloadLogHandles(SafeFileHandle stdout,SafeFileHandle stderr,string path,FileIdentity identity)
+            { StandardOutput=stdout; StandardError=stderr; EvidencePath=path; EvidenceIdentity=identity; }
+            public void Dispose()
+            {
+                Exception failure=null;
+                try { if(StandardOutput!=null) StandardOutput.Dispose(); } catch(Exception error) { failure=error; }
+                try { if(StandardError!=null) StandardError.Dispose(); } catch(Exception error) { if(failure==null) failure=error; }
+                if(failure!=null) throw new IOException("payload log handle close failed",failure);
+            }
+        }
+
+        internal PayloadLogHandles CreatePayloadLogHandles()
+        {
+            lock(this)
+            {
+                if(disposed || !IsStaged || State!=AllocationState.IdentityRecorded || evidenceCaptureStarted || RuntimeIdentity==null || !ReadIdentity(runtimeHandle).SameAs(RuntimeIdentity))
+                    throw new InvalidOperationException("payload evidence setup requires the live staged runtime allocation");
+                string path=System.IO.Path.Combine(parent.Path,".scoped-evidence-"+invocationId.ToString("N"));
+                if(path.Length>MaximumPathLength) throw new IOException("payload evidence path exceeds the fixed bound");
+                CreateDestinationDirectory(path);
+                SafeFileHandle root=OpenDirectory(path);
+                SafeFileHandle stdout=null,stderr=null;
+                try
+                {
+                    SecurityIdentifier user; using(WindowsIdentity current=WindowsIdentity.GetCurrent()) user=current==null ? null : current.User;
+                    if(user==null) throw new IOException("current user SID unavailable for payload evidence directory");
+                    VerifyProtectedDacl(root,user,AceFlags.ContainerInherit|AceFlags.ObjectInherit,"payload evidence directory");
+                    FileIdentity identity=ReadIdentity(root);
+                    stdout=CreateDestinationFile(System.IO.Path.Combine(path,"stdout.log"));
+                    stderr=CreateDestinationFile(System.IO.Path.Combine(path,"stderr.log"));
+                    payloadStdoutIdentity=ReadIdentity(stdout); payloadStderrIdentity=ReadIdentity(stderr);
+                    payloadEvidencePath=path; payloadEvidenceIdentity=identity; evidenceCaptureStarted=true;
+                    return new PayloadLogHandles(stdout,stderr,path,identity);
+                }
+                catch { if(stdout!=null) stdout.Dispose(); if(stderr!=null) stderr.Dispose(); throw; }
+                finally { root.Dispose(); }
+            }
+        }
+
+        internal bool TryChargePayloadLogBytes(long count)
+        {
+            lock(this)
+            {
+                if(count<0 || count>MaximumTotalStagedBytes-stagedSourceBytes-payloadLogBytes) return false;
+                payloadLogBytes=checked(payloadLogBytes+count); return true;
+            }
+        }
+
+        internal long PayloadLogBytes { get { lock(this) return payloadLogBytes; } }
+        internal string PayloadEvidencePath { get { return payloadEvidencePath; } }
+        internal FileIdentity PayloadEvidenceIdentity { get { return payloadEvidenceIdentity; } }
         internal SafeFileHandle StagedExecutableHandle { get { return stagedExecutableHandle; } }
         internal FileIdentity StagedExecutableIdentity { get { return stagedExecutableIdentity; } }
         internal string StagedExecutableRelativePath { get { return stagedExecutableRelativePath; } }
@@ -518,37 +597,76 @@ internal static class WindowsCustodyBackend
             private readonly RuntimeAllocation allocation;
             private readonly FileIdentity runtimeIdentity;
             private readonly LeaseMonitor.ExactJobClosureProof closureProof;
+            private readonly PayloadEvidenceReceipt payloadEvidence;
             private OutcomeMetadataReceipt(RuntimeAllocation owner, LeaseMonitor.ExactJobClosureProof proof,
-                uint? exitCode, PayloadSupervisionOutcome supervision, ulong deadline)
+                uint? exitCode, PayloadSupervisionOutcome supervision, ulong deadline,PayloadEvidenceReceipt evidence)
             {
                 allocation=owner; runtimeIdentity=owner.RuntimeIdentity; closureProof=proof;
+                payloadEvidence=evidence;
                 PayloadExitCode=exitCode; SupervisionOutcome=supervision;
-                LocalMetadataSaved=true; PayloadEvidenceSaved=false; HostExported=false; Deadline=deadline;
+                LocalMetadataSaved=true; PayloadEvidenceSaved=evidence!=null; HostExported=false; Deadline=deadline;
             }
             internal static OutcomeMetadataReceipt FromVerifiedOwner(RuntimeAllocation owner,
-                LeaseMonitor.ExactJobClosureProof proof, uint? exitCode, PayloadSupervisionOutcome supervision, ulong deadline)
+                LeaseMonitor.ExactJobClosureProof proof, uint? exitCode, PayloadSupervisionOutcome supervision, ulong deadline,PayloadEvidenceReceipt evidence)
             {
-                if(owner==null || !owner.outcomeRecordFlushed || owner.journal==null || owner.journal.IsFaulted ||
+                if(owner==null || !owner.outcomeRecordFlushed || !owner.lifecycleDiagnosticsFlushed || owner.lifecycleOperationFailed || owner.lifecycleCleanupFailed ||
+                    owner.lifecycleDiagnosticsDeadline!=deadline || owner.journal==null || owner.journal.IsFaulted ||
                     owner.RuntimeIdentity==null || deadline==0 || owner.outcomeFinalizationDeadline!=deadline ||
                     !Nullable.Equals(owner.recordedPayloadExitCode,exitCode) || owner.recordedSupervisionOutcome!=supervision ||
                     !Object.ReferenceEquals(owner.recordedClosureProof,proof) || proof==null || !proof.Authorizes(owner,owner.RuntimeIdentity))
                     throw new InvalidOperationException("only the exact durably recorded allocation outcome can mint a metadata receipt");
-                return new OutcomeMetadataReceipt(owner,proof,exitCode,supervision,deadline);
+                if(evidence!=null && !evidence.Authorizes(owner,owner.RuntimeIdentity,proof,exitCode,supervision,deadline))
+                    throw new InvalidOperationException("outcome evidence receipt is not bound to the durable exact-job closure");
+                return new OutcomeMetadataReceipt(owner,proof,exitCode,supervision,deadline,evidence);
             }
             internal bool IsBoundTo(RuntimeAllocation owner, LeaseMonitor.ExactJobClosureProof proof,
-                uint? exitCode, PayloadSupervisionOutcome supervision, ulong deadline)
+                uint? exitCode, PayloadSupervisionOutcome supervision, ulong deadline,PayloadEvidenceReceipt evidence)
             {
                 return AuthorizesMetadata(owner,owner==null ? null : owner.RuntimeIdentity) &&
                     Object.ReferenceEquals(closureProof,proof) && Nullable.Equals(PayloadExitCode,exitCode) &&
-                    SupervisionOutcome==supervision && Deadline==deadline;
+                    SupervisionOutcome==supervision && Deadline==deadline && Object.ReferenceEquals(payloadEvidence,evidence);
             }
             internal bool AuthorizesMetadata(RuntimeAllocation owner, FileIdentity identity)
             {
                 return Object.ReferenceEquals(allocation,owner) && runtimeIdentity!=null && runtimeIdentity.SameAs(identity) &&
                     closureProof!=null && closureProof.Authorizes(owner,identity) && LocalMetadataSaved &&
-                    !PayloadEvidenceSaved && !HostExported && owner!=null && owner.outcomeRecordFlushed &&
+                    !HostExported && owner!=null && owner.outcomeRecordFlushed &&
+                    owner.lifecycleDiagnosticsFlushed && !owner.lifecycleOperationFailed && !owner.lifecycleCleanupFailed &&
+                    owner.lifecycleDiagnosticsDeadline==Deadline &&
                     owner.outcomeFinalizationDeadline==Deadline && Nullable.Equals(owner.recordedPayloadExitCode,PayloadExitCode) &&
-                    owner.recordedSupervisionOutcome==SupervisionOutcome && Object.ReferenceEquals(owner.recordedClosureProof,closureProof);
+                    owner.recordedSupervisionOutcome==SupervisionOutcome && Object.ReferenceEquals(owner.recordedClosureProof,closureProof) &&
+                    PayloadEvidenceSaved==(payloadEvidence!=null) && (payloadEvidence==null || payloadEvidence.Authorizes(owner,identity,closureProof,PayloadExitCode,SupervisionOutcome,Deadline));
+            }
+        }
+
+        internal sealed class PayloadEvidenceReceipt
+        {
+            internal readonly string ManifestDigest;
+            internal readonly long CapturedBytes;
+            internal readonly ulong Deadline;
+            internal readonly uint? PayloadExitCode;
+            internal readonly PayloadSupervisionOutcome SupervisionOutcome;
+            private readonly RuntimeAllocation allocation;
+            private readonly FileIdentity runtimeIdentity,evidenceIdentity;
+            private readonly LeaseMonitor.ExactJobClosureProof closureProof;
+            private PayloadEvidenceReceipt(RuntimeAllocation owner,LeaseMonitor.ExactJobClosureProof proof,string digest,long bytes,uint? exitCode,PayloadSupervisionOutcome supervision,ulong deadline)
+            { allocation=owner; runtimeIdentity=owner.RuntimeIdentity; evidenceIdentity=owner.payloadEvidenceIdentity; closureProof=proof; ManifestDigest=digest; CapturedBytes=bytes; PayloadExitCode=exitCode; SupervisionOutcome=supervision; Deadline=deadline; }
+            internal static PayloadEvidenceReceipt FromVerifiedOwner(RuntimeAllocation owner,LeaseMonitor.ExactJobClosureProof proof,string digest,long bytes,uint? exitCode,PayloadSupervisionOutcome supervision,ulong deadline)
+            {
+                if(owner==null || !owner.evidenceCaptureComplete || owner.lifecycleOperationFailed || owner.lifecycleCleanupFailed ||
+                    owner.lifecycleDiagnosticsDeadline!=deadline || owner.lifecycleClosureProof==null || !Object.ReferenceEquals(owner.lifecycleClosureProof,proof) ||
+                    owner.RuntimeIdentity==null || owner.payloadEvidenceIdentity==null || proof==null || !proof.Authorizes(owner,owner.RuntimeIdentity) ||
+                    String.IsNullOrEmpty(digest) || bytes<0 || deadline==0 || owner.payloadEvidenceReceipt!=null)
+                    throw new InvalidOperationException("payload evidence receipt requires this allocation's completed readback and exact closure proof");
+                return new PayloadEvidenceReceipt(owner,proof,digest,bytes,exitCode,supervision,deadline);
+            }
+            internal bool Authorizes(RuntimeAllocation owner,FileIdentity identity,LeaseMonitor.ExactJobClosureProof proof,uint? exitCode,PayloadSupervisionOutcome supervision,ulong deadline)
+            {
+                return Object.ReferenceEquals(allocation,owner) && runtimeIdentity!=null && runtimeIdentity.SameAs(identity) &&
+                    evidenceIdentity!=null && owner!=null && evidenceIdentity.SameAs(owner.payloadEvidenceIdentity) &&
+                    Object.ReferenceEquals(closureProof,proof) && proof!=null && proof.Authorizes(owner,identity) && Deadline==deadline &&
+                    Nullable.Equals(PayloadExitCode,exitCode) && SupervisionOutcome==supervision &&
+                    owner.evidenceCaptureComplete && Object.ReferenceEquals(owner.payloadEvidenceReceipt,this);
             }
         }
 
@@ -557,6 +675,13 @@ internal static class WindowsCustodyBackend
         internal static ulong ExpiredFinalizationDeadlineForFixture()
         { return GetTickCount64()-1; }
         internal void FailNextJournalAppendForFixture() { journal.FailNextAppendForFixture(); }
+        internal void SetEvidenceReadbackMutationForFixture(Action<string> mutation)
+        { fixtureEvidenceAfterCopy=mutation ?? throw new ArgumentNullException("mutation"); }
+        internal void CorruptEvidenceIdentityForFixture()
+        {
+            if(payloadEvidenceIdentity==null) throw new InvalidOperationException("payload evidence identity is unavailable");
+            payloadEvidenceIdentity=new FileIdentity(payloadEvidenceIdentity.VolumeSerial^1UL,payloadEvidenceIdentity.FileId);
+        }
         internal bool RemoveRuntimeForFixture(NoPayloadAuthorization authorization, CancellationToken cancellationToken,
             DispositionFailurePoint failurePoint)
         {
@@ -596,6 +721,8 @@ internal static class WindowsCustodyBackend
             if(GetTickCount64()<deadline) return;
             throw new TimeoutException(phase+" exceeded the shared local finalization deadline");
         }
+        private static void EnsureFinalizationBudgetIfSet(ulong deadline,string phase)
+        { if(deadline!=0) EnsureFinalizationBudget(deadline,phase); }
         private static void EnsureRemovalBudget(CancellationToken cancellationToken,ulong deadline,string phase)
         {
             cancellationToken.ThrowIfCancellationRequested();
@@ -604,18 +731,20 @@ internal static class WindowsCustodyBackend
         }
 
         internal OutcomeMetadataReceipt RecordLocalOutcomeMetadata(LeaseMonitor.ExactJobClosureProof proof,
-            uint? payloadExitCode, PayloadSupervisionOutcome supervision, ulong deadline)
+            uint? payloadExitCode, PayloadSupervisionOutcome supervision, ulong deadline,PayloadEvidenceReceipt evidenceReceipt=null)
         {
             lock(this)
             {
                 if(outcomeMetadataReceipt!=null)
                 {
-                    if(outcomeMetadataReceipt.IsBoundTo(this,proof,payloadExitCode,supervision,deadline)) return outcomeMetadataReceipt;
+                    if(outcomeMetadataReceipt.IsBoundTo(this,proof,payloadExitCode,supervision,deadline,evidenceReceipt)) return outcomeMetadataReceipt;
                     throw new InvalidOperationException("outcome metadata receipt is already bound to another proof or deadline");
                 }
-                if(disposed || State!=AllocationState.IdentityRecorded || RuntimeIdentity==null || journal==null || journal.IsFaulted ||
+                if(disposed || State!=AllocationState.IdentityRecorded || RuntimeIdentity==null || journal==null || journal.IsFaulted || !lifecycleDiagnosticsFlushed || lifecycleOperationFailed || lifecycleCleanupFailed || lifecycleDiagnosticsDeadline!=deadline ||
                     proof==null || !proof.Authorizes(this,RuntimeIdentity))
-                    throw new InvalidOperationException("local outcome requires a live identity-recorded allocation and its exact-job closure proof");
+                    throw new InvalidOperationException("local outcome requires flushed lifecycle diagnostics, a live identity-recorded allocation, and its exact-job closure proof");
+                if(evidenceReceipt!=null && !evidenceReceipt.Authorizes(this,RuntimeIdentity,proof,payloadExitCode,supervision,deadline))
+                    throw new InvalidOperationException("local outcome evidence belongs to another allocation, proof, or deadline");
                 if(outcomeRecordFlushed) throw new IOException("outcome metadata was durably written after its finalization deadline; runtime retained");
                 EnsureFinalizationBudget(deadline,"before outcome metadata append");
                 outcomeFinalizationDeadline=deadline;
@@ -624,13 +753,170 @@ internal static class WindowsCustodyBackend
                 recordedClosureProof=proof;
                 string exit=payloadExitCode.HasValue ? payloadExitCode.Value.ToString("X8") : "NONE";
                 string record="OUTCOME|"+invocationId.ToString("N")+"|"+FormatIdentity(RuntimeIdentity)+"|payload="+exit+
-                    "|supervision="+supervision.ToString()+"|cleanup=CONFIRMED|local_metadata_saved=1|payload_evidence_saved=0|host_exported=0|runtime_removed=0";
+                    "|supervision="+supervision.ToString()+"|cleanup=CONFIRMED|diagnostics_saved=1|local_metadata_saved=1|payload_evidence_saved="+(evidenceReceipt==null ? "0" : "1")+
+                    "|evidence="+(evidenceReceipt==null ? "NONE" : evidenceReceipt.ManifestDigest)+"|evidence_identity="+(evidenceReceipt==null ? "NONE" : FormatIdentity(payloadEvidenceIdentity))+
+                    "|evidence_bytes="+(evidenceReceipt==null ? "0" : evidenceReceipt.CapturedBytes.ToString())+"|host_exported=0|runtime_removed=0";
                 journal.Append(record); // DurableJournal bounds, frames, and flushes each record.
                 outcomeRecordFlushed=true;
                 EnsureFinalizationBudget(deadline,"after outcome metadata flush");
-                outcomeMetadataReceipt=OutcomeMetadataReceipt.FromVerifiedOwner(this,proof,payloadExitCode,supervision,deadline);
+                outcomeMetadataReceipt=OutcomeMetadataReceipt.FromVerifiedOwner(this,proof,payloadExitCode,supervision,deadline,evidenceReceipt);
                 return outcomeMetadataReceipt;
             }
+        }
+
+        internal PayloadEvidenceReceipt CapturePayloadEvidence(LeaseMonitor.ExactJobClosureProof proof,
+            uint? payloadExitCode,PayloadSupervisionOutcome supervision,ulong deadline)
+        {
+            lock(this)
+            {
+                if(payloadEvidenceReceipt!=null)
+                {
+                    if(payloadEvidenceReceipt.Authorizes(this,RuntimeIdentity,proof,payloadExitCode,supervision,deadline)) return payloadEvidenceReceipt;
+                    throw new InvalidOperationException("payload evidence is already bound to another closure proof or deadline");
+                }
+                if(disposed || !IsStaged || State!=AllocationState.IdentityRecorded || RuntimeIdentity==null || runtimeHandle==null ||
+                    journal==null || journal.IsFaulted || !lifecycleDiagnosticsFlushed || lifecycleOperationFailed || lifecycleCleanupFailed ||
+                    lifecycleDiagnosticsDeadline!=deadline || proof==null || !proof.Authorizes(this,RuntimeIdentity) || supervision==PayloadSupervisionOutcome.TransitionFailed)
+                    throw new InvalidOperationException("payload evidence requires a successful outcome, exact closure proof, and live allocation journal");
+                EnsureFinalizationBudget(deadline,"before payload evidence inventory");
+                if(payloadEvidencePath==null || payloadEvidenceIdentity==null || !ReadIdentity(runtimeHandle).SameAs(RuntimeIdentity))
+                    throw new IOException("payload evidence root or exact runtime identity is unavailable");
+                using(SafeFileHandle evidenceRoot=OpenDirectory(payloadEvidencePath))
+                {
+                    if(!ReadIdentity(evidenceRoot).SameAs(payloadEvidenceIdentity)) throw new IOException("payload evidence root identity changed before capture");
+                    string snapshotPath=Path.Combine(payloadEvidencePath,"runtime");
+                    if(snapshotPath.Length>MaximumPathLength) throw new IOException("payload snapshot path exceeds fixed bound");
+                    CreateDestinationDirectory(snapshotPath);
+                    using(PinnedDirectory source=PinSingleDirectory(RuntimePath,OpenDirectory(RuntimePath)))
+                    using(SafeFileHandle snapshot=OpenDirectory(snapshotPath))
+                    {
+                        if(!source.Identity.SameAs(RuntimeIdentity)) throw new IOException("runtime identity changed before evidence snapshot");
+                        var sourceManifest=new List<StagedEntry>();
+                        var sourceIdentities=new HashSet<string>(StringComparer.Ordinal);
+                        AddUniqueIdentity(sourceIdentities,source.Identity,"runtime evidence root");
+                        sourceManifest.Add(ReadDirectoryEntry(source,String.Empty));
+                        long sourceBytes=0;
+                        ScanSourceTree(source,String.Empty,0,sourceManifest,sourceIdentities,ref sourceBytes,CancellationToken.None,deadline);
+                        long totalBytes=checked(stagedSourceBytes+payloadLogBytes);
+                        if(totalBytes>MaximumTotalStagedBytes-sourceBytes) throw new IOException("complete runtime snapshot plus staged source and payload logs exceeds shared evidence bound");
+                        var copiedManifest=new List<StagedEntry> { sourceManifest[0] };
+                        var copiedIdentities=new HashSet<string>(StringComparer.Ordinal);
+                        AddUniqueIdentity(copiedIdentities,source.Identity,"runtime evidence copy root");
+                        var filePins=new List<SafeFileHandle>(); var directoryPins=new List<PinnedDirectory>();
+                        try
+                        {
+                            CopyDirectoryTree(source,String.Empty,snapshotPath,0,sourceManifest[0],copiedManifest,copiedIdentities,
+                                ref totalBytes,CancellationToken.None,filePins,directoryPins
+#if SCOPED_RUNNER_TESTING
+                                ,null
+#endif
+                                ,deadline);
+                            CompareManifests(sourceManifest,copiedManifest);
+#if SCOPED_RUNNER_TESTING
+                            Action<string> mutation=fixtureEvidenceAfterCopy;
+                            fixtureEvidenceAfterCopy=null;
+                            if(mutation!=null) mutation(snapshotPath);
+#endif
+                            EnsureFinalizationBudget(deadline,"after payload evidence copy");
+                            var verification=new List<StagedEntry>(); var verificationIds=new HashSet<string>(StringComparer.Ordinal); long verifiedSourceBytes=0;
+                            AddUniqueIdentity(verificationIds,source.Identity,"runtime evidence source recheck root");
+                            verification.Add(ReadDirectoryEntry(source,String.Empty));
+                            ScanSourceTree(source,String.Empty,0,verification,verificationIds,ref verifiedSourceBytes,CancellationToken.None,deadline);
+                            if(verifiedSourceBytes!=sourceBytes) throw new IOException("runtime byte count changed during evidence capture");
+                            CompareManifests(sourceManifest,verification);
+                            Dictionary<string,FileIdentity> readbackIdentities;
+                            ValidateDestinationTree(snapshotPath,snapshot,sourceManifest,CancellationToken.None,out readbackIdentities,deadline);
+                        }
+                        finally
+                        {
+                            for(int i=0;i<filePins.Count;i++) filePins[i].Dispose();
+                            for(int i=0;i<directoryPins.Count;i++) directoryPins[i].DisposeOwned();
+                        }
+                        string manifestText=SerializeManifest(sourceManifest);
+                        byte[] manifestBytes=Encoding.UTF8.GetBytes(manifestText);
+                        if(manifestBytes.LongLength>MaximumRecordBytes*MaximumInventoryEntries) throw new IOException("payload evidence manifest exceeds fixed bound");
+                        if(totalBytes>MaximumTotalStagedBytes-manifestBytes.LongLength) throw new IOException("manifest exceeds shared source and evidence byte bound");
+                        string manifestPath=Path.Combine(payloadEvidencePath,"manifest.txt");
+                        string manifestHash=HashText(manifestText);
+                        using(SafeFileHandle manifestHandle=CreateDestinationFile(manifestPath))
+                        {
+                            FileIdentity writtenManifestIdentity=ReadIdentity(manifestHandle);
+                            WriteBytes(manifestHandle,manifestBytes);
+                            if(!FlushFileBuffers(manifestHandle)) throw new IOException("FlushFileBuffers(payload evidence manifest) failed",new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error()));
+                            using(SafeFileHandle readback=OpenEntryForInspection(manifestPath))
+                            {
+                                if(!ReadIdentity(readback).SameAs(writtenManifestIdentity)) throw new IOException("payload manifest path identity changed after flush");
+                                FileStandardInfo standard; Check(GetFileInformationByHandleEx(readback,FileStandardInfoClass,out standard,(uint)Marshal.SizeOf(typeof(FileStandardInfo))),"FileStandardInfo(payload manifest readback)");
+                                if(standard.EndOfFile!=manifestBytes.LongLength || !String.Equals(TransferAndHash(readback,null,standard.EndOfFile,false,CancellationToken.None,deadline),manifestHash,StringComparison.Ordinal))
+                                    throw new IOException("independent payload manifest readback did not match the flushed manifest");
+                            }
+                        }
+                        long stdoutBytes,stderrBytes;
+                        string stdoutHash=HashEvidenceFile(Path.Combine(payloadEvidencePath,"stdout.log"),payloadStdoutIdentity,deadline,out stdoutBytes);
+                        string stderrHash=HashEvidenceFile(Path.Combine(payloadEvidencePath,"stderr.log"),payloadStderrIdentity,deadline,out stderrBytes);
+                        if(checked(stdoutBytes+stderrBytes)!=payloadLogBytes) throw new IOException("payload log lengths differ from the owner-accounted output byte count");
+                        if(supervision==PayloadSupervisionOutcome.TransitionFailed) throw new InvalidOperationException("failed transition cannot produce successful evidence");
+                        EnsureFinalizationBudget(deadline,"before payload evidence journal record");
+                        string record="EVIDENCE|"+invocationId.ToString("N")+"|"+FormatIdentity(RuntimeIdentity)+"|proof=EXACT|exit="+(payloadExitCode.HasValue?payloadExitCode.Value.ToString("X8"):"NONE")+
+                            "|supervision="+supervision.ToString()+"|evidence_identity="+FormatIdentity(payloadEvidenceIdentity)+"|manifest="+manifestHash+"|stdout="+stdoutHash+"|stderr="+stderrHash+"|runtime_bytes="+sourceBytes.ToString()+"|logs_bytes="+payloadLogBytes.ToString()+"|deadline="+deadline.ToString();
+                        journal.Append(record);
+                        EnsureFinalizationBudget(deadline,"after payload evidence journal flush");
+                        totalBytes=checked(totalBytes+manifestBytes.LongLength);
+                        evidenceCaptureComplete=true;
+                        payloadEvidenceReceipt=PayloadEvidenceReceipt.FromVerifiedOwner(this,proof,manifestHash,totalBytes,payloadExitCode,supervision,deadline);
+                        return payloadEvidenceReceipt;
+                    }
+                }
+            }
+        }
+
+        // This diagnostic record is deliberately independent of a closure
+        // proof. It preserves transition/cleanup failures in the external
+        // journal when possible, but never authorizes evidence or removal.
+        internal void RecordLifecycleDiagnostics(Exception operationFailure, Exception cleanupFailure,
+            LeaseMonitor.ExactJobClosureProof closureProof, ulong deadline)
+        {
+            lock(this)
+            {
+                string operation=BoundDiagnostic(operationFailure);
+                string cleanup=BoundDiagnostic(cleanupFailure);
+                bool closureConfirmed=closureProof!=null && closureProof.Authorizes(this,RuntimeIdentity) && cleanupFailure==null;
+                if(lifecycleDiagnosticsFlushed)
+                {
+                    if(lifecycleDiagnosticsDeadline!=deadline || lifecycleOperationDiagnostic!=operation || lifecycleCleanupDiagnostic!=cleanup ||
+                        !Object.ReferenceEquals(lifecycleClosureProof,closureConfirmed ? closureProof : null))
+                        throw new InvalidOperationException("lifecycle diagnostic record is already bound to different failures, closure evidence, or deadline");
+                    return;
+                }
+                if(disposed || State!=AllocationState.IdentityRecorded || RuntimeIdentity==null || journal==null || journal.IsFaulted)
+                    throw new InvalidOperationException("lifecycle diagnostics require the live external allocation journal");
+                if(closureProof!=null && !closureProof.Authorizes(this,RuntimeIdentity))
+                    throw new InvalidOperationException("lifecycle closure confirmation belongs to another allocation or identity");
+                EnsureFinalizationBudget(deadline,"before lifecycle diagnostics append");
+                lifecycleDiagnosticsDeadline=deadline;
+                string record="LIFECYCLE|"+invocationId.ToString("N")+"|"+FormatIdentity(RuntimeIdentity)+
+                    "|deadline="+deadline.ToString()+"|operation="+operation+"|cleanup="+cleanup+"|cleanup_confirmed="+(closureConfirmed ? "1" : "0");
+                journal.Append(record);
+                lifecycleDiagnosticsFlushed=true;
+                lifecycleOperationFailed=operationFailure!=null;
+                lifecycleCleanupFailed=cleanupFailure!=null;
+                lifecycleClosureProof=closureConfirmed ? closureProof : null;
+                lifecycleOperationDiagnostic=operation; lifecycleCleanupDiagnostic=cleanup;
+                EnsureFinalizationBudget(deadline,"after lifecycle diagnostics flush");
+            }
+        }
+
+        private static string BoundDiagnostic(Exception error)
+        {
+            if(error==null) return "NONE";
+            string value=error.GetType().Name+":"+error.Message;
+            var result=new StringBuilder(Math.Min(value.Length,384));
+            for(int i=0;i<value.Length && result.Length<384;i++)
+            {
+                char c=value[i];
+                result.Append(c>=0x20 && c<=0x7e && c!='|' ? c : '_');
+            }
+            return result.ToString();
         }
 
         internal bool TryRemoveRuntimeAfterOutcomeMetadata(OutcomeMetadataReceipt receipt, CancellationToken cancellationToken)
@@ -647,9 +933,13 @@ internal static class WindowsCustodyBackend
                 DispositionState=RuntimeDispositionState.Blocked;
                 return false;
             }
-            Failure=AllocationDiagnostic("runtime disposition remains blocked until bounded payload logs, results, and manifest are saved and read back outside the runtime",RuntimePath,JournalPath);
-            DispositionState=RuntimeDispositionState.Blocked;
-            return false;
+            if(!receipt.PayloadEvidenceSaved || !receipt.AuthorizesMetadata(this,RuntimeIdentity))
+            {
+                Failure=AllocationDiagnostic("runtime disposition remains blocked until bounded payload logs, results, and manifest are saved and read back outside the runtime",RuntimePath,JournalPath);
+                DispositionState=RuntimeDispositionState.Blocked;
+                return false;
+            }
+            return RemoveRuntimeCore(receipt,cancellationToken,DispositionFailurePoint.None,MaximumInventoryEntries,MaximumSourceDepth,receipt.Deadline);
         }
 
         internal bool RemoveRuntime()
@@ -755,9 +1045,9 @@ internal static class WindowsCustodyBackend
         private static bool HasFilesystemFixtureAuthorization(object authorization)
         {
 #if SCOPED_RUNNER_TESTING
-            return authorization is NoPayloadAuthorization;
+            return authorization is NoPayloadAuthorization || authorization is OutcomeMetadataReceipt;
 #else
-            return false;
+            return authorization is OutcomeMetadataReceipt;
 #endif
         }
 
@@ -991,6 +1281,7 @@ internal static class WindowsCustodyBackend
                     string receipt = "STAGED|" + invocationId.ToString("N") + "|" + initial.Count.ToString() + "|" +
                         totalBytes.ToString() + "|" + digest + "|" + HashText(stagedExecutableRelativePath) + "|" + FormatIdentity(stagedExecutableIdentity);
                     journal.Append(receipt);
+                    stagedSourceBytes=totalBytes;
                     StageStatus = StagingState.Staged;
                     return true;
                 }
@@ -1192,6 +1483,25 @@ internal static class WindowsCustodyBackend
         finally { LocalFree(descriptor); }
     }
 
+    internal static IntPtr CreateProtectedPipeSecurityDescriptor()
+    {
+        SecurityIdentifier user;
+        using(WindowsIdentity current=WindowsIdentity.GetCurrent()) user=current==null ? null : current.User;
+        if(user==null) throw new IOException("current user SID unavailable for payload pipe DACL");
+        IntPtr descriptor; uint size;
+        if(!ConvertStringSecurityDescriptorToSecurityDescriptorW("D:P(A;;FA;;;SY)(A;;FA;;;"+user.Value+")",1,out descriptor,out size))
+            throw new IOException("unable to build protected payload pipe DACL",new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error()));
+        return descriptor;
+    }
+
+    internal static void VerifyProtectedPipeDacl(SafeFileHandle handle)
+    {
+        SecurityIdentifier user;
+        using(WindowsIdentity current=WindowsIdentity.GetCurrent()) user=current==null ? null : current.User;
+        if(user==null) throw new IOException("current user SID unavailable while verifying payload pipe DACL");
+        VerifyProtectedDacl(handle,user,AceFlags.None,"payload output pipe");
+    }
+
     private static SafeFileHandle OpenSourceFile(string path)
     {
         SafeFileHandle handle = CreateFileW(path, GENERIC_READ | READ_CONTROL | FILE_READ_ATTRIBUTES,
@@ -1227,8 +1537,10 @@ internal static class WindowsCustodyBackend
 #if SCOPED_RUNNER_TESTING
         , string failAtRelativePath
 #endif
+        , ulong deadline=0
         )
     {
+        EnsureFinalizationBudgetIfSet(deadline,"during bounded evidence copy");
         if (depth > MaximumSourceDepth) throw new IOException("source directory depth exceeds the fixed bound");
         StagedEntry actualDirectory = ReadDirectoryEntry(sourceDirectory, relativeDirectory);
         if (!actualDirectory.SameAs(expectedDirectory)) throw new IOException("source directory identity or metadata changed before traversal");
@@ -1278,6 +1590,7 @@ internal static class WindowsCustodyBackend
 #if SCOPED_RUNNER_TESTING
                                 , failAtRelativePath
 #endif
+                                , deadline
                                 );
                         }
                     }
@@ -1296,7 +1609,7 @@ internal static class WindowsCustodyBackend
                         throw new IOException("fixture injected failure after a partial source-tree copy");
 #endif
                     StagedEntry copied = CopySourceFile(entry, identity, sourceChildPath, destinationPath, relative,
-                        tag.Attributes, ref totalBytes, cancellationToken);
+                        tag.Attributes, ref totalBytes, cancellationToken,deadline);
                     sourceFilePins.Add(entry);
                     retainEntry = true;
                     manifest.Add(copied);
@@ -1308,8 +1621,9 @@ internal static class WindowsCustodyBackend
     }
 
     private static void ScanSourceTree(PinnedDirectory sourceDirectory, string relativeDirectory, int depth,
-        List<StagedEntry> manifest, HashSet<string> identities, ref long totalBytes, CancellationToken cancellationToken)
+        List<StagedEntry> manifest, HashSet<string> identities, ref long totalBytes, CancellationToken cancellationToken,ulong deadline=0)
     {
+        EnsureFinalizationBudgetIfSet(deadline,"during bounded evidence scan");
         if (depth > MaximumSourceDepth) throw new IOException("source directory depth exceeds the fixed bound during verification");
         foreach (string childPath in EnumerateBoundedEntries(sourceDirectory.Path, manifest.Count))
         {
@@ -1335,13 +1649,13 @@ internal static class WindowsCustodyBackend
                         StagedEntry dir = ReadDirectoryEntry(childPin, relative);
                         if (!dir.Identity.SameAs(identity)) throw new IOException("source directory identity changed during verification: " + childPath);
                         manifest.Add(dir);
-                        ScanSourceTree(childPin, relative, depth + 1, manifest, identities, ref totalBytes, cancellationToken);
+                        ScanSourceTree(childPin, relative, depth + 1, manifest, identities, ref totalBytes, cancellationToken,deadline);
                     }
                     finally { childPin.DisposeOwned(); }
                 }
                 else
                 {
-                    StagedEntry file = ScanSourceFile(entry, identity, childPath, relative, tag.Attributes, ref totalBytes, cancellationToken);
+                    StagedEntry file = ScanSourceFile(entry, identity, childPath, relative, tag.Attributes, ref totalBytes, cancellationToken,deadline);
                     manifest.Add(file);
                 }
             }
@@ -1349,7 +1663,7 @@ internal static class WindowsCustodyBackend
     }
 
     private static StagedEntry CopySourceFile(SafeFileHandle source, FileIdentity identity, string sourcePath,
-        string destinationPath, string relativePath, uint attributes, ref long totalBytes, CancellationToken cancellationToken)
+        string destinationPath, string relativePath, uint attributes, ref long totalBytes, CancellationToken cancellationToken,ulong deadline=0)
     {
         FileStandardInfo before;
         Check(GetFileInformationByHandleEx(source, FileStandardInfoClass, out before,
@@ -1368,9 +1682,9 @@ internal static class WindowsCustodyBackend
             using (WindowsIdentity current = WindowsIdentity.GetCurrent()) user = current == null ? null : current.User;
             if (user == null) throw new IOException("current user SID unavailable while verifying staged file");
             VerifyProtectedDacl(destination, user, AceFlags.None, "staged file");
-            string copiedDigest = TransferAndHash(source, destination, before.EndOfFile, true, cancellationToken);
+            string copiedDigest = TransferAndHash(source, destination, before.EndOfFile, true, cancellationToken,deadline);
             if (!FlushFileBuffers(destination)) throw new IOException("FlushFileBuffers(staged file) failed", new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error()));
-            string sourceDigest = TransferAndHash(source, null, before.EndOfFile, false, cancellationToken);
+            string sourceDigest = TransferAndHash(source, null, before.EndOfFile, false, cancellationToken,deadline);
             if (!String.Equals(copiedDigest, sourceDigest, StringComparison.Ordinal))
                 throw new IOException("source content changed while the staged copy was being made: " + sourcePath);
             FileStandardInfo after;
@@ -1387,7 +1701,7 @@ internal static class WindowsCustodyBackend
                 (uint)Marshal.SizeOf(typeof(FileStandardInfo))), "FileStandardInfo(staged file)");
             if (destinationInfo.Directory || destinationInfo.EndOfFile != before.EndOfFile || destinationInfo.DeletePending)
                 throw new IOException("staged file size or type differs from its source: " + destinationPath);
-            string destinationDigest = TransferAndHash(destination, null, destinationInfo.EndOfFile, false, cancellationToken);
+            string destinationDigest = TransferAndHash(destination, null, destinationInfo.EndOfFile, false, cancellationToken,deadline);
             if (!String.Equals(copiedDigest, destinationDigest, StringComparison.Ordinal))
                 throw new IOException("independent destination handle readback did not match the source: " + destinationPath);
             totalBytes = checked(totalBytes + before.EndOfFile);
@@ -1397,7 +1711,7 @@ internal static class WindowsCustodyBackend
     }
 
     private static StagedEntry ScanSourceFile(SafeFileHandle source, FileIdentity identity, string path,
-        string relativePath, uint attributes, ref long totalBytes, CancellationToken cancellationToken)
+        string relativePath, uint attributes, ref long totalBytes, CancellationToken cancellationToken,ulong deadline=0)
     {
         FileStandardInfo standard;
         Check(GetFileInformationByHandleEx(source, FileStandardInfoClass, out standard,
@@ -1408,7 +1722,7 @@ internal static class WindowsCustodyBackend
         if (standard.Directory || standard.DeletePending || standard.NumberOfLinks != 1 || standard.EndOfFile < 0 || standard.EndOfFile > MaximumSingleStagedFileBytes ||
             standard.EndOfFile > MaximumTotalStagedBytes - totalBytes)
             throw new IOException("source file violates the fixed staging bounds during verification: " + path);
-        string digest = TransferAndHash(source, null, standard.EndOfFile, false, cancellationToken);
+        string digest = TransferAndHash(source, null, standard.EndOfFile, false, cancellationToken,deadline);
         FileBasicInfo after;
         Check(GetFileInformationByHandleEx(source, FileBasicInfoClass, out after,
             (uint)Marshal.SizeOf(typeof(FileBasicInfo))), "FileBasicInfo(source verification after read)");
@@ -1419,7 +1733,7 @@ internal static class WindowsCustodyBackend
     }
 
     private static string TransferAndHash(SafeFileHandle source, SafeFileHandle destination, long expectedLength,
-        bool copy, CancellationToken cancellationToken)
+        bool copy, CancellationToken cancellationToken,ulong deadline=0)
     {
         long position;
         Check(SetFilePointerEx(source, 0, out position, FILE_BEGIN), "SetFilePointerEx(source)");
@@ -1433,6 +1747,7 @@ internal static class WindowsCustodyBackend
                 while (total < expectedLength)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
+                    EnsureFinalizationBudgetIfSet(deadline,"during bounded file transfer");
                     uint request = (uint)Math.Min(TransferBufferBytes, expectedLength - total);
                     uint read;
                     if (!ReadFile(source, buffer, request, out read, IntPtr.Zero))
@@ -1582,7 +1897,7 @@ internal static class WindowsCustodyBackend
 
     private static void ValidateDestinationTree(string destinationRoot, SafeFileHandle runtimeHandle,
         List<StagedEntry> sourceManifest, CancellationToken cancellationToken,
-        out Dictionary<string, FileIdentity> identitiesByPath)
+        out Dictionary<string, FileIdentity> identitiesByPath,ulong deadline=0)
     {
         var expected = new Dictionary<string, StagedEntry>(StringComparer.OrdinalIgnoreCase);
         for (int i = 0; i < sourceManifest.Count; i++) expected.Add(sourceManifest[i].RelativePath, sourceManifest[i]);
@@ -1603,7 +1918,7 @@ internal static class WindowsCustodyBackend
         AddUniqueIdentity(destinationIdentities, runtimeIdentity, "staged runtime root");
         identitiesByPath = new Dictionary<string, FileIdentity>(StringComparer.OrdinalIgnoreCase);
         ScanDestinationDirectory(destinationRoot, runtimeHandle, String.Empty, 0, expected, observed,
-            destinationIdentities, identitiesByPath, ref count, ref total, user, cancellationToken);
+            destinationIdentities, identitiesByPath, ref count, ref total, user, cancellationToken,deadline);
         if (observed.Count != expected.Count - 1)
             throw new IOException("staged destination inventory contains missing or unexpected entries");
     }
@@ -1611,12 +1926,14 @@ internal static class WindowsCustodyBackend
     private static void ScanDestinationDirectory(string directoryPath, SafeFileHandle directoryHandle,
         string relativeDirectory, int depth, Dictionary<string, StagedEntry> expected, HashSet<string> observed,
         HashSet<string> identities, Dictionary<string, FileIdentity> identitiesByPath,
-        ref int count, ref long total, SecurityIdentifier user, CancellationToken cancellationToken)
+        ref int count, ref long total, SecurityIdentifier user, CancellationToken cancellationToken,ulong deadline=0)
     {
+        EnsureFinalizationBudgetIfSet(deadline,"during independent payload snapshot readback");
         if (depth > MaximumSourceDepth) throw new IOException("staged directory depth exceeds the fixed bound");
         foreach (string path in EnumerateBoundedEntries(directoryPath, count))
         {
             cancellationToken.ThrowIfCancellationRequested();
+            EnsureFinalizationBudgetIfSet(deadline,"during independent payload snapshot entry readback");
             if (++count > MaximumInventoryEntries) throw new IOException("staged destination inventory exceeds the fixed entry bound");
             string name = Path.GetFileName(path);
             ValidateSourceComponent(name);
@@ -1644,7 +1961,7 @@ internal static class WindowsCustodyBackend
                         if (!child.Identity.SameAs(identity)) throw new IOException("staged directory identity changed while pinning: " + path);
                         VerifyProtectedDacl(child.Handle, user, AceFlags.ContainerInherit | AceFlags.ObjectInherit, "staged directory");
                         ScanDestinationDirectory(child.Path, child.Handle, relative, depth + 1, expected, observed, identities, identitiesByPath,
-                            ref count, ref total, user, cancellationToken);
+                            ref count, ref total, user, cancellationToken,deadline);
                     }
                     finally { child.DisposeOwned(); }
                 }
@@ -1657,7 +1974,7 @@ internal static class WindowsCustodyBackend
                     if (standard.Directory || standard.DeletePending || standard.NumberOfLinks != 1 || standard.EndOfFile != expectedEntry.Length ||
                         standard.EndOfFile > MaximumSingleStagedFileBytes || standard.EndOfFile > MaximumTotalStagedBytes - total)
                         throw new IOException("staged file size violates its manifest or fixed bounds: " + relative);
-                    string digest = TransferAndHash(entry, null, standard.EndOfFile, false, cancellationToken);
+                    string digest = TransferAndHash(entry, null, standard.EndOfFile, false, cancellationToken,deadline);
                     if (!String.Equals(digest, expectedEntry.ContentDigest, StringComparison.Ordinal))
                         throw new IOException("staged file content differs from the source manifest: " + relative);
                     total = checked(total + standard.EndOfFile);
@@ -1668,16 +1985,51 @@ internal static class WindowsCustodyBackend
 
     private static string ManifestDigest(List<StagedEntry> entries)
     {
-        entries.Sort(delegate(StagedEntry a, StagedEntry b) { return StringComparer.OrdinalIgnoreCase.Compare(a.RelativePath, b.RelativePath); });
-        var text = new StringBuilder();
-        for (int i = 0; i < entries.Count; i++)
+        return HashText(SerializeManifest(entries));
+    }
+
+    private static string SerializeManifest(List<StagedEntry> entries)
+    {
+        entries.Sort(delegate(StagedEntry a,StagedEntry b) { return StringComparer.OrdinalIgnoreCase.Compare(a.RelativePath,b.RelativePath); });
+        var text=new StringBuilder();
+        for(int i=0;i<entries.Count;i++)
         {
-            StagedEntry item = entries[i];
-            text.Append(item.RelativePath).Append('|').Append(item.IsDirectory ? 'D' : 'F').Append('|')
-                .Append(FormatIdentity(item.Identity)).Append('|').Append(item.Length).Append('|')
-                .Append(item.LastWriteTime).Append('|').Append(item.Attributes).Append('|').Append(item.ContentDigest).Append('\n');
+            StagedEntry item=entries[i];
+            text.Append(item.RelativePath).Append('|').Append(item.IsDirectory?'D':'F').Append('|').Append(FormatIdentity(item.Identity)).Append('|')
+                .Append(item.Length).Append('|').Append(item.LastWriteTime).Append('|').Append(item.Attributes).Append('|').Append(item.ContentDigest).Append('\n');
         }
-        using (SHA256 hash = SHA256.Create()) return Hex(hash.ComputeHash(Encoding.UTF8.GetBytes(text.ToString())));
+        return text.ToString();
+    }
+
+    private static void WriteBytes(SafeFileHandle destination,byte[] bytes)
+    {
+        IntPtr buffer=Marshal.AllocHGlobal(bytes.Length);
+        try
+        {
+            Marshal.Copy(bytes,0,buffer,bytes.Length); uint offset=0;
+            while(offset<(uint)bytes.Length)
+            {
+                uint written;
+                if(!WriteFile(destination,IntPtr.Add(buffer,(int)offset),(uint)bytes.Length-offset,out written,IntPtr.Zero) || written==0 || written>(uint)bytes.Length-offset)
+                    throw new IOException("WriteFile(payload evidence manifest) failed or made invalid progress",new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error()));
+                offset+=written;
+            }
+        }
+        finally { Marshal.FreeHGlobal(buffer); }
+    }
+
+    private static string HashEvidenceFile(string path,FileIdentity expectedIdentity,ulong deadline,out long length)
+    {
+        using(SafeFileHandle file=OpenEntryForInspection(path))
+        {
+            if(expectedIdentity==null || !ReadIdentity(file).SameAs(expectedIdentity)) throw new IOException("payload log identity changed before independent readback");
+            FileStandardInfo standard;
+            Check(GetFileInformationByHandleEx(file,FileStandardInfoClass,out standard,(uint)Marshal.SizeOf(typeof(FileStandardInfo))),"FileStandardInfo(payload log readback)");
+            if(standard.Directory || standard.DeletePending || standard.NumberOfLinks!=1 || standard.EndOfFile<0 || standard.EndOfFile>MaximumTotalStagedBytes)
+                throw new IOException("payload log readback violates its file bounds");
+            length=standard.EndOfFile;
+            return TransferAndHash(file,null,length,false,CancellationToken.None,deadline);
+        }
     }
 
     private static string HashText(string value)
