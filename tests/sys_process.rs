@@ -1524,7 +1524,7 @@ fn managed_run_reports_while_fixture_reaper_holds_stopped_zombies() {
     assert!(cleanup.contains("held_zombies=true"));
     assert!(cleanup.contains(&format!("worker={} reaped=true", worker_fields["pid"])), "worker was not reaped by the fixture-owned reaper: {cleanup}");
     assert!(cleanup.contains(&format!("leaf={} reaped=true", leaf_fields["pid"])), "leaf was not reaped by the fixture-owned reaper: {cleanup}");
-    eprintln!("managed_held_zombie_boundary host_live_at_return=true leader_reaped=true worker={} worker_start={worker_start} worker_state=Z worker_pgid={} leaf={} leaf_start={leaf_start} leaf_state=Z leaf_pgid={} group={group} kill_zero_result={group_result} kill_zero_errno={group_errno} capture_complete=true api_result={api_result:?} held={held:?} reaper_status={status:?}", worker_fields["pid"], worker_now.2, leaf_fields["pid"], leaf_now.2);
+    eprintln!("managed_held_zombie_boundary host_live_at_return=true leader={} leader_start={leader_start} leader_reaped=true worker={} worker_start={worker_start} worker_state=Z worker_pgid={} leaf={} leaf_start={leaf_start} leaf_state=Z leaf_pgid={} group={group} kill_zero_result={group_result} kill_zero_errno={group_errno} capture_complete=true api_result={api_result:?} held={held:?} reaper_status={status:?}", leader_fields["pid"], worker_fields["pid"], worker_now.2, leaf_fields["pid"], leaf_now.2);
     eprintln!("managed_held_zombie_cleanup worker={} reaped=true leaf={} reaped=true", worker_fields["pid"], leaf_fields["pid"]);
 }
 
