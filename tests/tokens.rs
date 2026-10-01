@@ -1,5 +1,34 @@
 use rhai::{Engine, ParseErrorType, INT};
 
+#[cfg(feature = "sys")]
+#[test]
+fn sys_spawn_keyword_can_be_called_as_the_documented_global_function() {
+    let mut engine = Engine::new();
+    engine.register_fn("spawn", || 42 as INT);
+    assert_eq!(engine.eval::<INT>("spawn()").unwrap(), 42);
+
+    for source in ["let spawn = 42;", "spawn_value.spawn()"] {
+        let error = engine.compile(source).unwrap_err();
+        assert!(
+            matches!(
+                error.err_type(),
+                ParseErrorType::Reserved(ref name) if name == "spawn"
+            ),
+            "reserved identifier/method accepted: {source}"
+        );
+    }
+}
+
+#[cfg(not(feature = "sys"))]
+#[test]
+fn spawn_remains_reserved_when_sys_is_disabled() {
+    let error = Engine::new().compile("spawn()").unwrap_err();
+    assert!(matches!(
+        error.err_type(),
+        ParseErrorType::Reserved(ref name) if name == "spawn"
+    ));
+}
+
 #[test]
 fn test_tokens_disabled() {
     let mut engine = Engine::new();

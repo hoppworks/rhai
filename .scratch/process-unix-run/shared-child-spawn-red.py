@@ -23,6 +23,8 @@ OVERLAYS = [
     'src/packages/sys/mod.rs',
     'src/packages/sys/process.rs',
     'src/packages/sys/process/unix.rs',
+    'src/types/token.rs',
+    'tests/tokens.rs',
     'tests/sys_process.rs',
     'tests/fixtures/sys_process_shared_child_contract.rs',
 ]
@@ -179,6 +181,58 @@ env.update({
 })
 (RUNTIME / 'cargo-home').mkdir()
 (RUNTIME / 'rustup-home').mkdir()
+token_command = [
+    str(CARGO), 'test', '--locked', '--test', 'tokens',
+    '--features', 'sys', '--',
+    'sys_spawn_keyword_can_be_called_as_the_documented_global_function',
+    '--exact', '--nocapture', '--test-threads=1',
+]
+token_status, token_output = run_cargo(token_command, source, env, RUNTIME / 'cargo-token-test.log')
+token_sys_passed = (
+    token_status == 0
+    and 'running 1 test' in token_output
+    and 'sys_spawn_keyword_can_be_called_as_the_documented_global_function ... ok' in token_output
+)
+print(f'parser_sys_callability_test status={token_status} passed={token_sys_passed}', flush=True)
+if not token_sys_passed:
+    raise RuntimeError('sys-enabled public parser callability test did not pass')
+
+token_nocustom_command = [
+    str(CARGO), 'test', '--locked', '--test', 'tokens',
+    '--features', 'sys,no_custom_syntax', '--',
+    'sys_spawn_keyword_can_be_called_as_the_documented_global_function',
+    '--exact', '--nocapture', '--test-threads=1',
+]
+token_nocustom_status, token_nocustom_output = run_cargo(
+    token_nocustom_command, source, env, RUNTIME / 'cargo-token-nocustom-test.log'
+)
+token_nocustom_passed = (
+    token_nocustom_status == 0
+    and 'running 1 test' in token_nocustom_output
+    and 'sys_spawn_keyword_can_be_called_as_the_documented_global_function ... ok' in token_nocustom_output
+)
+print(f'parser_sys_no_custom_syntax_test status={token_nocustom_status} passed={token_nocustom_passed}', flush=True)
+if not token_nocustom_passed:
+    raise RuntimeError('sys plus no_custom_syntax parser callability test did not pass')
+
+token_no_sys_command = [
+    str(CARGO), 'test', '--locked', '--test', 'tokens', '--no-default-features',
+    '--features', 'std', '--', 'spawn_remains_reserved_when_sys_is_disabled',
+    '--exact', '--nocapture', '--test-threads=1',
+]
+token_no_sys_status, token_no_sys_output = run_cargo(
+    token_no_sys_command, source, env, RUNTIME / 'cargo-token-no-sys-test.log'
+)
+token_no_sys_passed = (
+    token_no_sys_status == 0
+    and 'running 1 test' in token_no_sys_output
+    and 'spawn_remains_reserved_when_sys_is_disabled ... ok' in token_no_sys_output
+)
+token_test_passed = token_sys_passed and token_nocustom_passed and token_no_sys_passed
+print(f'parser_no_sys_test status={token_no_sys_status} passed={token_no_sys_passed}', flush=True)
+if not token_no_sys_passed:
+    raise RuntimeError('non-sys reserved-keyword behavior changed')
+
 command = [
     str(CARGO), 'test', '--locked', '--test', 'sys_process',
     '--features', 'testing-environ,sys,sync', '--', TEST_NAME,
@@ -187,7 +241,8 @@ command = [
 status, output = run_cargo(command, source, env, RUNTIME / 'cargo-test.log')
 
 expected = 'Function not found: spawn' in output
-test_failed = f'test {TEST_NAME} ... FAILED' in output
+test_failed = bool(re.search(rf'(?m)^    {re.escape(TEST_NAME)}$', output))
+one_test_failed = bool(re.search(r'(?m)^test result: FAILED\. 0 passed; 1 failed;', output))
 one_test = 'running 1 test' in output
 controller_reaped = 'shared-child controller_reaped scenario=blocked_input_wait_snapshot' in output
 root_match = re.search(r'shared-child controller_started scenario=blocked_input_wait_snapshot pid=(\d+) root=(\S+)', output)
@@ -226,7 +281,7 @@ source_unchanged = final_private_hashes == expected_private_hashes and final_inj
 final_original_hashes = {name: sha(REPO / name) for name in OVERLAYS}
 original_unchanged = final_original_hashes == source_hashes
 print('final_original_overlay_hashes=' + repr(final_original_hashes), flush=True)
-print(f'red_classifier status={status} one_test={one_test} intended_public_spawn_error={expected} exact_test_failed={test_failed} controller_reaped={controller_reaped} controller_esrch={controller_esrch} fixture_root_contained={root_contained} fixture_root_absent={root_absent} private_source_unchanged={source_unchanged} original_sources_unchanged={original_unchanged}', flush=True)
-if not (status == 101 and one_test and expected and test_failed and controller_reaped and controller_esrch and root_contained and root_absent and source_unchanged and original_unchanged):
+print(f'red_classifier status={status} one_test={one_test} intended_public_spawn_error={expected} exact_test_failed={test_failed} one_test_failure_summary={one_test_failed} parser_sys={token_sys_passed} parser_sys_no_custom={token_nocustom_passed} parser_no_sys={token_no_sys_passed} controller_reaped={controller_reaped} controller_esrch={controller_esrch} fixture_root_contained={root_contained} fixture_root_absent={root_absent} private_source_unchanged={source_unchanged} original_sources_unchanged={original_unchanged}', flush=True)
+if not (status == 101 and one_test and expected and test_failed and one_test_failed and token_test_passed and controller_reaped and controller_esrch and root_contained and root_absent and source_unchanged and original_unchanged):
     raise RuntimeError('expected public Engine FunctionNotFound RED was not isolated; do not count as contract evidence')
 print('classification=expected_development_toolchain_public_engine_red; no_os_fixture_spawned; not_msrv_or_release_acceptance', flush=True)
