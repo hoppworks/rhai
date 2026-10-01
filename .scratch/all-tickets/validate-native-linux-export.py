@@ -15,7 +15,7 @@ for c in l['cases']:
  for s in ['stdin','stdout','stderr']:
   n=a[s+'_bytes'];block=bytes(i^(0xa5 if s=='stderr' and name in ['normal','cancel','missing-wake'] else 0) for i in range(256));b=(block*((n+255)//256))[:n]
   assert a[s+'_sha256']==digest(b),(name,s)
-  if s!='stdin':assert bytes.fromhex(a[s+'_prefix_hex'])==b[:len(bytes.fromhex(a[s+'_prefix_hex']))]
+  if s!='stdin':assert bytes.fromhex(a[s+'_prefix_hex'])==b[:min(n,64 if name in ['normal','cancel','missing-wake'] else 4096)]
  if name=='normal':
   assert all(a[s+'_bytes']==2097152 for s in ['stdin','stdout','stderr']);assert a['stdin_end']=='complete' and a['stdout_end']==a['stderr_end']=='eof'
  elif name in ['cancel','missing-wake']:
