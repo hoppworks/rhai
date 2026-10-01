@@ -2,7 +2,6 @@ import ast
 import hashlib
 import os
 import re
-import errno
 from pathlib import Path
 
 raw_path = Path('.scratch/process-unix-run/evidence/post-reap-kill.UbWTw2')
@@ -31,23 +30,27 @@ control_ok = (
 )
 
 scenario = re.search(r'shared-child scenario=blocked_input_wait_snapshot controller_pid=(\d+) status=ok fixture_record=Some\("pid=(\d+) state=exited code=17\\n"\)', green)
+def pid_absent(pid):
+    try:
+        os.kill(pid, 0)
+        return False
+    except ProcessLookupError:
+        return True
+    except PermissionError:
+        return False
+
 if scenario:
     controller_pid, fixture_pid = map(int, scenario.groups())
     controller_reaped = re.search(rf'shared-child controller_reaped scenario=blocked_input_wait_snapshot pid={controller_pid} status=exit status: 0', green)
     controller_esrch = f'shared-child controller_esrch pid={controller_pid} verified=true' in green
     fixture_esrch = f'shared-child fixture_cleanup pid={fixture_pid} absent=true' in green
-    try:
-        os.kill(fixture_pid, 0)
-        fixture_pid_absent = False
-    except ProcessLookupError:
-        fixture_pid_absent = True
-    except PermissionError:
-        fixture_pid_absent = False
+    fixture_pid_absent = pid_absent(fixture_pid)
+    controller_pid_absent = pid_absent(controller_pid)
     fixture_root = re.search(rf'shared-child controller_started scenario=blocked_input_wait_snapshot pid={controller_pid} root=(\S+)', green)
     root_absent = bool(fixture_root and not Path(fixture_root.group(1)).exists())
 else:
     controller_pid = fixture_pid = 0
-    controller_reaped = controller_esrch = fixture_esrch = root_absent = fixture_pid_absent = False
+    controller_reaped = controller_esrch = fixture_esrch = root_absent = fixture_pid_absent = controller_pid_absent = False
 
 started = re.findall(r'(?m)^test (shared_child_contract::[^ ]+) \.\.\.', green)
 all_tests = re.search(r'(?m)^test result: ok\. 6 passed; 0 failed;', green) is not None
@@ -119,7 +122,7 @@ checks = {
     'scenario_exit_record_code17': bool(scenario),
     'matching_controller_reaped_and_esrch': bool(controller_reaped and controller_esrch),
     'fixture_cleanup_record_and_root_absent': bool(fixture_esrch and root_absent),
-    'fixture_and_controller_pid_readback': bool(fixture_pid and controller_pid),
+    'fixture_and_controller_pid_readback': bool(fixture_pid_absent and controller_pid_absent),
     'all_source_manifests_and_restoration': bool(all_manifest),
     'source_contains_required_cached_snapshot_assertions': bool(source_assertions),
     'captured_nested_marker_explanation_matches_controller_record': bool(scenario and 'state=exited code=17\\n' in scenario.group(0)),
