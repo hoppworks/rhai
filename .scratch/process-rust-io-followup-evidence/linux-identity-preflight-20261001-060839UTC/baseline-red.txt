@@ -1,0 +1,3 @@
+Baseline HEAD identity seam test (remote Linux own-PID vs independent /proc stat):
+RuntimeError: Darwin proc_pidinfo is unavailable
+Exit status: 1

@@ -5,6 +5,7 @@ import hashlib
 import importlib.util
 import json
 import os
+import platform
 import shutil
 import stat
 import subprocess
@@ -327,7 +328,7 @@ def main():
     build_deadline = started + BUILD_LIMIT
     private = runtime / 'private-source'
     private.mkdir()
-    export = repo / '.scratch/process-rust-io/evidence/native-msrv1772-followup-20261001-055900UTC'
+    export = repo / '.scratch/process-rust-io/evidence/native-linux-io-followup-20261001-060839UTC'
     export.mkdir(parents=True, exist_ok=False)
     parent_pid = os.getppid()
     supervisor_pid = parent_pid
@@ -378,12 +379,19 @@ def main():
     try:
         ledger['storage_observations'] = []
         sampler.start()
-        rustup = Path('/Users/hoppworks/.cargo/bin/rustup')
+        if sys.platform == 'darwin':
+            rustup = Path('/Users/hoppworks/.cargo/bin/rustup')
+            rust_target = '1.77.2-aarch64-apple-darwin'
+        elif sys.platform.startswith('linux') and platform.machine() == 'x86_64':
+            rustup = Path('/root/.cargo/bin/rustup')
+            rust_target = '1.77.2-x86_64-unknown-linux-gnu'
+        else:
+            raise RuntimeError(f'unsupported native acceptance host: {sys.platform}/{platform.machine()}')
         bounded_process([str(rustup), 'toolchain', 'install', '1.77.2',
                          '--profile', 'minimal', '--no-self-update'],
                         repo, env, build_deadline, export / 'rustup-install.log',
                         'rustup-install-1.77.2', ledger, sampler, 'setup', 'toolchain-install')
-        toolchain_bin = runtime / 'rustup-home' / 'toolchains' / '1.77.2-aarch64-apple-darwin' / 'bin'
+        toolchain_bin = runtime / 'rustup-home' / 'toolchains' / rust_target / 'bin'
         rustc = toolchain_bin / 'rustc'
         cargo = toolchain_bin / 'cargo'
         rustdoc = toolchain_bin / 'rustdoc'

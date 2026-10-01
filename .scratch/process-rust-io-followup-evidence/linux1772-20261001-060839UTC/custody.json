@@ -1,0 +1,24 @@
+{
+  "driver": {
+    "parent_pid": 206278,
+    "parent_start_identity": [
+      1790355202,
+      48052948
+    ],
+    "pid": 206279,
+    "start_identity": [
+      1790355202,
+      48052950
+    ]
+  },
+  "runtime_path": "/tmp/agent-build-rf1abtjr",
+  "sampler_children": "see sampler-children.json; PIDs captured from direct Popen handles and terminal outcomes recorded after communicate/reap",
+  "supervisor": {
+    "pgid": 206278,
+    "pid": 206278,
+    "start_identity": [
+      1790355202,
+      48052948
+    ]
+  }
+}

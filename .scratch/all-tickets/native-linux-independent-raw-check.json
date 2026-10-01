@@ -1,0 +1,15 @@
+{
+  "cases": 13,
+  "distinct_ledger_hashed_files": 34,
+  "sampler_children_terminal": 51,
+  "valid_resource_samples": 51,
+  "sampled_private_bytes_max": 567014517,
+  "sampled_process_max": 8,
+  "wrapper_status": 0,
+  "limitations": [
+    "Standalone native prototype, not public Engine API",
+    "External custodian pipe holder does not prove workload-spawned escaped-descendant topology",
+    "Resource maxima are sampled, not continuous peaks",
+    "Runner interruption proves custody, not worker joins"
+  ]
+}
