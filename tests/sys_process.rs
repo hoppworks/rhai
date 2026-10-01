@@ -1484,6 +1484,8 @@ fn managed_run_reports_while_fixture_reaper_holds_stopped_zombies() {
     let api_result = std::fs::read_to_string(api_result_path).unwrap();
     assert!(api_result.contains(&format!("host={host_pid} host_start={host_start}")), "API result belongs to unexpected host: {api_result}");
     assert!(api_result.contains("success=true") || api_result.contains("success=false"), "API outcome receipt is malformed: {api_result}");
+    let recognized_api_outcome = api_result.contains("api_success=true api_outcome=success_report") || (api_result.contains("api_success=false api_outcome=typed_process_io cause_op=observe_process_group_closure cause_op_matches=true") && api_result.contains("diagnostic=true"));
+    assert!(recognized_api_outcome, "API result must be a successful report or the typed managed group-closure error with its matching diagnostic: {api_result}");
     assert!(api_result.contains("exit=Some("), "API result must retain the exact direct leader's exit status: {api_result}");
     assert!(api_result.contains("stdout_complete=true stderr_complete=true"), "API return must include complete local capture facts: {api_result}");
     assert_managed_pidfds_exited(&pidfds);
