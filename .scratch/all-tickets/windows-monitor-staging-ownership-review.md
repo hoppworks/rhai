@@ -116,3 +116,25 @@ c466da5498e6908f273158384c73d58b055f083930bc9fac7c7af2a7dbf12251  tools/windows-
 3e774455bc25a3f0fa40162e4ca3f5d59f35270d27b41c3e2aceb0f144f73d8d  tools/windows-scoped-runner/fixtures/MonitorSpecificationIntakeFixture.cs
 e4dce4e35d3779d76f20be03bddfb4acbc138eda6a54d6c9011b5932d2a409cb  tools/windows-scoped-runner/fixtures/MonitorStagingHandoffFixture.cs
 ```
+
+
+## Exact-job lifecycle candidate review — not yet accepted
+
+Current source-only package uses exact root polling, a shared cleanup deadline
+and allocation-bound receipt. Early review corrected rejection of legitimate
+signaled exit259 and missing deadline readback after final job closure.
+Primary API reference: https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-getexitcodeprocess.
+No executed compiler or native evidence supports this candidate.
+
+A subsequent frozen candidate was not accepted: boolean ClosureFacts fixture
+checks mirror the mint conjunction but do not exercise actual termination,
+root observation, handle closure, job polling, ordering or budget consumption.
+The responsible context is adding deterministic fake native operations around
+the same production cleanup algorithm, with explicit model/native boundaries.
+Private nested ClosureReceipt construction from its containing owner also
+requires a compiler-safe guarded factory; changing to an unchecked internal
+constructor would invalidate the proof authority. Microsoft constructor rule:
+https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/classes-and-structs/private-constructors.
+These are unexecuted source review findings, not failed native corrections.
+Existing sole Expert02/history, private ownership, source-only scope and all
+actual resource limits remain unchanged. Runtime removal stays uninvoked.
