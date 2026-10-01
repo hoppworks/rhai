@@ -11,6 +11,41 @@ use std::os::unix::process::{CommandExt, ExitStatusExt};
 use std::process::{Child, Command, Stdio};
 use std::time::{Duration, Instant};
 
+/// Private, per-execution fault adapter used only by host unit tests.
+///
+/// The plan is consumed immediately before spawn and then carried with that exact execution;
+/// there is no script-visible switch and no process-global fault state.
+#[derive(Default)]
+struct ExecutionFaults {
+    #[cfg(test)]
+    refuse_kill_once: bool,
+    #[cfg(test)]
+    retired: Option<std::sync::Arc<std::sync::atomic::AtomicBool>>,
+}
+
+impl ExecutionFaults {
+    fn take_for_execution() -> Self {
+        #[cfg(test)]
+        {
+            return tests::take_execution_faults();
+        }
+        #[cfg(not(test))]
+        Self::default()
+    }
+
+    fn kill(&mut self, child: &mut Child) -> io::Result<()> {
+        #[cfg(test)]
+        if self.refuse_kill_once {
+            self.refuse_kill_once = false;
+            return Err(io::Error::new(
+                io::ErrorKind::PermissionDenied,
+                "injected one-shot termination refusal",
+            ));
+        }
+        child.kill()
+    }
+}
+
 type Res<T> = Result<T, Box<crate::EvalAltResult>>;
 
 pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
@@ -349,6 +384,7 @@ fn run_map(
     }
     // The monotonic deadline begins immediately before process creation.
     let started = Instant::now();
+    let mut faults = ExecutionFaults::take_for_execution();
     let mut child = command
         .spawn()
         .map_err(|e| SysError::io("spawn process", program, &e))?;
@@ -359,6 +395,7 @@ fn run_map(
         options.limit,
         options.timeout,
         started,
+        &mut faults,
     );
     let _keep_cwd_open_until_spawn_returned = cwd;
     let report = match result {
@@ -489,6 +526,7 @@ fn supervise(
     limit: usize,
     timeout: Option<Duration>,
     started: Instant,
+    faults: &mut ExecutionFaults,
 ) -> Result<ProcessReport, (ProcessCause, ProcessReport)> {
     let mut stdout = child.stdout.take().unwrap();
     let mut stderr = child.stderr.take().unwrap();
@@ -511,6 +549,7 @@ fn supervise(
                 vec![],
                 false,
                 false,
+                faults,
             );
         }
     }
@@ -538,6 +577,7 @@ fn supervise(
                     err,
                     out_eof,
                     err_eof,
+                    faults,
                 )
             }
         }
@@ -602,6 +642,7 @@ fn supervise(
                 err,
                 out_eof,
                 err_eof,
+                faults,
             );
         }
         if fds[0].revents != 0 {
@@ -617,6 +658,7 @@ fn supervise(
                         err,
                         out_eof,
                         err_eof,
+                        faults,
                     )
                 }
                 Ok(ReadState::Eof) => out_eof = true,
@@ -635,6 +677,7 @@ fn supervise(
                         err,
                         out_eof,
                         err_eof,
+                        faults,
                     )
                 }
             }
@@ -652,6 +695,7 @@ fn supervise(
                         err,
                         out_eof,
                         err_eof,
+                        faults,
                     )
                 }
                 Ok(ReadState::Eof) => err_eof = true,
@@ -670,6 +714,7 @@ fn supervise(
                         err,
                         out_eof,
                         err_eof,
+                        faults,
                     )
                 }
             }
@@ -696,6 +741,7 @@ fn supervise(
                             err,
                             out_eof,
                             err_eof,
+                            faults,
                         )
                     }
                 }
@@ -712,6 +758,7 @@ fn supervise(
                 err,
                 out_eof,
                 err_eof,
+                faults,
             )
             .unwrap_err();
             return if report.timed_out() {
@@ -745,10 +792,11 @@ fn fail(
     err: Vec<u8>,
     out_eof: bool,
     err_eof: bool,
+    faults: &mut ExecutionFaults,
 ) -> Result<ProcessReport, (ProcessCause, ProcessReport)> {
     let is_timeout = matches!(&cause, ProcessCause::Timeout(_));
     let mut diagnostics = vec![];
-    if let Err(e) = child.kill() {
+    if let Err(e) = faults.kill(child) {
         if e.kind() != io::ErrorKind::InvalidInput {
             diagnostics.push(super::ProcessDiagnostic::new(
                 "kill child",
@@ -782,10 +830,44 @@ fn fail(
 
 #[cfg(test)]
 mod tests {
-    use super::{read_ready, ReadState};
-    use std::io::{self, Read};
+    use super::{read_ready, ExecutionFaults, ReadState};
+    use crate::packages::sys::{ProcessCause, ProgramPolicy, SysConfig, SysError, SysPackage};
+    use crate::packages::Package;
+    use crate::{Engine, EvalAltResult};
+    use std::cell::RefCell;
+    use std::ffi::CString;
+    use std::fs::{self, OpenOptions};
+    use std::io::{self, Read, Write};
+    use std::os::unix::ffi::OsStrExt;
+    use std::os::unix::fs::OpenOptionsExt;
+    use std::path::{Path, PathBuf};
+    use std::process::{Child, Command, Stdio};
+    use std::sync::atomic::{AtomicBool, Ordering};
+    use std::sync::Arc;
+    use std::thread;
+    use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};
 
     const EXPECTED_READ_BUDGET: usize = 64 * 1024;
+
+    thread_local! {
+        static NEXT_EXECUTION_FAULTS: RefCell<Option<ExecutionFaults>> = const { RefCell::new(None) };
+    }
+
+    pub(super) fn take_execution_faults() -> ExecutionFaults {
+        NEXT_EXECUTION_FAULTS.with(|next| next.borrow_mut().take().unwrap_or_default())
+    }
+
+    fn refuse_kill_for_next_execution() -> Arc<AtomicBool> {
+        let retired = Arc::new(AtomicBool::new(false));
+        NEXT_EXECUTION_FAULTS.with(|next| {
+            let previous = next.borrow_mut().replace(ExecutionFaults {
+                refuse_kill_once: true,
+                retired: Some(Arc::clone(&retired)),
+            });
+            assert!(previous.is_none(), "an execution fault was already armed");
+        });
+        retired
+    }
 
     struct AlwaysReadyReader;
 
@@ -810,5 +892,309 @@ mod tests {
             EXPECTED_READ_BUDGET
         );
         assert!(output.iter().all(|byte| *byte == b'x'));
+    }
+
+    struct FixtureDir(PathBuf);
+
+    impl FixtureDir {
+        fn new() -> Self {
+            let nonce = SystemTime::now()
+                .duration_since(UNIX_EPOCH)
+                .unwrap()
+                .as_nanos();
+            let path = std::env::temp_dir()
+                .join(format!("rhai-process-owner-{}-{nonce}", std::process::id()));
+            fs::create_dir(&path).unwrap();
+            Self(path)
+        }
+    }
+
+    impl Drop for FixtureDir {
+        fn drop(&mut self) {
+            let _ = fs::remove_dir_all(&self.0);
+        }
+    }
+
+    struct NestedTestChild {
+        child: Child,
+        release: PathBuf,
+    }
+
+    impl NestedTestChild {
+        fn try_wait(&mut self) -> io::Result<Option<std::process::ExitStatus>> {
+            self.child.try_wait()
+        }
+    }
+
+    impl Drop for NestedTestChild {
+        fn drop(&mut self) {
+            // Always unblock the shell fixture before terminating the exact nested test process.
+            let _ = release_fifo(&self.release);
+            let deadline = Instant::now() + Duration::from_secs(1);
+            loop {
+                match self.child.try_wait() {
+                    Ok(Some(_)) => return,
+                    Ok(None) if Instant::now() < deadline => {
+                        thread::sleep(Duration::from_millis(10));
+                    }
+                    Ok(None) => break,
+                    Err(_) => return,
+                }
+            }
+            let _ = self.child.kill();
+            let reap_deadline = Instant::now() + Duration::from_secs(1);
+            while Instant::now() < reap_deadline {
+                match self.child.try_wait() {
+                    Ok(Some(_)) => return,
+                    Ok(None) => thread::sleep(Duration::from_millis(10)),
+                    Err(_) => return,
+                }
+            }
+        }
+    }
+
+    fn create_fifo(path: &Path) {
+        let path = CString::new(path.as_os_str().as_bytes()).unwrap();
+        // SAFETY: path is a live NUL-terminated path and mode is a valid permission mask.
+        assert_eq!(unsafe { libc::mkfifo(path.as_ptr(), 0o600) }, 0);
+    }
+
+    fn release_fifo(path: &Path) -> io::Result<()> {
+        let deadline = Instant::now() + Duration::from_secs(2);
+        loop {
+            match try_release_fifo(path) {
+                Ok(()) => return Ok(()),
+                Err(error)
+                    if matches!(error.raw_os_error(), Some(libc::ENXIO) | Some(libc::ENOENT))
+                        && Instant::now() < deadline =>
+                {
+                    thread::sleep(Duration::from_millis(5));
+                }
+                Err(error) => return Err(error),
+            }
+        }
+    }
+
+    fn try_release_fifo(path: &Path) -> io::Result<()> {
+        let mut fifo = OpenOptions::new()
+            .write(true)
+            .custom_flags(libc::O_NONBLOCK)
+            .open(path)?;
+        fifo.write_all(b"release\n")
+    }
+
+    fn record_pid(path: &Path) -> io::Result<i32> {
+        let record = fs::read_to_string(path)?;
+        let value = record
+            .strip_prefix("child-pid=")
+            .and_then(|value| value.split_whitespace().next())
+            .ok_or_else(|| io::Error::new(io::ErrorKind::InvalidData, "invalid child record"))?;
+        value
+            .parse::<i32>()
+            .map_err(|error| io::Error::new(io::ErrorKind::InvalidData, error))
+    }
+
+    fn assert_pid_alive(pid: i32) {
+        // SAFETY: signal zero queries the exact recorded child PID and sends no signal.
+        assert_eq!(
+            unsafe { libc::kill(pid, 0) },
+            0,
+            "recorded child {pid} is not alive"
+        );
+    }
+
+    fn assert_pid_reaped(pid: i32) {
+        // SAFETY: signal zero queries only the exact, independently recorded child PID.
+        assert_eq!(unsafe { libc::kill(pid, 0) }, -1);
+        assert_eq!(io::Error::last_os_error().raw_os_error(), Some(libc::ESRCH));
+    }
+
+    fn wait_for_pid_reaped(pid: i32) {
+        let deadline = Instant::now() + Duration::from_secs(2);
+        loop {
+            // SAFETY: signal zero queries only the exact PID from this fixture's atomic record.
+            if unsafe { libc::kill(pid, 0) } == -1
+                && io::Error::last_os_error().raw_os_error() == Some(libc::ESRCH)
+            {
+                return;
+            }
+            assert!(
+                Instant::now() < deadline,
+                "recorded child {pid} was not reaped"
+            );
+            thread::sleep(Duration::from_millis(10));
+        }
+    }
+
+    fn quote_rhai(value: &str) -> String {
+        format!("\"{}\"", value.replace('\\', "\\\\").replace('"', "\\\""))
+    }
+
+    #[cfg(not(feature = "no_float"))]
+    fn run_inner_retained_owner_case() {
+        let record = PathBuf::from(std::env::var_os("RHAI_TEST_OWNER_RECORD").unwrap());
+        let returned = PathBuf::from(std::env::var_os("RHAI_TEST_OWNER_RETURNED").unwrap());
+        let release = PathBuf::from(std::env::var_os("RHAI_TEST_OWNER_RELEASE").unwrap());
+        let retired = refuse_kill_for_next_execution();
+        let mut engine = Engine::new();
+        let package = SysPackage::new(
+            SysConfig::default()
+                .programs(ProgramPolicy::Any)
+                .max_output(1024),
+        )
+        .unwrap();
+        package.register_into_engine(&mut engine);
+
+        let shell = format!(
+            "tmp=\"$RHAI_TEST_OWNER_RECORD.tmp\"; printf 'child-pid=%s child-ready=1\\n' \"$$\" > \"$tmp\"; mv \"$tmp\" \"$RHAI_TEST_OWNER_RECORD\"; IFS= read -r value < \"$RHAI_TEST_OWNER_RELEASE\""
+        );
+        let script = format!(
+            "run(\"/bin/sh\", #{{ stdin: {}, timeout: 0.1, max_output: 1024, env: #{{ \"RHAI_TEST_OWNER_RECORD\": {}, \"RHAI_TEST_OWNER_RELEASE\": {} }} }})",
+            quote_rhai(&shell),
+            quote_rhai(record.to_str().unwrap()),
+            quote_rhai(release.to_str().unwrap()),
+        );
+        let started = Instant::now();
+        let result = engine.eval::<crate::Map>(&script);
+        assert!(
+            started.elapsed() < Duration::from_secs(2),
+            "public run blocked after termination refusal instead of returning boundedly"
+        );
+        let marker_tmp = returned.with_extension("tmp");
+        fs::write(&marker_tmp, b"public-returned\n").unwrap();
+        fs::rename(&marker_tmp, &returned).unwrap();
+        let record_deadline = Instant::now() + Duration::from_secs(1);
+        let child_pid = loop {
+            if record.exists() {
+                break record_pid(&record).unwrap();
+            }
+            assert!(
+                Instant::now() < record_deadline,
+                "child readiness record missing"
+            );
+            thread::sleep(Duration::from_millis(5));
+        };
+        let error = result.expect_err("deadline with refused termination must return an error");
+        let sys_error = match error.as_ref() {
+            EvalAltResult::ErrorRuntime(value, _) => value.clone().try_cast::<SysError>().unwrap(),
+            other => panic!("expected SysError::Process, got {other:?}"),
+        };
+        let report = match &sys_error {
+            SysError::Process { cause, report } => {
+                assert!(matches!(cause, ProcessCause::Timeout(_)));
+                report.clone()
+            }
+            other => panic!("expected timeout process error, got {other:?}"),
+        };
+        assert!(
+            !report.timed_out(),
+            "cleanup refusal cannot certify timeout completion"
+        );
+        assert!(!report.stdout_complete() && !report.stderr_complete());
+        assert!(report
+            .cleanup_diagnostics()
+            .iter()
+            .any(|diagnostic| diagnostic
+                .message()
+                .contains("injected one-shot termination refusal")));
+        assert!(
+            !retired.load(Ordering::Acquire),
+            "owner retired while its child was live"
+        );
+
+        drop(sys_error);
+        drop(report);
+        drop(error);
+        drop(engine);
+        drop(package);
+        assert_pid_alive(child_pid);
+        assert!(
+            !retired.load(Ordering::Acquire),
+            "package drop discarded retained custody"
+        );
+
+        release_fifo(&release).unwrap();
+        let cleanup_deadline = Instant::now() + Duration::from_secs(3);
+        while !retired.load(Ordering::Acquire) && Instant::now() < cleanup_deadline {
+            thread::sleep(Duration::from_millis(5));
+        }
+        assert!(
+            retired.load(Ordering::Acquire),
+            "retained owner did not retire after reap"
+        );
+        assert_pid_reaped(child_pid);
+    }
+
+    #[cfg(not(feature = "no_float"))]
+    #[test]
+    fn kill_refusal_returns_boundedly_and_retains_real_child_after_package_drop() {
+        const CHILD_ROLE: &str = "RHAI_TEST_OWNER_CHILD_ROLE";
+        const TEST_NAME: &str = "packages::sys::process::unix::tests::kill_refusal_returns_boundedly_and_retains_real_child_after_package_drop";
+
+        if std::env::var_os(CHILD_ROLE).is_some() {
+            run_inner_retained_owner_case();
+            return;
+        }
+
+        let fixture = FixtureDir::new();
+        let record = fixture.0.join("child-record");
+        let returned = fixture.0.join("public-returned");
+        let release = fixture.0.join("release.fifo");
+        create_fifo(&release);
+        let nested = Command::new(std::env::current_exe().unwrap())
+            .args(["--exact", TEST_NAME, "--nocapture"])
+            .env(CHILD_ROLE, "inner")
+            .env("RHAI_TEST_OWNER_RECORD", &record)
+            .env("RHAI_TEST_OWNER_RETURNED", &returned)
+            .env("RHAI_TEST_OWNER_RELEASE", &release)
+            .stdout(Stdio::inherit())
+            .stderr(Stdio::inherit())
+            .spawn()
+            .unwrap();
+        let mut nested = NestedTestChild {
+            child: nested,
+            release: release.clone(),
+        };
+        let started = Instant::now();
+        let mut watchdog_released_fixture = false;
+        let status = loop {
+            if let Some(status) = nested.try_wait().unwrap() {
+                break status;
+            }
+            if started.elapsed() >= Duration::from_secs(3)
+                && !returned.exists()
+                && !watchdog_released_fixture
+            {
+                assert!(
+                    record.exists(),
+                    "nested test did not publish child readiness"
+                );
+                let pid = record_pid(&record).unwrap();
+                assert_pid_alive(pid);
+                release_fifo(&release).unwrap();
+                watchdog_released_fixture = true;
+            }
+            if started.elapsed() >= Duration::from_secs(8) {
+                panic!("nested retained-owner test exceeded its external watchdog");
+            }
+            thread::sleep(Duration::from_millis(10));
+        };
+        if record.exists() {
+            let pid = record_pid(&record).unwrap();
+            println!(
+                "retained-owner-red child_record={} pid={pid}",
+                record.display()
+            );
+            wait_for_pid_reaped(pid);
+            println!("retained-owner-red child_pid={pid} reap=ESRCH");
+        }
+        assert!(
+            !watchdog_released_fixture,
+            "external watchdog had to release the child; public run did not return boundedly"
+        );
+        assert!(
+            status.success(),
+            "nested retained-owner contract failed: {status}"
+        );
     }
 }
