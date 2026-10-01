@@ -1,0 +1,24 @@
+{
+  "driver": {
+    "parent_pid": 65189,
+    "parent_start_identity": [
+      1790834646,
+      832932
+    ],
+    "pid": 65190,
+    "start_identity": [
+      1790834646,
+      856133
+    ]
+  },
+  "runtime_path": "/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4sb_5w6h",
+  "sampler_children": "see sampler-children.json; PIDs captured from direct Popen handles and terminal outcomes recorded after communicate/reap",
+  "supervisor": {
+    "pgid": 65189,
+    "pid": 65189,
+    "start_identity": [
+      1790834646,
+      832932
+    ]
+  }
+}
