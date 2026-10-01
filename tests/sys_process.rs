@@ -151,6 +151,22 @@ const MANAGED_ESCAPE_RECORD_ENV: &str = "RHAI_SYS_MANAGED_ESCAPE_RECORD";
 const MANAGED_ESCAPE_RELEASE_ENV: &str = "RHAI_SYS_MANAGED_ESCAPE_RELEASE";
 #[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
 const MANAGED_ESCAPE_GROUP_ENV: &str = "RHAI_SYS_MANAGED_ESCAPE_GROUP";
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+const MANAGED_PIPE_FIXTURE_ENV: &str = "RHAI_SYS_MANAGED_PIPE_FIXTURE";
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+const MANAGED_PIPE_ROOT_ENV: &str = "RHAI_SYS_MANAGED_PIPE_ROOT";
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+const MANAGED_PIPE_HOLDER_RECORD_ENV: &str = "RHAI_SYS_MANAGED_PIPE_HOLDER_RECORD";
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+const MANAGED_PIPE_HOLDER_RELEASE_ENV: &str = "RHAI_SYS_MANAGED_PIPE_HOLDER_RELEASE";
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+const MANAGED_PIPE_HOLDER_CHALLENGE_ENV: &str = "RHAI_SYS_MANAGED_PIPE_HOLDER_CHALLENGE";
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+const MANAGED_PIPE_HOLDER_ACK_ENV: &str = "RHAI_SYS_MANAGED_PIPE_HOLDER_ACK";
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+const MANAGED_PIPE_SENTINEL_GROUP_ENV: &str = "RHAI_SYS_MANAGED_PIPE_SENTINEL_GROUP";
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+const MANAGED_PIPE_LEADER_RECORD_ENV: &str = "RHAI_SYS_MANAGED_PIPE_LEADER_RECORD";
 
 #[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
 fn managed_atomic_record(path: &std::path::Path, contents: &str) {
@@ -345,6 +361,107 @@ fn managed_scope_spawn_leader_fixture() {
     managed_atomic_record(&exit_record, &format!("leader_pid={leader_pid} worker_pid={worker_pid} worker_status={worker_status:?}\n"));
 }
 
+/// Managed direct child starts an escaped holder that inherits both capture writers. The test
+/// parent releases and reaps that exact holder through fixture-owned files after checking the API.
+#[test]
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_scope_retained_pipe_leader_fixture() {
+    if std::env::var_os(MANAGED_PIPE_FIXTURE_ENV).is_none() {
+        return;
+    }
+    let root = std::path::PathBuf::from(std::env::var_os(MANAGED_PIPE_ROOT_ENV).unwrap());
+    let holder_record = std::path::PathBuf::from(std::env::var_os(MANAGED_PIPE_HOLDER_RECORD_ENV).unwrap());
+    let holder_release = std::path::PathBuf::from(std::env::var_os(MANAGED_PIPE_HOLDER_RELEASE_ENV).unwrap());
+    let holder_challenge = std::path::PathBuf::from(std::env::var_os(MANAGED_PIPE_HOLDER_CHALLENGE_ENV).unwrap());
+    let holder_ack = std::path::PathBuf::from(std::env::var_os(MANAGED_PIPE_HOLDER_ACK_ENV).unwrap());
+    let leader_record = std::path::PathBuf::from(std::env::var_os(MANAGED_PIPE_LEADER_RECORD_ENV).unwrap());
+    let sentinel_pgid = std::env::var(MANAGED_PIPE_SENTINEL_GROUP_ENV).unwrap().parse::<i32>().unwrap();
+    let executable = std::env::current_exe().unwrap();
+    let mut command = Command::new(executable);
+    command
+        .args(["--exact", "managed_scope_retained_pipe_holder_fixture", "--nocapture", "--quiet"])
+        .env_clear()
+        .env(MANAGED_PIPE_FIXTURE_ENV, "holder")
+        .env(MANAGED_PIPE_HOLDER_RECORD_ENV, &holder_record)
+        .env(MANAGED_PIPE_HOLDER_RELEASE_ENV, &holder_release)
+        .env(MANAGED_PIPE_HOLDER_CHALLENGE_ENV, &holder_challenge)
+        .env(MANAGED_PIPE_HOLDER_ACK_ENV, &holder_ack)
+        .stdin(Stdio::null())
+        .stdout(Stdio::inherit())
+        .stderr(Stdio::inherit());
+    // SAFETY: the holder joins the separately owned sentinel's same-session process group.
+    unsafe {
+        command.pre_exec(move || {
+            if libc::setpgid(0, sentinel_pgid) < 0 {
+                return Err(std::io::Error::last_os_error());
+            }
+            Ok(())
+        });
+    }
+    let mut holder = command.spawn().expect("start escaped captured-pipe holder");
+    let holder_pid = holder.id() as i32;
+    let leader_pid = std::process::id() as i32;
+    let leader_pgid = unsafe { libc::getpgrp() };
+    let deadline = Instant::now() + Duration::from_secs(3);
+    while !holder_record.exists() && Instant::now() < deadline {
+        std::thread::sleep(Duration::from_millis(5));
+    }
+    let holder_fields = managed_record_fields(&std::fs::read_to_string(&holder_record).expect("holder readiness record"));
+    assert_eq!(holder_fields.get("pid"), Some(&holder_pid));
+    assert_eq!(holder_fields.get("pgid"), Some(&sentinel_pgid));
+    managed_atomic_record(&leader_record, &format!("pid={leader_pid} pgid={leader_pgid} holder={holder_pid} holder_pgid={sentinel_pgid} sentinel_pgid={sentinel_pgid}\n"));
+    let deadline = Instant::now() + Duration::from_secs(15);
+    while !root.join("release-leader").exists() && Instant::now() < deadline {
+        std::thread::sleep(Duration::from_millis(5));
+    }
+    // The direct leader may be terminated by the public API before fixture release. The outer
+    // owner releases the escaped holder and independently observes its PID become ESRCH.
+    drop(holder);
+}
+
+/// Escaped holder keeps both inherited capture writers open, but can be challenged and released
+/// through independent fixture files. Probe results are written outside captured stdout/stderr.
+#[test]
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_scope_retained_pipe_holder_fixture() {
+    if std::env::var(MANAGED_PIPE_FIXTURE_ENV).as_deref() != Ok("holder") {
+        return;
+    }
+    let record = std::path::PathBuf::from(std::env::var_os(MANAGED_PIPE_HOLDER_RECORD_ENV).unwrap());
+    let release = std::path::PathBuf::from(std::env::var_os(MANAGED_PIPE_HOLDER_RELEASE_ENV).unwrap());
+    let challenge = std::path::PathBuf::from(std::env::var_os(MANAGED_PIPE_HOLDER_CHALLENGE_ENV).unwrap());
+    let ack = std::path::PathBuf::from(std::env::var_os(MANAGED_PIPE_HOLDER_ACK_ENV).unwrap());
+    let pid = std::process::id() as i32;
+    let pgid = unsafe { libc::getpgrp() };
+    let mut stdout = std::io::stdout().lock();
+    let mut stderr = std::io::stderr().lock();
+    stdout.write_all(b"escaped-holder-stdout-ready\n").unwrap();
+    stdout.flush().unwrap();
+    stderr.write_all(b"escaped-holder-stderr-ready\n").unwrap();
+    stderr.flush().unwrap();
+    drop(stdout);
+    drop(stderr);
+    managed_atomic_record(&record, &format!("pid={pid} pgid={pgid} ready=true\n"));
+    // Keep the holder alive after endpoint closure so raw writes can report EPIPE instead of
+    // terminating it with SIGPIPE. It remains an independently owned fixture process.
+    unsafe {
+        libc::signal(libc::SIGPIPE, libc::SIG_IGN);
+    }
+    let deadline = Instant::now() + Duration::from_secs(15);
+    while !release.exists() && Instant::now() < deadline {
+        if challenge.exists() && !ack.exists() {
+            let stdout_probe = b"escaped-holder-post-return-stdout\n";
+            let stderr_probe = b"escaped-holder-post-return-stderr\n";
+            let stdout_result = unsafe { libc::write(libc::STDOUT_FILENO, stdout_probe.as_ptr().cast(), stdout_probe.len()) };
+            let stdout_error = if stdout_result < 0 { std::io::Error::last_os_error().raw_os_error().unwrap_or(0) } else { 0 };
+            let stderr_result = unsafe { libc::write(libc::STDERR_FILENO, stderr_probe.as_ptr().cast(), stderr_probe.len()) };
+            let stderr_error = if stderr_result < 0 { std::io::Error::last_os_error().raw_os_error().unwrap_or(0) } else { 0 };
+            managed_atomic_record(&ack, &format!("pid={pid} stdout_result={stdout_result} stdout_error={stdout_error} stderr_result={stderr_result} stderr_error={stderr_error}\n"));
+        }
+        std::thread::sleep(Duration::from_millis(5));
+    }
+}
+
 #[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
 struct ManagedFixture {
     root: TempDir,
@@ -393,6 +510,52 @@ impl Drop for ManagedFixture {
             leaf_pid.map_or(true, pid_is_absent)
         );
         eprintln!("managed_spawn_fixture_leader_cleanup leader_pid={leader_pid:?} leader_esrch={}", leader_pid.map_or(true, pid_is_absent),);
+    }
+}
+
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+struct ManagedEscapedPipeFixture {
+    root: TempDir,
+    released: bool,
+}
+
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+impl ManagedEscapedPipeFixture {
+    fn new() -> Self {
+        Self { root: TempDir::new(), released: false }
+    }
+
+    fn path(&self, name: &str) -> std::path::PathBuf {
+        self.root.path().join(name)
+    }
+
+    fn release_and_wait(&mut self) -> (Option<i32>, Option<i32>, bool, bool) {
+        if !self.released {
+            let _ = std::fs::write(self.path("release-leader"), b"release\n");
+            let _ = std::fs::write(self.path("release-holder"), b"release\n");
+            self.released = true;
+        }
+        let leader_pid = std::fs::read_to_string(self.path("leader-record"))
+            .ok()
+            .and_then(|record| managed_record_fields(&record).get("pid").copied());
+        let holder_pid = std::fs::read_to_string(self.path("holder-record"))
+            .ok()
+            .and_then(|record| managed_record_fields(&record).get("pid").copied());
+        let deadline = Instant::now() + Duration::from_secs(5);
+        while Instant::now() < deadline && (leader_pid.is_some_and(|pid| !pid_is_absent(pid)) || holder_pid.is_some_and(|pid| !pid_is_absent(pid))) {
+            std::thread::sleep(Duration::from_millis(10));
+        }
+        let leader_esrch = leader_pid.map_or(false, pid_is_absent);
+        let holder_esrch = holder_pid.map_or(false, pid_is_absent);
+        eprintln!("managed_escaped_pipe_cleanup root={} leader={leader_pid:?} leader_esrch={leader_esrch} holder={holder_pid:?} holder_esrch={holder_esrch}", self.root.path().display());
+        (leader_pid, holder_pid, leader_esrch, holder_esrch)
+    }
+}
+
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+impl Drop for ManagedEscapedPipeFixture {
+    fn drop(&mut self) {
+        let _ = self.release_and_wait();
     }
 }
 
@@ -618,6 +781,30 @@ fn managed_spawn_script(fixture: &ManagedFixture) -> (Engine, String) {
 }
 
 #[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_escaped_pipe_spawn_script(fixture: &ManagedEscapedPipeFixture, sentinel_pgid: i32) -> (Engine, String) {
+    let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let root = fixture.root.path().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let holder_record = fixture.path("holder-record").to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let holder_release = fixture.path("release-holder").to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let holder_challenge = fixture.path("holder-challenge").to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let holder_ack = fixture.path("holder-ack").to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let leader_record = fixture.path("leader-record").to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let config = SysConfig::default()
+        .programs(ProgramPolicy::AllowList(vec![executable.clone()]))
+        .process_scope(ProcessScope::Managed)
+        .max_output(4096)
+        .kill_on_drop(true);
+    let engine = engine(config);
+    let script = format!(
+        r#"spawn("{executable}", ["--exact", "managed_scope_retained_pipe_leader_fixture", "--nocapture", "--quiet"], #{{
+            env_clear: true,
+            env: #{{ {MANAGED_PIPE_FIXTURE_ENV}: "leader", {MANAGED_PIPE_ROOT_ENV}: "{root}", {MANAGED_PIPE_HOLDER_RECORD_ENV}: "{holder_record}", {MANAGED_PIPE_HOLDER_RELEASE_ENV}: "{holder_release}", {MANAGED_PIPE_HOLDER_CHALLENGE_ENV}: "{holder_challenge}", {MANAGED_PIPE_HOLDER_ACK_ENV}: "{holder_ack}", {MANAGED_PIPE_SENTINEL_GROUP_ENV}: "{sentinel_pgid}", {MANAGED_PIPE_LEADER_RECORD_ENV}: "{leader_record}" }}
+        }})"#
+    );
+    (engine, script)
+}
+
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
 fn managed_fixture_member_pids(fixture: &ManagedFixture) -> (i32, i32, i32, i32) {
     let deadline = Instant::now() + Duration::from_secs(5);
     loop {
@@ -705,6 +892,85 @@ fn managed_spawn_kill_stops_leader_worker_leaf_and_preserves_sentinel() {
     assert!(!result["success"].as_bool().unwrap());
     drop(sentinel);
     assert!(pid_is_absent(sentinel_pid), "fixture must reap its exact sentinel");
+}
+
+/// Killing a managed child whose escaped descendant holds capture pipes must still publish a
+/// bounded final report with incomplete streams. The fixture, not the process API, releases the
+/// escaped holder after proving it remained live and could still answer a fresh challenge.
+#[test]
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes() {
+    let mut fixture = ManagedEscapedPipeFixture::new();
+    let mut sentinel = managed_spawn_sentinel();
+    let sentinel_pid = sentinel.0.id() as i32;
+    let sentinel_pgid = unsafe { libc::getpgid(sentinel_pid) };
+    assert_eq!(sentinel_pgid, sentinel_pid, "fixture sentinel owns its group");
+    let (engine, script) = managed_escaped_pipe_spawn_script(&fixture, sentinel_pgid);
+    let child = engine.eval::<Dynamic>(&script).expect("public managed spawn");
+
+    let deadline = Instant::now() + Duration::from_secs(5);
+    while (!fixture.path("leader-record").exists() || !fixture.path("holder-record").exists()) && Instant::now() < deadline {
+        std::thread::sleep(Duration::from_millis(5));
+    }
+    let leader = managed_record_fields(&std::fs::read_to_string(fixture.path("leader-record")).expect("leader readiness"));
+    let holder = managed_record_fields(&std::fs::read_to_string(fixture.path("holder-record")).expect("holder readiness"));
+    let leader_pid = leader["pid"];
+    let leader_pgid = leader["pgid"];
+    let holder_pid = holder["pid"];
+    let holder_pgid = holder["pgid"];
+    assert_eq!(leader_pid, leader_pgid, "managed leader owns its process group");
+    assert_eq!(holder_pgid, sentinel_pgid, "pipe holder escaped into the fixture sentinel group");
+    assert_ne!(holder_pgid, leader_pgid, "pipe holder must escape the managed group");
+    assert!(pid_is_alive(holder_pid), "escaped holder must be alive before cancellation");
+    assert!(sentinel.0.try_wait().unwrap().is_none(), "fixture sentinel exited before the test");
+
+    let mut scope = Scope::new();
+    scope.push_dynamic("child", child);
+    let wait_result = engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill(); child.wait(2.0)");
+    let leader_esrch_before_cleanup = pid_is_absent(leader_pid);
+    let holder_live_after_wait = pid_is_alive(holder_pid);
+    let sentinel_live_after_wait = sentinel.0.try_wait().unwrap().is_none();
+    std::fs::write(fixture.path("holder-challenge"), b"probe\n").unwrap();
+    let ack_deadline = Instant::now() + Duration::from_secs(2);
+    while !fixture.path("holder-ack").exists() && Instant::now() < ack_deadline {
+        std::thread::sleep(Duration::from_millis(5));
+    }
+    let probe = std::fs::read_to_string(fixture.path("holder-ack")).expect("escaped holder answered post-return challenge");
+    let probe_fields = managed_record_fields(&probe);
+    let sentinel_pgid_matches = probe_fields.get("pid") == Some(&holder_pid) && holder_live_after_wait && sentinel_live_after_wait && holder_pgid == sentinel_pgid;
+    eprintln!(
+        "managed_escaped_pipe_wait root={} test_pid={} leader={} leader_pgid={} leader_esrch={leader_esrch_before_cleanup} holder={} holder_pgid={} holder_live_after_wait={holder_live_after_wait} sentinel={} sentinel_pgid={} sentinel_live_after_wait={sentinel_live_after_wait} wait_unit={} probe={probe:?} identity_ok={sentinel_pgid_matches}",
+        fixture.root.path().display(),
+        std::process::id(),
+        leader_pid,
+        leader_pgid,
+        holder_pid,
+        holder_pgid,
+        sentinel_pid,
+        sentinel_pgid,
+        wait_result.as_ref().is_ok_and(|value| value.is_unit()),
+    );
+    let (cleanup_leader, cleanup_holder, leader_esrch, holder_esrch) = fixture.release_and_wait();
+    drop(sentinel);
+    let sentinel_esrch = pid_is_absent(sentinel_pid);
+    eprintln!("managed_escaped_pipe_terminal leader={cleanup_leader:?} leader_esrch={leader_esrch} holder={cleanup_holder:?} holder_esrch={holder_esrch} sentinel={sentinel_pid} sentinel_esrch={sentinel_esrch}");
+    assert_eq!(cleanup_leader, Some(leader_pid));
+    assert_eq!(cleanup_holder, Some(holder_pid));
+    assert!(leader_esrch && holder_esrch && sentinel_esrch, "fixture must release and reap exact PIDs");
+    assert!(leader_esrch_before_cleanup, "public kill must terminate the direct managed leader");
+    assert!(holder_live_after_wait && sentinel_live_after_wait && sentinel_pgid_matches, "fixture must prove the escaped holder remains operational in the unrelated sentinel group");
+
+    let result = wait_result.expect("public wait must finish capture after cancellation even when an escaped holder retains pipes");
+    assert!(!result.is_unit(), "public wait must return the final process report");
+    let result = result.cast::<Map>();
+    assert_eq!(result["stdout_complete"].as_bool().unwrap(), false);
+    assert_eq!(result["stderr_complete"].as_bool().unwrap(), false);
+    assert!(result["stdout"].as_immutable_string_ref().unwrap().contains("escaped-holder-stdout-ready"));
+    assert!(result["stderr"].as_immutable_string_ref().unwrap().contains("escaped-holder-stderr-ready"));
+    assert_eq!(probe_fields.get("stdout_result"), Some(&-1), "closed stdout capture endpoint must reject the post-return write");
+    assert_eq!(probe_fields.get("stdout_error"), Some(&libc::EPIPE));
+    assert_eq!(probe_fields.get("stderr_result"), Some(&-1), "closed stderr capture endpoint must reject the post-return write");
+    assert_eq!(probe_fields.get("stderr_error"), Some(&libc::EPIPE));
 }
 
 /// Dropping a nonfinal shared Child clone preserves the running group; dropping the final
