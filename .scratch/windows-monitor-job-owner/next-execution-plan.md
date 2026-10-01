@@ -231,3 +231,16 @@ harness source hash is
 new immutable input checkpoint before any further invocation. The real-client
 driver is frozen separately as described above. No shutdown or VM
 reconfiguration was performed.
+
+## Harness cleanup correction (2026-10-01)
+
+The previous harness hash `575ba6b8...` is superseded. Review found that its
+finally block treated returning from a script invoked with `&` as process
+teardown, ignored a timer-disposal result, and used an unbounded callback drain.
+The corrected source keeps the exact-process watchdog and retained process
+handle alive through job accounting and handle disposition, fails fast if exact
+job cleanup fails, and requires successful `Timer.Dispose(waitHandle)` plus a
+bounded five-second signaled callback drain before releasing owners. The new
+source hash is recorded in the state file. This is an unparsed source candidate
+pending root review; the earlier guest parser result does not apply to it, and
+no guest invocation or compiler/fixture work has run with this revision.

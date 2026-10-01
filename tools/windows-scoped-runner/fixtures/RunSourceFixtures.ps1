@@ -182,6 +182,7 @@ $timerState[0] = $currentProcess.Handle
 $timerState[1] = $script:terminateProcess
 $timerState[2] = [uint32]0xE0000002
 $watchdogDelegate = $script:wallWatchdogType.GetMethod('Fire').CreateDelegate([Threading.TimerCallback])
+$drained = [Threading.ManualResetEvent]::new($false)
 $script:wallTimer = [Threading.Timer]::new($watchdogDelegate, $timerState, 3600000, [System.Threading.Timeout]::Infinite)
 
 $runwatch = [Diagnostics.Stopwatch]::StartNew()
@@ -277,51 +278,58 @@ try {
     $success = $true
 }
 finally {
-    try {
-      if ($script:jobHandle -ne [IntPtr]::Zero) {
-        if ($success) {
-            # All owned children were synchronously waited; require the current
-            # PowerShell process to be the only remaining member before close.
-            $accounting = [Runtime.InteropServices.Marshal]::AllocHGlobal(48)
-            try {
-                if (!$script:queryJobInfo.Invoke($script:jobHandle, 1, $accounting, 48, [IntPtr]::Zero)) {
-                    throw "QueryInformationJobObject(accounting) failed: $([Runtime.InteropServices.Marshal]::GetLastWin32Error())"
+    if ($script:jobHandle -ne [IntPtr]::Zero) {
+        try {
+            if ($success) {
+                # All owned children were synchronously waited; require the current
+                # PowerShell process to be the only remaining member before close.
+                $accounting = [Runtime.InteropServices.Marshal]::AllocHGlobal(48)
+                try {
+                    if (!$script:queryJobInfo.Invoke($script:jobHandle, 1, $accounting, 48, [IntPtr]::Zero)) {
+                        throw "QueryInformationJobObject(accounting) failed: $([Runtime.InteropServices.Marshal]::GetLastWin32Error())"
+                    }
+                    $active = [Runtime.InteropServices.Marshal]::ReadInt32($accounting, 40)
+                    if ($active -ne 1) { throw "Owned job has $active active processes at successful exit; refusing clean harness result." }
                 }
-                $active = [Runtime.InteropServices.Marshal]::ReadInt32($accounting, 40)
-                if ($active -ne 1) { throw "Owned job has $active active processes at successful exit; refusing clean harness result." }
-            }
-            finally { [Runtime.InteropServices.Marshal]::FreeHGlobal($accounting) }
-            $script:jobInfo = [Runtime.InteropServices.Marshal]::AllocHGlobal(144)
-            try {
-                [Runtime.InteropServices.Marshal]::Copy([byte[]]::new(144), 0, $script:jobInfo, 144)
-                if (!$script:setJobInfo.Invoke($script:jobHandle, 9, $script:jobInfo, 144)) {
-                    throw "Could not clear KILL_ON_JOB_CLOSE after all children exited: $([Runtime.InteropServices.Marshal]::GetLastWin32Error())"
+                finally { [Runtime.InteropServices.Marshal]::FreeHGlobal($accounting) }
+                $script:jobInfo = [Runtime.InteropServices.Marshal]::AllocHGlobal(144)
+                try {
+                    [Runtime.InteropServices.Marshal]::Copy([byte[]]::new(144), 0, $script:jobInfo, 144)
+                    if (!$script:setJobInfo.Invoke($script:jobHandle, 9, $script:jobInfo, 144)) {
+                        throw "Could not clear KILL_ON_JOB_CLOSE after all children exited: $([Runtime.InteropServices.Marshal]::GetLastWin32Error())"
+                    }
                 }
+                finally { [Runtime.InteropServices.Marshal]::FreeHGlobal($script:jobInfo); $script:jobInfo = [IntPtr]::Zero }
             }
-            finally { [Runtime.InteropServices.Marshal]::FreeHGlobal($script:jobInfo); $script:jobInfo = [IntPtr]::Zero }
-        }
-        else {
-            # Failure closes the only job handle while KILL_ON_JOB_CLOSE remains
-            # set. If explicit close fails, retain the exact value until this
-            # one-shot -File host exits and the OS closes its handles.
-            if ($script:closeHandle.Invoke($script:jobHandle)) { $script:jobHandle = [IntPtr]::Zero }
-            else { Write-Error "CloseHandle(failing fixture job) failed: $([Runtime.InteropServices.Marshal]::GetLastWin32Error()); OS process-exit closure remains outstanding." }
-        }
-        if ($success) {
-            if ($script:closeHandle.Invoke($script:jobHandle)) { $script:jobHandle = [IntPtr]::Zero }
-            else { throw "CloseHandle(successful fixture job) failed: $([Runtime.InteropServices.Marshal]::GetLastWin32Error()); exact handle remains owned until this host exits." }
-        }
-      }
-    }
-    finally {
-        if ($script:wallTimer -ne $null) {
-            $timerDrain = [Threading.ManualResetEvent]::new($false)
-            try {
-                [void]$script:wallTimer.Dispose($timerDrain)
-                [void]$timerDrain.WaitOne()
+            if (!$script:closeHandle.Invoke($script:jobHandle)) {
+                $closeError = [Runtime.InteropServices.Marshal]::GetLastWin32Error()
+                # If successful accounting already cleared KILL_ON_JOB_CLOSE,
+                # explicitly terminate the exact job before failing the host.
+                if ($success -and !$script:terminateJob.Invoke($script:jobHandle, [uint32]0xE0000003)) {
+                    [Environment]::FailFast("CloseHandle(job) and recovery TerminateJobObject failed ($closeError / $([Runtime.InteropServices.Marshal]::GetLastWin32Error())); exact handle/watchdog remain owned through process teardown.")
+                }
+                [Environment]::FailFast("CloseHandle(job) failed ($closeError); exact handle/watchdog remain owned through process teardown.")
             }
-            finally { $timerDrain.Dispose(); $script:wallTimer = $null }
+            $script:jobHandle = [IntPtr]::Zero
         }
-        $currentProcess.Dispose()
+        catch {
+            # Never unwind with the exact job handle owned: this shell may have
+            # been invoked with &, so script-scope cleanup is not process teardown.
+            [Environment]::FailFast("Job disposition failed; preserving watchdog and owner through controller teardown: $($_.Exception.Message)")
+        }
     }
+    # The timer remains armed through job accounting and handle disposition.
+    # Dispose(waitHandle) requests cancellation; only its signaled drain event
+    # proves that no callback can still use the retained exact process handle.
+    if ($script:wallTimer -ne $null) {
+        if (!$script:wallTimer.Dispose($drained)) {
+            [Environment]::FailFast('Watchdog timer refused disposal; preserving process/job ownership through controller teardown.')
+        }
+        if (!$drained.WaitOne(5000)) {
+            [Environment]::FailFast('Watchdog callback did not drain within 5 seconds; preserving process/job ownership through controller teardown.')
+        }
+        $script:wallTimer = $null
+    }
+    $drained.Dispose()
+    $currentProcess.Dispose()
 }
