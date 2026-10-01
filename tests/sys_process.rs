@@ -1657,7 +1657,15 @@ fn managed_run_closes_worker_after_leader_exit_and_preserves_sentinel() {
                 panic!("managed run returned SysError::Denied: {message}");
             }
         }
-        panic!("managed run returned a non-Denied error: {error:?}");
+        let diagnostic = match error.as_ref() {
+            rhai::EvalAltResult::ErrorRuntime(value, _) => match value.clone().try_cast::<SysError>() {
+                Some(SysError::Process { cause, report }) => format!("SysError::Process cause={cause:?} report={report:?} cleanup_diagnostics={:?}", report.cleanup_diagnostics()),
+                Some(other) => format!("SysError={other:?}"),
+                None => format!("non-SysError runtime payload={value:?}"),
+            },
+            other => format!("non-runtime error={other:?}"),
+        };
+        panic!("managed run returned an unexpected error: {diagnostic}");
     });
     assert_eq!(result["success"].as_bool().unwrap(), true);
     assert_eq!(result["code"].as_int().unwrap(), 0);
