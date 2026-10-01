@@ -1,5 +1,9 @@
-# Test harness correction record
+# Test harness and setup correction record
 
-The first 1.77.2 API test build exposed `i32` report getters as Rhai `i32` custom values, which did not compare with script integers. Changed both getters to `Dynamic::from_int` and added typed Engine coverage.
+The first Rust 1.77.2 attempt did not reach the test assertions: unlocked resolution selected `thin-vec 0.2.20`, whose manifest requires Cargo edition2024 support. The later runs used the approved compatible lock copied into the private source tree with `--locked`; no dependency change was made.
 
-The next build compiled and ran 7 tests: 5 passed, including report snapshot mutation and absent/signal Engine reads; 2 error catch tests failed because the test incorrectly attempted to use `try` as an expression, first returning unit and then producing a parse error after a harness-only rewrite. Corrected those scripts to initialize a variable, assign it inside `catch`, then return it. These are test harness failures, not accepted implementation regressions; the corrected source remains to be proven.
+A test build exposed `i32` report getters as Rhai custom `i32` values, which did not compare with script integers. Changed both getters to `Dynamic::from_int`; final Rust 1.77.2 Engine runs passed for all recorded feature selections. The false-green control intentionally changed the expected Timeout message and failed the relevant assertion, then the restored expectation passed.
+
+Earlier Engine catch tests incorrectly attempted to use `try` as an expression, first returning unit and then producing a parse error after a harness-only rewrite. The scripts were changed to initialize a boolean, assign it inside `catch`, and return it. The corrected catch harness is covered by the final passing results in `verification-final.log` and `verification-feature-matrix.log`; these were harness errors, not implementation regressions.
+
+More complete verification provenance and explicit limits are in `verification-index.md`.
