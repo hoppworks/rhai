@@ -1,0 +1,31 @@
+{
+  "exact_pair_count": 98,
+  "known_pid_count": 114,
+  "matching_alive": [],
+  "known_alive": [],
+  "observed_pgids": [
+    3855296,
+    3855365,
+    3862411,
+    3865865,
+    3865874,
+    3865886,
+    3866278,
+    3866280,
+    3866302,
+    3866343,
+    3866345,
+    3866717,
+    3866836
+  ],
+  "group_members": [],
+  "runtime_exists": false,
+  "terminal_statuses": {
+    "outer-status.txt": "0",
+    "run-scoped.status": "0",
+    "process-monitor.status": "0"
+  },
+  "manifest_phase_count": 4,
+  "six_paths_per_phase": true,
+  "manifests_match": true
+}
