@@ -779,3 +779,36 @@ fn fail(
         ProcessReport::new(out, err, out_eof, err_eof, exit, timed_out, diagnostics),
     ))
 }
+
+#[cfg(test)]
+mod tests {
+    use super::{read_ready, ReadState};
+    use std::io::{self, Read};
+
+    const EXPECTED_READ_BUDGET: usize = 64 * 1024;
+
+    struct AlwaysReadyReader;
+
+    impl Read for AlwaysReadyReader {
+        fn read(&mut self, buffer: &mut [u8]) -> io::Result<usize> {
+            buffer.fill(b'x');
+            Ok(buffer.len())
+        }
+    }
+
+    #[test]
+    fn read_ready_yields_after_budget_for_always_ready_reader() {
+        let mut reader = AlwaysReadyReader;
+        let mut output = Vec::new();
+        let state = read_ready(&mut reader, &mut output, EXPECTED_READ_BUDGET * 8).unwrap();
+
+        assert!(matches!(state, ReadState::Pending));
+        assert!(
+            output.len() > 0 && output.len() <= EXPECTED_READ_BUDGET,
+            "read step exceeded its byte budget: {} > {}",
+            output.len(),
+            EXPECTED_READ_BUDGET
+        );
+        assert!(output.iter().all(|byte| *byte == b'x'));
+    }
+}

@@ -17,6 +17,8 @@ use sys_support::TempDir;
 const FIXTURE_ENV: &str = "RHAI_SYS_PROCESS_FIXTURE";
 const FIXTURE_RECORD_ENV: &str = "RHAI_SYS_PROCESS_FIXTURE_RECORD";
 const LIBTEST_QUIET_START: &[u8] = b"\nrunning 1 test\n";
+const ACTIVE_STDERR_MARKER: &str = "stderr-active-marker\n";
+const ACTIVE_STDERR_OUTPUT: &str = "stderr-active-marker\n";
 
 /// The process API re-executes this test binary so stdout/stderr and exit status come from
 /// an independently supervised OS process rather than a mocked command implementation.
@@ -67,6 +69,45 @@ fn process_fixture() {
             stdout_writer.join().unwrap();
             stderr_writer.join().unwrap();
             process::exit(code.parse().unwrap());
+        }
+        if std::env::var_os("RHAI_SYS_PROCESS_DEADLINE_IO").is_some() {
+            std::fs::write(record, format!("child-pid={} child-ready=1\n", process::id())).unwrap();
+            let stdout_started = std::sync::Arc::new(std::sync::atomic::AtomicBool::new(false));
+            let stdout_ready = std::sync::Arc::clone(&stdout_started);
+            std::thread::spawn(move || {
+                let mut stdout = std::io::stdout().lock();
+                if stdout.write_all(b"stdout-ready\n").is_err() || stdout.flush().is_err() {
+                    return;
+                }
+                stdout_ready.store(true, std::sync::atomic::Ordering::Release);
+                let chunk = vec![b'o'; 4096];
+                loop {
+                    if stdout.write_all(&chunk).is_err() || stdout.flush().is_err() {
+                        break;
+                    }
+                    std::thread::sleep(std::time::Duration::from_micros(200));
+                }
+            });
+            let stderr_ready = std::sync::Arc::clone(&stdout_started);
+            std::thread::spawn(move || {
+                while !stderr_ready.load(std::sync::atomic::Ordering::Acquire) {
+                    std::thread::yield_now();
+                }
+                let mut stderr = std::io::stderr().lock();
+                if stderr.write_all(ACTIVE_STDERR_OUTPUT.as_bytes()).is_err() || stderr.flush().is_err() {
+                    return;
+                }
+                let chunk = vec![b'e'; 1024];
+                loop {
+                    if stderr.write_all(&chunk).is_err() || stderr.flush().is_err() {
+                        break;
+                    }
+                    std::thread::sleep(std::time::Duration::from_micros(500));
+                }
+            });
+            loop {
+                std::thread::sleep(std::time::Duration::from_millis(10));
+            }
         }
         std::fs::write(record, format!("child-pid={} child-exit={code}\n", process::id())).unwrap();
         if let Ok(count) = std::env::var("RHAI_SYS_PROCESS_INVALID_COUNT") {
@@ -337,6 +378,70 @@ fn run_deadline_returns_bounded_partial_output_after_terminating_child() {
             assert!(stdout.len() <= 1_048_576 && stderr.len() <= 1_048_576);
         }
         assert_timed_child_record(&record_path);
+    }
+}
+
+#[test]
+#[cfg(not(feature = "no_index"))]
+fn run_deadline_with_blocked_stdin_and_active_stdout_stderr() {
+    const INPUT_BYTES: usize = 512 * 1024;
+    const OUTPUT_LIMIT: usize = 64 * 1024 * 1024;
+    let mut engine = engine(SysConfig::default().max_output(OUTPUT_LIMIT).programs(ProgramPolicy::Any));
+    engine.set_max_string_size(OUTPUT_LIMIT);
+    let executable = std::env::current_exe().unwrap();
+    let executable = executable.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let input = "i".repeat(INPUT_BYTES);
+
+    for raw in [true, false] {
+        let records = TempDir::new();
+        let record_path = records.path().join("deadline-io-record.txt");
+        let record_literal = record_path.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+        let api = if raw { "run_raw" } else { "run" };
+        let script = format!(
+            r#"{api}("{executable}", ["--exact", "process_fixture", "--nocapture", "--quiet"], #{{
+                env_clear: true,
+                env: #{{ {FIXTURE_ENV}: "0", {FIXTURE_RECORD_ENV}: "{record_literal}", RHAI_SYS_PROCESS_DEADLINE_IO: "1" }},
+                stdin: "{input}", max_output: {OUTPUT_LIMIT}, timeout: 0.25
+            }})"#
+        );
+        let result = match engine.eval::<Map>(&script) {
+            Ok(result) => result,
+            Err(error) => {
+                assert_timed_child_record(&record_path);
+                let sys_error = match error.as_ref() {
+                    rhai::EvalAltResult::ErrorRuntime(value, _) => value.clone().try_cast::<SysError>().unwrap(),
+                    other => panic!("unexpected deadline I/O error: {other:?}"),
+                };
+                assert!(matches!(sys_error, SysError::Process { cause: ProcessCause::Timeout(_), .. }), "unexpected primary deadline I/O cause: {sys_error:?}");
+                panic!("successful deadline cleanup returned an error instead of a run result map");
+            }
+        };
+
+        // Check independent child ownership before output assertions, so the wrong-marker
+        // control still proves that the timed-out child was terminated and reaped.
+        assert_timed_child_record(&record_path);
+        assert!(result["timed_out"].as_bool().unwrap(), "blocked stdin/output fixture did not hit its deadline");
+        assert!(!result["stdout_complete"].as_bool().unwrap());
+        assert!(!result["stderr_complete"].as_bool().unwrap());
+        if raw {
+            let stdout = result["stdout"].clone().try_cast::<Blob>().unwrap();
+            let stderr = result["stderr"].clone().try_cast::<Blob>().unwrap();
+            assert!(stdout.starts_with(LIBTEST_QUIET_START));
+            assert!(stdout.windows(b"stdout-ready\n".len()).any(|bytes| bytes == b"stdout-ready\n"));
+            assert!(stdout.windows(4096).any(|bytes| bytes.iter().all(|byte| *byte == b'o')), "stdout payload chunk missing");
+            assert!(stderr.windows(ACTIVE_STDERR_MARKER.len()).any(|bytes| bytes == ACTIVE_STDERR_MARKER.as_bytes()), "stderr active-stream marker missing");
+            assert!(stderr.windows(1024).any(|bytes| bytes.iter().all(|byte| *byte == b'e')), "stderr payload chunk missing");
+            assert!(stdout.len() <= OUTPUT_LIMIT && stderr.len() <= OUTPUT_LIMIT);
+        } else {
+            let stdout = result["stdout"].as_immutable_string_ref().unwrap();
+            let stderr = result["stderr"].as_immutable_string_ref().unwrap();
+            assert!(stdout.starts_with(&*String::from_utf8_lossy(LIBTEST_QUIET_START)));
+            assert!(stdout.contains("stdout-ready\n"));
+            assert!(stdout.as_bytes().windows(4096).any(|bytes| bytes.iter().all(|byte| *byte == b'o')), "stdout payload chunk missing");
+            assert!(stderr.contains(ACTIVE_STDERR_MARKER), "stderr active-stream marker missing");
+            assert!(stderr.as_bytes().windows(1024).any(|bytes| bytes.iter().all(|byte| *byte == b'e')), "stderr payload chunk missing");
+            assert!(stdout.len() <= OUTPUT_LIMIT && stderr.len() <= OUTPUT_LIMIT);
+        }
     }
 }
 

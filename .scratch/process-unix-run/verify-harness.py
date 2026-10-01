@@ -166,6 +166,9 @@ try:
     print('cargo_version=' + cargo_log.read_text().strip(), flush=True)
 
     features = 'testing-environ,sys,metadata'
+    run_bounded(
+        ['rustup', 'run', '1.77.2', 'cargo', 'test', '--locked', '--features', features, '--lib', 'read_ready_yields_after_budget_for_always_ready_reader', '--', '--nocapture'],
+        source, env, expected=0, timeout=180, label='read-ready-budget-unit')
     run_bounded(['rustup', 'run', '1.77.2', 'cargo', 'test', '--locked', '--features', features, '--test', 'sys_process', '--', '--nocapture'], source, env, expected=0, timeout=180, label='sys-process')
     run_bounded(['rustup', 'run', '1.77.2', 'cargo', 'test', '--locked', '--features', features, '--test', 'sys_process_report', '--', '--nocapture'], source, env, expected=0, timeout=120, label='sys-process-report')
 
@@ -205,10 +208,53 @@ try:
             raise RuntimeError('wrong-prefix control did not fail specifically on the intended output-byte assertion')
     finally:
         fixture.write_bytes(restored)
+    marker_line = b'const ACTIVE_STDERR_MARKER: &str = "stderr-active-marker\\n";'
+    wrong_marker_line = b'const ACTIVE_STDERR_MARKER: &str = "wrong-active-marker\\n";'
+    if restored.count(marker_line) != 1:
+        raise RuntimeError('wrong-marker control target must occur exactly once')
+    try:
+        fixture.write_bytes(restored.replace(marker_line, wrong_marker_line, 1))
+        status, marker_control_log = run_bounded(
+            ['rustup', 'run', '1.77.2', 'cargo', 'test', '--locked', '--features', features, '--test', 'sys_process', 'run_deadline_with_blocked_stdin_and_active_stdout_stderr', '--', '--exact', '--nocapture'],
+            source, env, timeout=120, label='wrong-active-output-marker-control')
+        marker_output = marker_control_log.read_text(errors='replace')
+        print('wrong_active_output_marker_control_output_begin', flush=True)
+        print(marker_output[-10000:], flush=True)
+        print('wrong_active_output_marker_control_output_end', flush=True)
+        if status != 101 or 'run_deadline_with_blocked_stdin_and_active_stdout_stderr' not in marker_output or 'stderr active-stream marker missing' not in marker_output:
+            raise RuntimeError('wrong-marker control did not fail specifically on the intended active-stderr assertion')
+    finally:
+        fixture.write_bytes(restored)
+    unix_adapter = source / 'src/packages/sys/process/unix.rs'
+    unix_restored = unix_adapter.read_bytes()
+    budget_line = b'const READ_BUDGET: usize = 64 * 1024;'
+    wrong_budget_line = b'const READ_BUDGET: usize = 256 * 1024;'
+    if unix_restored.count(budget_line) != 1:
+        raise RuntimeError('wrong-budget control target must occur exactly once')
+    try:
+        unix_adapter.write_bytes(unix_restored.replace(budget_line, wrong_budget_line, 1))
+        status, budget_control_log = run_bounded(
+            ['rustup', 'run', '1.77.2', 'cargo', 'test', '--locked', '--features', features, '--lib', 'read_ready_yields_after_budget_for_always_ready_reader', '--', '--nocapture'],
+            source, env, timeout=120, label='wrong-read-budget-control')
+        budget_output = budget_control_log.read_text(errors='replace')
+        print('wrong_read_budget_control_output_begin', flush=True)
+        print(budget_output[-10000:], flush=True)
+        print('wrong_read_budget_control_output_end', flush=True)
+        if status != 101 or 'read_ready_yields_after_budget_for_always_ready_reader' not in budget_output or 'read step exceeded its byte budget' not in budget_output:
+            raise RuntimeError('wrong-budget control did not fail specifically on the intended bounded-read assertion')
+    finally:
+        unix_adapter.write_bytes(unix_restored)
     restored_hash = hashlib.sha256(fixture.read_bytes()).hexdigest()
     if restored_hash != copied_hashes['tests/sys_process.rs']:
         raise RuntimeError('private fixture was not byte-for-byte restored')
     print('restored_fixture_sha256=' + restored_hash, flush=True)
+    restored_unix_hash = hashlib.sha256(unix_adapter.read_bytes()).hexdigest()
+    if restored_unix_hash != copied_hashes['src/packages/sys/process/unix.rs']:
+        raise RuntimeError('private Unix adapter was not byte-for-byte restored after the wrong-budget control')
+    print('restored_unix_adapter_sha256=' + restored_unix_hash, flush=True)
+    run_bounded(
+        ['rustup', 'run', '1.77.2', 'cargo', 'test', '--locked', '--features', features, '--lib', 'read_ready_yields_after_budget_for_always_ready_reader', '--', '--nocapture'],
+        source, env, expected=0, timeout=180, label='read-ready-budget-restored')
     run_bounded(['rustup', 'run', '1.77.2', 'cargo', 'test', '--locked', '--features', features, '--test', 'sys_process', '--', '--nocapture'], source, env, expected=0, timeout=180, label='sys-process-restored')
     run_bounded(
         ['rustup', 'run', '1.77.2', 'cargo', 'test', '--locked', '--features', 'testing-environ,sys,metadata,no_index', '--test', 'sys_process', 'scalar_run_with_cwd_works_without_collections', '--', '--exact', '--nocapture'],
