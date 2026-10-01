@@ -200,7 +200,9 @@ fn drop_final_client(root: &Path, kill_on_drop: bool) {
     let engine = engine(kill_on_drop);
     let mut scope = Scope::new();
     let child = spawn_fixture(&engine, &mut scope, root, "hold", None);
-    let pid = engine.eval_with_scope::<INT>(&mut scope, "child.id").unwrap() as i32;
+    scope.push_dynamic("pid_probe", child.clone());
+    let pid = engine.eval_with_scope::<INT>(&mut scope, "pid_probe.id").unwrap() as i32;
+    drop(scope.remove::<Dynamic>("pid_probe"));
     wait_for_state(root, "child.status", "ready", Duration::from_secs(3));
     let alias = child.clone();
     drop(child);
@@ -210,7 +212,7 @@ fn drop_final_client(root: &Path, kill_on_drop: bool) {
 
     // Dropping the remaining Dynamic is the final script-client release. The Engine/package
     // stays alive so this distinguishes ClientLease behavior from service/package lifetime.
-    scope.remove::<Dynamic>("remaining");
+    drop(scope.remove::<Dynamic>("remaining"));
     if kill_on_drop {
         wait_for_pid_gone(pid, Duration::from_secs(5));
         eprintln!("shared-child final-drop kill_on_drop=true pid={pid} reap=ESRCH");
@@ -228,7 +230,9 @@ fn sync_wait_cancel(root: &Path) {
     let engine = Arc::new(engine(false));
     let mut scope = Scope::new();
     let child = spawn_fixture(&engine, &mut scope, root, "hold", None);
-    let pid = engine.eval_with_scope::<INT>(&mut scope, "child.id").unwrap() as i32;
+    scope.push_dynamic("pid_probe", child.clone());
+    let pid = engine.eval_with_scope::<INT>(&mut scope, "pid_probe.id").unwrap() as i32;
+    drop(scope.remove::<Dynamic>("pid_probe"));
     wait_for_state(root, "child.status", "ready", Duration::from_secs(3));
 
     let barrier = Arc::new(Barrier::new(2));

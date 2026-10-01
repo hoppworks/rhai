@@ -7,6 +7,8 @@ use std::io;
 mod unix;
 #[cfg(unix)]
 pub(super) use unix::CleanupService;
+#[cfg(unix)]
+pub use unix::ProcessChild as Child;
 
 /// Final status of a process when one is available.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

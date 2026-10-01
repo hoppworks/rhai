@@ -44,6 +44,8 @@ mod process;
 
 pub use config::{EnvPolicy, FsAccess, FsPolicy, FsRoot, ProcessScope, ProgramPolicy, SysConfig};
 pub use error::SysError;
+#[cfg(unix)]
+pub use process::Child;
 pub use process::{ProcessCause, ProcessDiagnostic, ProcessExit, ProcessReport};
 
 use crate::packages::Package;

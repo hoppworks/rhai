@@ -8,7 +8,7 @@ use std::ffi::OsStr;
 use std::io::{self, Read, Write};
 use std::os::fd::{AsRawFd, RawFd};
 use std::os::unix::process::{CommandExt, ExitStatusExt};
-use std::process::{Child, ChildStderr, ChildStdin, ChildStdout, Command, Stdio};
+use std::process::{Child as OsChild, ChildStderr, ChildStdin, ChildStdout, Command, Stdio};
 use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
 use std::sync::{Arc, Condvar, Mutex};
 use std::thread::{self, JoinHandle};
@@ -20,13 +20,15 @@ const MAX_RETAINED_EXECUTIONS: usize = 64;
 enum OwnerPhase {
     Launching,
     Caller,
+    Spawned,
     CleanupPending,
     Service,
     Quarantined,
 }
 
 struct OwnerRecord {
-    child: Option<Child>,
+    child: Option<OsChild>,
+    spawned: Option<SpawnRuntime>,
     phase: OwnerPhase,
     pump_finished: bool,
     reaped: bool,
@@ -34,6 +36,66 @@ struct OwnerRecord {
     retired: Option<Arc<AtomicBool>>,
     #[cfg(test)]
     service_gate: Option<Arc<AtomicBool>>,
+    #[cfg(test)]
+    numeric_operations: Option<Arc<AtomicUsize>>,
+    #[cfg(test)]
+    quarantine_observations: Option<Arc<AtomicUsize>>,
+}
+
+struct ChildControl {
+    snapshot: Mutex<ChildSnapshot>,
+    changed: Condvar,
+}
+
+struct ChildSnapshot {
+    pid: u32,
+    program: String,
+    engine_limit: usize,
+    stdin: Vec<u8>,
+    stdin_offset: usize,
+    stdout: Vec<u8>,
+    stderr: Vec<u8>,
+    stdout_complete: bool,
+    stderr_complete: bool,
+    exit: Option<ProcessExit>,
+    terminal: bool,
+    kill_requested: bool,
+    kill_sent: bool,
+    error: Option<ProcessCause>,
+    limit: usize,
+    kill_on_drop: bool,
+}
+
+struct SpawnRuntime {
+    control: Arc<ChildControl>,
+    stdin: Option<ChildStdin>,
+    stdout: ChildStdout,
+    stderr: ChildStderr,
+}
+
+/// A shared handle to a child process launched by the `sys` package.
+#[derive(Clone)]
+pub struct ProcessChild {
+    lease: Arc<ClientLease>,
+}
+
+struct ClientLease {
+    control: Arc<ChildControl>,
+    registry: Arc<OwnerRegistry>,
+}
+
+impl Drop for ClientLease {
+    fn drop(&mut self) {
+        let mut state = self
+            .control
+            .snapshot
+            .lock()
+            .unwrap_or_else(|p| p.into_inner());
+        if !state.terminal && state.kill_on_drop {
+            state.kill_requested = true;
+            self.registry.changed.notify_all();
+        }
+    }
 }
 
 struct OwnerRegistry {
@@ -69,7 +131,17 @@ impl CleanupService {
         &self,
         retired: Option<Arc<AtomicBool>>,
         #[cfg(test)] service_gate: Option<Arc<AtomicBool>>,
+        #[cfg(test)] numeric_operations: Option<Arc<AtomicUsize>>,
+        #[cfg(test)] quarantine_observations: Option<Arc<AtomicUsize>>,
+        #[cfg(test)] fail_reservation: bool,
     ) -> io::Result<LaunchReservation> {
+        #[cfg(test)]
+        if fail_reservation {
+            return Err(io::Error::new(
+                io::ErrorKind::Other,
+                "injected cleanup-service start failure",
+            ));
+        }
         self.ensure_worker()?;
         let mut current = self.registry.outstanding.load(Ordering::Acquire);
         loop {
@@ -91,6 +163,7 @@ impl CleanupService {
         }
         let record = Arc::new(Mutex::new(OwnerRecord {
             child: None,
+            spawned: None,
             phase: OwnerPhase::Launching,
             pump_finished: false,
             reaped: false,
@@ -98,6 +171,10 @@ impl CleanupService {
             retired,
             #[cfg(test)]
             service_gate,
+            #[cfg(test)]
+            numeric_operations,
+            #[cfg(test)]
+            quarantine_observations,
         }));
         self.registry
             .records
@@ -149,10 +226,27 @@ fn cleanup_worker(registry: Arc<OwnerRegistry>) {
             .clone();
         let mut progressed = false;
         for record in records {
+            let spawned = record
+                .lock()
+                .unwrap_or_else(|poisoned| poisoned.into_inner())
+                .phase
+                == OwnerPhase::Spawned;
+            if spawned {
+                if pump_spawned_record(&registry, &record) {
+                    progressed = true;
+                }
+                continue;
+            }
             let mut child = {
                 let mut owner = record
                     .lock()
                     .unwrap_or_else(|poisoned| poisoned.into_inner());
+                #[cfg(test)]
+                if owner.phase == OwnerPhase::Quarantined {
+                    if let Some(observations) = &owner.quarantine_observations {
+                        observations.fetch_add(1, Ordering::AcqRel);
+                    }
+                }
                 if owner.phase != OwnerPhase::CleanupPending || !owner.pump_finished {
                     continue;
                 }
@@ -170,6 +264,7 @@ fn cleanup_worker(registry: Arc<OwnerRegistry>) {
             let Some(mut child_value) = child.take() else {
                 continue;
             };
+            note_numeric_operation(&record);
             let observation = child_value.try_wait();
             let (retire, quarantined) = match observation {
                 Ok(Some(_)) => (true, false),
@@ -211,6 +306,222 @@ fn cleanup_worker(registry: Arc<OwnerRegistry>) {
     }
 }
 
+fn pump_spawned_record(registry: &OwnerRegistry, record: &Arc<Mutex<OwnerRecord>>) -> bool {
+    let mut owner = record.lock().unwrap_or_else(|p| p.into_inner());
+    if owner.phase != OwnerPhase::Spawned {
+        return false;
+    }
+    let Some(mut runtime) = owner.spawned.take() else {
+        return false;
+    };
+    let Some(mut child) = owner.child.take() else {
+        owner.spawned = Some(runtime);
+        return false;
+    };
+    let mut state = runtime
+        .control
+        .snapshot
+        .lock()
+        .unwrap_or_else(|p| p.into_inner());
+    let mut progressed = false;
+
+    if state.kill_requested && !state.kill_sent && !owner.reaped {
+        runtime.stdin.take();
+        note_numeric_operation_owner(&owner);
+        match child.kill() {
+            Ok(()) => state.kill_sent = true,
+            Err(error) => {
+                if state.error.is_none() {
+                    state.error = Some(process_io_cause("terminate child", &state.program, error));
+                }
+                state.kill_sent = true;
+            }
+        }
+        progressed = true;
+    }
+
+    let mut close_stdin = false;
+    if let Some(stdin) = runtime.stdin.as_mut() {
+        if state.stdin_offset < state.stdin.len() {
+            match stdin.write(&state.stdin[state.stdin_offset..]) {
+                Ok(0) => {
+                    state.stdin_offset = state.stdin.len();
+                    close_stdin = true;
+                    progressed = true;
+                }
+                Ok(count) => {
+                    state.stdin_offset += count;
+                    progressed = true;
+                }
+                Err(error) if error.kind() == io::ErrorKind::WouldBlock => {}
+                Err(error) if error.kind() == io::ErrorKind::Interrupted => {}
+                Err(error) if error.kind() == io::ErrorKind::BrokenPipe => {
+                    state.stdin_offset = state.stdin.len();
+                    close_stdin = true;
+                    progressed = true;
+                }
+                Err(error) => {
+                    if state.error.is_none() {
+                        state.error =
+                            Some(process_io_cause("write child stdin", &state.program, error));
+                    }
+                    close_stdin = true;
+                    state.kill_requested = true;
+                    progressed = true;
+                }
+            }
+        } else {
+            close_stdin = true;
+            progressed = true;
+        }
+    }
+    if close_stdin {
+        runtime.stdin.take();
+    }
+
+    let output_limit = state.limit;
+    if !state.stdout_complete {
+        match read_ready(&mut runtime.stdout, &mut state.stdout, output_limit) {
+            Ok(ReadState::Eof) => {
+                state.stdout_complete = true;
+                progressed = true;
+            }
+            Ok(ReadState::Overflow) => {
+                if state.error.is_none() {
+                    state.error = Some(ProcessCause::OutputLimit(format!(
+                        "stdout for `{}` exceeded max_output of {} bytes",
+                        state.program, state.limit
+                    )));
+                }
+                state.kill_requested = true;
+                progressed = true;
+            }
+            Ok(ReadState::Pending) => {}
+            Err(error) => {
+                if state.error.is_none() {
+                    state.error =
+                        Some(process_io_cause("read child stdout", &state.program, error));
+                }
+                state.kill_requested = true;
+                progressed = true;
+            }
+        }
+    }
+    if !state.stderr_complete {
+        match read_ready(&mut runtime.stderr, &mut state.stderr, output_limit) {
+            Ok(ReadState::Eof) => {
+                state.stderr_complete = true;
+                progressed = true;
+            }
+            Ok(ReadState::Overflow) => {
+                if state.error.is_none() {
+                    state.error = Some(ProcessCause::OutputLimit(format!(
+                        "stderr for `{}` exceeded max_output of {} bytes",
+                        state.program, state.limit
+                    )));
+                }
+                state.kill_requested = true;
+                progressed = true;
+            }
+            Ok(ReadState::Pending) => {}
+            Err(error) => {
+                if state.error.is_none() {
+                    state.error =
+                        Some(process_io_cause("read child stderr", &state.program, error));
+                }
+                state.kill_requested = true;
+                progressed = true;
+            }
+        }
+    }
+
+    if !owner.reaped {
+        note_numeric_operation_owner(&owner);
+        match child.try_wait() {
+            Ok(Some(status)) => {
+                state.exit = Some(process_exit(status));
+                owner.reaped = true;
+                runtime.stdin.take();
+                progressed = true;
+            }
+            Ok(None) => {}
+            Err(error) if error.raw_os_error() == Some(libc::ECHILD) => {
+                owner.phase = OwnerPhase::Quarantined;
+                if state.error.is_none() {
+                    state.error = Some(process_io_cause("wait for child", &state.program, error));
+                }
+                state.terminal = true;
+                runtime.control.changed.notify_all();
+                registry.changed.notify_all();
+                drop(state);
+                owner.child = Some(child);
+                owner.spawned = Some(runtime);
+                return true;
+            }
+            Err(error) => {
+                if state.error.is_none() {
+                    state.error = Some(process_io_cause("wait for child", &state.program, error));
+                }
+                state.terminal = true;
+                runtime.control.changed.notify_all();
+                drop(state);
+                owner.phase = OwnerPhase::Quarantined;
+                owner.child = Some(child);
+                owner.spawned = Some(runtime);
+                return true;
+            }
+        }
+    }
+
+    if owner.reaped && state.stdout_complete && state.stderr_complete {
+        state.terminal = true;
+        runtime.stdin.take();
+        owner.pump_finished = true;
+        runtime.control.changed.notify_all();
+        drop(state);
+        drop(child);
+        drop(runtime);
+        owner.phase = OwnerPhase::Service;
+        drop(owner);
+        retire_record(registry, record);
+        return true;
+    }
+
+    if progressed {
+        runtime.control.changed.notify_all();
+    }
+    drop(state);
+    owner.child = Some(child);
+    owner.spawned = Some(runtime);
+    progressed
+}
+
+fn note_numeric_operation_owner(owner: &OwnerRecord) {
+    #[cfg(test)]
+    if let Some(count) = &owner.numeric_operations {
+        count.fetch_add(1, Ordering::AcqRel);
+    }
+    #[cfg(not(test))]
+    let _ = owner;
+}
+
+fn process_io_cause(op: &'static str, target: &str, error: io::Error) -> ProcessCause {
+    ProcessCause::Io {
+        op,
+        target: target.to_owned(),
+        kind: error.kind(),
+        message: error.to_string(),
+    }
+}
+
+fn process_exit(status: std::process::ExitStatus) -> ProcessExit {
+    if let Some(code) = status.code() {
+        ProcessExit::Code(code)
+    } else {
+        ProcessExit::Signal(status.signal().unwrap_or_default())
+    }
+}
+
 struct LaunchReservation {
     registry: Arc<OwnerRegistry>,
     record: Arc<Mutex<OwnerRecord>>,
@@ -218,13 +529,46 @@ struct LaunchReservation {
 }
 
 impl LaunchReservation {
-    fn adopt(&mut self, child: Child) {
+    fn adopt(&mut self, child: OsChild) {
         let mut owner = self
             .record
             .lock()
             .unwrap_or_else(|poisoned| poisoned.into_inner());
         owner.child = Some(child);
         owner.phase = OwnerPhase::Caller;
+    }
+
+    fn attach_spawned(&mut self, control: Arc<ChildControl>) -> io::Result<()> {
+        let mut owner = self.record.lock().unwrap_or_else(|p| p.into_inner());
+        let child = owner
+            .child
+            .as_mut()
+            .expect("spawned child adopted before pipe setup");
+        let stdin = child.stdin.take();
+        let stdout = child.stdout.take().expect("piped child stdout");
+        let stderr = child.stderr.take().expect("piped child stderr");
+        for fd in [
+            stdin.as_ref().map(AsRawFd::as_raw_fd),
+            Some(stdout.as_raw_fd()),
+            Some(stderr.as_raw_fd()),
+        ]
+        .into_iter()
+        .flatten()
+        {
+            set_nonblock(fd)?;
+        }
+        owner.spawned = Some(SpawnRuntime {
+            control,
+            stdin,
+            stdout,
+            stderr,
+        });
+        owner.phase = OwnerPhase::Spawned;
+        // From this point the retained service owns the child even if the caller unwinds.
+        self.active = false;
+        drop(owner);
+        self.registry.changed.notify_all();
+        Ok(())
     }
 
     fn drive(&mut self) -> DriverToken<'_> {
@@ -254,7 +598,7 @@ impl LaunchReservation {
         self.active = false;
     }
 
-    fn handoff(&mut self, child: Child) {
+    fn handoff(&mut self, child: OsChild) {
         {
             let mut owner = self
                 .record
@@ -282,6 +626,7 @@ impl Drop for LaunchReservation {
                 child.stdin.take();
                 child.stdout.take();
                 child.stderr.take();
+                note_numeric_operation(&self.record);
                 let _ = child.kill();
                 let mut owner = self
                     .record
@@ -312,7 +657,7 @@ impl Drop for LaunchReservation {
 
 struct DriverToken<'a> {
     reservation: &'a mut LaunchReservation,
-    child: Option<Child>,
+    child: Option<OsChild>,
     completed: bool,
     termination_attempted: bool,
     reaped: bool,
@@ -320,7 +665,7 @@ struct DriverToken<'a> {
 }
 
 impl DriverToken<'_> {
-    fn child_mut(&mut self) -> &mut Child {
+    fn child_mut(&mut self) -> &mut OsChild {
         self.child.as_mut().expect("active process driver")
     }
 
@@ -375,6 +720,7 @@ impl Drop for DriverToken<'_> {
             }
             if !self.termination_attempted {
                 if let Some(child) = self.child.as_mut() {
+                    note_numeric_operation(&self.reservation.record);
                     let _ = child.kill();
                 }
             }
@@ -413,6 +759,20 @@ fn retire_record(registry: &OwnerRegistry, record: &Arc<Mutex<OwnerRecord>>) {
         .unwrap_or_else(|poisoned| poisoned.into_inner())
         .retain(|candidate| !Arc::ptr_eq(candidate, record));
     registry.outstanding.fetch_sub(1, Ordering::AcqRel);
+}
+
+fn note_numeric_operation(record: &Arc<Mutex<OwnerRecord>>) {
+    #[cfg(test)]
+    if let Some(count) = record
+        .lock()
+        .unwrap_or_else(|poisoned| poisoned.into_inner())
+        .numeric_operations
+        .as_ref()
+    {
+        count.fetch_add(1, Ordering::AcqRel);
+    }
+    #[cfg(not(test))]
+    let _ = record;
 }
 
 struct PumpGuard {
@@ -455,6 +815,10 @@ struct ExecutionFaults {
     #[cfg(test)]
     fail_cleanup_wait_once: bool,
     #[cfg(test)]
+    fail_cleanup_wait_echild_once: bool,
+    #[cfg(test)]
+    fail_reservation_once: bool,
+    #[cfg(test)]
     fail_configure_pipe_once: bool,
     #[cfg(test)]
     configure_pipe_gate: Option<std::path::PathBuf>,
@@ -466,6 +830,12 @@ struct ExecutionFaults {
     interrupt_polls_remaining: usize,
     #[cfg(test)]
     injected_poll_interrupts: Option<std::sync::Arc<std::sync::atomic::AtomicUsize>>,
+    #[cfg(test)]
+    numeric_operations: Option<Arc<AtomicUsize>>,
+    #[cfg(test)]
+    quarantine_observations: Option<Arc<AtomicUsize>>,
+    #[cfg(test)]
+    spawn_operations: Option<Arc<AtomicUsize>>,
 }
 
 impl ExecutionFaults {
@@ -478,7 +848,7 @@ impl ExecutionFaults {
         Self::default()
     }
 
-    fn kill(&mut self, child: &mut Child) -> io::Result<()> {
+    fn kill(&mut self, child: &mut OsChild) -> io::Result<()> {
         #[cfg(test)]
         if self.refuse_kill_once {
             self.refuse_kill_once = false;
@@ -518,7 +888,11 @@ impl ExecutionFaults {
         self.service_gate.clone()
     }
 
-    fn cleanup_wait(&mut self, child: &mut Child) -> io::Result<Option<std::process::ExitStatus>> {
+    fn cleanup_wait(
+        &mut self,
+        child: &mut OsChild,
+    ) -> io::Result<Option<std::process::ExitStatus>> {
+        self.note_fault_operation();
         #[cfg(test)]
         if self.fail_cleanup_wait_once {
             self.fail_cleanup_wait_once = false;
@@ -527,7 +901,59 @@ impl ExecutionFaults {
                 "injected non-consuming cleanup wait failure",
             ));
         }
+        #[cfg(test)]
+        if self.fail_cleanup_wait_echild_once {
+            self.fail_cleanup_wait_echild_once = false;
+            return Err(io::Error::from_raw_os_error(libc::ECHILD));
+        }
         child.try_wait()
+    }
+
+    fn numeric_operations_probe(&self) -> Option<Arc<AtomicUsize>> {
+        #[cfg(test)]
+        {
+            self.numeric_operations.clone()
+        }
+        #[cfg(not(test))]
+        {
+            None
+        }
+    }
+
+    fn quarantine_observations_probe(&self) -> Option<Arc<AtomicUsize>> {
+        #[cfg(test)]
+        {
+            self.quarantine_observations.clone()
+        }
+        #[cfg(not(test))]
+        {
+            None
+        }
+    }
+
+    fn note_fault_operation(&self) {
+        #[cfg(test)]
+        if let Some(count) = &self.numeric_operations {
+            count.fetch_add(1, Ordering::AcqRel);
+        }
+    }
+
+    fn note_spawn_operation(&self) {
+        #[cfg(test)]
+        if let Some(count) = &self.spawn_operations {
+            count.fetch_add(1, Ordering::AcqRel);
+        }
+    }
+
+    fn fail_reservation(&self) -> bool {
+        #[cfg(test)]
+        {
+            self.fail_reservation_once
+        }
+        #[cfg(not(test))]
+        {
+            false
+        }
     }
 
     fn configure_pipe(&mut self, fd: RawFd) -> io::Result<()> {
@@ -560,6 +986,7 @@ impl ExecutionFaults {
 type Res<T> = Result<T, Box<crate::EvalAltResult>>;
 
 pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
+    ProcessChild::register(module);
     #[cfg(not(feature = "no_index"))]
     {
         let st = state.clone();
@@ -641,6 +1068,242 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
                 },
             );
     }
+    let st = state.clone();
+    crate::packages::sys::reg(
+        "spawn",
+        &["/// Spawn a child and return a shared Child handle."],
+    )
+    .set_into_module(
+        module,
+        move |ctx: NativeCallContext, program: &str| -> Res<ProcessChild> {
+            spawn_child(&ctx, &st, program, &[], Map::new())
+        },
+    );
+    let st = state.clone();
+    crate::packages::sys::reg("spawn", &["/// Spawn a child with options."]).set_into_module(
+        module,
+        move |ctx: NativeCallContext, program: &str, options: Map| -> Res<ProcessChild> {
+            spawn_child(&ctx, &st, program, &[], options)
+        },
+    );
+    #[cfg(not(feature = "no_index"))]
+    {
+        let st = state.clone();
+        crate::packages::sys::reg("spawn", &["/// Spawn a child with arguments."]).set_into_module(
+            module,
+            move |ctx: NativeCallContext, program: &str, args: Array| -> Res<ProcessChild> {
+                spawn_child(&ctx, &st, program, &parse_args(args)?, Map::new())
+            },
+        );
+        let st = state.clone();
+        crate::packages::sys::reg("spawn", &["/// Spawn a child with arguments and options."])
+            .set_into_module(
+                module,
+                move |ctx: NativeCallContext,
+                      program: &str,
+                      args: Array,
+                      options: Map|
+                      -> Res<ProcessChild> {
+                    spawn_child(&ctx, &st, program, &parse_args(args)?, options)
+                },
+            );
+    }
+}
+
+impl ProcessChild {
+    fn register(module: &mut Module) {
+        module.set_custom_type::<Self>("Child");
+        let getter = crate::FuncRegistration::new(crate::engine::make_getter("id"))
+            .with_purity(true)
+            .with_volatility(false);
+        getter.set_into_module(module, |child: &mut Self| -> INT {
+            child
+                .lease
+                .control
+                .snapshot
+                .lock()
+                .unwrap_or_else(|p| p.into_inner())
+                .pid as INT
+        });
+        crate::FuncRegistration::new("try_wait")
+            .with_purity(false)
+            .set_into_module(module, |child: &mut Self| -> Res<Dynamic> {
+                child.snapshot(false, None)
+            });
+        crate::FuncRegistration::new("wait")
+            .with_purity(false)
+            .set_into_module(module, |child: &mut Self| -> Res<Map> {
+                match child.snapshot(true, None)? {
+                    value if value.is_unit() => unreachable!("blocking wait has no timeout"),
+                    value => Ok(value.cast()),
+                }
+            });
+        #[cfg(not(feature = "no_float"))]
+        crate::FuncRegistration::new("wait")
+            .with_purity(false)
+            .set_into_module(
+                module,
+                |child: &mut Self, seconds: crate::FLOAT| -> Res<Dynamic> {
+                    let timeout =
+                        if seconds.is_finite() && seconds >= 0.0 {
+                            Some(Duration::try_from_secs_f64(seconds as f64).map_err(|_| {
+                                SysError::Denied("wait timeout is out of range".into())
+                            })?)
+                        } else {
+                            return Err(SysError::Denied(
+                                "wait timeout must be a finite non-negative number".into(),
+                            )
+                            .into());
+                        };
+                    child.snapshot(true, timeout)
+                },
+            );
+        #[cfg(feature = "no_float")]
+        crate::FuncRegistration::new("wait")
+            .with_purity(false)
+            .set_into_module(module, |child: &mut Self, seconds: INT| -> Res<Dynamic> {
+                if seconds < 0 {
+                    return Err(SysError::Denied("wait timeout must be non-negative".into()).into());
+                }
+                child.snapshot(true, Some(Duration::from_secs(seconds as u64)))
+            });
+        crate::FuncRegistration::new("kill")
+            .with_purity(false)
+            .set_into_module(module, |child: &mut Self| {
+                let mut state = child
+                    .lease
+                    .control
+                    .snapshot
+                    .lock()
+                    .unwrap_or_else(|p| p.into_inner());
+                if !state.terminal {
+                    state.kill_requested = true;
+                    child.lease.registry.changed.notify_all();
+                }
+            });
+    }
+
+    fn snapshot(&self, wait: bool, timeout: Option<Duration>) -> Res<Dynamic> {
+        let control = &self.lease.control;
+        let mut state = control.snapshot.lock().unwrap_or_else(|p| p.into_inner());
+        if !state.terminal && wait {
+            if let Some(timeout) = timeout {
+                let deadline = Instant::now()
+                    .checked_add(timeout)
+                    .ok_or_else(|| SysError::Denied("wait timeout is out of range".into()))?;
+                while !state.terminal {
+                    let remaining = deadline.saturating_duration_since(Instant::now());
+                    if remaining.is_zero() {
+                        return Ok(Dynamic::UNIT);
+                    }
+                    let (next, timed) = control
+                        .changed
+                        .wait_timeout(state, remaining)
+                        .unwrap_or_else(|p| p.into_inner());
+                    state = next;
+                    if timed.timed_out() && !state.terminal {
+                        return Ok(Dynamic::UNIT);
+                    }
+                }
+            } else {
+                while !state.terminal {
+                    state = control
+                        .changed
+                        .wait(state)
+                        .unwrap_or_else(|p| p.into_inner());
+                }
+            }
+        }
+        if !state.terminal {
+            return Ok(Dynamic::UNIT);
+        }
+        if let Some(error) = &state.error {
+            let stdout = String::from_utf8_lossy(&state.stdout);
+            let stderr = String::from_utf8_lossy(&state.stderr);
+            let cause = if state.engine_limit > 0
+                && (stdout.len() > state.engine_limit || stderr.len() > state.engine_limit)
+            {
+                ProcessCause::OutputLimit(format!(
+                    "decoded process output exceeded the engine string limit of {} bytes",
+                    state.engine_limit
+                ))
+            } else {
+                error.clone()
+            };
+            let report = child_process_report(&state);
+            return Err(SysError::Process { cause, report }.into());
+        }
+        if state.engine_limit > 0 {
+            let stdout = String::from_utf8_lossy(&state.stdout);
+            let stderr = String::from_utf8_lossy(&state.stderr);
+            if stdout.len() > state.engine_limit || stderr.len() > state.engine_limit {
+                let report = child_process_report(&state);
+                return Err(SysError::Process {
+                    cause: ProcessCause::OutputLimit(format!(
+                        "decoded process output exceeded the engine string limit of {} bytes",
+                        state.engine_limit
+                    )),
+                    report,
+                }
+                .into());
+            }
+        }
+        Ok(Dynamic::from(child_snapshot_map(&state)))
+    }
+}
+
+fn child_process_report(state: &ChildSnapshot) -> ProcessReport {
+    ProcessReport::new(
+        state.stdout.clone(),
+        state.stderr.clone(),
+        state.stdout_complete,
+        state.stderr_complete,
+        state.exit,
+        false,
+        vec![],
+    )
+}
+
+fn child_snapshot_map(state: &ChildSnapshot) -> Map {
+    let mut map = Map::new();
+    let code = match state.exit {
+        Some(ProcessExit::Code(value)) => Some(value),
+        _ => None,
+    };
+    let signal = match state.exit {
+        Some(ProcessExit::Signal(value)) => Some(value),
+        _ => None,
+    };
+    map.insert("success".into(), Dynamic::from(code == Some(0)));
+    map.insert(
+        "code".into(),
+        code.map(|n| Dynamic::from_int(n as INT))
+            .unwrap_or(Dynamic::UNIT),
+    );
+    map.insert(
+        "signal".into(),
+        signal
+            .map(|n| Dynamic::from_int(n as INT))
+            .unwrap_or(Dynamic::UNIT),
+    );
+    map.insert("timed_out".into(), Dynamic::FALSE);
+    map.insert(
+        "stdout_complete".into(),
+        Dynamic::from(state.stdout_complete),
+    );
+    map.insert(
+        "stderr_complete".into(),
+        Dynamic::from(state.stderr_complete),
+    );
+    map.insert(
+        "stdout".into(),
+        Dynamic::from(String::from_utf8_lossy(&state.stdout).into_owned()),
+    );
+    map.insert(
+        "stderr".into(),
+        Dynamic::from(String::from_utf8_lossy(&state.stderr).into_owned()),
+    );
+    map
 }
 
 #[cfg(not(feature = "no_index"))]
@@ -817,6 +1480,125 @@ fn parse_stdin(value: Dynamic) -> Res<Vec<u8>> {
         .ok_or_else(|| SysError::Denied("process option `stdin` must be a string".into()).into())
 }
 
+fn spawn_child(
+    ctx: &NativeCallContext,
+    state: &Shared<SysState>,
+    program: &str,
+    args: &[String],
+    opts: Map,
+) -> Res<ProcessChild> {
+    if !state.config.programs.allows(program) {
+        return Err(SysError::Denied(format!("program `{program}` is not allowed")).into());
+    }
+    if state.config.process_scope != ProcessScope::DirectChild {
+        return Err(SysError::Denied(
+            "Managed process scope is not supported by this target".into(),
+        )
+        .into());
+    }
+    let engine_limit = {
+        #[cfg(not(feature = "unchecked"))]
+        {
+            ctx.engine().max_string_size()
+        }
+        #[cfg(feature = "unchecked")]
+        {
+            0
+        }
+    };
+    let has_timeout_option = opts.contains_key("timeout");
+    let mut options = parse_options(state, opts, engine_limit)?;
+    if has_timeout_option {
+        return Err(SysError::Denied("spawn does not accept a timeout option".into()).into());
+    }
+    // The package default deadline applies to `run`; spawned handles choose their own waits.
+    options.timeout = None;
+    let cwd = options
+        .cwd
+        .as_deref()
+        .map(|p| state.fs.open_process_cwd(p))
+        .transpose()?;
+    let mut command = Command::new(OsStr::new(program));
+    command
+        .args(args)
+        .stdin(if options.stdin.is_some() {
+            Stdio::piped()
+        } else {
+            Stdio::null()
+        })
+        .stdout(Stdio::piped())
+        .stderr(Stdio::piped());
+    if options.env_clear {
+        command.env_clear();
+    }
+    for key in options.env_remove {
+        command.env_remove(key);
+    }
+    for (key, value) in options.env {
+        command.env(key, value);
+    }
+    if let Some(dir) = cwd.as_ref() {
+        let fd = dir.as_raw_fd();
+        // SAFETY: only async-signal-safe fchdir is called with an owned directory descriptor.
+        unsafe {
+            command.pre_exec(move || {
+                if libc::fchdir(fd) == 0 {
+                    Ok(())
+                } else {
+                    Err(io::Error::last_os_error())
+                }
+            });
+        }
+    }
+
+    let mut reservation = {
+        #[cfg(test)]
+        {
+            state.cleanup.reserve(None, None, None, None, false)
+        }
+        #[cfg(not(test))]
+        {
+            state.cleanup.reserve(None)
+        }
+    }
+    .map_err(|e| SysError::io("reserve process cleanup", program, &e))?;
+    let mut child =
+        Command::spawn(&mut command).map_err(|e| SysError::io("spawn process", program, &e))?;
+    let pid = child.id();
+    reservation.adopt(child);
+    let control = Arc::new(ChildControl {
+        snapshot: Mutex::new(ChildSnapshot {
+            pid,
+            program: program.to_owned(),
+            engine_limit,
+            stdin: options.stdin.unwrap_or_default(),
+            stdin_offset: 0,
+            stdout: Vec::new(),
+            stderr: Vec::new(),
+            stdout_complete: false,
+            stderr_complete: false,
+            exit: None,
+            terminal: false,
+            kill_requested: false,
+            kill_sent: false,
+            error: None,
+            limit: options.limit,
+            kill_on_drop: state.config.kill_on_drop,
+        }),
+        changed: Condvar::new(),
+    });
+    reservation
+        .attach_spawned(control.clone())
+        .map_err(|e| SysError::io("configure process pipe", program, &e))?;
+    drop(cwd);
+    Ok(ProcessChild {
+        lease: Arc::new(ClientLease {
+            control,
+            registry: state.cleanup.registry.clone(),
+        }),
+    })
+}
+
 fn run_map(
     ctx: &NativeCallContext,
     state: &Shared<SysState>,
@@ -897,9 +1679,13 @@ fn run_map(
     let mut reservation = {
         #[cfg(test)]
         {
-            state
-                .cleanup
-                .reserve(faults.retirement_probe(), faults.service_gate_probe())
+            state.cleanup.reserve(
+                faults.retirement_probe(),
+                faults.service_gate_probe(),
+                faults.numeric_operations_probe(),
+                faults.quarantine_observations_probe(),
+                faults.fail_reservation(),
+            )
         }
         #[cfg(not(test))]
         {
@@ -909,6 +1695,7 @@ fn run_map(
     .map_err(|e| SysError::io("reserve process cleanup", program, &e))?;
     // The monotonic deadline begins immediately before process creation.
     let started = Instant::now();
+    faults.note_spawn_operation();
     let child = command
         .spawn()
         .map_err(|e| SysError::io("spawn process", program, &e))?;
@@ -1101,6 +1888,7 @@ fn supervise(
     loop {
         let mut expired = timeout.is_some_and(|t| started.elapsed() >= t);
         if !driver.reaped {
+            faults.note_fault_operation();
             match driver.child_mut().try_wait() {
                 Ok(s) => {
                     if let Some(value) = s.as_ref() {
@@ -1415,6 +2203,7 @@ fn fail(
         ));
     } else if !driver.reaped {
         driver.termination_attempted = true;
+        faults.note_fault_operation();
         if let Err(e) = faults.kill(driver.child_mut()) {
             diagnostics.push(super::ProcessDiagnostic::new(
                 "kill child",
@@ -1538,6 +2327,7 @@ mod tests {
                 service_gate: None,
                 interrupt_polls_remaining: 0,
                 injected_poll_interrupts: None,
+                ..ExecutionFaults::default()
             });
             assert!(previous.is_none(), "an execution fault was already armed");
         });
@@ -1557,10 +2347,140 @@ mod tests {
                 service_gate: Some(Arc::clone(&service_gate)),
                 interrupt_polls_remaining: 0,
                 injected_poll_interrupts: None,
+                fail_cleanup_wait_echild_once: false,
+                fail_reservation_once: false,
+                numeric_operations: None,
+                ..ExecutionFaults::default()
             });
             assert!(previous.is_none(), "an execution fault was already armed");
         });
         (retired, service_gate)
+    }
+
+    fn fail_cleanup_wait_echild_for_next_execution() -> (
+        Arc<AtomicBool>,
+        Arc<AtomicBool>,
+        Arc<AtomicUsize>,
+        Arc<AtomicUsize>,
+    ) {
+        let retired = Arc::new(AtomicBool::new(false));
+        let service_gate = Arc::new(AtomicBool::new(false));
+        let numeric_operations = Arc::new(AtomicUsize::new(0));
+        let quarantine_observations = Arc::new(AtomicUsize::new(0));
+        NEXT_EXECUTION_FAULTS.with(|next| {
+            let previous = next.borrow_mut().replace(ExecutionFaults {
+                fail_cleanup_wait_echild_once: true,
+                retired: Some(Arc::clone(&retired)),
+                service_gate: Some(Arc::clone(&service_gate)),
+                numeric_operations: Some(Arc::clone(&numeric_operations)),
+                quarantine_observations: Some(Arc::clone(&quarantine_observations)),
+                ..ExecutionFaults::default()
+            });
+            assert!(previous.is_none(), "an execution fault was already armed");
+        });
+        (
+            retired,
+            service_gate,
+            numeric_operations,
+            quarantine_observations,
+        )
+    }
+
+    fn fail_reservation_for_next_execution() -> Arc<AtomicUsize> {
+        let spawn_operations = Arc::new(AtomicUsize::new(0));
+        NEXT_EXECUTION_FAULTS.with(|next| {
+            let previous = next.borrow_mut().replace(ExecutionFaults {
+                fail_reservation_once: true,
+                spawn_operations: Some(Arc::clone(&spawn_operations)),
+                ..ExecutionFaults::default()
+            });
+            assert!(previous.is_none(), "an execution fault was already armed");
+        });
+        spawn_operations
+    }
+
+    fn count_spawns_for_next_execution() -> Arc<AtomicUsize> {
+        let spawn_operations = Arc::new(AtomicUsize::new(0));
+        NEXT_EXECUTION_FAULTS.with(|next| {
+            let previous = next.borrow_mut().replace(ExecutionFaults {
+                spawn_operations: Some(Arc::clone(&spawn_operations)),
+                ..ExecutionFaults::default()
+            });
+            assert!(previous.is_none(), "an execution fault was already armed");
+        });
+        spawn_operations
+    }
+
+    #[test]
+    fn cleanup_service_reservation_failure_precedes_os_spawn() {
+        let fixture = FixtureDir::new();
+        let marker = fixture.0.join("spawned");
+        let spawn_operations = fail_reservation_for_next_execution();
+        let mut engine = Engine::new();
+        let package = SysPackage::new(SysConfig::default().programs(ProgramPolicy::Any)).unwrap();
+        package.register_into_engine(&mut engine);
+        let script = format!(
+            "run(\"/bin/sh\", [\"-c\", \"printf 'child-pid=%s content=x\\\\n' \\\"$$\\\" > \\\"$MARKER\\\"\"], #{{ env: #{{ \"MARKER\": {} }} }})",
+            quote_rhai(marker.to_str().unwrap())
+        );
+        let result = engine.eval::<crate::Dynamic>(&script);
+        if marker.exists() {
+            let child_pid = record_pid(&marker).unwrap();
+            wait_for_pid_reaped(child_pid);
+            println!(
+                "reserve-boundary child_pid={child_pid} reap=ESRCH marker={} spawn_entries={}",
+                marker.display(),
+                spawn_operations.load(Ordering::Acquire)
+            );
+            panic!("wrong-control OS child spawned before cleanup service reservation");
+        }
+        let error = result.expect_err("reservation fault must fail before OS spawn");
+        let sys_error = match error.as_ref() {
+            EvalAltResult::ErrorRuntime(value, _) => value.clone().try_cast::<SysError>().unwrap(),
+            other => panic!("expected SysError::Io, got {other:?}"),
+        };
+        match sys_error {
+            SysError::Io { op, message, .. } => {
+                assert_eq!(op, "reserve process cleanup");
+                assert!(message.contains("injected cleanup-service start failure"));
+            }
+            other => panic!("expected reservation error, got {other:?}"),
+        }
+        assert!(
+            !marker.exists(),
+            "OS child spawned before cleanup service reservation"
+        );
+        assert_eq!(spawn_operations.load(Ordering::Acquire), 0);
+        drop(engine);
+        drop(package);
+    }
+
+    #[test]
+    fn successful_execution_enters_os_spawn_seam() {
+        let fixture = FixtureDir::new();
+        let marker = fixture.0.join("spawned");
+        let spawn_operations = count_spawns_for_next_execution();
+        let mut engine = Engine::new();
+        let package = SysPackage::new(SysConfig::default().programs(ProgramPolicy::Any)).unwrap();
+        package.register_into_engine(&mut engine);
+        let script = format!(
+            "run(\"/bin/sh\", [\"-c\", \"printf 'child-pid=%s content=x\\\\n' \\\"$$\\\" > \\\"$MARKER\\\"\"], #{{ env: #{{ \"MARKER\": {} }} }})",
+            quote_rhai(marker.to_str().unwrap())
+        );
+        let result = engine.eval::<crate::Map>(&script).unwrap();
+        assert_eq!(map_int(&result, "code"), 0);
+        assert!(map_bool(&result, "success"));
+        let record = fs::read_to_string(&marker).unwrap();
+        assert!(record.contains("content=x"));
+        let child_pid = record_pid(&marker).unwrap();
+        wait_for_pid_reaped(child_pid);
+        assert_eq!(spawn_operations.load(Ordering::Acquire), 1);
+        println!(
+            "spawn-seam control child_pid={child_pid} reap=ESRCH marker={} spawn_entries=1 content=x",
+            marker.display(),
+        );
+        drop(engine);
+        drop(package);
     }
 
     fn fail_pipe_setup_for_next_execution(gate: PathBuf) -> Arc<AtomicBool> {
@@ -1575,6 +2495,10 @@ mod tests {
                 service_gate: None,
                 interrupt_polls_remaining: 0,
                 injected_poll_interrupts: None,
+                fail_cleanup_wait_echild_once: false,
+                fail_reservation_once: false,
+                numeric_operations: None,
+                ..ExecutionFaults::default()
             });
             assert!(previous.is_none(), "an execution fault was already armed");
         });
@@ -1594,6 +2518,10 @@ mod tests {
                 service_gate: None,
                 interrupt_polls_remaining: count,
                 injected_poll_interrupts: Some(Arc::clone(&observed)),
+                fail_cleanup_wait_echild_once: false,
+                fail_reservation_once: false,
+                numeric_operations: None,
+                ..ExecutionFaults::default()
             });
             assert!(previous.is_none(), "an execution fault was already armed");
         });
@@ -1634,7 +2562,7 @@ mod tests {
         let guard_retired = Arc::clone(&retired);
         let guard_gate = Arc::clone(&service_gate);
         let mut reservation = service
-            .reserve(Some(retired), Some(service_gate))
+            .reserve(Some(retired), Some(service_gate), None, None, false)
             .expect("reserve service fairness child");
         cleanup_guard.owners.push((guard_gate, guard_retired));
         let child = Command::new("/bin/sh")
@@ -1671,7 +2599,7 @@ mod tests {
         let pid_receipt = Arc::clone(&child_pid);
         let result = catch_unwind(AssertUnwindSafe(|| {
             let mut reservation = service
-                .reserve(Some(Arc::clone(&retired)), None)
+                .reserve(Some(Arc::clone(&retired)), None, None, None, false)
                 .expect("reserve direct child cleanup slot");
             let child = Command::new("/bin/sh")
                 .args(["-c", "exit 0"])
@@ -2294,6 +3222,176 @@ mod tests {
         }
         println!("retained-owner-wait child_pid={child_pid} reap=ESRCH");
         drop(error);
+        drop(sys_error);
+        drop(engine);
+        drop(package);
+    }
+
+    #[cfg(not(feature = "no_float"))]
+    #[test]
+    fn echild_quarantine_performs_no_later_numeric_child_operations() {
+        const CHILD_ROLE: &str = "RHAI_TEST_OWNER_ECHILD_CHILD_ROLE";
+        const TEST_NAME: &str = "packages::sys::process::unix::tests::echild_quarantine_performs_no_later_numeric_child_operations";
+
+        if std::env::var_os(CHILD_ROLE).is_some() {
+            run_inner_echild_quarantine_case();
+            return;
+        }
+
+        let fixture = FixtureDir::new();
+        let record = fixture.0.join("child-record");
+        let returned = fixture.0.join("public-returned");
+        let release = fixture.0.join("release.fifo");
+        create_fifo(&release);
+        let nested = Command::new(std::env::current_exe().unwrap())
+            .args(["--exact", TEST_NAME, "--nocapture"])
+            .env(CHILD_ROLE, "inner")
+            .env("RHAI_TEST_OWNER_RECORD", &record)
+            .env("RHAI_TEST_OWNER_RETURNED", &returned)
+            .env("RHAI_TEST_OWNER_RELEASE", &release)
+            .stdout(Stdio::inherit())
+            .stderr(Stdio::inherit())
+            .spawn()
+            .unwrap();
+        let mut nested = NestedTestChild {
+            child: nested,
+            release: release.clone(),
+            setup_gate: None,
+        };
+        let started = Instant::now();
+        let mut watchdog_released_fixture = false;
+        let status = loop {
+            if let Some(status) = nested.try_wait().unwrap() {
+                break status;
+            }
+            if started.elapsed() >= Duration::from_secs(3)
+                && !returned.exists()
+                && !watchdog_released_fixture
+            {
+                assert!(
+                    record.exists(),
+                    "nested test did not publish child readiness"
+                );
+                release_fifo(&release).unwrap();
+                watchdog_released_fixture = true;
+            }
+            if started.elapsed() >= Duration::from_secs(8) {
+                panic!("nested ECHILD quarantine test exceeded its external watchdog");
+            }
+            thread::sleep(Duration::from_millis(10));
+        };
+        if record.exists() {
+            let pid = record_pid(&record).unwrap();
+            println!(
+                "echild-quarantine child_record={} pid={pid}",
+                record.display()
+            );
+            wait_for_pid_reaped(pid);
+            println!("echild-quarantine child_pid={pid} reap=ESRCH");
+        }
+        assert!(
+            !watchdog_released_fixture,
+            "external watchdog had to release the child"
+        );
+        assert!(
+            status.success(),
+            "nested quarantine contract failed: {status}"
+        );
+    }
+
+    #[cfg(not(feature = "no_float"))]
+    fn run_inner_echild_quarantine_case() {
+        let record = PathBuf::from(std::env::var_os("RHAI_TEST_OWNER_RECORD").unwrap());
+        let returned = PathBuf::from(std::env::var_os("RHAI_TEST_OWNER_RETURNED").unwrap());
+        let release = PathBuf::from(std::env::var_os("RHAI_TEST_OWNER_RELEASE").unwrap());
+        let (retired, service_gate, numeric_operations, quarantine_observations) =
+            fail_cleanup_wait_echild_for_next_execution();
+        let mut engine = Engine::new();
+        let package = SysPackage::new(
+            SysConfig::default()
+                .programs(ProgramPolicy::Any)
+                .max_output(1024),
+        )
+        .unwrap();
+        package.register_into_engine(&mut engine);
+        let shell = format!(
+            "tmp=\"$RHAI_TEST_OWNER_RECORD.tmp\"; printf 'child-pid=%s child-ready=1\\n' \"$$\" > \"$tmp\"; mv \"$tmp\" \"$RHAI_TEST_OWNER_RECORD\"; IFS= read -r value < \"$RHAI_TEST_OWNER_RELEASE\""
+        );
+        let script = format!(
+            "run(\"/bin/sh\", #{{ stdin: {}, timeout: 0.1, max_output: 1024, env: #{{ \"RHAI_TEST_OWNER_RECORD\": {}, \"RHAI_TEST_OWNER_RELEASE\": {} }} }})",
+            quote_rhai(&shell),
+            quote_rhai(record.to_str().unwrap()),
+            quote_rhai(release.to_str().unwrap()),
+        );
+        let result = engine.eval::<crate::Map>(&script);
+        let marker_tmp = returned.with_extension("tmp");
+        fs::write(&marker_tmp, b"public-returned\n").unwrap();
+        fs::rename(&marker_tmp, &returned).unwrap();
+        let deadline = Instant::now() + Duration::from_secs(1);
+        let child_pid = loop {
+            if record.exists() {
+                break record_pid(&record).unwrap();
+            }
+            assert!(Instant::now() < deadline, "child readiness record missing");
+            thread::sleep(Duration::from_millis(5));
+        };
+        let error = result.expect_err("injected ECHILD must return incomplete process cleanup");
+        let sys_error = match error.as_ref() {
+            EvalAltResult::ErrorRuntime(value, _) => value.clone().try_cast::<SysError>().unwrap(),
+            other => panic!("expected SysError::Process, got {other:?}"),
+        };
+        let report = match &sys_error {
+            SysError::Process { cause, report } => {
+                assert!(matches!(cause, ProcessCause::Timeout(_)));
+                report.clone()
+            }
+            other => panic!("expected timeout process error, got {other:?}"),
+        };
+        assert!(!report.stdout_complete() && !report.stderr_complete());
+        assert!(
+            !report.timed_out(),
+            "the lost-custody report is not a completed timeout"
+        );
+        assert!(
+            report.cleanup_diagnostics().iter().any(|diagnostic| {
+                diagnostic.operation() == "reap child"
+                    && diagnostic.message().contains("custody was lost")
+            }),
+            "the injected ECHILD must be reported as lost child custody"
+        );
+        assert!(
+            !retired.load(Ordering::Acquire),
+            "quarantined owner was retired"
+        );
+        let operations_at_return = numeric_operations.load(Ordering::Acquire);
+        assert!(operations_at_return > 0, "no real owner seam was observed");
+        let quarantine_pass_at_return = quarantine_observations.load(Ordering::Acquire);
+        println!("echild-quarantine fault=deterministic-cleanup-wait-ECHILD");
+        service_gate.store(true, Ordering::Release);
+        let worker_pass_deadline = Instant::now() + Duration::from_secs(2);
+        while quarantine_observations.load(Ordering::Acquire) <= quarantine_pass_at_return {
+            assert!(
+                Instant::now() < worker_pass_deadline,
+                "cleanup worker did not acknowledge a post-quarantine traversal"
+            );
+            thread::sleep(Duration::from_millis(5));
+        }
+        println!(
+            "echild-quarantine worker_passes_before={quarantine_pass_at_return} after={}",
+            quarantine_observations.load(Ordering::Acquire)
+        );
+        assert_eq!(
+            numeric_operations.load(Ordering::Acquire),
+            operations_at_return,
+            "quarantined child received a later numeric wait or signal operation"
+        );
+        assert!(
+            !retired.load(Ordering::Acquire),
+            "quarantined owner was retired later"
+        );
+        println!(
+            "echild-quarantine child_pid={child_pid} operations={operations_at_return} owner=retained"
+        );
         drop(sys_error);
         drop(engine);
         drop(package);
