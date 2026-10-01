@@ -44,3 +44,20 @@ hashes matched fresh remote `sha256sum` and local frozen Git-object or configure
 helper bytes. Exact results: `workload-topology-stage-readback.json`. One native
 invocation authorized within the unchanged package; retain the stage for raw
 acceptance and cleanup review. No runtime outcome is accepted by this release.
+
+Attempt1 stopped at fixture compilation (E0308), with zero topology cases.
+The raw compiler result disproved the prior source gate's type assumption;
+no runtime requirement was accepted. Raw canonical export:
+`../process-rust-io-followup-evidence/topology-attempt1-20261001-071148UTC/`;
+all17 manifest entries and six ledger log hashes independently verified.
+
+Follow-up immutable source gate07:19UTC: range8f5430f4..60dc01eb,
+runtime archiveb7c725ccb3eeaa4dc9fd32e3df2cb18cd0242dd5,
+detached route60dc01eb118858eb2975169888c6528ef65be66e.
+All four OCR-selected paths reviewed, zero excluded/skipped, coverage100%.
+The only runtime correction is `write_all(b"1")` (one-byte slice);
+other changes give attempt2 its unique export/stage and archive parent.
+Three new commits have exact lowercase author and committer. No source finding
+remains in this correction range; no new build or runtime acceptance claimed.
+Release staging only, then independent fifteen-input hash comparison before
+exactly one finite attempt2 within unchanged safety limits and07:50 cutoff.

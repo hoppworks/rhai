@@ -1,0 +1,24 @@
+{
+  "driver": {
+    "parent_pid": 252316,
+    "parent_start_identity": [
+      1790355202,
+      48350532
+    ],
+    "pid": 252317,
+    "start_identity": [
+      1790355202,
+      48350534
+    ]
+  },
+  "runtime_path": "/tmp/agent-build-3ibjjmg2",
+  "sampler_children": "see sampler-children.json; PIDs captured from direct Popen handles and terminal outcomes recorded after communicate/reap",
+  "supervisor": {
+    "pgid": 252316,
+    "pid": 252316,
+    "start_identity": [
+      1790355202,
+      48350532
+    ]
+  }
+}

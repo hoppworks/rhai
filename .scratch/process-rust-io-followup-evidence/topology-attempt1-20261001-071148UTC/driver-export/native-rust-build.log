@@ -1,0 +1,18 @@
+    Updating crates.io index
+ Downloading crates ...
+  Downloaded memchr v2.8.3
+  Downloaded itoa v1.0.18
+  Downloaded serde_json v1.0.140
+  Downloaded ryu v1.0.23
+  Downloaded serde_core v1.0.229
+  Downloaded serde v1.0.229
+  Downloaded libc v0.2.171
+   Compiling serde_core v1.0.229
+   Compiling serde v1.0.229
+   Compiling serde_json v1.0.140
+   Compiling libc v0.2.171
+   Compiling memchr v2.8.3
+   Compiling ryu v1.0.23
+   Compiling itoa v1.0.18
+   Compiling process-rust-io-acceptance v0.1.0 (/tmp/agent-build-3ibjjmg2/private-source/process-rust-io)
+    Finished dev [unoptimized] target(s) in 2.43s

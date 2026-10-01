@@ -1,0 +1,4 @@
+launch_utc=2026-10-01T07:11:48Z
+launcher_pid=252305 launcher_pgid=252305
+remaining_seconds=600
+native acceptance stopped: RuntimeError('private operation fixture failed status=101 elapsed=0.042s')
