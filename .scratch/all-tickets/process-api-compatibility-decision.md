@@ -1,0 +1,30 @@
+# Process API compatibility decision
+
+Baseline: `182e321672c95e24eb418b85be918018d0a46e74`. This is a static API review; no process implementation, native proof, or production mechanism was changed or accepted.
+
+## Recommendation
+
+Add public `ProcessScope`, deriving `Debug, Clone, Copy, PartialEq, Eq, Hash` and `Default`, with `DirectChild` as the default and `Managed` as the other variant. Add a private `process_scope: ProcessScope` field to `SysConfig`, default it to `DirectChild`, and expose `const fn process_scope(self, scope: ProcessScope) -> Self`. This is additive to existing builder use and enforces the accepted host-selected scope without adding script authority to downgrade it.
+
+Keep every existing `SysError` variant and constructor shape. Add `Process { cause: ProcessCause, report: ProcessReport }`, where `ProcessCause` is a non-recursive owned enum with `Io { op: &'static str, target: String, kind: io::ErrorKind, message: String }`, `Timeout(String)`, and `OutputLimit(String)`. Cloneable, equality-comparable fields preserve the current `SysError` derives and allow storage in Rhai `Dynamic`. Use the primary cause for `kind`, `io_kind`, `op`, and `target`; format it with the existing `Io (...)`, `Timeout:`, or `OutputLimit:` display conventions. Add `process` as a getter returning `()` for all other variants and a cloned report for `Process`.
+
+Represent the report as a public, immutable-to-scripts `ProcessReport` custom type with private fields: raw stdout/stderr `Vec<u8>`, stdout/stderr capture-complete booleans, `Option<ProcessExit>`, timed-out boolean, and an ordered `Vec<ProcessDiagnostic>` for secondary cleanup failures. `ProcessExit` should distinguish `Code(i32)` from Unix `Signal(i32)`; `ProcessDiagnostic` should retain operation, optional I/O kind, and message. Register read-only getters for stdout/stderr bytes, lossy stdout/stderr text, each completeness flag, optional exit code/signal, timed-out, and cleanup diagnostics. Getters must copy/clone their result so script mutation cannot alter the stored snapshot or a later read. Keep report data as a snapshot only: cleanup ownership, child handles, workers, and reaping responsibility remain with the supervisor and are not represented as owned by the report.
+
+The new `Process` Rust variant intentionally changes the Rust-level variant used by future process errors, including spawn I/O, timeout, and output overflow. Callers matching old `Io`, `Timeout`, or `OutputLimit` variants will not see those future process failures in the old variants; callers constructing those variants remain source-compatible. The enum is already `#[non_exhaustive]`, which protects downstream exhaustive matches from additions, but does not protect construction of existing public variants from payload changes. Do not change those payloads. The Rhai-facing `kind` and I/O getters preserve the established classification for the new variant. Filesystem errors continue to use `SysError::Io`.
+
+## Feature and validation implications
+
+All additions stay behind `sys`; they add no dependency and preserve core Rust 1.66.0. The accepted `sys` MSRV remains 1.77.2. `ProcessScope` and report values use owned standard types and should remain `Send + Sync` under `sync`; verify both package construction and sharing a `Child` under that feature. `no_index` should only remove existing array-argument overloads as specified by the contract; scalar scope and report getters need no special path. `metadata` needs doc-comments on every registered getter and the new host API. `no_object` stays an explicit `compile_error!` incompatibility already enforced by `sys`; do not invent map/array fallbacks for reports. Existing no_std and wasm exclusions remain.
+
+Before accepting implementation, add Rust API compatibility checks that construct every existing `SysError` variant and assert its current getters/display, plus checks for `Process` cause classification, clone/equality, and scope defaults/building. Add Rhai tests that catch each process cause, inspect `kind`/`io_kind`/`op`/`target` and `process`, mutate returned blobs/collections, and confirm a subsequent read returns the unchanged snapshot. Check report behavior when exit is absent, on code and signal exits, incomplete capture, timeout, and multiple cleanup diagnostics. Compile/test the documented feature matrix including `sys`, `sys,sync,no_index`, `sys,metadata,serde`, `only_i32,no_float`, and negative `no_object`/`no_std`/wasm combinations at the specified MSRVs. These API checks do not replace the separately required strict native Linux/macOS/Windows process lifecycle proofs; those remain prerequisites to production mechanisms and release.
+
+## Sources and limits
+
+- `src/packages/sys/error.rs`: current non-exhaustive enum, public payloads, derives, display formatting, and script getters.
+- `src/packages/sys/config.rs`: current private configuration fields, `Default`, builder style, and clone/equality derives.
+- `src/packages/sys/mod.rs`: `sys` feature exclusions and error registration.
+- `docs/sys-package-plan.md`, decisions D4/D5/D8/D9/D10/D11 and process sections 3.3–3.4, 4.4–4.5: accepted process surface, error classification, MSRV, sync, and feature expectations.
+- `.scratch/stdlib-wayfinder/issues/03-process-contract.md`, resolution and answer: direct-child/managed semantics, report contents, immutable snapshots, and cleanup ownership.
+- `.scratch/stdlib-wayfinder/issues/06-compatibility-release.md` and `.scratch/all-tickets/release-proposal.md`: feature/MSRV/native proof gates and the intentionally new Rust process-error variant.
+
+This recommendation resolves representation and compatibility only. It does not select a process I/O/cancellation mechanism, establish behavior through tests, or waive any native proof gate.
