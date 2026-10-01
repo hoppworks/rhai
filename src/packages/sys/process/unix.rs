@@ -2577,7 +2577,9 @@ fn fail(
 #[cfg(test)]
 mod tests {
     use super::{read_ready, CleanupService, ExecutionFaults, ReadState};
-    use crate::packages::sys::{ProcessCause, ProgramPolicy, SysConfig, SysError, SysPackage};
+    use crate::packages::sys::{
+        ProcessCause, ProcessExit, ProgramPolicy, SysConfig, SysError, SysPackage,
+    };
     use crate::packages::Package;
     use crate::{Engine, EvalAltResult};
     use std::cell::RefCell;
@@ -2930,6 +2932,98 @@ mod tests {
             &registry.worker_done,
             Instant::now() + Duration::from_secs(1),
             "cleanup worker did not stop after unwind retirement",
+        );
+    }
+
+    #[test]
+    fn public_kill_on_drop_false_final_lease_retires_owner_and_worker() {
+        let mut engine = Engine::new();
+        let package = SysPackage::new(
+            SysConfig::default()
+                .programs(ProgramPolicy::Any)
+                .kill_on_drop(false),
+        )
+        .expect("create sys package with kill_on_drop disabled");
+        package.register_into_engine(&mut engine);
+
+        let value = engine
+            .eval::<crate::Dynamic>(
+                "spawn(\"/bin/sh\", [\"-c\", \"printf retained-output; sleep 0.2\"])",
+            )
+            .expect("public spawn with kill_on_drop disabled");
+        let child = value.cast::<super::ProcessChild>();
+        let registry = Arc::clone(&child.lease.registry);
+        let control = Arc::clone(&child.lease.control);
+        let (pid, terminal, kill_on_drop) = {
+            let snapshot = child
+                .lease
+                .control
+                .snapshot
+                .lock()
+                .unwrap_or_else(|poisoned| poisoned.into_inner());
+            (
+                snapshot.pid as i32,
+                snapshot.terminal,
+                snapshot.kill_on_drop,
+            )
+        };
+        assert!(pid > 0);
+        assert!(!terminal);
+        assert!(!kill_on_drop);
+        assert_eq!(registry.outstanding.load(Ordering::Acquire), 1);
+        // SAFETY: signal zero queries only the exact PID from the public Child snapshot.
+        assert_eq!(
+            unsafe { libc::kill(pid, 0) },
+            0,
+            "child must be live before final drop"
+        );
+
+        drop(child);
+        drop(engine);
+        drop(package);
+        let deadline = Instant::now() + Duration::from_secs(3);
+        while registry.outstanding.load(Ordering::Acquire) != 0 && Instant::now() < deadline {
+            thread::sleep(Duration::from_millis(5));
+        }
+        assert_eq!(
+            registry.outstanding.load(Ordering::Acquire),
+            0,
+            "false-policy owner slot was not retired"
+        );
+        assert!(
+            registry.records.lock().unwrap().is_empty(),
+            "false-policy owner record remains registered"
+        );
+        assert_pid_reaped(pid);
+        let worker_deadline = Instant::now() + Duration::from_secs(1);
+        while !registry.worker_done.load(Ordering::Acquire) && Instant::now() < worker_deadline {
+            thread::sleep(Duration::from_millis(5));
+        }
+        assert!(
+            registry.worker_done.load(Ordering::Acquire),
+            "cleanup worker did not stop after false-policy retirement"
+        );
+        let snapshot = control
+            .snapshot
+            .lock()
+            .unwrap_or_else(|poisoned| poisoned.into_inner());
+        assert!(
+            snapshot.terminal,
+            "retained child snapshot did not become terminal"
+        );
+        assert!(
+            snapshot.stdout_complete,
+            "retained child stdout was incomplete"
+        );
+        assert!(
+            snapshot.stderr_complete,
+            "retained child stderr was incomplete"
+        );
+        assert_eq!(snapshot.stdout, b"retained-output");
+        assert_eq!(snapshot.exit, Some(ProcessExit::Code(0)));
+        drop(snapshot);
+        eprintln!(
+            "false-policy-owner-retired pid={pid} slot_retired=true worker_done=true reap=ESRCH stdout=retained-output stdout_complete=true stderr_complete=true exit=Code(0)"
         );
     }
 
