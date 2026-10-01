@@ -453,6 +453,10 @@ struct ExecutionFaults {
     #[cfg(test)]
     fail_cleanup_wait_once: bool,
     #[cfg(test)]
+    fail_configure_pipe_once: bool,
+    #[cfg(test)]
+    configure_pipe_gate: Option<std::path::PathBuf>,
+    #[cfg(test)]
     retired: Option<std::sync::Arc<std::sync::atomic::AtomicBool>>,
     #[cfg(test)]
     service_gate: Option<std::sync::Arc<std::sync::atomic::AtomicBool>>,
@@ -506,6 +510,32 @@ impl ExecutionFaults {
             ));
         }
         child.try_wait()
+    }
+
+    fn configure_pipe(&mut self, fd: RawFd) -> io::Result<()> {
+        #[cfg(test)]
+        if self.fail_configure_pipe_once {
+            self.fail_configure_pipe_once = false;
+            let gate = self
+                .configure_pipe_gate
+                .take()
+                .expect("test setup fault must have a release gate");
+            let deadline = std::time::Instant::now() + std::time::Duration::from_secs(5);
+            while !gate.exists() {
+                if std::time::Instant::now() >= deadline {
+                    return Err(io::Error::new(
+                        io::ErrorKind::TimedOut,
+                        "fixture did not release injected pipe-configuration failure",
+                    ));
+                }
+                std::thread::sleep(std::time::Duration::from_millis(5));
+            }
+            return Err(io::Error::new(
+                io::ErrorKind::Other,
+                "injected post-spawn pipe configuration failure",
+            ));
+        }
+        set_nonblock(fd)
     }
 }
 
@@ -1023,7 +1053,7 @@ fn supervise(
     let errfd = stderr.as_ref().unwrap().as_raw_fd();
     let infd = stdin.as_ref().map(AsRawFd::as_raw_fd);
     for fd in [Some(outfd), Some(errfd), infd].into_iter().flatten() {
-        if let Err(e) = set_nonblock(fd) {
+        if let Err(e) = faults.configure_pipe(fd) {
             return fail(
                 &mut driver,
                 &mut stdin,
@@ -1458,6 +1488,8 @@ mod tests {
             let previous = next.borrow_mut().replace(ExecutionFaults {
                 refuse_kill_once: true,
                 fail_cleanup_wait_once: false,
+                fail_configure_pipe_once: false,
+                configure_pipe_gate: None,
                 retired: Some(Arc::clone(&retired)),
                 service_gate: None,
             });
@@ -1473,12 +1505,30 @@ mod tests {
             let previous = next.borrow_mut().replace(ExecutionFaults {
                 refuse_kill_once: false,
                 fail_cleanup_wait_once: true,
+                fail_configure_pipe_once: false,
+                configure_pipe_gate: None,
                 retired: Some(Arc::clone(&retired)),
                 service_gate: Some(Arc::clone(&service_gate)),
             });
             assert!(previous.is_none(), "an execution fault was already armed");
         });
         (retired, service_gate)
+    }
+
+    fn fail_pipe_setup_for_next_execution(gate: PathBuf) -> Arc<AtomicBool> {
+        let retired = Arc::new(AtomicBool::new(false));
+        NEXT_EXECUTION_FAULTS.with(|next| {
+            let previous = next.borrow_mut().replace(ExecutionFaults {
+                refuse_kill_once: false,
+                fail_cleanup_wait_once: false,
+                fail_configure_pipe_once: true,
+                configure_pipe_gate: Some(gate),
+                retired: Some(Arc::clone(&retired)),
+                service_gate: None,
+            });
+            assert!(previous.is_none(), "an execution fault was already armed");
+        });
+        retired
     }
 
     struct AlwaysReadyReader;
@@ -1530,6 +1580,7 @@ mod tests {
     struct NestedTestChild {
         child: Child,
         release: PathBuf,
+        setup_gate: Option<PathBuf>,
     }
 
     impl NestedTestChild {
@@ -1541,6 +1592,9 @@ mod tests {
     impl Drop for NestedTestChild {
         fn drop(&mut self) {
             // Always unblock the shell fixture before terminating the exact nested test process.
+            if let Some(gate) = &self.setup_gate {
+                let _ = fs::write(gate, b"release\n");
+            }
             let _ = release_fifo(&self.release);
             let deadline = Instant::now() + Duration::from_secs(1);
             loop {
@@ -1877,6 +1931,7 @@ mod tests {
         let mut nested = NestedTestChild {
             child: nested,
             release: release.clone(),
+            setup_gate: None,
         };
         let started = Instant::now();
         let mut watchdog_released_fixture = false;
@@ -1921,6 +1976,153 @@ mod tests {
         );
     }
 
+    fn run_inner_pipe_setup_failure_case() {
+        let record = PathBuf::from(std::env::var_os("RHAI_TEST_OWNER_RECORD").unwrap());
+        let release = PathBuf::from(std::env::var_os("RHAI_TEST_OWNER_RELEASE").unwrap());
+        let setup_gate = PathBuf::from(std::env::var_os("RHAI_TEST_OWNER_SETUP_GATE").unwrap());
+        let retired = fail_pipe_setup_for_next_execution(setup_gate);
+        let mut engine = Engine::new();
+        let package = SysPackage::new(
+            SysConfig::default()
+                .programs(ProgramPolicy::Any)
+                .max_output(1024),
+        )
+        .unwrap();
+        package.register_into_engine(&mut engine);
+
+        let shell = format!(
+            "tmp=\"$RHAI_TEST_OWNER_RECORD.tmp\"; printf 'child-pid=%s child-ready=1\\n' \"$$\" > \"$tmp\"; mv \"$tmp\" \"$RHAI_TEST_OWNER_RECORD\"; IFS= read -r value < \"$RHAI_TEST_OWNER_RELEASE\""
+        );
+        let script = format!(
+            "run(\"/bin/sh\", [\"-c\", {}], #{{ env: #{{ \"RHAI_TEST_OWNER_RECORD\": {}, \"RHAI_TEST_OWNER_RELEASE\": {} }} }})",
+            quote_rhai(&shell),
+            quote_rhai(record.to_str().unwrap()),
+            quote_rhai(release.to_str().unwrap()),
+        );
+        let result = engine.eval::<crate::Map>(&script);
+        let error = result.expect_err("injected post-spawn setup failure must remain catchable");
+        let sys_error = match error.as_ref() {
+            EvalAltResult::ErrorRuntime(value, _) => value.clone().try_cast::<SysError>().unwrap(),
+            other => panic!("expected SysError::Process, got {other:?}"),
+        };
+        let (cause_is_configure_io, report_incomplete) = match &sys_error {
+            SysError::Process { cause, report } => (
+                matches!(
+                    cause,
+                    ProcessCause::Io {
+                        op: "configure process pipe",
+                        kind: io::ErrorKind::Other,
+                        message,
+                        ..
+                    } if message == "injected post-spawn pipe configuration failure"
+                ),
+                !report.timed_out()
+                    && !report.stdout_complete()
+                    && !report.stderr_complete()
+                    && report.stdout_bytes().is_empty()
+                    && report.stderr_bytes().is_empty(),
+            ),
+            other => panic!("expected process setup error, got {other:?}"),
+        };
+        assert!(
+            retired.load(Ordering::Acquire),
+            "setup-failed owner did not retire after the child was reaped"
+        );
+        let record_deadline = Instant::now() + Duration::from_secs(1);
+        let child_pid = loop {
+            if record.exists() {
+                break record_pid(&record).unwrap();
+            }
+            assert!(
+                Instant::now() < record_deadline,
+                "setup-failed child readiness record missing"
+            );
+            thread::sleep(Duration::from_millis(5));
+        };
+        assert_pid_reaped(child_pid);
+        println!("setup-failure child_pid={child_pid} reap=ESRCH owner_retired=true");
+        drop(error);
+        drop(sys_error);
+        drop(engine);
+        drop(package);
+        assert!(
+            cause_is_configure_io,
+            "primary cause must remain configure-pipe Io"
+        );
+        assert!(
+            report_incomplete,
+            "setup failure must not fabricate EOF or timeout completion"
+        );
+    }
+
+    #[test]
+    fn post_spawn_pipe_setup_failure_preserves_cause_and_reaps_child() {
+        const CHILD_ROLE: &str = "RHAI_TEST_OWNER_SETUP_CHILD_ROLE";
+        const TEST_NAME: &str = "packages::sys::process::unix::tests::post_spawn_pipe_setup_failure_preserves_cause_and_reaps_child";
+
+        if std::env::var_os(CHILD_ROLE).is_some() {
+            run_inner_pipe_setup_failure_case();
+            return;
+        }
+
+        let fixture = FixtureDir::new();
+        let record = fixture.0.join("child-record");
+        let release = fixture.0.join("release.fifo");
+        let setup_gate = fixture.0.join("allow-setup-failure");
+        create_fifo(&release);
+        let nested = Command::new(std::env::current_exe().unwrap())
+            .args(["--exact", TEST_NAME, "--nocapture"])
+            .env(CHILD_ROLE, "inner")
+            .env("RHAI_TEST_OWNER_RECORD", &record)
+            .env("RHAI_TEST_OWNER_RELEASE", &release)
+            .env("RHAI_TEST_OWNER_SETUP_GATE", &setup_gate)
+            .stdout(Stdio::inherit())
+            .stderr(Stdio::inherit())
+            .spawn()
+            .unwrap();
+        let mut nested = NestedTestChild {
+            child: nested,
+            release: release.clone(),
+            setup_gate: Some(setup_gate.clone()),
+        };
+        let started = Instant::now();
+        let record_deadline = started + Duration::from_secs(3);
+        while !record.exists() {
+            if let Some(status) = nested.try_wait().unwrap() {
+                panic!("nested setup-failure test exited before child readiness: {status}");
+            }
+            assert!(
+                Instant::now() < record_deadline,
+                "nested setup-failure child readiness watchdog expired"
+            );
+            thread::sleep(Duration::from_millis(10));
+        }
+        let child_pid = record_pid(&record).unwrap();
+        assert_pid_alive(child_pid);
+        fs::write(&setup_gate, b"allow\n").unwrap();
+        let setup_release_started = Instant::now();
+        let status = loop {
+            if let Some(status) = nested.try_wait().unwrap() {
+                break status;
+            }
+            assert!(
+                started.elapsed() < Duration::from_secs(8),
+                "nested setup-failure test exceeded its external watchdog"
+            );
+            thread::sleep(Duration::from_millis(10));
+        };
+        assert!(
+            setup_release_started.elapsed() < Duration::from_secs(2),
+            "public run did not return boundedly after setup failure was released"
+        );
+        wait_for_pid_reaped(child_pid);
+        println!("setup-failure fixture child_pid={child_pid} reap=ESRCH");
+        assert!(
+            status.success(),
+            "nested setup-failure test failed: {status}"
+        );
+    }
+
     #[cfg(not(feature = "no_float"))]
     #[test]
     fn kill_refusal_returns_boundedly_and_retains_real_child_after_package_drop() {
@@ -1950,6 +2152,7 @@ mod tests {
         let mut nested = NestedTestChild {
             child: nested,
             release: release.clone(),
+            setup_gate: None,
         };
         let started = Instant::now();
         let mut watchdog_released_fixture = false;
