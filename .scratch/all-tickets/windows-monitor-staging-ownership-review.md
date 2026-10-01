@@ -155,3 +155,15 @@ The same owner worker observes exact root exit and preserves a signaled exit cod
 Source fixtures now drive the shared production cleanup algorithm through scripted operations. Root corrected a real schedule mismatch:500ms left means five100ms sleeps/queries, with no query at deadline. Failure assertions match their specific nested diagnostics, so null allocation cannot make them pass for an unrelated reason. Custody fixture supplies actual allocation identities and checks owner/identity mismatch without using a valid proof to remove runtime data.
 
 Static checkpoint only: no compilation, executed fixture, Windows kernel operation or native strict proof. Simulated operations do not establish native membership, handle release or cleanup. Outcome finalization, saved/exported evidence and runtime removal remain incomplete and uninvoked. Next source route retains exact worker/allocation ownership and implements bounded local evidence finalization before any exact-proof removal. No native/bootstrap scope or resource limit changed.
+
+## Outcome metadata source gate — 2026-10-01
+
+All five changed paths independently read, hashes matched, diff check passed. This is a source-only checkpoint, not executed or native acceptance. Metadata explicitly distinguishes saved metadata from unsaved payload artifacts; neither exact closure alone nor the metadata receipt can authorize production removal. Receipt creation checks privately recorded outcome, proof, identity and deadline; repeat-call mismatches reject. Fixture-only NoPayload capability remains separate. Fixtures cover truthful flags, changed exit/supervision/deadline, foreign receipt, specific pending-artifact refusal and retained files, pre-append expiry and injected append failure. None ran.
+
+- .scratch/windows-monitor-job-owner/coordinator-state.md: 70d40afac6e1334fd6cfef2ed4e644daffffd849488f03320bf3f2e631e70010
+- tools/windows-scoped-runner/MonitorStagingHandoff.cs: 4123b6321e0b0146acf76bbef237cc61cfa19a57cc390636f66b717cc88847ce
+- tools/windows-scoped-runner/README.md: 753e58b8df6f9fb5240c47c10851af737c16eb60765222f184a39a6faad9fdcd
+- tools/windows-scoped-runner/WindowsCustodyBackend.cs: 7ccee601fdf73da4f91b6057f3de037887adc61516661eafbd63acee44beaba3
+- tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs: 9e3e3ed3f1c2655cb74bc0c109d61a2c0ac77b700d7cb5e2b072f8922a33e5fc
+
+Immutable6152e24677b8202cd6ba354cc0a91c3fe377cc8b independently read back on https://github.com/hoppworks/rhai.git task/windows-scoped-runner, author/committer both hoppworks <daniel@hoppworks.de>; all five immutable hashes match. Next required behavior is actual bounded payload logs/results/manifest capture outside runtime, independent readback and allocation-bound finalization authority. Preserve failure diagnostics too: current cleanup-failure path bypasses outcome append. No removal execution, compiler/native/bootstrap launch, new Expert chain or resource-cap change authorized by this gate.
