@@ -1,0 +1,738 @@
+{
+  "binaries": [
+    {
+      "binary_sha256": "6c89d7a8fde95cf64d542f324633378e305d033c76616e1ea48104a297a95881",
+      "manifest": "process-rust-io/Cargo.toml"
+    },
+    {
+      "binary_sha256": "1b1b1337841f1ae7f84938bcd262a9e4aa67f707611c9018dba2a4971ffd282a",
+      "manifest": "process-prototype/Cargo.toml"
+    }
+  ],
+  "builds": [
+    {
+      "log": "native-rust-build.log",
+      "log_sha256": "b5160b73d9908e100eb893a14785ba645cb659e5ceb562ca4a88260925603088",
+      "name": "native-rust",
+      "output_complete": true,
+      "pid": 62781,
+      "seconds": 2.721,
+      "start_identity": [
+        1790834080,
+        453810
+      ],
+      "status": 0,
+      "stop_reason": null,
+      "timed_out": false
+    },
+    {
+      "log": "fixture-build.log",
+      "log_sha256": "bbe9cb843dc74c5f2cc34a2482de426bf65ab83fb80696d6d30bcbcc97c8e983",
+      "name": "fixture",
+      "output_complete": true,
+      "pid": 62863,
+      "seconds": 0.14,
+      "start_identity": [
+        1790834083,
+        189033
+      ],
+      "status": 0,
+      "stop_reason": null,
+      "timed_out": false
+    }
+  ],
+  "case_order": [
+    "stdout-4096-4096",
+    "stdout-4096-4097",
+    "stdout-0-0",
+    "stdout-0-1",
+    "stderr-4096-4096",
+    "stderr-4096-4097",
+    "stderr-0-0",
+    "stderr-0-1"
+  ],
+  "cases": [
+    {
+      "control": "stdout-4096-4096",
+      "finalizer": "finalizer-stdout-4096-4096.json",
+      "finalizer_sha256": "18c030ef13ab04621bc0e963ec1884219cdffb0110294177e6ad8eba79873669",
+      "index": 1,
+      "receipt": "custodian-62869-stdout-4096-4096.json",
+      "seconds": 0.443,
+      "sha256": "9b9ee49906326f72540c0eacf33ad3783d05f5d90c2e62689aeaf2755c9a4fea"
+    },
+    {
+      "control": "stdout-4096-4097",
+      "finalizer": "finalizer-stdout-4096-4097.json",
+      "finalizer_sha256": "c827c27b4730e557072650a2bc3f9179da3dd7accbb86c674a7395b01b8e30b0",
+      "index": 2,
+      "receipt": "custodian-62877-stdout-4096-4097.json",
+      "seconds": 0.186,
+      "sha256": "3049b375e1de2122daf197844e33617e8fd14ac426f9c944dddd3713631994e6"
+    },
+    {
+      "control": "stdout-0-0",
+      "finalizer": "finalizer-stdout-0-0.json",
+      "finalizer_sha256": "ad35b4c2a8e0f38b377e422b99754262054ae4be88511c13a9f3a5445c492b44",
+      "index": 3,
+      "receipt": "custodian-62885-stdout-0-0.json",
+      "seconds": 0.176,
+      "sha256": "c497493f273423b46b0e1d10f6a972d66d7b8fc63ced0e6e597f2d07e1c70db0"
+    },
+    {
+      "control": "stdout-0-1",
+      "finalizer": "finalizer-stdout-0-1.json",
+      "finalizer_sha256": "61186dc291a1aec6f3bfcc981c0c7f8f586c657b029b5d97f91dfab72df3a0c3",
+      "index": 4,
+      "receipt": "custodian-62892-stdout-0-1.json",
+      "seconds": 0.184,
+      "sha256": "fb686a14cdf64be5416945496e1b820a44d303dff10d7b0e0ebec6ca2192fd7c"
+    },
+    {
+      "control": "stderr-4096-4096",
+      "finalizer": "finalizer-stderr-4096-4096.json",
+      "finalizer_sha256": "4c7d6d0b2795b95c0d1929a64aee5e9c2da1d0b8d9a71eb71c4a12360e6bfe26",
+      "index": 5,
+      "receipt": "custodian-62900-stderr-4096-4096.json",
+      "seconds": 0.188,
+      "sha256": "648f711a2fb25abb6fb0f006d75f49f529c8890297b4ceab969a13e1550ff14e"
+    },
+    {
+      "control": "stderr-4096-4097",
+      "finalizer": "finalizer-stderr-4096-4097.json",
+      "finalizer_sha256": "c213d34e53655ed8bcecf552c0d9c452e5829b6de46d0237644cbe2a3e0d9960",
+      "index": 6,
+      "receipt": "custodian-62906-stderr-4096-4097.json",
+      "seconds": 0.183,
+      "sha256": "e19ca3d78a08015d7a139e2bec247c2f5e7e599ec10dfa5fe27b222662c193cb"
+    },
+    {
+      "control": "stderr-0-0",
+      "finalizer": "finalizer-stderr-0-0.json",
+      "finalizer_sha256": "85d6e783998ccc6239f099579933bab374cd7741c5d811c031ed834b2c500e16",
+      "index": 7,
+      "receipt": "custodian-62914-stderr-0-0.json",
+      "seconds": 0.18,
+      "sha256": "59f6517ab038b196c94ce918b08497dc8ab149d0791374aeeb87380f77a1fbc9"
+    },
+    {
+      "control": "stderr-0-1",
+      "finalizer": "finalizer-stderr-0-1.json",
+      "finalizer_sha256": "40b878a0d753e0bacc0579bc06016978b2f4b7689b12c46170a0f776905a3957",
+      "index": 8,
+      "receipt": "custodian-62921-stderr-0-1.json",
+      "seconds": 0.178,
+      "sha256": "c5a1da25980b4d6280d45ec7aed8d0f50ac43b7485208d54f643ff53a122b1b8"
+    }
+  ],
+  "driver": {
+    "parent_pid": 62779,
+    "parent_start_identity": [
+      1790834080,
+      367360
+    ],
+    "pid": 62780,
+    "start_identity": [
+      1790834080,
+      395531
+    ]
+  },
+  "limits": {
+    "build_seconds": 300.0,
+    "cargo_jobs": 2,
+    "case_seconds": 45.0,
+    "export_reserve_seconds": 10.0,
+    "invocation_seconds": 600.0,
+    "owned_fixture_process_bound": 7,
+    "owned_fixture_process_limit": 8,
+    "owned_fixture_process_scope": "controller + custodian + runner + leader + anchor + sentinel + optional holder; driver/supervisor excluded",
+    "private_bytes": 1073741824,
+    "process_peak_method": "sampled owned PID/PPID/PGID/lstart graph; sampled maximum only, no continuous-peak claim",
+    "process_resources": 8,
+    "rust_fd_method": "RLIMIT_NOFILE=32 enforced in Rust; three worker handles checked at native_done",
+    "rust_fds": 32,
+    "rust_workers": 3,
+    "sampler": "one live ps/storage sampler at a time, every 250ms; fixture and sampler bound <=8",
+    "sampler_process_bound": 1,
+    "stream_bytes": 2097152
+  },
+  "resource_samples": [
+    {
+      "elapsed_seconds": 0.0151,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:54:40 2026",
+          "pgid": 62779,
+          "pid": 62781,
+          "ppid": 62780
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "build:native-rust",
+      "private_bytes": 145537,
+      "process_limit": 8,
+      "sampler_pid": 62782,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0173,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:54:40 2026",
+          "pgid": 62779,
+          "pid": 62781,
+          "ppid": 62780
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "build:native-rust",
+      "private_bytes": 145790,
+      "process_limit": 8,
+      "sampler_pid": 62787,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0153,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:54:40 2026",
+          "pgid": 62779,
+          "pid": 62781,
+          "ppid": 62780
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "build:native-rust",
+      "private_bytes": 1814782,
+      "process_limit": 8,
+      "sampler_pid": 62789,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0248,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:54:40 2026",
+          "pgid": 62779,
+          "pid": 62781,
+          "ppid": 62780
+        },
+        {
+          "lstart": "Thu Oct  1 07:54:41 2026",
+          "pgid": 62779,
+          "pid": 62790,
+          "ppid": 62781
+        },
+        {
+          "lstart": "Thu Oct  1 07:54:41 2026",
+          "pgid": 62779,
+          "pid": 62791,
+          "ppid": 62781
+        }
+      ],
+      "owned_processes_including_sampler": 4,
+      "phase": "build:native-rust",
+      "private_bytes": 9987571,
+      "process_limit": 8,
+      "sampler_pid": 62792,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0258,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:54:40 2026",
+          "pgid": 62779,
+          "pid": 62781,
+          "ppid": 62780
+        },
+        {
+          "lstart": "Thu Oct  1 07:54:41 2026",
+          "pgid": 62779,
+          "pid": 62790,
+          "ppid": 62781
+        },
+        {
+          "lstart": "Thu Oct  1 07:54:41 2026",
+          "pgid": 62779,
+          "pid": 62791,
+          "ppid": 62781
+        },
+        {
+          "lstart": "Thu Oct  1 07:54:41 2026",
+          "pgid": 62779,
+          "pid": 62793,
+          "ppid": 62790
+        },
+        {
+          "lstart": "Thu Oct  1 07:54:41 2026",
+          "pgid": 62779,
+          "pid": 62794,
+          "ppid": 62791
+        },
+        {
+          "lstart": "Thu Oct  1 07:54:41 2026",
+          "pgid": 62779,
+          "pid": 62797,
+          "ppid": 62794
+        },
+        {
+          "lstart": "Thu Oct  1 07:54:41 2026",
+          "pgid": 62779,
+          "pid": 62798,
+          "ppid": 62793
+        }
+      ],
+      "owned_processes_including_sampler": 8,
+      "phase": "build:native-rust",
+      "private_bytes": 10240315,
+      "process_limit": 8,
+      "sampler_pid": 62799,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0385,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:54:40 2026",
+          "pgid": 62779,
+          "pid": 62781,
+          "ppid": 62780
+        },
+        {
+          "lstart": "Thu Oct  1 07:54:41 2026",
+          "pgid": 62779,
+          "pid": 62802,
+          "ppid": 62781
+        },
+        {
+          "lstart": "Thu Oct  1 07:54:41 2026",
+          "pgid": 62779,
+          "pid": 62803,
+          "ppid": 62781
+        }
+      ],
+      "owned_processes_including_sampler": 4,
+      "phase": "build:native-rust",
+      "private_bytes": 12100034,
+      "process_limit": 8,
+      "sampler_pid": 62804,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0259,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:54:40 2026",
+          "pgid": 62779,
+          "pid": 62781,
+          "ppid": 62780
+        },
+        {
+          "lstart": "Thu Oct  1 07:54:41 2026",
+          "pgid": 62779,
+          "pid": 62807,
+          "ppid": 62781
+        },
+        {
+          "lstart": "Thu Oct  1 07:54:41 2026",
+          "pgid": 62779,
+          "pid": 62816,
+          "ppid": 62781
+        }
+      ],
+      "owned_processes_including_sampler": 4,
+      "phase": "build:native-rust",
+      "private_bytes": 14040948,
+      "process_limit": 8,
+      "sampler_pid": 62817,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.025,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:54:40 2026",
+          "pgid": 62779,
+          "pid": 62781,
+          "ppid": 62780
+        },
+        {
+          "lstart": "Thu Oct  1 07:54:41 2026",
+          "pgid": 62779,
+          "pid": 62807,
+          "ppid": 62781
+        },
+        {
+          "lstart": "Thu Oct  1 07:54:42 2026",
+          "pgid": 62779,
+          "pid": 62850,
+          "ppid": 62781
+        }
+      ],
+      "owned_processes_including_sampler": 4,
+      "phase": "build:native-rust",
+      "private_bytes": 14043303,
+      "process_limit": 8,
+      "sampler_pid": 62849,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0346,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:54:40 2026",
+          "pgid": 62779,
+          "pid": 62781,
+          "ppid": 62780
+        },
+        {
+          "lstart": "Thu Oct  1 07:54:42 2026",
+          "pgid": 62779,
+          "pid": 62852,
+          "ppid": 62781
+        },
+        {
+          "lstart": "Thu Oct  1 07:54:42 2026",
+          "pgid": 62779,
+          "pid": 62853,
+          "ppid": 62781
+        }
+      ],
+      "owned_processes_including_sampler": 4,
+      "phase": "build:native-rust",
+      "private_bytes": 25985339,
+      "process_limit": 8,
+      "sampler_pid": 62854,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0269,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:54:40 2026",
+          "pgid": 62779,
+          "pid": 62781,
+          "ppid": 62780
+        },
+        {
+          "lstart": "Thu Oct  1 07:54:42 2026",
+          "pgid": 62779,
+          "pid": 62856,
+          "ppid": 62781
+        }
+      ],
+      "owned_processes_including_sampler": 3,
+      "phase": "build:native-rust",
+      "private_bytes": 31165129,
+      "process_limit": 8,
+      "sampler_pid": 62857,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0273,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:54:40 2026",
+          "pgid": 62779,
+          "pid": 62781,
+          "ppid": 62780
+        },
+        {
+          "lstart": "Thu Oct  1 07:54:42 2026",
+          "pgid": 62779,
+          "pid": 62858,
+          "ppid": 62781
+        }
+      ],
+      "owned_processes_including_sampler": 3,
+      "phase": "build:native-rust",
+      "private_bytes": 34705753,
+      "process_limit": 8,
+      "sampler_pid": 62859,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0264,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:54:43 2026",
+          "pgid": 62779,
+          "pid": 62863,
+          "ppid": 62780
+        },
+        {
+          "lstart": "Thu Oct  1 07:54:43 2026",
+          "pgid": 62779,
+          "pid": 62864,
+          "ppid": 62863
+        }
+      ],
+      "owned_processes_including_sampler": 3,
+      "phase": "build:fixture",
+      "private_bytes": 37466034,
+      "process_limit": 8,
+      "sampler_pid": 62865,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0249,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:54:43 2026",
+          "pgid": 62869,
+          "pid": 62869,
+          "ppid": 62780
+        },
+        {
+          "lstart": "Thu Oct  1 07:54:43 2026",
+          "pgid": 62870,
+          "pid": 62870,
+          "ppid": 62869
+        }
+      ],
+      "owned_processes_including_sampler": 4,
+      "phase": "case:stdout-4096-4096",
+      "private_bytes": 38836304,
+      "process_limit": 8,
+      "sampler_pid": 62871,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0248,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:54:43 2026",
+          "pgid": 62869,
+          "pid": 62869,
+          "ppid": 62780
+        },
+        {
+          "lstart": "Thu Oct  1 07:54:43 2026",
+          "pgid": 62870,
+          "pid": 62870,
+          "ppid": 62869
+        },
+        {
+          "lstart": "Thu Oct  1 07:54:43 2026",
+          "pgid": 62872,
+          "pid": 62872,
+          "ppid": 62869
+        },
+        {
+          "lstart": "Thu Oct  1 07:54:43 2026",
+          "pgid": 62872,
+          "pid": 62873,
+          "ppid": 62869
+        }
+      ],
+      "owned_processes_including_sampler": 6,
+      "phase": "case:stdout-4096-4096",
+      "private_bytes": 38836304,
+      "process_limit": 8,
+      "sampler_pid": 62874,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0268,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:54:43 2026",
+          "pgid": 62877,
+          "pid": 62877,
+          "ppid": 62780
+        }
+      ],
+      "owned_processes_including_sampler": 3,
+      "phase": "case:stdout-4096-4097",
+      "private_bytes": 38893641,
+      "process_limit": 8,
+      "sampler_pid": 62883,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0404,
+      "owned_process_identities": [],
+      "owned_processes_including_sampler": 2,
+      "phase": "case:stdout-0-0",
+      "private_bytes": 38877089,
+      "process_limit": 8,
+      "sampler_pid": 62891,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0285,
+      "owned_process_identities": [],
+      "owned_processes_including_sampler": 2,
+      "phase": "case:stdout-0-1",
+      "private_bytes": 38879845,
+      "process_limit": 8,
+      "sampler_pid": 62899,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0253,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:54:44 2026",
+          "pgid": 62906,
+          "pid": 62906,
+          "ppid": 62780
+        }
+      ],
+      "owned_processes_including_sampler": 3,
+      "phase": "case:stderr-4096-4097",
+      "private_bytes": 38898860,
+      "process_limit": 8,
+      "sampler_pid": 62907,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0243,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:54:44 2026",
+          "pgid": 62914,
+          "pid": 62914,
+          "ppid": 62780
+        }
+      ],
+      "owned_processes_including_sampler": 3,
+      "phase": "case:stderr-0-0",
+      "private_bytes": 38918021,
+      "process_limit": 8,
+      "sampler_pid": 62915,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0313,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:54:45 2026",
+          "pgid": 62921,
+          "pid": 62921,
+          "ppid": 62780
+        }
+      ],
+      "owned_processes_including_sampler": 3,
+      "phase": "case:stderr-0-1",
+      "private_bytes": 38920704,
+      "process_limit": 8,
+      "sampler_pid": 62922,
+      "storage_retry_used": false
+    }
+  ],
+  "sampled_private_bytes_max": 38920704,
+  "sampled_process_max": 8,
+  "sampler_failure": null,
+  "storage_observations": [
+    {
+      "bytes": 37464104,
+      "limit_bytes": 1073741824,
+      "phase": "after-native-build",
+      "retry_used": false
+    },
+    {
+      "bytes": 38836304,
+      "limit_bytes": 1073741824,
+      "phase": "after-fixture-build",
+      "retry_used": false
+    },
+    {
+      "bytes": 38836304,
+      "limit_bytes": 1073741824,
+      "phase": "before-stdout-4096-4096",
+      "retry_used": false
+    },
+    {
+      "bytes": 38855319,
+      "limit_bytes": 1073741824,
+      "phase": "after-stdout-4096-4096",
+      "retry_used": false
+    },
+    {
+      "bytes": 38855319,
+      "limit_bytes": 1073741824,
+      "phase": "before-stdout-4096-4097",
+      "retry_used": false
+    },
+    {
+      "bytes": 38874480,
+      "limit_bytes": 1073741824,
+      "phase": "after-stdout-4096-4097",
+      "retry_used": false
+    },
+    {
+      "bytes": 38874480,
+      "limit_bytes": 1073741824,
+      "phase": "before-stdout-0-0",
+      "retry_used": false
+    },
+    {
+      "bytes": 38877089,
+      "limit_bytes": 1073741824,
+      "phase": "after-stdout-0-0",
+      "retry_used": false
+    },
+    {
+      "bytes": 38877089,
+      "limit_bytes": 1073741824,
+      "phase": "before-stdout-0-1",
+      "retry_used": false
+    },
+    {
+      "bytes": 38879845,
+      "limit_bytes": 1073741824,
+      "phase": "after-stdout-0-1",
+      "retry_used": false
+    },
+    {
+      "bytes": 38879845,
+      "limit_bytes": 1073741824,
+      "phase": "before-stderr-4096-4096",
+      "retry_used": false
+    },
+    {
+      "bytes": 38898860,
+      "limit_bytes": 1073741824,
+      "phase": "after-stderr-4096-4096",
+      "retry_used": false
+    },
+    {
+      "bytes": 38898860,
+      "limit_bytes": 1073741824,
+      "phase": "before-stderr-4096-4097",
+      "retry_used": false
+    },
+    {
+      "bytes": 38918021,
+      "limit_bytes": 1073741824,
+      "phase": "after-stderr-4096-4097",
+      "retry_used": false
+    },
+    {
+      "bytes": 38918021,
+      "limit_bytes": 1073741824,
+      "phase": "before-stderr-0-0",
+      "retry_used": false
+    },
+    {
+      "bytes": 38920704,
+      "limit_bytes": 1073741824,
+      "phase": "after-stderr-0-0",
+      "retry_used": false
+    },
+    {
+      "bytes": 38920704,
+      "limit_bytes": 1073741824,
+      "phase": "before-stderr-0-1",
+      "retry_used": false
+    },
+    {
+      "bytes": 38923460,
+      "limit_bytes": 1073741824,
+      "phase": "after-stderr-0-1",
+      "retry_used": false
+    }
+  ]
+}

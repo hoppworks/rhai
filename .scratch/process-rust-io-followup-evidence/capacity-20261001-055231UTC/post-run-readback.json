@@ -1,0 +1,655 @@
+{
+  "accepted_cases": [
+    "stdout-4096-4096",
+    "stdout-4096-4097",
+    "stdout-0-0",
+    "stdout-0-1",
+    "stderr-4096-4096",
+    "stderr-4096-4097",
+    "stderr-0-0",
+    "stderr-0-1"
+  ],
+  "build_statuses": [
+    {
+      "name": "native-rust",
+      "status": 0
+    },
+    {
+      "name": "fixture",
+      "status": 0
+    }
+  ],
+  "candidate_fixture_pgids_from_custody_contract": [
+    62870,
+    62872,
+    62875,
+    62878,
+    62879,
+    62881,
+    62882,
+    62886,
+    62887,
+    62889,
+    62893,
+    62894,
+    62896,
+    62897,
+    62901,
+    62902,
+    62904,
+    62908,
+    62909,
+    62911,
+    62912,
+    62916,
+    62917,
+    62919,
+    62923,
+    62924,
+    62926,
+    62927
+  ],
+  "capacity_readbacks": [
+    {
+      "all_at_least_requested": true,
+      "endpoints": {
+        "custodian": {
+          "receive_bytes": 65536,
+          "send_bytes": 65536
+        },
+        "runner": {
+          "receive_bytes": 65536,
+          "send_bytes": 65536
+        }
+      },
+      "receipt": "custodian-62869-stdout-4096-4096.json",
+      "requested_bytes": 65536
+    },
+    {
+      "all_at_least_requested": true,
+      "endpoints": {
+        "custodian": {
+          "receive_bytes": 65536,
+          "send_bytes": 65536
+        },
+        "runner": {
+          "receive_bytes": 65536,
+          "send_bytes": 65536
+        }
+      },
+      "receipt": "custodian-62877-stdout-4096-4097.json",
+      "requested_bytes": 65536
+    },
+    {
+      "all_at_least_requested": true,
+      "endpoints": {
+        "custodian": {
+          "receive_bytes": 65536,
+          "send_bytes": 65536
+        },
+        "runner": {
+          "receive_bytes": 65536,
+          "send_bytes": 65536
+        }
+      },
+      "receipt": "custodian-62885-stdout-0-0.json",
+      "requested_bytes": 65536
+    },
+    {
+      "all_at_least_requested": true,
+      "endpoints": {
+        "custodian": {
+          "receive_bytes": 65536,
+          "send_bytes": 65536
+        },
+        "runner": {
+          "receive_bytes": 65536,
+          "send_bytes": 65536
+        }
+      },
+      "receipt": "custodian-62892-stdout-0-1.json",
+      "requested_bytes": 65536
+    },
+    {
+      "all_at_least_requested": true,
+      "endpoints": {
+        "custodian": {
+          "receive_bytes": 65536,
+          "send_bytes": 65536
+        },
+        "runner": {
+          "receive_bytes": 65536,
+          "send_bytes": 65536
+        }
+      },
+      "receipt": "custodian-62900-stderr-4096-4096.json",
+      "requested_bytes": 65536
+    },
+    {
+      "all_at_least_requested": true,
+      "endpoints": {
+        "custodian": {
+          "receive_bytes": 65536,
+          "send_bytes": 65536
+        },
+        "runner": {
+          "receive_bytes": 65536,
+          "send_bytes": 65536
+        }
+      },
+      "receipt": "custodian-62906-stderr-4096-4097.json",
+      "requested_bytes": 65536
+    },
+    {
+      "all_at_least_requested": true,
+      "endpoints": {
+        "custodian": {
+          "receive_bytes": 65536,
+          "send_bytes": 65536
+        },
+        "runner": {
+          "receive_bytes": 65536,
+          "send_bytes": 65536
+        }
+      },
+      "receipt": "custodian-62914-stderr-0-0.json",
+      "requested_bytes": 65536
+    },
+    {
+      "all_at_least_requested": true,
+      "endpoints": {
+        "custodian": {
+          "receive_bytes": 65536,
+          "send_bytes": 65536
+        },
+        "runner": {
+          "receive_bytes": 65536,
+          "send_bytes": 65536
+        }
+      },
+      "receipt": "custodian-62921-stderr-0-1.json",
+      "requested_bytes": 65536
+    }
+  ],
+  "case_receipt_count": 8,
+  "current_rows_in_candidate_fixture_pgids": [],
+  "invocation_result": {
+    "acceptance_ledger_failure": null,
+    "diagnosis": "the driver calls sys.exit(main()) inside a BaseException handler; successful main return 0 raises SystemExit(0), which the handler misreports as failure",
+    "scoped_wrapper_exit_status": 1,
+    "scoped_wrapper_output": "native acceptance stopped: SystemExit(0)"
+  },
+  "process_identity_readback": [
+    {
+      "lookup_error": null,
+      "pid": 62780,
+      "role": "driver",
+      "same_process_present": false,
+      "start_identity": [
+        1790834080,
+        395531
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62779,
+      "role": "supervisor",
+      "same_process_present": false,
+      "start_identity": [
+        1790834080,
+        367360
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62869,
+      "role": "custodian:custodian-62869-stdout-4096-4096",
+      "same_process_present": false,
+      "start_identity": [
+        1790834083,
+        355742
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62873,
+      "role": "anchor:custodian-62869-stdout-4096-4096",
+      "same_process_present": false,
+      "start_identity": [
+        1790834083,
+        607782
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62872,
+      "role": "leader:custodian-62869-stdout-4096-4096",
+      "same_process_present": false,
+      "start_identity": [
+        1790834083,
+        607423
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62870,
+      "role": "runner:custodian-62869-stdout-4096-4096",
+      "same_process_present": false,
+      "start_identity": [
+        1790834083,
+        450427
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62875,
+      "role": "sentinel:custodian-62869-stdout-4096-4096",
+      "same_process_present": false,
+      "start_identity": [
+        1790834083,
+        747818
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62877,
+      "role": "custodian:custodian-62877-stdout-4096-4097",
+      "same_process_present": false,
+      "start_identity": [
+        1790834083,
+        835748
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62880,
+      "role": "anchor:custodian-62877-stdout-4096-4097",
+      "same_process_present": false,
+      "start_identity": [
+        1790834083,
+        921288
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62882,
+      "role": "holder:custodian-62877-stdout-4096-4097",
+      "same_process_present": false,
+      "start_identity": [
+        1790834083,
+        922917
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62879,
+      "role": "leader:custodian-62877-stdout-4096-4097",
+      "same_process_present": false,
+      "start_identity": [
+        1790834083,
+        921069
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62878,
+      "role": "runner:custodian-62877-stdout-4096-4097",
+      "same_process_present": false,
+      "start_identity": [
+        1790834083,
+        919251
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62881,
+      "role": "sentinel:custodian-62877-stdout-4096-4097",
+      "same_process_present": false,
+      "start_identity": [
+        1790834083,
+        922708
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62885,
+      "role": "custodian:custodian-62885-stdout-0-0",
+      "same_process_present": false,
+      "start_identity": [
+        1790834084,
+        58953
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62888,
+      "role": "anchor:custodian-62885-stdout-0-0",
+      "same_process_present": false,
+      "start_identity": [
+        1790834084,
+        153907
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62887,
+      "role": "leader:custodian-62885-stdout-0-0",
+      "same_process_present": false,
+      "start_identity": [
+        1790834084,
+        153208
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62886,
+      "role": "runner:custodian-62885-stdout-0-0",
+      "same_process_present": false,
+      "start_identity": [
+        1790834084,
+        150752
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62889,
+      "role": "sentinel:custodian-62885-stdout-0-0",
+      "same_process_present": false,
+      "start_identity": [
+        1790834084,
+        157008
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62892,
+      "role": "custodian:custodian-62892-stdout-0-1",
+      "same_process_present": false,
+      "start_identity": [
+        1790834084,
+        285901
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62895,
+      "role": "anchor:custodian-62892-stdout-0-1",
+      "same_process_present": false,
+      "start_identity": [
+        1790834084,
+        372219
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62897,
+      "role": "holder:custodian-62892-stdout-0-1",
+      "same_process_present": false,
+      "start_identity": [
+        1790834084,
+        373931
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62894,
+      "role": "leader:custodian-62892-stdout-0-1",
+      "same_process_present": false,
+      "start_identity": [
+        1790834084,
+        372010
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62893,
+      "role": "runner:custodian-62892-stdout-0-1",
+      "same_process_present": false,
+      "start_identity": [
+        1790834084,
+        370243
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62896,
+      "role": "sentinel:custodian-62892-stdout-0-1",
+      "same_process_present": false,
+      "start_identity": [
+        1790834084,
+        373678
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62900,
+      "role": "custodian:custodian-62900-stderr-4096-4096",
+      "same_process_present": false,
+      "start_identity": [
+        1790834084,
+        517134
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62903,
+      "role": "anchor:custodian-62900-stderr-4096-4096",
+      "same_process_present": false,
+      "start_identity": [
+        1790834084,
+        607816
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62902,
+      "role": "leader:custodian-62900-stderr-4096-4096",
+      "same_process_present": false,
+      "start_identity": [
+        1790834084,
+        607517
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62901,
+      "role": "runner:custodian-62900-stderr-4096-4096",
+      "same_process_present": false,
+      "start_identity": [
+        1790834084,
+        605390
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62904,
+      "role": "sentinel:custodian-62900-stderr-4096-4096",
+      "same_process_present": false,
+      "start_identity": [
+        1790834084,
+        609277
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62906,
+      "role": "custodian:custodian-62906-stderr-4096-4097",
+      "same_process_present": false,
+      "start_identity": [
+        1790834084,
+        744565
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62910,
+      "role": "anchor:custodian-62906-stderr-4096-4097",
+      "same_process_present": false,
+      "start_identity": [
+        1790834084,
+        831188
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62912,
+      "role": "holder:custodian-62906-stderr-4096-4097",
+      "same_process_present": false,
+      "start_identity": [
+        1790834084,
+        832815
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62909,
+      "role": "leader:custodian-62906-stderr-4096-4097",
+      "same_process_present": false,
+      "start_identity": [
+        1790834084,
+        830962
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62908,
+      "role": "runner:custodian-62906-stderr-4096-4097",
+      "same_process_present": false,
+      "start_identity": [
+        1790834084,
+        829090
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62911,
+      "role": "sentinel:custodian-62906-stderr-4096-4097",
+      "same_process_present": false,
+      "start_identity": [
+        1790834084,
+        832571
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62914,
+      "role": "custodian:custodian-62914-stderr-0-0",
+      "same_process_present": false,
+      "start_identity": [
+        1790834084,
+        969614
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62918,
+      "role": "anchor:custodian-62914-stderr-0-0",
+      "same_process_present": false,
+      "start_identity": [
+        1790834085,
+        56235
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62917,
+      "role": "leader:custodian-62914-stderr-0-0",
+      "same_process_present": false,
+      "start_identity": [
+        1790834085,
+        55976
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62916,
+      "role": "runner:custodian-62914-stderr-0-0",
+      "same_process_present": false,
+      "start_identity": [
+        1790834085,
+        54285
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62919,
+      "role": "sentinel:custodian-62914-stderr-0-0",
+      "same_process_present": false,
+      "start_identity": [
+        1790834085,
+        57596
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62921,
+      "role": "custodian:custodian-62921-stderr-0-1",
+      "same_process_present": false,
+      "start_identity": [
+        1790834085,
+        191120
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62925,
+      "role": "anchor:custodian-62921-stderr-0-1",
+      "same_process_present": false,
+      "start_identity": [
+        1790834085,
+        283784
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62927,
+      "role": "holder:custodian-62921-stderr-0-1",
+      "same_process_present": false,
+      "start_identity": [
+        1790834085,
+        286571
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62924,
+      "role": "leader:custodian-62921-stderr-0-1",
+      "same_process_present": false,
+      "start_identity": [
+        1790834085,
+        283559
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62923,
+      "role": "runner:custodian-62921-stderr-0-1",
+      "same_process_present": false,
+      "start_identity": [
+        1790834085,
+        281710
+      ]
+    },
+    {
+      "lookup_error": null,
+      "pid": 62926,
+      "role": "sentinel:custodian-62921-stderr-0-1",
+      "same_process_present": false,
+      "start_identity": [
+        1790834085,
+        285923
+      ]
+    }
+  ],
+  "runtime_exists_after_wrapper": false,
+  "runtime_path": "/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-4wrefsl3",
+  "sampler": {
+    "all_terminal_returncode_zero": true,
+    "children": 20,
+    "failure": null,
+    "sample_count": 20,
+    "sampled_private_bytes_max": 38920704,
+    "sampled_process_max": 8
+  },
+  "scope": "read-only exact PID/start identity and current ps readback after the sole scoped invocation; prior five accepted cases remain in native-schema-followup-20261001-054920UTC"
+}
