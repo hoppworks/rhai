@@ -18,7 +18,7 @@ TARGET = RUNTIME / 'target'
 LOCK_BASE = STAGE / 'Cargo.lock.baseline'
 LOCK_SHA = '8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa'
 LOCK_EDGE = '2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425'
-ARCHIVE_SHA = 'b5f4b962248fcdaec6e0eea983869d6cf0c50ca470015ad91b8fcfedbc7cdc8f'
+ARCHIVE_SHA = 'fb939f8b58ef5ec77c3b36cb3b5e1579f0e846869543dc3a89edfa8e2a746a5a'
 RUST = pathlib.Path('/root/.rustup/toolchains/1.93.0-x86_64-unknown-linux-gnu/bin')
 CARGO = RUST / 'cargo'
 RUSTC = RUST / 'rustc'
@@ -396,7 +396,10 @@ def held_zombie_boundary_valid(log, expected_summary=32):
         r'managed_held_zombie_boundary host_live_at_return=true leader=(\d+) leader_start=(\d+) leader_reaped=true '
         r'worker=(\d+) worker_start=(\d+) worker_state=Z worker_pgid=(\d+) '
         r'leaf=(\d+) leaf_start=(\d+) leaf_state=Z leaf_pgid=(\d+) '
-        r'group=(\d+) kill_zero_result=(-?\d+) kill_zero_errno=(\d+) capture_complete=true',
+        r'group=(\d+) kill_zero_result=(-?\d+) kill_zero_errno=(\d+) capture_complete=true '
+        r'host=\d+ host_start=\d+ (?:api_success=true api_outcome=success_report|'
+        r'api_success=false api_outcome=typed_process_io cause_op=observe_process_group_closure '
+        r'cause_op_matches=true kind=\S+ exit=\S+ stdout_complete=true stderr_complete=true diagnostic=true)',
         log,
     )
     cleanup = re.search(r'managed_held_zombie_cleanup worker=(\d+) reaped=true leaf=(\d+) reaped=true', log)
@@ -505,7 +508,7 @@ def main():
     for key in ('RUSTC_WRAPPER', 'RUSTC_WORKSPACE_WRAPPER', 'RUSTUP_TOOLCHAIN', 'CARGO_HOME_CONFIG'):
         BASE_ENV.pop(key, None)
     emit(f'PRIVATE_RUNTIME {RUNTIME}')
-    emit(f'SOURCE_ARCHIVE sha256={ARCHIVE_SHA} revision=0dcd6e6b7c42fbc4fc4cc3384118f866869ed849')
+    emit(f'SOURCE_ARCHIVE sha256={ARCHIVE_SHA} revision=55e54ebd93a3dda931141d463c8cb12f5a2ea849')
     emit(f'LOCK edge_only_sha256={LOCK_EDGE} baseline_sha256={LOCK_SHA}')
     emit(f'PLATFORM {subprocess.check_output(["uname", "-a"], text=True).strip()}')
     emit('LIMITS package_outer_seconds=600 active_driver_seconds=580 aggregate_cargo_seconds=540 cargo_jobs=2 storage_sample_stop_kib=1572864 hard_policy_kib=2097152 sampler_interval_seconds=1')
