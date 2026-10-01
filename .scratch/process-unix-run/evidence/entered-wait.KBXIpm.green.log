@@ -1,0 +1,52 @@
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9/source)
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:1571:9
+     |
+1571 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+     |
+     = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:1890:9
+     |
+1890 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: function `try_release_fifo` is never used
+    --> src/packages/sys/process/unix.rs:2915:8
+     |
+2915 |     fn try_release_fifo(path: &Path) -> io::Result<()> {
+     |        ^^^^^^^^^^^^^^^^
+     |
+     = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused `dynamic::Dynamic` that must be used
+    --> src/packages/sys/process/unix.rs:3080:9
+     |
+3080 | /         engine
+3081 | |             .eval_with_scope::<crate::Dynamic>(&mut cancel_scope, "child.kill()")
+3082 | |             .expect("public cancellation should wake the blocked waiter");
+     | |_________________________________________________________________________^
+     |
+     = note: `#[warn(unused_must_use)]` (part of `#[warn(unused)]`) on by default
+help: use `let _ = ...` to ignore the resulting value
+     |
+3080 |         let _ = engine
+     |         +++++++
+
+warning: `rhai` (lib test) generated 4 warnings (run `cargo fix --lib -p rhai --tests` to apply 2 suggestions)
+    Finished `test` profile [unoptimized] target(s) in 8.00s
+     Running unittests src/lib.rs (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9/target/debug/deps/rhai-0e1361df2a553af5)
+
+running 1 test
+test packages::sys::process::unix::tests::public_wait_is_cancelled_after_entering_condvar ... wait-entry checkpoint pid=59836 count=1 nonterminal=true
+shared-child entered-wait pid=59836 wait_entries=2 nonterminal_at_cancel=true waiter_woke=true reap=ESRCH
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 12 filtered out; finished in 0.05s
+

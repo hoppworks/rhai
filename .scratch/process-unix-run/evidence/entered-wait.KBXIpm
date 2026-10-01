@@ -1,0 +1,278 @@
+phase=development_entered_wait_contract
+python=3.9.6 (default, Aug 25 2026, 21:26:21)  [Clang 21.0.0 (clang-2100.3.34.2)]
+platform=macOS-27.0-arm64-arm-64bit
+runtime=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9
+runner_pid=59040 supervisor_pid=59039 pgid=59039
+cargo_path=/Users/hoppworks/.rustup/toolchains/stable-aarch64-apple-darwin/bin/cargo version=cargo 1.93.0 (083ac5135 2025-12-15)
+rustc_path=/Users/hoppworks/.rustup/toolchains/stable-aarch64-apple-darwin/bin/rustc version=rustc 1.93.0 (254b59607 2026-01-19) | binary: rustc | commit-hash: 254b59607d4417e9dffbc307138ae5c86280fe4c | commit-date: 2026-01-19 | host: aarch64-apple-darwin | release: 1.93.0 | LLVM version: 21.1.8
+rustdoc_path=/Users/hoppworks/.rustup/toolchains/stable-aarch64-apple-darwin/bin/rustdoc version=rustdoc 1.93.0 (254b59607 2026-01-19)
+source_hashes={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/process/unix.rs': '1cbc17999eafb1915a1ffd5c07f81108dd6b8cae870a8005d85c57aa78f63335'}
+repo_head=4f1d761ce947eaa9678b214a24b3226dc735fd93
+repo_dirty=[' M src/packages/sys/process/unix.rs', '?? .scratch/process-unix-run/cleanup-rust-archive-partial.py', '?? .scratch/process-unix-run/entered-wait.py', '?? .scratch/process-unix-run/escalations/07-rustup-install-recovery.md', '?? .scratch/process-unix-run/evidence/entered-wait.0o4JA4', '?? .scratch/process-unix-run/evidence/entered-wait.0o4JA4.wrong-control.log', '?? .scratch/process-unix-run/evidence/entered-wait.KBXIpm', '?? .scratch/process-unix-run/evidence/quarantine-reservation.ecKi0j', '?? .scratch/process-unix-run/evidence/quarantine-reservation.qyGAZk', '?? .scratch/process-unix-run/evidence/rust-1.77.2-procurement.dFUPvK', '?? .scratch/process-unix-run/evidence/shared-child-first-green.GHCfV0', '?? .scratch/process-unix-run/evidence/shared-child-first-green.WnqVYv', '?? .scratch/process-unix-run/fetch-rust-1.77.2.py', '?? .scratch/process-unix-run/quarantine-reservation-offline.py', '?? .scratch/process-unix-run/quarantine-reservation.py', '?? .scratch/process-unix-run/run-entered-wait.sh', '?? .scratch/process-unix-run/run-fetch-rust-1.77.2.sh', '?? .scratch/process-unix-run/run-quarantine-reservation-offline.sh', '?? .scratch/process-unix-run/run-quarantine-reservation.sh']
+storage_attempt=1 status=0 stdout='0\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+private_source_hashes={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/process/unix.rs': '1cbc17999eafb1915a1ffd5c07f81108dd6b8cae870a8005d85c57aa78f63335'}
+accepted_lock_sha256=8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa private_lock_sha256=2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425
+wrong_control_source_sha256=e62a32ef689bf3c1747d7e3231faff0ff5952dd4a42aaa26183cb0f80754510a
+cargo_argv=['/Users/hoppworks/.rustup/toolchains/stable-aarch64-apple-darwin/bin/cargo', 'test', '--locked', '--lib', '--features', 'testing-environ,sys,sync', 'packages::sys::process::unix::tests::public_wait_is_cancelled_after_entering_condvar', '--', '--exact', '--nocapture', '--test-threads=1']
+cargo_pid=59065 cargo_pgid=59039
+storage_attempt=1 status=0 stdout='17880\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='21156\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='21156\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='24312\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='46980\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='61920\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='73180\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='79632\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='85016\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='95004\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='109412\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='122792\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='127760\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='129724\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='135392\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='174096\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='185000\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='185008\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='185008\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='185008\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='185012\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='185020\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='189556\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='195108\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+cargo_status=101
+cargo_log_bytes=5732 clipped=False full_log_path=/Users/hoppworks/projects/rhai-process-unix-run/.scratch/process-unix-run/evidence/entered-wait.KBXIpm.wrong-control.log full_log_sha256=0535e49581db4427daa2cb1356ad1bb7fba9acd1de89259e065a890264309f6a
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded num-traits v0.2.19
+  Downloaded const-random-macro v0.1.16
+  Downloaded version_check v0.9.5
+  Downloaded fs-set-times v0.20.3
+  Downloaded cap-primitives v4.0.3
+  Downloaded smallvec v1.16.2
+  Downloaded tiny-keccak v2.0.2
+  Downloaded rmp v0.8.14
+  Downloaded unicode-ident v1.0.22
+  Downloaded smartstring v1.0.1
+  Downloaded serde v1.0.229
+  Downloaded serde_json v1.0.145
+  Downloaded portable-atomic v1.15.0
+  Downloaded zerocopy v0.8.59
+  Downloaded syn v2.0.106
+  Downloaded rustix v1.1.5
+  Downloaded memchr v2.8.3
+  Downloaded io-extras v0.19.0
+  Downloaded libc v0.2.189
+  Downloaded serde_core v1.0.229
+  Downloaded static_assertions v1.1.0
+  Downloaded once_cell v1.21.4
+  Downloaded thin-vec v0.2.19
+  Downloaded itoa v1.0.15
+  Downloaded ahash v0.8.12
+  Downloaded cfg-if v1.0.5
+  Downloaded bitflags v2.13.2
+  Downloaded getrandom v0.2.17
+  Downloaded cap-std v4.0.3
+  Downloaded spin v0.7.2
+  Downloaded ryu v1.0.20
+  Downloaded rmp-serde v1.3.0
+  Downloaded quote v1.0.41
+  Downloaded proc-macro2 v1.0.103
+  Downloaded io-lifetimes v2.0.4
+  Downloaded getrandom v0.3.4
+  Downloaded crunchy v0.2.4
+  Downloaded const-random v0.1.18
+  Downloaded byteorder v1.5.0
+  Downloaded autocfg v1.5.1
+  Downloaded ambient-authority v0.0.2
+  Downloaded paste v1.0.15
+  Downloaded maybe-owned v0.3.4
+  Downloaded ipnet v2.12.2
+  Downloaded io-lifetimes v3.0.1
+  Downloaded errno v0.3.14
+   Compiling libc v0.2.189
+   Compiling autocfg v1.5.1
+   Compiling crunchy v0.2.4
+   Compiling version_check v0.9.5
+   Compiling rustix v1.1.5
+   Compiling tiny-keccak v2.0.2
+   Compiling serde_core v1.0.229
+   Compiling io-lifetimes v2.0.4
+   Compiling cfg-if v1.0.5
+   Compiling io-lifetimes v3.0.1
+   Compiling proc-macro2 v1.0.103
+   Compiling errno v0.3.14
+   Compiling num-traits v0.2.19
+   Compiling quote v1.0.41
+   Compiling unicode-ident v1.0.22
+   Compiling portable-atomic v1.15.0
+   Compiling bitflags v2.13.2
+   Compiling io-extras v0.19.0
+   Compiling paste v1.0.15
+   Compiling getrandom v0.2.17
+   Compiling serde v1.0.229
+   Compiling getrandom v0.3.4
+   Compiling zerocopy v0.8.59
+   Compiling once_cell v1.21.4
+   Compiling cap-primitives v4.0.3
+   Compiling const-random-macro v0.1.16
+   Compiling fs-set-times v0.20.3
+   Compiling smartstring v1.0.1
+   Compiling ahash v0.8.12
+   Compiling serde_json v1.0.145
+   Compiling cap-std v4.0.3
+   Compiling ambient-authority v0.0.2
+   Compiling ipnet v2.12.2
+   Compiling byteorder v1.5.0
+   Compiling maybe-owned v0.3.4
+   Compiling rmp v0.8.14
+   Compiling syn v2.0.106
+   Compiling const-random v0.1.18
+   Compiling itoa v1.0.15
+   Compiling memchr v2.8.3
+   Compiling static_assertions v1.1.0
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9/source)
+   Compiling ryu v1.0.20
+   Compiling rhai_codegen v3.2.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9/source/codegen)
+   Compiling rmp-serde v1.3.0
+   Compiling thin-vec v0.2.19
+   Compiling smallvec v1.16.2
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:1571:9
+     |
+1571 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+     |
+     = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:1890:9
+     |
+1890 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: function `try_release_fifo` is never used
+    --> src/packages/sys/process/unix.rs:2915:8
+     |
+2915 |     fn try_release_fifo(path: &Path) -> io::Result<()> {
+     |        ^^^^^^^^^^^^^^^^
+     |
+     = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused `dynamic::Dynamic` that must be used
+    --> src/packages/sys/process/unix.rs:3080:9
+     |
+3080 | /         engine
+3081 | |             .eval_with_scope::<crate::Dynamic>(&mut cancel_scope, "child.kill()")
+3082 | |             .expect("public cancellation should wake the blocked waiter");
+     | |_________________________________________________________________________^
+     |
+     = note: `#[warn(unused_must_use)]` (part of `#[warn(unused)]`) on by default
+help: use `let _ = ...` to ignore the resulting value
+     |
+3080 |         let _ = engine
+     |         +++++++
+
+warning: `rhai` (lib test) generated 4 warnings (run `cargo fix --lib -p rhai --tests` to apply 2 suggestions)
+    Finished `test` profile [unoptimized] target(s) in 24.32s
+     Running unittests src/lib.rs (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9/target/debug/deps/rhai-0e1361df2a553af5)
+
+running 1 test
+test packages::sys::process::unix::tests::public_wait_is_cancelled_after_entering_condvar ... wait-entry checkpoint pid=59640 count=1 nonterminal=true
+
+thread 'packages::sys::process::unix::tests::public_wait_is_cancelled_after_entering_condvar' (55378675) panicked at src/packages/sys/process/unix.rs:3072:9:
+observer acquired snapshot mutex after Condvar wait entry
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+wait-entry fixture cleanup pid=59640 reap=ESRCH
+FAILED
+
+failures:
+
+failures:
+    packages::sys::process::unix::tests::public_wait_is_cancelled_after_entering_condvar
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 12 filtered out; finished in 0.05s
+
+error: test failed, to rerun pass `--lib`
+
+storage_attempt=1 status=0 stdout='195108\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+wrong_control status=101 exact_failed_test=True one_failure=True intended_assertion=True wait_checkpoint='wait-entry checkpoint pid=59640 count=1 nonterminal=true' fixture_reap='wait-entry fixture cleanup pid=59640 reap=ESRCH' pid_receipt_consistent=True
+candidate_restored=True
+cargo_argv=['/Users/hoppworks/.rustup/toolchains/stable-aarch64-apple-darwin/bin/cargo', 'test', '--locked', '--lib', '--features', 'testing-environ,sys,sync', 'packages::sys::process::unix::tests::public_wait_is_cancelled_after_entering_condvar', '--', '--exact', '--nocapture', '--test-threads=1']
+cargo_pid=59678 cargo_pgid=59039
+storage_attempt=1 status=0 stdout='195108\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='195100\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='195100\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='195100\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='195100\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='195108\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='198512\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+storage_attempt=1 status=0 stdout='205564\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+cargo_status=0
+cargo_log_bytes=2226 clipped=False full_log_path=/Users/hoppworks/projects/rhai-process-unix-run/.scratch/process-unix-run/evidence/entered-wait.KBXIpm.green.log full_log_sha256=66cd46b479227ac310e45fb5cc47408ceae70e8b6a540eeff7d334cdba04175f
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9/source)
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:1571:9
+     |
+1571 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+     |
+     = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:1890:9
+     |
+1890 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: function `try_release_fifo` is never used
+    --> src/packages/sys/process/unix.rs:2915:8
+     |
+2915 |     fn try_release_fifo(path: &Path) -> io::Result<()> {
+     |        ^^^^^^^^^^^^^^^^
+     |
+     = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused `dynamic::Dynamic` that must be used
+    --> src/packages/sys/process/unix.rs:3080:9
+     |
+3080 | /         engine
+3081 | |             .eval_with_scope::<crate::Dynamic>(&mut cancel_scope, "child.kill()")
+3082 | |             .expect("public cancellation should wake the blocked waiter");
+     | |_________________________________________________________________________^
+     |
+     = note: `#[warn(unused_must_use)]` (part of `#[warn(unused)]`) on by default
+help: use `let _ = ...` to ignore the resulting value
+     |
+3080 |         let _ = engine
+     |         +++++++
+
+warning: `rhai` (lib test) generated 4 warnings (run `cargo fix --lib -p rhai --tests` to apply 2 suggestions)
+    Finished `test` profile [unoptimized] target(s) in 8.00s
+     Running unittests src/lib.rs (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9/target/debug/deps/rhai-0e1361df2a553af5)
+
+running 1 test
+test packages::sys::process::unix::tests::public_wait_is_cancelled_after_entering_condvar ... wait-entry checkpoint pid=59836 count=1 nonterminal=true
+shared-child entered-wait pid=59836 wait_entries=2 nonterminal_at_cancel=true waiter_woke=true reap=ESRCH
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 12 filtered out; finished in 0.05s
+
+
+storage_attempt=1 status=0 stdout='195112\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-mqh39eh9' stderr=''
+final_private_hashes={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/process/unix.rs': '1cbc17999eafb1915a1ffd5c07f81108dd6b8cae870a8005d85c57aa78f63335'}
+final_original_hashes={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/process/unix.rs': '1cbc17999eafb1915a1ffd5c07f81108dd6b8cae870a8005d85c57aa78f63335'}
+entered_wait_green status=0 passed=True source_unchanged=True
+classification=development_only_entered_wait; not_msrv_or_release_acceptance; broader_lifecycle_remains_open
+exit_original_hashes={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/process/unix.rs': '1cbc17999eafb1915a1ffd5c07f81108dd6b8cae870a8005d85c57aa78f63335'}
+exit_private_hashes={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/process/unix.rs': '1cbc17999eafb1915a1ffd5c07f81108dd6b8cae870a8005d85c57aa78f63335'}
+exit_private_lock_sha256=2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425

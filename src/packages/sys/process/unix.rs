@@ -45,6 +45,8 @@ struct OwnerRecord {
 struct ChildControl {
     snapshot: Mutex<ChildSnapshot>,
     changed: Condvar,
+    #[cfg(test)]
+    wait_entries: AtomicUsize,
 }
 
 struct ChildSnapshot {
@@ -1196,6 +1198,8 @@ impl ProcessChild {
                     if remaining.is_zero() {
                         return Ok(Dynamic::UNIT);
                     }
+                    #[cfg(test)]
+                    control.wait_entries.fetch_add(1, Ordering::Release);
                     let (next, timed) = control
                         .changed
                         .wait_timeout(state, remaining)
@@ -1207,6 +1211,8 @@ impl ProcessChild {
                 }
             } else {
                 while !state.terminal {
+                    #[cfg(test)]
+                    control.wait_entries.fetch_add(1, Ordering::Release);
                     state = control
                         .changed
                         .wait(state)
@@ -1586,6 +1592,8 @@ fn spawn_child(
             kill_on_drop: state.config.kill_on_drop,
         }),
         changed: Condvar::new(),
+        #[cfg(test)]
+        wait_entries: AtomicUsize::new(0),
     });
     reservation
         .attach_spawned(control.clone())
@@ -2830,6 +2838,54 @@ mod tests {
         }
     }
 
+    struct CancelChildOnDrop {
+        fifo: Option<PathBuf>,
+        pid: i32,
+        control: Arc<super::ChildControl>,
+        registry: Arc<super::OwnerRegistry>,
+    }
+
+    impl Drop for CancelChildOnDrop {
+        fn drop(&mut self) {
+            let Some(fifo) = self.fifo.take() else {
+                return;
+            };
+            let _ = release_fifo(&fifo);
+            {
+                let mut snapshot = self
+                    .control
+                    .snapshot
+                    .lock()
+                    .unwrap_or_else(|poison| poison.into_inner());
+                if !snapshot.terminal {
+                    snapshot.kill_requested = true;
+                    self.registry.changed.notify_all();
+                }
+            }
+            let deadline = Instant::now() + Duration::from_secs(2);
+            while Instant::now() < deadline {
+                // SAFETY: this is the exact PID read from this test's child record.
+                if unsafe { libc::kill(self.pid, 0) } == -1
+                    && io::Error::last_os_error().raw_os_error() == Some(libc::ESRCH)
+                {
+                    eprintln!("wait-entry fixture cleanup pid={} reap=ESRCH", self.pid);
+                    return;
+                }
+                thread::sleep(Duration::from_millis(10));
+            }
+            eprintln!(
+                "wait-entry fixture cleanup pid={} reap=unconfirmed",
+                self.pid
+            );
+        }
+    }
+
+    impl CancelChildOnDrop {
+        fn finish(&mut self) {
+            self.fifo = None;
+        }
+    }
+
     fn create_fifo(path: &Path) {
         let path = CString::new(path.as_os_str().as_bytes()).unwrap();
         // SAFETY: path is a live NUL-terminated path and mode is a valid permission mask.
@@ -2928,6 +2984,116 @@ mod tests {
         // SAFETY: signal zero queries only the exact, independently recorded child PID.
         assert_eq!(unsafe { libc::kill(pid, 0) }, -1);
         assert_eq!(io::Error::last_os_error().raw_os_error(), Some(libc::ESRCH));
+    }
+
+    #[cfg(feature = "sync")]
+    #[test]
+    fn public_wait_is_cancelled_after_entering_condvar() {
+        let fixture = FixtureDir::new();
+        let record = fixture.0.join("child-record");
+        let release = fixture.0.join("release.fifo");
+        create_fifo(&release);
+
+        let mut engine = Engine::new();
+        let package = SysPackage::new(
+            SysConfig::default()
+                .programs(ProgramPolicy::Any)
+                .kill_on_drop(true),
+        )
+        .unwrap();
+        package.register_into_engine(&mut engine);
+        let shell = "tmp=\"$RHAI_TEST_WAIT_RECORD.tmp\"; printf 'child-pid=%s child-ready=1\\n' \"$$\" > \"$tmp\"; mv \"$tmp\" \"$RHAI_TEST_WAIT_RECORD\"; IFS= read -r value < \"$RHAI_TEST_WAIT_RELEASE\"";
+        let script = format!(
+            "spawn(\"/bin/sh\", [\"-c\", {}], #{{ env: #{{ \"RHAI_TEST_WAIT_RECORD\": {}, \"RHAI_TEST_WAIT_RELEASE\": {} }} }})",
+            quote_rhai(shell),
+            quote_rhai(record.to_str().unwrap()),
+            quote_rhai(release.to_str().unwrap()),
+        );
+        let value = engine.eval::<crate::Dynamic>(&script).unwrap();
+        let child = value.cast::<super::ProcessChild>();
+        let control = Arc::clone(&child.lease.control);
+        let pid = control
+            .snapshot
+            .lock()
+            .unwrap_or_else(|poison| poison.into_inner())
+            .pid as i32;
+        let mut cleanup = CancelChildOnDrop {
+            fifo: Some(release),
+            pid,
+            control: Arc::clone(&control),
+            registry: Arc::clone(&child.lease.registry),
+        };
+
+        let ready_deadline = Instant::now() + Duration::from_secs(3);
+        while !record.exists() {
+            assert!(
+                Instant::now() < ready_deadline,
+                "child readiness record missing"
+            );
+            thread::sleep(Duration::from_millis(5));
+        }
+        assert_eq!(record_pid(&record).unwrap(), pid);
+        assert_pid_alive(pid);
+
+        let engine = Arc::new(engine);
+        let (done_tx, done_rx) = std::sync::mpsc::sync_channel(1);
+        let waiter_engine = Arc::clone(&engine);
+        let waiter_child = child.clone();
+        let waiter = thread::spawn(move || {
+            let mut scope = crate::Scope::new();
+            scope.push_dynamic("child", crate::Dynamic::from(waiter_child));
+            let result = waiter_engine
+                .eval_with_scope::<crate::Map>(&mut scope, "child.wait()")
+                .map(|_| ())
+                .map_err(|error| error.to_string());
+            let _ = done_tx.send(result);
+        });
+
+        let entry_deadline = Instant::now() + Duration::from_secs(3);
+        while control.wait_entries.load(Ordering::Acquire) == 0 {
+            assert!(
+                Instant::now() < entry_deadline,
+                "waiter never reached Condvar::wait"
+            );
+            thread::sleep(Duration::from_millis(2));
+        }
+        // The waiter retains this mutex until Condvar::wait atomically releases it. Acquiring
+        // it while the independently held child is nonterminal proves the waiter reached wait.
+        let snapshot = control
+            .snapshot
+            .lock()
+            .unwrap_or_else(|poison| poison.into_inner());
+        assert!(
+            !snapshot.terminal,
+            "child completed before the cancellation boundary"
+        );
+        let entered_waits = control.wait_entries.load(Ordering::Acquire);
+        eprintln!("wait-entry checkpoint pid={pid} count={entered_waits} nonterminal=true");
+        assert!(
+            entered_waits > 0,
+            "observer acquired snapshot mutex after Condvar wait entry"
+        );
+        drop(snapshot);
+
+        let mut cancel_scope = crate::Scope::new();
+        cancel_scope.push_dynamic("child", crate::Dynamic::from(child.clone()));
+        engine
+            .eval_with_scope::<crate::Dynamic>(&mut cancel_scope, "child.kill()")
+            .expect("public cancellation should wake the blocked waiter");
+        let waited = done_rx
+            .recv_timeout(Duration::from_secs(3))
+            .expect("entered waiter did not wake after cancellation");
+        assert!(waited.is_ok(), "public waiter failed: {waited:?}");
+        waiter.join().expect("waiter thread");
+        assert_pid_reaped(pid);
+        eprintln!(
+            "shared-child entered-wait pid={pid} wait_entries={} nonterminal_at_cancel=true waiter_woke=true reap=ESRCH",
+            control.wait_entries.load(Ordering::Acquire)
+        );
+        cleanup.finish();
+        drop(child);
+        drop(engine);
+        drop(package);
     }
 
     #[cfg(not(feature = "no_float"))]
