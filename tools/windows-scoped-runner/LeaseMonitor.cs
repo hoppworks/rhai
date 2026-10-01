@@ -9,10 +9,9 @@ internal static class LeaseMonitor
 {
     internal enum State { Ready, CreateAuthorized, Suspended, ResumeAuthorized, Running, Stopping }
 
-    // Unconstructible in this source slice: a future private monitor path may
-    // issue this only after its owned job reports zero active processes and it
-    // has independently released its retained payload process/thread handles.
-    // No PID, caller boolean, or protocol fixture can manufacture that proof.
+    // The only minting path consumes a receipt that the exact-job owner can
+    // create only after termination, signaled root wait, process/thread handle
+    // closure, job emptiness, and job-handle closure all succeed.
     internal sealed class ExactJobClosureProof
     {
         private readonly WindowsCustodyBackend.RuntimeAllocation allocation;
@@ -22,6 +21,12 @@ internal static class LeaseMonitor
         {
             allocation = owner;
             runtimeIdentity = identity;
+        }
+        internal static ExactJobClosureProof FromVerifiedClosure(MonitorPayloadJob.ClosureReceipt receipt)
+        {
+            if (receipt == null || receipt.Allocation == null || receipt.RuntimeIdentity == null)
+                throw new InvalidOperationException("exact-job closure receipt is incomplete");
+            return new ExactJobClosureProof(receipt.Allocation, receipt.RuntimeIdentity);
         }
         internal bool Authorizes(WindowsCustodyBackend.RuntimeAllocation owner,
             WindowsCustodyBackend.FileIdentity identity)

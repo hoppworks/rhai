@@ -367,6 +367,35 @@ internal static class CustodyBackendFixture
             Expect("nested runtime removal starts from exact recorded staged identity", staged && allocation.IsStaged);
             bool missingAuthorization = !allocation.RemoveRuntime() && allocation.DispositionState == WindowsCustodyBackend.RuntimeDispositionState.Blocked;
             Expect("production disposition refuses without monitor exact-job proof", missingAuthorization);
+            var fixtureOperations=new MonitorPayloadJob.ScriptedClosureOperations { ActiveCounts=new uint[] { 0 } };
+            var fixtureJob=MonitorPayloadJob.ForClosureFixture(allocation,fixtureOperations);
+            MonitorPayloadJob.ClosureReceipt fixtureReceipt=fixtureJob.CloseAndVerify();
+            LeaseMonitor.ExactJobClosureProof fixtureProof=fixtureJob.ClosureAuthorization;
+            Expect("proof binds to exact allocation object and immutable runtime identity",
+                fixtureReceipt!=null && fixtureProof!=null && fixtureProof.Authorizes(allocation,allocation.RuntimeIdentity));
+            Expect("proof rejects a different allocation reference or immutable identity",
+                fixtureProof!=null && !fixtureProof.Authorizes(null,allocation.RuntimeIdentity) &&
+                !fixtureProof.Authorizes(allocation,new WindowsCustodyBackend.FileIdentity(
+                    allocation.RuntimeIdentity.VolumeSerial^1UL,allocation.RuntimeIdentity.FileId)));
+            string foreignRoot=NewStageCase(fixture,"proof-foreign-owner");
+            string foreignRuntime,foreignJournal;
+            LeaseMonitor.ExactJobClosureProof foreignProof;
+            using(WindowsCustodyBackend.RuntimeAllocation foreign=BeginStageAllocation(foreignRoot,out foreignRuntime,out foreignJournal))
+            {
+                bool foreignCreated=foreign.CreateRuntime() && foreign.RuntimeIdentity!=null;
+                Expect("foreign proof allocation identity is recorded",foreignCreated);
+                if(foreignCreated)
+                {
+                    var foreignJob=MonitorPayloadJob.ForClosureFixture(foreign,
+                        new MonitorPayloadJob.ScriptedClosureOperations { ActiveCounts=new uint[] { 0 } });
+                    foreignJob.CloseAndVerify(); foreignProof=foreignJob.ClosureAuthorization;
+                }
+                else foreignProof=null;
+                Expect("fixture can mint a proof only after the foreign exact-job algorithm closes",foreignProof!=null);
+            }
+            RetainPair("foreign proof runtime",foreignRuntime,foreignJournal);
+            Expect("runtime removal gate rejects another allocation's verified proof",
+                foreignProof!=null && !allocation.RemoveRuntimeAfterExactJobClosure(foreignProof,CancellationToken.None));
             bool removed = allocation.RemoveRuntimeForFixture(WindowsCustodyBackend.RuntimeAllocation.NoPayloadAuthorizationForFixture(),
                 CancellationToken.None, WindowsCustodyBackend.DispositionFailurePoint.None);
             Expect("nested runtime entries are removed by opened-handle disposition", removed &&

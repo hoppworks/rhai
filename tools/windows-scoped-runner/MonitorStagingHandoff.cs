@@ -53,24 +53,39 @@ internal sealed class MonitorStagingHandoff
         if(allocation==null) throw new InvalidOperationException("accepted staging owner has an unexpected type");
         MonitorPayloadJob payload=null;
         Exception operationFailure=null, cleanupFailure=null;
+        uint? payloadExitCode=null;
+        MonitorPayloadJob.ClosureReceipt closureReceipt=null;
+        LeaseMonitor.ExactJobClosureProof closureAuthorization=null;
         try
         {
             RequestAndWaitForAuthority(protocol,token,monotonicNow,LeaseMonitor.State.Ready);
             payload=MonitorPayloadJob.CreateSuspended(allocation,specification,protocol);
             RequestAndWaitForAuthority(protocol,token,monotonicNow,LeaseMonitor.State.Suspended);
             payload.ResumeAfterHostChallenge(protocol);
-            HoldPayloadUntilStop(protocol,token,monotonicNow);
+            HoldPayloadUntilStop(payload,protocol,token,monotonicNow);
+            payloadExitCode=payload.RootExitCode;
         }
         catch(Exception error)
         {
             operationFailure=error;
-            protocol.SignalClientExited(monotonicNow());
+            try { protocol.SignalClientExited(monotonicNow()); }
+            catch(Exception signalError) { operationFailure=new AggregateException("payload transition failed and stop publication also failed",operationFailure,signalError); }
         }
         finally
         {
             if(payload!=null)
-                try { payload.Dispose(); }
-                catch(Exception error) { cleanupFailure=error; protocol.SignalClientExited(monotonicNow()); }
+                try { closureReceipt=payload.CloseAndVerify(); closureAuthorization=payload.ClosureAuthorization; }
+                catch(Exception error)
+                {
+                    cleanupFailure=error;
+                    try { protocol.SignalClientExited(monotonicNow()); }
+                    catch(Exception signalError) { cleanupFailure=new AggregateException("exact-job cleanup failed and stop publication also failed",cleanupFailure,signalError); }
+                }
+            if(payload!=null) payloadExitCode=payload.RootExitCode;
+            // The exit outcome and cleanup diagnostics remain separate. A verified
+            // receipt is deliberately not consumed here: local evidence finalize,
+            // export, and runtime removal remain fail-closed in this source slice.
+            GC.KeepAlive(payloadExitCode); GC.KeepAlive(closureReceipt); GC.KeepAlive(closureAuthorization);
         }
         if(operationFailure!=null && cleanupFailure!=null)
             throw new AggregateException("payload transition and exact-job cleanup both failed",operationFailure,cleanupFailure);
@@ -78,11 +93,12 @@ internal sealed class MonitorStagingHandoff
         if(cleanupFailure!=null) throw new InvalidOperationException("exact-job cleanup failed; allocation remains retained or uncertain",cleanupFailure);
     }
 
-    private static void HoldPayloadUntilStop(LeaseMonitor.Protocol protocol, CancellationToken token, Func<long> monotonicNow)
+    private static void HoldPayloadUntilStop(MonitorPayloadJob payload, LeaseMonitor.Protocol protocol, CancellationToken token, Func<long> monotonicNow)
     {
         while(!token.IsCancellationRequested)
         {
             if(protocol.Tick(monotonicNow())==LeaseMonitor.State.Stopping) return;
+            if(payload.ObserveRootExit()) return;
             Thread.Sleep(10);
         }
     }

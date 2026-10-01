@@ -2,6 +2,7 @@
 // semantics. Compile only in the authorized Windows custody harness; this
 // task leaves it intentionally uncompiled and unexecuted.
 using System;
+using System.IO;
 using System.Threading;
 
 internal static class MonitorPayloadJobFixture
@@ -98,6 +99,90 @@ internal static class MonitorPayloadJobFixture
         bool secondClose = owned.TryClose(out closeFailure);
         Expect("retry closes retained exact owner", secondClose && owned.IsClosed && closeCalls == 2 && terminateCalls == 0);
         owned.Dispose();
+
+        uint capturedExit;
+        Expect("signaled root may legitimately report exit code 259",MonitorPayloadJob.TryCaptureSignaledExitCode(true,259,out capturedExit) && capturedExit==259);
+        Expect("unsignaled root never captures a value that resembles STILL_ACTIVE",!MonitorPayloadJob.TryCaptureSignaledExitCode(false,259,out capturedExit));
+
+        var normalOps=new MonitorPayloadJob.ScriptedClosureOperations { RootWaitElapsed=250, ActiveCounts=new uint[] { 1,0 } };
+        var normalJob=MonitorPayloadJob.ForClosureFixture(null,normalOps);
+        bool normalCleanupFailed=false;
+        try { normalJob.CloseAndVerify(); } catch(IOException) { normalCleanupFailed=true; }
+        Expect("normal root exit with residual members terminates, waits, closes exact handles, and polls the same job",
+            normalCleanupFailed && normalOps.Events.IndexOf("terminate-job")<normalOps.Events.IndexOf("wait-root") &&
+            normalOps.Events.IndexOf("wait-root")<normalOps.Events.IndexOf("read-exit-code") &&
+            normalOps.Events.IndexOf("read-exit-code")<normalOps.Events.IndexOf("close-thread") &&
+            normalOps.Events.IndexOf("close-thread")<normalOps.Events.IndexOf("close-process") &&
+            normalOps.Events.IndexOf("close-process")<normalOps.Events.IndexOf("query-job") &&
+            normalOps.Events.IndexOf("query-job")<normalOps.Events.IndexOf("close-job") &&
+            normalOps.Events.Contains("sleep-100") && normalOps.RootWaitBudgets.Count==1 && normalOps.RootWaitBudgets[0]==30000 &&
+            normalOps.QueryTimes.Count==2 && normalJob.RootExitCode==259);
+
+        var deadlineOps=new MonitorPayloadJob.ScriptedClosureOperations { RootWaitResult=258, RootWaitElapsed=30000, ActiveCounts=new uint[] { 1 } };
+        var deadlineJob=MonitorPayloadJob.ForClosureFixture(null,deadlineOps);
+        bool deadlineFailed=false; try { deadlineJob.CloseAndVerify(); } catch(IOException) { deadlineFailed=true; }
+        Expect("root wait consumes the one cleanup deadline and still attempts job close without polling on a fresh budget",
+            deadlineFailed && deadlineOps.Events.Contains("terminate-job") && !deadlineOps.Events.Contains("query-job") && deadlineOps.Events.Contains("close-job"));
+
+        var sharedOps=new MonitorPayloadJob.ScriptedClosureOperations { RootWaitElapsed=29500, ActiveCounts=new uint[] { 1 } };
+        var sharedJob=MonitorPayloadJob.ForClosureFixture(null,sharedOps);
+        bool sharedDeadlineFailed=false; try { sharedJob.CloseAndVerify(); } catch(IOException) { sharedDeadlineFailed=true; }
+        Expect("job emptiness polling receives only the time left after the exact-root wait",
+            sharedDeadlineFailed && sharedOps.RootWaitBudgets.Count==1 && sharedOps.RootWaitBudgets[0]==30000 &&
+            sharedOps.QueryTimes.Count==5 && sharedOps.QueryTimes[0]==30500 && sharedOps.QueryTimes[4]==30900 &&
+            sharedOps.Events.FindAll(delegate(string item) { return item=="sleep-100"; }).Count==5 &&
+            sharedOps.Clock==31000 && sharedOps.Events.IndexOf("query-job")<sharedOps.Events.IndexOf("close-job"));
+
+        var queryOps=new MonitorPayloadJob.ScriptedClosureOperations { QuerySucceeds=false };
+        var queryJob=MonitorPayloadJob.ForClosureFixture(null,queryOps);
+        IOException queryError=null; try { queryJob.CloseAndVerify(); } catch(IOException error) { queryError=error; }
+        Expect("query failure is retained while exact job close still runs and proof stays withheld",
+            queryError!=null && queryError.ToString().Contains("scripted operation failure: QueryInformationJobObject(payload closure)") &&
+            queryOps.Events.Contains("query-job") && queryOps.Events.Contains("close-job") && queryJob.ClosureAuthorization==null);
+
+        var terminationOps=new MonitorPayloadJob.ScriptedClosureOperations { TerminationSucceeds=false };
+        var terminationJob=MonitorPayloadJob.ForClosureFixture(null,terminationOps);
+        IOException terminationError=null; try { terminationJob.CloseAndVerify(); } catch(IOException error) { terminationError=error; }
+        Expect("termination failure does not skip waits, closes, or accounting and withholds proof",
+            terminationError!=null && terminationError.ToString().Contains("scripted operation failure: TerminateJobObject(exact payload closure)") &&
+            terminationOps.Events.Contains("wait-root") && terminationOps.Events.Contains("query-job") &&
+            terminationOps.Events.Contains("close-job") && terminationJob.ClosureAuthorization==null);
+
+        var closeOps=new MonitorPayloadJob.ScriptedClosureOperations { CloseFailureRole="process" };
+        var closeJob=MonitorPayloadJob.ForClosureFixture(null,closeOps);
+        IOException processCloseError=null; try { closeJob.CloseAndVerify(); } catch(IOException error) { processCloseError=error; }
+        Expect("failed process close retains its owner while emptiness query and job close are still attempted",
+            processCloseError!=null && processCloseError.ToString().Contains("scripted close failure: process") &&
+            closeOps.Events.Contains("query-job") && closeOps.Events.Contains("close-job") && closeJob.ClosureAuthorization==null);
+
+        var threadCloseOps=new MonitorPayloadJob.ScriptedClosureOperations { CloseFailureRole="thread" };
+        var threadClose=MonitorPayloadJob.ForClosureFixture(null,threadCloseOps);
+        IOException threadCloseError=null; try { threadClose.CloseAndVerify(); } catch(IOException error) { threadCloseError=error; }
+        Expect("failed thread close retains its owner while process and job cleanup continue",
+            threadCloseError!=null && threadCloseError.ToString().Contains("scripted close failure: thread") &&
+            threadCloseOps.Events.Contains("close-process") && threadCloseOps.Events.Contains("query-job") &&
+            threadCloseOps.Events.Contains("close-job") && threadClose.ClosureAuthorization==null);
+
+        var exitReadOps=new MonitorPayloadJob.ScriptedClosureOperations { ExitReadSucceeds=false };
+        var exitReadJob=MonitorPayloadJob.ForClosureFixture(null,exitReadOps);
+        IOException exitReadError=null; try { exitReadJob.CloseAndVerify(); } catch(IOException error) { exitReadError=error; }
+        Expect("exit-code read failure is retained while later closure steps continue",
+            exitReadError!=null && exitReadError.ToString().Contains("scripted operation failure: GetExitCodeProcess(signaled exact payload root during closure)") &&
+            exitReadOps.Events.Contains("close-thread") && exitReadOps.Events.Contains("query-job") && exitReadOps.Events.Contains("close-job"));
+
+        var jobCloseOps=new MonitorPayloadJob.ScriptedClosureOperations { CloseFailureRole="job" };
+        var jobClose=MonitorPayloadJob.ForClosureFixture(null,jobCloseOps);
+        IOException jobCloseError=null; try { jobClose.CloseAndVerify(); } catch(IOException error) { jobCloseError=error; }
+        Expect("failed final job close retains the exact owner and withholds proof",
+            jobCloseError!=null && jobCloseError.ToString().Contains("scripted close failure: job") &&
+            jobCloseOps.Events.Contains("query-job") && jobCloseOps.Events.Contains("close-job") && jobClose.ClosureAuthorization==null);
+
+        var lateCloseOps=new MonitorPayloadJob.ScriptedClosureOperations { FinalJobCloseElapsed=30001 };
+        var lateCloseJob=MonitorPayloadJob.ForClosureFixture(null,lateCloseOps);
+        IOException lateCloseError=null; try { lateCloseJob.CloseAndVerify(); } catch(IOException error) { lateCloseError=error; }
+        Expect("job handle close finishing beyond the shared deadline withholds proof",
+            lateCloseError!=null && lateCloseError.ToString().Contains("exact job handle closure completed after the shared cleanup deadline") &&
+            lateCloseJob.ClosureAuthorization==null);
 
         // Failed explicit close followed by Dispose invokes the SafeHandle
         // release path: terminate exact job before bounded close retry.
