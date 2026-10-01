@@ -1,0 +1,24 @@
+{
+  "driver": {
+    "parent_pid": 267700,
+    "parent_start_identity": [
+      1790355202,
+      48402530
+    ],
+    "pid": 267701,
+    "start_identity": [
+      1790355202,
+      48402532
+    ]
+  },
+  "runtime_path": "/tmp/agent-build-xmmprdgg",
+  "sampler_children": "see sampler-children.json; PIDs captured from direct Popen handles and terminal outcomes recorded after communicate/reap",
+  "supervisor": {
+    "pgid": 267700,
+    "pid": 267700,
+    "start_identity": [
+      1790355202,
+      48402530
+    ]
+  }
+}

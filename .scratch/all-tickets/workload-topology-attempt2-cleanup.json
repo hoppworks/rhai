@@ -1,0 +1,111 @@
+{
+  "identities": [
+    {
+      "pid": 267701,
+      "recorded_start_identity": [
+        1790355202,
+        48402532
+      ],
+      "state": "absent"
+    },
+    {
+      "pid": 267700,
+      "recorded_start_identity": [
+        1790355202,
+        48402530
+      ],
+      "state": "absent"
+    },
+    {
+      "pid": 267704,
+      "recorded_start_identity": [
+        1790355202,
+        48402536
+      ],
+      "state": "absent"
+    },
+    {
+      "pid": 267942,
+      "recorded_start_identity": [
+        1790355202,
+        48403239
+      ],
+      "state": "absent"
+    },
+    {
+      "pid": 268099,
+      "recorded_start_identity": [
+        1790355202,
+        48403466
+      ],
+      "state": "absent"
+    },
+    {
+      "pid": 268124,
+      "recorded_start_identity": [
+        1790355202,
+        48403490
+      ],
+      "state": "absent"
+    },
+    {
+      "pid": 268125,
+      "recorded_start_identity": [
+        1790355202,
+        48403490
+      ],
+      "state": "absent"
+    },
+    {
+      "pid": 268123,
+      "recorded_start_identity": [
+        1790355202,
+        48403490
+      ],
+      "state": "absent"
+    },
+    {
+      "pid": 268122,
+      "recorded_start_identity": [
+        1790355202,
+        48403490
+      ],
+      "state": "absent"
+    },
+    {
+      "pid": 268126,
+      "recorded_start_identity": [
+        1790355202,
+        48403491
+      ],
+      "state": "absent"
+    },
+    {
+      "pid": 268120,
+      "recorded_start_identity": [
+        1790355202,
+        48403482
+      ],
+      "state": "absent"
+    },
+    {
+      "pid": 267686,
+      "recorded_start_identity": [
+        1790355202,
+        48402525
+      ],
+      "state": "absent"
+    },
+    {
+      "pid": 267698,
+      "recorded_start_identity": [
+        1790355202,
+        48402528
+      ],
+      "state": "absent"
+    }
+  ],
+  "remaining_owned_group_members": [],
+  "runtime_exists": false
+}
+

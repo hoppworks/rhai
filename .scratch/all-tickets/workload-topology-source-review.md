@@ -61,3 +61,8 @@ Three new commits have exact lowercase author and committer. No source finding
 remains in this correction range; no new build or runtime acceptance claimed.
 Release staging only, then independent fifteen-input hash comparison before
 exactly one finite attempt2 within unchanged safety limits and07:50 cutoff.
+
+Attempt2 staged readback independently accepted: all15 hashes match frozen
+local inputs, declared manifest and fresh remote sha256sum. Details in
+workload-topology-attempt2-stage-readback.json. Runtime released07:20UTC
+for exactly one invocation with unchanged limits; actual acceptance pending.

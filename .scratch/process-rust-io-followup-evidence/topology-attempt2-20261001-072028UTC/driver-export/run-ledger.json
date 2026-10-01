@@ -1,0 +1,936 @@
+{
+  "binaries": [
+    {
+      "binary_sha256": "9dbc5f2492a57995826b7974604d64e6bb36e4b7bfbfc4c063b46724b442c642",
+      "manifest": "process-rust-io/Cargo.toml"
+    },
+    {
+      "binary_sha256": "30a76c41949be34fe24edcaac4c48942ad257d0d75559dbe603f33622775ab97",
+      "manifest": "process-prototype/Cargo.toml"
+    }
+  ],
+  "builds": [
+    {
+      "identity_scope": "PID/start identity captured immediately",
+      "log": "native-rust-build.log",
+      "log_sha256": "4803a71f6d7f6a166dc08fa590cc8e957a5cc8e69c65befa0b6016b081fdf37d",
+      "name": "native-rust",
+      "output_complete": true,
+      "pid": 267942,
+      "seconds": 2.266,
+      "start_identity": [
+        1790355202,
+        48403239
+      ],
+      "status": 0,
+      "stop_reason": null,
+      "timed_out": false
+    },
+    {
+      "identity_scope": "PID/start identity captured immediately",
+      "log": "fixture-build.log",
+      "log_sha256": "44256efff34f205560d71c9b7e69ba2e944a999dcc80425c65942dc078046445",
+      "name": "fixture",
+      "output_complete": true,
+      "pid": 268099,
+      "seconds": 0.151,
+      "start_identity": [
+        1790355202,
+        48403466
+      ],
+      "status": 0,
+      "stop_reason": null,
+      "timed_out": false
+    }
+  ],
+  "case_order": [
+    "topology-cancel"
+  ],
+  "cases": [],
+  "driver": {
+    "parent_pid": 267700,
+    "parent_start_identity": [
+      1790355202,
+      48402530
+    ],
+    "pid": 267701,
+    "start_identity": [
+      1790355202,
+      48402532
+    ]
+  },
+  "elapsed_seconds": 9.623,
+  "failure": "RuntimeError('custodian status or runtime identity failed; retained /tmp/agent-build-xmmprdgg/private-source/process-rust-io/runs/custody-run-8dcovu58')",
+  "limits": {
+    "build_seconds": 300.0,
+    "cargo_jobs": 2,
+    "case_seconds": 45.0,
+    "export_reserve_seconds": 10.0,
+    "invocation_seconds": 600.0,
+    "owned_fixture_process_bound": 7,
+    "owned_fixture_process_limit": 8,
+    "owned_fixture_process_scope": "controller + custodian + runner + leader + anchor + sentinel + optional holder; driver/supervisor excluded",
+    "private_bytes": 1073741824,
+    "process_peak_method": "sampled owned PID/PPID/PGID/lstart graph; sampled maximum only, no continuous-peak claim",
+    "process_resources": 8,
+    "rust_fd_method": "RLIMIT_NOFILE=32 enforced in Rust; three worker handles checked at native_done",
+    "rust_fds": 32,
+    "rust_workers": 3,
+    "sampler": "one live ps/storage sampler at a time, every 250ms; fixture and sampler bound <=8",
+    "sampler_process_bound": 1,
+    "stream_bytes": 2097152
+  },
+  "resolved_lockfiles": [
+    {
+      "bytes": 2838,
+      "name": "native-Cargo.lock",
+      "sha256": "818f46aeb7ccffab3d83069baab505af988480d057799886d4efa77c6ccbed9d"
+    },
+    {
+      "bytes": 161,
+      "name": "fixture-Cargo.lock",
+      "sha256": "a966476585ac338d4fff8d842cab75fd569e4eae49fd09060b9382e7a626f4ba"
+    }
+  ],
+  "resource_samples": [
+    {
+      "elapsed_seconds": 0.0166,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:27 2026",
+          "pgid": 267700,
+          "pid": 267704,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "toolchain-install:rustup-install-1.77.2",
+      "private_bytes": 212330,
+      "process_limit": 8,
+      "sampler_pid": 267703,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0139,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:27 2026",
+          "pgid": 267700,
+          "pid": 267704,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "toolchain-install:rustup-install-1.77.2",
+      "private_bytes": 1634188,
+      "process_limit": 8,
+      "sampler_pid": 267790,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0135,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:27 2026",
+          "pgid": 267700,
+          "pid": 267704,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "toolchain-install:rustup-install-1.77.2",
+      "private_bytes": 7335820,
+      "process_limit": 8,
+      "sampler_pid": 267791,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0116,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:27 2026",
+          "pgid": 267700,
+          "pid": 267704,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "toolchain-install:rustup-install-1.77.2",
+      "private_bytes": 12382092,
+      "process_limit": 8,
+      "sampler_pid": 267792,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0137,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:27 2026",
+          "pgid": 267700,
+          "pid": 267704,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "toolchain-install:rustup-install-1.77.2",
+      "private_bytes": 19363781,
+      "process_limit": 8,
+      "sampler_pid": 267801,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.013,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:27 2026",
+          "pgid": 267700,
+          "pid": 267704,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "toolchain-install:rustup-install-1.77.2",
+      "private_bytes": 41852238,
+      "process_limit": 8,
+      "sampler_pid": 267802,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0127,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:27 2026",
+          "pgid": 267700,
+          "pid": 267704,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "toolchain-install:rustup-install-1.77.2",
+      "private_bytes": 62965235,
+      "process_limit": 8,
+      "sampler_pid": 267811,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0125,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:27 2026",
+          "pgid": 267700,
+          "pid": 267704,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "toolchain-install:rustup-install-1.77.2",
+      "private_bytes": 68732403,
+      "process_limit": 8,
+      "sampler_pid": 267812,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0114,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:27 2026",
+          "pgid": 267700,
+          "pid": 267704,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "toolchain-install:rustup-install-1.77.2",
+      "private_bytes": 74462666,
+      "process_limit": 8,
+      "sampler_pid": 267814,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0125,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:27 2026",
+          "pgid": 267700,
+          "pid": 267704,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "toolchain-install:rustup-install-1.77.2",
+      "private_bytes": 80229834,
+      "process_limit": 8,
+      "sampler_pid": 267818,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0116,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:27 2026",
+          "pgid": 267700,
+          "pid": 267704,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "toolchain-install:rustup-install-1.77.2",
+      "private_bytes": 85935189,
+      "process_limit": 8,
+      "sampler_pid": 267819,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0124,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:27 2026",
+          "pgid": 267700,
+          "pid": 267704,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "toolchain-install:rustup-install-1.77.2",
+      "private_bytes": 91687485,
+      "process_limit": 8,
+      "sampler_pid": 267820,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0133,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:27 2026",
+          "pgid": 267700,
+          "pid": 267704,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "toolchain-install:rustup-install-1.77.2",
+      "private_bytes": 123891975,
+      "process_limit": 8,
+      "sampler_pid": 267831,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0135,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:27 2026",
+          "pgid": 267700,
+          "pid": 267704,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "toolchain-install:rustup-install-1.77.2",
+      "private_bytes": 163115271,
+      "process_limit": 8,
+      "sampler_pid": 267832,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0122,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:27 2026",
+          "pgid": 267700,
+          "pid": 267704,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "toolchain-install:rustup-install-1.77.2",
+      "private_bytes": 194506798,
+      "process_limit": 8,
+      "sampler_pid": 267834,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0131,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:27 2026",
+          "pgid": 267700,
+          "pid": 267704,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "toolchain-install:rustup-install-1.77.2",
+      "private_bytes": 234090298,
+      "process_limit": 8,
+      "sampler_pid": 267835,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0129,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:27 2026",
+          "pgid": 267700,
+          "pid": 267704,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "toolchain-install:rustup-install-1.77.2",
+      "private_bytes": 259655037,
+      "process_limit": 8,
+      "sampler_pid": 267837,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0141,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:27 2026",
+          "pgid": 267700,
+          "pid": 267704,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "toolchain-install:rustup-install-1.77.2",
+      "private_bytes": 265422205,
+      "process_limit": 8,
+      "sampler_pid": 267841,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0135,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:27 2026",
+          "pgid": 267700,
+          "pid": 267704,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "toolchain-install:rustup-install-1.77.2",
+      "private_bytes": 269735226,
+      "process_limit": 8,
+      "sampler_pid": 267850,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0135,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:27 2026",
+          "pgid": 267700,
+          "pid": 267704,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "toolchain-install:rustup-install-1.77.2",
+      "private_bytes": 308692223,
+      "process_limit": 8,
+      "sampler_pid": 267852,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0146,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:27 2026",
+          "pgid": 267700,
+          "pid": 267704,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "toolchain-install:rustup-install-1.77.2",
+      "private_bytes": 325469439,
+      "process_limit": 8,
+      "sampler_pid": 267855,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0125,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:27 2026",
+          "pgid": 267700,
+          "pid": 267704,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "toolchain-install:rustup-install-1.77.2",
+      "private_bytes": 342246655,
+      "process_limit": 8,
+      "sampler_pid": 267923,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0121,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:27 2026",
+          "pgid": 267700,
+          "pid": 267704,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "toolchain-install:rustup-install-1.77.2",
+      "private_bytes": 375801087,
+      "process_limit": 8,
+      "sampler_pid": 267924,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0158,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:27 2026",
+          "pgid": 267700,
+          "pid": 267704,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "toolchain-install:rustup-install-1.77.2",
+      "private_bytes": 420714751,
+      "process_limit": 8,
+      "sampler_pid": 267925,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0159,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:27 2026",
+          "pgid": 267700,
+          "pid": 267704,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "toolchain-install:rustup-install-1.77.2",
+      "private_bytes": 471046399,
+      "process_limit": 8,
+      "sampler_pid": 267926,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0115,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:27 2026",
+          "pgid": 267700,
+          "pid": 267704,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "toolchain-install:rustup-install-1.77.2",
+      "private_bytes": 487823615,
+      "process_limit": 8,
+      "sampler_pid": 267927,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0127,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:27 2026",
+          "pgid": 267700,
+          "pid": 267704,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "toolchain-install:rustup-install-1.77.2",
+      "private_bytes": 504600831,
+      "process_limit": 8,
+      "sampler_pid": 267932,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.013,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:27 2026",
+          "pgid": 267700,
+          "pid": 267704,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "toolchain-install:rustup-install-1.77.2",
+      "private_bytes": 538155263,
+      "process_limit": 8,
+      "sampler_pid": 267935,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0128,
+      "owned_process_identities": [],
+      "owned_processes_including_sampler": 1,
+      "phase": "toolchain-verify:cargo-version",
+      "private_bytes": 470669235,
+      "process_limit": 8,
+      "sampler_pid": 267938,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0123,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:34 2026",
+          "pgid": 267700,
+          "pid": 267942,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "build:native-rust",
+      "private_bytes": 471463353,
+      "process_limit": 8,
+      "sampler_pid": 267950,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0148,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:34 2026",
+          "pgid": 267700,
+          "pid": 267942,
+          "ppid": 267701
+        },
+        {
+          "lstart": "Thu Oct  1 09:20:34 2026",
+          "pgid": 267700,
+          "pid": 267956,
+          "ppid": 267942
+        },
+        {
+          "lstart": "Thu Oct  1 09:20:34 2026",
+          "pgid": 267700,
+          "pid": 267957,
+          "ppid": 267942
+        }
+      ],
+      "owned_processes_including_sampler": 4,
+      "phase": "build:native-rust",
+      "private_bytes": 480453409,
+      "process_limit": 8,
+      "sampler_pid": 267958,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0212,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:34 2026",
+          "pgid": 267700,
+          "pid": 267942,
+          "ppid": 267701
+        },
+        {
+          "lstart": "Thu Oct  1 09:20:34 2026",
+          "pgid": 267700,
+          "pid": 267989,
+          "ppid": 267942
+        },
+        {
+          "lstart": "Thu Oct  1 09:20:35 2026",
+          "pgid": 267700,
+          "pid": 268018,
+          "ppid": 267942
+        }
+      ],
+      "owned_processes_including_sampler": 4,
+      "phase": "build:native-rust",
+      "private_bytes": 484738825,
+      "process_limit": 8,
+      "sampler_pid": 268020,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0154,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:34 2026",
+          "pgid": 267700,
+          "pid": 267942,
+          "ppid": 267701
+        },
+        {
+          "lstart": "Thu Oct  1 09:20:34 2026",
+          "pgid": 267700,
+          "pid": 267989,
+          "ppid": 267942
+        },
+        {
+          "lstart": "Thu Oct  1 09:20:35 2026",
+          "pgid": 267700,
+          "pid": 268025,
+          "ppid": 267942
+        }
+      ],
+      "owned_processes_including_sampler": 4,
+      "phase": "build:native-rust",
+      "private_bytes": 486373371,
+      "process_limit": 8,
+      "sampler_pid": 268031,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0146,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:34 2026",
+          "pgid": 267700,
+          "pid": 267942,
+          "ppid": 267701
+        },
+        {
+          "lstart": "Thu Oct  1 09:20:34 2026",
+          "pgid": 267700,
+          "pid": 267989,
+          "ppid": 267942
+        },
+        {
+          "lstart": "Thu Oct  1 09:20:35 2026",
+          "pgid": 267700,
+          "pid": 268041,
+          "ppid": 267942
+        }
+      ],
+      "owned_processes_including_sampler": 4,
+      "phase": "build:native-rust",
+      "private_bytes": 488020850,
+      "process_limit": 8,
+      "sampler_pid": 268043,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0147,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:34 2026",
+          "pgid": 267700,
+          "pid": 267942,
+          "ppid": 267701
+        },
+        {
+          "lstart": "Thu Oct  1 09:20:35 2026",
+          "pgid": 267700,
+          "pid": 268050,
+          "ppid": 267942
+        }
+      ],
+      "owned_processes_including_sampler": 3,
+      "phase": "build:native-rust",
+      "private_bytes": 503688683,
+      "process_limit": 8,
+      "sampler_pid": 268054,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0157,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:34 2026",
+          "pgid": 267700,
+          "pid": 267942,
+          "ppid": 267701
+        },
+        {
+          "lstart": "Thu Oct  1 09:20:35 2026",
+          "pgid": 267700,
+          "pid": 268058,
+          "ppid": 267942
+        }
+      ],
+      "owned_processes_including_sampler": 3,
+      "phase": "build:native-rust",
+      "private_bytes": 505496799,
+      "process_limit": 8,
+      "sampler_pid": 268061,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0153,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:34 2026",
+          "pgid": 267700,
+          "pid": 267942,
+          "ppid": 267701
+        },
+        {
+          "lstart": "Thu Oct  1 09:20:36 2026",
+          "pgid": 267700,
+          "pid": 268073,
+          "ppid": 267942
+        }
+      ],
+      "owned_processes_including_sampler": 3,
+      "phase": "build:native-rust",
+      "private_bytes": 509151635,
+      "process_limit": 8,
+      "sampler_pid": 268075,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.015,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:34 2026",
+          "pgid": 267700,
+          "pid": 267942,
+          "ppid": 267701
+        },
+        {
+          "lstart": "Thu Oct  1 09:20:36 2026",
+          "pgid": 267700,
+          "pid": 268073,
+          "ppid": 267942
+        },
+        {
+          "lstart": "Thu Oct  1 09:20:36 2026",
+          "pgid": 267700,
+          "pid": 268095,
+          "ppid": 268073
+        },
+        {
+          "lstart": "Thu Oct  1 09:20:36 2026",
+          "pgid": 267700,
+          "pid": 268096,
+          "ppid": 268095
+        },
+        {
+          "lstart": "Thu Oct  1 09:20:36 2026",
+          "pgid": 267700,
+          "pid": 268097,
+          "ppid": 268096
+        }
+      ],
+      "owned_processes_including_sampler": 6,
+      "phase": "build:native-rust",
+      "private_bytes": 510849371,
+      "process_limit": 8,
+      "sampler_pid": 268098,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0156,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 09:20:36 2026",
+          "pgid": 268120,
+          "pid": 268120,
+          "ppid": 267701
+        }
+      ],
+      "owned_processes_including_sampler": 3,
+      "phase": "case:topology-cancel",
+      "private_bytes": 513728380,
+      "process_limit": 8,
+      "sampler_pid": 268121,
+      "storage_retry_used": false
+    }
+  ],
+  "sampled_private_bytes_max": 538155263,
+  "sampled_process_max": 6,
+  "sampler_failure": null,
+  "setup": [
+    {
+      "identity_scope": "PID/start identity captured immediately",
+      "log": "rustup-install.log",
+      "log_sha256": "f4a368272773d7ca80cd7da817ed988ec4bab4a1bcb2b31c6e6736b5ea15090b",
+      "name": "rustup-install-1.77.2",
+      "output_complete": true,
+      "pid": 267704,
+      "seconds": 7.007,
+      "start_identity": [
+        1790355202,
+        48402536
+      ],
+      "status": 0,
+      "stop_reason": null,
+      "timed_out": false
+    },
+    {
+      "identity_scope": "direct Popen handle + bounded communicate/reap",
+      "log": "rustc-version.log",
+      "log_sha256": "8d95dab8b988abfc08735506e13455043a0a2f910e0672f4fdd48f37cc0a2f83",
+      "name": "rustc-version",
+      "output_complete": true,
+      "pid": 267939,
+      "seconds": 0.005,
+      "start_identity": null,
+      "status": 0,
+      "stop_reason": null,
+      "timed_out": false
+    },
+    {
+      "identity_scope": "direct Popen handle + bounded communicate/reap",
+      "log": "cargo-version.log",
+      "log_sha256": "6112bcce75ab9a1c5d664eec9c11d98776a7c36c3be3c3402d871d72f1401b20",
+      "name": "cargo-version",
+      "output_complete": true,
+      "pid": 267940,
+      "seconds": 0.002,
+      "start_identity": null,
+      "status": 0,
+      "stop_reason": null,
+      "timed_out": false
+    },
+    {
+      "identity_scope": "direct Popen handle + bounded communicate/reap",
+      "log": "rustdoc-version.log",
+      "log_sha256": "96db214f950ee507ca588726ce17c73ab00f1d5a7520ee2ee34cea14bc21f76b",
+      "name": "rustdoc-version",
+      "output_complete": true,
+      "pid": 267941,
+      "seconds": 0.006,
+      "start_identity": null,
+      "status": 0,
+      "stop_reason": null,
+      "timed_out": false
+    }
+  ],
+  "storage_observations": [
+    {
+      "bytes": 512158355,
+      "limit_bytes": 1073741824,
+      "phase": "after-native-build",
+      "retry_used": false
+    },
+    {
+      "bytes": 513719105,
+      "limit_bytes": 1073741824,
+      "phase": "after-fixture-build",
+      "retry_used": false
+    },
+    {
+      "bytes": 513719105,
+      "limit_bytes": 1073741824,
+      "phase": "before-topology-cancel",
+      "retry_used": false
+    }
+  ],
+  "toolchain": {
+    "cargo": "/tmp/agent-build-xmmprdgg/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+    "private_cargo_home": "/tmp/agent-build-xmmprdgg/cargo-home",
+    "private_rustup_home": "/tmp/agent-build-xmmprdgg/rustup-home",
+    "rustc": "/tmp/agent-build-xmmprdgg/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+    "rustdoc": "/tmp/agent-build-xmmprdgg/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustdoc",
+    "verified_versions": {
+      "cargo": "1.77.2",
+      "rustc": "1.77.2",
+      "rustdoc": "1.77.2"
+    },
+    "version": "1.77.2"
+  }
+}

@@ -1,0 +1,4 @@
+launch_utc=2026-10-01T07:20:28Z
+launcher_pid=267686 launcher_pgid=267686
+remaining_seconds=600
+native acceptance stopped: RuntimeError('custodian status or runtime identity failed; retained /tmp/agent-build-xmmprdgg/private-source/process-rust-io/runs/custody-run-8dcovu58')
