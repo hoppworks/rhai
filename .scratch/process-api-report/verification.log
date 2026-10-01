@@ -1,0 +1,155 @@
+=== MSRV metadata process API tests ===\n    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded getrandom v0.3.4
+  Downloaded itoa v1.0.15
+  Downloaded maybe-owned v0.3.4
+  Downloaded errno v0.3.14
+  Downloaded once_cell v1.21.4
+  Downloaded cfg-if v1.0.5
+  Downloaded smartstring v1.0.1
+  Downloaded proc-macro2 v1.0.103
+  Downloaded rmp-serde v1.3.0
+  Downloaded version_check v0.9.5
+  Downloaded const-random v0.1.18
+  Downloaded ryu v1.0.20
+  Downloaded serde v1.0.229
+  Downloaded static_assertions v1.1.0
+  Downloaded crunchy v0.2.4
+  Downloaded cap-primitives v4.0.3
+  Downloaded unicode-ident v1.0.22
+  Downloaded num-traits v0.2.19
+  Downloaded thin-vec v0.2.19
+  Downloaded serde_json v1.0.145
+  Downloaded io-lifetimes v2.0.4
+  Downloaded portable-atomic v1.15.0
+  Downloaded zerocopy v0.8.59
+  Downloaded syn v2.0.106
+  Downloaded rustix v1.1.5
+  Downloaded memchr v2.8.3
+  Downloaded getrandom v0.2.17
+  Downloaded rmp v0.8.14
+  Downloaded cap-std v4.0.3
+  Downloaded byteorder v1.5.0
+  Downloaded bitflags v2.13.2
+  Downloaded fs-set-times v0.20.3
+  Downloaded tiny-keccak v2.0.2
+  Downloaded syn v3.0.6
+  Downloaded serde_core v1.0.229
+  Downloaded paste v1.0.15
+  Downloaded const-random-macro v0.1.16
+  Downloaded autocfg v1.5.1
+  Downloaded smallvec v1.16.2
+  Downloaded serde_derive v1.0.229
+  Downloaded quote v1.0.41
+  Downloaded ipnet v2.12.2
+  Downloaded ambient-authority v0.0.2
+  Downloaded io-extras v0.19.0
+  Downloaded ahash v0.8.12
+  Downloaded io-lifetimes v3.0.1
+  Downloaded libc v0.2.189
+ Downloading crates ...
+  Downloaded web-time v1.1.0
+   Compiling proc-macro2 v1.0.103
+   Compiling libc v0.2.189
+   Compiling quote v1.0.41
+   Compiling unicode-ident v1.0.22
+   Compiling autocfg v1.5.1
+   Compiling serde_core v1.0.229
+   Compiling version_check v0.9.5
+   Compiling crunchy v0.2.4
+   Compiling cfg-if v1.0.5
+   Compiling io-lifetimes v2.0.4
+   Compiling rustix v1.1.5
+   Compiling tiny-keccak v2.0.2
+   Compiling io-lifetimes v3.0.1
+   Compiling errno v0.3.14
+   Compiling syn v3.0.6
+   Compiling num-traits v0.2.19
+   Compiling bitflags v2.13.2
+   Compiling portable-atomic v1.15.0
+   Compiling serde v1.0.229
+   Compiling io-extras v0.19.0
+   Compiling serde_derive v1.0.229
+   Compiling getrandom v0.2.17
+   Compiling zerocopy v0.8.59
+   Compiling once_cell v1.21.4
+   Compiling cap-primitives v4.0.3
+   Compiling getrandom v0.3.4
+   Compiling const-random-macro v0.1.16
+   Compiling fs-set-times v0.20.3
+   Compiling ahash v0.8.12
+   Compiling smartstring v1.0.1
+   Compiling ipnet v2.12.2
+   Compiling paste v1.0.15
+   Compiling serde_json v1.0.145
+   Compiling maybe-owned v0.3.4
+   Compiling ambient-authority v0.0.2
+   Compiling cap-std v4.0.3
+   Compiling const-random v0.1.18
+   Compiling syn v2.0.106
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-phqjchug/src)
+   Compiling ryu v1.0.20
+   Compiling memchr v2.8.3
+   Compiling static_assertions v1.1.0
+   Compiling itoa v1.0.15
+   Compiling rhai_codegen v3.2.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-phqjchug/src/codegen)
+   Compiling smallvec v1.16.2
+   Compiling thin-vec v0.2.19
+   Compiling byteorder v1.5.0
+   Compiling rmp v0.8.14
+   Compiling rmp-serde v1.3.0
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized + debuginfo] target(s) in 22.96s
+     Running tests/sys_process_report.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-phqjchug/target/debug/deps/sys_process_report-782e095d0962b1e7)
+
+running 7 tests
+test process_report_rust_accessors_cover_absent_code_signal_and_diagnostics ... ok
+test scope_defaults_and_builder ... ok
+test prior_sys_error_variants_keep_display_and_classification ... ok
+test absent_and_signal_exit_are_readable_through_engine ... ok
+test old_error_variants_keep_rhai_classification_and_have_no_process_report ... FAILED
+test process_causes_retain_primary_classification_and_snapshot ... FAILED
+test script_mutating_copied_report_blobs_and_collections_does_not_change_snapshot ... ok
+
+failures:
+
+---- old_error_variants_keep_rhai_classification_and_have_no_process_report stdout ----
+thread 'old_error_variants_keep_rhai_classification_and_have_no_process_report' panicked at tests/sys_process_report.rs:113:136:
+called `Result::unwrap()` on an `Err` value: ErrorMismatchOutputType("bool", "()", none)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- process_causes_retain_primary_classification_and_snapshot stdout ----
+thread 'process_causes_retain_primary_classification_and_snapshot' panicked at tests/sys_process_report.rs:52:41:
+called `Result::unwrap()` on an `Err` value: ErrorMismatchOutputType("bool", "()", none)
+
+
+failures:
+    old_error_variants_keep_rhai_classification_and_have_no_process_report
+    process_causes_retain_primary_classification_and_snapshot
+
+test result: FAILED. 5 passed; 2 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+error: test failed, to rerun pass `--test sys_process_report`
+\n

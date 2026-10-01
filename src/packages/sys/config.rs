@@ -52,6 +52,16 @@ pub enum ProgramPolicy {
     Any,
 }
 
+/// Process lifetime policy selected by the host.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default)]
+pub enum ProcessScope {
+    /// The supervisor owns only the direct child process.
+    #[default]
+    DirectChild,
+    /// The supervisor owns the child and its managed worker scope.
+    Managed,
+}
+
 impl ProgramPolicy {
     /// May the program be run under this policy?
     #[must_use]
@@ -114,6 +124,7 @@ pub struct SysConfig {
     pub(crate) max_file_read: usize,
     pub(crate) kill_on_drop: bool,
     pub(crate) allow_batch_files: bool,
+    pub(crate) process_scope: ProcessScope,
 }
 
 impl Default for SysConfig {
@@ -127,11 +138,24 @@ impl Default for SysConfig {
             max_file_read: 8 * 1024 * 1024,
             kill_on_drop: true,
             allow_batch_files: false,
+            process_scope: ProcessScope::DirectChild,
         }
     }
 }
 
 impl SysConfig {
+    /// Select the host-owned process lifetime scope. Defaults to [`ProcessScope::DirectChild`].
+    #[must_use]
+    pub const fn process_scope(mut self, scope: ProcessScope) -> Self {
+        self.process_scope = scope;
+        self
+    }
+
+    /// Get the configured process lifetime scope.
+    #[must_use]
+    pub const fn process_scope_value(&self) -> ProcessScope {
+        self.process_scope
+    }
     /// A configuration that allows everything: the whole filesystem with
     /// [`FsAccess::ReadWriteDelete`], every environment variable and every program.
     ///

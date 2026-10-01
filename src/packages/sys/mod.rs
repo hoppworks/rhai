@@ -40,9 +40,11 @@ mod config;
 mod env;
 mod error;
 mod fs;
+mod process;
 
-pub use config::{EnvPolicy, FsAccess, FsPolicy, FsRoot, ProgramPolicy, SysConfig};
+pub use config::{EnvPolicy, FsAccess, FsPolicy, FsRoot, ProcessScope, ProgramPolicy, SysConfig};
 pub use error::SysError;
+pub use process::{ProcessCause, ProcessDiagnostic, ProcessExit, ProcessReport};
 
 use crate::packages::Package;
 use crate::{Module, Shared, SharedModule};
@@ -82,6 +84,7 @@ impl SysPackage {
 
         let mut module = Module::new();
         SysError::register(&mut module);
+        process::ProcessReport::register(&mut module);
         env::register(&mut module, &state);
         fs::register(&mut module, &state);
         module.build_index();
