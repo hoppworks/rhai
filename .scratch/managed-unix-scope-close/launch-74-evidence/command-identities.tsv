@@ -1,0 +1,4 @@
+label	pid	start_ticks	ppid	pgid	cmdline
+known-broken-managed-gate-control	3855383	3160200	3855366	3855365	/root/.rustup/toolchains/1.93.0-x86_64-unknown-linux-gnu/bin/cargo test --locked --no-fail-fast --features testing-environ,sys --test sys_process managed_run_closes_pipe_closed_worker_before_return -- --exact --nocapture --test-threads=1
+unix-owner	3862423	3161663	3855366	3855365	
+full-sys-process	3865070	3163547	3855366	3855365	/root/.rustup/toolchains/1.93.0-x86_64-unknown-linux-gnu/bin/cargo test --locked --no-fail-fast --features testing-environ,sys --test sys_process -- --nocapture --test-threads=1

@@ -1,0 +1,24 @@
+launch_utc=2026-10-01T22:50:00Z
+launcher_pid=3855354
+launcher_pgid=3855296
+outer_deadline_epoch=1790895600
+runner_tree_identity_count=93
+PRIVATE_RUNTIME /tmp/agent-build-f6ovy6yn
+SOURCE_ARCHIVE sha256=44b60f1d1260d90b4bb546aad92ff44f673c3257fc0cd9b1e35faf01c33240d5 revision=911fe6fc047cfc5240347ccc4cd11fa56a282ff8
+LOCK edge_only_sha256=2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425 baseline_sha256=8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa
+PLATFORM Linux workhorse 7.2.7-ogc1.1.fc44.x86_64 #1 SMP PREEMPT_DYNAMIC Fri Sep 25 06:00:41 UTC 2026 x86_64 GNU/Linux
+LIMITS package_outer_seconds=600 active_driver_seconds=580 aggregate_cargo_seconds=540 cargo_jobs=2 storage_sample_stop_kib=1572864 hard_policy_kib=2097152 sampler_interval_seconds=1
+COMMAND known-broken-managed-gate-control: ['/root/.rustup/toolchains/1.93.0-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--no-fail-fast', '--features', 'testing-environ,sys', '--test', 'sys_process', 'managed_run_closes_pipe_closed_worker_before_return', '--', '--exact', '--nocapture', '--test-threads=1']
+STATUS known-broken-managed-gate-control=101 elapsed=14.63s
+CONTROL_SOURCE_RESTORED sha256=11f3c2f23bc91535f6519a9dac94f7558970e6e4992a9b5286de3f350f7aaf67
+COMMAND unix-owner: ['/root/.rustup/toolchains/1.93.0-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--no-fail-fast', '--features', 'testing-environ,sys', '--lib', 'packages::sys::process::unix::tests::', '--', '--nocapture', '--test-threads=1']
+STATUS unix-owner=0 elapsed=18.84s
+COMMAND full-sys-process: ['/root/.rustup/toolchains/1.93.0-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--no-fail-fast', '--features', 'testing-environ,sys', '--test', 'sys_process', '--', '--nocapture', '--test-threads=1']
+STATUS full-sys-process=0 elapsed=11.82s
+OUTER_SUMMARY full_sys_process_passed=32 owner_passed=20 raw_sys_process_test_attributes=33
+EXPORTED_FINAL_LOCK sha256=2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425
+SAMPLED_PRIVATE_STORAGE_MAX_KIB=294448; interval=1s du -sk; sampled maximum, not continuous peak
+LINUX_PROCESS_PUBLIC_BEHAVIOR_PROOF_COMPLETE
+EXACT_SAMPLED_CHILD_CLEANUP alive_before=[] remaining=[]
+SAMPLED_PRIVATE_STORAGE_MAX_KIB=294448; interval=1s du -sk; sampled maximum, not continuous peak
+runtime_cleanup_status=0 runtime=/tmp/agent-build-f6ovy6yn
