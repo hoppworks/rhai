@@ -30,6 +30,7 @@ struct OwnerRecord {
     child: Option<OsChild>,
     spawned: Option<SpawnRuntime>,
     phase: OwnerPhase,
+    managed: bool,
     pump_finished: bool,
     reaped: bool,
     retirement_complete: bool,
@@ -167,6 +168,7 @@ impl CleanupService {
             child: None,
             spawned: None,
             phase: OwnerPhase::Launching,
+            managed: false,
             pump_finished: false,
             reaped: false,
             retirement_complete: false,
@@ -187,6 +189,7 @@ impl CleanupService {
             registry: self.registry.clone(),
             record,
             active: true,
+            managed: false,
         })
     }
 
@@ -330,13 +333,33 @@ fn pump_spawned_record(registry: &OwnerRegistry, record: &Arc<Mutex<OwnerRecord>
     if state.kill_requested && !state.kill_sent && !owner.reaped {
         runtime.stdin.take();
         note_numeric_operation_owner(&owner);
-        match child.kill() {
+        let (termination, operation) = if owner.managed {
+            match terminate_managed_child(&mut child) {
+                Ok(()) => (Ok(()), "terminate process group and child"),
+                Err(error) => (Err(error.source), error.operation),
+            }
+        } else {
+            (child.kill(), "terminate child")
+        };
+        match termination {
             Ok(()) => state.kill_sent = true,
             Err(error) => {
                 if state.error.is_none() {
-                    state.error = Some(process_io_cause("terminate child", &state.program, error));
+                    state.error = Some(process_io_cause(operation, &state.program, error));
                 }
                 state.kill_sent = true;
+                if owner.managed {
+                    // Without a successful group close, do not reap the leader and lose the
+                    // only safe PGID identity fence. Keep the entire owner quarantined.
+                    owner.phase = OwnerPhase::Quarantined;
+                    state.terminal = true;
+                    runtime.control.changed.notify_all();
+                    registry.changed.notify_all();
+                    drop(state);
+                    owner.child = Some(child);
+                    owner.spawned = Some(runtime);
+                    return true;
+                }
             }
         }
         progressed = true;
@@ -439,7 +462,24 @@ fn pump_spawned_record(registry: &OwnerRegistry, record: &Arc<Mutex<OwnerRecord>
 
     if !owner.reaped {
         note_numeric_operation_owner(&owner);
-        match child.try_wait() {
+        let mut wait_operation = "wait for child";
+        let observation = if owner.managed && !state.kill_sent {
+            match managed_leader_exited(&child) {
+                Ok(false) => Ok(None),
+                Err(error) if error.kind() == io::ErrorKind::Interrupted => Ok(None),
+                Ok(true) => match close_managed_group(child.id()) {
+                    Ok(()) => child.wait().map(Some),
+                    Err(error) => {
+                        wait_operation = "terminate process group";
+                        Err(error)
+                    }
+                },
+                Err(error) => Err(error),
+            }
+        } else {
+            child.try_wait()
+        };
+        match observation {
             Ok(Some(status)) => {
                 state.exit = Some(process_exit(status));
                 owner.reaped = true;
@@ -450,7 +490,7 @@ fn pump_spawned_record(registry: &OwnerRegistry, record: &Arc<Mutex<OwnerRecord>
             Err(error) if error.raw_os_error() == Some(libc::ECHILD) => {
                 owner.phase = OwnerPhase::Quarantined;
                 if state.error.is_none() {
-                    state.error = Some(process_io_cause("wait for child", &state.program, error));
+                    state.error = Some(process_io_cause(wait_operation, &state.program, error));
                 }
                 state.terminal = true;
                 runtime.control.changed.notify_all();
@@ -462,7 +502,7 @@ fn pump_spawned_record(registry: &OwnerRegistry, record: &Arc<Mutex<OwnerRecord>
             }
             Err(error) => {
                 if state.error.is_none() {
-                    state.error = Some(process_io_cause("wait for child", &state.program, error));
+                    state.error = Some(process_io_cause(wait_operation, &state.program, error));
                 }
                 state.terminal = true;
                 runtime.control.changed.notify_all();
@@ -524,10 +564,82 @@ fn process_exit(status: std::process::ExitStatus) -> ProcessExit {
     }
 }
 
+/// Observe leader exit without consuming the wait status, preserving its PID as a process-group
+/// identity fence until the managed group has been closed.
+fn managed_leader_exited(child: &OsChild) -> io::Result<bool> {
+    // SAFETY: siginfo is initialized by waitid for this owned child PID.
+    let mut info: libc::siginfo_t = unsafe { std::mem::zeroed() };
+    // SAFETY: WNOWAIT observes but does not reap the exact still-owned child.
+    let result = unsafe {
+        libc::waitid(
+            libc::P_PID,
+            child.id() as libc::id_t,
+            &mut info,
+            libc::WEXITED | libc::WNOHANG | libc::WNOWAIT,
+        )
+    };
+    if result < 0 {
+        return Err(io::Error::last_os_error());
+    }
+    // SAFETY: waitid returned successfully and initialized siginfo.
+    let observed_pid = unsafe { info.si_pid() };
+    if observed_pid == 0 {
+        Ok(false)
+    } else if observed_pid == child.id() as libc::pid_t {
+        Ok(true)
+    } else {
+        Err(io::Error::new(
+            io::ErrorKind::InvalidData,
+            "waitid returned an unexpected child identity",
+        ))
+    }
+}
+
+/// Close a managed process group while its leader is still unreaped and pins the PGID.
+fn close_managed_group(pid: u32) -> io::Result<()> {
+    // SAFETY: negative pid addresses only the process group created for this owned child.
+    if unsafe { libc::kill(-(pid as libc::pid_t), libc::SIGKILL) } == 0 {
+        return Ok(());
+    }
+    let error = io::Error::last_os_error();
+    if error.raw_os_error() == Some(libc::ESRCH) {
+        Ok(())
+    } else {
+        Err(error)
+    }
+}
+
+struct ManagedTerminationError {
+    operation: &'static str,
+    source: io::Error,
+}
+
+/// Close the original scope and independently stop its owned leader. A child can move itself
+/// to another same-session group after pre_exec establishes the initial scope, so the group
+/// signal alone does not guarantee that the direct child has stopped.
+fn terminate_managed_child(child: &mut OsChild) -> Result<(), ManagedTerminationError> {
+    let group_error = close_managed_group(child.id()).err();
+    let child_error = child.kill().err();
+    if let Some(source) = group_error {
+        return Err(ManagedTerminationError {
+            operation: "terminate process group",
+            source,
+        });
+    }
+    if let Some(source) = child_error {
+        return Err(ManagedTerminationError {
+            operation: "terminate child",
+            source,
+        });
+    }
+    Ok(())
+}
+
 struct LaunchReservation {
     registry: Arc<OwnerRegistry>,
     record: Arc<Mutex<OwnerRecord>>,
     active: bool,
+    managed: bool,
 }
 
 impl LaunchReservation {
@@ -537,6 +649,7 @@ impl LaunchReservation {
             .lock()
             .unwrap_or_else(|poisoned| poisoned.into_inner());
         owner.child = Some(child);
+        owner.managed = self.managed;
         owner.phase = OwnerPhase::Caller;
     }
 
@@ -574,6 +687,7 @@ impl LaunchReservation {
     }
 
     fn drive(&mut self) -> DriverToken<'_> {
+        let managed = self.managed;
         let child = {
             let mut owner = self
                 .record
@@ -585,6 +699,7 @@ impl LaunchReservation {
         DriverToken {
             reservation: self,
             child: Some(child),
+            managed,
             completed: false,
             termination_attempted: false,
             reaped: false,
@@ -629,13 +744,24 @@ impl Drop for LaunchReservation {
                 child.stdout.take();
                 child.stderr.take();
                 note_numeric_operation(&self.record);
-                let _ = child.kill();
+                let (termination, _operation) = if self.managed {
+                    match terminate_managed_child(&mut child) {
+                        Ok(()) => (Ok(()), "terminate process group and child"),
+                        Err(error) => (Err(error.source), error.operation),
+                    }
+                } else {
+                    (child.kill(), "terminate child")
+                };
                 let mut owner = self
                     .record
                     .lock()
                     .unwrap_or_else(|poisoned| poisoned.into_inner());
                 owner.child = Some(child);
-                owner.phase = OwnerPhase::CleanupPending;
+                owner.phase = if self.managed && termination.is_err() {
+                    OwnerPhase::Quarantined
+                } else {
+                    OwnerPhase::CleanupPending
+                };
                 owner.pump_finished = true;
                 self.registry.changed.notify_all();
                 self.active = false;
@@ -660,6 +786,7 @@ impl Drop for LaunchReservation {
 struct DriverToken<'a> {
     reservation: &'a mut LaunchReservation,
     child: Option<OsChild>,
+    managed: bool,
     completed: bool,
     termination_attempted: bool,
     reaped: bool,
@@ -723,7 +850,25 @@ impl Drop for DriverToken<'_> {
             if !self.termination_attempted {
                 if let Some(child) = self.child.as_mut() {
                     note_numeric_operation(&self.reservation.record);
-                    let _ = child.kill();
+                    let result = if self.managed {
+                        terminate_managed_child(child).map_err(|error| error.source)
+                    } else {
+                        child.kill()
+                    };
+                    if result.is_err() && self.managed {
+                        if let Some(child) = self.child.take() {
+                            let mut owner = self
+                                .reservation
+                                .record
+                                .lock()
+                                .unwrap_or_else(|p| p.into_inner());
+                            owner.child = Some(child);
+                            owner.phase = OwnerPhase::Quarantined;
+                        }
+                        self.reservation.active = false;
+                        self.completed = true;
+                        return;
+                    }
                 }
             }
             if let Some(mut child) = self.child.take() {
@@ -1496,12 +1641,7 @@ fn spawn_child(
     if !state.config.programs.allows(program) {
         return Err(SysError::Denied(format!("program `{program}` is not allowed")).into());
     }
-    if state.config.process_scope != ProcessScope::DirectChild {
-        return Err(SysError::Denied(
-            "Managed process scope is not supported by this target".into(),
-        )
-        .into());
-    }
+    let managed = state.config.process_scope == ProcessScope::Managed;
     let engine_limit = {
         #[cfg(not(feature = "unchecked"))]
         {
@@ -1543,16 +1683,20 @@ fn spawn_child(
     for (key, value) in options.env {
         command.env(key, value);
     }
-    if let Some(dir) = cwd.as_ref() {
-        let fd = dir.as_raw_fd();
-        // SAFETY: only async-signal-safe fchdir is called with an owned directory descriptor.
+    if cwd.is_some() || managed {
+        let fd = cwd.as_ref().map(AsRawFd::as_raw_fd);
+        // SAFETY: only async-signal-safe setpgid/fchdir syscalls use copied values in the child.
         unsafe {
             command.pre_exec(move || {
-                if libc::fchdir(fd) == 0 {
-                    Ok(())
-                } else {
-                    Err(io::Error::last_os_error())
+                if managed && libc::setpgid(0, 0) < 0 {
+                    return Err(io::Error::last_os_error());
                 }
+                if let Some(fd) = fd {
+                    if libc::fchdir(fd) < 0 {
+                        return Err(io::Error::last_os_error());
+                    }
+                }
+                Ok(())
             });
         }
     }
@@ -1568,6 +1712,7 @@ fn spawn_child(
         }
     }
     .map_err(|e| SysError::io("reserve process cleanup", program, &e))?;
+    reservation.managed = managed;
     let mut child =
         Command::spawn(&mut command).map_err(|e| SysError::io("spawn process", program, &e))?;
     let pid = child.id();
@@ -1618,12 +1763,7 @@ fn run_map(
     if !state.config.programs.allows(program) {
         return Err(SysError::Denied(format!("program `{program}` is not allowed")).into());
     }
-    if state.config.process_scope != ProcessScope::DirectChild {
-        return Err(SysError::Denied(
-            "Managed process scope is not supported by this target".into(),
-        )
-        .into());
-    }
+    let managed = state.config.process_scope == ProcessScope::Managed;
     let engine_limit = {
         #[cfg(not(feature = "unchecked"))]
         {
@@ -1670,16 +1810,20 @@ fn run_map(
     for (key, value) in options.env {
         command.env(key, value);
     }
-    if let Some(dir) = cwd.as_ref() {
-        let fd = dir.as_raw_fd();
-        // SAFETY: the closure only invokes async-signal-safe fchdir on a parent-owned open fd.
+    if cwd.is_some() || managed {
+        let fd = cwd.as_ref().map(AsRawFd::as_raw_fd);
+        // SAFETY: only async-signal-safe setpgid/fchdir syscalls use copied values in the child.
         unsafe {
             command.pre_exec(move || {
-                if libc::fchdir(fd) == 0 {
-                    Ok(())
-                } else {
-                    Err(io::Error::last_os_error())
+                if managed && libc::setpgid(0, 0) < 0 {
+                    return Err(io::Error::last_os_error());
                 }
+                if let Some(fd) = fd {
+                    if libc::fchdir(fd) < 0 {
+                        return Err(io::Error::last_os_error());
+                    }
+                }
+                Ok(())
             });
         }
     }
@@ -1701,6 +1845,7 @@ fn run_map(
         }
     }
     .map_err(|e| SysError::io("reserve process cleanup", program, &e))?;
+    reservation.managed = managed;
     // The monotonic deadline begins immediately before process creation.
     let started = Instant::now();
     faults.note_spawn_operation();
@@ -1897,7 +2042,25 @@ fn supervise(
         let mut expired = timeout.is_some_and(|t| started.elapsed() >= t);
         if !driver.reaped {
             faults.note_fault_operation();
-            match driver.child_mut().try_wait() {
+            let mut wait_operation = "wait for process";
+            let wait_result = if driver.managed {
+                match managed_leader_exited(driver.child_mut()) {
+                    Ok(false) => Ok(None),
+                    Err(error) if error.kind() == io::ErrorKind::Interrupted => Ok(None),
+                    Ok(true) => {
+                        if let Err(error) = close_managed_group(driver.child_mut().id()) {
+                            wait_operation = "terminate process group";
+                            Err(error)
+                        } else {
+                            driver.child_mut().wait().map(Some)
+                        }
+                    }
+                    Err(error) => Err(error),
+                }
+            } else {
+                driver.child_mut().try_wait()
+            };
+            match wait_result {
                 Ok(s) => {
                     if let Some(value) = s.as_ref() {
                         driver.observe_reaped(value.clone());
@@ -1905,13 +2068,14 @@ fn supervise(
                     status = s;
                 }
                 Err(e) => {
+                    let identity_lost = e.raw_os_error() == Some(libc::ECHILD) || driver.managed;
                     return fail(
                         &mut driver,
                         &mut stdin,
                         &mut stdout,
                         &mut stderr,
                         ProcessCause::Io {
-                            op: "wait for process",
+                            op: wait_operation,
                             target: program.into(),
                             kind: e.kind(),
                             message: e.to_string(),
@@ -1921,8 +2085,8 @@ fn supervise(
                         out_eof,
                         err_eof,
                         faults,
-                        e.raw_os_error() == Some(libc::ECHILD),
-                    )
+                        identity_lost,
+                    );
                 }
             }
         }
@@ -2212,12 +2376,25 @@ fn fail(
     } else if !driver.reaped {
         driver.termination_attempted = true;
         faults.note_fault_operation();
-        if let Err(e) = faults.kill(driver.child_mut()) {
+        let termination = if driver.managed {
+            terminate_managed_child(driver.child_mut())
+                .map_err(|error| (error.operation, error.source))
+        } else {
+            faults
+                .kill(driver.child_mut())
+                .map_err(|error| ("kill child", error))
+        };
+        if let Err((operation, e)) = termination {
             diagnostics.push(super::ProcessDiagnostic::new(
-                "kill child",
+                operation,
                 Some(e.kind()),
                 e.to_string(),
             ));
+            if driver.managed {
+                // Do not consume the leader's wait status after a failed group close; its
+                // unreaped identity is the only fence against signaling a reused PGID.
+                identity_lost = true;
+            }
         }
     }
     let cleanup_deadline = Instant::now() + Duration::from_secs(1);

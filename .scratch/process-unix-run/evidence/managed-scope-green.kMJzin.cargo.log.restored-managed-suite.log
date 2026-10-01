@@ -1,0 +1,70 @@
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-57g7hae9/source)
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:1716:9
+     |
+1716 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+     |
+     = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2035:9
+     |
+2035 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: methods `numeric_operations_probe`, `quarantine_observations_probe`, and `fail_reservation` are never used
+    --> src/packages/sys/process/unix.rs:1059:8
+     |
+ 988 | impl ExecutionFaults {
+     | -------------------- methods in this implementation
+...
+1059 |     fn numeric_operations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1070 |     fn quarantine_observations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1095 |     fn fail_reservation(&self) -> bool {
+     |        ^^^^^^^^^^^^^^^^
+     |
+     = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (lib) generated 3 warnings (run `cargo fix --lib -p rhai` to apply 2 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 7.20s
+     Running tests/sys_process.rs (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-57g7hae9/target/debug/deps/sys_process-a4f350212a887c3b)
+
+running 6 tests
+test managed_run_closes_worker_after_leader_exit_and_preserves_sentinel ... managed_fixture_started root=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-57g7hae9/tmp/rhai-sys-test-5998-managed_run_closes_worker_after_leader_exit_and_preserves_sentinel-0 test_pid=5998 sentinel_pid=6000
+managed_normal_leader pid=6001 pgid=6001 esrch=true
+managed_normal_worker_leaf worker_pid=6002 worker_esrch=true leaf_pid=6003 leaf_esrch=true
+managed_normal_sentinel pid=6000 live=true
+managed-scope sentinel_cleanup pid=6000 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(6002) worker_esrch=true leaf_pid=Some(6003) leaf_esrch=true
+ok
+test managed_scope_escape_fixture ... ok
+test managed_scope_leader_fixture ... ok
+test managed_scope_leaf_fixture ... ok
+test managed_scope_worker_fixture ... ok
+test managed_timeout_kills_leader_after_it_changes_process_group ... managed_escape_started root=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-57g7hae9/tmp/rhai-sys-test-5998-managed_timeout_kills_leader_after_it_changes_process_group-1 test_pid=5998 sentinel_pid=6004 sentinel_pgid=6004
+managed_escape_sentinel_live pid=6004 live=true
+managed_escape_leader pid=6005 original_pgid=6005 escaped_pgid=6004 esrch=true
+managed_escape_fixture_cleanup pid=Some(6005) esrch=true
+managed-scope sentinel_cleanup pid=6004 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 11 filtered out; finished in 0.65s
+

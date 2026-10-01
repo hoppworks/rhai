@@ -3,14 +3,20 @@
 
 mod sys_support;
 
-use rhai::packages::sys::{FsAccess, ProcessCause, ProgramPolicy, SysConfig, SysError};
+use rhai::packages::sys::{FsAccess, ProcessCause, ProcessScope, ProgramPolicy, SysConfig, SysError};
 #[cfg(not(feature = "no_index"))]
 use rhai::Blob;
 use rhai::Map;
 #[cfg(not(feature = "no_index"))]
 use std::io::{Read, Write};
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+use std::os::unix::process::CommandExt;
 #[cfg(not(feature = "no_index"))]
 use std::process;
+#[cfg(not(feature = "no_index"))]
+use std::process::{Child, Command, Stdio};
+#[cfg(not(feature = "no_index"))]
+use std::time::{Duration, Instant};
 use sys_support::engine;
 use sys_support::TempDir;
 
@@ -124,6 +130,400 @@ fn process_fixture() {
         std::io::stderr().write_all(&[0xfe, 0x42, 0x00]).unwrap();
         process::exit(code.parse().unwrap());
     }
+}
+
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+const MANAGED_FIXTURE_ENV: &str = "RHAI_SYS_MANAGED_FIXTURE";
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+const MANAGED_ROOT_ENV: &str = "RHAI_SYS_MANAGED_ROOT";
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+const MANAGED_WORKER_ENV: &str = "RHAI_SYS_MANAGED_WORKER";
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+const MANAGED_LEAF_ENV: &str = "RHAI_SYS_MANAGED_LEAF";
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+const MANAGED_RELEASE_ENV: &str = "RHAI_SYS_MANAGED_RELEASE";
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+const MANAGED_ESCAPE_FIXTURE_ENV: &str = "RHAI_SYS_MANAGED_ESCAPE_FIXTURE";
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+const MANAGED_ESCAPE_RECORD_ENV: &str = "RHAI_SYS_MANAGED_ESCAPE_RECORD";
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+const MANAGED_ESCAPE_RELEASE_ENV: &str = "RHAI_SYS_MANAGED_ESCAPE_RELEASE";
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+const MANAGED_ESCAPE_GROUP_ENV: &str = "RHAI_SYS_MANAGED_ESCAPE_GROUP";
+
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_atomic_record(path: &std::path::Path, contents: &str) {
+    let temporary = path.with_extension(format!("tmp-{}", std::process::id()));
+    std::fs::write(&temporary, contents).unwrap();
+    std::fs::rename(temporary, path).unwrap();
+}
+
+/// Re-exec fixture moves the managed leader into a separate same-session group, then waits for
+/// fixture-owned release. This exercises exact direct-child cancellation independently of the
+/// original process-group signal.
+#[test]
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_scope_escape_fixture() {
+    if std::env::var_os(MANAGED_ESCAPE_FIXTURE_ENV).is_none() {
+        return;
+    }
+    let record = std::path::PathBuf::from(std::env::var_os(MANAGED_ESCAPE_RECORD_ENV).unwrap());
+    let release = std::path::PathBuf::from(std::env::var_os(MANAGED_ESCAPE_RELEASE_ENV).unwrap());
+    let escaped_pgid = std::env::var(MANAGED_ESCAPE_GROUP_ENV).unwrap().parse::<i32>().unwrap();
+    let pid = std::process::id() as i32;
+    let original_pgid = unsafe { libc::getpgrp() };
+    // SAFETY: this fixture is a child in the same session as the fixture-owned target group.
+    assert_eq!(unsafe { libc::setpgid(0, escaped_pgid) }, 0, "move leader into fixture-owned group");
+    assert_eq!(unsafe { libc::getpgrp() }, escaped_pgid);
+    managed_atomic_record(&record, &format!("pid={pid} original_pgid={original_pgid} escaped_pgid={escaped_pgid}\n"));
+    let deadline = Instant::now() + Duration::from_secs(10);
+    while !release.exists() && Instant::now() < deadline {
+        std::thread::sleep(Duration::from_millis(5));
+    }
+}
+
+/// Re-exec fixture leader: start a worker that inherits the captured pipes, publish both
+/// process-group identities, then exit successfully while the worker remains alive.
+#[test]
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_scope_leader_fixture() {
+    if std::env::var_os(MANAGED_FIXTURE_ENV).is_none() {
+        return;
+    }
+    let root = std::path::PathBuf::from(std::env::var_os(MANAGED_ROOT_ENV).unwrap());
+    let worker_record = std::path::PathBuf::from(std::env::var_os(MANAGED_WORKER_ENV).unwrap());
+    let leaf_record = std::path::PathBuf::from(std::env::var_os(MANAGED_LEAF_ENV).unwrap());
+    let release = std::env::var_os(MANAGED_RELEASE_ENV).unwrap();
+    let worker = Command::new(std::env::current_exe().unwrap())
+        .args(["--exact", "managed_scope_worker_fixture", "--nocapture", "--quiet"])
+        .env_clear()
+        .env(MANAGED_FIXTURE_ENV, "worker")
+        .env(MANAGED_WORKER_ENV, &worker_record)
+        .env(MANAGED_LEAF_ENV, &leaf_record)
+        .env(MANAGED_RELEASE_ENV, &release)
+        .stdin(Stdio::null())
+        .stdout(Stdio::inherit())
+        .stderr(Stdio::inherit())
+        .spawn()
+        .expect("start managed worker fixture");
+    let worker_pid = worker.id();
+    let deadline = Instant::now() + Duration::from_secs(5);
+    while !worker_record.exists() || !leaf_record.exists() {
+        assert!(Instant::now() < deadline, "worker and leaf readiness records were not published");
+        std::thread::sleep(Duration::from_millis(5));
+    }
+    let worker_text = std::fs::read_to_string(&worker_record).unwrap();
+    let worker_fields = managed_record_fields(&worker_text);
+    let leader_pid = std::process::id();
+    let leader_pgid = unsafe { libc::getpgrp() };
+    let leaf_text = std::fs::read_to_string(&leaf_record).unwrap();
+    let leaf_fields = managed_record_fields(&leaf_text);
+    managed_atomic_record(
+        &root.join("leader-record"),
+        &format!("pid={leader_pid} pgid={leader_pgid} worker={worker_pid} worker-pgid={} leaf={} leaf-pgid={}\n", worker_fields["pgid"], leaf_fields["pid"], leaf_fields["pgid"]),
+    );
+    // Dropping Child intentionally leaves the worker for the process-scope owner to close.
+    drop(worker);
+}
+
+/// Re-exec fixture worker: remain alive with inherited stdout/stderr until the fixture guard
+/// releases it, or until its bounded fallback expires after a failed assertion.
+#[test]
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_scope_worker_fixture() {
+    if std::env::var(MANAGED_FIXTURE_ENV).as_deref() != Ok("worker") {
+        return;
+    }
+    let record = std::path::PathBuf::from(std::env::var_os(MANAGED_WORKER_ENV).unwrap());
+    let leaf_record = std::path::PathBuf::from(std::env::var_os(MANAGED_LEAF_ENV).unwrap());
+    let release = std::path::PathBuf::from(std::env::var_os(MANAGED_RELEASE_ENV).unwrap());
+    let pid = std::process::id();
+    let pgid = unsafe { libc::getpgrp() };
+    managed_atomic_record(&record, &format!("pid={pid} pgid={pgid} ready=true\n"));
+    let leaf = Command::new(std::env::current_exe().unwrap())
+        .args(["--exact", "managed_scope_leaf_fixture", "--nocapture", "--quiet"])
+        .env_clear()
+        .env(MANAGED_FIXTURE_ENV, "leaf")
+        .env(MANAGED_LEAF_ENV, &leaf_record)
+        .env(MANAGED_RELEASE_ENV, &release)
+        .stdin(Stdio::null())
+        .stdout(Stdio::inherit())
+        .stderr(Stdio::inherit())
+        .spawn()
+        .expect("start managed leaf fixture");
+    let leaf_pid = leaf.id();
+    let leaf_deadline = Instant::now() + Duration::from_secs(5);
+    while !leaf_record.exists() {
+        assert!(Instant::now() < leaf_deadline, "leaf readiness record was not published");
+        std::thread::sleep(Duration::from_millis(5));
+    }
+    managed_atomic_record(&record.with_extension("child"), &format!("pid={pid} leaf={leaf_pid}\n"));
+    let deadline = Instant::now() + Duration::from_secs(15);
+    while !release.exists() && Instant::now() < deadline {
+        std::thread::sleep(Duration::from_millis(5));
+    }
+    let mut leaf = leaf;
+    if leaf.try_wait().ok().flatten().is_none() {
+        let _ = leaf.kill();
+        let _ = leaf.wait();
+    }
+    managed_atomic_record(&record.with_extension("exited"), &format!("pid={pid} released={} leaf={}\n", release.exists(), leaf_pid));
+}
+
+/// Re-exec fixture leaf: retain the managed process-group membership after both ancestors exit.
+#[test]
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_scope_leaf_fixture() {
+    if std::env::var(MANAGED_FIXTURE_ENV).as_deref() != Ok("leaf") {
+        return;
+    }
+    let record = std::path::PathBuf::from(std::env::var_os(MANAGED_LEAF_ENV).unwrap());
+    let release = std::path::PathBuf::from(std::env::var_os(MANAGED_RELEASE_ENV).unwrap());
+    let pid = std::process::id();
+    let pgid = unsafe { libc::getpgrp() };
+    managed_atomic_record(&record, &format!("pid={pid} pgid={pgid} ready=true\n"));
+    let deadline = Instant::now() + Duration::from_secs(15);
+    while !release.exists() && Instant::now() < deadline {
+        std::thread::sleep(Duration::from_millis(5));
+    }
+}
+
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+struct ManagedFixture {
+    root: TempDir,
+}
+
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+impl ManagedFixture {
+    fn new() -> Self {
+        Self { root: TempDir::new() }
+    }
+
+    fn path(&self, name: &str) -> std::path::PathBuf {
+        self.root.path().join(name)
+    }
+}
+
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+impl Drop for ManagedFixture {
+    fn drop(&mut self) {
+        // The marker is fixture-owned cleanup, never a process-name or numeric-PID signal.
+        let _ = std::fs::write(self.path("release-worker"), b"release\n");
+        let deadline = Instant::now() + Duration::from_secs(3);
+        let mut worker_pid = None;
+        let mut leaf_pid = None;
+        while Instant::now() < deadline {
+            let worker = std::fs::read_to_string(self.path("worker-record")).ok().map(|record| managed_record_fields(&record));
+            let leaf = std::fs::read_to_string(self.path("leaf-record")).ok().map(|record| managed_record_fields(&record));
+            worker_pid = worker.as_ref().and_then(|record| record.get("pid")).copied();
+            leaf_pid = leaf.as_ref().and_then(|record| record.get("pid")).copied();
+            let worker_gone = worker.as_ref().and_then(|record| record.get("pid")).map_or(false, |pid| pid_is_absent(*pid));
+            let leaf_gone = leaf.as_ref().and_then(|record| record.get("pid")).map_or(true, |pid| pid_is_absent(*pid));
+            if worker_gone && leaf_gone {
+                break;
+            }
+            std::thread::sleep(Duration::from_millis(10));
+        }
+        eprintln!(
+            "managed_fixture_cleanup worker_pid={worker_pid:?} worker_esrch={} leaf_pid={leaf_pid:?} leaf_esrch={}",
+            worker_pid.map_or(false, pid_is_absent),
+            leaf_pid.map_or(true, pid_is_absent)
+        );
+    }
+}
+
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+struct Sentinel(Child);
+
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+impl Drop for Sentinel {
+    fn drop(&mut self) {
+        let pid = self.0.id();
+        if self.0.try_wait().ok().flatten().is_none() {
+            let _ = self.0.kill();
+            let status = self.0.wait().ok();
+            eprintln!("managed-scope sentinel_cleanup pid={pid} status={status:?} esrch={}", pid_is_absent(pid as i32));
+        } else {
+            eprintln!("managed-scope sentinel_cleanup pid={pid} status=already-exited esrch={}", pid_is_absent(pid as i32));
+        }
+    }
+}
+
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+fn pid_is_absent(pid: i32) -> bool {
+    if unsafe { libc::kill(pid, 0) } == -1 {
+        std::io::Error::last_os_error().raw_os_error() == Some(libc::ESRCH)
+    } else {
+        false
+    }
+}
+
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_record_fields(record: &str) -> std::collections::HashMap<String, i32> {
+    record
+        .split_whitespace()
+        .filter_map(|field| {
+            let (key, value) = field.split_once('=')?;
+            Some((key.to_owned(), value.parse().ok()?))
+        })
+        .collect()
+}
+
+/// Host-selected managed scope closes workers that outlive a successful leader without touching
+/// an unrelated process in the runner's inherited group.
+#[test]
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_run_closes_worker_after_leader_exit_and_preserves_sentinel() {
+    let fixture = ManagedFixture::new();
+    let mut sentinel = Sentinel(
+        Command::new("/bin/sleep")
+            .arg("30")
+            .stdin(Stdio::null())
+            .stdout(Stdio::null())
+            .stderr(Stdio::null())
+            .spawn()
+            .expect("start unrelated sentinel"),
+    );
+    let sentinel_pid = sentinel.0.id() as i32;
+    eprintln!("managed_fixture_started root={} test_pid={} sentinel_pid={sentinel_pid}", fixture.root.path().display(), std::process::id());
+    let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let root = fixture.root.as_script_path();
+    let worker_record = fixture.path("worker-record").to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let leaf_record = fixture.path("leaf-record").to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let release = fixture.path("release-worker").to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let configured = SysConfig::default().programs(ProgramPolicy::AllowList(vec![executable.clone()])).process_scope(ProcessScope::Managed);
+    let engine = engine(configured);
+    let script = format!(
+        r#"run("{executable}", ["--exact", "managed_scope_leader_fixture", "--nocapture", "--quiet"], #{{
+            env_clear: true,
+            env: #{{ {MANAGED_FIXTURE_ENV}: "leader", {MANAGED_ROOT_ENV}: "{root}", {MANAGED_WORKER_ENV}: "{worker_record}", {MANAGED_LEAF_ENV}: "{leaf_record}", {MANAGED_RELEASE_ENV}: "{release}" }},
+            timeout: 4.0
+        }})"#
+    );
+
+    let result = engine.eval::<Map>(&script).unwrap_or_else(|error| {
+        if let rhai::EvalAltResult::ErrorRuntime(value, _) = error.as_ref() {
+            if let Some(SysError::Denied(message)) = value.clone().try_cast::<SysError>() {
+                panic!("managed run returned SysError::Denied: {message}");
+            }
+        }
+        panic!("managed run returned a non-Denied error: {error:?}");
+    });
+    assert_eq!(result["success"].as_bool().unwrap(), true);
+    assert_eq!(result["code"].as_int().unwrap(), 0);
+    assert_eq!(result["timed_out"].as_bool().unwrap(), false);
+    assert_eq!(result["stdout_complete"].as_bool().unwrap(), true);
+    assert_eq!(result["stderr_complete"].as_bool().unwrap(), true);
+
+    let leader = std::fs::read_to_string(fixture.path("leader-record")).unwrap();
+    let worker = std::fs::read_to_string(fixture.path("worker-record")).unwrap();
+    let leaf = std::fs::read_to_string(fixture.path("leaf-record")).unwrap();
+    let leader = managed_record_fields(&leader);
+    let worker = managed_record_fields(&worker);
+    let leaf = managed_record_fields(&leaf);
+    let leader_gone = pid_is_absent(*leader.get("pid").unwrap());
+    let worker_gone = pid_is_absent(*worker.get("pid").unwrap());
+    let leaf_gone = pid_is_absent(*leaf.get("pid").unwrap());
+    let sentinel_live = sentinel.0.try_wait().unwrap().is_none();
+    eprintln!("managed_normal_leader pid={} pgid={} esrch={leader_gone}", leader["pid"], leader["pgid"]);
+    eprintln!("managed_normal_worker_leaf worker_pid={} worker_esrch={worker_gone} leaf_pid={} leaf_esrch={leaf_gone}", worker["pid"], leaf["pid"]);
+    eprintln!("managed_normal_sentinel pid={sentinel_pid} live={sentinel_live}");
+    assert_eq!(leader.get("pgid"), leader.get("pid"), "leader must own a new process group");
+    assert_eq!(worker.get("pgid"), leader.get("pgid"), "worker must inherit managed group");
+    assert_eq!(leaf.get("pgid"), leader.get("pgid"), "grandchild must inherit managed group");
+    assert_eq!(leader.get("worker"), worker.get("pid"), "leader and worker receipts must identify the same child");
+    assert_eq!(leader.get("leaf"), leaf.get("pid"), "leader receipt must identify the same grandchild");
+    assert!(leader_gone, "leader must be reaped before run returns");
+    assert!(worker_gone, "managed worker must be gone before run returns");
+    assert!(leaf_gone, "managed grandchild must be gone before run returns");
+    assert!(sentinel_live, "managed cleanup terminated unrelated sentinel");
+    drop(sentinel);
+    assert!(pid_is_absent(sentinel_pid), "fixture-owned sentinel cleanup must reap its exact child");
+}
+
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+struct ManagedEscapeFixture {
+    root: TempDir,
+}
+
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+impl ManagedEscapeFixture {
+    fn new() -> Self {
+        Self { root: TempDir::new() }
+    }
+
+    fn path(&self, name: &str) -> std::path::PathBuf {
+        self.root.path().join(name)
+    }
+}
+
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+impl Drop for ManagedEscapeFixture {
+    fn drop(&mut self) {
+        let _ = std::fs::write(self.path("release"), b"release\n");
+        let record = std::fs::read_to_string(self.path("leader-record")).ok();
+        let pid = record.as_deref().and_then(|value| managed_record_fields(value).get("pid").copied());
+        let deadline = Instant::now() + Duration::from_secs(2);
+        while pid.is_some_and(|pid| !pid_is_absent(pid)) && Instant::now() < deadline {
+            std::thread::sleep(Duration::from_millis(10));
+        }
+        eprintln!("managed_escape_fixture_cleanup pid={pid:?} esrch={}", pid.map_or(true, pid_is_absent));
+    }
+}
+
+/// Timeout closes the original group and separately stops its direct leader even when that
+/// leader moved into another fixture-owned same-session group. The unrelated group member lives.
+#[test]
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_timeout_kills_leader_after_it_changes_process_group() {
+    let mut sentinel = Sentinel({
+        let mut command = Command::new("/bin/sleep");
+        command.arg("30").stdin(Stdio::null()).stdout(Stdio::null()).stderr(Stdio::null());
+        // SAFETY: the fixture sentinel creates a separate process group in the inherited session.
+        unsafe {
+            command.pre_exec(|| {
+                if libc::setpgid(0, 0) < 0 {
+                    return Err(std::io::Error::last_os_error());
+                }
+                Ok(())
+            });
+        }
+        command.spawn().expect("start managed-scope sentinel")
+    });
+    let sentinel_pid = sentinel.0.id() as i32;
+    let sentinel_pgid = unsafe { libc::getpgid(sentinel_pid) };
+    assert_eq!(sentinel_pgid, sentinel_pid, "sentinel must own its fixture process group");
+    let fixture = ManagedEscapeFixture::new();
+    eprintln!("managed_escape_started root={} test_pid={} sentinel_pid={} sentinel_pgid={}", fixture.root.path().display(), std::process::id(), sentinel_pid, sentinel_pgid);
+    let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let record = fixture.path("leader-record").to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let release = fixture.path("release").to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let config = SysConfig::default().programs(ProgramPolicy::AllowList(vec![executable.clone()])).process_scope(ProcessScope::Managed);
+    let engine = engine(config);
+    let script = format!(
+        r#"run("{executable}", ["--exact", "managed_scope_escape_fixture", "--nocapture", "--quiet"], #{{
+            env_clear: true,
+            env: #{{ {MANAGED_ESCAPE_FIXTURE_ENV}: "1", {MANAGED_ESCAPE_RECORD_ENV}: "{record}", {MANAGED_ESCAPE_RELEASE_ENV}: "{release}", {MANAGED_ESCAPE_GROUP_ENV}: "{sentinel_pgid}" }},
+            timeout: 0.5,
+            max_output: 4096
+        }})"#
+    );
+    let result = engine.eval::<Map>(&script);
+    let child_record = std::fs::read_to_string(fixture.path("leader-record")).unwrap();
+    let child = managed_record_fields(&child_record);
+    assert_eq!(child.get("pid"), child.get("original_pgid"));
+    assert_eq!(child.get("escaped_pgid"), Some(&sentinel_pgid));
+    assert_ne!(child.get("original_pgid"), child.get("escaped_pgid"));
+    let sentinel_live = sentinel.0.try_wait().unwrap().is_none();
+    eprintln!("managed_escape_sentinel_live pid={sentinel_pid} live={sentinel_live}");
+    assert!(sentinel_live, "cleanup signaled the escaped child's unrelated group");
+    eprintln!("managed_escape_leader pid={} original_pgid={} escaped_pgid={} esrch={}", child["pid"], child["original_pgid"], child["escaped_pgid"], pid_is_absent(child["pid"]));
+    assert!(pid_is_absent(*child.get("pid").unwrap()), "managed direct leader must be gone before return");
+    let result = result.unwrap_or_else(|error| panic!("managed timeout did not return its report: {error:?}"));
+    assert_eq!(result["timed_out"].as_bool().unwrap(), true);
+    drop(fixture);
+    drop(sentinel);
+    assert!(pid_is_absent(sentinel_pid), "fixture must reap the exact sentinel");
 }
 
 #[test]
