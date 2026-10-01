@@ -1,0 +1,32 @@
+{
+  "invocation_session_id": 71354,
+  "invocation_exit_status": 1,
+  "builds": [
+    {"name": "native-rust", "status": 0, "seconds": 2.636},
+    {"name": "fixture", "status": 0, "seconds": 0.14}
+  ],
+  "case_attempted": "normal",
+  "cases_accepted": 0,
+  "failure": "pipes frame does not match the complete schema",
+  "failure_detail": "The sender emits the intended five keys. The receiver sorts keys alphabetically but compares against a non-alphabetical expected vector, placing anchor_pgid before anchor_pid in the sorted actual vector.",
+  "runtime_path": "/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-nfvecqtr",
+  "runtime_exists_after_scoped_wrapper_exit": false,
+  "driver": {"pid": 60954, "original_start_identity_still_matches": false},
+  "supervisor": {"pid": 60953, "pgid": 60953, "original_start_identity_still_matches": false},
+  "custodian": {"pid": 61056, "original_start_identity_still_matches": false, "pgid_rows_after_exit": []},
+  "supervisor_pgid_rows_after_exit": [],
+  "fixture_and_build_identities_still_match": false,
+  "sampler_children": {
+    "count": 13,
+    "all_direct_popen_handles_terminal": true,
+    "all_return_codes_present": true,
+    "all_return_codes_zero": true,
+    "all_termination_requests_false": true,
+    "all_kill_requests_false": true
+  },
+  "resource_samples": 13,
+  "sampled_private_bytes_max": 38835384,
+  "sampled_process_max": 6,
+  "sampler_failure": null,
+  "readback_method": "After scoped wrapper exit, checked exact runtime path, recorded Darwin start identities for driver/supervisor/custodian/fixture/build PIDs, and exact process groups 60953 and 61056 via /bin/ps; all recorded identities were absent and both groups empty. Direct Popen sampler handles recorded terminal status for every child."
+}

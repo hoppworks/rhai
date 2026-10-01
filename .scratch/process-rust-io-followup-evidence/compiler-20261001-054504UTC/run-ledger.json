@@ -1,0 +1,434 @@
+{
+  "binaries": [
+    {
+      "binary_sha256": "093744ef2ca74354e394638e434236b646bdcf93cb68b37eda73d5eaf1e8a5b4",
+      "manifest": "process-rust-io/Cargo.toml"
+    },
+    {
+      "binary_sha256": "1b1b1337841f1ae7f84938bcd262a9e4aa67f707611c9018dba2a4971ffd282a",
+      "manifest": "process-prototype/Cargo.toml"
+    }
+  ],
+  "builds": [
+    {
+      "log": "native-rust-build.log",
+      "log_sha256": "7887b552c714cbb644560496a2802e183d2bd4d97c438d5ee3d6b779da871409",
+      "name": "native-rust",
+      "output_complete": true,
+      "pid": 60955,
+      "seconds": 2.636,
+      "start_identity": [
+        1790833673,
+        161429
+      ],
+      "status": 0,
+      "stop_reason": null,
+      "timed_out": false
+    },
+    {
+      "log": "fixture-build.log",
+      "log_sha256": "a7dddfb2f641acf067b91ea736a234eddc2c3a09b901bd8242037f914ed9143b",
+      "name": "fixture",
+      "output_complete": true,
+      "pid": 61050,
+      "seconds": 0.14,
+      "start_identity": [
+        1790833675,
+        811056
+      ],
+      "status": 0,
+      "stop_reason": null,
+      "timed_out": false
+    }
+  ],
+  "case_order": [
+    "normal",
+    "cancel",
+    "missing-wake",
+    "term",
+    "kill",
+    "stdout-4096-4096",
+    "stdout-4096-4097",
+    "stdout-0-0",
+    "stdout-0-1",
+    "stderr-4096-4096",
+    "stderr-4096-4097",
+    "stderr-0-0",
+    "stderr-0-1"
+  ],
+  "cases": [],
+  "driver": {
+    "parent_pid": 60953,
+    "parent_start_identity": [
+      1790833673,
+      85379
+    ],
+    "pid": 60954,
+    "start_identity": [
+      1790833673,
+      109821
+    ]
+  },
+  "elapsed_seconds": 3.291,
+  "failure": "RuntimeError('custodian status or runtime identity failed; retained /private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-nfvecqtr/private-source/process-rust-io/runs/custody-run-58lqxaq5')",
+  "limits": {
+    "build_seconds": 300.0,
+    "cargo_jobs": 2,
+    "case_seconds": 45.0,
+    "export_reserve_seconds": 10.0,
+    "invocation_seconds": 600.0,
+    "owned_fixture_process_bound": 7,
+    "owned_fixture_process_limit": 8,
+    "owned_fixture_process_scope": "controller + custodian + runner + leader + anchor + sentinel + optional holder; driver/supervisor excluded",
+    "private_bytes": 1073741824,
+    "process_peak_method": "sampled owned PID/PPID/PGID/lstart graph; sampled maximum only, no continuous-peak claim",
+    "process_resources": 8,
+    "rust_fd_method": "RLIMIT_NOFILE=32 enforced in Rust; three worker handles checked at native_done",
+    "rust_fds": 32,
+    "rust_workers": 3,
+    "sampler": "one live ps/storage sampler at a time, every 250ms; fixture and sampler bound <=8",
+    "sampler_process_bound": 1,
+    "stream_bytes": 2097152
+  },
+  "resource_samples": [
+    {
+      "elapsed_seconds": 0.0151,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:47:53 2026",
+          "pgid": 60953,
+          "pid": 60955,
+          "ppid": 60954
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "build:native-rust",
+      "private_bytes": 144615,
+      "process_limit": 8,
+      "sampler_pid": 60956,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0187,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:47:53 2026",
+          "pgid": 60953,
+          "pid": 60955,
+          "ppid": 60954
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "build:native-rust",
+      "private_bytes": 506032,
+      "process_limit": 8,
+      "sampler_pid": 60967,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0212,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:47:53 2026",
+          "pgid": 60953,
+          "pid": 60955,
+          "ppid": 60954
+        }
+      ],
+      "owned_processes_including_sampler": 2,
+      "phase": "build:native-rust",
+      "private_bytes": 4334644,
+      "process_limit": 8,
+      "sampler_pid": 60969,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0284,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:47:53 2026",
+          "pgid": 60953,
+          "pid": 60955,
+          "ppid": 60954
+        },
+        {
+          "lstart": "Thu Oct  1 07:47:53 2026",
+          "pgid": 60953,
+          "pid": 60970,
+          "ppid": 60955
+        },
+        {
+          "lstart": "Thu Oct  1 07:47:53 2026",
+          "pgid": 60953,
+          "pid": 60971,
+          "ppid": 60955
+        }
+      ],
+      "owned_processes_including_sampler": 4,
+      "phase": "build:native-rust",
+      "private_bytes": 10239393,
+      "process_limit": 8,
+      "sampler_pid": 60973,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0318,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:47:53 2026",
+          "pgid": 60953,
+          "pid": 60955,
+          "ppid": 60954
+        },
+        {
+          "lstart": "Thu Oct  1 07:47:53 2026",
+          "pgid": 60953,
+          "pid": 60970,
+          "ppid": 60955
+        },
+        {
+          "lstart": "Thu Oct  1 07:47:53 2026",
+          "pgid": 60953,
+          "pid": 60971,
+          "ppid": 60955
+        },
+        {
+          "lstart": "Thu Oct  1 07:47:54 2026",
+          "pgid": 60953,
+          "pid": 60980,
+          "ppid": 60970
+        },
+        {
+          "lstart": "Thu Oct  1 07:47:54 2026",
+          "pgid": 60953,
+          "pid": 60981,
+          "ppid": 60971
+        }
+      ],
+      "owned_processes_including_sampler": 6,
+      "phase": "build:native-rust",
+      "private_bytes": 12098881,
+      "process_limit": 8,
+      "sampler_pid": 60982,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0288,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:47:53 2026",
+          "pgid": 60953,
+          "pid": 60955,
+          "ppid": 60954
+        },
+        {
+          "lstart": "Thu Oct  1 07:47:54 2026",
+          "pgid": 60953,
+          "pid": 60987,
+          "ppid": 60955
+        },
+        {
+          "lstart": "Thu Oct  1 07:47:54 2026",
+          "pgid": 60953,
+          "pid": 60988,
+          "ppid": 60955
+        }
+      ],
+      "owned_processes_including_sampler": 4,
+      "phase": "build:native-rust",
+      "private_bytes": 12232529,
+      "process_limit": 8,
+      "sampler_pid": 60989,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0275,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:47:53 2026",
+          "pgid": 60953,
+          "pid": 60955,
+          "ppid": 60954
+        },
+        {
+          "lstart": "Thu Oct  1 07:47:54 2026",
+          "pgid": 60953,
+          "pid": 60988,
+          "ppid": 60955
+        },
+        {
+          "lstart": "Thu Oct  1 07:47:54 2026",
+          "pgid": 60953,
+          "pid": 60997,
+          "ppid": 60955
+        }
+      ],
+      "owned_processes_including_sampler": 4,
+      "phase": "build:native-rust",
+      "private_bytes": 14040026,
+      "process_limit": 8,
+      "sampler_pid": 60998,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0265,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:47:53 2026",
+          "pgid": 60953,
+          "pid": 60955,
+          "ppid": 60954
+        },
+        {
+          "lstart": "Thu Oct  1 07:47:54 2026",
+          "pgid": 60953,
+          "pid": 60988,
+          "ppid": 60955
+        },
+        {
+          "lstart": "Thu Oct  1 07:47:54 2026",
+          "pgid": 60953,
+          "pid": 61032,
+          "ppid": 60955
+        }
+      ],
+      "owned_processes_including_sampler": 4,
+      "phase": "build:native-rust",
+      "private_bytes": 14059193,
+      "process_limit": 8,
+      "sampler_pid": 61033,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0281,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:47:53 2026",
+          "pgid": 60953,
+          "pid": 60955,
+          "ppid": 60954
+        },
+        {
+          "lstart": "Thu Oct  1 07:47:55 2026",
+          "pgid": 60953,
+          "pid": 61035,
+          "ppid": 60955
+        },
+        {
+          "lstart": "Thu Oct  1 07:47:55 2026",
+          "pgid": 60953,
+          "pid": 61039,
+          "ppid": 60955
+        }
+      ],
+      "owned_processes_including_sampler": 4,
+      "phase": "build:native-rust",
+      "private_bytes": 26710999,
+      "process_limit": 8,
+      "sampler_pid": 61040,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0289,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:47:53 2026",
+          "pgid": 60953,
+          "pid": 60955,
+          "ppid": 60954
+        },
+        {
+          "lstart": "Thu Oct  1 07:47:55 2026",
+          "pgid": 60953,
+          "pid": 61041,
+          "ppid": 60955
+        }
+      ],
+      "owned_processes_including_sampler": 3,
+      "phase": "build:native-rust",
+      "private_bytes": 32580123,
+      "process_limit": 8,
+      "sampler_pid": 61042,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0284,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:47:53 2026",
+          "pgid": 60953,
+          "pid": 60955,
+          "ppid": 60954
+        },
+        {
+          "lstart": "Thu Oct  1 07:47:55 2026",
+          "pgid": 60953,
+          "pid": 61043,
+          "ppid": 60955
+        }
+      ],
+      "owned_processes_including_sampler": 3,
+      "phase": "build:native-rust",
+      "private_bytes": 35514937,
+      "process_limit": 8,
+      "sampler_pid": 61044,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0374,
+      "owned_process_identities": [],
+      "owned_processes_including_sampler": 1,
+      "phase": "build:fixture",
+      "private_bytes": 38835384,
+      "process_limit": 8,
+      "sampler_pid": 61055,
+      "storage_retry_used": false
+    },
+    {
+      "elapsed_seconds": 0.0353,
+      "owned_process_identities": [
+        {
+          "lstart": "Thu Oct  1 07:47:55 2026",
+          "pgid": 61056,
+          "pid": 61056,
+          "ppid": 60954
+        },
+        {
+          "lstart": "Thu Oct  1 07:47:56 2026",
+          "pgid": 61057,
+          "pid": 61057,
+          "ppid": 61056
+        }
+      ],
+      "owned_processes_including_sampler": 4,
+      "phase": "case:normal",
+      "private_bytes": 38835384,
+      "process_limit": 8,
+      "sampler_pid": 61058,
+      "storage_retry_used": false
+    }
+  ],
+  "sampled_private_bytes_max": 38835384,
+  "sampled_process_max": 6,
+  "sampler_failure": null,
+  "storage_observations": [
+    {
+      "bytes": 37463184,
+      "limit_bytes": 1073741824,
+      "phase": "after-native-build",
+      "retry_used": false
+    },
+    {
+      "bytes": 38835384,
+      "limit_bytes": 1073741824,
+      "phase": "after-fixture-build",
+      "retry_used": false
+    },
+    {
+      "bytes": 38835384,
+      "limit_bytes": 1073741824,
+      "phase": "before-normal",
+      "retry_used": false
+    }
+  ]
+}

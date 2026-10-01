@@ -1,0 +1,24 @@
+{
+  "driver": {
+    "parent_pid": 60953,
+    "parent_start_identity": [
+      1790833673,
+      85379
+    ],
+    "pid": 60954,
+    "start_identity": [
+      1790833673,
+      109821
+    ]
+  },
+  "runtime_path": "/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-nfvecqtr",
+  "sampler_children": "see sampler-children.json; PIDs captured from direct Popen handles and terminal outcomes recorded after communicate/reap",
+  "supervisor": {
+    "pgid": 60953,
+    "pid": 60953,
+    "start_identity": [
+      1790833673,
+      85379
+    ]
+  }
+}
