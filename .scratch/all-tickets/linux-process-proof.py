@@ -193,27 +193,43 @@ def record_process(label, pid, log):
     os.fsync(log.fileno())
 
 
-def monitor_ready():
+def monitor_health():
     heartbeat = pathlib.Path(os.environ['PROOF_CUSTODY_HEARTBEAT'])
     ready = pathlib.Path(os.environ['PROOF_CUSTODY_READY'])
     if ready.is_symlink() or not ready.is_file() or heartbeat.is_symlink() or not heartbeat.is_file():
-        return False
-    match = re.fullmatch(r'pid=(\d+) start_ticks=(\d+)\n?', ready.read_text())
+        return False, 'ready/heartbeat missing or symlinked'
+    try:
+        ready_text = ready.read_text()
+        heartbeat_text = heartbeat.read_text().strip()
+    except OSError as exc:
+        return False, f'ready/heartbeat unreadable: {type(exc).__name__}'
+    match = re.fullmatch(r'pid=(\d+) start_ticks=(\d+)\n?', ready_text)
     if not match:
-        return False
+        return False, 'ready identity malformed'
     expected_pid, expected_start = int(match.group(1)), match.group(2)
+    try:
+        age = time.time() - float(heartbeat_text)
+    except ValueError:
+        return False, 'heartbeat timestamp malformed or observed during a partial update'
+    if age > 1.0:
+        return False, f'heartbeat stale by {age:.3f}s'
     try:
         current = os.getpid()
         for _ in range(8):
             identity = proc_identity(current)
             if current == expected_pid:
-                return identity[0] == expected_start and time.time() - float(heartbeat.read_text().strip()) <= 1.0
+                if identity[0] != expected_start:
+                    return False, 'monitor root PID start tick changed'
+                return True, 'ready'
             current = identity[1]
             if current <= 1:
-                return False
-    except (OSError, ValueError, IndexError):
-        return False
-    return False
+                return False, 'monitor root is not in the owned ancestor chain'
+    except (OSError, ValueError, IndexError) as exc:
+        return False, f'monitor ancestry unreadable: {type(exc).__name__}'
+    return False, 'monitor root not found in the owned ancestor chain'
+
+def monitor_ready():
+    return monitor_health()[0]
 
 def source_manifest(phase):
     path = EVIDENCE / 'source-restoration-manifests.tsv'
@@ -230,8 +246,9 @@ def sources_match_initial():
     return True
 
 def run(label, args, expect=0):
-    if not monitor_ready():
-        raise RuntimeError('external process custody monitor is not ready or heartbeat is stale')
+    monitor_ok, monitor_reason = monitor_health()
+    if not monitor_ok:
+        raise RuntimeError(f'external process custody monitor is not ready: {monitor_reason}')
     deadline = min(OUTER_DEADLINE, CARGO_DEADLINE)
     if time.monotonic() >= deadline:
         raise TimeoutError(f'{label} started after the package deadline')
@@ -247,17 +264,33 @@ def run(label, args, expect=0):
         proc = subprocess.Popen(argv, cwd=SOURCE, env=BASE_ENV, stdout=stream, stderr=subprocess.STDOUT, start_new_session=False)
         active[0] = proc
         record_process(label, proc.pid, ids)
-        while proc.poll() is None:
-            if custody_failure:
-                raise RuntimeError('resource/process sampler failed') from custody_failure[0]
-            if not monitor_ready():
-                raise RuntimeError('external process custody monitor failed or stopped heartbeating')
-            if time.monotonic() >= deadline:
-                proc.terminate()
-                raise TimeoutError(f'{label} exceeded active command deadline; Cargo emits to a file')
-            time.sleep(.2)
-        active[0] = None
-        status = proc.returncode
+        try:
+            while proc.poll() is None:
+                if custody_failure:
+                    raise RuntimeError('resource/process sampler failed') from custody_failure[0]
+                monitor_ok, monitor_reason = monitor_health()
+                if not monitor_ok:
+                    raise RuntimeError(f'external process custody monitor failed: {monitor_reason}')
+                if time.monotonic() >= deadline:
+                    raise TimeoutError(f'{label} exceeded active command deadline; Cargo emits to a file')
+                time.sleep(.2)
+            status = proc.returncode
+        finally:
+            # Cargo is our direct child, so its unreaped PID cannot be reused.
+            # Reap it before exact descendant cleanup and runtime exit.
+            if proc.poll() is None:
+                try:
+                    proc.terminate()
+                except ProcessLookupError:
+                    pass
+                try:
+                    proc.wait(timeout=1)
+                except subprocess.TimeoutExpired:
+                    proc.kill()
+                    proc.wait(timeout=1)
+            else:
+                proc.wait()
+            active[0] = None
     status_path.write_text(f'{status}\n')
     with status_path.open('rb') as receipt:
         os.fsync(receipt.fileno())

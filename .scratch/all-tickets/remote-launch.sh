@@ -47,7 +47,7 @@ PY
 # disposable runtime. The tree scan includes its session leader and detached
 # fixture descendants while they still have an owned ancestry path.
 python3 - "$runner_pid" "$evidence/runner-process-identities.tsv" "$evidence/launcher-identities.tsv" <<'PY' &
-import os, pathlib, signal, sys, time
+import os, pathlib, signal, sys, tempfile, time
 root, out = int(sys.argv[1]), pathlib.Path(sys.argv[2])
 ready, heartbeat = out.with_suffix('.ready'), out.with_suffix('.heartbeat')
 ledger = pathlib.Path(sys.argv[3])
@@ -83,7 +83,17 @@ with out.open('w', buffering=1) as stream:
     stream.write('utc_epoch\tpid\tstart_ticks\tppid\tpgid\tcmdline\n')
     ready.write_text(f'pid={root} start_ticks={root_identity[0]}\n')
     while True:
-        heartbeat.write_text(f'{time.time():.6f}\n')
+        # Publish a complete timestamp atomically. The driver reads this file
+        # concurrently; truncating it in place creates a false stale-monitor
+        # result when a read lands between truncate and write.
+        with tempfile.NamedTemporaryFile(mode='w', dir=heartbeat.parent,
+                                         prefix=heartbeat.name + '.',
+                                         delete=False) as stream:
+            heartbeat_tmp = pathlib.Path(stream.name)
+            stream.write(f'{time.time():.6f}\n')
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(heartbeat_tmp, heartbeat)
         current = snapshot()
         if current.get(root) is None or current[root][0] != root_identity[0]:
             break
