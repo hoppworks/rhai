@@ -616,6 +616,13 @@ actual human/safety caps and consumed history. Next Windows native step remains
 blocked only by current machine occupancy and concrete fresh prerequisites,
 not a stored PENDING label. Expert02 real-client30min stays nonrenewable/separate.
 
+
+### Windows finite source-fixture follow-up allocation
+
+Coordinator concretely recommends one additional source-fixture invocation with the corrected, independently reviewed37dac203 harness; applies owner standing acceptance of recommendations and subsequent continue-all-tickets instructions. This is not inference from stored PENDING or renewal of Expert02. SourceRoot resolved from original native audit to w9e0-20261002-6f804a9c4c4a4e78\source (full path above); archive/extracted source reused read-only, no transfer/extraction needed. Current local readback confirms corrected harness hash and all17C#pins unchanged. Native invocation1 consumed with unknown compiler exit; follow-up1 allocated, cumulative1->2 only at actual dispatch, no run launched this turn. Single follow-up stops on any prerequisite mismatch, custody uncertainty, compile/fixture failure or watchdog/resource boundary; no automatic retry within package. One-hour watchdog per invocation, existing180s compilers, six fixture ceilings720/120/180/180/300/180s, setupcontrol30s, actual0/17/wrongexpectation/unavailable-status checks, inherited exact job custody/closure, existing job2GiB/process1GiB/desc16/free2GiB maintained. Expert02 realclient nonrenewable30min untouched/separate.
+
+Before dispatch: fresh workhorse/VM heavy-slot inventory, harness/nativePS5.1x64/parser0, exact17guestsourcepins/source-tree and all ancestors no reparse, existing Roslyn identity59,720bytes/SHA cf32c7b8e5691b962f1b6e92b03d87409dd9f7aebfd71c5bf778203cc56ee1, free2GiB and newly absent unique <private-session>/run/monitor-source-GUID required. Allocate unique run path only after successful gate; preserve oldscope/run/proof. Native original stdout/stderr/markers/primaryerror/closure and independent process/job/readback retained outside disposable outputs before own cleanup. A successful fixture package is source/native custody prerequisite only; not Windows Rust production Engine or realclient acceptance. Latest actual slot observation: Mac foreignPlaywright58136/60658 and Cargo60727/rustc60742; workhorse foreignCargo131936 plus queued foreignG32 work and make81053. No foreign process touched. Revalidate at launch, these observations are not a future free-slot receipt.
+
 ## Resources, counts and cause history
 Unix actual native invocation count84 consumed.82 failed before runtime;
 83 measurementCargo0 but originalouter1 due optional cmdline receipt validation.
