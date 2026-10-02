@@ -352,3 +352,29 @@ Allocation81 consumed atactual wrapperstart; nextunique82 thereafter.
 Linux legacythreeproof histories consolidated, corrected latestnative scripts
 retained for conflicting paths. Earlier scripts remain in reachable original
 commits; no work discarded and no newnative run for superseded legacyharness.
+
+## Fork-main consolidation and accepted Unix proof
+
+Human explicitly repeated allchanges on forkmain and remoteonlymain on2026-10-02.
+This consolidation preserves the current development source/history, including
+Windows tools with nativeacceptance stillopen; it is not releaseacceptance or
+productiondeployment. Future owned commits publish directly to forkmain after
+coordinator integration; do not recreate remote taskbranches. Local taskworktrees
+remain isolated while workisactive and foreign/unclassified dirtywork ispreserved.
+All remaining remote tips are ancestors of root consolidation HEAD: process-unix
+4a8d4e5c, managedUnix c9aa8723, Windows realclientf9cc7372, originalrunnerdc63c38e
+and correctedrunnerb6c8219d. ThreelegacyLinuxproof tips werealreadymerged/pushed
+anddeleted alongside rootremotealias; remoteinventory fell10→6.
+Unix restoredsource bytes match exacte5b55460 across six nativepaths. Linux80
+originalstatus/readbackreview passes controls101, owner21 and public32(raw33),
+exact99pairs absent/allownedgroups empty/runtimeabsent; passingevidence430a3da1
+merged. macOS81 attached16400 wrapper52578, sourcee5/archive70b7404b, terminal0:
+knownbrokenEPERMcontrol101 and accepted75exitcontrolreuse; restoredowner21 and
+fullpublic29passed. Root freshchecks34emittedPIDs/10groups absent, runtimeabsent,
+three restoration manifests match. Cargo53.432s/sampled276896KiB; no continuous
+peakclaim. Mac81source test-onlypath selectionfix, productionmatches Linux80.
+Windows5 realclient scaffoldingchecks pass; they do not prove nativecustody.
+Soleownerrepair PositiveUInt32/custody sourceinreview; nativeWindows17fixtures
+andrealclient remainopen. Allticketgoal is notcomplete. Root next publishes
+consolidationHEAD, reads exactmain, verifies ancestrybeforedelete5remainingrefs,
+reads remoteonlymain. Nextsourcefixmerge willalso publishmainonly.

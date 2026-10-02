@@ -61,6 +61,16 @@ the public upstream repository. Preserve foreign local main checkouts; use a
 verified fast-forward ref update when no merge commit is required, and read back
 the fork's exact main head after pushing.
 
+## Fork branch consolidation
+
+On 2026-10-02 the owner explicitly requested all existing fork branch histories
+and changes consolidated into main, with main as the only remote branch. Preserve
+current development work and report unfinished verification honestly. Publish
+future campaign commits to fork main through coordinator integration; do not
+recreate remote task branches. Local isolated task worktrees remain permitted
+while active. Preserve foreign or dirty worktrees and their uncommitted changes.
+This is repository consolidation, not release acceptance or production deployment.
+
 ## Resource lifecycle
 
 For future POSIX builds and verification, use

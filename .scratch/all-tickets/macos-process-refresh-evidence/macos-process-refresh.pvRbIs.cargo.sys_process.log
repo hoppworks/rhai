@@ -1,0 +1,169 @@
+ Downloading crates ...
+  Downloaded web-time v1.1.0
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-dae6wbl6/source)
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:668:13
+    |
+668 |         let mut wait_operation = "wait for child";
+    |             ----^^^^^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `termination`
+    --> src/packages/sys/process/unix.rs:1106:22
+     |
+1106 |                 let (termination, _operation) = if self.managed {
+     |                      ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_termination`
+     |
+     = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2134:9
+     |
+2134 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2456:9
+     |
+2456 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: methods `numeric_operations_probe`, `quarantine_observations_probe`, and `fail_reservation` are never used
+    --> src/packages/sys/process/unix.rs:1470:8
+     |
+1390 | impl ExecutionFaults {
+     | -------------------- methods in this implementation
+...
+1470 |     fn numeric_operations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1481 |     fn quarantine_observations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1506 |     fn fail_reservation(&self) -> bool {
+     |        ^^^^^^^^^^^^^^^^
+     |
+     = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (lib) generated 5 warnings (run `cargo fix --lib -p rhai` to apply 4 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+   --> tests/sys_process.rs:727:9
+    |
+727 |     let mut holder = command.spawn().expect("start escaped captured-pipe holder");
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: constant `DIRECT_DROP_RECORD_ENV` is never used
+  --> tests/sys_process.rs:34:7
+   |
+34 | const DIRECT_DROP_RECORD_ENV: &str = "RHAI_SYS_DIRECT_DROP_RECORD";
+   |       ^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+warning: `rhai` (test "sys_process") generated 2 warnings (run `cargo fix --test "sys_process" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 5.84s
+     Running tests/sys_process.rs (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-dae6wbl6/target/debug/deps/sys_process-a4f350212a887c3b)
+
+running 29 tests
+test direct_spawn_kill_on_drop_false_preserves_child_and_capture ... direct_drop_fixture_started root=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-dae6wbl6/tmp/rhai-sys-test-53148-direct_spawn_kill_on_drop_false_preserves_child_and_capture-0 test_pid=53148 child_pid=53149
+direct_drop_after_final_client_drop pid=53149 alive=true challenge_ack=true completion_exists=false
+direct_drop_completion pid=53149 record="pid=53149 stdout_bytes=524288 stderr_bytes=524288 complete=true\n"
+direct_drop_terminal pid=53149 esrch=true
+direct_drop_fixture_cleanup root=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-dae6wbl6/tmp/rhai-sys-test-53148-direct_spawn_kill_on_drop_false_preserves_child_and_capture-0 pid=53149 esrch=true
+direct_drop_fixture_cleanup root=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-dae6wbl6/tmp/rhai-sys-test-53148-direct_spawn_kill_on_drop_false_preserves_child_and_capture-0 pid=53149 esrch=true
+ok
+test lossy_run_reports_engine_limit_expansion_without_returning_truncated_text ... ok
+test managed_false_drop_leader_fixture ... ok
+test managed_false_drop_leaf_fixture ... ok
+test managed_false_drop_worker_fixture ... ok
+test managed_run_closes_worker_after_leader_exit_and_preserves_sentinel ... managed_fixture_started root=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-dae6wbl6/tmp/rhai-sys-test-53148-managed_run_closes_worker_after_leader_exit_and_preserves_sentinel-2 test_pid=53148 sentinel_pid=53153
+managed_normal_leader pid=53154 pgid=53154 esrch=true
+managed_normal_worker_leaf worker_pid=53155 worker_esrch=true leaf_pid=53156 leaf_esrch=true
+managed_normal_sentinel pid=53153 live=true
+managed-scope sentinel_cleanup pid=53153 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(53155) worker_esrch=true leaf_pid=Some(53156) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(53154) leader_esrch=true
+ok
+test managed_scope_escape_fixture ... ok
+test managed_scope_leader_fixture ... ok
+test managed_scope_leaf_fixture ... ok
+test managed_scope_retained_pipe_holder_fixture ... ok
+test managed_scope_retained_pipe_leader_fixture ... ok
+test managed_scope_spawn_leader_fixture ... ok
+test managed_scope_worker_fixture ... ok
+test managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not ... managed_spawn_drop_started root=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-dae6wbl6/tmp/rhai-sys-test-53148-managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not-3 test_pid=53148 sentinel_pid=53157 sentinel_pgid=53157 leader=53158 worker=53159 leaf=53160 group=53158
+managed_spawn_nonfinal_drop leader=53158 leader_live=true worker=53159 worker_live=true leaf=53160 leaf_live=true all_live=true
+managed_spawn_final_drop leader=53158 leader_esrch=true worker=53159 worker_esrch=true leaf=53160 leaf_esrch=true all_esrch=true sentinel=53157 live=true
+managed-scope sentinel_cleanup pid=53157 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(53159) worker_esrch=true leaf_pid=Some(53160) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(53158) leader_esrch=true
+ok
+test managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes ... managed_escaped_pipe_wait root=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-dae6wbl6/tmp/rhai-sys-test-53148-managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes-4 test_pid=53148 leader=53164 leader_pgid=53164 leader_esrch=true holder=53165 holder_pgid=53163 holder_live_after_wait=true sentinel=53163 sentinel_pgid=53163 sentinel_live_after_wait=true wait_unit=false probe="pid=53165 stdout_result=-1 stdout_error=32 stderr_result=-1 stderr_error=32\n" identity_ok=true
+managed_escaped_pipe_cleanup root=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-dae6wbl6/tmp/rhai-sys-test-53148-managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes-4 leader=Some(53164) leader_esrch=true holder=Some(53165) holder_esrch=true
+managed-scope sentinel_cleanup pid=53163 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_escaped_pipe_terminal leader=Some(53164) leader_esrch=true holder=Some(53165) holder_esrch=true sentinel=53163 sentinel_esrch=true
+managed_escaped_pipe_cleanup root=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-dae6wbl6/tmp/rhai-sys-test-53148-managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes-4 leader=Some(53164) leader_esrch=true holder=Some(53165) holder_esrch=true
+ok
+test managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit ... managed_false_drop_started root=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-dae6wbl6/tmp/rhai-sys-test-53148-managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit-5 test_pid=53148 sentinel_pid=53168 sentinel_pgid=53168 leader=53169 worker=53170 leaf=53171 group=53169
+managed_false_drop_after_final_client_drop leader=53169 leader_live=true worker=53170 worker_live=true leaf=53171 leaf_live=true sentinel=53168 sentinel_live=true
+managed_false_drop_live_challenge leader=53169 worker=53170 leaf=53171 group=53169 ack_count=3 ack_pids=[Some(53169), Some(53170), Some(53171)] ack_groups=[Some(53169), Some(53169), Some(53169)]
+managed_false_drop_after_leader_exit leader=53169 leader_esrch=true worker=53170 worker_esrch=true leaf=53171 leaf_esrch=true sentinel=53168 sentinel_live=true
+managed-scope sentinel_cleanup pid=53168 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(53170) worker_esrch=true leaf_pid=Some(53171) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(53169) leader_esrch=true
+ok
+test managed_spawn_kill_stops_leader_worker_leaf_and_preserves_sentinel ... managed_spawn_kill_started root=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-dae6wbl6/tmp/rhai-sys-test-53148-managed_spawn_kill_stops_leader_worker_leaf_and_preserves_sentinel-6 test_pid=53148 sentinel_pid=53218 sentinel_pgid=53218 leader=53219 worker=53220 leaf=53221 group=53219
+managed_spawn_kill leader=53219 leader_esrch=true worker=53220 worker_esrch=true leaf=53221 leaf_esrch=true all_esrch=true sentinel=53218 live=true wait_returned=true
+managed-scope sentinel_cleanup pid=53218 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(53220) worker_esrch=true leaf_pid=Some(53221) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(53219) leader_esrch=true
+ok
+test managed_spawn_post_reap_cancel_bounds_escaped_capture ... managed_post_reap_ordinary_wait root=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-dae6wbl6/tmp/rhai-sys-test-53148-managed_spawn_post_reap_cancel_bounds_escaped_capture-7 test_pid=53148 leader=53223 holder=53224 sentinel=53222 wait_unit=true holder_live=true
+managed_post_reap_typed_error unexpected=None
+managed_post_reap_leader leader=53223 exit_record_matches=true exit_record="pid=53223 release_seen=true exit_intent=true\n" try_wait_unit=true try_wait_error=None ps_status=Ok("") leader_esrch=true holder=53224 holder_live=true
+managed_post_reap_uncancelled_wait leader=53223 wait_unit=true holder=53224 holder_live=true sentinel=53222 sentinel_live=true
+managed_escaped_pipe_cleanup root=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-dae6wbl6/tmp/rhai-sys-test-53148-managed_spawn_post_reap_cancel_bounds_escaped_capture-7 leader=Some(53223) leader_esrch=true holder=Some(53224) holder_esrch=true
+managed-scope sentinel_cleanup pid=53222 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_escaped_pipe_terminal leader=Some(53223) leader_esrch=true holder=Some(53224) holder_esrch=true sentinel=53222 sentinel_esrch=true
+managed_post_reap_cancel root=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-dae6wbl6/tmp/rhai-sys-test-53148-managed_spawn_post_reap_cancel_bounds_escaped_capture-7 test_pid=53148 leader=53223 leader_esrch_before_kill=true leader_esrch=true holder=53224 holder_live_after_cancel=true holder_esrch=true sentinel=53222 sentinel_esrch=true probe="pid=53224 stdout_result=-1 stdout_error=32 stderr_result=-1 stderr_error=32\n" wait_unit=false
+managed_escaped_pipe_cleanup root=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-dae6wbl6/tmp/rhai-sys-test-53148-managed_spawn_post_reap_cancel_bounds_escaped_capture-7 leader=Some(53223) leader_esrch=true holder=Some(53224) holder_esrch=true
+ok
+test managed_timeout_kills_leader_after_it_changes_process_group ... managed_escape_started root=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-dae6wbl6/tmp/rhai-sys-test-53148-managed_timeout_kills_leader_after_it_changes_process_group-8 test_pid=53148 sentinel_pid=53227 sentinel_pgid=53227
+managed_escape_sentinel_live pid=53227 live=true
+managed_escape_leader pid=53228 original_pgid=53228 escaped_pgid=53227 esrch=true
+managed_escape_fixture_cleanup pid=Some(53228) esrch=true
+managed-scope sentinel_cleanup pid=53227 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+ok
+test process_cwd_uses_the_opened_filesystem_capability_after_root_replacement ... ok
+test process_fixture ... ok
+test process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one ... ok
+test process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps ... ok
+test run_deadline_returns_bounded_partial_output_after_terminating_child ... ok
+test run_deadline_with_blocked_stdin_and_active_stdout_stderr ... ok
+test run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data ... ok
+test unit_stdin_means_immediate_eof ... ok
+test unit_timeout_disables_configured_default_deadline ... ok
+test zero_output_cap_reports_output_limit_with_an_empty_retained_prefix ... ok
+
+test result: ok. 29 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.89s
+
