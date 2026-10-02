@@ -225,3 +225,18 @@ Complete superseded root state, detailed source/proof hashes, exact PID receipts
 
 ## Overall remaining acceptance
 Ticket03 complete process lifecycle/options/fault/setup/native-platform coverage; Windows job custody and real client; Linux/macOS/Windows production process matrix, optional1.77.2 and core1.66 compatibility of final sources, required feature gates, overhead/performance evidence and release integration. Remaining local ticket acceptance follows .scratch/stdlib-wayfinder/issues and existing release decisions without narrowing the original goal. Commit/push correctly attributed owned changes, merge only fully verified source, retain proof and retire only this session's exact owned clean worktrees after verified integration. Goal active/incomplete; no completion or genuine overall impasse is established.
+
+## Next native refresh after namespace correction
+
+Unix sourcec6e820d4 fixes only the test public enum path; driver-bindinge9a663bf
+pushed/read back by owner. Root inspected exact one-line diff and Linux driver
+changes, accepting source/archivec799fe5a and driver e6dd7b28. Linux76 is released
+for exact staging/preflight and bounded launch; allocation consumes76 at actual
+start. Mac next77 driver source-only binds same source/archive and reuses native75
+exit0→42 receipt SHA0cd30945 because production behavior and integration test are
+unchanged; new EPERM control, owner21 and full public29 still execute. AST/zsh/diff
+checks pass. Remaining caps unchanged; no extra launch approval gate. Descriptive
+overhead is a separate accepted source-only proposal:30 paired direct/managed
+samples each for true latency and16MiB combined capture, alternate order, publish
+per-run/medians and exact retained counts with no invented threshold. Freeze the
+measurement contract and limits before execution after behavioral acceptance.
