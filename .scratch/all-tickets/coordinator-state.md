@@ -86,7 +86,7 @@ Current authoritative history through this rewrite is Git commit
 10d4a0d55400ebe8c24feff134e7161ff36bf8d5, this same state path. It retains
 all earlier cause/attempt/resource/source applicability records. Read that
 history for consumed work, not superseded next actions. No reset occurred.
-Last independently read-back fork main58deedb4f1c7be458a1fc07af213521c741df501; only remote main, lowercase
+Last independently read-back fork main36561b13173dabe29c51849b4d22fabcc1c5789f; only remote main, lowercase
 human author/committer. Goal active and incomplete.
 
 ### Accepted current Linux non-process package
@@ -335,9 +335,42 @@ Previous user status turn VERIFIED WAIT: specific handles1620/2713 both polled
 live then; no code or acceptance closure that turn. This continuation PROGRESS:
 collected source acceptance and concrete new custody finding, dispatched two
 bounded source fixes. Exact foreign TableTop PID51269 still live at elapsed1:25:26;
-no signal sent. Darwin prepared heavy stage remains unlaunched. Next collect same
-49420/48964, independently inspect frozen results and perform affected combined
-review before native execution. No native count changed or full acceptance claimed.
+no signal sent. Darwin prepared heavy stage remains unlaunched. Both source jobs terminal0: Windows49420 produced frozen
+1e014b57675b4b46add54973245ef20907f42972; root independently read actual helper,
+nested setup wait, real0/17 output markers and explicit unavailable-status control.
+8 pure source checks reported GREEN; no PowerShell/native parsing/execution.
+Actual combined Expert review25864 TERMINAL0: full report independently read,
+3/3 direct coverage, no material implementation regression; medium acceptance gap:
+actual17 child must fail expected0, then pass correct17. Null rejection is a
+separate control. Windows handle repair SOURCE ACCEPTED narrowly, no native proof.
+Configured Worker mechanical coverage fix57812 actually running same owned tree,
+windows-exit-code-control-fix-brief.md, no guest/native launches or allowance reset.
+Mac48964 produced frozen cfd6a9ea29bb5ee2410593d3be6d5bf112281dda; root read actual
+runner/result: removes forced KILL, retains live direct custodian on uncertainty,
+returns125 with retained-custodian diagnostic.4 targeted/94 pure checks reported;
+no native. Whether this really preserves supervision/custody after outer return
+and meets existing09 retained-owner rule is unresolved, not accepted. Actual
+combined affected review58833 TERMINAL0, full actual report independently read:
+REJECTED same high custody finding. Outer avoids KILL but control controller and
+adapter themselves unwind, discard handles and exit on incomplete cleanup. This
+is SAME underlying ownership finding, not a new escalation cause. Count2 rejected
+outer corrections now recorded, alongside existing09 history; review's count1
+was incoming history and is superseded by this result. Existing09 answer remains
+the single route: honest failed case with retained actual owner/runtime, complete
+closure required for passing controls. Current package source-only elapsed~9
+wall-clock minutes at17:41 from~17:32;30-minute active-work checkpoint remains
+unchanged. Concrete new diagnosis allows one existing-answer source follow-up
+9463 in same responsible worktree, retained-owner-fix-brief.md: actual ownership
+object before adapter/controller unwind, no normal launches or refreshed cleanup
+budget. No new Expert chain, no blind cosmetic repeat, no actual caps raised.
+Stop dependent path if this cannot retain actual authority within scope.
+Both source commits remain local pending review/integration; no remote task refs.
+Native collaboration inventory confirms all three remaining children completed;
+no active native descendants to update. New CLI jobs explicitly loaded current
+rules/templates; output revision confirmations require readback when terminal.
+Original terminal review reports retained once under source-review-readback-20261002.
+Next collect same57812/9463, independently read exact results and affected review
+before any native launch. No reviewed source-only change closes native acceptance. No native count changed or full acceptance claimed.
 
 ## Resources, counts and cause history
 Unix actual native invocation count84 consumed.82 failed before runtime;
