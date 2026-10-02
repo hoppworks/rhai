@@ -1,0 +1,13 @@
+F
+======================================================================
+FAIL: test_wrapper_runtime_record_parser_accepts_only_identical_duplicates (__main__.EnvironmentTests.test_wrapper_runtime_record_parser_accepts_only_identical_duplicates) (evidence='runtime_path=/scope/runtime\nruntime_path=/scope/runtime\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/hoppworks/.local/share/agent-builds/rhai/root-correction-20261002-f01c39b2/agent-build-bwyqfliy/.scratch/all-tickets/test-macos-process-overhead-source.py", line 148, in test_wrapper_runtime_record_parser_accepts_only_identical_duplicates
+    self.assertEqual(result.returncode, status, result.stderr)
+AssertionError: 1 != 0 : 
+
+----------------------------------------------------------------------
+Ran 1 test in 0.401s
+
+FAILED (failures=1)

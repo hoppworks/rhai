@@ -1,0 +1,27 @@
+{
+  "revision": "18d64de68e46f7e837d6874ac2faff1393f5bf03",
+  "runtime": "/Users/hoppworks/.local/share/agent-builds/rhai/root-correction-20261002-f01c39b2/agent-build-bwyqfliy",
+  "statuses": {
+    "reader-positive": 0,
+    "adapter-positive": 0,
+    "wrong-cleanup-acceptance": 1,
+    "wrong-startup-deadline": 1,
+    "wrong-export-summary-expectation": 1,
+    "wrong-wrapper-duplicate-rejection": 1,
+    "reader-restored": 0,
+    "adapter-restored": 0
+  },
+  "elapsed_seconds": 2.1841267498675734,
+  "source_sha256": {
+    ".scratch/all-tickets/darwin-process-reader.py": "50e8d15e8cc743efac288762d98d2ec55044b32e843609474ab99969487ea37f",
+    ".scratch/all-tickets/test-darwin-process-reader.py": "76d79005ee74410c226d0e19f507cb1bcfbbd6a1665ba1c2581a83cfcb557cf9",
+    ".scratch/all-tickets/macos-process-overhead.py": "dc237252b02ec4f0d60d1661d7abaee2d5d1aa008b4bf9468b2f08ef7a7726e4",
+    ".scratch/all-tickets/run-macos-process-overhead-scoped.py": "582e46b9b364beba6eb9f46e2c80b05fd6ebf89db1d2c16909176d66bd00f601",
+    ".scratch/all-tickets/test-macos-process-overhead-source.py": "59f3c9007804b20263e87004695de54a1ede4a79b6750337d1ae63f4976a758b",
+    ".scratch/all-tickets/run-macos-process-overhead.sh": "93f33c8840ff3ae7ae80b493aeb8b2ad856020d2f553bff7a40b11a09e2e7611",
+    ".scratch/all-tickets/runtime-path-parser.zsh": "2990b5942fda3b35228bad835a6e2046dfa1fa44d1623096aa47b0f17ebb293a",
+    ".scratch/managed-unix-scope-close/measure-process-overhead.py": "1f32479303b789f993bc2297f1a4e62adaba5e44f6941669db7a793bf1d1b2a2"
+  },
+  "acceptance": "Pure source regressions only; native ABI and custody remain open.",
+  "target_fixture_native_control_measurement_launches": 0
+}

@@ -1,0 +1,13 @@
+F
+======================================================================
+FAIL: test_final_acceptance_requires_cleanup_complete_even_after_eof (__main__.EnvironmentTests.test_final_acceptance_requires_cleanup_complete_even_after_eof)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/hoppworks/.local/share/agent-builds/rhai/root-correction-20261002-f01c39b2/agent-build-bwyqfliy/.scratch/all-tickets/test-macos-process-overhead-source.py", line 85, in test_final_acceptance_requires_cleanup_complete_even_after_eof
+    self.assertFalse(custodian.records_closed([uncertain]))
+AssertionError: True is not false
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (failures=1)

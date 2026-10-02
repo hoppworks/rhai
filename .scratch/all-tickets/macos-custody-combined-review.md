@@ -112,8 +112,16 @@ review or native acceptance run.
 No additional material source finding was identified. The four original source
 findings are closed narrowly by this correction read-back. The responsible owner
 reports 19 reader and 29 adapter/source tests plus syntax/diff checks green; root
-has not independently replayed this new batch. Earlier unchanged reader and
+has independently replayed this new batch (see the evidence note below). Earlier unchanged reader and
 sampling proof remains applicable only to those unchanged requirements.
 Darwin ABI/access, actual toolchain/helper confinement, whole-run interruption,
 escaped-leaf readback, runtime cleanup and the native measurement remain open.
 The launch guard stays false; no native launch was created by this review.
+
+Independent correction evidence: macos-correction-root-evidence pins18d64 and
+all eight source/parser hashes. Reader19 and adapter29 positives passed; cleanup
+acceptance, startup deadline, exported-summary wrong expectation and wrapper
+identical-duplicate rejection controls each failed with an intended AssertionError,
+not a harness exception. Restored19/29 passed and every frozen file matched.
+Outer0, helper2.18412675s; independently checked exact runtime absence and empty
+scope retirement. This proves pure regressions only, not real process closure.

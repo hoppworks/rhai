@@ -1,0 +1,11 @@
+.......custodian_command_reaped gate=0 anchor=0 pgid=20 group_signal_issued=True
+.............cargo_argv=['/bin/true']
+cargo_cwd=/Users/hoppworks/.local/share/agent-builds/rhai/root-correction-20261002-f01c39b2/agent-build-bwyqfliy/tmp/measurement-bytes-test-zy_zzbzq
+cargo_log=/Users/hoppworks/.local/share/agent-builds/rhai/root-correction-20261002-f01c39b2/agent-build-bwyqfliy/tmp/measurement-bytes-test-zy_zzbzq/cargo.log
+cargo_status=0 cargo_pgid=99 cargo_elapsed_seconds=0.000
+escaped_leaf_candidate_absence=0 original_pgid_absent_observations=2
+.........
+----------------------------------------------------------------------
+Ran 29 tests in 0.070s
+
+OK

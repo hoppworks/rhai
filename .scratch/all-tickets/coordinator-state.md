@@ -80,16 +80,16 @@ Historical detailed staging, gates and outcomes remain in this same state at
    parser and isolated pure path controls before any fixture invocation. Earlier
    compiler/setup/extraction failures and nonrenewable real-client allocation
    retained; no native job/public production acceptance claimed.
-3. Mac sole-custodian source increment frozen at b2db6448af7c4c29fe6d6529910d4648e264739a,
-   following 2f/a723/fdb. Native task-info RSS replaces the ps/native join; owner
-   reports 19 reader and 25 adapter injected tests passing; root independently
-   accepted their narrow controls. Combined source review found four material
-   integration boundaries; one correction batch is back with the same owner.
-   False launch guard stays closed;
-   selected graph/toolchain
-   confinement, escaped-leaf closure, native Darwin ABI and finite interruption
-   controls still need proof. No native launch since81; existing Expert09/caps
-   remain. Review complete current source before any execution gate.
+3. Mac sole-custodian source corrected at18d64de68e46f7e837d6874ac2faff1393f5bf03,
+   following2f/a723/fdb/b2db. Existing combined review's four findings are closed
+   narrowly. Root independently replayed19 reader/29 adapter positives and four
+   meaningful AssertionError controls, restored19/29 and exact eight files;
+   original macos-correction-root-evidence retains logs/receipt/cleanup. Heavy
+   Mac slot remains occupied by a foreign live Playwright gate, so no compile
+   has launched. Same owner continues installed-header ABI/source-toolchain
+   prerequisites under existing cause09/Expert09, no native queries/builds.
+   Native Darwin ABI behavior, confinement, finite interruption/escaped-leaf
+   controls and measurement remain open. False launch guard and count84 retained.
 
 ## Resources, counts and cause history
 Unix actual native invocation count84 consumed.82 failed before runtime;
@@ -413,3 +413,22 @@ no-local-build observation is superseded. Do not launch the allocated compiler
 while that heavy E2E occupies this Mac. Scopec96f1a72 remains uncreated and compile
 allocation unconsumed. Continue light source/readback work; recheck slot before
 the single bounded compile. Preserve foreign processes and their outputs.
+
+Root correction replay allocated: frozen18d64, eight source/parser files in
+private scope root-correction-20261002-f01c39b2, outer100s, each command10s.
+Reader/adapter positive, four intended AssertionError controls (cleanup gate,
+startup deadline, exported summary expectation, duplicate runtime rejection),
+restored reader/adapter and exact file restoration. No Cargo/target fixture/native
+control/measurement; existing count84 and all prior acceptance/history unchanged.
+Heavy Mac slot remains occupied by exact Chromium PID78440 under Playwright.
+
+Root correction replay terminal0 in2.18412675s:19 reader/29 adapter positive,
+all four controls status1 with one intended AssertionError and noERROR, restored
+19/29 green. Exact eight source/parser files match frozen18d64. Original logs and
+source hashes in macos-correction-root-evidence; independent cleanup receipt
+confirms runtime agent-build-bwyqfliy absent and exact empty scope retired.
+No target fixture/native control/measurement or heavy build. Accept these source
+regressions only. Same responsible owner resumed for existing source readiness:
+SDK constants/layout/signatures and current Darwin provenance; exact toolchain/
+helper/config assumptions. Current4d86 instructions required from start, no new
+Expert chain/review, one30-minute source planning checkpoint and guardfalse.

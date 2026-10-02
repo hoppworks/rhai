@@ -1,0 +1,18 @@
+cargo_argv=['/bin/true']
+cargo_cwd=/Users/hoppworks/.local/share/agent-builds/rhai/root-correction-20261002-f01c39b2/agent-build-bwyqfliy/tmp/measurement-bytes-test-2ux8ocg5
+cargo_log=/Users/hoppworks/.local/share/agent-builds/rhai/root-correction-20261002-f01c39b2/agent-build-bwyqfliy/tmp/measurement-bytes-test-2ux8ocg5/cargo.log
+cargo_status=0 cargo_pgid=99 cargo_elapsed_seconds=0.000
+escaped_leaf_candidate_absence=0 original_pgid_absent_observations=2
+F
+======================================================================
+FAIL: test_measurement_run_decodes_successful_bytes_before_parser_and_export (__main__.EnvironmentTests.test_measurement_run_decodes_successful_bytes_before_parser_and_export)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/hoppworks/.local/share/agent-builds/rhai/root-correction-20261002-f01c39b2/agent-build-bwyqfliy/.scratch/all-tickets/test-macos-process-overhead-source.py", line 75, in test_measurement_run_decodes_successful_bytes_before_parser_and_export
+    self.assertEqual(exported_summary["samples_total"], 119)
+AssertionError: 120 != 119
+
+----------------------------------------------------------------------
+Ran 1 test in 0.007s
+
+FAILED (failures=1)
