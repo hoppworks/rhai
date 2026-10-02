@@ -86,7 +86,7 @@ Current authoritative history through this rewrite is Git commit
 10d4a0d55400ebe8c24feff134e7161ff36bf8d5, this same state path. It retains
 all earlier cause/attempt/resource/source applicability records. Read that
 history for consumed work, not superseded next actions. No reset occurred.
-Last independently read-back fork main67968f30; only remote main, lowercase
+Last independently read-back fork mainad833184; only remote main, lowercase
 human author/committer. Goal active and incomplete.
 
 ### Accepted current Linux non-process package
@@ -129,8 +129,10 @@ Stage now exists at owner .scratch/all-tickets/current-darwin-sys-net-behavior-2
 all staged pins verified; exact corresponding central scope created empty.
 Darwin arm64 confirmed; helper performs private1.77.2 install/verification. Initial
 /usr/bin/ps probe failed before native invocation; actual /bin/ps works.
-Unrelated Playwright/browser/ffmpeg activity requires classification as active E2E
-or idle surface before heavy slot allocation. Owner checks exact PID/start handles.
+Exact later /bin/ps confirms foreign TableTop Playwright test PID51269,
+worker51296/browser51297 remain alive (second observation12s later, elapsed~38min).
+Heavy Mac slot occupied by actual E2E; no signal or run launch. TaUron MCPs likely
+idle services; ffmpeg exited. Use same E2E identities for later slot observation.
 Prepared dispatch command requires configured modern Python for BOTH runner/helper
 and PYTHONDONTWRITEBYTECODE=1, explicit outer timeout600; no system Python assumption.
 Native Darwin acceptance remains pending; no native launch allocated yet.
@@ -164,6 +166,12 @@ CONTROL fail() atomically invalidates capturing receipt before endpoint teardown
 and exits before teardown if invalidation cannot be guaranteed. Focused3/full88
 pure tests pass. SAME reviewer macos_finite_control_review dispatched on new freeze,
 including actual error/STOP/invalidationfailure boundaries; no native acceptance.
+Reviewer decisive checkpoint: original stopped observer regression passes, aborted
+observer cannot KILL; STOP before invalidation retains incomplete endpoints, after
+invalidation sees aborted. No material affected source blocker, terminal report
+being frozen (not yet retained). Owner preparing existing four one-attempt control
+commands/stage/scopes/pins/cleanup under SAME Expert09, no control allocation or
+native dispatch. Darwin heavy run precedes Mac controls when foreign slot clears.
 Production/measurement/fixtures and historical failures retained. Foreign tracked
 prerequisite deletion/untracked assets remain untouched.
 
