@@ -997,7 +997,7 @@ No source integration/native acceptance before this affected checkpoint.
 No native/build/toolchain/control/measurement dispatch; affected combined recheck
 at frozen repair required. Genuine EILSEQ early return remains uncovered.
 
-Last independently read-back fork main35c6d70b83bd031a84cb371c36a3d9d407f82d53.
+Last independently read-back fork main9f8cced5d9aa0864f9dcd8f231aaa13d45b4c0fa.
 Lowercase author and committer independently checked; root checkout clean before
 this state update. No upstream writes. Current disk instructions958a4538 unchanged.
 Previous status-only goal turn: NO PROGRESS. This continuation yields new evidence:
@@ -1060,3 +1060,30 @@ or second Expert chain. Two failed F4 corrections remain counted; this package
 is one permitted bounded follow-up, not a third unexamined patch.
 Next: collect Darwin follow-up freeze and SAME affected review; Mac correction
 freeze and SAME review; Windows subtree/pins/parser/Roslyn readonly readback.
+
+Mac same-owner source correction frozen29cfb009aa97ff5cb0b63d22a7714e745ea6bfda,
+exact lowercase author/committer independently read. Four changedfiles: CONTROL
+overlayunix.rs, overlay pin/mac overheadhelper, scopedcustodian, source tests.
+Root read original full85/85 and affected12/12 logs under owner
+macos-managed-action-correction-20261002/; mocked Cargo/status lines are pure
+test output only, not native evidence. Same affected reviewer dispatched on
+this freeze for per-read pairedpublication/STOPbound/postKILLlive and measurement
+isolation plus retainedfindings1–3. Nativecause09 history and allocation85
+unlaunched/guardfalse unchanged. Foreign prereq deletion/untrackedassets preserved.
+Previous goal turn PROGRESS: Windows exactname audit accepted and cause11 route
+dispatched. Current continuation PROGRESS: actual Mac sourcefreeze and original
+GREEN receipts read; same affected review underway. Darwin cause11 repair and
+Windows readonly prerequisites confirmed live; no native completion claim.
+Next: collect BOTH frozen-source affected outcomes and Windows prerequisites;
+keep full native/process/release requirements open.
+
+Live Mac29cfb affected review identifies material source blockers: stopped-host
+validation strips status into PID/start identity then checks missing
+slots.managed_host.status, so require_stopped always rejects. Reviewer is also
+reproducing read/publication-error fail() closing capture while old capturing
+receipt remains valid; no acceptance yet. Terminal consolidated report pending,
+no third direct patch or native allocation. Preserve one prior failedfinding4
+correction and this result, existingExpert09 single-chain constraint. Independent
+Darwin/Windows work continues; do not mark whole Goal blocked from this path.
+Windows current exact readonly recursive attribute scan key-injection helper
+PID61556 live at owner checkpoint,295chars450ms/char; not yet entered/result.
