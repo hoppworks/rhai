@@ -55,3 +55,7 @@ serial test-harness scheduling to bound fixture child count; explicit concurrenc
 tests retain their own threads. Positive test accounting must distinguish nested
 fixture summaries from outer target summaries. One Cargo invocation per row can
 run several integration test executables.
+
+## Corrected package narrow recheck — 519ad474
+
+The intended control message and byte-vector findings are addressed in source. Three output-contract defects still block native dispatch: positive classification concatenates stdout then stderr although libtest results are stdout and Cargo target markers stderr, so summaries precede their boundaries; target order must be exact membership/once rather than caller order; modern Rust panic PID format in the original no_object record is `(51957959)`, not the invented `(pid 123)` pure fixture. Preserve Rust 1.77 no-PID support. Existing owner receives one coherent correction batch with chronological merged-output and original-format regression requirements. No native attempt consumed. Source commit attribution is Daniel Hopp; integration must use explicit lowercase author/committer and future owner commits corrected without rewriting published history.

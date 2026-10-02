@@ -270,8 +270,12 @@ scoped64 pure tests passed. Source-side compiler/linker lookup consistency close
 narrowly, native controls and measurement remain open. Review at
 macos-tool-path-increment-review.md, replay macos-tool-path-root-test.log.
 Own runtime removed and exact empty scope retired. Count84/guardfalse preserved.
-Linux owner confirmed live, correcting runtime-control classifiers; next collect
-immutable corrected package and recheck before staging/native dispatch.
+Linux corrected package519ad474 received; narrow recheck found positive stdout/
+stderr concatenation destroys target boundaries, caller order is not Cargo target
+order, and modern panic PID fixture differs from original output. Existing owner
+receives one coherent correction batch; no native launch. Next collect corrected
+chronological-output/exact-membership/original-format tests before dispatch.
+Mac live dual-stream source readiness continues in existing owner under Expert09.
 
 ## Current-source core MSRV package — accepted narrow gate
 Current default-core applicability CLOSED for source52d9797b, Rust/Cargo1.66.0,
