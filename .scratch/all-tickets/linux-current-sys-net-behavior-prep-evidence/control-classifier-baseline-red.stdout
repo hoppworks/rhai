@@ -1,0 +1,4 @@
+old_no_object_accepts_intended_red=False
+old_write_accepts_incidental_101=True
+REGRESSION_RED: no_object old selector missed its intentional wrong-peer assertion
+REGRESSION_RED: write old selector accepted unrelated status 101 containing 254

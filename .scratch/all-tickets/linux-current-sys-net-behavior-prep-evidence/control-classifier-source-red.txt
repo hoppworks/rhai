@@ -1,0 +1,8 @@
+Classifier regression source RED (read-only reproduction; no Cargo/native execution).
+Historical no_object log: /Users/hoppworks/.codex/worktrees/all-tickets-continuation/rhai/.scratch/net-feature-proof/logs/noobj-peer-wrong.log
+Historical write log: /Users/hoppworks/.codex/worktrees/all-tickets-continuation/rhai/.scratch/linux-net-release-features/evidence/wrong-peer-byte-control.log
+Old no_object selector required the restored-branch phrase "independent peer observed exact script bytes"; actual deliberate RED reports "deliberately wrong independent peer expectation" and ping/pang byte vectors.
+old_no_object_classifier_accepts_intended_red=False
+Old write selector accepted any output containing the generic substring "254".
+old_write_classifier_accepts_unrelated_compile_diagnostic=True
+historical_write_log_contains_expected_vectors=True

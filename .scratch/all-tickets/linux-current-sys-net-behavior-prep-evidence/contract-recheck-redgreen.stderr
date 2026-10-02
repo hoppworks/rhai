@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/hoppworks/.codex/worktrees/linux-msrv-helper-repair/rhai/.scratch/all-tickets/test-linux-current-sys-net-behavior.py", line 323, in <module>
+    main()
+  File "/Users/hoppworks/.codex/worktrees/linux-msrv-helper-repair/rhai/.scratch/all-tickets/test-linux-current-sys-net-behavior.py", line 308, in main
+    test_control_classifier_rejects_incidental_101_and_accepts_intended_red()
+  File "/Users/hoppworks/.codex/worktrees/linux-msrv-helper-repair/rhai/.scratch/all-tickets/test-linux-current-sys-net-behavior.py", line 160, in test_control_classifier_rejects_incidental_101_and_accepts_intended_red
+    assert module.classify_assertion_control(
+AssertionError

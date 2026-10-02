@@ -263,18 +263,15 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Current turn classification
-Previous continuation: PROGRESS (Mac source correction integrated64pure tests,
-Linux corrected-package review identified three real output-contract defects).
-Current continuation: verified active owner wait plus fresh native-slot evidence.
-Linux owner live implementing chronological merged output, exact target membership,
-and real panic PID format fixes. Workhorse foreign scoped1694532/start7773524
-and supervisor1694533/start7773526 remain live with cleanup descendants; preserve
-all foreign resources. Exact readback linux-sys-net-slot-readback-20261002.json;
-new Linux stage/scope absent. Revalidate machine slot before native dispatch.
-Mac existing owner investigates separate genuine read-path observer control,
-without changing frozen measurement or inventing public API. Current public
-reports expose completed buffers only; marker/task readiness remains rejected.
-No native launch or count85, no blocker transition; goal remains incomplete.
+Previous continuation: PROGRESS. Current continuation: PROGRESS, corrected Linux
+package33b4d676 source findings closed by narrow recheck and independent scoped
+pure eight-requirement replay0. Exact32 inputs/evidence files integrated; review
+linux-current-sys-net-behavior-review.md and root-pure.log. No native run yet;
+stage reviewed nine inputs and read back, revalidate foreign heavy cleanup slot
+before dispatch. Own runtime removed/emptyscope retired, all finite caps retained.
+Mac owner investigates separate companion-only internal real read observer,
+absent from frozen measurement; applicability and native evidence remain open.
+No count85 allocation or blocked transition; full goal remains incomplete.
 
 ## Current-source core MSRV package — accepted narrow gate
 Current default-core applicability CLOSED for source52d9797b, Rust/Cargo1.66.0,

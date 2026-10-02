@@ -1,0 +1,9 @@
+PRIVATE_RUNTIME /Users/hoppworks/.local/share/agent-builds/rhai/linux-sys-net-contract-recheck2-20261002/agent-build-vz9q_cqm/tmp/linux-sys-net-pure-tfzav9q1/linux-current-sys-net-behavior-1ca21e32-20261002/agent-build-test
+frozen_source_lock_toolchain_and_finite_rows=PASS
+real_engine_os_targets_and_named_controls=PASS
+rows_and_assertion_controls_match_frozen_test_sources=PASS
+controls_require_named_test_and_exact_wrong_assertion=PASS
+positive_rows_require_complete_non_skipped_target_coverage=PASS
+unavailable_identity_fails_before_external_work=PASS
+interrupted_export_allowed_only_within_original_deadline=PASS
+wrapper_bounded_custody_no_pid_signal_bash_and_heredoc_syntax=PASS
