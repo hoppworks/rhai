@@ -83,6 +83,11 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    original run root/logs retained. This is known-process absence, not direct
    closed-job handle readback or native fixture acceptance. Owner records exact
    receipts, then fresh canonical archive/parser/hash staging for focused fix.
+   Original read-only cleanup evidence06bea589 independently viewed: exact
+   PID6244/5864/3972 query has no results, compiler/setup failures and retained
+   log lengths visible. Integrated screenshots/state preserve job-closure limit.
+   Owner stages immutable main43a68022 in fresh private guest root; archive,
+   parser and17 pins only before source-fixture launch review.
    Existing hard caps and nonrenewable real-client allocation remain.
    This is a concrete compilation cause, not a verified live wait. Original
    detailed setup history is retained by reference to root state at f8b65ad6.
@@ -109,7 +114,12 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    supplemental; original failed finalization retained. Next source-only task in
    same responsible Linux context: concrete retained worker/handle/descriptor
    census and meaningful controls for ticket03, reuse accepted timing data.
-   No new build/native invocation before root source review. Prior launcher,
+   No new build/native invocation before root source review. Root inspected
+   CleanupService::ensure_worker: first execution intentionally retains one
+   package-lifetime cleanup worker. Supplement must report baseline/API-return/
+   post-package-drop task/fd counts, distinguish intentional worker from leaks,
+   detect a positive blocked-child control and bounded post-drop quiescence;
+   no silent warmup or false requirement of zero service workers at return. Prior launcher,
    resource/preflight review and invocation82 missing dependency failure remain
    by reference to root state4d095f86 and original82 receipts; no history reset.
    macOS overhead remains SOURCE-ONLY and NOT ready to launch. Expert09 answer
@@ -125,6 +135,12 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    audit path outside disposable runtimes, verifying Cargo.lock checksums; no
    install/toolchain/config/credentials/agent-home change. Same responsible Mac
    context implements Expert09 architecture and pure controls before native gate.
+   All131 locked registry archive checksums now verified in owner's durable
+   source-audit path; selected build-script/proc-macro/toolchain confinement and
+   conservative native Darwin reader still unverified. SDK declarations found.
+   Root authorized exact immutable compiler/library source acquisition for
+   read-only audit if existing verbose commit identifies it; no installation or
+   agent-home/config changes. Implementation can progress independently.
    No new Expert chain or native slot. Historical Mac prerequisite count82 is
    pre83 snapshot; authoritative actual Unix count83 below. Thirty-minute repair
    checkpoint is an estimate, reviewed with concrete progress; caps unchanged.
@@ -221,6 +237,15 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Current turn classification
+Previous goal turn PROGRESS: source fixes and original Linux83 data integrated,
+verified fork push43a68022 with only main remote. Current turn PROGRESS:
+Windows cleanup receipts independently inspected/integrated; concrete Linux
+resource-census correction distinguishes retained package cleanup service;
+Mac checksum audit progresses without native launch. Current default-core source
+applicability reviewed against c4646230: token.rs spawn row now cfg(sys) (false
+without sys), manifest adds Unix optional libc/targeted cap-std and gated examples.
+Old default-core1.66 proof remains historical compilation/smoke evidence, but
+current manifest/lock compatibility is not claimed verified by that old build.
 PROGRESS: reread current global/project rules; independently verified Windows17
 pins and integrated focused hash correction; integrated Mac fail-closed launch
 guard while responsible implementation continues; reviewed/retested corrected
