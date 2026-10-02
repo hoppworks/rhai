@@ -18,7 +18,7 @@ TARGET = RUNTIME / 'target'
 LOCK_BASE = STAGE / 'Cargo.lock.baseline'
 LOCK_SHA = '8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa'
 LOCK_EDGE = '2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425'
-ARCHIVE_SHA = '44b60f1d1260d90b4bb546aad92ff44f673c3257fc0cd9b1e35faf01c33240d5'
+ARCHIVE_SHA = 'fe254cabef661b334aa30ce16ab6ed7c267f8dd62507d7e28d3adcd6216c7f75'
 RUST = pathlib.Path('/root/.rustup/toolchains/1.93.0-x86_64-unknown-linux-gnu/bin')
 CARGO = RUST / 'cargo'
 RUSTC = RUST / 'rustc'
@@ -321,8 +321,19 @@ def exact_receipt(label, log, expected_status, test_name):
                 cleanup.groups() == (acquired[1][0], acquired[2][0])):
             raise RuntimeError('known-broken control did not fail on the exact acquired worker PID/start identity and then clean both fixture members')
 
+def provisional_eperm_control_valid(log):
+    name = 'packages::sys::process::unix::tests::managed_run_retries_provisional_group_eperm_within_one_observation_window'
+    summary = re.search(r'(?m)^test result: FAILED\. 0 passed; 1 failed;', log)
+    named = re.search(rf'(?m)^test {re.escape(name)} \.\.\. ', log)
+    expected_assertion = 'a later exact ESRCH observation closes the scope'
+    typed_error = re.search(
+        r'Process \{ cause: Io \{ op: "observe process group closure", .*?PermissionDenied',
+        log,
+    )
+    return bool(summary and named and expected_assertion in log and typed_error)
 
-def owner_suite_valid(log, expected_count=20):
+
+def owner_suite_valid(log, expected_count=21):
     summaries = re.findall(r'(?m)^test result: ok\. (\d+) passed; 0 failed;', log)
     name = 'packages::sys::process::unix::tests::public_kill_on_drop_false_final_lease_retires_owner_and_worker'
     named = re.search(rf'(?m)^test {re.escape(name)} \.\.\. ', log)
@@ -508,7 +519,7 @@ def main():
     for key in ('RUSTC_WRAPPER', 'RUSTC_WORKSPACE_WRAPPER', 'RUSTUP_TOOLCHAIN', 'CARGO_HOME_CONFIG'):
         BASE_ENV.pop(key, None)
     emit(f'PRIVATE_RUNTIME {RUNTIME}')
-    emit(f'SOURCE_ARCHIVE sha256={ARCHIVE_SHA} revision=911fe6fc047cfc5240347ccc4cd11fa56a282ff8')
+    emit(f'SOURCE_ARCHIVE sha256={ARCHIVE_SHA} revision=eafdcdf8e88cd08da5e097d7bdb5215ba3e9b564')
     emit(f'LOCK edge_only_sha256={LOCK_EDGE} baseline_sha256={LOCK_SHA}')
     emit(f'PLATFORM {subprocess.check_output(["uname", "-a"], text=True).strip()}')
     emit('LIMITS package_outer_seconds=600 active_driver_seconds=580 aggregate_cargo_seconds=540 cargo_jobs=2 storage_sample_stop_kib=1572864 hard_policy_kib=2097152 sampler_interval_seconds=1')
@@ -537,13 +548,57 @@ def main():
     emit(f'CONTROL_SOURCE_RESTORED sha256={original_sha}')
     if not sources_match_initial():
         raise RuntimeError('one or more frozen production/test inputs did not restore after control')
-    source_manifest('after-control-restoration')
+    source_manifest('after-managed-gate-control-restoration')
+
+    # Reintroduce the old immediate-failure behavior for the new public-engine regression.
+    # The injected first EPERM must then fail the test at its exact recovery assertion.
+    ep_start_marker = b'                Err(error) if error.raw_os_error() == Some(libc::EPERM) => {\n'
+    ep_end_marker = b'                Err(error) => {\n'
+    ep_start = original.find(ep_start_marker)
+    ep_end = original.find(ep_end_marker, ep_start + len(ep_start_marker)) if ep_start >= 0 else -1
+    if ep_start < 0 or ep_end < 0 or original.find(ep_start_marker, ep_start + 1) >= 0:
+        raise RuntimeError('provisional EPERM control could not locate exactly one supervisor observation branch')
+    old_eprem_branch = b'''                Err(error) if error.raw_os_error() == Some(libc::EPERM) => {
+                    return fail(
+                        &mut driver,
+                        &mut stdin,
+                        &mut stdout,
+                        &mut stderr,
+                        process_io_cause("observe process group closure", program, error),
+                        out,
+                        err,
+                        out_eof,
+                        err_eof,
+                        faults,
+                        false,
+                        None,
+                    );
+                }
+'''
+    try:
+        implementation.write_bytes(original[:ep_start] + old_eprem_branch + original[ep_end:])
+        control = run(
+            'known-broken-provisional-eperm-control',
+            common + [
+                '--lib',
+                'packages::sys::process::unix::tests::managed_run_retries_provisional_group_eperm_within_one_observation_window',
+                '--', '--exact', '--nocapture', '--test-threads=1',
+            ],
+            expect=101,
+        )
+        if not provisional_eperm_control_valid(control):
+            raise RuntimeError('EPERM control failed outside the intended one-shot recovery assertion')
+    finally:
+        implementation.write_bytes(original)
+    if sha(implementation) != original_sha or not sources_match_initial():
+        raise RuntimeError('one or more frozen source paths failed to restore after provisional EPERM control')
+    source_manifest('after-eperm-control-restoration')
 
     if sha(implementation) != original_sha:
         raise RuntimeError('production source drifted before restored suites')
     owner = run('unix-owner', common + ['--lib', 'packages::sys::process::unix::tests::', '--', '--nocapture', '--test-threads=1'])
-    if not owner_suite_valid(owner):
-        raise RuntimeError('Unix process owner suite lacks 20 passing tests or exact owner/worker/reap/output receipt')
+    if not owner_suite_valid(owner, expected_count=21):
+        raise RuntimeError('Unix process owner suite lacks 21 passing tests or exact owner/worker/reap/output receipt')
     source_manifest('after-owner-suite')
     if not sources_match_initial():
         raise RuntimeError('frozen production/test inputs drifted during owner suite')
