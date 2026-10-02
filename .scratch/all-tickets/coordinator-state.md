@@ -997,7 +997,7 @@ No source integration/native acceptance before this affected checkpoint.
 No native/build/toolchain/control/measurement dispatch; affected combined recheck
 at frozen repair required. Genuine EILSEQ early return remains uncovered.
 
-Last independently read-back fork main f56e6807a5a704c87181f0240fa0d932ab401fc1.
+Last independently read-back fork main8c61f9fbdf4c343ff58db55e714d1289e0a15354.
 Lowercase author and committer independently checked; root checkout clean before
 this state update. No upstream writes. Current disk instructions958a4538 unchanged.
 Previous status-only goal turn: NO PROGRESS. This continuation yields new evidence:
@@ -1011,3 +1011,14 @@ Next: collect immutable Darwin affected outcome; collect frozen Mac per-read bou
 and post-KILL-live correction for same affected review; complete Windows exact
 archive/tree/pins/parser/Roslyn prerequisite readback. Preserve native totals,
 accepted Linux proof and explicit caps; goal remains active.
+
+Affected Darwin4c4a81e live independent finding: F3 configured-root policy now
+matches. F4 clean split association works, but coverage uses parser_core and
+excludes appended stderr diagnostics; actual stderr-only EILSEQ false pass
+invalidates F1 diagnostic acceptance under this new derivation. Same reviewer
+is freezing the actual-stream reproduction/report; no third direct patch.
+Two failed implemented F4 corrections preserved (8b974 ordering,4c4a diagnostics).
+Required first cause-specific escalation brief prepared at
+escalations/11-darwin-split-stream-coverage.md; fresh Expert dispatch awaits
+terminal original report and available slot. Source-only30min planning checkpoint;
+one Expert/one bounded follow-up, no native allocation/history reset.
