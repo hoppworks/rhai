@@ -86,7 +86,7 @@ Current authoritative history through this rewrite is Git commit
 10d4a0d55400ebe8c24feff134e7161ff36bf8d5, this same state path. It retains
 all earlier cause/attempt/resource/source applicability records. Read that
 history for consumed work, not superseded next actions. No reset occurred.
-Last independently read-back fork mainef1a8d62; only remote main, lowercase
+Last independently read-back fork main7add22e3; only remote main, lowercase
 human author/committer. Goal active and incomplete.
 
 ### Accepted current Linux non-process package
@@ -204,9 +204,26 @@ This does not prove absence of a new heavy owner. Sole owner checks fresh slot
 and exact guest RunRoot/free storage, then executes existing single authorized
 source-fixture invocation; no allowance/history reset.
 
+### Registered shared Child contract slice
+
+Read-only explorer confirmed public spawn/shared Child implementation exists but
+prepared tests/fixtures/sys_process_shared_child_contract.rs was dormant. Root
+created attached owned worktree /Users/hoppworks/.codex/worktrees/process-shared-child-activation/rhai,
+task/process-shared-child-activation at7add22e3. Minimal atomic commit
+dd2a44fc53452b82dea55af102fc1a3842b9e4fb registers module under sys/unix/!no_index
+and selects integer wait(0)/wait(10) under no_float, preserving normal float
+scripts and OS/readback assertions. Static module-registration RED observed,
+then discovery/gates/reexec-names GREEN and diffcheck; no Cargo/native launch.
+Activation note records feature applicability and unchanged sync-start-channel
+limitation (not proof wait entered blocking section). Source acceptance/review
+and strict private1.77.2 normal/sync/no_float native proof still pending.
+New agent/reviewer dispatch attempts hit live thread limit; no task was launched
+or review claimed. Reuse available independent reviewer when slot frees.
+Commit awaits review/native checks/integration, no remote task ref was created.
+
 ### Next actions and turn classification
 
-Collect Mac5ed13 affected result; Darwin owner prepares exact native dispatch;
+Mac5ed13 source review accepted; Darwin exact staged dispatch waits live E2E;
 Windows owner proceeds to existing bounded source-fixture execution after fresh
 preflight. Allocate actual Darwin native run only after exact source/helper/lock/
 contract/toolchain/slot/runtime checks. Preserve all caps and no foreign disruption.
@@ -215,7 +232,19 @@ parser/pins/compiler-file prerequisites pushed as67968f30, soleforkmain checked.
 Current PROGRESS: actual exact Darwin pinned stage and empty owned scope prepared;
 command interpreter corrected before launch; foreign Windows heavy-build identities
 subsequently observed absent. Source/native counts unchanged. No native acceptance
-or completion claim. Mac same affected source review remains active.
+or completion claim. Mac same affected source review terminal accepted. Root later exact PID51269
+stilllive, original worker/browser exited but current descendant worker68636,
+browser68639 and ffmpeg68863 confirm continuing foreign E2E; do not launch heavy.
+Mac wrapper source readiness has real unsafe unmodified globalrunner0.2s PGID
+teardown conflict with separate command custody. Existing project-local runner-copy
+authorization permits responsible assessment of custody-aware owned copy, no global
+edit or cap/control allowance increase; preserve safe solecustodian and all limits.
+Fix interpreter/contract/readiness only from valid original refs, not stale labels.
+Windows preflight keyboard24475 terminal: owned run-parent missing, candidate
+monitor-source-e4ca75a61838492e8d9eadc22fcf2855 absent, free70739865600bytes,
+script19c unchanged. Exact owned parent creation typing54841 live, no duplicate.
+Current turn PROGRESS: actual shared Child contract activated atomically with
+source RED/GREEN; no native invocation/count change or completion claim.
 
 ## Resources, counts and cause history
 Unix actual native invocation count84 consumed.82 failed before runtime;
