@@ -1,0 +1,5 @@
+label	pid	start_ticks	ppid	pgid	cmdline
+known-broken-managed-gate-control	2778673	5148362	2778654	2778653	/root/.rustup/toolchains/1.93.0-x86_64-unknown-linux-gnu/bin/cargo test --locked --no-fail-fast --features testing-environ,sys --test sys_process managed_run_closes_pipe_closed_worker_before_return -- --exact --nocapture --test-threads=1
+known-broken-provisional-eperm-control	2780639	5149725	2778654	2778653	/root/.rustup/toolchains/1.93.0-x86_64-unknown-linux-gnu/bin/cargo test --locked --no-fail-fast --features testing-environ,sys --lib packages::sys::process::unix::tests::managed_run_retries_provisional_group_eperm_within_one_observation_window -- --exact --nocapture --test-threads=1
+unix-owner	2780826	5150206	2778654	2778653	/root/.rustup/toolchains/1.93.0-x86_64-unknown-linux-gnu/bin/cargo test --locked --no-fail-fast --features testing-environ,sys --lib packages::sys::process::unix::tests:: -- --nocapture --test-threads=1
+full-sys-process	2784132	5152231	2778654	2778653	/root/.rustup/toolchains/1.93.0-x86_64-unknown-linux-gnu/bin/cargo test --locked --no-fail-fast --features testing-environ,sys --test sys_process -- --nocapture --test-threads=1

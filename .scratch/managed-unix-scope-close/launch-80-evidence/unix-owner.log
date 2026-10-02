@@ -1,0 +1,159 @@
+   Compiling rhai v1.26.1 (/tmp/agent-build-1ftfwo9g/source)
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:668:13
+    |
+668 |         let mut wait_operation = "wait for child";
+    |             ----^^^^^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `termination`
+    --> src/packages/sys/process/unix.rs:1106:22
+     |
+1106 |                 let (termination, _operation) = if self.managed {
+     |                      ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_termination`
+     |
+     = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2134:9
+     |
+2134 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2456:9
+     |
+2456 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variant `OnlyZombieLeader` is never constructed
+  --> src/packages/sys/process/unix.rs:50:5
+   |
+47 | enum GroupCloseOutcome {
+   |      ----------------- variant in this enum
+...
+50 |     OnlyZombieLeader,
+   |     ^^^^^^^^^^^^^^^^
+   |
+   = note: `GroupCloseOutcome` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: struct `CancelChildOnDrop` is never constructed
+    --> src/packages/sys/process/unix.rs:4005:12
+     |
+4005 |     struct CancelChildOnDrop {
+     |            ^^^^^^^^^^^^^^^^^
+
+warning: method `finish` is never used
+    --> src/packages/sys/process/unix.rs:4048:12
+     |
+4047 |     impl CancelChildOnDrop {
+     |     ---------------------- method in this implementation
+4048 |         fn finish(&mut self) {
+     |            ^^^^^^
+
+warning: function `try_release_fifo` is never used
+    --> src/packages/sys/process/unix.rs:4079:8
+     |
+4079 |     fn try_release_fifo(path: &Path) -> io::Result<()> {
+     |        ^^^^^^^^^^^^^^^^
+
+warning: `rhai` (lib test) generated 8 warnings (run `cargo fix --lib -p rhai --tests` to apply 4 suggestions)
+    Finished `test` profile [unoptimized] target(s) in 4.70s
+     Running unittests src/lib.rs (/tmp/agent-build-1ftfwo9g/target/debug/deps/rhai-02633672f86fc62e)
+
+running 21 tests
+test packages::sys::process::unix::tests::absent_signal_result_still_requires_passive_post_reap_closure ... ok
+test packages::sys::process::unix::tests::cleanup_service_progresses_past_a_stalled_owner ... owner_service_child first pid=2781123
+owner_service_child second pid=2781124
+owner_service_checkpoint first_pid=2781123 first_retired=false second_pid=2781124 second=ESRCH
+owner_service_final first_pid=2781123 second_pid=2781124 both=ESRCH
+ok
+test packages::sys::process::unix::tests::cleanup_service_reservation_failure_precedes_os_spawn ... ok
+test packages::sys::process::unix::tests::darwin_eperm_fallback_requires_natural_exit_and_exact_group_listing ... ok
+test packages::sys::process::unix::tests::echild_quarantine_performs_no_later_numeric_child_operations ... 
+running 1 test
+echild-quarantine fault=deterministic-cleanup-wait-ECHILD
+echild-quarantine worker_passes_before=1 after=2
+echild-quarantine child_pid=2781131 operations=2858 owner=retained
+test packages::sys::process::unix::tests::echild_quarantine_performs_no_later_numeric_child_operations ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 21 filtered out; finished in 0.12s
+
+echild-quarantine child_record=/tmp/agent-build-1ftfwo9g/tmp/rhai-process-owner-2781119-1790914905810486520/child-record pid=2781131
+echild-quarantine child_pid=2781131 reap=ESRCH
+ok
+test packages::sys::process::unix::tests::empty_unadopted_launch_reservation_can_retire ... ok
+test packages::sys::process::unix::tests::failed_group_submission_is_fenced_from_numeric_retry ... ok
+test packages::sys::process::unix::tests::inherited_pipe_holder_is_alive_at_timeout_and_fixture_releases_it ... 
+running 1 test
+inherited-pipe fixture holder_pid=2782218 alive=true challenge=before:nonce-before-timeout answered=true
+inherited-pipe captured_stdout_ready=true captured_stderr_ready=true
+inherited-pipe timeout child_pid=2782214 child_reap=ESRCH holder_pid=2782218 holder_live=true stdout_complete=false stderr_complete=false
+inherited-pipe post-return challenge=after:nonce-after-return answered=true
+inherited-pipe holder_pid=2782218 probe="stdout=errno=32 stderr=errno=32\n" reap=ESRCH
+test packages::sys::process::unix::tests::inherited_pipe_holder_is_alive_at_timeout_and_fixture_releases_it ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 21 filtered out; finished in 2.03s
+
+inherited-pipe fixture api_returned_after_pre_ack=true
+inherited-pipe outer child_pid=2782214 holder_pid=2782218 both=ESRCH
+ok
+test packages::sys::process::unix::tests::interrupted_poll_does_not_skip_public_deadline ... interrupted-poll child_pid=2782683 reap=ESRCH elapsed_ms=110 injected=96
+ok
+test packages::sys::process::unix::tests::kill_refusal_returns_boundedly_and_retains_real_child_after_package_drop ... 
+running 1 test
+test packages::sys::process::unix::tests::kill_refusal_returns_boundedly_and_retains_real_child_after_package_drop ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 21 filtered out; finished in 1.15s
+
+retained-owner-red child_record=/tmp/agent-build-1ftfwo9g/tmp/rhai-process-owner-2781119-1790914912104041556/child-record pid=2782762
+retained-owner-red child_pid=2782762 reap=ESRCH
+ok
+test packages::sys::process::unix::tests::managed_close_submission_is_not_scope_completion ... ok
+test packages::sys::process::unix::tests::managed_run_retries_provisional_group_eperm_within_one_observation_window ... ok
+test packages::sys::process::unix::tests::managed_scope_esrch_closes_only_after_child_reap_and_io_completion ... ok
+test packages::sys::process::unix::tests::managed_scope_observation_errors_remain_passive_and_retryable ... ok
+test packages::sys::process::unix::tests::non_consuming_cleanup_wait_failure_publishes_frozen_snapshot ... 
+running 1 test
+retained-owner-wait child_record=/tmp/agent-build-1ftfwo9g/tmp/rhai-process-owner-2781119-1790914916667389576/child-record pid=2783422
+retained-owner-wait child_pid=2783422 reap=ESRCH
+test packages::sys::process::unix::tests::non_consuming_cleanup_wait_failure_publishes_frozen_snapshot ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 21 filtered out; finished in 0.14s
+
+retained-owner-wait child_record=/tmp/agent-build-1ftfwo9g/tmp/rhai-process-owner-2781119-1790914916667389576/child-record pid=2783422
+retained-owner-wait child_pid=2783422 reap=ESRCH
+ok
+test packages::sys::process::unix::tests::post_spawn_pipe_setup_failure_preserves_cause_and_reaps_child ... 
+running 1 test
+setup-failure child_pid=2783714 reap=ESRCH owner_retired=true
+test packages::sys::process::unix::tests::post_spawn_pipe_setup_failure_preserves_cause_and_reaps_child ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 21 filtered out; finished in 0.02s
+
+setup-failure fixture child_pid=2783714 reap=ESRCH
+ok
+test packages::sys::process::unix::tests::public_kill_on_drop_false_final_lease_retires_owner_and_worker ... false-policy-owner-retired pid=2784069 slot_retired=true worker_done=true reap=ESRCH stdout=retained-output stdout_complete=true stderr_complete=true exit=Code(0)
+ok
+test packages::sys::process::unix::tests::read_ready_yields_after_budget_for_always_ready_reader ... ok
+test packages::sys::process::unix::tests::reaped_driver_unwind_retires_completed_owner_once ... reaped-driver-unwind child_pid=2784095 has_been_waited=true
+
+thread 'packages::sys::process::unix::tests::reaped_driver_unwind_retires_completed_owner_once' (2784093) panicked at src/packages/sys/process/unix.rs:3706:13:
+injected caller unwind after child reap and pump completion
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+reaped-driver-unwind child_pid=2784095 reap=ESRCH
+ok
+test packages::sys::process::unix::tests::retirement_requires_passive_esrch_observation ... ok
+test packages::sys::process::unix::tests::successful_execution_enters_os_spawn_seam ... spawn-seam control child_pid=2784099 reap=ESRCH marker=/tmp/agent-build-1ftfwo9g/tmp/rhai-process-owner-2781119-1790914921085358731/spawned spawn_entries=1 content=x
+ok
+
+test result: ok. 21 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 15.45s
+
