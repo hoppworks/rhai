@@ -1,0 +1,13 @@
+F
+======================================================================
+FAIL: test_harness_paths_follow_own_worktree_not_removed_checkout (test-macos-process-overhead-source.EnvironmentTests.test_harness_paths_follow_own_worktree_not_removed_checkout)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/hoppworks/.local/share/agent-builds/rhai/managed-path-root-fbd23a42ade44aae9aa859cc00d907ce/agent-build-xzsjs140/.scratch/all-tickets/test-macos-process-overhead-source.py", line 37, in test_harness_paths_follow_own_worktree_not_removed_checkout
+    self.assertEqual(module.REPO, expected_repo)
+AssertionError: Posix[18 chars]orks/projects/rhai-all-tickets') != Posix[18 chars]orks/.local/share/agent-builds/rhai/managed-pa[58 chars]140')
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (failures=1)

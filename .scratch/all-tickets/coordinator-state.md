@@ -93,10 +93,13 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
    meaningful RED1, prior Cargo stream request fails1, restored adapter58 pass.
    macos-managed-correction-review.md records source-only acceptance and scope.
    Guardfalse/count84 preserved. Real dual-stream capture progress, native ABI,
-   confinement/interruption and measurement acceptance remain open. Existing
-   Mac owner now fixes only absent-checkout path dependence in active harness
-   source under the same Expert09 history, source-only30min checkpoint; no Cargo
-   or native allocation. Frozen measurement/archive/toolchain unchanged.
+   confinement/interruption and measurement acceptance remain open. Absent-checkout path correctionca7684ab independently passes adapter59,
+   meaningful prior-path RED1 and restored59; syntax/cleanup readback0. Owner
+   completed. Nine reviewed preparation source files are integrated byte-for-byte
+   fromca7684ab; frozen parser dependency also matches the tested receipt.
+   Full source history reviews are retained by their original refs, and source
+   prerequisites still remain open. No Cargo/native allocation; frozen
+   measurement/archive/toolchain unchanged.
 4. Windows sole owner is completed and guest last observed off; partial console
    command/cleanup remains unverified. Preserve allocation and all prior evidence;
    no restart, new native launch or repeated source review for the rule update.
@@ -163,7 +166,10 @@ PROGRESS: prior status-only turn was NO PROGRESS; next available safe action
 completed independent affected-source correction review and scoped pure replay
 of frozen74943bb2. Original logs and receipt at macos-managed-root-regressions;
 runner0, runtime absent, exact own empty scope removed. Three material source
-findings closed narrowly, no native/process/Cargo launch. Full goal remains open.
+findings and absent-checkout path dependency closed narrowly, finalca7684ab
+59 adapter checks and meaningful prior-path RED1 independently replayed.
+Nine reviewed preparation source files integrated at exact tested hashes, with
+false launch guard retained; no native/process/Cargo launch. Full goal remains open.
 Exact renewed foreign heavy handles establish a verified wait for Linux, while
 independent source correction continues. The second externally removed root
 checkout is replaced by an attached owned managed checkout from retained4ac,

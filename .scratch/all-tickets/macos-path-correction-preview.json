@@ -1,0 +1,40 @@
+{
+  "schema_version": "1",
+  "mode": "range",
+  "repository": "/Users/hoppworks/.codex/worktrees/all-tickets-continuation/rhai",
+  "from": "74943bb2",
+  "to": "ca7684ab",
+  "merge_base": "74943bb231f7f26e6951d946baa687465d72d3a8",
+  "total_files": 4,
+  "reviewable_count": 4,
+  "excluded_count": 0,
+  "total_insertions": 21,
+  "total_deletions": 8,
+  "reviewable_files": [
+    {
+      "path": ".scratch/all-tickets/macos-process-overhead.py",
+      "status": "modified",
+      "insertions": 4,
+      "deletions": 4
+    },
+    {
+      "path": ".scratch/all-tickets/run-macos-process-overhead-scoped.py",
+      "status": "modified",
+      "insertions": 4,
+      "deletions": 3
+    },
+    {
+      "path": ".scratch/all-tickets/run-macos-process-overhead.sh",
+      "status": "modified",
+      "insertions": 2,
+      "deletions": 1
+    },
+    {
+      "path": ".scratch/all-tickets/test-macos-process-overhead-source.py",
+      "status": "modified",
+      "insertions": 11,
+      "deletions": 0
+    }
+  ],
+  "excluded_files": []
+}

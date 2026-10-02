@@ -1,13 +1,15 @@
-import hashlib, os, platform, re, shutil, signal, subprocess, sys, time
+import ctypes, errno, hashlib, importlib.util, json, os, platform, re, shutil, socket, sys, time
 from pathlib import Path
-REPO=Path('/Users/hoppworks/projects/rhai-all-tickets')
+REPO=Path(__file__).resolve().parents[2]
 SOURCE_REF='00bed4a0dfeb103ff209ba4c76dac7ae797b7c56'
 ARCHIVE_SHA='5414ea195ad00152b1eae36b3f4e10943ba5d9bf323baff6410cca0c5b4d8b98'
 RUNTIME=Path(os.environ['AGENT_RUNTIME_DIR']).resolve()
 BASE=Path(os.environ['RHAI_OVERHEAD_LOG_BASE']).absolute()
-EVIDENCE=Path('/Users/hoppworks/projects/rhai-all-tickets/.scratch/all-tickets/macos-process-overhead-evidence')
+EVIDENCE=REPO/'.scratch/all-tickets/macos-process-overhead-evidence'
 TOOL=Path('/Users/hoppworks/.rustup/toolchains/stable-aarch64-apple-darwin/bin')
 CARGO,RUSTC,RUSTDOC=(TOOL/n for n in ('cargo','rustc','rustdoc'))
+SDKROOT=Path('/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk')
+XCODE_TOOLS=Path('/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin')
 LOCK_SHA='8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa'
 OVERLAYS=['Cargo.toml','src/packages/sys/config.rs','src/packages/sys/mod.rs','src/packages/sys/process.rs','src/packages/sys/process/unix.rs','tests/sys_process.rs']
 LIMIT=1_572_864
@@ -20,6 +22,14 @@ MAX_RSS_KIB=2*1024*1024
 # independently reviewed. This is a source gate, not evidence of custody.
 CUSTODY_READINESS = Path(__file__).with_name('macos-overhead-custody-readiness.json')
 CUSTODY_IMPLEMENTATION_FROZEN = False
+_WAITID = None
+_RPC = None
+_LAST_CUSTODY_RESULT = None
+# Darwin idtype_t/waitid constants from the active SDK's sys/wait.h.
+DARWIN_P_PID = 1
+DARWIN_WNOHANG = 0x01
+DARWIN_WEXITED = 0x04
+DARWIN_WNOWAIT = 0x20
 
 def require_launch_readiness():
     if CUSTODY_IMPLEMENTATION_FROZEN is not True:
@@ -41,10 +51,152 @@ def require_launch_readiness():
     if not isinstance(readiness, dict) or any(readiness.get(key) != value for key, value in required.items()):
         raise RuntimeError('macOS overhead source is NOT launch-ready: custody prerequisites are incomplete')
 
-class Interrupted(BaseException):
-    def __init__(self, signum): self.signum=signum
+class _DarwinSigVal(ctypes.Union):
+    _fields_ = [('sival_int', ctypes.c_int), ('sival_ptr', ctypes.c_void_p)]
 
-def _interrupt(signum, _frame): raise Interrupted(signum)
+class _DarwinSigInfo(ctypes.Structure):
+    _fields_ = [('si_signo', ctypes.c_int), ('si_errno', ctypes.c_int),
+                ('si_code', ctypes.c_int), ('si_pid', ctypes.c_int32),
+                ('si_uid', ctypes.c_uint32), ('si_status', ctypes.c_int),
+                ('si_addr', ctypes.c_void_p),
+                ('si_value', _DarwinSigVal),
+                ('si_band', ctypes.c_long), ('__pad', ctypes.c_ulong * 7)]
+
+class _WaitResult:
+    def __init__(self, pid, code, status):
+        self.si_pid, self.si_code, self.si_status = pid, code, status
+
+def require_nonreaping_waitid():
+    """Resolve reviewed WNOWAIT support before any gated process is spawned."""
+    global _WAITID
+    if callable(getattr(os, 'waitid', None)):
+        for name in ('P_PID', 'WEXITED', 'WNOHANG', 'WNOWAIT'):
+            if not hasattr(os, name):
+                raise RuntimeError('waitid lacks required constant os.' + name)
+        _WAITID = os.waitid
+        return
+    if sys.platform != 'darwin' or ctypes.sizeof(_DarwinSigInfo) != 104:
+        raise RuntimeError('no reviewed Darwin waitid/WNOWAIT ABI for this Python/platform')
+    libc = ctypes.CDLL(None, use_errno=True)
+    native = getattr(libc, 'waitid', None)
+    if native is None:
+        raise RuntimeError('native waitid symbol is unavailable')
+    native.argtypes = (ctypes.c_int, ctypes.c_uint32,
+                       ctypes.POINTER(_DarwinSigInfo), ctypes.c_int)
+    native.restype = ctypes.c_int
+    def waitid(pid):
+        info = _DarwinSigInfo()
+        while True:
+            ctypes.set_errno(0)
+            result = native(DARWIN_P_PID, pid, ctypes.byref(info),
+                            DARWIN_WEXITED | DARWIN_WNOHANG | DARWIN_WNOWAIT)
+            if result == 0:
+                return None if info.si_pid == 0 else _WaitResult(info.si_pid, info.si_code, info.si_status)
+            error = ctypes.get_errno()
+            if error == errno.EINTR:
+                continue
+            raise OSError(error, os.strerror(error))
+    _WAITID = waitid
+
+def waitid_nonreap(pid):
+    if _WAITID is None:
+        raise RuntimeError('non-reaping waitid was not resolved')
+    if hasattr(os, 'waitid'):
+        return _WAITID(os.P_PID, pid, os.WEXITED | os.WNOHANG | os.WNOWAIT)
+    return _WAITID(pid)
+
+def build_environment(runtime):
+    """Build a closed Cargo environment; inherited variables cannot alter custody."""
+    runtime=Path(runtime).resolve()
+    home=runtime/'home'
+    tmp=runtime/'tmp'
+    cargo_home=runtime/'cargo-home'
+    rustup_home=runtime/'rustup-home'
+    target=runtime/'target'
+    for path in (home,tmp,cargo_home,rustup_home,target):
+        path.mkdir(parents=True,exist_ok=True)
+    return {
+        'PATH':f'{TOOL}:/usr/bin:/bin:/usr/sbin:/sbin',
+        'HOME':str(home),
+        'TMPDIR':str(tmp), 'TMP':str(tmp), 'TEMP':str(tmp),
+        'CARGO_HOME':str(cargo_home), 'RUSTUP_HOME':str(rustup_home),
+        'CARGO_TARGET_DIR':str(target), 'CARGO_BUILD_JOBS':'2',
+        'CARGO_INCREMENTAL':'0', 'CARGO_PROFILE_DEV_DEBUG':'0',
+        'CARGO_PROFILE_TEST_DEBUG':'0', 'CARGO_TERM_COLOR':'never',
+        'RUSTC':str(RUSTC), 'RUSTDOC':str(RUSTDOC),
+        'SDKROOT':str(SDKROOT),
+    }
+
+def expected_tool_identity():
+    return {
+        'cargo_version': 'cargo 1.93.0 (083ac5135 2025-12-15)',
+        'rustc_release': '1.93.0',
+        'rustc_commit': '254b59607d4417e9dffbc307138ae5c86280fe4c',
+        'rustc_host': 'aarch64-apple-darwin',
+        'rustc_llvm': '21.1.8',
+        'rustdoc_version': 'rustdoc 1.93.0 (254b59607 2026-01-19)',
+        'xcrun_version': 'xcrun version 72.',
+        'sdkroot': str(SDKROOT),
+        'cc_path': str(XCODE_TOOLS/'cc'),
+        'clang_path': str(XCODE_TOOLS/'clang'),
+        'ld_path': str(XCODE_TOOLS/'ld'),
+        'dsymutil_path': str(XCODE_TOOLS/'dsymutil'),
+        'cc_identity': ('Apple clang version 21.0.0', 'Target: arm64-apple-darwin27.0.0',
+                        f'InstalledDir: {XCODE_TOOLS}'),
+        'clang_identity': ('Apple clang version 21.0.0', 'Target: arm64-apple-darwin27.0.0',
+                           f'InstalledDir: {XCODE_TOOLS}'),
+        'ld_identity': ('ld-27037.1', 'LLVM version 21.0.0', 'TAPI version 21.0.0'),
+        'dsymutil_identity': ('Apple LLVM version 21.0.0',),
+    }
+
+def validate_tool_identity(actual):
+    expected = expected_tool_identity()
+    if not isinstance(actual, dict):
+        raise RuntimeError('tool identity probe is not a mapping')
+    for key, value in expected.items():
+        if key not in actual:
+            raise RuntimeError(f'tool identity probe omitted {key}')
+        observed = actual[key]
+        if isinstance(value, tuple):
+            if observed != value and (not isinstance(observed, str) or any(part not in observed for part in value)):
+                raise RuntimeError(f'tool identity mismatch for {key}')
+        elif observed != value:
+            raise RuntimeError(f'tool identity mismatch for {key}')
+
+def verify_toolchain_identity(env, deadline):
+    expected = expected_tool_identity()
+    probes = [
+        ('cargo_version', [str(CARGO), '--version'], 'cargo-version-preflight.out'),
+        ('rustc', [str(RUSTC), '--version', '--verbose'], 'rustc-version-preflight.out'),
+        ('rustdoc_version', [str(RUSTDOC), '--version'], 'rustdoc-version-preflight.out'),
+        ('xcrun_version', ['/usr/bin/xcrun', '--version'], 'xcrun-version-preflight.out'),
+        ('sdkroot', ['/usr/bin/xcrun', '--show-sdk-path'], 'xcrun-sdk-preflight.out'),
+        ('cc_path', ['/usr/bin/xcrun', '--find', 'cc'], 'xcrun-cc-preflight.out'),
+        ('clang_path', ['/usr/bin/xcrun', '--find', 'clang'], 'xcrun-clang-preflight.out'),
+        ('ld_path', ['/usr/bin/xcrun', '--find', 'ld'], 'xcrun-ld-preflight.out'),
+        ('dsymutil_path', ['/usr/bin/xcrun', '--find', 'dsymutil'], 'xcrun-dsymutil-preflight.out'),
+        ('cc_identity', ['/usr/bin/cc', '--version'], 'cc-version-preflight.out'),
+        ('clang_identity', ['/usr/bin/clang', '--version'], 'clang-version-preflight.out'),
+        ('ld_identity', [str(XCODE_TOOLS/'ld'), '-v'], 'ld-version-preflight.out'),
+        ('dsymutil_identity', ['/usr/bin/dsymutil', '--version'], 'dsymutil-version-preflight.out'),
+    ]
+    actual = {}
+    for key, argv, filename in probes:
+        left = deadline-time.monotonic()
+        if left <= 0: raise TimeoutError('tool identity preflight exceeded work deadline')
+        output = RUNTIME/filename
+        status, data = run_anchored_command(argv, REPO, env, output,
+            min(deadline, time.monotonic()+10), closure_deadline=deadline)
+        if status: raise RuntimeError(f'tool identity command failed for {key}: status={status}')
+        text = data.decode(errors='replace').strip()
+        if key == 'rustc':
+            fields = dict(line.split(': ', 1) for line in text.splitlines() if ': ' in line)
+            actual.update({'rustc_release': fields.get('release'), 'rustc_commit': fields.get('commit-hash'),
+                           'rustc_host': fields.get('host'), 'rustc_llvm': fields.get('LLVM version')})
+        else:
+            actual[key] = text
+    validate_tool_identity(actual)
+    print('tool_identity_preflight=passed', flush=True)
 
 def parse_ps_snapshot(output):
     """Parse `ps -axo pid=,ppid=,pgid=,rss=,state=,lstart=` output."""
@@ -76,150 +228,292 @@ def enforce_process_sample(live, rss_kib):
     if count>MAX_DESCENDANTS: raise RuntimeError(f'sampled process descendants exceeded {MAX_DESCENDANTS}')
     if rss_kib>=MAX_RSS_KIB: raise RuntimeError(f'sampled process RSS reached {MAX_RSS_KIB} KiB')
 
-def process_snapshot(root_pid, deadline):
+def process_snapshot(root_pid, deadline, env, source, owned_pids=()):
     left=deadline-time.monotonic()
     if left<=0: raise TimeoutError('aggregate Cargo deadline expired during process sample')
-    result=subprocess.run(['ps','-axo','pid=,ppid=,pgid=,rss=,state=,lstart='],
-                          capture_output=True,text=True,timeout=min(5,left),check=False)
-    if result.returncode: raise RuntimeError(f'process snapshot failed status={result.returncode}: {result.stderr.strip()}')
-    rows=parse_ps_snapshot(result.stdout)
-    if root_pid not in rows: return [],0
+    output=RUNTIME/'process-snapshot.out'
+    status,data=run_anchored_command(['/bin/ps','-axo','pid=,ppid=,pgid=,rss=,state=,lstart='],source,env,output,min(deadline,time.monotonic()+5),closure_deadline=deadline)
+    if status: raise RuntimeError(f'process snapshot failed status={status}: {data.decode(errors="replace").strip()}')
+    rows=parse_ps_snapshot(data.decode(errors='replace'))
+    if root_pid not in rows: raise RuntimeError('owned harness is absent from process snapshot')
     live=descendants(rows,root_pid)
-    # The direct Cargo process is itself part of the bounded process tree.
+    # The owned harness root is counted with all active child helper groups.
     live=[rows[root_pid],*live]
+    for pid in owned_pids:
+        if pid not in rows: raise RuntimeError('owned anchor absent from sampled process snapshot')
+        if pid not in {row['pid'] for row in live}: live.append(rows[pid])
     return live,sum(row['rss_kib'] for row in live)
 
-def persist_ledger(rows, complete=False, state='monitoring'):
-    path=RUNTIME/'owned-process-ledger.json'
-    data={'sampling':'one-second ps snapshots; not continuous enforcement',
-          'identities':rows,'observed_identity_readback_complete':complete,
-          'custody_state':state}
-    temporary=path.with_suffix('.tmp')
-    temporary.write_text(__import__('json').dumps(data,sort_keys=True)+'\n')
-    os.replace(temporary,path)
-
-def live_ledger_identities(ledger, deadline):
-    if not ledger: return []
-    left=deadline-time.monotonic()
-    if left<=0: raise TimeoutError('aggregate measurement deadline expired before final identity readback')
-    result=subprocess.run(['ps','-axo','pid=,ppid=,pgid=,rss=,state=,lstart='],
-                          capture_output=True,text=True,timeout=min(5,left),check=False)
-    if result.returncode: raise RuntimeError('final process identity readback failed')
-    current=parse_ps_snapshot(result.stdout)
-    by_key={(row['pid'],row['start']):row for row in current.values()}
-    return [by_key[(row['pid'],row['start'])] for row in ledger
-            if (row['pid'],row['start']) in by_key]
-
 def sha(p): return hashlib.sha256(Path(p).read_bytes()).hexdigest()
-def sample(deadline):
+def sample(deadline,env,source):
     for n in (1,2):
         left=deadline-time.monotonic()
         if left<=0: raise TimeoutError('aggregate Cargo deadline expired during storage sample')
-        try: r=subprocess.run(['du','-sk',str(RUNTIME)],capture_output=True,text=True,timeout=min(5,left))
-        except subprocess.TimeoutExpired as e:
-            print(f'storage_sample_attempt={n} status=timeout stdout={e.stdout!r} stderr={e.stderr!r}',flush=True)
+        output=RUNTIME/'storage-sample.out'
+        try: status,data=run_anchored_command(['/usr/bin/du','-sk',str(RUNTIME)],source,env,output,min(deadline,time.monotonic()+5),closure_deadline=deadline)
+        except (TimeoutError,RuntimeError) as e:
+            print(f'storage_sample_attempt={n} status=timeout detail={type(e).__name__}: {e}',flush=True)
             if n==2: raise
             time.sleep(min(.05,max(0,deadline-time.monotonic()))); continue
-        print(f'storage_sample_attempt={n} status={r.returncode} stdout={r.stdout.strip()!r} stderr={r.stderr.strip()!r}',flush=True)
-        if r.returncode:
+        text=data.decode(errors='replace')
+        print(f'storage_sample_attempt={n} status={status} stdout={text.strip()!r}',flush=True)
+        if status:
             if n==2: raise RuntimeError('two failed storage samples')
             time.sleep(min(.05,max(0,deadline-time.monotonic()))); continue
-        f=r.stdout.strip().split(maxsplit=1)
+        f=text.strip().split(maxsplit=1)
         if len(f)!=2 or not f[0].isdigit() or f[1]!=str(RUNTIME): raise RuntimeError('invalid storage sample')
         k=int(f[0]); print(f'storage_sample_kib={k}',flush=True)
         if k>=LIMIT: raise RuntimeError(f'sampled storage reached {LIMIT} KiB')
         return k
     raise RuntimeError('no valid storage measurement')
+
+def _rpc_line(conn, deadline):
+    import select
+    data=bytearray()
+    while b'\n' not in data:
+        left=deadline-time.monotonic()
+        if left<=0: raise TimeoutError('custody response deadline expired')
+        ready,_,_=select.select([conn],[],[],min(.1,left))
+        if not ready: continue
+        block=conn.recv(65536-len(data))
+        if not block: raise RuntimeError('custodian closed RPC connection')
+        data.extend(block)
+        if len(data)>65535: raise RuntimeError('custody response exceeds frame limit')
+    line,extra=bytes(data).split(b'\n',1)
+    if extra: raise RuntimeError('custodian returned pipelined RPC frames')
+    return json.loads(line)
+
+def read_command_output(output_path, stderr_path=None, include_stderr=True):
+    """Read the two custody streams without mixing machine-readable stdout."""
+    output = Path(output_path)
+    if not output.is_file() or output.is_symlink():
+        raise RuntimeError('custodian output path is missing or invalid')
+    stdout = output.read_bytes()
+    stderr = b''
+    if stderr_path is not None:
+        error_output = Path(stderr_path)
+        if not error_output.is_file() or error_output.is_symlink():
+            raise RuntimeError('custodian stderr path is missing or invalid')
+        stderr = error_output.read_bytes()
+    return (stdout + stderr if include_stderr else stdout), stderr
+
+
+def run_anchored_command(argv, cwd, env, output_path, deadline, stderr_path=None,
+                         closure_deadline=None, monitor_resources=False,
+                         include_stderr=True):
+    """Request an exact child command from the sole-spawning outer custodian."""
+    global _LAST_CUSTODY_RESULT
+    if _RPC is None: raise RuntimeError('no scoped custodian RPC connection')
+    command_deadline=min(deadline,closure_deadline) if closure_deadline is not None else deadline
+    request={'op':'command','argv':list(argv),'cwd':str(cwd),'env':env,
+             'output':str(output_path),'stderr':str(stderr_path) if stderr_path else None,
+             'deadline':command_deadline,'monitor_resources':monitor_resources}
+    encoded=json.dumps(request,separators=(',',':')).encode()+b'\n'
+    if len(encoded)>65535: raise RuntimeError('custody request exceeds frame limit')
+    _RPC.sendall(encoded)
+    response=_rpc_line(_RPC,command_deadline+5)
+    _LAST_CUSTODY_RESULT=response
+    if 'error' in response: raise RuntimeError('custodian command failed: '+response['error'])
+    data, _stderr = read_command_output(response['output'], stderr_path, include_stderr)
+    return response['status'],data
+
 def emit(path,complete):
     b=path.read_bytes() if path.exists() else b''
     print(f'measurement_driver_output_begin path={path} complete={str(complete).lower()} bytes={len(b)} sha256={hashlib.sha256(b).hexdigest()}',flush=True)
     print(b.decode(errors='replace'),flush=True); print('measurement_driver_output_end',flush=True)
-def cancel_and_reap(p):
-    if p.poll() is not None:
-        return p.wait(timeout=2)
-    p.terminate()  # Exact direct-child handle: Popen wait/reap establishes custody.
-    try: return p.wait(timeout=2)
-    except subprocess.TimeoutExpired:
-        p.kill()
-        try: return p.wait(timeout=2)
-        except subprocess.TimeoutExpired as exc: raise RuntimeError('exact Cargo child remains unreaped after bounded KILL wait') from exc
+
+def _load_process_reader():
+    reader_path=Path(__file__).with_name('darwin-process-reader.py')
+    spec=importlib.util.spec_from_file_location('darwin_process_reader',reader_path)
+    reader_module=importlib.util.module_from_spec(spec); spec.loader.exec_module(reader_module)
+    return reader_module,reader_module.DarwinProcessReader()
+
+def export_measurement_output(measurement_dir,status,output,parser):
+    """Keep raw custody bytes, but export and parse measurement output as text."""
+    if isinstance(output,bytes):
+        text=output.decode(errors='replace')
+    elif type(output) is str:
+        text=output
+    else:
+        raise TypeError('measurement output must be bytes or text')
+    measurement_dir.mkdir(parents=True,exist_ok=False)
+    (measurement_dir/'cargo-output.log').write_text(text,encoding='utf-8')
+    (measurement_dir/'cargo.status').write_text(f'{status}\n',encoding='ascii')
+    if status!=0:
+        return text,None,None
+    samples=parser.parse_samples(text)
+    summary=parser.summarize(samples)
+    return text,samples,summary
 
 def run(argv,path,deadline,env,source):
-    print('measurement_driver_argv='+repr(argv),flush=True); print('measurement_driver_cwd='+str(source),flush=True); print('measurement_driver_log='+str(path),flush=True)
+    print('cargo_argv='+repr(argv),flush=True); print('cargo_cwd='+str(source),flush=True); print('cargo_log='+str(path),flush=True)
     command_start=time.monotonic()
-    with path.open('wb') as f:
-        if not callable(getattr(signal,'pthread_sigmask',None)):
-            raise RuntimeError('cannot safely block interruption across exact Cargo child registration')
-        old_handlers={sig:signal.signal(sig,_interrupt) for sig in (signal.SIGTERM,signal.SIGINT)}
-        blocked=signal.pthread_sigmask(signal.SIG_BLOCK,{signal.SIGTERM,signal.SIGINT})
-        persist_ledger([],state='spawn-in-progress')
+    cargo_deadline=min(deadline,command_start+540)
+    status,out=run_anchored_command(argv,source,env,path,cargo_deadline,
+        closure_deadline=deadline,monitor_resources=True)
+    pgid=(_LAST_CUSTODY_RESULT or {}).get('pgid')
+    if pgid is None: raise RuntimeError('custodian omitted direct Cargo group identity')
+    print(f'cargo_status={status} cargo_pgid={pgid} cargo_elapsed_seconds={time.monotonic()-command_start:.3f}',flush=True)
+    emit(path,True)
+    reader_module,reader=_load_process_reader()
+    absence=reader_module.candidate_absence(reader,RUNTIME,min(deadline,time.monotonic()+15))
+    pgid_absent=0
+    for _ in range(2):
+        rows=reader.complete_listing(min(deadline,time.monotonic()+5))
+        if any(row.get('pgid')==pgid for row in rows):
+            raise RuntimeError('original command process group remains after custodian group closure')
+        pgid_absent+=1
+    print(f'escaped_leaf_candidate_absence={absence} original_pgid_absent_observations={pgid_absent}',flush=True)
+    if status!=0: raise RuntimeError('direct Cargo measurement failed; no retry')
+    return status,out.decode(errors='replace')
+
+def run_control_only(control_case, env, deadline, source):
+    """Run one finite setup/build workload and stop before the measurement path."""
+    if control_case == 'setup':
+        archive = RUNTIME/'setup-control.tar'
+        status, _data = run_anchored_command(
+            ['/usr/bin/git', '-C', str(REPO), 'archive', SOURCE_REF],
+            REPO, env, archive, min(deadline, time.monotonic()+90), closure_deadline=deadline)
+        if status or sha(archive) != ARCHIVE_SHA:
+            raise RuntimeError('setup control archive did not match the frozen source')
+        extracted = RUNTIME/'setup-control-source'
+        extracted.mkdir()
+        argv = ['/usr/bin/tar', '-xf', str(archive), '-C', str(extracted)]
+        output = RUNTIME/'setup-control-tar.out'
+    elif control_case == 'build':
+        argv = [str(CARGO), 'test', '--features', 'testing-environ,sys',
+                '--test', 'sys_process', '--no-run']
+        output = RUNTIME/'build-control.out'
+    elif control_case == 'managed':
+        fixture_build = [str(CARGO), 'test', '--features', 'testing-environ,sys',
+            '--test', 'sys_process', '--no-run', '--message-format=json-render-diagnostics']
+        fixture_log = RUNTIME/'managed-fixture-build.out'
+        fixture_stderr = RUNTIME/'managed-fixture-build.stderr'
+        status, data = run_anchored_command(fixture_build, source, env, fixture_log,
+            min(deadline, time.monotonic()+540), stderr_path=fixture_stderr,
+            closure_deadline=deadline, include_stderr=False)
+        if status:
+            raise RuntimeError(f'Managed fixture compile-only command failed status={status}')
+        fixture = parse_managed_fixture_executable(data, RUNTIME)
+        companion_source = Path(__file__).with_name('macos-managed-capture-companion.rs')
+        if not companion_source.is_file():
+            raise RuntimeError('Managed companion source is missing')
+        examples = source/'examples'
+        examples.mkdir(exist_ok=True)
+        companion = examples/'macos-managed-capture-companion.rs'
+        shutil.copyfile(companion_source, companion)
+        companion_build = [str(CARGO), 'build', '--offline', '--locked',
+            '--features', 'testing-environ,sys', '--example', 'macos-managed-capture-companion',
+            '--message-format=json-render-diagnostics']
+        companion_log = RUNTIME/'managed-companion-build.out'
+        companion_stderr = RUNTIME/'managed-companion-build.stderr'
+        status, data = run_anchored_command(companion_build, source, env, companion_log,
+            min(deadline, time.monotonic()+540), stderr_path=companion_stderr,
+            closure_deadline=deadline, include_stderr=False)
+        if status:
+            raise RuntimeError(f'Managed companion compile-only command failed status={status}')
+        host = parse_managed_companion_executable(data, RUNTIME)
+        ready = RUNTIME/'managed-host-ready.json'
+        fixture_record = RUNTIME/'managed-fixture.record'
+        complete = RUNTIME/'managed-host-complete'
+        capture_progress = RUNTIME/'managed-capture-progress.json'
+        argv = [str(host), str(fixture), str(ready), str(fixture_record),
+                str(complete), str(capture_progress)]
+        output = RUNTIME/'managed-host.out'
+        print(f'control_case=managed control_argv={argv!r}', flush=True)
+        run_anchored_command(argv, source, env, output,
+            min(deadline, time.monotonic()+20), closure_deadline=deadline)
+        raise RuntimeError('Managed host ended before the exact live stream readiness stop')
+    else:
+        raise RuntimeError('unsupported control client mode')
+    print(f'control_case={control_case} control_argv={argv!r}', flush=True)
+    status, _data = run_anchored_command(argv, source, env, output,
+        min(deadline, time.monotonic()+540), closure_deadline=deadline)
+    raise RuntimeError(f'{control_case} control workload ended before its controller stop status={status}')
+
+
+def _parse_cargo_executable(output, runtime, target_name, target_kind, target_dir):
+    runtime = Path(runtime).resolve()
+    expected_root = (runtime/'target'/target_dir).resolve()
+    matches = []
+    for raw in bytes(output).splitlines():
+        if not raw:
+            continue
         try:
-            p=subprocess.Popen(argv,cwd=source,env=env,stdout=f,stderr=subprocess.STDOUT,start_new_session=False)
-        except BaseException:
-            for sig,handler in old_handlers.items(): signal.signal(sig,handler)
-            signal.pthread_sigmask(signal.SIG_SETMASK,blocked)
-            raise
-        ledger=[]
-        try:
-            signal.pthread_sigmask(signal.SIG_SETMASK,blocked)
-            print(f'measurement_driver_pid={p.pid} measurement_driver_pgid={os.getpgid(p.pid)}',flush=True)
-            persist_ledger(ledger,state='monitoring')
-            last_sample_started=None
-            while p.poll() is None:
-                if time.monotonic()>=deadline: raise TimeoutError('aggregate Cargo watchdog expired')
-                sample_started=time.monotonic()
-                sample(deadline)
-                observed,rss=process_snapshot(p.pid,deadline)
-                for row in observed:
-                    if not any((x['pid'],x['start'])==(row['pid'],row['start']) for x in ledger): ledger.append(row)
-                persist_ledger(ledger)
-                descendants_now=len(observed)
-                interval='first' if last_sample_started is None else f'{sample_started-last_sample_started:.3f}'
-                last_sample_started=sample_started
-                print(f'measurement_tree_descendants={max(0,descendants_now-1)} measurement_tree_rss_kib={rss} limit_descendants={MAX_DESCENDANTS} limit_rss_kib={MAX_RSS_KIB} sample_interval_seconds={interval} continuous_enforcement=false',flush=True)
-                enforce_process_sample(observed,rss)
-                time.sleep(max(0,sample_started+1-time.monotonic()))
-            status=p.returncode; print(f'measurement_driver_status={status} measurement_driver_elapsed_seconds={time.monotonic()-command_start:.3f}',flush=True); emit(path,True); sample(deadline)
-        except BaseException as exc:
-            for sig in (signal.SIGTERM,signal.SIGINT): signal.signal(sig,signal.SIG_IGN)
-            rc=cancel_and_reap(p)
-            print(f'measurement_driver_cancelled_reaped=true measurement_driver_status={rc} cause={type(exc).__name__}; descendant_custody_not_implied=true',flush=True)
-            emit(path,rc is not None); raise
-        finally:
-            for sig,handler in old_handlers.items(): signal.signal(sig,handler)
-            signal.pthread_sigmask(signal.SIG_SETMASK,blocked)
-    live=live_ledger_identities(ledger,deadline)
-    print(f'final_owned_identity_readback_live={len(live)}',flush=True)
-    if live:
-        print('incomplete_cleanup_live_identities='+repr(live),flush=True)
-        raise RuntimeError('recorded process descendants remain live; runtime must be retained')
-    persist_ledger(ledger,complete=True,state='readback-complete')
-    return status,path.read_text(errors='replace')
+            record = json.loads(raw)
+        except (UnicodeDecodeError, ValueError) as exc:
+            raise ValueError('Cargo artifact stream contains malformed JSON') from exc
+        if record.get('reason') != 'compiler-artifact':
+            continue
+        target = record.get('target')
+        executable = record.get('executable')
+        if (type(target) is dict and target.get('name') == target_name
+                and target_kind in target.get('kind', []) and type(executable) is str):
+            path = Path(executable)
+            if not path.is_absolute() or path.is_symlink():
+                raise ValueError('Cargo artifact path is not an absolute regular file')
+            resolved = path.resolve(strict=True)
+            if expected_root not in resolved.parents or not resolved.is_file():
+                raise ValueError('Cargo artifact escapes the private target directory')
+            matches.append(resolved)
+    if len(matches) != 1:
+        raise ValueError(f'expected exactly one {target_name} executable artifact')
+    return matches[0]
+
+
+def parse_managed_fixture_executable(output, runtime):
+    return _parse_cargo_executable(output, runtime, 'sys_process', 'test', 'debug/deps')
+
+
+def parse_managed_companion_executable(output, runtime):
+    return _parse_cargo_executable(output, runtime, 'macos-managed-capture-companion',
+                                    'example', 'debug/examples')
 
 def main():
     # The gate is deliberately first: no runtime, evidence directory, version
     # query, Git/archive, Cargo, or fixture process may start before root review.
     require_launch_readiness()
+    global _RPC
+    sock_path=os.environ.get('RHAI_CUSTODY_SOCKET')
+    if not sock_path: raise RuntimeError('missing scoped custodian RPC socket path')
+    _RPC=socket.socket(socket.AF_UNIX,socket.SOCK_STREAM)
+    _RPC.settimeout(5)
+    _RPC.connect(sock_path)
+    _RPC.settimeout(None)
     # Setup commands below are external children too. Any interrupted setup is
     # deliberately incomplete so the adapter retains the runtime for review.
-    persist_ledger([],state='setup-in-progress')
-    package_deadline=time.monotonic()+580
+    package_deadline=min(float(os.environ['RHAI_CUSTODY_WORK_DEADLINE']),time.monotonic()+560)
+    control_case=os.environ.get('RHAI_CONTROL_CASE')
+    if control_case not in (None, 'setup', 'build', 'managed'):
+        raise RuntimeError('invalid or unsupported control client mode')
     if RUNTIME.is_symlink() or not RUNTIME.is_dir(): raise RuntimeError('unowned runtime path')
     if BASE.parent!=EVIDENCE or BASE.is_symlink(): raise RuntimeError('log base outside evidence directory')
+    env=build_environment(RUNTIME)
     EVIDENCE.mkdir(parents=True,exist_ok=True)
-    print('phase=process_scope_overhead_measurement',flush=True)
-    print('scope=immutable_POSIX_overhead_development_not_release',flush=True)
-    print(f'runtime_path={RUNTIME}',flush=True)
-    print(f'python={sys.version.replace(chr(10)," ")} platform={platform.platform()}',flush=True)
-    print(f'harness_pid={os.getpid()} supervisor_pid={os.getppid()} inherited_pgid={os.getpgid(0)}',flush=True)
+    if control_case == 'setup':
+        run_control_only(control_case, env, package_deadline, REPO)
+        return
+    verify_toolchain_identity(env, package_deadline)
     for name,p in [('cargo',CARGO),('rustc',RUSTC),('rustdoc',RUSTDOC)]:
-        v=subprocess.check_output([str(p),'--version','--verbose'] if name=='rustc' else [str(p),'--version'],text=True,timeout=10).strip().replace('\n',' | ')
+        output=RUNTIME/f'{name}-version.out'
+        args=[str(p),'--version','--verbose'] if name=='rustc' else [str(p),'--version']
+        status,data=run_anchored_command(args,REPO,env,output,min(package_deadline,time.monotonic()+10),closure_deadline=package_deadline)
+        if status: raise RuntimeError(f'{name} version command failed status={status}')
+        v=data.decode(errors='replace').strip().replace('\n',' | ')
         print(f'{name}_path={p} {name}_version={v}',flush=True)
-    hashes={n:hashlib.sha256(subprocess.check_output(['git','-C',str(REPO),'show',f'{SOURCE_REF}:{n}'],timeout=10)).hexdigest() for n in OVERLAYS}
-    print('repo_head='+subprocess.check_output(['git','-C',str(REPO),'rev-parse',SOURCE_REF],text=True,timeout=10).strip(),flush=True)
+    hashes={}
+    for name in OVERLAYS:
+        output=RUNTIME/'git-show.out'
+        status,data=run_anchored_command(['/usr/bin/git','-C',str(REPO),'show',f'{SOURCE_REF}:{name}'],REPO,env,output,min(package_deadline,time.monotonic()+10),closure_deadline=package_deadline)
+        if status: raise RuntimeError(f'git show failed for {name} status={status}')
+        hashes[name]=hashlib.sha256(data).hexdigest()
+    head_out=RUNTIME/'git-head.out'
+    status,data=run_anchored_command(['/usr/bin/git','-C',str(REPO),'rev-parse',SOURCE_REF],REPO,env,head_out,min(package_deadline,time.monotonic()+10),closure_deadline=package_deadline)
+    if status: raise RuntimeError('git rev-parse failed')
+    print('repo_head='+data.decode(errors='replace').strip(),flush=True)
     print('original_overlay_hashes='+repr(hashes),flush=True)
-    wrapper=Path('/Users/hoppworks/projects/rhai-all-tickets/.scratch/all-tickets/run-macos-process-overhead.sh')
-    adapter=Path('/Users/hoppworks/projects/rhai-all-tickets/.scratch/all-tickets/run-macos-process-overhead-scoped.py')
+    wrapper=Path(__file__).with_name('run-macos-process-overhead.sh')
+    adapter=Path(__file__).with_name('run-macos-process-overhead-scoped.py')
     scoped=Path('/Users/hoppworks/projects/agent-skills/tools/run_scoped.py')
     print(f'harness_sha256={sha(Path(__file__))}',flush=True)
     print(f'wrapper_sha256={sha(wrapper)}',flush=True)
@@ -227,17 +521,15 @@ def main():
     print(f'shared_runner_reference_sha256={sha(scoped)}',flush=True)
     source=RUNTIME/'source'; source.mkdir()
     archive=RUNTIME/'baseline.tar'
-    with archive.open('wb') as f:
-        p=subprocess.Popen(['git','-C',str(REPO),'archive',SOURCE_REF],stdout=f,stderr=subprocess.PIPE,start_new_session=False)
-        d=time.monotonic()+90
-        while p.poll() is None:
-            if time.monotonic()>=d: raise TimeoutError('baseline archive exceeded90s')
-            sample(d); time.sleep(.5)
-        err=p.stderr.read().decode(errors='replace')
-        if p.returncode: raise RuntimeError(f'git archive status={p.returncode}: {err}')
+    archive_err=RUNTIME/'git-archive.stderr'
+    d=min(package_deadline,time.monotonic()+90)
+    archive_status,_=run_anchored_command(['/usr/bin/git','-C',str(REPO),'archive',SOURCE_REF],REPO,env,archive,d,stderr_path=archive_err,closure_deadline=package_deadline)
+    if archive_status: raise RuntimeError(f'git archive status={archive_status}: {archive_err.read_text(errors="replace")}')
     if sha(archive)!=ARCHIVE_SHA: raise RuntimeError('immutable archive hash mismatch')
     print(f'archive_sha256={sha(archive)} source_ref={SOURCE_REF}',flush=True)
-    if subprocess.run(['tar','-xf',str(archive),'-C',str(source)],timeout=90).returncode: raise RuntimeError('archive extraction failed')
+    tar_out=RUNTIME/'tar-extract.out'
+    tar_status,_=run_anchored_command(['/usr/bin/tar','-xf',str(archive),'-C',str(source)],source,env,tar_out,min(package_deadline,time.monotonic()+90),closure_deadline=package_deadline)
+    if tar_status: raise RuntimeError('archive extraction failed')
     archive.unlink()
     private={n:sha(source/n) for n in OVERLAYS}
     if private!=hashes: raise RuntimeError('private source manifest differs from frozen source')
@@ -252,19 +544,36 @@ def main():
         i=section.index(' "libm",\n'); section=section[:i]+' "libc",\n'+section[i:]; plock.write_text(txt[:a]+section+txt[b:])
     if sha(plock)!='2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425': raise RuntimeError('private edge-only lock hash mismatch')
     print(f'accepted_lock_sha256={sha(lock)} private_lock_sha256={sha(plock)}',flush=True)
-    env=dict(os.environ)
-    for k in ('RUSTUP_TOOLCHAIN','RUSTC_WRAPPER','RUSTC_WORKSPACE_WRAPPER','CARGO_BUILD_RUSTC_WRAPPER'): env.pop(k,None)
-    env.update({'PATH':f'{TOOL}:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin','CARGO_HOME':str(RUNTIME/'cargo-home'),'RUSTUP_HOME':str(RUNTIME/'rustup-home'),'CARGO_TARGET_DIR':str(RUNTIME/'target'),'CARGO_BUILD_JOBS':'2','CARGO_INCREMENTAL':'0','CARGO_PROFILE_DEV_DEBUG':'0','CARGO_PROFILE_TEST_DEBUG':'0','RUSTC':str(RUSTC),'RUSTDOC':str(RUSTDOC),'TMPDIR':str(RUNTIME/'tmp'),'TMP':str(RUNTIME/'tmp'),'TEMP':str(RUNTIME/'tmp')})
-    (RUNTIME/'cargo-home').mkdir(); (RUNTIME/'rustup-home').mkdir()
+    if control_case in ('build', 'managed'):
+        run_control_only(control_case, env, package_deadline, source)
+        return
+    print('phase=process_scope_overhead_measurement',flush=True)
+    print('scope=immutable_POSIX_overhead_development_not_release',flush=True)
+    print(f'runtime_path={RUNTIME}',flush=True)
+    print(f'python={sys.version.replace(chr(10)," ")} platform={platform.platform()}',flush=True)
+    print(f'harness_pid={os.getpid()} supervisor_pid={os.getppid()} inherited_pgid={os.getpgid(0)}',flush=True)
     measurement_dir=BASE.with_name(BASE.name+'.samples')
-    driver=source/'.scratch/managed-unix-scope-close/measure-process-overhead.py'
-    measurement_log=BASE.with_name(BASE.name+'.measurement-driver.log')
-    cmd=[sys.executable,str(driver),'--source-dir',str(source),'--evidence-dir',str(measurement_dir),'--source-revision',SOURCE_REF,'--source-archive-sha256',ARCHIVE_SHA]
+    parser_path=REPO/'.scratch/managed-unix-scope-close/measure-process-overhead.py'
+    spec=importlib.util.spec_from_file_location('frozen_overhead_parser',parser_path)
+    parser=importlib.util.module_from_spec(spec); spec.loader.exec_module(parser)
+    measurement_log=BASE.with_name(BASE.name+'.cargo-output.log')
+    cmd=[str(CARGO),'test','--features','testing-environ,sys','--test','sys_process','process_scope_overhead_measurement','--','--exact','--ignored','--nocapture','--test-threads=1']
+    measurement_start=time.monotonic()
     status,out=run(cmd,measurement_log,package_deadline,env,source)
-    if status!=0: raise RuntimeError('measurement driver failed; no retry')
-    import json
-    summary=json.loads((measurement_dir/'summary.json').read_text())
+    out,samples,summary=export_measurement_output(measurement_dir,status,out,parser)
+    if status!=0: raise RuntimeError('direct Cargo measurement failed; no retry')
+    import json, csv, platform as _platform
     if summary['samples_total']!=120 or summary['warmups']!=0: raise RuntimeError('unexpected measurement count')
+    parser.write_samples(measurement_dir/'raw-samples.csv',samples)
+    rustc_out=RUNTIME/'rustc-version-final.out'
+    rustc_status,rustc_bytes=run_anchored_command([str(RUSTC),'--version','--verbose'],REPO,env,rustc_out,min(package_deadline,time.monotonic()+5),closure_deadline=package_deadline)
+    cargo_out=RUNTIME/'cargo-version-final.out'
+    cargo_status,cargo_bytes=run_anchored_command([str(CARGO),'--version'],REPO,env,cargo_out,min(package_deadline,time.monotonic()+5),closure_deadline=package_deadline)
+    if rustc_status or cargo_status: raise RuntimeError('toolchain metadata command failed')
+    rustc=rustc_bytes.decode(errors='replace')
+    cargo=cargo_bytes.decode(errors='replace').strip()
+    metadata={**summary,'os':_platform.platform(),'machine':_platform.machine(),'cargo':cargo,'rustc':rustc,'source_revision':SOURCE_REF,'source_archive_sha256':ARCHIVE_SHA,'command':cmd,'elapsed_package_seconds':time.monotonic()-measurement_start,'resource_policy':{'outer_seconds':600,'run_scoped_seconds':585,'driver_seconds':580,'cargo_seconds':540,'jobs':2,'descendants':16,'memory_policy_bytes':2*1024*1024*1024,'sampled_storage_stop_kib':LIMIT,'storage_sampling_seconds':1},'interpretation':'API-evaluation entry to completed Rhai report; excludes Engine construction and AST parsing. Spawn-to-first-byte is not exposed by this API.'}
+    (measurement_dir/'summary.json').write_text(json.dumps(metadata,indent=2)+'\n')
     final={n:sha(source/n) for n in OVERLAYS}
     if final!=hashes: raise RuntimeError('final source manifest differs from frozen inputs')
     if sha(plock)!='2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425': raise RuntimeError('private lock changed')
