@@ -93,7 +93,9 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 ## Resources, counts and cause history
 Unix actual native invocation count84 consumed.82 failed before runtime;
 83 measurementCargo0 but originalouter1 due optional cmdline receipt validation.
-83 is terminal; no liveUnix testhandle. Invocation84 allocated after independent stage gate; not consumed until actual launch. Preserve originalfailures
+83 and84 are terminal; no live owned Unix process-test handle. Invocation84 was
+launched and consumed; its result is recorded in the current step and prior
+Linux84 evidence. No85 is allocated. Preserve originalfailures
 and root independently accepted narrow descriptive data/cleanup readback. Linux outer598s
 plus kill2s=600s, scoped585s, driver580s, aggregate Cargo540s, jobs2, descendants16,
 2GiB policy and sampled stop1572864KiB. macOS scoped600s/Cargo540s/jobs2 with same
@@ -578,7 +580,21 @@ identify this one invocation; no staging or retry/cap expansion.
 Latest rule-update checkpoint: root reread disk globals/project AGENTS, campaign,
 e2e-proof, OCR-delegate, repair-package, roles and both Codex coordinator templates
 at4d86b5f774a95111b56e9cbcf9c9882d7303a7a9. Active Mac owner confirms revision
-and no descendants. Existing optional owner was asked to reload when continued
-for the diagnosed Linux setup repair; confirmation pending. Completed Windows
+and no descendants. Existing optional owner explicitly confirmed reload of globals/project rules,
+campaign/TDD and repair references, roles and both coordinator templates at the
+exact revision; it reports no active descendants. Completed Windows
 owner remains revision-unconfirmed and was not restarted solely for reload.
 No process interruption or new build/review solely for rule changes.
+
+Current workhorse slot observation: foreign G43 runner1202246, supervisor1202260
+and driver1202292 subsequently disappeared (exact ps lookup returned1). Fresh
+/proc inventory found noCargo/rustc or G43 runner. Preserved scoped supervisors
+28951 (idle KSR) and1198110 (P01 source closure) remain. No Linux dispatch yet: the
+source repair/review is pending, and renew the slot inventory just before launch.
+The responsible Linux owner confirmed the update and uses its newly owned managed
+worktree linux-msrv-helper-repair for source-only TDD; original remote stage remains
+immutable. Both active owners and root have now confirmed4d86b5f; completed Windows
+context is still revision-unconfirmed, not active or restarted for the update.
+Previous goal turn classified PROGRESS: original Linux failure/cleanup evidence
+and accepted Darwin raw lock were committed/pushed as1899acb6, independently read
+back on fork main with no other remote branch.
