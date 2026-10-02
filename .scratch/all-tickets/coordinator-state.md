@@ -86,7 +86,7 @@ Current authoritative history through this rewrite is Git commit
 10d4a0d55400ebe8c24feff134e7161ff36bf8d5, this same state path. It retains
 all earlier cause/attempt/resource/source applicability records. Read that
 history for consumed work, not superseded next actions. No reset occurred.
-Last independently read-back fork main14702b7c9d8e4c6929cba8c718c71abe317bc107; only remote main, lowercase
+Last independently read-back fork mainc62b2f05efd761e79be16c2d10d794f9da7b487c; only remote main, lowercase
 human author/committer. Goal active and incomplete.
 
 ### Accepted current Linux non-process package
@@ -228,7 +228,24 @@ shared-child-activation-review.md, both under the owned slice's existing
 claim. Review result must be independently read before integration. Existing
 30-minute active-work checkpoint applies; this is combined package review,
 not another Expert09 escalation or a reset of any attempt history.
-Commit awaits review/native checks/integration, no remote task ref was created.
+Independent CLI review71191 TERMINAL0, full original response retained at
+shared-child-activation-review.md in the owned slice. Loaded958a4538 confirmed;
+OCR1.12.9 preview/rules and all3 changed files reviewed, including excluded
+fixture/note. Activationdd2 source accepted, no native acceptance. Three inherited
+gaps found: no_float DIRECT_DROP_CHALLENGE_ENV gate mismatch, exceptional cleanup
+destroys controller/reaper before releasing fixture, successful controller logs
+discarded. Atomic0184e20a fixes the gate and exports successful controller logs,
+retains original review/brief and explicitly leaves exceptional cleanup open.
+Affected review/native checks and integration remain pending; no remote task ref.
+Historical48 wrong control removes public spawn, not cached code; annotation
+corrected without invalidating historical development proof or resetting counts.
+Fresh configured Standard CLI actualhandle45993 started2026-10-02T15:05:11Z
+for bounded source-only exceptional cleanup repair in SAME owned worktree,
+brief shared-child-cleanup-repair-brief.md. No Cargo/native/heavy runs allowed;
+30-minute active-work checkpoint, retain exact ownership and honest incomplete
+closure, no numeric fixture PID signals or assertion weakening. Review follows
+affected edits. This new fixture finding has no prior failed correction and does
+not extend Expert09/Windows/native budgets. Read actual handle before continuing.
 
 ### Next actions and turn classification
 
@@ -261,8 +278,19 @@ Windows owner final path screenshot confirms owned run-parent Directory/no
 reparse, unique RunRoot absent, free70739865600bytes and unchanged script19c.
 Single frozen invocation typing handle90567 is live, not entered; never duplicate
 typing/launch because observation times out. No compiler/native result yet.
-Current turn progress: combined independent Child review actually dispatched
-through configured role launcher and live reads verified; native counts unchanged.
+Current turn PROGRESS: independent Child activation source review terminal,
+two inherited source prerequisites corrected and remaining cleanup repair
+actually dispatched. Windows single frozen invocation Entered once and is now
+terminal at clean console prompt, first compiler step failed. Root independently
+viewed actual /tmp/win9e0-20261002-6f804a9c4c4a4e78/fixture-progress.png and
+retained it once at windows-staging-9e0-root-evidence/first-fixture-result.png.
+Console shows path-policy controls PASS and nested setup-failure control PASS:
+owned child5380 removed by nested job teardown and outer job owner-only. This
+is narrow observed setup-control output, not independent final PID/job closure
+or production/source-batch acceptance. compile-production-runner exited before
+remaining fixture cases; stdout/stderr under exact unique RunRoot logs pending
+readback. Windows keyboard54532 live typing readonly logs query; no rerun.
+All Unix native counts unchanged; goal active, no full acceptance claim.
 
 ## Resources, counts and cause history
 Unix actual native invocation count84 consumed.82 failed before runtime;
