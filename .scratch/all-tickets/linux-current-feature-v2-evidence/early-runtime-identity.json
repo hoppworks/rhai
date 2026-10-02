@@ -1,0 +1,8 @@
+{
+  "helper_pid": 1566100,
+  "helper_start_ticks": 7382045,
+  "identity_receipt": "process-identities.tsv",
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r",
+  "supervisor_pid": 1566099,
+  "supervisor_start_ticks": 7382044
+}

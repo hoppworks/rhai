@@ -1,0 +1,16 @@
+{
+  "positive_rows_verified": 11,
+  "negative_status": 101,
+  "exact_negative_diagnostic_verified": true,
+  "manifest_hashes_verified": 7,
+  "lock_verified": true,
+  "relevant_current_sources_unchanged": true,
+  "remote_independent_cleanup": {
+    "exact_recorded_pid_start_pairs_absent": 20,
+    "owned_pgid": 1566099,
+    "group_empty": true,
+    "runtime_absent": true,
+    "scope_absent": true
+  },
+  "compiler_only": true
+}

@@ -75,19 +75,23 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
    write/fresh host read and independent TCP peer, meaningful wrong-expectation
    controls101 and restored0. Frozen1ca21e32/v3lock2ba4; fork main e5849699.
    Other platforms and final native feature behavior remain open.
-2. Linux current-feature compiler setup-source repair accepted narrowly at
-   94a10d73, owner6abb5933. Independent review and meaningful legacy/identity RED1,
-   restored GREEN0 at linux-current-feature-v2-review.md and root-pure originals.
-   Unique v2 stage, outer590/helper530/work500/export30, preserved prior use and
-   resource caps. V2 stage completed: all eight remote input hashes independently pass, no
-   compiler launched. Prior P01 runner1245052/start7234121 and supervisor1245053/start7234124,
-   G43 runner1303951/start7249413 and supervisor1303952/start7249415 are now
-   missing. New foreign G43 r9 runner1529933/start7320491 and
-   supervisor1529935/start7320494 are live with cargo1533992/start7321034
-   and actual rustc children; wait for its heavy slot without stopping them.
-   Stage wrapper terminal1 after zsh read-only status variable; runner status
-   unrecorded, exact remote readiness independently verified and own empty
-   local scope removed. Preserve stage; do not repeat staging. No native85.
+2. Linux current optional compiler prerequisite CLOSED narrowly. One v2 launch
+   finished outer0, run-scoped0, all11 positive rows0 and sys/no_object101 with
+   the exact intentional diagnostic. Frozen1ca21e32/v3lock2ba4, direct private
+   Rust/Cargo1.77.2 Linuxx86_64; original linux-current-feature-v2-evidence and
+   launcher-evidence, independent linux-current-feature-v2-root-readback.json.
+   Seven manifest hashes and lock match; relevant src/codegen/build.rs/Cargo.toml
+   unchanged at currentf6ad9e9b. Fresh remote /proc PID/start readback confirms
+   all20 identities absent, ownPGID1566099 empty, exact runtime/scope absent.
+   Export64.206s; 88periodic samples maxRSS803384KiB/storage761640KiB/descendants4,
+   not continuous peaks. Prior v1/setup history retained, no limit reset/native85.
+   Next: current Linux real sys/net examples acceptance using the existing
+   reviewed examples harness adapted for Linux; compiler proof does not prove
+   native runtime behavior or close the final release gate. Existing owner
+   current_optional_msrv_prepare_v2 resumed for source-only Linux examples
+   adaptation in its own linux-msrv-helper-repair worktree. TDD/pure preparation
+   only, no staging/build/native execution until root review; current rule
+   revision reload confirmation requested, history and safety caps preserved.
 3. Mac Managed source correction74943bb2 is independently reviewed and replayed:
    58 adapter/23 reader pass, prior wrong fixture PGID and early gate reap are
    meaningful RED1, prior Cargo stream request fails1, restored adapter58 pass.
@@ -100,7 +104,8 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
    Full source history reviews are retained by their original refs, and source
    prerequisites still remain open. No Cargo/native allocation; frozen
    measurement/archive/toolchain unchanged.
-4. Windows sole owner is completed and guest last observed off; partial console
+4. Windows sole owner is completed; current virsh domstate readback0 confirms
+   rhai-win11-quality shut off. Partial console
    command/cleanup remains unverified. Preserve allocation and all prior evidence;
    no restart, new native launch or repeated source review for the rule update.
 
@@ -162,18 +167,14 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Current turn classification
-PROGRESS: prior status-only turn was NO PROGRESS; next available safe action
-completed independent affected-source correction review and scoped pure replay
-of frozen74943bb2. Original logs and receipt at macos-managed-root-regressions;
-runner0, runtime absent, exact own empty scope removed. Three material source
-findings and absent-checkout path dependency closed narrowly, finalca7684ab
-59 adapter checks and meaningful prior-path RED1 independently replayed.
-Nine reviewed preparation source files integrated at exact tested hashes, with
-false launch guard retained; no native/process/Cargo launch. Full goal remains open.
-Exact renewed foreign heavy handles establish a verified wait for Linux, while
-independent source correction continues. The second externally removed root
-checkout is replaced by an attached owned managed checkout from retained4ac,
-without discarding/pruning foreign work or claiming removed contents verified.
+VERIFIED WAIT: prior turn made concrete progress with finalca7684ab source
+integration and independent regressions, pushedf6ad9e9b. Current exact P01
+runner1563057/start7353326 and supervisor1563058/start7353328 are live with
+actual Patrol descendants, so the Linux heavy slot is occupied. Prior G43
+handles are missing; no restart or compiler dispatch performed. Windows guest
+readback confirms shut off, leaving its native prerequisites unavailable.
+No new source change or acceptance is claimed. Preserve all accepted proof,
+count84, false Mac launch guard and original safety/cause history. Goal active.
 
 ## Current-source core MSRV package — accepted narrow gate
 Current default-core applicability CLOSED for source52d9797b, Rust/Cargo1.66.0,
@@ -607,3 +608,7 @@ context is still revision-unconfirmed, not active or restarted for the update.
 Previous goal turn classified PROGRESS: original Linux failure/cleanup evidence
 and accepted Darwin raw lock were committed/pushed as1899acb6, independently read
 back on fork main with no other remote branch.
+
+Previous status turn classified PROGRESS: authoritative terminal Linux receipts
+changed the next action from polling to acceptance. Current turn closes the
+Linux compiler prerequisite by independent input/result/cleanup readback.

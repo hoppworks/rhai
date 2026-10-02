@@ -1,0 +1,350 @@
+   Compiling rhai v1.26.1 (/var/roothome/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/source)
+error: the `sys` feature requires object maps; it cannot be combined with `no_object`
+  --> src/packages/sys/mod.rs:34:1
+   |
+34 | compile_error!("the `sys` feature requires object maps; it cannot be combined with `no_object`");
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0432]: unresolved import `crate::Map`
+   --> src/packages/sys/env.rs:5:37
+    |
+5   | use crate::{Dynamic, EvalAltResult, Map, Module, Shared};
+    |                                     ^^^ no `Map` in the root
+    |
+    = help: consider importing one of these items instead:
+            core::iter::Map
+            crate::ast::Expr::Map
+            std::iter::Map
+note: found an item that was configured out
+   --> src/lib.rs:325:10
+    |
+325 | pub type Map = std::collections::BTreeMap<Identifier, Dynamic>;
+    |          ^^^
+
+error[E0432]: unresolved import `crate::Map`
+   --> src/packages/sys/fs.rs:15:45
+    |
+15  | use crate::{Dynamic, EvalAltResult, Locked, Map, Module, NativeCallContext, Shared, INT};
+    |                                             ^^^ no `Map` in the root
+    |
+    = help: consider importing one of these items instead:
+            core::iter::Map
+            crate::ast::Expr::Map
+            std::iter::Map
+note: found an item that was configured out
+   --> src/lib.rs:325:10
+    |
+325 | pub type Map = std::collections::BTreeMap<Identifier, Dynamic>;
+    |          ^^^
+
+error[E0432]: unresolved import `crate::Map`
+   --> src/packages/sys/process/unix.rs:6:39
+    |
+6   | use crate::{Dynamic, ImmutableString, Map, Module, NativeCallContext, Shared, INT};
+    |                                       ^^^ no `Map` in the root
+    |
+    = help: consider importing one of these items instead:
+            core::iter::Map
+            crate::ast::Expr::Map
+            std::iter::Map
+note: found an item that was configured out
+   --> src/lib.rs:325:10
+    |
+325 | pub type Map = std::collections::BTreeMap<Identifier, Dynamic>;
+    |          ^^^
+
+error[E0425]: cannot find function `make_getter` in module `crate::engine`
+    --> src/packages/sys/process/unix.rs:1674:66
+     |
+1674 |         let getter = crate::FuncRegistration::new(crate::engine::make_getter("id"))
+     |                                                                  ^^^^^^^^^^^ not found in `crate::engine`
+     |
+note: found an item that was configured out
+    --> src/engine.rs:229:8
+     |
+229  | pub fn make_getter(id: &str) -> Identifier {
+     |        ^^^^^^^^^^^
+
+error[E0425]: cannot find function `make_getter` in module `crate::engine`
+   --> src/packages/sys/process.rs:217:69
+    |
+217 |                   let r = crate::FuncRegistration::new(crate::engine::make_getter($name))
+    |                                                                       ^^^^^^^^^^^ not found in `crate::engine`
+...
+225 | /         getter!(
+226 | |             "stdout",
+227 | |             &["Captured stdout decoded lossily as UTF-8."],
+228 | |             |r: &mut Self| -> ImmutableString { r.stdout().into() }
+229 | |         );
+    | |_________- in this macro invocation
+    |
+note: found an item that was configured out
+   --> src/engine.rs:229:8
+    |
+229 | pub fn make_getter(id: &str) -> Identifier {
+    |        ^^^^^^^^^^^
+    = note: this error originates in the macro `getter` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0425]: cannot find function `make_getter` in module `crate::engine`
+   --> src/packages/sys/process.rs:217:69
+    |
+217 |                   let r = crate::FuncRegistration::new(crate::engine::make_getter($name))
+    |                                                                       ^^^^^^^^^^^ not found in `crate::engine`
+...
+230 | /         getter!(
+231 | |             "stderr",
+232 | |             &["Captured stderr decoded lossily as UTF-8."],
+233 | |             |r: &mut Self| -> ImmutableString { r.stderr().into() }
+234 | |         );
+    | |_________- in this macro invocation
+    |
+note: found an item that was configured out
+   --> src/engine.rs:229:8
+    |
+229 | pub fn make_getter(id: &str) -> Identifier {
+    |        ^^^^^^^^^^^
+    = note: this error originates in the macro `getter` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0425]: cannot find function `make_getter` in module `crate::engine`
+   --> src/packages/sys/process.rs:217:69
+    |
+217 |                   let r = crate::FuncRegistration::new(crate::engine::make_getter($name))
+    |                                                                       ^^^^^^^^^^^ not found in `crate::engine`
+...
+235 | /         getter!(
+236 | |             "stdout_complete",
+237 | |             &["Whether stdout capture reached EOF."],
+238 | |             |r: &mut Self| r.stdout_complete
+239 | |         );
+    | |_________- in this macro invocation
+    |
+note: found an item that was configured out
+   --> src/engine.rs:229:8
+    |
+229 | pub fn make_getter(id: &str) -> Identifier {
+    |        ^^^^^^^^^^^
+    = note: this error originates in the macro `getter` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0425]: cannot find function `make_getter` in module `crate::engine`
+   --> src/packages/sys/process.rs:217:69
+    |
+217 |                   let r = crate::FuncRegistration::new(crate::engine::make_getter($name))
+    |                                                                       ^^^^^^^^^^^ not found in `crate::engine`
+...
+240 | /         getter!(
+241 | |             "stderr_complete",
+242 | |             &["Whether stderr capture reached EOF."],
+243 | |             |r: &mut Self| r.stderr_complete
+244 | |         );
+    | |_________- in this macro invocation
+    |
+note: found an item that was configured out
+   --> src/engine.rs:229:8
+    |
+229 | pub fn make_getter(id: &str) -> Identifier {
+    |        ^^^^^^^^^^^
+    = note: this error originates in the macro `getter` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0425]: cannot find function `make_getter` in module `crate::engine`
+   --> src/packages/sys/process.rs:217:69
+    |
+217 |                   let r = crate::FuncRegistration::new(crate::engine::make_getter($name))
+    |                                                                       ^^^^^^^^^^^ not found in `crate::engine`
+...
+245 | /         getter!(
+246 | |             "exit_code",
+247 | |             &["Normal exit code, or `()`."],
+248 | |             |r: &mut Self| -> Dynamic {
+...   |
+252 | |             }
+253 | |         );
+    | |_________- in this macro invocation
+    |
+note: found an item that was configured out
+   --> src/engine.rs:229:8
+    |
+229 | pub fn make_getter(id: &str) -> Identifier {
+    |        ^^^^^^^^^^^
+    = note: this error originates in the macro `getter` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0425]: cannot find function `make_getter` in module `crate::engine`
+   --> src/packages/sys/process.rs:217:69
+    |
+217 |                   let r = crate::FuncRegistration::new(crate::engine::make_getter($name))
+    |                                                                       ^^^^^^^^^^^ not found in `crate::engine`
+...
+254 | /         getter!(
+255 | |             "exit_signal",
+256 | |             &["Unix signal number, or `()`."],
+257 | |             |r: &mut Self| -> Dynamic {
+...   |
+261 | |             }
+262 | |         );
+    | |_________- in this macro invocation
+    |
+note: found an item that was configured out
+   --> src/engine.rs:229:8
+    |
+229 | pub fn make_getter(id: &str) -> Identifier {
+    |        ^^^^^^^^^^^
+    = note: this error originates in the macro `getter` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0425]: cannot find function `make_getter` in module `crate::engine`
+   --> src/packages/sys/process.rs:217:69
+    |
+217 |                   let r = crate::FuncRegistration::new(crate::engine::make_getter($name))
+    |                                                                       ^^^^^^^^^^^ not found in `crate::engine`
+...
+263 | /         getter!(
+264 | |             "timed_out",
+265 | |             &["Whether the process deadline expired."],
+266 | |             |r: &mut Self| r.timed_out
+267 | |         );
+    | |_________- in this macro invocation
+    |
+note: found an item that was configured out
+   --> src/engine.rs:229:8
+    |
+229 | pub fn make_getter(id: &str) -> Identifier {
+    |        ^^^^^^^^^^^
+    = note: this error originates in the macro `getter` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0425]: cannot find function `make_getter` in module `crate::engine`
+   --> src/packages/sys/process.rs:217:69
+    |
+217 |                   let r = crate::FuncRegistration::new(crate::engine::make_getter($name))
+    |                                                                       ^^^^^^^^^^^ not found in `crate::engine`
+...
+283 | /         getter!(
+284 | |             "operation",
+285 | |             &["Cleanup operation that failed."],
+286 | |             |d: &mut ProcessDiagnostic| -> ImmutableString { d.operation.clone().into() }
+287 | |         );
+    | |_________- in this macro invocation
+    |
+note: found an item that was configured out
+   --> src/engine.rs:229:8
+    |
+229 | pub fn make_getter(id: &str) -> Identifier {
+    |        ^^^^^^^^^^^
+    = note: this error originates in the macro `getter` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0425]: cannot find function `make_getter` in module `crate::engine`
+   --> src/packages/sys/process.rs:217:69
+    |
+217 |                   let r = crate::FuncRegistration::new(crate::engine::make_getter($name))
+    |                                                                       ^^^^^^^^^^^ not found in `crate::engine`
+...
+288 | /         getter!(
+289 | |             "message",
+290 | |             &["Human-readable cleanup failure detail."],
+291 | |             |d: &mut ProcessDiagnostic| -> ImmutableString { d.message.clone().into() }
+292 | |         );
+    | |_________- in this macro invocation
+    |
+note: found an item that was configured out
+   --> src/engine.rs:229:8
+    |
+229 | pub fn make_getter(id: &str) -> Identifier {
+    |        ^^^^^^^^^^^
+    = note: this error originates in the macro `getter` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0425]: cannot find function `make_getter` in module `crate::engine`
+   --> src/packages/sys/process.rs:217:69
+    |
+217 |                   let r = crate::FuncRegistration::new(crate::engine::make_getter($name))
+    |                                                                       ^^^^^^^^^^^ not found in `crate::engine`
+...
+293 | /         getter!(
+294 | |             "io_kind",
+295 | |             &["Underlying I/O error kind, or `()`."],
+296 | |             |d: &mut ProcessDiagnostic| -> Dynamic {
+...   |
+300 | |             }
+301 | |         );
+    | |_________- in this macro invocation
+    |
+note: found an item that was configured out
+   --> src/engine.rs:229:8
+    |
+229 | pub fn make_getter(id: &str) -> Identifier {
+    |        ^^^^^^^^^^^
+    = note: this error originates in the macro `getter` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0425]: cannot find function `make_getter` in module `crate::engine`
+   --> src/packages/sys/process.rs:217:69
+    |
+217 |                   let r = crate::FuncRegistration::new(crate::engine::make_getter($name))
+    |                                                                       ^^^^^^^^^^^ not found in `crate::engine`
+...
+304 | /             getter!(
+305 | |                 "stdout_bytes",
+306 | |                 &["Copy of captured stdout bytes."],
+307 | |                 |r: &mut Self| -> crate::Blob { r.stdout.clone() }
+308 | |             );
+    | |_____________- in this macro invocation
+    |
+note: found an item that was configured out
+   --> src/engine.rs:229:8
+    |
+229 | pub fn make_getter(id: &str) -> Identifier {
+    |        ^^^^^^^^^^^
+    = note: this error originates in the macro `getter` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0425]: cannot find function `make_getter` in module `crate::engine`
+   --> src/packages/sys/process.rs:217:69
+    |
+217 |                   let r = crate::FuncRegistration::new(crate::engine::make_getter($name))
+    |                                                                       ^^^^^^^^^^^ not found in `crate::engine`
+...
+309 | /             getter!(
+310 | |                 "stderr_bytes",
+311 | |                 &["Copy of captured stderr bytes."],
+312 | |                 |r: &mut Self| -> crate::Blob { r.stderr.clone() }
+313 | |             );
+    | |_____________- in this macro invocation
+    |
+note: found an item that was configured out
+   --> src/engine.rs:229:8
+    |
+229 | pub fn make_getter(id: &str) -> Identifier {
+    |        ^^^^^^^^^^^
+    = note: this error originates in the macro `getter` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0425]: cannot find function `make_getter` in module `crate::engine`
+   --> src/packages/sys/process.rs:217:69
+    |
+217 |                   let r = crate::FuncRegistration::new(crate::engine::make_getter($name))
+    |                                                                       ^^^^^^^^^^^ not found in `crate::engine`
+...
+314 | /             getter!(
+315 | |                 "cleanup_diagnostics",
+316 | |                 &["Copy of the ordered cleanup diagnostics."],
+317 | |                 |r: &mut Self| -> crate::Array {
+...   |
+323 | |                 }
+324 | |             );
+    | |_____________- in this macro invocation
+    |
+note: found an item that was configured out
+   --> src/engine.rs:229:8
+    |
+229 | pub fn make_getter(id: &str) -> Identifier {
+    |        ^^^^^^^^^^^
+    = note: this error originates in the macro `getter` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+Some errors have detailed explanations: E0425, E0432.
+For more information about an error, try `rustc --explain E0425`.
+warning: `rhai` (lib) generated 1 warning
+error: could not compile `rhai` (lib) due to 18 previous errors; 1 warning emitted

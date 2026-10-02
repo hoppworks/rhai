@@ -1,0 +1,131 @@
+launch_utc=2026-10-02T10:33:39Z
+runner_timeout_seconds=590
+stage=/root/rhai-linux-current-features-v2-1ca21e32-20261002
+scope=/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002
+PRIVATE_RUNTIME /root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r
+HELPER_IDENTITY 1566100 7382045
+sample={"descendants": 1, "monotonic_seconds": 0.257, "rss_kib": 30204, "storage_kib": 44960}
+command=rustup-version argv=['/root/.cargo/bin/rustup', '--version']
+sample={"descendants": 2, "monotonic_seconds": 0.27, "rss_kib": 35676, "storage_kib": 44960}
+sample={"descendants": 1, "monotonic_seconds": 0.386, "rss_kib": 30216, "storage_kib": 44968}
+status=rustup-version:0
+command=rustup-install argv=['/root/.cargo/bin/rustup', 'toolchain', 'install', '1.77.2', '--profile', 'minimal', '--no-self-update']
+sample={"descendants": 2, "monotonic_seconds": 0.4, "rss_kib": 45872, "storage_kib": 44976}
+sample={"descendants": 2, "monotonic_seconds": 1.417, "rss_kib": 54420, "storage_kib": 45020}
+sample={"descendants": 2, "monotonic_seconds": 2.434, "rss_kib": 54392, "storage_kib": 49256}
+sample={"descendants": 2, "monotonic_seconds": 3.45, "rss_kib": 56060, "storage_kib": 95028}
+sample={"descendants": 2, "monotonic_seconds": 4.466, "rss_kib": 56128, "storage_kib": 95776}
+sample={"descendants": 2, "monotonic_seconds": 5.482, "rss_kib": 56136, "storage_kib": 110104}
+sample={"descendants": 2, "monotonic_seconds": 6.498, "rss_kib": 56260, "storage_kib": 114672}
+sample={"descendants": 2, "monotonic_seconds": 7.516, "rss_kib": 56248, "storage_kib": 122444}
+sample={"descendants": 2, "monotonic_seconds": 8.531, "rss_kib": 217652, "storage_kib": 230604}
+sample={"descendants": 2, "monotonic_seconds": 9.547, "rss_kib": 152324, "storage_kib": 267592}
+sample={"descendants": 2, "monotonic_seconds": 10.566, "rss_kib": 152400, "storage_kib": 275816}
+sample={"descendants": 2, "monotonic_seconds": 11.586, "rss_kib": 152304, "storage_kib": 276456}
+sample={"descendants": 2, "monotonic_seconds": 12.605, "rss_kib": 152324, "storage_kib": 285580}
+sample={"descendants": 2, "monotonic_seconds": 13.623, "rss_kib": 152372, "storage_kib": 285884}
+sample={"descendants": 2, "monotonic_seconds": 14.638, "rss_kib": 152428, "storage_kib": 295348}
+sample={"descendants": 2, "monotonic_seconds": 15.656, "rss_kib": 152276, "storage_kib": 295480}
+sample={"descendants": 2, "monotonic_seconds": 16.673, "rss_kib": 152372, "storage_kib": 300664}
+sample={"descendants": 2, "monotonic_seconds": 17.69, "rss_kib": 152428, "storage_kib": 305160}
+sample={"descendants": 2, "monotonic_seconds": 18.707, "rss_kib": 160768, "storage_kib": 308404}
+sample={"descendants": 2, "monotonic_seconds": 19.722, "rss_kib": 259320, "storage_kib": 428408}
+sample={"descendants": 2, "monotonic_seconds": 20.735, "rss_kib": 406716, "storage_kib": 586960}
+sample={"descendants": 1, "monotonic_seconds": 20.95, "rss_kib": 30164, "storage_kib": 504664}
+status=rustup-install:0
+command=rustc-version argv=['/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 20.963, "rss_kib": 30292, "storage_kib": 504668}
+sample={"descendants": 1, "monotonic_seconds": 21.077, "rss_kib": 30212, "storage_kib": 504672}
+status=rustc-version:0
+command=cargo-version argv=['/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 21.091, "rss_kib": 30092, "storage_kib": 504676}
+sample={"descendants": 1, "monotonic_seconds": 21.203, "rss_kib": 30160, "storage_kib": 504680}
+status=cargo-version:0
+command=cargo-baseline-sys-net argv=['/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'check', '--locked', '--lib', '--features', 'testing-environ,sys,net']
+sample={"descendants": 2, "monotonic_seconds": 21.24, "rss_kib": 50676, "storage_kib": 504688}
+sample={"descendants": 2, "monotonic_seconds": 22.259, "rss_kib": 53436, "storage_kib": 504716}
+sample={"descendants": 2, "monotonic_seconds": 23.277, "rss_kib": 71556, "storage_kib": 507964}
+sample={"descendants": 2, "monotonic_seconds": 24.296, "rss_kib": 108112, "storage_kib": 540012}
+sample={"descendants": 4, "monotonic_seconds": 25.317, "rss_kib": 525700, "storage_kib": 578496}
+sample={"descendants": 4, "monotonic_seconds": 26.337, "rss_kib": 243144, "storage_kib": 598744}
+sample={"descendants": 4, "monotonic_seconds": 27.36, "rss_kib": 803384, "storage_kib": 604456}
+sample={"descendants": 4, "monotonic_seconds": 28.381, "rss_kib": 427616, "storage_kib": 630068}
+sample={"descendants": 3, "monotonic_seconds": 29.401, "rss_kib": 474372, "storage_kib": 632916}
+sample={"descendants": 3, "monotonic_seconds": 30.422, "rss_kib": 610244, "storage_kib": 632916}
+sample={"descendants": 1, "monotonic_seconds": 31.243, "rss_kib": 29664, "storage_kib": 640500}
+status=cargo-baseline-sys-net:0
+command=cargo-sys-alone argv=['/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'check', '--locked', '--lib', '--features', 'testing-environ,sys']
+sample={"descendants": 2, "monotonic_seconds": 31.262, "rss_kib": 59032, "storage_kib": 640508}
+sample={"descendants": 3, "monotonic_seconds": 32.283, "rss_kib": 445664, "storage_kib": 641024}
+sample={"descendants": 3, "monotonic_seconds": 33.303, "rss_kib": 574876, "storage_kib": 641024}
+sample={"descendants": 1, "monotonic_seconds": 34.023, "rss_kib": 29628, "storage_kib": 648404}
+status=cargo-sys-alone:0
+command=cargo-net-alone argv=['/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'check', '--locked', '--lib', '--features', 'testing-environ,net']
+sample={"descendants": 2, "monotonic_seconds": 34.045, "rss_kib": 63940, "storage_kib": 648408}
+sample={"descendants": 3, "monotonic_seconds": 35.067, "rss_kib": 349592, "storage_kib": 653628}
+sample={"descendants": 3, "monotonic_seconds": 36.088, "rss_kib": 530728, "storage_kib": 653628}
+sample={"descendants": 1, "monotonic_seconds": 36.909, "rss_kib": 29696, "storage_kib": 660864}
+status=cargo-net-alone:0
+command=cargo-net-no-object argv=['/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'check', '--locked', '--lib', '--features', 'testing-environ,net,no_object']
+sample={"descendants": 2, "monotonic_seconds": 36.933, "rss_kib": 63988, "storage_kib": 660872}
+sample={"descendants": 3, "monotonic_seconds": 37.953, "rss_kib": 428360, "storage_kib": 661388}
+sample={"descendants": 3, "monotonic_seconds": 38.973, "rss_kib": 556336, "storage_kib": 661388}
+sample={"descendants": 1, "monotonic_seconds": 39.394, "rss_kib": 29784, "storage_kib": 668424}
+status=cargo-net-no-object:0
+command=cargo-combined-sync argv=['/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'check', '--locked', '--lib', '--features', 'testing-environ,sys,net,sync']
+sample={"descendants": 2, "monotonic_seconds": 39.416, "rss_kib": 63932, "storage_kib": 668428}
+sample={"descendants": 3, "monotonic_seconds": 40.439, "rss_kib": 331788, "storage_kib": 673052}
+sample={"descendants": 3, "monotonic_seconds": 41.46, "rss_kib": 530132, "storage_kib": 673064}
+sample={"descendants": 3, "monotonic_seconds": 42.482, "rss_kib": 682492, "storage_kib": 673072}
+sample={"descendants": 1, "monotonic_seconds": 42.702, "rss_kib": 29580, "storage_kib": 680640}
+status=cargo-combined-sync:0
+command=cargo-combined-no-index argv=['/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'check', '--locked', '--lib', '--features', 'testing-environ,sys,net,no_index']
+sample={"descendants": 2, "monotonic_seconds": 42.725, "rss_kib": 62780, "storage_kib": 680644}
+sample={"descendants": 3, "monotonic_seconds": 43.747, "rss_kib": 450088, "storage_kib": 681160}
+sample={"descendants": 3, "monotonic_seconds": 44.768, "rss_kib": 583960, "storage_kib": 681160}
+sample={"descendants": 1, "monotonic_seconds": 45.19, "rss_kib": 29656, "storage_kib": 688024}
+status=cargo-combined-no-index:0
+command=cargo-combined-metadata-serde argv=['/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'check', '--locked', '--lib', '--features', 'testing-environ,sys,net,metadata,serde']
+sample={"descendants": 2, "monotonic_seconds": 45.215, "rss_kib": 65556, "storage_kib": 688028}
+sample={"descendants": 3, "monotonic_seconds": 46.236, "rss_kib": 192480, "storage_kib": 708672}
+sample={"descendants": 3, "monotonic_seconds": 47.259, "rss_kib": 207532, "storage_kib": 717440}
+sample={"descendants": 3, "monotonic_seconds": 48.281, "rss_kib": 458280, "storage_kib": 718160}
+sample={"descendants": 3, "monotonic_seconds": 49.3, "rss_kib": 592568, "storage_kib": 718160}
+sample={"descendants": 3, "monotonic_seconds": 50.321, "rss_kib": 369348, "storage_kib": 726556}
+sample={"descendants": 1, "monotonic_seconds": 50.444, "rss_kib": 29720, "storage_kib": 726568}
+status=cargo-combined-metadata-serde:0
+command=cargo-combined-only-i32-no-float argv=['/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'check', '--locked', '--lib', '--features', 'testing-environ,sys,net,only_i32,no_float']
+sample={"descendants": 2, "monotonic_seconds": 50.469, "rss_kib": 65556, "storage_kib": 726572}
+sample={"descendants": 3, "monotonic_seconds": 51.492, "rss_kib": 436716, "storage_kib": 727088}
+sample={"descendants": 3, "monotonic_seconds": 52.512, "rss_kib": 586112, "storage_kib": 727096}
+sample={"descendants": 1, "monotonic_seconds": 52.73, "rss_kib": 29584, "storage_kib": 732744}
+status=cargo-combined-only-i32-no-float:0
+command=cargo-combined-unchecked argv=['/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'check', '--locked', '--lib', '--features', 'testing-environ,sys,net,unchecked']
+sample={"descendants": 2, "monotonic_seconds": 52.753, "rss_kib": 63580, "storage_kib": 732748}
+sample={"descendants": 3, "monotonic_seconds": 53.776, "rss_kib": 447660, "storage_kib": 733264}
+sample={"descendants": 3, "monotonic_seconds": 54.802, "rss_kib": 574724, "storage_kib": 733264}
+sample={"descendants": 1, "monotonic_seconds": 55.525, "rss_kib": 29724, "storage_kib": 740796}
+status=cargo-combined-unchecked:0
+command=cargo-combined-no-index-sync-metadata argv=['/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'check', '--locked', '--lib', '--features', 'testing-environ,sys,net,no_index,sync,metadata']
+sample={"descendants": 2, "monotonic_seconds": 55.55, "rss_kib": 65920, "storage_kib": 740808}
+sample={"descendants": 3, "monotonic_seconds": 56.575, "rss_kib": 333708, "storage_kib": 745308}
+sample={"descendants": 3, "monotonic_seconds": 57.597, "rss_kib": 512432, "storage_kib": 745312}
+sample={"descendants": 3, "monotonic_seconds": 58.62, "rss_kib": 652440, "storage_kib": 745320}
+sample={"descendants": 1, "monotonic_seconds": 59.141, "rss_kib": 29660, "storage_kib": 752908}
+status=cargo-combined-no-index-sync-metadata:0
+command=cargo-combined-f32-float argv=['/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'check', '--locked', '--lib', '--features', 'testing-environ,sys,net,f32_float']
+sample={"descendants": 2, "monotonic_seconds": 59.165, "rss_kib": 65632, "storage_kib": 752916}
+sample={"descendants": 3, "monotonic_seconds": 60.188, "rss_kib": 432064, "storage_kib": 753432}
+sample={"descendants": 3, "monotonic_seconds": 61.211, "rss_kib": 549820, "storage_kib": 753432}
+sample={"descendants": 1, "monotonic_seconds": 62.233, "rss_kib": 29676, "storage_kib": 761004}
+status=cargo-combined-f32-float:0
+command=cargo-sys-no-object-negative argv=['/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'check', '--locked', '--lib', '--features', 'testing-environ,sys,no_object']
+sample={"descendants": 2, "monotonic_seconds": 62.258, "rss_kib": 64992, "storage_kib": 761008}
+sample={"descendants": 3, "monotonic_seconds": 63.281, "rss_kib": 434504, "storage_kib": 761640}
+sample={"descendants": 1, "monotonic_seconds": 64.203, "rss_kib": 29672, "storage_kib": 761640}
+status=cargo-sys-no-object-negative:101
+evidence_exported=/root/rhai-linux-current-features-v2-1ca21e32-20261002/proof-evidence
+linux_current_feature_compilation=pass
+run_scoped_status=0
+runtime_cleanup_status=0 pid_readback_status=0 scope_cleanup_status=0
+outer_status=0

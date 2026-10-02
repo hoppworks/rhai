@@ -1,0 +1,19 @@
+    Checking libc v0.2.189
+    Checking once_cell v1.21.4
+   Compiling rhai v1.26.1 (/var/roothome/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/source)
+    Checking bitflags v2.13.2
+    Checking getrandom v0.3.4
+    Checking ahash v0.8.12
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (lib) generated 1 warning
+    Finished dev [unoptimized] target(s) in 2.78s

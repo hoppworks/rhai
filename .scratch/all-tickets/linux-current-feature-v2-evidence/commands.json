@@ -1,0 +1,281 @@
+[
+  {
+    "argv": [
+      "/root/.cargo/bin/rustup",
+      "--version"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r",
+    "expected_status": 0,
+    "finished_monotonic_seconds": 0.389,
+    "name": "rustup-version",
+    "started_monotonic_seconds": 0.257,
+    "status": 0,
+    "stderr": "rustup-version.stderr",
+    "stdout": "rustup-version.stdout"
+  },
+  {
+    "argv": [
+      "/root/.cargo/bin/rustup",
+      "toolchain",
+      "install",
+      "1.77.2",
+      "--profile",
+      "minimal",
+      "--no-self-update"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r",
+    "expected_status": 0,
+    "finished_monotonic_seconds": 20.95,
+    "name": "rustup-install",
+    "started_monotonic_seconds": 0.389,
+    "status": 0,
+    "stderr": "rustup-install.stderr",
+    "stdout": "rustup-install.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+      "--version",
+      "--verbose"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r",
+    "expected_status": 0,
+    "finished_monotonic_seconds": 21.077,
+    "name": "rustc-version",
+    "started_monotonic_seconds": 20.95,
+    "status": 0,
+    "stderr": "rustc-version.stderr",
+    "stdout": "rustc-version.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "--version",
+      "--verbose"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r",
+    "expected_status": 0,
+    "finished_monotonic_seconds": 21.203,
+    "name": "cargo-version",
+    "started_monotonic_seconds": 21.078,
+    "status": 0,
+    "stderr": "cargo-version.stderr",
+    "stdout": "cargo-version.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "check",
+      "--locked",
+      "--lib",
+      "--features",
+      "testing-environ,sys,net"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/source",
+    "expected_status": null,
+    "finished_monotonic_seconds": 31.243,
+    "name": "cargo-baseline-sys-net",
+    "started_monotonic_seconds": 21.229,
+    "status": 0,
+    "stderr": "cargo-baseline-sys-net.stderr",
+    "stdout": "cargo-baseline-sys-net.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "check",
+      "--locked",
+      "--lib",
+      "--features",
+      "testing-environ,sys"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/source",
+    "expected_status": null,
+    "finished_monotonic_seconds": 34.023,
+    "name": "cargo-sys-alone",
+    "started_monotonic_seconds": 31.247,
+    "status": 0,
+    "stderr": "cargo-sys-alone.stderr",
+    "stdout": "cargo-sys-alone.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "check",
+      "--locked",
+      "--lib",
+      "--features",
+      "testing-environ,net"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/source",
+    "expected_status": null,
+    "finished_monotonic_seconds": 36.909,
+    "name": "cargo-net-alone",
+    "started_monotonic_seconds": 34.027,
+    "status": 0,
+    "stderr": "cargo-net-alone.stderr",
+    "stdout": "cargo-net-alone.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "check",
+      "--locked",
+      "--lib",
+      "--features",
+      "testing-environ,net,no_object"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/source",
+    "expected_status": null,
+    "finished_monotonic_seconds": 39.394,
+    "name": "cargo-net-no-object",
+    "started_monotonic_seconds": 36.913,
+    "status": 0,
+    "stderr": "cargo-net-no-object.stderr",
+    "stdout": "cargo-net-no-object.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "check",
+      "--locked",
+      "--lib",
+      "--features",
+      "testing-environ,sys,net,sync"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/source",
+    "expected_status": null,
+    "finished_monotonic_seconds": 42.702,
+    "name": "cargo-combined-sync",
+    "started_monotonic_seconds": 39.398,
+    "status": 0,
+    "stderr": "cargo-combined-sync.stderr",
+    "stdout": "cargo-combined-sync.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "check",
+      "--locked",
+      "--lib",
+      "--features",
+      "testing-environ,sys,net,no_index"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/source",
+    "expected_status": null,
+    "finished_monotonic_seconds": 45.191,
+    "name": "cargo-combined-no-index",
+    "started_monotonic_seconds": 42.706,
+    "status": 0,
+    "stderr": "cargo-combined-no-index.stderr",
+    "stdout": "cargo-combined-no-index.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "check",
+      "--locked",
+      "--lib",
+      "--features",
+      "testing-environ,sys,net,metadata,serde"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/source",
+    "expected_status": null,
+    "finished_monotonic_seconds": 50.444,
+    "name": "cargo-combined-metadata-serde",
+    "started_monotonic_seconds": 45.195,
+    "status": 0,
+    "stderr": "cargo-combined-metadata-serde.stderr",
+    "stdout": "cargo-combined-metadata-serde.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "check",
+      "--locked",
+      "--lib",
+      "--features",
+      "testing-environ,sys,net,only_i32,no_float"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/source",
+    "expected_status": null,
+    "finished_monotonic_seconds": 52.731,
+    "name": "cargo-combined-only-i32-no-float",
+    "started_monotonic_seconds": 50.448,
+    "status": 0,
+    "stderr": "cargo-combined-only-i32-no-float.stderr",
+    "stdout": "cargo-combined-only-i32-no-float.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "check",
+      "--locked",
+      "--lib",
+      "--features",
+      "testing-environ,sys,net,unchecked"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/source",
+    "expected_status": null,
+    "finished_monotonic_seconds": 55.525,
+    "name": "cargo-combined-unchecked",
+    "started_monotonic_seconds": 52.735,
+    "status": 0,
+    "stderr": "cargo-combined-unchecked.stderr",
+    "stdout": "cargo-combined-unchecked.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "check",
+      "--locked",
+      "--lib",
+      "--features",
+      "testing-environ,sys,net,no_index,sync,metadata"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/source",
+    "expected_status": null,
+    "finished_monotonic_seconds": 59.141,
+    "name": "cargo-combined-no-index-sync-metadata",
+    "started_monotonic_seconds": 55.529,
+    "status": 0,
+    "stderr": "cargo-combined-no-index-sync-metadata.stderr",
+    "stdout": "cargo-combined-no-index-sync-metadata.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "check",
+      "--locked",
+      "--lib",
+      "--features",
+      "testing-environ,sys,net,f32_float"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/source",
+    "expected_status": null,
+    "finished_monotonic_seconds": 62.234,
+    "name": "cargo-combined-f32-float",
+    "started_monotonic_seconds": 59.145,
+    "status": 0,
+    "stderr": "cargo-combined-f32-float.stderr",
+    "stdout": "cargo-combined-f32-float.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "check",
+      "--locked",
+      "--lib",
+      "--features",
+      "testing-environ,sys,no_object"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-current-features-v2-1ca21e32-20261002/agent-build-bbn_xv7r/source",
+    "expected_status": null,
+    "finished_monotonic_seconds": 64.203,
+    "name": "cargo-sys-no-object-negative",
+    "started_monotonic_seconds": 62.238,
+    "status": 101,
+    "stderr": "cargo-sys-no-object-negative.stderr",
+    "stdout": "cargo-sys-no-object-negative.stdout"
+  }
+]

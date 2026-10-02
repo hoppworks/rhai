@@ -1,0 +1,30 @@
+{
+  "Cargo.lock.accepted": {
+    "path": "/root/rhai-linux-current-features-v2-1ca21e32-20261002/Cargo.lock.accepted",
+    "sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425"
+  },
+  "agentskills/__init__.py": {
+    "path": "/root/rhai-linux-current-features-v2-1ca21e32-20261002/runner/tools/agentskills/__init__.py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "agentskills/pyguard.py": {
+    "path": "/root/rhai-linux-current-features-v2-1ca21e32-20261002/runner/tools/agentskills/pyguard.py",
+    "sha256": "a3739f4947744303e1adf3fb0875ac743944a272e5b95c94b1baba53029d313f"
+  },
+  "contract.md": {
+    "path": "/root/rhai-linux-current-features-v2-1ca21e32-20261002/contract.md",
+    "sha256": "d3984be5f9a0424dce12fd243312bb7f658ed8c6853d31d0151eecc5382be689"
+  },
+  "run-feature-compilation.py": {
+    "path": "/root/rhai-linux-current-features-v2-1ca21e32-20261002/run-feature-compilation.py",
+    "sha256": "48639dc1ed4632c717ae17b45c5de1a8ae512cb0a0f7ea5bf0d5907a39f28ce3"
+  },
+  "run_scoped.py": {
+    "path": "/root/rhai-linux-current-features-v2-1ca21e32-20261002/runner/tools/run_scoped.py",
+    "sha256": "9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d"
+  },
+  "source.tar": {
+    "path": "/root/rhai-linux-current-features-v2-1ca21e32-20261002/source.tar",
+    "sha256": "8251e0429d51ffd330e7eac596a1513d836e43e549ca761852cafc642a2a8155"
+  }
+}

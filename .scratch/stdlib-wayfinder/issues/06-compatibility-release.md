@@ -106,3 +106,16 @@ storage754776KiB,descendants6. Exact runtime and own empty scope absent.
 This closes the current optional-MSRV examples execution requirement on Darwin
 only. Other platforms/features/process/docs/API review and full release remain
 open; no process fixture/control/measurement invocation85 was consumed.
+
+## Current Linux optional compiler acceptance
+
+Frozen source1ca21e32, accepted v3lock2ba4 and private direct Rust/Cargo1.77.2
+Linuxx86_64 pass all11 positive feature rows. The unsupported sys/no_object
+combination returns101 with its exact intentional diagnostic. Original evidence:
+`../../all-tickets/linux-current-feature-v2-evidence/` and launcher-evidence;
+independent root-readback verifies row statuses, seven manifests, lock and unchanged
+relevant sources at integratedf6ad9e9b. All20 recorded PID/start identities are
+absent, ownPGID1566099 empty, exact runtime and scope absent. Outer/scoped0;
+export64.206s, sampled maximaRSS803384KiB/storage761640KiB/descendants4.
+This closes compiler compatibility only; Linux current examples, native behavior,
+Windows, process lifecycle and final release remain open. No native85 consumed.
