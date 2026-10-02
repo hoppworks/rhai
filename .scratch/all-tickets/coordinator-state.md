@@ -67,14 +67,19 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    handle yet; hash/parser/17-pin gate not yet verified. Continue fresh immutable
    archive/runroot, native PS5.1 parser and input gate before fixture invocation.
    Preserve failed roots and exact cleanup. Do not call this a verified live wait.
-2. Linux responsible context prepares source-only overhead driver and fixed
-   measurement contract. No Cargo/native measurements authorized until root review
-   of source/contract. Thirty paired samples per API-entry-to-completed-report
-   latency and 8MiB stdout plus 8MiB stderr throughput, direct/managed alternating
-   order:120 measured executions, explicit warmups (prefer none), raw values,
-   medians, exact toolchain/resource observations. Explain that public API does
-   not expose spawn→first-byte timestamps. Private scoped build, one reused build,
-   exact owned cleanup/export, per-run/total limits and finite no-progress criteria.
+2. POSIX overhead source00bed4a0dfeb103ff209ba4c76dac7ae797b7c56 integrated.
+   OCR selected2 files, reviewed2/skipped0; excluded contract/state read separately.
+   Root Python AST and parser self-test pass, including meaningful missing/reordered
+   sample rejection. Rust formatting/whitespace checks passed in responsible context.
+   No Cargo/native measurements yet. Thirty paired samples per API-entry-to-report
+   latency and 8MiB stdout plus8MiB stderr throughput, alternating mode/workload
+   order,120 executions/zero warmups. Explicit frozen revision/archive IDs, bounded
+   metadata commands and early raw export address root pre-freeze findings.
+   Exact capture fixture PID absence is narrow observed resource evidence, not a
+   worker/handle/descriptor census; those ticket03 resource requirements stay open.
+   Responsible Linux context prepares frozen launcher/archive/preflight using
+   existing monitor, scoped private source/lock/build and exact cleanup ledger.
+   Root reviews launcher before native invocation82; no retry package or cap reset.
 3. Windows public-contract source preparation is integrated at43e9ef8c (parent
    056c0b53). OCR selected1 Rust file, reviewed1/skipped0; excluded Markdown state
    was read separately. Initial review corrected INT typing and no_float timeout,
