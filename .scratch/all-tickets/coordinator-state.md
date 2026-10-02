@@ -335,3 +335,8 @@ finalization reserve, jobs2, descendants16, sampledRSS2GiB/storage1572864KiB.
 Prior human recommendation acceptance and authorized continuation cover this
 finite follow-up; actual count83 until owner records launch, then84. Stop on
 failed assertion/cleanup/cap; preserve original logs and exact cleanup readback.
+
+Invocation84 actually launched 2026-10-02T06:24:13Z, owner follows existing
+SSH exec handle88635. LauncherPID3890227/PGID3890133, outerdeadline1790922853.
+Actual Unix invocation count is now84; original83 preserved. One census only,
+no retry authorized/dispatched. Owner waits on same handle and retains originals.
