@@ -152,24 +152,28 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Current turn classification
-PROGRESS: fork main8c346bf229ba2f932493edea2f576fed62f8d33f contains the
-accepted narrow current-core proof and prior Linux/Mac source proof. Onlymain
-was independently read back after publication. Preserve older publication and
-source-review receipts by reference; root implementation remains incomplete.
-Root independently reviewed all4 frozen Mac2f4be015 architecture files. Review
-changes_required in macos-custodian-architecture-root-review.json: inherited
-blocked child INT/TERM masks, empty observed identity ledger, work570 exceeding
-original560, final readback wrongly clamped to closure575, cancellation/release
-and cleanup-error dispatch gaps. Returned source-only correction to existing
-responsible context under Expert09; false launch guard and all original caps
-remain. No native invocation or new Expert chain allocated.
-Windows fresh maximized screenshot showed PS prompt; key-map failure left an
-unexecuted partial GET line (no Enter, no transfer or new stage). Clearing attempt
-could not be read back. Subsequent screenshot failed; independent root read-only
-virsh domstate now reports shut off. This is new external guest unavailability,
-not proof of guest cleanup. No VM start/restart/key/GET performed by root. Preserve
-historical files/process ownership and unconsumed oneGET allocation. Independent
-source work continues; native Windows gates require guest availability.
+PROGRESS: fork main62a9b82991bc577fe7c731d737f38ae40813dd77 contains the
+accepted narrow macOS preflight source proof. Goal remains incomplete.
+Existing Linux preparation owner corrects interruption export: active work must
+stop after SIGINT/TERM, but partial evidence may export within the original
+540-second limit. Actual stage/launch scripts are being prepared in that same
+context; root identified missing heredoc termination, export/readback path
+mismatch, premature interrupted wait and permission/malformed-identity false
+absence. Recheck this one batch before freezing or any remote staging/build.
+No new cause escalation or native launch allocation; native invocation count84 retained.
+Existing Mac owner implements the private finite-case controller/channel from
+89bd29d source contract with meaningful pure REDs. Guard remains false, source
+proof does not certify native custody. Existing Expert09 and hard limits remain.
+Matching installed kernel applicability remains an explicit source prerequisite:
+live Darwin27.0.0 reports XNU13432.1.9~1; read-only Apple XNU tag inventory has
+155 version tags and no13432 tag (latest numeric tag12377.121.6). Current-main
+source and active SDK agreement alone do not establish installed-kernel
+applicability. Resume this prerequisite on applicable authoritative source or
+an existing Expert09-compatible proof of applicability; do not repeat the same
+inventory without new information. Independent controller source work continues.
+Windows guest remains last observed shut off; partial console entry and guest
+cleanup unverified. No shared VM restart or new guest action is authorized by
+the rule update. Preserve existing proof/history and unconsumed allocations.
 
 ## Current-source core MSRV package — accepted narrow gate
 Current default-core applicability CLOSED for source52d9797b, Rust/Cargo1.66.0,
@@ -519,9 +523,12 @@ Linux compiler prerequisite preparation uses frozen1ca21e32/v3lock2ba4 with
 baseline plus tenpositive feature rows and a separate sys+no_object negative
 check (Cargo101 plus exact intentional diagnostic). Existing optional-helper
 owner prepares only, one integrated runtime/proposed600/540/510s and unchanged
-caps, no targetfixtures/native85. Workhorse heavy slot is occupied per current
-Patrol thread readback: foreigncargo-nextest636412/cargo636436/rustc in
- guardrails-G40; preserve it and renew exact inventory before dispatch.
+caps, no targetfixtures/native85. Latest authoritative workhorse process inventory
+supersedes the old G40 sample:
+foreign G41 timeout724515/run_scoped724516/Cargo728546 and active rustc733077,
+733364,733312,733366 occupy the heavy slot. Preserve all foreign work and renew
+exact inventory before any compiler dispatch; disappearance of G40 alone did
+not release the slot.
 Current turn continues progress from the previous ten-row accepted closure;
 no true campaign-wide blocked condition, no release completion claimed.
 
