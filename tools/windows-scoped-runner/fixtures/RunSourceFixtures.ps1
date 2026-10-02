@@ -349,7 +349,13 @@ function Quote-ProcessArgument([string] $value) {
     return $builder.ToString()
 }
 
-function Invoke-OwnedProcess([string] $Path, [string[]] $Arguments, [string] $Name, [int] $TimeoutSeconds) {
+function Get-RequiredExitCode([object] $ExitCode, [string] $Name) {
+    if ($null -eq $ExitCode) { throw "$Name exited with unavailable exit status." }
+    if ($ExitCode -isnot [int]) { throw "$Name returned invalid exit status '$ExitCode' (expected Int32)." }
+    return [int]$ExitCode
+}
+
+function Invoke-OwnedProcess([string] $Path, [string[]] $Arguments, [string] $Name, [int] $TimeoutSeconds, [int] $ExpectedExitCode = 0) {
     $stdout = Join-Path $logRoot ($Name + '.stdout.txt')
     $stderr = Join-Path $logRoot ($Name + '.stderr.txt')
     $argumentLine = (($Arguments | ForEach-Object { Quote-ProcessArgument ([string]$_) }) -join ' ')
@@ -357,6 +363,10 @@ function Invoke-OwnedProcess([string] $Path, [string[]] $Arguments, [string] $Na
     if ($remaining -le 0) { throw 'One-hour overall source-fixture limit elapsed.' }
     $process = Start-Process -FilePath $Path -ArgumentList $argumentLine -WorkingDirectory $buildRoot `
         -RedirectStandardOutput $stdout -RedirectStandardError $stderr -PassThru -NoNewWindow
+    # Cache this exact handle before waiting: Windows PowerShell 5.1 can expose
+    # a null ExitCode for redirected Start-Process output without this workaround.
+    $processHandle = $process.Handle
+    if ($processHandle -eq [IntPtr]::Zero) { throw "$Name did not expose a valid process handle before waiting." }
     # The PowerShell parent is already in a KILL_ON_JOB_CLOSE job. Windows
     # places this child in that job at creation, before it can execute.
     if (!$process.WaitForExit($remaining * 1000)) {
@@ -365,8 +375,31 @@ function Invoke-OwnedProcess([string] $Path, [string[]] $Arguments, [string] $Na
         throw "$Name exceeded its bounded timeout; inherited job was terminated"
     }
     $process.Refresh()
-    if ($process.ExitCode -ne 0) { throw "$Name exited $($process.ExitCode); inspect $stdout and $stderr" }
-    Write-Output "PASS $Name"
+    $exitCode = $process.ExitCode
+    $exitCode = Get-RequiredExitCode $exitCode $Name
+    [GC]::KeepAlive($processHandle)
+    if ($exitCode -ne $ExpectedExitCode) { throw "$Name exited $exitCode (expected $ExpectedExitCode); inspect $stdout and $stderr" }
+    Write-Output "PASS $Name exit=$exitCode"
+}
+
+function Test-OwnedProcessExitCodes([string] $PowerShellPath) {
+    $zeroOutput = Join-Path $logRoot 'exit-code-regression-zero.stdout.txt'
+    $seventeenOutput = Join-Path $logRoot 'exit-code-regression-17.stdout.txt'
+    Invoke-OwnedProcess $PowerShellPath @('-NoLogo','-NoProfile','-Command',"Write-Output 'EXIT_CODE_REGRESSION_ZERO'; exit 0") `
+        'exit-code-regression-zero' 30 0
+    Invoke-OwnedProcess $PowerShellPath @('-NoLogo','-NoProfile','-Command',"Write-Output 'EXIT_CODE_REGRESSION_17'; exit 17") `
+        'exit-code-regression-17' 30 17
+    if ((Get-Content -LiteralPath $zeroOutput -Raw).Trim() -ne 'EXIT_CODE_REGRESSION_ZERO') {
+        throw 'Exit-code regression child with exit 0 did not produce its expected redirected output.'
+    }
+    if ((Get-Content -LiteralPath $seventeenOutput -Raw).Trim() -ne 'EXIT_CODE_REGRESSION_17') {
+        throw 'Exit-code regression child with exit 17 did not produce its expected redirected output.'
+    }
+    $unavailableRejected = $false
+    try { $null = Get-RequiredExitCode $null 'exit-code-regression-unavailable' }
+    catch { $unavailableRejected = $_.Exception.Message -match 'unavailable exit status' }
+    if (!$unavailableRejected) { throw 'Unavailable child exit status was not rejected explicitly.' }
+    Write-Output 'PASS exit-code-regression-unavailable rejected'
 }
 
 if (!$SetupFailureControl) {
@@ -384,13 +417,18 @@ if (!$SetupFailureControl) {
         $controlProcess = Start-Process -FilePath $childPowerShell -ArgumentList $controlArgumentLine `
             -WorkingDirectory $source -RedirectStandardOutput $controlStdout -RedirectStandardError $controlStderr `
             -PassThru -NoNewWindow
+        $controlProcessHandle = $controlProcess.Handle
+        if ($controlProcessHandle -eq [IntPtr]::Zero) { throw 'Setup-failure control did not expose a valid process handle before waiting.' }
         $remainingMilliseconds = [Math]::Max(0, 30000 - [int]$controlDeadline.ElapsedMilliseconds)
         if (!$controlProcess.WaitForExit($remainingMilliseconds)) {
             [void]$script:terminateJob.Invoke($script:jobHandle, [uint32]3758096385)
             throw 'Setup-failure control exceeded its shared 30-second deadline; the exact outer job was terminated.'
         }
         $controlProcess.Refresh()
-        if ($controlProcess.ExitCode -eq 0) { throw 'Setup-failure control unexpectedly succeeded.' }
+        $controlExitCode = $controlProcess.ExitCode
+        $controlExitCode = Get-RequiredExitCode $controlExitCode 'Setup-failure control'
+        [GC]::KeepAlive($controlProcessHandle)
+        if ($controlExitCode -eq 0) { throw 'Setup-failure control unexpectedly succeeded.' }
         if (!(Test-Path -LiteralPath $controlMarker -PathType Leaf)) { throw 'Setup-failure control did not preserve its primary setup exception.' }
         $controlRecord = Get-Content -LiteralPath $controlMarker -Raw
         if ($controlRecord -notmatch 'CONTROL_INJECTED_AFTER_JOB_ASSIGNMENT_BEFORE_TIMER' -or
@@ -421,6 +459,8 @@ if (!$SetupFailureControl) {
     }
     finally { if ($null -ne $controlProcess) { $controlProcess.Dispose() } }
 }
+
+if (!$SetupFailureControl) { Test-OwnedProcessExitCodes $childPowerShell }
 
     foreach ($relative in ($expected.Keys | Sort-Object)) {
         $inputPath = Join-Path $source $relative
