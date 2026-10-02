@@ -237,7 +237,7 @@ build/process was moved, removed or restarted because of the instruction update.
 ## Resources, counts and cause history
 Unix actual native invocation count83 consumed.82 failed before runtime;
 83 measurementCargo0 but originalouter1 due optional cmdline receipt validation.
-83 is terminal; no liveUnix testhandle. No84allocated. Preserve originalfailures
+83 is terminal; no liveUnix testhandle. Invocation84 allocated after independent stage gate; not consumed until actual launch. Preserve originalfailures
 and root independently accepted narrow descriptive data/cleanup readback. Linux outer598s
 plus kill2s=600s, scoped585s, driver580s, aggregate Cargo540s, jobs2, descendants16,
 2GiB policy and sampled stop1572864KiB. macOS scoped600s/Cargo540s/jobs2 with same
@@ -320,3 +320,18 @@ cleanup responsibility. Concrete corrections returned within existing cause09;
 false launch guard, selected graph/native controls and caps remain unchanged.
 Goal remains active/incomplete. Next: staged Linux source gate/native census,
 actual Mac sole custodian source corrections, Windows private-root/parser gate.
+
+## Linux census84 allocation
+Root independently SSH-read all nine staged regular-file hashes and retained
+preflight-output.txt from workhorse:/root/rhai-process-resource-census-0b3841a.
+All exact bindings match the reviewed source-controls receipt; contract SHA
+c808ded571ba6664588dc7ffa48c6dafeffbbaf79781805a03a9b417526f1eaf.
+Python3.14.7 preflight passes, runner help/import and classifier/finalizer controls
+pass; evidence is real and empty. Basename correction was a setup-only preflight
+repair, no Cargo/native consumed. Allocate one dedicated invocation84, six
+completed cases and two held controls, no warmups/retries or timing repeat.
+Existing bounds unchanged: outer600/scoped585/driver580/Cargo540 with20s
+finalization reserve, jobs2, descendants16, sampledRSS2GiB/storage1572864KiB.
+Prior human recommendation acceptance and authorized continuation cover this
+finite follow-up; actual count83 until owner records launch, then84. Stop on
+failed assertion/cleanup/cap; preserve original logs and exact cleanup readback.
