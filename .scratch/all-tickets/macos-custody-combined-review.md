@@ -141,3 +141,22 @@ The unchanged18d four-finding proof remains valid for its source boundaries.
 This validates source agreement and regressions only. Actual native ABI/access,
 Cargo/linker/helper confinement, executed unit graph, interruption/escaped-leaf
 and measurement gates stay open, and the launch guard remains false.
+
+
+## Tool identity preflight follow-up
+
+Frozen e88aa80b575a956d7c7854e9d8daca7a9efaa966, parent140eed: three
+OCR-selected Python files reviewed, none skipped (total3/reviewed3/skipped0,
+coverage100%). Expected Cargo/rustc/rustdoc and active Xcode identities are
+validated before archival or Cargo. Queries use the existing sole-custodian RPC;
+the added Xcode executable allowance is restricted to fixed read-only argv.
+No new material source finding. Point-in-time identities do not prove subsequent
+runtime helper confinement or installed native ABI/access.
+
+Independent scoped macos-preflight-root-evidence:20 reader/34 adapter positives,
+two intended AssertionError controls (accepted identity mismatch and unreviewed
+Xcode query), restored20/34 green and eight frozen files matched. Outer0;
+helper1.132073667s; exact runtime absent and empty owned scope retired.
+This accepts source regressions only. Unchanged earlier correction/ABI proofs
+remain applicable. Native interruption/escaped-leaf controls, tool confinement,
+measurement and release acceptance remain open; launch guard stays false.

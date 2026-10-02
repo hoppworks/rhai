@@ -1,0 +1,14 @@
+{
+  "revision": "e88aa80b575a956d7c7854e9d8daca7a9efaa966",
+  "runtime": "/Users/hoppworks/.local/share/agent-builds/rhai/root-preflight-20261002-71649b8a/agent-build-xtlrsyem",
+  "runtime_absent": true,
+  "scope": "/Users/hoppworks/.local/share/agent-builds/rhai/root-preflight-20261002-71649b8a",
+  "empty_scope_retired": true,
+  "scope_absent": true,
+  "frozen_source_hashes_match": true,
+  "positive_and_restored_counts": {
+    "reader": 20,
+    "adapter": 34
+  },
+  "outer_status": 0
+}

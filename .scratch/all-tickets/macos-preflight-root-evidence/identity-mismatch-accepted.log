@@ -1,0 +1,14 @@
+F
+======================================================================
+FAIL: test_tool_identity_rejects_mismatched_or_missing_probe (__main__.EnvironmentTests.test_tool_identity_rejects_mismatched_or_missing_probe)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/hoppworks/.local/share/agent-builds/rhai/root-preflight-20261002-71649b8a/agent-build-xtlrsyem/.scratch/all-tickets/test-macos-process-overhead-source.py", line 36, in test_tool_identity_rejects_mismatched_or_missing_probe
+    with self.assertRaisesRegex(RuntimeError, 'cargo_version'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: RuntimeError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (failures=1)

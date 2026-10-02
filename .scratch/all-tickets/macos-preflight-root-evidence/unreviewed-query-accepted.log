@@ -1,0 +1,13 @@
+F
+======================================================================
+FAIL: test_adapter_xcode_queries_are_exact_and_read_only (__main__.EnvironmentTests.test_adapter_xcode_queries_are_exact_and_read_only)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/hoppworks/.local/share/agent-builds/rhai/root-preflight-20261002-71649b8a/agent-build-xtlrsyem/.scratch/all-tickets/test-macos-process-overhead-source.py", line 56, in test_adapter_xcode_queries_are_exact_and_read_only
+    self.assertFalse(custodian.is_exact_xcode_preflight(['/usr/bin/xcrun', '--find', 'unreviewed']))
+AssertionError: True is not false
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (failures=1)

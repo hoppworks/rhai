@@ -524,3 +524,23 @@ Patrol thread readback: foreigncargo-nextest636412/cargo636436/rustc in
  guardrails-G40; preserve it and renew exact inventory before dispatch.
 Current turn continues progress from the previous ten-row accepted closure;
 no true campaign-wide blocked condition, no release completion claimed.
+
+
+Current rules propagation reconfirmed: root and both active owners explicitly
+loaded agent-skills4d86b5f774a95111b56e9cbcf9c9882d7303a7a9 globals/project rules,
+relevant skills and role/coordinator templates. Both owners report no descendants.
+Completed Windows owner is not active and its loaded revision remains unconfirmed;
+no restart solely for reload. New agents must load current rules from disk.
+No process interruption or duplicate build/review was caused by the update.
+
+Mac fail-closed tool preflight e88aa80b source follow-up CLOSED narrowly: root
+reviewed all3 OCR-selected files and affected RPC callers; no material finding.
+Pure replay in own scope root-preflight-20261002-71649b8a (outer100s/command10s)
+returned20reader/34adapter positives and restored checks; identity mismatch and
+unreviewed query controls each produced meaningful AssertionError. Original
+macos-preflight-root-evidence retains exact statuses/logs/eight source hashes;
+helper1.132073667s, outer0, runtime absent/empty scope retired independently.
+This is source-only proof: native count84, no85 allocation, guardfalse and cause09
+history/caps preserved. Same owner now prepares the finite four-case control
+controller/contract from Expert09, with no native dispatch. Linux11positive plus
+1negative compiler helper remains in preparation; workhorse occupied, no launch.
