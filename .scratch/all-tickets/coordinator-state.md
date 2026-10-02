@@ -340,3 +340,14 @@ Invocation84 actually launched 2026-10-02T06:24:13Z, owner follows existing
 SSH exec handle88635. LauncherPID3890227/PGID3890133, outerdeadline1790922853.
 Actual Unix invocation count is now84; original83 preserved. One census only,
 no retry authorized/dispatched. Owner waits on same handle and retains originals.
+
+Invocation84 is terminal, originalouter1/driver classifier failure. Root SSH-read
+original Cargo log: Rust test1passed, all8 receipts present; first DirectChild/run
+receipt has exact libtest prefix `test process_scope_retained_resource_census ... `
+and strict startswith classifier skipped it, reporting7. This is parser framing
+failure, not failed Rust resource assertion. Original finalizer reports41 exact
+identities absent, two groups empty, no cleanup signals, sampledRSS849092608bytes/
+storage288600KiB. Not yet independently accepted: owner preserves originals and
+checks exact8 fixture identities/source/runtime; root will independently verify.
+No rerun dispatched. Pure exact-prefix framing correction and reuse of original
+valid native rows are the next action; original failed package status remains.
