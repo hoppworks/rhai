@@ -1,0 +1,21 @@
+{
+  "reviewed_revision": "8b9740de8e4493c78320293d3a07599672f22484",
+  "original_revision": "2d52bf0b87a684b87222436795dcfc73875a7ce8",
+  "changed_files": [
+    ".scratch/all-tickets/check-current-darwin-sys-net-behavior.py",
+    ".scratch/all-tickets/current-darwin-sys-net-behavior-contract.md",
+    ".scratch/all-tickets/current-darwin-sys-net-behavior-repair-green.stdout",
+    ".scratch/all-tickets/current-darwin-sys-net-behavior-source-prep.md",
+    ".scratch/all-tickets/readback-current-darwin-sys-net-cleanup.py",
+    ".scratch/all-tickets/test-current-darwin-sys-net-behavior.py",
+    "tests/sys_policy.rs"
+  ],
+  "owner_clean": true,
+  "rules_revision": "958a4538b0191c53f2ccb2cd00d96c15045fbf68",
+  "source_freeze": "50af89515fa2094c9c10bf03e98b89f00291c57f",
+  "source_archive_sha256": "12f66ac017d8c54e95f7bf38a9319f1e379446168bd9d102a9ff7b52dbe5327a",
+  "source_test_manifest_changes_after_freeze": [],
+  "changed_production_files_since_original": [
+    "tests/sys_policy.rs"
+  ]
+}

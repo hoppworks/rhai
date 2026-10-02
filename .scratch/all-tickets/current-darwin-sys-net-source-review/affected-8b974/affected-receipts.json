@@ -1,0 +1,936 @@
+{
+  "revision": "8b9740de8e4493c78320293d3a07599672f22484",
+  "native_launches": 0,
+  "seven_owner_categories": [
+    "pins_and_nine_rows=PASS",
+    "named_assertion_red_and_incidental_101_rejection=PASS",
+    "darwin_early_return_named_coverage_and_summary_integrity=PASS",
+    "cleanup_unknown_and_reparented_process=PASS",
+    "cleanup_owned_group_membership=PASS",
+    "distinct_darwin_alias_fixture_and_receipts=PASS",
+    "scope_and_cleanup_contract=PASS"
+  ],
+  "original_F1_cases": {
+    "eilseq": {
+      "target_results": [
+        {
+          "target": "sys_fs",
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered_out": 0,
+          "summary_count": 1,
+          "expected_tests": [
+            "ordinary_test",
+            "test_non_utf8_file_name"
+          ],
+          "observed_tests": [
+            "ordinary_test",
+            "test_non_utf8_file_name"
+          ],
+          "test_outcomes": {
+            "ordinary_test": "ok",
+            "test_non_utf8_file_name": "ok"
+          },
+          "completed_named_tests": [
+            "ordinary_test"
+          ],
+          "uncovered_named_tests": [
+            "test_non_utf8_file_name"
+          ]
+        }
+      ],
+      "expected_targets": [
+        "sys_fs"
+      ],
+      "all_selected_targets_ran_once": true,
+      "all_tests_passed_without_ignored_or_filtered": false,
+      "ignored_tests": [],
+      "skipped_tests": [
+        {
+          "target": "sys_fs",
+          "test": "test_non_utf8_file_name",
+          "reason": "Darwin EILSEQ rejected non-UTF-8 fixture; assertion returned early"
+        }
+      ],
+      "named_test_coverage_found": false,
+      "coverage_found": false
+    },
+    "missing-name": {
+      "target_results": [
+        {
+          "target": "sys_fs",
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered_out": 0,
+          "summary_count": 1,
+          "expected_tests": [
+            "ordinary_test",
+            "test_non_utf8_file_name"
+          ],
+          "observed_tests": [
+            "ordinary_test"
+          ],
+          "test_outcomes": {
+            "ordinary_test": "ok"
+          },
+          "completed_named_tests": [
+            "ordinary_test"
+          ],
+          "uncovered_named_tests": [
+            "test_non_utf8_file_name"
+          ]
+        }
+      ],
+      "expected_targets": [
+        "sys_fs"
+      ],
+      "all_selected_targets_ran_once": true,
+      "all_tests_passed_without_ignored_or_filtered": false,
+      "ignored_tests": [],
+      "skipped_tests": [],
+      "named_test_coverage_found": false,
+      "coverage_found": false
+    },
+    "duplicate-summary": {
+      "target_results": [
+        {
+          "target": "sys_fs",
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered_out": 0,
+          "summary_count": 2,
+          "expected_tests": [
+            "ordinary_test",
+            "test_non_utf8_file_name"
+          ],
+          "observed_tests": [
+            "ordinary_test",
+            "test_non_utf8_file_name"
+          ],
+          "test_outcomes": {
+            "ordinary_test": "ok",
+            "test_non_utf8_file_name": "ok"
+          },
+          "completed_named_tests": [
+            "ordinary_test",
+            "test_non_utf8_file_name"
+          ],
+          "uncovered_named_tests": []
+        }
+      ],
+      "expected_targets": [
+        "sys_fs"
+      ],
+      "all_selected_targets_ran_once": true,
+      "all_tests_passed_without_ignored_or_filtered": false,
+      "ignored_tests": [],
+      "skipped_tests": [],
+      "named_test_coverage_found": false,
+      "coverage_found": false
+    },
+    "clean-ordered": {
+      "target_results": [
+        {
+          "target": "sys_fs",
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered_out": 0,
+          "summary_count": 1,
+          "expected_tests": [
+            "ordinary_test",
+            "test_non_utf8_file_name"
+          ],
+          "observed_tests": [
+            "ordinary_test",
+            "test_non_utf8_file_name"
+          ],
+          "test_outcomes": {
+            "ordinary_test": "ok",
+            "test_non_utf8_file_name": "ok"
+          },
+          "completed_named_tests": [
+            "ordinary_test",
+            "test_non_utf8_file_name"
+          ],
+          "uncovered_named_tests": []
+        }
+      ],
+      "expected_targets": [
+        "sys_fs"
+      ],
+      "all_selected_targets_ran_once": true,
+      "all_tests_passed_without_ignored_or_filtered": true,
+      "ignored_tests": [],
+      "skipped_tests": [],
+      "named_test_coverage_found": true,
+      "coverage_found": true
+    }
+  },
+  "F4_separate_stream_order": {
+    "exception": "test result appeared without a selected integration target",
+    "same_data_in_order_accepted": true,
+    "stdout": "behavior-model.stdout",
+    "stderr": "behavior-model.stderr",
+    "parser_input": "behavior-model.parser-input.txt"
+  },
+  "original_F2_query_denial": "cannot reliably query pid 100: injected ps denial",
+  "F2_group_query_failure": "cannot reliably enumerate owned process groups: injected group failure",
+  "original_F2_reparented_changed_group_command": "cleanup readback failed: recorded helper process remains",
+  "F2_nonempty_scope": "cleanup readback failed: exact build scope is nonempty: /private/tmp/current-darwin-sys-net-affected-recheck.vmrgou7y/closure-6skwi68c/scope",
+  "inventory": {
+    "combined-baseline": {
+      "sys_env": [
+        "test_env_var_set_and_unset",
+        "test_env_default_policy_hides_all",
+        "test_env_vars_all",
+        "test_env_allow_list_value",
+        "test_cwd_matches_process",
+        "test_env_allow_list_unset_variable",
+        "test_env_var_non_utf8"
+      ],
+      "sys_fs": [
+        "test_open_file_default_preserves_contents_and_shares_cursor",
+        "test_open_file_modes_and_exclusive_create",
+        "test_open_file_checks_grants_before_mutation_and_stays_confined",
+        "test_file_handle_read_string_advances_the_shared_cursor",
+        "test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving",
+        "test_file_handle_string_read_requires_complete_utf8",
+        "test_file_handle_read_respects_engine_limit_below_host_cap",
+        "test_file_handle_read_blob_preserves_bytes_and_obeys_host_cap",
+        "test_file_handle_reads_fail_at_eof_and_on_write_only_handle",
+        "test_file_handle_blob_read_respects_engine_array_limit",
+        "test_read_file_cases",
+        "test_read_binary",
+        "test_large_file_round_trip",
+        "test_write_append_blob",
+        "test_write_into_missing_parent",
+        "test_predicates_and_metadata",
+        "test_read_dir_cases",
+        "test_create_dir_cases",
+        "test_remove_cases",
+        "test_rename_and_copy",
+        "test_unicode_names",
+        "test_unrestricted_round_trip",
+        "test_unrestricted_symlinks_follow_host_semantics",
+        "test_unrestricted_symlink_then_parent_uses_host_resolution",
+        "test_unrestricted_relative_paths_after_cwd_is_unlinked",
+        "test_wrong_entry_kind",
+        "test_metadata_symlink_and_readonly",
+        "test_non_utf8_file_name",
+        "test_rename_overwrite_and_directory",
+        "test_path_spellings",
+        "test_deep_tree_and_many_entries",
+        "test_unrestricted_relative_paths",
+        "test_unrestricted_missing_parents",
+        "test_empty_and_mixed_writes"
+      ],
+      "sys_policy": [
+        "test_default_config_denies_fs",
+        "test_read_only_root",
+        "test_remove_dir_all_needs_delete_access",
+        "test_parent_traversal_is_denied",
+        "test_symlink_escape_is_denied",
+        "test_absolute_paths",
+        "test_multiple_roots",
+        "test_env_allow_list",
+        "test_unrestricted_respects_access_level",
+        "test_missing_root_fails_early",
+        "test_errors_are_catchable",
+        "test_plain_engine_has_no_sys_functions",
+        "test_host_can_downcast",
+        "test_nested_roots_longest_prefix",
+        "test_root_with_dot_components",
+        "test_symlinked_root",
+        "test_absolute_path_through_symlinked_root_ancestor",
+        "test_root_accepts_macos_system_prefix_aliases",
+        "test_nested_roots_keep_permissions_through_system_prefix_aliases",
+        "test_configured_root_symlink_then_parent_uses_os_resolution",
+        "test_absolute_path_with_parent_components",
+        "test_copy_across_roots",
+        "test_config_builder",
+        "test_static_module_and_sharing",
+        "test_error_position",
+        "test_error_variants"
+      ],
+      "net_connect": [
+        "authorized_connect_is_observed_and_clone_close_is_shared",
+        "denied_and_invalid_endpoints_do_not_reach_peer_and_errors_are_catchable",
+        "net_config_rejects_zero_deadline_and_invalid_handle_limits",
+        "open_handle_limit_is_shared_across_package_engines_and_released_on_close"
+      ],
+      "net_listen": [
+        "authorized_listener_accepts_an_independent_peer",
+        "denied_and_invalid_listener_endpoints_never_bind",
+        "bind_failure_releases_listener_quota",
+        "no_client_accept_times_out_with_catchable_net_error",
+        "quota_retry_deadline_expires_under_a_real_saturated_handle_limit",
+        "listener_clones_share_close_and_final_drop_releases_the_bind",
+        "accepted_stream_uses_the_shared_package_quota_across_engines"
+      ],
+      "net_reads": [
+        "stream_read_string_returns_exact_lossy_text_from_peer_bytes",
+        "one_shot_text_read_replaces_a_utf8_character_cut_by_the_available_prefix",
+        "one_shot_read_returns_an_available_short_prefix_without_waiting_for_more",
+        "blob_reads_validate_lengths_return_exact_short_prefix_and_obey_host_cap",
+        "no_data_read_times_out_and_bounded_eof_loop_reports_partial_progress",
+        "engine_string_limit_keeps_ascii_and_reports_lossy_expansion_progress",
+        "accepted_stream_inherits_host_receive_cap"
+      ],
+      "net_writes": [
+        "script_writes_string_and_write_all_report_real_peer_bytes",
+        "script_write_blob_preserves_exact_bytes",
+        "write_half_close_keeps_the_read_direction_and_is_idempotent",
+        "bounded_write_timeout_reports_partial_bytes_matching_peer_readback",
+        "host_write_cap_rejects_oversize_input_without_peer_bytes",
+        "engine_string_limit_rejects_write_before_peer_bytes",
+        "invalid_host_write_bounds_are_rejected",
+        "read_half_close_is_idempotent_and_keeps_stream_open_for_close",
+        "accepted_stream_writes_are_read_back_by_the_peer",
+        "accepted_stream_inherits_host_write_cap"
+      ],
+      "combined_sys_net": [
+        "sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors"
+      ]
+    },
+    "combined-no-index": {
+      "sys_fs": [
+        "test_open_file_default_preserves_contents_and_shares_cursor",
+        "test_open_file_modes_and_exclusive_create",
+        "test_open_file_checks_grants_before_mutation_and_stays_confined",
+        "test_file_handle_read_string_advances_the_shared_cursor",
+        "test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving",
+        "test_file_handle_string_read_requires_complete_utf8",
+        "test_file_handle_read_respects_engine_limit_below_host_cap",
+        "test_file_handle_reads_fail_at_eof_and_on_write_only_handle",
+        "test_file_handle_blob_read_is_omitted_under_no_index",
+        "test_read_file_cases",
+        "test_write_into_missing_parent",
+        "test_predicates_and_metadata",
+        "test_create_dir_cases",
+        "test_remove_cases",
+        "test_rename_and_copy",
+        "test_unrestricted_symlinks_follow_host_semantics",
+        "test_unrestricted_symlink_then_parent_uses_host_resolution",
+        "test_unrestricted_relative_paths_after_cwd_is_unlinked",
+        "test_wrong_entry_kind",
+        "test_metadata_symlink_and_readonly",
+        "test_rename_overwrite_and_directory",
+        "test_path_spellings",
+        "test_unrestricted_relative_paths",
+        "test_unrestricted_missing_parents"
+      ],
+      "net_reads": [
+        "stream_read_string_returns_exact_lossy_text_from_peer_bytes",
+        "one_shot_text_read_replaces_a_utf8_character_cut_by_the_available_prefix",
+        "one_shot_read_returns_an_available_short_prefix_without_waiting_for_more",
+        "no_data_read_times_out_and_bounded_eof_loop_reports_partial_progress",
+        "engine_string_limit_keeps_ascii_and_reports_lossy_expansion_progress",
+        "accepted_stream_inherits_host_receive_cap",
+        "no_index_keeps_string_reads_and_omits_blob_methods"
+      ],
+      "net_writes": [
+        "script_writes_string_and_write_all_report_real_peer_bytes",
+        "no_index_keeps_string_writes_and_omits_blob_writes",
+        "write_half_close_keeps_the_read_direction_and_is_idempotent",
+        "bounded_write_timeout_reports_partial_bytes_matching_peer_readback",
+        "host_write_cap_rejects_oversize_input_without_peer_bytes",
+        "engine_string_limit_rejects_write_before_peer_bytes",
+        "invalid_host_write_bounds_are_rejected",
+        "read_half_close_is_idempotent_and_keeps_stream_open_for_close",
+        "accepted_stream_writes_are_read_back_by_the_peer",
+        "accepted_stream_inherits_host_write_cap"
+      ],
+      "combined_sys_net": [
+        "sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors"
+      ]
+    },
+    "net-no-object": {
+      "net_no_object": [
+        "registered_stream_functions_work_without_dot_syntax",
+        "registered_listener_functions_work_with_explicit_handle_arguments",
+        "registered_error_getters_are_callable_with_explicit_arguments"
+      ]
+    },
+    "combined-metadata-serde": {
+      "sys_policy": [
+        "test_default_config_denies_fs",
+        "test_read_only_root",
+        "test_remove_dir_all_needs_delete_access",
+        "test_parent_traversal_is_denied",
+        "test_symlink_escape_is_denied",
+        "test_absolute_paths",
+        "test_multiple_roots",
+        "test_env_allow_list",
+        "test_unrestricted_respects_access_level",
+        "test_missing_root_fails_early",
+        "test_errors_are_catchable",
+        "test_plain_engine_has_no_sys_functions",
+        "test_host_can_downcast",
+        "test_nested_roots_longest_prefix",
+        "test_root_with_dot_components",
+        "test_symlinked_root",
+        "test_absolute_path_through_symlinked_root_ancestor",
+        "test_root_accepts_macos_system_prefix_aliases",
+        "test_nested_roots_keep_permissions_through_system_prefix_aliases",
+        "test_configured_root_symlink_then_parent_uses_os_resolution",
+        "test_absolute_path_with_parent_components",
+        "test_copy_across_roots",
+        "test_config_builder",
+        "test_static_module_and_sharing",
+        "test_error_position",
+        "test_error_variants",
+        "test_function_metadata"
+      ],
+      "net_metadata": [
+        "metadata_exposes_the_documented_tcp_surface"
+      ]
+    },
+    "combined-sync": {
+      "sys_fs": [
+        "test_open_file_default_preserves_contents_and_shares_cursor",
+        "test_open_file_modes_and_exclusive_create",
+        "test_open_file_checks_grants_before_mutation_and_stays_confined",
+        "test_file_handle_read_string_advances_the_shared_cursor",
+        "test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving",
+        "test_file_handle_string_read_requires_complete_utf8",
+        "test_file_handle_read_respects_engine_limit_below_host_cap",
+        "test_file_handle_read_blob_preserves_bytes_and_obeys_host_cap",
+        "test_file_handle_reads_fail_at_eof_and_on_write_only_handle",
+        "test_file_handle_blob_read_respects_engine_array_limit",
+        "test_read_file_cases",
+        "test_read_binary",
+        "test_large_file_round_trip",
+        "test_write_append_blob",
+        "test_write_into_missing_parent",
+        "test_predicates_and_metadata",
+        "test_read_dir_cases",
+        "test_create_dir_cases",
+        "test_remove_cases",
+        "test_rename_and_copy",
+        "test_unicode_names",
+        "test_unrestricted_round_trip",
+        "test_unrestricted_symlinks_follow_host_semantics",
+        "test_unrestricted_symlink_then_parent_uses_host_resolution",
+        "test_unrestricted_relative_paths_after_cwd_is_unlinked",
+        "test_wrong_entry_kind",
+        "test_metadata_symlink_and_readonly",
+        "test_non_utf8_file_name",
+        "test_rename_overwrite_and_directory",
+        "test_path_spellings",
+        "test_deep_tree_and_many_entries",
+        "test_unrestricted_relative_paths",
+        "test_unrestricted_missing_parents",
+        "test_empty_and_mixed_writes"
+      ],
+      "sys_policy": [
+        "test_default_config_denies_fs",
+        "test_read_only_root",
+        "test_remove_dir_all_needs_delete_access",
+        "test_parent_traversal_is_denied",
+        "test_symlink_escape_is_denied",
+        "test_absolute_paths",
+        "test_multiple_roots",
+        "test_env_allow_list",
+        "test_unrestricted_respects_access_level",
+        "test_missing_root_fails_early",
+        "test_errors_are_catchable",
+        "test_plain_engine_has_no_sys_functions",
+        "test_host_can_downcast",
+        "test_nested_roots_longest_prefix",
+        "test_root_with_dot_components",
+        "test_symlinked_root",
+        "test_absolute_path_through_symlinked_root_ancestor",
+        "test_root_accepts_macos_system_prefix_aliases",
+        "test_nested_roots_keep_permissions_through_system_prefix_aliases",
+        "test_configured_root_symlink_then_parent_uses_os_resolution",
+        "test_absolute_path_with_parent_components",
+        "test_copy_across_roots",
+        "test_config_builder",
+        "test_static_module_and_sharing",
+        "test_error_position",
+        "test_error_variants",
+        "test_sync_threads"
+      ],
+      "net_connect": [
+        "authorized_connect_is_observed_and_clone_close_is_shared",
+        "denied_and_invalid_endpoints_do_not_reach_peer_and_errors_are_catchable",
+        "net_config_rejects_zero_deadline_and_invalid_handle_limits",
+        "open_handle_limit_is_shared_across_package_engines_and_released_on_close"
+      ],
+      "net_listen": [
+        "authorized_listener_accepts_an_independent_peer",
+        "denied_and_invalid_listener_endpoints_never_bind",
+        "bind_failure_releases_listener_quota",
+        "no_client_accept_times_out_with_catchable_net_error",
+        "quota_retry_deadline_expires_under_a_real_saturated_handle_limit",
+        "closing_a_clone_unblocks_an_accept_waiting_on_shared_quota",
+        "listener_clones_share_close_and_final_drop_releases_the_bind",
+        "accepted_stream_uses_the_shared_package_quota_across_engines"
+      ],
+      "net_reads": [
+        "stream_read_string_returns_exact_lossy_text_from_peer_bytes",
+        "one_shot_text_read_replaces_a_utf8_character_cut_by_the_available_prefix",
+        "one_shot_read_returns_an_available_short_prefix_without_waiting_for_more",
+        "blob_reads_validate_lengths_return_exact_short_prefix_and_obey_host_cap",
+        "no_data_read_times_out_and_bounded_eof_loop_reports_partial_progress",
+        "engine_string_limit_keeps_ascii_and_reports_lossy_expansion_progress",
+        "accepted_stream_inherits_host_receive_cap",
+        "closing_a_clone_cancels_an_outstanding_read_and_releases_quota"
+      ],
+      "net_writes": [
+        "script_writes_string_and_write_all_report_real_peer_bytes",
+        "script_write_blob_preserves_exact_bytes",
+        "write_half_close_keeps_the_read_direction_and_is_idempotent",
+        "bounded_write_timeout_reports_partial_bytes_matching_peer_readback",
+        "host_write_cap_rejects_oversize_input_without_peer_bytes",
+        "engine_string_limit_rejects_write_before_peer_bytes",
+        "invalid_host_write_bounds_are_rejected",
+        "read_half_close_is_idempotent_and_keeps_stream_open_for_close",
+        "accepted_stream_writes_are_read_back_by_the_peer",
+        "accepted_stream_inherits_host_write_cap"
+      ],
+      "combined_sys_net": [
+        "sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors"
+      ]
+    },
+    "combined-i32-no-float": {
+      "sys_fs": [
+        "test_open_file_default_preserves_contents_and_shares_cursor",
+        "test_open_file_modes_and_exclusive_create",
+        "test_open_file_checks_grants_before_mutation_and_stays_confined",
+        "test_file_handle_read_string_advances_the_shared_cursor",
+        "test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving",
+        "test_file_handle_string_read_requires_complete_utf8",
+        "test_file_handle_read_respects_engine_limit_below_host_cap",
+        "test_file_handle_read_blob_preserves_bytes_and_obeys_host_cap",
+        "test_file_handle_reads_fail_at_eof_and_on_write_only_handle",
+        "test_file_handle_blob_read_respects_engine_array_limit",
+        "test_read_file_cases",
+        "test_read_binary",
+        "test_large_file_round_trip",
+        "test_write_append_blob",
+        "test_write_into_missing_parent",
+        "test_predicates_and_metadata",
+        "test_read_dir_cases",
+        "test_create_dir_cases",
+        "test_remove_cases",
+        "test_rename_and_copy",
+        "test_unicode_names",
+        "test_unrestricted_round_trip",
+        "test_unrestricted_symlinks_follow_host_semantics",
+        "test_unrestricted_symlink_then_parent_uses_host_resolution",
+        "test_unrestricted_relative_paths_after_cwd_is_unlinked",
+        "test_wrong_entry_kind",
+        "test_metadata_symlink_and_readonly",
+        "test_non_utf8_file_name",
+        "test_rename_overwrite_and_directory",
+        "test_path_spellings",
+        "test_deep_tree_and_many_entries",
+        "test_unrestricted_relative_paths",
+        "test_unrestricted_missing_parents",
+        "test_empty_and_mixed_writes"
+      ],
+      "sys_policy": [
+        "test_default_config_denies_fs",
+        "test_read_only_root",
+        "test_remove_dir_all_needs_delete_access",
+        "test_parent_traversal_is_denied",
+        "test_symlink_escape_is_denied",
+        "test_absolute_paths",
+        "test_multiple_roots",
+        "test_env_allow_list",
+        "test_unrestricted_respects_access_level",
+        "test_missing_root_fails_early",
+        "test_errors_are_catchable",
+        "test_plain_engine_has_no_sys_functions",
+        "test_host_can_downcast",
+        "test_nested_roots_longest_prefix",
+        "test_root_with_dot_components",
+        "test_symlinked_root",
+        "test_absolute_path_through_symlinked_root_ancestor",
+        "test_root_accepts_macos_system_prefix_aliases",
+        "test_nested_roots_keep_permissions_through_system_prefix_aliases",
+        "test_configured_root_symlink_then_parent_uses_os_resolution",
+        "test_absolute_path_with_parent_components",
+        "test_copy_across_roots",
+        "test_config_builder",
+        "test_static_module_and_sharing",
+        "test_error_position",
+        "test_error_variants"
+      ],
+      "net_connect": [
+        "authorized_connect_is_observed_and_clone_close_is_shared",
+        "denied_and_invalid_endpoints_do_not_reach_peer_and_errors_are_catchable",
+        "net_config_rejects_zero_deadline_and_invalid_handle_limits",
+        "open_handle_limit_is_shared_across_package_engines_and_released_on_close"
+      ],
+      "net_listen": [
+        "authorized_listener_accepts_an_independent_peer",
+        "denied_and_invalid_listener_endpoints_never_bind",
+        "bind_failure_releases_listener_quota",
+        "no_client_accept_times_out_with_catchable_net_error",
+        "quota_retry_deadline_expires_under_a_real_saturated_handle_limit",
+        "listener_clones_share_close_and_final_drop_releases_the_bind",
+        "accepted_stream_uses_the_shared_package_quota_across_engines"
+      ],
+      "net_reads": [
+        "stream_read_string_returns_exact_lossy_text_from_peer_bytes",
+        "one_shot_text_read_replaces_a_utf8_character_cut_by_the_available_prefix",
+        "one_shot_read_returns_an_available_short_prefix_without_waiting_for_more",
+        "blob_reads_validate_lengths_return_exact_short_prefix_and_obey_host_cap",
+        "no_data_read_times_out_and_bounded_eof_loop_reports_partial_progress",
+        "engine_string_limit_keeps_ascii_and_reports_lossy_expansion_progress",
+        "accepted_stream_inherits_host_receive_cap"
+      ],
+      "net_writes": [
+        "script_writes_string_and_write_all_report_real_peer_bytes",
+        "script_write_blob_preserves_exact_bytes",
+        "write_half_close_keeps_the_read_direction_and_is_idempotent",
+        "bounded_write_timeout_reports_partial_bytes_matching_peer_readback",
+        "host_write_cap_rejects_oversize_input_without_peer_bytes",
+        "engine_string_limit_rejects_write_before_peer_bytes",
+        "invalid_host_write_bounds_are_rejected",
+        "read_half_close_is_idempotent_and_keeps_stream_open_for_close",
+        "accepted_stream_writes_are_read_back_by_the_peer",
+        "accepted_stream_inherits_host_write_cap"
+      ],
+      "combined_sys_net": [
+        "sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors"
+      ]
+    },
+    "combined-unchecked": {
+      "sys_fs": [
+        "test_open_file_default_preserves_contents_and_shares_cursor",
+        "test_open_file_modes_and_exclusive_create",
+        "test_open_file_checks_grants_before_mutation_and_stays_confined",
+        "test_file_handle_read_string_advances_the_shared_cursor",
+        "test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving",
+        "test_file_handle_string_read_requires_complete_utf8",
+        "test_file_handle_read_blob_preserves_bytes_and_obeys_host_cap",
+        "test_file_handle_reads_fail_at_eof_and_on_write_only_handle",
+        "test_read_file_cases",
+        "test_read_binary",
+        "test_large_file_round_trip",
+        "test_write_append_blob",
+        "test_write_into_missing_parent",
+        "test_predicates_and_metadata",
+        "test_read_dir_cases",
+        "test_create_dir_cases",
+        "test_remove_cases",
+        "test_rename_and_copy",
+        "test_unicode_names",
+        "test_unrestricted_round_trip",
+        "test_unrestricted_symlinks_follow_host_semantics",
+        "test_unrestricted_symlink_then_parent_uses_host_resolution",
+        "test_unrestricted_relative_paths_after_cwd_is_unlinked",
+        "test_wrong_entry_kind",
+        "test_metadata_symlink_and_readonly",
+        "test_non_utf8_file_name",
+        "test_rename_overwrite_and_directory",
+        "test_path_spellings",
+        "test_deep_tree_and_many_entries",
+        "test_unrestricted_relative_paths",
+        "test_unrestricted_missing_parents",
+        "test_empty_and_mixed_writes"
+      ],
+      "sys_policy": [
+        "test_default_config_denies_fs",
+        "test_read_only_root",
+        "test_remove_dir_all_needs_delete_access",
+        "test_parent_traversal_is_denied",
+        "test_symlink_escape_is_denied",
+        "test_absolute_paths",
+        "test_multiple_roots",
+        "test_env_allow_list",
+        "test_unrestricted_respects_access_level",
+        "test_missing_root_fails_early",
+        "test_errors_are_catchable",
+        "test_plain_engine_has_no_sys_functions",
+        "test_host_can_downcast",
+        "test_nested_roots_longest_prefix",
+        "test_root_with_dot_components",
+        "test_symlinked_root",
+        "test_absolute_path_through_symlinked_root_ancestor",
+        "test_root_accepts_macos_system_prefix_aliases",
+        "test_nested_roots_keep_permissions_through_system_prefix_aliases",
+        "test_configured_root_symlink_then_parent_uses_os_resolution",
+        "test_absolute_path_with_parent_components",
+        "test_copy_across_roots",
+        "test_config_builder",
+        "test_static_module_and_sharing",
+        "test_error_position",
+        "test_error_variants"
+      ],
+      "net_connect": [
+        "authorized_connect_is_observed_and_clone_close_is_shared",
+        "denied_and_invalid_endpoints_do_not_reach_peer_and_errors_are_catchable",
+        "net_config_rejects_zero_deadline_and_invalid_handle_limits",
+        "open_handle_limit_is_shared_across_package_engines_and_released_on_close"
+      ],
+      "net_listen": [
+        "authorized_listener_accepts_an_independent_peer",
+        "denied_and_invalid_listener_endpoints_never_bind",
+        "bind_failure_releases_listener_quota",
+        "no_client_accept_times_out_with_catchable_net_error",
+        "quota_retry_deadline_expires_under_a_real_saturated_handle_limit",
+        "listener_clones_share_close_and_final_drop_releases_the_bind",
+        "accepted_stream_uses_the_shared_package_quota_across_engines"
+      ],
+      "net_reads": [
+        "stream_read_string_returns_exact_lossy_text_from_peer_bytes",
+        "one_shot_text_read_replaces_a_utf8_character_cut_by_the_available_prefix",
+        "one_shot_read_returns_an_available_short_prefix_without_waiting_for_more",
+        "blob_reads_validate_lengths_return_exact_short_prefix_and_obey_host_cap",
+        "no_data_read_times_out_and_bounded_eof_loop_reports_partial_progress",
+        "unchecked_mode_keeps_the_host_receive_cap",
+        "accepted_stream_inherits_host_receive_cap"
+      ],
+      "net_writes": [
+        "script_writes_string_and_write_all_report_real_peer_bytes",
+        "script_write_blob_preserves_exact_bytes",
+        "write_half_close_keeps_the_read_direction_and_is_idempotent",
+        "bounded_write_timeout_reports_partial_bytes_matching_peer_readback",
+        "host_write_cap_rejects_oversize_input_without_peer_bytes",
+        "invalid_host_write_bounds_are_rejected",
+        "read_half_close_is_idempotent_and_keeps_stream_open_for_close",
+        "accepted_stream_writes_are_read_back_by_the_peer",
+        "accepted_stream_inherits_host_write_cap"
+      ],
+      "combined_sys_net": [
+        "sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors"
+      ]
+    },
+    "combined-no-index-sync-metadata": {
+      "sys_fs": [
+        "test_open_file_default_preserves_contents_and_shares_cursor",
+        "test_open_file_modes_and_exclusive_create",
+        "test_open_file_checks_grants_before_mutation_and_stays_confined",
+        "test_file_handle_read_string_advances_the_shared_cursor",
+        "test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving",
+        "test_file_handle_string_read_requires_complete_utf8",
+        "test_file_handle_read_respects_engine_limit_below_host_cap",
+        "test_file_handle_reads_fail_at_eof_and_on_write_only_handle",
+        "test_file_handle_blob_read_is_omitted_under_no_index",
+        "test_read_file_cases",
+        "test_write_into_missing_parent",
+        "test_predicates_and_metadata",
+        "test_create_dir_cases",
+        "test_remove_cases",
+        "test_rename_and_copy",
+        "test_unrestricted_symlinks_follow_host_semantics",
+        "test_unrestricted_symlink_then_parent_uses_host_resolution",
+        "test_unrestricted_relative_paths_after_cwd_is_unlinked",
+        "test_wrong_entry_kind",
+        "test_metadata_symlink_and_readonly",
+        "test_rename_overwrite_and_directory",
+        "test_path_spellings",
+        "test_unrestricted_relative_paths",
+        "test_unrestricted_missing_parents"
+      ],
+      "sys_policy": [
+        "test_default_config_denies_fs",
+        "test_read_only_root",
+        "test_remove_dir_all_needs_delete_access",
+        "test_parent_traversal_is_denied",
+        "test_symlink_escape_is_denied",
+        "test_absolute_paths",
+        "test_multiple_roots",
+        "test_env_allow_list",
+        "test_unrestricted_respects_access_level",
+        "test_missing_root_fails_early",
+        "test_errors_are_catchable",
+        "test_plain_engine_has_no_sys_functions",
+        "test_host_can_downcast",
+        "test_nested_roots_longest_prefix",
+        "test_root_with_dot_components",
+        "test_symlinked_root",
+        "test_absolute_path_through_symlinked_root_ancestor",
+        "test_root_accepts_macos_system_prefix_aliases",
+        "test_nested_roots_keep_permissions_through_system_prefix_aliases",
+        "test_configured_root_symlink_then_parent_uses_os_resolution",
+        "test_absolute_path_with_parent_components",
+        "test_copy_across_roots",
+        "test_config_builder",
+        "test_static_module_and_sharing",
+        "test_error_position",
+        "test_error_variants",
+        "test_sync_threads",
+        "test_function_metadata"
+      ],
+      "net_connect": [
+        "authorized_connect_is_observed_and_clone_close_is_shared",
+        "denied_and_invalid_endpoints_do_not_reach_peer_and_errors_are_catchable",
+        "net_config_rejects_zero_deadline_and_invalid_handle_limits",
+        "open_handle_limit_is_shared_across_package_engines_and_released_on_close"
+      ],
+      "net_listen": [
+        "authorized_listener_accepts_an_independent_peer",
+        "denied_and_invalid_listener_endpoints_never_bind",
+        "bind_failure_releases_listener_quota",
+        "no_client_accept_times_out_with_catchable_net_error",
+        "quota_retry_deadline_expires_under_a_real_saturated_handle_limit",
+        "closing_a_clone_unblocks_an_accept_waiting_on_shared_quota",
+        "listener_clones_share_close_and_final_drop_releases_the_bind",
+        "accepted_stream_uses_the_shared_package_quota_across_engines"
+      ],
+      "net_reads": [
+        "stream_read_string_returns_exact_lossy_text_from_peer_bytes",
+        "one_shot_text_read_replaces_a_utf8_character_cut_by_the_available_prefix",
+        "one_shot_read_returns_an_available_short_prefix_without_waiting_for_more",
+        "no_data_read_times_out_and_bounded_eof_loop_reports_partial_progress",
+        "engine_string_limit_keeps_ascii_and_reports_lossy_expansion_progress",
+        "accepted_stream_inherits_host_receive_cap",
+        "no_index_keeps_string_reads_and_omits_blob_methods",
+        "closing_a_clone_cancels_an_outstanding_read_and_releases_quota"
+      ],
+      "net_writes": [
+        "script_writes_string_and_write_all_report_real_peer_bytes",
+        "no_index_keeps_string_writes_and_omits_blob_writes",
+        "write_half_close_keeps_the_read_direction_and_is_idempotent",
+        "bounded_write_timeout_reports_partial_bytes_matching_peer_readback",
+        "host_write_cap_rejects_oversize_input_without_peer_bytes",
+        "engine_string_limit_rejects_write_before_peer_bytes",
+        "invalid_host_write_bounds_are_rejected",
+        "read_half_close_is_idempotent_and_keeps_stream_open_for_close",
+        "accepted_stream_writes_are_read_back_by_the_peer",
+        "accepted_stream_inherits_host_write_cap"
+      ],
+      "combined_sys_net": [
+        "sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors"
+      ],
+      "net_metadata": [
+        "metadata_exposes_the_documented_tcp_surface"
+      ]
+    },
+    "combined-f32": {
+      "sys_fs": [
+        "test_open_file_default_preserves_contents_and_shares_cursor",
+        "test_open_file_modes_and_exclusive_create",
+        "test_open_file_checks_grants_before_mutation_and_stays_confined",
+        "test_file_handle_read_string_advances_the_shared_cursor",
+        "test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving",
+        "test_file_handle_string_read_requires_complete_utf8",
+        "test_file_handle_read_respects_engine_limit_below_host_cap",
+        "test_file_handle_read_blob_preserves_bytes_and_obeys_host_cap",
+        "test_file_handle_reads_fail_at_eof_and_on_write_only_handle",
+        "test_file_handle_blob_read_respects_engine_array_limit",
+        "test_read_file_cases",
+        "test_read_binary",
+        "test_large_file_round_trip",
+        "test_write_append_blob",
+        "test_write_into_missing_parent",
+        "test_predicates_and_metadata",
+        "test_read_dir_cases",
+        "test_create_dir_cases",
+        "test_remove_cases",
+        "test_rename_and_copy",
+        "test_unicode_names",
+        "test_unrestricted_round_trip",
+        "test_unrestricted_symlinks_follow_host_semantics",
+        "test_unrestricted_symlink_then_parent_uses_host_resolution",
+        "test_unrestricted_relative_paths_after_cwd_is_unlinked",
+        "test_wrong_entry_kind",
+        "test_metadata_symlink_and_readonly",
+        "test_non_utf8_file_name",
+        "test_rename_overwrite_and_directory",
+        "test_path_spellings",
+        "test_deep_tree_and_many_entries",
+        "test_unrestricted_relative_paths",
+        "test_unrestricted_missing_parents",
+        "test_empty_and_mixed_writes"
+      ],
+      "sys_policy": [
+        "test_default_config_denies_fs",
+        "test_read_only_root",
+        "test_remove_dir_all_needs_delete_access",
+        "test_parent_traversal_is_denied",
+        "test_symlink_escape_is_denied",
+        "test_absolute_paths",
+        "test_multiple_roots",
+        "test_env_allow_list",
+        "test_unrestricted_respects_access_level",
+        "test_missing_root_fails_early",
+        "test_errors_are_catchable",
+        "test_plain_engine_has_no_sys_functions",
+        "test_host_can_downcast",
+        "test_nested_roots_longest_prefix",
+        "test_root_with_dot_components",
+        "test_symlinked_root",
+        "test_absolute_path_through_symlinked_root_ancestor",
+        "test_root_accepts_macos_system_prefix_aliases",
+        "test_nested_roots_keep_permissions_through_system_prefix_aliases",
+        "test_configured_root_symlink_then_parent_uses_os_resolution",
+        "test_absolute_path_with_parent_components",
+        "test_copy_across_roots",
+        "test_config_builder",
+        "test_static_module_and_sharing",
+        "test_error_position",
+        "test_error_variants"
+      ],
+      "net_connect": [
+        "authorized_connect_is_observed_and_clone_close_is_shared",
+        "denied_and_invalid_endpoints_do_not_reach_peer_and_errors_are_catchable",
+        "net_config_rejects_zero_deadline_and_invalid_handle_limits",
+        "open_handle_limit_is_shared_across_package_engines_and_released_on_close"
+      ],
+      "net_listen": [
+        "authorized_listener_accepts_an_independent_peer",
+        "denied_and_invalid_listener_endpoints_never_bind",
+        "bind_failure_releases_listener_quota",
+        "no_client_accept_times_out_with_catchable_net_error",
+        "quota_retry_deadline_expires_under_a_real_saturated_handle_limit",
+        "listener_clones_share_close_and_final_drop_releases_the_bind",
+        "accepted_stream_uses_the_shared_package_quota_across_engines"
+      ],
+      "net_reads": [
+        "stream_read_string_returns_exact_lossy_text_from_peer_bytes",
+        "one_shot_text_read_replaces_a_utf8_character_cut_by_the_available_prefix",
+        "one_shot_read_returns_an_available_short_prefix_without_waiting_for_more",
+        "f32_float_timeout_arguments_reject_fractional_and_non_finite_values",
+        "blob_reads_validate_lengths_return_exact_short_prefix_and_obey_host_cap",
+        "no_data_read_times_out_and_bounded_eof_loop_reports_partial_progress",
+        "engine_string_limit_keeps_ascii_and_reports_lossy_expansion_progress",
+        "accepted_stream_inherits_host_receive_cap"
+      ],
+      "net_writes": [
+        "script_writes_string_and_write_all_report_real_peer_bytes",
+        "script_write_blob_preserves_exact_bytes",
+        "write_half_close_keeps_the_read_direction_and_is_idempotent",
+        "bounded_write_timeout_reports_partial_bytes_matching_peer_readback",
+        "host_write_cap_rejects_oversize_input_without_peer_bytes",
+        "engine_string_limit_rejects_write_before_peer_bytes",
+        "invalid_host_write_bounds_are_rejected",
+        "read_half_close_is_idempotent_and_keeps_stream_open_for_close",
+        "accepted_stream_writes_are_read_back_by_the_peer",
+        "accepted_stream_inherits_host_write_cap"
+      ],
+      "combined_sys_net": [
+        "sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors"
+      ]
+    }
+  },
+  "F3_configured_root_policy_mismatch": {
+    "central_fixture": "/Users/hoppworks/.local/share/agent-builds/rhai/owned/runtime/tmp/rhai-sys-test-owned",
+    "configured_root": "/Users/hoppworks/.local/share/agent-builds/rhai/owned/runtime/tmp/rhai-sys-test-owned/link",
+    "canonical_root": "/Users/hoppworks/.local/share/agent-builds/rhai/owned/runtime/tmp/rhai-sys-test-owned/real",
+    "absolute_reads": [
+      "/var/../../Users/hoppworks/.local/share/agent-builds/rhai/owned/runtime/tmp/rhai-sys-test-owned/real/a.txt",
+      "/private/var/../../Users/hoppworks/.local/share/agent-builds/rhai/owned/runtime/tmp/rhai-sys-test-owned/real/a.txt"
+    ],
+    "possible_root_aliases": [
+      "/Users/hoppworks/.local/share/agent-builds/rhai/owned/runtime/tmp/rhai-sys-test-owned/link",
+      "/Users/hoppworks/.local/share/agent-builds/rhai/owned/runtime/tmp/rhai-sys-test-owned/real"
+    ],
+    "matches_configured_root": false,
+    "source_dependency": "src/packages/sys/fs.rs:179-200,245-267",
+    "scope": "lexical source model only; no OS canonicalization or native Engine executed"
+  }
+}

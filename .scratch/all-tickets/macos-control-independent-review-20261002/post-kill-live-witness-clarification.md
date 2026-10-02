@@ -1,0 +1,17 @@
+# Post-KILL live-fixture witness clarification
+
+**The candidate closes the reproduced whole-process-exit race, but does not close original finding4 under the unchanged active-capture acceptance.** An independently fresh, genuinely LIVE (not zombie), same PID/start observation after exact unreaped-host KILL submission proves that the fixture had not exited before that submission. Require full identity, executable/topology binding and fail-closed lookup; absence, reuse, zombie or unknown state cannot pass. This is useful retrospective evidence, but process lifetime does not imply writer or capture activity.
+
+A remaining false-accept schedule follows the frozen source:
+
+1. Both real streams have positive read counters and the pre-action task/census receipt passes while writers are active.
+2. Before host KILL, the host drains the remaining output. Both finite writers complete `write_all` and `flush`, and return. The fixture process remains LIVE: its fixture thread is descheduled before finishing stdin/readback/join/exit, or is about to run its joins and `process::exit`. Its libtest main also remains present. The companion has not yet written its final completion marker.
+3. Submit exact host KILL; independently observe the same fixture PID/start LIVE before its fixture thread resumes. Retain the earlier counters and task receipt. Later the fixture resumes/exits, and final passive candidate/group absence succeeds.
+
+Every proposed witness passes, but both streams were idle/completed at injection. Even one writer completing is enough to violate the two-active-stream condition. Fresh pre-action task count cannot cover subsequent thread completion; adding only a post-action process-LIVE witness supplies no monotonic writer-state property. Positive counters are historical: the private observer deliberately publishes once. The fixture record can remain `child-ready=1` if the fixture thread has not yet run its stdin/record-update path, while its two independent writers have already returned.
+
+This conclusion uses immutable `b1e05e0f80b62f7a16dfe356da35fda184f0e144` adapter observation/action/finalization and observer/companion source, original `test_managed_action_boundary.py`, frozen `00bed4a0dfeb103ff209ba4c76dac7ae797b7c56:tests/sys_process.rs` lines75–102, and Expert09 acceptance lines60/64. The original regression models whole-fixture exit before KILL; the candidate rejects that narrow interleaving. The schedule above is a different interleaving within the same finding and unchanged acceptance, not a new cause or escalation.
+
+Do not accept this witness alone as source readiness. Retain it if useful, but require supported evidence preserving or establishing both streams' active precondition at injection; do not infer it from LIVE process plus stale positive counters, aggregate prior task count, an unsupported pipe-state bit, or a guessed pipe-capacity bound. No native result is required before preparing such source logic; eventual native controls must still prove the real outcome.
+
+Current rules confirmed at safe start: all previously loaded instruction hashes unchanged, agent-skills revision `958a4538b0191c53f2ccb2cd00d96c15045fbf68`. Source-only reading and this clarification file are the only actions. No source mutation, implementation, native API, control, Cargo, fixture or measurement execution. One-attempt controls, count84, unlaunched85, guardfalse, cause09/Expert09 history and all caps remain unchanged.

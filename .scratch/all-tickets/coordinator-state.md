@@ -906,11 +906,24 @@ Investigate stopped exact host's actual two read descriptors, peer binding, no
 other readers, interrupted-write stale bits and source applicability before code.
 Owner concludes pipe-state candidate unsupported: SDK lacks live/atomic peer
 semantics, unmatched kernel source and interrupted-write stale bit remain gaps.
-No code/native changes. Existing independent finite-control reviewer now performs
-a narrow affected contract clarification: would independent same PID/start LIVE
-fixture after exact host KILL reject the known pre-action exit schedule while
-preserving both-stream-active criteria? A remaining writer-complete schedule must
-be identified honestly; no capacity claim, new Expert09 chain or native dispatch.
+No code/native changes. SAME affected reviewer clarified original contract: blocked writer syscalls are
+not required when both real capture streams have positive reads and strictly
+uncollected output at confirmed host STOP. Post-KILL fresh same PID/start LIVE
+fixture rejects pre-action whole-process exit, but alone cannot fix stale counters.
+Current b1e05 observer publishes once then repeated reads occur;64KiB is only
+one read budget, not an upper bound on all unpublished reads. Both original
+clarifications retained once in macos-control-independent-review-20261002/.
+Root resumes same owner with concrete source-supported correction: atomic paired
+identity/helper-bound publication after every bounded read/per-iteration, at most
+one unpublished64KiB quantum per stream, conservative upper totals strictly below
+both frozen payload lower bounds8388592/8388608 at exact confirmed host STOP,
+then exact owned-host KILL and independent samefixture LIVE after submission.
+Unknown/zombie/reused/absent or raced completion fails the one-attempt control.
+No writer-blockage/pipe-capacity claim; unchanged fixture/timer. Original source
+REDs for stale repetition/STOP publication boundary/completed stream/action race,
+publication failures and postaction identity required; source-only freeze/recheck.
+This preserves one failed finding4 correction/cause09/native totals; concrete new
+insight justifies continuation at same30min active planning checkpoint, not reset.
 No native API/control/build launch authorized by this source investigation;
 no capacity inference/fixture mutation/new Expert09 chain/history reset.
 Guardfalse; allocation85 unlaunched. Thirty-minute active-work planning checkpoint
@@ -926,9 +939,16 @@ No live GET/no retry. Selective tools extraction has not yet been submitted. Roo
 ancestors-line/result originals: cancelled draft extraction line, eight existing
 ancestors through C:\ all Directory/no ReparsePoint/no errors, terminal prompt.
 Two exact digest-checked frames and narrow ancestry readback retained once at
-windows-staging-9e0-root-evidence/; extraction remains pending guarded rooted/upward
-entries and no overwrite.
-Then17pins/PS5.1 parser/path controls/exact Roslyn readonly prerequisites;
+windows-staging-9e0-root-evidence/; extraction was submitted once. Owner reports count24 but readonly guard
+used nonexistent IO.Path.IsRooted instead of IsPathRooted; without Stop preference
+errors were nonterminating. No extraction retry/overwrite/GET/native. Classified
+as local setup/API error, not implemented native correction; owner continues
+readonly exact archive member/tree safety, expected24 names/digests/17C#pins, new
+destination ancestor reparse checks, correct rooted/upward/resolved-prefix guards
+with ErrorActionPreference=Stop; actual unsafe/outside write or ownership doubt
+must stop and be reported. Terminal originals/root readback pending, so extraction
+not accepted from count alone.
+Then PS5.1 parser/path controls/exact Roslyn readonly prerequisites;
 no compiler/bootstrap/job/client/fixture/native before root prerequisite readback.
 Older5fe4 GET history and Expert02/nonrenewable client30min/source-fixture1h,
 setup120/closure30/finalization30 and actual resources remain binding.
@@ -954,13 +974,25 @@ Owner source-only checkpoint reports seven pure categories GREEN: named inventor
 with specific F19 uncovered, status0 incomplete coverage retains per-test outcomes
 and continues later rows but overall fails; cleanup tri-state/PIDstart/groups
 and sampled descendant identity retention. Helper/provenance correction frozen8b9740de8e4493c78320293d3a07599672f22484,
-clean owner checkout. SAME combined independent reviewer actively rechecks F1–F4
-and changed alias/provenance dependencies, original injected regressions preserved.
+clean owner checkout. SAME combined independent reviewer rechecks F1–F4; live checkpoint reports F1/F2
+materially addressed, two remaining blockers: stdout-then-stderr parser orders
+summary before Cargo target headers and raises, and first corrected alias test
+keeps ordinary /Users Engine root so static policy denies /var spelling. Affected
+report/revision/12originals retained once at current-darwin-sys-net-source-review/
+affected-8b974/. Same owner resumed one consolidated F3/F4 source-only correction:
+configure/read SAME prefix-root directory; exact stderr header sequence paired
+with successive stdout libtest blocks in honestly derived target order (or equally
+reliable bounded method), real split-stream multi-target RED and alias policy
+regression required. Freeze corrected macOS test source before new archive/helper
+provenance; no Cargo/native. First failed implemented correction for F3/F4,
+not a reset of initial review history. No broad redo; consolidate next fix batch
+after terminal report. Original injected regressions and valid F1/F2 preserved.
 No source integration/native acceptance before this affected checkpoint.
 No native/build/toolchain/control/measurement dispatch; affected combined recheck
 at frozen repair required. Genuine EILSEQ early return remains uncovered.
 
-Current root/fork main863ec1ec322d8e69b5aa45a9f5f51f0db0c0b97c was pushed and
+Last independently read-back fork maine425b87cd30cecb466e78b2871759a0bf3c8d67a
+was pushed and
 independently read back as sole remote main. Lowercase human attribution;
 no upstream writes. Root loaded958a4538 disk globals/project/campaign, unchanged;
 active owners confirmed same revision previously, no descendants.
@@ -970,6 +1002,7 @@ consolidated repair verified live; unsupported pipe-capacity route rejected and
 concrete SDK/public-source pipe-state alternative sent to existing responsible
 owner. Windows handle verified live, transfer acceptance unchanged. Linux nine
 non-process rows/601 accepted at unchanged inputs. Goal remains active.
-Next: collect immutable Darwin correction and affected recheck; finish Windows
+Next: complete source-supported per-read capture bound/post-KILL-live fix;
+collect next immutable Darwin F3/F4 correction and SAME affected recheck; finish Windows
 extraction/pins/parser/path/Roslyn readback; source-only decide pipe-state witness
 without manufacturing native or completed custody acceptance.

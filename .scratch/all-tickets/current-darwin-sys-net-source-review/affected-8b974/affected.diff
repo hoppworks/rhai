@@ -1,0 +1,786 @@
+diff --git a/.scratch/all-tickets/check-current-darwin-sys-net-behavior.py b/.scratch/all-tickets/check-current-darwin-sys-net-behavior.py
+index d4bae34f..78e4c883 100644
+--- a/.scratch/all-tickets/check-current-darwin-sys-net-behavior.py
++++ b/.scratch/all-tickets/check-current-darwin-sys-net-behavior.py
+@@ -15,8 +15,8 @@ import tarfile
+ import time
+ import traceback
+ 
+-SOURCE_REVISION = 'a2d7a8c2ace21e63c18b2e64cdce74e5e10afc94'
+-SOURCE_ARCHIVE_SHA256 = '551c03dbe3f4550db1b144b3e65d83f5bc66c132c1a9cffa59c83fce16bc41e1'
++SOURCE_REVISION = '50af89515fa2094c9c10bf03e98b89f00291c57f'
++SOURCE_ARCHIVE_SHA256 = '12f66ac017d8c54e95f7bf38a9319f1e379446168bd9d102a9ff7b52dbe5327a'
+ LOCK_SHA256 = '2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425'
+ RUSTUP = Path.home() / '.cargo/bin/rustup'
+ TOOLCHAIN = '1.77.2-aarch64-apple-darwin'
+@@ -100,6 +100,7 @@ COMMANDS: list[dict[str, object]] = []
+ POSITIVE_RESULTS: list[dict[str, object]] = []
+ CONTROL_RESULTS: list[dict[str, object]] = []
+ MANIFEST_HASHES: dict[str, str] = {}
++RECORDED_PIDS: set[int] = set()
+ ACTIVE_CHILD: subprocess.Popen[bytes] | None = None
+ INTERRUPTED: int | None = None
+ 
+@@ -142,12 +143,12 @@ def process_identity(pid: int) -> tuple[int, int, int, str] | None:
+     try:
+         result = subprocess.run(['/bin/ps', '-p', str(pid), '-o', 'ppid=,pgid=,lstart=,command='],
+                                 capture_output=True, text=True, check=True, timeout=5)
+-        fields = result.stdout.strip().split(None, 6)
+-        if len(fields) != 7:
++        fields = result.stdout.strip().split(None, 7)
++        if len(fields) != 8:
+             return None
+         ppid, pgid = int(fields[0]), int(fields[1])
+-        start = ' '.join(fields[2:6])
+-        command = fields[6]
++        start = ' '.join(fields[2:7])
++        command = fields[7]
+         start_digest = int(hashlib.sha256(start.encode()).hexdigest()[:12], 16)
+         return ppid, pgid, start_digest, command
+     except (OSError, subprocess.SubprocessError, IndexError, ValueError):
+@@ -161,6 +162,7 @@ def record_process_identity(label: str, pid: int, identity: tuple[int, int, int,
+             stream.write(f'{label}\t{pid}\t<identity-unavailable>\n')
+         return
+     ppid, pgid, start_ticks, command = identity
++    RECORDED_PIDS.add(pid)
+     with path.open('a', encoding='utf-8') as stream:
+         stream.write(f'{label}\t{pid}\t{ppid}\t{pgid}\t{start_ticks}\t{command}\n')
+ 
+@@ -258,6 +260,12 @@ def sample_resources() -> None:
+         if not children:
+             break
+         owned.update(children)
++    for pid in sorted(owned):
++        if pid not in RECORDED_PIDS:
++            identity = process_identity(pid)
++            if identity is None:
++                raise RuntimeError(f'cannot record exact identity for owned descendant {pid}')
++            record_process_identity('sampled-descendant', pid, identity)
+     rss = sum(processes[pid][1] for pid in owned)
+     descendants = len(owned) - 1
+     current = {'monotonic_seconds': round(time.monotonic() - START, 3),
+@@ -316,6 +324,8 @@ def run_command(name: str, argv: list[str], env: dict[str, str], *,
+         ACTIVE_CHILD = child
+         record_process(name, child.pid)
+         try:
++            if child.pid not in RECORDED_PIDS:
++                raise RuntimeError(f'cannot record exact identity for command process {child.pid}')
+             while child.poll() is None:
+                 check_deadline()
+                 now = time.monotonic()
+@@ -382,19 +392,82 @@ def classify_assertion_control(status: int, output: str, target: str, test_name:
+     }
+ 
+ 
+-def positive_test_coverage(output: str, targets: tuple[str, ...]) -> dict[str, object]:
+-    """Require every selected integration binary to execute all tests successfully."""
++def _cfg_enabled(expression: str, features: set[str]) -> bool:
++    expression = expression.strip()
++    if expression.startswith('not(') and expression.endswith(')'):
++        return not _cfg_enabled(expression[4:-1], features)
++    for operator in ('all(', 'any('):
++        if expression.startswith(operator) and expression.endswith(')'):
++            inner = expression[len(operator):-1]
++            parts, depth, begin = [], 0, 0
++            for index, char in enumerate(inner):
++                if char == '(':
++                    depth += 1
++                elif char == ')':
++                    depth -= 1
++                elif char == ',' and depth == 0:
++                    parts.append(inner[begin:index]); begin = index + 1
++            parts.append(inner[begin:])
++            values = [_cfg_enabled(part, features) for part in parts]
++            return all(values) if operator == 'all(' else any(values)
++    if expression == 'unix' or expression == 'target_os = "macos"':
++        return True
++    if expression in ('windows', 'target_os = "linux"'):
++        return False
++    if expression.startswith('feature = '):
++        return expression.split('"')[1] in features
++    raise ValueError(f'unsupported cfg expression in frozen test inventory: {expression}')
++
++
++def frozen_test_inventory(source: Path, features: str) -> dict[str, list[str]]:
++    """Read exact active #[test] function names from frozen integration sources."""
++    import re
++
++    feature_set = set(features.split(','))
++    inventory: dict[str, list[str]] = {}
++    for path in sorted((source / 'tests').glob('*.rs')):
++        target = path.stem
++        text = path.read_text(encoding='utf-8')
++        names: list[str] = []
++        pending_cfg: list[str] = []
++        lines = text.splitlines()
++        for index, line in enumerate(lines):
++            cfg = re.match(r'^\s*#\[cfg\((.*)\)\]\s*$', line)
++            if cfg:
++                pending_cfg.append(cfg.group(1))
++                continue
++            if re.match(r'^\s*#\[test\]\s*$', line):
++                function = next((re.match(r'^\s*fn\s+([A-Za-z0-9_]+)\s*\(', following)
++                                 for following in lines[index + 1:] if following.strip()), None)
++                if function and all(_cfg_enabled(item, feature_set) for item in pending_cfg):
++                    names.append(function.group(1))
++                pending_cfg = []
++                continue
++            if line.strip() and not line.lstrip().startswith('//'):
++                pending_cfg = []
++        if names:
++            inventory[target] = names
++    return inventory
++
++
++def positive_test_coverage(output: str, targets: tuple[str, ...],
++                           expected_tests: dict[str, list[str]]) -> dict[str, object]:
++    """Require each frozen named test and exactly one complete summary per target."""
+     import re
+ 
+     running = re.compile(r'^\s*Running tests/([A-Za-z0-9_]+)\.rs(?:\s|$)', re.MULTILINE)
+     result = re.compile(
+-        r'^test result: ok\. (\d+) passed; (\d+) failed; (\d+) ignored; '
++        r'^test result: (?:ok|FAILED)\. (\d+) passed; (\d+) failed; (\d+) ignored; '
+         r'(\d+) measured; (\d+) filtered out;', re.MULTILINE)
+     lines = output.splitlines()
+     ignored_tests: list[str] = []
+     observed_targets: list[str] = []
+     summaries: dict[str, list[dict[str, int]]] = {}
++    observed_tests: dict[str, list[str]] = {}
++    test_outcomes: dict[str, dict[str, str]] = {}
++    skipped_tests: list[dict[str, str]] = []
+     current: str | None = None
++    pending_test: str | None = None
+     for line in lines:
+         ignored = re.match(r'^test ([A-Za-z0-9_]+) \.\.\. ignored(?:,.*)?$', line)
+         if ignored:
+@@ -403,6 +476,28 @@ def positive_test_coverage(output: str, targets: tuple[str, ...]) -> dict[str, o
+         if match:
+             current = match.group(1)
+             observed_targets.append(current)
++            observed_tests[current] = []
++            test_outcomes[current] = {}
++        test_line = re.match(r'^test ([A-Za-z0-9_]+) \.\.\. (.*)$', line)
++        if current is not None and test_line:
++            test_name, result_text = test_line.groups()
++            pending_test = test_name
++            if test_name in observed_tests[current]:
++                observed_tests[current].append(test_name + '#duplicate')
++            else:
++                observed_tests[current].append(test_name)
++            outcome = re.search(r'\b(ok|ignored(?:,.*)?|FAILED)\s*$', result_text)
++            if outcome:
++                test_outcomes[current][test_name] = outcome.group(1).split(',')[0]
++                pending_test = None
++            if 'filesystem rejects non-UTF-8 fixture with EILSEQ:' in result_text:
++                skipped_tests.append({'target': current, 'test': test_name,
++                                      'reason': 'Darwin EILSEQ rejected non-UTF-8 fixture; assertion returned early'})
++        elif current is not None and pending_test is not None:
++            outcome = re.match(r'^\s*(ok|ignored(?:,.*)?|FAILED)\s*$', line)
++            if outcome:
++                test_outcomes[current][pending_test] = outcome.group(1).split(',')[0]
++                pending_test = None
+         match = result.match(line)
+         if match:
+             if current is None:
+@@ -414,15 +509,40 @@ def positive_test_coverage(output: str, targets: tuple[str, ...]) -> dict[str, o
+             })
+     exact_targets = (len(observed_targets) == len(targets)
+                      and set(observed_targets) == set(targets))
+-    final_rows = [{'target': target, **summaries[target][-1]}
++    final_rows = [{'target': target, **summaries[target][0],
++                   'summary_count': len(summaries[target]),
++                   'expected_tests': expected_tests.get(target, []),
++                   'observed_tests': observed_tests.get(target, []),
++                   'test_outcomes': test_outcomes.get(target, {})}
+                   for target in targets if target in summaries]
+-    all_executed = len(final_rows) == len(targets) and all(
+-        row['passed'] > 0 and row['failed'] == 0 and row['ignored'] == 0
++    for target in targets:
++        if 'filesystem rejects non-UTF-8 fixture with EILSEQ:' in output and \
++                'test_non_utf8_file_name' in expected_tests.get(target, []):
++            if not any(item['target'] == target and item['test'] == 'test_non_utf8_file_name'
++                       for item in skipped_tests):
++                skipped_tests.append({'target': target, 'test': 'test_non_utf8_file_name',
++                                      'reason': 'Darwin EILSEQ rejected non-UTF-8 fixture; assertion returned early'})
++    named_complete = len(final_rows) == len(targets) and all(
++        row['summary_count'] == 1 and row['expected_tests']
++        and sorted(row['observed_tests']) == sorted(row['expected_tests'])
++        for row in final_rows)
++    for row in final_rows:
++        skipped_names = {item['test'] for item in skipped_tests if item['target'] == row['target']}
++        row['completed_named_tests'] = sorted(
++            name for name in row['expected_tests']
++            if row['test_outcomes'].get(name) == 'ok' and name not in skipped_names)
++        row['uncovered_named_tests'] = sorted(set(row['expected_tests']) -
++                                              set(row['completed_named_tests']))
++    named_complete = named_complete and all(
++        len(row['completed_named_tests']) == len(row['expected_tests']) for row in final_rows)
++    all_executed = named_complete and not skipped_tests and all(
++        row['passed'] == len(row['completed_named_tests']) and row['failed'] == 0 and row['ignored'] == 0
+         and row['measured'] == 0 and row['filtered_out'] == 0 for row in final_rows)
+     return {'target_results': final_rows, 'expected_targets': list(targets),
+             'all_selected_targets_ran_once': exact_targets,
+             'all_tests_passed_without_ignored_or_filtered': all_executed,
+-            'ignored_tests': ignored_tests,
++            'ignored_tests': ignored_tests, 'skipped_tests': skipped_tests,
++            'named_test_coverage_found': named_complete,
+             'coverage_found': exact_targets and all_executed}
+ 
+ 
+@@ -481,12 +601,15 @@ def export_evidence() -> None:
+     write_json(EVIDENCE / 'rows.json', {
+         'positive_rows': POSITIVE_RESULTS,
+         'positive_row_count': len(TEST_ROWS),
+-        'successful_positive_rows': sum(row.get('status') == 0 for row in POSITIVE_RESULTS),
++        'successful_positive_rows': sum(row.get('status') == 0 and row.get('coverage_found')
++                                        for row in POSITIVE_RESULTS),
+         'all_positive_rows_succeeded': len(POSITIVE_RESULTS) == len(TEST_ROWS)
+-            and all(row.get('status') == 0 for row in POSITIVE_RESULTS),
++            and all(row.get('status') == 0 and row.get('coverage_found') for row in POSITIVE_RESULTS),
+         'assertion_controls': CONTROL_RESULTS,
+         'all_assertion_controls_are_meaningful_red': len(CONTROL_RESULTS) == len(ASSERTION_CONTROLS)
+             and all(row.get('status') == 101 and row.get('diagnostic_found') for row in CONTROL_RESULTS),
++        'uncovered_positive_rows': [row.get('row') for row in POSITIVE_RESULTS
++                                    if row.get('status') != 0 or not row.get('coverage_found')],
+     })
+     write_json(EVIDENCE / 'export.json', {
+         'source_revision': SOURCE_REVISION,
+@@ -662,31 +785,44 @@ def main() -> int:
+             argv.extend(['--test', target])
+         argv.extend(['--', '--nocapture', '--test-threads=1'])
+         status = run_command('behavior-' + row_name, argv, env, expected_status=None,
+-                             cwd=SOURCE, merge_streams=True)
++                             cwd=SOURCE)
+         output = ((EVIDENCE / f'behavior-{row_name}.stdout').read_text(errors='replace') +
++                  '\n--- stderr follows stdout; raw files are preserved separately ---\n' +
+                   (EVIDENCE / f'behavior-{row_name}.stderr').read_text(errors='replace'))
+-        coverage = positive_test_coverage(output, targets)
++        (EVIDENCE / f'behavior-{row_name}.parser-input.txt').write_text(output, encoding='utf-8')
++        inventory = frozen_test_inventory(SOURCE, features)
++        expected_tests = {target: inventory.get(target, []) for target in targets}
++        coverage = positive_test_coverage(output, targets, expected_tests)
+         result = {'row': row_name, 'features': features, 'targets': list(targets),
+                   'status': status, 'argv': argv, **coverage,
+                   'stdout': f'behavior-{row_name}.stdout',
+-                  'stderr': f'behavior-{row_name}.stderr'}
++                  'stderr': f'behavior-{row_name}.stderr',
++                  'parser_input': f'behavior-{row_name}.parser-input.txt',
++                  'expected_tests': expected_tests}
+         POSITIVE_RESULTS.append(result)
+         write_json(EVIDENCE / 'positive-rows-in-progress.json', POSITIVE_RESULTS)
+         if status != 0 or not coverage['coverage_found']:
+-            raise RuntimeError(f'behavior row {row_name} expected status 0, got {status}')
++            if status != 0:
++                raise RuntimeError(f'behavior row {row_name} expected status 0, got {status}')
++            print(f'coverage_incomplete={row_name}; continuing independent rows', flush=True)
+         verify_immutable_inputs('after behavior row ' + row_name)
+     write_json(EVIDENCE / 'result.json', {
+         'all_behavior_rows_passed': len(POSITIVE_RESULTS) == len(TEST_ROWS)
+-            and all(row.get('status') == 0 for row in POSITIVE_RESULTS),
++            and all(row.get('status') == 0 and row.get('coverage_found') for row in POSITIVE_RESULTS),
+         'all_controls_are_meaningful_red': len(CONTROL_RESULTS) == len(ASSERTION_CONTROLS)
+             and all(row.get('status') == 101 and row.get('diagnostic_found') for row in CONTROL_RESULTS),
+         'positive_rows': POSITIVE_RESULTS, 'assertion_controls': CONTROL_RESULTS,
+-        'uncovered_runtime_rows': ['combined-sync', 'combined-only-i32-no-float',
+-            'combined-unchecked', 'combined-no-index-sync-metadata', 'combined-f32-float'],
+-        'acceptance_marker': 'all-controls-and-positive-runs-passed',
++        'uncovered_runtime_rows': [name for name, _, _ in TEST_ROWS
++                                   if not any(row.get('row') == name and row.get('status') == 0
++                                              and row.get('coverage_found') for row in POSITIVE_RESULTS)],
++        'acceptance_marker': ('all-controls-and-positive-runs-passed'
++            if len(POSITIVE_RESULTS) == len(TEST_ROWS)
++            and all(row.get('status') == 0 and row.get('coverage_found') for row in POSITIVE_RESULTS)
++            else 'incomplete-unaccepted'),
+     })
+     export_evidence()
+-    return 0
++    return 0 if len(POSITIVE_RESULTS) == len(TEST_ROWS) and all(
++        row.get('status') == 0 and row.get('coverage_found') for row in POSITIVE_RESULTS) else 1
+ 
+ 
+ if __name__ == '__main__':
+diff --git a/.scratch/all-tickets/current-darwin-sys-net-behavior-contract.md b/.scratch/all-tickets/current-darwin-sys-net-behavior-contract.md
+index 993e9b53..d4042496 100644
+--- a/.scratch/all-tickets/current-darwin-sys-net-behavior-contract.md
++++ b/.scratch/all-tickets/current-darwin-sys-net-behavior-contract.md
+@@ -1,22 +1,39 @@
+ # Current Darwin filesystem and TCP behavior contract
+ 
+-This is a prepared acceptance runner for the frozen production source revision
+-`a2d7a8c2ace21e63c18b2e64cdce74e5e10afc94` (archive SHA-256
+-`551c03dbe3f4550db1b144b3e65d83f5bc66c132c1a9cffa59c83fce16bc41e1`) and
++This is a prepared acceptance runner for production source revision
++`50af89515fa2094c9c10bf03e98b89f00291c57f` (archive SHA-256
++`12f66ac017d8c54e95f7bf38a9319f1e379446168bd9d102a9ff7b52dbe5327a`) and
+ compatible lock SHA-256
+ `2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425`.
+ It runs only on native Darwin arm64 with private Rust 1.77.2. Its nine behavior
+ rows exercise filesystem access, policy metadata, TCP connect/listen/read/write,
+ and combined sys/net use through the public Engine plus real OS resources. The
+ five assertion controls must fail for their intended incorrect expectation;
+-then the unchanged inputs must pass all nine behavior rows. Every Cargo command
+-retains separate stdout, stderr, status, command metadata, and exact target/test
+-coverage in exported receipts.
++then the unchanged inputs must pass all nine behavior rows.
++
++Every Cargo command retains original separate stdout and stderr files, status,
++command metadata, and exact target/test coverage in exported receipts. Each row
++also preserves a deterministic parser input consisting of stdout followed by
++stderr with an explicit boundary. It is not described as a chronological merged
++stream. The expected test names are derived from active `#[test]` functions in
++the frozen sources under the row's feature set and Darwin target cfg, then
++compared exactly with names reported by libtest. Each target must have exactly
++one result summary.
+ 
+ The runner rejects ignored, measured, filtered, missing, repeated, or failed
+-test coverage. In particular, a Darwin EILSEQ/non-UTF8 fixture skip is listed
+-under `ignored_tests` and leaves its row unaccepted. It must be explicitly
+-reported as uncovered; a successful Cargo exit alone is insufficient.
++test coverage. It also recognizes the actual
++`filesystem rejects non-UTF-8 fixture with EILSEQ:` early-return diagnostic
++emitted by the frozen filesystem test. The test prints that diagnostic and
++returns normally, so libtest can report it as passed with zero ignored tests.
++The runner records that named test as skipped and leaves the row unaccepted; a
++successful Cargo exit alone is insufficient.
++
++The two macOS system-prefix policy tests use distinct
++`/var/../../...` and `/private/var/../../...` spellings that independently
++canonicalize to the existing owned fixture beneath the central runtime. They
++fail before Engine construction if the host layout does not preserve that exact
++mapping. This fixture correction is included in the source revision and archive
++hash above; previous same-path assertions are not acceptance evidence.
+ 
+ Before future dispatch, stage the source archive, accepted lock, this contract,
+ the runner, and the existing `run_scoped.py` package inputs under the unique
+@@ -33,12 +50,16 @@ total bounds. No shared-home toolchain install, process fixture, service,
+ credential or upstream write is part of this contract. There is no process API
+ fixture or service involved.
+ 
+-The parent runner must perform an independent cleanup readback of the exact runtime path, confirm
++The parent runner must perform an independent cleanup readback of the exact
++runtime path, confirm
+ the scoped runtime is gone, confirm the scope is empty before removing only
+-that exact directory, and use the recorded Darwin PID/start-time/command
+-identities to confirm this run left no matching process. Preserve all exported
+-receipts and prior accepted compiler/example proof. Existing Linux behavior
+-proof is useful for row design but is not Darwin acceptance. Existing Darwin
+-compiler and example proof applies only to those unchanged requirements; the
+-combined filesystem/TCP behavior remains unaccepted until this contract is
+-executed and all row/control criteria are met.
++that exact directory, and query every recorded Darwin PID/start identity.
++Permission failures and other query errors are unknown and fail closed;
++reparenting or command changes do not hide a surviving PID/start identity. The
++helper records itself, its supervisor, commands, and sampled owned descendants.
++The readback also enumerates recorded helper/command process groups and fails
++if any member remains. Preserve all exported receipts and prior accepted
++compiler/example proof. Existing Linux behavior proof is useful for row design
++but is not Darwin acceptance. Existing Darwin compiler and example proof applies
++only to those unchanged requirements; combined filesystem/TCP behavior remains
++unaccepted until this contract is executed and all row/control criteria pass.
+diff --git a/.scratch/all-tickets/current-darwin-sys-net-behavior-repair-green.stdout b/.scratch/all-tickets/current-darwin-sys-net-behavior-repair-green.stdout
+new file mode 100644
+index 00000000..92073931
+--- /dev/null
++++ b/.scratch/all-tickets/current-darwin-sys-net-behavior-repair-green.stdout
+@@ -0,0 +1,7 @@
++pins_and_nine_rows=PASS
++named_assertion_red_and_incidental_101_rejection=PASS
++darwin_early_return_named_coverage_and_summary_integrity=PASS
++cleanup_unknown_and_reparented_process=PASS
++cleanup_owned_group_membership=PASS
++distinct_darwin_alias_fixture_and_receipts=PASS
++scope_and_cleanup_contract=PASS
+diff --git a/.scratch/all-tickets/current-darwin-sys-net-behavior-source-prep.md b/.scratch/all-tickets/current-darwin-sys-net-behavior-source-prep.md
+index 35155486..ad696a6e 100644
+--- a/.scratch/all-tickets/current-darwin-sys-net-behavior-source-prep.md
++++ b/.scratch/all-tickets/current-darwin-sys-net-behavior-source-prep.md
+@@ -1,24 +1,23 @@
+ # Source preparation receipts
+ 
+-## Frozen inputs and prior accepted evidence
++## Frozen inputs and retained evidence
+ 
+-- Source revision: `a2d7a8c2ace21e63c18b2e64cdce74e5e10afc94`.
++- Test/source revision: `50af89515fa2094c9c10bf03e98b89f00291c57f`.
++- Frozen source archive SHA-256: `12f66ac017d8c54e95f7bf38a9319f1e379446168bd9d102a9ff7b52dbe5327a`.
+ - Compatible lock SHA-256: `2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425`.
+-- Reused by reference: `.scratch/all-tickets/current-feature-compilation-evidence/root-readback.json` and `.scratch/all-tickets/current-msrv-examples-root-readback.json`.
+-- Those receipts establish only compiler/example coverage. They do not accept the nine current Darwin behavior rows or five assertion controls. Existing Linux behavior receipts remain Linux-only.
++- The seven original independent-review receipts are retained at `/Users/hoppworks/.codex/worktrees/all-tickets-continuation/rhai/.scratch/all-tickets/current-darwin-sys-net-source-review/`; `review.md`, `pure-regressions.py`, `pure-receipts.json`, and `pure-regressions.stdout` record the F1–F4 RED baseline. Review applicability was frozen at `2d52bf0b87a684b87222436795dcfc73875a7ce8` against unchanged production inputs.
++- Existing compiler/example readbacks remain reusable for compiler/example coverage only. Existing Linux behavior receipts remain Linux-only.
+ 
+-## Source-only TDD evidence
++## F1–F4 source repair and focused GREEN evidence
+ 
+-- RED: with the new source-only acceptance tests present and the behavior helper absent, `python3 .scratch/all-tickets/test-current-darwin-sys-net-behavior.py` exited 1 at `test_pins_and_rows` with `FileNotFoundError` for `check-current-darwin-sys-net-behavior.py`.
+-- GREEN: after implementation, the same test command printed `pins_and_nine_rows=PASS`, `named_assertion_red_and_incidental_101_rejection=PASS`, `darwin_skips_are_explicitly_uncovered=PASS`, and `scope_and_cleanup_contract=PASS`.
+-- `python3 -m py_compile` passed for the behavior helper and source-only test. No Cargo, toolchain setup, native behavior test, process fixture, or heavy run was launched.
++- F1: each target now compares its exact frozen feature/OS-selected named-test inventory with individual outcomes and one exact libtest summary. A successful-status early return carrying `filesystem rejects non-UTF-8 fixture with EILSEQ:` leaves `test_non_utf8_file_name` explicitly uncovered. Completed named tests remain recorded, later rows continue, and the aggregate row remains unaccepted.
++- F2: cleanup readback fails closed for unknown process/path state, checks stable PID/start identity despite reparenting or process-group changes, records sampled descendants, checks owned process-group membership, and verifies runtime/scope absence or an empty real runtime directory with error-aware filesystem calls.
++- F3: the cfg(macos) central runtime fixture now supplies distinct `/var/../../...` and `/private/var/../../...` spellings, independently verifies their distinct strings, and independently canonicalizes both to the exact owned fixture path.
++- F4: stdout and stderr are retained at separate, honest log paths; parser input is explicitly stdout followed by stderr, not represented as chronological merged output.
++- GREEN: `python3 .scratch/all-tickets/test-current-darwin-sys-net-behavior.py` passes the seven focused source-only regressions recorded in `current-darwin-sys-net-behavior-repair-green.stdout`. Python syntax compilation and `git diff --check` pass.
++- Runner behavior at the RED baseline: a status-0 target with a coverage deficit stopped the run by raising immediately, so later rows were not executed and partial named outcomes were unavailable. It now records completed/uncovered named tests, continues other status-0 rows, and keeps aggregate acceptance false; nonzero command status remains a hard stop.
++- No Cargo/toolchain/native behavior run, process fixture, control run, or measurement was launched. No Darwin acceptance is claimed. The unchanged production code and separately accepted Linux evidence are unaffected.
+ 
+-## Dispatch prerequisites and open acceptance
++## Remaining acceptance
+ 
+-Review the helper, contract, and cleanup readback before dispatch. Then stage the
+-exact frozen source archive and lock plus the existing scoped-runner inputs,
+-choose the approved Darwin machine slot, invoke via `tools/run_scoped.py`, and
+-perform independent cleanup readback with
+-`readback-current-darwin-sys-net-cleanup.py`. Until then all nine behavior rows
+-and all five controls remain unverified on Darwin. Any ignored EILSEQ/non-UTF8
+-fixture is explicitly uncovered by the runner's acceptance check.
++All nine Darwin behavior rows and five assertion controls remain pending actual Darwin source-run acceptance, including the named EILSEQ assertion which this platform fixture may not reach. The current package is prepared for the SAME independent combined reviewer’s affected recheck. Do not treat source-only GREEN as native acceptance.
+diff --git a/.scratch/all-tickets/readback-current-darwin-sys-net-cleanup.py b/.scratch/all-tickets/readback-current-darwin-sys-net-cleanup.py
+index cf1d0fcf..c12d2d96 100644
+--- a/.scratch/all-tickets/readback-current-darwin-sys-net-cleanup.py
++++ b/.scratch/all-tickets/readback-current-darwin-sys-net-cleanup.py
+@@ -3,23 +3,88 @@
+ from __future__ import annotations
+ 
+ import argparse
++import errno
+ import hashlib
+ import json
++import os
+ from pathlib import Path
++import stat
+ import subprocess
+ 
++class CleanupUnknown(RuntimeError):
++    pass
++
++
++def require_absent(path: Path) -> None:
++    try:
++        os.lstat(path)
++    except FileNotFoundError:
++        return
++    except OSError as exc:
++        raise CleanupUnknown(f'cannot reliably establish absence of {path}: {exc}') from exc
++    raise SystemExit(f'cleanup readback failed: path still exists: {path}')
++
++
++def require_empty_real_directory(path: Path) -> None:
++    try:
++        mode = os.lstat(path).st_mode
++        if not stat.S_ISDIR(mode):
++            raise SystemExit(f'cleanup readback failed: scope is not a real directory: {path}')
++        with os.scandir(path) as entries:
++            first = next(entries, None)
++    except FileNotFoundError as exc:
++        raise CleanupUnknown(f'cannot verify missing exact scope {path}') from exc
++    except OSError as exc:
++        raise CleanupUnknown(f'cannot reliably read exact scope {path}: {exc}') from exc
++    if first is not None:
++        raise SystemExit(f'cleanup readback failed: exact build scope is nonempty: {path}')
++
+ 
+ def identity(pid: int) -> tuple[int, int, str, str] | None:
++    """Return None only for a successful query proving absence; errors are unknown."""
+     try:
+         result = subprocess.run(['/bin/ps', '-p', str(pid), '-o', 'ppid=,pgid=,lstart=,command='],
++                                capture_output=True, text=True, check=False, timeout=5)
++        if result.returncode != 0 or not result.stdout.strip():
++            try:
++                os.kill(pid, 0)
++            except ProcessLookupError:
++                return None
++            except PermissionError as exc:
++                raise CleanupUnknown(f'permission denied checking pid {pid}') from exc
++            except OSError as exc:
++                if exc.errno == errno.ESRCH:
++                    return None
++                raise CleanupUnknown(f'cannot distinguish pid {pid} state: {exc}') from exc
++            raise CleanupUnknown(f'pid {pid} exists but ps did not return its identity: {result.stderr.strip()}')
++        parts = result.stdout.strip().split(None, 7)
++        if len(parts) != 8:
++            raise CleanupUnknown(f'malformed ps identity for pid {pid}: {result.stdout!r}')
++        digest = hashlib.sha256(' '.join(parts[2:7]).encode()).hexdigest()[:12]
++        return int(parts[0]), int(parts[1]), str(int(digest, 16)), parts[7]
++    except CleanupUnknown:
++        raise
++    except (OSError, subprocess.SubprocessError, IndexError, ValueError) as exc:
++        raise CleanupUnknown(f'cannot reliably query pid {pid}: {exc}') from exc
++
++
++def process_group_members(groups: set[int]) -> list[tuple[int, int, int, str]]:
++    try:
++        result = subprocess.run(['/bin/ps', '-axo', 'pid=,ppid=,pgid=,lstart=,command='],
+                                 capture_output=True, text=True, check=True, timeout=5)
+-        parts = result.stdout.strip().split(None, 6)
+-        if len(parts) != 7:
+-            return None
+-        digest = hashlib.sha256(' '.join(parts[2:6]).encode()).hexdigest()[:12]
+-        return int(parts[0]), int(parts[1]), str(int(digest, 16)), parts[6]
+-    except (OSError, subprocess.SubprocessError, IndexError, ValueError):
+-        return None
++        members = []
++        for line in result.stdout.splitlines():
++            parts = line.strip().split(None, 8)
++            if len(parts) != 9:
++                raise CleanupUnknown(f'malformed process table row: {line!r}')
++            pid, ppid, pgid = map(int, parts[:3])
++            if pgid in groups:
++                members.append((pid, ppid, pgid, parts[8]))
++        return members
++    except CleanupUnknown:
++        raise
++    except (OSError, subprocess.SubprocessError, ValueError) as exc:
++        raise CleanupUnknown(f'cannot reliably enumerate owned process groups: {exc}') from exc
+ 
+ 
+ def main() -> int:
+@@ -29,8 +94,9 @@ def main() -> int:
+     parser.add_argument('--scope', type=Path, required=True)
+     args = parser.parse_args()
+     receipt = args.evidence / 'process-identities.tsv'
+-    if not receipt.is_file() or args.runtime.exists():
+-        raise SystemExit('cleanup readback failed: missing receipt or runtime still exists')
++    if not receipt.is_file():
++        raise CleanupUnknown(f'missing or unreadable process identity receipt: {receipt}')
++    require_absent(args.runtime)
+     identity_record = json.loads((args.evidence / 'early-runtime-identity.json').read_text(encoding='utf-8'))
+     if Path(identity_record['runtime']) != args.runtime or args.runtime.parent != args.scope:
+         raise SystemExit('cleanup readback failed: runtime/scope differs from the early identity receipt')
+@@ -43,11 +109,22 @@ def main() -> int:
+             raise SystemExit(f'cleanup readback failed: malformed identity row {row!r}')
+         label, pid_text, ppid_text, pgid_text, start_text, command = fields
+         current = identity(int(pid_text))
+-        if current is not None and current == (int(ppid_text), int(pgid_text), start_text, command):
++        if current is not None and current[2] == start_text:
+             raise SystemExit(f'cleanup readback failed: recorded {label} process remains')
+-    remaining = list(args.scope.iterdir()) if args.scope.is_dir() else None
+-    if remaining is None or remaining:
+-        raise SystemExit('cleanup readback failed: exact build scope is missing or nonempty')
++    groups: set[int] = set()
++    for row in rows[1:]:
++        fields = row.split('\t', 5)
++        if len(fields) != 6:
++            raise SystemExit(f'cleanup readback failed: malformed process receipt {row!r}')
++        label, _pid, _ppid, pgid, start, command = fields
++        if '<' in pgid or '<' in start or '<' in command:
++            raise SystemExit(f'cleanup readback failed: unknown identity for {label}')
++        if label != 'scoped-supervisor':
++            groups.add(int(pgid))
++    members = process_group_members(groups)
++    if members:
++        raise SystemExit(f'cleanup readback failed: recorded process group has members {members!r}')
++    require_empty_real_directory(args.scope)
+     print('cleanup_readback=PASS')
+     print(f'checked_process_identities={len(rows) - 1}')
+     print(f'empty_scope={args.scope}')
+diff --git a/.scratch/all-tickets/test-current-darwin-sys-net-behavior.py b/.scratch/all-tickets/test-current-darwin-sys-net-behavior.py
+index 7b3e3dcd..d9f8f559 100644
+--- a/.scratch/all-tickets/test-current-darwin-sys-net-behavior.py
++++ b/.scratch/all-tickets/test-current-darwin-sys-net-behavior.py
+@@ -7,6 +7,11 @@ import importlib.util
+ import os
+ from pathlib import Path
+ from unittest import mock
++import contextlib
++import io
++import json
++import sys
++import tempfile
+ 
+ HERE = Path(__file__).resolve().parent
+ HELPER = HERE / 'check-current-darwin-sys-net-behavior.py'
+@@ -28,7 +33,8 @@ def test_pins_and_rows():
+               for node in tree.body if isinstance(node, ast.Assign)
+               and len(node.targets) == 1 and isinstance(node.targets[0], ast.Name)
+               and isinstance(node.value, ast.Constant)}
+-    assert values['SOURCE_REVISION'] == 'a2d7a8c2ace21e63c18b2e64cdce74e5e10afc94'
++    assert values['SOURCE_REVISION'] == '50af89515fa2094c9c10bf03e98b89f00291c57f'
++    assert values['SOURCE_ARCHIVE_SHA256'] == '12f66ac017d8c54e95f7bf38a9319f1e379446168bd9d102a9ff7b52dbe5327a'
+     assert values['LOCK_SHA256'] == '2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425'
+     assert values['TOOLCHAIN'] == '1.77.2-aarch64-apple-darwin'
+     rows = ast.literal_eval(next(node.value for node in tree.body if isinstance(node, ast.Assign)
+@@ -56,18 +62,87 @@ def test_controls_require_the_intended_red():
+                                                   'net_reads', test_name, context)['diagnostic_found']
+ 
+ 
+-def test_darwin_skips_are_reported_as_uncovered():
++def test_darwin_early_return_and_named_coverage_are_uncovered():
+     module = load_helper()
+     text = ('     Running tests/sys_fs.rs (target/debug/deps/sys_fs-abc)\n'
+-            'running 2 tests\ntest filesystem_read ... ok\ntest non_utf8_path ... ignored, EILSEQ on Darwin\n'
+-            'test result: ok. 1 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.00s\n')
+-    result = module.positive_test_coverage(text, ('sys_fs',))
++            'running 2 tests\ntest filesystem_read ... ok\n'
++            'test test_non_utf8_file_name ... filesystem rejects non-UTF-8 fixture with EILSEQ: Illegal byte sequence (os error 92)\n'
++            'ok\ntest result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n')
++    expected = {'sys_fs': ['filesystem_read', 'test_non_utf8_file_name']}
++    result = module.positive_test_coverage(text, ('sys_fs',), expected)
+     assert result['coverage_found'] is False
+-    assert result['ignored_tests'] == ['non_utf8_path']
+-    no_skips = text.replace('test non_utf8_path ... ignored, EILSEQ on Darwin\n', '') \
+-        .replace('1 passed; 0 failed; 1 ignored;', '1 passed; 0 failed; 0 ignored;') \
+-        .replace('filtered out;', 'filtered out;')
+-    assert module.positive_test_coverage(no_skips, ('sys_fs',))['coverage_found']
++    assert result['skipped_tests'][0]['test'] == 'test_non_utf8_file_name'
++    sys_fs_row = result['target_results'][0]
++    assert sys_fs_row['completed_named_tests'] == ['filesystem_read']
++    assert sys_fs_row['uncovered_named_tests'] == ['test_non_utf8_file_name']
++    no_skips = ('     Running tests/sys_fs.rs (target/debug/deps/sys_fs-abc)\n'
++                'running 2 tests\ntest filesystem_read ... ok\ntest test_non_utf8_file_name ... ok\n'
++                'test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n')
++    assert module.positive_test_coverage(no_skips, ('sys_fs',), expected)['coverage_found']
++    assert not module.positive_test_coverage(
++        no_skips.replace('test test_non_utf8_file_name ... ok\n', ''), ('sys_fs',), expected)['coverage_found']
++    duplicate = no_skips.replace('finished in 0.00s', 'finished in 0.00s', 1).replace(
++        'test result:', 'test result:', 1) + 'test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n'
++    assert not module.positive_test_coverage(duplicate, ('sys_fs',), expected)['coverage_found']
++    inventory = module.frozen_test_inventory(HERE.parents[1], 'testing-environ,sys,net')
++    assert 'test_non_utf8_file_name' in inventory['sys_fs']
++    assert len(inventory['sys_fs']) > 2
++    for _name, features, targets in module.TEST_ROWS:
++        expected = module.frozen_test_inventory(HERE.parents[1], features)
++        assert all(expected.get(target) for target in targets)
++
++
++def test_cleanup_fails_closed_and_detects_reparented_process():
++    spec = importlib.util.spec_from_file_location('darwin_cleanup', HERE / 'readback-current-darwin-sys-net-cleanup.py')
++    cleanup = importlib.util.module_from_spec(spec)
++    spec.loader.exec_module(cleanup)
++    with mock.patch.object(cleanup.subprocess, 'run', side_effect=PermissionError('denied')):
++        try:
++            cleanup.identity(123)
++        except cleanup.CleanupUnknown:
++            pass
++        else:
++            raise AssertionError('permission error was treated as confirmed process absence')
++    with tempfile.TemporaryDirectory() as temp:
++        root = Path(temp); evidence = root / 'evidence'; evidence.mkdir()
++        scope = root / 'scope'; scope.mkdir(); runtime = scope / 'runtime'
++        (evidence / 'early-runtime-identity.json').write_text(json.dumps({'runtime': str(runtime)}))
++        (evidence / 'process-identities.tsv').write_text(
++            'label\tpid\tppid\tpgid\tstart_ticks\tcmdline\n'
++            'helper\t123\t9\t123\t456\tpython helper\n'
++            'scoped-supervisor\t124\t9\t9\t457\tpython supervisor\n')
++        with mock.patch.object(cleanup, 'identity', side_effect=[
++                (1, 123, '456', 'python helper'), None]):
++            with mock.patch.object(sys, 'argv', ['readback','--evidence',str(evidence),'--runtime',str(runtime),'--scope',str(scope)]):
++                try:
++                    cleanup.main()
++                except SystemExit as exc:
++                    assert 'process remains' in str(exc)
++                else:
++                    raise AssertionError('reparented process was treated as absent')
++
++
++def test_cleanup_rejects_live_owned_process_group_member():
++    spec = importlib.util.spec_from_file_location('darwin_cleanup_group', HERE / 'readback-current-darwin-sys-net-cleanup.py')
++    cleanup = importlib.util.module_from_spec(spec)
++    spec.loader.exec_module(cleanup)
++    with tempfile.TemporaryDirectory() as temp:
++        root = Path(temp); evidence = root / 'evidence'; evidence.mkdir()
++        scope = root / 'scope'; scope.mkdir(); runtime = scope / 'runtime'
++        (evidence / 'early-runtime-identity.json').write_text(json.dumps({'runtime': str(runtime)}))
++        (evidence / 'process-identities.tsv').write_text(
++            'label\tpid\tppid\tpgid\tstart_ticks\tcmdline\n'
++            'helper\t123\t9\t123\t456\tpython helper\n'
++            'scoped-supervisor\t124\t9\t9\t457\tpython supervisor\n')
++        with mock.patch.object(cleanup, 'identity', side_effect=[None, None]), \
++             mock.patch.object(cleanup, 'process_group_members', return_value=[(900, 1, 123, 'surviving child')]), \
++             mock.patch.object(sys, 'argv', ['readback','--evidence',str(evidence),'--runtime',str(runtime),'--scope',str(scope)]):
++            try:
++                cleanup.main()
++            except SystemExit as exc:
++                assert 'process group has members' in str(exc)
++            else:
++                raise AssertionError('surviving owned group member was not detected')
+ 
+ 
+ def test_contract_describes_scope_and_cleanup():
+@@ -77,12 +152,33 @@ def test_contract_describes_scope_and_cleanup():
+         assert phrase in contract
+ 
+ 
++def test_distinct_alias_fixture_and_raw_receipt_contract():
++    source = (HERE.parents[1] / 'tests/sys_policy.rs').read_text(encoding='utf-8')
++    assert 'fn macos_system_prefix_spellings' in source
++    assert 'format!("/var/../../{suffix}")' in source
++    assert 'format!("/private/var/../../{suffix}")' in source
++    assert 'assert_ne!(var_path, private_var_path' in source
++    assert source.count('canonicalize().unwrap(), canonical') >= 2
++    helper = HELPER.read_text(encoding='utf-8')
++    assert "cwd=SOURCE)" in helper
++    assert "merge_streams=True" not in helper
++    assert "parser-input.txt" in helper
++    assert "row.get('status') == 0 and row.get('coverage_found')" in helper
++    assert 'coverage_incomplete=' in helper
++
++
+ if __name__ == '__main__':
+     test_pins_and_rows()
+     test_controls_require_the_intended_red()
+-    test_darwin_skips_are_reported_as_uncovered()
++    test_darwin_early_return_and_named_coverage_are_uncovered()
++    test_cleanup_fails_closed_and_detects_reparented_process()
++    test_cleanup_rejects_live_owned_process_group_member()
+     test_contract_describes_scope_and_cleanup()
++    test_distinct_alias_fixture_and_raw_receipt_contract()
+     print('pins_and_nine_rows=PASS')
+     print('named_assertion_red_and_incidental_101_rejection=PASS')
+-    print('darwin_skips_are_explicitly_uncovered=PASS')
++    print('darwin_early_return_named_coverage_and_summary_integrity=PASS')
++    print('cleanup_unknown_and_reparented_process=PASS')
++    print('cleanup_owned_group_membership=PASS')
++    print('distinct_darwin_alias_fixture_and_receipts=PASS')
+     print('scope_and_cleanup_contract=PASS')
+diff --git a/tests/sys_policy.rs b/tests/sys_policy.rs
+index a90fb156..f3c5c27a 100644
+--- a/tests/sys_policy.rs
++++ b/tests/sys_policy.rs
+@@ -314,6 +314,18 @@ fn test_absolute_path_through_symlinked_root_ancestor() {
+     assert_eq!(err_kind(&e, &format!(r#"read_file("{outside}")"#)), "Denied");
+ }
+ 
++#[cfg(target_os = "macos")]
++fn macos_system_prefix_spellings(path: &std::path::Path) -> (String, String) {
++    let canonical = path.canonicalize().unwrap();
++    let suffix = canonical.strip_prefix("/").unwrap().to_str().unwrap();
++    let var_path = format!("/var/../../{suffix}");
++    let private_var_path = format!("/private/var/../../{suffix}");
++    assert_ne!(var_path, private_var_path, "system-prefix spellings must differ");
++    assert_eq!(std::path::Path::new(&var_path).canonicalize().unwrap(), canonical);
++    assert_eq!(std::path::Path::new(&private_var_path).canonicalize().unwrap(), canonical);
++    (var_path, private_var_path)
++}
++
+ #[cfg(target_os = "macos")]
+ #[test]
+ fn test_root_accepts_macos_system_prefix_aliases() {
+@@ -322,8 +334,10 @@ fn test_root_accepts_macos_system_prefix_aliases() {
+     std::os::unix::fs::symlink(t.path().join("real"), t.path().join("link")).unwrap();
+     let e = engine(SysConfig::default().fs_root(t.path().join("link"), FsAccess::Read));
+ 
+-    let var_path = format!("{}/real/a.txt", t.as_script_path());
+-    let private_path = var_path.replacen("/var/", "/private/var/", 1);
++    let (var_root, private_root) = macos_system_prefix_spellings(t.path());
++    let var_path = format!("{var_root}/real/a.txt");
++    let private_path = format!("{private_root}/real/a.txt");
++    assert_ne!(var_path, private_path);
+     assert_eq!(e.eval::<String>(&format!(r#"read_file("{var_path}")"#)).unwrap(), "payload");
+     assert_eq!(e.eval::<String>(&format!(r#"read_file("{private_path}")"#)).unwrap(), "payload");
+     assert_eq!(err_kind(&e, &format!(r#"write_file("{private_path}", "changed")"#)), "Denied");
+@@ -335,10 +349,11 @@ fn test_root_accepts_macos_system_prefix_aliases() {
+ fn test_nested_roots_keep_permissions_through_system_prefix_aliases() {
+     let t = TempDir::new();
+     t.write("inner/marker.txt", "nested payload");
+-    let outer_var = t.as_script_path();
+-    let outer_private = outer_var.replacen("/var/", "/private/var/", 1);
++    let (outer_var, outer_private) = macos_system_prefix_spellings(t.path());
+     let inner_var = format!("{outer_var}/inner");
+-    let inner_private = inner_var.replacen("/var/", "/private/var/", 1);
++    let (_, inner_private) = macos_system_prefix_spellings(&t.path().join("inner"));
++    assert_ne!(outer_var, outer_private);
++    assert_ne!(inner_var, inner_private);
+     let e = engine(SysConfig::default().fs_root(&outer_var, FsAccess::Read).fs_root(&inner_private, FsAccess::ReadWrite));
+ 
+     for path in [format!("{inner_var}/marker.txt"), format!("{inner_private}/marker.txt")] {

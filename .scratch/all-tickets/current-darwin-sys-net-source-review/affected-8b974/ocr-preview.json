@@ -1,0 +1,62 @@
+{
+  "schema_version": "1",
+  "mode": "range",
+  "repository": "/Users/hoppworks/.codex/worktrees/current-darwin-sys-net-behavior/rhai",
+  "from": "2d52bf0",
+  "to": "8b9740de8e4493c78320293d3a07599672f22484",
+  "merge_base": "2d52bf0b87a684b87222436795dcfc73875a7ce8",
+  "total_files": 7,
+  "reviewable_count": 4,
+  "excluded_count": 3,
+  "total_insertions": 438,
+  "total_deletions": 87,
+  "reviewable_files": [
+    {
+      "path": ".scratch/all-tickets/check-current-darwin-sys-net-behavior.py",
+      "status": "modified",
+      "insertions": 160,
+      "deletions": 24
+    },
+    {
+      "path": ".scratch/all-tickets/readback-current-darwin-sys-net-cleanup.py",
+      "status": "modified",
+      "insertions": 90,
+      "deletions": 13
+    },
+    {
+      "path": ".scratch/all-tickets/test-current-darwin-sys-net-behavior.py",
+      "status": "modified",
+      "insertions": 108,
+      "deletions": 12
+    },
+    {
+      "path": "tests/sys_policy.rs",
+      "status": "modified",
+      "insertions": 20,
+      "deletions": 5
+    }
+  ],
+  "excluded_files": [
+    {
+      "path": ".scratch/all-tickets/current-darwin-sys-net-behavior-contract.md",
+      "status": "modified",
+      "insertions": 38,
+      "deletions": 17,
+      "exclude_reason": "unsupported_ext"
+    },
+    {
+      "path": ".scratch/all-tickets/current-darwin-sys-net-behavior-repair-green.stdout",
+      "status": "added",
+      "insertions": 7,
+      "deletions": 0,
+      "exclude_reason": "unsupported_ext"
+    },
+    {
+      "path": ".scratch/all-tickets/current-darwin-sys-net-behavior-source-prep.md",
+      "status": "modified",
+      "insertions": 15,
+      "deletions": 16,
+      "exclude_reason": "unsupported_ext"
+    }
+  ]
+}
