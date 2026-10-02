@@ -6,13 +6,13 @@ OCR v1.12.9 preview and rules succeeded. I reviewed independently, without deleg
 
 **Findings relevant to the planned proof**
 
-1. **High — pre-existing test compilation blocker under `no_float`.**  
+1. **High — pre-existing test compilation blocker under `no_float`.**
    [tests/sys_process.rs:42](/Users/hoppworks/.codex/worktrees/process-shared-child-activation/rhai/tests/sys_process.rs:42) excludes `DIRECT_DROP_CHALLENGE_ENV` when `no_float` is enabled, but [line 154](/Users/hoppworks/.codex/worktrees/process-shared-child-activation/rhai/tests/sys_process.rs:154) references it inside `process_fixture`, whose gate excludes only `no_index`. Consequently, the planned `testing-environ,sys,sync,no_float` test target contains an unresolved identifier. A test-name filter cannot avoid compiling that function. I confirmed this mismatch exists in the commit’s parent; it is not introduced by this patch.
 
-2. **Medium — pre-existing exceptional cleanup does not establish fixture closure.**  
+2. **Medium — pre-existing exceptional cleanup does not establish fixture closure.**
    [ControllerGuard::drop:393](/Users/hoppworks/.codex/worktrees/process-shared-child-activation/rhai/tests/fixtures/sys_process_shared_child_contract.rs:393) kills/reaps the controller before releasing a surviving fixture. Killing the controller also removes the process containing its direct-child reaper. The guard then waits up to three seconds and merely logs `absent=false` if the fixture remains present; `FixtureDir::drop` subsequently removes the synchronization directory. This is not verified exceptional-path cleanup, particularly for foreign-parent zombies. The scoped runner must provide independently verified custody and honest incomplete-cleanup reporting. Successful scenario paths do assert fixture ESRCH; this finding concerns failure/watchdog paths.
 
-3. **Medium — pre-existing successful-controller output is discarded.**  
+3. **Medium — pre-existing successful-controller output is discarded.**
    [run_bounded_controller:345](/Users/hoppworks/.codex/worktrees/process-shared-child-activation/rhai/tests/fixtures/sys_process_shared_child_contract.rs:345) captures controller output but prints it only on failure. Successful runs therefore omit the inner consumed-input, snapshot and cancellation diagnostics, and fixture files are subsequently removed. Assertions still execute, but the planned preservation of public Engine readback and child records needs an explicit evidence-export mechanism. This behavior predates activation.
 
 **All-file coverage**

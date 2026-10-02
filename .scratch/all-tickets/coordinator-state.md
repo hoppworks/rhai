@@ -421,7 +421,24 @@ original human authorization/route scope needs concrete reconciliation before
 new guest execution. Real-client30min nonrenewable remains separate. Mac heavy
 acceptance can resume only with free slot and an already accepted harness; the
 stopped process-overhead path cannot resume just because the slot becomes free.
-Goal remains active; independent Windows/other acceptance work exists, so no
+Windows integration push succeeded; independent ls-remote --heads returned ONLY
+main at510b7649a83b131945e2fa40084e56bd60faedaf. All3 new commits have author and
+committer hoppworks <daniel@hoppworks.de>. No public upstream write.
+Fresh workhorse slot observation17:51local: foreign make3378458/start17:45:33 and
+cargo-nextest3382341/start17:45:38 alive; both cwd /var/home/workhorse/projects/
+tauron-worktrees/guardrails-G30g19. Exact Windows VM still running. Workhorse heavy
+slot occupied too; no guest execution or foreign process touched.
+Coordinator integrated completed Child source commitsdd2a44fc/0184e20a/58dbf90f/
+e5937ac5 as69351a99/6a5ebfd5/090dace1/3af1ec99. Root compared both actual Rust files
+(tests/sys_process.rs and tests/fixtures/sys_process_shared_child_contract.rs)
+against accepted e593 source: identical. Original source review applies; no
+compiler/native behavior inferred. Removed only3 Markdown trailing hard-break
+spaces from the historical activation-review copy to satisfy integration whitespace
+check; original report remains retrievable at0184e20a. Accepted e593 report
+already retained verbatim under source-review-readback-20261002. Strict native
+launch gates and source correction count1 unchanged. This integration also follows
+the owner's development consolidation authorization; parent acceptance stays open.
+Goal remains active; independent implementation/acceptance work exists, so no
 blocked audit or completion claim is warranted.
 
 ## Resources, counts and cause history
