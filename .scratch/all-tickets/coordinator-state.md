@@ -515,6 +515,46 @@ control path in the actual bounded command. No process native/control allocation
 or cause09 repair is reopened. Next action is this independent Darwin acceptance
 with unchanged600/540/510 bounds, then independent cleanup/readback.
 
+### Darwin first actual package launch and diagnosed setup failure
+
+Actual first non-process Darwin invocation this package completed outer1 before
+Rustup or Cargo. Scoped runtime agent-build-qqscgxlz; helper20807/supervisor20806,
+PGID20806 recorded before external commands. At first resource sample ps snapshot
+reported descendant20811 whose identity was unavailable after ps returned.
+Original failure and all empty row/control results retained in owned Darwin
+stage proof-evidence/, outer logs in outer-evidence/. Hypothesis: completed sampler
+observes itself; verify with meaningful regression before correction. This is
+one infrastructure failure, not behavior failure or cause11/cause09 reopening.
+No test row/negative control/toolchain install launched, all native process
+counts unchanged. Root independent full PID/PGID readback:20806/20807 absent,
+no20806 group members;20811 absent now but never identified. Runtime absent,
+scope empty and exact empty rmdir completed. Narrow cleanup receipt at
+darwin-first-launch-cleanup.json; no unobserved whole-tree or peak claim.
+
+Responsible configured Standard source repair live handle96652 in existing
+current-darwin-sys-net-behavior owned worktree. Brief darwin-sampler-repair-brief.md.
+Exact completed observer only may be excluded, genuine unknown descendants
+still failclosed. Real RED/GREEN plus consistent new unique stage identity and
+independent affected review required before another heavy launch. All unchanged
+600/540/510 safety caps, first consumed invocation and cause history preserved.
+Current turn PROGRESS: independent documentation correction79b21b09 pushed;
+sole forkmain verified79b21b09595b923040ec1137b336108191946a17. Actual native
+infrastructure evidence changes next action; corrective source work is ongoing,
+not an acceptance closure. Goal remains active/incomplete.
+
+Windows accounting source report conclusion that extracted SourceRoot unavailable
+is superseded by root direct original audit-tree.txt and screenshot readback.
+Exact original SourceRoot C:\Users\RhaiTest\.local\share\agent-builds\rhai\
+w9e0-20261002-6f804a9c4c4a4e78\source; native audit confirms24/24/0 names and0
+reparse ancestors at tools/windows-scoped-runner. Existing separate17 guest pin
+receipt covers original C# source. Fresh readback still required before launching.
+No guess, new extraction, source adoption or guest command performed this turn.
+One-hour source watchdog is per-invocation; current standing accept-recommendations
+can cover a concrete bounded follow-up without artificial approval gate, preserving
+actual human/safety caps and consumed history. Next Windows native step remains
+blocked only by current machine occupancy and concrete fresh prerequisites,
+not a stored PENDING label. Expert02 real-client30min stays nonrenewable/separate.
+
 ## Resources, counts and cause history
 Unix actual native invocation count84 consumed.82 failed before runtime;
 83 measurementCargo0 but originalouter1 due optional cmdline receipt validation.

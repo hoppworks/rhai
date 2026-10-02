@@ -1,0 +1,18 @@
+{
+  "time_utc": "2026-10-02T16:17:34.875996+00:00",
+  "outer_status": 1,
+  "original_stage": "/Users/hoppworks/.codex/worktrees/current-darwin-sys-net-behavior/rhai/.scratch/all-tickets/current-darwin-sys-net-behavior-2f795ece-20261002",
+  "runtime": "/Users/hoppworks/.local/share/agent-builds/rhai/current-darwin-sys-net-behavior-2f795ece-20261002/agent-build-qqscgxlz",
+  "runtime_absent": true,
+  "exact_recorded_pids": [
+    20806,
+    20807
+  ],
+  "recorded_group": 20806,
+  "pids_and_group_absent": true,
+  "unknown_identity_failure_pid": 20811,
+  "failure_pid_absent_now_only": true,
+  "scope_empty_then_exact_rmdir": "/Users/hoppworks/.local/share/agent-builds/rhai/current-darwin-sys-net-behavior-2f795ece-20261002",
+  "rustup_cargo_native_tests_launched": false,
+  "coverage": "Infrastructure failure before toolchain setup; no feature acceptance or continuous peak claim."
+}
