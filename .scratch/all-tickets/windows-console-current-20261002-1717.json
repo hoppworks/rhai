@@ -1,0 +1,18 @@
+{
+  "receipts": [
+    {
+      "local": ".scratch/all-tickets/windows-console-current-20261002-1717.png",
+      "sha256": "05713dbacb00cfa92e8cad1581147b0f1349f6ee14c97d122440aff36011bd53",
+      "remote_owned_path": "/tmp/rhai-root-console-20261002-1717.ppm",
+      "cleanup": "exact path absent readback"
+    },
+    {
+      "local": ".scratch/all-tickets/windows-console-awake-20261002-1717.png",
+      "sha256": "bbb50bafedd4733707b1373d8650de50bf9178a743648be9091f6f9141ae9a40",
+      "remote_owned_path": "/tmp/rhai-root-console-20261002-1717-awake.ppm",
+      "cleanup": "exact path absent readback"
+    }
+  ],
+  "result": "VM running; one Shift restored clean PowerShell prompt; no guest command or fixture launched; not source/compiler/job acceptance",
+  "cleanup_note": "First cleanup command returned1 after removing own first file; actual subsequent exact-path absence confirmed; second hashmatched then removed."
+}
