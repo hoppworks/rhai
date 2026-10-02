@@ -1,0 +1,6 @@
+- Loaded agent-skills revision `958a4538b0191c53f2ccb2cd00d96c15045fbf68`.
+- Committed as `8aa0bfda7c43c4932c48f5723a6f262b00569cbd` (`hoppworks <daniel@hoppworks.de>`); not pushed.
+- Added a RED interruption regression, then verified GREEN with pinned Python 3.12.14: all 13 source-only categories passed. `git diff --check` passed.
+- Sampler2 instructions pin Python for runner and helper, disable bytecode, and set outer timeout to 600 seconds. The stage identifier and resource caps are preserved.
+- Corrected elapsed accounting: 0.502 seconds covers helper start through export; total outer duration is unknown.
+- No native, Cargo, toolchain, or fixture launch occurred. Existing untracked stage inputs remain; the build scope and proof-evidence directory are absent.

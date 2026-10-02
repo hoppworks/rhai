@@ -1,0 +1,10 @@
+Review complete: **three medium findings; source acceptance withheld.**
+
+- [Helper, line 254](/Users/hoppworks/.codex/worktrees/current-darwin-sys-net-behavior/rhai/.scratch/all-tickets/check-current-darwin-sys-net-behavior.py:254): interruption during `communicate()` bypasses observer termination/reaping. An in-memory control reproduced this. Add bounded cleanup for exceptional exits and an interruption regression.
+- [Launch example, line 86](/Users/hoppworks/.codex/worktrees/current-darwin-sys-net-behavior/rhai/.scratch/all-tickets/darwin-observer-sampler-repair.md:86): use pinned Python 3.12 for both runner and helper, `PYTHONDONTWRITEBYTECODE=1`, and explicit `--timeout 600`. The current example omits these requirements.
+- [Elapsed accounting, line 12](/Users/hoppworks/.codex/worktrees/current-darwin-sys-net-behavior/rhai/.scratch/all-tickets/darwin-observer-sampler-repair.md:12): `0.502 s` measures helper startup through export timestamp, not complete outer-launch duration. Correct this claim and its repetition at line 60.
+
+All six changed files reviewed; none skipped. OCR failed from contaminated Apple Git output; manual review followed the brief.
+All seven staged input hashes matched. The original sampler failed the observer regression; both changed regressions passed using write-free fixture substitution. Unknown descendants still fail closed; timeout kill/reap, wrong PPID, and duplicate-PID controls behaved correctly.
+Earlier cause11 parser/export/cleanup conclusions remain applicable. Original evidence and launch consumption remain preserved; RSS/descendant samples exclude the transient observer and do not prove continuous peaks.
+No heavy/native acceptance run, edits, commits, or pushes performed. Full-suite execution remains unverified. Report delivered here for external capture; no report file written under the read-only constraint.

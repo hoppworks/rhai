@@ -531,16 +531,40 @@ no20806 group members;20811 absent now but never identified. Runtime absent,
 scope empty and exact empty rmdir completed. Narrow cleanup receipt at
 darwin-first-launch-cleanup.json; no unobserved whole-tree or peak claim.
 
-Responsible configured Standard source repair live handle96652 in existing
-current-darwin-sys-net-behavior owned worktree. Brief darwin-sampler-repair-brief.md.
-Exact completed observer only may be excluded, genuine unknown descendants
-still failclosed. Real RED/GREEN plus consistent new unique stage identity and
-independent affected review required before another heavy launch. All unchanged
-600/540/510 safety caps, first consumed invocation and cause history preserved.
-Current turn PROGRESS: independent documentation correction79b21b09 pushed;
-sole forkmain verified79b21b09595b923040ec1137b336108191946a17. Actual native
-infrastructure evidence changes next action; corrective source work is ongoing,
-not an acceptance closure. Goal remains active/incomplete.
+Responsible Standard96652 is terminal0, candidate db05c412b44ee2e43e553ad1f7fec23222ab1425.
+Independent Expert65166 terminal0 withheld source acceptance: interrupted
+communicate bypasses observer kill/reap; launch example lacks pinned Python,
+bytecode setting and outer600; 0.502s was wrongly called whole-launch duration.
+This is first rejected source correction for the sampler infrastructure cause.
+Normal real five-sample light readback passed narrowly; retained at
+darwin-sampler-native-light-readback.json/.log. No native feature acceptance.
+Original first stage and first consumed invocation unchanged; process count84.
+
+Previous status-only turn is NO PROGRESS. Current responsible fix batch CLI88451
+is terminal0; candidate8aa0bfda7c43c4932c48f5723a6f262b00569cbd, brief
+darwin-sampler-fix-batch-brief.md and result darwin-sampler-fix-batch-result.md.
+Reported meaningful interruption RED then all13 source categories GREEN, pinned
+Python and elapsed corrections; staged helper/contract tracked and updated.
+Independent affected recheck CLI71291 terminal0 SOURCE ACCEPTED; brief
+darwin-sampler-fix-recheck-brief.md and final darwin-sampler-fix-recheck.md.
+All three findings closed narrowly; sixteen exception/cleanup controls passed,
+prior helper interruption RED/current GREEN, stage pins agree. Native suite and
+real observer interruption lifecycle still unverified; no allowance consumed.
+Consolidate three findings in existing owned Darwin context, meaningful interrupt
+RED/GREEN, then affected independent recheck against db05. No heavy/native launch
+until accepted correction and fresh slot check. 30min active-work checkpoint,
+unchanged600/540/510 caps, unknown descendants fail closed. Prospective sampler2
+stage identity retained; no new central scope. Existing source/doc/native evidence
+remains preserved; cause09 stays stopped and native85 unlaunched. Next action is
+retain accepted source integration on fork main, then launch single finite native
+follow-up only when actual Mac slot is free. Fresh exact observation: Mac foreign
+Playwright28242/start18:26:33local and browser28287/start18:26:34 are live
+elapsed7:20/7:19; workhorse foreign make3808482/start18:27:22 and nextest3812407/
+start18:27:28 live6:29/6:24, cwd Tauron guardrails-G30g19. Workhorse initially
+lacks rg; fallback grep read-only observation succeeded. No foreign signals or
+resource changes. Windows heavy follow-up also waits for workhorse slot. Current
+turn PROGRESS: source sampler correction and independent affected acceptance;
+full goal remains incomplete, process cause09 stopped/count84 preserved.
 
 Windows accounting source report conclusion that extracted SourceRoot unavailable
 is superseded by root direct original audit-tree.txt and screenshot readback.

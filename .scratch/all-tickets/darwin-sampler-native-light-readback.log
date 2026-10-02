@@ -1,0 +1,8 @@
+PRIVATE_RUNTIME /Users/hoppworks/.local/share/agent-builds/rhai/darwin-sampler-readback-20261002-8c32917e/agent-build-rvyfh_si
+HELPER_IDENTITY 24659 67576921351662
+sample={"descendants": 0, "monotonic_seconds": 0.018, "rss_kib": 26336, "storage_kib": 8}
+sample={"descendants": 0, "monotonic_seconds": 0.029, "rss_kib": 26384, "storage_kib": 8}
+sample={"descendants": 0, "monotonic_seconds": 0.04, "rss_kib": 26384, "storage_kib": 8}
+sample={"descendants": 0, "monotonic_seconds": 0.052, "rss_kib": 26384, "storage_kib": 8}
+sample={"descendants": 0, "monotonic_seconds": 0.067, "rss_kib": 26384, "storage_kib": 8}
+five_real_resource_samples=PASS

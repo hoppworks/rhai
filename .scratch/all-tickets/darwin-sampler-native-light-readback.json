@@ -1,0 +1,39 @@
+{
+  "scope": "Real Darwin resource sampler only, no Rustup/Cargo/Engine acceptance",
+  "source": "/Users/hoppworks/.codex/worktrees/current-darwin-sys-net-behavior/rhai/.scratch/all-tickets/check-current-darwin-sys-net-behavior.py",
+  "sample_count": 5,
+  "samples": [
+    {
+      "monotonic_seconds": 0.018,
+      "storage_kib": 8,
+      "rss_kib": 26336,
+      "descendants": 0
+    },
+    {
+      "monotonic_seconds": 0.029,
+      "storage_kib": 8,
+      "rss_kib": 26384,
+      "descendants": 0
+    },
+    {
+      "monotonic_seconds": 0.04,
+      "storage_kib": 8,
+      "rss_kib": 26384,
+      "descendants": 0
+    },
+    {
+      "monotonic_seconds": 0.052,
+      "storage_kib": 8,
+      "rss_kib": 26384,
+      "descendants": 0
+    },
+    {
+      "monotonic_seconds": 0.067,
+      "storage_kib": 8,
+      "rss_kib": 26384,
+      "descendants": 0
+    }
+  ],
+  "process_identities": "label\tpid\tppid\tpgid\tstart_ticks\tcmdline\nhelper\t24659\t24658\t24658\t67576921351662\t/Users/hoppworks/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 -\nscoped-supervisor\t24658\t24657\t24658\t67576921351662\t/Users/hoppworks/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 /Users/hoppworks/projects/agent-skills/tools/run_scoped.py _supervise 4 /Users/hoppworks/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 -\n",
+  "runtime": "/Users/hoppworks/.local/share/agent-builds/rhai/darwin-sampler-readback-20261002-8c32917e/agent-build-rvyfh_si"
+}

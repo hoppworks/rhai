@@ -1,0 +1,5 @@
+- Fixed the Darwin sampler race: it now excludes only its own successfully waited `/bin/ps` child; unknown descendant identities still fail closed.
+- The regression produced the expected RED, then passed with the safety control. The full source-only suite and `git diff --check` passed.
+- Prepared and read back a separate stage; original evidence remains untouched. No Rustup, Cargo, or native run was launched. Independent review is required before the follow-up run.
+- Commit: `db05c412b44ee2e43e553ad1f7fec23222ab1425` on `task/current-darwin-sys-net-behavior` (not pushed).
+- Report: [darwin-observer-sampler-repair.md](/Users/hoppworks/.codex/worktrees/current-darwin-sys-net-behavior/rhai/.scratch/all-tickets/darwin-observer-sampler-repair.md).
