@@ -50,8 +50,8 @@ Windows guest control belongs solely to windows_monitor_job_owner.
   source, owner21/public29 passed. native81-root-cleanup-readback.json confirms
   34 emitted PIDs/10 groups and exact runtime absent, three manifests matching.
   Cargo53.432s, sampled276896KiB; no continuous peak claim.
-- Remote branch cleanup CLOSED. On 2026-10-02 exact ls-remote readback shows ONLY
-  main at 6e3c6a5a0c2ee8f3f8a93b7b9e4c77c5d34ff64b. Nine remote task refs removed
+- Remote branch cleanup CLOSED. Latest independent ls-remote readback shows ONLY
+  main at 658221520e1226c39e75ddb3f922db64c2d0e95c (2026-10-02). Nine remote task refs removed
   in the final consolidation, one earlier; every exact tip was ancestor of pushed
   main before deletion. Histories preserved. Local active/foreign/dirty worktrees
   remain; remote cleanup does not authorize discarding them.
@@ -127,7 +127,14 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    group receipt. Exactly3 hash-bound runner files, nativePython>=3.12/filter and
    bounded --help import gate now precede workload. Root accepted source gate
    and released fresh absent-only staging/preflight; native83 remains withheld
-   until staged receipts are independently reviewed. No new invocation yet.
+   until staged receipts are independently reviewed. Root then independently
+   SSH-read stage /root/rhai-process-overhead-00bed4a0-b6f34e20-preflight83:
+   all10 exact hashes match, evidence real/empty. Native preflight reports
+   Python3.14.7, tarfile filter and copied runner --help imports pass. Original
+   receipts in responsible launch-83-staging/{staged-hashes,preflight-output}.txt.
+   Source/staging gate CLOSED; ONE native83 released under unchanged caps and
+   exact120calls/zero warmups/no retries. Count83 consumes only at actual launch;
+   no live handle or actual launch receipt yet. No performance acceptance claimed.
    Root macOS measurement adaptation is SOURCE-ONLY and NOT approved to launch:
    macos-process-overhead.py and run-macos-process-overhead.sh bind00bed/archive
    5414ea195ad00152b1eae36b3f4e10943ba5d9bf323baff6410cca0c5b4d8b98.
