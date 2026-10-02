@@ -12,6 +12,7 @@ import signal
 import subprocess
 import sys
 import tarfile
+import threading
 import time
 
 
@@ -30,6 +31,7 @@ SOURCE_PATHS = (
 )
 MAX_DRIVER_SECONDS = 580
 MAX_CARGO_SECONDS = 540
+SAMPLED_STORAGE_STOP_KIB = 1_572_864
 
 
 def digest(path: pathlib.Path) -> str:
@@ -94,6 +96,44 @@ def source_manifest(evidence: pathlib.Path, source: pathlib.Path, phase: str) ->
             output.write(f"{phase}\t{relative}\t{digest(source / relative)}\n")
         output.flush()
         os.fsync(output.fileno())
+
+
+def sampled_runtime_storage(runtime: pathlib.Path, evidence: pathlib.Path, stop: threading.Event,
+                            failures: list[BaseException], samples: list[int]) -> None:
+    output_path = evidence / "resource-samples.tsv"
+    try:
+        with output_path.open("w", buffering=1, encoding="utf-8") as output:
+            output.write("utc_epoch\tsampled_runtime_kib\n")
+            next_sample = time.monotonic()
+            while not stop.is_set():
+                result = subprocess.run(
+                    ["du", "-sk", str(runtime)], capture_output=True, text=True,
+                    timeout=4, check=True,
+                )
+                fields = result.stdout.strip().split(maxsplit=1)
+                if len(fields) != 2 or not fields[0].isdigit() or fields[1] != str(runtime):
+                    raise RuntimeError(f"malformed private runtime storage sample: {result.stdout!r}")
+                size = int(fields[0])
+                samples.append(size)
+                output.write(f"{time.time():.3f}\t{size}\n")
+                if size >= SAMPLED_STORAGE_STOP_KIB:
+                    raise RuntimeError(
+                        f"sampled private runtime storage reached {size} KiB "
+                        f"(stop {SAMPLED_STORAGE_STOP_KIB})"
+                    )
+                next_sample += 1.0
+                if stop.wait(max(0.0, next_sample - time.monotonic())):
+                    break
+    except BaseException as error:
+        failures.append(error)
+        print(f"STORAGE_SAMPLER_FAILURE {type(error).__name__}: {error}", file=sys.stderr, flush=True)
+
+
+def stop_storage_sampler(stop: threading.Event, thread: threading.Thread) -> None:
+    stop.set()
+    thread.join(timeout=5)
+    if thread.is_alive():
+        raise TimeoutError("bounded storage sampler did not stop within 5 seconds")
 
 
 def main() -> int:
@@ -197,6 +237,16 @@ def main() -> int:
     )
     wait_for_monitor_ready()
     started = time.monotonic()
+    storage_stop = threading.Event()
+    storage_failures: list[BaseException] = []
+    storage_samples: list[int] = []
+    storage_thread = threading.Thread(
+        target=sampled_runtime_storage,
+        args=(runtime, evidence, storage_stop, storage_failures, storage_samples),
+        name="private-runtime-storage-sampler",
+        daemon=True,
+    )
+    storage_thread.start()
     log_path = evidence / "measurement-launch.log"
     identities_path = evidence / "measurement-command-identities.tsv"
     with log_path.open("w", encoding="utf-8") as output, identities_path.open("w", encoding="utf-8") as identities:
@@ -221,6 +271,8 @@ def main() -> int:
                 healthy, reason = monitor_health()
                 if not healthy:
                     raise RuntimeError(f"process custody monitor failed during measurement: {reason}")
+                if storage_failures:
+                    raise RuntimeError("private runtime storage sampler failed") from storage_failures[0]
                 if time.monotonic() - started > MAX_DRIVER_SECONDS:
                     raise TimeoutError("measurement driver exceeded its 580-second package limit")
                 time.sleep(0.2)
@@ -237,7 +289,16 @@ def main() -> int:
                     process.kill()
                     process.wait(timeout=1)
             raise
+        finally:
+            stop_storage_sampler(storage_stop, storage_thread)
 
+    if storage_failures:
+        raise RuntimeError("private runtime storage sampler failed") from storage_failures[0]
+    print(
+        f"SAMPLED_PRIVATE_RUNTIME_STORAGE_MAX_KIB={max(storage_samples, default=0)}; "
+        "du -sk approximately once per second; sampled maximum, not continuous peak",
+        flush=True,
+    )
     print(log_path.read_text(encoding="utf-8", errors="replace"), flush=True)
     if status != 0:
         raise RuntimeError(f"measurement driver exited with status {status}; no retry")

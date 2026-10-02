@@ -79,6 +79,22 @@ def main() -> None:
         raise SystemExit("preflight failed: runtime verifier is not bound to reviewed inputs")
     if "process-overhead-proof.py" not in launcher or "--timeout 585" not in launcher:
         raise SystemExit("preflight failed: launcher does not dispatch the measurement or preserve scoped bound")
+    if (
+        "SAMPLED_STORAGE_STOP_KIB = 1_572_864" not in proof
+        or '["du", "-sk", str(runtime)]' not in proof
+        or "timeout=4" not in proof
+        or "resource-samples.tsv" not in proof
+    ):
+        raise SystemExit("preflight failed: bounded private-runtime storage sampling/stop is absent")
+    for required in (
+        "VmRSS:",
+        "memory_limit_bytes = 2 * 1024 * 1024 * 1024",
+        "process-resource-samples.tsv",
+        "measurement-command-identities.tsv",
+        "sampled_owned_tree_rss_max_bytes=",
+    ):
+        if required not in launcher:
+            raise SystemExit(f"preflight failed: live RSS/identity custody component is absent: {required}")
     if not re.search(r"timeout --signal=TERM --kill-after=2 598s", contract):
         raise SystemExit("preflight failed: expected explicit 600-second outer timeout wrapper is not recorded")
 

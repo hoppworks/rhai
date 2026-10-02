@@ -13,9 +13,18 @@ Stage a fresh absent-only directory containing `source.tar`,
 `measure-process-overhead.py`, `remote-overhead-launch.sh`, and
 `runner/tools/run_scoped.py`. Create an empty real `evidence/` directory.
 The staged launcher's independent monitor records exact PID/start-tick lineage,
-samples descendants and private runtime storage at one-second intervals, fails
-closed above16 owned descendants or at1,572,864KiB sampled storage, and performs
-exact cleanup/readback after `run_scoped` exits.
+samples the owned descendant count and summed `/proc/*/status` `VmRSS` for the
+run-scoped process tree at one-second intervals, and stops the exact pidfd-anchored
+runner if a sample reaches2GiB or the tree exceeds16 descendants. The RSS sum may
+double-count shared pages and is a sampled observation, not a continuous peak.
+The measurement wrapper separately runs bounded `du -sk` against its exact
+private runtime on an approximately one-second cadence (each `du` is bounded to
+4 seconds) and stops at1,572,864KiB sampled storage. Both
+resource ledgers are required and exported; final
+readback rejects missing or malformed samples, identity ledgers, or a sample at
+the stop threshold. The launcher also reads back the exact measurement-driver
+PID/start-tick identity and verifies all recorded exact identities and owned
+groups after `run_scoped` exits.
 
 Run from the remote stage directory with an external600-second bound:
 
@@ -52,6 +61,6 @@ scoped to this package. No claim is made for Windows.
 Before any execution, independently read back every staged hash and the empty
 evidence directory. At termination preserve raw samples, summary/toolchain
 metadata, source manifest, runner identity/heartbeat ledger, process and resource
-samples, command identities, outer statuses, and exact PID/start/PGID cleanup
-readback outside the private runtime. Do not relaunch after a failure without a
-new diagnosis and root review.
+samples, measurement command identities, outer statuses, and exact PID/start/PGID
+cleanup readback outside the private runtime. Do not relaunch after a failure
+without a new diagnosis and root review.
