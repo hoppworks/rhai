@@ -86,7 +86,7 @@ Current authoritative history through this rewrite is Git commit
 10d4a0d55400ebe8c24feff134e7161ff36bf8d5, this same state path. It retains
 all earlier cause/attempt/resource/source applicability records. Read that
 history for consumed work, not superseded next actions. No reset occurred.
-Last independently read-back fork maine8b2d09b81af40fc682263b0da7bd4f0eb655f3c; only remote main, lowercase
+Last independently read-back fork main58deedb4f1c7be458a1fc07af213521c741df501; only remote main, lowercase
 human author/committer. Goal active and incomplete.
 
 ### Accepted current Linux non-process package
@@ -249,70 +249,95 @@ not extend Expert09/Windows/native budgets. Read actual handle before continuing
 
 ### Next actions and turn classification
 
-Previous goal turn NO PROGRESS toward acceptance: user-requested overall status
-and actual fork readback confirmed sole main8e0edeec, but closed no further
-requirement. Current continuation made concrete source progress: Standard
-CLI45993 is TERMINAL0, correction frozen58dbf90f671281fc9a8845f7546f23f225c34b4b
-in the owned shared-Child slice, lowercase human author and committer verified.
-It catches scenario panics, releases the owned fixture before reaper termination,
-adds a real self-reexec panic-cleanup regression, retains unverified records and
-keeps the broad hard-watchdog/process-custody gap explicitly open. No Cargo or
-native checks ran. Diffcheck passed; rustfmt reports differences including old
-untouched formatting. Watchdog12-to24s is an agent-selected fixture estimate
-adjustment beyond existing18s fixture bound, not an extension of external caps.
-Original report shared-child-cleanup-repair.md and source brief/summary retained
-in that slice. Implementation readiness only, no strict acceptance/integration.
+Previous goal turn PROGRESS: frozen Child58dbf90f correction independently
+reviewed; three material defects found, first source correction rejected/count1.
+Review72842 terminal0 full report at owned slice shared-child-cleanup-review-summary.md;
+OCR preview blocked by sandbox Apple Git cache diagnostic pollution, direct5/5
+coverage completed. Fix batch55591 actually dispatched, nativecount84unchanged.
+Windows compiler filter actual stdout2817/stderr0/no error|failed matches changed
+classification from presumed compiler failure to stopped-at-compile/unproven cause.
+History through58deedb4 at this same state path retains original findings/routes.
 
-One combined affected independent Expert source review actually launched via
-configured tools/launch.sh, CLIhandle72842, read-only. Exact brief/report/log
-under slice .scratch/process-unix-run/shared-child-cleanup-review*. No descendants,
-heavy build or native launch. Review includes panic receipt authenticity,
-expected-failure test unexpectedly succeeding, production reaper lifetime,
-forced controller death, changed watchdog and earlier constant/output fixes.
-Review72842 now TERMINAL0, full CLI output retained at
-shared-child-cleanup-review-summary.md (read-only reviewer could not create the
-separate requested report; -o preserved full findings). Root read actual report.
-Loaded958revision confirmed,5/5direct coverage; OCR preview failed on sandbox-
-denied Apple Git cache diagnostics, rules not obtained, direct diff inspection
-continued. SOURCE disposition changes required: expected-panic accepts success/
-unrelated panic, guard misses late PID publication, note misstates outer receipt
-provenance. First cleanup source correction rejected; count1 under this fixture
-cause, not a native failure or another Expert09 chain. Production worker retained
-Child supports catch_unwind; forced controller/hard-runner custody still open.
-24s is a polling deadline, not whole-fixture bound (blocked-input has separate
-18s waits plus read); do not extend external caps. Actual next related fix batch
-launched configured Standard CLI55591 workspace-write, exact brief/output/log
-shared-child-cleanup-fix-*. Source-only, no descendants/Cargo/native/push,
-30min checkpoint,3findings grouped. Collect same live handle then affected review.
+Current PROGRESS: Standard55591 TERMINAL0, corrected coherent batch frozen
+e5937ac5532da3d4029935851f2853e6fbd00315 in owned shared-Child slice. Actual diff
+and fix-result.md independently read: rejects successful or unrelated panic,
+binds intended payload/controller event and receipt, releases unique fixture
+files regardless of PID publication, refreshes PID, distinguishes outer normal
+receipt and controller panic receipt. No Cargo/compiler/native run; source
+checks only. Count1 failed correction retained; second correction SOURCE ACCEPTED by terminal review1620.
+Affected independent review actualCLI1620 read-only, output/log
+.scratch/process-unix-run/shared-child-cleanup-affected-review.md/-cli.log.
+No new escalation or native allowance; external forced-controller/hard-runner
+custody, sync blocking wait entry, compiler/MSRV and all native criteria open.
 
-Mac source owner reports92/92 pure checks, configured Python3.12 wrapper and
-project-local direct-child runner source changes; checking timeout/exception
-edge before freeze. This is unaccepted owner source evidence pending readback
-and combined affected review, not native custody. Root exact ps confirms foreign
-TableTop Playwright51269 original start2026-10-02 16:06:31 still live at1:07:09.
-No heavy Mac run/control allocation; prepared Darwin stage waits actual slot.
+Mac responsible owner TERMINAL source commit7e8183a6b416c481fe7d165d4dbe834f1ff3e93c.
+Root read actual local runner and source-green-94.log:94 pure tests+AST passed,
+owned runner exact direct-child registration and585/600 reserve source-only.
+Pinned provenance9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d.
+Changed wrapper/localrunner/tests/control-readiness docs and original RED/GREEN
+logs; foreign dirty prerequisite deletion/assets untouched. Native followup
+review dispatch failed thread limit and started nothing. Actual configured
+ExpertCLI2713 read-only now performs one combined affected review against5ed13;
+output .scratch/all-tickets/macos-wrapper-correction-20261002/affected-review.md.
+Outer SIGKILL/unconfirmed adapter reap cannot retain ownership by files. No
+native/control/measurement launch; guardfalse/count84/85unlaunched unchanged.
 
-Windows single fixture invocation remains terminal at first production-compiler
-failure. Latest owner screenshot logs-result.png shows nested control PID4324/
-child5380 and preserved injected setup exception; root independently viewed the original frame and confirms this narrow log
-content at a clean prompt. It does not prove final PID/job absence. Compiler-filter-result.png independently viewed by root: stdout2817bytes,
-stderr0; setup-parent441/childstdout93/childstderr0/controlstdout118/
-controlstderr0/controlmarker211bytes, error|failed filter matched no compiler
-lines. Thus stopped-at-compile is established but a compiler error is not yet
-proved. SAME owner closure/executable query46147 is live typing; PIDs3192/4324/
-5380 and build/ScopedRunner.exe existence/size will distinguish wrapper failure
-from compiler failure. No rerun; original screenshots remain at exact owner path. Owner proceeds
-with one narrow read-only log filter and exact filenames/sizes, plus independent
-PID/job closure; no rerun or budget reset. Previous first-fixture result and
-narrow setup-control output retained once at8e0edeec. Diagnose actual compiler
-cause before any correction or later launch.
+Windows owner terminal reported typing46147 unavailable; root SAME handle query
+returned Unknown process id, exact ps showed no type_console command. No new
+fixture launch. Root actual VMUUIDdc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19 verified,
+current screenshot showed full intended460char readonly query, no Enter.
+Root Entered this existing complete query ONCE. Actual terminal result at
+/tmp/win9e0-20261002-6f804a9c4c4a4e78/root-closure-result.png: get-process exact
+3192/4324/5380 returns none; parent receipt compile-production-runner exited
+with BLANK code, same exact log paths; build/ScopedRunner.exe exists171008bytes.
+This closes those exact process absence observations, not job/process-tree or
+compiler/production acceptance. Root original frames retained once under
+windows-staging-9e0-root-evidence/closure-readback/. Blank exit-code handling is
+a source hypothesis; configured WorkerCLI82458 read-only checks frozen9e0
+RunSourceFixtures.ps1 Invoke-OwnedProcess. Output windows-compiler-exit-diagnosis.md,
+no guest input/compile/retry. Single source-fixture history/outer1h/Expert02 caps
+preserved; no fixture rerun until actual diagnosis and current bounds checked.
 
-Next: collect Child review, batch material fixes in responsible source context;
-collect Windows exact diagnostics/closure; freeze/read back Mac runner source
-edge and affected review. Use existing tickets/acceptance criteria. Child
-production/native, broad custody, sync wait-entry, Windows actual production,
-Mac controls/overhead and full release matrix remain open. Unix count84,
-measurement85unlaunched/fourcontrolsunallocated unchanged; Goal active.
+Current continuation PROGRESS: review handles1620/2713 are now missing/terminal;
+full actual final reports independently read. Originals retained once under
+source-review-readback-20261002/. Child e593 SOURCE ACCEPTED for all three defects,
+8/8 changed paths covered. External custody, compiler/native, forced-controller
+closure and sync blocking-wait evidence remain open; source acceptance is not
+native acceptance. Existing unit public_wait_is_cancelled_after_entering_condvar
+uses public Engine, actual FIFO-held child, test-only wait_entries and reacquired
+snapshot mutex/nonterminal observation; native proof still required. Integration
+fixture channel alone still does not prove blocking wait entry.
+
+Mac7e wrapper review REJECTED high: its599-second exact-child KILL can destroy
+sole adapter/controller custody while anchored descendants remain; direct reaping
+and retained files do not prove closure. Prior5ed source closures remain valid.
+This distinct outer-runner correction has1 failed source correction; preserve
+cause09's separate existing Expert history without reset/new chain. Configured
+Standard source-only fix actualhandle48964 runs in same owned Mac worktree,
+brief macos-wrapper-correction-20261002/custody-fix-brief.md. Must retain/transfer
+real custody within unchanged600/585 bounds, no broad PID/group signalling,
+no merely renamed uncertainty or abandonment. No native/control launch allowed.
+
+Windows Worker82458 TERMINAL0 report independently read; its revision confirmation
+confused the instruction repo with Rhai checkout, so not accepted as a confirmed
+958 instruction revision. Primary PowerShell issue5421 documents redirected/
+NoNewWindow Start-Process null ExitCode and exact Handle caching before wait:
+https://github.com/PowerShell/PowerShell/issues/5421. Matches actual blank receipt,
+but cause still native-unproven. New owned managed worktree
+/Users/hoppworks/.codex/worktrees/windows-source-exit-codes/rhai starts frozen9e0,
+branch task/windows-source-exit-codes, project AGENTS reread. Configured Standard
+source-only repair actual49420, windows-exit-code-repair-brief.md: cache exact
+Handle, capture/validate status, preserve job custody/bounds, real0/17 and missing
+status controls prepared for later reviewed native execution. No guest/native
+retry allocated; existing one consumed source-fixture invocation and caps retained.
+
+Previous user status turn VERIFIED WAIT: specific handles1620/2713 both polled
+live then; no code or acceptance closure that turn. This continuation PROGRESS:
+collected source acceptance and concrete new custody finding, dispatched two
+bounded source fixes. Exact foreign TableTop PID51269 still live at elapsed1:25:26;
+no signal sent. Darwin prepared heavy stage remains unlaunched. Next collect same
+49420/48964, independently inspect frozen results and perform affected combined
+review before native execution. No native count changed or full acceptance claimed.
 
 ## Resources, counts and cause history
 Unix actual native invocation count84 consumed.82 failed before runtime;
