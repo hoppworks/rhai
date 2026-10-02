@@ -1,0 +1,11 @@
+# Affected shared Child source review
+
+Read ~/.agents/AGENTS.md, this worktree AGENTS.md, the current ocr-delegate skill and current Expert role/template from /Users/hoppworks/projects/agent-skills. Confirm loaded revision. This is one combined affected review, not a fresh escalation or native acceptance.
+
+Review immutable commit 58dbf90f671281fc9a8845f7546f23f225c34b4b against 0184e20a4e49c57f3fec7289ec3d94ec6bffb548, and affected dependencies of the earlier dd2a44f activation. Prior report: .scratch/process-unix-run/shared-child-activation-review.md. Current repair report: shared-child-cleanup-repair.md. Exact fixture: tests/fixtures/sys_process_shared_child_contract.rs. Production child ownership/reaping is in src/packages/sys_process.rs.
+
+Read-only; no builds, Cargo, native fixture executions, installs, config changes, commits, pushes or descendants. Run OCR deterministic preview/rules when available and directly inspect excluded fixture/docs. One heavy slot remains occupied by foreign work; this is source-only.
+
+Assess correctness, applicable rules, coverage and honest acceptance limitations together. Focus on scenario catch_unwind, production Child lifetime/reap, ESRCH receipt authenticity, guard release-before-kill, failed-panic regression detection (including unexpectedly successful controller), fixture retention and late child-status races. Retained files alone cannot establish custody. Determine what remains required before native dispatch, particularly hard scoped watchdog and forced controller death. Recheck no_float constant gate and successful controller output. Explain whether the 12-to-24-second fixture watchdog adjustment is justified by the 18-second fixture bound; do not alter external hard caps. Sync start notification is not blocking wait entry proof. No numeric fixture PID signals or weakening safety assertions.
+
+Write full findings, locations, source acceptance disposition and one concrete next action to .scratch/process-unix-run/shared-child-cleanup-review.md, with a concise terminal summary. Source review cannot claim compiler/native/E2E completion. Existing native count84 and allocated-unlaunched85 stay unchanged. Current project/instruction revision is authoritative. Planning checkpoint30min active work; stop when review complete.

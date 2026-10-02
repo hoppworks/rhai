@@ -1,0 +1,9 @@
+**The source correction batch is ready for the affected review.** It addresses all three findings in the fixture and updates the activation note and prior repair report. The immutable base was `58dbf90f`; the agent-skills revision read was `958a4538`.
+
+- Expected-panic checks now reject controller success and require the intended panic payload, cleanup event, and a receipt matching scenario, controller PID, fixture PID, and fixture root. Source controls cover a successful controller and an unrelated panic.
+- Cleanup releases only the fixture’s owned synchronization files, refreshes PID records during bounded grace and final accounting, and signals only the exact controller child. Unverified closure retains records. The normal receipt is identified as an outer-test observation.
+- The timeout record distinguishes hold mode’s single 18-second deadline from blocked-input mode’s two waits and blocking read; 24 seconds is documented as a polling deadline, not a whole-fixture cap.
+
+**Checks:** `git diff --check` passed. `rustfmt --check` parsed the fixture but reported formatting differences, including untouched existing sections; I avoided whole-file formatting. No Cargo, compiler, test, native, or process-fixture execution was run.
+
+The rejected correction remains recorded as **1 failed source correction**. Native accounting remains **84 consumed / 85 allocated but unlaunched**; hard budgets are unchanged. External process custody, forced controller-death recovery, sync wait-entry, and compiler/MSRV behavior remain open. The detailed record is [shared-child-cleanup-fix-result.md](/Users/hoppworks/.codex/worktrees/process-shared-child-activation/rhai/.scratch/process-unix-run/shared-child-cleanup-fix-result.md).

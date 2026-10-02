@@ -1,0 +1,13 @@
+# Shared Child affected review correction batch
+
+Read current ~/.agents/AGENTS.md, project AGENTS.md, relevant current skills and Standard role/template from /Users/hoppworks/projects/agent-skills; confirm958a4538 revision. Existing owned worktree is authorized, do not create another. No descendants.
+
+Implement the three material findings in .scratch/process-unix-run/shared-child-cleanup-review-summary.md against immutable58dbf90f. Prior repair report shared-child-cleanup-repair.md. Production path src/packages/sys/process/unix.rs. This is one ordinary related source fix batch, not a new escalation chain. Review rejected first cleanup correction: preserve cause/history, count1 failed source correction; do not reset84 consumed native/85unlaunched or hard budgets.
+
+1. The expected-panic wrapper must fail on successful controller status and verify the intended panic payload/event, not any unrelated panic with cleanup. Preserve original failed scenario outcome. Add meaningful wrong/success-case controls as test source; no native execution yet.
+2. Guard releases only exact owned synchronization files unconditionally, independent of initial PID publication; refresh recorded PID during bounded grace/final accounting. Never signal a numeric fixture PID. Preserve exact ControllerChild ownership and incomplete cleanup honestly. Files alone are not custody; no unsupported hard-watchdog claims.
+3. Correct receipt provenance and bind identity/scenario evidence. Outer normal marker is not controller-issued. Correct the18-second whole-fixture claim: hold timeout differs from blocked-input multi-stage timeout;24sec is polling deadline plus bounded grace/blocking output limitations, not complete package cap.
+
+Only fixture, existing activation note/report and a source fix result under .scratch/process-unix-run/shared-child-cleanup-fix-result.md. Do not edit production, global runner, other worktrees, installed skills/config/homes. No commits/push/native/Cargo/builds. Source/pure checks only, use tdd principles with recorded expected RED if meaningful source check can actually establish it; never substitute static assertions for real native acceptance. No standalone Python regex test that mirrors code as fake behavior proof. Diffcheck and targeted syntax/formatting inspection; avoid unrelated whole-file formatting. External process custody, sync wait-entry and MSRV/compiler remain open.
+
+30min active-work planning checkpoint, at most two consecutive launches without new diagnosis, no native launch permission in this source task. Report exact changes/checks/open limitations and next affected review in the result. Stop once this cohesive fix batch is ready.

@@ -1,4 +1,4 @@
-# Shared Child fixture cleanup repair
+# Shared Child fixture cleanup repair — superseded by review correction
 
 ## Changed files
 
@@ -13,7 +13,17 @@
   repair, evidence limits, source recheck, and remaining sync wait-entry limit.
 - `shared-child-cleanup-repair.md`: this result.
 
-## Checks
+## Review correction and preserved history
+
+The independent source review in
+`.scratch/process-unix-run/shared-child-cleanup-review-summary.md` rejected the
+first cleanup correction on three material points. That is one failed source
+correction for this cause; it does not reset the 84 consumed / 85 allocated but
+unlaunched native counts or any hard budget. See
+`.scratch/process-unix-run/shared-child-cleanup-fix-result.md` for the cohesive
+correction and its source-only checks.
+
+## Checks from the first correction
 
 - Confirmed `HEAD` is `0184e20a4e49c57f3fec7289ec3d94ec6bffb548`.
 - Reviewed production `CleanupService` ownership/reap behavior and the affected
