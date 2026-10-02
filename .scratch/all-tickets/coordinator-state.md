@@ -79,9 +79,14 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    metadata commands and early raw export address root pre-freeze findings.
    Exact capture fixture PID absence is narrow observed resource evidence, not a
    worker/handle/descriptor census; those ticket03 resource requirements stay open.
-   Responsible Linux context prepares frozen launcher/archive/preflight using
-   existing monitor, scoped private source/lock/build and exact cleanup ledger.
-   Root reviews launcher before native invocation82; no retry package or cap reset.
+   Responsible Linux context froze launcher/preflight at local dd95669e. Root
+   independently read all launcher/wrapper/contract/preflight sources: descendant
+   monitoring exists, but storage sampling is missing from the new wrapper and
+   memory RSS observation/stop is absent despite printed claims. Root returned
+   first source-review correction: implement actual bounded storage/RSS sampling
+   and export, add measurement-command identity ledger to final readback, retain
+   exact identity/heartbeat/cancellation and existing bounds. No staging or native
+   invocation82 is released; no measurement slot or native failure consumed.
    Root macOS measurement adaptation is SOURCE-ONLY and NOT approved to launch:
    macos-process-overhead.py and run-macos-process-overhead.sh bind00bed/archive
    5414ea195ad00152b1eae36b3f4e10943ba5d9bf323baff6410cca0c5b4d8b98.
@@ -89,9 +94,12 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    semantics/export and watchdogs present; inherited du-only sampling lacks live
    descendant<=16 and2GiB memory observation/stop. run_scoped group-only cleanup
    must not be claimed as exact managed-child closure after interrupted driver.
-   No Mac launch consumed. Next root action: wire the existing concrete resource
-   sampling pattern with bounded child cancellation/final identity readback, then
-   review the changed safeguards before any invocation. First source-review finding,
+   No Mac launch consumed. Responsible fresh Standard macos_overhead_safeguards now owns managed worktree
+   /Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai on local
+   task/macos-overhead-safeguards from39617ee7. Source-only repair brief requires
+   concrete live descendant/RSS monitoring, bounded cancellation/reap and exact
+   identity readback without unsafe stale-PID/group signaling. No native/Cargo
+   launch; root independently reviews frozen safeguards before release. First source-review finding,
    no native failure or new Expert chain. Keep planned120calls/zero warmups/no retries.
 3. Windows public-contract source preparation is integrated at43e9ef8c (parent
    056c0b53). OCR selected1 Rust file, reviewed1/skipped0; excluded Markdown state
@@ -161,10 +169,11 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Previous turn classification
-Previous turn progressed: corrected Windows contract and measurement source were
-reviewed/integrated, meaningful parser rejection controls passed. This turn prepares
-Mac adapter source and obtains independent review identifying missing concrete cap
-monitoring; that evidence changes next action to safeguard repair before launch.
-Linux source launcher preparation continues; no live native fixture handle is
-claimed from agent status or intent. Windows fetch key error is diagnosed before
-fixture execution, not a behavior failure. No retry/cause history or budget reset.
+The preceding user status turn restated authoritative state and verified only-main
+remote; it did not close implementation acceptance (no implementation progress).
+This continuation independently reviewed frozen Linux launcher dd95669e and found
+concrete missing storage/RSS monitoring, changing next action to source correction
+before native82. Linux responsible context continues that repair. Root created an
+exact owned managed worktree and delegated the parallel bounded Mac safeguard
+repair. Windows continues its existing owner context; no live fixture handle is
+claimed from agent status or intent. No history, budget or native counter reset.
