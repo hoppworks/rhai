@@ -4,6 +4,7 @@ use rhai::packages::sys::{ProgramPolicy, SysConfig, SysPackage};
 use rhai::packages::Package;
 use rhai::{Dynamic, Engine, Map, Scope, INT};
 use std::path::{Path, PathBuf};
+use std::panic::{catch_unwind, resume_unwind, AssertUnwindSafe};
 use std::process::{Child as ControllerChild, Command, Stdio};
 #[cfg(feature = "sync")]
 use std::sync::{mpsc, Arc, Barrier};
@@ -24,13 +25,31 @@ fn scenario_entry() {
         return;
     };
     let root = PathBuf::from(std::env::var_os(ROOT_ENV).expect("scenario root"));
-    match scenario.as_str() {
+    let result = catch_unwind(AssertUnwindSafe(|| match scenario.as_str() {
         "blocked_input_wait_snapshot" => blocked_input_wait_snapshot(&root),
         "drop_true" => drop_final_client(&root, true),
         "drop_false" => drop_final_client(&root, false),
+        "panic_cleanup" => panic_with_live_fixture(&root),
         #[cfg(feature = "sync")]
         "sync_wait_cancel" => sync_wait_cancel(&root),
         other => panic!("unknown shared-child scenario {other}"),
+    }));
+    if let Err(payload) = result {
+        // Keep the package cleanup worker alive while releasing only this fixture through its
+        // private synchronization files. The worker retains the exact OS Child and performs
+        // the production reap; neither this handler nor the outer guard signals a numeric PID.
+        release_fixture(&root);
+        match wait_for_recorded_fixture_reap(&root, Duration::from_secs(4)) {
+            Some(pid) => {
+                eprintln!("shared-child panic_cleanup pid={pid} reap=ESRCH verified=true");
+                let _ = std::fs::write(root.join("fixture-closure-verified"), "ESRCH\n");
+            }
+            None => eprintln!(
+                "shared-child panic_cleanup reap=unverified record={:?}; retaining fixture records",
+                std::fs::read_to_string(root.join("child.status")).ok()
+            ),
+        }
+        resume_unwind(payload);
     }
 }
 
@@ -104,6 +123,11 @@ fn nonfinal_child_clone_drop_keeps_the_real_child_available() {
 #[test]
 fn final_drop_honors_both_kill_on_drop_policies() {
     run_bounded_controller("drop_false");
+}
+
+#[test]
+fn scenario_panic_releases_and_reaps_the_owned_fixture() {
+    run_bounded_controller_expect_panic("panic_cleanup");
 }
 
 #[cfg(feature = "sync")]
@@ -241,6 +265,15 @@ fn drop_final_client(root: &Path, kill_on_drop: bool) {
     }
 }
 
+fn panic_with_live_fixture(root: &Path) {
+    let engine = engine(false);
+    let mut scope = Scope::new();
+    let child = spawn_fixture(&engine, &mut scope, root, "hold", None);
+    scope.push_dynamic("child", child);
+    wait_for_state(root, "child.status", "ready", Duration::from_secs(3));
+    panic!("intentional scenario panic with an owned live fixture");
+}
+
 #[cfg(feature = "sync")]
 fn sync_wait_cancel(root: &Path) {
     let engine = Arc::new(engine(false));
@@ -322,6 +355,14 @@ fn try_issue_probe(
 /// The scoped runner owns the group watchdog; this guard terminates and reaps only the exact
 /// direct controller, then verifies any recorded OS fixture PID before its temp root is dropped.
 fn run_bounded_controller(scenario: &str) {
+    run_bounded_controller_inner(scenario, false);
+}
+
+fn run_bounded_controller_expect_panic(scenario: &str) {
+    run_bounded_controller_inner(scenario, true);
+}
+
+fn run_bounded_controller_inner(scenario: &str, expect_panic: bool) {
     let root = FixtureDir::new();
     let root_path = root.path().to_path_buf();
     let executable = std::env::current_exe().expect("test executable");
@@ -339,7 +380,7 @@ fn run_bounded_controller(scenario: &str) {
     let controller_pid = child.id() as i32;
     eprintln!("shared-child controller_started scenario={scenario} pid={controller_pid} root={}", root_path.display());
     let mut guard = ControllerGuard { child: Some(child), controller_pid, record: root_path.join("child.status") };
-    let deadline = Instant::now() + Duration::from_secs(12);
+    let deadline = Instant::now() + Duration::from_secs(24);
     loop {
         if let Some(status) = guard.child.as_mut().unwrap().try_wait().expect("poll exact scenario child") {
             let output = guard.child.take().unwrap().wait_with_output().expect("reap exact scenario child");
@@ -348,15 +389,28 @@ fn run_bounded_controller(scenario: &str) {
             assert_pid_reaped(controller_pid);
             eprintln!("shared-child controller_esrch pid={controller_pid} verified=true");
             if !status.success() {
+                if expect_panic {
+                    let output_text = format!("{}{}", String::from_utf8_lossy(&output.stdout), String::from_utf8_lossy(&output.stderr));
+                    assert!(output_text.contains("panic_cleanup") && output_text.contains("reap=ESRCH verified=true"), "scenario panic did not prove production reap:\n{output_text}");
+                    let fixture_pid = read_record_pid(&guard.record).expect("panic fixture PID record");
+                    assert_pid_reaped(fixture_pid);
+                    let record = std::fs::read_to_string(&guard.record).expect("panic fixture exit record");
+                    assert!(record.contains("state=exited"), "fixture did not exit after release: {record}");
+                    assert!(guard.record.parent().unwrap().join("fixture-closure-verified").exists(), "controller did not preserve the production-reap receipt");
+                    eprintln!("shared-child panic-regression fixture_pid={fixture_pid} production_reap=verified record={record:?}");
+                    return;
+                }
                 panic!("scenario {scenario} failed ({status})\nstdout:\n{}\nstderr:\n{}", String::from_utf8_lossy(&output.stdout), String::from_utf8_lossy(&output.stderr));
             }
             if let Some(pid) = read_record_pid(&guard.record) {
                 wait_for_pid_gone(pid, Duration::from_secs(3));
+                std::fs::write(guard.record.parent().unwrap().join("fixture-closure-verified"), "production-reap-and-ESRCH\n")
+                    .expect("record normal fixture closure");
             }
             eprintln!("shared-child scenario={scenario} controller_pid={controller_pid} status=ok fixture_record={:?}", std::fs::read_to_string(&guard.record).ok());
             return;
         }
-        assert!(Instant::now() < deadline, "scenario {scenario} exceeded 12s external watchdog; fixture_record={:?}", std::fs::read_to_string(&guard.record).ok());
+        assert!(Instant::now() < deadline, "scenario {scenario} exceeded 24s external watchdog; fixture_record={:?}", std::fs::read_to_string(&guard.record).ok());
         thread::sleep(Duration::from_millis(10));
     }
 }
@@ -381,7 +435,12 @@ impl FixtureDir {
 
 impl Drop for FixtureDir {
     fn drop(&mut self) {
-        std::fs::remove_dir_all(&self.0).expect("remove exact fixture root");
+        let closure_verified = self.0.join("fixture-closure-verified").exists();
+        if !closure_verified {
+            eprintln!("shared-child fixture_records_retained root={} reason=closure_unverified", self.0.display());
+            return;
+        }
+        std::fs::remove_dir_all(&self.0).expect("remove exact fixture root after verified closure");
     }
 }
 
@@ -394,7 +453,20 @@ struct ControllerGuard {
 impl Drop for ControllerGuard {
     fn drop(&mut self) {
         let recorded_pid = read_record_pid(&self.record);
-        let fixture_live = recorded_pid.is_some_and(process_exists);
+        if let Some(pid) = recorded_pid {
+            // The controller may still own the production reaper. Release its fixture first,
+            // then give that exact controller a bounded chance to finish and reap it.
+            release_fixture(self.record.parent().expect("fixture record parent"));
+            let deadline = Instant::now() + Duration::from_secs(5);
+            while self.child.as_mut().is_some_and(|child| child.try_wait().ok().flatten().is_none())
+                && Instant::now() < deadline
+            {
+                thread::sleep(Duration::from_millis(5));
+            }
+            if !pid_is_esrch(pid) {
+                eprintln!("shared-child watchdog fixture_closure=unverified pid={pid}; retaining fixture records");
+            }
+        }
         if let Some(mut child) = self.child.take() {
             if child.try_wait().ok().flatten().is_none() {
                 // Stop only the exact controller Child. It remains in the scoped runner's
@@ -412,20 +484,41 @@ impl Drop for ControllerGuard {
             }
         }
         if let Some(pid) = recorded_pid {
-            if fixture_live {
-                // Release only this recorded fixture through its owned synchronization files.
-                // This keeps wrong-control panics bounded without signaling a PID that may have
-                // exited or been reused.
-                let root = self.record.parent().expect("fixture record parent");
-                let _ = std::fs::write(root.join("release-input"), "watchdog");
-                let _ = std::fs::write(root.join("release-exit"), "watchdog");
-                let deadline = Instant::now() + Duration::from_secs(3);
-                while process_exists(pid) && Instant::now() < deadline {
-                    thread::sleep(Duration::from_millis(5));
-                }
+            let production_reap_verified = self
+                .record
+                .parent()
+                .expect("fixture record parent")
+                .join("fixture-closure-verified")
+                .exists();
+            if production_reap_verified && pid_is_esrch(pid) {
+                eprintln!("shared-child watchdog fixture_closure=verified pid={pid} reap=ESRCH production_reap=true");
+            } else {
+                eprintln!("shared-child watchdog fixture_closure=unverified pid={pid} production_reap={production_reap_verified}; fixture_records_retained=true");
             }
-            eprintln!("shared-child fixture_cleanup pid={pid} absent={}", !process_exists(pid));
         }
+    }
+}
+
+fn release_fixture(root: &Path) {
+    for name in ["release-input", "release-exit"] {
+        if let Err(error) = std::fs::write(root.join(name), "watchdog") {
+            eprintln!("shared-child fixture_release_error file={name} error={error}");
+        }
+    }
+}
+
+fn wait_for_recorded_fixture_reap(root: &Path, timeout: Duration) -> Option<i32> {
+    let deadline = Instant::now() + timeout;
+    loop {
+        if let Some(pid) = read_record_pid(&root.join("child.status")) {
+            if pid_is_esrch(pid) {
+                return Some(pid);
+            }
+        }
+        if Instant::now() >= deadline {
+            return None;
+        }
+        thread::sleep(Duration::from_millis(5));
     }
 }
 

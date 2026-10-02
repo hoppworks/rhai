@@ -51,12 +51,27 @@ records three inherited acceptance prerequisites. The direct-drop challenge
 constant now has the same feature gate as its process-fixture use, removing
 the identified `no_float` unresolved-name mismatch. Successful controllers
 now export their captured stdout/stderr to the enclosing test log before
-fixture records are removed. Both corrections still need affected review
-and actual native/compiler verification.
+fixture records are removed. Source recheck confirms both corrections remain
+in place; affected native/compiler verification is pending.
 
-Exceptional controller cleanup remains unresolved: killing the controller
-before fixture release may remove the child's reaper, and a logged
-`absent=false` does not establish cleanup. Do not launch this module until
-the bounded runner/fixture path retains ownership and reports incomplete
-closure honestly. Preserve this finding rather than accepting only its
-successful paths. The sync blocking-wait-entry limitation also remains open.
+Exceptional controller cleanup now catches scenario unwinds inside the
+controller, releases only its owned synchronization files, and waits for exact
+`ESRCH` while the package cleanup worker retains the OS `Child`. The normal
+controller path records closure only after its exact-child reap check. The outer
+guard releases before its bounded wait and termination of the exact controller;
+it never promotes post-termination PID absence to production-reap proof. Fixture
+records are removed only after a controller-side production-reap check and
+`ESRCH`; otherwise the directory and records are retained with cleanup logged as
+unverified. This does not prove cleanup if the controller is forcibly terminated
+before its worker reaps, or if the scoped runner's hard watchdog interrupts the
+process group. Do not launch the module until the runner's broader process-group
+custody prerequisite is satisfied.
+
+A new panic-cleanup regression exercises this recovery through the public Engine
+and self-reexecuted OS fixture; it requires an exited child record, exact
+`ESRCH`, and the controller-side production-reap receipt. It has not been run.
+
+The source recheck confirms successful controller stdout/stderr remains
+emitted, and `DIRECT_DROP_CHALLENGE_ENV` remains gated by `unix && !no_index`,
+matching its process-fixture use. The sync blocking-wait-entry limitation also
+remains open.
