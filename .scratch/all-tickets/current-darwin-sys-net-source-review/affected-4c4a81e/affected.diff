@@ -1,0 +1,357 @@
+diff --git a/.scratch/all-tickets/check-current-darwin-sys-net-behavior.py b/.scratch/all-tickets/check-current-darwin-sys-net-behavior.py
+index 78e4c883..850cefc6 100644
+--- a/.scratch/all-tickets/check-current-darwin-sys-net-behavior.py
++++ b/.scratch/all-tickets/check-current-darwin-sys-net-behavior.py
+@@ -15,8 +15,8 @@ import tarfile
+ import time
+ import traceback
+ 
+-SOURCE_REVISION = '50af89515fa2094c9c10bf03e98b89f00291c57f'
+-SOURCE_ARCHIVE_SHA256 = '12f66ac017d8c54e95f7bf38a9319f1e379446168bd9d102a9ff7b52dbe5327a'
++SOURCE_REVISION = '2f795ecee8edd6ddf348f382e5397cc6e348ad37'
++SOURCE_ARCHIVE_SHA256 = '43c8b8e43a2bcd3e74dd0be3d60a0dea2eab50eb5bfe65cc736684631523d52b'
+ LOCK_SHA256 = '2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425'
+ RUSTUP = Path.home() / '.cargo/bin/rustup'
+ TOOLCHAIN = '1.77.2-aarch64-apple-darwin'
+@@ -546,6 +546,66 @@ def positive_test_coverage(output: str, targets: tuple[str, ...],
+             'coverage_found': exact_targets and all_executed}
+ 
+ 
++def derive_target_order_parser_input(stdout: str, stderr: str, targets: tuple[str, ...],
++                                     expected_tests: dict[str, list[str]]) -> dict[str, object]:
++    """Associate Cargo stderr target headers with successive complete stdout libtest blocks."""
++    import re
++
++    header_pattern = re.compile(r'^\s*Running tests/([A-Za-z0-9_]+)\.rs(?:\s|$)')
++    summary_pattern = re.compile(r'^test result: (?:ok|FAILED)\.')
++    headers = [match.group(1) for line in stderr.splitlines()
++               if (match := header_pattern.match(line))]
++    stderr_diagnostics = [line for line in stderr.splitlines()
++                          if not header_pattern.match(line)]
++    if len(headers) != len(targets) or set(headers) != set(targets) or len(set(headers)) != len(headers):
++        raise RuntimeError(f'stderr target headers do not match selected targets exactly once: {headers}')
++
++    lines = stdout.splitlines()
++    blocks: list[list[str]] = []
++    outside: list[str] = []
++    current: list[str] | None = None
++    for line in lines:
++        if re.match(r'^running \d+ tests?$', line):
++            if current is not None:
++                raise RuntimeError('stdout libtest block began before prior block summary')
++            current = [line]
++        elif current is None:
++            outside.append(line)
++        else:
++            current.append(line)
++            if summary_pattern.match(line):
++                blocks.append(current)
++                current = None
++    if current is not None:
++        raise RuntimeError('stdout ended with incomplete libtest block')
++    if len(blocks) != len(headers):
++        raise RuntimeError(f'stdout complete libtest blocks ({len(blocks)}) do not match '
++                           f'stderr target headers ({len(headers)})')
++
++    entries: list[str] = []
++    for target, block in zip(headers, blocks):
++        # Validate association against the exact selected inventory before combining
++        # streams. EILSEQ can still be associated because it produces a named result.
++        standalone = '     Running tests/' + target + '.rs (derived target order)\n' + '\n'.join(block) + '\n'
++        check = positive_test_coverage(standalone, (target,), expected_tests)
++        row = check['target_results'][0] if check['target_results'] else {}
++        if (row.get('summary_count') != 1
++                or sorted(row.get('observed_tests', [])) != sorted(expected_tests.get(target, []))):
++            raise RuntimeError(f'stdout block does not match named inventory for {target}')
++        entries.append('     Running tests/' + target + '.rs (derived target order)\n'
++                       + '\n'.join(block) + '\n')
++    parser_core = ('--- derived target order from stderr headers and successive stdout blocks; '
++                    'this is not captured cross-stream chronology ---\n'
++                    + ('--- stdout outside complete libtest blocks ---\n' + '\n'.join(outside) + '\n'
++                       if outside else '') + ''.join(entries))
++    parser_input = (parser_core + ('--- stderr diagnostics outside target headers ---\n'
++                                   + '\n'.join(stderr_diagnostics) + '\n'
++                                   if stderr_diagnostics else ''))
++    coverage = positive_test_coverage(parser_core, targets, expected_tests)
++    return {'label': 'derived target order from stderr headers and successive stdout blocks',
++            'target_order': headers, 'parser_input': parser_input, 'coverage': coverage}
++
++
+ def extract_archive(archive_path: Path) -> None:
+     """Extract the staged git archive while rejecting escaping paths and links."""
+     root = SOURCE.resolve()
+@@ -786,15 +846,18 @@ def main() -> int:
+         argv.extend(['--', '--nocapture', '--test-threads=1'])
+         status = run_command('behavior-' + row_name, argv, env, expected_status=None,
+                              cwd=SOURCE)
+-        output = ((EVIDENCE / f'behavior-{row_name}.stdout').read_text(errors='replace') +
+-                  '\n--- stderr follows stdout; raw files are preserved separately ---\n' +
+-                  (EVIDENCE / f'behavior-{row_name}.stderr').read_text(errors='replace'))
+-        (EVIDENCE / f'behavior-{row_name}.parser-input.txt').write_text(output, encoding='utf-8')
++        stdout = (EVIDENCE / f'behavior-{row_name}.stdout').read_text(errors='replace')
++        stderr = (EVIDENCE / f'behavior-{row_name}.stderr').read_text(errors='replace')
+         inventory = frozen_test_inventory(SOURCE, features)
+         expected_tests = {target: inventory.get(target, []) for target in targets}
+-        coverage = positive_test_coverage(output, targets, expected_tests)
++        derived = derive_target_order_parser_input(stdout, stderr, targets, expected_tests)
++        output = derived['parser_input']
++        (EVIDENCE / f'behavior-{row_name}.parser-input.txt').write_text(output, encoding='utf-8')
++        coverage = derived['coverage']
+         result = {'row': row_name, 'features': features, 'targets': list(targets),
+                   'status': status, 'argv': argv, **coverage,
++                  'parser_order_label': derived['label'],
++                  'derived_target_order': derived['target_order'],
+                   'stdout': f'behavior-{row_name}.stdout',
+                   'stderr': f'behavior-{row_name}.stderr',
+                   'parser_input': f'behavior-{row_name}.parser-input.txt',
+diff --git a/.scratch/all-tickets/current-darwin-sys-net-behavior-contract.md b/.scratch/all-tickets/current-darwin-sys-net-behavior-contract.md
+index d4042496..c3cd9325 100644
+--- a/.scratch/all-tickets/current-darwin-sys-net-behavior-contract.md
++++ b/.scratch/all-tickets/current-darwin-sys-net-behavior-contract.md
+@@ -1,8 +1,8 @@
+ # Current Darwin filesystem and TCP behavior contract
+ 
+-This is a prepared acceptance runner for production source revision
+-`50af89515fa2094c9c10bf03e98b89f00291c57f` (archive SHA-256
+-`12f66ac017d8c54e95f7bf38a9319f1e379446168bd9d102a9ff7b52dbe5327a`) and
++This is a prepared acceptance runner for test/source revision
++`2f795ecee8edd6ddf348f382e5397cc6e348ad37` (archive SHA-256
++`43c8b8e43a2bcd3e74dd0be3d60a0dea2eab50eb5bfe65cc736684631523d52b`) and
+ compatible lock SHA-256
+ `2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425`.
+ It runs only on native Darwin arm64 with private Rust 1.77.2. Its nine behavior
+@@ -12,10 +12,11 @@ five assertion controls must fail for their intended incorrect expectation;
+ then the unchanged inputs must pass all nine behavior rows.
+ 
+ Every Cargo command retains original separate stdout and stderr files, status,
+-command metadata, and exact target/test coverage in exported receipts. Each row
+-also preserves a deterministic parser input consisting of stdout followed by
+-stderr with an explicit boundary. It is not described as a chronological merged
+-stream. The expected test names are derived from active `#[test]` functions in
++and command metadata. For each multi-target behavior row, the parser validates
++the exact target-header sequence in stderr, then associates each successive
++complete stdout libtest block with the corresponding header and frozen named
++inventory. The resulting parser input is explicitly labeled as derived target
++order, not captured cross-stream chronology. The expected test names are derived from active `#[test]` functions in
+ the frozen sources under the row's feature set and Darwin target cfg, then
+ compared exactly with names reported by libtest. Each target must have exactly
+ one result summary.
+@@ -28,18 +29,21 @@ returns normally, so libtest can report it as passed with zero ignored tests.
+ The runner records that named test as skipped and leaves the row unaccepted; a
+ successful Cargo exit alone is insufficient.
+ 
+-The two macOS system-prefix policy tests use distinct
+-`/var/../../...` and `/private/var/../../...` spellings that independently
+-canonicalize to the existing owned fixture beneath the central runtime. They
+-fail before Engine construction if the host layout does not preserve that exact
+-mapping. This fixture correction is included in the source revision and archive
+-hash above; previous same-path assertions are not acceptance evidence.
++The macOS system-prefix policy test obtains distinct `/var/../../...` and
++`/private/var/../../...` spellings for the same existing `real` fixture
++directory beneath the central runtime. It configures the Engine root with the
++first spelling, reads the file through both spellings, requires write denial,
++and performs independent host readback. The fixture helper asserts distinct
++strings and independently canonicalizes both spellings to the exact owned
++directory before Engine construction. This fixture correction is included in
++the source revision and archive hash above; previous mismatched-root assertions
++are not acceptance evidence.
+ 
+ Before future dispatch, stage the source archive, accepted lock, this contract,
+ the runner, and the existing `run_scoped.py` package inputs under the unique
+-real directory named `current-darwin-sys-net-behavior-a2d7a8c2-20261002`.
++real directory named `current-darwin-sys-net-behavior-2f795ece-20261002`.
+ Set `DARWIN_PROOF_STAGE` to that absolute stage, create a unique scope at
+-`~/.local/share/agent-builds/rhai/current-darwin-sys-net-behavior-a2d7a8c2-20261002`,
++`~/.local/share/agent-builds/rhai/current-darwin-sys-net-behavior-2f795ece-20261002`,
+ and invoke this helper through the existing `tools/run_scoped.py` with an
+ absolute `TMPDIR` equal to that scope. Its runtime owns the extracted source,
+ private Rustup/Cargo homes, target output, and temporary files. Export receipts
+diff --git a/.scratch/all-tickets/current-darwin-sys-net-behavior-repair-green.stdout b/.scratch/all-tickets/current-darwin-sys-net-behavior-repair-green.stdout
+index 92073931..e681a44a 100644
+--- a/.scratch/all-tickets/current-darwin-sys-net-behavior-repair-green.stdout
++++ b/.scratch/all-tickets/current-darwin-sys-net-behavior-repair-green.stdout
+@@ -5,3 +5,4 @@ cleanup_unknown_and_reparented_process=PASS
+ cleanup_owned_group_membership=PASS
+ distinct_darwin_alias_fixture_and_receipts=PASS
+ scope_and_cleanup_contract=PASS
++split_stream_derived_target_order_and_malformed_cases=PASS
+diff --git a/.scratch/all-tickets/current-darwin-sys-net-behavior-repair-red.json b/.scratch/all-tickets/current-darwin-sys-net-behavior-repair-red.json
+new file mode 100644
+index 00000000..dd4a9ae3
+--- /dev/null
++++ b/.scratch/all-tickets/current-darwin-sys-net-behavior-repair-red.json
+@@ -0,0 +1,24 @@
++{
++  "baseline_commit": "8b9740de8e4493c78320293d3a07599672f22484",
++  "fixture": "two complete stdout libtest blocks; two stderr Running tests headers",
++  "tests": {
++    "separate_stdout_then_stderr": {
++      "RED": "test result appeared without a selected integration target"
++    },
++    "ordered_clean_named_output": {
++      "coverage_found": true
++    },
++    "EILSEQ_named_early_return": {
++      "coverage_found": false
++    },
++    "missing_named_test": {
++      "coverage_found": false
++    },
++    "selected_header_reordered_vs_targets": {
++      "covered_by_new_regression": "headers sequence sys_net,sys_fs; target tuple sys_fs,sys_net; successive blocks matched in header order"
++    },
++    "missing_duplicate_headers_blocks": {
++      "covered_by_new_regression": "focused GREEN rejects missing and duplicate headers, missing inventory block, extra duplicate block"
++    }
++  }
++}
+diff --git a/.scratch/all-tickets/current-darwin-sys-net-behavior-source-prep.md b/.scratch/all-tickets/current-darwin-sys-net-behavior-source-prep.md
+index ad696a6e..0cc7e9c7 100644
+--- a/.scratch/all-tickets/current-darwin-sys-net-behavior-source-prep.md
++++ b/.scratch/all-tickets/current-darwin-sys-net-behavior-source-prep.md
+@@ -2,22 +2,25 @@
+ 
+ ## Frozen inputs and retained evidence
+ 
+-- Test/source revision: `50af89515fa2094c9c10bf03e98b89f00291c57f`.
+-- Frozen source archive SHA-256: `12f66ac017d8c54e95f7bf38a9319f1e379446168bd9d102a9ff7b52dbe5327a`.
++- Test/source revision: `2f795ecee8edd6ddf348f382e5397cc6e348ad37`.
++- Frozen source archive SHA-256: `43c8b8e43a2bcd3e74dd0be3d60a0dea2eab50eb5bfe65cc736684631523d52b`.
+ - Compatible lock SHA-256: `2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425`.
+-- The seven original independent-review receipts are retained at `/Users/hoppworks/.codex/worktrees/all-tickets-continuation/rhai/.scratch/all-tickets/current-darwin-sys-net-source-review/`; `review.md`, `pure-regressions.py`, `pure-receipts.json`, and `pure-regressions.stdout` record the F1–F4 RED baseline. Review applicability was frozen at `2d52bf0b87a684b87222436795dcfc73875a7ce8` against unchanged production inputs.
+-- Existing compiler/example readbacks remain reusable for compiler/example coverage only. Existing Linux behavior receipts remain Linux-only.
++- Original combined review and its seven receipts are retained at `/Users/hoppworks/.codex/worktrees/all-tickets-continuation/rhai/.scratch/all-tickets/current-darwin-sys-net-source-review/`.
++- The same combined affected recheck is retained at `/tmp/current-darwin-sys-net-affected-recheck.vmrgou7y/`; its `review.md`, `affected-regressions.py`, and `affected-receipts.json` document that the first F3/F4 repair in `8b9740de8e4493c78320293d3a07599672f22484` did not configure a root matching the system-prefix reads and concatenated stdout before stderr, making target association fail. This correction batch preserves that failed-correction history; no native allocation was made.
++- Existing compiler/example readbacks apply only to those requirements. Existing Linux behavior proof remains Linux-only and unaffected.
+ 
+-## F1–F4 source repair and focused GREEN evidence
++## Consolidated affected correction
+ 
+-- F1: each target now compares its exact frozen feature/OS-selected named-test inventory with individual outcomes and one exact libtest summary. A successful-status early return carrying `filesystem rejects non-UTF-8 fixture with EILSEQ:` leaves `test_non_utf8_file_name` explicitly uncovered. Completed named tests remain recorded, later rows continue, and the aggregate row remains unaccepted.
+-- F2: cleanup readback fails closed for unknown process/path state, checks stable PID/start identity despite reparenting or process-group changes, records sampled descendants, checks owned process-group membership, and verifies runtime/scope absence or an empty real runtime directory with error-aware filesystem calls.
+-- F3: the cfg(macos) central runtime fixture now supplies distinct `/var/../../...` and `/private/var/../../...` spellings, independently verifies their distinct strings, and independently canonicalizes both to the exact owned fixture path.
+-- F4: stdout and stderr are retained at separate, honest log paths; parser input is explicitly stdout followed by stderr, not represented as chronological merged output.
+-- GREEN: `python3 .scratch/all-tickets/test-current-darwin-sys-net-behavior.py` passes the seven focused source-only regressions recorded in `current-darwin-sys-net-behavior-repair-green.stdout`. Python syntax compilation and `git diff --check` pass.
+-- Runner behavior at the RED baseline: a status-0 target with a coverage deficit stopped the run by raising immediately, so later rows were not executed and partial named outcomes were unavailable. It now records completed/uncovered named tests, continues other status-0 rows, and keeps aggregate acceptance false; nonzero command status remains a hard stop.
+-- No Cargo/toolchain/native behavior run, process fixture, control run, or measurement was launched. No Darwin acceptance is claimed. The unchanged production code and separately accepted Linux evidence are unaffected.
++- F1/F2 are retained from `8b9740de8e4493c78320293d3a07599672f22484`: exact named outcomes/EILSEQ uncovered aggregation and fail-closed stable process/path cleanup remain unchanged.
++- F3: the frozen cfg(macos) test now obtains the two system-prefix spellings from the exact owned `real` directory, configures `fs_root` with the `/var` spelling, and reads through both configured and prefix-alias forms. The fixture independently requires distinct strings, canonical equality to the exact real directory, denied write, and host byte readback. Native execution remains unverified.
++- F4: raw stdout and stderr stay separate. The helper validates the exact stderr target header sequence, parses successive complete stdout libtest blocks, pairs each block with its corresponding header and exact selected named inventory, and labels the generated parser input `derived target order ... not captured cross-stream chronology`. Missing, duplicate, extra, incomplete or inventory-mismatched headers/blocks fail closed. Original stdout/stderr logs remain raw receipts; non-header stderr diagnostics are preserved in the labeled parser input, and stdout diagnostics within blocks, including EILSEQ, remain available to the coverage parser.
++
++## RED/GREEN receipts
++
++- F3 RED: the affected recheck’s `F3_configured_root_policy_mismatch` demonstrates that the previous configured ordinary `.../link` root did not lexically match either `/var/../../.../real/a.txt` or `/private/var/../../.../real/a.txt`. Its scope is explicitly a lexical policy model, not an Engine or OS run. F3 GREEN is the test-source correction in frozen revision `2f795ecee8edd6ddf348f382e5397cc6e348ad37`; the cfg(macos) assertions will verify the actual host canonicalization, Engine access, denied write, and readback only at future Darwin dispatch.
++- F4 RED: the affected recheck’s `behavior-model.stdout`, `behavior-model.stderr`, and `behavior-model.parser-input.txt` use realistic separate Cargo streams and reproduce `test result appeared without a selected integration target` for stdout-then-stderr concatenation. A direct run of the baseline helper at `8b9740de8e4493c78320293d3a07599672f22484` against two complete blocks and two stderr headers reproduced the same error; ordered clean named output passed while EILSEQ and missing-name cases stayed uncovered. These results are saved in `current-darwin-sys-net-behavior-repair-red.json`. The new focused regression initially failed because `derive_target_order_parser_input` did not exist. F4 GREEN: `python3 .scratch/all-tickets/test-current-darwin-sys-net-behavior.py` now passes the separate-stream multi-target regression, with reversed selected-target order, missing/duplicate headers, extra/missing/inventory-mismatched blocks, clean ordered output, named-test negatives, and the EILSEQ uncovered case. Exact output is saved in `current-darwin-sys-net-behavior-repair-green.stdout`.
++- Python syntax compilation and `git diff --check` pass. No Cargo, toolchain, native Engine/API/fixture, process query, control, or measurement85 was launched.
+ 
+ ## Remaining acceptance
+ 
+-All nine Darwin behavior rows and five assertion controls remain pending actual Darwin source-run acceptance, including the named EILSEQ assertion which this platform fixture may not reach. The current package is prepared for the SAME independent combined reviewer’s affected recheck. Do not treat source-only GREEN as native acceptance.
++The nine Darwin behavior rows and five assertion controls remain pending actual Darwin source-run acceptance. `test_non_utf8_file_name` remains uncovered if its actual body returns early for EILSEQ. The original independent reviewer should perform the requested affected recheck of F3/F4 at the frozen correction. No native acceptance is claimed, and no push or merge was performed.
+diff --git a/.scratch/all-tickets/test-current-darwin-sys-net-behavior.py b/.scratch/all-tickets/test-current-darwin-sys-net-behavior.py
+index d9f8f559..d5b5adc9 100644
+--- a/.scratch/all-tickets/test-current-darwin-sys-net-behavior.py
++++ b/.scratch/all-tickets/test-current-darwin-sys-net-behavior.py
+@@ -33,8 +33,8 @@ def test_pins_and_rows():
+               for node in tree.body if isinstance(node, ast.Assign)
+               and len(node.targets) == 1 and isinstance(node.targets[0], ast.Name)
+               and isinstance(node.value, ast.Constant)}
+-    assert values['SOURCE_REVISION'] == '50af89515fa2094c9c10bf03e98b89f00291c57f'
+-    assert values['SOURCE_ARCHIVE_SHA256'] == '12f66ac017d8c54e95f7bf38a9319f1e379446168bd9d102a9ff7b52dbe5327a'
++    assert values['SOURCE_REVISION'] == '2f795ecee8edd6ddf348f382e5397cc6e348ad37'
++    assert values['SOURCE_ARCHIVE_SHA256'] == '43c8b8e43a2bcd3e74dd0be3d60a0dea2eab50eb5bfe65cc736684631523d52b'
+     assert values['LOCK_SHA256'] == '2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425'
+     assert values['TOOLCHAIN'] == '1.77.2-aarch64-apple-darwin'
+     rows = ast.literal_eval(next(node.value for node in tree.body if isinstance(node, ast.Assign)
+@@ -167,6 +167,58 @@ def test_distinct_alias_fixture_and_raw_receipt_contract():
+     assert 'coverage_incomplete=' in helper
+ 
+ 
++def test_split_stream_target_association():
++    module = load_helper()
++    expected = {
++        'sys_fs': ['filesystem_read', 'test_non_utf8_file_name'],
++        'sys_net': ['net_read'],
++    }
++    headers = ('warning: retained Cargo warning in stderr\n'
++               '     Running tests/sys_net.rs (target/debug/deps/sys_net-a)\n'
++               '     Running tests/sys_fs.rs (target/debug/deps/sys_fs-b)\n')
++    # Cargo emits these target headers to stderr, separately from each successive
++    # stdout libtest block. This order is intentionally opposite targets tuple.
++    stdout = ('running 1 test\ntest net_read ... ok\n'
++              'test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n'
++              'running 2 tests\ntest filesystem_read ... ok\n'
++              'test test_non_utf8_file_name ... ok\n'
++              'test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n')
++    parse = getattr(module, 'derive_target_order_parser_input')
++    derived = parse(stdout, headers, ('sys_fs', 'sys_net'), expected)
++    assert derived['label'] == 'derived target order from stderr headers and successive stdout blocks'
++    assert derived['target_order'] == ['sys_net', 'sys_fs']
++    assert derived['coverage']['coverage_found']
++    assert 'warning: retained Cargo warning in stderr' in derived['parser_input']
++
++    for bad_headers, bad_stdout in (
++            (headers.splitlines()[0] + '\n', stdout),
++            (headers + headers.splitlines()[1] + '\n', stdout),
++            (headers, stdout + 'running 0 tests\n'),
++            (headers, stdout.replace('test filesystem_read ... ok\n', '')),
++            (headers, stdout + 'running 1 test\ntest net_read ... ok\n'
++             'test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n')):
++        try:
++            parse(bad_stdout, bad_headers, ('sys_fs', 'sys_net'), expected)
++        except (RuntimeError, ValueError):
++            pass
++        else:
++            raise AssertionError('mismatched split-stream headers/blocks were accepted')
++
++    ordered = (headers.splitlines()[2] + '\n' +
++               'running 2 tests\ntest filesystem_read ... ok\n'
++               'test test_non_utf8_file_name ... ok\n'
++               'test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n' +
++               headers.splitlines()[1] + '\n' +
++               'running 1 test\ntest net_read ... ok\n'
++               'test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n')
++    assert module.positive_test_coverage(ordered, ('sys_fs', 'sys_net'), expected)['coverage_found']
++    eilseq_stdout = stdout.replace('test test_non_utf8_file_name ... ok',
++        'test test_non_utf8_file_name ... filesystem rejects non-UTF-8 fixture with EILSEQ: os error 92\nok')
++    eilseq = parse(eilseq_stdout, headers, ('sys_fs', 'sys_net'), expected)
++    assert not eilseq['coverage']['coverage_found']
++    assert eilseq['coverage']['target_results'][0]['uncovered_named_tests'] == ['test_non_utf8_file_name']
++
++
+ if __name__ == '__main__':
+     test_pins_and_rows()
+     test_controls_require_the_intended_red()
+@@ -175,6 +227,7 @@ if __name__ == '__main__':
+     test_cleanup_rejects_live_owned_process_group_member()
+     test_contract_describes_scope_and_cleanup()
+     test_distinct_alias_fixture_and_raw_receipt_contract()
++    test_split_stream_target_association()
+     print('pins_and_nine_rows=PASS')
+     print('named_assertion_red_and_incidental_101_rejection=PASS')
+     print('darwin_early_return_named_coverage_and_summary_integrity=PASS')
+@@ -182,3 +235,4 @@ if __name__ == '__main__':
+     print('cleanup_owned_group_membership=PASS')
+     print('distinct_darwin_alias_fixture_and_receipts=PASS')
+     print('scope_and_cleanup_contract=PASS')
++    print('split_stream_derived_target_order_and_malformed_cases=PASS')
+diff --git a/tests/sys_policy.rs b/tests/sys_policy.rs
+index f3c5c27a..a4dcf57f 100644
+--- a/tests/sys_policy.rs
++++ b/tests/sys_policy.rs
+@@ -332,11 +332,11 @@ fn test_root_accepts_macos_system_prefix_aliases() {
+     let t = TempDir::new();
+     t.write("real/a.txt", "payload");
+     std::os::unix::fs::symlink(t.path().join("real"), t.path().join("link")).unwrap();
+-    let e = engine(SysConfig::default().fs_root(t.path().join("link"), FsAccess::Read));
++    let (var_root, private_root) = macos_system_prefix_spellings(&t.path().join("real"));
++    let e = engine(SysConfig::default().fs_root(&var_root, FsAccess::Read));
+ 
+-    let (var_root, private_root) = macos_system_prefix_spellings(t.path());
+-    let var_path = format!("{var_root}/real/a.txt");
+-    let private_path = format!("{private_root}/real/a.txt");
++    let var_path = format!("{var_root}/a.txt");
++    let private_path = format!("{private_root}/a.txt");
+     assert_ne!(var_path, private_path);
+     assert_eq!(e.eval::<String>(&format!(r#"read_file("{var_path}")"#)).unwrap(), "payload");
+     assert_eq!(e.eval::<String>(&format!(r#"read_file("{private_path}")"#)).unwrap(), "payload");

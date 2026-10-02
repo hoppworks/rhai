@@ -1,0 +1,3 @@
+     Running tests/net_reads.rs (target/debug/deps/net_reads-a)
+     Running tests/sys_fs.rs (target/debug/deps/sys_fs-b)
+filesystem rejects non-UTF-8 fixture with EILSEQ: Illegal byte sequence (os error 92)

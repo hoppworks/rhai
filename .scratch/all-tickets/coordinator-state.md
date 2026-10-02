@@ -997,7 +997,7 @@ No source integration/native acceptance before this affected checkpoint.
 No native/build/toolchain/control/measurement dispatch; affected combined recheck
 at frozen repair required. Genuine EILSEQ early return remains uncovered.
 
-Last independently read-back fork main8c61f9fbdf4c343ff58db55e714d1289e0a15354.
+Last independently read-back fork main8c0a3a16ddced5376ea8f17720d57fa165850bdc.
 Lowercase author and committer independently checked; root checkout clean before
 this state update. No upstream writes. Current disk instructions958a4538 unchanged.
 Previous status-only goal turn: NO PROGRESS. This continuation yields new evidence:
@@ -1016,9 +1016,20 @@ Affected Darwin4c4a81e live independent finding: F3 configured-root policy now
 matches. F4 clean split association works, but coverage uses parser_core and
 excludes appended stderr diagnostics; actual stderr-only EILSEQ false pass
 invalidates F1 diagnostic acceptance under this new derivation. Same reviewer
-is freezing the actual-stream reproduction/report; no third direct patch.
+terminal report and12 original files retained once at
+current-darwin-sys-net-source-review/affected-4c4a81e/. Root read exact receipts:
+actual stderr skip falsely coverage_found=true; full preserved parser input
+correctly rejects and marks only F19 uncovered. Native launches0. F3 source
+accepted and F2 retained; new derived-path F1 invalidated only for EILSEQ.
+Also contract stage/scope2f795ece conflicts with helper enforcementa2d7a8c2.
+No third direct patch.
 Two failed implemented F4 corrections preserved (8b974 ordering,4c4a diagnostics).
 Required first cause-specific escalation brief prepared at
-escalations/11-darwin-split-stream-coverage.md; fresh Expert dispatch awaits
-terminal original report and available slot. Source-only30min planning checkpoint;
+escalations/11-darwin-split-stream-coverage.md; fresh nonfork Expert
+darwin_split_stream_coverage_expert dispatched with terminal original report,
+actual-stream receipts and stage/scope mismatch. Source-only30min planning checkpoint;
 one Expert/one bounded follow-up, no native allocation/history reset.
+
+Previous goal turn: PROGRESS (immutable correction/review finding and cause11 brief).
+This continuation: terminal affected report independently read and retained;
+first cause11 fresh Expert dispatched. Goal active, no native acceptance yet.

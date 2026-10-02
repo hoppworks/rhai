@@ -1,0 +1,227 @@
+{
+  "revision": "4c4a81e0551f6e6d5c56112de7febda0101ce27f",
+  "native_launches": 0,
+  "source_categories": [
+    "pins_and_nine_rows=PASS",
+    "named_assertion_red_and_incidental_101_rejection=PASS",
+    "darwin_early_return_named_coverage_and_summary_integrity=PASS",
+    "cleanup_unknown_and_reparented_process=PASS",
+    "cleanup_owned_group_membership=PASS",
+    "distinct_darwin_alias_fixture_and_receipts=PASS",
+    "scope_and_cleanup_contract=PASS",
+    "split_stream_derived_target_order_and_malformed_cases=PASS"
+  ],
+  "clean_multi_target": {
+    "target_results": [
+      {
+        "target": "sys_fs",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered_out": 0,
+        "summary_count": 1,
+        "expected_tests": [
+          "filesystem_read",
+          "test_non_utf8_file_name"
+        ],
+        "observed_tests": [
+          "filesystem_read",
+          "test_non_utf8_file_name"
+        ],
+        "test_outcomes": {
+          "filesystem_read": "ok",
+          "test_non_utf8_file_name": "ok"
+        },
+        "completed_named_tests": [
+          "filesystem_read",
+          "test_non_utf8_file_name"
+        ],
+        "uncovered_named_tests": []
+      },
+      {
+        "target": "net_reads",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered_out": 0,
+        "summary_count": 1,
+        "expected_tests": [
+          "net_read"
+        ],
+        "observed_tests": [
+          "net_read"
+        ],
+        "test_outcomes": {
+          "net_read": "ok"
+        },
+        "completed_named_tests": [
+          "net_read"
+        ],
+        "uncovered_named_tests": []
+      }
+    ],
+    "expected_targets": [
+      "sys_fs",
+      "net_reads"
+    ],
+    "all_selected_targets_ran_once": true,
+    "all_tests_passed_without_ignored_or_filtered": true,
+    "ignored_tests": [],
+    "skipped_tests": [],
+    "named_test_coverage_found": true,
+    "coverage_found": true
+  },
+  "meaningful_negatives": {
+    "missing-header": "stderr target headers do not match selected targets exactly once: ['net_reads']",
+    "duplicate-header": "stderr target headers do not match selected targets exactly once: ['net_reads', 'sys_fs', 'net_reads']",
+    "missing-named-test": "stdout block does not match named inventory for sys_fs",
+    "incomplete-block": "stdout ended with incomplete libtest block",
+    "extra-summary": "test result appeared without a selected integration target"
+  },
+  "actual_eprintln_stream_shape_false_acceptance": {
+    "target_results": [
+      {
+        "target": "sys_fs",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered_out": 0,
+        "summary_count": 1,
+        "expected_tests": [
+          "filesystem_read",
+          "test_non_utf8_file_name"
+        ],
+        "observed_tests": [
+          "filesystem_read",
+          "test_non_utf8_file_name"
+        ],
+        "test_outcomes": {
+          "filesystem_read": "ok",
+          "test_non_utf8_file_name": "ok"
+        },
+        "completed_named_tests": [
+          "filesystem_read",
+          "test_non_utf8_file_name"
+        ],
+        "uncovered_named_tests": []
+      },
+      {
+        "target": "net_reads",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered_out": 0,
+        "summary_count": 1,
+        "expected_tests": [
+          "net_read"
+        ],
+        "observed_tests": [
+          "net_read"
+        ],
+        "test_outcomes": {
+          "net_read": "ok"
+        },
+        "completed_named_tests": [
+          "net_read"
+        ],
+        "uncovered_named_tests": []
+      }
+    ],
+    "expected_targets": [
+      "sys_fs",
+      "net_reads"
+    ],
+    "all_selected_targets_ran_once": true,
+    "all_tests_passed_without_ignored_or_filtered": true,
+    "ignored_tests": [],
+    "skipped_tests": [],
+    "named_test_coverage_found": true,
+    "coverage_found": true
+  },
+  "full_preserved_parser_input_rejects_same_skip": {
+    "target_results": [
+      {
+        "target": "sys_fs",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered_out": 0,
+        "summary_count": 1,
+        "expected_tests": [
+          "filesystem_read",
+          "test_non_utf8_file_name"
+        ],
+        "observed_tests": [
+          "filesystem_read",
+          "test_non_utf8_file_name"
+        ],
+        "test_outcomes": {
+          "filesystem_read": "ok",
+          "test_non_utf8_file_name": "ok"
+        },
+        "completed_named_tests": [
+          "filesystem_read"
+        ],
+        "uncovered_named_tests": [
+          "test_non_utf8_file_name"
+        ]
+      },
+      {
+        "target": "net_reads",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered_out": 0,
+        "summary_count": 1,
+        "expected_tests": [
+          "net_read"
+        ],
+        "observed_tests": [
+          "net_read"
+        ],
+        "test_outcomes": {
+          "net_read": "ok"
+        },
+        "completed_named_tests": [
+          "net_read"
+        ],
+        "uncovered_named_tests": []
+      }
+    ],
+    "expected_targets": [
+      "sys_fs",
+      "net_reads"
+    ],
+    "all_selected_targets_ran_once": true,
+    "all_tests_passed_without_ignored_or_filtered": false,
+    "ignored_tests": [],
+    "skipped_tests": [
+      {
+        "target": "sys_fs",
+        "test": "test_non_utf8_file_name",
+        "reason": "Darwin EILSEQ rejected non-UTF-8 fixture; assertion returned early"
+      }
+    ],
+    "named_test_coverage_found": false,
+    "coverage_found": false
+  },
+  "F3_configured_prefix_policy_routes": {
+    "given_root": "/var/../../Users/hoppworks/.local/share/agent-builds/rhai/owned/runtime/tmp/rhai-sys-test-owned/real",
+    "given_prefix_alias": "/private/var/../../Users/hoppworks/.local/share/agent-builds/rhai/owned/runtime/tmp/rhai-sys-test-owned/real",
+    "relative_suffixes": [
+      "a.txt",
+      "a.txt"
+    ],
+    "native_canonicalization_and_engine": "unverified"
+  },
+  "scope_naming": {
+    "helper_required_stage_and_scope": "current-darwin-sys-net-behavior-a2d7a8c2-20261002",
+    "contract_instructed_stage_and_scope": "current-darwin-sys-net-behavior-2f795ece-20261002"
+  }
+}

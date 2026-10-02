@@ -13,7 +13,7 @@ Two implemented F4 corrections failed independent affected review: 8b9740de conc
 - Helper: .scratch/all-tickets/check-current-darwin-sys-net-behavior.py, positive_test_coverage and derive_target_order_parser_input, especially coverage computed from parser_core.
 - Tests: .scratch/all-tickets/test-current-darwin-sys-net-behavior.py; actual macOS EILSEQ emission in tests/sys_fs.rs; named inventories and contract/source-prep in the same directory.
 - Root initial and affected originals: .scratch/all-tickets/current-darwin-sys-net-source-review/ and affected-8b974/.
-- Latest same-reviewer original report/reproduction: obtain its terminal path from the root before analysis if not available. Do not infer acceptance from owner GREEN categories.
+- Latest same-reviewer original report/reproduction: /tmp/current-darwin-sys-net-second-recheck.6h16fg12/review.md and adjacent affected-receipts.json, affected-regressions.py, eilseq-model.stdout/.stderr/.parser-input.txt. Do not infer acceptance from owner GREEN categories.
 
 # Constraints and decisions
 
@@ -25,7 +25,7 @@ Initial review: missing named inventory/EILSEQ early-return rejection and merged
 
 # Deliverable
 
-Write 11-darwin-split-stream-coverage.answer.md beside this brief. Diagnose the exact evidence boundary; propose the smallest sound source correction and meaningful realistic multi-target stdout/stderr RED/GREEN cases, including unknown diagnostic association, multiple targets, clean output and stderr-only EILSEQ. Specify previously accepted conclusions invalidated and unchanged evidence reusable. Provide a bounded follow-up repair contract and stop criteria. Return at most 15 lines plus path.
+Write 11-darwin-split-stream-coverage.answer.md beside this brief. Diagnose the exact evidence boundary; propose the smallest sound source correction and meaningful realistic multi-target stdout/stderr RED/GREEN cases, including unknown diagnostic association, multiple targets, clean output and stderr-only EILSEQ. Also resolve the contract stage/scope mismatch: contract names2f795ece while helper SESSION_ID enforcement still namesa2d7a8c2. Specify previously accepted conclusions invalidated and unchanged evidence reusable. Provide a bounded follow-up repair contract and stop criteria. Return at most 15 lines plus path.
 
 # Budget
 
