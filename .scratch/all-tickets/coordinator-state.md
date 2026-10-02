@@ -124,8 +124,19 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
    finite Linux non-process filesystem/environment/TCP feature acceptance package,
    source-only before review/staging. Confirms4d86 global/project/roles/templates
    and no descendants; no new native launch permitted by that source task.
-   Next collect exact covered release criteria, immutable source and pure controls;
-   retain valid unchanged earlier proof, leave missing feature/native gates open.
+   Linux source-only behavior preparation38b07774 frozen, independently
+   reviewed4/4 OCR codefiles plus contract. Four proposed runtime rows
+   combinedbaseline/no_index/metadata+serde andnet/no_object reuse accepted
+   examples. Two assertion-control classifier defects found in one batch:
+   no_object requires restoredELSE message, write accepts incidental101+254.
+   Existing owner correcting classifiers with intended namedtest/panic/output
+   proof and compileerror/zero-test/unrelatedpanic negative fixtures. Review at
+   linux-current-sys-net-behavior-review.md; reviewer combinedbytes concern
+   withdrawn after full String::from_utf8_lossy assertion read, not a failure.
+   No staging/build/native command executed. Next collect corrected ref and
+   original RED/GREEN, recheck finding fixes and independently scoped pure
+   tests before integration/staging. Other combinedruntime rows remainopen.
+
 
 3. Mac Managed source correction74943bb2 is independently reviewed and replayed:
    58 adapter/23 reader pass, prior wrong fixture PGID and early gate reap are
@@ -246,12 +257,14 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Current turn classification
-Previous goal turn: PROGRESS, reviewed preparation integrated/staged/read back.
-Current continuation: PROGRESS. Linux optional-MSRV real sys/net examples close
-through one locked build, meaningful wrong-expectation controls and restored
-Engine/OS readbacks. Independent110-PID/group/runtime/scope closure checked.
-Existing Linux/Mac source work proceeds; Windows remains shut off. Count84 and
-full release/campaign requirements remain open, no cap/history revision.
+Previous status-request turn: no implementation progress; live fork readback
+confirmed mainonly and owner handback changed the next available action.
+Current continuation: PROGRESS. Independent Mac review found and closed an
+output-contract defect, replayed63source tests0, integrated reviewed source
+and original receipts, pushed97977bac and independently read back forkmain.
+Independent Linux behavior review now identifies concrete classifier defects
+for one responsible fix batch. Goal incomplete; source work is active and
+meaningful, no blocked transition or additional nativeprocess allocation.
 
 ## Current-source core MSRV package — accepted narrow gate
 Current default-core applicability CLOSED for source52d9797b, Rust/Cargo1.66.0,
