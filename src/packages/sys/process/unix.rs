@@ -3201,7 +3201,17 @@ mod tests {
         inject_scope_eperm_for_next_execution(1);
         let recovered = engine
             .eval::<crate::Map>("run(\"/bin/true\")")
-            .expect("a later exact ESRCH observation closes the scope");
+            .unwrap_or_else(|error| {
+                let detail = match error.as_ref() {
+                    EvalAltResult::ErrorRuntime(value, _) => value
+                        .clone()
+                        .try_cast::<SysError>()
+                        .map(|error| format!("{error:?}"))
+                        .unwrap_or_else(|| format!("untyped runtime payload {value:?}")),
+                    other => format!("{other:?}"),
+                };
+                panic!("a later exact ESRCH observation closes the scope: {detail}");
+            });
         assert!(recovered["success"].as_bool().unwrap());
         assert_eq!(recovered["code"].as_int().unwrap(), 0);
         assert!(recovered["stdout_complete"].as_bool().unwrap());
