@@ -263,15 +263,23 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Current turn classification
-Previous continuation: PROGRESS. Current continuation: PROGRESS, corrected Linux
-package33b4d676 source findings closed by narrow recheck and independent scoped
-pure eight-requirement replay0. Exact32 inputs/evidence files integrated; review
-linux-current-sys-net-behavior-review.md and root-pure.log. No native run yet;
-stage reviewed nine inputs and read back, revalidate foreign heavy cleanup slot
-before dispatch. Own runtime removed/emptyscope retired, all finite caps retained.
-Mac owner investigates separate companion-only internal real read observer,
-absent from frozen measurement; applicability and native evidence remain open.
-No count85 allocation or blocked transition; full goal remains incomplete.
+Previous continuation: PROGRESS, Linux source package integrated/staged with nine
+independently matched inputs. Current continuation: PROGRESS, first native
+non-process runtime package exec5531 terminal1 yielded three correctly classified
+intended REDs101 (filesystem/TCP read/write), then combined intended RED101
+rejected by generic assertion-prefix predicate. Original custom assert! message
+contains exact expected/actual values and named panic/source but no generic
+assertion prefix. Native evidence invalidates invented pure assertion fixture.
+First infrastructure/classifier failure for this native cause, not a production
+failure; no positive rows or no_object control executed. Existing owner receives
+precise original-byte regression/fix, unused follow-up stage/scope, finite caps
+unchanged and count84/no85. Original evidence linux-current-sys-net-behavior-
+evidence/launcher-evidence/outer.log; independent root-readback confirms all
+recorded exact PID/start identities absent and runtime/scope absent. Outer/scoped1,
+cleanup/readback/scope0. Export23.547s,37samples maximaRSS916472KiB,
+storage804608KiB,desc6 (periodic maxima). Reviewed helper bytes match native.
+Mac companion-only actual-read observer preparation continues; measurement
+source/guard remain unchanged. Full release and goal incomplete.
 
 ## Current-source core MSRV package — accepted narrow gate
 Current default-core applicability CLOSED for source52d9797b, Rust/Cargo1.66.0,

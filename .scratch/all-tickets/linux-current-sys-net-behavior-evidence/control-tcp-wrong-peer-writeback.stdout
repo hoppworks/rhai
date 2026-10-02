@@ -1,0 +1,11 @@
+
+running 1 test
+test script_write_blob_preserves_exact_bytes ... FAILED
+
+failures:
+
+failures:
+    script_write_blob_preserves_exact_bytes
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 9 filtered out; finished in 0.00s
+

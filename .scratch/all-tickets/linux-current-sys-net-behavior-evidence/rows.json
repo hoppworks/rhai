@@ -1,0 +1,86 @@
+{
+  "all_assertion_controls_are_meaningful_red": false,
+  "all_positive_rows_succeeded": false,
+  "assertion_controls": [
+    {
+      "assertion_panic_context_found": true,
+      "diagnostic_found": true,
+      "environment_control": "RHAI_FILE_READ_WRONG_EXPECTATION",
+      "exactly_one_test_ran_and_failed": true,
+      "expected_status": 101,
+      "features": "testing-environ,sys,net",
+      "intended_assertion_context_found": true,
+      "name": "sys-filesystem-wrong-readback",
+      "named_test_failed": true,
+      "required_assertion_context": [
+        "left: \"abc\"",
+        "right: \"wrong expectation\""
+      ],
+      "status": 101,
+      "status_is_101": true,
+      "target": "sys_fs",
+      "test": "test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving"
+    },
+    {
+      "assertion_panic_context_found": true,
+      "diagnostic_found": true,
+      "environment_control": "RHAI_NET_WRONG_READ_EXPECTATION",
+      "exactly_one_test_ran_and_failed": true,
+      "expected_status": 101,
+      "features": "testing-environ,sys,net",
+      "intended_assertion_context_found": true,
+      "name": "tcp-wrong-peer-readback",
+      "named_test_failed": true,
+      "required_assertion_context": [
+        "left: \"a\ufffdb\"",
+        "right: \"wrong peer payload\""
+      ],
+      "status": 101,
+      "status_is_101": true,
+      "target": "net_reads",
+      "test": "stream_read_string_returns_exact_lossy_text_from_peer_bytes"
+    },
+    {
+      "assertion_panic_context_found": true,
+      "diagnostic_found": true,
+      "environment_control": "RHAI_NET_WRONG_WRITE_EXPECTATION",
+      "exactly_one_test_ran_and_failed": true,
+      "expected_status": 101,
+      "features": "testing-environ,sys,net",
+      "intended_assertion_context_found": true,
+      "name": "tcp-wrong-peer-writeback",
+      "named_test_failed": true,
+      "required_assertion_context": [
+        "left: [0, 255, 65]",
+        "right: [0, 254, 65]"
+      ],
+      "status": 101,
+      "status_is_101": true,
+      "target": "net_writes",
+      "test": "script_write_blob_preserves_exact_bytes"
+    },
+    {
+      "assertion_panic_context_found": false,
+      "diagnostic_found": false,
+      "environment_control": "RHAI_COMBINED_WRONG_EXPECTATION",
+      "exactly_one_test_ran_and_failed": true,
+      "expected_status": 101,
+      "features": "testing-environ,sys,net",
+      "intended_assertion_context_found": true,
+      "name": "combined-wrong-host-readback",
+      "named_test_failed": true,
+      "required_assertion_context": [
+        "fresh host readback must match independent expected bytes",
+        "actual=\"filesystem-payload\"",
+        "expected=\"incorrect filesystem expectation\""
+      ],
+      "status": 101,
+      "status_is_101": true,
+      "target": "combined_sys_net",
+      "test": "sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors"
+    }
+  ],
+  "positive_row_count": 4,
+  "positive_rows": [],
+  "successful_positive_rows": 0
+}

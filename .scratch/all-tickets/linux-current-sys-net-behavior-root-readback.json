@@ -1,0 +1,66 @@
+{
+  "exact_pid_start_readback": [
+    {
+      "label": "helper",
+      "pid": 1790626,
+      "start_ticks": "7841574",
+      "matching_identity_alive": false
+    },
+    {
+      "label": "scoped-supervisor",
+      "pid": 1790625,
+      "start_ticks": "7841573",
+      "matching_identity_alive": false
+    },
+    {
+      "label": "rustup-version",
+      "pid": 1790632,
+      "start_ticks": "7841603",
+      "matching_identity_alive": false
+    },
+    {
+      "label": "rustup-install",
+      "pid": 1790647,
+      "start_ticks": "7841616",
+      "matching_identity_alive": false
+    },
+    {
+      "label": "rustc-version",
+      "pid": 1790832,
+      "start_ticks": "7842429",
+      "matching_identity_alive": false
+    },
+    {
+      "label": "cargo-version",
+      "pid": 1790838,
+      "start_ticks": "7842442",
+      "matching_identity_alive": false
+    },
+    {
+      "label": "control-sys-filesystem-wrong-readback",
+      "pid": 1790856,
+      "start_ticks": "7842457",
+      "matching_identity_alive": false
+    },
+    {
+      "label": "control-tcp-wrong-peer-readback",
+      "pid": 1792025,
+      "start_ticks": "7843798",
+      "matching_identity_alive": false
+    },
+    {
+      "label": "control-tcp-wrong-peer-writeback",
+      "pid": 1792059,
+      "start_ticks": "7843843",
+      "matching_identity_alive": false
+    },
+    {
+      "label": "control-combined-wrong-host-readback",
+      "pid": 1792107,
+      "start_ticks": "7843887",
+      "matching_identity_alive": false
+    }
+  ],
+  "runtime_absent": true,
+  "scope_absent": true
+}

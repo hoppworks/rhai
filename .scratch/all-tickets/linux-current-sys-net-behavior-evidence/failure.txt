@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/root/rhai-linux-current-sys-net-behavior-1ca21e32-20261002/run-sys-net-behavior.py", line 669, in <module>
+    exit_status = main()
+  File "/root/rhai-linux-current-sys-net-behavior-1ca21e32-20261002/run-sys-net-behavior.py", line 627, in main
+    raise RuntimeError(f'{control_name} did not produce its intended assertion failure')
+RuntimeError: combined-wrong-host-readback did not produce its intended assertion failure
