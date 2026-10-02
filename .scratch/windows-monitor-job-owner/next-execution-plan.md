@@ -238,10 +238,13 @@ without the pipeline wrapper, explicitly assigns `BaseAddress` to a typed
 `IntPtr`, and passes that typed handle directly through the resolver guard and
 `Object[2]` invocation arguments. The nonzero CLR-type validation remains in
 place. Its source hash is
-`7622f44d57d40c84705c85a8ab37043cb4fb674ee7d9a0431ed237eb1d3bfc08`;
-`git diff --check` passes. This focused diff is pending root review. After
-review, rerun the corrected script parser and immutable 17-input gate from a
-fresh pinned archive and a new absent GUID run root. The one-hour source-fixture
+`7622f44d57d40c84705c85a8ab37043cb4fb674ee7d9a0431ed237eb1d3bfc08`.
+Root accepted this source correction. It is checkpointed in fork commit
+`2580f04d373a1e14d021b292f0bd73381dec8076` with lowercase author and
+committer, pushed and read back only on
+`task/windows-scoped-runner-corrected`. Rerun the corrected script parser and
+immutable 17-input gate from a fresh archive pinned to this exact commit and a
+new absent GUID run root. The one-hour source-fixture
 batch remains the outer execution bound; the 30-minute source planning estimate
 is not a hard cap. Expert02's separate 30-minute monitor lifetime and its setup,
 lease, closure, evidence, and resource limits remain unchanged. No compiler,
