@@ -2511,8 +2511,30 @@ fn supervise(
                     }
                 }
                 Err(error) if error.raw_os_error() == Some(libc::EPERM) => {
-                    scope_wait_started.get_or_insert_with(Instant::now);
+                    let since = *scope_wait_started.get_or_insert_with(Instant::now);
                     provisional_scope_error.get_or_insert(error);
+                    if since.elapsed() >= Duration::from_secs(1) {
+                        let deadline = since + Duration::from_secs(1);
+                        let cause = process_io_cause(
+                            "observe process group closure",
+                            program,
+                            provisional_scope_error.take().unwrap(),
+                        );
+                        return fail(
+                            &mut driver,
+                            &mut stdin,
+                            &mut stdout,
+                            &mut stderr,
+                            cause,
+                            out,
+                            err,
+                            out_eof,
+                            err_eof,
+                            faults,
+                            false,
+                            Some(deadline),
+                        );
+                    }
                 }
                 Err(error) => {
                     return fail(
