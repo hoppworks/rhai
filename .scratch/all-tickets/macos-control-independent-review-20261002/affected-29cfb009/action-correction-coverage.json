@@ -1,0 +1,37 @@
+{
+  "commit": "29cfb009aa97ff5cb0b63d22a7714e745ea6bfda",
+  "total_files": 4,
+  "reviewed_files": 4,
+  "skipped_files": 0,
+  "coverage_rate": 1.0,
+  "files": [
+    {
+      "path": ".scratch/all-tickets/macos-managed-capture-overlay/unix.rs",
+      "status": "modified",
+      "insertions": 46,
+      "deletions": 62,
+      "review_status": "reviewed"
+    },
+    {
+      "path": ".scratch/all-tickets/macos-process-overhead.py",
+      "status": "modified",
+      "insertions": 1,
+      "deletions": 1,
+      "review_status": "reviewed"
+    },
+    {
+      "path": ".scratch/all-tickets/run-macos-process-overhead-scoped.py",
+      "status": "modified",
+      "insertions": 183,
+      "deletions": 27,
+      "review_status": "reviewed"
+    },
+    {
+      "path": ".scratch/all-tickets/test-macos-process-overhead-source.py",
+      "status": "modified",
+      "insertions": 277,
+      "deletions": 35,
+      "review_status": "reviewed"
+    }
+  ]
+}

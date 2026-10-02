@@ -1,0 +1,23 @@
+FE
+======================================================================
+ERROR: test_real_stopped_observer_retains_validated_host_status (__main__.ActionRegressions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/rhai-macos-control-review-20261002/test_action_correction_regressions.py", line 23, in test_real_stopped_observer_retains_validated_host_status
+    event=a.observe_managed_case_ready(Custody(),[str(host),str(fixture),str(ready),str(record),str(complete),str(progress)],gate,anchor,client,time.monotonic()+2,root,require_stopped=True)
+  File "/tmp/rhai-macos-control-review-20261002/action-correction-source/.scratch/all-tickets/run-macos-process-overhead-scoped.py", line 548, in observe_managed_case_ready
+    raise ValueError('Managed host stop was not visible in both final censuses')
+ValueError: Managed host stop was not visible in both final censuses
+
+======================================================================
+FAIL: test_capture_failure_cannot_leave_action_eligible_capturing_receipt (__main__.ActionRegressions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/rhai-macos-control-review-20261002/test_action_correction_regressions.py", line 38, in test_capture_failure_cannot_leave_action_eligible_capturing_receipt
+    self.assertTrue(capture_endpoints_open or action is None,'aborted capture still produces an accepted Managed action from stale stage=capturing receipt')
+AssertionError: False is not true : aborted capture still produces an accepted Managed action from stale stage=capturing receipt
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.004s
+
+FAILED (failures=1, errors=1)

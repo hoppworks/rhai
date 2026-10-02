@@ -1,0 +1,39 @@
+{
+  "schema_version": "1",
+  "mode": "commit",
+  "repository": "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai",
+  "commit": "29cfb009aa97ff5cb0b63d22a7714e745ea6bfda",
+  "background": "Prove managed capture remains active at interruption",
+  "total_files": 4,
+  "reviewable_count": 4,
+  "excluded_count": 0,
+  "total_insertions": 507,
+  "total_deletions": 125,
+  "reviewable_files": [
+    {
+      "path": ".scratch/all-tickets/macos-managed-capture-overlay/unix.rs",
+      "status": "modified",
+      "insertions": 46,
+      "deletions": 62
+    },
+    {
+      "path": ".scratch/all-tickets/macos-process-overhead.py",
+      "status": "modified",
+      "insertions": 1,
+      "deletions": 1
+    },
+    {
+      "path": ".scratch/all-tickets/run-macos-process-overhead-scoped.py",
+      "status": "modified",
+      "insertions": 183,
+      "deletions": 27
+    },
+    {
+      "path": ".scratch/all-tickets/test-macos-process-overhead-source.py",
+      "status": "modified",
+      "insertions": 277,
+      "deletions": 35
+    }
+  ],
+  "excluded_files": []
+}

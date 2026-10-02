@@ -1,0 +1,17 @@
+test_managed_action_freezes_host_then_rechecks_blocked_output_before_kill (affected.EnvironmentTests) ... ok
+test_managed_fixture_exit_between_fresh_check_and_post_kill_readback_fails (affected.EnvironmentTests) ... ok
+test_managed_action_requires_strict_remaining_payload_after_one_unpublished_read (affected.EnvironmentTests) ... ok
+test_managed_post_kill_fixture_witness_rejects_exit_zombie_unknown_and_reuse (affected.EnvironmentTests) ... ok
+test_managed_source_publishes_each_read_atomically_before_next_stream_read (affected.EnvironmentTests) ... ok
+test_managed_post_kill_identity_is_observed_after_exact_host_kill (affected.EnvironmentTests) ... ok
+test_observer_publication_failures_abort_before_read_state_is_accepted (affected.EnvironmentTests) ... ok
+test_managed_action_rejects_fixture_lost_after_published_readiness (affected.EnvironmentTests) ... ok
+test_managed_host_signal_defers_gate_reap_until_anchored_group_signal (affected.EnvironmentTests) ... ok
+test_owned_command_refreshes_managed_observation_at_action_time (affected.EnvironmentTests) ... ok
+test_control_finalization_requires_recorded_readiness_action_and_full_readback (affected.EnvironmentTests) ... ok
+test_managed_capture_receipt_binds_real_read_counters_to_census_pids (affected.EnvironmentTests) ... ok
+
+----------------------------------------------------------------------
+Ran 12 tests in 0.004s
+
+OK

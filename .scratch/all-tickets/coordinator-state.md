@@ -997,7 +997,7 @@ No source integration/native acceptance before this affected checkpoint.
 No native/build/toolchain/control/measurement dispatch; affected combined recheck
 at frozen repair required. Genuine EILSEQ early return remains uncovered.
 
-Last independently read-back fork main6b6104e2bcfbb051bddc87334c7da66cdfe05bcd.
+Last independently read-back fork mainb1598b1cdd30e807fc69c432345da888e1615fc2.
 Lowercase author and committer independently checked; root checkout clean before
 this state update. No upstream writes. Current disk instructions958a4538 unchanged.
 Previous status-only goal turn: NO PROGRESS. This continuation yields new evidence:
@@ -1102,3 +1102,33 @@ checkpoint, no GREEN/freeze yet. Same Mac reviewer consolidated terminal pending
 Previous goal turn PROGRESS (Mac sourcefreeze/affected finding); this continuation
 PROGRESS: independent Windows subtree nonreparse readback accepted; all native
 counts/allocations and history unchanged.
+
+Mac29cfb terminal affected report/eight originals retained once at
+macos-control-independent-review-20261002/affected-29cfb009/. Root read full
+report and existing Expert09 answer: numerical at-most-one64KiB unpublished
+quantum now independently source-accepted; findings1–3 retained. Two material
+errors: actual callback drops validatedSSTOP status and always rejects; fail()
+closes readers while old capturing receipt remains actioneligible, including
+publicationfailure. Original realcallback and error-boundary pure REDs preserved.
+Two failed finding4 corrections retained, no relabel/reset/nativeclaim.
+Authorization reconciled: current human global Autonomous workflow permits
+ordinary reversible setup/implementation repairs and revising agent-selected
+planning checkpoints with concrete closed checks/new diagnosis. Prior root
+'no third direct patch' wording was an internal gate, not human source-attempt
+cap. Explicit one-attempt nativecontrols and actual resources remain hard.
+Continue SAME responsible context and existing Expert09 source-first follow-up,
+not another Expert/package: closed numericalbound plus precise new status/error
+diagnoses justify30min active checkpoint. Permitted statuspropagation and CONTROL
+active-state invalidation before endpoint teardown; invalidationfailure must
+fail closed too (consider hostabort before teardown, no production/measurement
+change). Meaningful actualcallback/error/STOP-edge RED/GREEN, frozen revision and
+SAME affected review required. At most2 launches without diagnosis/closed check;
+stop repeatedfailure withoutprogress/unsoundroute/hardcap. Preserve cumulative
+history; no nativeAPI/Cargo/control/measurement/push/merge delegated.
+Darwin cause11 mapping/naming implemented; stale prep assertion corrected, ten
+pure categoriesGREEN at checkpoint. Structural-lookalike and partial continuation
+assertions/provenance/final freeze pending. Windows parser/pin typing session43606
+confirmed live, not entered; no restart or new GET/extraction.
+Previous turnPROGRESS (Windows treeacceptance); currentPROGRESS (terminal Mac
+boundsource closure and consolidated diagnoses, authorized exact repair resumed).
+Goal active; native84/allocated85unlaunched/guardfalse unchanged.

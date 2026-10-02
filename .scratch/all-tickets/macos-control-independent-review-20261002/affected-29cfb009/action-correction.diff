@@ -1,0 +1,992 @@
+diff --git a/.scratch/all-tickets/macos-managed-capture-overlay/unix.rs b/.scratch/all-tickets/macos-managed-capture-overlay/unix.rs
+index e285da69..302e09e9 100644
+--- a/.scratch/all-tickets/macos-managed-capture-overlay/unix.rs
++++ b/.scratch/all-tickets/macos-managed-capture-overlay/unix.rs
+@@ -2377,17 +2377,14 @@ fn publish_capture_progress(
+     pid: u32,
+     stdout: &[u8],
+     stderr: &[u8],
+-    published: &mut bool,
++    generation: &mut u64,
+ ) -> io::Result<()> {
+-    if *published {
+-        return Ok(());
+-    }
+     let Some(path) = std::env::var_os("RHAI_SYS_PROCESS_CAPTURE_PROGRESS") else {
+-        return Ok(());
++        return Err(io::Error::new(
++            io::ErrorKind::NotFound,
++            "private capture progress path is required",
++        ));
+     };
+-    if stdout.is_empty() || stderr.is_empty() {
+-        return Ok(());
+-    }
+     let path = std::path::PathBuf::from(path);
+     if !path.is_absolute() {
+         return Err(io::Error::new(
+@@ -2395,20 +2392,28 @@ fn publish_capture_progress(
+             "private capture progress path must be absolute",
+         ));
+     }
+-    let temporary = path.with_extension(format!("capture-{pid}.tmp"));
++    let next_generation = generation.checked_add(1).ok_or_else(|| {
++        io::Error::new(io::ErrorKind::Other, "capture progress generation overflow")
++    })?;
++    let temporary = path.with_extension(format!("capture-{pid}-{next_generation}.tmp"));
+     let body = format!(
+-        "{{\"schema\":1,\"stage\":\"capturing\",\"host_pid\":{},\"fixture_pid\":{},\"stdout_bytes_read\":{},\"stderr_bytes_read\":{}}}\n",
+-        std::process::id(), pid, stdout.len(), stderr.len());
+-    let mut file = std::fs::OpenOptions::new()
+-        .write(true)
+-        .create_new(true)
+-        .open(&temporary)?;
+-    file.write_all(body.as_bytes())?;
+-    file.sync_all()?;
+-    drop(file);
+-    std::fs::hard_link(&temporary, &path)?;
+-    *published = true;
+-    let _ = std::fs::remove_file(temporary);
++        "{{\"schema\":1,\"stage\":\"capturing\",\"generation\":{},\"host_pid\":{},\"fixture_pid\":{},\"stdout_bytes_read\":{},\"stderr_bytes_read\":{}}}\n",
++        next_generation, std::process::id(), pid, stdout.len(), stderr.len());
++    let result = (|| {
++        let mut file = std::fs::OpenOptions::new()
++            .write(true)
++            .create_new(true)
++            .open(&temporary)?;
++        file.write_all(body.as_bytes())?;
++        file.sync_all()?;
++        drop(file);
++        std::fs::rename(&temporary, &path)
++    })();
++    if result.is_err() {
++        let _ = std::fs::remove_file(&temporary);
++        return result;
++    }
++    *generation = next_generation;
+     Ok(())
+ }
+ 
+@@ -2500,7 +2505,8 @@ fn supervise(
+     let mut out = Vec::new();
+     let mut err = Vec::new();
+     #[cfg(feature = "sys-process-capture-observer")]
+-    let mut capture_progress_published = false;
++    #[cfg(feature = "sys-process-capture-observer")]
++    let mut capture_progress_generation = 0u64;
+     let (mut out_eof, mut err_eof) = (false, false);
+     let mut status = None;
+     let mut scope_wait_started = None;
+@@ -2767,7 +2773,17 @@ fn supervise(
+             }
+         }
+         if fds[0].revents != 0 {
+-            match read_ready(stdout.as_mut().unwrap(), &mut out, limit) {
++            let read_result = read_ready(stdout.as_mut().unwrap(), &mut out, limit);
++            #[cfg(feature = "sys-process-capture-observer")]
++            if let Err(error) = publish_capture_progress(
++                driver.child_mut().id(), &out, &err, &mut capture_progress_generation) {
++                return fail(
++                    &mut driver, &mut stdin, &mut stdout, &mut stderr,
++                    process_io_cause("publish private process capture progress", program, error),
++                    out, err, out_eof, err_eof, faults, false, None,
++                );
++            }
++            match read_result {
+                 Ok(ReadState::Overflow) => {
+                     return fail(
+                         &mut driver,
+@@ -2811,29 +2827,18 @@ fn supervise(
+                 }
+             }
+         }
+-        #[cfg(feature = "sys-process-capture-observer")]
+-        if !capture_progress_published && !out.is_empty() && !err.is_empty() {
+-            let pid = driver.child_mut().id();
++        if fds[1].revents != 0 {
++            let read_result = read_ready(stderr.as_mut().unwrap(), &mut err, limit);
++            #[cfg(feature = "sys-process-capture-observer")]
+             if let Err(error) = publish_capture_progress(
+-                pid, &out, &err, &mut capture_progress_published) {
++                driver.child_mut().id(), &out, &err, &mut capture_progress_generation) {
+                 return fail(
+-                    &mut driver,
+-                    &mut stdin,
+-                    &mut stdout,
+-                    &mut stderr,
++                    &mut driver, &mut stdin, &mut stdout, &mut stderr,
+                     process_io_cause("publish private process capture progress", program, error),
+-                    out,
+-                    err,
+-                    out_eof,
+-                    err_eof,
+-                    faults,
+-                    false,
+-                    None,
++                    out, err, out_eof, err_eof, faults, false, None,
+                 );
+             }
+-        }
+-        if fds[1].revents != 0 {
+-            match read_ready(stderr.as_mut().unwrap(), &mut err, limit) {
++            match read_result {
+                 Ok(ReadState::Overflow) => {
+                     return fail(
+                         &mut driver,
+@@ -2877,27 +2882,6 @@ fn supervise(
+                 }
+             }
+         }
+-        #[cfg(feature = "sys-process-capture-observer")]
+-        if !capture_progress_published && !out.is_empty() && !err.is_empty() {
+-            let pid = driver.child_mut().id();
+-            if let Err(error) = publish_capture_progress(
+-                pid, &out, &err, &mut capture_progress_published) {
+-                return fail(
+-                    &mut driver,
+-                    &mut stdin,
+-                    &mut stdout,
+-                    &mut stderr,
+-                    process_io_cause("publish private process capture progress", program, error),
+-                    out,
+-                    err,
+-                    out_eof,
+-                    err_eof,
+-                    faults,
+-                    false,
+-                    None,
+-                );
+-            }
+-        }
+         if fds[2].revents != 0 {
+             if let Some(pipe) = stdin.as_mut() {
+                 match pipe.write(&pending[offset..]) {
+diff --git a/.scratch/all-tickets/macos-process-overhead.py b/.scratch/all-tickets/macos-process-overhead.py
+index 38ef3e72..c9d21521 100644
+--- a/.scratch/all-tickets/macos-process-overhead.py
++++ b/.scratch/all-tickets/macos-process-overhead.py
+@@ -19,7 +19,7 @@ LOCK_SHA='8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa'
+ OVERLAYS=['Cargo.toml','src/packages/sys/config.rs','src/packages/sys/mod.rs','src/packages/sys/process.rs','src/packages/sys/process/unix.rs','tests/sys_process.rs']
+ MANAGED_OBSERVER_OVERLAY_SHA256={
+     'Cargo.toml':('Cargo.toml','4e8b305d4fd30889adbb2e1c03d6461a6c3efd58ad5ac55327c2f3523c584579'),
+-    'unix.rs':('src/packages/sys/process/unix.rs','07ff4c6b3bdd6ae2b5ad4d7e5a9854faa3092178b432242ec5078e3f3bbe4190'),
++    'unix.rs':('src/packages/sys/process/unix.rs','9cbaf28323e7bf3f8c25df8ce3a6eba7cf4102aa09b4ef5b9edb0c3f736a2be2'),
+ }
+ MANAGED_OBSERVER_BASE_SHA256={
+     'Cargo.toml':'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec',
+diff --git a/.scratch/all-tickets/run-macos-process-overhead-scoped.py b/.scratch/all-tickets/run-macos-process-overhead-scoped.py
+index e4920253..67654ab0 100644
+--- a/.scratch/all-tickets/run-macos-process-overhead-scoped.py
++++ b/.scratch/all-tickets/run-macos-process-overhead-scoped.py
+@@ -40,6 +40,11 @@ CONTROL_CASES = {
+     'deadline': {'signal': None, 'evidence': ('command_live',)},
+ }
+ DEADLINE_CONTROL_ARGV = [sys.executable, '-c', 'import time; time.sleep(600)']
++DARWIN_SSTOP = 4
++DARWIN_LIVE_PROCESS_STATES = frozenset((1, 2, 3, DARWIN_SSTOP))
++MANAGED_STDOUT_TOTAL = 8_388_592
++MANAGED_STDERR_TOTAL = 8_388_608
++MANAGED_READ_BUDGET = 64 * 1024
+ 
+ 
+ def validate_control_case(case):
+@@ -60,7 +65,11 @@ def validate_case_evidence(case, evidence):
+     validate_control_case(case)
+     required = CONTROL_CASES[case]['evidence']
+     if case == 'managed':
+-        if (type(evidence) is not dict or set(evidence) != set(required)
++        optional = {'capture_generation', 'managed_host_stopped',
++                    'stdout_upper_bytes', 'stderr_upper_bytes',
++                    'maximum_unpublished_read_bytes', 'fixture_path'}
++        if (type(evidence) is not dict or not set(required) <= set(evidence)
++                or not set(evidence) <= set(required) | optional
+                 or any(evidence.get(key) is not True for key in
+                        ('managed_host_live', 'fixture_live', 'fixture_topology_live'))
+                 or type(evidence.get('fixture_thread_count')) is not int
+@@ -68,6 +77,18 @@ def validate_case_evidence(case, evidence):
+                 or any(type(evidence.get(key)) is not int or evidence[key] <= 0
+                        for key in ('stdout_bytes_read', 'stderr_bytes_read'))):
+             raise ValueError(f'{case} case readiness evidence is incomplete')
++        if ('fixture_path' in evidence and
++                (type(evidence['fixture_path']) is not str
++                 or not Path(evidence['fixture_path']).is_absolute())):
++            raise ValueError('Managed fixture path evidence is malformed')
++        if 'managed_host_stopped' in evidence:
++            if (evidence.get('managed_host_stopped') is not True
++                    or type(evidence.get('capture_generation')) is not int
++                    or evidence['capture_generation'] <= 0):
++                raise ValueError('Managed stopped-host evidence is incomplete')
++            witness = managed_stopped_output_witness(evidence)
++            if any(evidence.get(key) != value for key, value in witness.items()):
++                raise ValueError('Managed stopped-host output witness changed')
+         return dict(evidence)
+     if type(evidence) is not dict or any(evidence.get(key) is not True for key in required):
+         raise ValueError(f'{case} case readiness evidence is incomplete')
+@@ -89,9 +110,10 @@ def validate_managed_capture_progress(progress, host_identity, fixture_identity)
+     """Require independently observed live byte progress from both captured streams."""
+     keys = ('pid', 'start_seconds', 'start_microseconds')
+     if (type(progress) is not dict
+-            or set(progress) != {'schema', 'stage', 'host', 'fixture',
++            or set(progress) != {'schema', 'stage', 'generation', 'host', 'fixture',
+                                  'stdout_bytes_read', 'stderr_bytes_read'}
+             or type(progress.get('schema')) is not int or progress['schema'] != 1
++            or type(progress.get('generation')) is not int or progress['generation'] <= 0
+             or progress.get('stage') != 'capturing'):
+         raise ValueError('Managed capture progress receipt is malformed')
+     for slot, expected in (('host', host_identity), ('fixture', fixture_identity)):
+@@ -106,20 +128,54 @@ def validate_managed_capture_progress(progress, host_identity, fixture_identity)
+     return {key: progress[key] for key in ('stdout_bytes_read', 'stderr_bytes_read')}
+ 
+ 
++def managed_stopped_output_witness(progress):
++    """Prove the stopped host still has payload left after one unpublished read."""
++    counts = {}
++    for stream, total in (('stdout', MANAGED_STDOUT_TOTAL),
++                          ('stderr', MANAGED_STDERR_TOTAL)):
++        value = progress.get(stream + '_bytes_read') if type(progress) is dict else None
++        if type(value) is not int or value < 0 or value > total:
++            raise ValueError('Managed stopped capture progress counter is invalid')
++        upper = value + MANAGED_READ_BUDGET
++        if upper >= total:
++            raise ValueError('Managed stopped capture does not prove unfinished capture')
++        counts[stream + '_upper_bytes'] = upper
++    counts['maximum_unpublished_read_bytes'] = MANAGED_READ_BUDGET
++    return counts
++
++
++def validate_managed_post_kill_fixture(row, expected_identity, expected_path):
++    """Require the identical fixture process to remain live after host KILL."""
++    keys = ('pid', 'start_seconds', 'start_microseconds')
++    if (type(row) is not dict or type(expected_identity) is not dict
++            or row.get('foreign') is True
++            or any(type(row.get(key)) is not int or row.get(key) != expected_identity.get(key)
++                   for key in keys)
++            or row.get('path') != expected_path
++            or row.get('pgid') != expected_identity.get('pid')
++            or type(row.get('status')) is not int
++            or row['status'] not in DARWIN_LIVE_PROCESS_STATES):
++        raise ValueError('post-KILL fixture is absent, changed, zombie, unknown, or outside its group')
++    return {key: row[key] for key in keys} | {
++        'path': row['path'], 'pgid': row['pgid'], 'status': row['status']}
++
++
+ def bind_managed_capture_receipt(receipt, host_identity, fixture_identity):
+     """Bind private read-path counters to full identities from one native census."""
+-    expected = {'schema', 'stage', 'host_pid', 'fixture_pid',
++    expected = {'schema', 'stage', 'generation', 'host_pid', 'fixture_pid',
+                 'stdout_bytes_read', 'stderr_bytes_read'}
+     if (type(receipt) is not dict or set(receipt) != expected
+             or type(receipt.get('schema')) is not int or receipt['schema'] != 1
+             or receipt.get('stage') != 'capturing'
++            or type(receipt.get('generation')) is not int or receipt['generation'] <= 0
+             or type(receipt.get('host_pid')) is not int
+             or type(receipt.get('fixture_pid')) is not int
+             or type(host_identity) is not dict or type(fixture_identity) is not dict
+             or receipt['host_pid'] != host_identity.get('pid')
+             or receipt['fixture_pid'] != fixture_identity.get('pid')):
+         raise ValueError('Managed capture receipt does not match the observed host/fixture PIDs')
+-    bound = {'schema': 1, 'stage': 'capturing', 'host': dict(host_identity),
++    bound = {'schema': 1, 'stage': 'capturing', 'generation': receipt['generation'],
++        'host': dict(host_identity),
+         'fixture': dict(fixture_identity),
+         'stdout_bytes_read': receipt['stdout_bytes_read'],
+         'stderr_bytes_read': receipt['stderr_bytes_read']}
+@@ -129,7 +185,7 @@ def bind_managed_capture_receipt(receipt, host_identity, fixture_identity):
+ 
+ def validate_managed_snapshot(rows, gate_pid, anchor_pid, host_pid, fixture_pid,
+                               host_path, fixture_path, capture_progress, custody,
+-                              client_pid=None):
++                              client_pid=None, require_stopped=False):
+     """Validate one full-tuple native snapshot; task count is conditional fixture evidence."""
+     by_pid = {row.get('pid'): row for row in rows if not row.get('foreign')}
+     gate, anchor = by_pid.get(gate_pid), by_pid.get(anchor_pid)
+@@ -140,10 +196,14 @@ def validate_managed_snapshot(rows, gate_pid, anchor_pid, host_pid, fixture_pid,
+         raise ValueError('Managed snapshot omitted an exact live slot')
+     if gate.get('pid') != host_pid or gate.get('path') != host_path:
+         raise ValueError('Managed host is not the exact anchored direct command')
++    if require_stopped and host.get('status') != DARWIN_SSTOP:
++        raise ValueError('Managed host is not stopped in the final action census')
+     if host.get('pgid') != gate_pid or anchor.get('pgid') != gate_pid:
+         raise ValueError('Managed host/anchor escaped the pinned command group')
+     if fixture.get('pgid') != fixture_pid:
+         raise ValueError('Managed fixture is not in its exact new process group')
++    if fixture.get('status') not in DARWIN_LIVE_PROCESS_STATES:
++        raise ValueError('Managed fixture is not in a known live native process state')
+     if fixture.get('path') != fixture_path:
+         raise ValueError('Managed fixture image differs from the private artifact')
+     if fixture_pid not in {row.get('pid') for row in custody.descendants(by_pid, host_pid)}:
+@@ -163,7 +223,12 @@ def validate_managed_snapshot(rows, gate_pid, anchor_pid, host_pid, fixture_pid,
+                 # two blocking writers. Four tasks are necessary but do not
+                 # identify those threads; this topology claim is source-bound.
+                 'fixture_topology_live': True, 'fixture_thread_count': 4,
++                'fixture_path': fixture_path,
++                'capture_generation': bound_capture_progress['generation'],
+                 **stream_progress}}
++    if require_stopped:
++        result['evidence']['managed_host_stopped'] = True
++        result['evidence'].update(managed_stopped_output_witness(stream_progress))
+     if client is not None:
+         result['client'] = {key: client[key] for key in
+                             ('pid', 'start_seconds', 'start_microseconds')}
+@@ -271,8 +336,44 @@ def signal_unreaped_managed_host(proc, signum):
+         raise RuntimeError('Managed host exited before the exact-child signal') from exc
+ 
+ 
++def stop_unreaped_managed_host(proc):
++    """Freeze the exact unreaped direct child before the final native census."""
++    if proc.returncode is not None:
++        raise RuntimeError('Managed host must remain an unreaped direct child before STOP')
++    try:
++        os.kill(proc.pid, signal.SIGSTOP)
++    except ProcessLookupError as exc:
++        raise RuntimeError('Managed host exited before exact-child STOP') from exc
++
++
++def confirm_managed_host_stopped(custody, proc, expected_identity, deadline):
++    reader = custody._adapter_process_reader
++    while time.monotonic() < deadline:
++        rows = reader.complete_listing(deadline)
++        matches = [row for row in rows if row.get('pid') == proc.pid]
++        if len(matches) != 1:
++            raise ValueError('stopped Managed host identity is absent or ambiguous')
++        row = matches[0]
++        if row.get('foreign') or any(row.get(key) != expected_identity.get(key)
++                for key in ('pid', 'start_seconds', 'start_microseconds')):
++            raise ValueError('stopped Managed host identity changed')
++        if row.get('status') == DARWIN_SSTOP:
++            return row
++        time.sleep(min(0.01, max(0, deadline - time.monotonic())))
++    raise TimeoutError('exact Managed host did not reach the stopped state before its deadline')
++
++
++def observe_managed_fixture_after_host_kill(custody, expected_identity, expected_path, deadline):
++    """Read a complete passive census after exact host KILL and validate the same fixture."""
++    rows = custody._adapter_process_reader.complete_listing(deadline)
++    matches = [row for row in rows if row.get('pid') == expected_identity.get('pid')]
++    if len(matches) != 1:
++        raise ValueError('post-KILL fixture identity is absent or ambiguous')
++    return validate_managed_post_kill_fixture(matches[0], expected_identity, expected_path)
++
++
+ def same_case_readiness_state(published, fresh):
+-    """Compare the live identities/evidence while allowing a new observation id."""
++    """Bind a stopped-host capture witness to the published live identities."""
+     if (type(published) is not dict or type(fresh) is not dict
+             or published.get('event') != 'case-ready' or fresh.get('event') != 'case-ready'
+             or published.get('case') != 'managed' or fresh.get('case') != 'managed'):
+@@ -284,13 +385,28 @@ def same_case_readiness_state(published, fresh):
+                                            fresh.get('identities'), fresh.get('evidence'))
+     except (TypeError, ValueError):
+         return False
+-    return (original == published and normalized == fresh
+-            and published.get('identities') == fresh.get('identities')
+-            and published.get('evidence') == fresh.get('evidence'))
++    stop = fresh.get('stop_proof')
++    if (original != published or type(stop) is not dict
++            or set(fresh) != set(normalized) | {'stop_proof'}
++            or normalized != {key: fresh[key] for key in normalized}
++            or published.get('identities') != fresh.get('identities')
++            or any(published['evidence'].get(key) != fresh['evidence'].get(key)
++                   for key in ('managed_host_live', 'fixture_live', 'fixture_topology_live',
++                               'fixture_thread_count', 'fixture_path'))):
++        return False
++    host = fresh['identities']['managed_host']
++    try:
++        return (stop == {'host_status': DARWIN_SSTOP, 'host_identity': host,
++                         'capture_generation': fresh['evidence']['capture_generation'],
++                         'output_witness': managed_stopped_output_witness(fresh['evidence'])}
++                and fresh['evidence'].get('managed_host_stopped') is True)
++    except (KeyError, TypeError, ValueError):
++        return False
+ 
+ 
+ def service_controller(controller, selected_case, ready_event, consumed, client_proc,
+-                       command_proc, deadline, pre_action_validate=None):
++                       command_proc, deadline, pre_action_validate=None,
++                       confirm_stopped=None, confirm_fixture_live=None):
+     readable, _, _ = select.select([controller], [], [], 0)
+     if not readable:
+         return None
+@@ -300,17 +416,31 @@ def service_controller(controller, selected_case, ready_event, consumed, client_
+     if proc is None or ready_event['identities'][target]['pid'] != proc.pid:
+         raise ValueError('readiness target identity does not match its exact direct-child handle')
+     if target == 'managed_host':
+-        if not callable(pre_action_validate):
+-            raise ValueError('Managed action requires a fresh live observation before injection')
++        if (not callable(pre_action_validate) or not callable(confirm_stopped)
++                or not callable(confirm_fixture_live)):
++            raise ValueError('Managed action requires exact STOP and fresh live observation')
++        expected_host = ready_event['identities']['managed_host']
++        stop_unreaped_managed_host(proc)
++        stopped_row = confirm_stopped(proc, expected_host, deadline)
++        if (type(stopped_row) is not dict
++                or any(stopped_row.get(key) != expected_host.get(key)
++                       for key in ('pid', 'start_seconds', 'start_microseconds'))
++                or stopped_row.get('status') != DARWIN_SSTOP):
++            raise ValueError('exact Managed host STOP was not confirmed by native identity readback')
+         action_readiness = pre_action_validate()
+         if not same_case_readiness_state(ready_event, action_readiness):
+             raise ValueError('Managed fixture/capture readiness changed before injection')
+         signal_unreaped_managed_host(proc, signum)
++        fixture_after_kill = validate_managed_post_kill_fixture(
++            confirm_fixture_live(action_readiness['identities']['fixture'], deadline),
++            action_readiness['identities']['fixture'],
++            action_readiness['evidence']['fixture_path'])
+         # Confirmation is deferred until stop_anchored issues the one pinned
+         # group signal and then reaps the exact gate and anchor children.
+         return {'action': 'managed-host-interrupted', 'case': selected_case,
+                 'event_id': ready_event['event_id'], 'status': None,
+-                'action_readiness_event': action_readiness}
++                'action_readiness_event': action_readiness,
++                'fixture_after_kill': fixture_after_kill}
+     status = signal_and_reap_owned_client(proc, signum, deadline)
+     controller.sendall(json.dumps({'event': 'client-reaped', 'case': selected_case,
+         'event_id': ready_event['event_id'], 'status': status}).encode() + b'\n')
+@@ -364,7 +494,8 @@ def validate_managed_command_argv(argv, runtime):
+     return host, fixture
+ 
+ 
+-def observe_managed_case_ready(custody, argv, gate, anchor, client_proc, deadline, runtime):
++def observe_managed_case_ready(custody, argv, gate, anchor, client_proc, deadline, runtime,
++                               require_stopped=False):
+     expected_host = runtime/'target/debug/examples/macos-managed-capture-companion'
+     if not argv or argv[0] != str(expected_host):
+         return None
+@@ -377,9 +508,7 @@ def observe_managed_case_ready(custody, argv, gate, anchor, client_proc, deadlin
+         fields = fixture_record.read_text(encoding='ascii').split()
+         progress = json.loads(progress_path.read_text(encoding='utf-8'))
+     except (OSError, UnicodeError, ValueError):
+-        # The frozen public run_raw API returns captured bytes only at
+-        # completion. No pre-completion per-stream progress source is currently
+-        # wired, so absent progress must keep this Managed control unavailable.
++        # Missing private observer evidence never enables an interruption action.
+         return None
+     if (type(ready) is not dict or set(ready) != {'schema', 'host_pid', 'stage'}
+             or ready.get('schema') != 1 or ready.get('stage') != 'managed-run-entering'
+@@ -404,22 +533,34 @@ def observe_managed_case_ready(custody, argv, gate, anchor, client_proc, deadlin
+         snapshot = validate_managed_snapshot(rows, gate.pid, anchor.pid,
+             ready['host_pid'], fixture_pid, str(expected_host), str(fixture_path),
+             progress, custody,
+-            client_proc.pid if client_proc else None)
++            client_proc.pid if client_proc else None,
++            require_stopped=require_stopped)
+         snapshots.append(snapshot)
+     if snapshots[0] != snapshots[1]:
+         raise ValueError('Managed host/fixture full identity or task sample changed between censuses')
+     slots = snapshots[1]
+-    return make_case_ready_event('managed', str(uuid.uuid4()),
++    event = make_case_ready_event('managed', str(uuid.uuid4()),
+         {key: slots[key] for key in ('client', 'gate', 'anchor', 'managed_host', 'fixture')},
+         slots['evidence'])
+-
+-
+-def observe_case_ready(custody, case, argv, gate, anchor, client_proc, deadline, runtime=None):
++    if require_stopped:
++        host = slots['managed_host']
++        if host.get('status') != DARWIN_SSTOP:
++            raise ValueError('Managed host stop was not visible in both final censuses')
++        event['stop_proof'] = {
++            'host_status': DARWIN_SSTOP,
++            'host_identity': dict(event['identities']['managed_host']),
++            'capture_generation': slots['evidence']['capture_generation'],
++            'output_witness': managed_stopped_output_witness(slots['evidence'])}
++    return event
++
++
++def observe_case_ready(custody, case, argv, gate, anchor, client_proc, deadline, runtime=None,
++                      require_stopped=False):
+     if case == 'managed':
+         if runtime is None:
+             raise ValueError('Managed readiness requires the exact private runtime path')
+         return observe_managed_case_ready(custody, argv, gate, anchor, client_proc,
+-                                          deadline, Path(runtime))
++                                          deadline, Path(runtime), require_stopped)
+     reader = custody._adapter_process_reader
+     rows = reader.complete_listing(deadline)
+     by_pid = {row['pid']: row for row in rows if not row.get('foreign')}
+@@ -762,13 +903,26 @@ def owned_command(custody, argv, cwd, env, output, deadline, closure_deadline, c
+                         controller.sendall(json.dumps(ready_event, sort_keys=True).encode()+b'\n')
+                 if ready_event is not None and selected_case != 'deadline':
+                     pre_action_validate = None
++                    confirm_stopped = None
++                    confirm_fixture_live = None
+                     if selected_case == 'managed':
++                        _managed_host, managed_fixture = validate_managed_command_argv(argv, runtime)
+                         pre_action_validate = lambda: observe_case_ready(custody,
+                             selected_case, argv, gate, anchor, client_proc,
+-                            min(deadline, time.monotonic()+2), runtime)
++                            min(closure_deadline, time.monotonic()+2), runtime,
++                            require_stopped=True)
++                        confirm_stopped = lambda proc, identity, stop_deadline: \
++                            confirm_managed_host_stopped(custody, proc, identity,
++                                min(stop_deadline, time.monotonic()+2))
++                        confirm_fixture_live = lambda identity, post_kill_deadline: \
++                            observe_managed_fixture_after_host_kill(custody, identity,
++                                str(managed_fixture), min(post_kill_deadline,
++                                time.monotonic()+2))
+                     control_action = service_controller(controller, selected_case,
+                         ready_event, control_consumed, client_proc, gate, closure_deadline,
+-                        pre_action_validate=pre_action_validate)
++                        pre_action_validate=pre_action_validate,
++                        confirm_stopped=confirm_stopped,
++                        confirm_fixture_live=confirm_fixture_live)
+                     if control_action is not None:
+                         action_readiness = control_action.pop('action_readiness_event', None)
+                         if selected_case == 'managed':
+@@ -1109,10 +1263,12 @@ def control_finalization_complete(case, records, ledger, candidate_absence,
+             if (type(action_event) is not dict
+                     or action_event.get('event') != 'case-ready'
+                     or action_event.get('case') != 'managed'
+-                    or make_case_ready_event('managed', action_event.get('event_id'),
+-                        action_event.get('identities'), action_event.get('evidence')) != action_event
+                     or not same_case_readiness_state(event, action_event)):
+                 raise ValueError('fresh Managed injection readiness receipt is absent or changed')
++            fixture_after_kill = action.get('fixture_after_kill') if type(action) is dict else None
++            validate_managed_post_kill_fixture(
++                fixture_after_kill, action_event['identities']['fixture'],
++                action_event['evidence']['fixture_path'])
+             if (type(action) is not dict or action.get('action') != 'managed-host-interrupted'
+                     or action.get('case') != case or action.get('event_id') != event['event_id']
+                     or type(action.get('status')) is not int or action['status'] != -signal.SIGKILL
+diff --git a/.scratch/all-tickets/test-macos-process-overhead-source.py b/.scratch/all-tickets/test-macos-process-overhead-source.py
+index 1596f74c..9614afe9 100644
+--- a/.scratch/all-tickets/test-macos-process-overhead-source.py
++++ b/.scratch/all-tickets/test-macos-process-overhead-source.py
+@@ -226,7 +226,7 @@ class EnvironmentTests(unittest.TestCase):
+             with self.subTest(sample=sample), self.assertRaisesRegex(ValueError, "Managed task sample"):
+                 custodian.validate_managed_task_sample(sample, identity)
+ 
+-        progress = {"schema": 1, "stage": "capturing",
++        progress = {"schema": 1, "stage": "capturing", "generation": 1,
+                     "host": {"pid": 90, "start_seconds": 8, "start_microseconds": 90},
+                     "fixture": identity, "stdout_bytes_read": 17, "stderr_bytes_read": 19}
+         self.assertTrue(custodian.validate_managed_capture_progress(
+@@ -258,7 +258,7 @@ class EnvironmentTests(unittest.TestCase):
+     def test_managed_capture_receipt_binds_real_read_counters_to_census_pids(self):
+         host = {"pid": 90, "start_seconds": 8, "start_microseconds": 90}
+         fixture = {"pid": 94, "start_seconds": 9, "start_microseconds": 94}
+-        receipt = {"schema": 1, "stage": "capturing", "host_pid": 90,
++        receipt = {"schema": 1, "stage": "capturing", "generation": 1, "host_pid": 90,
+                    "fixture_pid": 94, "stdout_bytes_read": 4096,
+                    "stderr_bytes_read": 2048}
+         bound = custodian.bind_managed_capture_receipt(receipt, host, fixture)
+@@ -295,11 +295,12 @@ class EnvironmentTests(unittest.TestCase):
+         rust = (overlay_dir / "unix.rs").read_text(encoding="utf-8")
+         self.assertGreaterEqual(rust.count('#[cfg(feature = "sys-process-capture-observer")]'), 3)
+         observer = rust[rust.index("fn publish_capture_progress("):rust.index("const READ_BUDGET")]
+-        for evidence in ("stdout.is_empty()", "stderr.is_empty()",
+-                         "std::process::id()", "pid", "stdout.len()",
+-                         "stderr.len()", "file.sync_all()", "std::fs::hard_link",
+-                         "*published = true"):
++        for evidence in ("RHAI_SYS_PROCESS_CAPTURE_PROGRESS", "std::process::id()",
++                         "pid", "generation.checked_add(1)", "stdout.len()",
++                         "stderr.len()", "file.sync_all()", "std::fs::rename",
++                         "*generation = next_generation"):
+             self.assertIn(evidence, observer)
++        self.assertNotIn("return Ok(())", observer)
+ 
+     def test_private_observer_is_on_successful_run_raw_capture_path(self):
+         overlay_dir = SOURCE.with_name("macos-managed-capture-overlay")
+@@ -388,7 +389,8 @@ class EnvironmentTests(unittest.TestCase):
+             {"pid": 92, "ppid": 91, "pgid": 91, "path": "/usr/bin/python3",
+              "start_seconds": 2, "start_microseconds": 92},
+             {"pid": 93, "ppid": 91, "pgid": 93, "path": fixture_path,
+-             "start_seconds": 3, "start_microseconds": 93, "thread_count": 4},
++             "start_seconds": 3, "start_microseconds": 93, "thread_count": 4,
++             "status": 3},
+         ]
+ 
+         class Census:
+@@ -405,7 +407,8 @@ class EnvironmentTests(unittest.TestCase):
+ 
+         host = {"pid": 91, "start_seconds": 2, "start_microseconds": 91}
+         fixture = {"pid": 93, "start_seconds": 3, "start_microseconds": 93}
+-        progress = {"schema": 1, "stage": "capturing", "host_pid": host["pid"],
++        progress = {"schema": 1, "stage": "capturing", "generation": 1,
++            "host_pid": host["pid"],
+             "fixture_pid": fixture["pid"], "stdout_bytes_read": 17,
+             "stderr_bytes_read": 19}
+         snapshot = custodian.validate_managed_snapshot(rows, 91, 92, 91, 93,
+@@ -446,14 +449,15 @@ class EnvironmentTests(unittest.TestCase):
+         events = []
+         gate = Child("gate", events)
+         anchor = Child("anchor", events)
+-        event = {"event": "case-ready", "case": "managed", "event_id": "m-1",
+-            "identities": {slot: {"pid": pid, "start_seconds": 1,
+-                "start_microseconds": pid} for slot, pid in
+-                (("managed_host", gate.pid), ("client", 90), ("gate", gate.pid),
+-                 ("anchor", anchor.pid), ("fixture", 102))},
+-            "evidence": {"managed_host_live": True, "fixture_live": True,
+-                "fixture_topology_live": True, "fixture_thread_count": 4,
+-                "stdout_bytes_read": 1, "stderr_bytes_read": 1}}
++        identities = {slot: {"pid": pid, "start_seconds": 1,
++            "start_microseconds": pid} for slot, pid in
++            (("managed_host", gate.pid), ("client", 90), ("gate", gate.pid),
++             ("anchor", anchor.pid), ("fixture", 102))}
++        evidence = {"managed_host_live": True, "fixture_live": True,
++            "fixture_topology_live": True, "fixture_thread_count": 4,
++            "fixture_path": "/private/fixture", "capture_generation": 1,
++            "stdout_bytes_read": 1, "stderr_bytes_read": 1}
++        event = custodian.make_case_ready_event("managed", "m-1", identities, evidence)
+         request = {"op": "interrupt", "case": "managed", "event_id": "m-1",
+             "target": "managed_host", "signal": "KILL"}
+         controller, peer = socket.socketpair()
+@@ -472,6 +476,17 @@ class EnvironmentTests(unittest.TestCase):
+         def record_group(pgid, signum):
+             events.append(("group-signal", pgid, signum))
+ 
++        def fresh_stopped_event():
++            stopped_evidence = {**evidence, "managed_host_stopped": True}
++            witness = custodian.managed_stopped_output_witness(stopped_evidence)
++            stopped_evidence.update(witness)
++            result = custodian.make_case_ready_event("managed", "m-2", identities,
++                                                      stopped_evidence)
++            result["stop_proof"] = {"host_status": custodian.DARWIN_SSTOP,
++                "host_identity": identities["managed_host"],
++                "capture_generation": 1, "output_witness": witness}
++            return result
++
+         try:
+             with patch.object(custodian.os, "kill", side_effect=record_direct), \
+                  patch.object(custodian.os, "killpg", side_effect=record_group), \
+@@ -479,7 +494,12 @@ class EnvironmentTests(unittest.TestCase):
+                  patch.object(custodian, "waitid_nonreap", return_value=None):
+                 action = custodian.service_controller(controller, "managed", event,
+                     False, None, gate, deadline,
+-                    pre_action_validate=lambda: {**event, "event_id": "m-2"})
++                    pre_action_validate=fresh_stopped_event,
++                    confirm_stopped=lambda proc, identity, _deadline: {
++                        **identity, "status": custodian.DARWIN_SSTOP},
++                    confirm_fixture_live=lambda identity, _deadline: {
++                        **identity, "path": "/private/fixture", "pgid": identity["pid"],
++                        "status": 3})
+                 self.assertEqual(action["action"], "managed-host-interrupted")
+                 self.assertIsNone(action["status"])
+                 self.assertEqual(action["action_readiness_event"]["event_id"], "m-2")
+@@ -489,6 +509,7 @@ class EnvironmentTests(unittest.TestCase):
+                     deadline, signal_state)
+             self.assertEqual(statuses, [-custodian.signal.SIGKILL] * 2)
+             self.assertEqual(events, [
++                ("direct-signal", gate.pid, custodian.signal.SIGSTOP),
+                 ("direct-signal", gate.pid, custodian.signal.SIGKILL),
+                 ("group-signal", gate.pid, custodian.signal.SIGKILL),
+                 ("gate", "wait"), ("anchor", "wait")])
+@@ -505,6 +526,7 @@ class EnvironmentTests(unittest.TestCase):
+                  ("anchor", 102), ("fixture", 103))},
+             "evidence": {"managed_host_live": True, "fixture_live": True,
+                 "fixture_topology_live": True, "fixture_thread_count": 4,
++                "fixture_path": "/private/fixture", "capture_generation": 1,
+                 "stdout_bytes_read": 8, "stderr_bytes_read": 8}}
+         changed = {**ready, "event_id": "m-2", "identities": {
+             **ready["identities"], "fixture": {"pid": 103, "start_seconds": 1,
+@@ -519,12 +541,203 @@ class EnvironmentTests(unittest.TestCase):
+                 with self.assertRaisesRegex(ValueError, "changed before injection"):
+                     custodian.service_controller(controller, "managed", ready, False,
+                     None, gate, time.monotonic() + 2,
+-                        pre_action_validate=lambda: changed)
+-                kill.assert_not_called()
++                        pre_action_validate=lambda: changed,
++                        confirm_stopped=lambda proc, identity, _deadline: {
++                            **identity, "status": custodian.DARWIN_SSTOP},
++                        confirm_fixture_live=lambda identity, _deadline: {
++                            **identity, "path": "/private/fixture",
++                            "pgid": identity["pid"], "status": 3})
++                kill.assert_called_once_with(101, signal.SIGSTOP)
++        finally:
++            controller.close()
++            peer.close()
++
++    def test_managed_action_freezes_host_then_rechecks_blocked_output_before_kill(self):
++        gate = type("Gate", (), {"pid": 101, "returncode": None})()
++        ready = {"event": "case-ready", "case": "managed", "event_id": "m-1",
++            "identities": {slot: {"pid": pid, "start_seconds": 1,
++                "start_microseconds": pid} for slot, pid in
++                (("managed_host", 101), ("client", 90), ("gate", 101),
++                 ("anchor", 102), ("fixture", 103))},
++            "evidence": {"managed_host_live": True, "fixture_live": True,
++                "fixture_topology_live": True, "fixture_thread_count": 4,
++                "fixture_path": "/private/fixture", "capture_generation": 1,
++                "stdout_bytes_read": 100, "stderr_bytes_read": 100}}
++        request = {"op": "interrupt", "case": "managed", "event_id": "m-1",
++            "target": "managed_host", "signal": "KILL"}
++        controller, peer = socket.socketpair()
++        peer.sendall(json.dumps(request).encode() + b"\n")
++        order = []
++        def confirm_stopped(proc, expected, _deadline):
++            order.append(("confirm", proc.pid, expected["start_microseconds"]))
++            return {**expected, "status": custodian.DARWIN_SSTOP}
++        def fresh_stopped_capture():
++            self.assertEqual(order, [("signal", 101, signal.SIGSTOP),
++                                     ("confirm", 101, 101)])
++            stopped_evidence = {**ready["evidence"], "managed_host_stopped": True}
++            witness = custodian.managed_stopped_output_witness(stopped_evidence)
++            stopped_evidence.update(witness)
++            fresh = custodian.make_case_ready_event("managed", "m-stop",
++                ready["identities"], stopped_evidence)
++            fresh["stop_proof"] = {"host_status": custodian.DARWIN_SSTOP,
++                "host_identity": ready["identities"]["managed_host"],
++                "capture_generation": 1, "output_witness": witness}
++            return fresh
++        def confirm_fixture_live(identity, _deadline):
++            order.append(("fixture-live-after-kill", identity["pid"]))
++            return {**identity, "path": "/private/fixture", "pgid": identity["pid"],
++                    "status": 3}
++        try:
++            with patch.object(custodian.os, "kill", side_effect=lambda pid, sig:
++                    order.append(("signal", pid, sig))):
++                action = custodian.service_controller(controller, "managed", ready,
++                    False, None, gate, time.monotonic() + 2,
++                    pre_action_validate=fresh_stopped_capture,
++                    confirm_stopped=confirm_stopped,
++                    confirm_fixture_live=confirm_fixture_live)
++            self.assertEqual(order[-1], ("fixture-live-after-kill", 103))
++            self.assertIn(("signal", 101, signal.SIGKILL), order)
++            self.assertEqual(action["action_readiness_event"]["stop_proof"]["host_status"],
++                             custodian.DARWIN_SSTOP)
+         finally:
+             controller.close()
+             peer.close()
+ 
++    def test_managed_fixture_exit_between_fresh_check_and_post_kill_readback_fails(self):
++        gate = type("Gate", (), {"pid": 101, "returncode": None})()
++        identities = {slot: {"pid": pid, "start_seconds": 1,
++            "start_microseconds": pid} for slot, pid in
++            (("managed_host", 101), ("client", 90), ("gate", 101),
++             ("anchor", 102), ("fixture", 103))}
++        evidence = {"managed_host_live": True, "fixture_live": True,
++            "fixture_topology_live": True, "fixture_thread_count": 4,
++            "fixture_path": "/private/fixture", "capture_generation": 2,
++            "stdout_bytes_read": 100, "stderr_bytes_read": 100}
++        ready = custodian.make_case_ready_event("managed", "m-1", identities, evidence)
++        request = {"op": "interrupt", "case": "managed", "event_id": "m-1",
++            "target": "managed_host", "signal": "KILL"}
++        controller, peer = socket.socketpair()
++        peer.sendall(json.dumps(request).encode() + b"\n")
++        events = []
++        def fresh_after_stop():
++            stopped = {**evidence, "managed_host_stopped": True}
++            witness = custodian.managed_stopped_output_witness(stopped)
++            stopped.update(witness)
++            event = custodian.make_case_ready_event("managed", "m-2", identities, stopped)
++            event["stop_proof"] = {"host_status": custodian.DARWIN_SSTOP,
++                "host_identity": identities["managed_host"], "capture_generation": 2,
++                "output_witness": witness}
++            return event
++        def confirm_fixture(identity, _deadline):
++            events.append(("post-kill-census", identity["pid"]))
++            return None  # The fixture exited in the compare-to-KILL interval.
++        try:
++            with patch.object(custodian.os, "kill", side_effect=lambda pid, sig:
++                    events.append(("signal", pid, sig))):
++                with self.assertRaisesRegex(ValueError, "post-KILL fixture"):
++                    custodian.service_controller(controller, "managed", ready, False,
++                        None, gate, time.monotonic() + 2,
++                        pre_action_validate=fresh_after_stop,
++                        confirm_stopped=lambda proc, identity, _deadline: {
++                            **identity, "status": custodian.DARWIN_SSTOP},
++                        confirm_fixture_live=confirm_fixture)
++            self.assertEqual(events, [("signal", 101, signal.SIGSTOP),
++                ("signal", 101, signal.SIGKILL), ("post-kill-census", 103)])
++        finally:
++            controller.close()
++            peer.close()
++
++    def test_managed_action_requires_strict_remaining_payload_after_one_unpublished_read(self):
++        output = {"stdout_bytes_read": custodian.MANAGED_STDOUT_TOTAL -
++                  custodian.MANAGED_READ_BUDGET - 1,
++                  "stderr_bytes_read": custodian.MANAGED_STDERR_TOTAL -
++                  custodian.MANAGED_READ_BUDGET - 1}
++        witness = custodian.managed_stopped_output_witness(output)
++        self.assertEqual(witness["stdout_upper_bytes"], custodian.MANAGED_STDOUT_TOTAL - 1)
++        self.assertEqual(witness["stderr_upper_bytes"], custodian.MANAGED_STDERR_TOTAL - 1)
++        for stream, total in (("stdout", custodian.MANAGED_STDOUT_TOTAL),
++                              ("stderr", custodian.MANAGED_STDERR_TOTAL)):
++            bad = dict(output, **{stream + "_bytes_read": total - custodian.MANAGED_READ_BUDGET})
++            with self.subTest(stream=stream), self.assertRaisesRegex(ValueError, "unfinished capture"):
++                custodian.managed_stopped_output_witness(bad)
++
++    def test_managed_post_kill_fixture_witness_rejects_exit_zombie_unknown_and_reuse(self):
++        identity = {"pid": 103, "start_seconds": 8, "start_microseconds": 42}
++        live = {**identity, "path": "/private/fixture", "pgid": 103, "status": 3}
++        self.assertTrue(custodian.validate_managed_post_kill_fixture(
++            live, identity, "/private/fixture"))
++        for bad in (
++                {**live, "status": 5},
++                {**live, "status": 99},
++                {**live, "start_microseconds": 43},
++                {**live, "pgid": 101},
++                {**live, "path": "/other/fixture"},
++                {**live, "foreign": True},
++                {key: value for key, value in live.items() if key != "path"},
++                None):
++            with self.subTest(row=bad), self.assertRaisesRegex(ValueError, "post-KILL fixture"):
++                custodian.validate_managed_post_kill_fixture(
++                    bad, identity, "/private/fixture")
++
++    def test_managed_source_publishes_each_read_atomically_before_next_stream_read(self):
++        rust = SOURCE.with_name("macos-managed-capture-overlay").joinpath("unix.rs").read_text(
++            encoding="utf-8")
++        supervise = rust[rust.index("fn supervise("):rust.index("fn fail(", rust.index("fn supervise("))]
++        self.assertIn("const READ_BUDGET: usize = 64 * 1024;", rust)
++        read_start = rust.index("fn read_ready<R: Read>(")
++        read_loop = rust[read_start:rust.index("\nfn supervise(", read_start)]
++        self.assertIn("READ_BUDGET - consumed", read_loop)
++        self.assertNotIn("capture_progress_published", supervise)
++        for stream, buf, next_read in (("stdout", "out", "read_ready(stderr.as_mut().unwrap(), &mut err, limit)"),
++                                       ("stderr", "err", "if fds[2].revents != 0")):
++            read_call = f"read_ready({stream}.as_mut().unwrap(), &mut {buf}, limit)"
++            start = supervise.index(read_call)
++            self.assertEqual(supervise.count(read_call), 1,
++                             "each supervise iteration has one bounded quantum per stream")
++            publish = supervise.index("publish_capture_progress(", start)
++            match = supervise.index("match read_result", publish)
++            end = supervise.index(next_read, start)
++            self.assertLess(start, publish)
++            self.assertLess(publish, match)
++            self.assertLess(match, end)
++            self.assertIn('process_io_cause("publish private process capture progress"',
++                          supervise[publish:match])
++            self.assertIn("return fail(", supervise[publish:match],
++                          "publication errors must enter cleanup before read status handling")
++        observer = rust[rust.index("fn publish_capture_progress("):rust.index("const READ_BUDGET")]
++        self.assertIn("generation.checked_add(1)", observer)
++        self.assertIn("std::fs::rename", observer)
++        self.assertNotIn("create_new().open(&path)", observer)
++
++    def test_managed_post_kill_identity_is_observed_after_exact_host_kill(self):
++        source = ADAPTER.read_text(encoding="utf-8")
++        body = source[source.index("def service_controller("):source.index("def case_evidence(")]
++        self.assertLess(body.index("signal_unreaped_managed_host"),
++                        body.index("confirm_fixture_live("))
++        self.assertIn("fixture_after_kill", body)
++
++    def test_observer_publication_failures_abort_before_read_state_is_accepted(self):
++        rust = SOURCE.with_name("macos-managed-capture-overlay").joinpath("unix.rs").read_text(
++            encoding="utf-8")
++        supervise = rust[rust.index("fn supervise("):rust.index("fn fail(", rust.index("fn supervise("))]
++        for stream in ("stdout", "stderr"):
++            read = supervise.index(f"let read_result = read_ready({stream}.as_mut().unwrap()")
++            publish = supervise.index("publish_capture_progress(", read)
++            handled = supervise.index("match read_result", publish)
++            block = supervise[publish:handled]
++            self.assertIn("if let Err(error) = ", supervise[read:publish])
++            self.assertIn("return fail(", block)
++            self.assertNotIn("unwrap_or", block)
++            self.assertLess(publish, handled)
++
++        publisher = rust[rust.index("fn publish_capture_progress("):rust.index("const READ_BUDGET")]
++        self.assertIn("is_absolute()", publisher)
++        self.assertIn("generation.checked_add(1)", publisher)
++        self.assertIn("file.sync_all()?", publisher)
++        self.assertIn("std::fs::rename(&temporary, &path)", publisher)
++        self.assertIn("return result;", publisher)
++        self.assertNotIn("return Ok(())", publisher)
++
+     def test_owned_command_refreshes_managed_observation_at_action_time(self):
+         class Child:
+             pid = 101
+@@ -537,7 +750,8 @@ class EnvironmentTests(unittest.TestCase):
+                               ("managed_host", 101), ("fixture", 103))},
+             {"managed_host_live": True, "fixture_live": True,
+              "fixture_topology_live": True, "fixture_thread_count": 4,
+-             "stdout_bytes_read": 8, "stderr_bytes_read": 8})
++             "fixture_path": "/private/runtime/target/debug/deps/sys_process-frozen",
++             "capture_generation": 1, "stdout_bytes_read": 8, "stderr_bytes_read": 8})
+         lost = {**ready, "event_id": "m-2", "evidence": {
+             **ready["evidence"], "fixture_live": False}}
+         request = {"op": "interrupt", "case": "managed", "event_id": "m-1",
+@@ -545,10 +759,26 @@ class EnvironmentTests(unittest.TestCase):
+         controller, peer = socket.socketpair()
+         peer.sendall(json.dumps(request).encode() + b"\n")
+         observations = []
+-        def observe(*_args):
++        def observe(*_args, **_kwargs):
+             observations.append(True)
+             return ready if len(observations) == 1 else lost
+         setup = (gate, anchor, {}, {}, set(), {"issued": False}, {})
++        temporary = tempfile.TemporaryDirectory()
++        runtime = Path(temporary.name).resolve()
++        fixture_path = runtime/"target/debug/deps/sys_process-frozen"
++        fixture_path.parent.mkdir(parents=True)
++        fixture_path.touch()
++        argv = [str(runtime/"target/debug/examples/macos-managed-capture-companion"),
++            str(fixture_path), str(runtime/"managed-host-ready.json"),
++            str(runtime/"managed-fixture.record"), str(runtime/"managed-host-complete"),
++            str(runtime/"managed-capture-progress.json")]
++        host_path = argv[0]
++        host_identity = ready["identities"]["managed_host"]
++        class Reader:
++            def complete_listing(self, _deadline):
++                return [{**host_identity, "path": host_path, "status": custodian.DARWIN_SSTOP}]
++        class Custody:
++            _adapter_process_reader = Reader()
+         try:
+             with patch.object(custodian, "spawn_anchored", return_value=setup), \
+                  patch.object(custodian, "waitid_nonreap", return_value=None), \
+@@ -556,17 +786,18 @@ class EnvironmentTests(unittest.TestCase):
+                  patch.object(custodian, "stop_anchored", return_value=[-9, -9]), \
+                  patch.object(custodian.os, "kill") as kill:
+                 with self.assertRaisesRegex(ValueError, "changed before injection"):
+-                    custodian.owned_command(object(), ["/private/runtime/managed-host"],
+-                        Path("/private/runtime"), {}, Path("/private/runtime/out"),
++                    custodian.owned_command(Custody(), argv,
++                        runtime, {}, runtime/"out",
+                         time.monotonic() + 5, time.monotonic() + 10,
+                         control_context=(controller, "managed", client),
+-                        runtime=Path("/private/runtime"))
++                        runtime=runtime)
+                 self.assertEqual(len(observations), 2,
+                     "the action must take a second native observation after the request")
+-                kill.assert_not_called()
++                kill.assert_called_once_with(101, signal.SIGSTOP)
+         finally:
+             controller.close()
+             peer.close()
++            temporary.cleanup()
+ 
+     def test_bootstrap_uses_exact_target_after_python_c_sentinel(self):
+         target = [sys.executable, str(CONTROL_PACKAGE.with_name(
+@@ -893,22 +1124,33 @@ class EnvironmentTests(unittest.TestCase):
+                 custodian.control_finalization_complete("deadline", [bad], ledger, absence,
+                     [], 2, "deadline-control-stop", None, status)
+ 
+-        managed_ready = {"event": "case-ready", "case": "managed", "event_id": "m-1",
+-            "identities": {slot: {"pid": pid, "start_seconds": 3,
+-                "start_microseconds": pid} for slot, pid in
+-                (("client", 30), ("gate", 31), ("anchor", 32),
+-                 ("managed_host", 31), ("fixture", 33))},
+-            "evidence": {"managed_host_live": True, "fixture_live": True,
+-                "fixture_topology_live": True, "fixture_thread_count": 4,
+-                "stdout_bytes_read": 12, "stderr_bytes_read": 14}}
+-        action_ready = {**managed_ready, "event_id": "m-2"}
++        managed_identities = {slot: {"pid": pid, "start_seconds": 3,
++            "start_microseconds": pid} for slot, pid in
++            (("client", 30), ("gate", 31), ("anchor", 32),
++             ("managed_host", 31), ("fixture", 33))}
++        managed_evidence = {"managed_host_live": True, "fixture_live": True,
++            "fixture_topology_live": True, "fixture_thread_count": 4,
++            "fixture_path": "/private/fixture", "capture_generation": 1,
++            "stdout_bytes_read": 12, "stderr_bytes_read": 14}
++        managed_ready = custodian.make_case_ready_event(
++            "managed", "m-1", managed_identities, managed_evidence)
++        stopped_evidence = {**managed_evidence, "managed_host_stopped": True}
++        stopped_witness = custodian.managed_stopped_output_witness(stopped_evidence)
++        stopped_evidence.update(stopped_witness)
++        action_ready = custodian.make_case_ready_event(
++            "managed", "m-2", managed_identities, stopped_evidence)
++        action_ready["stop_proof"] = {"host_status": custodian.DARWIN_SSTOP,
++            "host_identity": managed_identities["managed_host"],
++            "capture_generation": 1, "output_witness": stopped_witness}
+         managed_record = {"setup_complete": True, "group_signal_issued": True,
+             "gate_status": -9, "anchor_status": -9, "cleanup_complete": True,
+             "control_case": "managed", "command_pid": 31,
+             "control_readiness_event": managed_ready,
+             "control_action_readiness_event": action_ready,
+             "control_action": {"action": "managed-host-interrupted", "case": "managed",
+-                "event_id": "m-1", "status": -9}}
++                "event_id": "m-1", "status": -9,
++                "fixture_after_kill": {**managed_identities["fixture"],
++                    "path": "/private/fixture", "pgid": 33, "status": 3}}}
+         self.assertTrue(custodian.control_finalization_complete(
+             "managed", [managed_record], ledger, absence, [], 2,
+             "client-eof", 1, None))
