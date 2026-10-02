@@ -504,3 +504,23 @@ Sampled maximaRSS735200KiB/storage733948KiB/descendants7, export74.811s; these a
 periodic maxima, not continuous peaks. Owned runtime and empty scope absent.
 Compiler-only requirement accepted; native behavior/matrix remains open.
 Active owner source audit continues at current4d86; no native85 allocated.
+
+
+Next prerequisite checkpoint: Mac source audit140eed identifies actual current
+Cargo/rustc/Xcode tool resolution and absent ancestorCargo config/emcc. Root
+read the full one-file report, accepting point-in-time path/source assumptions
+only. Concrete source gap: version outputs are printed but not enforced.
+Existing owner continues minimal fail-closed preflight under cause09/Expert09
+with pure mismatch and pre-archive-placement tests, same guardfalse/count84/caps.
+After freezing, next source prerequisite is the finite four-case native control
+controller/companion; no repeated broad audit or native dispatch yet.
+
+Linux compiler prerequisite preparation uses frozen1ca21e32/v3lock2ba4 with
+baseline plus tenpositive feature rows and a separate sys+no_object negative
+check (Cargo101 plus exact intentional diagnostic). Existing optional-helper
+owner prepares only, one integrated runtime/proposed600/540/510s and unchanged
+caps, no targetfixtures/native85. Workhorse heavy slot is occupied per current
+Patrol thread readback: foreigncargo-nextest636412/cargo636436/rustc in
+ guardrails-G40; preserve it and renew exact inventory before dispatch.
+Current turn continues progress from the previous ten-row accepted closure;
+no true campaign-wide blocked condition, no release completion claimed.
