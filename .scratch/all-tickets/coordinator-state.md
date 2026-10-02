@@ -75,7 +75,15 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    medians, exact toolchain/resource observations. Explain that public API does
    not expose spawn→first-byte timestamps. Private scoped build, one reused build,
    exact owned cleanup/export, per-run/total limits and finite no-progress criteria.
-3. After actual Windows prerequisite acceptance, implement and prove the Windows
+3. Windows public-contract source preparation is running in fresh Standard context
+   windows_public_contract, owned managed worktree
+   /Users/hoppworks/.codex/worktrees/windows-public-contract/rhai, local branch
+   task/windows-public-contract at b7e5f4e2. Prepare the first public Engine success/
+   nonzero/raw-output contract with independent fixture record and cleanup, reusing
+   self-reexec support. No native execution, Cargo, dependency or production adapter
+   change before prerequisite proof. Source-only validation; do not claim an
+   unexecuted test is a demonstrated RED. Planning checkpoint30min, zero launches.
+   After actual Windows prerequisite acceptance, implement and prove the Windows
    production adapter/lifecycle against ticket03/design. Current process.rs registers
    only cfg(unix); runner scaffolding is not the Windows production implementation.
 4. Complete final current-source native OS/features/MSRV matrix, documentation,
