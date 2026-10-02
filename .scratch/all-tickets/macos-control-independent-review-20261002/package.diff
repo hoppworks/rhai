@@ -1,0 +1,734 @@
+diff --git a/.scratch/all-tickets/macos-finite-control-package-20261002/source-green-final.log b/.scratch/all-tickets/macos-finite-control-package-20261002/source-green-final.log
+new file mode 100644
+index 00000000..e04bff0c
+--- /dev/null
++++ b/.scratch/all-tickets/macos-finite-control-package-20261002/source-green-final.log
+@@ -0,0 +1,14 @@
++...........custodian_command_reaped gate=0 anchor=0 pgid=20 group_signal_issued=True
++..........runtime_path=/Users/hoppworks/.local/share/agent-builds/rhai/macos-finite-control-package-20261002-AmHM95ev/tmp/agent-build-gn0jtctg/tmp/tmpklw2cwab/scope/runtime
++control_case=build controller_status=0 custodian_status=0 custody_receipt=/Users/hoppworks/.local/share/agent-builds/rhai/macos-finite-control-package-20261002-AmHM95ev/tmp/agent-build-gn0jtctg/tmp/tmpklw2cwab/logs/control.custody.json controller_receipt=/Users/hoppworks/.local/share/agent-builds/rhai/macos-finite-control-package-20261002-AmHM95ev/tmp/agent-build-gn0jtctg/tmp/tmpklw2cwab/logs/control.controller.json
++.................................cargo_argv=['/bin/true']
++cargo_cwd=/Users/hoppworks/.local/share/agent-builds/rhai/macos-finite-control-package-20261002-AmHM95ev/tmp/agent-build-gn0jtctg/tmp/measurement-bytes-test-t6h7fmfv
++cargo_log=/Users/hoppworks/.local/share/agent-builds/rhai/macos-finite-control-package-20261002-AmHM95ev/tmp/agent-build-gn0jtctg/tmp/measurement-bytes-test-t6h7fmfv/cargo.log
++cargo_status=0 cargo_pgid=99 cargo_elapsed_seconds=0.000
++escaped_leaf_candidate_absence=0 original_pgid_absent_observations=2
++...................
++----------------------------------------------------------------------
++Ran 73 tests in 0.127s
++
++OK
++AST syntax: PASS
+diff --git a/.scratch/all-tickets/macos-finite-control-package-20261002/source-red.log b/.scratch/all-tickets/macos-finite-control-package-20261002/source-red.log
+new file mode 100644
+index 00000000..f56663b0
+--- /dev/null
++++ b/.scratch/all-tickets/macos-finite-control-package-20261002/source-red.log
+@@ -0,0 +1,107 @@
++...........custodian_command_reaped gate=0 anchor=0 pgid=20 group_signal_issued=True
++.........EEE............E..................cargo_argv=['/bin/true']
++cargo_cwd=/Users/hoppworks/.local/share/agent-builds/rhai/macos-finite-control-package-20261002-s4a9Bwf4/tmp/agent-build-sb49m867/tmp/measurement-bytes-test-34of2tlx
++cargo_log=/Users/hoppworks/.local/share/agent-builds/rhai/macos-finite-control-package-20261002-s4a9Bwf4/tmp/agent-build-sb49m867/tmp/measurement-bytes-test-34of2tlx/cargo.log
++cargo_status=0 cargo_pgid=99 cargo_elapsed_seconds=0.000
++escaped_leaf_candidate_absence=0 original_pgid_absent_observations=2
++..................
++======================================================================
++ERROR: test_control_package_accepts_only_matching_controller_and_complete_custody_receipts (__main__.EnvironmentTests)
++----------------------------------------------------------------------
++Traceback (most recent call last):
++  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py", line 964, in test_control_package_accepts_only_matching_controller_and_complete_custody_receipts
++    self.assertTrue(control_package.validate_control_artifacts(case, 0, result, receipt, False))
++AttributeError: module 'macos_process_overhead_control_package' has no attribute 'validate_control_artifacts'
++
++======================================================================
++ERROR: test_control_package_launches_controller_only_after_registered_adapter_socket (__main__.EnvironmentTests)
++----------------------------------------------------------------------
++Traceback (most recent call last):
++  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py", line 994, in test_control_package_launches_controller_only_after_registered_adapter_socket
++    action, status = control_package.expected_result(case)
++AttributeError: module 'macos_process_overhead_control_package' has no attribute 'expected_result'
++
++======================================================================
++ERROR: test_control_package_requires_adapter_socket_from_exact_runtime_and_case (__main__.EnvironmentTests)
++----------------------------------------------------------------------
++Traceback (most recent call last):
++  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py", line 941, in test_control_package_requires_adapter_socket_from_exact_runtime_and_case
++    self.assertEqual(control_package.parse_socket_announcement(
++AttributeError: module 'macos_process_overhead_control_package' has no attribute 'parse_socket_announcement'
++
++======================================================================
++ERROR: test_finite_control_package_has_one_exact_case_vector_and_bounded_time (__main__.EnvironmentTests) (case='setup')
++----------------------------------------------------------------------
++Traceback (most recent call last):
++  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py", line 924, in test_finite_control_package_has_one_exact_case_vector_and_bounded_time
++    argv = control_package.adapter_argv("/usr/bin/python3", ADAPTER, case, 585)
++AttributeError: module 'macos_process_overhead_control_package' has no attribute 'adapter_argv'
++
++======================================================================
++ERROR: test_finite_control_package_has_one_exact_case_vector_and_bounded_time (__main__.EnvironmentTests) (case='build')
++----------------------------------------------------------------------
++Traceback (most recent call last):
++  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py", line 924, in test_finite_control_package_has_one_exact_case_vector_and_bounded_time
++    argv = control_package.adapter_argv("/usr/bin/python3", ADAPTER, case, 585)
++AttributeError: module 'macos_process_overhead_control_package' has no attribute 'adapter_argv'
++
++======================================================================
++ERROR: test_finite_control_package_has_one_exact_case_vector_and_bounded_time (__main__.EnvironmentTests) (case='managed')
++----------------------------------------------------------------------
++Traceback (most recent call last):
++  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py", line 924, in test_finite_control_package_has_one_exact_case_vector_and_bounded_time
++    argv = control_package.adapter_argv("/usr/bin/python3", ADAPTER, case, 585)
++AttributeError: module 'macos_process_overhead_control_package' has no attribute 'adapter_argv'
++
++======================================================================
++ERROR: test_finite_control_package_has_one_exact_case_vector_and_bounded_time (__main__.EnvironmentTests) (case='deadline')
++----------------------------------------------------------------------
++Traceback (most recent call last):
++  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py", line 924, in test_finite_control_package_has_one_exact_case_vector_and_bounded_time
++    argv = control_package.adapter_argv("/usr/bin/python3", ADAPTER, case, 585)
++AttributeError: module 'macos_process_overhead_control_package' has no attribute 'adapter_argv'
++
++======================================================================
++ERROR: test_finite_control_package_has_one_exact_case_vector_and_bounded_time (__main__.EnvironmentTests) (case='all')
++----------------------------------------------------------------------
++Traceback (most recent call last):
++  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py", line 930, in test_finite_control_package_has_one_exact_case_vector_and_bounded_time
++    control_package.validate_case(case)
++AttributeError: module 'macos_process_overhead_control_package' has no attribute 'validate_case'
++
++======================================================================
++ERROR: test_finite_control_package_has_one_exact_case_vector_and_bounded_time (__main__.EnvironmentTests) (case='setup,build')
++----------------------------------------------------------------------
++Traceback (most recent call last):
++  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py", line 930, in test_finite_control_package_has_one_exact_case_vector_and_bounded_time
++    control_package.validate_case(case)
++AttributeError: module 'macos_process_overhead_control_package' has no attribute 'validate_case'
++
++======================================================================
++ERROR: test_finite_control_package_has_one_exact_case_vector_and_bounded_time (__main__.EnvironmentTests) (case='')
++----------------------------------------------------------------------
++Traceback (most recent call last):
++  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py", line 930, in test_finite_control_package_has_one_exact_case_vector_and_bounded_time
++    control_package.validate_case(case)
++AttributeError: module 'macos_process_overhead_control_package' has no attribute 'validate_case'
++
++======================================================================
++ERROR: test_finite_control_package_has_one_exact_case_vector_and_bounded_time (__main__.EnvironmentTests) (case=None)
++----------------------------------------------------------------------
++Traceback (most recent call last):
++  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py", line 930, in test_finite_control_package_has_one_exact_case_vector_and_bounded_time
++    control_package.validate_case(case)
++AttributeError: module 'macos_process_overhead_control_package' has no attribute 'validate_case'
++
++======================================================================
++ERROR: test_finite_control_package_has_one_exact_case_vector_and_bounded_time (__main__.EnvironmentTests)
++----------------------------------------------------------------------
++Traceback (most recent call last):
++  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py", line 932, in test_finite_control_package_has_one_exact_case_vector_and_bounded_time
++    control_package.adapter_argv("/usr/bin/python3", ADAPTER, "setup", 586)
++AttributeError: module 'macos_process_overhead_control_package' has no attribute 'adapter_argv'
++
++----------------------------------------------------------------------
++Ran 72 tests in 0.120s
++
++FAILED (errors=12)
+diff --git a/.scratch/all-tickets/run-macos-process-overhead-control-package.py b/.scratch/all-tickets/run-macos-process-overhead-control-package.py
+new file mode 100644
+index 00000000..2e27e2e1
+--- /dev/null
++++ b/.scratch/all-tickets/run-macos-process-overhead-control-package.py
+@@ -0,0 +1,361 @@
++#!/usr/bin/env python3
++"""Orchestrate one finite interruption control through the scoped custodian."""
++import argparse
++import importlib.util
++import json
++import math
++import os
++import signal
++import socket
++import subprocess
++import sys
++import time
++from pathlib import Path
++
++sys.dont_write_bytecode = True
++
++HERE = Path(__file__).resolve().parent
++REPO = HERE.parents[1]
++ADAPTER = HERE / 'run-macos-process-overhead-scoped.py'
++CONTROL = HERE / 'macos-process-overhead-control.py'
++EVIDENCE = REPO / '.scratch/all-tickets/macos-process-overhead-evidence'
++CASES = {'setup', 'build', 'managed', 'deadline'}
++OUTER_LIMIT = 600.0
++ADAPTER_LIMIT = 585.0
++WRAPPER_RESERVE = 15.0
++INTERRUPT_SIGNALS = {signal.SIGINT, signal.SIGTERM}
++BOOTSTRAP = (
++    'import os,signal,sys; '
++    'signal.pthread_sigmask(signal.SIG_UNBLOCK,{signal.SIGINT,signal.SIGTERM}); '
++    'os.execv(sys.argv[0],sys.argv)'
++)
++
++CONTROL_SPEC = importlib.util.spec_from_file_location('overhead_finite_control_client', CONTROL)
++control_client = importlib.util.module_from_spec(CONTROL_SPEC)
++CONTROL_SPEC.loader.exec_module(control_client)
++
++
++class ControlCancelled(BaseException):
++    pass
++
++
++def validate_case(case):
++    if type(case) is not str or case not in CASES:
++        raise ValueError('exactly one of setup, build, managed or deadline is required')
++    return case
++
++
++def expected_result(case):
++    validate_case(case)
++    return {
++        'setup': ('client-interrupted', -signal.SIGTERM),
++        'build': ('client-interrupted', -signal.SIGKILL),
++        'managed': ('managed-host-interrupted', -signal.SIGKILL),
++        'deadline': ('deadline-stop-observed', -signal.SIGKILL),
++    }[case]
++
++
++def adapter_argv(python, adapter, case, timeout):
++    validate_case(case)
++    if (type(timeout) not in (int, float) or not math.isfinite(timeout)
++            or timeout <= 0 or timeout > ADAPTER_LIMIT):
++        raise ValueError('adapter timeout must be positive and at most 585 seconds')
++    return [str(python), str(adapter), '--timeout', format(float(timeout), '.9g'),
++            '--control-case', case]
++
++
++def registered_exec_argv(argv, python=None):
++    """Exec one exact target with signals unblocked after its Popen slot exists."""
++    if type(argv) not in (list, tuple) or not argv or any(type(item) is not str for item in argv):
++        raise ValueError('registered child argv must be a nonempty string vector')
++    return [str(python or sys.executable), '-c', BOOTSTRAP, *argv]
++
++
++def parse_socket_announcement(text, scope, case):
++    validate_case(case)
++    if type(text) is not str:
++        raise ValueError('custodian socket announcement is not text')
++    records = [line for line in text.splitlines()
++               if line.startswith('control_socket_path=')]
++    if len(records) != 1:
++        raise ValueError('custodian did not publish exactly one controller socket')
++    fields = records[0].split()
++    if len(fields) != 2 or not fields[0].startswith('control_socket_path=') \
++            or not fields[1].startswith('control_case='):
++        raise ValueError('custodian controller announcement is malformed')
++    path = Path(fields[0].split('=', 1)[1])
++    announced_case = fields[1].split('=', 1)[1]
++    runtime = Path(scope).resolve(strict=True) / 'runtime'
++    expected = runtime / 'controller.sock'
++    if (announced_case != case or not path.is_absolute() or path != expected
++            or path.parent != runtime or runtime.is_symlink()):
++        raise ValueError('custodian controller socket does not match the exact scope/case')
++    if path.is_symlink():
++        raise ValueError('custodian controller socket path is redirected')
++    return path
++
++
++def _closed_command_records(records, case, result):
++    if type(records) is not list or not records:
++        return False
++    matching = [record for record in records if type(record) is dict
++                and record.get('control_case') == case]
++    if len(matching) != 1:
++        return False
++    record = matching[0]
++    if not all(record.get(key) is True for key in
++               ('setup_complete', 'group_signal_issued', 'cleanup_complete')):
++        return False
++    if any(type(record.get(key)) is not int for key in ('gate_status', 'anchor_status')):
++        return False
++    event = record.get('control_readiness_event')
++    if (type(event) is not dict or event.get('event') != 'case-ready'
++            or event.get('case') != case or type(event.get('event_id')) is not str
++            or not event.get('event_id') or event.get('event_id') != result.get('event_id')):
++        return False
++    action, status = expected_result(case)
++    if case == 'deadline':
++        completion = record.get('control_completion_event')
++        return (record.get('control_stop_reason') == 'work-deadline-expired'
++                and record.get('control_action') is None
++                and type(completion) is dict
++                and completion.get('event') == 'deadline-expired'
++                and completion.get('case') == case
++                and completion.get('event_id') == result.get('event_id')
++                and completion.get('reason') == 'work-deadline-expired'
++                and completion.get('command_status') == status)
++    recorded = record.get('control_action')
++    return (type(recorded) is dict and recorded.get('action') == action
++            and recorded.get('case') == case
++            and recorded.get('event_id') == result.get('event_id')
++            and recorded.get('status') == result.get('status'))
++
++
++def validate_control_artifacts(case, adapter_status, controller_result, receipt,
++                               runtime_present):
++    try:
++        validate_case(case)
++        if adapter_status != 0 or runtime_present:
++            raise ValueError('custodian status/runtime cleanup is incomplete')
++        action, status = expected_result(case)
++        if (type(controller_result) is not dict
++                or set(controller_result) != {'case', 'event_id', 'action', 'status'}
++                or controller_result.get('case') != case
++                or type(controller_result.get('event_id')) is not str
++                or not controller_result.get('event_id')
++                or controller_result.get('action') != action
++                or type(controller_result.get('status')) is not int):
++            raise ValueError('controller result does not describe the selected action')
++        allowed = {status}
++        if case == 'setup':
++            allowed.add(-signal.SIGKILL)
++        if controller_result['status'] not in allowed:
++            raise ValueError('controller result status does not match the selected action')
++        if (type(receipt) is not dict or receipt.get('schema') != 1
++                or receipt.get('control_case') != case or receipt.get('complete') is not True):
++            raise ValueError('custodian receipt is absent, incomplete or for another case')
++        ledger = receipt.get('identity_ledger')
++        absence = receipt.get('candidate_absence')
++        if (type(ledger) is not dict or ledger.get('observed_identity_readback_complete') is not True
++                or type(absence) is not dict or absence.get('complete') is not True
++                or absence.get('candidates') != []
++                or type(receipt.get('groups_absent_observations')) is not int
++                or receipt['groups_absent_observations'] < 2):
++            raise ValueError('custodian identity/group/candidate readback is incomplete')
++        if not _closed_command_records(receipt.get('commands'), case, controller_result):
++            raise ValueError('custodian command/action receipt is incomplete or mismatched')
++        return True
++    except (AttributeError, KeyError, TypeError, ValueError) as exc:
++        raise ValueError(f'control package rejected: {exc}') from exc
++
++
++def _open_private_log(path):
++    flags = os.O_WRONLY | os.O_CREAT | os.O_EXCL
++    flags |= getattr(os, 'O_NOFOLLOW', 0)
++    descriptor = os.open(path, flags, 0o600)
++    return os.fdopen(descriptor, 'w', encoding='utf-8')
++
++
++def _socket_announcement(log_path, scope, case):
++    if log_path.is_symlink() or not log_path.is_file():
++        return None
++    text = log_path.read_text(encoding='utf-8', errors='strict')
++    if 'control_socket_path=' not in text:
++        return None
++    try:
++        return parse_socket_announcement(text, scope, case)
++    except ValueError:
++        if text.endswith('\n'):
++            raise
++        return None
++
++
++def wait_for_socket(proc, log_path, scope, case, deadline, clock=time.monotonic,
++                    sleeper=time.sleep):
++    while clock() < deadline:
++        path = _socket_announcement(log_path, scope, case)
++        if path is not None:
++            return path
++        if proc.poll() is not None:
++            raise RuntimeError('custodian exited before publishing its controller socket')
++        sleeper(min(0.02, max(0, deadline - clock())))
++    raise TimeoutError('custodian controller socket was not published before its deadline')
++
++
++def _connect_controller(path, timeout):
++    conn = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
++    try:
++        conn.settimeout(min(2.0, timeout))
++        conn.connect(str(path))
++        conn.settimeout(None)
++        return conn
++    except BaseException:
++        conn.close()
++        raise
++
++
++def _spawn_registered(argv, stdout, env, popen_factory, signal_api=signal):
++    mask = getattr(signal_api, 'pthread_sigmask', None)
++    if not callable(mask):
++        raise RuntimeError('cannot register the custodian while safely blocking interruption')
++    prior = mask(signal_api.SIG_BLOCK, INTERRUPT_SIGNALS)
++    try:
++        proc = popen_factory(registered_exec_argv(argv), stdin=subprocess.DEVNULL,
++                             stdout=stdout, stderr=subprocess.STDOUT, env=env,
++                             close_fds=True)
++    finally:
++        mask(signal_api.SIG_SETMASK, prior)
++    return proc
++
++
++def _stop_exact_adapter(proc, deadline, clock=time.monotonic):
++    if proc.poll() is not None:
++        return proc.returncode
++    proc.send_signal(signal.SIGTERM)
++    remaining = max(0.0, deadline - clock())
++    try:
++        return proc.wait(timeout=min(15.0, remaining))
++    except subprocess.TimeoutExpired as exc:
++        raise RuntimeError(
++            f'custodian did not close within its bounded cancellation window; '
++            f'preserve runtime and owner pid={proc.pid}') from exc
++
++
++def run_control_case(case, scope, log_base, timeout=OUTER_LIMIT,
++                     popen_factory=subprocess.Popen, connect_fn=_connect_controller,
++                     protocol_fn=None, clock=time.monotonic, sleeper=time.sleep,
++                     manage_signals=True):
++    """Run one case, with the adapter as the only workload custodian."""
++    validate_case(case)
++    if type(timeout) not in (int, float) or not math.isfinite(timeout) \
++            or timeout <= 0 or timeout > OUTER_LIMIT:
++        raise ValueError('control package timeout must be positive and at most 600 seconds')
++    scope = Path(scope).absolute()
++    if scope.is_symlink() or not scope.is_dir() or scope.resolve(strict=True) != scope:
++        raise ValueError('control package scope must be an exact existing directory')
++    tmp = scope / 'tmp'
++    if tmp.is_symlink() or not tmp.is_dir() or tmp.resolve(strict=True) != tmp:
++        raise ValueError('control package requires its exact private scope tmp directory')
++    log_base = Path(log_base).absolute()
++    if (log_base.parent.resolve(strict=True) != EVIDENCE.resolve()
++            or log_base.is_symlink() or log_base.exists()):
++        raise ValueError('control evidence base must be a new path in the fixed evidence directory')
++    EVIDENCE.mkdir(parents=True, exist_ok=True)
++    if EVIDENCE.is_symlink():
++        raise ValueError('control evidence directory is redirected')
++    started = clock()
++    outer_deadline = started + float(timeout)
++    runtime = scope / 'runtime'
++    if runtime.exists() or runtime.is_symlink():
++        raise ValueError('control package runtime already exists')
++    adapter_log = Path(str(log_base) + '.adapter.log')
++    control_log = Path(str(log_base) + '.controller.json')
++    receipt_path = Path(str(log_base) + '.custody.json')
++    if any(path.exists() or path.is_symlink() for path in (adapter_log, control_log, receipt_path)):
++        raise ValueError('control evidence outputs already exist')
++    env = dict(os.environ)
++    env.update({'AGENT_BUILD_SCOPE': str(scope), 'TMPDIR': str(tmp), 'TMP': str(tmp),
++                'TEMP': str(tmp), 'RHAI_OVERHEAD_LOG_BASE': str(log_base)})
++    previous_handlers = {}
++    if manage_signals:
++        def interrupted(signum, _frame):
++            raise ControlCancelled(f'finite control received signal {signum}')
++        for signum in INTERRUPT_SIGNALS:
++            previous_handlers[signum] = signal.signal(signum, interrupted)
++    adapter = None
++    conn = None
++    try:
++        with _open_private_log(adapter_log) as log:
++            adapter_timeout = min(ADAPTER_LIMIT,
++                                 outer_deadline - clock() - WRAPPER_RESERVE)
++            if adapter_timeout <= 0:
++                raise TimeoutError('no adapter time remains after the wrapper/readback reserve')
++            argv = adapter_argv(sys.executable, ADAPTER, case, adapter_timeout)
++            adapter = _spawn_registered(argv, log, env, popen_factory)
++        print(f'runtime_path={runtime}', flush=True)
++        deadline = min(outer_deadline, started + adapter_timeout)
++        socket_path = wait_for_socket(adapter, adapter_log, scope, case, deadline, clock, sleeper)
++        left = deadline - clock()
++        if left <= 0:
++            raise TimeoutError('no scoped time remains to perform the selected control')
++        conn = connect_fn(socket_path, left)
++        if protocol_fn is None:
++            protocol_fn = control_client.run_control_protocol
++        result = protocol_fn(conn, case, deadline)
++        conn.close()
++        conn = None
++        adapter_left = deadline - clock()
++        if adapter_left <= 0:
++            raise TimeoutError('no scoped time remains for custodian receipt/readback')
++        try:
++            adapter_status = adapter.wait(timeout=adapter_left)
++        except subprocess.TimeoutExpired as exc:
++            raise TimeoutError('custodian did not finish readback by its scoped deadline') from exc
++        if receipt_path.is_symlink() or not receipt_path.is_file():
++            raise ValueError('custodian did not export its independent closure receipt')
++        receipt = json.loads(receipt_path.read_text(encoding='utf-8'))
++        runtime_present = runtime.exists() or runtime.is_symlink()
++        validate_control_artifacts(case, adapter_status, result, receipt, runtime_present)
++        with _open_private_log(control_log) as output:
++            json.dump(result, output, sort_keys=True)
++            output.write('\n')
++        print(f'control_case={case} controller_status=0 custodian_status={adapter_status} '
++              f'custody_receipt={receipt_path} controller_receipt={control_log}', flush=True)
++        return result
++    except BaseException:
++        if conn is not None:
++            try:
++                conn.close()
++            except OSError:
++                pass
++        if adapter is not None and adapter.poll() is None:
++            try:
++                _stop_exact_adapter(adapter, outer_deadline, clock)
++            except BaseException as cleanup_error:
++                print(f'custodian_cancel_unconfirmed={type(cleanup_error).__name__}: {cleanup_error}; '
++                      f'preserve runtime={runtime}', file=sys.stderr, flush=True)
++        raise
++    finally:
++        for signum, handler in previous_handlers.items():
++            signal.signal(signum, handler)
++
++
++def main(argv=None):
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument('--case', choices=sorted(CASES), required=True)
++    parser.add_argument('--scope', required=True)
++    parser.add_argument('--timeout', type=float, default=OUTER_LIMIT)
++    args = parser.parse_args(argv)
++    try:
++        log_base = os.environ.get('RHAI_OVERHEAD_LOG_BASE')
++        if not log_base:
++            raise ValueError('wrapper must provide the fixed evidence log base')
++        run_control_case(args.case, args.scope, log_base, args.timeout)
++        return 0
++    except BaseException as exc:
++        print(f'finite control failed: {type(exc).__name__}: {exc}', file=sys.stderr, flush=True)
++        return 1
++
++
++if __name__ == '__main__':
++    sys.exit(main())
+diff --git a/.scratch/all-tickets/run-macos-process-overhead.sh b/.scratch/all-tickets/run-macos-process-overhead.sh
+index 54a11676..d8ecfc77 100644
+--- a/.scratch/all-tickets/run-macos-process-overhead.sh
++++ b/.scratch/all-tickets/run-macos-process-overhead.sh
+@@ -5,13 +5,12 @@ if [[ $# == 0 ]]; then
+ elif [[ $# == 2 && $1 == --control-case ]]; then
+  control_case=$2
+ else
+- print -r -- "usage: run-macos-process-overhead.sh [--control-case setup|build|deadline]" >&2
++ print -r -- "usage: run-macos-process-overhead.sh [--control-case setup|build|managed|deadline]" >&2
+  exit 2
+ fi
+ if [[ $control_case != normal ]]; then
+  case "$control_case" in
+-  setup|build|deadline) ;;
+-  managed) print -r -- "Managed control is unready: fixture/stream observations are not implemented" >&2; exit 2 ;;
++  setup|build|managed|deadline) ;;
+   *) print -r -- "invalid finite control case: $control_case" >&2; exit 2 ;;
+  esac
+ fi
+@@ -26,15 +25,19 @@ scope=$(mktemp -d "$build_root/macos-overhead-XXXXXXXX")
+ mkdir -m 700 "$scope/tmp"
+ export AGENT_BUILD_SCOPE="$scope"
+ export TMPDIR="$scope/tmp" TMP="$scope/tmp" TEMP="$scope/tmp"
++export PYTHONDONTWRITEBYTECODE=1
+ evidence=$(mktemp "$evidence_dir/macos-process-overhead.XXXXXX")
+ log_base="$evidence.driver"
+ print -r -- "evidence_path=$evidence"
+ print -r -- "cargo_log_base=$log_base"
+ print -r -- "wrapper_pid=$$ wrapper_pgid=$(ps -o pgid= -p $$ | tr -d ' ')"
+ export RHAI_OVERHEAD_LOG_BASE="$log_base"
+-adapter_args=(--timeout 585)
+-if [[ $control_case != normal ]]; then adapter_args+=(--control-case "$control_case"); fi
+-python3 "$repo/.scratch/all-tickets/run-macos-process-overhead-scoped.py" "${adapter_args[@]}" > "$evidence" 2>&1
++if [[ $control_case == normal ]]; then
++ python3 -B "$repo/.scratch/all-tickets/run-macos-process-overhead-scoped.py" --timeout 585 > "$evidence" 2>&1
++else
++ python3 -B "$repo/.scratch/all-tickets/run-macos-process-overhead-control-package.py" \
++  --case "$control_case" --scope "$scope" --timeout 600 > "$evidence" 2>&1
++fi
+ runner_rc=$?
+ cat "$evidence"
+ cleanup_rc=0
+@@ -57,6 +60,14 @@ fi
+ receipt="$log_base.custody.json"
+ if [[ -L "$receipt" || ! -f "$receipt" ]]; then print -r -- "custody_receipt=missing_or_invalid path=$receipt"; cleanup_rc=1
+ else print -r -- "custody_receipt=present bytes=$(wc -c < "$receipt" | tr -d ' ') path=$receipt"; fi
++if [[ $control_case != normal ]]; then
++ controller_receipt="$log_base.controller.json"
++ if [[ -L "$controller_receipt" || ! -f "$controller_receipt" || ! -s "$controller_receipt" ]]; then
++  print -r -- "controller_receipt=missing_or_invalid path=$controller_receipt"; cleanup_rc=1
++ else
++  print -r -- "controller_receipt=present bytes=$(wc -c < "$controller_receipt" | tr -d ' ') path=$controller_receipt"
++ fi
++fi
+ if [[ -d "$scope" && ! -L "$scope" ]]; then
+  if [[ -d "$scope/tmp" && ! -L "$scope/tmp" ]]; then rmdir "$scope/tmp" 2>/dev/null || true; fi
+  if rmdir "$scope" 2>/dev/null; then print -r -- "agent_build_scope=removed path=$scope"
+diff --git a/.scratch/all-tickets/test-macos-process-overhead-source.py b/.scratch/all-tickets/test-macos-process-overhead-source.py
+index d814eb70..b6c36ae5 100644
+--- a/.scratch/all-tickets/test-macos-process-overhead-source.py
++++ b/.scratch/all-tickets/test-macos-process-overhead-source.py
+@@ -16,12 +16,16 @@ SOURCE = Path(__file__).with_name("macos-process-overhead.py")
+ ADAPTER = Path(__file__).with_name("run-macos-process-overhead-scoped.py")
+ READER = Path(__file__).with_name("darwin-process-reader.py")
+ CONTROL_CLIENT = Path(__file__).with_name("macos-process-overhead-control.py")
++CONTROL_PACKAGE = Path(__file__).with_name("run-macos-process-overhead-control-package.py")
+ ADAPTER_SPEC = importlib.util.spec_from_file_location("macos_process_custodian", ADAPTER)
+ custodian = importlib.util.module_from_spec(ADAPTER_SPEC)
+ ADAPTER_SPEC.loader.exec_module(custodian)
+ CONTROL_SPEC = importlib.util.spec_from_file_location("macos_process_overhead_control", CONTROL_CLIENT)
+ control_client = importlib.util.module_from_spec(CONTROL_SPEC)
+ CONTROL_SPEC.loader.exec_module(control_client)
++PACKAGE_SPEC = importlib.util.spec_from_file_location("macos_process_overhead_control_package", CONTROL_PACKAGE)
++control_package = importlib.util.module_from_spec(PACKAGE_SPEC)
++PACKAGE_SPEC.loader.exec_module(control_package)
+ SPEC = importlib.util.spec_from_file_location("macos_process_overhead", SOURCE)
+ module = importlib.util.module_from_spec(SPEC)
+ os.environ.setdefault("AGENT_RUNTIME_DIR", "/tmp/unused-source-test-runtime")
+@@ -910,6 +914,154 @@ class EnvironmentTests(unittest.TestCase):
+         self.assertIn("--control-case", ADAPTER.read_text(encoding="utf-8"))
+         self.assertIn("normal", ADAPTER.read_text(encoding="utf-8"))
+ 
++    def test_finite_control_package_has_one_exact_case_vector_and_bounded_time(self):
++        cases = {"setup": ("client-interrupted", -15),
++                 "build": ("client-interrupted", -9),
++                 "managed": ("managed-host-interrupted", -9),
++                 "deadline": ("deadline-stop-observed", -9)}
++        for case, (action, status) in cases.items():
++            with self.subTest(case=case):
++                argv = control_package.adapter_argv("/usr/bin/python3", ADAPTER, case, 585)
++                self.assertEqual(argv[-4:], ["--timeout", "585", "--control-case", case])
++                self.assertEqual(argv.count("--control-case"), 1)
++                self.assertEqual(control_package.expected_result(case), (action, status))
++        for case in ("all", "setup,build", "", None):
++            with self.subTest(case=case), self.assertRaises(ValueError):
++                control_package.validate_case(case)
++        with self.assertRaisesRegex(ValueError, "at most 585"):
++            control_package.adapter_argv("/usr/bin/python3", ADAPTER, "setup", 586)
++
++    def test_control_package_requires_adapter_socket_from_exact_runtime_and_case(self):
++        from tempfile import TemporaryDirectory
++        with TemporaryDirectory() as directory:
++            scope = Path(directory)
++            runtime = scope / "runtime"
++            runtime.mkdir()
++            expected = runtime / "controller.sock"
++            self.assertEqual(control_package.parse_socket_announcement(
++                f"control_socket_path={expected} control_case=managed\n", scope, "managed"), expected)
++            for text in (
++                    f"control_socket_path={scope / 'foreign.sock'} control_case=managed\n",
++                    f"control_socket_path={expected} control_case=build\n",
++                    f"control_socket_path={expected} control_case=managed\n"
++                    f"control_socket_path={expected} control_case=managed\n",
++                    "control_socket_path=relative.sock control_case=managed\n"):
++                with self.subTest(text=text), self.assertRaises(ValueError):
++                    control_package.parse_socket_announcement(text, scope, "managed")
++
++    def test_shell_dispatch_keeps_normal_measurement_separate_from_finite_control_package(self):
++        wrapper = Path(__file__).with_name("run-macos-process-overhead.sh").read_text(encoding="utf-8")
++        self.assertIn("setup|build|managed|deadline)", wrapper)
++        self.assertIn("run-macos-process-overhead-control-package.py", wrapper)
++        normal = wrapper.index("if [[ $control_case == normal ]]; then", wrapper.index("export PYTHONDONTWRITEBYTECODE"))
++        measured = wrapper.index("run-macos-process-overhead-scoped.py\" --timeout 585", normal)
++        controlled = wrapper.index("else\n python3 -B \"$repo/.scratch/all-tickets/run-macos-process-overhead-control-package.py\"", measured)
++        self.assertLess(measured, controlled)
++        self.assertIn("controller_receipt=present", wrapper)
++        self.assertIn("measurement_readback=present", wrapper)
++
++    def test_control_package_accepts_only_matching_controller_and_complete_custody_receipts(self):
++        case = "setup"
++        result = {"case": case, "event_id": "setup-event", "action": "client-interrupted", "status": -15}
++        receipt = {"schema": 1, "control_case": case, "complete": True,
++                   "identity_ledger": {"observed_identity_readback_complete": True},
++                   "candidate_absence": {"complete": True, "candidates": []},
++                   "groups_absent_observations": 2,
++                   "commands": [{"control_case": case,
++                       "setup_complete": True, "group_signal_issued": True,
++                       "cleanup_complete": True, "gate_status": 0, "anchor_status": 0,
++                       "control_readiness_event": {"event": "case-ready", "case": case,
++                           "event_id": "setup-event"},
++                       "control_action": {"action": "client-interrupted", "case": case,
++                           "event_id": "setup-event", "status": -15}}]}
++        self.assertTrue(control_package.validate_control_artifacts(case, 0, result, receipt, False))
++        for bad_case, bad_status, adapter_status, runtime_present, bad_receipt in (
++                ("build", -15, 0, False, receipt),
++                (case, -9, 0, False, receipt),
++                (case, -15, 1, False, receipt),
++                (case, -15, 0, True, receipt),
++                (case, -15, 0, False, {**receipt, "complete": False}),
++                (case, -15, 0, False, {**receipt, "identity_ledger": {}}),
++                (case, -15, 0, False, {**receipt, "candidate_absence": {"complete": True, "candidates": [42]}})):
++            with self.subTest(bad_case=bad_case, bad_status=bad_status,
++                              adapter_status=adapter_status, runtime_present=runtime_present), \
++                    self.assertRaisesRegex(ValueError, "control package rejected"):
++                control_package.validate_control_artifacts(
++                    bad_case, adapter_status,
++                    {**result, "case": bad_case, "status": bad_status},
++                    bad_receipt, runtime_present)
++
++    def test_control_package_launches_controller_only_after_registered_adapter_socket(self):
++        from tempfile import TemporaryDirectory
++        with TemporaryDirectory() as directory:
++            root = Path(directory)
++            scope = root / "scope"
++            scope.mkdir()
++            (scope / "tmp").mkdir()
++            runtime = scope / "runtime"
++            logs = root / "logs"
++            logs.mkdir()
++            log_base = logs / "control"
++            calls = []
++            case = "build"
++            action, status = control_package.expected_result(case)
++            event_id = "build-event"
++            receipt = {"schema": 1, "control_case": case, "complete": True,
++                       "identity_ledger": {"observed_identity_readback_complete": True},
++                       "candidate_absence": {"complete": True, "candidates": []},
++                       "groups_absent_observations": 2,
++                       "commands": [{"control_case": case,
++                           "setup_complete": True, "group_signal_issued": True,
++                           "cleanup_complete": True, "gate_status": 0, "anchor_status": 0,
++                           "control_readiness_event": {"event": "case-ready", "case": case,
++                               "event_id": event_id},
++                           "control_action": {"action": action, "case": case,
++                               "event_id": event_id, "status": status}}]}
++
++            class Child:
++                pid = 12345
++                returncode = None
++                def __init__(self, argv, kwargs): self.argv, self.kwargs = argv, kwargs
++                def poll(self): return self.returncode
++                def wait(self, timeout):
++                    self.returncode = 0
++                    runtime.rmdir()
++                    return 0
++                def send_signal(self, signum):
++                    self.returncode = -signum
++
++            def popen(argv, **kwargs):
++                calls.append((argv, kwargs))
++                target = argv[3:] if argv[1] == "-c" else argv
++                if "--control-case" in target:
++                    runtime.mkdir()
++                    output = kwargs["stdout"]
++                    output.write(f"control_socket_path={scope / 'runtime' / 'controller.sock'} control_case={case}\n")
++                    (logs / "control.custody.json").write_text(json.dumps(receipt))
++                return Child(argv, kwargs)
++
++            connection_calls = []
++            class Connection:
++                def close(self): pass
++            def connect(path, timeout):
++                connection_calls.append((path, timeout))
++                return Connection()
++            def protocol(conn, selected, deadline):
++                self.assertEqual(selected, case)
++                return {"case": case, "event_id": event_id, "action": action, "status": status}
++
++            with patch.object(control_package, "EVIDENCE", logs):
++                result = control_package.run_control_case(
++                    case, scope, log_base, timeout=600, popen_factory=popen,
++                    connect_fn=connect, protocol_fn=protocol, manage_signals=False)
++            self.assertEqual(result["case"], case)
++            self.assertEqual(len(calls), 1)
++            self.assertTrue(calls[0][0][1] == "-c", "adapter child must restore its signal mask before exec")
++            self.assertEqual(len(connection_calls), 1)
++            self.assertEqual(connection_calls[0][0], scope / "runtime" / "controller.sock")
++            self.assertTrue((logs / "control.controller.json").is_file())
++
++
+     def test_controller_action_uses_only_exact_direct_client_handle(self):
+         class Child:
+             pid = 42

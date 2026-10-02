@@ -1,0 +1,33 @@
+{
+  "agent_skills_revision": "958a4538b0191c53f2ccb2cd00d96c15045fbf68",
+  "loaded_files": [
+    {
+      "path": "/Users/hoppworks/.agents/AGENTS.md",
+      "sha256": "373f36f813b65fa1f0d2016a5a2d93e2bd56694e2d6a683707937a5c2a34fc95"
+    },
+    {
+      "path": "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/AGENTS.md",
+      "sha256": "9a51a3d5f13e7a793964609bb8606a902c4b75fd26066874f410d56601802e75"
+    },
+    {
+      "path": "/Users/hoppworks/.agents/skills/ocr-delegate/SKILL.md",
+      "sha256": "c3e55c6524ec952040488870dd47af69ebcf44c184ff7499d536bbf86462078e"
+    },
+    {
+      "path": "/Users/hoppworks/.agents/skills/campaign/SKILL.md",
+      "sha256": "fb3ebf38033fb57a50242f8895b2775b5603b9588df0a07d3d45d67a8733034c"
+    },
+    {
+      "path": "/Users/hoppworks/.agents/skills/e2e-proof/SKILL.md",
+      "sha256": "ec4c778cc1711ee7955c0003462679d355fc232f74f93c4d1a01f350838924f5"
+    },
+    {
+      "path": "/Users/hoppworks/projects/agent-skills/config/roles.toml",
+      "sha256": "e424458bf524c43463365de319d727d74196f24090dda222cac332ee55953c90"
+    },
+    {
+      "path": "/Users/hoppworks/projects/agent-skills/skills/campaign/references/escalation-brief-template.md",
+      "sha256": "d9bdae5cef20d070e05bb764634c9354b02e94874ca87c9f5ad99dd28fd17f84"
+    }
+  ]
+}

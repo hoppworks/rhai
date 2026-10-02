@@ -1,0 +1,63 @@
+Fcustodian_command_reaped gate=0 anchor=0 pgid=12345 group_signal_issued=True
+FF
+======================================================================
+FAIL: test_bootstrap_executes_target_vector_after_python_c_option (__main__.SourceRegressions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/rhai-macos-control-review-20261002/test_source_regressions.py", line 52, in test_bootstrap_executes_target_vector_after_python_c_option
+    self.assertEqual(observed, [(target[0], target)])
+AssertionError: Lists differ: [('-c', ['-c', '/Applications/Xcode.app/Cont[202 chars]p'])] != [('/Applications/Xcode.app/Contents/Develope[252 chars]p'])]
+
+First differing element 0:
+('-c', ['-c', '/Applications/Xcode.app/Cont[201 chars]up'])
+('/Applications/Xcode.app/Contents/Develope[251 chars]up'])
+
++ [('/Applications/Xcode.app/Contents/Developer/usr/bin/python3',
+- [('-c',
+-   ['-c',
+-    '/Applications/Xcode.app/Contents/Developer/usr/bin/python3',
+?   ^
+
++   ['/Applications/Xcode.app/Contents/Developer/usr/bin/python3',
+?   ^
+
+     '/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/run-macos-process-overhead-scoped.py',
+     '--timeout',
+     '585',
+     '--control-case',
+     'setup'])]
+
+======================================================================
+FAIL: test_managed_not_ready_probe_emits_no_controller_frame (__main__.SourceRegressions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/rhai-macos-control-review-20261002/test_source_regressions.py", line 41, in test_managed_not_ready_probe_emits_no_controller_frame
+    self.assertEqual(controller.frames, [], 'not-ready must not become a null readiness event')
+AssertionError: Lists differ: [b'null\n'] != []
+
+First list contains 1 additional elements.
+First extra element 0:
+b'null\n'
+
+- [b'null\n']
++ [] : not-ready must not become a null readiness event
+
+======================================================================
+FAIL: test_pending_signal_leaves_created_child_available_for_cleanup (__main__.SourceRegressions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/rhai-macos-control-review-20261002/test_source_regressions.py", line 89, in test_pending_signal_leaves_created_child_available_for_cleanup
+    self.assertEqual(child.signals, [signal.SIGTERM],
+AssertionError: Lists differ: [] != [<Signals.SIGTERM: 15>]
+
+Second list contains 1 additional elements.
+First extra element 0:
+<Signals.SIGTERM: 15>
+
+- []
++ [<Signals.SIGTERM: 15>] : pending delivery lost the already-created direct-child handle
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.003s
+
+FAILED (failures=3)

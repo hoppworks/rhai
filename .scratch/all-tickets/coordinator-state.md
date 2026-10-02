@@ -876,18 +876,42 @@ docs-only change; manual source review supplies coverage of the changed doc.
 No build/native85 dispatch. Previous reviewer-spawn thread-limit failure created
 no agent; existing independent Mac owner performed the review.
 
-Current continuation classification: previous status-only goal turn NO PROGRESS.
-This turn PROGRESS: original raw Linux coverage/source/cleanup independently
-accepted and integrated; no new build. macOS source-only control package43fa6a05
-awaits root independent review (73pure tests reported, four native controls not run).
-Windows exact archive path C:\RhaiQuality\rhai-source.zip is absent; exact
-Framework64 compiler path exists (2569832bytes), original owner frames independently viewed and hashes matched by root in
-windows-current-readiness-20261002/archive-compiler-root-readback.json. No transfer/compiler/fixture, no native budget reset.
+Current continuation: previous turn PROGRESS, Linux final two-row raw coverage,
+source and cleanup acceptance integrated/pushed d9f9082d. Windows original guest
+frames independently viewed/hashed and integrated/pushed95918ad0; ls-remote
+confirms sole main at95918ad08f648f3f5930238826c96c326a519a5a. Root worktree clean.
+Linux nine-row non-process package remains accepted601, process/fullrelease open.
 
-Next Mac action: combined independent Expert review of immutable43fa6a05 active,
-source-only; no native/control/Cargo dispatch. Current958 rules and updated role
-reload required. Windows responsible owner resumes exact immutable staging route
-assessment against original oneGET consumption and latest reviewed corrections,
-no compiler/bootstrap/fixture until exact source/route prerequisites read back.
-Linux acceptance integrated/pushed d9f9082daf4981b9304c9a5c49ccc8ed7a6b06eb;
-independent ls-remote confirmed main as the sole fork branch at that exact head.
+Current Mac step: combined independent review of immutable43fa6a05 covers all five
+changed files (OCR3 executable entries plus two excluded logs) and affected wrapper,
+controller/custodian/Managed/graph paths. Reviewer identified four material issues:
+bootstrap exec target indexes '-c'; pending signal at mask restore can lose outer
+child custody; Managed not-ready probe publishes null; cached readiness is used at
+Managed injection without fresh live capture/fixture readback. Three mocked source
+regressions reproduce defects; consolidated report and original OCR/RED receipts
+retained at macos-control-independent-review-20261002/. All5 changed files and
+affected dependencies reviewed; no material finding omitted. Responsible
+macos_overhead_safeguards resumed to await report and correct one batch under
+existingExpert09/history with meaningful source RED/GREEN. No new advisory chain,
+Cargo/native/control/measurement; count84/allocation85 unlaunched/guardfalse.
+
+Current Windows step: responsible owner reconciled transfer history. Older5fe4
+GET consumed with original owner.zip/extraction/pins/parser receipts in
+.scratch/windows-monitor-job-owner/next-execution-plan.md; separately retained9e0
+oneGET allowance unconsumed per current route receipts/history. Archive absence
+alone is not consumption proof. Source9e0 contains exact reviewed harness19c03096
+and17 matching C# pins; root independently hashes harness against original
+windows-private-root-source-review.json. Host-only archive13380569bytes/SHA8291
+receipt applies. Root directed same owner to one bounded immutable transfer to
+fresh unique owned guest path and length/hash/selective extraction17pins/PS5.1
+parser/path controls/read-only exact Roslyn path. Prevalidate input characters and
+whole short lines. No compiler/bootstrap/job/fixture/client/native execution before
+root readback; no install/admin/credentials/service/config/reset. GET launch consumes
+its slot even on failure. ExistingExpert02/history/caps preserved,30min active
+staging planning checkpoint; no human allowance reset. Goal active/incomplete.
+
+This turn PROGRESS: four reproduced source/acceptance defects consolidated into
+one responsible repair batch, valid unchanged review retained. Windows immutable
+19c harness independently matched source-review receipt and already-authorized
+oneGET staged-preflight route dispatched. No native launch or accepted platform
+claim; Mac source repairs and guest transfer receipts await actual results.

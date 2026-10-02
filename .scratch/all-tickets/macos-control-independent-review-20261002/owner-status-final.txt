@@ -1,0 +1,15 @@
+ D .scratch/all-tickets/macos-overhead-custody-prerequisites.md
+?? .scratch/all-tickets/macos-controls-correction-20261002/
+?? .scratch/all-tickets/macos-graph-preflight-source-evidence-20261002/
+?? .scratch/all-tickets/macos-managed-control-correction-20261002/
+?? .scratch/all-tickets/macos-overhead-custody-source-audit/acquire_sources.py
+?? .scratch/all-tickets/macos-overhead-custody-source-audit/archive-manifest.json
+?? .scratch/all-tickets/macos-overhead-custody-source-audit/archives/
+?? .scratch/all-tickets/macos-overhead-custody-source-audit/audit_sources.py
+?? .scratch/all-tickets/macos-overhead-custody-source-audit/cargo-083ac5135.tar.gz
+?? .scratch/all-tickets/macos-overhead-custody-source-audit/cargo-083ac5135/
+?? .scratch/all-tickets/macos-overhead-custody-source-audit/rust-254b59607.tar.gz
+?? .scratch/all-tickets/macos-overhead-custody-source-audit/rust-254b59607/
+?? .scratch/all-tickets/macos-overhead-custody-source-audit/rust-src-1.93.0.tar.xz
+?? .scratch/all-tickets/macos-overhead-custody-source-audit/rust-src-1.93.0/
+?? .scratch/all-tickets/macos-overhead-custody-source-audit/unpacked/

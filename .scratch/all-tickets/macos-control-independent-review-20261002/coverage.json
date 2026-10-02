@@ -1,0 +1,41 @@
+{
+  "commit": "43fa6a0588196b3c827f2a9ac77d6fc5734d6d97",
+  "total_files": 5,
+  "reviewed_files": 5,
+  "skipped_files": 0,
+  "coverage_rate": 1.0,
+  "ocr_reviewable_files": 3,
+  "ocr_reviewed_files": 3,
+  "excluded_files_manually_reviewed": 2,
+  "files": [
+    {
+      "path": ".scratch/all-tickets/run-macos-process-overhead-control-package.py",
+      "status": "added",
+      "review": "reviewed"
+    },
+    {
+      "path": ".scratch/all-tickets/run-macos-process-overhead.sh",
+      "status": "modified",
+      "review": "reviewed"
+    },
+    {
+      "path": ".scratch/all-tickets/test-macos-process-overhead-source.py",
+      "status": "modified",
+      "review": "reviewed"
+    },
+    {
+      "path": ".scratch/all-tickets/macos-finite-control-package-20261002/source-green-final.log",
+      "status": "added",
+      "review": "reviewed"
+    },
+    {
+      "path": ".scratch/all-tickets/macos-finite-control-package-20261002/source-red.log",
+      "status": "added",
+      "review": "reviewed"
+    }
+  ],
+  "native_invocations_added": 0,
+  "process_invocations_preserved": 84,
+  "allocation85_launched": false,
+  "measurement_guard": false
+}
