@@ -290,13 +290,33 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Current turn classification
-PROGRESS: completed independent OCR review of frozen Linux census source
-0b3841a0 (1 selected/reviewed,0 skipped), consumed only exact one-file patch with
-pre/post byte verification and preserved lowercase attribution/history. Closed
-initial source-review corrections; native behavior remains unverified. Dedicated
-fresh-runtime driver/preflight is being prepared within original caps, with no
-repeat of accepted timing samples and no native84 dispatched. Last turn's
-Darwin pure13/13 receipt and instruction reconciliation remain accepted by their
-narrow scope. Fork main readback atbd0b8d1c showed only main. Goal remains active
-and incomplete. Next: dedicated Linux driver source gate; Mac sole custodian and
-selected execution graph; Windows selective archive/hash/parser staging.
+PROGRESS: global and project instructions reread, prior authorizations reconciled,
+no additional approval gate. Independently ran frozen Darwin reader14 controls
+and corrected caller-environment injection control (1), Linux classifier valid8
+plus five rejecting mutations, Python AST and bash syntax in a new owned scoped
+runtime. All passed; exact empty scope retired. Receipt:
+source-controls-root-readback.json, with exact hashes and narrow applicability.
+No native invocation was launched by root; actual Unix count remains83.
+Linux census driver corrections now reviewed source-only: Cargo cwd is private
+source, closed environment excludes caller wrappers/session escape, monotonic
+540s Cargo deadline inside560s work plus20s finalization reserve, numeric six-field
+cleanup identity rows accept optional empty descriptive cmdline. Owner may stage
+those exact inputs and run remote Python>=3.12 preflight; staged binding review
+precedes one dedicated native census, no repeat of accepted120 timings. Local
+Python3.9 preflight rejection executed no build/workload and consumes no native.
+Windows selected tar extraction into fresh input/extract-tar now has owner
+archive/hash17 and actualPS5.1 parser0 evidence. No compiler/fixture started.
+Old harness writes C:/RhaiQuality; prospective resource rule requires private
+agent-builds session/run. Focused source correction is being reviewed, with
+exact actual ancestor traversal and run-volume free-space binding requested.
+Old parser/hash receipt applies only to unchanged old harness; corrected inputs
+require a fresh exact parser/hash gate. Original extraction/setup history retained.
+Mac corrected environment test now really injects hazardous caller variables;
+root pure pass used frozen helper3a791325, not unfinished new custodian. Reader14
+includes the slow-call deadline-overrun control, source-only. Current unfinished
+custodian review found anchor readiness wrongly compares group to anchor PID
+although anchor joins gate group, and partial setup must preserve exact child
+cleanup responsibility. Concrete corrections returned within existing cause09;
+false launch guard, selected graph/native controls and caps remain unchanged.
+Goal remains active/incomplete. Next: staged Linux source gate/native census,
+actual Mac sole custodian source corrections, Windows private-root/parser gate.

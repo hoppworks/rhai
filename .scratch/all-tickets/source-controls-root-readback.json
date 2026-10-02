@@ -1,0 +1,21 @@
+{
+  "scope": "Source-only independent controls, not native platform or release acceptance",
+  "rules": "Global and project AGENTS reread after 056b17c; prospective lifecycle applied; prior approvals and consumed history retained",
+  "scoped_command": "TMPDIR=/Users/hoppworks/.local/share/agent-builds/rhai/root-source-controls-20261002-2b9a51 PYTHONDONTWRITEBYTECODE=1 /opt/homebrew/bin/python3.14 /Users/hoppworks/projects/agent-skills/tools/run_scoped.py --timeout 45 -- /opt/homebrew/bin/python3.14 -",
+  "runner_status": 0,
+  "empty_scope_rmdir_status": 0,
+  "macos_source_ref": "3a7913253133dd2fe56dc0fc7ac5c19893e27b33",
+  "darwin_reader_sha256": "74e24de6c4600863cea02ca76e555fb842c1e12082ece40aff65723cc65d5f40",
+  "darwin_test_sha256": "edf698803957a7e8250c9d5beaf740f39f5d82960674edf903700538eb82a615",
+  "darwin_pure_tests_passed": 14,
+  "frozen_environment_helper_sha256": "1d9fcf8ee11d7301830d733c3fba1992eb11f3578de30b4d77be4e9877bd8022",
+  "corrected_environment_test_sha256": "def56f22bb8f3325b2f36de8627d199564f97f9475a5133e24501ff40eaacd56",
+  "environment_controls_passed": 1,
+  "environment_control": "Injected caller setsid/wrapper/flags/CC through patch.dict; frozen closed environment excludes them",
+  "linux_driver_sha256": "8de721149f4c7967efcc57769dab480399c47ed77d0ee768da2db568c7a6df74",
+  "linux_preflight_sha256": "c5228458607973b57b21b06b23f9351c63736f65fc2e84bdece4f5b22521417f",
+  "linux_launcher_sha256": "b3d1d1db0e2c471be594e86f225210334e969858ef2a4b769a4f54b41f797789",
+  "linux_checks": "Valid eight rows accepted; five missing/duplicate/identity/leak/weak-control mutations rejected; Python AST and bash syntax pass",
+  "native_invocations_consumed": 83,
+  "native84_dispatched": false
+}
