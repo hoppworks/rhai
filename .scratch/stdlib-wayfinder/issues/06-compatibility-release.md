@@ -137,3 +137,20 @@ owned groups empty, exact private runtime/scope absent. Outer/scoped0, export
 This closes Linux current optional-MSRV examples only. Native process count84
 is unchanged; Windows, final feature behavior, process lifecycle, overhead and
 release acceptance remain open.
+
+## Linux combined baseline partial native acceptance
+
+Frozen1ca21e32, private Rust/Cargo1.77.2, v3lock2ba4 and Linux7.2.7 completed
+seven successful targets: combined_sys_net1, net_connect4, net_listen7,
+net_reads7, net_writes10, sys_env7 and sys_fs35 (71 tests, zero ignored/filtered).
+Intended filesystem, TCP read/write and combined wrong-expectation assertions
+failed before restored positive execution. The no_object control also failed
+as intended, but its positive feature row was not reached.
+
+sys_policy failed two canonical-root path tests (21 passed/2 failed), leaving
+the combined feature row open. Later rows were not executed. Original evidence
+is in ../../all-tickets/linux-current-sys-net-behavior-followup-evidence/;
+launcher evidence and followup-root-readback.json confirm owned cleanup. Root
+independently matched all seven frozen manifest hashes, lock and helper bytes.
+Successful Engine/OS slices remain valid within their source/environment scope;
+filesystem corrections require affected filesystem/combined rechecks.

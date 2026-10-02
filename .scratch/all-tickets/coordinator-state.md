@@ -296,7 +296,17 @@ blocking observer attaches spawn path rather than run_raw/supervise; frozen
 control source lacks feature/hook. One fix batch returned to responsible owner,
 source-only, guardfalse/count84 unchanged. Previous goal turn is PROGRESS:
 terminal native evidence changed next action, persisted originals and cleanup.
-Next collect original terminal evidence and fresh cleanup/acceptance readback.
+Independent terminal readback verifies frozen seven manifest hashes, lock2ba4
+and exact reviewed helper-used bytes. Original combined-baseline output has
+seven complete successful target sections with zero failures/ignored/filtered:
+combined_sys_net1, net_connect4, net_listen7, net_reads7, net_writes10, sys_env7,
+sys_fs35 (71 total). Intended filesystem/TCP/combined controls and restored
+assertions give valid narrow native Engine/OS slices at frozen1ca/private1.77.2/
+Linux7.2.7. Preserve original receipts; sys_policy21pass2fail, whole baseline
+and subsequent feature rows remain open. Filesystem corrections require affected
+filesystem/combined rechecks; unchanged net paths retain their proof. No parent
+ticket closure inferred. Next collect Linux policy correction and Mac observer
+fix batch, review sources, then freeze integrated non-process native acceptance.
 
 ## Current-source core MSRV package — accepted narrow gate
 Current default-core applicability CLOSED for source52d9797b, Rust/Cargo1.66.0,
