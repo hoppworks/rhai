@@ -72,3 +72,16 @@ This closes only the current sys/net library compiler prerequisite on Darwin.
 Script behavior, tests/examples, other feature combinations and native platforms
 remain open. Native process invocation count84 is unchanged; no fixture/control
 or overhead measurement was run. The earlier release specification stays intact.
+
+
+## Current Darwin optional compiler acceptance
+
+The frozen4baf source passes direct private Rust/Cargo1.77.2 on Darwin arm64
+for the previously accepted sys+net baseline plus all ten uncovered optional
+feature rows. Original evidence: `.scratch/all-tickets/current-feature-compilation-evidence/`;
+`rows.json` and independent `root-readback.json` identify every command, status,
+version, compatible v3lock2ba4, manifests and exact runtime cleanup. Sampled
+maximaRSS735200KiB/storage733948KiB/descendants7; export74.811s. Compiler-only
+prerequisites are closed narrowly. Feature behavior, current native Linux/
+Windows, process lifecycle, docs/examples and strict release acceptance remain
+open. Earlier valid unchanged proof is retained.
