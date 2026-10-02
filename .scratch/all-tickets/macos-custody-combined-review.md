@@ -85,3 +85,35 @@ After correcting the combined material batch, source readiness must be reconcile
 In particular, `_identity()` now requires a full TASKINFO result for every enumerated PID, including foreign-UID/system processes, before it can return a complete listing. The fake API tests do not establish that the installed macOS permits those reads, or that zombie/taskless entries expose that structure. Native validation must establish whether this fail-closed whole-system census is operational on the actual machine without treating denied rows as absent or zero-RSS. BSD start identity bracketing also does not prove executable-image stability: a process can exec without changing PID/start time, and this revision reads its path only once. Repeated candidate absence remains conservative sampling rather than a universal certificate against arbitrary exec/path changes. The named build/toolchain confinement assumptions and escaped-leaf native controls must bound that gap before readiness is asserted.
 
 No Cargo, build, fixture, native API, interruption control, measurement or tool install was run for this review. No native launch or resumed measurement is authorized by this document. The current false guard, existing cause09 history and original hard limits remain in force.
+# Correction read-back
+
+The existing combined review was followed up against correction commit
+`18d64de68e46f7e837d6874ac2faff1393f5bf03`, parent
+`b2db6448af7c4c29fe6d6529910d4648e264739a`. OCR commit preview selected five
+files, all reviewed with their resolved Python/default rules; none skipped
+(total_files=5, reviewed_files=5, skipped_files=0, coverage_rate=100%).
+This is a check of the correction batch and affected callers, not a new broad
+review or native acceptance run.
+
+- The driver decodes captured bytes before text export and parsing, while the
+  custody log retains raw bytes. The new pure test exercises the successful
+  driver return, status export, parser and 120-row summary with synthetic data.
+- Final EOF/interruption and successful-client acceptance now require every
+  command record's explicit `cleanup_complete is True` before a complete receipt
+  or runtime removal. The failure test checks conservative refusal and retained
+  evidence; real group-signal failure and native cleanup remain unverified.
+- Nonconnecting clients stop waiting at the work deadline, retaining the existing
+  closure reserve. The fake-clock test checks this boundary; native timely reap
+  remains unverified.
+- Runtime record parsing accepts only identical duplicates matching the expected
+  absolute path and requires absence with no symlink. Conflicting/missing records
+  fail. The new shell helper and its wrapper integration were both reviewed.
+
+No additional material source finding was identified. The four original source
+findings are closed narrowly by this correction read-back. The responsible owner
+reports 19 reader and 29 adapter/source tests plus syntax/diff checks green; root
+has not independently replayed this new batch. Earlier unchanged reader and
+sampling proof remains applicable only to those unchanged requirements.
+Darwin ABI/access, actual toolchain/helper confinement, whole-run interruption,
+escaped-leaf readback, runtime cleanup and the native measurement remain open.
+The launch guard stays false; no native launch was created by this review.

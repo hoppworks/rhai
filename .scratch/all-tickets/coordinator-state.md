@@ -370,3 +370,46 @@ batch at a30-minute active-work checkpoint, preserving cause09/Expert09/history,
 false guard and all hard caps. No native/build/control/measurement permission is
 created by this review. Recheck affected boundaries and prior findings at the
 corrected immutable revision; do not restart unaffected review/proof.
+
+Current optional compile helper preparation completed and root read the full
+helper/contract. Root found missing SOURCE cwd before archival; owner corrected
+explicit archive cwd=existing RUNTIME, compile cwd=extracted SOURCE, with pure
+source-boundary/syntax checks. Frozen source has no tracked .cargo configuration;
+private HOME/CARGO_HOME/RUSTUP_HOME and closed environment prevent shared config
+use. This was a prelaunch setup correction, not a failed compile. One bounded
+compile launch is now allocated under existing helper540/outer600 limits (work510
+reserves30 for export), own scope root-optional-msrv-20261002-c96f1a72. Local
+inventory shows no Cargo/rustc/Rustup/compiler/build process; observed Dart MCP
+servers are idle service processes, not heavy builds. Other active project heavy
+work runs on lllm/workhorse. Check only frozen9f84 sys/net library Rust1.77.2,
+locked2ba4, jobs2, no target API/fixtures/native85. Original logs/export and exact
+runtime/scope readback are required; no acceptance until actual result is read.
+
+Instruction revision and correction checkpoint (2026-10-02): root explicitly
+reread global and project AGENTS, campaign, OCR delegate, E2E proof, roles and
+current Codex coordinator templates at installed agent-skills revision
+4d86b5f774a95111b56e9cbcf9c9882d7303a7a9. Active macos_overhead_safeguards received
+the update through the existing control channel and explicitly confirmed that
+same revision after rereading global/project instructions, TDD/campaign and its
+current coordinator template. It confirmed no active descendants. No active
+subordinate is unreachable or awaiting this update; completed agents were not
+restarted just to reload. Future agents must load the current on-disk revision.
+No process, build or test was interrupted or repeated because of the update.
+
+The same owner froze the four source fixes at18d64de68e46f7e837d6874ac2faff1393f5bf03,
+parentb2db. Root reviewed all five OCR-previewed changed files and affected
+callers against the existing combined review; no skipped files or new material
+findings. The four source findings are closed by inspection; owner19 reader and
+29 adapter/source pure checks are reported green, not independent native proof.
+Native ABI, confinement, interruption, escaped-leaf and runtime acceptance remain
+open, false launch guard and count84 unchanged. See the combined review follow-up.
+
+Current optional helper review accounts for its one OCR-reviewable Python file
+(100% reviewed) and manually reviewed contract. The state/contract were OCR
+excluded only by unsupported extension. Archive cwd correction is confirmed;
+no remaining material source finding. Immediate renewed slot inventory found a
+foreign Playwright gate with Chromium child78440 around693% CPU, so the earlier
+no-local-build observation is superseded. Do not launch the allocated compiler
+while that heavy E2E occupies this Mac. Scopec96f1a72 remains uncreated and compile
+allocation unconsumed. Continue light source/readback work; recheck slot before
+the single bounded compile. Preserve foreign processes and their outputs.
