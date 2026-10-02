@@ -2,7 +2,7 @@
 
 Baseline: 89bd29d4457720107efc5c38791745565f3eebd5.
 Reviewed increment: 01a14793cf28c666bce033335daad773c3d0f605.
-Preparation is not accepted yet. Native invocation count remains84 and the
+The original increment required the correction below. Native invocation count remains84 and the
 measurement guard remains false.
 
 OCR selected five source files; all five were reviewed, none skipped (100%).
@@ -34,3 +34,31 @@ logic and readiness/closure rejection paths, with meaningful RED/restored proof.
 The owner reported47 source and20 reader passes, but the original scoped output
 was not located; that report is not independent acceptance. Root will replay the
 frozen corrected package. No build or native control was launched by this review.
+
+## Correction read-back
+
+Correction revision: `0ecfc6e4a61e8cfd3c35bfebe80326e245283309`.
+OCR selected all three changed Python files; each was reviewed with affected
+callers, none skipped (100%). The fourth changed Markdown contract was read
+separately. No remaining material finding in this source correction.
+
+The custodian initializes its ledger before commands, records registered
+command/anchor identities from a complete census, and merges observed control
+readiness identities. The shared finalizer requires complete ledger readback,
+candidate absence, two absent-group observations, closed records, a matching
+readiness event, and the consumed action or actual deadline-expiry event.
+The controller rejects EOF without that expiry event. Managed stays disabled.
+
+Independent source replay is recorded in `macos-controls-root-evidence-02`:
+20 reader and 49 adapter tests pass, both restored suites pass, and two isolated
+mutations produce meaningful AssertionError failures: missing ledger acceptance
+and premature controller EOF acceptance. The first replay selected the wrong
+protocol test for its second mutation; retain `macos-controls-root-evidence` as
+incomplete setup history. It does not represent a failed implementation correction.
+The corrected replay took 1.822 seconds; scoped runner status0, runtime absent,
+and its exact empty session scope was retired. Nine frozen sources were restored
+byte-for-byte and Python sources compiled without native calls.
+
+This closes only the reviewed source finalization defects. Native Darwin ABI,
+confinement, interruption controls, Managed readiness and overhead remain open.
+No fixture/control/measurement or Cargo launch: count84 and guardfalse preserved.

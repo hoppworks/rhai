@@ -1,0 +1,14 @@
+F
+======================================================================
+FAIL: test_controller_client_rejects_readiness_absence_and_deadline_never_signals (__main__.EnvironmentTests.test_controller_client_rejects_readiness_absence_and_deadline_never_signals)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/hoppworks/.local/share/agent-builds/rhai/root-controls-20261002-cb46d61b/agent-build-0lt5z664/.scratch/all-tickets/test-macos-process-overhead-source.py", line 139, in test_controller_client_rejects_readiness_absence_and_deadline_never_signals
+    with self.assertRaisesRegex(RuntimeError, "before the actual deadline cleanup"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: RuntimeError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 0.005s
+
+FAILED (failures=1)

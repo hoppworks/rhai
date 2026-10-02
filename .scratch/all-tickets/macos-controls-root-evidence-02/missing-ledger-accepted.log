@@ -1,0 +1,14 @@
+F
+======================================================================
+FAIL: test_control_finalization_requires_recorded_readiness_action_and_full_readback (__main__.EnvironmentTests.test_control_finalization_requires_recorded_readiness_action_and_full_readback) (args=({'setup_complete': True, 'group_signal_issued': True, 'gate_status': -9, 'anchor_status': -9, 'cleanup_complete': True, 'control_case': 'setup', 'control_readiness_event': {'event': 'case-ready', 'case': 'setup', 'event_id': 's-1', 'identities': {'client': {'pid': 9, 'start_seconds': 1, 'start_microseconds': 2}, 'gate': {'pid': 10, 'start_seconds': 1, 'start_microseconds': 3}, 'anchor': {'pid': 11, 'start_seconds': 1, 'start_microseconds': 4}}, 'evidence': {'setup_command_live': True}}, 'control_action': {'action': 'client-interrupted', 'case': 'setup', 'event_id': 's-1', 'status': -15}}, {'observed_identity_readback_complete': False}, {'complete': True, 'candidates': []}, [], 2, 'client-eof', -15, None))
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/hoppworks/.local/share/agent-builds/rhai/root-controls-20261002-cb46d61b/agent-build-0lt5z664/.scratch/all-tickets/test-macos-process-overhead-source.py", line 175, in test_control_finalization_requires_recorded_readiness_action_and_full_readback
+    with self.subTest(args=args), self.assertRaisesRegex(ValueError, "control finalization"):
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (failures=1)

@@ -152,25 +152,25 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Current turn classification
-PROGRESS: previous turn published independently accepted Linux preparation and
-original source/staging receipts at de2f6d2da51a5b621fd8090a3535cc625f86e7f1.
-Only forkmain exists, author/committer hoppworks independently read back.
-This turn independently reviewed Mac finite-control increment01a14793 against
-89bd29d4. All5 OCR source paths reviewed,0 skipped; Markdown contract read
-separately. Normal mode/setup/build separation is present, but shared finalizer
-requires a measurement ledger these control paths never create. Deadline EOF
-also lacks final closure confirmation; selected readiness/action must be required.
-Findings and next correction are in macos-controls-review.md. Existing owner
-continues one coherent source correction batch under cause09/Expert09; no new
-Expert chain or native allocation. Reported47/20 pure checks lack located original
-logs and are not independently accepted; replay corrected frozen source next.
-Invocation count84/guardfalse, caps/history and earlier accepted proofs preserved.
-Linux stage /root/rhai-linux-current-features-msrv-1ca21e32-20261002 remains ready,
-not launched. Last authoritative workhorse heavy slot is foreign P01 E2E
-run_scoped900161/supervisor900162 and patrol941795; revalidate before launch.
-Darwin installed-kernel applicability and Managed companion/readiness remain
-open. Windows last observed off; no shared restart/guest cleanup claim.
-Goal active and incomplete. No update-only review/build or duplicated proof.
+VERIFIED WAIT plus independent preparation: previous turn changed the next action
+through combined review findings at e5694dd9. Existing Mac owner is actively
+correcting finite control finalization/readiness without native launch. Exact
+workhorse900161/900162 foreign E2E remain live at8m46s, Flutter965611 active;
+Linux compiler stays staged/unlaunched. No foreign process stopped/restarted.
+A new independent release requirement is prepared by existing optional-MSRV
+owner: execute examples/sys.rs and examples/net.rs through real Engine under
+private Rust1.77.2 Darwinarm64 with independent file/peer truth and meaningful
+wrong-expectation controls/restoration. Source-only helper/contract preparation,
+frozen1ca21e32/lock2ba4, no worktree example/production changes. Actual launch
+requires root source review and Mac heavy-slot check. One future600outer/
+540helper/510work/export30 package, jobs2/desc16/RSS2GiB/storagepreemptive1.5GiB;
+no retry/cap expansion, no process fixture or invocation85. This requirement is
+examples execution, not whole release acceptance. Original source/check evidence
+and other matrix rows remain valid or open according to their applicability.
+Mac control original47/20 reported checks lack located logs, not independently
+accepted. Replay corrected frozen increment next; managed companion/installed
+kernel applicability stay open. Windows last observed off, no shared restart.
+Goal active/incomplete. Current preparation does not reset histories or limits.
 
 ## Current-source core MSRV package — accepted narrow gate
 Current default-core applicability CLOSED for source52d9797b, Rust/Cargo1.66.0,
@@ -548,3 +548,27 @@ This is source-only proof: native count84, no85 allocation, guardfalse and cause
 history/caps preserved. Same owner now prepares the finite four-case control
 controller/contract from Expert09, with no native dispatch. Linux11positive plus
 1negative compiler helper remains in preparation; workhorse occupied, no launch.
+
+
+Latest completed step: Mac control-finalization correction0ecfc6e4 independently
+reviewed against01a14793, three OCR source files plus affected callers and contract;
+no remaining material source finding. Original receipt/logs at
+macos-controls-root-evidence-02:20reader/49adapter positive/restored; missing-ledger
+and premature-EOF mutations each meaningful AssertionError/status1. Initial replay
+used wrong protocol-test selector, preserved atmacos-controls-root-evidence as
+setup history, corrected within finite pure package. Runner0/runtime absent/exact
+empty scope retired. Native count84/guardfalse/cause09/hard limits unchanged.
+Managed task-count source inference remains conditional, not native acceptance:
+exact4 could still conceal OS/runtime helper threads; matching XNU/ABI open.
+
+Latest user propagation checkpoint: root plus both active owners confirmed
+4d86b5f774a95111b56e9cbcf9c9882d7303a7a9 globals/project AGENTS, relevant skills,
+roles and both coordinator templates explicitly loaded. Neither has descendants.
+Completed Windows owner remains revision-unconfirmed, not restarted for reload.
+No process interruptions or duplicate builds/reviews caused by the update.
+
+Next action: collect/review current optional owner examples helper and finite
+contract, then launch only after local heavy-slot inventory. Linux staging remains
+ready/unlaunched: foreign P01 900161/900162 ended, but fresh G42 cargo1121738 and
+rustc1128188 now occupy workhorse heavy slot. Preserve foreign KSR idle runtime
+28950/28951 and orphan flutter_tester3269558. No compiler package was dispatched.
