@@ -263,23 +263,16 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Current turn classification
-Previous continuation: PROGRESS, Linux source package integrated/staged with nine
-independently matched inputs. Current continuation: PROGRESS, first native
-non-process runtime package exec5531 terminal1 yielded three correctly classified
-intended REDs101 (filesystem/TCP read/write), then combined intended RED101
-rejected by generic assertion-prefix predicate. Original custom assert! message
-contains exact expected/actual values and named panic/source but no generic
-assertion prefix. Native evidence invalidates invented pure assertion fixture.
-First infrastructure/classifier failure for this native cause, not a production
-failure; no positive rows or no_object control executed. Existing owner receives
-precise original-byte regression/fix, unused follow-up stage/scope, finite caps
-unchanged and count84/no85. Original evidence linux-current-sys-net-behavior-
-evidence/launcher-evidence/outer.log; independent root-readback confirms all
-recorded exact PID/start identities absent and runtime/scope absent. Outer/scoped1,
-cleanup/readback/scope0. Export23.547s,37samples maximaRSS916472KiB,
-storage804608KiB,desc6 (periodic maxima). Reviewed helper bytes match native.
-Mac companion-only actual-read observer preparation continues; measurement
-source/guard remain unchanged. Full release and goal incomplete.
+Previous continuation: PROGRESS, first native original controls/cleanup preserved
+ata9612849. Current continuation: PROGRESS, d3c32ee7 custom-assertion repair
+independently rechecked against original native bytes and integrated. Eight pure
+requirements pass under own scoped runner0/runtime absent/empty scope removed.
+Unused followup1 stage/scope identities applied consistently; caps unchanged.
+First native cause failure1,23.547s elapsed,600s prior envelope retained; one
+corrected600s envelope allocated under standing goal/repair authorization.
+No existing build to reuse after required scoped cleanup. Four runtime rows and
+all original acceptance criteria retained; processcount84/measurementguardfalse.
+Next stage/readback nine inputs, fresh machine-slot inventory, native followup.
 
 ## Current-source core MSRV package — accepted narrow gate
 Current default-core applicability CLOSED for source52d9797b, Rust/Cargo1.66.0,

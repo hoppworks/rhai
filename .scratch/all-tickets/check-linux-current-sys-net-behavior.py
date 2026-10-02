@@ -23,8 +23,8 @@ TOOLCHAIN = '1.77.2-x86_64-unknown-linux-gnu'
 EXPECTED_RUN_SCOPED_SHA256 = '9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d'
 EXPECTED_INIT_SHA256 = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
 EXPECTED_PYGUARD_SHA256 = 'a3739f4947744303e1adf3fb0875ac743944a272e5b95c94b1baba53029d313f'
-EXPECTED_STAGE = Path('/root/rhai-linux-current-sys-net-behavior-1ca21e32-20261002')
-EXPECTED_SCOPE = Path('/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002')
+EXPECTED_STAGE = Path('/root/rhai-linux-current-sys-net-behavior-1ca21e32-20261002-followup1')
+EXPECTED_SCOPE = Path('/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1')
 STAGE = Path(os.environ.get('PROOF_STAGE', ''))
 RUNTIME = Path(os.environ.get('AGENT_RUNTIME_DIR', ''))
 INTERRUPT_REQUEST = Path(os.environ.get('INTERRUPT_REQUEST', ''))
@@ -345,9 +345,16 @@ def classify_assertion_control(status: int, output: str, target: str, test_name:
         re.MULTILINE)
     named_test_failed = bool(named_failure.search(output)) and bool(panic.search(output))
     one_test_failed = bool(result_pattern.search(output)) and 'running 1 test' in output
-    assertion_context_found = ('assertion `left == right` failed' in output
-                                or bool(re.search(r'assertion failed(?::|\b)', output)))
     context_found = bool(required_context) and all(item in output for item in required_context)
+    standard_assertion = ('assertion `left == right` failed' in output
+                          or bool(re.search(r'assertion failed(?::|\b)', output)))
+    combined_host_assertion = (
+        target == 'combined_sys_net'
+        and test_name == 'sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors'
+        and 'fresh host readback must match independent expected bytes' in output
+        and 'actual="filesystem-payload"' in output
+        and 'expected="incorrect filesystem expectation"' in output)
+    assertion_context_found = standard_assertion or combined_host_assertion
     accepted = (status == 101 and named_test_failed and one_test_failed
                 and assertion_context_found and context_found)
     return {

@@ -42,8 +42,8 @@ def test_frozen_pins_and_finite_rows(source: str, tree: ast.Module) -> None:
     assert values['MAX_DESCENDANTS'] == 16
     assert values['CARGO_JOBS'] == '2'
     assert 'testing-environ,sys,net' in source
-    assert "Path('/root/rhai-linux-current-sys-net-behavior-1ca21e32-20261002')" in source
-    assert "Path('/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002')" in source
+    assert "Path('/root/rhai-linux-current-sys-net-behavior-1ca21e32-20261002-followup1')" in source
+    assert "Path('/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1')" in source
     assert 'testing-environ,net,no_object' in source
     assert 'testing-environ,sys,net,no_index' in source
     assert 'testing-environ,sys,net,metadata,serde' in source
@@ -118,8 +118,8 @@ def test_control_classifier_rejects_incidental_101_and_accepts_intended_red() ->
 
     def test_output(target: str, test_name: str, context: tuple[str, ...]) -> str:
         details = '\n'.join(f' {line}' for line in context)
-        assertion = ('assertion failed: host_file == expected_host_file'
-                     if target == 'combined_sys_net' else 'assertion `left == right` failed')
+        assertion = ('' if target == 'combined_sys_net'
+                     else 'assertion `left == right` failed')
         return (f'running 1 test\ntest {test_name} ...\n'
                 f'thread {test_name!r} panicked at tests/{target}.rs:1:1:\n'
                 f'{assertion}\n{details}\n'
@@ -159,6 +159,28 @@ def test_control_classifier_rejects_incidental_101_and_accepts_intended_red() ->
         historical = (PREP_EVIDENCE / 'original-output-fixtures' / fixture).read_text()
         assert module.classify_assertion_control(
             101, historical, target, test_name, context)['diagnostic_found']
+
+    combined_test = 'sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors'
+    combined_context = ('fresh host readback must match independent expected bytes',
+                        'actual="filesystem-payload"',
+                        'expected="incorrect filesystem expectation"')
+    combined_base = PREP_EVIDENCE / 'original-output-fixtures' / 'combined-host-wrong-readback'
+    combined_stdout = (combined_base.with_suffix('.stdout')).read_text()
+    combined_stderr = (combined_base.with_suffix('.stderr')).read_text()
+    combined_status = int(combined_base.with_suffix('.status').read_text())
+    combined_output = combined_stdout + combined_stderr
+    assert combined_status == 101
+    assert module.classify_assertion_control(
+        combined_status, combined_output, 'combined_sys_net', combined_test,
+        combined_context)['diagnostic_found']
+    assert not module.classify_assertion_control(
+        combined_status, combined_output.replace(
+            'fresh host readback must match independent expected bytes', 'unrelated failure'),
+        'combined_sys_net', combined_test, combined_context)['diagnostic_found']
+    assert not module.classify_assertion_control(
+        combined_status, combined_output.replace('expected="incorrect filesystem expectation"',
+                                                  'expected="other value"'),
+        'combined_sys_net', combined_test, combined_context)['diagnostic_found']
 
 
 def test_positive_coverage_requires_every_target_and_no_skips() -> None:
@@ -229,7 +251,7 @@ def test_positive_coverage_requires_every_target_and_no_skips() -> None:
 def test_identity_capture_fails_before_external_work_and_export_deadline_is_hard() -> None:
     with tempfile.TemporaryDirectory(prefix='linux-sys-net-pure-') as temp:
         base = Path(temp)
-        runtime = base / 'linux-current-sys-net-behavior-1ca21e32-20261002' / 'agent-build-test'
+        runtime = base / 'linux-current-sys-net-behavior-1ca21e32-20261002-followup1' / 'agent-build-test'
         runtime.mkdir(parents=True)
         stage = base / 'stage'
         stage.mkdir()
@@ -277,7 +299,7 @@ def test_wrapper_has_bounded_custody_and_does_not_signal_by_pid() -> None:
     assert 'sleep 0.1' in launcher
     assert 'fail closed' in launcher and 'preserving scope' in launcher
     assert 'proof-evidence/process-identities.tsv' in launcher
-    assert '/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002' in launcher
+    assert '/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1' in launcher
     for path in (STAGE_SCRIPT, LAUNCH_SCRIPT):
         subprocess.run(['/bin/bash', '-n', str(path)], check=True, timeout=5)
     blocks = []
