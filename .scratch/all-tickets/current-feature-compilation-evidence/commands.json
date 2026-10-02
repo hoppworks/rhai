@@ -1,0 +1,248 @@
+[
+  {
+    "argv": [
+      "/usr/bin/git",
+      "-C",
+      "/Users/hoppworks/projects/rhai-all-tickets",
+      "archive",
+      "4baf3b20ba8335fbe9dab21236182429a97f51ec"
+    ],
+    "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16/agent-build-wqsbtouw",
+    "expected_status": 0,
+    "finished_monotonic_seconds": 0.255,
+    "name": "source-archive",
+    "started_monotonic_seconds": 0.002,
+    "status": 0,
+    "stderr": "evidence/source-archive.stderr",
+    "stdout": "frozen-source.tar"
+  },
+  {
+    "argv": [
+      "/Users/hoppworks/.cargo/bin/rustup",
+      "toolchain",
+      "install",
+      "1.77.2-aarch64-apple-darwin",
+      "--profile",
+      "minimal",
+      "--no-self-update"
+    ],
+    "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16/agent-build-wqsbtouw/source",
+    "expected_status": 0,
+    "finished_monotonic_seconds": 22.472,
+    "name": "rustup-install",
+    "started_monotonic_seconds": 0.71,
+    "status": 0,
+    "stderr": "evidence/rustup-install.stderr",
+    "stdout": "evidence/rustup-install.stdout"
+  },
+  {
+    "argv": [
+      "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16/agent-build-wqsbtouw/rustup-home/toolchains/1.77.2-aarch64-apple-darwin/bin/rustc",
+      "--version",
+      "--verbose"
+    ],
+    "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16/agent-build-wqsbtouw/source",
+    "expected_status": 0,
+    "finished_monotonic_seconds": 22.641,
+    "name": "rustc-version",
+    "started_monotonic_seconds": 22.472,
+    "status": 0,
+    "stderr": "evidence/rustc-version.stderr",
+    "stdout": "evidence/rustc-version.stdout"
+  },
+  {
+    "argv": [
+      "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16/agent-build-wqsbtouw/rustup-home/toolchains/1.77.2-aarch64-apple-darwin/bin/cargo",
+      "--version",
+      "--verbose"
+    ],
+    "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16/agent-build-wqsbtouw/source",
+    "expected_status": 0,
+    "finished_monotonic_seconds": 23.11,
+    "name": "cargo-version",
+    "started_monotonic_seconds": 22.641,
+    "status": 0,
+    "stderr": "evidence/cargo-version.stderr",
+    "stdout": "evidence/cargo-version.stdout"
+  },
+  {
+    "argv": [
+      "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16/agent-build-wqsbtouw/rustup-home/toolchains/1.77.2-aarch64-apple-darwin/bin/cargo",
+      "check",
+      "--locked",
+      "--lib",
+      "--features",
+      "testing-environ,sys"
+    ],
+    "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16/agent-build-wqsbtouw/source",
+    "expected_status": null,
+    "finished_monotonic_seconds": 38.371,
+    "name": "cargo-sys-alone",
+    "started_monotonic_seconds": 23.11,
+    "status": 0,
+    "stderr": "evidence/cargo-sys-alone.stderr",
+    "stdout": "evidence/cargo-sys-alone.stdout"
+  },
+  {
+    "argv": [
+      "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16/agent-build-wqsbtouw/rustup-home/toolchains/1.77.2-aarch64-apple-darwin/bin/cargo",
+      "check",
+      "--locked",
+      "--lib",
+      "--features",
+      "testing-environ,net"
+    ],
+    "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16/agent-build-wqsbtouw/source",
+    "expected_status": null,
+    "finished_monotonic_seconds": 41.89,
+    "name": "cargo-net-alone",
+    "started_monotonic_seconds": 38.371,
+    "status": 0,
+    "stderr": "evidence/cargo-net-alone.stderr",
+    "stdout": "evidence/cargo-net-alone.stdout"
+  },
+  {
+    "argv": [
+      "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16/agent-build-wqsbtouw/rustup-home/toolchains/1.77.2-aarch64-apple-darwin/bin/cargo",
+      "check",
+      "--locked",
+      "--lib",
+      "--features",
+      "testing-environ,net,no_object"
+    ],
+    "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16/agent-build-wqsbtouw/source",
+    "expected_status": null,
+    "finished_monotonic_seconds": 45.223,
+    "name": "cargo-net-no-object",
+    "started_monotonic_seconds": 41.891,
+    "status": 0,
+    "stderr": "evidence/cargo-net-no-object.stderr",
+    "stdout": "evidence/cargo-net-no-object.stdout"
+  },
+  {
+    "argv": [
+      "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16/agent-build-wqsbtouw/rustup-home/toolchains/1.77.2-aarch64-apple-darwin/bin/cargo",
+      "check",
+      "--locked",
+      "--lib",
+      "--features",
+      "testing-environ,sys,net,sync"
+    ],
+    "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16/agent-build-wqsbtouw/source",
+    "expected_status": null,
+    "finished_monotonic_seconds": 49.384,
+    "name": "cargo-combined-sync",
+    "started_monotonic_seconds": 45.223,
+    "status": 0,
+    "stderr": "evidence/cargo-combined-sync.stderr",
+    "stdout": "evidence/cargo-combined-sync.stdout"
+  },
+  {
+    "argv": [
+      "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16/agent-build-wqsbtouw/rustup-home/toolchains/1.77.2-aarch64-apple-darwin/bin/cargo",
+      "check",
+      "--locked",
+      "--lib",
+      "--features",
+      "testing-environ,sys,net,no_index"
+    ],
+    "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16/agent-build-wqsbtouw/source",
+    "expected_status": null,
+    "finished_monotonic_seconds": 52.246,
+    "name": "cargo-combined-no-index",
+    "started_monotonic_seconds": 49.385,
+    "status": 0,
+    "stderr": "evidence/cargo-combined-no-index.stderr",
+    "stdout": "evidence/cargo-combined-no-index.stdout"
+  },
+  {
+    "argv": [
+      "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16/agent-build-wqsbtouw/rustup-home/toolchains/1.77.2-aarch64-apple-darwin/bin/cargo",
+      "check",
+      "--locked",
+      "--lib",
+      "--features",
+      "testing-environ,sys,net,metadata,serde"
+    ],
+    "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16/agent-build-wqsbtouw/source",
+    "expected_status": null,
+    "finished_monotonic_seconds": 60.803,
+    "name": "cargo-combined-metadata-serde",
+    "started_monotonic_seconds": 52.246,
+    "status": 0,
+    "stderr": "evidence/cargo-combined-metadata-serde.stderr",
+    "stdout": "evidence/cargo-combined-metadata-serde.stdout"
+  },
+  {
+    "argv": [
+      "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16/agent-build-wqsbtouw/rustup-home/toolchains/1.77.2-aarch64-apple-darwin/bin/cargo",
+      "check",
+      "--locked",
+      "--lib",
+      "--features",
+      "testing-environ,sys,net,only_i32,no_float"
+    ],
+    "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16/agent-build-wqsbtouw/source",
+    "expected_status": null,
+    "finished_monotonic_seconds": 63.793,
+    "name": "cargo-combined-only-i32-no-float",
+    "started_monotonic_seconds": 60.811,
+    "status": 0,
+    "stderr": "evidence/cargo-combined-only-i32-no-float.stderr",
+    "stdout": "evidence/cargo-combined-only-i32-no-float.stdout"
+  },
+  {
+    "argv": [
+      "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16/agent-build-wqsbtouw/rustup-home/toolchains/1.77.2-aarch64-apple-darwin/bin/cargo",
+      "check",
+      "--locked",
+      "--lib",
+      "--features",
+      "testing-environ,sys,net,unchecked"
+    ],
+    "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16/agent-build-wqsbtouw/source",
+    "expected_status": null,
+    "finished_monotonic_seconds": 67.149,
+    "name": "cargo-combined-unchecked",
+    "started_monotonic_seconds": 63.793,
+    "status": 0,
+    "stderr": "evidence/cargo-combined-unchecked.stderr",
+    "stdout": "evidence/cargo-combined-unchecked.stdout"
+  },
+  {
+    "argv": [
+      "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16/agent-build-wqsbtouw/rustup-home/toolchains/1.77.2-aarch64-apple-darwin/bin/cargo",
+      "check",
+      "--locked",
+      "--lib",
+      "--features",
+      "testing-environ,sys,net,no_index,sync,metadata"
+    ],
+    "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16/agent-build-wqsbtouw/source",
+    "expected_status": null,
+    "finished_monotonic_seconds": 71.499,
+    "name": "cargo-combined-no-index-sync-metadata",
+    "started_monotonic_seconds": 67.149,
+    "status": 0,
+    "stderr": "evidence/cargo-combined-no-index-sync-metadata.stderr",
+    "stdout": "evidence/cargo-combined-no-index-sync-metadata.stdout"
+  },
+  {
+    "argv": [
+      "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16/agent-build-wqsbtouw/rustup-home/toolchains/1.77.2-aarch64-apple-darwin/bin/cargo",
+      "check",
+      "--locked",
+      "--lib",
+      "--features",
+      "testing-environ,sys,net,f32_float"
+    ],
+    "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16/agent-build-wqsbtouw/source",
+    "expected_status": null,
+    "finished_monotonic_seconds": 74.809,
+    "name": "cargo-combined-f32-float",
+    "started_monotonic_seconds": 71.5,
+    "status": 0,
+    "stderr": "evidence/cargo-combined-f32-float.stderr",
+    "stdout": "evidence/cargo-combined-f32-float.stdout"
+  }
+]

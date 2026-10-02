@@ -1,0 +1,1 @@
+10/10 uncovered cargo check --locked --lib feature rows exited 0 on frozen source; compilation only. Baseline testing-environ,sys,net is referenced from accepted prior evidence and was not rerun.

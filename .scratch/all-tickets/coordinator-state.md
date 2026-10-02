@@ -80,16 +80,21 @@ Historical detailed staging, gates and outcomes remain in this same state at
    parser and isolated pure path controls before any fixture invocation. Earlier
    compiler/setup/extraction failures and nonrenewable real-client allocation
    retained; no native job/public production acceptance claimed.
-3. Mac sole-custodian source corrected at18d64de68e46f7e837d6874ac2faff1393f5bf03,
-   following2f/a723/fdb/b2db. Existing combined review's four findings are closed
-   narrowly. Root independently replayed19 reader/29 adapter positives and four
-   meaningful AssertionError controls, restored19/29 and exact eight files;
-   original macos-correction-root-evidence retains logs/receipt/cleanup. Heavy
-   Mac slot remains occupied by a foreign live Playwright gate, so no compile
-   has launched. Same owner continues installed-header ABI/source-toolchain
-   prerequisites under existing cause09/Expert09, no native queries/builds.
-   Native Darwin ABI behavior, confinement, finite interruption/escaped-leaf
-   controls and measurement remain open. False launch guard and count84 retained.
+3. Mac sole-custodian source corrected at4aa198898fe1f4deecfdebcdade2f07a0fa78f2b,
+   following2f/a723/fdb/b2db/18d. Combined review and independent pure regressions
+   close the four earlier source findings and active-SDK/layout agreement only.
+   Existing owner continues exact helper/toolchain/config source assumptions.
+   Native Darwin ABI/access, confinement, finite interruption/escaped-leaf
+   controls and measurement remain open. False launch guard/count84 retained.
+4. Current Darwin optional Rust1.77.2 compiler prerequisites CLOSED narrowly:
+   accepted baseline plus all ten uncovered feature rows. Original evidence at
+   current-feature-compilation-evidence, frozen4baf/v3lock2ba4, all commands0,
+   direct privateversions/ten argv/Finisheddev/manifests/lock independently read
+   back. Export74.811s, sampled maxRSS735200KiB/storage733948KiB/descendants7.
+   Exact runtime agent-build-wqsbtouw absent, owned empty scope retired. Mac
+   heavy slot released. No targetfixture/native85 or behavioral acceptance.
+   Next: existing Mac owner source-tool prerequisites; remaining native Linux/
+   Windows current-source MSRV/features and strict release behavioral gates.
 
 ## Resources, counts and cause history
 Unix actual native invocation count84 consumed.82 failed before runtime;
@@ -447,3 +452,55 @@ empty-only. No relevant src/build.rs/Cargo/codegen/config diff9f84..1928c068, so
 compile applies to current integration. No target fixtures/native85 or feature
 behavior acceptance. Private Rustup home/toolchain removed by owned runtime
 cleanup. Linux/Windows optional current MSRV and native final feature matrix open.
+
+Next release compiler prerequisites: same optional-helper responsible context
+resumed to prepare, not execute, one private Rust1.77.2 compile feature package.
+Ten approved rows: sys alone, net alone, net+no_object, combinedsync, no_index,
+metadata+serde, only_i32+no_float, unchecked, no_index+sync+metadata andf32_float.
+Baseline combined9f84 proof is reused; same production/manifests unchanged through
+4baf. Direct private toolchain, locked2ba4, jobs2, outer600/helper540 and existing
+storage/RSS/descendant safety caps proposed; root source review/slot check before
+dispatch. No script/test/example/fixture/native execution or count85. This is
+compile prerequisite work only; full Engine/native release acceptance staysopen.
+Preparation checkpoint30minutes, current4d86 reload/ack required. Mac source owner
+continues ABI/header and exact helper assumptions, identified SDK path mismatch
+and reports meaningful TDD plus narrow pure20reader/30adapter checks; source
+increment is not yet frozen or root reviewed. No native launch/readiness claim.
+
+
+Rules propagation at revision4d86b5f774a95111b56e9cbcf9c9882d7303a7a9 CLOSED for
+all active owners: root, macos_overhead_safeguards and current_optional_msrv_prepare_v2
+explicitly reread global/project rules, relevant skills and current coordinator
+and role templates. Both owners confirmed no active descendants. Completed Windows
+owner was not resumed solely for the update; its loaded revision is not reconfirmed.
+No running process interrupted, no review/build solely for the update.
+
+Mac ABI/SDK increment4aa1988 source-only recheck CLOSED narrowly. Three OCR-selected
+files reviewed, no skipped files or new material finding. Root scoped replay20
+reader/31 adapter green; wrong SDK, waitid constant and TASKINFO field-type
+controls each produced intended AssertionError, restored20/31 green and exact
+frozen eight files. Original macos-abi-root-evidence retains receipt/logs; runtime
+agent-build-e_rdstno absent and owned empty scope retired. Native ABI/access,
+exact executed helper graph/confinement and lifecycle controls remain open;
+launch guard false, native count84 unchanged. Prior unchanged18d correction
+proof remains applicable. Architecture chain remains outside root integration.
+
+Current ten-row compiler helper and contract prepared by the existing responsible
+owner; source review covers the full helper and contract against accepted baseline.
+Private1.77.2/v3lock2ba4, frozen4baf, closed homes/env, ten exact commands, one target,
+per-row receipt/export and unchanged resource/deadline caps. Slot inventory shows
+no active Cargo/rustc or heavy Chromium gate (idle MCP servers are preserved).
+One compiler-only package allocated now: root-feature-20261002-29bc7f16,
+outer600/helper540/work510, jobs2/desc16/RSS2GiB/storage preemptive1.5GiB.
+No target tests/fixtures/native controls/measurement or native85; partial failures
+remain unaccepted. No automatic retry or hard-cap increase.
+
+
+Ten-row current feature compiler allocation terminal0. Root independent receipt
+current-feature-compilation-evidence/root-readback.json confirms ten exact rows,
+statuses0/dev completion, direct Rust/Cargo1.77.2 Darwinarm64, seven frozen
+manifests and unchanged v3lock2ba4; original logs/helper-used/contract retained.
+Sampled maximaRSS735200KiB/storage733948KiB/descendants7, export74.811s; these are
+periodic maxima, not continuous peaks. Owned runtime and empty scope absent.
+Compiler-only requirement accepted; native behavior/matrix remains open.
+Active owner source audit continues at current4d86; no native85 allocated.

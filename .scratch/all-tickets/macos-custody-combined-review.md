@@ -125,3 +125,19 @@ identical-duplicate rejection controls each failed with an intended AssertionErr
 not a harness exception. Restored19/29 passed and every frozen file matched.
 Outer0, helper2.18412675s; independently checked exact runtime absence and empty
 scope retirement. This proves pure regressions only, not real process closure.
+
+
+## SDK and ABI source follow-up
+
+Frozen4aa198898fe1f4deecfdebcdade2f07a0fa78f2b, parent18d64: all three
+OCR-selected Python files reviewed with resolved rules (total3/reviewed3/skipped0,
+coverage100%). Active Xcode SDK selection, named unchanged waitid constants,
+ctypes layout/signature tests and resolved private temporary test paths agree
+with the affected callers. No new material source finding. Independent scoped
+macos-abi-root-evidence reports20 reader/31 adapter positives, three intended
+AssertionError controls (wrong SDK, waitid constant, TASKINFO field type),
+restored20/31 and exact frozen files. Owned runtime/scope absence is read back.
+The unchanged18d four-finding proof remains valid for its source boundaries.
+This validates source agreement and regressions only. Actual native ABI/access,
+Cargo/linker/helper confinement, executed unit graph, interruption/escaped-leaf
+and measurement gates stay open, and the launch guard remains false.

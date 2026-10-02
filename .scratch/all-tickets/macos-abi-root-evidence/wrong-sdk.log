@@ -1,0 +1,16 @@
+F
+======================================================================
+FAIL: test_child_environment_is_closed_and_runtime_local (__main__.EnvironmentTests.test_child_environment_is_closed_and_runtime_local)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/hoppworks/.local/share/agent-builds/rhai/root-abi-20261002-e718c93b/agent-build-e_rdstno/.scratch/all-tickets/test-macos-process-overhead-source.py", line 207, in test_child_environment_is_closed_and_runtime_local
+    self.assertEqual(
+AssertionError: '/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk' != '/Applications/Xcode.app/Contents/Developer[48 chars].sdk'
+- /Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk
++ /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+FAILED (failures=1)

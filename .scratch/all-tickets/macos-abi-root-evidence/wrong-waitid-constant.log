@@ -1,0 +1,24 @@
+F
+======================================================================
+FAIL: test_darwin_siginfo_layout_and_waitid_constants_match_active_sdk (__main__.EnvironmentTests.test_darwin_siginfo_layout_and_waitid_constants_match_active_sdk)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/hoppworks/.local/share/agent-builds/rhai/root-abi-20261002-e718c93b/agent-build-e_rdstno/.scratch/all-tickets/test-macos-process-overhead-source.py", line 39, in test_darwin_siginfo_layout_and_waitid_constants_match_active_sdk
+    self.assertEqual((module.DARWIN_P_PID, module.DARWIN_WNOHANG,
+AssertionError: Tuples differ: (1, 1, 4, 16) != (1, 1, 4, 32)
+
+First differing element 3:
+16
+32
+
+- (1, 1, 4, 16)
+?           ^^
+
++ (1, 1, 4, 32)
+?           ^^
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (failures=1)

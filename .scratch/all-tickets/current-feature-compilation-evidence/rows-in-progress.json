@@ -1,0 +1,72 @@
+[
+  {
+    "features": "testing-environ,sys",
+    "row": "sys-alone",
+    "status": 0,
+    "stderr": "cargo-sys-alone.stderr",
+    "stdout": "cargo-sys-alone.stdout"
+  },
+  {
+    "features": "testing-environ,net",
+    "row": "net-alone",
+    "status": 0,
+    "stderr": "cargo-net-alone.stderr",
+    "stdout": "cargo-net-alone.stdout"
+  },
+  {
+    "features": "testing-environ,net,no_object",
+    "row": "net-no-object",
+    "status": 0,
+    "stderr": "cargo-net-no-object.stderr",
+    "stdout": "cargo-net-no-object.stdout"
+  },
+  {
+    "features": "testing-environ,sys,net,sync",
+    "row": "combined-sync",
+    "status": 0,
+    "stderr": "cargo-combined-sync.stderr",
+    "stdout": "cargo-combined-sync.stdout"
+  },
+  {
+    "features": "testing-environ,sys,net,no_index",
+    "row": "combined-no-index",
+    "status": 0,
+    "stderr": "cargo-combined-no-index.stderr",
+    "stdout": "cargo-combined-no-index.stdout"
+  },
+  {
+    "features": "testing-environ,sys,net,metadata,serde",
+    "row": "combined-metadata-serde",
+    "status": 0,
+    "stderr": "cargo-combined-metadata-serde.stderr",
+    "stdout": "cargo-combined-metadata-serde.stdout"
+  },
+  {
+    "features": "testing-environ,sys,net,only_i32,no_float",
+    "row": "combined-only-i32-no-float",
+    "status": 0,
+    "stderr": "cargo-combined-only-i32-no-float.stderr",
+    "stdout": "cargo-combined-only-i32-no-float.stdout"
+  },
+  {
+    "features": "testing-environ,sys,net,unchecked",
+    "row": "combined-unchecked",
+    "status": 0,
+    "stderr": "cargo-combined-unchecked.stderr",
+    "stdout": "cargo-combined-unchecked.stdout"
+  },
+  {
+    "features": "testing-environ,sys,net,no_index,sync,metadata",
+    "row": "combined-no-index-sync-metadata",
+    "status": 0,
+    "stderr": "cargo-combined-no-index-sync-metadata.stderr",
+    "stdout": "cargo-combined-no-index-sync-metadata.stdout"
+  },
+  {
+    "features": "testing-environ,sys,net,f32_float",
+    "row": "combined-f32-float",
+    "status": 0,
+    "stderr": "cargo-combined-f32-float.stderr",
+    "stdout": "cargo-combined-f32-float.stdout"
+  }
+]

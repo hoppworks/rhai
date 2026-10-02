@@ -1,0 +1,8 @@
+{
+  "elapsed_seconds_at_export": 74.811,
+  "evidence_destination": "/Users/hoppworks/projects/rhai-all-tickets/.scratch/all-tickets/current-feature-compilation-evidence",
+  "expected_outer_scope": "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16",
+  "helper_deadline_seconds": 540,
+  "runtime": "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16/agent-build-wqsbtouw",
+  "runtime_cleanup_owner": "run_scoped.py; independently read back by coordinator"
+}

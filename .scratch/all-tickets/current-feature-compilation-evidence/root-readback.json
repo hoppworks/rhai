@@ -1,0 +1,16 @@
+{
+  "revision": "4baf3b20ba8335fbe9dab21236182429a97f51ec",
+  "rows_verified": 10,
+  "all_statuses_zero": true,
+  "lock_and_manifests_match": true,
+  "direct_private_tool_versions_verified": true,
+  "runtime_absent": "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16/agent-build-wqsbtouw",
+  "empty_scope_removed": "/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16",
+  "sampled_maxima": {
+    "descendants": 7,
+    "rss_kib": 735200,
+    "storage_kib": 733948
+  },
+  "elapsed_at_export_seconds": 74.811,
+  "acceptance": "Darwin arm64 Rust1.77.2 compiler checks only; native behavioral release gates remain open."
+}

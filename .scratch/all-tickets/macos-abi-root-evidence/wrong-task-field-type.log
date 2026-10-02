@@ -1,0 +1,41 @@
+F
+======================================================================
+FAIL: test_ctypes_structs_and_libproc_signatures_match_active_sdk_declarations (__main__.ReaderTests.test_ctypes_structs_and_libproc_signatures_match_active_sdk_declarations)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/hoppworks/.local/share/agent-builds/rhai/root-abi-20261002-e718c93b/agent-build-e_rdstno/.scratch/all-tickets/test-darwin-process-reader.py", line 115, in test_ctypes_structs_and_libproc_signatures_match_active_sdk_declarations
+    self.assertEqual(tuple(field_type for _name, field_type in task._fields_),
+AssertionError: Tuples differ: (<cla[35 chars]s.c_uint'>, <class 'ctypes.c_ulong'>, <class '[352 chars]nt'>) != (<cla[35 chars]s.c_ulong'>, <class 'ctypes.c_ulong'>, <class [353 chars]nt'>)
+
+First differing element 1:
+<class 'ctypes.c_uint'>
+<class 'ctypes.c_ulong'>
+
+  (<class 'ctypes.c_ulong'>,
+-  <class 'ctypes.c_uint'>,
+?                    ^ ^
+
++  <class 'ctypes.c_ulong'>,
+?                    ^^ ^
+
+   <class 'ctypes.c_ulong'>,
+   <class 'ctypes.c_ulong'>,
+   <class 'ctypes.c_ulong'>,
+   <class 'ctypes.c_ulong'>,
+   <class 'ctypes.c_int'>,
+   <class 'ctypes.c_int'>,
+   <class 'ctypes.c_int'>,
+   <class 'ctypes.c_int'>,
+   <class 'ctypes.c_int'>,
+   <class 'ctypes.c_int'>,
+   <class 'ctypes.c_int'>,
+   <class 'ctypes.c_int'>,
+   <class 'ctypes.c_int'>,
+   <class 'ctypes.c_int'>,
+   <class 'ctypes.c_int'>,
+   <class 'ctypes.c_int'>)
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (failures=1)

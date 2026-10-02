@@ -1,0 +1,14 @@
+   Compiling rhai v1.26.1 (/Users/hoppworks/.local/share/agent-builds/rhai/root-feature-20261002-29bc7f16/agent-build-wqsbtouw/source)
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (lib) generated 1 warning
+    Finished dev [unoptimized] target(s) in 3.14s
