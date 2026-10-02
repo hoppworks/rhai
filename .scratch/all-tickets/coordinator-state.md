@@ -75,8 +75,12 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
    94a10d73, owner6abb5933. Independent review and meaningful legacy/identity RED1,
    restored GREEN0 at linux-current-feature-v2-review.md and root-pure originals.
    Unique v2 stage, outer590/helper530/work500/export30, preserved prior use and
-   resource caps. Renew the workhorse heavy slot, stage and launch the reviewed
-   eleven-positive/one-negative compiler package. No native85.
+   resource caps. V2 stage completed: all eight remote input hashes independently pass, no
+   compiler launched. Foreign web E2E runner1245052/start7234121 and
+   supervisor1245053/start7234124 currently live; wait for its heavy slot.
+   Stage wrapper terminal1 after zsh read-only status variable; runner status
+   unrecorded, exact remote readiness independently verified and own empty
+   local scope removed. Preserve stage; do not repeat staging. No native85.
 3. Existing Mac owner continues cause09 bounded Managed companion/readiness source
    plumbing under Expert09. Pure tests only; unchanged frozen measurement source,
    guardfalse, nativecount84. Source control-finalization correction0ecfc6e4 is
@@ -152,8 +156,10 @@ pending. Previous status-only turn was no progress; this concrete action closes
 its next available safe step.
 Root worktree was externally removed; restored the owned task/all-tickets tree
 from exact retained d0d9f615. Committed history/proof intact, uncommitted removed
-contents not certified. No foreign work touched. Mac owner frozen3e17e3f5 awaits
-independent affected-source review: live both-stream progress absent from current
+contents not certified. No foreign work touched. Mac owner frozen3e17e3f5 independent review found missing fixture new-PGID
+validation and premature gate poll/reap before group shutdown; consolidated
+source-only correction returned to the same owner, no native/retry chain.
+Current readiness limitation: live both-stream progress absent from current
 public API, Managed remains fail-closed and guardfalse/count84. Windows unchanged.
 
 ## Current-source core MSRV package — accepted narrow gate

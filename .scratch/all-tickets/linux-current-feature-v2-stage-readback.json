@@ -1,0 +1,20 @@
+{
+  "staging_log": "linux-current-feature-v2-stage.log",
+  "wrapper_exit": 1,
+  "wrapper_error": "zsh read-only status variable after scoped stage invocation",
+  "runner_exit_receipt": "not recorded by wrapper; do not infer",
+  "remote_input_hash_readback_exit": 0,
+  "remote_inputs": 8,
+  "outer_evidence_absent": true,
+  "proof_evidence_absent": true,
+  "local_exact_scope": "/Users/hoppworks/.local/share/agent-builds/rhai/linux-v2-stage-20261002-a",
+  "local_empty_scope_removed": true,
+  "compiler_launched": false,
+  "foreign_heavy_run": {
+    "runner_pid": 1245052,
+    "runner_start_ticks": "7234121",
+    "supervisor_pid": 1245053,
+    "supervisor_start_ticks": "7234124",
+    "live_readback": true
+  }
+}
