@@ -88,9 +88,19 @@ function New-NativeDelegateType([string] $Name, [Type] $ReturnType, [Type[]] $Pa
     $builder.SetCustomAttribute($attribute)
     return $builder.CreateTypeInfo().AsType()
 }
-$script:kernel32 = [Diagnostics.Process]::GetCurrentProcess().Modules |
-    Where-Object { $_.ModuleName -ieq 'kernel32.dll' } | Select-Object -First 1 -ExpandProperty BaseAddress
-if ($script:kernel32 -eq [IntPtr]::Zero) { throw 'kernel32 module handle was not available in the current process.' }
+$currentProcessModules = [Diagnostics.Process]::GetCurrentProcess().Modules
+$kernel32Module = $null
+foreach ($module in $currentProcessModules) {
+    if ($module.ModuleName -ieq 'kernel32.dll') { $kernel32Module = $module; break }
+}
+if ($null -eq $kernel32Module) { throw 'kernel32 module was not present in the current process module list.' }
+# Desktop PowerShell wraps values emitted from a collection pipeline in PSObject.
+# Use a typed assignment from the concrete ProcessModule property before any
+# reflection call; the resolver below requires a CLR IntPtr, not that wrapper.
+[IntPtr]$script:kernel32 = $kernel32Module.BaseAddress
+if ($script:kernel32.GetType() -ne [IntPtr] -or $script:kernel32 -eq [IntPtr]::Zero) {
+    throw 'kernel32 module handle was not a nonzero CLR IntPtr after explicit conversion.'
+}
 $resolverBuilder = $script:delegateModule.DefineType('Kernel32ExportResolver',
     [Reflection.TypeAttributes]::Public -bor [Reflection.TypeAttributes]::Abstract -bor [Reflection.TypeAttributes]::Sealed)
 $resolverMethod = $resolverBuilder.DefinePInvokeMethod('GetProcAddress', 'kernel32.dll',
@@ -100,15 +110,15 @@ $resolverMethod = $resolverBuilder.DefinePInvokeMethod('GetProcAddress', 'kernel
 $resolverMethod.SetImplementationFlags([Reflection.MethodImplAttributes]::PreserveSig)
 $script:kernel32Resolver = $resolverBuilder.CreateTypeInfo().AsType()
 function Get-KernelDelegate([string] $Export, [Type] $DelegateType) {
-    # Desktop PowerShell may preserve pipeline results as PSObject wrappers;
-    # MethodInfo.Invoke requires the underlying CLR IntPtr in its argument array.
-    $moduleHandle = [System.Management.Automation.PSObject]::AsPSObject($script:kernel32).BaseObject
+    # Read the handle from the explicitly typed owner field. MethodInfo.Invoke
+    # requires a CLR IntPtr in its argument array, not a PowerShell wrapper.
+    [IntPtr]$moduleHandle = $script:kernel32
     if ($moduleHandle -isnot [IntPtr] -or $moduleHandle -eq [IntPtr]::Zero) {
         throw 'kernel32 module handle was not a nonzero CLR IntPtr.'
     }
     if ([string]::IsNullOrWhiteSpace($Export)) { throw 'Kernel32 export name is empty.' }
     $arguments = [object[]]::new(2)
-    $arguments.SetValue([System.Management.Automation.PSObject]::AsPSObject($script:kernel32).BaseObject, 0)
+    $arguments.SetValue($moduleHandle, 0)
     $arguments.SetValue([string]$Export, 1)
     if ($arguments[0].GetType() -ne [IntPtr] -or $arguments[0] -eq [IntPtr]::Zero) {
         throw 'GetProcAddress argument 0 is not a nonzero CLR IntPtr.'

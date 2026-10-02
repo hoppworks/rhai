@@ -215,22 +215,39 @@ bootstrap/install, or release acceptance.
 
 ## Present status
 
-No compiler, fixture executable, monitor, payload, bootstrap, package build, or
-runtime-removal command has run. The guest parser check and source inventory
-passed as recorded above. The initial pre-load policy rejection consumed no
-compiler/fixture measurement. The subsequent same-process invocation failed
-before bootstrap job creation because of the PowerShell 5.1 `PSObject` to
-`IntPtr` binding defect above. The exact authorized VM remains running. The
-harness source was independently reviewed and transferred at its frozen hash.
-The PowerShell compatibility correction explicitly stores the unwrapped
-`PSObject.BaseObject` and string in a new `Object[2]`, then validates the
-stored CLR types and nonzero handle before `MethodInfo.Invoke`. The corrected
-harness source hash is
-`575ba6b84497b3bc628ff314ac5625e9bff5fbdecf0f4ee1e10142e28dca3ddb`;
-`git diff --check` passes. This source-only candidate needs root review and a
-new immutable input checkpoint before any further invocation. The real-client
-driver is frozen separately as described above. No shutdown or VM
-reconfiguration was performed.
+Earlier preflight and harness failures are historical and remain counted: the
+policy rejection, PowerShell 5.1 reflection-argument failure, and a later
+collision before compiler launch. On 2026-10-02, the corrected owner commit
+`737988d417195a69e1d14c226c9940a9de7d844b` was downloaded to the fresh
+`owner-737988d4.zip` path (SHA-256
+`55aefedd96acdf716399ad12994c27e993211920b2d22f769b70b533e7c986ab`) and
+extracted without overwrite to the previously absent
+`owner-737988d4-src`. Its harness hash matched
+`6e8adde4969fafd5502a6848a8607420510ed96949e6f4d12b58d3bca0116ffa`, and
+PowerShell 5.1 `Parser.ParseFile` on that exact script returned zero errors.
+The new run root `C:\RhaiQuality\runs\monitor-source-4df64ca93e024a29a4a47cc11c27a8d1`
+was absent at preflight. The one authorized invocation then failed before
+creating a job or timer, before starting any child/compiler/fixture process,
+because the module handle returned through `Select-Object -ExpandProperty`
+was not a CLR `IntPtr`. The script had already created the exact run root and
+its `build`, `input`, `logs`, and `temp` subdirectories; they are preserved
+and must not be reused. The in-script 17-file hash/copy gate has not run.
+
+The mutable correction now enumerates the concrete `ProcessModule` collection
+without the pipeline wrapper, explicitly assigns `BaseAddress` to a typed
+`IntPtr`, and passes that typed handle directly through the resolver guard and
+`Object[2]` invocation arguments. The nonzero CLR-type validation remains in
+place. Its source hash is
+`7622f44d57d40c84705c85a8ab37043cb4fb674ee7d9a0431ed237eb1d3bfc08`;
+`git diff --check` passes. This focused diff is pending root review. After
+review, rerun the corrected script parser and immutable 17-input gate from a
+fresh pinned archive and a new absent GUID run root. The one-hour source-fixture
+batch remains the outer execution bound; the 30-minute source planning estimate
+is not a hard cap. Expert02's separate 30-minute monitor lifetime and its setup,
+lease, closure, evidence, and resource limits remain unchanged. No compiler,
+fixture executable, production monitor, payload, bootstrap, package build, or
+runtime-removal command has run. The real-client driver remains frozen
+separately as described above. No VM shutdown or reconfiguration was performed.
 
 ## Harness cleanup correction (2026-10-01)
 
