@@ -1,0 +1,18 @@
+{
+  "frames": [
+    {
+      "original": "/tmp/rhai-win11-quality-archive-result-20261002.png",
+      "retained": "archive-absent.png",
+      "sha256": "aeab0a61707103796efae7ee839a30116a0764d0a8cbf7a4e3c7da30e7cc634d"
+    },
+    {
+      "original": "/tmp/rhai-win11-quality-dotnet-result-20261002.png",
+      "retained": "framework-compiler-present.png",
+      "sha256": "67b400368712ef7a5b1f2072a47683bb82b73e1c61f65f67272619a3ca788b1e"
+    }
+  ],
+  "independent_visual_readback": true,
+  "archive": "Exact C:\\RhaiQuality\\rhai-source.zip PathNotFound, clean prompt",
+  "compiler": "Exact C:\\Windows\\Microsoft.NET\\Framework64\\v4.0.30319\\csc.exe listing, length2569832bytes; not executed",
+  "scope": "read-only guest preflight; no transfer, compiler, bootstrap or native acceptance"
+}

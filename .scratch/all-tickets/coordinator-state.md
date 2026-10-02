@@ -881,5 +881,13 @@ This turn PROGRESS: original raw Linux coverage/source/cleanup independently
 accepted and integrated; no new build. macOS source-only control package43fa6a05
 awaits root independent review (73pure tests reported, four native controls not run).
 Windows exact archive path C:\RhaiQuality\rhai-source.zip is absent; exact
-Framework64 compiler path exists (2569832bytes), owner read-only results awaiting
-root visual readback. No transfer/compiler/fixture, no native budget reset.
+Framework64 compiler path exists (2569832bytes), original owner frames independently viewed and hashes matched by root in
+windows-current-readiness-20261002/archive-compiler-root-readback.json. No transfer/compiler/fixture, no native budget reset.
+
+Next Mac action: combined independent Expert review of immutable43fa6a05 active,
+source-only; no native/control/Cargo dispatch. Current958 rules and updated role
+reload required. Windows responsible owner resumes exact immutable staging route
+assessment against original oneGET consumption and latest reviewed corrections,
+no compiler/bootstrap/fixture until exact source/route prerequisites read back.
+Linux acceptance integrated/pushed d9f9082daf4981b9304c9a5c49ccc8ed7a6b06eb;
+independent ls-remote confirmed main as the sole fork branch at that exact head.
