@@ -1,0 +1,12 @@
+{
+  "accepted_scope": "Exact locked registry archive and unpacked source integrity only; selected execution graph, toolchain confinement, custody and native reader remain unverified",
+  "source_path": "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/macos-overhead-custody-source-audit",
+  "lock_sha256": "8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa",
+  "archive_manifest_sha256": "4b678d45a16426866fc035c581ef62b2277d708c1192895f43d0a15adaca3698",
+  "registry_archives_verified": 131,
+  "archive_bytes": 37649963,
+  "unpacked_regular_files_byte_compared": 5968,
+  "unexpected_unpacked_files": 0,
+  "nonregular_archive_payload_members": 0,
+  "cargo_or_native_launches": 0
+}

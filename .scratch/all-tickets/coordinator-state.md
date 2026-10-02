@@ -56,6 +56,14 @@ Windows guest control belongs solely to windows_monitor_job_owner.
   main before deletion. Histories preserved. Local active/foreign/dirty worktrees
   remain; remote cleanup does not authorize discarding them.
 
+- macOS locked registry SOURCE INTEGRITY prerequisite CLOSED narrowly. Root
+  independently verified baseline lock8bd35 against archive-manifest4b678d45,
+  all131 archive checksums/declared byte sizes, and byte-compared5968 unpacked
+  regular files with exact tar members; no extras/nonregular payloads. Total
+  archive37,649,963bytes. Receipt macos-locked-source-root-readback.json; exact
+  durable owner source-audit path recorded there. This closes source acquisition
+  integrity only, not selected execution graph/toolchain/custody or native proof.
+
 ## Current step and next action
 1. Windows owner launched the single reviewed source-fixture harness at exact
    C:\RhaiQuality\runs\monitor-source-c58407e0123145698ab1d70e70473f7e after
@@ -86,6 +94,13 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    Original read-only cleanup evidence06bea589 independently viewed: exact
    PID6244/5864/3972 query has no results, compiler/setup failures and retained
    log lengths visible. Integrated screenshots/state preserve job-closure limit.
+   Owner default tool cwd unexpectedly resolved to foreign primary; root exact
+   git-C readback confirms owned /Users/hoppworks/projects/rhai-windows-scoped-runner
+   still exists, correct task branch/HEAD06bea589 and state directory. Resume
+   explicit workdir commands only, no restore or foreign primary changes.
+   Fresh private guest scope wm-source-20261002-6c96e7227c124542b8e5a7e86ab5d411
+   under RhaiTest .local/share/agent-builds/rhai exists; inspect existing bounded
+   archive transfer terminal result before any subsequent transfer/parse/build.
    Owner stages immutable main43a68022 in fresh private guest root; archive,
    parser and17 pins only before source-fixture launch review.
    Existing hard caps and nonrenewable real-client allocation remain.
@@ -141,6 +156,11 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    Root authorized exact immutable compiler/library source acquisition for
    read-only audit if existing verbose commit identifies it; no installation or
    agent-home/config changes. Implementation can progress independently.
+   Darwin non-signaling reader source now present in responsible context.
+   Initial independent root source review found zero PID-list false-empty risk,
+   identity/path ABA pairing without second BSD identity, and missing per-row/
+   buffer-growth deadline checks. Returned those concrete corrections and pure
+   controls in same cause09 repair; no native/code-behavior failure consumed.
    No new Expert chain or native slot. Historical Mac prerequisite count82 is
    pre83 snapshot; authoritative actual Unix count83 below. Thirty-minute repair
    checkpoint is an estimate, reviewed with concrete progress; caps unchanged.
@@ -237,17 +257,13 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Current turn classification
-Previous goal turn PROGRESS: source fixes and original Linux83 data integrated,
-verified fork push43a68022 with only main remote. Current turn PROGRESS:
-Windows cleanup receipts independently inspected/integrated as6d6731c5;
-Linux resource-census correction distinguishes retained package cleanup service;
-Mac checksum audit progresses without native launch. Current default-core source
-applicability reviewed against c4646230: token.rs spawn row now cfg(sys) (false
-without sys), manifest adds Unix optional libc/targeted cap-std and gated examples.
-Old default-core1.66 proof remains historical compilation/smoke evidence; current
-manifest/lock compatibility is not claimed verified by that old build.
-Fork integration5816cb1c independently read back as the only remote main head;
-all new authors/committers lowercase hoppworks. Root worktree clean before this
-state reconciliation. Full goal active/incomplete. Next concrete actions remain
-Linux frozen census source review, Mac frozen custody/ABI/confinement source
-review, and Windows exact fresh archive/parser/pin readback before native release.
+Previous turn PROGRESS: Windows cleanup receipts integrated and resource census
+requirements refined. Current turn PROGRESS: independently verified all131
+locked archives/5968 unpacked files, closing exact source-integrity prerequisite;
+independent Darwin-reader review identified concrete unsafe false-empty/ABA/
+deadline paths before native launch; recovered Windows explicit owned-tool cwd
+by live Git/path readback without changing the foreign primary or guest stage.
+No new native invocation or Cargo build; Unix count83/caps/history unchanged.
+Full goal active/incomplete. Next: Linux frozen census source review; Mac reader
+corrections/pure controls and custody/confinement implementation; Windows inspect
+same bounded transfer terminal outcome and fresh archive/parser/pin gates.
