@@ -593,14 +593,15 @@ Coordinator reconciles owner standing acceptance of recommendations with this
 finite recommendation: source30min planning checkpoint, single affectedreview,
 lightchurn <=20 one-sec samples/60sec/fourchildren and at most one new native
 package invocation, cumulative2->3 only if launched; unchanged safety caps.
-No artificial PENDING gate and no reset. Source-only responsible Standard dispatched
-under darwin-census-followup-brief.md; no new native allocation/launch yet.
-Next safe action: collect single fresh Expert escalation for
-repeated exact-identity census failures, assess observable native acceptance
-route, conservative membership/resource bounds, source regression and safer
-mechanism without pretending an vanished unknown PID is an observer. Record
-recommendation/limits and fix only within that justified bounded package; no
-additional launch before diagnostic result and actual slot acceptance.
+No artificial PENDING gate and no reset. Source-only responsible Standard CLI60885 terminal0; candidate
+a6fc667f0ac234e0876600f85bc8a36a860cc607 frozen. Source/test census/cleanup/
+dispatch controls reportedGREEN and8staged pins match; observer cleanup block
+reportedbyteunchanged. Candidate includes47MB immutable stage archive locally,
+Coordinator must integrate selectedsource only, not duplicate archive in fork.
+Report darwin-census-followup-result.md; final lacked explicit loadedrevision
+confirmation, no inferred confirmation. Combined affected reviewer dispatched
+under darwin-census-review-brief.md; no source/native acceptance yet.
+Combined review CLI33212 terminal0 SOURCE REJECTED, exact loadedrevision confirmed958a4538. Report darwin-census-review.md: three reproduced high findings, actual cleanup readback compares incompatible identity encodings and can pass a live PID; immediate command query failure accepted via stale PID cache; dispatcher accepts unknown/-1 inventory and no real collector supplied. Single-census RED/GREEN/seven failure controls pass;8pins and lifecycle bytes unchanged. This is first rejected candidate within sole Expert12 follow-up, no native launch. Current goal turn PROGRESS: material independent evidence changes next action. One consolidated affected source fix batch under darwin-census-fix-batch-brief.md; same owned source worktree, no native allocation, no new escalation chain or archive duplication. Responsible source fix CLI24541 confirmed live by actual poll; collect SAME handle, do not restart on observation timeout. Next action collect responsible fix job then affected independent recheck; only accepted source may proceed to finite light/native controls. Earlier source job60885 and review33212 terminal; do not poll/restart them.
 
 Windows accounting source report conclusion that extracted SourceRoot unavailable
 is superseded by root direct original audit-tree.txt and screenshot readback.
