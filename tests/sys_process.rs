@@ -38,7 +38,7 @@ const DIRECT_DROP_ENV: &str = "RHAI_SYS_DIRECT_DROP";
 const DIRECT_DROP_RECORD_ENV: &str = "RHAI_SYS_DIRECT_DROP_RECORD";
 #[cfg(all(unix, not(feature = "no_index")))]
 const DIRECT_DROP_RELEASE_ENV: &str = "RHAI_SYS_DIRECT_DROP_RELEASE";
-#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+#[cfg(all(unix, not(feature = "no_index")))]
 const DIRECT_DROP_CHALLENGE_ENV: &str = "RHAI_SYS_DIRECT_DROP_CHALLENGE";
 
 /// The process API re-executes this test binary so stdout/stderr and exit status come from

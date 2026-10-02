@@ -344,6 +344,7 @@ fn run_bounded_controller(scenario: &str) {
         if let Some(status) = guard.child.as_mut().unwrap().try_wait().expect("poll exact scenario child") {
             let output = guard.child.take().unwrap().wait_with_output().expect("reap exact scenario child");
             eprintln!("shared-child controller_reaped scenario={scenario} pid={controller_pid} status={status}");
+            eprintln!("shared-child controller_output scenario={scenario} stdout={:?} stderr={:?}", String::from_utf8_lossy(&output.stdout), String::from_utf8_lossy(&output.stderr));
             assert_pid_reaped(controller_pid);
             eprintln!("shared-child controller_esrch pid={controller_pid} verified=true");
             if !status.success() {

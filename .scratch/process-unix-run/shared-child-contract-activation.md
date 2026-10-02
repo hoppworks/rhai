@@ -4,6 +4,9 @@
 
 Invocation45 selected only the spawn case and reached the public Engine call, failing with `Function not found: spawn`; the harness confirmed no OS fixture spawned. Invocation47 passed the earlier blocked-stdin/wait fixture after source-only validator replay corrected its output matcher. Invocation48 passed the expanded fixture and wrong-control after the temporary clone corrections. All four fixture children and controllers were independently reaped. Broader direct-child and descendant lifecycle coverage remains open.
 
+The historical invocation48 wrong-control removed public `spawn`; it is not
+evidence for the planned cached-exit-code assertion control.
+
 To activate in the test source, add `#[path = "fixtures/sys_process_shared_child_contract.rs"] mod shared_child_contract;` to `tests/sys_process.rs` under the same `all(feature = "sys", unix, not(feature = "no_index"))` gates. The focused suite uses `--features testing-environ,sys,sync` and the scoped runner. Preserve exact child records, process ownership and cleanup receipts.
 
 Assertion mapping:
@@ -40,3 +43,20 @@ readback and every exact child/controller cleanup identity. Allocate this run
 only when the machine's heavy slot is free. The new feature-selected scripts
 and module registration require current native verification; historical injected
 module results do not close that acceptance or the release matrix.
+
+## Independent activation review and affected corrections
+
+`shared-child-activation-review.md` accepts commit dd2a44fc source-only and
+records three inherited acceptance prerequisites. The direct-drop challenge
+constant now has the same feature gate as its process-fixture use, removing
+the identified `no_float` unresolved-name mismatch. Successful controllers
+now export their captured stdout/stderr to the enclosing test log before
+fixture records are removed. Both corrections still need affected review
+and actual native/compiler verification.
+
+Exceptional controller cleanup remains unresolved: killing the controller
+before fixture release may remove the child's reaper, and a logged
+`absent=false` does not establish cleanup. Do not launch this module until
+the bounded runner/fixture path retains ownership and reports incomplete
+closure honestly. Preserve this finding rather than accepting only its
+successful paths. The sync blocking-wait-entry limitation also remains open.
