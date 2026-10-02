@@ -1,0 +1,15 @@
+{
+  "host_frame_sha256": "9e3383307735111153b7bb4ae5525af355662338ed1758c9f6eb7dc0bbeba5f1",
+  "root_visual_readback": {
+    "ordinary_powershell_available": true,
+    "prompt_user": "RhaiTest",
+    "Get-Host_name": "ConsoleHost",
+    "Get-Host_version": "5.1.26100.9444",
+    "visible_partial_unexecuted_command": "dir C:\\RhaiQ",
+    "guest_archive_presence_or_hash_proven": false,
+    "directory_listing_proven_by_this_frame": false
+  },
+  "owner_reported_partial_line_cancelled": "await exact screenshot attribution; original host frame does not prove cancellation",
+  "GET_issued_by_current_preflight": false,
+  "native_compiler_or_fixture_launched": false
+}

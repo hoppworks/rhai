@@ -374,7 +374,11 @@ reuses pinned23 receipts/seven positives/five controls, and preserves a2d source
 original caps and cause history. No repeat of accepted rows or controls.
 Fresh workhorse inventory found foreign tauron gate3 runner1924771/supervisor1924772
 and observer1925697 live; postpone heavy launch, preserving foreign dev-server
-runner28950/28951. Stage preparation is light and authorized. Before launch renew
+runner28950/28951. Stage preparation finished exit0; root independently compared all32 staged input
+hashes with reviewed local inputs (linux-current-sys-net-policy2-stage-readback.json).
+Exact stage retained. Responsible Linux owner resumes to observe the SAME foreign
+handles/terminal receipt and then one reviewed launch, without restaging or a
+restart on observation timeout. Before launch renew
 exact PID/start/terminal heavy-slot readback. One600s follow-up will bring outer
 allocation2400s; observed elapsed143.627s remains unchanged until actual execution.
 Source-only preparation and status turn before this were not acceptance progress;
@@ -441,7 +445,14 @@ and polled, without restart after observation timeout. This turn PROGRESS: macOS
 integrated/pushed b5245fcc; exact owned Windows VM activated and independently
 read back. Mac owner now prepares the finite Expert09 native-control entrypoint
 source-only; no native allocation85, guardfalse. Linux policy2 preparation and
-Windows read-only guest preflight continue; no acceptance or budget reset.
+Windows read-only guest preflight continues; ordinary PowerShell launch and
+ConsoleHost5.1.26100.9444 are independently visually confirmed in original exact
+frames at windows-current-readiness-20261002/. Host frame9e33833 shows unexecuted
+partial `dir C:\RhaiQ`, not the directory listing claimed for that frame; root
+requested correct original listing/cancellation attribution. Archive presence/hash
+remain unproven. No GET/compiler/fixture in this preflight. Timing diagnosis permits
+slower verified short-line delivery in the same responsible context; preserve
+cumulative active time and prior bootstrap/Expert02 history. No native budget reset.
 Goal active, no release acceptance.
 
 ## Selected macOS measurement graph package — allocated
