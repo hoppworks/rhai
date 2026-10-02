@@ -143,20 +143,22 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Current turn classification
-PROGRESS: global/project instructions reread after update056b17c, applicable
-human authorization reconciled with no additional approval gate. Independent
-corrected Linux classifier controls and original84 replay passed in a new owned
-scoped runtime; exact empty session scope retired. Reviewed source correction
-and original18-file integrity integrated, preserving failed original statuses,
-missing postimage manifest and all cause counts. Receipt:
-linux84-framing-source-root-review.json; native84 detailed readback in
-linux84-census-root-readback.json. No new native invocation or build.
-Mac findings corrected at510d7233; further review found repeat group-KILL
-after failed wait and unsafe direct-child-only cleanup after release. Existing
-owner is running the bounded source correction; false launch guard remains.
-Windows owner handle is missing from live inventory, not a verified live wait
-or guest terminal proof. Last frozen state has no new parser/path result.
-Root plan differed from dbff4ffd parent, so whole patch rejected; only reviewed
-private-run-path command applied without importing divergent history. Resume
-Windows with read-only guest state inspection before any launch. Remaining
-full ticket/release acceptance above unchanged; Goal active and incomplete.
+PROGRESS: published Linux84 framing/source/original evidence at fork main
+c3e72349, private Windows plan/status atdfeff5a3; independent remote readback
+ONLYmain equals dfeff5a30411f7b0333de2dece6de929b4c7bdd8. Root clean before
+this evidence increment. History and original statuses remain unchanged.
+Mac frozen878a correction independently source-tested11/11 in new owned scoped
+runtime, exact empty scope retired. Known-broken510d repeated stop after failed
+wait emits groupKILL twice; corrected shared issued state suppresses second
+syscall while preserving both bounded direct waits. Receipt:
+macos-custody-repeat-signal-root-readback.json. No native/build launched.
+Architecture review found scoped adapter unchanged: owns/kills only driver,
+while driver owns gate/anchors. Kill-client/EOF custody remains unimplemented.
+Returned EXISTING Expert09 separate actual custodian/nonspawning client route
+for source implementation, reusing reviewed narrow controls, frozen Rust/parser,
+false launch guard, prior cause history and caps. Do not claim full review green.
+Windows old owner absent from live inventory; fresh bounded sole-controller
+windows_private_staging_readback assigned read-only guest recovery and isolated
+parser/path gates only, no compiler/fixture/job harness/real-client launch.
+No stopped-process assumption from missing agent handle. Existing staging roots,
+logs and nonrenewable budgets remain. Final all-ticket requirements still open.

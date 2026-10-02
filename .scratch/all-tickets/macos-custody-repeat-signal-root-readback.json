@@ -1,0 +1,15 @@
+{
+  "source_ref": "878a5164c697311029138c511a58271496742240",
+  "review_scope": "Repeat group signal and ambiguous release correction only; architecture not launch-ready",
+  "source_hashes": {
+    "macos-process-overhead.py": "a95a4c9296f57c776a442fc3b2361d90d7c7a08e3685e5a9a7dfbf1963c1dd1c",
+    "test-macos-process-overhead-source.py": "168d13df8c9dabaa7313cc04401136eade1b45d5c724211759411a09d3abeab6"
+  },
+  "pure_controls_passed": 11,
+  "known_broken_control": "Frozen510d stop_anchored invoked again after first gate.wait TimeoutExpired emits killpg twice; corrected878a shared issued state emits once and reaps both exact children",
+  "runner_status": 0,
+  "owned_scope_retired": "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-custody-544949c78eb64e2b879d09b2a34ce982",
+  "native_invocations": 0,
+  "architecture_blocker": "Scoped adapter still owns only Python driver; client SIGKILL/EOF can orphan driver-owned gates/anchors. Expert09 separate actual custodian/nonspawning client route remains unimplemented. False readiness guard retained.",
+  "next_action": "Existing responsible context implements Expert09 adapter ownership and bounded RPC, reuse reviewed gate/waitid/reader; no native until source gate"
+}
