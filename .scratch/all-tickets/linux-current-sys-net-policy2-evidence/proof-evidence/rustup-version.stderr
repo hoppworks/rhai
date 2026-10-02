@@ -1,0 +1,2 @@
+info: This is the version for the rustup toolchain manager, not the rustc compiler.
+info: no `rustc` is currently active

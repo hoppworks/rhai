@@ -1,0 +1,9 @@
+{
+  "captured_before_stage_validation_or_external_command": true,
+  "helper_pid": 1938096,
+  "helper_start_ticks": 8244715,
+  "identity_receipt": "process-identities.tsv",
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/agent-build-scrahomj",
+  "supervisor_pid": 1938095,
+  "supervisor_start_ticks": 8244713
+}

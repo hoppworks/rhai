@@ -1,0 +1,100 @@
+launch_utc=2026-10-02T12:57:26Z
+runner_timeout_seconds=600
+stage=/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2
+scope=/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2
+source.tar: OK
+Cargo.lock.accepted: OK
+run-sys-net-policy2.py: OK
+contract.md: OK
+launch.sh: OK
+stage.sh: OK
+runner/tools/run_scoped.py: OK
+runner/tools/agentskills/__init__.py: OK
+runner/tools/agentskills/pyguard.py: OK
+reused-policy1/source-lock-manifests.json: OK
+reused-policy1/positive-rows-in-progress.json: OK
+reused-policy1/controls-in-progress.json: OK
+reused-policy1/commands.json: OK
+reused-policy1/host.json: OK
+reused-policy1/rustc-version.stdout: OK
+reused-policy1/cargo-version.stdout: OK
+reused-policy1/helper-used.py: OK
+reused-policy1/control-sys-filesystem-wrong-readback.stdout: OK
+reused-policy1/control-sys-filesystem-wrong-readback.stderr: OK
+reused-policy1/control-sys-filesystem-wrong-readback.status: OK
+reused-policy1/control-tcp-wrong-peer-readback.stdout: OK
+reused-policy1/control-tcp-wrong-peer-readback.stderr: OK
+reused-policy1/control-tcp-wrong-peer-readback.status: OK
+reused-policy1/control-tcp-wrong-peer-writeback.stdout: OK
+reused-policy1/control-tcp-wrong-peer-writeback.stderr: OK
+reused-policy1/control-tcp-wrong-peer-writeback.status: OK
+reused-policy1/control-combined-wrong-host-readback.stdout: OK
+reused-policy1/control-combined-wrong-host-readback.stderr: OK
+reused-policy1/control-combined-wrong-host-readback.status: OK
+reused-policy1/control-net-no-object-wrong-peer.stdout: OK
+reused-policy1/control-net-no-object-wrong-peer.stderr: OK
+reused-policy1/control-net-no-object-wrong-peer.status: OK
+PRIVATE_RUNTIME /root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/agent-build-scrahomj
+HELPER_IDENTITY 1938096 8244715
+sample={"descendants": 1, "monotonic_seconds": 0.276, "rss_kib": 32088, "storage_kib": 45908}
+command=rustup-version argv=['/root/.cargo/bin/rustup', '--version']
+sample={"descendants": 2, "monotonic_seconds": 0.292, "rss_kib": 32004, "storage_kib": 45908}
+sample={"descendants": 1, "monotonic_seconds": 0.405, "rss_kib": 31992, "storage_kib": 45916}
+status=rustup-version:0
+command=rustup-install argv=['/root/.cargo/bin/rustup', 'toolchain', 'install', '1.77.2', '--profile', 'minimal', '--no-self-update']
+sample={"descendants": 2, "monotonic_seconds": 0.42, "rss_kib": 48064, "storage_kib": 45924}
+sample={"descendants": 2, "monotonic_seconds": 1.436, "rss_kib": 56712, "storage_kib": 64344}
+sample={"descendants": 2, "monotonic_seconds": 2.451, "rss_kib": 58116, "storage_kib": 118428}
+sample={"descendants": 2, "monotonic_seconds": 3.467, "rss_kib": 219600, "storage_kib": 249512}
+sample={"descendants": 2, "monotonic_seconds": 4.483, "rss_kib": 154144, "storage_kib": 299964}
+sample={"descendants": 2, "monotonic_seconds": 5.503, "rss_kib": 269860, "storage_kib": 363820}
+sample={"descendants": 2, "monotonic_seconds": 6.519, "rss_kib": 421328, "storage_kib": 522372}
+sample={"descendants": 1, "monotonic_seconds": 7.234, "rss_kib": 32144, "storage_kib": 505612}
+status=rustup-install:0
+command=rustc-version argv=['/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/agent-build-scrahomj/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 7.249, "rss_kib": 32060, "storage_kib": 505616}
+sample={"descendants": 1, "monotonic_seconds": 7.363, "rss_kib": 32172, "storage_kib": 505620}
+status=rustc-version:0
+command=cargo-version argv=['/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/agent-build-scrahomj/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 7.376, "rss_kib": 32068, "storage_kib": 505624}
+sample={"descendants": 1, "monotonic_seconds": 7.489, "rss_kib": 32080, "storage_kib": 505628}
+status=cargo-version:0
+command=behavior-combined-no-index-sync-metadata argv=['/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/agent-build-scrahomj/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--features', 'testing-environ,sys,net,no_index,sync,metadata', '--test', 'sys_fs', '--test', 'sys_policy', '--test', 'net_connect', '--test', 'net_listen', '--test', 'net_reads', '--test', 'net_writes', '--test', 'combined_sys_net', '--test', 'net_metadata', '--', '--nocapture', '--test-threads=1']
+sample={"descendants": 2, "monotonic_seconds": 7.529, "rss_kib": 53416, "storage_kib": 505644}
+sample={"descendants": 2, "monotonic_seconds": 8.546, "rss_kib": 74656, "storage_kib": 508900}
+sample={"descendants": 2, "monotonic_seconds": 9.561, "rss_kib": 75748, "storage_kib": 509140}
+sample={"descendants": 2, "monotonic_seconds": 10.575, "rss_kib": 80952, "storage_kib": 512348}
+sample={"descendants": 2, "monotonic_seconds": 11.59, "rss_kib": 98376, "storage_kib": 515652}
+sample={"descendants": 3, "monotonic_seconds": 12.616, "rss_kib": 272648, "storage_kib": 574628}
+sample={"descendants": 4, "monotonic_seconds": 13.64, "rss_kib": 601376, "storage_kib": 595544}
+sample={"descendants": 7, "monotonic_seconds": 14.662, "rss_kib": 493436, "storage_kib": 625944}
+sample={"descendants": 4, "monotonic_seconds": 15.685, "rss_kib": 509616, "storage_kib": 649568}
+sample={"descendants": 4, "monotonic_seconds": 16.708, "rss_kib": 565524, "storage_kib": 659316}
+sample={"descendants": 4, "monotonic_seconds": 17.731, "rss_kib": 869316, "storage_kib": 667964}
+sample={"descendants": 7, "monotonic_seconds": 18.754, "rss_kib": 474332, "storage_kib": 713256}
+sample={"descendants": 3, "monotonic_seconds": 19.778, "rss_kib": 485520, "storage_kib": 717708}
+sample={"descendants": 3, "monotonic_seconds": 20.804, "rss_kib": 614320, "storage_kib": 717708}
+sample={"descendants": 3, "monotonic_seconds": 21.828, "rss_kib": 759856, "storage_kib": 717732}
+sample={"descendants": 3, "monotonic_seconds": 22.852, "rss_kib": 912224, "storage_kib": 735656}
+sample={"descendants": 4, "monotonic_seconds": 23.876, "rss_kib": 529716, "storage_kib": 762624}
+sample={"descendants": 7, "monotonic_seconds": 24.901, "rss_kib": 554048, "storage_kib": 818584}
+sample={"descendants": 3, "monotonic_seconds": 25.924, "rss_kib": 117644, "storage_kib": 853992}
+sample={"descendants": 1, "monotonic_seconds": 26.346, "rss_kib": 32016, "storage_kib": 853996}
+status=behavior-combined-no-index-sync-metadata:0
+command=behavior-combined-f32 argv=['/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/agent-build-scrahomj/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--features', 'testing-environ,sys,net,f32_float', '--test', 'sys_fs', '--test', 'sys_policy', '--test', 'net_connect', '--test', 'net_listen', '--test', 'net_reads', '--test', 'net_writes', '--test', 'combined_sys_net', '--', '--nocapture', '--test-threads=1']
+sample={"descendants": 2, "monotonic_seconds": 26.373, "rss_kib": 67760, "storage_kib": 854004}
+sample={"descendants": 3, "monotonic_seconds": 27.396, "rss_kib": 289720, "storage_kib": 862388}
+sample={"descendants": 3, "monotonic_seconds": 28.42, "rss_kib": 512624, "storage_kib": 862404}
+sample={"descendants": 3, "monotonic_seconds": 29.443, "rss_kib": 657636, "storage_kib": 862412}
+sample={"descendants": 3, "monotonic_seconds": 30.469, "rss_kib": 878692, "storage_kib": 874452}
+sample={"descendants": 3, "monotonic_seconds": 31.496, "rss_kib": 875160, "storage_kib": 888668}
+sample={"descendants": 10, "monotonic_seconds": 32.521, "rss_kib": 421032, "storage_kib": 931616}
+sample={"descendants": 6, "monotonic_seconds": 33.546, "rss_kib": 291440, "storage_kib": 988608}
+sample={"descendants": 1, "monotonic_seconds": 34.468, "rss_kib": 31904, "storage_kib": 1000220}
+status=behavior-combined-f32:0
+evidence_exported=/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/proof-evidence
+linux_current_sys_net_policy2=pass
+/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/launch.sh: line 123: /proc/1938091/stat: No such file or directory
+run_scoped_status=0
+runtime_cleanup_status=0 pid_readback_status=0 scope_cleanup_status=0
+outer_status=0

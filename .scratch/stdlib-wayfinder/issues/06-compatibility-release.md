@@ -173,3 +173,7 @@ The finite package stopped at its storage preemption while compiling
 no_index/sync/metadata; f32 was not run. These two rows, the wider platform/process
 matrix and release acceptance remain open. Seven completed rows may be reused
 while their relevant source/check/environment remain unchanged.
+
+## Remaining Linux non-process feature rows — 2026-10-02
+
+Frozen a2d7a8c2 with lock2ba4, private Rust/Cargo1.77.2 on native Linux7.2.7 passed combined-no-index-sync-metadata (82 tests) and combined-f32 (89 tests). Independent raw target/test coverage and live exact PID/start/group/runtime/scope cleanup readback are accepted in ../../all-tickets/linux-current-sys-net-policy2-review.md. Original proof commit84b8671f and receipts in ../../all-tickets/linux-current-sys-net-policy2-evidence/ preserve the single invocation. The seven prior rows and five meaningful assertion controls remain applicable unchanged: nine planned non-process rows, 601 successful executions. Current production/test/build inputs match frozen source. This closes this Linux filesystem/policy/TCP feature package only; process, other-platform and final release requirements remain open.

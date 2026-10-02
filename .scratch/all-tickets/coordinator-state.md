@@ -365,22 +365,22 @@ maxRSS964272KiB/storage1588088KiB/descendants10, not continuous peaks.
 Export84.425s; cumulative exported elapsed143.627s/outer allocation1800s.
 No hard-cap change or failed correction added for the policy cause.
 
-Remaining native rows: combined-no-index-sync-metadata (compile interrupted at
-storage preemption) and combined-f32 (not run). Responsible Linux owner froze policy2 package5309e171; root combined independent
-review covers all five files (OCR4/4 plus excluded contract), with no material
-finding. Root four pure boundaries passed scoped0 and exact empty scope cleanup0;
-original owner/root logs and review retained. The plan runs exactly those two rows,
-reuses pinned23 receipts/seven positives/five controls, and preserves a2d source,
-original caps and cause history. No repeat of accepted rows or controls.
-Fresh workhorse inventory found foreign tauron gate3 runner1924771/supervisor1924772
-and observer1925697 live; postpone heavy launch, preserving foreign dev-server
-runner28950/28951. Stage preparation finished exit0; root independently compared all32 staged input
-hashes with reviewed local inputs (linux-current-sys-net-policy2-stage-readback.json).
-Exact stage retained. Responsible Linux owner resumes to observe the SAME foreign
-handles/terminal receipt and then one reviewed launch, without restaging or a
-restart on observation timeout. Before launch renew
-exact PID/start/terminal heavy-slot readback. One600s follow-up will bring outer
-allocation2400s; observed elapsed143.627s remains unchanged until actual execution.
+Linux nine-row non-process feature package CLOSED narrowly. Policy2 source5309e171
+was independently reviewed (all five files, OCR4/4 plus contract), pure boundaries
+passed, and all32 staged input hashes independently matched. Foreign tauron job
+terminal0 was observed before the single launch; KSR dev-server was preserved.
+SSH57354 terminal0; original receipts frozen84b8671f, integrated once in
+linux-current-sys-net-policy2-evidence with original launch log. Root raw coverage
+confirms combined-no-index-sync-metadata82 and combined-f3289, every selected
+target once and no failed/ignored/measured/filtered tests. Prior seven rows430
+and five meaningful controls reused unchanged: nine planned rows601 executions.
+Source/helper/contract/seven manifests match current integration and frozena2d.
+Root independent live readback: ten exact identities absent, PGID1938095 empty,
+runtime/scope absent; outer/scoped/cleanup0. 44periodic samples maxima
+RSS912224KiB/storage1000220KiB/descendants10, not continuous peaks. Export34.471s;
+cumulative178.098s observed/2400s outer allocation. No rerun, failed correction,
+hard-cap change or process85. Full platform/process/release gates remain open.
+
 Source-only preparation and status turn before this were not acceptance progress;
 this combined review/pure evidence and integration are progress. Mac owner closes concrete confinement source gaps without native
 launch; processcount84 and measurementguardfalse unchanged.
@@ -418,8 +418,7 @@ No invocation85/process measurement. Remaining optional/platform/feature gates
 and every other ticket requirement remain active.
 
 ## Immediate next actions
-Collect the prepared Linux non-process feature acceptance package and preserve
-newly accepted Linux examples proof. Collect the existing Mac owner's supported
+Linux non-process nine-row feature acceptance is closed; preserve original proof. Collect the existing Mac owner's supported
 stable-toolchain source route and review affected prerequisites before any native
 allocation. Complete exact
 feature/toolchain confinement and installed Darwin ABI prerequisites; keep
@@ -449,7 +448,10 @@ Windows read-only guest preflight continues; ordinary PowerShell launch and
 ConsoleHost5.1.26100.9444 are independently visually confirmed in original exact
 frames at windows-current-readiness-20261002/. Host frame9e33833 shows unexecuted
 partial `dir C:\RhaiQ`, not the directory listing claimed for that frame; root
-requested correct original listing/cancellation attribution. Archive presence/hash
+received corrected original listing frame7be595 and cancellation/clean-prompt
+frame22154aa and independently visually confirmed both. Visible entries include
+baseline-source/baseline-source-v2/runs and older control logs; archive absence
+is not inferred from a partially scrolled listing. Archive presence/hash
 remain unproven. No GET/compiler/fixture in this preflight. Timing diagnosis permits
 slower verified short-line delivery in the same responsible context; preserve
 cumulative active time and prior bootstrap/Expert02 history. No native budget reset.
@@ -873,3 +875,11 @@ narrow readback of the synchronous-spawn caveat. OCR selects no code for this
 docs-only change; manual source review supplies coverage of the changed doc.
 No build/native85 dispatch. Previous reviewer-spawn thread-limit failure created
 no agent; existing independent Mac owner performed the review.
+
+Current continuation classification: previous status-only goal turn NO PROGRESS.
+This turn PROGRESS: original raw Linux coverage/source/cleanup independently
+accepted and integrated; no new build. macOS source-only control package43fa6a05
+awaits root independent review (73pure tests reported, four native controls not run).
+Windows exact archive path C:\RhaiQuality\rhai-source.zip is absent; exact
+Framework64 compiler path exists (2569832bytes), owner read-only results awaiting
+root visual readback. No transfer/compiler/fixture, no native budget reset.

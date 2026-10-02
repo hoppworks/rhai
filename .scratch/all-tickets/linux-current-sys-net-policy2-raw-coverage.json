@@ -1,0 +1,37 @@
+{
+  "original_evidence_commit": "84b8671fbf876a9f81cc118144f33ef04997bcbf",
+  "raw_rows": [
+    {
+      "row": "combined-no-index-sync-metadata",
+      "targets": {
+        "combined_sys_net": 1,
+        "net_connect": 4,
+        "net_listen": 8,
+        "net_metadata": 1,
+        "net_reads": 8,
+        "net_writes": 10,
+        "sys_fs": 24,
+        "sys_policy": 26
+      },
+      "executions": 82
+    },
+    {
+      "row": "combined-f32",
+      "targets": {
+        "combined_sys_net": 1,
+        "net_connect": 4,
+        "net_listen": 7,
+        "net_reads": 8,
+        "net_writes": 10,
+        "sys_fs": 35,
+        "sys_policy": 24
+      },
+      "executions": 89
+    }
+  ],
+  "additional_executions": 171,
+  "coverage": "Every selected target once; named test starts and successful endings equal raw summaries; no failures/ignored/measured/filtered",
+  "source_applicability": "src/tests/codegen/build.rs/Cargo.toml unchanged from frozen a2d7a8c2; seven manifests match",
+  "helper_and_contract_match": true,
+  "original_ignored_lock_sha256_verified": true
+}

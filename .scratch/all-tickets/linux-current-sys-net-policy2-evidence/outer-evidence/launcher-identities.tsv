@@ -1,0 +1,3 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+launcher	1938023	1938022	1938023	8244705	/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/launch.sh
+run-scoped	1938091	1938023	1938023	8244711	python3 /root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/runner/tools/run_scoped.py --timeout 600 -- python3 /root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/run-sys-net-policy2.py

@@ -9,7 +9,24 @@
     "guest_archive_presence_or_hash_proven": false,
     "directory_listing_proven_by_this_frame": false
   },
-  "owner_reported_partial_line_cancelled": "await exact screenshot attribution; original host frame does not prove cancellation",
+  "owner_reported_partial_line_cancelled": "independently visually confirmed by exact22154aa frame",
   "GET_issued_by_current_preflight": false,
-  "native_compiler_or_fixture_launched": false
+  "native_compiler_or_fixture_launched": false,
+  "corrected_original_frames": {
+    "directory_listing_sha256": "7be595c069e6e93321cfb7fae8dd847b1c009548345a0108cedba9e4e894e47f",
+    "directory_listing_visible_entries": [
+      "baseline-source",
+      "baseline-source-v2",
+      "runs",
+      "control logs",
+      "native-baseline.log",
+      "provision-toolchain.log",
+      "rustup-init.exe",
+      "sys test logs",
+      "vs_buildtools.exe"
+    ],
+    "partial_cancel_sha256": "22154aa2952366f0e83796a4be971cef0c3737c1493f05416d4d70a4c61d7976",
+    "partial_line_cancelled_and_clean_prompt": true,
+    "archive_absence_not_proven": true
+  }
 }

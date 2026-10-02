@@ -1,0 +1,76 @@
+{
+  "exact_identities": [
+    {
+      "label": "helper",
+      "pid": 1938096,
+      "start_ticks": "8244715",
+      "matching_identity_present": false
+    },
+    {
+      "label": "scoped-supervisor",
+      "pid": 1938095,
+      "start_ticks": "8244713",
+      "matching_identity_present": false
+    },
+    {
+      "label": "rustup-version",
+      "pid": 1938108,
+      "start_ticks": "8244745",
+      "matching_identity_present": false
+    },
+    {
+      "label": "rustup-install",
+      "pid": 1938123,
+      "start_ticks": "8244758",
+      "matching_identity_present": false
+    },
+    {
+      "label": "rustc-version",
+      "pid": 1938414,
+      "start_ticks": "8245441",
+      "matching_identity_present": false
+    },
+    {
+      "label": "cargo-version",
+      "pid": 1938420,
+      "start_ticks": "8245454",
+      "matching_identity_present": false
+    },
+    {
+      "label": "behavior-combined-no-index-sync-metadata",
+      "pid": 1938440,
+      "start_ticks": "8245469",
+      "matching_identity_present": false
+    },
+    {
+      "label": "behavior-combined-f32",
+      "pid": 1940147,
+      "start_ticks": "8247352",
+      "matching_identity_present": false
+    },
+    {
+      "label": "launcher",
+      "pid": 1938023,
+      "start_ticks": "8244705",
+      "matching_identity_present": false
+    },
+    {
+      "label": "run-scoped",
+      "pid": 1938091,
+      "start_ticks": "8244711",
+      "matching_identity_present": false
+    }
+  ],
+  "scoped_groups": [
+    1938095
+  ],
+  "live_group_members": [],
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/agent-build-scrahomj",
+  "runtime_exists": false,
+  "runtime_is_symlink": false,
+  "scope": "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2",
+  "scope_exists": false,
+  "scope_is_symlink": false,
+  "outer_status": "0",
+  "scoped_status": "0"
+}

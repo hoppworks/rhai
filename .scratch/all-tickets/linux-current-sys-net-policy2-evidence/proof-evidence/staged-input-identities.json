@@ -1,0 +1,124 @@
+{
+  "Cargo.lock.accepted": {
+    "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/Cargo.lock.accepted",
+    "sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425"
+  },
+  "agentskills/__init__.py": {
+    "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/runner/tools/agentskills/__init__.py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "agentskills/pyguard.py": {
+    "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/runner/tools/agentskills/pyguard.py",
+    "sha256": "a3739f4947744303e1adf3fb0875ac743944a272e5b95c94b1baba53029d313f"
+  },
+  "contract.md": {
+    "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/contract.md",
+    "sha256": "26d1f0838ec25051a60deda3b8369deb5c4a3cff592c3d00b6f5118ca1761787"
+  },
+  "reused_policy1_receipts": {
+    "cargo-version.stdout": {
+      "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/reused-policy1/cargo-version.stdout",
+      "sha256": "bd859f92e30f43b3d238342da4f9a98eaecf6fb4d9dcf317c4e27346f28b4a69"
+    },
+    "commands.json": {
+      "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/reused-policy1/commands.json",
+      "sha256": "b2589420c8078975ee53bdb5eeb81ed08c28bc71a0b5447a82a13e3046973607"
+    },
+    "control-combined-wrong-host-readback.status": {
+      "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/reused-policy1/control-combined-wrong-host-readback.status",
+      "sha256": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c"
+    },
+    "control-combined-wrong-host-readback.stderr": {
+      "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/reused-policy1/control-combined-wrong-host-readback.stderr",
+      "sha256": "6d0d3fca882149f3cc8c81c39076a751f26f3da0336553061124d9d42b8ec590"
+    },
+    "control-combined-wrong-host-readback.stdout": {
+      "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/reused-policy1/control-combined-wrong-host-readback.stdout",
+      "sha256": "a3c59d1cf98836739e15784b35a24541a069ba3ad8c765e52d8da179fc7971f8"
+    },
+    "control-net-no-object-wrong-peer.status": {
+      "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/reused-policy1/control-net-no-object-wrong-peer.status",
+      "sha256": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c"
+    },
+    "control-net-no-object-wrong-peer.stderr": {
+      "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/reused-policy1/control-net-no-object-wrong-peer.stderr",
+      "sha256": "a614dc867f437e8bbe9435aa23570f90ebb34613340f6a76e0d98c0b8432cac2"
+    },
+    "control-net-no-object-wrong-peer.stdout": {
+      "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/reused-policy1/control-net-no-object-wrong-peer.stdout",
+      "sha256": "6d8b53aa5423044c96ffe4271d7ae8cb790485800b68f3b2b978c309c1e47292"
+    },
+    "control-sys-filesystem-wrong-readback.status": {
+      "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/reused-policy1/control-sys-filesystem-wrong-readback.status",
+      "sha256": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c"
+    },
+    "control-sys-filesystem-wrong-readback.stderr": {
+      "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/reused-policy1/control-sys-filesystem-wrong-readback.stderr",
+      "sha256": "650177feb4302d0715ab5efe6e4ca7f9fe05c4319fa5f8940c7d20a2f3b08a38"
+    },
+    "control-sys-filesystem-wrong-readback.stdout": {
+      "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/reused-policy1/control-sys-filesystem-wrong-readback.stdout",
+      "sha256": "c2c70d343903f8f8a2cda6a9ead4400e78ff713f6acb9b57a3a47ef3729f92cd"
+    },
+    "control-tcp-wrong-peer-readback.status": {
+      "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/reused-policy1/control-tcp-wrong-peer-readback.status",
+      "sha256": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c"
+    },
+    "control-tcp-wrong-peer-readback.stderr": {
+      "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/reused-policy1/control-tcp-wrong-peer-readback.stderr",
+      "sha256": "8688a71fc97f8103fa6963d0f4d08ed780735595169063d61f982216821722e5"
+    },
+    "control-tcp-wrong-peer-readback.stdout": {
+      "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/reused-policy1/control-tcp-wrong-peer-readback.stdout",
+      "sha256": "0f4887639eaa5052f39d006881fde26c93d5af273bb9239d7de6c84c8ddbf20d"
+    },
+    "control-tcp-wrong-peer-writeback.status": {
+      "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/reused-policy1/control-tcp-wrong-peer-writeback.status",
+      "sha256": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c"
+    },
+    "control-tcp-wrong-peer-writeback.stderr": {
+      "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/reused-policy1/control-tcp-wrong-peer-writeback.stderr",
+      "sha256": "514dc112f3d41dad8d2fe0f5154ab344cf1c7180e6ac73638da77c4cd29d6811"
+    },
+    "control-tcp-wrong-peer-writeback.stdout": {
+      "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/reused-policy1/control-tcp-wrong-peer-writeback.stdout",
+      "sha256": "e16861abb209f9f3d0a6e108f1ab126abfbe121850e3fcd8a3f7ec9957c42735"
+    },
+    "controls-in-progress.json": {
+      "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/reused-policy1/controls-in-progress.json",
+      "sha256": "ff064e1e3ebdf098a4945df296a0dc6550102144d602f529d35b32e20eae4d4b"
+    },
+    "helper-used.py": {
+      "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/reused-policy1/helper-used.py",
+      "sha256": "f5461ba793c28da589afc9a75289156a42eb339ca8a453ff4f53ff70881093c3"
+    },
+    "host.json": {
+      "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/reused-policy1/host.json",
+      "sha256": "51be03f870b6f0ed37973d15100b2eb40cf452fb5cf68e5dad3510fa9d0bbb03"
+    },
+    "positive-rows-in-progress.json": {
+      "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/reused-policy1/positive-rows-in-progress.json",
+      "sha256": "d6dfd6936b3b3faa29eb2731459df8507c9cb37f22097660a1b08be4937f35fd"
+    },
+    "rustc-version.stdout": {
+      "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/reused-policy1/rustc-version.stdout",
+      "sha256": "f4679d0dda28ffcd994b39583743b88e06b6fe4a89fd7359aa1d147e5e660f11"
+    },
+    "source-lock-manifests.json": {
+      "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/reused-policy1/source-lock-manifests.json",
+      "sha256": "579bb5b7fb6ef2c79104ed5addbbc1b75c3eb135ca73c8e5efde4db10e3c27b2"
+    }
+  },
+  "run-sys-net-policy2.py": {
+    "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/run-sys-net-policy2.py",
+    "sha256": "279f6e0b8de15d41693f53c1b73848d4813f6c7a64db2575da3adfa54b128ede"
+  },
+  "run_scoped.py": {
+    "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/runner/tools/run_scoped.py",
+    "sha256": "9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d"
+  },
+  "source.tar": {
+    "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy2/source.tar",
+    "sha256": "551c03dbe3f4550db1b144b3e65d83f5bc66c132c1a9cffa59c83fce16bc41e1"
+  }
+}
