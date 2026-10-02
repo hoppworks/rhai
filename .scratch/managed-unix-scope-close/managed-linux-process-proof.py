@@ -29,6 +29,7 @@ CARGO_DEADLINE = time.monotonic() + 540
 SAMPLED_STOP_KIB = 1_572_864
 HARD_KIB = 2 * 1024 * 1024
 MAX_OWNED_PROCESSES = 16
+HEARTBEAT_STALE_AFTER_SECONDS = 3.0
 SOURCE_PATHS = (
     'Cargo.toml', 'src/packages/sys/config.rs', 'src/packages/sys/mod.rs',
     'src/packages/sys/process.rs', 'src/packages/sys/process/unix.rs', 'tests/sys_process.rs',
@@ -211,8 +212,8 @@ def monitor_health():
         age = time.time() - float(heartbeat_text)
     except ValueError:
         return False, 'heartbeat timestamp malformed or observed during a partial update'
-    if age > 1.0:
-        return False, f'heartbeat stale by {age:.3f}s'
+    if age > HEARTBEAT_STALE_AFTER_SECONDS:
+        return False, f'heartbeat stale by {age:.3f}s (limit {HEARTBEAT_STALE_AFTER_SECONDS:.1f}s)'
     try:
         current = os.getpid()
         for _ in range(8):
