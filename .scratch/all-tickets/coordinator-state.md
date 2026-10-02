@@ -86,7 +86,7 @@ Current authoritative history through this rewrite is Git commit
 10d4a0d55400ebe8c24feff134e7161ff36bf8d5, this same state path. It retains
 all earlier cause/attempt/resource/source applicability records. Read that
 history for consumed work, not superseded next actions. No reset occurred.
-Last independently read-back fork mainc62b2f05efd761e79be16c2d10d794f9da7b487c; only remote main, lowercase
+Last independently read-back fork main8e0edeec187470064ce7344d89f36459a951f5ff; only remote main, lowercase
 human author/committer. Goal active and incomplete.
 
 ### Accepted current Linux non-process package
@@ -249,48 +249,51 @@ not extend Expert09/Windows/native budgets. Read actual handle before continuing
 
 ### Next actions and turn classification
 
-Mac5ed13 source review accepted; Darwin exact staged dispatch waits live E2E;
-Windows owner proceeds to existing bounded source-fixture execution after fresh
-preflight. Allocate actual Darwin native run only after exact source/helper/lock/
-contract/toolchain/slot/runtime checks. Preserve all caps and no foreign disruption.
-Previous turn PROGRESS: retained/readback Darwin source review and Windows
-parser/pins/compiler-file prerequisites pushed as67968f30, soleforkmain checked.
-Current PROGRESS: actual exact Darwin pinned stage and empty owned scope prepared;
-command interpreter corrected before launch; foreign Windows heavy-build identities
-subsequently observed absent. Source/native counts unchanged. No native acceptance
-or completion claim. Mac same affected source review terminal accepted. Root later exact PID51269
-stilllive, original worker/browser exited but current descendant worker68636,
-browser68639 and ffmpeg68863 confirm continuing foreign E2E; do not launch heavy.
-Mac wrapper source readiness has real unsafe unmodified globalrunner0.2s PGID
-teardown conflict with separate command custody. Existing project-local runner-copy
-authorization permits responsible assessment of custody-aware owned copy, no global
-edit or cap/control allowance increase; preserve safe solecustodian and all limits.
-Fix interpreter/contract/readiness only from valid original refs, not stale labels.
-Windows preflight keyboard24475 terminal: owned run-parent missing, candidate
-monitor-source-e4ca75a61838492e8d9eadc22fcf2855 absent, free70739865600bytes,
-script19c unchanged. Exact owned parent creation typing54841 live, no duplicate.
-Previous user-status turn NO PROGRESS toward acceptance: fresh fork readback
-confirmed sole main14702b7 but did not close another implementation requirement.
-This continuation takes the next available source-review action rather than
-repeating status. Exact foreign Playwright51269 start2026-10-02 16:06:31 local
-is live at elapsed51:35; native Mac heavy slot remains occupied. No signals.
-Windows owner final path screenshot confirms owned run-parent Directory/no
-reparse, unique RunRoot absent, free70739865600bytes and unchanged script19c.
-Single frozen invocation typing handle90567 is live, not entered; never duplicate
-typing/launch because observation times out. No compiler/native result yet.
-Current turn PROGRESS: independent Child activation source review terminal,
-two inherited source prerequisites corrected and remaining cleanup repair
-actually dispatched. Windows single frozen invocation Entered once and is now
-terminal at clean console prompt, first compiler step failed. Root independently
-viewed actual /tmp/win9e0-20261002-6f804a9c4c4a4e78/fixture-progress.png and
-retained it once at windows-staging-9e0-root-evidence/first-fixture-result.png.
-Console shows path-policy controls PASS and nested setup-failure control PASS:
-owned child5380 removed by nested job teardown and outer job owner-only. This
-is narrow observed setup-control output, not independent final PID/job closure
-or production/source-batch acceptance. compile-production-runner exited before
-remaining fixture cases; stdout/stderr under exact unique RunRoot logs pending
-readback. Windows keyboard54532 live typing readonly logs query; no rerun.
-All Unix native counts unchanged; goal active, no full acceptance claim.
+Previous goal turn NO PROGRESS toward acceptance: user-requested overall status
+and actual fork readback confirmed sole main8e0edeec, but closed no further
+requirement. Current continuation made concrete source progress: Standard
+CLI45993 is TERMINAL0, correction frozen58dbf90f671281fc9a8845f7546f23f225c34b4b
+in the owned shared-Child slice, lowercase human author and committer verified.
+It catches scenario panics, releases the owned fixture before reaper termination,
+adds a real self-reexec panic-cleanup regression, retains unverified records and
+keeps the broad hard-watchdog/process-custody gap explicitly open. No Cargo or
+native checks ran. Diffcheck passed; rustfmt reports differences including old
+untouched formatting. Watchdog12-to24s is an agent-selected fixture estimate
+adjustment beyond existing18s fixture bound, not an extension of external caps.
+Original report shared-child-cleanup-repair.md and source brief/summary retained
+in that slice. Implementation readiness only, no strict acceptance/integration.
+
+One combined affected independent Expert source review actually launched via
+configured tools/launch.sh, CLIhandle72842, read-only. Exact brief/report/log
+under slice .scratch/process-unix-run/shared-child-cleanup-review*. No descendants,
+heavy build or native launch. Review includes panic receipt authenticity,
+expected-failure test unexpectedly succeeding, production reaper lifetime,
+forced controller death, changed watchdog and earlier constant/output fixes.
+Collect the same live handle; do not restart for an observation timeout.
+
+Mac source owner reports92/92 pure checks, configured Python3.12 wrapper and
+project-local direct-child runner source changes; checking timeout/exception
+edge before freeze. This is unaccepted owner source evidence pending readback
+and combined affected review, not native custody. Root exact ps confirms foreign
+TableTop Playwright51269 original start2026-10-02 16:06:31 still live at1:07:09.
+No heavy Mac run/control allocation; prepared Darwin stage waits actual slot.
+
+Windows single fixture invocation remains terminal at first production-compiler
+failure. Latest owner screenshot logs-result.png shows nested control PID4324/
+child5380 and preserved injected setup exception; root independently viewed the original frame and confirms this narrow log
+content at a clean prompt. It does not prove final PID/job absence. Compiler
+error text is still not exposed. Owner proceeds
+with one narrow read-only log filter and exact filenames/sizes, plus independent
+PID/job closure; no rerun or budget reset. Previous first-fixture result and
+narrow setup-control output retained once at8e0edeec. Diagnose actual compiler
+cause before any correction or later launch.
+
+Next: collect Child review, batch material fixes in responsible source context;
+collect Windows exact diagnostics/closure; freeze/read back Mac runner source
+edge and affected review. Use existing tickets/acceptance criteria. Child
+production/native, broad custody, sync wait-entry, Windows actual production,
+Mac controls/overhead and full release matrix remain open. Unix count84,
+measurement85unlaunched/fourcontrolsunallocated unchanged; Goal active.
 
 ## Resources, counts and cause history
 Unix actual native invocation count84 consumed.82 failed before runtime;
