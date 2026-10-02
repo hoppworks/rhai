@@ -876,10 +876,10 @@ docs-only change; manual source review supplies coverage of the changed doc.
 No build/native85 dispatch. Previous reviewer-spawn thread-limit failure created
 no agent; existing independent Mac owner performed the review.
 
-Current continuation: previous status-only turn is NO PROGRESS; this continuation
-revalidated live responsible agents and advances immutable source correction and
-missing Darwin behavior preparation. Last integrated root/fork main is
-abbad1ec2d2dac83b64a481b7c8580d5ea95304c; fresh ls-remote confirms sole main.
+Current continuation: previous turn PROGRESS: immutable affected review closes
+three source findings and reproduces remaining action race; source acceptance
+preparation dispatched and evidence pushed. Root/fork main be4ff8dc6ea8aac011656e63afedf3571ccdedad
+was independently read back as sole remote main. This turn continues same scope.
 Linux nine-row non-process package remains accepted601 at unchanged production
 inputs. Process/full release remains open.
 
@@ -919,8 +919,11 @@ Before transfer its exact archive Test-Path=False was independently recorded by
 owner; owner announces launch of the single finite GET. Single GET launched with curl --connect-timeout5/--max-time30; owner and root
 independently view original curl-return.png at /tmp/win9e0-20261002-6f804a9c4c4a4e78/,
 SHA2f8537a536ddf05975fe2028ae0974068eacc9f0d181b9b51b6861342cec7f50:
-100%/12.75M and returned clean prompt. This consumes the one GET; exact status,
-length/hash and original guest prerequisite receipts await readback; never duplicate on observation timeout.
+100%/12.75M and returned clean prompt. Owner records terminal status0 and exact
+13380569bytes/SHA8291; root independently viewed hash-result.png and hashed both
+frames, accepted only immutable archive transfer. Original two frames retained once
+in windows-staging-9e0-root-evidence/ with root-readback.json. This consumes one GET;
+no live transfer handle/no retry. Extraction and guest prerequisite receipts pending; never duplicate on observation timeout.
 Then length/hash, selective extraction17pins, PS5.1 parser/path controls and exact
 pinned Roslyn read-only check only. No compiler/bootstrap/job/client/fixture/native
 before root prerequisites readback. ExistingExpert02/history/caps and nonrenewable
@@ -934,14 +937,22 @@ TDD helper/contract preparation first, no Cargo/toolchain/native launch before
 source review and one-per-machine slot dispatch. Unaffected accepted Darwin
 compiler/examples reused; old sys-only proof does not certify current alias/combined
 rows. Source prepare30min active planning checkpoint with preserved cause/resources.
+Prepared Darwin runner frozen2d52bf0b87a684b87222436795dcfc73875a7ce8, clean owned
+worktree. Five files: helper/contract/cleanup readback/pure tests/prep receipt;
+nine rows/five controls reported. Full combined independent Expert review dispatched
+from briefs/current-darwin-sys-net-source-review.md, focused on actual coverage,
+EILSEQ internal successful skips versus ignored counts, meaningful controls and
+resource/custody/export/private output paths. No source integration or native launch
+until reviewed. Existing accepted compiler/examples retained unchanged by reference.
 Root, current Mac/Windows owners, independent reviewer and new Darwin owner loaded revision958a4538;
 new owner explicitly read disk globals/project/campaign/TDD/e2e/roles/template and
 has no descendants. Existing independent reviewer is rechecking frozen source only.
 
-This turn PROGRESS: exact b1e05 source correction/full78 proof collected and affected
-independent recheck dispatched; separate missing Darwin feature acceptance source
-preparation dispatched in own isolated worktree. Native controls and release not
-accepted. Goal active/incomplete. Next: collect review, integrate only verified frozen
-source/original receipts; read Windows actual transfer prerequisites; close concrete
-remaining source readiness before separately allocated finite controls, retain
-measurement gate until actual controls pass.
+This turn PROGRESS: independently accepted exact Windows immutable archive transfer
+with terminal status0/length/hash and original guest frames; prepared Darwin
+acceptance source2d52 collected and combined source review dispatched. Remaining
+Mac source finding4 being repaired using stopped-host remaining-per-stream output
+witness; SDK pipe maximum and stale read allowance require actual source implication,
+not inference from aggregate task count. No native/custody/release acceptance.
+Next: collect Darwin source review and Mac frozen repair; complete Windows selective
+extraction/pins/parser/path/Roslyn readback before compiler/client work. Goal active.

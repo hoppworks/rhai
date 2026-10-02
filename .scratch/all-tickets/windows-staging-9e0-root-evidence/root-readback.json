@@ -1,0 +1,24 @@
+{
+  "source_revision": "9e0e84e8e531e0b64859f613bb4b1bc64f804d42",
+  "domain": "rhai-win11-quality",
+  "destination": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\w9e0-20261002-6f804a9c4c4a4e78\\rhai-source.zip",
+  "get_launches_this_route": 1,
+  "get_terminal": true,
+  "exit_status": 0,
+  "archive_bytes": 13380569,
+  "archive_sha256": "8291e58652a7dc8494513d910460e6dae39a716f5dfca937bda40fafcfa0caa4",
+  "independent_verification": "Root visually read the exact curl command/destination, completed progress and clean prompt; subsequent exact destination length and Get-FileHash SHA256 match the existing host frozen archive receipt.",
+  "frames": {
+    "curl-return.png": {
+      "original_path": "/tmp/win9e0-20261002-6f804a9c4c4a4e78/curl-return.png",
+      "sha256": "2f8537a536ddf05975fe2028ae0974068eacc9f0d181b9b51b6861342cec7f50"
+    },
+    "hash-result.png": {
+      "original_path": "/tmp/win9e0-20261002-6f804a9c4c4a4e78/hash-result.png",
+      "sha256": "57157fb765cbcd78cf3df78cc2a8a6c4a6e8d889ffdeabd7da259211c2e640c9"
+    }
+  },
+  "acceptance_scope": "Immutable archive transfer only. Extraction, harness pins, parser, path controls, Roslyn prerequisites, native custody and production behavior remain unaccepted.",
+  "no_compiler_job_client_fixture_execution_authorized_by_receipt": true,
+  "preserved_limits": "One GET consumed; no retries. Existing Expert02 history and nonrenewable client30min allocation unchanged."
+}
