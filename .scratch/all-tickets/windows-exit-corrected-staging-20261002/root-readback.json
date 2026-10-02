@@ -1,0 +1,22 @@
+{
+  "source_revision": "2c9cc6fedda4647fac12dc404363610134a92ec1",
+  "guest_scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\w2c9-20261002-cfe0128fbd4b",
+  "harness_filename": "fixtures.ps1",
+  "harness_sha256": "37dac20385ce3251c671960add4e43a5cde18ac5d52a42eae6827ffd2921543a",
+  "transfer_bytes": 40180,
+  "native_parser_errors": 0,
+  "root_readback": "Full transfer command checked visually before Enter. Native final output hash matches integrated file; parser_errors=0 followed by clean prompt. No new command error. Single transfer/readback invocation each.",
+  "source_pin_check": "17/17 C# pins match integrated source locally; C# paths unchanged since9e0e84e8. Prior guest content evidence remains narrow, not a fresh guest pin check.",
+  "evidence": {
+    "root-transfer-full-20261002.png": "1d7ae4328d23bdbff2e0e6353bad17f82cf030ed33306688528ecee66d11d0e5",
+    "root-readback-result-20261002.png": "0223cd10e5c5c431d995eb3235ca3c2f23aa22680ddcef3e459eb01b374afff8"
+  },
+  "native_fixture_invocations_this_step": 0,
+  "not_proven": [
+    "real child exit statuses",
+    "fixture compilation or execution",
+    "job/watchdog accounting and cleanup",
+    "Windows Rust I/O or production Engine behavior"
+  ],
+  "retention": "Exact own harness scope retained for the next reviewed source-fixture route; old scope/evidence untouched."
+}

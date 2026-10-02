@@ -1,0 +1,1 @@
+$ErrorActionPreference='Stop';$f=join-path $p 'fixtures.ps1';get-filehash $f -algorithm sha256|select-object hash;$t=$null;$e=$null;[System.Management.Automation.Language.Parser]::ParseFile($f,[ref]$t,[ref]$e)|out-null;'parser_errors='+$e.count

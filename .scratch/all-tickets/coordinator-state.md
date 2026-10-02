@@ -441,6 +441,44 @@ the owner's development consolidation authorization; parent acceptance stays ope
 Goal remains active; independent implementation/acceptance work exists, so no
 blocked audit or completion claim is warranted.
 
+
+### Current corrected Windows staging acceptance — 2026-10-02
+
+Previous goal turn PROGRESS: Windows and Child development integration pushed,
+sole forkmain readback at2c9cc6fedda4647fac12dc404363610134a92ec1. Current turn
+PROGRESS: native corrected harness transfer/hash/parser prerequisite closed.
+Current rules revision958a4538 unchanged. Native collaboration inventory root
+only active; all three children completed, no unupdated active descendants.
+Root now sole guest input owner for this continuation; prior owner is terminal.
+Fresh VM state running; first screenshot black, one harmless Shift wake restored
+same clean ConsoleHost prompt. No restart or credentials. No prior typing replay.
+Owned absent new scope C:\Users\RhaiTest\.local\share\agent-builds\rhai\w2c9-20261002-cfe0128fbd4b created exclusively after test-path rejection of any
+existing scope. Single fixed fork2c9 raw-file GET, curl --fail/--max-time60,
+40180bytes, completed prompt. Exact full typed command visually checked before
+Enter; no execution of received script. Read-only native Get-FileHash and
+Parser.ParseFile then executed once: actual SHA37dac20385ce3251c671960add4e43a5cde18ac5d52a42eae6827ffd2921543a,
+parser_errors=0, no new errors, clean prompt. Source and target SHA match.
+Original two accepted frames retained once with root-readback.json and exact
+commands under windows-exit-corrected-staging-20261002/. Own scope contains only
+fixtures.ps1 and is retained for reviewed future staging; old source/runtime,
+compiler diagnostics and failed invocation untouched. Local17/17 C# pins match;
+C# code is byte unchanged against9e0e84e8. This is not a fresh guest17-pin readback.
+Typing sessions54860 and67655 TERMINAL0, no running input command. No Cargo,
+compiler, fixture, real-client or process workload launched. All native counts,
+Expert02 nonrenewable30min and one-hour source-fixture policy/history preserved.
+Exact native slot observations: Mac foreign Playwright51269/start16:06:31local
+alive elapsed1:53:41; workhorse foreign make3378458/start17:45:33 and
+cargo-nextest3382341/start17:45:38 alive elapsed14:39/14:33, same owned Tauron
+cwd from prior observation. No signal/restart/cleanup of foreign resources.
+Next: when the workhorse slot is actually free, reconcile the existing source
+package's cumulative allowance and actual human authorization, then check exact
+new RunRoot/non-reparse ancestors/free storage, fresh17 guest pins and compiler,
+and execute only the already reviewed finite route within remaining caps.
+New hash/parser evidence does not authorize a budget reset or prove cleanup.
+Mac independent sys/net acceptance remains ready but heavy slot occupied;
+process-overhead cause09 stays stopped after third rejected source candidate.
+Goal remains active and incomplete; this step does not claim any feature done.
+
 ## Resources, counts and cause history
 Unix actual native invocation count84 consumed.82 failed before runtime;
 83 measurementCargo0 but originalouter1 due optional cmdline receipt validation.
