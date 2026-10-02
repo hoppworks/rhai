@@ -328,6 +328,26 @@ this is not consumed work or peak use. No failed correction for policy cause yet
 Next collect/review Mac fix and observe foreign slot; launch only reviewed
 Linux package when slot is clear. Processcount84/measurementguardfalse unchanged.
 
+Latest continuation: PROGRESS after the preceding status-only turn (NO PROGRESS
+for goal acceptance). Mac c3ac2573 affected correction independently reviewed,
+all6/6 OCR-selected files plus excluded logs and dependent receipt/companion
+callers; both source findings resolved. Integrated only nine private harness,
+overlay and original evidence files; production manifest/Unix exactly equal
+frozen00bed baseline and were not copied or rolled back. Independent root pure
+68/68 pass at macos-managed-observer-correction-root-pure.log, scoped0/runtime
+absent, exact empty root-macos-observer-pure-20261002-1 scope removed. Review
+macos-managed-observer-review.md distinguishes source closure from still-open
+native ABI/confinement/live capture acceptance. No native85 or measurement.
+Foreign workhorse1803689/1803690/1803691 freshly alive, heavy slot still occupied;
+no policy launch. Latest human AGENTS replacement (owned cleanup without default
+six-hour retention, no new legacy cache/output writes) adopted; instructions sent
+to all three reachable completed owners for their next active safe checkpoint.
+No owner restarted solely for reload; acknowledgements remain pending.
+Next responsible Mac context reconciles the stale prerequisite record against
+accepted source evidence and closes the concrete remaining tool/confinement
+source gaps under existing Expert09, without native dispatch or another review
+chain. Root renews exact Linux heavy-slot inventory before policy1 launch.
+
 ## Current-source core MSRV package — accepted narrow gate
 Current default-core applicability CLOSED for source52d9797b, Rust/Cargo1.66.0,
 Darwin arm64, exact v3 lock. Real Engine42, spawn reserved withoutsys, wrong43

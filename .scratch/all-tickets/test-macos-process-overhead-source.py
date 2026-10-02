@@ -5,6 +5,7 @@ import json
 import os
 import socket
 import subprocess
+import shutil
 import tempfile
 import threading
 import unittest
@@ -207,6 +208,112 @@ class EnvironmentTests(unittest.TestCase):
             with self.subTest(key=key, value=value), self.assertRaisesRegex(ValueError, "evidence"):
                 custodian.validate_case_evidence("managed", bad)
 
+    def test_managed_capture_receipt_binds_real_read_counters_to_census_pids(self):
+        host = {"pid": 90, "start_seconds": 8, "start_microseconds": 90}
+        fixture = {"pid": 94, "start_seconds": 9, "start_microseconds": 94}
+        receipt = {"schema": 1, "stage": "capturing", "host_pid": 90,
+                   "fixture_pid": 94, "stdout_bytes_read": 4096,
+                   "stderr_bytes_read": 2048}
+        bound = custodian.bind_managed_capture_receipt(receipt, host, fixture)
+        self.assertEqual(bound["host"], host)
+        self.assertEqual(bound["fixture"], fixture)
+        self.assertEqual(custodian.validate_managed_capture_progress(
+            bound, host, fixture),
+            {"stdout_bytes_read": 4096, "stderr_bytes_read": 2048})
+        for bad in (
+                {**receipt, "host_pid": 91},
+                {**receipt, "fixture_pid": 95},
+                {**receipt, "stdout_bytes_read": 0},
+                {**receipt, "stderr_bytes_read": True},
+                {**receipt, "extra": "not from the capture reader"},
+                {**receipt, "stage": "starting"}):
+            with self.subTest(receipt=bad), self.assertRaisesRegex(ValueError, "capture (?:receipt|progress receipt)"):
+                custodian.bind_managed_capture_receipt(bad, host, fixture)
+
+    def test_managed_companion_enables_private_capture_observer_only_for_control_build(self):
+        source = SOURCE.read_text(encoding="utf-8")
+        companion_build = source[source.index("companion_build = cargo_build_argv"):
+                                 source.index("companion_log =", source.index("companion_build = cargo_build_argv"))]
+        self.assertIn("'testing-environ,sys,sys-process-capture-observer'", companion_build)
+        self.assertNotIn("sys-process-capture-observer", module.measurement_cargo_argv())
+        production_manifest = (SOURCE.parents[2] / "Cargo.toml").read_text(encoding="utf-8")
+        production_rust = (SOURCE.parents[2] / "src/packages/sys/process/unix.rs").read_text(
+            encoding="utf-8")
+        self.assertNotIn("sys-process-capture-observer", production_manifest)
+        self.assertNotIn("sys-process-capture-observer", production_rust)
+        self.assertNotIn("publish_capture_progress(", production_rust)
+        overlay_dir = SOURCE.with_name("macos-managed-capture-overlay")
+        manifest = (overlay_dir / "Cargo.toml").read_text(encoding="utf-8")
+        self.assertIn('sys-process-capture-observer = ["sys"]', manifest)
+        rust = (overlay_dir / "unix.rs").read_text(encoding="utf-8")
+        self.assertGreaterEqual(rust.count('#[cfg(feature = "sys-process-capture-observer")]'), 3)
+        observer = rust[rust.index("fn publish_capture_progress("):rust.index("const READ_BUDGET")]
+        for evidence in ("stdout.is_empty()", "stderr.is_empty()",
+                         "std::process::id()", "pid", "stdout.len()",
+                         "stderr.len()", "file.sync_all()", "std::fs::hard_link",
+                         "*published = true"):
+            self.assertIn(evidence, observer)
+
+    def test_private_observer_is_on_successful_run_raw_capture_path(self):
+        overlay_dir = SOURCE.with_name("macos-managed-capture-overlay")
+        rust = (overlay_dir / "unix.rs").read_text(encoding="utf-8")
+        supervise = rust[rust.index("fn supervise("):rust.index("fn fail(", rust.index("fn supervise("))]
+        stdout_read = supervise.index("read_ready(stdout.as_mut().unwrap(), &mut out, limit)")
+        stderr_read = supervise.index("read_ready(stderr.as_mut().unwrap(), &mut err, limit)")
+        out_observer = supervise.index("publish_capture_progress(", stdout_read)
+        err_observer = supervise.index("publish_capture_progress(", stderr_read)
+        self.assertLess(stdout_read, out_observer)
+        self.assertLess(stderr_read, err_observer)
+        stdout_capture = supervise[stdout_read:stderr_read]
+        self.assertIn("driver.child_mut().id()", stdout_capture)
+        self.assertIn("&out", stdout_capture)
+        self.assertIn("&err", stdout_capture)
+        self.assertIn("run_raw", rust)
+        production_rust = (SOURCE.parents[2] / "src/packages/sys/process/unix.rs").read_text(
+            encoding="utf-8")
+        self.assertNotIn("publish_capture_progress(", production_rust)
+
+    def test_managed_control_build_assembles_the_pinned_observer_overlay(self):
+        source = SOURCE.read_text(encoding="utf-8")
+        helper_start = source.index("def prepare_managed_observer_source(")
+        helper_end = source.index("def run_control_only(", helper_start)
+        helper = source[helper_start:helper_end]
+        managed = source[source.index("elif control_case == 'managed':", source.index("def run_control_only(")):
+                          source.index("else:\n        raise RuntimeError('unsupported control client mode')")]
+        self.assertIn("prepare_managed_observer_source(\n            source", managed)
+        self.assertIn("managed_observer_source", managed)
+        self.assertIn("run_anchored_command(fixture_build, source", managed)
+        self.assertIn("run_anchored_command(companion_build, managed_observer_source", managed)
+        self.assertIn("shutil.copytree(base_source, overlay)", helper)
+        self.assertIn("MANAGED_OBSERVER_OVERLAY_SHA256", helper)
+        self.assertIn("MANAGED_OBSERVER_BASE_SHA256", helper)
+        self.assertIn("Cargo.toml", helper)
+        self.assertIn("src/packages/sys/process/unix.rs", helper)
+        self.assertIn("sys-process-capture-observer", helper)
+
+        with tempfile.TemporaryDirectory() as directory:
+            runtime = Path(directory).resolve()
+            base = runtime / "frozen"
+            for relative in module.MANAGED_OBSERVER_BASE_SHA256:
+                destination = base / relative
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(SOURCE.parents[2] / relative, destination)
+            original = {name: (base / name).read_bytes() for name in
+                        ("Cargo.toml", "src/packages/sys/process/unix.rs")}
+            overlay = module.prepare_managed_observer_source(base, runtime / "overlay")
+            artifacts = SOURCE.with_name("macos-managed-capture-overlay")
+            self.assertEqual((overlay / "Cargo.toml").read_bytes(),
+                             (artifacts / "Cargo.toml").read_bytes())
+            self.assertEqual((overlay / "src/packages/sys/process/unix.rs").read_bytes(),
+                             (artifacts / "unix.rs").read_bytes())
+            self.assertEqual({name: (base / name).read_bytes() for name in original}, original)
+
+            bad_base = runtime / "bad-frozen-source"
+            shutil.copytree(base, bad_base)
+            (bad_base / "Cargo.toml").write_text("changed source\n", encoding="utf-8")
+            with self.assertRaisesRegex(RuntimeError, "differs from frozen source"):
+                module.prepare_managed_observer_source(bad_base, runtime / "bad-overlay")
+
     def test_managed_ready_event_requires_host_fixture_and_exact_task_count(self):
         identities = {slot: {"pid": pid, "start_seconds": 8,
             "start_microseconds": pid} for slot, pid in
@@ -251,8 +358,9 @@ class EnvironmentTests(unittest.TestCase):
 
         host = {"pid": 91, "start_seconds": 2, "start_microseconds": 91}
         fixture = {"pid": 93, "start_seconds": 3, "start_microseconds": 93}
-        progress = {"schema": 1, "stage": "capturing", "host": host,
-            "fixture": fixture, "stdout_bytes_read": 17, "stderr_bytes_read": 19}
+        progress = {"schema": 1, "stage": "capturing", "host_pid": host["pid"],
+            "fixture_pid": fixture["pid"], "stdout_bytes_read": 17,
+            "stderr_bytes_read": 19}
         snapshot = custodian.validate_managed_snapshot(rows, 91, 92, 91, 93,
             host_path, fixture_path, progress, Census(), 90)
         self.assertEqual(snapshot["evidence"]["stdout_bytes_read"], 17)
@@ -262,7 +370,7 @@ class EnvironmentTests(unittest.TestCase):
                 ([*rows[:3], {**rows[3], "thread_count": 5}], progress),
                 ([*rows[:3], {**rows[3], "pgid": 91}], progress),
                 (rows, {**progress, "stderr_bytes_read": 0}),
-                (rows, {**progress, "fixture": {**fixture, "start_microseconds": 94}})):
+                (rows, {**progress, "fixture_pid": 95})):
             with self.subTest(changed=changed, capture=capture), self.assertRaises(ValueError):
                 custodian.validate_managed_snapshot(changed, 91, 92, 91, 93,
                     host_path, fixture_path, capture, Census(), 90)
@@ -366,6 +474,11 @@ class EnvironmentTests(unittest.TestCase):
                         raise AssertionError("missing capture progress must stop before census/readiness")
                 _adapter_process_reader = Reader()
 
+            self.assertIsNone(custodian.observe_managed_case_ready(
+                NoCensus(), argv, Gate(), Anchor(), None, custodian.time.monotonic() + 1, runtime))
+            (runtime / "managed-capture-progress.json").write_text(
+                '{"schema":1,"stage":"capturing","host_pid":92,"fixture_pid":93,'
+                '"stdout_bytes_read":4096,"stderr_bytes_read":4096}\n')
             self.assertIsNone(custodian.observe_managed_case_ready(
                 NoCensus(), argv, Gate(), Anchor(), None, custodian.time.monotonic() + 1, runtime))
 

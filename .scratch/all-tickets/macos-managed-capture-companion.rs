@@ -29,7 +29,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let ready = Path::new(&args[2]);
     let fixture_record = &args[3];
     let complete = Path::new(&args[4]);
-    let _capture_progress = Path::new(&args[5]);
+    let capture_progress = Path::new(&args[5]);
+    if !capture_progress.is_absolute() || capture_progress.exists() || capture_progress.is_symlink() {
+        return Err("capture progress path must be a fresh absolute private-runtime file".into());
+    }
+    env::set_var("RHAI_SYS_PROCESS_CAPTURE_PROGRESS", capture_progress);
     let host_pid = std::process::id();
 
     let config = SysConfig::default()
@@ -43,9 +47,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         "run_raw({}, [\"--exact\", \"process_fixture\", \"--nocapture\", \"--quiet\"], #{{ env_clear: true, env: #{{ RHAI_SYS_PROCESS_FIXTURE: \"0\", RHAI_SYS_PROCESS_FIXTURE_RECORD: {}, RHAI_SYS_PROCESS_IO_STRESS: \"1\", RHAI_SYS_PROCESS_IO_BYTES: \"0\", RHAI_SYS_PROCESS_STDOUT_BYTES: \"8388592\", RHAI_SYS_PROCESS_STDERR_BYTES: \"8388608\" }}, stdin: \"\", max_output: 8388608, timeout: 6.0 }})",
         quote(fixture), quote(fixture_record));
 
-    // This marker only brackets entry into eval. The public API exposes stream
-    // bytes after completion, so it cannot provide the live per-stream progress
-    // receipt required by the adapter. No capture-progress receipt is fabricated.
+    // This marker brackets eval entry. The separate control build enables the
+    // private capture observer, which publishes a receipt only after both real
+    // capture readers have consumed bytes.
     write_once(ready, &format!(
         "{{\"schema\":1,\"host_pid\":{host_pid},\"stage\":\"managed-run-entering\"}}\n"))?;
     let result: Map = engine.eval(&script)?;

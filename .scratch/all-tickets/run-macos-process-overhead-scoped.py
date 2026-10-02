@@ -106,6 +106,27 @@ def validate_managed_capture_progress(progress, host_identity, fixture_identity)
     return {key: progress[key] for key in ('stdout_bytes_read', 'stderr_bytes_read')}
 
 
+def bind_managed_capture_receipt(receipt, host_identity, fixture_identity):
+    """Bind private read-path counters to full identities from one native census."""
+    expected = {'schema', 'stage', 'host_pid', 'fixture_pid',
+                'stdout_bytes_read', 'stderr_bytes_read'}
+    if (type(receipt) is not dict or set(receipt) != expected
+            or type(receipt.get('schema')) is not int or receipt['schema'] != 1
+            or receipt.get('stage') != 'capturing'
+            or type(receipt.get('host_pid')) is not int
+            or type(receipt.get('fixture_pid')) is not int
+            or type(host_identity) is not dict or type(fixture_identity) is not dict
+            or receipt['host_pid'] != host_identity.get('pid')
+            or receipt['fixture_pid'] != fixture_identity.get('pid')):
+        raise ValueError('Managed capture receipt does not match the observed host/fixture PIDs')
+    bound = {'schema': 1, 'stage': 'capturing', 'host': dict(host_identity),
+        'fixture': dict(fixture_identity),
+        'stdout_bytes_read': receipt['stdout_bytes_read'],
+        'stderr_bytes_read': receipt['stderr_bytes_read']}
+    validate_managed_capture_progress(bound, host_identity, fixture_identity)
+    return bound
+
+
 def validate_managed_snapshot(rows, gate_pid, anchor_pid, host_pid, fixture_pid,
                               host_path, fixture_path, capture_progress, custody,
                               client_pid=None):
@@ -130,8 +151,10 @@ def validate_managed_snapshot(rows, gate_pid, anchor_pid, host_pid, fixture_pid,
     host_identity = {key: host[key] for key in ('pid', 'start_seconds', 'start_microseconds')}
     fixture_identity = {key: fixture[key] for key in ('pid', 'start_seconds', 'start_microseconds')}
     validate_managed_task_sample(fixture, fixture_identity)
-    stream_progress = validate_managed_capture_progress(
+    bound_capture_progress = bind_managed_capture_receipt(
         capture_progress, host_identity, fixture_identity)
+    stream_progress = validate_managed_capture_progress(
+        bound_capture_progress, host_identity, fixture_identity)
     result = {'gate': host_identity, 'anchor': {key: anchor[key] for key in
             ('pid', 'start_seconds', 'start_microseconds')},
             'managed_host': host_identity, 'fixture': fixture_identity,
@@ -341,6 +364,9 @@ def observe_managed_case_ready(custody, argv, gate, anchor, client_proc, deadlin
     try:
         fixture_pid = int(fields[0].split('=', 1)[1])
     except ValueError:
+        return None
+    if (type(progress) is not dict or progress.get('host_pid') != ready['host_pid']
+            or progress.get('fixture_pid') != fixture_pid):
         return None
     reader = custody._adapter_process_reader
     snapshots = []

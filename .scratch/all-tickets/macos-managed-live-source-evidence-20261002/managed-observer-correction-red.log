@@ -1,0 +1,23 @@
+command=['/Applications/Xcode.app/Contents/Developer/usr/bin/python3', '/Users/hoppworks/projects/agent-skills/tools/run_scoped.py', '--timeout', '120', '--', '/Applications/Xcode.app/Contents/Developer/usr/bin/python3', '/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py', 'EnvironmentTests.test_managed_companion_enables_private_capture_observer_only_for_control_build', 'EnvironmentTests.test_private_observer_is_on_successful_run_raw_capture_path']
+expected_red_exit=1
+FE
+======================================================================
+ERROR: test_private_observer_is_on_successful_run_raw_capture_path (__main__.EnvironmentTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py", line 263, in test_private_observer_is_on_successful_run_raw_capture_path
+    out_observer = supervise.index("publish_capture_progress(", stdout_read)
+ValueError: substring not found
+
+======================================================================
+FAIL: test_managed_companion_enables_private_capture_observer_only_for_control_build (__main__.EnvironmentTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py", line 249, in test_managed_companion_enables_private_capture_observer_only_for_control_build
+    self.assertGreaterEqual(rust.count('#[cfg(feature = "sys-process-capture-observer")]'), 3)
+AssertionError: 0 not greater than or equal to 3
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.002s
+
+FAILED (failures=1, errors=1)

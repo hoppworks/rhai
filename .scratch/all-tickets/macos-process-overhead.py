@@ -12,6 +12,14 @@ SDKROOT=Path('/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platfo
 XCODE_TOOLS=Path('/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin')
 LOCK_SHA='8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa'
 OVERLAYS=['Cargo.toml','src/packages/sys/config.rs','src/packages/sys/mod.rs','src/packages/sys/process.rs','src/packages/sys/process/unix.rs','tests/sys_process.rs']
+MANAGED_OBSERVER_OVERLAY_SHA256={
+    'Cargo.toml':('Cargo.toml','4e8b305d4fd30889adbb2e1c03d6461a6c3efd58ad5ac55327c2f3523c584579'),
+    'unix.rs':('src/packages/sys/process/unix.rs','07ff4c6b3bdd6ae2b5ad4d7e5a9854faa3092178b432242ec5078e3f3bbe4190'),
+}
+MANAGED_OBSERVER_BASE_SHA256={
+    'Cargo.toml':'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec',
+    'src/packages/sys/process/unix.rs':'1b60751c6d9ed695f79edc4f8a7972338274684ef53583bd1ea1009c1aca822a',
+}
 REVIEWED_BUILD_CANDIDATES={
     ('ahash','0.8.12'), ('cap-primitives','4.0.3'), ('cap-std','4.0.3'),
     ('const-random-macro','0.1.16'), ('crunchy','0.2.4'),
@@ -396,6 +404,39 @@ def run(argv,path,deadline,env,source):
     if status!=0: raise RuntimeError('direct Cargo measurement failed; no retry')
     return status,out.decode(errors='replace')
 
+def prepare_managed_observer_source(base_source, overlay):
+    """Copy frozen source and overlay only the reviewed private observer files."""
+    base_source=Path(base_source).resolve(strict=True)
+    overlay=Path(overlay).resolve()
+    if overlay.exists() or overlay.is_symlink():
+        raise RuntimeError('Managed observer source overlay path already exists')
+    shutil.copytree(base_source, overlay)
+    for relative, expected in MANAGED_OBSERVER_BASE_SHA256.items():
+        if sha(base_source/relative)!=expected:
+            raise RuntimeError(f'Managed observer base source differs from frozen source: {relative}')
+    overlay_artifacts=Path(__file__).with_name('macos-managed-capture-overlay')
+    for artifact, (relative, expected) in MANAGED_OBSERVER_OVERLAY_SHA256.items():
+        source_file=overlay_artifacts/artifact
+        destination=overlay/relative
+        if not source_file.is_file() or sha(source_file)!=expected:
+            raise RuntimeError(f'Managed observer source differs from its reviewed pin: {relative}')
+        shutil.copyfile(source_file, destination)
+        if sha(destination)!=expected:
+            raise RuntimeError(f'Managed observer overlay copy failed its source pin: {relative}')
+    manifest=(overlay/'Cargo.toml').read_text(encoding='utf-8')
+    base_manifest=(base_source/'Cargo.toml').read_text(encoding='utf-8')
+    feature_block=('## Enable an internal per-stream read counter for the standalone Managed capture control.\n'
+        '## This feature is excluded from the frozen measurement build.\n'
+        'sys-process-capture-observer = ["sys"]\n')
+    unix_source=(overlay/'src/packages/sys/process/unix.rs').read_text(encoding='utf-8')
+    supervise=unix_source[unix_source.index('fn supervise('):unix_source.index('fn fail(',unix_source.index('fn supervise('))]
+    if (manifest.count(feature_block)!=1
+            or manifest.replace(feature_block,'')!=base_manifest
+            or 'publish_capture_progress(' not in supervise):
+        raise RuntimeError('Managed observer overlay lacks the run_raw capture hook')
+    return overlay
+
+
 def run_control_only(control_case, env, deadline, source):
     """Run one finite setup/build workload and stop before the measurement path."""
     if control_case == 'setup':
@@ -414,6 +455,8 @@ def run_control_only(control_case, env, deadline, source):
                                 '--test', 'sys_process', '--no-run')
         output = RUNTIME/'build-control.out'
     elif control_case == 'managed':
+        managed_observer_source=prepare_managed_observer_source(
+            source, RUNTIME/'managed-observer-source')
         fixture_build = cargo_build_argv('test', '--features', 'testing-environ,sys',
             '--test', 'sys_process', '--no-run', '--message-format=json-render-diagnostics')
         fixture_log = RUNTIME/'managed-fixture-build.out'
@@ -427,16 +470,17 @@ def run_control_only(control_case, env, deadline, source):
         companion_source = Path(__file__).with_name('macos-managed-capture-companion.rs')
         if not companion_source.is_file():
             raise RuntimeError('Managed companion source is missing')
-        examples = source/'examples'
+        examples = managed_observer_source/'examples'
         examples.mkdir(exist_ok=True)
         companion = examples/'macos-managed-capture-companion.rs'
         shutil.copyfile(companion_source, companion)
         companion_build = cargo_build_argv('build', '--offline',
-            '--features', 'testing-environ,sys', '--example', 'macos-managed-capture-companion',
+            '--features', 'testing-environ,sys,sys-process-capture-observer',
+            '--example', 'macos-managed-capture-companion',
             '--message-format=json-render-diagnostics')
         companion_log = RUNTIME/'managed-companion-build.out'
         companion_stderr = RUNTIME/'managed-companion-build.stderr'
-        status, data = run_anchored_command(companion_build, source, env, companion_log,
+        status, data = run_anchored_command(companion_build, managed_observer_source, env, companion_log,
             min(deadline, time.monotonic()+540), stderr_path=companion_stderr,
             closure_deadline=deadline, include_stderr=False)
         if status:
@@ -450,7 +494,7 @@ def run_control_only(control_case, env, deadline, source):
                 str(complete), str(capture_progress)]
         output = RUNTIME/'managed-host.out'
         print(f'control_case=managed control_argv={argv!r}', flush=True)
-        run_anchored_command(argv, source, env, output,
+        run_anchored_command(argv, managed_observer_source, env, output,
             min(deadline, time.monotonic()+20), closure_deadline=deadline)
         raise RuntimeError('Managed host ended before the exact live stream readiness stop')
     else:

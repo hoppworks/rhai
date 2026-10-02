@@ -1,0 +1,67 @@
+{
+  "schema_version": "1",
+  "mode": "range",
+  "repository": "/Users/hoppworks/.codex/worktrees/all-tickets-continuation/rhai",
+  "from": "c2829b1e148a54d6225b2a821835feb5061dd64f",
+  "to": "c3ac25738b76d304dc8c60c661a9a36a73704fa8",
+  "merge_base": "c2829b1e148a54d6225b2a821835feb5061dd64f",
+  "total_files": 8,
+  "reviewable_count": 6,
+  "excluded_count": 2,
+  "total_insertions": 5820,
+  "total_deletions": 84,
+  "reviewable_files": [
+    {
+      "path": ".scratch/all-tickets/macos-managed-capture-overlay/Cargo.toml",
+      "status": "added",
+      "insertions": 222,
+      "deletions": 0
+    },
+    {
+      "path": ".scratch/all-tickets/macos-managed-capture-overlay/unix.rs",
+      "status": "added",
+      "insertions": 5438,
+      "deletions": 0
+    },
+    {
+      "path": ".scratch/all-tickets/macos-process-overhead.py",
+      "status": "modified",
+      "insertions": 46,
+      "deletions": 3
+    },
+    {
+      "path": ".scratch/all-tickets/test-macos-process-overhead-source.py",
+      "status": "modified",
+      "insertions": 74,
+      "deletions": 7
+    },
+    {
+      "path": "Cargo.toml",
+      "status": "modified",
+      "insertions": 0,
+      "deletions": 3
+    },
+    {
+      "path": "src/packages/sys/process/unix.rs",
+      "status": "modified",
+      "insertions": 4,
+      "deletions": 71
+    }
+  ],
+  "excluded_files": [
+    {
+      "path": ".scratch/all-tickets/macos-managed-live-source-evidence-20261002/managed-observer-correction-green.log",
+      "status": "added",
+      "insertions": 13,
+      "deletions": 0,
+      "exclude_reason": "unsupported_ext"
+    },
+    {
+      "path": ".scratch/all-tickets/macos-managed-live-source-evidence-20261002/managed-observer-correction-red.log",
+      "status": "added",
+      "insertions": 23,
+      "deletions": 0,
+      "exclude_reason": "unsupported_ext"
+    }
+  ]
+}

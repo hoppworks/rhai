@@ -26,3 +26,27 @@ performed. Launch guard remains false, native allocation count remains84.
 No claim of live dual-stream read progress or Darwin identity binding is accepted.
 Fix batch returned to the responsible owner; independent affected-path recheck
 and native prerequisites remain required before control execution.
+
+## Corrected increment and independent replay
+
+Rechecked immutable c3ac25738b76d304dc8c60c661a9a36a73704fa8 against c2829b1e.
+All six OCR-selected files reviewed, plus the two excluded RED/GREEN logs and
+the earlier receipt-binding/companion callers. Correction preview and rules are
+`macos-managed-observer-correction-{preview,rules}.json`; coverage is 6/6 (100%).
+Both blocking findings are resolved in source. The pinned private manifest and
+Unix overlay are assembled separately; successful synchronous `supervise` reads
+publish positive counts for both streams. Atomic no-overwrite publication binds
+the host/fixture PIDs to the existing complete native identity census. Publication
+errors take the existing bounded failure/cleanup path. The observer is absent
+from production and the frozen measurement command/source. Production manifest
+and Unix source exactly equal the 00bed4 baseline; no rollback is integrated.
+The overlay also retains two harmless read-result local bindings in the unused
+spawn capture path, without observer calls there.
+
+Root independently replayed the integrated pure suite: 68/68 pass, scoped exit0,
+runtime removed and exact empty scope retired. Original output is
+`macos-managed-observer-correction-root-pure.log`. This checks real private-source
+assembly/nonmutation and rejects altered frozen input, alongside protocol and
+counter controls. No material source finding remains. No Cargo/native fixture,
+interruption control or measurement ran; ABI, actual confinement and live-capture
+acceptance remain open. Native process allocation84 and false guard unchanged.
