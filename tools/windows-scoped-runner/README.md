@@ -1,9 +1,182 @@
 # Candidate Windows monitor/client custody source
 
+## Separate native acceptance route (source only)
+
+`MonitorAcceptanceDriver` is a separate route prepared for later Windows guest
+acceptance; it is not part of `fixtures/RunSourceFixtures.ps1`, and it has not
+been compiled or executed. It launches the public `ScopedRunner.exe
+--lease-client`, transfers the canonical immutable `RHAI-LAUNCH/1`
+specification, and answers fresh monitor challenges. `success` requires a
+single-deadline bounded journal readback, canonical CRC32 frames, the exact
+ordered completion grammar, linked allocation/evidence identities,
+independently hashed evidence files, matching expected payload and client exit
+codes, confirmed cleanup, and an absent runtime directory.
+`--expected-payload-exit HEX` is mandatory and must be the exact expected
+eight-digit payload exit value. EOF or disconnect does not count as successful
+protocol coverage.
+
+The native route uses a separate controller job with fixed active-process,
+per-process-memory, and job-memory limits. The controller job grants breakaway
+capability to eligible children; this launch path uses it for the detached
+monitor while retaining the real `--lease-client` process until completion or
+the driver's 180-second whole-driver monotonic deadline. That deadline covers
+protocol I/O, client exit, journal inventory/readback, evidence hashing, and
+job disposition. An exact-current-process watchdog stays armed for that entire
+interval, including bounded reader joins and cleanup; on expiry it terminates
+the retained driver process handle, leaving the main thread as the sole
+controller-job handle owner. The escaped monitor has its own
+production 30-minute absolute deadline, 30-second termination deadline, and
+30-second finalization deadline; it watches the client's real process handle
+and owns payload cleanup. The payload job does not grant breakaway; it uses its
+own kill-on-close containment. The driver refuses to start inside an ambient job because the
+existing source-fixture harness deliberately uses a no-breakaway containment
+job. The driver is a separate bounded guest launch route, never a child of that
+source-fixture harness. `disconnect-alive`, `client-death`, and `replay` are finite negative
+controls. Their observed journals and exact exit/cleanup diagnostics are
+controls, never successful protocol coverage. They act only after four fresh
+post-transfer challenges, spanning setup, create, resume, and a Running lease
+renewal in the current monitor protocol. Each negative control requires
+its explicit driver action, exact `MonitorStopped` outcome, client exit
+(`client-death` is 1; the other modes are 78), payload exit `0000007D` from
+the monitor's `TerminateJobObject(..., 125)` action, cleanup receipt, and
+removal readback. This negative-control contract assumes the payload was
+created before the host action; missing or contradictory payload termination
+evidence fails closed. Journal inventory ambiguity,
+malformed/torn records, CRC mismatch, or an unbounded journal fail closed. The
+job flag allows eligible children to break away; source does not prove the
+detached monitor is the only child that could do so. Cleanup clears
+kill-on-close only after the exact client has exited and job accounting reports
+exactly the driver process. If that check or a cleanup API fails, the job
+remains kill-on-close and final status fails.
+
+### Compile and launch custody route (source only; not executed)
+
+The existing `RunSourceFixtures.ps1` output is reusable only when its retained
+`build/ScopedRunner.exe` was produced from the exact nine production-source
+hashes pinned by that harness and the accepted monitor-source checkpoint. Keep
+that fixture run directory intact. Copy that exact runner into a fresh direct
+child of `C:\RhaiQuality\runs` named `monitor-driver-<32 lowercase hex>` and
+record/read back its SHA-256. Copy the nine pinned production sources,
+`MonitorAcceptanceDriver.cs`, and
+`fixtures/MonitorAcceptanceDriverFixture.cs` into that run's private `input`
+tree; verify every frozen source hash before invoking the existing compiler at
+`C:\BuildTools\MSBuild\Current\Bin\Roslyn\csc.exe`. Compile both outputs
+into the run's `build` directory with bounded stdout/stderr files and the
+existing 180-second per-compiler ceiling:
+
+The dependency freeze for this route is the nine-file source manifest in
+`RunSourceFixtures.ps1` (checkpoint `c8c6b18caaa855d2f66e0fc1f84e594d4f1e5e6b`),
+plus the driver and fixture from driver checkpoint
+`5583d7b3de50bb0f8c2706b837d2d4ba64ff9368`. Their SHA-256 values are
+`MonitorAcceptanceDriver.cs`:
+`6e1516897be40b66585b25163bac51f9f283cc8b6b2b8ea3218338cc2d4bf019`, and
+`fixtures/MonitorAcceptanceDriverFixture.cs`:
+`33581ea00e1dc536bf4afdd8842c0a9cc3fdd028514e228c8b1ca776d40e1db0`. Retain
+the unique run root, copied sources, runner and driver binaries, fixture result,
+compiler logs, and hashes for inspection; do not reuse or delete it after a
+failed run.
+
+```text
+csc.exe /target:exe /main:MonitorAcceptanceDriver /out:<run>\build\MonitorAcceptanceDriver.exe <nine production sources> MonitorAcceptanceDriver.cs
+csc.exe /target:exe /define:SCOPED_RUNNER_TESTING /main:MonitorAcceptanceDriverFixture /out:<run>\build\MonitorAcceptanceDriverFixture.exe <nine production sources> MonitorAcceptanceDriver.cs MonitorAcceptanceDriverFixture.cs
+```
+
+`fixtures/CompileMonitorAcceptanceDriver.ps1` is the separate compile-only
+wrapper candidate. Its inputs are the source checkout, the retained
+`monitor-source-<GUID>\build\ScopedRunner.exe`, the independently accepted
+build's lowercase SHA-256 as `ExpectedRunnerSha256`, and a fresh
+`C:\RhaiQuality\runs\monitor-driver-<GUID>` root. It verifies the retained
+runner against that supplied accepted-build hash before and after copy,
+verifies the retained source tree against the nine production pins, copies and hashes those files
+plus the driver and pure fixture, compiles the driver and fixture, checks a
+deliberate compiler failure, and runs only the fixture. It retains the runner,
+inputs, outputs, manifest, result and capped compiler/fixture logs. The wrapper
+uses a 4 MiB per-log polling cap, 180-second compiler and fixture waits, and a
+one-hour exact-owner watchdog. Its controller job is no-breakaway, kill-on-close,
+and limited to 1 GiB per process, 2 GiB aggregate and 16 active processes. It
+must query exactly one remaining process before clearing kill-on-close and
+closing the job. Any query, flag-change, or close failure terminates the exact
+controller fail-closed before the watchdog or retained process owner is
+released; if close fails after the flag was cleared, it explicitly terminates
+the exactly-accounted job first. This wrapper source has not been compiled or executed on
+Windows; source-presence tests are scaffolding, not custody proof. The accepted
+source-fixture harness stays unchanged and cannot launch the driver from its
+no-breakaway job.
+
+Only after that compiler owner has exited, launch the driver directly from a
+separately verified uncontained interactive console process. Do not run it
+from `RunSourceFixtures.ps1`, one of its descendants, or another job-contained
+launcher: driver `Main` checks `IsProcessInJob(self, NULL)` and refuses ambient
+job membership. It creates its own controller job, assigns itself before
+creating the `ScopedRunner.exe --lease-client` child, requires that client to
+remain in the controller job, and permits eligible children to break away so
+the detached monitor can refuse ambient membership. The payload job remains
+kill-on-close without breakaway. The escaped monitor retains its independent
+Expert02 absolute and cleanup deadlines; the driver watchdog retains the exact
+driver process handle and its single 180-second monotonic deadline through
+protocol, client wait, journal inventory/readback, evidence hashing, pipe
+joins, and job disposition. The controller job's flag allows any eligible
+child to break away; source does not establish that only the monitor can do so.
+
+The implemented driver modes are `success`, `disconnect-alive`,
+`client-death`, and `replay`. Each sends the immutable specification and exact
+transfer ACKs. Disconnect closes the driver's input after four fresh
+post-transfer challenges; client-death kills the exact client after that
+point; replay re-sends a previously answered challenge after a bounded delay.
+The success validator requires the caller's exact expected payload exit,
+`PayloadExited`, client exit 78, confirmed cleanup/removal, and independent
+evidence hashes. Negative validators require the exact driver action,
+`MonitorStopped`, payload exit `0000007D`, client exit 1 for client-death and
+78 otherwise, confirmed cleanup/removal, and evidence hashes. These are source
+contracts only: no native protocol, process, journal, or evidence behavior has
+been exercised.
+
+The driver's workload path is the public `--lease-client` entrypoint, which
+receives the immutable source/executable specification over the protocol; it
+does not call the refused legacy direct `ScopedRunner.Main --source/--exe`
+path. Subject to compilation and native execution, the driver is intended to
+exercise one ordinary successful payload run plus connection loss while the
+client remains alive, exact client death, and a replayed challenge. The
+negative controls need a created payload to establish the expected
+`TerminateJobObject(..., 125)` result; absent or contradictory termination
+evidence must fail closed. None of these four native cases has been run yet.
+
+The full Expert02 native set remains required under its one-hour outer bound,
+2 GiB job memory cap,
+16-process cap, 2 GiB free-space preflight, and unique retained run root:
+ordinary success with residual-child cleanup, payload failure, lease expiry,
+connection loss while client remains alive, client death, expired/replayed
+challenge, suspended-create/resume failure, nested-job refusal, output cap,
+evidence/readback failure, and cleanup timeout. Every monitor retains the
+fixed 2-second challenge interval, 15-second lease, 120-second setup deadline,
+nonrenewable 30-minute absolute lifetime, 30-second termination/emptiness/
+handle-closure deadline, and shared 30-second evidence-finalization/removal
+deadline. The maximum-lifetime case consumes the full 30 minutes. Record
+elapsed time and storage use separately. Preserve every runtime, evidence
+directory, and journal on failure; diagnose and have root read back preserved
+state before retrying. Host export is not implemented and remains open for all
+four modes; the driver verifies locally retained evidence and reports
+`HOST_EXPORTED=0`.
+
 This checkout contains intermediate Windows source only. It is **not accepted or
-ready to run**. None of the C# sources or fixtures in this substep has been
-compiled or executed, and no package build, guest run, compiler bootstrap,
+ready to run**. The driver parser/control C# fixture is source-only scaffolding;
+its APIs directly exercise the driver's bounded frame decoder and semantic
+validator, but neither it nor any C# source in this substep has been compiled
+or executed. The Python source-presence checks are scaffolding only and do not
+prove those contracts. No package build, guest run, compiler bootstrap,
 installation, or staging backend operation was performed.
+
+The parser/control fixture has its own executable `Main`. Its isolated compile
+route explicitly selects `/main:MonitorAcceptanceDriverFixture` and uses the
+full production source set already declared in `RunSourceFixtures.ps1`:
+`LaunchSpecification.cs`, `LeaseMonitor.cs`, `MonitorPayloadJob.cs`,
+`MonitorSpecificationIntake.cs`, `MonitorStagingHandoff.cs`,
+`MonitorTransport.cs`, `ScopedRunner.cs`, `SpecificationTransfer.cs`, and
+`WindowsCustodyBackend.cs`, plus `MonitorAcceptanceDriver.cs` and
+`fixtures/MonitorAcceptanceDriverFixture.cs`. Compile with
+`/define:SCOPED_RUNNER_TESTING` and place output under the scoped private
+runtime directory. The fixture is not included in `RunSourceFixtures.ps1`;
+neither compile nor execution was performed in this source-preparation step.
 
 `ScopedRunner.exe --lease-client` is the only public source entrypoint. It starts
 a detached monitor with an explicit inherited-handle list containing two pipe
