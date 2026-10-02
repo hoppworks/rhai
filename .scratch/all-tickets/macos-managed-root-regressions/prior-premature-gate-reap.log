@@ -1,0 +1,22 @@
+F
+======================================================================
+FAIL: test_managed_host_signal_defers_gate_reap_until_anchored_group_signal (test-macos-process-overhead-source.EnvironmentTests.test_managed_host_signal_defers_gate_reap_until_anchored_group_signal)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/hoppworks/.local/share/agent-builds/rhai/managed-root-63fe3153ef2c43ecabec9798508dbcba/agent-build-6lwj4q2i/.scratch/all-tickets/test-macos-process-overhead-source.py", line 191, in test_managed_host_signal_defers_gate_reap_until_anchored_group_signal
+    action = custodian.service_controller(controller, "managed", event,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hoppworks/.local/share/agent-builds/rhai/managed-root-63fe3153ef2c43ecabec9798508dbcba/agent-build-6lwj4q2i/.scratch/all-tickets/run-macos-process-overhead-scoped.py", line 244, in service_controller
+    status = signal_and_reap_owned_client(proc, signum, deadline)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hoppworks/.local/share/agent-builds/rhai/managed-root-63fe3153ef2c43ecabec9798508dbcba/agent-build-6lwj4q2i/.scratch/all-tickets/run-macos-process-overhead-scoped.py", line 208, in signal_and_reap_owned_client
+    if proc.poll() is None:
+       ^^^^^^^^^^^
+  File "/Users/hoppworks/.local/share/agent-builds/rhai/managed-root-63fe3153ef2c43ecabec9798508dbcba/agent-build-6lwj4q2i/.scratch/all-tickets/test-macos-process-overhead-source.py", line 147, in poll
+    raise AssertionError("gate must not be polled before group signal")
+AssertionError: gate must not be polled before group signal
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (failures=1)

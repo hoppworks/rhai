@@ -12,7 +12,11 @@ acceptance. Local Markdown tickets only; no Linear. Goal active and incomplete.
 
 ## Authorization and ownership
 Only https://github.com/hoppworks/rhai.git may receive writes; never public
-upstream. Root owns /Users/hoppworks/projects/rhai-all-tickets on task/all-tickets.
+upstream. Root owns /Users/hoppworks/.codex/worktrees/all-tickets-continuation/rhai on
+task/all-tickets-continuation. The former owned checkout was externally removed
+a second time; retained committed4ac93a44 was used to create this attached managed
+checkout. Do not recreate/prune/remove the old missing worktree entry blindly.
+Committed proof is intact; removed uncommitted contents are not certified.
 The foreign primary checkout and foreign/dirty worktrees remain untouched.
 Author and committer exactly hoppworks <daniel@hoppworks.de>, command-local Git
 configuration, no coauthors/branding. Strict verification, automatic fork pushes
@@ -76,16 +80,23 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
    restored GREEN0 at linux-current-feature-v2-review.md and root-pure originals.
    Unique v2 stage, outer590/helper530/work500/export30, preserved prior use and
    resource caps. V2 stage completed: all eight remote input hashes independently pass, no
-   compiler launched. Foreign web E2E runner1245052/start7234121 and
-   supervisor1245053/start7234124 currently live; wait for its heavy slot.
+   compiler launched. Prior P01 runner1245052/start7234121 and supervisor1245053/start7234124,
+   G43 runner1303951/start7249413 and supervisor1303952/start7249415 are now
+   missing. New foreign G43 r9 runner1529933/start7320491 and
+   supervisor1529935/start7320494 are live with cargo1533992/start7321034
+   and actual rustc children; wait for its heavy slot without stopping them.
    Stage wrapper terminal1 after zsh read-only status variable; runner status
    unrecorded, exact remote readiness independently verified and own empty
    local scope removed. Preserve stage; do not repeat staging. No native85.
-3. Existing Mac owner continues cause09 bounded Managed companion/readiness source
-   plumbing under Expert09. Pure tests only; unchanged frozen measurement source,
-   guardfalse, nativecount84. Source control-finalization correction0ecfc6e4 is
-   independently reviewed and accepted narrowly in macos-controls-review.md.
-   Native ABI/confinement/interruption/measurement requirements remain open.
+3. Mac Managed source correction74943bb2 is independently reviewed and replayed:
+   58 adapter/23 reader pass, prior wrong fixture PGID and early gate reap are
+   meaningful RED1, prior Cargo stream request fails1, restored adapter58 pass.
+   macos-managed-correction-review.md records source-only acceptance and scope.
+   Guardfalse/count84 preserved. Real dual-stream capture progress, native ABI,
+   confinement/interruption and measurement acceptance remain open. Existing
+   Mac owner now fixes only absent-checkout path dependence in active harness
+   source under the same Expert09 history, source-only30min checkpoint; no Cargo
+   or native allocation. Frozen measurement/archive/toolchain unchanged.
 4. Windows sole owner is completed and guest last observed off; partial console
    command/cleanup remains unverified. Preserve allocation and all prior evidence;
    no restart, new native launch or repeated source review for the rule update.
@@ -148,19 +159,15 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Current turn classification
-PROGRESS: Linux v2 setup-source correction independently reviewed and replayed,
-legacy alias RED1 and missing-required-identity RED1, restored GREEN0. Four OCR
-source files reviewed, ten contract/receipt exclusions checked. Private runtime
-absent and exact empty scope removed. Integrated94a10d73; compiler acceptance
-pending. Previous status-only turn was no progress; this concrete action closes
-its next available safe step.
-Root worktree was externally removed; restored the owned task/all-tickets tree
-from exact retained d0d9f615. Committed history/proof intact, uncommitted removed
-contents not certified. No foreign work touched. Mac owner frozen3e17e3f5 independent review found missing fixture new-PGID
-validation and premature gate poll/reap before group shutdown; consolidated
-source-only correction returned to the same owner, no native/retry chain.
-Current readiness limitation: live both-stream progress absent from current
-public API, Managed remains fail-closed and guardfalse/count84. Windows unchanged.
+PROGRESS: prior status-only turn was NO PROGRESS; next available safe action
+completed independent affected-source correction review and scoped pure replay
+of frozen74943bb2. Original logs and receipt at macos-managed-root-regressions;
+runner0, runtime absent, exact own empty scope removed. Three material source
+findings closed narrowly, no native/process/Cargo launch. Full goal remains open.
+Exact renewed foreign heavy handles establish a verified wait for Linux, while
+independent source correction continues. The second externally removed root
+checkout is replaced by an attached owned managed checkout from retained4ac,
+without discarding/pruning foreign work or claiming removed contents verified.
 
 ## Current-source core MSRV package — accepted narrow gate
 Current default-core applicability CLOSED for source52d9797b, Rust/Cargo1.66.0,

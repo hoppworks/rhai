@@ -1,0 +1,13 @@
+F
+======================================================================
+FAIL: test_managed_build_requests_keep_cargo_streams_separate (test-macos-process-overhead-source.EnvironmentTests.test_managed_build_requests_keep_cargo_streams_separate)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/hoppworks/.local/share/agent-builds/rhai/managed-root-63fe3153ef2c43ecabec9798508dbcba/agent-build-6lwj4q2i/.scratch/all-tickets/test-macos-process-overhead-source.py", line 294, in test_managed_build_requests_keep_cargo_streams_separate
+    self.assertEqual(control.count("include_stderr=False"), 2)
+AssertionError: 0 != 2
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (failures=1)

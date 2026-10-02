@@ -1,0 +1,14 @@
+F
+======================================================================
+FAIL: test_managed_native_snapshot_requires_progress_for_both_real_capture_streams (test-macos-process-overhead-source.EnvironmentTests.test_managed_native_snapshot_requires_progress_for_both_real_capture_streams) (changed=[{'pid': 90, 'ppid': 1, 'pgid': 90, 'path': '/Users/hoppworks/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3', 'start_seconds': 1, 'start_microseconds': 90}, {'pid': 91, 'ppid': 90, 'pgid': 91, 'path': '/private/owned-runtime/target/debug/examples/macos-managed-capture-companion', 'start_seconds': 2, 'start_microseconds': 91}, {'pid': 92, 'ppid': 91, 'pgid': 91, 'path': '/usr/bin/python3', 'start_seconds': 2, 'start_microseconds': 92}, {'pid': 93, 'ppid': 91, 'pgid': 91, 'path': '/private/owned-runtime/target/debug/deps/sys_process-frozen', 'start_seconds': 3, 'start_microseconds': 93, 'thread_count': 4}], capture={'schema': 1, 'stage': 'capturing', 'host': {'pid': 91, 'start_seconds': 2, 'start_microseconds': 91}, 'fixture': {'pid': 93, 'start_seconds': 3, 'start_microseconds': 93}, 'stdout_bytes_read': 17, 'stderr_bytes_read': 19})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/hoppworks/.local/share/agent-builds/rhai/managed-root-63fe3153ef2c43ecabec9798508dbcba/agent-build-6lwj4q2i/.scratch/all-tickets/test-macos-process-overhead-source.py", line 132, in test_managed_native_snapshot_requires_progress_for_both_real_capture_streams
+    with self.subTest(changed=changed, capture=capture), self.assertRaises(ValueError):
+                                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (failures=1)

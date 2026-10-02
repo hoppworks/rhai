@@ -1,0 +1,6 @@
+{
+  "scope": "/Users/hoppworks/.local/share/agent-builds/rhai/managed-root-63fe3153ef2c43ecabec9798508dbcba",
+  "script": "/Users/hoppworks/.codex/worktrees/all-tickets-continuation/rhai/.scratch/all-tickets/replay-managed-corrections.py",
+  "root": "/Users/hoppworks/.codex/worktrees/all-tickets-continuation/rhai",
+  "evidence": "/Users/hoppworks/.codex/worktrees/all-tickets-continuation/rhai/.scratch/all-tickets/macos-managed-root-regressions"
+}
