@@ -272,3 +272,18 @@ Cargo77=35.749s/sample209216KiB. Known69–71+73–75+77 subtotal217.863s exclud
 and Linux76 timing not yet exported in root state; no inferred continuous peak.
 Next actual unique Unix invocation78 only after concrete diagnosis/frozen review.
 Goal and final fork-main-only consolidation remain active and incomplete.
+
+## Reviewed Linux heartbeat follow-up
+
+Root inspected exact a3026f8 driver-only diff: healthconstant3.0 replaces1.0;
+identity/ancestry checks, atomicheartbeat and immediate missing/deadmonitor
+failclosed behavior remain. Driver SHA395d353aa3a747ef730cfc605c64d5254d139b4aab2571dd415683de1900333a
+accepted source-only on c6e820d4/archivec799. Synthetic1.187/3.0 accepted and3.001
+rejected are supplemental. Linux78 released for exact staging/preflight and one
+coherent bounded run under unchanged600/585/580/540, jobs2/process16/storagecaps;
+consume78 only atactualstart. No new Mac launch until typed77failure diagnosis.
+Root final pushed source-only/evidence main886c33f1 remote readback verified and
+root worktreeclean.17 mergedlocalrefs retired;28localbranches/20worktrees remain.
+Windows latest known newarchiveb6c hashd7b0b514; nestedExpand-Archive failed before
+parser/harness/compiler/job. Soleowner preserves partialextractions and switches
+to freshshort absent userroot; actualparser/input/job/client acceptance stillopen.
