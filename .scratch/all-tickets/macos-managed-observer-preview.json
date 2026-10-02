@@ -1,0 +1,59 @@
+{
+  "schema_version": "1",
+  "mode": "commit",
+  "repository": "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai",
+  "commit": "c2829b1e148a54d6225b2a821835feb5061dd64f",
+  "background": "Add private Managed capture progress observer",
+  "total_files": 7,
+  "reviewable_count": 6,
+  "excluded_count": 1,
+  "total_insertions": 172,
+  "total_deletions": 13,
+  "reviewable_files": [
+    {
+      "path": ".scratch/all-tickets/macos-managed-capture-companion.rs",
+      "status": "modified",
+      "insertions": 8,
+      "deletions": 4
+    },
+    {
+      "path": ".scratch/all-tickets/macos-process-overhead.py",
+      "status": "modified",
+      "insertions": 2,
+      "deletions": 1
+    },
+    {
+      "path": ".scratch/all-tickets/run-macos-process-overhead-scoped.py",
+      "status": "modified",
+      "insertions": 27,
+      "deletions": 1
+    },
+    {
+      "path": ".scratch/all-tickets/test-macos-process-overhead-source.py",
+      "status": "modified",
+      "insertions": 49,
+      "deletions": 3
+    },
+    {
+      "path": "Cargo.toml",
+      "status": "modified",
+      "insertions": 3,
+      "deletions": 0
+    },
+    {
+      "path": "src/packages/sys/process/unix.rs",
+      "status": "modified",
+      "insertions": 71,
+      "deletions": 4
+    }
+  ],
+  "excluded_files": [
+    {
+      "path": ".scratch/all-tickets/macos-managed-live-source-evidence-20261002/pure-suite.log",
+      "status": "added",
+      "insertions": 12,
+      "deletions": 0,
+      "exclude_reason": "unsupported_ext"
+    }
+  ]
+}

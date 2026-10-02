@@ -1,0 +1,12 @@
+{
+  "cargo_binary": "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+  "cargo_sha256": "bfc78d62e9e3e80adf4dca159f012ca21cb1e0fdf8bdf63ff5d25d5c75ada76d",
+  "os_release": "NAME=\"Bazzite\"\nVERSION=\"44.20260929.0 (Kinoite)\"\nRELEASE_TYPE=stable\nID=bazzite\nID_LIKE=\"fedora\"\nVERSION_ID=44\nVERSION_CODENAME=\"Kinoite\"\nPRETTY_NAME=\"Bazzite\"\nANSI_COLOR=\"0;38;2;138;43;226\"\nLOGO=bazzite-logo\nCPE_NAME=\"cpe:/o:universal-blue:bazzite:44\"\nDEFAULT_HOSTNAME=\"bazzite\"\nHOME_URL=\"https://bazzite.gg\"\nDOCUMENTATION_URL=\"https://docs.bazzite.gg\"\nSUPPORT_URL=\"https://discord.bazzite.gg\"\nBUG_REPORT_URL=\"https://github.com/ublue-os/bazzite/issues/\"\nSUPPORT_END=2027-05-19\nVARIANT=\"Kinoite\"\nVARIANT_ID=bazzite-nvidia-open\nOSTREE_VERSION='44.20260929.0'\nBUILD_ID=\"Stable (F44.20260929)\"\nBOOTLOADER_NAME=\"Bazzite Stable (F44.20260929)\"\nIMAGE_ID=\"bazzite-nvidia-open-44.20260929\"\n",
+  "platform_machine": "x86_64",
+  "platform_system": "Linux",
+  "rustc_binary": "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+  "rustc_sha256": "c1bd86d51ed89c344fa4b394dcb116d48f5e3eeb121498c083b9b516624f55cd",
+  "rustup_binary": "/root/.cargo/bin/rustup",
+  "rustup_sha256": "dda7234360b7f578ca8b0ddcb80145646fa61a67c1720a5abc7051b35c9fcb71",
+  "uname": "Linux workhorse 7.2.7-ogc1.1.fc44.x86_64 #1 SMP PREEMPT_DYNAMIC Fri Sep 25 06:00:41 UTC 2026 x86_64 GNU/Linux"
+}

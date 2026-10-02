@@ -1,0 +1,116 @@
+[
+  {
+    "all_selected_targets_ran_once": true,
+    "all_tests_passed_without_ignored_or_filtered": false,
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys,net",
+      "--test",
+      "sys_env",
+      "--test",
+      "sys_fs",
+      "--test",
+      "sys_policy",
+      "--test",
+      "net_connect",
+      "--test",
+      "net_listen",
+      "--test",
+      "net_reads",
+      "--test",
+      "net_writes",
+      "--test",
+      "combined_sys_net",
+      "--",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "coverage_found": false,
+    "expected_targets": [
+      "sys_env",
+      "sys_fs",
+      "sys_policy",
+      "net_connect",
+      "net_listen",
+      "net_reads",
+      "net_writes",
+      "combined_sys_net"
+    ],
+    "features": "testing-environ,sys,net",
+    "row": "combined-baseline",
+    "status": 101,
+    "stderr": "behavior-combined-baseline.stderr",
+    "stdout": "behavior-combined-baseline.stdout",
+    "target_results": [
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 7,
+        "target": "sys_env"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 35,
+        "target": "sys_fs"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 4,
+        "target": "net_connect"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 7,
+        "target": "net_listen"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 7,
+        "target": "net_reads"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 10,
+        "target": "net_writes"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 1,
+        "target": "combined_sys_net"
+      }
+    ],
+    "targets": [
+      "sys_env",
+      "sys_fs",
+      "sys_policy",
+      "net_connect",
+      "net_listen",
+      "net_reads",
+      "net_writes",
+      "combined_sys_net"
+    ]
+  }
+]

@@ -1,0 +1,100 @@
+launch_utc=2026-10-02T11:54:37Z
+runner_timeout_seconds=600
+stage=/root/rhai-linux-current-sys-net-behavior-1ca21e32-20261002-followup1
+scope=/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1
+source.tar: OK
+Cargo.lock.accepted: OK
+run-sys-net-behavior.py: OK
+contract.md: OK
+launch.sh: OK
+stage.sh: OK
+runner/tools/run_scoped.py: OK
+runner/tools/agentskills/__init__.py: OK
+runner/tools/agentskills/pyguard.py: OK
+PRIVATE_RUNTIME /root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j
+HELPER_IDENTITY 1794564 7867870
+sample={"descendants": 1, "monotonic_seconds": 0.253, "rss_kib": 30540, "storage_kib": 44960}
+command=rustup-version argv=['/root/.cargo/bin/rustup', '--version']
+sample={"descendants": 2, "monotonic_seconds": 0.267, "rss_kib": 30496, "storage_kib": 44960}
+sample={"descendants": 1, "monotonic_seconds": 0.381, "rss_kib": 30552, "storage_kib": 44968}
+status=rustup-version:0
+command=rustup-install argv=['/root/.cargo/bin/rustup', 'toolchain', 'install', '1.77.2', '--profile', 'minimal', '--no-self-update']
+sample={"descendants": 2, "monotonic_seconds": 0.396, "rss_kib": 45816, "storage_kib": 44976}
+sample={"descendants": 2, "monotonic_seconds": 1.411, "rss_kib": 55052, "storage_kib": 61176}
+sample={"descendants": 2, "monotonic_seconds": 2.426, "rss_kib": 104832, "storage_kib": 135664}
+sample={"descendants": 2, "monotonic_seconds": 3.441, "rss_kib": 152180, "storage_kib": 274828}
+sample={"descendants": 2, "monotonic_seconds": 4.456, "rss_kib": 152240, "storage_kib": 297648}
+sample={"descendants": 2, "monotonic_seconds": 5.472, "rss_kib": 153252, "storage_kib": 308300}
+sample={"descendants": 2, "monotonic_seconds": 6.487, "rss_kib": 333416, "storage_kib": 428408}
+sample={"descendants": 2, "monotonic_seconds": 7.5, "rss_kib": 480952, "storage_kib": 570576}
+sample={"descendants": 1, "monotonic_seconds": 7.713, "rss_kib": 30544, "storage_kib": 504664}
+status=rustup-install:0
+command=rustc-version argv=['/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 7.728, "rss_kib": 30552, "storage_kib": 504668}
+sample={"descendants": 1, "monotonic_seconds": 7.841, "rss_kib": 30496, "storage_kib": 504672}
+status=rustc-version:0
+command=cargo-version argv=['/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 7.854, "rss_kib": 30428, "storage_kib": 504676}
+sample={"descendants": 1, "monotonic_seconds": 7.969, "rss_kib": 30488, "storage_kib": 504680}
+status=cargo-version:0
+command=control-sys-filesystem-wrong-readback argv=['/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--features', 'testing-environ,sys,net', '--test', 'sys_fs', 'test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving', '--', '--exact', '--nocapture', '--test-threads=1']
+sample={"descendants": 2, "monotonic_seconds": 8.008, "rss_kib": 51296, "storage_kib": 504688}
+sample={"descendants": 2, "monotonic_seconds": 9.026, "rss_kib": 72352, "storage_kib": 507964}
+sample={"descendants": 2, "monotonic_seconds": 10.041, "rss_kib": 73132, "storage_kib": 508184}
+sample={"descendants": 2, "monotonic_seconds": 11.057, "rss_kib": 86008, "storage_kib": 512784}
+sample={"descendants": 3, "monotonic_seconds": 12.078, "rss_kib": 259452, "storage_kib": 567984}
+sample={"descendants": 4, "monotonic_seconds": 13.099, "rss_kib": 598076, "storage_kib": 590372}
+sample={"descendants": 3, "monotonic_seconds": 14.121, "rss_kib": 241920, "storage_kib": 627604}
+sample={"descendants": 4, "monotonic_seconds": 15.142, "rss_kib": 780428, "storage_kib": 635388}
+sample={"descendants": 4, "monotonic_seconds": 16.165, "rss_kib": 461388, "storage_kib": 673168}
+sample={"descendants": 4, "monotonic_seconds": 17.188, "rss_kib": 449260, "storage_kib": 693116}
+sample={"descendants": 3, "monotonic_seconds": 18.21, "rss_kib": 543304, "storage_kib": 701092}
+sample={"descendants": 3, "monotonic_seconds": 19.23, "rss_kib": 688400, "storage_kib": 701104}
+sample={"descendants": 3, "monotonic_seconds": 20.251, "rss_kib": 907292, "storage_kib": 713744}
+sample={"descendants": 3, "monotonic_seconds": 21.274, "rss_kib": 921156, "storage_kib": 727884}
+sample={"descendants": 1, "monotonic_seconds": 22.196, "rss_kib": 29944, "storage_kib": 769792}
+status=control-sys-filesystem-wrong-readback:101
+command=control-tcp-wrong-peer-readback argv=['/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--features', 'testing-environ,sys,net', '--test', 'net_reads', 'stream_read_string_returns_exact_lossy_text_from_peer_bytes', '--', '--exact', '--nocapture', '--test-threads=1']
+sample={"descendants": 2, "monotonic_seconds": 22.22, "rss_kib": 65964, "storage_kib": 769800}
+sample={"descendants": 1, "monotonic_seconds": 22.639, "rss_kib": 30004, "storage_kib": 780884}
+status=control-tcp-wrong-peer-readback:101
+command=control-tcp-wrong-peer-writeback argv=['/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--features', 'testing-environ,sys,net', '--test', 'net_writes', 'script_write_blob_preserves_exact_bytes', '--', '--exact', '--nocapture', '--test-threads=1']
+sample={"descendants": 2, "monotonic_seconds": 22.662, "rss_kib": 64216, "storage_kib": 780892}
+sample={"descendants": 1, "monotonic_seconds": 23.082, "rss_kib": 30152, "storage_kib": 792156}
+status=control-tcp-wrong-peer-writeback:101
+command=control-combined-wrong-host-readback argv=['/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--features', 'testing-environ,sys,net', '--test', 'combined_sys_net', 'sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors', '--', '--exact', '--nocapture', '--test-threads=1']
+sample={"descendants": 2, "monotonic_seconds": 23.105, "rss_kib": 65868, "storage_kib": 792160}
+sample={"descendants": 1, "monotonic_seconds": 23.526, "rss_kib": 30032, "storage_kib": 804644}
+status=control-combined-wrong-host-readback:101
+command=control-net-no-object-wrong-peer argv=['/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--features', 'testing-environ,net,no_object', '--test', 'net_no_object', 'registered_stream_functions_work_without_dot_syntax', '--', '--exact', '--nocapture', '--test-threads=1']
+sample={"descendants": 2, "monotonic_seconds": 23.551, "rss_kib": 65760, "storage_kib": 804648}
+sample={"descendants": 3, "monotonic_seconds": 24.572, "rss_kib": 419612, "storage_kib": 806944}
+sample={"descendants": 3, "monotonic_seconds": 25.593, "rss_kib": 553188, "storage_kib": 806944}
+sample={"descendants": 3, "monotonic_seconds": 26.615, "rss_kib": 756356, "storage_kib": 819728}
+sample={"descendants": 3, "monotonic_seconds": 27.636, "rss_kib": 594708, "storage_kib": 834008}
+sample={"descendants": 1, "monotonic_seconds": 28.157, "rss_kib": 29948, "storage_kib": 866548}
+status=control-net-no-object-wrong-peer:101
+command=behavior-combined-baseline argv=['/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--features', 'testing-environ,sys,net', '--test', 'sys_env', '--test', 'sys_fs', '--test', 'sys_policy', '--test', 'net_connect', '--test', 'net_listen', '--test', 'net_reads', '--test', 'net_writes', '--test', 'combined_sys_net', '--', '--nocapture', '--test-threads=1']
+sample={"descendants": 2, "monotonic_seconds": 28.181, "rss_kib": 66008, "storage_kib": 866552}
+sample={"descendants": 3, "monotonic_seconds": 29.202, "rss_kib": 453136, "storage_kib": 831132}
+sample={"descendants": 3, "monotonic_seconds": 30.224, "rss_kib": 582692, "storage_kib": 831132}
+sample={"descendants": 3, "monotonic_seconds": 31.245, "rss_kib": 769556, "storage_kib": 840496}
+sample={"descendants": 3, "monotonic_seconds": 32.267, "rss_kib": 902168, "storage_kib": 839912}
+sample={"descendants": 10, "monotonic_seconds": 33.29, "rss_kib": 517748, "storage_kib": 862404}
+sample={"descendants": 7, "monotonic_seconds": 34.313, "rss_kib": 492416, "storage_kib": 889276}
+sample={"descendants": 3, "monotonic_seconds": 35.334, "rss_kib": 71728, "storage_kib": 912880}
+sample={"descendants": 1, "monotonic_seconds": 35.654, "rss_kib": 30096, "storage_kib": 912884}
+status=behavior-combined-baseline:101
+evidence_exported=/root/rhai-linux-current-sys-net-behavior-1ca21e32-20261002-followup1/proof-evidence
+Traceback (most recent call last):
+  File "/root/rhai-linux-current-sys-net-behavior-1ca21e32-20261002-followup1/run-sys-net-behavior.py", line 676, in <module>
+    exit_status = main()
+  File "/root/rhai-linux-current-sys-net-behavior-1ca21e32-20261002-followup1/run-sys-net-behavior.py", line 656, in main
+    raise RuntimeError(f'behavior row {row_name} expected status 0, got {status}')
+RuntimeError: behavior row combined-baseline expected status 0, got 101
+
+linux_current_sys_net_behavior=incomplete_or_failed
+/root/rhai-linux-current-sys-net-behavior-1ca21e32-20261002-followup1/launch.sh: line 123: /proc/1794559/stat: No such file or directory
+run_scoped_status=1
+runtime_cleanup_status=0 pid_readback_status=0 scope_cleanup_status=0
+outer_status=1

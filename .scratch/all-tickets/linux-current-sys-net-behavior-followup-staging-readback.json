@@ -1,0 +1,15 @@
+{
+  "stage": "/root/rhai-linux-current-sys-net-behavior-1ca21e32-20261002-followup1",
+  "all_nine_inputs_match": true,
+  "sha256": {
+    "source.tar": "8251e0429d51ffd330e7eac596a1513d836e43e549ca761852cafc642a2a8155",
+    "Cargo.lock.accepted": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+    "run-sys-net-behavior.py": "38e2d8dc766bc20b850ef9cf68bf51d16d2089e59259f55c676e2702f8596c1f",
+    "contract.md": "a33f3f75be41a976f7e51826c37013fe5112c7112c1aa927a20a6f61d943bae9",
+    "launch.sh": "5cc4f7872cac375231b5727e3f3509e37612829dba81779656d571ab0b748563",
+    "stage.sh": "347985187c13f3e70255eac999e2f367d8c5d5e812ad905ea2ab21daaf05a0d1",
+    "runner/tools/run_scoped.py": "9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d",
+    "runner/tools/agentskills/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runner/tools/agentskills/pyguard.py": "a3739f4947744303e1adf3fb0875ac743944a272e5b95c94b1baba53029d313f"
+  }
+}

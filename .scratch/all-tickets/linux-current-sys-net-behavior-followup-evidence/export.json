@@ -1,0 +1,12 @@
+{
+  "compatible_lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "elapsed_seconds_at_export": 35.655,
+  "evidence_destination": "/root/rhai-linux-current-sys-net-behavior-1ca21e32-20261002-followup1/proof-evidence",
+  "export_reserve_seconds": 30,
+  "helper_deadline_seconds": 540,
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j",
+  "runtime_cleanup_owner": "run_scoped.py; independently read back by coordinator",
+  "source_archive_sha256": "8251e0429d51ffd330e7eac596a1513d836e43e549ca761852cafc642a2a8155",
+  "source_revision": "1ca21e32eed2aa40287ba7e1282000add1dd49c7",
+  "work_deadline_seconds": 510
+}

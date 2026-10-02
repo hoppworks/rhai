@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/root/rhai-linux-current-sys-net-behavior-1ca21e32-20261002-followup1/run-sys-net-behavior.py", line 676, in <module>
+    exit_status = main()
+  File "/root/rhai-linux-current-sys-net-behavior-1ca21e32-20261002-followup1/run-sys-net-behavior.py", line 656, in main
+    raise RuntimeError(f'behavior row {row_name} expected status 0, got {status}')
+RuntimeError: behavior row combined-baseline expected status 0, got 101

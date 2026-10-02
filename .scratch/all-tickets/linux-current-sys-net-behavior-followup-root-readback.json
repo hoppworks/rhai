@@ -1,0 +1,91 @@
+{
+  "identities": [
+    {
+      "label": "helper",
+      "pid": 1794564,
+      "recorded_start": "7867870",
+      "current_start": null,
+      "matching_alive": false
+    },
+    {
+      "label": "scoped-supervisor",
+      "pid": 1794563,
+      "recorded_start": "7867869",
+      "current_start": null,
+      "matching_alive": false
+    },
+    {
+      "label": "rustup-version",
+      "pid": 1794574,
+      "recorded_start": "7867898",
+      "current_start": null,
+      "matching_alive": false
+    },
+    {
+      "label": "rustup-install",
+      "pid": 1794588,
+      "recorded_start": "7867911",
+      "current_start": null,
+      "matching_alive": false
+    },
+    {
+      "label": "rustc-version",
+      "pid": 1794768,
+      "recorded_start": "7868644",
+      "current_start": null,
+      "matching_alive": false
+    },
+    {
+      "label": "cargo-version",
+      "pid": 1794774,
+      "recorded_start": "7868657",
+      "current_start": null,
+      "matching_alive": false
+    },
+    {
+      "label": "control-sys-filesystem-wrong-readback",
+      "pid": 1794792,
+      "recorded_start": "7868672",
+      "current_start": null,
+      "matching_alive": false
+    },
+    {
+      "label": "control-tcp-wrong-peer-readback",
+      "pid": 1795866,
+      "recorded_start": "7870093",
+      "current_start": null,
+      "matching_alive": false
+    },
+    {
+      "label": "control-tcp-wrong-peer-writeback",
+      "pid": 1795899,
+      "recorded_start": "7870137",
+      "current_start": null,
+      "matching_alive": false
+    },
+    {
+      "label": "control-combined-wrong-host-readback",
+      "pid": 1795941,
+      "recorded_start": "7870181",
+      "current_start": null,
+      "matching_alive": false
+    },
+    {
+      "label": "control-net-no-object-wrong-peer",
+      "pid": 1795973,
+      "recorded_start": "7870226",
+      "current_start": null,
+      "matching_alive": false
+    },
+    {
+      "label": "behavior-combined-baseline",
+      "pid": 1796138,
+      "recorded_start": "7870689",
+      "current_start": null,
+      "matching_alive": false
+    }
+  ],
+  "all_recorded_absent": true,
+  "runtime_absent": true,
+  "scope_absent": true
+}

@@ -272,7 +272,31 @@ First native cause failure1,23.547s elapsed,600s prior envelope retained; one
 corrected600s envelope allocated under standing goal/repair authorization.
 No existing build to reuse after required scoped cleanup. Four runtime rows and
 all original acceptance criteria retained; processcount84/measurementguardfalse.
-Next stage/readback nine inputs, fresh machine-slot inventory, native followup.
+Nine followup inputs independently matched; fresh remote census contains only
+retained idle28950/28951 and orphan3269558(ticks87 unchanged). Native followup
+dispatched exact SSH handle97146; terminal SSH/outer/scoped1 observed. All five
+wrong-expectation controls produced101 and passed their classifiers. Restored
+combined-baseline returned101: sys_policy test_root_with_dot_components and
+test_symlinked_root failed at lines265/282 with SysError; sys_fs35 passed and
+sys_policy21 passed/2 failed. Later feature rows were not run. Preserve original
+followup-evidence and followup-launcher-evidence directories plus outer.log.
+Launcher reports runtime_cleanup/pid_readback/scope_cleanup0; fresh independent
+identity readback and production-versus-fixture diagnosis remain next actions.
+Do not accept the feature row or relaunch without diagnosis. First classifier
+failure remains separate from this newly observed restored-behavior failure.
+Fresh independent followup-root-readback.json confirms every recorded PID/start
+absent and runtime/scope absent. Followup export35.655s, 52 periodic samples
+maximaRSS921156KiB/storage912884KiB/desc10;
+samples are not continuous peaks. Production-versus-fixture diagnosis delegated
+to the existing Linux owner, source-only before review and shared acceptance.
+Mac owner froze source-only c2829b1e: private dual-stream capture observer,
+66/66 pure checks, no compilation/native launch. Independent combined review
+macos-managed-observer-review.md covers6/6 selected codefiles plus original log:
+blocking observer attaches spawn path rather than run_raw/supervise; frozen
+control source lacks feature/hook. One fix batch returned to responsible owner,
+source-only, guardfalse/count84 unchanged. Previous goal turn is PROGRESS:
+terminal native evidence changed next action, persisted originals and cleanup.
+Next collect original terminal evidence and fresh cleanup/acceptance readback.
 
 ## Current-source core MSRV package — accepted narrow gate
 Current default-core applicability CLOSED for source52d9797b, Rust/Cargo1.66.0,

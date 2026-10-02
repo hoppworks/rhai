@@ -1,0 +1,11 @@
+
+running 1 test
+test stream_read_string_returns_exact_lossy_text_from_peer_bytes ... FAILED
+
+failures:
+
+failures:
+    stream_read_string_returns_exact_lossy_text_from_peer_bytes
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 6 filtered out; finished in 0.00s
+

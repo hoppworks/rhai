@@ -1,0 +1,11 @@
+
+running 1 test
+test registered_stream_functions_work_without_dot_syntax ... FAILED
+
+failures:
+
+failures:
+    registered_stream_functions_work_without_dot_syntax
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.00s
+

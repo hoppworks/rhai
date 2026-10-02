@@ -1,0 +1,9 @@
+{
+  "captured_before_stage_validation_or_external_command": true,
+  "helper_pid": 1794564,
+  "helper_start_ticks": 7867870,
+  "identity_receipt": "process-identities.tsv",
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j",
+  "supervisor_pid": 1794563,
+  "supervisor_start_ticks": 7867869
+}

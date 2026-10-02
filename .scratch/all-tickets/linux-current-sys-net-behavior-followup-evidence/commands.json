@@ -1,0 +1,251 @@
+[
+  {
+    "argv": [
+      "/root/.cargo/bin/rustup",
+      "--version"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 0.382,
+    "merge_streams": false,
+    "name": "rustup-version",
+    "started_monotonic_seconds": 0.253,
+    "status": 0,
+    "stderr": "rustup-version.stderr",
+    "stdout": "rustup-version.stdout"
+  },
+  {
+    "argv": [
+      "/root/.cargo/bin/rustup",
+      "toolchain",
+      "install",
+      "1.77.2",
+      "--profile",
+      "minimal",
+      "--no-self-update"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 7.714,
+    "merge_streams": false,
+    "name": "rustup-install",
+    "started_monotonic_seconds": 0.382,
+    "status": 0,
+    "stderr": "rustup-install.stderr",
+    "stdout": "rustup-install.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+      "--version",
+      "--verbose"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 7.841,
+    "merge_streams": false,
+    "name": "rustc-version",
+    "started_monotonic_seconds": 7.714,
+    "status": 0,
+    "stderr": "rustc-version.stderr",
+    "stdout": "rustc-version.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "--version",
+      "--verbose"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 7.969,
+    "merge_streams": false,
+    "name": "cargo-version",
+    "started_monotonic_seconds": 7.842,
+    "status": 0,
+    "stderr": "cargo-version.stderr",
+    "stdout": "cargo-version.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys,net",
+      "--test",
+      "sys_fs",
+      "test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving",
+      "--",
+      "--exact",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j/source",
+    "env_overrides": {
+      "RHAI_FILE_READ_WRONG_EXPECTATION": "1"
+    },
+    "expected_status": null,
+    "finished_monotonic_seconds": 22.196,
+    "merge_streams": false,
+    "name": "control-sys-filesystem-wrong-readback",
+    "started_monotonic_seconds": 7.995,
+    "status": 101,
+    "stderr": "control-sys-filesystem-wrong-readback.stderr",
+    "stdout": "control-sys-filesystem-wrong-readback.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys,net",
+      "--test",
+      "net_reads",
+      "stream_read_string_returns_exact_lossy_text_from_peer_bytes",
+      "--",
+      "--exact",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j/source",
+    "env_overrides": {
+      "RHAI_NET_WRONG_READ_EXPECTATION": "1"
+    },
+    "expected_status": null,
+    "finished_monotonic_seconds": 22.64,
+    "merge_streams": false,
+    "name": "control-tcp-wrong-peer-readback",
+    "started_monotonic_seconds": 22.201,
+    "status": 101,
+    "stderr": "control-tcp-wrong-peer-readback.stderr",
+    "stdout": "control-tcp-wrong-peer-readback.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys,net",
+      "--test",
+      "net_writes",
+      "script_write_blob_preserves_exact_bytes",
+      "--",
+      "--exact",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j/source",
+    "env_overrides": {
+      "RHAI_NET_WRONG_WRITE_EXPECTATION": "1"
+    },
+    "expected_status": null,
+    "finished_monotonic_seconds": 23.082,
+    "merge_streams": false,
+    "name": "control-tcp-wrong-peer-writeback",
+    "started_monotonic_seconds": 22.644,
+    "status": 101,
+    "stderr": "control-tcp-wrong-peer-writeback.stderr",
+    "stdout": "control-tcp-wrong-peer-writeback.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys,net",
+      "--test",
+      "combined_sys_net",
+      "sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors",
+      "--",
+      "--exact",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j/source",
+    "env_overrides": {
+      "RHAI_COMBINED_WRONG_EXPECTATION": "1"
+    },
+    "expected_status": null,
+    "finished_monotonic_seconds": 23.526,
+    "merge_streams": false,
+    "name": "control-combined-wrong-host-readback",
+    "started_monotonic_seconds": 23.086,
+    "status": 101,
+    "stderr": "control-combined-wrong-host-readback.stderr",
+    "stdout": "control-combined-wrong-host-readback.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,net,no_object",
+      "--test",
+      "net_no_object",
+      "registered_stream_functions_work_without_dot_syntax",
+      "--",
+      "--exact",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j/source",
+    "env_overrides": {
+      "RHAI_NET_NO_OBJECT_WRONG_PEER_EXPECTATION": "1"
+    },
+    "expected_status": null,
+    "finished_monotonic_seconds": 28.157,
+    "merge_streams": false,
+    "name": "control-net-no-object-wrong-peer",
+    "started_monotonic_seconds": 23.53,
+    "status": 101,
+    "stderr": "control-net-no-object-wrong-peer.stderr",
+    "stdout": "control-net-no-object-wrong-peer.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys,net",
+      "--test",
+      "sys_env",
+      "--test",
+      "sys_fs",
+      "--test",
+      "sys_policy",
+      "--test",
+      "net_connect",
+      "--test",
+      "net_listen",
+      "--test",
+      "net_reads",
+      "--test",
+      "net_writes",
+      "--test",
+      "combined_sys_net",
+      "--",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1/agent-build-o538ke3j/source",
+    "env_overrides": {},
+    "expected_status": null,
+    "finished_monotonic_seconds": 35.654,
+    "merge_streams": true,
+    "name": "behavior-combined-baseline",
+    "started_monotonic_seconds": 28.162,
+    "status": 101,
+    "stderr": "behavior-combined-baseline.stderr",
+    "stdout": "behavior-combined-baseline.stdout"
+  }
+]
