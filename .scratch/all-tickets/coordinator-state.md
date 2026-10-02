@@ -935,7 +935,7 @@ SHA8291e58652a7dc8494513d910460e6dae39a716f5dfca937bda40fafcfa0caa4.
 Root independent visual/readback of original guest frames accepted transfer ONLY,
 retained once windows-staging-9e0-root-evidence/ at2c4c5a9. Exact guestroot:
 C:\Users\RhaiTest\.local\share\agent-builds\rhai\w9e0-20261002-6f804a9c4c4a4e78.
-No live GET/no retry. Selective tools extraction has not yet been submitted. Root independently viewed
+No live GET/no retry. Root independently viewed
 ancestors-line/result originals: cancelled draft extraction line, eight existing
 ancestors through C:\ all Directory/no ReparsePoint/no errors, terminal prompt.
 Two exact digest-checked frames and narrow ancestry readback retained once at
@@ -985,24 +985,29 @@ with successive stdout libtest blocks in honestly derived target order (or equal
 reliable bounded method), real split-stream multi-target RED and alias policy
 regression required. Freeze corrected macOS test source before new archive/helper
 provenance; no Cargo/native. First failed implemented correction for F3/F4,
-not a reset of initial review history. No broad redo; consolidate next fix batch
-after terminal report. Original injected regressions and valid F1/F2 preserved.
+not a reset of initial review history. The second consolidated correction is now
+frozen: cfg(macos) test/source2f795ecee8edd6ddf348f382e5397cc6e348ad37, archive
+43c8b8e43a2bcd3e74dd0be3d60a0dea2eab50eb5bfe65cc736684631523d52b; helper/provenance
+4c4a81e0551f6e6d5c56112de7febda0101ce27f. Root read immutable diff summary and
+original structured RED/eight-category GREEN receipts in the owner worktree.
+Same affected reviewer dispatched on this exact freeze; F1/F2 retained, no broad
+redo or native launch. Await independent outcome before source integration.
+A second same-cause failure requires the recorded single escalation, not a third patch. Original injected regressions and valid F1/F2 preserved.
 No source integration/native acceptance before this affected checkpoint.
 No native/build/toolchain/control/measurement dispatch; affected combined recheck
 at frozen repair required. Genuine EILSEQ early return remains uncovered.
 
-Last independently read-back fork maine425b87cd30cecb466e78b2871759a0bf3c8d67a
-was pushed and
-independently read back as sole remote main. Lowercase human attribution;
-no upstream writes. Root loaded958a4538 disk globals/project/campaign, unchanged;
-active owners confirmed same revision previously, no descendants.
-Previous user status-only turn classified NO PROGRESS (no state change).
-This continuation PROGRESS: original Darwin review defects collected and retained,
-consolidated repair verified live; unsupported pipe-capacity route rejected and
-concrete SDK/public-source pipe-state alternative sent to existing responsible
-owner. Windows handle verified live, transfer acceptance unchanged. Linux nine
-non-process rows/601 accepted at unchanged inputs. Goal remains active.
-Next: complete source-supported per-read capture bound/post-KILL-live fix;
-collect next immutable Darwin F3/F4 correction and SAME affected recheck; finish Windows
-extraction/pins/parser/path/Roslyn readback; source-only decide pipe-state witness
-without manufacturing native or completed custody acceptance.
+Last independently read-back fork main f56e6807a5a704c87181f0240fa0d932ab401fc1.
+Lowercase author and committer independently checked; root checkout clean before
+this state update. No upstream writes. Current disk instructions958a4538 unchanged.
+Previous status-only goal turn: NO PROGRESS. This continuation yields new evidence:
+Darwin second F3/F4 source correction frozen and same affected recheck dispatched;
+Mac owner reports four meaningful source REDs plus per-read/publication/post-KILL
+implementation in progress, not yet frozen or accepted; Windows exact live key
+injection handle54608 entering fail-fast readonly1349-character audit, no Enter
+at checkpoint. One GET/extraction remains consumed; no native launch or retry.
+All three owners confirmed live through collaboration state this continuation.
+Next: collect immutable Darwin affected outcome; collect frozen Mac per-read bound
+and post-KILL-live correction for same affected review; complete Windows exact
+archive/tree/pins/parser/Roslyn prerequisite readback. Preserve native totals,
+accepted Linux proof and explicit caps; goal remains active.
