@@ -102,7 +102,12 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
    current_optional_msrv_prepare_v2 resumed for source-only Linux examples
    adaptation in its own linux-msrv-helper-repair worktree. TDD/pure preparation
    only, no staging/build/native execution until root review; current rule
-   revision reload confirmation requested, history and safety caps preserved.
+   owner confirms4d86 globals/project/campaign/TDD/roles/coordinator reload and
+   no descendants. Source preparation is live; original pure RED receipt at
+   linux-msrv-helper-repair/rhai/.scratch/all-tickets/linux-current-msrv-examples-pure
+   returns1 at the intended wrong Darwin-vs-Linux toolchain assertion, not an
+   infrastructure crash. Root read the original stderr/status independently.
+   Await frozen source/pure GREEN before review; history/caps preserved.
 3. Mac Managed source correction74943bb2 is independently reviewed and replayed:
    58 adapter/23 reader pass, prior wrong fixture PGID and early gate reap are
    meaningful RED1, prior Cargo stream request fails1, restored adapter58 pass.
@@ -181,14 +186,20 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Current turn classification
-VERIFIED WAIT: prior turn made concrete progress with finalca7684ab source
-integration and independent regressions, pushedf6ad9e9b. Current exact P01
-runner1563057/start7353326 and supervisor1563058/start7353328 are live with
-actual Patrol descendants, so the Linux heavy slot is occupied. Prior G43
-handles are missing; no restart or compiler dispatch performed. Windows guest
-readback confirms shut off, leaving its native prerequisites unavailable.
-No new source change or acceptance is claimed. Preserve all accepted proof,
-count84, false Mac launch guard and original safety/cause history. Goal active.
+Previous user status turn: NO PROGRESS toward acceptance; it reported existing
+results and independently read back fork main only. This continuation: PROGRESS.
+The process documentation contract correction has completed its combined
+independent source review. The reviewer found one missing synchronous-spawn
+caveat; root added it and the same reviewer independently confirmed it matches
+inline Command::spawn before handle construction, with no further finding.
+Review covers executable authority, PATH/file identity, run/spawn deadlines,
+timeout versus incomplete cleanup, per-stream limits and overflow precedence.
+Root source readback and whitespace checks agree. Documentation-only acceptance;
+no runtime behavior, release gate or full ticket completion is inferred.
+Linux examples preparation remains active. Mac source preparation21cfd2ad is
+reported complete (locked Cargo arguments, pure60); integration/review pending.
+Exact selected graph, capture and native ABI remain open; count84/guardfalse
+and all cause/resource history remain unchanged. Goal active.
 
 ## Current-source core MSRV package — accepted narrow gate
 Current default-core applicability CLOSED for source52d9797b, Rust/Cargo1.66.0,
@@ -626,3 +637,13 @@ back on fork main with no other remote branch.
 Previous status turn classified PROGRESS: authoritative terminal Linux receipts
 changed the next action from polling to acceptance. Current turn closes the
 Linux compiler prerequisite by independent input/result/cleanup readback.
+
+Previous turn PROGRESS: net-only proof source applicability was resolved and
+committed2a9a75b5. This turn verifies two live responsible agent handles and the
+new Linux preparation RED evidence; no build/native allocation or acceptance.
+
+Process documentation correction: independent review completed, including
+narrow readback of the synchronous-spawn caveat. OCR selects no code for this
+docs-only change; manual source review supplies coverage of the changed doc.
+No build/native85 dispatch. Previous reviewer-spawn thread-limit failure created
+no agent; existing independent Mac owner performed the review.

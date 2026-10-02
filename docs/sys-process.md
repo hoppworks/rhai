@@ -13,6 +13,12 @@ a bare name is subsequently resolved through `PATH`. Arguments are passed
 directly to the selected program. A shell is used only if the host permits one
 and the script explicitly launches it.
 
+An allow-list entry grants the selected program the host process's OS authority.
+Filesystem roots restrict the package's file operations, not the launched
+program's subsequent access. Managed groups do not provide a sandbox. Prefer
+host-configured absolute executable paths when `PATH` resolution is undesirable;
+the allow-list does not pin an executable's file identity or contents.
+
 `SysConfig::process_scope` selects `DirectChild` (the default) or `Managed`.
 Scripts cannot change this selection. `DirectChild` supervises the launched
 child. On Unix, `Managed` creates and supervises a process group: cancellation
@@ -66,6 +72,20 @@ Unknown options and invalid types are rejected. Child environment options affect
 only the launched process, not the embedding host's environment. Spawned handles
 have no execution deadline inherited from `default_timeout`; a timed `wait`
 bounds that caller's wait only.
+OS process creation happens synchronously before `spawn` returns the handle and
+has no bounded duration.
+
+The `run` deadline starts immediately before OS process creation and includes
+input transfer, execution and output collection. Process creation and OS cleanup
+can themselves stall, so the duration is not a hard wall-clock guarantee.
+Successful timeout cleanup returns a result with `timed_out == true`; incomplete
+cleanup raises an error with the available process report instead.
+
+A zero output cap permits empty output and fails on the first byte. Exceeding
+either stream's cap requests cancellation and raises `SysError::OutputLimit`,
+retaining at most the allowed prefix per stream in the report. If readable output
+reveals overflow in the same supervision step as deadline expiry, overflow takes
+precedence. No ordering between independent stdout and stderr events is promised.
 
 ## Shared lifetime and failures
 
