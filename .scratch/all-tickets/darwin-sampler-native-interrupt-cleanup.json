@@ -1,0 +1,16 @@
+{
+  "pids": [
+    35863,
+    35862,
+    35867,
+    35869
+  ],
+  "groups": [
+    35862
+  ],
+  "matching_pid_rows": [],
+  "matching_group_rows": [],
+  "runtime_absent": true,
+  "scope_absent_after_empty_rmdir": true,
+  "scope": "/Users/hoppworks/.local/share/agent-builds/rhai/darwin-sampler-interrupt-20261002-e93c780f"
+}

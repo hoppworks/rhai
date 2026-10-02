@@ -1,0 +1,26 @@
+PRIVATE_RUNTIME /Users/hoppworks/.local/share/agent-builds/rhai/darwin-sampler-interrupt-20261002-e93c780f/agent-build-tmiipvmp
+HELPER_IDENTITY 35863 6998824393381
+{
+  "scope": "Actual Darwin ps observer, real SIGINT/SIGTERM, local termination/reap only; no Rustup/Cargo/Engine acceptance",
+  "rows": [
+    {
+      "signal": "SIGINT",
+      "observer_pid": 35867,
+      "returncode_before_propagation": -15,
+      "waitpid_no_child": true,
+      "elapsed_seconds": 0.003759,
+      "error": "interrupted by signal 2"
+    },
+    {
+      "signal": "SIGTERM",
+      "observer_pid": 35869,
+      "returncode_before_propagation": -15,
+      "waitpid_no_child": true,
+      "elapsed_seconds": 0.002893,
+      "error": "interrupted by signal 15"
+    }
+  ],
+  "runtime": "/Users/hoppworks/.local/share/agent-builds/rhai/darwin-sampler-interrupt-20261002-e93c780f/agent-build-tmiipvmp",
+  "process_identities": "label\tpid\tppid\tpgid\tstart_ticks\tcmdline\nhelper\t35863\t35862\t35862\t6998824393381\t/Users/hoppworks/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 .scratch/all-tickets/check-darwin-sampler-native-interrupt.py\nscoped-supervisor\t35862\t35858\t35862\t6998824393381\t/Users/hoppworks/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 /Users/hoppworks/projects/agent-skills/tools/run_scoped.py _supervise 4 /Users/hoppworks/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 .scratch/all-tickets/check-darwin-sampler-native-interrupt.py\n"
+}
+real_sigint_sigterm_observer_reap=PASS

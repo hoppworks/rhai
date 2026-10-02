@@ -1,0 +1,24 @@
+{
+  "pids": [
+    38056,
+    38057,
+    38063,
+    38069,
+    38185,
+    38266,
+    38274,
+    38297,
+    38300
+  ],
+  "groups": [
+    38056
+  ],
+  "matching_pid_rows": [],
+  "matching_group_rows": [],
+  "unidentified_failure_pid": 38300,
+  "unidentified_pid_absent_now_only": true,
+  "runtime_absent": true,
+  "scope_absent_after_empty_rmdir": true,
+  "scope": "/Users/hoppworks/.local/share/agent-builds/rhai/current-darwin-sys-net-behavior-2f795ece-sampler2-20261002",
+  "original_evidence": "/Users/hoppworks/.codex/worktrees/current-darwin-sys-net-behavior/rhai/.scratch/all-tickets/current-darwin-sys-net-behavior-2f795ece-sampler2-20261002/proof-evidence"
+}

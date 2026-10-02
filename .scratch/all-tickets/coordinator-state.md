@@ -538,7 +538,8 @@ bytecode setting and outer600; 0.502s was wrongly called whole-launch duration.
 This is first rejected source correction for the sampler infrastructure cause.
 Normal real five-sample light readback passed narrowly; retained at
 darwin-sampler-native-light-readback.json/.log. No native feature acceptance.
-Original first stage and first consumed invocation unchanged; process count84.
+Original first stage preserved; second package invocation now consumed; process
+nativecount84 is unchanged. See current second-launch outcome below.
 
 Previous status-only turn is NO PROGRESS. Current responsible fix batch CLI88451
 is terminal0; candidate8aa0bfda7c43c4932c48f5723a6f262b00569cbd, brief
@@ -551,20 +552,55 @@ All three findings closed narrowly; sixteen exception/cleanup controls passed,
 prior helper interruption RED/current GREEN, stage pins agree. Native suite and
 real observer interruption lifecycle still unverified; no allowance consumed.
 Consolidate three findings in existing owned Darwin context, meaningful interrupt
-RED/GREEN, then affected independent recheck against db05. No heavy/native launch
-until accepted correction and fresh slot check. 30min active-work checkpoint,
-unchanged600/540/510 caps, unknown descendants fail closed. Prospective sampler2
-stage identity retained; no new central scope. Existing source/doc/native evidence
-remains preserved; cause09 stays stopped and native85 unlaunched. Next action is
-retain accepted source integration on fork main, then launch single finite native
-follow-up only when actual Mac slot is free. Fresh exact observation: Mac foreign
-Playwright28242/start18:26:33local and browser28287/start18:26:34 are live
-elapsed7:20/7:19; workhorse foreign make3808482/start18:27:22 and nextest3812407/
-start18:27:28 live6:29/6:24, cwd Tauron guardrails-G30g19. Workhorse initially
-lacks rg; fallback grep read-only observation succeeded. No foreign signals or
-resource changes. Windows heavy follow-up also waits for workhorse slot. Current
-turn PROGRESS: source sampler correction and independent affected acceptance;
-full goal remains incomplete, process cause09 stopped/count84 preserved.
+RED/GREEN, then affected independent recheck against db05. The accepted source remains unchanged. Second package actual invocation99772
+terminal1, first infrastructure failure plus one unsuccessful recovery for same
+identity census cause; no third launch. Cause09 stopped/count84 preserved.
+Real observers SIGINT/SIGTERM proof remains accepted narrowly, not feature proof.
+
+## Current second-launch outcome and next action
+
+Previous goal turn PROGRESS: accepted sampler source integrated/pushed e93c780f,
+sole-main exact readback. Current turn PROGRESS: actual signal/reap proof and
+second native infrastructure evidence changes next action. Fresh preflight
+correctly detected new foreign Mac cargo35676/rustc36920 and Playwright37458/
+browser37508; coordinator shell incorrectly continued after Python assertion
+because subsequent launch was not chained on success. This violated the one-heavy-run convention through a
+machine-slot overlap; do not claim free-slot launch. Exact own interrupt.request
+was created after observing mistake; actual invocation was already terminal1
+from identity error38300 before that request could stop it. No foreign process
+was signalled, restarted or cleaned. Future launch must have one explicit
+successful checked return before any resource creation/dispatch, preferably one
+Python entrypoint using check=True; no newline continuation after failed gate.
+
+Second run installed privateRust1.77.2 and verified rustc/cargo; first wrong-read
+Cargo control was dispatched but sampler failed before intended assertion at
+helper sample_resources line315: cannot record exact identity for owned
+descendant38300. Not a valid RED, not production/feature failure. Unknown actual
+descendant stayed failclosed. Original proof-evidence and outer logs remain in
+owned sampler2 stage. Actual export timestamp11.175s measures helper startup
+through export, not whole outer duration. Sample maxima RSS392016KiB/storage
+548984KiB/desc2 from17periodic samples, not continuous peak. Package actual
+invocations2 consumed, original finite follow-up exhausted; no default reset.
+Root independent9PID rows (8recorded identities plus38300 absent-now-only),
+group38056 empty, runtime absent, exact empty session rmdir. Receipt
+darwin-second-launch-cleanup.json. Rustup/Cargo source/toolchain receipts do not
+certify intended controls/feature rows. Existing Linux and prior source proofs
+remain applicable. Workhorse foreign3808482/3812407 still occupied; Windows
+native follow-up waits. Fresh Expert12 CLI1651 terminal0; answer12-darwin-resource-census-identity.answer.md
+read by Coordinator. One-snapshot identity/resource census and conservative
+any-live-PID cleanup recommended; original38300 identity remains unknown.
+Coordinator reconciles owner standing acceptance of recommendations with this
+finite recommendation: source30min planning checkpoint, single affectedreview,
+lightchurn <=20 one-sec samples/60sec/fourchildren and at most one new native
+package invocation, cumulative2->3 only if launched; unchanged safety caps.
+No artificial PENDING gate and no reset. Source-only responsible Standard dispatched
+under darwin-census-followup-brief.md; no new native allocation/launch yet.
+Next safe action: collect single fresh Expert escalation for
+repeated exact-identity census failures, assess observable native acceptance
+route, conservative membership/resource bounds, source regression and safer
+mechanism without pretending an vanished unknown PID is an observer. Record
+recommendation/limits and fix only within that justified bounded package; no
+additional launch before diagnostic result and actual slot acceptance.
 
 Windows accounting source report conclusion that extracted SourceRoot unavailable
 is superseded by root direct original audit-tree.txt and screenshot readback.
