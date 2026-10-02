@@ -1,0 +1,3 @@
+control=managed-natural-exit-eperm.uvdVsh.cargo.log.control-managed_spawn_post_reap_cancel_bounds_escaped_capture.log
+integration=/Users/hoppworks/projects/rhai-process-unix-run/.scratch/process-unix-run/evidence/managed-natural-exit-eperm.uvdVsh.cargo.log.restored-sys-process.log
+unix_owner_tests=/Users/hoppworks/projects/rhai-process-unix-run/.scratch/process-unix-run/evidence/managed-natural-exit-eperm.uvdVsh.cargo.log.restored-unix-owner-tests.log

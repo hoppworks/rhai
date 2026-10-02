@@ -1,0 +1,159 @@
+source_head=c19e90d4b5be95f8598ec53dbcf497e09583f3eb
+source_test_sha256=c335da2a96d9463a8fb3ea4e6697fcd63edb05bdbf906c796ad6c95201fcf63b  /Users/hoppworks/projects/rhai-process-unix-run/tests/sys_process.rs
+host=27.0
+Darwin Daniels-MBP-2.fritz.box 27.0.0 Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:59 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8142 arm64
+rustup=rustup 1.29.1 (d95a37b6a 2026-08-13)
+info: This is the version for the rustup toolchain manager, not the rustc compiler.
+info: the currently active `rustc` version is `rustc 1.93.0 (254b59607 2026-01-19)`
+install argv: rustup toolchain install 1.77.2 --profile minimal --no-self-update
+info: syncing channel updates for 1.77.2-aarch64-apple-darwin
+info: latest update on 2024-04-09 for version 1.77.2 (25ef9e3d8 2024-04-09)
+info: downloading 3 components
+
+  1.77.2-aarch64-apple-darwin installed - rustc 1.77.2 (25ef9e3d8 2024-04-09)
+
+info: default toolchain set to 1.77.2-aarch64-apple-darwin
+cargo test argv: cargo +1.77.2 test --locked --features testing-environ,sys,metadata --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture; CARGO_BUILD_JOBS=2
+rustc 1.77.2 (25ef9e3d8 2024-04-09)
+cargo 1.77.2 (e52e36006 2024-03-26)
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded byteorder v1.5.0
+  Downloaded const-random-macro v0.1.16
+  Downloaded const-random v0.1.18
+  Downloaded ahash v0.8.12
+  Downloaded cfg-if v1.0.5
+  Downloaded maybe-owned v0.3.4
+  Downloaded bitflags v2.13.2
+  Downloaded itoa v1.0.15
+  Downloaded getrandom v0.2.17
+  Downloaded fs-set-times v0.20.3
+  Downloaded ambient-authority v0.0.2
+  Downloaded version_check v0.9.5
+  Downloaded errno v0.3.14
+  Downloaded crunchy v0.2.4
+  Downloaded smartstring v1.0.1
+  Downloaded autocfg v1.5.1
+  Downloaded tiny-keccak v2.0.2
+  Downloaded paste v1.0.15
+  Downloaded static_assertions v1.1.0
+  Downloaded quote v1.0.41
+  Downloaded unicode-ident v1.0.22
+  Downloaded proc-macro2 v1.0.103
+  Downloaded thin-vec v0.2.19
+  Downloaded serde_derive v1.0.229
+  Downloaded num-traits v0.2.19
+  Downloaded getrandom v0.3.4
+  Downloaded serde v1.0.229
+  Downloaded serde_core v1.0.229
+  Downloaded memchr v2.8.3
+  Downloaded cap-primitives v4.0.3
+  Downloaded serde_json v1.0.145
+  Downloaded portable-atomic v1.15.0
+  Downloaded cap-std v4.0.3
+  Downloaded ryu v1.0.20
+  Downloaded rmp-serde v1.3.0
+  Downloaded io-lifetimes v2.0.4
+  Downloaded smallvec v1.16.2
+  Downloaded zerocopy v0.8.59
+  Downloaded syn v3.0.6
+  Downloaded syn v2.0.106
+  Downloaded rmp v0.8.14
+  Downloaded once_cell v1.21.4
+  Downloaded io-extras v0.19.0
+  Downloaded rustix v1.1.5
+  Downloaded ipnet v2.12.2
+  Downloaded io-lifetimes v3.0.1
+  Downloaded libc v0.2.189
+ Downloading crates ...
+  Downloaded web-time v1.1.0
+   Compiling proc-macro2 v1.0.103
+   Compiling quote v1.0.41
+   Compiling unicode-ident v1.0.22
+   Compiling libc v0.2.189
+   Compiling autocfg v1.5.1
+   Compiling version_check v0.9.5
+   Compiling serde_core v1.0.229
+   Compiling crunchy v0.2.4
+   Compiling rustix v1.1.5
+   Compiling tiny-keccak v2.0.2
+   Compiling io-lifetimes v2.0.4
+   Compiling cfg-if v1.0.5
+   Compiling io-lifetimes v3.0.1
+   Compiling errno v0.3.14
+   Compiling num-traits v0.2.19
+   Compiling syn v3.0.6
+   Compiling io-extras v0.19.0
+   Compiling portable-atomic v1.15.0
+   Compiling serde v1.0.229
+   Compiling bitflags v2.13.2
+   Compiling serde_derive v1.0.229
+   Compiling getrandom v0.2.17
+   Compiling cap-primitives v4.0.3
+   Compiling zerocopy v0.8.59
+   Compiling getrandom v0.3.4
+   Compiling once_cell v1.21.4
+   Compiling const-random-macro v0.1.16
+   Compiling fs-set-times v0.20.3
+   Compiling smartstring v1.0.1
+   Compiling ahash v0.8.12
+   Compiling paste v1.0.15
+   Compiling maybe-owned v0.3.4
+   Compiling serde_json v1.0.145
+   Compiling cap-std v4.0.3
+   Compiling ipnet v2.12.2
+   Compiling ambient-authority v0.0.2
+   Compiling const-random v0.1.18
+   Compiling syn v2.0.106
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-zkmxhnr_/source)
+   Compiling itoa v1.0.15
+   Compiling ryu v1.0.20
+   Compiling static_assertions v1.1.0
+   Compiling memchr v2.8.3
+   Compiling rhai_codegen v3.2.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-zkmxhnr_/source/codegen)
+   Compiling smallvec v1.16.2
+   Compiling thin-vec v0.2.19
+   Compiling byteorder v1.5.0
+   Compiling rmp v0.8.14
+   Compiling rmp-serde v1.3.0
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized + debuginfo] target(s) in 23.97s
+     Running tests/sys_process.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-zkmxhnr_/target/debug/deps/sys_process-8f07496feb7ab97b)
+
+running 1 test
+thread 'run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data' panicked at tests/sys_process.rs:39:50:
+called `Result::unwrap()` on an `Err` value: ErrorFunctionNotFound("run_raw (&str | ImmutableString | String, array, map)", 1:1)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data ... FAILED
+
+failures:
+
+failures:
+    run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 1 filtered out; finished in 0.01s
+
+error: test failed, to rerun pass `--test sys_process`
+cargo_status=101

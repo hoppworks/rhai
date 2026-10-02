@@ -1,0 +1,448 @@
+runtime_path=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-y290uurf
+os=macOS-27.0-arm64-arm-64bit
+python=3.9.6 (default, Aug 25 2026, 21:26:21)  [Clang 21.0.0 (clang-2100.3.34.2)]
+source_head=a9c4aadf6cbc97ea205b5cb61275afec7aa74f6a
+source_manifest={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/mod.rs': 'f4adb768333afb9303d4eb40053db90602e220630dd1335042532cfb082f2c6b', 'src/packages/sys/process.rs': 'cce804da530776565acddd5ba3e7b25338d3332378624c8e17d06d97162241bc', 'src/packages/sys/process/unix.rs': 'bad97c6a476fea20d92198838926c6071b0738698751cd8a271db74d108bd447', 'tests/sys_process.rs': '483b5180f21923161a42b16076dc6ddb31bb31235ac33103c1b5b25e3dba165d'}
+harness_sha256=7f3587f483a802c1700dd0a135d39e901a2c8217abc243cff6d5e00b830520c9
+runner_sha256=9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d
+wrapper_sha256=8a72eea44f421d1218b3d80c82e2cafd735ed26d96ebfc2a09ec5d98da79e991
+storage_sample_kib=0
+storage_sample_kib=14152
+command_name=extract-baseline
+command_argv=['tar', '-xf', '/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-y290uurf/baseline.tar', '-C', '/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-y290uurf/source']
+command_cwd=/Users/hoppworks/projects/rhai-process-unix-run
+command_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-y290uurf/01-extract-baseline.log
+storage_sample_kib=14152
+storage_sample_kib=31416
+command_status=0 name=extract-baseline
+command_output_begin name=01-extract-baseline.log complete=true bytes=0 clipped=false
+
+command_output_end
+private_source_manifest={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/mod.rs': 'f4adb768333afb9303d4eb40053db90602e220630dd1335042532cfb082f2c6b', 'src/packages/sys/process.rs': 'cce804da530776565acddd5ba3e7b25338d3332378624c8e17d06d97162241bc', 'src/packages/sys/process/unix.rs': 'bad97c6a476fea20d92198838926c6071b0738698751cd8a271db74d108bd447', 'tests/sys_process.rs': '483b5180f21923161a42b16076dc6ddb31bb31235ac33103c1b5b25e3dba165d'}
+accepted_lock_sha256=8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa
+private_lock_sha256=fb30d25a7f00c2e0d3c8eefb7ee787c21b1043cbe391a3c5aa58209e1afe9e8e
+command_name=install-rust-1.77.2
+command_argv=['rustup', 'toolchain', 'install', '1.77.2', '--profile', 'minimal', '--no-self-update']
+command_cwd=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-y290uurf/source
+command_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-y290uurf/02-install-rust-1.77.2.log
+storage_sample_kib=17296
+storage_sample_kib=60200
+storage_sample_kib=83704
+storage_sample_kib=106232
+storage_sample_kib=128760
+storage_sample_kib=243504
+storage_sample_kib=382000
+storage_sample_kib=569300
+storage_sample_kib=483184
+storage_sample_kib=483188
+command_status=0 name=install-rust-1.77.2
+command_output_begin name=02-install-rust-1.77.2.log complete=true bytes=308 clipped=false
+info: syncing channel updates for 1.77.2-aarch64-apple-darwin
+info: latest update on 2024-04-09 for version 1.77.2 (25ef9e3d8 2024-04-09)
+info: downloading 3 components
+
+  1.77.2-aarch64-apple-darwin installed - rustc 1.77.2 (25ef9e3d8 2024-04-09)
+
+info: default toolchain set to 1.77.2-aarch64-apple-darwin
+
+command_output_end
+command_name=rustc-version
+command_argv=['rustup', 'run', '1.77.2', 'rustc', '--version']
+command_cwd=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-y290uurf/source
+command_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-y290uurf/03-rustc-version.log
+storage_sample_kib=483188
+storage_sample_kib=483192
+command_status=0 name=rustc-version
+command_output_begin name=03-rustc-version.log complete=true bytes=36 clipped=false
+rustc 1.77.2 (25ef9e3d8 2024-04-09)
+
+command_output_end
+command_name=cargo-version
+command_argv=['rustup', 'run', '1.77.2', 'cargo', '--version']
+command_cwd=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-y290uurf/source
+command_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-y290uurf/04-cargo-version.log
+storage_sample_kib=483192
+storage_sample_kib=483196
+command_status=0 name=cargo-version
+command_output_begin name=04-cargo-version.log complete=true bytes=36 clipped=false
+cargo 1.77.2 (e52e36006 2024-03-26)
+
+command_output_end
+rustc_version=rustc 1.77.2 (25ef9e3d8 2024-04-09)
+cargo_version=cargo 1.77.2 (e52e36006 2024-03-26)
+command_name=wrong-no-index-output-expectation
+command_argv=['rustup', 'run', '1.77.2', 'cargo', 'test', '--locked', '--features', 'testing-environ,sys,metadata,no_index', '--test', 'sys_process', 'scalar_run_with_cwd_works_without_collections', '--', '--exact', '--nocapture']
+command_cwd=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-y290uurf/source
+command_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-y290uurf/05-wrong-no-index-output-expectation.log
+storage_sample_kib=483196
+storage_sample_kib=483224
+storage_sample_kib=483224
+storage_sample_kib=483224
+storage_sample_kib=484036
+storage_sample_kib=486472
+storage_sample_kib=486948
+storage_sample_kib=523856
+storage_sample_kib=531212
+storage_sample_kib=542768
+storage_sample_kib=549968
+storage_sample_kib=562472
+storage_sample_kib=570112
+storage_sample_kib=570668
+storage_sample_kib=581300
+storage_sample_kib=587336
+storage_sample_kib=602508
+storage_sample_kib=605152
+storage_sample_kib=605168
+storage_sample_kib=610616
+storage_sample_kib=644192
+storage_sample_kib=650340
+storage_sample_kib=658892
+storage_sample_kib=660452
+storage_sample_kib=660452
+storage_sample_kib=660452
+storage_sample_kib=660460
+storage_sample_kib=669636
+storage_sample_kib=675180
+storage_sample_kib=680720
+storage_sample_kib=722060
+storage_sample_kib=722056
+command_status=101 name=wrong-no-index-output-expectation
+command_output_begin name=05-wrong-no-index-output-expectation.log complete=true bytes=7646 clipped=false
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded errno v0.3.14
+  Downloaded autocfg v1.5.1
+  Downloaded getrandom v0.3.4
+  Downloaded const-random v0.1.18
+  Downloaded const-random-macro v0.1.16
+  Downloaded ambient-authority v0.0.2
+  Downloaded itoa v1.0.15
+  Downloaded cfg-if v1.0.5
+  Downloaded version_check v0.9.5
+  Downloaded maybe-owned v0.3.4
+  Downloaded crunchy v0.2.4
+  Downloaded smartstring v1.0.1
+  Downloaded quote v1.0.41
+  Downloaded rmp v0.8.14
+  Downloaded thin-vec v0.2.19
+  Downloaded tiny-keccak v2.0.2
+  Downloaded unicode-ident v1.0.22
+  Downloaded serde_core v1.0.229
+  Downloaded memchr v2.8.3
+  Downloaded cap-primitives v4.0.3
+  Downloaded proc-macro2 v1.0.103
+  Downloaded serde_derive v1.0.229
+  Downloaded serde_json v1.0.145
+  Downloaded num-traits v0.2.19
+  Downloaded cap-std v4.0.3
+  Downloaded portable-atomic v1.15.0
+  Downloaded rmp-serde v1.3.0
+  Downloaded once_cell v1.21.4
+  Downloaded io-extras v0.19.0
+  Downloaded zerocopy v0.8.59
+  Downloaded syn v3.0.6
+  Downloaded syn v2.0.106
+  Downloaded bitflags v2.13.2
+  Downloaded ahash v0.8.12
+  Downloaded static_assertions v1.1.0
+  Downloaded smallvec v1.16.2
+  Downloaded rustix v1.1.5
+  Downloaded serde v1.0.229
+  Downloaded ryu v1.0.20
+  Downloaded getrandom v0.2.17
+  Downloaded paste v1.0.15
+  Downloaded io-lifetimes v3.0.1
+  Downloaded byteorder v1.5.0
+  Downloaded ipnet v2.12.2
+  Downloaded io-lifetimes v2.0.4
+  Downloaded fs-set-times v0.20.3
+  Downloaded libc v0.2.189
+ Downloading crates ...
+  Downloaded web-time v1.1.0
+   Compiling proc-macro2 v1.0.103
+   Compiling unicode-ident v1.0.22
+   Compiling libc v0.2.189
+   Compiling quote v1.0.41
+   Compiling autocfg v1.5.1
+   Compiling serde_core v1.0.229
+   Compiling crunchy v0.2.4
+   Compiling version_check v0.9.5
+   Compiling cfg-if v1.0.5
+   Compiling io-lifetimes v2.0.4
+   Compiling rustix v1.1.5
+   Compiling tiny-keccak v2.0.2
+   Compiling io-lifetimes v3.0.1
+   Compiling errno v0.3.14
+   Compiling syn v3.0.6
+   Compiling num-traits v0.2.19
+   Compiling io-extras v0.19.0
+   Compiling serde v1.0.229
+   Compiling bitflags v2.13.2
+   Compiling portable-atomic v1.15.0
+   Compiling serde_derive v1.0.229
+   Compiling getrandom v0.2.17
+   Compiling once_cell v1.21.4
+   Compiling zerocopy v0.8.59
+   Compiling cap-primitives v4.0.3
+   Compiling getrandom v0.3.4
+   Compiling const-random-macro v0.1.16
+   Compiling fs-set-times v0.20.3
+   Compiling smartstring v1.0.1
+   Compiling ahash v0.8.12
+   Compiling maybe-owned v0.3.4
+   Compiling ambient-authority v0.0.2
+   Compiling paste v1.0.15
+   Compiling cap-std v4.0.3
+   Compiling ipnet v2.12.2
+   Compiling serde_json v1.0.145
+   Compiling const-random v0.1.18
+   Compiling syn v2.0.106
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-y290uurf/source)
+   Compiling ryu v1.0.20
+   Compiling memchr v2.8.3
+   Compiling itoa v1.0.15
+   Compiling static_assertions v1.1.0
+   Compiling rhai_codegen v3.2.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-y290uurf/source/codegen)
+   Compiling smallvec v1.16.2
+   Compiling thin-vec v0.2.19
+   Compiling byteorder v1.5.0
+   Compiling rmp v0.8.14
+   Compiling rmp-serde v1.3.0
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:666:9
+    |
+666 |     let mut known = vec!["cwd", "env", "env_clear", "stdin", "timeout", "max_output"];
+    |         ----^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:1093:9
+     |
+1093 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: function `os_to_string` is never used
+   --> src/packages/sys/fs.rs:307:4
+    |
+307 | fn os_to_string(what: &str, s: std::ffi::OsString) -> Result<String, SysError> {
+    |    ^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` on by default
+
+warning: `rhai` (lib) generated 4 warnings (run `cargo fix --lib -p rhai` to apply 2 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: unused imports: `FsAccess`, `ProcessCause`, `ProgramPolicy`
+ --> tests/sys_process.rs:6:27
+  |
+6 | use rhai::packages::sys::{FsAccess, ProcessCause, ProgramPolicy, SysConfig, SysError};
+  |                           ^^^^^^^^  ^^^^^^^^^^^^  ^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: unused import: `sys_support::TempDir`
+  --> tests/sys_process.rs:15:5
+   |
+15 | use sys_support::TempDir;
+   |     ^^^^^^^^^^^^^^^^^^^^
+
+warning: constant `FIXTURE_ENV` is never used
+  --> tests/sys_process.rs:17:7
+   |
+17 | const FIXTURE_ENV: &str = "RHAI_SYS_PROCESS_FIXTURE";
+   |       ^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: constant `FIXTURE_RECORD_ENV` is never used
+  --> tests/sys_process.rs:18:7
+   |
+18 | const FIXTURE_RECORD_ENV: &str = "RHAI_SYS_PROCESS_FIXTURE_RECORD";
+   |       ^^^^^^^^^^^^^^^^^^
+
+warning: constant `LIBTEST_QUIET_START` is never used
+  --> tests/sys_process.rs:19:7
+   |
+19 | const LIBTEST_QUIET_START: &[u8] = b"\nrunning 1 test\n";
+   |       ^^^^^^^^^^^^^^^^^^^
+
+warning: constant `ACTIVE_STDERR_MARKER` is never used
+  --> tests/sys_process.rs:20:7
+   |
+20 | const ACTIVE_STDERR_MARKER: &str = "stderr-active-marker\n";
+   |       ^^^^^^^^^^^^^^^^^^^^
+
+warning: constant `ACTIVE_STDERR_OUTPUT` is never used
+  --> tests/sys_process.rs:21:7
+   |
+21 | const ACTIVE_STDERR_OUTPUT: &str = "stderr-active-marker\n";
+   |       ^^^^^^^^^^^^^^^^^^^^
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+warning: `rhai` (test "sys_process") generated 7 warnings (run `cargo fix --test "sys_process"` to apply 2 suggestions)
+    Finished test [unoptimized] target(s) in 31.45s
+     Running tests/sys_process.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-y290uurf/target/debug/deps/sys_process-3b902ba4233fd17e)
+
+running 1 test
+no-index scalar child_pid=9023 reap=ESRCH
+thread 'scalar_run_with_cwd_works_without_collections' panicked at tests/sys_process.rs:636:5:
+assertion `left == right` failed
+  left: "/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-y290uurf/tmp/rhai-sys-test-9021-scalar_run_with_cwd_works_without_collections-0/child\n"
+ right: "/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-y290uurf/tmp/rhai-sys-test-9021-scalar_run_with_cwd_works_without_collections-0/child\nwrong-control"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test scalar_run_with_cwd_works_without_collections ... FAILED
+
+failures:
+
+failures:
+    scalar_run_with_cwd_works_without_collections
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.12s
+
+error: test failed, to rerun pass `--test sys_process`
+
+command_output_end
+external_pid_readback pid=9023 result=ESRCH label=wrong-control
+command_name=no-index-scalar-green
+command_argv=['rustup', 'run', '1.77.2', 'cargo', 'test', '--locked', '--features', 'testing-environ,sys,metadata,no_index', '--test', 'sys_process', 'scalar_run_with_cwd_works_without_collections', '--', '--exact', '--nocapture']
+command_cwd=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-y290uurf/source
+command_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-y290uurf/06-no-index-scalar-green.log
+storage_sample_kib=722056
+storage_sample_kib=722060
+command_status=0 name=no-index-scalar-green
+command_output_begin name=06-no-index-scalar-green.log complete=true bytes=3704 clipped=false
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:666:9
+    |
+666 |     let mut known = vec!["cwd", "env", "env_clear", "stdin", "timeout", "max_output"];
+    |         ----^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:1093:9
+     |
+1093 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: function `os_to_string` is never used
+   --> src/packages/sys/fs.rs:307:4
+    |
+307 | fn os_to_string(what: &str, s: std::ffi::OsString) -> Result<String, SysError> {
+    |    ^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` on by default
+
+warning: `rhai` (lib) generated 4 warnings (run `cargo fix --lib -p rhai` to apply 2 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-y290uurf/source)
+warning: unused imports: `FsAccess`, `ProcessCause`, `ProgramPolicy`
+ --> tests/sys_process.rs:6:27
+  |
+6 | use rhai::packages::sys::{FsAccess, ProcessCause, ProgramPolicy, SysConfig, SysError};
+  |                           ^^^^^^^^  ^^^^^^^^^^^^  ^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: unused import: `sys_support::TempDir`
+  --> tests/sys_process.rs:15:5
+   |
+15 | use sys_support::TempDir;
+   |     ^^^^^^^^^^^^^^^^^^^^
+
+warning: constant `FIXTURE_ENV` is never used
+  --> tests/sys_process.rs:17:7
+   |
+17 | const FIXTURE_ENV: &str = "RHAI_SYS_PROCESS_FIXTURE";
+   |       ^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: constant `FIXTURE_RECORD_ENV` is never used
+  --> tests/sys_process.rs:18:7
+   |
+18 | const FIXTURE_RECORD_ENV: &str = "RHAI_SYS_PROCESS_FIXTURE_RECORD";
+   |       ^^^^^^^^^^^^^^^^^^
+
+warning: constant `LIBTEST_QUIET_START` is never used
+  --> tests/sys_process.rs:19:7
+   |
+19 | const LIBTEST_QUIET_START: &[u8] = b"\nrunning 1 test\n";
+   |       ^^^^^^^^^^^^^^^^^^^
+
+warning: constant `ACTIVE_STDERR_MARKER` is never used
+  --> tests/sys_process.rs:20:7
+   |
+20 | const ACTIVE_STDERR_MARKER: &str = "stderr-active-marker\n";
+   |       ^^^^^^^^^^^^^^^^^^^^
+
+warning: constant `ACTIVE_STDERR_OUTPUT` is never used
+  --> tests/sys_process.rs:21:7
+   |
+21 | const ACTIVE_STDERR_OUTPUT: &str = "stderr-active-marker\n";
+   |       ^^^^^^^^^^^^^^^^^^^^
+
+warning: `rhai` (test "sys_process") generated 7 warnings (run `cargo fix --test "sys_process"` to apply 2 suggestions)
+    Finished test [unoptimized] target(s) in 0.52s
+     Running tests/sys_process.rs (/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-y290uurf/target/debug/deps/sys_process-3b902ba4233fd17e)
+
+running 1 test
+no-index scalar child_pid=9106 reap=ESRCH
+test scalar_run_with_cwd_works_without_collections ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.12s
+
+
+command_output_end
+external_pid_readback pid=9106 result=ESRCH label=restored-green
+final_tested_source_manifest={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/mod.rs': 'f4adb768333afb9303d4eb40053db90602e220630dd1335042532cfb082f2c6b', 'src/packages/sys/process.rs': 'cce804da530776565acddd5ba3e7b25338d3332378624c8e17d06d97162241bc', 'src/packages/sys/process/unix.rs': 'bad97c6a476fea20d92198838926c6071b0738698751cd8a271db74d108bd447', 'tests/sys_process.rs': '483b5180f21923161a42b16076dc6ddb31bb31235ac33103c1b5b25e3dba165d'}
+storage_sample_kib=722060
+sampled_storage_max_kib=722060
+no_index_classification=scalar_text_cwd_child_reaped_control_pid=9023_green_pid=9106

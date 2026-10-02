@@ -271,6 +271,26 @@ impl FsState {
             }
         }
     }
+
+    /// Open a child working directory through the configured filesystem capability. Retaining
+    /// this directory handle lets the process launcher change directory by descriptor without
+    /// reopening a pathname after policy validation.
+    pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+        let resolved = self.resolve(path, Need::Read)?;
+        let unrestricted = resolved.host_path.is_some();
+        let directory = if let Some(host_path) = resolved.host_path {
+            Dir::open_ambient_dir(host_path, ambient_authority())
+        } else {
+            resolved.dir().open_dir(&resolved.rel)
+        };
+        directory.map_err(|e| {
+            if unrestricted {
+                SysError::io("open process working directory", path, &e)
+            } else {
+                map_io("open process working directory", path, &e)
+            }
+        })
+    }
 }
 
 /// Map an I/O error from `cap-std`, turning its sandbox-escape error into `Denied`.

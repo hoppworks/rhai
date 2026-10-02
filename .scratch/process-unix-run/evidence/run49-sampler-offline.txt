@@ -1,0 +1,10 @@
+raw_sha256=97ab7eccd945c6baa639d6ba5b52679e4686a5127dba0be99be2e447dcc4ba6e
+harness_sha256=a6e4db413e787003d3a769bc03f8c5c27269f865bbc071bb583790811691e96b
+run49_failure_replayed=('status', 1, '250088\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-5l9vdd8s', 'du: /private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-5l9vdd8s/shared-child-fixture-43116-3: No such file or directory')
+bounded_retry_value_kib=250084 attempts=2
+offline_cases=nonzero_then_valid,two_nonzero,two_timeouts,deadline_exhausted,malformed,wrong_path,threshold
+emit_log_helper=executed_and_retained_terminal_diagnostic
+exit_manifest_export=executed_for_original_and_private_files
+run_cargo_terminal_order=source-reviewed; exception_output_retained=source-reviewed
+sample_parser=legacy_run49_and_new_attempt_status_formats
+classification=source_only_offline_sampler_verification; no_cargo_or_os_child_launched

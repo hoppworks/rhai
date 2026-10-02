@@ -502,7 +502,10 @@ static RESERVED_LIST: [(&str, bool, bool, bool); 150] = [
     ("private", cfg!(feature = "no_function"), false, false),
     ("var", true, false, false),
     ("protected", true, false, false),
-    ("spawn", true, false, false),
+    // `spawn` is a reserved keyword, but the `sys` package documents it as a global function.
+    // Permit only function-call syntax when that package is enabled; it remains reserved in
+    // scripts and unavailable as a method name.
+    ("spawn", true, cfg!(feature = "sys"), false),
     ("shared", true, false, false),
     ("is", true, false, false),
     ("===", true, false, false),

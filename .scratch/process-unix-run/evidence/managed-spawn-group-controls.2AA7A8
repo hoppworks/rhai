@@ -1,0 +1,451 @@
+offline_receipt_classifier_checks=6 baseline_and_identity_or_missing_receipt_mutations_passed
+phase=development_managed_spawn_explicit_kill_and_final_clone_drop
+acceptance_scope=public_managed_spawn_kill_and_final_shared_child_drop
+runtime_path=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx
+python=3.9.6 (default, Aug 25 2026, 21:26:21)  [Clang 21.0.0 (clang-2100.3.34.2)]
+platform=macOS-27.0-arm64-arm-64bit
+harness_pid=27302 supervisor_pid=27301 inherited_pgid=27301
+cargo_path=/Users/hoppworks/.rustup/toolchains/stable-aarch64-apple-darwin/bin/cargo cargo_version=cargo 1.93.0 (083ac5135 2025-12-15)
+rustc_path=/Users/hoppworks/.rustup/toolchains/stable-aarch64-apple-darwin/bin/rustc rustc_version=rustc 1.93.0 (254b59607 2026-01-19) | binary: rustc | commit-hash: 254b59607d4417e9dffbc307138ae5c86280fe4c | commit-date: 2026-01-19 | host: aarch64-apple-darwin | release: 1.93.0 | LLVM version: 21.1.8
+rustdoc_path=/Users/hoppworks/.rustup/toolchains/stable-aarch64-apple-darwin/bin/rustdoc rustdoc_version=rustdoc 1.93.0 (254b59607 2026-01-19)
+repo_head=780ecdb007180dbe964a8e1993cb3a8a93e5c906
+repo_dirty=[' M .scratch/process-unix-run/coordinator-state.md', ' M tests/sys_process.rs', '?? .scratch/process-unix-run/cleanup-rust-archive-partial.py', '?? .scratch/process-unix-run/escalations/07-rustup-install-recovery.md', '?? .scratch/process-unix-run/evidence/entered-wait.0o4JA4', '?? .scratch/process-unix-run/evidence/entered-wait.0o4JA4.wrong-control.log', '?? .scratch/process-unix-run/evidence/managed-scope-red.By3uJf', '?? .scratch/process-unix-run/evidence/managed-scope-red.By3uJf.cargo.log', '?? .scratch/process-unix-run/evidence/managed-spawn-group-controls.2AA7A8', '?? .scratch/process-unix-run/evidence/post-reap-kill.e1VqcL', '?? .scratch/process-unix-run/evidence/quarantine-reservation.ecKi0j', '?? .scratch/process-unix-run/evidence/quarantine-reservation.qyGAZk', '?? .scratch/process-unix-run/evidence/rust-1.77.2-procurement.dFUPvK', '?? .scratch/process-unix-run/evidence/shared-child-first-green.GHCfV0', '?? .scratch/process-unix-run/evidence/shared-child-first-green.WnqVYv', '?? .scratch/process-unix-run/fetch-rust-1.77.2.py', '?? .scratch/process-unix-run/managed-spawn-group-controls.py', '?? .scratch/process-unix-run/quarantine-reservation-offline.py', '?? .scratch/process-unix-run/quarantine-reservation.py', '?? .scratch/process-unix-run/run-fetch-rust-1.77.2.sh', '?? .scratch/process-unix-run/run-managed-spawn-group-controls.sh', '?? .scratch/process-unix-run/run-quarantine-reservation-offline.sh', '?? .scratch/process-unix-run/run-quarantine-reservation.sh']
+original_overlay_hashes={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/config.rs': '723da516ad26082ae25ca32b791d629d8b7e29e8c7272b2843ad7d6c3192a845', 'src/packages/sys/mod.rs': 'ee2dfc0900d64481d09d6d20bbd64b75ac05a316e02788cdf58e9fe52c6be0c5', 'src/packages/sys/process.rs': '090094476662417aa94e2ff519cb8038c1d3721e02be6ec166762502bfbff2e2', 'src/packages/sys/process/unix.rs': '78820b6efbee3ae372a48b2664902cbcd5f92a696bd6264ae2d716675188a9e6', 'tests/sys_process.rs': '42038e31d12387cdfb733779ccef36691141e83b171ede6843f7a9737f675ffe'}
+managed_test_hash=42038e31d12387cdfb733779ccef36691141e83b171ede6843f7a9737f675ffe
+harness_hash=9ec6c688eca03ecb636637b0c6422246f1e96f4ae831b614eed4e993bcc64953
+run_scoped_hash=9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d
+wrapper_hash=97324ecf658a7061ffe6cf7a37c72d1ab23edfe0bb7279ef25616304f4dc1ee7
+storage_sample_attempt=1 status=0 stdout='0\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=0
+private_source_hashes={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/config.rs': '723da516ad26082ae25ca32b791d629d8b7e29e8c7272b2843ad7d6c3192a845', 'src/packages/sys/mod.rs': 'ee2dfc0900d64481d09d6d20bbd64b75ac05a316e02788cdf58e9fe52c6be0c5', 'src/packages/sys/process.rs': '090094476662417aa94e2ff519cb8038c1d3721e02be6ec166762502bfbff2e2', 'src/packages/sys/process/unix.rs': '78820b6efbee3ae372a48b2664902cbcd5f92a696bd6264ae2d716675188a9e6', 'tests/sys_process.rs': '42038e31d12387cdfb733779ccef36691141e83b171ede6843f7a9737f675ffe'}
+private_source=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx/source
+accepted_lock_sha256=8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa private_lock_sha256=2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425 private_direct_libc_edge=true
+control_mutated_unix_sha256=2fd57f7e8e2c101501451d464b37f3cf33f172eb5270dcd7064f7e8b2997fc7d control_kind=omit_managed_group_close_keep_direct_child_kill
+offline_managed_receipt_checks=9 valid controls/restored plus identity, missing, and contradictory mutations rejected
+cargo_argv=['/Users/hoppworks/.rustup/toolchains/stable-aarch64-apple-darwin/bin/cargo', 'test', '--locked', '--test', 'sys_process', '--features', 'testing-environ,sys', '--', 'managed_spawn_kill_stops_leader_worker_leaf_and_preserves_sentinel', '--exact', '--nocapture', '--test-threads=1']
+cargo_cwd=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx/source
+cargo_log=/Users/hoppworks/projects/rhai-process-unix-run/.scratch/process-unix-run/evidence/managed-spawn-group-controls.2AA7A8.cargo.log.kill-group-control.log
+cargo_pid=27313 cargo_pgid=27301
+storage_sample_attempt=1 status=0 stdout='18160\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=18160
+storage_sample_attempt=1 status=0 stdout='21432\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=21432
+storage_sample_attempt=1 status=0 stdout='24588\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=24588
+storage_sample_attempt=1 status=0 stdout='30396\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=30396
+storage_sample_attempt=1 status=0 stdout='61528\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=61528
+storage_sample_attempt=1 status=0 stdout='72400\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=72400
+storage_sample_attempt=1 status=0 stdout='82732\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=82732
+storage_sample_attempt=1 status=0 stdout='97608\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=97608
+storage_sample_attempt=1 status=0 stdout='112336\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=112336
+storage_sample_attempt=1 status=0 stdout='114828\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=114828
+storage_sample_attempt=1 status=0 stdout='120212\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=120212
+storage_sample_attempt=1 status=0 stdout='157992\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=157992
+storage_sample_attempt=1 status=0 stdout='175840\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=175840
+storage_sample_attempt=1 status=0 stdout='180652\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=180652
+storage_sample_attempt=1 status=0 stdout='185224\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=185224
+storage_sample_attempt=1 status=0 stdout='185224\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=185224
+storage_sample_attempt=1 status=0 stdout='194512\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=194512
+storage_sample_attempt=1 status=0 stdout='201148\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=201148
+storage_sample_attempt=1 status=0 stdout='230784\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=230784
+cargo_status=101
+cargo_output_begin path=/Users/hoppworks/projects/rhai-process-unix-run/.scratch/process-unix-run/evidence/managed-spawn-group-controls.2AA7A8.cargo.log.kill-group-control.log complete=true bytes=6470
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded bitflags v2.13.2
+  Downloaded version_check v0.9.5
+  Downloaded fs-set-times v0.20.3
+  Downloaded errno v0.3.14
+  Downloaded const-random-macro v0.1.16
+  Downloaded ambient-authority v0.0.2
+  Downloaded const-random v0.1.18
+  Downloaded maybe-owned v0.3.4
+  Downloaded crunchy v0.2.4
+  Downloaded itoa v1.0.15
+  Downloaded cfg-if v1.0.5
+  Downloaded tiny-keccak v2.0.2
+  Downloaded static_assertions v1.1.0
+  Downloaded rmp v0.8.14
+  Downloaded io-lifetimes v2.0.4
+  Downloaded smallvec v1.16.2
+  Downloaded io-extras v0.19.0
+  Downloaded smartstring v1.0.1
+  Downloaded thin-vec v0.2.19
+  Downloaded getrandom v0.3.4
+  Downloaded unicode-ident v1.0.22
+  Downloaded cap-primitives v4.0.3
+  Downloaded memchr v2.8.3
+  Downloaded serde v1.0.229
+  Downloaded proc-macro2 v1.0.103
+  Downloaded portable-atomic v1.15.0
+  Downloaded serde_json v1.0.145
+  Downloaded num-traits v0.2.19
+  Downloaded serde_core v1.0.229
+  Downloaded ryu v1.0.20
+  Downloaded ahash v0.8.12
+  Downloaded cap-std v4.0.3
+  Downloaded rmp-serde v1.3.0
+  Downloaded zerocopy v0.8.59
+  Downloaded syn v2.0.106
+  Downloaded byteorder v1.5.0
+  Downloaded getrandom v0.2.17
+  Downloaded autocfg v1.5.1
+  Downloaded quote v1.0.41
+  Downloaded paste v1.0.15
+  Downloaded once_cell v1.21.4
+  Downloaded rustix v1.1.5
+  Downloaded ipnet v2.12.2
+  Downloaded io-lifetimes v3.0.1
+  Downloaded libc v0.2.189
+ Downloading crates ...
+  Downloaded web-time v1.1.0
+   Compiling libc v0.2.189
+   Compiling autocfg v1.5.1
+   Compiling version_check v0.9.5
+   Compiling crunchy v0.2.4
+   Compiling io-lifetimes v3.0.1
+   Compiling rustix v1.1.5
+   Compiling tiny-keccak v2.0.2
+   Compiling proc-macro2 v1.0.103
+   Compiling cfg-if v1.0.5
+   Compiling io-lifetimes v2.0.4
+   Compiling errno v0.3.14
+   Compiling num-traits v0.2.19
+   Compiling unicode-ident v1.0.22
+   Compiling portable-atomic v1.15.0
+   Compiling bitflags v2.13.2
+   Compiling io-extras v0.19.0
+   Compiling quote v1.0.41
+   Compiling getrandom v0.2.17
+   Compiling getrandom v0.3.4
+   Compiling cap-primitives v4.0.3
+   Compiling once_cell v1.21.4
+   Compiling serde_core v1.0.229
+   Compiling zerocopy v0.8.59
+   Compiling const-random-macro v0.1.16
+   Compiling fs-set-times v0.20.3
+   Compiling smartstring v1.0.1
+   Compiling ahash v0.8.12
+   Compiling cap-std v4.0.3
+   Compiling maybe-owned v0.3.4
+   Compiling ambient-authority v0.0.2
+   Compiling ipnet v2.12.2
+   Compiling paste v1.0.15
+   Compiling syn v2.0.106
+   Compiling const-random v0.1.18
+   Compiling serde v1.0.229
+   Compiling static_assertions v1.1.0
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx/source)
+   Compiling rhai_codegen v3.2.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx/source/codegen)
+   Compiling smallvec v1.16.2
+   Compiling thin-vec v0.2.19
+   Compiling serde_json v1.0.145
+   Compiling byteorder v1.5.0
+   Compiling rmp v0.8.14
+   Compiling ryu v1.0.20
+   Compiling itoa v1.0.15
+   Compiling memchr v2.8.3
+   Compiling rmp-serde v1.3.0
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:1716:9
+     |
+1716 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+     |
+     = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2035:9
+     |
+2035 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: methods `numeric_operations_probe`, `quarantine_observations_probe`, and `fail_reservation` are never used
+    --> src/packages/sys/process/unix.rs:1059:8
+     |
+ 988 | impl ExecutionFaults {
+     | -------------------- methods in this implementation
+...
+1059 |     fn numeric_operations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1070 |     fn quarantine_observations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1095 |     fn fail_reservation(&self) -> bool {
+     |        ^^^^^^^^^^^^^^^^
+     |
+     = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (lib) generated 3 warnings (run `cargo fix --lib -p rhai` to apply 2 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 19.03s
+     Running tests/sys_process.rs (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx/target/debug/deps/sys_process-a4f350212a887c3b)
+
+running 1 test
+test managed_spawn_kill_stops_leader_worker_leaf_and_preserves_sentinel ... managed_spawn_kill_started root=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx/tmp/rhai-sys-test-27616-managed_spawn_kill_stops_leader_worker_leaf_and_preserves_sentinel-0 test_pid=27616 sentinel_pid=27617 sentinel_pgid=27617 leader=27618 worker=27619 leaf=27620 group=27618
+managed_spawn_kill leader=27618 leader_esrch=true worker=27619 worker_esrch=false leaf=27620 leaf_esrch=false all_esrch=false sentinel=27617 live=true wait_returned=true
+
+thread 'managed_spawn_kill_stops_leader_worker_leaf_and_preserves_sentinel' (55733763) panicked at tests/sys_process.rs:700:5:
+managed spawned members must be gone after public kill
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+managed-scope sentinel_cleanup pid=27617 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(27619) worker_esrch=true leaf_pid=Some(27620) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(27618) leader_esrch=true
+FAILED
+
+failures:
+
+failures:
+    managed_spawn_kill_stops_leader_worker_leaf_and_preserves_sentinel
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 19 filtered out; finished in 0.54s
+
+error: test failed, to rerun pass `--test sys_process`
+
+cargo_output_end
+storage_sample_attempt=1 status=0 stdout='249864\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=249864
+kill_group_close_wrong_control status=101 receipts={'valid': True, 'ids_consistent': True, 'root_absent': True, 'cleanup_states': {'leader': True, 'worker': True, 'leaf': True, 'sentinel': True}, 'pid_states': {'test': True, 'sentinel': True, 'sentinel_pgid': True, 'leader': True, 'worker': True, 'leaf': True}, 'mode_receipt': True, 'expected_assertion': True, 'named_failure': True, 'one_failure_summary': True} accepted=True
+cargo_argv=['/Users/hoppworks/.rustup/toolchains/stable-aarch64-apple-darwin/bin/cargo', 'test', '--locked', '--test', 'sys_process', '--features', 'testing-environ,sys', '--', 'managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not', '--exact', '--nocapture', '--test-threads=1']
+cargo_cwd=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx/source
+cargo_log=/Users/hoppworks/projects/rhai-process-unix-run/.scratch/process-unix-run/evidence/managed-spawn-group-controls.2AA7A8.cargo.log.drop-group-control.log
+cargo_pid=27624 cargo_pgid=27301
+storage_sample_attempt=1 status=0 stdout='249864\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=249864
+storage_sample_attempt=1 status=0 stdout='249880\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=249880
+storage_sample_attempt=1 status=0 stdout='249880\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=249880
+storage_sample_attempt=1 status=0 stdout='249880\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=249880
+storage_sample_attempt=1 status=0 stdout='249880\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=249880
+storage_sample_attempt=1 status=0 stdout='249864\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=249864
+cargo_status=101
+cargo_output_begin path=/Users/hoppworks/projects/rhai-process-unix-run/.scratch/process-unix-run/evidence/managed-spawn-group-controls.2AA7A8.cargo.log.drop-group-control.log complete=true bytes=3356
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:1716:9
+     |
+1716 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+     |
+     = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2035:9
+     |
+2035 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: methods `numeric_operations_probe`, `quarantine_observations_probe`, and `fail_reservation` are never used
+    --> src/packages/sys/process/unix.rs:1059:8
+     |
+ 988 | impl ExecutionFaults {
+     | -------------------- methods in this implementation
+...
+1059 |     fn numeric_operations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1070 |     fn quarantine_observations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1095 |     fn fail_reservation(&self) -> bool {
+     |        ^^^^^^^^^^^^^^^^
+     |
+     = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (lib) generated 3 warnings (run `cargo fix --lib -p rhai` to apply 2 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 0.07s
+     Running tests/sys_process.rs (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx/target/debug/deps/sys_process-a4f350212a887c3b)
+
+running 1 test
+test managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not ... managed_spawn_drop_started root=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx/tmp/rhai-sys-test-27626-managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not-0 test_pid=27626 sentinel_pid=27627 sentinel_pgid=27627 leader=27628 worker=27629 leaf=27630 group=27628
+managed_spawn_nonfinal_drop leader=27628 leader_live=true worker=27629 worker_live=true leaf=27630 leaf_live=true all_live=true
+managed_spawn_final_drop leader=27628 leader_esrch=true worker=27629 worker_esrch=false leaf=27630 leaf_esrch=false all_esrch=false sentinel=27627 live=true
+
+thread 'managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not' (55733812) panicked at tests/sys_process.rs:769:5:
+dropping final Child clone did not terminate the managed group
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+managed-scope sentinel_cleanup pid=27627 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(27629) worker_esrch=true leaf_pid=Some(27630) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(27628) leader_esrch=true
+FAILED
+
+failures:
+
+failures:
+    managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 19 filtered out; finished in 5.15s
+
+error: test failed, to rerun pass `--test sys_process`
+
+cargo_output_end
+storage_sample_attempt=1 status=0 stdout='249864\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=249864
+drop_group_close_wrong_control status=101 receipts={'valid': True, 'ids_consistent': True, 'root_absent': True, 'cleanup_states': {'leader': True, 'worker': True, 'leaf': True, 'sentinel': True}, 'pid_states': {'test': True, 'sentinel': True, 'sentinel_pgid': True, 'leader': True, 'worker': True, 'leaf': True}, 'mode_receipt': True, 'expected_assertion': True, 'named_failure': True, 'one_failure_summary': True} accepted=True
+control_source_restored_sha256=78820b6efbee3ae372a48b2664902cbcd5f92a696bd6264ae2d716675188a9e6
+cargo_argv=['/Users/hoppworks/.rustup/toolchains/stable-aarch64-apple-darwin/bin/cargo', 'test', '--locked', '--test', 'sys_process', '--features', 'testing-environ,sys', '--', 'managed_', '--nocapture', '--test-threads=1']
+cargo_cwd=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx/source
+cargo_log=/Users/hoppworks/projects/rhai-process-unix-run/.scratch/process-unix-run/evidence/managed-spawn-group-controls.2AA7A8.cargo.log.restored-managed-spawn-suite.log
+cargo_pid=27664 cargo_pgid=27301
+storage_sample_attempt=1 status=0 stdout='249864\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=249864
+storage_sample_attempt=1 status=0 stdout='223944\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=223944
+storage_sample_attempt=1 status=0 stdout='223944\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=223944
+storage_sample_attempt=1 status=0 stdout='223944\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=223944
+storage_sample_attempt=1 status=0 stdout='233232\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=233232
+storage_sample_attempt=1 status=0 stdout='225612\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=225612
+storage_sample_attempt=1 status=0 stdout='241240\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=241240
+storage_sample_attempt=1 status=0 stdout='249872\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=249872
+cargo_status=0
+cargo_output_begin path=/Users/hoppworks/projects/rhai-process-unix-run/.scratch/process-unix-run/evidence/managed-spawn-group-controls.2AA7A8.cargo.log.restored-managed-spawn-suite.log complete=true bytes=5459
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx/source)
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:1716:9
+     |
+1716 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+     |
+     = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2035:9
+     |
+2035 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: methods `numeric_operations_probe`, `quarantine_observations_probe`, and `fail_reservation` are never used
+    --> src/packages/sys/process/unix.rs:1059:8
+     |
+ 988 | impl ExecutionFaults {
+     | -------------------- methods in this implementation
+...
+1059 |     fn numeric_operations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1070 |     fn quarantine_observations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1095 |     fn fail_reservation(&self) -> bool {
+     |        ^^^^^^^^^^^^^^^^
+     |
+     = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (lib) generated 3 warnings (run `cargo fix --lib -p rhai` to apply 2 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 6.77s
+     Running tests/sys_process.rs (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx/target/debug/deps/sys_process-a4f350212a887c3b)
+
+running 9 tests
+test managed_run_closes_worker_after_leader_exit_and_preserves_sentinel ... managed_fixture_started root=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx/tmp/rhai-sys-test-27696-managed_run_closes_worker_after_leader_exit_and_preserves_sentinel-0 test_pid=27696 sentinel_pid=27697
+managed_normal_leader pid=27698 pgid=27698 esrch=true
+managed_normal_worker_leaf worker_pid=27699 worker_esrch=true leaf_pid=27700 leaf_esrch=true
+managed_normal_sentinel pid=27697 live=true
+managed-scope sentinel_cleanup pid=27697 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(27699) worker_esrch=true leaf_pid=Some(27700) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(27698) leader_esrch=true
+ok
+test managed_scope_escape_fixture ... ok
+test managed_scope_leader_fixture ... ok
+test managed_scope_leaf_fixture ... ok
+test managed_scope_spawn_leader_fixture ... ok
+test managed_scope_worker_fixture ... ok
+test managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not ... managed_spawn_drop_started root=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx/tmp/rhai-sys-test-27696-managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not-1 test_pid=27696 sentinel_pid=27701 sentinel_pgid=27701 leader=27702 worker=27703 leaf=27704 group=27702
+managed_spawn_nonfinal_drop leader=27702 leader_live=true worker=27703 worker_live=true leaf=27704 leaf_live=true all_live=true
+managed_spawn_final_drop leader=27702 leader_esrch=true worker=27703 worker_esrch=true leaf=27704 leaf_esrch=true all_esrch=true sentinel=27701 live=true
+managed-scope sentinel_cleanup pid=27701 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(27703) worker_esrch=true leaf_pid=Some(27704) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(27702) leader_esrch=true
+ok
+test managed_spawn_kill_stops_leader_worker_leaf_and_preserves_sentinel ... managed_spawn_kill_started root=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx/tmp/rhai-sys-test-27696-managed_spawn_kill_stops_leader_worker_leaf_and_preserves_sentinel-2 test_pid=27696 sentinel_pid=27705 sentinel_pgid=27705 leader=27706 worker=27707 leaf=27708 group=27706
+managed_spawn_kill leader=27706 leader_esrch=true worker=27707 worker_esrch=true leaf=27708 leaf_esrch=true all_esrch=true sentinel=27705 live=true wait_returned=true
+managed-scope sentinel_cleanup pid=27705 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(27707) worker_esrch=true leaf_pid=Some(27708) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(27706) leader_esrch=true
+ok
+test managed_timeout_kills_leader_after_it_changes_process_group ... managed_escape_started root=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx/tmp/rhai-sys-test-27696-managed_timeout_kills_leader_after_it_changes_process_group-3 test_pid=27696 sentinel_pid=27710 sentinel_pgid=27710
+managed_escape_sentinel_live pid=27710 live=true
+managed_escape_leader pid=27711 original_pgid=27711 escaped_pgid=27710 esrch=true
+managed_escape_fixture_cleanup pid=Some(27711) esrch=true
+managed-scope sentinel_cleanup pid=27710 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 11 filtered out; finished in 0.87s
+
+
+cargo_output_end
+storage_sample_attempt=1 status=0 stdout='249868\t/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_0uvqzvx' stderr=''
+storage_sample_kib=249868
+restored_managed_spawn_suite status=0 nine_tests=True named_tests=True kill_receipt=True final_drop_receipt=True unique_fixture_ids=True accepted=True
+final_private_source_hashes={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/config.rs': '723da516ad26082ae25ca32b791d629d8b7e29e8c7272b2843ad7d6c3192a845', 'src/packages/sys/mod.rs': 'ee2dfc0900d64481d09d6d20bbd64b75ac05a316e02788cdf58e9fe52c6be0c5', 'src/packages/sys/process.rs': '090094476662417aa94e2ff519cb8038c1d3721e02be6ec166762502bfbff2e2', 'src/packages/sys/process/unix.rs': '78820b6efbee3ae372a48b2664902cbcd5f92a696bd6264ae2d716675188a9e6', 'tests/sys_process.rs': '42038e31d12387cdfb733779ccef36691141e83b171ede6843f7a9737f675ffe'}
+final_original_overlay_hashes={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/config.rs': '723da516ad26082ae25ca32b791d629d8b7e29e8c7272b2843ad7d6c3192a845', 'src/packages/sys/mod.rs': 'ee2dfc0900d64481d09d6d20bbd64b75ac05a316e02788cdf58e9fe52c6be0c5', 'src/packages/sys/process.rs': '090094476662417aa94e2ff519cb8038c1d3721e02be6ec166762502bfbff2e2', 'src/packages/sys/process/unix.rs': '78820b6efbee3ae372a48b2664902cbcd5f92a696bd6264ae2d716675188a9e6', 'tests/sys_process.rs': '42038e31d12387cdfb733779ccef36691141e83b171ede6843f7a9737f675ffe'}
+source_manifests_unchanged=True
+complete_log_receipt path=/Users/hoppworks/projects/rhai-process-unix-run/.scratch/process-unix-run/evidence/managed-spawn-group-controls.2AA7A8.cargo.log.kill-group-control.log bytes=6470 sha256=c45b37b7e3c9015881efe876c8cf0962138f295a2105e322cd09fccea2ce674f
+complete_log_receipt path=/Users/hoppworks/projects/rhai-process-unix-run/.scratch/process-unix-run/evidence/managed-spawn-group-controls.2AA7A8.cargo.log.drop-group-control.log bytes=3356 sha256=bf963256a191efd799d1c11a854cd0753d495c63be84853065c519916ea10db0
+complete_log_receipt path=/Users/hoppworks/projects/rhai-process-unix-run/.scratch/process-unix-run/evidence/managed-spawn-group-controls.2AA7A8.cargo.log.restored-managed-spawn-suite.log bytes=5459 sha256=f3b7557e1ace75355ddf5921b3405da25de0f3814300365501d47746710f0f2d
+managed_spawn_group_cancel_acceptance=pass

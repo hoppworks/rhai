@@ -1,0 +1,233 @@
+runtime_path=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-d9ru9uxk
+os=macOS-27.0-arm64-arm-64bit
+python=3.9.6 (default, Aug 25 2026, 21:26:21)  [Clang 21.0.0 (clang-2100.3.34.2)]
+tool_path_python3=/usr/bin/python3
+tool_path_git=/usr/bin/git
+tool_path_tar=/usr/bin/tar
+tool_path_rustup=/Users/hoppworks/.cargo/bin/rustup
+tool_path_shasum=/usr/bin/shasum
+source_head=e34d2de04b974d0b54ac5ed62a476ecb399920bb
+dirty_input_status=[' M .scratch/process-unix-run/coordinator-state.md', ' M src/packages/sys/process/unix.rs', '?? .scratch/process-unix-run/evidence/retained-owner-red.ComK8T', '?? .scratch/process-unix-run/retained-owner-red.py', '?? .scratch/process-unix-run/run-retained-owner-red.sh']
+source_manifest={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/process/unix.rs': '89b374faee22d488d70ac5640e2df7f393b3b998a27b3de1fbfaf4095afa84aa'}
+harness_sha256=376f528a161702521ca8942c367b4acdae7670b5c7eeb87c7ee33dbf50c03527
+runner_sha256=9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d
+wrapper_sha256=f4ebbe31d74837c84a8d9feadc9707ecc25038108b8af379be9be5af7e633954
+storage_sample_kib=0
+storage_sample_kib=13632
+case_label=extract-baseline
+case_argv=['tar', '-xf', '/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-d9ru9uxk/baseline.tar', '-C', '/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-d9ru9uxk/source']
+case_cwd=/Users/hoppworks/projects/rhai-process-unix-run
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-d9ru9uxk/extract-baseline.log
+storage_sample_kib=13632
+case_status=0 label=extract-baseline
+case_output_begin label=extract-baseline
+
+case_output_end label=extract-baseline
+storage_sample_kib=16676
+storage_sample_kib=16688
+private_source_manifest={'Cargo.toml': 'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec', 'src/packages/sys/process/unix.rs': '89b374faee22d488d70ac5640e2df7f393b3b998a27b3de1fbfaf4095afa84aa'}
+private_source=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-d9ru9uxk/source
+accepted_lock_sha256=8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa
+private_lock_sha256=fb30d25a7f00c2e0d3c8eefb7ee787c21b1043cbe391a3c5aa58209e1afe9e8e
+case_label=install-rust-1.77.2
+case_argv=['rustup', 'toolchain', 'install', '1.77.2', '--profile', 'minimal', '--no-self-update']
+case_cwd=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-d9ru9uxk/source
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-d9ru9uxk/install-rust-1.77.2.log
+storage_sample_kib=16720
+storage_sample_kib=33916
+storage_sample_kib=83760
+storage_sample_kib=218700
+storage_sample_kib=241228
+storage_sample_kib=380848
+storage_sample_kib=568148
+storage_sample_kib=482608
+case_status=0 label=install-rust-1.77.2
+case_output_begin label=install-rust-1.77.2
+info: syncing channel updates for 1.77.2-aarch64-apple-darwin
+info: latest update on 2024-04-09 for version 1.77.2 (25ef9e3d8 2024-04-09)
+info: downloading 3 components
+
+  1.77.2-aarch64-apple-darwin installed - rustc 1.77.2 (25ef9e3d8 2024-04-09)
+
+info: default toolchain set to 1.77.2-aarch64-apple-darwin
+
+case_output_end label=install-rust-1.77.2
+case_label=rustc-version
+case_argv=['rustup', 'run', '1.77.2', 'rustc', '--version']
+case_cwd=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-d9ru9uxk/source
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-d9ru9uxk/rustc-version.log
+storage_sample_kib=482612
+case_status=0 label=rustc-version
+case_output_begin label=rustc-version
+rustc 1.77.2 (25ef9e3d8 2024-04-09)
+
+case_output_end label=rustc-version
+case_label=cargo-version
+case_argv=['rustup', 'run', '1.77.2', 'cargo', '--version']
+case_cwd=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-d9ru9uxk/source
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-d9ru9uxk/cargo-version.log
+storage_sample_kib=482616
+case_status=0 label=cargo-version
+case_output_begin label=cargo-version
+cargo 1.77.2 (e52e36006 2024-03-26)
+
+case_output_end label=cargo-version
+rustc_version=rustc 1.77.2 (25ef9e3d8 2024-04-09)
+cargo_version=cargo 1.77.2 (e52e36006 2024-03-26)
+case_label=retained-owner-kill-refusal-red
+case_argv=['rustup', 'run', '1.77.2', 'cargo', 'test', '--locked', '--features', 'testing-environ,sys,metadata', '--lib', 'packages::sys::process::unix::tests::kill_refusal_returns_boundedly_and_retains_real_child_after_package_drop', '--', '--exact', '--nocapture']
+case_cwd=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-d9ru9uxk/source
+case_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-d9ru9uxk/retained-owner-kill-refusal-red.log
+storage_sample_kib=482620
+storage_sample_kib=483124
+storage_sample_kib=486016
+storage_sample_kib=489440
+storage_sample_kib=492112
+storage_sample_kib=493572
+storage_sample_kib=528508
+storage_sample_kib=540584
+storage_sample_kib=550068
+storage_sample_kib=572432
+storage_sample_kib=587556
+storage_sample_kib=600296
+storage_sample_kib=616636
+storage_sample_kib=617676
+storage_sample_kib=624564
+storage_sample_kib=674132
+storage_sample_kib=687216
+storage_sample_kib=712580
+case_status=101 label=retained-owner-kill-refusal-red
+case_output_begin label=retained-owner-kill-refusal-red
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded const-random-macro v0.1.16
+  Downloaded crunchy v0.2.4
+  Downloaded errno v0.3.14
+  Downloaded version_check v0.9.5
+  Downloaded maybe-owned v0.3.4
+  Downloaded cfg-if v1.0.5
+  Downloaded ambient-authority v0.0.2
+  Downloaded fs-set-times v0.20.3
+  Downloaded itoa v1.0.15
+  Downloaded const-random v0.1.18
+  Downloaded paste v1.0.15
+  Downloaded rmp v0.8.14
+  Downloaded tiny-keccak v2.0.2
+  Downloaded unicode-ident v1.0.22
+  Downloaded static_assertions v1.1.0
+  Downloaded serde_derive v1.0.229
+  Downloaded serde_core v1.0.229
+  Downloaded num-traits v0.2.19
+  Downloaded serde v1.0.229
+  Downloaded cap-primitives v4.0.3
+  Downloaded memchr v2.8.3
+  Downloaded getrandom v0.3.4
+  Downloaded proc-macro2 v1.0.103
+  Downloaded syn v3.0.6
+  Downloaded serde_json v1.0.145
+  Downloaded ahash v0.8.12
+  Downloaded portable-atomic v1.15.0
+  Downloaded bitflags v2.13.2
+  Downloaded smallvec v1.16.2
+  Downloaded zerocopy v0.8.59
+  Downloaded syn v2.0.106
+  Downloaded cap-std v4.0.3
+  Downloaded thin-vec v0.2.19
+  Downloaded smartstring v1.0.1
+  Downloaded rmp-serde v1.3.0
+  Downloaded quote v1.0.41
+  Downloaded io-extras v0.19.0
+  Downloaded rustix v1.1.5
+  Downloaded getrandom v0.2.17
+  Downloaded ryu v1.0.20
+  Downloaded once_cell v1.21.4
+  Downloaded io-lifetimes v3.0.1
+  Downloaded byteorder v1.5.0
+  Downloaded autocfg v1.5.1
+  Downloaded ipnet v2.12.2
+  Downloaded io-lifetimes v2.0.4
+  Downloaded libc v0.2.189
+   Compiling proc-macro2 v1.0.103
+   Compiling unicode-ident v1.0.22
+   Compiling libc v0.2.189
+   Compiling quote v1.0.41
+   Compiling autocfg v1.5.1
+   Compiling crunchy v0.2.4
+   Compiling version_check v0.9.5
+   Compiling serde_core v1.0.229
+   Compiling tiny-keccak v2.0.2
+   Compiling io-lifetimes v2.0.4
+   Compiling io-lifetimes v3.0.1
+   Compiling cfg-if v1.0.5
+   Compiling rustix v1.1.5
+   Compiling errno v0.3.14
+   Compiling syn v3.0.6
+   Compiling num-traits v0.2.19
+   Compiling portable-atomic v1.15.0
+   Compiling io-extras v0.19.0
+   Compiling bitflags v2.13.2
+   Compiling serde v1.0.229
+   Compiling paste v1.0.15
+   Compiling serde_derive v1.0.229
+   Compiling getrandom v0.2.17
+   Compiling once_cell v1.21.4
+   Compiling cap-primitives v4.0.3
+   Compiling zerocopy v0.8.59
+   Compiling getrandom v0.3.4
+   Compiling const-random-macro v0.1.16
+   Compiling fs-set-times v0.20.3
+   Compiling ahash v0.8.12
+   Compiling smartstring v1.0.1
+   Compiling cap-std v4.0.3
+   Compiling ipnet v2.12.2
+   Compiling ambient-authority v0.0.2
+   Compiling serde_json v1.0.145
+   Compiling maybe-owned v0.3.4
+   Compiling byteorder v1.5.0
+   Compiling rmp v0.8.14
+   Compiling const-random v0.1.18
+   Compiling syn v2.0.106
+   Compiling itoa v1.0.15
+   Compiling static_assertions v1.1.0
+   Compiling memchr v2.8.3
+   Compiling ryu v1.0.20
+   Compiling rhai v1.26.1 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-d9ru9uxk/source)
+   Compiling rhai_codegen v3.2.0 (/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-d9ru9uxk/source/codegen)
+   Compiling rmp-serde v1.3.0
+   Compiling smallvec v1.16.2
+   Compiling thin-vec v0.2.19
+error[E0412]: cannot find type `Child` in this scope
+   --> src/packages/sys/process/unix.rs:919:16
+    |
+919 |         child: Child,
+    |                ^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+833 +     use crate::packages::sys::process::unix::Child;
+    |
+833 +     use std::process::Child;
+    |
+
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+For more information about this error, try `rustc --explain E0412`.
+warning: `rhai` (lib test) generated 1 warning
+error: could not compile `rhai` (lib test) due to 1 previous error; 1 warning emitted
+
+case_output_end label=retained-owner-kill-refusal-red
+Traceback (most recent call last):
+  File "/Users/hoppworks/projects/rhai-process-unix-run/.scratch/process-unix-run/retained-owner-red.py", line 123, in <module>
+    raise RuntimeError('RED did not fail at the expected public bounded-return assertion')
+RuntimeError: RED did not fail at the expected public bounded-return assertion

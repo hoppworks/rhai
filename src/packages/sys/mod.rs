@@ -44,6 +44,8 @@ mod process;
 
 pub use config::{EnvPolicy, FsAccess, FsPolicy, FsRoot, ProcessScope, ProgramPolicy, SysConfig};
 pub use error::SysError;
+#[cfg(unix)]
+pub use process::Child;
 pub use process::{ProcessCause, ProcessDiagnostic, ProcessExit, ProcessReport};
 
 use crate::packages::Package;
@@ -55,6 +57,8 @@ use crate::{Module, Shared, SharedModule};
 struct SysState {
     config: SysConfig,
     fs: fs::FsState,
+    #[cfg(unix)]
+    cleanup: process::CleanupService,
 }
 
 /// Start a registration for a volatile, non-mutating function with doc-comments.
@@ -80,11 +84,17 @@ impl SysPackage {
     /// Fails when a configured filesystem root cannot be opened.
     pub fn new(config: SysConfig) -> Result<Self, SysError> {
         let fs = fs::FsState::open(&config.fs)?;
-        let state: Shared<SysState> = Shared::new(SysState { config, fs });
+        let state: Shared<SysState> = Shared::new(SysState {
+            config,
+            fs,
+            #[cfg(unix)]
+            cleanup: process::CleanupService::new(),
+        });
 
         let mut module = Module::new();
         SysError::register(&mut module);
         process::ProcessReport::register(&mut module);
+        process::register(&mut module, &state);
         env::register(&mut module, &state);
         fs::register(&mut module, &state);
         module.build_index();
