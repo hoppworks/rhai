@@ -62,9 +62,11 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    SHA25679be8688152ae600b4126f6c03571dd6dd66d669f4dfe2a1b720b775bfe82b4d.
    Root source review accepted positive UInt32 constants, custody from first handle,
    guarded disposal, shared30s setup-failure accounting and CRLF marker matching.
-   Latest owner receipt: exact VM running, unlocked console, fresh ordinary
-   PowerShell prompt after process-local policy command. NO fixture/compiler/job
-   handle yet; hash/parser/17-pin gate not yet verified. Continue fresh immutable
+   Latest owner receipt: unlocked VM console; process-local Bypass read back.
+   Fresh archive curl command used lowercase-l instead of uppercase-L and saved
+   an empty redirect response. Original empty archive preserved; owner diagnosed
+   the exact key/input error and prepares fresh absent-path redirect-follow fetch.
+   NO fixture/compiler/job handle yet; hash/parser/17-pin gate not yet verified. Continue fresh immutable
    archive/runroot, native PS5.1 parser and input gate before fixture invocation.
    Preserve failed roots and exact cleanup. Do not call this a verified live wait.
 2. POSIX overhead source00bed4a0dfeb103ff209ba4c76dac7ae797b7c56 integrated.
@@ -80,6 +82,17 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    Responsible Linux context prepares frozen launcher/archive/preflight using
    existing monitor, scoped private source/lock/build and exact cleanup ledger.
    Root reviews launcher before native invocation82; no retry package or cap reset.
+   Root macOS measurement adaptation is SOURCE-ONLY and NOT approved to launch:
+   macos-process-overhead.py and run-macos-process-overhead.sh bind00bed/archive
+   5414ea195ad00152b1eae36b3f4e10943ba5d9bf323baff6410cca0c5b4d8b98.
+   Fresh Worker reviewed both files: frozen inputs, private lock/runtime, sample
+   semantics/export and watchdogs present; inherited du-only sampling lacks live
+   descendant<=16 and2GiB memory observation/stop. run_scoped group-only cleanup
+   must not be claimed as exact managed-child closure after interrupted driver.
+   No Mac launch consumed. Next root action: wire the existing concrete resource
+   sampling pattern with bounded child cancellation/final identity readback, then
+   review the changed safeguards before any invocation. First source-review finding,
+   no native failure or new Expert chain. Keep planned120calls/zero warmups/no retries.
 3. Windows public-contract source preparation is integrated at43e9ef8c (parent
    056c0b53). OCR selected1 Rust file, reviewed1/skipped0; excluded Markdown state
    was read separately. Initial review corrected INT typing and no_float timeout,
@@ -148,10 +161,10 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Previous turn classification
-Previous continuation prepared parallel Windows public-contract source work and
-consolidated stale state; no native acceptance closed. This turn source review
-found and corrected feature assertion/timeout portability and clarified evidence
-limits; accepted corrected test preparation is integrated. Overhead pre-freeze
-review found archive copies lack Git metadata and unbounded metadata subprocesses;
-responsible context corrects those before native measurement. No blind retries,
-fixture launches or budget reset. Windows setup remains sole-owner controlled.
+Previous turn progressed: corrected Windows contract and measurement source were
+reviewed/integrated, meaningful parser rejection controls passed. This turn prepares
+Mac adapter source and obtains independent review identifying missing concrete cap
+monitoring; that evidence changes next action to safeguard repair before launch.
+Linux source launcher preparation continues; no live native fixture handle is
+claimed from agent status or intent. Windows fetch key error is diagnosed before
+fixture execution, not a behavior failure. No retry/cause history or budget reset.
