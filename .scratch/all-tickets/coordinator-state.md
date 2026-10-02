@@ -370,10 +370,20 @@ source, existing caps, original applicable five controls and cause history. No
 repeat of seven accepted rows. Review preparation before fresh slot inventory
 and launch. Mac owner closes concrete confinement source gaps without native
 launch; processcount84 and measurementguardfalse unchanged.
+Mac source increment93ea4244 independently reviewed2/2 OCR-selected Python
+files plus original excluded pure log and affected environment/graph callers.
+Private PATH has six pinned entrypoints only; complete26-key candidate boundary
+rejects omissions/additions while exactunitsfalse remains. Root pure68/68 passes,
+and frozen c3ac validator independently fails the new missing-candidate assertion
+for the intended reason. Original logs/replay script/review retained; both exact
+owned scopes removed after scoped0. Integrate only three frozen owner files plus
+root proof; no native launch, control, fixture or measurement. Native prerequisites
+remain open; guardfalse/readinessnot-ready/processcount84 unchanged.
 Root and both active owners confirm current instruction revision958a4538,
 including applicable project/skills/templates; neither owner has descendants.
-Windows completed owner is pending reload at its next safe active checkpoint;
-no restart solely for rules. Goal and all remaining platform/process/release
+Windows owner resumed for already-authorized VM readiness. Reload confirmed958;
+correct root worktree and roles path supplied after absent old owner checkout.
+Foreign primary dirty checkout is preserved; no worktree recreation authorized. Goal and all remaining platform/process/release
 requirements remain open.
 
 ## Current-source core MSRV package — accepted narrow gate
@@ -400,11 +410,24 @@ stable-toolchain source route and review affected prerequisites before any nativ
 allocation. Complete exact
 feature/toolchain confinement and installed Darwin ABI prerequisites; keep
 measurement unlaunched until declared native interruption controls pass.
-Windows native stage/parser/path/build proof is dependent on guest availability;
-last observed shut off, unexecuted partial console line unresolved. Do not restart
-shared VM or infer cleanup. Retain archive hash receipt and oneGET allowance:
-exact9e0 archive13380569bytes/SHA8291e58652a7dc8494513d910460e6dae39a716f5dfca937bda40fafcfa0caa4.
-Continue independent authorized work. Goal active, no release acceptance.
+Windows native stage/parser/path/build proof remains open. Fresh exact-domain
+readback returns shut off. Reconciliation against windows-vm/README.md and
+windows-monitor-staging-ownership-review.md establishes campaign ownership and
+already-authorized exact VM activation/read-only guest preflight. The shared-VM
+restart exclusion does not revoke activation of this owned domain. The earlier
+11:17–11:47 record was source-only and does not prove an exhausted human native
+allowance. Existing responsible Windows owner resumed for exact domain/capacity
+inventory, activation and actual guest/partial-console readiness only; no reset,
+reseed, install/admin/credentials/service/config/home changes or native compiler
+fixture yet. Reload current958a4538 rules/templates and acknowledge at checkpoint.
+Retain archive hash receipt and oneGET allowance: exact9e0 archive13380569bytes/
+SHA8291e58652a7dc8494513d910460e6dae39a716f5dfca937bda40fafcfa0caa4;
+read actual consumption before any transfer. Preserve bootstrap/input history,
+Expert02 and caps. Root reviews readiness before native execution.
+Previous goal turn VERIFIED WAIT: exact active Linux/Mac handles observed running
+and polled, without restart after observation timeout. This turn continues those
+packages and resolves the stale Windows authorization interpretation.
+Goal active, no release acceptance.
 
 ## Selected macOS measurement graph package — allocated
 One new source-discovery package: frozen00bed archive5414 / edge-only lock2ba4;

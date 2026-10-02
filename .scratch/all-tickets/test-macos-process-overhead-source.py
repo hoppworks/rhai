@@ -74,9 +74,37 @@ class EnvironmentTests(unittest.TestCase):
                 {'id': 'registry+https://github.com/rust-lang/crates.io-index#ahash@0.8.12'},
             ]},
         }
+        # The candidate boundary is a source-audited conservative superset,
+        # so positive metadata must include every reviewed package candidate.
+        for name, version in module.REVIEWED_BUILD_CANDIDATES - {
+                ('rhai', '1.26.1'), ('ahash', '0.8.12')}:
+            package_id = f'registry+https://example.invalid#{name}@{version}'
+            metadata['packages'].append({
+                'id': package_id, 'name': name, 'version': version,
+                'targets': [{'kind': ['custom-build'], 'crate_types': ['bin']}],
+            })
+            metadata['resolve']['nodes'].append({'id': package_id})
+        metadata['packages'][0]['targets'].append(
+            {'kind': ['custom-build'], 'crate_types': ['bin']})
         result = module.validate_cargo_source_graph(graph, json.dumps(metadata))
         self.assertEqual(result['selected_package_count'], 2)
-        self.assertEqual(result['selected_build_or_proc_macro_packages'], ['ahash v0.8.12'])
+        self.assertEqual(result['selected_build_or_proc_macro_packages'],
+                         ['ahash v0.8.12', 'rhai v1.26.1'])
+        self.assertEqual(len(result['metadata_candidate_superset']),
+                         len(module.REVIEWED_BUILD_CANDIDATES))
+
+        omitted_candidate = dict(metadata)
+        omitted_candidate['packages'] = list(metadata['packages'])
+        omitted_candidate['resolve'] = {'nodes': list(metadata['resolve']['nodes'])}
+        dropped = ('trybuild', '1.0.90')
+        omitted_candidate['packages'] = [
+            row for row in omitted_candidate['packages']
+            if (row['name'], row['version']) != dropped]
+        omitted_candidate['resolve']['nodes'] = [
+            node for node in omitted_candidate['resolve']['nodes']
+            if dropped[0] not in node['id']]
+        with self.assertRaisesRegex(RuntimeError, 'reviewed candidate missing from metadata superset'):
+            module.validate_cargo_source_graph(graph, json.dumps(omitted_candidate))
 
         unreviewed_graph = graph + 'unreviewed-build v9.0.0\n'
         unreviewed = dict(metadata)
@@ -102,7 +130,7 @@ class EnvironmentTests(unittest.TestCase):
     def test_stable_graph_queries_use_custodian_rpc_and_validate_returned_bytes(self):
         source = Path('/private/runtime/source')
         graph = b'rhai v1.26.1\nahash v0.8.12\n'
-        metadata = json.dumps({
+        metadata_value = {
             'packages': [
                 {'id': 'path+file:///src#rhai@1.26.1', 'name': 'rhai',
                  'version': '1.26.1', 'targets': [{'kind': ['lib'],
@@ -116,7 +144,18 @@ class EnvironmentTests(unittest.TestCase):
                 {'id': 'path+file:///src#rhai@1.26.1'},
                 {'id': 'registry+https://github.com/rust-lang/crates.io-index#ahash@0.8.12'},
             ]},
-        }).encode()
+        }
+        for name, version in module.REVIEWED_BUILD_CANDIDATES - {
+                ('rhai', '1.26.1'), ('ahash', '0.8.12')}:
+            package_id = f'registry+https://example.invalid#{name}@{version}'
+            metadata_value['packages'].append({
+                'id': package_id, 'name': name, 'version': version,
+                'targets': [{'kind': ['custom-build'], 'crate_types': ['bin']}],
+            })
+            metadata_value['resolve']['nodes'].append({'id': package_id})
+        metadata_value['packages'][0]['targets'].append(
+            {'kind': ['custom-build'], 'crate_types': ['bin']})
+        metadata = json.dumps(metadata_value).encode()
         calls = []
 
         def rpc(argv, cwd, env, stdout, deadline, **kwargs):
@@ -140,7 +179,8 @@ class EnvironmentTests(unittest.TestCase):
             self.assertTrue(call[5]['monitor_resources'])
             self.assertFalse(call[5]['include_stderr'])
             self.assertEqual(call[5]['stderr_path'].parent, runtime)
-        self.assertEqual(result['selected_build_or_proc_macro_packages'], ['ahash v0.8.12'])
+        self.assertEqual(result['selected_build_or_proc_macro_packages'],
+                         ['ahash v0.8.12', 'rhai v1.26.1'])
         self.assertEqual(result['cargo_tree_sha256'], __import__('hashlib').sha256(graph).hexdigest())
         self.assertEqual(result['cargo_metadata_sha256'], __import__('hashlib').sha256(metadata).hexdigest())
 
@@ -937,14 +977,18 @@ class EnvironmentTests(unittest.TestCase):
             runtime = Path(directory) / "runtime"
             env = module.build_environment(runtime)
             paths = env["PATH"].split(":")
-            tool_bin = Path(paths[1])
-            self.assertEqual(paths[0], str(module.TOOL))
+            tool_bin = Path(paths[0])
+            self.assertEqual(paths, [str(tool_bin)])
             self.assertEqual(tool_bin, runtime / "tool-bin")
             self.assertNotIn(str(module.XCODE_TOOLS), paths)
-            self.assertEqual({path.name for path in tool_bin.iterdir()}, {"cc", "clang", "ld", "dsymutil"})
+            self.assertEqual({path.name for path in tool_bin.iterdir()},
+                             {"cc", "clang", "ld", "dsymutil", "xcrun", "xcode-select"})
             self.assertFalse((tool_bin / "ar").exists())
+            self.assertFalse((tool_bin / "emcc").exists())
             for name in ("cc", "clang", "ld", "dsymutil"):
                 self.assertEqual(os.readlink(tool_bin / name), str(module.XCODE_TOOLS / name))
+            self.assertEqual(os.readlink(tool_bin / "xcrun"), "/usr/bin/xcrun")
+            self.assertEqual(os.readlink(tool_bin / "xcode-select"), "/usr/bin/xcode-select")
         probes = {key: argv for key, argv, _filename in module.tool_identity_probes()}
         for key, executable, args in (
             ("cc_identity", module.XCODE_TOOLS / "cc", ["--version"]),

@@ -10,6 +10,11 @@ TOOL=Path('/Users/hoppworks/.rustup/toolchains/stable-aarch64-apple-darwin/bin')
 CARGO,RUSTC,RUSTDOC=(TOOL/n for n in ('cargo','rustc','rustdoc'))
 SDKROOT=Path('/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk')
 XCODE_TOOLS=Path('/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin')
+PINNED_PATH_TOOLS={
+    'cc':XCODE_TOOLS/'cc', 'clang':XCODE_TOOLS/'clang',
+    'ld':XCODE_TOOLS/'ld', 'dsymutil':XCODE_TOOLS/'dsymutil',
+    'xcrun':Path('/usr/bin/xcrun'), 'xcode-select':Path('/usr/bin/xcode-select'),
+}
 LOCK_SHA='8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa'
 OVERLAYS=['Cargo.toml','src/packages/sys/config.rs','src/packages/sys/mod.rs','src/packages/sys/process.rs','src/packages/sys/process/unix.rs','tests/sys_process.rs']
 MANAGED_OBSERVER_OVERLAY_SHA256={
@@ -37,10 +42,10 @@ LIMIT=1_572_864
 MAX_DESCENDANTS=16
 MAX_RSS_KIB=2*1024*1024
 
-# This legacy harness still spawns setup commands and a nested measurement
-# driver, so it does not meet cause-09 command custody. Keep it impossible to
-# launch accidentally until the source audit and the sole-custodian adapter are
-# independently reviewed. This is a source gate, not evidence of custody.
+# Keep the launch gate closed until all source and native prerequisites are
+# accepted, including Darwin ABI behavior, interruption controls, complete leaf
+# readback, and Managed dual-stream capture. Source controls alone are not native
+# custody evidence.
 CUSTODY_READINESS = Path(__file__).with_name('macos-overhead-custody-readiness.json')
 CUSTODY_IMPLEMENTATION_FROZEN = False
 _WAITID = None
@@ -137,8 +142,7 @@ def build_environment(runtime):
     tool_bin=runtime/'tool-bin'
     for path in (home,tmp,cargo_home,rustup_home,target,tool_bin):
         path.mkdir(parents=True,exist_ok=True)
-    for name in ('cc','clang','ld','dsymutil'):
-        executable=XCODE_TOOLS/name
+    for name,executable in PINNED_PATH_TOOLS.items():
         link=tool_bin/name
         if not executable.is_file() or not os.access(executable, os.X_OK):
             raise RuntimeError(f'required pinned Xcode tool is unavailable: {executable}')
@@ -148,9 +152,11 @@ def build_environment(runtime):
         else:
             os.symlink(str(executable), link)
     return {
-        # Expose only the reviewed Xcode compiler/linker helpers. Other tools
-        # retain the ordinary system PATH resolution used by the frozen harness.
-        'PATH':f'{TOOL}:{tool_bin}:/usr/bin:/bin:/usr/sbin:/sbin',
+        # Build scripts and rustc resolve only the source-reviewed helpers.
+        # In particular, an optional `emcc` probe cannot fall through to an
+        # arbitrary system executable, and Darwin archives use rustc's in-process
+        # archive writer rather than PATH-resolved `ar`.
+        'PATH':str(tool_bin),
         'HOME':str(home),
         'TMPDIR':str(tmp), 'TMP':str(tmp), 'TEMP':str(tmp),
         'CARGO_HOME':str(cargo_home), 'RUSTUP_HOME':str(rustup_home),
@@ -630,13 +636,19 @@ def validate_cargo_source_graph(tree_output, metadata_output):
         return kinds
 
     reviewed_superset=[]
+    reviewed_candidate_keys=set()
     for package in resolved_by_id.values():
         kinds=candidate_kind(package)
         if kinds:
             key=(package['name'],package['version'])
             if key not in REVIEWED_BUILD_CANDIDATES:
                 raise RuntimeError(f'unreviewed build/proc-macro candidate in metadata superset: {key[0]} {key[1]}')
+            reviewed_candidate_keys.add(key)
             reviewed_superset.append(f'{key[0]} v{key[1]}')
+    missing_candidates=REVIEWED_BUILD_CANDIDATES-reviewed_candidate_keys
+    if missing_candidates:
+        missing=', '.join(f'{name} v{version}' for name,version in sorted(missing_candidates))
+        raise RuntimeError(f'reviewed candidate missing from metadata superset: {missing}')
     candidates=[]
     for name,version in sorted(selected):
         matching=[row for row in package_rows if isinstance(row,dict)

@@ -1,0 +1,16 @@
+test_stable_cargo_tree_and_metadata_preflight_cover_reviewed_candidate_superset (source_boundary_tests.EnvironmentTests.test_stable_cargo_tree_and_metadata_preflight_cover_reviewed_candidate_superset) ... FAIL
+
+======================================================================
+FAIL: test_stable_cargo_tree_and_metadata_preflight_cover_reviewed_candidate_superset (source_boundary_tests.EnvironmentTests.test_stable_cargo_tree_and_metadata_preflight_cover_reviewed_candidate_superset)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/hoppworks/.codex/worktrees/all-tickets-continuation/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py", line 106, in test_stable_cargo_tree_and_metadata_preflight_cover_reviewed_candidate_superset
+    with self.assertRaisesRegex(RuntimeError, 'reviewed candidate missing from metadata superset'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: RuntimeError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (failures=1)
+Expected baseline missing-candidate RED verified; candidate restored on disk.
