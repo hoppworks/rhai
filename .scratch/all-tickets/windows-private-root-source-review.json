@@ -1,0 +1,16 @@
+{
+  "source_commit": "611ad22c3dd3893f2b1a34db4d77926e262df431",
+  "consumed_file": "tools/windows-scoped-runner/fixtures/RunSourceFixtures.ps1",
+  "sha256": "19c0309630eea86121d675c9457fc596e3b6cbf13bae555ad35e57037c555782",
+  "exact_preimage_postimage_match": true,
+  "ocr_selection": "PS1 excluded default_path; manually reviewed1/1 against resolved rules",
+  "findings_closed": [
+    "Actual ancestor traversal to run volume root",
+    "Run-volume free-space binding",
+    "Nonstandard profile control includes all9parents"
+  ],
+  "existing_17_source_pins": "Independently rehashed and matched; unchanged",
+  "native_PS_parser": "pending for final script",
+  "path_controls": "source reviewed; actual PS execution pending",
+  "scope": "Source-only lifecycle path correction, no native job/fixture acceptance"
+}

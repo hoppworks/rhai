@@ -351,3 +351,20 @@ storage288600KiB. Not yet independently accepted: owner preserves originals and
 checks exact8 fixture identities/source/runtime; root will independently verify.
 No rerun dispatched. Pure exact-prefix framing correction and reuse of original
 valid native rows are the next action; original failed package status remains.
+
+## Current accepted increments
+PROGRESS: root independently validated all8 original84 receipts with only exact
+libtest prefix removal before the unchanged frozen classifier; 48 emitted runner
+plus fixture PID/start pairs absent, original2groups empty, runtime/scope absent.
+Remote/local18 original evidence hashes match; six before-source hashes match
+frozen0b archive. Receipt linux84-census-root-readback.json. Originalouter/runner1
+and missing after-source manifest preserved; full package acceptance not claimed.
+No native rerun. Owner freezes parser framing correction with effective controls.
+Windows private-root source correction611ad22c consumed exact harness patch only;
+pre/post bytes match, SHA19c03096, all17existingC#pins independently match. Actual
+ancestor chain and run-volume free-space gate reviewed; corrected nonstandard
+profile control expects all9parents. Receipt windows-private-root-source-review.json.
+NativePS5.1 parser/path-control and changed archive gates still required before
+source-fixture run. Foreign owner state/history not merged into root state.
+Mac actual sole-custodian source increment being frozen for cancellation/setup
+review; source guard remains false, native selected graph/ABI controls open.

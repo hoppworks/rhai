@@ -34,23 +34,128 @@ $expected = @{
 }
 
 $source = (Resolve-Path -LiteralPath $SourceRoot).Path
-$run = [IO.Path]::GetFullPath($RunRoot)
-$allowedParent = 'C:\RhaiQuality\runs'
-$allowedRoot = $allowedParent + '\'
-if ($run -notmatch '^C:\\RhaiQuality\\runs\\monitor-source-[0-9a-f]{32}$') {
-    throw "RunRoot must be a direct, unique monitor-source-GUID child of $allowedParent"
+function Resolve-PrivateRunLayout([string] $RunRoot, [string] $UserProfile) {
+    if ($RunRoot -match '(^|[\\/])\.\.([\\/]|$)') { throw 'RunRoot cannot contain parent-directory traversal.' }
+    $profileRoot = [IO.Path]::GetFullPath($UserProfile).TrimEnd('\')
+    $privateBuildRoot = [IO.Path]::GetFullPath((Join-Path $profileRoot '.local\share\agent-builds\rhai')).TrimEnd('\')
+    $privatePrefix = $privateBuildRoot + '\'
+    $run = [IO.Path]::GetFullPath($RunRoot)
+    if (!$privateBuildRoot.StartsWith(($profileRoot + '\'), [StringComparison]::OrdinalIgnoreCase) -or
+        !$run.StartsWith($privatePrefix, [StringComparison]::OrdinalIgnoreCase)) {
+        throw 'RunRoot must be inside the current user private agent-builds/rhai tree.'
+    }
+    $relativeRun = $run.Substring($privatePrefix.Length)
+    $runParts = $relativeRun.Split([char[]]@('\'))
+    if ($runParts.Length -ne 3 -or
+        $runParts[0] -notmatch '^[A-Za-z0-9][A-Za-z0-9._-]{0,95}$' -or
+        $runParts[1] -cne 'run' -or
+        $runParts[2] -notmatch '^monitor-source-[0-9a-f]{32}$') {
+        throw 'RunRoot must be a unique monitor-source-GUID child of <private-session-root>\run.'
+    }
+    $sessionRoot = Join-Path $privateBuildRoot $runParts[0]
+    $allowedParent = Join-Path $sessionRoot 'run'
+    $expectedRun = Join-Path $allowedParent $runParts[2]
+    if (!$run.Equals($expectedRun, [StringComparison]::OrdinalIgnoreCase)) {
+        throw 'RunRoot must be the canonical direct child of the current private session run directory.'
+    }
+    $volumeRoot = [IO.Path]::GetPathRoot($run)
+    if (![IO.Path]::GetPathRoot($profileRoot).Equals($volumeRoot, [StringComparison]::OrdinalIgnoreCase)) {
+        throw 'RunRoot and USERPROFILE must use the same volume.'
+    }
+    $trustedDirectories = @()
+    $cursor = $allowedParent
+    while ($true) {
+        $trustedDirectories += $cursor
+        if ($cursor.Equals($volumeRoot, [StringComparison]::OrdinalIgnoreCase)) { break }
+        $parent = [IO.Directory]::GetParent($cursor)
+        if ($null -eq $parent) { throw 'Could not enumerate every RunRoot ancestor through the volume root.' }
+        $cursor = $parent.FullName
+    }
+    return [PSCustomObject]@{
+        RunRoot = $run
+        AllowedParent = $allowedParent
+        DriveRoot = $volumeRoot
+        TrustedDirectories = $trustedDirectories
+    }
 }
-foreach ($trustedDirectory in @('C:\RhaiQuality', $allowedParent)) {
+function Assert-NoReparseDirectories([string[]] $TrustedDirectories, [string[]] $ReparseDirectories) {
+    foreach ($trustedDirectory in $TrustedDirectories) {
+        foreach ($reparseDirectory in $ReparseDirectories) {
+            if ($trustedDirectory.Equals($reparseDirectory, [StringComparison]::OrdinalIgnoreCase)) {
+                throw "Approved run ancestor is a reparse point: $trustedDirectory"
+            }
+        }
+    }
+}
+function Assert-RunRootRejected([string] $Name, [string] $RunRoot, [string] $UserProfile) {
+    $rejected = $false
+    try { $null = Resolve-PrivateRunLayout $RunRoot $UserProfile } catch { $rejected = $true }
+    if (!$rejected) { throw "Private run-root policy accepted invalid case: $Name" }
+}
+
+# Exercise the path policy without creating files or native resources.
+$policyProfile = [IO.Path]::GetFullPath($env:USERPROFILE)
+$policyPrivate = Join-Path $policyProfile '.local\share\agent-builds\rhai'
+$policySession = Join-Path $policyPrivate 'policy-test-session'
+$policyRunName = 'monitor-source-0123456789abcdef0123456789abcdef'
+$policyValidRun = Join-Path (Join-Path $policySession 'run') $policyRunName
+$policyLayout = Resolve-PrivateRunLayout $policyValidRun $policyProfile
+if (!$policyLayout.RunRoot.Equals([IO.Path]::GetFullPath($policyValidRun), [StringComparison]::OrdinalIgnoreCase) -or
+    !$policyLayout.DriveRoot.Equals([IO.Path]::GetPathRoot($policyProfile), [StringComparison]::OrdinalIgnoreCase)) {
+    throw 'Private run-root valid-case or volume binding failed.'
+}
+Assert-RunRootRejected 'old-root' (Join-Path (Join-Path $policyLayout.DriveRoot 'RhaiQuality\runs') $policyRunName) $policyProfile
+Assert-RunRootRejected 'wrong-session-depth' (Join-Path (Join-Path (Join-Path $policySession 'nested') 'run') $policyRunName) $policyProfile
+Assert-RunRootRejected 'parent-traversal' ((Join-Path (Join-Path $policySession 'run') '..\run') + '\' + $policyRunName) $policyProfile
+$alternateProfile = Join-Path ([IO.Path]::GetPathRoot($policyProfile)) 'Profiles\PolicyFixture'
+$alternatePrivate = Join-Path $alternateProfile '.local\share\agent-builds\rhai'
+$alternateSession = Join-Path $alternatePrivate 'alternate-session'
+$alternateParent = Join-Path $alternateSession 'run'
+$alternateRun = Join-Path $alternateParent $policyRunName
+$alternateLayout = Resolve-PrivateRunLayout $alternateRun $alternateProfile
+$expectedAlternateAncestors = @(
+    $alternateParent,
+    $alternateSession,
+    $alternatePrivate,
+    (Join-Path $alternateProfile '.local\share\agent-builds'),
+    (Join-Path $alternateProfile '.local\share'),
+    (Join-Path $alternateProfile '.local'),
+    $alternateProfile,
+    (Join-Path ([IO.Path]::GetPathRoot($alternateProfile)) 'Profiles'),
+    [IO.Path]::GetPathRoot($alternateProfile)
+)
+if (!$alternateLayout.DriveRoot.Equals([IO.Path]::GetPathRoot($alternateRun), [StringComparison]::OrdinalIgnoreCase) -or
+    $alternateLayout.TrustedDirectories.Length -ne $expectedAlternateAncestors.Length) {
+    throw 'Private run-root drive binding or nonstandard-profile ancestor count failed.'
+}
+for ($ancestorIndex = 0; $ancestorIndex -lt $expectedAlternateAncestors.Length; $ancestorIndex++) {
+    if (!$alternateLayout.TrustedDirectories[$ancestorIndex].Equals($expectedAlternateAncestors[$ancestorIndex], [StringComparison]::OrdinalIgnoreCase)) {
+        throw "Private run-root ancestor enumeration failed at index $ancestorIndex."
+    }
+}
+$reparseRejected = $false
+try { Assert-NoReparseDirectories $policyLayout.TrustedDirectories @($policyLayout.TrustedDirectories[1]) } catch { $reparseRejected = $true }
+if (!$reparseRejected) { throw 'Private run-root policy accepted a reparse-point ancestor case.' }
+Write-Output 'PASS private-run-root policy cases: valid, old-root, depth, traversal, reparse, nonstandard ancestors, drive binding'
+
+$policyLayout = Resolve-PrivateRunLayout $RunRoot $env:USERPROFILE
+$run = $policyLayout.RunRoot
+$allowedParent = $policyLayout.AllowedParent
+$driveRoot = $policyLayout.DriveRoot
+$trustedDirectories = $policyLayout.TrustedDirectories
+$reparseDirectories = @()
+foreach ($trustedDirectory in $trustedDirectories) {
     if (!(Test-Path -LiteralPath $trustedDirectory -PathType Container)) { throw "Approved run ancestor is absent: $trustedDirectory" }
     $directoryInfo = Get-Item -LiteralPath $trustedDirectory -Force
-    if (($directoryInfo.Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) { throw "Approved run ancestor is a reparse point: $trustedDirectory" }
+    if (($directoryInfo.Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) { $reparseDirectories += $trustedDirectory }
 }
+Assert-NoReparseDirectories $trustedDirectories $reparseDirectories
 if ($SetupFailureControl) {
     if (!(Test-Path -LiteralPath $run -PathType Container)) { throw "SetupFailureControl requires the existing owner run root: $run" }
 }
 elseif (Test-Path -LiteralPath $run) { throw "RunRoot already exists; preserve and inspect it: $run" }
-$drive = [IO.DriveInfo]::new('C:')
-if ($drive.AvailableFreeSpace -lt 2GB) { throw 'At least 2 GiB free on C: is required by the fixed fixture storage plan' }
+$drive = [IO.DriveInfo]::new($driveRoot)
+if ($drive.AvailableFreeSpace -lt 2GB) { throw "At least 2 GiB free on $driveRoot is required by the fixed fixture storage plan" }
 
 $expectedRoot = Join-Path $run 'input'
 $buildRoot = Join-Path $run 'build'
