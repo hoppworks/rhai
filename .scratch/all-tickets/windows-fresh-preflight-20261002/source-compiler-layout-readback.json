@@ -1,0 +1,49 @@
+{
+  "scope": "Read-only native Windows source/compiler/layout prerequisites; not fixture or production acceptance",
+  "source_root": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\w9e0-20261002-6f804a9c4c4a4e78\\source",
+  "source_pins_matching": 17,
+  "pins_method": "Read current previously hash-verified harness; match its 17 literal path/hash entries, native Get-FileHash SHA256 on each source path, throw on mismatch or count other than17. Typed command checked before Enter; native output independently visually read.",
+  "powershell": "5.1.26100.9444",
+  "intptr_bytes": 8,
+  "compiler_sha256": "cf32c7b8e5691b962f1b6e92b03d87409dd9f7aebfd71c5bf778203cc56ee1",
+  "compiler_bytes": 59720,
+  "free_bytes": 70730817536,
+  "source_tree_and_ancestors": "clean native recursive enumeration and DirectoryInfo.Parent traversal; throw on any ReparsePoint",
+  "terminal_prompt_returned": true,
+  "cleanup": {
+    "exact_owned_screenshots_removed": 6
+  },
+  "screenshots": [
+    {
+      "local": ".scratch/all-tickets/windows-fresh-preflight-20261002/pins-before.png",
+      "remote": "/tmp/rhai-root-pins-before-20261002.png",
+      "sha256": "ca76a2be2d911b47ea60636063a3d6a9440105debf6536eaf8193cf48ad2a894"
+    },
+    {
+      "local": ".scratch/all-tickets/windows-fresh-preflight-20261002/pins-typed.png",
+      "remote": "/tmp/rhai-root-pins-typed-20261002.png",
+      "sha256": "03094d45f167be9d8a40ade6e423364b9c93b8edab8ca6b3fa747e6062ac84e7"
+    },
+    {
+      "local": ".scratch/all-tickets/windows-fresh-preflight-20261002/pins-result.png",
+      "remote": "/tmp/rhai-root-pins-result-20261002.png",
+      "sha256": "28549a910dfa774727b9b2c44767515b10d519f4a1c303f5b9f2be7639ed6fcb"
+    },
+    {
+      "local": ".scratch/all-tickets/windows-fresh-preflight-20261002/layout-typed.png",
+      "remote": "/tmp/rhai-root-layout-typed-20261002.png",
+      "sha256": "ee641299dcaf8128e8f14576bf23be3fbdb23e8d713ef2ae2533817040c2a0c1"
+    },
+    {
+      "local": ".scratch/all-tickets/windows-fresh-preflight-20261002/layout-result.png",
+      "remote": "/tmp/rhai-root-layout-result-20261002.png",
+      "sha256": "b5183feeb8f80588d70d45d0bdc13a55a96768c75874237620185dcf5b199f9b"
+    },
+    {
+      "local": ".scratch/all-tickets/windows-fresh-preflight-20261002/layout-terminal.png",
+      "remote": "/tmp/rhai-root-layout-terminal-20261002.png",
+      "sha256": "c6876206d253c52d94b688d56d9b54bf96d94cff501328ec7eef899ad5e61adb"
+    }
+  ],
+  "remaining": "Absent unique runroot and its every approved ancestor; fresh dispatch-time slot and prerequisite applicability; actual compiler/fixtures/job closure."
+}
