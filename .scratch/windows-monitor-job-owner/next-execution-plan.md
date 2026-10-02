@@ -215,52 +215,6 @@ bootstrap/install, or release acceptance.
 
 ## Present status
 
-Earlier preflight and harness failures are historical and remain counted: the
-policy rejection, PowerShell 5.1 reflection-argument failure, and a later
-collision before compiler launch. On 2026-10-02, the corrected owner commit
-`737988d417195a69e1d14c226c9940a9de7d844b` was downloaded to the fresh
-`owner-737988d4.zip` path (SHA-256
-`55aefedd96acdf716399ad12994c27e993211920b2d22f769b70b533e7c986ab`) and
-extracted without overwrite to the previously absent
-`owner-737988d4-src`. Its harness hash matched
-`6e8adde4969fafd5502a6848a8607420510ed96949e6f4d12b58d3bca0116ffa`, and
-PowerShell 5.1 `Parser.ParseFile` on that exact script returned zero errors.
-The new run root `C:\RhaiQuality\runs\monitor-source-4df64ca93e024a29a4a47cc11c27a8d1`
-was absent at preflight. The one authorized invocation then failed before
-creating a job or timer, before starting any child/compiler/fixture process,
-because the module handle returned through `Select-Object -ExpandProperty`
-was not a CLR `IntPtr`. The script had already created the exact run root and
-its `build`, `input`, `logs`, and `temp` subdirectories; they are preserved
-and must not be reused. The in-script 17-file hash/copy gate has not run.
+The immutable 7b source archive and harness/parser/17-input preflight are recorded above. The one authorized harness invocation used `C:\RhaiQuality\runs\monitor-source-c58407e0123145698ab1d70e70473f7e`; its 17-input hash/copy gate passed. Compilation then stopped on five `CS0103` errors because `EnsureFinalizationBudgetIfSet` was scoped inside `RuntimeAllocation` but called by five enclosing-backend copy/scan/transfer/readback methods. No fixtures ran. Preserve this failed run root and its original logs/screenshots.
 
-The mutable correction now enumerates the concrete `ProcessModule` collection
-without the pipeline wrapper, explicitly assigns `BaseAddress` to a typed
-`IntPtr`, and passes that typed handle directly through the resolver guard and
-`Object[2]` invocation arguments. The nonzero CLR-type validation remains in
-place. Its source hash is
-`7622f44d57d40c84705c85a8ab37043cb4fb674ee7d9a0431ed237eb1d3bfc08`.
-Root accepted this source correction. It is checkpointed in fork commit
-`2580f04d373a1e14d021b292f0bd73381dec8076` with lowercase author and
-committer, pushed and read back only on
-`task/windows-scoped-runner-corrected`. Rerun the corrected script parser and
-immutable 17-input gate from a fresh archive pinned to this exact commit and a
-new absent GUID run root. The one-hour source-fixture
-batch remains the outer execution bound; the 30-minute source planning estimate
-is not a hard cap. Expert02's separate 30-minute monitor lifetime and its setup,
-lease, closure, evidence, and resource limits remain unchanged. No compiler,
-fixture executable, production monitor, payload, bootstrap, package build, or
-runtime-removal command has run. The real-client driver remains frozen
-separately as described above. No VM shutdown or reconfiguration was performed.
-
-## Harness cleanup correction (2026-10-01)
-
-The previous harness hash `575ba6b8...` is superseded. Review found that its
-finally block treated returning from a script invoked with `&` as process
-teardown, ignored a timer-disposal result, and used an unbounded callback drain.
-The corrected source keeps the exact-process watchdog and retained process
-handle alive through job accounting and handle disposition, fails fast if exact
-job cleanup fails, and requires successful `Timer.Dispose(waitHandle)` plus a
-bounded five-second signaled callback drain before releasing owners. The new
-source hash is recorded in the state file. This is an unparsed source candidate
-pending root review; the earlier guest parser result does not apply to it, and
-no guest invocation or compiler/fixture work has run with this revision.
+The local source candidate `WindowsCustodyBackend.cs` SHA-256 is `368e230e67b6712a29386b8623c69bf9e58ab404687a79078685ffe5cf061ee5`. It moves the required-deadline and optional-deadline helpers unchanged to backend scope and removes their nested copies. Static brace/scope/call-site checks and `git diff --check` pass; no compile or guest retry has occurred on this candidate. Root review is the next step. Do not restart from or alter the previous root. Any later run must use a fresh unique path under the new private guest resource convention, after source review, and remain within the original one-hour source-fixture bound. Expert02 monitor limits and all earlier launch/cause history remain unchanged. This source-fixture attempt does not establish native monitor, payload custody, runtime removal, or full acceptance.

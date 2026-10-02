@@ -106,6 +106,22 @@ internal static class WindowsCustodyBackend
     private static extern bool ConvertStringSecurityDescriptorToSecurityDescriptorW(string sddl, uint revision, out IntPtr descriptor, out uint size);
     [DllImport("kernel32.dll", SetLastError = true)] private static extern IntPtr LocalFree(IntPtr memory);
     [DllImport("kernel32.dll")] private static extern ulong GetTickCount64();
+
+    // Shared by RuntimeAllocation and the enclosing bounded-copy/readback
+    // helpers below. Keeping this at the backend scope makes the deadline
+    // guard available to both call-site scopes without changing its behavior.
+    private static void EnsureFinalizationBudget(ulong deadline, string phase)
+    {
+        if (deadline == 0) throw new InvalidOperationException("local outcome finalization requires a finite monotonic deadline");
+        if (GetTickCount64() < deadline) return;
+        throw new TimeoutException(phase + " exceeded the shared local finalization deadline");
+    }
+
+    private static void EnsureFinalizationBudgetIfSet(ulong deadline, string phase)
+    {
+        if (deadline != 0) EnsureFinalizationBudget(deadline, phase);
+    }
+
     [DllImport("advapi32.dll", SetLastError = true)]
     private static extern uint GetSecurityInfo(SafeFileHandle handle, int objectType, uint info,
         out IntPtr owner, out IntPtr group, out IntPtr dacl, out IntPtr sacl, out IntPtr descriptor);
@@ -715,14 +731,6 @@ internal static class WindowsCustodyBackend
         internal static ulong StartLocalFinalizationDeadline()
         { return GetTickCount64()+LocalFinalizationBudgetMs; }
 
-        private static void EnsureFinalizationBudget(ulong deadline,string phase)
-        {
-            if(deadline==0) throw new InvalidOperationException("local outcome finalization requires a finite monotonic deadline");
-            if(GetTickCount64()<deadline) return;
-            throw new TimeoutException(phase+" exceeded the shared local finalization deadline");
-        }
-        private static void EnsureFinalizationBudgetIfSet(ulong deadline,string phase)
-        { if(deadline!=0) EnsureFinalizationBudget(deadline,phase); }
         private static void EnsureRemovalBudget(CancellationToken cancellationToken,ulong deadline,string phase)
         {
             cancellationToken.ThrowIfCancellationRequested();
