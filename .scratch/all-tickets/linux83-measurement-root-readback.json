@@ -1,0 +1,57 @@
+{
+  "native_invocation": 83,
+  "source_revision": "00bed4a0dfeb103ff209ba4c76dac7ae797b7c56",
+  "samples": 120,
+  "cargo_status": 0,
+  "runner_status": 0,
+  "monitor_status": 0,
+  "original_outer_status": 1,
+  "raw_csv_matches_original_cargo_records": true,
+  "summary_matches_recomputed_frozen_parser": true,
+  "six_source_manifests_match_frozen_revision": true,
+  "runner_identity_data_rows": 89,
+  "empty_descriptive_cmdline_fields": 49,
+  "identity_numeric_fields_valid": true,
+  "final_cleanup_acceptance": "exact emitted identities/original groups/private runtime/session scope absent",
+  "retained_workers_handles_descriptors": "unverified",
+  "fresh_independent_cleanup": {
+    "exact_identity_count": 89,
+    "group_count": 23,
+    "matching_identities_alive": [],
+    "original_group_members": [],
+    "runtime": "/var/roothome/.local/share/agent-builds/rhai/process-overhead-rhai-process-overhead-00bed4a0-b6f34e20-preflight83-3600450/agent-build-34k5bcbe",
+    "runtime_absent": true,
+    "session_scope": "/var/roothome/.local/share/agent-builds/rhai/process-overhead-rhai-process-overhead-00bed4a0-b6f34e20-preflight83-3600450",
+    "session_scope_absent": true,
+    "signals_sent": false
+  },
+  "original_evidence_path": "/Users/hoppworks/projects/rhai-managed-unix-scope-close/.scratch/managed-unix-scope-close/launch-83-evidence",
+  "original_hashes": {
+    "outer.log": "d4193bec5381636ef1d0cb4b41b2a87cfae124ded58e17de781eba765ab9ac51",
+    "pid-readback.tsv": "f5e700fd1d0d807914bd4dc7f7255b15227300543c1216b8fd2cad5cca9b9a2e",
+    "runner-process-identities.tsv": "7bbe36b38e3100e30a943a6cd574a97cab2aae4855f7fdb168bbc6ba8da3599e",
+    "measurements/raw-samples.csv": "ff99e27c32b5f0ad2624b8ca777f151437be65368e54aadb7621631a605d90c9",
+    "measurements/summary.json": "23c64a533b5020d0907fb6f67317b1e8f32f00f32f722d4bcdf3a204525ad00a"
+  },
+  "descriptive_medians": {
+    "DirectChild": {
+      "true": {
+        "latency_ns_median": 699281.0
+      },
+      "capture": {
+        "latency_ns_median": 111473513.0,
+        "captured_bytes_per_second_median": 150504059.05020827
+      }
+    },
+    "Managed": {
+      "true": {
+        "latency_ns_median": 101176990.5
+      },
+      "capture": {
+        "latency_ns_median": 211283791.0,
+        "captured_bytes_per_second_median": 79406102.04494554
+      }
+    }
+  },
+  "acceptance_scope": "Linux descriptive latency/throughput data at frozen00bed; original outer1 preserved, exact numeric identity fields plus fresh closure readback independently validated. Not a native all-feature/MSRV or worker/handle/descriptor census."
+}

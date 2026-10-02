@@ -71,7 +71,12 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    6244.txt and compiler logs, checks exact process/job cleanup, then source-first
    fixes helper visibility without weakening shared finalization deadlines.
    Frozen correction and originals require root review before another native
-   invocation. Existing hard caps and nonrenewable real-client allocation remain.
+   invocation. Focused c776b8e3 relocation of both unchanged guards to enclosing
+   backend independently reviewed/integrated as source-only; fivecallers unchanged.
+   Root viewed actual compiler screenshot (fiveCS0103). Desktop-only screenshot
+   is not exactjob closure proof. Owner checks exact6244/compiler/setupchild IDs
+   and updates changed backend's immutable17input hash before nextfresharchive.
+   Existing hard caps and nonrenewable real-client allocation remain.
    This is a concrete compilation cause, not a verified live wait. Original
    detailed setup history is retained by reference to root state at f8b65ad6.
 2. POSIX overhead source00bed4a0dfeb103ff209ba4c76dac7ae797b7c56 integrated.
@@ -134,7 +139,23 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    receipts in responsible launch-83-staging/{staged-hashes,preflight-output}.txt.
    Source/staging gate CLOSED; ONE native83 released under unchanged caps and
    exact120calls/zero warmups/no retries. Count83 consumes only at actual launch;
-   no live handle or actual launch receipt yet. No performance acceptance claimed.
+   actual83 dispatched2026-10-02T05:34:59Z, exec56258, launcher3600450/start5590079,
+   runner3600461/start5590081, independently confirmed live then terminal.
+   Cargo/runscoped/monitor0;120samples emitted, outer1 due49empty cmdline metadata
+   rows in otherwise valid numeric identity ledger. False SystemExit:0 diagnostic
+   comes from sys.exit(main()) inside BaseException logging, status0 preserved.
+   Root independently re-parsed original Cargo records with frozen parser,
+   compared rawCSV and recomputed summary, and checked six before/after manifests
+   against00bed. Fresh independent SSHreadback confirms89distinctPID/start pairs
+   absent,23originalgroups empty, exactruntime/sessionTMPDIRabsent, no signals.
+   Root receipt linux83-measurement-root-readback.json supports narrow descriptive
+   Linux timing/throughput acceptance; originalouter1 and rawlogs preserved.
+   MedianDirecttrue0.699ms/Managedtrue101.177ms; captureDirect111.474ms,
+   Managed211.284ms for16MiB total. SamplemaxRSS911638528bytes/storage300040KiB.
+   Responsible owner repairs optionalmetadata validation and falseexitlogging,
+   adds pure malformedidentity REDcontrols and re-evaluates immutable83originals.
+   No native84/repeatedmeasurement authorized or needed for finalizer formatting.
+   Worker/handle/descriptor census and Mac/Windows measurements remain open.
    Root macOS measurement adaptation is SOURCE-ONLY and NOT approved to launch:
    macos-process-overhead.py and run-macos-process-overhead.sh bind00bed/archive
    5414ea195ad00152b1eae36b3f4e10943ba5d9bf323baff6410cca0c5b4d8b98.
@@ -209,9 +230,10 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    source/check logic/environment; final strict coverage remains required.
 
 ## Resources, counts and cause history
-Unix actual native invocation count82 consumed; native82 failed at runner import
-before runtime/measurement. Next unique invocation83 allocated only at launch after
-new source/staging gate. No live Unix test handle is currently recorded. Linux outer598s
+Unix actual native invocation count83 consumed.82 failed before runtime;
+83 measurementCargo0 but originalouter1 due optional cmdline receipt validation.
+83 is terminal; no liveUnix testhandle. No84allocated. Preserve originalfailures
+and root independently accepted narrow descriptive data/cleanup readback. Linux outer598s
 plus kill2s=600s, scoped585s, driver580s, aggregate Cargo540s, jobs2, descendants16,
 2GiB policy and sampled stop1572864KiB. macOS scoped600s/Cargo540s/jobs2 with same
 policy/sample limits. Sampling is not continuous peak or enforced byte accounting.
@@ -263,9 +285,9 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Previous turn classification
-The user-requested overall-status turn was NO PROGRESS (readback/status only).
-This continuation makes PROGRESS: independently accepted/applied Linux dependency
-bundle correction and82 original cleanup receipts, advanced absent-only staging,
-reviewed Expert09 answer and resumed bounded Mac source implementation, and obtained
-actual Windows compiler-failure evidence that determines the targeted correction.
-No new native slot or benchmark result claimed; goal remains active/incomplete.
+PROGRESS: observed83 live exactidentities then terminal, independently validated
+120rawmeasurementrecords/summary/frozenmanifests and fresh exactclosure; concrete
+optionalcmdline finalizer diagnosis avoids unnecessary benchmark repetition.
+Windows focusedguard source correction reviewed/integrated with originalcompiler
+screenshot evidence; pending exactcleanup and updatedinputpin before nextnativegate.
+Mac sourcefirst Expert09 implementation continues. Fullgoal active/incomplete.
