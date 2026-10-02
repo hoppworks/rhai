@@ -80,10 +80,12 @@ Historical detailed staging, gates and outcomes remain in this same state at
    parser and isolated pure path controls before any fixture invocation. Earlier
    compiler/setup/extraction failures and nonrenewable real-client allocation
    retained; no native job/public production acceptance claimed.
-3. Mac sole-custodian corrections frozena7232f05: source-only client exec-vector
-   and observed-identity corrections are running in the responsible context.
-   Original2f review remains referenced; a723 is not accepted. False launch guard
-   stays closed; selected graph/toolchain
+3. Mac sole-custodian source increment frozen at b2db6448af7c4c29fe6d6529910d4648e264739a,
+   following 2f/a723/fdb. Native task-info RSS replaces the ps/native join; owner
+   reports 19 reader and 25 adapter injected tests passing, not yet independently
+   accepted. One combined independent source review is active, including prior
+   findings and selected helper-source risk. False launch guard stays closed;
+   selected graph/toolchain
    confinement, escaped-leaf closure, native Darwin ABI and finite interruption
    controls still need proof. No native launch since81; existing Expert09/caps
    remain. Review complete current source before any execution gate.
@@ -296,3 +298,45 @@ and retain current conservative path/closure checks. Pure injected ABI/identity
 race controls precede any native call; reader ABI and native controls remain open.
 Responsible owner may finish this in existing09 source package at a30-minute
 active-work checkpoint; no new Expert chain/native slots or hard-cap changes.
+
+Independent current optional MSRV compilation prerequisite is available: accepted
+old Darwin1.77.2 proof applies to source0c2dda12; current process manifest/source
+diff contains8915 added/changed lines including Unix adapter, so its compatibility
+cannot be inferred. No1.77.2 toolchain is currently installed on this Mac. A new
+owned private build dependency may be staged solely under scoped runtime (as in
+accepted optional proof); never install/update shared toolchain/home. Prepare one
+source-reviewed bounded check of exact9f84aa6d source/full manifests/lock2ba4,
+Rust/Cargo1.77.2, sys+net+testing-environ library compile, jobs2/debug0/incremental0,
+sampled storage/RSS2GiB and descendants16, helper540/outer600 including setup and
+export. No tests/fixtures/native reader/process measurement; no invocation85.
+This is a new changed-source compatibility prerequisite, not a restart/reset of
+old accepted package or full native behavior acceptance. Freeze helper for root
+review before execution; preserve all outcomes, stop lock/toolchain/assertion or
+resource/deadline failure. Thirty-minute active-work preparation checkpoint.
+
+## Current instruction application and active work
+
+Global instructions at commit056b17c and this project's AGENTS were reread on
+2026-10-02. Relevant changed campaign/review rules were reloaded. Existing human
+authorization covers the current finite source correction, review and compiler
+prerequisite; stale pending labels do not revoke it. All accepted evidence,
+cause09/Expert09 history, actual84 native invocations and hard caps are retained.
+Use one combined independent review per coherent package; specialist input needs
+a named risk. Related requirements may share integrated acceptance. One heavy
+build/E2E per Machine is the default: check recorded cross-session active work
+before launch and never stop foreign processes. Source review/light tests can
+run concurrently. Worker is mechanical only, Standard implements rule-heavy
+helpers, Expert performs independent review. New temporary runs use unique owned
+scopes under ~/.local/share/agent-builds/rhai, absolute TMPDIR and private runtime
+outputs/caches; existing resources are not moved or cleaned.
+
+Active source-only combined review: macos_custody_combined_review, exactb2db6448
+package plus previous material findings and named build-helper confinement risk.
+No native/build/control/measurement launch authorized by this review itself.
+Selected-source reportd162e84fb9305043cfdfc091ff4aeda311b6c003 accounts27 candidate
+targets/58 source units; root read full report and independently confirmed libc's
+unconditional PATH emcc probe in the accepted source. Accept its candidate-source
+analysis narrowly; exact compiler/wrappers/PATH/SDK/helper confinement remains open.
+Current optional helper preparation is active in current_optional_msrv_prepare_v2;
+earlier spawn capacity rejection launched nothing and consumed no compile/native
+slot. No heavy job has been launched in this current step.
