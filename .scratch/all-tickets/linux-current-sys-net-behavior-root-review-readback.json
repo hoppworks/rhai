@@ -1,0 +1,17 @@
+{
+  "reviewed_ref": "38b07774d3d518885004bbd04f9d93ea290fec78",
+  "helper_sha256": "08ad623b672b34d547bb71242a1b1264d892685f17b984288c458bd22cfe89b9",
+  "original_no_object_red": {
+    "path": "/Users/hoppworks/.codex/worktrees/all-tickets-continuation/rhai/.scratch/net-feature-proof/logs/noobj-peer-wrong.log",
+    "sha256": "99aed8f98b52c4d15aaa4bf4573f6d3158c79113a74d46d4495b265686dfd646",
+    "intended_named_assertion_present": true,
+    "draft_required_diagnostic_present": false
+  },
+  "write_classifier_negative_fixture": {
+    "fixture": "error[E0254]: could not compile test; 254",
+    "draft_diagnostic_substring_would_match": true,
+    "is_test_assertion": false
+  },
+  "production_and_selected_targets_unchanged_from_frozen_source": true,
+  "scope": "source-only classifier reproduction using retained original proof; not new native acceptance"
+}

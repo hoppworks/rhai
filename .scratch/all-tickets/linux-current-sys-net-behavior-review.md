@@ -38,3 +38,20 @@ no_index/sync/metadata and f32_float, other platforms and native process/release
 acceptance remain open. The frozen source/archive/lock and finite
 600/540/510+30 second budgets, jobs2, periodic RSS/storage caps and descendant16
 limits are preserved. This review does not prove any runtime row.
+
+## Independent original-evidence reproduction
+
+Root read the retained original no-object RED log and the frozen draft control
+constants in an own scoped pure run. The intended named assertion is present,
+and the draft restored-branch diagnostic is absent. A compile-error-shaped
+negative fixture containing 254 also matches the draft write classifier.
+Receipt: `linux-current-sys-net-behavior-root-review-readback.json`, with original
+proof path/hash and exact draft ref. Runner exited0; private runtime and exact
+empty scope were retired. No native acceptance run or build occurred.
+
+A direct frozen1ca-to-current diff confirms production, build/codegen/manifests
+and all selected target sources are unchanged. The repaired package should use
+serial test-harness scheduling to bound fixture child count; explicit concurrency
+tests retain their own threads. Positive test accounting must distinguish nested
+fixture summaries from outer target summaries. One Cargo invocation per row can
+run several integration test executables.

@@ -135,7 +135,13 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
    withdrawn after full String::from_utf8_lossy assertion read, not a failure.
    No staging/build/native command executed. Next collect corrected ref and
    original RED/GREEN, recheck finding fixes and independently scoped pure
-   tests before integration/staging. Other combinedruntime rows remainopen.
+   tests before integration/staging. Root original-proof readback independently
+   confirms no_object diagnostic mismatch and compileerror254 falsepositive;
+   receiptlinux-current-sys-net-behavior-root-review-readback.json. Source-only
+   scoped runner0/runtime removed/empty scope retired. Production and all
+   selected target sources unchanged frozen1ca..current. Serial test scheduling
+   requested to bound fixture footprint, explicit concurrency tests retained;
+   account outer summaries separately from legitimate nested fixture summaries. Other combinedruntime rows remainopen.
 
 
 3. Mac Managed source correction74943bb2 is independently reviewed and replayed:
@@ -257,14 +263,15 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Current turn classification
-Previous status-request turn: no implementation progress; live fork readback
-confirmed mainonly and owner handback changed the next available action.
-Current continuation: PROGRESS. Independent Mac review found and closed an
-output-contract defect, replayed63source tests0, integrated reviewed source
-and original receipts, pushed97977bac and independently read back forkmain.
-Independent Linux behavior review now identifies concrete classifier defects
-for one responsible fix batch. Goal incomplete; source work is active and
-meaningful, no blocked transition or additional nativeprocess allocation.
+Previous goal continuation: PROGRESS, independently reviewed/corrected Mac
+source preflight integrated and source tests63pass; Linux review found concrete
+classifier defects sent as one batch.
+Current continuation: PROGRESS. Own scoped original-evidence reproduction
+confirms both classifier defects and unchanged frozen-source applicability;
+original proof is retained without duplicate build. Existing Linux/Mac owners
+confirmedrunning by collaboration inventory while implementing coherent source
+corrections. Await corrected immutable refs before native dispatch. Goal stays
+active/incomplete; no nativeprocess85 allocation, no blocked transition.
 
 ## Current-source core MSRV package — accepted narrow gate
 Current default-core applicability CLOSED for source52d9797b, Rust/Cargo1.66.0,
