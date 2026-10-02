@@ -1,0 +1,2 @@
+label	pid	start_ticks	ppid	pgid	cmdline
+measurement-driver	3890282	5885449	3890265	3890264	/root/.rustup/toolchains/1.93.0-x86_64-unknown-linux-gnu/bin/cargo test --features testing-environ,sys --test sys_process process_scope_retained_resource_census -- --exact --ignored --nocapture --test-threads=1

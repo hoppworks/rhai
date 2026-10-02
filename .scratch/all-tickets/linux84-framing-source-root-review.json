@@ -1,0 +1,23 @@
+{
+  "source_ref": "5ebd025c044e4be10491ddaae89bcba898ce8e3c",
+  "integration": "Exact 22-file increment; divergent owner state excluded; no ancestry merge",
+  "ocr": {
+    "selected": 3,
+    "reviewed": 3,
+    "skipped": 0,
+    "coverage_rate": 1.0
+  },
+  "review_basis": "Original full launcher/driver/preflight reviewed against source-controls-root-readback and native84 stage gate; exact framing and postimage-order corrections reviewed independently",
+  "controls": "Corrected self_test positive8 + exact libtest-prefix positive + seven negative mutations; original native84 log replay8; AST two files/bash syntax/manifest before classifier pass",
+  "runner_status": 0,
+  "empty_scope_retired": "/Users/hoppworks/.local/share/agent-builds/rhai/root-census-replay-739ae761c8204878a79c69236491de77",
+  "original_evidence": "All18 original file SHA256 values match independent remote readback receipt",
+  "native_invocations_consumed": 84,
+  "new_native_launch": false,
+  "limitations": "Original outer/runner1 and absent after-source manifest remain; no full package or release acceptance",
+  "source_hashes": {
+    "remote-resource-census-launch.sh": "b3d1d1db0e2c471be594e86f225210334e969858ef2a4b769a4f54b41f797789",
+    "resource-census-preflight.py": "31eb5879c61cfe99f83af8b9178473c5d7a49a39e24518804b94fe86271c8a7f",
+    "resource-census-proof.py": "a07c8bd4a48f083c465ed18af714fe7fcc762bdfd1bc8a080cbfb24ae11127d9"
+  }
+}

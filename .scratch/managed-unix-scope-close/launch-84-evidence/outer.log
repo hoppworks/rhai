@@ -1,0 +1,238 @@
+launch_utc=2026-10-02T06:24:13Z
+launcher_pid=3890227
+launcher_pgid=3890133
+outer_deadline_epoch=1790922853
+runner_tree_identity_count=40
+PRIVATE_RUNTIME /var/roothome/.local/share/agent-builds/rhai/process-overhead-rhai-process-resource-census-0b3841a-3890227/agent-build-nwbp27xm
+SOURCE_ARCHIVE revision=0b3841a03657463f40fae01f9af2797d5c3812ed sha256=e52fe1903537da4f58cf3315feec3e4eff33408f3de37688d81bdcdd9c558cd4
+LOCK baseline_sha256=8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa private_edge_sha256=2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425
+LIMITS outer_seconds=600 run_scoped_seconds=585 driver_seconds=580 cargo_seconds=540 cargo_jobs=2 descendants=16 memory_policy_bytes=2147483648 sampled_storage_stop_kib=1572864 storage_sampling_seconds=1 census_completed=6 held_controls=2 retries=0
+SAMPLED_PRIVATE_RUNTIME_STORAGE_MAX_KIB=288600; du -sk approximately once per second; sampled maximum, not continuous peak
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded ambient-authority v0.0.2
+  Downloaded autocfg v1.5.1
+  Downloaded bitflags v2.13.2
+  Downloaded itoa v1.0.15
+  Downloaded crunchy v0.2.4
+  Downloaded const-random v0.1.18
+  Downloaded cfg-if v1.0.5
+  Downloaded const-random-macro v0.1.16
+  Downloaded errno v0.3.14
+  Downloaded fs-set-times v0.20.3
+  Downloaded version_check v0.9.5
+  Downloaded static_assertions v1.1.0
+  Downloaded maybe-owned v0.3.4
+  Downloaded ipnet v2.12.2
+  Downloaded tiny-keccak v2.0.2
+  Downloaded ahash v0.8.12
+  Downloaded byteorder v1.5.0
+  Downloaded rmp v0.8.14
+  Downloaded io-lifetimes v2.0.4
+  Downloaded smartstring v1.0.1
+  Downloaded rustix-linux-procfs v0.1.1
+  Downloaded paste v1.0.15
+  Downloaded quote v1.0.41
+  Downloaded once_cell v1.21.4
+  Downloaded getrandom v0.2.17
+  Downloaded ryu v1.0.20
+  Downloaded rmp-serde v1.3.0
+  Downloaded io-lifetimes v3.0.1
+  Downloaded smallvec v1.16.2
+  Downloaded io-extras v0.19.0
+  Downloaded unicode-ident v1.0.22
+  Downloaded thin-vec v0.2.19
+  Downloaded proc-macro2 v1.0.103
+  Downloaded getrandom v0.3.4
+  Downloaded cap-std v4.0.3
+  Downloaded serde_core v1.0.229
+  Downloaded num-traits v0.2.19
+  Downloaded cap-primitives v4.0.3
+  Downloaded serde v1.0.229
+  Downloaded memchr v2.8.3
+  Downloaded serde_json v1.0.145
+  Downloaded portable-atomic v1.15.0
+  Downloaded syn v2.0.106
+  Downloaded zerocopy v0.8.59
+  Downloaded rustix v1.1.5
+  Downloaded libc v0.2.189
+  Downloaded linux-raw-sys v0.12.1
+ Downloading crates ...
+  Downloaded web-time v1.1.0
+   Compiling autocfg v1.5.1
+   Compiling portable-atomic v1.15.0
+   Compiling version_check v0.9.5
+   Compiling libc v0.2.189
+   Compiling crunchy v0.2.4
+   Compiling rustix v1.1.5
+   Compiling bitflags v2.13.2
+   Compiling linux-raw-sys v0.12.1
+   Compiling io-lifetimes v3.0.1
+   Compiling proc-macro2 v1.0.103
+   Compiling cfg-if v1.0.5
+   Compiling io-lifetimes v2.0.4
+   Compiling tiny-keccak v2.0.2
+   Compiling once_cell v1.21.4
+   Compiling num-traits v0.2.19
+   Compiling quote v1.0.41
+   Compiling io-extras v0.19.0
+   Compiling unicode-ident v1.0.22
+   Compiling getrandom v0.2.17
+   Compiling serde_core v1.0.229
+   Compiling getrandom v0.3.4
+   Compiling zerocopy v0.8.59
+   Compiling cap-primitives v4.0.3
+   Compiling const-random-macro v0.1.16
+   Compiling fs-set-times v0.20.3
+   Compiling rustix-linux-procfs v0.1.1
+   Compiling ahash v0.8.12
+   Compiling smartstring v1.0.1
+   Compiling maybe-owned v0.3.4
+   Compiling ambient-authority v0.0.2
+   Compiling paste v1.0.15
+   Compiling cap-std v4.0.3
+   Compiling ipnet v2.12.2
+   Compiling syn v2.0.106
+   Compiling const-random v0.1.18
+   Compiling rhai v1.26.1 (/var/roothome/.local/share/agent-builds/rhai/process-overhead-rhai-process-resource-census-0b3841a-3890227/agent-build-nwbp27xm/source)
+   Compiling serde v1.0.229
+   Compiling static_assertions v1.1.0
+   Compiling rhai_codegen v3.2.0 (/var/roothome/.local/share/agent-builds/rhai/process-overhead-rhai-process-resource-census-0b3841a-3890227/agent-build-nwbp27xm/source/codegen)
+   Compiling thin-vec v0.2.19
+   Compiling serde_json v1.0.145
+   Compiling smallvec v1.16.2
+   Compiling byteorder v1.5.0
+   Compiling rmp v0.8.14
+   Compiling memchr v2.8.3
+   Compiling itoa v1.0.15
+   Compiling ryu v1.0.20
+   Compiling rmp-serde v1.3.0
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:668:13
+    |
+668 |         let mut wait_operation = "wait for child";
+    |             ----^^^^^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `termination`
+    --> src/packages/sys/process/unix.rs:1106:22
+     |
+1106 |                 let (termination, _operation) = if self.managed {
+     |                      ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_termination`
+     |
+     = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2134:9
+     |
+2134 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2456:9
+     |
+2456 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variant `OnlyZombieLeader` is never constructed
+  --> src/packages/sys/process/unix.rs:50:5
+   |
+47 | enum GroupCloseOutcome {
+   |      ----------------- variant in this enum
+...
+50 |     OnlyZombieLeader,
+   |     ^^^^^^^^^^^^^^^^
+   |
+   = note: `GroupCloseOutcome` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: methods `numeric_operations_probe`, `quarantine_observations_probe`, and `fail_reservation` are never used
+    --> src/packages/sys/process/unix.rs:1470:8
+     |
+1390 | impl ExecutionFaults {
+     | -------------------- methods in this implementation
+...
+1470 |     fn numeric_operations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1481 |     fn quarantine_observations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1506 |     fn fail_reservation(&self) -> bool {
+     |        ^^^^^^^^^^^^^^^^
+
+warning: `rhai` (lib) generated 6 warnings (run `cargo fix --lib -p rhai` to apply 4 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+warning: variable does not need to be mutable
+   --> tests/sys_process.rs:861:9
+    |
+861 |     let mut holder = command.spawn().expect("start escaped captured-pipe holder");
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: value assigned to `incomplete` is never read
+    --> tests/sys_process.rs:1174:30
+     |
+1174 |         let mut incomplete = false;
+     |                              ^^^^^
+     |
+     = help: maybe it is overwritten before being read?
+     = note: `#[warn(unused_assignments)]` (part of `#[warn(unused)]`) on by default
+
+warning: constant `DIRECT_DROP_RECORD_ENV` is never used
+  --> tests/sys_process.rs:34:7
+   |
+34 | const DIRECT_DROP_RECORD_ENV: &str = "RHAI_SYS_DIRECT_DROP_RECORD";
+   |       ^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (test "sys_process") generated 3 warnings (run `cargo fix --test "sys_process" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 15.13s
+     Running tests/sys_process.rs (/var/roothome/.local/share/agent-builds/rhai/process-overhead-rhai-process-resource-census-0b3841a-3890227/agent-build-nwbp27xm/target/debug/deps/sys_process-1928063df57ef1bb)
+
+running 1 test
+test process_scope_retained_resource_census ... PROCESS_SCOPE_RESOURCE,DirectChild,run,base_tasks=2,return_tasks=3,base_fds=4,return_fds=4,cleanup_threads=1,fixture_pid=3892754,fixture_start=5886964,postdrop_tasks=2,postdrop_fds=4
+PROCESS_SCOPE_RESOURCE,DirectChild,spawn_wait,base_tasks=2,return_tasks=3,base_fds=4,return_fds=4,cleanup_threads=1,fixture_pid=3892757,fixture_start=5886965,postdrop_tasks=2,postdrop_fds=4
+PROCESS_SCOPE_RESOURCE,DirectChild,shared_child,base_tasks=2,return_tasks=3,base_fds=4,return_fds=4,cleanup_threads=1,fixture_pid=3892760,fixture_start=5886967,postdrop_tasks=2,postdrop_fds=4
+PROCESS_SCOPE_RESOURCE,DirectChild,held_child_control,base_tasks=2,return_tasks=3,base_fds=4,return_fds=6,cleanup_threads=1,fixture_pid=3892763,fixture_start=5886969,postdrop_tasks=2,postdrop_fds=4
+PROCESS_SCOPE_RESOURCE,Managed,run,base_tasks=2,return_tasks=3,base_fds=4,return_fds=4,cleanup_threads=1,fixture_pid=3892766,fixture_start=5886972,postdrop_tasks=2,postdrop_fds=4
+PROCESS_SCOPE_RESOURCE,Managed,spawn_wait,base_tasks=2,return_tasks=3,base_fds=4,return_fds=4,cleanup_threads=1,fixture_pid=3892774,fixture_start=5886992,postdrop_tasks=2,postdrop_fds=4
+PROCESS_SCOPE_RESOURCE,Managed,shared_child,base_tasks=2,return_tasks=3,base_fds=4,return_fds=4,cleanup_threads=1,fixture_pid=3892777,fixture_start=5886994,postdrop_tasks=2,postdrop_fds=4
+PROCESS_SCOPE_RESOURCE,Managed,held_child_control,base_tasks=2,return_tasks=3,base_fds=4,return_fds=6,cleanup_threads=1,fixture_pid=3892780,fixture_start=5886997,postdrop_tasks=2,postdrop_fds=4
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 33 filtered out; finished in 0.35s
+
+
+RESOURCE_CENSUS_PACKAGE_FAILURE ValueError: expected exactly eight census rows; missing=[('DirectChild', 'run')] observed=7
+Traceback (most recent call last):
+  File "/root/rhai-process-resource-census-0b3841a/resource-census-proof.py", line 416, in <module>
+    status = main()
+  File "/root/rhai-process-resource-census-0b3841a/resource-census-proof.py", line 396, in main
+    records = validate_census_log(census_text)
+  File "/root/rhai-process-resource-census-0b3841a/resource-census-proof.py", line 180, in validate_census_log
+    raise ValueError(f"expected exactly eight census rows; missing={sorted(expected)} observed={len(records)}")
+ValueError: expected exactly eight census rows; missing=[('DirectChild', 'run')] observed=7
+cleanup/readback completed with live owned identities or acceptance failures; see pid-readback.tsv
+session_scope_retired=empty:/root/.local/share/agent-builds/rhai/process-overhead-rhai-process-resource-census-0b3841a-3890227
