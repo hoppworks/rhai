@@ -1,0 +1,14 @@
+{
+  "revision": "b2db6448af7c4c29fe6d6529910d4648e264739a",
+  "statuses": {
+    "reader-positive": 0,
+    "adapter-positive": 0,
+    "wrong-rss-rounding": 1,
+    "wrong-identity-microseconds": 1,
+    "reader-restored": 0,
+    "adapter-restored": 0
+  },
+  "elapsed_seconds": 0.9668049588799477,
+  "acceptance": "Injected source regressions only; native ABI and custody remain unverified.",
+  "build_fixture_native_control_measurement_launches": 0
+}

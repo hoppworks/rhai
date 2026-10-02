@@ -1,0 +1,13 @@
+F
+======================================================================
+FAIL: test_taskinfo_layout_and_resident_kib_conversion (__main__.ReaderTests.test_taskinfo_layout_and_resident_kib_conversion)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/hoppworks/.local/share/agent-builds/rhai/root-native-source-20261002-a8b73f24/agent-build-38hp__d6/test-darwin-process-reader.py", line 92, in test_taskinfo_layout_and_resident_kib_conversion
+    self.assertEqual(reader_module.resident_kib(rows), 3)
+AssertionError: 2 != 3
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (failures=1)

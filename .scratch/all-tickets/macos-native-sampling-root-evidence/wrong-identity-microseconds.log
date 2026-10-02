@@ -1,0 +1,13 @@
+F
+======================================================================
+FAIL: test_taskinfo_is_bracketed_by_full_identity_including_microseconds (__main__.ReaderTests.test_taskinfo_is_bracketed_by_full_identity_including_microseconds)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/hoppworks/.local/share/agent-builds/rhai/root-native-source-20261002-a8b73f24/agent-build-38hp__d6/test-darwin-process-reader.py", line 120, in test_taskinfo_is_bracketed_by_full_identity_including_microseconds
+    self.assertEqual(api.list_calls, 2)
+AssertionError: 1 != 2
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (failures=1)

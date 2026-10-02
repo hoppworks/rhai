@@ -340,3 +340,21 @@ analysis narrowly; exact compiler/wrappers/PATH/SDK/helper confinement remains o
 Current optional helper preparation is active in current_optional_msrv_prepare_v2;
 earlier spawn capacity rejection launched nothing and consumed no compile/native
 slot. No heavy job has been launched in this current step.
+
+Independent b2db source regression replay allocated: own exact scope
+root-native-source-20261002-a8b73f24; outer100s, six pure Python commands at most
+10s each plus source copy/export. Run reader19/adapter25, deliberately wrong RSS
+rounding and omitted start-microsecond comparison, then restored19/25. No native
+API/build/fixture/control/measurement; no native slot consumed. Preserve original
+logs/statuses and verify exact empty scope retirement before narrow acceptance.
+
+Replay completed outer0/helper0.966804959s: reader19/adapter25 pass, both intended
+AssertionError controls fail1 (not harness errors), restored19/25 pass. Original
+macos-native-sampling-root-evidence receipt/logs retained. Exact owned scope was
+retired by empty-only rmdir and independently observed absent. Accept these two
+source regressions narrowly; native task-info ABI/readability, full architecture
+and interruption acceptance remain open. No native85/build launched.
+Heavy-slot coordination read the two other active project chats: AUTHZ work is
+on lllm, Patrol work on workhorse; no permission to message or alter those jobs.
+Local compiler process inventory will be checked immediately before any Mac
+heavy launch. Their remote heavy runs do not occupy this Mac's one-run convention.
