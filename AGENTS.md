@@ -93,6 +93,13 @@ Do not modify the global runner. Independent source review precedes execution;
 record finite controls and limits before launching. Native Windows custody remains
 an independent prerequisite, not waived by these decisions.
 
+On 2026-10-02 the owner explicitly accepted a clear Unix incomplete-cleanup
+error when managed processes have stopped but remain zombies under foreign
+parents. Ticket03 records the revised completion contract. Preserve conservative
+closure checks, retained custody, direct-child reaping, bounded output and honest
+diagnostics; permission errors do not prove stopped membership. The owner also
+confirmed the local console and Windows VM are available for native verification.
+
 ## Git attribution
 
 The owner requires author and committer names to be exactly `hoppworks` (lowercase).

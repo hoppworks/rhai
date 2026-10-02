@@ -8,17 +8,64 @@ Only https://github.com/hoppworks/rhai.git may receive pushes/verified main merg
 
 ## Current step and next action
 
-Previous continuation was progress: native74 executed with accepted diagnostic, exact independent cleanup and durable fork checkpoint03ebb5ff. This turn completed the source-interface feasibility assessment and exposed a concrete product decision; no new native launch. Actual macOS73 is terminal, attached61601 exit1. Immutable diagnostic source55e54ebd93a3dda931141d463c8cb12f5a2ea849/archivefb939f8b58ef5ec77c3b36cb3b5e1579f0e846869543dc3a89edfa8e2a746a5a used unchanged productionb801. It exposed ProcessCause::Io for "observe process group closure", PermissionDenied/EPERM after direct exit0 and complete output. The intended false-exit42 assertion was not reached, so this is rejected native acceptance, not meaningful control RED. Owner20/public29 did not run. Review native73-review.md and original macos-process-refresh-evidence/macos-process-refresh.B3sAtB. Root independently confirmed all nine known PIDs, owned groups and exact private runtime absent; cleanup receipt native73-root-cleanup-readback.json. Cargo73 actual monotonic16.640s; sample250668KiB not continuous peak. Count73 consumed; prior69–71 Cargo89.78s preserved,72 full wall unavailable. Known subtotal69–71+73=106.420s explicitly excludes72.
+The owner explicitly answered "beides ja" on 2026-10-02 to the Unix completion
+contract revision and console/Windows VM availability. Both prior blockers are
+resolved; the Goal is active and incomplete. No new native launch in this resume.
+Root records the accepted revision in ticket03 and AGENTS.md. Responsible Unix
+context linux_process_native_proof continues the existing cause08 work source-only:
+reuse native74 for the revised foreign-zombie error boundary, adapt affected native
+expectations and diagnose macOS73 honestly, then freeze changes for source review
+before execution. Windows sole owner windows_monitor_job_owner resumes live guest
+verification within its existing finite Expert02 package and cumulative limits.
+Root does not control the guest. Next native invocation75 is allocated only at
+actual coordinated launch; count74 and cause/budget history remain unchanged.
 
-Linux source911fe6fc047cfc5240347ccc4cd11fa56a282ff8/archive44b60f1d1260d90b4bb546aad92ff44f673c3257fc0cd9b1e35faf01c33240d5 and driver64a8831611de0d73fe81f875c899fe111beb5848ee7e2058181067f2ac6de596 close the frozen archive/outcome findings: public observer and driver both require successful report or exact closure Io+matching diagnostic. Owner branch3b31e0c5a541e569de259e160b4a228079059bf3 pushed with exact lowercase attribution. Fresh absent-only stage /root/rhai-managed-unix-scope-close-911fe6fc reported seven matching hashes and no launch. Root independently verified all seven staged hashes plus actual source.tar and linux-process-proof.py bindings and empty non-symlink evidence directory, closing two basename setup defects before execution. Root released one bounded Linux diagnostic74 (outer600/scoped585/driver580/Cargo540s,jobs2,descendants16,sampled storage stop1572864KiB). Actual74 attached86682 is terminal0; control101, owner20/0, public32/0/raw33 and four matching six-path restoration phases. Root independently read exact held-zombie boundary: W/F stoppedZ with pre-acquired handles, leader reaped, Hlive, captures complete; API typed closure Io TimedOut+matching diagnostic before external reap. This closes diagnostic acceptance, exposes foreign-reap dependence, and does not close normal completion. Root livechecked98 exact PID/start pairs/114 known PIDs absent,13 PGIDs empty, runtime /tmp/agent-build-f6ovy6yn absent; outer/scoped/monitor0. Review native74-review.md, receipt native74-root-cleanup-readback.json; original evidence in owner's launch-74-evidence. Cargo74=45.29s, known69–71+73+74 subtotal151.710s excludes unavailable72 wall; sample294448KiB notcontinuouspeak. Count74 consumed. Same-context source-only feasibility under existing08 concluded no complete certificate identified within current constraints: WNOWAIT pins leader identity but wait interfaces cover children; pidfds cover known identities, not all members; repeated proc scans are not atomic; isolated subreaping alone is not a complete mechanism. This is not proof that every possible architecture is impossible. No native retry/code change/newExpertchain. Product decision below now blocks dependent completion repairs; original scope remains unchanged pending explicit human answer. Accepted71 unchanged-production ordinary Linux/shared-safety proof remains reusable.
+Native74 source911fe6fc/archive44b60f1d/driver64a88316 is terminal0: meaningful
+control101, owner20/0, public32/0, matching restoration manifests. Independent
+return-boundary observation proves leader reaped, live host, stopped W/F zombies
+under foreign fixture reaper, complete captures, exact closure Io TimedOut and
+matching immutable cleanup diagnostic. Under the explicit revised contract this
+is reusable proof of the narrow foreign-zombie incomplete outcome. It does not
+certify all platform/lifecycle requirements. Original evidence remains solely in
+owner launch-74-evidence at94e5373f; root native74-review.md and cleanup receipt
+record98 exact PID/start pairs/114 known PIDs absent,13 PGIDs empty and runtime
+absent. Cargo74=45.29s; known69–71+73+74 subtotal151.710s excludes unavailable72
+wall; sample294448KiB is not continuous peak.
 
-Responsible source context also investigates Darwin source-only in the same cause08 follow-up. Actual73 has no member-state observation, so do not infer all remaining members were zombies. Apple libproc converts underlying -1 to return0 preserving errno: zero bytes alone cannot certify empty group. Complete native listing needs error/truncation/identity and atomicity analysis; repeated stable snapshots alone do not prove safety. No speculative production repair or new macOS launch released. Existing Expert08 answer/history and actual hard caps remain binding. General managed normal completion independent of foreign reaping, Windows custody, final MSRV/features/performance/release and source-chain main integration remain OPEN.
+macOS73 remains rejected acceptance: source55e54ebd/archivefb939f8b with unchanged
+productionb801 returned closure Io PermissionDenied/EPERM, direct exit0, complete
+captures, empty cleanup diagnostics before intended false-exit42 control. No
+member-state observation exists; do not infer all remaining members were zombies.
+Owner20/public29 did not run. Root verified all nine known PIDs/groups/runtime
+absent. Review native73-review.md and original B3sAtB evidence; Cargo16.640s,
+sample250668KiB. New expectations require meaningful controls and native proof.
+Do not rerun unchanged rejected harness or silently treat EPERM as success.
 
-## Open product decision and resume condition
+Full process ticket, Windows custody/client, final MSRV/features/native matrix,
+performance/docs/release and source-chain main integration remain open. Existing
+foundation evidence and unchanged-production ordinary Linux safety proof remain
+reusable only within their recorded applicability.
 
-One question presented to the owner this turn: allow explicit incomplete managed completion when group cessation cannot be certified (recommended, preserves process-group and escape semantics, but revises the former general normal-completion requirement), or preserve the stronger requirement and investigate a changed platform scope with separately specified deployment/escape requirements. Standing acceptance of ordinary recommendations does not authorize silently narrowing that observable behavior. Current contract remains binding until an explicit answer. No automatic preselection counts as an answer. Resume dependent architecture/behavior work on the actual answer or concrete new mechanism evidence; no repeated broad reading, native retries or second Expert chain meanwhile. Underlying cause08/launch74/history/safety caps preserved. Blocked audit observation3: no human answer or availability event in the continuation; all subordinate jobs are authoritatively completed, no live native handle remains. Prior turn made progress by preserving94e5373f evidence and9176cbdc root review; that retention is now finished. Remaining process repair requires the pending material contract choice; Windows native work requires the pending availability event. No independent executable acceptance step identified against final unchanged scope. Same blockers persisted for three consecutive goal turns including the original decision turn, with no pending live job or independent acceptance action; controller status is now blocked pending actual human answer/external availability. Full objective and all unaccepted requirements remain unchanged. Do not repeat tests or documentation rounds. User was asked whether the previously locked local console/Windows VM is now available; only affirmative availability/new evidence permits sole Windows owner continuation.
+## Accepted product decision and prior blocker history
 
-Root checked the cited primary interface documentation: [kill(2)](https://man7.org/linux/man-pages/man2/kill.2.html) distinguishes signal submission/group existence from exit and says group success requires at least one delivered signal; [wait(2)](https://man7.org/linux/man-pages/man2/waitpid.2.html) observes children and WNOWAIT preserves waitability; [cgroup v2](https://docs.kernel.org/admin-guide/cgroup-v2.html) offers a different kernel scope. Inferring incompatibility of a cgroup substitution with the currently selected group escape boundary is a contract assessment, not native acceptance. No cgroup/helper proposal is deemed implemented or portable. Owner source assessment is preserved in the responsible state; its original74 evidence is committed/pushed as94e5373f under authorized fork scope; root independently verified exact remote head and attribution.
+User instruction reference: explicit "beides ja", responding to two concrete
+questions: accept clear Unix incomplete cleanup for stopped processes remaining
+zombies under foreign parents, and confirm unlocked local console/Windows VM.
+The first deliberately revises the former general reaper-independent normal
+completion requirement, as explained in the question. Preserve successful-result
+closure, exact direct reap, local I/O shutdown, immutable errors and retained
+custody; no generic EPERM success or unobserved stopped-member claim. No helper,
+cgroup, deployment, install/admin/credentials or host-policy changes authorized.
+
+Prior three-observation blocked audit and source feasibility assessment are
+preserved in commit4b3398d6, native73/native74 reviews and existing Expert08 answer.
+That audit is superseded by this actual answer/availability event, not erased.
+Same-context assessment identified no complete portable cessation certificate
+within the former constraints; it was not a universal impossibility proof. WNOWAIT
+pins leader identity but wait interfaces observe children; known pidfds do not
+prove complete membership; repeated proc snapshots are not atomic. Apple libproc
+zero bytes with errno does not certify an empty group. Cause08 and all cumulative
+work and hard caps persist; no second Expert chain or duplicated unchanged proof.
 
 ## Current frozen review milestone
 
@@ -44,7 +91,7 @@ Immutable af18bb36a1cbe03563d67abebd1ee8a836922df4 has exact lowercase attributi
 The full Unix process source ancestor chain remains unintegrated into main from mergebase c19e90d4b5be95f8598ec53dbcf497e09583f3eb. af18 is not an independently mergeable tiny correction. Preserve full ticket03 platform/lifecycle/MSRV/features/setup/overhead gates before production merge. Main contains verified foundation/API/report work and review/state checkpoints. Existing narrow process proofs are reusable only for unchanged relevant sources/checks/environment; do not claim their coverage extends to missing false-policy behavior or other native platforms.
 
 ## Windows source-only state
-Corrected custody runner source737988d417195a69e1d14c226c9940a9de7d844b and real-client sourcef9cc7372c12122dc2a88f0cd0049863161261d82 remain current owner heads; fork readbacks/attribution and prior source reviews are retained. Real-client5 local scaffolding tests prove source-only behavior, not native custody. New corrected Windows source parser/compiler/job/fixture and real-client acceptance remain unverified. The previous accepted PS5.1 parser result applies only to the superseded script. Last known console observation was a locked macOS surface; no availability event justifies repeating unchanged polls. Sole owner may continue the pinned finite native package once the console is available. No guest invocation or new Windows acceptance in this continuation. Preserve Expert02/cause history, original17 runner pins/9 client pins and exact limits; no second Expert chain, installs/admin/home mutations or independent root guest control.
+Corrected custody runner source737988d417195a69e1d14c226c9940a9de7d844b and real-client sourcef9cc7372c12122dc2a88f0cd0049863161261d82 remain current owner heads; fork readbacks/attribution and prior source reviews are retained. Real-client5 local scaffolding tests prove source-only behavior, not native custody. New corrected Windows source parser/compiler/job/fixture and real-client acceptance remain unverified. The previous accepted PS5.1 parser result applies only to the superseded script. The owner explicitly confirmed console and VM availability on2026-10-02. Sole owner has been resumed to inspect live availability and continue the pinned finite native package within its remaining limits. No new guest invocation or Windows acceptance is yet reported in this resume. Preserve Expert02/cause history, original17 runner pins/9 client pins and exact limits; no second Expert chain, installs/admin/home mutations or independent root guest control.
 
 ## Cause history and resource limits
 Cumulative Unix production native scoped invocations68, including expected RED/control runs and earlier separate infrastructure failures; no counts or elapsed history reset. Cause06 retained-owner Expert answer and bounded follow-up history persist. Cause07 optional macOS1.77.2 procurement43 consumed its180s watchdog and failed after partial52428800/56737656 bytes; no repeated procurement/install or second setup Expert. Current existing toolchain1.93 is development-only. Preserve original08:04/cause06start09:48/owner-invariant12:31/checkpoint13:01 history and all previous causes by the immutable reference below. Agent-selected checkpoints are estimates; actual safety caps and explicit limited packages remain binding.

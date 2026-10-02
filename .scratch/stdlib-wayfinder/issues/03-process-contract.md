@@ -99,8 +99,18 @@ API-review detail, not an existing method.
 
 In managed scope, run deadline, output overflow, explicit kill and final-handle drop
 with `kill_on_drop` terminate the owned group/job as well as the direct child. A
-normal direct-child exit also closes its managed scope before a final result is
-published: managed mode is for a bounded task, not a launcher for persistent services.
+normal direct-child exit also closes its managed scope before a successful final
+result is published: managed mode is for a bounded task, not a launcher for
+persistent services. On 2026-10-02 the owner explicitly approved a clear
+incomplete-cleanup error when scope members have stopped but remain zombies under
+foreign parents. This revises the former requirement for normal completion
+independent of foreign reaping. The error preserves available direct-child exit
+and bounded capture data, reports unresolved cleanup, and retains cleanup custody.
+Termination submission alone does not certify closure. A permission error or
+unverified membership must not be converted into success or described as proof
+that every member stopped. Direct-child reaping and local I/O shutdown remain
+required; this exception does not authorize reaping foreign children or changing
+host signal/subreaper policy.
 With `kill_on_drop: false`, the retained owner continues supervision until ordinary
 completion, then closes the scope. Use direct-child mode for intentional independent
 background services.
