@@ -3189,10 +3189,15 @@ mod tests {
 
     #[test]
     fn managed_run_retries_provisional_group_eperm_within_one_observation_window() {
+        let program = if cfg!(target_os = "macos") {
+            "/usr/bin/true"
+        } else {
+            "/bin/true"
+        };
         let mut engine = Engine::new();
         let package = SysPackage::new(
             SysConfig::default()
-                .programs(ProgramPolicy::AllowList(vec!["/bin/true".into()]))
+                .programs(ProgramPolicy::AllowList(vec![program.into()]))
                 .process_scope(crate::packages::sys::ProcessScope::Managed),
         )
         .unwrap();
@@ -3200,7 +3205,7 @@ mod tests {
 
         inject_scope_eperm_for_next_execution(1);
         let recovered = engine
-            .eval::<crate::Map>("run(\"/bin/true\")")
+            .eval::<crate::Map>(&format!("run({program:?})"))
             .unwrap_or_else(|error| {
                 let detail = match error.as_ref() {
                     EvalAltResult::ErrorRuntime(value, _) => value
@@ -3219,7 +3224,7 @@ mod tests {
 
         inject_scope_eperm_for_next_execution(usize::MAX);
         let error = engine
-            .eval::<crate::Map>("run(\"/bin/true\")")
+            .eval::<crate::Map>(&format!("run({program:?})"))
             .expect_err("persistent EPERM must remain an operational error");
         let sys_error = match error.as_ref() {
             EvalAltResult::ErrorRuntime(value, _) => value
