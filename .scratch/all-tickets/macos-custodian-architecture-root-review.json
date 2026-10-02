@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "source_commit": "2f4be0150c694a14e7d4ca3cc45320abb5220162",
+  "reviewed_files": [
+    ".scratch/all-tickets/macos-process-overhead.py",
+    ".scratch/all-tickets/run-macos-process-overhead-scoped.py",
+    ".scratch/all-tickets/run-macos-process-overhead.sh",
+    ".scratch/all-tickets/test-macos-process-overhead-source.py"
+  ],
+  "coverage": {
+    "reviewed": 4,
+    "skipped": 0
+  },
+  "result": "changes_required",
+  "method": "Independent complete source review; no native process or build launch",
+  "findings": [
+    {
+      "id": "child-signal-mask",
+      "lines": [
+        115,
+        120,
+        129,
+        463,
+        469,
+        550
+      ],
+      "file": "run-macos-process-overhead-scoped.py",
+      "requirement": "Restore intended child INT/TERM masks before executable work/client RPC; exact bounded direct-client termination, escalation and reap. Parent mask restoration does not restore inherited child masks."
+    },
+    {
+      "id": "observed-identity-ledger",
+      "lines": [
+        248,
+        262,
+        361,
+        504
+      ],
+      "file": "run-macos-process-overhead-scoped.py",
+      "client_lines": [
+        258,
+        265,
+        385
+      ],
+      "requirement": "Custodian owns initialized accumulated PID/start observations and final readback acceptance. Client empty-list writes and completion cannot certify observed descendant closure."
+    },
+    {
+      "id": "original-work-deadline",
+      "lines": [
+        398
+      ],
+      "file": "run-macos-process-overhead-scoped.py",
+      "requirement": "Restore work stop560 seconds per existing Expert09; closure575/readback580/cleanup585/outer600 and aggregate Cargo540 unchanged."
+    },
+    {
+      "id": "readback-phase-budget",
+      "lines": [
+        374,
+        376,
+        489,
+        491
+      ],
+      "file": "run-macos-process-overhead-scoped.py",
+      "requirement": "Final bounded readback query and its reap must use reserved readback phase, without launching after its allowed command deadline."
+    },
+    {
+      "id": "cancelled-dispatch",
+      "lines": [
+        103,
+        140,
+        198,
+        345,
+        351
+      ],
+      "file": "run-macos-process-overhead-scoped.py",
+      "requirement": "Reject normal launches/releases after cancellation, expired deadline, or incomplete custody; do not respond with an error then accept further normal work after cleanup uncertainty."
+    }
+  ],
+  "remaining_prerequisites": [
+    "Selected exact Cargo feature/build-script/toolchain confinement audit",
+    "Installed Darwin ABI and escaped-leaf certificate",
+    "Finite native interruption controls before unchanged measurement"
+  ],
+  "history": "Existing cause09 and Expert09 only; no new escalation chain, native invocation or cap reset. False launch guard remains. Source-only corrections returned to responsible owner."
+}

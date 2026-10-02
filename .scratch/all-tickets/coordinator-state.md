@@ -143,25 +143,24 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Current turn classification
-PROGRESS: published Linux84 framing/source/original evidence at fork main
-c3e72349, private Windows plan/status atdfeff5a3; independent remote readback
-ONLYmain equals dfeff5a30411f7b0333de2dece6de929b4c7bdd8. Root clean before
-this evidence increment. History and original statuses remain unchanged.
-Mac frozen878a correction independently source-tested11/11 in new owned scoped
-runtime, exact empty scope retired. Known-broken510d repeated stop after failed
-wait emits groupKILL twice; corrected shared issued state suppresses second
-syscall while preserving both bounded direct waits. Receipt:
-macos-custody-repeat-signal-root-readback.json. No native/build launched.
-Architecture review found scoped adapter unchanged: owns/kills only driver,
-while driver owns gate/anchors. Kill-client/EOF custody remains unimplemented.
-Returned EXISTING Expert09 separate actual custodian/nonspawning client route
-for source implementation, reusing reviewed narrow controls, frozen Rust/parser,
-false launch guard, prior cause history and caps. Do not claim full review green.
-Windows old owner absent from live inventory; fresh bounded sole-controller
-windows_private_staging_readback assigned read-only guest recovery and isolated
-parser/path gates only, no compiler/fixture/job harness/real-client launch.
-No stopped-process assumption from missing agent handle. Existing staging roots,
-logs and nonrenewable budgets remain. Final all-ticket requirements still open.
+PROGRESS: fork main200114c271d1c1b4ed4f32c508afbae7be630a1b contains the
+accepted narrow current-core proof and prior Linux/Mac source proof. Onlymain
+was independently read back after publication. Preserve older publication and
+source-review receipts by reference; root implementation remains incomplete.
+Root independently reviewed all4 frozen Mac2f4be015 architecture files. Review
+changes_required in macos-custodian-architecture-root-review.json: inherited
+blocked child INT/TERM masks, empty observed identity ledger, work570 exceeding
+original560, final readback wrongly clamped to closure575, cancellation/release
+and cleanup-error dispatch gaps. Returned source-only correction to existing
+responsible context under Expert09; false launch guard and all original caps
+remain. No native invocation or new Expert chain allocated.
+Windows fresh maximized screenshot showed PS prompt; key-map failure left an
+unexecuted partial GET line (no Enter, no transfer or new stage). Clearing attempt
+could not be read back. Subsequent screenshot failed; independent root read-only
+virsh domstate now reports shut off. This is new external guest unavailability,
+not proof of guest cleanup. No VM start/restart/key/GET performed by root. Preserve
+historical files/process ownership and unconsumed oneGET allocation. Independent
+source work continues; native Windows gates require guest availability.
 
 ## Current-source core MSRV package — accepted narrow gate
 Current default-core applicability CLOSED for source52d9797b, Rust/Cargo1.66.0,
@@ -181,17 +180,12 @@ No invocation85/process measurement. Remaining optional/platform/feature gates
 and every other ticket requirement remain active.
 
 ## Immediate next actions
-Review frozen Mac architecture2f4be015: driver has no spawn, adapter sole
-custodian and RPC/EOF cleanup; source gate false,14pure tests reported by owner,
-root review still open. Existing Expert09/history/caps, no native since81.
-Windows sole controller recovered PS5.1 desktop; shell3664/cscabsent and run/tmp
-empty are filtered observations only. Old stages/NLL and zero-byte archive
-preserved. Bounded HEAD diagnosis shows archive endpoint200 and directlegacy
-endpoint404, not general network blockage. Root inspected original final
-screenshot and independently downloaded exact9e0 archive bytes into memory:
-13380569bytes/SHA8291e58652a7dc8494513d910460e6dae39a716f5dfca937bda40fafcfa0caa4.
-Receipt windows-private-staging-archive-root-hash.json. Authorized one30sGET
-using confirmed GitHub endpoint into NEW own unique private session root;
-observe hash before extraction; no repeat, compiler/fixture/job/realclient.
-All original Windows caps/history persist. Next stage/parser/path proof remains
-open. Goal active, no release acceptance.
+Collect exact source-only Mac correction and independently review affected
+custody requirements/pure controls before any native allocation. Complete exact
+feature/toolchain confinement and installed Darwin ABI prerequisites; keep
+measurement unlaunched until declared native interruption controls pass.
+Windows native stage/parser/path/build proof is dependent on guest availability;
+last observed shut off, unexecuted partial console line unresolved. Do not restart
+shared VM or infer cleanup. Retain archive hash receipt and oneGET allowance:
+exact9e0 archive13380569bytes/SHA8291e58652a7dc8494513d910460e6dae39a716f5dfca937bda40fafcfa0caa4.
+Continue independent authorized work. Goal active, no release acceptance.
