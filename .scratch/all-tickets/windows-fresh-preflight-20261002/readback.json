@@ -1,0 +1,33 @@
+{
+  "scope": "Read-only native PowerShell harness hash/parser prerequisite; no compiler or fixture invocation",
+  "harness": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\w2c9-20261002-cfe0128fbd4b\\fixtures.ps1",
+  "native_sha256": "37dac20385ce3251c671960add4e43a5cde18ac5d52a42eae6827ffd2921543a",
+  "parser_errors": 0,
+  "independent_readback": "Coordinator visually inspected typed command and terminal result.png, matching hash, zero parser errors, restored prompt",
+  "cleanup": {
+    "exact_owned_screenshots_removed": 4
+  },
+  "screenshots": [
+    {
+      "local": ".scratch/all-tickets/windows-fresh-preflight-20261002/before.png",
+      "remote": "/tmp/rhai-root-preflight-20261002-1802.png",
+      "sha256": "05713dbacb00cfa92e8cad1581147b0f1349f6ee14c97d122440aff36011bd53"
+    },
+    {
+      "local": ".scratch/all-tickets/windows-fresh-preflight-20261002/awake.png",
+      "remote": "/tmp/rhai-root-preflight-20261002-1802-awake.png",
+      "sha256": "3580114557a2dadf40f7b99ba81a855d2cef51c5b2ac33efff660afa44f4e1cb"
+    },
+    {
+      "local": ".scratch/all-tickets/windows-fresh-preflight-20261002/typed.png",
+      "remote": "/tmp/rhai-root-preflight-20261002-1802-typed.png",
+      "sha256": "0828dd0af0803516daedf9d3b46cde3a45b0b9c461ea464a2467b069398b3022"
+    },
+    {
+      "local": ".scratch/all-tickets/windows-fresh-preflight-20261002/result.png",
+      "remote": "/tmp/rhai-root-preflight-20261002-1802-result.png",
+      "sha256": "c19cce607298fcb1769e27a75ef7163825d34003602a88a23148e38dd01297ec"
+    }
+  ],
+  "remaining": "Fresh17C#pins, source/ancestor reparse scan, compiler identity, free storage, absent unique runroot, PowerShell x64/version and free heavy slot before allocated follow-up."
+}
