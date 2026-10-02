@@ -51,7 +51,7 @@ Windows guest control belongs solely to windows_monitor_job_owner.
   34 emitted PIDs/10 groups and exact runtime absent, three manifests matching.
   Cargo53.432s, sampled276896KiB; no continuous peak claim.
 - Remote branch cleanup CLOSED. Latest independent ls-remote readback shows ONLY
-  main at b198c26c02d50833cfa67d07c9217535b71060d8 (last readback before this integration). Nine remote task refs removed
+  main at 1167770c7a94c9687724afcd819195e73422e89d (2026-10-02 integration readback). Nine remote task refs removed
   in the final consolidation, one earlier; every exact tip was ancestor of pushed
   main before deletion. Histories preserved. Local active/foreign/dirty worktrees
   remain; remote cleanup does not authorize discarding them.
@@ -225,5 +225,6 @@ PROGRESS: reread current global/project rules; independently verified Windows17
 pins and integrated focused hash correction; integrated Mac fail-closed launch
 guard while responsible implementation continues; reviewed/retested corrected
 Linux83 verifier and preserved all originals without repeating measurements.
-Full goal active/incomplete. Root integration awaits authorized fork-main push
-and exact readback; only remote main remains intended.
+Full goal active/incomplete. Root integration published to fork main1167770c; exact ls-remote confirms only
+refs/heads/main and the matching head. Every new author/committer is lowercase
+hoppworks. Root worktree clean. This state update follows that verified readback.
