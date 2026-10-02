@@ -15,3 +15,28 @@ Assertion mapping:
 - `sync_waiter_can_be_cancelled_through_another_shared_child_handle` (`sync` only) races a public timed waiter with cancellation through a cloned handle and requires bounded waiter completion, final wait and direct-child ESRCH. Its start-channel receipt shows the waiter is about to call `wait`, not that it has entered the blocking part before cancellation.
 
 Readiness and completion records use temp-write plus rename. The fixture directory is inside `AGENT_RUNTIME_DIR`; Rust Drop removes the exact directory, and the scoped runner removes the private runtime if its hard watchdog interrupts the test. All fixture waits are bounded. Invocation48 ran the wrong-control and all six injected module tests serially, checking controller/fixture ESRCH and owned roots. Full lifecycle, escaped-descendant, managed, Windows and MSRV/release acceptance remain open.
+
+
+## Registered contract — current acceptance pending
+
+The fixture is now registered in `tests/sys_process.rs` under the target's
+`sys + unix` gate and the module's `!no_index` gate. The previous source-discovery
+check failed because `mod shared_child_contract` was absent; after registration,
+the gate and both exact self-reexec target names pass the static check.
+This is discovery evidence only; no compiler or native process was launched.
+
+With `no_float`, the blocked-input case calls integer `wait(0)` while the child
+is independently held before reading stdin, and the sync waiter uses integer
+`wait(10)`. Normal floating-point builds retain `wait(0.02)` and `wait(10.0)`.
+The input release, stable cached snapshots, mutation isolation, repeated kill,
+clone/drop and independent OS records are unchanged. The sync readiness
+limitation documented above still applies; it is not a blocking-wait entry proof.
+
+Next native acceptance uses private Rust 1.77.2, serial execution and scoped
+output/cache isolation: the focused blocked-input test with its wrong cached
+exit-code control, then the registered module under `testing-environ,sys,sync`
+and `testing-environ,sys,sync,no_float`. Preserve original logs, public Engine
+readback and every exact child/controller cleanup identity. Allocate this run
+only when the machine's heavy slot is free. The new feature-selected scripts
+and module registration require current native verification; historical injected
+module results do not close that acceptance or the release matrix.

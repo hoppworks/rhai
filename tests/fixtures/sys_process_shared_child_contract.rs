@@ -1,8 +1,4 @@
-//! Prepared public-Engine acceptance fixture for the shared `spawn`/`Child` API.
-//!
-//! This file is intentionally unregistered until the public `spawn` surface and its
-//! Clone-capable Rhai Child type exist. See
-//! `.scratch/process-unix-run/shared-child-contract-activation.md` for the exact activation.
+//! Public-Engine acceptance fixture for the shared `spawn`/`Child` API.
 
 use rhai::packages::sys::{ProgramPolicy, SysConfig, SysPackage};
 use rhai::packages::Package;
@@ -166,7 +162,11 @@ fn blocked_input_wait_snapshot(root: &Path) {
     assert!(!root.join("child.consumed").exists(), "fixture unexpectedly consumed stdin before release");
     eprintln!("shared-child blocked-stdin ready pid={pid} spawn_elapsed_ms={}", spawn_elapsed.as_millis());
 
-    let timed_wait = engine.eval_with_scope::<Dynamic>(&mut scope, "child.wait(0.02)").unwrap();
+    #[cfg(not(feature = "no_float"))]
+    let wait_script = "child.wait(0.02)";
+    #[cfg(feature = "no_float")]
+    let wait_script = "child.wait(0)";
+    let timed_wait = engine.eval_with_scope::<Dynamic>(&mut scope, wait_script).unwrap();
     assert!(timed_wait.is_unit(), "finite wait must return unit while fixture remains held");
     assert!(!root.join("child.consumed").exists(), "timed wait unexpectedly released stdin");
     std::fs::write(root.join("release-input"), "go").unwrap();
@@ -262,7 +262,11 @@ fn sync_wait_cancel(root: &Path) {
         waiter_scope.push_dynamic("child", waiter_child);
         waiter_barrier.wait();
         started_tx.send(()).unwrap();
-        let result = waiter_engine.eval_with_scope::<Dynamic>(&mut waiter_scope, "child.wait(10.0)");
+        #[cfg(not(feature = "no_float"))]
+        let wait_script = "child.wait(10.0)";
+        #[cfg(feature = "no_float")]
+        let wait_script = "child.wait(10)";
+        let result = waiter_engine.eval_with_scope::<Dynamic>(&mut waiter_scope, wait_script);
         done_tx.send(result.map(|value| value.is_unit())).unwrap();
     });
     barrier.wait();

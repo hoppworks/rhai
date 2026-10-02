@@ -3,6 +3,10 @@
 
 mod sys_support;
 
+#[cfg(not(feature = "no_index"))]
+#[path = "fixtures/sys_process_shared_child_contract.rs"]
+mod shared_child_contract;
+
 use rhai::packages::sys::{FsAccess, ProcessCause, ProcessScope, ProgramPolicy, SysConfig, SysError};
 #[cfg(not(feature = "no_index"))]
 use rhai::Blob;
