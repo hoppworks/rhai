@@ -132,8 +132,15 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
    macos-locked-source-root-test.log; private runtime and exact empty scope removed.
    No actual Cargo/build/native/measurement executed. Exact selected graph remains
    open: source/workspace metadata cannot prove selected units. Proposed unit-graph
-   query requires frozen tool support and custody review before execution; no
-   native85 allocation, live capture and native ABI stay open.
+   route is incompatible with frozen Cargo: direct Cargo1.93.0 --version and
+   -Z help returned0 under private scoped HOME/cache/runtime; help explicitly
+   states unstable options are nightly-only and this tool is stable. Original
+   macos-cargo-unit-graph-support.log records exact outputs. No selected command,
+   build script, compiler, native control or measurement launched. Scope removed
+   empty after runner0. Do not run the proposed -Z unstable-options query or
+   silently substitute a new toolchain. Existing conservative candidate review
+   remains valid narrowly; exact graph/toolchain confinement, live capture and
+   native ABI remain open, no native85 allocation.
 4. Windows sole owner is completed; current virsh domstate readback0 confirms
    rhai-win11-quality shut off. Partial console
    command/cleanup remains unverified. Preserve allocation and all prior evidence;
@@ -197,20 +204,16 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Current turn classification
-Previous user status turn: NO PROGRESS toward acceptance; it reported existing
-results and independently read back fork main only. This continuation: PROGRESS.
-The process documentation contract correction has completed its combined
-independent source review. The reviewer found one missing synchronous-spawn
-caveat; root added it and the same reviewer independently confirmed it matches
-inline Command::spawn before handle construction, with no further finding.
-Review covers executable authority, PATH/file identity, run/spawn deadlines,
-timeout versus incomplete cleanup, per-stream limits and overflow precedence.
-Root source readback and whitespace checks agree. Documentation-only acceptance;
-no runtime behavior, release gate or full ticket completion is inferred.
-Linux examples preparation remains active. Mac source preparation21cfd2ad is
-independently reviewed, integrated and pure60 green; source-only acceptance.
-Exact selected graph, capture and native ABI remain open; count84/guardfalse
-and all cause/resource history remain unchanged. Goal active.
+Previous goal turn: PROGRESS. Process documentation review closed and pushed
+fabcf35c; locked Cargo preparation independently reviewed2/2, pure60 passed,
+integrated/pushed86195fe4 with lowercase human attribution and only remote main.
+Current continuation: PROGRESS. Frozen Cargo support observation rules out the
+proposed nightly unit-graph query without executing a build or measurement.
+Linux owner is authoritatively running and reports no external/toolchain blocker;
+its local conformance fixes and RED/GREEN/shell checks remain in progress. Await
+frozen package before combined review or dispatch. Count84/guardfalse, accepted
+proof, explicit safety limits and full remaining requirements remain unchanged.
+Goal active.
 
 ## Current-source core MSRV package — accepted narrow gate
 Current default-core applicability CLOSED for source52d9797b, Rust/Cargo1.66.0,
