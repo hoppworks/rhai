@@ -1383,6 +1383,8 @@ struct ExecutionFaults {
     quarantine_observations: Option<Arc<AtomicUsize>>,
     #[cfg(test)]
     spawn_operations: Option<Arc<AtomicUsize>>,
+    #[cfg(test)]
+    scope_eperm_observations_remaining: usize,
 }
 
 impl ExecutionFaults {
@@ -1405,6 +1407,15 @@ impl ExecutionFaults {
             ));
         }
         child.kill()
+    }
+
+    fn observe_scope(&mut self, scope: &mut ManagedScopeState) -> io::Result<ScopeObservation> {
+        #[cfg(test)]
+        if self.scope_eperm_observations_remaining > 0 {
+            self.scope_eperm_observations_remaining -= 1;
+            return scope.observe(Err(io::Error::from_raw_os_error(libc::EPERM)));
+        }
+        observe_managed_scope(scope)
     }
 
     #[cfg(test)]
@@ -2438,6 +2449,7 @@ fn supervise(
                 false,
                 faults,
                 false,
+                None,
             );
         }
     }
@@ -2448,6 +2460,7 @@ fn supervise(
     let (mut out_eof, mut err_eof) = (false, false);
     let mut status = None;
     let mut scope_wait_started = None;
+    let mut provisional_scope_error = None;
     loop {
         let mut expired = timeout.is_some_and(|t| started.elapsed() >= t);
         if driver.reaped && driver.managed {
@@ -2460,34 +2473,46 @@ fn supervise(
                 if matches!(owner.scope, ManagedScopeState::Closed) {
                     Ok(ScopeObservation::Closed)
                 } else {
-                    observe_managed_scope(&mut owner.scope)
+                    faults.observe_scope(&mut owner.scope)
                 }
             };
             match observation {
                 Ok(ScopeObservation::Closed) => {}
                 Ok(ScopeObservation::Pending) => {
-                    let since = scope_wait_started.get_or_insert_with(Instant::now);
+                    let since = *scope_wait_started.get_or_insert_with(Instant::now);
                     if since.elapsed() >= Duration::from_secs(1) {
-                        return fail(
-                            &mut driver,
-                            &mut stdin,
-                            &mut stdout,
-                            &mut stderr,
-                            ProcessCause::Io {
+                        let deadline = since + Duration::from_secs(1);
+                        let cause = provisional_scope_error.take().map_or_else(
+                            || ProcessCause::Io {
                                 op: "observe process group closure",
                                 target: program.into(),
                                 kind: io::ErrorKind::TimedOut,
                                 message: "managed process scope remained present after leader reap"
                                     .into(),
                             },
+                            |error| {
+                                process_io_cause("observe process group closure", program, error)
+                            },
+                        );
+                        return fail(
+                            &mut driver,
+                            &mut stdin,
+                            &mut stdout,
+                            &mut stderr,
+                            cause,
                             out,
                             err,
                             out_eof,
                             err_eof,
                             faults,
                             false,
+                            Some(deadline),
                         );
                     }
+                }
+                Err(error) if error.raw_os_error() == Some(libc::EPERM) => {
+                    scope_wait_started.get_or_insert_with(Instant::now);
+                    provisional_scope_error.get_or_insert(error);
                 }
                 Err(error) => {
                     return fail(
@@ -2502,6 +2527,7 @@ fn supervise(
                         err_eof,
                         faults,
                         false,
+                        None,
                     );
                 }
             }
@@ -2565,6 +2591,7 @@ fn supervise(
                         err_eof,
                         faults,
                         identity_lost,
+                        None,
                     );
                 }
             }
@@ -2669,6 +2696,7 @@ fn supervise(
                     err_eof,
                     faults,
                     false,
+                    None,
                 );
             }
         }
@@ -2689,6 +2717,7 @@ fn supervise(
                         err_eof,
                         faults,
                         false,
+                        None,
                     )
                 }
                 Ok(ReadState::Eof) => out_eof = true,
@@ -2711,6 +2740,7 @@ fn supervise(
                         err_eof,
                         faults,
                         false,
+                        None,
                     )
                 }
             }
@@ -2732,6 +2762,7 @@ fn supervise(
                         err_eof,
                         faults,
                         false,
+                        None,
                     )
                 }
                 Ok(ReadState::Eof) => err_eof = true,
@@ -2754,6 +2785,7 @@ fn supervise(
                         err_eof,
                         faults,
                         false,
+                        None,
                     )
                 }
             }
@@ -2784,6 +2816,7 @@ fn supervise(
                             err_eof,
                             faults,
                             false,
+                            None,
                         )
                     }
                 }
@@ -2804,6 +2837,7 @@ fn supervise(
                 err_eof,
                 faults,
                 false,
+                None,
             )
             .unwrap_err();
             return if report.timed_out() {
@@ -2848,6 +2882,7 @@ fn fail(
     err_eof: bool,
     faults: &mut ExecutionFaults,
     mut identity_lost: bool,
+    cleanup_deadline: Option<Instant>,
 ) -> Result<ProcessReport, (ProcessCause, ProcessReport)> {
     // Stop every pipe operation before signaling or observing cleanup. No caller-side I/O
     // endpoint remains active once this execution commits to its primary failure.
@@ -2888,7 +2923,8 @@ fn fail(
             // allow direct-child reaping followed only by passive group observations.
         }
     }
-    let cleanup_deadline = Instant::now() + Duration::from_secs(1);
+    let cleanup_deadline =
+        cleanup_deadline.unwrap_or_else(|| Instant::now() + Duration::from_secs(1));
     let mut status = driver.exit_status.clone();
     let mut interrupted = 0u8;
     while !identity_lost && Instant::now() < cleanup_deadline {
@@ -2900,7 +2936,7 @@ fn fail(
                     .lock()
                     .unwrap_or_else(|p| p.into_inner());
                 if owner.managed && !matches!(owner.scope, ManagedScopeState::Closed) {
-                    observe_managed_scope(&mut owner.scope)
+                    faults.observe_scope(&mut owner.scope)
                 } else {
                     Ok(ScopeObservation::Closed)
                 }
@@ -2984,7 +3020,7 @@ fn fail(
                 .unwrap_or_else(|p| p.into_inner());
             owner.pump_finished = true;
             let observed = if owner.managed && !matches!(owner.scope, ManagedScopeState::Closed) {
-                observe_managed_scope(&mut owner.scope)
+                faults.observe_scope(&mut owner.scope)
             } else {
                 Ok(ScopeObservation::Closed)
             };
@@ -3130,6 +3166,60 @@ mod tests {
     }
 
     #[test]
+    fn managed_run_retries_provisional_group_eperm_within_one_observation_window() {
+        let mut engine = Engine::new();
+        let package = SysPackage::new(
+            SysConfig::default()
+                .programs(ProgramPolicy::AllowList(vec!["/bin/true".into()]))
+                .process_scope(super::super::ProcessScope::Managed),
+        )
+        .unwrap();
+        package.register_into_engine(&mut engine);
+
+        inject_scope_eperm_for_next_execution(1);
+        let recovered = engine
+            .eval::<crate::Map>("run(\"/bin/true\")")
+            .expect("a later exact ESRCH observation closes the scope");
+        assert!(recovered["success"].as_bool().unwrap());
+        assert_eq!(recovered["code"].as_int().unwrap(), 0);
+        assert!(recovered["stdout_complete"].as_bool().unwrap());
+        assert!(recovered["stderr_complete"].as_bool().unwrap());
+
+        inject_scope_eperm_for_next_execution(usize::MAX);
+        let error = engine
+            .eval::<crate::Map>("run(\"/bin/true\")")
+            .expect_err("persistent EPERM must remain an operational error");
+        let sys_error = match error.as_ref() {
+            EvalAltResult::ErrorRuntime(value, _) => value
+                .clone()
+                .try_cast::<SysError>()
+                .expect("typed process error"),
+            other => panic!("expected typed process error, got {other:?}"),
+        };
+        match sys_error {
+            SysError::Process { cause, report } => {
+                assert!(matches!(
+                    cause,
+                    ProcessCause::Io {
+                        op: "observe process group closure",
+                        kind: io::ErrorKind::PermissionDenied,
+                        ..
+                    }
+                ));
+                assert_eq!(report.exit_code(), Some(0));
+                assert!(report.stdout_complete());
+                assert!(report.stderr_complete());
+                assert!(report.cleanup_diagnostics().iter().any(|diagnostic| {
+                    diagnostic.operation() == "observe process group closure"
+                        && diagnostic.io_kind() == Some(io::ErrorKind::PermissionDenied)
+                }));
+            }
+            other => panic!("expected SysError::Process, got {other:?}"),
+        }
+        drop(package);
+    }
+
+    #[test]
     fn failed_group_submission_is_fenced_from_numeric_retry() {
         let mut scope = ManagedScopeState::Open { pgid: 44 };
         scope.begin_close().expect("one close attempt");
@@ -3261,6 +3351,16 @@ mod tests {
 
     pub(super) fn take_execution_faults() -> ExecutionFaults {
         NEXT_EXECUTION_FAULTS.with(|next| next.borrow_mut().take().unwrap_or_default())
+    }
+
+    fn inject_scope_eperm_for_next_execution(count: usize) {
+        NEXT_EXECUTION_FAULTS.with(|next| {
+            let previous = next.borrow_mut().replace(ExecutionFaults {
+                scope_eperm_observations_remaining: count,
+                ..ExecutionFaults::default()
+            });
+            assert!(previous.is_none(), "an execution fault was already armed");
+        });
     }
 
     fn refuse_kill_for_next_execution() -> Arc<AtomicBool> {
