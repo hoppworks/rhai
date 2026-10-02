@@ -146,7 +146,16 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    bounded waits and held-child cleanup on assertion failures. Separate census
    must not break no_float or Darwin fixture compilation/behavior; Linux marker
    branch and float-enabled census gate required unless integer variant provided.
-   Owner is correcting same initial source review, not a native correction failure. Prior launcher,
+   Owner froze corrected census as0b3841a03657463f40fae01f9af2797d5c3812ed,
+   exactly one Rust file, lowercase author/committer. Root OCR preview/rules
+   selected1/reviewed1/skipped0, no remaining source findings; exact preimage
+   matched root and patch consumption byte-matched99f32a002f25523bd2875724ba121281f055d41dfbbb608fb1dda1879c2aa074.
+   Receipt linux-census-source-root-review.json; no Linux ancestry merged.
+   This closes source review only; dedicated native census driver/preflight is
+   being prepared, with6 completed cases+2 held controls, no repeat of120 timings.
+   Invocation83 private runtime/build was removed; new own lifecycle scope and
+   disposable source/cache/target are required, accepted inputs reused by reference.
+   No native84 dispatched. Prior launcher,
    resource/preflight review and invocation82 missing dependency failure remain
    by reference to root state4d095f86 and original82 receipts; no history reset.
    macOS overhead remains SOURCE-ONLY and NOT ready to launch. Expert09 answer
@@ -281,14 +290,13 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Current turn classification
-PROGRESS: reread current global056b17c and project instructions; authorization,
-strict profile, original caps/history and fork-only main publishing preserved.
-Independent Darwin pure controls13/13 pass in an own lifecycle-compliant scope;
-SDK static field/typedef review matches reader transcription, source hashes
-stable. Returned concrete Linux observer error/bounds/feature isolation issues
-for same-context source repair. Windows transfer completed, actual long-path
-extraction error classified before parser/compiler/fixture; selected short-path
-extraction is the concrete next step with partial stage preserved. No new native
-invocation or Cargo build; Unix count83/caps/history unchanged. Full goal active
-and incomplete. Next: frozen Linux census source gate; Mac sole-custodian and
-execution-graph implementation; Windows selective staging/hash/parser gate.
+PROGRESS: completed independent OCR review of frozen Linux census source
+0b3841a0 (1 selected/reviewed,0 skipped), consumed only exact one-file patch with
+pre/post byte verification and preserved lowercase attribution/history. Closed
+initial source-review corrections; native behavior remains unverified. Dedicated
+fresh-runtime driver/preflight is being prepared within original caps, with no
+repeat of accepted timing samples and no native84 dispatched. Last turn's
+Darwin pure13/13 receipt and instruction reconciliation remain accepted by their
+narrow scope. Fork main readback atbd0b8d1c showed only main. Goal remains active
+and incomplete. Next: dedicated Linux driver source gate; Mac sole custodian and
+selected execution graph; Windows selective archive/hash/parser staging.

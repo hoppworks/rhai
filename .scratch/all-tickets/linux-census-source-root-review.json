@@ -1,0 +1,13 @@
+{
+  "source_commit": "0b3841a03657463f40fae01f9af2797d5c3812ed",
+  "mode": "OCR source review and exact patch consumption only",
+  "total_files": 1,
+  "reviewed_files": 1,
+  "skipped_files": 0,
+  "coverage_rate": 1.0,
+  "findings": [],
+  "file": "tests/sys_process.rs",
+  "sha256": "99f32a002f25523bd2875724ba121281f055d41dfbbb608fb1dda1879c2aa074",
+  "acceptance": "Frozen census source accepted for dedicated driver preparation; Cargo/native census behavior not yet verified. Original 120 timing measurement unchanged. No owner ancestry merged.",
+  "checks": "Identity read errors surfaced; ENOENT/different verified start only for absence; bounded snapshot retries and waits; held-child release/watchdog; no_float census gated; Darwin stat branch isolated."
+}

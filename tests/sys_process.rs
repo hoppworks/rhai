@@ -53,6 +53,15 @@ fn process_fixture() {
     }
     if let Ok(code) = std::env::var(FIXTURE_ENV) {
         let record = std::env::var_os(FIXTURE_RECORD_ENV).expect("fixture record path");
+        if std::env::var_os("RHAI_SYS_PROCESS_RESOURCE_HOLD").is_some() {
+            std::fs::write(record, format!("child-pid={} child-ready=1\n", process::id())).unwrap();
+            let release = std::env::var_os("RHAI_SYS_PROCESS_RESOURCE_RELEASE").map(std::path::PathBuf::from);
+            let deadline = std::time::Instant::now() + std::time::Duration::from_secs(20);
+            while std::time::Instant::now() < deadline && !release.as_ref().is_some_and(|path| path.exists()) {
+                std::thread::sleep(std::time::Duration::from_millis(10));
+            }
+            process::exit(code.parse().unwrap());
+        }
         if std::env::var_os("RHAI_SYS_PROCESS_HOLD").is_some() {
             std::fs::write(record, format!("child-pid={} child-ready=1\n", process::id())).unwrap();
             let hold_for = std::env::var("RHAI_SYS_PROCESS_HOLD_FOR_MS").ok().map(|value| value.parse::<u64>().unwrap());
@@ -172,7 +181,21 @@ fn process_fixture() {
             std::fs::rename(complete_temporary, complete).unwrap();
             process::exit(0);
         }
-        std::fs::write(record, format!("child-pid={} child-exit={code}\n", process::id())).unwrap();
+        let child_id = process::id();
+        #[cfg(target_os = "linux")]
+        let census_identity = if std::env::var_os("RHAI_SYS_PROCESS_RESOURCE_CENSUS").is_some() {
+            format!(
+                " child-start={}",
+                resource_census_start_ticks(child_id as i32)
+                    .expect("read fixture start ticks")
+                    .expect("fixture process identity exists")
+            )
+        } else {
+            String::new()
+        };
+        #[cfg(not(target_os = "linux"))]
+        let census_identity = String::new();
+        std::fs::write(record, format!("child-pid={child_id} child-exit={code}{census_identity}\n")).unwrap();
         if let Ok(count) = std::env::var("RHAI_SYS_PROCESS_INVALID_COUNT") {
             std::io::stdout().write_all(&vec![0xff; count.parse().unwrap()]).unwrap();
             process::exit(code.parse().unwrap());
@@ -186,6 +209,117 @@ fn process_fixture() {
         std::io::stdout().write_all(&[0x00, 0x41, 0xff]).unwrap();
         std::io::stderr().write_all(&[0xfe, 0x42, 0x00]).unwrap();
         process::exit(code.parse().unwrap());
+    }
+}
+
+#[cfg(all(target_os = "linux", not(feature = "no_index")))]
+fn resource_census_parse_start_ticks(stat: &str) -> std::io::Result<u64> {
+    let tail = stat
+        .rsplit_once(')')
+        .ok_or_else(|| std::io::Error::new(std::io::ErrorKind::InvalidData, "missing /proc stat command terminator"))?
+        .1;
+    tail.split_whitespace()
+        .nth(19)
+        .ok_or_else(|| std::io::Error::new(std::io::ErrorKind::InvalidData, "missing /proc stat start time"))?
+        .parse()
+        .map_err(|error| std::io::Error::new(std::io::ErrorKind::InvalidData, error))
+}
+
+#[cfg(all(target_os = "linux", not(feature = "no_index")))]
+fn resource_census_start_ticks(pid: i32) -> std::io::Result<Option<u64>> {
+    let stat = match std::fs::read_to_string(format!("/proc/{pid}/stat")) {
+        Ok(stat) => stat,
+        Err(error) if error.kind() == std::io::ErrorKind::NotFound => return Ok(None),
+        Err(error) => return Err(error),
+    };
+    resource_census_parse_start_ticks(&stat).map(Some)
+}
+
+#[cfg(all(target_os = "linux", not(feature = "no_index")))]
+fn resource_census_assert_gone(pid: i32, start: u64) {
+    assert_ne!(resource_census_start_ticks(pid).expect("read exact process identity"), Some(start), "process identity {pid}/{start} remains present");
+}
+
+#[cfg(all(target_os = "linux", not(feature = "no_index")))]
+fn resource_census_snapshot() -> (usize, usize, usize) {
+    let deadline = Instant::now() + Duration::from_millis(100);
+    loop {
+        let tasks = std::fs::read_dir("/proc/self/task").expect("read current task list");
+        let mut task_count = 0;
+        let mut cleanup_workers = 0;
+        let mut retry = false;
+        for task in tasks {
+            let task = task.expect("read current task entry");
+            task_count += 1;
+            let comm = match std::fs::read_to_string(task.path().join("comm")) {
+                Ok(comm) => comm,
+                Err(error) if error.kind() == std::io::ErrorKind::NotFound => {
+                    retry = true;
+                    break;
+                }
+                Err(error) => panic!("read task comm: {error}"),
+            };
+            if comm.trim() == "rhai-sys-proces" {
+                cleanup_workers += 1;
+            }
+        }
+        if !retry {
+            let fd_count = std::fs::read_dir("/proc/self/fd")
+                .expect("read current descriptor list")
+                .map(|entry| entry.expect("read descriptor entry"))
+                .count();
+            return (task_count, fd_count, cleanup_workers);
+        }
+        assert!(Instant::now() < deadline, "task snapshot stayed ambiguous through bounded retry");
+        std::thread::yield_now();
+    }
+}
+
+#[cfg(all(target_os = "linux", not(feature = "no_index")))]
+fn resource_census_wait_for_baseline(expected: (usize, usize, usize)) -> (usize, usize, usize) {
+    let deadline = Instant::now() + Duration::from_secs(2);
+    loop {
+        let observed = resource_census_snapshot();
+        if observed == expected || Instant::now() >= deadline {
+            return observed;
+        }
+        std::thread::sleep(Duration::from_millis(5));
+    }
+}
+
+#[cfg(all(target_os = "linux", not(feature = "no_index")))]
+fn resource_census_fields(path: &std::path::Path) -> Option<std::collections::HashMap<String, u64>> {
+    Some(
+        std::fs::read_to_string(path)
+            .ok()?
+            .split_whitespace()
+            .filter_map(|field| {
+                let (key, value) = field.split_once('=')?;
+                Some((key.to_owned(), value.parse().ok()?))
+            })
+            .collect(),
+    )
+}
+
+#[cfg(all(target_os = "linux", not(feature = "no_index")))]
+fn resource_census_wait_for_pid(path: &std::path::Path) -> i32 {
+    let deadline = Instant::now() + Duration::from_secs(2);
+    loop {
+        if let Some(pid) = resource_census_fields(path).and_then(|fields| fields.get("child-pid").copied()) {
+            return pid as i32;
+        }
+        assert!(Instant::now() < deadline, "fixture did not publish its PID before the bounded watchdog");
+        std::thread::sleep(Duration::from_millis(5));
+    }
+}
+
+#[cfg(all(target_os = "linux", not(feature = "no_index")))]
+struct ResourceCensusRelease(std::path::PathBuf);
+
+#[cfg(all(target_os = "linux", not(feature = "no_index")))]
+impl Drop for ResourceCensusRelease {
+    fn drop(&mut self) {
+        let _ = std::fs::write(&self.0, b"release\n");
     }
 }
 
@@ -2548,6 +2682,121 @@ fn process_scope_overhead_measurement() {
                 eprintln!("PROCESS_SCOPE_SAMPLE,{pair},{name},{workload},{latency_ns},{},{},0", stdout.len(), stderr.len());
             }
         }
+    }
+}
+
+/// Separately measures Linux retained process/thread/descriptor counts at public API return
+/// and after the owning Engine is dropped. The held-child case is an observer control: it must
+/// see the exact live fixture identity and increased host resources before public-handle cleanup.
+#[test]
+#[cfg(target_os = "linux")]
+#[cfg(not(feature = "no_index"))]
+#[cfg(not(feature = "no_float"))]
+#[ignore = "bounded Linux retained-resource census; invoke with the dedicated resource driver"]
+fn process_scope_retained_resource_census() {
+    let synthetic = format!("42 (fixture with ) chars) S {} 987654321", vec!["0"; 18].join(" "));
+    assert_eq!(resource_census_parse_start_ticks(&synthetic).unwrap(), 987_654_321);
+    assert_eq!(resource_census_parse_start_ticks("42 (malformed) S 0").unwrap_err().kind(), std::io::ErrorKind::InvalidData);
+    const CASES: [(&str, ProcessScope); 2] = [("DirectChild", ProcessScope::DirectChild), ("Managed", ProcessScope::Managed)];
+    let executable = std::env::current_exe().unwrap().to_string_lossy().into_owned();
+
+    for (scope_name, scope) in CASES {
+        for (case_name, api_expression) in [("run", "run_raw"), ("spawn_wait", "spawn_wait"), ("shared_child", "shared_child")] {
+            let records = TempDir::new();
+            let record = records.path().join("resource-child.txt");
+            let record_script = record.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+            let executable_script = executable.replace('\\', "\\\\").replace('"', "\\\"");
+            let command = format!("\"{executable_script}\", [\"--exact\", \"process_fixture\", \"--nocapture\", \"--quiet\"], #{{ env_clear: true, env: #{{ {FIXTURE_ENV}: \"0\", {FIXTURE_RECORD_ENV}: \"{record_script}\", RHAI_SYS_PROCESS_RESOURCE_CENSUS: \"1\" }} }}");
+            let script = match api_expression {
+                "run_raw" => format!("run_raw({command})"),
+                "spawn_wait" => format!("spawn({command}).wait(2.0)"),
+                "shared_child" => format!("spawn({command})"),
+                _ => unreachable!(),
+            };
+            let config = SysConfig::default()
+                .default_timeout(Some(2.0))
+                .programs(ProgramPolicy::AllowList(vec![executable.clone()]))
+                .process_scope(scope)
+                .max_output(4096);
+            let baseline = resource_census_snapshot();
+            let engine = engine(config);
+            let result = if case_name == "shared_child" {
+                let handle = engine
+                    .eval::<Dynamic>(&script)
+                    .unwrap_or_else(|error| panic!("resource census {scope_name}/{case_name} spawn failed: {error:?}"));
+                let first = handle.try_cast::<rhai::packages::sys::Child>().expect("spawn result is the public Child type");
+                let second = first.clone();
+                let mut scope = Scope::new();
+                scope.push("first", first);
+                scope.push("second", second);
+                engine
+                    .eval_with_scope::<Map>(&mut scope, "let primary = first.wait(2.0); second.wait(2.0); primary")
+                    .unwrap_or_else(|error| panic!("resource census {scope_name}/{case_name} waits failed: {error:?}"))
+            } else {
+                engine.eval::<Map>(&script).unwrap_or_else(|error| panic!("resource census {scope_name}/{case_name} failed: {error:?}"))
+            };
+            let at_return = resource_census_snapshot();
+            assert!(result["success"].as_bool().unwrap(), "{scope_name}/{case_name} report: {result:?}");
+            assert_eq!(result["code"].as_int().unwrap(), 0);
+            let fields = resource_census_fields(&record).expect("fixture identity receipt");
+            let child_pid = fields["child-pid"] as i32;
+            let child_start = fields["child-start"] as u64;
+            resource_census_assert_gone(child_pid, child_start);
+            assert_eq!(at_return.2, baseline.2 + 1, "the lazy package cleanup worker is retained through API return");
+            drop(engine);
+            let after_drop = resource_census_wait_for_baseline(baseline);
+            assert_eq!(after_drop, baseline, "{scope_name}/{case_name} resources did not return to the pre-package baseline");
+            eprintln!(
+                "PROCESS_SCOPE_RESOURCE,{scope_name},{case_name},base_tasks={},return_tasks={},base_fds={},return_fds={},cleanup_threads={},fixture_pid={child_pid},fixture_start={child_start},postdrop_tasks={},postdrop_fds={}",
+                baseline.0, at_return.0, baseline.1, at_return.1, at_return.2, after_drop.0, after_drop.1
+            );
+        }
+
+        // Return an owned public Child while its fixture is demonstrably alive. The observer
+        // must detect the retained process, capture descriptors, and package cleanup thread;
+        // cleanup then goes through that exact Child handle, never a numeric PID signal.
+        let records = TempDir::new();
+        let record = records.path().join("held-child.txt");
+        let release = records.path().join("release-child");
+        let record_script = record.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+        let release_script = release.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+        let executable_script = executable.replace('\\', "\\\\").replace('"', "\\\"");
+        let spawn_script = format!(
+            "spawn(\"{executable_script}\", [\"--exact\", \"process_fixture\", \"--nocapture\", \"--quiet\"], #{{ env_clear: true, env: #{{ {FIXTURE_ENV}: \"0\", {FIXTURE_RECORD_ENV}: \"{record_script}\", RHAI_SYS_PROCESS_RESOURCE_CENSUS: \"1\", RHAI_SYS_PROCESS_RESOURCE_HOLD: \"1\", RHAI_SYS_PROCESS_RESOURCE_RELEASE: \"{release_script}\" }} }})"
+        );
+        let config = SysConfig::default()
+            .default_timeout(Some(2.0))
+            .programs(ProgramPolicy::AllowList(vec![executable.clone()]))
+            .process_scope(scope)
+            .max_output(4096);
+        let baseline = resource_census_snapshot();
+        let engine = engine(config);
+        let _release_guard = ResourceCensusRelease(release);
+        let handle = engine.eval::<Dynamic>(&spawn_script).expect("public spawn returns a Child handle");
+        let at_return = resource_census_snapshot();
+        let child_pid = resource_census_wait_for_pid(&record);
+        let child_start = resource_census_start_ticks(child_pid).expect("read held fixture identity").expect("held child identity exists");
+        assert_eq!(resource_census_start_ticks(child_pid).expect("read held child identity"), Some(child_start), "positive control child must still be live at observation");
+        assert!(at_return.0 > baseline.0, "positive control must expose an additional process-owned pump/service task");
+        assert!(at_return.1 > baseline.1, "positive control must expose retained capture descriptors");
+        assert_eq!(at_return.2, baseline.2 + 1, "positive control retains exactly one package cleanup worker");
+        let child = handle.try_cast::<rhai::packages::sys::Child>().expect("spawn result is the public Child type");
+        let mut scope = Scope::new();
+        scope.push("child", child);
+        let stopped = engine
+            .eval_with_scope::<Map>(&mut scope, "child.kill(); child.wait(2.0)")
+            .expect("public Child handle cancels and reaps the positive-control fixture");
+        assert!(stopped["stdout_complete"].as_bool().unwrap());
+        assert!(stopped["stderr_complete"].as_bool().unwrap());
+        resource_census_assert_gone(child_pid, child_start);
+        drop(scope);
+        drop(engine);
+        let after_drop = resource_census_wait_for_baseline(baseline);
+        assert_eq!(after_drop, baseline, "positive-control resources did not return to baseline after Engine drop");
+        eprintln!(
+            "PROCESS_SCOPE_RESOURCE,{scope_name},held_child_control,base_tasks={},return_tasks={},base_fds={},return_fds={},cleanup_threads={},fixture_pid={child_pid},fixture_start={child_start},postdrop_tasks={},postdrop_fds={}",
+            baseline.0, at_return.0, baseline.1, at_return.1, at_return.2, after_drop.0, after_drop.1
+        );
     }
 }
 
