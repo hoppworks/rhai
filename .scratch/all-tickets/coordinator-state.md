@@ -68,6 +68,17 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
   durable owner source-audit path recorded there. This closes source acquisition
   integrity only, not selected execution graph/toolchain/custody or native proof.
 
+- Linux net-only feature proof source applicability checked at6d4d9e0f against
+  original243404c9: net production, codegen, build.rs and all six net integration
+  targets/support unchanged. Entire src diff outside sys is only token.rs spawn
+  function-call allowance gated by feature sys; these net-only rows omit sys.
+  Cargo changes only move optional cap-std to non-WASM and add sys-only libc;
+  net feature remains std. Original957fc acceptance and raw23invocations/148tests
+  retain their original Linux7.2.4/Rust1.97.1/lock4aa2 coverage; do not claim they
+  ran on present Linux7.2.7/privateRust1.77.2. No relevant net check/source change
+  warrants a duplicate control or build solely for current integration. Combined
+  sys/net, changed platform/MSRV and final current-native release coverage open.
+
 ## Current step and next action
 1. Darwin current-source optional MSRV compiler matrix and sys/net examples are
    accepted narrowly. Examples proof at current-msrv-examples-proof.md and original
@@ -103,7 +114,10 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
    fromca7684ab; frozen parser dependency also matches the tested receipt.
    Full source history reviews are retained by their original refs, and source
    prerequisites still remain open. No Cargo/native allocation; frozen
-   measurement/archive/toolchain unchanged.
+   measurement/archive/toolchain unchanged. Existing Mac owner resumed for
+   source-only exact selected graph/toolchain confinement prerequisite; confirms
+   current4d86 globals/project/skills/roles/templates reload and no descendants.
+   No Cargo, native control or85 dispatch; live progress and nativeABI stayopen.
 4. Windows sole owner is completed; current virsh domstate readback0 confirms
    rhai-win11-quality shut off. Partial console
    command/cleanup remains unverified. Preserve allocation and all prior evidence;
