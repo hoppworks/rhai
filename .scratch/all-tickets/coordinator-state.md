@@ -41,6 +41,26 @@ absent. Review native73-review.md and original B3sAtB evidence; Cargo16.640s,
 sample250668KiB. New expectations require meaningful controls and native proof.
 Do not rerun unchanged rejected harness or silently treat EPERM as success.
 
+Source review in this continuation identifies a concrete macOS73 race without
+claiming unobserved native membership: run immediately commits a passive closure
+EPERM to fail(); fail() can subsequently observe exact original PGID ESRCH and
+emit no cleanup diagnostic while still returning the earlier cause. Root read
+immutable55e54ebd run/fail paths and the exact original73 report; no richer
+return-boundary receipt exists. Responsible context is implementing bounded
+provisional observation retry before committing the terminal closure cause.
+Exact same fenced PGID ESRCH may permit normal completion only with existing
+leader-reap/local-I/O requirements; persistent failure must report unresolved
+scope and retain custody. Preserve other committed causes/immutable snapshots,
+no post-reap nonzero signal, no increased existing absolute budgets. Source-only
+freeze/regression control review precedes any launch. Existing Expert08/cause
+history is retained; this is a concrete diagnosis, not a new escalation chain.
+
+Windows sole owner confirmed live unlocked desktop and ordinary PowerShell input.
+Fresh absent-only owner737988d4 archive downloaded; guest SHA256
+55aefedd96acdf716399ad12994c27e993211920b2d22f769b70b533e7c986ab.
+This proves transfer/readback only; parser, compiler, custody fixtures and client
+remain unverified until actual results. Original package counts/caps unchanged.
+
 Full process ticket, Windows custody/client, final MSRV/features/native matrix,
 performance/docs/release and source-chain main integration remain open. Existing
 foundation evidence and unchanged-production ordinary Linux safety proof remain
