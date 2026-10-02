@@ -1,0 +1,12 @@
+{
+  "revision": "00bed4a0dfeb103ff209ba4c76dac7ae797b7c56",
+  "archive_sha256": "5414ea195ad00152b1eae36b3f4e10943ba5d9bf323baff6410cca0c5b4d8b98",
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "command": "cargo metadata --locked --offline --format-version 1 --filter-platform aarch64-apple-darwin --features testing-environ,sys",
+  "helper_seconds": 90,
+  "outer_seconds": 120,
+  "sampled_storage_stop_kib": 1572864,
+  "sampled_rss_stop_kib": 2097152,
+  "descendants": 16,
+  "builds_tests_fixtures_measurements": 0
+}

@@ -1,0 +1,529 @@
+{
+  "contract": {
+    "revision": "00bed4a0dfeb103ff209ba4c76dac7ae797b7c56",
+    "archive_sha256": "5414ea195ad00152b1eae36b3f4e10943ba5d9bf323baff6410cca0c5b4d8b98",
+    "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+    "command": "cargo metadata --locked --format-version 1 --filter-platform aarch64-apple-darwin --features testing-environ,sys",
+    "helper_seconds": 75,
+    "outer_seconds": 100,
+    "sampled_storage_stop_kib": 1572864,
+    "sampled_rss_stop_kib": 2097152,
+    "descendants": 16,
+    "builds_tests_fixtures_measurements": 0
+  },
+  "statuses": {
+    "rustc-version": 0,
+    "cargo-version": 0,
+    "metadata": 0
+  },
+  "lock_unchanged": true,
+  "package_count": 62,
+  "resolve_nodes": 62,
+  "workspace_members": 3,
+  "rhai_reachable_packages": 61,
+  "root_features": [
+    "default",
+    "metadata",
+    "serde",
+    "serde_json",
+    "std",
+    "sys",
+    "testing-environ"
+  ],
+  "scope_readback": {
+    "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-7f44f7af7f1c4e6cacf2d65e4bf7e5be": "absent",
+    "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-5fbe99a075a34c009aebb9f99246aa0b": "absent",
+    "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-8f656fc710414b9f832eb5fa8fe0f0d8": "absent"
+  },
+  "sampled_maxima": {
+    "storage_kib": 748876,
+    "rss_kib": 76720,
+    "descendants": 3
+  },
+  "source_audit_candidates": [
+    {
+      "name": "rhai",
+      "version": "1.26.1",
+      "source": null,
+      "features": [
+        "default",
+        "metadata",
+        "serde",
+        "serde_json",
+        "std",
+        "sys",
+        "testing-environ"
+      ],
+      "targets": [
+        {
+          "name": "build-script-build",
+          "kind": [
+            "custom-build"
+          ],
+          "src_path": "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-8f656fc710414b9f832eb5fa8fe0f0d8/agent-build-wpjefg2x/source/build.rs"
+        }
+      ]
+    },
+    {
+      "name": "rhai_codegen",
+      "version": "3.2.0",
+      "source": null,
+      "features": [
+        "default",
+        "metadata"
+      ],
+      "targets": [
+        {
+          "name": "rhai_codegen",
+          "kind": [
+            "proc-macro"
+          ],
+          "src_path": "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-8f656fc710414b9f832eb5fa8fe0f0d8/agent-build-wpjefg2x/source/codegen/src/lib.rs"
+        }
+      ]
+    },
+    {
+      "name": "ahash",
+      "version": "0.8.12",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "features": [
+        "compile-time-rng",
+        "const-random",
+        "getrandom",
+        "runtime-rng",
+        "std"
+      ],
+      "targets": [
+        {
+          "name": "build-script-build",
+          "kind": [
+            "custom-build"
+          ],
+          "src_path": "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-8f656fc710414b9f832eb5fa8fe0f0d8/agent-build-wpjefg2x/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/ahash-0.8.12/build.rs"
+        }
+      ]
+    },
+    {
+      "name": "cap-primitives",
+      "version": "4.0.3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "features": [],
+      "targets": [
+        {
+          "name": "build-script-build",
+          "kind": [
+            "custom-build"
+          ],
+          "src_path": "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-8f656fc710414b9f832eb5fa8fe0f0d8/agent-build-wpjefg2x/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/cap-primitives-4.0.3/build.rs"
+        }
+      ]
+    },
+    {
+      "name": "cap-std",
+      "version": "4.0.3",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "features": [
+        "default"
+      ],
+      "targets": [
+        {
+          "name": "build-script-build",
+          "kind": [
+            "custom-build"
+          ],
+          "src_path": "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-8f656fc710414b9f832eb5fa8fe0f0d8/agent-build-wpjefg2x/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/cap-std-4.0.3/build.rs"
+        }
+      ]
+    },
+    {
+      "name": "const-random-macro",
+      "version": "0.1.16",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "features": [],
+      "targets": [
+        {
+          "name": "const_random_macro",
+          "kind": [
+            "proc-macro"
+          ],
+          "src_path": "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-8f656fc710414b9f832eb5fa8fe0f0d8/agent-build-wpjefg2x/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/const-random-macro-0.1.16/src/lib.rs"
+        }
+      ]
+    },
+    {
+      "name": "crunchy",
+      "version": "0.2.4",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "features": [
+        "default",
+        "limit_128"
+      ],
+      "targets": [
+        {
+          "name": "build-script-build",
+          "kind": [
+            "custom-build"
+          ],
+          "src_path": "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-8f656fc710414b9f832eb5fa8fe0f0d8/agent-build-wpjefg2x/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/crunchy-0.2.4/build.rs"
+        }
+      ]
+    },
+    {
+      "name": "getrandom",
+      "version": "0.3.4",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "features": [],
+      "targets": [
+        {
+          "name": "build-script-build",
+          "kind": [
+            "custom-build"
+          ],
+          "src_path": "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-8f656fc710414b9f832eb5fa8fe0f0d8/agent-build-wpjefg2x/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/getrandom-0.3.4/build.rs"
+        }
+      ]
+    },
+    {
+      "name": "io-extras",
+      "version": "0.19.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "features": [
+        "default"
+      ],
+      "targets": [
+        {
+          "name": "build-script-build",
+          "kind": [
+            "custom-build"
+          ],
+          "src_path": "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-8f656fc710414b9f832eb5fa8fe0f0d8/agent-build-wpjefg2x/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/io-extras-0.19.0/build.rs"
+        }
+      ]
+    },
+    {
+      "name": "io-lifetimes",
+      "version": "2.0.4",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "features": [],
+      "targets": [
+        {
+          "name": "build-script-build",
+          "kind": [
+            "custom-build"
+          ],
+          "src_path": "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-8f656fc710414b9f832eb5fa8fe0f0d8/agent-build-wpjefg2x/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/io-lifetimes-2.0.4/build.rs"
+        }
+      ]
+    },
+    {
+      "name": "io-lifetimes",
+      "version": "3.0.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "features": [
+        "default"
+      ],
+      "targets": [
+        {
+          "name": "build-script-build",
+          "kind": [
+            "custom-build"
+          ],
+          "src_path": "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-8f656fc710414b9f832eb5fa8fe0f0d8/agent-build-wpjefg2x/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/io-lifetimes-3.0.1/build.rs"
+        }
+      ]
+    },
+    {
+      "name": "libc",
+      "version": "0.2.189",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "features": [
+        "default",
+        "std"
+      ],
+      "targets": [
+        {
+          "name": "build-script-build",
+          "kind": [
+            "custom-build"
+          ],
+          "src_path": "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-8f656fc710414b9f832eb5fa8fe0f0d8/agent-build-wpjefg2x/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/libc-0.2.189/build.rs"
+        }
+      ]
+    },
+    {
+      "name": "num-traits",
+      "version": "0.2.19",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "features": [
+        "std"
+      ],
+      "targets": [
+        {
+          "name": "build-script-build",
+          "kind": [
+            "custom-build"
+          ],
+          "src_path": "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-8f656fc710414b9f832eb5fa8fe0f0d8/agent-build-wpjefg2x/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/num-traits-0.2.19/build.rs"
+        }
+      ]
+    },
+    {
+      "name": "paste",
+      "version": "1.0.15",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "features": [],
+      "targets": [
+        {
+          "name": "paste",
+          "kind": [
+            "proc-macro"
+          ],
+          "src_path": "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-8f656fc710414b9f832eb5fa8fe0f0d8/agent-build-wpjefg2x/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/paste-1.0.15/src/lib.rs"
+        },
+        {
+          "name": "build-script-build",
+          "kind": [
+            "custom-build"
+          ],
+          "src_path": "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-8f656fc710414b9f832eb5fa8fe0f0d8/agent-build-wpjefg2x/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/paste-1.0.15/build.rs"
+        }
+      ]
+    },
+    {
+      "name": "portable-atomic",
+      "version": "1.15.0",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "features": [],
+      "targets": [
+        {
+          "name": "build-script-build",
+          "kind": [
+            "custom-build"
+          ],
+          "src_path": "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-8f656fc710414b9f832eb5fa8fe0f0d8/agent-build-wpjefg2x/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/portable-atomic-1.15.0/build.rs"
+        }
+      ]
+    },
+    {
+      "name": "proc-macro2",
+      "version": "1.0.103",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "features": [
+        "default",
+        "proc-macro"
+      ],
+      "targets": [
+        {
+          "name": "build-script-build",
+          "kind": [
+            "custom-build"
+          ],
+          "src_path": "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-8f656fc710414b9f832eb5fa8fe0f0d8/agent-build-wpjefg2x/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro2-1.0.103/build.rs"
+        }
+      ]
+    },
+    {
+      "name": "quote",
+      "version": "1.0.41",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "features": [
+        "default",
+        "proc-macro"
+      ],
+      "targets": [
+        {
+          "name": "build-script-build",
+          "kind": [
+            "custom-build"
+          ],
+          "src_path": "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-8f656fc710414b9f832eb5fa8fe0f0d8/agent-build-wpjefg2x/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.41/build.rs"
+        }
+      ]
+    },
+    {
+      "name": "rustix",
+      "version": "1.1.5",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "features": [
+        "alloc",
+        "default",
+        "fs",
+        "process",
+        "std",
+        "termios",
+        "time"
+      ],
+      "targets": [
+        {
+          "name": "build-script-build",
+          "kind": [
+            "custom-build"
+          ],
+          "src_path": "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-8f656fc710414b9f832eb5fa8fe0f0d8/agent-build-wpjefg2x/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/rustix-1.1.5/build.rs"
+        }
+      ]
+    },
+    {
+      "name": "serde",
+      "version": "1.0.229",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "features": [
+        "alloc",
+        "default",
+        "derive",
+        "serde_derive",
+        "std"
+      ],
+      "targets": [
+        {
+          "name": "build-script-build",
+          "kind": [
+            "custom-build"
+          ],
+          "src_path": "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-8f656fc710414b9f832eb5fa8fe0f0d8/agent-build-wpjefg2x/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.229/build.rs"
+        }
+      ]
+    },
+    {
+      "name": "serde_core",
+      "version": "1.0.229",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "features": [
+        "alloc",
+        "result",
+        "std"
+      ],
+      "targets": [
+        {
+          "name": "build-script-build",
+          "kind": [
+            "custom-build"
+          ],
+          "src_path": "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-8f656fc710414b9f832eb5fa8fe0f0d8/agent-build-wpjefg2x/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.229/build.rs"
+        }
+      ]
+    },
+    {
+      "name": "serde_derive",
+      "version": "1.0.229",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "features": [
+        "default"
+      ],
+      "targets": [
+        {
+          "name": "serde_derive",
+          "kind": [
+            "proc-macro"
+          ],
+          "src_path": "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-8f656fc710414b9f832eb5fa8fe0f0d8/agent-build-wpjefg2x/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/serde_derive-1.0.229/src/lib.rs"
+        }
+      ]
+    },
+    {
+      "name": "serde_json",
+      "version": "1.0.145",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "features": [
+        "alloc",
+        "default",
+        "std"
+      ],
+      "targets": [
+        {
+          "name": "build-script-build",
+          "kind": [
+            "custom-build"
+          ],
+          "src_path": "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-8f656fc710414b9f832eb5fa8fe0f0d8/agent-build-wpjefg2x/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/serde_json-1.0.145/build.rs"
+        }
+      ]
+    },
+    {
+      "name": "smartstring",
+      "version": "1.0.1",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "features": [
+        "std"
+      ],
+      "targets": [
+        {
+          "name": "build-script-build",
+          "kind": [
+            "custom-build"
+          ],
+          "src_path": "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-8f656fc710414b9f832eb5fa8fe0f0d8/agent-build-wpjefg2x/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/smartstring-1.0.1/build.rs"
+        }
+      ]
+    },
+    {
+      "name": "tiny-keccak",
+      "version": "2.0.2",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "features": [
+        "default",
+        "shake"
+      ],
+      "targets": [
+        {
+          "name": "build-script-build",
+          "kind": [
+            "custom-build"
+          ],
+          "src_path": "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-8f656fc710414b9f832eb5fa8fe0f0d8/agent-build-wpjefg2x/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/tiny-keccak-2.0.2/build.rs"
+        }
+      ]
+    },
+    {
+      "name": "trybuild",
+      "version": "1.0.90",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "features": [],
+      "targets": [
+        {
+          "name": "build-script-build",
+          "kind": [
+            "custom-build"
+          ],
+          "src_path": "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-8f656fc710414b9f832eb5fa8fe0f0d8/agent-build-wpjefg2x/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/trybuild-1.0.90/build.rs"
+        }
+      ]
+    },
+    {
+      "name": "zerocopy",
+      "version": "0.8.59",
+      "source": "registry+https://github.com/rust-lang/crates.io-index",
+      "features": [
+        "simd"
+      ],
+      "targets": [
+        {
+          "name": "build-script-build",
+          "kind": [
+            "custom-build"
+          ],
+          "src_path": "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-graph-8f656fc710414b9f832eb5fa8fe0f0d8/agent-build-wpjefg2x/cargo-home/registry/src/index.crates.io-1949cf8c6b5b557f/zerocopy-0.8.59/build.rs"
+        }
+      ]
+    }
+  ],
+  "acceptance": "Locked metadata source discovery only; conservative workspace feature union.",
+  "unverified": [
+    "Exact executed Cargo unit graph",
+    "Build-script/toolchain confinement",
+    "Native Darwin ABI",
+    "Interruption custody",
+    "Process measurement"
+  ],
+  "attempt_history": [
+    "01: Python 3.9 data-filter API boundary before Cargo",
+    "02: offline toml_write index boundary; tool probes passed",
+    "03: public index completion; all metadata commands passed"
+  ],
+  "elapsed_seconds": {
+    "01": 0.729404,
+    "02": "approximately 4 by file timestamps; not monotonic",
+    "03": 5.527903584064916
+  },
+  "resource_method": "Periodic du/ps samples; not continuous peaks or native custody proof."
+}

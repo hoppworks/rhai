@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/Users/hoppworks/projects/rhai-all-tickets/.scratch/all-tickets/macos-selected-graph.py", line 54, in <module>
+    with tarfile.open(archive) as bundle: bundle.extractall(source,filter='data')
+TypeError: extractall() got an unexpected keyword argument 'filter'

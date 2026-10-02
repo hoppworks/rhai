@@ -1,0 +1,14 @@
+sample={"storage_kib": 715708, "rss_kib": 26272, "descendants": 1}
+sample={"storage_kib": 715708, "rss_kib": 43008, "descendants": 2}
+sample={"storage_kib": 715708, "rss_kib": 26416, "descendants": 1}
+sample={"storage_kib": 715708, "rss_kib": 26448, "descendants": 2}
+sample={"storage_kib": 715708, "rss_kib": 26304, "descendants": 1}
+sample={"storage_kib": 715708, "rss_kib": 77440, "descendants": 3}
+sample={"storage_kib": 715712, "rss_kib": 26208, "descendants": 1}
+Traceback (most recent call last):
+  File "/Users/hoppworks/projects/rhai-all-tickets/.scratch/all-tickets/macos-selected-graph.py", line 77, in <module>
+    command('metadata',[str(TOOL/'cargo'),'metadata','--locked','--offline','--format-version','1','--filter-platform','aarch64-apple-darwin','--features','testing-environ,sys'],env)
+  File "/Users/hoppworks/projects/rhai-all-tickets/.scratch/all-tickets/macos-selected-graph.py", line 45, in command
+    if status: raise RuntimeError(name+' failed status='+str(status))
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: metadata failed status=101

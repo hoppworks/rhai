@@ -143,7 +143,7 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Current turn classification
-PROGRESS: fork main200114c271d1c1b4ed4f32c508afbae7be630a1b contains the
+PROGRESS: fork main8c346bf229ba2f932493edea2f576fed62f8d33f contains the
 accepted narrow current-core proof and prior Linux/Mac source proof. Onlymain
 was independently read back after publication. Preserve older publication and
 source-review receipts by reference; root implementation remains incomplete.
@@ -189,3 +189,65 @@ last observed shut off, unexecuted partial console line unresolved. Do not resta
 shared VM or infer cleanup. Retain archive hash receipt and oneGET allowance:
 exact9e0 archive13380569bytes/SHA8291e58652a7dc8494513d910460e6dae39a716f5dfca937bda40fafcfa0caa4.
 Continue independent authorized work. Goal active, no release acceptance.
+
+## Selected macOS measurement graph package — allocated
+One new source-discovery package: frozen00bed archive5414 / edge-only lock2ba4;
+Cargo metadata only, offline/locked, targetaarch64-apple-darwin, default features
+plus testing-environ,sys, exact stable toolchain must report1.93.0. No builds,
+script execution, fixtures, tests or measurement; no native invocation85.
+Global existing run_scoped with new own rhai session scope/TMPDIR absolute;
+private source/home/Cargo cache/target/tmp under AGENT_RUNTIME_DIR.
+Helper90s / runner120s, sampled storage<1572864KiB, RSS<2097152KiB, descendants<=16,
+jobs2. One launch; offline input/toolchain boundary stops without retry.
+Existing source integrity receipts reused; metadata alone cannot prove tool
+confinement or native ABI. Export original statuses/log/lock and scope absence.
+
+Graph package01 terminal1 after0.729s: systemPython3.9 lacks tarfile data-filter
+API, before Cargo/toolchain commands and cache copy. Frozen archive hash check
+preceded this boundary; original helper/contract/traceback preserved. Exact
+empty own scope7f44f7af7f1c4e6cacf2d65e4bf7e5be retired. This is a local setup
+error, not product/metadata failure. Existing bundled modernPython selected
+read-only (no install/home change). One diagnosed followup02 allocated85/110s;
+combined elapsed ceiling remains original90/120s (initial0.729s consumed).
+Original source package history retained; no metadata/offline retry yet.
+
+Graph02 terminal1: rustc/cargo1.93.0 probes0; metadata101 before graph due missing
+private offline crates.io index rowtoml_write0.1.2. Exact edge-only lock2ba4
+unchanged; public archive/source checksum already accepted. Source/metadata
+assertions not executed, so not product failure. Original logs/statuses retained;
+exact empty own5fbe99a075a34c009aebb9f99246aa0b scope retired. Samples storage
+715712KiB/RSS77440KiB/descendants3, not continuous peaks. Filesystem timestamps
+bound observed active package02 near4s, not exact monotonic elapsed.
+Concrete index diagnosis reuses accepted Expert10 online-locked input route;
+new reversible03 index completion selected within original90/120s active-run
+planning envelope:75/100s, unchanged resource stops, no build/fixture/native
+allocation. Prior0.729s plus approximate4s consumption retained, no history reset.
+No default launch-count approval gate; stop03 on changed lock, toolchain mismatch,
+network/deadline failure or unresolved graph. No resolution/version changes.
+
+Graph03 terminal0, exact lock2ba4 unchanged, rustc/cargo1.93.0 probes0 and
+metadata0. Original elapsed5.527903584s; samples storage748876KiB/RSS76720KiB/
+descendants3. Independent read-macos-selected-graph.py verified all62 package
+name/version/source lock rows,62 resolve nodes,3 workspace members,61 reachable
+from Rhai, statuses, sampled limits and all3 exact scope absences. Receipt:
+macos-selected-graph-root-readback.json. This closes locked metadata source
+discovery only. Metadata includes workspace feature union (metadata enabled by
+codegen's dev Rhai dependency); conservative build/proc-macro candidate list is
+not an exact executed unit graph, confinement or native custody acceptance.
+No compilation, fixture, control, measurement or invocation85 occurred.
+
+Global056b17c rules and owned project's AGENTS reloaded; campaign repair rules
+reloaded because estimate/approval/resource handling applies. Existing strict,
+automatic fork push/coordinator merge and main-only remote scope unchanged.
+No new home install/config mutation or foreign resource cleanup.
+
+Mac source correctiona723 received; review found CLIENT_CODE execv selects the
+nonexecutable driver.py rather than Python. Returned exact interpreter/vector
+repair and meaningful pure regression to responsible owner, existing09 history,
+source-only. Its first followup failed before work due prompt rejection; a
+narrow source-only followup was dispatched, no native/resource slot consumed.
+Additional observed-ledger correlation question: ps and later Darwin census
+are correlated by PID/PPID/PGID without start identity; disappeared sampled rows
+are skipped. Owner must preserve uncertainty and assess the original observed
+PID/start union requirement. Full a723/followup acceptance remains open; false
+launch guard and all explicit caps stay intact. Original2f review retained.
