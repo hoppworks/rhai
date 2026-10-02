@@ -14,6 +14,33 @@ LIMIT=1_572_864
 MAX_DESCENDANTS=16
 MAX_RSS_KIB=2*1024*1024
 
+# This legacy harness still spawns setup commands and a nested measurement
+# driver, so it does not meet cause-09 command custody. Keep it impossible to
+# launch accidentally until the source audit and the sole-custodian adapter are
+# independently reviewed. This is a source gate, not evidence of custody.
+CUSTODY_READINESS = Path(__file__).with_name('macos-overhead-custody-readiness.json')
+CUSTODY_IMPLEMENTATION_FROZEN = False
+
+def require_launch_readiness():
+    if CUSTODY_IMPLEMENTATION_FROZEN is not True:
+        raise RuntimeError('macOS overhead source is NOT launch-ready: sole-custodian implementation is not frozen')
+    try:
+        readiness = __import__('json').loads(CUSTODY_READINESS.read_text(encoding='utf-8'))
+    except (OSError, ValueError) as exc:
+        raise RuntimeError('macOS overhead source is NOT launch-ready: missing custody readiness record') from exc
+    required = {
+        'schema': 1,
+        'status': 'reviewed-ready',
+        'build_confinement_audit': 'complete',
+        'darwin_process_abi_review': 'complete',
+        'sole_spawner_reaper': 'complete',
+        'escaped_leaf_readback': 'complete',
+        'pure_controls': 'complete',
+        'independent_source_review': 'complete',
+    }
+    if not isinstance(readiness, dict) or any(readiness.get(key) != value for key, value in required.items()):
+        raise RuntimeError('macOS overhead source is NOT launch-ready: custody prerequisites are incomplete')
+
 class Interrupted(BaseException):
     def __init__(self, signum): self.signum=signum
 
@@ -170,6 +197,9 @@ def run(argv,path,deadline,env,source):
     return status,path.read_text(errors='replace')
 
 def main():
+    # The gate is deliberately first: no runtime, evidence directory, version
+    # query, Git/archive, Cargo, or fixture process may start before root review.
+    require_launch_readiness()
     # Setup commands below are external children too. Any interrupted setup is
     # deliberately incomplete so the adapter retains the runtime for review.
     persist_ledger([],state='setup-in-progress')

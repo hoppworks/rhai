@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "status": "not-ready",
+  "build_confinement_audit": "incomplete",
+  "darwin_process_abi_review": "incomplete",
+  "sole_spawner_reaper": "incomplete",
+  "escaped_leaf_readback": "incomplete",
+  "pure_controls": "incomplete",
+  "independent_source_review": "incomplete",
+  "reason": "Cause 09 prerequisites have not been established. This record must not be changed to reviewed-ready without source evidence and independent review."
+}
