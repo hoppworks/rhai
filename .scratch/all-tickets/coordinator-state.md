@@ -80,143 +80,117 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
   sys/net, changed platform/MSRV and final current-native release coverage open.
 
 ## Current step and next action
-1. Darwin current-source optional MSRV compiler matrix and sys/net examples are
-   accepted narrowly. Examples proof at current-msrv-examples-proof.md and original
-   current-msrv-examples-evidence: one private Rust1.77.2 build, real Engine file
-   write/fresh host read and independent TCP peer, meaningful wrong-expectation
-   controls101 and restored0. Frozen1ca21e32/v3lock2ba4; fork main e5849699.
-   Other platforms and final native feature behavior remain open.
-2. Linux current optional compiler prerequisite CLOSED narrowly. One v2 launch
-   finished outer0, run-scoped0, all11 positive rows0 and sys/no_object101 with
-   the exact intentional diagnostic. Frozen1ca21e32/v3lock2ba4, direct private
-   Rust/Cargo1.77.2 Linuxx86_64; original linux-current-feature-v2-evidence and
-   launcher-evidence, independent linux-current-feature-v2-root-readback.json.
-   Seven manifest hashes and lock match; relevant src/codegen/build.rs/Cargo.toml
-   unchanged at currentf6ad9e9b. Fresh remote /proc PID/start readback confirms
-   all20 identities absent, ownPGID1566099 empty, exact runtime/scope absent.
-   Export64.206s; 88periodic samples maxRSS803384KiB/storage761640KiB/descendants4,
-   not continuous peaks. Prior v1/setup history retained, no limit reset/native85.
-   Linux current-source optional-MSRV sys/net examples acceptance CLOSED.
-   One reviewed package at integrated6199fcab finished SSH/outer/scoped0.
-   Frozen1ca21e32/archive8251/v3lock2ba4, direct privateRust/Cargo1.77.2
-   Linuxx86_64 kernel7.2.7-ogc1.1.fc44.x86_64. One combined locked build,
-   real Engine filesystem fresh host readbackRhaiting data, independent OS-selected
-   TCP peer receivesping and scriptpong. Both deliberate wrong expectations
-   produce intended named assertions/status101; restoredsys/net each0.
-   Original linux-current-msrv-examples-evidence and launcher-evidence plus
-   outer.log retain all8 commands, direct versions, source restoration, controls
-   and resource samples. Independent linux-current-msrv-examples-root-readback.json
-   verifies reviewed helper bytes, seven manifests, restored example hashes,
-   unchanged relevant production at current3b3da3c9, all110 exact PID/start
-   identities absent, own groups empty, exact runtime and scope absent.
-   Export33.911s/49samples maximaRSS900108KiB/storage769428KiB/descendants7,
-   periodic observations not continuous peaks. One normal proc disappearance
-   emits Bash missing-file diagnostic before successful wait0; no lost status.
-   This closes Linux optional-MSRV documentation examples only, no process85.
-   Combined independent source review at6c384 covers4/4 codefiles and contract;
-   two launcher findings corrected in one batch with original source/polling RED1,
-   owner scopedGREEN0 and independent integrated five-requirement pure replay0.
-   Root staging independently matched nine inputs; source preparation/staging logs
-   retained. Previous foreign runner1583798/driver1583802/cleanup1673220 were
-   absent before dispatch, fresh heavy inventory clear; preserve idle28950/28951
-   and Dart MCP5388. Limits600/540/work510+export30/jobs2 and sampled2GiB/16
-   unchanged, no history reset. Source preparation owner now continues a separate
-   finite Linux non-process filesystem/environment/TCP feature acceptance package,
-   source-only before review/staging. Confirms4d86 global/project/roles/templates
-   and no descendants; no new native launch permitted by that source task.
-   Linux source-only behavior preparation38b07774 frozen, independently
-   reviewed4/4 OCR codefiles plus contract. Four proposed runtime rows
-   combinedbaseline/no_index/metadata+serde andnet/no_object reuse accepted
-   examples. Two assertion-control classifier defects found in one batch:
-   no_object requires restoredELSE message, write accepts incidental101+254.
-   Existing owner correcting classifiers with intended namedtest/panic/output
-   proof and compileerror/zero-test/unrelatedpanic negative fixtures. Review at
-   linux-current-sys-net-behavior-review.md; reviewer combinedbytes concern
-   withdrawn after full String::from_utf8_lossy assertion read, not a failure.
-   No staging/build/native command executed. Next collect corrected ref and
-   original RED/GREEN, recheck finding fixes and independently scoped pure
-   tests before integration/staging. Root original-proof readback independently
-   confirms no_object diagnostic mismatch and compileerror254 falsepositive;
-   receiptlinux-current-sys-net-behavior-root-review-readback.json. Source-only
-   scoped runner0/runtime removed/empty scope retired. Production and all
-   selected target sources unchanged frozen1ca..current. Serial test scheduling
-   requested to bound fixture footprint, explicit concurrency tests retained;
-   account outer summaries separately from legitimate nested fixture summaries. Other combinedruntime rows remainopen.
 
+Current instructions/roles revision958a4538b0191c53f2ccb2cd00d96c15045fbf68.
+Current authoritative history through this rewrite is Git commit
+10d4a0d55400ebe8c24feff134e7161ff36bf8d5, this same state path. It retains
+all earlier cause/attempt/resource/source applicability records. Read that
+history for consumed work, not superseded next actions. No reset occurred.
+Last independently read-back fork main10d4a0d5; only remote main, lowercase
+human author/committer. Goal active and incomplete.
 
-3. Mac Managed source correction74943bb2 is independently reviewed and replayed:
-   58 adapter/23 reader pass, prior wrong fixture PGID and early gate reap are
-   meaningful RED1, prior Cargo stream request fails1, restored adapter58 pass.
-   macos-managed-correction-review.md records source-only acceptance and scope.
-   Guardfalse/count84 preserved. Real dual-stream capture progress, native ABI,
-   confinement/interruption and measurement acceptance remain open. Absent-checkout path correctionca7684ab independently passes adapter59,
-   meaningful prior-path RED1 and restored59; syntax/cleanup readback0. Owner
-   completed. Nine reviewed preparation source files are integrated byte-for-byte
-   fromca7684ab; frozen parser dependency also matches the tested receipt.
-   Full source history reviews are retained by their original refs, and source
-   prerequisites still remain open. No Cargo/native allocation; frozen
-   measurement/archive/toolchain unchanged. Existing Mac owner resumed for
-   source-only exact selected graph/toolchain confinement prerequisite; confirms
-   current4d86 globals/project/skills/roles/templates reload and no descendants.
-   Source increment21cfd2ad now independently reviewed and integrated: all
-   measured/control Cargo test/build commands honor --locked; feature/target/test
-   arguments and120-call measurement selection unchanged. OCR selected2files;
-   root reviewed2/2 against system rules and command call sites, no findings.
-   Owner meaningful RED is missing measurement_cargo_argv before implementation,
-   restored60pass; root reused that original receipt and independently reran60
-   tests successfully through scoped runner. Original root log is
-   macos-locked-source-root-test.log; private runtime and exact empty scope removed.
-   No actual Cargo/build/native/measurement executed. Exact selected graph remains
-   open: source/workspace metadata cannot prove selected units. Proposed unit-graph
-   route is incompatible with frozen Cargo: direct Cargo1.93.0 --version and
-   -Z help returned0 under private scoped HOME/cache/runtime; help explicitly
-   states unstable options are nightly-only and this tool is stable. Original
-   macos-cargo-unit-graph-support.log records exact outputs. No selected command,
-   build script, compiler, native control or measurement launched. Scope removed
-   empty after runner0. Do not run the proposed -Z unstable-options query or
-   silently substitute a new toolchain. Existing conservative candidate review
-   remains valid narrowly; exact graph/toolchain confinement, live capture and
-   native ABI remain open, no native85 allocation. Existing responsible owner
-   macos_overhead_safeguards continued for a source-only supported stable-Cargo
-   route after ruling out nightly unit-graph. Preserve Expert09 single chain and
-   30-minute active-work checkpoint; no Cargo/compiler/native command permitted.
-   Exact selected-unit acceptance remains distinct from conservative candidate
-   confinement coverage; both require explicit supported evidence. Next collect
-   immutable source increment and pure proof or concrete missing capability.
-   Stable-Cargo source-candidate preflight52fe92bc now accepted narrowly.
-   Independent OCR review2/2 found --edges all producer/parser mismatch;
-   corrected explicitnormal,build,dev retains all package edge types and
-   excludes feature-only display rows. Original intended edge-kinds RED and
-   targeted/full63GREEN retained undermacos-graph-preflight-source-evidence-20261002.
-   Root independent63-test scoped replay0 atmacos-stable-graph-root-test.log;
-   runner0/private runtime removed/exact empty scope retired. Exact2 source
-   files integrated byte-for-byte; reviewmacos-stable-graph-increment-review.md.
-   Queries use sole custodian RPC; candidate metadata superset outside reviewed
-   26packages fails closed. Actual queries not run; exactunitsfalse honestly.
-   Existing owner continues source-only tool/linker resolution and finite native
-   control readiness under soleExpert09. Exact units/matching kernel source are
-   evidence techniques, not independent human requirements when a supported
-   conservative alternative proves the same acceptance. No native allocation;
-   gatefalse/count84/no85 preserved. Next collect coherent source increment and
-   finite proof prerequisites before any live-control request.
+### Accepted current Linux non-process package
 
-4. Windows owned domain activation completed under reconciled existing authority.
-   Independent root UUID/domstate/domdisplay and desktop readback preserved at
-   windows-current-readiness-20261002/. Exact VM running, loopbackVNC; unrelated
-   domain untouched/shut off. Current owner continues bounded read-only guest
-   console/path inspection; partial-input clearance and oneGET consumption remain
-   unverified. No compiler/bootstrap/fixture/native acceptance claimed.
+Frozen productiona2d7a8c2/archive551c03db, v3lock2ba4, privateRust1.77.2,
+Linux7.2.7: nine real Engine/OS feature rows,601 tests, five meaningful wrong
+controls. Seven rows430 plus combined-no-index-sync-metadata82 and f3289.
+Original linux-policy-package-evidence and linux-current-sys-net-policy2-evidence,
+policy2-review.md and root readbacks establish exact source/coverage/cleanup.
+All10 policy2PID/start absent, groups/runtime/scope absent; sampledRSS912224KiB,
+storage1000220KiB/desc10; export34.471s; unchanged proof remains applicable.
+Compiler11rows and optionalexamples on Linux/Darwin remain accepted narrowly;
+core1.66Darwin42/wrong43/restored42 reused under unchanged relevant inputs.
+Ticket06 contains detailed applicability. None closes process/fullrelease.
+
+### Darwin files/network preparation
+
+Owned /Users/hoppworks/.codex/worktrees/current-darwin-sys-net-behavior/rhai,
+task/current-darwin-sys-net-behavior. Test/source2f795ecee8edd6ddf348f382e5397cc6e348ad37,
+archive43c8b8e43a2bcd3e74dd0be3d60a0dea2eab50eb5bfe65cc736684631523d52b,
+lock2ba4. Initial2d52 review and affected8b974/4c4a originals retained once in
+current-darwin-sys-net-source-review/. F2 conservative cleanup source accepted;
+F3 configured prefix-root source accepted, native canonicalization still open.
+Two failed F4 corrections retained:8b974 split ordering,4c4a stderr diagnostic
+loss invalidating derived-path F1 EILSEQ rejection. Cause11 single fresh Expert
+answer escalation11-darwin-split-stream-coverage.answer.md, one source follow-up.
+Follow-up frozen CLEAN322ac6be2a46191242d3982c3b4e2f2f62cd9425: separate frozen
+sys_fs/F19 diagnostic mapping, unresolved/conflict failclosed partial receipts,
+structural diagnostic isolation, status0 incomplete continuation and strict
+SESSION_ID2f795ece naming. Owner ten pure categoriesGREEN; RED/GREEN at
+current-darwin-sys-net-diagnostic-red.md/-green.stdout in owner worktree.
+SAME reviewer current_darwin_sys_net_review dispatched on this freeze, no broad
+redo/new cause11 chain. Await independent acceptance before source integration
+or native allocation. Production/source/lock unchanged; Linux proof retained.
+
+### Mac process overhead/control preparation
+
+Owned /Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai,
+task/macos-overhead-safeguards. Expert09 solecustodian/anchors/directCargo/private
+PATH/native passive escaped-leaf route remains current, no second custody chain.
+All earlier confinement/ABI/header audits and exact measurement overlays/fixtures
+retained by historical state references. Measurement source00bed/archive5414,
+30 alternating pairs/workload120calls/zero warmups, fixture8MiB/stream unchanged.
+Guardfalse, nativecount84; measurement85 allocated/unlaunched; four one-attempt
+controls unallocated. Source readiness sixfields remain open before dispatch.
+Findings1–3 source accepted atb1e05; finding4 failed actionrace correction retained.
+Latest29cfb009 per-read bound independently source-accepted: at most one unpublished
+64KiB quantum/stream, paired atomic generation, stdout8388592/stderr8388608 strict
+remaining bounds. Full85/85 ownerpure and independent affected12/12 do not certify
+native behavior. Same affected report/eight originals retained once at
+macos-control-independent-review-20261002/affected-29cfb009/.
+Two terminal defects: real observer drops validatedSSTOP status and always rejects;
+fail() closes capture endpoints while old capturing receipt remains actioneligible,
+including publicationfailure. Two failedfinding4 corrections retained.
+Authorization reconciled with current human Autonomous workflow and standing
+acceptance of recommendations: earlier root no-third-patch note was internal,
+not human sourceattemptcap. Concrete boundclosure/new diagnoses justify continuing
+SAME Expert09 source-first follow-up at30min planningcheckpoint; no newpackage,
+chain or nativeallowance. Owner fixes statuspropagation and failclosed active-state
+protocol BEFORE endpointteardown, including invalidationfailure (CONTROL-only
+hostabort-beforeteardown may be simpler). Preserve production/measurement/fixture;
+actualcallback/error/STOP RED/GREEN and SAME affected review required. Stop on
+unsoundroute/repeatedfailure withoutprogress/hardcaps, no historyreset. Foreign
+tracked prerequisite deletion/untracked assets remain preserved.
+
+### Windows private preparation
+
+Soleowner windows_private_staging_readback, VM rhai-win11-quality UUID
+dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19,4vCPU8GiB; foreigntauron untouched.
+Exact own guestroot C:\Users\RhaiTest\.local\share\agent-builds\rhai\w9e0-20261002-6f804a9c4c4a4e78.
+Single9e0GET consumed terminalcurl0/13380569bytes/SHA8291e58652a7dc8494513d910460e6dae39a716f5dfca937bda40fafcfa0caa4;
+one extraction consumed. Earlier nonexistentIsRooted guard emitted nonterminal
+errors; no retry/overwrite. Correct failfast readonly archive/path/name audit
+24expected/24actual/0differences, ancestor noReparsePoint accepted by independent
+root visual readback. Follow-up whole source subtree directories/files reparse
+scan count0 cleanprompt independently accepted; originals/readbacks retained once
+windows-staging-9e0-root-evidence/. Script17C#pins/PS5.1parser/path controls and
+exactRoslyn compiler readback still pending. PS5.1ConsoleHost; no native compiler/
+bootstrap/job/client/sourcefixture before prerequisite acceptance. Old5fe4GET
+history and Expert02 nonrenewable limits retained. Current parser/pin keyboard
+session43606 confirmedlive649chars450ms/char, noEnter at checkpoint; do not restart
+on observationtimeout. Prior61556 helper terminal observed, no restart.
+
+### Next actions and turn classification
+
+Collect Darwin322ac6 affected result; collect next Mac status/error-state source
+freeze and SAME affected result; finish Windows readonly prerequisites. Only
+then allocate applicable native runs within original caps, oneheavy/Machine,
+central unique owned scope/TMPDIR/AGENT_RUNTIME_DIR, no foreign disruption.
+Previous goalturn PROGRESS (Windows treeacceptance); currentPROGRESS: Mac numerical
+bound independently source-closed and two original defects retained, responsible
+repair continued under reconciled authority; Darwin next immutablefreeze obtained
+and same affected review dispatched. No new native acceptance or completion claim.
 
 ## Resources, counts and cause history
 Unix actual native invocation count84 consumed.82 failed before runtime;
 83 measurementCargo0 but originalouter1 due optional cmdline receipt validation.
 83 and84 are terminal; no live owned Unix process-test handle. Invocation84 was
 launched and consumed; its result is recorded in the current step and prior
-Linux84 evidence. No85 is allocated. Preserve originalfailures
+Linux84 evidence. Measurement85 is allocated but unlaunched; four one-attempt controls are unallocated. Preserve originalfailures
 and root independently accepted narrow descriptive data/cleanup readback. Linux outer598s
 plus kill2s=600s, scoped585s, driver580s, aggregate Cargo540s, jobs2, descendants16,
-2GiB policy and sampled stop1572864KiB. macOS scoped600s/Cargo540s/jobs2 with same
-policy/sample limits. Sampling is not continuous peak or enforced byte accounting.
+2GiB policy and sampled stop1572864KiB. macOS outer600s/scoped585s/work560s/closure575s/evidence580s/cleanup585s,
+aggregateCargo540s/jobs2, same policy/sample limits (Expert09). Sampling is not continuous peak or enforced byte accounting.
 New global resource-path instructions applied prospectively and recorded in
 project AGENTS: own unique ~/.local/share/agent-builds/rhai/<session-id> scope,
 absolute TMPDIR before runner, private child runtimes, exact empty-only retirement.
@@ -263,872 +237,3 @@ measured overhead, docs/examples and release integration. Reference local issues
 in .scratch/stdlib-wayfinder/issues and release-proposal.md. Preserve original
 scope; no release or goal-complete claim. Retire only exact owned clean worktrees
 after verified integration, retaining necessary original proof outside them.
-
-## Current turn classification
-Previous continuation: PROGRESS, first native original controls/cleanup preserved
-ata9612849. Current continuation: PROGRESS, d3c32ee7 custom-assertion repair
-independently rechecked against original native bytes and integrated. Eight pure
-requirements pass under own scoped runner0/runtime absent/empty scope removed.
-Unused followup1 stage/scope identities applied consistently; caps unchanged.
-First native cause failure1,23.547s elapsed,600s prior envelope retained; one
-corrected600s envelope allocated under standing goal/repair authorization.
-No existing build to reuse after required scoped cleanup. Four runtime rows and
-all original acceptance criteria retained; processcount84/measurementguardfalse.
-Nine followup inputs independently matched; fresh remote census contains only
-retained idle28950/28951 and orphan3269558(ticks87 unchanged). Native followup
-dispatched exact SSH handle97146; terminal SSH/outer/scoped1 observed. All five
-wrong-expectation controls produced101 and passed their classifiers. Restored
-combined-baseline returned101: sys_policy test_root_with_dot_components and
-test_symlinked_root failed at lines265/282 with SysError; sys_fs35 passed and
-sys_policy21 passed/2 failed. Later feature rows were not run. Preserve original
-followup-evidence and followup-launcher-evidence directories plus outer.log.
-Launcher reports runtime_cleanup/pid_readback/scope_cleanup0; fresh independent
-identity readback and production-versus-fixture diagnosis remain next actions.
-Do not accept the feature row or relaunch without diagnosis. First classifier
-failure remains separate from this newly observed restored-behavior failure.
-Fresh independent followup-root-readback.json confirms every recorded PID/start
-absent and runtime/scope absent. Followup export35.655s, 52 periodic samples
-maximaRSS921156KiB/storage912884KiB/desc10;
-samples are not continuous peaks. Production-versus-fixture diagnosis delegated
-to the existing Linux owner, source-only before review and shared acceptance.
-Mac owner froze source-only c2829b1e: private dual-stream capture observer,
-66/66 pure checks, no compilation/native launch. Independent combined review
-macos-managed-observer-review.md covers6/6 selected codefiles plus original log:
-blocking observer attaches spawn path rather than run_raw/supervise; frozen
-control source lacks feature/hook. One fix batch returned to responsible owner,
-source-only, guardfalse/count84 unchanged. Previous goal turn is PROGRESS:
-terminal native evidence changed next action, persisted originals and cleanup.
-Independent terminal readback verifies frozen seven manifest hashes, lock2ba4
-and exact reviewed helper-used bytes. Original combined-baseline output has
-seven complete successful target sections with zero failures/ignored/filtered:
-combined_sys_net1, net_connect4, net_listen7, net_reads7, net_writes10, sys_env7,
-sys_fs35 (71 total). Intended filesystem/TCP/combined controls and restored
-assertions give valid narrow native Engine/OS slices at frozen1ca/private1.77.2/
-Linux7.2.7. Preserve original receipts; sys_policy21pass2fail, whole baseline
-and subsequent feature rows remain open. Filesystem corrections require affected
-filesystem/combined rechecks; unchanged net paths retain their proof. No parent
-ticket closure inferred.
-Linux correction a2d7a8c2 source-ready, independently reviewed2/2 OCR files.
-Fresh readlink/root confirms var/roothome. Checked aliases require full canonical
-equality; retained capability-relative I/O/access/traversal remain. Regression
-includes alternate/canonical reads, denied write and fresh unchanged host bytes.
-Original two policy failures are pre-correction RED; native acceptance pending.
-Root holds exact two-file candidate changes uncommitted; frozen owner commit
-preserves these bytes. No unrelated production source difference from frozen
-input applies. Review linux-root-alias-review.md also covers mechanical helper
-repinning and five new required feature rows (nine finite total), same hard caps.
-Source archive551c03/v3lock2ba4, stage/scope suffixa2d7a8c2-20261002-policy1.
-All eight independent pure requirements pass in exact own scoped runtime0;
-empty scope retired. Nine staged files independently remote-hash matched in
-linux-policy-package-staging-readback.json. Staging SSH46736 terminal0.
-Before dispatch fresh census finds foreign E2E scoped1803689/start7945973,
-supervisor1803690/start7945975, driver1803691/start7945977 alive. Preserve these
-and idle vestra resources. No native policy run launched, scope not created;
-wait for a fresh free heavy slot while reviewing Mac fix. Finite new600s envelope
-planned (1800s cumulative outer allocation, prior observed export59.202s);
-this is not consumed work or peak use. No failed correction for policy cause yet.
-Next collect/review Mac fix and observe foreign slot; launch only reviewed
-Linux package when slot is clear. Processcount84/measurementguardfalse unchanged.
-
-Latest continuation: PROGRESS after the preceding status-only turn (NO PROGRESS
-for goal acceptance). Mac c3ac2573 affected correction independently reviewed,
-all6/6 OCR-selected files plus excluded logs and dependent receipt/companion
-callers; both source findings resolved. Integrated only nine private harness,
-overlay and original evidence files; production manifest/Unix exactly equal
-frozen00bed baseline and were not copied or rolled back. Independent root pure
-68/68 pass at macos-managed-observer-correction-root-pure.log, scoped0/runtime
-absent, exact empty root-macos-observer-pure-20261002-1 scope removed. Review
-macos-managed-observer-review.md distinguishes source closure from still-open
-native ABI/confinement/live capture acceptance. No native85 or measurement.
-Foreign workhorse1803689/1803690/1803691 freshly alive, heavy slot still occupied;
-no policy launch. Latest human AGENTS replacement (owned cleanup without default
-six-hour retention, no new legacy cache/output writes) adopted; instructions sent
-to all three reachable completed owners for their next active safe checkpoint.
-No owner restarted solely for reload; acknowledgements remain pending.
-Next responsible Mac context reconciles the stale prerequisite record against
-accepted source evidence and closes the concrete remaining tool/confinement
-source gaps under existing Expert09, without native dispatch or another review
-chain. Root renews exact Linux heavy-slot inventory before policy1 launch.
-
-Current continuation: previous status-only turn NO PROGRESS. This turn accepts
-and integrates the native root-alias correction with its original proof.
-Policy1 SSH81930 is terminal1 at private-storage preemption, not a failed source
-correction. Original proof collected; seven complete feature rows/430 tests and
-five intended failing assertion controls independently read from raw logs. Both
-original policy failures and the new ancestor-alias regression pass. Sourcea2d,
-archive551c03, lock2ba4, seven manifests and executed helper match; the two
-production candidate files are byte-identical to frozen a2d. See
-linux-root-alias-review.md and linux-policy-package-root-readback.json.
-Launcher cleanup/readback/scope0; fresh native readback confirms all21 recorded
-PID/start identities and exact runtime/scope absent. 107periodic samples give
-maxRSS964272KiB/storage1588088KiB/descendants10, not continuous peaks.
-Export84.425s; cumulative exported elapsed143.627s/outer allocation1800s.
-No hard-cap change or failed correction added for the policy cause.
-
-Linux nine-row non-process feature package CLOSED narrowly. Policy2 source5309e171
-was independently reviewed (all five files, OCR4/4 plus contract), pure boundaries
-passed, and all32 staged input hashes independently matched. Foreign tauron job
-terminal0 was observed before the single launch; KSR dev-server was preserved.
-SSH57354 terminal0; original receipts frozen84b8671f, integrated once in
-linux-current-sys-net-policy2-evidence with original launch log. Root raw coverage
-confirms combined-no-index-sync-metadata82 and combined-f3289, every selected
-target once and no failed/ignored/measured/filtered tests. Prior seven rows430
-and five meaningful controls reused unchanged: nine planned rows601 executions.
-Source/helper/contract/seven manifests match current integration and frozena2d.
-Root independent live readback: ten exact identities absent, PGID1938095 empty,
-runtime/scope absent; outer/scoped/cleanup0. 44periodic samples maxima
-RSS912224KiB/storage1000220KiB/descendants10, not continuous peaks. Export34.471s;
-cumulative178.098s observed/2400s outer allocation. No rerun, failed correction,
-hard-cap change or process85. Full platform/process/release gates remain open.
-
-Source-only preparation and status turn before this were not acceptance progress;
-this combined review/pure evidence and integration are progress. Mac owner closes concrete confinement source gaps without native
-launch; processcount84 and measurementguardfalse unchanged.
-Mac source increment93ea4244 independently reviewed2/2 OCR-selected Python
-files plus original excluded pure log and affected environment/graph callers.
-Private PATH has six pinned entrypoints only; complete26-key candidate boundary
-rejects omissions/additions while exactunitsfalse remains. Root pure68/68 passes,
-and frozen c3ac validator independently fails the new missing-candidate assertion
-for the intended reason. Original logs/replay script/review retained; both exact
-owned scopes removed after scoped0. Integrate only three frozen owner files plus
-root proof; no native launch, control, fixture or measurement. Native prerequisites
-remain open; guardfalse/readinessnot-ready/processcount84 unchanged.
-Root and both active owners confirm current instruction revision958a4538,
-including applicable project/skills/templates; neither owner has descendants.
-Windows owner resumed for already-authorized VM readiness. Reload confirmed958;
-correct root worktree and roles path supplied after absent old owner checkout.
-Foreign primary dirty checkout is preserved; no worktree recreation authorized. Goal and all remaining platform/process/release
-requirements remain open.
-
-## Current-source core MSRV package — accepted narrow gate
-Current default-core applicability CLOSED for source52d9797b, Rust/Cargo1.66.0,
-Darwin arm64, exact v3 lock. Real Engine42, spawn reserved withoutsys, wrong43
-assertion101, restored42; outer04 terminal0. Independent frozen archive/lock
-hashes,119 cached locked archive rows/statuses/assertions/sampled maxima and
-all four exact scope absences checked in core-current-msrv-root-readback.json.
-Original core-current-msrv-evidence{,-02,-03,-04}, outer logs and
-core-current-msrv-proof.md preserve attempts01index,02archive,03librarypass/
-examplearchive boundary,04acceptance, old seven historical attempts and
-Expert10 single answer/followup. No source failures or history reset.
-Four allocated540s/600s packages (cumulative2160s helper/2400s outer ceilings;
-actual elapsed not captured), jobs2, sampled2GiB storage/RSS/16descendants.
-04 sampled storage978720KiB/RSS804096KiB/descendants6, not continuous peaks.
-Full manifests unchanged; no shared cache/config/install/credentials change.
-No invocation85/process measurement. Remaining optional/platform/feature gates
-and every other ticket requirement remain active.
-
-## Immediate next actions
-Linux non-process nine-row feature acceptance is closed; preserve original proof. Collect the existing Mac owner's supported
-stable-toolchain source route and review affected prerequisites before any native
-allocation. Complete exact
-feature/toolchain confinement and installed Darwin ABI prerequisites; keep
-measurement unlaunched until declared native interruption controls pass.
-Windows native stage/parser/path/build proof remains open. Earlier exact-domain
-readback returned shut off; later authorized activation and root readback confirm
-running exact UUIDdc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19, loopbackVNC and desktop.
-Original screenshot and root receipts at windows-current-readiness-20261002/. Reconciliation against windows-vm/README.md and
-windows-monitor-staging-ownership-review.md establishes campaign ownership and
-already-authorized exact VM activation/read-only guest preflight. The shared-VM
-restart exclusion does not revoke activation of this owned domain. The earlier
-11:17–11:47 record was source-only and does not prove an exhausted human native
-allowance. Existing responsible Windows owner resumed for exact domain/capacity
-inventory, activation and actual guest/partial-console readiness only; no reset,
-reseed, install/admin/credentials/service/config/home changes or native compiler
-fixture yet. Reload current958a4538 rules/templates and acknowledge at checkpoint.
-Retain archive hash receipt and oneGET allowance: exact9e0 archive13380569bytes/
-SHA8291e58652a7dc8494513d910460e6dae39a716f5dfca937bda40fafcfa0caa4;
-read actual consumption before any transfer. Preserve bootstrap/input history,
-Expert02 and caps. Root reviews readiness before native execution.
-Previous goal turn VERIFIED WAIT: exact active Linux/Mac handles observed running
-and polled, without restart after observation timeout. This turn PROGRESS: macOS reviewed source correction and independent68/68 proof
-integrated/pushed b5245fcc; exact owned Windows VM activated and independently
-read back. Mac owner now prepares the finite Expert09 native-control entrypoint
-source-only; no native allocation85, guardfalse. Linux policy2 preparation and
-Windows read-only guest preflight continues; ordinary PowerShell launch and
-ConsoleHost5.1.26100.9444 are independently visually confirmed in original exact
-frames at windows-current-readiness-20261002/. Host frame9e33833 shows unexecuted
-partial `dir C:\RhaiQ`, not the directory listing claimed for that frame; root
-received corrected original listing frame7be595 and cancellation/clean-prompt
-frame22154aa and independently visually confirmed both. Visible entries include
-baseline-source/baseline-source-v2/runs and older control logs; archive absence
-is not inferred from a partially scrolled listing. Archive presence/hash
-remain unproven. No GET/compiler/fixture in this preflight. Timing diagnosis permits
-slower verified short-line delivery in the same responsible context; preserve
-cumulative active time and prior bootstrap/Expert02 history. No native budget reset.
-Goal active, no release acceptance.
-
-## Selected macOS measurement graph package — allocated
-One new source-discovery package: frozen00bed archive5414 / edge-only lock2ba4;
-Cargo metadata only, offline/locked, targetaarch64-apple-darwin, default features
-plus testing-environ,sys, exact stable toolchain must report1.93.0. No builds,
-script execution, fixtures, tests or measurement; no native invocation85.
-Global existing run_scoped with new own rhai session scope/TMPDIR absolute;
-private source/home/Cargo cache/target/tmp under AGENT_RUNTIME_DIR.
-Helper90s / runner120s, sampled storage<1572864KiB, RSS<2097152KiB, descendants<=16,
-jobs2. One launch; offline input/toolchain boundary stops without retry.
-Existing source integrity receipts reused; metadata alone cannot prove tool
-confinement or native ABI. Export original statuses/log/lock and scope absence.
-
-Graph package01 terminal1 after0.729s: systemPython3.9 lacks tarfile data-filter
-API, before Cargo/toolchain commands and cache copy. Frozen archive hash check
-preceded this boundary; original helper/contract/traceback preserved. Exact
-empty own scope7f44f7af7f1c4e6cacf2d65e4bf7e5be retired. This is a local setup
-error, not product/metadata failure. Existing bundled modernPython selected
-read-only (no install/home change). One diagnosed followup02 allocated85/110s;
-combined elapsed ceiling remains original90/120s (initial0.729s consumed).
-Original source package history retained; no metadata/offline retry yet.
-
-Graph02 terminal1: rustc/cargo1.93.0 probes0; metadata101 before graph due missing
-private offline crates.io index rowtoml_write0.1.2. Exact edge-only lock2ba4
-unchanged; public archive/source checksum already accepted. Source/metadata
-assertions not executed, so not product failure. Original logs/statuses retained;
-exact empty own5fbe99a075a34c009aebb9f99246aa0b scope retired. Samples storage
-715712KiB/RSS77440KiB/descendants3, not continuous peaks. Filesystem timestamps
-bound observed active package02 near4s, not exact monotonic elapsed.
-Concrete index diagnosis reuses accepted Expert10 online-locked input route;
-new reversible03 index completion selected within original90/120s active-run
-planning envelope:75/100s, unchanged resource stops, no build/fixture/native
-allocation. Prior0.729s plus approximate4s consumption retained, no history reset.
-No default launch-count approval gate; stop03 on changed lock, toolchain mismatch,
-network/deadline failure or unresolved graph. No resolution/version changes.
-
-Graph03 terminal0, exact lock2ba4 unchanged, rustc/cargo1.93.0 probes0 and
-metadata0. Original elapsed5.527903584s; samples storage748876KiB/RSS76720KiB/
-descendants3. Independent read-macos-selected-graph.py verified all62 package
-name/version/source lock rows,62 resolve nodes,3 workspace members,61 reachable
-from Rhai, statuses, sampled limits and all3 exact scope absences. Receipt:
-macos-selected-graph-root-readback.json. This closes locked metadata source
-discovery only. Metadata includes workspace feature union (metadata enabled by
-codegen's dev Rhai dependency); conservative build/proc-macro candidate list is
-not an exact executed unit graph, confinement or native custody acceptance.
-No compilation, fixture, control, measurement or invocation85 occurred.
-
-Global056b17c rules and owned project's AGENTS reloaded; campaign repair rules
-reloaded because estimate/approval/resource handling applies. Existing strict,
-automatic fork push/coordinator merge and main-only remote scope unchanged.
-No new home install/config mutation or foreign resource cleanup.
-
-Mac source correctiona723 received; review found CLIENT_CODE execv selects the
-nonexecutable driver.py rather than Python. Returned exact interpreter/vector
-repair and meaningful pure regression to responsible owner, existing09 history,
-source-only. Its first followup failed before work due prompt rejection; a
-narrow source-only followup was dispatched, no native/resource slot consumed.
-Additional observed-ledger correlation question: ps and later Darwin census
-are correlated by PID/PPID/PGID without start identity; disappeared sampled rows
-are skipped. Owner must preserve uncertainty and assess the original observed
-PID/start union requirement. Full a723/followup acceptance remains open; false
-launch guard and all explicit caps stay intact. Original2f review retained.
-
-Previous goal turn PROGRESS: locked metadata source discovery independently
-closed and published as eedba0fc1ff632dce64f9fad0b1616bcf433c178; remote readback
-only main matched exactly, root clean. Current owner handle revalidated running.
-Independent selected-source confinement review is the next available source-only
-requirement: use conservative61 graph candidates and already accepted source
-integrity; review actual executable build/proc-macro paths and subprocess/session
-selection, not lexical absence alone. A fresh Standard context may read these
-foreign source inputs without modifying them and produce a report in its own
-task worktree. Thirty-minute active-work checkpoint, no execution/native/build
-allocation, no new cause09 Expert chain; source gaps stop native readiness.
-
-Frozen Mac followupfdb9cf207158cff0635b500f26664a89bc2af5ab received,2 affected
-files reviewed through OCR preview/rules (2 reviewed,0 skipped). Exact Python
-client vector fixed. Native full-tuple ledger union retained; ps correlation
-cannot exclude same-second PID reuse, so architecture acceptance remains open.
-Independent pure replay allocated: one own scoped package100s outer;4 checks at
-most20s each plus source copy/receipt, no builds/native/fixtures/measurement.
-Positive26, wrong interpreter-vector assertion RED, originala723 disappeared
-sample assertion RED, restored26. Existing cause09 history retained; expected
-negative assertions do not count as failed corrections. Preserve every original
-log/status and exact empty scope absence before accepting this narrow gate.
-
-Independent pure replay terminal0: positive26/restored26 pass; wrong client
-vector1 and originala723 silent disappeared-row logic1 each fail by the intended
-assertion (no harness ERROR). Helper elapsed0.821657458s, no build/native launch.
-Original receipt/logs in macos-custody-source-root-evidence; owned exact scope
-root-mac-source-6b613d7a9e5a43dd8c12fcba1f1a310d retired empty. These narrow
-regressions are accepted; sole-custodian/native architecture remains unaccepted.
-Integration attempt of a723/fdb without their unaccepted2f prerequisite conflicted;
-exact own cherry-pick aborted successfully. Root returned to eedba0fc with own
-state/evidence intact. No source changes reached main, no foreign work changed.
-
-Return-to-goal checkpoint: full PID/start custody observations must support honest
-closure and sampled resource bounds. The remaining ps/native same-second join is
-a chosen technique, not a requirement. Existing Expert09 already prefers native
-passive sampling. Next source-only correction can remove ps ancestry/RSS joins:
-add identity-bracketed PROC_PIDTASKINFO RSS to the existing Darwin reader using
-the installed header (flavor4; resident size bytes), take census identities and
-resources from that one reader, persist full tuples even on later sample failure,
-and retain current conservative path/closure checks. Pure injected ABI/identity
-race controls precede any native call; reader ABI and native controls remain open.
-Responsible owner may finish this in existing09 source package at a30-minute
-active-work checkpoint; no new Expert chain/native slots or hard-cap changes.
-
-Independent current optional MSRV compilation prerequisite is available: accepted
-old Darwin1.77.2 proof applies to source0c2dda12; current process manifest/source
-diff contains8915 added/changed lines including Unix adapter, so its compatibility
-cannot be inferred. No1.77.2 toolchain is currently installed on this Mac. A new
-owned private build dependency may be staged solely under scoped runtime (as in
-accepted optional proof); never install/update shared toolchain/home. Prepare one
-source-reviewed bounded check of exact9f84aa6d source/full manifests/lock2ba4,
-Rust/Cargo1.77.2, sys+net+testing-environ library compile, jobs2/debug0/incremental0,
-sampled storage/RSS2GiB and descendants16, helper540/outer600 including setup and
-export. No tests/fixtures/native reader/process measurement; no invocation85.
-This is a new changed-source compatibility prerequisite, not a restart/reset of
-old accepted package or full native behavior acceptance. Freeze helper for root
-review before execution; preserve all outcomes, stop lock/toolchain/assertion or
-resource/deadline failure. Thirty-minute active-work preparation checkpoint.
-
-## Current instruction application and active work
-
-Global instructions at commit056b17c and this project's AGENTS were reread on
-2026-10-02. Relevant changed campaign/review rules were reloaded. Existing human
-authorization covers the current finite source correction, review and compiler
-prerequisite; stale pending labels do not revoke it. All accepted evidence,
-cause09/Expert09 history, actual84 native invocations and hard caps are retained.
-Use one combined independent review per coherent package; specialist input needs
-a named risk. Related requirements may share integrated acceptance. One heavy
-build/E2E per Machine is the default: check recorded cross-session active work
-before launch and never stop foreign processes. Source review/light tests can
-run concurrently. Worker is mechanical only, Standard implements rule-heavy
-helpers, Expert performs independent review. New temporary runs use unique owned
-scopes under ~/.local/share/agent-builds/rhai, absolute TMPDIR and private runtime
-outputs/caches; existing resources are not moved or cleaned.
-
-Active source-only combined review: macos_custody_combined_review, exactb2db6448
-package plus previous material findings and named build-helper confinement risk.
-No native/build/control/measurement launch authorized by this review itself.
-Selected-source reportd162e84fb9305043cfdfc091ff4aeda311b6c003 accounts27 candidate
-targets/58 source units; root read full report and independently confirmed libc's
-unconditional PATH emcc probe in the accepted source. Accept its candidate-source
-analysis narrowly; exact compiler/wrappers/PATH/SDK/helper confinement remains open.
-Current optional helper preparation is active in current_optional_msrv_prepare_v2;
-earlier spawn capacity rejection launched nothing and consumed no compile/native
-slot. No heavy job has been launched in this current step.
-
-Independent b2db source regression replay allocated: own exact scope
-root-native-source-20261002-a8b73f24; outer100s, six pure Python commands at most
-10s each plus source copy/export. Run reader19/adapter25, deliberately wrong RSS
-rounding and omitted start-microsecond comparison, then restored19/25. No native
-API/build/fixture/control/measurement; no native slot consumed. Preserve original
-logs/statuses and verify exact empty scope retirement before narrow acceptance.
-
-Replay completed outer0/helper0.966804959s: reader19/adapter25 pass, both intended
-AssertionError controls fail1 (not harness errors), restored19/25 pass. Original
-macos-native-sampling-root-evidence receipt/logs retained. Exact owned scope was
-retired by empty-only rmdir and independently observed absent. Accept these two
-source regressions narrowly; native task-info ABI/readability, full architecture
-and interruption acceptance remain open. No native85/build launched.
-Heavy-slot coordination read the two other active project chats: AUTHZ work is
-on lllm, Patrol work on workhorse; no permission to message or alter those jobs.
-Local compiler process inventory will be checked immediately before any Mac
-heavy launch. Their remote heavy runs do not occupy this Mac's one-run convention.
-
-Combined independent review completed at b2db: six changed files reviewed, none
-skipped. Original macos-custody-combined-review.md records four material findings:
-measurement bytes/text boundary, final acceptance omitting cleanup_complete,
-startup connection wait consuming closure reserve, and duplicate same-runtime
-records rejected by wrapper. Source readiness remains unestablished. Same owner
-macos_overhead_safeguards was continued for one consolidated TDD source-only fix
-batch at a30-minute active-work checkpoint, preserving cause09/Expert09/history,
-false guard and all hard caps. No native/build/control/measurement permission is
-created by this review. Recheck affected boundaries and prior findings at the
-corrected immutable revision; do not restart unaffected review/proof.
-
-Current optional compile helper preparation completed and root read the full
-helper/contract. Root found missing SOURCE cwd before archival; owner corrected
-explicit archive cwd=existing RUNTIME, compile cwd=extracted SOURCE, with pure
-source-boundary/syntax checks. Frozen source has no tracked .cargo configuration;
-private HOME/CARGO_HOME/RUSTUP_HOME and closed environment prevent shared config
-use. This was a prelaunch setup correction, not a failed compile. One bounded
-compile launch is now allocated under existing helper540/outer600 limits (work510
-reserves30 for export), own scope root-optional-msrv-20261002-c96f1a72. Local
-inventory shows no Cargo/rustc/Rustup/compiler/build process; observed Dart MCP
-servers are idle service processes, not heavy builds. Other active project heavy
-work runs on lllm/workhorse. Check only frozen9f84 sys/net library Rust1.77.2,
-locked2ba4, jobs2, no target API/fixtures/native85. Original logs/export and exact
-runtime/scope readback are required; no acceptance until actual result is read.
-
-Instruction revision and correction checkpoint (2026-10-02): root explicitly
-reread global and project AGENTS, campaign, OCR delegate, E2E proof, roles and
-current Codex coordinator templates at installed agent-skills revision
-4d86b5f774a95111b56e9cbcf9c9882d7303a7a9. Active macos_overhead_safeguards received
-the update through the existing control channel and explicitly confirmed that
-same revision after rereading global/project instructions, TDD/campaign and its
-current coordinator template. It confirmed no active descendants. No active
-subordinate is unreachable or awaiting this update; completed agents were not
-restarted just to reload. Future agents must load the current on-disk revision.
-No process, build or test was interrupted or repeated because of the update.
-
-The same owner froze the four source fixes at18d64de68e46f7e837d6874ac2faff1393f5bf03,
-parentb2db. Root reviewed all five OCR-previewed changed files and affected
-callers against the existing combined review; no skipped files or new material
-findings. The four source findings are closed by inspection; owner19 reader and
-29 adapter/source pure checks are reported green, not independent native proof.
-Native ABI, confinement, interruption, escaped-leaf and runtime acceptance remain
-open, false launch guard and count84 unchanged. See the combined review follow-up.
-
-Current optional helper review accounts for its one OCR-reviewable Python file
-(100% reviewed) and manually reviewed contract. The state/contract were OCR
-excluded only by unsupported extension. Archive cwd correction is confirmed;
-no remaining material source finding. Immediate renewed slot inventory found a
-foreign Playwright gate with Chromium child78440 around693% CPU, so the earlier
-no-local-build observation is superseded. Do not launch the allocated compiler
-while that heavy E2E occupies this Mac. Scopec96f1a72 remains uncreated and compile
-allocation unconsumed. Continue light source/readback work; recheck slot before
-the single bounded compile. Preserve foreign processes and their outputs.
-
-Root correction replay allocated: frozen18d64, eight source/parser files in
-private scope root-correction-20261002-f01c39b2, outer100s, each command10s.
-Reader/adapter positive, four intended AssertionError controls (cleanup gate,
-startup deadline, exported summary expectation, duplicate runtime rejection),
-restored reader/adapter and exact file restoration. No Cargo/target fixture/native
-control/measurement; existing count84 and all prior acceptance/history unchanged.
-Heavy Mac slot remains occupied by exact Chromium PID78440 under Playwright.
-
-Root correction replay terminal0 in2.18412675s:19 reader/29 adapter positive,
-all four controls status1 with one intended AssertionError and noERROR, restored
-19/29 green. Exact eight source/parser files match frozen18d64. Original logs and
-source hashes in macos-correction-root-evidence; independent cleanup receipt
-confirms runtime agent-build-bwyqfliy absent and exact empty scope retired.
-No target fixture/native control/measurement or heavy build. Accept these source
-regressions only. Same responsible owner resumed for existing source readiness:
-SDK constants/layout/signatures and current Darwin provenance; exact toolchain/
-helper/config assumptions. Current4d86 instructions required from start, no new
-Expert chain/review, one30-minute source planning checkpoint and guardfalse.
-
-Optional MSRV compile dispatch checkpoint: previous live Playwright PIDs78437/78438/78440 are now absent; renewed compiler/headless inventory is empty. One previously allocated source9f84 check launches now, same scope/caps/lock; no target fixture or native85.
-
-Current optional MSRV compile CLOSED narrowly: frozen9f84, direct Rust/Cargo1.77.2
-Darwinarm64, compatible lock2ba4, cargo check --locked --lib --features
-testing-environ,sys,net. Source archive/install/versions/check all0; outer0.
-Original current-optional-msrv-evidence includes independent root-readback:
-seven Cargo manifests match frozen Git source, lock matches, rustc host/version
-and exact Cargo argv match, dev completion exists, no failure artifact. Export
-at37.84s; sampled maxima storage622252KiB/RSS799552KiB/descendants4, not continuous
-peak. Exact runtime agent-build-9uhi7a7a independently absent; own scope retired
-empty-only. No relevant src/build.rs/Cargo/codegen/config diff9f84..1928c068, so
-compile applies to current integration. No target fixtures/native85 or feature
-behavior acceptance. Private Rustup home/toolchain removed by owned runtime
-cleanup. Linux/Windows optional current MSRV and native final feature matrix open.
-
-Next release compiler prerequisites: same optional-helper responsible context
-resumed to prepare, not execute, one private Rust1.77.2 compile feature package.
-Ten approved rows: sys alone, net alone, net+no_object, combinedsync, no_index,
-metadata+serde, only_i32+no_float, unchecked, no_index+sync+metadata andf32_float.
-Baseline combined9f84 proof is reused; same production/manifests unchanged through
-4baf. Direct private toolchain, locked2ba4, jobs2, outer600/helper540 and existing
-storage/RSS/descendant safety caps proposed; root source review/slot check before
-dispatch. No script/test/example/fixture/native execution or count85. This is
-compile prerequisite work only; full Engine/native release acceptance staysopen.
-Preparation checkpoint30minutes, current4d86 reload/ack required. Mac source owner
-continues ABI/header and exact helper assumptions, identified SDK path mismatch
-and reports meaningful TDD plus narrow pure20reader/30adapter checks; source
-increment is not yet frozen or root reviewed. No native launch/readiness claim.
-
-
-Rules propagation at revision4d86b5f774a95111b56e9cbcf9c9882d7303a7a9 CLOSED for
-all active owners: root, macos_overhead_safeguards and current_optional_msrv_prepare_v2
-explicitly reread global/project rules, relevant skills and current coordinator
-and role templates. Both owners confirmed no active descendants. Completed Windows
-owner was not resumed solely for the update; its loaded revision is not reconfirmed.
-No running process interrupted, no review/build solely for the update.
-
-Mac ABI/SDK increment4aa1988 source-only recheck CLOSED narrowly. Three OCR-selected
-files reviewed, no skipped files or new material finding. Root scoped replay20
-reader/31 adapter green; wrong SDK, waitid constant and TASKINFO field-type
-controls each produced intended AssertionError, restored20/31 green and exact
-frozen eight files. Original macos-abi-root-evidence retains receipt/logs; runtime
-agent-build-e_rdstno absent and owned empty scope retired. Native ABI/access,
-exact executed helper graph/confinement and lifecycle controls remain open;
-launch guard false, native count84 unchanged. Prior unchanged18d correction
-proof remains applicable. Architecture chain remains outside root integration.
-
-Current ten-row compiler helper and contract prepared by the existing responsible
-owner; source review covers the full helper and contract against accepted baseline.
-Private1.77.2/v3lock2ba4, frozen4baf, closed homes/env, ten exact commands, one target,
-per-row receipt/export and unchanged resource/deadline caps. Slot inventory shows
-no active Cargo/rustc or heavy Chromium gate (idle MCP servers are preserved).
-One compiler-only package allocated now: root-feature-20261002-29bc7f16,
-outer600/helper540/work510, jobs2/desc16/RSS2GiB/storage preemptive1.5GiB.
-No target tests/fixtures/native controls/measurement or native85; partial failures
-remain unaccepted. No automatic retry or hard-cap increase.
-
-
-Ten-row current feature compiler allocation terminal0. Root independent receipt
-current-feature-compilation-evidence/root-readback.json confirms ten exact rows,
-statuses0/dev completion, direct Rust/Cargo1.77.2 Darwinarm64, seven frozen
-manifests and unchanged v3lock2ba4; original logs/helper-used/contract retained.
-Sampled maximaRSS735200KiB/storage733948KiB/descendants7, export74.811s; these are
-periodic maxima, not continuous peaks. Owned runtime and empty scope absent.
-Compiler-only requirement accepted; native behavior/matrix remains open.
-Active owner source audit continues at current4d86; no native85 allocated.
-
-
-Next prerequisite checkpoint: Mac source audit140eed identifies actual current
-Cargo/rustc/Xcode tool resolution and absent ancestorCargo config/emcc. Root
-read the full one-file report, accepting point-in-time path/source assumptions
-only. Concrete source gap: version outputs are printed but not enforced.
-Existing owner continues minimal fail-closed preflight under cause09/Expert09
-with pure mismatch and pre-archive-placement tests, same guardfalse/count84/caps.
-After freezing, next source prerequisite is the finite four-case native control
-controller/companion; no repeated broad audit or native dispatch yet.
-
-Linux compiler prerequisite preparation uses frozen1ca21e32/v3lock2ba4 with
-baseline plus tenpositive feature rows and a separate sys+no_object negative
-check (Cargo101 plus exact intentional diagnostic). Existing optional-helper
-owner prepares only, one integrated runtime/proposed600/540/510s and unchanged
-caps, no targetfixtures/native85. Latest authoritative workhorse process inventory
-supersedes the old G40 sample:
-foreign G41 timeout724515/run_scoped724516/Cargo728546 and active rustc733077,
-733364,733312,733366 occupy the heavy slot. Preserve all foreign work and renew
-exact inventory before any compiler dispatch; disappearance of G40 alone did
-not release the slot.
-Current turn continues progress from the previous ten-row accepted closure;
-no true campaign-wide blocked condition, no release completion claimed.
-
-
-Current rules propagation reconfirmed: root and both active owners explicitly
-loaded agent-skills4d86b5f774a95111b56e9cbcf9c9882d7303a7a9 globals/project rules,
-relevant skills and role/coordinator templates. Both owners report no descendants.
-Completed Windows owner is not active and its loaded revision remains unconfirmed;
-no restart solely for reload. New agents must load current rules from disk.
-No process interruption or duplicate build/review was caused by the update.
-
-Mac fail-closed tool preflight e88aa80b source follow-up CLOSED narrowly: root
-reviewed all3 OCR-selected files and affected RPC callers; no material finding.
-Pure replay in own scope root-preflight-20261002-71649b8a (outer100s/command10s)
-returned20reader/34adapter positives and restored checks; identity mismatch and
-unreviewed query controls each produced meaningful AssertionError. Original
-macos-preflight-root-evidence retains exact statuses/logs/eight source hashes;
-helper1.132073667s, outer0, runtime absent/empty scope retired independently.
-This is source-only proof: native count84, no85 allocation, guardfalse and cause09
-history/caps preserved. Same owner now prepares the finite four-case control
-controller/contract from Expert09, with no native dispatch. Linux11positive plus
-1negative compiler helper remains in preparation; workhorse occupied, no launch.
-
-
-Latest completed step: Mac control-finalization correction0ecfc6e4 independently
-reviewed against01a14793, three OCR source files plus affected callers and contract;
-no remaining material source finding. Original receipt/logs at
-macos-controls-root-evidence-02:20reader/49adapter positive/restored; missing-ledger
-and premature-EOF mutations each meaningful AssertionError/status1. Initial replay
-used wrong protocol-test selector, preserved atmacos-controls-root-evidence as
-setup history, corrected within finite pure package. Runner0/runtime absent/exact
-empty scope retired. Native count84/guardfalse/cause09/hard limits unchanged.
-Managed task-count source inference remains conditional, not native acceptance:
-exact4 could still conceal OS/runtime helper threads; matching XNU/ABI open.
-
-Latest user propagation checkpoint: root plus both active owners confirmed
-4d86b5f774a95111b56e9cbcf9c9882d7303a7a9 globals/project AGENTS, relevant skills,
-roles and both coordinator templates explicitly loaded. Neither has descendants.
-Completed Windows owner remains revision-unconfirmed, not restarted for reload.
-No process interruptions or duplicate builds/reviews caused by the update.
-
-Superseded staging snapshot: the examples are accepted and Linux was dispatched;
-current outcomes and next actions are recorded above. Preserve foreign work.
-
-
-Linux current optional compiler dispatch: authoritative1172268/1172269 G42 r5
-handles absent and noCargo/rustc/Dart compiler present. Foreign P01sourceclosure
-1196569/1196570 is source format/diff/documentation/public-text plus private
-npm/unitPlaywright/registry checks; inspected driver explicitly says nofullstack.
-This is light source acceptance, not another heavy build/E2E. Preserve it and
-idleKSR28950/28951. Dispatch exactly staged Linux11positive+1negative compiler
-package under existing600/540/510/export30, jobs2/desc16/RSS2GiB/storage1.5GiB
-limits. Existing source review/interruptionexport proof applies unchanged;
-launch.shhash3b3a50 matches staged receipt. No processfixture/control/measurement85.
-Original remote outer-evidence and local linux-current-feature-outer.log/.status
-identify this one invocation; no staging or retry/cap expansion.
-
-Latest rule-update checkpoint: root reread disk globals/project AGENTS, campaign,
-e2e-proof, OCR-delegate, repair-package, roles and both Codex coordinator templates
-at4d86b5f774a95111b56e9cbcf9c9882d7303a7a9. Active Mac owner confirms revision
-and no descendants. Existing optional owner explicitly confirmed reload of globals/project rules,
-campaign/TDD and repair references, roles and both coordinator templates at the
-exact revision; it reports no active descendants. Completed Windows
-owner remains revision-unconfirmed and was not restarted solely for reload.
-No process interruption or new build/review solely for rule changes.
-
-Current workhorse slot observation: foreign G43 runner1202246, supervisor1202260
-and driver1202292 subsequently disappeared (exact ps lookup returned1). Fresh
-/proc inventory found noCargo/rustc or G43 runner. Preserved scoped supervisors
-28951 (idle KSR) and1198110 (P01 source closure) remain. No Linux dispatch yet: the
-source repair/review is pending, and renew the slot inventory just before launch.
-The responsible Linux owner confirmed the update and uses its newly owned managed
-worktree linux-msrv-helper-repair for source-only TDD; original remote stage remains
-immutable. Both active owners and root have now confirmed4d86b5f; completed Windows
-context is still revision-unconfirmed, not active or restarted for the update.
-Previous goal turn classified PROGRESS: original Linux failure/cleanup evidence
-and accepted Darwin raw lock were committed/pushed as1899acb6, independently read
-back on fork main with no other remote branch.
-
-Previous status turn classified PROGRESS: authoritative terminal Linux receipts
-changed the next action from polling to acceptance. Current turn closes the
-Linux compiler prerequisite by independent input/result/cleanup readback.
-
-Previous turn PROGRESS: net-only proof source applicability was resolved and
-committed2a9a75b5. This turn verifies two live responsible agent handles and the
-new Linux preparation RED evidence; no build/native allocation or acceptance.
-
-Process documentation correction: independent review completed, including
-narrow readback of the synchronous-spawn caveat. OCR selects no code for this
-docs-only change; manual source review supplies coverage of the changed doc.
-No build/native85 dispatch. Previous reviewer-spawn thread-limit failure created
-no agent; existing independent Mac owner performed the review.
-
-Current continuation: previous turn PROGRESS: immutable affected review closes
-three source findings and reproduces remaining action race; source acceptance
-preparation dispatched and evidence pushed. Root/fork main be4ff8dc6ea8aac011656e63afedf3571ccdedad
-was independently read back as sole remote main. This turn continues same scope.
-Linux nine-row non-process package remains accepted601 at unchanged production
-inputs. Process/full release remains open.
-
-Current Mac step: combined review of43fa6a05 found four material issues;
-original/affected evidence retained at macos-control-independent-review-20261002/.
-Correction b1e05e0f80b62f7a16dfe356da35fda184f0e144 closes findings1–3:
-original three injected regressions GREEN, source suite78/78 and affected7/7.
-Finding4 remains HIGH: runnable fixture can finish after comparison before host
-KILL. One failed implemented correction for this source cause; native cause09
-and count84 preserved. Exact-host STOP alone and four task count are insufficient.
-Owner's remaining-output witness investigation found installed SDK PIPE_SIZE16KiB,
-BIG_PIPE_SIZE64KiB and aggregate PIPE_KVAMAX16MiB do not establish a supported
-per-pipe maximum. Existing fixture emits stdout8388592/stderr8388608 bytes;
-unsupported64KiB maximum must not be used. Original80-test RED with two missing
-STOP/witness assertions stays in owner's macos-controls-correction-20261002/;
-this is informative unimplemented source boundary, not a second failed correction.
-Root now resumes the same owner on a concrete passive pipe-state alternative:
-installed SDK PIPE_WANTW0x010 means writer wants space, public pipe_info exposes
-pipe_status/handles. Apple's public XNU sys_pipe.c fills pipe_status from pipe_state
-and sets WANTW on read side before write sleep. Source URL:
-https://raw.githubusercontent.com/apple-oss-distributions/xnu/main/bsd/kern/sys_pipe.c
-This is corroborating source, not matching installed Darwin27/xnu13432.1.9 proof.
-Investigate stopped exact host's actual two read descriptors, peer binding, no
-other readers, interrupted-write stale bits and source applicability before code.
-Owner concludes pipe-state candidate unsupported: SDK lacks live/atomic peer
-semantics, unmatched kernel source and interrupted-write stale bit remain gaps.
-No code/native changes. SAME affected reviewer clarified original contract: blocked writer syscalls are
-not required when both real capture streams have positive reads and strictly
-uncollected output at confirmed host STOP. Post-KILL fresh same PID/start LIVE
-fixture rejects pre-action whole-process exit, but alone cannot fix stale counters.
-Current b1e05 observer publishes once then repeated reads occur;64KiB is only
-one read budget, not an upper bound on all unpublished reads. Both original
-clarifications retained once in macos-control-independent-review-20261002/.
-Root resumes same owner with concrete source-supported correction: atomic paired
-identity/helper-bound publication after every bounded read/per-iteration, at most
-one unpublished64KiB quantum per stream, conservative upper totals strictly below
-both frozen payload lower bounds8388592/8388608 at exact confirmed host STOP,
-then exact owned-host KILL and independent samefixture LIVE after submission.
-Unknown/zombie/reused/absent or raced completion fails the one-attempt control.
-No writer-blockage/pipe-capacity claim; unchanged fixture/timer. Original source
-REDs for stale repetition/STOP publication boundary/completed stream/action race,
-publication failures and postaction identity required; source-only freeze/recheck.
-This preserves one failed finding4 correction/cause09/native totals; concrete new
-insight justifies continuation at same30min active planning checkpoint, not reset.
-No native API/control/build launch authorized by this source investigation;
-no capacity inference/fixture mutation/new Expert09 chain/history reset.
-Guardfalse; allocation85 unlaunched. Thirty-minute active-work planning checkpoint
-retains actual safety caps. Six source readiness fields remain unaccepted;
-actual native outcomes must not become circular pre-control prerequisites.
-
-Current Windows step: sole bounded9e0 GET terminal status0,13380569bytes,
-SHA8291e58652a7dc8494513d910460e6dae39a716f5dfca937bda40fafcfa0caa4.
-Root independent visual/readback of original guest frames accepted transfer ONLY,
-retained once windows-staging-9e0-root-evidence/ at2c4c5a9. Exact guestroot:
-C:\Users\RhaiTest\.local\share\agent-builds\rhai\w9e0-20261002-6f804a9c4c4a4e78.
-No live GET/no retry. Root independently viewed
-ancestors-line/result originals: cancelled draft extraction line, eight existing
-ancestors through C:\ all Directory/no ReparsePoint/no errors, terminal prompt.
-Two exact digest-checked frames and narrow ancestry readback retained once at
-windows-staging-9e0-root-evidence/; extraction was submitted once. Owner reports count24 but readonly guard
-used nonexistent IO.Path.IsRooted instead of IsPathRooted; without Stop preference
-errors were nonterminating. No extraction retry/overwrite/GET/native. Classified
-as local setup/API error, not implemented native correction; owner continues
-readonly exact archive member/tree safety, expected24 names/digests/17C#pins, new
-destination ancestor reparse checks, correct rooted/upward/resolved-prefix guards
-with ErrorActionPreference=Stop; actual unsafe/outside write or ownership doubt
-must stop and be reported. Terminal originals/root readback pending, so extraction
-not accepted from count alone.
-Then PS5.1 parser/path controls/exact Roslyn readonly prerequisites;
-no compiler/bootstrap/job/client/fixture/native before root prerequisite readback.
-Older5fe4 GET history and Expert02/nonrenewable client30min/source-fixture1h,
-setup120/closure30/finalization30 and actual resources remain binding.
-No install/admin/credential/service/shared resets.
-
-Current Darwin non-process step: prepared2d52bf0b87a684b87222436795dcfc73875a7ce8
-failed one combined independent source review, now retained once at
-current-darwin-sys-net-source-review/ (seven original report/OCR/pure receipts).
-F1 actual EILSEQ normal-return marker yields false pass; missing named inventory
-and repeated summaries also accepted. F2 query errors/reparenting falsely prove
-absence; exact stable identity and actual group/descendant closure required.
-F3 central TMPDIR makes /var replacement no-op; two system-prefix paths duplicate.
-F4 merged streams conflict with contract and exported success/uncovered summaries
-ignore actual coverage. Same responsible owner actively repairs all four in one
-batch with meaningful RED/GREEN. cfg(macos) scoped distinct prefix test correction
-permitted: /var/../../Users/... and /private/var/../../Users/..., independently
-canonicalize both to exact owned fixture, require distinct strings, fail layout
-mismatch. Freeze changed test/source revision before archive/helper provenance.
-Unchanged production and unrelated Linux proof retained where applicable.
-Fixture correction frozen50af89515fa2094c9c10bf03e98b89f00291c57f, archiveSHA
-12f66ac017d8c54e95f7bf38a9319f1e379446168bd9d102a9ff7b52dbe5327a.
-Owner source-only checkpoint reports seven pure categories GREEN: named inventory
-with specific F19 uncovered, status0 incomplete coverage retains per-test outcomes
-and continues later rows but overall fails; cleanup tri-state/PIDstart/groups
-and sampled descendant identity retention. Helper/provenance correction frozen8b9740de8e4493c78320293d3a07599672f22484,
-clean owner checkout. SAME combined independent reviewer rechecks F1–F4; live checkpoint reports F1/F2
-materially addressed, two remaining blockers: stdout-then-stderr parser orders
-summary before Cargo target headers and raises, and first corrected alias test
-keeps ordinary /Users Engine root so static policy denies /var spelling. Affected
-report/revision/12originals retained once at current-darwin-sys-net-source-review/
-affected-8b974/. Same owner resumed one consolidated F3/F4 source-only correction:
-configure/read SAME prefix-root directory; exact stderr header sequence paired
-with successive stdout libtest blocks in honestly derived target order (or equally
-reliable bounded method), real split-stream multi-target RED and alias policy
-regression required. Freeze corrected macOS test source before new archive/helper
-provenance; no Cargo/native. First failed implemented correction for F3/F4,
-not a reset of initial review history. The second consolidated correction is now
-frozen: cfg(macos) test/source2f795ecee8edd6ddf348f382e5397cc6e348ad37, archive
-43c8b8e43a2bcd3e74dd0be3d60a0dea2eab50eb5bfe65cc736684631523d52b; helper/provenance
-4c4a81e0551f6e6d5c56112de7febda0101ce27f. Root read immutable diff summary and
-original structured RED/eight-category GREEN receipts in the owner worktree.
-Same affected reviewer dispatched on this exact freeze; F1/F2 retained, no broad
-redo or native launch. Await independent outcome before source integration.
-A second same-cause failure requires the recorded single escalation, not a third patch. Original injected regressions and valid F1/F2 preserved.
-No source integration/native acceptance before this affected checkpoint.
-No native/build/toolchain/control/measurement dispatch; affected combined recheck
-at frozen repair required. Genuine EILSEQ early return remains uncovered.
-
-Last independently read-back fork mainb1598b1cdd30e807fc69c432345da888e1615fc2.
-Lowercase author and committer independently checked; root checkout clean before
-this state update. No upstream writes. Current disk instructions958a4538 unchanged.
-Previous status-only goal turn: NO PROGRESS. This continuation yields new evidence:
-Darwin second F3/F4 source correction frozen and same affected recheck dispatched;
-Mac owner reports four meaningful source REDs plus per-read/publication/post-KILL
-implementation in progress, not yet frozen or accepted; Windows exact live key
-injection handle54608 entering fail-fast readonly1349-character audit, no Enter
-at checkpoint. One GET/extraction remains consumed; no native launch or retry.
-All three owners confirmed live through collaboration state this continuation.
-Next: collect immutable Darwin affected outcome; collect frozen Mac per-read bound
-and post-KILL-live correction for same affected review; complete Windows exact
-archive/tree/pins/parser/Roslyn prerequisite readback. Preserve native totals,
-accepted Linux proof and explicit caps; goal remains active.
-
-Affected Darwin4c4a81e live independent finding: F3 configured-root policy now
-matches. F4 clean split association works, but coverage uses parser_core and
-excludes appended stderr diagnostics; actual stderr-only EILSEQ false pass
-invalidates F1 diagnostic acceptance under this new derivation. Same reviewer
-terminal report and12 original files retained once at
-current-darwin-sys-net-source-review/affected-4c4a81e/. Root read exact receipts:
-actual stderr skip falsely coverage_found=true; full preserved parser input
-correctly rejects and marks only F19 uncovered. Native launches0. F3 source
-accepted and F2 retained; new derived-path F1 invalidated only for EILSEQ.
-Also contract stage/scope2f795ece conflicts with helper enforcementa2d7a8c2.
-No third direct patch.
-Two failed implemented F4 corrections preserved (8b974 ordering,4c4a diagnostics).
-Required first cause-specific escalation brief prepared at
-escalations/11-darwin-split-stream-coverage.md; fresh nonfork Expert
-darwin_split_stream_coverage_expert dispatched with terminal original report,
-actual-stream receipts and stage/scope mismatch. Source-only30min planning checkpoint;
-one Expert/one bounded follow-up, no native allocation/history reset.
-
-Previous goal turn: PROGRESS (immutable correction/review finding and cause11 brief).
-This continuation: terminal affected report independently read and retained;
-first cause11 fresh Expert dispatched. Goal active, no native acceptance yet.
-
-Windows fail-fast readonly audit terminal accepted narrowly by root original
-visual/text readback: expected ZIP24/extracted files24/name differences0;
-rooted/upward/drive checks and exact destination containment pass; destination
-ancestors have no reparse attributes. Original frames/command/setup-error and
-audit-tree-root-readback.json retained once in windows-staging-9e0-root-evidence/.
-The printed reparse0 is constant plus fail-closed ancestor loop, not whole-tree
-enumeration: owner instructed to check every extracted subtree item explicitly
-before claiming tree nonreparse.17 C# pins/script/parser/Roslyn still pending;
-one extraction/GET consumed, no retry or native launch. This continuation
-PROGRESS: accepted exact safe archive/file-name set and next missing check defined.
-
-Cause11 Expert answer read independently and accepted as repair route at
-escalations/11-darwin-split-stream-coverage.answer.md (rules958a4538). One
-source-only follow-up dispatched to SAME responsible Darwin owner: consume
-coverage diagnostics separately with exact frozen sys_fs/F19 mapping, fail
-closed on unresolved/conflicting association, preserve partial observed names
-and incomplete aggregate/status-zero continuation, retain structural negatives.
-Align strict helper SESSION_ID with contract2f795ece; no accepting both names.
-Frozen source2f795ece/archive43c8b8/lock2ba4 and production retained unchanged.
-Meaningful actual separate-stream RED/GREEN, strict naming negatives and same
-affected reviewer required.30min active planning checkpoint; at most2 launches
-without diagnosis/closed check, cumulative history retained, no native allocation
-or second Expert chain. Two failed F4 corrections remain counted; this package
-is one permitted bounded follow-up, not a third unexamined patch.
-Next: collect Darwin follow-up freeze and SAME affected review; Mac correction
-freeze and SAME review; Windows subtree/pins/parser/Roslyn readonly readback.
-
-Mac same-owner source correction frozen29cfb009aa97ff5cb0b63d22a7714e745ea6bfda,
-exact lowercase author/committer independently read. Four changedfiles: CONTROL
-overlayunix.rs, overlay pin/mac overheadhelper, scopedcustodian, source tests.
-Root read original full85/85 and affected12/12 logs under owner
-macos-managed-action-correction-20261002/; mocked Cargo/status lines are pure
-test output only, not native evidence. Same affected reviewer dispatched on
-this freeze for per-read pairedpublication/STOPbound/postKILLlive and measurement
-isolation plus retainedfindings1–3. Nativecause09 history and allocation85
-unlaunched/guardfalse unchanged. Foreign prereq deletion/untrackedassets preserved.
-Previous goal turn PROGRESS: Windows exactname audit accepted and cause11 route
-dispatched. Current continuation PROGRESS: actual Mac sourcefreeze and original
-GREEN receipts read; same affected review underway. Darwin cause11 repair and
-Windows readonly prerequisites confirmed live; no native completion claim.
-Next: collect BOTH frozen-source affected outcomes and Windows prerequisites;
-keep full native/process/release requirements open.
-
-Live Mac29cfb affected review identifies material source blockers: stopped-host
-validation strips status into PID/start identity then checks missing
-slots.managed_host.status, so require_stopped always rejects. Reviewer is also
-reproducing read/publication-error fail() closing capture while old capturing
-receipt remains valid; no acceptance yet. Terminal consolidated report pending,
-no third direct patch or native allocation. Preserve one prior failedfinding4
-correction and this result, existingExpert09 single-chain constraint. Independent
-Darwin/Windows work continues; do not mark whole Goal blocked from this path.
-Windows current exact readonly recursive attribute scan key-injection helper
-PID61556 live at owner checkpoint,295chars450ms/char; not yet entered/result.
-
-Windows readonly subtree reparse check terminal independently viewed by root:
-recursive Get-ChildItem-Force on exact own source includes files/directories,
-ReparsePoint count0, clean prompt. Digestchecked original frame/text and narrow
-rootreadback retained once windows-staging-9e0-root-evidence/tree-reparse*.
-This closes actual-tree nonreparse prerequisite together with existing ancestor
-and archive/pathname proof, not content/parser/compiler/native acceptance.
-Previous typinghelper61556 confirmed absent; owner observed terminal, no restart.
-Successor readonly parser/pin key-injection session43606 live,649chars450ms/char,
-not entered at checkpoint. Darwin cause11 owner actual stderr-only RED reproduced
-through production entrypoint; mapping/naming implementation still pending at
-checkpoint, no GREEN/freeze yet. Same Mac reviewer consolidated terminal pending.
-Previous goal turn PROGRESS (Mac sourcefreeze/affected finding); this continuation
-PROGRESS: independent Windows subtree nonreparse readback accepted; all native
-counts/allocations and history unchanged.
-
-Mac29cfb terminal affected report/eight originals retained once at
-macos-control-independent-review-20261002/affected-29cfb009/. Root read full
-report and existing Expert09 answer: numerical at-most-one64KiB unpublished
-quantum now independently source-accepted; findings1–3 retained. Two material
-errors: actual callback drops validatedSSTOP status and always rejects; fail()
-closes readers while old capturing receipt remains actioneligible, including
-publicationfailure. Original realcallback and error-boundary pure REDs preserved.
-Two failed finding4 corrections retained, no relabel/reset/nativeclaim.
-Authorization reconciled: current human global Autonomous workflow permits
-ordinary reversible setup/implementation repairs and revising agent-selected
-planning checkpoints with concrete closed checks/new diagnosis. Prior root
-'no third direct patch' wording was an internal gate, not human source-attempt
-cap. Explicit one-attempt nativecontrols and actual resources remain hard.
-Continue SAME responsible context and existing Expert09 source-first follow-up,
-not another Expert/package: closed numericalbound plus precise new status/error
-diagnoses justify30min active checkpoint. Permitted statuspropagation and CONTROL
-active-state invalidation before endpoint teardown; invalidationfailure must
-fail closed too (consider hostabort before teardown, no production/measurement
-change). Meaningful actualcallback/error/STOP-edge RED/GREEN, frozen revision and
-SAME affected review required. At most2 launches without diagnosis/closed check;
-stop repeatedfailure withoutprogress/unsoundroute/hardcap. Preserve cumulative
-history; no nativeAPI/Cargo/control/measurement/push/merge delegated.
-Darwin cause11 mapping/naming implemented; stale prep assertion corrected, ten
-pure categoriesGREEN at checkpoint. Structural-lookalike and partial continuation
-assertions/provenance/final freeze pending. Windows parser/pin typing session43606
-confirmed live, not entered; no restart or new GET/extraction.
-Previous turnPROGRESS (Windows treeacceptance); currentPROGRESS (terminal Mac
-boundsource closure and consolidated diagnoses, authorized exact repair resumed).
-Goal active; native84/allocated85unlaunched/guardfalse unchanged.
