@@ -119,3 +119,21 @@ absent, ownPGID1566099 empty, exact runtime and scope absent. Outer/scoped0;
 export64.206s, sampled maximaRSS803384KiB/storage761640KiB/descendants4.
 This closes compiler compatibility only; Linux current examples, native behavior,
 Windows, process lifecycle and final release remain open. No native85 consumed.
+
+## Current Linux optional examples acceptance
+
+Frozen source `1ca21e32eed2aa40287ba7e1282000add1dd49c7`, compatible v3lock2ba4
+and private direct Rust/Cargo1.77.2 Linuxx86_64 pass one combined locked sys/net
+examples build. Real Engine file writes have fresh host readback `Rhaiting data`;
+the independent loopback peer receives `ping`, and the script receives `pong`.
+Both deliberate wrong expectations fail at their named independent assertions
+with status101; both restored expectations return0. Original evidence is in
+`../../all-tickets/linux-current-msrv-examples-evidence/` and launcher-evidence;
+`../../all-tickets/linux-current-msrv-examples-root-readback.json` checks all8
+commands, direct versions, reviewed helper, source/manifest/lock restoration and
+current source applicability. All110 recorded PID/start identities are absent,
+owned groups empty, exact private runtime/scope absent. Outer/scoped0, export
+33.911s,49periodic samples maxRSS900108KiB/storage769428KiB/descendants7.
+This closes Linux current optional-MSRV examples only. Native process count84
+is unchanged; Windows, final feature behavior, process lifecycle, overhead and
+release acceptance remain open.

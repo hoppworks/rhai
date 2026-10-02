@@ -96,32 +96,37 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
    all20 identities absent, ownPGID1566099 empty, exact runtime/scope absent.
    Export64.206s; 88periodic samples maxRSS803384KiB/storage761640KiB/descendants4,
    not continuous peaks. Prior v1/setup history retained, no limit reset/native85.
-   Next: execute the staged current Linux real sys/net examples package when
-   the single heavy slot is free. Source preparation and independent combined
-   review CLOSED narrowly at owner6c384145 (initialca894531). All4 code files
-   and contract reviewed; both launcher findings corrected in one batch.
-   Builtin read now retains proc identity/state; missing/mismatching/unreadable
-   identities fail closed, interrupted reads retry within the original deadline,
-   and sleep0.1 provides real polling delay. Original intended source RED1 and
-   polling RED1 retained; scoped owner GREEN0 and independent integrated replay0
-   cover five pure requirements. linux-current-msrv-examples-root-pure.log
-   records the replay; exact own scope removed empty after runner0. Pure checks
-   do not certify native launcher interruption or real example behavior.
-   Stage preparation completed0 through scoped runner, no Rustup/Cargo/native
-   execution. Exact unique remote stage is
-   /root/rhai-linux-current-msrv-examples-1ca21e32-20261002; nine inputs were
-   compared independently with reviewed local bytes and remote sha256sum check.
-   Original staging log and staging-readback.json retain proof. Production src,
-   codegen, build.rs, manifests and both examples unchanged from frozen1ca21e32.
-   Remote build scope remains uncreated; native count84 unchanged.
-   Heavy slot is occupied by foreign work: last live proc readback runner1583798
-   start7568048/PGID1583736, supervisor1583799 start7568051/PGID1583799 and
-   patrol profile audit1601978 start7579061/PGID1601977. Earlier1581785 and
-   1581799 are absent from inventory; do not restart or stop any foreign job.
-   Preserved idle28950/28951 and Dart MCP5388 remain unrelated resources.
-   Recheck exact live work before dispatch, retain600/540/510+30 limits and
-   sampled2GiB/16 descendants caps. Compiler proof and prepared source alone
-   leave the native examples and final release gate open.
+   Linux current-source optional-MSRV sys/net examples acceptance CLOSED.
+   One reviewed package at integrated6199fcab finished SSH/outer/scoped0.
+   Frozen1ca21e32/archive8251/v3lock2ba4, direct privateRust/Cargo1.77.2
+   Linuxx86_64 kernel7.2.7-ogc1.1.fc44.x86_64. One combined locked build,
+   real Engine filesystem fresh host readbackRhaiting data, independent OS-selected
+   TCP peer receivesping and scriptpong. Both deliberate wrong expectations
+   produce intended named assertions/status101; restoredsys/net each0.
+   Original linux-current-msrv-examples-evidence and launcher-evidence plus
+   outer.log retain all8 commands, direct versions, source restoration, controls
+   and resource samples. Independent linux-current-msrv-examples-root-readback.json
+   verifies reviewed helper bytes, seven manifests, restored example hashes,
+   unchanged relevant production at current3b3da3c9, all110 exact PID/start
+   identities absent, own groups empty, exact runtime and scope absent.
+   Export33.911s/49samples maximaRSS900108KiB/storage769428KiB/descendants7,
+   periodic observations not continuous peaks. One normal proc disappearance
+   emits Bash missing-file diagnostic before successful wait0; no lost status.
+   This closes Linux optional-MSRV documentation examples only, no process85.
+   Combined independent source review at6c384 covers4/4 codefiles and contract;
+   two launcher findings corrected in one batch with original source/polling RED1,
+   owner scopedGREEN0 and independent integrated five-requirement pure replay0.
+   Root staging independently matched nine inputs; source preparation/staging logs
+   retained. Previous foreign runner1583798/driver1583802/cleanup1673220 were
+   absent before dispatch, fresh heavy inventory clear; preserve idle28950/28951
+   and Dart MCP5388. Limits600/540/work510+export30/jobs2 and sampled2GiB/16
+   unchanged, no history reset. Source preparation owner now continues a separate
+   finite Linux non-process filesystem/environment/TCP feature acceptance package,
+   source-only before review/staging. Confirms4d86 global/project/roles/templates
+   and no descendants; no new native launch permitted by that source task.
+   Next collect exact covered release criteria, immutable source and pure controls;
+   retain valid unchanged earlier proof, leave missing feature/native gates open.
+
 3. Mac Managed source correction74943bb2 is independently reviewed and replayed:
    58 adapter/23 reader pass, prior wrong fixture PGID and early gate reap are
    meaningful RED1, prior Cargo stream request fails1, restored adapter58 pass.
@@ -224,12 +229,12 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Current turn classification
-Previous goal turn: NO PROGRESS toward acceptance; user requested overall status.
-Current continuation: PROGRESS. Corrected Linux source preparation passed narrow
-independent recheck and integrated pure replay; exact remote inputs staged and
-independently read back. Heavy native run remains queued behind authoritatively
-live foreign work. No scope/cap revision, process invocation85 or release claim.
-Count84/guardfalse and full goal remain open.
+Previous goal turn: PROGRESS, reviewed preparation integrated/staged/read back.
+Current continuation: PROGRESS. Linux optional-MSRV real sys/net examples close
+through one locked build, meaningful wrong-expectation controls and restored
+Engine/OS readbacks. Independent110-PID/group/runtime/scope closure checked.
+Existing Linux/Mac source work proceeds; Windows remains shut off. Count84 and
+full release/campaign requirements remain open, no cap/history revision.
 
 ## Current-source core MSRV package — accepted narrow gate
 Current default-core applicability CLOSED for source52d9797b, Rust/Cargo1.66.0,
@@ -249,8 +254,8 @@ No invocation85/process measurement. Remaining optional/platform/feature gates
 and every other ticket requirement remain active.
 
 ## Immediate next actions
-Execute the reviewed staged Linux examples when the observed heavy slot is free;
-recheck foreign process identities first. Collect the existing Mac owner's supported
+Collect the prepared Linux non-process feature acceptance package and preserve
+newly accepted Linux examples proof. Collect the existing Mac owner's supported
 stable-toolchain source route and review affected prerequisites before any native
 allocation. Complete exact
 feature/toolchain confinement and installed Darwin ABI prerequisites; keep

@@ -1,0 +1,8 @@
+{
+  "elapsed_seconds_at_export": 33.911,
+  "evidence_destination": "/root/rhai-linux-current-msrv-examples-1ca21e32-20261002/proof-evidence",
+  "expected_outer_scope": "/root/.local/share/agent-builds/rhai/linux-current-msrv-examples-1ca21e32-20261002",
+  "helper_deadline_seconds": 540,
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-current-msrv-examples-1ca21e32-20261002/agent-build-g2xxt_26",
+  "runtime_cleanup_owner": "run_scoped.py; coordinator must independently read back"
+}

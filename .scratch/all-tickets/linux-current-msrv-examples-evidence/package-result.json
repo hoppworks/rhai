@@ -1,0 +1,49 @@
+{
+  "all_controls_and_positive_runs_passed": true,
+  "cargo_build_invocations": 1,
+  "compatible_lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "controls": [
+    {
+      "expected_status": 101,
+      "intended_assertion_observed": true,
+      "name": "sys-red",
+      "required_diagnostics": [
+        "host file independent readback",
+        "left: \"Rhaiting data\"",
+        "right: \"deliberately wrong host contents\""
+      ],
+      "status": 101
+    },
+    {
+      "expected_status": 0,
+      "independent_readback": "host file now contains \"Rhaiting data\"",
+      "name": "sys-green",
+      "status": 0
+    },
+    {
+      "expected_status": 101,
+      "intended_assertion_observed": true,
+      "name": "net-red",
+      "required_diagnostics": [
+        "independent peer received the script bytes",
+        "left: [112, 105, 110, 103]",
+        "right: [119, 114, 111, 110, 103, 32, 112, 101, 101, 114, 32, 98, 121, 116, 101, 115]"
+      ],
+      "status": 101
+    },
+    {
+      "expected_status": 0,
+      "independent_readback": "Peer received ping; script received pong.",
+      "name": "net-green",
+      "status": 0
+    }
+  ],
+  "examples": [
+    "sys",
+    "net"
+  ],
+  "features": "testing-environ,sys,net",
+  "helper_exit_status": 0,
+  "scope": "Rust 1.77.2 Linux x86_64 examples through real Engine; host file and real loopback peer only",
+  "source_revision": "1ca21e32eed2aa40287ba7e1282000add1dd49c7"
+}
