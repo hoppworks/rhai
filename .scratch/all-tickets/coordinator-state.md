@@ -386,17 +386,43 @@ and normal completion on failed cleanup. Controller retains exact adapter handle
 on cancellation timeout. Reported96 pure tests used3.14.7 instead of requested
 pinned3.12; root therefore ran actual pinned3.12 affected suite once (not native):
 terminal0,96 tests OK, retained-owner-python312-readback.log in same Mac worktree.
-No Cargo/build/temp runtime or native workload was launched. Third candidate
-awaits source acceptance; count2 rejected outer corrections remains until review.
+No Cargo/build/temp runtime or native workload was launched. Third candidate source review is now terminal and rejected; count3 rejected outer corrections for the same ownership cause is preserved.
 Explicit retained-owner wait, signal interruption/unwind, usability of shutdown
 state and timing must be independently checked; no diagnostic alone accepted.
-Configured Expert read-only review54587 actually live, retained-owner-review.md
-output. Existing09 route/history unchanged; no new escalation chain or allowance.
-If rejected again, stop that dependent path rather than a blind further patch.
-Next collect SAME54587. Windows reviewed source control85bb is ready for bounded
-staging after original caps/ownership reconciliation; parsing/native/workload
-custody remain unverified. All code correction commits remain local awaiting
-integration; only audit/evidence updates pushed to sole forkmain. No reviewed source-only change closes native acceptance. No native count changed or full acceptance claimed.
+Configured Expert read-only review54587 is TERMINAL: root read the full actual
+report, retained once under source-review-readback-20261002/macos-retained-owner-cd516c1e.md.
+Revision958a4538 confirmed. cd516c1e REJECTED for native launch: controller INT/TERM
+raises out of the retained-owner wait; diagnostic I/O can precede/bypass retention;
+parked handles have no operational later accounting/reaping/handoff. All4 changed
+paths reviewed. Same cause09, no new chain or allowance. Count3 failed outer
+corrections retained. Under the existing stop condition, dependent repair/native
+path stopped; no blind fourth correction. Launch guard false, native84 consumed,
+85 unlaunched, four controls unallocated. Native prerequisites remain open.
+
+Current continuation at2026-10-02T15:49Z is PROGRESS: prior status turn yielded
+new authoritative terminal review evidence and changes the next action; this
+turn integrates reviewed Windows source corrections. Root verified9e0e84e8 is
+already an ancestor and the Windows runner tree exists before integration.
+Coordinator cherry-picked1e014b57 and85bb7366 to0b074586 andac32aa80 respectively.
+Exact configured lowercase author/committer retained. On integrated revision
+ac32aa80, pinned Python3.12 source-contract suite passes9/9 (exit-control4 and
+real-client source-scaffolding5); immutable diff whitespace check passes. This
+is development integration authorized by the owner's fork consolidation request,
+not native fixture or strict release acceptance. Original reviewed source,
+control-repair RED/GREEN and acceptance limits retained in committed reports.
+No new guest input, native invocation, Cargo build or runtime launched.
+Fresh exact Mac observation at15:49:31UTC: foreign Playwright51269/parent51252,
+start2026-10-02 16:06:31local, alive elapsed1:42:59. Heavy slot stays occupied;
+no foreign process touched. Current state next action: publish this reviewed
+Windows development integration to sole forkmain and exact readback, then prepare
+next acceptance from the existing source-fixture route. Original single consumed
+invocation and one-hour policy must not silently become a new allocation;
+original human authorization/route scope needs concrete reconciliation before
+new guest execution. Real-client30min nonrenewable remains separate. Mac heavy
+acceptance can resume only with free slot and an already accepted harness; the
+stopped process-overhead path cannot resume just because the slot becomes free.
+Goal remains active; independent Windows/other acceptance work exists, so no
+blocked audit or completion claim is warranted.
 
 ## Resources, counts and cause history
 Unix actual native invocation count84 consumed.82 failed before runtime;
