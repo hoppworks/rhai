@@ -168,3 +168,42 @@ monitoring; that evidence changes next action to safeguard repair before launch.
 Linux source launcher preparation continues; no live native fixture handle is
 claimed from agent status or intent. Windows fetch key error is diagnosed before
 fixture execution, not a behavior failure. No retry/cause history or budget reset.
+
+## macOS overhead custody — cause 09 bounded follow-up
+Cause 09 answer at the root checkout's
+`.scratch/all-tickets/escalations/09-macos-overhead-custody.answer.md` is the sole
+repair route; do not start another Expert chain. Previous source-only revision
+f7dab793 is superseded for launch review: it reaped only the measurement-driver
+Python process, not Cargo or escaped fixture leaves. Current task remains source
+only; no native/Cargo/control/measurement invocation or count82 allocation. Keep
+120 calls, zero warmups, no retries, and all stated time/resource caps unchanged.
+Permitted work: one sole-spawner/reaper custodian, per-command gated/anchored group,
+direct Cargo with frozen parser reuse, passive complete escaped-leaf readback,
+source/build/toolchain confinement audit, and pure controls. Do not signal by stale
+numeric PID or use fixture-only protocol as general custody. This follow-up closed
+one prevention requirement only: `macos-process-overhead.py` has a source constant
+fixed to `False` before it reads the readiness record, creates a runtime, or starts
+any child; the record is also deliberately `not-ready`.
+The exact unresolved prerequisite and source evidence are recorded in
+`macos-overhead-custody-prerequisites.md`. A read-only baseline-lock audit counted
+131 locked registry packages and found 46 source directories absent from the
+existing shared cache. No source was fetched or installed; this is insufficient to
+establish build-script/toolchain confinement. The Darwin SDK process APIs were
+located, but matching kernel semantics and a complete reader remain unreviewed.
+Scoped pure checks passed for AST ordering, the frozen fail-closed gate (including
+a falsely complete readiness record), descendant accounting, sampled 16/17 and
+2-GiB boundaries, and shell syntax. The harness refusal control confirmed it exits
+before source/runtime setup or child launch. These checks do not establish
+interruption custody or launch readiness.
+
+Updated global resource rule applies to any temporary source checks: use a fresh
+scope at `~/.local/share/agent-builds/rhai/<unique-session-id>/`, set absolute
+TMPDIR before the existing scoped runner, leave durable source/evidence outside,
+and remove only the exact empty scope after its runs are finished. Scope
+`/Users/hoppworks/.local/share/agent-builds/rhai/macos-overhead-custody-20261002-0412z`
+held only the scoped check runtimes and was removed after those runs. No native,
+Cargo, fixture, control, or measurement launch occurred. The planning checkpoint
+remains 30 minutes active work; retain elapsed work and cause09 history. No push or
+task remote ref. This source repair is not launch-ready:
+sole custody, direct Cargo, escaped-leaf readback, complete confinement audit,
+pure controls, and independent review are still open.
