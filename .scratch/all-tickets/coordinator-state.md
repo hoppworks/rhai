@@ -75,14 +75,17 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    medians, exact toolchain/resource observations. Explain that public API does
    not expose spawn→first-byte timestamps. Private scoped build, one reused build,
    exact owned cleanup/export, per-run/total limits and finite no-progress criteria.
-3. Windows public-contract source preparation is running in fresh Standard context
-   windows_public_contract, owned managed worktree
-   /Users/hoppworks/.codex/worktrees/windows-public-contract/rhai, local branch
-   task/windows-public-contract at b7e5f4e2. Prepare the first public Engine success/
-   nonzero/raw-output contract with independent fixture record and cleanup, reusing
-   self-reexec support. No native execution, Cargo, dependency or production adapter
-   change before prerequisite proof. Source-only validation; do not claim an
-   unexecuted test is a demonstrated RED. Planning checkpoint30min, zero launches.
+3. Windows public-contract source preparation is integrated at43e9ef8c (parent
+   056c0b53). OCR selected1 Rust file, reviewed1/skipped0; excluded Markdown state
+   was read separately. Initial review corrected INT typing and no_float timeout,
+   and distinguished pre-exit intent record from actual process termination proof.
+   tests/sys_process_windows.rs adds focused Engine run_raw success/nonzero/raw-byte
+   contract, exact streams and child-written record. Static rustfmt/whitespace checks
+   pass; no compiler/native test launched, missing-registration RED is unobserved.
+   Native owner must prove retained process-handle/PID termination separately;
+   pre-exit record and report alone do not prove that. Managed source worktree
+   /Users/hoppworks/.codex/worktrees/windows-public-contract/rhai and local
+   task/windows-public-contract are clean/owned, retained until native gate review.
    After actual Windows prerequisite acceptance, implement and prove the Windows
    production adapter/lifecycle against ticket03/design. Current process.rs registers
    only cfg(unix); runner scaffolding is not the Windows production implementation.
@@ -140,8 +143,10 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Previous turn classification
-The user status turn verified exact remote main and inspected current source/state,
-but closed no new implementation requirement: no progress toward ticket completion.
-This continuation revalidates owner state and moves the active prerequisite and
-independent source package forward; documentation consolidation is continuity,
-not a substitute for native implementation acceptance.
+Previous continuation prepared parallel Windows public-contract source work and
+consolidated stale state; no native acceptance closed. This turn source review
+found and corrected feature assertion/timeout portability and clarified evidence
+limits; accepted corrected test preparation is integrated. Overhead pre-freeze
+review found archive copies lack Git metadata and unbounded metadata subprocesses;
+responsible context corrects those before native measurement. No blind retries,
+fixture launches or budget reset. Windows setup remains sole-owner controlled.
