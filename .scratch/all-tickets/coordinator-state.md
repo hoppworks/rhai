@@ -57,36 +57,23 @@ Windows guest control belongs solely to windows_monitor_job_owner.
   remain; remote cleanup does not authorize discarding them.
 
 ## Current step and next action
-1. Windows owner continues the authorized source-fixture package. Frozen source
-   7b9fd871c3d036ff9f57e9e4e35e01b10f0c0c32 is on fork main; RunSourceFixtures.ps1
-   SHA25679be8688152ae600b4126f6c03571dd6dd66d669f4dfe2a1b720b775bfe82b4d.
-   Root source review accepted positive UInt32 constants, custody from first handle,
-   guarded disposal, shared30s setup-failure accounting and CRLF marker matching.
-   Latest owner receipt: unlocked VM console; process-local Bypass read back.
-   Fresh archive curl command used lowercase-l instead of uppercase-L and saved
-   an empty redirect response. Original empty archive preserved; owner diagnosed
-   the exact key/input error and prepares fresh absent-path redirect-follow fetch.
-   Alternate direct codeload guest attempt returned404 before fixture activity.
-   Root independently fetched the canonical immutable archive in a private scoped
-   runtime:1789933bytes, ZIP SHA7d44819d647dc002b8746764504f84a7568f76708c60c13b80813f90792fdc44,
-   contained RunSourceFixtures.ps1 SHA matches79be8688 exactly. Original receipt
-   windows-source-archive-host-readback.json proves host endpoint/archive integrity;
-   it does not prove guest transfer or native execution. Owner received receipt
-   and continues verified canonical Shift-L input; no credentials or new transport.
-   Latest guest receipt now closes archive transfer integrity: canonical ZIP
-   C:\Users\RhaiTest\w7.zip has the same SHA7d44819d as the independent host
-   receipt and is extracted under fresh C:\Users\RhaiTest\w7src. Directory
-   readback confirms RunSourceFixtures.ps1,30441bytes. The attempted script hash
-   failed because the console key encoder omitted uppercase letters; owner uses
-   the case-insensitive lowercase path next. This is input setup, not fixture
-   failure. Original console receipts remain in the responsible context.
-   Latest guest closes script integrity and native parser gates: script SHA79be8688
-   matches exactly, ParseFile reports zero errors and a non-null AST. Owner prepares
-   a fresh absent GUID runroot for the single invocation, including nested setup-
-   failure control,17 input pins, compiler and fixture payloads under existing caps.
-   NO fixture/compiler/job handle yet;17-pin/fixture gates remain open. Continue fresh immutable
-   archive/runroot, native PS5.1 parser and input gate before fixture invocation.
-   Preserve failed roots and exact cleanup. Do not call this a verified live wait.
+1. Windows owner launched the single reviewed source-fixture harness at exact
+   C:\RhaiQuality\runs\monitor-source-c58407e0123145698ab1d70e70473f7e after
+   guest archive7d44819d/script79be8688 integrity and native PS5.1 parser gates.
+   Original PowerShell console disappeared; owner reopened read-only inspection,
+   with no relaunch. Actual retained logs show setup-control PASS marker,17-file
+   input/copy gate reached and compile-production-runner started. Compilation
+   failed with CS0103 at WindowsCustodyBackend.cs1543/1626/1750/1931/1936:
+   EnsureFinalizationBudgetIfSet is defined in nested RuntimeAllocation, while
+   callers are in outer WindowsCustodyBackend. Root rg independently confirmed
+   the one definition at724 and five callers. No fixture executable ran; native
+   job/fixture acceptance remains open. Owner preserves original setup-failure-
+   6244.txt and compiler logs, checks exact process/job cleanup, then source-first
+   fixes helper visibility without weakening shared finalization deadlines.
+   Frozen correction and originals require root review before another native
+   invocation. Existing hard caps and nonrenewable real-client allocation remain.
+   This is a concrete compilation cause, not a verified live wait. Original
+   detailed setup history is retained by reference to root state at f8b65ad6.
 2. POSIX overhead source00bed4a0dfeb103ff209ba4c76dac7ae797b7c56 integrated.
    OCR selected2 files, reviewed2/skipped0; excluded contract/state read separately.
    Root Python AST and parser self-test pass, including meaningful missing/reordered
@@ -134,8 +121,13 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    exactly these three files are required; pyguard uses existing Python>=3.11,
    no install/config changes. Responsible context prepares a frozen complete
    dependency manifest/contract/preflight and NEW absent stage, retaining82 stage.
-   Staged --help import preflight is permitted without workload/runtime. Native83
-   is NOT released until corrected frozen source and staged receipts are reviewed.
+   Corrected patch from local57e68c6f was applied without importing that
+   misattributed commit: root verifies preflight86cb738f, launcher020dc216 and
+   contract2b871c13, AST/bash syntax/whitespace and original post-exit identity/
+   group receipt. Exactly3 hash-bound runner files, nativePython>=3.12/filter and
+   bounded --help import gate now precede workload. Root accepted source gate
+   and released fresh absent-only staging/preflight; native83 remains withheld
+   until staged receipts are independently reviewed. No new invocation yet.
    Root macOS measurement adaptation is SOURCE-ONLY and NOT approved to launch:
    macos-process-overhead.py and run-macos-process-overhead.sh bind00bed/archive
    5414ea195ad00152b1eae36b3f4e10943ba5d9bf323baff6410cca0c5b4d8b98.
@@ -176,8 +168,13 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    Fresh read-only Expert09 /root/macos_overhead_custody_expert is analyzing the
    uncovered benchmark-launch custody decision,15-minute planning checkpoint,
    no native/Cargo slots. Brief escalations/09-macos-overhead-custody.md; answer
-   pending. This is distinct from accepted Expert08 production Unix completion,
-   and only one escalation chain for this launch custody cause is permitted.
+   delivered at escalations/09-macos-overhead-custody.answer.md. Root reviewed
+   sole-spawner/reaper anchored command gate, direct Cargo with frozen parser,
+   conservative complete Darwin leaf readback and exact build-script/toolchain
+   confinement prerequisite. Same responsible macos_overhead_safeguards context
+   now implements one source-first bounded repair,30-minute active checkpoint.
+   No native/control/measurement launch until frozen source/pure controls/ABI and
+   confinement review. One cause09 chain; no count or hard-cap reset.
 3. Windows public-contract source preparation is integrated at43e9ef8c (parent
    056c0b53). OCR selected1 Rust file, reviewed1/skipped0; excluded Markdown state
    was read separately. Initial review corrected INT typing and no_float timeout,
@@ -211,7 +208,11 @@ new source/staging gate. No live Unix test handle is currently recorded. Linux o
 plus kill2s=600s, scoped585s, driver580s, aggregate Cargo540s, jobs2, descendants16,
 2GiB policy and sampled stop1572864KiB. macOS scoped600s/Cargo540s/jobs2 with same
 policy/sample limits. Sampling is not continuous peak or enforced byte accounting.
-Use /Users/hoppworks/projects/agent-skills/tools/run_scoped.py and project flags;
+New global resource-path instructions applied prospectively and recorded in
+project AGENTS: own unique ~/.local/share/agent-builds/rhai/<session-id> scope,
+absolute TMPDIR before runner, private child runtimes, exact empty-only retirement.
+Do not migrate or remove prior failed stages/runtimes. Use
+/Users/hoppworks/projects/agent-skills/tools/run_scoped.py and project flags;
 private source/lock/home/target/tmp, exported originals outside before cleanup.
 Baseline lock8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa;
 private libc edge lock2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425.
@@ -255,10 +256,9 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Previous turn classification
-Current continuation integrated independently reviewed Linux safeguards and Mac
-source preparation, verified frozen hashes/AST/embedded/bash inputs, and observed
-actual terminal native82 setup failure. Root read original82 error/cleanup receipts
-and the configured runner import graph, returning a concrete missing dependency
-bundle correction before any relaunch. Expert09 analyzes Mac benchmark custody;
-Windows guest script/native parser gates close, fixtures open. No live Unix handle
-or measured performance claimed; actual native82 consumed and hard caps unchanged.
+The user-requested overall-status turn was NO PROGRESS (readback/status only).
+This continuation makes PROGRESS: independently accepted/applied Linux dependency
+bundle correction and82 original cleanup receipts, advanced absent-only staging,
+reviewed Expert09 answer and resumed bounded Mac source implementation, and obtained
+actual Windows compiler-failure evidence that determines the targeted correction.
+No new native slot or benchmark result claimed; goal remains active/incomplete.

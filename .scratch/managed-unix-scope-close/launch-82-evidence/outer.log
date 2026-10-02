@@ -1,0 +1,10 @@
+launch_utc=2026-10-02T05:22:31Z
+launcher_pid=3539356
+launcher_pgid=3539298
+outer_deadline_epoch=1790919151
+run_scoped exited before process-tree custody began
+Traceback (most recent call last):
+  File "/root/rhai-process-overhead-00bed4a0-b6f34e20/runner/tools/run_scoped.py", line 7, in <module>
+    from agentskills import pyguard
+ModuleNotFoundError: No module named 'agentskills'
+cleanup/readback completed with live owned identities or acceptance failures; see pid-readback.tsv

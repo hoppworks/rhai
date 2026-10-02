@@ -10,8 +10,15 @@ the private libc-edge lock SHA-256
 
 Stage a fresh absent-only directory containing `source.tar`,
 `Cargo.lock.baseline`, `process-overhead-proof.py`,
-`measure-process-overhead.py`, `remote-overhead-launch.sh`, and
-`runner/tools/run_scoped.py`. Create an empty real `evidence/` directory.
+`measure-process-overhead.py`, `remote-overhead-launch.sh`, and the complete
+configured runner import bundle: `runner/tools/run_scoped.py`,
+`runner/tools/agentskills/__init__.py`, and
+`runner/tools/agentskills/pyguard.py`. The runner files are hash-bound to the
+configured agent-skills checkout. Create an empty real `evidence/` directory.
+Before launch, the preflight checks the runner file hashes and executes the
+staged runner's bounded `--help` import path; this must succeed without starting
+a workload. It also records the available Python version and verifies that
+`tarfile.extractall(filter="data")` is supported (Python3.12+).
 The staged launcher's independent monitor records exact PID/start-tick lineage,
 samples the owned descendant count and summed `/proc/*/status` `VmRSS` for the
 run-scoped process tree at one-second intervals, and stops the exact pidfd-anchored
@@ -25,6 +32,16 @@ readback rejects missing or malformed samples, identity ledgers, or a sample at
 the stop threshold. The launcher also reads back the exact measurement-driver
 PID/start-tick identity and verifies all recorded exact identities and owned
 groups after `run_scoped` exits.
+
+Each future launch uses a fresh unique session scope under
+`~/.local/share/agent-builds/rhai/<unique-session-id>`. The launcher derives a
+unique child path from its stage name and launcher PID, requires that exact
+path to be absent, creates it with mode0700, and sets `TMPDIR` (and `TMP`/`TEMP`)
+to that absolute path before starting the copied `run_scoped.py`. The runner
+creates its private `agent-build-*` runtime there and removes that exact runtime
+on exit. The launcher removes the session directory only with `rmdir` after
+the runner and monitor terminate; if it is nonempty or unavailable, it is
+retained and reported. Previous session scopes are never reused or cleaned.
 
 Run from the remote stage directory with an external600-second bound:
 

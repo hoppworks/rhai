@@ -1,0 +1,40 @@
+Read-only post-exit cleanup command executed against `workhorse`:
+
+```sh
+ssh workhorse 'python3 - <<'"'"'PY'"'"'
+import pathlib, subprocess
+identities = [
+    ("launcher", 3539356, "5515212", 3539298),
+    ("run-scoped", 3539364, "5515216", 3539298),
+]
+print("label\tpid\tstart_ticks\tpgid\tmatching_identity_present")
+for label, pid, start, pgid in identities:
+    try:
+        raw = pathlib.Path("/proc", str(pid), "stat").read_text()
+        fields = raw[raw.rfind(")") + 2:].split()
+        same = fields[19] == start
+    except (FileNotFoundError, ProcessLookupError):
+        same = False
+    print(f"{label}\t{pid}\t{start}\t{pgid}\t{str(same).lower()}")
+result = subprocess.run(["ps", "-e", "-o", "pid=,pgid="], capture_output=True, text=True, timeout=5, check=True)
+members = []
+for row in result.stdout.splitlines():
+    fields = row.split()
+    if len(fields) == 2 and fields[1].isdigit() and int(fields[1]) == 3539298:
+        members.append((int(fields[0]), int(fields[1])))
+print("pgid\tmembers")
+print(f"3539298\t{members!r}")
+PY'
+```
+
+Captured output:
+
+```text
+label	pid	start_ticks	pgid	matching_identity_present
+launcher	3539356	5515212	3539298	false
+run-scoped	3539364	5515216	3539298	false
+pgid	members
+3539298	[]
+```
+
+This is a read-only post-exit identity/group readback. No signals were sent.

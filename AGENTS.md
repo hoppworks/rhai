@@ -75,9 +75,15 @@ This is repository consolidation, not release acceptance or production deploymen
 
 For future POSIX builds and verification, use
 `/Users/hoppworks/projects/agent-skills/tools/run_scoped.py -- <command>`.
+Before invoking the runner, create an absent, owned session scope under
+`~/.local/share/agent-builds/rhai/<unique-session-id>/` and set `TMPDIR` to its
+absolute path. The runner creates a unique private runtime below that scope.
 Set `CARGO_TARGET_DIR="$AGENT_RUNTIME_DIR/target"` and
 `CARGO_HOME="$AGENT_RUNTIME_DIR/cargo-home"` inside that command. The runner sets
-temporary-directory variables. Build from an owned source copy inside the runtime,
+temporary-directory variables. Keep original sources and accepted evidence outside
+that runtime; the owned build source copy below is disposable isolation for
+Cargo-generated files. After all owned runs finish, retire only the exact empty
+session scope with `rmdir`; never migrate or clean another session scope. Build from an owned source copy inside the runtime,
 including the changes under test, so Cargo.lock and build.rs-generated source files
 also stay scoped. Keep related compilation, tests and assertion controls in one
 invocation, and export accepted evidence and needed diagnostics before it exits.

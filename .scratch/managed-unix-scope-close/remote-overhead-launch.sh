@@ -5,8 +5,15 @@ stage=$PROOF_STAGE
 evidence="$stage/evidence"
 test -d "$stage" && test ! -L "$stage"
 test -d "$evidence" && test ! -L "$evidence"
+session_base="$HOME/.local/share/agent-builds/rhai"
+session_scope="$session_base/process-overhead-${stage##*/}-$$"
+mkdir -p "$session_base"
+test ! -e "$session_scope" && test ! -L "$session_scope"
+mkdir -m 700 "$session_scope"
+test -d "$session_scope" && test ! -L "$session_scope"
+test -z "$(find "$session_scope" -mindepth 1 -maxdepth 1 -print -quit)"
 exec > >(tee -a "$evidence/outer.log") 2>&1
-trap 'rc=$?; printf "%s\n" "$rc" > "$evidence/outer-status.txt"' EXIT
+trap 'rc=$?; printf "%s\n" "$rc" > "$evidence/outer-status.txt"; if rmdir "$session_scope" 2>/dev/null; then printf "session_scope_retired=empty:%s\n" "$session_scope" >> "$evidence/outer.log"; else printf "session_scope_retained_nonempty_or_unavailable=%s\n" "$session_scope" >> "$evidence/outer.log"; fi' EXIT
 
 deadline=$(( $(date -u +%s) + 600 ))
 printf 'launch_utc=%s\nlauncher_pid=%s\nlauncher_pgid=%s\nouter_deadline_epoch=%s\n' \
@@ -22,6 +29,7 @@ cmd = pathlib.Path('/proc', str(pid), 'cmdline').read_bytes().replace(b'\0', b' 
 out.write_text('label\tpid\tstart_ticks\tppid\tpgid\tcmdline\n' + f'launcher\t{pid}\t{f[19]}\t{f[1]}\t{f[2]}\t{cmd}\n')
 PY
 
+TMPDIR="$session_scope" TMP="$session_scope" TEMP="$session_scope" \
 PROOF_STAGE="$stage" PROOF_CUSTODY_READY="$evidence/runner-process-identities.ready" PROOF_CUSTODY_HEARTBEAT="$evidence/runner-process-identities.heartbeat" python3 "$stage/runner/tools/run_scoped.py" --timeout 585 -- \
   python3 "$stage/process-overhead-proof.py" > "$evidence/driver-outer.log" 2>&1 &
 runner_pid=$!

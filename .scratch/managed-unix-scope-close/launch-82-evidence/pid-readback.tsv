@@ -1,0 +1,9 @@
+observed_exact_pid_start_pairs=[(3539364, '5515216')]
+initial_exact_identities_alive=[]
+exact_cleanup_actions=[]
+matching_identities_alive=[]
+owned_pgids=[]
+owned_pgid_members_alive=[]
+sampled_owned_tree_rss_max_bytes=unavailable
+sampled_private_runtime_storage_max_kib=unavailable
+acceptance_failures=['missing or incomplete required identity/resource ledger: measurement-command-identities.tsv', 'missing or incomplete required identity/resource ledger: runner-process-identities.tsv', 'missing or incomplete required identity/resource ledger: process-resource-samples.tsv', 'missing or incomplete required identity/resource ledger: resource-samples.tsv', 'run-scoped exited with status 1']
