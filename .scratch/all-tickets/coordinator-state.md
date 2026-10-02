@@ -107,7 +107,21 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
    linux-msrv-helper-repair/rhai/.scratch/all-tickets/linux-current-msrv-examples-pure
    returns1 at the intended wrong Darwin-vs-Linux toolchain assertion, not an
    infrastructure crash. Root read the original stderr/status independently.
-   Await frozen source/pure GREEN before review; history/caps preserved.
+   Combined root review of current draft covers all4 OCR-selected code files
+   plus contract and receipts manually; Python/system default Bash rules applied.
+   Two material launcher findings returned to the responsible context as one
+   batch: redirect-only $(<file 2>/dev/null) loses Bash file-read output, bypassing
+   runner identity/state polling and potentially treating interrupted wait as
+   terminal; read -t on /dev/null returns EOF immediately and does not delay.
+   Independent local Bash boundary probe: plain /etc/hosts substitution212bytes,
+   redirected0bytes; read -t1 on /dev/null status1 elapsed0seconds. No file
+   contents exported, no Linux/native dispatch inferred. Need focused corrected
+   launcher boundary proof and narrow recheck against reviewed baseline before
+   staging. Existing pure GREEN0 covers only source/helper checks and wrote its
+   temp fixture under ordinary /var/folders temp; preserve it as historical,
+   require corrected checks through configured scoped runner before acceptance.
+   Owner is authoritatively running; no infrastructure/implementation correction
+   failure counted from these pre-launch review findings. History/caps preserved.
 3. Mac Managed source correction74943bb2 is independently reviewed and replayed:
    58 adapter/23 reader pass, prior wrong fixture PGID and early gate reap are
    meaningful RED1, prior Cargo stream request fails1, restored adapter58 pass.
@@ -204,16 +218,13 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Current turn classification
-Previous goal turn: PROGRESS. Process documentation review closed and pushed
-fabcf35c; locked Cargo preparation independently reviewed2/2, pure60 passed,
-integrated/pushed86195fe4 with lowercase human attribution and only remote main.
-Current continuation: PROGRESS. Frozen Cargo support observation rules out the
-proposed nightly unit-graph query without executing a build or measurement.
-Linux owner is authoritatively running and reports no external/toolchain blocker;
-its local conformance fixes and RED/GREEN/shell checks remain in progress. Await
-frozen package before combined review or dispatch. Count84/guardfalse, accepted
-proof, explicit safety limits and full remaining requirements remain unchanged.
-Goal active.
+Previous goal turn: VERIFIED WAIT on live current_optional_msrv_prepare_v2 agent.
+Current continuation: PROGRESS. Combined draft review completed4/4 code files
+and contract, found two concrete launcher defects and returned one fix batch.
+Independent shell boundary observations change the next action to correction
+and narrow recheck before stage/build. Pure helper GREEN exists but does not
+cover these launcher failures or prove native examples. No external/build/native
+launch, retry or resource-limit revision. Count84/guardfalse and full goal open.
 
 ## Current-source core MSRV package — accepted narrow gate
 Current default-core applicability CLOSED for source52d9797b, Rust/Cargo1.66.0,
