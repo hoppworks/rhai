@@ -3193,7 +3193,7 @@ mod tests {
         let package = SysPackage::new(
             SysConfig::default()
                 .programs(ProgramPolicy::AllowList(vec!["/bin/true".into()]))
-                .process_scope(super::super::ProcessScope::Managed),
+                .process_scope(crate::packages::sys::ProcessScope::Managed),
         )
         .unwrap();
         package.register_into_engine(&mut engine);
