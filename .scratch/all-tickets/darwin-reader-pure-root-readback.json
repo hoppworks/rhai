@@ -1,0 +1,32 @@
+{
+  "observed_at": "2026-10-02T06:06:49.892961+00:00",
+  "mode": "pure fake libproc controls; no kernel libproc call, Cargo, or native measurement",
+  "command": [
+    "/opt/homebrew/bin/python3.14",
+    "/Users/hoppworks/projects/agent-skills/tools/run_scoped.py",
+    "--timeout",
+    "30",
+    "--",
+    "env",
+    "PYTHONDONTWRITEBYTECODE=1",
+    "/opt/homebrew/bin/python3.14",
+    "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-darwin-process-reader.py"
+  ],
+  "session_scope": "/Users/hoppworks/.local/share/agent-builds/rhai/root-darwin-pure-7f70f3a55fe34577bdba4b83b3c36773",
+  "status": 0,
+  "stdout": "",
+  "stderr": ".............\n----------------------------------------------------------------------\nRan 13 tests in 0.029s\n\nOK\n",
+  "source_sha256": {
+    "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/darwin-process-reader.py": "522ea4852e9dbe616823df1f6280206efa436a6982e323110f1ad6e697c5ba72",
+    "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-darwin-process-reader.py": "b3c8e18b2166fe86cdd231f25218ef0f427c31a55825f3c0230f6b55635b4bc2"
+  },
+  "sources_unchanged": true,
+  "sdk_static_review": {
+    "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX27.0.sdk/usr/include",
+    "proc_info.h": "proc_bsdinfo field order and integer declarations match transcription; PROC_ALL_PIDS=1, PROC_PIDTBSDINFO=3",
+    "sys/_types.h": "__darwin_uid_t and __darwin_gid_t are __uint32_t",
+    "sys/param.h": "MAXCOMLEN=16"
+  },
+  "applicability": "Source observer controls only; runtime ABI, complete actual execution graph, command custody and native interruption proof remain open.",
+  "session_scope_absent": true
+}

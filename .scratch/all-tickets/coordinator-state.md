@@ -99,10 +99,16 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    still exists, correct task branch/HEAD06bea589 and state directory. Resume
    explicit workdir commands only, no restore or foreign primary changes.
    Fresh private guest scope wm-source-20261002-6c96e7227c124542b8e5a7e86ab5d411
-   under RhaiTest .local/share/agent-builds/rhai exists; inspect existing bounded
-   archive transfer terminal result before any subsequent transfer/parse/build.
-   Owner stages immutable main43a68022 in fresh private guest root; archive,
-   parser and17 pins only before source-fixture launch review.
+   under RhaiTest .local/share/agent-builds/rhai stages immutable main43a68022.
+   Transfer now terminal:10,723,292bytes, guest SHA256
+   90318cd4e59e174404a47498a9f80becf5576668a3c707473e92b0f4df5a762b5.
+   First lowercase-l transfer produced an exact owned zero-byte file; corrected
+   uppercase-L transfer replaced only that empty file. Expand-Archive failed on
+   a long archived scratch path; no compiler/parser/fixture ran. Preserve partial
+   extraction and console-expand2-20261002.png in owner evidence. Next select only
+   required frozen inputs/dependencies into a fresh short exact owned destination,
+   archive-entry safety/hash/parser gates before source-fixture launch review.
+   This preserves the historical b6 long-path failure; no blind full-extract retry.
    Existing hard caps and nonrenewable real-client allocation remain.
    This is a concrete compilation cause, not a verified live wait. Original
    detailed setup history is retained by reference to root state at f8b65ad6.
@@ -134,7 +140,13 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    package-lifetime cleanup worker. Supplement must report baseline/API-return/
    post-package-drop task/fd counts, distinguish intentional worker from leaks,
    detect a positive blocked-child control and bounded post-drop quiescence;
-   no silent warmup or false requirement of zero service workers at return. Prior launcher,
+   no silent warmup or false requirement of zero service workers at return.
+   Root in-progress source review also requires fail-closed stat parsing (only
+   ENOENT/different verified start permits absence), explicit fd/task I/O errors,
+   bounded waits and held-child cleanup on assertion failures. Separate census
+   must not break no_float or Darwin fixture compilation/behavior; Linux marker
+   branch and float-enabled census gate required unless integer variant provided.
+   Owner is correcting same initial source review, not a native correction failure. Prior launcher,
    resource/preflight review and invocation82 missing dependency failure remain
    by reference to root state4d095f86 and original82 receipts; no history reset.
    macOS overhead remains SOURCE-ONLY and NOT ready to launch. Expert09 answer
@@ -164,6 +176,18 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    No new Expert chain or native slot. Historical Mac prerequisite count82 is
    pre83 snapshot; authoritative actual Unix count83 below. Thirty-minute repair
    checkpoint is an estimate, reviewed with concrete progress; caps unchanged.
+   Root independently ran corrected reader13 pure controls with fake libproc:
+   status0, unchanged reader522ea485/testb3c8e18. SDK proc_bsdinfo field order,
+   uint declarations, uid/gid32-bit typedefs, MAXCOMLEN16 and constants match.
+   Receipt darwin-reader-pure-root-readback.json records command, hashes, log and
+   exact new own session scope absent after empty-only retirement. This proves
+   source observer controls only, not kernel/private ABI or complete native census.
+   Synchronous libproc deadline checks cannot interrupt a stalled syscall; owner
+   must document overshoot limitation. Cargo inherited test-only setsid variable
+   was found in immutable source; owner now builds environment whitelist, dropping
+   inherited compiler/wrapper/Cargo flags and caller HOME/TMP. Sole custodian,
+   selected execution graph audit, native ABI and interruption controls remain
+   open; CUSTODY_IMPLEMENTATION_FROZEN=False remains enforced.
 3. Windows public-contract source preparation is integrated at43e9ef8c (parent
    056c0b53). OCR selected1 Rust file, reviewed1/skipped0; excluded Markdown state
    was read separately. Initial review corrected INT typing and no_float timeout,
@@ -257,13 +281,14 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Current turn classification
-Previous turn PROGRESS: Windows cleanup receipts integrated and resource census
-requirements refined. Current turn PROGRESS: independently verified all131
-locked archives/5968 unpacked files, closing exact source-integrity prerequisite;
-independent Darwin-reader review identified concrete unsafe false-empty/ABA/
-deadline paths before native launch; recovered Windows explicit owned-tool cwd
-by live Git/path readback without changing the foreign primary or guest stage.
-No new native invocation or Cargo build; Unix count83/caps/history unchanged.
-Full goal active/incomplete. Next: Linux frozen census source review; Mac reader
-corrections/pure controls and custody/confinement implementation; Windows inspect
-same bounded transfer terminal outcome and fresh archive/parser/pin gates.
+PROGRESS: reread current global056b17c and project instructions; authorization,
+strict profile, original caps/history and fork-only main publishing preserved.
+Independent Darwin pure controls13/13 pass in an own lifecycle-compliant scope;
+SDK static field/typedef review matches reader transcription, source hashes
+stable. Returned concrete Linux observer error/bounds/feature isolation issues
+for same-context source repair. Windows transfer completed, actual long-path
+extraction error classified before parser/compiler/fixture; selected short-path
+extraction is the concrete next step with partial stage preserved. No new native
+invocation or Cargo build; Unix count83/caps/history unchanged. Full goal active
+and incomplete. Next: frozen Linux census source gate; Mac sole-custodian and
+execution-graph implementation; Windows selective staging/hash/parser gate.
