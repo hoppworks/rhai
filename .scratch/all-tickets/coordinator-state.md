@@ -6,19 +6,49 @@ Implement every approved local stdlib ticket with strict public Engine + real OS
 ## Authorization and ownership
 Only https://github.com/hoppworks/rhai.git may receive pushes/verified main merges. Never write to the public upstream. Root owns /Users/hoppworks/projects/rhai-all-tickets, task/all-tickets; foreign primary /Users/hoppworks/projects/rhai and other sessions remain untouched. Author and committer exactly hoppworks <daniel@hoppworks.de>, command-local Git configuration, no agent attribution. Strict verification and this session's fork pushes/main merges are authorized. No agent-home/config/credentials/service/admin changes. Windows guest control belongs solely to windows_monitor_job_owner.
 
+## Consolidation request
+
+The user explicitly requests consolidating all work into fork main and ending with
+only main. Reconcile campaign branches without weakening strict acceptance or
+discarding foreign/dirty work. Fork fetch succeeded; main461cf5ec is an ancestor
+of this root branch. Root documentation/evidence and reviewed source-only drivers
+may fast-forward fork main; production process changes remain behind their native
+gates. Full branch/worktree and exact ancestry report is repository-reconciliation.md.
+Seventeen already-main-contained, unoccupied campaign task refs are listed there
+and shown to the user for authorized cleanup; no worktree or unmerged code deletion.
+
 ## Current step and next action
 
 The owner explicitly answered "beides ja" on 2026-10-02 to the Unix completion
 contract revision and console/Windows VM availability. Both prior blockers are
-resolved; the Goal is active and incomplete. No new native launch in this resume.
-Root records the accepted revision in ticket03 and AGENTS.md. Responsible Unix
-context linux_process_native_proof continues the existing cause08 work source-only:
-reuse native74 for the revised foreign-zombie error boundary, adapt affected native
-expectations and diagnose macOS73 honestly, then freeze changes for source review
-before execution. Windows sole owner windows_monitor_job_owner resumes live guest
-verification within its existing finite Expert02 package and cumulative limits.
-Root does not control the guest. Next native invocation75 is allocated only at
-actual coordinated launch; count74 and cause/budget history remain unchanged.
+resolved; the Goal is active and incomplete. User decisions are recorded in
+AGENTS.md and ticket03. Root accepts frozen Unix correction eafdcdf8 after focused
+OCR Rust review of its one selected production/test file. Persistent provisional
+EPERM checks the same absolute one-second deadline on every observation; no fail()
+path recovers a committed error. finish_close leaves AwaitingClosure even for
+Darwin OnlyZombieLeader, preserving the regression's post-reap observation path.
+New real Engine regression covers one-shot recovery and persistent typed failure.
+Source SHA2560c6ec347f5d9ca5c940598d477f9e3f7ec00d40cb8bc72db3fff2c7a56939818;
+archivefe254cabef661b334aa30ce16ab6ed7c267f8dd62507d7e28d3adcd6216c7f75.
+Root independently confirms fork branch readback and exact lowercase attribution.
+Rustfmt/diff checks passed; new native behavior remains unverified. Responsible
+Linux context prepares a frozen driver with meaningful provisional-EPERM RED,
+restoration, owner21/public32 raw33 and retained boundary requirements. Root
+macOS driver now binds the same source/archive, owner21/public29 and two controls:
+real exit0→42 plus deletion of the supervisor provisional EPERM arm, preserving
+seam/regression and falling through to immediate error. Both restore six paths in
+finally. AST/zsh syntax/diff checks pass; bounded Worker review pending. No new
+Unix launch; invocation74/history remain, next75 allocated only on actual launch.
+
+Windows sole owner froze source repair2580f04d and acceptance-stateb6c8219d,
+pushed only fork task/windows-scoped-runner-corrected; root independently confirms
+remote headb6c8219d. Source script7622f44d has passed focused supplemental manual
+OCR-system-rule review: concrete Process.Modules iteration and typed nonzero CLR
+IntPtr pass directly to GetProcAddress, eliminating PSObject.BaseObject extraction.
+Owner proceeds with a fresh absent archive/extraction/root and exact script hash,
+PowerShell5.1 parse,17-file input gate and corrected fixture batch under original
+finite limits. Previous failed root is preserved; parser/source review is not
+native custody acceptance. Root does not control the guest.
 
 Native74 source911fe6fc/archive44b60f1d/driver64a88316 is terminal0: meaningful
 control101, owner20/0, public32/0, matching restoration manifests. Independent
@@ -134,7 +164,14 @@ Immutable af18bb36a1cbe03563d67abebd1ee8a836922df4 has exact lowercase attributi
 The full Unix process source ancestor chain remains unintegrated into main from mergebase c19e90d4b5be95f8598ec53dbcf497e09583f3eb. af18 is not an independently mergeable tiny correction. Preserve full ticket03 platform/lifecycle/MSRV/features/setup/overhead gates before production merge. Main contains verified foundation/API/report work and review/state checkpoints. Existing narrow process proofs are reusable only for unchanged relevant sources/checks/environment; do not claim their coverage extends to missing false-policy behavior or other native platforms.
 
 ## Windows source-only state
-Corrected custody runner source737988d417195a69e1d14c226c9940a9de7d844b and real-client sourcef9cc7372c12122dc2a88f0cd0049863161261d82 remain current owner heads; fork readbacks/attribution and prior source reviews are retained. Real-client5 local scaffolding tests prove source-only behavior, not native custody. New corrected Windows source parser/compiler/job/fixture and real-client acceptance remain unverified. The previous accepted PS5.1 parser result applies only to the superseded script. The owner explicitly confirmed console and VM availability on2026-10-02. Sole owner has been resumed to inspect live availability and continue the pinned finite native package within its remaining limits. No new guest invocation or Windows acceptance is yet reported in this resume. Preserve Expert02/cause history, original17 runner pins/9 client pins and exact limits; no second Expert chain, installs/admin/home mutations or independent root guest control.
+Corrected custody runner current source2580f04d373a1e14d021b292f0bd73381dec8076
+and stateb6c8219d9bb507ae1e3b8ecb8db9ae75dbbd0028 replace737988d4 only for the
+narrow PS5.1 typed-module extraction repair. Real-client sourcef9cc7372 remains;
+its five local scaffolding tests are source-only. Fresh native parser/input-gate,
+compiler/job/fixtures and real-client acceptance remain pending. Sole owner has
+live console availability and is preparing the corrected immutable batch. Retain
+original failed root, Expert02/cause history,17 runner pins/9 client pins and exact
+limits; no second Expert chain, installs/admin/home mutation or root guest control.
 
 ## Cause history and resource limits
 Cumulative Unix production native scoped invocations68, including expected RED/control runs and earlier separate infrastructure failures; no counts or elapsed history reset. Cause06 retained-owner Expert answer and bounded follow-up history persist. Cause07 optional macOS1.77.2 procurement43 consumed its180s watchdog and failed after partial52428800/56737656 bytes; no repeated procurement/install or second setup Expert. Current existing toolchain1.93 is development-only. Preserve original08:04/cause06start09:48/owner-invariant12:31/checkpoint13:01 history and all previous causes by the immutable reference below. Agent-selected checkpoints are estimates; actual safety caps and explicit limited packages remain binding.

@@ -21,7 +21,7 @@ else
  if [[ "$runtime" != /* || -L "$runtime" || -e "$runtime" ]]; then print -r -- "cleanup_readback=present_or_invalid runtime=$runtime"; cleanup_rc=1
  else print -r -- "cleanup_readback=absent runtime=$runtime"; fi
 fi
-for suffix in .wrong-expectation.log .owner.log .sys_process.log; do
+for suffix in .wrong-expectation.log .provisional-eperm-control.log .owner.log .sys_process.log; do
  log="$log_base$suffix"
  if [[ -L "$log" || ! -f "$log" ]]; then print -r -- "cargo_log_readback=missing_or_invalid path=$log"; cleanup_rc=1
  else print -r -- "cargo_log_readback=present bytes=$(wc -c < "$log" | tr -d ' ') path=$log"; fi

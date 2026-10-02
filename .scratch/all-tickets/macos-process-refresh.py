@@ -1,8 +1,8 @@
 import hashlib, os, platform, re, shutil, subprocess, sys, time
 from pathlib import Path
 REPO=Path('/Users/hoppworks/projects/rhai-managed-unix-scope-close')
-SOURCE_REF='55e54ebd93a3dda931141d463c8cb12f5a2ea849'
-ARCHIVE_SHA='fb939f8b58ef5ec77c3b36cb3b5e1579f0e846869543dc3a89edfa8e2a746a5a'
+SOURCE_REF='eafdcdf8e88cd08da5e097d7bdb5215ba3e9b564'
+ARCHIVE_SHA='fe254cabef661b334aa30ce16ab6ed7c267f8dd62507d7e28d3adcd6216c7f75'
 RUNTIME=Path(os.environ['AGENT_RUNTIME_DIR']).resolve()
 BASE=Path(os.environ['RHAI_RESUME_LOG_BASE']).absolute()
 EVIDENCE=Path('/Users/hoppworks/projects/rhai-all-tickets/.scratch/all-tickets/macos-process-refresh-evidence')
@@ -128,12 +128,33 @@ def main():
         restored={n:sha(source/n) for n in OVERLAYS}
         if restored!=hashes: raise RuntimeError('control restoration mismatch')
         print('restored_private_overlay_hashes='+repr(restored),flush=True)
+    unix_path=source/'src/packages/sys/process/unix.rs'
+    unix_original=unix_path.read_text()
+    branch_start=unix_original.index('                Err(error) if error.raw_os_error() == Some(libc::EPERM) => {', unix_original.index('fn supervise('))
+    branch_end=unix_original.index('                Err(error) => {', branch_start)
+    # Remove provisional retry while retaining the real Engine regression and fault seam.
+    # Falling through to the adjacent generic error arm reproduces immediate commitment.
+    broken_unix=unix_original[:branch_start]+unix_original[branch_end:]
+    regression='packages::sys::process::unix::tests::managed_run_retries_provisional_group_eperm_within_one_observation_window'
+    regression_log=BASE.with_name(BASE.name+'.provisional-eperm-control.log')
+    try:
+        unix_path.write_text(broken_unix)
+        cmd=[str(CARGO),'test','--locked','--lib','--features','testing-environ,sys',regression,'--','--exact','--nocapture','--test-threads=1']
+        status,out=run(cmd,regression_log,deadline,env,source)
+        if status!=101 or 'a later exact ESRCH observation closes the scope' not in out or '1 failed' not in out:
+            raise RuntimeError('provisional EPERM control did not reach intended real Engine recovery assertion')
+        print('provisional_eperm_control_status=101 intended_one_shot_recovery_failure=true',flush=True)
+    finally:
+        unix_path.write_text(unix_original)
+        restored={n:sha(source/n) for n in OVERLAYS}
+        if restored!=hashes: raise RuntimeError('provisional EPERM control restoration mismatch')
+        print('provisional_control_restored_private_overlay_hashes='+repr(restored),flush=True)
     owner=BASE.with_name(BASE.name+'.owner.log')
     cmd=[str(CARGO),'test','--locked','--lib','--features','testing-environ,sys','packages::sys::process::unix::tests::','--','--nocapture','--test-threads=1']
     status,out=run(cmd,owner,deadline,env,source)
     summaries=re.findall(r'(?m)^test result: ok\. (\d+) passed; 0 failed;',out)
     receipt=re.search(r'(?m)^(?:test packages::sys::process::unix::tests::public_kill_on_drop_false_final_lease_retires_owner_and_worker \.\.\. )?false-policy-owner-retired pid=(\d+) slot_retired=true worker_done=true reap=ESRCH stdout=retained-output stdout_complete=true stderr_complete=true exit=Code\(0\)$',out)
-    if status!=0 or not summaries or int(summaries[-1])!=20 or not receipt: raise RuntimeError('owner suite did not pass its retained-owner receipt')
+    if status!=0 or not summaries or int(summaries[-1])!=21 or not receipt: raise RuntimeError('owner suite did not pass its retained-owner receipt')
     owner_count=int(summaries[-1])
     print(f'owner_suite status={status} tests={owner_count} receipt_pid={receipt.group(1)}',flush=True)
     suite=BASE.with_name(BASE.name+'.sys_process.log')
