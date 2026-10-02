@@ -1,0 +1,10 @@
+PRIVATE_RUNTIME /var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/rhai-early-runtime-proof-fwbkr9eb
+HELPER_IDENTITY 78955 88955
+PRIVATE_RUNTIME /var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/rhai-missing-process-proof-ar7ve262
+PRIVATE_RUNTIME /var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/rhai-missing-process-proof-yn07olnq
+HELPER_IDENTITY 4242 14242
+stage_identity_same_directory=PASS
+unrelated_stage_rejected=PASS
+runtime_receipts_before_stage_validation=PASS
+durable_runtime_helper_supervisor_receipts=PASS
+unavailable_required_identity_fails_closed=PASS

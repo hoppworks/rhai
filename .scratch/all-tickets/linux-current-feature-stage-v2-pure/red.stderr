@@ -1,0 +1,18 @@
+REGRESSION_FAIL: same directory through the root alias must be accepted
+Traceback (most recent call last):
+  File "/Users/hoppworks/.codex/worktrees/linux-msrv-helper-repair/rhai/.scratch/all-tickets/test-linux-current-feature-stage-v2.py", line 29, in test_canonical_same_directory_only
+    function = function_node(tree, 'stage_identity_matches')
+  File "/Users/hoppworks/.codex/worktrees/linux-msrv-helper-repair/rhai/.scratch/all-tickets/test-linux-current-feature-stage-v2.py", line 16, in function_node
+    raise AssertionError(f'missing helper function: {name}')
+AssertionError: missing helper function: stage_identity_matches
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/hoppworks/.codex/worktrees/linux-msrv-helper-repair/rhai/.scratch/all-tickets/test-linux-current-feature-stage-v2.py", line 112, in <module>
+    main()
+  File "/Users/hoppworks/.codex/worktrees/linux-msrv-helper-repair/rhai/.scratch/all-tickets/test-linux-current-feature-stage-v2.py", line 102, in main
+    test_canonical_same_directory_only(tree)
+  File "/Users/hoppworks/.codex/worktrees/linux-msrv-helper-repair/rhai/.scratch/all-tickets/test-linux-current-feature-stage-v2.py", line 44, in test_canonical_same_directory_only
+    assert not rejected, 'same directory through the root alias must be accepted'
+AssertionError: same directory through the root alias must be accepted
