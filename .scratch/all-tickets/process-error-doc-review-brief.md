@@ -1,0 +1,7 @@
+# Review process output-limit documentation correction
+
+Role Expert, read-only independent review of one documentation-only correction. Read current ~/.agents/AGENTS.md, project AGENTS.md, /Users/hoppworks/projects/agent-skills/CONTEXT.md and config/roles.toml, relevant ocr-delegate skill. Confirm actual instruction revision. No subagents, builds, guest input, Git mutation or remote writes.
+
+Baseline4c9d87dcb1d5b46681135b282c47e27790c24faf. Only reviewed deliverable: current docs/sys-process.md diff correcting output-cap Rust variant from SysError::OutputLimit to SysError::Process { cause: ProcessCause::OutputLimit, report }, preserving script kind classification. Independently inspect current src/packages/sys/error.rs and src/packages/sys/process/unix.rs direct run/spawn errors and report registration. Determine whether wording is accurate, public APIs exported and error.process supported. No native behavior or feature acceptance claim intended. This package changes documentation only, so existing unchanged runtime evidence stays applicable; no duplicate native run needed.
+
+One combined review. OCR preview previously failed due Apple Git cache/xcrun diagnostics; if unavailable use immutable manual affected review and report that limitation; do not repair shared tooling. Report actionable findings or source-only acceptance with exact inspected file/line references and limits. Output at most15 lines plus detailed report if necessary. No source writes; final output captured by coordinator.30-minute active-work planning checkpoint.

@@ -479,6 +479,42 @@ Mac independent sys/net acceptance remains ready but heavy slot occupied;
 process-overhead cause09 stays stopped after third rejected source candidate.
 Goal remains active and incomplete; this step does not claim any feature done.
 
+### Current continuation — independent documentation and launch preparation
+
+Previous status-only goal turn is NO PROGRESS toward acceptance; current turn
+has a reviewed documentation correction and concrete native-slot observations.
+Current instruction repo958a4538 unchanged; loaded global/project, campaign and
+e2e-proof rules. Standard allowance CLI19926 and Expert documentation CLI89769
+are terminal0, original final reports retained at windows-source-allowance-result.md
+and process-error-doc-review.md. The Standard did not separately confirm the
+instruction Git revision; do not infer confirmation. Its finding establishes
+source-fixture1h as per-invocation watchdog, no measured cumulative elapsed;
+its refusal relies on a stored single-invocation label rather than a concrete
+human source restriction. Root must apply current standing acceptance of a
+concrete finite recommendation, preserving consumed launch and all actual caps;
+no new launch performed this turn. Exact extracted SourceRoot still requires
+receipt readback, not guessing. Workhorse foreign make3610198/nextest3615591
+remain live at elapsed8:02/7:55, cwd existing Tauron guardrails-G30g19; a second
+foreign make3654251 was observed at patrol-p01-gate3-full-r5-20261001 and later
+absent. No foreign process touched.
+
+Documentation corrects only docs/sys-process.md output-limit Rust variant to
+SysError::Process with ProcessCause::OutputLimit and script kind/error.process.
+Independent Expert accepted against actual direct/spawn/error registration paths;
+OCR preview excluded Markdown, so manual affected review. No runtime source
+changes; unaffected native proof retained. Whitespace check passed. Final
+platform/process acceptance remains open.
+
+Mac foreign14774 and16993 are terminal/missing; fresh whole-process inventory
+finds no Playwright/Cargo/rustc/nextest/make workload (only inventory self-match).
+Prepared Darwin sys/net source archive/lock and staged runner hashes match
+accepted constants. Own existing exact scope is empty. No native launch yet:
+helper additionally requires INTERRUPT_REQUEST at stage/outer-evidence/interrupt.request,
+which the previously summarized command omitted. Supply that exact absent
+control path in the actual bounded command. No process native/control allocation
+or cause09 repair is reopened. Next action is this independent Darwin acceptance
+with unchanged600/540/510 bounds, then independent cleanup/readback.
+
 ## Resources, counts and cause history
 Unix actual native invocation count84 consumed.82 failed before runtime;
 83 measurementCargo0 but originalouter1 due optional cmdline receipt validation.

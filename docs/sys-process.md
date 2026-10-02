@@ -82,8 +82,10 @@ Successful timeout cleanup returns a result with `timed_out == true`; incomplete
 cleanup raises an error with the available process report instead.
 
 A zero output cap permits empty output and fails on the first byte. Exceeding
-either stream's cap requests cancellation and raises `SysError::OutputLimit`,
-retaining at most the allowed prefix per stream in the report. If readable output
+either stream's cap requests cancellation and raises `SysError::Process` with
+`ProcessCause::OutputLimit`, retaining at most the allowed prefix per stream in
+the report. Scripts observe `kind == "OutputLimit"` and can inspect `error.process`;
+Rust callers match the `Process` variant to access its cause and report. If readable output
 reveals overflow in the same supervision step as deadline expiry, overflow takes
 precedence. No ordering between independent stdout and stderr events is promised.
 
