@@ -19,5 +19,6 @@
     "remote-resource-census-launch.sh": "b3d1d1db0e2c471be594e86f225210334e969858ef2a4b769a4f54b41f797789",
     "resource-census-preflight.py": "31eb5879c61cfe99f83af8b9178473c5d7a49a39e24518804b94fe86271c8a7f",
     "resource-census-proof.py": "a07c8bd4a48f083c465ed18af714fe7fcc762bdfd1bc8a080cbfb24ae11127d9"
-  }
+  },
+  "whitespace_check": "Code and root state/review pass. Full patch reports original census-log EOF and two TSV empty-cmdline trailing tabs; byte-exact accepted evidence preserved, not normalized."
 }
