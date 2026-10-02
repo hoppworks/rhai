@@ -82,9 +82,10 @@ Historical detailed staging, gates and outcomes remain in this same state at
    retained; no native job/public production acceptance claimed.
 3. Mac sole-custodian source increment frozen at b2db6448af7c4c29fe6d6529910d4648e264739a,
    following 2f/a723/fdb. Native task-info RSS replaces the ps/native join; owner
-   reports 19 reader and 25 adapter injected tests passing, not yet independently
-   accepted. One combined independent source review is active, including prior
-   findings and selected helper-source risk. False launch guard stays closed;
+   reports 19 reader and 25 adapter injected tests passing; root independently
+   accepted their narrow controls. Combined source review found four material
+   integration boundaries; one correction batch is back with the same owner.
+   False launch guard stays closed;
    selected graph/toolchain
    confinement, escaped-leaf closure, native Darwin ABI and finite interruption
    controls still need proof. No native launch since81; existing Expert09/caps
@@ -358,3 +359,14 @@ Heavy-slot coordination read the two other active project chats: AUTHZ work is
 on lllm, Patrol work on workhorse; no permission to message or alter those jobs.
 Local compiler process inventory will be checked immediately before any Mac
 heavy launch. Their remote heavy runs do not occupy this Mac's one-run convention.
+
+Combined independent review completed at b2db: six changed files reviewed, none
+skipped. Original macos-custody-combined-review.md records four material findings:
+measurement bytes/text boundary, final acceptance omitting cleanup_complete,
+startup connection wait consuming closure reserve, and duplicate same-runtime
+records rejected by wrapper. Source readiness remains unestablished. Same owner
+macos_overhead_safeguards was continued for one consolidated TDD source-only fix
+batch at a30-minute active-work checkpoint, preserving cause09/Expert09/history,
+false guard and all hard caps. No native/build/control/measurement permission is
+created by this review. Recheck affected boundaries and prior findings at the
+corrected immutable revision; do not restart unaffected review/proof.
