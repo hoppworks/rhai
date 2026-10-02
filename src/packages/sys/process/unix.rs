@@ -26,11 +26,113 @@ enum OwnerPhase {
     Quarantined,
 }
 
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum ManagedScopeState {
+    Direct,
+    Open { pgid: u32 },
+    Signaling { pgid: u32 },
+    AwaitingClosure { pgid: u32 },
+    NeedsObservation { pgid: u32 },
+    Closed,
+    Unresolved { pgid: u32 },
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum ScopeObservation {
+    Pending,
+    Closed,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum GroupCloseOutcome {
+    SignalSubmitted,
+    AlreadyAbsent,
+    OnlyZombieLeader,
+}
+
+fn completion_ready(
+    managed: bool,
+    child_reaped: bool,
+    scope_closed: bool,
+    local_io_finished: bool,
+) -> bool {
+    child_reaped && (!managed || scope_closed) && local_io_finished
+}
+
+impl ManagedScopeState {
+    fn begin_close(&mut self) -> Option<u32> {
+        let Self::Open { pgid } = *self else {
+            return None;
+        };
+        *self = Self::Signaling { pgid };
+        Some(pgid)
+    }
+
+    fn finish_close(&mut self, result: io::Result<GroupCloseOutcome>) -> io::Result<()> {
+        let Self::Signaling { pgid } = *self else {
+            return Err(io::Error::new(
+                io::ErrorKind::InvalidInput,
+                "managed scope close was not in progress",
+            ));
+        };
+        match result {
+            Ok(GroupCloseOutcome::SignalSubmitted | GroupCloseOutcome::OnlyZombieLeader) => {
+                *self = Self::AwaitingClosure { pgid };
+                Ok(())
+            }
+            Ok(GroupCloseOutcome::AlreadyAbsent) => {
+                // A signal result is not a completion receipt. The caller must reap the
+                // exact leader and passively observe ESRCH for the original PGID.
+                *self = Self::AwaitingClosure { pgid };
+                Ok(())
+            }
+            Err(error) => {
+                *self = Self::Unresolved { pgid };
+                Err(error)
+            }
+        }
+    }
+
+    fn observe(&mut self, result: io::Result<()>) -> io::Result<ScopeObservation> {
+        let pgid = match *self {
+            Self::AwaitingClosure { pgid }
+            | Self::NeedsObservation { pgid }
+            | Self::Unresolved { pgid } => pgid,
+            _ => {
+                return match self {
+                    Self::Direct | Self::Closed => Ok(ScopeObservation::Closed),
+                    Self::Open { .. } | Self::Signaling { .. } => Ok(ScopeObservation::Pending),
+                    Self::AwaitingClosure { .. }
+                    | Self::NeedsObservation { .. }
+                    | Self::Unresolved { .. } => unreachable!(),
+                }
+            }
+        };
+        match result {
+            Ok(()) => Ok(ScopeObservation::Pending),
+            Err(error) if error.raw_os_error() == Some(libc::ESRCH) => {
+                *self = Self::Closed;
+                Ok(ScopeObservation::Closed)
+            }
+            Err(error) if error.kind() == io::ErrorKind::Interrupted => {
+                Ok(ScopeObservation::Pending)
+            }
+            Err(error) => {
+                *self = Self::NeedsObservation { pgid };
+                Err(error)
+            }
+        }
+    }
+}
+
 struct OwnerRecord {
     child: Option<OsChild>,
     spawned: Option<SpawnRuntime>,
     phase: OwnerPhase,
     managed: bool,
+    scope: ManagedScopeState,
+    direct_kill_attempted: bool,
+    scope_close_started: Option<Instant>,
     pump_finished: bool,
     reaped: bool,
     retirement_complete: bool,
@@ -67,6 +169,8 @@ struct ChildSnapshot {
     kill_requested: bool,
     kill_sent: bool,
     error: Option<ProcessCause>,
+    cleanup_diagnostics: Vec<super::ProcessDiagnostic>,
+    published_failure: Option<(ProcessCause, ProcessReport)>,
     limit: usize,
     kill_on_drop: bool,
 }
@@ -171,6 +275,9 @@ impl CleanupService {
             spawned: None,
             phase: OwnerPhase::Launching,
             managed: false,
+            scope: ManagedScopeState::Direct,
+            direct_kill_attempted: false,
+            scope_close_started: None,
             pump_finished: false,
             reaped: false,
             retirement_complete: false,
@@ -246,7 +353,7 @@ fn cleanup_worker(registry: Arc<OwnerRegistry>) {
                 }
                 continue;
             }
-            let mut child = {
+            let (mut child, already_reaped) = {
                 let mut owner = record
                     .lock()
                     .unwrap_or_else(|poisoned| poisoned.into_inner());
@@ -268,18 +375,30 @@ fn cleanup_worker(registry: Arc<OwnerRegistry>) {
                     continue;
                 }
                 owner.phase = OwnerPhase::Service;
-                owner.child.take()
+                (owner.child.take(), owner.reaped)
             };
-            let Some(mut child_value) = child.take() else {
-                continue;
-            };
-            note_numeric_operation(&record);
-            let observation = child_value.try_wait();
-            let (retire, quarantined) = match observation {
-                Ok(Some(_)) => (true, false),
-                Ok(None) => (false, false),
-                Err(error) if error.raw_os_error() == Some(libc::ECHILD) => (false, true),
-                Err(_) => (false, false),
+            let mut child_value = child.take();
+            let (retire, quarantined) = if already_reaped {
+                let mut owner = record.lock().unwrap_or_else(|p| p.into_inner());
+                let scope_result = if owner.managed {
+                    observe_managed_scope(&mut owner.scope)
+                } else {
+                    Ok(ScopeObservation::Closed)
+                };
+                (matches!(scope_result, Ok(ScopeObservation::Closed)), false)
+            } else if let Some(value) = child_value.as_mut() {
+                note_numeric_operation(&record);
+                match value.try_wait() {
+                    Ok(Some(_)) => {
+                        record.lock().unwrap_or_else(|p| p.into_inner()).reaped = true;
+                        (false, false)
+                    }
+                    Ok(None) => (false, false),
+                    Err(error) if error.raw_os_error() == Some(libc::ECHILD) => (false, true),
+                    Err(_) => (false, false),
+                }
+            } else {
+                (false, true)
             };
             if retire {
                 retire_record(&registry, &record);
@@ -288,7 +407,7 @@ fn cleanup_worker(registry: Arc<OwnerRegistry>) {
                 let mut owner = record
                     .lock()
                     .unwrap_or_else(|poisoned| poisoned.into_inner());
-                owner.child = Some(child_value);
+                owner.child = child_value;
                 owner.phase = if quarantined {
                     OwnerPhase::Quarantined
                 } else {
@@ -345,7 +464,7 @@ fn pump_spawned_record(registry: &OwnerRegistry, record: &Arc<Mutex<OwnerRecord>
         runtime.stdin.take();
         note_numeric_operation_owner(&owner);
         let (termination, operation) = if owner.managed {
-            match terminate_managed_child(&mut child) {
+            match terminate_managed_child(&mut owner, &mut child) {
                 Ok(()) => (Ok(()), "terminate process group and child"),
                 Err(error) => (Err(error.source), error.operation),
             }
@@ -360,16 +479,9 @@ fn pump_spawned_record(registry: &OwnerRegistry, record: &Arc<Mutex<OwnerRecord>
                 }
                 state.kill_sent = true;
                 if owner.managed {
-                    // Without a successful group close, do not reap the leader and lose the
-                    // only safe PGID identity fence. Keep the entire owner quarantined.
-                    owner.phase = OwnerPhase::Quarantined;
-                    state.terminal = true;
-                    runtime.control.changed.notify_all();
-                    registry.changed.notify_all();
-                    drop(state);
-                    owner.child = Some(child);
-                    owner.spawned = Some(runtime);
-                    return true;
+                    // Keep exact PGID custody. The direct child can still be reaped, after
+                    // which the service may passively observe natural group disappearance.
+                    owner.phase = OwnerPhase::Spawned;
                 }
             }
         }
@@ -490,6 +602,67 @@ fn pump_spawned_record(registry: &OwnerRegistry, record: &Arc<Mutex<OwnerRecord>
         progressed = true;
     }
 
+    if owner.reaped && owner.managed && !matches!(owner.scope, ManagedScopeState::Closed) {
+        owner.scope_close_started.get_or_insert_with(Instant::now);
+        note_numeric_operation_owner(&owner);
+        match observe_managed_scope(&mut owner.scope) {
+            Ok(ScopeObservation::Closed) => progressed = true,
+            Ok(ScopeObservation::Pending) => {}
+            Err(error) => {
+                if state.error.is_none() {
+                    state.error = Some(process_io_cause(
+                        "observe process group closure",
+                        &state.program,
+                        error,
+                    ));
+                }
+                // Keep the immutable PGID custody record and retry only passive observation.
+            }
+        }
+    }
+
+    if owner.managed
+        && owner.reaped
+        && !matches!(owner.scope, ManagedScopeState::Closed)
+        && owner
+            .scope_close_started
+            .is_some_and(|started| started.elapsed() >= Duration::from_secs(1))
+        && !state.terminal
+    {
+        runtime.stdin.take();
+        runtime.stdout.take();
+        runtime.stderr.take();
+        owner.capture_closed = true;
+        owner.pump_finished = true;
+        let scope_diagnostic = super::ProcessDiagnostic::new(
+            "observe process group closure",
+            Some(io::ErrorKind::TimedOut),
+            "managed process scope remained present after leader reap",
+        );
+        if !state.cleanup_diagnostics.iter().any(|diagnostic| {
+            diagnostic.operation() == scope_diagnostic.operation()
+                && diagnostic.message() == scope_diagnostic.message()
+        }) {
+            state.cleanup_diagnostics.push(scope_diagnostic);
+        }
+        if state.error.is_none() {
+            state.error = Some(ProcessCause::Io {
+                op: "observe process group closure",
+                target: state.program.clone(),
+                kind: io::ErrorKind::TimedOut,
+                message: "managed process scope remained present after leader reap".into(),
+            });
+        }
+        state.terminal = true;
+        let published_cause = state
+            .error
+            .clone()
+            .expect("scope expiry publishes an incomplete-cleanup error");
+        state.published_failure = Some((published_cause, child_process_report(&state)));
+        runtime.control.changed.notify_all();
+        progressed = true;
+    }
+
     if !owner.reaped {
         note_numeric_operation_owner(&owner);
         let mut wait_operation = "wait for child";
@@ -498,11 +671,24 @@ fn pump_spawned_record(registry: &OwnerRegistry, record: &Arc<Mutex<OwnerRecord>
                 Ok(false) => Ok(None),
                 Err(error) if error.kind() == io::ErrorKind::Interrupted => Ok(None),
                 Ok(true) => {
-                    match close_managed_group(child.id(), GroupCloseContext::LeaderExited) {
-                        Ok(()) => child.wait().map(Some),
+                    match request_managed_close(
+                        &mut owner.scope,
+                        child.id(),
+                        GroupCloseContext::LeaderExited,
+                    ) {
+                        Ok(()) => child.try_wait(),
                         Err(error) => {
-                            wait_operation = "terminate process group";
-                            Err(error)
+                            if state.error.is_none() {
+                                state.error = Some(process_io_cause(
+                                    "terminate process group",
+                                    &state.program,
+                                    error,
+                                ));
+                            }
+                            // Submission failure is retained as an execution error, but it
+                            // does not erase exact leader custody. Reap nonblocking, then
+                            // let the service passively observe the original PGID.
+                            child.try_wait()
                         }
                     }
                 }
@@ -547,10 +733,16 @@ fn pump_spawned_record(registry: &OwnerRegistry, record: &Arc<Mutex<OwnerRecord>
         }
     }
 
-    if owner.reaped
-        && (state.stdout_complete || owner.capture_closed)
-        && (state.stderr_complete || owner.capture_closed)
-    {
+    if completion_ready(
+        owner.managed,
+        owner.reaped,
+        matches!(
+            owner.scope,
+            ManagedScopeState::Closed | ManagedScopeState::Direct
+        ),
+        (state.stdout_complete || owner.capture_closed)
+            && (state.stderr_complete || owner.capture_closed),
+    ) {
         state.terminal = true;
         runtime.stdin.take();
         owner.pump_finished = true;
@@ -690,21 +882,21 @@ fn darwin_group_is_only_leader(pid: u32) -> io::Result<bool> {
 /// Darwin may report EPERM for a group containing only its already-exited zombie leader.
 /// That one case is harmless after exact WNOWAIT observation and an untruncated atomic
 /// process-group listing; all live-cancellation and ambiguous cases preserve the error.
-fn close_managed_group(pid: u32, context: GroupCloseContext) -> io::Result<()> {
+fn close_managed_group(pid: u32, context: GroupCloseContext) -> io::Result<GroupCloseOutcome> {
     #[cfg(not(target_os = "macos"))]
     let _ = context;
     // SAFETY: negative pid addresses only the process group created for this owned child.
     if unsafe { libc::kill(-(pid as libc::pid_t), libc::SIGKILL) } == 0 {
-        return Ok(());
+        return Ok(GroupCloseOutcome::SignalSubmitted);
     }
     let error = io::Error::last_os_error();
     if error.raw_os_error() == Some(libc::ESRCH) {
-        return Ok(());
+        return Ok(GroupCloseOutcome::AlreadyAbsent);
     }
     #[cfg(target_os = "macos")]
     if error.raw_os_error() == Some(libc::EPERM) && context == GroupCloseContext::LeaderExited {
         if darwin_eperm_fallback_allowed(context, &error, darwin_group_is_only_leader(pid)) {
-            return Ok(());
+            return Ok(GroupCloseOutcome::OnlyZombieLeader);
         }
     }
     Err(error)
@@ -718,9 +910,69 @@ struct ManagedTerminationError {
 /// Close the original scope and independently stop its owned leader. A child can move itself
 /// to another same-session group after pre_exec establishes the initial scope, so the group
 /// signal alone does not guarantee that the direct child has stopped.
-fn terminate_managed_child(child: &mut OsChild) -> Result<(), ManagedTerminationError> {
-    let group_error = close_managed_group(child.id(), GroupCloseContext::Cancellation).err();
-    let child_error = child.kill().err();
+fn request_managed_close(
+    scope: &mut ManagedScopeState,
+    pid: u32,
+    context: GroupCloseContext,
+) -> io::Result<()> {
+    let Some(pgid) = scope.begin_close() else {
+        return match scope {
+            ManagedScopeState::Unresolved { .. } => Err(io::Error::new(
+                io::ErrorKind::Other,
+                "managed group close was previously unresolved",
+            )),
+            _ => Ok(()),
+        };
+    };
+    debug_assert_eq!(pgid, pid);
+    let result = close_managed_group(pgid, context);
+    scope.finish_close(result)
+}
+
+fn observe_managed_scope(scope: &mut ManagedScopeState) -> io::Result<ScopeObservation> {
+    let pgid = match *scope {
+        ManagedScopeState::AwaitingClosure { pgid }
+        | ManagedScopeState::NeedsObservation { pgid }
+        | ManagedScopeState::Unresolved { pgid } => pgid,
+        ManagedScopeState::Closed | ManagedScopeState::Direct => {
+            return Ok(ScopeObservation::Closed)
+        }
+        ManagedScopeState::Open { .. } | ManagedScopeState::Signaling { .. } => {
+            return Ok(ScopeObservation::Pending)
+        }
+    };
+    // SAFETY: signal zero observes only the original, retained process group.
+    let result = if unsafe { libc::kill(-(pgid as libc::pid_t), 0) } == 0 {
+        Ok(())
+    } else {
+        Err(io::Error::last_os_error())
+    };
+    scope.observe(result)
+}
+
+fn terminate_managed_child(
+    owner: &mut OwnerRecord,
+    child: &mut OsChild,
+) -> Result<(), ManagedTerminationError> {
+    let group_error = if owner.reaped {
+        Some(io::Error::new(
+            io::ErrorKind::InvalidInput,
+            "managed process scope cannot be signaled after direct-child reap",
+        ))
+    } else {
+        request_managed_close(
+            &mut owner.scope,
+            child.id(),
+            GroupCloseContext::Cancellation,
+        )
+        .err()
+    };
+    let child_error = if owner.reaped || owner.direct_kill_attempted {
+        None
+    } else {
+        owner.direct_kill_attempted = true;
+        child.kill().err()
+    };
     if let Some(source) = group_error {
         return Err(ManagedTerminationError {
             operation: "terminate process group",
@@ -749,8 +1001,14 @@ impl LaunchReservation {
             .record
             .lock()
             .unwrap_or_else(|poisoned| poisoned.into_inner());
+        let pid = child.id();
         owner.child = Some(child);
         owner.managed = self.managed;
+        owner.scope = if self.managed {
+            ManagedScopeState::Open { pgid: pid }
+        } else {
+            ManagedScopeState::Direct
+        };
         owner.phase = OwnerPhase::Caller;
     }
 
@@ -846,7 +1104,11 @@ impl Drop for LaunchReservation {
                 child.stderr.take();
                 note_numeric_operation(&self.record);
                 let (termination, _operation) = if self.managed {
-                    match terminate_managed_child(&mut child) {
+                    let result = {
+                        let mut owner = self.record.lock().unwrap_or_else(|p| p.into_inner());
+                        terminate_managed_child(&mut owner, &mut child)
+                    };
+                    match result {
                         Ok(()) => (Ok(()), "terminate process group and child"),
                         Err(error) => (Err(error.source), error.operation),
                     }
@@ -858,11 +1120,7 @@ impl Drop for LaunchReservation {
                     .lock()
                     .unwrap_or_else(|poisoned| poisoned.into_inner());
                 owner.child = Some(child);
-                owner.phase = if self.managed && termination.is_err() {
-                    OwnerPhase::Quarantined
-                } else {
-                    OwnerPhase::CleanupPending
-                };
+                owner.phase = OwnerPhase::CleanupPending;
                 owner.pump_finished = true;
                 self.registry.changed.notify_all();
                 self.active = false;
@@ -944,7 +1202,20 @@ impl Drop for DriverToken<'_> {
         if !self.completed {
             if self.reaped {
                 // A child already observed as reaped must never be waited or signaled again.
-                self.child.take();
+                // Preserve a managed PGID-only obligation for passive service observation.
+                let child = self.child.take();
+                let mut owner = self
+                    .reservation
+                    .record
+                    .lock()
+                    .unwrap_or_else(|p| p.into_inner());
+                owner.pump_finished = true;
+                if self.managed && !matches!(owner.scope, ManagedScopeState::Closed) {
+                    owner.child = child;
+                    owner.phase = OwnerPhase::CleanupPending;
+                    self.reservation.active = false;
+                    self.reservation.registry.changed.notify_all();
+                }
                 self.completed = true;
                 return;
             }
@@ -952,7 +1223,12 @@ impl Drop for DriverToken<'_> {
                 if let Some(child) = self.child.as_mut() {
                     note_numeric_operation(&self.reservation.record);
                     let result = if self.managed {
-                        terminate_managed_child(child).map_err(|error| error.source)
+                        let mut owner = self
+                            .reservation
+                            .record
+                            .lock()
+                            .unwrap_or_else(|p| p.into_inner());
+                        terminate_managed_child(&mut owner, child).map_err(|error| error.source)
                     } else {
                         child.kill()
                     };
@@ -964,7 +1240,7 @@ impl Drop for DriverToken<'_> {
                                 .lock()
                                 .unwrap_or_else(|p| p.into_inner());
                             owner.child = Some(child);
-                            owner.phase = OwnerPhase::Quarantined;
+                            owner.phase = OwnerPhase::CleanupPending;
                         }
                         self.reservation.active = false;
                         self.completed = true;
@@ -992,7 +1268,21 @@ fn retire_record(registry: &OwnerRegistry, record: &Arc<Mutex<OwnerRecord>>) {
         let mut owner = record
             .lock()
             .unwrap_or_else(|poisoned| poisoned.into_inner());
-        if owner.retirement_complete {
+        let empty_launch = owner.phase == OwnerPhase::Launching
+            && owner.child.is_none()
+            && owner.spawned.is_none();
+        if owner.retirement_complete
+            || (!empty_launch
+                && !completion_ready(
+                    owner.managed,
+                    owner.reaped,
+                    matches!(
+                        owner.scope,
+                        ManagedScopeState::Direct | ManagedScopeState::Closed
+                    ),
+                    owner.pump_finished,
+                ))
+        {
             return;
         }
         owner.retirement_complete = true;
@@ -1036,6 +1326,15 @@ impl PumpGuard {
                 let mut record = self.record.lock().unwrap_or_else(|p| p.into_inner());
                 record.pump_finished = true;
                 record.reaped
+                    && completion_ready(
+                        record.managed,
+                        record.reaped,
+                        matches!(
+                            record.scope,
+                            ManagedScopeState::Direct | ManagedScopeState::Closed
+                        ),
+                        record.pump_finished,
+                    )
             };
             if reaped {
                 retire_record(&self.registry, &self.record);
@@ -1084,6 +1383,8 @@ struct ExecutionFaults {
     quarantine_observations: Option<Arc<AtomicUsize>>,
     #[cfg(test)]
     spawn_operations: Option<Arc<AtomicUsize>>,
+    #[cfg(test)]
+    scope_eperm_observations_remaining: usize,
 }
 
 impl ExecutionFaults {
@@ -1106,6 +1407,15 @@ impl ExecutionFaults {
             ));
         }
         child.kill()
+    }
+
+    fn observe_scope(&mut self, scope: &mut ManagedScopeState) -> io::Result<ScopeObservation> {
+        #[cfg(test)]
+        if self.scope_eperm_observations_remaining > 0 {
+            self.scope_eperm_observations_remaining -= 1;
+            return scope.observe(Err(io::Error::from_raw_os_error(libc::EPERM)));
+        }
+        observe_managed_scope(scope)
     }
 
     #[cfg(test)]
@@ -1469,6 +1779,13 @@ impl ProcessChild {
         if !state.terminal {
             return Ok(Dynamic::UNIT);
         }
+        if let Some((cause, report)) = &state.published_failure {
+            return Err(SysError::Process {
+                cause: cause.clone(),
+                report: report.clone(),
+            }
+            .into());
+        }
         if let Some(error) = &state.error {
             let stdout = String::from_utf8_lossy(&state.stdout);
             let stderr = String::from_utf8_lossy(&state.stderr);
@@ -1512,7 +1829,7 @@ fn child_process_report(state: &ChildSnapshot) -> ProcessReport {
         state.stderr_complete,
         state.exit,
         false,
-        vec![],
+        state.cleanup_diagnostics.clone(),
     )
 }
 
@@ -1834,6 +2151,8 @@ fn spawn_child(
             kill_requested: false,
             kill_sent: false,
             error: None,
+            cleanup_diagnostics: Vec::new(),
+            published_failure: None,
             limit: options.limit,
             kill_on_drop: state.config.kill_on_drop,
         }),
@@ -2130,6 +2449,7 @@ fn supervise(
                 false,
                 faults,
                 false,
+                None,
             );
         }
     }
@@ -2139,8 +2459,101 @@ fn supervise(
     let mut err = Vec::new();
     let (mut out_eof, mut err_eof) = (false, false);
     let mut status = None;
+    let mut scope_wait_started = None;
+    let mut provisional_scope_error = None;
     loop {
         let mut expired = timeout.is_some_and(|t| started.elapsed() >= t);
+        if driver.reaped && driver.managed {
+            let observation = {
+                let mut owner = driver
+                    .reservation
+                    .record
+                    .lock()
+                    .unwrap_or_else(|p| p.into_inner());
+                if matches!(owner.scope, ManagedScopeState::Closed) {
+                    Ok(ScopeObservation::Closed)
+                } else {
+                    faults.observe_scope(&mut owner.scope)
+                }
+            };
+            match observation {
+                Ok(ScopeObservation::Closed) => {}
+                Ok(ScopeObservation::Pending) => {
+                    let since = *scope_wait_started.get_or_insert_with(Instant::now);
+                    if since.elapsed() >= Duration::from_secs(1) {
+                        let deadline = since + Duration::from_secs(1);
+                        let cause = provisional_scope_error.take().map_or_else(
+                            || ProcessCause::Io {
+                                op: "observe process group closure",
+                                target: program.into(),
+                                kind: io::ErrorKind::TimedOut,
+                                message: "managed process scope remained present after leader reap"
+                                    .into(),
+                            },
+                            |error| {
+                                process_io_cause("observe process group closure", program, error)
+                            },
+                        );
+                        return fail(
+                            &mut driver,
+                            &mut stdin,
+                            &mut stdout,
+                            &mut stderr,
+                            cause,
+                            out,
+                            err,
+                            out_eof,
+                            err_eof,
+                            faults,
+                            false,
+                            Some(deadline),
+                        );
+                    }
+                }
+                Err(error) if error.raw_os_error() == Some(libc::EPERM) => {
+                    let since = *scope_wait_started.get_or_insert_with(Instant::now);
+                    provisional_scope_error.get_or_insert(error);
+                    if since.elapsed() >= Duration::from_secs(1) {
+                        let deadline = since + Duration::from_secs(1);
+                        let cause = process_io_cause(
+                            "observe process group closure",
+                            program,
+                            provisional_scope_error.take().unwrap(),
+                        );
+                        return fail(
+                            &mut driver,
+                            &mut stdin,
+                            &mut stdout,
+                            &mut stderr,
+                            cause,
+                            out,
+                            err,
+                            out_eof,
+                            err_eof,
+                            faults,
+                            false,
+                            Some(deadline),
+                        );
+                    }
+                }
+                Err(error) => {
+                    return fail(
+                        &mut driver,
+                        &mut stdin,
+                        &mut stdout,
+                        &mut stderr,
+                        process_io_cause("observe process group closure", program, error),
+                        out,
+                        err,
+                        out_eof,
+                        err_eof,
+                        faults,
+                        false,
+                        None,
+                    );
+                }
+            }
+        }
         if !driver.reaped {
             faults.note_fault_operation();
             let mut wait_operation = "wait for process";
@@ -2149,14 +2562,24 @@ fn supervise(
                     Ok(false) => Ok(None),
                     Err(error) if error.kind() == io::ErrorKind::Interrupted => Ok(None),
                     Ok(true) => {
-                        if let Err(error) = close_managed_group(
-                            driver.child_mut().id(),
-                            GroupCloseContext::LeaderExited,
-                        ) {
+                        let child_id = driver.child_mut().id();
+                        let result = {
+                            let mut owner = driver
+                                .reservation
+                                .record
+                                .lock()
+                                .unwrap_or_else(|p| p.into_inner());
+                            request_managed_close(
+                                &mut owner.scope,
+                                child_id,
+                                GroupCloseContext::LeaderExited,
+                            )
+                        };
+                        if let Err(error) = result {
                             wait_operation = "terminate process group";
                             Err(error)
                         } else {
-                            driver.child_mut().wait().map(Some)
+                            driver.child_mut().try_wait()
                         }
                     }
                     Err(error) => Err(error),
@@ -2172,7 +2595,7 @@ fn supervise(
                     status = s;
                 }
                 Err(e) => {
-                    let identity_lost = e.raw_os_error() == Some(libc::ECHILD) || driver.managed;
+                    let identity_lost = e.raw_os_error() == Some(libc::ECHILD);
                     return fail(
                         &mut driver,
                         &mut stdin,
@@ -2190,11 +2613,22 @@ fn supervise(
                         err_eof,
                         faults,
                         identity_lost,
+                        None,
                     );
                 }
             }
         }
-        if status.is_some() && out_eof && err_eof {
+        let scope_closed = if driver.managed {
+            let owner = driver
+                .reservation
+                .record
+                .lock()
+                .unwrap_or_else(|p| p.into_inner());
+            matches!(owner.scope, ManagedScopeState::Closed)
+        } else {
+            true
+        };
+        if status.is_some() && out_eof && err_eof && scope_closed {
             break;
         }
         if let Some(fd) = infd {
@@ -2284,6 +2718,7 @@ fn supervise(
                     err_eof,
                     faults,
                     false,
+                    None,
                 );
             }
         }
@@ -2304,6 +2739,7 @@ fn supervise(
                         err_eof,
                         faults,
                         false,
+                        None,
                     )
                 }
                 Ok(ReadState::Eof) => out_eof = true,
@@ -2326,6 +2762,7 @@ fn supervise(
                         err_eof,
                         faults,
                         false,
+                        None,
                     )
                 }
             }
@@ -2347,6 +2784,7 @@ fn supervise(
                         err_eof,
                         faults,
                         false,
+                        None,
                     )
                 }
                 Ok(ReadState::Eof) => err_eof = true,
@@ -2369,6 +2807,7 @@ fn supervise(
                         err_eof,
                         faults,
                         false,
+                        None,
                     )
                 }
             }
@@ -2399,6 +2838,7 @@ fn supervise(
                             err_eof,
                             faults,
                             false,
+                            None,
                         )
                     }
                 }
@@ -2419,6 +2859,7 @@ fn supervise(
                 err_eof,
                 faults,
                 false,
+                None,
             )
             .unwrap_err();
             return if report.timed_out() {
@@ -2463,6 +2904,7 @@ fn fail(
     err_eof: bool,
     faults: &mut ExecutionFaults,
     mut identity_lost: bool,
+    cleanup_deadline: Option<Instant>,
 ) -> Result<ProcessReport, (ProcessCause, ProcessReport)> {
     // Stop every pipe operation before signaling or observing cleanup. No caller-side I/O
     // endpoint remains active once this execution commits to its primary failure.
@@ -2481,8 +2923,13 @@ fn fail(
         driver.termination_attempted = true;
         faults.note_fault_operation();
         let termination = if driver.managed {
-            terminate_managed_child(driver.child_mut())
-                .map_err(|error| (error.operation, error.source))
+            let record = driver.reservation.record.clone();
+            let child = driver.child.as_mut().expect("active process driver");
+            let result = {
+                let mut owner = record.lock().unwrap_or_else(|p| p.into_inner());
+                terminate_managed_child(&mut owner, child)
+            };
+            result.map_err(|error| (error.operation, error.source))
         } else {
             faults
                 .kill(driver.child_mut())
@@ -2494,22 +2941,50 @@ fn fail(
                 Some(e.kind()),
                 e.to_string(),
             ));
-            if driver.managed {
-                // Do not consume the leader's wait status after a failed group close; its
-                // unreaped identity is the only fence against signaling a reused PGID.
-                identity_lost = true;
-            }
+            // A failed group submission is not identity loss: retain the exact PGID and
+            // allow direct-child reaping followed only by passive group observations.
         }
     }
-    let cleanup_deadline = Instant::now() + Duration::from_secs(1);
+    let cleanup_deadline =
+        cleanup_deadline.unwrap_or_else(|| Instant::now() + Duration::from_secs(1));
     let mut status = driver.exit_status.clone();
     let mut interrupted = 0u8;
-    while !identity_lost && !driver.reaped && Instant::now() < cleanup_deadline {
+    while !identity_lost && Instant::now() < cleanup_deadline {
+        if driver.reaped {
+            let observation = {
+                let mut owner = driver
+                    .reservation
+                    .record
+                    .lock()
+                    .unwrap_or_else(|p| p.into_inner());
+                if owner.managed && !matches!(owner.scope, ManagedScopeState::Closed) {
+                    faults.observe_scope(&mut owner.scope)
+                } else {
+                    Ok(ScopeObservation::Closed)
+                }
+            };
+            match observation {
+                Ok(ScopeObservation::Closed) => break,
+                Ok(ScopeObservation::Pending) => thread::sleep(Duration::from_millis(10)),
+                Err(error) => {
+                    diagnostics.push(super::ProcessDiagnostic::new(
+                        "observe process group closure",
+                        Some(error.kind()),
+                        error.to_string(),
+                    ));
+                    break;
+                }
+            }
+            continue;
+        }
         match faults.cleanup_wait(driver.child_mut()) {
             Ok(Some(value)) => {
                 driver.observe_reaped(value.clone());
                 status = Some(value);
-                break;
+                // Managed cleanup still owns its bounded passive group-observation budget
+                // after the exact leader has been reaped. The next loop pass observes the
+                // retained PGID without another nonzero signal; direct-child cleanup exits
+                // through the same loop's already-closed branch.
             }
             Ok(None) => thread::sleep(Duration::from_millis(10)),
             Err(error) if error.raw_os_error() == Some(libc::ECHILD) => {
@@ -2559,8 +3034,46 @@ fn fail(
             driver.relinquish();
         }
     } else if driver.reaped {
-        driver.completed = true;
-        driver.reservation.active = false;
+        let (scope_closed, observation_error) = {
+            let mut owner = driver
+                .reservation
+                .record
+                .lock()
+                .unwrap_or_else(|p| p.into_inner());
+            owner.pump_finished = true;
+            let observed = if owner.managed && !matches!(owner.scope, ManagedScopeState::Closed) {
+                faults.observe_scope(&mut owner.scope)
+            } else {
+                Ok(ScopeObservation::Closed)
+            };
+            (
+                matches!(observed, Ok(ScopeObservation::Closed)),
+                observed.err(),
+            )
+        };
+        if let Some(error) = observation_error {
+            diagnostics.push(super::ProcessDiagnostic::new(
+                "observe process group closure",
+                Some(error.kind()),
+                error.to_string(),
+            ));
+        }
+        if scope_closed {
+            driver.completed = true;
+            driver.reservation.active = false;
+        } else {
+            if !diagnostics
+                .iter()
+                .any(|diagnostic| diagnostic.operation() == "observe process group closure")
+            {
+                diagnostics.push(super::ProcessDiagnostic::new(
+                    "observe process group closure",
+                    None,
+                    "managed scope remains present under retained process ownership",
+                ));
+            }
+            driver.relinquish();
+        }
     }
     let exit = status.and_then(|s| {
         s.code()
@@ -2576,7 +3089,10 @@ fn fail(
 
 #[cfg(test)]
 mod tests {
-    use super::{read_ready, CleanupService, ExecutionFaults, ReadState};
+    use super::{
+        completion_ready, read_ready, CleanupService, ExecutionFaults, ManagedScopeState,
+        ReadState, ScopeObservation,
+    };
     use crate::packages::sys::{
         ProcessCause, ProcessExit, ProgramPolicy, SysConfig, SysError, SysPackage,
     };
@@ -2592,11 +3108,279 @@ mod tests {
     use std::path::{Path, PathBuf};
     use std::process::{Child, Command, Stdio};
     use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
-    use std::sync::Arc;
+    use std::sync::{Arc, Condvar, Mutex};
     use std::thread;
     use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};
 
     const EXPECTED_READ_BUDGET: usize = 64 * 1024;
+
+    #[test]
+    fn managed_close_submission_is_not_scope_completion() {
+        let mut scope = ManagedScopeState::Open { pgid: 41 };
+        assert_eq!(scope.begin_close(), Some(41));
+        scope
+            .finish_close(Ok(super::GroupCloseOutcome::SignalSubmitted))
+            .unwrap();
+
+        assert_eq!(scope, ManagedScopeState::AwaitingClosure { pgid: 41 });
+        assert_eq!(scope.observe(Ok(())).unwrap(), ScopeObservation::Pending);
+        assert_eq!(
+            scope.begin_close(),
+            None,
+            "a second numeric signal is forbidden"
+        );
+        assert!(!completion_ready(true, true, false, true));
+    }
+
+    #[test]
+    fn managed_scope_esrch_closes_only_after_child_reap_and_io_completion() {
+        let mut scope = ManagedScopeState::Open { pgid: 42 };
+        scope.begin_close().expect("one close attempt");
+        scope
+            .finish_close(Ok(super::GroupCloseOutcome::SignalSubmitted))
+            .unwrap();
+        assert_eq!(scope.observe(Ok(())).unwrap(), ScopeObservation::Pending);
+        assert!(!completion_ready(true, true, false, true));
+
+        assert_eq!(
+            scope
+                .observe(Err(io::Error::from_raw_os_error(libc::ESRCH)))
+                .unwrap(),
+            ScopeObservation::Closed
+        );
+        assert!(!completion_ready(true, false, true, true));
+        assert!(!completion_ready(true, true, true, false));
+        assert!(completion_ready(true, true, true, true));
+        assert!(completion_ready(false, true, false, true));
+    }
+
+    #[test]
+    fn managed_scope_observation_errors_remain_passive_and_retryable() {
+        let mut scope = ManagedScopeState::Open { pgid: 43 };
+        scope.begin_close().expect("one close attempt");
+        scope
+            .finish_close(Ok(super::GroupCloseOutcome::SignalSubmitted))
+            .unwrap();
+        assert_eq!(
+            scope
+                .observe(Err(io::Error::new(
+                    io::ErrorKind::Interrupted,
+                    "interrupted",
+                )))
+                .unwrap(),
+            ScopeObservation::Pending
+        );
+        assert!(scope
+            .observe(Err(io::Error::from_raw_os_error(libc::EPERM)))
+            .is_err());
+        assert_eq!(scope, ManagedScopeState::NeedsObservation { pgid: 43 });
+        assert_eq!(
+            scope.begin_close(),
+            None,
+            "observation failure cannot resignal"
+        );
+        assert_eq!(
+            scope
+                .observe(Err(io::Error::from_raw_os_error(libc::ESRCH)))
+                .unwrap(),
+            ScopeObservation::Closed
+        );
+    }
+
+    #[test]
+    fn managed_run_retries_provisional_group_eperm_within_one_observation_window() {
+        let program = if cfg!(target_os = "macos") {
+            "/usr/bin/true"
+        } else {
+            "/bin/true"
+        };
+        let mut engine = Engine::new();
+        let package = SysPackage::new(
+            SysConfig::default()
+                .programs(ProgramPolicy::AllowList(vec![program.into()]))
+                .process_scope(crate::packages::sys::ProcessScope::Managed),
+        )
+        .unwrap();
+        package.register_into_engine(&mut engine);
+
+        inject_scope_eperm_for_next_execution(1);
+        let recovered = engine
+            .eval::<crate::Map>(&format!("run({program:?})"))
+            .unwrap_or_else(|error| {
+                let detail = match error.as_ref() {
+                    EvalAltResult::ErrorRuntime(value, _) => value
+                        .clone()
+                        .try_cast::<SysError>()
+                        .map(|error| format!("{error:?}"))
+                        .unwrap_or_else(|| format!("untyped runtime payload {value:?}")),
+                    other => format!("{other:?}"),
+                };
+                panic!("a later exact ESRCH observation closes the scope: {detail}");
+            });
+        assert!(recovered["success"].as_bool().unwrap());
+        assert_eq!(recovered["code"].as_int().unwrap(), 0);
+        assert!(recovered["stdout_complete"].as_bool().unwrap());
+        assert!(recovered["stderr_complete"].as_bool().unwrap());
+
+        inject_scope_eperm_for_next_execution(usize::MAX);
+        let error = engine
+            .eval::<crate::Map>(&format!("run({program:?})"))
+            .expect_err("persistent EPERM must remain an operational error");
+        let sys_error = match error.as_ref() {
+            EvalAltResult::ErrorRuntime(value, _) => value
+                .clone()
+                .try_cast::<SysError>()
+                .expect("typed process error"),
+            other => panic!("expected typed process error, got {other:?}"),
+        };
+        match sys_error {
+            SysError::Process { cause, report } => {
+                assert!(matches!(
+                    cause,
+                    ProcessCause::Io {
+                        op: "observe process group closure",
+                        kind: io::ErrorKind::PermissionDenied,
+                        ..
+                    }
+                ));
+                assert_eq!(report.exit_code(), Some(0));
+                assert!(report.stdout_complete());
+                assert!(report.stderr_complete());
+                assert!(report.cleanup_diagnostics().iter().any(|diagnostic| {
+                    diagnostic.operation() == "observe process group closure"
+                        && diagnostic.io_kind() == Some(io::ErrorKind::PermissionDenied)
+                }));
+            }
+            other => panic!("expected SysError::Process, got {other:?}"),
+        }
+        drop(package);
+    }
+
+    #[test]
+    fn failed_group_submission_is_fenced_from_numeric_retry() {
+        let mut scope = ManagedScopeState::Open { pgid: 44 };
+        scope.begin_close().expect("one close attempt");
+        assert!(scope
+            .finish_close(Err(io::Error::from_raw_os_error(libc::EPERM)))
+            .is_err());
+        assert_eq!(scope, ManagedScopeState::Unresolved { pgid: 44 });
+        assert_eq!(scope.begin_close(), None);
+        assert_eq!(scope.observe(Ok(())).unwrap(), ScopeObservation::Pending);
+        assert_eq!(
+            scope
+                .observe(Err(io::Error::from_raw_os_error(libc::ESRCH)))
+                .unwrap(),
+            ScopeObservation::Closed,
+            "failed submission can retire only after exact post-reap passive closure"
+        );
+    }
+
+    #[test]
+    fn absent_signal_result_still_requires_passive_post_reap_closure() {
+        let mut scope = ManagedScopeState::Open { pgid: 45 };
+        scope.begin_close().expect("one close attempt");
+        scope
+            .finish_close(Ok(super::GroupCloseOutcome::AlreadyAbsent))
+            .unwrap();
+        assert_eq!(scope, ManagedScopeState::AwaitingClosure { pgid: 45 });
+        assert_eq!(scope.observe(Ok(())).unwrap(), ScopeObservation::Pending);
+        assert_eq!(
+            scope
+                .observe(Err(io::Error::from_raw_os_error(libc::ESRCH)))
+                .unwrap(),
+            ScopeObservation::Closed
+        );
+    }
+
+    #[test]
+    fn retirement_requires_passive_esrch_observation() {
+        let retired = Arc::new(AtomicBool::new(false));
+        let owner = Arc::new(Mutex::new(super::OwnerRecord {
+            child: None,
+            spawned: None,
+            phase: super::OwnerPhase::CleanupPending,
+            managed: true,
+            scope: ManagedScopeState::AwaitingClosure { pgid: 46 },
+            direct_kill_attempted: true,
+            scope_close_started: Some(Instant::now()),
+            pump_finished: true,
+            reaped: true,
+            retirement_complete: false,
+            capture_cancel_at: None,
+            capture_closed: true,
+            retired: Some(retired.clone()),
+            #[cfg(test)]
+            service_gate: None,
+            #[cfg(test)]
+            numeric_operations: None,
+            #[cfg(test)]
+            quarantine_observations: None,
+        }));
+        let registry = super::OwnerRegistry {
+            records: Mutex::new(vec![owner.clone()]),
+            changed: Condvar::new(),
+            outstanding: AtomicUsize::new(1),
+            closing: AtomicBool::new(false),
+            worker_done: AtomicBool::new(true),
+            worker: Mutex::new(None),
+        };
+
+        super::retire_record(&registry, &owner);
+        assert_eq!(registry.outstanding.load(Ordering::Acquire), 1);
+        assert!(!retired.load(Ordering::Acquire));
+
+        {
+            let mut record = owner.lock().unwrap();
+            assert_eq!(
+                record
+                    .scope
+                    .observe(Err(io::Error::from_raw_os_error(libc::ESRCH)))
+                    .unwrap(),
+                ScopeObservation::Closed
+            );
+        }
+        super::retire_record(&registry, &owner);
+        assert_eq!(registry.outstanding.load(Ordering::Acquire), 0);
+        assert!(retired.load(Ordering::Acquire));
+    }
+
+    #[test]
+    fn empty_unadopted_launch_reservation_can_retire() {
+        let retired = Arc::new(AtomicBool::new(false));
+        let owner = Arc::new(Mutex::new(super::OwnerRecord {
+            child: None,
+            spawned: None,
+            phase: super::OwnerPhase::Launching,
+            managed: false,
+            scope: ManagedScopeState::Direct,
+            direct_kill_attempted: false,
+            scope_close_started: None,
+            pump_finished: false,
+            reaped: false,
+            retirement_complete: false,
+            capture_cancel_at: None,
+            capture_closed: false,
+            retired: Some(retired.clone()),
+            #[cfg(test)]
+            service_gate: None,
+            #[cfg(test)]
+            numeric_operations: None,
+            #[cfg(test)]
+            quarantine_observations: None,
+        }));
+        let registry = super::OwnerRegistry {
+            records: Mutex::new(vec![owner.clone()]),
+            changed: Condvar::new(),
+            outstanding: AtomicUsize::new(1),
+            closing: AtomicBool::new(false),
+            worker_done: AtomicBool::new(true),
+            worker: Mutex::new(None),
+        };
+
+        super::retire_record(&registry, &owner);
+        assert_eq!(registry.outstanding.load(Ordering::Acquire), 0);
+        assert!(retired.load(Ordering::Acquire));
+    }
 
     thread_local! {
         static NEXT_EXECUTION_FAULTS: RefCell<Option<ExecutionFaults>> = const { RefCell::new(None) };
@@ -2604,6 +3388,16 @@ mod tests {
 
     pub(super) fn take_execution_faults() -> ExecutionFaults {
         NEXT_EXECUTION_FAULTS.with(|next| next.borrow_mut().take().unwrap_or_default())
+    }
+
+    fn inject_scope_eperm_for_next_execution(count: usize) {
+        NEXT_EXECUTION_FAULTS.with(|next| {
+            let previous = next.borrow_mut().replace(ExecutionFaults {
+                scope_eperm_observations_remaining: count,
+                ..ExecutionFaults::default()
+            });
+            assert!(previous.is_none(), "an execution fault was already armed");
+        });
     }
 
     fn refuse_kill_for_next_execution() -> Arc<AtomicBool> {
