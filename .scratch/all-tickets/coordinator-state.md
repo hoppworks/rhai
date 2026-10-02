@@ -86,7 +86,7 @@ Current authoritative history through this rewrite is Git commit
 10d4a0d55400ebe8c24feff134e7161ff36bf8d5, this same state path. It retains
 all earlier cause/attempt/resource/source applicability records. Read that
 history for consumed work, not superseded next actions. No reset occurred.
-Last independently read-back fork main7add22e3; only remote main, lowercase
+Last independently read-back fork main14702b7c9d8e4c6929cba8c718c71abe317bc107; only remote main, lowercase
 human author/committer. Goal active and incomplete.
 
 ### Accepted current Linux non-process package
@@ -217,8 +217,17 @@ then discovery/gates/reexec-names GREEN and diffcheck; no Cargo/native launch.
 Activation note records feature applicability and unchanged sync-start-channel
 limitation (not proof wait entered blocking section). Source acceptance/review
 and strict private1.77.2 normal/sync/no_float native proof still pending.
-New agent/reviewer dispatch attempts hit live thread limit; no task was launched
-or review claimed. Reuse available independent reviewer when slot frees.
+Native agent/reviewer dispatch attempts hit live thread limit; those calls did
+not start review. Existing tools/launch.sh expert codex provides a fresh,
+ephemeral read-only independent review without adding a heavy build. Actual
+exec handle71191 started2026-10-02T14:59:33Z, CLI session01a0fd20-ae43-7f10-bb43-3464e6e4f0d7;
+its latest poll confirms requested instruction/OCR/diff reads in progress.
+Brief is shared-child-review-brief.md and terminal response destination is
+shared-child-activation-review.md, both under the owned slice's existing
+.scratch/process-unix-run/. No descendants, native launches or new acceptance
+claim. Review result must be independently read before integration. Existing
+30-minute active-work checkpoint applies; this is combined package review,
+not another Expert09 escalation or a reset of any attempt history.
 Commit awaits review/native checks/integration, no remote task ref was created.
 
 ### Next actions and turn classification
@@ -243,8 +252,17 @@ Fix interpreter/contract/readiness only from valid original refs, not stale labe
 Windows preflight keyboard24475 terminal: owned run-parent missing, candidate
 monitor-source-e4ca75a61838492e8d9eadc22fcf2855 absent, free70739865600bytes,
 script19c unchanged. Exact owned parent creation typing54841 live, no duplicate.
-Current turn PROGRESS: actual shared Child contract activated atomically with
-source RED/GREEN; no native invocation/count change or completion claim.
+Previous user-status turn NO PROGRESS toward acceptance: fresh fork readback
+confirmed sole main14702b7 but did not close another implementation requirement.
+This continuation takes the next available source-review action rather than
+repeating status. Exact foreign Playwright51269 start2026-10-02 16:06:31 local
+is live at elapsed51:35; native Mac heavy slot remains occupied. No signals.
+Windows owner final path screenshot confirms owned run-parent Directory/no
+reparse, unique RunRoot absent, free70739865600bytes and unchanged script19c.
+Single frozen invocation typing handle90567 is live, not entered; never duplicate
+typing/launch because observation times out. No compiler/native result yet.
+Current turn progress: combined independent Child review actually dispatched
+through configured role launcher and live reads verified; native counts unchanged.
 
 ## Resources, counts and cause history
 Unix actual native invocation count84 consumed.82 failed before runtime;
