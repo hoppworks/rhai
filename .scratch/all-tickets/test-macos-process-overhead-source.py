@@ -31,6 +31,19 @@ READER_SPEC.loader.exec_module(reader_module)
 
 
 class EnvironmentTests(unittest.TestCase):
+    def test_cargo_measurement_and_control_commands_are_locked(self):
+        self.assertEqual(
+            module.measurement_cargo_argv(),
+            [str(module.CARGO), 'test', '--locked', '--features',
+             'testing-environ,sys', '--test', 'sys_process',
+             'process_scope_overhead_measurement', '--', '--exact', '--ignored',
+             '--nocapture', '--test-threads=1'])
+        self.assertEqual(
+            module.cargo_build_argv('test', '--features', 'testing-environ,sys',
+                                    '--test', 'sys_process', '--no-run'),
+            [str(module.CARGO), 'test', '--locked', '--features',
+             'testing-environ,sys', '--test', 'sys_process', '--no-run'])
+
     def test_harness_paths_follow_own_worktree_not_removed_checkout(self):
         expected_repo = SOURCE.resolve().parents[2]
         expected_evidence = expected_repo / ".scratch/all-tickets/macos-process-overhead-evidence"
@@ -623,7 +636,7 @@ class EnvironmentTests(unittest.TestCase):
         self.assertIn("'--no-run'", source)
         self.assertIn("if control_case == 'setup':", main_body)
         self.assertIn("if control_case in ('build', 'managed'):", main_body)
-        control_helper = source[source.index("def run_control_only("):source.index("def main():")]
+        control_helper = source[source.index("def run_control_only("):source.index("def _parse_cargo_executable(")]
         self.assertNotIn("process_scope_overhead_measurement'", control_helper)
 
     def test_wrapper_preserves_normal_mode_without_control_selector(self):
@@ -692,7 +705,7 @@ class EnvironmentTests(unittest.TestCase):
         main_body = source[source.index('def main():'):source.index("if __name__ == '__main__':")]
         preflight = main_body.index('verify_toolchain_identity(')
         archive = main_body.index("'archive',SOURCE_REF")
-        measurement = main_body.index("cmd=[str(CARGO),'test'")
+        measurement = main_body.index('cmd=measurement_cargo_argv()')
         self.assertLess(preflight, archive)
         self.assertLess(preflight, measurement)
 

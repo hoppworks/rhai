@@ -381,12 +381,12 @@ def run_control_only(control_case, env, deadline, source):
         argv = ['/usr/bin/tar', '-xf', str(archive), '-C', str(extracted)]
         output = RUNTIME/'setup-control-tar.out'
     elif control_case == 'build':
-        argv = [str(CARGO), 'test', '--features', 'testing-environ,sys',
-                '--test', 'sys_process', '--no-run']
+        argv = cargo_build_argv('test', '--features', 'testing-environ,sys',
+                                '--test', 'sys_process', '--no-run')
         output = RUNTIME/'build-control.out'
     elif control_case == 'managed':
-        fixture_build = [str(CARGO), 'test', '--features', 'testing-environ,sys',
-            '--test', 'sys_process', '--no-run', '--message-format=json-render-diagnostics']
+        fixture_build = cargo_build_argv('test', '--features', 'testing-environ,sys',
+            '--test', 'sys_process', '--no-run', '--message-format=json-render-diagnostics')
         fixture_log = RUNTIME/'managed-fixture-build.out'
         fixture_stderr = RUNTIME/'managed-fixture-build.stderr'
         status, data = run_anchored_command(fixture_build, source, env, fixture_log,
@@ -402,9 +402,9 @@ def run_control_only(control_case, env, deadline, source):
         examples.mkdir(exist_ok=True)
         companion = examples/'macos-managed-capture-companion.rs'
         shutil.copyfile(companion_source, companion)
-        companion_build = [str(CARGO), 'build', '--offline', '--locked',
+        companion_build = cargo_build_argv('build', '--offline',
             '--features', 'testing-environ,sys', '--example', 'macos-managed-capture-companion',
-            '--message-format=json-render-diagnostics']
+            '--message-format=json-render-diagnostics')
         companion_log = RUNTIME/'managed-companion-build.out'
         companion_stderr = RUNTIME/'managed-companion-build.stderr'
         status, data = run_anchored_command(companion_build, source, env, companion_log,
@@ -468,6 +468,18 @@ def parse_managed_fixture_executable(output, runtime):
 def parse_managed_companion_executable(output, runtime):
     return _parse_cargo_executable(output, runtime, 'macos-managed-capture-companion',
                                     'example', 'debug/examples')
+
+def cargo_build_argv(operation, *arguments):
+    """Build a Cargo command that must honor the frozen private lockfile."""
+    if operation not in ('test', 'build'):
+        raise ValueError('unsupported Cargo operation')
+    return [str(CARGO), operation, '--locked', *arguments]
+
+def measurement_cargo_argv():
+    return cargo_build_argv(
+        'test', '--features', 'testing-environ,sys', '--test', 'sys_process',
+        'process_scope_overhead_measurement', '--', '--exact', '--ignored',
+        '--nocapture', '--test-threads=1')
 
 def main():
     # The gate is deliberately first: no runtime, evidence directory, version
@@ -557,7 +569,7 @@ def main():
     spec=importlib.util.spec_from_file_location('frozen_overhead_parser',parser_path)
     parser=importlib.util.module_from_spec(spec); spec.loader.exec_module(parser)
     measurement_log=BASE.with_name(BASE.name+'.cargo-output.log')
-    cmd=[str(CARGO),'test','--features','testing-environ,sys','--test','sys_process','process_scope_overhead_measurement','--','--exact','--ignored','--nocapture','--test-threads=1']
+    cmd=measurement_cargo_argv()
     measurement_start=time.monotonic()
     status,out=run(cmd,measurement_log,package_deadline,env,source)
     out,samples,summary=export_measurement_output(measurement_dir,status,out,parser)

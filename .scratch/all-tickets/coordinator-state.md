@@ -122,7 +122,18 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
    measurement/archive/toolchain unchanged. Existing Mac owner resumed for
    source-only exact selected graph/toolchain confinement prerequisite; confirms
    current4d86 globals/project/skills/roles/templates reload and no descendants.
-   No Cargo, native control or85 dispatch; live progress and nativeABI stayopen.
+   Source increment21cfd2ad now independently reviewed and integrated: all
+   measured/control Cargo test/build commands honor --locked; feature/target/test
+   arguments and120-call measurement selection unchanged. OCR selected2files;
+   root reviewed2/2 against system rules and command call sites, no findings.
+   Owner meaningful RED is missing measurement_cargo_argv before implementation,
+   restored60pass; root reused that original receipt and independently reran60
+   tests successfully through scoped runner. Original root log is
+   macos-locked-source-root-test.log; private runtime and exact empty scope removed.
+   No actual Cargo/build/native/measurement executed. Exact selected graph remains
+   open: source/workspace metadata cannot prove selected units. Proposed unit-graph
+   query requires frozen tool support and custody review before execution; no
+   native85 allocation, live capture and native ABI stay open.
 4. Windows sole owner is completed; current virsh domstate readback0 confirms
    rhai-win11-quality shut off. Partial console
    command/cleanup remains unverified. Preserve allocation and all prior evidence;
@@ -197,7 +208,7 @@ timeout versus incomplete cleanup, per-stream limits and overflow precedence.
 Root source readback and whitespace checks agree. Documentation-only acceptance;
 no runtime behavior, release gate or full ticket completion is inferred.
 Linux examples preparation remains active. Mac source preparation21cfd2ad is
-reported complete (locked Cargo arguments, pure60); integration/review pending.
+independently reviewed, integrated and pure60 green; source-only acceptance.
 Exact selected graph, capture and native ABI remain open; count84/guardfalse
 and all cause/resource history remain unchanged. Goal active.
 
