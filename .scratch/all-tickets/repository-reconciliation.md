@@ -1,88 +1,44 @@
 # Repository reconciliation
 
-Current verified fork main: `7f4229a9012876ec75a24dba967e0d3ade6cd9d5`. Original full inventory and first17
-exact cleanup targets are retained at commit5269bcb2 in this file. Fetch was
-fork-only; no upstream writes. Classification uses conservative orphan/foreign
-labels, so absence of tracking metadata does not prove unmerged code or ownership.
-No foreign or dirty worktree has been modified.
+Fork: https://github.com/hoppworks/rhai.git
 
-## Branches (default: `main`)
+The owner requested all fork development histories and changes consolidated into
+main, with main as the only remote branch. Fork main was pushed and independently
+read back at61edd5993a76bff68588476b7e1f4028f54da259. git ls-remote --heads origin
+returned exactly one head: refs/heads/main. No public upstream write occurred.
 
-| Name | Kind | Category | Upstream |
-|---|---|---|---|
-| `archive/windows-scoped-runner-c4f87445` | local | orphan | - |
-| `claude/vibrant-sagan-3g1pxn` | local | gone | origin/claude/vibrant-sagan-3g1pxn |
-| `main` | local | default | origin/main |
-| `task/all-tickets` | local | up-to-date | origin/task/all-tickets |
-| `task/core-msrv-check` | local | orphan | - |
-| `task/core-msrv-resolution` | local | orphan | - |
-| `task/environment-fixtures` | local | orphan | - |
-| `task/file-handle-compatibility` | local | orphan | - |
-| `task/file-handles` | local | orphan | - |
-| `task/filesystem-contract` | local | orphan | - |
-| `task/linux-process-native-proof` | local | orphan | - |
-| `task/linux-process-native-proof-draft` | local | orphan | - |
-| `task/linux-process-proof-preparation` | local | up-to-date | origin/task/linux-process-proof-preparation |
-| `task/linux-process-proof-preparation-corrected` | local | up-to-date | origin/task/linux-process-proof-preparation-corrected |
-| `task/linux-sys-proof` | local | orphan | - |
-| `task/managed-unix-scope-close` | local | orphan | - |
-| `task/process-rust-io` | local | orphan | - |
-| `task/process-unix-run` | local | orphan | - |
-| `task/remote-cleanup` | local | merged | origin/main |
-| `task/review-sys-windows` | local | gone | origin/claude/vibrant-sagan-3g1pxn |
-| `task/stdlib-net-assessment` | local | gone | origin/task/stdlib-net-assessment |
-| `task/tcp-connect` | local | orphan | - |
-| `task/windows-real-client` | local | orphan | - |
-| `task/windows-scoped-runner` | local | orphan | - |
-| `task/windows-scoped-runner-corrected` | local | orphan | - |
-| `origin/main` | remote | remote | - |
-| `origin/task/all-tickets` | remote | remote | - |
-| `origin/task/linux-process-native-proof` | remote | remote | - |
-| `origin/task/linux-process-proof-preparation` | remote | remote | - |
-| `origin/task/linux-process-proof-preparation-corrected` | remote | remote | - |
-| `origin/task/managed-unix-scope-close` | remote | remote | - |
-| `origin/task/process-unix-run` | remote | remote | - |
-| `origin/task/windows-real-client` | remote | remote | - |
-| `origin/task/windows-scoped-runner` | remote | remote | - |
-| `origin/task/windows-scoped-runner-corrected` | remote | remote | - |
+## Preserved and removed remote branches
 
-## Worktrees
+Every exact tip below was verified as an ancestor of the pushed main before its
+remote ref was deleted. Original commits remain reachable in main's history.
 
-| Path | Branch | Category | Tags |
-|---|---|---|---|
-| `/Users/hoppworks/projects/rhai` | main | default | - |
-| `/Users/hoppworks/.codex/worktrees/linux-process-proof-preparation/rhai` | linux-process-proof-preparation-corrected | - | foreign |
-| `/Users/hoppworks/.codex/worktrees/stdlib-net-assessment/rhai` | stdlib-net-assessment | - | dirty, foreign |
-| `/Users/hoppworks/projects/rhai-all-tickets` | all-tickets | - | - |
-| `/Users/hoppworks/projects/rhai-core-msrv-check` | core-msrv-check | - | foreign |
-| `/Users/hoppworks/projects/rhai-core-msrv-resolution` | core-msrv-resolution | - | foreign |
-| `/Users/hoppworks/projects/rhai-environment-fixtures` | environment-fixtures | - | foreign |
-| `/Users/hoppworks/projects/rhai-file-handle-compatibility` | file-handle-compatibility | - | foreign |
-| `/Users/hoppworks/projects/rhai-file-handles` | file-handles | - | dirty, foreign |
-| `/Users/hoppworks/projects/rhai-filesystem-contract` | filesystem-contract | - | foreign |
-| `/Users/hoppworks/projects/rhai-linux-process-native-proof` | linux-process-native-proof | - | foreign |
-| `/Users/hoppworks/projects/rhai-linux-sys-proof` | linux-sys-proof | - | foreign |
-| `/Users/hoppworks/projects/rhai-managed-unix-scope-close` | managed-unix-scope-close | - | dirty, foreign |
-| `/Users/hoppworks/projects/rhai-process-rust-io` | process-rust-io | - | dirty, foreign |
-| `/Users/hoppworks/projects/rhai-process-unix-run` | process-unix-run | - | dirty, foreign |
-| `/Users/hoppworks/projects/rhai-remote-cleanup` | remote-cleanup | - | dirty, foreign |
-| `/Users/hoppworks/projects/rhai-review-sys-windows` | review-sys-windows | - | dirty, foreign |
-| `/Users/hoppworks/projects/rhai-tcp-connect` | tcp-connect | - | foreign |
-| `/Users/hoppworks/projects/rhai-windows-real-client` | windows-real-client | - | foreign |
-| `/Users/hoppworks/projects/rhai-windows-scoped-runner` | windows-scoped-runner-corrected | - | dirty, foreign |
+| Removed branch | Preserved tip |
+|---|---|
+| task/all-tickets | 7f4229a9012876ec75a24dba967e0d3ade6cd9d5 |
+| task/linux-process-native-proof | 643033531581c8e8d556cfc025c75610c8a44585 |
+| task/linux-process-proof-preparation | 85cb9abef802f75de874adf8a230b6dd2c7a0e4c |
+| task/linux-process-proof-preparation-corrected | 60488ce5967831f21374fe3d4ed8013b18666861 |
+| task/managed-unix-scope-close | c9aa8723b4ca6d1ce0ee29f9454c2c9c64467c12 |
+| task/process-unix-run | 4a8d4e5cfa4e76ae62ebfcd1c4a77e3ee6207dd2 |
+| task/windows-real-client | f9cc7372c12122dc2a88f0cd0049863161261d82 |
+| task/windows-scoped-runner | dc63c38e061e2e5afc9d232421c075f177634563 |
+| task/windows-scoped-runner-corrected | b6c8219d9bb507ae1e3b8ecb8db9ae75dbbd0028 |
 
+## Verification and continued work
 
-## Executed consolidation and cleanup
+Unix production source matches the accepted native inputs: Linux80 restored owner
+21/public32 and macOS81 restored owner21/public29 passed, with meaningful failure
+controls, restored manifests and independent exact cleanup receipts. Five Windows
+real-client scaffolding checks passed; native Windows custody/fixtures/real-client
+acceptance remains open. Consolidation is not release acceptance. A source-only
+PowerShell setup repair is being integrated directly into main after review.
 
-- Root source-only documentation/evidence fast-forwarded to fork main and read back.
-- First17 listed unoccupied campaign refs were already reachable from main; ordinary
-  git branch -d removed them. See prior5269bcb2 inventory for exactnames.
-- process-api-report and process-api-compatibility cleanly merged, with empty
-  git diff HEAD^1 HEAD for each. No file changed; their histories now belong to main.
-  After verified push/readback, their two unoccupied local refs were deleted.
-- process-harness-review likewise cleanly merged with empty parent diff. After
-  verified push/readback its local ref and exact fork remote ref were deleted;
-  git ls-remote confirms remoteabsence.
-- Total20 local refs and1 fork remote ref retired. No worktree deletion.
-- Remaining25 local branches and20 worktrees include unfinished source and foreign/
-  dirty work. Final main-only request remains open. No process production gate waived.
+Future campaign commits publish to fork main through coordinator integration;
+remote task branches must not be recreated. Local isolated worktrees remain while
+active. Foreign/dirty worktrees and uncommitted evidence are preserved.
+
+Earlier local cleanup removed20 exact unoccupied integrated campaign branches,
+and the earlier process-harness-review remote ref. This continuation removed nine
+more remote refs. No worktree was deleted. Full prior branch/worktree inventory
+is preserved in this file at0e868b3a and5269bcb2; local worktree retirement remains
+separate from the verified remote-only-main result.

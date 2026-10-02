@@ -378,3 +378,11 @@ Soleownerrepair PositiveUInt32/custody sourceinreview; nativeWindows17fixtures
 andrealclient remainopen. Allticketgoal is notcomplete. Root next publishes
 consolidationHEAD, reads exactmain, verifies ancestrybeforedelete5remainingrefs,
 reads remoteonlymain. Nextsourcefixmerge willalso publishmainonly.
+
+Remoteonlymain requirement now VERIFIED: main61edd599 pushed/readback exact;
+all5remainingtip ancestrychecks passed, remote refs deleted, lsremote onlymain.
+This continuationdeleted9remote taskrefs total (previouscleanup1), histories
+preserved. Foreign/localactiveworktrees untouched. RawCargooriginal logs retain
+trailing whitespace intentionally; source/docdiffcheckpasses, originalsunchanged.
+Windows finalsource review66d7 accepted shared30s passiveaccounting/guardedDispose;
+CRLFmarkerregex correction pendingownercommit, then directmainintegration.
