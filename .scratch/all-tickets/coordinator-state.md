@@ -343,3 +343,12 @@ sampled195884KiB. Public suite notrun. Evidence native79-root-cleanup-readback.
 Latest human reiterates REMOTE onlymain consolidation with allchanges preserved.
 Root prioritizes complete history/source consolidation and stops new taskremote
 publication; no release/completion claim from unfinished platformproof.
+
+Mac81 released exacttest-only fixturefix e5b55460/archive70b7404b after root
+focusedreview: programvariable selects independentlyverified /usr/bin/true on
+Darwin, same allowlist/both scriptcalls; production unchanged. Driveronlyref/hash
+rebound and ASTpassed. Same knowncontrols/owner/public suite and unchangedcaps.
+Allocation81 consumed atactual wrapperstart; nextunique82 thereafter.
+Linux legacythreeproof histories consolidated, corrected latestnative scripts
+retained for conflicting paths. Earlier scripts remain in reachable original
+commits; no work discarded and no newnative run for superseded legacyharness.
