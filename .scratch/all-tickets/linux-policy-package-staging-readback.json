@@ -1,0 +1,51 @@
+{
+  "stage": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1",
+  "files": {
+    "Cargo.lock.accepted": {
+      "expected": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+      "remote": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+      "matches": true
+    },
+    "run-sys-net-behavior.py": {
+      "expected": "f5461ba793c28da589afc9a75289156a42eb339ca8a453ff4f53ff70881093c3",
+      "remote": "f5461ba793c28da589afc9a75289156a42eb339ca8a453ff4f53ff70881093c3",
+      "matches": true
+    },
+    "contract.md": {
+      "expected": "950a283d5e5013e7d5061cb6b0aaca0707e31c66c30241c3cab525003dab0c6d",
+      "remote": "950a283d5e5013e7d5061cb6b0aaca0707e31c66c30241c3cab525003dab0c6d",
+      "matches": true
+    },
+    "launch.sh": {
+      "expected": "e404c2601775eb837e6f0bc1014aa5f9fa4b4d2ba5bd747a60b3837a7a707740",
+      "remote": "e404c2601775eb837e6f0bc1014aa5f9fa4b4d2ba5bd747a60b3837a7a707740",
+      "matches": true
+    },
+    "stage.sh": {
+      "expected": "9d1bde9ef70ee3a7bcb2797af42d048d8c43317c13b50f01fe8b212164461bc7",
+      "remote": "9d1bde9ef70ee3a7bcb2797af42d048d8c43317c13b50f01fe8b212164461bc7",
+      "matches": true
+    },
+    "runner/tools/run_scoped.py": {
+      "expected": "9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d",
+      "remote": "9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d",
+      "matches": true
+    },
+    "runner/tools/agentskills/__init__.py": {
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "remote": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "matches": true
+    },
+    "runner/tools/agentskills/pyguard.py": {
+      "expected": "a3739f4947744303e1adf3fb0875ac743944a272e5b95c94b1baba53029d313f",
+      "remote": "a3739f4947744303e1adf3fb0875ac743944a272e5b95c94b1baba53029d313f",
+      "matches": true
+    },
+    "source.tar": {
+      "expected": "551c03dbe3f4550db1b144b3e65d83f5bc66c132c1a9cffa59c83fce16bc41e1",
+      "remote": "551c03dbe3f4550db1b144b3e65d83f5bc66c132c1a9cffa59c83fce16bc41e1",
+      "matches": true
+    }
+  },
+  "all_match": true
+}

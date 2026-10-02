@@ -15,16 +15,16 @@ import tarfile
 import time
 import traceback
 
-SOURCE_REVISION = '1ca21e32eed2aa40287ba7e1282000add1dd49c7'
-SOURCE_ARCHIVE_SHA256 = '8251e0429d51ffd330e7eac596a1513d836e43e549ca761852cafc642a2a8155'
+SOURCE_REVISION = 'a2d7a8c2ace21e63c18b2e64cdce74e5e10afc94'
+SOURCE_ARCHIVE_SHA256 = '551c03dbe3f4550db1b144b3e65d83f5bc66c132c1a9cffa59c83fce16bc41e1'
 LOCK_SHA256 = '2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425'
 RUSTUP = Path('/root/.cargo/bin/rustup')
 TOOLCHAIN = '1.77.2-x86_64-unknown-linux-gnu'
 EXPECTED_RUN_SCOPED_SHA256 = '9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d'
 EXPECTED_INIT_SHA256 = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
 EXPECTED_PYGUARD_SHA256 = 'a3739f4947744303e1adf3fb0875ac743944a272e5b95c94b1baba53029d313f'
-EXPECTED_STAGE = Path('/root/rhai-linux-current-sys-net-behavior-1ca21e32-20261002-followup1')
-EXPECTED_SCOPE = Path('/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1')
+EXPECTED_STAGE = Path('/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1')
+EXPECTED_SCOPE = Path('/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1')
 STAGE = Path(os.environ.get('PROOF_STAGE', ''))
 RUNTIME = Path(os.environ.get('AGENT_RUNTIME_DIR', ''))
 INTERRUPT_REQUEST = Path(os.environ.get('INTERRUPT_REQUEST', ''))
@@ -56,6 +56,16 @@ TEST_ROWS = (
     ('net-no-object', 'testing-environ,net,no_object', ('net_no_object',)),
     ('combined-metadata-serde', 'testing-environ,sys,net,metadata,serde',
      ('sys_policy', 'net_metadata')),
+    ('combined-sync', 'testing-environ,sys,net,sync',
+     ('sys_fs', 'sys_policy', 'net_connect', 'net_listen', 'net_reads', 'net_writes', 'combined_sys_net')),
+    ('combined-i32-no-float', 'testing-environ,sys,net,only_i32,no_float',
+     ('sys_fs', 'sys_policy', 'net_connect', 'net_listen', 'net_reads', 'net_writes', 'combined_sys_net')),
+    ('combined-unchecked', 'testing-environ,sys,net,unchecked',
+     ('sys_fs', 'sys_policy', 'net_connect', 'net_listen', 'net_reads', 'net_writes', 'combined_sys_net')),
+    ('combined-no-index-sync-metadata', 'testing-environ,sys,net,no_index,sync,metadata',
+     ('sys_fs', 'sys_policy', 'net_connect', 'net_listen', 'net_reads', 'net_writes', 'combined_sys_net', 'net_metadata')),
+    ('combined-f32', 'testing-environ,sys,net,f32_float',
+     ('sys_fs', 'sys_policy', 'net_connect', 'net_listen', 'net_reads', 'net_writes', 'combined_sys_net')),
 )
 ASSERTION_CONTROLS = (
     ('sys-filesystem-wrong-readback', 'testing-environ,sys,net', 'sys_fs',

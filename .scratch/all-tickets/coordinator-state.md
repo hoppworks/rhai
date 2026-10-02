@@ -305,8 +305,28 @@ assertions give valid narrow native Engine/OS slices at frozen1ca/private1.77.2/
 Linux7.2.7. Preserve original receipts; sys_policy21pass2fail, whole baseline
 and subsequent feature rows remain open. Filesystem corrections require affected
 filesystem/combined rechecks; unchanged net paths retain their proof. No parent
-ticket closure inferred. Next collect Linux policy correction and Mac observer
-fix batch, review sources, then freeze integrated non-process native acceptance.
+ticket closure inferred.
+Linux correction a2d7a8c2 source-ready, independently reviewed2/2 OCR files.
+Fresh readlink/root confirms var/roothome. Checked aliases require full canonical
+equality; retained capability-relative I/O/access/traversal remain. Regression
+includes alternate/canonical reads, denied write and fresh unchanged host bytes.
+Original two policy failures are pre-correction RED; native acceptance pending.
+Root holds exact two-file candidate changes uncommitted; frozen owner commit
+preserves these bytes. No unrelated production source difference from frozen
+input applies. Review linux-root-alias-review.md also covers mechanical helper
+repinning and five new required feature rows (nine finite total), same hard caps.
+Source archive551c03/v3lock2ba4, stage/scope suffixa2d7a8c2-20261002-policy1.
+All eight independent pure requirements pass in exact own scoped runtime0;
+empty scope retired. Nine staged files independently remote-hash matched in
+linux-policy-package-staging-readback.json. Staging SSH46736 terminal0.
+Before dispatch fresh census finds foreign E2E scoped1803689/start7945973,
+supervisor1803690/start7945975, driver1803691/start7945977 alive. Preserve these
+and idle vestra resources. No native policy run launched, scope not created;
+wait for a fresh free heavy slot while reviewing Mac fix. Finite new600s envelope
+planned (1800s cumulative outer allocation, prior observed export59.202s);
+this is not consumed work or peak use. No failed correction for policy cause yet.
+Next collect/review Mac fix and observe foreign slot; launch only reviewed
+Linux package when slot is clear. Processcount84/measurementguardfalse unchanged.
 
 ## Current-source core MSRV package — accepted narrow gate
 Current default-core applicability CLOSED for source52d9797b, Rust/Cargo1.66.0,

@@ -29,8 +29,8 @@ def constants(tree: ast.Module) -> dict[str, object]:
 
 def test_frozen_pins_and_finite_rows(source: str, tree: ast.Module) -> None:
     values = constants(tree)
-    assert values['SOURCE_REVISION'] == '1ca21e32eed2aa40287ba7e1282000add1dd49c7'
-    assert values['SOURCE_ARCHIVE_SHA256'] == '8251e0429d51ffd330e7eac596a1513d836e43e549ca761852cafc642a2a8155'
+    assert values['SOURCE_REVISION'] == 'a2d7a8c2ace21e63c18b2e64cdce74e5e10afc94'
+    assert values['SOURCE_ARCHIVE_SHA256'] == '551c03dbe3f4550db1b144b3e65d83f5bc66c132c1a9cffa59c83fce16bc41e1'
     assert values['LOCK_SHA256'] == '2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425'
     assert values['TOOLCHAIN'] == '1.77.2-x86_64-unknown-linux-gnu'
     assert values['HELPER_DEADLINE_SECONDS'] == 540
@@ -42,8 +42,8 @@ def test_frozen_pins_and_finite_rows(source: str, tree: ast.Module) -> None:
     assert values['MAX_DESCENDANTS'] == 16
     assert values['CARGO_JOBS'] == '2'
     assert 'testing-environ,sys,net' in source
-    assert "Path('/root/rhai-linux-current-sys-net-behavior-1ca21e32-20261002-followup1')" in source
-    assert "Path('/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1')" in source
+    assert "Path('/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1')" in source
+    assert "Path('/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1')" in source
     assert 'testing-environ,net,no_object' in source
     assert 'testing-environ,sys,net,no_index' in source
     assert 'testing-environ,sys,net,metadata,serde' in source
@@ -81,7 +81,8 @@ def test_rows_and_controls_match_frozen_test_sources(tree: ast.Module, source: s
     rows = ast.literal_eval(assignments['TEST_ROWS'])
     assert [row[0] for row in rows] == [
         'combined-baseline', 'combined-no-index', 'net-no-object',
-        'combined-metadata-serde']
+        'combined-metadata-serde', 'combined-sync', 'combined-i32-no-float',
+        'combined-unchecked', 'combined-no-index-sync-metadata', 'combined-f32']
     assert rows[0][1] == 'testing-environ,sys,net'
     assert rows[1][1] == 'testing-environ,sys,net,no_index'
     assert rows[2][1] == 'testing-environ,net,no_object'
@@ -251,7 +252,7 @@ def test_positive_coverage_requires_every_target_and_no_skips() -> None:
 def test_identity_capture_fails_before_external_work_and_export_deadline_is_hard() -> None:
     with tempfile.TemporaryDirectory(prefix='linux-sys-net-pure-') as temp:
         base = Path(temp)
-        runtime = base / 'linux-current-sys-net-behavior-1ca21e32-20261002-followup1' / 'agent-build-test'
+        runtime = base / 'linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1' / 'agent-build-test'
         runtime.mkdir(parents=True)
         stage = base / 'stage'
         stage.mkdir()
@@ -299,7 +300,7 @@ def test_wrapper_has_bounded_custody_and_does_not_signal_by_pid() -> None:
     assert 'sleep 0.1' in launcher
     assert 'fail closed' in launcher and 'preserving scope' in launcher
     assert 'proof-evidence/process-identities.tsv' in launcher
-    assert '/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-1ca21e32-20261002-followup1' in launcher
+    assert '/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1' in launcher
     for path in (STAGE_SCRIPT, LAUNCH_SCRIPT):
         subprocess.run(['/bin/bash', '-n', str(path)], check=True, timeout=5)
     blocks = []

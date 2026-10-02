@@ -4,13 +4,13 @@ umask 077
 
 repo=$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd -P)
 skills=${AGENT_SKILLS_REPO:-/Users/hoppworks/projects/agent-skills}
-source_rev=1ca21e32eed2aa40287ba7e1282000add1dd49c7
-expected_archive=8251e0429d51ffd330e7eac596a1513d836e43e549ca761852cafc642a2a8155
+source_rev=a2d7a8c2ace21e63c18b2e64cdce74e5e10afc94
+expected_archive=551c03dbe3f4550db1b144b3e65d83f5bc66c132c1a9cffa59c83fce16bc41e1
 expected_lock=2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425
 expected_run_scoped=9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d
 expected_init=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 expected_pyguard=a3739f4947744303e1adf3fb0875ac743944a272e5b95c94b1baba53029d313f
-stage=/root/rhai-linux-current-sys-net-behavior-1ca21e32-20261002-followup1
+stage=/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1
 lock="$repo/.scratch/all-tickets/macos-selected-graph-evidence-03/Cargo.lock"
 helper="$repo/.scratch/all-tickets/check-linux-current-sys-net-behavior.py"
 contract="$repo/.scratch/all-tickets/linux-current-sys-net-behavior-contract.md"
