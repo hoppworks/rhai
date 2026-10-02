@@ -166,14 +166,23 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
    Exact selected-unit acceptance remains distinct from conservative candidate
    confinement coverage; both require explicit supported evidence. Next collect
    immutable source increment and pure proof or concrete missing capability.
-   Stable-Cargo incrementadbb95e independently reviewed2/2 with OCR rules.
-   One blocking producer/parser mismatch: --edges all includes feature rows,
-   but parser accepts package rows only. Existing owner correcting in one
-   source-only batch with meaningful regression; no Cargo/native command.
-   Reviewmacos-stable-graph-increment-review.md records exact scope and source.
-   Other source checks retain candidate coverage only, exact unitsfalse.
-   Next collect corrected frozen source and affected evidence, then integrate
-   after narrow finding recheck; guardfalse/count84/no85 preserved.
+   Stable-Cargo source-candidate preflight52fe92bc now accepted narrowly.
+   Independent OCR review2/2 found --edges all producer/parser mismatch;
+   corrected explicitnormal,build,dev retains all package edge types and
+   excludes feature-only display rows. Original intended edge-kinds RED and
+   targeted/full63GREEN retained undermacos-graph-preflight-source-evidence-20261002.
+   Root independent63-test scoped replay0 atmacos-stable-graph-root-test.log;
+   runner0/private runtime removed/exact empty scope retired. Exact2 source
+   files integrated byte-for-byte; reviewmacos-stable-graph-increment-review.md.
+   Queries use sole custodian RPC; candidate metadata superset outside reviewed
+   26packages fails closed. Actual queries not run; exactunitsfalse honestly.
+   Existing owner continues source-only tool/linker resolution and finite native
+   control readiness under soleExpert09. Exact units/matching kernel source are
+   evidence techniques, not independent human requirements when a supported
+   conservative alternative proves the same acceptance. No native allocation;
+   gatefalse/count84/no85 preserved. Next collect coherent source increment and
+   finite proof prerequisites before any live-control request.
+
 4. Windows sole owner is completed; current virsh domstate readback0 confirms
    rhai-win11-quality shut off. Partial console
    command/cleanup remains unverified. Preserve allocation and all prior evidence;

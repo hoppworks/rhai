@@ -35,3 +35,18 @@ The finding was sent to the existing responsible owner as one source-only fix
 batch. The launch guard stays false, native invocation count remains 84, and
 invocation 85 is not allocated. Acceptance awaits corrected immutable source and
 affected-test evidence; unrelated accepted proof is retained.
+
+## Corrected increment acceptance
+
+Rechecked `52fe92bc9608ca996aef80d922e6f776f21c1609` against the reviewed
+baseline. Explicit `normal,build,dev` edges remove feature-only display rows
+without dropping package dependency kinds or proc macros. The regression retains
+fail-closed handling for unexpected documented feature rows. The blocking
+finding is closed. Original owner edge-kinds RED shows the intended argv
+mismatch, targeted GREEN and the full 63-test GREEN are retained under
+`macos-graph-preflight-source-evidence-20261002/`. Root independently ran all
+63 tests successfully against the integrated files through the existing scoped
+runner; original output is `macos-stable-graph-root-test.log`. The runner exited
+0 and its own exact empty scope was removed. No Cargo query/build/native
+measurement ran. This accepts source-candidate preflight implementation only;
+tool/linker resolution and native custody/ABI/live-stream proof remain open.

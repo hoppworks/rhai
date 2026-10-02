@@ -1,0 +1,35 @@
+F
+======================================================================
+FAIL: test_stable_cargo_tree_and_metadata_preflight_cover_reviewed_candidate_superset (__main__.EnvironmentTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py", line 50, in test_stable_cargo_tree_and_metadata_preflight_cover_reviewed_candidate_superset
+    self.assertEqual(module.cargo_source_graph_argv(source), [
+AssertionError: Lists differ: ['/Us[246 chars]-edges', 'all', '--no-dedupe', '--prefix', 'none'] != ['/Us[246 chars]-edges', 'normal,build,dev', '--no-dedupe', '--prefix', 'none']
+
+First differing element 12:
+'all'
+'normal,build,dev'
+
+  ['/Users/hoppworks/.rustup/toolchains/stable-aarch64-apple-darwin/bin/cargo',
+   'tree',
+   '--locked',
+   '--manifest-path',
+   '/private/runtime/source/Cargo.toml',
+   '--target',
+   'aarch64-apple-darwin',
+   '--package',
+   'rhai',
+   '--features',
+   'testing-environ,sys',
+   '--edges',
+-  'all',
++  'normal,build,dev',
+   '--no-dedupe',
+   '--prefix',
+   'none']
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (failures=1)

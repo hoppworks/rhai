@@ -1,6 +1,7 @@
 import ast
 import ctypes
 import importlib.util
+import json
 import os
 import socket
 import subprocess
@@ -43,6 +44,115 @@ class EnvironmentTests(unittest.TestCase):
                                     '--test', 'sys_process', '--no-run'),
             [str(module.CARGO), 'test', '--locked', '--features',
              'testing-environ,sys', '--test', 'sys_process', '--no-run'])
+
+    def test_stable_cargo_tree_and_metadata_preflight_cover_reviewed_candidate_superset(self):
+        source = Path('/private/runtime/source')
+        self.assertEqual(module.cargo_source_graph_argv(source), [
+            str(module.CARGO), 'tree', '--locked', '--manifest-path',
+            str(source / 'Cargo.toml'), '--target', 'aarch64-apple-darwin',
+            '--package', 'rhai', '--features', 'testing-environ,sys', '--edges', 'normal,build,dev',
+            '--no-dedupe', '--prefix', 'none'])
+        self.assertEqual(module.cargo_metadata_graph_argv(source), [
+            str(module.CARGO), 'metadata', '--format-version', '1', '--locked',
+            '--manifest-path', str(source / 'Cargo.toml'), '--filter-platform',
+            'aarch64-apple-darwin', '--features', 'testing-environ,sys'])
+
+        graph = 'rhai v1.26.1\nahash v0.8.12\n'
+        metadata = {
+            'packages': [
+                {'id': 'path+file:///src#rhai@1.26.1', 'name': 'rhai',
+                 'version': '1.26.1', 'targets': [{'kind': ['lib'],
+                 'crate_types': ['lib']}]},
+                {'id': 'registry+https://github.com/rust-lang/crates.io-index#ahash@0.8.12',
+                 'name': 'ahash', 'version': '0.8.12', 'targets': [
+                     {'kind': ['lib'], 'crate_types': ['lib']},
+                     {'kind': ['custom-build'], 'crate_types': ['bin']} ]},
+            ],
+            'resolve': {'nodes': [
+                {'id': 'path+file:///src#rhai@1.26.1'},
+                {'id': 'registry+https://github.com/rust-lang/crates.io-index#ahash@0.8.12'},
+            ]},
+        }
+        result = module.validate_cargo_source_graph(graph, json.dumps(metadata))
+        self.assertEqual(result['selected_package_count'], 2)
+        self.assertEqual(result['selected_build_or_proc_macro_packages'], ['ahash v0.8.12'])
+
+        unreviewed_graph = graph + 'unreviewed-build v9.0.0\n'
+        unreviewed = dict(metadata)
+        unreviewed['packages'] = metadata['packages'] + [
+            {'id': 'registry+https://example.invalid#unreviewed-build@9.0.0',
+             'name': 'unreviewed-build', 'version': '9.0.0', 'targets': [
+                 {'kind': ['custom-build'], 'crate_types': ['bin']}]},
+        ]
+        unreviewed['resolve'] = {'nodes': metadata['resolve']['nodes'] + [
+            {'id': 'registry+https://example.invalid#unreviewed-build@9.0.0'}]}
+        with self.assertRaisesRegex(RuntimeError, 'unreviewed build/proc-macro candidate'):
+            module.validate_cargo_source_graph(unreviewed_graph, json.dumps(unreviewed))
+
+        with self.assertRaisesRegex(RuntimeError, 'malformed Cargo tree package row'):
+            module.validate_cargo_source_graph(graph + 'not a package row\n', json.dumps(metadata))
+
+        # Cargo documents feature-edge rows separately from package rows;
+        # they are intentionally excluded by the requested edge kinds.
+        with self.assertRaisesRegex(RuntimeError, 'malformed Cargo tree package row'):
+            module.validate_cargo_source_graph(
+                'rhai v1.26.1\nlog feature "serde"\n', json.dumps(metadata))
+
+    def test_stable_graph_queries_use_custodian_rpc_and_validate_returned_bytes(self):
+        source = Path('/private/runtime/source')
+        graph = b'rhai v1.26.1\nahash v0.8.12\n'
+        metadata = json.dumps({
+            'packages': [
+                {'id': 'path+file:///src#rhai@1.26.1', 'name': 'rhai',
+                 'version': '1.26.1', 'targets': [{'kind': ['lib'],
+                 'crate_types': ['lib']}]},
+                {'id': 'registry+https://github.com/rust-lang/crates.io-index#ahash@0.8.12',
+                 'name': 'ahash', 'version': '0.8.12', 'targets': [
+                     {'kind': ['lib'], 'crate_types': ['lib']},
+                     {'kind': ['custom-build'], 'crate_types': ['bin']}]},
+            ],
+            'resolve': {'nodes': [
+                {'id': 'path+file:///src#rhai@1.26.1'},
+                {'id': 'registry+https://github.com/rust-lang/crates.io-index#ahash@0.8.12'},
+            ]},
+        }).encode()
+        calls = []
+
+        def rpc(argv, cwd, env, stdout, deadline, **kwargs):
+            calls.append((argv, cwd, env, stdout, deadline, kwargs))
+            return 0, (graph if len(calls) == 1 else metadata)
+
+        with tempfile.TemporaryDirectory() as directory:
+            runtime = Path(directory)
+            with patch.object(module, 'RUNTIME', runtime), \
+                    patch.object(module, 'run_anchored_command', side_effect=rpc), \
+                    patch.object(module.time, 'monotonic', return_value=100), \
+                    patch('builtins.print'):
+                result = module.run_source_graph_preflight(source, {'PATH': '/bin'}, 200)
+
+        self.assertEqual(len(calls), 2)
+        self.assertEqual([call[0] for call in calls], [
+            module.cargo_source_graph_argv(source),
+            module.cargo_metadata_graph_argv(source)])
+        for call in calls:
+            self.assertEqual(call[1:3], (source, {'PATH': '/bin'}))
+            self.assertTrue(call[5]['monitor_resources'])
+            self.assertFalse(call[5]['include_stderr'])
+            self.assertEqual(call[5]['stderr_path'].parent, runtime)
+        self.assertEqual(result['selected_build_or_proc_macro_packages'], ['ahash v0.8.12'])
+        self.assertEqual(result['cargo_tree_sha256'], __import__('hashlib').sha256(graph).hexdigest())
+        self.assertEqual(result['cargo_metadata_sha256'], __import__('hashlib').sha256(metadata).hexdigest())
+
+    def test_stable_graph_preflight_runs_after_private_lock_and_before_any_build(self):
+        source = SOURCE.read_text(encoding='utf-8')
+        main_body = source[source.index('def main():'):source.index("if __name__ == '__main__':")]
+        self.assertIn('run_source_graph_preflight(source, env, package_deadline)', main_body)
+        self.assertLess(main_body.index("print(f'accepted_lock_sha256="),
+                        main_body.index('run_source_graph_preflight(source, env, package_deadline)'))
+        self.assertLess(main_body.index('run_source_graph_preflight(source, env, package_deadline)'),
+                        main_body.index("run_control_only(control_case, env, package_deadline, source)"))
+        self.assertLess(main_body.index('run_source_graph_preflight(source, env, package_deadline)'),
+                        main_body.index("print('phase=process_scope_overhead_measurement'"))
 
     def test_harness_paths_follow_own_worktree_not_removed_checkout(self):
         expected_repo = SOURCE.resolve().parents[2]
@@ -314,7 +424,7 @@ class EnvironmentTests(unittest.TestCase):
 
     def test_managed_build_requests_keep_cargo_streams_separate(self):
         source = SOURCE.read_text(encoding="utf-8")
-        control = source[source.index("def run_control_only("):source.index("def main():")]
+        control = source[source.index("def run_control_only("):source.index("def _parse_cargo_executable(")]
         self.assertEqual(control.count("include_stderr=False"), 2)
         self.assertGreaterEqual(control.count("stderr_path="), 2)
 

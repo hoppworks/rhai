@@ -12,6 +12,19 @@ SDKROOT=Path('/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platfo
 XCODE_TOOLS=Path('/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin')
 LOCK_SHA='8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa'
 OVERLAYS=['Cargo.toml','src/packages/sys/config.rs','src/packages/sys/mod.rs','src/packages/sys/process.rs','src/packages/sys/process/unix.rs','tests/sys_process.rs']
+REVIEWED_BUILD_CANDIDATES={
+    ('ahash','0.8.12'), ('cap-primitives','4.0.3'), ('cap-std','4.0.3'),
+    ('const-random-macro','0.1.16'), ('crunchy','0.2.4'),
+    ('getrandom','0.3.4'), ('io-extras','0.19.0'), ('io-lifetimes','2.0.4'),
+    ('io-lifetimes','3.0.1'), ('libc','0.2.189'), ('num-traits','0.2.19'),
+    ('paste','1.0.15'), ('portable-atomic','1.15.0'),
+    ('proc-macro2','1.0.103'), ('quote','1.0.41'), ('rhai','1.26.1'),
+    ('rhai_codegen','3.2.0'), ('rustix','1.1.5'), ('serde','1.0.229'),
+    ('serde_core','1.0.229'), ('serde_derive','1.0.229'),
+    ('serde_json','1.0.145'), ('smartstring','1.0.1'),
+    ('tiny-keccak','2.0.2'), ('trybuild','1.0.90'), ('zerocopy','0.8.59'),
+}
+SOURCE_GRAPH_PREFLIGHT=None
 LIMIT=1_572_864
 MAX_DESCENDANTS=16
 MAX_RSS_KIB=2*1024*1024
@@ -475,6 +488,140 @@ def cargo_build_argv(operation, *arguments):
         raise ValueError('unsupported Cargo operation')
     return [str(CARGO), operation, '--locked', *arguments]
 
+def cargo_source_graph_argv(source):
+    """Ask stable Cargo for the locked, target-filtered package dependency tree."""
+    return [str(CARGO), 'tree', '--locked', '--manifest-path',
+            str(Path(source)/'Cargo.toml'), '--target', 'aarch64-apple-darwin',
+            '--package', 'rhai', '--features', 'testing-environ,sys',
+            '--edges', 'normal,build,dev', '--no-dedupe', '--prefix', 'none']
+
+def cargo_metadata_graph_argv(source):
+    """Read stable package target metadata; this is a target/feature superset."""
+    return [str(CARGO), 'metadata', '--format-version', '1', '--locked',
+            '--manifest-path', str(Path(source)/'Cargo.toml'),
+            '--filter-platform', 'aarch64-apple-darwin',
+            '--features', 'testing-environ,sys']
+
+def _graph_text(value, label):
+    if isinstance(value, bytes):
+        try: value=value.decode('utf-8')
+        except UnicodeDecodeError as exc: raise RuntimeError(f'{label} is not UTF-8') from exc
+    if type(value) is not str or not value:
+        raise RuntimeError(f'{label} is empty or invalid')
+    return value
+
+def validate_cargo_source_graph(tree_output, metadata_output):
+    """Join Cargo's stable package tree to target metadata and the reviewed source superset.
+
+    Cargo documents `cargo tree` as a close package/feature overview, not an
+    exact compilation-unit graph. This check requests every package dependency
+    kind (normal, build, and dev) while excluding feature-only display rows,
+    then checks the complete reviewed build/proc-macro candidate set as a
+    conservative source audit boundary. It never reports exact unit selection.
+    """
+    tree_text=_graph_text(tree_output, 'Cargo tree output')
+    metadata_text=_graph_text(metadata_output, 'Cargo metadata output')
+    packages=[]
+    for line in tree_text.splitlines():
+        if not line: raise RuntimeError('malformed Cargo tree package row')
+        match=re.fullmatch(r'([A-Za-z0-9_-]+) v([^\s]+)((?: \([^()\n]*\))*)',line)
+        if match is None: raise RuntimeError('malformed Cargo tree package row')
+        packages.append((match.group(1),match.group(2)))
+    selected=set(packages)
+    if not selected or ('rhai','1.26.1') not in selected:
+        raise RuntimeError('Cargo tree omitted the frozen Rhai package')
+    try: metadata=json.loads(metadata_text)
+    except (TypeError,ValueError) as exc: raise RuntimeError('Cargo metadata is invalid JSON') from exc
+    package_rows=metadata.get('packages') if isinstance(metadata,dict) else None
+    resolve=metadata.get('resolve') if isinstance(metadata,dict) else None
+    nodes=resolve.get('nodes') if isinstance(resolve,dict) else None
+    if not isinstance(package_rows,list) or not isinstance(nodes,list):
+        raise RuntimeError('Cargo metadata omitted packages or resolved nodes')
+    node_ids={node.get('id') for node in nodes if isinstance(node,dict)}
+    if len(node_ids)!=len(nodes) or not all(type(item) is str for item in node_ids):
+        raise RuntimeError('Cargo metadata has malformed resolved nodes')
+    resolved_by_id={}
+    for package in package_rows:
+        if not isinstance(package,dict) or type(package.get('id')) is not str:
+            raise RuntimeError('Cargo metadata has malformed package rows')
+        if package['id'] in node_ids:
+            if package['id'] in resolved_by_id:
+                raise RuntimeError('Cargo metadata has duplicate resolved package identity')
+            resolved_by_id[package['id']]=package
+    if set(resolved_by_id)!=node_ids:
+        raise RuntimeError('Cargo metadata resolution refers to missing packages')
+
+    def candidate_kind(package):
+        name,version=package.get('name'),package.get('version')
+        targets=package.get('targets')
+        if type(name) is not str or type(version) is not str or not isinstance(targets,list):
+            raise RuntimeError('Cargo target metadata is missing or malformed')
+        kinds=set()
+        for target in targets:
+            if not isinstance(target,dict): raise RuntimeError(f'malformed Cargo target: {name} {version}')
+            target_kinds=target.get('kind')
+            crate_types=target.get('crate_types')
+            if not isinstance(target_kinds,list) or not all(type(kind) is str for kind in target_kinds):
+                raise RuntimeError(f'malformed Cargo target kinds: {name} {version}')
+            if not isinstance(crate_types,list) or not all(type(kind) is str for kind in crate_types):
+                raise RuntimeError(f'malformed Cargo target crate types: {name} {version}')
+            if 'custom-build' in target_kinds: kinds.add('custom-build')
+            if 'proc-macro' in target_kinds or 'proc-macro' in crate_types: kinds.add('proc-macro')
+        return kinds
+
+    reviewed_superset=[]
+    for package in resolved_by_id.values():
+        kinds=candidate_kind(package)
+        if kinds:
+            key=(package['name'],package['version'])
+            if key not in REVIEWED_BUILD_CANDIDATES:
+                raise RuntimeError(f'unreviewed build/proc-macro candidate in metadata superset: {key[0]} {key[1]}')
+            reviewed_superset.append(f'{key[0]} v{key[1]}')
+    candidates=[]
+    for name,version in sorted(selected):
+        matching=[row for row in package_rows if isinstance(row,dict)
+                  and row.get('name')==name and row.get('version')==version]
+        if len(matching)!=1:
+            raise RuntimeError(f'Cargo tree package is missing or ambiguous in metadata: {name} {version}')
+        package=matching[0]
+        if type(package.get('id')) is not str or package['id'] not in node_ids:
+            raise RuntimeError(f'Cargo tree package is absent from Cargo metadata resolution: {name} {version}')
+        if candidate_kind(package): candidates.append(f'{name} v{version}')
+    return {'graph_kind':'stable-cargo-tree-package-superset',
+            'exact_compilation_units':False,
+            'target':'aarch64-apple-darwin','features':['testing-environ','sys'],
+            'selected_package_count':len(selected),
+            'selected_build_or_proc_macro_packages':candidates,
+            'metadata_candidate_superset':sorted(reviewed_superset)}
+
+def run_source_graph_preflight(source, env, deadline):
+    """Reject package graphs outside the reviewed source candidate boundary before compile."""
+    global SOURCE_GRAPH_PREFLIGHT
+    commands=(('tree',cargo_source_graph_argv(source)),
+              ('metadata',cargo_metadata_graph_argv(source)))
+    outputs={}
+    for label,argv in commands:
+        if deadline-time.monotonic()<=0:
+            raise TimeoutError('work deadline expired before Cargo graph preflight')
+        stdout=RUNTIME/f'cargo-{label}-source-graph.out'
+        stderr=RUNTIME/f'cargo-{label}-source-graph.stderr'
+        status,data=run_anchored_command(argv,source,env,stdout,
+            min(deadline,time.monotonic()+45),stderr_path=stderr,
+            closure_deadline=deadline,monitor_resources=True,include_stderr=False)
+        if status:
+            diagnostic=stderr.read_text(errors='replace') if stderr.exists() else ''
+            raise RuntimeError(f'Cargo {label} graph preflight failed status={status}: {diagnostic}')
+        outputs[label]=data
+    SOURCE_GRAPH_PREFLIGHT=validate_cargo_source_graph(outputs['tree'],outputs['metadata'])
+    SOURCE_GRAPH_PREFLIGHT.update({
+        'reviewed_source_baseline':'eedba0fc1ff632dce64f9fad0b1616bcf433c178',
+        'reviewed_candidate_package_count':len(REVIEWED_BUILD_CANDIDATES),
+        'cargo_tree_sha256':hashlib.sha256(outputs['tree']).hexdigest(),
+        'cargo_metadata_sha256':hashlib.sha256(outputs['metadata']).hexdigest(),
+        'limitation':'Cargo tree is an approximate package graph, not an exact compilation-unit graph; this records candidate-source coverage only.'})
+    print('source_candidate_graph_preflight='+json.dumps(SOURCE_GRAPH_PREFLIGHT,sort_keys=True),flush=True)
+    return SOURCE_GRAPH_PREFLIGHT
+
 def measurement_cargo_argv():
     return cargo_build_argv(
         'test', '--features', 'testing-environ,sys', '--test', 'sys_process',
@@ -556,6 +703,7 @@ def main():
         i=section.index(' "libm",\n'); section=section[:i]+' "libc",\n'+section[i:]; plock.write_text(txt[:a]+section+txt[b:])
     if sha(plock)!='2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425': raise RuntimeError('private edge-only lock hash mismatch')
     print(f'accepted_lock_sha256={sha(lock)} private_lock_sha256={sha(plock)}',flush=True)
+    run_source_graph_preflight(source, env, package_deadline)
     if control_case in ('build', 'managed'):
         run_control_only(control_case, env, package_deadline, source)
         return
@@ -584,7 +732,7 @@ def main():
     if rustc_status or cargo_status: raise RuntimeError('toolchain metadata command failed')
     rustc=rustc_bytes.decode(errors='replace')
     cargo=cargo_bytes.decode(errors='replace').strip()
-    metadata={**summary,'os':_platform.platform(),'machine':_platform.machine(),'cargo':cargo,'rustc':rustc,'source_revision':SOURCE_REF,'source_archive_sha256':ARCHIVE_SHA,'command':cmd,'elapsed_package_seconds':time.monotonic()-measurement_start,'resource_policy':{'outer_seconds':600,'run_scoped_seconds':585,'driver_seconds':580,'cargo_seconds':540,'jobs':2,'descendants':16,'memory_policy_bytes':2*1024*1024*1024,'sampled_storage_stop_kib':LIMIT,'storage_sampling_seconds':1},'interpretation':'API-evaluation entry to completed Rhai report; excludes Engine construction and AST parsing. Spawn-to-first-byte is not exposed by this API.'}
+    metadata={**summary,'source_candidate_graph':SOURCE_GRAPH_PREFLIGHT,'os':_platform.platform(),'machine':_platform.machine(),'cargo':cargo,'rustc':rustc,'source_revision':SOURCE_REF,'source_archive_sha256':ARCHIVE_SHA,'command':cmd,'elapsed_package_seconds':time.monotonic()-measurement_start,'resource_policy':{'outer_seconds':600,'run_scoped_seconds':585,'driver_seconds':580,'cargo_seconds':540,'jobs':2,'descendants':16,'memory_policy_bytes':2*1024*1024*1024,'sampled_storage_stop_kib':LIMIT,'storage_sampling_seconds':1},'interpretation':'API-evaluation entry to completed Rhai report; excludes Engine construction and AST parsing. Spawn-to-first-byte is not exposed by this API.'}
     (measurement_dir/'summary.json').write_text(json.dumps(metadata,indent=2)+'\n')
     final={n:sha(source/n) for n in OVERLAYS}
     if final!=hashes: raise RuntimeError('final source manifest differs from frozen inputs')
