@@ -51,7 +51,7 @@ Windows guest control belongs solely to windows_monitor_job_owner.
   34 emitted PIDs/10 groups and exact runtime absent, three manifests matching.
   Cargo53.432s, sampled276896KiB; no continuous peak claim.
 - Remote branch cleanup CLOSED. Latest independent ls-remote readback shows ONLY
-  main at 658221520e1226c39e75ddb3f922db64c2d0e95c (2026-10-02). Nine remote task refs removed
+  main at b198c26c02d50833cfa67d07c9217535b71060d8 (last readback before this integration). Nine remote task refs removed
   in the final consolidation, one earlier; every exact tip was ancestor of pushed
   main before deletion. Histories preserved. Local active/foreign/dirty worktrees
   remain; remote cleanup does not authorize discarding them.
@@ -76,133 +76,58 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    Root viewed actual compiler screenshot (fiveCS0103). Desktop-only screenshot
    is not exactjob closure proof. Owner checks exact6244/compiler/setupchild IDs
    and updates changed backend's immutable17input hash before nextfresharchive.
+   Source pin aa38e83a integrated as26277055: root independently computed all17
+   declared input hashes from frozen Git blobs; all match,16 unchanged. Harness
+   SHA b1ce7161c87d8aead4d46953f87719dba1f3203a166973ff6bdee655e8c2e372.
+   Owner live read-only get-process IDs6244/5864/3972 and csc returned none;
+   original run root/logs retained. This is known-process absence, not direct
+   closed-job handle readback or native fixture acceptance. Owner records exact
+   receipts, then fresh canonical archive/parser/hash staging for focused fix.
    Existing hard caps and nonrenewable real-client allocation remain.
    This is a concrete compilation cause, not a verified live wait. Original
    detailed setup history is retained by reference to root state at f8b65ad6.
-2. POSIX overhead source00bed4a0dfeb103ff209ba4c76dac7ae797b7c56 integrated.
-   OCR selected2 files, reviewed2/skipped0; excluded contract/state read separately.
-   Root Python AST and parser self-test pass, including meaningful missing/reordered
-   sample rejection. Rust formatting/whitespace checks passed in responsible context.
-   No Cargo/native measurements yet. Thirty paired samples per API-entry-to-report
-   latency and 8MiB stdout plus8MiB stderr throughput, alternating mode/workload
-   order,120 executions/zero warmups. Explicit frozen revision/archive IDs, bounded
-   metadata commands and early raw export address root pre-freeze findings.
-   Exact capture fixture PID absence is narrow observed resource evidence, not a
-   worker/handle/descriptor census; those ticket03 resource requirements stay open.
-   Responsible Linux context froze launcher/preflight at local dd95669e. Root
-   independently read all launcher/wrapper/contract/preflight sources: descendant
-   monitoring exists, but storage sampling is missing from the new wrapper and
-   memory RSS observation/stop is absent despite printed claims. Root returned
-   first source-review correction: implement actual bounded storage/RSS sampling
-   and export, add measurement-command identity ledger to final readback, retain
-   exact identity/heartbeat/cancellation and existing bounds. No staging or native
-   invocation82 is released; no measurement slot or native failure consumed.
-   Owner added concrete du/storage and owned-tree RSS sampling. Root early review
-   of the in-progress correction found final strict ledger/cap validation could
-   raise before failed-run exact cleanup, and failed readback was not exported.
-   Returned concrete correction: unconditional exact cleanup/readback from valid
-   available identities first, preserve failed receipts, then fail acceptance.
-   Confirmed same-start zombie/X entries without VmRSS must be terminal0, while
-   missing live-process VmRSS stays fail-closed. These are source-review findings
-   within the same first correction; no native cause count or budget reset.
-   Corrected frozen package b6f34e20efea282f3a31cf040b9e89831a17bd6d now
-   independently read and integrated into root. Root verified all four reported
-   hashes, Python AST, four embedded Python blocks and bash syntax in scoped30s.
-   Finalizer exports initial live identities/cleanup actions and rejects status0
-   with leftovers; current snapshot receipts precede resource stop checks. Source
-   gate accepted; responsible Linux context resumes fresh staging/hash/empty-
-   evidence readback released ONE bounded native82. It actually launched at
-   2026-10-02T05:22:31Z and returned terminal1 before private runtime/measurement:
-   copied runner imports agentskills.pyguard but the stage omitted that package.
-   Native82 consumed; zero benchmark calls/results. Original seven exported files
-   at responsible .scratch/managed-unix-scope-close/launch-82-evidence independently
-   read by root: exact ModuleNotFoundError, run-scoped/monitor/outer1, failed required
-   ledger acceptance and no matching runner identity remaining. Owner additionally
-   observed launcher3539356/start5515212 and runner3539364/start5515216 absent,
-   PGID3539298 empty; requested original readback receipt preservation. No
-   PRIVATE_RUNTIME emitted, because import failed before runtime creation.
-   First infrastructure cause is incomplete copied runner dependency bundle. Root
-   inspected configured run_scoped.py plus agentskills/{__init__.py,pyguard.py}:
-   exactly these three files are required; pyguard uses existing Python>=3.11,
-   no install/config changes. Responsible context prepares a frozen complete
-   dependency manifest/contract/preflight and NEW absent stage, retaining82 stage.
-   Corrected patch from local57e68c6f was applied without importing that
-   misattributed commit: root verifies preflight86cb738f, launcher020dc216 and
-   contract2b871c13, AST/bash syntax/whitespace and original post-exit identity/
-   group receipt. Exactly3 hash-bound runner files, nativePython>=3.12/filter and
-   bounded --help import gate now precede workload. Root accepted source gate
-   and released fresh absent-only staging/preflight; native83 remains withheld
-   until staged receipts are independently reviewed. Root then independently
-   SSH-read stage /root/rhai-process-overhead-00bed4a0-b6f34e20-preflight83:
-   all10 exact hashes match, evidence real/empty. Native preflight reports
-   Python3.14.7, tarfile filter and copied runner --help imports pass. Original
-   receipts in responsible launch-83-staging/{staged-hashes,preflight-output}.txt.
-   Source/staging gate CLOSED; ONE native83 released under unchanged caps and
-   exact120calls/zero warmups/no retries. Count83 consumes only at actual launch;
-   actual83 dispatched2026-10-02T05:34:59Z, exec56258, launcher3600450/start5590079,
-   runner3600461/start5590081, independently confirmed live then terminal.
-   Cargo/runscoped/monitor0;120samples emitted, outer1 due49empty cmdline metadata
-   rows in otherwise valid numeric identity ledger. False SystemExit:0 diagnostic
-   comes from sys.exit(main()) inside BaseException logging, status0 preserved.
-   Root independently re-parsed original Cargo records with frozen parser,
-   compared rawCSV and recomputed summary, and checked six before/after manifests
-   against00bed. Fresh independent SSHreadback confirms89distinctPID/start pairs
-   absent,23originalgroups empty, exactruntime/sessionTMPDIRabsent, no signals.
-   Root receipt linux83-measurement-root-readback.json supports narrow descriptive
-   Linux timing/throughput acceptance; originalouter1 and rawlogs preserved.
-   MedianDirecttrue0.699ms/Managedtrue101.177ms; captureDirect111.474ms,
-   Managed211.284ms for16MiB total. SamplemaxRSS911638528bytes/storage300040KiB.
-   Responsible owner repairs optionalmetadata validation and falseexitlogging,
-   adds pure malformedidentity REDcontrols and re-evaluates immutable83originals.
-   No native84/repeatedmeasurement authorized or needed for finalizer formatting.
-   Worker/handle/descriptor census and Mac/Windows measurements remain open.
-   Root macOS measurement adaptation is SOURCE-ONLY and NOT approved to launch:
-   macos-process-overhead.py and run-macos-process-overhead.sh bind00bed/archive
-   5414ea195ad00152b1eae36b3f4e10943ba5d9bf323baff6410cca0c5b4d8b98.
-   Fresh Worker reviewed both files: frozen inputs, private lock/runtime, sample
-   semantics/export and watchdogs present; inherited du-only sampling lacks live
-   descendant<=16 and2GiB memory observation/stop. run_scoped group-only cleanup
-   must not be claimed as exact managed-child closure after interrupted driver.
-   No Mac launch consumed. Responsible fresh Standard macos_overhead_safeguards now owns managed worktree
-   /Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai on local
-   task/macos-overhead-safeguards from39617ee7. Source-only repair brief requires
-   concrete live descendant/RSS monitoring, bounded cancellation/reap and exact
-   identity readback without unsafe stale-PID/group signaling. No native/Cargo
-   launch; root independently reviews frozen safeguards before release. First source-review finding,
-   no native failure or new Expert chain. Keep planned120calls/zero warmups/no retries. Root inspected frozen io_stress
-   fixture: exact2 writer threads/no process descendants, stdin EOF, write errors
-   panic and failed joins unwind before process exit. This gives a concrete route
-   for a later bounded pipe-closure interruption control, not native closure proof.
-   Owner must retain candid unresolved escaped-PGID closure status; passive
-   PID+lstart ledger never authorizes stale/nonchild numeric signaling.
-   macOS safeguards frozen source31f22f960c4df69638d52007eef64afc4e8927e8
-   passed responsible pure/static checks but root rejects native launch readiness.
-   Root read the adapter, harness and frozen measurement driver: harness run()
-   owns the measurement Python Popen, not Cargo; frozen driver subprocess.run
-   has no interruption forwarding/finally. Reaping the Python starter cannot
-   establish Cargo or test descendant closure. Setup git-archive Popen also
-   starts outside cancellation/ledger while state still says no-process-started,
-   permitting unsafe runtime removal after interruption. Final ps readback must
-   fit the total adapter deadline. Returned concrete source corrections to the
-   same responsible context; first source review, no native attempt consumed.
-   A project-local direct Cargo invocation can reuse frozen parsing/measurement
-   semantics and remove the intermediate child, but still needs accepted group
-   anchor custody and benchmark-specific escaped-fixture interruption proof.
-   No group/PID signaling authority is granted by passive snapshots.
-   Corrected safeguards f7dab7934f7f7f42245ec23008fe8e2616606799 integrated
-   as source progress only. Exact child log names corrected to measurement driver;
-   setup-in-progress prevents false no-process-started cleanup, final readback
-   has a remaining-time bound. Generic interrupted descendant closure still open.
-   Fresh read-only Expert09 /root/macos_overhead_custody_expert is analyzing the
-   uncovered benchmark-launch custody decision,15-minute planning checkpoint,
-   no native/Cargo slots. Brief escalations/09-macos-overhead-custody.md; answer
-   delivered at escalations/09-macos-overhead-custody.answer.md. Root reviewed
-   sole-spawner/reaper anchored command gate, direct Cargo with frozen parser,
-   conservative complete Darwin leaf readback and exact build-script/toolchain
-   confinement prerequisite. Same responsible macos_overhead_safeguards context
-   now implements one source-first bounded repair,30-minute active checkpoint.
-   No native/control/measurement launch until frozen source/pure controls/ABI and
-   confinement review. One cause09 chain; no count or hard-cap reset.
+2. Linux overhead invocation83 is terminal. Frozen measurement source00bed4a0,
+   archive5414ea19,120 alternating calls/zero warmups/no retries. Cargo/scoped/
+   monitor0; originalouter1 because49 descriptive cmdlines were empty in89
+   otherwise numeric-valid identity rows. Preserve original false SystemExit:0
+   diagnostic and failed finalization, not a workload failure. Root independently
+   re-parsed all120 Cargo records, compared CSV/recomputed summary and six frozen
+   manifests, then SSH-read89 distinct PID/start pairs absent,23 groups empty,
+   exact runtime/session scope absent, no signals. Receipt:
+   linux83-measurement-root-readback.json. Narrow descriptive Linux data accepted;
+   retained worker/handle/descriptor census and final release coverage remain open.
+   Median true direct0.699ms/managed101.177ms;16MiB capture direct111.474ms,
+   managed211.284ms. Sample maxima RSS911638528bytes/storage300040KiB;
+   sampling is not continuous peak. Original83 evidence/staging integrated with
+   corrected verifier as278d4924, consuming19048043 patch without importing
+   misattributed57e68c6f ancestry. Root byte-compared originalCSV/summary/outer/
+   readback with190 blobs; four hashes match. All89 ledger rows and malformed
+   identity/quiet-success/real-error controls pass, embedded Python AST/bash syntax
+   pass. Empty descriptive cmdline now allowed; numeric identity fields remain
+   mandatory. Driver sys.exit is outside Exception logging. No native84 allocated
+   or measurement repetition needed. Owner's corrected-finalizer replay is
+   supplemental; original failed finalization retained. Next source-only task in
+   same responsible Linux context: concrete retained worker/handle/descriptor
+   census and meaningful controls for ticket03, reuse accepted timing data.
+   No new build/native invocation before root source review. Prior launcher,
+   resource/preflight review and invocation82 missing dependency failure remain
+   by reference to root state4d095f86 and original82 receipts; no history reset.
+   macOS overhead remains SOURCE-ONLY and NOT ready to launch. Expert09 answer
+   escalations/09-macos-overhead-custody.answer.md requires sole spawner/reaper,
+   owned process-group anchor and command release gate, direct Cargo with frozen
+   parser, complete conservative Darwin leaf census and audited actual build
+   script/toolchain confinement. Existing f7dab scaffolding is incomplete.
+   Launch guard e4971b03 integrated as4d095f86; root verified first main action
+   checks CUSTODY_IMPLEMENTATION_FROZEN=False before setup/runtime/children.
+   Prerequisite document explicitly incomplete; guard does not prove custody.
+   Source audit found46 of131 locked registry sources missing from cache. Root
+   authorized ordinary exact locked archive acquisition into a new owned source-
+   audit path outside disposable runtimes, verifying Cargo.lock checksums; no
+   install/toolchain/config/credentials/agent-home change. Same responsible Mac
+   context implements Expert09 architecture and pure controls before native gate.
+   No new Expert chain or native slot. Historical Mac prerequisite count82 is
+   pre83 snapshot; authoritative actual Unix count83 below. Thirty-minute repair
+   checkpoint is an estimate, reviewed with concrete progress; caps unchanged.
 3. Windows public-contract source preparation is integrated at43e9ef8c (parent
    056c0b53). OCR selected1 Rust file, reviewed1/skipped0; excluded Markdown state
    was read separately. Initial review corrected INT typing and no_float timeout,
@@ -228,6 +153,17 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    Complete final current-source native OS/features/MSRV matrix, documentation,
    overhead and release gates. Reuse existing evidence only for unchanged relevant
    source/check logic/environment; final strict coverage remains required.
+
+## Instruction reconciliation
+Root reread /Users/hoppworks/.agents/AGENTS.md and project AGENTS.md after the
+owner's056b17c update. Commit056b changes global instructions/tooling contract,
+not skill files; no unaffected skill reread. Prior approvals cover ordinary
+reversible repairs, exact locked source acquisition and fork push/coordinator
+integration. Stored PENDING labels do not override human authorization. Explicit
+limits, safety caps, histories and acceptance requirements remain. New builds
+use owned unique ~/.local/share/agent-builds/rhai/session scope, absolute TMPDIR,
+existing run_scoped and project private output/cache/source flags. No existing
+build/process was moved, removed or restarted because of the instruction update.
 
 ## Resources, counts and cause history
 Unix actual native invocation count83 consumed.82 failed before runtime;
@@ -284,10 +220,10 @@ in .scratch/stdlib-wayfinder/issues and release-proposal.md. Preserve original
 scope; no release or goal-complete claim. Retire only exact owned clean worktrees
 after verified integration, retaining necessary original proof outside them.
 
-## Previous turn classification
-PROGRESS: observed83 live exactidentities then terminal, independently validated
-120rawmeasurementrecords/summary/frozenmanifests and fresh exactclosure; concrete
-optionalcmdline finalizer diagnosis avoids unnecessary benchmark repetition.
-Windows focusedguard source correction reviewed/integrated with originalcompiler
-screenshot evidence; pending exactcleanup and updatedinputpin before nextnativegate.
-Mac sourcefirst Expert09 implementation continues. Fullgoal active/incomplete.
+## Current turn classification
+PROGRESS: reread current global/project rules; independently verified Windows17
+pins and integrated focused hash correction; integrated Mac fail-closed launch
+guard while responsible implementation continues; reviewed/retested corrected
+Linux83 verifier and preserved all originals without repeating measurements.
+Full goal active/incomplete. Root integration awaits authorized fork-main push
+and exact readback; only remote main remains intended.
