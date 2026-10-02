@@ -239,17 +239,15 @@ after verified integration, retaining necessary original proof outside them.
 ## Current turn classification
 Previous goal turn PROGRESS: source fixes and original Linux83 data integrated,
 verified fork push43a68022 with only main remote. Current turn PROGRESS:
-Windows cleanup receipts independently inspected/integrated; concrete Linux
-resource-census correction distinguishes retained package cleanup service;
+Windows cleanup receipts independently inspected/integrated as6d6731c5;
+Linux resource-census correction distinguishes retained package cleanup service;
 Mac checksum audit progresses without native launch. Current default-core source
 applicability reviewed against c4646230: token.rs spawn row now cfg(sys) (false
 without sys), manifest adds Unix optional libc/targeted cap-std and gated examples.
-Old default-core1.66 proof remains historical compilation/smoke evidence, but
-current manifest/lock compatibility is not claimed verified by that old build.
-PROGRESS: reread current global/project rules; independently verified Windows17
-pins and integrated focused hash correction; integrated Mac fail-closed launch
-guard while responsible implementation continues; reviewed/retested corrected
-Linux83 verifier and preserved all originals without repeating measurements.
-Full goal active/incomplete. Root integration published to fork main1167770c; exact ls-remote confirms only
-refs/heads/main and the matching head. Every new author/committer is lowercase
-hoppworks. Root worktree clean. This state update follows that verified readback.
+Old default-core1.66 proof remains historical compilation/smoke evidence; current
+manifest/lock compatibility is not claimed verified by that old build.
+Fork integration5816cb1c independently read back as the only remote main head;
+all new authors/committers lowercase hoppworks. Root worktree clean before this
+state reconciliation. Full goal active/incomplete. Next concrete actions remain
+Linux frozen census source review, Mac frozen custody/ABI/confinement source
+review, and Windows exact fresh archive/parser/pin readback before native release.
