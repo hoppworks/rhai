@@ -80,7 +80,10 @@ Before invoking the runner, create an absent, owned session scope under
 absolute path. The runner creates a unique private runtime below that scope.
 Set `CARGO_TARGET_DIR="$AGENT_RUNTIME_DIR/target"` and
 `CARGO_HOME="$AGENT_RUNTIME_DIR/cargo-home"` inside that command. The runner sets
-temporary-directory variables. Keep original sources and accepted evidence outside
+temporary-directory variables. For Python proof helpers, set
+`PYTHONPYCACHEPREFIX="$AGENT_RUNTIME_DIR/pycache"` inside the command, or use
+`PYTHONDONTWRITEBYTECODE=1` when bytecode caching is unnecessary. Keep original
+sources and accepted evidence outside
 that runtime; the owned build source copy below is disposable isolation for
 Cargo-generated files. After all owned runs finish, retire only the exact empty
 session scope with `rmdir`; never migrate or clean another session scope. Build from an owned source copy inside the runtime,
