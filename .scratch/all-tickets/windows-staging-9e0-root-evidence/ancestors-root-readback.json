@@ -1,0 +1,9 @@
+{
+  "scope": "existing guest destination ancestors only, before extraction",
+  "guest_root": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\w9e0-20261002-6f804a9c4c4a4e78",
+  "readback": "Root independently viewed full typed Get-Item -Force/Parent enumeration and terminal output: eight ancestors to C:\\, all Directory; no ReparsePoint, no errors; clean prompt returned. Earlier draft extraction line is visibly Ctrl+C cancelled; this receipt does not establish extraction or compiler/native behavior.",
+  "frames": {
+    "ancestors-result.png": "72a0a0f38b2670b920b5ec67a581abcb3982f201f9bdc582b4dc10ddd7a40af4",
+    "ancestors-line.png": "784ce123072ddb40c694f0c836a65bcab5975f0b50c81ffd56fd812c19438239"
+  }
+}

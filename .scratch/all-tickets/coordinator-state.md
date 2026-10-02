@@ -904,6 +904,13 @@ https://raw.githubusercontent.com/apple-oss-distributions/xnu/main/bsd/kern/sys_
 This is corroborating source, not matching installed Darwin27/xnu13432.1.9 proof.
 Investigate stopped exact host's actual two read descriptors, peer binding, no
 other readers, interrupted-write stale bits and source applicability before code.
+Owner concludes pipe-state candidate unsupported: SDK lacks live/atomic peer
+semantics, unmatched kernel source and interrupted-write stale bit remain gaps.
+No code/native changes. Existing independent finite-control reviewer now performs
+a narrow affected contract clarification: would independent same PID/start LIVE
+fixture after exact host KILL reject the known pre-action exit schedule while
+preserving both-stream-active criteria? A remaining writer-complete schedule must
+be identified honestly; no capacity claim, new Expert09 chain or native dispatch.
 No native API/control/build launch authorized by this source investigation;
 no capacity inference/fixture mutation/new Expert09 chain/history reset.
 Guardfalse; allocation85 unlaunched. Thirty-minute active-work planning checkpoint
@@ -915,9 +922,12 @@ SHA8291e58652a7dc8494513d910460e6dae39a716f5dfca937bda40fafcfa0caa4.
 Root independent visual/readback of original guest frames accepted transfer ONLY,
 retained once windows-staging-9e0-root-evidence/ at2c4c5a9. Exact guestroot:
 C:\Users\RhaiTest\.local\share\agent-builds\rhai\w9e0-20261002-6f804a9c4c4a4e78.
-No live GET/no retry. Selective tools extraction has not yet been submitted per
-fresh owner screenshot; owner will clear typed line and verify ALL existing
-ancestors for reparse points before exact no-overwrite/rooted/upward ZIP guards.
+No live GET/no retry. Selective tools extraction has not yet been submitted. Root independently viewed
+ancestors-line/result originals: cancelled draft extraction line, eight existing
+ancestors through C:\ all Directory/no ReparsePoint/no errors, terminal prompt.
+Two exact digest-checked frames and narrow ancestry readback retained once at
+windows-staging-9e0-root-evidence/; extraction remains pending guarded rooted/upward
+entries and no overwrite.
 Then17pins/PS5.1 parser/path controls/exact Roslyn readonly prerequisites;
 no compiler/bootstrap/job/client/fixture/native before root prerequisite readback.
 Older5fe4 GET history and Expert02/nonrenewable client30min/source-fixture1h,
@@ -938,10 +948,19 @@ permitted: /var/../../Users/... and /private/var/../../Users/..., independently
 canonicalize both to exact owned fixture, require distinct strings, fail layout
 mismatch. Freeze changed test/source revision before archive/helper provenance.
 Unchanged production and unrelated Linux proof retained where applicable.
+Fixture correction frozen50af89515fa2094c9c10bf03e98b89f00291c57f, archiveSHA
+12f66ac017d8c54e95f7bf38a9319f1e379446168bd9d102a9ff7b52dbe5327a.
+Owner source-only checkpoint reports seven pure categories GREEN: named inventory
+with specific F19 uncovered, status0 incomplete coverage retains per-test outcomes
+and continues later rows but overall fails; cleanup tri-state/PIDstart/groups
+and sampled descendant identity retention. Helper/provenance correction frozen8b9740de8e4493c78320293d3a07599672f22484,
+clean owner checkout. SAME combined independent reviewer actively rechecks F1–F4
+and changed alias/provenance dependencies, original injected regressions preserved.
+No source integration/native acceptance before this affected checkpoint.
 No native/build/toolchain/control/measurement dispatch; affected combined recheck
 at frozen repair required. Genuine EILSEQ early return remains uncovered.
 
-Current root/fork main2c4c5a9799acebda289364c86d7e481e413f0df1 was pushed and
+Current root/fork main863ec1ec322d8e69b5aa45a9f5f51f0db0c0b97c was pushed and
 independently read back as sole remote main. Lowercase human attribution;
 no upstream writes. Root loaded958a4538 disk globals/project/campaign, unchanged;
 active owners confirmed same revision previously, no descendants.
