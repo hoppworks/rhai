@@ -58,8 +58,31 @@ history is retained; this is a concrete diagnosis, not a new escalation chain.
 Windows sole owner confirmed live unlocked desktop and ordinary PowerShell input.
 Fresh absent-only owner737988d4 archive downloaded; guest SHA256
 55aefedd96acdf716399ad12994c27e993211920b2d22f769b70b533e7c986ab.
-This proves transfer/readback only; parser, compiler, custody fixtures and client
-remain unverified until actual results. Original package counts/caps unchanged.
+Guest expanded absent-only owner-737988d4-src; exact corrected harness hash
+6e8adde4969fafd5502a6848a8607420510ed96949e6f4d12b58d3bca0116ffa
+matches. PowerShell5.1 Parser.ParseFile on that script reports zero errors.
+Unique run root C:\RhaiQuality\runs\monitor-source-4df64ca93e024a29a4a47cc11c27a8d1
+was absent on preflight. Sole owner actually launched the source-fixture batch. It stopped at the first
+Get-KernelDelegate export resolution: kernel32 module handle was not a nonzero
+CLR IntPtr. Internal17-file gate, compiler/fixtures, CreateJobObject and timer
+setup were not reached by source order; sole owner verifies live exact state
+and preserves the failed unique runroot before a narrow PS5.1 extraction repair.
+This is a new infrastructure compatibility cause, not behavioral test failure.
+Source correction, review and fresh pinned archive/root inside remaining actual
+limits are ordinary authorized work; no repeated human question is required. Archive/parser proof is not native custody/client acceptance.
+Root reconciled next-execution-plan.md:30-minute source planning estimate is
+not an execution cap; source-fixture batch retains1-hour outer bound. Expert02
+monitor nonrenewable30-minute lifetime,120-second setup,30-second closure and
+shared30-second finalization are distinct actual policy limits; preserve them and
+cumulative history. Root shorthand must not create an additional approval gate.
+
+Root early source review rejected mutable Unix recovery-in-fail draft: it could
+convert an already committed primary cause into success and stack a fresh cleanup
+window after provisional wait. This is a source review correction, not a failed
+native implementation check. Responsible context removes that path, keeps retry
+before terminal cause commitment with the shared absolute allowance, and adds a
+meaningful supervisor regression instead of a mirrored boolean-helper truth table.
+No new Unix launch; native count74/history unchanged.
 
 Full process ticket, Windows custody/client, final MSRV/features/native matrix,
 performance/docs/release and source-chain main integration remain open. Existing
