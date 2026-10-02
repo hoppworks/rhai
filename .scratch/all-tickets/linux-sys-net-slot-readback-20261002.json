@@ -1,0 +1,93 @@
+{
+  "utc": "2026-10-02T11:47:54Z",
+  "exact_identity_readback": [
+    {
+      "pid": 1694532,
+      "ppid": 1694531,
+      "start_ticks": "7773524",
+      "state": "S",
+      "executable": "python3",
+      "arguments": [
+        "/var/home/workhorse/projects/agent-skills/tools/run_scoped.py",
+        "--timeout",
+        "1800"
+      ]
+    },
+    {
+      "pid": 1694533,
+      "ppid": 1694532,
+      "start_ticks": "7773526",
+      "state": "S",
+      "executable": "/usr/bin/python3",
+      "arguments": [
+        "/var/home/workhorse/projects/agent-skills/tools/run_scoped.py",
+        "_supervise",
+        "4"
+      ]
+    },
+    {
+      "pid": 1694535,
+      "ppid": 1694534,
+      "start_ticks": "7773531",
+      "state": "S",
+      "executable": "python3",
+      "arguments": [
+        "/var/tmp/p01-real-bo09-warning-20261002.py",
+        ""
+      ]
+    },
+    {
+      "pid": 1767247,
+      "ppid": 1694535,
+      "start_ticks": "7808937",
+      "state": "S",
+      "executable": "make",
+      "arguments": [
+        "patrol2-worker-down-unleased",
+        ""
+      ]
+    },
+    {
+      "pid": 1767254,
+      "ppid": 1767251,
+      "start_ticks": "7808947",
+      "state": "S",
+      "executable": "python3",
+      "arguments": [
+        "bin/patrol-s10-soak.py",
+        "cleanup-owned",
+        ""
+      ]
+    },
+    {
+      "pid": 1777469,
+      "absent": true
+    },
+    {
+      "pid": 28950,
+      "ppid": 28948,
+      "start_ticks": "6144704",
+      "state": "S",
+      "executable": "python3",
+      "arguments": [
+        "/var/home/workhorse/projects/agent-skills/tools/run_scoped.py",
+        "--timeout",
+        "28800"
+      ]
+    },
+    {
+      "pid": 28951,
+      "ppid": 28950,
+      "start_ticks": "6144707",
+      "state": "S",
+      "executable": "/usr/bin/python3",
+      "arguments": [
+        "/var/home/workhorse/projects/agent-skills/tools/run_scoped.py",
+        "_supervise",
+        "4"
+      ]
+    }
+  ],
+  "stage_exists": false,
+  "scope_exists": false
+}

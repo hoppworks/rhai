@@ -263,19 +263,18 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Current turn classification
-Previous status turn: NO PROGRESS (status readback only). This continuation:
-PROGRESS. Mac frozen tool-lookup increment ceb9cf independently reviewed3/3
-Python files plus audit/original evidence; exact12 files integrated, independent
-scoped64 pure tests passed. Source-side compiler/linker lookup consistency closed
-narrowly, native controls and measurement remain open. Review at
-macos-tool-path-increment-review.md, replay macos-tool-path-root-test.log.
-Own runtime removed and exact empty scope retired. Count84/guardfalse preserved.
-Linux corrected package519ad474 received; narrow recheck found positive stdout/
-stderr concatenation destroys target boundaries, caller order is not Cargo target
-order, and modern panic PID fixture differs from original output. Existing owner
-receives one coherent correction batch; no native launch. Next collect corrected
-chronological-output/exact-membership/original-format tests before dispatch.
-Mac live dual-stream source readiness continues in existing owner under Expert09.
+Previous continuation: PROGRESS (Mac source correction integrated64pure tests,
+Linux corrected-package review identified three real output-contract defects).
+Current continuation: verified active owner wait plus fresh native-slot evidence.
+Linux owner live implementing chronological merged output, exact target membership,
+and real panic PID format fixes. Workhorse foreign scoped1694532/start7773524
+and supervisor1694533/start7773526 remain live with cleanup descendants; preserve
+all foreign resources. Exact readback linux-sys-net-slot-readback-20261002.json;
+new Linux stage/scope absent. Revalidate machine slot before native dispatch.
+Mac existing owner investigates separate genuine read-path observer control,
+without changing frozen measurement or inventing public API. Current public
+reports expose completed buffers only; marker/task readiness remains rejected.
+No native launch or count85, no blocker transition; goal remains incomplete.
 
 ## Current-source core MSRV package — accepted narrow gate
 Current default-core applicability CLOSED for source52d9797b, Rust/Cargo1.66.0,
