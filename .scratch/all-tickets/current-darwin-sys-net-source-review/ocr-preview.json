@@ -1,0 +1,48 @@
+{
+  "schema_version": "1",
+  "mode": "commit",
+  "repository": "/Users/hoppworks/.codex/worktrees/current-darwin-sys-net-behavior/rhai",
+  "commit": "2d52bf0b87a684b87222436795dcfc73875a7ce8",
+  "background": "Prepare Darwin sys net behavior acceptance",
+  "total_files": 5,
+  "reviewable_count": 3,
+  "excluded_count": 2,
+  "total_insertions": 935,
+  "total_deletions": 0,
+  "reviewable_files": [
+    {
+      "path": ".scratch/all-tickets/check-current-darwin-sys-net-behavior.py",
+      "status": "added",
+      "insertions": 721,
+      "deletions": 0
+    },
+    {
+      "path": ".scratch/all-tickets/readback-current-darwin-sys-net-cleanup.py",
+      "status": "added",
+      "insertions": 58,
+      "deletions": 0
+    },
+    {
+      "path": ".scratch/all-tickets/test-current-darwin-sys-net-behavior.py",
+      "status": "added",
+      "insertions": 88,
+      "deletions": 0
+    }
+  ],
+  "excluded_files": [
+    {
+      "path": ".scratch/all-tickets/current-darwin-sys-net-behavior-contract.md",
+      "status": "added",
+      "insertions": 44,
+      "deletions": 0,
+      "exclude_reason": "unsupported_ext"
+    },
+    {
+      "path": ".scratch/all-tickets/current-darwin-sys-net-behavior-source-prep.md",
+      "status": "added",
+      "insertions": 24,
+      "deletions": 0,
+      "exclude_reason": "unsupported_ext"
+    }
+  ]
+}

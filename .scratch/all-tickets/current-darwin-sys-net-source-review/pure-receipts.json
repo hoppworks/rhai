@@ -1,0 +1,100 @@
+{
+  "reviewed_revision": "2d52bf0b87a684b87222436795dcfc73875a7ce8",
+  "native_commands_launched": 0,
+  "scope": "Pure classifier and mocked cleanup checks against immutable extracted snapshot; defects reproduced, not acceptance proof.",
+  "actual_eilseq_early_return": {
+    "injected_output": "     Running tests/sys_fs.rs (target/debug/deps/sys_fs-abc)\nrunning 2 tests\ntest ordinary_test ... ok\ntest test_non_utf8_file_name ... filesystem rejects non-UTF-8 fixture with EILSEQ: Illegal byte sequence (os error 92)\nok\ntest result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n",
+    "classification": {
+      "target_results": [
+        {
+          "target": "sys_fs",
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered_out": 0
+        }
+      ],
+      "expected_targets": [
+        "sys_fs"
+      ],
+      "all_selected_targets_ran_once": true,
+      "all_tests_passed_without_ignored_or_filtered": true,
+      "ignored_tests": [],
+      "coverage_found": true
+    }
+  },
+  "missing_named_tests": {
+    "injected_output": "     Running tests/sys_fs.rs (target/debug/deps/sys_fs-abc)\ntest ordinary_test ... ok\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n",
+    "classification": {
+      "target_results": [
+        {
+          "target": "sys_fs",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered_out": 0
+        }
+      ],
+      "expected_targets": [
+        "sys_fs"
+      ],
+      "all_selected_targets_ran_once": true,
+      "all_tests_passed_without_ignored_or_filtered": true,
+      "ignored_tests": [],
+      "coverage_found": true
+    }
+  },
+  "duplicate_summary": {
+    "injected_output": "     Running tests/sys_fs.rs (target/debug/deps/sys_fs-abc)\ntest ordinary_test ... ok\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n",
+    "classification": {
+      "target_results": [
+        {
+          "target": "sys_fs",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered_out": 0
+        }
+      ],
+      "expected_targets": [
+        "sys_fs"
+      ],
+      "all_selected_targets_ran_once": true,
+      "all_tests_passed_without_ignored_or_filtered": true,
+      "ignored_tests": [],
+      "coverage_found": true
+    }
+  },
+  "macos_alias_paths_collapse": {
+    "scoped_fixture": "/Users/hoppworks/.local/share/agent-builds/rhai/current-darwin-sys-net-behavior-a2d7a8c2-20261002/agent-build-example/tmp/rhai-sys-test-example",
+    "replacement_result": "/Users/hoppworks/.local/share/agent-builds/rhai/current-darwin-sys-net-behavior-a2d7a8c2-20261002/agent-build-example/tmp/rhai-sys-test-example",
+    "distinct_aliases": false
+  },
+  "denied_process_query_returns_none": true,
+  "cleanup_cases": {
+    "query-denied": {
+      "exit_status": 0,
+      "stdout": "cleanup_readback=PASS\nchecked_process_identities=2\nempty_scope=/private/tmp/current-darwin-sys-net-source-review.CnOZQa/query-denied-dfq5a9e1/scope\n",
+      "injected_identities": [
+        null,
+        null
+      ]
+    },
+    "live-reparented": {
+      "exit_status": 0,
+      "stdout": "cleanup_readback=PASS\nchecked_process_identities=2\nempty_scope=/private/tmp/current-darwin-sys-net-source-review.CnOZQa/live-reparented-a1tup45y/scope\n",
+      "injected_identities": [
+        [
+          1,
+          200,
+          "123",
+          "python helper"
+        ],
+        null
+      ]
+    }
+  }
+}

@@ -883,76 +883,74 @@ was independently read back as sole remote main. This turn continues same scope.
 Linux nine-row non-process package remains accepted601 at unchanged production
 inputs. Process/full release remains open.
 
-Current Mac step: combined independent review of immutable43fa6a05 found four
-material issues; original review/three regression REDs retained at
-macos-control-independent-review-20261002/. Responsible owner freezes correction
-b1e05e0f80b62f7a16dfe356da35fda184f0e144, exact lowercase author/committer,
-three source/test files and three original logs only. Full source suite78/78 and
-affected7/7 pass; initial RED also exposed three /var vs /private/var assumptions.
-Those tests now compare resolved paths and are included in final78/78; intermediate
-excluded run is superseded, not accepted. Affected independent checkpoint closes findings1–3: original three injected
-regressions pass against immutableb1e05. Finding4 remains high: host/fixture stay
-runnable between fresh observation/comparison and SIGKILL. A deterministic source
-scheduling regression makes fixture finish in that interval while the code still
-returns an acceptable action receipt. This is one failed implementation correction
-for source finding4, preserved independently from native cause09 history. Next is
-the existing Expert09 permitted exact-host STOP/readiness/recheck/KILL route, losing
-race fails without retry. Frozen affected report and original RED/3-regression GREEN/OCR receipts retained
-once in macos-control-independent-review-20261002/. Unaffected coverage retained.
-First owner-resume call hit concurrency and created no turn; after reviewer terminal,
-responsible owner successfully resumed exact source correction. STOP alone is not
-sufficient: prove the source-bound live writer/stream condition cannot finish after
-frozen-host recheck before KILL. Do not equate four tasks with both writers, mutate
-fixture or manufacture unsupported proof. Concrete source gap must stay closed-gated. No new Expert09 chain; guardfalse/count84/allocation85 unlaunched.
-Six source readiness fields remain unchanged pending actual source applicability
-reconciliation; native outcomes belong to finite controls and must not become a
-circular prerequisite for those controls. Exact4 task-count inference/matching
-XNU applicability still needs a concrete source determination.
+Current Mac step: combined review of43fa6a05 found four material issues;
+original/affected evidence retained at macos-control-independent-review-20261002/.
+Correction b1e05e0f80b62f7a16dfe356da35fda184f0e144 closes findings1–3:
+original three injected regressions GREEN, source suite78/78 and affected7/7.
+Finding4 remains HIGH: runnable fixture can finish after comparison before host
+KILL. One failed implemented correction for this source cause; native cause09
+and count84 preserved. Exact-host STOP alone and four task count are insufficient.
+Owner's remaining-output witness investigation found installed SDK PIPE_SIZE16KiB,
+BIG_PIPE_SIZE64KiB and aggregate PIPE_KVAMAX16MiB do not establish a supported
+per-pipe maximum. Existing fixture emits stdout8388592/stderr8388608 bytes;
+unsupported64KiB maximum must not be used. Original80-test RED with two missing
+STOP/witness assertions stays in owner's macos-controls-correction-20261002/;
+this is informative unimplemented source boundary, not a second failed correction.
+Root now resumes the same owner on a concrete passive pipe-state alternative:
+installed SDK PIPE_WANTW0x010 means writer wants space, public pipe_info exposes
+pipe_status/handles. Apple's public XNU sys_pipe.c fills pipe_status from pipe_state
+and sets WANTW on read side before write sleep. Source URL:
+https://raw.githubusercontent.com/apple-oss-distributions/xnu/main/bsd/kern/sys_pipe.c
+This is corroborating source, not matching installed Darwin27/xnu13432.1.9 proof.
+Investigate stopped exact host's actual two read descriptors, peer binding, no
+other readers, interrupted-write stale bits and source applicability before code.
+No native API/control/build launch authorized by this source investigation;
+no capacity inference/fixture mutation/new Expert09 chain/history reset.
+Guardfalse; allocation85 unlaunched. Thirty-minute active-work planning checkpoint
+retains actual safety caps. Six source readiness fields remain unaccepted;
+actual native outcomes must not become circular pre-control prerequisites.
 
-Current Windows step: older5fe4 GET consumed per original owner.zip proof; separate
-retained9e0 allowance reconciled as unconsumed, not inferred from archive absence.
-Immutable harness19c matches original reviewed content and17C# pins; root host
-archive13380569bytes/SHA8291 receipt applies narrowly. Responsible owner observes
-exact owned VM running and clean PS5.1 prompt, fresh unique root absent then created
-at C:\Users\RhaiTest\.local\share\agent-builds\rhai\w9e0-20261002-6f804a9c4c4a4e78.
-Before transfer its exact archive Test-Path=False was independently recorded by
-owner; owner announces launch of the single finite GET. Single GET launched with curl --connect-timeout5/--max-time30; owner and root
-independently view original curl-return.png at /tmp/win9e0-20261002-6f804a9c4c4a4e78/,
-SHA2f8537a536ddf05975fe2028ae0974068eacc9f0d181b9b51b6861342cec7f50:
-100%/12.75M and returned clean prompt. Owner records terminal status0 and exact
-13380569bytes/SHA8291; root independently viewed hash-result.png and hashed both
-frames, accepted only immutable archive transfer. Original two frames retained once
-in windows-staging-9e0-root-evidence/ with root-readback.json. This consumes one GET;
-no live transfer handle/no retry. Extraction and guest prerequisite receipts pending; never duplicate on observation timeout.
-Then length/hash, selective extraction17pins, PS5.1 parser/path controls and exact
-pinned Roslyn read-only check only. No compiler/bootstrap/job/client/fixture/native
-before root prerequisites readback. ExistingExpert02/history/caps and nonrenewable
-client30min allocation preserved; no install/admin/credential/service/shared reset.
+Current Windows step: sole bounded9e0 GET terminal status0,13380569bytes,
+SHA8291e58652a7dc8494513d910460e6dae39a716f5dfca937bda40fafcfa0caa4.
+Root independent visual/readback of original guest frames accepted transfer ONLY,
+retained once windows-staging-9e0-root-evidence/ at2c4c5a9. Exact guestroot:
+C:\Users\RhaiTest\.local\share\agent-builds\rhai\w9e0-20261002-6f804a9c4c4a4e78.
+No live GET/no retry. Selective tools extraction has not yet been submitted per
+fresh owner screenshot; owner will clear typed line and verify ALL existing
+ancestors for reparse points before exact no-overwrite/rooted/upward ZIP guards.
+Then17pins/PS5.1 parser/path controls/exact Roslyn readonly prerequisites;
+no compiler/bootstrap/job/client/fixture/native before root prerequisite readback.
+Older5fe4 GET history and Expert02/nonrenewable client30min/source-fixture1h,
+setup120/closure30/finalization30 and actual resources remain binding.
+No install/admin/credential/service/shared resets.
 
-Parallel missing acceptance preparation: fresh Standard current_darwin_sys_net_prepare
-owns managed worktree current-darwin-sys-net-behavior at immutableabbad, task branch.
-Brief briefs/current-darwin-sys-net-behavior.md covers current filesystem/policy/TCP
-nine-row real Engine/OS behavior and meaningful assertion controls; source-only
-TDD helper/contract preparation first, no Cargo/toolchain/native launch before
-source review and one-per-machine slot dispatch. Unaffected accepted Darwin
-compiler/examples reused; old sys-only proof does not certify current alias/combined
-rows. Source prepare30min active planning checkpoint with preserved cause/resources.
-Prepared Darwin runner frozen2d52bf0b87a684b87222436795dcfc73875a7ce8, clean owned
-worktree. Five files: helper/contract/cleanup readback/pure tests/prep receipt;
-nine rows/five controls reported. Full combined independent Expert review dispatched
-from briefs/current-darwin-sys-net-source-review.md, focused on actual coverage,
-EILSEQ internal successful skips versus ignored counts, meaningful controls and
-resource/custody/export/private output paths. No source integration or native launch
-until reviewed. Existing accepted compiler/examples retained unchanged by reference.
-Root, current Mac/Windows owners, independent reviewer and new Darwin owner loaded revision958a4538;
-new owner explicitly read disk globals/project/campaign/TDD/e2e/roles/template and
-has no descendants. Existing independent reviewer is rechecking frozen source only.
+Current Darwin non-process step: prepared2d52bf0b87a684b87222436795dcfc73875a7ce8
+failed one combined independent source review, now retained once at
+current-darwin-sys-net-source-review/ (seven original report/OCR/pure receipts).
+F1 actual EILSEQ normal-return marker yields false pass; missing named inventory
+and repeated summaries also accepted. F2 query errors/reparenting falsely prove
+absence; exact stable identity and actual group/descendant closure required.
+F3 central TMPDIR makes /var replacement no-op; two system-prefix paths duplicate.
+F4 merged streams conflict with contract and exported success/uncovered summaries
+ignore actual coverage. Same responsible owner actively repairs all four in one
+batch with meaningful RED/GREEN. cfg(macos) scoped distinct prefix test correction
+permitted: /var/../../Users/... and /private/var/../../Users/..., independently
+canonicalize both to exact owned fixture, require distinct strings, fail layout
+mismatch. Freeze changed test/source revision before archive/helper provenance.
+Unchanged production and unrelated Linux proof retained where applicable.
+No native/build/toolchain/control/measurement dispatch; affected combined recheck
+at frozen repair required. Genuine EILSEQ early return remains uncovered.
 
-This turn PROGRESS: independently accepted exact Windows immutable archive transfer
-with terminal status0/length/hash and original guest frames; prepared Darwin
-acceptance source2d52 collected and combined source review dispatched. Remaining
-Mac source finding4 being repaired using stopped-host remaining-per-stream output
-witness; SDK pipe maximum and stale read allowance require actual source implication,
-not inference from aggregate task count. No native/custody/release acceptance.
-Next: collect Darwin source review and Mac frozen repair; complete Windows selective
-extraction/pins/parser/path/Roslyn readback before compiler/client work. Goal active.
+Current root/fork main2c4c5a9799acebda289364c86d7e481e413f0df1 was pushed and
+independently read back as sole remote main. Lowercase human attribution;
+no upstream writes. Root loaded958a4538 disk globals/project/campaign, unchanged;
+active owners confirmed same revision previously, no descendants.
+Previous user status-only turn classified NO PROGRESS (no state change).
+This continuation PROGRESS: original Darwin review defects collected and retained,
+consolidated repair verified live; unsupported pipe-capacity route rejected and
+concrete SDK/public-source pipe-state alternative sent to existing responsible
+owner. Windows handle verified live, transfer acceptance unchanged. Linux nine
+non-process rows/601 accepted at unchanged inputs. Goal remains active.
+Next: collect immutable Darwin correction and affected recheck; finish Windows
+extraction/pins/parser/path/Roslyn readback; source-only decide pipe-state witness
+without manufacturing native or completed custody acceptance.

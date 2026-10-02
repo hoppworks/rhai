@@ -1,0 +1,4 @@
+pins_and_nine_rows=PASS
+named_assertion_red_and_incidental_101_rejection=PASS
+darwin_skips_are_explicitly_uncovered=PASS
+scope_and_cleanup_contract=PASS
