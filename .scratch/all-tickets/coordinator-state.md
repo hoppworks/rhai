@@ -73,7 +73,14 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    windows-source-archive-host-readback.json proves host endpoint/archive integrity;
    it does not prove guest transfer or native execution. Owner received receipt
    and continues verified canonical Shift-L input; no credentials or new transport.
-   NO fixture/compiler/job handle yet; native hash/parser/17-pin gate not yet verified. Continue fresh immutable
+   Latest guest receipt now closes archive transfer integrity: canonical ZIP
+   C:\Users\RhaiTest\w7.zip has the same SHA7d44819d as the independent host
+   receipt and is extracted under fresh C:\Users\RhaiTest\w7src. Directory
+   readback confirms RunSourceFixtures.ps1,30441bytes. The attempted script hash
+   failed because the console key encoder omitted uppercase letters; owner uses
+   the case-insensitive lowercase path next. This is input setup, not fixture
+   failure. Original console receipts remain in the responsible context.
+   NO fixture/compiler/job handle yet; native script hash/parser/17-pin gate not yet verified. Continue fresh immutable
    archive/runroot, native PS5.1 parser and input gate before fixture invocation.
    Preserve failed roots and exact cleanup. Do not call this a verified live wait.
 2. POSIX overhead source00bed4a0dfeb103ff209ba4c76dac7ae797b7c56 integrated.
@@ -121,6 +128,20 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    for a later bounded pipe-closure interruption control, not native closure proof.
    Owner must retain candid unresolved escaped-PGID closure status; passive
    PID+lstart ledger never authorizes stale/nonchild numeric signaling.
+   macOS safeguards frozen source31f22f960c4df69638d52007eef64afc4e8927e8
+   passed responsible pure/static checks but root rejects native launch readiness.
+   Root read the adapter, harness and frozen measurement driver: harness run()
+   owns the measurement Python Popen, not Cargo; frozen driver subprocess.run
+   has no interruption forwarding/finally. Reaping the Python starter cannot
+   establish Cargo or test descendant closure. Setup git-archive Popen also
+   starts outside cancellation/ledger while state still says no-process-started,
+   permitting unsafe runtime removal after interruption. Final ps readback must
+   fit the total adapter deadline. Returned concrete source corrections to the
+   same responsible context; first source review, no native attempt consumed.
+   A project-local direct Cargo invocation can reuse frozen parsing/measurement
+   semantics and remove the intermediate child, but still needs accepted group
+   anchor custody and benchmark-specific escaped-fixture interruption proof.
+   No group/PID signaling authority is granted by passive snapshots.
 3. Windows public-contract source preparation is integrated at43e9ef8c (parent
    056c0b53). OCR selected1 Rust file, reviewed1/skipped0; excluded Markdown state
    was read separately. Initial review corrected INT typing and no_float timeout,
@@ -197,12 +218,11 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Previous turn classification
-Previous continuation integrated verified documentation source. Current continuation
-independently inspected the in-progress Linux resource correction and identified a
-new cleanup ordering defect: strict ledger/cap checks could skip exact failure
-cleanup and failure receipts. Sent concrete fix before freeze; no native launch.
-Root inspected the actual frozen finite io_stress fixture and identified a possible
-pipe-closure interruption control route for Mac without unsafe nonchild signaling;
-source support is explicitly not native proof. Responsible contexts continue their
-bounded source repairs. No live native handle claimed from activity/intent, and no
-cause, history, measurement or safety-cap reset.
+The previous user status turn was no progress: it reported the existing state.
+This continuation independently inspected frozen macOS safeguards and the actual
+nested measurement driver's process ownership, identifying concrete cancellation,
+setup-ledger and deadline defects and returning source corrections before launch.
+Windows guest transfer/hash/directory readback gives new archive integrity evidence;
+script/parser/fixture gates remain open. Linux responsible context continues the
+previous cleanup-ordering correction. No live native handle claimed from activity,
+no native launch, and no cause, measurement or safety-cap reset.
