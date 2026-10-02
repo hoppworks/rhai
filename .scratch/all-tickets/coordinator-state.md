@@ -122,7 +122,15 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    After actual Windows prerequisite acceptance, implement and prove the Windows
    production adapter/lifecycle against ticket03/design. Current process.rs registers
    only cfg(unix); runner scaffolding is not the Windows production implementation.
-4. Complete final current-source native OS/features/MSRV matrix, documentation,
+4. Root added docs/sys-process.md and README link, describing only the current
+   Unix registration: host scope/program/output policy, run/raw/shared Child,
+   no_index/no_float differences, wait versus execution deadlines, immutable
+   failure reports and honest foreign-zombie cleanup boundary. Source descriptions
+   checked against config.rs/process.rs/unix.rs/error.rs; all local README/doc
+   links resolve and whitespace check passes. Documentation-only change, no
+   runtime behavior or native/example acceptance claim. Executed examples and
+   final Windows documentation still remain required.
+   Complete final current-source native OS/features/MSRV matrix, documentation,
    overhead and release gates. Reuse existing evidence only for unchanged relevant
    source/check logic/environment; final strict coverage remains required.
 
@@ -176,12 +184,12 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Previous turn classification
-Previous continuation progressed by independent source review identifying missing
-Linux resource safeguards and starting the parallel bounded Mac repair. Current
-continuation revalidated a clean root and continuing responsible contexts, then
-obtained new actual host HTTP GET/ZIP-content evidence for immutable Windows7b
-archive after the guest404. Exact source script hash matches the frozen contract;
-this distinguishes guest input/transfer setup from an invalid URL/source package.
-Original receipt exported, private fetch used run_scoped, no native invocation.
-Sent concrete evidence to sole Windows owner. Linux/Mac source corrections continue;
-no live fixture handle claimed from intent. No cause/history/budget reset.
+Previous continuation progressed by independently fetching/checking the frozen
+Windows source archive. Current continuation observed actual Mac safeguard source
+edits without treating agent activity as native proof, and the Linux owner returned
+its concrete storage/RSS/ledger repair approach. Root closed a documentation source
+subrequirement: current Unix process options, shared-handle/wait semantics, host
+scope and honest cleanup-report behavior now documented and linked from README.
+Descriptions checked against actual registration/parser/lifecycle sources; links
+and whitespace verified. Native behavior, Windows platform and executed examples
+remain open; no launch/cause/history/budget reset.

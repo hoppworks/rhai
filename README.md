@@ -105,6 +105,9 @@ replaces invalid UTF-8 with U+FFFD, while `FileHandle.read_string` reports inval
 See [`examples/sys.rs`](examples/sys.rs) for a runnable example that confines a script to a
 temporary directory and verifies the script's write from the host.
 
+For the current Unix child-process API, host-selected lifetime scopes, shared handles and
+cleanup reports, see [Child process access](docs/sys-process.md).
+
 
 Protected against attacks
 -------------------------
