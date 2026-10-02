@@ -1,0 +1,30 @@
+[
+  {
+    "path": "/Users/hoppworks/.agents/AGENTS.md",
+    "unchanged": true
+  },
+  {
+    "path": "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/AGENTS.md",
+    "unchanged": true
+  },
+  {
+    "path": "/Users/hoppworks/.agents/skills/ocr-delegate/SKILL.md",
+    "unchanged": true
+  },
+  {
+    "path": "/Users/hoppworks/.agents/skills/campaign/SKILL.md",
+    "unchanged": true
+  },
+  {
+    "path": "/Users/hoppworks/.agents/skills/e2e-proof/SKILL.md",
+    "unchanged": true
+  },
+  {
+    "path": "/Users/hoppworks/projects/agent-skills/config/roles.toml",
+    "unchanged": true
+  },
+  {
+    "path": "/Users/hoppworks/projects/agent-skills/skills/campaign/references/escalation-brief-template.md",
+    "unchanged": true
+  }
+]

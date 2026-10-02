@@ -1,0 +1,20 @@
+F
+======================================================================
+FAIL: test_completed_fixture_after_fresh_observation_cannot_be_accepted (__main__.InjectionBoundary)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/tmp/rhai-macos-control-review-20261002/test_managed_action_boundary.py", line 35, in test_completed_fixture_after_fresh_observation_cannot_be_accepted
+    self.assertEqual(killed_after_completion,[],
+AssertionError: Lists differ: [True] != []
+
+First list contains 1 additional elements.
+First extra element 0:
+True
+
+- [True]
++ [] : valid cached action receipt is returned even when fixture completes before exact KILL
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+FAILED (failures=1)

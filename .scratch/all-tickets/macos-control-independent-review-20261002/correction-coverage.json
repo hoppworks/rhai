@@ -1,0 +1,56 @@
+{
+  "commit": "b1e05e0f80b62f7a16dfe356da35fda184f0e144",
+  "total_files": 6,
+  "reviewed_files": 6,
+  "skipped_files": 0,
+  "coverage_rate": 1.0,
+  "ocr_reviewable_reviewed": 3,
+  "excluded_manually_reviewed": 3,
+  "files": [
+    {
+      "path": ".scratch/all-tickets/run-macos-process-overhead-control-package.py",
+      "status": "modified",
+      "insertions": 10,
+      "deletions": 3,
+      "review_status": "reviewed"
+    },
+    {
+      "path": ".scratch/all-tickets/run-macos-process-overhead-scoped.py",
+      "status": "modified",
+      "insertions": 49,
+      "deletions": 3,
+      "review_status": "reviewed"
+    },
+    {
+      "path": ".scratch/all-tickets/test-macos-process-overhead-source.py",
+      "status": "modified",
+      "insertions": 176,
+      "deletions": 5,
+      "review_status": "reviewed"
+    },
+    {
+      "path": ".scratch/all-tickets/macos-controls-correction-20261002/four-finding-source-correction/affected-green.log",
+      "status": "added",
+      "insertions": 13,
+      "deletions": 0,
+      "exclude_reason": "unsupported_ext",
+      "review_status": "reviewed"
+    },
+    {
+      "path": ".scratch/all-tickets/macos-controls-correction-20261002/four-finding-source-correction/full-source-suite-green.log",
+      "status": "added",
+      "insertions": 14,
+      "deletions": 0,
+      "exclude_reason": "unsupported_ext",
+      "review_status": "reviewed"
+    },
+    {
+      "path": ".scratch/all-tickets/macos-controls-correction-20261002/four-finding-source-correction/source-red.log",
+      "status": "added",
+      "insertions": 113,
+      "deletions": 0,
+      "exclude_reason": "unsupported_ext",
+      "review_status": "reviewed"
+    }
+  ]
+}

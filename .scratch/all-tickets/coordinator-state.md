@@ -876,42 +876,72 @@ docs-only change; manual source review supplies coverage of the changed doc.
 No build/native85 dispatch. Previous reviewer-spawn thread-limit failure created
 no agent; existing independent Mac owner performed the review.
 
-Current continuation: previous turn PROGRESS, Linux final two-row raw coverage,
-source and cleanup acceptance integrated/pushed d9f9082d. Windows original guest
-frames independently viewed/hashed and integrated/pushed95918ad0; ls-remote
-confirms sole main at95918ad08f648f3f5930238826c96c326a519a5a. Root worktree clean.
-Linux nine-row non-process package remains accepted601, process/fullrelease open.
+Current continuation: previous status-only turn is NO PROGRESS; this continuation
+revalidated live responsible agents and advances immutable source correction and
+missing Darwin behavior preparation. Last integrated root/fork main is
+abbad1ec2d2dac83b64a481b7c8580d5ea95304c; fresh ls-remote confirms sole main.
+Linux nine-row non-process package remains accepted601 at unchanged production
+inputs. Process/full release remains open.
 
-Current Mac step: combined independent review of immutable43fa6a05 covers all five
-changed files (OCR3 executable entries plus two excluded logs) and affected wrapper,
-controller/custodian/Managed/graph paths. Reviewer identified four material issues:
-bootstrap exec target indexes '-c'; pending signal at mask restore can lose outer
-child custody; Managed not-ready probe publishes null; cached readiness is used at
-Managed injection without fresh live capture/fixture readback. Three mocked source
-regressions reproduce defects; consolidated report and original OCR/RED receipts
-retained at macos-control-independent-review-20261002/. All5 changed files and
-affected dependencies reviewed; no material finding omitted. Responsible
-macos_overhead_safeguards resumed to await report and correct one batch under
-existingExpert09/history with meaningful source RED/GREEN. No new advisory chain,
-Cargo/native/control/measurement; count84/allocation85 unlaunched/guardfalse.
+Current Mac step: combined independent review of immutable43fa6a05 found four
+material issues; original review/three regression REDs retained at
+macos-control-independent-review-20261002/. Responsible owner freezes correction
+b1e05e0f80b62f7a16dfe356da35fda184f0e144, exact lowercase author/committer,
+three source/test files and three original logs only. Full source suite78/78 and
+affected7/7 pass; initial RED also exposed three /var vs /private/var assumptions.
+Those tests now compare resolved paths and are included in final78/78; intermediate
+excluded run is superseded, not accepted. Affected independent checkpoint closes findings1–3: original three injected
+regressions pass against immutableb1e05. Finding4 remains high: host/fixture stay
+runnable between fresh observation/comparison and SIGKILL. A deterministic source
+scheduling regression makes fixture finish in that interval while the code still
+returns an acceptable action receipt. This is one failed implementation correction
+for source finding4, preserved independently from native cause09 history. Next is
+the existing Expert09 permitted exact-host STOP/readiness/recheck/KILL route, losing
+race fails without retry. Frozen affected report and original RED/3-regression GREEN/OCR receipts retained
+once in macos-control-independent-review-20261002/. Unaffected coverage retained.
+First owner-resume call hit concurrency and created no turn; after reviewer terminal,
+responsible owner successfully resumed exact source correction. STOP alone is not
+sufficient: prove the source-bound live writer/stream condition cannot finish after
+frozen-host recheck before KILL. Do not equate four tasks with both writers, mutate
+fixture or manufacture unsupported proof. Concrete source gap must stay closed-gated. No new Expert09 chain; guardfalse/count84/allocation85 unlaunched.
+Six source readiness fields remain unchanged pending actual source applicability
+reconciliation; native outcomes belong to finite controls and must not become a
+circular prerequisite for those controls. Exact4 task-count inference/matching
+XNU applicability still needs a concrete source determination.
 
-Current Windows step: responsible owner reconciled transfer history. Older5fe4
-GET consumed with original owner.zip/extraction/pins/parser receipts in
-.scratch/windows-monitor-job-owner/next-execution-plan.md; separately retained9e0
-oneGET allowance unconsumed per current route receipts/history. Archive absence
-alone is not consumption proof. Source9e0 contains exact reviewed harness19c03096
-and17 matching C# pins; root independently hashes harness against original
-windows-private-root-source-review.json. Host-only archive13380569bytes/SHA8291
-receipt applies. Root directed same owner to one bounded immutable transfer to
-fresh unique owned guest path and length/hash/selective extraction17pins/PS5.1
-parser/path controls/read-only exact Roslyn path. Prevalidate input characters and
-whole short lines. No compiler/bootstrap/job/fixture/client/native execution before
-root readback; no install/admin/credentials/service/config/reset. GET launch consumes
-its slot even on failure. ExistingExpert02/history/caps preserved,30min active
-staging planning checkpoint; no human allowance reset. Goal active/incomplete.
+Current Windows step: older5fe4 GET consumed per original owner.zip proof; separate
+retained9e0 allowance reconciled as unconsumed, not inferred from archive absence.
+Immutable harness19c matches original reviewed content and17C# pins; root host
+archive13380569bytes/SHA8291 receipt applies narrowly. Responsible owner observes
+exact owned VM running and clean PS5.1 prompt, fresh unique root absent then created
+at C:\Users\RhaiTest\.local\share\agent-builds\rhai\w9e0-20261002-6f804a9c4c4a4e78.
+Before transfer its exact archive Test-Path=False was independently recorded by
+owner; owner announces launch of the single finite GET. Single GET launched with curl --connect-timeout5/--max-time30; owner and root
+independently view original curl-return.png at /tmp/win9e0-20261002-6f804a9c4c4a4e78/,
+SHA2f8537a536ddf05975fe2028ae0974068eacc9f0d181b9b51b6861342cec7f50:
+100%/12.75M and returned clean prompt. This consumes the one GET; exact status,
+length/hash and original guest prerequisite receipts await readback; never duplicate on observation timeout.
+Then length/hash, selective extraction17pins, PS5.1 parser/path controls and exact
+pinned Roslyn read-only check only. No compiler/bootstrap/job/client/fixture/native
+before root prerequisites readback. ExistingExpert02/history/caps and nonrenewable
+client30min allocation preserved; no install/admin/credential/service/shared reset.
 
-This turn PROGRESS: four reproduced source/acceptance defects consolidated into
-one responsible repair batch, valid unchanged review retained. Windows immutable
-19c harness independently matched source-review receipt and already-authorized
-oneGET staged-preflight route dispatched. No native launch or accepted platform
-claim; Mac source repairs and guest transfer receipts await actual results.
+Parallel missing acceptance preparation: fresh Standard current_darwin_sys_net_prepare
+owns managed worktree current-darwin-sys-net-behavior at immutableabbad, task branch.
+Brief briefs/current-darwin-sys-net-behavior.md covers current filesystem/policy/TCP
+nine-row real Engine/OS behavior and meaningful assertion controls; source-only
+TDD helper/contract preparation first, no Cargo/toolchain/native launch before
+source review and one-per-machine slot dispatch. Unaffected accepted Darwin
+compiler/examples reused; old sys-only proof does not certify current alias/combined
+rows. Source prepare30min active planning checkpoint with preserved cause/resources.
+Root, current Mac/Windows owners, independent reviewer and new Darwin owner loaded revision958a4538;
+new owner explicitly read disk globals/project/campaign/TDD/e2e/roles/template and
+has no descendants. Existing independent reviewer is rechecking frozen source only.
+
+This turn PROGRESS: exact b1e05 source correction/full78 proof collected and affected
+independent recheck dispatched; separate missing Darwin feature acceptance source
+preparation dispatched in own isolated worktree. Native controls and release not
+accepted. Goal active/incomplete. Next: collect review, integrate only verified frozen
+source/original receipts; read Windows actual transfer prerequisites; close concrete
+remaining source readiness before separately allocated finite controls, retain
+measurement gate until actual controls pass.

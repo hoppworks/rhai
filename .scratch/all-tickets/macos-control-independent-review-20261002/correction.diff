@@ -1,0 +1,545 @@
+diff --git a/.scratch/all-tickets/macos-controls-correction-20261002/four-finding-source-correction/affected-green.log b/.scratch/all-tickets/macos-controls-correction-20261002/four-finding-source-correction/affected-green.log
+new file mode 100644
+index 00000000..877c7879
+--- /dev/null
++++ b/.scratch/all-tickets/macos-controls-correction-20261002/four-finding-source-correction/affected-green.log
+@@ -0,0 +1,13 @@
++test_bootstrap_uses_exact_target_after_python_c_sentinel (source_tests.EnvironmentTests) ... ok
++test_pending_signal_keeps_created_adapter_registered_for_cleanup (source_tests.EnvironmentTests) ... ok
++test_managed_not_ready_probe_emits_no_controller_frame (source_tests.EnvironmentTests) ... custodian_command_reaped gate=0 anchor=0 pgid=12345 group_signal_issued=True
++ok
++test_managed_action_rejects_fixture_lost_after_published_readiness (source_tests.EnvironmentTests) ... ok
++test_owned_command_refreshes_managed_observation_at_action_time (source_tests.EnvironmentTests) ... ok
++test_managed_host_signal_defers_gate_reap_until_anchored_group_signal (source_tests.EnvironmentTests) ... ok
++test_control_finalization_requires_recorded_readiness_action_and_full_readback (source_tests.EnvironmentTests) ... ok
++
++----------------------------------------------------------------------
++Ran 7 tests in 0.003s
++
++OK
+diff --git a/.scratch/all-tickets/macos-controls-correction-20261002/four-finding-source-correction/full-source-suite-green.log b/.scratch/all-tickets/macos-controls-correction-20261002/four-finding-source-correction/full-source-suite-green.log
+new file mode 100644
+index 00000000..28c8b911
+--- /dev/null
++++ b/.scratch/all-tickets/macos-controls-correction-20261002/four-finding-source-correction/full-source-suite-green.log
+@@ -0,0 +1,14 @@
++............custodian_command_reaped gate=0 anchor=0 pgid=20 group_signal_issued=True
++..........runtime_path=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-o615s24m/tmp/tmpq6_krxg6/scope/runtime
++control_case=build controller_status=0 custodian_status=0 custody_receipt=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-o615s24m/tmp/tmpq6_krxg6/logs/control.custody.json controller_receipt=/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-o615s24m/tmp/tmpq6_krxg6/logs/control.controller.json
++...............................custodian_command_reaped gate=0 anchor=0 pgid=12345 group_signal_issued=True
++....cargo_argv=['/bin/true']
++cargo_cwd=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-o615s24m/tmp/measurement-bytes-test-t5c8bh3d
++cargo_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-o615s24m/tmp/measurement-bytes-test-t5c8bh3d/cargo.log
++cargo_status=0 cargo_pgid=99 cargo_elapsed_seconds=0.000
++escaped_leaf_candidate_absence=0 original_pgid_absent_observations=2
++.....................
++----------------------------------------------------------------------
++Ran 78 tests in 0.117s
++
++OK
+diff --git a/.scratch/all-tickets/macos-controls-correction-20261002/four-finding-source-correction/source-red.log b/.scratch/all-tickets/macos-controls-correction-20261002/four-finding-source-correction/source-red.log
+new file mode 100644
+index 00000000..fdf4687b
+--- /dev/null
++++ b/.scratch/all-tickets/macos-controls-correction-20261002/four-finding-source-correction/source-red.log
+@@ -0,0 +1,113 @@
++.....F......custodian_command_reaped gate=0 anchor=0 pgid=20 group_signal_issued=True
++....F.....EE...................E.......E.custodian_command_reaped gate=0 anchor=0 pgid=12345 group_signal_issued=True
++F...cargo_argv=['/bin/true']
++cargo_cwd=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/measurement-bytes-test-6ptm_43d
++cargo_log=/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/measurement-bytes-test-6ptm_43d/cargo.log
++cargo_status=0 cargo_pgid=99 cargo_elapsed_seconds=0.000
++escaped_leaf_candidate_absence=0 original_pgid_absent_observations=2
++...F................
++======================================================================
++ERROR: test_control_package_launches_controller_only_after_registered_adapter_socket (__main__.EnvironmentTests)
++----------------------------------------------------------------------
++Traceback (most recent call last):
++  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py", line 1154, in test_control_package_launches_controller_only_after_registered_adapter_socket
++    result = control_package.run_control_case(
++  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/run-macos-process-overhead-control-package.py", line 255, in run_control_case
++    raise ValueError('control package scope must be an exact existing directory')
++ValueError: control package scope must be an exact existing directory
++
++======================================================================
++ERROR: test_control_package_requires_adapter_socket_from_exact_runtime_and_case (__main__.EnvironmentTests)
++----------------------------------------------------------------------
++Traceback (most recent call last):
++  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py", line 1041, in test_control_package_requires_adapter_socket_from_exact_runtime_and_case
++    self.assertEqual(control_package.parse_socket_announcement(
++  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/run-macos-process-overhead-control-package.py", line 92, in parse_socket_announcement
++    raise ValueError('custodian controller socket does not match the exact scope/case')
++ValueError: custodian controller socket does not match the exact scope/case
++
++======================================================================
++ERROR: test_managed_action_rejects_fixture_lost_after_published_readiness (__main__.EnvironmentTests)
++----------------------------------------------------------------------
++Traceback (most recent call last):
++  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py", line 519, in test_managed_action_rejects_fixture_lost_after_published_readiness
++    custodian.service_controller(controller, "managed", ready, False,
++TypeError: service_controller() got an unexpected keyword argument 'pre_action_validate'
++
++======================================================================
++ERROR: test_managed_host_signal_defers_gate_reap_until_anchored_group_signal (__main__.EnvironmentTests)
++----------------------------------------------------------------------
++Traceback (most recent call last):
++  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py", line 479, in test_managed_host_signal_defers_gate_reap_until_anchored_group_signal
++    action = custodian.service_controller(controller, "managed", event,
++TypeError: service_controller() got an unexpected keyword argument 'pre_action_validate'
++
++======================================================================
++FAIL: test_bootstrap_uses_exact_target_after_python_c_sentinel (__main__.EnvironmentTests)
++----------------------------------------------------------------------
++Traceback (most recent call last):
++  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py", line 536, in test_bootstrap_uses_exact_target_after_python_c_sentinel
++    self.assertEqual(observed, [(target[0], target)])
++AssertionError: Lists differ: [('-c', ['-c', '/Applications/Xcode.app/Cont[202 chars]p'])] != [('/Applications/Xcode.app/Contents/Develope[252 chars]p'])]
++
++First differing element 0:
++('-c', ['-c', '/Applications/Xcode.app/Cont[201 chars]up'])
++('/Applications/Xcode.app/Contents/Develope[251 chars]up'])
++
+++ [('/Applications/Xcode.app/Contents/Developer/usr/bin/python3',
++- [('-c',
++-   ['-c',
++-    '/Applications/Xcode.app/Contents/Developer/usr/bin/python3',
++?   ^
++
+++   ['/Applications/Xcode.app/Contents/Developer/usr/bin/python3',
++?   ^
++
++     '/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/run-macos-process-overhead-scoped.py',
++     '--timeout',
++     '585',
++     '--control-case',
++     'setup'])]
++
++======================================================================
++FAIL: test_closed_path_and_version_probes_use_the_same_xcode_tool_directory (__main__.EnvironmentTests)
++----------------------------------------------------------------------
++Traceback (most recent call last):
++  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py", line 1234, in test_closed_path_and_version_probes_use_the_same_xcode_tool_directory
++    self.assertEqual(tool_bin, runtime / "tool-bin")
++AssertionError: PosixPath('/private/var/folders/yk/m4dzf0ss5x9f4j4z3x[56 chars]bin') != PosixPath('/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv400[48 chars]bin')
++
++======================================================================
++FAIL: test_managed_not_ready_probe_emits_no_controller_frame (__main__.EnvironmentTests)
++----------------------------------------------------------------------
++Traceback (most recent call last):
++  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py", line 560, in test_managed_not_ready_probe_emits_no_controller_frame
++    self.assertEqual(controller.frames, [])
++AssertionError: Lists differ: [b'null\n'] != []
++
++First list contains 1 additional elements.
++First extra element 0:
++b'null\n'
++
++- [b'null\n']
+++ []
++
++======================================================================
++FAIL: test_pending_signal_keeps_created_adapter_registered_for_cleanup (__main__.EnvironmentTests)
++----------------------------------------------------------------------
++Traceback (most recent call last):
++  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py", line 591, in test_pending_signal_keeps_created_adapter_registered_for_cleanup
++    self.assertEqual(child.signals, [signal.SIGTERM])
++AssertionError: Lists differ: [] != [<Signals.SIGTERM: 15>]
++
++Second list contains 1 additional elements.
++First extra element 0:
++<Signals.SIGTERM: 15>
++
++- []
+++ [<Signals.SIGTERM: 15>]
++
++----------------------------------------------------------------------
++Ran 77 tests in 0.097s
++
++FAILED (failures=4, errors=4)
+diff --git a/.scratch/all-tickets/run-macos-process-overhead-control-package.py b/.scratch/all-tickets/run-macos-process-overhead-control-package.py
+index 2e27e2e1..65ebb3e1 100644
+--- a/.scratch/all-tickets/run-macos-process-overhead-control-package.py
++++ b/.scratch/all-tickets/run-macos-process-overhead-control-package.py
+@@ -27,7 +27,7 @@ INTERRUPT_SIGNALS = {signal.SIGINT, signal.SIGTERM}
+ BOOTSTRAP = (
+     'import os,signal,sys; '
+     'signal.pthread_sigmask(signal.SIG_UNBLOCK,{signal.SIGINT,signal.SIGTERM}); '
+-    'os.execv(sys.argv[0],sys.argv)'
++    'os.execv(sys.argv[1],sys.argv[1:])'
+ )
+ 
+ CONTROL_SPEC = importlib.util.spec_from_file_location('overhead_finite_control_client', CONTROL)
+@@ -214,7 +214,8 @@ def _connect_controller(path, timeout):
+         raise
+ 
+ 
+-def _spawn_registered(argv, stdout, env, popen_factory, signal_api=signal):
++def _spawn_registered(argv, stdout, env, popen_factory, signal_api=signal,
++                      on_created=None):
+     mask = getattr(signal_api, 'pthread_sigmask', None)
+     if not callable(mask):
+         raise RuntimeError('cannot register the custodian while safely blocking interruption')
+@@ -223,6 +224,8 @@ def _spawn_registered(argv, stdout, env, popen_factory, signal_api=signal):
+         proc = popen_factory(registered_exec_argv(argv), stdin=subprocess.DEVNULL,
+                              stdout=stdout, stderr=subprocess.STDOUT, env=env,
+                              close_fds=True)
++        if on_created is not None:
++            on_created(proc)
+     finally:
+         mask(signal_api.SIG_SETMASK, prior)
+     return proc
+@@ -291,7 +294,11 @@ def run_control_case(case, scope, log_base, timeout=OUTER_LIMIT,
+             if adapter_timeout <= 0:
+                 raise TimeoutError('no adapter time remains after the wrapper/readback reserve')
+             argv = adapter_argv(sys.executable, ADAPTER, case, adapter_timeout)
+-            adapter = _spawn_registered(argv, log, env, popen_factory)
++            def register_adapter(proc):
++                nonlocal adapter
++                adapter = proc
++            adapter = _spawn_registered(argv, log, env, popen_factory,
++                                        on_created=register_adapter)
+         print(f'runtime_path={runtime}', flush=True)
+         deadline = min(outer_deadline, started + adapter_timeout)
+         socket_path = wait_for_socket(adapter, adapter_log, scope, case, deadline, clock, sleeper)
+diff --git a/.scratch/all-tickets/run-macos-process-overhead-scoped.py b/.scratch/all-tickets/run-macos-process-overhead-scoped.py
+index e31e3df9..e4920253 100644
+--- a/.scratch/all-tickets/run-macos-process-overhead-scoped.py
++++ b/.scratch/all-tickets/run-macos-process-overhead-scoped.py
+@@ -271,7 +271,26 @@ def signal_unreaped_managed_host(proc, signum):
+         raise RuntimeError('Managed host exited before the exact-child signal') from exc
+ 
+ 
+-def service_controller(controller, selected_case, ready_event, consumed, client_proc, command_proc, deadline):
++def same_case_readiness_state(published, fresh):
++    """Compare the live identities/evidence while allowing a new observation id."""
++    if (type(published) is not dict or type(fresh) is not dict
++            or published.get('event') != 'case-ready' or fresh.get('event') != 'case-ready'
++            or published.get('case') != 'managed' or fresh.get('case') != 'managed'):
++        return False
++    try:
++        original = make_case_ready_event('managed', published.get('event_id'),
++                                         published.get('identities'), published.get('evidence'))
++        normalized = make_case_ready_event('managed', fresh.get('event_id'),
++                                           fresh.get('identities'), fresh.get('evidence'))
++    except (TypeError, ValueError):
++        return False
++    return (original == published and normalized == fresh
++            and published.get('identities') == fresh.get('identities')
++            and published.get('evidence') == fresh.get('evidence'))
++
++
++def service_controller(controller, selected_case, ready_event, consumed, client_proc,
++                       command_proc, deadline, pre_action_validate=None):
+     readable, _, _ = select.select([controller], [], [], 0)
+     if not readable:
+         return None
+@@ -281,11 +300,17 @@ def service_controller(controller, selected_case, ready_event, consumed, client_
+     if proc is None or ready_event['identities'][target]['pid'] != proc.pid:
+         raise ValueError('readiness target identity does not match its exact direct-child handle')
+     if target == 'managed_host':
++        if not callable(pre_action_validate):
++            raise ValueError('Managed action requires a fresh live observation before injection')
++        action_readiness = pre_action_validate()
++        if not same_case_readiness_state(ready_event, action_readiness):
++            raise ValueError('Managed fixture/capture readiness changed before injection')
+         signal_unreaped_managed_host(proc, signum)
+         # Confirmation is deferred until stop_anchored issues the one pinned
+         # group signal and then reaps the exact gate and anchor children.
+         return {'action': 'managed-host-interrupted', 'case': selected_case,
+-                'event_id': ready_event['event_id'], 'status': None}
++                'event_id': ready_event['event_id'], 'status': None,
++                'action_readiness_event': action_readiness}
+     status = signal_and_reap_owned_client(proc, signum, deadline)
+     controller.sendall(json.dumps({'event': 'client-reaped', 'case': selected_case,
+         'event_id': ready_event['event_id'], 'status': status}).encode() + b'\n')
+@@ -730,13 +755,26 @@ def owned_command(custody, argv, cwd, env, output, deadline, closure_deadline, c
+                     except (OSError, RuntimeError, ValueError, TimeoutError):
+                         ready_event = None
+                     else:
++                        if ready_event is None:
++                            continue
+                         record.update({'control_case': selected_case,
+                                        'control_readiness_event': ready_event})
+                         controller.sendall(json.dumps(ready_event, sort_keys=True).encode()+b'\n')
+                 if ready_event is not None and selected_case != 'deadline':
++                    pre_action_validate = None
++                    if selected_case == 'managed':
++                        pre_action_validate = lambda: observe_case_ready(custody,
++                            selected_case, argv, gate, anchor, client_proc,
++                            min(deadline, time.monotonic()+2), runtime)
+                     control_action = service_controller(controller, selected_case,
+-                        ready_event, control_consumed, client_proc, gate, closure_deadline)
++                        ready_event, control_consumed, client_proc, gate, closure_deadline,
++                        pre_action_validate=pre_action_validate)
+                     if control_action is not None:
++                        action_readiness = control_action.pop('action_readiness_event', None)
++                        if selected_case == 'managed':
++                            if action_readiness is None:
++                                raise RuntimeError('Managed action omitted its fresh readiness receipt')
++                            record['control_action_readiness_event'] = action_readiness
+                         record['control_action'] = control_action
+                         control_consumed = True
+                         failure = InterruptedError('selected control case interrupted its exact registered child')
+@@ -1067,6 +1105,14 @@ def control_finalization_complete(case, records, ledger, candidate_absence,
+         elif case == 'managed':
+             action = record.get('control_action')
+             host_identity = event['identities']['managed_host']
++            action_event = record.get('control_action_readiness_event')
++            if (type(action_event) is not dict
++                    or action_event.get('event') != 'case-ready'
++                    or action_event.get('case') != 'managed'
++                    or make_case_ready_event('managed', action_event.get('event_id'),
++                        action_event.get('identities'), action_event.get('evidence')) != action_event
++                    or not same_case_readiness_state(event, action_event)):
++                raise ValueError('fresh Managed injection readiness receipt is absent or changed')
+             if (type(action) is not dict or action.get('action') != 'managed-host-interrupted'
+                     or action.get('case') != case or action.get('event_id') != event['event_id']
+                     or type(action.get('status')) is not int or action['status'] != -signal.SIGKILL
+diff --git a/.scratch/all-tickets/test-macos-process-overhead-source.py b/.scratch/all-tickets/test-macos-process-overhead-source.py
+index b6c36ae5..1596f74c 100644
+--- a/.scratch/all-tickets/test-macos-process-overhead-source.py
++++ b/.scratch/all-tickets/test-macos-process-overhead-source.py
+@@ -3,11 +3,14 @@ import ctypes
+ import importlib.util
+ import json
+ import os
++import signal
+ import socket
+ import subprocess
+ import shutil
++import sys
+ import tempfile
+ import threading
++import time
+ import unittest
+ from pathlib import Path
+ from unittest.mock import patch
+@@ -455,7 +458,7 @@ class EnvironmentTests(unittest.TestCase):
+             "target": "managed_host", "signal": "KILL"}
+         controller, peer = socket.socketpair()
+         peer.sendall(__import__("json").dumps(request).encode() + b"\n")
+-        deadline = __import__("time").monotonic() + 2
++        deadline = time.monotonic() + 2
+         signal_state = {"issued": False}
+ 
+         class Custody:
+@@ -475,9 +478,11 @@ class EnvironmentTests(unittest.TestCase):
+                  patch.object(custodian.os, "getpgid", return_value=gate.pid), \
+                  patch.object(custodian, "waitid_nonreap", return_value=None):
+                 action = custodian.service_controller(controller, "managed", event,
+-                    False, None, gate, deadline)
++                    False, None, gate, deadline,
++                    pre_action_validate=lambda: {**event, "event_id": "m-2"})
+                 self.assertEqual(action["action"], "managed-host-interrupted")
+                 self.assertIsNone(action["status"])
++                self.assertEqual(action["action_readiness_event"]["event_id"], "m-2")
+                 self.assertFalse(__import__("select").select([peer], [], [], 0)[0],
+                     "controller must wait for anchored cleanup before reap confirmation")
+                 statuses = custodian.stop_anchored(Custody(), gate, anchor, gate.pid,
+@@ -491,6 +496,144 @@ class EnvironmentTests(unittest.TestCase):
+             controller.close()
+             peer.close()
+ 
++    def test_managed_action_rejects_fixture_lost_after_published_readiness(self):
++        gate = type("Gate", (), {"pid": 101, "returncode": None})()
++        ready = {"event": "case-ready", "case": "managed", "event_id": "m-1",
++            "identities": {slot: {"pid": pid, "start_seconds": 1,
++                "start_microseconds": pid} for slot, pid in
++                (("managed_host", 101), ("client", 90), ("gate", 101),
++                 ("anchor", 102), ("fixture", 103))},
++            "evidence": {"managed_host_live": True, "fixture_live": True,
++                "fixture_topology_live": True, "fixture_thread_count": 4,
++                "stdout_bytes_read": 8, "stderr_bytes_read": 8}}
++        changed = {**ready, "event_id": "m-2", "identities": {
++            **ready["identities"], "fixture": {"pid": 103, "start_seconds": 1,
++                "start_microseconds": 103}}, "evidence": {
++                    **ready["evidence"], "fixture_live": False}}
++        request = {"op": "interrupt", "case": "managed", "event_id": "m-1",
++            "target": "managed_host", "signal": "KILL"}
++        controller, peer = socket.socketpair()
++        peer.sendall(json.dumps(request).encode() + b"\n")
++        try:
++            with patch.object(custodian.os, "kill") as kill:
++                with self.assertRaisesRegex(ValueError, "changed before injection"):
++                    custodian.service_controller(controller, "managed", ready, False,
++                    None, gate, time.monotonic() + 2,
++                        pre_action_validate=lambda: changed)
++                kill.assert_not_called()
++        finally:
++            controller.close()
++            peer.close()
++
++    def test_owned_command_refreshes_managed_observation_at_action_time(self):
++        class Child:
++            pid = 101
++            returncode = None
++        gate, anchor, client = Child(), type("Anchor", (), {"pid": 102,
++            "returncode": None})(), type("Client", (), {"pid": 90})()
++        ready = custodian.make_case_ready_event("managed", "m-1", {
++            slot: {"pid": pid, "start_seconds": 1, "start_microseconds": pid}
++            for slot, pid in (("client", 90), ("gate", 101), ("anchor", 102),
++                              ("managed_host", 101), ("fixture", 103))},
++            {"managed_host_live": True, "fixture_live": True,
++             "fixture_topology_live": True, "fixture_thread_count": 4,
++             "stdout_bytes_read": 8, "stderr_bytes_read": 8})
++        lost = {**ready, "event_id": "m-2", "evidence": {
++            **ready["evidence"], "fixture_live": False}}
++        request = {"op": "interrupt", "case": "managed", "event_id": "m-1",
++            "target": "managed_host", "signal": "KILL"}
++        controller, peer = socket.socketpair()
++        peer.sendall(json.dumps(request).encode() + b"\n")
++        observations = []
++        def observe(*_args):
++            observations.append(True)
++            return ready if len(observations) == 1 else lost
++        setup = (gate, anchor, {}, {}, set(), {"issued": False}, {})
++        try:
++            with patch.object(custodian, "spawn_anchored", return_value=setup), \
++                 patch.object(custodian, "waitid_nonreap", return_value=None), \
++                 patch.object(custodian, "observe_case_ready", side_effect=observe), \
++                 patch.object(custodian, "stop_anchored", return_value=[-9, -9]), \
++                 patch.object(custodian.os, "kill") as kill:
++                with self.assertRaisesRegex(ValueError, "changed before injection"):
++                    custodian.owned_command(object(), ["/private/runtime/managed-host"],
++                        Path("/private/runtime"), {}, Path("/private/runtime/out"),
++                        time.monotonic() + 5, time.monotonic() + 10,
++                        control_context=(controller, "managed", client),
++                        runtime=Path("/private/runtime"))
++                self.assertEqual(len(observations), 2,
++                    "the action must take a second native observation after the request")
++                kill.assert_not_called()
++        finally:
++            controller.close()
++            peer.close()
++
++    def test_bootstrap_uses_exact_target_after_python_c_sentinel(self):
++        target = [sys.executable, str(CONTROL_PACKAGE.with_name(
++            "run-macos-process-overhead-scoped.py")), "--timeout", "585",
++            "--control-case", "setup"]
++        observed = []
++        with patch("sys.argv", ["-c", *target]), \
++             patch("os.execv", lambda path, argv: observed.append((path, list(argv)))), \
++             patch("signal.pthread_sigmask", return_value=set()):
++            exec(control_package.BOOTSTRAP, {})
++        self.assertEqual(observed, [(target[0], target)])
++
++    def test_managed_not_ready_probe_emits_no_controller_frame(self):
++        class Child:
++            pid = 12345
++            returncode = 0
++        class Controller:
++            def __init__(self): self.frames = []
++            def sendall(self, frame): self.frames.append(frame)
++        controller = Controller()
++        gate, anchor = Child(), Child()
++        setup = (gate, anchor, {}, {}, set(), {"issued": True}, {})
++        with patch.object(custodian, "require_active"), \
++             patch.object(custodian, "spawn_anchored", return_value=setup), \
++             patch.object(custodian, "waitid_nonreap", side_effect=[None, object()]), \
++             patch.object(custodian, "observe_case_ready", return_value=None), \
++             patch.object(custodian, "stop_anchored", return_value=[0, 0]), \
++             patch.object(custodian.time, "sleep"), \
++             patch.object(custodian.signal, "pthread_sigmask", return_value=set()):
++            custodian.owned_command(object(), ["/usr/bin/xcrun", "--version"],
++                Path("/unused"), {}, Path("/unused/output"),
++                time.monotonic() + 5,
++                time.monotonic() + 10,
++                control_context=(controller, "managed", Child()))
++        self.assertEqual(controller.frames, [])
++
++    def test_pending_signal_keeps_created_adapter_registered_for_cleanup(self):
++        class Child:
++            pid = 12345
++            returncode = None
++            def __init__(self): self.signals, self.waits = [], []
++            def poll(self): return self.returncode
++            def send_signal(self, signum): self.signals.append(signum)
++            def wait(self, timeout):
++                self.waits.append(timeout)
++                self.returncode = -signal.SIGTERM
++                return self.returncode
++        child = Child()
++        def mask(how, _signals):
++            if how == signal.SIG_SETMASK:
++                raise control_package.ControlCancelled("pending signal at restore")
++            return set()
++        with tempfile.TemporaryDirectory() as temporary:
++            root = Path(temporary).resolve()
++            scope = root / "scope"
++            scope.mkdir()
++            (scope / "tmp").mkdir()
++            logs = root / "logs"
++            logs.mkdir()
++            with patch.object(control_package, "EVIDENCE", logs), \
++             patch.object(signal, "pthread_sigmask", side_effect=mask):
++                with self.assertRaises(control_package.ControlCancelled):
++                    control_package.run_control_case("setup", scope, logs / "control",
++                        popen_factory=lambda *args, **kwargs: child, manage_signals=False)
++        self.assertEqual(child.signals, [signal.SIGTERM])
++        self.assertEqual(len(child.waits), 1)
++
+     def test_managed_observer_stays_unready_without_real_capture_progress_receipt(self):
+         with tempfile.TemporaryDirectory() as directory:
+             runtime = Path(directory).resolve()
+@@ -750,6 +893,34 @@ class EnvironmentTests(unittest.TestCase):
+                 custodian.control_finalization_complete("deadline", [bad], ledger, absence,
+                     [], 2, "deadline-control-stop", None, status)
+ 
++        managed_ready = {"event": "case-ready", "case": "managed", "event_id": "m-1",
++            "identities": {slot: {"pid": pid, "start_seconds": 3,
++                "start_microseconds": pid} for slot, pid in
++                (("client", 30), ("gate", 31), ("anchor", 32),
++                 ("managed_host", 31), ("fixture", 33))},
++            "evidence": {"managed_host_live": True, "fixture_live": True,
++                "fixture_topology_live": True, "fixture_thread_count": 4,
++                "stdout_bytes_read": 12, "stderr_bytes_read": 14}}
++        action_ready = {**managed_ready, "event_id": "m-2"}
++        managed_record = {"setup_complete": True, "group_signal_issued": True,
++            "gate_status": -9, "anchor_status": -9, "cleanup_complete": True,
++            "control_case": "managed", "command_pid": 31,
++            "control_readiness_event": managed_ready,
++            "control_action_readiness_event": action_ready,
++            "control_action": {"action": "managed-host-interrupted", "case": "managed",
++                "event_id": "m-1", "status": -9}}
++        self.assertTrue(custodian.control_finalization_complete(
++            "managed", [managed_record], ledger, absence, [], 2,
++            "client-eof", 1, None))
++        for missing_or_stale in (
++                {**managed_record, "control_action_readiness_event": None},
++                {**managed_record, "control_action_readiness_event": {
++                    **action_ready, "evidence": {**action_ready["evidence"],
++                        "fixture_live": False}}}):
++            with self.assertRaisesRegex(ValueError, "control finalization"):
++                custodian.control_finalization_complete("managed", [missing_or_stale],
++                    ledger, absence, [], 2, "client-eof", 1, None)
++
+         wrong_readiness = dict(record, control_readiness_event={**ready, "identities": {}})
+         with self.assertRaisesRegex(ValueError, "control finalization"):
+             custodian.control_finalization_complete("setup", [wrong_readiness], ledger,
+@@ -934,7 +1105,7 @@ class EnvironmentTests(unittest.TestCase):
+     def test_control_package_requires_adapter_socket_from_exact_runtime_and_case(self):
+         from tempfile import TemporaryDirectory
+         with TemporaryDirectory() as directory:
+-            scope = Path(directory)
++            scope = Path(directory).resolve()
+             runtime = scope / "runtime"
+             runtime.mkdir()
+             expected = runtime / "controller.sock"
+@@ -994,7 +1165,7 @@ class EnvironmentTests(unittest.TestCase):
+     def test_control_package_launches_controller_only_after_registered_adapter_socket(self):
+         from tempfile import TemporaryDirectory
+         with TemporaryDirectory() as directory:
+-            root = Path(directory)
++            root = Path(directory).resolve()
+             scope = root / "scope"
+             scope.mkdir()
+             (scope / "tmp").mkdir()
+@@ -1126,7 +1297,7 @@ class EnvironmentTests(unittest.TestCase):
+ 
+     def test_closed_path_and_version_probes_use_the_same_xcode_tool_directory(self):
+         with tempfile.TemporaryDirectory(prefix="tool-path-contract-") as directory:
+-            runtime = Path(directory) / "runtime"
++            runtime = Path(directory).resolve() / "runtime"
+             env = module.build_environment(runtime)
+             paths = env["PATH"].split(":")
+             tool_bin = Path(paths[0])
