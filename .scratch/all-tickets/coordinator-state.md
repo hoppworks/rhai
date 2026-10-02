@@ -71,16 +71,12 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
    write/fresh host read and independent TCP peer, meaningful wrong-expectation
    controls101 and restored0. Frozen1ca21e32/v3lock2ba4; fork main e5849699.
    Other platforms and final native feature behavior remain open.
-2. Linux current-feature compiler launch stopped before Rustup/Cargo at canonical
-   stage comparison: /root resolves to /var/roothome. Original setup proof remains
-   immutable remotely and locally at linux-current-feature-setup-evidence.
-   Root independently confirmed three recorded PIDs and observed groups absent,
-   exact runtime absent, and removed only the exact empty owned scope.
-   Existing optional owner prepares canonical-identity and early-receipt TDD fixes,
-   new v2 stage, no build/SSH/fixture launch. Review before dispatch; inventory the
-   one-heavy-run slot again. Previous outer0.4396s/helper0.001s retained; follow-up
-   proposed590/530/work500/export30, unchanged jobs2/desc16/RSS2GiB/storage1.5GiB.
-   This is one infrastructure setup failure, not a feature failure or native85.
+2. Linux current-feature compiler setup-source repair accepted narrowly at
+   94a10d73, owner6abb5933. Independent review and meaningful legacy/identity RED1,
+   restored GREEN0 at linux-current-feature-v2-review.md and root-pure originals.
+   Unique v2 stage, outer590/helper530/work500/export30, preserved prior use and
+   resource caps. Renew the workhorse heavy slot, stage and launch the reviewed
+   eleven-positive/one-negative compiler package. No native85.
 3. Existing Mac owner continues cause09 bounded Managed companion/readiness source
    plumbing under Expert09. Pure tests only; unchanged frozen measurement source,
    guardfalse, nativecount84. Source control-finalization correction0ecfc6e4 is
@@ -148,23 +144,17 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Current turn classification
-PROGRESS: current Darwinarm64 optional-MSRV examples requirement CLOSED narrowly.
-Frozen1ca21e32/lock2ba4/directprivateRust1.77.2, one combinedbuild, two intended
-assertionRED101/twoGREEN0 through realEngine/file/peer; original9commands and
-7manifests/sourcebytes/lock/archive/versions independently read back. Proof:
-current-msrv-examples-proof.md, evidence directory, root-readback.json.
-Helper34.951s,49periodic samples,maxRSS794064KiB/storage754776KiB/descendants6,
-outer0. Exact runtimeagent-build-ehwjvndb absent and empty ownscope retired.
-No processfixture/control/measurement/count85. Remaining release gates retained.
-
-Next: existing Mac owner source-only Managed companion/readiness plumbing under
-cause09, guardfalse,30min planningcheckpoint, no native/extraExpert/cap expansion.
-Conditionalexact4taskcount is not writer identity proof; XNU/native applicability
-remains open. Linux staged optional compiler not launched: direct G42 cargo ended,
-but live foreign run_scoped1172268/1172269 r5 still holds heavy slot. Preserve
-KSR28950/28951 and orphanflutter_tester. Revalidate exact handles before dispatch.
-Windows guest last observed off, unresolved partial line/ownership; no restart.
-Goal active/incomplete; no whole release completion claimed.
+PROGRESS: Linux v2 setup-source correction independently reviewed and replayed,
+legacy alias RED1 and missing-required-identity RED1, restored GREEN0. Four OCR
+source files reviewed, ten contract/receipt exclusions checked. Private runtime
+absent and exact empty scope removed. Integrated94a10d73; compiler acceptance
+pending. Previous status-only turn was no progress; this concrete action closes
+its next available safe step.
+Root worktree was externally removed; restored the owned task/all-tickets tree
+from exact retained d0d9f615. Committed history/proof intact, uncommitted removed
+contents not certified. No foreign work touched. Mac owner frozen3e17e3f5 awaits
+independent affected-source review: live both-stream progress absent from current
+public API, Managed remains fail-closed and guardfalse/count84. Windows unchanged.
 
 ## Current-source core MSRV package — accepted narrow gate
 Current default-core applicability CLOSED for source52d9797b, Rust/Cargo1.66.0,

@@ -1,0 +1,10 @@
+PRIVATE_RUNTIME /Users/hoppworks/.local/share/agent-builds/rhai/linux-v2-root-review-20261002-a/agent-build-qcr4cwzd/tmp/rhai-early-runtime-proof-ly42n033
+HELPER_IDENTITY 81683 91683
+PRIVATE_RUNTIME /Users/hoppworks/.local/share/agent-builds/rhai/linux-v2-root-review-20261002-a/agent-build-qcr4cwzd/tmp/rhai-missing-process-proof-vca472bd
+PRIVATE_RUNTIME /Users/hoppworks/.local/share/agent-builds/rhai/linux-v2-root-review-20261002-a/agent-build-qcr4cwzd/tmp/rhai-missing-process-proof-qrzbuvz4
+HELPER_IDENTITY 4242 14242
+stage_identity_same_directory=PASS
+unrelated_stage_rejected=PASS
+runtime_receipts_before_stage_validation=PASS
+durable_runtime_helper_supervisor_receipts=PASS
+unavailable_required_identity_fails_closed=PASS

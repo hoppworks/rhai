@@ -1,0 +1,24 @@
+{
+  "results": [
+    {
+      "check": "legacy-red",
+      "status": 1,
+      "expected_diagnostic": "same directory through the root alias must be accepted"
+    },
+    {
+      "check": "missing-identity-red",
+      "status": 1,
+      "expected_diagnostic": "unavailable required process identity must stop setup"
+    },
+    {
+      "check": "restored-green",
+      "status": 0,
+      "expected_diagnostic": "unavailable_required_identity_fails_closed=PASS"
+    }
+  ],
+  "python_ast": 2,
+  "bash_syntax": 2,
+  "compiled_launcher_heredocs": 3,
+  "runtime": "/Users/hoppworks/.local/share/agent-builds/rhai/linux-v2-root-review-20261002-a/agent-build-qcr4cwzd",
+  "scope": "/Users/hoppworks/.local/share/agent-builds/rhai/linux-v2-root-review-20261002-a"
+}

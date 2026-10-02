@@ -1,0 +1,11 @@
+REGRESSION_FAIL: unavailable required process identity must stop setup
+Traceback (most recent call last):
+  File "/Users/hoppworks/.codex/worktrees/linux-msrv-helper-repair/rhai/.scratch/all-tickets/test-linux-current-feature-stage-v2.py", line 160, in <module>
+    main()
+  File "/Users/hoppworks/.codex/worktrees/linux-msrv-helper-repair/rhai/.scratch/all-tickets/test-linux-current-feature-stage-v2.py", line 150, in main
+    test_runtime_receipts_precede_stage_validation(tree)
+  File "/Users/hoppworks/.codex/worktrees/linux-msrv-helper-repair/rhai/.scratch/all-tickets/test-linux-current-feature-stage-v2.py", line 67, in test_runtime_receipts_precede_stage_validation
+    test_unavailable_required_identity_fails_closed(capture)
+  File "/Users/hoppworks/.codex/worktrees/linux-msrv-helper-repair/rhai/.scratch/all-tickets/test-linux-current-feature-stage-v2.py", line 137, in test_unavailable_required_identity_fails_closed
+    raise AssertionError('unavailable required process identity must stop setup')
+AssertionError: unavailable required process identity must stop setup
