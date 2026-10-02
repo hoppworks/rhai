@@ -86,7 +86,7 @@ Current authoritative history through this rewrite is Git commit
 10d4a0d55400ebe8c24feff134e7161ff36bf8d5, this same state path. It retains
 all earlier cause/attempt/resource/source applicability records. Read that
 history for consumed work, not superseded next actions. No reset occurred.
-Last independently read-back fork main36561b13173dabe29c51849b4d22fabcc1c5789f; only remote main, lowercase
+Last independently read-back fork main06308cdb5bfd835f07c422b87b809cd6abb19ee2; only remote main, lowercase
 human author/committer. Goal active and incomplete.
 
 ### Accepted current Linux non-process package
@@ -343,8 +343,18 @@ Actual combined Expert review25864 TERMINAL0: full report independently read,
 3/3 direct coverage, no material implementation regression; medium acceptance gap:
 actual17 child must fail expected0, then pass correct17. Null rejection is a
 separate control. Windows handle repair SOURCE ACCEPTED narrowly, no native proof.
-Configured Worker mechanical coverage fix57812 actually running same owned tree,
-windows-exit-code-control-fix-brief.md, no guest/native launches or allowance reset.
+Configured Worker57812 TERMINAL0, frozen85bb73668a37a7092bd6b292f0398f7389dffa35.
+Root independently read actual source diff: real17 child with expected0 must
+produce its named actual17/expected0 mismatch; unrelated exceptions rejected;
+fresh distinct stdout marker read; real0 and restored17 execute separately;
+null rejection preserved. This closes the previous medium source coverage finding
+by independent affected readback without repeating unaffected full review.4 source
+checks reported GREEN; no native/PowerShell parser execution or allowance reset.
+First repair1e and coverage85bb remain local/source-ready, not native accepted.
+Before guest execution reconcile remaining original one-hour source-package bounds
+and exact staged provenance; no code or status from prior invocation is reused
+as a native result. Worker instruction revision not explicitly separately confirmed
+in final result; do not infer its revision confirmation from quoted prior reports.
 Mac48964 produced frozen cfd6a9ea29bb5ee2410593d3be6d5bf112281dda; root read actual
 runner/result: removes forced KILL, retains live direct custodian on uncertainty,
 returns125 with retained-custodian diagnostic.4 targeted/94 pure checks reported;
@@ -369,8 +379,24 @@ Native collaboration inventory confirms all three remaining children completed;
 no active native descendants to update. New CLI jobs explicitly loaded current
 rules/templates; output revision confirmations require readback when terminal.
 Original terminal review reports retained once under source-review-readback-20261002.
-Next collect same57812/9463, independently read exact results and affected review
-before any native launch. No reviewed source-only change closes native acceptance. No native count changed or full acceptance claimed.
+Standard9463 TERMINAL0: frozen cd516c1ecb58d77340dbdc247f17b82b9e128b3d.
+Root independently read full result and actual adapter/controller diff: registered
+RetainedOwner holds exact Popen/custody/descriptors/shutdown state, blocks unwinding
+and normal completion on failed cleanup. Controller retains exact adapter handle
+on cancellation timeout. Reported96 pure tests used3.14.7 instead of requested
+pinned3.12; root therefore ran actual pinned3.12 affected suite once (not native):
+terminal0,96 tests OK, retained-owner-python312-readback.log in same Mac worktree.
+No Cargo/build/temp runtime or native workload was launched. Third candidate
+awaits source acceptance; count2 rejected outer corrections remains until review.
+Explicit retained-owner wait, signal interruption/unwind, usability of shutdown
+state and timing must be independently checked; no diagnostic alone accepted.
+Configured Expert read-only review54587 actually live, retained-owner-review.md
+output. Existing09 route/history unchanged; no new escalation chain or allowance.
+If rejected again, stop that dependent path rather than a blind further patch.
+Next collect SAME54587. Windows reviewed source control85bb is ready for bounded
+staging after original caps/ownership reconciliation; parsing/native/workload
+custody remain unverified. All code correction commits remain local awaiting
+integration; only audit/evidence updates pushed to sole forkmain. No reviewed source-only change closes native acceptance. No native count changed or full acceptance claimed.
 
 ## Resources, counts and cause history
 Unix actual native invocation count84 consumed.82 failed before runtime;
