@@ -94,6 +94,14 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    and export, add measurement-command identity ledger to final readback, retain
    exact identity/heartbeat/cancellation and existing bounds. No staging or native
    invocation82 is released; no measurement slot or native failure consumed.
+   Owner added concrete du/storage and owned-tree RSS sampling. Root early review
+   of the in-progress correction found final strict ledger/cap validation could
+   raise before failed-run exact cleanup, and failed readback was not exported.
+   Returned concrete correction: unconditional exact cleanup/readback from valid
+   available identities first, preserve failed receipts, then fail acceptance.
+   Confirmed same-start zombie/X entries without VmRSS must be terminal0, while
+   missing live-process VmRSS stays fail-closed. These are source-review findings
+   within the same first correction; no native cause count or budget reset.
    Root macOS measurement adaptation is SOURCE-ONLY and NOT approved to launch:
    macos-process-overhead.py and run-macos-process-overhead.sh bind00bed/archive
    5414ea195ad00152b1eae36b3f4e10943ba5d9bf323baff6410cca0c5b4d8b98.
@@ -107,7 +115,12 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    concrete live descendant/RSS monitoring, bounded cancellation/reap and exact
    identity readback without unsafe stale-PID/group signaling. No native/Cargo
    launch; root independently reviews frozen safeguards before release. First source-review finding,
-   no native failure or new Expert chain. Keep planned120calls/zero warmups/no retries.
+   no native failure or new Expert chain. Keep planned120calls/zero warmups/no retries. Root inspected frozen io_stress
+   fixture: exact2 writer threads/no process descendants, stdin EOF, write errors
+   panic and failed joins unwind before process exit. This gives a concrete route
+   for a later bounded pipe-closure interruption control, not native closure proof.
+   Owner must retain candid unresolved escaped-PGID closure status; passive
+   PID+lstart ledger never authorizes stale/nonchild numeric signaling.
 3. Windows public-contract source preparation is integrated at43e9ef8c (parent
    056c0b53). OCR selected1 Rust file, reviewed1/skipped0; excluded Markdown state
    was read separately. Initial review corrected INT typing and no_float timeout,
@@ -184,12 +197,12 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Previous turn classification
-Previous continuation progressed by independently fetching/checking the frozen
-Windows source archive. Current continuation observed actual Mac safeguard source
-edits without treating agent activity as native proof, and the Linux owner returned
-its concrete storage/RSS/ledger repair approach. Root closed a documentation source
-subrequirement: current Unix process options, shared-handle/wait semantics, host
-scope and honest cleanup-report behavior now documented and linked from README.
-Descriptions checked against actual registration/parser/lifecycle sources; links
-and whitespace verified. Native behavior, Windows platform and executed examples
-remain open; no launch/cause/history/budget reset.
+Previous continuation integrated verified documentation source. Current continuation
+independently inspected the in-progress Linux resource correction and identified a
+new cleanup ordering defect: strict ledger/cap checks could skip exact failure
+cleanup and failure receipts. Sent concrete fix before freeze; no native launch.
+Root inspected the actual frozen finite io_stress fixture and identified a possible
+pipe-closure interruption control route for Mac without unsafe nonchild signaling;
+source support is explicitly not native proof. Responsible contexts continue their
+bounded source repairs. No live native handle claimed from activity/intent, and no
+cause, history, measurement or safety-cap reset.
