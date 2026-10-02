@@ -1,0 +1,3 @@
+label	pid	start_ticks	ppid	pgid	cmdline
+launcher	2778642	5148341	2778582	2778582	bash /root/rhai-managed-unix-scope-close-1241a5f8-linux80/remote-launch.sh
+run-scoped	2778650	5148342	2778642	2778582	python3 /root/rhai-managed-unix-scope-close-1241a5f8-linux80/runner/tools/run_scoped.py --timeout 585 -- python3 /root/rhai-managed-unix-scope-close-1241a5f8-linux80/linux-process-proof.py

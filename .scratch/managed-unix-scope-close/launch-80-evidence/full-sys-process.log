@@ -1,0 +1,217 @@
+   Compiling rhai v1.26.1 (/tmp/agent-build-1ftfwo9g/source)
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:668:13
+    |
+668 |         let mut wait_operation = "wait for child";
+    |             ----^^^^^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `termination`
+    --> src/packages/sys/process/unix.rs:1106:22
+     |
+1106 |                 let (termination, _operation) = if self.managed {
+     |                      ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_termination`
+     |
+     = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2134:9
+     |
+2134 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2456:9
+     |
+2456 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variant `OnlyZombieLeader` is never constructed
+  --> src/packages/sys/process/unix.rs:50:5
+   |
+47 | enum GroupCloseOutcome {
+   |      ----------------- variant in this enum
+...
+50 |     OnlyZombieLeader,
+   |     ^^^^^^^^^^^^^^^^
+   |
+   = note: `GroupCloseOutcome` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: methods `numeric_operations_probe`, `quarantine_observations_probe`, and `fail_reservation` are never used
+    --> src/packages/sys/process/unix.rs:1470:8
+     |
+1390 | impl ExecutionFaults {
+     | -------------------- methods in this implementation
+...
+1470 |     fn numeric_operations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1481 |     fn quarantine_observations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1506 |     fn fail_reservation(&self) -> bool {
+     |        ^^^^^^^^^^^^^^^^
+
+warning: `rhai` (lib) generated 6 warnings (run `cargo fix --lib -p rhai` to apply 4 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+warning: variable does not need to be mutable
+   --> tests/sys_process.rs:727:9
+    |
+727 |     let mut holder = command.spawn().expect("start escaped captured-pipe holder");
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: value assigned to `incomplete` is never read
+    --> tests/sys_process.rs:1040:30
+     |
+1040 |         let mut incomplete = false;
+     |                              ^^^^^
+     |
+     = help: maybe it is overwritten before being read?
+     = note: `#[warn(unused_assignments)]` (part of `#[warn(unused)]`) on by default
+
+warning: constant `DIRECT_DROP_RECORD_ENV` is never used
+  --> tests/sys_process.rs:34:7
+   |
+34 | const DIRECT_DROP_RECORD_ENV: &str = "RHAI_SYS_DIRECT_DROP_RECORD";
+   |       ^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (test "sys_process") generated 3 warnings (run `cargo fix --test "sys_process" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 6.13s
+     Running tests/sys_process.rs (/tmp/agent-build-1ftfwo9g/target/debug/deps/sys_process-1928063df57ef1bb)
+
+running 32 tests
+test direct_run_returns_with_pipe_closed_worker_live_control ... managed_pidfd_acquired pid=2785347 start=5152845 ppid=2785343 pgid=2778653
+managed_pidfd_acquired pid=2785349 start=5152845 ppid=2785347 pgid=2778653
+managed_pidfd_acquired pid=2785351 start=5152845 ppid=2785349 pgid=2778653
+managed_fixture_cleanup worker_pid=Some(2785349) worker_esrch=true leaf_pid=Some(2785351) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2785347) leader_esrch=true
+ok
+test direct_spawn_kill_on_drop_false_preserves_child_and_capture ... direct_drop_fixture_started root=/tmp/agent-build-1ftfwo9g/tmp/rhai-sys-test-2785343-direct_spawn_kill_on_drop_false_preserves_child_and_capture-1 test_pid=2785343 child_pid=2785360
+direct_drop_after_final_client_drop pid=2785360 alive=true challenge_ack=true completion_exists=false
+direct_drop_completion pid=2785360 record="pid=2785360 stdout_bytes=524288 stderr_bytes=524288 complete=true\n"
+direct_drop_terminal pid=2785360 esrch=true
+direct_drop_fixture_cleanup root=/tmp/agent-build-1ftfwo9g/tmp/rhai-sys-test-2785343-direct_spawn_kill_on_drop_false_preserves_child_and_capture-1 pid=2785360 esrch=true
+direct_drop_fixture_cleanup root=/tmp/agent-build-1ftfwo9g/tmp/rhai-sys-test-2785343-direct_spawn_kill_on_drop_false_preserves_child_and_capture-1 pid=2785360 esrch=true
+ok
+test lossy_run_reports_engine_limit_expansion_without_returning_truncated_text ... ok
+test managed_false_drop_leader_fixture ... ok
+test managed_false_drop_leaf_fixture ... ok
+test managed_false_drop_worker_fixture ... ok
+test managed_run_closes_pipe_closed_worker_before_return ... managed_pidfd_acquired pid=2785378 start=5152899 ppid=2785343 pgid=2785378
+managed_pidfd_acquired pid=2785380 start=5152899 ppid=2785378 pgid=2785378
+managed_pidfd_acquired pid=2785382 start=5152899 ppid=2785380 pgid=2785378
+managed_fixture_cleanup worker_pid=Some(2785380) worker_esrch=true leaf_pid=Some(2785382) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2785378) leader_esrch=true
+ok
+test managed_run_closes_worker_after_leader_exit_and_preserves_sentinel ... managed_fixture_started root=/tmp/agent-build-1ftfwo9g/tmp/rhai-sys-test-2785343-managed_run_closes_worker_after_leader_exit_and_preserves_sentinel-4 test_pid=2785343 sentinel_pid=2785387
+managed_normal_leader pid=2785389 pgid=2785389 esrch=true
+managed_normal_worker_leaf worker_pid=2785391 worker_esrch=true leaf_pid=2785393 leaf_esrch=true
+managed_normal_sentinel pid=2785387 live=true
+managed-scope sentinel_cleanup pid=2785387 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(2785391) worker_esrch=true leaf_pid=Some(2785393) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2785389) leader_esrch=true
+ok
+test managed_run_reports_while_fixture_reaper_holds_stopped_zombies ... 
+running 1 test
+
+running 1 test
+managed_pidfd_acquired pid=2785402 start=5152941 ppid=2785399 pgid=2785402
+managed_pidfd_acquired pid=2785404 start=5152941 ppid=2785402 pgid=2785402
+managed_pidfd_acquired pid=2785406 start=5152942 ppid=2785404 pgid=2785402
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 31 filtered out; finished in 1.12s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 31 filtered out; finished in 1.13s
+
+managed_held_zombie_boundary host_live_at_return=true leader=2785402 leader_start=5152941 leader_reaped=true worker=2785404 worker_start=5152941 worker_state=Z worker_pgid=2785402 leaf=2785406 leaf_start=5152942 leaf_state=Z leaf_pgid=2785402 group=2785402 kill_zero_result=0 kill_zero_errno=0 capture_complete=true host=2785399 host_start=5152941 api_success=false api_outcome=typed_process_io cause_op=observe_process_group_closure cause_op_matches=true kind=TimedOut exit=Some(0) stdout_complete=true stderr_complete=true diagnostic=true cause_details=Some(Process { cause: Io { op: "observe process group closure", target: "/tmp/agent-build-1ftfwo9g/target/debug/deps/sys_process-1928063df57ef1bb", kind: TimedOut, message: "managed process scope remained present after leader reap" }, report: ProcessReport { stdout: [10, 114, 117, 110, 110, 105, 110, 103, 32, 49, 32, 116, 101, 115, 116, 10, 46, 10, 116, 101, 115, 116, 32, 114, 101, 115, 117, 108, 116, 58, 32, 111, 107, 46, 32, 49, 32, 112, 97, 115, 115, 101, 100, 59, 32, 48, 32, 102, 97, 105, 108, 101, 100, 59, 32, 48, 32, 105, 103, 110, 111, 114, 101, 100, 59, 32, 48, 32, 109, 101, 97, 115, 117, 114, 101, 100, 59, 32, 51, 49, 32, 102, 105, 108, 116, 101, 114, 101, 100, 32, 111, 117, 116, 59, 32, 102, 105, 110, 105, 115, 104, 101, 100, 32, 105, 110, 32, 48, 46, 48, 49, 115, 10, 10], stderr: [], stdout_complete: true, stderr_complete: true, exit: Some(Code(0)), timed_out: false, cleanup_diagnostics: [ProcessDiagnostic { operation: "observe process group closure", io_kind: None, message: "managed scope remains present under retained process ownership" }] } }) cleanup_diagnostics=[ProcessDiagnostic { operation: "observe process group closure", io_kind: None, message: "managed scope remains present under retained process ownership" }]
+ held="pid=2785397 start=5152941 host_status=0 worker=Some(2785404) worker_start=Some(5152941) leaf=Some(2785406) leaf_start=Some(5152942) held_zombies=true\n" reaper_status=ExitStatus(unix_wait_status(0))
+managed_held_zombie_cleanup worker=2785404 reaped=true leaf=2785406 reaped=true
+managed_fixture_cleanup worker_pid=Some(2785404) worker_esrch=true leaf_pid=Some(2785406) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2785402) leader_esrch=true
+ok
+test managed_scope_escape_fixture ... ok
+test managed_scope_leader_fixture ... ok
+test managed_scope_leaf_fixture ... ok
+test managed_scope_retained_pipe_holder_fixture ... ok
+test managed_scope_retained_pipe_leader_fixture ... ok
+test managed_scope_spawn_leader_fixture ... ok
+test managed_scope_worker_fixture ... ok
+test managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not ... managed_spawn_drop_started root=/tmp/agent-build-1ftfwo9g/tmp/rhai-sys-test-2785343-managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not-6 test_pid=2785343 sentinel_pid=2785446 sentinel_pgid=2785446 leader=2785448 worker=2785450 leaf=2785452 group=2785448
+managed_spawn_nonfinal_drop leader=2785448 leader_live=true worker=2785450 worker_live=true leaf=2785452 leaf_live=true all_live=true
+managed_spawn_final_drop leader=2785448 leader_esrch=true worker=2785450 worker_esrch=true leaf=2785452 leaf_esrch=true all_esrch=true sentinel=2785446 live=true
+managed-scope sentinel_cleanup pid=2785446 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(2785450) worker_esrch=true leaf_pid=Some(2785452) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2785448) leader_esrch=true
+ok
+test managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes ... managed_escaped_pipe_wait root=/tmp/agent-build-1ftfwo9g/tmp/rhai-sys-test-2785343-managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes-7 test_pid=2785343 leader=2785457 leader_pgid=2785457 leader_esrch=true holder=2785459 holder_pgid=2785455 holder_live_after_wait=true sentinel=2785455 sentinel_pgid=2785455 sentinel_live_after_wait=true wait_unit=false probe="pid=2785459 stdout_result=-1 stdout_error=32 stderr_result=-1 stderr_error=32\n" identity_ok=true
+managed_escaped_pipe_cleanup root=/tmp/agent-build-1ftfwo9g/tmp/rhai-sys-test-2785343-managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes-7 leader=Some(2785457) leader_esrch=true holder=Some(2785459) holder_esrch=true
+managed-scope sentinel_cleanup pid=2785455 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_escaped_pipe_terminal leader=Some(2785457) leader_esrch=true holder=Some(2785459) holder_esrch=true sentinel=2785455 sentinel_esrch=true
+managed_escaped_pipe_cleanup root=/tmp/agent-build-1ftfwo9g/tmp/rhai-sys-test-2785343-managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes-7 leader=Some(2785457) leader_esrch=true holder=Some(2785459) holder_esrch=true
+ok
+test managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit ... managed_false_drop_started root=/tmp/agent-build-1ftfwo9g/tmp/rhai-sys-test-2785343-managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit-8 test_pid=2785343 sentinel_pid=2785463 sentinel_pgid=2785463 leader=2785465 worker=2785467 leaf=2785469 group=2785465
+managed_false_drop_after_final_client_drop leader=2785465 leader_live=true worker=2785467 worker_live=true leaf=2785469 leaf_live=true sentinel=2785463 sentinel_live=true
+managed_false_drop_live_challenge leader=2785465 worker=2785467 leaf=2785469 group=2785465 ack_count=3 ack_pids=[Some(2785465), Some(2785467), Some(2785469)] ack_groups=[Some(2785465), Some(2785465), Some(2785465)]
+managed_false_drop_after_leader_exit leader=2785465 leader_esrch=true worker=2785467 worker_esrch=true leaf=2785469 leaf_esrch=true sentinel=2785463 sentinel_live=true
+managed-scope sentinel_cleanup pid=2785463 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(2785467) worker_esrch=true leaf_pid=Some(2785469) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2785465) leader_esrch=true
+ok
+test managed_spawn_kill_stops_leader_worker_leaf_and_preserves_sentinel ... managed_spawn_kill_started root=/tmp/agent-build-1ftfwo9g/tmp/rhai-sys-test-2785343-managed_spawn_kill_stops_leader_worker_leaf_and_preserves_sentinel-9 test_pid=2785343 sentinel_pid=2785541 sentinel_pgid=2785541 leader=2785543 worker=2785545 leaf=2785547 group=2785543
+managed_spawn_kill leader=2785543 leader_esrch=true worker=2785545 worker_esrch=true leaf=2785547 leaf_esrch=true all_esrch=true sentinel=2785541 live=true wait_returned=true
+managed-scope sentinel_cleanup pid=2785541 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(2785545) worker_esrch=true leaf_pid=Some(2785547) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2785543) leader_esrch=true
+ok
+test managed_spawn_post_reap_cancel_bounds_escaped_capture ... managed_post_reap_ordinary_wait root=/tmp/agent-build-1ftfwo9g/tmp/rhai-sys-test-2785343-managed_spawn_post_reap_cancel_bounds_escaped_capture-10 test_pid=2785343 leader=2785553 holder=2785555 sentinel=2785551 wait_unit=true holder_live=true
+managed_post_reap_typed_error unexpected=None
+managed_post_reap_leader leader=2785553 exit_record_matches=true exit_record="pid=2785553 release_seen=true exit_intent=true\n" try_wait_unit=true try_wait_error=None ps_status=Ok("") leader_esrch=true holder=2785555 holder_live=true
+managed_post_reap_uncancelled_wait leader=2785553 wait_unit=true holder=2785555 holder_live=true sentinel=2785551 sentinel_live=true
+managed_escaped_pipe_cleanup root=/tmp/agent-build-1ftfwo9g/tmp/rhai-sys-test-2785343-managed_spawn_post_reap_cancel_bounds_escaped_capture-10 leader=Some(2785553) leader_esrch=true holder=Some(2785555) holder_esrch=true
+managed-scope sentinel_cleanup pid=2785551 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_escaped_pipe_terminal leader=Some(2785553) leader_esrch=true holder=Some(2785555) holder_esrch=true sentinel=2785551 sentinel_esrch=true
+managed_post_reap_cancel root=/tmp/agent-build-1ftfwo9g/tmp/rhai-sys-test-2785343-managed_spawn_post_reap_cancel_bounds_escaped_capture-10 test_pid=2785343 leader=2785553 leader_esrch_before_kill=true leader_esrch=true holder=2785555 holder_live_after_cancel=true holder_esrch=true sentinel=2785551 sentinel_esrch=true probe="pid=2785555 stdout_result=-1 stdout_error=32 stderr_result=-1 stderr_error=32\n" wait_unit=false
+managed_escaped_pipe_cleanup root=/tmp/agent-build-1ftfwo9g/tmp/rhai-sys-test-2785343-managed_spawn_post_reap_cancel_bounds_escaped_capture-10 leader=Some(2785553) leader_esrch=true holder=Some(2785555) holder_esrch=true
+ok
+test managed_timeout_kills_leader_after_it_changes_process_group ... managed_escape_started root=/tmp/agent-build-1ftfwo9g/tmp/rhai-sys-test-2785343-managed_timeout_kills_leader_after_it_changes_process_group-11 test_pid=2785343 sentinel_pid=2785656 sentinel_pgid=2785656
+managed_escape_sentinel_live pid=2785656 live=true
+managed_escape_leader pid=2785658 original_pgid=2785658 escaped_pgid=2785656 esrch=true
+managed_escape_fixture_cleanup pid=Some(2785658) esrch=true
+managed-scope sentinel_cleanup pid=2785656 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+ok
+test process_cwd_uses_the_opened_filesystem_capability_after_root_replacement ... ok
+test process_fixture ... ok
+test process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one ... ok
+test process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps ... ok
+test run_deadline_returns_bounded_partial_output_after_terminating_child ... ok
+test run_deadline_with_blocked_stdin_and_active_stdout_stderr ... ok
+test run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data ... ok
+test unit_stdin_means_immediate_eof ... ok
+test unit_timeout_disables_configured_default_deadline ... ok
+test zero_output_cap_reports_output_limit_with_an_empty_retained_prefix ... ok
+
+test result: ok. 32 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 5.86s
+
