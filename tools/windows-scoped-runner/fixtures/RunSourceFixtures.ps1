@@ -1,6 +1,7 @@
 param(
     [Parameter(Mandatory = $true)] [string] $SourceRoot,
-    [Parameter(Mandatory = $true)] [string] $RunRoot
+    [Parameter(Mandatory = $true)] [string] $RunRoot,
+    [switch] $SetupFailureControl
 )
 
 $ErrorActionPreference = 'Stop'
@@ -44,7 +45,10 @@ foreach ($trustedDirectory in @('C:\RhaiQuality', $allowedParent)) {
     $directoryInfo = Get-Item -LiteralPath $trustedDirectory -Force
     if (($directoryInfo.Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) { throw "Approved run ancestor is a reparse point: $trustedDirectory" }
 }
-if (Test-Path -LiteralPath $run) { throw "RunRoot already exists; preserve and inspect it: $run" }
+if ($SetupFailureControl) {
+    if (!(Test-Path -LiteralPath $run -PathType Container)) { throw "SetupFailureControl requires the existing owner run root: $run" }
+}
+elseif (Test-Path -LiteralPath $run) { throw "RunRoot already exists; preserve and inspect it: $run" }
 $drive = [IO.DriveInfo]::new('C:')
 if ($drive.AvailableFreeSpace -lt 2GB) { throw 'At least 2 GiB free on C: is required by the fixed fixture storage plan' }
 
@@ -52,9 +56,16 @@ $expectedRoot = Join-Path $run 'input'
 $buildRoot = Join-Path $run 'build'
 $logRoot = Join-Path $run 'logs'
 $tempRoot = Join-Path $run 'temp'
-New-Item -ItemType Directory -Path $run | Out-Null
-foreach ($directory in @($expectedRoot, $buildRoot, $logRoot, $tempRoot)) {
-    New-Item -ItemType Directory -Path $directory | Out-Null
+if ($SetupFailureControl) {
+    foreach ($directory in @($expectedRoot, $buildRoot, $logRoot, $tempRoot)) {
+        if (!(Test-Path -LiteralPath $directory -PathType Container)) { throw "SetupFailureControl owner directory is absent: $directory" }
+    }
+}
+else {
+    New-Item -ItemType Directory -Path $run | Out-Null
+    foreach ($directory in @($expectedRoot, $buildRoot, $logRoot, $tempRoot)) {
+        New-Item -ItemType Directory -Path $directory | Out-Null
+    }
 }
 $env:TEMP = $tempRoot
 $env:TMP = $tempRoot
@@ -136,6 +147,17 @@ $script:terminateProcess = Get-KernelDelegate 'TerminateProcess' (New-NativeDele
 $script:terminateProcessDelegateType = $script:terminateProcess.GetType()
 $script:closeHandle = Get-KernelDelegate 'CloseHandle' (New-NativeDelegateType 'CloseHandleDelegate' ([bool]) ([Type[]]@([IntPtr])))
 $script:queryJobInfo = Get-KernelDelegate 'QueryInformationJobObject' (New-NativeDelegateType 'QueryInformationJobObjectDelegate' ([bool]) ([Type[]]@([IntPtr], [int], [IntPtr], [uint32], [IntPtr])))
+
+# Initialize every owner before acquiring the first native handle. The encompassing
+# try/finally below covers job creation, assignment, watchdog setup and execution.
+$script:jobHandle = [IntPtr]::Zero
+$script:jobInfo = [IntPtr]::Zero
+$script:wallTimer = $null
+$script:setupFailureChild = $null
+$currentProcess = $null
+$drained = $null
+$success = $false
+try {
 $script:jobHandle = $script:createJob.Invoke([IntPtr]::Zero, [IntPtr]::Zero)
 if ($script:jobHandle -eq [IntPtr]::Zero) { throw "CreateJobObjectW failed: $([Runtime.InteropServices.Marshal]::GetLastWin32Error())" }
 $script:jobInfo = [Runtime.InteropServices.Marshal]::AllocHGlobal(144)
@@ -149,13 +171,24 @@ try {
         throw "SetInformationJobObject failed: $([Runtime.InteropServices.Marshal]::GetLastWin32Error())"
     }
 }
-finally { [Runtime.InteropServices.Marshal]::FreeHGlobal($script:jobInfo) }
+finally {
+    [Runtime.InteropServices.Marshal]::FreeHGlobal($script:jobInfo)
+    $script:jobInfo = [IntPtr]::Zero
+}
 $currentProcess = [Diagnostics.Process]::GetCurrentProcess()
 if (!$script:assignJob.Invoke($script:jobHandle, $currentProcess.Handle)) {
     $failure = [Runtime.InteropServices.Marshal]::GetLastWin32Error()
-    [void]$script:closeHandle.Invoke($script:jobHandle)
-    $script:jobHandle = [IntPtr]::Zero
+    # Keep the exact handle in its initialized owner; the encompassing finally
+    # performs the only close attempt and preserves it on failure.
     throw "AssignProcessToJobObject(current PowerShell process) failed before any child was launched: $failure"
+}
+if ($SetupFailureControl) {
+    $controlOutput = Join-Path $logRoot 'setup-failure-child.stdout.txt'
+    $controlError = Join-Path $logRoot 'setup-failure-child.stderr.txt'
+    $script:setupFailureChild = Start-Process -FilePath 'C:\Windows\System32\PING.EXE' `
+        -ArgumentList @('-n', '60', '127.0.0.1') -RedirectStandardOutput $controlOutput `
+        -RedirectStandardError $controlError -PassThru -NoNewWindow
+    throw 'Injected setup failure after job assignment and before watchdog construction.'
 }
 
 # A one-hour timer runs on the .NET timer thread. On expiry it terminates the
@@ -190,7 +223,7 @@ $script:wallWatchdogType = $watchdogType.CreateTypeInfo().AsType()
 $timerState = [Object[]]::new(3)
 $timerState[0] = $currentProcess.Handle
 $timerState[1] = $script:terminateProcess
-$timerState[2] = [uint32]0xE0000002
+$timerState[2] = [uint32]3758096386 # 0xE0000002, represented as positive UInt32 for Windows PowerShell 5.1
 $watchdogDelegate = $script:wallWatchdogType.GetMethod('Fire').CreateDelegate([Threading.TimerCallback])
 $drained = [Threading.ManualResetEvent]::new($false)
 $script:wallTimer = [Threading.Timer]::new($watchdogDelegate, $timerState, 3600000, [System.Threading.Timeout]::Infinite)
@@ -222,7 +255,7 @@ function Invoke-OwnedProcess([string] $Path, [string[]] $Arguments, [string] $Na
     # The PowerShell parent is already in a KILL_ON_JOB_CLOSE job. Windows
     # places this child in that job at creation, before it can execute.
     if (!$process.WaitForExit($remaining * 1000)) {
-        [void]$script:terminateJob.Invoke($script:jobHandle, 0xE0000001)
+        [void]$script:terminateJob.Invoke($script:jobHandle, [uint32]3758096385) # 0xE0000001
         [void]$process.WaitForExit(5000)
         throw "$Name exceeded its bounded timeout; inherited job was terminated"
     }
@@ -231,8 +264,59 @@ function Invoke-OwnedProcess([string] $Path, [string[]] $Arguments, [string] $Na
     Write-Output "PASS $Name"
 }
 
-$success = $false
-try {
+if (!$SetupFailureControl) {
+    $controlMarker = Join-Path $logRoot 'setup-failure-control.txt'
+    if (Test-Path -LiteralPath $controlMarker) { throw "Setup-failure control marker already exists: $controlMarker" }
+    $childPowerShell = Join-Path $PSHOME 'powershell.exe'
+    $controlStdout = Join-Path $logRoot 'setup-failure-control.stdout.txt'
+    $controlStderr = Join-Path $logRoot 'setup-failure-control.stderr.txt'
+    $controlArguments = @('-NoLogo', '-NoProfile', '-ExecutionPolicy', 'Bypass', '-File', $PSCommandPath,
+        '-SourceRoot', $source, '-RunRoot', $run, '-SetupFailureControl')
+    $controlArgumentLine = (($controlArguments | ForEach-Object { Quote-ProcessArgument ([string]$_) }) -join ' ')
+    $controlDeadline = [Diagnostics.Stopwatch]::StartNew()
+    $controlProcess = $null
+    try {
+        $controlProcess = Start-Process -FilePath $childPowerShell -ArgumentList $controlArgumentLine `
+            -WorkingDirectory $source -RedirectStandardOutput $controlStdout -RedirectStandardError $controlStderr `
+            -PassThru -NoNewWindow
+        $remainingMilliseconds = [Math]::Max(0, 30000 - [int]$controlDeadline.ElapsedMilliseconds)
+        if (!$controlProcess.WaitForExit($remainingMilliseconds)) {
+            [void]$script:terminateJob.Invoke($script:jobHandle, [uint32]3758096385)
+            throw 'Setup-failure control exceeded its shared 30-second deadline; the exact outer job was terminated.'
+        }
+        $controlProcess.Refresh()
+        if ($controlProcess.ExitCode -eq 0) { throw 'Setup-failure control unexpectedly succeeded.' }
+        if (!(Test-Path -LiteralPath $controlMarker -PathType Leaf)) { throw 'Setup-failure control did not preserve its primary setup exception.' }
+        $controlRecord = Get-Content -LiteralPath $controlMarker -Raw
+        if ($controlRecord -notmatch 'CONTROL_INJECTED_AFTER_JOB_ASSIGNMENT_BEFORE_TIMER' -or
+            $controlRecord -notmatch 'Injected setup failure after job assignment and before watchdog construction' -or
+            $controlRecord -notmatch '(?m)^ChildPid=([1-9][0-9]*)\r?$') {
+            throw 'Setup-failure control marker does not bind the injected setup error and exact child PID.'
+        }
+        $controlChildPid = [int]$Matches[1]
+        $controlErrors = if (Test-Path -LiteralPath $controlStderr -PathType Leaf) { Get-Content -LiteralPath $controlStderr -Raw } else { '' }
+        if ($controlErrors -match 'Job disposition failed|CloseHandle\(job\) failed|Watchdog timer refused disposal') {
+            throw 'Setup-failure control reported an owner-disposition failure.'
+        }
+        $accounting = [Runtime.InteropServices.Marshal]::AllocHGlobal(48)
+        try {
+            $active = -1
+            while ($controlDeadline.ElapsedMilliseconds -lt 30000) {
+                if (!$script:queryJobInfo.Invoke($script:jobHandle, 1, $accounting, 48, [IntPtr]::Zero)) {
+                    throw "QueryInformationJobObject(after setup-failure control) failed: $([Runtime.InteropServices.Marshal]::GetLastWin32Error())"
+                }
+                $active = [Runtime.InteropServices.Marshal]::ReadInt32($accounting, 40)
+                if ($active -eq 1) { break }
+                Start-Sleep -Milliseconds ([Math]::Min(100, [Math]::Max(1, 30000 - [int]$controlDeadline.ElapsedMilliseconds)))
+            }
+            if ($active -ne 1) { throw "Setup-failure control child PID $controlChildPid left $($active - 1) process(es) in the exact outer job at the shared 30-second deadline." }
+        }
+        finally { [Runtime.InteropServices.Marshal]::FreeHGlobal($accounting) }
+        Write-Output "PASS setup-failure-control: child PID $controlChildPid; primary exception retained; nested job teardown removed owned child; outer job returned to owner-only."
+    }
+    finally { if ($null -ne $controlProcess) { $controlProcess.Dispose() } }
+}
+
     foreach ($relative in ($expected.Keys | Sort-Object)) {
         $inputPath = Join-Path $source $relative
         if (!(Test-Path -LiteralPath $inputPath -PathType Leaf)) { throw "Required immutable input missing: $relative" }
@@ -287,6 +371,33 @@ try {
     Write-Output "RETAINED run root: $run"
     $success = $true
 }
+catch {
+    $primaryFailure = $_
+    try {
+        if ($SetupFailureControl) {
+            $markerPath = Join-Path $logRoot 'setup-failure-control.txt'
+            $childPid = if ($null -ne $script:setupFailureChild) { $script:setupFailureChild.Id } else { 0 }
+            $markerText = "CONTROL_INJECTED_AFTER_JOB_ASSIGNMENT_BEFORE_TIMER`r`nPowerShellPid=$PID`r`nChildPid=$childPid`r`n$($primaryFailure.Exception.ToString())"
+            $markerBytes = [Text.UTF8Encoding]::new($false).GetBytes($markerText)
+            $markerStream = [IO.File]::Open($markerPath, [IO.FileMode]::CreateNew, [IO.FileAccess]::Write, [IO.FileShare]::Read)
+            try { $markerStream.Write($markerBytes, 0, $markerBytes.Length); $markerStream.Flush($true) }
+            finally { $markerStream.Dispose() }
+        }
+        else {
+            [Console]::Error.WriteLine("Primary source-fixture failure: $($primaryFailure.Exception.ToString())")
+            [Console]::Error.Flush()
+            if (Test-Path -LiteralPath $logRoot -PathType Container) {
+                $failurePath = Join-Path $logRoot ("setup-failure-$PID.txt")
+                [IO.File]::WriteAllText($failurePath, $primaryFailure.Exception.ToString(), [Text.UTF8Encoding]::new($false))
+            }
+        }
+    }
+    catch {
+        [Console]::Error.WriteLine("Could not persist primary source-fixture failure diagnostics: $($_.Exception.ToString())")
+        [Console]::Error.Flush()
+    }
+    throw $primaryFailure
+}
 finally {
     if ($script:jobHandle -ne [IntPtr]::Zero) {
         try {
@@ -315,7 +426,7 @@ finally {
                 $closeError = [Runtime.InteropServices.Marshal]::GetLastWin32Error()
                 # If successful accounting already cleared KILL_ON_JOB_CLOSE,
                 # explicitly terminate the exact job before failing the host.
-                if ($success -and !$script:terminateJob.Invoke($script:jobHandle, [uint32]0xE0000003)) {
+                if ($success -and !$script:terminateJob.Invoke($script:jobHandle, [uint32]3758096387)) { # 0xE0000003
                     [Environment]::FailFast("CloseHandle(job) and recovery TerminateJobObject failed ($closeError / $([Runtime.InteropServices.Marshal]::GetLastWin32Error())); exact handle/watchdog remain owned through process teardown.")
                 }
                 [Environment]::FailFast("CloseHandle(job) failed ($closeError); exact handle/watchdog remain owned through process teardown.")
@@ -340,6 +451,6 @@ finally {
         }
         $script:wallTimer = $null
     }
-    $drained.Dispose()
-    $currentProcess.Dispose()
+    if ($drained -ne $null) { $drained.Dispose() }
+    if ($currentProcess -ne $null) { $currentProcess.Dispose() }
 }
