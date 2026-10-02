@@ -1,0 +1,30 @@
+F
+======================================================================
+FAIL: test_client_exec_vector_runs_python_driver_with_restored_signal_mask (__main__.EnvironmentTests.test_client_exec_vector_runs_python_driver_with_restored_signal_mask)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-source-6b613d7a9e5a43dd8c12fcba1f1a310d/agent-build-h1fi9q1d/test-macos-process-overhead-source.py", line 186, in test_client_exec_vector_runs_python_driver_with_restored_signal_mask
+    self.assertEqual(command, [custodian.sys.executable, "-c", custodian.CLIENT_CODE,
+AssertionError: Lists differ: ['/Us[280 chars]', '/private/runtime/macos-process-overhead.py'] != ['/Us[280 chars]', '/Users/hoppworks/.cache/codex-runtimes/cod[93 chars].py']
+
+First differing element 4:
+'/private/runtime/macos-process-overhead.py'
+'/Users/hoppworks/.cache/codex-runtimes/cod[46 chars]hon3'
+
+Second list contains 1 additional elements.
+First extra element 5:
+'/private/runtime/macos-process-overhead.py'
+
+  ['/Users/hoppworks/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3',
+   '-c',
+   'import os,signal,sys; mask=sys.argv[1]; '
+   'signal.pthread_sigmask(signal.SIG_SETMASK,{signal.Signals(int(v)) for v in '
+   'mask.split(",") if v}); os.execv(sys.argv[2],sys.argv[2:])',
+   '2,15',
++  '/Users/hoppworks/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3',
+   '/private/runtime/macos-process-overhead.py']
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (failures=1)

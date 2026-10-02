@@ -1,0 +1,14 @@
+F
+======================================================================
+FAIL: test_sampled_descendant_missing_from_identity_census_fails_closed (__main__.EnvironmentTests.test_sampled_descendant_missing_from_identity_census_fails_closed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/hoppworks/.local/share/agent-builds/rhai/root-mac-source-6b613d7a9e5a43dd8c12fcba1f1a310d/agent-build-h1fi9q1d/test-macos-process-overhead-source.py", line 214, in test_sampled_descendant_missing_from_identity_census_fails_closed
+    with self.assertRaisesRegex(RuntimeError, "sampled descendant.*identity census"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: RuntimeError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (failures=1)

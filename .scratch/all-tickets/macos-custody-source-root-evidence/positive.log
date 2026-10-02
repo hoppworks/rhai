@@ -1,0 +1,6 @@
+......custodian_command_reaped gate=0 anchor=0 pgid=20 group_signal_issued=True
+....................
+----------------------------------------------------------------------
+Ran 26 tests in 0.033s
+
+OK

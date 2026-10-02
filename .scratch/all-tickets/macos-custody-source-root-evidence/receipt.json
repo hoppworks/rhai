@@ -1,0 +1,13 @@
+{
+  "revision": "fdb9cf207158cff0635b500f26664a89bc2af5ab",
+  "known_broken_identity_source": "a7232f054d324779bab9afd43f5b6d52ca7c685e",
+  "statuses": {
+    "positive": 0,
+    "wrong-client-vector": 1,
+    "known-broken-disappeared-sample": 1,
+    "restored": 0
+  },
+  "elapsed_seconds": 0.8216574580874294,
+  "acceptance": "Pure source regressions only; no native architecture acceptance.",
+  "no_build_fixture_native_measurement": true
+}

@@ -80,9 +80,10 @@ Historical detailed staging, gates and outcomes remain in this same state at
    parser and isolated pure path controls before any fixture invocation. Earlier
    compiler/setup/extraction failures and nonrenewable real-client allocation
    retained; no native job/public production acceptance claimed.
-3. Mac sole-custodian corrections frozen510d7233: waitid resolved before setup,
-   exact release token required, command cleanup deadline reserved. Source review
-   remains open. False launch guard stays closed; selected graph/toolchain
+3. Mac sole-custodian corrections frozena7232f05: source-only client exec-vector
+   and observed-identity corrections are running in the responsible context.
+   Original2f review remains referenced; a723 is not accepted. False launch guard
+   stays closed; selected graph/toolchain
    confinement, escaped-leaf closure, native Darwin ABI and finite interruption
    controls still need proof. No native launch since81; existing Expert09/caps
    remain. Review complete current source before any execution gate.
@@ -251,3 +252,47 @@ are correlated by PID/PPID/PGID without start identity; disappeared sampled rows
 are skipped. Owner must preserve uncertainty and assess the original observed
 PID/start union requirement. Full a723/followup acceptance remains open; false
 launch guard and all explicit caps stay intact. Original2f review retained.
+
+Previous goal turn PROGRESS: locked metadata source discovery independently
+closed and published as eedba0fc1ff632dce64f9fad0b1616bcf433c178; remote readback
+only main matched exactly, root clean. Current owner handle revalidated running.
+Independent selected-source confinement review is the next available source-only
+requirement: use conservative61 graph candidates and already accepted source
+integrity; review actual executable build/proc-macro paths and subprocess/session
+selection, not lexical absence alone. A fresh Standard context may read these
+foreign source inputs without modifying them and produce a report in its own
+task worktree. Thirty-minute active-work checkpoint, no execution/native/build
+allocation, no new cause09 Expert chain; source gaps stop native readiness.
+
+Frozen Mac followupfdb9cf207158cff0635b500f26664a89bc2af5ab received,2 affected
+files reviewed through OCR preview/rules (2 reviewed,0 skipped). Exact Python
+client vector fixed. Native full-tuple ledger union retained; ps correlation
+cannot exclude same-second PID reuse, so architecture acceptance remains open.
+Independent pure replay allocated: one own scoped package100s outer;4 checks at
+most20s each plus source copy/receipt, no builds/native/fixtures/measurement.
+Positive26, wrong interpreter-vector assertion RED, originala723 disappeared
+sample assertion RED, restored26. Existing cause09 history retained; expected
+negative assertions do not count as failed corrections. Preserve every original
+log/status and exact empty scope absence before accepting this narrow gate.
+
+Independent pure replay terminal0: positive26/restored26 pass; wrong client
+vector1 and originala723 silent disappeared-row logic1 each fail by the intended
+assertion (no harness ERROR). Helper elapsed0.821657458s, no build/native launch.
+Original receipt/logs in macos-custody-source-root-evidence; owned exact scope
+root-mac-source-6b613d7a9e5a43dd8c12fcba1f1a310d retired empty. These narrow
+regressions are accepted; sole-custodian/native architecture remains unaccepted.
+Integration attempt of a723/fdb without their unaccepted2f prerequisite conflicted;
+exact own cherry-pick aborted successfully. Root returned to eedba0fc with own
+state/evidence intact. No source changes reached main, no foreign work changed.
+
+Return-to-goal checkpoint: full PID/start custody observations must support honest
+closure and sampled resource bounds. The remaining ps/native same-second join is
+a chosen technique, not a requirement. Existing Expert09 already prefers native
+passive sampling. Next source-only correction can remove ps ancestry/RSS joins:
+add identity-bracketed PROC_PIDTASKINFO RSS to the existing Darwin reader using
+the installed header (flavor4; resident size bytes), take census identities and
+resources from that one reader, persist full tuples even on later sample failure,
+and retain current conservative path/closure checks. Pure injected ABI/identity
+race controls precede any native call; reader ABI and native controls remain open.
+Responsible owner may finish this in existing09 source package at a30-minute
+active-work checkpoint; no new Expert chain/native slots or hard-cap changes.
