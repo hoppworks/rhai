@@ -80,7 +80,11 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    failed because the console key encoder omitted uppercase letters; owner uses
    the case-insensitive lowercase path next. This is input setup, not fixture
    failure. Original console receipts remain in the responsible context.
-   NO fixture/compiler/job handle yet; native script hash/parser/17-pin gate not yet verified. Continue fresh immutable
+   Latest guest closes script integrity and native parser gates: script SHA79be8688
+   matches exactly, ParseFile reports zero errors and a non-null AST. Owner prepares
+   a fresh absent GUID runroot for the single invocation, including nested setup-
+   failure control,17 input pins, compiler and fixture payloads under existing caps.
+   NO fixture/compiler/job handle yet;17-pin/fixture gates remain open. Continue fresh immutable
    archive/runroot, native PS5.1 parser and input gate before fixture invocation.
    Preserve failed roots and exact cleanup. Do not call this a verified live wait.
 2. POSIX overhead source00bed4a0dfeb103ff209ba4c76dac7ae797b7c56 integrated.
@@ -109,6 +113,14 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    Confirmed same-start zombie/X entries without VmRSS must be terminal0, while
    missing live-process VmRSS stays fail-closed. These are source-review findings
    within the same first correction; no native cause count or budget reset.
+   Corrected frozen package b6f34e20efea282f3a31cf040b9e89831a17bd6d now
+   independently read and integrated into root. Root verified all four reported
+   hashes, Python AST, four embedded Python blocks and bash syntax in scoped30s.
+   Finalizer exports initial live identities/cleanup actions and rejects status0
+   with leftovers; current snapshot receipts precede resource stop checks. Source
+   gate accepted; responsible Linux context resumes fresh staging/hash/empty-
+   evidence readback then ONE bounded native82. Count82 only at actual launch;
+   no live handle or executed measurement is claimed yet. No retry after failure.
    Root macOS measurement adaptation is SOURCE-ONLY and NOT approved to launch:
    macos-process-overhead.py and run-macos-process-overhead.sh bind00bed/archive
    5414ea195ad00152b1eae36b3f4e10943ba5d9bf323baff6410cca0c5b4d8b98.
@@ -142,6 +154,15 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    semantics and remove the intermediate child, but still needs accepted group
    anchor custody and benchmark-specific escaped-fixture interruption proof.
    No group/PID signaling authority is granted by passive snapshots.
+   Corrected safeguards f7dab7934f7f7f42245ec23008fe8e2616606799 integrated
+   as source progress only. Exact child log names corrected to measurement driver;
+   setup-in-progress prevents false no-process-started cleanup, final readback
+   has a remaining-time bound. Generic interrupted descendant closure still open.
+   Fresh read-only Expert09 /root/macos_overhead_custody_expert is analyzing the
+   uncovered benchmark-launch custody decision,15-minute planning checkpoint,
+   no native/Cargo slots. Brief escalations/09-macos-overhead-custody.md; answer
+   pending. This is distinct from accepted Expert08 production Unix completion,
+   and only one escalation chain for this launch custody cause is permitted.
 3. Windows public-contract source preparation is integrated at43e9ef8c (parent
    056c0b53). OCR selected1 Rust file, reviewed1/skipped0; excluded Markdown state
    was read separately. Initial review corrected INT typing and no_float timeout,
@@ -218,11 +239,11 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Previous turn classification
-The previous user status turn was no progress: it reported the existing state.
-This continuation independently inspected frozen macOS safeguards and the actual
-nested measurement driver's process ownership, identifying concrete cancellation,
-setup-ledger and deadline defects and returning source corrections before launch.
-Windows guest transfer/hash/directory readback gives new archive integrity evidence;
-script/parser/fixture gates remain open. Linux responsible context continues the
-previous cleanup-ordering correction. No live native handle claimed from activity,
-no native launch, and no cause, measurement or safety-cap reset.
+Previous continuation made source-review progress. Current continuation independently
+reviewed Linux frozen resource/cleanup corrections and returned two concrete final
+ordering fixes, then accepted/integrated b6 and passed independent frozen hash,
+AST/embedded-block/bash checks. Responsible context resumes single bounded native82
+after staged hash/empty-evidence gate. Corrected Mac source integrated candidly
+unready; fresh Expert09 assesses actual nested/setup custody decision. Windows
+guest script hash/native parser gate closes, fixtures still open. No live native
+handle claimed from activity and no consumed measurement/safety-cap reset.
