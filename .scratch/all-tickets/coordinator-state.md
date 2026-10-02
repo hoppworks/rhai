@@ -55,7 +55,7 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
   34 emitted PIDs/10 groups and exact runtime absent, three manifests matching.
   Cargo53.432s, sampled276896KiB; no continuous peak claim.
 - Remote branch cleanup CLOSED. Latest independent ls-remote readback shows ONLY
-  main at56f1a35cd4df09ae1cddc4dc728c54d7290403f4 (latest pre-integration readback). Nine remote task refs removed
+  main at6199fcabc755355929ced07e9b6d306a33dded2e (reviewed Linux package integration readback). Nine remote task refs removed
   in the final consolidation, one earlier; every exact tip was ancestor of pushed
   main before deletion. Histories preserved. Local active/foreign/dirty worktrees
   remain; remote cleanup does not authorize discarding them.
@@ -154,7 +154,13 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
    empty after runner0. Do not run the proposed -Z unstable-options query or
    silently substitute a new toolchain. Existing conservative candidate review
    remains valid narrowly; exact graph/toolchain confinement, live capture and
-   native ABI remain open, no native85 allocation.
+   native ABI remain open, no native85 allocation. Existing responsible owner
+   macos_overhead_safeguards continued for a source-only supported stable-Cargo
+   route after ruling out nightly unit-graph. Preserve Expert09 single chain and
+   30-minute active-work checkpoint; no Cargo/compiler/native command permitted.
+   Exact selected-unit acceptance remains distinct from conservative candidate
+   confinement coverage; both require explicit supported evidence. Next collect
+   immutable source increment and pure proof or concrete missing capability.
 4. Windows sole owner is completed; current virsh domstate readback0 confirms
    rhai-win11-quality shut off. Partial console
    command/cleanup remains unverified. Preserve allocation and all prior evidence;
@@ -243,8 +249,10 @@ No invocation85/process measurement. Remaining optional/platform/feature gates
 and every other ticket requirement remain active.
 
 ## Immediate next actions
-Collect exact source-only Mac correction and independently review affected
-custody requirements/pure controls before any native allocation. Complete exact
+Execute the reviewed staged Linux examples when the observed heavy slot is free;
+recheck foreign process identities first. Collect the existing Mac owner's supported
+stable-toolchain source route and review affected prerequisites before any native
+allocation. Complete exact
 feature/toolchain confinement and installed Darwin ABI prerequisites; keep
 measurement unlaunched until declared native interruption controls pass.
 Windows native stage/parser/path/build proof is dependent on guest availability;
