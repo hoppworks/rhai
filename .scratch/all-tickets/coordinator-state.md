@@ -200,10 +200,12 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
    gatefalse/count84/no85 preserved. Next collect coherent source increment and
    finite proof prerequisites before any live-control request.
 
-4. Windows sole owner is completed; current virsh domstate readback0 confirms
-   rhai-win11-quality shut off. Partial console
-   command/cleanup remains unverified. Preserve allocation and all prior evidence;
-   no restart, new native launch or repeated source review for the rule update.
+4. Windows owned domain activation completed under reconciled existing authority.
+   Independent root UUID/domstate/domdisplay and desktop readback preserved at
+   windows-current-readiness-20261002/. Exact VM running, loopbackVNC; unrelated
+   domain untouched/shut off. Current owner continues bounded read-only guest
+   console/path inspection; partial-input clearance and oneGET consumption remain
+   unverified. No compiler/bootstrap/fixture/native acceptance claimed.
 
 ## Resources, counts and cause history
 Unix actual native invocation count84 consumed.82 failed before runtime;
@@ -410,8 +412,10 @@ stable-toolchain source route and review affected prerequisites before any nativ
 allocation. Complete exact
 feature/toolchain confinement and installed Darwin ABI prerequisites; keep
 measurement unlaunched until declared native interruption controls pass.
-Windows native stage/parser/path/build proof remains open. Fresh exact-domain
-readback returns shut off. Reconciliation against windows-vm/README.md and
+Windows native stage/parser/path/build proof remains open. Earlier exact-domain
+readback returned shut off; later authorized activation and root readback confirm
+running exact UUIDdc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19, loopbackVNC and desktop.
+Original screenshot and root receipts at windows-current-readiness-20261002/. Reconciliation against windows-vm/README.md and
 windows-monitor-staging-ownership-review.md establishes campaign ownership and
 already-authorized exact VM activation/read-only guest preflight. The shared-VM
 restart exclusion does not revoke activation of this owned domain. The earlier
@@ -425,8 +429,11 @@ SHA8291e58652a7dc8494513d910460e6dae39a716f5dfca937bda40fafcfa0caa4;
 read actual consumption before any transfer. Preserve bootstrap/input history,
 Expert02 and caps. Root reviews readiness before native execution.
 Previous goal turn VERIFIED WAIT: exact active Linux/Mac handles observed running
-and polled, without restart after observation timeout. This turn continues those
-packages and resolves the stale Windows authorization interpretation.
+and polled, without restart after observation timeout. This turn PROGRESS: macOS reviewed source correction and independent68/68 proof
+integrated/pushed b5245fcc; exact owned Windows VM activated and independently
+read back. Mac owner now prepares the finite Expert09 native-control entrypoint
+source-only; no native allocation85, guardfalse. Linux policy2 preparation and
+Windows read-only guest preflight continue; no acceptance or budget reset.
 Goal active, no release acceptance.
 
 ## Selected macOS measurement graph package — allocated

@@ -1,0 +1,33 @@
+{
+  "results": [
+    {
+      "command": "domstate rhai-win11-quality",
+      "status": 0,
+      "stdout": "running\n\n",
+      "stderr": ""
+    },
+    {
+      "command": "domuuid rhai-win11-quality",
+      "status": 0,
+      "stdout": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19\n\n",
+      "stderr": ""
+    },
+    {
+      "command": "domdisplay rhai-win11-quality",
+      "status": 0,
+      "stdout": "vnc://127.0.0.1:0\n",
+      "stderr": ""
+    },
+    {
+      "command": "list --all",
+      "status": 0,
+      "stdout": " Id   Name                            State\n------------------------------------------------\n 1    rhai-win11-quality              running\n -    tauron-lane-wh-a-58a9dddac6c7   shut off\n\n",
+      "stderr": ""
+    }
+  ],
+  "desktop_sha256": "0ba70d24d9b6f1bd7ce13683ddf6dc4799dbfb8c729a16d9121e2a2f06afa446",
+  "desktop_bytes": 967801,
+  "independent_visual_readback": "Unlocked desktop; no visible PowerShell prompt",
+  "native_compiler_or_fixture_acceptance": false,
+  "get_consumption": "Unverified; no GET in current activation package"
+}
