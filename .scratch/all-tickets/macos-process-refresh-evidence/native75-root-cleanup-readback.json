@@ -1,0 +1,28 @@
+{
+  "native_invocation": 75,
+  "terminal_status": 1,
+  "known_pids": [
+    30197,
+    30206,
+    30207,
+    30232,
+    30763,
+    30764,
+    30765,
+    30766,
+    30767,
+    30770
+  ],
+  "checked_groups": [
+    30197,
+    30206,
+    30765
+  ],
+  "present_rows": [],
+  "runtime": "/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-x_el1ozb",
+  "runtime_present": false,
+  "restoration_manifests_match": true,
+  "cargo_seconds": 30.404,
+  "sampled_max_kib": 252224,
+  "coverage": "Known identities only; no continuous process or byte peak claim."
+}

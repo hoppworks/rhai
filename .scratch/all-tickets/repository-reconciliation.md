@@ -162,3 +162,11 @@ remain reachable from main. No remote refs in this batch.
 - `task/tcp-stream-reads`
 - `task/tcp-stream-writes`
 - `task/unsupported-feature-proof`
+
+## Executed first batch
+
+Fork main fast-forwarded461cf5ec→38c6f218 and exact remote readback matched.
+All17 listed local campaign refs were deleted with git branch -d after checking
+main ancestry and no attached worktree. No force or hook bypass; no remote branch
+or worktree deletion. Production process source remains unmerged pending native
+acceptance.28 local branches/20 worktrees remain; final main-only goal is open.

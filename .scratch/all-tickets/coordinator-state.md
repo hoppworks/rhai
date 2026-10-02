@@ -14,8 +14,12 @@ discarding foreign/dirty work. Fork fetch succeeded; main461cf5ec is an ancestor
 of this root branch. Root documentation/evidence and reviewed source-only drivers
 may fast-forward fork main; production process changes remain behind their native
 gates. Full branch/worktree and exact ancestry report is repository-reconciliation.md.
-Seventeen already-main-contained, unoccupied campaign task refs are listed there
-and shown to the user for authorized cleanup; no worktree or unmerged code deletion.
+Root source-only/evidence commits45826e83 and38c6f218 were pushed and fork main
+fast-forwarded461cf5ec→38c6f218, with exact remote readback. No production source
+entered main. All17 exact listed already-main-contained unoccupied campaign refs
+were deleted with ordinary git branch -d; no force, hook bypass or worktree write.
+Twenty worktrees and28 local branches remain, including active/foreign/dirty work;
+consolidation remains open until native gates and safe retirement finish.
 
 ## Current step and next action
 
@@ -37,8 +41,17 @@ restoration, owner21/public32 raw33 and retained boundary requirements. Root
 macOS driver now binds the same source/archive, owner21/public29 and two controls:
 real exit0→42 plus deletion of the supervisor provisional EPERM arm, preserving
 seam/regression and falling through to immediate error. Both restore six paths in
-finally. AST/zsh syntax/diff checks pass; bounded Worker review pending. No new
-Unix launch; invocation74/history remain, next75 allocated only on actual launch.
+finally. AST/zsh syntax/diff checks pass; bounded Worker review pending. Actual macOS invocation75 used attached session64000 and is terminal1. The
+real exit0→42 control passed intended101 at exact assertion; the new provisional
+EPERM control failed compilation with E0433: super::super::ProcessScope is absent.
+This unexecuted assertion is a test namespace setup defect, not a meaningful RED
+or failed behavioral correction. Root source review missed this name resolution.
+Responsible Unix context fixes only the public enum path and refreshes immutable
+source/driver. Owner21/public29 did not run. Both six-path restoration manifests
+match, all10 known PIDs/3 groups and exact runtime are absent on root readback.
+Original evidence LOytvN and native75-root-cleanup-readback.json retained. Cargo
+75=30.404s, sample252224KiB; known69–71+73–75 subtotal182.114s excludes72.
+Count75 consumed; next76 allocated only at actual coordinated launch.
 
 Windows sole owner froze source repair2580f04d and acceptance-stateb6c8219d,
 pushed only fork task/windows-scoped-runner-corrected; root independently confirms
