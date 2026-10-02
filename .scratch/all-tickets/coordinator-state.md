@@ -384,5 +384,9 @@ all5remainingtip ancestrychecks passed, remote refs deleted, lsremote onlymain.
 This continuationdeleted9remote taskrefs total (previouscleanup1), histories
 preserved. Foreign/localactiveworktrees untouched. RawCargooriginal logs retain
 trailing whitespace intentionally; source/docdiffcheckpasses, originalsunchanged.
-Windows finalsource review66d7 accepted shared30s passiveaccounting/guardedDispose;
-CRLFmarkerregex correction pendingownercommit, then directmainintegration.
+Windows source repair frozen7b9fd871/script79be868 passes rootfocusedreview,
+including CRLFregex and shared30s passiveaccounting/guardedDispose. Integrated
+and pushed forkmain86782c8c; exactlsremote confirmsonlymain. SoleWindowsowner
+continues nativehash/parser/sourcefixture package under existing1houtercaps;
+no newtaskremote refs, no realclientExpert lifetime renewal. NativeWindows gate
+remainsopen; repository remoteonlymain cleanup requirement isclosed.

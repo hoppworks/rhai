@@ -4,7 +4,8 @@ Fork: https://github.com/hoppworks/rhai.git
 
 The owner requested all fork development histories and changes consolidated into
 main, with main as the only remote branch. Fork main was pushed and independently
-read back at61edd5993a76bff68588476b7e1f4028f54da259. git ls-remote --heads origin
+read back after the Windows setup repair at
+86782c8ca04292f534c0a3cac13c5afd3fc637a0. git ls-remote --heads origin
 returned exactly one head: refs/heads/main. No public upstream write occurred.
 
 ## Preserved and removed remote branches
@@ -31,7 +32,8 @@ Unix production source matches the accepted native inputs: Linux80 restored owne
 controls, restored manifests and independent exact cleanup receipts. Five Windows
 real-client scaffolding checks passed; native Windows custody/fixtures/real-client
 acceptance remains open. Consolidation is not release acceptance. A source-only
-PowerShell setup repair is being integrated directly into main after review.
+PowerShell setup repair7b9fd871 was reviewed and integrated directly into main;
+its native hash/parser/fixture checks continue separately.
 
 Future campaign commits publish to fork main through coordinator integration;
 remote task branches must not be recreated. Local isolated worktrees remain while
