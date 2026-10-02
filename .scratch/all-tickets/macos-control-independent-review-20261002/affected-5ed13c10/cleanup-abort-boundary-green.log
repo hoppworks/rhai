@@ -1,0 +1,6 @@
+test_real_aborted_observer_cannot_produce_kill_action (__main__.IndependentBoundary) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 0.003s
+
+OK

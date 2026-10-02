@@ -1,0 +1,11 @@
+test_real_stopped_observer_propagates_validated_host_status (cleanup_tests.EnvironmentTests) ... ok
+test_aborted_capture_receipt_never_reaches_native_readiness_callback (cleanup_tests.EnvironmentTests) ... ok
+test_failure_invalidates_capture_receipt_before_endpoint_teardown (cleanup_tests.EnvironmentTests) ... ok
+test_managed_fixture_exit_between_fresh_check_and_post_kill_readback_fails (cleanup_tests.EnvironmentTests) ... ok
+test_control_finalization_requires_recorded_readiness_action_and_full_readback (cleanup_tests.EnvironmentTests) ... ok
+test_real_aborted_observer_cannot_produce_kill_action (__main__.IndependentBoundary) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.010s
+
+OK

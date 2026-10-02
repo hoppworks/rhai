@@ -86,7 +86,7 @@ Current authoritative history through this rewrite is Git commit
 10d4a0d55400ebe8c24feff134e7161ff36bf8d5, this same state path. It retains
 all earlier cause/attempt/resource/source applicability records. Read that
 history for consumed work, not superseded next actions. No reset occurred.
-Last independently read-back fork mainad833184; only remote main, lowercase
+Last independently read-back fork mainef1a8d62; only remote main, lowercase
 human author/committer. Goal active and incomplete.
 
 ### Accepted current Linux non-process package
@@ -168,8 +168,10 @@ pure tests pass. SAME reviewer macos_finite_control_review dispatched on new fre
 including actual error/STOP/invalidationfailure boundaries; no native acceptance.
 Reviewer decisive checkpoint: original stopped observer regression passes, aborted
 observer cannot KILL; STOP before invalidation retains incomplete endpoints, after
-invalidation sees aborted. No material affected source blocker, terminal report
-being frozen (not yet retained). Owner preparing existing four one-attempt control
+invalidation sees aborted. Terminal SAME affected report independently read back and ten exact originals
+retained once at macos-control-independent-review-20261002/affected-5ed13c10/.
+Both outstanding manifestations source CLOSED, no residual material finding.
+Owner preparing existing four one-attempt control
 commands/stage/scopes/pins/cleanup under SAME Expert09, no control allocation or
 native dispatch. Darwin heavy run precedes Mac controls when foreign slot clears.
 Production/measurement/fixtures and historical failures retained. Foreign tracked

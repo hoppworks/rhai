@@ -1,0 +1,224 @@
+diff --git a/.scratch/all-tickets/macos-managed-capture-overlay/unix.rs b/.scratch/all-tickets/macos-managed-capture-overlay/unix.rs
+index 302e09e9..7c5d5d1a 100644
+--- a/.scratch/all-tickets/macos-managed-capture-overlay/unix.rs
++++ b/.scratch/all-tickets/macos-managed-capture-overlay/unix.rs
+@@ -2395,10 +2395,43 @@ fn publish_capture_progress(
+     let next_generation = generation.checked_add(1).ok_or_else(|| {
+         io::Error::new(io::ErrorKind::Other, "capture progress generation overflow")
+     })?;
+-    let temporary = path.with_extension(format!("capture-{pid}-{next_generation}.tmp"));
+     let body = format!(
+         "{{\"schema\":1,\"stage\":\"capturing\",\"generation\":{},\"host_pid\":{},\"fixture_pid\":{},\"stdout_bytes_read\":{},\"stderr_bytes_read\":{}}}\n",
+         next_generation, std::process::id(), pid, stdout.len(), stderr.len());
++    replace_capture_progress(&path, pid, next_generation, &body)?;
++    *generation = next_generation;
++    Ok(())
++}
++
++#[cfg(feature = "sys-process-capture-observer")]
++fn invalidate_capture_progress(pid: u32, stdout: &[u8], stderr: &[u8]) -> io::Result<()> {
++    let Some(path) = std::env::var_os("RHAI_SYS_PROCESS_CAPTURE_PROGRESS") else {
++        return Err(io::Error::new(
++            io::ErrorKind::NotFound,
++            "private capture progress path is required for invalidation",
++        ));
++    };
++    let path = std::path::PathBuf::from(path);
++    if !path.is_absolute() {
++        return Err(io::Error::new(
++            io::ErrorKind::InvalidInput,
++            "private capture progress path must be absolute",
++        ));
++    }
++    let body = format!(
++        "{{\"schema\":1,\"stage\":\"aborted\",\"generation\":0,\"host_pid\":{},\"fixture_pid\":{},\"stdout_bytes_read\":{},\"stderr_bytes_read\":{}}}\n",
++        std::process::id(), pid, stdout.len(), stderr.len());
++    replace_capture_progress(&path, pid, 0, &body)
++}
++
++#[cfg(feature = "sys-process-capture-observer")]
++fn replace_capture_progress(
++    path: &std::path::Path,
++    pid: u32,
++    generation: u64,
++    body: &str,
++) -> io::Result<()> {
++    let temporary = path.with_extension(format!("capture-{pid}-{generation}.tmp"));
+     let result = (|| {
+         let mut file = std::fs::OpenOptions::new()
+             .write(true)
+@@ -2407,14 +2440,13 @@ fn publish_capture_progress(
+         file.write_all(body.as_bytes())?;
+         file.sync_all()?;
+         drop(file);
+-        std::fs::rename(&temporary, &path)
++        std::fs::rename(&temporary, path)
+     })();
+     if result.is_err() {
+         let _ = std::fs::remove_file(&temporary);
+         return result;
+     }
+-    *generation = next_generation;
+-    Ok(())
++    result
+ }
+ 
+ const READ_BUDGET: usize = 64 * 1024;
+@@ -2976,6 +3008,17 @@ fn fail(
+     mut identity_lost: bool,
+     cleanup_deadline: Option<Instant>,
+ ) -> Result<ProcessReport, (ProcessCause, ProcessReport)> {
++    #[cfg(feature = "sys-process-capture-observer")]
++    if std::env::var_os("RHAI_SYS_PROCESS_CAPTURE_PROGRESS").is_some() {
++        let Some(pid) = driver.child.as_ref().map(OsChild::id) else {
++            std::process::exit(1);
++        };
++        if invalidate_capture_progress(pid, &out, &err).is_err() {
++            // Do not close capture endpoints while an old `capturing` receipt can
++            // still authorize interruption. Immediate process exit is fail-closed.
++            std::process::exit(1);
++        }
++    }
+     // Stop every pipe operation before signaling or observing cleanup. No caller-side I/O
+     // endpoint remains active once this execution commits to its primary failure.
+     stdin.take();
+diff --git a/.scratch/all-tickets/macos-process-overhead.py b/.scratch/all-tickets/macos-process-overhead.py
+index c9d21521..17cdbfdd 100644
+--- a/.scratch/all-tickets/macos-process-overhead.py
++++ b/.scratch/all-tickets/macos-process-overhead.py
+@@ -19,7 +19,7 @@ LOCK_SHA='8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa'
+ OVERLAYS=['Cargo.toml','src/packages/sys/config.rs','src/packages/sys/mod.rs','src/packages/sys/process.rs','src/packages/sys/process/unix.rs','tests/sys_process.rs']
+ MANAGED_OBSERVER_OVERLAY_SHA256={
+     'Cargo.toml':('Cargo.toml','4e8b305d4fd30889adbb2e1c03d6461a6c3efd58ad5ac55327c2f3523c584579'),
+-    'unix.rs':('src/packages/sys/process/unix.rs','9cbaf28323e7bf3f8c25df8ce3a6eba7cf4102aa09b4ef5b9edb0c3f736a2be2'),
++    'unix.rs':('src/packages/sys/process/unix.rs','9f6b3612de139295b473a8070cc9ed16f3d744eee140f97b0baecf1db287a8e0'),
+ }
+ MANAGED_OBSERVER_BASE_SHA256={
+     'Cargo.toml':'bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec',
+diff --git a/.scratch/all-tickets/run-macos-process-overhead-scoped.py b/.scratch/all-tickets/run-macos-process-overhead-scoped.py
+index 67654ab0..9a51a732 100644
+--- a/.scratch/all-tickets/run-macos-process-overhead-scoped.py
++++ b/.scratch/all-tickets/run-macos-process-overhead-scoped.py
+@@ -218,6 +218,7 @@ def validate_managed_snapshot(rows, gate_pid, anchor_pid, host_pid, fixture_pid,
+     result = {'gate': host_identity, 'anchor': {key: anchor[key] for key in
+             ('pid', 'start_seconds', 'start_microseconds')},
+             'managed_host': host_identity, 'fixture': fixture_identity,
++            'managed_host_status': host.get('status'),
+             'evidence': {'managed_host_live': True, 'fixture_live': True,
+                 # The frozen fixture writes child-ready before starting exactly
+                 # two blocking writers. Four tasks are necessary but do not
+@@ -519,7 +520,9 @@ def observe_managed_case_ready(custody, argv, gate, anchor, client_proc, deadlin
+         fixture_pid = int(fields[0].split('=', 1)[1])
+     except ValueError:
+         return None
+-    if (type(progress) is not dict or progress.get('host_pid') != ready['host_pid']
++    if (type(progress) is not dict or progress.get('stage') != 'capturing'
++            or type(progress.get('generation')) is not int or progress['generation'] <= 0
++            or progress.get('host_pid') != ready['host_pid']
+             or progress.get('fixture_pid') != fixture_pid):
+         return None
+     reader = custody._adapter_process_reader
+@@ -543,8 +546,8 @@ def observe_managed_case_ready(custody, argv, gate, anchor, client_proc, deadlin
+         {key: slots[key] for key in ('client', 'gate', 'anchor', 'managed_host', 'fixture')},
+         slots['evidence'])
+     if require_stopped:
+-        host = slots['managed_host']
+-        if host.get('status') != DARWIN_SSTOP:
++        host_status = slots.get('managed_host_status')
++        if host_status != DARWIN_SSTOP:
+             raise ValueError('Managed host stop was not visible in both final censuses')
+         event['stop_proof'] = {
+             'host_status': DARWIN_SSTOP,
+diff --git a/.scratch/all-tickets/test-macos-process-overhead-source.py b/.scratch/all-tickets/test-macos-process-overhead-source.py
+index 9614afe9..72504cd7 100644
+--- a/.scratch/all-tickets/test-macos-process-overhead-source.py
++++ b/.scratch/all-tickets/test-macos-process-overhead-source.py
+@@ -40,6 +40,76 @@ READER_SPEC.loader.exec_module(reader_module)
+ 
+ 
+ class EnvironmentTests(unittest.TestCase):
++    def _managed_observer_fixture(self, root, stage='capturing'):
++        host_path = root/'target/debug/examples/macos-managed-capture-companion'
++        fixture_path = root/'target/debug/deps/sys_process-frozen'
++        fixture_path.parent.mkdir(parents=True, exist_ok=True)
++        fixture_path.touch()
++        ready_path, record_path, complete_path, progress_path = [root/name for name in
++            ('managed-host-ready.json', 'managed-fixture.record',
++             'managed-host-complete', 'managed-capture-progress.json')]
++        ready_path.write_text(json.dumps({'schema': 1, 'host_pid': 101,
++            'stage': 'managed-run-entering'}), encoding='utf-8')
++        record_path.write_text('child-pid=103 child-ready=1\n', encoding='ascii')
++        progress_path.write_text(json.dumps({'schema': 1, 'stage': stage,
++            'generation': 2, 'host_pid': 101, 'fixture_pid': 103,
++            'stdout_bytes_read': 100, 'stderr_bytes_read': 100}), encoding='utf-8')
++        def row(pid, ppid, pgid, path, status=3, thread_count=1):
++            return {'pid': pid, 'ppid': ppid, 'pgid': pgid, 'path': str(path),
++                'status': status, 'start_seconds': 1, 'start_microseconds': pid,
++                'thread_count': thread_count}
++        rows = [row(101, os.getpid(), 101, host_path, custodian.DARWIN_SSTOP),
++            row(102, os.getpid(), 101, sys.executable),
++            row(103, 101, 103, fixture_path, thread_count=4),
++            row(90, os.getpid(), 90, sys.executable)]
++        class Reader:
++            def complete_listing(self, _deadline):
++                return rows
++        class Custody:
++            _adapter_process_reader = Reader()
++            @staticmethod
++            def descendants(_by_pid, _pid):
++                return [rows[1], rows[2]]
++        gate = type('Gate', (), {'pid': 101})()
++        anchor = type('Anchor', (), {'pid': 102})()
++        client = type('Client', (), {'pid': 90})()
++        argv = [str(host_path), str(fixture_path), str(ready_path), str(record_path),
++            str(complete_path), str(progress_path)]
++        return Custody(), argv, gate, anchor, client
++
++    def test_real_stopped_observer_propagates_validated_host_status(self):
++        with tempfile.TemporaryDirectory() as directory:
++            custody, argv, gate, anchor, client = self._managed_observer_fixture(
++                Path(directory).resolve())
++            with patch.object(custodian, 'merge_observed_identities'):
++                event = custodian.observe_managed_case_ready(custody, argv, gate, anchor,
++                    client, time.monotonic() + 2, Path(directory).resolve(),
++                    require_stopped=True)
++            self.assertEqual(event['stop_proof']['host_status'], custodian.DARWIN_SSTOP)
++
++    def test_aborted_capture_receipt_never_reaches_native_readiness_callback(self):
++        with tempfile.TemporaryDirectory() as directory:
++            custody, argv, gate, anchor, client = self._managed_observer_fixture(
++                Path(directory).resolve(), stage='aborted')
++            with patch.object(custody._adapter_process_reader, 'complete_listing',
++                    side_effect=AssertionError('aborted receipt reached native census')):
++                event = custodian.observe_managed_case_ready(custody, argv, gate, anchor,
++                    client, time.monotonic() + 2, Path(directory).resolve(),
++                    require_stopped=True)
++            self.assertIsNone(event)
++
++    def test_failure_invalidates_capture_receipt_before_endpoint_teardown(self):
++        rust = SOURCE.with_name('macos-managed-capture-overlay').joinpath('unix.rs').read_text(
++            encoding='utf-8')
++        fail_start = rust.index('\nfn fail(')
++        fail = rust[fail_start:rust.index('\n#[cfg(test)]', fail_start)]
++        self.assertLess(fail.index('invalidate_capture_progress'), fail.index('stdin.take()'))
++        self.assertLess(fail.index('std::process::exit(1)'), fail.index('stdin.take()'))
++        invalidator_start = rust.index('fn invalidate_capture_progress(')
++        invalidator = rust[invalidator_start:rust.index('const READ_BUDGET')]
++        self.assertIn(r'\"stage\":\"aborted\"', invalidator)
++        self.assertIn('std::fs::rename', invalidator)
++
+     def test_cargo_measurement_and_control_commands_are_locked(self):
+         self.assertEqual(
+             module.measurement_cargo_argv(),
+@@ -734,9 +804,10 @@ class EnvironmentTests(unittest.TestCase):
+         self.assertIn("is_absolute()", publisher)
+         self.assertIn("generation.checked_add(1)", publisher)
+         self.assertIn("file.sync_all()?", publisher)
+-        self.assertIn("std::fs::rename(&temporary, &path)", publisher)
+         self.assertIn("return result;", publisher)
+         self.assertNotIn("return Ok(())", publisher)
++        replacer = rust[rust.index("fn replace_capture_progress("):rust.index("const READ_BUDGET")]
++        self.assertIn("std::fs::rename(&temporary, path)", replacer)
+ 
+     def test_owned_command_refreshes_managed_observation_at_action_time(self):
+         class Child:

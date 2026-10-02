@@ -1,0 +1,48 @@
+{
+  "revision": "5ed13c10a341250755372bf03445f0b597294848",
+  "review": "same affected independent review source accepted",
+  "closed": "both finding4 manifestations; findings1-3 and paired64KiB bound retained",
+  "native_acceptance": false,
+  "originals": [
+    {
+      "file": "affected-recheck-5ed13c10.md",
+      "sha256": "f7b902d4495e1c8f1967a3b4a7ef5adf009026f0efcb7affa527382d3fd94ddf"
+    },
+    {
+      "file": "cleanup-correction-ocr-preview.json",
+      "sha256": "7f3b48c6ab2d5fc772da7060e468f08d05305dddffb5a6ffe852ba8dd3add5c9"
+    },
+    {
+      "file": "cleanup-correction-ocr-rules.json",
+      "sha256": "845503b5e50a56ea07da783d7570fe8dafa6edf5e7d581d58136617dd35486bd"
+    },
+    {
+      "file": "cleanup-correction-coverage.json",
+      "sha256": "99d3e7b7ae57fde382e0300348d13012e725ed0f3dfd94f79462a6537076fccd"
+    },
+    {
+      "file": "cleanup-correction.diff",
+      "sha256": "738a3de8766e4b0ec1322e6ecc12e356e6884d07beab7c59890d9c4daa5bb576"
+    },
+    {
+      "file": "test_cleanup_correction_original_observer.py",
+      "sha256": "77e278ef292e09b9a529a5b00f5f8ef6dbfd25feaddb00d91fd8a970c94cb9c9"
+    },
+    {
+      "file": "cleanup-original-observer-green.log",
+      "sha256": "a626407facf1102b512cc38f00f6e7d889aa6280a5c03d1722ac6d1c4eb08dc5"
+    },
+    {
+      "file": "cleanup-correction-focused-green.log",
+      "sha256": "a1e90fb4a5acbf3ee67a3f76505dae6ca337b88f0bdcb343e63cfc270aca3356"
+    },
+    {
+      "file": "test_cleanup_correction_abort_boundary.py",
+      "sha256": "efada3d04ba180e79e9d9e49775647e7029569e0dc8a1c679f71be023782a360"
+    },
+    {
+      "file": "cleanup-abort-boundary-green.log",
+      "sha256": "7ad147eafea61edef103c0e85d2f0b9cc11de30ae7d41f7aecfcec2c753f96f1"
+    }
+  ]
+}
