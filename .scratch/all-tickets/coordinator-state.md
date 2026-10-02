@@ -86,7 +86,7 @@ Current authoritative history through this rewrite is Git commit
 10d4a0d55400ebe8c24feff134e7161ff36bf8d5, this same state path. It retains
 all earlier cause/attempt/resource/source applicability records. Read that
 history for consumed work, not superseded next actions. No reset occurred.
-Last independently read-back fork main8e0edeec187470064ce7344d89f36459a951f5ff; only remote main, lowercase
+Last independently read-back fork maine8b2d09b81af40fc682263b0da7bd4f0eb655f3c; only remote main, lowercase
 human author/committer. Goal active and incomplete.
 
 ### Accepted current Linux non-process package
@@ -269,7 +269,21 @@ under slice .scratch/process-unix-run/shared-child-cleanup-review*. No descendan
 heavy build or native launch. Review includes panic receipt authenticity,
 expected-failure test unexpectedly succeeding, production reaper lifetime,
 forced controller death, changed watchdog and earlier constant/output fixes.
-Collect the same live handle; do not restart for an observation timeout.
+Review72842 now TERMINAL0, full CLI output retained at
+shared-child-cleanup-review-summary.md (read-only reviewer could not create the
+separate requested report; -o preserved full findings). Root read actual report.
+Loaded958revision confirmed,5/5direct coverage; OCR preview failed on sandbox-
+denied Apple Git cache diagnostics, rules not obtained, direct diff inspection
+continued. SOURCE disposition changes required: expected-panic accepts success/
+unrelated panic, guard misses late PID publication, note misstates outer receipt
+provenance. First cleanup source correction rejected; count1 under this fixture
+cause, not a native failure or another Expert09 chain. Production worker retained
+Child supports catch_unwind; forced controller/hard-runner custody still open.
+24s is a polling deadline, not whole-fixture bound (blocked-input has separate
+18s waits plus read); do not extend external caps. Actual next related fix batch
+launched configured Standard CLI55591 workspace-write, exact brief/output/log
+shared-child-cleanup-fix-*. Source-only, no descendants/Cargo/native/push,
+30min checkpoint,3findings grouped. Collect same live handle then affected review.
 
 Mac source owner reports92/92 pure checks, configured Python3.12 wrapper and
 project-local direct-child runner source changes; checking timeout/exception
@@ -281,8 +295,13 @@ No heavy Mac run/control allocation; prepared Darwin stage waits actual slot.
 Windows single fixture invocation remains terminal at first production-compiler
 failure. Latest owner screenshot logs-result.png shows nested control PID4324/
 child5380 and preserved injected setup exception; root independently viewed the original frame and confirms this narrow log
-content at a clean prompt. It does not prove final PID/job absence. Compiler
-error text is still not exposed. Owner proceeds
+content at a clean prompt. It does not prove final PID/job absence. Compiler-filter-result.png independently viewed by root: stdout2817bytes,
+stderr0; setup-parent441/childstdout93/childstderr0/controlstdout118/
+controlstderr0/controlmarker211bytes, error|failed filter matched no compiler
+lines. Thus stopped-at-compile is established but a compiler error is not yet
+proved. SAME owner closure/executable query46147 is live typing; PIDs3192/4324/
+5380 and build/ScopedRunner.exe existence/size will distinguish wrapper failure
+from compiler failure. No rerun; original screenshots remain at exact owner path. Owner proceeds
 with one narrow read-only log filter and exact filenames/sizes, plus independent
 PID/job closure; no rerun or budget reset. Previous first-fixture result and
 narrow setup-control output retained once at8e0edeec. Diagnose actual compiler
