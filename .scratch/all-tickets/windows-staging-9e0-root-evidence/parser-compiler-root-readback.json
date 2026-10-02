@@ -1,0 +1,26 @@
+{
+  "method": "independent visual readback of actual guest console result and echoed commands",
+  "parser_errors": 0,
+  "csharp_pins": 17,
+  "pin_mismatches": 0,
+  "script_sha256": "19c0309630eea86121d675c9457fc596e3b6cbf13bae555ad35e57037c555782",
+  "compiler_path": "C:\\BuildTools\\MSBuild\\Current\\Bin\\Roslyn\\csc.exe",
+  "compiler_length": 59720,
+  "compiler_sha256": "cf32c7b8e5691b962f1b6e92b03d87409dd9f7aebfd71c5bf778203cc56ee1",
+  "compiler_execution": false,
+  "native_acceptance": false,
+  "originals": [
+    {
+      "file": "parser-pins-result.png",
+      "sha256": "28bcfb08f767f3c3b4d91165ece3d258fd272bd01cac540c3dc56f8105e81f75"
+    },
+    {
+      "file": "parser-pins-final.png",
+      "sha256": "a6c709cfbca61644381dc01f98614e98c6574c832c155aab11022e1e4adce5ac"
+    },
+    {
+      "file": "roslyn-result.png",
+      "sha256": "29dc70d0c2278df9ec6de52edd54d5e3f3b3c9850a35f7eb157179f4909aef57"
+    }
+  ]
+}

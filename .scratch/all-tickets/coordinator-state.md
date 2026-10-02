@@ -86,7 +86,7 @@ Current authoritative history through this rewrite is Git commit
 10d4a0d55400ebe8c24feff134e7161ff36bf8d5, this same state path. It retains
 all earlier cause/attempt/resource/source applicability records. Read that
 history for consumed work, not superseded next actions. No reset occurred.
-Last independently read-back fork main10d4a0d5; only remote main, lowercase
+Last independently read-back fork main1faf604d; only remote main, lowercase
 human author/committer. Goal active and incomplete.
 
 ### Accepted current Linux non-process package
@@ -118,9 +118,14 @@ sys_fs/F19 diagnostic mapping, unresolved/conflict failclosed partial receipts,
 structural diagnostic isolation, status0 incomplete continuation and strict
 SESSION_ID2f795ece naming. Owner ten pure categoriesGREEN; RED/GREEN at
 current-darwin-sys-net-diagnostic-red.md/-green.stdout in owner worktree.
-SAME reviewer current_darwin_sys_net_review dispatched on this freeze, no broad
-redo/new cause11 chain. Await independent acceptance before source integration
-or native allocation. Production/source/lock unchanged; Linux proof retained.
+SAME reviewer current_darwin_sys_net_review ACCEPTED this affected source scope.
+Ten original review artifacts and root readback retained once in
+current-darwin-sys-net-source-review/affected-322ac6be/. Actual stderr F19 rejection,
+unresolved failclosed partial rows, main-loop continuation and strict naming
+independently verified source-only. Production/source/lock unchanged; Linux proof
+retained. Responsible owner preparing exact staged inputs, private toolchain,
+heavy-slot availability and scoped bounded command before coordinator allocation.
+Native Darwin acceptance remains pending; no native launch allocated yet.
 
 ### Mac process overhead/control preparation
 
@@ -145,12 +150,14 @@ Authorization reconciled with current human Autonomous workflow and standing
 acceptance of recommendations: earlier root no-third-patch note was internal,
 not human sourceattemptcap. Concrete boundclosure/new diagnoses justify continuing
 SAME Expert09 source-first follow-up at30min planningcheckpoint; no newpackage,
-chain or nativeallowance. Owner fixes statuspropagation and failclosed active-state
-protocol BEFORE endpointteardown, including invalidationfailure (CONTROL-only
-hostabort-beforeteardown may be simpler). Preserve production/measurement/fixture;
-actualcallback/error/STOP RED/GREEN and SAME affected review required. Stop on
-unsoundroute/repeatedfailure withoutprogress/hardcaps, no historyreset. Foreign
-tracked prerequisite deletion/untracked assets remain preserved.
+chain or nativeallowance. Owner follow-up frozen5ed13c10a341250755372bf03445f0b597294848: stopped status
+propagates into actual observer; aborted receipts rejected before native census;
+CONTROL fail() atomically invalidates capturing receipt before endpoint teardown,
+and exits before teardown if invalidation cannot be guaranteed. Focused3/full88
+pure tests pass. SAME reviewer macos_finite_control_review dispatched on new freeze,
+including actual error/STOP/invalidationfailure boundaries; no native acceptance.
+Production/measurement/fixtures and historical failures retained. Foreign tracked
+prerequisite deletion/untracked assets remain untouched.
 
 ### Windows private preparation
 
@@ -163,23 +170,27 @@ errors; no retry/overwrite. Correct failfast readonly archive/path/name audit
 24expected/24actual/0differences, ancestor noReparsePoint accepted by independent
 root visual readback. Follow-up whole source subtree directories/files reparse
 scan count0 cleanprompt independently accepted; originals/readbacks retained once
-windows-staging-9e0-root-evidence/. Script17C#pins/PS5.1parser/path controls and
-exactRoslyn compiler readback still pending. PS5.1ConsoleHost; no native compiler/
-bootstrap/job/client/sourcefixture before prerequisite acceptance. Old5fe4GET
-history and Expert02 nonrenewable limits retained. Current parser/pin keyboard
-session43606 confirmedlive649chars450ms/char, noEnter at checkpoint; do not restart
-on observationtimeout. Prior61556 helper terminal observed, no restart.
+windows-staging-9e0-root-evidence/. Script17C#pins all match, PS5.1parser0, scriptSHA19c030... verified by actual
+ConsoleHost result and independent root visual readback. Exact Roslyn file
+C:\BuildTools\MSBuild\Current\Bin\Roslyn\csc.exe59720bytes/SHAcf32... read only.
+Three actual console frames plus narrow parser-compiler-root-readback.json retained
+once in windows-staging-9e0-root-evidence/. Compiler execution still unperformed.
+Old5fe4GET/history and Expert02 nonrenewable limits retained. Responsible soleowner
+continues already authorized single bounded source-fixture invocation after fresh
+exact RunRoot/path/storage/slot/pin checks. Outer1h and existing job/process timers
+unchanged; no installs, real client or production-native acceptance authorized by
+these source prerequisites. Keyboard43606 terminal confirmed; no restart.
 
 ### Next actions and turn classification
 
-Collect Darwin322ac6 affected result; collect next Mac status/error-state source
-freeze and SAME affected result; finish Windows readonly prerequisites. Only
-then allocate applicable native runs within original caps, oneheavy/Machine,
-central unique owned scope/TMPDIR/AGENT_RUNTIME_DIR, no foreign disruption.
-Previous goalturn PROGRESS (Windows treeacceptance); currentPROGRESS: Mac numerical
-bound independently source-closed and two original defects retained, responsible
-repair continued under reconciled authority; Darwin next immutablefreeze obtained
-and same affected review dispatched. No new native acceptance or completion claim.
+Collect Mac5ed13 affected result; Darwin owner prepares exact native dispatch;
+Windows owner proceeds to existing bounded source-fixture execution after fresh
+preflight. Allocate actual Darwin native run only after exact source/helper/lock/
+contract/toolchain/slot/runtime checks. Preserve all caps and no foreign disruption.
+Previous status turn: PROGRESS, new independent Darwin terminal acceptance and
+Windows parser/pin/compiler-file evidence changed next actions. Current PROGRESS:
+root retained/read back exact originals, dispatched SAME affected Mac review and
+advanced responsible Windows/Darwin owners. No new native acceptance or completion.
 
 ## Resources, counts and cause history
 Unix actual native invocation count84 consumed.82 failed before runtime;

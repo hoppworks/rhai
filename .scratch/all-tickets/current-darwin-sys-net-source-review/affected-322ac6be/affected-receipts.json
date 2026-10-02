@@ -1,0 +1,1069 @@
+{
+  "revision": "322ac6be2a46191242d3982c3b4e2f2f62cd9425",
+  "native_launches": 0,
+  "source_categories": [
+    "pins_and_nine_rows=PASS",
+    "named_assertion_red_and_incidental_101_rejection=PASS",
+    "darwin_early_return_named_coverage_and_summary_integrity=PASS",
+    "cleanup_unknown_and_reparented_process=PASS",
+    "cleanup_owned_group_membership=PASS",
+    "distinct_darwin_alias_fixture_and_receipts=PASS",
+    "scope_and_cleanup_contract=PASS",
+    "split_stream_derived_target_order_and_malformed_cases=PASS",
+    "stderr_diagnostic_frozen_producer_association_and_fail_closed=PASS",
+    "strict_source_named_stage_and_scope=PASS"
+  ],
+  "original_stream_paths": [
+    "/tmp/current-darwin-sys-net-second-recheck.6h16fg12/eilseq-model.stdout",
+    "/tmp/current-darwin-sys-net-second-recheck.6h16fg12/eilseq-model.stderr"
+  ],
+  "original_actual_stderr_case": {
+    "label": "derived target order from stderr headers and successive stdout blocks",
+    "target_order": [
+      "net_reads",
+      "sys_fs"
+    ],
+    "parser_input": "--- derived target order from stderr headers and successive stdout blocks; this is not captured cross-stream chronology ---\n     Running tests/net_reads.rs (derived target order)\nrunning 1 test\ntest net_read ... ok\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n     Running tests/sys_fs.rs (derived target order)\nrunning 2 tests\ntest filesystem_read ... ok\ntest test_non_utf8_file_name ... ok\ntest result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n--- stderr diagnostics outside target headers ---\nfilesystem rejects non-UTF-8 fixture with EILSEQ: Illegal byte sequence (os error 92)\n",
+    "coverage": {
+      "target_results": [
+        {
+          "target": "sys_fs",
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered_out": 0,
+          "summary_count": 1,
+          "expected_tests": [
+            "filesystem_read",
+            "test_non_utf8_file_name"
+          ],
+          "observed_tests": [
+            "filesystem_read",
+            "test_non_utf8_file_name"
+          ],
+          "test_outcomes": {
+            "filesystem_read": "ok",
+            "test_non_utf8_file_name": "ok"
+          },
+          "provisional_completed_named_tests": [
+            "filesystem_read"
+          ],
+          "completion_certified": true,
+          "completed_named_tests": [
+            "filesystem_read"
+          ],
+          "uncovered_named_tests": [
+            "test_non_utf8_file_name"
+          ]
+        },
+        {
+          "target": "net_reads",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered_out": 0,
+          "summary_count": 1,
+          "expected_tests": [
+            "net_read"
+          ],
+          "observed_tests": [
+            "net_read"
+          ],
+          "test_outcomes": {
+            "net_read": "ok"
+          },
+          "provisional_completed_named_tests": [
+            "net_read"
+          ],
+          "completion_certified": true,
+          "completed_named_tests": [
+            "net_read"
+          ],
+          "uncovered_named_tests": []
+        }
+      ],
+      "expected_targets": [
+        "sys_fs",
+        "net_reads"
+      ],
+      "all_selected_targets_ran_once": true,
+      "all_tests_passed_without_ignored_or_filtered": false,
+      "ignored_tests": [],
+      "skipped_tests": [
+        {
+          "target": "sys_fs",
+          "test": "test_non_utf8_file_name",
+          "reason": "Darwin EILSEQ rejected fixture; producer returned early",
+          "occurrence_count": 1,
+          "occurrences": [
+            {
+              "stream": "stderr",
+              "line_number": 3,
+              "text": "filesystem rejects non-UTF-8 fixture with EILSEQ: Illegal byte sequence (os error 92)"
+            }
+          ]
+        }
+      ],
+      "unresolved_diagnostics": [],
+      "named_test_coverage_found": false,
+      "coverage_found": false
+    }
+  },
+  "clean_diagnostic_lookalikes": {
+    "label": "derived target order from stderr headers and successive stdout blocks",
+    "target_order": [
+      "net_reads",
+      "sys_fs"
+    ],
+    "parser_input": "--- derived target order from stderr headers and successive stdout blocks; this is not captured cross-stream chronology ---\n     Running tests/net_reads.rs (derived target order)\nrunning 1 test\ntest net_read ... ok\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n     Running tests/sys_fs.rs (derived target order)\nrunning 2 tests\ntest filesystem_read ... ok\ntest test_non_utf8_file_name ... ok\ntest result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n--- stderr diagnostics outside target headers ---\nwarning: retained warning\ntest injected ... ok\ntest result: ok. 100 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n",
+    "coverage": {
+      "target_results": [
+        {
+          "target": "sys_fs",
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered_out": 0,
+          "summary_count": 1,
+          "expected_tests": [
+            "filesystem_read",
+            "test_non_utf8_file_name"
+          ],
+          "observed_tests": [
+            "filesystem_read",
+            "test_non_utf8_file_name"
+          ],
+          "test_outcomes": {
+            "filesystem_read": "ok",
+            "test_non_utf8_file_name": "ok"
+          },
+          "provisional_completed_named_tests": [
+            "filesystem_read",
+            "test_non_utf8_file_name"
+          ],
+          "completion_certified": true,
+          "completed_named_tests": [
+            "filesystem_read",
+            "test_non_utf8_file_name"
+          ],
+          "uncovered_named_tests": []
+        },
+        {
+          "target": "net_reads",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered_out": 0,
+          "summary_count": 1,
+          "expected_tests": [
+            "net_read"
+          ],
+          "observed_tests": [
+            "net_read"
+          ],
+          "test_outcomes": {
+            "net_read": "ok"
+          },
+          "provisional_completed_named_tests": [
+            "net_read"
+          ],
+          "completion_certified": true,
+          "completed_named_tests": [
+            "net_read"
+          ],
+          "uncovered_named_tests": []
+        }
+      ],
+      "expected_targets": [
+        "sys_fs",
+        "net_reads"
+      ],
+      "all_selected_targets_ran_once": true,
+      "all_tests_passed_without_ignored_or_filtered": true,
+      "ignored_tests": [],
+      "skipped_tests": [],
+      "unresolved_diagnostics": [],
+      "named_test_coverage_found": true,
+      "coverage_found": true
+    }
+  },
+  "position_and_duplicate_cases": {
+    "before-headers": {
+      "target_results": [
+        {
+          "target": "sys_fs",
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered_out": 0,
+          "summary_count": 1,
+          "expected_tests": [
+            "filesystem_read",
+            "test_non_utf8_file_name"
+          ],
+          "observed_tests": [
+            "filesystem_read",
+            "test_non_utf8_file_name"
+          ],
+          "test_outcomes": {
+            "filesystem_read": "ok",
+            "test_non_utf8_file_name": "ok"
+          },
+          "provisional_completed_named_tests": [
+            "filesystem_read"
+          ],
+          "completion_certified": true,
+          "completed_named_tests": [
+            "filesystem_read"
+          ],
+          "uncovered_named_tests": [
+            "test_non_utf8_file_name"
+          ]
+        },
+        {
+          "target": "net_reads",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered_out": 0,
+          "summary_count": 1,
+          "expected_tests": [
+            "net_read"
+          ],
+          "observed_tests": [
+            "net_read"
+          ],
+          "test_outcomes": {
+            "net_read": "ok"
+          },
+          "provisional_completed_named_tests": [
+            "net_read"
+          ],
+          "completion_certified": true,
+          "completed_named_tests": [
+            "net_read"
+          ],
+          "uncovered_named_tests": []
+        }
+      ],
+      "expected_targets": [
+        "sys_fs",
+        "net_reads"
+      ],
+      "all_selected_targets_ran_once": true,
+      "all_tests_passed_without_ignored_or_filtered": false,
+      "ignored_tests": [],
+      "skipped_tests": [
+        {
+          "target": "sys_fs",
+          "test": "test_non_utf8_file_name",
+          "reason": "Darwin EILSEQ rejected fixture; producer returned early",
+          "occurrence_count": 1,
+          "occurrences": [
+            {
+              "stream": "stderr",
+              "line_number": 1,
+              "text": "filesystem rejects non-UTF-8 fixture with EILSEQ: Illegal byte sequence (os error 92)"
+            }
+          ]
+        }
+      ],
+      "unresolved_diagnostics": [],
+      "named_test_coverage_found": false,
+      "coverage_found": false
+    },
+    "between-headers": {
+      "target_results": [
+        {
+          "target": "sys_fs",
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered_out": 0,
+          "summary_count": 1,
+          "expected_tests": [
+            "filesystem_read",
+            "test_non_utf8_file_name"
+          ],
+          "observed_tests": [
+            "filesystem_read",
+            "test_non_utf8_file_name"
+          ],
+          "test_outcomes": {
+            "filesystem_read": "ok",
+            "test_non_utf8_file_name": "ok"
+          },
+          "provisional_completed_named_tests": [
+            "filesystem_read"
+          ],
+          "completion_certified": true,
+          "completed_named_tests": [
+            "filesystem_read"
+          ],
+          "uncovered_named_tests": [
+            "test_non_utf8_file_name"
+          ]
+        },
+        {
+          "target": "net_reads",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered_out": 0,
+          "summary_count": 1,
+          "expected_tests": [
+            "net_read"
+          ],
+          "observed_tests": [
+            "net_read"
+          ],
+          "test_outcomes": {
+            "net_read": "ok"
+          },
+          "provisional_completed_named_tests": [
+            "net_read"
+          ],
+          "completion_certified": true,
+          "completed_named_tests": [
+            "net_read"
+          ],
+          "uncovered_named_tests": []
+        }
+      ],
+      "expected_targets": [
+        "sys_fs",
+        "net_reads"
+      ],
+      "all_selected_targets_ran_once": true,
+      "all_tests_passed_without_ignored_or_filtered": false,
+      "ignored_tests": [],
+      "skipped_tests": [
+        {
+          "target": "sys_fs",
+          "test": "test_non_utf8_file_name",
+          "reason": "Darwin EILSEQ rejected fixture; producer returned early",
+          "occurrence_count": 1,
+          "occurrences": [
+            {
+              "stream": "stderr",
+              "line_number": 2,
+              "text": "filesystem rejects non-UTF-8 fixture with EILSEQ: Illegal byte sequence (os error 92)"
+            }
+          ]
+        }
+      ],
+      "unresolved_diagnostics": [],
+      "named_test_coverage_found": false,
+      "coverage_found": false
+    },
+    "after-headers": {
+      "target_results": [
+        {
+          "target": "sys_fs",
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered_out": 0,
+          "summary_count": 1,
+          "expected_tests": [
+            "filesystem_read",
+            "test_non_utf8_file_name"
+          ],
+          "observed_tests": [
+            "filesystem_read",
+            "test_non_utf8_file_name"
+          ],
+          "test_outcomes": {
+            "filesystem_read": "ok",
+            "test_non_utf8_file_name": "ok"
+          },
+          "provisional_completed_named_tests": [
+            "filesystem_read"
+          ],
+          "completion_certified": true,
+          "completed_named_tests": [
+            "filesystem_read"
+          ],
+          "uncovered_named_tests": [
+            "test_non_utf8_file_name"
+          ]
+        },
+        {
+          "target": "net_reads",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered_out": 0,
+          "summary_count": 1,
+          "expected_tests": [
+            "net_read"
+          ],
+          "observed_tests": [
+            "net_read"
+          ],
+          "test_outcomes": {
+            "net_read": "ok"
+          },
+          "provisional_completed_named_tests": [
+            "net_read"
+          ],
+          "completion_certified": true,
+          "completed_named_tests": [
+            "net_read"
+          ],
+          "uncovered_named_tests": []
+        }
+      ],
+      "expected_targets": [
+        "sys_fs",
+        "net_reads"
+      ],
+      "all_selected_targets_ran_once": true,
+      "all_tests_passed_without_ignored_or_filtered": false,
+      "ignored_tests": [],
+      "skipped_tests": [
+        {
+          "target": "sys_fs",
+          "test": "test_non_utf8_file_name",
+          "reason": "Darwin EILSEQ rejected fixture; producer returned early",
+          "occurrence_count": 1,
+          "occurrences": [
+            {
+              "stream": "stderr",
+              "line_number": 3,
+              "text": "filesystem rejects non-UTF-8 fixture with EILSEQ: Illegal byte sequence (os error 92)"
+            }
+          ]
+        }
+      ],
+      "unresolved_diagnostics": [],
+      "named_test_coverage_found": false,
+      "coverage_found": false
+    },
+    "duplicate": {
+      "target_results": [
+        {
+          "target": "sys_fs",
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered_out": 0,
+          "summary_count": 1,
+          "expected_tests": [
+            "filesystem_read",
+            "test_non_utf8_file_name"
+          ],
+          "observed_tests": [
+            "filesystem_read",
+            "test_non_utf8_file_name"
+          ],
+          "test_outcomes": {
+            "filesystem_read": "ok",
+            "test_non_utf8_file_name": "ok"
+          },
+          "provisional_completed_named_tests": [
+            "filesystem_read"
+          ],
+          "completion_certified": true,
+          "completed_named_tests": [
+            "filesystem_read"
+          ],
+          "uncovered_named_tests": [
+            "test_non_utf8_file_name"
+          ]
+        },
+        {
+          "target": "net_reads",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered_out": 0,
+          "summary_count": 1,
+          "expected_tests": [
+            "net_read"
+          ],
+          "observed_tests": [
+            "net_read"
+          ],
+          "test_outcomes": {
+            "net_read": "ok"
+          },
+          "provisional_completed_named_tests": [
+            "net_read"
+          ],
+          "completion_certified": true,
+          "completed_named_tests": [
+            "net_read"
+          ],
+          "uncovered_named_tests": []
+        }
+      ],
+      "expected_targets": [
+        "sys_fs",
+        "net_reads"
+      ],
+      "all_selected_targets_ran_once": true,
+      "all_tests_passed_without_ignored_or_filtered": false,
+      "ignored_tests": [],
+      "skipped_tests": [
+        {
+          "target": "sys_fs",
+          "test": "test_non_utf8_file_name",
+          "reason": "Darwin EILSEQ rejected fixture; producer returned early",
+          "occurrence_count": 2,
+          "occurrences": [
+            {
+              "stream": "stderr",
+              "line_number": 3,
+              "text": "filesystem rejects non-UTF-8 fixture with EILSEQ: Illegal byte sequence (os error 92)"
+            },
+            {
+              "stream": "stderr",
+              "line_number": 4,
+              "text": "filesystem rejects non-UTF-8 fixture with EILSEQ: Illegal byte sequence (os error 92)"
+            }
+          ]
+        }
+      ],
+      "unresolved_diagnostics": [],
+      "named_test_coverage_found": false,
+      "coverage_found": false
+    }
+  },
+  "unresolved_cases": {
+    "no-index": {
+      "target_results": [
+        {
+          "target": "sys_fs",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered_out": 0,
+          "summary_count": 1,
+          "expected_tests": [
+            "filesystem_read"
+          ],
+          "observed_tests": [
+            "filesystem_read"
+          ],
+          "test_outcomes": {
+            "filesystem_read": "ok"
+          },
+          "provisional_completed_named_tests": [
+            "filesystem_read"
+          ],
+          "completion_certified": false,
+          "completed_named_tests": [],
+          "uncovered_named_tests": [
+            "filesystem_read"
+          ]
+        }
+      ],
+      "expected_targets": [
+        "sys_fs"
+      ],
+      "all_selected_targets_ran_once": true,
+      "all_tests_passed_without_ignored_or_filtered": false,
+      "ignored_tests": [],
+      "skipped_tests": [],
+      "unresolved_diagnostics": [
+        {
+          "stream": "stderr",
+          "line_number": 2,
+          "text": "filesystem rejects non-UTF-8 fixture with EILSEQ: Illegal byte sequence (os error 92)",
+          "resolution_error": "frozen producer is not selected exactly once in the named inventory"
+        }
+      ],
+      "named_test_coverage_found": false,
+      "coverage_found": false
+    },
+    "sys-fs-absent": {
+      "target_results": [
+        {
+          "target": "net_reads",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered_out": 0,
+          "summary_count": 1,
+          "expected_tests": [
+            "net_read"
+          ],
+          "observed_tests": [
+            "net_read"
+          ],
+          "test_outcomes": {
+            "net_read": "ok"
+          },
+          "provisional_completed_named_tests": [
+            "net_read"
+          ],
+          "completion_certified": false,
+          "completed_named_tests": [],
+          "uncovered_named_tests": [
+            "net_read"
+          ]
+        }
+      ],
+      "expected_targets": [
+        "net_reads"
+      ],
+      "all_selected_targets_ran_once": true,
+      "all_tests_passed_without_ignored_or_filtered": false,
+      "ignored_tests": [],
+      "skipped_tests": [],
+      "unresolved_diagnostics": [
+        {
+          "stream": "stderr",
+          "line_number": 2,
+          "text": "filesystem rejects non-UTF-8 fixture with EILSEQ: Illegal byte sequence (os error 92)",
+          "resolution_error": "frozen producer is not selected exactly once in the named inventory"
+        }
+      ],
+      "named_test_coverage_found": false,
+      "coverage_found": false
+    },
+    "conflicting-inline": {
+      "target_results": [
+        {
+          "target": "sys_fs",
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered_out": 0,
+          "summary_count": 1,
+          "expected_tests": [
+            "filesystem_read",
+            "test_non_utf8_file_name"
+          ],
+          "observed_tests": [
+            "filesystem_read",
+            "test_non_utf8_file_name"
+          ],
+          "test_outcomes": {
+            "filesystem_read": "ok",
+            "test_non_utf8_file_name": "ok"
+          },
+          "provisional_completed_named_tests": [
+            "filesystem_read",
+            "test_non_utf8_file_name"
+          ],
+          "completion_certified": false,
+          "completed_named_tests": [],
+          "uncovered_named_tests": [
+            "filesystem_read",
+            "test_non_utf8_file_name"
+          ]
+        },
+        {
+          "target": "net_reads",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0,
+          "measured": 0,
+          "filtered_out": 0,
+          "summary_count": 1,
+          "expected_tests": [
+            "net_read"
+          ],
+          "observed_tests": [
+            "net_read"
+          ],
+          "test_outcomes": {
+            "net_read": "ok"
+          },
+          "provisional_completed_named_tests": [
+            "net_read"
+          ],
+          "completion_certified": false,
+          "completed_named_tests": [],
+          "uncovered_named_tests": [
+            "net_read"
+          ]
+        }
+      ],
+      "expected_targets": [
+        "sys_fs",
+        "net_reads"
+      ],
+      "all_selected_targets_ran_once": true,
+      "all_tests_passed_without_ignored_or_filtered": false,
+      "ignored_tests": [],
+      "skipped_tests": [],
+      "unresolved_diagnostics": [
+        {
+          "stream": "stdout",
+          "line": "test filesystem_read ... filesystem rejects non-UTF-8 fixture with EILSEQ: Illegal byte sequence (os error 92)",
+          "inline_target": "sys_fs",
+          "inline_test": "filesystem_read",
+          "resolution_error": "inline producer conflicts with frozen source mapping"
+        }
+      ],
+      "named_test_coverage_found": false,
+      "coverage_found": false
+    }
+  },
+  "actual_main_positive_path": {
+    "executed_via": "immutable main() positive loop/final aggregate AST; fake command receipts only",
+    "calls": [
+      "behavior-incomplete-eilseq",
+      "behavior-later-clean",
+      "behavior-unresolved"
+    ],
+    "status": 1,
+    "stdout": "coverage_incomplete=incomplete-eilseq; continuing independent rows\ncoverage_incomplete=unresolved; continuing independent rows\n",
+    "final": {
+      "acceptance_marker": "incomplete-unaccepted",
+      "all_behavior_rows_passed": false,
+      "all_controls_are_meaningful_red": true,
+      "all_positive_rows_succeeded": false,
+      "assertion_controls": [],
+      "positive_row_count": 3,
+      "positive_rows": [
+        {
+          "all_selected_targets_ran_once": true,
+          "all_tests_passed_without_ignored_or_filtered": false,
+          "argv": [
+            "/not-executed/cargo",
+            "test",
+            "--locked",
+            "--features",
+            "normal",
+            "--test",
+            "sys_fs",
+            "--test",
+            "net_reads",
+            "--",
+            "--nocapture",
+            "--test-threads=1"
+          ],
+          "coverage_found": false,
+          "derived_target_order": [
+            "net_reads",
+            "sys_fs"
+          ],
+          "expected_targets": [
+            "sys_fs",
+            "net_reads"
+          ],
+          "expected_tests": {
+            "net_reads": [
+              "net_read"
+            ],
+            "sys_fs": [
+              "filesystem_read",
+              "test_non_utf8_file_name"
+            ]
+          },
+          "features": "normal",
+          "ignored_tests": [],
+          "named_test_coverage_found": false,
+          "parser_input": "behavior-incomplete-eilseq.parser-input.txt",
+          "parser_order_label": "derived target order from stderr headers and successive stdout blocks",
+          "row": "incomplete-eilseq",
+          "skipped_tests": [
+            {
+              "occurrence_count": 1,
+              "occurrences": [
+                {
+                  "line_number": 3,
+                  "stream": "stderr",
+                  "text": "filesystem rejects non-UTF-8 fixture with EILSEQ: Illegal byte sequence (os error 92)"
+                }
+              ],
+              "reason": "Darwin EILSEQ rejected fixture; producer returned early",
+              "target": "sys_fs",
+              "test": "test_non_utf8_file_name"
+            }
+          ],
+          "status": 0,
+          "stderr": "behavior-incomplete-eilseq.stderr",
+          "stdout": "behavior-incomplete-eilseq.stdout",
+          "target_results": [
+            {
+              "completed_named_tests": [
+                "filesystem_read"
+              ],
+              "completion_certified": true,
+              "expected_tests": [
+                "filesystem_read",
+                "test_non_utf8_file_name"
+              ],
+              "failed": 0,
+              "filtered_out": 0,
+              "ignored": 0,
+              "measured": 0,
+              "observed_tests": [
+                "filesystem_read",
+                "test_non_utf8_file_name"
+              ],
+              "passed": 2,
+              "provisional_completed_named_tests": [
+                "filesystem_read"
+              ],
+              "summary_count": 1,
+              "target": "sys_fs",
+              "test_outcomes": {
+                "filesystem_read": "ok",
+                "test_non_utf8_file_name": "ok"
+              },
+              "uncovered_named_tests": [
+                "test_non_utf8_file_name"
+              ]
+            },
+            {
+              "completed_named_tests": [
+                "net_read"
+              ],
+              "completion_certified": true,
+              "expected_tests": [
+                "net_read"
+              ],
+              "failed": 0,
+              "filtered_out": 0,
+              "ignored": 0,
+              "measured": 0,
+              "observed_tests": [
+                "net_read"
+              ],
+              "passed": 1,
+              "provisional_completed_named_tests": [
+                "net_read"
+              ],
+              "summary_count": 1,
+              "target": "net_reads",
+              "test_outcomes": {
+                "net_read": "ok"
+              },
+              "uncovered_named_tests": []
+            }
+          ],
+          "targets": [
+            "sys_fs",
+            "net_reads"
+          ],
+          "unresolved_diagnostics": []
+        },
+        {
+          "all_selected_targets_ran_once": true,
+          "all_tests_passed_without_ignored_or_filtered": true,
+          "argv": [
+            "/not-executed/cargo",
+            "test",
+            "--locked",
+            "--features",
+            "normal",
+            "--test",
+            "sys_fs",
+            "--test",
+            "net_reads",
+            "--",
+            "--nocapture",
+            "--test-threads=1"
+          ],
+          "coverage_found": true,
+          "derived_target_order": [
+            "net_reads",
+            "sys_fs"
+          ],
+          "expected_targets": [
+            "sys_fs",
+            "net_reads"
+          ],
+          "expected_tests": {
+            "net_reads": [
+              "net_read"
+            ],
+            "sys_fs": [
+              "filesystem_read",
+              "test_non_utf8_file_name"
+            ]
+          },
+          "features": "normal",
+          "ignored_tests": [],
+          "named_test_coverage_found": true,
+          "parser_input": "behavior-later-clean.parser-input.txt",
+          "parser_order_label": "derived target order from stderr headers and successive stdout blocks",
+          "row": "later-clean",
+          "skipped_tests": [],
+          "status": 0,
+          "stderr": "behavior-later-clean.stderr",
+          "stdout": "behavior-later-clean.stdout",
+          "target_results": [
+            {
+              "completed_named_tests": [
+                "filesystem_read",
+                "test_non_utf8_file_name"
+              ],
+              "completion_certified": true,
+              "expected_tests": [
+                "filesystem_read",
+                "test_non_utf8_file_name"
+              ],
+              "failed": 0,
+              "filtered_out": 0,
+              "ignored": 0,
+              "measured": 0,
+              "observed_tests": [
+                "filesystem_read",
+                "test_non_utf8_file_name"
+              ],
+              "passed": 2,
+              "provisional_completed_named_tests": [
+                "filesystem_read",
+                "test_non_utf8_file_name"
+              ],
+              "summary_count": 1,
+              "target": "sys_fs",
+              "test_outcomes": {
+                "filesystem_read": "ok",
+                "test_non_utf8_file_name": "ok"
+              },
+              "uncovered_named_tests": []
+            },
+            {
+              "completed_named_tests": [
+                "net_read"
+              ],
+              "completion_certified": true,
+              "expected_tests": [
+                "net_read"
+              ],
+              "failed": 0,
+              "filtered_out": 0,
+              "ignored": 0,
+              "measured": 0,
+              "observed_tests": [
+                "net_read"
+              ],
+              "passed": 1,
+              "provisional_completed_named_tests": [
+                "net_read"
+              ],
+              "summary_count": 1,
+              "target": "net_reads",
+              "test_outcomes": {
+                "net_read": "ok"
+              },
+              "uncovered_named_tests": []
+            }
+          ],
+          "targets": [
+            "sys_fs",
+            "net_reads"
+          ],
+          "unresolved_diagnostics": []
+        },
+        {
+          "all_selected_targets_ran_once": true,
+          "all_tests_passed_without_ignored_or_filtered": false,
+          "argv": [
+            "/not-executed/cargo",
+            "test",
+            "--locked",
+            "--features",
+            "no-index",
+            "--test",
+            "sys_fs",
+            "--",
+            "--nocapture",
+            "--test-threads=1"
+          ],
+          "coverage_found": false,
+          "derived_target_order": [
+            "sys_fs"
+          ],
+          "expected_targets": [
+            "sys_fs"
+          ],
+          "expected_tests": {
+            "sys_fs": [
+              "filesystem_read"
+            ]
+          },
+          "features": "no-index",
+          "ignored_tests": [],
+          "named_test_coverage_found": false,
+          "parser_input": "behavior-unresolved.parser-input.txt",
+          "parser_order_label": "derived target order from stderr headers and successive stdout blocks",
+          "row": "unresolved",
+          "skipped_tests": [],
+          "status": 0,
+          "stderr": "behavior-unresolved.stderr",
+          "stdout": "behavior-unresolved.stdout",
+          "target_results": [
+            {
+              "completed_named_tests": [],
+              "completion_certified": false,
+              "expected_tests": [
+                "filesystem_read"
+              ],
+              "failed": 0,
+              "filtered_out": 0,
+              "ignored": 0,
+              "measured": 0,
+              "observed_tests": [
+                "filesystem_read"
+              ],
+              "passed": 1,
+              "provisional_completed_named_tests": [
+                "filesystem_read"
+              ],
+              "summary_count": 1,
+              "target": "sys_fs",
+              "test_outcomes": {
+                "filesystem_read": "ok"
+              },
+              "uncovered_named_tests": [
+                "filesystem_read"
+              ]
+            }
+          ],
+          "targets": [
+            "sys_fs"
+          ],
+          "unresolved_diagnostics": [
+            {
+              "line_number": 2,
+              "resolution_error": "frozen producer is not selected exactly once in the named inventory",
+              "stream": "stderr",
+              "text": "filesystem rejects non-UTF-8 fixture with EILSEQ: Illegal byte sequence (os error 92)"
+            }
+          ]
+        }
+      ],
+      "successful_positive_rows": 1,
+      "uncovered_positive_rows": [
+        "incomplete-eilseq",
+        "unresolved"
+      ]
+    },
+    "exported_summary": [
+      {
+        "positive_row_count": 3,
+        "successful_positive_rows": 1,
+        "all_positive_rows_succeeded": false,
+        "uncovered_positive_rows": [
+          "incomplete-eilseq",
+          "unresolved"
+        ]
+      }
+    ]
+  },
+  "session_id": "current-darwin-sys-net-behavior-2f795ece-20261002"
+}

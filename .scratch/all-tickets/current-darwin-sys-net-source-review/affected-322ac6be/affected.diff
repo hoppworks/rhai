@@ -1,0 +1,493 @@
+diff --git a/.scratch/all-tickets/check-current-darwin-sys-net-behavior.py b/.scratch/all-tickets/check-current-darwin-sys-net-behavior.py
+index 850cefc6..19b6d24d 100644
+--- a/.scratch/all-tickets/check-current-darwin-sys-net-behavior.py
++++ b/.scratch/all-tickets/check-current-darwin-sys-net-behavior.py
+@@ -24,7 +24,7 @@ EXPECTED_RUN_SCOPED_SHA256 = '9edd5bc53260c697174552498f6064e65ab821d28838af2291
+ EXPECTED_INIT_SHA256 = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
+ EXPECTED_PYGUARD_SHA256 = 'a3739f4947744303e1adf3fb0875ac743944a272e5b95c94b1baba53029d313f'
+ EXPECTED_STAGE = Path(os.environ.get('DARWIN_PROOF_STAGE', ''))
+-SESSION_ID = 'current-darwin-sys-net-behavior-a2d7a8c2-20261002'
++SESSION_ID = 'current-darwin-sys-net-behavior-2f795ece-20261002'
+ EXPECTED_SCOPE = Path.home() / '.local/share/agent-builds/rhai' / SESSION_ID
+ STAGE = EXPECTED_STAGE
+ RUNTIME = Path(os.environ.get('AGENT_RUNTIME_DIR', ''))
+@@ -103,6 +103,8 @@ MANIFEST_HASHES: dict[str, str] = {}
+ RECORDED_PIDS: set[int] = set()
+ ACTIVE_CHILD: subprocess.Popen[bytes] | None = None
+ INTERRUPTED: int | None = None
++EILSEQ_MARKER = 'filesystem rejects non-UTF-8 fixture with EILSEQ:'
++EILSEQ_PRODUCER = ('sys_fs', 'test_non_utf8_file_name')
+ 
+ 
+ def sha256(path: Path) -> str:
+@@ -209,14 +211,18 @@ def capture_runtime_proof() -> None:
+         raise RuntimeError('required helper or scoped supervisor identity unavailable')
+ 
+ 
++def validate_stage_scope(stage: Path, runtime: Path) -> None:
++    if stage.name != SESSION_ID:
++        raise RuntimeError(f'DARWIN_PROOF_STAGE must use the prescribed unique stage name: {SESSION_ID}')
++    if runtime.parent.resolve() != EXPECTED_SCOPE.resolve():
++        raise RuntimeError(f'private runtime is outside the prescribed project scope: {EXPECTED_SCOPE}')
++
++
+ def validate_stage_inputs() -> None:
+     """Fail closed on any stage other than the prescribed canonical directory."""
+     if not STAGE.is_absolute() or not STAGE.is_dir() or STAGE.is_symlink():
+         raise RuntimeError('DARWIN_PROOF_STAGE must be the existing absolute real input stage')
+-    if RUNTIME.parent.resolve() != EXPECTED_SCOPE.resolve():
+-        raise RuntimeError(f'private runtime is outside the prescribed project scope: {EXPECTED_SCOPE}')
+-    if STAGE.name != SESSION_ID:
+-        raise RuntimeError(f'DARWIN_PROOF_STAGE must use the prescribed unique stage name: {SESSION_ID}')
++    validate_stage_scope(STAGE, RUNTIME)
+     for path in (STAGE / 'source.tar', STAGE / 'Cargo.lock.accepted'):
+         if not path.is_file():
+             raise FileNotFoundError(f'required explicitly staged input missing: {path}')
+@@ -451,7 +457,8 @@ def frozen_test_inventory(source: Path, features: str) -> dict[str, list[str]]:
+ 
+ 
+ def positive_test_coverage(output: str, targets: tuple[str, ...],
+-                           expected_tests: dict[str, list[str]]) -> dict[str, object]:
++                           expected_tests: dict[str, list[str]],
++                           diagnostic_inputs: list[dict[str, object]] | None = None) -> dict[str, object]:
+     """Require each frozen named test and exactly one complete summary per target."""
+     import re
+ 
+@@ -465,7 +472,7 @@ def positive_test_coverage(output: str, targets: tuple[str, ...],
+     summaries: dict[str, list[dict[str, int]]] = {}
+     observed_tests: dict[str, list[str]] = {}
+     test_outcomes: dict[str, dict[str, str]] = {}
+-    skipped_tests: list[dict[str, str]] = []
++    diagnostic_inputs = list(diagnostic_inputs or [])
+     current: str | None = None
+     pending_test: str | None = None
+     for line in lines:
+@@ -490,9 +497,9 @@ def positive_test_coverage(output: str, targets: tuple[str, ...],
+             if outcome:
+                 test_outcomes[current][test_name] = outcome.group(1).split(',')[0]
+                 pending_test = None
+-            if 'filesystem rejects non-UTF-8 fixture with EILSEQ:' in result_text:
+-                skipped_tests.append({'target': current, 'test': test_name,
+-                                      'reason': 'Darwin EILSEQ rejected non-UTF-8 fixture; assertion returned early'})
++            if EILSEQ_MARKER in result_text:
++                diagnostic_inputs.append({'stream': 'stdout', 'line': line,
++                                          'inline_target': current, 'inline_test': test_name})
+         elif current is not None and pending_test is not None:
+             outcome = re.match(r'^\s*(ok|ignored(?:,.*)?|FAILED)\s*$', line)
+             if outcome:
+@@ -515,37 +522,72 @@ def positive_test_coverage(output: str, targets: tuple[str, ...],
+                    'observed_tests': observed_tests.get(target, []),
+                    'test_outcomes': test_outcomes.get(target, {})}
+                   for target in targets if target in summaries]
+-    for target in targets:
+-        if 'filesystem rejects non-UTF-8 fixture with EILSEQ:' in output and \
+-                'test_non_utf8_file_name' in expected_tests.get(target, []):
+-            if not any(item['target'] == target and item['test'] == 'test_non_utf8_file_name'
+-                       for item in skipped_tests):
+-                skipped_tests.append({'target': target, 'test': 'test_non_utf8_file_name',
+-                                      'reason': 'Darwin EILSEQ rejected non-UTF-8 fixture; assertion returned early'})
++    skipped_tests: list[dict[str, object]] = []
++    unresolved_diagnostics: list[dict[str, object]] = []
++    resolved_occurrences: list[dict[str, object]] = []
++    for diagnostic in diagnostic_inputs:
++        record = dict(diagnostic)
++        text = str(record.get('text', record.get('line', '')))
++        if EILSEQ_MARKER not in text:
++            continue
++        inline_pair = (record.get('inline_target'), record.get('inline_test'))
++        if inline_pair != (None, None):
++            resolved = inline_pair == EILSEQ_PRODUCER
++            reason = 'inline producer conflicts with frozen source mapping'
++        else:
++            resolved = (EILSEQ_PRODUCER[0] in targets and
++                        expected_tests.get(EILSEQ_PRODUCER[0], []).count(EILSEQ_PRODUCER[1]) == 1)
++            reason = 'frozen producer is not selected exactly once in the named inventory'
++        if resolved:
++            resolved_occurrences.append(record)
++        else:
++            record['resolution_error'] = reason
++            unresolved_diagnostics.append(record)
++    if resolved_occurrences:
++        skipped_tests.append({'target': EILSEQ_PRODUCER[0], 'test': EILSEQ_PRODUCER[1],
++                              'reason': 'Darwin EILSEQ rejected fixture; producer returned early',
++                              'occurrence_count': len(resolved_occurrences),
++                              'occurrences': resolved_occurrences})
+     named_complete = len(final_rows) == len(targets) and all(
+         row['summary_count'] == 1 and row['expected_tests']
+         and sorted(row['observed_tests']) == sorted(row['expected_tests'])
+         for row in final_rows)
+     for row in final_rows:
+         skipped_names = {item['test'] for item in skipped_tests if item['target'] == row['target']}
+-        row['completed_named_tests'] = sorted(
++        provisional = sorted(
+             name for name in row['expected_tests']
+             if row['test_outcomes'].get(name) == 'ok' and name not in skipped_names)
++        row['provisional_completed_named_tests'] = provisional
++        row['completion_certified'] = not unresolved_diagnostics
++        row['completed_named_tests'] = [] if unresolved_diagnostics else provisional
+         row['uncovered_named_tests'] = sorted(set(row['expected_tests']) -
+                                               set(row['completed_named_tests']))
+     named_complete = named_complete and all(
+         len(row['completed_named_tests']) == len(row['expected_tests']) for row in final_rows)
+-    all_executed = named_complete and not skipped_tests and all(
++    all_executed = named_complete and not skipped_tests and not unresolved_diagnostics and all(
+         row['passed'] == len(row['completed_named_tests']) and row['failed'] == 0 and row['ignored'] == 0
+         and row['measured'] == 0 and row['filtered_out'] == 0 for row in final_rows)
+     return {'target_results': final_rows, 'expected_targets': list(targets),
+             'all_selected_targets_ran_once': exact_targets,
+             'all_tests_passed_without_ignored_or_filtered': all_executed,
+             'ignored_tests': ignored_tests, 'skipped_tests': skipped_tests,
++            'unresolved_diagnostics': unresolved_diagnostics,
+             'named_test_coverage_found': named_complete,
+             'coverage_found': exact_targets and all_executed}
+ 
+ 
++def should_continue_positive_rows(status: int, coverage_found: bool) -> bool:
++    return status == 0 and not coverage_found
++
++
++def positive_rows_summary(results: list[dict[str, object]], expected_count: int) -> dict[str, object]:
++    successful = sum(row.get('status') == 0 and row.get('coverage_found') for row in results)
++    return {'positive_row_count': expected_count, 'successful_positive_rows': successful,
++            'all_positive_rows_succeeded': len(results) == expected_count and successful == expected_count,
++            'uncovered_positive_rows': [row.get('row') for row in results
++                                        if row.get('status') != 0 or not row.get('coverage_found')]}
++
++
+ def derive_target_order_parser_input(stdout: str, stderr: str, targets: tuple[str, ...],
+                                      expected_tests: dict[str, list[str]]) -> dict[str, object]:
+     """Associate Cargo stderr target headers with successive complete stdout libtest blocks."""
+@@ -557,6 +599,9 @@ def derive_target_order_parser_input(stdout: str, stderr: str, targets: tuple[st
+                if (match := header_pattern.match(line))]
+     stderr_diagnostics = [line for line in stderr.splitlines()
+                           if not header_pattern.match(line)]
++    diagnostic_inputs = [{'stream': 'stderr', 'line_number': index, 'text': line}
++                         for index, line in enumerate(stderr.splitlines(), 1)
++                         if EILSEQ_MARKER in line]
+     if len(headers) != len(targets) or set(headers) != set(targets) or len(set(headers)) != len(headers):
+         raise RuntimeError(f'stderr target headers do not match selected targets exactly once: {headers}')
+ 
+@@ -601,7 +646,7 @@ def derive_target_order_parser_input(stdout: str, stderr: str, targets: tuple[st
+     parser_input = (parser_core + ('--- stderr diagnostics outside target headers ---\n'
+                                    + '\n'.join(stderr_diagnostics) + '\n'
+                                    if stderr_diagnostics else ''))
+-    coverage = positive_test_coverage(parser_core, targets, expected_tests)
++    coverage = positive_test_coverage(parser_core, targets, expected_tests, diagnostic_inputs)
+     return {'label': 'derived target order from stderr headers and successive stdout blocks',
+             'target_order': headers, 'parser_input': parser_input, 'coverage': coverage}
+ 
+@@ -660,16 +705,10 @@ def export_evidence() -> None:
+         ''.join(json.dumps(row, sort_keys=True) + '\n' for row in SAMPLES), encoding='utf-8')
+     write_json(EVIDENCE / 'rows.json', {
+         'positive_rows': POSITIVE_RESULTS,
+-        'positive_row_count': len(TEST_ROWS),
+-        'successful_positive_rows': sum(row.get('status') == 0 and row.get('coverage_found')
+-                                        for row in POSITIVE_RESULTS),
+-        'all_positive_rows_succeeded': len(POSITIVE_RESULTS) == len(TEST_ROWS)
+-            and all(row.get('status') == 0 and row.get('coverage_found') for row in POSITIVE_RESULTS),
++        **positive_rows_summary(POSITIVE_RESULTS, len(TEST_ROWS)),
+         'assertion_controls': CONTROL_RESULTS,
+         'all_assertion_controls_are_meaningful_red': len(CONTROL_RESULTS) == len(ASSERTION_CONTROLS)
+             and all(row.get('status') == 101 and row.get('diagnostic_found') for row in CONTROL_RESULTS),
+-        'uncovered_positive_rows': [row.get('row') for row in POSITIVE_RESULTS
+-                                    if row.get('status') != 0 or not row.get('coverage_found')],
+     })
+     write_json(EVIDENCE / 'export.json', {
+         'source_revision': SOURCE_REVISION,
+@@ -867,20 +906,18 @@ def main() -> int:
+         if status != 0 or not coverage['coverage_found']:
+             if status != 0:
+                 raise RuntimeError(f'behavior row {row_name} expected status 0, got {status}')
+-            print(f'coverage_incomplete={row_name}; continuing independent rows', flush=True)
++            if should_continue_positive_rows(status, bool(coverage['coverage_found'])):
++                print(f'coverage_incomplete={row_name}; continuing independent rows', flush=True)
+         verify_immutable_inputs('after behavior row ' + row_name)
+     write_json(EVIDENCE / 'result.json', {
+-        'all_behavior_rows_passed': len(POSITIVE_RESULTS) == len(TEST_ROWS)
+-            and all(row.get('status') == 0 and row.get('coverage_found') for row in POSITIVE_RESULTS),
++        **positive_rows_summary(POSITIVE_RESULTS, len(TEST_ROWS)),
++        'all_behavior_rows_passed': positive_rows_summary(POSITIVE_RESULTS, len(TEST_ROWS))[
++            'all_positive_rows_succeeded'],
+         'all_controls_are_meaningful_red': len(CONTROL_RESULTS) == len(ASSERTION_CONTROLS)
+             and all(row.get('status') == 101 and row.get('diagnostic_found') for row in CONTROL_RESULTS),
+         'positive_rows': POSITIVE_RESULTS, 'assertion_controls': CONTROL_RESULTS,
+-        'uncovered_runtime_rows': [name for name, _, _ in TEST_ROWS
+-                                   if not any(row.get('row') == name and row.get('status') == 0
+-                                              and row.get('coverage_found') for row in POSITIVE_RESULTS)],
+         'acceptance_marker': ('all-controls-and-positive-runs-passed'
+-            if len(POSITIVE_RESULTS) == len(TEST_ROWS)
+-            and all(row.get('status') == 0 and row.get('coverage_found') for row in POSITIVE_RESULTS)
++            if positive_rows_summary(POSITIVE_RESULTS, len(TEST_ROWS))['all_positive_rows_succeeded']
+             else 'incomplete-unaccepted'),
+     })
+     export_evidence()
+diff --git a/.scratch/all-tickets/coordinator-state.md b/.scratch/all-tickets/coordinator-state.md
+index cfe1f359..5ddd06ef 100644
+--- a/.scratch/all-tickets/coordinator-state.md
++++ b/.scratch/all-tickets/coordinator-state.md
+@@ -80,6 +80,27 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
+   sys/net, changed platform/MSRV and final current-native release coverage open.
+ 
+ ## Current step and next action
++The bounded Darwin sys/net F4 cause11 source-only follow-up is implemented in
++the existing owned worktree. The helper separately consumes the exact F19 EILSEQ
++diagnostic, resolves only `sys_fs/test_non_utf8_file_name`, retains partial
++observations while withholding named completion when unresolved, keeps later
++status-zero rows running, reports truthful aggregate incompleteness, and
++validates the exact pinned SESSION_ID/stage/runtime scope. Meaningful RED and
++final ten-category pure GREEN are recorded at
++`current-darwin-sys-net-diagnostic-red.md` and
++`current-darwin-sys-net-diagnostic-green.stdout`; prep records the GREEN hash
++and one fixture correction. Context: Expert answer
++`.scratch/all-tickets/escalations/11-darwin-split-stream-coverage.answer.md`;
++failed correction history `8b9740de` and `4c4a81e`; one Expert chain, no reset.
++F1/F2 and F3 conclusions, source `2f795ece` / archive `43c8b8e4` / lock
++`2ba4b3a0`, production and Linux evidence remain unchanged. No Cargo,
++toolchain, native API/process/control/measurement or external Git action. The
++30-minute planning checkpoint and two-launch limit remain unchanged; no native
++resource allocation was consumed. Next: inspect diff/pins, commit this helper,
++tests, contract, prep, receipts and state atomically, then return the clean
++lowercase ref for the same independent affected reviewer. Native acceptance
++remains pending.
++
+ 1. Darwin current-source optional MSRV compiler matrix and sys/net examples are
+    accepted narrowly. Examples proof at current-msrv-examples-proof.md and original
+    current-msrv-examples-evidence: one private Rust1.77.2 build, real Engine file
+diff --git a/.scratch/all-tickets/current-darwin-sys-net-behavior-contract.md b/.scratch/all-tickets/current-darwin-sys-net-behavior-contract.md
+index c3cd9325..f5de5039 100644
+--- a/.scratch/all-tickets/current-darwin-sys-net-behavior-contract.md
++++ b/.scratch/all-tickets/current-darwin-sys-net-behavior-contract.md
+@@ -26,8 +26,16 @@ test coverage. It also recognizes the actual
+ `filesystem rejects non-UTF-8 fixture with EILSEQ:` early-return diagnostic
+ emitted by the frozen filesystem test. The test prints that diagnostic and
+ returns normally, so libtest can report it as passed with zero ignored tests.
+-The runner records that named test as skipped and leaves the row unaccepted; a
+-successful Cargo exit alone is insufficient.
++The runner associates that diagnostic with the exact frozen producer
++`sys_fs/test_non_utf8_file_name`. It consumes the diagnostic separately from
++libtest structure, so stderr-only output cannot fabricate a test or summary.
++An stderr diagnostic resolves only when `sys_fs` is selected and that named
++test occurs exactly once in its frozen inventory. Inline stdout diagnostics
++must be attached to that same target and test. Missing or conflicting producer
++association is retained as unresolved evidence and fails closed: observed
++outcomes remain recorded, but no named row is certified. A resolved occurrence
++marks only the producer uncovered; siblings and other targets retain their
++observed results. A successful Cargo exit alone is insufficient.
+ 
+ The macOS system-prefix policy test obtains distinct `/var/../../...` and
+ `/private/var/../../...` spellings for the same existing `real` fixture
+diff --git a/.scratch/all-tickets/current-darwin-sys-net-behavior-source-prep.md b/.scratch/all-tickets/current-darwin-sys-net-behavior-source-prep.md
+index 0cc7e9c7..2d980b4c 100644
+--- a/.scratch/all-tickets/current-darwin-sys-net-behavior-source-prep.md
++++ b/.scratch/all-tickets/current-darwin-sys-net-behavior-source-prep.md
+@@ -2,10 +2,15 @@
+ 
+ ## Frozen inputs and retained evidence
+ 
++- Prescribed stage/private-runtime identifier: `current-darwin-sys-net-behavior-2f795ece-20261002`; the helper rejects mismatched stage basenames or runtime scope.
++
+ - Test/source revision: `2f795ecee8edd6ddf348f382e5397cc6e348ad37`.
+ - Frozen source archive SHA-256: `43c8b8e43a2bcd3e74dd0be3d60a0dea2eab50eb5bfe65cc736684631523d52b`.
+ - Compatible lock SHA-256: `2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425`.
+ - Original combined review and its seven receipts are retained at `/Users/hoppworks/.codex/worktrees/all-tickets-continuation/rhai/.scratch/all-tickets/current-darwin-sys-net-source-review/`.
++- The diagnostic association TDD RED is recorded in `current-darwin-sys-net-diagnostic-red.md`; it shows the old helper accepting a status-zero stderr-only EILSEQ case.
++- Follow-up pure GREEN: `python3 .scratch/all-tickets/test-current-darwin-sys-net-behavior.py` passed all ten categories; complete captured output is `current-darwin-sys-net-diagnostic-green.stdout` (SHA-256 `c903ed462358f52217654aed54cf6a7aab76a18e5fe22e38c9ef4241e7f94684`). It covers stderr-only producer association with overlapping names, warning/test/result-shaped stderr isolation, partial observations and status-zero continuation/aggregate behavior, no-index unresolved coverage, conflicting inline producer, original stream-order malformed cases, and strict SESSION_ID/stage/scope positives and negatives.
++- One test-fixture correction was made after an initial pure run showed that the inline-conflict synthetic transcript omitted its required Cargo target header; the transcript was corrected and the complete suite then passed. No native/build/Cargo/toolchain invocation occurred.
+ - The same combined affected recheck is retained at `/tmp/current-darwin-sys-net-affected-recheck.vmrgou7y/`; its `review.md`, `affected-regressions.py`, and `affected-receipts.json` document that the first F3/F4 repair in `8b9740de8e4493c78320293d3a07599672f22484` did not configure a root matching the system-prefix reads and concatenated stdout before stderr, making target association fail. This correction batch preserves that failed-correction history; no native allocation was made.
+ - Existing compiler/example readbacks apply only to those requirements. Existing Linux behavior proof remains Linux-only and unaffected.
+ 
+@@ -13,7 +18,7 @@
+ 
+ - F1/F2 are retained from `8b9740de8e4493c78320293d3a07599672f22484`: exact named outcomes/EILSEQ uncovered aggregation and fail-closed stable process/path cleanup remain unchanged.
+ - F3: the frozen cfg(macos) test now obtains the two system-prefix spellings from the exact owned `real` directory, configures `fs_root` with the `/var` spelling, and reads through both configured and prefix-alias forms. The fixture independently requires distinct strings, canonical equality to the exact real directory, denied write, and host byte readback. Native execution remains unverified.
+-- F4: raw stdout and stderr stay separate. The helper validates the exact stderr target header sequence, parses successive complete stdout libtest blocks, pairs each block with its corresponding header and exact selected named inventory, and labels the generated parser input `derived target order ... not captured cross-stream chronology`. Missing, duplicate, extra, incomplete or inventory-mismatched headers/blocks fail closed. Original stdout/stderr logs remain raw receipts; non-header stderr diagnostics are preserved in the labeled parser input, and stdout diagnostics within blocks, including EILSEQ, remain available to the coverage parser.
++- F4: raw stdout and stderr stay separate. The helper validates the exact stderr target header sequence, parses successive complete stdout libtest blocks, pairs each block with its corresponding header and exact selected named inventory, and labels the generated parser input `derived target order ... not captured cross-stream chronology`. Missing, duplicate, extra, incomplete or inventory-mismatched headers/blocks fail closed. Original stdout/stderr logs remain raw receipts. The EILSEQ diagnostic is separately consumed and associated only with the frozen producer `sys_fs/test_non_utf8_file_name`; stderr structure is never reparsed as libtest output. Unknown or conflicting association preserves observed outcomes but leaves completion uncertified and fails the row closed.
+ 
+ ## RED/GREEN receipts
+ 
+@@ -23,4 +28,4 @@
+ 
+ ## Remaining acceptance
+ 
+-The nine Darwin behavior rows and five assertion controls remain pending actual Darwin source-run acceptance. `test_non_utf8_file_name` remains uncovered if its actual body returns early for EILSEQ. The original independent reviewer should perform the requested affected recheck of F3/F4 at the frozen correction. No native acceptance is claimed, and no push or merge was performed.
++The nine Darwin behavior rows and five assertion controls remain pending actual Darwin source-run acceptance. `test_non_utf8_file_name` remains uncovered if its actual body returns early for EILSEQ. The source-only diagnostic association follow-up updates the helper, its regression suite, contract, and this preparation record atomically; it retains the original F1/F2/F3/F4 receipts and requires the same independent reviewer’s affected recheck. No native acceptance is claimed, and no push or merge was performed.
+diff --git a/.scratch/all-tickets/current-darwin-sys-net-diagnostic-green.stdout b/.scratch/all-tickets/current-darwin-sys-net-diagnostic-green.stdout
+new file mode 100644
+index 00000000..88608eb6
+--- /dev/null
++++ b/.scratch/all-tickets/current-darwin-sys-net-diagnostic-green.stdout
+@@ -0,0 +1,10 @@
++pins_and_nine_rows=PASS
++named_assertion_red_and_incidental_101_rejection=PASS
++darwin_early_return_named_coverage_and_summary_integrity=PASS
++cleanup_unknown_and_reparented_process=PASS
++cleanup_owned_group_membership=PASS
++distinct_darwin_alias_fixture_and_receipts=PASS
++scope_and_cleanup_contract=PASS
++split_stream_derived_target_order_and_malformed_cases=PASS
++stderr_diagnostic_frozen_producer_association_and_fail_closed=PASS
++strict_source_named_stage_and_scope=PASS
+diff --git a/.scratch/all-tickets/current-darwin-sys-net-diagnostic-red.md b/.scratch/all-tickets/current-darwin-sys-net-diagnostic-red.md
+new file mode 100644
+index 00000000..2d0835cc
+--- /dev/null
++++ b/.scratch/all-tickets/current-darwin-sys-net-diagnostic-red.md
+@@ -0,0 +1,16 @@
++# EILSEQ association regression RED
++
++The new regression `test_stderr_only_eilseq_is_mapped_to_frozen_producer` was
++run against the pre-follow-up helper before implementation:
++
++```text
++runpy.run_path(test_path, run_name='darwin_test')['test_stderr_only_eilseq_is_mapped_to_frozen_producer']()
++AssertionError: assert True is False
++```
++
++Its two stdout libtest blocks and separate stderr stream included valid target
++headers and the actual frozen EILSEQ diagnostic. The old helper ignored the
++stderr diagnostic and incorrectly returned `coverage_found=true`. This was an
++expected TDD RED, not a failed implementation correction. The earlier F4
++correction history remains recorded at `8b9740de` and `4c4a81e`; neither history
++nor the original review receipts were replaced.
+diff --git a/.scratch/all-tickets/test-current-darwin-sys-net-behavior.py b/.scratch/all-tickets/test-current-darwin-sys-net-behavior.py
+index d5b5adc9..e99350c2 100644
+--- a/.scratch/all-tickets/test-current-darwin-sys-net-behavior.py
++++ b/.scratch/all-tickets/test-current-darwin-sys-net-behavior.py
+@@ -219,6 +219,121 @@ def test_split_stream_target_association():
+     assert eilseq['coverage']['target_results'][0]['uncovered_named_tests'] == ['test_non_utf8_file_name']
+ 
+ 
++def test_stderr_only_eilseq_is_mapped_to_frozen_producer():
++    module = load_helper()
++    targets = ('sys_fs', 'net_reads')
++    expected = {
++        'sys_fs': ['filesystem_read', 'test_non_utf8_file_name'],
++        'net_reads': ['net_read', 'test_non_utf8_file_name'],
++    }
++    fs = ('running 2 tests\ntest filesystem_read ... ok\n'
++          'test test_non_utf8_file_name ... ok\n'
++          'test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n')
++    net = ('running 2 tests\ntest net_read ... ok\n'
++           'test test_non_utf8_file_name ... ok\n'
++           'test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n')
++    stdout = fs + net
++    headers = ('     Running tests/sys_fs.rs (target/debug/deps/sys_fs-a)\n'
++               'filesystem rejects non-UTF-8 fixture with EILSEQ: [Errno 84]\n'
++               'test injected ... ok\n'
++               'test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n'
++               '     Running tests/net_reads.rs (target/debug/deps/net_reads-b)\n')
++    result = module.derive_target_order_parser_input(stdout, headers, targets, expected)
++    coverage = result['coverage']
++    assert coverage['coverage_found'] is False
++    assert coverage['named_test_coverage_found'] is False
++    assert coverage['all_tests_passed_without_ignored_or_filtered'] is False
++    rows = {row['target']: row for row in coverage['target_results']}
++    assert rows['sys_fs']['observed_tests'] == expected['sys_fs']
++    assert rows['sys_fs']['test_outcomes']['test_non_utf8_file_name'] == 'ok'
++    assert rows['sys_fs']['completed_named_tests'] == ['filesystem_read']
++    assert rows['sys_fs']['uncovered_named_tests'] == ['test_non_utf8_file_name']
++    assert rows['net_reads']['completed_named_tests'] == expected['net_reads']
++    assert [item['target'] for item in coverage['skipped_tests']] == ['sys_fs']
++    assert coverage['skipped_tests'][0]['occurrence_count'] == 1
++    assert len(coverage['unresolved_diagnostics']) == 0
++    assert len(coverage['target_results']) == 2
++    summary = module.positive_rows_summary([
++        {'row': 'incomplete-eilseq', 'status': 0, 'coverage_found': coverage['coverage_found']},
++        {'row': 'later-complete-row', 'status': 0, 'coverage_found': True}], 2)
++    assert summary == {'positive_row_count': 2, 'successful_positive_rows': 1,
++                       'all_positive_rows_succeeded': False,
++                       'uncovered_positive_rows': ['incomplete-eilseq']}
++    assert module.should_continue_positive_rows(0, False)
++    assert not module.should_continue_positive_rows(0, True)
++    assert not module.should_continue_positive_rows(101, False)
++    assert result['label'] == 'derived target order from stderr headers and successive stdout blocks'
++    assert 'filesystem rejects non-UTF-8 fixture with EILSEQ:' in result['parser_input']
++    repeated = module.derive_target_order_parser_input(
++        stdout, headers.replace('     Running tests/net_reads.rs',
++                                'filesystem rejects non-UTF-8 fixture with EILSEQ: second diagnostic\n'
++                                '     Running tests/net_reads.rs'), targets, expected)['coverage']
++    assert len(repeated['skipped_tests']) == 1
++    assert repeated['skipped_tests'][0]['occurrence_count'] == 2
++
++
++def test_unresolved_diagnostic_does_not_fabricate_skip_or_certify_rows():
++    module = load_helper()
++    stdout = ('running 1 test\ntest filesystem_read ... ok\n'
++              'test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n')
++    headers = ('     Running tests/sys_fs.rs (target/debug/deps/sys_fs-a)\n'
++               'filesystem rejects non-UTF-8 fixture with EILSEQ: [Errno 84]\n')
++    no_index = module.derive_target_order_parser_input(
++        stdout, headers, ('sys_fs',), {'sys_fs': ['filesystem_read']})['coverage']
++    assert no_index['coverage_found'] is False
++    assert no_index['named_test_coverage_found'] is False
++    assert no_index['all_tests_passed_without_ignored_or_filtered'] is False
++    assert no_index['skipped_tests'] == []
++    assert no_index['unresolved_diagnostics']
++    row = no_index['target_results'][0]
++    assert row['observed_tests'] == ['filesystem_read']
++    assert row['provisional_completed_named_tests'] == ['filesystem_read']
++    assert row['completed_named_tests'] == []
++    assert row['completion_certified'] is False
++    conflict = ('     Running tests/sys_fs.rs (derived target order)\n'
++                'running 1 test\ntest unrelated_name ... filesystem rejects non-UTF-8 fixture with EILSEQ: os error 92\n'
++                'ok\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s\n')
++    conflicting = module.positive_test_coverage(
++        conflict, ('sys_fs',), {'sys_fs': ['unrelated_name']})
++    assert conflicting['skipped_tests'] == []
++    assert conflicting['unresolved_diagnostics']
++    assert conflicting['coverage_found'] is False
++
++
++def test_stage_scope_name_matches_pinned_source_contract():
++    module = load_helper()
++    assert module.SESSION_ID == 'current-darwin-sys-net-behavior-2f795ece-20261002'
++    contract = CONTRACT.read_text(encoding='utf-8')
++    prep = (HERE / 'current-darwin-sys-net-behavior-source-prep.md').read_text(encoding='utf-8')
++    assert contract.count(module.SESSION_ID) >= 2
++    assert module.SESSION_ID in prep
++    with tempfile.TemporaryDirectory() as directory:
++        root = Path(directory)
++        scope = root / '.local/share/agent-builds/rhai' / module.SESSION_ID
++        scope.mkdir(parents=True)
++        stage = root / module.SESSION_ID
++        stage.mkdir()
++        runtime = scope / 'runtime'
++        with mock.patch.object(module, 'EXPECTED_SCOPE', scope):
++            module.validate_stage_scope(stage, runtime)
++        wrong_stage = root / 'wrong-stage'; wrong_stage.mkdir()
++        try:
++            with mock.patch.object(module, 'EXPECTED_SCOPE', scope):
++                module.validate_stage_scope(wrong_stage, runtime)
++        except RuntimeError:
++            pass
++        else:
++            raise AssertionError('wrong stage basename was accepted')
++        wrong_scope_runtime = root / 'wrong-scope/runtime'
++        try:
++            with mock.patch.object(module, 'EXPECTED_SCOPE', scope):
++                module.validate_stage_scope(stage, wrong_scope_runtime)
++        except RuntimeError:
++            pass
++        else:
++            raise AssertionError('wrong private scope was accepted')
++
++
+ if __name__ == '__main__':
+     test_pins_and_rows()
+     test_controls_require_the_intended_red()
+@@ -228,6 +343,9 @@ if __name__ == '__main__':
+     test_contract_describes_scope_and_cleanup()
+     test_distinct_alias_fixture_and_raw_receipt_contract()
+     test_split_stream_target_association()
++    test_stderr_only_eilseq_is_mapped_to_frozen_producer()
++    test_unresolved_diagnostic_does_not_fabricate_skip_or_certify_rows()
++    test_stage_scope_name_matches_pinned_source_contract()
+     print('pins_and_nine_rows=PASS')
+     print('named_assertion_red_and_incidental_101_rejection=PASS')
+     print('darwin_early_return_named_coverage_and_summary_integrity=PASS')
+@@ -236,3 +354,5 @@ if __name__ == '__main__':
+     print('distinct_darwin_alias_fixture_and_receipts=PASS')
+     print('scope_and_cleanup_contract=PASS')
+     print('split_stream_derived_target_order_and_malformed_cases=PASS')
++    print('stderr_diagnostic_frozen_producer_association_and_fail_closed=PASS')
++    print('strict_source_named_stage_and_scope=PASS')

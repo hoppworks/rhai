@@ -1,0 +1,47 @@
+{
+  "revision": "322ac6be2a46191242d3982c3b4e2f2f62cd9425",
+  "result": "affected source review accepted; native acceptance pending",
+  "checked": "original terminal report, affected receipt and frozen source applicability",
+  "originals": [
+    {
+      "file": "review.md",
+      "sha256": "77186338666704c80a74b45b2002a60c28a04a8082000f6b8ef61105a8883aa3"
+    },
+    {
+      "file": "revision.json",
+      "sha256": "c6ab5d770d83a17bf608878eadd3fbd86bc63d2ebeda8d162cab2fc736dc60c6"
+    },
+    {
+      "file": "affected-regressions.py",
+      "sha256": "6448d514c2732bee85cd8f17e494ff9586d133c1030d1e88a0571e623ce56f50"
+    },
+    {
+      "file": "affected.diff",
+      "sha256": "5eb35e00c1fc153f1992d43d59a55ea6c41a2c5a3f0f91d2edab78926314db00"
+    },
+    {
+      "file": "affected-receipts.json",
+      "sha256": "a3e6f116dd4811f34dce3f899d05d597597453511e127aa3d232357f99dde666"
+    },
+    {
+      "file": "prepared-source-tests.stdout",
+      "sha256": "c903ed462358f52217654aed54cf6a7aab76a18e5fe22e38c9ef4241e7f94684"
+    },
+    {
+      "file": "actual-main-positive-path.stdout",
+      "sha256": "c1a32206ca279967c90d02645c7870408842a3540028f6462f7ba932e0ec4f15"
+    },
+    {
+      "file": "affected-regressions.stdout",
+      "sha256": "1b583f87af0204688f38008669f9aa8d711bda78a7c5d403766a2392a6aabfe1"
+    },
+    {
+      "file": "ocr-preview.json",
+      "sha256": "6155166eacee7e872678dc305faa28de0e1c3cd767020d88da5698ac73dd09f4"
+    },
+    {
+      "file": "ocr-rules.json",
+      "sha256": "93f97d81206018b02260f09b1f6ee334ffd7299e4252c763d818edb3f3e672f5"
+    }
+  ]
+}

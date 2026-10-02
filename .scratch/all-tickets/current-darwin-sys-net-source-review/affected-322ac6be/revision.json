@@ -1,0 +1,19 @@
+{
+  "revision": "322ac6be2a46191242d3982c3b4e2f2f62cd9425",
+  "baseline": "4c4a81e0551f6e6d5c56112de7febda0101ce27f",
+  "source_freeze": "2f795ecee8edd6ddf348f382e5397cc6e348ad37",
+  "archive_sha256": "43c8b8e43a2bcd3e74dd0be3d60a0dea2eab50eb5bfe65cc736684631523d52b",
+  "rules": "958a4538b0191c53f2ccb2cd00d96c15045fbf68",
+  "owner_clean": true,
+  "changed_files": [
+    ".scratch/all-tickets/check-current-darwin-sys-net-behavior.py",
+    ".scratch/all-tickets/coordinator-state.md",
+    ".scratch/all-tickets/current-darwin-sys-net-behavior-contract.md",
+    ".scratch/all-tickets/current-darwin-sys-net-behavior-source-prep.md",
+    ".scratch/all-tickets/current-darwin-sys-net-diagnostic-green.stdout",
+    ".scratch/all-tickets/current-darwin-sys-net-diagnostic-red.md",
+    ".scratch/all-tickets/test-current-darwin-sys-net-behavior.py"
+  ],
+  "source_test_manifest_changes_after_freeze": [],
+  "native_launches": 0
+}
