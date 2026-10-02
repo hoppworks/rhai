@@ -2460,15 +2460,95 @@ fn assert_io_stress_record(path: &std::path::Path, expected_input: usize, comple
 }
 
 #[cfg(not(feature = "no_index"))]
-fn io_stress_script(executable: &str, record_path: &str, input_bytes: usize, stdout_bytes: usize, stderr_bytes: usize, limit: usize) -> String {
+fn io_stress_script(executable: &str, record_path: &str, input_bytes: usize, stdout_bytes: usize, stderr_bytes: usize, limit: usize, timeout_secs: f64) -> String {
     let input = "i".repeat(input_bytes);
     format!(
         r#"run_raw("{executable}", ["--exact", "process_fixture", "--nocapture", "--quiet"], #{{
             env_clear: true,
             env: #{{ {FIXTURE_ENV}: "0", {FIXTURE_RECORD_ENV}: "{record_path}", RHAI_SYS_PROCESS_IO_STRESS: "1", RHAI_SYS_PROCESS_IO_BYTES: "{input_bytes}", RHAI_SYS_PROCESS_STDOUT_BYTES: "{stdout_bytes}", RHAI_SYS_PROCESS_STDERR_BYTES: "{stderr_bytes}" }},
-            stdin: "{input}", max_output: {limit}, timeout: 5.0
+            stdin: "{input}", max_output: {limit}, timeout: {timeout_secs}
         }})"#
     )
+}
+
+/// Bounded, opt-in DirectChild/Managed overhead measurements for POSIX hosts.
+/// This is intentionally ignored by normal suites; the measurement driver runs it once.
+#[test]
+#[cfg(not(feature = "no_index"))]
+#[ignore = "bounded POSIX process-scope overhead measurement; invoke with the dedicated driver"]
+fn process_scope_overhead_measurement() {
+    const PAIRS: usize = 30;
+    const STREAM_BYTES: usize = 8 * 1024 * 1024;
+    const OUTPUT_LIMIT: usize = STREAM_BYTES;
+    const TRUE_TIMEOUT_SECS: f64 = 2.0;
+    const CAPTURE_TIMEOUT_SECS: f64 = 6.0;
+
+    let true_program = if cfg!(target_os = "macos") { "/usr/bin/true" } else { "/bin/true" };
+    let fixture_executable = std::env::current_exe().unwrap().to_string_lossy().into_owned();
+    let records = TempDir::new();
+    let record_path_buf = records.path().join("capture-record.txt");
+    let complete_record_path = record_path_buf.with_extension("complete");
+    let record_path = record_path_buf.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let capture_script = io_stress_script(&fixture_executable.replace('\\', "\\\\").replace('"', "\\\""), &record_path, 0, STREAM_BYTES - LIBTEST_QUIET_START.len(), STREAM_BYTES, OUTPUT_LIMIT, CAPTURE_TIMEOUT_SECS);
+    let true_script = format!("run_raw({true_program:?})");
+
+    let mut modes = [ProcessScope::DirectChild, ProcessScope::Managed]
+        .into_iter()
+        .map(|scope| {
+            let config = SysConfig::default()
+                .programs(ProgramPolicy::AllowList(vec![true_program.into(), fixture_executable.clone()]))
+                .max_output(OUTPUT_LIMIT)
+                .default_timeout(Some(TRUE_TIMEOUT_SECS))
+                .process_scope(scope);
+            let engine = engine(config);
+            let true_ast = engine.compile(&true_script).unwrap();
+            let capture_ast = engine.compile(&capture_script).unwrap();
+            let name = match scope {
+                ProcessScope::DirectChild => "DirectChild",
+                ProcessScope::Managed => "Managed",
+            };
+            (name, engine, true_ast, capture_ast)
+        })
+        .collect::<Vec<_>>();
+
+    for pair in 0..PAIRS {
+        let mode_order = if pair % 2 == 0 { [0, 1] } else { [1, 0] };
+        for mode_index in mode_order {
+            let workload_order = if pair % 2 == 0 { ["true", "capture"] } else { ["capture", "true"] };
+            for workload in workload_order {
+                let (name, engine, true_ast, capture_ast) = &mut modes[mode_index];
+                let (ast, expected_out, expected_err, record) = if workload == "true" {
+                    (true_ast, 0, 0, false)
+                } else {
+                    let _ = std::fs::remove_file(&record_path_buf);
+                    let _ = std::fs::remove_file(&complete_record_path);
+                    (capture_ast, STREAM_BYTES, STREAM_BYTES, true)
+                };
+
+                let started = Instant::now();
+                let result = engine
+                    .eval_ast::<Map>(ast)
+                    .unwrap_or_else(|error| panic!("measurement pair={pair} scope={name} workload={workload} failed: {error:?}"));
+                let latency_ns = started.elapsed().as_nanos();
+
+                assert!(result["success"].as_bool().unwrap(), "measurement child failed");
+                assert_eq!(result["code"].as_int().unwrap(), 0);
+                assert!(result["stdout_complete"].as_bool().unwrap());
+                assert!(result["stderr_complete"].as_bool().unwrap());
+                let stdout = result["stdout"].clone().try_cast::<Blob>().unwrap();
+                let stderr = result["stderr"].clone().try_cast::<Blob>().unwrap();
+                assert_eq!(stdout.len(), expected_out, "stdout byte count for {name}/{workload}");
+                assert_eq!(stderr.len(), expected_err, "stderr byte count for {name}/{workload}");
+                if record {
+                    assert!(stdout.starts_with(LIBTEST_QUIET_START));
+                    assert!(stdout[LIBTEST_QUIET_START.len()..].iter().all(|byte| *byte == b'o'));
+                    assert!(stderr.iter().all(|byte| *byte == b'e'));
+                    assert_io_stress_record(&record_path_buf, 0, true);
+                }
+                eprintln!("PROCESS_SCOPE_SAMPLE,{pair},{name},{workload},{latency_ns},{},{},0", stdout.len(), stderr.len());
+            }
+        }
+    }
 }
 
 #[cfg(not(feature = "no_index"))]
@@ -2505,7 +2585,7 @@ fn process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps() 
     let records = TempDir::new();
     let record_path = records.path().join("exact-cap.txt");
     let record_literal = record_path.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
-    let script = io_stress_script(&executable, &record_literal, INPUT_BYTES, CAP - LIBTEST_QUIET_START.len(), CAP, CAP);
+    let script = io_stress_script(&executable, &record_literal, INPUT_BYTES, CAP - LIBTEST_QUIET_START.len(), CAP, CAP, 5.0);
     let result = engine.eval::<Map>(&script).unwrap();
     let stdout = result["stdout"].clone().try_cast::<Blob>().unwrap();
     let stderr = result["stderr"].clone().try_cast::<Blob>().unwrap();
@@ -2540,7 +2620,7 @@ fn process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one(
         let record_literal = record_path.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
         let stdout_payload = if stream == "stdout" { CAP - LIBTEST_QUIET_START.len() + 1 } else { 0 };
         let stderr_payload = if stream == "stderr" { CAP + 1 } else { 0 };
-        let script = io_stress_script(&executable, &record_literal, INPUT_BYTES, stdout_payload, stderr_payload, CAP);
+        let script = io_stress_script(&executable, &record_literal, INPUT_BYTES, stdout_payload, stderr_payload, CAP, 5.0);
         let error = engine.eval::<Map>(&script).unwrap_err();
         let expected_prefix = if stream == "stdout" {
             let mut prefix = LIBTEST_QUIET_START.to_vec();
