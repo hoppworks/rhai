@@ -1,0 +1,616 @@
+[
+  {
+    "all_selected_targets_ran_once": true,
+    "all_tests_passed_without_ignored_or_filtered": true,
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1/agent-build-b_e0ropn/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys,net",
+      "--test",
+      "sys_env",
+      "--test",
+      "sys_fs",
+      "--test",
+      "sys_policy",
+      "--test",
+      "net_connect",
+      "--test",
+      "net_listen",
+      "--test",
+      "net_reads",
+      "--test",
+      "net_writes",
+      "--test",
+      "combined_sys_net",
+      "--",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "coverage_found": true,
+    "expected_targets": [
+      "sys_env",
+      "sys_fs",
+      "sys_policy",
+      "net_connect",
+      "net_listen",
+      "net_reads",
+      "net_writes",
+      "combined_sys_net"
+    ],
+    "features": "testing-environ,sys,net",
+    "row": "combined-baseline",
+    "status": 0,
+    "stderr": "behavior-combined-baseline.stderr",
+    "stdout": "behavior-combined-baseline.stdout",
+    "target_results": [
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 7,
+        "target": "sys_env"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 35,
+        "target": "sys_fs"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 24,
+        "target": "sys_policy"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 4,
+        "target": "net_connect"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 7,
+        "target": "net_listen"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 7,
+        "target": "net_reads"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 10,
+        "target": "net_writes"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 1,
+        "target": "combined_sys_net"
+      }
+    ],
+    "targets": [
+      "sys_env",
+      "sys_fs",
+      "sys_policy",
+      "net_connect",
+      "net_listen",
+      "net_reads",
+      "net_writes",
+      "combined_sys_net"
+    ]
+  },
+  {
+    "all_selected_targets_ran_once": true,
+    "all_tests_passed_without_ignored_or_filtered": true,
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1/agent-build-b_e0ropn/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys,net,no_index",
+      "--test",
+      "sys_fs",
+      "--test",
+      "net_reads",
+      "--test",
+      "net_writes",
+      "--test",
+      "combined_sys_net",
+      "--",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "coverage_found": true,
+    "expected_targets": [
+      "sys_fs",
+      "net_reads",
+      "net_writes",
+      "combined_sys_net"
+    ],
+    "features": "testing-environ,sys,net,no_index",
+    "row": "combined-no-index",
+    "status": 0,
+    "stderr": "behavior-combined-no-index.stderr",
+    "stdout": "behavior-combined-no-index.stdout",
+    "target_results": [
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 24,
+        "target": "sys_fs"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 7,
+        "target": "net_reads"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 10,
+        "target": "net_writes"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 1,
+        "target": "combined_sys_net"
+      }
+    ],
+    "targets": [
+      "sys_fs",
+      "net_reads",
+      "net_writes",
+      "combined_sys_net"
+    ]
+  },
+  {
+    "all_selected_targets_ran_once": true,
+    "all_tests_passed_without_ignored_or_filtered": true,
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1/agent-build-b_e0ropn/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,net,no_object",
+      "--test",
+      "net_no_object",
+      "--",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "coverage_found": true,
+    "expected_targets": [
+      "net_no_object"
+    ],
+    "features": "testing-environ,net,no_object",
+    "row": "net-no-object",
+    "status": 0,
+    "stderr": "behavior-net-no-object.stderr",
+    "stdout": "behavior-net-no-object.stdout",
+    "target_results": [
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 3,
+        "target": "net_no_object"
+      }
+    ],
+    "targets": [
+      "net_no_object"
+    ]
+  },
+  {
+    "all_selected_targets_ran_once": true,
+    "all_tests_passed_without_ignored_or_filtered": true,
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1/agent-build-b_e0ropn/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys,net,metadata,serde",
+      "--test",
+      "sys_policy",
+      "--test",
+      "net_metadata",
+      "--",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "coverage_found": true,
+    "expected_targets": [
+      "sys_policy",
+      "net_metadata"
+    ],
+    "features": "testing-environ,sys,net,metadata,serde",
+    "row": "combined-metadata-serde",
+    "status": 0,
+    "stderr": "behavior-combined-metadata-serde.stderr",
+    "stdout": "behavior-combined-metadata-serde.stdout",
+    "target_results": [
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 25,
+        "target": "sys_policy"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 1,
+        "target": "net_metadata"
+      }
+    ],
+    "targets": [
+      "sys_policy",
+      "net_metadata"
+    ]
+  },
+  {
+    "all_selected_targets_ran_once": true,
+    "all_tests_passed_without_ignored_or_filtered": true,
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1/agent-build-b_e0ropn/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys,net,sync",
+      "--test",
+      "sys_fs",
+      "--test",
+      "sys_policy",
+      "--test",
+      "net_connect",
+      "--test",
+      "net_listen",
+      "--test",
+      "net_reads",
+      "--test",
+      "net_writes",
+      "--test",
+      "combined_sys_net",
+      "--",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "coverage_found": true,
+    "expected_targets": [
+      "sys_fs",
+      "sys_policy",
+      "net_connect",
+      "net_listen",
+      "net_reads",
+      "net_writes",
+      "combined_sys_net"
+    ],
+    "features": "testing-environ,sys,net,sync",
+    "row": "combined-sync",
+    "status": 0,
+    "stderr": "behavior-combined-sync.stderr",
+    "stdout": "behavior-combined-sync.stdout",
+    "target_results": [
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 35,
+        "target": "sys_fs"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 25,
+        "target": "sys_policy"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 4,
+        "target": "net_connect"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 8,
+        "target": "net_listen"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 8,
+        "target": "net_reads"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 10,
+        "target": "net_writes"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 1,
+        "target": "combined_sys_net"
+      }
+    ],
+    "targets": [
+      "sys_fs",
+      "sys_policy",
+      "net_connect",
+      "net_listen",
+      "net_reads",
+      "net_writes",
+      "combined_sys_net"
+    ]
+  },
+  {
+    "all_selected_targets_ran_once": true,
+    "all_tests_passed_without_ignored_or_filtered": true,
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1/agent-build-b_e0ropn/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys,net,only_i32,no_float",
+      "--test",
+      "sys_fs",
+      "--test",
+      "sys_policy",
+      "--test",
+      "net_connect",
+      "--test",
+      "net_listen",
+      "--test",
+      "net_reads",
+      "--test",
+      "net_writes",
+      "--test",
+      "combined_sys_net",
+      "--",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "coverage_found": true,
+    "expected_targets": [
+      "sys_fs",
+      "sys_policy",
+      "net_connect",
+      "net_listen",
+      "net_reads",
+      "net_writes",
+      "combined_sys_net"
+    ],
+    "features": "testing-environ,sys,net,only_i32,no_float",
+    "row": "combined-i32-no-float",
+    "status": 0,
+    "stderr": "behavior-combined-i32-no-float.stderr",
+    "stdout": "behavior-combined-i32-no-float.stdout",
+    "target_results": [
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 35,
+        "target": "sys_fs"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 24,
+        "target": "sys_policy"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 4,
+        "target": "net_connect"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 7,
+        "target": "net_listen"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 7,
+        "target": "net_reads"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 10,
+        "target": "net_writes"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 1,
+        "target": "combined_sys_net"
+      }
+    ],
+    "targets": [
+      "sys_fs",
+      "sys_policy",
+      "net_connect",
+      "net_listen",
+      "net_reads",
+      "net_writes",
+      "combined_sys_net"
+    ]
+  },
+  {
+    "all_selected_targets_ran_once": true,
+    "all_tests_passed_without_ignored_or_filtered": true,
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1/agent-build-b_e0ropn/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys,net,unchecked",
+      "--test",
+      "sys_fs",
+      "--test",
+      "sys_policy",
+      "--test",
+      "net_connect",
+      "--test",
+      "net_listen",
+      "--test",
+      "net_reads",
+      "--test",
+      "net_writes",
+      "--test",
+      "combined_sys_net",
+      "--",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "coverage_found": true,
+    "expected_targets": [
+      "sys_fs",
+      "sys_policy",
+      "net_connect",
+      "net_listen",
+      "net_reads",
+      "net_writes",
+      "combined_sys_net"
+    ],
+    "features": "testing-environ,sys,net,unchecked",
+    "row": "combined-unchecked",
+    "status": 0,
+    "stderr": "behavior-combined-unchecked.stderr",
+    "stdout": "behavior-combined-unchecked.stdout",
+    "target_results": [
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 33,
+        "target": "sys_fs"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 24,
+        "target": "sys_policy"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 4,
+        "target": "net_connect"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 7,
+        "target": "net_listen"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 7,
+        "target": "net_reads"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 9,
+        "target": "net_writes"
+      },
+      {
+        "failed": 0,
+        "filtered_out": 0,
+        "ignored": 0,
+        "measured": 0,
+        "passed": 1,
+        "target": "combined_sys_net"
+      }
+    ],
+    "targets": [
+      "sys_fs",
+      "sys_policy",
+      "net_connect",
+      "net_listen",
+      "net_reads",
+      "net_writes",
+      "combined_sys_net"
+    ]
+  }
+]

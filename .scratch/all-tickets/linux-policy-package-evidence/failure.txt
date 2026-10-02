@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1/run-sys-net-behavior.py", line 686, in <module>
+    exit_status = main()
+  File "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1/run-sys-net-behavior.py", line 654, in main
+    status = run_command('behavior-' + row_name, argv, env, expected_status=None,
+                         cwd=SOURCE, merge_streams=True)
+  File "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1/run-sys-net-behavior.py", line 319, in run_command
+    sample_resources()
+    ~~~~~~~~~~~~~~~~^^
+  File "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1/run-sys-net-behavior.py", line 267, in sample_resources
+    raise RuntimeError('sampled private storage reached 1.5 GiB preemptive stop')
+RuntimeError: sampled private storage reached 1.5 GiB preemptive stop

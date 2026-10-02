@@ -348,6 +348,34 @@ accepted source evidence and closes the concrete remaining tool/confinement
 source gaps under existing Expert09, without native dispatch or another review
 chain. Root renews exact Linux heavy-slot inventory before policy1 launch.
 
+Current continuation: previous status-only turn NO PROGRESS. This turn accepts
+and integrates the native root-alias correction with its original proof.
+Policy1 SSH81930 is terminal1 at private-storage preemption, not a failed source
+correction. Original proof collected; seven complete feature rows/430 tests and
+five intended failing assertion controls independently read from raw logs. Both
+original policy failures and the new ancestor-alias regression pass. Sourcea2d,
+archive551c03, lock2ba4, seven manifests and executed helper match; the two
+production candidate files are byte-identical to frozen a2d. See
+linux-root-alias-review.md and linux-policy-package-root-readback.json.
+Launcher cleanup/readback/scope0; fresh native readback confirms all21 recorded
+PID/start identities and exact runtime/scope absent. 107periodic samples give
+maxRSS964272KiB/storage1588088KiB/descendants10, not continuous peaks.
+Export84.425s; cumulative exported elapsed143.627s/outer allocation1800s.
+No hard-cap change or failed correction added for the policy cause.
+
+Remaining native rows: combined-no-index-sync-metadata (compile interrupted at
+storage preemption) and combined-f32 (not run). Existing responsible Linux owner
+prepares one source-only policy2 package for exactly those rows, preserving a2d
+source, existing caps, original applicable five controls and cause history. No
+repeat of seven accepted rows. Review preparation before fresh slot inventory
+and launch. Mac owner closes concrete confinement source gaps without native
+launch; processcount84 and measurementguardfalse unchanged.
+Root and both active owners confirm current instruction revision958a4538,
+including applicable project/skills/templates; neither owner has descendants.
+Windows completed owner is pending reload at its next safe active checkpoint;
+no restart solely for rules. Goal and all remaining platform/process/release
+requirements remain open.
+
 ## Current-source core MSRV package — accepted narrow gate
 Current default-core applicability CLOSED for source52d9797b, Rust/Cargo1.66.0,
 Darwin arm64, exact v3 lock. Real Engine42, spawn reserved withoutsys, wrong43

@@ -1,0 +1,32 @@
+   Compiling rhai v1.26.1 (/var/roothome/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1/agent-build-b_e0ropn/source)
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 4.75s
+     Running tests/net_no_object.rs (/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1/agent-build-b_e0ropn/target/debug/deps/net_no_object-e57c9c43359ae725)
+
+running 3 tests
+test registered_error_getters_are_callable_with_explicit_arguments ... ok
+test registered_listener_functions_work_with_explicit_handle_arguments ... ok
+test registered_stream_functions_work_without_dot_syntax ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+

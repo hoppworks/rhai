@@ -1,0 +1,365 @@
+{
+  "source_revision": "a2d7a8c2ace21e63c18b2e64cdce74e5e10afc94",
+  "manifests_match": 7,
+  "source_lock_helper_candidate_match": true,
+  "rows": [
+    {
+      "row": "combined-baseline",
+      "features": "testing-environ,sys,net",
+      "summaries": [
+        {
+          "target": "combined_sys_net",
+          "passed": 1
+        },
+        {
+          "target": "net_connect",
+          "passed": 4
+        },
+        {
+          "target": "net_listen",
+          "passed": 7
+        },
+        {
+          "target": "net_reads",
+          "passed": 7
+        },
+        {
+          "target": "net_writes",
+          "passed": 10
+        },
+        {
+          "target": "sys_env",
+          "passed": 7
+        },
+        {
+          "target": "sys_fs",
+          "passed": 35
+        },
+        {
+          "target": "sys_policy",
+          "passed": 24
+        }
+      ],
+      "tests": 95
+    },
+    {
+      "row": "combined-no-index",
+      "features": "testing-environ,sys,net,no_index",
+      "summaries": [
+        {
+          "target": "combined_sys_net",
+          "passed": 1
+        },
+        {
+          "target": "net_reads",
+          "passed": 7
+        },
+        {
+          "target": "net_writes",
+          "passed": 10
+        },
+        {
+          "target": "sys_fs",
+          "passed": 24
+        }
+      ],
+      "tests": 42
+    },
+    {
+      "row": "net-no-object",
+      "features": "testing-environ,net,no_object",
+      "summaries": [
+        {
+          "target": "net_no_object",
+          "passed": 3
+        }
+      ],
+      "tests": 3
+    },
+    {
+      "row": "combined-metadata-serde",
+      "features": "testing-environ,sys,net,metadata,serde",
+      "summaries": [
+        {
+          "target": "net_metadata",
+          "passed": 1
+        },
+        {
+          "target": "sys_policy",
+          "passed": 25
+        }
+      ],
+      "tests": 26
+    },
+    {
+      "row": "combined-sync",
+      "features": "testing-environ,sys,net,sync",
+      "summaries": [
+        {
+          "target": "combined_sys_net",
+          "passed": 1
+        },
+        {
+          "target": "net_connect",
+          "passed": 4
+        },
+        {
+          "target": "net_listen",
+          "passed": 8
+        },
+        {
+          "target": "net_reads",
+          "passed": 8
+        },
+        {
+          "target": "net_writes",
+          "passed": 10
+        },
+        {
+          "target": "sys_fs",
+          "passed": 35
+        },
+        {
+          "target": "sys_policy",
+          "passed": 25
+        }
+      ],
+      "tests": 91
+    },
+    {
+      "row": "combined-i32-no-float",
+      "features": "testing-environ,sys,net,only_i32,no_float",
+      "summaries": [
+        {
+          "target": "combined_sys_net",
+          "passed": 1
+        },
+        {
+          "target": "net_connect",
+          "passed": 4
+        },
+        {
+          "target": "net_listen",
+          "passed": 7
+        },
+        {
+          "target": "net_reads",
+          "passed": 7
+        },
+        {
+          "target": "net_writes",
+          "passed": 10
+        },
+        {
+          "target": "sys_fs",
+          "passed": 35
+        },
+        {
+          "target": "sys_policy",
+          "passed": 24
+        }
+      ],
+      "tests": 88
+    },
+    {
+      "row": "combined-unchecked",
+      "features": "testing-environ,sys,net,unchecked",
+      "summaries": [
+        {
+          "target": "combined_sys_net",
+          "passed": 1
+        },
+        {
+          "target": "net_connect",
+          "passed": 4
+        },
+        {
+          "target": "net_listen",
+          "passed": 7
+        },
+        {
+          "target": "net_reads",
+          "passed": 7
+        },
+        {
+          "target": "net_writes",
+          "passed": 9
+        },
+        {
+          "target": "sys_fs",
+          "passed": 33
+        },
+        {
+          "target": "sys_policy",
+          "passed": 24
+        }
+      ],
+      "tests": 85
+    }
+  ],
+  "controls_checked": 5,
+  "new_alias_and_original_regressions_pass": true,
+  "terminal_status": 1,
+  "cause": "preemptive private storage limit, not a failed source correction",
+  "remaining_rows": [
+    "combined-no-index-sync-metadata",
+    "combined-f32"
+  ],
+  "native_readback": {
+    "identities": [
+      {
+        "label": "helper",
+        "pid": 1811809,
+        "start": "8028928",
+        "matching_alive": false
+      },
+      {
+        "label": "scoped-supervisor",
+        "pid": 1811808,
+        "start": "8028926",
+        "matching_alive": false
+      },
+      {
+        "label": "rustup-version",
+        "pid": 1811816,
+        "start": "8028957",
+        "matching_alive": false
+      },
+      {
+        "label": "rustup-install",
+        "pid": 1811830,
+        "start": "8028970",
+        "matching_alive": false
+      },
+      {
+        "label": "rustc-version",
+        "pid": 1811996,
+        "start": "8029743",
+        "matching_alive": false
+      },
+      {
+        "label": "cargo-version",
+        "pid": 1812003,
+        "start": "8029756",
+        "matching_alive": false
+      },
+      {
+        "label": "control-sys-filesystem-wrong-readback",
+        "pid": 1812021,
+        "start": "8029771",
+        "matching_alive": false
+      },
+      {
+        "label": "control-tcp-wrong-peer-readback",
+        "pid": 1813756,
+        "start": "8031204",
+        "matching_alive": false
+      },
+      {
+        "label": "control-tcp-wrong-peer-writeback",
+        "pid": 1813793,
+        "start": "8031249",
+        "matching_alive": false
+      },
+      {
+        "label": "control-combined-wrong-host-readback",
+        "pid": 1813836,
+        "start": "8031304",
+        "matching_alive": false
+      },
+      {
+        "label": "control-net-no-object-wrong-peer",
+        "pid": 1813869,
+        "start": "8031348",
+        "matching_alive": false
+      },
+      {
+        "label": "behavior-combined-baseline",
+        "pid": 1814061,
+        "start": "8031852",
+        "matching_alive": false
+      },
+      {
+        "label": "behavior-combined-no-index",
+        "pid": 1814556,
+        "start": "8032663",
+        "matching_alive": false
+      },
+      {
+        "label": "behavior-net-no-object",
+        "pid": 1814847,
+        "start": "8033250",
+        "matching_alive": false
+      },
+      {
+        "label": "behavior-combined-metadata-serde",
+        "pid": 1814987,
+        "start": "8033734",
+        "matching_alive": false
+      },
+      {
+        "label": "behavior-combined-sync",
+        "pid": 1815349,
+        "start": "8034587",
+        "matching_alive": false
+      },
+      {
+        "label": "behavior-combined-i32-no-float",
+        "pid": 1815890,
+        "start": "8035408",
+        "matching_alive": false
+      },
+      {
+        "label": "behavior-combined-unchecked",
+        "pid": 1816336,
+        "start": "8036015",
+        "matching_alive": false
+      },
+      {
+        "label": "behavior-combined-no-index-sync-metadata",
+        "pid": 1816811,
+        "start": "8036756",
+        "matching_alive": false
+      },
+      {
+        "label": "launcher",
+        "pid": 1811738,
+        "start": "8028918",
+        "matching_alive": false
+      },
+      {
+        "label": "run-scoped",
+        "pid": 1811805,
+        "start": "8028924",
+        "matching_alive": false
+      }
+    ],
+    "paths": [
+      {
+        "path": "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1/agent-build-b_e0ropn",
+        "exists": false,
+        "symlink": false
+      },
+      {
+        "path": "/root/.local/share/agent-builds/rhai/linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1",
+        "exists": false,
+        "symlink": false
+      }
+    ]
+  },
+  "sampled_maxima": {
+    "descendant_hard_stop": 16,
+    "maxima": {
+      "descendants": 10,
+      "rss_kib": 964272,
+      "storage_kib": 1588088
+    },
+    "rss_hard_stop_kib": 2097152,
+    "sample_count": 107,
+    "samples_are_periodic_not_continuous_peak": true,
+    "storage_hard_stop_kib": 2097152,
+    "storage_preemptive_stop_kib": 1572864
+  },
+  "elapsed_seconds_at_export": 84.425,
+  "test_invocations_passed": 430
+}

@@ -282,6 +282,38 @@ fn test_symlinked_root() {
     assert_eq!(e.eval::<String>(&format!(r#"read_file("{via_real}")"#)).unwrap(), "a");
 }
 
+// An absolute spelling beneath a symlinked ancestor may name the canonical root
+// even when the configured spelling includes `..` components.
+#[cfg(unix)]
+#[test]
+fn test_absolute_path_through_symlinked_root_ancestor() {
+    let t = TempDir::new();
+    t.write("real/sub/a.txt", "a");
+    std::os::unix::fs::symlink(t.path().join("real"), t.path().join("alias")).unwrap();
+    let configured = t.path().join("alias/sub/../sub");
+    let e = engine(SysConfig::default().fs_root(&configured, FsAccess::Read));
+
+    assert_eq!(e.eval::<String>(r#"read_file("a.txt")"#).unwrap(), "a");
+    let via_alias = format!("{}/alias/sub/a.txt", t.as_script_path());
+    let via_canonical = std::fs::canonicalize(t.path().join("real/sub/a.txt"))
+        .unwrap()
+        .to_str()
+        .unwrap()
+        .to_owned();
+    assert_eq!(e.eval::<String>(&format!(r#"read_file("{via_alias}")"#)).unwrap(), "a");
+    assert_eq!(e.eval::<String>(&format!(r#"read_file("{via_canonical}")"#)).unwrap(), "a");
+    assert_eq!(
+        err_kind(
+            &e,
+            &format!(r#"write_file("{via_alias}", "changed")"#)
+        ),
+        "Denied"
+    );
+    assert_eq!(std::fs::read(t.path().join("real/sub/a.txt")).unwrap(), b"a");
+    let outside = format!("{}/../../../outside.txt", t.path().join("alias/sub").display());
+    assert_eq!(err_kind(&e, &format!(r#"read_file("{outside}")"#)), "Denied");
+}
+
 #[cfg(target_os = "macos")]
 #[test]
 fn test_root_accepts_macos_system_prefix_aliases() {

@@ -1,0 +1,30 @@
+{
+  "Cargo.lock.accepted": {
+    "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1/Cargo.lock.accepted",
+    "sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425"
+  },
+  "agentskills/__init__.py": {
+    "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1/runner/tools/agentskills/__init__.py",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "agentskills/pyguard.py": {
+    "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1/runner/tools/agentskills/pyguard.py",
+    "sha256": "a3739f4947744303e1adf3fb0875ac743944a272e5b95c94b1baba53029d313f"
+  },
+  "contract.md": {
+    "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1/contract.md",
+    "sha256": "950a283d5e5013e7d5061cb6b0aaca0707e31c66c30241c3cab525003dab0c6d"
+  },
+  "run-sys-net-behavior.py": {
+    "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1/run-sys-net-behavior.py",
+    "sha256": "f5461ba793c28da589afc9a75289156a42eb339ca8a453ff4f53ff70881093c3"
+  },
+  "run_scoped.py": {
+    "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1/runner/tools/run_scoped.py",
+    "sha256": "9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d"
+  },
+  "source.tar": {
+    "path": "/root/rhai-linux-current-sys-net-behavior-a2d7a8c2-20261002-policy1/source.tar",
+    "sha256": "551c03dbe3f4550db1b144b3e65d83f5bc66c132c1a9cffa59c83fce16bc41e1"
+  }
+}

@@ -1,0 +1,11 @@
+
+running 1 test
+test test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving ... FAILED
+
+failures:
+
+failures:
+    test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 34 filtered out; finished in 0.00s
+

@@ -26,6 +26,8 @@ pub(super) struct OpenRoot {
     given: PathBuf,
     /// Canonical form of `given`, for matching absolute script paths.
     canonical: PathBuf,
+    /// Exact absolute spellings that resolve to `canonical` and may name this root.
+    aliases: Vec<PathBuf>,
     dir: Dir,
     access: FsAccess,
 }
@@ -57,11 +59,13 @@ impl FsState {
                         std::fs::canonicalize(&given)
                             .map_err(|e| SysError::io("open root", target(), &e))?,
                     );
+                    let aliases = root_aliases(&given, &canonical);
                     let dir = Dir::open_ambient_dir(&given, ambient_authority())
                         .map_err(|e| SysError::io("open root", target(), &e))?;
                     opened.push(OpenRoot {
                         given,
                         canonical,
+                        aliases,
                         dir,
                         access: root.access,
                     });
@@ -167,6 +171,35 @@ fn prefix_alias(path: &Path) -> Option<PathBuf> {
     None
 }
 
+/// Return additional spellings of a configured root that the OS resolves to the
+/// same canonical directory. This accounts for symlinked ancestors such as
+/// `/root` -> `/var/roothome` without treating lexical normalization as proof of
+/// equivalence: every candidate is canonicalized and compared with the opened
+/// root's canonical path.
+fn root_aliases(given: &Path, canonical: &Path) -> Vec<PathBuf> {
+    let mut aliases = vec![given.to_path_buf(), canonical.to_path_buf()];
+    for prefix in given.ancestors() {
+        let Ok(resolved_prefix) = std::fs::canonicalize(prefix) else {
+            continue;
+        };
+        let resolved_prefix = strip_verbatim(resolved_prefix);
+        let Ok(suffix) = canonical.strip_prefix(&resolved_prefix) else {
+            continue;
+        };
+        let candidate = prefix.join(suffix);
+        if aliases.contains(&candidate) {
+            continue;
+        }
+        let Ok(resolved_candidate) = std::fs::canonicalize(&candidate) else {
+            continue;
+        };
+        if strip_verbatim(resolved_candidate) == canonical {
+            aliases.push(candidate);
+        }
+    }
+    aliases
+}
+
 /// Refuse a relative path that lexically climbs above its start.
 fn check_relative(path: &str, rel: &Path) -> Result<(), SysError> {
     let mut depth: isize = 0;
@@ -213,7 +246,7 @@ impl FsState {
                 let (ix, rel) = if p.is_absolute() {
                     let mut best: Option<(usize, &Path)> = None;
                     for (i, root) in roots.iter().enumerate() {
-                        let mut aliases = vec![root.given.as_path(), root.canonical.as_path()];
+                        let mut aliases: Vec<&Path> = root.aliases.iter().map(PathBuf::as_path).collect();
                         let given_alias = prefix_alias(&root.given);
                         let canonical_alias = prefix_alias(&root.canonical);
                         aliases.extend(given_alias.iter().map(PathBuf::as_path));

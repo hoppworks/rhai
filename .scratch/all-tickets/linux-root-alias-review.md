@@ -44,3 +44,33 @@ These justify one shared finite run rather than separate disposable builds.
 The unchanged hard limits stop work if the larger feature matrix cannot fit.
 No continuous peak or guaranteed completion within this envelope is inferred.
 Native process count84 and Mac measurement guardfalse remain unchanged.
+
+## Native correction acceptance — 2026-10-02
+
+The frozen a2d7a8c2 production files match the integrated candidate byte for byte.
+Original Linux policy1 evidence and launcher receipts are retained in
+`linux-policy-package-evidence/`, `linux-policy-package-launcher-evidence/` and
+`linux-policy-package-outer.log`; independent raw-result and fresh native cleanup
+readback is in `linux-policy-package-root-readback.json`. Direct private
+Rust/Cargo1.77.2, archive551c03 and v3lock2ba4 match the reviewed contract.
+
+Seven complete rows pass: combined-baseline95, combined-no-index42,
+net-no-object3, combined-metadata-serde26, combined-sync91,
+combined-i32-no-float88 and combined-unchecked85: 430 test executions. Every
+selected target has one successful summary with no ignored or filtered tests.
+The original dot-component and symlinked-root failures and the new public
+ancestor-alias regression pass. All five intentional wrong expectations return101
+with their named assertion diagnostics before restored positive execution. This
+closes the root-alias correction for these native configurations, including
+independent unchanged host-file readback after denied writes.
+
+The package terminates1 at the declared private-storage preemption, during
+combined-no-index-sync-metadata compilation; combined-f32 was not run. Neither
+row is accepted. Launcher runtime cleanup, identity readback and scope cleanup
+return0. Fresh independent native readback finds all21 PID/start identities absent
+and the exact runtime/session scope absent. Across107 periodic samples, maxima
+are RSS964272KiB, storage1588088KiB and10 descendants; these are sampled maxima,
+not continuous peaks. Export elapsed84.425s brings cumulative exported elapsed
+to143.627s; cumulative outer allocation remains1800s. This resource boundary is
+not a failed source correction. Follow-up preparation targets only the two open
+rows, reusing applicable original controls and retaining all existing caps.

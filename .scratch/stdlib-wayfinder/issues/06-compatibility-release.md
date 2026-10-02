@@ -154,3 +154,22 @@ launcher evidence and followup-root-readback.json confirm owned cleanup. Root
 independently matched all seven frozen manifest hashes, lock and helper bytes.
 Successful Engine/OS slices remain valid within their source/environment scope;
 filesystem corrections require affected filesystem/combined rechecks.
+
+## Linux current root-alias correction and seven native feature rows
+
+Frozen a2d7a8c2 with private Rust/Cargo1.77.2 and v3lock2ba4 completes seven
+real Engine/OS feature rows: baseline95, no_index42, net/no_object3,
+metadata/serde26, sync91, only_i32/no_float88 and unchecked85. All430 test
+executions pass; five deliberate wrong-expectation controls fail as intended.
+The two prior canonical-root failures and new ancestor-alias regression pass,
+including denied-write independent host readback. Production candidate bytes,
+seven manifests, source/archive, lock and executed helper were independently
+matched. Original proof and terminal/cleanup receipts are retained under
+`../../all-tickets/linux-policy-package-evidence/` and launcher-evidence;
+`../../all-tickets/linux-policy-package-root-readback.json` records raw summary
+checks and fresh native readback of21 absent identities and removed runtime/scope.
+
+The finite package stopped at its storage preemption while compiling
+no_index/sync/metadata; f32 was not run. These two rows, the wider platform/process
+matrix and release acceptance remain open. Seven completed rows may be reused
+while their relevant source/check/environment remain unchanged.
