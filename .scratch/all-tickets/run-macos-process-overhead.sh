@@ -9,7 +9,7 @@ print -r -- "evidence_path=$evidence"
 print -r -- "cargo_log_base=$log_base"
 print -r -- "wrapper_pid=$$ wrapper_pgid=$(ps -o pgid= -p $$ | tr -d ' ')"
 export RHAI_OVERHEAD_LOG_BASE="$log_base"
-python3 /Users/hoppworks/projects/agent-skills/tools/run_scoped.py --timeout 585 -- python3 "$repo/.scratch/all-tickets/macos-process-overhead.py" > "$evidence" 2>&1
+python3 "$repo/.scratch/all-tickets/run-macos-process-overhead-scoped.py" --timeout 585 > "$evidence" 2>&1
 runner_rc=$?
 cat "$evidence"
 runtime_paths=(${(f)"$(sed -n 's/^runtime_path=//p' "$evidence")"})
