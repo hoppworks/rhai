@@ -12,7 +12,7 @@ const FIXTURE_CODE_ENV: &str = "RHAI_SYS_WINDOWS_PROCESS_CODE";
 const FIXTURE_RECORD_ENV: &str = "RHAI_SYS_WINDOWS_PROCESS_RECORD";
 const LIBTEST_QUIET_START: &[u8] = b"\nrunning 1 test\n";
 
-/// Re-executed by the public `run_raw` contract to provide independent OS output and status.
+/// Re-executed by the public `run_raw` contract to produce OS output and a pre-exit record.
 #[test]
 fn windows_process_fixture() {
     let Ok(code) = std::env::var(FIXTURE_CODE_ENV) else {
@@ -29,7 +29,8 @@ fn windows_process_fixture() {
 }
 
 /// Public Windows run contract: raw streams, nonzero exit as data, and completion after the
-/// independently observed child record has been written.
+/// child-written pre-exit record and captured streams are observed. Native process-handle
+/// readback is still required to prove OS-level termination and cleanup ownership.
 #[test]
 fn windows_run_raw_captures_output_and_nonzero_exit() {
     let engine = engine(SysConfig::default().programs(ProgramPolicy::Any));
@@ -44,12 +45,12 @@ fn windows_run_raw_captures_output_and_nonzero_exit() {
                 env_clear: true,
                 env: #{{ {FIXTURE_CODE_ENV}: "{code}", {FIXTURE_RECORD_ENV}: "{record}" }},
                 max_output: 1024,
-                timeout: 5.0
+                timeout: 5
             }})"#
         );
         let result = engine.eval::<Map>(&script).unwrap();
         assert_eq!(result["success"].as_bool().unwrap(), code == 0);
-        assert_eq!(result["code"].as_int().unwrap(), i64::from(code));
+        assert_eq!(result["code"].as_int().unwrap(), rhai::INT::from(code));
         assert!(result["stdout_complete"].as_bool().unwrap());
         assert!(result["stderr_complete"].as_bool().unwrap());
         let mut expected_stdout = LIBTEST_QUIET_START.to_vec();

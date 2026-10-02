@@ -14,10 +14,12 @@ Added `tests/sys_process_windows.rs`, gated to Windows with `sys` and indexed
 collections enabled. The test re-executes its own test binary and calls public
 `run_raw` through `SysPackage`/`Engine` for exit codes 0 and 7. It checks exact
 binary stdout/stderr, complete capture, nonzero status as returned data, and
-independently reads the child's PID/exit record after `run_raw` returns. The
-fixture writes that record itself before exiting. `TempDir` owns and removes
-the record directory. This is a contract preparation only: the test was not
-compiled or run, so no native RED or pass is claimed.
+reads the child's PID/exit-intent record after `run_raw` returns. The fixture
+writes that record before output and exit; it does not independently prove the
+process has terminated. The integer timeout works with `no_float`, and the
+requested 1024-byte output limit is clamped by the host's configured maximum.
+`TempDir` owns and removes the record directory. This is a contract preparation
+only: the test was not compiled or run, so no native RED or pass is claimed.
 
 Smallest private production seam needed: in `src/packages/sys/process.rs`,
 declare a private `#[cfg(windows)] mod windows;` and dispatch to
@@ -33,8 +35,10 @@ slice.
   untracked test has also passed `rustfmt --check`.
 - No Cargo, compiler, fixture, or native Windows command was launched.
 - Native Windows compilation, meaningful missing-registration RED, byte/output
-  assertions, OS-level handle cleanup/reaping, and repeatability remain
-  unverified and belong to the Windows owner after the custody/prototype gate.
+  assertions, OS-level termination and handle cleanup/reaping, and repeatability
+  remain unverified. Native acceptance must read back the exact recorded PID via
+  the runner's retained process handle after the report, and establish cleanup
+  ownership, under the Windows owner's custody/prototype gate.
 - Active-work estimate/checkpoint: 30 minutes. Work in this step stayed within
   that estimate. Native launches: zero; source-only package count: one.
 - No dependencies, shared services, guest resources, or temporary processes
