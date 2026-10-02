@@ -1,0 +1,8 @@
+{
+  "elapsed_seconds_at_export": 37.84,
+  "evidence_destination": "/Users/hoppworks/projects/rhai-all-tickets/.scratch/all-tickets/current-optional-msrv-evidence",
+  "expected_outer_scope": "/Users/hoppworks/.local/share/agent-builds/rhai/root-optional-msrv-20261002-c96f1a72",
+  "helper_deadline_seconds": 540,
+  "runtime": "/Users/hoppworks/.local/share/agent-builds/rhai/root-optional-msrv-20261002-c96f1a72/agent-build-9uhi7a7a",
+  "runtime_cleanup_owner": "run_scoped.py; independently read back by coordinator"
+}

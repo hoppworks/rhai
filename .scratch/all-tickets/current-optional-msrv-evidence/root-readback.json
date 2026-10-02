@@ -1,0 +1,22 @@
+{
+  "revision": "9f84aa6d8163257b4e3f3c2fe4a1c7d7b7c3cce6",
+  "outer_status": 0,
+  "command_statuses": {
+    "source-archive": 0,
+    "rustup-install": 0,
+    "rustc-version": 0,
+    "cargo-version": 0,
+    "cargo-check": 0
+  },
+  "runtime_absent": "/Users/hoppworks/.local/share/agent-builds/rhai/root-optional-msrv-20261002-c96f1a72/agent-build-9uhi7a7a",
+  "scope_retired_empty_only": "/Users/hoppworks/.local/share/agent-builds/rhai/root-optional-msrv-20261002-c96f1a72",
+  "manifest_hashes_matched": 7,
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "sampled_maxima": {
+    "descendants": 4,
+    "rss_kib": 799552,
+    "storage_kib": 622252
+  },
+  "elapsed_seconds_at_export": 37.84,
+  "acceptance": "Rust1.77.2 native Darwin arm64 sys/net library compile only; native behavior and final release remain open."
+}

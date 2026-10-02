@@ -54,3 +54,21 @@ The owner accepted the recommended concrete specification in
 [the approved proposal](../../all-tickets/release-proposal.md).
 Implementation, documented behavior and strict native/feature/MSRV proof remain
 open campaign requirements. No remote publication is authorized.
+
+## Current-source optional compiler prerequisite — 2026-10-02
+
+Native Darwin arm64 Rust/Cargo1.77.2 successfully ran
+`cargo check --locked --lib --features testing-environ,sys,net` at frozen source
+`9f84aa6d8163257b4e3f3c2fe4a1c7d7b7c3cce6`, with compatible lock SHA-256
+`2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425`.
+Original logs, direct versions, command statuses and seven manifest hashes are in
+`../../all-tickets/current-optional-msrv-evidence/`; `root-readback.json` confirms
+outer0, every command0, exact runtime absence and empty-only scope retirement.
+No relevant source, build script or Cargo-manifest change exists between that
+revision and integration1928c068, so this compile evidence applies there too.
+The private toolchain and caches were disposable, with no shared-home install.
+
+This closes only the current sys/net library compiler prerequisite on Darwin.
+Script behavior, tests/examples, other feature combinations and native platforms
+remain open. Native process invocation count84 is unchanged; no fixture/control
+or overhead measurement was run. The earlier release specification stays intact.

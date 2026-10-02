@@ -432,3 +432,18 @@ regressions only. Same responsible owner resumed for existing source readiness:
 SDK constants/layout/signatures and current Darwin provenance; exact toolchain/
 helper/config assumptions. Current4d86 instructions required from start, no new
 Expert chain/review, one30-minute source planning checkpoint and guardfalse.
+
+Optional MSRV compile dispatch checkpoint: previous live Playwright PIDs78437/78438/78440 are now absent; renewed compiler/headless inventory is empty. One previously allocated source9f84 check launches now, same scope/caps/lock; no target fixture or native85.
+
+Current optional MSRV compile CLOSED narrowly: frozen9f84, direct Rust/Cargo1.77.2
+Darwinarm64, compatible lock2ba4, cargo check --locked --lib --features
+testing-environ,sys,net. Source archive/install/versions/check all0; outer0.
+Original current-optional-msrv-evidence includes independent root-readback:
+seven Cargo manifests match frozen Git source, lock matches, rustc host/version
+and exact Cargo argv match, dev completion exists, no failure artifact. Export
+at37.84s; sampled maxima storage622252KiB/RSS799552KiB/descendants4, not continuous
+peak. Exact runtime agent-build-9uhi7a7a independently absent; own scope retired
+empty-only. No relevant src/build.rs/Cargo/codegen/config diff9f84..1928c068, so
+compile applies to current integration. No target fixtures/native85 or feature
+behavior acceptance. Private Rustup home/toolchain removed by owned runtime
+cleanup. Linux/Windows optional current MSRV and native final feature matrix open.
