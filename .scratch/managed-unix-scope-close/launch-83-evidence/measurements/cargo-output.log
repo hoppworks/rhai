@@ -1,0 +1,328 @@
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded ahash v0.8.12
+  Downloaded num-traits v0.2.19
+  Downloaded version_check v0.9.5
+  Downloaded const-random-macro v0.1.16
+  Downloaded const-random v0.1.18
+  Downloaded cfg-if v1.0.5
+  Downloaded itoa v1.0.15
+  Downloaded crunchy v0.2.4
+  Downloaded ambient-authority v0.0.2
+  Downloaded fs-set-times v0.20.3
+  Downloaded autocfg v1.5.1
+  Downloaded errno v0.3.14
+  Downloaded smartstring v1.0.1
+  Downloaded paste v1.0.15
+  Downloaded static_assertions v1.1.0
+  Downloaded io-lifetimes v3.0.1
+  Downloaded maybe-owned v0.3.4
+  Downloaded tiny-keccak v2.0.2
+  Downloaded quote v1.0.41
+  Downloaded byteorder v1.5.0
+  Downloaded io-lifetimes v2.0.4
+  Downloaded thin-vec v0.2.19
+  Downloaded ryu v1.0.20
+  Downloaded unicode-ident v1.0.22
+  Downloaded rmp-serde v1.3.0
+  Downloaded smallvec v1.16.2
+  Downloaded rmp v0.8.14
+  Downloaded ipnet v2.12.2
+  Downloaded rustix-linux-procfs v0.1.1
+  Downloaded cap-std v4.0.3
+  Downloaded io-extras v0.19.0
+  Downloaded serde_core v1.0.229
+  Downloaded once_cell v1.21.4
+  Downloaded getrandom v0.2.17
+  Downloaded proc-macro2 v1.0.103
+  Downloaded bitflags v2.13.2
+  Downloaded getrandom v0.3.4
+  Downloaded serde v1.0.229
+  Downloaded cap-primitives v4.0.3
+  Downloaded memchr v2.8.3
+  Downloaded serde_json v1.0.145
+  Downloaded portable-atomic v1.15.0
+  Downloaded syn v2.0.106
+  Downloaded zerocopy v0.8.59
+  Downloaded rustix v1.1.5
+  Downloaded libc v0.2.189
+  Downloaded linux-raw-sys v0.12.1
+ Downloading crates ...
+  Downloaded web-time v1.1.0
+   Compiling autocfg v1.5.1
+   Compiling portable-atomic v1.15.0
+   Compiling version_check v0.9.5
+   Compiling rustix v1.1.5
+   Compiling libc v0.2.189
+   Compiling crunchy v0.2.4
+   Compiling cfg-if v1.0.5
+   Compiling linux-raw-sys v0.12.1
+   Compiling tiny-keccak v2.0.2
+   Compiling proc-macro2 v1.0.103
+   Compiling io-lifetimes v3.0.1
+   Compiling io-lifetimes v2.0.4
+   Compiling bitflags v2.13.2
+   Compiling once_cell v1.21.4
+   Compiling num-traits v0.2.19
+   Compiling quote v1.0.41
+   Compiling unicode-ident v1.0.22
+   Compiling io-extras v0.19.0
+   Compiling getrandom v0.2.17
+   Compiling getrandom v0.3.4
+   Compiling cap-primitives v4.0.3
+   Compiling serde_core v1.0.229
+   Compiling zerocopy v0.8.59
+   Compiling const-random-macro v0.1.16
+   Compiling rustix-linux-procfs v0.1.1
+   Compiling fs-set-times v0.20.3
+   Compiling smartstring v1.0.1
+   Compiling ahash v0.8.12
+   Compiling paste v1.0.15
+   Compiling cap-std v4.0.3
+   Compiling ipnet v2.12.2
+   Compiling ambient-authority v0.0.2
+   Compiling maybe-owned v0.3.4
+   Compiling syn v2.0.106
+   Compiling const-random v0.1.18
+   Compiling rhai v1.26.1 (/var/roothome/.local/share/agent-builds/rhai/process-overhead-rhai-process-overhead-00bed4a0-b6f34e20-preflight83-3600450/agent-build-34k5bcbe/source)
+   Compiling serde v1.0.229
+   Compiling static_assertions v1.1.0
+   Compiling rhai_codegen v3.2.0 (/var/roothome/.local/share/agent-builds/rhai/process-overhead-rhai-process-overhead-00bed4a0-b6f34e20-preflight83-3600450/agent-build-34k5bcbe/source/codegen)
+   Compiling thin-vec v0.2.19
+   Compiling smallvec v1.16.2
+   Compiling byteorder v1.5.0
+   Compiling serde_json v1.0.145
+   Compiling rmp v0.8.14
+   Compiling memchr v2.8.3
+   Compiling ryu v1.0.20
+   Compiling itoa v1.0.15
+   Compiling rmp-serde v1.3.0
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:668:13
+    |
+668 |         let mut wait_operation = "wait for child";
+    |             ----^^^^^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `termination`
+    --> src/packages/sys/process/unix.rs:1106:22
+     |
+1106 |                 let (termination, _operation) = if self.managed {
+     |                      ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_termination`
+     |
+     = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2134:9
+     |
+2134 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2456:9
+     |
+2456 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variant `OnlyZombieLeader` is never constructed
+  --> src/packages/sys/process/unix.rs:50:5
+   |
+47 | enum GroupCloseOutcome {
+   |      ----------------- variant in this enum
+...
+50 |     OnlyZombieLeader,
+   |     ^^^^^^^^^^^^^^^^
+   |
+   = note: `GroupCloseOutcome` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: methods `numeric_operations_probe`, `quarantine_observations_probe`, and `fail_reservation` are never used
+    --> src/packages/sys/process/unix.rs:1470:8
+     |
+1390 | impl ExecutionFaults {
+     | -------------------- methods in this implementation
+...
+1470 |     fn numeric_operations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1481 |     fn quarantine_observations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1506 |     fn fail_reservation(&self) -> bool {
+     |        ^^^^^^^^^^^^^^^^
+
+warning: `rhai` (lib) generated 6 warnings (run `cargo fix --lib -p rhai` to apply 4 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+warning: variable does not need to be mutable
+   --> tests/sys_process.rs:727:9
+    |
+727 |     let mut holder = command.spawn().expect("start escaped captured-pipe holder");
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: value assigned to `incomplete` is never read
+    --> tests/sys_process.rs:1040:30
+     |
+1040 |         let mut incomplete = false;
+     |                              ^^^^^
+     |
+     = help: maybe it is overwritten before being read?
+     = note: `#[warn(unused_assignments)]` (part of `#[warn(unused)]`) on by default
+
+warning: constant `DIRECT_DROP_RECORD_ENV` is never used
+  --> tests/sys_process.rs:34:7
+   |
+34 | const DIRECT_DROP_RECORD_ENV: &str = "RHAI_SYS_DIRECT_DROP_RECORD";
+   |       ^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (test "sys_process") generated 3 warnings (run `cargo fix --test "sys_process" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 13.97s
+     Running tests/sys_process.rs (/var/roothome/.local/share/agent-builds/rhai/process-overhead-rhai-process-overhead-00bed4a0-b6f34e20-preflight83-3600450/agent-build-34k5bcbe/target/debug/deps/sys_process-1928063df57ef1bb)
+
+running 1 test
+test process_scope_overhead_measurement ... PROCESS_SCOPE_SAMPLE,0,DirectChild,true,100623439,0,0,0
+PROCESS_SCOPE_SAMPLE,0,DirectChild,capture,112700120,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,0,Managed,true,201688075,0,0,0
+PROCESS_SCOPE_SAMPLE,0,Managed,capture,212230246,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,1,Managed,capture,212214856,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,1,Managed,true,201418587,0,0,0
+PROCESS_SCOPE_SAMPLE,1,DirectChild,capture,12816758,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,1,DirectChild,true,101236436,0,0,0
+PROCESS_SCOPE_SAMPLE,2,DirectChild,true,758106,0,0,0
+PROCESS_SCOPE_SAMPLE,2,DirectChild,capture,110606402,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,2,Managed,true,101079287,0,0,0
+PROCESS_SCOPE_SAMPLE,2,Managed,capture,211412940,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,3,Managed,capture,212294876,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,3,Managed,true,101003607,0,0,0
+PROCESS_SCOPE_SAMPLE,3,DirectChild,capture,112043074,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,3,DirectChild,true,100808418,0,0,0
+PROCESS_SCOPE_SAMPLE,4,DirectChild,true,100843308,0,0,0
+PROCESS_SCOPE_SAMPLE,4,DirectChild,capture,111461868,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,4,Managed,true,100974137,0,0,0
+PROCESS_SCOPE_SAMPLE,4,Managed,capture,110798861,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,5,Managed,capture,211684259,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,5,Managed,true,100919148,0,0,0
+PROCESS_SCOPE_SAMPLE,5,DirectChild,capture,112580061,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,5,DirectChild,true,640276,0,0,0
+PROCESS_SCOPE_SAMPLE,6,DirectChild,true,248679,0,0,0
+PROCESS_SCOPE_SAMPLE,6,DirectChild,capture,14819816,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,6,Managed,true,201005370,0,0,0
+PROCESS_SCOPE_SAMPLE,6,Managed,capture,113342677,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,7,Managed,capture,212588533,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,7,Managed,true,101133576,0,0,0
+PROCESS_SCOPE_SAMPLE,7,DirectChild,capture,112029755,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,7,DirectChild,true,648156,0,0,0
+PROCESS_SCOPE_SAMPLE,8,DirectChild,true,423527,0,0,0
+PROCESS_SCOPE_SAMPLE,8,DirectChild,capture,111315738,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,8,Managed,true,101111416,0,0,0
+PROCESS_SCOPE_SAMPLE,8,Managed,capture,210547815,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,9,Managed,capture,110907021,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,9,Managed,true,100921347,0,0,0
+PROCESS_SCOPE_SAMPLE,9,DirectChild,capture,110432964,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,9,DirectChild,true,100712789,0,0,0
+PROCESS_SCOPE_SAMPLE,10,DirectChild,true,633796,0,0,0
+PROCESS_SCOPE_SAMPLE,10,DirectChild,capture,111735966,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,10,Managed,true,100960327,0,0,0
+PROCESS_SCOPE_SAMPLE,10,Managed,capture,111663466,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,11,Managed,capture,110274944,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,11,Managed,true,201331597,0,0,0
+PROCESS_SCOPE_SAMPLE,11,DirectChild,capture,111493617,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,11,DirectChild,true,100777978,0,0,0
+PROCESS_SCOPE_SAMPLE,12,DirectChild,true,502337,0,0,0
+PROCESS_SCOPE_SAMPLE,12,DirectChild,capture,109697937,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,12,Managed,true,100917548,0,0,0
+PROCESS_SCOPE_SAMPLE,12,Managed,capture,110303765,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,13,Managed,capture,110905661,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,13,Managed,true,101354125,0,0,0
+PROCESS_SCOPE_SAMPLE,13,DirectChild,capture,111785026,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,13,DirectChild,true,100699828,0,0,0
+PROCESS_SCOPE_SAMPLE,14,DirectChild,true,500907,0,0,0
+PROCESS_SCOPE_SAMPLE,14,DirectChild,capture,109739877,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,14,Managed,true,100950357,0,0,0
+PROCESS_SCOPE_SAMPLE,14,Managed,capture,112776350,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,15,Managed,capture,212462534,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,15,Managed,true,201224978,0,0,0
+PROCESS_SCOPE_SAMPLE,15,DirectChild,capture,11917353,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,15,DirectChild,true,694576,0,0,0
+PROCESS_SCOPE_SAMPLE,16,DirectChild,true,100663439,0,0,0
+PROCESS_SCOPE_SAMPLE,16,DirectChild,capture,111595657,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,16,Managed,true,201356537,0,0,0
+PROCESS_SCOPE_SAMPLE,16,Managed,capture,211154642,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,17,Managed,capture,111844735,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,17,Managed,true,100921517,0,0,0
+PROCESS_SCOPE_SAMPLE,17,DirectChild,capture,112299853,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,17,DirectChild,true,484347,0,0,0
+PROCESS_SCOPE_SAMPLE,18,DirectChild,true,266309,0,0,0
+PROCESS_SCOPE_SAMPLE,18,DirectChild,capture,9883364,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,18,Managed,true,101341515,0,0,0
+PROCESS_SCOPE_SAMPLE,18,Managed,capture,112051094,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,19,Managed,capture,211931098,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,19,Managed,true,101623054,0,0,0
+PROCESS_SCOPE_SAMPLE,19,DirectChild,capture,113535836,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,19,DirectChild,true,100843867,0,0,0
+PROCESS_SCOPE_SAMPLE,20,DirectChild,true,676287,0,0,0
+PROCESS_SCOPE_SAMPLE,20,DirectChild,capture,113258837,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,20,Managed,true,201186518,0,0,0
+PROCESS_SCOPE_SAMPLE,20,Managed,capture,213656628,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,21,Managed,capture,212367854,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,21,Managed,true,101160446,0,0,0
+PROCESS_SCOPE_SAMPLE,21,DirectChild,capture,112924379,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,21,DirectChild,true,100858818,0,0,0
+PROCESS_SCOPE_SAMPLE,22,DirectChild,true,632447,0,0,0
+PROCESS_SCOPE_SAMPLE,22,DirectChild,capture,111485158,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,22,Managed,true,100939487,0,0,0
+PROCESS_SCOPE_SAMPLE,22,Managed,capture,213070731,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,23,Managed,capture,110615502,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,23,Managed,true,101229106,0,0,0
+PROCESS_SCOPE_SAMPLE,23,DirectChild,capture,110775752,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,23,DirectChild,true,100794638,0,0,0
+PROCESS_SCOPE_SAMPLE,24,DirectChild,true,100775248,0,0,0
+PROCESS_SCOPE_SAMPLE,24,DirectChild,capture,111577947,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,24,Managed,true,201207828,0,0,0
+PROCESS_SCOPE_SAMPLE,24,Managed,capture,213317890,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,25,Managed,capture,111691706,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,25,Managed,true,101193535,0,0,0
+PROCESS_SCOPE_SAMPLE,25,DirectChild,capture,111449568,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,25,DirectChild,true,703986,0,0,0
+PROCESS_SCOPE_SAMPLE,26,DirectChild,true,335018,0,0,0
+PROCESS_SCOPE_SAMPLE,26,DirectChild,capture,112219923,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,26,Managed,true,201199368,0,0,0
+PROCESS_SCOPE_SAMPLE,26,Managed,capture,212184206,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,27,Managed,capture,211548399,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,27,Managed,true,101020567,0,0,0
+PROCESS_SCOPE_SAMPLE,27,DirectChild,capture,110526653,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,27,DirectChild,true,655356,0,0,0
+PROCESS_SCOPE_SAMPLE,28,DirectChild,true,363968,0,0,0
+PROCESS_SCOPE_SAMPLE,28,DirectChild,capture,11339986,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,28,Managed,true,200969290,0,0,0
+PROCESS_SCOPE_SAMPLE,28,Managed,capture,211072972,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,29,Managed,capture,211769438,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,29,Managed,true,101117026,0,0,0
+PROCESS_SCOPE_SAMPLE,29,DirectChild,capture,110092615,8388608,8388608,0
+PROCESS_SCOPE_SAMPLE,29,DirectChild,true,100739058,0,0,0
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 32 filtered out; finished in 14.77s
+

@@ -313,7 +313,8 @@ def main() -> int:
 
 if __name__ == "__main__":
     try:
-        sys.exit(main())
-    except BaseException as error:
+        result = main()
+    except Exception as error:
         print(f"MEASUREMENT_PACKAGE_FAILURE {type(error).__name__}: {error}", file=sys.stderr, flush=True)
         raise
+    sys.exit(result)

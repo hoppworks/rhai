@@ -1,0 +1,20 @@
+Command: ssh workhorse 'cd /root/rhai-process-overhead-00bed4a0-b6f34e20-preflight83 && python3 overhead-preflight.py --stage /root/rhai-process-overhead-00bed4a0-b6f34e20-preflight83'
+Exit status: 0
+
+preflight=pass revision=00bed4a0dfeb103ff209ba4c76dac7ae797b7c56
+archive_sha256=5414ea195ad00152b1eae36b3f4e10943ba5d9bf323baff6410cca0c5b4d8b98
+baseline_lock_sha256=8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa
+private_edge_lock_sha256=2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425
+python=Python 3.14.7 tarfile_data_filter=available staged_run_scoped_help=pass
+file_sha256=5414ea195ad00152b1eae36b3f4e10943ba5d9bf323baff6410cca0c5b4d8b98 path=source.tar
+file_sha256=8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa path=Cargo.lock.baseline
+file_sha256=1f32479303b789f993bc2297f1a4e62adaba5e44f6941669db7a793bf1d1b2a2 path=measure-process-overhead.py
+file_sha256=4ba751a9bb6f5f4ffe0fb839e4b13c8de7e4a7664bdb5888457dcb0762f8cfb9 path=process-overhead-proof.py
+file_sha256=020dc216c2d0b17195832f9e5968fcc8aabfc2c2469e3014e9a254c93a477214 path=remote-overhead-launch.sh
+file_sha256=2b871c1371a3f6abc20d792b2a6fde56687288b189f59bd57093b7a17543263a path=linux-overhead-launch-contract.md
+file_sha256=9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d path=run_scoped.py
+file_sha256=e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855 path=__init__.py
+file_sha256=a3739f4947744303e1adf3fb0875ac743944a272e5b95c94b1baba53029d313f path=pyguard.py
+manifest_paths=Cargo.toml,src/packages/sys/config.rs,src/packages/sys/mod.rs,src/packages/sys/process.rs,src/packages/sys/process/unix.rs,tests/sys_process.rs
+limits=outer600 scoped585 driver580 cargo540 jobs2 descendants16 memory2GiB sampled-stop1572864KiB@1s samples120 warmups0 retries0
+execution=none (hash, archive, lock, and static launcher checks only)

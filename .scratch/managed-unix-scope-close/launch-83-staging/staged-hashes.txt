@@ -1,0 +1,16 @@
+Read-only remote staged SHA-256 and evidence check
+Stage: /root/rhai-process-overhead-00bed4a0-b6f34e20-preflight83
+Command: ssh workhorse 'cd /root/rhai-process-overhead-00bed4a0-b6f34e20-preflight83 && test -d evidence && test ! -L evidence && test -z "$(find evidence -mindepth 1 -maxdepth 1 -print -quit)" && sha256sum source.tar Cargo.lock.baseline process-overhead-proof.py measure-process-overhead.py remote-overhead-launch.sh overhead-preflight.py linux-overhead-launch-contract.md runner/tools/run_scoped.py runner/tools/agentskills/__init__.py runner/tools/agentskills/pyguard.py'
+
+5414ea195ad00152b1eae36b3f4e10943ba5d9bf323baff6410cca0c5b4d8b98  source.tar
+8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa  Cargo.lock.baseline
+4ba751a9bb6f5f4ffe0fb839e4b13c8de7e4a7664bdb5888457dcb0762f8cfb9  process-overhead-proof.py
+1f32479303b789f993bc2297f1a4e62adaba5e44f6941669db7a793bf1d1b2a2  measure-process-overhead.py
+020dc216c2d0b17195832f9e5968fcc8aabfc2c2469e3014e9a254c93a477214  remote-overhead-launch.sh
+86cb738f4d9caa3b41c2e0aa0a2b3c1f515f4e64b7d305660c5ab801f8209ee6  overhead-preflight.py
+2b871c1371a3f6abc20d792b2a6fde56687288b189f59bd57093b7a17543263a  linux-overhead-launch-contract.md
+9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d  runner/tools/run_scoped.py
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  runner/tools/agentskills/__init__.py
+a3739f4947744303e1adf3fb0875ac743944a272e5b95c94b1baba53029d313f  runner/tools/agentskills/pyguard.py
+
+evidence_empty=true evidence_real=true

@@ -225,6 +225,10 @@ def read_rows(name):
     except OSError as error:
         failures.append(f'cannot read {name}: {error}')
         return []
+def valid_runner_identity_row(row):
+    fields = row.split('\t', 5)
+    return (len(fields) == 6 and fields[0].replace('.', '', 1).isdigit()
+            and all(field.isdigit() for field in fields[1:5]))
 command_rows = read_rows('measurement-command-identities.tsv')
 if command_rows:
     if (len(command_rows) != 2 or command_rows[0] != 'label\tpid\tstart_ticks\tppid\tpgid\tcmdline'):
@@ -239,9 +243,7 @@ if runner_identity_rows:
     if runner_identity_rows[0] != 'utc_epoch\tpid\tstart_ticks\tppid\tpgid\tcmdline':
         failures.append('runner process identity ledger has an unexpected header')
     for row in runner_identity_rows[1:]:
-        fields = row.split('\t', 5)
-        if (len(fields) != 6 or not fields[0].replace('.', '', 1).isdigit()
-                or not all(field.isdigit() for field in fields[1:5]) or not fields[5]):
+        if not valid_runner_identity_row(row):
             failures.append('runner process identity ledger contains a malformed row')
     if len(runner_identity_rows) < 2:
         failures.append('runner process identity ledger contains no exact identities')
