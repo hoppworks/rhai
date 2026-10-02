@@ -1,0 +1,26 @@
+{
+  "evidence": {
+    "audit-tree-result.png": "92cef7454a6d2e10421f37b47e43c98d279af20ce80202c5e9ce2b12e37d4da9",
+    "audit-tree-line.png": "46e3bc91fbbb8e2e7eec27a4db482d9ef61f086d67a7033b8ceadca737b7d497",
+    "audit-tree.txt": "058164ba73ef4f011b56b4990b95800d347f34f5c9c6ccbd65c98a32cb91985e",
+    "extract-safe-result.png": "e1ad83d3070eafe71fcb783faee08032779748ba8c28ad1d03193bd84e18d507"
+  },
+  "root_visual_readback": "audit-tree-result.png and exact audit-tree.txt inspected",
+  "accepted_scope": [
+    "24 expected archive files",
+    "24 extracted file paths",
+    "zero case-sensitive name differences",
+    "archive names rooted/upward/drive checks and full destination containment",
+    "destination-directory ancestors fail-closed for reparse attributes",
+    "terminal prompt without new audit errors"
+  ],
+  "not_accepted": [
+    "whole extracted subtree reparse enumeration",
+    "17 C# content pins and script identity",
+    "PowerShell parser/path controls",
+    "exact compiler readback",
+    "native custody or process behavior"
+  ],
+  "prior_error_preserved": "single extraction used missing IsRooted; nonterminating errors did not stop loop; no retry",
+  "native_launches": 0
+}

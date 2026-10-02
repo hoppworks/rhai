@@ -997,7 +997,7 @@ No source integration/native acceptance before this affected checkpoint.
 No native/build/toolchain/control/measurement dispatch; affected combined recheck
 at frozen repair required. Genuine EILSEQ early return remains uncovered.
 
-Last independently read-back fork main8c0a3a16ddced5376ea8f17720d57fa165850bdc.
+Last independently read-back fork main35c6d70b83bd031a84cb371c36a3d9d407f82d53.
 Lowercase author and committer independently checked; root checkout clean before
 this state update. No upstream writes. Current disk instructions958a4538 unchanged.
 Previous status-only goal turn: NO PROGRESS. This continuation yields new evidence:
@@ -1033,3 +1033,30 @@ one Expert/one bounded follow-up, no native allocation/history reset.
 Previous goal turn: PROGRESS (immutable correction/review finding and cause11 brief).
 This continuation: terminal affected report independently read and retained;
 first cause11 fresh Expert dispatched. Goal active, no native acceptance yet.
+
+Windows fail-fast readonly audit terminal accepted narrowly by root original
+visual/text readback: expected ZIP24/extracted files24/name differences0;
+rooted/upward/drive checks and exact destination containment pass; destination
+ancestors have no reparse attributes. Original frames/command/setup-error and
+audit-tree-root-readback.json retained once in windows-staging-9e0-root-evidence/.
+The printed reparse0 is constant plus fail-closed ancestor loop, not whole-tree
+enumeration: owner instructed to check every extracted subtree item explicitly
+before claiming tree nonreparse.17 C# pins/script/parser/Roslyn still pending;
+one extraction/GET consumed, no retry or native launch. This continuation
+PROGRESS: accepted exact safe archive/file-name set and next missing check defined.
+
+Cause11 Expert answer read independently and accepted as repair route at
+escalations/11-darwin-split-stream-coverage.answer.md (rules958a4538). One
+source-only follow-up dispatched to SAME responsible Darwin owner: consume
+coverage diagnostics separately with exact frozen sys_fs/F19 mapping, fail
+closed on unresolved/conflicting association, preserve partial observed names
+and incomplete aggregate/status-zero continuation, retain structural negatives.
+Align strict helper SESSION_ID with contract2f795ece; no accepting both names.
+Frozen source2f795ece/archive43c8b8/lock2ba4 and production retained unchanged.
+Meaningful actual separate-stream RED/GREEN, strict naming negatives and same
+affected reviewer required.30min active planning checkpoint; at most2 launches
+without diagnosis/closed check, cumulative history retained, no native allocation
+or second Expert chain. Two failed F4 corrections remain counted; this package
+is one permitted bounded follow-up, not a third unexamined patch.
+Next: collect Darwin follow-up freeze and SAME affected review; Mac correction
+freeze and SAME review; Windows subtree/pins/parser/Roslyn readonly readback.
