@@ -1,0 +1,35 @@
+{
+  "native_invocation": 79,
+  "terminal_status": 1,
+  "known_pids": [
+    49126,
+    49134,
+    49135,
+    49151,
+    49891,
+    49953,
+    49954,
+    49956,
+    49988,
+    49990,
+    50022,
+    50025,
+    50052,
+    50066,
+    50084,
+    50086,
+    50087
+  ],
+  "checked_groups": [
+    49126,
+    49134
+  ],
+  "present_rows": [],
+  "runtime": "/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-o_n8zetb",
+  "runtime_present": false,
+  "restoration_manifests_match": true,
+  "coverage": "Known emitted identities only; no continuous peak claim.",
+  "actual_failure": "Test fixture /bin/true absent on Darwin; spawn NotFound before closure observation.",
+  "cargo_seconds": 50.007999999999996,
+  "sampled_max_kib": 208504
+}

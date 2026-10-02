@@ -287,3 +287,59 @@ root worktreeclean.17 mergedlocalrefs retired;28localbranches/20worktrees remain
 Windows latest known newarchiveb6c hashd7b0b514; nestedExpand-Archive failed before
 parser/harness/compiler/job. Soleowner preserves partialextractions and switches
 to freshshort absent userroot; actualparser/input/job/client acceptance stillopen.
+
+## Current consolidation progress
+
+This goal continuation is progress: clean history-only merges of integrated
+process-api-report, process-api-compatibility and process-harness-review passed
+exact empty parentdiff checks and push/readback. Fork main7f4229a9 verified.
+Their three unoccupied localrefs were removed with git branch-d; the exact fork
+remote process-harness-review was removed and ls-remote confirmsabsence.
+Total20local/1remote refs retired;25localbranches/20worktrees remain. Current
+full inventory replaces repository-reconciliation.md; priorinventory retained by
+commit5269bcb2. No foreign/dirtyworktree touched and no production source merged.
+
+Linux78 actually launched once attached90865, stagec6e820d4-heartbeat3. Launcher
+2650864/start5104744, scoped2650872/start5104746; monitor bound exactscopeidentity.
+Terminalouter1/scoped1/monitor0; managed omissioncontrol intended101/restoration
+passed. Deliberately old-immediatefailure EPERMcontrol101 panicked at recovery
+expect but classifier rejected opaque ErrorRuntime output. This is expected TDD
+RED with inadequate classifier/typeddiagnostics, not a secondfailed corrected
+productionbehavior. Restoredowner/public neverran. Owner originallaunch78evidence
+retains43exactPID/startpairs absent, PGID2650875 empty, runtimeqt3os6ac absent;
+sample299844KiB. Responsiblecontext enhances typedSysError failurediagnostics and
+checks policy/actualcause before newcontrol/nativefreeze. Mac77 remains onlyactual
+restored-source newbehavior failure. No blindretry or newExpertchain from miscount.
+
+## Current native diagnostic package79/80
+
+Root reviewed test-only typed SysError diagnostics at1241a5f8 and archivec433;
+production unchanged from c6. Mac79 launched attached59866 wrapper49126/PGID49126
+with original evidence macos-process-refresh.HZcakY under unchanged scoped600/
+Cargo540/jobs2/process16/storage limits. Same handle monitored; no retry.
+Linux80 owner committed frozen binding/state/original78evidence c9aa8723 and
+pushed exactforkref. Actual80 attached64745 launcher2778642/start5148341 and
+scoped2778650/start5148342, stage1241a5f8-linux80, driveredf877, archivec433.
+Owner reports terminal0 with both intended101 controls, restoration, owner21
+(20pass/1filtered), public32(raw33), monitor0. Exact exported original and
+cleanup review pending root acceptance. No inferred continuous peak.
+Windows PS5.1 parser/hash passed b6 source, but actual setup fails at negative
+hex-to-UInt32 conversion before fixtures. Native job was created/assigned before
+existing try/finally. Sole owner identified failed interactive owner PID8600 and
+stopped only that PID after disposition; no fixture/compiler existed and unique
+failed root preserved. Repair positive UInt32 literal and exception-safe custody
+from first native handle, then frozen review and live setup-failure control.
+This is distinct setup cause, not fixture failure or a new permission gate.
+Next actual unique native invocation81 at actual start only. Goal/finalmain-only
+cleanup remain incomplete; preserve prior actual launches and failure history.
+
+Mac79 terminal1 original typed diagnosis proves spawn NotFound: /bin/true does
+not exist on this Darwin host; /usr/bin/true independently exists/executable.
+This reclassifies the opaque77 failure as fixture setup, not failed production
+group-observation correction. Owner fixes test-only platform executable binding;
+Linux80 production passed. Root cleanup79 independently checks17emittedPIDs/
+twogroups absent, runtime absent, sixpath restoration match. Cargo50.008s,
+sampled195884KiB. Public suite notrun. Evidence native79-root-cleanup-readback.
+Latest human reiterates REMOTE onlymain consolidation with allchanges preserved.
+Root prioritizes complete history/source consolidation and stops new taskremote
+publication; no release/completion claim from unfinished platformproof.

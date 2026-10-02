@@ -1,8 +1,8 @@
 import hashlib, os, platform, re, shutil, subprocess, sys, time
 from pathlib import Path
 REPO=Path('/Users/hoppworks/projects/rhai-managed-unix-scope-close')
-SOURCE_REF='c6e820d4e409a27f2d34504ff899ea17083fc35a'
-ARCHIVE_SHA='c799fe5a436ae9a548e476712c29ca91811c1e34accc4870748a66cbc270b3ee'
+SOURCE_REF='1241a5f8c6863a3bdde02e58ee1fded7571068f2'
+ARCHIVE_SHA='c4330ee1ff3f60d08210f5232304a391413c3481bce13518a7c08068d5fc2455'
 RUNTIME=Path(os.environ['AGENT_RUNTIME_DIR']).resolve()
 BASE=Path(os.environ['RHAI_RESUME_LOG_BASE']).absolute()
 EVIDENCE=Path('/Users/hoppworks/projects/rhai-all-tickets/.scratch/all-tickets/macos-process-refresh-evidence')
@@ -105,13 +105,13 @@ def main():
     env.update({'PATH':f'{TOOL}:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin','CARGO_HOME':str(RUNTIME/'cargo-home'),'RUSTUP_HOME':str(RUNTIME/'rustup-home'),'CARGO_TARGET_DIR':str(RUNTIME/'target'),'CARGO_BUILD_JOBS':'2','CARGO_INCREMENTAL':'0','CARGO_PROFILE_DEV_DEBUG':'0','CARGO_PROFILE_TEST_DEBUG':'0','RUSTC':str(RUSTC),'RUSTDOC':str(RUSTDOC),'TMPDIR':str(RUNTIME/'tmp'),'TMP':str(RUNTIME/'tmp'),'TEMP':str(RUNTIME/'tmp')})
     (RUNTIME/'cargo-home').mkdir(); (RUNTIME/'rustup-home').mkdir()
     deadline=time.monotonic()+540
-    # Native75 already proved this control. Only the unit-test enum path changed.
+    # Native75 already proved this control. Only unit-test enum path and diagnostic formatting changed.
     accepted_control=EVIDENCE/'macos-process-refresh.LOytvN.cargo.wrong-expectation.log'
     if sha(accepted_control)!='0cd30945ba91709ea75e3a13f23a5f02db23a5314141f989e3716cd0fc0bf8ab': raise RuntimeError('accepted native75 control receipt changed')
     accepted_output=accepted_control.read_text()
     if not re.search(r'left:\s*0\s+right:\s*42',accepted_output) or '1 failed' not in accepted_output:
         raise RuntimeError('accepted native75 control lacks exact API assertion')
-    print(f'reused_native75_exit_control={accepted_control} sha256={sha(accepted_control)} production_unchanged_except_unit_test_enum_path=true',flush=True)
+    print(f'reused_native75_exit_control={accepted_control} sha256={sha(accepted_control)} production_unchanged_test_only_changes=true',flush=True)
     unix_path=source/'src/packages/sys/process/unix.rs'
     unix_original=unix_path.read_text()
     branch_start=unix_original.index('                Err(error) if error.raw_os_error() == Some(libc::EPERM) => {', unix_original.index('fn supervise('))
