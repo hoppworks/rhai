@@ -1,0 +1,18 @@
+launch_utc=2026-10-02T09:42:55Z
+runner_timeout_seconds=600
+stage=/root/rhai-linux-current-features-msrv-1ca21e32-20261002
+scope=/root/.local/share/agent-builds/rhai/linux-current-features-1ca21e32-20261002
+HELPER_IDENTITY 1197390 7077619
+evidence_exported=/root/rhai-linux-current-features-msrv-1ca21e32-20261002/proof-evidence
+Traceback (most recent call last):
+  File "/root/rhai-linux-current-features-msrv-1ca21e32-20261002/run-feature-compilation.py", line 547, in <module>
+    exit_status = main()
+  File "/root/rhai-linux-current-features-msrv-1ca21e32-20261002/run-feature-compilation.py", line 343, in main
+    raise RuntimeError(f'PROOF_STAGE must be the prescribed unique stage: {EXPECTED_STAGE}')
+RuntimeError: PROOF_STAGE must be the prescribed unique stage: /root/rhai-linux-current-features-msrv-1ca21e32-20261002
+
+linux_current_feature_compilation=incomplete_or_failed
+run_scoped_status=1
+helper identity file missing: /root/rhai-linux-current-features-msrv-1ca21e32-20261002/proof-evidence/process-identities.tsv
+runtime_cleanup_status=1 pid_readback_status=1 scope_cleanup_status=1
+outer_status=1

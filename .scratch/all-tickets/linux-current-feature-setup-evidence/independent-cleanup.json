@@ -1,0 +1,26 @@
+{
+  "canonical_stage": "/var/roothome/rhai-linux-current-features-msrv-1ca21e32-20261002",
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-current-features-1ca21e32-20261002/agent-build-8dpbkisi",
+  "runtime_exists": false,
+  "recorded_pids": [
+    {
+      "pid": 1197315,
+      "proc_exists": false
+    },
+    {
+      "pid": 1197387,
+      "proc_exists": false
+    },
+    {
+      "pid": 1197390,
+      "proc_exists": false
+    }
+  ],
+  "group_members": {
+    "1197315": [],
+    "1197387": [],
+    "1197390": []
+  },
+  "scope_exists_before": true,
+  "scope_exists_after": false
+}

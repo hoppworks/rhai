@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/root/rhai-linux-current-features-msrv-1ca21e32-20261002/run-feature-compilation.py", line 547, in <module>
+    exit_status = main()
+  File "/root/rhai-linux-current-features-msrv-1ca21e32-20261002/run-feature-compilation.py", line 343, in main
+    raise RuntimeError(f'PROOF_STAGE must be the prescribed unique stage: {EXPECTED_STAGE}')
+RuntimeError: PROOF_STAGE must be the prescribed unique stage: /root/rhai-linux-current-features-msrv-1ca21e32-20261002

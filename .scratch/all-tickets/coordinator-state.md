@@ -65,36 +65,30 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
   integrity only, not selected execution graph/toolchain/custody or native proof.
 
 ## Current step and next action
-Historical detailed staging, gates and outcomes remain in this same state at
-9e0e84e8e531e0b64859f613bb4b1bc64f804d42; do not execute superseded next actions.
-1. Linux native84 terminal: original Cargo1passed, outer/runner1 due exact libtest
-   framing. Root accepted8 original census rows,48 exact PID/start absences,
-   two empty groups, absent runtime/scope and18 matching original hashes.
-   Six before-source hashes match; after-source manifest is missing. Narrow
-   resource behavior accepted, full package remains incomplete. Corrected source
-   5ebd025c replayed independently:8 original rows, exact-prefix positive and7
-   negative mutations pass; AST/bash/manifest ordering pass. Exact22-file increment
-   preserves originals, excludes owner state. No85 allocation or timing repeat.
-2. Windows private-root correction611ad22c already integrated on fork main9e0.
-   Sole owner stages immutable9e0 script, checks guest archive/17C#pins/nativePS5.1
-   parser and isolated pure path controls before any fixture invocation. Earlier
-   compiler/setup/extraction failures and nonrenewable real-client allocation
-   retained; no native job/public production acceptance claimed.
-3. Mac sole-custodian source corrected at4aa198898fe1f4deecfdebcdade2f07a0fa78f2b,
-   following2f/a723/fdb/b2db/18d. Combined review and independent pure regressions
-   close the four earlier source findings and active-SDK/layout agreement only.
-   Existing owner continues exact helper/toolchain/config source assumptions.
-   Native Darwin ABI/access, confinement, finite interruption/escaped-leaf
-   controls and measurement remain open. False launch guard/count84 retained.
-4. Current Darwin optional Rust1.77.2 compiler prerequisites CLOSED narrowly:
-   accepted baseline plus all ten uncovered feature rows. Original evidence at
-   current-feature-compilation-evidence, frozen4baf/v3lock2ba4, all commands0,
-   direct privateversions/ten argv/Finisheddev/manifests/lock independently read
-   back. Export74.811s, sampled maxRSS735200KiB/storage733948KiB/descendants7.
-   Exact runtime agent-build-wqsbtouw absent, owned empty scope retired. Mac
-   heavy slot released. No targetfixture/native85 or behavioral acceptance.
-   Next: existing Mac owner source-tool prerequisites; remaining native Linux/
-   Windows current-source MSRV/features and strict release behavioral gates.
+1. Darwin current-source optional MSRV compiler matrix and sys/net examples are
+   accepted narrowly. Examples proof at current-msrv-examples-proof.md and original
+   current-msrv-examples-evidence: one private Rust1.77.2 build, real Engine file
+   write/fresh host read and independent TCP peer, meaningful wrong-expectation
+   controls101 and restored0. Frozen1ca21e32/v3lock2ba4; fork main e5849699.
+   Other platforms and final native feature behavior remain open.
+2. Linux current-feature compiler launch stopped before Rustup/Cargo at canonical
+   stage comparison: /root resolves to /var/roothome. Original setup proof remains
+   immutable remotely and locally at linux-current-feature-setup-evidence.
+   Root independently confirmed three recorded PIDs and observed groups absent,
+   exact runtime absent, and removed only the exact empty owned scope.
+   Existing optional owner prepares canonical-identity and early-receipt TDD fixes,
+   new v2 stage, no build/SSH/fixture launch. Review before dispatch; inventory the
+   one-heavy-run slot again. Previous outer0.4396s/helper0.001s retained; follow-up
+   proposed590/530/work500/export30, unchanged jobs2/desc16/RSS2GiB/storage1.5GiB.
+   This is one infrastructure setup failure, not a feature failure or native85.
+3. Existing Mac owner continues cause09 bounded Managed companion/readiness source
+   plumbing under Expert09. Pure tests only; unchanged frozen measurement source,
+   guardfalse, nativecount84. Source control-finalization correction0ecfc6e4 is
+   independently reviewed and accepted narrowly in macos-controls-review.md.
+   Native ABI/confinement/interruption/measurement requirements remain open.
+4. Windows sole owner is completed and guest last observed off; partial console
+   command/cleanup remains unverified. Preserve allocation and all prior evidence;
+   no restart, new native launch or repeated source review for the rule update.
 
 ## Resources, counts and cause history
 Unix actual native invocation count84 consumed.82 failed before runtime;
@@ -565,8 +559,26 @@ roles and both coordinator templates explicitly loaded. Neither has descendants.
 Completed Windows owner remains revision-unconfirmed, not restarted for reload.
 No process interruptions or duplicate builds/reviews caused by the update.
 
-Next action: collect/review current optional owner examples helper and finite
-contract, then launch only after local heavy-slot inventory. Linux staging remains
-ready/unlaunched: foreign P01 900161/900162 ended, but fresh G42 cargo1121738 and
-rustc1128188 now occupy workhorse heavy slot. Preserve foreign KSR idle runtime
-28950/28951 and orphan flutter_tester3269558. No compiler package was dispatched.
+Superseded staging snapshot: the examples are accepted and Linux was dispatched;
+current outcomes and next actions are recorded above. Preserve foreign work.
+
+
+Linux current optional compiler dispatch: authoritative1172268/1172269 G42 r5
+handles absent and noCargo/rustc/Dart compiler present. Foreign P01sourceclosure
+1196569/1196570 is source format/diff/documentation/public-text plus private
+npm/unitPlaywright/registry checks; inspected driver explicitly says nofullstack.
+This is light source acceptance, not another heavy build/E2E. Preserve it and
+idleKSR28950/28951. Dispatch exactly staged Linux11positive+1negative compiler
+package under existing600/540/510/export30, jobs2/desc16/RSS2GiB/storage1.5GiB
+limits. Existing source review/interruptionexport proof applies unchanged;
+launch.shhash3b3a50 matches staged receipt. No processfixture/control/measurement85.
+Original remote outer-evidence and local linux-current-feature-outer.log/.status
+identify this one invocation; no staging or retry/cap expansion.
+
+Latest rule-update checkpoint: root reread disk globals/project AGENTS, campaign,
+e2e-proof, OCR-delegate, repair-package, roles and both Codex coordinator templates
+at4d86b5f774a95111b56e9cbcf9c9882d7303a7a9. Active Mac owner confirms revision
+and no descendants. Existing optional owner was asked to reload when continued
+for the diagnosed Linux setup repair; confirmation pending. Completed Windows
+owner remains revision-unconfirmed and was not restarted solely for reload.
+No process interruption or new build/review solely for rule changes.
