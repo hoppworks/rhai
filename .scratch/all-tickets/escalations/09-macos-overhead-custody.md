@@ -27,8 +27,7 @@ for this launch custody cause is permitted.
 - Prior accepted fixture-specific anchor/custodian protocol:
   .scratch/process-prototype/adapter/{README.md,run_scoped.py,custodian.py,controller.py}
 - Prior production completion answer: .scratch/all-tickets/escalations/08-managed-unix-scope-completion.answer.md
-- Approved ticket: .scratch/stdlib-wayfinder/issues/03-process-authority-lifecycle.md
-  (resolve actual filename if this path differs).
+- Approved ticket: .scratch/stdlib-wayfinder/issues/03-process-contract.md
 
 # Constraints and decisions
 
@@ -42,7 +41,8 @@ Keep exact benchmark source/archive, 30 pairs per workload,120 calls, zero warmu
 no retries and unchanged timing/throughput semantics. Limits: outer600s,
 scoped585s, driver580s, aggregateCargo540s, jobs2, descendants16, sampled RSS2GiB,
 storage1572864KiB approximately1s. Setup/export/closure included in total bound.
-Actual native launches consumed81; no new slot consumed by analysis. Retained
+Native launches consumed81 at dispatch; Linux82 subsequently failed at runner
+import before runtime/measurement. Analysis consumes no native slot. Retained
 runtime after interrupted unknown custody is honest failure, not acceptance.
 Do not waive full goal scope or generic production process obligations.
 

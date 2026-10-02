@@ -119,8 +119,23 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    Finalizer exports initial live identities/cleanup actions and rejects status0
    with leftovers; current snapshot receipts precede resource stop checks. Source
    gate accepted; responsible Linux context resumes fresh staging/hash/empty-
-   evidence readback then ONE bounded native82. Count82 only at actual launch;
-   no live handle or executed measurement is claimed yet. No retry after failure.
+   evidence readback released ONE bounded native82. It actually launched at
+   2026-10-02T05:22:31Z and returned terminal1 before private runtime/measurement:
+   copied runner imports agentskills.pyguard but the stage omitted that package.
+   Native82 consumed; zero benchmark calls/results. Original seven exported files
+   at responsible .scratch/managed-unix-scope-close/launch-82-evidence independently
+   read by root: exact ModuleNotFoundError, run-scoped/monitor/outer1, failed required
+   ledger acceptance and no matching runner identity remaining. Owner additionally
+   observed launcher3539356/start5515212 and runner3539364/start5515216 absent,
+   PGID3539298 empty; requested original readback receipt preservation. No
+   PRIVATE_RUNTIME emitted, because import failed before runtime creation.
+   First infrastructure cause is incomplete copied runner dependency bundle. Root
+   inspected configured run_scoped.py plus agentskills/{__init__.py,pyguard.py}:
+   exactly these three files are required; pyguard uses existing Python>=3.11,
+   no install/config changes. Responsible context prepares a frozen complete
+   dependency manifest/contract/preflight and NEW absent stage, retaining82 stage.
+   Staged --help import preflight is permitted without workload/runtime. Native83
+   is NOT released until corrected frozen source and staged receipts are reviewed.
    Root macOS measurement adaptation is SOURCE-ONLY and NOT approved to launch:
    macos-process-overhead.py and run-macos-process-overhead.sh bind00bed/archive
    5414ea195ad00152b1eae36b3f4e10943ba5d9bf323baff6410cca0c5b4d8b98.
@@ -190,8 +205,9 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    source/check logic/environment; final strict coverage remains required.
 
 ## Resources, counts and cause history
-Unix actual native invocation count81 consumed; next unique invocation82 allocated
-only at launch. No live Unix test handle is currently recorded. Linux outer598s
+Unix actual native invocation count82 consumed; native82 failed at runner import
+before runtime/measurement. Next unique invocation83 allocated only at launch after
+new source/staging gate. No live Unix test handle is currently recorded. Linux outer598s
 plus kill2s=600s, scoped585s, driver580s, aggregate Cargo540s, jobs2, descendants16,
 2GiB policy and sampled stop1572864KiB. macOS scoped600s/Cargo540s/jobs2 with same
 policy/sample limits. Sampling is not continuous peak or enforced byte accounting.
@@ -239,11 +255,10 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Previous turn classification
-Previous continuation made source-review progress. Current continuation independently
-reviewed Linux frozen resource/cleanup corrections and returned two concrete final
-ordering fixes, then accepted/integrated b6 and passed independent frozen hash,
-AST/embedded-block/bash checks. Responsible context resumes single bounded native82
-after staged hash/empty-evidence gate. Corrected Mac source integrated candidly
-unready; fresh Expert09 assesses actual nested/setup custody decision. Windows
-guest script hash/native parser gate closes, fixtures still open. No live native
-handle claimed from activity and no consumed measurement/safety-cap reset.
+Current continuation integrated independently reviewed Linux safeguards and Mac
+source preparation, verified frozen hashes/AST/embedded/bash inputs, and observed
+actual terminal native82 setup failure. Root read original82 error/cleanup receipts
+and the configured runner import graph, returning a concrete missing dependency
+bundle correction before any relaunch. Expert09 analyzes Mac benchmark custody;
+Windows guest script/native parser gates close, fixtures open. No live Unix handle
+or measured performance claimed; actual native82 consumed and hard caps unchanged.
