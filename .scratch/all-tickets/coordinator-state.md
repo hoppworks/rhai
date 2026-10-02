@@ -51,7 +51,7 @@ Windows guest control belongs solely to windows_monitor_job_owner.
   34 emitted PIDs/10 groups and exact runtime absent, three manifests matching.
   Cargo53.432s, sampled276896KiB; no continuous peak claim.
 - Remote branch cleanup CLOSED. Latest independent ls-remote readback shows ONLY
-  main at 1167770c7a94c9687724afcd819195e73422e89d (2026-10-02 integration readback). Nine remote task refs removed
+  main at c3e7234948c90cd204f1f814063376537b0e5599 (2026-10-02 integration readback). Nine remote task refs removed
   in the final consolidation, one earlier; every exact tip was ancestor of pushed
   main before deletion. Histories preserved. Local active/foreign/dirty worktrees
   remain; remote cleanup does not authorize discarding them.
@@ -151,7 +151,12 @@ and original18-file integrity integrated, preserving failed original statuses,
 missing postimage manifest and all cause counts. Receipt:
 linux84-framing-source-root-review.json; native84 detailed readback in
 linux84-census-root-readback.json. No new native invocation or build.
-Mac review findings returned and corrected at510d7233; independent full source
-review next. Windows immutable9e0 guest staging/isolated controls ongoing under
-sole owner; documentation-only correctiondbff4ffd pending integration. Remaining
+Mac findings corrected at510d7233; further review found repeat group-KILL
+after failed wait and unsafe direct-child-only cleanup after release. Existing
+owner is running the bounded source correction; false launch guard remains.
+Windows owner handle is missing from live inventory, not a verified live wait
+or guest terminal proof. Last frozen state has no new parser/path result.
+Root plan differed from dbff4ffd parent, so whole patch rejected; only reviewed
+private-run-path command applied without importing divergent history. Resume
+Windows with read-only guest state inspection before any launch. Remaining
 full ticket/release acceptance above unchanged; Goal active and incomplete.

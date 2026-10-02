@@ -93,7 +93,7 @@ single harness invocation is:
 & "$env:WINDIR\System32\WindowsPowerShell\v1.0\powershell.exe" -NoLogo -NoProfile -NonInteractive -File `
   '<immutable guest input copy>\tools\windows-scoped-runner\fixtures\RunSourceFixtures.ps1' `
   -SourceRoot '<same immutable guest input copy>' `
-  -RunRoot 'C:\RhaiQuality\runs\monitor-source-<fresh-guid>'
+  -RunRoot (Join-Path (Join-Path (Join-Path $env:USERPROFILE '.local\share\agent-builds\rhai\<fresh-unique-session>') 'run') 'monitor-source-<fresh-guid>')
 ```
 
 That batch compiles the normal runner, six `SCOPED_RUNNER_TESTING` fixture
