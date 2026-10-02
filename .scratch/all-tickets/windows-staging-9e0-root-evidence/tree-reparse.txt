@@ -1,0 +1,1 @@
+$erroractionpreference='stop';$s='c:\users\rhaitest\.local\share\agent-builds\rhai\w9e0-20261002-6f804a9c4c4a4e78\source';$i=get-childitem -literalpath $s -force -recurse;$r=$i|where-object{$_.attributes -band [io.fileattributes]::reparsepoint};$r.count;$r|select-object -expandproperty fullname

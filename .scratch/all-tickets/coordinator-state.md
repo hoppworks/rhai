@@ -997,7 +997,7 @@ No source integration/native acceptance before this affected checkpoint.
 No native/build/toolchain/control/measurement dispatch; affected combined recheck
 at frozen repair required. Genuine EILSEQ early return remains uncovered.
 
-Last independently read-back fork main9f8cced5d9aa0864f9dcd8f231aaa13d45b4c0fa.
+Last independently read-back fork main6b6104e2bcfbb051bddc87334c7da66cdfe05bcd.
 Lowercase author and committer independently checked; root checkout clean before
 this state update. No upstream writes. Current disk instructions958a4538 unchanged.
 Previous status-only goal turn: NO PROGRESS. This continuation yields new evidence:
@@ -1087,3 +1087,18 @@ correction and this result, existingExpert09 single-chain constraint. Independen
 Darwin/Windows work continues; do not mark whole Goal blocked from this path.
 Windows current exact readonly recursive attribute scan key-injection helper
 PID61556 live at owner checkpoint,295chars450ms/char; not yet entered/result.
+
+Windows readonly subtree reparse check terminal independently viewed by root:
+recursive Get-ChildItem-Force on exact own source includes files/directories,
+ReparsePoint count0, clean prompt. Digestchecked original frame/text and narrow
+rootreadback retained once windows-staging-9e0-root-evidence/tree-reparse*.
+This closes actual-tree nonreparse prerequisite together with existing ancestor
+and archive/pathname proof, not content/parser/compiler/native acceptance.
+Previous typinghelper61556 confirmed absent; owner observed terminal, no restart.
+Successor readonly parser/pin key-injection session43606 live,649chars450ms/char,
+not entered at checkpoint. Darwin cause11 owner actual stderr-only RED reproduced
+through production entrypoint; mapping/naming implementation still pending at
+checkpoint, no GREEN/freeze yet. Same Mac reviewer consolidated terminal pending.
+Previous goal turn PROGRESS (Mac sourcefreeze/affected finding); this continuation
+PROGRESS: independent Windows subtree nonreparse readback accepted; all native
+counts/allocations and history unchanged.

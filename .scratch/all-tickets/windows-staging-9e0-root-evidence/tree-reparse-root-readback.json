@@ -1,0 +1,15 @@
+{
+  "evidence": {
+    "tree-reparse-result.png": "d9e3234685729557a89745f37f3871ac742fc6d9e6448bda03d15cc98e437e00",
+    "tree-reparse.txt": "971946c32bea1b181d76964780c0c61343966f8932282f3d0c86a95812e051ac"
+  },
+  "independent_visual_readback": "complete echoed fail-fast command; recursive Get-ChildItem -Force includes files/directories; ReparsePoint filter count0; clean prompt",
+  "accepted": "actual source subtree contains no reparse items at observed readback",
+  "still_pending": [
+    "script/C# content pins",
+    "PS5.1 parser/path controls",
+    "compiler readback",
+    "native custody/behavior"
+  ],
+  "native_launches": 0
+}
