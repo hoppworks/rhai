@@ -1,0 +1,47 @@
+{
+  "schema_version": "1",
+  "mode": "commit",
+  "repository": "/Users/hoppworks/.codex/worktrees/linux-msrv-helper-repair/rhai",
+  "commit": "5309e17106c7c891eb4a6ddbeaae4644d4da876c",
+  "background": "Prepare Linux optional MSRV policy follow-up",
+  "total_files": 5,
+  "reviewable_count": 4,
+  "excluded_count": 1,
+  "total_insertions": 1334,
+  "total_deletions": 0,
+  "reviewable_files": [
+    {
+      "path": ".scratch/all-tickets/check-linux-current-sys-net-policy2.py",
+      "status": "added",
+      "insertions": 846,
+      "deletions": 0
+    },
+    {
+      "path": ".scratch/all-tickets/launch-linux-current-sys-net-policy2.sh",
+      "status": "added",
+      "insertions": 258,
+      "deletions": 0
+    },
+    {
+      "path": ".scratch/all-tickets/stage-linux-current-sys-net-policy2.sh",
+      "status": "added",
+      "insertions": 47,
+      "deletions": 0
+    },
+    {
+      "path": ".scratch/all-tickets/test-linux-current-sys-net-policy2.py",
+      "status": "added",
+      "insertions": 163,
+      "deletions": 0
+    }
+  ],
+  "excluded_files": [
+    {
+      "path": ".scratch/all-tickets/linux-current-sys-net-policy2-contract.md",
+      "status": "added",
+      "insertions": 20,
+      "deletions": 0,
+      "exclude_reason": "unsupported_ext"
+    }
+  ]
+}

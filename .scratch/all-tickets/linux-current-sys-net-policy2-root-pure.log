@@ -1,0 +1,4 @@
+exact_two_row_followup_plan=PASS
+pinned_prior_rows_controls_and_environment_reuse=PASS
+tampered_source_and_check_receipts_fail_closed=PASS
+unique_stage_scope_and_wrapper_syntax=PASS

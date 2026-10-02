@@ -366,11 +366,19 @@ Export84.425s; cumulative exported elapsed143.627s/outer allocation1800s.
 No hard-cap change or failed correction added for the policy cause.
 
 Remaining native rows: combined-no-index-sync-metadata (compile interrupted at
-storage preemption) and combined-f32 (not run). Existing responsible Linux owner
-prepares one source-only policy2 package for exactly those rows, preserving a2d
-source, existing caps, original applicable five controls and cause history. No
-repeat of seven accepted rows. Review preparation before fresh slot inventory
-and launch. Mac owner closes concrete confinement source gaps without native
+storage preemption) and combined-f32 (not run). Responsible Linux owner froze policy2 package5309e171; root combined independent
+review covers all five files (OCR4/4 plus excluded contract), with no material
+finding. Root four pure boundaries passed scoped0 and exact empty scope cleanup0;
+original owner/root logs and review retained. The plan runs exactly those two rows,
+reuses pinned23 receipts/seven positives/five controls, and preserves a2d source,
+original caps and cause history. No repeat of accepted rows or controls.
+Fresh workhorse inventory found foreign tauron gate3 runner1924771/supervisor1924772
+and observer1925697 live; postpone heavy launch, preserving foreign dev-server
+runner28950/28951. Stage preparation is light and authorized. Before launch renew
+exact PID/start/terminal heavy-slot readback. One600s follow-up will bring outer
+allocation2400s; observed elapsed143.627s remains unchanged until actual execution.
+Source-only preparation and status turn before this were not acceptance progress;
+this combined review/pure evidence and integration are progress. Mac owner closes concrete confinement source gaps without native
 launch; processcount84 and measurementguardfalse unchanged.
 Mac source increment93ea4244 independently reviewed2/2 OCR-selected Python
 files plus original excluded pure log and affected environment/graph callers.
