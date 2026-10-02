@@ -36,6 +36,13 @@ class SourceProcessExitContractTests(unittest.TestCase):
             with self.subTest(marker=marker):
                 self.assertIn(marker, self.source)
 
+    def test_native_contract_demonstrates_real_wrong_expected_exit_status(self):
+        helper = re.search(r"(?ms)^function Test-OwnedProcessExitCodes\b.*?(?=^if \(!\$SetupFailureControl\))", self.source).group(0)
+        self.assertRegex(helper, r"(?s)Invoke-OwnedProcess\s+\$PowerShellPath.*?exit 17.*?['\"]exit-code-regression-17-wrong-expected['\"]\s+30\s+0")
+        self.assertRegex(helper, r"(?s)catch\s*\{.*?Exception\.Message\s*-match.*?exit-code-regression-17-wrong-expected exited 17 \\\(expected 0\\\).*")
+        self.assertIn("EXIT_CODE_REGRESSION_17_WRONG_EXPECTED", helper)
+        self.assertIn("exit-code-regression-17-wrong-expected.stdout.txt", helper)
+
 
 if __name__ == "__main__":
     unittest.main()

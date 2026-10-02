@@ -383,8 +383,22 @@ function Invoke-OwnedProcess([string] $Path, [string[]] $Arguments, [string] $Na
 }
 
 function Test-OwnedProcessExitCodes([string] $PowerShellPath) {
+    $wrongExpectedOutput = Join-Path $logRoot 'exit-code-regression-17-wrong-expected.stdout.txt'
     $zeroOutput = Join-Path $logRoot 'exit-code-regression-zero.stdout.txt'
     $seventeenOutput = Join-Path $logRoot 'exit-code-regression-17.stdout.txt'
+    $wrongExpectedRejected = $false
+    try {
+        Invoke-OwnedProcess $PowerShellPath @('-NoLogo','-NoProfile','-Command',"Write-Output 'EXIT_CODE_REGRESSION_17_WRONG_EXPECTED'; exit 17") `
+            'exit-code-regression-17-wrong-expected' 30 0
+    }
+    catch {
+        $wrongExpectedRejected = $_.Exception.Message -match 'exit-code-regression-17-wrong-expected exited 17 \(expected 0\)'
+    }
+    if (!$wrongExpectedRejected) { throw 'Real exit-17 child was not rejected with its actual 17 and expected 0 status.' }
+    if ((Get-Content -LiteralPath $wrongExpectedOutput -Raw).Trim() -ne 'EXIT_CODE_REGRESSION_17_WRONG_EXPECTED') {
+        throw 'Exit-code regression child with the wrong expected status did not produce its expected redirected output.'
+    }
+    Write-Output 'PASS exit-code-regression-17-wrong-expected rejected with actual 17 expected 0'
     Invoke-OwnedProcess $PowerShellPath @('-NoLogo','-NoProfile','-Command',"Write-Output 'EXIT_CODE_REGRESSION_ZERO'; exit 0") `
         'exit-code-regression-zero' 30 0
     Invoke-OwnedProcess $PowerShellPath @('-NoLogo','-NoProfile','-Command',"Write-Output 'EXIT_CODE_REGRESSION_17'; exit 17") `
