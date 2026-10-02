@@ -166,6 +166,14 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
    Exact selected-unit acceptance remains distinct from conservative candidate
    confinement coverage; both require explicit supported evidence. Next collect
    immutable source increment and pure proof or concrete missing capability.
+   Stable-Cargo incrementadbb95e independently reviewed2/2 with OCR rules.
+   One blocking producer/parser mismatch: --edges all includes feature rows,
+   but parser accepts package rows only. Existing owner correcting in one
+   source-only batch with meaningful regression; no Cargo/native command.
+   Reviewmacos-stable-graph-increment-review.md records exact scope and source.
+   Other source checks retain candidate coverage only, exact unitsfalse.
+   Next collect corrected frozen source and affected evidence, then integrate
+   after narrow finding recheck; guardfalse/count84/no85 preserved.
 4. Windows sole owner is completed; current virsh domstate readback0 confirms
    rhai-win11-quality shut off. Partial console
    command/cleanup remains unverified. Preserve allocation and all prior evidence;
