@@ -66,7 +66,14 @@ Windows guest control belongs solely to windows_monitor_job_owner.
    Fresh archive curl command used lowercase-l instead of uppercase-L and saved
    an empty redirect response. Original empty archive preserved; owner diagnosed
    the exact key/input error and prepares fresh absent-path redirect-follow fetch.
-   NO fixture/compiler/job handle yet; hash/parser/17-pin gate not yet verified. Continue fresh immutable
+   Alternate direct codeload guest attempt returned404 before fixture activity.
+   Root independently fetched the canonical immutable archive in a private scoped
+   runtime:1789933bytes, ZIP SHA7d44819d647dc002b8746764504f84a7568f76708c60c13b80813f90792fdc44,
+   contained RunSourceFixtures.ps1 SHA matches79be8688 exactly. Original receipt
+   windows-source-archive-host-readback.json proves host endpoint/archive integrity;
+   it does not prove guest transfer or native execution. Owner received receipt
+   and continues verified canonical Shift-L input; no credentials or new transport.
+   NO fixture/compiler/job handle yet; native hash/parser/17-pin gate not yet verified. Continue fresh immutable
    archive/runroot, native PS5.1 parser and input gate before fixture invocation.
    Preserve failed roots and exact cleanup. Do not call this a verified live wait.
 2. POSIX overhead source00bed4a0dfeb103ff209ba4c76dac7ae797b7c56 integrated.
@@ -169,11 +176,12 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Previous turn classification
-The preceding user status turn restated authoritative state and verified only-main
-remote; it did not close implementation acceptance (no implementation progress).
-This continuation independently reviewed frozen Linux launcher dd95669e and found
-concrete missing storage/RSS monitoring, changing next action to source correction
-before native82. Linux responsible context continues that repair. Root created an
-exact owned managed worktree and delegated the parallel bounded Mac safeguard
-repair. Windows continues its existing owner context; no live fixture handle is
-claimed from agent status or intent. No history, budget or native counter reset.
+Previous continuation progressed by independent source review identifying missing
+Linux resource safeguards and starting the parallel bounded Mac repair. Current
+continuation revalidated a clean root and continuing responsible contexts, then
+obtained new actual host HTTP GET/ZIP-content evidence for immutable Windows7b
+archive after the guest404. Exact source script hash matches the frozen contract;
+this distinguishes guest input/transfer setup from an invalid URL/source package.
+Original receipt exported, private fetch used run_scoped, no native invocation.
+Sent concrete evidence to sole Windows owner. Linux/Mac source corrections continue;
+no live fixture handle claimed from intent. No cause/history/budget reset.

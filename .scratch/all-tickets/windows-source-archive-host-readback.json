@@ -1,0 +1,13 @@
+{
+  "source_revision": "7b9fd871c3d036ff9f57e9e4e35e01b10f0c0c32",
+  "request_url": "https://github.com/hoppworks/rhai/archive/7b9fd871c3d036ff9f57e9e4e35e01b10f0c0c32.zip",
+  "final_url": "https://codeload.github.com/hoppworks/rhai/zip/7b9fd871c3d036ff9f57e9e4e35e01b10f0c0c32",
+  "archive_bytes": 1789933,
+  "archive_sha256": "7d44819d647dc002b8746764504f84a7568f76708c60c13b80813f90792fdc44",
+  "fixture_path": "rhai-7b9fd871c3d036ff9f57e9e4e35e01b10f0c0c32/tools/windows-scoped-runner/fixtures/RunSourceFixtures.ps1",
+  "fixture_sha256": "79be8688152ae600b4126f6c03571dd6dd66d669f4dfe2a1b720b775bfe82b4d",
+  "fixture_expected_sha256": "79be8688152ae600b4126f6c03571dd6dd66d669f4dfe2a1b720b775bfe82b4d",
+  "archive_fixture_hash_matches": true,
+  "native_execution": false,
+  "observed_epoch": 1790917393.363861
+}
