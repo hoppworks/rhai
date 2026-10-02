@@ -1,0 +1,11 @@
+sampled_storage_kib=668812 sampled_rss_kib=24608 sampled_descendants=1
+command=resolve-current-libc argv=['/Users/hoppworks/.rustup/toolchains/1.93.0-aarch64-apple-darwin/bin/cargo', 'update', '--offline', '-p', 'libc', '--precise', '0.2.189']
+sampled_storage_kib=711972 sampled_rss_kib=65824 sampled_descendants=2
+status=resolve-current-libc:101
+Traceback (most recent call last):
+  File "/Users/hoppworks/projects/rhai-all-tickets/.scratch/all-tickets/core-current-msrv-proof.py", line 114, in <module>
+    command('resolve-current-libc', [str(MODERN / 'cargo'), 'update', '--offline', '-p', 'libc', '--precise', '0.2.189'], env)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hoppworks/projects/rhai-all-tickets/.scratch/all-tickets/core-current-msrv-proof.py", line 82, in command
+    raise RuntimeError(f'{name} expected {expected}, observed {status}; see {path}')
+RuntimeError: resolve-current-libc expected 0, observed 101; see /Users/hoppworks/projects/rhai-all-tickets/.scratch/all-tickets/core-current-msrv-evidence/resolve-current-libc.log

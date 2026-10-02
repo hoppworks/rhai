@@ -1,0 +1,4 @@
+storage_kib=978720
+rss_kib=804096
+descendants=6
+Approximately one-second and post-setup samples; not continuous peak or byte accounting

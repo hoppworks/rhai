@@ -20,7 +20,7 @@ and coordinator merges are authorized. The owner explicitly requested all fork
 histories consolidated into main with main the only remote branch; development
 integration does not claim release acceptance. Do not recreate remote task refs.
 No installs, admin, credentials, agent-home/config or shared-service changes.
-Windows guest control belongs solely to windows_monitor_job_owner.
+Windows guest control belongs solely to windows_private_staging_readback; historical owner records remain preserved.
 
 ## Done steps and accepted evidence
 - Foundation filesystem/environment/file handles/TCP slices are integrated with
@@ -162,3 +162,36 @@ windows_private_staging_readback assigned read-only guest recovery and isolated
 parser/path gates only, no compiler/fixture/job harness/real-client launch.
 No stopped-process assumption from missing agent handle. Existing staging roots,
 logs and nonrenewable budgets remain. Final all-ticket requirements still open.
+
+## Current-source core MSRV package — accepted narrow gate
+Current default-core applicability CLOSED for source52d9797b, Rust/Cargo1.66.0,
+Darwin arm64, exact v3 lock. Real Engine42, spawn reserved withoutsys, wrong43
+assertion101, restored42; outer04 terminal0. Independent frozen archive/lock
+hashes,119 cached locked archive rows/statuses/assertions/sampled maxima and
+all four exact scope absences checked in core-current-msrv-root-readback.json.
+Original core-current-msrv-evidence{,-02,-03,-04}, outer logs and
+core-current-msrv-proof.md preserve attempts01index,02archive,03librarypass/
+examplearchive boundary,04acceptance, old seven historical attempts and
+Expert10 single answer/followup. No source failures or history reset.
+Four allocated540s/600s packages (cumulative2160s helper/2400s outer ceilings;
+actual elapsed not captured), jobs2, sampled2GiB storage/RSS/16descendants.
+04 sampled storage978720KiB/RSS804096KiB/descendants6, not continuous peaks.
+Full manifests unchanged; no shared cache/config/install/credentials change.
+No invocation85/process measurement. Remaining optional/platform/feature gates
+and every other ticket requirement remain active.
+
+## Immediate next actions
+Review frozen Mac architecture2f4be015: driver has no spawn, adapter sole
+custodian and RPC/EOF cleanup; source gate false,14pure tests reported by owner,
+root review still open. Existing Expert09/history/caps, no native since81.
+Windows sole controller recovered PS5.1 desktop; shell3664/cscabsent and run/tmp
+empty are filtered observations only. Old stages/NLL and zero-byte archive
+preserved. Bounded HEAD diagnosis shows archive endpoint200 and directlegacy
+endpoint404, not general network blockage. Root inspected original final
+screenshot and independently downloaded exact9e0 archive bytes into memory:
+13380569bytes/SHA8291e58652a7dc8494513d910460e6dae39a716f5dfca937bda40fafcfa0caa4.
+Receipt windows-private-staging-archive-root-hash.json. Authorized one30sGET
+using confirmed GitHub endpoint into NEW own unique private session root;
+observe hash before extraction; no repeat, compiler/fixture/job/realclient.
+All original Windows caps/history persist. Next stage/parser/path proof remains
+open. Goal active, no release acceptance.

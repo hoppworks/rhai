@@ -1,0 +1,48 @@
+sampled_storage_kib=668812 sampled_rss_kib=24544 sampled_descendants=1
+command=rustc-version argv=['/Users/hoppworks/.rustup/toolchains/1.66.0-aarch64-apple-darwin/bin/rustc', '--version', '--verbose']
+sampled_storage_kib=711972 sampled_rss_kib=81280 sampled_descendants=2
+sampled_storage_kib=711972 sampled_rss_kib=65776 sampled_descendants=1
+status=rustc-version:0
+command=cargo-version argv=['/Users/hoppworks/.rustup/toolchains/1.66.0-aarch64-apple-darwin/bin/cargo', '--version']
+sampled_storage_kib=711972 sampled_rss_kib=65776 sampled_descendants=2
+sampled_storage_kib=711972 sampled_rss_kib=65776 sampled_descendants=1
+status=cargo-version:0
+command=core-check argv=['/Users/hoppworks/.rustup/toolchains/1.66.0-aarch64-apple-darwin/bin/cargo', 'check', '--locked', '--lib', '--target', 'aarch64-apple-darwin']
+sampled_storage_kib=711972 sampled_rss_kib=88816 sampled_descendants=3
+sampled_storage_kib=732212 sampled_rss_kib=308912 sampled_descendants=5
+sampled_storage_kib=737688 sampled_rss_kib=293888 sampled_descendants=4
+sampled_storage_kib=751172 sampled_rss_kib=242848 sampled_descendants=4
+sampled_storage_kib=761596 sampled_rss_kib=440400 sampled_descendants=4
+sampled_storage_kib=766216 sampled_rss_kib=656560 sampled_descendants=4
+sampled_storage_kib=788660 sampled_rss_kib=443584 sampled_descendants=4
+sampled_storage_kib=804836 sampled_rss_kib=178752 sampled_descendants=3
+sampled_storage_kib=805164 sampled_rss_kib=296688 sampled_descendants=3
+sampled_storage_kib=805176 sampled_rss_kib=441168 sampled_descendants=3
+sampled_storage_kib=805176 sampled_rss_kib=533744 sampled_descendants=3
+sampled_storage_kib=815816 sampled_rss_kib=54160 sampled_descendants=2
+sampled_storage_kib=815816 sampled_rss_kib=54160 sampled_descendants=1
+status=core-check:0
+command=engine-positive argv=['/Users/hoppworks/.rustup/toolchains/1.66.0-aarch64-apple-darwin/bin/cargo', 'run', '--locked', '--target', 'aarch64-apple-darwin', '--example', 'core_current_msrv']
+sampled_storage_kib=815820 sampled_rss_kib=96960 sampled_descendants=2
+sampled_storage_kib=828672 sampled_rss_kib=414816 sampled_descendants=4
+sampled_storage_kib=851584 sampled_rss_kib=396160 sampled_descendants=6
+sampled_storage_kib=856508 sampled_rss_kib=489984 sampled_descendants=4
+sampled_storage_kib=903392 sampled_rss_kib=311664 sampled_descendants=4
+sampled_storage_kib=907984 sampled_rss_kib=307472 sampled_descendants=3
+sampled_storage_kib=907996 sampled_rss_kib=449136 sampled_descendants=3
+sampled_storage_kib=907996 sampled_rss_kib=529600 sampled_descendants=3
+sampled_storage_kib=907996 sampled_rss_kib=604848 sampled_descendants=3
+sampled_storage_kib=922524 sampled_rss_kib=738384 sampled_descendants=3
+sampled_storage_kib=930600 sampled_rss_kib=804096 sampled_descendants=3
+sampled_storage_kib=936952 sampled_rss_kib=586848 sampled_descendants=3
+sampled_storage_kib=978720 sampled_rss_kib=54192 sampled_descendants=1
+status=engine-positive:0
+command=engine-wrong-control argv=['/Users/hoppworks/.rustup/toolchains/1.66.0-aarch64-apple-darwin/bin/cargo', 'run', '--offline', '--locked', '--target', 'aarch64-apple-darwin', '--example', 'core_current_msrv', '--', '--wrong']
+sampled_storage_kib=978720 sampled_rss_kib=100112 sampled_descendants=2
+sampled_storage_kib=978720 sampled_rss_kib=56864 sampled_descendants=1
+status=engine-wrong-control:101
+command=engine-restored argv=['/Users/hoppworks/.rustup/toolchains/1.66.0-aarch64-apple-darwin/bin/cargo', 'run', '--offline', '--locked', '--target', 'aarch64-apple-darwin', '--example', 'core_current_msrv']
+sampled_storage_kib=978720 sampled_rss_kib=56896 sampled_descendants=2
+sampled_storage_kib=978720 sampled_rss_kib=56848 sampled_descendants=1
+status=engine-restored:0
+core_current_msrv_proof=pass

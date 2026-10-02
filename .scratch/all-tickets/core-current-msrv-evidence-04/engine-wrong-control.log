@@ -1,0 +1,23 @@
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: associated function `get_script_fn_by_hash_mut` is never used
+    --> src/module/mod.rs:1358:19
+     |
+1358 |     pub(crate) fn get_script_fn_by_hash_mut(
+     |                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+     |
+     = note: `#[warn(dead_code)]` on by default
+
+warning: `rhai` (lib) generated 2 warnings
+    Finished dev [unoptimized] target(s) in 0.08s
+     Running `/Users/hoppworks/.local/share/agent-builds/rhai/root-core-msrv-88a4ff064c114de4918207da21bd6638/agent-build-i07xusad/target/aarch64-apple-darwin/debug/examples/core_current_msrv --wrong`
+thread 'main' panicked at 'assertion failed: `(left == right)`
+  left: `42`,
+ right: `43`: independent Engine expectation', examples/core_current_msrv.rs:7:5
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

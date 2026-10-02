@@ -1,0 +1,9 @@
+[
+  {
+    "namespace": "index.crates.io-1949cf8c6b5b557f",
+    "config": {
+      "dl": "https://static.crates.io/crates",
+      "api": "https://crates.io"
+    }
+  }
+]

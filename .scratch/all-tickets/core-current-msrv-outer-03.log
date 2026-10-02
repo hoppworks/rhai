@@ -1,0 +1,35 @@
+sampled_storage_kib=668812 sampled_rss_kib=23488 sampled_descendants=1
+command=resolve-current-libc argv=['/Users/hoppworks/.rustup/toolchains/1.93.0-aarch64-apple-darwin/bin/cargo', 'update', '-p', 'libc', '--precise', '0.2.189']
+sampled_storage_kib=711972 sampled_rss_kib=89936 sampled_descendants=2
+sampled_storage_kib=711976 sampled_rss_kib=57600 sampled_descendants=2
+status=resolve-current-libc:0
+command=rustc-version argv=['/Users/hoppworks/.rustup/toolchains/1.66.0-aarch64-apple-darwin/bin/rustc', '--version', '--verbose']
+sampled_storage_kib=712036 sampled_rss_kib=26000 sampled_descendants=2
+status=rustc-version:0
+command=cargo-version argv=['/Users/hoppworks/.rustup/toolchains/1.66.0-aarch64-apple-darwin/bin/cargo', '--version']
+sampled_storage_kib=712036 sampled_rss_kib=38192 sampled_descendants=2
+status=cargo-version:0
+command=core-check argv=['/Users/hoppworks/.rustup/toolchains/1.66.0-aarch64-apple-darwin/bin/cargo', 'check', '--locked', '--lib', '--target', 'aarch64-apple-darwin']
+sampled_storage_kib=712036 sampled_rss_kib=76560 sampled_descendants=3
+sampled_storage_kib=731720 sampled_rss_kib=310448 sampled_descendants=4
+sampled_storage_kib=737200 sampled_rss_kib=195536 sampled_descendants=4
+sampled_storage_kib=749628 sampled_rss_kib=265008 sampled_descendants=4
+sampled_storage_kib=761348 sampled_rss_kib=83088 sampled_descendants=4
+sampled_storage_kib=761668 sampled_rss_kib=524096 sampled_descendants=4
+sampled_storage_kib=766276 sampled_rss_kib=665056 sampled_descendants=4
+sampled_storage_kib=789272 sampled_rss_kib=434304 sampled_descendants=4
+sampled_storage_kib=801360 sampled_rss_kib=312480 sampled_descendants=4
+sampled_storage_kib=805224 sampled_rss_kib=237488 sampled_descendants=3
+sampled_storage_kib=805236 sampled_rss_kib=399616 sampled_descendants=3
+sampled_storage_kib=805236 sampled_rss_kib=448592 sampled_descendants=3
+sampled_storage_kib=805236 sampled_rss_kib=517344 sampled_descendants=3
+status=core-check:0
+command=engine-positive argv=['/Users/hoppworks/.rustup/toolchains/1.66.0-aarch64-apple-darwin/bin/cargo', 'run', '--offline', '--locked', '--target', 'aarch64-apple-darwin', '--example', 'core_current_msrv']
+sampled_storage_kib=815880 sampled_rss_kib=25376 sampled_descendants=2
+status=engine-positive:101
+Traceback (most recent call last):
+  File "/Users/hoppworks/projects/rhai-all-tickets/.scratch/all-tickets/core-current-msrv-proof.py", line 134, in <module>
+    positive = command('engine-positive', argv, env)
+  File "/Users/hoppworks/projects/rhai-all-tickets/.scratch/all-tickets/core-current-msrv-proof.py", line 82, in command
+    raise RuntimeError(f'{name} expected {expected}, observed {status}; see {path}')
+RuntimeError: engine-positive expected 0, observed 101; see /Users/hoppworks/projects/rhai-all-tickets/.scratch/all-tickets/core-current-msrv-evidence-03/engine-positive.log

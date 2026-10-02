@@ -1,0 +1,40 @@
+{
+  "readback_utc": "2026-10-02T07:04:23.158015+00:00",
+  "revision": "52d9797b250abcd29ca3d264be9aa0e42acd43bb",
+  "archive_sha256": "995b2fd04724d6f67798e6e020cb07be1f4e112f508670788a023bf08ed07ee3",
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "command_statuses": [
+    "rustc-version:0",
+    "cargo-version:0",
+    "core-check:0",
+    "engine-positive:0",
+    "engine-wrong-control:101",
+    "engine-restored:0"
+  ],
+  "library_check": "default core Rust1.66 Darwin arm64",
+  "engine": "real42, spawn reserved withoutsys, wrong43 assertion101, restored42",
+  "scopes": {
+    "/Users/hoppworks/.local/share/agent-builds/rhai/root-core-msrv-f49c79c6dfcd46f5b9f97902f52f7b18": "absent",
+    "/Users/hoppworks/.local/share/agent-builds/rhai/root-core-msrv-6f383f9037504aa7ac8d1e1a1be8a97e": "absent",
+    "/Users/hoppworks/.local/share/agent-builds/rhai/root-core-msrv-085a360c0bb144f0bc0c652a0ce8a70b": "absent",
+    "/Users/hoppworks/.local/share/agent-builds/rhai/root-core-msrv-88a4ff064c114de4918207da21bd6638": "absent"
+  },
+  "cached_locked_archive_rows": 119,
+  "archive_scope": "present matching locked cache archives; not all used packages or all workspace inputs",
+  "sampled_maxima": {
+    "storage_kib": 978720,
+    "rss_kib": 804096,
+    "descendants": 6
+  },
+  "resource_limitation": "samples only; not continuous peak/enforcement",
+  "remaining": "optional MSRV, other platforms, full feature matrix and remaining tickets open",
+  "ocr_source_review": {
+    "reviewable_files": 1,
+    "reviewed_files": 1,
+    "skipped_files": 0,
+    "excluded_files": 37,
+    "coverage_rate": 1.0,
+    "findings": [],
+    "scope": "helper source; explicit original evidence exclusions independently read back"
+  }
+}

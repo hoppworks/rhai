@@ -1,0 +1,22 @@
+sampled_storage_kib=668812 sampled_rss_kib=27376 sampled_descendants=1
+command=resolve-current-libc argv=['/Users/hoppworks/.rustup/toolchains/1.93.0-aarch64-apple-darwin/bin/cargo', 'update', '-p', 'libc', '--precise', '0.2.189']
+sampled_storage_kib=711972 sampled_rss_kib=92192 sampled_descendants=2
+sampled_storage_kib=711976 sampled_rss_kib=59600 sampled_descendants=2
+sampled_storage_kib=711976 sampled_rss_kib=62400 sampled_descendants=2
+status=resolve-current-libc:0
+command=rustc-version argv=['/Users/hoppworks/.rustup/toolchains/1.66.0-aarch64-apple-darwin/bin/rustc', '--version', '--verbose']
+sampled_storage_kib=712036 sampled_rss_kib=28288 sampled_descendants=2
+status=rustc-version:0
+command=cargo-version argv=['/Users/hoppworks/.rustup/toolchains/1.66.0-aarch64-apple-darwin/bin/cargo', '--version']
+sampled_storage_kib=712036 sampled_rss_kib=34448 sampled_descendants=2
+status=cargo-version:0
+command=core-check argv=['/Users/hoppworks/.rustup/toolchains/1.66.0-aarch64-apple-darwin/bin/cargo', 'check', '--offline', '--locked', '--lib', '--target', 'aarch64-apple-darwin']
+sampled_storage_kib=712036 sampled_rss_kib=39264 sampled_descendants=2
+status=core-check:101
+Traceback (most recent call last):
+  File "/Users/hoppworks/projects/rhai-all-tickets/.scratch/all-tickets/core-current-msrv-proof.py", line 121, in <module>
+    command('core-check', [str(OLD / 'cargo'), 'check', '--offline', '--locked', '--lib', '--target', 'aarch64-apple-darwin'], env)
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/hoppworks/projects/rhai-all-tickets/.scratch/all-tickets/core-current-msrv-proof.py", line 82, in command
+    raise RuntimeError(f'{name} expected {expected}, observed {status}; see {path}')
+RuntimeError: core-check expected 0, observed 101; see /Users/hoppworks/projects/rhai-all-tickets/.scratch/all-tickets/core-current-msrv-evidence-02/core-check.log

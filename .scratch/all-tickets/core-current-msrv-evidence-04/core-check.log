@@ -1,0 +1,64 @@
+ Downloading crates ...
+  Downloaded getrandom v0.3.4
+  Downloaded crunchy v0.2.4
+  Downloaded unicode-ident v1.0.22
+  Downloaded cfg-if v1.0.5
+  Downloaded bitflags v2.13.2
+  Downloaded autocfg v1.5.1
+  Downloaded smartstring v1.0.1
+  Downloaded thin-vec v0.2.19
+  Downloaded smallvec v1.16.2
+  Downloaded proc-macro2 v1.0.103
+  Downloaded num-traits v0.2.19
+  Downloaded once_cell v1.21.4
+  Downloaded getrandom v0.2.17
+  Downloaded ahash v0.8.12
+  Downloaded quote v1.0.41
+  Downloaded portable-atomic v1.15.0
+  Downloaded zerocopy v0.8.59
+  Downloaded syn v2.0.106
+  Downloaded libc v0.2.189
+   Compiling libc v0.2.189
+   Compiling autocfg v1.5.1
+   Compiling crunchy v0.2.4
+   Compiling version_check v0.9.5
+   Compiling proc-macro2 v1.0.103
+   Compiling tiny-keccak v2.0.2
+   Compiling unicode-ident v1.0.22
+   Compiling portable-atomic v1.15.0
+   Compiling quote v1.0.41
+   Compiling cfg-if v1.0.5
+   Compiling getrandom v0.2.17
+   Compiling getrandom v0.3.4
+   Compiling once_cell v1.21.4
+   Compiling zerocopy v0.8.59
+   Compiling const-random-macro v0.1.16
+   Compiling ahash v0.8.12
+   Compiling smartstring v1.0.1
+   Compiling num-traits v0.2.19
+   Compiling syn v2.0.106
+    Checking const-random v0.1.18
+   Compiling rhai v1.26.1 (/Users/hoppworks/.local/share/agent-builds/rhai/root-core-msrv-88a4ff064c114de4918207da21bd6638/agent-build-i07xusad/source)
+    Checking static_assertions v1.1.0
+   Compiling rhai_codegen v3.2.0 (/Users/hoppworks/.local/share/agent-builds/rhai/root-core-msrv-88a4ff064c114de4918207da21bd6638/agent-build-i07xusad/source/codegen)
+    Checking smallvec v1.16.2
+    Checking bitflags v2.13.2
+    Checking thin-vec v0.2.19
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: associated function `get_script_fn_by_hash_mut` is never used
+    --> src/module/mod.rs:1358:19
+     |
+1358 |     pub(crate) fn get_script_fn_by_hash_mut(
+     |                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+     |
+     = note: `#[warn(dead_code)]` on by default
+
+warning: `rhai` (lib) generated 2 warnings
+    Finished dev [unoptimized] target(s) in 12.29s
