@@ -1,0 +1,16 @@
+{
+  "stage": "/root/rhai-linux-current-msrv-examples-1ca21e32-20261002",
+  "matching_reviewed_inputs": {
+    "source.tar": "8251e0429d51ffd330e7eac596a1513d836e43e549ca761852cafc642a2a8155",
+    "Cargo.lock.accepted": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+    "run-examples.py": "59ac8b7b9c71ab2331c13196b36d8d2794931e07138741c43d4a8c3d1d754b06",
+    "contract.md": "a23eaa2b6f07b16a35ba172bf6f6b19986626afdcc8452ffe5fb4f8a0401a5a7",
+    "launch.sh": "c1dd27f10d9a5165622af03c9de74ffa5556a2296c7b70bb0dcfe2555177dcdb",
+    "stage.sh": "52d6aafd4d50798f1be613b27dc7344573971c328c94a5fa5832478a12a46124",
+    "runner/tools/run_scoped.py": "9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d",
+    "runner/tools/agentskills/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runner/tools/agentskills/pyguard.py": "a3739f4947744303e1adf3fb0875ac743944a272e5b95c94b1baba53029d313f"
+  },
+  "native_execution_started": false,
+  "process_native_invocations_consumed": 84
+}

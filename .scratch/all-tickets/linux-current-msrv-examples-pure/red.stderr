@@ -1,0 +1,9 @@
+REGRESSION_FAIL: prepared examples package must pin native Linux Rust 1.77.2
+Traceback (most recent call last):
+  File "/Users/hoppworks/.codex/worktrees/linux-msrv-helper-repair/rhai/.scratch/all-tickets/test-linux-current-msrv-examples.py", line 87, in <module>
+    main()
+  File "/Users/hoppworks/.codex/worktrees/linux-msrv-helper-repair/rhai/.scratch/all-tickets/test-linux-current-msrv-examples.py", line 77, in main
+    test_linux_toolchain_and_frozen_inputs(tree, source)
+  File "/Users/hoppworks/.codex/worktrees/linux-msrv-helper-repair/rhai/.scratch/all-tickets/test-linux-current-msrv-examples.py", line 30, in test_linux_toolchain_and_frozen_inputs
+    assert constants.get('TOOLCHAIN') == '1.77.2-x86_64-unknown-linux-gnu', \
+AssertionError: prepared examples package must pin native Linux Rust 1.77.2

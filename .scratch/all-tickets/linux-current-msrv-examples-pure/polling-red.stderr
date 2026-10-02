@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/hoppworks/.codex/worktrees/linux-msrv-helper-repair/rhai/.scratch/all-tickets/test-linux-current-msrv-examples.py", line 153, in <module>
+    main()
+  File "/Users/hoppworks/.codex/worktrees/linux-msrv-helper-repair/rhai/.scratch/all-tickets/test-linux-current-msrv-examples.py", line 144, in main
+    test_wrappers_are_prepared_not_invoked()
+  File "/Users/hoppworks/.codex/worktrees/linux-msrv-helper-repair/rhai/.scratch/all-tickets/test-linux-current-msrv-examples.py", line 130, in test_wrappers_are_prepared_not_invoked
+    assert 'runner_raw=$(</proc/"$runner_pid"/stat 2>/dev/null)' not in launcher
+AssertionError

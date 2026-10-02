@@ -1,0 +1,6 @@
+PRIVATE_RUNTIME /Users/hoppworks/.local/share/agent-builds/rhai/linux-current-msrv-examples-pure-20261002-1235/agent-build-1lv_hswo/tmp/linux-examples-pure-h0vk1xt7/agent-build-private
+frozen_source_lock_toolchain=PASS
+real_engine_examples_and_named_controls=PASS
+missing_identity_durable_failure_and_no_command=PASS
+interruption_exports_within_deadline_and_rejects_expiry=PASS
+custody_deadlines_resource_limits_and_wrapper_scope=PASS

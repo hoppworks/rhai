@@ -55,7 +55,7 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
   34 emitted PIDs/10 groups and exact runtime absent, three manifests matching.
   Cargo53.432s, sampled276896KiB; no continuous peak claim.
 - Remote branch cleanup CLOSED. Latest independent ls-remote readback shows ONLY
-  main at c3e7234948c90cd204f1f814063376537b0e5599 (2026-10-02 integration readback). Nine remote task refs removed
+  main at56f1a35cd4df09ae1cddc4dc728c54d7290403f4 (latest pre-integration readback). Nine remote task refs removed
   in the final consolidation, one earlier; every exact tip was ancestor of pushed
   main before deletion. Histories preserved. Local active/foreign/dirty worktrees
   remain; remote cleanup does not authorize discarding them.
@@ -96,32 +96,32 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
    all20 identities absent, ownPGID1566099 empty, exact runtime/scope absent.
    Export64.206s; 88periodic samples maxRSS803384KiB/storage761640KiB/descendants4,
    not continuous peaks. Prior v1/setup history retained, no limit reset/native85.
-   Next: current Linux real sys/net examples acceptance using the existing
-   reviewed examples harness adapted for Linux; compiler proof does not prove
-   native runtime behavior or close the final release gate. Existing owner
-   current_optional_msrv_prepare_v2 resumed for source-only Linux examples
-   adaptation in its own linux-msrv-helper-repair worktree. TDD/pure preparation
-   only, no staging/build/native execution until root review; current rule
-   owner confirms4d86 globals/project/campaign/TDD/roles/coordinator reload and
-   no descendants. Source preparation is live; original pure RED receipt at
-   linux-msrv-helper-repair/rhai/.scratch/all-tickets/linux-current-msrv-examples-pure
-   returns1 at the intended wrong Darwin-vs-Linux toolchain assertion, not an
-   infrastructure crash. Root read the original stderr/status independently.
-   Combined root review of current draft covers all4 OCR-selected code files
-   plus contract and receipts manually; Python/system default Bash rules applied.
-   Two material launcher findings returned to the responsible context as one
-   batch: redirect-only $(<file 2>/dev/null) loses Bash file-read output, bypassing
-   runner identity/state polling and potentially treating interrupted wait as
-   terminal; read -t on /dev/null returns EOF immediately and does not delay.
-   Independent local Bash boundary probe: plain /etc/hosts substitution212bytes,
-   redirected0bytes; read -t1 on /dev/null status1 elapsed0seconds. No file
-   contents exported, no Linux/native dispatch inferred. Need focused corrected
-   launcher boundary proof and narrow recheck against reviewed baseline before
-   staging. Existing pure GREEN0 covers only source/helper checks and wrote its
-   temp fixture under ordinary /var/folders temp; preserve it as historical,
-   require corrected checks through configured scoped runner before acceptance.
-   Owner is authoritatively running; no infrastructure/implementation correction
-   failure counted from these pre-launch review findings. History/caps preserved.
+   Next: execute the staged current Linux real sys/net examples package when
+   the single heavy slot is free. Source preparation and independent combined
+   review CLOSED narrowly at owner6c384145 (initialca894531). All4 code files
+   and contract reviewed; both launcher findings corrected in one batch.
+   Builtin read now retains proc identity/state; missing/mismatching/unreadable
+   identities fail closed, interrupted reads retry within the original deadline,
+   and sleep0.1 provides real polling delay. Original intended source RED1 and
+   polling RED1 retained; scoped owner GREEN0 and independent integrated replay0
+   cover five pure requirements. linux-current-msrv-examples-root-pure.log
+   records the replay; exact own scope removed empty after runner0. Pure checks
+   do not certify native launcher interruption or real example behavior.
+   Stage preparation completed0 through scoped runner, no Rustup/Cargo/native
+   execution. Exact unique remote stage is
+   /root/rhai-linux-current-msrv-examples-1ca21e32-20261002; nine inputs were
+   compared independently with reviewed local bytes and remote sha256sum check.
+   Original staging log and staging-readback.json retain proof. Production src,
+   codegen, build.rs, manifests and both examples unchanged from frozen1ca21e32.
+   Remote build scope remains uncreated; native count84 unchanged.
+   Heavy slot is occupied by foreign work: last live proc readback runner1583798
+   start7568048/PGID1583736, supervisor1583799 start7568051/PGID1583799 and
+   patrol profile audit1601978 start7579061/PGID1601977. Earlier1581785 and
+   1581799 are absent from inventory; do not restart or stop any foreign job.
+   Preserved idle28950/28951 and Dart MCP5388 remain unrelated resources.
+   Recheck exact live work before dispatch, retain600/540/510+30 limits and
+   sampled2GiB/16 descendants caps. Compiler proof and prepared source alone
+   leave the native examples and final release gate open.
 3. Mac Managed source correction74943bb2 is independently reviewed and replayed:
    58 adapter/23 reader pass, prior wrong fixture PGID and early gate reap are
    meaningful RED1, prior Cargo stream request fails1, restored adapter58 pass.
@@ -218,13 +218,12 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Current turn classification
-Previous goal turn: VERIFIED WAIT on live current_optional_msrv_prepare_v2 agent.
-Current continuation: PROGRESS. Combined draft review completed4/4 code files
-and contract, found two concrete launcher defects and returned one fix batch.
-Independent shell boundary observations change the next action to correction
-and narrow recheck before stage/build. Pure helper GREEN exists but does not
-cover these launcher failures or prove native examples. No external/build/native
-launch, retry or resource-limit revision. Count84/guardfalse and full goal open.
+Previous goal turn: NO PROGRESS toward acceptance; user requested overall status.
+Current continuation: PROGRESS. Corrected Linux source preparation passed narrow
+independent recheck and integrated pure replay; exact remote inputs staged and
+independently read back. Heavy native run remains queued behind authoritatively
+live foreign work. No scope/cap revision, process invocation85 or release claim.
+Count84/guardfalse and full goal remain open.
 
 ## Current-source core MSRV package — accepted narrow gate
 Current default-core applicability CLOSED for source52d9797b, Rust/Cargo1.66.0,
