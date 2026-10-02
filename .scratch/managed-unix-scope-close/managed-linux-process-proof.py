@@ -18,7 +18,7 @@ TARGET = RUNTIME / 'target'
 LOCK_BASE = STAGE / 'Cargo.lock.baseline'
 LOCK_SHA = '8bd35d7d14b123c204f253e89e77c4f655815f141ccdb1ce4e44c4be837d8baa'
 LOCK_EDGE = '2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425'
-ARCHIVE_SHA = 'fe254cabef661b334aa30ce16ab6ed7c267f8dd62507d7e28d3adcd6216c7f75'
+ARCHIVE_SHA = 'c799fe5a436ae9a548e476712c29ca91811c1e34accc4870748a66cbc270b3ee'
 RUST = pathlib.Path('/root/.rustup/toolchains/1.93.0-x86_64-unknown-linux-gnu/bin')
 CARGO = RUST / 'cargo'
 RUSTC = RUST / 'rustc'
@@ -519,7 +519,7 @@ def main():
     for key in ('RUSTC_WRAPPER', 'RUSTC_WORKSPACE_WRAPPER', 'RUSTUP_TOOLCHAIN', 'CARGO_HOME_CONFIG'):
         BASE_ENV.pop(key, None)
     emit(f'PRIVATE_RUNTIME {RUNTIME}')
-    emit(f'SOURCE_ARCHIVE sha256={ARCHIVE_SHA} revision=eafdcdf8e88cd08da5e097d7bdb5215ba3e9b564')
+    emit(f'SOURCE_ARCHIVE sha256={ARCHIVE_SHA} revision=c6e820d4e409a27f2d34504ff899ea17083fc35a')
     emit(f'LOCK edge_only_sha256={LOCK_EDGE} baseline_sha256={LOCK_SHA}')
     emit(f'PLATFORM {subprocess.check_output(["uname", "-a"], text=True).strip()}')
     emit('LIMITS package_outer_seconds=600 active_driver_seconds=580 aggregate_cargo_seconds=540 cargo_jobs=2 storage_sample_stop_kib=1572864 hard_policy_kib=2097152 sampler_interval_seconds=1')
