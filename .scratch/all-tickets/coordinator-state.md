@@ -240,3 +240,35 @@ overhead is a separate accepted source-only proposal:30 paired direct/managed
 samples each for true latency and16MiB combined capture, alternate order, publish
 per-run/medians and exact retained counts with no invented threshold. Freeze the
 measurement contract and limits before execution after behavioral acceptance.
+
+## Actual native76/77 outcomes and next responsible repairs
+
+Linux76 actual attached79839 launched immutable stagee9a663bf; launcher
+2561140/start5066884 and scoped2561174/start5066899. Terminalouter1/scoped1/monitor0
+before first managed control assertion during dependency compilation. Heartbeat
+age1.187s exceeded agent-selected1.0s tolerance despite live monitor atomicwrites
+and full /proc scan;1–3 current descendants, sample247320KiB. Original18files
+retained solely in owner launch-76-evidence. Owner exact readback35 PID/start pairs
+and PGID2561183 empty, runtime /tmp/agent-build-ryupt5at absent. Root accepts
+source-only3.0s scheduling grace proposal with synthetic boundary checks and
+immediate missing/dead-monitor failure preserved. This revises agent-selected
+health tolerance, not hard package/process/storage limits; no launch yet. Preserve
+76 infrastructure history; do not count unexecuted assertion as behavioral failure.
+
+Mac77 actual session82509 wrapper33109, sourcec6e820d4/archivec799, terminal1.
+Reused accepted75 exact exit0→42 receipt applies to unchanged production/integration
+test. New provisional EPERM known-broken control101 reached intended one-shot
+recovery assertion and sixpath restoration matched. Restored owner suite20passed/
+1failed at same new one-shot recovery assertion; ErrorRuntime hides actual typed
+SysError detail. Public29 did not run. New correction not accepted. Responsible
+context enhances typed failure diagnostics and checks program policy/actual Darwin
+closure before selecting next repair, without faking ESRCH or weakening acceptance.
+This is first actual behavioral failed correction for the provisional-observation
+cause;75 namespace setup and76 monitor infrastructure are separate outcomes.
+Existing Expert08/cause history remains; no blind retry or second escalation chain.
+Original BwimTR/control/owner logs retained and root independently confirms all17
+emitted known PIDs/two groups and exact runtime absent; restoration manifests match.
+Cargo77=35.749s/sample209216KiB. Known69–71+73–75+77 subtotal217.863s excludes72
+and Linux76 timing not yet exported in root state; no inferred continuous peak.
+Next actual unique Unix invocation78 only after concrete diagnosis/frozen review.
+Goal and final fork-main-only consolidation remain active and incomplete.

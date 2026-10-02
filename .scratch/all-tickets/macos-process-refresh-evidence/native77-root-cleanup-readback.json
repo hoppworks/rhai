@@ -1,0 +1,34 @@
+{
+  "native_invocation": 77,
+  "terminal_status": 1,
+  "known_pids": [
+    33109,
+    33117,
+    33118,
+    33140,
+    33592,
+    33650,
+    33651,
+    33657,
+    33664,
+    33666,
+    33760,
+    33765,
+    33781,
+    33788,
+    33796,
+    33798,
+    33799
+  ],
+  "checked_groups": [
+    33109,
+    33117
+  ],
+  "present_rows": [],
+  "runtime": "/private/var/folders/yk/m4dzf0ss5x9f4j4z3xb2rrv40000gn/T/agent-build-_7x19jiv",
+  "runtime_present": false,
+  "restoration_manifests_match": true,
+  "cargo_seconds": 35.749,
+  "sampled_max_kib": 209216,
+  "coverage": "Known emitted identities only; no continuous process or byte peak claim."
+}
