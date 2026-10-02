@@ -1,0 +1,37 @@
+{
+  "scope": "Native read-only unique Windows runroot preflight; not fixture acceptance",
+  "prospective": {
+    "session": "wroot-20261002-7a5ad33a7a3c",
+    "runroot": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\wroot-20261002-7a5ad33a7a3c\\run\\monitor-source-7a5ad33a7a3c44d6a19c707b191dd345",
+    "created": false,
+    "fixture_invocations_consumed": 1,
+    "followup_allocated": 1,
+    "native_runroot_absent": true,
+    "existing_clean_ancestors": 7,
+    "receipt": "runroot-result.png",
+    "remaining": "Create only exact new session/run parents after free-slot gate; require every ancestor and absent runroot again before fixture dispatch."
+  },
+  "screenshots": [
+    {
+      "local": ".scratch/all-tickets/windows-fresh-preflight-20261002/runroot-before.png",
+      "remote": "/tmp/rhai-root-runroot-before-20261002.png",
+      "sha256": "f6d536543f32d65c0b6c60fb511abd7670c3951a9d59d699b00594a47a2cfc12"
+    },
+    {
+      "local": ".scratch/all-tickets/windows-fresh-preflight-20261002/runroot-typed.png",
+      "remote": "/tmp/rhai-root-runroot-typed-20261002.png",
+      "sha256": "e415728e8bd5718ad338a156e51ca6fdc7556e51390900aebb7e9038af6da5cd"
+    },
+    {
+      "local": ".scratch/all-tickets/windows-fresh-preflight-20261002/runroot-result.png",
+      "remote": "/tmp/rhai-root-runroot-result-20261002.png",
+      "sha256": "415eb401456dee9d0fb1e77326fff4b1fdf6fe0aca3304bf542cf49551a14366"
+    }
+  ],
+  "cleanup": {
+    "exact_owned_screenshots_removed": 3
+  },
+  "typed_command_visually_verified": true,
+  "terminal_result_visually_verified": true,
+  "slot": "Previous foreign Nextest812118 now absent; fresh foreign cargo-clippy835669/cargo835673 and rustc descendants remain; no launch."
+}

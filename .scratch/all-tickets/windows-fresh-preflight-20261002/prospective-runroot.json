@@ -1,0 +1,11 @@
+{
+  "session": "wroot-20261002-7a5ad33a7a3c",
+  "runroot": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\wroot-20261002-7a5ad33a7a3c\\run\\monitor-source-7a5ad33a7a3c44d6a19c707b191dd345",
+  "created": false,
+  "fixture_invocations_consumed": 1,
+  "followup_allocated": 1,
+  "native_runroot_absent": true,
+  "existing_clean_ancestors": 7,
+  "receipt": "runroot-result.png",
+  "remaining": "Create only exact new session/run parents after free-slot gate; require every ancestor and absent runroot again before fixture dispatch."
+}
