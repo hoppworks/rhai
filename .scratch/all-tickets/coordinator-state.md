@@ -152,25 +152,23 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Current turn classification
-VERIFIED WAIT plus independent preparation: previous turn changed the next action
-through combined review findings at e5694dd9. Existing Mac owner is actively
-correcting finite control finalization/readiness without native launch. Exact
-workhorse900161/900162 foreign E2E remain live at8m46s, Flutter965611 active;
-Linux compiler stays staged/unlaunched. No foreign process stopped/restarted.
-A new independent release requirement is prepared by existing optional-MSRV
-owner: execute examples/sys.rs and examples/net.rs through real Engine under
-private Rust1.77.2 Darwinarm64 with independent file/peer truth and meaningful
-wrong-expectation controls/restoration. Source-only helper/contract preparation,
-frozen1ca21e32/lock2ba4, no worktree example/production changes. Actual launch
-requires root source review and Mac heavy-slot check. One future600outer/
-540helper/510work/export30 package, jobs2/desc16/RSS2GiB/storagepreemptive1.5GiB;
-no retry/cap expansion, no process fixture or invocation85. This requirement is
-examples execution, not whole release acceptance. Original source/check evidence
-and other matrix rows remain valid or open according to their applicability.
-Mac control original47/20 reported checks lack located logs, not independently
-accepted. Replay corrected frozen increment next; managed companion/installed
-kernel applicability stay open. Windows last observed off, no shared restart.
-Goal active/incomplete. Current preparation does not reset histories or limits.
+PROGRESS: current Darwinarm64 optional-MSRV examples requirement CLOSED narrowly.
+Frozen1ca21e32/lock2ba4/directprivateRust1.77.2, one combinedbuild, two intended
+assertionRED101/twoGREEN0 through realEngine/file/peer; original9commands and
+7manifests/sourcebytes/lock/archive/versions independently read back. Proof:
+current-msrv-examples-proof.md, evidence directory, root-readback.json.
+Helper34.951s,49periodic samples,maxRSS794064KiB/storage754776KiB/descendants6,
+outer0. Exact runtimeagent-build-ehwjvndb absent and empty ownscope retired.
+No processfixture/control/measurement/count85. Remaining release gates retained.
+
+Next: existing Mac owner source-only Managed companion/readiness plumbing under
+cause09, guardfalse,30min planningcheckpoint, no native/extraExpert/cap expansion.
+Conditionalexact4taskcount is not writer identity proof; XNU/native applicability
+remains open. Linux staged optional compiler not launched: direct G42 cargo ended,
+but live foreign run_scoped1172268/1172269 r5 still holds heavy slot. Preserve
+KSR28950/28951 and orphanflutter_tester. Revalidate exact handles before dispatch.
+Windows guest last observed off, unresolved partial line/ownership; no restart.
+Goal active/incomplete; no whole release completion claimed.
 
 ## Current-source core MSRV package — accepted narrow gate
 Current default-core applicability CLOSED for source52d9797b, Rust/Cargo1.66.0,

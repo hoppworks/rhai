@@ -1,0 +1,7 @@
+{
+  "all_scoped_sys_directories_removed": true,
+  "net_peer_joined_before_its_assertion": true,
+  "private_tmp": "/Users/hoppworks/.local/share/agent-builds/rhai/current-msrv-examples-1ca21e32-20261002/agent-build-ehwjvndb/tmp",
+  "remaining_sys_example_directories": [],
+  "sys_example_directory_prefix": "rhai-sys-example-"
+}

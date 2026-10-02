@@ -1,0 +1,5 @@
+thread 'main' panicked at examples/net.rs:89:5:
+assertion `left == right` failed: independent peer received the script bytes
+  left: [112, 105, 110, 103]
+ right: [119, 114, 111, 110, 103, 32, 112, 101, 101, 114, 32, 98, 121, 116, 101, 115]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

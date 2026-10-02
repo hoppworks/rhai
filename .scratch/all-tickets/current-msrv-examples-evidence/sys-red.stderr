@@ -1,0 +1,5 @@
+thread 'main' panicked at examples/sys.rs:77:5:
+assertion `left == right` failed: host file independent readback
+  left: "Rhaiting data"
+ right: "deliberately wrong host contents"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

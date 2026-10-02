@@ -85,3 +85,24 @@ maximaRSS735200KiB/storage733948KiB/descendants7; export74.811s. Compiler-only
 prerequisites are closed narrowly. Feature behavior, current native Linux/
 Windows, process lifecycle, docs/examples and strict release acceptance remain
 open. Earlier valid unchanged proof is retained.
+
+## Current Darwin optional examples acceptance
+
+Frozen source `1ca21e32eed2aa40287ba7e1282000add1dd49c7`, private direct
+Rust/Cargo1.77.2 Darwinarm64 and accepted v3lock2ba4 passed one combined
+`cargo build --locked --example sys --example net --features testing-environ,sys,net`.
+The resulting examples execute the real Engine, scoped filesystem and loopback
+peer. Fresh host readback observes `Rhaiting data`; independent peer receives
+`ping`, and the script receives `pong`. Wrong file contents and wrong peer bytes
+each produce their named assertion/status101; default expectations restored
+produce status0. Assertion-only seams are compiled into private binaries;
+production/example sources in the worktree are unchanged.
+
+Original commands/logs/versions/source-lock-restoration/resource receipts:
+`../../all-tickets/current-msrv-examples-evidence/`.
+Independent readback: `../../all-tickets/current-msrv-examples-root-readback.json`.
+Outer0, helper34.951s,49periodic samples, observed maxRSS794064KiB,
+storage754776KiB,descendants6. Exact runtime and own empty scope absent.
+This closes the current optional-MSRV examples execution requirement on Darwin
+only. Other platforms/features/process/docs/API review and full release remain
+open; no process fixture/control/measurement invocation85 was consumed.

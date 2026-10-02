@@ -1,0 +1,16 @@
+{
+  "cargo_lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "injected_example_sha256": {
+    "examples/net.rs": "e9941c9e1a28217dd40767e33b653f8db5948994893a6ca5baec8b10e9d4cd4b",
+    "examples/sys.rs": "2a0fa2c2365dc100c962157c99553c5b0bc45738e602806a5a10facc93bf231c"
+  },
+  "manifests_unchanged": true,
+  "original_example_sha256": {
+    "examples/net.rs": "779118884ecc593ae965332055f67dec69cf738161b6affe9722aa926c500003",
+    "examples/sys.rs": "c91ab9f49b096cfb47b64fd476a478844d3e42dce443122466c1c05cc231f2a8"
+  },
+  "restored_example_sha256": {
+    "examples/net.rs": "779118884ecc593ae965332055f67dec69cf738161b6affe9722aa926c500003",
+    "examples/sys.rs": "c91ab9f49b096cfb47b64fd476a478844d3e42dce443122466c1c05cc231f2a8"
+  }
+}

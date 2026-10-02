@@ -1,0 +1,26 @@
+{
+  "status": "accepted-narrow",
+  "revision": "1ca21e32eed2aa40287ba7e1282000add1dd49c7",
+  "platform": "Darwin arm64",
+  "rust": "1.77.2",
+  "commands_checked": 9,
+  "source_manifests_checked": 7,
+  "controls": [
+    "sys assertion wrong contents:101",
+    "sys real host file restored expectation:0",
+    "net wrong peer bytes:101",
+    "net real peer ping/script pong:0"
+  ],
+  "one_integrated_build": true,
+  "helper_elapsed_seconds": 34.951,
+  "periodic_observed_maxima": {
+    "storage_kib": 754776,
+    "rss_kib": 794064,
+    "descendants": 6
+  },
+  "sample_count": 49,
+  "continuous_peak_claim": false,
+  "exact_runtime_absent": "/Users/hoppworks/.local/share/agent-builds/rhai/current-msrv-examples-1ca21e32-20261002/agent-build-ehwjvndb",
+  "exact_owned_scope_absent": "/Users/hoppworks/.local/share/agent-builds/rhai/current-msrv-examples-1ca21e32-20261002",
+  "unverified": "Other platforms, process, feature behavior and full release remain open."
+}
