@@ -86,7 +86,7 @@ Current authoritative history through this rewrite is Git commit
 10d4a0d55400ebe8c24feff134e7161ff36bf8d5, this same state path. It retains
 all earlier cause/attempt/resource/source applicability records. Read that
 history for consumed work, not superseded next actions. No reset occurred.
-Last independently read-back fork main1faf604d; only remote main, lowercase
+Last independently read-back fork main67968f30; only remote main, lowercase
 human author/committer. Goal active and incomplete.
 
 ### Accepted current Linux non-process package
@@ -125,6 +125,14 @@ unresolved failclosed partial rows, main-loop continuation and strict naming
 independently verified source-only. Production/source/lock unchanged; Linux proof
 retained. Responsible owner preparing exact staged inputs, private toolchain,
 heavy-slot availability and scoped bounded command before coordinator allocation.
+Stage now exists at owner .scratch/all-tickets/current-darwin-sys-net-behavior-2f795ece-20261002,
+all staged pins verified; exact corresponding central scope created empty.
+Darwin arm64 confirmed; helper performs private1.77.2 install/verification. Initial
+/usr/bin/ps probe failed before native invocation; actual /bin/ps works.
+Unrelated Playwright/browser/ffmpeg activity requires classification as active E2E
+or idle surface before heavy slot allocation. Owner checks exact PID/start handles.
+Prepared dispatch command requires configured modern Python for BOTH runner/helper
+and PYTHONDONTWRITEBYTECODE=1, explicit outer timeout600; no system Python assumption.
 Native Darwin acceptance remains pending; no native launch allocated yet.
 
 ### Mac process overhead/control preparation
@@ -180,6 +188,11 @@ continues already authorized single bounded source-fixture invocation after fres
 exact RunRoot/path/storage/slot/pin checks. Outer1h and existing job/process timers
 unchanged; no installs, real client or production-native acceptance authorized by
 these source prerequisites. Keyboard43606 terminal confirmed; no restart.
+Workhorse heavy slot initially occupied by foreign Tauron Cargo PID2801039 and
+rustc2801043. Later exact ps and /proc paths both absent; no signal was sent.
+This does not prove absence of a new heavy owner. Sole owner checks fresh slot
+and exact guest RunRoot/free storage, then executes existing single authorized
+source-fixture invocation; no allowance/history reset.
 
 ### Next actions and turn classification
 
@@ -187,10 +200,12 @@ Collect Mac5ed13 affected result; Darwin owner prepares exact native dispatch;
 Windows owner proceeds to existing bounded source-fixture execution after fresh
 preflight. Allocate actual Darwin native run only after exact source/helper/lock/
 contract/toolchain/slot/runtime checks. Preserve all caps and no foreign disruption.
-Previous status turn: PROGRESS, new independent Darwin terminal acceptance and
-Windows parser/pin/compiler-file evidence changed next actions. Current PROGRESS:
-root retained/read back exact originals, dispatched SAME affected Mac review and
-advanced responsible Windows/Darwin owners. No new native acceptance or completion.
+Previous turn PROGRESS: retained/readback Darwin source review and Windows
+parser/pins/compiler-file prerequisites pushed as67968f30, soleforkmain checked.
+Current PROGRESS: actual exact Darwin pinned stage and empty owned scope prepared;
+command interpreter corrected before launch; foreign Windows heavy-build identities
+subsequently observed absent. Source/native counts unchanged. No native acceptance
+or completion claim. Mac same affected source review remains active.
 
 ## Resources, counts and cause history
 Unix actual native invocation count84 consumed.82 failed before runtime;
