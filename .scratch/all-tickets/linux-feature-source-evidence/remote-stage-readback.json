@@ -1,0 +1,18 @@
+{
+  "stage": "/root/rhai-linux-current-features-msrv-1ca21e32-20261002",
+  "input_sha256": {
+    "source.tar": "8251e0429d51ffd330e7eac596a1513d836e43e549ca761852cafc642a2a8155",
+    "Cargo.lock.accepted": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+    "run-feature-compilation.py": "6b0ff775be53c7da4331aeb7e30869e5c2ad1b67dcdb5006066a8ce2a21be89d",
+    "contract.md": "118881c1ba37de9c6c25128671a874d1bd777de540271105aab256daadc9c501",
+    "launch.sh": "3b3a50e76416b44ca84af92e0be42958e28ea7be0343ec9a0c93a269d4c3f222",
+    "runner/tools/run_scoped.py": "9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d",
+    "runner/tools/agentskills/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runner/tools/agentskills/pyguard.py": "a3739f4947744303e1adf3fb0875ac743944a272e5b95c94b1baba53029d313f"
+  },
+  "independent_ssh_sha256sum_status": 0,
+  "matches_local_frozen_inputs": true,
+  "compiler_scope_absent": true,
+  "outer_evidence_absent": true,
+  "compiler_package_launched": false
+}

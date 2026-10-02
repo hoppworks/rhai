@@ -152,28 +152,41 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Current turn classification
-PROGRESS: fork main62a9b82991bc577fe7c731d737f38ae40813dd77 contains the
-accepted narrow macOS preflight source proof. Goal remains incomplete.
-Existing Linux preparation owner corrects interruption export: active work must
-stop after SIGINT/TERM, but partial evidence may export within the original
-540-second limit. Actual stage/launch scripts are being prepared in that same
-context; root identified missing heredoc termination, export/readback path
-mismatch, premature interrupted wait and permission/malformed-identity false
-absence. Recheck this one batch before freezing or any remote staging/build.
-No new cause escalation or native launch allocation; native invocation count84 retained.
-Existing Mac owner implements the private finite-case controller/channel from
-89bd29d source contract with meaningful pure REDs. Guard remains false, source
-proof does not certify native custody. Existing Expert09 and hard limits remain.
-Matching installed kernel applicability remains an explicit source prerequisite:
+PROGRESS: Linux11positive plus1negative compiler preparation source batch is
+independently reviewed and staged, not compiler/native accepted. Four OCR-selected
+files reviewed4/skipped0; contract read separately. One correction batch closes
+interruption export, heredoc, evidence path, unknown identity, interrupted wait
+and numerical helper-signal defects. Private cancellation request replaces the
+unsafe helper PID signal; exact child wait retains original runner600/helper540/
+work510/export30 caps. Passive ps readback has5-second bound. Pure scoped replay
+passes interruption/export/expired-deadline checks, meaningful interrupted-export
+RED (status1/InterruptedError), restored checks, both shell syntax checks and
+all3 Python heredocs. Evidence linux-feature-source-evidence retains original
+logs/statuses, frozen inputs and exact runtime/scope cleanup receipts. No native
+fixtures/control/measurement; invocation count84 unchanged.
+Authorized stage source/lock/helper/contract/launcher/runner package hashes were
+independently read back on workhorse and match. Stage path is
+/root/rhai-linux-current-features-msrv-1ca21e32-20261002; private compiler scope
+and outer-evidence absent. Local staging runtime/scope retired. Inputs retained
+outside disposable runtime for the next real compiler package. Last live heavy
+slot: G41r3 has ended, but foreign P01 real E2E now occupies workhorse:
+run_scoped900161/supervisor900162 (7200s), dart:patrol_run941795. The live
+readback also retains foreign BuildKit and flutter_tester processes. No compiler
+dispatch while that E2E is active; never stop foreign processes.
+Existing Mac owner continues controller implementation under cause09/Expert09.
+Root preliminary review requires setup/build controls separated from the ordinary
+measurement client, compile-only build control, and preserved normal measurement
+mode. Managed companion and both-stream activity readiness remain unimplemented;
+no all4-controls or native custody claim. False launch guard remains.
+Matching installed kernel applicability remains an explicit prerequisite:
 live Darwin27.0.0 reports XNU13432.1.9~1; read-only Apple XNU tag inventory has
 155 version tags and no13432 tag (latest numeric tag12377.121.6). Current-main
-source and active SDK agreement alone do not establish installed-kernel
-applicability. Resume this prerequisite on applicable authoritative source or
-an existing Expert09-compatible proof of applicability; do not repeat the same
-inventory without new information. Independent controller source work continues.
+source and active SDK agreement alone do not establish applicability. Resume
+on applicable authoritative source or Expert09-compatible proof; no repeated
+inventory without new information. Independent source work continues.
 Windows guest remains last observed shut off; partial console entry and guest
-cleanup unverified. No shared VM restart or new guest action is authorized by
-the rule update. Preserve existing proof/history and unconsumed allocations.
+cleanup unverified. No shared VM restart/new guest action from rule update.
+Preserve history, accepted proof and unconsumed allocations. Goal incomplete.
 
 ## Current-source core MSRV package — accepted narrow gate
 Current default-core applicability CLOSED for source52d9797b, Rust/Cargo1.66.0,

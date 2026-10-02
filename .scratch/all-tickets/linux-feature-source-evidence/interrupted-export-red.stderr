@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/hoppworks/.local/share/agent-builds/rhai/linux-source-f9db995c889a4bf886ee69135cbe6cc6/agent-build-0kr7e6md/test-linux-current-feature-export-interrupt.py", line 55, in <module>
+    main()
+  File "/Users/hoppworks/.local/share/agent-builds/rhai/linux-source-f9db995c889a4bf886ee69135cbe6cc6/agent-build-0kr7e6md/test-linux-current-feature-export-interrupt.py", line 43, in main
+    check_deadline(during_export=True)
+  File "/Users/hoppworks/.local/share/agent-builds/rhai/linux-source-f9db995c889a4bf886ee69135cbe6cc6/agent-build-0kr7e6md/check-linux-current-feature-compilation.py", line 104, in check_deadline
+    raise InterruptedError(f'interrupted by signal {INTERRUPTED}')
+InterruptedError: interrupted by signal 15
