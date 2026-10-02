@@ -1,0 +1,17 @@
+E.
+======================================================================
+ERROR: test_closed_path_and_version_probes_use_the_same_xcode_tool_directory (__main__.EnvironmentTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py", line 831, in test_closed_path_and_version_probes_use_the_same_xcode_tool_directory
+    self.assertEqual({path.name for path in tool_bin.iterdir()}, {"cc", "clang", "ld", "dsymutil"})
+  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py", line 831, in <setcomp>
+    self.assertEqual({path.name for path in tool_bin.iterdir()}, {"cc", "clang", "ld", "dsymutil"})
+  File "/Applications/Xcode.app/Contents/Developer/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/pathlib.py", line 1150, in iterdir
+    for name in self._accessor.listdir(self):
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/hoppworks/.local/share/agent-builds/rhai/macos-overhead-safeguards-20261002-xcode-path/agent-build-o5zkrxjh/tmp/tool-path-contract-x7loibnc/runtime/tool-bin'
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.004s
+
+FAILED (errors=1)

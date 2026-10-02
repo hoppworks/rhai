@@ -1,0 +1,29 @@
+FF
+======================================================================
+FAIL: test_closed_path_and_version_probes_use_the_same_xcode_tool_directory (__main__.EnvironmentTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py", line 826, in test_closed_path_and_version_probes_use_the_same_xcode_tool_directory
+    self.assertEqual(paths[:2], [str(module.TOOL), str(module.XCODE_TOOLS)])
+AssertionError: Lists differ: ['/Us[64 chars]', '/usr/bin'] != ['/Us[64 chars]', '/Applications/Xcode.app/Contents/Developer[41 chars]bin']
+
+First differing element 1:
+'/usr/bin'
+'/Applications/Xcode.app/Contents/Developer[40 chars]/bin'
+
+  ['/Users/hoppworks/.rustup/toolchains/stable-aarch64-apple-darwin/bin',
+-  '/usr/bin']
++  '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin']
+
+======================================================================
+FAIL: test_adapter_xcode_queries_are_exact_and_read_only (__main__.EnvironmentTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py", line 841, in test_adapter_xcode_queries_are_exact_and_read_only
+    self.assertTrue(custodian.is_exact_xcode_preflight([str(custodian.XCODE_TOOLS/'cc'), '--version']))
+AssertionError: False is not true
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.002s
+
+FAILED (failures=2)

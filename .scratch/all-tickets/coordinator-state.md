@@ -263,15 +263,15 @@ scope; no release or goal-complete claim. Retire only exact owned clean worktree
 after verified integration, retaining necessary original proof outside them.
 
 ## Current turn classification
-Previous goal continuation: PROGRESS, independently reviewed/corrected Mac
-source preflight integrated and source tests63pass; Linux review found concrete
-classifier defects sent as one batch.
-Current continuation: PROGRESS. Own scoped original-evidence reproduction
-confirms both classifier defects and unchanged frozen-source applicability;
-original proof is retained without duplicate build. Existing Linux/Mac owners
-confirmedrunning by collaboration inventory while implementing coherent source
-corrections. Await corrected immutable refs before native dispatch. Goal stays
-active/incomplete; no nativeprocess85 allocation, no blocked transition.
+Previous status turn: NO PROGRESS (status readback only). This continuation:
+PROGRESS. Mac frozen tool-lookup increment ceb9cf independently reviewed3/3
+Python files plus audit/original evidence; exact12 files integrated, independent
+scoped64 pure tests passed. Source-side compiler/linker lookup consistency closed
+narrowly, native controls and measurement remain open. Review at
+macos-tool-path-increment-review.md, replay macos-tool-path-root-test.log.
+Own runtime removed and exact empty scope retired. Count84/guardfalse preserved.
+Linux owner confirmed live, correcting runtime-control classifiers; next collect
+immutable corrected package and recheck before staging/native dispatch.
 
 ## Current-source core MSRV package — accepted narrow gate
 Current default-core applicability CLOSED for source52d9797b, Rust/Cargo1.66.0,

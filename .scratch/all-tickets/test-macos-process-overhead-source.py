@@ -819,11 +819,34 @@ class EnvironmentTests(unittest.TestCase):
         self.assertLess(preflight, archive)
         self.assertLess(preflight, measurement)
 
+    def test_closed_path_and_version_probes_use_the_same_xcode_tool_directory(self):
+        with tempfile.TemporaryDirectory(prefix="tool-path-contract-") as directory:
+            runtime = Path(directory) / "runtime"
+            env = module.build_environment(runtime)
+            paths = env["PATH"].split(":")
+            tool_bin = Path(paths[1])
+            self.assertEqual(paths[0], str(module.TOOL))
+            self.assertEqual(tool_bin, runtime / "tool-bin")
+            self.assertNotIn(str(module.XCODE_TOOLS), paths)
+            self.assertEqual({path.name for path in tool_bin.iterdir()}, {"cc", "clang", "ld", "dsymutil"})
+            self.assertFalse((tool_bin / "ar").exists())
+            for name in ("cc", "clang", "ld", "dsymutil"):
+                self.assertEqual(os.readlink(tool_bin / name), str(module.XCODE_TOOLS / name))
+        probes = {key: argv for key, argv, _filename in module.tool_identity_probes()}
+        for key, executable, args in (
+            ("cc_identity", module.XCODE_TOOLS / "cc", ["--version"]),
+            ("clang_identity", module.XCODE_TOOLS / "clang", ["--version"]),
+            ("ld_identity", module.XCODE_TOOLS / "ld", ["-v"]),
+            ("dsymutil_identity", module.XCODE_TOOLS / "dsymutil", ["--version"]),
+        ):
+            self.assertEqual(probes[key], [str(executable), *args])
+
     def test_adapter_xcode_queries_are_exact_and_read_only(self):
         self.assertTrue(custodian.is_exact_xcode_preflight(['/usr/bin/xcrun', '--find', 'cc']))
-        self.assertTrue(custodian.is_exact_xcode_preflight(['/usr/bin/cc', '--version']))
+        self.assertTrue(custodian.is_exact_xcode_preflight([str(custodian.XCODE_TOOLS/'cc'), '--version']))
         self.assertFalse(custodian.is_exact_xcode_preflight(['/usr/bin/xcrun', '--find', 'unreviewed']))
-        self.assertFalse(custodian.is_exact_xcode_preflight(['/usr/bin/cc', 'unreviewed-argument']))
+        self.assertFalse(custodian.is_exact_xcode_preflight([str(custodian.XCODE_TOOLS/'cc'), 'unreviewed-argument']))
+        self.assertFalse(custodian.is_exact_xcode_preflight(['/usr/bin/cc', '--version']))
 
     def test_darwin_siginfo_layout_and_waitid_constants_match_active_sdk(self):
         # The declaration maps sys/signal.h siginfo_t on LP64 Darwin.

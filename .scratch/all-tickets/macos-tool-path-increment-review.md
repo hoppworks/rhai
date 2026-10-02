@@ -1,0 +1,7 @@
+# Pinned Xcode lookup increment review
+
+Reviewed frozen source ceb9cf567fabade4fd2bfc619b9433cdcb155df3 against accepted 52fe92bc. OCR selected three Python files; all three reviewed under the resolved Python rules (3/3, no skipped code files). The audit and eight evidence files were manually checked for applicability and honest scope.
+
+The private runtime directory exposes exactly cc, clang, ld and dsymutil symlinks to the preflighted Xcode paths. Existing links must match, unavailable tools fail closed, and RPC accepts only the fixed absolute version queries. The existing closed environment and runtime ownership remain. No new blocking finding in this increment. Original intended REDs, intermediate implementation and corrected temporary-directory test setup history are retained, rather than counted as native attempts.
+
+Independent integrated replay: 64 source tests passed; original output in macos-tool-path-root-test.log. Scoped runner returned zero and its runtime was removed; exact empty scope macos-tool-review-20261002-root retired with rmdir. git diff --check passed. No Cargo/compiler/native control/measurement was executed. This closes only source-side lookup consistency. Runtime tool resolution, ar applicability, live Managed dual-stream capture, Darwin native reader/interruption controls and measured overhead remain open. Launch guard false and process count 84 unchanged.

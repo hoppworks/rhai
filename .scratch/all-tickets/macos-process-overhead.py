@@ -126,10 +126,23 @@ def build_environment(runtime):
     cargo_home=runtime/'cargo-home'
     rustup_home=runtime/'rustup-home'
     target=runtime/'target'
-    for path in (home,tmp,cargo_home,rustup_home,target):
+    tool_bin=runtime/'tool-bin'
+    for path in (home,tmp,cargo_home,rustup_home,target,tool_bin):
         path.mkdir(parents=True,exist_ok=True)
+    for name in ('cc','clang','ld','dsymutil'):
+        executable=XCODE_TOOLS/name
+        link=tool_bin/name
+        if not executable.is_file() or not os.access(executable, os.X_OK):
+            raise RuntimeError(f'required pinned Xcode tool is unavailable: {executable}')
+        if os.path.lexists(link):
+            if not link.is_symlink() or os.readlink(link) != str(executable):
+                raise RuntimeError(f'private Xcode tool link differs from its pin: {link}')
+        else:
+            os.symlink(str(executable), link)
     return {
-        'PATH':f'{TOOL}:/usr/bin:/bin:/usr/sbin:/sbin',
+        # Expose only the reviewed Xcode compiler/linker helpers. Other tools
+        # retain the ordinary system PATH resolution used by the frozen harness.
+        'PATH':f'{TOOL}:{tool_bin}:/usr/bin:/bin:/usr/sbin:/sbin',
         'HOME':str(home),
         'TMPDIR':str(tmp), 'TMP':str(tmp), 'TEMP':str(tmp),
         'CARGO_HOME':str(cargo_home), 'RUSTUP_HOME':str(rustup_home),
@@ -176,9 +189,9 @@ def validate_tool_identity(actual):
         elif observed != value:
             raise RuntimeError(f'tool identity mismatch for {key}')
 
-def verify_toolchain_identity(env, deadline):
-    expected = expected_tool_identity()
-    probes = [
+def tool_identity_probes():
+    """Return the complete, fixed identity-query set without running tools."""
+    return [
         ('cargo_version', [str(CARGO), '--version'], 'cargo-version-preflight.out'),
         ('rustc', [str(RUSTC), '--version', '--verbose'], 'rustc-version-preflight.out'),
         ('rustdoc_version', [str(RUSTDOC), '--version'], 'rustdoc-version-preflight.out'),
@@ -188,11 +201,14 @@ def verify_toolchain_identity(env, deadline):
         ('clang_path', ['/usr/bin/xcrun', '--find', 'clang'], 'xcrun-clang-preflight.out'),
         ('ld_path', ['/usr/bin/xcrun', '--find', 'ld'], 'xcrun-ld-preflight.out'),
         ('dsymutil_path', ['/usr/bin/xcrun', '--find', 'dsymutil'], 'xcrun-dsymutil-preflight.out'),
-        ('cc_identity', ['/usr/bin/cc', '--version'], 'cc-version-preflight.out'),
-        ('clang_identity', ['/usr/bin/clang', '--version'], 'clang-version-preflight.out'),
+        ('cc_identity', [str(XCODE_TOOLS/'cc'), '--version'], 'cc-version-preflight.out'),
+        ('clang_identity', [str(XCODE_TOOLS/'clang'), '--version'], 'clang-version-preflight.out'),
         ('ld_identity', [str(XCODE_TOOLS/'ld'), '-v'], 'ld-version-preflight.out'),
-        ('dsymutil_identity', ['/usr/bin/dsymutil', '--version'], 'dsymutil-version-preflight.out'),
+        ('dsymutil_identity', [str(XCODE_TOOLS/'dsymutil'), '--version'], 'dsymutil-version-preflight.out'),
     ]
+
+def verify_toolchain_identity(env, deadline):
+    probes = tool_identity_probes()
     actual = {}
     for key, argv, filename in probes:
         left = deadline-time.monotonic()

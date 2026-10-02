@@ -1,0 +1,13 @@
+F
+======================================================================
+FAIL: test_closed_path_and_version_probes_use_the_same_xcode_tool_directory (__main__.EnvironmentTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/hoppworks/.codex/worktrees/macos-overhead-safeguards/rhai/.scratch/all-tickets/test-macos-process-overhead-source.py", line 829, in test_closed_path_and_version_probes_use_the_same_xcode_tool_directory
+    self.assertEqual(tool_bin, runtime / "tool-bin")
+AssertionError: PosixPath('/Applications/Xcode.app/Contents/Developer[41 chars]bin') != PosixPath('/Users/hoppworks/.local/share/agent-builds[118 chars]bin')
+
+----------------------------------------------------------------------
+Ran 1 test in 0.001s
+
+FAILED (failures=1)

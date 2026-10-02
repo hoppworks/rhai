@@ -11,8 +11,8 @@ or measurement was run. The launch readiness guard remains false.
 The source harness is
 `.scratch/all-tickets/macos-process-overhead.py`. Its tool constants at lines
 9–13 name the stable Rust toolchain directory, its Cargo/rustc/rustdoc siblings,
-and the active Xcode MacOSX SDK. `build_environment()` at lines 107–127 returns
-a closed environment: PATH is
+and the active Xcode MacOSX SDK. At the time of the read-only queries below,
+`build_environment()` returned a closed environment whose PATH was
 `/Users/hoppworks/.rustup/toolchains/stable-aarch64-apple-darwin/bin:/usr/bin:/bin:/usr/sbin:/sbin`,
 SDKROOT is the active Xcode SDK, and caller `DEVELOPER_DIR`, wrappers, compiler
 overrides, Rust/Cargo flags, and arbitrary Cargo configuration environment
@@ -79,21 +79,41 @@ children an actual rustc invocation starts. Rust's xcrun source notes that
 active developer-directory resolution is xcrun-defined and cached; the
 hermetic query establishes the current selected paths only.
 
-## Remaining source prerequisite
+## Source preflight status and remaining prerequisites
 
-Tool path resolution is now identified for this machine and exact harness PATH,
-but the harness does not enforce the Cargo/rustc/rustdoc versions before
-continuing. The smallest source-side closure is to compare the pre-Cargo
-version outputs with the frozen Cargo/rustc commits and expected rustdoc
-identity, and to fail closed on mismatch. To enforce Xcode resolution too, the
-sole custodian must query and validate the expected `xcrun`, SDK, `cc`/linker,
-and `dsymutil` paths and versions before release; it must do so without
-allowing an unreviewed subprocess route. This audit did not add that behavior.
+Commit `e88aa80b` adds the source-side preflight: before archive or Cargo, the
+sole custodian queries and validates Cargo, rustc, rustdoc, xcrun, SDKROOT,
+resolved `cc`/`clang`/`ld`/`dsymutil` paths, and their relevant version
+identities. All queries use fixed read-only argv through the existing custody
+RPC. The launch readiness guard remains false; this is source and pure-control
+evidence, not a runtime validation of those tools.
 
-Even after those checks, only a bounded compiler-only or benchmark launch with
-the frozen custody architecture can establish actual runtime resolution and
-escaped-process readback. The selected Cargo metadata graph remains a
-conservative workspace-feature union, not the exact executed unit graph. The
-sole-spawner/reaper, escaped-leaf cleanup proof, native Darwin ABI semantics,
-and independent source review remain open. No native/Cargo/fixture/control/
+The selected Cargo metadata graph remains a conservative workspace-feature
+union, not the exact executed unit graph, and build confinement is not closed.
+The adapter still lacks the separate controller channel needed for the four
+finite interruption controls. Native Darwin ABI/kernel semantics and
+independent source review also remain open. No native/Cargo/fixture/control/
 measurement launch is authorized by this audit; keep the launch gate false.
+
+## Source-only resolution correction
+
+After the path/version readback above, the source harness was changed so its
+closed child PATH places a private runtime `tool-bin` directly after the pinned
+Rust toolchain directory. It contains only symlinks for `cc`, `clang`, `ld`, and
+`dsymutil`, each pointing to the pinned Xcode default toolchain directory. The
+Xcode directory itself is not added to PATH, so other Xcode executables are not
+introduced into command lookup. The `cc`, `clang`, `ld`, and `dsymutil` identity
+probes invoke absolute paths in that directory. The
+custodian authorizes only those exact version-query vectors; `/usr/bin/cc`,
+`/usr/bin/clang`, and `/usr/bin/dsymutil` are no longer accepted as substitutes.
+This aligns Cargo's default `cc` linker lookup with the directory that xcrun
+preflight requires. Pure regression tests verify the PATH order, probe vectors,
+and custodian allowlist. No tool was invoked after this source change, so its
+runtime resolution remains unverified.
+
+`ar` still resolves through the preexisting `/usr/bin` fallback and has no
+identity probe. Its applicability to the reviewed candidate source set remains
+open; do not treat the direct `cc`/`clang`/`ld` checks as covering it. The finite
+Managed control is still unready because no source path reports actual stdout
+and stderr bytes while the host is live. The source launch guard remains false,
+and all native controls remain unlaunched.

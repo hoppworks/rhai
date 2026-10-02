@@ -22,10 +22,10 @@ EXACT_XCODE_PREFLIGHT = {
     ('/usr/bin/xcrun', '--find', 'clang'),
     ('/usr/bin/xcrun', '--find', 'ld'),
     ('/usr/bin/xcrun', '--find', 'dsymutil'),
-    ('/usr/bin/cc', '--version'),
-    ('/usr/bin/clang', '--version'),
+    (str(XCODE_TOOLS/'cc'), '--version'),
+    (str(XCODE_TOOLS/'clang'), '--version'),
     (str(XCODE_TOOLS/'ld'), '-v'),
-    ('/usr/bin/dsymutil', '--version'),
+    (str(XCODE_TOOLS/'dsymutil'), '--version'),
 }
 
 def is_exact_xcode_preflight(argv):
@@ -931,8 +931,8 @@ def serve_requests(custody, conn, runtime, work_deadline, closure_deadline,
         allowed_executables = {
             str(custody.CARGO), str(custody.RUSTC), str(custody.RUSTDOC),
             '/usr/bin/git', '/usr/bin/tar', '/bin/ps', '/usr/bin/du',
-            '/usr/bin/xcrun', '/usr/bin/cc', '/usr/bin/clang',
-            str(XCODE_TOOLS/'ld'), '/usr/bin/dsymutil',
+            '/usr/bin/xcrun', str(XCODE_TOOLS/'cc'), str(XCODE_TOOLS/'clang'),
+            str(XCODE_TOOLS/'ld'), str(XCODE_TOOLS/'dsymutil'),
         }
         managed_host = runtime/'target/debug/examples/macos-managed-capture-companion'
         if argv[0] == str(managed_host):
@@ -943,8 +943,8 @@ def serve_requests(custody, conn, runtime, work_deadline, closure_deadline,
             allowed_executables.add(str(managed_host))
         if argv[0] not in allowed_executables:
             raise RuntimeError('custody RPC executable is outside the audited command set')
-        if argv[0] in {'/usr/bin/xcrun', '/usr/bin/cc', '/usr/bin/clang',
-                       str(XCODE_TOOLS/'ld'), '/usr/bin/dsymutil'} and not is_exact_xcode_preflight(argv):
+        if argv[0] in {'/usr/bin/xcrun', str(XCODE_TOOLS/'cc'), str(XCODE_TOOLS/'clang'),
+                       str(XCODE_TOOLS/'ld'), str(XCODE_TOOLS/'dsymutil')} and not is_exact_xcode_preflight(argv):
             raise RuntimeError('Xcode tool preflight argv is outside the exact reviewed query set')
         if type(request.get('monitor_resources', False)) is not bool:
             raise RuntimeError('resource monitor request must be a boolean')
