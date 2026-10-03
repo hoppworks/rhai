@@ -1,0 +1,19 @@
+{
+  "captured_before_stage_validation_or_external_command": true,
+  "helper": {
+    "cmdline": "python3 /root/rhai-linux-wait-entry-20261003-08507d68/linux-wait-entry-proof.py",
+    "pgid": 745965,
+    "pid": 745966,
+    "ppid": 745965,
+    "start_ticks": "967005"
+  },
+  "identity_errors": {},
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3",
+  "scoped_supervisor": {
+    "cmdline": "/usr/bin/python3 /var/roothome/rhai-linux-wait-entry-20261003-08507d68/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-wait-entry-20261003-08507d68/linux-wait-entry-proof.py",
+    "pgid": 745965,
+    "pid": 745965,
+    "ppid": 745962,
+    "start_ticks": "967003"
+  }
+}

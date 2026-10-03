@@ -1,0 +1,83 @@
+   Compiling rhai v1.26.1 (/var/roothome/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3/source)
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:668:13
+    |
+668 |         let mut wait_operation = "wait for child";
+    |             ----^^^^^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` on by default
+
+warning: unused variable: `termination`
+    --> src/packages/sys/process/unix.rs:1106:22
+     |
+1106 |                 let (termination, _operation) = if self.managed {
+     |                      ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_termination`
+     |
+     = note: `#[warn(unused_variables)]` on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2134:9
+     |
+2134 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2456:9
+     |
+2456 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variant `OnlyZombieLeader` is never constructed
+  --> src/packages/sys/process/unix.rs:50:5
+   |
+47 | enum GroupCloseOutcome {
+   |      ----------------- variant in this enum
+...
+50 |     OnlyZombieLeader,
+   |     ^^^^^^^^^^^^^^^^
+   |
+   = note: `GroupCloseOutcome` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+   = note: `#[warn(dead_code)]` on by default
+
+warning: function `try_release_fifo` is never used
+    --> src/packages/sys/process/unix.rs:4084:8
+     |
+4084 |     fn try_release_fifo(path: &Path) -> io::Result<()> {
+     |        ^^^^^^^^^^^^^^^^
+
+warning: unused `dynamic::Dynamic` that must be used
+    --> src/packages/sys/process/unix.rs:4249:9
+     |
+4249 | /         engine
+4250 | |             .eval_with_scope::<crate::Dynamic>(&mut cancel_scope, "child.kill()")
+4251 | |             .expect("public cancellation should wake the blocked waiter");
+     | |_________________________________________________________________________^
+     |
+     = note: `#[warn(unused_must_use)]` on by default
+help: use `let _ = ...` to ignore the resulting value
+     |
+4249 |         let _ = engine
+     |         +++++++
+
+warning: `rhai` (lib test) generated 8 warnings (run `cargo fix --lib -p rhai --tests` to apply 4 suggestions)
+    Finished test [unoptimized] target(s) in 5.22s
+     Running unittests src/lib.rs (/root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3/target/debug/deps/rhai-deccf4c68b3241fc)
+wait-entry checkpoint pid=747237 count=1 nonterminal=true
+shared-child entered-wait pid=747237 wait_entries=2 nonterminal_at_cancel=true waiter_woke=true reap=ESRCH

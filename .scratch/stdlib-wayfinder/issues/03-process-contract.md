@@ -237,8 +237,27 @@ rejected. All three wrong exit-status expectations fail101, restored GREEN0.
 Original evidence, root independent process closure and combined independent
 review: .scratch/all-tickets/linux-shared-child-proof.md and referenced originals.
 
-Sync concurrent cancel/wait passes, but actual blocking condvar entry remains
-unproven; do not close that complete criterion. Managed groups, externally
+At invocation87 sync concurrent cancel/wait passed, while actual blocking condvar
+entry remained unproven; invocation88 below closes that specific missing criterion. Managed groups, externally
 forced controller custody, remaining options/I/O boundaries and platform/release
 requirements remain open. Ticket is not complete. Initial invocation86 compiler
 failure and one-borrow recovery87 retain consumed history and closure evidence.
+
+
+## Accepted Linux actual wait-entry subset — 2026-10-03
+
+Source08507d68, native Linux7.2.7 x86_64, private Rust/Cargo1.77.2, sync and
+sync+no_float: public Engine wait enters the Condvar path while a real FIFO-held
+child remains nonterminal; another public handle kills it, the waiter completes
+within3s, joins, and the independently recorded child PID is reaped. Test-only
+counter plus reacquired snapshot mutex establishes actual entry before cancel;
+spurious wakes remain permitted, so continuous sleep at kill is not claimed.
+Both intentionally wrong entry assertions fail101 at their intended checkpoint,
+restore exactly and pass0. Original child records are freshly checked by the host,
+four fixture PIDs and107recorded PID/start identities independently absent,
+groups/private runtime/scope closed. No production change required.
+Proof and combined independent review: .scratch/all-tickets/linux-wait-entry-proof.md
+and linux-wait-entry-review.md, original native88 logs and root closure receipts.
+This closes only the untimed wait cancellation-lock criterion in these Linux rows.
+Timed waits, other features/platforms, managed-group/forced-custody/performance and
+full release requirements remain open; ticket implementation is not complete.

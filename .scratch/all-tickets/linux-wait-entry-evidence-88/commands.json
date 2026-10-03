@@ -1,0 +1,157 @@
+[
+  {
+    "argv": [
+      "/root/.cargo/bin/rustup",
+      "toolchain",
+      "install",
+      "1.77.2-x86_64-unknown-linux-gnu",
+      "--profile",
+      "minimal",
+      "--no-self-update"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 7.8,
+    "name": "rustup-install",
+    "spawned": true,
+    "started_monotonic_seconds": 0.378,
+    "status": 0,
+    "stderr": "evidence/rustup-install.stderr",
+    "stdout": "evidence/rustup-install.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+      "--version",
+      "--verbose"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3/source",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 7.923,
+    "name": "rustc-version",
+    "spawned": true,
+    "started_monotonic_seconds": 7.8,
+    "status": 0,
+    "stderr": "evidence/rustc-version.stderr",
+    "stdout": "evidence/rustc-version.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "--version",
+      "--verbose"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3/source",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 8.046,
+    "name": "cargo-version",
+    "spawned": true,
+    "started_monotonic_seconds": 7.923,
+    "status": 0,
+    "stderr": "evidence/cargo-version.stderr",
+    "stdout": "evidence/cargo-version.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys,sync",
+      "--lib",
+      "packages::sys::process::unix::tests::public_wait_is_cancelled_after_entering_condvar",
+      "--",
+      "--exact",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3/source",
+    "env_overrides": {},
+    "expected_status": 101,
+    "finished_monotonic_seconds": 23.233,
+    "name": "row-0-wrong-wait-entry",
+    "spawned": true,
+    "started_monotonic_seconds": 8.046,
+    "status": 101,
+    "stderr": "evidence/row-0-wrong-wait-entry.stderr",
+    "stdout": "evidence/row-0-wrong-wait-entry.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys,sync",
+      "--lib",
+      "packages::sys::process::unix::tests::public_wait_is_cancelled_after_entering_condvar",
+      "--",
+      "--exact",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3/source",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 28.574,
+    "name": "row-0-green",
+    "spawned": true,
+    "started_monotonic_seconds": 23.234,
+    "status": 0,
+    "stderr": "evidence/row-0-green.stderr",
+    "stdout": "evidence/row-0-green.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys,sync,no_float",
+      "--lib",
+      "packages::sys::process::unix::tests::public_wait_is_cancelled_after_entering_condvar",
+      "--",
+      "--exact",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3/source",
+    "env_overrides": {},
+    "expected_status": 101,
+    "finished_monotonic_seconds": 33.597,
+    "name": "row-1-wrong-wait-entry",
+    "spawned": true,
+    "started_monotonic_seconds": 28.578,
+    "status": 101,
+    "stderr": "evidence/row-1-wrong-wait-entry.stderr",
+    "stdout": "evidence/row-1-wrong-wait-entry.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys,sync,no_float",
+      "--lib",
+      "packages::sys::process::unix::tests::public_wait_is_cancelled_after_entering_condvar",
+      "--",
+      "--exact",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3/source",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 38.523,
+    "name": "row-1-green",
+    "spawned": true,
+    "started_monotonic_seconds": 33.598,
+    "status": 0,
+    "stderr": "evidence/row-1-green.stderr",
+    "stdout": "evidence/row-1-green.stdout"
+  }
+]

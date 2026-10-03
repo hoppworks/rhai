@@ -86,7 +86,7 @@ Current authoritative history through this rewrite is Git commit
 10d4a0d55400ebe8c24feff134e7161ff36bf8d5, this same state path. It retains
 all earlier cause/attempt/resource/source applicability records. Read that
 history for consumed work, not superseded next actions. No reset occurred.
-Last independently read-back fork main2a8fdc49a37b780c63e5c30b141c345321a876d0; only remote main, lowercase
+Last independently read-back fork main08507d6831f73f28aa0b95a4255c5df8ebe2ec13; only remote main, lowercase
 human author/committer. Goal active and incomplete.
 
 ### Accepted current Linux non-process package
@@ -856,3 +856,56 @@ src/packages/sys/process/unix.rs::public_wait_is_cancelled_after_entering_condva
 within its own existing source/history, preserving all hard limits and stopped
 Windows/Darwin routes. Owned root needed for campaign continuation. No own
 heavy run or retained build/stage now; foreign trees unchanged.
+
+
+## Current Linux actual wait-entry package — 2026-10-03
+Previous goal turn PROGRESS: shared Child compiler correction and three native
+rows accepted; fork main independently verified at08507d6831f73f28aa0b95a4255c5df8ebe2ec13,
+sole remote main. Rule revision faba3db reread by root; completed native reviewers
+notified before next action. Unreachable historical agent names are not live in
+native registry and remain not newly confirmed; their accepted proof stays valid.
+No rule-only build/review, no existing process interrupted.
+Root continues actual blocked wait-entry criterion through existing public Engine
+FIFO fixture in unix.rs4160. Worker linux_wait_entry_prepare owns mechanical
+recipe adaptation; same combined Expert linux_shared_child_review owns relevant
+source/delta/evidence review. No new test seam or production change planned.
+Two feature rows sync and sync,no_float share one private Rust1.77.2 run; unique
+wrong entered_waits assertion RED101 then exact restoration GREEN0, actual child
+record, nonterminal checkpoint, waiter wake/join and ESRCH required.
+New correctness invocation88 is prospective, Unix cumulative87 still consumed;
+no dispatch yet. Historical overhead85 remains separately unlaunched, stopped
+Windows/Darwin causes and all original budgets preserved. Fresh workhorse light
+inventory currently no cargo/rustc/rustup/make/ninja; revalidate before dispatch.
+Outer600/scoped585/helper540 incl30export/work510/jobs2/desc16/2GiB policy and
+sampled storage stop1572864KiB unchanged. One30-minute active-work planning
+checkpoint; no blind retries. Build/stage reuse from87 impossible because closed
+and removed; use exact new absent owned paths and own private caches. No retained
+resource now; root worktree remains needed for campaign. Preparation, native
+acceptance, cleanup and integration remain pending; wider tickets still open.
+
+Root and combined Expert explicitly loaded current Coordinator/Expert role templates atfaba3db. Expert source assessment linux-wait-entry-review.md accepts actual wait-entry logic and meaningful private control, with spurious-wake caveat; recipe/native proof still pending. Prior shared review report unchanged.
+
+Mechanical three-recipe preparation complete, AST/bash syntax and root delta/pins pass. Exact new stage created by owned staging only, terminal0 and all inputs freshly read back; no scope/runtime or native launch yet. Source archive37e2b95a matches independent git archive; proofff9eb6c3/stagedb1ff5c1/launch7586b150. Combined recipe readiness pending, cumulative Unix87 unchanged. Source/proof drafts remain unaccepted until live execution/readback.
+
+Combined recipe readiness accepted, no material blocker; fresh workhorse heavy inventory empty. Native correctness invocation88 dispatch now, Unix cumulative88 consumed. Same finite bounds and two exact feature rows, no stopped chain renewed or history reset.
+
+Native88 terminal0, both intended RED101/restored GREEN0 and entry checkpoint count1 observed. Original evidence exported, source/lock/manifests restored. Root fresh closure107PID/start identities/4fixture PIDs absent, groups empty, runtime/scope absent; exact stage cleanup52hashmatchedfiles/6dirs absent. Export38.528s sampledRSS920012KiB/storage762208KiB/desc6 (not continuous peaks). All actors loadedfaba3db/currenttemplates; no own retained build. Combined evidence acceptance pending in same review context. No ordinary correction or retry; Unix88 preserved, stopped chains untouched.
+
+Combined independent native88 acceptance completed with no material findings.
+Actual untimed public wait-entry/cancel/wakeup/reap criterion accepted narrowly
+for Linuxsync andsync+no_float at08507d68; proof and ticket partialclosure updated.
+Conditional launcher /proc stat exit-race warning preserved and reviewed, not a
+custody failure. Rules/global/project/relevant skills and role templates confirmed
+faba3db by root, Worker and combined Expert; historical unavailable agents have
+not newly confirmed and will require reload before any future action.
+Current turn PROGRESS: new acceptance evidence closes the previously missing
+actual wait-entry criterion, resource cleanup verified. No production changes,
+failed corrections or retries. Unix88 cumulative; historical overhead85 and
+stopped Windows/Darwin routes unchanged. Root owns exact metadata integration to
+fork main; fresh remote still08507d68 onlymain. Keep all wider requirements open.
+Next action after integration: inspect remaining options/capture/deadline process
+criteria against required current feature/MSRV/native matrix, group related
+missing cases into one acceptance package; do not substitute partial Linuxproof
+for complete Windows/Darwin/finalrelease. No retained build/stage/privatecache.
+Owned root worktree remains needed; foreign untracked historylogs unchanged.
+Elapsed native38.528s toexport; Role/token/cost/cache metrics unavailable/unknown.

@@ -1,0 +1,106 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+helper	745966	745965	745965	967005	python3 /root/rhai-linux-wait-entry-20261003-08507d68/linux-wait-entry-proof.py
+scoped-supervisor	745965	745962	745965	967003	/usr/bin/python3 /var/roothome/rhai-linux-wait-entry-20261003-08507d68/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-wait-entry-20261003-08507d68/linux-wait-entry-proof.py
+command:rustup-install	745971	745966	745965	967046	/root/.cargo/bin/rustup toolchain install 1.77.2-x86_64-unknown-linux-gnu --profile minimal --no-self-update
+command:du	745980	745966	745965	967046	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	745990	745966	745965	967046	/bin/ps -e -o pid=,ppid=,rss=
+command:du	746002	745966	745965	967147	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	746003	745966	745965	967148	/bin/ps -e -o pid=,ppid=,rss=
+command:du	746023	745966	745965	967248	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	746024	745966	745965	967249	/bin/ps -e -o pid=,ppid=,rss=
+command:du	746044	745966	745965	967350	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	746045	745966	745965	967350	/bin/ps -e -o pid=,ppid=,rss=
+command:du	746057	745966	745965	967451	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	746058	745966	745965	967452	/bin/ps -e -o pid=,ppid=,rss=
+command:du	746069	745966	745965	967553	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	746070	745966	745965	967553	/bin/ps -e -o pid=,ppid=,rss=
+command:du	746089	745966	745965	967654	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	746090	745966	745965	967654	/bin/ps -e -o pid=,ppid=,rss=
+command:du	746101	745966	745965	967755	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	746102	745966	745965	967756	/bin/ps -e -o pid=,ppid=,rss=
+command:du	746108	745966	745965	967787	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	746109	745966	745965	967787	/bin/ps -e -o pid=,ppid=,rss=
+command:rustc-version	746111	745966	745965	967788	/root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose
+command:du	746112	745966	745965	967788	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	746113	745966	745965	967788	/bin/ps -e -o pid=,ppid=,rss=
+command:du	746115	745966	745965	967799	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	746116	745966	745965	967800	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-version	746117	745966	745965	967800	/root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose
+command:du	746118	745966	745965	967800	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	746130	745966	745965	967801	/bin/ps -e -o pid=,ppid=,rss=
+command:du	746132	745966	745965	967811	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	746133	745966	745965	967812	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-wrong-wait-entry	746134	745966	745965	967813	/root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --lib packages::sys::process::unix::tests::public_wait_is_cancelled_after_entering_condvar -- --exact --nocapture --test-threads=1
+command:du	746135	745966	745965	967813	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	746137	745966	745965	967813	/bin/ps -e -o pid=,ppid=,rss=
+command:du	746154	745966	745965	967914	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	746155	745966	745965	967914	/bin/ps -e -o pid=,ppid=,rss=
+command:du	746168	745966	745965	968015	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	746169	745966	745965	968016	/bin/ps -e -o pid=,ppid=,rss=
+command:du	746180	745966	745965	968116	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	746181	745966	745965	968117	/bin/ps -e -o pid=,ppid=,rss=
+command:du	746193	745966	745965	968218	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	746194	745966	745965	968218	/bin/ps -e -o pid=,ppid=,rss=
+command:du	746401	745966	745965	968319	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	746402	745966	745965	968320	/bin/ps -e -o pid=,ppid=,rss=
+command:du	746581	745966	745965	968421	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	746584	745966	745965	968422	/bin/ps -e -o pid=,ppid=,rss=
+command:du	746774	745966	745965	968523	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	746777	745966	745965	968524	/bin/ps -e -o pid=,ppid=,rss=
+command:du	746879	745966	745965	968625	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	746880	745966	745965	968626	/bin/ps -e -o pid=,ppid=,rss=
+command:du	746937	745966	745965	968727	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	746941	745966	745965	968729	/bin/ps -e -o pid=,ppid=,rss=
+command:du	747049	745966	745965	968829	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	747050	745966	745965	968831	/bin/ps -e -o pid=,ppid=,rss=
+command:du	747061	745966	745965	968931	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	747062	745966	745965	968933	/bin/ps -e -o pid=,ppid=,rss=
+command:du	747073	745966	745965	969033	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	747074	745966	745965	969035	/bin/ps -e -o pid=,ppid=,rss=
+command:du	747090	745966	745965	969135	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	747091	745966	745965	969136	/bin/ps -e -o pid=,ppid=,rss=
+command:du	747112	745966	745965	969237	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	747115	745966	745965	969239	/bin/ps -e -o pid=,ppid=,rss=
+command:du	747137	745966	745965	969329	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	747138	745966	745965	969330	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-green	747139	745966	745965	969331	/root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --lib packages::sys::process::unix::tests::public_wait_is_cancelled_after_entering_condvar -- --exact --nocapture --test-threads=1
+command:du	747140	745966	745965	969331	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	747145	745966	745965	969332	/bin/ps -e -o pid=,ppid=,rss=
+command:du	747160	745966	745965	969433	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	747161	745966	745965	969434	/bin/ps -e -o pid=,ppid=,rss=
+command:du	747172	745966	745965	969535	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	747173	745966	745965	969536	/bin/ps -e -o pid=,ppid=,rss=
+command:du	747184	745966	745965	969637	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	747185	745966	745965	969638	/bin/ps -e -o pid=,ppid=,rss=
+command:du	747209	745966	745965	969739	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	747211	745966	745965	969741	/bin/ps -e -o pid=,ppid=,rss=
+command:du	747230	745966	745965	969842	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	747232	745966	745965	969843	/bin/ps -e -o pid=,ppid=,rss=
+command:du	747241	745966	745965	969863	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	747242	745966	745965	969865	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-wrong-wait-entry	747243	745966	745965	969866	/root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync,no_float --lib packages::sys::process::unix::tests::public_wait_is_cancelled_after_entering_condvar -- --exact --nocapture --test-threads=1
+command:du	747244	745966	745965	969866	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	747249	745966	745965	969867	/bin/ps -e -o pid=,ppid=,rss=
+command:du	747278	745966	745965	969968	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	747279	745966	745965	969969	/bin/ps -e -o pid=,ppid=,rss=
+command:du	747298	745966	745965	970070	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	747299	745966	745965	970071	/bin/ps -e -o pid=,ppid=,rss=
+command:du	747312	745966	745965	970172	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	747313	745966	745965	970173	/bin/ps -e -o pid=,ppid=,rss=
+command:du	747337	745966	745965	970274	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	747338	745966	745965	970275	/bin/ps -e -o pid=,ppid=,rss=
+command:du	747364	745966	745965	970366	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	747366	745966	745965	970367	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-green	747367	745966	745965	970368	/root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync,no_float --lib packages::sys::process::unix::tests::public_wait_is_cancelled_after_entering_condvar -- --exact --nocapture --test-threads=1
+command:du	747368	745966	745965	970368	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	747373	745966	745965	970369	/bin/ps -e -o pid=,ppid=,rss=
+command:du	747388	745966	745965	970470	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	747389	745966	745965	970471	/bin/ps -e -o pid=,ppid=,rss=
+command:du	747400	745966	745965	970572	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	747401	745966	745965	970573	/bin/ps -e -o pid=,ppid=,rss=
+command:du	747415	745966	745965	970674	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	747417	745966	745965	970675	/bin/ps -e -o pid=,ppid=,rss=
+command:du	747439	745966	745965	970776	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	747440	745966	745965	970777	/bin/ps -e -o pid=,ppid=,rss=
+command:du	747462	745966	745965	970858	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-wait-entry-20261003-08507d68/agent-build-e4soyep3
+command:ps	747463	745966	745965	970859	/bin/ps -e -o pid=,ppid=,rss=

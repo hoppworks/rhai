@@ -1,0 +1,302 @@
+{
+  "max_descendants": 16,
+  "rss_hard_stop_kib": 2097152,
+  "sampled_maxima": {
+    "descendants": 6,
+    "rss_kib": 920012,
+    "storage_kib": 762208
+  },
+  "samples": [
+    {
+      "descendants": 2,
+      "monotonic_seconds": 0.392,
+      "rss_kib": 46748,
+      "storage_kib": 68188
+    },
+    {
+      "descendants": 2,
+      "monotonic_seconds": 1.405,
+      "rss_kib": 55608,
+      "storage_kib": 84832
+    },
+    {
+      "descendants": 2,
+      "monotonic_seconds": 2.419,
+      "rss_kib": 56656,
+      "storage_kib": 139524
+    },
+    {
+      "descendants": 2,
+      "monotonic_seconds": 3.432,
+      "rss_kib": 156568,
+      "storage_kib": 204440
+    },
+    {
+      "descendants": 2,
+      "monotonic_seconds": 4.446,
+      "rss_kib": 152940,
+      "storage_kib": 321292
+    },
+    {
+      "descendants": 2,
+      "monotonic_seconds": 5.458,
+      "rss_kib": 152892,
+      "storage_kib": 330516
+    },
+    {
+      "descendants": 2,
+      "monotonic_seconds": 6.473,
+      "rss_kib": 319656,
+      "storage_kib": 435236
+    },
+    {
+      "descendants": 2,
+      "monotonic_seconds": 7.486,
+      "rss_kib": 469320,
+      "storage_kib": 593788
+    },
+    {
+      "descendants": 1,
+      "monotonic_seconds": 7.799,
+      "rss_kib": 31180,
+      "storage_kib": 527876
+    },
+    {
+      "descendants": 2,
+      "monotonic_seconds": 7.812,
+      "rss_kib": 31204,
+      "storage_kib": 527884
+    },
+    {
+      "descendants": 1,
+      "monotonic_seconds": 7.923,
+      "rss_kib": 31252,
+      "storage_kib": 527888
+    },
+    {
+      "descendants": 2,
+      "monotonic_seconds": 7.935,
+      "rss_kib": 31332,
+      "storage_kib": 527892
+    },
+    {
+      "descendants": 1,
+      "monotonic_seconds": 8.046,
+      "rss_kib": 31204,
+      "storage_kib": 527896
+    },
+    {
+      "descendants": 2,
+      "monotonic_seconds": 8.058,
+      "rss_kib": 53016,
+      "storage_kib": 527904
+    },
+    {
+      "descendants": 2,
+      "monotonic_seconds": 9.071,
+      "rss_kib": 74104,
+      "storage_kib": 531180
+    },
+    {
+      "descendants": 2,
+      "monotonic_seconds": 10.084,
+      "rss_kib": 74732,
+      "storage_kib": 531400
+    },
+    {
+      "descendants": 2,
+      "monotonic_seconds": 11.098,
+      "rss_kib": 82068,
+      "storage_kib": 534728
+    },
+    {
+      "descendants": 2,
+      "monotonic_seconds": 12.113,
+      "rss_kib": 106400,
+      "storage_kib": 540256
+    },
+    {
+      "descendants": 4,
+      "monotonic_seconds": 13.134,
+      "rss_kib": 407828,
+      "storage_kib": 602036
+    },
+    {
+      "descendants": 4,
+      "monotonic_seconds": 14.153,
+      "rss_kib": 351960,
+      "storage_kib": 632532
+    },
+    {
+      "descendants": 5,
+      "monotonic_seconds": 15.173,
+      "rss_kib": 373196,
+      "storage_kib": 660532
+    },
+    {
+      "descendants": 4,
+      "monotonic_seconds": 16.194,
+      "rss_kib": 664968,
+      "storage_kib": 671224
+    },
+    {
+      "descendants": 4,
+      "monotonic_seconds": 17.214,
+      "rss_kib": 691460,
+      "storage_kib": 686164
+    },
+    {
+      "descendants": 3,
+      "monotonic_seconds": 18.234,
+      "rss_kib": 309096,
+      "storage_kib": 724268
+    },
+    {
+      "descendants": 3,
+      "monotonic_seconds": 19.254,
+      "rss_kib": 551864,
+      "storage_kib": 724280
+    },
+    {
+      "descendants": 3,
+      "monotonic_seconds": 20.274,
+      "rss_kib": 677352,
+      "storage_kib": 724280
+    },
+    {
+      "descendants": 3,
+      "monotonic_seconds": 21.294,
+      "rss_kib": 892576,
+      "storage_kib": 724304
+    },
+    {
+      "descendants": 3,
+      "monotonic_seconds": 22.314,
+      "rss_kib": 920012,
+      "storage_kib": 738632
+    },
+    {
+      "descendants": 1,
+      "monotonic_seconds": 23.233,
+      "rss_kib": 31176,
+      "storage_kib": 736536
+    },
+    {
+      "descendants": 2,
+      "monotonic_seconds": 23.253,
+      "rss_kib": 67308,
+      "storage_kib": 736548
+    },
+    {
+      "descendants": 3,
+      "monotonic_seconds": 24.273,
+      "rss_kib": 469456,
+      "storage_kib": 736532
+    },
+    {
+      "descendants": 3,
+      "monotonic_seconds": 25.293,
+      "rss_kib": 585736,
+      "storage_kib": 736532
+    },
+    {
+      "descendants": 3,
+      "monotonic_seconds": 26.313,
+      "rss_kib": 754484,
+      "storage_kib": 736548
+    },
+    {
+      "descendants": 3,
+      "monotonic_seconds": 27.335,
+      "rss_kib": 862880,
+      "storage_kib": 747664
+    },
+    {
+      "descendants": 6,
+      "monotonic_seconds": 28.356,
+      "rss_kib": 755112,
+      "storage_kib": 749680
+    },
+    {
+      "descendants": 1,
+      "monotonic_seconds": 28.574,
+      "rss_kib": 31204,
+      "storage_kib": 736556
+    },
+    {
+      "descendants": 2,
+      "monotonic_seconds": 28.596,
+      "rss_kib": 67596,
+      "storage_kib": 736560
+    },
+    {
+      "descendants": 3,
+      "monotonic_seconds": 29.617,
+      "rss_kib": 459424,
+      "storage_kib": 737076
+    },
+    {
+      "descendants": 3,
+      "monotonic_seconds": 30.636,
+      "rss_kib": 570396,
+      "storage_kib": 737076
+    },
+    {
+      "descendants": 3,
+      "monotonic_seconds": 31.657,
+      "rss_kib": 761012,
+      "storage_kib": 737104
+    },
+    {
+      "descendants": 3,
+      "monotonic_seconds": 32.677,
+      "rss_kib": 856532,
+      "storage_kib": 748616
+    },
+    {
+      "descendants": 1,
+      "monotonic_seconds": 33.597,
+      "rss_kib": 31224,
+      "storage_kib": 748452
+    },
+    {
+      "descendants": 2,
+      "monotonic_seconds": 33.617,
+      "rss_kib": 66628,
+      "storage_kib": 748460
+    },
+    {
+      "descendants": 3,
+      "monotonic_seconds": 34.637,
+      "rss_kib": 466344,
+      "storage_kib": 748436
+    },
+    {
+      "descendants": 3,
+      "monotonic_seconds": 35.658,
+      "rss_kib": 573764,
+      "storage_kib": 748436
+    },
+    {
+      "descendants": 3,
+      "monotonic_seconds": 36.683,
+      "rss_kib": 783140,
+      "storage_kib": 748472
+    },
+    {
+      "descendants": 3,
+      "monotonic_seconds": 37.704,
+      "rss_kib": 841672,
+      "storage_kib": 762208
+    },
+    {
+      "descendants": 1,
+      "monotonic_seconds": 38.523,
+      "rss_kib": 31124,
+      "storage_kib": 748476
+    }
+  ],
+  "samples_are_periodic_not_continuous_peak": true,
+  "storage_hard_stop_kib": 2097152,
+  "storage_preemptive_stop_kib": 1572864
+}

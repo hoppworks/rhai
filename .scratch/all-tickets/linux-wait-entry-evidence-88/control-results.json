@@ -1,0 +1,44 @@
+[
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-0-wrong-wait-entry",
+    "required_diagnostics": [
+      "wait-entry checkpoint pid=",
+      "count=",
+      "nonterminal=true",
+      "observer acquired snapshot mutex after Condvar wait entry",
+      "FAILED",
+      "wait-entry fixture cleanup pid=",
+      "reap=ESRCH"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "1 passed; 0 failed;",
+    "name": "row-0-green",
+    "status": 0
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-1-wrong-wait-entry",
+    "required_diagnostics": [
+      "wait-entry checkpoint pid=",
+      "count=",
+      "nonterminal=true",
+      "observer acquired snapshot mutex after Condvar wait entry",
+      "FAILED",
+      "wait-entry fixture cleanup pid=",
+      "reap=ESRCH"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "1 passed; 0 failed;",
+    "name": "row-1-green",
+    "status": 0
+  }
+]
