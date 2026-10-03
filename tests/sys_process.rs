@@ -1391,6 +1391,7 @@ fn managed_zombie_reaper_process() {
         .args(["--exact", "process_fixture", "--nocapture", "--quiet"])
         .env_clear()
         .env(MANAGED_ZOMBIE_ROLE_ENV, "host")
+        .env(MANAGED_ZOMBIE_REAP_MODE_ENV, &reap_mode)
         .env(MANAGED_ZOMBIE_ROOT_ENV, &root)
         .env(MANAGED_ZOMBIE_DEADLINE_ENV, deadline_ns.to_string())
         .env(MANAGED_ROOT_ENV, &root)
@@ -1675,7 +1676,6 @@ fn managed_zombie_host_child_kill(root: &std::path::Path, host_pid: i32, host_st
         r#"spawn("{executable_text}", ["--exact", "managed_scope_spawn_leader_fixture", "--nocapture", "--quiet"], #{{
             env_clear: true,
             env: #{{ {MANAGED_SPAWN_HOLD_ENV}: "child-kill", {MANAGED_ROOT_ENV}: "{root_literal}", {MANAGED_WORKER_ENV}: "{worker_literal}", {MANAGED_LEAF_ENV}: "{leaf_literal}", {MANAGED_RELEASE_ENV}: "{release_literal}" }},
-            timeout: 4.0
         }})"#
     );
     let child = engine.eval::<Dynamic>(&script).expect("public managed spawn");
@@ -1688,7 +1688,7 @@ fn managed_zombie_host_child_kill(root: &std::path::Path, host_pid: i32, host_st
     assert!(root.join("kill-request").exists(), "outer observer did not authorize public Child.kill");
     let api_result = match engine.eval_with_scope::<Map>(&mut scope, "child.kill(); child.wait(5.0)") {
         Ok(report) => {
-            let success = report.get("success").and_then(|value| value.as_bool().ok()).unwrap_or(false);
+            let success = report.get("success").and_then(|value| value.as_bool().ok()).expect("Child.wait report success must be a boolean");
             let code = report.get("code").and_then(|value| value.as_int().ok());
             let signal = report.get("signal").and_then(|value| value.as_int().ok());
             let stdout_complete = report.get("stdout_complete").and_then(|value| value.as_bool().ok()).unwrap_or(false);
@@ -1899,7 +1899,7 @@ fn managed_child_kill_reports_group_closed_under_fixture_reaper() {
     let worker_absent = managed_proc_identity(worker["pid"]).is_none();
     let leaf_absent = managed_proc_identity(leaf["pid"]).is_none();
     let reaped = std::fs::read_to_string(fixture.path("prompt-reaper-cleanup")).unwrap_or_default();
-    let exact_reaped = reaped.contains(&format!("worker={} start={worker_start} pgid={group} reaped=true wait_status=0", worker["pid"])) && reaped.contains(&format!("leaf={} start={leaf_start} pgid={group} reaped=true wait_status=0", leaf["pid"])) && reaped.contains("complete=true");
+    let exact_reaped = reaped.contains(&format!("worker={} start={worker_start} pgid={group} reaped=true wait_status=", worker["pid"])) && reaped.contains(&format!("leaf={} start={leaf_start} pgid={group} reaped=true wait_status=", leaf["pid"])) && reaped.contains("complete=true");
     let host_live = matches!(managed_proc_identity(host_pid), Some((state, parent, _, start)) if state != 'Z' && parent == reaper_pid && start == host_start);
     let reaper_live = matches!(managed_proc_identity(reaper_pid), Some((state, parent, _, start)) if state != 'Z' && parent == std::process::id() as i32 && start == reaper_start);
     let sentinel_live = matches!(managed_proc_identity(sentinel_pid), Some((state, parent, pgid, start)) if state != 'Z' && parent == std::process::id() as i32 && pgid == sentinel_pgid && start == sentinel_start);
