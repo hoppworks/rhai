@@ -1,0 +1,151 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+helper	1190157	1190156	1190156	4227577	python3 /root/rhai-linux-managed-deadline-20261003-bcecd9eb-105/linux-managed-deadline105-proof.py
+scoped-supervisor	1190156	1190153	1190156	4227575	/usr/bin/python3 /var/roothome/rhai-linux-managed-deadline-20261003-bcecd9eb-105/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-managed-deadline-20261003-bcecd9eb-105/linux-managed-deadline105-proof.py
+command:rustup-install	1190159	1190157	1190156	4227585	/root/.cargo/bin/rustup toolchain install 1.77.2-x86_64-unknown-linux-gnu --profile minimal --no-self-update
+command:du	1190160	1190157	1190156	4227585	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1190169	1190157	1190156	4227585	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1190198	1190157	1190156	4227686	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1190199	1190157	1190156	4227687	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1190211	1190157	1190156	4227787	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1190212	1190157	1190156	4227788	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1190223	1190157	1190156	4227889	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1190224	1190157	1190156	4227889	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1190243	1190157	1190156	4227990	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1190244	1190157	1190156	4227990	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1190264	1190157	1190156	4228091	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1190265	1190157	1190156	4228091	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1190280	1190157	1190156	4228192	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1190281	1190157	1190156	4228192	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1190291	1190157	1190156	4228263	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1190292	1190157	1190156	4228264	/bin/ps -e -o pid=,ppid=,rss=
+command:rustc-version	1190293	1190157	1190156	4228264	/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose
+command:du	1190294	1190157	1190156	4228264	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1190295	1190157	1190156	4228265	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1190297	1190157	1190156	4228275	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1190298	1190157	1190156	4228276	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-version	1190299	1190157	1190156	4228276	/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose
+command:du	1190300	1190157	1190156	4228276	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1190304	1190157	1190156	4228276	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1190314	1190157	1190156	4228287	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1190315	1190157	1190156	4228288	/bin/ps -e -o pid=,ppid=,rss=
+command:require-timeout-control	1190316	1190157	1190156	4228288	/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_run_deadline_reaps_group_under_fixture_reaper
+command:du	1190317	1190157	1190156	4228288	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1190318	1190157	1190156	4228289	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1190338	1190157	1190156	4228389	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1190339	1190157	1190156	4228390	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1190352	1190157	1190156	4228491	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1190353	1190157	1190156	4228491	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1190364	1190157	1190156	4228592	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1190365	1190157	1190156	4228592	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1190402	1190157	1190156	4228693	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1190406	1190157	1190156	4228694	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1190619	1190157	1190156	4228795	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1190620	1190157	1190156	4228795	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1190846	1190157	1190156	4228896	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1190848	1190157	1190156	4228897	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1190981	1190157	1190156	4228998	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1190982	1190157	1190156	4228999	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191014	1190157	1190156	4229100	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191015	1190157	1190156	4229101	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191169	1190157	1190156	4229202	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191170	1190157	1190156	4229203	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191224	1190157	1190156	4229304	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191225	1190157	1190156	4229305	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191236	1190157	1190156	4229406	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191237	1190157	1190156	4229406	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191251	1190157	1190156	4229507	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191254	1190157	1190156	4229508	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191274	1190157	1190156	4229609	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191275	1190157	1190156	4229610	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191318	1190157	1190156	4229711	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191320	1190157	1190156	4229712	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191355	1190157	1190156	4229813	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191356	1190157	1190156	4229814	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191360	1190157	1190156	4229844	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191361	1190157	1190156	4229845	/bin/ps -e -o pid=,ppid=,rss=
+command:base-prompt-regression-row1	1191363	1190157	1190156	4229847	/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_run_succeeds_after_fixture_reaper_reaps_descendants
+command:du	1191364	1190157	1190156	4229847	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191369	1190157	1190156	4229848	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191422	1190157	1190156	4229949	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191423	1190157	1190156	4229949	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191426	1190157	1190156	4229970	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191427	1190157	1190156	4229971	/bin/ps -e -o pid=,ppid=,rss=
+command:base-held-regression-row1	1191430	1190157	1190156	4229973	/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_run_reports_while_fixture_reaper_holds_stopped_zombies
+command:du	1191431	1190157	1190156	4229973	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191434	1190157	1190156	4229974	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191461	1190157	1190156	4230074	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191462	1190157	1190156	4230075	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191466	1190157	1190156	4230106	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191467	1190157	1190156	4230107	/bin/ps -e -o pid=,ppid=,rss=
+command:base-kill-regression-row1	1191469	1190157	1190156	4230108	/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_child_kill_reports_group_closed_under_fixture_reaper
+command:du	1191470	1190157	1190156	4230108	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191475	1190157	1190156	4230109	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191492	1190157	1190156	4230120	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191493	1190157	1190156	4230121	/bin/ps -e -o pid=,ppid=,rss=
+command:base-final-drop-regression-row1	1191495	1190157	1190156	4230122	/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_spawn_final_clone_drop_closes_group_under_fixture_reaper
+command:du	1191496	1190157	1190156	4230122	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191502	1190157	1190156	4230123	
+command:du	1191520	1190157	1190156	4230144	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191521	1190157	1190156	4230145	/bin/ps -e -o pid=,ppid=,rss=
+command:green-row-1	1191523	1190157	1190156	4230146	/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_run_deadline_reaps_group_under_fixture_reaper
+command:du	1191524	1190157	1190156	4230146	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191529	1190157	1190156	4230147	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191553	1190157	1190156	4230228	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191554	1190157	1190156	4230229	/bin/ps -e -o pid=,ppid=,rss=
+command:green-row-2	1191556	1190157	1190156	4230230	/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync,metadata --test sys_process -- --exact --nocapture --test-threads=1 managed_run_deadline_reaps_group_under_fixture_reaper
+command:du	1191557	1190157	1190156	4230230	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191562	1190157	1190156	4230231	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191652	1190157	1190156	4230332	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191653	1190157	1190156	4230333	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191704	1190157	1190156	4230434	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191705	1190157	1190156	4230434	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191719	1190157	1190156	4230535	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191721	1190157	1190156	4230536	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191732	1190157	1190156	4230637	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191733	1190157	1190156	4230638	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191744	1190157	1190156	4230739	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191745	1190157	1190156	4230740	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191763	1190157	1190156	4230841	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191764	1190157	1190156	4230842	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191785	1190157	1190156	4230942	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191787	1190157	1190156	4230943	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191835	1190157	1190156	4231044	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191836	1190157	1190156	4231045	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191861	1190157	1190156	4231146	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191862	1190157	1190156	4231147	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191864	1190157	1190156	4231158	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191865	1190157	1190156	4231159	/bin/ps -e -o pid=,ppid=,rss=
+command:green-row-3	1191868	1190157	1190156	4231160	/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process -- --exact --nocapture --test-threads=1 managed_run_deadline_reaps_group_under_fixture_reaper
+command:du	1191869	1190157	1190156	4231160	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191874	1190157	1190156	4231161	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191904	1190157	1190156	4231262	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191905	1190157	1190156	4231263	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191916	1190157	1190156	4231364	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191917	1190157	1190156	4231365	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191929	1190157	1190156	4231465	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191930	1190157	1190156	4231466	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191953	1190157	1190156	4231567	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191954	1190157	1190156	4231568	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1191985	1190157	1190156	4231669	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1191986	1190157	1190156	4231670	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1192033	1190157	1190156	4231771	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1192034	1190157	1190156	4231772	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1192040	1190157	1190156	4231823	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1192041	1190157	1190156	4231824	/bin/ps -e -o pid=,ppid=,rss=
+command:green-row-4	1192044	1190157	1190156	4231825	/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,unchecked --test sys_process -- --exact --nocapture --test-threads=1 managed_run_deadline_reaps_group_under_fixture_reaper
+command:du	1192045	1190157	1190156	4231825	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1192050	1190157	1190156	4231826	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1192082	1190157	1190156	4231927	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1192083	1190157	1190156	4231928	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1192094	1190157	1190156	4232029	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1192095	1190157	1190156	4232030	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1192106	1190157	1190156	4232131	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1192107	1190157	1190156	4232132	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1192130	1190157	1190156	4232232	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1192131	1190157	1190156	4232233	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1192162	1190157	1190156	4232334	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1192163	1190157	1190156	4232335	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1192210	1190157	1190156	4232436	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1192211	1190157	1190156	4232437	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1192216	1190157	1190156	4232478	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105/agent-build-l7418bei
+command:ps	1192217	1190157	1190156	4232479	/bin/ps -e -o pid=,ppid=,rss=

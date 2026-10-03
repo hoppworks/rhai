@@ -85,7 +85,7 @@ Instructions/roles faba3db3bef6891ad2c0b20d434963bb8fe9572d loaded by root,
 responsible Standard and same combined reviewer. Workhorse installed rules resolved
 at /var/home/workhorse/.agents/AGENTS.md and /var/home/workhorse/projects/agent-skills;
 SSH root has no ~/.agents. Read-only resolution/command-local safe.directory only.
-Last verified fork main9fe3068f9285eed509a2118e63729daea9c38fa1; sole remote main,
+Last verified fork mainab7e8a7fef579fb5f8d09226125beebe5e6f08ac; sole remote main,
 lowercase human author/committer. Current package: managed deadline104 original
 export and corrected105 shared-fixture acceptance. Overall scope incomplete.
 
@@ -216,6 +216,20 @@ safe action: observe same live runner identity/start and fresh global inventory;
 when heavy work terminal/absent, recheck hashes/scope and allocate bounded105 once.
 Current turn PROGRESS: affected collector repaired/READY and stage hashvalidated;
 wait is machine occupancy, no failed correction/native budget consumption.
+Latest continuation verified wait: exact former runner988548/start4043970 and
+supervisor988549/start4043972 freshly absent. Full inventory detects new foreign
+tauron runner1036148/supervisor1036149 timeout5000 and Cargo1059254; private runtime
+tauron/g4546e/agent-build-cx3qmbpq (canonical /var/home/workhorse, /home alias).
+All fifteen105 input hashes freshly PASS; own scope absent, outer-status absent.
+Still no105 allocation/native work; never treat foreign runner turnover as free
+slot without full fresh inventory. Previous goal turn PROGRESS (corrected105
+readiness/staging). Current wait is verified against actual foreign processes.
+Same responsible Standard now implements next OutputLimit test/fixture slice
+under existing30min planning checkpoint and hard limits, noSSH/build/stage. Source
+may advance locally because staged105 contains immutable31a archive and all its
+helpers; do not change those105 recipes or its remote inputs. New OutputLimit
+acceptance remains separate/unproven, with own future immutable input pins; no
+fabricated TDD RED or reuse of narrower direct-scope cap proof for managed closure.
 Prospective105 unallocated. Bounds unchanged600outer/585runner/540helper incl30export,
 jobs2/desc16/preempt1572864/hardstorageRSS2097152KiB, fixturewatchdog20s.
 Ordinary30min active-work planning checkpoint, max2consecutivelauncheswithoutnew
@@ -224,6 +238,78 @@ Finaldrop102/kill101/prompt96 acceptedoriginals preserved with narrower applicab
 claims; source repair/dependency review may require affectedbasechecks before next
 acceptance. Tickets03/06 and overall remain OPEN. Nextfreeze ->samecombined affected
 source/recipes/rawreview -> export104/cleanup ->freshslot ->bounded105.
+
+### Accepted native105 integration
+
+Same combined Expert independently inspected all78 originalhashes,actualnamed
+RED101/source restoration,eightGREEN plus threesetup and exactnineclosure/custody/
+retirement receipts. ACCEPTED narrow manageddeadline/partialoutput at31a and four
+base regressions; stable104watchdog cause RESOLVED with failedcorrectioncount1
+retained, no renewed budget. Original103/104 and closed14/15 histories preserved.
+Root integration copies exact31a testblob and reviewed50341 frozen105recipes only;
+non-scratch diff vs31a must be empty. OutputLimit0a6/a33 source excluded pending
+its own source/nativeproof. Tickets03/06 updated with partialcriterionclosure,
+parentticket/release still OPEN. Full proof linux-managed-deadline-proof.md.
+
+Same Standard OutputLimit repair frozena33b048eabe3b663550a3c24a0eb56434eeb8a9c,
+testSHA2a6e5c3d04e092471aba351e706d5af2a2684a3533c4b528810080987a3a02e6.
+Same Expert affectedsource recheck ongoing; only purechecks passed,no native.
+Currentgoalturn PROGRESS: actual105accepted/nativeoriginalexport/exactcleanup,
+sourceintegration prepared and nextOutputLimit sourcecorrectionfrozen.
+
+### Native105 actual result and OutputLimit source repair
+
+Native105 finished: SSH wrapper0; originalouter/scoped/runtime/readback/scope0.
+Original meaningful wrong-timeout control101 at intended named assertion, four
+featuredeadline GREEN0, four affected base regression GREEN0, three setup0.
+Source31a testhash8d6af23 restored. Original78files/5dirs with nineexistingclosure
+artifacts independently fullhashmatched by reviewed collector75c4150. Fresh150
+helper+2launcher exactPID/start absent, groups1190144/1190156 empty; own private
+runtime agent-build-l7418bei, central scope and stage absent. Exact hash-gated
+stage cleanup78files/5dirs, freshabsence saved remote-cleanup.json. Original
+/proc1190153/stat disappearance warning preserved; no assertion/result rewritten.
+Same combined Expert now reviews immutable originalacceptance; criterion not yet
+markedaccepted pendingfinalreadbackreview. CumulativeUnix105/deadlinenative3.
+No retained105build. Root notified authorizedTauroncoordthread that windowrequest
+is fulfilled; no foreignprocess changes or additionalwindow requested.
+
+OutputLimit0a6dbb5 initialsource review NOT READY: temporaryguardborrowescape,
+inventedstderrcomplete and delayedzombiereaping/racyclosure snapshot. One batch
+of preparationfindings; no completedfailedcorrection or nativeallocation. Same
+Standard repairsallthree preserving typedOutputLimit/cap4096/timed_out=false,
+normal exactzombie promptreaping withoutlivekills and boundedcompoundclosure.
+Report linux-managed-output-limit-review.md. Compactprospectiveinvocation7tests
+(1postcleanupwrongcontrol,4features,2prompt/heldbase)+3setup; actualfilenameinventory
+mustmatchparserlabels. No broadoldmatrix repeatedfor mode-specificextensions.
+Newsource readiness and nativeOutputLimit acceptance remain unproven.
+
+### Current OutputLimit source and build coordination
+
+Previous goal turn PROGRESS: immutable OutputLimit source completed and explicit
+human authorization obtained for build-window messaging; no native acceptance.
+Responsible Standard committed test-only0a6dbb5d9239d747b6d63a80728985c19a4618be
+in owned linux-managed-success worktree. New exact managed_run_output_limit_reaps_group_under_fixture_reaper
+requires typed OutputLimit,4096-byte prefix,honest stdout/stderr capture flags,
+timed_out=false, exact PID/start/PIDFD/group closure and wait receipts, live
+host/reaper/sentinel at API boundary. New reaper mode waits for APIresult before
+its signals; proc read errors cannot prove absence. Parser/diff checks passed;
+compile/native proof UNVERIFIED. Same combined Expert reviews actual immutable
+source delta; same Standard prepares related frozen recipes with pure checks only,
+no Cargo/SSH/staging/native. Frozen105 remote inputs remain unchanged.
+
+Human explicitly approved requesting a Tauron build window via pending question
+reply “Ja, Buildfenster abstimmen (Empfohlen)”. Root sent finite coordination
+request to existing thread01a0fe32-5425-71d2-887b-3bf1bac284e7 (Branches in Main und Integration mig),
+without asking to stop/restart foreign processes. Responsible owner confirmation
+still pending; other inspected Tauron threads currently use lllm/Mac, not proof
+of ownership of Workhorse g4546 runs. Do not message arbitrary other chats.
+Fresh Workhorse check: former1170741/1170742/1170762 absent; new foreign runner
+1178934/start4214826, supervisor1178935/start4214828 plus actual Cargo/rustc live.
+Foreign runtime /var/home/workhorse/.local/share/agent-builds/tauron/g4546base/agent-build-isjk2_4q.
+Own105 stage exists; exactscope and outer-evidence/outer-status.txt absent.
+No105 launch/allocation, cumulativeUnix104/deadlinenative2 unchanged.
+Current continuation PROGRESS: immutable OutputLimit combined review/recipe work
+underway; heavy wait confirmed actual live processes. Overall remains incomplete.
 
 ### Next independent criterion after deadline acceptance
 
@@ -1669,3 +1755,5 @@ same affected recheck -> fresh slot and stage validation -> bounded native96.
 Native103 allocated 2026-10-03T16:45:11.138303+00:00 at recipes65ada008/sourceb524, cumulativeUnix103/deadlinenative1. FirstlocalcontractpinrepairPASSedsamecombined actualinputs; machineforeignheavybrieflyobserved thenexactoldPIDsabsent/freshglobalheavyruntimeinventoryempty. Stageinputhashesallverified; limitsunchanged600/585/540+30export, jobs2,desc16,preempt1572864/hardstorageRSS2097152KiB. Acceptanceunproven; ownSSHlaunchbounded600s.
 
 Native104 allocated 2026-10-03T17:07:50.239885+00:00 at sourcef820/recipes0150. Fresh heavy/runtime inventory empty, exactstage/physical/inputhashes valid and scope absent. CumulativeUnix104/deadlinenative2; compiler recurrence recovery now executing, no acceptance yet. Bounds unchanged600/585/540incl30export, jobs2/desc16/preempt1572864/hard2097152KiB.
+
+Native105 allocated 2026-10-03T18:11:24.513670+00:00 at frozen source31a61e752d0ffb747be827475278e3fc5d9dbe30/recipes50341e87. Fresh global heavy and private runtime inventory empty,15staged hashes allPASS, exactscope/outerstatus absent. CumulativeUnix105/deadlinenative3; second bounded deadline correction, acceptanceunproven. Bounds unchanged600outer/585runner/540helper incl30export,jobs2,desc16,preempt1572864/hardstorageRSS2097152KiB.

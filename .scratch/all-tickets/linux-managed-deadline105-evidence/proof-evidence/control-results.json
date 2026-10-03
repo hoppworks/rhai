@@ -1,0 +1,11 @@
+[
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "require-timeout-control",
+    "required_diagnostics": [
+      "managed-deadline-control require-timeout assertion"
+    ],
+    "status": 101
+  }
+]

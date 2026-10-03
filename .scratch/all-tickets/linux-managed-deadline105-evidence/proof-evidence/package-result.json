@@ -1,0 +1,26 @@
+{
+  "acceptance_claim": false,
+  "base_regressions": [
+    "managed_run_succeeds_after_fixture_reaper_reaps_descendants",
+    "managed_run_reports_while_fixture_reaper_holds_stopped_zombies",
+    "managed_child_kill_reports_group_closed_under_fixture_reaper",
+    "managed_spawn_final_clone_drop_closes_group_under_fixture_reaper"
+  ],
+  "feature_rows": [
+    "testing-environ,sys",
+    "testing-environ,sys,sync,metadata",
+    "testing-environ,sys,f32_float",
+    "testing-environ,sys,unchecked"
+  ],
+  "green_rows": 4,
+  "limitations": [
+    "No no_float/no_index feature row is included; full native acceptance and remote custody require collector readback."
+  ],
+  "source_restored": true,
+  "source_revision": "31a61e752d0ffb747be827475278e3fc5d9dbe30",
+  "test": "managed_run_deadline_reaps_group_under_fixture_reaper",
+  "test_sha256": "8d6af23f45ac24ce640ca624800b3e40daff9e10941047a786ce5f7bd233f02b",
+  "wrong_controls": [
+    "require-timeout-control"
+  ]
+}

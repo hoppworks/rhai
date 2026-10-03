@@ -1,0 +1,1332 @@
+{
+  "directories": [
+    "outer-evidence",
+    "proof-evidence",
+    "runner",
+    "runner/tools",
+    "runner/tools/agentskills"
+  ],
+  "files": {
+    "Cargo.lock.accepted": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+    "archive-build-source.py": "a75b4e807f03e8247ed821df871ceb35e776b7f699046d7a099dd0b85199fd8b",
+    "check-linux-current-msrv-examples.py": "59ac8b7b9c71ab2331c13196b36d8d2794931e07138741c43d4a8c3d1d754b06",
+    "contract-source.md": "0edcab444948bce58d7530202ca75688160efee80143f8be17fc29b96cd5da68",
+    "contract.md": "e645b24357b3c5b2e77c2550f8aeeecd1d839b5cdb58ee48ce5af6ec34f8ce42",
+    "input-identities.sha256": "18c8569f6bcdf98f73d5ca2f130acaf14452bbbde5a5330e0a790ee1eecab5de",
+    "launch.sh": "d0ce048cdf6fa0bb162e08e33d99dd7f16103c69ad17328a02daaa5e6ee4739d",
+    "linux-managed-deadline105-proof.py": "44cb3867771c93af50fb50dbbf496fcf35fc645dfdfd7d59d248d9a663783f55",
+    "linux-managed-final-drop-proof.py": "b94913dd6e7baaf8140c24d1a609086ae0367a62f1c2c30277ccff5393031e99",
+    "linux-managed-kill-proof.py": "4a80d60a826e1db80e174fe0627e01194d46cc54c4d22e55c1c49425637e50d1",
+    "linux-managed-success-proof.py": "83e84145fdec770ee5469b8ef2d85eacb813bc073abbd2a37e80e605a224a1a0",
+    "outer-evidence/launcher-identities.tsv": "8ad8fbf7c7d852e6680b858536f29b5f4e1449abe6dcdb9e5f91ad21076025a0",
+    "outer-evidence/outer-status.txt": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "outer-evidence/outer.log": "5d3fdbea75f97415ebfa86285f7fff399dfd8754c68687eb557be0bdd6c63a94",
+    "outer-evidence/pid-readback-launcher.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "outer-evidence/pid-readback.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "outer-evidence/pid-readback.tsv": "57aa0a9bc5ded36210468246899ebc55d15bdf5c747b358770a6898f2ad97df2",
+    "outer-evidence/run-scoped.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "outer-evidence/runtime-cleanup.tsv": "01a6f75e7043f30996b2601bd282d0373ef1616ccee8b9761e921125faabb43f",
+    "outer-evidence/scope-cleanup.tsv": "723c56f9df5ff00baa260e20a9aa5bb08b56620c257c28af55b62455bfbd1e11",
+    "proof-evidence/base-final-drop-regression-row1-fixture-closure.json": "94920e4bf60e0d79d38c072d053a76831d4c4563ed2a950f2aedd2d589b67006",
+    "proof-evidence/base-final-drop-regression-row1.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "proof-evidence/base-final-drop-regression-row1.stderr": "08dcc229bd78c8b0cb3379b186ab4d790996f8e08856b33e9fb720a01bfcd0f8",
+    "proof-evidence/base-final-drop-regression-row1.stdout": "4f1d80a4a53988b8100669c3c4e80b3a8156e134c7c05dc8df15311708ca1a16",
+    "proof-evidence/base-held-regression-row1.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "proof-evidence/base-held-regression-row1.stderr": "89abe6863e7ff9566190dd3343d08a4abc3bafc6a87c80e027af9682c79d1f5d",
+    "proof-evidence/base-held-regression-row1.stdout": "427535cf8a2a33e2f87983988a8a7451ec1041874cfe2e6d7e2813c41b66f99b",
+    "proof-evidence/base-kill-regression-row1-fixture-closure.json": "64637bd830bb204b28d58c3621ed1d99aa84c2c8e9efe584bf83e6f1ecadb6fe",
+    "proof-evidence/base-kill-regression-row1.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "proof-evidence/base-kill-regression-row1.stderr": "8b98966d4506ce76d4e9612f0bc4cbdf9174943f6cdad76cf0f16001030eb42c",
+    "proof-evidence/base-kill-regression-row1.stdout": "df18672fe8281112a246609bb33478107525d3a6f8bb666e89d1fd1204909f81",
+    "proof-evidence/base-prompt-regression-row1.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "proof-evidence/base-prompt-regression-row1.stderr": "c6902b9008e53c11d553b0097ece78a1c3630dc2a23df0e3e2609ad9310ee35e",
+    "proof-evidence/base-prompt-regression-row1.stdout": "ab081f2c5ceca7eec4082829f0dc7f6e39fb983892529aa72de9fb4f87a5a546",
+    "proof-evidence/cargo-version.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "proof-evidence/cargo-version.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "proof-evidence/cargo-version.stdout": "bd859f92e30f43b3d238342da4f9a98eaecf6fb4d9dcf317c4e27346f28b4a69",
+    "proof-evidence/commands.json": "4ca53999b50929b00676aed2520f8b3a85763fce6b11cdc505a356184f04f838",
+    "proof-evidence/control-results.json": "52c05e092f89930d595d9c7ddf7650a72a39a2c8fc905c42c1491fcfb30dc1e9",
+    "proof-evidence/deadline-base-held-regression-row1-held-closure.json": "ef410743657ff3645e236c36a00d0766ca3d6cc0c2495366dbb5f70a5cc42d04",
+    "proof-evidence/deadline-base-prompt-regression-row1-fixture-closure.json": "8932407eaace42d74699e73793ced8455ff84f4f5620a1a24c18bc47f8b486ae",
+    "proof-evidence/early-runtime-identity.json": "02f1e204057bf0d485949ed00f851663b231a65dc2bb5b042bb331146778df63",
+    "proof-evidence/export.json": "81a7164aade26907f650669e99fc8ad1b8acc56b20e0d4f2ca34a5e96814ab36",
+    "proof-evidence/green-row-1-fixture-closure.json": "92c1a84ff71c1c6f7aade578a8b38f5ddc72a5dc247cfedb71204e8de46e7f45",
+    "proof-evidence/green-row-1.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "proof-evidence/green-row-1.stderr": "da15c75d15dde08b48126d808d340623b2680fcc6d8c11b402cf0afeb2e54376",
+    "proof-evidence/green-row-1.stdout": "aa294326989ede935041c09ff8e6057bf0caaab565d1375cd50e33b76271076c",
+    "proof-evidence/green-row-2-fixture-closure.json": "e7ab03ae90ee7aae18410acc27b9dab659b078448af38ce11cfb4b63b6cc5b74",
+    "proof-evidence/green-row-2.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "proof-evidence/green-row-2.stderr": "20b4e875297873e99972a297f61b22b0fbfa65e1bdf747b2231566de8e3f72e6",
+    "proof-evidence/green-row-2.stdout": "ba8f2541f05b6d30ddb830e9daead762626e4fa9ce29140e5087e95d5b615db0",
+    "proof-evidence/green-row-3-fixture-closure.json": "5eaae3231c866f19f1f6f53482b6e9cc912efe20446561f691b803d2ca53c477",
+    "proof-evidence/green-row-3.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "proof-evidence/green-row-3.stderr": "a35d72f4b9677a0da374936ff09013153f05abcef1d303ada2cf1649a9578ff8",
+    "proof-evidence/green-row-3.stdout": "aa294326989ede935041c09ff8e6057bf0caaab565d1375cd50e33b76271076c",
+    "proof-evidence/green-row-4-fixture-closure.json": "dd3a6f5775b0b44b3690d1baa53a32f49d7998edad65447f0fe6572468a598c8",
+    "proof-evidence/green-row-4.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "proof-evidence/green-row-4.stderr": "5cee829467d9934178c463ccefb45d6f722cf31db01e30540ddf418230152ce8",
+    "proof-evidence/green-row-4.stdout": "08d19e03671a66387978bcb2896f7ef85348d6985539813ad8ad084f1d7c16b0",
+    "proof-evidence/package-result.json": "1b0e9c8ce90a958a7ab30c4c1141d8e3dcf204eacb3e854da8606006ab6ddc61",
+    "proof-evidence/process-identities.tsv": "eeccf6414cb0925e825cc264b3f82520d6102f1ee6ea8c74c55fe9d516ef5711",
+    "proof-evidence/require-timeout-control-fixture-closure.json": "3d3dbba6a49724405a779b47c274bb8a754fde3d6a17a9d140c35b9e4c2ca847",
+    "proof-evidence/require-timeout-control.status": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c",
+    "proof-evidence/require-timeout-control.stderr": "6342897a801a1f65cd9ca3cb5beb29014584d0bcc34c692a78cc2f8d45ece0e4",
+    "proof-evidence/require-timeout-control.stdout": "777e98858c464b2a00e5e87035e11bca51450c00c85038fd16aa78491199e751",
+    "proof-evidence/rustc-version.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "proof-evidence/rustc-version.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "proof-evidence/rustc-version.stdout": "f4679d0dda28ffcd994b39583743b88e06b6fe4a89fd7359aa1d147e5e660f11",
+    "proof-evidence/rustup-install.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "proof-evidence/rustup-install.stderr": "2c2b1d035c5a27642a26ef93759dec9c7aa6d70b8326994af1f1273f88328f17",
+    "proof-evidence/rustup-install.stdout": "161155bc054a3dcbfa30ec0fd091dd1fbb639b63d3aea56da09bff04e6762c4c",
+    "proof-evidence/source-restoration.json": "c80d81466d6a1da42f9926a75062ecf9d8325d80b83e5137710b2426a16fa56f",
+    "runner/tools/agentskills/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runner/tools/agentskills/pyguard.py": "a3739f4947744303e1adf3fb0875ac743944a272e5b95c94b1baba53029d313f",
+    "runner/tools/run_scoped.py": "9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d",
+    "source.sha256": "8b2937b977ccf0239634da49c9cb4aa36446a6be15300813f7c58df522e15637",
+    "source.tar": "aa3916aeb2cfb842cb2572032e398fc1c3f43f3811e6c60abc3e73d51dba4796",
+    "stage.sh": "8e42a15807c51daf735203cf3f718fe0b3d8e5d6bf8d90594f8ed74c840cb42f"
+  },
+  "fixture_closure_files": [
+    "base-final-drop-regression-row1-fixture-closure.json",
+    "base-kill-regression-row1-fixture-closure.json",
+    "deadline-base-held-regression-row1-held-closure.json",
+    "deadline-base-prompt-regression-row1-fixture-closure.json",
+    "green-row-1-fixture-closure.json",
+    "green-row-2-fixture-closure.json",
+    "green-row-3-fixture-closure.json",
+    "green-row-4-fixture-closure.json",
+    "require-timeout-control-fixture-closure.json"
+  ],
+  "groups": [
+    1190144,
+    1190156
+  ],
+  "launcher_process_identities": [
+    {
+      "label": "launcher",
+      "matching_process_alive": false,
+      "pgid": 1190144,
+      "pid": 1190144,
+      "ppid": 1,
+      "start_ticks": "4227572"
+    },
+    {
+      "label": "run-scoped",
+      "matching_process_alive": false,
+      "pgid": 1190144,
+      "pid": 1190153,
+      "ppid": 1190144,
+      "start_ticks": "4227573"
+    }
+  ],
+  "owned_process_identities": [
+    {
+      "label": "helper",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190157,
+      "ppid": 1190156,
+      "start_ticks": "4227577"
+    },
+    {
+      "label": "scoped-supervisor",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190156,
+      "ppid": 1190153,
+      "start_ticks": "4227575"
+    },
+    {
+      "label": "command:rustup-install",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190159,
+      "ppid": 1190157,
+      "start_ticks": "4227585"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190160,
+      "ppid": 1190157,
+      "start_ticks": "4227585"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190169,
+      "ppid": 1190157,
+      "start_ticks": "4227585"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190198,
+      "ppid": 1190157,
+      "start_ticks": "4227686"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190199,
+      "ppid": 1190157,
+      "start_ticks": "4227687"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190211,
+      "ppid": 1190157,
+      "start_ticks": "4227787"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190212,
+      "ppid": 1190157,
+      "start_ticks": "4227788"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190223,
+      "ppid": 1190157,
+      "start_ticks": "4227889"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190224,
+      "ppid": 1190157,
+      "start_ticks": "4227889"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190243,
+      "ppid": 1190157,
+      "start_ticks": "4227990"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190244,
+      "ppid": 1190157,
+      "start_ticks": "4227990"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190264,
+      "ppid": 1190157,
+      "start_ticks": "4228091"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190265,
+      "ppid": 1190157,
+      "start_ticks": "4228091"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190280,
+      "ppid": 1190157,
+      "start_ticks": "4228192"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190281,
+      "ppid": 1190157,
+      "start_ticks": "4228192"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190291,
+      "ppid": 1190157,
+      "start_ticks": "4228263"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190292,
+      "ppid": 1190157,
+      "start_ticks": "4228264"
+    },
+    {
+      "label": "command:rustc-version",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190293,
+      "ppid": 1190157,
+      "start_ticks": "4228264"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190294,
+      "ppid": 1190157,
+      "start_ticks": "4228264"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190295,
+      "ppid": 1190157,
+      "start_ticks": "4228265"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190297,
+      "ppid": 1190157,
+      "start_ticks": "4228275"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190298,
+      "ppid": 1190157,
+      "start_ticks": "4228276"
+    },
+    {
+      "label": "command:cargo-version",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190299,
+      "ppid": 1190157,
+      "start_ticks": "4228276"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190300,
+      "ppid": 1190157,
+      "start_ticks": "4228276"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190304,
+      "ppid": 1190157,
+      "start_ticks": "4228276"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190314,
+      "ppid": 1190157,
+      "start_ticks": "4228287"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190315,
+      "ppid": 1190157,
+      "start_ticks": "4228288"
+    },
+    {
+      "label": "command:require-timeout-control",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190316,
+      "ppid": 1190157,
+      "start_ticks": "4228288"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190317,
+      "ppid": 1190157,
+      "start_ticks": "4228288"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190318,
+      "ppid": 1190157,
+      "start_ticks": "4228289"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190338,
+      "ppid": 1190157,
+      "start_ticks": "4228389"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190339,
+      "ppid": 1190157,
+      "start_ticks": "4228390"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190352,
+      "ppid": 1190157,
+      "start_ticks": "4228491"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190353,
+      "ppid": 1190157,
+      "start_ticks": "4228491"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190364,
+      "ppid": 1190157,
+      "start_ticks": "4228592"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190365,
+      "ppid": 1190157,
+      "start_ticks": "4228592"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190402,
+      "ppid": 1190157,
+      "start_ticks": "4228693"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190406,
+      "ppid": 1190157,
+      "start_ticks": "4228694"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190619,
+      "ppid": 1190157,
+      "start_ticks": "4228795"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190620,
+      "ppid": 1190157,
+      "start_ticks": "4228795"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190846,
+      "ppid": 1190157,
+      "start_ticks": "4228896"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190848,
+      "ppid": 1190157,
+      "start_ticks": "4228897"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190981,
+      "ppid": 1190157,
+      "start_ticks": "4228998"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1190982,
+      "ppid": 1190157,
+      "start_ticks": "4228999"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191014,
+      "ppid": 1190157,
+      "start_ticks": "4229100"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191015,
+      "ppid": 1190157,
+      "start_ticks": "4229101"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191169,
+      "ppid": 1190157,
+      "start_ticks": "4229202"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191170,
+      "ppid": 1190157,
+      "start_ticks": "4229203"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191224,
+      "ppid": 1190157,
+      "start_ticks": "4229304"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191225,
+      "ppid": 1190157,
+      "start_ticks": "4229305"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191236,
+      "ppid": 1190157,
+      "start_ticks": "4229406"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191237,
+      "ppid": 1190157,
+      "start_ticks": "4229406"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191251,
+      "ppid": 1190157,
+      "start_ticks": "4229507"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191254,
+      "ppid": 1190157,
+      "start_ticks": "4229508"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191274,
+      "ppid": 1190157,
+      "start_ticks": "4229609"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191275,
+      "ppid": 1190157,
+      "start_ticks": "4229610"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191318,
+      "ppid": 1190157,
+      "start_ticks": "4229711"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191320,
+      "ppid": 1190157,
+      "start_ticks": "4229712"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191355,
+      "ppid": 1190157,
+      "start_ticks": "4229813"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191356,
+      "ppid": 1190157,
+      "start_ticks": "4229814"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191360,
+      "ppid": 1190157,
+      "start_ticks": "4229844"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191361,
+      "ppid": 1190157,
+      "start_ticks": "4229845"
+    },
+    {
+      "label": "command:base-prompt-regression-row1",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191363,
+      "ppid": 1190157,
+      "start_ticks": "4229847"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191364,
+      "ppid": 1190157,
+      "start_ticks": "4229847"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191369,
+      "ppid": 1190157,
+      "start_ticks": "4229848"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191422,
+      "ppid": 1190157,
+      "start_ticks": "4229949"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191423,
+      "ppid": 1190157,
+      "start_ticks": "4229949"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191426,
+      "ppid": 1190157,
+      "start_ticks": "4229970"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191427,
+      "ppid": 1190157,
+      "start_ticks": "4229971"
+    },
+    {
+      "label": "command:base-held-regression-row1",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191430,
+      "ppid": 1190157,
+      "start_ticks": "4229973"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191431,
+      "ppid": 1190157,
+      "start_ticks": "4229973"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191434,
+      "ppid": 1190157,
+      "start_ticks": "4229974"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191461,
+      "ppid": 1190157,
+      "start_ticks": "4230074"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191462,
+      "ppid": 1190157,
+      "start_ticks": "4230075"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191466,
+      "ppid": 1190157,
+      "start_ticks": "4230106"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191467,
+      "ppid": 1190157,
+      "start_ticks": "4230107"
+    },
+    {
+      "label": "command:base-kill-regression-row1",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191469,
+      "ppid": 1190157,
+      "start_ticks": "4230108"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191470,
+      "ppid": 1190157,
+      "start_ticks": "4230108"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191475,
+      "ppid": 1190157,
+      "start_ticks": "4230109"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191492,
+      "ppid": 1190157,
+      "start_ticks": "4230120"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191493,
+      "ppid": 1190157,
+      "start_ticks": "4230121"
+    },
+    {
+      "label": "command:base-final-drop-regression-row1",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191495,
+      "ppid": 1190157,
+      "start_ticks": "4230122"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191496,
+      "ppid": 1190157,
+      "start_ticks": "4230122"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191502,
+      "ppid": 1190157,
+      "start_ticks": "4230123"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191520,
+      "ppid": 1190157,
+      "start_ticks": "4230144"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191521,
+      "ppid": 1190157,
+      "start_ticks": "4230145"
+    },
+    {
+      "label": "command:green-row-1",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191523,
+      "ppid": 1190157,
+      "start_ticks": "4230146"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191524,
+      "ppid": 1190157,
+      "start_ticks": "4230146"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191529,
+      "ppid": 1190157,
+      "start_ticks": "4230147"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191553,
+      "ppid": 1190157,
+      "start_ticks": "4230228"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191554,
+      "ppid": 1190157,
+      "start_ticks": "4230229"
+    },
+    {
+      "label": "command:green-row-2",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191556,
+      "ppid": 1190157,
+      "start_ticks": "4230230"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191557,
+      "ppid": 1190157,
+      "start_ticks": "4230230"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191562,
+      "ppid": 1190157,
+      "start_ticks": "4230231"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191652,
+      "ppid": 1190157,
+      "start_ticks": "4230332"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191653,
+      "ppid": 1190157,
+      "start_ticks": "4230333"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191704,
+      "ppid": 1190157,
+      "start_ticks": "4230434"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191705,
+      "ppid": 1190157,
+      "start_ticks": "4230434"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191719,
+      "ppid": 1190157,
+      "start_ticks": "4230535"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191721,
+      "ppid": 1190157,
+      "start_ticks": "4230536"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191732,
+      "ppid": 1190157,
+      "start_ticks": "4230637"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191733,
+      "ppid": 1190157,
+      "start_ticks": "4230638"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191744,
+      "ppid": 1190157,
+      "start_ticks": "4230739"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191745,
+      "ppid": 1190157,
+      "start_ticks": "4230740"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191763,
+      "ppid": 1190157,
+      "start_ticks": "4230841"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191764,
+      "ppid": 1190157,
+      "start_ticks": "4230842"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191785,
+      "ppid": 1190157,
+      "start_ticks": "4230942"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191787,
+      "ppid": 1190157,
+      "start_ticks": "4230943"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191835,
+      "ppid": 1190157,
+      "start_ticks": "4231044"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191836,
+      "ppid": 1190157,
+      "start_ticks": "4231045"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191861,
+      "ppid": 1190157,
+      "start_ticks": "4231146"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191862,
+      "ppid": 1190157,
+      "start_ticks": "4231147"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191864,
+      "ppid": 1190157,
+      "start_ticks": "4231158"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191865,
+      "ppid": 1190157,
+      "start_ticks": "4231159"
+    },
+    {
+      "label": "command:green-row-3",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191868,
+      "ppid": 1190157,
+      "start_ticks": "4231160"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191869,
+      "ppid": 1190157,
+      "start_ticks": "4231160"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191874,
+      "ppid": 1190157,
+      "start_ticks": "4231161"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191904,
+      "ppid": 1190157,
+      "start_ticks": "4231262"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191905,
+      "ppid": 1190157,
+      "start_ticks": "4231263"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191916,
+      "ppid": 1190157,
+      "start_ticks": "4231364"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191917,
+      "ppid": 1190157,
+      "start_ticks": "4231365"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191929,
+      "ppid": 1190157,
+      "start_ticks": "4231465"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191930,
+      "ppid": 1190157,
+      "start_ticks": "4231466"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191953,
+      "ppid": 1190157,
+      "start_ticks": "4231567"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191954,
+      "ppid": 1190157,
+      "start_ticks": "4231568"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191985,
+      "ppid": 1190157,
+      "start_ticks": "4231669"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1191986,
+      "ppid": 1190157,
+      "start_ticks": "4231670"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1192033,
+      "ppid": 1190157,
+      "start_ticks": "4231771"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1192034,
+      "ppid": 1190157,
+      "start_ticks": "4231772"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1192040,
+      "ppid": 1190157,
+      "start_ticks": "4231823"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1192041,
+      "ppid": 1190157,
+      "start_ticks": "4231824"
+    },
+    {
+      "label": "command:green-row-4",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1192044,
+      "ppid": 1190157,
+      "start_ticks": "4231825"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1192045,
+      "ppid": 1190157,
+      "start_ticks": "4231825"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1192050,
+      "ppid": 1190157,
+      "start_ticks": "4231826"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1192082,
+      "ppid": 1190157,
+      "start_ticks": "4231927"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1192083,
+      "ppid": 1190157,
+      "start_ticks": "4231928"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1192094,
+      "ppid": 1190157,
+      "start_ticks": "4232029"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1192095,
+      "ppid": 1190157,
+      "start_ticks": "4232030"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1192106,
+      "ppid": 1190157,
+      "start_ticks": "4232131"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1192107,
+      "ppid": 1190157,
+      "start_ticks": "4232132"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1192130,
+      "ppid": 1190157,
+      "start_ticks": "4232232"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1192131,
+      "ppid": 1190157,
+      "start_ticks": "4232233"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1192162,
+      "ppid": 1190157,
+      "start_ticks": "4232334"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1192163,
+      "ppid": 1190157,
+      "start_ticks": "4232335"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1192210,
+      "ppid": 1190157,
+      "start_ticks": "4232436"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1192211,
+      "ppid": 1190157,
+      "start_ticks": "4232437"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1192216,
+      "ppid": 1190157,
+      "start_ticks": "4232478"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 1190156,
+      "pid": 1192217,
+      "ppid": 1190157,
+      "start_ticks": "4232479"
+    }
+  ],
+  "scope": "/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-105",
+  "stage": "/root/rhai-linux-managed-deadline-20261003-bcecd9eb-105",
+  "statuses": {
+    "outer-status.txt": 0,
+    "pid-readback-launcher.status": 0,
+    "pid-readback.status": 0,
+    "run-scoped.status": 0
+  }
+}

@@ -269,3 +269,16 @@ originals `../../all-tickets/linux-managed-final-drop102-evidence/`.
 
 This is one partial managed lifecycle criterion only. Ticket 06's broader
 feature/platform matrix and final release gates remain open.
+
+## Accepted Linux managed run deadline — native105, 2026-10-03
+
+At immutable source31a61e752d0ffb747be827475278e3fc5d9dbe30, real Engine run
+proves managed timeout, honest partial stdout/stderr, exact member/group closure
+and independent reaping while host/reaper/sentinel remain live. Four private
+Rust1.77.2 Linux feature rows and four affected base regressions pass; one named
+post-fullcleanup wrong-timeout control fails101 and source is restored. Combined
+review accepts78 originals/nine closure artifacts and fresh exact owned cleanup.
+See ../../all-tickets/linux-managed-deadline-proof.md, linux-managed-deadline-review.md
+and linux-managed-deadline105-evidence/. This is partial criterion closure only;
+OutputLimit, remaining lifecycle/fault/performance, other native platforms and
+final current-source release acceptance remain open.
