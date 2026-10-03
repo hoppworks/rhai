@@ -85,10 +85,9 @@ Instructions/roles faba3db3bef6891ad2c0b20d434963bb8fe9572d loaded by root,
 responsible Standard and same combined reviewer. Workhorse installed rules resolved
 at /var/home/workhorse/.agents/AGENTS.md and /var/home/workhorse/projects/agent-skills;
 SSH root has no ~/.agents. Read-only resolution/command-local safe.directory only.
-Last verified fork main77a4b3bf90a2551186c94eff97e91fecafebedf3; sole remote main,
-lowercase human author/committer. Previous goal turn PROGRESS: initial final-drop source and independent review
-identified async/timing/type gaps; cause count1 preserved, second repair underway.
-Current source repair accepted independently; overall scope remains incomplete.
+Last verified fork main4df297d8b503b77280360f16eea0702728c54e75; sole remote main,
+lowercase human author/committer. Current goal turn PROGRESS: final managed lease
+drop102 accepted and integrated with original evidence. Overall scope incomplete.
 
 ### Current coherent requirement: final managed client lease drop
 
@@ -110,8 +109,9 @@ infrastructure only; resumed same reviewer, no native rerun. Original
 optional launcher /proc812259/stat disappearance warning preserved; same combined
 reviewer confirmed strict terminal custody unaffected by ordinary exit race. Final combined
 review ACCEPTED the scoped final-client-lease criterion; responsible Standard
-correcting proof/mapping status before integration. Tickets03/06 remain open for
-remaining criteria. Root collecting exact acceptance commit and source integration.
+completed proof/mapping at60eb4799. Acceptance7173a89c and source integration
+4df297d8 pushed/readback on sole forkmain. Integrated non-scratch diff vs60eb
+is empty, testd0a8842c exact. Tickets03/06 remain open for remaining criteria.
 
 Cause final-drop-observation preserved: initial106f immediate async snapshot
 finding; first correction228132/d9e9 failed affected source review (one completed
@@ -124,6 +124,23 @@ linux-managed-final-drop-review.md preserves source, recipe and acceptance histo
 Execution retained original hardlimits600/585/540s including30sexport, twoCargo
 jobs, descendants16, preemptive1572864KiB and storage/RSS2097152KiB. No broad filter,
 no no_float/no_index or otherOS/releaseclaim. Root and writer owners unchanged.
+
+### Next authorized source package
+
+Same responsible Standard linux_managed_gap continues managed run deadline
+termination/closure, one remaining ticket03 criterion, source-only before review.
+Own writer may fast-forward accepted4df297d8, preserving unrelated untracked file.
+Public timeout alone must terminate managed members; no kill/lease-drop/watchdog
+substitute. Independent exact PIDFD/start/group/reaper and live sentinel/host
+boundary, meaningful post-cleanup control, truthful captures/timeout and exact
+cleanup remain mandatory. Reuse accepted custody mechanics and unaffected proofs.
+New deadline criterion source/native0;103 stage/launch unallocated. Ordinary
+30min active-work planning checkpoint, existing hard limits unchanged. Final-drop
+failurecount1 resolved; closed14/15 and stopped platform chains preserved. Next:
+freeze source/semantic test brief, one combined review, then affected native proof.
+No owned retained build or process; active protected owned worktrees reused.
+Raw libtest whitespace in immutable102 originals intentionally preserved/hashbound;
+authored docs/source diffcheck passes. Cost/token use remains unknown per package.
 
 ### Accepted current Linux managed subsets
 
