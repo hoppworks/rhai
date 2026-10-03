@@ -85,7 +85,7 @@ Instructions/roles faba3db3bef6891ad2c0b20d434963bb8fe9572d loaded by root,
 responsible Standard and same combined reviewer. Workhorse installed rules resolved
 at /var/home/workhorse/.agents/AGENTS.md and /var/home/workhorse/projects/agent-skills;
 SSH root has no ~/.agents. Read-only resolution/command-local safe.directory only.
-Last verified fork mainfae42da621ffaaa23dac71d9f4da70fea38c0491; sole remote main,
+Last verified accepted integration fork main6faf70be091dd52dff9987276d2e33492647bfbd; sole remote main,
 lowercase human author/committer. Native105 managed deadline accepted, exported,
 exactly cleaned and integrated. Current package: native106 OutputLimit frozen
 source53b/recipesc785 completed terminal0: three setup0, intended control101,
@@ -94,8 +94,8 @@ seven preexisting closures; exact hash-gated stage/scope/group retirement comple
 Same combined Expert actual acceptance ACCEPTED narrowly; original68hashes and
 strict control/readback independently reviewed. Immutable53b integration prepared.
 No retained native106 build; finite two-heavy exception expired. CumulativeUnix106,
-OutputLimitnative1; failedborrowcorrectioncount1 preserved. Next immutable53b integration/forksolemain push and exact remote read-back.
-Next escaped-pipe source-only writerf32afdd frozen, combined source review underway;
+OutputLimitnative1; failedborrowcorrectioncount1 preserved. Immutable53b integration6faf70be pushed; soleforkmain exactremote read-back PASS.
+Next escaped-pipe source-only writer5236086 frozen, combined affectedsource READY;
 compile/native/acceptance unproven. All other platform/performance gates remain open.
 
 ### Current coherent requirement: final managed client lease drop
@@ -1782,3 +1782,5 @@ Capacity route checkpoint 2026-10-03T18:44:43.638399+00:00: default one-heavy ru
 Native106 allocated 2026-10-03T18:50:23.707720+00:00: fresh guardPASS, prior foreignG47 exited; successor launcher1329948/start4447594 supervisor1329949/start4447596 exactvalidated. All Cargo/rustc in successor group, no third heavy run. Capacity32CPU/79,580,232KiB available/727,025,782,784bytes free, all13stagehashesPASS, scope/terminalabsent. Finite project exception identity refreshed without changing limits. CumulativeUnix106/OutputLimitnative1, acceptancepending; source53b/recipesc785 frozen, newer writerf32 escapedpipe excluded. Bounded600s launch next. Initial guard stale-group failure was read-only preflight, no native consumption or product correction.
 
 Native106 samecombinedactualacceptance ACCEPTED, review/proof/tickets03/06 partialclosure recorded. Immutable root non-scratchsource prepared53b, newerescapedpipe notintegrated. Escapedf32 initial3sourcefindings repaired523608648dcae99bc0f6b46eaf2bb91fa4ecc752; sameExpert affectedrecheck running, sameStandard recipespreparation source-only. No107allocation, no renewedhardchain.
+
+Native106 acceptedintegration6faf70be091dd52dff9987276d2e33492647bfbd pushed; independentlsremote confirmsONLYforkmain exactsamehash. Author/committer hoppworks<daniel@hoppworks.de>. Root non-scratch exceptprojectAGENTS equalsacceptedimmutable53b. Escapedpipe523 samecombinedaffectedSOURCE READY at testSHA5836af855f7410213367786e195c0b9b09c0da005cde37244cfa241baf59c4cb; sourcefindingsresolvedfirstbatch, no completedfailedcorrection. SameStandard source-onlyboundedrecipespreparation, native107unallocated. Overallactiveincomplete; no extra approval needed for ordinaryauthorizedwork.
