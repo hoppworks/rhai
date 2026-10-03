@@ -82,7 +82,7 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 ## Current step and next action
 
 Current instructions/roles revision faba3db3bef6891ad2c0b20d434963bb8fe9572d.
-Latest independently read-back fork main ca7636170f65a933617be03fa32c2b6c79f9cf3f;
+Latest independently read-back fork main d736bf2fdadcc901719612735e17d4903e375300;
 ONLY remote main. Lowercase human author and committer verified. Accepted96 subset
 is mapped explicitly to open tickets03/06; checkpoint/source remains unchanged.
 Workhorse installed revision independently read back at
@@ -253,9 +253,20 @@ Raw100 original42 hashes and106 absence rows independently rechecked locally.
 Same combined reviewer follow-up dispatch unavailable (agent thread limit); review
 pending, no acceptance claimed. Expert15 fresh non-fork dispatched; responsible
 Standard notified to preserve source and wait for answer before correction.
-Next: same combined reviewer verifies raw100 custody; independent Expert15
-explains the contradicted exit diagnosis and proposes one finite follow-up repair
-with strict reaper_ok criterion and affected prompt/held regressions unchanged.
+Expert15 ANSWER received: archived SPAWN leader-record lacks start=, unlike normal-exit
+producer. Guard exact-start parser keeps pending until18s despite corrected filename.
+Answer escalations/15-managed-kill-reaper-exit-observation.answer.md; revision
+faba3db confirmed. ONE bounded follow-up dispatched to same responsible Standard:
+write live exact Linux start in atomic spawn record; save producer/PIDFD comparison
+and assert only after full cleanup; strict reaper_ok/20s watchdog unchanged. Source/
+recipe-only preparation101; no native allocation yet. Same combined reviewer
+successfully resumed for raw100 custody plus subsequent affected source/pin check.
+Follow-up native estimate one launch after readiness and fresh slot inventory;
+retain600/585/540s, jobs2/desc16 and original resource caps. Failure/contradiction
+stops this cause; no second Expert or renewal. Current package one failed correction,
+sole Expert15 answer, follow-up preparation in progress, Unix100 consumed.
+Next: collect responsible correction, same combined affected review, then one
+bounded native101 original8 invocations if READY and machine capacity permits.
 
 ### Accepted current Linux non-process package
 
