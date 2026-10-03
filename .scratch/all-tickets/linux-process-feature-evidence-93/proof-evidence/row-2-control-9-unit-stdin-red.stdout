@@ -1,0 +1,11 @@
+
+running 1 test
+test unit_stdin_means_immediate_eof ... FAILED
+
+failures:
+
+failures:
+    unit_stdin_means_immediate_eof
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 40 filtered out; finished in 0.10s
+

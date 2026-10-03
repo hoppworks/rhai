@@ -1,0 +1,170 @@
+{
+  "acceptance_claim": false,
+  "all_commands_passed": false,
+  "baseline_test_sha256": "379db748d4b84a60538d172059df1feafaa62b337eaf49c1178d3e6467d40c74",
+  "commands": [
+    {
+      "argv": [
+        "/root/.cargo/bin/rustup",
+        "toolchain",
+        "install",
+        "1.77.2-x86_64-unknown-linux-gnu",
+        "--profile",
+        "minimal",
+        "--no-self-update"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa",
+      "env_overrides": {},
+      "expected_status": 0,
+      "finished_monotonic_seconds": 8.246,
+      "name": "rustup-install",
+      "spawned": true,
+      "started_monotonic_seconds": 0.418,
+      "status": 0,
+      "stderr": "evidence/rustup-install.stderr",
+      "stdout": "evidence/rustup-install.stdout"
+    },
+    {
+      "argv": [
+        "/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+        "--version",
+        "--verbose"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa/source",
+      "env_overrides": {},
+      "expected_status": 0,
+      "finished_monotonic_seconds": 8.371,
+      "name": "rustc-version",
+      "spawned": true,
+      "started_monotonic_seconds": 8.246,
+      "status": 0,
+      "stderr": "evidence/rustc-version.stderr",
+      "stdout": "evidence/rustc-version.stdout"
+    },
+    {
+      "argv": [
+        "/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+        "--version",
+        "--verbose"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa/source",
+      "env_overrides": {},
+      "expected_status": 0,
+      "finished_monotonic_seconds": 8.495,
+      "name": "cargo-version",
+      "spawned": true,
+      "started_monotonic_seconds": 8.371,
+      "status": 0,
+      "stderr": "evidence/cargo-version.stderr",
+      "stdout": "evidence/cargo-version.stdout"
+    },
+    {
+      "argv": [
+        "/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys,only_i32,no_float",
+        "--test",
+        "sys_process",
+        "--no-run"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa/source",
+      "env_overrides": {},
+      "expected_status": 101,
+      "finished_monotonic_seconds": 21.256,
+      "name": "baseline-no-run-only-i32-no-float",
+      "spawned": true,
+      "started_monotonic_seconds": 8.495,
+      "status": 101,
+      "stderr": "evidence/baseline-no-run-only-i32-no-float.stderr",
+      "stdout": "evidence/baseline-no-run-only-i32-no-float.stdout"
+    },
+    {
+      "argv": [
+        "/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys,unchecked",
+        "--test",
+        "sys_process",
+        "--no-run"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa/source",
+      "env_overrides": {},
+      "expected_status": 101,
+      "finished_monotonic_seconds": 26.379,
+      "name": "baseline-no-run-unchecked",
+      "spawned": true,
+      "started_monotonic_seconds": 21.256,
+      "status": 101,
+      "stderr": "evidence/baseline-no-run-unchecked.stderr",
+      "stdout": "evidence/baseline-no-run-unchecked.stdout"
+    },
+    {
+      "argv": [
+        "patch",
+        "-p1",
+        "--batch",
+        "--forward",
+        "-i",
+        "/root/rhai-linux-process-feature-20261003-6c451c5c-92/process-feature.patch"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa/source",
+      "env_overrides": {},
+      "expected_status": 0,
+      "name": "apply-process-feature-patch",
+      "started_monotonic_seconds": 26.379,
+      "stderr": "evidence/apply-process-feature-patch.stderr",
+      "stdout": "evidence/apply-process-feature-patch.stdout"
+    }
+  ],
+  "compatible_lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "controls": [],
+  "exact_tests": [
+    "run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data",
+    "process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one",
+    "zero_output_cap_reports_output_limit_with_an_empty_retained_prefix",
+    "run_deadline_returns_bounded_partial_output_after_terminating_child",
+    "unit_timeout_disables_configured_default_deadline",
+    "unit_stdin_means_immediate_eof",
+    "process_cwd_uses_the_opened_filesystem_capability_after_root_replacement",
+    "lossy_run_reports_engine_limit_expansion_without_returning_truncated_text",
+    "process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps",
+    "run_deadline_with_blocked_stdin_and_active_stdout_stderr",
+    "process_script_output_option_cannot_raise_the_host_cap"
+  ],
+  "feature_rows": [
+    "testing-environ,sys",
+    "testing-environ,sys,only_i32,no_float",
+    "testing-environ,sys,unchecked"
+  ],
+  "limitations": [
+    "Test-internal PID records and ESRCH checks are independent readbacks; short-lived fixture PIDs are not guaranteed in periodic process samples.",
+    "The cwd positive case has no PID receipt; denied escape verifies no fixture record was written, not absence of every transient process.",
+    "Raw/text capture iterations reuse a record path, so receipts do not uniquely map PID to each API call.",
+    "Deadline checks prove configured timeout behavior and selected partial-output assertions; no separate upper-latency guarantee is claimed."
+  ],
+  "negative_control_count_expected_by_row": [
+    2,
+    16,
+    15
+  ],
+  "patched_test_sha256": "8ec4d456672338920249446618ce768bc2fa1d29798d571dca1e897db87a076b",
+  "positive_count_expected_by_row": [
+    11,
+    11,
+    10
+  ],
+  "process_feature_patch_sha256": "5cf5d4533ca3adb99a9313e710b91f184bf5f2ee90ce2e215644fddf71b17693",
+  "restoration_error": null,
+  "source_restored": false,
+  "source_revision": "6c451c5c99e751e50023a08912a035a2c8754ff6",
+  "test_file": "tests/sys_process.rs",
+  "tested_source_identity": {
+    "baseline_revision": "6c451c5c99e751e50023a08912a035a2c8754ff6",
+    "patch_sha256": "5cf5d4533ca3adb99a9313e710b91f184bf5f2ee90ce2e215644fddf71b17693",
+    "patched_test_sha256": "8ec4d456672338920249446618ce768bc2fa1d29798d571dca1e897db87a076b"
+  }
+}

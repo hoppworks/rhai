@@ -1,0 +1,8 @@
+{
+  "baseline_revision": "6c451c5c99e751e50023a08912a035a2c8754ff6",
+  "baseline_test_sha256": "379db748d4b84a60538d172059df1feafaa62b337eaf49c1178d3e6467d40c74",
+  "patch_sha256": "5cf5d4533ca3adb99a9313e710b91f184bf5f2ee90ce2e215644fddf71b17693",
+  "patched_test_sha256": "8ec4d456672338920249446618ce768bc2fa1d29798d571dca1e897db87a076b",
+  "private_source_only": true,
+  "strict_patch_applier_sha256": "4533ca87a0e668225e34382d259eb439edfa4a12bea608755e22fce95ddb807f"
+}

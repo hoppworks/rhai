@@ -1,0 +1,74 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+helper	768978	768977	768977	1493901	python3 /root/rhai-linux-process-feature-20261003-6c451c5c-92/linux-process-feature-proof.py
+scoped-supervisor	768977	768974	768977	1493900	/usr/bin/python3 /var/roothome/rhai-linux-process-feature-20261003-6c451c5c-92/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-process-feature-20261003-6c451c5c-92/linux-process-feature-proof.py
+command:rustup-install	768983	768978	768977	1493946	/root/.cargo/bin/rustup toolchain install 1.77.2-x86_64-unknown-linux-gnu --profile minimal --no-self-update
+command:du	768984	768978	768977	1493946	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	769002	768978	768977	1493947	/bin/ps -e -o pid=,ppid=,rss=
+command:du	769022	768978	768977	1494048	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	769023	768978	768977	1494048	/bin/ps -e -o pid=,ppid=,rss=
+command:du	769035	768978	768977	1494149	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	769036	768978	768977	1494150	/bin/ps -e -o pid=,ppid=,rss=
+command:du	769047	768978	768977	1494251	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	769049	768978	768977	1494251	/bin/ps -e -o pid=,ppid=,rss=
+command:du	769060	768978	768977	1494352	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	769061	768978	768977	1494353	/bin/ps -e -o pid=,ppid=,rss=
+command:du	769080	768978	768977	1494453	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	769081	768978	768977	1494454	/bin/ps -e -o pid=,ppid=,rss=
+command:du	769101	768978	768977	1494555	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	769102	768978	768977	1494555	/bin/ps -e -o pid=,ppid=,rss=
+command:du	769113	768978	768977	1494656	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	769114	768978	768977	1494657	/bin/ps -e -o pid=,ppid=,rss=
+command:du	769124	768978	768977	1494728	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	769125	768978	768977	1494728	/bin/ps -e -o pid=,ppid=,rss=
+command:rustc-version	769126	768978	768977	1494729	/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose
+command:du	769127	768978	768977	1494729	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	769128	768978	768977	1494730	/bin/ps -e -o pid=,ppid=,rss=
+command:du	769130	768978	768977	1494740	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	769131	768978	768977	1494741	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-version	769132	768978	768977	1494742	/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose
+command:du	769133	768978	768977	1494742	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	769145	768978	768977	1494742	/bin/ps -e -o pid=,ppid=,rss=
+command:du	769147	768978	768977	1494753	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	769148	768978	768977	1494753	/bin/ps -e -o pid=,ppid=,rss=
+command:baseline-no-run-only-i32-no-float	769149	768978	768977	1494754	/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,only_i32,no_float --test sys_process --no-run
+command:du	769150	768978	768977	1494754	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	769153	768978	768977	1494755	/bin/ps -e -o pid=,ppid=,rss=
+command:du	769169	768978	768977	1494855	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	769170	768978	768977	1494856	/bin/ps -e -o pid=,ppid=,rss=
+command:du	769184	768978	768977	1494957	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	769185	768978	768977	1494957	/bin/ps -e -o pid=,ppid=,rss=
+command:du	769196	768978	768977	1495058	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	769197	768978	768977	1495059	/bin/ps -e -o pid=,ppid=,rss=
+command:du	769309	768978	768977	1495160	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	769312	768978	768977	1495161	/bin/ps -e -o pid=,ppid=,rss=
+command:du	769479	768978	768977	1495262	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	769482	768978	768977	1495263	/bin/ps -e -o pid=,ppid=,rss=
+command:du	769759	768978	768977	1495364	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	769763	768978	768977	1495365	/bin/ps -e -o pid=,ppid=,rss=
+command:du	769826	768978	768977	1495466	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	769827	768978	768977	1495467	/bin/ps -e -o pid=,ppid=,rss=
+command:du	769904	768978	768977	1495568	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	769905	768978	768977	1495569	/bin/ps -e -o pid=,ppid=,rss=
+command:du	770012	768978	768977	1495670	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	770014	768978	768977	1495671	/bin/ps -e -o pid=,ppid=,rss=
+command:du	770056	768978	768977	1495772	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	770058	768978	768977	1495773	/bin/ps -e -o pid=,ppid=,rss=
+command:du	770069	768978	768977	1495874	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	770070	768978	768977	1495875	/bin/ps -e -o pid=,ppid=,rss=
+command:du	770097	768978	768977	1495976	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	770098	768978	768977	1495977	/bin/ps -e -o pid=,ppid=,rss=
+command:du	770120	768978	768977	1496028	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	770121	768978	768977	1496029	/bin/ps -e -o pid=,ppid=,rss=
+command:baseline-no-run-unchecked	770122	768978	768977	1496030	/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,unchecked --test sys_process --no-run
+command:du	770123	768978	768977	1496030	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	770128	768978	768977	1496031	/bin/ps -e -o pid=,ppid=,rss=
+command:du	770156	768978	768977	1496132	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	770157	768978	768977	1496133	/bin/ps -e -o pid=,ppid=,rss=
+command:du	770168	768978	768977	1496234	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	770169	768978	768977	1496235	/bin/ps -e -o pid=,ppid=,rss=
+command:du	770181	768978	768977	1496336	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	770182	768978	768977	1496337	/bin/ps -e -o pid=,ppid=,rss=
+command:du	770207	768978	768977	1496438	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	770208	768978	768977	1496439	/bin/ps -e -o pid=,ppid=,rss=
+command:du	770238	768978	768977	1496540	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command:ps	770239	768978	768977	1496542	/bin/ps -e -o pid=,ppid=,rss=

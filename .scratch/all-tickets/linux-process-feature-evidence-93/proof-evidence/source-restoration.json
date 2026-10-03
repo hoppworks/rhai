@@ -1,0 +1,53 @@
+{
+  "cargo_lock_sha256_after_execution": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "manifests_sha256_after_restoration": {
+    ".scratch/all-tickets/macos-managed-capture-overlay/Cargo.toml": "4e8b305d4fd30889adbb2e1c03d6461a6c3efd58ad5ac55327c2f3523c584579",
+    ".scratch/process-prototype/Cargo.toml": "b26b20e622954380ffb94aba823f0863006b34db6be3c7190ddc91939d58ff43",
+    ".scratch/process-rust-io/Cargo.toml": "3791ba60a8a4373e3e23b99d2171254cdeb4b9a0c46daf2f9c10161067194fea",
+    "Cargo.toml": "bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec",
+    "codegen/Cargo.toml": "1ad774a34019adecf5321498e443999d0a6c38412e2eb77b06f4ccc66aa64dc3",
+    "codegen/tests/custom_root/Cargo.toml": "1000e24c121e5a377db8b38926f4450166460ddbe3c9863811168dbfab490d86",
+    "fuzz/Cargo.toml": "7b65fd0c1d36908f502ec12a18c86a299cafbc3415187731d8330053e4244b46",
+    "no_std/no_std_test/Cargo.toml": "b05325f695dbce8aeb8d62f7b2c5e4bb888e0ca782050d3c11bceb6a0804f152"
+  },
+  "original_test_sha256": {
+    "tests/sys_process.rs": "8ec4d456672338920249446618ce768bc2fa1d29798d571dca1e897db87a076b"
+  },
+  "private_overlay_sha256": {
+    "row-0-host-cap-stderr": "0677411acff611391b5bc5e3c231c717c793e9ee8b6d014adb61cf971f53d47c",
+    "row-0-host-cap-stdout": "79373db4249d89eaa0d70ebd44b9d9e1ef347d434aec845784a1ea8cfa5d74cf",
+    "row-1-capture-raw-code0": "f7a3c8c1c0e4a741af360f00de8e72c7b94ba9725fc40bc0df6bf7c4b08f607c",
+    "row-1-capture-text-code7": "6594c4814f2c1a94bd9482e8aa9f6e1eb9e8a6c4dde74241772d10e73f09068f",
+    "row-1-cwd-denial": "2b12e5d8dec69115c273995532d4ea2937e86c1a0519ce6bb8d2bd1a64d0de49",
+    "row-1-deadline-io": "8a6bd5a9e90d54afad24ac614a5535a122dbdfc16649229d967a3ad4bafc1d52",
+    "row-1-deadline-raw": "86b2d348b1c9253290ec586368043dc0bdff76df616ae328788cd7d100f8aa16",
+    "row-1-deadline-text": "85a74db4fb1184d70604bc1f6f3046b517558731842809a058faeec38e537b1a",
+    "row-1-host-cap-stderr": "0677411acff611391b5bc5e3c231c717c793e9ee8b6d014adb61cf971f53d47c",
+    "row-1-host-cap-stdout": "79373db4249d89eaa0d70ebd44b9d9e1ef347d434aec845784a1ea8cfa5d74cf",
+    "row-1-lossy-expansion": "2a9bbcc8a3c7618424bec26e3a8a8d6c3a79a3ac4896ad831fca2fe2096afdd6",
+    "row-1-overflow-stderr": "6bfbaf2536383325d4518dfa6fa7dd0ca69de9e1a96f4e360be5a090d166ba77",
+    "row-1-overflow-stdout": "1497d778ca3bd4c92a49e5814d509db312ea1fa011ec61a81b546aed11181225",
+    "row-1-simultaneous-io": "f7aea879ed657e3debf863fb3784ff55396e5be1da166d85537fc59faf6c476d",
+    "row-1-unit-stdin": "e5b93e714a92beeddefa3f66d68e9396ada4f59c59ef18b804c1d0c6796fdb13",
+    "row-1-unit-timeout": "b80d760b078ff8283dfd2de9cd8fb5d3aeda4cdb224b8a2420b763e8856caef5",
+    "row-1-zero-stderr": "b34f279732d388e3eb0981676ddb9b8d56db2fa31a009d3392a1d9468f0aee3a",
+    "row-1-zero-stdout": "78509722cd5c8d6869a3f25a1deb63c8682a7349fb0767ed6b5befe8fa1feb20",
+    "row-2-capture-raw-code0": "f7a3c8c1c0e4a741af360f00de8e72c7b94ba9725fc40bc0df6bf7c4b08f607c",
+    "row-2-capture-text-code7": "6594c4814f2c1a94bd9482e8aa9f6e1eb9e8a6c4dde74241772d10e73f09068f",
+    "row-2-cwd-denial": "2b12e5d8dec69115c273995532d4ea2937e86c1a0519ce6bb8d2bd1a64d0de49",
+    "row-2-deadline-io": "8a6bd5a9e90d54afad24ac614a5535a122dbdfc16649229d967a3ad4bafc1d52",
+    "row-2-deadline-raw": "86b2d348b1c9253290ec586368043dc0bdff76df616ae328788cd7d100f8aa16",
+    "row-2-deadline-text": "85a74db4fb1184d70604bc1f6f3046b517558731842809a058faeec38e537b1a",
+    "row-2-host-cap-stderr": "0677411acff611391b5bc5e3c231c717c793e9ee8b6d014adb61cf971f53d47c",
+    "row-2-host-cap-stdout": "79373db4249d89eaa0d70ebd44b9d9e1ef347d434aec845784a1ea8cfa5d74cf",
+    "row-2-overflow-stderr": "6bfbaf2536383325d4518dfa6fa7dd0ca69de9e1a96f4e360be5a090d166ba77",
+    "row-2-overflow-stdout": "1497d778ca3bd4c92a49e5814d509db312ea1fa011ec61a81b546aed11181225",
+    "row-2-simultaneous-io": "f7aea879ed657e3debf863fb3784ff55396e5be1da166d85537fc59faf6c476d",
+    "row-2-unit-stdin": "e5b93e714a92beeddefa3f66d68e9396ada4f59c59ef18b804c1d0c6796fdb13",
+    "row-2-unit-timeout": "b80d760b078ff8283dfd2de9cd8fb5d3aeda4cdb224b8a2420b763e8856caef5",
+    "row-2-zero-stderr": "b34f279732d388e3eb0981676ddb9b8d56db2fa31a009d3392a1d9468f0aee3a",
+    "row-2-zero-stdout": "78509722cd5c8d6869a3f25a1deb63c8682a7349fb0767ed6b5befe8fa1feb20"
+  },
+  "restoration_error": null,
+  "restored_test_matches_original": true
+}

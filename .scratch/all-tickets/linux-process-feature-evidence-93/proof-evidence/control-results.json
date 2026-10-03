@@ -1,0 +1,623 @@
+[
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-0-control-0-host-cap-stdout-red",
+    "required_diagnostics": [
+      "test process_script_output_option_cannot_raise_the_host_cap ... FAILED",
+      "host-cap-stdout reap=ESRCH pid=",
+      "host-cap-stdout intended_wrong_expectation=true",
+      "assertion `left == right` failed",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-0-control-1-host-cap-stderr-red",
+    "required_diagnostics": [
+      "test process_script_output_option_cannot_raise_the_host_cap ... FAILED",
+      "host-cap-stderr reap=ESRCH pid=",
+      "host-cap-stderr intended_wrong_expectation=true",
+      "assertion `left == right` failed",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-0-test-0-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-0-test-1-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-0-test-2-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-0-test-3-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-0-test-4-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-0-test-5-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-0-test-6-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-0-test-7-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-0-test-8-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-0-test-9-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-0-test-10-green",
+    "status": 0
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-1-control-0-capture-raw-code0-red",
+    "required_diagnostics": [
+      "test run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data ... FAILED",
+      "capture-raw-code0 reap=ESRCH pid=",
+      "capture-raw-code0 intended_wrong_expectation=true",
+      "capture raw expected deliberate mismatch",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-1-control-1-capture-text-code7-red",
+    "required_diagnostics": [
+      "test run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data ... FAILED",
+      "capture-text-code7 reap=ESRCH pid=",
+      "capture-text-code7 intended_wrong_expectation=true",
+      "capture text expected deliberate mismatch",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-1-control-2-overflow-stdout-red",
+    "required_diagnostics": [
+      "test process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one ... FAILED",
+      "overflow-stdout reap=ESRCH pid=",
+      "overflow-stdout intended_wrong_expectation=true",
+      "assertion `left == right` failed",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-1-control-3-overflow-stderr-red",
+    "required_diagnostics": [
+      "test process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one ... FAILED",
+      "overflow-stderr reap=ESRCH pid=",
+      "overflow-stderr intended_wrong_expectation=true",
+      "assertion `left == right` failed",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-1-control-4-zero-stdout-red",
+    "required_diagnostics": [
+      "test zero_output_cap_reports_output_limit_with_an_empty_retained_prefix ... FAILED",
+      "zero-stdout reap=ESRCH pid=",
+      "zero-stdout intended_wrong_expectation=true",
+      "assertion `left == right` failed",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-1-control-5-zero-stderr-red",
+    "required_diagnostics": [
+      "test zero_output_cap_reports_output_limit_with_an_empty_retained_prefix ... FAILED",
+      "zero-stderr reap=ESRCH pid=",
+      "zero-stderr intended_wrong_expectation=true",
+      "assertion `left == right` failed",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-1-control-6-deadline-raw-red",
+    "required_diagnostics": [
+      "test run_deadline_returns_bounded_partial_output_after_terminating_child ... FAILED",
+      "deadline-raw reap=ESRCH pid=",
+      "deadline-raw intended_wrong_expectation=true",
+      "deadline-raw expected wrong-out marker",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-1-control-7-deadline-text-red",
+    "required_diagnostics": [
+      "test run_deadline_returns_bounded_partial_output_after_terminating_child ... FAILED",
+      "deadline-text reap=ESRCH pid=",
+      "deadline-text intended_wrong_expectation=true",
+      "deadline-text expected wrong-out marker",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-1-control-8-unit-timeout-red",
+    "required_diagnostics": [
+      "test unit_timeout_disables_configured_default_deadline ... FAILED",
+      "unit-timeout reap=ESRCH pid=",
+      "unit-timeout intended_wrong_expectation=true",
+      "unit-timeout expected timed_out=true",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-1-control-9-unit-stdin-red",
+    "required_diagnostics": [
+      "test unit_stdin_means_immediate_eof ... FAILED",
+      "unit-stdin reap=ESRCH pid=",
+      "unit-stdin intended_wrong_expectation=true",
+      "unit-stdin expected deliberately wrong bytes",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-1-control-10-cwd-denial-red",
+    "required_diagnostics": [
+      "test process_cwd_uses_the_opened_filesystem_capability_after_root_replacement ... FAILED",
+      "cwd attempted-record-absent=true",
+      "cwd-denial intended_wrong_expectation=true",
+      "cwd-denial wrong-process-option expectation",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-1-control-11-lossy-expansion-red",
+    "required_diagnostics": [
+      "test lossy_run_reports_engine_limit_expansion_without_returning_truncated_text ... FAILED",
+      "lossy-expansion reap=ESRCH pid=",
+      "lossy-expansion intended_wrong_expectation=true",
+      "lossy-expansion expected wrong final byte",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-1-control-12-simultaneous-io-red",
+    "required_diagnostics": [
+      "test process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps ... FAILED",
+      "simultaneous-io reap=ESRCH pid=",
+      "simultaneous-io intended_wrong_expectation=true",
+      "stdout differs at byte",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-1-control-13-deadline-io-red",
+    "required_diagnostics": [
+      "test run_deadline_with_blocked_stdin_and_active_stdout_stderr ... FAILED",
+      "deadline-io reap=ESRCH pid=",
+      "deadline-io intended_wrong_expectation=true",
+      "stderr active-stream marker missing",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-1-control-14-host-cap-stdout-red",
+    "required_diagnostics": [
+      "test process_script_output_option_cannot_raise_the_host_cap ... FAILED",
+      "host-cap-stdout reap=ESRCH pid=",
+      "host-cap-stdout intended_wrong_expectation=true",
+      "assertion `left == right` failed",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-1-control-15-host-cap-stderr-red",
+    "required_diagnostics": [
+      "test process_script_output_option_cannot_raise_the_host_cap ... FAILED",
+      "host-cap-stderr reap=ESRCH pid=",
+      "host-cap-stderr intended_wrong_expectation=true",
+      "assertion `left == right` failed",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-1-test-0-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-1-test-1-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-1-test-2-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-1-test-3-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-1-test-4-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-1-test-5-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-1-test-6-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-1-test-7-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-1-test-8-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-1-test-9-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-1-test-10-green",
+    "status": 0
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-2-control-0-capture-raw-code0-red",
+    "required_diagnostics": [
+      "test run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data ... FAILED",
+      "capture-raw-code0 reap=ESRCH pid=",
+      "capture-raw-code0 intended_wrong_expectation=true",
+      "capture raw expected deliberate mismatch",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-2-control-1-capture-text-code7-red",
+    "required_diagnostics": [
+      "test run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data ... FAILED",
+      "capture-text-code7 reap=ESRCH pid=",
+      "capture-text-code7 intended_wrong_expectation=true",
+      "capture text expected deliberate mismatch",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-2-control-2-overflow-stdout-red",
+    "required_diagnostics": [
+      "test process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one ... FAILED",
+      "overflow-stdout reap=ESRCH pid=",
+      "overflow-stdout intended_wrong_expectation=true",
+      "assertion `left == right` failed",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-2-control-3-overflow-stderr-red",
+    "required_diagnostics": [
+      "test process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one ... FAILED",
+      "overflow-stderr reap=ESRCH pid=",
+      "overflow-stderr intended_wrong_expectation=true",
+      "assertion `left == right` failed",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-2-control-4-zero-stdout-red",
+    "required_diagnostics": [
+      "test zero_output_cap_reports_output_limit_with_an_empty_retained_prefix ... FAILED",
+      "zero-stdout reap=ESRCH pid=",
+      "zero-stdout intended_wrong_expectation=true",
+      "assertion `left == right` failed",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-2-control-5-zero-stderr-red",
+    "required_diagnostics": [
+      "test zero_output_cap_reports_output_limit_with_an_empty_retained_prefix ... FAILED",
+      "zero-stderr reap=ESRCH pid=",
+      "zero-stderr intended_wrong_expectation=true",
+      "assertion `left == right` failed",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-2-control-6-deadline-raw-red",
+    "required_diagnostics": [
+      "test run_deadline_returns_bounded_partial_output_after_terminating_child ... FAILED",
+      "deadline-raw reap=ESRCH pid=",
+      "deadline-raw intended_wrong_expectation=true",
+      "deadline-raw expected wrong-out marker",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-2-control-7-deadline-text-red",
+    "required_diagnostics": [
+      "test run_deadline_returns_bounded_partial_output_after_terminating_child ... FAILED",
+      "deadline-text reap=ESRCH pid=",
+      "deadline-text intended_wrong_expectation=true",
+      "deadline-text expected wrong-out marker",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-2-control-8-unit-timeout-red",
+    "required_diagnostics": [
+      "test unit_timeout_disables_configured_default_deadline ... FAILED",
+      "unit-timeout reap=ESRCH pid=",
+      "unit-timeout intended_wrong_expectation=true",
+      "unit-timeout expected timed_out=true",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-2-control-9-unit-stdin-red",
+    "required_diagnostics": [
+      "test unit_stdin_means_immediate_eof ... FAILED",
+      "unit-stdin reap=ESRCH pid=",
+      "unit-stdin intended_wrong_expectation=true",
+      "unit-stdin expected deliberately wrong bytes",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-2-control-10-cwd-denial-red",
+    "required_diagnostics": [
+      "test process_cwd_uses_the_opened_filesystem_capability_after_root_replacement ... FAILED",
+      "cwd attempted-record-absent=true",
+      "cwd-denial intended_wrong_expectation=true",
+      "cwd-denial wrong-process-option expectation",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-2-control-11-simultaneous-io-red",
+    "required_diagnostics": [
+      "test process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps ... FAILED",
+      "simultaneous-io reap=ESRCH pid=",
+      "simultaneous-io intended_wrong_expectation=true",
+      "stdout differs at byte",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-2-control-12-deadline-io-red",
+    "required_diagnostics": [
+      "test run_deadline_with_blocked_stdin_and_active_stdout_stderr ... FAILED",
+      "deadline-io reap=ESRCH pid=",
+      "deadline-io intended_wrong_expectation=true",
+      "stderr active-stream marker missing",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-2-control-13-host-cap-stdout-red",
+    "required_diagnostics": [
+      "test process_script_output_option_cannot_raise_the_host_cap ... FAILED",
+      "host-cap-stdout reap=ESRCH pid=",
+      "host-cap-stdout intended_wrong_expectation=true",
+      "assertion `left == right` failed",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-2-control-14-host-cap-stderr-red",
+    "required_diagnostics": [
+      "test process_script_output_option_cannot_raise_the_host_cap ... FAILED",
+      "host-cap-stderr reap=ESRCH pid=",
+      "host-cap-stderr intended_wrong_expectation=true",
+      "assertion `left == right` failed",
+      "test result: FAILED. 0 passed; 1 failed;"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-2-test-0-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-2-test-1-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-2-test-2-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-2-test-3-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-2-test-4-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-2-test-5-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-2-test-6-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-2-test-7-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-2-test-8-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-2-test-9-green",
+    "status": 0
+  }
+]

@@ -181,3 +181,29 @@ Frozen a2d7a8c2 with lock2ba4, private Rust/Cargo1.77.2 on native Linux7.2.7 pas
 ## Native Linux scalar process feature rows — 2026-10-03
 
 Frozen2a8fdc49, private Rust/Cargo1.77.2 and compatible lock2ba4 pass the exact public scalar process test under no_index and combined sys/net/no_index/sync/metadata. Each meaningful wrong-CWD assertion failed101, exact test bytes were restored and the real Engine/child execution passed. Child PID record/CWD readback, ESRCH reaping, complete output/success/code0 and absence of run_raw are covered. Fresh independent closure checks confirm131 PID/start identities and four child PIDs absent, groups empty and runtime/scope removed. Original logs and proof applicability are in ../../all-tickets/linux-scalar-process-proof.md. Unix cumulative native count85; historical measurement85 remains unlaunched. This closes these two narrow process feature criteria; wider process/platform/release requirements remain open.
+
+## Linux integer-only and unchecked process subset — 2026-10-03
+
+Native invocation 93 uses frozen `6c451c5c` plus the exact reviewed test patch
+`5cf5d453`; production is unchanged. Private Rust/Cargo 1.77.2, compatible lock
+`2ba4`, and three rows (`sys`, `sys+only_i32+no_float`, `sys+unchecked`, each with
+`testing-environ`) pass 32 original exact tests and 33 intended assertion controls.
+Independent combined review accepts the targeted feature compatibility and host
+output-cap criteria. Scripts requesting 8192 bytes cannot raise the host's
+4096-byte cap for either stream; real child records and reaping precede exact
+prefix/error checks. The helper's INT-width and unchecked Engine API compiler
+regressions are reproduced separately and repaired in tests.
+
+Fractional deadlines under `no_float` are host defaults; fractional per-call
+script values are not proven. The unchecked Engine expansion criterion is
+excluded, not passed. Existing normal-row sensitivity from invocations 89/90 is
+reused; new feature controls cover selected branches, not every prior assertion.
+Original evidence, combined review, all source/overlay identities and independent
+445 PID/start plus 42 fixture-PID closure receipts are referenced in
+`../../all-tickets/linux-process-feature-proof.md`. All 251 owned stage files and
+five subdirectories were retired after export verification. Failed preparation
+invocations 91/92 and their causes remain preserved without product acceptance.
+
+This partially closes the Linux process feature requirements only. Managed
+groups, remaining fault/lifecycle criteria, performance, other native platforms
+and final release acceptance remain open.

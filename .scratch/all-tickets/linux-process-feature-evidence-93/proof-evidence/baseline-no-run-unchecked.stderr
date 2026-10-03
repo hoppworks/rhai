@@ -1,0 +1,134 @@
+   Compiling rhai v1.26.1 (/var/roothome/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-93/agent-build-xck6hk6g/source)
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: unused variable: `ctx`
+   --> src/packages/sys/fs.rs:566:36
+    |
+566 |     .set_into_module(module, move |ctx: NativeCallContext, file: FileHandle| -> Res<String> {
+    |                                    ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: unused variable: `ctx`
+   --> src/packages/sys/fs.rs:591:36
+    |
+591 |     .set_into_module(module, move |ctx: NativeCallContext, file: FileHandle, len: INT| -> Res<String> {
+    |                                    ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/sys/fs.rs:619:40
+    |
+619 |         .set_into_module(module, move |ctx: NativeCallContext, file: FileHandle| -> Res<crate::Blob> {
+    |                                        ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/sys/fs.rs:636:40
+    |
+636 |         .set_into_module(module, move |ctx: NativeCallContext, file: FileHandle, len: INT| -> Res<crate::Blob> {
+    |                                        ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:668:13
+    |
+668 |         let mut wait_operation = "wait for child";
+    |             ----^^^^^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` on by default
+
+warning: unused variable: `termination`
+    --> src/packages/sys/process/unix.rs:1106:22
+     |
+1106 |                 let (termination, _operation) = if self.managed {
+     |                      ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_termination`
+
+warning: unused variable: `ctx`
+    --> src/packages/sys/process/unix.rs:2053:5
+     |
+2053 |     ctx: &NativeCallContext,
+     |     ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2134:9
+     |
+2134 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: unused variable: `ctx`
+    --> src/packages/sys/process/unix.rs:2176:5
+     |
+2176 |     ctx: &NativeCallContext,
+     |     ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2456:9
+     |
+2456 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variant `OnlyZombieLeader` is never constructed
+  --> src/packages/sys/process/unix.rs:50:5
+   |
+47 | enum GroupCloseOutcome {
+   |      ----------------- variant in this enum
+...
+50 |     OnlyZombieLeader,
+   |     ^^^^^^^^^^^^^^^^
+   |
+   = note: `GroupCloseOutcome` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+   = note: `#[warn(dead_code)]` on by default
+
+warning: methods `numeric_operations_probe`, `quarantine_observations_probe`, and `fail_reservation` are never used
+    --> src/packages/sys/process/unix.rs:1470:8
+     |
+1390 | impl ExecutionFaults {
+     | -------------------- methods in this implementation
+...
+1470 |     fn numeric_operations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1481 |     fn quarantine_observations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1506 |     fn fail_reservation(&self) -> bool {
+     |        ^^^^^^^^^^^^^^^^
+
+warning: `rhai` (lib) generated 13 warnings (run `cargo fix --lib -p rhai` to apply 10 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+error[E0599]: no method named `set_max_string_size` found for struct `Engine` in the current scope
+    --> tests/sys_process.rs:2983:12
+     |
+2983 |     engine.set_max_string_size(OUTPUT_LIMIT);
+     |            ^^^^^^^^^^^^^^^^^^^ help: there is a method with a similar name: `set_max_strings_interned`
+
+error[E0599]: no method named `set_max_string_size` found for struct `Engine` in the current scope
+    --> tests/sys_process.rs:3170:12
+     |
+3170 |     engine.set_max_string_size(engine_limit);
+     |            ^^^^^^^^^^^^^^^^^^^ help: there is a method with a similar name: `set_max_strings_interned`
+
+For more information about this error, try `rustc --explain E0599`.
+error: could not compile `rhai` (test "sys_process") due to 2 previous errors
+warning: build failed, waiting for other jobs to finish...
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)

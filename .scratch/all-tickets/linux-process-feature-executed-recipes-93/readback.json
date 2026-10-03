@@ -1,0 +1,8 @@
+{
+  "remote_stage": "/root/rhai-linux-process-feature-20261003-6c451c5c-93",
+  "files": {
+    "stage.sh": "434cc7a1301b11d782875d4fb388283ccb74e649f3e3695b70b3d166fac13ba5",
+    "launch.sh": "ee47fa55531707db8a9381b6b220de9b3d4d945296ba11eb426d9faeda865d46"
+  },
+  "byte_equal_reviewed_local": true
+}

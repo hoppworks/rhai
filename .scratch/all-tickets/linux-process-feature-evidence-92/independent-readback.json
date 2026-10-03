@@ -1,0 +1,588 @@
+{
+  "directories": [
+    "outer-evidence",
+    "proof-evidence",
+    "runner",
+    "runner/tools",
+    "runner/tools/agentskills"
+  ],
+  "files": {
+    "Cargo.lock.accepted": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+    "check-linux-current-msrv-examples.py": "59ac8b7b9c71ab2331c13196b36d8d2794931e07138741c43d4a8c3d1d754b06",
+    "contract.md": "46ef933d7c867770cf7f5a6cec671f22bf2ddccd2b5ea47751506b893f198721",
+    "input-identities.sha256": "6c23b89ce0d37971041bca56b50441c5ce4f8a7521d167c8d8052fd2a0f24054",
+    "launch.sh": "7e2fc008bb4bbf550ab32868a3f9500896944dd24659f646ab80dc439dd7626d",
+    "linux-process-feature-proof.py": "0347d12c6d89f853749a762939f29fefc45bdfe00d6a080b66396e2ba0447131",
+    "linux-process-io-control.py": "00aba0d09535ab63e0ef4cf344f9d1ad31197456ad6adca11decab1ab2ec3396",
+    "linux-process-options-control.py": "ac679734a00a39aec0369f96861655982320c75b637ae86d41adbe3104024503",
+    "outer-evidence/launcher-identities.tsv": "8823458be9aa01c2375d325c2ed944d89eb2d59797d4c15cc03582d30d06d4f3",
+    "outer-evidence/outer-status.txt": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "outer-evidence/outer.log": "9df905b7c643aa34746e700e3f3ce495a790d018572d05d700d8905cb7bfb609",
+    "outer-evidence/pid-readback-launcher.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "outer-evidence/pid-readback.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "outer-evidence/pid-readback.tsv": "a4ba62003c854c0dfd4361bc3e056bb14f5a1f026ba936682ca65ecaf5f65ea2",
+    "outer-evidence/run-scoped.status": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "outer-evidence/runtime-cleanup.tsv": "1cfdcd2accdaa026af050ded620389dfd3176ae044b2e6dfe89abc58c7deecac",
+    "outer-evidence/scope-cleanup.tsv": "00c116fb36f848f9ed9c1bbf406624ca66118fb75143813063a6101492856bcb",
+    "process-feature.patch": "5cf5d4533ca3adb99a9313e710b91f184bf5f2ee90ce2e215644fddf71b17693",
+    "proof-evidence/apply-process-feature-patch.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "proof-evidence/apply-process-feature-patch.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "proof-evidence/baseline-compatibility.json": "63d3fe9b9e9d727c26b7c6ef6227584ca2d52c912dfeeb010b10eea7656dc8b4",
+    "proof-evidence/baseline-no-run-only-i32-no-float.status": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c",
+    "proof-evidence/baseline-no-run-only-i32-no-float.stderr": "e3aba70253259a2c1864e3c325aa623da2bdbe4bea8ed08d2a9c35eeaa49fbda",
+    "proof-evidence/baseline-no-run-only-i32-no-float.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "proof-evidence/baseline-no-run-unchecked.status": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c",
+    "proof-evidence/baseline-no-run-unchecked.stderr": "b13cf29d7dacfad209c5550d5288be56e06ad43836ad81c0c129c78b452a9f9e",
+    "proof-evidence/baseline-no-run-unchecked.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "proof-evidence/cargo-version.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "proof-evidence/cargo-version.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "proof-evidence/cargo-version.stdout": "bd859f92e30f43b3d238342da4f9a98eaecf6fb4d9dcf317c4e27346f28b4a69",
+    "proof-evidence/commands.json": "21336ffe30edb71c183fcedab78b0429082105246b3fa042ad33a2d9be8fdd8d",
+    "proof-evidence/early-runtime-identity.json": "538b328659ed101622c4e537aa0beb9af7bc9518e34040ac931b6c0d47d77326",
+    "proof-evidence/export.json": "bd85bfac95bf13bdb4d5b3d9dd90eeecd9ca4b1573697fa16d116754c844ab84",
+    "proof-evidence/failure.txt": "45439ec918aa7ccf468cff18dff2ce3bf7cb54653026978f27780603952d43cc",
+    "proof-evidence/package-result.json": "b52f1cd8ef274bd3b2afdbcbb1488d19365380e1e17a66d409e83618f996e889",
+    "proof-evidence/process-identities.tsv": "d043f6ebc799b616a24ad83258d563190813b4fb0027ea5dfeebf6253858568b",
+    "proof-evidence/resource-samples.json": "216c88fb0d1604427c29d0f9038b47e1ac8be333344f57ac25a6f87b7ab22756",
+    "proof-evidence/rustc-version.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "proof-evidence/rustc-version.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "proof-evidence/rustc-version.stdout": "f4679d0dda28ffcd994b39583743b88e06b6fe4a89fd7359aa1d147e5e660f11",
+    "proof-evidence/rustup-install.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "proof-evidence/rustup-install.stderr": "2c2b1d035c5a27642a26ef93759dec9c7aa6d70b8326994af1f1273f88328f17",
+    "proof-evidence/rustup-install.stdout": "161155bc054a3dcbfa30ec0fd091dd1fbb639b63d3aea56da09bff04e6762c4c",
+    "proof-evidence/source-inputs.json": "63c916eb0d9853e45f355afd1ce5594ddb22dfe4ca45f2581293042ef262683e",
+    "proof-evidence/source-lock-manifests.json": "38027c27b516ccd7a8fc7d4f4a87283e095dbc8d9804687b27b9207a726164f3",
+    "proof-evidence/source-restoration.json": "4fc1a96a2dc9decfc4469cf52fc4324e8cc8ae37dff5fe545c751e43d51e1a04",
+    "runner/tools/agentskills/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runner/tools/agentskills/pyguard.py": "a3739f4947744303e1adf3fb0875ac743944a272e5b95c94b1baba53029d313f",
+    "runner/tools/run_scoped.py": "9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d",
+    "source.sha256": "cdbfd14bbf4d40a33c00b5eeaabf0ba450c0dc0c176176c8e1c87c3ae8cf1f75",
+    "source.tar": "a158051f476cddc02744ab551c76a5b2458d3a69910f673ee6fb39745411d391",
+    "stage.sh": "eb121a172f8685898bcb91c84dff7f2625c83192167dedbdd246cc982e6622f1"
+  },
+  "fixture_pid_receipts": [],
+  "fixture_receipt_count": 0,
+  "live_group_processes": [],
+  "processes": [
+    {
+      "label": "helper",
+      "matching_process_alive": false,
+      "pid": 768978,
+      "start_ticks": "1493901"
+    },
+    {
+      "label": "scoped-supervisor",
+      "matching_process_alive": false,
+      "pid": 768977,
+      "start_ticks": "1493900"
+    },
+    {
+      "label": "command:rustup-install",
+      "matching_process_alive": false,
+      "pid": 768983,
+      "start_ticks": "1493946"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 768984,
+      "start_ticks": "1493946"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 769002,
+      "start_ticks": "1493947"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 769022,
+      "start_ticks": "1494048"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 769023,
+      "start_ticks": "1494048"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 769035,
+      "start_ticks": "1494149"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 769036,
+      "start_ticks": "1494150"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 769047,
+      "start_ticks": "1494251"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 769049,
+      "start_ticks": "1494251"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 769060,
+      "start_ticks": "1494352"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 769061,
+      "start_ticks": "1494353"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 769080,
+      "start_ticks": "1494453"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 769081,
+      "start_ticks": "1494454"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 769101,
+      "start_ticks": "1494555"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 769102,
+      "start_ticks": "1494555"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 769113,
+      "start_ticks": "1494656"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 769114,
+      "start_ticks": "1494657"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 769124,
+      "start_ticks": "1494728"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 769125,
+      "start_ticks": "1494728"
+    },
+    {
+      "label": "command:rustc-version",
+      "matching_process_alive": false,
+      "pid": 769126,
+      "start_ticks": "1494729"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 769127,
+      "start_ticks": "1494729"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 769128,
+      "start_ticks": "1494730"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 769130,
+      "start_ticks": "1494740"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 769131,
+      "start_ticks": "1494741"
+    },
+    {
+      "label": "command:cargo-version",
+      "matching_process_alive": false,
+      "pid": 769132,
+      "start_ticks": "1494742"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 769133,
+      "start_ticks": "1494742"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 769145,
+      "start_ticks": "1494742"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 769147,
+      "start_ticks": "1494753"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 769148,
+      "start_ticks": "1494753"
+    },
+    {
+      "label": "command:baseline-no-run-only-i32-no-float",
+      "matching_process_alive": false,
+      "pid": 769149,
+      "start_ticks": "1494754"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 769150,
+      "start_ticks": "1494754"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 769153,
+      "start_ticks": "1494755"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 769169,
+      "start_ticks": "1494855"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 769170,
+      "start_ticks": "1494856"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 769184,
+      "start_ticks": "1494957"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 769185,
+      "start_ticks": "1494957"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 769196,
+      "start_ticks": "1495058"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 769197,
+      "start_ticks": "1495059"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 769309,
+      "start_ticks": "1495160"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 769312,
+      "start_ticks": "1495161"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 769479,
+      "start_ticks": "1495262"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 769482,
+      "start_ticks": "1495263"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 769759,
+      "start_ticks": "1495364"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 769763,
+      "start_ticks": "1495365"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 769826,
+      "start_ticks": "1495466"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 769827,
+      "start_ticks": "1495467"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 769904,
+      "start_ticks": "1495568"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 769905,
+      "start_ticks": "1495569"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 770012,
+      "start_ticks": "1495670"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 770014,
+      "start_ticks": "1495671"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 770056,
+      "start_ticks": "1495772"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 770058,
+      "start_ticks": "1495773"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 770069,
+      "start_ticks": "1495874"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 770070,
+      "start_ticks": "1495875"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 770097,
+      "start_ticks": "1495976"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 770098,
+      "start_ticks": "1495977"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 770120,
+      "start_ticks": "1496028"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 770121,
+      "start_ticks": "1496029"
+    },
+    {
+      "label": "command:baseline-no-run-unchecked",
+      "matching_process_alive": false,
+      "pid": 770122,
+      "start_ticks": "1496030"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 770123,
+      "start_ticks": "1496030"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 770128,
+      "start_ticks": "1496031"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 770156,
+      "start_ticks": "1496132"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 770157,
+      "start_ticks": "1496133"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 770168,
+      "start_ticks": "1496234"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 770169,
+      "start_ticks": "1496235"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 770181,
+      "start_ticks": "1496336"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 770182,
+      "start_ticks": "1496337"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 770207,
+      "start_ticks": "1496438"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 770208,
+      "start_ticks": "1496439"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pid": 770238,
+      "start_ticks": "1496540"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pid": 770239,
+      "start_ticks": "1496542"
+    },
+    {
+      "label": "launcher",
+      "matching_process_alive": false,
+      "pid": 768907,
+      "start_ticks": "1493890"
+    },
+    {
+      "label": "run-scoped",
+      "matching_process_alive": false,
+      "pid": 768974,
+      "start_ticks": "1493897"
+    }
+  ],
+  "scope": "/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92",
+  "scoped_groups": [
+    768977
+  ],
+  "selected_files": {
+    "check-linux-current-msrv-examples.py": "59ac8b7b9c71ab2331c13196b36d8d2794931e07138741c43d4a8c3d1d754b06",
+    "contract.md": "46ef933d7c867770cf7f5a6cec671f22bf2ddccd2b5ea47751506b893f198721",
+    "input-identities.sha256": "6c23b89ce0d37971041bca56b50441c5ce4f8a7521d167c8d8052fd2a0f24054",
+    "linux-process-feature-proof.py": "0347d12c6d89f853749a762939f29fefc45bdfe00d6a080b66396e2ba0447131",
+    "linux-process-io-control.py": "00aba0d09535ab63e0ef4cf344f9d1ad31197456ad6adca11decab1ab2ec3396",
+    "linux-process-options-control.py": "ac679734a00a39aec0369f96861655982320c75b637ae86d41adbe3104024503",
+    "outer-evidence/launcher-identities.tsv": "8823458be9aa01c2375d325c2ed944d89eb2d59797d4c15cc03582d30d06d4f3",
+    "outer-evidence/outer-status.txt": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "outer-evidence/outer.log": "9df905b7c643aa34746e700e3f3ce495a790d018572d05d700d8905cb7bfb609",
+    "outer-evidence/pid-readback-launcher.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "outer-evidence/pid-readback.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "outer-evidence/pid-readback.tsv": "a4ba62003c854c0dfd4361bc3e056bb14f5a1f026ba936682ca65ecaf5f65ea2",
+    "outer-evidence/run-scoped.status": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "outer-evidence/runtime-cleanup.tsv": "1cfdcd2accdaa026af050ded620389dfd3176ae044b2e6dfe89abc58c7deecac",
+    "outer-evidence/scope-cleanup.tsv": "00c116fb36f848f9ed9c1bbf406624ca66118fb75143813063a6101492856bcb",
+    "process-feature.patch": "5cf5d4533ca3adb99a9313e710b91f184bf5f2ee90ce2e215644fddf71b17693",
+    "proof-evidence/apply-process-feature-patch.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "proof-evidence/apply-process-feature-patch.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "proof-evidence/baseline-compatibility.json": "63d3fe9b9e9d727c26b7c6ef6227584ca2d52c912dfeeb010b10eea7656dc8b4",
+    "proof-evidence/baseline-no-run-only-i32-no-float.status": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c",
+    "proof-evidence/baseline-no-run-only-i32-no-float.stderr": "e3aba70253259a2c1864e3c325aa623da2bdbe4bea8ed08d2a9c35eeaa49fbda",
+    "proof-evidence/baseline-no-run-only-i32-no-float.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "proof-evidence/baseline-no-run-unchecked.status": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c",
+    "proof-evidence/baseline-no-run-unchecked.stderr": "b13cf29d7dacfad209c5550d5288be56e06ad43836ad81c0c129c78b452a9f9e",
+    "proof-evidence/baseline-no-run-unchecked.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "proof-evidence/cargo-version.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "proof-evidence/cargo-version.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "proof-evidence/cargo-version.stdout": "bd859f92e30f43b3d238342da4f9a98eaecf6fb4d9dcf317c4e27346f28b4a69",
+    "proof-evidence/commands.json": "21336ffe30edb71c183fcedab78b0429082105246b3fa042ad33a2d9be8fdd8d",
+    "proof-evidence/early-runtime-identity.json": "538b328659ed101622c4e537aa0beb9af7bc9518e34040ac931b6c0d47d77326",
+    "proof-evidence/export.json": "bd85bfac95bf13bdb4d5b3d9dd90eeecd9ca4b1573697fa16d116754c844ab84",
+    "proof-evidence/failure.txt": "45439ec918aa7ccf468cff18dff2ce3bf7cb54653026978f27780603952d43cc",
+    "proof-evidence/package-result.json": "b52f1cd8ef274bd3b2afdbcbb1488d19365380e1e17a66d409e83618f996e889",
+    "proof-evidence/process-identities.tsv": "d043f6ebc799b616a24ad83258d563190813b4fb0027ea5dfeebf6253858568b",
+    "proof-evidence/resource-samples.json": "216c88fb0d1604427c29d0f9038b47e1ac8be333344f57ac25a6f87b7ab22756",
+    "proof-evidence/rustc-version.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "proof-evidence/rustc-version.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "proof-evidence/rustc-version.stdout": "f4679d0dda28ffcd994b39583743b88e06b6fe4a89fd7359aa1d147e5e660f11",
+    "proof-evidence/rustup-install.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "proof-evidence/rustup-install.stderr": "2c2b1d035c5a27642a26ef93759dec9c7aa6d70b8326994af1f1273f88328f17",
+    "proof-evidence/rustup-install.stdout": "161155bc054a3dcbfa30ec0fd091dd1fbb639b63d3aea56da09bff04e6762c4c",
+    "proof-evidence/source-inputs.json": "63c916eb0d9853e45f355afd1ce5594ddb22dfe4ca45f2581293042ef262683e",
+    "proof-evidence/source-lock-manifests.json": "38027c27b516ccd7a8fc7d4f4a87283e095dbc8d9804687b27b9207a726164f3",
+    "proof-evidence/source-restoration.json": "4fc1a96a2dc9decfc4469cf52fc4324e8cc8ae37dff5fe545c751e43d51e1a04",
+    "source.sha256": "cdbfd14bbf4d40a33c00b5eeaabf0ba450c0dc0c176176c8e1c87c3ae8cf1f75"
+  },
+  "selected_paths": [
+    "proof-evidence",
+    "outer-evidence",
+    "source.sha256",
+    "contract.md",
+    "input-identities.sha256",
+    "process-feature.patch",
+    "linux-process-feature-proof.py",
+    "linux-process-options-control.py",
+    "linux-process-io-control.py",
+    "check-linux-current-msrv-examples.py"
+  ],
+  "stage": "/root/rhai-linux-process-feature-20261003-6c451c5c-92",
+  "statuses": {
+    "outer-status.txt": 1,
+    "pid-readback-launcher.status": 0,
+    "pid-readback.status": 0,
+    "run-scoped.status": 1
+  }
+}

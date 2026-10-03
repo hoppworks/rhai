@@ -1,0 +1,160 @@
+{
+  "schema_version": "1",
+  "mode": "workspace",
+  "repository": "/Users/hoppworks/.codex/worktrees/all-tickets-continuation/rhai",
+  "total_files": 21,
+  "reviewable_count": 1,
+  "excluded_count": 20,
+  "total_insertions": 209481,
+  "total_deletions": 11,
+  "reviewable_files": [
+    {
+      "path": "tests/sys_process.rs",
+      "status": "modified",
+      "insertions": 48,
+      "deletions": 10
+    }
+  ],
+  "excluded_files": [
+    {
+      "path": ".scratch/all-tickets/coordinator-state.md",
+      "status": "modified",
+      "insertions": 27,
+      "deletions": 1,
+      "exclude_reason": "user_exclude"
+    },
+    {
+      "path": ".scratch/all-tickets/darwin-census-fix-batch-cli.log",
+      "status": "added",
+      "insertions": 34149,
+      "deletions": 0,
+      "exclude_reason": "user_exclude"
+    },
+    {
+      "path": ".scratch/all-tickets/darwin-census-fix-recheck-cli.log",
+      "status": "added",
+      "insertions": 4899,
+      "deletions": 0,
+      "exclude_reason": "user_exclude"
+    },
+    {
+      "path": ".scratch/all-tickets/darwin-census-followup-cli.log",
+      "status": "added",
+      "insertions": 105478,
+      "deletions": 0,
+      "exclude_reason": "user_exclude"
+    },
+    {
+      "path": ".scratch/all-tickets/darwin-census-review-cli.log",
+      "status": "added",
+      "insertions": 4337,
+      "deletions": 0,
+      "exclude_reason": "user_exclude"
+    },
+    {
+      "path": ".scratch/all-tickets/darwin-resource-census-expert-cli.log",
+      "status": "added",
+      "insertions": 3632,
+      "deletions": 0,
+      "exclude_reason": "user_exclude"
+    },
+    {
+      "path": ".scratch/all-tickets/darwin-sampler-fix-batch-cli.log",
+      "status": "added",
+      "insertions": 5945,
+      "deletions": 0,
+      "exclude_reason": "user_exclude"
+    },
+    {
+      "path": ".scratch/all-tickets/darwin-sampler-fix-recheck-cli.log",
+      "status": "added",
+      "insertions": 3385,
+      "deletions": 0,
+      "exclude_reason": "user_exclude"
+    },
+    {
+      "path": ".scratch/all-tickets/darwin-sampler-repair-cli.log",
+      "status": "added",
+      "insertions": 10650,
+      "deletions": 0,
+      "exclude_reason": "user_exclude"
+    },
+    {
+      "path": ".scratch/all-tickets/darwin-sampler-review-cli.log",
+      "status": "added",
+      "insertions": 3706,
+      "deletions": 0,
+      "exclude_reason": "user_exclude"
+    },
+    {
+      "path": ".scratch/all-tickets/linux-process-feature-launch.sh",
+      "status": "added",
+      "insertions": 258,
+      "deletions": 0,
+      "exclude_reason": "user_exclude"
+    },
+    {
+      "path": ".scratch/all-tickets/linux-process-feature-proof.py",
+      "status": "added",
+      "insertions": 451,
+      "deletions": 0,
+      "exclude_reason": "user_exclude"
+    },
+    {
+      "path": ".scratch/all-tickets/linux-process-feature-review-preview.json",
+      "status": "added",
+      "insertions": 0,
+      "deletions": 0,
+      "exclude_reason": "user_exclude"
+    },
+    {
+      "path": ".scratch/all-tickets/linux-process-feature-stage.sh",
+      "status": "added",
+      "insertions": 33,
+      "deletions": 0,
+      "exclude_reason": "user_exclude"
+    },
+    {
+      "path": ".scratch/all-tickets/linux-scalar-process-preparation-cli.log",
+      "status": "added",
+      "insertions": 22858,
+      "deletions": 0,
+      "exclude_reason": "user_exclude"
+    },
+    {
+      "path": ".scratch/all-tickets/process-error-doc-review-cli.log",
+      "status": "added",
+      "insertions": 2241,
+      "deletions": 0,
+      "exclude_reason": "user_exclude"
+    },
+    {
+      "path": ".scratch/all-tickets/process-feature.patch",
+      "status": "added",
+      "insertions": 140,
+      "deletions": 0,
+      "exclude_reason": "user_exclude"
+    },
+    {
+      "path": ".scratch/all-tickets/windows-compiler-exit-diagnosis-cli.log",
+      "status": "added",
+      "insertions": 1011,
+      "deletions": 0,
+      "exclude_reason": "user_exclude"
+    },
+    {
+      "path": ".scratch/all-tickets/windows-job-exit-expert-cli.log",
+      "status": "added",
+      "insertions": 2911,
+      "deletions": 0,
+      "exclude_reason": "user_exclude"
+    },
+    {
+      "path": ".scratch/all-tickets/windows-source-allowance-cli.log",
+      "status": "added",
+      "insertions": 3322,
+      "deletions": 0,
+      "exclude_reason": "user_exclude"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+
+running 1 test
+test process_script_output_option_cannot_raise_the_host_cap ... FAILED
+
+failures:
+
+failures:
+    process_script_output_option_cannot_raise_the_host_cap
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 41 filtered out; finished in 0.01s
+

@@ -1,0 +1,22 @@
+Traceback (most recent call last):
+  File "/root/rhai-linux-process-feature-20261003-6c451c5c-92/linux-process-feature-proof.py", line 508, in <module>
+    status = main()
+  File "/root/rhai-linux-process-feature-20261003-6c451c5c-92/linux-process-feature-proof.py", line 288, in main
+    h.run_command("apply-process-feature-patch", patch_command, env, cwd=h.SOURCE)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-process-feature-20261003-6c451c5c-92/check-linux-current-msrv-examples.py", line 286, in run_command
+    child = subprocess.Popen(argv, cwd=command_cwd, env=command_env,
+                             stdin=subprocess.DEVNULL, stdout=stdout, stderr=stderr)
+  File "/usr/lib64/python3.14/subprocess.py", line 1039, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.14/subprocess.py", line 1990, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'patch'

@@ -1,0 +1,61 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+helper	766562	766561	766561	1475062	python3 /root/rhai-linux-process-feature-20261003-6c451c5c/linux-process-feature-proof.py
+scoped-supervisor	766561	766558	766561	1475061	/usr/bin/python3 /var/roothome/rhai-linux-process-feature-20261003-6c451c5c/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-process-feature-20261003-6c451c5c/linux-process-feature-proof.py
+command:rustup-install	766567	766562	766561	1475108	/root/.cargo/bin/rustup toolchain install 1.77.2-x86_64-unknown-linux-gnu --profile minimal --no-self-update
+command:du	766576	766562	766561	1475108	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori
+command:ps	766586	766562	766561	1475109	/bin/ps -e -o pid=,ppid=,rss=
+command:du	766598	766562	766561	1475210	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori
+command:ps	766599	766562	766561	1475210	/bin/ps -e -o pid=,ppid=,rss=
+command:du	766619	766562	766561	1475311	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori
+command:ps	766621	766562	766561	1475312	/bin/ps -e -o pid=,ppid=,rss=
+command:du	766640	766562	766561	1475412	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori
+command:ps	766641	766562	766561	1475414	/bin/ps -e -o pid=,ppid=,rss=
+command:du	766653	766562	766561	1475515	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori
+command:ps	766654	766562	766561	1475515	/bin/ps -e -o pid=,ppid=,rss=
+command:du	766673	766562	766561	1475616	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori
+command:ps	766674	766562	766561	1475617	/bin/ps -e -o pid=,ppid=,rss=
+command:du	766692	766562	766561	1475717	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori
+command:ps	766693	766562	766561	1475718	/bin/ps -e -o pid=,ppid=,rss=
+command:du	766702	766562	766561	1475779	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori
+command:ps	766703	766562	766561	1475779	/bin/ps -e -o pid=,ppid=,rss=
+command:rustc-version	766704	766562	766561	1475780	/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose
+command:du	766705	766562	766561	1475780	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori
+command:ps	766706	766562	766561	1475781	/bin/ps -e -o pid=,ppid=,rss=
+command:du	766708	766562	766561	1475791	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori
+command:ps	766709	766562	766561	1475792	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-version	766710	766562	766561	1475793	/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose
+command:du	766711	766562	766561	1475793	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori
+command:ps	766723	766562	766561	1475793	/bin/ps -e -o pid=,ppid=,rss=
+command:du	766725	766562	766561	1475804	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori
+command:ps	766726	766562	766561	1475804	/bin/ps -e -o pid=,ppid=,rss=
+command:baseline-no-run-only-i32-no-float	766727	766562	766561	1475805	/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,only_i32,no_float --test sys_process --no-run
+command:du	766729	766562	766561	1475805	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori
+command:ps	766731	766562	766561	1475806	/bin/ps -e -o pid=,ppid=,rss=
+command:du	766748	766562	766561	1475906	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori
+command:ps	766749	766562	766561	1475907	/bin/ps -e -o pid=,ppid=,rss=
+command:du	766762	766562	766561	1476008	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori
+command:ps	766763	766562	766561	1476008	/bin/ps -e -o pid=,ppid=,rss=
+command:du	766774	766562	766561	1476109	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori
+command:ps	766775	766562	766561	1476110	/bin/ps -e -o pid=,ppid=,rss=
+command:du	766786	766562	766561	1476210	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori
+command:ps	766787	766562	766561	1476211	/bin/ps -e -o pid=,ppid=,rss=
+command:du	766799	766562	766561	1476312	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori
+command:ps	766800	766562	766561	1476313	/bin/ps -e -o pid=,ppid=,rss=
+command:du	767011	766562	766561	1476414	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori
+command:ps	767012	766562	766561	1476415	/bin/ps -e -o pid=,ppid=,rss=
+command:du	767251	766562	766561	1476516	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori
+command:ps	767252	766562	766561	1476517	/bin/ps -e -o pid=,ppid=,rss=
+command:du	767403	766562	766561	1476618	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori
+command:ps	767404	766562	766561	1476619	/bin/ps -e -o pid=,ppid=,rss=
+command:du	767433	766562	766561	1476720	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori
+command:ps	767434	766562	766561	1476721	/bin/ps -e -o pid=,ppid=,rss=
+command:du	767571	766562	766561	1476822	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori
+command:ps	767573	766562	766561	1476823	/bin/ps -e -o pid=,ppid=,rss=
+command:du	767644	766562	766561	1476924	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori
+command:ps	767648	766562	766561	1476925	/bin/ps -e -o pid=,ppid=,rss=
+command:du	767659	766562	766561	1477026	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori
+command:ps	767660	766562	766561	1477027	/bin/ps -e -o pid=,ppid=,rss=
+command:du	767680	766562	766561	1477128	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori
+command:ps	767681	766562	766561	1477129	/bin/ps -e -o pid=,ppid=,rss=
+command:du	767715	766562	766561	1477230	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori
+command:ps	767716	766562	766561	1477231	/bin/ps -e -o pid=,ppid=,rss=

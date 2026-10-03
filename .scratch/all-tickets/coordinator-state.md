@@ -86,7 +86,7 @@ Current authoritative history through this rewrite is Git commit
 10d4a0d55400ebe8c24feff134e7161ff36bf8d5, this same state path. It retains
 all earlier cause/attempt/resource/source applicability records. Read that
 history for consumed work, not superseded next actions. No reset occurred.
-Last independently read-back fork main469998db6e23e3ce68f000fa01bf2dc44f709ced; only remote main, lowercase
+Last independently read-back fork main6c451c5c99e751e50023a08912a035a2c8754ff6; only remote main, lowercase
 human author/committer. Goal active and incomplete.
 
 ### Accepted current Linux non-process package
@@ -1044,3 +1044,150 @@ no nativefailedcorrection/infrastructurerecovery. Ownintegrationtoforkmainnext.
 Nextactionrequiredchecked/no_float/unchecked processfeaturegaps or remaining
 managed/faultcriteria; retain all90/89validproof, do notrenewstoppedchains.
 No retainedbuild/cache/stage; worktreeremainsneeded. Rolecost/token/cacheunknown.
+
+Verifiedintegration6c451c5c99e751e50023a08912a035a2c8754ff6:404packagefiles
+committed,push10117terminal0, independentls-remoteexactheadandsolemain.
+Author/committerlowercasehoppworks <daniel@hoppworks.de>. Native77970/
+stage6156terminal0; no furtherpoll/restart. Foreignhistorylogsremainunstaged.
+CurrentturnPROGRESS,overallgoalincomplete; nextrequiredprocessfeaturegaps.
+Thispostpushbookkeepingentersnextcoherentpackage; keepownedworktreeactive.
+
+### Process integer-only and unchecked package preparation
+
+Resumed at6c451c5c under unchanged faba3db global/project/campaign/TDD/proof
+and Coordinator template; Standard process_feature_support loaded current
+rules/template before source inspection. Existing Worker/Expert confirmations
+remain at same revision; unreachable historical agents are not resumed.
+Source audit identifies floating script durations under no_float, INT-width
+comparison and unchecked Engine-limit API needing explicit check. Next action:
+minimal feature-compatible test delta with baseline compilation reproduction,
+real public Engine/OS acceptance and host-bound controls; no production change
+yet. Preserve original float-row proof by retaining existing feature branches.
+Workhorse read-only inventory: no cargo/rustc/rustup/make/ninja/test/ffmpeg
+candidates,704259981312freebytes; transient Python observer PIDs764640/764679
+absent. This is not a slot reservation; recheck immediately before launch.
+No launch91 allocated/consumed yet. Unix90 cumulative, all stopped causes and
+actual resource limits unchanged. Active-work30minute planning checkpoint,
+no added routine approval. Current package owner root with focused Standard
+source diagnosis; no owned retained resources or new remote branches.
+
+Prepared minimal source delta process-feature.patch5cf5d453, test8ec4d456.
+Only tests change: helperusesINT, integral5second literals, no_float host
+fractionaldefault preserves .1/.25second deadlines, unchecked gates only
+unavailableEngine APIs/specificEngine expansioncriterion. NewrealOS test
+requests8192bytes againsthost4096cap inbothstreams and reads exactPID/reap
+beforeprefixassertions. Standard confirmedE0308 and E0599 sourcecauses; no
+productionfailureclaimed. Worker samecontext preparing existingadapter/custody
+for three rows(originalchecked,only_i32/no_float,unchecked),32positive exact
+tests, wrongcontrolsandtwo baselinecompile compatibility reproductions.
+Expert samecombinedreviewcontext inspecting source and finalreadiness; no
+automaticadditionalreview. Expectedwrongassertions and baselinecompileissues
+will be classifiedseparately; patch/manifest/lock/source pins recorded.
+No native dispatchyet; prospective91 notconsumed. Originalproductionproof
+remainsvalid; changedtestpaths willbechecked at patchedrevisionwithcoverage
+limits explicit. Unchangedfeature/nativeproof retained, nofullreleaseclaim.
+
+Sourcecombinedreview accepted1/1Rustfile plusexactpatch; no materialfinding.
+Review .scratch/all-tickets/linux-process-feature-review.md documents narrower
+no_float host-default deadlinecoverage anduncheckedexcludedEnginecriterion.
+Reuse oldnormalrow sensitivity from89/90; newadapter normalrow runsnewhostcap
+controls only plus11positives. Newfeature rows cover16/15controls and11/10
+positives, respectively:33newwrongcontrols,32GREENtargets,2baselinecompiler
+reproductions. Avoid repeated unchangedproof; record exact testedbaseline+patch
+and restorewrongcontrols to patchedoriginal, not falselytoarchivebaseline.
+
+Worker finalmechanicalready: proof50ef07c741f8665a6b759b3f9150445d6f7859ce3071e3830d0b9a82251723a9,
+staged40fe23190579ce748651d4537a07f86b73ac78e1582477deff91d9272c859ef,
+launch10a2f68b880faa45eeec0889cb7e15f71093f4373a0d80dbc18372a32dd5987c.
+All16overlaysAST/markers/reap localchecks andbashsyntaxpass;32G/33R/65proof
+results+2baselinecompiler+1patch+3setup=71commands. Combinedfinalreadiness
+pending, no launch. Preflightfirsttriedroot/.agents/AGENTS.md absent: readonly
+observer corrected viaworkhorse accountpwd to/home/workhorse/.agents/AGENTS.md.
+ExactglobalSHA1fc21bf24aeda853d63b662fef3364cf70743ddb440c29eab6debb30aa9a0eb6
+matchessamealreadyreadlocalrules;skillrepofaba3db unchanged. Thisobserver
+pathcorrection isnotnativeattempt/productcorrection. Freshheavycandidateempty,
+704259690496freebytes; noforeignprocesschanges. ProjectCONTEXT.md read and
+existinghoststandardlibrary/reviewedscript vocabulary retained.
+
+Final combined readiness READY for exact50ef07c7/d40fe231/10a2f68b recipes.
+Stage28230 terminal0 with every staged manifest pin matching. Fresh workhorse
+heavy inventory empty,704191885312freebytes. Native91 dispatch now; Unix
+cumulative91 consumed. Owned stage/root/rhai-linux-process-feature-20261003-6c451c5c
+and scope/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c;
+600/585/540seconds, jobs2/desc16 and existing2GiB resource bounds unchanged.
+Native acceptance pending; stopped histories and original89/90 proof retained.
+
+Native91 terminal1 before patch/acceptance, actual baseline E0308 expectedi64/foundi32.
+Harness required reversed diagnostic. First failed infrastructure outcome for
+feature baseline diagnostic direction; no product correction or assertion RED.
+Original stage preserved for exact export. Runner/runtime/scope cleanup0 and
+launcher PID readbacks0; root independent collection pending. Narrow recovery
+changes tuple only plus fresh92 owned paths, source patch and acceptance fixed.
+Unix91 consumed; cumulative history preserved, no approval missing.
+
+Same independent review narrow92 READY pins0347d12c/eb121a17/7e2fc008.
+Staging99242 terminal0; fresh heavy inventoryempty704191643648freebytes.
+Native92 dispatch now, cumulativeUnix92consumed; exactownedstage/scope suffix
+-92, same600/585/540second and resourcebounds. Only tuple/path correction,
+first failed harness91 preserved, no product acceptance until original92proof.
+
+Native92 terminal1 after both baselineE0308/E0599 expected101 confirmed;
+patchcommand could not spawn because systempatch absent. New missingdependency
+harnesscause, first outcome; diagnosticcause91 repairclosed by actual92 check.
+No intendedproductassertions reached. Both stage originalspreserved; runtime/
+scopecleanup0, independentcollectionpending. No install/adminauthorized.
+Simpler repair exactPythonunifiedpatchapplication with baseline/context/patch/
+resulthashes and failinglocalcontrol, next93 onlyafterdiagnosisclosed/review.
+CumulativeUnix92 remains, actualcaps unchanged and otherstoppedhistories intact.
+
+Root91/92 fullselectedoriginalsexported/hashmatched:62/75PIDstartidentities
+absent,0fixturePIDs(noassertionsreached),groups/runtime/scopeabsent. Exact46/52
+filesand5/5subdirsremovedafterlocalbyteverifyandfreshremotePID/hashinventory,
+independentstage/scopeabsence receiptsretained. Export21.666/26.384seconds,
+samples811068/834056KiBRSS770648/825756storage7/4desc,notpeaks. Localcollector
+firstPython3.9 tarfilterTypeError correctedusingexistingPython3.14; exactempty
+ownedfailedexportdirrmdir, no nativecount/resourcechange. Rootfirstsummary
+wrongnestedexportpath observation correctedfromactualfileinventory; no rerun.
+Bothfailuresremain nonacceptance, sourcepatchneverapplied; manifest/lock intact.
+
+StrictPythonpatch localproof: frozenbaseline+exact5cf5patch yields8ec4 equal
+ownedRustsource; both alteredpatch/source fail beforewrite. Original91/92 cause
+checks retained. Affectedreview found proofprescribedpaths still92 and export
+omittednewapplier; singleprelaunchbatch corrected, not nativefailure. No93
+allocationbeforefinalreadiness;Unix92consumed. Rootexactimportcreatedpyc removed,
+othercachecontents preserved. Standard/Worker/Expert usage metrics unknown.
+
+Affected93 readinessaccepted exact9f2cd53e proof/4533ca87applier/434cc7a1stage/
+ee47fa55launcher/2a5eb5fbcollector; fullpinsreviewreport. Purebaseline/patch
+application8ec and corruptedinputsreject independentlyverified; complete91/92
+selectedoriginals/hashinventory/identity/cleanup acceptedfailedscope. Stage10121
+terminal0 everymanifestpinmatching. Freshheavyempty704258600960freebytes.
+Native93 dispatchnow; cumulativeUnix93consumed, ownstage/scope-93, samebounds.
+Two prior causes/historypreserved; sourcepatchunchanged, nativeacceptancepending.
+
+Native93 terminal0:32originalGREEN/33intendedRED,71helpercommands,80.216s
+export. Root445exactPIDstart/42printedfixturePIDsabsent,groups/runtime/scope
+absent. Sourcesrestored8ec/manifests/lockunchanged; recipes/helper/applier byte
+equalreviewedlocal. Samples874544KiBRSS918968storage6desc,notpeaks. Fullstage
+inventory251files5subdirs; exactcleanupstillpendingexport/review. Collector
+selectedoriginalsomitstage/launch; rootfirstbytecheckrequestedthese absent
+files,read-onlyobservationcorrectedbyexactremotefetch+inventoryhash+localbyte
+comparison intoexecuted-recipes-93 beforecleanup. No rerun/productcorrection.
+Prior91/92terminal/failedscope retained, cumulativeUnix93. Nativeacceptance
+pending samecombinedreview; nofullticket/platform/releaseclaim.
+
+93exact251files/fivesubdirsretiredafterexporthash/freshPIDreadback; independent
+stage/scopeabsence receiptretained. Noownedretainedbuild/cache/stage. Threeown
+standalonediagnosticcopiesdeduplicatedonlyafterbytecomparisonwithfull91/92
+originalexports; failedoutcomes/causehistory preserved. Combinedreviewpending.
+
+Combinedindependent93 ACCEPTED narrow featurecompatibility/hostcap criteria.
+Reviewer independently71commands,32G33R,33overlayhashes/nativeversions/restoration/
+manifestlock/42fixture445PIDstartclosure/251file5dircleanup and executedrecipes.
+Proofmd/tickets03and06 recordpartialclosure and exactsourceapplicability.
+CurrentturnPROGRESS: source/testpatch+proofintegrationtosoleforkmain next.
+No productiondelta; broadermanaged/fault/platform/performance/releaseopen.
+Noownedretainedresources; keepownedworktree for campaign. CumulativeUnix93,
+all91/92causes/stoppedhistories preserved, unavailableusageunknown. Next package
+remainingmanaged/faultcontractorplatformcustody prerequisite withinauthorizations,
+not duplicate unaffectedproof. Goalactive/incomplete.

@@ -1,0 +1,27 @@
+{
+  "baseline_test_sha256": "379db748d4b84a60538d172059df1feafaa62b337eaf49c1178d3e6467d40c74",
+  "checks": [
+    {
+      "compatibility_failure_not_product_red": true,
+      "expected_code": "E0308",
+      "expected_diagnostics": [
+        "E0308",
+        "expected `i64`, found `i32`"
+      ],
+      "features": "testing-environ,sys,only_i32,no_float",
+      "name": "baseline-no-run-only-i32-no-float",
+      "status": 101
+    },
+    {
+      "compatibility_failure_not_product_red": true,
+      "expected_code": "E0599",
+      "expected_diagnostics": [
+        "E0599",
+        "no method named `set_max_string_size`"
+      ],
+      "features": "testing-environ,sys,unchecked",
+      "name": "baseline-no-run-unchecked",
+      "status": 101
+    }
+  ]
+}

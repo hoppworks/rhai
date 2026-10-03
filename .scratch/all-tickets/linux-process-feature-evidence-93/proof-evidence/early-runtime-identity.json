@@ -1,0 +1,19 @@
+{
+  "captured_before_stage_validation_or_external_command": true,
+  "helper": {
+    "cmdline": "python3 /root/rhai-linux-process-feature-20261003-6c451c5c-93/linux-process-feature-proof.py",
+    "pgid": 772703,
+    "pid": 772704,
+    "ppid": 772703,
+    "start_ticks": "1548676"
+  },
+  "identity_errors": {},
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-93/agent-build-xck6hk6g",
+  "scoped_supervisor": {
+    "cmdline": "/usr/bin/python3 /var/roothome/rhai-linux-process-feature-20261003-6c451c5c-93/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-process-feature-20261003-6c451c5c-93/linux-process-feature-proof.py",
+    "pgid": 772703,
+    "pid": 772703,
+    "ppid": 772696,
+    "start_ticks": "1548674"
+  }
+}

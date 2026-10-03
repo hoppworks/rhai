@@ -1,0 +1,10 @@
+{
+  "run": 93,
+  "exact_file_hashes_verified_before_delete": true,
+  "removed_files": 251,
+  "removed_subdirectories": 5,
+  "independent_absence": {
+    "/root/rhai-linux-process-feature-20261003-6c451c5c-93": true,
+    "/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-93": true
+  }
+}

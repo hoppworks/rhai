@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/root/rhai-linux-process-feature-20261003-6c451c5c/linux-process-feature-proof.py", line 508, in <module>
+    status = main()
+  File "/root/rhai-linux-process-feature-20261003-6c451c5c/linux-process-feature-proof.py", line 278, in main
+    raise RuntimeError(f"{name} did not reproduce the expected test-compatibility diagnostic {expected_code}: {required!r}")
+RuntimeError: baseline-no-run-only-i32-no-float did not reproduce the expected test-compatibility diagnostic E0308: ('expected `i32`, found `i64`',)

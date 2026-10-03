@@ -1,0 +1,63 @@
+launch_utc=2026-10-03T10:32:39Z
+runner_timeout_seconds=585
+stage=/root/rhai-linux-process-feature-20261003-6c451c5c
+scope=/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c
+source.tar: OK
+Cargo.lock.accepted: OK
+check-linux-current-msrv-examples.py: OK
+linux-process-feature-proof.py: OK
+process-feature.patch: OK
+linux-process-options-control.py: OK
+linux-process-io-control.py: OK
+contract.md: OK
+stage.sh: OK
+launch.sh: OK
+runner/tools/run_scoped.py: OK
+runner/tools/agentskills/__init__.py: OK
+runner/tools/agentskills/pyguard.py: OK
+PRIVATE_RUNTIME /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori
+command=rustup-install argv=['/root/.cargo/bin/rustup', 'toolchain', 'install', '1.77.2-x86_64-unknown-linux-gnu', '--profile', 'minimal', '--no-self-update']
+sample={"descendants": 2, "monotonic_seconds": 0.437, "rss_kib": 47012, "storage_kib": 73496}
+sample={"descendants": 2, "monotonic_seconds": 1.452, "rss_kib": 56212, "storage_kib": 91972}
+sample={"descendants": 2, "monotonic_seconds": 2.466, "rss_kib": 57000, "storage_kib": 146560}
+sample={"descendants": 2, "monotonic_seconds": 3.488, "rss_kib": 235072, "storage_kib": 305756}
+sample={"descendants": 2, "monotonic_seconds": 4.501, "rss_kib": 153192, "storage_kib": 328448}
+sample={"descendants": 2, "monotonic_seconds": 5.516, "rss_kib": 272880, "storage_kib": 407776}
+sample={"descendants": 2, "monotonic_seconds": 6.531, "rss_kib": 432696, "storage_kib": 549944}
+sample={"descendants": 1, "monotonic_seconds": 7.144, "rss_kib": 31468, "storage_kib": 533184}
+status=rustup-install:0
+command=rustc-version argv=['/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 7.157, "rss_kib": 31416, "storage_kib": 533192}
+sample={"descendants": 1, "monotonic_seconds": 7.269, "rss_kib": 31480, "storage_kib": 533196}
+status=rustc-version:0
+command=cargo-version argv=['/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 7.281, "rss_kib": 31612, "storage_kib": 533200}
+sample={"descendants": 1, "monotonic_seconds": 7.392, "rss_kib": 31408, "storage_kib": 533204}
+status=cargo-version:0
+command=baseline-no-run-only-i32-no-float argv=['/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c/agent-build-pmmvrori/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--features', 'testing-environ,sys,only_i32,no_float', '--test', 'sys_process', '--no-run']
+sample={"descendants": 2, "monotonic_seconds": 7.404, "rss_kib": 53036, "storage_kib": 533212}
+sample={"descendants": 2, "monotonic_seconds": 8.418, "rss_kib": 74300, "storage_kib": 536488}
+sample={"descendants": 2, "monotonic_seconds": 9.432, "rss_kib": 74920, "storage_kib": 536708}
+sample={"descendants": 2, "monotonic_seconds": 10.446, "rss_kib": 80560, "storage_kib": 539956}
+sample={"descendants": 2, "monotonic_seconds": 11.46, "rss_kib": 99952, "storage_kib": 543484}
+sample={"descendants": 2, "monotonic_seconds": 12.48, "rss_kib": 110912, "storage_kib": 586252}
+sample={"descendants": 7, "monotonic_seconds": 13.499, "rss_kib": 488916, "storage_kib": 615812}
+sample={"descendants": 4, "monotonic_seconds": 14.519, "rss_kib": 446240, "storage_kib": 639876}
+sample={"descendants": 4, "monotonic_seconds": 15.54, "rss_kib": 589644, "storage_kib": 659920}
+sample={"descendants": 4, "monotonic_seconds": 16.561, "rss_kib": 811068, "storage_kib": 669912}
+sample={"descendants": 4, "monotonic_seconds": 17.581, "rss_kib": 371004, "storage_kib": 717920}
+sample={"descendants": 3, "monotonic_seconds": 18.601, "rss_kib": 474444, "storage_kib": 728996}
+sample={"descendants": 3, "monotonic_seconds": 19.621, "rss_kib": 629020, "storage_kib": 729552}
+sample={"descendants": 3, "monotonic_seconds": 20.642, "rss_kib": 797884, "storage_kib": 742976}
+sample={"descendants": 1, "monotonic_seconds": 21.662, "rss_kib": 31544, "storage_kib": 770648}
+status=baseline-no-run-only-i32-no-float:101
+Traceback (most recent call last):
+  File "/root/rhai-linux-process-feature-20261003-6c451c5c/linux-process-feature-proof.py", line 508, in <module>
+    status = main()
+  File "/root/rhai-linux-process-feature-20261003-6c451c5c/linux-process-feature-proof.py", line 278, in main
+    raise RuntimeError(f"{name} did not reproduce the expected test-compatibility diagnostic {expected_code}: {required!r}")
+RuntimeError: baseline-no-run-only-i32-no-float did not reproduce the expected test-compatibility diagnostic E0308: ('expected `i32`, found `i64`',)
+/root/rhai-linux-process-feature-20261003-6c451c5c/launch.sh: line 123: /proc/766558/stat: No such file or directory
+run_scoped_status=1
+runtime_cleanup_status=0 pid_readback_status=0 scope_cleanup_status=0
+outer_status=1

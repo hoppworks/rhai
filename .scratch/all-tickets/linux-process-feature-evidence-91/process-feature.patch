@@ -1,0 +1,140 @@
+diff --git a/tests/sys_process.rs b/tests/sys_process.rs
+index 96cdd0fb..6355c6b9 100644
+--- a/tests/sys_process.rs
++++ b/tests/sys_process.rs
+@@ -2540,7 +2540,7 @@ fn run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data() {
+                 env_clear: true,
+                 env: #{{ {FIXTURE_ENV}: "{code}", {FIXTURE_RECORD_ENV}: "{record_path}" }},
+                 max_output: 1024,
+-                timeout: 5.0
++                timeout: 5
+             }})"#
+         );
+         let result = engine.eval::<Map>(&script).unwrap();
+@@ -2567,7 +2567,7 @@ fn run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data() {
+ }
+ 
+ #[cfg(not(feature = "no_index"))]
+-fn assert_child_record(path: &std::path::Path, code: i64) {
++fn assert_child_record(path: &std::path::Path, code: rhai::INT) {
+     let record = std::fs::read_to_string(path).unwrap();
+     let fields: Vec<_> = record.split_whitespace().collect();
+     assert_eq!(fields.len(), 2, "child record: {record:?}");
+@@ -2887,6 +2887,34 @@ fn process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one(
+     }
+ }
+ 
++#[test]
++#[cfg(not(feature = "no_index"))]
++fn process_script_output_option_cannot_raise_the_host_cap() {
++    const CAP: usize = 4096;
++    let engine = engine(SysConfig::default().max_output(CAP).programs(ProgramPolicy::Any));
++    let executable = std::env::current_exe().unwrap();
++    let executable = executable.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
++    for stream in ["stdout", "stderr"] {
++        let records = TempDir::new();
++        let record_path = records.path().join(format!("host-cap-{stream}.txt"));
++        let record_literal = record_path.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
++        let stdout_payload = if stream == "stdout" { CAP - LIBTEST_QUIET_START.len() + 1 } else { 0 };
++        let stderr_payload = if stream == "stderr" { CAP + 1 } else { 0 };
++        let script = io_stress_script(&executable, &record_literal, 0, stdout_payload, stderr_payload, CAP * 2, 5.0);
++        let error = engine.eval::<Map>(&script).unwrap_err();
++        // Read the independent record and prove reaping before checking the bounded prefix.
++        assert_io_stress_record(&record_path, 0, false);
++        let expected_prefix = if stream == "stdout" {
++            let mut prefix = LIBTEST_QUIET_START.to_vec();
++            prefix.extend(std::iter::repeat(b'o').take(CAP - LIBTEST_QUIET_START.len()));
++            prefix
++        } else {
++            vec![b'e'; CAP]
++        };
++        assert_output_limit_error(error, stream, &expected_prefix);
++    }
++}
++
+ #[test]
+ #[cfg(not(feature = "no_index"))]
+ fn zero_output_cap_reports_output_limit_with_an_empty_retained_prefix() {
+@@ -2901,7 +2929,7 @@ fn zero_output_cap_reports_output_limit_with_an_empty_retained_prefix() {
+             "stderr" => "; printf x >&2",
+             _ => unreachable!(),
+         };
+-        let script = format!(r#"run("/bin/sh", #{{ env_clear: true, env: #{{ RECORD: "{record_literal}" }}, stdin: "printf 'child-pid=%s\\n' \"$$\" > \"$RECORD\"{output}", max_output: 0, timeout: 5.0 }})"#);
++        let script = format!(r#"run("/bin/sh", #{{ env_clear: true, env: #{{ RECORD: "{record_literal}" }}, stdin: "printf 'child-pid=%s\\n' \"$$\" > \"$RECORD\"{output}", max_output: 0, timeout: 5 }})"#);
+         if stream == "none" {
+             let result = engine.eval::<Map>(&script).unwrap();
+             assert!(result["success"].as_bool().unwrap());
+@@ -2924,7 +2952,12 @@ fn zero_output_cap_reports_output_limit_with_an_empty_retained_prefix() {
+ #[test]
+ #[cfg(not(feature = "no_index"))]
+ fn run_deadline_returns_bounded_partial_output_after_terminating_child() {
+-    let engine = engine(SysConfig::default().programs(ProgramPolicy::Any));
++    let config = SysConfig::default().programs(ProgramPolicy::Any);
++    #[cfg(feature = "no_float")]
++    let config = config.default_timeout(Some(0.1));
++    let engine = engine(config);
++    // Integer-only scripts use the same fractional deadline configured by the host.
++    let timeout_option = if cfg!(feature = "no_float") { "" } else { "timeout: 0.1" };
+     let executable = std::env::current_exe().unwrap();
+     let executable = executable.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+     for raw in [true, false] {
+@@ -2937,7 +2970,7 @@ fn run_deadline_returns_bounded_partial_output_after_terminating_child() {
+                 env_clear: true,
+                 env: #{{ {FIXTURE_ENV}: "0", {FIXTURE_RECORD_ENV}: "{record_literal}", RHAI_SYS_PROCESS_HOLD: "1" }},
+                 max_output: 1048576,
+-                timeout: 0.1
++                {timeout_option}
+             }})"#
+         );
+         let result = match engine.eval::<Map>(&script) {
+@@ -2979,8 +3012,13 @@ fn run_deadline_returns_bounded_partial_output_after_terminating_child() {
+ fn run_deadline_with_blocked_stdin_and_active_stdout_stderr() {
+     const INPUT_BYTES: usize = 512 * 1024;
+     const OUTPUT_LIMIT: usize = 64 * 1024 * 1024;
+-    let mut engine = engine(SysConfig::default().max_output(OUTPUT_LIMIT).programs(ProgramPolicy::Any));
++    let config = SysConfig::default().max_output(OUTPUT_LIMIT).programs(ProgramPolicy::Any);
++    #[cfg(feature = "no_float")]
++    let config = config.default_timeout(Some(0.25));
++    let mut engine = engine(config);
++    #[cfg(not(feature = "unchecked"))]
+     engine.set_max_string_size(OUTPUT_LIMIT);
++    let timeout_option = if cfg!(feature = "no_float") { "" } else { "timeout: 0.25" };
+     let executable = std::env::current_exe().unwrap();
+     let executable = executable.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+     let input = "i".repeat(INPUT_BYTES);
+@@ -2994,7 +3032,7 @@ fn run_deadline_with_blocked_stdin_and_active_stdout_stderr() {
+             r#"{api}("{executable}", ["--exact", "process_fixture", "--nocapture", "--quiet"], #{{
+                 env_clear: true,
+                 env: #{{ {FIXTURE_ENV}: "0", {FIXTURE_RECORD_ENV}: "{record_literal}", RHAI_SYS_PROCESS_DEADLINE_IO: "1" }},
+-                stdin: "{input}", max_output: {OUTPUT_LIMIT}, timeout: 0.25
++                stdin: "{input}", max_output: {OUTPUT_LIMIT}, {timeout_option}
+             }})"#
+         );
+         let result = match engine.eval::<Map>(&script) {
+@@ -3090,7 +3128,7 @@ fn unit_stdin_means_immediate_eof() {
+             env_clear: true,
+             env: #{{ {FIXTURE_ENV}: "0", {FIXTURE_RECORD_ENV}: "{record_path}", RHAI_SYS_PROCESS_READ_STDIN: "1" }},
+             stdin: (),
+-            timeout: 5.0
++            timeout: 5
+         }})"#
+     );
+     let result = match engine.eval::<Map>(&script) {
+@@ -3155,7 +3193,7 @@ fn process_cwd_uses_the_opened_filesystem_capability_after_root_replacement() {
+ }
+ 
+ #[test]
+-#[cfg(not(feature = "no_index"))]
++#[cfg(all(not(feature = "no_index"), not(feature = "unchecked")))]
+ fn lossy_run_reports_engine_limit_expansion_without_returning_truncated_text() {
+     let mut engine = engine(SysConfig::default().programs(ProgramPolicy::Any));
+     let executable = std::env::current_exe().unwrap();
+@@ -3173,7 +3211,7 @@ fn lossy_run_reports_engine_limit_expansion_without_returning_truncated_text() {
+             env_clear: true,
+             env: #{{ {FIXTURE_ENV}: "0", {FIXTURE_RECORD_ENV}: "{record_path}", RHAI_SYS_PROCESS_INVALID_COUNT: "{invalid_count}" }},
+             max_output: 1024,
+-            timeout: 5.0
++            timeout: 5
+         }})"#
+     );
+     let error = engine.eval::<Map>(&script).unwrap_err();

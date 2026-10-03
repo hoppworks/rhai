@@ -1,0 +1,88 @@
+launch_utc=2026-10-03T10:35:47Z
+runner_timeout_seconds=585
+stage=/root/rhai-linux-process-feature-20261003-6c451c5c-92
+scope=/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92
+source.tar: OK
+Cargo.lock.accepted: OK
+check-linux-current-msrv-examples.py: OK
+linux-process-feature-proof.py: OK
+process-feature.patch: OK
+linux-process-options-control.py: OK
+linux-process-io-control.py: OK
+contract.md: OK
+stage.sh: OK
+launch.sh: OK
+runner/tools/run_scoped.py: OK
+runner/tools/agentskills/__init__.py: OK
+runner/tools/agentskills/pyguard.py: OK
+PRIVATE_RUNTIME /root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa
+command=rustup-install argv=['/root/.cargo/bin/rustup', 'toolchain', 'install', '1.77.2-x86_64-unknown-linux-gnu', '--profile', 'minimal', '--no-self-update']
+sample={"descendants": 2, "monotonic_seconds": 0.433, "rss_kib": 46980, "storage_kib": 73496}
+sample={"descendants": 2, "monotonic_seconds": 1.448, "rss_kib": 93156, "storage_kib": 89260}
+sample={"descendants": 2, "monotonic_seconds": 2.462, "rss_kib": 56732, "storage_kib": 143352}
+sample={"descendants": 2, "monotonic_seconds": 3.475, "rss_kib": 56852, "storage_kib": 166068}
+sample={"descendants": 2, "monotonic_seconds": 4.488, "rss_kib": 56828, "storage_kib": 188804}
+sample={"descendants": 2, "monotonic_seconds": 5.503, "rss_kib": 210068, "storage_kib": 283516}
+sample={"descendants": 2, "monotonic_seconds": 6.517, "rss_kib": 270904, "storage_kib": 407776}
+sample={"descendants": 2, "monotonic_seconds": 7.532, "rss_kib": 424620, "storage_kib": 549944}
+sample={"descendants": 1, "monotonic_seconds": 8.246, "rss_kib": 31184, "storage_kib": 533184}
+status=rustup-install:0
+command=rustc-version argv=['/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 8.258, "rss_kib": 31100, "storage_kib": 533192}
+sample={"descendants": 1, "monotonic_seconds": 8.371, "rss_kib": 31192, "storage_kib": 533196}
+status=rustc-version:0
+command=cargo-version argv=['/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 8.383, "rss_kib": 31212, "storage_kib": 533200}
+sample={"descendants": 1, "monotonic_seconds": 8.495, "rss_kib": 31204, "storage_kib": 533204}
+status=cargo-version:0
+command=baseline-no-run-only-i32-no-float argv=['/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--features', 'testing-environ,sys,only_i32,no_float', '--test', 'sys_process', '--no-run']
+sample={"descendants": 2, "monotonic_seconds": 8.507, "rss_kib": 52988, "storage_kib": 533212}
+sample={"descendants": 2, "monotonic_seconds": 9.521, "rss_kib": 74212, "storage_kib": 536488}
+sample={"descendants": 2, "monotonic_seconds": 10.535, "rss_kib": 74832, "storage_kib": 536708}
+sample={"descendants": 2, "monotonic_seconds": 11.55, "rss_kib": 89424, "storage_kib": 541596}
+sample={"descendants": 3, "monotonic_seconds": 12.57, "rss_kib": 238972, "storage_kib": 598160}
+sample={"descendants": 4, "monotonic_seconds": 13.59, "rss_kib": 641268, "storage_kib": 626016}
+sample={"descendants": 3, "monotonic_seconds": 14.61, "rss_kib": 271292, "storage_kib": 657624}
+sample={"descendants": 4, "monotonic_seconds": 15.631, "rss_kib": 665420, "storage_kib": 673040}
+sample={"descendants": 4, "monotonic_seconds": 16.651, "rss_kib": 693884, "storage_kib": 685832}
+sample={"descendants": 4, "monotonic_seconds": 17.673, "rss_kib": 536532, "storage_kib": 723108}
+sample={"descendants": 3, "monotonic_seconds": 18.694, "rss_kib": 544428, "storage_kib": 729564}
+sample={"descendants": 3, "monotonic_seconds": 19.714, "rss_kib": 722680, "storage_kib": 736700}
+sample={"descendants": 3, "monotonic_seconds": 20.735, "rss_kib": 808396, "storage_kib": 749504}
+sample={"descendants": 1, "monotonic_seconds": 21.255, "rss_kib": 31136, "storage_kib": 770672}
+status=baseline-no-run-only-i32-no-float:101
+command=baseline-no-run-unchecked argv=['/root/.local/share/agent-builds/rhai/linux-process-feature-20261003-6c451c5c-92/agent-build-79hikwwa/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--features', 'testing-environ,sys,unchecked', '--test', 'sys_process', '--no-run']
+sample={"descendants": 2, "monotonic_seconds": 21.274, "rss_kib": 67060, "storage_kib": 770676}
+sample={"descendants": 3, "monotonic_seconds": 22.295, "rss_kib": 445188, "storage_kib": 771200}
+sample={"descendants": 3, "monotonic_seconds": 23.316, "rss_kib": 573008, "storage_kib": 771200}
+sample={"descendants": 3, "monotonic_seconds": 24.336, "rss_kib": 763492, "storage_kib": 780212}
+sample={"descendants": 3, "monotonic_seconds": 25.358, "rss_kib": 834056, "storage_kib": 793824}
+sample={"descendants": 1, "monotonic_seconds": 26.379, "rss_kib": 31264, "storage_kib": 825756}
+status=baseline-no-run-unchecked:101
+command=apply-process-feature-patch argv=['patch', '-p1', '--batch', '--forward', '-i', '/root/rhai-linux-process-feature-20261003-6c451c5c-92/process-feature.patch']
+Traceback (most recent call last):
+  File "/root/rhai-linux-process-feature-20261003-6c451c5c-92/linux-process-feature-proof.py", line 508, in <module>
+    status = main()
+  File "/root/rhai-linux-process-feature-20261003-6c451c5c-92/linux-process-feature-proof.py", line 288, in main
+    h.run_command("apply-process-feature-patch", patch_command, env, cwd=h.SOURCE)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-process-feature-20261003-6c451c5c-92/check-linux-current-msrv-examples.py", line 286, in run_command
+    child = subprocess.Popen(argv, cwd=command_cwd, env=command_env,
+                             stdin=subprocess.DEVNULL, stdout=stdout, stderr=stderr)
+  File "/usr/lib64/python3.14/subprocess.py", line 1039, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.14/subprocess.py", line 1990, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'patch'
+/root/rhai-linux-process-feature-20261003-6c451c5c-92/launch.sh: line 123: /proc/768974/stat: No such file or directory
+run_scoped_status=1
+runtime_cleanup_status=0 pid_readback_status=0 scope_cleanup_status=0
+outer_status=1
