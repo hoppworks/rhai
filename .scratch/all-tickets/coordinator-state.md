@@ -85,7 +85,7 @@ Instructions/roles faba3db3bef6891ad2c0b20d434963bb8fe9572d loaded by root,
 responsible Standard and same combined reviewer. Workhorse installed rules resolved
 at /var/home/workhorse/.agents/AGENTS.md and /var/home/workhorse/projects/agent-skills;
 SSH root has no ~/.agents. Read-only resolution/command-local safe.directory only.
-Last verified fork main2e0344cb60febc61268e34b8ddb6d935f6dcde6e; sole remote main,
+Last verified fork mainf2353118f1fc6462e4c9c43439a991ca0636e308; sole remote main,
 lowercase human author/committer. Previous goal turn PROGRESS: public managed
 Child.kill native101 accepted and integrated; overall scope remains incomplete.
 
@@ -100,8 +100,15 @@ requests cleanup but initial observer snapshots immediate closure. One batched
 correction dispatched to responsible Standard: distinguish finaldrop-return from
 later bounded independent closure/reaping while host/reaper/sentinel remain live.
 Keep kill101 unchanged, strict exactidentity/reaper/group cleanup,20s watchdog and
-no extra kill/wait/deadline termination. New package initialfinding1, completed
-failed corrections0/native launches0. Ref linux-managed-final-drop-review.md.
+no extra kill/wait/deadline termination. New package initialfinding1, then correction228132c9/d9e9fa4a completed affected
+review NOT READY with2blockers: identity parseclosure mixes i32/u64; observeruntil
+watchdog-4s overlaps reaperexceptionalcleanupstart-7s, permitting false dropalone
+closure. Stable final-drop-observation failedsourcecorrectioncount1/native0;
+diagnostic reaper_statusaddition sound, notfix. Onebatched secondcorrection
+assignedsameStandard: explicitparsetypes, acceptancebeforeexceptionalboundary or
+exactfailclosedexceptionalstartguard, unchangedwatchdogs/resources. Onsecondfailed
+correction escalatefreshnonforkExpert; nohistoryreset. Fullsamecombinedreport
+linux-managed-final-drop-review.md preserves rejected source/sourcepins. Ref linux-managed-final-drop-review.md.
 Prospective102 stage /root/rhai-linux-managed-final-drop-20261003-106f2472-102,
 physical /var/roothome/rhai-linux-managed-final-drop-20261003-106f2472-102,
 scope /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102.
@@ -1547,4 +1554,3 @@ remain in review report as immutable rejected baseline. No Cargo/SSH/stage/nativ
 Unix95consumed/96unallocated. These are independent preparation findings, not
 native failed implementation/infrastructure outcomes. Next corrected freeze ->
 same affected recheck -> fresh slot and stage validation -> bounded native96.
-
