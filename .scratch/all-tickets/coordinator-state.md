@@ -1784,3 +1784,17 @@ Native106 allocated 2026-10-03T18:50:23.707720+00:00: fresh guardPASS, prior for
 Native106 samecombinedactualacceptance ACCEPTED, review/proof/tickets03/06 partialclosure recorded. Immutable root non-scratchsource prepared53b, newerescapedpipe notintegrated. Escapedf32 initial3sourcefindings repaired523608648dcae99bc0f6b46eaf2bb91fa4ecc752; sameExpert affectedrecheck running, sameStandard recipespreparation source-only. No107allocation, no renewedhardchain.
 
 Native106 acceptedintegration6faf70be091dd52dff9987276d2e33492647bfbd pushed; independentlsremote confirmsONLYforkmain exactsamehash. Author/committer hoppworks<daniel@hoppworks.de>. Root non-scratch exceptprojectAGENTS equalsacceptedimmutable53b. Escapedpipe523 samecombinedaffectedSOURCE READY at testSHA5836af855f7410213367786e195c0b9b09c0da005cde37244cfa241baf59c4cb; sourcefindingsresolvedfirstbatch, no completedfailedcorrection. SameStandard source-onlyboundedrecipespreparation, native107unallocated. Overallactiveincomplete; no extra approval needed for ordinaryauthorizedwork.
+
+Following criterion decision: sameExpert source-only recommendation in
+linux-stdin-closure-decision.md resolves actual BrokenPipe with unsent supplied
+input as retained input Io cause, preserving earlier committed causes and exact
+owned cleanup; pending-byte Ok(0) likewise WriteZero. Accepted ticket03 matrix
+explicitly requires input error retained. Human standing recommendation acceptance
+covers this concrete scope; agent-authored contract-owner gate is not a hard user
+limit. No new approval gate. RealOS self-reexec child closes fd0 while live, records
+actual capacity/PID/start/markers; oversized input publicEngine run must report
+write-child-stdin Io, truthful captures, no fallback timeout, exact reap/closure.
+First RED before production correction, existing EOF/blockedstdin regressions and
+postcleanup sensitivity. No source edit/native allocation yet; sameStandard starts
+only after immutable escaped523 stage is confirmed. Windows and worker-start fault
+remain independent; no exhausted cause chain is reopened.
