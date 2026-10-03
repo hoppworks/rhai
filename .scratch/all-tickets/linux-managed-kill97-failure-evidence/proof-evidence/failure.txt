@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/root/rhai-linux-managed-kill-20261003-a17f40a7-97/linux-managed-kill-proof.py", line 196, in <module>
+    try: status=main()
+                ~~~~^^
+  File "/root/rhai-linux-managed-kill-20261003-a17f40a7-97/linux-managed-kill-proof.py", line 164, in main
+    one(cargo,env,control,ROWS[0],101,control)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-managed-kill-20261003-a17f40a7-97/linux-managed-kill-proof.py", line 132, in one
+    result=verify_panic(out,err,label,CONTROLS[control])
+  File "/root/rhai-linux-managed-kill-20261003-a17f40a7-97/linux-managed-kill-proof.py", line 122, in verify_panic
+    terminal(out,TEST,True)
+    ~~~~~~~~^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-managed-kill-20261003-a17f40a7-97/linux-managed-kill-proof.py", line 49, in terminal
+    if len(re.findall(r'(?m)^test '+re.escape(name)+r' \.\.\..*$',out))!=1: raise RuntimeError(f'{name}: exact outer name missing/duplicated')
+                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: managed_child_kill_reports_group_closed_under_fixture_reaper: exact outer name missing/duplicated

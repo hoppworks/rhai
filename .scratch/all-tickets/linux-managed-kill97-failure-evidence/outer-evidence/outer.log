@@ -1,0 +1,77 @@
+launch_utc=2026-10-03T14:10:49Z
+runner_timeout_seconds=585
+stage=/root/rhai-linux-managed-kill-20261003-a17f40a7-97
+scope=/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-97
+archive-build-source.py: OK
+source.tar: OK
+Cargo.lock.accepted: OK
+check-linux-current-msrv-examples.py: OK
+linux-managed-kill-proof.py: OK
+linux-managed-success-proof.py: OK
+contract-source.md: OK
+contract.md: OK
+stage.sh: OK
+launch.sh: OK
+runner/tools/run_scoped.py: OK
+runner/tools/agentskills/__init__.py: OK
+runner/tools/agentskills/pyguard.py: OK
+PRIVATE_RUNTIME /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-97/agent-build-4pp9guh2
+command=rustup-install argv=['/root/.cargo/bin/rustup', 'toolchain', 'install', '1.77.2-x86_64-unknown-linux-gnu', '--profile', 'minimal', '--no-self-update']
+sample={"descendants": 2, "monotonic_seconds": 0.065, "rss_kib": 45092, "storage_kib": 7152}
+sample={"descendants": 2, "monotonic_seconds": 1.076, "rss_kib": 53988, "storage_kib": 7156}
+sample={"descendants": 2, "monotonic_seconds": 2.087, "rss_kib": 53936, "storage_kib": 7588}
+sample={"descendants": 2, "monotonic_seconds": 3.097, "rss_kib": 53932, "storage_kib": 7972}
+sample={"descendants": 2, "monotonic_seconds": 4.107, "rss_kib": 53988, "storage_kib": 23508}
+sample={"descendants": 2, "monotonic_seconds": 5.118, "rss_kib": 153948, "storage_kib": 87280}
+sample={"descendants": 2, "monotonic_seconds": 6.13, "rss_kib": 124432, "storage_kib": 221048}
+sample={"descendants": 2, "monotonic_seconds": 7.14, "rss_kib": 65344, "storage_kib": 258672}
+sample={"descendants": 2, "monotonic_seconds": 8.151, "rss_kib": 65376, "storage_kib": 267848}
+sample={"descendants": 2, "monotonic_seconds": 9.162, "rss_kib": 220712, "storage_kib": 374200}
+sample={"descendants": 2, "monotonic_seconds": 10.174, "rss_kib": 376308, "storage_kib": 516368}
+sample={"descendants": 1, "monotonic_seconds": 10.584, "rss_kib": 29644, "storage_kib": 466840}
+status=rustup-install:0
+command=rustc-version argv=['/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-97/agent-build-4pp9guh2/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 10.594, "rss_kib": 29508, "storage_kib": 466848}
+sample={"descendants": 1, "monotonic_seconds": 10.707, "rss_kib": 29648, "storage_kib": 466852}
+status=rustc-version:0
+command=cargo-version argv=['/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-97/agent-build-4pp9guh2/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 10.716, "rss_kib": 29608, "storage_kib": 466860}
+sample={"descendants": 1, "monotonic_seconds": 10.827, "rss_kib": 29724, "storage_kib": 466864}
+status=cargo-version:0
+command=require-success-control argv=['/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-97/agent-build-4pp9guh2/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--features', 'testing-environ,sys', '--test', 'sys_process', '--', '--exact', '--nocapture', '--test-threads=1', 'managed_child_kill_reports_group_closed_under_fixture_reaper']
+sample={"descendants": 2, "monotonic_seconds": 10.836, "rss_kib": 51632, "storage_kib": 466868}
+sample={"descendants": 2, "monotonic_seconds": 11.847, "rss_kib": 72576, "storage_kib": 470124}
+sample={"descendants": 2, "monotonic_seconds": 12.858, "rss_kib": 72692, "storage_kib": 470364}
+sample={"descendants": 2, "monotonic_seconds": 13.87, "rss_kib": 105820, "storage_kib": 484420}
+sample={"descendants": 9, "monotonic_seconds": 14.887, "rss_kib": 320280, "storage_kib": 534712}
+sample={"descendants": 4, "monotonic_seconds": 15.903, "rss_kib": 600176, "storage_kib": 560980}
+sample={"descendants": 4, "monotonic_seconds": 16.921, "rss_kib": 456064, "storage_kib": 591956}
+sample={"descendants": 4, "monotonic_seconds": 17.938, "rss_kib": 667448, "storage_kib": 607828}
+sample={"descendants": 4, "monotonic_seconds": 18.956, "rss_kib": 700724, "storage_kib": 619992}
+sample={"descendants": 4, "monotonic_seconds": 19.973, "rss_kib": 460504, "storage_kib": 658508}
+sample={"descendants": 3, "monotonic_seconds": 20.99, "rss_kib": 561376, "storage_kib": 663196}
+sample={"descendants": 3, "monotonic_seconds": 22.008, "rss_kib": 711992, "storage_kib": 663208}
+sample={"descendants": 3, "monotonic_seconds": 23.025, "rss_kib": 915884, "storage_kib": 676336}
+sample={"descendants": 3, "monotonic_seconds": 24.043, "rss_kib": 938448, "storage_kib": 690540}
+sample={"descendants": 1, "monotonic_seconds": 24.56, "rss_kib": 29948, "storage_kib": 718324}
+status=require-success-control:101
+Traceback (most recent call last):
+  File "/root/rhai-linux-managed-kill-20261003-a17f40a7-97/linux-managed-kill-proof.py", line 196, in <module>
+    try: status=main()
+                ~~~~^^
+  File "/root/rhai-linux-managed-kill-20261003-a17f40a7-97/linux-managed-kill-proof.py", line 164, in main
+    one(cargo,env,control,ROWS[0],101,control)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-managed-kill-20261003-a17f40a7-97/linux-managed-kill-proof.py", line 132, in one
+    result=verify_panic(out,err,label,CONTROLS[control])
+  File "/root/rhai-linux-managed-kill-20261003-a17f40a7-97/linux-managed-kill-proof.py", line 122, in verify_panic
+    terminal(out,TEST,True)
+    ~~~~~~~~^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-managed-kill-20261003-a17f40a7-97/linux-managed-kill-proof.py", line 49, in terminal
+    if len(re.findall(r'(?m)^test '+re.escape(name)+r' \.\.\..*$',out))!=1: raise RuntimeError(f'{name}: exact outer name missing/duplicated')
+                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: managed_child_kill_reports_group_closed_under_fixture_reaper: exact outer name missing/duplicated
+/root/rhai-linux-managed-kill-20261003-a17f40a7-97/launch.sh: line 123: /proc/794074/stat: No such file or directory
+run_scoped_status=1
+runtime_cleanup_status=0 pid_readback_status=0 scope_cleanup_status=0
+outer_status=1

@@ -82,7 +82,7 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 ## Current step and next action
 
 Current instructions/roles revision faba3db3bef6891ad2c0b20d434963bb8fe9572d.
-Latest independently read-back fork main 3e8668585957c2f7bea1317d6d46e938a80f14fa;
+Latest independently read-back fork main 9caa3852f593f17f03630dbaaed18da37539ccbe;
 ONLY remote main. Lowercase human author and committer verified. Accepted96 subset
 is mapped explicitly to open tickets03/06; checkpoint/source remains unchanged.
 Workhorse installed revision independently read back at
@@ -171,7 +171,18 @@ Relevant shared fixture changes require original prompt/held cases in same build
 
 Prospective native97 stage /root/rhai-linux-managed-kill-20261003-a17f40a7-97,
 scope /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-97;
-UNALLOCATED, absent/not staged yet. Planned four existing feature rows for one new
+Native97 ALLOCATED for ONE bounded run after independent EXECUTION READY at
+recipecec147/source d70; collector-only batch remains NOT READY. Exact stage and
+scope freshly observed absent. Workhorse Linux7.2.7 current process inventory has
+no heavy build/test candidates and no central private runtimes under root or
+workhorse user; MemAvailable82880032kB. This is a current observation, no slot or
+capacity reservation. Recorded campaign active runs none; do not disrupt foreign
+processes. Preserve all stage originals pending corrected read-only collection.
+Native97 CONSUMED launch2026-10-03T14:10:49Z, root exec session12956.
+Runtime agent-build-4pp9guh2 below exact scope, input hashes passed before helper.
+Three existing private-toolchain setup commands use runtime-scoped outputs/caches
+as in accepted96 recipe; no shared agent-home/system installation or config change.
+No retry/budget reset; Unix97 consumed, prior Unix96 retained. ENDED before intended assertions: Cargo101 compile failure at tests/sys_process.rs1921, three format placeholders without arguments. Empty test stdout; no fixture launched. Infrastructure/compiler-harness outcome, not intended RED or product failure. Source restored9c6/errornull. Runner status1; PID readback/runtime/scope cleanup statuses0. Raw-failure evidence preserved in linux-managed-kill97-failure-evidence/:42 original files/5dirs byte-identical, fresh70 recorded PID/start rows absent and2exactgroups empty. collect-linux-managed-kill97-failure.py explicitly rejects acceptance; original source/recipe pins retained. Exact stage removed only after local/freshremote inventories agreed; remote-cleanup.json verifies stage/scope/group absence. No retained build. One minimal setup recovery under existing authorization; native98 not allocated. Planned four existing feature rows for one new
 kill criterion, base-row original96 prompt/held affected regressions, two named
 report-success and sentinel-absent RED controls after full fixture cleanup, exact
 restored GREEN. Agent plan revised1→2 before launch to prove both newly claimed
@@ -179,7 +190,15 @@ report/sentinel assertion paths; unchanged time/resource hardbounds, no consumpt
 or userlimit change. Bounds remain
 600s outer/585runner/540helper incl30exportreserve, jobs2/desc16, preempt storage
 1572864KiB and RSS/storage hard2097152KiB. No budget reset; Unix96 consumed.
-Source d70 SOURCE READY; helper pins pending recipe preparation and combined readiness.
+Source d70 SOURCE READY; initial recipe-only commitcec147c3 has11commands
+(3setup,8exacttests:6positive/2controls). Initial recipe review NOT READY:
+collector REMOTE missing re import, writing sink can regenerate original closure
+artifacts, original96-success lacks fresh identity/group closure reader. Same
+responsible Standard applies one batch while reviewer finishes count/pin checks;
+execution independently READY while collector affected correction continues. New collector adaptation must
+compare preexisting originals read-only; historical96 helpers remain immutable.
+Initial recipe findings, zero completed corrective recipe attempts/native failures;
+no renewal of the historical PASSED receipt/custody Expert chain.
 Initial a17/1009 pins are obsolete for launch. One combined source/recipe/live evidence review, no extra pipeline.
 30-minute active-work planning checkpoint; ordinary reversible implementation
 continues under existing authorization. The passed receipt/custody history is
