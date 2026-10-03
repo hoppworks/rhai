@@ -129,75 +129,62 @@ no no_float/no_index or otherOS/releaseclaim. Root and writer owners unchanged.
 
 ### Current coherent requirement: managed run deadline
 
-Same responsible Standard linux_managed_gap continues ticket03 public run() deadline
-closure under unchanged faba3db instructions; same combined Expert owns affected
-review. Source b5243017a5ff2926c12c13e6108a2064091e843b, recipes65ada008bc1623844555e5440f3a83ecced6a1cd.
-Initial source findings and first batched fixes remain in linux-managed-deadline-review.md.
-Local stale contract-pin infrastructure outcome repaired once successfully at65ada;
-actual immutable contract0edcab44 verified. No failed pin recovery/native allocation
-from local preflight. Source semantics: public0.75s deadline, capture4096, fixture
-watchdog20s; exact PIDFD/start/group/reaper/sentinel closure and honest partial,
-incomplete capture required. No kill/Drop/watchdog substitute or criterion waiver.
+Current sourcef82049391de33ee2f096cc6a21ba6639084a67e2/recipes0150adf3bc483ddacefd2b03b988be6c65ccef5e
+passed same combined affected execution/collection review. Actualsource/archive/test
+pins3e112b01/ab894ab2; proof9b41554a/staged1f90be5/launcher867c880f/collector3035163d.
+All initial bce/b524 findings and recipe6bc rejected consumer pins remain in
+linux-managed-deadline-review.md and history. Pin65ada contractrepair PASS;
+0150actualconsumerpinrepair PASS; no nativeallocation from staticpinfindings.
 
-Native103 allocated2026-10-03T16:45:11Z, terminal outer1/run-scoped1; intended
-control never executed. Original compiler error tests/sys_process.rs:2384:124:
-three positional format arguments missing from deadline boundary receipt. Cargo101
-and empty control stdout are infrastructure, NOT meaningful RED/product acceptance.
-Root original linux-managed-deadline103-launch.log retained. Runtimecleanup0,
-PIDreadback0, scopecleanup0; fresh exact central scope absence observed. Restored
-sourceSHAde4cfc16/errornull independently read. Original42files/5directories exported to linux-managed-deadline103-failure-evidence,
-all hashes matched fresh remote originals. Fresh60helper+2launcher PID/start rows
-absent, exact groups835397/835467 empty. Hash-gated cleanup removed exact42files/
-5dirs, fresh stage/scope/group absence confirmed. No retained build/stage.
-Stage/root/rhai-linux-managed-deadline-20261003-bcecd9eb-103 (physical/var/roothome),
-scope/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-103;
-private runtimeagent-build-btzqrka4 removed by runner receipt.
+Native103 compiler infrastructure outcome is preserved: missing3boundaryformatPID
+arguments, no actual test/meaningfulRED. f820 supplies exactleader/worker/leaf arguments;
+intermediate1d6mistaken eprintln edit retained as pre-native preparation. Raw103
+original42files5dirs exported/fullhashmatched; fresh60helper+2launcher rowsabsent,
+groups835397/835467 empty. Exactstage/scope/runtimegone; rawcollectorbb3ba1a3/SHA4794dbd8
+and originalfailureevidence committeda7421a7a. No103productacceptance. Historical97
+sameformatcause repairPASS retained;103recoveryPASS compilationproved at104 below.
 
-Compiler-format infrastructure recurrence carries native97 history: earlier repair
-passed before accepted101; current103 initial recurrence, unsuccessful recoveries0.
-Do not reset historical outcomes or renew closed custodyExpert14/killExpert15.
-Same Standard fixes receipt PID arguments only, freezes affected source and104pins,
-and adapts accepted97 raw failure collection mechanics. Same combined reviewer
-rechecks affected source/pins/raw custody; root performs collection/cleanup and
-bounded native execution only after readiness. Prospective104 UNALLOCATED.
-Source repairf82049391de33ee2f096cc6a21ba6639084a67e2 passed same affected
-independent source review: exactly three leader/worker/leaf PID format arguments,
-all predicates/production unchanged, testSHA3e112b015d506d0034982a3cd147a495d2cc686180aa2fe1859dfd5e1d71900f.
-Intermediate1d6ea010 mistaken later-eprintln edit corrected next commit, pre-native
-preparation only; preserved Git history. Raw103collector immutablebb3ba1a3/SHA4794dbd8
-passed same affected custody review and root collect/cleanup; raw originals remain
-compiler-only NOT acceptance.104recipes frozen6bc123099197f24d21b0ef01f20afbb3afa9a5ee
-failed static affected pin review: proof helper had mismatching actual ARCHIVE/TEST_SHA,
-though stager/collector pins matched. Initial static104 input-pin finding before
-allocation, NOT native recovery/productfailure. Corrected0150adf3bc483ddacefd2b03b988be6c65ccef5e
-passed same affected consumer dependency review: execution/collection READY.
-Root light104 staging passed all exactinputhashes; native104 remains UNALLOCATED.
-Own source stage/root/rhai-linux-managed-deadline-20261003-bcecd9eb-104 contains
-reviewed sources/recipes only, no build/runtime; retire exactstage after104original
-export/cleanup or cancellation. Actualsourcef820/archiveab894ab2/test3e112b01;
-proof9b41554a/staged1f90be5/launcher867c880f/collector3035163d.
-No104central scope/runtime created before heavy launch.
-Fresh heavy inventory observes foreign tauron scoped run850979/850980 timeout5400,
-Cargo890262/rustc891086/891160/891176 and runtime
-/var/home/workhorse/.local/share/agent-builds/tauron/g4546p/agent-build-8ej5ajf0.
-Do not touch it; own heavy launch waits for free slot. Reading/review/light work
-continues; no machine-lock/reservation claim. Exact descendant observation shows
-foreign supervised postgres/sqlx-prepare run still performing Cargo check (new
-Cargo895688/rustc895692); earlier exactCargoPIDs ending is not a free-slot proof.
-Same Standard reads remaining ticket03 criteria/source for smallest next real OS
-regression, message only/no source/file changes; current104 freeze stays intact.
-Ordinary30min active-work planning checkpoint; maximum two consecutive launches
-without diagnosis/closed check. New compiler diagnosis permits bounded correction.
-CumulativeUnix103/deadlinenative1. Seven exact tests plus3setup remain planned:
-one meaningful timeoutwrong, four deadline feature GREEN, two affected prompt/held.
-Hardlimits unchanged600outer/585runner/540helper incl30export, jobs2/desc16,
-preemptstorage1572864KiB, storage/RSS2097152KiB. Fresh machine inventory before
-next heavy launch; do not touch foreign tauron or other work.
+Native104 launched after fresh emptyheavy/runtime inventory and exactsource/input
+hashchecks. CumulativeUnix104/deadlinenative2. Publictestactuallyexecutes0.78s:
+independent boundary shows typedtimeout, incompletecaptures/bothmarkers, exact
+leader/worker/leaf absent/PIDFDexited/groupESRCH, host/reaper/sentinellive,
+exactdescendantreapreceipt, noexceptionalcleanupthroughboundary=true. Reaperexit0,
+sentinelcleanuptrue. AFTER reaper exit exceptionalmarkerexists, guard2401fails
+before intended wrong-timeoutassertion. Therefore NOT meaningfulRED/NOT acceptance.
+Originalouter1/runscoped1; exactcustody/runtime/scopecleanupstatuses0; SSHwrapper0
+also retained rather than treated as acceptance. Root full104launchlog and exact
+controlstdout/stderr diagnostic copies retained. Remote rawsource stage retained
+ONLY for reviewed original export/freshcustody/exactcleanup; runtime removed by
+receiptagent-build-h8_63l1r, no retainedbuild. Stage/root/rhai-linux-managed-deadline-
+20261003-bcecd9eb-104 (physical/var/roothome); owncentralscope same104ID.
 
-Finaldrop102 remains ACCEPTED and integrated4df297d8; source61b3739/proof7173a89,
-all original evidence and closed scope preserved. Finaldrop source correctioncount1
-resolved. Stopped Darwin/Mac/Windows chains remain stopped. Tickets03/06 OPEN;
-overall acceptance incomplete. No additional routine approval required.
+Concrete diagnosis: shared reaper exits normalhost-exit-release wait as soonmarker
+exists while host_statusNone, then immediately emits exceptional-cleanup-started
+and waits for normally exiting exacthost. At0.78s this isn't13s watchtimeout.
+Same responsible Standard repairs bounded normalexacthostwait before unchanged
+exceptionalfallback marker/kill. Preserve strong guard and deadlinecriteria.
+Stable managed-deadline-watchdog-observation initialbcewindow/markerfinding -> b524
+correction/windowguard -> f820compilefix ->104actualguardfailure now FIRST failed
+implementation correction. Do not relabel as infrastructure/newcause/resetcount.
+Nextnormalhostwait is second boundedcorrection; anotherfailedcorrection triggers
+freshnonforkExpert. Compile103infrastructure recoveryPASS separately. Closed
+custody14/kill15 remain closed; stopped Darwin/Mac/Windows chains unchanged.
+Sharedfixture affects prompt/kill/drop/deadline; samecombined reviewer to determine
+and verify affectedregressions with updatedrecipes, not automaticallyreuse altered
+fixtureproof. Guard at104boundary supports narrowdiagnosis only, no acceptance.
+
+SameStandard adapts raw104 collector from acceptedactual-fixture-failure recipes,
+with originalstderr exacthost/reaper/sentinel/memberPID/start/group freshreadback;
+NO originalclosurefiles produced beforeassertionfailure, never regenerate them.
+Root performs collect/cleanup only after immutable affectedrawreview readiness.
+Prospective105 unallocated. Bounds unchanged600outer/585runner/540helper incl30export,
+jobs2/desc16/preempt1572864/hardstorageRSS2097152KiB, fixturewatchdog20s.
+Ordinary30min active-work planning checkpoint, max2consecutivelauncheswithoutnew
+diagnosis/closedcheck; current104freshdiagnosis permits boundedcorrection.
+Finaldrop102/kill101/prompt96 acceptedoriginals preserved with narrower applicable
+claims; source repair/dependency review may require affectedbasechecks before next
+acceptance. Tickets03/06 and overall remain OPEN. Nextfreeze ->samecombined affected
+source/recipes/rawreview -> export104/cleanup ->freshslot ->bounded105.
 
 ### Next independent criterion after deadline acceptance
 
@@ -1641,3 +1628,5 @@ native failed implementation/infrastructure outcomes. Next corrected freeze ->
 same affected recheck -> fresh slot and stage validation -> bounded native96.
 
 Native103 allocated 2026-10-03T16:45:11.138303+00:00 at recipes65ada008/sourceb524, cumulativeUnix103/deadlinenative1. FirstlocalcontractpinrepairPASSedsamecombined actualinputs; machineforeignheavybrieflyobserved thenexactoldPIDsabsent/freshglobalheavyruntimeinventoryempty. Stageinputhashesallverified; limitsunchanged600/585/540+30export, jobs2,desc16,preempt1572864/hardstorageRSS2097152KiB. Acceptanceunproven; ownSSHlaunchbounded600s.
+
+Native104 allocated 2026-10-03T17:07:50.239885+00:00 at sourcef820/recipes0150. Fresh heavy/runtime inventory empty, exactstage/physical/inputhashes valid and scope absent. CumulativeUnix104/deadlinenative2; compiler recurrence recovery now executing, no acceptance yet. Bounds unchanged600/585/540incl30export, jobs2/desc16/preempt1572864/hard2097152KiB.

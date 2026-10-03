@@ -1,0 +1,73 @@
+launch_utc=2026-10-03T17:07:50Z
+runner_timeout_seconds=585
+stage=/root/rhai-linux-managed-deadline-20261003-bcecd9eb-104
+scope=/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-104
+archive-build-source.py: OK
+source.tar: OK
+Cargo.lock.accepted: OK
+check-linux-current-msrv-examples.py: OK
+linux-managed-deadline-proof.py: OK
+linux-managed-success-proof.py: OK
+contract-source.md: OK
+contract.md: OK
+stage.sh: OK
+launch.sh: OK
+runner/tools/run_scoped.py: OK
+runner/tools/agentskills/__init__.py: OK
+runner/tools/agentskills/pyguard.py: OK
+PRIVATE_RUNTIME /root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-104/agent-build-h8_63l1r
+command=rustup-install argv=['/root/.cargo/bin/rustup', 'toolchain', 'install', '1.77.2-x86_64-unknown-linux-gnu', '--profile', 'minimal', '--no-self-update']
+sample={"descendants": 2, "monotonic_seconds": 0.062, "rss_kib": 45140, "storage_kib": 7188}
+sample={"descendants": 2, "monotonic_seconds": 1.073, "rss_kib": 54524, "storage_kib": 25636}
+sample={"descendants": 2, "monotonic_seconds": 2.084, "rss_kib": 55312, "storage_kib": 79152}
+sample={"descendants": 2, "monotonic_seconds": 3.095, "rss_kib": 208828, "storage_kib": 184656}
+sample={"descendants": 2, "monotonic_seconds": 4.106, "rss_kib": 151576, "storage_kib": 259664}
+sample={"descendants": 2, "monotonic_seconds": 5.117, "rss_kib": 151576, "storage_kib": 264368}
+sample={"descendants": 2, "monotonic_seconds": 6.129, "rss_kib": 283652, "storage_kib": 341468}
+sample={"descendants": 2, "monotonic_seconds": 7.14, "rss_kib": 433120, "storage_kib": 500020}
+sample={"descendants": 1, "monotonic_seconds": 7.651, "rss_kib": 29540, "storage_kib": 466876}
+status=rustup-install:0
+command=rustc-version argv=['/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-104/agent-build-h8_63l1r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 7.661, "rss_kib": 29468, "storage_kib": 466884}
+sample={"descendants": 1, "monotonic_seconds": 7.769, "rss_kib": 29448, "storage_kib": 466888}
+status=rustc-version:0
+command=cargo-version argv=['/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-104/agent-build-h8_63l1r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 7.778, "rss_kib": 29592, "storage_kib": 466892}
+sample={"descendants": 1, "monotonic_seconds": 7.89, "rss_kib": 29600, "storage_kib": 466896}
+status=cargo-version:0
+command=require-timeout-control argv=['/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-104/agent-build-h8_63l1r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--features', 'testing-environ,sys', '--test', 'sys_process', '--', '--exact', '--nocapture', '--test-threads=1', 'managed_run_deadline_reaps_group_under_fixture_reaper']
+sample={"descendants": 2, "monotonic_seconds": 7.9, "rss_kib": 51372, "storage_kib": 466904}
+sample={"descendants": 2, "monotonic_seconds": 8.911, "rss_kib": 72604, "storage_kib": 470180}
+sample={"descendants": 2, "monotonic_seconds": 9.922, "rss_kib": 72660, "storage_kib": 470400}
+sample={"descendants": 2, "monotonic_seconds": 10.933, "rss_kib": 72584, "storage_kib": 470400}
+sample={"descendants": 2, "monotonic_seconds": 11.947, "rss_kib": 107688, "storage_kib": 491744}
+sample={"descendants": 4, "monotonic_seconds": 12.964, "rss_kib": 532252, "storage_kib": 540524}
+sample={"descendants": 4, "monotonic_seconds": 13.983, "rss_kib": 313340, "storage_kib": 572716}
+sample={"descendants": 4, "monotonic_seconds": 15.001, "rss_kib": 560620, "storage_kib": 593640}
+sample={"descendants": 4, "monotonic_seconds": 16.019, "rss_kib": 689776, "storage_kib": 610796}
+sample={"descendants": 4, "monotonic_seconds": 17.038, "rss_kib": 697652, "storage_kib": 626964}
+sample={"descendants": 4, "monotonic_seconds": 18.056, "rss_kib": 647332, "storage_kib": 660400}
+sample={"descendants": 3, "monotonic_seconds": 19.074, "rss_kib": 598552, "storage_kib": 663268}
+sample={"descendants": 3, "monotonic_seconds": 20.091, "rss_kib": 772348, "storage_kib": 672388}
+sample={"descendants": 3, "monotonic_seconds": 21.109, "rss_kib": 878756, "storage_kib": 682900}
+sample={"descendants": 7, "monotonic_seconds": 22.126, "rss_kib": 519240, "storage_kib": 708680}
+sample={"descendants": 9, "monotonic_seconds": 23.143, "rss_kib": 150624, "storage_kib": 731980}
+sample={"descendants": 1, "monotonic_seconds": 23.76, "rss_kib": 29924, "storage_kib": 731948}
+status=require-timeout-control:101
+Traceback (most recent call last):
+  File "/root/rhai-linux-managed-deadline-20261003-bcecd9eb-104/linux-managed-deadline-proof.py", line 167, in <module>
+    try: status=main()
+                ~~~~^^
+  File "/root/rhai-linux-managed-deadline-20261003-bcecd9eb-104/linux-managed-deadline-proof.py", line 138, in main
+    run_final(cargo,env,CONTROL,ROWS[0],101,True)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-managed-deadline-20261003-bcecd9eb-104/linux-managed-deadline-proof.py", line 110, in run_final
+    result=verify_control(out,err,label) if control else (terminal(out,TEST,False),parse_deadline(err,label))[1]
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-managed-deadline-20261003-bcecd9eb-104/linux-managed-deadline-proof.py", line 104, in verify_control
+    raise RuntimeError(f'{label}: did not reach the exact post-cleanup timeout-report control assertion')
+RuntimeError: require-timeout-control: did not reach the exact post-cleanup timeout-report control assertion
+./launch.sh: line 123: /proc/898979/stat: No such file or directory
+run_scoped_status=1
+runtime_cleanup_status=0 pid_readback_status=0 scope_cleanup_status=0
+outer_status=1
