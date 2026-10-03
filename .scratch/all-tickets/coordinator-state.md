@@ -195,6 +195,30 @@ separate without resetting historical totals. Preparation permits no Cargo, SSH,
 stage, heavy run or cleanup. Freeze then one combined independent review and
 fresh-slot real acceptance. Other stopped native/platform chains remain stopped.
 
+Process example source is frozen at c0d0afd63383065783794337749289ffd5831722:
+Cargo registration, docs/sys-process.md and examples/sys_process.rs only. Root
+verified exact lowercase author/committer and the three-file diff. Compilation,
+review and real execution remain unverified. Writer reports accepted archive
+helper output d75e7b83289081ad95c097763ac93c55520815bb5ea20a2079834ad137fecd7e;
+archive identity has not yet been independently checked by root.
+At the latest live checkpoint the same Standard had wired the process example
+into the bounded MSRV checker with one same-build wrong-exit RED/restored GREEN,
+source restoration, independent host readbacks and cloned-cache markers. Remaining
+work: launcher/stage/hash wiring, structural checks, diff check and coherent
+recipe freeze. Distinct stage/scope/contract and original-evidence destination
+must preserve all old accepted sys/net and stopped stdin artifacts. Reported
+active work is approximately25 minutes for this separate package; prior stopped
+classifier77 minutes plus unknown earlier use remain preserved and separate.
+At the30-minute planning checkpoint, checker/contract/distinct paths were wired;
+reported AST, bash syntax, rustfmt, whitespace and structural checks passed.
+A roughly5-minute estimate extension is justified by the newly identified raw
+Git archive versus accepted helper byte difference: finish archive/hash readback,
+all stage/launcher/contract pins and bounds, then freeze. This is a planning
+estimate revision, not a hard-cap renewal or erased consumption. Old evidence
+is untouched; new original output is the distinct stage's proof-evidence.
+No Cargo, SSH, native allocation or OS acceptance. Root confirmed the writer
+live; observation timeouts are verified waits, not failure or a restart reason.
+
 Next: freeze/review the distinct process API example preparation -> fresh measured
 slot and existing scoped acceptance route. Native110 stays unallocated. Human
 permits Tauron window coordination if fresh contention requires it. Final native
