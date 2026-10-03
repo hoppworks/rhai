@@ -82,7 +82,7 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 ## Current step and next action
 
 Instructions faba3db unchanged/loaded; full goal active/incomplete. Sole fork
-main last independently read back atf0e4a2b5a840fe54feecd7441e4d147abfe5c767.
+main last independently read back at436b728d1106b868c749ace4bfbd59caa4fa52d8.
 Accepted109 proof/source523 unchanged; no retained native resources, all finite
 concurrency exceptions expired. Unix109 consumed; native110 unallocated.
 
@@ -139,7 +139,7 @@ and guard. The current Python parser and actual-test/Cargo-inventory mismatch
 are distinct concrete mechanisms. The answer permits one recipe-only follow-up,
 without renewing those exhausted chains or resetting either completed failure.
 
-The same responsible Standard stdin_closure_test now owns that single follow-up
+The same responsible Standard stdin_closure_test completed that single follow-up
 from132e6: collect-red.py, baseline-proof.py and necessary contract/pin updates.
 Keep ee50 source unchanged. Correct actual Dynamic #{...} maps, top-level
 Some(...) fallback suffix and parsed positional sentinel phases, stable live
@@ -153,6 +153,18 @@ preserve53minutes reported plus unknown earlier use. Expert elapsed/usage unknow
 Stop this cause if the completed independent follow-up fails or an incompatible
 emission/outcome decision remains. No second Expert chain or counter reset.
 
+Follow-up frozen at2518238beae7ade7e59f5abd7edf1ce209a4c2e3. Root independently
+verified exact lowercase author/committer, four recipe-only changes vs132e6,
+six blob hashes and unchanged non-scratch ee50/testc247. Source-shaped actual
+consumer positive pending/read-only and code-exit/quoted-delimiter models and
+reported corruption checks passed; actual digest producer mutation/missing/
+symlink checks passed. These remain synthetic/local evidence, not OS proof.
+Same combined independent reviewer escaped_recipe_review is now rechecking the
+affected consumer/producer/pin dependencies; readiness is pending. Writer reports
+approximately24minutes active follow-up plus prior53minutes and unknown earlier
+use: known reported cumulative77minutes, not full measured cost/CPU. All two
+failed corrections and single Expert18 follow-up remain consumed/history intact.
+
 No Cargo/SSH/staging/native/production mutation or retained resources. Exact
 prospective stage /root/rhai-linux-stdin-closure-20261003-ee50c63e-110 and scope
 /root/.local/share/agent-builds/rhai/linux-stdin-closure-20261003-ee50c63e-110 are
@@ -163,14 +175,14 @@ preflight never executed. It requires canonical stage, absent scope/terminal,
 zero foreign runner/compiler and16GiB available RAM/disk. No slot reservation,
 expired exception reuse or native allowance renewal. Historical untracked
 lifecycle note and root CLI logs untouched.
-Next: freeze the single Expert18 recipe follow-up -> affected independent review
+Next: finish the affected independent review of frozen2518238b
 -> fresh workhorse slot/capacity -> stage/allocation only if READY -> genuine
 native RED -> product correction and real acceptance. Human explicitly permits
 Tauron window coordination if fresh contention requires it; authorization
 reconfirmed by the latest question reply, no additional message sent yet.
 Final native Linux/macOS/Windows, feature/MSRV/release remain open. Current turn
-PROGRESS: Expert18 diagnosis accepted as a source-only route and the single
-bounded follow-up dispatched; no native or acceptance claim.
+PROGRESS: the single Expert18 follow-up is frozen and independently inventoried;
+affected review dispatched. No native or acceptance claim.
 
 ### Earlier current-step history (retained, superseded)
 
