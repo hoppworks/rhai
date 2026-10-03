@@ -134,8 +134,25 @@ Public timeout alone must terminate managed members; no kill/lease-drop/watchdog
 substitute. Independent exact PIDFD/start/group/reaper and live sentinel/host
 boundary, meaningful post-cleanup control, truthful captures/timeout and exact
 cleanup remain mandatory. Reuse accepted custody mechanics and unaffected proofs.
-New deadline criterion source/native0;103 stage/launch unallocated. Ordinary
-30min active-work planning checkpoint, existing hard limits unchanged. Final-drop
+Deadline source frozenbcecd9eb9d296660a165c238892e4dc77758c095 (parent4df297d8),
+test7af53895abb16efeaa63e0302421df8a225f2c1e8251ce53cd6301f4c5fec39a.
+New managed_run_deadline_reaps_group_under_fixture_reaper uses public run0.75s,
+4096-byte capture cap and live leader/worker/leaf records, PIDFDs, exact reaper,
+sentinel/host boundary; no production change. Semantic note writer
+linux-managed-deadline.md. Source parser/diffcheck pass, compilation unproven.
+Same independent Expert found sourceNOT READY, four consolidated initial findings:
+OsString release.exists type, moved reaper_ready PathBuf, deadline observer20s
+window overlaps13s exceptional fallback without marker guard, and open-pipe
+fixture incorrectly expects timeout capture EOFcomplete=true. One report
+linux-managed-deadline-review.md being finalized, same Standard will apply one
+batched source repair then affected recheck. Initial findings are not completed
+failed corrections; native0 and no Expert escalation allocation. Deadline
+recipes draft6exacttests (1timeoutwrong+4GREEN+1affectedprompt)+3setup=9commands,
+unpinned/uncommitted pending corrected source readiness. No freeze/stage/launch.
+Prospective stage/root/rhai-linux-managed-deadline-20261003-bcecd9eb-103 and
+scope/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-103
+uncreated/unallocated. Ordinary30min active-work planning checkpoint, existing
+hard limits unchanged. Final-drop
 failurecount1 resolved; closed14/15 and stopped platform chains preserved. Next:
 freeze source/semantic test brief, one combined review, then affected native proof.
 No owned retained build or process; active protected owned worktrees reused.
