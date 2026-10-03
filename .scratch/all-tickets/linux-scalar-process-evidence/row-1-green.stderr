@@ -1,0 +1,160 @@
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:668:13
+    |
+668 |         let mut wait_operation = "wait for child";
+    |             ----^^^^^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` on by default
+
+warning: unused variable: `termination`
+    --> src/packages/sys/process/unix.rs:1106:22
+     |
+1106 |                 let (termination, _operation) = if self.managed {
+     |                      ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_termination`
+     |
+     = note: `#[warn(unused_variables)]` on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:1900:9
+     |
+1900 |     let mut known = vec!["cwd", "env", "env_clear", "stdin", "timeout", "max_output"];
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2134:9
+     |
+2134 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2456:9
+     |
+2456 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: function `os_to_string` is never used
+   --> src/packages/sys/fs.rs:340:4
+    |
+340 | fn os_to_string(what: &str, s: std::ffi::OsString) -> Result<String, SysError> {
+    |    ^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` on by default
+
+warning: variant `OnlyZombieLeader` is never constructed
+  --> src/packages/sys/process/unix.rs:50:5
+   |
+47 | enum GroupCloseOutcome {
+   |      ----------------- variant in this enum
+...
+50 |     OnlyZombieLeader,
+   |     ^^^^^^^^^^^^^^^^
+   |
+   = note: `GroupCloseOutcome` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+
+warning: methods `numeric_operations_probe`, `quarantine_observations_probe`, and `fail_reservation` are never used
+    --> src/packages/sys/process/unix.rs:1470:8
+     |
+1390 | impl ExecutionFaults {
+     | -------------------- methods in this implementation
+...
+1470 |     fn numeric_operations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1481 |     fn quarantine_observations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1506 |     fn fail_reservation(&self) -> bool {
+     |        ^^^^^^^^^^^^^^^^
+
+warning: `rhai` (lib) generated 9 warnings (run `cargo fix --lib -p rhai` to apply 5 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+   Compiling rhai v1.26.1 (/var/roothome/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979/source)
+warning: unused imports: `FsAccess`, `ProcessCause`, `ProcessScope`, `ProgramPolicy`
+  --> tests/sys_process.rs:10:27
+   |
+10 | use rhai::packages::sys::{FsAccess, ProcessCause, ProcessScope, ProgramPolicy, SysConfig, SysError};
+   |                           ^^^^^^^^  ^^^^^^^^^^^^  ^^^^^^^^^^^^  ^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` on by default
+
+warning: unused imports: `Dynamic`, `Engine`, `EvalAltResult`, `Scope`
+  --> tests/sys_process.rs:13:12
+   |
+13 | use rhai::{Dynamic, Engine, EvalAltResult, Map, Scope};
+   |            ^^^^^^^  ^^^^^^  ^^^^^^^^^^^^^       ^^^^^
+
+warning: unused import: `sys_support::TempDir`
+  --> tests/sys_process.rs:25:5
+   |
+25 | use sys_support::TempDir;
+   |     ^^^^^^^^^^^^^^^^^^^^
+
+warning: constant `FIXTURE_ENV` is never used
+  --> tests/sys_process.rs:27:7
+   |
+27 | const FIXTURE_ENV: &str = "RHAI_SYS_PROCESS_FIXTURE";
+   |       ^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: constant `FIXTURE_RECORD_ENV` is never used
+  --> tests/sys_process.rs:28:7
+   |
+28 | const FIXTURE_RECORD_ENV: &str = "RHAI_SYS_PROCESS_FIXTURE_RECORD";
+   |       ^^^^^^^^^^^^^^^^^^
+
+warning: constant `LIBTEST_QUIET_START` is never used
+  --> tests/sys_process.rs:29:7
+   |
+29 | const LIBTEST_QUIET_START: &[u8] = b"\nrunning 1 test\n";
+   |       ^^^^^^^^^^^^^^^^^^^
+
+warning: constant `ACTIVE_STDERR_MARKER` is never used
+  --> tests/sys_process.rs:30:7
+   |
+30 | const ACTIVE_STDERR_MARKER: &str = "stderr-active-marker\n";
+   |       ^^^^^^^^^^^^^^^^^^^^
+
+warning: constant `ACTIVE_STDERR_OUTPUT` is never used
+  --> tests/sys_process.rs:31:7
+   |
+31 | const ACTIVE_STDERR_OUTPUT: &str = "stderr-active-marker\n";
+   |       ^^^^^^^^^^^^^^^^^^^^
+
+warning: constant `MANAGED_SPAWN_HOLD_ENV` is never used
+  --> tests/sys_process.rs:32:7
+   |
+32 | const MANAGED_SPAWN_HOLD_ENV: &str = "RHAI_SYS_MANAGED_SPAWN_HOLD";
+   |       ^^^^^^^^^^^^^^^^^^^^^^
+
+warning: `rhai` (test "sys_process") generated 9 warnings (run `cargo fix --test "sys_process"` to apply 3 suggestions)
+    Finished test [unoptimized] target(s) in 0.34s
+     Running tests/sys_process.rs (/root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979/target/debug/deps/sys_process-5294670822541ecf)
+no-index scalar child_pid=679577 reap=ESRCH

@@ -1,0 +1,19 @@
+{
+  "captured_before_stage_validation_or_external_command": true,
+  "helper": {
+    "cmdline": "python3 /root/rhai-linux-scalar-process-20261003-2a8fdc49/linux-scalar-process-proof.py",
+    "pgid": 641614,
+    "pid": 641615,
+    "ppid": 641614,
+    "start_ticks": "451173"
+  },
+  "identity_errors": {},
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979",
+  "scoped_supervisor": {
+    "cmdline": "/usr/bin/python3 /var/roothome/rhai-linux-scalar-process-20261003-2a8fdc49/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-scalar-process-20261003-2a8fdc49/linux-scalar-process-proof.py",
+    "pgid": 641614,
+    "pid": 641614,
+    "ppid": 641610,
+    "start_ticks": "451171"
+  }
+}

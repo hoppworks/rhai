@@ -1,0 +1,36 @@
+[
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-0-wrong-cwd",
+    "required_diagnostics": [
+      "left:",
+      "right:",
+      "<deliberately-wrong-cwd>"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test scalar_run_with_cwd_works_without_collections ... ok",
+    "name": "row-0-green",
+    "status": 0
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-1-wrong-cwd",
+    "required_diagnostics": [
+      "left:",
+      "right:",
+      "<deliberately-wrong-cwd>"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test scalar_run_with_cwd_works_without_collections ... ok",
+    "name": "row-1-green",
+    "status": 0
+  }
+]

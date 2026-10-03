@@ -1,0 +1,93 @@
+launch_utc=2026-10-03T07:42:00Z
+runner_timeout_seconds=585
+stage=/root/rhai-linux-scalar-process-20261003-2a8fdc49
+scope=/root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49
+source.tar: OK
+Cargo.lock.accepted: OK
+check-linux-current-msrv-examples.py: OK
+linux-scalar-process-proof.py: OK
+contract.md: OK
+stage.sh: OK
+launch.sh: OK
+runner/tools/run_scoped.py: OK
+runner/tools/agentskills/__init__.py: OK
+runner/tools/agentskills/pyguard.py: OK
+PRIVATE_RUNTIME /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command=rustup-install argv=['/root/.cargo/bin/rustup', 'toolchain', 'install', '1.77.2-x86_64-unknown-linux-gnu', '--profile', 'minimal', '--no-self-update']
+sample={"descendants": 2, "monotonic_seconds": 0.366, "rss_kib": 45788, "storage_kib": 67344}
+sample={"descendants": 2, "monotonic_seconds": 1.381, "rss_kib": 47596, "storage_kib": 67344}
+sample={"descendants": 2, "monotonic_seconds": 2.396, "rss_kib": 47556, "storage_kib": 67344}
+sample={"descendants": 2, "monotonic_seconds": 3.41, "rss_kib": 47736, "storage_kib": 67472}
+sample={"descendants": 2, "monotonic_seconds": 4.423, "rss_kib": 53884, "storage_kib": 67384}
+sample={"descendants": 2, "monotonic_seconds": 5.437, "rss_kib": 53996, "storage_kib": 69844}
+sample={"descendants": 2, "monotonic_seconds": 6.451, "rss_kib": 54028, "storage_kib": 76064}
+sample={"descendants": 2, "monotonic_seconds": 7.465, "rss_kib": 54844, "storage_kib": 116484}
+sample={"descendants": 2, "monotonic_seconds": 8.479, "rss_kib": 55000, "storage_kib": 119248}
+sample={"descendants": 2, "monotonic_seconds": 9.492, "rss_kib": 54956, "storage_kib": 131688}
+sample={"descendants": 2, "monotonic_seconds": 10.505, "rss_kib": 54936, "storage_kib": 137248}
+sample={"descendants": 2, "monotonic_seconds": 11.518, "rss_kib": 55124, "storage_kib": 139476}
+sample={"descendants": 2, "monotonic_seconds": 12.533, "rss_kib": 197064, "storage_kib": 210664}
+sample={"descendants": 2, "monotonic_seconds": 13.546, "rss_kib": 54920, "storage_kib": 288756}
+sample={"descendants": 2, "monotonic_seconds": 14.56, "rss_kib": 54868, "storage_kib": 295164}
+sample={"descendants": 2, "monotonic_seconds": 15.573, "rss_kib": 54836, "storage_kib": 298228}
+sample={"descendants": 2, "monotonic_seconds": 16.586, "rss_kib": 54768, "storage_kib": 300420}
+sample={"descendants": 2, "monotonic_seconds": 17.603, "rss_kib": 54992, "storage_kib": 307948}
+sample={"descendants": 2, "monotonic_seconds": 18.617, "rss_kib": 54840, "storage_kib": 309092}
+sample={"descendants": 2, "monotonic_seconds": 19.631, "rss_kib": 54804, "storage_kib": 317716}
+sample={"descendants": 2, "monotonic_seconds": 20.646, "rss_kib": 54920, "storage_kib": 318356}
+sample={"descendants": 2, "monotonic_seconds": 21.661, "rss_kib": 54996, "storage_kib": 326548}
+sample={"descendants": 2, "monotonic_seconds": 22.676, "rss_kib": 54996, "storage_kib": 327612}
+sample={"descendants": 2, "monotonic_seconds": 23.69, "rss_kib": 122748, "storage_kib": 356856}
+sample={"descendants": 2, "monotonic_seconds": 24.705, "rss_kib": 285920, "storage_kib": 494640}
+sample={"descendants": 2, "monotonic_seconds": 25.719, "rss_kib": 175300, "storage_kib": 621188}
+sample={"descendants": 1, "monotonic_seconds": 25.832, "rss_kib": 29996, "storage_kib": 527032}
+status=rustup-install:0
+command=rustc-version argv=['/root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 25.846, "rss_kib": 29916, "storage_kib": 527040}
+sample={"descendants": 1, "monotonic_seconds": 25.959, "rss_kib": 29948, "storage_kib": 527044}
+status=rustc-version:0
+command=cargo-version argv=['/root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 25.973, "rss_kib": 29848, "storage_kib": 527048}
+sample={"descendants": 1, "monotonic_seconds": 26.087, "rss_kib": 29848, "storage_kib": 527052}
+status=cargo-version:0
+command=row-0-wrong-cwd argv=['/root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--features', 'testing-environ,sys,no_index', '--test', 'sys_process', 'scalar_run_with_cwd_works_without_collections', '--', '--exact', '--nocapture']
+sample={"descendants": 2, "monotonic_seconds": 26.101, "rss_kib": 51356, "storage_kib": 527060}
+sample={"descendants": 2, "monotonic_seconds": 27.115, "rss_kib": 72760, "storage_kib": 530336}
+sample={"descendants": 2, "monotonic_seconds": 28.131, "rss_kib": 72872, "storage_kib": 530556}
+sample={"descendants": 2, "monotonic_seconds": 29.15, "rss_kib": 109404, "storage_kib": 567104}
+sample={"descendants": 4, "monotonic_seconds": 30.198, "rss_kib": 379732, "storage_kib": 595272}
+sample={"descendants": 4, "monotonic_seconds": 31.221, "rss_kib": 533720, "storage_kib": 611320}
+sample={"descendants": 3, "monotonic_seconds": 32.243, "rss_kib": 195120, "storage_kib": 633524}
+sample={"descendants": 4, "monotonic_seconds": 33.265, "rss_kib": 501764, "storage_kib": 653768}
+sample={"descendants": 4, "monotonic_seconds": 34.285, "rss_kib": 662504, "storage_kib": 668516}
+sample={"descendants": 4, "monotonic_seconds": 35.306, "rss_kib": 714932, "storage_kib": 680184}
+sample={"descendants": 4, "monotonic_seconds": 36.328, "rss_kib": 520416, "storage_kib": 717480}
+sample={"descendants": 3, "monotonic_seconds": 37.349, "rss_kib": 547520, "storage_kib": 723388}
+sample={"descendants": 3, "monotonic_seconds": 38.369, "rss_kib": 691688, "storage_kib": 727692}
+sample={"descendants": 3, "monotonic_seconds": 39.389, "rss_kib": 803080, "storage_kib": 742284}
+sample={"descendants": 4, "monotonic_seconds": 40.41, "rss_kib": 114896, "storage_kib": 780636}
+sample={"descendants": 1, "monotonic_seconds": 40.529, "rss_kib": 29860, "storage_kib": 780632}
+status=row-0-wrong-cwd:101
+command=row-0-green argv=['/root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--features', 'testing-environ,sys,no_index', '--test', 'sys_process', 'scalar_run_with_cwd_works_without_collections', '--', '--exact', '--nocapture']
+sample={"descendants": 2, "monotonic_seconds": 40.549, "rss_kib": 65584, "storage_kib": 780640}
+sample={"descendants": 1, "monotonic_seconds": 41.069, "rss_kib": 30072, "storage_kib": 780652}
+status=row-0-green:0
+command=row-1-wrong-cwd argv=['/root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--features', 'testing-environ,sys,net,no_index,sync,metadata', '--test', 'sys_process', 'scalar_run_with_cwd_works_without_collections', '--', '--exact', '--nocapture']
+sample={"descendants": 2, "monotonic_seconds": 41.093, "rss_kib": 65624, "storage_kib": 780656}
+sample={"descendants": 3, "monotonic_seconds": 42.114, "rss_kib": 201208, "storage_kib": 797504}
+sample={"descendants": 4, "monotonic_seconds": 43.134, "rss_kib": 283492, "storage_kib": 803556}
+sample={"descendants": 3, "monotonic_seconds": 44.154, "rss_kib": 469388, "storage_kib": 804708}
+sample={"descendants": 3, "monotonic_seconds": 45.176, "rss_kib": 576328, "storage_kib": 804708}
+sample={"descendants": 3, "monotonic_seconds": 46.197, "rss_kib": 725028, "storage_kib": 807168}
+sample={"descendants": 3, "monotonic_seconds": 47.218, "rss_kib": 853820, "storage_kib": 822652}
+sample={"descendants": 10, "monotonic_seconds": 48.239, "rss_kib": 492796, "storage_kib": 849052}
+sample={"descendants": 1, "monotonic_seconds": 48.559, "rss_kib": 29944, "storage_kib": 868040}
+status=row-1-wrong-cwd:101
+command=row-1-green argv=['/root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--features', 'testing-environ,sys,net,no_index,sync,metadata', '--test', 'sys_process', 'scalar_run_with_cwd_works_without_collections', '--', '--exact', '--nocapture']
+sample={"descendants": 2, "monotonic_seconds": 48.58, "rss_kib": 65772, "storage_kib": 868048}
+sample={"descendants": 1, "monotonic_seconds": 49.1, "rss_kib": 30004, "storage_kib": 868060}
+status=row-1-green:0
+/root/rhai-linux-scalar-process-20261003-2a8fdc49/launch.sh: line 123: /proc/641610/stat: No such file or directory
+run_scoped_status=0
+runtime_cleanup_status=0 pid_readback_status=0 scope_cleanup_status=0
+outer_status=0

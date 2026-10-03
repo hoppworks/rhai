@@ -1,0 +1,130 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+helper	641615	641614	641614	451173	python3 /root/rhai-linux-scalar-process-20261003-2a8fdc49/linux-scalar-process-proof.py
+scoped-supervisor	641614	641610	641614	451171	/usr/bin/python3 /var/roothome/rhai-linux-scalar-process-20261003-2a8fdc49/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-scalar-process-20261003-2a8fdc49/linux-scalar-process-proof.py
+command:rustup-install	641621	641615	641614	451211	/root/.cargo/bin/rustup toolchain install 1.77.2-x86_64-unknown-linux-gnu --profile minimal --no-self-update
+command:du	641638	641615	641614	451211	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	641641	641615	641614	451211	/bin/ps -e -o pid=,ppid=,rss=
+command:du	642395	641615	641614	451312	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	642397	641615	641614	451313	/bin/ps -e -o pid=,ppid=,rss=
+command:du	642657	641615	641614	451414	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	642658	641615	641614	451414	/bin/ps -e -o pid=,ppid=,rss=
+command:du	643131	641615	641614	451515	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	643132	641615	641614	451516	/bin/ps -e -o pid=,ppid=,rss=
+command:du	643605	641615	641614	451617	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	643615	641615	641614	451617	/bin/ps -e -o pid=,ppid=,rss=
+command:du	643964	641615	641614	451718	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	643966	641615	641614	451719	/bin/ps -e -o pid=,ppid=,rss=
+command:du	644476	641615	641614	451820	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	644478	641615	641614	451820	/bin/ps -e -o pid=,ppid=,rss=
+command:du	645167	641615	641614	451921	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	645172	641615	641614	451921	/bin/ps -e -o pid=,ppid=,rss=
+command:du	645368	641615	641614	452022	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	645369	641615	641614	452023	/bin/ps -e -o pid=,ppid=,rss=
+command:du	645380	641615	641614	452124	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	645381	641615	641614	452124	/bin/ps -e -o pid=,ppid=,rss=
+command:du	645392	641615	641614	452225	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	645393	641615	641614	452225	/bin/ps -e -o pid=,ppid=,rss=
+command:du	645404	641615	641614	452326	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	645405	641615	641614	452327	/bin/ps -e -o pid=,ppid=,rss=
+command:du	645424	641615	641614	452428	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	645425	641615	641614	452428	/bin/ps -e -o pid=,ppid=,rss=
+command:du	645437	641615	641614	452529	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	645438	641615	641614	452530	/bin/ps -e -o pid=,ppid=,rss=
+command:du	645450	641615	641614	452630	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	645451	641615	641614	452631	/bin/ps -e -o pid=,ppid=,rss=
+command:du	645462	641615	641614	452732	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	645463	641615	641614	452732	/bin/ps -e -o pid=,ppid=,rss=
+command:du	645474	641615	641614	452833	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	645475	641615	641614	452833	/bin/ps -e -o pid=,ppid=,rss=
+command:du	645679	641615	641614	452934	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	645680	641615	641614	452935	/bin/ps -e -o pid=,ppid=,rss=
+command:du	645696	641615	641614	453036	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	645697	641615	641614	453037	/bin/ps -e -o pid=,ppid=,rss=
+command:du	645775	641615	641614	453137	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	645776	641615	641614	453138	/bin/ps -e -o pid=,ppid=,rss=
+command:du	645857	641615	641614	453239	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	645858	641615	641614	453239	/bin/ps -e -o pid=,ppid=,rss=
+command:du	645966	641615	641614	453340	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	645967	641615	641614	453341	/bin/ps -e -o pid=,ppid=,rss=
+command:du	646082	641615	641614	453442	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	646083	641615	641614	453442	/bin/ps -e -o pid=,ppid=,rss=
+command:du	646137	641615	641614	453543	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	646150	641615	641614	453544	/bin/ps -e -o pid=,ppid=,rss=
+command:du	646256	641615	641614	453645	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	646257	641615	641614	453645	/bin/ps -e -o pid=,ppid=,rss=
+command:du	646349	641615	641614	453746	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	646353	641615	641614	453747	/bin/ps -e -o pid=,ppid=,rss=
+command:du	646368	641615	641614	453758	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	646369	641615	641614	453758	/bin/ps -e -o pid=,ppid=,rss=
+command:rustc-version	646371	641615	641614	453759	/root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose
+command:du	646372	641615	641614	453759	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	646373	641615	641614	453760	/bin/ps -e -o pid=,ppid=,rss=
+command:du	646386	641615	641614	453770	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	646387	641615	641614	453771	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-version	646388	641615	641614	453772	/root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose
+command:du	646389	641615	641614	453772	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	646401	641615	641614	453772	/bin/ps -e -o pid=,ppid=,rss=
+command:du	646405	641615	641614	453783	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	646406	641615	641614	453784	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-wrong-cwd	646407	641615	641614	453785	/root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,no_index --test sys_process scalar_run_with_cwd_works_without_collections -- --exact --nocapture
+command:du	646408	641615	641614	453785	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	646410	641615	641614	453785	/bin/ps -e -o pid=,ppid=,rss=
+command:du	646460	641615	641614	453886	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	646461	641615	641614	453886	/bin/ps -e -o pid=,ppid=,rss=
+command:du	646536	641615	641614	453987	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	646537	641615	641614	453988	/bin/ps -e -o pid=,ppid=,rss=
+command:du	646552	641615	641614	454089	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	646574	641615	641614	454090	/bin/ps -e -o pid=,ppid=,rss=
+command:du	648231	641615	641614	454191	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	648258	641615	641614	454194	/bin/ps -e -o pid=,ppid=,rss=
+command:du	648953	641615	641614	454296	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	648958	641615	641614	454297	/bin/ps -e -o pid=,ppid=,rss=
+command:du	649787	641615	641614	454398	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	649794	641615	641614	454399	/bin/ps -e -o pid=,ppid=,rss=
+command:du	650228	641615	641614	454500	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	650237	641615	641614	454501	/bin/ps -e -o pid=,ppid=,rss=
+command:du	650472	641615	641614	454602	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	650474	641615	641614	454603	/bin/ps -e -o pid=,ppid=,rss=
+command:du	650588	641615	641614	454704	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	650590	641615	641614	454705	/bin/ps -e -o pid=,ppid=,rss=
+command:du	650788	641615	641614	454806	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	650790	641615	641614	454808	/bin/ps -e -o pid=,ppid=,rss=
+command:du	653364	641615	641614	454909	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	653387	641615	641614	454910	/bin/ps -e -o pid=,ppid=,rss=
+command:du	655508	641615	641614	455011	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	655532	641615	641614	455012	/bin/ps -e -o pid=,ppid=,rss=
+command:du	657561	641615	641614	455113	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	657604	641615	641614	455114	/bin/ps -e -o pid=,ppid=,rss=
+command:du	659716	641615	641614	455215	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	659738	641615	641614	455216	/bin/ps -e -o pid=,ppid=,rss=
+command:du	660056	641615	641614	455227	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	660098	641615	641614	455228	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-green	660120	641615	641614	455229	/root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,no_index --test sys_process scalar_run_with_cwd_works_without_collections -- --exact --nocapture
+command:du	660122	641615	641614	455229	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	660168	641615	641614	455230	/bin/ps -e -o pid=,ppid=,rss=
+command:du	661683	641615	641614	455281	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	661725	641615	641614	455282	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-wrong-cwd	661768	641615	641614	455283	/root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,no_index,sync,metadata --test sys_process scalar_run_with_cwd_works_without_collections -- --exact --nocapture
+command:du	661769	641615	641614	455283	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	661797	641615	641614	455284	/bin/ps -e -o pid=,ppid=,rss=
+command:du	663913	641615	641614	455385	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	663956	641615	641614	455386	/bin/ps -e -o pid=,ppid=,rss=
+command:du	666052	641615	641614	455487	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	666077	641615	641614	455488	/bin/ps -e -o pid=,ppid=,rss=
+command:du	668694	641615	641614	455589	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	668697	641615	641614	455590	/bin/ps -e -o pid=,ppid=,rss=
+command:du	671238	641615	641614	455691	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	671261	641615	641614	455692	/bin/ps -e -o pid=,ppid=,rss=
+command:du	673340	641615	641614	455793	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	673363	641615	641614	455795	/bin/ps -e -o pid=,ppid=,rss=
+command:du	675433	641615	641614	455896	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	675456	641615	641614	455897	/bin/ps -e -o pid=,ppid=,rss=
+command:du	677582	641615	641614	455998	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	677588	641615	641614	455999	/bin/ps -e -o pid=,ppid=,rss=
+command:du	678457	641615	641614	456030	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	678500	641615	641614	456031	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-green	678522	641615	641614	456032	/root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,no_index,sync,metadata --test sys_process scalar_run_with_cwd_works_without_collections -- --exact --nocapture
+command:du	678523	641615	641614	456032	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	678570	641615	641614	456033	/bin/ps -e -o pid=,ppid=,rss=
+command:du	680085	641615	641614	456084	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-scalar-process-20261003-2a8fdc49/agent-build-ihf3v979
+command:ps	680127	641615	641614	456085	/bin/ps -e -o pid=,ppid=,rss=

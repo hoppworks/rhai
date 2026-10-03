@@ -81,12 +81,12 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 
 ## Current step and next action
 
-Current instructions/roles revision958a4538b0191c53f2ccb2cd00d96c15045fbf68.
+Current instructions/roles revisionfaba3db3bef6891ad2c0b20d434963bb8fe9572d.
 Current authoritative history through this rewrite is Git commit
 10d4a0d55400ebe8c24feff134e7161ff36bf8d5, this same state path. It retains
 all earlier cause/attempt/resource/source applicability records. Read that
 history for consumed work, not superseded next actions. No reset occurred.
-Last independently read-back fork main17cd2816c6bfda075f5a77f378d460a516c613b4; only remote main, lowercase
+Last independently read-back fork main2a8fdc49a37b780c63e5c30b141c345321a876d0; only remote main, lowercase
 human author/committer. Goal active and incomplete.
 
 ### Accepted current Linux non-process package
@@ -730,3 +730,51 @@ completed, six base64 records preserved in export-result.png. Cleanup input41140
 completed, executed and verified. No live test invocation or pending input. Expert CLI37889 terminal0. Costs/token/cache
 usage per requirement unavailable; unknown. Root worktree remains needed for
 related repairs and campaign ownership; retire only after coherent work finishes.
+
+
+## Current independent Linux scalar feature package — 2026-10-03
+Previous turn PROGRESS: native Windows invocation2 gave new contradiction evidence,
+Expert13 classified same exhausted cause, originals and cleanup exported/verified,
+fork main2a8fdc49 independently read back; author/committer lowercase hoppworks.
+All native/source attempts and stopped chains remain preserved. New package covers
+only existing scalar run/CWD/env/child-record/reap public contract with no_index,
+and no_index+sync+metadata combined sys/net on private Linux Rust1.77.2. Existing
+public seam/strict profile apply; compiler-only or source-only does not close it.
+Requirement from release-proposal/ticket06; concrete test exists in sys_process.rs.
+No_Index excludes dormant shared-Child fixture; no managed/leaked process fixture,
+no stopped Darwin/Windows route or overhead measurement is reopened. Nativecount84
+and allocated but unlaunched measurement85 unchanged. This is feature correctness,
+not a retry/new label for an exhausted underlying cause.
+Responsible configured Standard CLI34028 terminal0, linux-scalar-process-brief.md;
+source-only recipe prepared in linux-scalar-process-result.md with adapter,
+absent-only stage/launch and five source checks passing. Required revision
+faba3db3bef6891ad2c0b20d434963bb8fe9572d confirmed; no SSH/build/native run or Git mutation.
+Outer600/scoped585/helper540(export30)/aggregateCargo510/jobs2/desc16,
+2GiB policy and sampled stop1572864KiB preserved. One source package/combined review,
+30min planning checkpoint. Workhorse foreign tauron Cargo/rustc observed live;
+prepare only, default single-heavy convention, no foreign process touched.
+Combined review and one affected recheck accepted the repaired recipe underfaba3db.
+linux-scalar-process-review.md preserves three material findings and fix batch;
+nine source-flow checks pass. Preparation155891 tokens; independent review/root
+cost/cache metrics unknown. Current goal turn PROGRESS: two scalar feature criteria
+accepted at2a8fdc49, linux-scalar-process-proof.md and original evidence directories.
+Native invocation85 terminal0; both wrong-CWD101/restored GREEN0; exact source,
+manifest and lock restoration verified. Export49.105s; sampled RSS853820KiB,
+storage868060KiB/desc10 (periodic, not continuous peaks). Fresh root readback131
+PID/start rows absent, scoped groups empty, four child PIDs absent, own exact
+private runtime/scope absent. Unix cumulative85 consumed; historical overhead
+measurement85 remains allocated/unlaunched, stopped chains/history untouched.
+No ordinary product correction failed. Token absence-guard check notation adapted
+to equivalent reviewed if guard; no new native retry or escalation.
+Independent native evidence review accepted both narrow criteria; wider
+interruption/lifecycle/platform/overhead proof remains open. Exact stage cleanup
+hash-matched56 own files including3 Python bytecode caches, removed8 directories,
+verified absence. Initial cleanup guard rejected unexpected own bytecode safely;
+one diagnosis, no product/native failure. Future launcher disables bytecode before
+imports; executed version preserved unchanged in outer-evidence. No owned build
+or stage retention remains. Local owned OCR/summary temps removed exactly. Final independent cache-delta
+recheck confirms accepted feature behavior remains applicable; no build rerun.
+Next: integrate verified narrow proof to fork main with lowercase author/committer,
+then return to remaining full process/platform matrix. Owned root worktree remains
+needed for related campaign work; no retirement or foreign checkout cleanup.
+All missing full process/Windows/Darwin/final matrix criteria remain open.

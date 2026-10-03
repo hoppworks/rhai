@@ -1,0 +1,11 @@
+
+running 1 test
+test scalar_run_with_cwd_works_without_collections ... FAILED
+
+failures:
+
+failures:
+    scalar_run_with_cwd_works_without_collections
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.10s
+
