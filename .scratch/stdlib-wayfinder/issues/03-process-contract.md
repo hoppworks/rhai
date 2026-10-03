@@ -326,6 +326,24 @@ This partially closes the Linux process feature requirements only. Managed
 groups, remaining fault/lifecycle criteria, performance, other native platforms
 and final release acceptance remain open.
 
+## Linux managed final-clone drop — native102, 2026-10-03
+
+The exact public-Engine final-clone-drop case is accepted on Rust 1.77.2 in four
+selected Linux feature rows by the combined review in
+`../../all-tickets/linux-managed-final-drop-review.md`. Nonfinal clone drop preserved the live managed
+group; final drop was recorded independently, followed by bounded PIDFD
+closure observation while the host, reaper, and sentinel remained live. Exact
+leader/worker/leaf identities and groups, successful fixture reaping, a
+post-cleanup wrong-control, affected base-row regressions, original export,
+restoration, and fresh cleanup readback are documented in
+`../../all-tickets/linux-managed-final-drop-proof.md`. The native originals are
+retained under `../../all-tickets/linux-managed-final-drop102-evidence/` in the
+acceptance worktree.
+
+This covers only final-clone drop for the selected Linux rows. It does not close
+the process contract: managed deadline/overflow, remaining lifecycle/fault
+cases, other platform rows, and final release acceptance remain open.
+
 ## Current Linux MSRV held-zombie boundary — 2026-10-03
 
 Native invocation 95 at frozen `257edf69`, private Rust/Cargo 1.77.2 and

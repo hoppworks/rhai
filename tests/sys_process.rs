@@ -1111,6 +1111,35 @@ fn managed_proc_identity(pid: i32) -> Option<(char, i32, i32, u64)> {
 }
 
 #[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_proc_identity_checked(pid: i32) -> std::io::Result<Option<(char, i32, i32, u64)>> {
+    let stat = match std::fs::read_to_string(format!("/proc/{pid}/stat")) {
+        Ok(stat) => stat,
+        Err(error) if error.kind() == std::io::ErrorKind::NotFound => return Ok(None),
+        Err(error) => return Err(error),
+    };
+    let fields = stat
+        .rsplit_once(')')
+        .ok_or_else(|| std::io::Error::new(std::io::ErrorKind::InvalidData, "malformed proc stat command"))?
+        .1
+        .split_whitespace()
+        .collect::<Vec<_>>();
+    let field = |index: usize| {
+        fields
+            .get(index)
+            .copied()
+            .ok_or_else(|| std::io::Error::new(std::io::ErrorKind::InvalidData, "short proc stat"))
+    };
+    let state = fields
+        .first()
+        .and_then(|field| field.chars().next())
+        .ok_or_else(|| std::io::Error::new(std::io::ErrorKind::InvalidData, "missing proc state"))?;
+    let parent = field(1)?.parse::<i32>().map_err(|error| std::io::Error::new(std::io::ErrorKind::InvalidData, error))?;
+    let group = field(2)?.parse::<i32>().map_err(|error| std::io::Error::new(std::io::ErrorKind::InvalidData, error))?;
+    let start = field(19)?.parse::<u64>().map_err(|error| std::io::Error::new(std::io::ErrorKind::InvalidData, error))?;
+    Ok(Some((state, parent, group, start)))
+}
+
+#[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
 #[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
 fn managed_zombie_wait_for(path: &std::path::Path, deadline: Instant) -> bool {
     while Instant::now() < deadline {
@@ -1390,7 +1419,7 @@ fn managed_zombie_reaper_process() {
     let work_deadline = Instant::now() + Duration::from_nanos(deadline_ns.saturating_sub(managed_zombie_monotonic_ns()).saturating_sub(7_000_000_000));
     let reaper_pid = std::process::id() as i32;
     let reap_mode = std::env::var(MANAGED_ZOMBIE_REAP_MODE_ENV).unwrap_or_default();
-    let prompt_reap = reap_mode == "prompt" || reap_mode == "kill";
+    let prompt_reap = reap_mode == "prompt" || reap_mode == "kill" || reap_mode == "drop";
     let reaper_start = managed_proc_identity(reaper_pid).expect("read reaper start ticks").3;
     let prctl_result = unsafe { libc::prctl(libc::PR_SET_CHILD_SUBREAPER, 1, 0, 0, 0) };
     assert_eq!(prctl_result, 0, "set fixture-local subreaper policy");
@@ -1464,6 +1493,7 @@ fn managed_zombie_reaper_process() {
     if host_status.is_none() {
         // This is a fixture-owned watchdog path: release only the already-created fixture's
         // exact readiness markers, then terminate/reap the exact direct Engine-host child.
+        managed_atomic_record(&root.join("exceptional-cleanup-started"), "kind=fixture-watchdog\n");
         if root.join("begin-run").exists() || root.join("leader-record").exists() {
             let _ = std::fs::write(root.join("pidfd-ack"), b"watchdog cleanup\n");
             let _ = std::fs::write(root.join("release-worker"), b"watchdog cleanup\n");
@@ -1617,6 +1647,10 @@ fn managed_zombie_host_process() {
         managed_zombie_host_child_kill(&root, host_pid, host_start, deadline);
         return;
     }
+    if std::env::var(MANAGED_ZOMBIE_REAP_MODE_ENV).as_deref() == Ok("drop") {
+        managed_zombie_host_final_drop(&root, host_pid, host_start, deadline);
+        return;
+    }
 
     let executable = std::env::current_exe().expect("test executable");
     let executable_text = executable.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
@@ -1715,6 +1749,47 @@ fn managed_zombie_host_child_kill(root: &std::path::Path, host_pid: i32, host_st
         Err(error) => format!("api_success=false api_outcome=child_error error={error:?}"),
     };
     managed_atomic_record(&root.join("api-result"), &format!("host={host_pid} host_start={host_start} {api_result}\n"));
+    while !root.join("host-exit-release").exists() && Instant::now() < deadline {
+        std::thread::sleep(Duration::from_millis(5));
+    }
+}
+
+#[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_zombie_host_final_drop(root: &std::path::Path, host_pid: i32, host_start: u64, deadline: Instant) {
+    let executable = std::env::current_exe().expect("test executable");
+    let executable_text = executable.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let root_literal = root.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let worker_literal = root.join("worker-record").to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let leaf_literal = root.join("leaf-record").to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let release_literal = root.join("release-worker").to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let config = SysConfig::default()
+        .programs(ProgramPolicy::AllowList(vec![executable_text.clone()]))
+        .process_scope(ProcessScope::Managed);
+    let engine = engine(config);
+    let script = format!(
+        r#"spawn("{executable_text}", ["--exact", "managed_scope_spawn_leader_fixture", "--nocapture", "--quiet"], #{{
+            env_clear: true,
+            env: #{{ {MANAGED_SPAWN_HOLD_ENV}: "child-kill", {MANAGED_ROOT_ENV}: "{root_literal}", {MANAGED_WORKER_ENV}: "{worker_literal}", {MANAGED_LEAF_ENV}: "{leaf_literal}", {MANAGED_RELEASE_ENV}: "{release_literal}" }},
+        }})"#
+    );
+    let original = engine.eval::<Dynamic>(&script).expect("public managed spawn");
+    let mut scope = Scope::new();
+    scope.push_dynamic("nonfinal", original.clone());
+    scope.push_dynamic("final", original.clone());
+    drop(original);
+    managed_atomic_record(&root.join("child-ready"), &format!("host={host_pid} host_start={host_start}\n"));
+
+    drop(scope.remove::<Dynamic>("nonfinal"));
+    let nonfinal_wait_unit = engine
+        .eval_with_scope::<Dynamic>(&mut scope, "final.wait(0.1)")
+        .is_ok_and(|result| result.is_unit());
+    managed_atomic_record(&root.join("nonfinal-drop-done"), &format!("host={host_pid} host_start={host_start} wait_unit={nonfinal_wait_unit}\n"));
+    while !root.join("kill-request").exists() && Instant::now() < deadline {
+        std::thread::sleep(Duration::from_millis(2));
+    }
+    assert!(root.join("kill-request").exists(), "outer observer did not authorize final managed lease drop");
+    drop(scope.remove::<Dynamic>("final"));
+    managed_atomic_record(&root.join("api-result"), &format!("host={host_pid} host_start={host_start} final_drop_returned=true nonfinal_wait_unit={nonfinal_wait_unit}\n"));
     while !root.join("host-exit-release").exists() && Instant::now() < deadline {
         std::thread::sleep(Duration::from_millis(5));
     }
@@ -1947,6 +2022,195 @@ fn managed_child_kill_reports_group_closed_under_fixture_reaper() {
     assert!(host_live && reaper_live, "host and independent reaper must remain live at API return");
     assert!(sentinel_live, "public Child.kill must preserve the unrelated sentinel at API return");
     assert!(reaper_ok && cleanup.contains("complete=true") && host_absent_after_cleanup && sentinel_reaped && group_empty, "exact fixture cleanup must finish: {cleanup}");
+}
+
+/// Dropping a nonfinal Rhai handle preserves the managed group; dropping the final lease closes it.
+#[test]
+#[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_spawn_final_clone_drop_closes_group_under_fixture_reaper() {
+    const WATCHDOG: Duration = Duration::from_secs(20);
+    let fixture = ManagedFixture::new();
+    let root = fixture.root.path().to_path_buf();
+    let deadline_ns = managed_zombie_monotonic_ns() + WATCHDOG.as_nanos() as u64;
+    let deadline = Instant::now() + WATCHDOG;
+    let mut sentinel = managed_spawn_sentinel();
+    let sentinel_pid = sentinel.0.id() as i32;
+    let sentinel_start = managed_proc_identity(sentinel_pid).expect("sentinel start").3;
+    let sentinel_pgid = unsafe { libc::getpgid(sentinel_pid) };
+    assert_eq!(sentinel_pgid, sentinel_pid);
+
+    let mut command = Command::new(std::env::current_exe().expect("test executable"));
+    command
+        .args(["--exact", "process_fixture", "--nocapture", "--quiet"])
+        .env_clear()
+        .env(MANAGED_ZOMBIE_ROLE_ENV, "reaper")
+        .env(MANAGED_ZOMBIE_REAP_MODE_ENV, "drop")
+        .env(MANAGED_ZOMBIE_ROOT_ENV, &root)
+        .env(MANAGED_ZOMBIE_DEADLINE_ENV, deadline_ns.to_string());
+    let child = command.spawn().expect("fixture reaper");
+    let reaper_pid = child.id() as i32;
+    let mut reaper = ManagedZombieReaperGuard { root: root.clone(), child, launched: false, deadline };
+    while (!fixture.path("reaper-ready").exists() || !fixture.path("host-ready").exists()) && Instant::now() < deadline {
+        assert!(reaper.child.try_wait().unwrap().is_none(), "reaper exited before readiness");
+        std::thread::sleep(Duration::from_millis(5));
+    }
+    let reaper_fields = managed_record_fields(&std::fs::read_to_string(fixture.path("reaper-ready")).expect("reaper readiness"));
+    let host_fields = managed_record_fields(&std::fs::read_to_string(fixture.path("host-ready")).expect("host readiness"));
+    let host_pid = host_fields["pid"];
+    let reaper_start = managed_proc_identity(reaper_pid).expect("reaper identity").3;
+    let host_start = managed_proc_identity(host_pid).expect("host identity").3;
+    assert_eq!(reaper_fields["pid"], reaper_pid);
+    assert_eq!(managed_proc_identity(host_pid).unwrap().1, reaper_pid);
+    assert_eq!(managed_proc_identity(reaper_pid).unwrap().1, std::process::id() as i32);
+    reaper.launched = true;
+    std::fs::write(fixture.path("begin-run"), b"begin final-drop fixture\n").unwrap();
+
+    while !fixture.path("nonfinal-drop-done").exists() && Instant::now() < deadline {
+        assert!(reaper.child.try_wait().unwrap().is_none(), "reaper exited before nonfinal-drop observation");
+        std::thread::sleep(Duration::from_millis(3));
+    }
+    let nonfinal = managed_record_fields(&std::fs::read_to_string(fixture.path("nonfinal-drop-done")).expect("nonfinal-drop observation"));
+    while (!fixture.path("leader-record").exists() || !fixture.path("worker-record").exists() || !fixture.path("leaf-record").exists()) && Instant::now() < deadline {
+        assert!(reaper.child.try_wait().unwrap().is_none(), "reaper exited before all managed members were ready");
+        std::thread::sleep(Duration::from_millis(3));
+    }
+    let leader_record_text = std::fs::read_to_string(fixture.path("leader-record")).expect("leader readiness");
+    let leader_record_start = managed_zombie_u64(&leader_record_text, "start").expect("leader start ticks");
+    let leader = managed_record_fields(&leader_record_text);
+    let worker = managed_record_fields(&std::fs::read_to_string(fixture.path("worker-record")).expect("worker readiness"));
+    let leaf = managed_record_fields(&std::fs::read_to_string(fixture.path("leaf-record")).expect("leaf readiness"));
+    let pidfds = acquire_managed_pidfds(root.clone(), host_pid);
+    let pidfd_start = |pid| pidfds.0.iter().find(|entry| entry.0 == pid).unwrap().2;
+    let leader_start = pidfd_start(leader["pid"]);
+    let worker_start = pidfd_start(worker["pid"]);
+    let leaf_start = pidfd_start(leaf["pid"]);
+    let group = leader["pgid"];
+    let leader_record_start_matches_pidfd = leader_record_start == leader_start;
+    let worker_record_group_matches = worker.get("pgid") == Some(&group);
+    let leaf_record_group_matches = leaf.get("pgid") == Some(&group);
+    let worker_record_start_matches_pidfd = managed_zombie_u64(&std::fs::read_to_string(fixture.path("worker-record")).unwrap(), "start") == Some(worker_start);
+    let leaf_record_start_matches_pidfd = managed_zombie_u64(&std::fs::read_to_string(fixture.path("leaf-record")).unwrap(), "start") == Some(leaf_start);
+    std::fs::write(fixture.path("pidfd-identities"), format!("leader_start={leader_start} worker_start={worker_start} leaf_start={leaf_start} pgid={group}\n")).unwrap();
+    eprintln!("managed_final_drop_live reaper={reaper_pid} reaper_start={reaper_start} host={host_pid} host_start={host_start} leader={} leader_start={leader_start} worker={} worker_start={worker_start} leaf={} leaf_start={leaf_start} group={group} sentinel={sentinel_pid} sentinel_start={sentinel_start} sentinel_pgid={sentinel_pgid}", leader["pid"], worker["pid"], leaf["pid"]);
+
+    let parent = std::process::id() as i32;
+    let reaper_live_before_drop = matches!(managed_proc_identity(reaper_pid), Some((state, actual_parent, _, start)) if state != 'Z' && actual_parent == parent && start == reaper_start);
+    let host_live_before_drop = matches!(managed_proc_identity(host_pid), Some((state, actual_parent, _, start)) if state != 'Z' && actual_parent == reaper_pid && start == host_start);
+    let sentinel_live_before_drop = matches!(managed_proc_identity(sentinel_pid), Some((state, actual_parent, pgid, start)) if state != 'Z' && actual_parent == parent && pgid == sentinel_pgid && start == sentinel_start);
+    let nonfinal_members_live = [leader["pid"], worker["pid"], leaf["pid"]].into_iter().all(|pid| {
+        managed_proc_identity(pid).is_some_and(|(state, _, observed_group, start)| state != 'Z' && observed_group == group && start == pidfd_start(pid))
+    });
+    let nonfinal_drop_preserved_group = nonfinal.get("host") == Some(&host_pid) && nonfinal_members_live
+        && std::fs::read_to_string(fixture.path("nonfinal-drop-done")).is_ok_and(|receipt| receipt.contains("wait_unit=true"));
+    std::fs::write(fixture.path("kill-request"), b"exact live identities recorded; authorize final lease drop\n").unwrap();
+    while !fixture.path("api-result").exists() && Instant::now() < deadline {
+        std::thread::sleep(Duration::from_millis(2));
+    }
+    let api = std::fs::read_to_string(fixture.path("api-result")).unwrap_or_default();
+    let api_bound = api.contains(&format!("host={host_pid} host_start={host_start} final_drop_returned=true nonfinal_wait_unit=true"));
+    let mut pidfds_exited = false;
+    let mut leader_absent = false;
+    let mut worker_absent = false;
+    let mut leaf_absent = false;
+    let mut exact_reaped = false;
+    let mut host_live_during_closure = false;
+    let mut reaper_live_during_closure = false;
+    let mut sentinel_live_during_closure = false;
+    let mut group_empty_after_closure = false;
+    let mut final_members_live = true;
+    let mut reaped = String::new();
+    let observation_deadline = deadline.checked_sub(Duration::from_secs(8)).unwrap_or(deadline);
+    let mut observation_error = None;
+    while Instant::now() < observation_deadline {
+        if fixture.path("exceptional-cleanup-started").exists() {
+            observation_error = Some("fixture watchdog exceptional cleanup started before observed closure".to_owned());
+            break;
+        }
+        let read_identity = |pid| managed_proc_identity_checked(pid);
+        let host_identity = read_identity(host_pid);
+        let reaper_identity = read_identity(reaper_pid);
+        let sentinel_identity = read_identity(sentinel_pid);
+        let member_identities = [leader["pid"], worker["pid"], leaf["pid"]].map(read_identity);
+        if host_identity.is_err() || reaper_identity.is_err() || sentinel_identity.is_err() || member_identities.iter().any(Result::is_err) {
+            observation_error = Some("permission or malformed proc identity during closure observation".to_owned());
+            break;
+        }
+        let host_identity = host_identity.unwrap();
+        let reaper_identity = reaper_identity.unwrap();
+        let sentinel_identity = sentinel_identity.unwrap();
+        let member_identities = member_identities.map(Result::unwrap);
+        host_live_during_closure = matches!(host_identity, Some((state, parent, _, start)) if state != 'Z' && parent == reaper_pid && start == host_start);
+        reaper_live_during_closure = matches!(reaper_identity, Some((state, parent, _, start)) if state != 'Z' && parent == std::process::id() as i32 && start == reaper_start);
+        sentinel_live_during_closure = matches!(sentinel_identity, Some((state, parent, pgid, start)) if state != 'Z' && parent == std::process::id() as i32 && pgid == sentinel_pgid && start == sentinel_start);
+        if !host_live_during_closure || !reaper_live_during_closure || !sentinel_live_during_closure {
+            observation_error = Some("host, reaper, or sentinel identity did not remain live during closure observation".to_owned());
+            break;
+        }
+        pidfds_exited = pidfds.0.iter().all(|(pid, fd, _)| {
+            let mut pollfd = libc::pollfd { fd: *fd, events: libc::POLLIN, revents: 0 };
+            (unsafe { libc::poll(&mut pollfd, 1, 0) }) == 1 && pollfd.revents & libc::POLLIN != 0 && *pid > 0
+        });
+        let expected = [(leader["pid"], leader_start), (worker["pid"], worker_start), (leaf["pid"], leaf_start)];
+        let absent = expected.iter().zip(member_identities.iter()).map(|((pid, start), identity)| {
+            match identity.as_ref() {
+                None => true,
+                Some((_, _, _, observed_start)) => observed_start != start || *pid <= 0,
+            }
+        }).collect::<Vec<_>>();
+        [leader_absent, worker_absent, leaf_absent] = [absent[0], absent[1], absent[2]];
+        reaped = std::fs::read_to_string(fixture.path("prompt-reaper-cleanup")).unwrap_or_default();
+        exact_reaped = reaped.contains(&format!("worker={} start={worker_start} pgid={group} reaped=true wait_status=", worker["pid"]))
+            && reaped.contains(&format!("leaf={} start={leaf_start} pgid={group} reaped=true wait_status=", leaf["pid"]))
+            && reaped.contains("complete=true");
+        let group_result = unsafe { libc::kill(-group, 0) };
+        let group_error = if group_result == -1 { std::io::Error::last_os_error().raw_os_error() } else { None };
+        group_empty_after_closure = group_result == -1 && group_error == Some(libc::ESRCH);
+        final_members_live = member_identities.iter().zip(expected.iter()).any(|(identity, (pid, start))| {
+            match identity {
+                Some((state, _, observed_group, observed_start)) => *state != 'Z' && *observed_group == group && observed_start == start && *pid > 0,
+                None => false,
+            }
+        });
+        if pidfds_exited && leader_absent && worker_absent && leaf_absent && exact_reaped && group_empty_after_closure {
+            break;
+        }
+        std::thread::sleep(Duration::from_millis(5));
+    }
+    let exceptional_cleanup_not_started = !fixture.path("exceptional-cleanup-started").exists();
+    let closure_observed = pidfds_exited && leader_absent && worker_absent && leaf_absent && exact_reaped && group_empty_after_closure
+        && exceptional_cleanup_not_started && observation_error.is_none();
+    let host_live_at_drop_return = host_live_during_closure;
+    let reaper_live_at_drop_return = reaper_live_during_closure;
+    let sentinel_live_at_drop_return = sentinel_live_during_closure;
+    managed_atomic_record(&root.join("final-drop-closure-observed"), &format!(
+        "host={host_pid} host_start={host_start} reaper={reaper_pid} reaper_start={reaper_start} leader={} leader_start={leader_start} worker={} worker_start={worker_start} leaf={} leaf_start={leaf_start} group={group} observed={closure_observed} pidfds_exited={pidfds_exited} exact_reaped={exact_reaped} group_empty={group_empty_after_closure}\n",
+        leader["pid"], worker["pid"], leaf["pid"]));
+
+    std::fs::write(fixture.path("host-exit-release"), b"final-drop boundary observed\n").unwrap();
+    let stop = deadline.checked_sub(Duration::from_secs(2)).unwrap_or(deadline);
+    let mut status = None;
+    while status.is_none() && Instant::now() < stop {
+        status = reaper.child.try_wait().unwrap();
+        if status.is_none() {
+            std::thread::sleep(Duration::from_millis(5));
+        }
+    }
+    let reaper_ok = status.is_some_and(|status| status.success());
+    let host_absent_after_cleanup = managed_proc_identity(host_pid).is_none();
+    let cleanup = std::fs::read_to_string(fixture.path("reaper-cleanup")).unwrap_or_default();
+    drop(sentinel);
+    let sentinel_reaped = pid_is_absent(sentinel_pid);
+    let group_empty = unsafe { libc::kill(-group, 0) } == -1 && std::io::Error::last_os_error().raw_os_error() == Some(libc::ESRCH);
+    eprintln!("managed_final_drop_boundary nonfinal_preserved={nonfinal_drop_preserved_group} leader={} leader_start={leader_start} leader_record_start_matches_pidfd={leader_record_start_matches_pidfd} worker={} worker_start={worker_start} worker_record_start_matches_pidfd={worker_record_start_matches_pidfd} leaf={} leaf_start={leaf_start} leaf_record_start_matches_pidfd={leaf_record_start_matches_pidfd} worker_record_group_matches={worker_record_group_matches} leaf_record_group_matches={leaf_record_group_matches} group={group} drop_return_recorded={api_bound} closure_observed={closure_observed} exceptional_cleanup_not_started={exceptional_cleanup_not_started} leader_absent={leader_absent} worker_absent={worker_absent} leaf_absent={leaf_absent} exact_reaped={exact_reaped} host_live_before_drop={host_live_before_drop} reaper_live_before_drop={reaper_live_before_drop} sentinel_live_before_drop={sentinel_live_before_drop} host_live_through_closure={host_live_at_drop_return} reaper_live_through_closure={reaper_live_at_drop_return} sentinel_live_through_closure={sentinel_live_at_drop_return} pidfds_exited={pidfds_exited} final_members_live={final_members_live} reaper_ok={reaper_ok} reaper_status={status:?} host_absent_after_cleanup={host_absent_after_cleanup} sentinel_reaped={sentinel_reaped} group_empty_after_closure={group_empty_after_closure} observation_error={observation_error:?} api={api:?} reaped={reaped:?} cleanup={cleanup:?}", leader["pid"], worker["pid"], leaf["pid"]);
+
+    assert!(leader_record_start_matches_pidfd && worker_record_start_matches_pidfd && leaf_record_start_matches_pidfd && worker_record_group_matches && leaf_record_group_matches, "fixture records must match exact acquired PIDFD identities and managed group");
+    assert!(host_live_before_drop && reaper_live_before_drop && sentinel_live_before_drop, "host, fixture reaper, and sentinel must be live before final drop");
+    assert!(nonfinal_drop_preserved_group, "dropping a nonfinal managed Child clone terminated its live group");
+    assert!(api_bound, "host did not record the authorized final managed lease drop: {api}");
+    assert!(closure_observed && pidfds_exited && leader_absent && worker_absent && leaf_absent && exact_reaped && group_empty_after_closure, "final managed lease drop must be followed by independently observed exact group closure");
+    assert!(host_live_at_drop_return && reaper_live_at_drop_return && sentinel_live_at_drop_return, "host, fixture reaper, and sentinel must remain live at the final-drop boundary");
+    assert!(reaper_ok && cleanup.contains("complete=true") && host_absent_after_cleanup && sentinel_reaped && group_empty, "exact final-drop fixture cleanup must finish: {cleanup}");
+    assert!(!final_members_live, "final managed Child lease drop left an exact process-group member live");
 }
 
 /// A fixture-owned subreaper reaps only the exact stopped descendants before the managed run
