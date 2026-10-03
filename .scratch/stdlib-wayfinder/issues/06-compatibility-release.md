@@ -233,9 +233,10 @@ Linux feature rows, with a named post-cleanup wrong-control and three affected
 base regressions. The proof records exact process identity/group closure,
 nonfinal-drop preservation, host/reaper/sentinel liveness through observed
 closure, source restoration, eight original closure records, and fresh owned
-resource cleanup. See `../../all-tickets/linux-managed-final-drop-proof.md` and
-the preserved native originals `../../all-tickets/linux-managed-final-drop102-evidence/`.
-The combined independent acceptance review remains pending.
+resource cleanup. This scoped criterion is accepted by the combined review in
+`../../all-tickets/linux-managed-final-drop-review.md`. See
+`../../all-tickets/linux-managed-final-drop-proof.md` and the preserved native
+originals `../../all-tickets/linux-managed-final-drop102-evidence/`.
 
 This is one partial managed lifecycle criterion only. Ticket 06's broader
 feature/platform matrix and final release gates remain open.
