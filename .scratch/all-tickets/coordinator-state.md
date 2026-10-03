@@ -85,7 +85,7 @@ Instructions/roles faba3db3bef6891ad2c0b20d434963bb8fe9572d loaded by root,
 responsible Standard and same combined reviewer. Workhorse installed rules resolved
 at /var/home/workhorse/.agents/AGENTS.md and /var/home/workhorse/projects/agent-skills;
 SSH root has no ~/.agents. Read-only resolution/command-local safe.directory only.
-Last verified fork main16ef422180c38584823af75eb1c82c9b2f22a745; sole remote main,
+Last verified fork mainf801d875; sole remote main,
 lowercase human author/committer. Current goal turn PROGRESS: final managed lease
 drop102 accepted and integrated with original evidence. Overall scope incomplete.
 
@@ -127,43 +127,49 @@ no no_float/no_index or otherOS/releaseclaim. Root and writer owners unchanged.
 
 ### Next authorized source package
 
-Same responsible Standard linux_managed_gap continues managed run deadline
-termination/closure, one remaining ticket03 criterion, source-only before review.
-Own writer may fast-forward accepted4df297d8, preserving unrelated untracked file.
-Public timeout alone must terminate managed members; no kill/lease-drop/watchdog
-substitute. Independent exact PIDFD/start/group/reaper and live sentinel/host
-boundary, meaningful post-cleanup control, truthful captures/timeout and exact
-cleanup remain mandatory. Reuse accepted custody mechanics and unaffected proofs.
-Deadline source frozenbcecd9eb9d296660a165c238892e4dc77758c095 (parent4df297d8),
-test7af53895abb16efeaa63e0302421df8a225f2c1e8251ce53cd6301f4c5fec39a.
-New managed_run_deadline_reaps_group_under_fixture_reaper uses public run0.75s,
-4096-byte capture cap and live leader/worker/leaf records, PIDFDs, exact reaper,
-sentinel/host boundary; no production change. Semantic note writer
-linux-managed-deadline.md. Source parser/diffcheck pass, compilation unproven.
-Same independent Expert found sourceNOT READY, four consolidated initial findings:
-OsString release.exists type, moved reaper_ready PathBuf, deadline observer20s
-window overlaps13s exceptional fallback without marker guard, and open-pipe
-fixture incorrectly expects timeout capture EOFcomplete=true. One report
-linux-managed-deadline-review.md retained. Same Standard froze one batched source
-repairb5243017a5ff2926c12c13e6108a2064091e843b, testde4cfc16a54b1cb5e0ef38337887c54d18a433114f3e7662a567d914f8918309.
-Fixes owned Path borrow/types, saves readiness receipt, observes before fallback
-with exceptional-start rejection, retained markers and honest incomplete EOF flags
-per original contract/root brief (not scope waiver). Same reviewer affected
-recheck SOURCE READY b524: all four fixed, original contract restored; watchdog
-guard fails closed through successful reaper exit. No failed completed correction. Initial findings are not failed completed corrections; native0
-and no Expert escalation allocation. Current correction count0 before verdict. Deadline
-recipes now preparing7exacttests (1timeoutwrong+4GREEN+2affectedprompt/held)
-plus3setup=10commands, unpinned/uncommitted before dependent recipe review.
-Same reviewer confirms unchanged accepted kill/finaldrop evidence applicable. No freeze/stage/launch.
-Prospective stage/root/rhai-linux-managed-deadline-20261003-bcecd9eb-103 and
-scope/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-103
-uncreated/unallocated. Ordinary30min active-work planning checkpoint, existing
-hard limits unchanged. Final-drop
-failurecount1 resolved; closed14/15 and stopped platform chains preserved. Next:
-freeze source/semantic test brief, one combined review, then affected native proof.
-No owned retained build or process; active protected owned worktrees reused.
-Raw libtest whitespace in immutable102 originals intentionally preserved/hashbound;
-authored docs/source diffcheck passes. Cost/token use remains unknown per package.
+### Current coherent requirement: managed run deadline
+
+Same responsible Standard linux_managed_gap continues ticket03 public run() deadline
+closure under unchanged faba3db instructions; same combined Expert owns affected
+review. Source b5243017a5ff2926c12c13e6108a2064091e843b, recipes65ada008bc1623844555e5440f3a83ecced6a1cd.
+Initial source findings and first batched fixes remain in linux-managed-deadline-review.md.
+Local stale contract-pin infrastructure outcome repaired once successfully at65ada;
+actual immutable contract0edcab44 verified. No failed pin recovery/native allocation
+from local preflight. Source semantics: public0.75s deadline, capture4096, fixture
+watchdog20s; exact PIDFD/start/group/reaper/sentinel closure and honest partial,
+incomplete capture required. No kill/Drop/watchdog substitute or criterion waiver.
+
+Native103 allocated2026-10-03T16:45:11Z, terminal outer1/run-scoped1; intended
+control never executed. Original compiler error tests/sys_process.rs:2384:124:
+three positional format arguments missing from deadline boundary receipt. Cargo101
+and empty control stdout are infrastructure, NOT meaningful RED/product acceptance.
+Root original linux-managed-deadline103-launch.log retained. Runtimecleanup0,
+PIDreadback0, scopecleanup0; fresh exact central scope absence observed. Restored
+sourceSHAde4cfc16/errornull independently read. Remote raw stage remains ONLY for
+original export and fresh hash/custody-gated exact cleanup; no retained build.
+Stage/root/rhai-linux-managed-deadline-20261003-bcecd9eb-103 (physical/var/roothome),
+scope/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-103;
+private runtimeagent-build-btzqrka4 removed by runner receipt.
+
+Compiler-format infrastructure recurrence carries native97 history: earlier repair
+passed before accepted101; current103 initial recurrence, unsuccessful recoveries0.
+Do not reset historical outcomes or renew closed custodyExpert14/killExpert15.
+Same Standard fixes receipt PID arguments only, freezes affected source and104pins,
+and adapts accepted97 raw failure collection mechanics. Same combined reviewer
+rechecks affected source/pins/raw custody; root performs collection/cleanup and
+bounded native execution only after readiness. Prospective104 UNALLOCATED.
+Ordinary30min active-work planning checkpoint; maximum two consecutive launches
+without diagnosis/closed check. New compiler diagnosis permits bounded correction.
+CumulativeUnix103/deadlinenative1. Seven exact tests plus3setup remain planned:
+one meaningful timeoutwrong, four deadline feature GREEN, two affected prompt/held.
+Hardlimits unchanged600outer/585runner/540helper incl30export, jobs2/desc16,
+preemptstorage1572864KiB, storage/RSS2097152KiB. Fresh machine inventory before
+next heavy launch; do not touch foreign tauron or other work.
+
+Finaldrop102 remains ACCEPTED and integrated4df297d8; source61b3739/proof7173a89,
+all original evidence and closed scope preserved. Finaldrop source correctioncount1
+resolved. Stopped Darwin/Mac/Windows chains remain stopped. Tickets03/06 OPEN;
+overall acceptance incomplete. No additional routine approval required.
 
 ### Accepted current Linux managed subsets
 
@@ -1589,3 +1595,5 @@ remain in review report as immutable rejected baseline. No Cargo/SSH/stage/nativ
 Unix95consumed/96unallocated. These are independent preparation findings, not
 native failed implementation/infrastructure outcomes. Next corrected freeze ->
 same affected recheck -> fresh slot and stage validation -> bounded native96.
+
+Native103 allocated 2026-10-03T16:45:11.138303+00:00 at recipes65ada008/sourceb524, cumulativeUnix103/deadlinenative1. FirstlocalcontractpinrepairPASSedsamecombined actualinputs; machineforeignheavybrieflyobserved thenexactoldPIDsabsent/freshglobalheavyruntimeinventoryempty. Stageinputhashesallverified; limitsunchanged600/585/540+30export, jobs2,desc16,preempt1572864/hardstorageRSS2097152KiB. Acceptanceunproven; ownSSHlaunchbounded600s.
