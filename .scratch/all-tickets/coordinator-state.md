@@ -85,7 +85,7 @@ Instructions/roles faba3db3bef6891ad2c0b20d434963bb8fe9572d loaded by root,
 responsible Standard and same combined reviewer. Workhorse installed rules resolved
 at /var/home/workhorse/.agents/AGENTS.md and /var/home/workhorse/projects/agent-skills;
 SSH root has no ~/.agents. Read-only resolution/command-local safe.directory only.
-Last verified fork mainab7e8a7fef579fb5f8d09226125beebe5e6f08ac; sole remote main,
+Last verified fork main08207d6e49b642b54158324d46eed6c6614b99ba; sole remote main,
 lowercase human author/committer. Current package: managed deadline104 original
 export and corrected105 shared-fixture acceptance. Overall scope incomplete.
 
@@ -1757,3 +1757,8 @@ Native103 allocated 2026-10-03T16:45:11.138303+00:00 at recipes65ada008/sourceb5
 Native104 allocated 2026-10-03T17:07:50.239885+00:00 at sourcef820/recipes0150. Fresh heavy/runtime inventory empty, exactstage/physical/inputhashes valid and scope absent. CumulativeUnix104/deadlinenative2; compiler recurrence recovery now executing, no acceptance yet. Bounds unchanged600/585/540incl30export, jobs2/desc16/preempt1572864/hard2097152KiB.
 
 Native105 allocated 2026-10-03T18:11:24.513670+00:00 at frozen source31a61e752d0ffb747be827475278e3fc5d9dbe30/recipes50341e87. Fresh global heavy and private runtime inventory empty,15staged hashes allPASS, exactscope/outerstatus absent. CumulativeUnix105/deadlinenative3; second bounded deadline correction, acceptanceunproven. Bounds unchanged600outer/585runner/540helper incl30export,jobs2,desc16,preempt1572864/hardstorageRSS2097152KiB.
+
+Native105 integration08207d6e49b642b54158324d46eed6c6614b99ba pushed and independentlsremote confirmssoleforkmain samehash; authorcommitter hoppworks<daniel@hoppworks.de>. Non-scratchtree equalsaccepted31a exactly. No OutputLimit source was integrated.
+OutputLimit a33 affectedrecheck retainedoneborrowblocker, completedfailedsourcecorrectioncount1 for stableborrowlengthcause; other2findingsresolved. SameStandard exacttwo-line repair frozen53b01fa5df3f3a23bb55d4659c6207e5da86dc79, test024e774b76e21d46326d007249ca5db92eab161f88af3328bdd4c3b591a2ab03; archivee4f024d2a1147cba5466e6421691f4087e1e96447da137b63e46c295efbdb83e. Rootreadactualfirstmap computesownedusize, noescapingbytes. SameExpert affectedsource recheck underway, sameStandard refreshesdraft7test/3setup recipes; no nativeallocation. Causehistory unchanged.
+
+Samecombined affectedsource53b01 review SOURCE READY; rootreadupdatedreport confirms ownedOptionusize and resolvedpreviousfindings. OutputLimit compile/native NOTPROVEN; nextsameownerrecipefreeze thenaffectedexecutioncollectionreview, freshheavyslot, boundedpublicEngineOSproof. Nofailedcorrectioncountreset, no newnativeallocation.
