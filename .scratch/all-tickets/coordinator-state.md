@@ -82,7 +82,7 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 ## Current step and next action
 
 Instructions faba3db unchanged/loaded; full goal active/incomplete. Sole fork
-main last independently read back at6e659810b7bd44a0d3c85cc75cbeef1d6fdff185.
+main last independently read back atac259e0359590f1c69f10fb1c5e31b85b8e03f7d.
 Accepted109 proof/source523 unchanged; no retained native resources, all finite
 concurrency exceptions expired. Unix109 consumed; native110 unallocated.
 
@@ -107,27 +107,57 @@ estimate is not a human safety-cap renewal. Native failures/launches remain0;
 no Cargo, SSH, stage, production change or native allocation occurred. All
 exhausted native/Darwin/Windows chains and actual hard boundaries remain stopped.
 
-Current owner: SAME Standard is finishing the existing recipe batch after SOURCE
-READY with current pins and all four c39 export/classification/custody findings.
-Helper, classifier, launch, stage and contract are edited; separate original
-collector added, not executed. Python AST checks and both shell syntax checks
-passed. First modeled-valid fixture exposed printed-schema mismatches (actual
-child_reaped, no live_observed); owner is aligning and rerunning valid/corrupt
-modeled cases. This is pre-native recipe setup, not meaningful product RED or
-acceptance. Recipe active work approximately14minutes, earlier preparation
-approximately2–3minutes and precise cumulative earlier use unknown. Existing
-30minute planning checkpoint unchanged; no source/history/cap reset.
+Same Standard recipe-only batch frozen at
+eeae50bbec70216ff50473927034fdff9a5002b8, six files: baseline-proof.py,
+collect-red.py, new collect-original.py, contract.md, launch.sh, stage.sh.
+Root independently confirmed exact lowercase author/committer and every file
+SHA256; source/test ee50 and archive/test pins remain unchanged. Same combined
+reviewer completed the affected review: recipes NOT READY. Final consolidated
+findings are in linux-stdin-closure-review.md, Frozen110 recipes eeae50bb. Actual
+source receipt formats and helper-versus-post-run custody are incompatible with
+the classifier; local export closes/deletes its tar too early; finally export
+lacks the promised deadline/resource checks; deletion needs fresh fail-closed
+canonical identity/PID/start/group census inside the removal boundary. AST/embedded Python, bash syntax, stage pin equality and diff
+checks passed; modeled valid baseline accepted and corrupted timeout rejected.
+These are synthetic setup checks only, not actual OS or product RED.
 
-No Cargo/SSH/staging/native/production mutation. Prospective exact stage/scope
-now use ee50c63e rather than c7; these are drafts, not allocated resources.
-Root's unexecuted earlier c7 preflight must consume final reviewed paths/pins
-before actual launch. Next: recipe freeze/checks -> SAME affected combined
-review -> fresh workhorse slot/capacity -> actual native RED -> production fix
-and real acceptance. Human permits Tauron window coordination if contention
-requires it. Final native Linux/macOS/Windows, feature/MSRV/release remain open.
-Previous goal turn PROGRESS: actual recipe edits and original collector changed
-preparation state. Current owner confirmed live; no missing approval or genuine
-external blocker. Source-only SOURCE READY never implies runtime acceptance.
+Recipe active work owner reports approximately18minutes this continuation;
+earlier cumulative recipe work was not measured and remains unknown. First
+modeled fixture schema mismatch (child_reaped, no live_observed) repaired with
+concrete source diagnosis; no native infrastructure or product launch occurred.
+Existing30minute planning checkpoint and prior c39/source causes preserved.
+No new Expert, native allocation or hard-limit renewal. Historical unrelated
+lifecycle note remains untracked and untouched.
+
+No Cargo/SSH/staging/native/production mutation. Exact prospective stage/scope
+/root/rhai-linux-stdin-closure-20261003-ee50c63e-110 and
+/root/.local/share/agent-builds/rhai/linux-stdin-closure-20261003-ee50c63e-110
+are unallocated. Root's /private/tmp/rhai-native110-preflight.py now uses those
+paths,13 independently fixed expected input hashes including source.tar and
+stage.sh, strict zero foreign runner/compiler,16GiB availableRAM/disk and exact
+canonical-stage/absent-scope/terminal guards. AST passed; never executed. Recheck
+pins after any recipe change. No slot reservation or expired exception reuse.
+Current owner: same Standard stdin_closure_test, continuing one consolidated
+recipe-only correction against the final four findings. No Rust/source change,
+SSH, staging, launch, cleanup or push in its scope. Actual frozen source emissions
+must ground parser models; separate immutable semantic classification from fresh
+post-run custody. Thirty-minute active-work planning checkpoint for this repair,
+with prior18minutes plus unknown earlier cumulative work preserved. Human
+authorization covers these ordinary reversible corrections; no new approval gate.
+c39 was the initial rejected proposal; eeae50 is the first completed corrective
+recipe batch failing independent review (recipe correction failure1). Preserve
+all earlier source4ac/2c/9d and Expert17 history: source decoding/guard repair is
+closed narrowly, while these consuming parser/export/lifecycle defects remain
+open. This classification does not reset any underlying source or native cause.
+A second failed corrective recipe check, contradictory evidence or an unresolved
+decision stops this path for fresh causal escalation audit. No native allowance
+is renewed. Next: corrected immutable recipes -> same affected review -> fresh
+workhorse slot/capacity -> stage/allocation only if ready -> genuine native RED
+-> production fix and real acceptance.
+Human permits Tauron window coordination if fresh contention requires it.
+Final native Linux/macOS/Windows, feature/MSRV/release remain open. Previous
+turn verified wait on live owner; current turn PROGRESS: immutable recipe/checks,
+independent pins and execution preflight correction change authoritative state.
 
 ### Earlier current-step history (retained, superseded)
 
