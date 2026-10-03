@@ -1,0 +1,422 @@
+[
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-0-simultaneous-io-wrong-assertion",
+    "required_diagnostics": [
+      "test process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps ... FAILED",
+      "stdout differs at byte",
+      "left: 111",
+      "right: 120",
+      "simultaneous-io reap=ESRCH pid="
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-0-deadline-io-wrong-assertion",
+    "required_diagnostics": [
+      "test run_deadline_with_blocked_stdin_and_active_stdout_stderr ... FAILED",
+      "stderr active-stream marker missing",
+      "deadline-io reap=ESRCH pid="
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-0-test-0-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-0-test-1-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-0-test-2-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-0-test-3-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-0-test-4-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-0-test-5-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-0-test-6-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-0-test-7-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-0-test-8-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-0-test-9-green",
+    "status": 0
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-1-simultaneous-io-wrong-assertion",
+    "required_diagnostics": [
+      "test process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps ... FAILED",
+      "stdout differs at byte",
+      "left: 111",
+      "right: 120",
+      "simultaneous-io reap=ESRCH pid="
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-1-deadline-io-wrong-assertion",
+    "required_diagnostics": [
+      "test run_deadline_with_blocked_stdin_and_active_stdout_stderr ... FAILED",
+      "stderr active-stream marker missing",
+      "deadline-io reap=ESRCH pid="
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-1-test-0-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-1-test-1-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-1-test-2-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-1-test-3-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-1-test-4-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-1-test-5-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-1-test-6-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-1-test-7-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-1-test-8-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-1-test-9-green",
+    "status": 0
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-2-simultaneous-io-wrong-assertion",
+    "required_diagnostics": [
+      "test process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps ... FAILED",
+      "stdout differs at byte",
+      "left: 111",
+      "right: 120",
+      "simultaneous-io reap=ESRCH pid="
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-2-deadline-io-wrong-assertion",
+    "required_diagnostics": [
+      "test run_deadline_with_blocked_stdin_and_active_stdout_stderr ... FAILED",
+      "stderr active-stream marker missing",
+      "deadline-io reap=ESRCH pid="
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-2-test-0-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-2-test-1-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-2-test-2-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-2-test-3-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-2-test-4-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-2-test-5-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-2-test-6-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-2-test-7-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-2-test-8-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-2-test-9-green",
+    "status": 0
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-3-simultaneous-io-wrong-assertion",
+    "required_diagnostics": [
+      "test process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps ... FAILED",
+      "stdout differs at byte",
+      "left: 111",
+      "right: 120",
+      "simultaneous-io reap=ESRCH pid="
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-3-deadline-io-wrong-assertion",
+    "required_diagnostics": [
+      "test run_deadline_with_blocked_stdin_and_active_stdout_stderr ... FAILED",
+      "stderr active-stream marker missing",
+      "deadline-io reap=ESRCH pid="
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-3-test-0-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-3-test-1-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-3-test-2-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-3-test-3-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-3-test-4-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-3-test-5-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-3-test-6-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-3-test-7-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-3-test-8-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-3-test-9-green",
+    "status": 0
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-4-simultaneous-io-wrong-assertion",
+    "required_diagnostics": [
+      "test process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps ... FAILED",
+      "stdout differs at byte",
+      "left: 111",
+      "right: 120",
+      "simultaneous-io reap=ESRCH pid="
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-4-deadline-io-wrong-assertion",
+    "required_diagnostics": [
+      "test run_deadline_with_blocked_stdin_and_active_stdout_stderr ... FAILED",
+      "stderr active-stream marker missing",
+      "deadline-io reap=ESRCH pid="
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-4-test-0-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-4-test-1-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-4-test-2-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-4-test-3-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-4-test-4-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-4-test-5-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-4-test-6-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-4-test-7-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-4-test-8-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored;",
+    "name": "row-4-test-9-green",
+    "status": 0
+  }
+]

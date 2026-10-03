@@ -1,0 +1,424 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+helper	751221	751220	751220	1111723	python3 /root/rhai-linux-process-io-20261003-9e56d5f2/linux-process-io-proof.py
+scoped-supervisor	751220	751217	751220	1111721	/usr/bin/python3 /var/roothome/rhai-linux-process-io-20261003-9e56d5f2/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-process-io-20261003-9e56d5f2/linux-process-io-proof.py
+command:rustup-install	751226	751221	751220	1111762	/root/.cargo/bin/rustup toolchain install 1.77.2-x86_64-unknown-linux-gnu --profile minimal --no-self-update
+command:du	751227	751221	751220	1111762	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	751245	751221	751220	1111763	/bin/ps -e -o pid=,ppid=,rss=
+command:du	751257	751221	751220	1111864	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	751258	751221	751220	1111864	/bin/ps -e -o pid=,ppid=,rss=
+command:du	751278	751221	751220	1111965	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	751279	751221	751220	1111965	/bin/ps -e -o pid=,ppid=,rss=
+command:du	751298	751221	751220	1112066	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	751299	751221	751220	1112067	/bin/ps -e -o pid=,ppid=,rss=
+command:du	751311	751221	751220	1112168	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	751312	751221	751220	1112168	/bin/ps -e -o pid=,ppid=,rss=
+command:du	751323	751221	751220	1112269	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	751324	751221	751220	1112270	/bin/ps -e -o pid=,ppid=,rss=
+command:du	751335	751221	751220	1112370	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	751336	751221	751220	1112371	/bin/ps -e -o pid=,ppid=,rss=
+command:du	751355	751221	751220	1112472	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	751356	751221	751220	1112472	/bin/ps -e -o pid=,ppid=,rss=
+command:du	751367	751221	751220	1112573	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	751368	751221	751220	1112574	/bin/ps -e -o pid=,ppid=,rss=
+command:du	751378	751221	751220	1112644	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	751379	751221	751220	1112645	/bin/ps -e -o pid=,ppid=,rss=
+command:rustc-version	751380	751221	751220	1112646	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose
+command:du	751381	751221	751220	1112646	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	751383	751221	751220	1112646	/bin/ps -e -o pid=,ppid=,rss=
+command:du	751385	751221	751220	1112657	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	751386	751221	751220	1112658	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-version	751387	751221	751220	1112658	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose
+command:du	751388	751221	751220	1112658	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	751400	751221	751220	1112659	/bin/ps -e -o pid=,ppid=,rss=
+command:du	751402	751221	751220	1112669	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	751403	751221	751220	1112670	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-simultaneous-io-wrong-assertion	751404	751221	751220	1112670	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps -- --exact --nocapture --test-threads=1
+command:du	751405	751221	751220	1112671	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	751407	751221	751220	1112671	/bin/ps -e -o pid=,ppid=,rss=
+command:du	751431	751221	751220	1112772	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	751432	751221	751220	1112772	/bin/ps -e -o pid=,ppid=,rss=
+command:du	751445	751221	751220	1112873	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	751446	751221	751220	1112874	/bin/ps -e -o pid=,ppid=,rss=
+command:du	751457	751221	751220	1112974	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	751458	751221	751220	1112975	/bin/ps -e -o pid=,ppid=,rss=
+command:du	751469	751221	751220	1113076	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	751470	751221	751220	1113076	/bin/ps -e -o pid=,ppid=,rss=
+command:du	751482	751221	751220	1113177	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	751483	751221	751220	1113178	/bin/ps -e -o pid=,ppid=,rss=
+command:du	751681	751221	751220	1113279	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	751683	751221	751220	1113280	/bin/ps -e -o pid=,ppid=,rss=
+command:du	751942	751221	751220	1113381	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	751943	751221	751220	1113382	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752087	751221	751220	1113483	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752088	751221	751220	1113484	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752124	751221	751220	1113585	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752125	751221	751220	1113586	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752263	751221	751220	1113687	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752264	751221	751220	1113688	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752330	751221	751220	1113789	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752331	751221	751220	1113790	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752342	751221	751220	1113891	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752343	751221	751220	1113892	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752354	751221	751220	1113993	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752355	751221	751220	1113994	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752377	751221	751220	1114095	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752379	751221	751220	1114097	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752424	751221	751220	1114197	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752426	751221	751220	1114198	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752447	751221	751220	1114249	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752448	751221	751220	1114250	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-deadline-io-wrong-assertion	752449	751221	751220	1114251	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process run_deadline_with_blocked_stdin_and_active_stdout_stderr -- --exact --nocapture --test-threads=1
+command:du	752450	751221	751220	1114251	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752455	751221	751220	1114252	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752499	751221	751220	1114353	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752500	751221	751220	1114354	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752502	751221	751220	1114365	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752503	751221	751220	1114366	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-test-0-green	752504	751221	751220	1114367	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	752505	751221	751220	1114367	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752510	751221	751220	1114368	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752558	751221	751220	1114469	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752560	751221	751220	1114470	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-test-1-green	752561	751221	751220	1114471	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps -- --exact --nocapture --test-threads=1
+command:du	752562	751221	751220	1114471	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752567	751221	751220	1114472	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752577	751221	751220	1114483	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752578	751221	751220	1114484	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-test-2-green	752579	751221	751220	1114485	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one -- --exact --nocapture --test-threads=1
+command:du	752580	751221	751220	1114485	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752585	751221	751220	1114486	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752599	751221	751220	1114496	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752600	751221	751220	1114497	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-test-3-green	752601	751221	751220	1114498	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process zero_output_cap_reports_output_limit_with_an_empty_retained_prefix -- --exact --nocapture --test-threads=1
+command:du	752602	751221	751220	1114498	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752607	751221	751220	1114499	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752618	751221	751220	1114520	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752619	751221	751220	1114521	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-test-4-green	752620	751221	751220	1114522	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process run_deadline_returns_bounded_partial_output_after_terminating_child -- --exact --nocapture --test-threads=1
+command:du	752621	751221	751220	1114522	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752626	751221	751220	1114523	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752638	751221	751220	1114554	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752639	751221	751220	1114555	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-test-5-green	752640	751221	751220	1114556	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process run_deadline_with_blocked_stdin_and_active_stdout_stderr -- --exact --nocapture --test-threads=1
+command:du	752641	751221	751220	1114556	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752646	751221	751220	1114557	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752666	751221	751220	1114627	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752667	751221	751220	1114628	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-test-6-green	752668	751221	751220	1114629	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process unit_timeout_disables_configured_default_deadline -- --exact --nocapture --test-threads=1
+command:du	752669	751221	751220	1114629	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752675	751221	751220	1114630	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752685	751221	751220	1114661	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752686	751221	751220	1114662	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-test-7-green	752687	751221	751220	1114663	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process unit_stdin_means_immediate_eof -- --exact --nocapture --test-threads=1
+command:du	752688	751221	751220	1114663	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752693	751221	751220	1114664	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752702	751221	751220	1114685	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752703	751221	751220	1114686	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-test-8-green	752704	751221	751220	1114687	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process process_cwd_uses_the_opened_filesystem_capability_after_root_replacement -- --exact --nocapture --test-threads=1
+command:du	752705	751221	751220	1114687	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752710	751221	751220	1114688	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752718	751221	751220	1114709	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752719	751221	751220	1114710	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-test-9-green	752720	751221	751220	1114711	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process lossy_run_reports_engine_limit_expansion_without_returning_truncated_text -- --exact --nocapture --test-threads=1
+command:du	752722	751221	751220	1114711	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752727	751221	751220	1114712	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752736	751221	751220	1114732	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752737	751221	751220	1114734	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-simultaneous-io-wrong-assertion	752738	751221	751220	1114735	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps -- --exact --nocapture --test-threads=1
+command:du	752739	751221	751220	1114735	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752744	751221	751220	1114736	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752799	751221	751220	1114836	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752800	751221	751220	1114840	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752811	751221	751220	1114942	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752813	751221	751220	1114943	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752824	751221	751220	1115044	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752825	751221	751220	1115045	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752842	751221	751220	1115146	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752843	751221	751220	1115147	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752866	751221	751220	1115248	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752867	751221	751220	1115249	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752915	751221	751220	1115350	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752916	751221	751220	1115351	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752926	751221	751220	1115372	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752927	751221	751220	1115373	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-deadline-io-wrong-assertion	752928	751221	751220	1115374	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process run_deadline_with_blocked_stdin_and_active_stdout_stderr -- --exact --nocapture --test-threads=1
+command:du	752929	751221	751220	1115374	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752934	751221	751220	1115375	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752978	751221	751220	1115476	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752980	751221	751220	1115477	/bin/ps -e -o pid=,ppid=,rss=
+command:du	752983	751221	751220	1115498	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752984	751221	751220	1115499	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-test-0-green	752985	751221	751220	1115500	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	752986	751221	751220	1115500	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	752991	751221	751220	1115501	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753039	751221	751220	1115602	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753040	751221	751220	1115603	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-test-1-green	753041	751221	751220	1115604	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps -- --exact --nocapture --test-threads=1
+command:du	753042	751221	751220	1115604	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753047	751221	751220	1115605	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753057	751221	751220	1115616	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753058	751221	751220	1115617	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-test-2-green	753059	751221	751220	1115617	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one -- --exact --nocapture --test-threads=1
+command:du	753060	751221	751220	1115618	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753066	751221	751220	1115619	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753080	751221	751220	1115629	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753081	751221	751220	1115630	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-test-3-green	753082	751221	751220	1115631	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process zero_output_cap_reports_output_limit_with_an_empty_retained_prefix -- --exact --nocapture --test-threads=1
+command:du	753083	751221	751220	1115631	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753088	751221	751220	1115632	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753098	751221	751220	1115653	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753099	751221	751220	1115654	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-test-4-green	753100	751221	751220	1115655	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process run_deadline_returns_bounded_partial_output_after_terminating_child -- --exact --nocapture --test-threads=1
+command:du	753101	751221	751220	1115655	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753106	751221	751220	1115656	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753118	751221	751220	1115687	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753119	751221	751220	1115688	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-test-5-green	753128	751221	751220	1115689	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process run_deadline_with_blocked_stdin_and_active_stdout_stderr -- --exact --nocapture --test-threads=1
+command:du	753129	751221	751220	1115689	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753134	751221	751220	1115690	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753154	751221	751220	1115760	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753155	751221	751220	1115762	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-test-6-green	753156	751221	751220	1115762	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process unit_timeout_disables_configured_default_deadline -- --exact --nocapture --test-threads=1
+command:du	753157	751221	751220	1115762	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753162	751221	751220	1115763	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753172	751221	751220	1115794	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753173	751221	751220	1115795	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-test-7-green	753174	751221	751220	1115796	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process unit_stdin_means_immediate_eof -- --exact --nocapture --test-threads=1
+command:du	753175	751221	751220	1115796	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753180	751221	751220	1115797	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753188	751221	751220	1115808	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753190	751221	751220	1115809	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-test-8-green	753191	751221	751220	1115810	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process process_cwd_uses_the_opened_filesystem_capability_after_root_replacement -- --exact --nocapture --test-threads=1
+command:du	753192	751221	751220	1115810	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753197	751221	751220	1115811	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753204	751221	751220	1115822	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753205	751221	751220	1115823	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-test-9-green	753206	751221	751220	1115824	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process lossy_run_reports_engine_limit_expansion_without_returning_truncated_text -- --exact --nocapture --test-threads=1
+command:du	753207	751221	751220	1115824	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753212	751221	751220	1115825	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753221	751221	751220	1115846	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753222	751221	751220	1115847	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-simultaneous-io-wrong-assertion	753223	751221	751220	1115848	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps -- --exact --nocapture --test-threads=1
+command:du	753224	751221	751220	1115848	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753229	751221	751220	1115849	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753316	751221	751220	1115950	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753318	751221	751220	1115951	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753357	751221	751220	1116052	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753364	751221	751220	1116053	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753387	751221	751220	1116154	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753388	751221	751220	1116155	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753399	751221	751220	1116256	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753400	751221	751220	1116257	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753413	751221	751220	1116358	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753414	751221	751220	1116359	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753433	751221	751220	1116460	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753434	751221	751220	1116461	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753455	751221	751220	1116562	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753456	751221	751220	1116563	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753506	751221	751220	1116664	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753512	751221	751220	1116665	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753515	751221	751220	1116676	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753516	751221	751220	1116677	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-deadline-io-wrong-assertion	753517	751221	751220	1116678	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process run_deadline_with_blocked_stdin_and_active_stdout_stderr -- --exact --nocapture --test-threads=1
+command:du	753518	751221	751220	1116678	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753523	751221	751220	1116679	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753567	751221	751220	1116780	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753568	751221	751220	1116781	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753571	751221	751220	1116802	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753572	751221	751220	1116803	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-test-0-green	753573	751221	751220	1116804	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	753574	751221	751220	1116804	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753579	751221	751220	1116805	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753627	751221	751220	1116906	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753628	751221	751220	1116907	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-test-1-green	753630	751221	751220	1116908	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps -- --exact --nocapture --test-threads=1
+command:du	753631	751221	751220	1116908	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753636	751221	751220	1116909	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753647	751221	751220	1116930	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753648	751221	751220	1116931	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-test-2-green	753649	751221	751220	1116932	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one -- --exact --nocapture --test-threads=1
+command:du	753650	751221	751220	1116932	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753655	751221	751220	1116933	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753669	751221	751220	1116944	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753670	751221	751220	1116945	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-test-3-green	753671	751221	751220	1116946	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process zero_output_cap_reports_output_limit_with_an_empty_retained_prefix -- --exact --nocapture --test-threads=1
+command:du	753672	751221	751220	1116946	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753677	751221	751220	1116947	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753687	751221	751220	1116967	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753689	751221	751220	1116968	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-test-4-green	753690	751221	751220	1116969	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process run_deadline_returns_bounded_partial_output_after_terminating_child -- --exact --nocapture --test-threads=1
+command:du	753691	751221	751220	1116969	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753696	751221	751220	1116971	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753708	751221	751220	1117001	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753709	751221	751220	1117002	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-test-5-green	753710	751221	751220	1117003	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process run_deadline_with_blocked_stdin_and_active_stdout_stderr -- --exact --nocapture --test-threads=1
+command:du	753711	751221	751220	1117003	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753716	751221	751220	1117004	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753736	751221	751220	1117075	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753737	751221	751220	1117076	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-test-6-green	753738	751221	751220	1117077	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process unit_timeout_disables_configured_default_deadline -- --exact --nocapture --test-threads=1
+command:du	753739	751221	751220	1117077	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753744	751221	751220	1117078	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753755	751221	751220	1117109	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753756	751221	751220	1117110	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-test-7-green	753757	751221	751220	1117111	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process unit_stdin_means_immediate_eof -- --exact --nocapture --test-threads=1
+command:du	753758	751221	751220	1117111	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753763	751221	751220	1117112	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753771	751221	751220	1117123	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753772	751221	751220	1117124	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-test-8-green	753773	751221	751220	1117125	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process process_cwd_uses_the_opened_filesystem_capability_after_root_replacement -- --exact --nocapture --test-threads=1
+command:du	753774	751221	751220	1117125	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753779	751221	751220	1117126	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753786	751221	751220	1117137	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753787	751221	751220	1117138	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-test-9-green	753788	751221	751220	1117139	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process lossy_run_reports_engine_limit_expansion_without_returning_truncated_text -- --exact --nocapture --test-threads=1
+command:du	753789	751221	751220	1117139	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753795	751221	751220	1117140	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753803	751221	751220	1117150	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753804	751221	751220	1117152	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-simultaneous-io-wrong-assertion	753805	751221	751220	1117153	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps -- --exact --nocapture --test-threads=1
+command:du	753806	751221	751220	1117153	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753811	751221	751220	1117154	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753864	751221	751220	1117255	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753865	751221	751220	1117256	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753876	751221	751220	1117357	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753877	751221	751220	1117358	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753888	751221	751220	1117459	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753889	751221	751220	1117460	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753900	751221	751220	1117561	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753902	751221	751220	1117562	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753923	751221	751220	1117663	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753924	751221	751220	1117664	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753958	751221	751220	1117765	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753959	751221	751220	1117767	/bin/ps -e -o pid=,ppid=,rss=
+command:du	753997	751221	751220	1117847	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	753998	751221	751220	1117849	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-deadline-io-wrong-assertion	753999	751221	751220	1117849	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process run_deadline_with_blocked_stdin_and_active_stdout_stderr -- --exact --nocapture --test-threads=1
+command:du	754000	751221	751220	1117850	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754005	751221	751220	1117851	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754053	751221	751220	1117951	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754054	751221	751220	1117953	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754057	751221	751220	1117974	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754059	751221	751220	1117975	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-test-0-green	754060	751221	751220	1117976	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	754061	751221	751220	1117976	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754066	751221	751220	1117977	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754114	751221	751220	1118078	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754115	751221	751220	1118079	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-test-1-green	754116	751221	751220	1118079	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps -- --exact --nocapture --test-threads=1
+command:du	754117	751221	751220	1118080	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754122	751221	751220	1118081	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754132	751221	751220	1118091	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754133	751221	751220	1118093	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-test-2-green	754134	751221	751220	1118093	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one -- --exact --nocapture --test-threads=1
+command:du	754135	751221	751220	1118094	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754140	751221	751220	1118095	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754155	751221	751220	1118105	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754156	751221	751220	1118106	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-test-3-green	754157	751221	751220	1118107	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process zero_output_cap_reports_output_limit_with_an_empty_retained_prefix -- --exact --nocapture --test-threads=1
+command:du	754158	751221	751220	1118107	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754163	751221	751220	1118108	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754173	751221	751220	1118129	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754174	751221	751220	1118130	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-test-4-green	754175	751221	751220	1118131	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process run_deadline_returns_bounded_partial_output_after_terminating_child -- --exact --nocapture --test-threads=1
+command:du	754176	751221	751220	1118131	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754181	751221	751220	1118132	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754193	751221	751220	1118163	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754194	751221	751220	1118164	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-test-5-green	754195	751221	751220	1118165	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process run_deadline_with_blocked_stdin_and_active_stdout_stderr -- --exact --nocapture --test-threads=1
+command:du	754196	751221	751220	1118165	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754202	751221	751220	1118166	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754222	751221	751220	1118237	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754223	751221	751220	1118238	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-test-6-green	754224	751221	751220	1118239	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process unit_timeout_disables_configured_default_deadline -- --exact --nocapture --test-threads=1
+command:du	754225	751221	751220	1118239	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754230	751221	751220	1118240	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754240	751221	751220	1118271	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754241	751221	751220	1118272	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-test-7-green	754242	751221	751220	1118273	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process unit_stdin_means_immediate_eof -- --exact --nocapture --test-threads=1
+command:du	754243	751221	751220	1118273	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754248	751221	751220	1118274	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754256	751221	751220	1118284	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754257	751221	751220	1118286	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-test-8-green	754258	751221	751220	1118286	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process process_cwd_uses_the_opened_filesystem_capability_after_root_replacement -- --exact --nocapture --test-threads=1
+command:du	754259	751221	751220	1118286	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754265	751221	751220	1118288	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754272	751221	751220	1118298	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754273	751221	751220	1118299	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-test-9-green	754274	751221	751220	1118300	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process lossy_run_reports_engine_limit_expansion_without_returning_truncated_text -- --exact --nocapture --test-threads=1
+command:du	754275	751221	751220	1118300	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754280	751221	751220	1118301	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754289	751221	751220	1118322	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754290	751221	751220	1118323	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-simultaneous-io-wrong-assertion	754291	751221	751220	1118324	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps -- --exact --nocapture --test-threads=1
+command:du	754292	751221	751220	1118324	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754297	751221	751220	1118325	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754325	751221	751220	1118426	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754327	751221	751220	1118428	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754338	751221	751220	1118528	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754339	751221	751220	1118530	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754350	751221	751220	1118630	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754351	751221	751220	1118632	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754381	751221	751220	1118733	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754382	751221	751220	1118734	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754413	751221	751220	1118835	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754417	751221	751220	1118836	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754451	751221	751220	1118907	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754452	751221	751220	1118908	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-deadline-io-wrong-assertion	754453	751221	751220	1118909	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process run_deadline_with_blocked_stdin_and_active_stdout_stderr -- --exact --nocapture --test-threads=1
+command:du	754454	751221	751220	1118909	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754459	751221	751220	1118910	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754503	751221	751220	1119011	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754505	751221	751220	1119012	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754507	751221	751220	1119023	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754508	751221	751220	1119024	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-test-0-green	754509	751221	751220	1119025	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	754510	751221	751220	1119025	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754515	751221	751220	1119026	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754563	751221	751220	1119127	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754564	751221	751220	1119128	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-test-1-green	754565	751221	751220	1119129	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps -- --exact --nocapture --test-threads=1
+command:du	754566	751221	751220	1119129	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754571	751221	751220	1119130	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754582	751221	751220	1119151	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754583	751221	751220	1119152	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-test-2-green	754584	751221	751220	1119153	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one -- --exact --nocapture --test-threads=1
+command:du	754585	751221	751220	1119153	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754591	751221	751220	1119154	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754605	751221	751220	1119165	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754606	751221	751220	1119166	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-test-3-green	754607	751221	751220	1119166	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process zero_output_cap_reports_output_limit_with_an_empty_retained_prefix -- --exact --nocapture --test-threads=1
+command:du	754608	751221	751220	1119166	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754613	751221	751220	1119168	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754623	751221	751220	1119188	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754624	751221	751220	1119190	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-test-4-green	754625	751221	751220	1119190	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process run_deadline_returns_bounded_partial_output_after_terminating_child -- --exact --nocapture --test-threads=1
+command:du	754626	751221	751220	1119190	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754631	751221	751220	1119192	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754643	751221	751220	1119222	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754645	751221	751220	1119223	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-test-5-green	754646	751221	751220	1119224	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process run_deadline_with_blocked_stdin_and_active_stdout_stderr -- --exact --nocapture --test-threads=1
+command:du	754647	751221	751220	1119224	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754652	751221	751220	1119226	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754672	751221	751220	1119296	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754673	751221	751220	1119298	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-test-6-green	754674	751221	751220	1119298	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process unit_timeout_disables_configured_default_deadline -- --exact --nocapture --test-threads=1
+command:du	754675	751221	751220	1119298	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754680	751221	751220	1119300	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754690	751221	751220	1119330	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754691	751221	751220	1119331	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-test-7-green	754692	751221	751220	1119332	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process unit_stdin_means_immediate_eof -- --exact --nocapture --test-threads=1
+command:du	754693	751221	751220	1119332	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754698	751221	751220	1119333	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754708	751221	751220	1119354	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754709	751221	751220	1119355	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-test-8-green	754710	751221	751220	1119356	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process process_cwd_uses_the_opened_filesystem_capability_after_root_replacement -- --exact --nocapture --test-threads=1
+command:du	754711	751221	751220	1119356	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754716	751221	751220	1119357	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754723	751221	751220	1119368	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754724	751221	751220	1119369	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-test-9-green	754725	751221	751220	1119370	/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process lossy_run_reports_engine_limit_expansion_without_returning_truncated_text -- --exact --nocapture --test-threads=1
+command:du	754726	751221	751220	1119370	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754731	751221	751220	1119371	/bin/ps -e -o pid=,ppid=,rss=
+command:du	754739	751221	751220	1119382	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d
+command:ps	754740	751221	751220	1119383	/bin/ps -e -o pid=,ppid=,rss=

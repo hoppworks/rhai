@@ -1,0 +1,30 @@
+{
+  "cargo_lock_sha256_after_execution": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "manifests_sha256_after_restoration": {
+    ".scratch/all-tickets/macos-managed-capture-overlay/Cargo.toml": "4e8b305d4fd30889adbb2e1c03d6461a6c3efd58ad5ac55327c2f3523c584579",
+    ".scratch/process-prototype/Cargo.toml": "b26b20e622954380ffb94aba823f0863006b34db6be3c7190ddc91939d58ff43",
+    ".scratch/process-rust-io/Cargo.toml": "3791ba60a8a4373e3e23b99d2171254cdeb4b9a0c46daf2f9c10161067194fea",
+    "Cargo.toml": "bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec",
+    "codegen/Cargo.toml": "1ad774a34019adecf5321498e443999d0a6c38412e2eb77b06f4ccc66aa64dc3",
+    "codegen/tests/custom_root/Cargo.toml": "1000e24c121e5a377db8b38926f4450166460ddbe3c9863811168dbfab490d86",
+    "fuzz/Cargo.toml": "7b65fd0c1d36908f502ec12a18c86a299cafbc3415187731d8330053e4244b46",
+    "no_std/no_std_test/Cargo.toml": "b05325f695dbce8aeb8d62f7b2c5e4bb888e0ca782050d3c11bceb6a0804f152"
+  },
+  "original_test_sha256": {
+    "tests/sys_process.rs": "379db748d4b84a60538d172059df1feafaa62b337eaf49c1178d3e6467d40c74"
+  },
+  "private_overlay_sha256": {
+    "row-0-deadline-io": "92e2dffe1e65258fa507a7e0bc458eb73ba036c3f9c3dd9359a052349715ed8a",
+    "row-0-simultaneous-io": "27eda0befedddf34b8d32d1aef2927b1878e41b20cbc40dcfa26e5e6305e76b6",
+    "row-1-deadline-io": "92e2dffe1e65258fa507a7e0bc458eb73ba036c3f9c3dd9359a052349715ed8a",
+    "row-1-simultaneous-io": "27eda0befedddf34b8d32d1aef2927b1878e41b20cbc40dcfa26e5e6305e76b6",
+    "row-2-deadline-io": "92e2dffe1e65258fa507a7e0bc458eb73ba036c3f9c3dd9359a052349715ed8a",
+    "row-2-simultaneous-io": "27eda0befedddf34b8d32d1aef2927b1878e41b20cbc40dcfa26e5e6305e76b6",
+    "row-3-deadline-io": "92e2dffe1e65258fa507a7e0bc458eb73ba036c3f9c3dd9359a052349715ed8a",
+    "row-3-simultaneous-io": "27eda0befedddf34b8d32d1aef2927b1878e41b20cbc40dcfa26e5e6305e76b6",
+    "row-4-deadline-io": "92e2dffe1e65258fa507a7e0bc458eb73ba036c3f9c3dd9359a052349715ed8a",
+    "row-4-simultaneous-io": "27eda0befedddf34b8d32d1aef2927b1878e41b20cbc40dcfa26e5e6305e76b6"
+  },
+  "restoration_error": null,
+  "restored_test_matches_original": true
+}

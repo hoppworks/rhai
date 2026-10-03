@@ -1,0 +1,89 @@
+{
+  "cleanup_assertion_unchanged": true,
+  "expectations_intentionally_wrong": true,
+  "original_test_sha256": "379db748d4b84a60538d172059df1feafaa62b337eaf49c1178d3e6467d40c74",
+  "overlays": [
+    {
+      "cleanup_assertion_unchanged": true,
+      "expectations_intentionally_wrong": true,
+      "label": "simultaneous-io",
+      "row": "0",
+      "sha256": "27eda0befedddf34b8d32d1aef2927b1878e41b20cbc40dcfa26e5e6305e76b6",
+      "test": "process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps"
+    },
+    {
+      "cleanup_assertion_unchanged": true,
+      "expectations_intentionally_wrong": true,
+      "label": "deadline-io",
+      "row": "0",
+      "sha256": "92e2dffe1e65258fa507a7e0bc458eb73ba036c3f9c3dd9359a052349715ed8a",
+      "test": "run_deadline_with_blocked_stdin_and_active_stdout_stderr"
+    },
+    {
+      "cleanup_assertion_unchanged": true,
+      "expectations_intentionally_wrong": true,
+      "label": "simultaneous-io",
+      "row": "1",
+      "sha256": "27eda0befedddf34b8d32d1aef2927b1878e41b20cbc40dcfa26e5e6305e76b6",
+      "test": "process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps"
+    },
+    {
+      "cleanup_assertion_unchanged": true,
+      "expectations_intentionally_wrong": true,
+      "label": "deadline-io",
+      "row": "1",
+      "sha256": "92e2dffe1e65258fa507a7e0bc458eb73ba036c3f9c3dd9359a052349715ed8a",
+      "test": "run_deadline_with_blocked_stdin_and_active_stdout_stderr"
+    },
+    {
+      "cleanup_assertion_unchanged": true,
+      "expectations_intentionally_wrong": true,
+      "label": "simultaneous-io",
+      "row": "2",
+      "sha256": "27eda0befedddf34b8d32d1aef2927b1878e41b20cbc40dcfa26e5e6305e76b6",
+      "test": "process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps"
+    },
+    {
+      "cleanup_assertion_unchanged": true,
+      "expectations_intentionally_wrong": true,
+      "label": "deadline-io",
+      "row": "2",
+      "sha256": "92e2dffe1e65258fa507a7e0bc458eb73ba036c3f9c3dd9359a052349715ed8a",
+      "test": "run_deadline_with_blocked_stdin_and_active_stdout_stderr"
+    },
+    {
+      "cleanup_assertion_unchanged": true,
+      "expectations_intentionally_wrong": true,
+      "label": "simultaneous-io",
+      "row": "3",
+      "sha256": "27eda0befedddf34b8d32d1aef2927b1878e41b20cbc40dcfa26e5e6305e76b6",
+      "test": "process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps"
+    },
+    {
+      "cleanup_assertion_unchanged": true,
+      "expectations_intentionally_wrong": true,
+      "label": "deadline-io",
+      "row": "3",
+      "sha256": "92e2dffe1e65258fa507a7e0bc458eb73ba036c3f9c3dd9359a052349715ed8a",
+      "test": "run_deadline_with_blocked_stdin_and_active_stdout_stderr"
+    },
+    {
+      "cleanup_assertion_unchanged": true,
+      "expectations_intentionally_wrong": true,
+      "label": "simultaneous-io",
+      "row": "4",
+      "sha256": "27eda0befedddf34b8d32d1aef2927b1878e41b20cbc40dcfa26e5e6305e76b6",
+      "test": "process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps"
+    },
+    {
+      "cleanup_assertion_unchanged": true,
+      "expectations_intentionally_wrong": true,
+      "label": "deadline-io",
+      "row": "4",
+      "sha256": "92e2dffe1e65258fa507a7e0bc458eb73ba036c3f9c3dd9359a052349715ed8a",
+      "test": "run_deadline_with_blocked_stdin_and_active_stdout_stderr"
+    }
+  ],
+  "private_only": true,
+  "restored_byte_for_byte_after_every_control": true
+}

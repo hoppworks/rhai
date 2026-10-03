@@ -1,0 +1,11 @@
+
+running 1 test
+test run_deadline_with_blocked_stdin_and_active_stdout_stderr ... FAILED
+
+failures:
+
+failures:
+    run_deadline_with_blocked_stdin_and_active_stdout_stderr
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 41 filtered out; finished in 0.33s
+

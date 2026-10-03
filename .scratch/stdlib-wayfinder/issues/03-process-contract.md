@@ -261,3 +261,25 @@ and linux-wait-entry-review.md, original native88 logs and root closure receipts
 This closes only the untimed wait cancellation-lock criterion in these Linux rows.
 Timed waits, other features/platforms, managed-group/forced-custody/performance and
 full release requirements remain open; ticket implementation is not complete.
+
+
+## Accepted Linux simultaneous IO and active deadline subset — 2026-10-03
+
+Frozen9e56d5f2, native Rust/Cargo1.77.2, sys/sys+sync/sys+metadata+serde/
+sys+net+sync+metadata+serde/sys+f32_float: public Engine simultaneous128KiB
+stdin and256KiB per-stream output reaches exact cap with complete flags and
+independent completed-input record/reap. Blocked512KiB stdin with active
+stdout/stderr reaches configured deadline, returns bounded partial output and
+incomplete flags through both raw/text APIs, with independent readiness/reap.
+Two meaningful controls per row fail101 after explicit record-derived ESRCH,
+then original tests pass. No per-call latency upper bound is asserted.
+
+Invocation89 has50 original exact GREENs covering ten selected cases, but only
+the two controlled cases above have newly established assertion sensitivity.
+Other eight cases are positive regression evidence awaiting applicable controls
+before strict individual closure. Root independently checks425PID/start
+identities/tencontrolPIDs absent, group/runtime/scope closed and221ownedstage
+files removed after exported hash verification. Proof/review/original logs:
+.scratch/all-tickets/linux-process-io-proof.md and linux-process-io-review.md.
+All remaining platform/feature/managed/fault/latency/performance and release
+criteria remain open. Existing partial evidence/cause/budget history unchanged.

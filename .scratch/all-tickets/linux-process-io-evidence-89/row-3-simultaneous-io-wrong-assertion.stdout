@@ -1,0 +1,11 @@
+
+running 1 test
+test process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps ... FAILED
+
+failures:
+
+failures:
+    process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 41 filtered out; finished in 0.12s
+

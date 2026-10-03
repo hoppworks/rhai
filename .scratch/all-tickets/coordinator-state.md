@@ -86,7 +86,7 @@ Current authoritative history through this rewrite is Git commit
 10d4a0d55400ebe8c24feff134e7161ff36bf8d5, this same state path. It retains
 all earlier cause/attempt/resource/source applicability records. Read that
 history for consumed work, not superseded next actions. No reset occurred.
-Last independently read-back fork main08507d6831f73f28aa0b95a4255c5df8ebe2ec13; only remote main, lowercase
+Last independently read-back fork main9e56d5f2ef42303493907907454562f72a24b60b; only remote main, lowercase
 human author/committer. Goal active and incomplete.
 
 ### Accepted current Linux non-process package
@@ -909,3 +909,79 @@ missing cases into one acceptance package; do not substitute partial Linuxproof
 for complete Windows/Darwin/finalrelease. No retained build/stage/privatecache.
 Owned root worktree remains needed; foreign untracked historylogs unchanged.
 Elapsed native38.528s toexport; Role/token/cost/cache metrics unavailable/unknown.
+
+Verified package integration9e56d5f2ef42303493907907454562f72a24b60b: push terminal0, independent ls-remote exact samehead and solemain, author/committer lowercase hoppworks.54packagefiles committed, foreign/historyCLIlogs unstaged/preserved. Whitespace check complaints only native raw stdout trailing blanklines; preserve unedited evidence rather than normalize. No live own process/build/stage. Goal incomplete; proceed remaining process/current platform matrix. This postpush state is owned continuation bookkeeping for next package.
+
+
+## Current Linux process IO/options package — 2026-10-03
+Root resumed user-authorized all-ticket work; global/project and relevant
+campaign/e2e-proof/tdd/ocr-delegate/current Coordinator role template reread at
+faba3db. Prior accepted proof and stopped cause histories remain unchanged.
+Frozen source9e56d5f2ef42303493907907454562f72a24b60b; prospective correctness
+invocation89, Unix88 consumed until actual dispatch. Existing Worker
+linux_wait_entry_prepare owns mechanical linux-process-io recipe adaptation;
+combined Expert linux_shared_child_review owns source/delta/evidence review.
+Scope is existing real public Engine capture/output cap/deadline/unit stdin and
+unit timeout/cwd capability cases; exact per-case selection excludes managed,
+resource census and overhead measurement suites. Candidate rows sys,sys+sync,
+sys+metadata+serde,sys+net+sync+metadata+serde,sys+f32_float share one private
+Rust1.77.2 build invocation. Existing float script literals preclude no_float
+claims; unchecked engine string-limit applicability needs separate resolution.
+Wrong expected output byte and expected stderr marker controls must fail for
+intended assertions after owned child cleanup, followed by exact restoration
+and each selected GREEN case. No production change planned, readiness pending.
+Outer600/scoped585/helper540/export30/jobs2/desc16/2GiB and sampled storage stop
+1572864KiB retained. One30-minute active-work planning checkpoint, no blind retry.
+Fresh workhorse inventory currently empty cargo/rustc/rustup/make/ninja and
+687122001920 free bytes; recheck just before heavy launch. No retained build or
+stage created. Sole fork main and lowercase attribution remain binding; wider
+platform/feature/release requirements open. No routine permission gate added.
+
+Source inspection found simultaneous-IO wrong-byte assertion precedes the existing
+independent child-record/reap check. Root permits a private-only assertion-order
+overlay moving the identical check before output assertions for RED, with exact
+unique anchors and separate overlay hash/diff; repository source untouched and
+original bytes restored before GREEN. Same approved Engine seam, no new scope
+or retry count. Combined reviewer checks readiness. No native launch yet.
+
+Combined source assessment confirms ten genuine tests and five checked rows;
+prior run23 was macOS with older supervision source, so current Linux affected
+coverage requires real rerun. Native preparation source findings consolidated:
+private RED reap relocation initially incorrect (fixed), incremental overlay
+identity recording needed (fixed), older shared-child launcher lacked the newer
+accepted process-group closure and scope-rmdir custody checks. Worker restores
+wait-entry launcher unchanged except exact package identities. All are prelaunch
+source findings, no native launch/failed product correction or cause reset.
+Root independently verifies frozen archive40ddedbf and pure overlay order with
+repository source unchanged. Review readiness remains pending launcher delta.
+
+Final combined recipe readiness accepted: helper00aba0d0/stage63832227/
+launchera000104f; actual launcher byte-equivalent accepted wait-entry custody
+except package identities. Stage terminal0, root fresh staged-input hashes
+checked; workhorse heavy inventory empty and704263671808 free bytes.
+Native correctness invocation89 dispatch now; Unix cumulative89 consumed.
+Same finite600/585/540seconds and hardresources, no stopped chain reopened.
+Tenexacttests×fivefeature rows and two intended controls×five, source9e56d5f2;
+real acceptance/readback/export/cleanup pending. Own stage recorded exact
+/root/rhai-linux-process-io-20261003-9e56d5f2 and central scope
+/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2.
+
+Native89 terminal0:50exactoriginalGREEN0 and10intendedRED101, exported76.589s;
+source/lock/manifests restored and executedrecipes byteequal reviewedlocal.
+Root independent425PID/startidentities/10controlfixturePIDs absent, groupempty,
+runtime/scopeabsent.221exactstagefiles hasheschecked/exported then removed,
+sixdirsrmdir/stageabsent. Samples989296KiBRSS/1114264storage/7desc, notpeaks.
+Combined independent review accepted narrowly two current sensitivity-backed
+requirements acrossfivefeature rows: simultaneousexactIO at perstreamcap and
+blockedstdinactivestreamdeadline raw/text behavior/reap; no latencyboundclaim.
+Eight other cases have valid positive regression proof but sensitivity closure
+pending. Proof linux-process-io-proof.md/review.md and originals; ticket03 partial
+closure recorded. Initialrootcollector wrongstatusfilename correctedtoactual
+pid-readback.status, no native rerun orproductcorrection; original proc exitrace
+warning retained/accepted. Unix89 cumulative, overhead85unlaunched/stopped
+Windows/Darwincauses unchanged. No retainedbuild/stage/privatecache.
+Current turn PROGRESS; owned metadata/evidence integration tosoleforkmain next.
+Then close the remaining eight process option/capture sensitivity requirements
+with specific controls and affected reruns, reusing valid89positive evidence
+where unchanged. Preserve uniquePID-path/latency/census limitations, all broader
+strictacceptance open. Usage/cost/token metrics for roles unavailable/unknown.

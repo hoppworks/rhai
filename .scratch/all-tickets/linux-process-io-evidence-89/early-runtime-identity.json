@@ -1,0 +1,19 @@
+{
+  "captured_before_stage_validation_or_external_command": true,
+  "helper": {
+    "cmdline": "python3 /root/rhai-linux-process-io-20261003-9e56d5f2/linux-process-io-proof.py",
+    "pgid": 751220,
+    "pid": 751221,
+    "ppid": 751220,
+    "start_ticks": "1111723"
+  },
+  "identity_errors": {},
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-process-io-20261003-9e56d5f2/agent-build-8y6eol4d",
+  "scoped_supervisor": {
+    "cmdline": "/usr/bin/python3 /var/roothome/rhai-linux-process-io-20261003-9e56d5f2/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-process-io-20261003-9e56d5f2/linux-process-io-proof.py",
+    "pgid": 751220,
+    "pid": 751220,
+    "ppid": 751217,
+    "start_ticks": "1111721"
+  }
+}
