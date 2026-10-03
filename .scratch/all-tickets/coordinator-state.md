@@ -85,11 +85,18 @@ Instructions/roles faba3db3bef6891ad2c0b20d434963bb8fe9572d loaded by root,
 responsible Standard and same combined reviewer. Workhorse installed rules resolved
 at /var/home/workhorse/.agents/AGENTS.md and /var/home/workhorse/projects/agent-skills;
 SSH root has no ~/.agents. Read-only resolution/command-local safe.directory only.
-Last verified fork main82ea0febaeb105ca8f6fee2d858fd509e7ce180c; sole remote main,
+Last verified fork mainfae42da621ffaaa23dac71d9f4da70fea38c0491; sole remote main,
 lowercase human author/committer. Native105 managed deadline accepted, exported,
-exactly cleaned and integrated. Current package: managed run OutputLimit source53b
-and frozen recipesc785a913, pending affected execution/collection review before
-any staging or native106 allocation. Overall scope incomplete.
+exactly cleaned and integrated. Current package: native106 OutputLimit frozen
+source53b/recipesc785 completed terminal0: three setup0, intended control101,
+sixGREEN0. Root export independently validates68 originalfiles/fivedirectories,
+seven preexisting closures; exact hash-gated stage/scope/group retirement complete.
+Same combined Expert actual acceptance ACCEPTED narrowly; original68hashes and
+strict control/readback independently reviewed. Immutable53b integration prepared.
+No retained native106 build; finite two-heavy exception expired. CumulativeUnix106,
+OutputLimitnative1; failedborrowcorrectioncount1 preserved. Next immutable53b integration/forksolemain push and exact remote read-back.
+Next escaped-pipe source-only writerf32afdd frozen, combined source review underway;
+compile/native/acceptance unproven. All other platform/performance gates remain open.
 
 ### Current coherent requirement: final managed client lease drop
 
@@ -1769,3 +1776,9 @@ OutputLimit recipes frozen c785a91364294b44c42c7c82acfb19a99f5c0c61; root indepe
 
 Same combined OutputLimit execution/collection review READY at c785a913; source53b remains SOURCE READY, no compile/native acceptance. Root staged immutable source and all13 inputs with hash checks PASS at /root/rhai-linux-managed-output-limit-20261003-0a6dbb5d-106 (physical /var/roothome/rhai-linux-managed-output-limit-20261003-0a6dbb5d-106). Stage is owned source/recipe custody, no build; prospective central scope remains absent. Retain until this bounded proof/export retires it, or inspection checkpoint 2026-10-04T18:34:36.213773+00:00, whichever first; owner root.
 Fresh immediate prelaunch inventory found foreign Tauron G47 run_scoped1259377/start4340154 and supervisor1259378/start4340156, Cargo1282095/start4358351 plus rustc. No native106 allocated or launched; cumulativeUnix105/OutputLimitnative0 unchanged. Human explicitly approved build-window coordination; root sent existing responsible Tauron chat01a0fe32-5425-71d2-887b-3bf1bac284e7 one finite600s window request, no process interruption. Next window/absence plus fresh global heavy check -> record106 allocation -> bounded native. Same responsible Standard continues independent escaped-held-pipe test source after immutable53b staging. Native or release claims remain open.
+
+Capacity route checkpoint 2026-10-03T18:44:43.638399+00:00: default one-heavy rule is a workflow convention and expressly permits measured project exceptions. Actualworkhorse32CPUs/76,814,028KiB MemAvailable/load6.60/5.29/4.32/free724,403,449,856bytes, foreignG47 sampledcompilerRSS2,044,696KiB. Record finite two-heavy exception in owned projectAGENTS for invocation106 only, Rhai2jobs/2GiB existing hard caps unchanged. No hard user limit revised, no foreign process touched. Require immediate no-third-heavy/16GiB availableRAM+disk before launch; allocation still pending guard. Future default remains one heavy.
+
+Native106 allocated 2026-10-03T18:50:23.707720+00:00: fresh guardPASS, prior foreignG47 exited; successor launcher1329948/start4447594 supervisor1329949/start4447596 exactvalidated. All Cargo/rustc in successor group, no third heavy run. Capacity32CPU/79,580,232KiB available/727,025,782,784bytes free, all13stagehashesPASS, scope/terminalabsent. Finite project exception identity refreshed without changing limits. CumulativeUnix106/OutputLimitnative1, acceptancepending; source53b/recipesc785 frozen, newer writerf32 escapedpipe excluded. Bounded600s launch next. Initial guard stale-group failure was read-only preflight, no native consumption or product correction.
+
+Native106 samecombinedactualacceptance ACCEPTED, review/proof/tickets03/06 partialclosure recorded. Immutable root non-scratchsource prepared53b, newerescapedpipe notintegrated. Escapedf32 initial3sourcefindings repaired523608648dcae99bc0f6b46eaf2bb91fa4ecc752; sameExpert affectedrecheck running, sameStandard recipespreparation source-only. No107allocation, no renewedhardchain.

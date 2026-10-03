@@ -1,0 +1,143 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+helper	1352109	1352108	1352108	4464795	python3 /root/rhai-linux-managed-output-limit-20261003-0a6dbb5d-106/linux-managed-output-limit-proof.py
+scoped-supervisor	1352108	1352105	1352108	4464794	/usr/bin/python3 /var/roothome/rhai-linux-managed-output-limit-20261003-0a6dbb5d-106/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-managed-output-limit-20261003-0a6dbb5d-106/linux-managed-output-limit-proof.py
+command:rustup-install	1352111	1352109	1352108	4464804	/root/.cargo/bin/rustup toolchain install 1.77.2-x86_64-unknown-linux-gnu --profile minimal --no-self-update
+command:du	1352120	1352109	1352108	4464804	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1352121	1352109	1352108	4464804	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1352150	1352109	1352108	4464906	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1352151	1352109	1352108	4464906	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1352163	1352109	1352108	4465007	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1352164	1352109	1352108	4465007	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1352177	1352109	1352108	4465108	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1352178	1352109	1352108	4465108	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1352197	1352109	1352108	4465209	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1352198	1352109	1352108	4465210	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1352210	1352109	1352108	4465311	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1352211	1352109	1352108	4465311	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1352230	1352109	1352108	4465412	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1352231	1352109	1352108	4465412	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1352245	1352109	1352108	4465513	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1352246	1352109	1352108	4465513	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1352257	1352109	1352108	4465614	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1352258	1352109	1352108	4465614	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1352263	1352109	1352108	4465635	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1352264	1352109	1352108	4465636	/bin/ps -e -o pid=,ppid=,rss=
+command:rustc-version	1352265	1352109	1352108	4465637	/root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose
+command:du	1352266	1352109	1352108	4465637	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1352267	1352109	1352108	4465637	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1352270	1352109	1352108	4465648	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1352271	1352109	1352108	4465648	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-version	1352272	1352109	1352108	4465649	/root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose
+command:du	1352273	1352109	1352108	4465649	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1352277	1352109	1352108	4465649	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1352287	1352109	1352108	4465660	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1352288	1352109	1352108	4465660	/bin/ps -e -o pid=,ppid=,rss=
+command:require-output-limit-control	1352289	1352109	1352108	4465661	/root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_run_output_limit_reaps_group_under_fixture_reaper
+command:du	1352290	1352109	1352108	4465661	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1352291	1352109	1352108	4465661	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1352312	1352109	1352108	4465762	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1352313	1352109	1352108	4465762	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1352347	1352109	1352108	4465863	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1352348	1352109	1352108	4465864	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1352359	1352109	1352108	4465965	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1352360	1352109	1352108	4465965	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1352401	1352109	1352108	4466066	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1352403	1352109	1352108	4466067	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1352613	1352109	1352108	4466168	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1352615	1352109	1352108	4466169	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1352836	1352109	1352108	4466269	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1352837	1352109	1352108	4466270	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1352979	1352109	1352108	4466371	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1352980	1352109	1352108	4466372	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1353012	1352109	1352108	4466473	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1353013	1352109	1352108	4466474	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1353147	1352109	1352108	4466575	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1353151	1352109	1352108	4466576	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1353222	1352109	1352108	4466677	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1353223	1352109	1352108	4466678	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1353237	1352109	1352108	4466779	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1353238	1352109	1352108	4466779	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1353249	1352109	1352108	4466880	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1353250	1352109	1352108	4466881	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1353268	1352109	1352108	4466982	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1353269	1352109	1352108	4466983	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1353291	1352109	1352108	4467084	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1353292	1352109	1352108	4467085	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1353339	1352109	1352108	4467186	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1353340	1352109	1352108	4467187	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1353356	1352109	1352108	4467198	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1353357	1352109	1352108	4467199	/bin/ps -e -o pid=,ppid=,rss=
+command:base-prompt-regression-row1	1353359	1352109	1352108	4467200	/root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_run_succeeds_after_fixture_reaper_reaps_descendants
+command:du	1353360	1352109	1352108	4467201	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1353366	1352109	1352108	4467201	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1353403	1352109	1352108	4467302	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1353411	1352109	1352108	4467303	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1353423	1352109	1352108	4467324	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1353424	1352109	1352108	4467325	/bin/ps -e -o pid=,ppid=,rss=
+command:base-held-regression-row1	1353426	1352109	1352108	4467327	/root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_run_reports_while_fixture_reaper_holds_stopped_zombies
+command:du	1353427	1352109	1352108	4467327	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1353432	1352109	1352108	4467328	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1353457	1352109	1352108	4467429	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1353458	1352109	1352108	4467429	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1353462	1352109	1352108	4467460	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1353463	1352109	1352108	4467461	/bin/ps -e -o pid=,ppid=,rss=
+command:green-row-1	1353466	1352109	1352108	4467463	/root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_run_output_limit_reaps_group_under_fixture_reaper
+command:du	1353467	1352109	1352108	4467463	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1353472	1352109	1352108	4467464	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1353489	1352109	1352108	4467475	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1353490	1352109	1352108	4467476	/bin/ps -e -o pid=,ppid=,rss=
+command:green-row-2	1353492	1352109	1352108	4467477	/root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync,metadata --test sys_process -- --exact --nocapture --test-threads=1 managed_run_output_limit_reaps_group_under_fixture_reaper
+command:du	1353493	1352109	1352108	4467477	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1353498	1352109	1352108	4467478	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1353782	1352109	1352108	4467579	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1353791	1352109	1352108	4467581	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1354169	1352109	1352108	4467684	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1354182	1352109	1352108	4467686	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1354564	1352109	1352108	4467789	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1354571	1352109	1352108	4467790	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1354914	1352109	1352108	4467893	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1354915	1352109	1352108	4467894	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1354955	1352109	1352108	4467996	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1354957	1352109	1352108	4467997	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1354970	1352109	1352108	4468097	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1354971	1352109	1352108	4468098	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1355005	1352109	1352108	4468199	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1355006	1352109	1352108	4468200	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1355021	1352109	1352108	4468301	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1355022	1352109	1352108	4468302	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1355078	1352109	1352108	4468403	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1355079	1352109	1352108	4468404	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1355108	1352109	1352108	4468505	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1355109	1352109	1352108	4468506	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1355154	1352109	1352108	4468587	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1355155	1352109	1352108	4468588	/bin/ps -e -o pid=,ppid=,rss=
+command:green-row-3	1355157	1352109	1352108	4468590	/root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process -- --exact --nocapture --test-threads=1 managed_run_output_limit_reaps_group_under_fixture_reaper
+command:du	1355158	1352109	1352108	4468590	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1355163	1352109	1352108	4468591	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1355192	1352109	1352108	4468692	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1355193	1352109	1352108	4468693	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1355204	1352109	1352108	4468793	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1355205	1352109	1352108	4468794	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1355218	1352109	1352108	4468895	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1355219	1352109	1352108	4468896	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1355239	1352109	1352108	4468997	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1355240	1352109	1352108	4468998	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1355276	1352109	1352108	4469099	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1355278	1352109	1352108	4469100	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1355329	1352109	1352108	4469201	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1355330	1352109	1352108	4469202	/bin/ps -e -o pid=,ppid=,rss=
+command:green-row-4	1355332	1352109	1352108	4469204	/root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,unchecked --test sys_process -- --exact --nocapture --test-threads=1 managed_run_output_limit_reaps_group_under_fixture_reaper
+command:du	1355333	1352109	1352108	4469204	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1355338	1352109	1352108	4469205	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1355366	1352109	1352108	4469306	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1355367	1352109	1352108	4469307	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1355378	1352109	1352108	4469408	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1355380	1352109	1352108	4469409	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1355391	1352109	1352108	4469509	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1355392	1352109	1352108	4469510	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1355416	1352109	1352108	4469611	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1355417	1352109	1352108	4469612	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1355546	1352109	1352108	4469713	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1355547	1352109	1352108	4469714	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1355604	1352109	1352108	4469805	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8
+command:ps	1355605	1352109	1352108	4469806	/bin/ps -e -o pid=,ppid=,rss=

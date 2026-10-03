@@ -282,3 +282,20 @@ See ../../all-tickets/linux-managed-deadline-proof.md, linux-managed-deadline-re
 and linux-managed-deadline105-evidence/. This is partial criterion closure only;
 OutputLimit, remaining lifecycle/fault/performance, other native platforms and
 final current-source release acceptance remain open.
+
+## Accepted Linux managed run OutputLimit — native106, 2026-10-03
+
+Immutable source53b01fa5 with frozen recipesc785a913 passes public Engine managed
+run overflow at cap4096 on native Linux/private Rust1.77.2. Exact retained stdout,
+typed OutputLimit, timed_out=false, honest incomplete captures, managed group
+termination/reaping and live host/reaper/sentinel boundary are independently
+proven. Four feature GREEN rows and prompt/held regressions pass; the wrong typed
+outcome fails101 after full fixture cleanup, followed by exact source restoration.
+All68 original files/five directories match exported hashes; seven original
+closures,142 helper/command and two launcher identities are absent, owned groups
+empty and exact stage/scope retirement complete. See
+../../all-tickets/linux-managed-output-limit-proof.md, the combined review and
+linux-managed-output-limit106-evidence/. This closes only the named Linux overflow
+criterion and affected regressions. Escaped pipes, post-spawn faults, remaining
+lifecycle/performance, other native platforms and final release acceptance remain
+open. Earlier borrow correction count1 and other cause/budget history are retained.

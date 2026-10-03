@@ -125,3 +125,26 @@ The owner requires author and committer names to be exactly `hoppworks` (lowerca
 Keep the configured email. Use command-local `git -c user.name=hoppworks` when
 committing or merging; do not modify global or shared configuration. No agent
 co-author trailers or signatures.
+
+## Workhorse finite build concurrency exception
+
+For the single reviewed Linux OutputLimit invocation106 only, permit at most two
+heavy runs on workhorse: the already active foreign Tauron G47 run_scoped group
+1329949 (launcher1329948/start4447594, supervisor1329949/start4447596) and this
+Session's one bounded Rhai run. Read-only capacity measurement on 2026-10-03
+reported32 CPUs, MemAvailable79,580,232 KiB and
+727,025,782,784 bytes free on the source/runtime filesystem. The observed foreign
+Cargo/rustc RSS totaled about2,044,696 KiB; these are samples, not peaks.
+
+Rhai retains600/585/540-second outer/runner/helper limits, two Cargo jobs,
+16 descendants,1,572,864 KiB storage preemptive stop and2,097,152 KiB
+storage/RSS hard caps. Before launch require no third heavy runner/compiler
+group, at least16 GiB MemAvailable and16 GiB disk free. Preserve all foreign
+processes, limits and resources. This finite exception expires when invocation106
+is terminal; later work uses the global one-heavy-run default unless a new
+measured exception is recorded. This is a workflow convention, not a lock.
+
+Invocation 106 finished successfully on 2026-10-03. Independent read-back and
+exact export retirement completed; its finite concurrency exception has expired.
+New heavy runs use the global default unless separately justified by current
+measurements. No foreign process was stopped or modified.

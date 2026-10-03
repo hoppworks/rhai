@@ -1,0 +1,19 @@
+{
+  "captured_before_stage_validation_or_external_command": true,
+  "helper": {
+    "cmdline": "python3 /root/rhai-linux-managed-output-limit-20261003-0a6dbb5d-106/linux-managed-output-limit-proof.py",
+    "pgid": 1352108,
+    "pid": 1352109,
+    "ppid": 1352108,
+    "start_ticks": "4464795"
+  },
+  "identity_errors": {},
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-managed-output-limit-20261003-0a6dbb5d-106/agent-build-hast5o_8",
+  "scoped_supervisor": {
+    "cmdline": "/usr/bin/python3 /var/roothome/rhai-linux-managed-output-limit-20261003-0a6dbb5d-106/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-managed-output-limit-20261003-0a6dbb5d-106/linux-managed-output-limit-proof.py",
+    "pgid": 1352108,
+    "pid": 1352108,
+    "ppid": 1352105,
+    "start_ticks": "4464794"
+  }
+}

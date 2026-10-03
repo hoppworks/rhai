@@ -1,0 +1,24 @@
+{
+  "acceptance_claim": false,
+  "base_regressions": [
+    "managed_run_succeeds_after_fixture_reaper_reaps_descendants",
+    "managed_run_reports_while_fixture_reaper_holds_stopped_zombies"
+  ],
+  "feature_rows": [
+    "testing-environ,sys",
+    "testing-environ,sys,sync,metadata",
+    "testing-environ,sys,f32_float",
+    "testing-environ,sys,unchecked"
+  ],
+  "green_rows": 4,
+  "limitations": [
+    "No no_float/no_index feature row is included; full native acceptance and remote custody require collector readback."
+  ],
+  "source_restored": true,
+  "source_revision": "53b01fa5df3f3a23bb55d4659c6207e5da86dc79",
+  "test": "managed_run_output_limit_reaps_group_under_fixture_reaper",
+  "test_sha256": "024e774b76e21d46326d007249ca5db92eab161f88af3328bdd4c3b591a2ab03",
+  "wrong_controls": [
+    "require-output-limit-control"
+  ]
+}

@@ -1,0 +1,11 @@
+[
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "require-output-limit-control",
+    "required_diagnostics": [
+      "managed-output-limit-control require-output-limit assertion"
+    ],
+    "status": 101
+  }
+]
