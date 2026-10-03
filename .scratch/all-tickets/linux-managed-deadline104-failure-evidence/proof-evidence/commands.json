@@ -1,0 +1,83 @@
+[
+  {
+    "argv": [
+      "/root/.cargo/bin/rustup",
+      "toolchain",
+      "install",
+      "1.77.2-x86_64-unknown-linux-gnu",
+      "--profile",
+      "minimal",
+      "--no-self-update"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-104/agent-build-h8_63l1r",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 7.651,
+    "name": "rustup-install",
+    "spawned": true,
+    "started_monotonic_seconds": 0.049,
+    "status": 0,
+    "stderr": "evidence/rustup-install.stderr",
+    "stdout": "evidence/rustup-install.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-104/agent-build-h8_63l1r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+      "--version",
+      "--verbose"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-104/agent-build-h8_63l1r/source",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 7.769,
+    "name": "rustc-version",
+    "spawned": true,
+    "started_monotonic_seconds": 7.651,
+    "status": 0,
+    "stderr": "evidence/rustc-version.stderr",
+    "stdout": "evidence/rustc-version.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-104/agent-build-h8_63l1r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "--version",
+      "--verbose"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-104/agent-build-h8_63l1r/source",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 7.89,
+    "name": "cargo-version",
+    "spawned": true,
+    "started_monotonic_seconds": 7.769,
+    "status": 0,
+    "stderr": "evidence/cargo-version.stderr",
+    "stdout": "evidence/cargo-version.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-104/agent-build-h8_63l1r/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys",
+      "--test",
+      "sys_process",
+      "--",
+      "--exact",
+      "--nocapture",
+      "--test-threads=1",
+      "managed_run_deadline_reaps_group_under_fixture_reaper"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-104/agent-build-h8_63l1r/source",
+    "env_overrides": {},
+    "expected_status": 101,
+    "finished_monotonic_seconds": 23.76,
+    "name": "require-timeout-control",
+    "spawned": true,
+    "started_monotonic_seconds": 7.891,
+    "status": 101,
+    "stderr": "evidence/require-timeout-control.stderr",
+    "stdout": "evidence/require-timeout-control.stdout"
+  }
+]

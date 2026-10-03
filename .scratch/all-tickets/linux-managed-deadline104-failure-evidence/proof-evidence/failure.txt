@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/root/rhai-linux-managed-deadline-20261003-bcecd9eb-104/linux-managed-deadline-proof.py", line 167, in <module>
+    try: status=main()
+                ~~~~^^
+  File "/root/rhai-linux-managed-deadline-20261003-bcecd9eb-104/linux-managed-deadline-proof.py", line 138, in main
+    run_final(cargo,env,CONTROL,ROWS[0],101,True)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-managed-deadline-20261003-bcecd9eb-104/linux-managed-deadline-proof.py", line 110, in run_final
+    result=verify_control(out,err,label) if control else (terminal(out,TEST,False),parse_deadline(err,label))[1]
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-managed-deadline-20261003-bcecd9eb-104/linux-managed-deadline-proof.py", line 104, in verify_control
+    raise RuntimeError(f'{label}: did not reach the exact post-cleanup timeout-report control assertion')
+RuntimeError: require-timeout-control: did not reach the exact post-cleanup timeout-report control assertion

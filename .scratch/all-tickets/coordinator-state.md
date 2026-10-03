@@ -85,9 +85,9 @@ Instructions/roles faba3db3bef6891ad2c0b20d434963bb8fe9572d loaded by root,
 responsible Standard and same combined reviewer. Workhorse installed rules resolved
 at /var/home/workhorse/.agents/AGENTS.md and /var/home/workhorse/projects/agent-skills;
 SSH root has no ~/.agents. Read-only resolution/command-local safe.directory only.
-Last verified fork maind09748e5; sole remote main,
-lowercase human author/committer. Current goal turn PROGRESS: final managed lease
-drop102 accepted and integrated with original evidence. Overall scope incomplete.
+Last verified fork main6690ff0a3e1c2760f82d86031c3f7d2a81edc919; sole remote main,
+lowercase human author/committer. Current package: managed deadline104 original
+export and corrected105 shared-fixture acceptance. Overall scope incomplete.
 
 ### Current coherent requirement: final managed client lease drop
 
@@ -153,8 +153,8 @@ sentinelcleanuptrue. AFTER reaper exit exceptionalmarkerexists, guard2401fails
 before intended wrong-timeoutassertion. Therefore NOT meaningfulRED/NOT acceptance.
 Originalouter1/runscoped1; exactcustody/runtime/scopecleanupstatuses0; SSHwrapper0
 also retained rather than treated as acceptance. Root full104launchlog and exact
-controlstdout/stderr diagnostic copies retained. Remote rawsource stage retained
-ONLY for reviewed original export/freshcustody/exactcleanup; runtime removed by
+controlstdout/stderr diagnostic copies retained. Remote rawsource stage exported and retired after reviewed original
+export/freshcustody/exactcleanup; runtime removed by
 receiptagent-build-h8_63l1r, no retainedbuild. Stage/root/rhai-linux-managed-deadline-
 20261003-bcecd9eb-104 (physical/var/roothome); owncentralscope same104ID.
 
@@ -173,7 +173,24 @@ Sharedfixture affects prompt/kill/drop/deadline; samecombined reviewer to determ
 and verify affectedregressions with updatedrecipes, not automaticallyreuse altered
 fixtureproof. Guard at104boundary supports narrowdiagnosis only, no acceptance.
 
-SameStandard adapts raw104 collector from acceptedactual-fixture-failure recipes,
+Source31a61e752d0ffb747be827475278e3fc5d9dbe30 SOURCE READY in same combined
+review: sixteen-line bounded normal owned-host exit observation before unchanged
+exceptional fallback, no predicate weakening. Shared prompt/held/kill/drop cases
+join deadline control/four feature positives in next nine-test package plus three
+setup commands. Test SHA8d6af23f45ac24ce640ca624800b3e40daff9e10941047a786ce5f7bd233f02b.
+
+SameStandard froze raw104 collector7e6d187a/SHA df23abb9. Same affected review
+found embedded REMOTE missing re import; fresh remote parser reproduces NameError.
+Initial static pre-execution finding, no native allocation/failed recovery. Owner
+repairs import in same context and continues105 recipes; no SSH/build/stage.
+Corrected immutable raw104 collector956976e2c168a80a104274e77ed037acc46b0546
+SHA4635deea47fb17e3cd90f77df7e6ec2932b42e2ad9481d61a3daae6c9d7dbc28
+passed same affected review and root actual collect/cleanup. Original42files5dirs
+fullhash match fresh remote; six fixture PID/start identities absent/group900206
+empty;66helper+2launcher absent/groups898970/898982 empty. Exactstage42files5dirs
+removed; freshstage/scope/helpergroup absence receipt saved. Runtime previously
+removed. No retained104resource; originalouter/scoped1 and failedguard preserved.
+Raw104 collector derives actual failed fixture identities from originalstderr,
 with originalstderr exacthost/reaper/sentinel/memberPID/start/group freshreadback;
 NO originalclosurefiles produced beforeassertionfailure, never regenerate them.
 Root performs collect/cleanup only after immutable affectedrawreview readiness.
@@ -198,9 +215,9 @@ host/deadline around1733/2285; production unix.rs read_ready2728/2773 -> fail292
 already terminates managed child. No production defect assumed. Escaped retained
 pipe under run deadline/overflow and post-spawn real managed setup failure remain
 separate OPEN criteria; explicit Child.kill/injected unit proofs do not close them.
-No source/code/docs edits or launches from diagnosis. Next actual action: fresh
-workhorse heavy-slot inventory; when free launch staged104 once under unchanged
-bounds, export originals/independent custody/cleanup and same combined acceptance.
+No source/code/docs edits or launches from this OutputLimit diagnosis. Next
+action remains raw104 export/cleanup after affected collector readiness, then
+reviewed105 recipe freeze/fresh heavy-slot inventory/bounded shared acceptance.
 
 ### Accepted current Linux managed subsets
 
