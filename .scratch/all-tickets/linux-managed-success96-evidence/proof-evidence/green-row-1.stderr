@@ -1,0 +1,161 @@
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:668:13
+    |
+668 |         let mut wait_operation = "wait for child";
+    |             ----^^^^^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` on by default
+
+warning: unused variable: `termination`
+    --> src/packages/sys/process/unix.rs:1106:22
+     |
+1106 |                 let (termination, _operation) = if self.managed {
+     |                      ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_termination`
+     |
+     = note: `#[warn(unused_variables)]` on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2134:9
+     |
+2134 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2456:9
+     |
+2456 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variant `OnlyZombieLeader` is never constructed
+  --> src/packages/sys/process/unix.rs:50:5
+   |
+47 | enum GroupCloseOutcome {
+   |      ----------------- variant in this enum
+...
+50 |     OnlyZombieLeader,
+   |     ^^^^^^^^^^^^^^^^
+   |
+   = note: `GroupCloseOutcome` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+   = note: `#[warn(dead_code)]` on by default
+
+warning: methods `numeric_operations_probe`, `quarantine_observations_probe`, and `fail_reservation` are never used
+    --> src/packages/sys/process/unix.rs:1470:8
+     |
+1390 | impl ExecutionFaults {
+     | -------------------- methods in this implementation
+...
+1470 |     fn numeric_operations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1481 |     fn quarantine_observations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1506 |     fn fail_reservation(&self) -> bool {
+     |        ^^^^^^^^^^^^^^^^
+
+warning: `rhai` (lib) generated 7 warnings (run `cargo fix --lib -p rhai` to apply 4 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+   Compiling rhai v1.26.1 (/var/roothome/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e/source)
+warning: variable does not need to be mutable
+   --> tests/sys_process.rs:867:9
+    |
+867 |     let mut holder = command.spawn().expect("start escaped captured-pipe holder");
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` on by default
+
+warning: value assigned to `incomplete` is never read
+    --> tests/sys_process.rs:1252:17
+     |
+1252 |         let mut incomplete = false;
+     |                 ^^^^^^^^^^
+     |
+     = help: maybe it is overwritten before being read?
+     = note: `#[warn(unused_assignments)]` on by default
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:1787:9
+     |
+1787 |     let mut sentinel = Sentinel(
+     |         ----^^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: constant `DIRECT_DROP_RECORD_ENV` is never used
+  --> tests/sys_process.rs:38:7
+   |
+38 | const DIRECT_DROP_RECORD_ENV: &str = "RHAI_SYS_DIRECT_DROP_RECORD";
+   |       ^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: unused `Dynamic` that must be used
+   --> tests/fixtures/sys_process_shared_child_contract.rs:239:5
+    |
+239 |     engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("kill after completion is idempotent");
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` on by default
+help: use `let _ = ...` to ignore the resulting value
+    |
+239 |     let _ = engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("kill after completion is idempotent");
+    |     +++++++
+
+warning: unused `Dynamic` that must be used
+   --> tests/fixtures/sys_process_shared_child_contract.rs:240:5
+    |
+240 |     engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("repeated kill after completion is idempotent");
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+help: use `let _ = ...` to ignore the resulting value
+    |
+240 |     let _ = engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("repeated kill after completion is idempotent");
+    |     +++++++
+
+warning: `rhai` (test "sys_process") generated 6 warnings (run `cargo fix --test "sys_process"` to apply 2 suggestions)
+    Finished test [unoptimized] target(s) in 0.82s
+     Running tests/sys_process.rs (/root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e/target/debug/deps/sys_process-7540f7d2e1301f52)
+managed_pidfd_acquired pid=789465 start=2408411 ppid=789462 pgid=789465
+managed_pidfd_acquired pid=789467 start=2408411 ppid=789465 pgid=789465
+managed_pidfd_acquired pid=789469 start=2408411 ppid=789467 pgid=789465
+managed_held_zombie_boundary host_live_at_return=true leader=789465 leader_start=2408411 leader_reaped=true worker=789467 worker_start=2408411 worker_state=Z worker_pgid=789465 leaf=789469 leaf_start=2408411 leaf_state=Z leaf_pgid=789465 group=789465 kill_zero_result=0 kill_zero_errno=0 capture_complete=true host=789462 host_start=2408410 api_success=false api_outcome=typed_process_io cause_op=observe_process_group_closure cause_op_matches=true kind=TimedOut exit=Some(0) stdout_complete=true stderr_complete=true diagnostic=true cause_details=Some(Process { cause: Io { op: "observe process group closure", target: "/var/roothome/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e/target/debug/deps/sys_process-7540f7d2e1301f52", kind: TimedOut, message: "managed process scope remained present after leader reap" }, report: ProcessReport { stdout: [10, 114, 117, 110, 110, 105, 110, 103, 32, 49, 32, 116, 101, 115, 116, 10, 46, 10, 116, 101, 115, 116, 32, 114, 101, 115, 117, 108, 116, 58, 32, 111, 107, 46, 32, 49, 32, 112, 97, 115, 115, 101, 100, 59, 32, 48, 32, 102, 97, 105, 108, 101, 100, 59, 32, 48, 32, 105, 103, 110, 111, 114, 101, 100, 59, 32, 48, 32, 109, 101, 97, 115, 117, 114, 101, 100, 59, 32, 52, 50, 32, 102, 105, 108, 116, 101, 114, 101, 100, 32, 111, 117, 116, 59, 32, 102, 105, 110, 105, 115, 104, 101, 100, 32, 105, 110, 32, 48, 46, 48, 49, 115, 10, 10], stderr: [], stdout_complete: true, stderr_complete: true, exit: Some(Code(0)), timed_out: false, cleanup_diagnostics: [ProcessDiagnostic { operation: "observe process group closure", io_kind: None, message: "managed scope remains present under retained process ownership" }] } }) cleanup_diagnostics=[ProcessDiagnostic { operation: "observe process group closure", io_kind: None, message: "managed scope remains present under retained process ownership" }]
+ held="pid=789460 start=2408410 host_status=0 worker=Some(789467) worker_start=Some(2408411) leaf=Some(789469) leaf_start=Some(2408411) held_zombies=true\n" reaper_status=ExitStatus(unix_wait_status(0))
+managed_held_zombie_cleanup worker=789467 reaped=true leaf=789469 reaped=true
+managed_fixture_cleanup worker_pid=Some(789467) worker_esrch=true leaf_pid=Some(789469) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(789465) leader_esrch=true
+managed_pidfd_acquired pid=789492 start=2408524 ppid=789488 pgid=789492
+managed_pidfd_acquired pid=789494 start=2408524 ppid=789492 pgid=789492
+managed_pidfd_acquired pid=789496 start=2408524 ppid=789494 pgid=789492
+managed_prompt_reap_live_boundary reaper=789486 reaper_start=2408523 host=789488 host_start=2408523 leader=789492 leader_start=2408524 worker=789494 worker_start=2408524 leaf=789496 leaf_start=2408524 group=789492 sentinel=789485 sentinel_start=2408523
+managed-scope sentinel_cleanup pid=789485 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_prompt_reap_success host=789488 host_start=2408523 leader=789492 leader_start=2408524 leader_absent=true worker=789494 worker_start=2408524 worker_absent=true leaf=789496 leaf_start=2408524 leaf_absent=true sentinel=789485 sentinel_start=2408523 sentinel_live_at_return=true sentinel_reaped_after_return=true api_exit_zero_at_return=true captures_complete_at_return=true api=host=789488 host_start=2408523 api_success=true api_outcome=success_report code=0 exit=Some(0) stdout_complete=true stderr_complete=true cause=none diagnostic=none
+ cleanup="worker=789494 start=2408524 pgid=789492 reaped=true wait_status=9 leaf=789496 start=2408524 pgid=789492 reaped=true wait_status=9 complete=true\n"
+managed_fixture_cleanup worker_pid=Some(789494) worker_esrch=true leaf_pid=Some(789496) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(789492) leader_esrch=true

@@ -86,8 +86,12 @@ Current authoritative history through this rewrite is Git commit
 10d4a0d55400ebe8c24feff134e7161ff36bf8d5, this same state path. It retains
 all earlier cause/attempt/resource/source applicability records. Read that
 history for consumed work, not superseded next actions. No reset occurred.
-Last independently read-back fork main45902682cd6a92f21f274cea1d4240997d32d4e6; only remote main, lowercase
-human author/committer. Goal active and incomplete.
+Last independently read-back fork maine7cf9e680a90ccb002a36161a324bdc4ee386cc1; only remote main, lowercase
+human author/committer. This six-file documentation/archive-utility package
+records reviewed preparation and cause history; it integrates no unverified
+managed-success source or recipes. Five source/document paths pass diff check;
+the original failed unified patch retains literal blank-context whitespace and
+verified SHA f85b8c6f, deliberately preserved as historical bytes. Goal active and incomplete.
 
 ### Latest accepted package and next action
 
@@ -128,10 +132,53 @@ path purechecks and success-only mutation under combined stderr. Preserve initia
 69fc findings and a2b1 rejected baseline in same review report; source003da and
 launcher remain READY. At a second failed completed correction for this cause,
 apply the fresh non-fork Expert escalation rule without resetting history.
-Previous turn verified wait on live owner; current turn PROGRESS through affected
-independent evidence and concrete corrective route. Native96 remains unallocated. Keep600/585/540incl30export,
-jobs2/desc16/2GiB limits and original source/cause history. No claim of ordinary
-success, wider matrix, performance or release completion until valid acceptance.
+Final second correction frozen: proof4cdd64b3, stage52483695, unchanged
+launcher27e1ee59, collector2016e540, prepare1494a730; root hashes verified.
+Affected review NOT READY: actual source success API has cause=none diagnostic=none
+before newline, omitted by the exact parser. Three earlier fixes pass; synthetic
+positive used abbreviated grammar. This is second failed completed correction for
+stable cause linux-managed-receipt-custody; no native/product failure or history reset.
+Fresh non-fork Expert escalation14 ANSWERED at
+escalations/14-linux-managed-receipt-custody.answer.md. Loaded revision faba3db
+confirmed. Actual functions reproduce suffix omission, cross-record cleanup
+acceptance and GREEN closure filename mismatch; actual95 held parser passes.
+No native/SSH/source edits occurred. Expert elapsed/cost usage unknown.
+ONE post-escalation follow-up now owned by linux_managed_gap: add exact success
+suffix, bind complete quoted cleanup to same receipt, use prefix for closure
+filename, execute source-format shared-tick positives plus actual95 held receipts,
+actual helper/REMOTE flow and listed negatives, then freeze dependent pins.
+30-minute active-work planning checkpoint, no second correction chain; stop if
+intended affected independent check fails or contradictory/no-progress evidence.
+Source003da and launcher unchanged. Native96 unallocated; cumulative Unix95,
+no stage/retained build. Native600/585/540incl30export, jobs2/desc16/2GiB unchanged.
+Single follow-up FROZEN: proof83e84145, stage67e13bdd, unchanged launcher27e1,
+collector01068eee, preparea800b263; root reads actual hashes. Owner reports actual
+source-format helper and mocked REMOTE checks pass with eleven exact closures,
+shared ticks and unchanged actual95 held stderr; malformed API/cleanup/structure,
+foreign-line completion and closure inventory negatives reject. Harness checks
+are not native acceptance; elapsed unavailable. Same affected reviewer READY: actual source-format combined receipts pass;14
+mutations reject; real helper/REMOTE consumers cover7cases and11closures under
+explicit mocks. Recipe readiness only, native acceptance remains unrun.
+Native96 ACCEPTED narrowly by same combined reviewer: prompt-success and held
+zombies across4 Linux Rust1.77.2 feature rows,8 exact GREEN tests,3 intended RED101.
+Original72files/6dirs and11closures byte-verified; source restored exacte003/errornull.
+Collector actual independent readback62fixture rows+146owned rows+2launcher rows,
+13groups; fresh post-cleanup all210 recorded identities absent (not unique PID
+count), groups empty, stage/scope/runtime absent,72files6dirs exact stage removed.
+Evidence linux-managed-success96-evidence/, proof linux-managed-success-proof.md,
+same combined linux-managed-success-review.md. SystemPython3.9 extractall(filter)
+export setup failure recovered with existingPython3.12.14, own empty destination
+rmdir only; no native rerun or source correction. One recovery for this distinct
+local interpreter cause; native/correction history unchanged. Elapsed51.765s
+helper work/export; sampledmax RSS953840KiB/storage967628KiB/desc9, not peaks.
+Cumulative Unix96 consumed; no retained build. Stable receipt/custody cause single
+Expert14 and ONE follow-up PASSED, two prior failures retained; no renewed chain.
+Owner recipe commit0b1c6431 clean/lowercase authors, parent003da frozen source.
+Coordinator merged7d045+003da+0b1 history at92146c604e3a248aa2d961d59f33be195b373875.
+Independent non-scratch diff vs frozen003da empty, test exact SHAe003; previous
+proof applies without duplicate build. Next commit proof/history -> push ONLY
+forkmain -> exact sole-branch readback -> archive owned writer worktree. Prior accepted unaffected proofs remain valid.
+Wider process/macOS/Windows/performance/release gates remain OPEN.
 
 ### Accepted current Linux non-process package
 

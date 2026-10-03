@@ -1,0 +1,147 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+helper	788080	788079	788079	2405767	python3 /root/rhai-linux-managed-success-20261003-7d045f21-96/linux-managed-success-proof.py
+scoped-supervisor	788079	788076	788079	2405765	/usr/bin/python3 /var/roothome/rhai-linux-managed-success-20261003-7d045f21-96/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-managed-success-20261003-7d045f21-96/linux-managed-success-proof.py
+command:rustup-install	788082	788080	788079	2405775	/root/.cargo/bin/rustup toolchain install 1.77.2-x86_64-unknown-linux-gnu --profile minimal --no-self-update
+command:du	788091	788080	788079	2405775	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	788100	788080	788079	2405775	/bin/ps -e -o pid=,ppid=,rss=
+command:du	788113	788080	788079	2405876	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	788114	788080	788079	2405876	/bin/ps -e -o pid=,ppid=,rss=
+command:du	788134	788080	788079	2405977	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	788135	788080	788079	2405978	/bin/ps -e -o pid=,ppid=,rss=
+command:du	788146	788080	788079	2406078	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	788147	788080	788079	2406079	/bin/ps -e -o pid=,ppid=,rss=
+command:du	788166	788080	788079	2406180	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	788167	788080	788079	2406180	/bin/ps -e -o pid=,ppid=,rss=
+command:du	788179	788080	788079	2406281	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	788180	788080	788079	2406281	/bin/ps -e -o pid=,ppid=,rss=
+command:du	788199	788080	788079	2406382	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	788200	788080	788079	2406382	/bin/ps -e -o pid=,ppid=,rss=
+command:du	788211	788080	788079	2406483	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	788212	788080	788079	2406483	/bin/ps -e -o pid=,ppid=,rss=
+command:du	788219	788080	788079	2406524	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	788220	788080	788079	2406524	/bin/ps -e -o pid=,ppid=,rss=
+command:rustc-version	788221	788080	788079	2406525	/root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose
+command:du	788222	788080	788079	2406525	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	788223	788080	788079	2406525	/bin/ps -e -o pid=,ppid=,rss=
+command:du	788225	788080	788079	2406536	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	788226	788080	788079	2406536	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-version	788227	788080	788079	2406537	/root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose
+command:du	788228	788080	788079	2406537	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	788232	788080	788079	2406537	/bin/ps -e -o pid=,ppid=,rss=
+command:du	788242	788080	788079	2406548	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	788243	788080	788079	2406548	/bin/ps -e -o pid=,ppid=,rss=
+command:held-mode-red	788244	788080	788079	2406549	/root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_run_succeeds_after_fixture_reaper_reaps_descendants
+command:du	788245	788080	788079	2406549	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	788246	788080	788079	2406549	/bin/ps -e -o pid=,ppid=,rss=
+command:du	788264	788080	788079	2406650	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	788265	788080	788079	2406650	/bin/ps -e -o pid=,ppid=,rss=
+command:du	788279	788080	788079	2406751	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	788281	788080	788079	2406751	/bin/ps -e -o pid=,ppid=,rss=
+command:du	788292	788080	788079	2406852	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	788293	788080	788079	2406852	/bin/ps -e -o pid=,ppid=,rss=
+command:du	788432	788080	788079	2406953	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	788437	788080	788079	2406954	/bin/ps -e -o pid=,ppid=,rss=
+command:du	788614	788080	788079	2407055	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	788615	788080	788079	2407055	/bin/ps -e -o pid=,ppid=,rss=
+command:du	788885	788080	788079	2407156	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	788886	788080	788079	2407157	/bin/ps -e -o pid=,ppid=,rss=
+command:du	788923	788080	788079	2407258	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	788924	788080	788079	2407259	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789003	788080	788079	2407360	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789005	788080	788079	2407361	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789124	788080	788079	2407461	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789125	788080	788079	2407462	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789152	788080	788079	2407563	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789153	788080	788079	2407564	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789164	788080	788079	2407665	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789165	788080	788079	2407666	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789182	788080	788079	2407766	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789183	788080	788079	2407767	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789205	788080	788079	2407868	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789206	788080	788079	2407869	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789269	788080	788079	2407970	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789270	788080	788079	2407971	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789281	788080	788079	2408072	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789282	788080	788079	2408073	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789285	788080	788079	2408093	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789286	788080	788079	2408094	/bin/ps -e -o pid=,ppid=,rss=
+command:require-exit-seven	789288	788080	788079	2408096	/root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_run_succeeds_after_fixture_reaper_reaps_descendants
+command:du	789289	788080	788079	2408096	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789294	788080	788079	2408096	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789345	788080	788079	2408197	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789346	788080	788079	2408198	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789348	788080	788079	2408209	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789349	788080	788079	2408210	/bin/ps -e -o pid=,ppid=,rss=
+command:require-sentinel-absent	789351	788080	788079	2408211	/root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_run_succeeds_after_fixture_reaper_reaps_descendants
+command:du	789352	788080	788079	2408211	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789358	788080	788079	2408212	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789409	788080	788079	2408313	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789410	788080	788079	2408314	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789412	788080	788079	2408325	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789413	788080	788079	2408325	/bin/ps -e -o pid=,ppid=,rss=
+command:green-row-1	789415	788080	788079	2408327	/root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_run_succeeds_after_fixture_reaper_reaps_descendants managed_run_reports_while_fixture_reaper_holds_stopped_zombies
+command:du	789416	788080	788079	2408327	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789419	788080	788079	2408328	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789473	788080	788079	2408428	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789474	788080	788079	2408429	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789498	788080	788079	2408530	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789499	788080	788079	2408531	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789501	788080	788079	2408542	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789502	788080	788079	2408542	/bin/ps -e -o pid=,ppid=,rss=
+command:green-row-2	789506	788080	788079	2408544	/root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync,metadata --test sys_process -- --exact --nocapture --test-threads=1 managed_run_succeeds_after_fixture_reaper_reaps_descendants managed_run_reports_while_fixture_reaper_holds_stopped_zombies
+command:du	789507	788080	788079	2408545	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789512	788080	788079	2408545	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789602	788080	788079	2408646	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789603	788080	788079	2408647	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789664	788080	788079	2408748	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789665	788080	788079	2408749	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789676	788080	788079	2408850	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789677	788080	788079	2408851	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789688	788080	788079	2408951	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789689	788080	788079	2408952	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789700	788080	788079	2409053	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789701	788080	788079	2409054	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789720	788080	788079	2409155	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789721	788080	788079	2409156	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789742	788080	788079	2409257	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789743	788080	788079	2409258	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789791	788080	788079	2409359	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789793	788080	788079	2409360	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789817	788080	788079	2409461	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789818	788080	788079	2409462	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789837	788080	788079	2409513	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789838	788080	788079	2409513	/bin/ps -e -o pid=,ppid=,rss=
+command:green-row-3	789841	788080	788079	2409516	/root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process -- --exact --nocapture --test-threads=1 managed_run_succeeds_after_fixture_reaper_reaps_descendants managed_run_reports_while_fixture_reaper_holds_stopped_zombies
+command:du	789842	788080	788079	2409516	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789847	788080	788079	2409516	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789875	788080	788079	2409617	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789876	788080	788079	2409618	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789887	788080	788079	2409719	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789888	788080	788079	2409720	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789899	788080	788079	2409821	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789900	788080	788079	2409822	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789924	788080	788079	2409923	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789925	788080	788079	2409924	/bin/ps -e -o pid=,ppid=,rss=
+command:du	789957	788080	788079	2410024	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	789958	788080	788079	2410025	/bin/ps -e -o pid=,ppid=,rss=
+command:du	790004	788080	788079	2410126	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	790005	788080	788079	2410127	/bin/ps -e -o pid=,ppid=,rss=
+command:du	790036	788080	788079	2410228	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	790037	788080	788079	2410229	/bin/ps -e -o pid=,ppid=,rss=
+command:green-row-4	790040	788080	788079	2410231	/root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,unchecked --test sys_process -- --exact --nocapture --test-threads=1 managed_run_succeeds_after_fixture_reaper_reaps_descendants managed_run_reports_while_fixture_reaper_holds_stopped_zombies
+command:du	790041	788080	788079	2410231	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	790046	788080	788079	2410232	/bin/ps -e -o pid=,ppid=,rss=
+command:du	790074	788080	788079	2410333	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	790075	788080	788079	2410334	/bin/ps -e -o pid=,ppid=,rss=
+command:du	790086	788080	788079	2410434	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	790087	788080	788079	2410435	/bin/ps -e -o pid=,ppid=,rss=
+command:du	790098	788080	788079	2410536	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	790099	788080	788079	2410537	/bin/ps -e -o pid=,ppid=,rss=
+command:du	790123	788080	788079	2410638	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	790125	788080	788079	2410639	/bin/ps -e -o pid=,ppid=,rss=
+command:du	790160	788080	788079	2410740	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	790162	788080	788079	2410741	/bin/ps -e -o pid=,ppid=,rss=
+command:du	790202	788080	788079	2410842	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	790203	788080	788079	2410843	/bin/ps -e -o pid=,ppid=,rss=
+command:du	790230	788080	788079	2410943	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command:ps	790231	788080	788079	2410944	/bin/ps -e -o pid=,ppid=,rss=

@@ -1,0 +1,53 @@
+[
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "held-mode-red",
+    "required_diagnostics": [
+      "managed run must return a successful zero-exit report after exact foreign reaping"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "require-exit-seven",
+    "required_diagnostics": [
+      "managed-success-control require-exit-seven assertion"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "require-sentinel-absent",
+    "required_diagnostics": [
+      "managed-success-control require-sentinel-absent assertion"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 41 filtered out; finished in 1.26s",
+    "name": "green-row-1",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 42 filtered out; finished in 1.37s",
+    "name": "green-row-2",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 41 filtered out; finished in 1.47s",
+    "name": "green-row-3",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 40 filtered out; finished in 1.46s",
+    "name": "green-row-4",
+    "status": 0
+  }
+]

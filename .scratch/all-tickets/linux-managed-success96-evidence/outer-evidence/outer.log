@@ -1,0 +1,108 @@
+launch_utc=2026-10-03T13:07:46Z
+runner_timeout_seconds=585
+stage=/root/rhai-linux-managed-success-20261003-7d045f21-96
+scope=/root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96
+archive-build-source.py: OK
+source.tar: OK
+Cargo.lock.accepted: OK
+check-linux-current-msrv-examples.py: OK
+linux-managed-success-proof.py: OK
+contract-source.md: OK
+contract.md: OK
+stage.sh: OK
+launch.sh: OK
+runner/tools/run_scoped.py: OK
+runner/tools/agentskills/__init__.py: OK
+runner/tools/agentskills/pyguard.py: OK
+PRIVATE_RUNTIME /root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e
+command=rustup-install argv=['/root/.cargo/bin/rustup', 'toolchain', 'install', '1.77.2-x86_64-unknown-linux-gnu', '--profile', 'minimal', '--no-self-update']
+sample={"descendants": 2, "monotonic_seconds": 0.062, "rss_kib": 45048, "storage_kib": 7140}
+sample={"descendants": 2, "monotonic_seconds": 1.073, "rss_kib": 54244, "storage_kib": 22312}
+sample={"descendants": 2, "monotonic_seconds": 2.084, "rss_kib": 56000, "storage_kib": 76732}
+sample={"descendants": 2, "monotonic_seconds": 3.096, "rss_kib": 56080, "storage_kib": 99464}
+sample={"descendants": 2, "monotonic_seconds": 4.107, "rss_kib": 183304, "storage_kib": 180672}
+sample={"descendants": 2, "monotonic_seconds": 5.118, "rss_kib": 152248, "storage_kib": 267708}
+sample={"descendants": 2, "monotonic_seconds": 6.129, "rss_kib": 309032, "storage_kib": 374188}
+sample={"descendants": 2, "monotonic_seconds": 7.14, "rss_kib": 456428, "storage_kib": 516356}
+sample={"descendants": 1, "monotonic_seconds": 7.549, "rss_kib": 29368, "storage_kib": 466828}
+status=rustup-install:0
+command=rustc-version argv=['/root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 7.559, "rss_kib": 29424, "storage_kib": 466836}
+sample={"descendants": 1, "monotonic_seconds": 7.668, "rss_kib": 29432, "storage_kib": 466840}
+status=rustc-version:0
+command=cargo-version argv=['/root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 7.677, "rss_kib": 29432, "storage_kib": 466844}
+sample={"descendants": 1, "monotonic_seconds": 7.787, "rss_kib": 29432, "storage_kib": 466848}
+status=cargo-version:0
+command=held-mode-red argv=['/root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--features', 'testing-environ,sys', '--test', 'sys_process', '--', '--exact', '--nocapture', '--test-threads=1', 'managed_run_succeeds_after_fixture_reaper_reaps_descendants']
+sample={"descendants": 2, "monotonic_seconds": 7.796, "rss_kib": 50928, "storage_kib": 466856}
+sample={"descendants": 2, "monotonic_seconds": 8.806, "rss_kib": 71564, "storage_kib": 470132}
+sample={"descendants": 2, "monotonic_seconds": 9.816, "rss_kib": 72300, "storage_kib": 470352}
+sample={"descendants": 2, "monotonic_seconds": 10.827, "rss_kib": 98368, "storage_kib": 477424}
+sample={"descendants": 4, "monotonic_seconds": 11.845, "rss_kib": 365720, "storage_kib": 538168}
+sample={"descendants": 4, "monotonic_seconds": 12.861, "rss_kib": 586136, "storage_kib": 561568}
+sample={"descendants": 4, "monotonic_seconds": 13.878, "rss_kib": 457840, "storage_kib": 592348}
+sample={"descendants": 4, "monotonic_seconds": 14.896, "rss_kib": 670328, "storage_kib": 607252}
+sample={"descendants": 4, "monotonic_seconds": 15.913, "rss_kib": 712820, "storage_kib": 619784}
+sample={"descendants": 4, "monotonic_seconds": 16.929, "rss_kib": 461212, "storage_kib": 658520}
+sample={"descendants": 3, "monotonic_seconds": 17.947, "rss_kib": 561792, "storage_kib": 663208}
+sample={"descendants": 3, "monotonic_seconds": 18.964, "rss_kib": 711140, "storage_kib": 663220}
+sample={"descendants": 3, "monotonic_seconds": 19.982, "rss_kib": 919548, "storage_kib": 676348}
+sample={"descendants": 3, "monotonic_seconds": 21.0, "rss_kib": 890296, "storage_kib": 694200}
+sample={"descendants": 9, "monotonic_seconds": 22.018, "rss_kib": 143532, "storage_kib": 731700}
+sample={"descendants": 8, "monotonic_seconds": 23.034, "rss_kib": 131120, "storage_kib": 731700}
+sample={"descendants": 1, "monotonic_seconds": 23.249, "rss_kib": 29428, "storage_kib": 731660}
+status=held-mode-red:101
+command=require-exit-seven argv=['/root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--features', 'testing-environ,sys', '--test', 'sys_process', '--', '--exact', '--nocapture', '--test-threads=1', 'managed_run_succeeds_after_fixture_reaper_reaps_descendants']
+sample={"descendants": 2, "monotonic_seconds": 23.272, "rss_kib": 63768, "storage_kib": 731676}
+sample={"descendants": 6, "monotonic_seconds": 24.289, "rss_kib": 87040, "storage_kib": 731740}
+sample={"descendants": 1, "monotonic_seconds": 24.405, "rss_kib": 29636, "storage_kib": 731688}
+status=require-exit-seven:101
+command=require-sentinel-absent argv=['/root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--features', 'testing-environ,sys', '--test', 'sys_process', '--', '--exact', '--nocapture', '--test-threads=1', 'managed_run_succeeds_after_fixture_reaper_reaps_descendants']
+sample={"descendants": 2, "monotonic_seconds": 24.429, "rss_kib": 64196, "storage_kib": 731696}
+sample={"descendants": 6, "monotonic_seconds": 25.447, "rss_kib": 87556, "storage_kib": 731760}
+sample={"descendants": 1, "monotonic_seconds": 25.562, "rss_kib": 29708, "storage_kib": 731708}
+status=require-sentinel-absent:101
+command=green-row-1 argv=['/root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--features', 'testing-environ,sys', '--test', 'sys_process', '--', '--exact', '--nocapture', '--test-threads=1', 'managed_run_succeeds_after_fixture_reaper_reaps_descendants', 'managed_run_reports_while_fixture_reaper_holds_stopped_zombies']
+sample={"descendants": 2, "monotonic_seconds": 25.584, "rss_kib": 60592, "storage_kib": 731720}
+sample={"descendants": 7, "monotonic_seconds": 26.602, "rss_kib": 84940, "storage_kib": 731772}
+sample={"descendants": 6, "monotonic_seconds": 27.617, "rss_kib": 87436, "storage_kib": 731788}
+sample={"descendants": 1, "monotonic_seconds": 27.732, "rss_kib": 29680, "storage_kib": 731736}
+status=green-row-1:0
+command=green-row-2 argv=['/root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--features', 'testing-environ,sys,sync,metadata', '--test', 'sys_process', '--', '--exact', '--nocapture', '--test-threads=1', 'managed_run_succeeds_after_fixture_reaper_reaps_descendants', 'managed_run_reports_while_fixture_reaper_holds_stopped_zombies']
+sample={"descendants": 2, "monotonic_seconds": 27.76, "rss_kib": 61980, "storage_kib": 731752}
+sample={"descendants": 3, "monotonic_seconds": 28.778, "rss_kib": 214928, "storage_kib": 748620}
+sample={"descendants": 3, "monotonic_seconds": 29.796, "rss_kib": 249360, "storage_kib": 755788}
+sample={"descendants": 3, "monotonic_seconds": 30.813, "rss_kib": 487052, "storage_kib": 755804}
+sample={"descendants": 3, "monotonic_seconds": 31.831, "rss_kib": 602572, "storage_kib": 755804}
+sample={"descendants": 3, "monotonic_seconds": 32.849, "rss_kib": 762640, "storage_kib": 755820}
+sample={"descendants": 3, "monotonic_seconds": 33.867, "rss_kib": 953840, "storage_kib": 771760}
+sample={"descendants": 3, "monotonic_seconds": 34.886, "rss_kib": 858548, "storage_kib": 787208}
+sample={"descendants": 6, "monotonic_seconds": 35.91, "rss_kib": 397796, "storage_kib": 819548}
+sample={"descendants": 7, "monotonic_seconds": 36.926, "rss_kib": 87776, "storage_kib": 830344}
+sample={"descendants": 1, "monotonic_seconds": 37.442, "rss_kib": 29668, "storage_kib": 830308}
+status=green-row-2:0
+command=green-row-3 argv=['/root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--features', 'testing-environ,sys,f32_float', '--test', 'sys_process', '--', '--exact', '--nocapture', '--test-threads=1', 'managed_run_succeeds_after_fixture_reaper_reaps_descendants', 'managed_run_reports_while_fixture_reaper_holds_stopped_zombies']
+sample={"descendants": 2, "monotonic_seconds": 37.471, "rss_kib": 62692, "storage_kib": 830320}
+sample={"descendants": 3, "monotonic_seconds": 38.489, "rss_kib": 446208, "storage_kib": 830840}
+sample={"descendants": 3, "monotonic_seconds": 39.507, "rss_kib": 575828, "storage_kib": 830840}
+sample={"descendants": 3, "monotonic_seconds": 40.525, "rss_kib": 768012, "storage_kib": 839956}
+sample={"descendants": 3, "monotonic_seconds": 41.544, "rss_kib": 855620, "storage_kib": 852548}
+sample={"descendants": 7, "monotonic_seconds": 42.562, "rss_kib": 533540, "storage_kib": 882556}
+sample={"descendants": 7, "monotonic_seconds": 43.58, "rss_kib": 84488, "storage_kib": 899320}
+sample={"descendants": 1, "monotonic_seconds": 44.596, "rss_kib": 29636, "storage_kib": 899284}
+status=green-row-3:0
+command=green-row-4 argv=['/root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--features', 'testing-environ,sys,unchecked', '--test', 'sys_process', '--', '--exact', '--nocapture', '--test-threads=1', 'managed_run_succeeds_after_fixture_reaper_reaps_descendants', 'managed_run_reports_while_fixture_reaper_holds_stopped_zombies']
+sample={"descendants": 2, "monotonic_seconds": 44.625, "rss_kib": 64128, "storage_kib": 899296}
+sample={"descendants": 3, "monotonic_seconds": 45.643, "rss_kib": 445748, "storage_kib": 899816}
+sample={"descendants": 3, "monotonic_seconds": 46.661, "rss_kib": 571724, "storage_kib": 899816}
+sample={"descendants": 3, "monotonic_seconds": 47.679, "rss_kib": 762884, "storage_kib": 908828}
+sample={"descendants": 3, "monotonic_seconds": 48.698, "rss_kib": 835452, "storage_kib": 922440}
+sample={"descendants": 3, "monotonic_seconds": 49.716, "rss_kib": 356200, "storage_kib": 954636}
+sample={"descendants": 7, "monotonic_seconds": 50.733, "rss_kib": 84848, "storage_kib": 967628}
+sample={"descendants": 1, "monotonic_seconds": 51.75, "rss_kib": 29764, "storage_kib": 967592}
+status=green-row-4:0
+/root/rhai-linux-managed-success-20261003-7d045f21-96/launch.sh: line 123: /proc/788076/stat: No such file or directory
+run_scoped_status=0
+runtime_cleanup_status=0 pid_readback_status=0 scope_cleanup_status=0
+outer_status=0

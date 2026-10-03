@@ -1,0 +1,25 @@
+{
+  "acceptance_claim": false,
+  "feature_rows": [
+    "testing-environ,sys",
+    "testing-environ,sys,sync,metadata",
+    "testing-environ,sys,f32_float",
+    "testing-environ,sys,unchecked"
+  ],
+  "green_rows": 4,
+  "limitations": [
+    "Native outputs and identity closure require independent collector readback; four rows exclude no_float/no_index."
+  ],
+  "red_controls": [
+    "held-mode-red",
+    "require-exit-seven",
+    "require-sentinel-absent"
+  ],
+  "source_restored": true,
+  "source_revision": "003da06421fbd11c26e0c96ab5013416c0939a1d",
+  "test_sha256": "e0034cf3a69ccf6107a9dfbc0854c0147ec2d93fdda8acf5ed6b07e683e1dc14",
+  "tests": [
+    "managed_run_succeeds_after_fixture_reaper_reaps_descendants",
+    "managed_run_reports_while_fixture_reaper_holds_stopped_zombies"
+  ]
+}

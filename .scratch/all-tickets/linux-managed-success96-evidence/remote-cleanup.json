@@ -1,0 +1,28 @@
+{
+  "cleanup": {
+    "removed_directories": 6,
+    "removed_files": 72,
+    "scope_absent": true,
+    "stage_absent": true
+  },
+  "fresh_absence": {
+    "groups_absent": [
+      788008,
+      788079,
+      789262,
+      789337,
+      789401,
+      789465,
+      789492,
+      789802,
+      789828,
+      789993,
+      790020,
+      790190,
+      790218
+    ],
+    "identity_count": 210,
+    "scope_absent": true,
+    "stage_absent": true
+  }
+}

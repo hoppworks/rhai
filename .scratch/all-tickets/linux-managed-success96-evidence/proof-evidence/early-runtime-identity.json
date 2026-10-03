@@ -1,0 +1,19 @@
+{
+  "captured_before_stage_validation_or_external_command": true,
+  "helper": {
+    "cmdline": "python3 /root/rhai-linux-managed-success-20261003-7d045f21-96/linux-managed-success-proof.py",
+    "pgid": 788079,
+    "pid": 788080,
+    "ppid": 788079,
+    "start_ticks": "2405767"
+  },
+  "identity_errors": {},
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e",
+  "scoped_supervisor": {
+    "cmdline": "/usr/bin/python3 /var/roothome/rhai-linux-managed-success-20261003-7d045f21-96/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-managed-success-20261003-7d045f21-96/linux-managed-success-proof.py",
+    "pgid": 788079,
+    "pid": 788079,
+    "ppid": 788076,
+    "start_ticks": "2405765"
+  }
+}

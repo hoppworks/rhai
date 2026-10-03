@@ -1,0 +1,56 @@
+{
+  "group": 789993,
+  "group_members_after_cleanup": [],
+  "identities": [
+    {
+      "label": "leader",
+      "matching_identity_alive": false,
+      "pid": 789993,
+      "start_ticks": "2410081"
+    },
+    {
+      "label": "worker",
+      "matching_identity_alive": false,
+      "pid": 789995,
+      "start_ticks": "2410081"
+    },
+    {
+      "label": "leaf",
+      "matching_identity_alive": false,
+      "pid": 789997,
+      "start_ticks": "2410081"
+    },
+    {
+      "label": "host",
+      "matching_identity_alive": false,
+      "pid": 789990,
+      "start_ticks": "2410080"
+    },
+    {
+      "label": "fixture-reaper",
+      "matching_identity_alive": false,
+      "pid": 789988,
+      "start_ticks": "2410080"
+    }
+  ],
+  "pidfd_identities": [
+    {
+      "pgid": 789993,
+      "pid": 789993,
+      "ppid": 789990,
+      "start_ticks": 2410081
+    },
+    {
+      "pgid": 789993,
+      "pid": 789995,
+      "ppid": 789993,
+      "start_ticks": 2410081
+    },
+    {
+      "pgid": 789993,
+      "pid": 789997,
+      "ppid": 789995,
+      "start_ticks": 2410081
+    }
+  ]
+}

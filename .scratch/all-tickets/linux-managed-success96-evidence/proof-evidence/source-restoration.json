@@ -1,0 +1,12 @@
+{
+  "error": null,
+  "original_sha256": {
+    "tests/sys_process.rs": "e0034cf3a69ccf6107a9dfbc0854c0147ec2d93fdda8acf5ed6b07e683e1dc14"
+  },
+  "overlay_sha256": {
+    "held-mode-red": "c397e0311c97b9c8310dd8b9b4507a60958650899e1ecf608bb120fa3aa17aea",
+    "require-exit-seven": "3a7fa91643d2b1297602ec9713f40014c7106f8d17f97187b418385ba5141347",
+    "require-sentinel-absent": "a5ff9ca8f0198d315ab2da92155e88c3767c828846bfa4c3d46d67eefc919845"
+  },
+  "restored": true
+}

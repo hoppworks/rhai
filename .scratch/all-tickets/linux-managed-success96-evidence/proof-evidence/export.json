@@ -1,0 +1,7 @@
+{
+  "destination": "/root/rhai-linux-managed-success-20261003-7d045f21-96/proof-evidence",
+  "elapsed_seconds": 51.765,
+  "reserve_seconds": 30,
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96/agent-build-wciti17e",
+  "scope": "/root/.local/share/agent-builds/rhai/linux-managed-success-20261003-7d045f21-96"
+}
