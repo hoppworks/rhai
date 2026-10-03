@@ -1,0 +1,65 @@
+{
+  "group_members_after_cleanup": [],
+  "groups": [
+    813525,
+    813531
+  ],
+  "identities": [
+    {
+      "label": "host",
+      "matching_identity_alive": false,
+      "pid": 813528,
+      "start_ticks": 3448119
+    },
+    {
+      "label": "leader",
+      "matching_identity_alive": false,
+      "pid": 813531,
+      "start_ticks": 3448120
+    },
+    {
+      "label": "worker",
+      "matching_identity_alive": false,
+      "pid": 813533,
+      "start_ticks": 3448120
+    },
+    {
+      "label": "leaf",
+      "matching_identity_alive": false,
+      "pid": 813535,
+      "start_ticks": 3448120
+    },
+    {
+      "label": "sentinel",
+      "matching_identity_alive": false,
+      "pid": 813525,
+      "start_ticks": 3448119
+    },
+    {
+      "label": "reaper",
+      "matching_identity_alive": false,
+      "pid": 813526,
+      "start_ticks": 3448119
+    }
+  ],
+  "pidfd_identities": [
+    {
+      "pgid": 813531,
+      "pid": 813531,
+      "ppid": 813528,
+      "start_ticks": 3448120
+    },
+    {
+      "pgid": 813531,
+      "pid": 813533,
+      "ppid": 813531,
+      "start_ticks": 3448120
+    },
+    {
+      "pgid": 813531,
+      "pid": 813535,
+      "ppid": 813533,
+      "start_ticks": 3448120
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "error": null,
+  "original_sha256": {
+    "tests/sys_process.rs": "d0a8842cc6be749a98ab7786ae66fdeca4a0488ad48aacfc88b24d48bdc660d8"
+  },
+  "overlay_sha256": {
+    "require-member-live-control": "90dab6475524ce0e0deba2e5e005b04f71084d11ea32dd82fabef1effc93f9c8"
+  },
+  "restored": true
+}

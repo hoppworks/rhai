@@ -1,0 +1,11 @@
+[
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "require-member-live-control",
+    "required_diagnostics": [
+      "managed-final-drop-control require-member-live assertion"
+    ],
+    "status": 101
+  }
+]

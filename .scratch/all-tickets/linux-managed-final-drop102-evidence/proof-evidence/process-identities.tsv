@@ -1,0 +1,140 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+helper	812263	812262	812262	3445659	python3 /root/rhai-linux-managed-final-drop-20261003-106f2472-102/linux-managed-final-drop-proof.py
+scoped-supervisor	812262	812259	812262	3445657	/usr/bin/python3 /var/roothome/rhai-linux-managed-final-drop-20261003-106f2472-102/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-managed-final-drop-20261003-106f2472-102/linux-managed-final-drop-proof.py
+command:rustup-install	812265	812263	812262	3445667	/root/.cargo/bin/rustup toolchain install 1.77.2-x86_64-unknown-linux-gnu --profile minimal --no-self-update
+command:du	812266	812263	812262	3445667	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	812283	812263	812262	3445667	/bin/ps -e -o pid=,ppid=,rss=
+command:du	812296	812263	812262	3445768	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	812297	812263	812262	3445769	/bin/ps -e -o pid=,ppid=,rss=
+command:du	812317	812263	812262	3445870	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	812318	812263	812262	3445870	/bin/ps -e -o pid=,ppid=,rss=
+command:du	812337	812263	812262	3445971	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	812338	812263	812262	3445971	/bin/ps -e -o pid=,ppid=,rss=
+command:du	812350	812263	812262	3446072	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	812351	812263	812262	3446072	/bin/ps -e -o pid=,ppid=,rss=
+command:du	812362	812263	812262	3446173	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	812363	812263	812262	3446173	/bin/ps -e -o pid=,ppid=,rss=
+command:du	812374	812263	812262	3446274	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	812375	812263	812262	3446274	/bin/ps -e -o pid=,ppid=,rss=
+command:du	812394	812263	812262	3446375	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	812395	812263	812262	3446375	/bin/ps -e -o pid=,ppid=,rss=
+command:du	812406	812263	812262	3446476	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	812407	812263	812262	3446476	/bin/ps -e -o pid=,ppid=,rss=
+command:du	812415	812263	812262	3446527	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	812416	812263	812262	3446527	/bin/ps -e -o pid=,ppid=,rss=
+command:rustc-version	812417	812263	812262	3446528	/root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose
+command:du	812418	812263	812262	3446528	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	812419	812263	812262	3446528	/bin/ps -e -o pid=,ppid=,rss=
+command:du	812421	812263	812262	3446539	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	812422	812263	812262	3446539	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-version	812423	812263	812262	3446540	/root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose
+command:du	812425	812263	812262	3446540	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	812432	812263	812262	3446540	/bin/ps -e -o pid=,ppid=,rss=
+command:du	812438	812263	812262	3446551	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	812439	812263	812262	3446551	/bin/ps -e -o pid=,ppid=,rss=
+command:require-member-live-control	812441	812263	812262	3446552	/root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_spawn_final_clone_drop_closes_group_under_fixture_reaper
+command:du	812442	812263	812262	3446552	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	812443	812263	812262	3446552	/bin/ps -e -o pid=,ppid=,rss=
+command:du	812458	812263	812262	3446653	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	812459	812263	812262	3446653	/bin/ps -e -o pid=,ppid=,rss=
+command:du	812482	812263	812262	3446754	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	812483	812263	812262	3446754	/bin/ps -e -o pid=,ppid=,rss=
+command:du	812494	812263	812262	3446855	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	812495	812263	812262	3446856	/bin/ps -e -o pid=,ppid=,rss=
+command:du	812546	812263	812262	3446956	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	812551	812263	812262	3446957	/bin/ps -e -o pid=,ppid=,rss=
+command:du	812756	812263	812262	3447058	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	812760	812263	812262	3447059	/bin/ps -e -o pid=,ppid=,rss=
+command:du	813013	812263	812262	3447160	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813017	812263	812262	3447161	/bin/ps -e -o pid=,ppid=,rss=
+command:du	813111	812263	812262	3447262	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813112	812263	812262	3447262	/bin/ps -e -o pid=,ppid=,rss=
+command:du	813160	812263	812262	3447363	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813162	812263	812262	3447364	/bin/ps -e -o pid=,ppid=,rss=
+command:du	813302	812263	812262	3447465	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813303	812263	812262	3447466	/bin/ps -e -o pid=,ppid=,rss=
+command:du	813354	812263	812262	3447567	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813355	812263	812262	3447568	/bin/ps -e -o pid=,ppid=,rss=
+command:du	813366	812263	812262	3447669	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813367	812263	812262	3447670	/bin/ps -e -o pid=,ppid=,rss=
+command:du	813382	812263	812262	3447771	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813384	812263	812262	3447771	/bin/ps -e -o pid=,ppid=,rss=
+command:du	813405	812263	812262	3447872	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813406	812263	812262	3447873	/bin/ps -e -o pid=,ppid=,rss=
+command:du	813452	812263	812262	3447974	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813454	812263	812262	3447975	/bin/ps -e -o pid=,ppid=,rss=
+command:du	813478	812263	812262	3448026	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813479	812263	812262	3448027	/bin/ps -e -o pid=,ppid=,rss=
+command:native101-kill-regression-row1	813481	812263	812262	3448028	/root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_child_kill_reports_group_closed_under_fixture_reaper
+command:du	813482	812263	812262	3448028	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813487	812263	812262	3448029	/bin/ps -e -o pid=,ppid=,rss=
+command:du	813538	812263	812262	3448130	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813539	812263	812262	3448131	/bin/ps -e -o pid=,ppid=,rss=
+command:native101-success-regression-row1	813541	812263	812262	3448132	/root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_run_succeeds_after_fixture_reaper_reaps_descendants
+command:du	813542	812263	812262	3448132	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813547	812263	812262	3448133	/bin/ps -e -o pid=,ppid=,rss=
+command:du	813565	812263	812262	3448154	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813567	812263	812262	3448155	/bin/ps -e -o pid=,ppid=,rss=
+command:native101-held-regression-row1	813569	812263	812262	3448156	/root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_run_reports_while_fixture_reaper_holds_stopped_zombies
+command:du	813570	812263	812262	3448156	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813575	812263	812262	3448157	/bin/ps -e -o pid=,ppid=,rss=
+command:du	813600	812263	812262	3448258	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813601	812263	812262	3448258	/bin/ps -e -o pid=,ppid=,rss=
+command:du	813605	812263	812262	3448289	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813606	812263	812262	3448290	/bin/ps -e -o pid=,ppid=,rss=
+command:green-row-1	813608	812263	812262	3448292	/root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_spawn_final_clone_drop_closes_group_under_fixture_reaper
+command:du	813609	812263	812262	3448292	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813612	812263	812262	3448292	/bin/ps -e -o pid=,ppid=,rss=
+command:du	813632	812263	812262	3448313	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813633	812263	812262	3448314	/bin/ps -e -o pid=,ppid=,rss=
+command:green-row-2	813636	812263	812262	3448315	/root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync,metadata --test sys_process -- --exact --nocapture --test-threads=1 managed_spawn_final_clone_drop_closes_group_under_fixture_reaper
+command:du	813637	812263	812262	3448315	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813642	812263	812262	3448316	/bin/ps -e -o pid=,ppid=,rss=
+command:du	813732	812263	812262	3448417	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813733	812263	812262	3448418	/bin/ps -e -o pid=,ppid=,rss=
+command:du	813788	812263	812262	3448519	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813789	812263	812262	3448520	/bin/ps -e -o pid=,ppid=,rss=
+command:du	813800	812263	812262	3448620	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813801	812263	812262	3448621	/bin/ps -e -o pid=,ppid=,rss=
+command:du	813812	812263	812262	3448722	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813813	812263	812262	3448723	/bin/ps -e -o pid=,ppid=,rss=
+command:du	813824	812263	812262	3448824	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813825	812263	812262	3448825	/bin/ps -e -o pid=,ppid=,rss=
+command:du	813844	812263	812262	3448926	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813845	812263	812262	3448927	/bin/ps -e -o pid=,ppid=,rss=
+command:du	813866	812263	812262	3449028	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813867	812263	812262	3449028	/bin/ps -e -o pid=,ppid=,rss=
+command:du	813915	812263	812262	3449129	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813916	812263	812262	3449130	/bin/ps -e -o pid=,ppid=,rss=
+command:du	813935	812263	812262	3449161	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813936	812263	812262	3449162	/bin/ps -e -o pid=,ppid=,rss=
+command:green-row-3	813938	812263	812262	3449164	/root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process -- --exact --nocapture --test-threads=1 managed_spawn_final_clone_drop_closes_group_under_fixture_reaper
+command:du	813939	812263	812262	3449164	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813944	812263	812262	3449164	/bin/ps -e -o pid=,ppid=,rss=
+command:du	813974	812263	812262	3449265	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813975	812263	812262	3449266	/bin/ps -e -o pid=,ppid=,rss=
+command:du	813986	812263	812262	3449367	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813987	812263	812262	3449368	/bin/ps -e -o pid=,ppid=,rss=
+command:du	813998	812263	812262	3449469	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	813999	812263	812262	3449470	/bin/ps -e -o pid=,ppid=,rss=
+command:du	814022	812263	812262	3449571	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	814023	812263	812262	3449572	/bin/ps -e -o pid=,ppid=,rss=
+command:du	814054	812263	812262	3449673	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	814055	812263	812262	3449673	/bin/ps -e -o pid=,ppid=,rss=
+command:du	814108	812263	812262	3449754	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	814110	812263	812262	3449755	/bin/ps -e -o pid=,ppid=,rss=
+command:green-row-4	814112	812263	812262	3449757	/root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,unchecked --test sys_process -- --exact --nocapture --test-threads=1 managed_spawn_final_clone_drop_closes_group_under_fixture_reaper
+command:du	814113	812263	812262	3449757	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	814118	812263	812262	3449758	/bin/ps -e -o pid=,ppid=,rss=
+command:du	814146	812263	812262	3449859	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	814147	812263	812262	3449859	/bin/ps -e -o pid=,ppid=,rss=
+command:du	814158	812263	812262	3449960	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	814159	812263	812262	3449961	/bin/ps -e -o pid=,ppid=,rss=
+command:du	814170	812263	812262	3450062	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	814171	812263	812262	3450063	/bin/ps -e -o pid=,ppid=,rss=
+command:du	814195	812263	812262	3450164	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	814197	812263	812262	3450165	/bin/ps -e -o pid=,ppid=,rss=
+command:du	814228	812263	812262	3450266	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	814229	812263	812262	3450267	/bin/ps -e -o pid=,ppid=,rss=
+command:du	814273	812263	812262	3450337	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07
+command:ps	814274	812263	812262	3450338	/bin/ps -e -o pid=,ppid=,rss=

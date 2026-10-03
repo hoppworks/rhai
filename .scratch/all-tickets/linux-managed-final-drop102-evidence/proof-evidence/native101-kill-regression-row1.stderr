@@ -1,0 +1,168 @@
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:668:13
+    |
+668 |         let mut wait_operation = "wait for child";
+    |             ----^^^^^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` on by default
+
+warning: unused variable: `termination`
+    --> src/packages/sys/process/unix.rs:1106:22
+     |
+1106 |                 let (termination, _operation) = if self.managed {
+     |                      ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_termination`
+     |
+     = note: `#[warn(unused_variables)]` on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2134:9
+     |
+2134 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2456:9
+     |
+2456 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variant `OnlyZombieLeader` is never constructed
+  --> src/packages/sys/process/unix.rs:50:5
+   |
+47 | enum GroupCloseOutcome {
+   |      ----------------- variant in this enum
+...
+50 |     OnlyZombieLeader,
+   |     ^^^^^^^^^^^^^^^^
+   |
+   = note: `GroupCloseOutcome` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+   = note: `#[warn(dead_code)]` on by default
+
+warning: methods `numeric_operations_probe`, `quarantine_observations_probe`, and `fail_reservation` are never used
+    --> src/packages/sys/process/unix.rs:1470:8
+     |
+1390 | impl ExecutionFaults {
+     | -------------------- methods in this implementation
+...
+1470 |     fn numeric_operations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1481 |     fn quarantine_observations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1506 |     fn fail_reservation(&self) -> bool {
+     |        ^^^^^^^^^^^^^^^^
+
+warning: `rhai` (lib) generated 7 warnings (run `cargo fix --lib -p rhai` to apply 4 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+   Compiling rhai v1.26.1 (/var/roothome/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07/source)
+warning: variable does not need to be mutable
+   --> tests/sys_process.rs:874:9
+    |
+874 |     let mut holder = command.spawn().expect("start escaped captured-pipe holder");
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` on by default
+
+warning: value assigned to `incomplete` is never read
+    --> tests/sys_process.rs:1288:17
+     |
+1288 |         let mut incomplete = false;
+     |                 ^^^^^^^^^^
+     |
+     = help: maybe it is overwritten before being read?
+     = note: `#[warn(unused_assignments)]` on by default
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:1928:9
+     |
+1928 |     let mut sentinel = managed_spawn_sentinel();
+     |         ----^^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:2036:9
+     |
+2036 |     let mut sentinel = managed_spawn_sentinel();
+     |         ----^^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:2226:9
+     |
+2226 |     let mut sentinel = Sentinel(
+     |         ----^^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: constant `DIRECT_DROP_RECORD_ENV` is never used
+  --> tests/sys_process.rs:38:7
+   |
+38 | const DIRECT_DROP_RECORD_ENV: &str = "RHAI_SYS_DIRECT_DROP_RECORD";
+   |       ^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: unused `Dynamic` that must be used
+   --> tests/fixtures/sys_process_shared_child_contract.rs:239:5
+    |
+239 |     engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("kill after completion is idempotent");
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` on by default
+help: use `let _ = ...` to ignore the resulting value
+    |
+239 |     let _ = engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("kill after completion is idempotent");
+    |     +++++++
+
+warning: unused `Dynamic` that must be used
+   --> tests/fixtures/sys_process_shared_child_contract.rs:240:5
+    |
+240 |     engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("repeated kill after completion is idempotent");
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+help: use `let _ = ...` to ignore the resulting value
+    |
+240 |     let _ = engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("repeated kill after completion is idempotent");
+    |     +++++++
+
+warning: `rhai` (test "sys_process") generated 8 warnings (run `cargo fix --test "sys_process"` to apply 4 suggestions)
+    Finished test [unoptimized] target(s) in 0.90s
+     Running tests/sys_process.rs (/root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07/target/debug/deps/sys_process-7540f7d2e1301f52)
+managed_pidfd_acquired pid=813531 start=3448120 ppid=813528 pgid=813531
+managed_pidfd_acquired pid=813533 start=3448120 ppid=813531 pgid=813531
+managed_pidfd_acquired pid=813535 start=3448120 ppid=813533 pgid=813531
+managed_child_kill_live reaper=813526 reaper_start=3448119 host=813528 host_start=3448119 leader=813531 leader_start=3448120 worker=813533 worker_start=3448120 leaf=813535 leaf_start=3448120 group=813531 sentinel=813525 sentinel_start=3448119 sentinel_pgid=813525
+managed-scope sentinel_cleanup pid=813525 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_child_kill_boundary host_live_at_return=true reaper_live_at_return=true leader=813531 leader_start=3448120 leader_record_start_matches_pidfd=true leader_absent=true worker=813533 worker_start=3448120 worker_absent=true leaf=813535 leaf_start=3448120 leaf_absent=true group=813531 exact_descendants_reaped=true sentinel=813525 sentinel_start=3448119 sentinel_pgid=813525 sentinel_live_at_return=true sentinel_reaped_after_return=true api_bound=true report_returned=true killed_report=true capture_complete=true pidfds_exited=true reaper_ok=true host_absent_after_cleanup=true group_empty=true api="host=813528 host_start=3448119 api_success=true api_outcome=child_report success=false code=None signal=Some(9) stdout_complete=true stderr_complete=true cause=none diagnostic=none\n" reaped="worker=813533 start=3448120 pgid=813531 reaped=true wait_status=9 leaf=813535 start=3448120 pgid=813531 reaped=true wait_status=9 complete=true\n" cleanup="pid=813526 prompt=true host_status=0 worker=813533 start=3448120 pgid=813531 reaped=true wait_status=9 leaf=813535 start=3448120 pgid=813531 reaped=true wait_status=9 complete=true\n"
+managed_fixture_cleanup worker_pid=Some(813533) worker_esrch=true leaf_pid=Some(813535) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(813531) leader_esrch=true

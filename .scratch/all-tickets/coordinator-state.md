@@ -85,50 +85,45 @@ Instructions/roles faba3db3bef6891ad2c0b20d434963bb8fe9572d loaded by root,
 responsible Standard and same combined reviewer. Workhorse installed rules resolved
 at /var/home/workhorse/.agents/AGENTS.md and /var/home/workhorse/projects/agent-skills;
 SSH root has no ~/.agents. Read-only resolution/command-local safe.directory only.
-Last verified fork mainf2353118f1fc6462e4c9c43439a991ca0636e308; sole remote main,
-lowercase human author/committer. Previous goal turn PROGRESS: public managed
-Child.kill native101 accepted and integrated; overall scope remains incomplete.
+Last verified fork main77a4b3bf90a2551186c94eff97e91fecafebedf3; sole remote main,
+lowercase human author/committer. Previous goal turn PROGRESS: initial final-drop source and independent review
+identified async/timing/type gaps; cause count1 preserved, second repair underway.
+Current source repair accepted independently; overall scope remains incomplete.
 
-### Current coherent requirement
+### Current coherent requirement: final managed client lease drop
 
-Final-client-lease drop with kill_on_drop is being implemented source-only by same
-responsible Standard linux_managed_gap in owned protected
-/Users/hoppworks/.codex/worktrees/linux-managed-success/rhai, task/linux-managed-success.
-Baseline5f78341a already integrated through408781f5. Initial source106f24720cc4a0892b69fe601b61de4032cf2531
-frozen, same combined final-drop review NOT READY: ClientLease Drop asynchronously
-requests cleanup but initial observer snapshots immediate closure. One batched
-correction dispatched to responsible Standard: distinguish finaldrop-return from
-later bounded independent closure/reaping while host/reaper/sentinel remain live.
-Keep kill101 unchanged, strict exactidentity/reaper/group cleanup,20s watchdog and
-no extra kill/wait/deadline termination. New package initialfinding1, then correction228132c9/d9e9fa4a completed affected
-review NOT READY with2blockers: identity parseclosure mixes i32/u64; observeruntil
-watchdog-4s overlaps reaperexceptionalcleanupstart-7s, permitting false dropalone
-closure. Stable final-drop-observation failedsourcecorrectioncount1/native0;
-diagnostic reaper_statusaddition sound, notfix. Onebatched secondcorrection
-assignedsameStandard: explicitparsetypes, acceptancebeforeexceptionalboundary or
-exactfailclosedexceptionalstartguard, unchangedwatchdogs/resources. Onsecondfailed
-correction escalatefreshnonforkExpert; nohistoryreset. Fullsamecombinedreport
-linux-managed-final-drop-review.md preserves rejected source/sourcepins. Ref linux-managed-final-drop-review.md.
-Prospective102 stage /root/rhai-linux-managed-final-drop-20261003-106f2472-102,
-physical /var/roothome/rhai-linux-managed-final-drop-20261003-106f2472-102,
-scope /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102.
-All uncreated/unallocated. Recipes draft source-only4featureGREEN/1namedRED plus
-3affected base kill/prompt/held regressions (8exact+3setup). Freeze correctedsource
-and dependent recipes before samecombinedaffectedrecheck; original101 custody
-mechanics retained without renewing passed14/15 chains. Existing regression
-managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not uses numeric
-PID absence only; ClientLease::drop in src/packages/sys/process/unix.rs triggers
-final cleanup. Bind live leader/worker/leaf and sentinel identities; nonfinal Rhai
-handle drop must leave managed processes live, final lease alone must close/reap
-the group while host/reaper/sentinel live, then exact independent full cleanup.
-Use existing isolated reaper/PIDFD/start/group mechanics and one post-cleanup
-wrong expectation that a managed member remains live. Explicit Child.kill or a
-spawn deadline cannot substitute for lease-drop. Preserve accepted101 logic;
-shared fixture changes require affected acceptance checks. Production unchanged
-unless meaningful failing contract establishes need. Thirty-minute active-work
-planning checkpoint. No native102/build/stage allocation yet. Next: source freeze,
-same combined affected review, coherent bounded acceptance recipe and fresh slot
-inventory; preserve exact existing hard caps and cumulative101 consumption.
+Source61b3739a785503d6a74d769b30c218b82f5dd249 and frozen recipes
+4a7d847ebf46c43604b40aebb5dbaf7449348d43 passed same combined readiness review.
+Native102 completed: one intended named post-fullcleanup RED101, four final-drop
+feature GREEN0, three affected base kill/prompt/held GREEN0 and three setup0.
+All outer/scoped/runtime/readback/scope statuses0. Original evidence at
+linux-managed-final-drop102-evidence/, root launch log102 retained. The collector
+required eight existing original closure files before read-only validation and
+compared all73 original files/5directories with fresh remote hashes. Fresh139
+helper+2launcher PID/start rows absent, original fixture closures independently
+validated, owned groups812192/812262 empty. Exact hash-gated stage cleanup removed
+73files/5dirs; freshstage/scope/groupsabsence receipt recorded. Private runtime
+agent-build-tqf5er07 and central scope absent. No retained resource.
+Helper elapsed46.78s;63 resource samples maxima973476KiB RSS,968332KiB storage
+and7descendants, not continuous peaks. Review service capacity interruption was
+infrastructure only; resumed same reviewer, no native rerun. Original
+optional launcher /proc812259/stat disappearance warning preserved; same combined
+reviewer confirmed strict terminal custody unaffected by ordinary exit race. Final combined
+review ACCEPTED the scoped final-client-lease criterion; responsible Standard
+correcting proof/mapping status before integration. Tickets03/06 remain open for
+remaining criteria. Root collecting exact acceptance commit and source integration.
+
+Cause final-drop-observation preserved: initial106f immediate async snapshot
+finding; first correction228132/d9e9 failed affected source review (one completed
+failed source correction: mixed parser types and observation overlapping watchdog
+fallback). Secondsource61b typed parser, observation ending watchdogminus8s before
+fallbackminus7s, exact exceptional-start marker guard PASSED. No second failed
+correction, no Expert allocation. CumulativeUnix102 / finaldropnative1; closed
+custodyExpert14 and killreaperExpert15 unchanged. Full samecombinedreport
+linux-managed-final-drop-review.md preserves source, recipe and acceptance history.
+Execution retained original hardlimits600/585/540s including30sexport, twoCargo
+jobs, descendants16, preemptive1572864KiB and storage/RSS2097152KiB. No broad filter,
+no no_float/no_index or otherOS/releaseclaim. Root and writer owners unchanged.
 
 ### Accepted current Linux managed subsets
 

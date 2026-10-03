@@ -1,0 +1,19 @@
+{
+  "captured_before_stage_validation_or_external_command": true,
+  "helper": {
+    "cmdline": "python3 /root/rhai-linux-managed-final-drop-20261003-106f2472-102/linux-managed-final-drop-proof.py",
+    "pgid": 812262,
+    "pid": 812263,
+    "ppid": 812262,
+    "start_ticks": "3445659"
+  },
+  "identity_errors": {},
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102/agent-build-tqf5er07",
+  "scoped_supervisor": {
+    "cmdline": "/usr/bin/python3 /var/roothome/rhai-linux-managed-final-drop-20261003-106f2472-102/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-managed-final-drop-20261003-106f2472-102/linux-managed-final-drop-proof.py",
+    "pgid": 812262,
+    "pid": 812262,
+    "ppid": 812259,
+    "start_ticks": "3445657"
+  }
+}
