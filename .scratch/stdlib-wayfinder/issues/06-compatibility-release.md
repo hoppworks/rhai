@@ -225,3 +225,29 @@ This closes only the current Linux MSRV held-zombie criterion. Ordinary managed
 success, remaining managed/fault/lifecycle paths, other feature/native-platform
 rows, performance and final release acceptance remain open. Prior valid proof
 and stopped cause/budget histories retain their recorded applicability.
+
+## Linux managed prompt-success and held boundary — 2026-10-03
+
+Native invocation 96 at frozen `003da064`, private Rust/Cargo 1.77.2 and compatible
+lock `2ba4` proves the public managed run prompt-success and held-zombie boundary
+in four rows: `testing-environ,sys`, plus `sync,metadata`, plus `f32_float`, and
+plus `unchecked`. All eight exact original tests pass after the three intended
+held-mode/wrong-exit/wrong-sentinel controls fail at their named assertions.
+The prompt fixture independently reaps its adopted worker/leaf while the host
+stays live; exact PID/start/group relations, code 0, complete capture, foreign
+reaping, sentinel survival at return and later fixture cleanup are observed.
+The held fixture retains the accepted typed incomplete-cleanup boundary.
+
+Combined independent acceptance, exact source restoration, all 72 original
+exported files, eleven closure records and fresh identity/group readback are in
+`../../all-tickets/linux-managed-success-proof.md` and its referenced originals.
+All 210 recorded identity rows are absent and 13 groups empty; these row counts
+are not a claim of unique PIDs. Owned stage/runtime/scope were retired exactly.
+Integration at `92146c60` preserves the frozen non-scratch source tree; subsequent
+evidence commits change no production/test inputs. The two receipt/custody
+correction failures and single Expert/follow-up history remain preserved.
+
+This closes ordinary prompt-reaped managed success and adds these held-boundary
+feature rows on Linux. Managed deadline/overflow/explicit-kill/final-drop/escape/
+setup/drop-false criteria, performance, macOS/Windows and final current-source
+release gates remain open. No full ticket closure is claimed.

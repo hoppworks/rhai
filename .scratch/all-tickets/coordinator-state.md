@@ -81,111 +81,82 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 
 ## Current step and next action
 
-Current instructions/roles revisionfaba3db3bef6891ad2c0b20d434963bb8fe9572d.
-Current authoritative history through this rewrite is Git commit
-10d4a0d55400ebe8c24feff134e7161ff36bf8d5, this same state path. It retains
-all earlier cause/attempt/resource/source applicability records. Read that
-history for consumed work, not superseded next actions. No reset occurred.
-Fork main native-acceptance anchor0a8ab05763eceb6125561c606691c9072930324e
-was independently read back with ONLY remote main after normal fast-forward push.
-Merge92146c60 preserves source7d045/003da and frozen recipe0b1 histories; native
-proof, review, originals and escalation history committed at0a8ab057. Lowercase
-human author/committer verified. This continuation-state checkpoint may advance
-main again; it does not change proven test/production inputs. Goal active/incomplete.
+Current instructions/roles revision faba3db3bef6891ad2c0b20d434963bb8fe9572d.
+Latest independently read-back fork main cda89fa6fb98785de991d3c2b6a9044bd0ce888b;
+ONLY remote main. Lowercase human author and committer verified. Previous goal
+turn PROGRESS: native96 accepted, reviewed source/recipe histories integrated,
+original evidence committed and pushed, exact own remote stage/runtime cleaned.
+Overall all-tickets goal active and incomplete; no scope reduction.
 
-### Latest accepted package and next action
+### Latest acceptance and applicability
 
-Native95 held-zombie current Linux MSRV criterion ACCEPTED by the same combined
-reviewer: setup/version statuses0/0/0, intended controls101/101, restored GREEN0.
-Frozen257edf69/test8ec/lock2ba4, one testing-environ,sys row. All52 original files
-hash-verified;99 exact PID/start identities absent, four groups empty,52files/
-5dirs stage removed, runtime/scope absent. Fresh cleanup receipt follows collector
-cleanup (its stdout was not saved). Proof/review and originals at linux-managed-
-zombie-proof.md, linux-managed-zombie-review.md, linux-managed-zombie95-evidence/.
-Native94 infrastructure interleaving failure and44 originals remain preserved;
-95 repaired that harness cause, no product correction or hard-cap revision.
-Cumulative Unix95; unavailable cost/token usage unknown. No retained build.
-Integrated45902682: exact114files committed and pushed to sole fork main;
-independent ls-remote confirms exact head and sole branch. Lowercase human
-author/committer verified. Current coherent package is deterministic managed
-success at source003da064 in owned task/linux-managed-success, paired with the
-held-zombie case across four current-MSRV rows. Source and unchanged launcher
-are READY. Same Standard is live correcting one combined review batch: bind
-both test receipts separately; restore exact helper/launcher/fixture/group
-custody and required closure inventory; hash-check local exports before exact
-remote retirement. Submitted recipes69fc/db612/27e1/5613 are NOT READY (see
-linux-managed-success-review.md), not native evidence. No96 allocation or stage.
-Next corrected recipe freeze -> same affected review -> fresh workhorse inventory
-and absent-path checks -> one bounded native96. Root read-only SSH confirmed
-Linux7.2.7 and prospective stage/scope absent; this is not a slot reservation.
-Corrected recipe freeze confirmed by owner and root hashes: proofa2b1e16a,
-stageaf67b5a9, unchanged launch27e1ee59, collector72ad7fc5, preparef136ec40.
-Owner reports realistic combined six-PIDFD positive/four negatives, exact custody/
-closure inventory guards and changed-local-export rejection; no native acceptance.
-Same affected recheck rejects completed a2b1 correction: early receipt wrongly
-requires distinct start ticks (actual95 shares ticks), require_held calls items()
-on a returned list, REMOTE uses undefined SUCCESS/HELD, and success API host/
-capture flags remain unbound so common held stderr can mask malformed success.
-One failed completed recipe correction for receipt/custody cause; not native.
-Same Standard receives all four in one batch with actual helper/REMOTE control
-path purechecks and success-only mutation under combined stderr. Preserve initial
-69fc findings and a2b1 rejected baseline in same review report; source003da and
-launcher remain READY. At a second failed completed correction for this cause,
-apply the fresh non-fork Expert escalation rule without resetting history.
-Final second correction frozen: proof4cdd64b3, stage52483695, unchanged
-launcher27e1ee59, collector2016e540, prepare1494a730; root hashes verified.
-Affected review NOT READY: actual source success API has cause=none diagnostic=none
-before newline, omitted by the exact parser. Three earlier fixes pass; synthetic
-positive used abbreviated grammar. This is second failed completed correction for
-stable cause linux-managed-receipt-custody; no native/product failure or history reset.
-Fresh non-fork Expert escalation14 ANSWERED at
-escalations/14-linux-managed-receipt-custody.answer.md. Loaded revision faba3db
-confirmed. Actual functions reproduce suffix omission, cross-record cleanup
-acceptance and GREEN closure filename mismatch; actual95 held parser passes.
-No native/SSH/source edits occurred. Expert elapsed/cost usage unknown.
-ONE post-escalation follow-up now owned by linux_managed_gap: add exact success
-suffix, bind complete quoted cleanup to same receipt, use prefix for closure
-filename, execute source-format shared-tick positives plus actual95 held receipts,
-actual helper/REMOTE flow and listed negatives, then freeze dependent pins.
-30-minute active-work planning checkpoint, no second correction chain; stop if
-intended affected independent check fails or contradictory/no-progress evidence.
-Source003da and launcher unchanged. Native96 unallocated; cumulative Unix95,
-no stage/retained build. Native600/585/540incl30export, jobs2/desc16/2GiB unchanged.
-Single follow-up FROZEN: proof83e84145, stage67e13bdd, unchanged launcher27e1,
-collector01068eee, preparea800b263; root reads actual hashes. Owner reports actual
-source-format helper and mocked REMOTE checks pass with eleven exact closures,
-shared ticks and unchanged actual95 held stderr; malformed API/cleanup/structure,
-foreign-line completion and closure inventory negatives reject. Harness checks
-are not native acceptance; elapsed unavailable. Same affected reviewer READY: actual source-format combined receipts pass;14
-mutations reject; real helper/REMOTE consumers cover7cases and11closures under
-explicit mocks. Recipe readiness only, native acceptance remains unrun.
-Native96 ACCEPTED narrowly by same combined reviewer: prompt-success and held
-zombies across4 Linux Rust1.77.2 feature rows,8 exact GREEN tests,3 intended RED101.
-Original72files/6dirs and11closures byte-verified; source restored exacte003/errornull.
-Collector actual independent readback62fixture rows+146owned rows+2launcher rows,
-13groups; fresh post-cleanup all210 recorded identities absent (not unique PID
-count), groups empty, stage/scope/runtime absent,72files6dirs exact stage removed.
-Evidence linux-managed-success96-evidence/, proof linux-managed-success-proof.md,
-same combined linux-managed-success-review.md. SystemPython3.9 extractall(filter)
-export setup failure recovered with existingPython3.12.14, own empty destination
-rmdir only; no native rerun or source correction. One recovery for this distinct
-local interpreter cause; native/correction history unchanged. Elapsed51.765s
-helper work/export; sampledmax RSS953840KiB/storage967628KiB/desc9, not peaks.
-Cumulative Unix96 consumed; no retained build. Stable receipt/custody cause single
-Expert14 and ONE follow-up PASSED, two prior failures retained; no renewed chain.
-Owner recipe commit0b1c6431 clean/lowercase authors, parent003da frozen source.
-Coordinator merged7d045+003da+0b1 history at92146c604e3a248aa2d961d59f33be195b373875.
-Independent non-scratch diff vs frozen003da empty, test exact SHAe003; previous
-proof applies without duplicate build. Proof/history committed0a8ab057 and pushed ONLY forkmain; independent exact
-sole-branch readback passed. Snapshot_sessions codex completed before requested
-managed archive of clean owned writer worktree. Archive refused because pinned
-task/workspace protects it; preserve it, no fallback delete/unpin/foreign cleanup.
-No disposable build remains. Next coherent requirement: managed run deadline
-and shared Child kill/final-drop group closure, using real fixture/readback and
-retaining accepted prompt/held receipts. Inspect current source/tests and existing
-coverage before choosing a small integrated repair/proof; no legacy immediate-
-ESRCH success inference or renewed stopped macOS/Windows path. Prior accepted unaffected proofs remain valid.
-Wider process/macOS/Windows/performance/release gates remain OPEN.
+Native96 prompt-success and held-zombie boundaries ACCEPTED by same combined
+reviewer across4 Linux Rust/Cargo1.77.2 feature rows: testing-environ,sys; plus
+sync,metadata; plus f32_float; plus unchecked.8 exact GREEN tests,3 intended RED101.
+Original72files/6dirs and11closures hash-verified; source restored exacte003/errornull.
+Fresh independent210 recorded PID/start identities absent and13groups empty;
+these are row counts, not a claim of210 unique PIDs. Stage/scope/runtime absent,
+72files6dirs exact stage removed. No retained build. Source003da/teste003/archivef62
+integrated through merge92146c60 and recipe0b1; independent non-scratch diff empty.
+Proof applies at current main without duplicate build. Proof/review/originals:
+linux-managed-success-proof.md, linux-managed-success-review.md,
+linux-managed-success96-evidence/. Acceptance/history commit0a8ab057 retains
+full preceding preparation and correction state; no attempt history reset.
+
+Original95 held-only current Linux MSRV acceptance remains valid independently:
+frozen257edf69/test8ec/lock2ba4, one testing-environ,sys row;52 originals,99exact
+identity rows absent,4groups empty; proof linux-managed-zombie-proof.md,
+linux-managed-zombie-review.md, linux-managed-zombie95-evidence/. Native94 parser
+interleaving infrastructure failure retained in original44files;95 repaired it.
+
+### Cause, budget and resource history
+
+Stable linux-managed-receipt-custody: initial69fc/5613 findings, completed a2b1/72ad
+and4cdd/2016 failed corrections count2; fresh non-fork Expert14 diagnosis and ONE
+follow-up83e84145/01068eee PASSED combined affected review and native96. Detailed
+source-format/mutation/export checks and frozen hashes retained in same review
+and escalations/14-linux-managed-receipt-custody.md plus answer. No renewed chain.
+Earlier misplaced early-source-receipt correction is distinct; immutable failed
+patch f85b8c6f retained. Native96 local Python3.9 tarfilter export setup failure
+recovered with existingPython3.12.14, empty owned destination rmdir; one local
+interpreter recovery, no native rerun or product correction. Raw original output
+whitespace/bytecode stays unchanged and hash-bound; source/docs diff-check passes.
+
+Cumulative Unix96 consumed. Native96 fixed limits600s outer/585s runner/540s
+helper including30s export reserve, jobs2, descendants16, storage preempt1572864KiB,
+RSS/storage hard2097152KiB. Helper work/export51.765s;1s sampledmaxRSS953840KiB,
+storage967628KiB,desc9, not continuous peaks or reservations. Cost/token usage
+unavailable; no invented savings. Prior allocation/safety histories retained in
+historical sections and referenced committed logs. Do not renew stopped macOS
+cause09, Darwin census12 or Windows JobExit13 chains.
+
+Owned writer linux_managed_gap on task/linux-managed-success remains clean at
+0b1c6431 in /Users/hoppworks/.codex/worktrees/linux-managed-success/rhai.
+Snapshot_sessions codex succeeded before attempted managed archival; archive
+refused due pinned task/workspace protection. Preserve, no fallback deletion or
+unpinning. Source/recipes/proof are integrated outside that worktree. All foreign
+worktrees and unrelated untracked CLI logs remain untouched.
+
+### Current coherent requirement and next action
+
+Public managed Child.kill group closure is the next criterion in contract03.
+The same responsible Standard completed diagnosis at the owned writer's
+linux-managed-lifecycle-next.md: existing numeric-PID absence checks do not bind
+lifecycle identities under foreign reaping. Implement one minimal public spawn →
+kill → bounded wait fixture with external isolated subreaper, exact live
+leader/worker/leaf and sentinel identities, failed final report, host/reaper live
+API-return boundary and independent exact cleanup. Preserve native96 run cases.
+Final-clone drop, deadline, overflow and broader gates remain separately open.
+
+Standard is LIVE implementing this coherent slice in the same protected owned
+writer. The existing owner-approved Engine/script → host → OS seam applies;
+no additional seam/approval gate. TDD and one wrong-control after full cleanup,
+with exact-byte restoration before GREEN. Inspect kill report semantics rather
+than transplant run-success assertions.30-minute active-work planning checkpoint;
+source-only preparation, no SSH/stage/build/native97 allocated. Coordinator owns
+one combined review and next bounded native launch after source/recipe readiness.
+The passed receipt/custody cause history is retained without renewal. Any new
+failure must be classified by its actual cause and preserve consumed work.
 
 ### Accepted current Linux non-process package
 
