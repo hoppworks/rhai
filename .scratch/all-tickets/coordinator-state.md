@@ -82,7 +82,7 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 ## Current step and next action
 
 Instructions faba3db unchanged/loaded; full goal active/incomplete. Sole fork
-main last independently read back atac259e0359590f1c69f10fb1c5e31b85b8e03f7d.
+main last independently read back at4728b28cceb870f0919d53379cee5127ea6eba03.
 Accepted109 proof/source523 unchanged; no retained native resources, all finite
 concurrency exceptions expired. Unix109 consumed; native110 unallocated.
 
@@ -107,53 +107,41 @@ estimate is not a human safety-cap renewal. Native failures/launches remain0;
 no Cargo, SSH, stage, production change or native allocation occurred. All
 exhausted native/Darwin/Windows chains and actual hard boundaries remain stopped.
 
-Same Standard recipe-only batch frozen at
-eeae50bbec70216ff50473927034fdff9a5002b8, six files: baseline-proof.py,
-collect-red.py, new collect-original.py, contract.md, launch.sh, stage.sh.
-Root independently confirmed exact lowercase author/committer and every file
-SHA256; source/test ee50 and archive/test pins remain unchanged. Same combined
-reviewer completed the affected review: recipes NOT READY. Final consolidated
-findings are in linux-stdin-closure-review.md, Frozen110 recipes eeae50bb. Actual
-source receipt formats and helper-versus-post-run custody are incompatible with
-the classifier; local export closes/deletes its tar too early; finally export
-lacks the promised deadline/resource checks; deletion needs fresh fail-closed
-canonical identity/PID/start/group census inside the removal boundary. AST/embedded Python, bash syntax, stage pin equality and diff
-checks passed; modeled valid baseline accepted and corrupted timeout rejected.
-These are synthetic setup checks only, not actual OS or product RED.
+Same Standard froze the consolidated recipe-only correction at
+132e6f83414d83be26b8c685e68b5bb125af8d7f, six recipe files only. Root checked
+all actual Git blob hashes and lowercase exact hoppworks author/committer;
+non-scratch source ee50 and testc247 are unchanged. Same combined reviewer now
+performs the affected recheck of its four final eeae50 findings. Syntax,
+embedded remote/remove/absence scripts, bash and diff checks pass; source-shaped
+quoted/nested receipt, two sentinel lifecycle phases, invalid identity/zombie
+rejection and local tar/inventory models pass. These are modeled checks only,
+not observed OS/product RED or acceptance. No recipe READY verdict yet.
 
-Recipe active work owner reports approximately18minutes this continuation;
-earlier cumulative recipe work was not measured and remains unknown. First
-modeled fixture schema mismatch (child_reaped, no live_observed) repaired with
-concrete source diagnosis; no native infrastructure or product launch occurred.
-Existing30minute planning checkpoint and prior c39/source causes preserved.
-No new Expert, native allocation or hard-limit renewal. Historical unrelated
-lifecycle note remains untracked and untouched.
+Cause history: c39 initial proposal NOT READY; first completed correctioneeae50
+failed its independent check (recipe corrective failure1). Current132e6 second
+corrective batch awaits review. Preserve source4ac/2c/9d and Expert17 history;
+source decoding/guard repair is closed narrowly, consuming parser/export/custody
+was still open. Two draft mismatches diagnosed from the actual emitter at the
+30-minute checkpoint (unit=true value=(); sentinel_after emitted twice; normal
+path has no fallback cleanup_complete) justified10additional estimated active
+minutes in the same batch. Writer finished in approximately35minutes this batch,
+plus prior18minutes and unknown earlier use: known reported total approximately
+53minutes, not measured full cumulative cost/CPU. No counters or hard caps reset.
+A second failed corrective recipe review, contradictory evidence or unresolved
+decision stops this path for fresh causal escalation audit.
 
-No Cargo/SSH/staging/native/production mutation. Exact prospective stage/scope
-/root/rhai-linux-stdin-closure-20261003-ee50c63e-110 and
-/root/.local/share/agent-builds/rhai/linux-stdin-closure-20261003-ee50c63e-110
-are unallocated. Root's /private/tmp/rhai-native110-preflight.py now uses those
-paths,13 independently fixed expected input hashes including source.tar and
-stage.sh, strict zero foreign runner/compiler,16GiB availableRAM/disk and exact
-canonical-stage/absent-scope/terminal guards. AST passed; never executed. Recheck
-pins after any recipe change. No slot reservation or expired exception reuse.
-Current owner: same Standard stdin_closure_test, continuing one consolidated
-recipe-only correction against the final four findings. No Rust/source change,
-SSH, staging, launch, cleanup or push in its scope. Actual frozen source emissions
-must ground parser models; separate immutable semantic classification from fresh
-post-run custody. Thirty-minute active-work planning checkpoint for this repair,
-with prior18minutes plus unknown earlier cumulative work preserved. Human
-authorization covers these ordinary reversible corrections; no new approval gate.
-c39 was the initial rejected proposal; eeae50 is the first completed corrective
-recipe batch failing independent review (recipe correction failure1). Preserve
-all earlier source4ac/2c/9d and Expert17 history: source decoding/guard repair is
-closed narrowly, while these consuming parser/export/lifecycle defects remain
-open. This classification does not reset any underlying source or native cause.
-A second failed corrective recipe check, contradictory evidence or an unresolved
-decision stops this path for fresh causal escalation audit. No native allowance
-is renewed. Next: corrected immutable recipes -> same affected review -> fresh
-workhorse slot/capacity -> stage/allocation only if ready -> genuine native RED
--> production fix and real acceptance.
+No Cargo/SSH/staging/native/production mutation or retained resources. Exact
+prospective stage /root/rhai-linux-stdin-closure-20261003-ee50c63e-110 and scope
+/root/.local/share/agent-builds/rhai/linux-stdin-closure-20261003-ee50c63e-110 are
+unallocated; native110 remains unallocated, Unix109 consumed. Root refreshed all
+six recipe pins in /private/tmp/rhai-native110-preflight.py against actual132e6
+blobs; all13 expected input hashes fixed, source archive unchanged. AST passes;
+preflight never executed. It requires canonical stage, absent scope/terminal,
+zero foreign runner/compiler and16GiB available RAM/disk. No slot reservation,
+expired exception reuse or native allowance renewal. Historical untracked
+lifecycle note and root CLI logs untouched.
+Next: affected review verdict -> fresh workhorse slot/capacity -> stage/allocation
+only if ready -> genuine native RED -> product correction and real acceptance.
 Human permits Tauron window coordination if fresh contention requires it.
 Final native Linux/macOS/Windows, feature/MSRV/release remain open. Previous
 turn verified wait on live owner; current turn PROGRESS: immutable recipe/checks,
