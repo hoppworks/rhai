@@ -1,0 +1,728 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+helper	757248	757247	757247	1288212	python3 /root/rhai-linux-process-options-20261003-469998db/linux-process-options-proof.py
+scoped-supervisor	757247	757244	757247	1288211	/usr/bin/python3 /var/roothome/rhai-linux-process-options-20261003-469998db/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-process-options-20261003-469998db/linux-process-options-proof.py
+command:rustup-install	757253	757248	757247	1288254	/root/.cargo/bin/rustup toolchain install 1.77.2-x86_64-unknown-linux-gnu --profile minimal --no-self-update
+command:du	757254	757248	757247	1288254	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	757272	757248	757247	1288254	/bin/ps -e -o pid=,ppid=,rss=
+command:du	757292	757248	757247	1288355	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	757293	757248	757247	1288356	/bin/ps -e -o pid=,ppid=,rss=
+command:du	757305	757248	757247	1288457	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	757306	757248	757247	1288457	/bin/ps -e -o pid=,ppid=,rss=
+command:du	757325	757248	757247	1288558	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	757326	757248	757247	1288559	/bin/ps -e -o pid=,ppid=,rss=
+command:du	757338	757248	757247	1288660	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	757339	757248	757247	1288660	/bin/ps -e -o pid=,ppid=,rss=
+command:du	757358	757248	757247	1288761	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	757359	757248	757247	1288761	/bin/ps -e -o pid=,ppid=,rss=
+command:du	757370	757248	757247	1288862	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	757371	757248	757247	1288863	/bin/ps -e -o pid=,ppid=,rss=
+command:du	757380	757248	757247	1288924	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	757381	757248	757247	1288924	/bin/ps -e -o pid=,ppid=,rss=
+command:rustc-version	757383	757248	757247	1288925	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose
+command:du	757384	757248	757247	1288925	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	757385	757248	757247	1288926	/bin/ps -e -o pid=,ppid=,rss=
+command:du	757387	757248	757247	1288936	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	757388	757248	757247	1288937	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-version	757389	757248	757247	1288938	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose
+command:du	757390	757248	757247	1288938	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	757402	757248	757247	1288938	/bin/ps -e -o pid=,ppid=,rss=
+command:du	757404	757248	757247	1288949	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	757405	757248	757247	1288949	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-control-0-capture-raw-code0-red	757406	757248	757247	1288950	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	757407	757248	757247	1288950	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	757409	757248	757247	1288950	/bin/ps -e -o pid=,ppid=,rss=
+command:du	757425	757248	757247	1289051	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	757426	757248	757247	1289052	/bin/ps -e -o pid=,ppid=,rss=
+command:du	757440	757248	757247	1289153	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	757441	757248	757247	1289153	/bin/ps -e -o pid=,ppid=,rss=
+command:du	757452	757248	757247	1289254	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	757453	757248	757247	1289254	/bin/ps -e -o pid=,ppid=,rss=
+command:du	757556	757248	757247	1289355	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	757562	757248	757247	1289356	/bin/ps -e -o pid=,ppid=,rss=
+command:du	757727	757248	757247	1289457	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	757731	757248	757247	1289458	/bin/ps -e -o pid=,ppid=,rss=
+command:du	758015	757248	757247	1289559	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758017	757248	757247	1289560	/bin/ps -e -o pid=,ppid=,rss=
+command:du	758075	757248	757247	1289661	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758077	757248	757247	1289663	/bin/ps -e -o pid=,ppid=,rss=
+command:du	758147	757248	757247	1289763	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758151	757248	757247	1289765	/bin/ps -e -o pid=,ppid=,rss=
+command:du	758277	757248	757247	1289865	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758281	757248	757247	1289867	/bin/ps -e -o pid=,ppid=,rss=
+command:du	758320	757248	757247	1289968	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758321	757248	757247	1289969	/bin/ps -e -o pid=,ppid=,rss=
+command:du	758332	757248	757247	1290070	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758333	757248	757247	1290071	/bin/ps -e -o pid=,ppid=,rss=
+command:du	758350	757248	757247	1290172	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758351	757248	757247	1290173	/bin/ps -e -o pid=,ppid=,rss=
+command:du	758372	757248	757247	1290274	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758374	757248	757247	1290275	/bin/ps -e -o pid=,ppid=,rss=
+command:du	758428	757248	757247	1290376	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758429	757248	757247	1290377	/bin/ps -e -o pid=,ppid=,rss=
+command:du	758431	757248	757247	1290388	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758432	757248	757247	1290389	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-control-1-capture-raw-code7-red	758433	757248	757247	1290390	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	758434	757248	757247	1290390	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758439	757248	757247	1290391	/bin/ps -e -o pid=,ppid=,rss=
+command:du	758483	757248	757247	1290472	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758484	757248	757247	1290473	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-control-2-capture-text-code0-red	758485	757248	757247	1290473	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	758486	757248	757247	1290474	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758491	757248	757247	1290475	/bin/ps -e -o pid=,ppid=,rss=
+command:du	758533	757248	757247	1290555	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758535	757248	757247	1290557	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-control-3-capture-text-code7-red	758536	757248	757247	1290557	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	758537	757248	757247	1290557	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758542	757248	757247	1290558	/bin/ps -e -o pid=,ppid=,rss=
+command:du	758588	757248	757247	1290639	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758589	757248	757247	1290640	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-control-4-overflow-stdout-red	758590	757248	757247	1290641	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one -- --exact --nocapture --test-threads=1
+command:du	758591	757248	757247	1290641	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758596	757248	757247	1290642	/bin/ps -e -o pid=,ppid=,rss=
+command:du	758639	757248	757247	1290733	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758640	757248	757247	1290734	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-control-5-overflow-stderr-red	758641	757248	757247	1290735	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one -- --exact --nocapture --test-threads=1
+command:du	758642	757248	757247	1290735	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758647	757248	757247	1290736	/bin/ps -e -o pid=,ppid=,rss=
+command:du	758694	757248	757247	1290827	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758695	757248	757247	1290828	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-control-6-zero-none-red	758697	757248	757247	1290829	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process zero_output_cap_reports_output_limit_with_an_empty_retained_prefix -- --exact --nocapture --test-threads=1
+command:du	758698	757248	757247	1290829	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758703	757248	757247	1290830	/bin/ps -e -o pid=,ppid=,rss=
+command:du	758743	757248	757247	1290921	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758744	757248	757247	1290922	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-control-7-zero-stdout-red	758745	757248	757247	1290923	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process zero_output_cap_reports_output_limit_with_an_empty_retained_prefix -- --exact --nocapture --test-threads=1
+command:du	758746	757248	757247	1290923	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758751	757248	757247	1290924	/bin/ps -e -o pid=,ppid=,rss=
+command:du	758792	757248	757247	1291015	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758793	757248	757247	1291016	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-control-8-zero-stderr-red	758794	757248	757247	1291017	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process zero_output_cap_reports_output_limit_with_an_empty_retained_prefix -- --exact --nocapture --test-threads=1
+command:du	758795	757248	757247	1291017	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758800	757248	757247	1291018	/bin/ps -e -o pid=,ppid=,rss=
+command:du	758843	757248	757247	1291119	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758844	757248	757247	1291120	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-control-9-deadline-raw-red	758846	757248	757247	1291121	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process run_deadline_returns_bounded_partial_output_after_terminating_child -- --exact --nocapture --test-threads=1
+command:du	758847	757248	757247	1291121	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758852	757248	757247	1291122	/bin/ps -e -o pid=,ppid=,rss=
+command:du	758893	757248	757247	1291213	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758894	757248	757247	1291214	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-control-10-deadline-text-red	758895	757248	757247	1291215	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process run_deadline_returns_bounded_partial_output_after_terminating_child -- --exact --nocapture --test-threads=1
+command:du	758896	757248	757247	1291215	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758901	757248	757247	1291216	/bin/ps -e -o pid=,ppid=,rss=
+command:du	758945	757248	757247	1291317	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758946	757248	757247	1291318	/bin/ps -e -o pid=,ppid=,rss=
+command:du	758948	757248	757247	1291329	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758949	757248	757247	1291330	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-control-11-unit-timeout-red	758950	757248	757247	1291331	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process unit_timeout_disables_configured_default_deadline -- --exact --nocapture --test-threads=1
+command:du	758951	757248	757247	1291331	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	758956	757248	757247	1291332	/bin/ps -e -o pid=,ppid=,rss=
+command:du	758999	757248	757247	1291433	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759000	757248	757247	1291434	/bin/ps -e -o pid=,ppid=,rss=
+command:du	759002	757248	757247	1291445	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759003	757248	757247	1291446	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-control-12-unit-stdin-red	759004	757248	757247	1291447	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process unit_stdin_means_immediate_eof -- --exact --nocapture --test-threads=1
+command:du	759005	757248	757247	1291447	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759010	757248	757247	1291448	/bin/ps -e -o pid=,ppid=,rss=
+command:du	759050	757248	757247	1291529	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759051	757248	757247	1291530	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-control-13-cwd-positive-red	759052	757248	757247	1291531	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process process_cwd_uses_the_opened_filesystem_capability_after_root_replacement -- --exact --nocapture --test-threads=1
+command:du	759053	757248	757247	1291531	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759058	757248	757247	1291532	/bin/ps -e -o pid=,ppid=,rss=
+command:du	759098	757248	757247	1291622	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759099	757248	757247	1291624	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-control-14-cwd-denial-red	759101	757248	757247	1291624	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process process_cwd_uses_the_opened_filesystem_capability_after_root_replacement -- --exact --nocapture --test-threads=1
+command:du	759102	757248	757247	1291624	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759107	757248	757247	1291626	/bin/ps -e -o pid=,ppid=,rss=
+command:du	759146	757248	757247	1291706	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759147	757248	757247	1291708	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-control-15-lossy-expansion-red	759148	757248	757247	1291708	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process lossy_run_reports_engine_limit_expansion_without_returning_truncated_text -- --exact --nocapture --test-threads=1
+command:du	759149	757248	757247	1291709	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759154	757248	757247	1291710	/bin/ps -e -o pid=,ppid=,rss=
+command:du	759194	757248	757247	1291790	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759195	757248	757247	1291792	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-test-0-green	759196	757248	757247	1291793	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	759199	757248	757247	1291793	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759202	757248	757247	1291794	/bin/ps -e -o pid=,ppid=,rss=
+command:du	759249	757248	757247	1291885	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759251	757248	757247	1291886	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-test-1-green	759252	757248	757247	1291887	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one -- --exact --nocapture --test-threads=1
+command:du	759253	757248	757247	1291887	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759258	757248	757247	1291888	/bin/ps -e -o pid=,ppid=,rss=
+command:du	759272	757248	757247	1291899	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759273	757248	757247	1291900	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-test-2-green	759274	757248	757247	1291901	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process zero_output_cap_reports_output_limit_with_an_empty_retained_prefix -- --exact --nocapture --test-threads=1
+command:du	759275	757248	757247	1291901	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759280	757248	757247	1291902	/bin/ps -e -o pid=,ppid=,rss=
+command:du	759290	757248	757247	1291923	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759291	757248	757247	1291924	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-test-3-green	759292	757248	757247	1291925	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process run_deadline_returns_bounded_partial_output_after_terminating_child -- --exact --nocapture --test-threads=1
+command:du	759293	757248	757247	1291925	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759298	757248	757247	1291926	/bin/ps -e -o pid=,ppid=,rss=
+command:du	759311	757248	757247	1291957	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759312	757248	757247	1291958	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-test-4-green	759313	757248	757247	1291959	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process unit_timeout_disables_configured_default_deadline -- --exact --nocapture --test-threads=1
+command:du	759314	757248	757247	1291959	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759319	757248	757247	1291960	/bin/ps -e -o pid=,ppid=,rss=
+command:du	759329	757248	757247	1291990	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759330	757248	757247	1291992	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-test-5-green	759331	757248	757247	1291992	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process unit_stdin_means_immediate_eof -- --exact --nocapture --test-threads=1
+command:du	759332	757248	757247	1291992	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759337	757248	757247	1291993	/bin/ps -e -o pid=,ppid=,rss=
+command:du	759345	757248	757247	1292004	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759346	757248	757247	1292005	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-test-6-green	759347	757248	757247	1292006	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process process_cwd_uses_the_opened_filesystem_capability_after_root_replacement -- --exact --nocapture --test-threads=1
+command:du	759348	757248	757247	1292006	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759354	757248	757247	1292007	/bin/ps -e -o pid=,ppid=,rss=
+command:du	759362	757248	757247	1292028	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759363	757248	757247	1292029	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-test-7-green	759364	757248	757247	1292030	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process lossy_run_reports_engine_limit_expansion_without_returning_truncated_text -- --exact --nocapture --test-threads=1
+command:du	759365	757248	757247	1292030	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759370	757248	757247	1292031	/bin/ps -e -o pid=,ppid=,rss=
+command:du	759379	757248	757247	1292052	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759380	757248	757247	1292053	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-control-0-capture-raw-code0-red	759381	757248	757247	1292054	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	759382	757248	757247	1292054	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759387	757248	757247	1292055	/bin/ps -e -o pid=,ppid=,rss=
+command:du	759441	757248	757247	1292156	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759442	757248	757247	1292157	/bin/ps -e -o pid=,ppid=,rss=
+command:du	759453	757248	757247	1292258	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759455	757248	757247	1292259	/bin/ps -e -o pid=,ppid=,rss=
+command:du	759466	757248	757247	1292360	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759467	757248	757247	1292361	/bin/ps -e -o pid=,ppid=,rss=
+command:du	759484	757248	757247	1292462	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759485	757248	757247	1292463	/bin/ps -e -o pid=,ppid=,rss=
+command:du	759507	757248	757247	1292564	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759508	757248	757247	1292565	/bin/ps -e -o pid=,ppid=,rss=
+command:du	759557	757248	757247	1292666	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759558	757248	757247	1292667	/bin/ps -e -o pid=,ppid=,rss=
+command:du	759565	757248	757247	1292678	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759566	757248	757247	1292679	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-control-1-capture-raw-code7-red	759567	757248	757247	1292680	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	759568	757248	757247	1292680	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759573	757248	757247	1292681	/bin/ps -e -o pid=,ppid=,rss=
+command:du	759626	757248	757247	1292782	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759628	757248	757247	1292783	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-control-2-capture-text-code0-red	759629	757248	757247	1292784	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	759630	757248	757247	1292784	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759635	757248	757247	1292785	/bin/ps -e -o pid=,ppid=,rss=
+command:du	759679	757248	757247	1292886	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759680	757248	757247	1292887	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-control-3-capture-text-code7-red	759681	757248	757247	1292888	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	759682	757248	757247	1292888	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759687	757248	757247	1292889	/bin/ps -e -o pid=,ppid=,rss=
+command:du	759874	757248	757247	1292990	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759875	757248	757247	1292992	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-control-4-overflow-stdout-red	759876	757248	757247	1292993	
+command:du	759877	757248	757247	1292993	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759883	757248	757247	1292994	/bin/ps -e -o pid=,ppid=,rss=
+command:du	759926	757248	757247	1293085	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759927	757248	757247	1293086	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-control-5-overflow-stderr-red	759928	757248	757247	1293087	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one -- --exact --nocapture --test-threads=1
+command:du	759929	757248	757247	1293087	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759934	757248	757247	1293088	/bin/ps -e -o pid=,ppid=,rss=
+command:du	759981	757248	757247	1293179	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759982	757248	757247	1293180	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-control-6-zero-none-red	759983	757248	757247	1293181	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process zero_output_cap_reports_output_limit_with_an_empty_retained_prefix -- --exact --nocapture --test-threads=1
+command:du	759984	757248	757247	1293181	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	759989	757248	757247	1293182	/bin/ps -e -o pid=,ppid=,rss=
+command:du	760030	757248	757247	1293283	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760031	757248	757247	1293284	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-control-7-zero-stdout-red	760033	757248	757247	1293285	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process zero_output_cap_reports_output_limit_with_an_empty_retained_prefix -- --exact --nocapture --test-threads=1
+command:du	760034	757248	757247	1293285	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760040	757248	757247	1293286	/bin/ps -e -o pid=,ppid=,rss=
+command:du	760082	757248	757247	1293387	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760083	757248	757247	1293388	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-control-8-zero-stderr-red	760084	757248	757247	1293389	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process zero_output_cap_reports_output_limit_with_an_empty_retained_prefix -- --exact --nocapture --test-threads=1
+command:du	760085	757248	757247	1293389	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760090	757248	757247	1293390	/bin/ps -e -o pid=,ppid=,rss=
+command:du	760132	757248	757247	1293481	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760133	757248	757247	1293482	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-control-9-deadline-raw-red	760134	757248	757247	1293483	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process run_deadline_returns_bounded_partial_output_after_terminating_child -- --exact --nocapture --test-threads=1
+command:du	760135	757248	757247	1293483	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760140	757248	757247	1293484	/bin/ps -e -o pid=,ppid=,rss=
+command:du	760182	757248	757247	1293585	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760183	757248	757247	1293586	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-control-10-deadline-text-red	760184	757248	757247	1293587	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process run_deadline_returns_bounded_partial_output_after_terminating_child -- --exact --nocapture --test-threads=1
+command:du	760185	757248	757247	1293587	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760191	757248	757247	1293588	/bin/ps -e -o pid=,ppid=,rss=
+command:du	760235	757248	757247	1293689	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760236	757248	757247	1293690	/bin/ps -e -o pid=,ppid=,rss=
+command:du	760238	757248	757247	1293701	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760239	757248	757247	1293702	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-control-11-unit-timeout-red	760240	757248	757247	1293703	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process unit_timeout_disables_configured_default_deadline -- --exact --nocapture --test-threads=1
+command:du	760241	757248	757247	1293703	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760246	757248	757247	1293704	/bin/ps -e -o pid=,ppid=,rss=
+command:du	760288	757248	757247	1293805	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760289	757248	757247	1293806	/bin/ps -e -o pid=,ppid=,rss=
+command:du	760291	757248	757247	1293817	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760292	757248	757247	1293818	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-control-12-unit-stdin-red	760293	757248	757247	1293819	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process unit_stdin_means_immediate_eof -- --exact --nocapture --test-threads=1
+command:du	760294	757248	757247	1293819	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760299	757248	757247	1293820	/bin/ps -e -o pid=,ppid=,rss=
+command:du	760341	757248	757247	1293911	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760342	757248	757247	1293912	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-control-13-cwd-positive-red	760343	757248	757247	1293913	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process process_cwd_uses_the_opened_filesystem_capability_after_root_replacement -- --exact --nocapture --test-threads=1
+command:du	760344	757248	757247	1293913	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760349	757248	757247	1293914	/bin/ps -e -o pid=,ppid=,rss=
+command:du	760389	757248	757247	1294005	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760390	757248	757247	1294006	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-control-14-cwd-denial-red	760391	757248	757247	1294007	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process process_cwd_uses_the_opened_filesystem_capability_after_root_replacement -- --exact --nocapture --test-threads=1
+command:du	760392	757248	757247	1294007	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760397	757248	757247	1294008	/bin/ps -e -o pid=,ppid=,rss=
+command:du	760437	757248	757247	1294099	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760438	757248	757247	1294100	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-control-15-lossy-expansion-red	760439	757248	757247	1294101	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process lossy_run_reports_engine_limit_expansion_without_returning_truncated_text -- --exact --nocapture --test-threads=1
+command:du	760440	757248	757247	1294101	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760445	757248	757247	1294102	/bin/ps -e -o pid=,ppid=,rss=
+command:du	760489	757248	757247	1294203	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760490	757248	757247	1294204	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-test-0-green	760491	757248	757247	1294205	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	760492	757248	757247	1294205	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760497	757248	757247	1294206	/bin/ps -e -o pid=,ppid=,rss=
+command:du	760545	757248	757247	1294307	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760546	757248	757247	1294308	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-test-1-green	760547	757248	757247	1294309	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one -- --exact --nocapture --test-threads=1
+command:du	760548	757248	757247	1294309	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760553	757248	757247	1294310	/bin/ps -e -o pid=,ppid=,rss=
+command:du	760567	757248	757247	1294321	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760568	757248	757247	1294322	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-test-2-green	760569	757248	757247	1294323	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process zero_output_cap_reports_output_limit_with_an_empty_retained_prefix -- --exact --nocapture --test-threads=1
+command:du	760570	757248	757247	1294323	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760576	757248	757247	1294324	/bin/ps -e -o pid=,ppid=,rss=
+command:du	760586	757248	757247	1294345	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760587	757248	757247	1294346	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-test-3-green	760588	757248	757247	1294347	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process run_deadline_returns_bounded_partial_output_after_terminating_child -- --exact --nocapture --test-threads=1
+command:du	760589	757248	757247	1294347	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760594	757248	757247	1294348	/bin/ps -e -o pid=,ppid=,rss=
+command:du	760606	757248	757247	1294379	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760607	757248	757247	1294380	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-test-4-green	760608	757248	757247	1294381	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process unit_timeout_disables_configured_default_deadline -- --exact --nocapture --test-threads=1
+command:du	760609	757248	757247	1294381	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760614	757248	757247	1294382	/bin/ps -e -o pid=,ppid=,rss=
+command:du	760624	757248	757247	1294412	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760625	757248	757247	1294414	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-test-5-green	760626	757248	757247	1294414	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process unit_stdin_means_immediate_eof -- --exact --nocapture --test-threads=1
+command:du	760628	757248	757247	1294415	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760633	757248	757247	1294416	/bin/ps -e -o pid=,ppid=,rss=
+command:du	760641	757248	757247	1294426	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760642	757248	757247	1294428	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-test-6-green	760643	757248	757247	1294428	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process process_cwd_uses_the_opened_filesystem_capability_after_root_replacement -- --exact --nocapture --test-threads=1
+command:du	760644	757248	757247	1294428	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760649	757248	757247	1294430	/bin/ps -e -o pid=,ppid=,rss=
+command:du	760657	757248	757247	1294450	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760658	757248	757247	1294451	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-test-7-green	760659	757248	757247	1294452	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process lossy_run_reports_engine_limit_expansion_without_returning_truncated_text -- --exact --nocapture --test-threads=1
+command:du	760660	757248	757247	1294452	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760665	757248	757247	1294453	/bin/ps -e -o pid=,ppid=,rss=
+command:du	760673	757248	757247	1294464	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760675	757248	757247	1294465	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-control-0-capture-raw-code0-red	760676	757248	757247	1294466	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	760677	757248	757247	1294466	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760682	757248	757247	1294467	/bin/ps -e -o pid=,ppid=,rss=
+command:du	760772	757248	757247	1294568	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760773	757248	757247	1294569	/bin/ps -e -o pid=,ppid=,rss=
+command:du	760824	757248	757247	1294670	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760825	757248	757247	1294672	
+command:du	760839	757248	757247	1294773	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760840	757248	757247	1294774	/bin/ps -e -o pid=,ppid=,rss=
+command:du	760851	757248	757247	1294875	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760852	757248	757247	1294876	/bin/ps -e -o pid=,ppid=,rss=
+command:du	760863	757248	757247	1294977	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760864	757248	757247	1294978	/bin/ps -e -o pid=,ppid=,rss=
+command:du	760884	757248	757247	1295079	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760886	757248	757247	1295080	/bin/ps -e -o pid=,ppid=,rss=
+command:du	760906	757248	757247	1295181	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760907	757248	757247	1295182	/bin/ps -e -o pid=,ppid=,rss=
+command:du	760960	757248	757247	1295283	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760961	757248	757247	1295284	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-control-1-capture-raw-code7-red	760962	757248	757247	1295285	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	760963	757248	757247	1295285	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	760968	757248	757247	1295287	/bin/ps -e -o pid=,ppid=,rss=
+command:du	761014	757248	757247	1295387	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761015	757248	757247	1295389	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-control-2-capture-text-code0-red	761016	757248	757247	1295389	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	761017	757248	757247	1295390	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761022	757248	757247	1295391	/bin/ps -e -o pid=,ppid=,rss=
+command:du	761066	757248	757247	1295492	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761068	757248	757247	1295493	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-control-3-capture-text-code7-red	761069	757248	757247	1295494	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	761070	757248	757247	1295494	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761075	757248	757247	1295495	/bin/ps -e -o pid=,ppid=,rss=
+command:du	761123	757248	757247	1295596	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761124	757248	757247	1295597	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-control-4-overflow-stdout-red	761125	757248	757247	1295598	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one -- --exact --nocapture --test-threads=1
+command:du	761126	757248	757247	1295598	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761131	757248	757247	1295599	/bin/ps -e -o pid=,ppid=,rss=
+command:du	761181	757248	757247	1295690	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761182	757248	757247	1295691	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-control-5-overflow-stderr-red	761183	757248	757247	1295692	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one -- --exact --nocapture --test-threads=1
+command:du	761184	757248	757247	1295692	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761189	757248	757247	1295693	/bin/ps -e -o pid=,ppid=,rss=
+command:du	761236	757248	757247	1295784	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761238	757248	757247	1295785	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-control-6-zero-none-red	761239	757248	757247	1295786	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process zero_output_cap_reports_output_limit_with_an_empty_retained_prefix -- --exact --nocapture --test-threads=1
+command:du	761240	757248	757247	1295786	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761245	757248	757247	1295787	/bin/ps -e -o pid=,ppid=,rss=
+command:du	761286	757248	757247	1295888	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761287	757248	757247	1295889	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-control-7-zero-stdout-red	761288	757248	757247	1295890	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process zero_output_cap_reports_output_limit_with_an_empty_retained_prefix -- --exact --nocapture --test-threads=1
+command:du	761289	757248	757247	1295890	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761294	757248	757247	1295892	/bin/ps -e -o pid=,ppid=,rss=
+command:du	761344	757248	757247	1295992	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761345	757248	757247	1295994	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-control-8-zero-stderr-red	761346	757248	757247	1295994	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process zero_output_cap_reports_output_limit_with_an_empty_retained_prefix -- --exact --nocapture --test-threads=1
+command:du	761347	757248	757247	1295995	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761352	757248	757247	1295996	/bin/ps -e -o pid=,ppid=,rss=
+command:du	761395	757248	757247	1296097	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761397	757248	757247	1296098	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-control-9-deadline-raw-red	761398	757248	757247	1296099	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process run_deadline_returns_bounded_partial_output_after_terminating_child -- --exact --nocapture --test-threads=1
+command:du	761399	757248	757247	1296099	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761404	757248	757247	1296100	/bin/ps -e -o pid=,ppid=,rss=
+command:du	761446	757248	757247	1296201	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761447	757248	757247	1296202	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-control-10-deadline-text-red	761448	757248	757247	1296203	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process run_deadline_returns_bounded_partial_output_after_terminating_child -- --exact --nocapture --test-threads=1
+command:du	761449	757248	757247	1296203	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761454	757248	757247	1296204	/bin/ps -e -o pid=,ppid=,rss=
+command:du	761498	757248	757247	1296305	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761499	757248	757247	1296306	/bin/ps -e -o pid=,ppid=,rss=
+command:du	761501	757248	757247	1296317	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761502	757248	757247	1296318	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-control-11-unit-timeout-red	761504	757248	757247	1296319	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process unit_timeout_disables_configured_default_deadline -- --exact --nocapture --test-threads=1
+command:du	761505	757248	757247	1296319	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761510	757248	757247	1296320	/bin/ps -e -o pid=,ppid=,rss=
+command:du	761552	757248	757247	1296421	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761553	757248	757247	1296422	/bin/ps -e -o pid=,ppid=,rss=
+command:du	761556	757248	757247	1296443	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761557	757248	757247	1296444	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-control-12-unit-stdin-red	761558	757248	757247	1296445	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process unit_stdin_means_immediate_eof -- --exact --nocapture --test-threads=1
+command:du	761559	757248	757247	1296445	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761564	757248	757247	1296446	/bin/ps -e -o pid=,ppid=,rss=
+command:du	761605	757248	757247	1296537	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761606	757248	757247	1296538	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-control-13-cwd-positive-red	761607	757248	757247	1296539	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process process_cwd_uses_the_opened_filesystem_capability_after_root_replacement -- --exact --nocapture --test-threads=1
+command:du	761608	757248	757247	1296539	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761614	757248	757247	1296540	/bin/ps -e -o pid=,ppid=,rss=
+command:du	761655	757248	757247	1296641	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761656	757248	757247	1296642	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-control-14-cwd-denial-red	761657	757248	757247	1296643	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process process_cwd_uses_the_opened_filesystem_capability_after_root_replacement -- --exact --nocapture --test-threads=1
+command:du	761658	757248	757247	1296643	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761663	757248	757247	1296644	/bin/ps -e -o pid=,ppid=,rss=
+command:du	761704	757248	757247	1296745	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761705	757248	757247	1296746	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-control-15-lossy-expansion-red	761706	757248	757247	1296747	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process lossy_run_reports_engine_limit_expansion_without_returning_truncated_text -- --exact --nocapture --test-threads=1
+command:du	761707	757248	757247	1296747	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761712	757248	757247	1296748	/bin/ps -e -o pid=,ppid=,rss=
+command:du	761754	757248	757247	1296849	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761755	757248	757247	1296850	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-test-0-green	761756	757248	757247	1296851	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	761757	757248	757247	1296851	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761763	757248	757247	1296853	/bin/ps -e -o pid=,ppid=,rss=
+command:du	761810	757248	757247	1296943	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761811	757248	757247	1296945	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-test-1-green	761812	757248	757247	1296945	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one -- --exact --nocapture --test-threads=1
+command:du	761813	757248	757247	1296945	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761818	757248	757247	1296947	/bin/ps -e -o pid=,ppid=,rss=
+command:du	761832	757248	757247	1296957	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761833	757248	757247	1296959	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-test-2-green	761834	757248	757247	1296959	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process zero_output_cap_reports_output_limit_with_an_empty_retained_prefix -- --exact --nocapture --test-threads=1
+command:du	761835	757248	757247	1296959	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761840	757248	757247	1296961	/bin/ps -e -o pid=,ppid=,rss=
+command:du	761850	757248	757247	1296981	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761851	757248	757247	1296982	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-test-3-green	761853	757248	757247	1296983	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process run_deadline_returns_bounded_partial_output_after_terminating_child -- --exact --nocapture --test-threads=1
+command:du	761854	757248	757247	1296983	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761859	757248	757247	1296984	/bin/ps -e -o pid=,ppid=,rss=
+command:du	761871	757248	757247	1297015	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761872	757248	757247	1297016	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-test-4-green	761873	757248	757247	1297017	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process unit_timeout_disables_configured_default_deadline -- --exact --nocapture --test-threads=1
+command:du	761874	757248	757247	1297017	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761879	757248	757247	1297018	/bin/ps -e -o pid=,ppid=,rss=
+command:du	761889	757248	757247	1297049	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761890	757248	757247	1297050	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-test-5-green	761891	757248	757247	1297051	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process unit_stdin_means_immediate_eof -- --exact --nocapture --test-threads=1
+command:du	761892	757248	757247	1297051	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761897	757248	757247	1297052	/bin/ps -e -o pid=,ppid=,rss=
+command:du	761906	757248	757247	1297073	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761908	757248	757247	1297074	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-test-6-green	761909	757248	757247	1297075	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process process_cwd_uses_the_opened_filesystem_capability_after_root_replacement -- --exact --nocapture --test-threads=1
+command:du	761910	757248	757247	1297075	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761915	757248	757247	1297076	/bin/ps -e -o pid=,ppid=,rss=
+command:du	761922	757248	757247	1297087	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761923	757248	757247	1297088	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-test-7-green	761924	757248	757247	1297089	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,metadata,serde --test sys_process lossy_run_reports_engine_limit_expansion_without_returning_truncated_text -- --exact --nocapture --test-threads=1
+command:du	761925	757248	757247	1297089	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761930	757248	757247	1297090	/bin/ps -e -o pid=,ppid=,rss=
+command:du	761938	757248	757247	1297101	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761939	757248	757247	1297102	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-control-0-capture-raw-code0-red	761940	757248	757247	1297103	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	761941	757248	757247	1297103	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	761947	757248	757247	1297104	/bin/ps -e -o pid=,ppid=,rss=
+command:du	762000	757248	757247	1297205	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762001	757248	757247	1297206	/bin/ps -e -o pid=,ppid=,rss=
+command:du	762012	757248	757247	1297307	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762013	757248	757247	1297308	/bin/ps -e -o pid=,ppid=,rss=
+command:du	762024	757248	757247	1297409	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762025	757248	757247	1297410	/bin/ps -e -o pid=,ppid=,rss=
+command:du	762036	757248	757247	1297511	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762037	757248	757247	1297513	/bin/ps -e -o pid=,ppid=,rss=
+command:du	762058	757248	757247	1297613	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762059	757248	757247	1297615	/bin/ps -e -o pid=,ppid=,rss=
+command:du	762093	757248	757247	1297716	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762094	757248	757247	1297717	/bin/ps -e -o pid=,ppid=,rss=
+command:du	762129	757248	757247	1297788	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762130	757248	757247	1297789	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-control-1-capture-raw-code7-red	762132	757248	757247	1297790	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	762133	757248	757247	1297790	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762138	757248	757247	1297791	/bin/ps -e -o pid=,ppid=,rss=
+command:du	762184	757248	757247	1297892	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762185	757248	757247	1297893	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-control-2-capture-text-code0-red	762186	757248	757247	1297894	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	762187	757248	757247	1297894	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762192	757248	757247	1297895	/bin/ps -e -o pid=,ppid=,rss=
+command:du	762241	757248	757247	1297996	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762242	757248	757247	1297997	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-control-3-capture-text-code7-red	762243	757248	757247	1297998	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	762244	757248	757247	1297998	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762249	757248	757247	1297999	/bin/ps -e -o pid=,ppid=,rss=
+command:du	762297	757248	757247	1298100	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762299	757248	757247	1298102	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-control-4-overflow-stdout-red	762300	757248	757247	1298103	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one -- --exact --nocapture --test-threads=1
+command:du	762301	757248	757247	1298103	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762306	757248	757247	1298104	/bin/ps -e -o pid=,ppid=,rss=
+command:du	762349	757248	757247	1298195	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762350	757248	757247	1298196	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-control-5-overflow-stderr-red	762351	757248	757247	1298197	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one -- --exact --nocapture --test-threads=1
+command:du	762352	757248	757247	1298197	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762357	757248	757247	1298198	/bin/ps -e -o pid=,ppid=,rss=
+command:du	762405	757248	757247	1298299	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762406	757248	757247	1298300	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-control-6-zero-none-red	762407	757248	757247	1298301	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process zero_output_cap_reports_output_limit_with_an_empty_retained_prefix -- --exact --nocapture --test-threads=1
+command:du	762408	757248	757247	1298301	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762413	757248	757247	1298302	/bin/ps -e -o pid=,ppid=,rss=
+command:du	762454	757248	757247	1298403	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762456	757248	757247	1298404	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-control-7-zero-stdout-red	762457	757248	757247	1298405	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process zero_output_cap_reports_output_limit_with_an_empty_retained_prefix -- --exact --nocapture --test-threads=1
+command:du	762458	757248	757247	1298405	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762463	757248	757247	1298406	/bin/ps -e -o pid=,ppid=,rss=
+command:du	762505	757248	757247	1298507	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762506	757248	757247	1298508	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-control-8-zero-stderr-red	762507	757248	757247	1298509	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process zero_output_cap_reports_output_limit_with_an_empty_retained_prefix -- --exact --nocapture --test-threads=1
+command:du	762508	757248	757247	1298509	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762513	757248	757247	1298510	/bin/ps -e -o pid=,ppid=,rss=
+command:du	762555	757248	757247	1298601	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762556	757248	757247	1298603	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-control-9-deadline-raw-red	762557	757248	757247	1298603	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process run_deadline_returns_bounded_partial_output_after_terminating_child -- --exact --nocapture --test-threads=1
+command:du	762558	757248	757247	1298603	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762563	757248	757247	1298605	/bin/ps -e -o pid=,ppid=,rss=
+command:du	762612	757248	757247	1298705	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762614	757248	757247	1298707	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-control-10-deadline-text-red	762615	757248	757247	1298708	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process run_deadline_returns_bounded_partial_output_after_terminating_child -- --exact --nocapture --test-threads=1
+command:du	762616	757248	757247	1298708	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762621	757248	757247	1298709	/bin/ps -e -o pid=,ppid=,rss=
+command:du	762665	757248	757247	1298810	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762666	757248	757247	1298811	/bin/ps -e -o pid=,ppid=,rss=
+command:du	762668	757248	757247	1298822	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762669	757248	757247	1298823	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-control-11-unit-timeout-red	762670	757248	757247	1298824	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process unit_timeout_disables_configured_default_deadline -- --exact --nocapture --test-threads=1
+command:du	762671	757248	757247	1298824	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762676	757248	757247	1298825	/bin/ps -e -o pid=,ppid=,rss=
+command:du	762718	757248	757247	1298926	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762719	757248	757247	1298927	/bin/ps -e -o pid=,ppid=,rss=
+command:du	762723	757248	757247	1298948	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762724	757248	757247	1298949	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-control-12-unit-stdin-red	762725	757248	757247	1298950	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process unit_stdin_means_immediate_eof -- --exact --nocapture --test-threads=1
+command:du	762726	757248	757247	1298950	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762731	757248	757247	1298951	/bin/ps -e -o pid=,ppid=,rss=
+command:du	762772	757248	757247	1299042	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762773	757248	757247	1299043	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-control-13-cwd-positive-red	762774	757248	757247	1299044	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process process_cwd_uses_the_opened_filesystem_capability_after_root_replacement -- --exact --nocapture --test-threads=1
+command:du	762775	757248	757247	1299044	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762780	757248	757247	1299045	/bin/ps -e -o pid=,ppid=,rss=
+command:du	762820	757248	757247	1299136	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762821	757248	757247	1299137	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-control-14-cwd-denial-red	762822	757248	757247	1299138	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process process_cwd_uses_the_opened_filesystem_capability_after_root_replacement -- --exact --nocapture --test-threads=1
+command:du	762823	757248	757247	1299138	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762829	757248	757247	1299139	/bin/ps -e -o pid=,ppid=,rss=
+command:du	762870	757248	757247	1299240	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762871	757248	757247	1299241	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-control-15-lossy-expansion-red	762872	757248	757247	1299242	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process lossy_run_reports_engine_limit_expansion_without_returning_truncated_text -- --exact --nocapture --test-threads=1
+command:du	762873	757248	757247	1299242	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762878	757248	757247	1299243	/bin/ps -e -o pid=,ppid=,rss=
+command:du	762919	757248	757247	1299334	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762920	757248	757247	1299335	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-test-0-green	762921	757248	757247	1299336	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	762922	757248	757247	1299336	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762927	757248	757247	1299337	/bin/ps -e -o pid=,ppid=,rss=
+command:du	762975	757248	757247	1299438	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762976	757248	757247	1299439	/bin/ps -e -o pid=,ppid=,rss=
+command:du	762978	757248	757247	1299450	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762980	757248	757247	1299451	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-test-1-green	762981	757248	757247	1299452	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one -- --exact --nocapture --test-threads=1
+command:du	762982	757248	757247	1299452	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	762987	757248	757247	1299453	/bin/ps -e -o pid=,ppid=,rss=
+command:du	763001	757248	757247	1299464	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763002	757248	757247	1299465	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-test-2-green	763003	757248	757247	1299466	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process zero_output_cap_reports_output_limit_with_an_empty_retained_prefix -- --exact --nocapture --test-threads=1
+command:du	763004	757248	757247	1299466	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763009	757248	757247	1299467	/bin/ps -e -o pid=,ppid=,rss=
+command:du	763019	757248	757247	1299488	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763020	757248	757247	1299489	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-test-3-green	763021	757248	757247	1299490	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process run_deadline_returns_bounded_partial_output_after_terminating_child -- --exact --nocapture --test-threads=1
+command:du	763022	757248	757247	1299490	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763027	757248	757247	1299491	/bin/ps -e -o pid=,ppid=,rss=
+command:du	763040	757248	757247	1299522	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763041	757248	757247	1299523	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-test-4-green	763042	757248	757247	1299524	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process unit_timeout_disables_configured_default_deadline -- --exact --nocapture --test-threads=1
+command:du	763043	757248	757247	1299524	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763048	757248	757247	1299525	/bin/ps -e -o pid=,ppid=,rss=
+command:du	763058	757248	757247	1299556	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763059	757248	757247	1299557	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-test-5-green	763061	757248	757247	1299558	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process unit_stdin_means_immediate_eof -- --exact --nocapture --test-threads=1
+command:du	763062	757248	757247	1299558	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763067	757248	757247	1299559	/bin/ps -e -o pid=,ppid=,rss=
+command:du	763076	757248	757247	1299580	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763077	757248	757247	1299581	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-test-6-green	763078	757248	757247	1299582	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process process_cwd_uses_the_opened_filesystem_capability_after_root_replacement -- --exact --nocapture --test-threads=1
+command:du	763079	757248	757247	1299582	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763085	757248	757247	1299583	/bin/ps -e -o pid=,ppid=,rss=
+command:du	763093	757248	757247	1299604	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763094	757248	757247	1299605	/bin/ps -e -o pid=,ppid=,rss=
+command:row-3-test-7-green	763095	757248	757247	1299606	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,net,sync,metadata,serde --test sys_process lossy_run_reports_engine_limit_expansion_without_returning_truncated_text -- --exact --nocapture --test-threads=1
+command:du	763096	757248	757247	1299606	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763101	757248	757247	1299607	/bin/ps -e -o pid=,ppid=,rss=
+command:du	763110	757248	757247	1299628	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763111	757248	757247	1299629	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-control-0-capture-raw-code0-red	763112	757248	757247	1299630	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	763113	757248	757247	1299630	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763118	757248	757247	1299631	/bin/ps -e -o pid=,ppid=,rss=
+command:du	763146	757248	757247	1299732	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763148	757248	757247	1299733	/bin/ps -e -o pid=,ppid=,rss=
+command:du	763159	757248	757247	1299834	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763160	757248	757247	1299835	/bin/ps -e -o pid=,ppid=,rss=
+command:du	763171	757248	757247	1299936	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763172	757248	757247	1299938	/bin/ps -e -o pid=,ppid=,rss=
+command:du	763195	757248	757247	1300038	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763196	757248	757247	1300040	/bin/ps -e -o pid=,ppid=,rss=
+command:du	763227	757248	757247	1300141	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763228	757248	757247	1300142	/bin/ps -e -o pid=,ppid=,rss=
+command:du	763263	757248	757247	1300213	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763264	757248	757247	1300214	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-control-1-capture-raw-code7-red	763265	757248	757247	1300215	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	763266	757248	757247	1300215	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763271	757248	757247	1300216	/bin/ps -e -o pid=,ppid=,rss=
+command:du	763317	757248	757247	1300317	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763319	757248	757247	1300318	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-control-2-capture-text-code0-red	763320	757248	757247	1300319	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	763321	757248	757247	1300319	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763326	757248	757247	1300320	/bin/ps -e -o pid=,ppid=,rss=
+command:du	763370	757248	757247	1300421	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763371	757248	757247	1300422	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-control-3-capture-text-code7-red	763372	757248	757247	1300423	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	763373	757248	757247	1300423	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763378	757248	757247	1300425	/bin/ps -e -o pid=,ppid=,rss=
+command:du	763425	757248	757247	1300515	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763426	757248	757247	1300517	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-control-4-overflow-stdout-red	763427	757248	757247	1300518	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one -- --exact --nocapture --test-threads=1
+command:du	763428	757248	757247	1300518	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763433	757248	757247	1300519	/bin/ps -e -o pid=,ppid=,rss=
+command:du	763476	757248	757247	1300610	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763478	757248	757247	1300611	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-control-5-overflow-stderr-red	763479	757248	757247	1300612	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one -- --exact --nocapture --test-threads=1
+command:du	763480	757248	757247	1300612	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763485	757248	757247	1300613	/bin/ps -e -o pid=,ppid=,rss=
+command:du	763532	757248	757247	1300704	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763533	757248	757247	1300705	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-control-6-zero-none-red	763534	757248	757247	1300706	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process zero_output_cap_reports_output_limit_with_an_empty_retained_prefix -- --exact --nocapture --test-threads=1
+command:du	763535	757248	757247	1300706	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763540	757248	757247	1300707	/bin/ps -e -o pid=,ppid=,rss=
+command:du	763580	757248	757247	1300798	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763581	757248	757247	1300799	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-control-7-zero-stdout-red	763582	757248	757247	1300800	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process zero_output_cap_reports_output_limit_with_an_empty_retained_prefix -- --exact --nocapture --test-threads=1
+command:du	763583	757248	757247	1300800	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763589	757248	757247	1300801	/bin/ps -e -o pid=,ppid=,rss=
+command:du	763630	757248	757247	1300892	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763631	757248	757247	1300893	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-control-8-zero-stderr-red	763632	757248	757247	1300894	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process zero_output_cap_reports_output_limit_with_an_empty_retained_prefix -- --exact --nocapture --test-threads=1
+command:du	763633	757248	757247	1300894	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763638	757248	757247	1300896	/bin/ps -e -o pid=,ppid=,rss=
+command:du	763681	757248	757247	1300996	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763682	757248	757247	1300998	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-control-9-deadline-raw-red	763683	757248	757247	1300999	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process run_deadline_returns_bounded_partial_output_after_terminating_child -- --exact --nocapture --test-threads=1
+command:du	763684	757248	757247	1300999	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763689	757248	757247	1301000	/bin/ps -e -o pid=,ppid=,rss=
+command:du	763730	757248	757247	1301091	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763731	757248	757247	1301092	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-control-10-deadline-text-red	763732	757248	757247	1301093	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process run_deadline_returns_bounded_partial_output_after_terminating_child -- --exact --nocapture --test-threads=1
+command:du	763733	757248	757247	1301093	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763739	757248	757247	1301094	/bin/ps -e -o pid=,ppid=,rss=
+command:du	763783	757248	757247	1301195	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763784	757248	757247	1301196	/bin/ps -e -o pid=,ppid=,rss=
+command:du	763786	757248	757247	1301207	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763787	757248	757247	1301208	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-control-11-unit-timeout-red	763788	757248	757247	1301209	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process unit_timeout_disables_configured_default_deadline -- --exact --nocapture --test-threads=1
+command:du	763789	757248	757247	1301209	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763794	757248	757247	1301210	/bin/ps -e -o pid=,ppid=,rss=
+command:du	763836	757248	757247	1301311	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763837	757248	757247	1301312	/bin/ps -e -o pid=,ppid=,rss=
+command:du	763840	757248	757247	1301333	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763841	757248	757247	1301334	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-control-12-unit-stdin-red	763842	757248	757247	1301335	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process unit_stdin_means_immediate_eof -- --exact --nocapture --test-threads=1
+command:du	763843	757248	757247	1301335	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763849	757248	757247	1301336	/bin/ps -e -o pid=,ppid=,rss=
+command:du	763889	757248	757247	1301417	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763890	757248	757247	1301418	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-control-13-cwd-positive-red	763891	757248	757247	1301419	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process process_cwd_uses_the_opened_filesystem_capability_after_root_replacement -- --exact --nocapture --test-threads=1
+command:du	763892	757248	757247	1301419	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763897	757248	757247	1301420	/bin/ps -e -o pid=,ppid=,rss=
+command:du	763937	757248	757247	1301511	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763938	757248	757247	1301512	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-control-14-cwd-denial-red	763939	757248	757247	1301513	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process process_cwd_uses_the_opened_filesystem_capability_after_root_replacement -- --exact --nocapture --test-threads=1
+command:du	763940	757248	757247	1301513	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763945	757248	757247	1301514	/bin/ps -e -o pid=,ppid=,rss=
+command:du	763984	757248	757247	1301595	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763985	757248	757247	1301596	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-control-15-lossy-expansion-red	763987	757248	757247	1301597	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process lossy_run_reports_engine_limit_expansion_without_returning_truncated_text -- --exact --nocapture --test-threads=1
+command:du	763988	757248	757247	1301597	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	763993	757248	757247	1301598	/bin/ps -e -o pid=,ppid=,rss=
+command:du	764041	757248	757247	1301689	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	764042	757248	757247	1301690	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-test-0-green	764043	757248	757247	1301691	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data -- --exact --nocapture --test-threads=1
+command:du	764044	757248	757247	1301691	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	764049	757248	757247	1301693	/bin/ps -e -o pid=,ppid=,rss=
+command:du	764096	757248	757247	1301783	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	764097	757248	757247	1301785	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-test-1-green	764098	757248	757247	1301785	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one -- --exact --nocapture --test-threads=1
+command:du	764099	757248	757247	1301785	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	764104	757248	757247	1301787	/bin/ps -e -o pid=,ppid=,rss=
+command:du	764118	757248	757247	1301797	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	764119	757248	757247	1301799	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-test-2-green	764121	757248	757247	1301799	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process zero_output_cap_reports_output_limit_with_an_empty_retained_prefix -- --exact --nocapture --test-threads=1
+command:du	764122	757248	757247	1301799	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	764127	757248	757247	1301801	/bin/ps -e -o pid=,ppid=,rss=
+command:du	764137	757248	757247	1301821	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	764138	757248	757247	1301822	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-test-3-green	764139	757248	757247	1301823	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process run_deadline_returns_bounded_partial_output_after_terminating_child -- --exact --nocapture --test-threads=1
+command:du	764140	757248	757247	1301823	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	764145	757248	757247	1301824	/bin/ps -e -o pid=,ppid=,rss=
+command:du	764157	757248	757247	1301855	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	764158	757248	757247	1301856	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-test-4-green	764159	757248	757247	1301857	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process unit_timeout_disables_configured_default_deadline -- --exact --nocapture --test-threads=1
+command:du	764160	757248	757247	1301857	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	764165	757248	757247	1301858	/bin/ps -e -o pid=,ppid=,rss=
+command:du	764175	757248	757247	1301889	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	764177	757248	757247	1301890	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-test-5-green	764178	757248	757247	1301891	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process unit_stdin_means_immediate_eof -- --exact --nocapture --test-threads=1
+command:du	764179	757248	757247	1301891	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	764184	757248	757247	1301892	/bin/ps -e -o pid=,ppid=,rss=
+command:du	764193	757248	757247	1301913	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	764194	757248	757247	1301914	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-test-6-green	764195	757248	757247	1301915	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process process_cwd_uses_the_opened_filesystem_capability_after_root_replacement -- --exact --nocapture --test-threads=1
+command:du	764196	757248	757247	1301915	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	764201	757248	757247	1301916	/bin/ps -e -o pid=,ppid=,rss=
+command:du	764209	757248	757247	1301937	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	764210	757248	757247	1301938	/bin/ps -e -o pid=,ppid=,rss=
+command:row-4-test-7-green	764211	757248	757247	1301939	/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process lossy_run_reports_engine_limit_expansion_without_returning_truncated_text -- --exact --nocapture --test-threads=1
+command:du	764212	757248	757247	1301939	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	764218	757248	757247	1301940	/bin/ps -e -o pid=,ppid=,rss=
+command:du	764227	757248	757247	1301961	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l
+command:ps	764228	757248	757247	1301962	/bin/ps -e -o pid=,ppid=,rss=

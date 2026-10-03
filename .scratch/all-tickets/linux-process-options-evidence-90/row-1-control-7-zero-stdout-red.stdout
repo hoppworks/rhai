@@ -1,0 +1,11 @@
+
+running 1 test
+test zero_output_cap_reports_output_limit_with_an_empty_retained_prefix ... FAILED
+
+failures:
+
+failures:
+    zero_output_cap_reports_output_limit_with_an_empty_retained_prefix
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 41 filtered out; finished in 0.11s
+

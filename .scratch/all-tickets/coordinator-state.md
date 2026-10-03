@@ -86,7 +86,7 @@ Current authoritative history through this rewrite is Git commit
 10d4a0d55400ebe8c24feff134e7161ff36bf8d5, this same state path. It retains
 all earlier cause/attempt/resource/source applicability records. Read that
 history for consumed work, not superseded next actions. No reset occurred.
-Last independently read-back fork main9e56d5f2ef42303493907907454562f72a24b60b; only remote main, lowercase
+Last independently read-back fork main469998db6e23e3ce68f000fa01bf2dc44f709ced; only remote main, lowercase
 human author/committer. Goal active and incomplete.
 
 ### Accepted current Linux non-process package
@@ -985,3 +985,62 @@ Then close the remaining eight process option/capture sensitivity requirements
 with specific controls and affected reruns, reusing valid89positive evidence
 where unchanged. Preserve uniquePID-path/latency/census limitations, all broader
 strictacceptance open. Usage/cost/token metrics for roles unavailable/unknown.
+
+Verified integration469998db6e23e3ce68f000fa01bf2dc44f709ced: pushterminal0,
+independentls-remote samehead andonlymain; author/committerexactlowercase
+hoppworks <daniel@hoppworks.de>.224exactpackagefilescommitted, foreign/historical
+CLIlogs preservedunstaged. Native31727/export87006/push62642 terminal0; never
+poll/restart them. No own liveheavyprocess/build/stage. Overallgoalincomplete,
+nextremainingeightprocesscase sensitivity plus recordedplatform/releasegaps.
+This ownedpostpushbookkeeping entersnextcoherentpackage; rootworktreeremains
+needed forcampaign, no archivewhileactive.
+
+## Current remaining process-options sensitivity package
+Source469998db6e23e3ce68f000fa01bf2dc44f709ced unchanged production/test inputs
+relative to accepted89. Remaining eight exact cases have positive evidence89;
+new controls target each claimed branch (raw/text, exit0/7, stdout/stderr and
+zero-cap silent/stdout/stderr), with independent cleanup preceding intended RED
+and exact original restoration before GREEN. Worker linux_wait_entry_prepare
+owns recipe adaptation, same combined Expert review context retained. No native
+launch/stage created; prospective correctness90, Unix89 consumed. Bounds600/585/
+540seconds with30export reserve, jobs2/desc16/2GiB and storage stop1572864KiB
+unchanged. One30-minute active-work planning checkpoint; no calibration or reset
+of stopped histories. Fresh workhorse tool inventory empty,704263118848freebytes;
+check again before launch. Remote independently469998 andsolemain. No retained
+resource. Current faba3db global/project/campaign/e2e andCoordinator template
+loaded; Worker must confirm before next action. Root preserves foreignlogs.
+
+Remainingoptions preparation:16branchcontrols/fiverows=80RED,8originalcases/
+fiverows=40GREEN,120testcommands sharebuild. Source findings (stagepaths/counts,
+partialRuststatementanchors, cleanupreceiptrepeatanchors, wrongEOFexpectation,
+missingintendeddiagnostics/rawmessage) consolidated beforelaunch in sameWorker/
+combinedExpert context; nofailednative/productcorrection. Finalproofac679734,
+stage3af2ec48,launcher4c3df724; AST/bashsyntax/all16pureoverlayspass. Current
+source/archive469998/3ab47017 andproductiontestdiff89empty; previouspositives
+retainapplicability. Finalreviewreadinesspending, noownedstage/build yet.
+
+Finalcombinedreadinessaccepted exactac679734/3af2ec48/4c3df724. Stage6156
+terminal0; rootstagedpinsmatch, freshheavyinventoryempty704262340608freebytes.
+Nativecorrectness90dispatchnow, Unixcumulative90consumed. Ownedstage
+/root/rhai-linux-process-options-20261003-469998db andcentralscope
+/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db;
+finite600/585/540secondsandresourcebounds unchanged. Nativeacceptancepending.
+
+Native90terminal0:80intendedRED101/40originalGREEN0,137.482seconds export.
+Rootactualrecipesbyteequal; source379db748/manifests/lockrestoredunchanged.
+729exactPIDstartidentities/95uniquecontrolfixturePIDsabsent,groupsempty,scope/
+runtimeabsent.401hashmatchedstagefiles/sixdirsremoved. Samples987612KiBRSS/
+1117404storage/7desc,notpeaks. Sameconditionalproc-exitrace preservedstatuses0.
+Rootfirstlocalread requested predecessorfilename sampled-maxima.json instead
+ofadapterresource-samples.json; read-only observation corrected usingfileinventory,
+no rerun/correction. Combinednativeacceptancepending, narrowproofrecordprepared.
+No retainedresource. Unix90 cumulative; stoppedhistories/overhead85unchanged.
+
+Combinedindependentnative90reviewACCEPTED targeted8case/16branch/fiverowproof;
+all123commands/80overlayhashes independentlyverified, no materialfinding.
+Eightremainingcases sensitivityclosednarrowly, fullticketandplatformreleaseopen.
+Proof/reviewandticket03updated; currentturnPROGRESS,newacceptedrequirements,
+no nativefailedcorrection/infrastructurerecovery. Ownintegrationtoforkmainnext.
+Nextactionrequiredchecked/no_float/unchecked processfeaturegaps or remaining
+managed/faultcriteria; retain all90/89validproof, do notrenewstoppedchains.
+No retainedbuild/cache/stage; worktreeremainsneeded. Rolecost/token/cacheunknown.

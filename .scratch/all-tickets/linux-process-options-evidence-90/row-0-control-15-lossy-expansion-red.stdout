@@ -1,0 +1,11 @@
+
+running 1 test
+test lossy_run_reports_engine_limit_expansion_without_returning_truncated_text ... FAILED
+
+failures:
+
+failures:
+    lossy_run_reports_engine_limit_expansion_without_returning_truncated_text
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 40 filtered out; finished in 0.00s
+

@@ -1,0 +1,11 @@
+
+running 1 test
+test run_deadline_returns_bounded_partial_output_after_terminating_child ... FAILED
+
+failures:
+
+failures:
+    run_deadline_returns_bounded_partial_output_after_terminating_child
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 41 filtered out; finished in 0.22s
+

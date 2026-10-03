@@ -1,0 +1,11 @@
+
+running 1 test
+test run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data ... FAILED
+
+failures:
+
+failures:
+    run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 41 filtered out; finished in 0.00s
+

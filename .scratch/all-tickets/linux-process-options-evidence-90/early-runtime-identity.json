@@ -1,0 +1,19 @@
+{
+  "captured_before_stage_validation_or_external_command": true,
+  "helper": {
+    "cmdline": "python3 /root/rhai-linux-process-options-20261003-469998db/linux-process-options-proof.py",
+    "pgid": 757247,
+    "pid": 757248,
+    "ppid": 757247,
+    "start_ticks": "1288212"
+  },
+  "identity_errors": {},
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-process-options-20261003-469998db/agent-build-c6558k7l",
+  "scoped_supervisor": {
+    "cmdline": "/usr/bin/python3 /var/roothome/rhai-linux-process-options-20261003-469998db/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-process-options-20261003-469998db/linux-process-options-proof.py",
+    "pgid": 757247,
+    "pid": 757247,
+    "ppid": 757244,
+    "start_ticks": "1288211"
+  }
+}

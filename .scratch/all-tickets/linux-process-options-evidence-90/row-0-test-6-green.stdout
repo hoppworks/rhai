@@ -1,0 +1,6 @@
+
+running 1 test
+test process_cwd_uses_the_opened_filesystem_capability_after_root_replacement ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 40 filtered out; finished in 0.10s
+

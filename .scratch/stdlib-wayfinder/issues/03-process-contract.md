@@ -283,3 +283,19 @@ files removed after exported hash verification. Proof/review/original logs:
 .scratch/all-tickets/linux-process-io-proof.md and linux-process-io-review.md.
 All remaining platform/feature/managed/fault/latency/performance and release
 criteria remain open. Existing partial evidence/cause/budget history unchanged.
+
+## Remaining Linux process-options branch acceptance — 2026-10-03
+
+Frozen469998 with privateRust1.77.2 and compatible lock2ba4: invocation90
+passes40 exact original tests and80 intended sensitivity controls for eight
+remaining process cases across five checked feature rows. Capture raw/text
+under exit0/7, stdout/stderr cap+1, zero-cap silent/first-byte branches, raw/text
+deadlines, unit timeout/stdin, capability-held cwd/escape denial and lossy UTF-8
+limit expansion have targeted branch proof. Combined review accepts this narrow
+coverage; it is not proof of every assertion or complete process-ticket closure.
+Original logs, control overlays/restoration, independent729PID/start and95printed
+fixturePID readback, and exact401file/sixdir staging cleanup are in
+../../all-tickets/linux-process-options-proof.md and its referenced artifacts.
+No no_float/unchecked/managed/performance/other-native-platform/finalrelease
+claim. Existing record-reuse, cwd PID and deadline-latency limits remain explicit.
+Invocation89's two controlled cases retain their accepted applicability.
