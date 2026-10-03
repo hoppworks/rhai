@@ -1,0 +1,80 @@
+launch_utc=2026-10-03T19:23:24Z
+runner_timeout_seconds=585
+stage=/root/rhai-linux-managed-escaped-pipe-20261003-52360864-107
+scope=/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-107
+archive-build-source.py: OK
+source.tar: OK
+Cargo.lock.accepted: OK
+check-linux-current-msrv-examples.py: OK
+linux-managed-escaped-pipe-proof.py: OK
+linux-managed-success-proof.py: OK
+contract-source.md: OK
+contract.md: OK
+stage.sh: OK
+launch.sh: OK
+runner/tools/run_scoped.py: OK
+runner/tools/agentskills/__init__.py: OK
+runner/tools/agentskills/pyguard.py: OK
+PRIVATE_RUNTIME /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-107/agent-build-89l1bx4f
+command=rustup-install argv=['/root/.cargo/bin/rustup', 'toolchain', 'install', '1.77.2-x86_64-unknown-linux-gnu', '--profile', 'minimal', '--no-self-update']
+sample={"descendants": 2, "monotonic_seconds": 0.067, "rss_kib": 45620, "storage_kib": 7228}
+sample={"descendants": 2, "monotonic_seconds": 1.079, "rss_kib": 54404, "storage_kib": 18848}
+sample={"descendants": 2, "monotonic_seconds": 2.092, "rss_kib": 55240, "storage_kib": 70296}
+sample={"descendants": 2, "monotonic_seconds": 3.105, "rss_kib": 55576, "storage_kib": 92768}
+sample={"descendants": 2, "monotonic_seconds": 4.119, "rss_kib": 55796, "storage_kib": 110828}
+sample={"descendants": 2, "monotonic_seconds": 5.131, "rss_kib": 187432, "storage_kib": 186124}
+sample={"descendants": 2, "monotonic_seconds": 6.143, "rss_kib": 252456, "storage_kib": 308740}
+sample={"descendants": 2, "monotonic_seconds": 7.156, "rss_kib": 398672, "storage_kib": 450908}
+sample={"descendants": 1, "monotonic_seconds": 8.167, "rss_kib": 29696, "storage_kib": 466916}
+status=rustup-install:0
+command=rustc-version argv=['/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-107/agent-build-89l1bx4f/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 8.177, "rss_kib": 29712, "storage_kib": 466924}
+sample={"descendants": 1, "monotonic_seconds": 8.288, "rss_kib": 29708, "storage_kib": 466928}
+status=rustc-version:0
+command=cargo-version argv=['/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-107/agent-build-89l1bx4f/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 8.299, "rss_kib": 29700, "storage_kib": 466932}
+sample={"descendants": 1, "monotonic_seconds": 8.414, "rss_kib": 29640, "storage_kib": 466940}
+status=cargo-version:0
+command=require-escaped-holder-control argv=['/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-107/agent-build-89l1bx4f/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--features', 'testing-environ,sys', '--test', 'sys_process', '--', '--exact', '--nocapture', '--test-threads=1', 'managed_run_deadline_cancels_escaped_pipe_holder_under_fixture_reaper']
+sample={"descendants": 2, "monotonic_seconds": 8.426, "rss_kib": 52400, "storage_kib": 466944}
+sample={"descendants": 2, "monotonic_seconds": 9.438, "rss_kib": 73444, "storage_kib": 470220}
+sample={"descendants": 2, "monotonic_seconds": 10.45, "rss_kib": 73576, "storage_kib": 470440}
+sample={"descendants": 2, "monotonic_seconds": 11.462, "rss_kib": 80596, "storage_kib": 473764}
+sample={"descendants": 2, "monotonic_seconds": 12.475, "rss_kib": 100408, "storage_kib": 477356}
+sample={"descendants": 5, "monotonic_seconds": 13.493, "rss_kib": 309660, "storage_kib": 539960}
+sample={"descendants": 3, "monotonic_seconds": 14.511, "rss_kib": 463996, "storage_kib": 562216}
+sample={"descendants": 4, "monotonic_seconds": 15.53, "rss_kib": 456452, "storage_kib": 592448}
+sample={"descendants": 4, "monotonic_seconds": 16.547, "rss_kib": 803500, "storage_kib": 598272}
+sample={"descendants": 4, "monotonic_seconds": 17.565, "rss_kib": 452612, "storage_kib": 636500}
+sample={"descendants": 4, "monotonic_seconds": 18.584, "rss_kib": 473528, "storage_kib": 656792}
+sample={"descendants": 3, "monotonic_seconds": 19.602, "rss_kib": 529504, "storage_kib": 663316}
+sample={"descendants": 3, "monotonic_seconds": 20.621, "rss_kib": 656500, "storage_kib": 663316}
+sample={"descendants": 3, "monotonic_seconds": 21.64, "rss_kib": 856688, "storage_kib": 673940}
+sample={"descendants": 3, "monotonic_seconds": 22.659, "rss_kib": 880732, "storage_kib": 687128}
+sample={"descendants": 3, "monotonic_seconds": 23.677, "rss_kib": 377544, "storage_kib": 718464}
+sample={"descendants": 8, "monotonic_seconds": 24.696, "rss_kib": 144800, "storage_kib": 732164}
+sample={"descendants": 3, "monotonic_seconds": 25.738, "rss_kib": 114836, "storage_kib": 732224}
+sample={"descendants": 3, "monotonic_seconds": 26.773, "rss_kib": 114760, "storage_kib": 732224}
+sample={"descendants": 3, "monotonic_seconds": 27.805, "rss_kib": 114900, "storage_kib": 732224}
+sample={"descendants": 1, "monotonic_seconds": 28.522, "rss_kib": 30312, "storage_kib": 732144}
+status=require-escaped-holder-control:101
+Traceback (most recent call last):
+  File "/root/rhai-linux-managed-escaped-pipe-20261003-52360864-107/linux-managed-escaped-pipe-proof.py", line 196, in <module>
+    try: status=main()
+                ~~~~^^
+  File "/root/rhai-linux-managed-escaped-pipe-20261003-52360864-107/linux-managed-escaped-pipe-proof.py", line 163, in main
+    run_final(cargo,env,CONTROL,ROWS[0],101,True)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-managed-escaped-pipe-20261003-52360864-107/linux-managed-escaped-pipe-proof.py", line 135, in run_final
+    result=verify_control(out,err,label) if control else (terminal(out,TEST,False),parse_escaped_pipe(err,label))[1]
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-managed-escaped-pipe-20261003-52360864-107/linux-managed-escaped-pipe-proof.py", line 130, in verify_control
+    return parse_escaped_pipe(err,label)
+  File "/root/rhai-linux-managed-escaped-pipe-20261003-52360864-107/linux-managed-escaped-pipe-proof.py", line 110, in parse_escaped_pipe
+    if len(selected)!=2 or len(actual)!=2 or actual!=expected: raise RuntimeError(f'{label}: exact leader/holder PIDFD identity mismatch: {actual!r}')
+                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: require-escaped-holder-control: exact leader/holder PIDFD identity mismatch: {}
+/root/rhai-linux-managed-escaped-pipe-20261003-52360864-107/launch.sh: line 123: /proc/1464536/stat: No such file or directory
+run_scoped_status=1
+runtime_cleanup_status=0 pid_readback_status=0 scope_cleanup_status=0
+outer_status=1

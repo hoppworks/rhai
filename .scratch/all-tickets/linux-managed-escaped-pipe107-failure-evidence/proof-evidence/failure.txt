@@ -1,0 +1,16 @@
+Traceback (most recent call last):
+  File "/root/rhai-linux-managed-escaped-pipe-20261003-52360864-107/linux-managed-escaped-pipe-proof.py", line 196, in <module>
+    try: status=main()
+                ~~~~^^
+  File "/root/rhai-linux-managed-escaped-pipe-20261003-52360864-107/linux-managed-escaped-pipe-proof.py", line 163, in main
+    run_final(cargo,env,CONTROL,ROWS[0],101,True)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-managed-escaped-pipe-20261003-52360864-107/linux-managed-escaped-pipe-proof.py", line 135, in run_final
+    result=verify_control(out,err,label) if control else (terminal(out,TEST,False),parse_escaped_pipe(err,label))[1]
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-managed-escaped-pipe-20261003-52360864-107/linux-managed-escaped-pipe-proof.py", line 130, in verify_control
+    return parse_escaped_pipe(err,label)
+  File "/root/rhai-linux-managed-escaped-pipe-20261003-52360864-107/linux-managed-escaped-pipe-proof.py", line 110, in parse_escaped_pipe
+    if len(selected)!=2 or len(actual)!=2 or actual!=expected: raise RuntimeError(f'{label}: exact leader/holder PIDFD identity mismatch: {actual!r}')
+                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: require-escaped-holder-control: exact leader/holder PIDFD identity mismatch: {}

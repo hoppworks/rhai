@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/root/rhai-linux-managed-escaped-pipe-20261003-52360864-108/linux-managed-escaped-pipe-proof.py", line 196, in <module>
+    try: status=main()
+                ~~~~^^
+  File "/root/rhai-linux-managed-escaped-pipe-20261003-52360864-108/linux-managed-escaped-pipe-proof.py", line 175, in main
+    if token not in retained: raise RuntimeError(f'{label}: retained-pipe regression receipt missing {token!r}')
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: base-retained-pipe-regression-row1: retained-pipe regression receipt missing 'wait_unit=true'

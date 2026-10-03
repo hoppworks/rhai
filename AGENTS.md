@@ -148,3 +148,44 @@ Invocation 106 finished successfully on 2026-10-03. Independent read-back and
 exact export retirement completed; its finite concurrency exception has expired.
 New heavy runs use the global default unless separately justified by current
 measurements. No foreign process was stopped or modified.
+
+## Workhorse finite concurrency exception for escaped-pipe proof
+
+For the single reviewed escaped-pipe invocation107, permit at most two heavy
+runs: the existing foreign Tauron runner (launcher1408079/start4603295,
+supervisor1408080/start4603297, compiler group1408080) and one bounded Rhai run.
+Current read-only measurements report32 CPUs, load3.86/4.27/4.15,
+MemAvailable78,299,404 KiB,717,200,211,968 bytes free, and sampled foreign
+compiler RSS3,794,880 KiB. These are samples, not peak or reservation claims.
+
+Rhai retains600/585/540-second outer/runner/helper bounds including30 seconds
+for export, two Cargo jobs,16 descendants,1,572,864 KiB preemptive storage stop
+and2,097,152 KiB hard RSS/storage limits. Require immediate no-third-heavy
+runner/compiler group, exact current foreign identities and at least16 GiB
+available RAM/disk before launch. If the foreign run exits, recheck the global
+slot; a changed runner needs a fresh measured identity assessment. Never stop
+or modify foreign processes. This project workflow exception expires at107
+terminal completion; subsequent runs use the global default.
+
+Invocation107 is terminal. Its finite concurrency exception has expired; no
+foreign process was modified. A later invocation needs fresh slot/capacity checks.
+
+## Workhorse finite concurrency exception for invocation108
+
+For this single reviewed escaped-pipe invocation108 only permit at most two
+heavy runs: foreign launcher1532705/start4776357 and supervisor1532709/start4776360
+with compiler group1532709, plus this owned bounded Rhai run. Fresh measurement
+reports 32 CPUs, MemAvailable78030992KiB, free725398978560bytes
+and foreign compiler RSS sample3807908KiB (not peak).
+Require immediately matching foreign identities, no third heavy group, at least
+16GiB available RAM/disk and all13 frozen stage hashes. Retain600/585/540second
+bounds including30second export reserve, two Cargo jobs,16descendants,
+1572864KiB preemptive storage and2097152KiB hard RSS/storage limits. Never modify
+foreign processes/resources. Exception expires at108 terminal; future default
+is one heavy run. Workflow convention, not a lock or capacity reservation.
+
+Invocation108 is terminal (infrastructure parser failure after control and base
+regressions). Its finite exception has expired. Runtime and scope cleanup passed;
+only the exact immutable diagnostic input/export stage remains until export
+and retirement. No foreign process was modified. Future launches require fresh
+measured slot/capacity checks; no exception transfers to109.

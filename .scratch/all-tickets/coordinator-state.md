@@ -81,22 +81,27 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 
 ## Current step and next action
 
-Instructions/roles faba3db3bef6891ad2c0b20d434963bb8fe9572d loaded by root,
-responsible Standard and same combined reviewer. Workhorse installed rules resolved
-at /var/home/workhorse/.agents/AGENTS.md and /var/home/workhorse/projects/agent-skills;
-SSH root has no ~/.agents. Read-only resolution/command-local safe.directory only.
-Last verified fork main cf4213288454694521c6838a967d50e778fdf6de (stdin contract decision); accepted source integration6faf70be091dd52dff9987276d2e33492647bfbd; sole remote main,
-lowercase human author/committer. Native105 managed deadline accepted, exported,
-exactly cleaned and integrated. Current package: native106 OutputLimit frozen
-source53b/recipesc785 completed terminal0: three setup0, intended control101,
-sixGREEN0. Root export independently validates68 originalfiles/fivedirectories,
-seven preexisting closures; exact hash-gated stage/scope/group retirement complete.
-Same combined Expert actual acceptance ACCEPTED narrowly; original68hashes and
-strict control/readback independently reviewed. Immutable53b integration prepared.
-No retained native106 build; finite two-heavy exception expired. CumulativeUnix106,
-OutputLimitnative1; failedborrowcorrectioncount1 preserved. Immutable53b integration6faf70be pushed; soleforkmain exactremote read-back PASS.
-Next escaped-pipe source-only writer5236086 frozen, combined affectedsource READY;
-compile/native/acceptance unproven. All other platform/performance gates remain open.
+Current applicable instructions faba3db loaded by root/Expert/Standard. Full goal
+active; last independently pushed soleforkmain6687d547, production53b unchanged.
+Source523 escaped deadline-pipe criterion remains SOURCE READY, not accepted.
+Native108 terminal1 after3setup0/control101/3baseGREEN0;4newfeature rows not run.
+WrongPIDFDprefix recovered; distinct retained-regression polarity infra1 corrected.
+Root exported/hashchecked55originals/fivedirs; fresh99helper+2launcher+24fixture
+rows absent/eightgroups empty. Exact stage/scope retirement0, savedreceipt.
+No retained107/108 build or remote input stage; finite exceptions expired.
+
+Prospective109 generic recipes in root independently execution/collection READY:
+proof890de4a1/stagea438f452/launch4d9ae4c6/collector17af3216/prepbe2ce2db.
+Correct completed-report wait_unit=false asserted exactly once; conservative
+retained fixture PID NotFound-only and two-group census/finalabsence added.
+Source523 unchanged; no source/stdin edits. Freeze root own recipes/history/original
+capsules and push authorized soleforkmain before nextstage.109unallocated;
+Unix108/escapednative2 cumulative and all prior cause/hard-limit history preserved.
+Next fresh machine/inputguards -> stage frozen109 -> bounded proof/export/actual
+combined acceptance. Four feature rows remain required; no broad release claim.
+Standard owns writerlinux-managed-success transferred inactive formerowner;
+preserve historical untrackednote. Resume accepted stdin TDD next once frozen109
+stage isolates523. All remaining ticket03/06/fullOSfeaturesMSRVrelease gates open.
 
 ### Current coherent requirement: final managed client lease drop
 
@@ -1802,3 +1807,42 @@ remain independent; no exhausted cause chain is reopened.
 Escaped-pipe execution recipes frozen53ae38a8aaea55ae609970cac96aef7ee5897d07 in same owned writer; root independently verified actual committed bytes/current files and lowercase author/committer. Proof SHAe57b58958ee4d6b7d8e2be0e5b58565cab31fbf53904aeda880104fc00b2ea40, stage dff39cb857329241fd68b5416c7c453f809e6cc18b0b211a42792f2ae4ebdd7e, launch798d9c94323f5646d6d0f3e535e1b4fff8b922ac8a83be16e17a01b5e29dbbe4, collector a5a7e9053c10e83600954825b852b680a3a4691dbea66e63c903b8eb2b6ef3b7. Standard purechecks and root AST/bash/pins PASS; no native acceptance. Same combined Expert now reviews affected execution/collection only. Eight tests+three setup, seven required original closures; retained-pipe regression has no invented closure artifact. Native107 unallocated, limits/history unchanged. Fresh read-only workhorse inventory showed one foreign Tauron group1402398 (launcher1402397/start4598403, supervisor1402398/start4598405),32CPUs/79736824KiB availableRAM/728909443072bytes free; prospective107stage/scope absent. Not a reservation or concurrency exception. No foreign process modified. Next READY -> fresh slot/capacity and immutable stage; same writer stdin implementation begins only after stage confirmation.
 
 Same combined affected execution review53ae reports NOT READY: parser consumes first physical boundary line while actual source boundary/API/cleanup spans continuation lines; holder_reap/reaper_cleanup are debug String literals, not Option Some strings. Both native helper and collector reuse this parser. Same Standard assigned one consolidated recipe correction with actual source-shaped positive and corruption purechecks plus dependent pin refresh. Source523 remains READY; initial preparation defects are not native failed corrections or infrastructure recoveries. Rejected53ae retained. No107stage/allocation, no stdin implementation, no hard limit revised.
+
+Previous goal turn classified PROGRESS: immutable recipes53ae and independent
+format findings changed the next action, recorded/pushed soleforkmain6687d547.
+Current correction44fd5468124be92a067af63ed0089ddea7106265 actual committed
+bytes/pins independently verified; proof81141bf9/stageb6150e4b/collector e7995d19,
+launcher unchanged798d9c94. Source-shaped positive and10 corruptions PASS reported
+by same Standard; same combined Expert affected recheck now active. No native
+allocation. Fresh measured32CPU/load3.86/4.27/4.15/78299404KiB RAMavailable/
+717200211968bytes free/foreign sampledcompilerRSS3794880KiB justifies one-run
+project exception107 recorded in ownedAGENTS: only foreign launcher1408079
+start4603295/supervisor1408080 start4603297 group1408080 plus Rhai107,
+no-third-heavy and16GiB RAM/disk immediate guard. Limits unchanged; expires
+terminal107. No foreign process modified and no build started.
+
+Native107 allocated 2026-10-03T19:23:19.733898+00:00 at immutable source523608648dcae99bc0f6b46eaf2bb91fa4ecc752/recipes44fd5468124be92a067af63ed0089ddea7106265. Same combined affected execution/collection READY read independently. Stage terminal0/all13hashesPASS, physical /var/roothome/rhai-linux-managed-escaped-pipe-20261003-52360864-107; retain exact stage for bounded proof/export, rootowner, expiry nextinspection2026-10-04T21:40:00Z or finishedexportearlier. Immediate guardPASS: foreign launcher1408079/start4603295/group1408073 supervisor1408080/start4603297/group1408080, allcompilerssamegroup, no thirdheavy, RAMavailable77148692KiB/free717077233664bytes, scope/outerstatusabsent. CumulativeUnix107/escapedpipe-native1. Bounds600outer/585runner/540helper incl30export/jobs2/desc16/preempt1572864KiB/hardRSSstorage2097152KiB unchanged. No acceptance claimed. Same Standard may start nextstdin test-only package now immutable523stageconfirmed; no productionbefore meaningfulbaselineRED.
+
+Native107 terminal ROOT_OUTER_STATUS1/runscoped1; runtime/readback/scopecleanup0.
+Three setup0 and intendedcontrol101 actuallycompiled/executed afterfullfixture
+cleanup, unique require-timeout-report panic. Helper then fails exactleaderholder
+PIDFDactual{}: regex managed_pidfd_acquired mismatches actual
+managed_pipe_pidfd_acquired. This is infrastructure outcome1 for stable cause
+wrongescapedPIDFDreceiptprefix, not product failedcorrection or full acceptance.
+GREENrows notexecuted. OriginalPIDFD/boundary/EPIPE/reap receipts preserved remotely
+and temporary unmodifiedstderr /private/tmp/rhai-native107-original-control.stderr
+for sameStandard actual-format repair; no sourcechange. Root adapting existing
+rawfailurecollector to preserve complete107originals with exactfreshcustody/hash
+readback/retirement; samecombinedExpert affected delta reviewactive.107exception
+expired atterminal; no retainedprivatebuild. Ownedremote stage retained solely for
+originalexport, finiteexpiry unchanged. Prospective108paths unique108, source523
+unchanged, noallocation. SameStandard paused stdin (noedits) and now corrects
+minimalreceiptprefix actual107positive/negative/pins. Budgets/history preserved.
+
+Escaped37e combined execution/collection READY; immutable108stage created, all13hashesPASS. Root owns exact /root/rhai-linux-managed-escaped-pipe-20261003-52360864-108 (physical /var/roothome/same-name) for proof/export or inspectionexpiry 2026-10-04T19:45:58.493677+00:00, whichever first. Scope absent, nobuild/allocation. Initial freshguard rejects changedforeignrunner; read-only preflight, no consumednative/recovery. Successor1532705/start4776357 supervisor1532709/start4776360 awaiting updatedcapacityguard.
+
+Native108 allocated 2026-10-03T19:57:28.180978+00:00 at source523608648dcae99bc0f6b46eaf2bb91fa4ecc752/recipes37e39470255d3d0809f4ccf729c869416e35282e. Immediate launchguardPASS all13hashes, exactforeign/no-thirdheavy, availableRAM/disk, scope/terminalabsent. CumulativeUnix108/escapednative2; first bounded recovery for wrongPIDFDprefix infrastructure cause, no historyreset. Bounds600/585/540incl30export/jobs2/desc16/preempt1572864/hard2097152KiB unchanged. Strictacceptancepending; launchonce.
+
+Native108 terminal ROOT_OUTER_STATUS1/runscoped1, runtime/readback/scopecleanup0. Three setup0/control101/threebaseGREEN0; newfourfeature rows NOT executed. WrongPIDFDprefix recovery succeeded actualcontrol and originalclosure. New infrastructure occurrence1 retained-regression receipt polarity: helper requires wait_unit=true, actual frozen killfixture yields completedreport false and test0. No product correction failure. Same Standard pausedstdin(noedits), corrects actual-semantic receipt/pins to prospective109;109unallocated. Root raw108 collector adapted accepted107 preserving three originalclosures with fresh exactidentity/group checks and alloriginalhashes, awaiting sameExpert affected review. No closure artifacts regenerated.108exception expired; originalstage retained only for export, expiryunchanged.
+
+Raw108 collection/cleanup completed0. Root independently rehashed55originalfiles/fivedirectories;99helper+2launcher+24fixture rows absent, eightgroups empty. Existingthreeclosures preserved, nofeatureclosures invented. Hash-gated exactremote stage55files/fivedirs retired; freshstage/scope/eightgroupsabsence saved remote-cleanup.json. No retained108resource. Root109recipe affectedreview underway; source523unchanged,109unallocated. Singleprepcollectorpin refreshed after reviewfinding, no source/native correction count.

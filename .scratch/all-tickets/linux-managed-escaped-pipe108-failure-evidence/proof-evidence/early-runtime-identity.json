@@ -1,0 +1,19 @@
+{
+  "captured_before_stage_validation_or_external_command": true,
+  "helper": {
+    "cmdline": "python3 /root/rhai-linux-managed-escaped-pipe-20261003-52360864-108/linux-managed-escaped-pipe-proof.py",
+    "pgid": 1580089,
+    "pid": 1580090,
+    "ppid": 1580089,
+    "start_ticks": "4863944"
+  },
+  "identity_errors": {},
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2",
+  "scoped_supervisor": {
+    "cmdline": "/usr/bin/python3 /var/roothome/rhai-linux-managed-escaped-pipe-20261003-52360864-108/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-managed-escaped-pipe-20261003-52360864-108/linux-managed-escaped-pipe-proof.py",
+    "pgid": 1580089,
+    "pid": 1580089,
+    "ppid": 1580086,
+    "start_ticks": "4863942"
+  }
+}

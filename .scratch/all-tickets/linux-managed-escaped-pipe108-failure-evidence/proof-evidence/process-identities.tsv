@@ -1,0 +1,100 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+helper	1580090	1580089	1580089	4863944	python3 /root/rhai-linux-managed-escaped-pipe-20261003-52360864-108/linux-managed-escaped-pipe-proof.py
+scoped-supervisor	1580089	1580086	1580089	4863942	/usr/bin/python3 /var/roothome/rhai-linux-managed-escaped-pipe-20261003-52360864-108/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-managed-escaped-pipe-20261003-52360864-108/linux-managed-escaped-pipe-proof.py
+command:rustup-install	1580092	1580090	1580089	4863952	/root/.cargo/bin/rustup toolchain install 1.77.2-x86_64-unknown-linux-gnu --profile minimal --no-self-update
+command:du	1580101	1580090	1580089	4863952	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1580110	1580090	1580089	4863953	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1580132	1580090	1580089	4864054	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1580133	1580090	1580089	4864054	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1580427	1580090	1580089	4864155	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1580428	1580090	1580089	4864156	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1580449	1580090	1580089	4864259	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1580450	1580090	1580089	4864259	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1580785	1580090	1580089	4864360	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1580787	1580090	1580089	4864360	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1581764	1580090	1580089	4864462	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1581765	1580090	1580089	4864462	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1582631	1580090	1580089	4864563	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1582633	1580090	1580089	4864563	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1583387	1580090	1580089	4864664	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1583388	1580090	1580089	4864665	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1583685	1580090	1580089	4864705	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1583686	1580090	1580089	4864706	/bin/ps -e -o pid=,ppid=,rss=
+command:rustc-version	1583703	1580090	1580089	4864707	/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose
+command:du	1583704	1580090	1580089	4864707	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1583705	1580090	1580089	4864707	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1583766	1580090	1580089	4864718	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1583767	1580090	1580089	4864718	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-version	1583770	1580090	1580089	4864719	/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose
+command:du	1583771	1580090	1580089	4864719	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1583773	1580090	1580089	4864719	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1583855	1580090	1580089	4864730	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1583856	1580090	1580089	4864730	/bin/ps -e -o pid=,ppid=,rss=
+command:require-escaped-holder-control	1583874	1580090	1580089	4864731	/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_run_deadline_cancels_escaped_pipe_holder_under_fixture_reaper
+command:du	1583875	1580090	1580089	4864731	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1583876	1580090	1580089	4864731	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1584474	1580090	1580089	4864832	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1584475	1580090	1580089	4864832	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1586280	1580090	1580089	4864934	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1586289	1580090	1580089	4864935	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1587325	1580090	1580089	4865038	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1587338	1580090	1580089	4865039	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1588193	1580090	1580089	4865141	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1588233	1580090	1580089	4865142	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1589311	1580090	1580089	4865244	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1589325	1580090	1580089	4865245	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1589991	1580090	1580089	4865347	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1590001	1580090	1580089	4865348	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1590518	1580090	1580089	4865450	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1590526	1580090	1580089	4865450	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1591104	1580090	1580089	4865551	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1591107	1580090	1580089	4865553	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1591174	1580090	1580089	4865654	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1591175	1580090	1580089	4865655	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1591374	1580090	1580089	4865756	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1591375	1580090	1580089	4865757	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1591558	1580090	1580089	4865858	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1591560	1580090	1580089	4865859	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1591702	1580090	1580089	4865960	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1591703	1580090	1580089	4865961	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1591755	1580090	1580089	4866062	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1591756	1580090	1580089	4866063	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1591785	1580090	1580089	4866164	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1591786	1580090	1580089	4866164	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1591812	1580090	1580089	4866265	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1591814	1580090	1580089	4866266	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1591847	1580090	1580089	4866367	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1591850	1580090	1580089	4866368	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1591906	1580090	1580089	4866469	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1591907	1580090	1580089	4866470	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1591993	1580090	1580089	4866571	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1591995	1580090	1580089	4866572	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1592058	1580090	1580089	4866673	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1592059	1580090	1580089	4866674	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1592078	1580090	1580089	4866775	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1592079	1580090	1580089	4866776	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1592347	1580090	1580089	4866877	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1592348	1580090	1580089	4866878	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1592361	1580090	1580089	4866889	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1592363	1580090	1580089	4866891	/bin/ps -e -o pid=,ppid=,rss=
+command:base-prompt-regression-row1	1592370	1580090	1580089	4866894	/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_run_succeeds_after_fixture_reaper_reaps_descendants
+command:du	1592371	1580090	1580089	4866894	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1592378	1580090	1580089	4866895	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1592575	1580090	1580089	4866997	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1592579	1580090	1580089	4867000	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1592817	1580090	1580089	4867106	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1592818	1580090	1580089	4867108	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1592939	1580090	1580089	4867200	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1592941	1580090	1580089	4867201	/bin/ps -e -o pid=,ppid=,rss=
+command:base-held-regression-row1	1592943	1580090	1580089	4867203	/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_run_reports_while_fixture_reaper_holds_stopped_zombies
+command:du	1592944	1580090	1580089	4867203	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1592967	1580090	1580089	4867204	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1593094	1580090	1580089	4867305	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1593095	1580090	1580089	4867306	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1593146	1580090	1580089	4867337	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1593147	1580090	1580089	4867338	/bin/ps -e -o pid=,ppid=,rss=
+command:base-retained-pipe-regression-row1	1593151	1580090	1580089	4867340	/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes
+command:du	1593152	1580090	1580089	4867340	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1593159	1580090	1580089	4867341	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1593198	1580090	1580089	4867372	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2
+command:ps	1593200	1580090	1580089	4867373	/bin/ps -e -o pid=,ppid=,rss=

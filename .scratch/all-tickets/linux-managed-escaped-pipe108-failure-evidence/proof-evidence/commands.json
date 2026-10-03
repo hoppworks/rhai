@@ -1,0 +1,161 @@
+[
+  {
+    "argv": [
+      "/root/.cargo/bin/rustup",
+      "toolchain",
+      "install",
+      "1.77.2-x86_64-unknown-linux-gnu",
+      "--profile",
+      "minimal",
+      "--no-self-update"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 7.595,
+    "name": "rustup-install",
+    "spawned": true,
+    "started_monotonic_seconds": 0.052,
+    "status": 0,
+    "stderr": "evidence/rustup-install.stderr",
+    "stdout": "evidence/rustup-install.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+      "--version",
+      "--verbose"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2/source",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 7.717,
+    "name": "rustc-version",
+    "spawned": true,
+    "started_monotonic_seconds": 7.596,
+    "status": 0,
+    "stderr": "evidence/rustc-version.stderr",
+    "stdout": "evidence/rustc-version.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "--version",
+      "--verbose"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2/source",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 7.837,
+    "name": "cargo-version",
+    "spawned": true,
+    "started_monotonic_seconds": 7.717,
+    "status": 0,
+    "stderr": "evidence/cargo-version.stderr",
+    "stdout": "evidence/cargo-version.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys",
+      "--test",
+      "sys_process",
+      "--",
+      "--exact",
+      "--nocapture",
+      "--test-threads=1",
+      "managed_run_deadline_cancels_escaped_pipe_holder_under_fixture_reaper"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2/source",
+    "env_overrides": {},
+    "expected_status": 101,
+    "finished_monotonic_seconds": 29.451,
+    "name": "require-escaped-holder-control",
+    "spawned": true,
+    "started_monotonic_seconds": 7.838,
+    "status": 101,
+    "stderr": "evidence/require-escaped-holder-control.stderr",
+    "stdout": "evidence/require-escaped-holder-control.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys",
+      "--test",
+      "sys_process",
+      "--",
+      "--exact",
+      "--nocapture",
+      "--test-threads=1",
+      "managed_run_succeeds_after_fixture_reaper_reaps_descendants"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2/source",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 32.548,
+    "name": "base-prompt-regression-row1",
+    "spawned": true,
+    "started_monotonic_seconds": 29.466,
+    "status": 0,
+    "stderr": "evidence/base-prompt-regression-row1.stderr",
+    "stdout": "evidence/base-prompt-regression-row1.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys",
+      "--test",
+      "sys_process",
+      "--",
+      "--exact",
+      "--nocapture",
+      "--test-threads=1",
+      "managed_run_reports_while_fixture_reaper_holds_stopped_zombies"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2/source",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 33.917,
+    "name": "base-held-regression-row1",
+    "spawned": true,
+    "started_monotonic_seconds": 32.558,
+    "status": 0,
+    "stderr": "evidence/base-held-regression-row1.stderr",
+    "stdout": "evidence/base-held-regression-row1.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys",
+      "--test",
+      "sys_process",
+      "--",
+      "--exact",
+      "--nocapture",
+      "--test-threads=1",
+      "managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-108/agent-build-92vbkoh2/source",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 34.273,
+    "name": "base-retained-pipe-regression-row1",
+    "spawned": true,
+    "started_monotonic_seconds": 33.928,
+    "status": 0,
+    "stderr": "evidence/base-retained-pipe-regression-row1.stderr",
+    "stdout": "evidence/base-retained-pipe-regression-row1.stdout"
+  }
+]

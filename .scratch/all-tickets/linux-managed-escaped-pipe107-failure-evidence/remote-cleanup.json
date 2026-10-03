@@ -1,0 +1,18 @@
+{
+  "cleanup": {
+    "removed_directories": 5,
+    "removed_files": 42,
+    "scope_absent": true,
+    "stage_absent": true
+  },
+  "fresh_absence": {
+    "process_groups_absent": [
+      1464469,
+      1464539,
+      1465810,
+      1465816
+    ],
+    "scope_absent": true,
+    "stage_absent": true
+  }
+}
