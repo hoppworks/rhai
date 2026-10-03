@@ -14,6 +14,29 @@ The known-broken baseline must yield unit from the first bounded wait, with the 
 
 Retain the existing successful input/EOF and blocked-stdin deadline cases as affected regressions. Add a separate child-read-all case if existing EOF evidence is insufficient; the closure fixture alone does not prove normal EOF. The spawn input test covers this real post-spawn I/O failure seam, not worker-start failure or every fault class. Keep a separate public run_raw positive regression: its existing synchronous owner already retains BrokenPipe as `write process stdin`, with truthful capture flags. A different operation-name assertion is not a meaningful missing-error RED. Pending-byte Ok(0)/WriteZero remains a separate open branch until its own meaningful evidence exists. Reader-side EPIPE challenge in the escaped output-pipe test is a different direction and supplies no proof of parent stdin failure. Supplementary injection may verify other fault branches but cannot replace this real-OS acceptance.
 
+## Successful cleanup map and exceptional observations
+
+Expert17 verified the actual bounded Child.wait success map: text stdout/stderr,
+boolean success/timed_out/capture flags, and required code/signal keys holding an
+integer or unit. It exposes neither raw Blob captures nor cleanup_diagnostics.
+Baseline explicit cleanup must decode those exact fields and retain provenance;
+ASCII marker bytes derived from text are UTF-8-derived, not original raw capture.
+Diagnostics are unavailable through this successful map, not an observed zero.
+Require a terminal success map with available exit, truthful flags, timed_out=false,
+bounded markers, and separately verified exact custody. Typed GREEN continues to
+compare real ProcessReport raw bytes/flags/cause/exit/diagnostics across all waits.
+This corrects a review schema assumption, not the product's retained-error contract.
+
+Save original API/OS observations before fallible decoding. Only a checked
+Ok(None) from actual NotFound proves PID absence; permission/read/parse errors,
+missing original identity and reused identity remain incomplete. Probe only a
+validated owned group and accept exact ESRCH. Exceptional cleanup distinguishes
+terminal typed error from unit; resource retirement and API terminal classification
+are separate facts. Bound sentinel reap and preserve its original identity,
+kill/wait results, host readback and partial evidence without masking the original
+failure. No fixture convenience API or guessed raw signals are authorized.
+Details and single bounded follow-up: escalations/17-stdin-fixture-extraction-guard-receipt.answer.md.
+
 ## Compatibility and limits
 
 This intentionally changes successful results for commands that stop reading before consuming supplied input into input errors. Programs accepting a prefix (for example an early-exiting filter) are the concrete compatibility risk; document the all-supplied-input contract and preserve unrelated normal-exit behavior. Avoid asserting cross-event ordering: if another terminal cause was committed first, retain it. Empty input, full transfer before closure and nondeterministic ordinary early exits must not be unconditionally rejected. Windows needs its own native write-error mapping and acceptance; no Linux result closes that platform. Source implementation, compilation and native acceptance are still pending. This decision is independent of prior repair causes and does not renew any exhausted chain.

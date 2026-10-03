@@ -99,8 +99,8 @@ and accepted archive-build-source.py archive SHA256
 Same Expert escaped_recipe_review completed affected source recheck NOT READY:
 actual successful map schema contradicts its earlier assumption, and fallback
 cleanup conflates observation errors with absence. Fresh non-fork Expert17
-stdin_fixture_contract_expert now diagnoses these same extraction/guard/receipt
-causes before any further source repair. Public spawn API seam/preclose choreography remains Expert16.
+stdin_fixture_contract_expert completed source-only diagnosis (faba3db confirmed).
+Answer17 read back; same Standard now applies its one bounded follow-up. Public spawn API seam/preclose choreography remains Expert16.
 No SOURCE READY claim before recheck. Standard completed this source batch and
 preserves two interrupted recipe drafts and historical untracked note.
 
@@ -110,7 +110,7 @@ failure or infrastructure launch occurred. Earlier cause and exhausted-chain
 history unchanged; planning checkpoint extension was based on concrete source
 progress, not a hard-limit renewal. No Cargo/staging/SSH build/product edit.
 
-Next: Expert17 diagnosis, one same-Standard source follow-up and affected recheck;
+Next: current same-Standard source follow-up freeze and affected recheck;
 only after SOURCE READY resume consuming recipe repair, preserve prior c39 failure
 history and satisfy all four original export/classification/custody findings.
 Then recipe review, fresh workhorse slot check and meaningful native RED before
@@ -2041,3 +2041,15 @@ corrections2 (4ac,2c); native/infrastructurelaunches0,110unallocated. Fresh
 nonfork Expert17 brief prepared for first escalation of these causes; prior
 Expert16 API seam remains valid and not renewed. Next actual source diagnosis
 before one bounded sameowner followup. No production/native/stage action.
+
+Expert17 answer independently read back: actual public success text map has
+code/signal and bool fields, diagnostics unavailable; typed GREEN retains raw
+ProcessReport. Only checked Ok(None) proves absence; validated group ESRCH,
+terminal typed-vs-unit distinction and bounded sentinel/host readbacks remain
+required. No new API/contract decision needed. Current faba3db loaded confirmed.
+Same Standard stdin_closure_test assigned ONE bounded consolidated tests-only
+followup,20minute active-work planningcheckpoint, no Cargo/SSH/staging/native/
+production/push/recipe mutation. Two failedsourcecorrections4ac/2c preserved;
+firstExpert17, no secondchain/capreset. Root factual decision updated, source
+review pendingfreeze. Current goal turn PROGRESS: diagnosis closes API schema
+uncertainty and directly changes authorized correction; broader scope unchanged.
