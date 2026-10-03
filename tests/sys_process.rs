@@ -453,6 +453,8 @@ const MANAGED_ZOMBIE_ROLE_ENV: &str = "RHAI_SYS_MANAGED_ZOMBIE_ROLE";
 const MANAGED_ZOMBIE_ROOT_ENV: &str = "RHAI_SYS_MANAGED_ZOMBIE_ROOT";
 #[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
 const MANAGED_ZOMBIE_DEADLINE_ENV: &str = "RHAI_SYS_MANAGED_ZOMBIE_DEADLINE_NS";
+#[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
+const MANAGED_ZOMBIE_REAP_MODE_ENV: &str = "RHAI_SYS_MANAGED_ZOMBIE_REAP_MODE";
 #[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
 const MANAGED_ESCAPE_FIXTURE_ENV: &str = "RHAI_SYS_MANAGED_ESCAPE_FIXTURE";
 #[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
@@ -1141,6 +1143,78 @@ fn managed_zombie_u64(fields: &str, key: &str) -> Option<u64> {
 }
 
 #[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_zombie_prompt_reap_members(root: &std::path::Path, reaper_pid: i32) -> Result<bool, String> {
+    let ids_path = root.join("pidfd-identities");
+    let Ok(ids) = std::fs::read_to_string(&ids_path) else { return Ok(false) };
+    let Some(group) = managed_zombie_u64(&ids, "pgid").and_then(|value| i32::try_from(value).ok()) else {
+        return Err("missing managed process-group identity".to_owned());
+    };
+    let mut receipts = Vec::new();
+    for (label, record_name, start_key, expected_parent_key) in [("worker", "worker-record", "worker_start", "leader"), ("leaf", "leaf-record", "leaf_start", "worker")] {
+        let receipt_path = root.join(format!("prompt-{label}-reaped"));
+        if let Ok(receipt) = std::fs::read_to_string(&receipt_path) {
+            let expected_start = managed_zombie_u64(&ids, start_key).ok_or_else(|| format!("missing {label} start identity"))?;
+            let expected_pid = std::fs::read_to_string(root.join(record_name))
+                .ok()
+                .and_then(|record| managed_record_fields(&record).get("pid").copied())
+                .ok_or_else(|| format!("missing {label} PID identity"))?;
+            if !receipt.contains(&format!("{label}={expected_pid} start={expected_start} pgid={group} reaped=true")) {
+                return Err(format!("{label} prior reap receipt does not match exact identity: {receipt}"));
+            }
+            if managed_proc_identity(expected_pid).is_some() {
+                return Err(format!("{label} PID became visible again after its exact wait receipt"));
+            }
+            receipts.push(receipt.trim().to_owned());
+            continue;
+        }
+        let record = match std::fs::read_to_string(root.join(record_name)) {
+            Ok(record) => record,
+            Err(_) => return Ok(false),
+        };
+        let pid = managed_record_fields(&record).get("pid").copied().ok_or_else(|| format!("missing {label} PID"))?;
+        let start = managed_zombie_u64(&ids, start_key).ok_or_else(|| format!("missing {label} start identity"))?;
+        let expected_parent = std::fs::read_to_string(root.join(format!("{expected_parent_key}-record")))
+            .ok()
+            .and_then(|record| managed_record_fields(&record).get("pid").copied())
+            .ok_or_else(|| format!("missing expected {label} parent identity"))?;
+        match managed_proc_identity(pid) {
+            None => return Err(format!("{label} disappeared without this reaper's exact wait receipt")),
+            Some((state, parent, process_group, observed_start)) if observed_start == start && process_group == group && state == 'Z' && parent == reaper_pid => {
+                let mut status = 0;
+                let waited = unsafe { libc::waitpid(pid, &mut status, libc::WNOHANG) };
+                if waited == pid {
+                    if managed_proc_identity(pid).is_some() {
+                        return Err(format!("{label} pid={pid} remained visible after exact waitpid"));
+                    }
+                    let receipt = format!("{label}={pid} start={start} pgid={group} reaped=true wait_status={status}");
+                    managed_atomic_record(&receipt_path, &(receipt.clone() + "\n"));
+                    receipts.push(receipt);
+                } else if waited == 0 {
+                    return Ok(false);
+                } else {
+                    return Err(format!("{label} waitpid failed: {:?}", std::io::Error::last_os_error()));
+                }
+            }
+            Some((state, parent, process_group, observed_start)) if observed_start == start && process_group == group && parent == expected_parent && state != 'Z' => {
+                return Ok(false);
+            }
+            Some((state, parent, process_group, observed_start)) if observed_start == start && process_group == group && parent == expected_parent && state == 'Z' => {
+                return Ok(false);
+            }
+            Some((_, parent, process_group, observed_start)) if observed_start == start && process_group == group && parent == reaper_pid => {
+                return Ok(false);
+            }
+            Some(identity) => return Err(format!("{label} identity left its owned lifecycle: {identity:?}")),
+        }
+    }
+    if receipts.len() != 2 {
+        return Ok(false);
+    }
+    managed_atomic_record(&root.join("prompt-reaper-cleanup"), &(receipts.join(" ") + " complete=true\n"));
+    Ok(true)
+}
+
+#[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
 struct ManagedZombieReaperGuard {
     root: std::path::PathBuf,
     child: Child,
@@ -1298,6 +1372,7 @@ fn managed_zombie_reaper_process() {
     let (deadline_ns, deadline) = managed_zombie_deadline();
     let work_deadline = Instant::now() + Duration::from_nanos(deadline_ns.saturating_sub(managed_zombie_monotonic_ns()).saturating_sub(7_000_000_000));
     let reaper_pid = std::process::id() as i32;
+    let prompt_reap = std::env::var(MANAGED_ZOMBIE_REAP_MODE_ENV).as_deref() == Ok("prompt");
     let reaper_start = managed_proc_identity(reaper_pid).expect("read reaper start ticks").3;
     let prctl_result = unsafe { libc::prctl(libc::PR_SET_CHILD_SUBREAPER, 1, 0, 0, 0) };
     assert_eq!(prctl_result, 0, "set fixture-local subreaper policy");
@@ -1330,7 +1405,17 @@ fn managed_zombie_reaper_process() {
         deadline: host_deadline,
     };
     let mut host_status = None;
+    let api_result_path = root.join("api-result");
     while Instant::now() < work_deadline {
+        if prompt_reap {
+            match managed_zombie_prompt_reap_members(&root, reaper_pid) {
+                Ok(_) => {}
+                Err(error) => panic!("prompt fixture reaper rejected lifecycle identity: {error}"),
+            }
+            if api_result_path.exists() {
+                break;
+            }
+        }
         if let Some(status) = host.child.as_mut().unwrap().try_wait().expect("observe exact Engine host") {
             host_status = Some(status);
             break;
@@ -1341,10 +1426,15 @@ fn managed_zombie_reaper_process() {
         std::thread::sleep(Duration::from_millis(5));
     }
 
-    let api_result_path = root.join("api-result");
     let host_exit_path = root.join("host-exit-release");
     if host_status.is_none() && api_result_path.exists() {
         while !host_exit_path.exists() && Instant::now() < work_deadline {
+            if prompt_reap {
+                match managed_zombie_prompt_reap_members(&root, reaper_pid) {
+                    Ok(_) => {}
+                    Err(error) => panic!("prompt fixture reaper rejected lifecycle identity: {error}"),
+                }
+            }
             if let Some(status) = host.child.as_mut().unwrap().try_wait().expect("observe Engine host exit") {
                 host_status = Some(status);
                 break;
@@ -1376,6 +1466,15 @@ fn managed_zombie_reaper_process() {
                 host_status = Some(child.wait().expect("reap exact fixture Engine host"));
             }
         }
+    }
+
+    if prompt_reap {
+        let status_code = host_status.and_then(|status| status.code()).unwrap_or(-1);
+        let cleanup = std::fs::read_to_string(root.join("prompt-reaper-cleanup")).expect("prompt reaper must independently record both exact descendants");
+        assert!(cleanup.contains("complete=true"), "prompt reaper cleanup receipt incomplete: {cleanup}");
+        assert_eq!(status_code, 0, "Engine host must remain successful through fixture cleanup");
+        managed_atomic_record(&root.join("reaper-cleanup"), &format!("pid={reaper_pid} prompt=true host_status={status_code} {cleanup}"));
+        return;
     }
 
     let worker_text = std::fs::read_to_string(root.join("worker-record")).ok();
@@ -1673,6 +1772,125 @@ fn managed_run_reports_while_fixture_reaper_holds_stopped_zombies() {
     assert!(cleanup.contains(&format!("leaf={} reaped=true", leaf_fields["pid"])), "leaf was not reaped by the fixture-owned reaper: {cleanup}");
     eprintln!("managed_held_zombie_boundary host_live_at_return=true leader={} leader_start={leader_start} leader_reaped=true worker={} worker_start={worker_start} worker_state=Z worker_pgid={} leaf={} leaf_start={leaf_start} leaf_state=Z leaf_pgid={} group={group} kill_zero_result={group_result} kill_zero_errno={group_errno} capture_complete=true {api_result} held={held:?} reaper_status={status:?}", leader_fields["pid"], worker_fields["pid"], worker_now.2, leaf_fields["pid"], leaf_now.2);
     eprintln!("managed_held_zombie_cleanup worker={} reaped=true leaf={} reaped=true", worker_fields["pid"], leaf_fields["pid"]);
+}
+
+/// A fixture-owned subreaper reaps only the exact stopped descendants before the managed run
+/// publishes success, while the separate Engine host remains alive for independent readback.
+#[test]
+#[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_run_succeeds_after_fixture_reaper_reaps_descendants() {
+    const WATCHDOG: Duration = Duration::from_secs(20);
+    let fixture = ManagedFixture::new();
+    let root = fixture.root.path().to_path_buf();
+    let deadline_ns = managed_zombie_monotonic_ns() + WATCHDOG.as_nanos() as u64;
+    let deadline = Instant::now() + WATCHDOG;
+    let mut sentinel = Sentinel(
+        Command::new("/bin/sleep")
+            .arg("30")
+            .stdin(Stdio::null())
+            .stdout(Stdio::null())
+            .stderr(Stdio::null())
+            .spawn()
+            .expect("start unrelated sentinel"),
+    );
+    let sentinel_pid = sentinel.0.id() as i32;
+    let sentinel_start = managed_proc_identity(sentinel_pid).expect("read unrelated sentinel identity").3;
+    let mut command = Command::new(std::env::current_exe().expect("test executable"));
+    command
+        .args(["--exact", "process_fixture", "--nocapture", "--quiet"])
+        .env_clear()
+        .env(MANAGED_ZOMBIE_ROLE_ENV, "reaper")
+        .env("RHAI_SYS_MANAGED_ZOMBIE_REAP_MODE", "prompt")
+        .env(MANAGED_ZOMBIE_ROOT_ENV, &root)
+        .env(MANAGED_ZOMBIE_DEADLINE_ENV, deadline_ns.to_string());
+    let reaper = command.spawn().expect("start fixture-owned reaper");
+    let reaper_pid = reaper.id() as i32;
+    let mut reaper = ManagedZombieReaperGuard {
+        root: root.clone(),
+        child: reaper,
+        launched: false,
+        deadline,
+    };
+    let reaper_ready = fixture.path("reaper-ready");
+    let host_ready = fixture.path("host-ready");
+    while (!reaper_ready.exists() || !host_ready.exists()) && Instant::now() < deadline {
+        assert!(reaper.child.try_wait().unwrap().is_none(), "fixture reaper exited before readiness");
+        std::thread::sleep(Duration::from_millis(5));
+    }
+    assert!(reaper_ready.exists() && host_ready.exists(), "reaper/host readiness exceeded fixture watchdog");
+    let reaper_receipt = std::fs::read_to_string(reaper_ready).unwrap();
+    let host_receipt = std::fs::read_to_string(host_ready).unwrap();
+    let reaper_fields = managed_record_fields(&reaper_receipt);
+    let host_fields = managed_record_fields(&host_receipt);
+    let host_pid = *host_fields.get("pid").expect("host PID receipt");
+    assert_eq!(reaper_fields.get("pid"), Some(&reaper_pid), "reaper PID receipt must match owned child");
+    let Some((_, host_parent, _, host_start)) = managed_proc_identity(host_pid) else { panic!("host identity unavailable before begin") };
+    let Some((_, reaper_parent, _, reaper_start)) = managed_proc_identity(reaper_pid) else { panic!("reaper identity unavailable before begin") };
+    assert_eq!(host_parent, reaper_pid, "Engine host must be a direct child of fixture reaper");
+    assert_eq!(reaper_parent, std::process::id() as i32, "reaper must be owned by outer test");
+    assert_eq!(managed_zombie_u64(&host_receipt, "start"), Some(host_start));
+    assert_eq!(managed_zombie_u64(&reaper_receipt, "start"), Some(reaper_start));
+    reaper.launched = true;
+    std::fs::write(fixture.path("begin-run"), b"begin\n").unwrap();
+
+    let pidfds = acquire_managed_pidfds(root.clone(), host_pid);
+    let leader = std::fs::read_to_string(fixture.path("leader-record")).unwrap();
+    let worker = std::fs::read_to_string(fixture.path("worker-record")).unwrap();
+    let leaf = std::fs::read_to_string(fixture.path("leaf-record")).unwrap();
+    let leader_fields = managed_record_fields(&leader);
+    let worker_fields = managed_record_fields(&worker);
+    let leaf_fields = managed_record_fields(&leaf);
+    let leader_start = pidfds.0.iter().find(|member| member.0 == leader_fields["pid"]).unwrap().2;
+    let worker_start = pidfds.0.iter().find(|member| member.0 == worker_fields["pid"]).unwrap().2;
+    let leaf_start = pidfds.0.iter().find(|member| member.0 == leaf_fields["pid"]).unwrap().2;
+    std::fs::write(fixture.path("pidfd-identities"), format!("leader_start={leader_start} worker_start={worker_start} leaf_start={leaf_start} pgid={}\n", leader_fields["pgid"])).unwrap();
+    eprintln!("managed_prompt_reap_live_boundary reaper={reaper_pid} reaper_start={reaper_start} host={host_pid} host_start={host_start} leader={} leader_start={leader_start} worker={} worker_start={worker_start} leaf={} leaf_start={leaf_start} group={} sentinel={sentinel_pid} sentinel_start={sentinel_start}", leader_fields["pid"], worker_fields["pid"], leaf_fields["pid"], leader_fields["pgid"]);
+    std::fs::write(fixture.path("pidfd-ack"), b"observer holds exact live pidfds\n").unwrap();
+
+    let api_result_path = fixture.path("api-result");
+    while !api_result_path.exists() && Instant::now() < deadline {
+        std::thread::sleep(Duration::from_millis(2));
+    }
+    assert!(api_result_path.exists(), "Engine host did not publish API result in watchdog");
+    let api_result = std::fs::read_to_string(api_result_path).unwrap();
+    assert!(api_result.contains(&format!("host={host_pid} host_start={host_start}")), "API result belongs to unexpected host: {api_result}");
+    let api_exit_zero_at_return = api_result.contains("api_success=true api_outcome=success_report code=0 exit=Some(0)");
+    assert!(api_exit_zero_at_return, "managed run must return a successful zero-exit report after exact foreign reaping: {api_result}");
+    let captures_complete_at_return = api_result.contains("stdout_complete=true stderr_complete=true");
+    assert!(captures_complete_at_return, "successful result must preserve complete captures: {api_result}");
+    assert_managed_pidfds_exited(&pidfds);
+
+    for (label, fields, expected_start) in [("leader", &leader_fields, leader_start), ("worker", &worker_fields, worker_start), ("leaf", &leaf_fields, leaf_start)] {
+        let pid = fields["pid"];
+        assert!(managed_proc_identity(pid).is_none(), "{label} pid={pid} start={expected_start} must be absent at API return");
+    }
+    let host_now = managed_proc_identity(host_pid).expect("Engine host remains live while parent verifies closure");
+    assert_ne!(host_now.0, 'Z', "Engine host exited before independent closure readback");
+    assert_eq!((host_now.1, host_now.3), (reaper_pid, host_start), "Engine host identity or parent changed");
+    let reaper_now = managed_proc_identity(reaper_pid).expect("fixture reaper remains live through API boundary");
+    assert_eq!((reaper_now.1, reaper_now.3), (std::process::id() as i32, reaper_start), "fixture reaper identity or parent changed");
+    let reaped = std::fs::read_to_string(fixture.path("prompt-reaper-cleanup")).expect("prompt reaper cleanup receipt");
+    for (label, fields, start) in [("worker", &worker_fields, worker_start), ("leaf", &leaf_fields, leaf_start)] {
+        assert!(reaped.contains(&format!("{label}={} start={start} pgid={} reaped=true", fields["pid"], leader_fields["pgid"])), "reaper did not prove exact {label} wait: {reaped}");
+    }
+    let sentinel_live_at_return = matches!(
+        managed_proc_identity(sentinel_pid),
+        Some((state, parent, _, start)) if state != 'Z' && parent == std::process::id() as i32 && start == sentinel_start
+    );
+    assert!(sentinel_live_at_return, "managed group cleanup terminated or replaced the unrelated sentinel");
+    std::fs::write(fixture.path("host-exit-release"), b"API success and exact closure recorded\n").unwrap();
+    let observation_deadline = deadline.checked_sub(Duration::from_secs(2)).unwrap_or(deadline);
+    let mut status = None;
+    while status.is_none() && Instant::now() < observation_deadline {
+        status = reaper.child.try_wait().expect("observe exact fixture reaper");
+        if status.is_none() {
+            std::thread::sleep(Duration::from_millis(5));
+        }
+    }
+    assert!(status.is_some_and(|status| status.success()), "fixture reaper did not finish exact cleanup");
+    drop(sentinel);
+    assert!(pid_is_absent(sentinel_pid), "fixture-owned sentinel cleanup must reap its exact child");
+    eprintln!("managed_prompt_reap_success host={host_pid} host_start={host_start} leader={} leader_start={leader_start} leader_absent=true worker={} worker_start={worker_start} worker_absent=true leaf={} leaf_start={leaf_start} leaf_absent=true sentinel={sentinel_pid} sentinel_start={sentinel_start} sentinel_live_at_return={sentinel_live_at_return} sentinel_reaped_after_return=true api_exit_zero_at_return={api_exit_zero_at_return} captures_complete_at_return={captures_complete_at_return} api={api_result} cleanup={reaped:?}", leader_fields["pid"], worker_fields["pid"], leaf_fields["pid"]);
 }
 
 #[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
