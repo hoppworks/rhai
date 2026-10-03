@@ -82,40 +82,39 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 ## Current step and next action
 
 Instructions faba3db unchanged/loaded; full goal active/incomplete. Sole fork
-main last independently read back at4dcdfa61bebabcb0cfb5f1205f765f7914bd0132.
+main last independently read back at727b1a78837e536201277e8bc8fa3f0e8b84a21b.
 Accepted109 proof/source523 unchanged; no retained native resources, all finite
 concurrency exceptions expired. Unix109 consumed; native110 unallocated.
 
-Expert17 single bounded same-Standard follow-up frozen9d051412f7097bca559d92c1e7d10f061ad1b755,
-tests/sys_process.rs only; production unchanged. Root confirms exact hoppworks
-<daniel@hoppworks.de> author/committer, testSHA256
-492983eaf504e764bd0b2cc75fe8b421a229f9efc69a6cf8e670837f9313a827,
-acceptedarchivehelper SHA256
-a97367a1a823ebc163ca5841a40e2064828a77b8c44d63003d8c17caf38e98a7
-(6451200bytes). Syntax-only and committed diff checks passed; not compilation.
-Same combined Expert affected9d source check completed NOT READY: borrow after
-move, property/method mismatch, typed success consistency and incomplete fallback
-terminal validation. Text-map/schema and checkedabsence repairs valid narrowly.
-Same Standard continues these four known corrections inside existing Expert17
-source-only followup; no new Expert/package or native launch.
-No SOURCE READY/runtime claim. Standard completed sourcebatch, preserves dirty
-interruptedrecipe drafts and historicalnote; no mutation while source reviewed.
+Same Standard completed the four known affected9d source fixes inside the
+existing Expert17 follow-up, frozen ee50c63e119ea22375e9cee2743ccf622d0a3aa3.
+Only tests/sys_process.rs changed; production and interrupted recipes unchanged.
+Root independently verified lowercase hoppworks author/committer, test SHA256
+c247551b421e6ca9d973fcdbad9a0fd21a2841c59db89c3f3824bbd6d26b221f,
+accepted archive SHA256
+d2115657ca6f81262077f9a1a074df018817e5469855ee894430f88990e43abe
+(6451200 bytes). Syntax parsing and committed diff checks passed, not compilation
+or runtime acceptance. Same combined reviewer completed the affected recheck: SOURCE READY, all four
+findings resolved and no new material source blocker. This is source readiness
+only; compilation and real OS acceptance remain unverified.
 
-Cause extraction/guard/receipt: two failedsourcechecks4ac/2c, firstExpert17,
-one justified followup ongoing after its source review checkpoint. Failedsource
-checks now3 (4ac,2c,9d), nativefailures0. No second Expert renewal or
-hardlimit increase; original wrong APIseam16 history remains independently
-settled. No Cargo/SSH/stage/native/product launch occurred. Previous goal turn
-VERIFIED WAIT on actuallylive Standard; current turn PROGRESS: immutable source
-freeze/pins independently verified and concrete affected recheck started.
+Source correction history4ac/2c/9d remains three failed checks, first Expert17
+and its same bounded follow-up; no new escalation, cause rename or budget reset.
+Owner reports approximately seven minutes wall-clock active work since the resumed
+checkpoint; earlier cumulative active work and CPU/cost metrics remain unknown.
+The recorded20-minute planning checkpoint/reconciled at-most30-minute total
+estimate is not a human safety-cap renewal. Native failures/launches remain0;
+no Cargo, SSH, stage, production change or native allocation occurred. All
+exhausted native/Darwin/Windows chains and actual hard boundaries remain stopped.
 
-Next current four known source corrections/freeze/affected recheck -> only if
-READY resume SAMEStandard one existing recipebatch
-with currentpins and four c39 export/classification/custody findings, honest
-successmapprovenance/diagnosticsunavailable. Then combined affected recipecheck,
-fresh workhorse slot/capacity, actual native RED before product correction.
-Human permits Tauron buildwindow coordination if freshcontention requires it.
-Strict finalnativeLinux/macOS/Windows/feature/MSRV/release coverage remainsopen.
+Current owner: SAME Standard resumed the existing recipe batch after SOURCE
+READY with current pins and all four c39 export/classification/custody findings,
+actual text-map provenance and unavailable diagnostics. Recipe-only work, no
+Cargo/SSH/staging/native/production mutation. Next: affected
+recipe review, fresh workhorse slot/capacity check, meaningful native RED before
+production correction and real acceptance. The human authorized Tauron build
+window coordination if fresh contention requires it. Final native Linux/macOS/
+Windows, feature, MSRV and release coverage remain open.
 
 ### Earlier current-step history (retained, superseded)
 
@@ -2112,3 +2111,12 @@ boundaries remain. All exhausted native/Darwin/Windows chains remain stopped.
 Currentturn PROGRESS: actual9d result closes valid schema/absence pieces and
 changes exactremainingfixbatch; current owner resumed in samecontext. Nextsource
 freeze/recheck, then pendingrecipes onlyafterREADY.
+
+Source ee50c63e follow-up completed: four affected9d fixes frozen and root pins
+verified; same affected review dispatched. Owner reports about seven minutes
+wall-clock since resumed checkpoint, earlier cumulative use unknown. No native
+launch/acceptance or production integration inferred. Current turn PROGRESS.
+
+Affected ee50c63e source review SOURCE READY: all four9d findings closed, no
+new material affected source issue. Same responsible Standard resumed consuming
+recipes; no source acceptance, native allocation or production integration.
