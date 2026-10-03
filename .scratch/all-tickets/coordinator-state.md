@@ -85,7 +85,7 @@ Instructions/roles faba3db3bef6891ad2c0b20d434963bb8fe9572d loaded by root,
 responsible Standard and same combined reviewer. Workhorse installed rules resolved
 at /var/home/workhorse/.agents/AGENTS.md and /var/home/workhorse/projects/agent-skills;
 SSH root has no ~/.agents. Read-only resolution/command-local safe.directory only.
-Last verified accepted integration fork main6faf70be091dd52dff9987276d2e33492647bfbd; sole remote main,
+Last verified fork main cf4213288454694521c6838a967d50e778fdf6de (stdin contract decision); accepted source integration6faf70be091dd52dff9987276d2e33492647bfbd; sole remote main,
 lowercase human author/committer. Native105 managed deadline accepted, exported,
 exactly cleaned and integrated. Current package: native106 OutputLimit frozen
 source53b/recipesc785 completed terminal0: three setup0, intended control101,
@@ -1798,3 +1798,5 @@ First RED before production correction, existing EOF/blockedstdin regressions an
 postcleanup sensitivity. No source edit/native allocation yet; sameStandard starts
 only after immutable escaped523 stage is confirmed. Windows and worker-start fault
 remain independent; no exhausted cause chain is reopened.
+
+Escaped-pipe execution recipes frozen53ae38a8aaea55ae609970cac96aef7ee5897d07 in same owned writer; root independently verified actual committed bytes/current files and lowercase author/committer. Proof SHAe57b58958ee4d6b7d8e2be0e5b58565cab31fbf53904aeda880104fc00b2ea40, stage dff39cb857329241fd68b5416c7c453f809e6cc18b0b211a42792f2ae4ebdd7e, launch798d9c94323f5646d6d0f3e535e1b4fff8b922ac8a83be16e17a01b5e29dbbe4, collector a5a7e9053c10e83600954825b852b680a3a4691dbea66e63c903b8eb2b6ef3b7. Standard purechecks and root AST/bash/pins PASS; no native acceptance. Same combined Expert now reviews affected execution/collection only. Eight tests+three setup, seven required original closures; retained-pipe regression has no invented closure artifact. Native107 unallocated, limits/history unchanged. Fresh read-only workhorse inventory showed one foreign Tauron group1402398 (launcher1402397/start4598403, supervisor1402398/start4598405),32CPUs/79736824KiB availableRAM/728909443072bytes free; prospective107stage/scope absent. Not a reservation or concurrency exception. No foreign process modified. Next READY -> fresh slot/capacity and immutable stage; same writer stdin implementation begins only after stage confirmation.
