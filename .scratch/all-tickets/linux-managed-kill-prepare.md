@@ -13,6 +13,6 @@ Recipe hashes:
 - `linux-managed-kill-proof.py`: `d6035236936abe7851ab592e4e419e3d9ff7e1085f7fc4c568ea913f01d4945f`
 - `linux-managed-kill-stage.sh`: `cb634ba0404afab3dd0f0c48a5eaf68decddbdf076eed0f6ee32cf0e430b8fe5`
 - `linux-managed-kill-launch.sh`: `20851ad36ea0b31bc66e1f2770ae699a43fbb8253b05d9d5ac1f8d79fe3d65db`
-- `collect-linux-managed-kill.py`: `e56b942e33758c3cc77c65c17e1dca9fad62735fa8b4fe7b726e1c7368e3aa26`
+- `collect-linux-managed-kill.py`: `4c215b16adeed34e8f9340ff0bd5e3b41d7bd318a3620b8bc046bd124db71c4b`
 
 The source-only checks are Python AST parsing under Python 3.12, Bash syntax validation, and synthetic exact-format receipt and negative-mutation checks. No Rust build, Cargo test, SSH staging, native run, wrong-control execution, or restored-green run has occurred. This package does not establish native acceptance; the named controls still need to prove sensitivity in the integrated run, followed by independent collector readback. `no_float` and `no_index` compatibility is not claimed because the managed test and its helpers are gated off for those configurations.

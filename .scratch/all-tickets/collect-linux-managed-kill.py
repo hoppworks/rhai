@@ -23,7 +23,7 @@ def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
 if sha(stage/'source.tar')!='450bf2f8dd3325e49e8a2e5e2e937903aee39e7a5381a0677b08bda3d977e9b9': raise SystemExit('source archive mismatch')
 if sha(stage/'Cargo.lock.accepted')!='2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425': raise SystemExit('lock mismatch')
 if sha(stage/'contract-source.md')!='1d8a61b5dffefc4f5891d12ed2b19b438637e4e752607e68c6495f96eb553d41': raise SystemExit('contract mismatch')
-for name,digest in [('linux-managed-kill-proof.py','20b8bd21b670af54e00e0b47f8a625425aded09fa339f0182ec9bb34fc8d5683'),('stage.sh','6cea80b06f007ae0732a8498bf5a086ffba519b9250d2931864d94743b95c283'),('launch.sh','0b02fe1bee9dbea37b27237c7f76c228fa24c8dc0ab3cd33191e236f083f0b36')]:
+for name,digest in [('linux-managed-kill-proof.py','d6035236936abe7851ab592e4e419e3d9ff7e1085f7fc4c568ea913f01d4945f'),('stage.sh','cb634ba0404afab3dd0f0c48a5eaf68decddbdf076eed0f6ee32cf0e430b8fe5'),('launch.sh','20851ad36ea0b31bc66e1f2770ae699a43fbb8253b05d9d5ac1f8d79fe3d65db')]:
  if sha(stage/name)!=digest: raise SystemExit(name+' recipe hash mismatch')
 contract=(stage/'contract.md').read_text()
 for line in ('exact_tests=8','feature_rows=4','positive_exact_invocations=6','negative_controls=2','test_exact_invocations=8','toolchain_setup_commands=3','helper_commands_expected=11','outer_timeout_seconds=600','run_scoped_timeout_seconds=585','helper_deadline_seconds=540','export_reserve_seconds=30','cargo_build_jobs=2','max_descendants=16','storage_preemptive_stop_kib=1572864','storage_hard_stop_kib=2097152','rss_hard_stop_kib=2097152'):
@@ -64,7 +64,7 @@ import importlib.util
 def load(path,name,expected):
  if sha(path)!=expected: raise SystemExit(f'{path.name} hash mismatch')
  spec=importlib.util.spec_from_file_location(name,path); mod=importlib.util.module_from_spec(spec); sys.modules[name]=mod; spec.loader.exec_module(mod); return mod
-proof=load(stage/'linux-managed-kill-proof.py','kill_proof','20b8bd21b670af54e00e0b47f8a625425aded09fa339f0182ec9bb34fc8d5683')
+proof=load(stage/'linux-managed-kill-proof.py','kill_proof','d6035236936abe7851ab592e4e419e3d9ff7e1085f7fc4c568ea913f01d4945f')
 old=load(stage/'linux-managed-success-proof.py','accepted96_proof','83e84145fdec770ee5469b8ef2d85eacb813bc073abbd2a37e80e605a224a1a0')
 class ComparisonSink:
  STAGE=p
