@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Bounded Rust 1.77.2 Linux managed Child.kill proof."""
 from __future__ import annotations
-import hashlib, importlib.util, json, os, platform, re, shutil, signal, sys, time, traceback
+import hashlib, importlib.util, json, os, platform, re, shutil, signal, stat, subprocess, sys, time, traceback
 from pathlib import Path
 
 REV = '90a6ddea70a7d25f2554845cc5f1b3d9e62e7e07'
@@ -19,8 +19,8 @@ CONTROLS = {
  'require-success-control': 'managed-child-kill-control require-success assertion',
  'require-sentinel-absent-control': 'managed-child-kill-control require-sentinel-absent assertion',
 }
-STAGE_PATH = Path('/root/rhai-linux-managed-kill-20261003-a17f40a7-98')
-SCOPE_PATH = Path('/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98')
+STAGE_PATH = Path('/root/rhai-linux-managed-kill-20261003-a17f40a7-99')
+SCOPE_PATH = Path('/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-99')
 BASE = None
 OLD = None
 
@@ -41,6 +41,145 @@ def overlay(original, control):
  else: raise RuntimeError(f'unknown control {control}')
  if text.count(anchor)!=1: raise RuntimeError('post-cleanup report assertion anchor is not unique')
  return text.replace(anchor,replacement,1).encode()
+
+DU_TRANSIENT_MAX_ATTEMPTS = 4
+
+
+def transient_du_missing_paths(stderr: str, runtime: Path) -> list[str] | None:
+ """Accept only GNU du ENOENT diagnostics for vanished files below this runtime."""
+ lines = stderr.splitlines()
+ if not lines or any(not line for line in lines):
+  return None
+ root_absolute = Path(os.path.abspath(runtime))
+ root = root_absolute.resolve(strict=True)
+ missing = []
+ pattern = re.compile(r"^du: cannot access '([^'\r\n]+)': No such file or directory$")
+ for line in lines:
+  match = pattern.fullmatch(line)
+  if match is None:
+   return None
+  candidate = Path(match.group(1))
+  if not candidate.is_absolute():
+   return None
+  try:
+   relative = candidate.relative_to(root_absolute)
+  except ValueError:
+   return None
+  if not relative.parts or any(part in ('', '.', '..') for part in relative.parts):
+   return None
+  current = root
+  disappeared = False
+  for index, part in enumerate(relative.parts):
+   current = current / part
+   try:
+    info = current.lstat()
+   except FileNotFoundError:
+    disappeared = True
+    break
+   except (PermissionError, OSError) as exc:
+    raise RuntimeError(f'cannot verify transient du ENOENT path {candidate}: {exc}') from exc
+   if stat.S_ISLNK(info.st_mode):
+    return None
+   if index < len(relative.parts) - 1 and not stat.S_ISDIR(info.st_mode):
+    return None
+  if not disappeared:
+   return None
+  missing.append(str(candidate))
+ return missing
+
+
+def install_bounded_du_retry(base) -> None:
+ """Replace only this proof's sampler; keep complete du/ps measurements and limits."""
+ def capture(name: str, argv: list[str]) -> tuple[str, str, int]:
+  child = subprocess.Popen(argv, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                           text=True, close_fds=True)
+  try:
+   base.record_process_identity(f'command:{name}', child.pid, base.process_identity(child.pid))
+   stdout, stderr = child.communicate(timeout=5)
+  except subprocess.TimeoutExpired:
+   base.stop_child(child)
+   raise TimeoutError(f'{name} sampling command exceeded five seconds')
+  except BaseException:
+   base.stop_child(child)
+   raise
+  return stdout, stderr, child.returncode
+
+ def process_usage() -> tuple[int, int]:
+  base.check_deadline()
+  ps_output, stderr, status = capture('ps', ['/bin/ps', '-e', '-o', 'pid=,ppid=,rss='])
+  base.check_deadline()
+  if status != 0:
+   raise RuntimeError(f'ps sampling command failed: {stderr[-500:]}')
+  rows: dict[int, tuple[int, int]] = {}
+  for line in ps_output.splitlines():
+   fields = line.split()
+   if len(fields) != 3:
+    raise RuntimeError(f'malformed ps resource row: {line!r}')
+   pid, ppid, rss = map(int, fields)
+   if pid in rows:
+    raise RuntimeError(f'duplicate PID in resource sample: {pid}')
+   rows[pid] = (ppid, rss)
+  root_pid = os.getpid()
+  if root_pid not in rows:
+   raise RuntimeError('helper PID absent from resource sample')
+  owned = {root_pid}
+  while True:
+   children = {pid for pid, (ppid, _rss) in rows.items() if ppid in owned} - owned
+   if not children:
+    break
+   owned.update(children)
+  return sum(rows[pid][1] for pid in owned), len(owned) - 1
+
+ def enforce_live_limits(rss: int, descendants: int) -> None:
+  base.MAXIMA['rss_kib'] = max(base.MAXIMA['rss_kib'], rss)
+  base.MAXIMA['descendants'] = max(base.MAXIMA['descendants'], descendants)
+  if rss >= base.HARD_RSS_KIB:
+   raise RuntimeError('sampled helper RSS reached 2 GiB hard stop')
+  if descendants > base.MAX_DESCENDANTS:
+   raise RuntimeError('sampled helper descendants exceeded 16')
+
+ def sample_resources() -> None:
+  base.check_deadline()
+  du_argv = ['/usr/bin/du', '-sk', str(base.RUNTIME)]
+  for attempt in range(1, DU_TRANSIENT_MAX_ATTEMPTS + 1):
+   base.check_deadline()
+   stdout, stderr, status = capture('du', du_argv)
+   if status == 0:
+    storage = int(stdout.split()[0])
+    break
+   vanished = transient_du_missing_paths(stderr, base.RUNTIME) if status == 1 else None
+   if vanished is None:
+    raise RuntimeError(f'du sampling command failed status={status}: {stderr[-500:]}')
+   # Keep live limits and the helper deadline active between complete storage
+   # measurements; retrying du never creates a window without RSS/child checks.
+   rss, descendants = process_usage()
+   enforce_live_limits(rss, descendants)
+   if attempt == DU_TRANSIENT_MAX_ATTEMPTS:
+    raise RuntimeError(f'du still saw transient ENOENT after {attempt} complete measurements: {vanished!r}')
+   event = {'monotonic_seconds': round(time.monotonic() - base.START, 3),
+            'attempt': attempt, 'vanished_paths': vanished,
+            'rss_kib': rss, 'descendants': descendants,
+            'next_action': 'rerun complete du measurement; no paths excluded'}
+   retry_path = base.STAGE / 'du-transient-retries.jsonl'
+   with retry_path.open('a', encoding='utf-8') as stream:
+    stream.write(json.dumps(event, sort_keys=True) + '\n')
+    stream.flush()
+   print('du_transient_retry=' + json.dumps(event, sort_keys=True), flush=True)
+  rss, descendants = process_usage()
+  current = {'monotonic_seconds': round(time.monotonic() - base.START, 3),
+             'storage_kib': storage, 'rss_kib': rss, 'descendants': descendants}
+  base.SAMPLES.append(current)
+  base.MAXIMA['storage_kib'] = max(base.MAXIMA['storage_kib'], storage)
+  base.MAXIMA['rss_kib'] = max(base.MAXIMA['rss_kib'], rss)
+  base.MAXIMA['descendants'] = max(base.MAXIMA['descendants'], descendants)
+  print('sample=' + json.dumps(current, sort_keys=True), flush=True)
+  if storage >= base.PREEMPTIVE_STORAGE_KIB:
+   raise RuntimeError('sampled private storage reached 1.5 GiB preemptive stop')
+  if storage >= base.HARD_STORAGE_KIB:
+   raise RuntimeError('sampled private storage/RSS reached 2 GiB hard stop')
+  enforce_live_limits(rss, descendants)
+ base.sample_resources = sample_resources
+
 
 def cargo_cmd(cargo,features): return [str(cargo),'test','--locked','--features',features,'--test','sys_process','--','--exact','--nocapture','--test-threads=1']
 def streams(label): return BASE.read_text(BASE.STAGE/f'{label}.stdout'),BASE.read_text(BASE.STAGE/f'{label}.stderr')
@@ -138,6 +277,7 @@ def main():
  global BASE, OLD
  stage=Path(os.environ['PROOF_STAGE']); runtime=Path(os.environ['AGENT_RUNTIME_DIR'])
  BASE=load(stage,'check-linux-current-msrv-examples.py',BASE_SHA,'accepted_base')
+ install_bounded_du_retry(BASE)
  OLD=load(stage,'linux-managed-success-proof.py',OLD_PROOF_SHA,'accepted96_proof')
  signal.signal(signal.SIGTERM,BASE.on_signal); signal.signal(signal.SIGINT,BASE.on_signal)
  BASE.INPUT_STAGE=stage; BASE.EXPECTED_STAGE=Path(os.environ['EXPECTED_PROOF_STAGE']); BASE.PRESCRIBED_STAGE=STAGE_PATH; BASE.PRESCRIBED_SCOPE=SCOPE_PATH

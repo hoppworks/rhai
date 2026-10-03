@@ -4,15 +4,15 @@ from __future__ import annotations
 import argparse, hashlib, importlib.util, json, re, shlex, subprocess, sys, tarfile, tempfile
 from pathlib import Path, PurePosixPath
 
-STAGE='/root/rhai-linux-managed-kill-20261003-a17f40a7-98'
-SCOPE='/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98'
-PHYSICAL='/var/roothome/rhai-linux-managed-kill-20261003-a17f40a7-98'
+STAGE='/root/rhai-linux-managed-kill-20261003-a17f40a7-99'
+SCOPE='/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-99'
+PHYSICAL='/var/roothome/rhai-linux-managed-kill-20261003-a17f40a7-99'
 REV='90a6ddea70a7d25f2554845cc5f1b3d9e62e7e07'
 ARCHIVE='450bf2f8dd3325e49e8a2e5e2e937903aee39e7a5381a0677b08bda3d977e9b9'
 LOCK='2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425'
 TEST='90b9216c4517384228418e57c2b6ec91ed779b590e68ff6b288b81760a6b537d'
 CONTRACT='1d8a61b5dffefc4f5891d12ed2b19b438637e4e752607e68c6495f96eb553d41'
-PROOF='d6035236936abe7851ab592e4e419e3d9ff7e1085f7fc4c568ea913f01d4945f'; STAGE_RECIPE='cb634ba0404afab3dd0f0c48a5eaf68decddbdf076eed0f6ee32cf0e430b8fe5'; LAUNCH='20851ad36ea0b31bc66e1f2770ae699a43fbb8253b05d9d5ac1f8d79fe3d65db'; OLD_PROOF='83e84145fdec770ee5469b8ef2d85eacb813bc073abbd2a37e80e605a224a1a0'
+PROOF='7cf8f2a1784193c206f63ffa35cb0d2c72e9add46bdf22457fe9526acb3735a1'; STAGE_RECIPE='dec96c3450f7119439424fb8fbb917c2a956dc64d93b9e2207ace2d7f9a13b52'; LAUNCH='b3c04620840cdb412ca52982d5c0e47e0cf7318bc28e2cc6605621f52ff0eb61'; OLD_PROOF='83e84145fdec770ee5469b8ef2d85eacb813bc073abbd2a37e80e605a224a1a0'
 
 REMOTE=r'''import hashlib,json,pathlib,re,subprocess,sys
 stage=pathlib.Path(sys.argv[1]); scope=pathlib.Path(sys.argv[2]); physical=pathlib.Path(sys.argv[3])
@@ -23,7 +23,7 @@ def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
 if sha(stage/'source.tar')!='450bf2f8dd3325e49e8a2e5e2e937903aee39e7a5381a0677b08bda3d977e9b9': raise SystemExit('source archive mismatch')
 if sha(stage/'Cargo.lock.accepted')!='2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425': raise SystemExit('lock mismatch')
 if sha(stage/'contract-source.md')!='1d8a61b5dffefc4f5891d12ed2b19b438637e4e752607e68c6495f96eb553d41': raise SystemExit('contract mismatch')
-for name,digest in [('linux-managed-kill-proof.py','d6035236936abe7851ab592e4e419e3d9ff7e1085f7fc4c568ea913f01d4945f'),('stage.sh','cb634ba0404afab3dd0f0c48a5eaf68decddbdf076eed0f6ee32cf0e430b8fe5'),('launch.sh','20851ad36ea0b31bc66e1f2770ae699a43fbb8253b05d9d5ac1f8d79fe3d65db')]:
+for name,digest in [('linux-managed-kill-proof.py','7cf8f2a1784193c206f63ffa35cb0d2c72e9add46bdf22457fe9526acb3735a1'),('stage.sh','dec96c3450f7119439424fb8fbb917c2a956dc64d93b9e2207ace2d7f9a13b52'),('launch.sh','b3c04620840cdb412ca52982d5c0e47e0cf7318bc28e2cc6605621f52ff0eb61')]:
  if sha(stage/name)!=digest: raise SystemExit(name+' recipe hash mismatch')
 contract=(stage/'contract.md').read_text()
 for line in ('exact_tests=8','feature_rows=4','positive_exact_invocations=6','negative_controls=2','test_exact_invocations=8','toolchain_setup_commands=3','helper_commands_expected=11','outer_timeout_seconds=600','run_scoped_timeout_seconds=585','helper_deadline_seconds=540','export_reserve_seconds=30','cargo_build_jobs=2','max_descendants=16','storage_preemptive_stop_kib=1572864','storage_hard_stop_kib=2097152','rss_hard_stop_kib=2097152'):
@@ -64,7 +64,7 @@ import importlib.util
 def load(path,name,expected):
  if sha(path)!=expected: raise SystemExit(f'{path.name} hash mismatch')
  spec=importlib.util.spec_from_file_location(name,path); mod=importlib.util.module_from_spec(spec); sys.modules[name]=mod; spec.loader.exec_module(mod); return mod
-proof=load(stage/'linux-managed-kill-proof.py','kill_proof','d6035236936abe7851ab592e4e419e3d9ff7e1085f7fc4c568ea913f01d4945f')
+proof=load(stage/'linux-managed-kill-proof.py','kill_proof','7cf8f2a1784193c206f63ffa35cb0d2c72e9add46bdf22457fe9526acb3735a1')
 old=load(stage/'linux-managed-success-proof.py','accepted96_proof','83e84145fdec770ee5469b8ef2d85eacb813bc073abbd2a37e80e605a224a1a0')
 class ComparisonSink:
  STAGE=p
