@@ -4,15 +4,15 @@ from __future__ import annotations
 import argparse, hashlib, importlib.util, json, re, shlex, subprocess, sys, tarfile, tempfile
 from pathlib import Path, PurePosixPath
 
-STAGE='/root/rhai-linux-managed-kill-20261003-a17f40a7-99'
-SCOPE='/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-99'
-PHYSICAL='/var/roothome/rhai-linux-managed-kill-20261003-a17f40a7-99'
-REV='90a6ddea70a7d25f2554845cc5f1b3d9e62e7e07'
-ARCHIVE='450bf2f8dd3325e49e8a2e5e2e937903aee39e7a5381a0677b08bda3d977e9b9'
+STAGE='/root/rhai-linux-managed-kill-20261003-a17f40a7-100'
+SCOPE='/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100'
+PHYSICAL='/var/roothome/rhai-linux-managed-kill-20261003-a17f40a7-100'
+REV='c69524f15666d66b7dc3fa8d4750e84ddc946535'
+ARCHIVE='e16cd6482d1e3e1ff4b9056e3198b6ad6e8733657c66c87fd2e59fc35e023fe8'
 LOCK='2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425'
-TEST='90b9216c4517384228418e57c2b6ec91ed779b590e68ff6b288b81760a6b537d'
+TEST='a29511c1b9c61b51f68022527e4fe2a9914d0a8d7589c32ab0938a4729023293'
 CONTRACT='1d8a61b5dffefc4f5891d12ed2b19b438637e4e752607e68c6495f96eb553d41'
-PROOF='7cf8f2a1784193c206f63ffa35cb0d2c72e9add46bdf22457fe9526acb3735a1'; STAGE_RECIPE='dec96c3450f7119439424fb8fbb917c2a956dc64d93b9e2207ace2d7f9a13b52'; LAUNCH='b3c04620840cdb412ca52982d5c0e47e0cf7318bc28e2cc6605621f52ff0eb61'; OLD_PROOF='83e84145fdec770ee5469b8ef2d85eacb813bc073abbd2a37e80e605a224a1a0'
+PROOF='e3961ba6c5db2898feaf121fd2b18a9652866c119c492ea186ce35f05d0cd1d6'; STAGE_RECIPE='c0033463cb8435ed80c8ac14f200c323bf3d668be9cad7080a0f4b3559500b9c'; LAUNCH='6eb76052d9ba9e9d3ab45a1c4e6d0a0d8b562a8c0cf2e9ad24acad59a99c3a5a'; OLD_PROOF='83e84145fdec770ee5469b8ef2d85eacb813bc073abbd2a37e80e605a224a1a0'
 
 REMOTE=r'''import hashlib,json,pathlib,re,subprocess,sys
 stage=pathlib.Path(sys.argv[1]); scope=pathlib.Path(sys.argv[2]); physical=pathlib.Path(sys.argv[3])
@@ -20,10 +20,10 @@ if not stage.is_dir() or stage.is_symlink() or stage.resolve()!=physical: raise 
 if scope.exists() or scope.is_symlink(): raise SystemExit('managed-kill private scope remains')
 subprocess.run(['sha256sum','--check','input-identities.sha256'],cwd=stage,check=True,stdout=subprocess.DEVNULL)
 def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
-if sha(stage/'source.tar')!='450bf2f8dd3325e49e8a2e5e2e937903aee39e7a5381a0677b08bda3d977e9b9': raise SystemExit('source archive mismatch')
+if sha(stage/'source.tar')!='e16cd6482d1e3e1ff4b9056e3198b6ad6e8733657c66c87fd2e59fc35e023fe8': raise SystemExit('source archive mismatch')
 if sha(stage/'Cargo.lock.accepted')!='2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425': raise SystemExit('lock mismatch')
 if sha(stage/'contract-source.md')!='1d8a61b5dffefc4f5891d12ed2b19b438637e4e752607e68c6495f96eb553d41': raise SystemExit('contract mismatch')
-for name,digest in [('linux-managed-kill-proof.py','7cf8f2a1784193c206f63ffa35cb0d2c72e9add46bdf22457fe9526acb3735a1'),('stage.sh','dec96c3450f7119439424fb8fbb917c2a956dc64d93b9e2207ace2d7f9a13b52'),('launch.sh','b3c04620840cdb412ca52982d5c0e47e0cf7318bc28e2cc6605621f52ff0eb61')]:
+for name,digest in [('linux-managed-kill-proof.py','e3961ba6c5db2898feaf121fd2b18a9652866c119c492ea186ce35f05d0cd1d6'),('stage.sh','c0033463cb8435ed80c8ac14f200c323bf3d668be9cad7080a0f4b3559500b9c'),('launch.sh','6eb76052d9ba9e9d3ab45a1c4e6d0a0d8b562a8c0cf2e9ad24acad59a99c3a5a')]:
  if sha(stage/name)!=digest: raise SystemExit(name+' recipe hash mismatch')
 contract=(stage/'contract.md').read_text()
 for line in ('exact_tests=8','feature_rows=4','positive_exact_invocations=6','negative_controls=2','test_exact_invocations=8','toolchain_setup_commands=3','helper_commands_expected=11','outer_timeout_seconds=600','run_scoped_timeout_seconds=585','helper_deadline_seconds=540','export_reserve_seconds=30','cargo_build_jobs=2','max_descendants=16','storage_preemptive_stop_kib=1572864','storage_hard_stop_kib=2097152','rss_hard_stop_kib=2097152'):
@@ -33,7 +33,7 @@ expected_closures={'require-success-control-fixture-closure.json','require-senti
 actual_closures={x.name for x in p.glob('*-closure.json')}
 if actual_closures!=expected_closures: raise SystemExit(f'required original closure inventory mismatch expected={sorted(expected_closures)} actual={sorted(actual_closures)}')
 rest=json.loads((p/'source-restoration.json').read_text())
-if not rest.get('restored') or rest.get('original_sha256',{}).get('tests/sys_process.rs')!='90b9216c4517384228418e57c2b6ec91ed779b590e68ff6b288b81760a6b537d' or rest.get('error') is not None: raise SystemExit('frozen test source restoration mismatch')
+if not rest.get('restored') or rest.get('original_sha256',{}).get('tests/sys_process.rs')!='a29511c1b9c61b51f68022527e4fe2a9914d0a8d7589c32ab0938a4729023293' or rest.get('error') is not None: raise SystemExit('frozen test source restoration mismatch')
 e=stage/'outer-evidence'; names=('outer-status.txt','run-scoped.status','pid-readback.status','pid-readback-launcher.status')
 statuses={n:int((e/n).read_text().strip()) for n in names}
 if statuses!={n:0 for n in names}: raise SystemExit(f'outer/custody statuses mismatch: {statuses}')
@@ -64,7 +64,7 @@ import importlib.util
 def load(path,name,expected):
  if sha(path)!=expected: raise SystemExit(f'{path.name} hash mismatch')
  spec=importlib.util.spec_from_file_location(name,path); mod=importlib.util.module_from_spec(spec); sys.modules[name]=mod; spec.loader.exec_module(mod); return mod
-proof=load(stage/'linux-managed-kill-proof.py','kill_proof','7cf8f2a1784193c206f63ffa35cb0d2c72e9add46bdf22457fe9526acb3735a1')
+proof=load(stage/'linux-managed-kill-proof.py','kill_proof','e3961ba6c5db2898feaf121fd2b18a9652866c119c492ea186ce35f05d0cd1d6')
 old=load(stage/'linux-managed-success-proof.py','accepted96_proof','83e84145fdec770ee5469b8ef2d85eacb813bc073abbd2a37e80e605a224a1a0')
 class ComparisonSink:
  STAGE=p

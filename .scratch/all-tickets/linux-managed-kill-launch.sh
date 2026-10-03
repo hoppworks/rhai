@@ -2,8 +2,8 @@
 set -euo pipefail
 umask 077
 
-stage=/root/rhai-linux-managed-kill-20261003-a17f40a7-99
-scope=/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-99
+stage=/root/rhai-linux-managed-kill-20261003-a17f40a7-100
+scope=/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100
 runner="$stage/runner/tools/run_scoped.py"
 helper="$stage/linux-managed-kill-proof.py"
 evidence="$stage/outer-evidence"
@@ -61,7 +61,7 @@ trap 'on_signal INT' INT
 printf 'launch_utc=%s\nrunner_timeout_seconds=585\n' "$(date -u +%FT%TZ)"
 printf 'stage=%s\nscope=%s\n' "$stage" "$scope"
 canonical_stage=$(realpath -e "$stage")
-canonical_expected_stage=$(realpath -e /root/rhai-linux-managed-kill-20261003-a17f40a7-99)
+canonical_expected_stage=$(realpath -e /root/rhai-linux-managed-kill-20261003-a17f40a7-100)
 if [[ "$canonical_stage" != "$canonical_expected_stage" ]]; then
   printf 'stage canonical identity mismatch: %s != %s\n' "$canonical_stage" "$canonical_expected_stage"
   exit 1

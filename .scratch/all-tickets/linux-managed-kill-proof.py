@@ -4,11 +4,11 @@ from __future__ import annotations
 import hashlib, importlib.util, json, os, platform, re, shutil, signal, stat, subprocess, sys, time, traceback
 from pathlib import Path
 
-REV = '90a6ddea70a7d25f2554845cc5f1b3d9e62e7e07'
-ARCHIVE = '450bf2f8dd3325e49e8a2e5e2e937903aee39e7a5381a0677b08bda3d977e9b9'
+REV = 'c69524f15666d66b7dc3fa8d4750e84ddc946535'
+ARCHIVE = 'e16cd6482d1e3e1ff4b9056e3198b6ad6e8733657c66c87fd2e59fc35e023fe8'
 LOCK = '2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425'
 BASE_SHA = '59ac8b7b9c71ab2331c13196b36d8d2794931e07138741c43d4a8c3d1d754b06'
-TEST_SHA = '90b9216c4517384228418e57c2b6ec91ed779b590e68ff6b288b81760a6b537d'
+TEST_SHA = 'a29511c1b9c61b51f68022527e4fe2a9914d0a8d7589c32ab0938a4729023293'
 CONTRACT_SHA = '1d8a61b5dffefc4f5891d12ed2b19b438637e4e752607e68c6495f96eb553d41'
 OLD_PROOF_SHA = '83e84145fdec770ee5469b8ef2d85eacb813bc073abbd2a37e80e605a224a1a0'
 ROWS = ('testing-environ,sys', 'testing-environ,sys,sync,metadata', 'testing-environ,sys,f32_float', 'testing-environ,sys,unchecked')
@@ -19,8 +19,8 @@ CONTROLS = {
  'require-success-control': 'managed-child-kill-control require-success assertion',
  'require-sentinel-absent-control': 'managed-child-kill-control require-sentinel-absent assertion',
 }
-STAGE_PATH = Path('/root/rhai-linux-managed-kill-20261003-a17f40a7-99')
-SCOPE_PATH = Path('/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-99')
+STAGE_PATH = Path('/root/rhai-linux-managed-kill-20261003-a17f40a7-100')
+SCOPE_PATH = Path('/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100')
 BASE = None
 OLD = None
 
