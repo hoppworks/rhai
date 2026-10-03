@@ -82,7 +82,8 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 ## Current step and next action
 
 Current instructions faba3db loaded by root/Expert/Standard. Full goal remains
-active and incomplete. Last pushed sole fork main19764c1f; production53b unchanged.
+active and incomplete. Last pushed sole fork main1ae2521af41a0003f3648c9561c3f657d440ece9;
+source matches accepted523 exceptprojectAGENTS, production unchanged.
 Native109 source523/frozen19764 recipes terminal0: three setup0, intended named
 post-cleanup control101, three base regressions0 and four new feature rows0.
 Source restoration passed. Root independently rehashed71 original files/five
@@ -98,17 +99,24 @@ is preserved; actual launcher custody and cleanup readbacks passed independently
 Same combined Expert ACCEPTED actual109 originals and named escaped deadline
 pipe criterion. Root integrated exact523 test bytes SHA5836af855f; non-scratch
 source equals accepted523 exceptprojectAGENTS. Proof and partial03/06 closure
-recorded. Next commit and push only forkmain with independent remote readback.
+recorded. Integration1ae2521af41a0003f3648c9561c3f657d440ece9 committed/pushed;
+independent ls-remote confirms only forkmain at exactly that hash. Author/committer
+hoppworks<daniel@hoppworks.de>. Next stdin test source/recipes review, baselineRED.
 Native109 cumulativeUnix109/escapednative3; prefix cause recovery and retained
 polarity recovery passed, original causes/history preserved. Sampled maxima are
 samples, not continuous peaks; usage/cost unknown. No source correction failure.
 
 Same Standard owns writerlinux-managed-success; preserve historical untrackednote.
 Immutable109 stage isolated523 before stdin edits. Test-only realOS early stdin
-closure regression is being prepared, production unchanged and no native RED yet.
-Test-only b827 frozen; sameStandard prepares host/sentinel and named baseline
-RED receipt correction plus scoped recipes. Affected independent review, then
-fresh slot and bounded native
+closure source initiallyc7 NOTREADY. One consolidated source repair frozen
+c4caf1da145278c3bc1921c69ab28ea790136b06 is now SOURCE READY after affected
+Expert recheck: mutable sentinel, explicitManaged/ownedPGID, flushed markers
+beforefd0close. Root independently verified testSHA91faca20 and scratch-excluded
+archiveSHAd0bb509c; onlytestdelta vsaccepted523. SameStandard prepares bounded
+baseline recipes in ownedwriter;
+production unchanged, native110 unallocated, no meaningful baselineRED yet.
+Preparationb827/6d020f19/c7e4a97d history preserved, not failed native corrections.
+Next consolidated source findings/repair, recipe review, fresh slot and bounded native
 baseline RED before any production correction. Remaining stdin/postspawn faults,
 lifecycle/performance/docs/examples, macOS/Windows and final MSRV/features/release
 criteria stay open. No exhausted safety/user cause chain is renewed.
@@ -1867,3 +1875,57 @@ Native109 combinedactualacceptance ACCEPTED, exact523 test integration and
 partial03/06 closure recorded. Original71files/sevenclosures custody/retirement
 review valid; no broader ticket or release closure. SameStandard nextstdin source
 preparation, productionunchanged and baselineREDpending. Cumulativehistory retained.
+
+Previous goal turn PROGRESS: actual109 review accepted, exact523 integration
+1ae2521a committed/pushed and independentsolemain readback. Current nextrequirement
+stdin sourcec7e4a97df356cb9e20a8d6e6e1f6f76628e8663a frozen, combinedsource review and
+source-only boundedrecipes preparation active. No native110 allocation or
+productionedit; no broad closure or exhausted-chain renewal.
+
+Stdin c7 sourcecombinedreview NOTREADY threepreparationfindings: sentinel
+mutability compileerror; implicitDirectChild inheritslivehostPGID invalidates
+groupclosure assertion; fd0close-before-markers racescorrecttermination. Same
+Standard oneconsolidatedsource-onlyrepair with Managed ownedPGID and deterministic
+markers beforefd0close. No build/nativeexecution, no productfailedcorrection
+count, native110 unallocated. Source readinessmustpass beforeactualbaselineRED.
+
+Current turn PROGRESS: stdin source c4caf1da consolidatedfixturefixes and
+independentaffected SOURCE READY. Root test/archive pins independently verified.
+Native110 remainsunallocated, no nativebaselineRED or productioncorrection.
+Recipe preparation sameStandard stillactive, generatedrecipe directory
+linux-stdin-closure110-evidence/ notactualnativeproof. Keep collectedoriginals
+distinct from recipefiles; next recipefreeze/combinedexecutioncustodyreview then
+fresh machine slot/stage/finiteallocation. Broadergoalactiveincomplete.
+
+Stdin frozen recipes c39 combined review NOT READY; source c4 remains SOURCE
+READY. Four consolidated preparation findings: actual known-broken baseline
+cause=None/timed_out=true/incomplete captures must be classified separately
+from infrastructure deadlines; bounded finally export partial originals; exact
+named Cargo failure/status/source/identity binding; independent local original
+collection/fresh hash readback/hash-gated exact stage retirement. Same Standard
+stdin_closure_test resumes one recipe-only correction batch, same Expert affected
+recheck next. Production/source unchanged, no Cargo/SSH staging/native allocation.
+Native110 unallocated and cumulative Unix109 unchanged. Rejected c39 and source
+history retained. Fresh earlier read-only workhorse inventory idle was observation,
+not a reservation. Human explicitly authorizes Tauron build-window coordination;
+use if fresh contention requires it, never stop foreign processes. Remote readback
+now confirms ONLY fork main at1ae2521af41a0003f3648c9561c3f657d440ece9.
+
+Previous goal turn PROGRESS: combined c39 review yielded four concrete preparation
+findings, next action became one bounded recipe correction; remote solemain verified.
+Current API-path contradiction changes authoritative next action: root traced
+run_raw/public run -> run_map -> supervise, whose pending stdin error already
+returns Io "write process stdin". Swallowing branch491–519 belongs spawn/shared
+Child service; current test expects "write child stdin", so its prospective RED
+could be only operation mismatch. Same reviewer confirmed and withdrew timeout/
+None baseline prediction and revoked c4 meaningful-baseline SOURCE READY.
+No prior native evidence for this new requirement exists. Same Standard stopped
+at safe checkpoint, preserving c39/source and incomplete uncommitted proof/classifier
+drafts. No stage/build/allocation; Unix109 consumed,110 unallocated.
+Fresh non-fork Expert stdin_api_seam_expert diagnoses cause via escalation16
+stdin-api-seam.md (20-minute active-work planning estimate, source-only/no launches).
+One bounded follow-up repair after diagnosis; no history reset or weakened scope.
+Root own /private/tmp/rhai-native110-preflight.py prepared but never executed;
+sourcearchive/inputhash and strict idle-machine guard only, not allocation.
+Next actual API seam answer -> source test correction -> affected combined review
+-> recipe repair -> meaningful native RED -> production fix and real acceptance.
