@@ -85,9 +85,11 @@ Instructions/roles faba3db3bef6891ad2c0b20d434963bb8fe9572d loaded by root,
 responsible Standard and same combined reviewer. Workhorse installed rules resolved
 at /var/home/workhorse/.agents/AGENTS.md and /var/home/workhorse/projects/agent-skills;
 SSH root has no ~/.agents. Read-only resolution/command-local safe.directory only.
-Last verified fork main08207d6e49b642b54158324d46eed6c6614b99ba; sole remote main,
-lowercase human author/committer. Current package: managed deadline104 original
-export and corrected105 shared-fixture acceptance. Overall scope incomplete.
+Last verified fork main82ea0febaeb105ca8f6fee2d858fd509e7ce180c; sole remote main,
+lowercase human author/committer. Native105 managed deadline accepted, exported,
+exactly cleaned and integrated. Current package: managed run OutputLimit source53b
+and frozen recipesc785a913, pending affected execution/collection review before
+any staging or native106 allocation. Overall scope incomplete.
 
 ### Current coherent requirement: final managed client lease drop
 
@@ -1762,3 +1764,8 @@ Native105 integration08207d6e49b642b54158324d46eed6c6614b99ba pushed and indepen
 OutputLimit a33 affectedrecheck retainedoneborrowblocker, completedfailedsourcecorrectioncount1 for stableborrowlengthcause; other2findingsresolved. SameStandard exacttwo-line repair frozen53b01fa5df3f3a23bb55d4659c6207e5da86dc79, test024e774b76e21d46326d007249ca5db92eab161f88af3328bdd4c3b591a2ab03; archivee4f024d2a1147cba5466e6421691f4087e1e96447da137b63e46c295efbdb83e. Rootreadactualfirstmap computesownedusize, noescapingbytes. SameExpert affectedsource recheck underway, sameStandard refreshesdraft7test/3setup recipes; no nativeallocation. Causehistory unchanged.
 
 Samecombined affectedsource53b01 review SOURCE READY; rootreadupdatedreport confirms ownedOptionusize and resolvedpreviousfindings. OutputLimit compile/native NOTPROVEN; nextsameownerrecipefreeze thenaffectedexecutioncollectionreview, freshheavyslot, boundedpublicEngineOSproof. Nofailedcorrectioncountreset, no newnativeallocation.
+
+OutputLimit recipes frozen c785a91364294b44c42c7c82acfb19a99f5c0c61; root independently verified committed/current bytes and four recipe hashes (proofc938bbdd, stagedc72b1ec, launch1e4e6fb3, collectorc527f21a). Source53b/archivee4f/test024e unchanged and independently confirmed. Seven tests plus three setup commands, all prior resource/time limits preserved. Same combined Expert reviews affected recipes only. Fresh read-only Workhorse heavy/private-runtime inventory empty and exact prospective106 stage/scope absent; this is no reservation or launch. Native106 unallocated; cause and consumption history unchanged.
+
+Same combined OutputLimit execution/collection review READY at c785a913; source53b remains SOURCE READY, no compile/native acceptance. Root staged immutable source and all13 inputs with hash checks PASS at /root/rhai-linux-managed-output-limit-20261003-0a6dbb5d-106 (physical /var/roothome/rhai-linux-managed-output-limit-20261003-0a6dbb5d-106). Stage is owned source/recipe custody, no build; prospective central scope remains absent. Retain until this bounded proof/export retires it, or inspection checkpoint 2026-10-04T18:34:36.213773+00:00, whichever first; owner root.
+Fresh immediate prelaunch inventory found foreign Tauron G47 run_scoped1259377/start4340154 and supervisor1259378/start4340156, Cargo1282095/start4358351 plus rustc. No native106 allocated or launched; cumulativeUnix105/OutputLimitnative0 unchanged. Human explicitly approved build-window coordination; root sent existing responsible Tauron chat01a0fe32-5425-71d2-887b-3bf1bac284e7 one finite600s window request, no process interruption. Next window/absence plus fresh global heavy check -> record106 allocation -> bounded native. Same responsible Standard continues independent escaped-held-pipe test source after immutable53b staging. Native or release claims remain open.
