@@ -85,7 +85,7 @@ Instructions/roles faba3db3bef6891ad2c0b20d434963bb8fe9572d loaded by root,
 responsible Standard and same combined reviewer. Workhorse installed rules resolved
 at /var/home/workhorse/.agents/AGENTS.md and /var/home/workhorse/projects/agent-skills;
 SSH root has no ~/.agents. Read-only resolution/command-local safe.directory only.
-Last verified fork main6690ff0a3e1c2760f82d86031c3f7d2a81edc919; sole remote main,
+Last verified fork main9fe3068f9285eed509a2118e63729daea9c38fa1; sole remote main,
 lowercase human author/committer. Current package: managed deadline104 original
 export and corrected105 shared-fixture acceptance. Overall scope incomplete.
 
@@ -194,6 +194,28 @@ Raw104 collector derives actual failed fixture identities from originalstderr,
 with originalstderr exacthost/reaper/sentinel/memberPID/start/group freshreadback;
 NO originalclosurefiles produced beforeassertionfailure, never regenerate them.
 Root performs collect/cleanup only after immutable affectedrawreview readiness.
+Prospective105 recipes frozen75033a91184fd7e42175990611a6f5a31b950f1b.
+Same combined affected review execution READY/collection NOT READY: two expected
+kill/drop closure names incorrectly carry deadline prefix, while actual unchanged
+reused parsers emit unprefixed originals. One consolidated pre-execution filename
+finding; owner repairs expected inventory names/hash dependencies only, keeping
+nine-original prerequisite/Sink/read-only checks. No failed native recovery or
+new cause count; source31a readiness retained. Fresh workhorse heavy inventory
+empty at this checkpoint, not reservation; recheck before launch. Current turn
+PROGRESS: immutable105 review gives concrete blocker and same-context fix batch.
+Affected filename repair50341e87be03f907079e6a594d46b42e8a98eb3f passes same
+combined recheck: execution READY/collection READY; collector75c4150fd2e25d6e2ba3605d60a3db3be58b65e99869f465eadf5050369314f8.
+Root staged reviewed105 successfully: fifteen input hash checks all OK. Exact
+stage /root/rhai-linux-managed-deadline-20261003-bcecd9eb-105 resolves to
+/var/roothome/rhai-linux-managed-deadline-20261003-bcecd9eb-105; own central scope
+absent. No native105 launch/allocation yet. Fresh next-launch inventory finds
+foreign tauron runner988548/supervisor988549 (timeout5400), Cargo1032439/rustc1032443,
+private runtime /var/home/workhorse/.local/share/agent-builds/tauron/g4546p3/agent-build-scj1ph1a
+(/home alias same runtime). Do not signal/delete/restart foreign work. Next exact
+safe action: observe same live runner identity/start and fresh global inventory;
+when heavy work terminal/absent, recheck hashes/scope and allocate bounded105 once.
+Current turn PROGRESS: affected collector repaired/READY and stage hashvalidated;
+wait is machine occupancy, no failed correction/native budget consumption.
 Prospective105 unallocated. Bounds unchanged600outer/585runner/540helper incl30export,
 jobs2/desc16/preempt1572864/hardstorageRSS2097152KiB, fixturewatchdog20s.
 Ordinary30min active-work planning checkpoint, max2consecutivelauncheswithoutnew
