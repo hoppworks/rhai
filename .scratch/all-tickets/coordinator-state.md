@@ -82,7 +82,7 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 ## Current step and next action
 
 Current instructions/roles revision faba3db3bef6891ad2c0b20d434963bb8fe9572d.
-Latest independently read-back fork main 0e5f2391367c98a92e4d512f2453b213111818cc;
+Latest independently read-back fork main 408781f58975be2fca8e58b683e7d2b7051b1787;
 ONLY remote main. Lowercase human author and committer verified. Accepted96 subset
 is mapped explicitly to open tickets03/06; checkpoint/source remains unchanged.
 Workhorse installed revision independently read back at
@@ -145,7 +145,9 @@ worktrees and unrelated untracked CLI logs remain untouched.
 
 ### Current coherent requirement and next action
 
-Public managed Child.kill group closure is the next criterion in contract03.
+Public managed Child.kill group closure now ACCEPTED via native101. Current next
+criterion is final-client-lease drop with kill_on_drop, source-only implementation
+assigned to same responsible Standard; historical kill preparation follows.
 The same responsible Standard completed diagnosis at the owned writer's
 linux-managed-lifecycle-next.md: existing numeric-PID absence checks do not bind
 lifecycle identities under foreign reaping. Implement one minimal public spawn →
@@ -1667,3 +1669,17 @@ custody. Expert15 solefollowupPASSED; stablecauseclosedwithoutbudgetrenewal.
 Proof linux-managed-kill-proof.md andsame linux-managed-kill-review.md/original101.
 Remainingoverallprocess/platform/releasecriteriaOPEN. ResponsibleStandardnow
 read-onlyselectingonenextindependentmanagedcriterion, noimplementationallocation.
+
+Integration408781f5 independently readback soleforkmain; lowercasehumanauthor/
+committerverified, integratednon-scratchdiffvswriter5f783empty/testdd4hashmatches.
+Accepted101 evidence persistedoutsidewriter inrootcommittedd75f7fc7. Same owned
+protectedwriter reusedfor relatedfinal-client-lease drop (no retirement while
+active). Standardread-onlydiagnosis points existing tests/sys_process.rs2859–2917
+and ClientLease::drop unix.rs199–208: currentnumericPIDabsence lacksstrictidentity
+and independentlyownedreaper/groupboundary. Next coherentcriterion: nonfinal
+Rhai-clientdrop leaves exactmanageddescendantslive; finalkill_on_drop leasealone
+closes/reapsgroup, sentinel/host/reaperaliveatreturn thenexactcleanup. Native101
+killsemantics donotprovelease-drop. Source-onlyTDD contractimplementationdispatched
+to sameStandard,30min planningcheckpoint; no102 stage/build/nativeallocation.
+Preserveaccepted101 logic/proof; sharedguardchanges requireaffectedchecks.
+AllstoppedMac/Windowschains and consumedbudgetsretained.
