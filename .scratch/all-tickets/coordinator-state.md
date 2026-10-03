@@ -82,8 +82,14 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 ## Current step and next action
 
 Current instructions/roles revision faba3db3bef6891ad2c0b20d434963bb8fe9572d.
-Latest independently read-back fork main cda89fa6fb98785de991d3c2b6a9044bd0ce888b;
-ONLY remote main. Lowercase human author and committer verified. Previous goal
+Latest independently read-back fork main 3e8668585957c2f7bea1317d6d46e938a80f14fa;
+ONLY remote main. Lowercase human author and committer verified. Accepted96 subset
+is mapped explicitly to open tickets03/06; checkpoint/source remains unchanged.
+Workhorse installed revision independently read back at
+/var/home/workhorse/projects/agent-skills; global AGENTS loaded at faba3db.
+SSH root has no ~/.agents; installed user path was resolved read-only, with
+command-local Git safe.directory for the revision query, no config mutation.
+Previous goal
 turn PROGRESS: native96 accepted, reviewed source/recipe histories integrated,
 original evidence committed and pushed, exact own remote stage/runtime cleaned.
 Overall all-tickets goal active and incomplete; no scope reduction.
@@ -148,15 +154,36 @@ leader/worker/leaf and sentinel identities, failed final report, host/reaper liv
 API-return boundary and independent exact cleanup. Preserve native96 run cases.
 Final-clone drop, deadline, overflow and broader gates remain separately open.
 
-Standard is LIVE implementing this coherent slice in the same protected owned
-writer. The existing owner-approved Engine/script → host → OS seam applies;
-no additional seam/approval gate. TDD and one wrong-control after full cleanup,
-with exact-byte restoration before GREEN. Inspect kill report semantics rather
-than transplant run-success assertions.30-minute active-work planning checkpoint;
-source-only preparation, no SSH/stage/build/native97 allocated. Coordinator owns
-one combined review and next bounded native launch after source/recipe readiness.
-The passed receipt/custody cause history is retained without renewal. Any new
-failure must be classified by its actual cause and preserve consumed work.
+Standard is LIVE preparing this coherent slice in the same protected owned
+writer. The existing owner-approved Engine/script → host → OS seam applies.
+Initial sourcea17f40a7 test-only fixture frozen, follow-up1009b504 removes two
+accidental unconditional wrong-control assertions before any native run. Initial
+combined review consolidated five findings: opposites, missing kill-mode
+propagation after env_clear, invalid raw waitpid status=0 for killed descendants,
+untyped report.success default false, competing4s spawn deadline. All batched in
+corrected frozen d70e2c409c82b09ab205e2fc12b08a7c6b94acec; same reviewer affected
+recheck SOURCE READY: all five findings resolved, faba3db confirmed. Owner and root independently agree source archive4510841b868ad57cbff61129b2f6244c21b3915588d36caf760a54d653e9e43d and test9c6ca59e753ebae483a3f2bed6cf5ffd076e80a7c6ef1be76dc87e49c5ea00da.
+These are source preparation findings, no build/pre-mode RED/native assertion
+or completed native correction has occurred. Reviewer premature no-other-blocker
+milestone was superseded by complete five-finding batch, retained in report.
+Review context is linux_shared_child_review; report linux-managed-kill-review.md.
+Relevant shared fixture changes require original prompt/held cases in same build.
+
+Prospective native97 stage /root/rhai-linux-managed-kill-20261003-a17f40a7-97,
+scope /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-97;
+UNALLOCATED, absent/not staged yet. Planned four existing feature rows for one new
+kill criterion, base-row original96 prompt/held affected regressions, two named
+report-success and sentinel-absent RED controls after full fixture cleanup, exact
+restored GREEN. Agent plan revised1→2 before launch to prove both newly claimed
+report/sentinel assertion paths; unchanged time/resource hardbounds, no consumption
+or userlimit change. Bounds remain
+600s outer/585runner/540helper incl30exportreserve, jobs2/desc16, preempt storage
+1572864KiB and RSS/storage hard2097152KiB. No budget reset; Unix96 consumed.
+Source d70 SOURCE READY; helper pins pending recipe preparation and combined readiness.
+Initial a17/1009 pins are obsolete for launch. One combined source/recipe/live evidence review, no extra pipeline.
+30-minute active-work planning checkpoint; ordinary reversible implementation
+continues under existing authorization. The passed receipt/custody history is
+retained without renewal; new outcomes classified by actual cause.
 
 ### Accepted current Linux non-process package
 
