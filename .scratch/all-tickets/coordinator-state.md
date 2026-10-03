@@ -82,7 +82,7 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 ## Current step and next action
 
 Instructions faba3db unchanged/loaded; full goal active/incomplete. Sole fork
-main last independently read back at436b728d1106b868c749ace4bfbd59caa4fa52d8.
+main last independently read back atea074cc3b841654ea3380787b59d5b20e9a9d623.
 Accepted109 proof/source523 unchanged; no retained native resources, all finite
 concurrency exceptions expired. Unix109 consumed; native110 unallocated.
 
@@ -159,8 +159,16 @@ six blob hashes and unchanged non-scratch ee50/testc247. Source-shaped actual
 consumer positive pending/read-only and code-exit/quoted-delimiter models and
 reported corruption checks passed; actual digest producer mutation/missing/
 symlink checks passed. These remain synthetic/local evidence, not OS proof.
-Same combined independent reviewer escaped_recipe_review is now rechecking the
-affected consumer/producer/pin dependencies; readiness is pending. Writer reports
+Same combined independent reviewer escaped_recipe_review completed the affected
+check: NOT READY. Complete actual-source positive is rejected by omitted normal
+fallback fields; unquoted provenance and normal sentinel-kill remain wrong.
+Checked identity grammar accepts malformed/unchecked wrappers; runtime/input
+binding is incomplete. Actual digest producer repair passes; prior static
+export/bounds/retirement closures remain applicable. Full report is in
+linux-stdin-closure-review.md. This completed Expert18 follow-up failed its
+independent check: third completed recipe correction failure, sole follow-up
+consumed. STOP this dependent stdin classifier path; no further correction,
+Expert chain, launch or counter reset authorized by this package. Writer reports
 approximately24minutes active follow-up plus prior53minutes and unknown earlier
 use: known reported cumulative77minutes, not full measured cost/CPU. All two
 failed corrections and single Expert18 follow-up remain consumed/history intact.
@@ -169,20 +177,30 @@ No Cargo/SSH/staging/native/production mutation or retained resources. Exact
 prospective stage /root/rhai-linux-stdin-closure-20261003-ee50c63e-110 and scope
 /root/.local/share/agent-builds/rhai/linux-stdin-closure-20261003-ee50c63e-110 are
 unallocated; native110 remains unallocated, Unix109 consumed. Root refreshed all
-six recipe pins in /private/tmp/rhai-native110-preflight.py against actual132e6
+six recipe pins in /private/tmp/rhai-native110-preflight.py against actual2518238
 blobs; all13 expected input hashes fixed, source archive unchanged. AST passes;
 preflight never executed. It requires canonical stage, absent scope/terminal,
 zero foreign runner/compiler and16GiB available RAM/disk. No slot reservation,
 expired exception reuse or native allowance renewal. Historical untracked
 lifecycle note and root CLI logs untouched.
-Next: finish the affected independent review of frozen2518238b
--> fresh workhorse slot/capacity -> stage/allocation only if READY -> genuine
-native RED -> product correction and real acceptance. Human explicitly permits
-Tauron window coordination if fresh contention requires it; authorization
-reconfirmed by the latest question reply, no additional message sent yet.
-Final native Linux/macOS/Windows, feature/MSRV/release remain open. Current turn
-PROGRESS: the single Expert18 follow-up is frozen and independently inventoried;
-affected review dispatched. No native or acceptance claim.
+Independent remaining work selected: process API example/documentation criterion.
+Existing examples/sys.rs covers file handles only and docs/sys-process.md has no
+runnable host process example. Same Standard owns a distinct bounded preparation
+package in its existing worktree: one self-contained process example, necessary
+Cargo registration/docs link and meaningful wrong-expectation control using real
+Engine/own executable/host readback. No production or stdin parser edits. Prefer
+existing MSRV-example verification helpers; no new generic proof framework.
+Thirty-minute active planning checkpoint; keep this package's measurements
+separate without resetting historical totals. Preparation permits no Cargo, SSH,
+stage, heavy run or cleanup. Freeze then one combined independent review and
+fresh-slot real acceptance. Other stopped native/platform chains remain stopped.
+
+Next: freeze/review the distinct process API example preparation -> fresh measured
+slot and existing scoped acceptance route. Native110 stays unallocated. Human
+permits Tauron window coordination if fresh contention requires it. Final native
+Linux/macOS/Windows, feature/MSRV/release and stdin/fault/lifecycle criteria remain
+open. Current turn PROGRESS: failed Expert18 follow-up recorded once and dependent
+path stopped; independent required example package dispatched. No OS acceptance.
 
 ### Earlier current-step history (retained, superseded)
 
