@@ -1,0 +1,99 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+helper	803647	803646	803646	3066070	python3 /root/rhai-linux-managed-kill-20261003-a17f40a7-100/linux-managed-kill-proof.py
+scoped-supervisor	803646	803643	803646	3066069	/usr/bin/python3 /var/roothome/rhai-linux-managed-kill-20261003-a17f40a7-100/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-managed-kill-20261003-a17f40a7-100/linux-managed-kill-proof.py
+command:rustup-install	803649	803647	803646	3066079	/root/.cargo/bin/rustup toolchain install 1.77.2-x86_64-unknown-linux-gnu --profile minimal --no-self-update
+command:du	803650	803647	803646	3066079	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	803667	803647	803646	3066079	/bin/ps -e -o pid=,ppid=,rss=
+command:du	803688	803647	803646	3066180	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	803689	803647	803646	3066180	/bin/ps -e -o pid=,ppid=,rss=
+command:du	803701	803647	803646	3066281	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	803702	803647	803646	3066281	/bin/ps -e -o pid=,ppid=,rss=
+command:du	803713	803647	803646	3066382	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	803714	803647	803646	3066383	/bin/ps -e -o pid=,ppid=,rss=
+command:du	803733	803647	803646	3066483	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	803734	803647	803646	3066484	/bin/ps -e -o pid=,ppid=,rss=
+command:du	803754	803647	803646	3066585	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	803755	803647	803646	3066585	/bin/ps -e -o pid=,ppid=,rss=
+command:du	803766	803647	803646	3066686	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	803767	803647	803646	3066686	/bin/ps -e -o pid=,ppid=,rss=
+command:du	803777	803647	803646	3066757	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	803778	803647	803646	3066757	/bin/ps -e -o pid=,ppid=,rss=
+command:rustc-version	803779	803647	803646	3066758	/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose
+command:du	803780	803647	803646	3066758	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	803781	803647	803646	3066758	/bin/ps -e -o pid=,ppid=,rss=
+command:du	803783	803647	803646	3066769	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	803784	803647	803646	3066769	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-version	803785	803647	803646	3066770	/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose
+command:du	803786	803647	803646	3066770	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	803790	803647	803646	3066770	/bin/ps -e -o pid=,ppid=,rss=
+command:du	803800	803647	803646	3066780	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	803801	803647	803646	3066781	/bin/ps -e -o pid=,ppid=,rss=
+command:require-success-control	803802	803647	803646	3066782	/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_child_kill_reports_group_closed_under_fixture_reaper
+command:du	803803	803647	803646	3066782	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	803804	803647	803646	3066782	/bin/ps -e -o pid=,ppid=,rss=
+command:du	803822	803647	803646	3066882	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	803823	803647	803646	3066883	/bin/ps -e -o pid=,ppid=,rss=
+command:du	803836	803647	803646	3066983	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	803838	803647	803646	3066984	/bin/ps -e -o pid=,ppid=,rss=
+command:du	803849	803647	803646	3067085	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	803850	803647	803646	3067085	/bin/ps -e -o pid=,ppid=,rss=
+command:du	803870	803647	803646	3067186	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	803871	803647	803646	3067186	/bin/ps -e -o pid=,ppid=,rss=
+command:du	804094	803647	803646	3067287	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	804095	803647	803646	3067288	/bin/ps -e -o pid=,ppid=,rss=
+command:du	804346	803647	803646	3067389	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	804351	803647	803646	3067390	/bin/ps -e -o pid=,ppid=,rss=
+command:du	804466	803647	803646	3067491	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	804467	803647	803646	3067492	/bin/ps -e -o pid=,ppid=,rss=
+command:du	804499	803647	803646	3067593	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	804500	803647	803646	3067594	/bin/ps -e -o pid=,ppid=,rss=
+command:du	804646	803647	803646	3067694	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	804647	803647	803646	3067695	/bin/ps -e -o pid=,ppid=,rss=
+command:du	804709	803647	803646	3067796	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	804710	803647	803646	3067797	/bin/ps -e -o pid=,ppid=,rss=
+command:du	804721	803647	803646	3067898	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	804722	803647	803646	3067899	/bin/ps -e -o pid=,ppid=,rss=
+command:du	804738	803647	803646	3068000	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	804741	803647	803646	3068001	/bin/ps -e -o pid=,ppid=,rss=
+command:du	804762	803647	803646	3068102	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	804764	803647	803646	3068103	/bin/ps -e -o pid=,ppid=,rss=
+command:du	804804	803647	803646	3068203	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	804806	803647	803646	3068204	/bin/ps -e -o pid=,ppid=,rss=
+command:du	804843	803647	803646	3068305	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	804844	803647	803646	3068306	/bin/ps -e -o pid=,ppid=,rss=
+command:du	804855	803647	803646	3068407	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	804856	803647	803646	3068408	/bin/ps -e -o pid=,ppid=,rss=
+command:du	804867	803647	803646	3068509	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	804868	803647	803646	3068509	/bin/ps -e -o pid=,ppid=,rss=
+command:du	804882	803647	803646	3068610	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	804883	803647	803646	3068611	/bin/ps -e -o pid=,ppid=,rss=
+command:du	804901	803647	803646	3068712	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	804902	803647	803646	3068713	/bin/ps -e -o pid=,ppid=,rss=
+command:du	804913	803647	803646	3068814	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	804914	803647	803646	3068814	/bin/ps -e -o pid=,ppid=,rss=
+command:du	804926	803647	803646	3068915	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	804927	803647	803646	3068916	/bin/ps -e -o pid=,ppid=,rss=
+command:du	804939	803647	803646	3069017	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	804941	803647	803646	3069018	/bin/ps -e -o pid=,ppid=,rss=
+command:du	804952	803647	803646	3069119	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	804953	803647	803646	3069119	/bin/ps -e -o pid=,ppid=,rss=
+command:du	804964	803647	803646	3069220	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	804965	803647	803646	3069221	/bin/ps -e -o pid=,ppid=,rss=
+command:du	804976	803647	803646	3069322	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	804977	803647	803646	3069323	/bin/ps -e -o pid=,ppid=,rss=
+command:du	804988	803647	803646	3069423	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	804989	803647	803646	3069424	/bin/ps -e -o pid=,ppid=,rss=
+command:du	805000	803647	803646	3069525	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	805001	803647	803646	3069526	/bin/ps -e -o pid=,ppid=,rss=
+command:du	805012	803647	803646	3069627	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	805013	803647	803646	3069627	/bin/ps -e -o pid=,ppid=,rss=
+command:du	805024	803647	803646	3069728	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	805025	803647	803646	3069729	/bin/ps -e -o pid=,ppid=,rss=
+command:du	805036	803647	803646	3069830	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	805037	803647	803646	3069831	/bin/ps -e -o pid=,ppid=,rss=
+command:du	805048	803647	803646	3069931	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	805049	803647	803646	3069932	/bin/ps -e -o pid=,ppid=,rss=
+command:du	805060	803647	803646	3070033	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	805062	803647	803646	3070034	/bin/ps -e -o pid=,ppid=,rss=
+command:du	805065	803647	803646	3070055	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz
+command:ps	805066	803647	803646	3070056	/bin/ps -e -o pid=,ppid=,rss=

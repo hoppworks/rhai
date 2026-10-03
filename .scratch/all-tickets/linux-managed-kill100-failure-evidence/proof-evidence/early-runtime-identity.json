@@ -1,0 +1,19 @@
+{
+  "captured_before_stage_validation_or_external_command": true,
+  "helper": {
+    "cmdline": "python3 /root/rhai-linux-managed-kill-20261003-a17f40a7-100/linux-managed-kill-proof.py",
+    "pgid": 803646,
+    "pid": 803647,
+    "ppid": 803646,
+    "start_ticks": "3066070"
+  },
+  "identity_errors": {},
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100/agent-build-g1dqh9xz",
+  "scoped_supervisor": {
+    "cmdline": "/usr/bin/python3 /var/roothome/rhai-linux-managed-kill-20261003-a17f40a7-100/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-managed-kill-20261003-a17f40a7-100/linux-managed-kill-proof.py",
+    "pgid": 803646,
+    "pid": 803646,
+    "ppid": 803643,
+    "start_ticks": "3066069"
+  }
+}

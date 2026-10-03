@@ -82,7 +82,7 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 ## Current step and next action
 
 Current instructions/roles revision faba3db3bef6891ad2c0b20d434963bb8fe9572d.
-Latest independently read-back fork main 61923d81ec3cc3a1182c58da790c65c269aa687f;
+Latest independently read-back fork main ca7636170f65a933617be03fa32c2b6c79f9cf3f;
 ONLY remote main. Lowercase human author and committer verified. Accepted96 subset
 is mapped explicitly to open tickets03/06; checkpoint/source remains unchanged.
 Workhorse installed revision independently read back at
@@ -225,10 +225,37 @@ checked betweenattempts, unknown/permissions fail. Targeted full-du/ps ordering,
 ceiling, bounds and fatalerrors pass; same reviewer affectedrevieweeea EXECUTION READY/COLLECTION READY; actualsampler focusedchecks independentlypassed; nativeacceptancepending.
 Fresh99inventory at2026-10-03T14:41:16Z actualheavy[], privateruntimes[], exactstage/
 scopeabsent, MemAvailable82885536kB; observationnotreservation. Native99 remains
-CONSUMED launch2026-10-03T14:44:37Z, rootexec45044, allstageinputshaOK; runtimeagent-build-aa371kh2 withinexact99scope. ENDED oneboundedrun aftereeea readiness: compilepassed andone actualduENOENT retry passed. Namedwrongrequire-successcontrol101 reached aftercleanup; actualpublicChildkill→wait returnedunsuccessfulchildreport withcompletecaptures, exact3PIDFDs/exitedmembersreaped/sentinel live alltrue, BUTreaper_okfalse. Nestedreaperteststdoutok18.00s outer18.01s; firstnativefixtureexit-observationcriterionfailure, nofullacceptance. Sampler/compile causesrecovered, notproductfailures. SameStandard diagnosisdeadline/statusobservationpending; native100unallocated. Original99raw43files5dirshashpreserved, source90b restored/errornull,112recordedPID/startrowsincl6fixtureabsentand4groupsempty, exactstage/scopecleanupverified. No retainedbuild. Proof refs linux-managed-kill99-failure-evidence/ andrawcollector99; reviewerfailurecustodypending. CumulativeUnix99consumed, newkill3launches(97compilefailed/98samplerfailed/99running); planningestimate2→3dueknownsamplerrepair, nohardcapraised/nohistoryreset. Next one finite run with same600/585/540time bounds,
+CONSUMED launch2026-10-03T14:44:37Z, rootexec45044, allstageinputshaOK; runtimeagent-build-aa371kh2 withinexact99scope. ENDED oneboundedrun aftereeea readiness: compilepassed andone actualduENOENT retry passed. Namedwrongrequire-successcontrol101 reached aftercleanup; actualpublicChildkill→wait returnedunsuccessfulchildreport withcompletecaptures, exact3PIDFDs/exitedmembersreaped/sentinel live alltrue, BUTreaper_okfalse. Nestedreaperteststdoutok18.00s outer18.01s; firstnativefixtureexit-observationcriterionfailure, nofullacceptance. Sampler/compile causesrecovered, notproductfailures. SameStandard diagnosisdeadline/statusobservationpending; native100unallocated. Original99raw43files5dirshashpreserved, source90b restored/errornull,112recordedPID/startrowsincl6fixtureabsentand4groupsempty, exactstage/scopecleanupverified. No retainedbuild. Proof refs linux-managed-kill99-failure-evidence/ andrawcollector99; same reviewer failurecustodyVERIFIED; NOT ACCEPTED. Original99 committed/pushedca763617. Concrete cause: ManagedZombieDrainGuard waits for absent leader-identity in killmode while exact leader-record exists; burns18s until outerstatuswait deadline. Sourcec69524f adds exactPID/startleader-recordfallback, keepsstrictreaper_ok/closure criteria. Testa29511c1/archivee16cd648/contractunchanged. No completedcorrectivelaunchyet forfixtureexit cause. Prospective100recipepins preparing, UNALLOCATED. CumulativeUnix99consumed, newkill3launches(97compilefailed/98samplerfailed/99running); planningestimate2→3dueknownsamplerrepair, nohardcapraised/nohistoryreset. Next one finite run with same600/585/540time bounds,
 30exportreserve/jobs2/desc16/1572864storagepreempt/2097152RSSstoragehard, preserving
 97compiler/98sampling consumption. Estimate mayadvance2→3 for this distinct known
 infrastructurecause; no repeated launchwithout newdiagnosis or limitsraised.
+
+Native100 ENDED: recipes18efd22d/sourcec69524f, test a295/archivee16,
+proofe396/stagec003/launch6eb760/collectorabbf89. Launch14:57:49Z consumed;
+compiler passed, named require-success control status101 but independent boundary
+failed reaper_ok=false, nested reaper18.00s, same as99. Group closure, exact worker/
+leaf wait_status9, host/reaper live at API return, sentinel survival and post-cleanup
+absence passed; no acceptance. This is FIRST failed corrective implementation for
+stable managed-kill-reaper-exit-observation cause. The absent leader-identity
+fallback diagnosis is contradicted by the unchanged18s outcome; fresh non-fork
+Expert escalation15 required before any further correction. No101 allocation.
+Raw100 evidence exported with42 original files/5dirs, byte-identical hashes,
+106 PID/start rows including6 fixtures absent,4groups empty; exact own stage,
+scope/runtime removed after independent readback. No retained build. Original
+source restored a295/errornull. Evidence linux-managed-kill100-failure-evidence/;
+raw-only exporter collect-linux-managed-kill100-failure.py claims no acceptance.
+Cumulative Unix100 consumed, managed-kill package4 launches97–100: compile
+infrastructure97, sampler infrastructure98, initial reaper failure99, first
+failed fixture-exit correction100. Fixed600s/585s/540s limits, jobs2, descendants16,
+1572864KiB preempt storage and2097152KiB hard RSS/storage unchanged. No renewal of
+receipt-custody14 PASSED or stopped Mac/Windows chains. Cost/token usage unknown.
+Raw100 original42 hashes and106 absence rows independently rechecked locally.
+Same combined reviewer follow-up dispatch unavailable (agent thread limit); review
+pending, no acceptance claimed. Expert15 fresh non-fork dispatched; responsible
+Standard notified to preserve source and wait for answer before correction.
+Next: same combined reviewer verifies raw100 custody; independent Expert15
+explains the contradicted exit diagnosis and proposes one finite follow-up repair
+with strict reaper_ok criterion and affected prompt/held regressions unchanged.
 
 ### Accepted current Linux non-process package
 

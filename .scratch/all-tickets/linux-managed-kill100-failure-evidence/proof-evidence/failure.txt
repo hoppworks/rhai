@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "/root/rhai-linux-managed-kill-20261003-a17f40a7-100/linux-managed-kill-proof.py", line 336, in <module>
+    try: status=main()
+                ~~~~^^
+  File "/root/rhai-linux-managed-kill-20261003-a17f40a7-100/linux-managed-kill-proof.py", line 304, in main
+    one(cargo,env,control,ROWS[0],101,control)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-managed-kill-20261003-a17f40a7-100/linux-managed-kill-proof.py", line 271, in one
+    result=verify_panic(out,err,label,CONTROLS[control])
+  File "/root/rhai-linux-managed-kill-20261003-a17f40a7-100/linux-managed-kill-proof.py", line 263, in verify_panic
+    closure=boundary(err,label)
+  File "/root/rhai-linux-managed-kill-20261003-a17f40a7-100/linux-managed-kill-proof.py", line 243, in boundary
+    if not all(b(k) for k in ('host_live','reaper_live','leader_absent','worker_absent','leaf_absent','exact_reaped','sentinel_live','sentinel_reaped','api_bound','report_returned','killed_report','capture_complete','pidfds_exited','reaper_ok','host_absent','group_empty')): raise RuntimeError(f'{label}: boundary invariant false')
+                                                                                                                                                                                                                                                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: require-success-control: boundary invariant false
