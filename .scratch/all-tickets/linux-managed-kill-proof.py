@@ -4,11 +4,11 @@ from __future__ import annotations
 import hashlib, importlib.util, json, os, platform, re, shutil, signal, stat, subprocess, sys, time, traceback
 from pathlib import Path
 
-REV = 'c69524f15666d66b7dc3fa8d4750e84ddc946535'
-ARCHIVE = 'e16cd6482d1e3e1ff4b9056e3198b6ad6e8733657c66c87fd2e59fc35e023fe8'
+REV = '61f7bc66e75b4de3b0d4c444da0e610d952e903d'
+ARCHIVE = 'a3a1fee7db1e9a89ea0fb2c6ad172c1ec5d267f903d12f77f4f60108ba562abd'
 LOCK = '2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425'
 BASE_SHA = '59ac8b7b9c71ab2331c13196b36d8d2794931e07138741c43d4a8c3d1d754b06'
-TEST_SHA = 'a29511c1b9c61b51f68022527e4fe2a9914d0a8d7589c32ab0938a4729023293'
+TEST_SHA = 'dd4ceb43e32c3756b4bac5d5fed6f5600c70a8e7336cc286edcdf7b90b341d5d'
 CONTRACT_SHA = '1d8a61b5dffefc4f5891d12ed2b19b438637e4e752607e68c6495f96eb553d41'
 OLD_PROOF_SHA = '83e84145fdec770ee5469b8ef2d85eacb813bc073abbd2a37e80e605a224a1a0'
 ROWS = ('testing-environ,sys', 'testing-environ,sys,sync,metadata', 'testing-environ,sys,f32_float', 'testing-environ,sys,unchecked')
@@ -19,8 +19,8 @@ CONTROLS = {
  'require-success-control': 'managed-child-kill-control require-success assertion',
  'require-sentinel-absent-control': 'managed-child-kill-control require-sentinel-absent assertion',
 }
-STAGE_PATH = Path('/root/rhai-linux-managed-kill-20261003-a17f40a7-100')
-SCOPE_PATH = Path('/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-100')
+STAGE_PATH = Path('/root/rhai-linux-managed-kill-20261003-a17f40a7-101')
+SCOPE_PATH = Path('/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-101')
 BASE = None
 OLD = None
 
@@ -218,7 +218,7 @@ def acquired(text, facts):
 def boundary(text, label):
  facts=early(text); pidfds=acquired(text,facts)
  pattern=re.compile(r'(?m)^managed_child_kill_boundary host_live_at_return=(?P<host_live>true|false) reaper_live_at_return=(?P<reaper_live>true|false) '
-  r'leader=(?P<leader>\d+) leader_start=(?P<leader_start>\d+) leader_absent=(?P<leader_absent>true|false) worker=(?P<worker>\d+) worker_start=(?P<worker_start>\d+) worker_absent=(?P<worker_absent>true|false) '
+  r'leader=(?P<leader>\d+) leader_start=(?P<leader_start>\d+) leader_record_start_matches_pidfd=(?P<leader_record_start_matches_pidfd>true|false) leader_absent=(?P<leader_absent>true|false) worker=(?P<worker>\d+) worker_start=(?P<worker_start>\d+) worker_absent=(?P<worker_absent>true|false) '
   r'leaf=(?P<leaf>\d+) leaf_start=(?P<leaf_start>\d+) leaf_absent=(?P<leaf_absent>true|false) group=(?P<group>\d+) exact_descendants_reaped=(?P<exact_reaped>true|false) '
   r'sentinel=(?P<sentinel>\d+) sentinel_start=(?P<sentinel_start>\d+) sentinel_pgid=(?P<sentinel_pgid>\d+) sentinel_live_at_return=(?P<sentinel_live>true|false) sentinel_reaped_after_return=(?P<sentinel_reaped>true|false) '
   r'api_bound=(?P<api_bound>true|false) report_returned=(?P<report_returned>true|false) killed_report=(?P<killed_report>true|false) capture_complete=(?P<capture_complete>true|false) pidfds_exited=(?P<pidfds_exited>true|false) '
@@ -240,7 +240,7 @@ def boundary(text, label):
  if (n('api_host'),n('api_host_start'))!=facts['host']: raise RuntimeError(f'{label}: API report host identity differs')
  if (n('worker_reaped'),n('worker_reaped_start'),n('worker_group'),n('leaf_reaped'),n('leaf_reaped_start'),n('leaf_group'))!=(facts['worker'][0],facts['worker'][1],facts['group'],facts['leaf'][0],facts['leaf'][1],facts['group']): raise RuntimeError(f'{label}: prompt reaper did not wait exact worker/leaf PID/start/group')
  if n('cleanup_reaper')!=facts['reaper'][0] or (n('cleanup_worker'),n('cleanup_worker_start'),n('cleanup_worker_group'),n('cleanup_leaf'),n('cleanup_leaf_start'),n('cleanup_leaf_group'))!=(facts['worker'][0],facts['worker'][1],facts['group'],facts['leaf'][0],facts['leaf'][1],facts['group']): raise RuntimeError(f'{label}: final fixture cleanup receipt mismatches exact identities')
- if not all(b(k) for k in ('host_live','reaper_live','leader_absent','worker_absent','leaf_absent','exact_reaped','sentinel_live','sentinel_reaped','api_bound','report_returned','killed_report','capture_complete','pidfds_exited','reaper_ok','host_absent','group_empty')): raise RuntimeError(f'{label}: boundary invariant false')
+ if not all(b(k) for k in ('host_live','reaper_live','leader_record_start_matches_pidfd','leader_absent','worker_absent','leaf_absent','exact_reaped','sentinel_live','sentinel_reaped','api_bound','report_returned','killed_report','capture_complete','pidfds_exited','reaper_ok','host_absent','group_empty')): raise RuntimeError(f'{label}: boundary invariant false')
  identities=[]
  for name,(pid,start) in exact.items():
   try:
