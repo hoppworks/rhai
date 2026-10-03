@@ -44,3 +44,5 @@ Originals: linux-managed-success96-evidence/proof-evidence/ (all seven command s
 **Unverified:** no_float/no_index excluded by fixture gates; wider managed deadline/overflow/kill/final-drop/escape/setup/drop-false/performance contracts, native macOS/Windows and final current-source release matrix. This proves two selected Linux paths, not all process functionality or release readiness.
 
 Integration applicability: merge92146c604e3a248aa2d961d59f33be195b373875 has exactly the frozen003da non-scratch tree (git diff empty), including exacte003 test bytes. Source/production/native proof inputs are unchanged; documentation and recipe commits require no duplicate build.
+
+Evidence integrity note: original libtest stdout trailing spaces/blank lines and the remote collector-created bytecode are hash-bound original inventory. They are preserved verbatim; documentation/source whitespace checks pass separately. No accepted evidence bytes were normalized.

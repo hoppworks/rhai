@@ -86,12 +86,12 @@ Current authoritative history through this rewrite is Git commit
 10d4a0d55400ebe8c24feff134e7161ff36bf8d5, this same state path. It retains
 all earlier cause/attempt/resource/source applicability records. Read that
 history for consumed work, not superseded next actions. No reset occurred.
-Last independently read-back fork maine7cf9e680a90ccb002a36161a324bdc4ee386cc1; only remote main, lowercase
-human author/committer. This six-file documentation/archive-utility package
-records reviewed preparation and cause history; it integrates no unverified
-managed-success source or recipes. Five source/document paths pass diff check;
-the original failed unified patch retains literal blank-context whitespace and
-verified SHA f85b8c6f, deliberately preserved as historical bytes. Goal active and incomplete.
+Fork main native-acceptance anchor0a8ab05763eceb6125561c606691c9072930324e
+was independently read back with ONLY remote main after normal fast-forward push.
+Merge92146c60 preserves source7d045/003da and frozen recipe0b1 histories; native
+proof, review, originals and escalation history committed at0a8ab057. Lowercase
+human author/committer verified. This continuation-state checkpoint may advance
+main again; it does not change proven test/production inputs. Goal active/incomplete.
 
 ### Latest accepted package and next action
 
@@ -176,8 +176,15 @@ Expert14 and ONE follow-up PASSED, two prior failures retained; no renewed chain
 Owner recipe commit0b1c6431 clean/lowercase authors, parent003da frozen source.
 Coordinator merged7d045+003da+0b1 history at92146c604e3a248aa2d961d59f33be195b373875.
 Independent non-scratch diff vs frozen003da empty, test exact SHAe003; previous
-proof applies without duplicate build. Next commit proof/history -> push ONLY
-forkmain -> exact sole-branch readback -> archive owned writer worktree. Prior accepted unaffected proofs remain valid.
+proof applies without duplicate build. Proof/history committed0a8ab057 and pushed ONLY forkmain; independent exact
+sole-branch readback passed. Snapshot_sessions codex completed before requested
+managed archive of clean owned writer worktree. Archive refused because pinned
+task/workspace protects it; preserve it, no fallback delete/unpin/foreign cleanup.
+No disposable build remains. Next coherent requirement: managed run deadline
+and shared Child kill/final-drop group closure, using real fixture/readback and
+retaining accepted prompt/held receipts. Inspect current source/tests and existing
+coverage before choosing a small integrated repair/proof; no legacy immediate-
+ESRCH success inference or renewed stopped macOS/Windows path. Prior accepted unaffected proofs remain valid.
 Wider process/macOS/Windows/performance/release gates remain OPEN.
 
 ### Accepted current Linux non-process package
