@@ -1252,8 +1252,18 @@ impl Drop for ManagedZombieDrainGuard {
         let mut incomplete = false;
         loop {
             let mut pending = false;
-            for (file, label) in [("leader-identity", "leader"), ("worker-record", "worker"), ("leaf-record", "leaf")] {
-                let Ok(text) = std::fs::read_to_string(self.root.join(file)) else {
+            for (file, fallback, label) in [("leader-identity", Some("leader-record"), "leader"), ("worker-record", None, "worker"), ("leaf-record", None, "leaf")] {
+                // The kill-mode fixture publishes the leader's exact PID/start identity in
+                // leader-record; leader-identity is only emitted by the held-zombie modes.
+                let path = self.root.join(file);
+                let path = if path.exists() {
+                    path
+                } else if let Some(fallback) = fallback {
+                    self.root.join(fallback)
+                } else {
+                    path
+                };
+                let Ok(text) = std::fs::read_to_string(path) else {
                     pending = true;
                     continue;
                 };
