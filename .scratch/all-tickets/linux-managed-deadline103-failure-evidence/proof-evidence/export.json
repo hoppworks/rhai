@@ -1,0 +1,7 @@
+{
+  "destination": "/root/rhai-linux-managed-deadline-20261003-bcecd9eb-103/proof-evidence",
+  "elapsed_seconds": 21.122,
+  "reserve_seconds": 30,
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-103/agent-build-btzqrka4",
+  "scope": "/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-103"
+}

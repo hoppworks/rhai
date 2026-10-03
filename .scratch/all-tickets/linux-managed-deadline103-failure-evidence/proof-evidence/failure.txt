@@ -1,0 +1,17 @@
+Traceback (most recent call last):
+  File "/root/rhai-linux-managed-deadline-20261003-bcecd9eb-103/linux-managed-deadline-proof.py", line 167, in <module>
+    try: status=main()
+                ~~~~^^
+  File "/root/rhai-linux-managed-deadline-20261003-bcecd9eb-103/linux-managed-deadline-proof.py", line 138, in main
+    run_final(cargo,env,CONTROL,ROWS[0],101,True)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-managed-deadline-20261003-bcecd9eb-103/linux-managed-deadline-proof.py", line 110, in run_final
+    result=verify_control(out,err,label) if control else (terminal(out,TEST,False),parse_deadline(err,label))[1]
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-managed-deadline-20261003-bcecd9eb-103/linux-managed-deadline-proof.py", line 102, in verify_control
+    terminal(out, TEST, True)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-managed-deadline-20261003-bcecd9eb-103/linux-managed-deadline-proof.py", line 42, in terminal
+    if len(re.findall(r'(?m)^test '+re.escape(name)+r' \.\.\..*$', out)) != 1: raise RuntimeError(f'{name}: exact outer test prefix missing/duplicated')
+                                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: managed_run_deadline_reaps_group_under_fixture_reaper: exact outer test prefix missing/duplicated

@@ -85,7 +85,7 @@ Instructions/roles faba3db3bef6891ad2c0b20d434963bb8fe9572d loaded by root,
 responsible Standard and same combined reviewer. Workhorse installed rules resolved
 at /var/home/workhorse/.agents/AGENTS.md and /var/home/workhorse/projects/agent-skills;
 SSH root has no ~/.agents. Read-only resolution/command-local safe.directory only.
-Last verified fork mainf801d875; sole remote main,
+Last verified fork main67483c695a908d730e135b100852b8d9ff3af35e; sole remote main,
 lowercase human author/committer. Current goal turn PROGRESS: final managed lease
 drop102 accepted and integrated with original evidence. Overall scope incomplete.
 
@@ -145,8 +145,10 @@ three positional format arguments missing from deadline boundary receipt. Cargo1
 and empty control stdout are infrastructure, NOT meaningful RED/product acceptance.
 Root original linux-managed-deadline103-launch.log retained. Runtimecleanup0,
 PIDreadback0, scopecleanup0; fresh exact central scope absence observed. Restored
-sourceSHAde4cfc16/errornull independently read. Remote raw stage remains ONLY for
-original export and fresh hash/custody-gated exact cleanup; no retained build.
+sourceSHAde4cfc16/errornull independently read. Original42files/5directories exported to linux-managed-deadline103-failure-evidence,
+all hashes matched fresh remote originals. Fresh60helper+2launcher PID/start rows
+absent, exact groups835397/835467 empty. Hash-gated cleanup removed exact42files/
+5dirs, fresh stage/scope/group absence confirmed. No retained build/stage.
 Stage/root/rhai-linux-managed-deadline-20261003-bcecd9eb-103 (physical/var/roothome),
 scope/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-103;
 private runtimeagent-build-btzqrka4 removed by runner receipt.
@@ -158,6 +160,14 @@ Same Standard fixes receipt PID arguments only, freezes affected source and104pi
 and adapts accepted97 raw failure collection mechanics. Same combined reviewer
 rechecks affected source/pins/raw custody; root performs collection/cleanup and
 bounded native execution only after readiness. Prospective104 UNALLOCATED.
+Source repairf82049391de33ee2f096cc6a21ba6639084a67e2 passed same affected
+independent source review: exactly three leader/worker/leaf PID format arguments,
+all predicates/production unchanged, testSHA3e112b015d506d0034982a3cd147a495d2cc686180aa2fe1859dfd5e1d71900f.
+Intermediate1d6ea010 mistaken later-eprintln edit corrected next commit, pre-native
+preparation only; preserved Git history. Raw103collector immutablebb3ba1a3/SHA4794dbd8
+passed same affected custody review and root collect/cleanup; raw originals remain
+compiler-only NOT acceptance.104recipes frozen6bc123099197f24d21b0ef01f20afbb3afa9a5ee
+await affected actual dependency review before allocation.
 Ordinary30min active-work planning checkpoint; maximum two consecutive launches
 without diagnosis/closed check. New compiler diagnosis permits bounded correction.
 CumulativeUnix103/deadlinenative1. Seven exact tests plus3setup remain planned:

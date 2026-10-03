@@ -1,0 +1,19 @@
+{
+  "captured_before_stage_validation_or_external_command": true,
+  "helper": {
+    "cmdline": "python3 /root/rhai-linux-managed-deadline-20261003-bcecd9eb-103/linux-managed-deadline-proof.py",
+    "pgid": 835467,
+    "pid": 835468,
+    "ppid": 835467,
+    "start_ticks": "3710239"
+  },
+  "identity_errors": {},
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-103/agent-build-btzqrka4",
+  "scoped_supervisor": {
+    "cmdline": "/usr/bin/python3 /var/roothome/rhai-linux-managed-deadline-20261003-bcecd9eb-103/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-managed-deadline-20261003-bcecd9eb-103/linux-managed-deadline-proof.py",
+    "pgid": 835467,
+    "pid": 835467,
+    "ppid": 835464,
+    "start_ticks": "3710237"
+  }
+}
