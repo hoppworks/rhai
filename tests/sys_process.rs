@@ -691,9 +691,16 @@ fn managed_scope_spawn_leader_fixture() {
     let leaf_fields = managed_record_fields(&std::fs::read_to_string(&leaf_record).unwrap());
     let leader_pid = std::process::id() as i32;
     let leader_pgid = unsafe { libc::getpgrp() };
+    #[cfg(target_os = "linux")]
+    let leader_start_field = format!("start={}", managed_proc_identity(leader_pid).expect("read managed spawn leader start ticks").3);
+    #[cfg(not(target_os = "linux"))]
+    let leader_start_field = String::new();
     managed_atomic_record(
         &root.join("leader-record"),
-        &format!("pid={leader_pid} pgid={leader_pgid} worker={worker_pid} worker_pgid={} leaf={} leaf_pgid={}\n", worker_fields["pgid"], leaf_fields["pid"], leaf_fields["pgid"]),
+        &format!(
+            "pid={leader_pid} {leader_start_field} pgid={leader_pgid} worker={worker_pid} worker_pgid={} leaf={} leaf_pgid={}\n",
+            worker_fields["pgid"], leaf_fields["pid"], leaf_fields["pgid"]
+        ),
     );
     let deadline = Instant::now() + Duration::from_secs(15);
     while !std::path::Path::new(&release).exists() && Instant::now() < deadline {
@@ -1882,11 +1889,14 @@ fn managed_child_kill_reports_group_closed_under_fixture_reaper() {
         std::thread::sleep(Duration::from_millis(3));
     }
     let pidfds = acquire_managed_pidfds(root.clone(), host_pid);
-    let leader = managed_record_fields(&std::fs::read_to_string(fixture.path("leader-record")).unwrap());
+    let leader_record_text = std::fs::read_to_string(fixture.path("leader-record")).unwrap();
+    let leader_record_start = managed_zombie_u64(&leader_record_text, "start").expect("spawn leader record must include its Linux start ticks");
+    let leader = managed_record_fields(&leader_record_text);
     let worker = managed_record_fields(&std::fs::read_to_string(fixture.path("worker-record")).unwrap());
     let leaf = managed_record_fields(&std::fs::read_to_string(fixture.path("leaf-record")).unwrap());
     let start = |pid| pidfds.0.iter().find(|entry| entry.0 == pid).unwrap().2;
     let leader_start = start(leader["pid"]);
+    let leader_record_start_matches_pidfd = leader_record_start == leader_start;
     let worker_start = start(worker["pid"]);
     let leaf_start = start(leaf["pid"]);
     let group = leader["pgid"];
@@ -1928,7 +1938,8 @@ fn managed_child_kill_reports_group_closed_under_fixture_reaper() {
     drop(sentinel);
     let sentinel_reaped = pid_is_absent(sentinel_pid);
     let group_empty = unsafe { libc::kill(-group, 0) } == -1 && std::io::Error::last_os_error().raw_os_error() == Some(libc::ESRCH);
-    eprintln!("managed_child_kill_boundary host_live_at_return={host_live} reaper_live_at_return={reaper_live} leader={} leader_start={leader_start} leader_absent={leader_absent} worker={} worker_start={worker_start} worker_absent={worker_absent} leaf={} leaf_start={leaf_start} leaf_absent={leaf_absent} group={group} exact_descendants_reaped={exact_reaped} sentinel={sentinel_pid} sentinel_start={sentinel_start} sentinel_pgid={sentinel_pgid} sentinel_live_at_return={sentinel_live} sentinel_reaped_after_return={sentinel_reaped} api_bound={api_bound} report_returned={report_returned} killed_report={killed_report} capture_complete={capture_complete} pidfds_exited={pidfds_exited} reaper_ok={reaper_ok} host_absent_after_cleanup={host_absent_after_cleanup} group_empty={group_empty} api={api:?} reaped={reaped:?} cleanup={cleanup:?}", leader["pid"], worker["pid"], leaf["pid"]);
+    eprintln!("managed_child_kill_boundary host_live_at_return={host_live} reaper_live_at_return={reaper_live} leader={} leader_start={leader_start} leader_record_start_matches_pidfd={leader_record_start_matches_pidfd} leader_absent={leader_absent} worker={} worker_start={worker_start} worker_absent={worker_absent} leaf={} leaf_start={leaf_start} leaf_absent={leaf_absent} group={group} exact_descendants_reaped={exact_reaped} sentinel={sentinel_pid} sentinel_start={sentinel_start} sentinel_pgid={sentinel_pgid} sentinel_live_at_return={sentinel_live} sentinel_reaped_after_return={sentinel_reaped} api_bound={api_bound} report_returned={report_returned} killed_report={killed_report} capture_complete={capture_complete} pidfds_exited={pidfds_exited} reaper_ok={reaper_ok} host_absent_after_cleanup={host_absent_after_cleanup} group_empty={group_empty} api={api:?} reaped={reaped:?} cleanup={cleanup:?}", leader["pid"], worker["pid"], leaf["pid"]);
+    assert!(leader_record_start_matches_pidfd, "spawn leader record start must match exact acquired PIDFD identity");
     assert!(api_bound && report_returned, "public wait must return the exact host-bound Child report: {api}");
     assert!(killed_report, "public Child.kill report must record the killed child as unsuccessful");
     assert!(capture_complete, "public kill report must contain complete streams: {api}");
