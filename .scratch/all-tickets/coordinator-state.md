@@ -680,4 +680,53 @@ in .scratch/stdlib-wayfinder/issues and release-proposal.md. Preserve original
 scope; no release or goal-complete claim. Retire only exact owned clean worktrees
 after verified integration, retaining necessary original proof outside them.
 
-Current goal turn VERIFIED WAIT: specific foreign workhorse Cargo843801 and860487 independently observed alive then exited; replacement cargo-clippy868917/Cargo868921 observed live then exited; latest cargo-clippy886993/Cargo886997 and rustc descendants confirmed live. Heavy slot remains occupied, third consecutive blocked-audit observation after prior prerequisite progress; same occupancy condition, no available independent acceptance step. Exact cargo-clippy886993/Cargo886997 confirmed still live at elapsed26s. Goal controller blocked transition required; resume condition is a freshly verified free workhorse heavy slot, preserving the prepared Windows follow-up and all source/native caps. No requirement declared done. No new source/native proof or runtime, no allowance consumed, no duplicate prerequisite round. Native unique Windows runroot prerequisite from prior step remains recorded. Exact prospective path C:\Users\RhaiTest\.local\share\agent-builds\rhai\wroot-20261002-7a5ad33a7a3c\run\monitor-source-7a5ad33a7a3c44d6a19c707b191dd345 is absent;7 existing ancestors through volume root inspected clean. Native source17pins/PS5.1x64/compiler/free-space/source-tree proofs from prior step remain references in windows-fresh-preflight-20261002/. Exact new session/run parents NOT created; next dispatch must create only these after slot gate and recheck every ancestor before harness invocation. runroot-command/result/readback retained, three owned remote screenshots SHA-compared and retired with absence checks. Input70697 terminal0, native read-only command terminal/clean prompt, no compiler/fixture invocation; source invocation count1consumed+1allocated remains unchanged. Specific foreign Nextest812118 observed then exited, fresh inventory instead cargo-clippy835669/Cargo835673 plus rustc descendants. No future-free-slot inference and no foreign signals. Next concrete action: fresh workhorse slot inventory; if free validate guest applicability, create/check exact own parents and dispatch the single already allocated fixture with retained caps/closure/readback. If occupied, dependent heavy work waits without duplicate prerequisite rounds. Darwin cause12 rejected dispatch path remains stopped, Mac cause09 remains stopped; no blind repairs/new escalation chain. Goal active and incomplete.
+Current goal turn PROGRESS2026-10-03: owner resumed SSH workhorse; native VM
+was exactly verified off then started, desktop/PowerShell available. Updated
+rules/roles loaded atfaba3db3bef6891ad2c0b20d434963bb8fe9572d; project and relevant
+campaign/e2e-proof/repair reference reread. No active native/CLI descendants to
+update at that checkpoint; fresh tasks receive current revision.
+Harness37dac203 parser0/PS5.1.26100.9444/x64 and17sourcepins/compilercf32c7b8
+59720bytes/source tree/ancestors/no-reparse/free70752665600bytes revalidated.
+Original proof windows-resume-20261003/. Foreign Clippy finished before dispatch;
+09:02:05 host inventory no heavy tree, own VM only,81182MiB available. Capacity
+exception considered but unused; default one-heavy-run rule unchanged.
+759char command visually verified, actual Enter creates only exact owned parents,
+runroot absent/seven clean existing ancestors; private-root policy controls PASS.
+Native fixture invocation2 consumed; terminal before compiler/six fixtures:
+primary error Setup-failure control unexpectedly succeeded, fixture_exit0.
+Inner marker proves injected setup exception/PID2564/child6668, outer failure
+marker PID6764. Independent CIM exact three PID query absent, scoped commandline
+query no matches, console8844 prompt returned. This closes fresh setup integrity
+and narrow exact-PID absence only; custody/full six fixtures NOT accepted.
+All original hard limits/history remain; no automatic retry/new native allowance.
+New actual contradiction error-vs-zero exit triggers focused independent diagnosis,
+checking relation to original blank-ExitCode cause and Expert02 before allowing
+any repair. No second chain or relabeling allowed. Expert13 diagnosis completed under revision
+faba3db3bef6891ad2c0b20d434963bb8fe9572d; answer beside
+13-windows-job-exit-contradiction.md. Source supports failure-path self-inclusive
+kill-on-close preempting normal error reporting. Actual zero exit is observed,
+not an API-guaranteed zero. This remains the existing exhausted exit-status/custody
+recovery route; no third native allowance, Expert02 renewal or source repair.
+Smallest future candidate is exact-job termination with reserved nonzero status
+and independent native process-status controls, still unimplemented/unproven.
+Standing acceptance of recommendations does not reset the exhausted cause chain
+or lift resource/safety limits. No missing-routine-approval blocker is asserted.
+Owned guest runroot wroot-20261002-7a5ad33a7a3c/run/monitor-source-7a5ad33a7a3c44d6a19c707b191dd345
+retired after diagnosis and original-log byte export in export-result.png.
+Inventory shows four ordinary directories/six logs; no compiler build existed.
+Visually verified exact cleanup reports cleanup_complete, explicit runroot
+absence check and empty-only parent/session deletion, no errors and prompt return.
+No retained build remains from this invocation; older historical scopes untouched.
+Root owns temporary /private/tmp/rhai-* files and exact remote
+/tmp/rhai-root-20261003-*.png receipts created this turn; preserve relevant
+screenshots before exact cleanup, never glob-delete foreign files.
+Next: integrate completed diagnosis/failure/closure/cleanup proof to sole fork
+main, then select independent remaining acceptance within its existing history. No Windows production/public Engine or
+whole-goal completion claim. Native typing53303/89438/66438/85460/10500/89552 all
+terminal; inventory input72049 completed and independently read back. Own runroot
+contains only build/input/logs/temp directories and six diagnostic files, no
+reparse attributes in the returned inventory. Original-byte console export36814
+completed, six base64 records preserved in export-result.png. Cleanup input41140
+completed, executed and verified. No live test invocation or pending input. Expert CLI37889 terminal0. Costs/token/cache
+usage per requirement unavailable; unknown. Root worktree remains needed for
+related repairs and campaign ownership; retire only after coherent work finishes.

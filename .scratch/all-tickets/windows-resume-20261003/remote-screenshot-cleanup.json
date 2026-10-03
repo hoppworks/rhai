@@ -1,0 +1,137 @@
+[
+  {
+    "path": "/tmp/rhai-root-20261003-boot.png",
+    "sha256": "af23548eaed4a6f61487ad78601a21964ee99142b1ce491ce8d23184313b941e",
+    "retired": true
+  },
+  {
+    "path": "/tmp/rhai-root-20261003-run.png",
+    "sha256": "3a739ef928bfc8d11ce0b694a7ad728786e4a3572faf7c1c9b83278b82e0c8f3",
+    "retired": true
+  },
+  {
+    "path": "/tmp/rhai-root-20261003-console.png",
+    "sha256": "0b11fcdbd9fb71e453ba55bc254fb8ce8dd4786011fa4e9dfad1e8002088ea09",
+    "retired": true
+  },
+  {
+    "path": "/tmp/rhai-root-20261003-p1typed.png",
+    "sha256": "414fca9dd8b84905ec5be9d4fd7e295326b750745aa54d87aef59dcb89309ab2",
+    "retired": true
+  },
+  {
+    "path": "/tmp/rhai-root-20261003-p1final.png",
+    "sha256": "40163bfa01caed4463a3678f204cc6fc3a22df834ebcd40a28347eb37ab73a91",
+    "retired": true
+  },
+  {
+    "path": "/tmp/rhai-root-20261003-p1result.png",
+    "sha256": "8598136a4ca653ffe5730021e3e25c32b49c6a38451c4428b6669b8af9418711",
+    "retired": true
+  },
+  {
+    "path": "/tmp/rhai-root-20261003-p1readback.png",
+    "sha256": "1fac0383f1e8a6c4b3ae7039f1739994bf7543beec0294e90956c427b07b77c3",
+    "retired": true
+  },
+  {
+    "path": "/tmp/rhai-root-20261003-p2partial.png",
+    "sha256": "2e9b12ab8668d4b490b726069c486e3720d5160da0eb820fcfe0185014f6fbb4",
+    "retired": true
+  },
+  {
+    "path": "/tmp/rhai-root-20261003-p2final.png",
+    "sha256": "cb324b053d3b6095e089769f7d08ae5af7c521c14faf8e530d39c21ea8638527",
+    "retired": true
+  },
+  {
+    "path": "/tmp/rhai-root-20261003-p2readback.png",
+    "sha256": "2482810cde7fc31213f0db3ba680a62bc6129df0881344d52bba5b3c98ddbdd8",
+    "retired": true
+  },
+  {
+    "path": "/tmp/rhai-root-20261003-p2terminal.png",
+    "sha256": "f35df802e2fb8904523598d06ea1d60894cb8f8cb87cd390e15e437ba06719b2",
+    "retired": true
+  },
+  {
+    "path": "/tmp/rhai-root-20261003-dispatch-partial.png",
+    "sha256": "86cd4011eee70b8dfcee93764947a204937adb39fcb4316e49f6ce18f9f7b9df",
+    "retired": true
+  },
+  {
+    "path": "/tmp/rhai-root-20261003-dispatch-typed.png",
+    "sha256": "cb5098c16ca09bd831a9735c199781c704eeb508af8248aea88c70184ac2675d",
+    "retired": true
+  },
+  {
+    "path": "/tmp/rhai-root-20261003-fixture-first.png",
+    "sha256": "0d040ef692f27cdd93c3b3275e895e2fff91737dd978311b496910a60268425e",
+    "retired": true
+  },
+  {
+    "path": "/tmp/rhai-root-20261003-fixture-next.png",
+    "sha256": "08f566bbc4d5003cf1cd2953ff19ae9e2ef1460a9bf0a7dcd89f49245b493162",
+    "retired": true
+  },
+  {
+    "path": "/tmp/rhai-root-20261003-closure-typed.png",
+    "sha256": "f6c82f9c90fc38681851dab64c20299ee0b8f5d4dccfb72dfd5706b4fa712e51",
+    "retired": true
+  },
+  {
+    "path": "/tmp/rhai-root-20261003-closure-result.png",
+    "sha256": "a2cf4726df907d054ae484d296aab508bc9f4eb722ddc61968b7b4626a5e9a5c",
+    "retired": true
+  },
+  {
+    "path": "/tmp/rhai-root-20261003-logs-typed.png",
+    "sha256": "0d76e6cdcd188a0632374ec17f91ce86d1d81b5d1268ed0556c243f451ca8bbb",
+    "retired": true
+  },
+  {
+    "path": "/tmp/rhai-root-20261003-logs-result.png",
+    "sha256": "3a8ad05b3a4846346a66e58d8bd49064ccf838e2fecb8fade29f3e0ede761d2c",
+    "retired": true
+  },
+  {
+    "path": "/tmp/rhai-root-20261003-pids-typed.png",
+    "sha256": "bc2057e55dd9d1de6ee5c9bc8c74d28f2437aeaad0741aeae3dd426d5febf9b6",
+    "retired": true
+  },
+  {
+    "path": "/tmp/rhai-root-20261003-pids-result.png",
+    "sha256": "a039bac474a339c43343b7db2d1805ca007761ecf0c43c302a7da9455229b101",
+    "retired": true
+  },
+  {
+    "path": "/tmp/rhai-root-20261003-inventory-typed.png",
+    "sha256": "5f590559b318d87dbc30a6eb6183f2a86d4e3736724d269643e55c186b33440a",
+    "retired": true
+  },
+  {
+    "path": "/tmp/rhai-root-20261003-inventory-result.png",
+    "sha256": "2524f5aba7dcf2f58f80de2f9847a2e5c91c635b23a24c97a5638f6007dad80d",
+    "retired": true
+  },
+  {
+    "path": "/tmp/rhai-root-20261003-export-typed.png",
+    "sha256": "ab6bbcb9d24c331eb76f516598907ed1c2ce3d188dae36aef87ba3169c45cf5a",
+    "retired": true
+  },
+  {
+    "path": "/tmp/rhai-root-20261003-export-result.png",
+    "sha256": "974fc0019be34169e2b617daf15f8a4904d6c680350fcf2893e4306ece463dd8",
+    "retired": true
+  },
+  {
+    "path": "/tmp/rhai-root-20261003-cleanup-typed.png",
+    "sha256": "583e8cf4cd0e066c18df8a8be1e96172ff357ee64e4f0c8117c2caeef7590c1c",
+    "retired": true
+  },
+  {
+    "path": "/tmp/rhai-root-20261003-cleanup-result.png",
+    "sha256": "da44cb20b824f4f213b2c19cf888bc9d9896f98a8bd62a44c7d82b1274cb8275",
+    "retired": true
+  }
+]

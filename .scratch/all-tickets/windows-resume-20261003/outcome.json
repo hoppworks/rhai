@@ -1,0 +1,22 @@
+{
+  "status": "infrastructure failure before compiler or six fixtures",
+  "fixture_exit": 0,
+  "primary_error": "Setup-failure control unexpectedly succeeded.",
+  "injected_marker": "CONTROL_INJECTED_AFTER_JOB_ASSIGNMENT_BEFORE_TIMER",
+  "control_powershell_pid": 2564,
+  "control_child_pid": 6668,
+  "outer_powershell_pid": 6764,
+  "interactive_console_pid": 8844,
+  "independent_pid_query": "all three test PIDs absent; command returned pid_check_complete and prompt",
+  "scope_commandline_query": "no matches; narrow observation only",
+  "source_fixture_invocations_consumed": 2,
+  "retry_allocated": false,
+  "native_acceptance": false,
+  "scope_retained_for": null,
+  "diagnosis": "same exhausted exit-status/custody route; self-inclusive kill-on-close can preempt normal failure reporting",
+  "expert_revision": "faba3db3bef6891ad2c0b20d434963bb8fe9572d",
+  "inventory": "four ordinary directories and six original diagnostic files; see inventory-result.png",
+  "remaining_acceptance": "compiler, six fixtures, full custody, real client and public Engine unexecuted/unproven",
+  "cleanup": "native cleanup_complete, runroot absence explicitly checked, both empty parents deleted; cleanup-result.png",
+  "original_log_export": "base64 of all six original files in export-result.png, not separately reconstructed"
+}

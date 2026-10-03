@@ -1,0 +1,1 @@
+$ErrorActionPreference='Stop';$f='C:\Users\RhaiTest\.local\share\agent-builds\rhai\w2c9-20261002-cfe0128fbd4b\fixtures.ps1';$t=$null;$e=$null;[System.Management.Automation.Language.Parser]::ParseFile($f,[ref]$t,[ref]$e)|out-null;'parser_errors='+$e.count;get-filehash $f -algorithm sha256|select-object hash;'powershell='+$PSVersionTable.PSVersion;'intptr='+[IntPtr]::Size

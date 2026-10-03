@@ -1,0 +1,11 @@
+{
+  "observation": "independent native console screenshot; clean terminal prompt returned",
+  "source_pins": 17,
+  "powershell": "5.1.26100.9444",
+  "intptr": 8,
+  "compiler_sha256": "cf32c7b8e5691b962f1b6e92b03d87409dd9f7aebfd71c5bf778203cc56ee1",
+  "compiler_bytes": 59720,
+  "free_bytes": 70752665600,
+  "source_tree_and_ancestors": "clean",
+  "fixture_launched": false
+}
