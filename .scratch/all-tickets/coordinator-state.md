@@ -1929,3 +1929,20 @@ Root own /private/tmp/rhai-native110-preflight.py prepared but never executed;
 sourcearchive/inputhash and strict idle-machine guard only, not allocation.
 Next actual API seam answer -> source test correction -> affected combined review
 -> recipe repair -> meaningful native RED -> production fix and real acceptance.
+
+API-seam Expert16 source-only answer received, faba3db confirmed. Genuine
+missingerror regression is public spawn/raw shared Child, bounded firstwaitunit
+while exactchild live and fd0 absent, followed by separate explicitcleanup; GREEN
+retainedBrokenPipe writechildstdin automaticcleanup and sharedcachedreport.
+run_raw alreadyretained writeprocessstdin remains separatepositive, not RED.
+Expert clarified postclose childreceipt races correcttermination: publish markers/
+closureintent BEFORE fd0close; GREEN actualBrokenPipe establishesclosure; baseline
+unit requires /proc/PID/fd/0 NotFound bracketed by same liveidentity readbacks.
+No childsurvival-afterclose publication requirement. Completionflags truthful,
+not manufactured. Originalanswer/history retained adjacent escalation16.
+Same Standard assigned one boundedsource/test followup first (30minute activework
+planningcheckpoint), productionunchanged untilgenuinenativeRED. Sourcefreeze then
+samecombinedaffectedreview; responsiblecontext laterrepairsconsumingrecipes.
+No sourceREADY claim until recheck; native110unallocated/Unix109 unchanged.
+Current continuation PROGRESS: freshindependentdiagnosis and racecorrection
+change actualacceptance choreography, responsiblewriter nowimplementing.
