@@ -1,0 +1,71 @@
+launch_utc=2026-10-03T14:28:33Z
+runner_timeout_seconds=585
+stage=/root/rhai-linux-managed-kill-20261003-a17f40a7-98
+scope=/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98
+archive-build-source.py: OK
+source.tar: OK
+Cargo.lock.accepted: OK
+check-linux-current-msrv-examples.py: OK
+linux-managed-kill-proof.py: OK
+linux-managed-success-proof.py: OK
+contract-source.md: OK
+contract.md: OK
+stage.sh: OK
+launch.sh: OK
+runner/tools/run_scoped.py: OK
+runner/tools/agentskills/__init__.py: OK
+runner/tools/agentskills/pyguard.py: OK
+PRIVATE_RUNTIME /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9
+command=rustup-install argv=['/root/.cargo/bin/rustup', 'toolchain', 'install', '1.77.2-x86_64-unknown-linux-gnu', '--profile', 'minimal', '--no-self-update']
+sample={"descendants": 2, "monotonic_seconds": 0.066, "rss_kib": 45752, "storage_kib": 7152}
+sample={"descendants": 2, "monotonic_seconds": 1.078, "rss_kib": 125992, "storage_kib": 41960}
+sample={"descendants": 2, "monotonic_seconds": 2.09, "rss_kib": 56372, "storage_kib": 79660}
+sample={"descendants": 2, "monotonic_seconds": 3.1, "rss_kib": 56488, "storage_kib": 95760}
+sample={"descendants": 2, "monotonic_seconds": 4.112, "rss_kib": 209672, "storage_kib": 188200}
+sample={"descendants": 2, "monotonic_seconds": 5.124, "rss_kib": 152360, "storage_kib": 260324}
+sample={"descendants": 2, "monotonic_seconds": 6.134, "rss_kib": 267996, "storage_kib": 325048}
+sample={"descendants": 2, "monotonic_seconds": 7.145, "rss_kib": 415592, "storage_kib": 467216}
+sample={"descendants": 1, "monotonic_seconds": 7.855, "rss_kib": 29648, "storage_kib": 466840}
+status=rustup-install:0
+command=rustc-version argv=['/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 7.865, "rss_kib": 29644, "storage_kib": 466848}
+sample={"descendants": 1, "monotonic_seconds": 7.975, "rss_kib": 29644, "storage_kib": 466852}
+status=rustc-version:0
+command=cargo-version argv=['/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 7.984, "rss_kib": 29516, "storage_kib": 466856}
+sample={"descendants": 1, "monotonic_seconds": 8.094, "rss_kib": 29496, "storage_kib": 466860}
+status=cargo-version:0
+command=require-success-control argv=['/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--features', 'testing-environ,sys', '--test', 'sys_process', '--', '--exact', '--nocapture', '--test-threads=1', 'managed_child_kill_reports_group_closed_under_fixture_reaper']
+sample={"descendants": 2, "monotonic_seconds": 8.104, "rss_kib": 51488, "storage_kib": 466868}
+sample={"descendants": 2, "monotonic_seconds": 9.114, "rss_kib": 72304, "storage_kib": 470144}
+sample={"descendants": 2, "monotonic_seconds": 10.125, "rss_kib": 73496, "storage_kib": 470364}
+sample={"descendants": 2, "monotonic_seconds": 11.14, "rss_kib": 110044, "storage_kib": 506912}
+sample={"descendants": 4, "monotonic_seconds": 12.158, "rss_kib": 534892, "storage_kib": 545036}
+sample={"descendants": 4, "monotonic_seconds": 13.176, "rss_kib": 429936, "storage_kib": 573532}
+sample={"descendants": 4, "monotonic_seconds": 14.194, "rss_kib": 584672, "storage_kib": 593576}
+sample={"descendants": 4, "monotonic_seconds": 15.212, "rss_kib": 864600, "storage_kib": 603056}
+Traceback (most recent call last):
+  File "/root/rhai-linux-managed-kill-20261003-a17f40a7-98/linux-managed-kill-proof.py", line 196, in <module>
+    try: status=main()
+                ~~~~^^
+  File "/root/rhai-linux-managed-kill-20261003-a17f40a7-98/linux-managed-kill-proof.py", line 164, in main
+    one(cargo,env,control,ROWS[0],101,control)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-managed-kill-20261003-a17f40a7-98/linux-managed-kill-proof.py", line 129, in one
+    BASE.run_command(label,cmd,env,expected_status=expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-managed-kill-20261003-a17f40a7-98/check-linux-current-msrv-examples.py", line 296, in run_command
+    sample_resources()
+    ~~~~~~~~~~~~~~~~^^
+  File "/root/rhai-linux-managed-kill-20261003-a17f40a7-98/check-linux-current-msrv-examples.py", line 213, in sample_resources
+    storage_output = capture('du', ['/usr/bin/du', '-sk', str(RUNTIME)])
+  File "/root/rhai-linux-managed-kill-20261003-a17f40a7-98/check-linux-current-msrv-examples.py", line 210, in capture
+    raise RuntimeError(f'{name} sampling command failed: {stderr[-500:]}')
+RuntimeError: du sampling command failed: No such file or directory
+du: cannot access '/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9/target/debug/deps/rhai_codegen-fac62c48e6888592.rhai_codegen.cb5bfbc15e059160-cgu.07.rcgu.o': No such file or directory
+du: cannot access '/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9/target/debug/deps/rhai_codegen-fac62c48e6888592.rhai_codegen.cb5bfbc15e059160-cgu.08.rcgu.o': No such file or directory
+
+/root/rhai-linux-managed-kill-20261003-a17f40a7-98/launch.sh: line 123: /proc/797396/stat: No such file or directory
+run_scoped_status=1
+runtime_cleanup_status=0 pid_readback_status=0 scope_cleanup_status=0
+outer_status=1

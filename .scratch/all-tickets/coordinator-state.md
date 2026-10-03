@@ -82,7 +82,7 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 ## Current step and next action
 
 Current instructions/roles revision faba3db3bef6891ad2c0b20d434963bb8fe9572d.
-Latest independently read-back fork main 9caa3852f593f17f03630dbaaed18da37539ccbe;
+Latest independently read-back fork main 87c48103abf7a0e196aac1c3fb393385d21b83e2;
 ONLY remote main. Lowercase human author and committer verified. Accepted96 subset
 is mapped explicitly to open tickets03/06; checkpoint/source remains unchanged.
 Workhorse installed revision independently read back at
@@ -182,7 +182,7 @@ Native97 CONSUMED launch2026-10-03T14:10:49Z, root exec session12956.
 Runtime agent-build-4pp9guh2 below exact scope, input hashes passed before helper.
 Three existing private-toolchain setup commands use runtime-scoped outputs/caches
 as in accepted96 recipe; no shared agent-home/system installation or config change.
-No retry/budget reset; Unix97 consumed, prior Unix96 retained. ENDED before intended assertions: Cargo101 compile failure at tests/sys_process.rs1921, three format placeholders without arguments. Empty test stdout; no fixture launched. Infrastructure/compiler-harness outcome, not intended RED or product failure. Source restored9c6/errornull. Runner status1; PID readback/runtime/scope cleanup statuses0. Raw-failure evidence preserved in linux-managed-kill97-failure-evidence/:42 original files/5dirs byte-identical, fresh70 recorded PID/start rows absent and2exactgroups empty. collect-linux-managed-kill97-failure.py explicitly rejects acceptance; original source/recipe pins retained. Exact stage removed only after local/freshremote inventories agreed; remote-cleanup.json verifies stage/scope/group absence. No retained build. One minimal setup recovery under existing authorization; native98 not allocated. Planned four existing feature rows for one new
+No retry/budget reset; Unix97 consumed, prior Unix96 retained. ENDED before intended assertions: Cargo101 compile failure at tests/sys_process.rs1921, three format placeholders without arguments. Empty test stdout; no fixture launched. Infrastructure/compiler-harness outcome, not intended RED or product failure. Source restored9c6/errornull. Runner status1; PID readback/runtime/scope cleanup statuses0. Raw-failure evidence preserved in linux-managed-kill97-failure-evidence/:42 original files/5dirs byte-identical, fresh70 recorded PID/start rows absent and2exactgroups empty. collect-linux-managed-kill97-failure.py explicitly rejects acceptance; original source/recipe pins retained. Exact stage removed only after local/freshremote inventories agreed; remote-cleanup.json verifies stage/scope/group absence. No retained build. Same reviewer independently verified raw-failure custody and immutable hashes; failure evidence committed/pushed87c48103. One minimal setup recovery under existing authorization; native98 not allocated. Writer source90a6ddea fixes only the three missing PID formatting arguments; reviewer source recheck passed. Recipe878cca affected collector recheck found stale embedded REMOTE proof/stage/launch hashes, despite correct top constants. First completed new collector correction fails static pin check; same responsible Standard applies minimal pin-only correction. Original three defects otherwise resolved: re imported, all8original closure files required, comparison-only typed sink, original96success independent identity closure. Native98 unallocated; no native product failure or old custody-chain renewal. Planned four existing feature rows for one new
 kill criterion, base-row original96 prompt/held affected regressions, two named
 report-success and sentinel-absent RED controls after full fixture cleanup, exact
 restored GREEN. Agent plan revised1→2 before launch to prove both newly claimed
@@ -203,6 +203,19 @@ Initial a17/1009 pins are obsolete for launch. One combined source/recipe/live e
 30-minute active-work planning checkpoint; ordinary reversible implementation
 continues under existing authorization. The passed receipt/custody history is
 retained without renewal; new outcomes classified by actual cause.
+
+Native98 preparation frozen source90a6ddea, recipesd045a90c after878cca
+and collector pin-only correction. Source test90b9216c/archive450bf2f8/lock2ba4;
+proofd6035236/stagecb634ba0/launch20851ad3. Same combined reviewer affected recheck atd045a90c EXECUTION READY and COLLECTION READY; stale REMOTEpins fixed, no material readiness findings. Native acceptance pending. Next authorized action after READY: allocate one fresh bounded98
+run, preserving97 consumed/compilerfailure and first collector staticpin failure.
+Planning estimate revised from one to two native launches because exact compiler
+cause is fixed by three missing arguments; no hard resource/time cap raised.
+Native98 CONSUMED launch2026-10-03T14:28:33Z, root execsession62968; inputs allshaOK, runtimeagent-build-vtv10lr9 within exact98central scope. ONE bounded run ENDED during compile before intendedassertions: originalbasehelper du -sk ENOENTrace on compiler-deleted .07/.08.rcgu.o files. Cargostatus-15/stdoutempty, noscenariofixture. Infrastructurestorage-sampler outcome distinctfromcompilerargs; no intendedRED/productfailure. Runtime/scope/readback cleanup0, outer/run1. Original98files preservedhashidentical, fresh exact recordedPID/startrowsabsent/groupsempty; exactstage removedafterlocal+freshremotecheck. Failure exporter initialpin wronglyderivedlivewriter changedproof; refusedbeforeexport/mutation, correctedtoimmutable d603 andsuccessful. Draftsyntaxfixedpreexecution. No renewedhistoricalcustodychain. CumulativeUnix98consumed, killpackage97compilerfailed+98running; no reset. Fresh inventory: exact98stage/scope absent, private
+runtimes absent, actual cargo/rustc/rustup/scoped-runner processes absent;
+MemAvailable82853008kB. A substring scan matched a foreign coordinator prompt,
+then exact executable/early argument scan excluded it; foreign session untouched.
+Same limits600outer/585runner/540helper incl30exportreserve, jobs2/desc16,
+1572864KiBstorage preempt and2097152KiBRSS/storage hard. Compilerargs recovery remains compile-unverified because samplerinterrupted. Newdu-ENOENTinfrastructurecause occurrence1, no unsuccessful recoveryyet. SameStandardminimal bounded full-du retry with exactownedpath diagnostics; no excludedfiles/ignorederrors or higherresourcecaps. Native99unallocated. Original98readback/export/cleanup in linux-managed-kill98-failure-evidence/, rawcollector98 explicitly NOTacceptance.
 
 ### Accepted current Linux non-process package
 

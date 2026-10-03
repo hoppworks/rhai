@@ -1,0 +1,21 @@
+Traceback (most recent call last):
+  File "/root/rhai-linux-managed-kill-20261003-a17f40a7-98/linux-managed-kill-proof.py", line 196, in <module>
+    try: status=main()
+                ~~~~^^
+  File "/root/rhai-linux-managed-kill-20261003-a17f40a7-98/linux-managed-kill-proof.py", line 164, in main
+    one(cargo,env,control,ROWS[0],101,control)
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-managed-kill-20261003-a17f40a7-98/linux-managed-kill-proof.py", line 129, in one
+    BASE.run_command(label,cmd,env,expected_status=expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-managed-kill-20261003-a17f40a7-98/check-linux-current-msrv-examples.py", line 296, in run_command
+    sample_resources()
+    ~~~~~~~~~~~~~~~~^^
+  File "/root/rhai-linux-managed-kill-20261003-a17f40a7-98/check-linux-current-msrv-examples.py", line 213, in sample_resources
+    storage_output = capture('du', ['/usr/bin/du', '-sk', str(RUNTIME)])
+  File "/root/rhai-linux-managed-kill-20261003-a17f40a7-98/check-linux-current-msrv-examples.py", line 210, in capture
+    raise RuntimeError(f'{name} sampling command failed: {stderr[-500:]}')
+RuntimeError: du sampling command failed: No such file or directory
+du: cannot access '/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9/target/debug/deps/rhai_codegen-fac62c48e6888592.rhai_codegen.cb5bfbc15e059160-cgu.07.rcgu.o': No such file or directory
+du: cannot access '/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9/target/debug/deps/rhai_codegen-fac62c48e6888592.rhai_codegen.cb5bfbc15e059160-cgu.08.rcgu.o': No such file or directory
+

@@ -1,0 +1,50 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+helper	797400	797399	797399	2890416	python3 /root/rhai-linux-managed-kill-20261003-a17f40a7-98/linux-managed-kill-proof.py
+scoped-supervisor	797399	797396	797399	2890414	/usr/bin/python3 /var/roothome/rhai-linux-managed-kill-20261003-a17f40a7-98/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-managed-kill-20261003-a17f40a7-98/linux-managed-kill-proof.py
+command:rustup-install	797402	797400	797399	2890424	/root/.cargo/bin/rustup toolchain install 1.77.2-x86_64-unknown-linux-gnu --profile minimal --no-self-update
+command:du	797403	797400	797399	2890424	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9
+command:ps	797420	797400	797399	2890425	/bin/ps -e -o pid=,ppid=,rss=
+command:du	797441	797400	797399	2890526	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9
+command:ps	797442	797400	797399	2890526	/bin/ps -e -o pid=,ppid=,rss=
+command:du	797454	797400	797399	2890627	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9
+command:ps	797455	797400	797399	2890627	/bin/ps -e -o pid=,ppid=,rss=
+command:du	797466	797400	797399	2890728	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9
+command:ps	797467	797400	797399	2890728	/bin/ps -e -o pid=,ppid=,rss=
+command:du	797486	797400	797399	2890829	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9
+command:ps	797487	797400	797399	2890829	/bin/ps -e -o pid=,ppid=,rss=
+command:du	797499	797400	797399	2890930	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9
+command:ps	797500	797400	797399	2890930	/bin/ps -e -o pid=,ppid=,rss=
+command:du	797519	797400	797399	2891031	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9
+command:ps	797520	797400	797399	2891032	/bin/ps -e -o pid=,ppid=,rss=
+command:du	797531	797400	797399	2891132	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9
+command:ps	797532	797400	797399	2891133	/bin/ps -e -o pid=,ppid=,rss=
+command:du	797542	797400	797399	2891204	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9
+command:ps	797543	797400	797399	2891204	/bin/ps -e -o pid=,ppid=,rss=
+command:rustc-version	797544	797400	797399	2891204	/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose
+command:du	797545	797400	797399	2891205	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9
+command:ps	797546	797400	797399	2891205	/bin/ps -e -o pid=,ppid=,rss=
+command:du	797548	797400	797399	2891215	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9
+command:ps	797549	797400	797399	2891216	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-version	797550	797400	797399	2891216	/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose
+command:du	797551	797400	797399	2891216	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9
+command:ps	797555	797400	797399	2891217	/bin/ps -e -o pid=,ppid=,rss=
+command:du	797565	797400	797399	2891227	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9
+command:ps	797566	797400	797399	2891228	/bin/ps -e -o pid=,ppid=,rss=
+command:require-success-control	797567	797400	797399	2891228	/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_child_kill_reports_group_closed_under_fixture_reaper
+command:du	797568	797400	797399	2891228	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9
+command:ps	797570	797400	797399	2891229	/bin/ps -e -o pid=,ppid=,rss=
+command:du	797587	797400	797399	2891329	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9
+command:ps	797588	797400	797399	2891330	/bin/ps -e -o pid=,ppid=,rss=
+command:du	797602	797400	797399	2891430	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9
+command:ps	797603	797400	797399	2891431	/bin/ps -e -o pid=,ppid=,rss=
+command:du	797615	797400	797399	2891532	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9
+command:ps	797616	797400	797399	2891532	/bin/ps -e -o pid=,ppid=,rss=
+command:du	797814	797400	797399	2891633	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9
+command:ps	797818	797400	797399	2891634	/bin/ps -e -o pid=,ppid=,rss=
+command:du	798074	797400	797399	2891735	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9
+command:ps	798075	797400	797399	2891736	/bin/ps -e -o pid=,ppid=,rss=
+command:du	798227	797400	797399	2891837	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9
+command:ps	798228	797400	797399	2891838	/bin/ps -e -o pid=,ppid=,rss=
+command:du	798257	797400	797399	2891938	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9
+command:ps	798258	797400	797399	2891939	/bin/ps -e -o pid=,ppid=,rss=
+command:du	798382	797400	797399	2892040	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98/agent-build-vtv10lr9
