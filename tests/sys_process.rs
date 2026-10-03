@@ -1123,18 +1123,20 @@ fn managed_proc_identity_checked(pid: i32) -> std::io::Result<Option<(char, i32,
         .1
         .split_whitespace()
         .collect::<Vec<_>>();
-    let parse = |index: usize| {
+    let field = |index: usize| {
         fields
             .get(index)
-            .ok_or_else(|| std::io::Error::new(std::io::ErrorKind::InvalidData, "short proc stat"))?
-            .parse()
-            .map_err(|error| std::io::Error::new(std::io::ErrorKind::InvalidData, error))
+            .copied()
+            .ok_or_else(|| std::io::Error::new(std::io::ErrorKind::InvalidData, "short proc stat"))
     };
     let state = fields
         .first()
         .and_then(|field| field.chars().next())
         .ok_or_else(|| std::io::Error::new(std::io::ErrorKind::InvalidData, "missing proc state"))?;
-    Ok(Some((state, parse(1)?, parse(2)?, parse(19)?)))
+    let parent = field(1)?.parse::<i32>().map_err(|error| std::io::Error::new(std::io::ErrorKind::InvalidData, error))?;
+    let group = field(2)?.parse::<i32>().map_err(|error| std::io::Error::new(std::io::ErrorKind::InvalidData, error))?;
+    let start = field(19)?.parse::<u64>().map_err(|error| std::io::Error::new(std::io::ErrorKind::InvalidData, error))?;
+    Ok(Some((state, parent, group, start)))
 }
 
 #[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
@@ -1491,6 +1493,7 @@ fn managed_zombie_reaper_process() {
     if host_status.is_none() {
         // This is a fixture-owned watchdog path: release only the already-created fixture's
         // exact readiness markers, then terminate/reap the exact direct Engine-host child.
+        managed_atomic_record(&root.join("exceptional-cleanup-started"), "kind=fixture-watchdog\n");
         if root.join("begin-run").exists() || root.join("leader-record").exists() {
             let _ = std::fs::write(root.join("pidfd-ack"), b"watchdog cleanup\n");
             let _ = std::fs::write(root.join("release-worker"), b"watchdog cleanup\n");
@@ -2116,9 +2119,13 @@ fn managed_spawn_final_clone_drop_closes_group_under_fixture_reaper() {
     let mut group_empty_after_closure = false;
     let mut final_members_live = true;
     let mut reaped = String::new();
-    let observation_deadline = deadline.checked_sub(Duration::from_secs(4)).unwrap_or(deadline);
+    let observation_deadline = deadline.checked_sub(Duration::from_secs(8)).unwrap_or(deadline);
     let mut observation_error = None;
     while Instant::now() < observation_deadline {
+        if fixture.path("exceptional-cleanup-started").exists() {
+            observation_error = Some("fixture watchdog exceptional cleanup started before observed closure".to_owned());
+            break;
+        }
         let read_identity = |pid| managed_proc_identity_checked(pid);
         let host_identity = read_identity(host_pid);
         let reaper_identity = read_identity(reaper_pid);
@@ -2169,8 +2176,9 @@ fn managed_spawn_final_clone_drop_closes_group_under_fixture_reaper() {
         }
         std::thread::sleep(Duration::from_millis(5));
     }
+    let exceptional_cleanup_not_started = !fixture.path("exceptional-cleanup-started").exists();
     let closure_observed = pidfds_exited && leader_absent && worker_absent && leaf_absent && exact_reaped && group_empty_after_closure
-        && observation_error.is_none();
+        && exceptional_cleanup_not_started && observation_error.is_none();
     let host_live_at_drop_return = host_live_during_closure;
     let reaper_live_at_drop_return = reaper_live_during_closure;
     let sentinel_live_at_drop_return = sentinel_live_during_closure;
@@ -2193,7 +2201,7 @@ fn managed_spawn_final_clone_drop_closes_group_under_fixture_reaper() {
     drop(sentinel);
     let sentinel_reaped = pid_is_absent(sentinel_pid);
     let group_empty = unsafe { libc::kill(-group, 0) } == -1 && std::io::Error::last_os_error().raw_os_error() == Some(libc::ESRCH);
-    eprintln!("managed_final_drop_boundary nonfinal_preserved={nonfinal_drop_preserved_group} leader={} leader_start={leader_start} leader_record_start_matches_pidfd={leader_record_start_matches_pidfd} worker={} worker_start={worker_start} worker_record_start_matches_pidfd={worker_record_start_matches_pidfd} leaf={} leaf_start={leaf_start} leaf_record_start_matches_pidfd={leaf_record_start_matches_pidfd} worker_record_group_matches={worker_record_group_matches} leaf_record_group_matches={leaf_record_group_matches} group={group} drop_return_recorded={api_bound} closure_observed={closure_observed} leader_absent={leader_absent} worker_absent={worker_absent} leaf_absent={leaf_absent} exact_reaped={exact_reaped} host_live_before_drop={host_live_before_drop} reaper_live_before_drop={reaper_live_before_drop} sentinel_live_before_drop={sentinel_live_before_drop} host_live_through_closure={host_live_at_drop_return} reaper_live_through_closure={reaper_live_at_drop_return} sentinel_live_through_closure={sentinel_live_at_drop_return} pidfds_exited={pidfds_exited} final_members_live={final_members_live} reaper_ok={reaper_ok} reaper_status={status:?} host_absent_after_cleanup={host_absent_after_cleanup} sentinel_reaped={sentinel_reaped} group_empty_after_closure={group_empty_after_closure} observation_error={observation_error:?} api={api:?} reaped={reaped:?} cleanup={cleanup:?}", leader["pid"], worker["pid"], leaf["pid"]);
+    eprintln!("managed_final_drop_boundary nonfinal_preserved={nonfinal_drop_preserved_group} leader={} leader_start={leader_start} leader_record_start_matches_pidfd={leader_record_start_matches_pidfd} worker={} worker_start={worker_start} worker_record_start_matches_pidfd={worker_record_start_matches_pidfd} leaf={} leaf_start={leaf_start} leaf_record_start_matches_pidfd={leaf_record_start_matches_pidfd} worker_record_group_matches={worker_record_group_matches} leaf_record_group_matches={leaf_record_group_matches} group={group} drop_return_recorded={api_bound} closure_observed={closure_observed} exceptional_cleanup_not_started={exceptional_cleanup_not_started} leader_absent={leader_absent} worker_absent={worker_absent} leaf_absent={leaf_absent} exact_reaped={exact_reaped} host_live_before_drop={host_live_before_drop} reaper_live_before_drop={reaper_live_before_drop} sentinel_live_before_drop={sentinel_live_before_drop} host_live_through_closure={host_live_at_drop_return} reaper_live_through_closure={reaper_live_at_drop_return} sentinel_live_through_closure={sentinel_live_at_drop_return} pidfds_exited={pidfds_exited} final_members_live={final_members_live} reaper_ok={reaper_ok} reaper_status={status:?} host_absent_after_cleanup={host_absent_after_cleanup} sentinel_reaped={sentinel_reaped} group_empty_after_closure={group_empty_after_closure} observation_error={observation_error:?} api={api:?} reaped={reaped:?} cleanup={cleanup:?}", leader["pid"], worker["pid"], leaf["pid"]);
 
     assert!(leader_record_start_matches_pidfd && worker_record_start_matches_pidfd && leaf_record_start_matches_pidfd && worker_record_group_matches && leaf_record_group_matches, "fixture records must match exact acquired PIDFD identities and managed group");
     assert!(host_live_before_drop && reaper_live_before_drop && sentinel_live_before_drop, "host, fixture reaper, and sentinel must be live before final drop");
