@@ -1111,6 +1111,33 @@ fn managed_proc_identity(pid: i32) -> Option<(char, i32, i32, u64)> {
 }
 
 #[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_proc_identity_checked(pid: i32) -> std::io::Result<Option<(char, i32, i32, u64)>> {
+    let stat = match std::fs::read_to_string(format!("/proc/{pid}/stat")) {
+        Ok(stat) => stat,
+        Err(error) if error.kind() == std::io::ErrorKind::NotFound => return Ok(None),
+        Err(error) => return Err(error),
+    };
+    let fields = stat
+        .rsplit_once(')')
+        .ok_or_else(|| std::io::Error::new(std::io::ErrorKind::InvalidData, "malformed proc stat command"))?
+        .1
+        .split_whitespace()
+        .collect::<Vec<_>>();
+    let parse = |index: usize| {
+        fields
+            .get(index)
+            .ok_or_else(|| std::io::Error::new(std::io::ErrorKind::InvalidData, "short proc stat"))?
+            .parse()
+            .map_err(|error| std::io::Error::new(std::io::ErrorKind::InvalidData, error))
+    };
+    let state = fields
+        .first()
+        .and_then(|field| field.chars().next())
+        .ok_or_else(|| std::io::Error::new(std::io::ErrorKind::InvalidData, "missing proc state"))?;
+    Ok(Some((state, parse(1)?, parse(2)?, parse(19)?)))
+}
+
+#[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
 #[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
 fn managed_zombie_wait_for(path: &std::path::Path, deadline: Instant) -> bool {
     while Instant::now() < deadline {
@@ -2078,23 +2105,78 @@ fn managed_spawn_final_clone_drop_closes_group_under_fixture_reaper() {
     }
     let api = std::fs::read_to_string(fixture.path("api-result")).unwrap_or_default();
     let api_bound = api.contains(&format!("host={host_pid} host_start={host_start} final_drop_returned=true nonfinal_wait_unit=true"));
-    let pidfds_exited = pidfds.0.iter().all(|(pid, fd, _)| {
-        let mut pollfd = libc::pollfd { fd: *fd, events: libc::POLLIN, revents: 0 };
-        (unsafe { libc::poll(&mut pollfd, 1, 0) }) == 1 && pollfd.revents & libc::POLLIN != 0 && *pid > 0
-    });
-    let leader_absent = managed_proc_identity(leader["pid"]).is_none();
-    let worker_absent = managed_proc_identity(worker["pid"]).is_none();
-    let leaf_absent = managed_proc_identity(leaf["pid"]).is_none();
-    let reaped = std::fs::read_to_string(fixture.path("prompt-reaper-cleanup")).unwrap_or_default();
-    let exact_reaped = reaped.contains(&format!("worker={} start={worker_start} pgid={group} reaped=true wait_status=", worker["pid"]))
-        && reaped.contains(&format!("leaf={} start={leaf_start} pgid={group} reaped=true wait_status=", leaf["pid"]))
-        && reaped.contains("complete=true");
-    let host_live_at_drop_return = matches!(managed_proc_identity(host_pid), Some((state, actual_parent, _, start)) if state != 'Z' && actual_parent == reaper_pid && start == host_start);
-    let reaper_live_at_drop_return = matches!(managed_proc_identity(reaper_pid), Some((state, actual_parent, _, start)) if state != 'Z' && actual_parent == parent && start == reaper_start);
-    let sentinel_live_at_drop_return = matches!(managed_proc_identity(sentinel_pid), Some((state, actual_parent, pgid, start)) if state != 'Z' && actual_parent == parent && pgid == sentinel_pgid && start == sentinel_start);
-    let final_members_live = [leader["pid"], worker["pid"], leaf["pid"]].into_iter().any(|pid| {
-        managed_proc_identity(pid).is_some_and(|(state, _, observed_group, start)| state != 'Z' && observed_group == group && pidfd_start(pid) == start)
-    });
+    let mut pidfds_exited = false;
+    let mut leader_absent = false;
+    let mut worker_absent = false;
+    let mut leaf_absent = false;
+    let mut exact_reaped = false;
+    let mut host_live_during_closure = false;
+    let mut reaper_live_during_closure = false;
+    let mut sentinel_live_during_closure = false;
+    let mut group_empty_after_closure = false;
+    let mut final_members_live = true;
+    let mut reaped = String::new();
+    let observation_deadline = deadline.checked_sub(Duration::from_secs(4)).unwrap_or(deadline);
+    let mut observation_error = None;
+    while Instant::now() < observation_deadline {
+        let read_identity = |pid| managed_proc_identity_checked(pid);
+        let host_identity = read_identity(host_pid);
+        let reaper_identity = read_identity(reaper_pid);
+        let sentinel_identity = read_identity(sentinel_pid);
+        let member_identities = [leader["pid"], worker["pid"], leaf["pid"]].map(read_identity);
+        if host_identity.is_err() || reaper_identity.is_err() || sentinel_identity.is_err() || member_identities.iter().any(Result::is_err) {
+            observation_error = Some("permission or malformed proc identity during closure observation".to_owned());
+            break;
+        }
+        let host_identity = host_identity.unwrap();
+        let reaper_identity = reaper_identity.unwrap();
+        let sentinel_identity = sentinel_identity.unwrap();
+        let member_identities = member_identities.map(Result::unwrap);
+        host_live_during_closure = matches!(host_identity, Some((state, parent, _, start)) if state != 'Z' && parent == reaper_pid && start == host_start);
+        reaper_live_during_closure = matches!(reaper_identity, Some((state, parent, _, start)) if state != 'Z' && parent == std::process::id() as i32 && start == reaper_start);
+        sentinel_live_during_closure = matches!(sentinel_identity, Some((state, parent, pgid, start)) if state != 'Z' && parent == std::process::id() as i32 && pgid == sentinel_pgid && start == sentinel_start);
+        if !host_live_during_closure || !reaper_live_during_closure || !sentinel_live_during_closure {
+            observation_error = Some("host, reaper, or sentinel identity did not remain live during closure observation".to_owned());
+            break;
+        }
+        pidfds_exited = pidfds.0.iter().all(|(pid, fd, _)| {
+            let mut pollfd = libc::pollfd { fd: *fd, events: libc::POLLIN, revents: 0 };
+            (unsafe { libc::poll(&mut pollfd, 1, 0) }) == 1 && pollfd.revents & libc::POLLIN != 0 && *pid > 0
+        });
+        let expected = [(leader["pid"], leader_start), (worker["pid"], worker_start), (leaf["pid"], leaf_start)];
+        let absent = expected.iter().zip(member_identities.iter()).map(|((pid, start), identity)| {
+            match identity.as_ref() {
+                None => true,
+                Some((_, _, _, observed_start)) => observed_start != start || *pid <= 0,
+            }
+        }).collect::<Vec<_>>();
+        [leader_absent, worker_absent, leaf_absent] = [absent[0], absent[1], absent[2]];
+        reaped = std::fs::read_to_string(fixture.path("prompt-reaper-cleanup")).unwrap_or_default();
+        exact_reaped = reaped.contains(&format!("worker={} start={worker_start} pgid={group} reaped=true wait_status=", worker["pid"]))
+            && reaped.contains(&format!("leaf={} start={leaf_start} pgid={group} reaped=true wait_status=", leaf["pid"]))
+            && reaped.contains("complete=true");
+        let group_result = unsafe { libc::kill(-group, 0) };
+        let group_error = if group_result == -1 { std::io::Error::last_os_error().raw_os_error() } else { None };
+        group_empty_after_closure = group_result == -1 && group_error == Some(libc::ESRCH);
+        final_members_live = member_identities.iter().zip(expected.iter()).any(|(identity, (pid, start))| {
+            match identity {
+                Some((state, _, observed_group, observed_start)) => *state != 'Z' && *observed_group == group && observed_start == start && *pid > 0,
+                None => false,
+            }
+        });
+        if pidfds_exited && leader_absent && worker_absent && leaf_absent && exact_reaped && group_empty_after_closure {
+            break;
+        }
+        std::thread::sleep(Duration::from_millis(5));
+    }
+    let closure_observed = pidfds_exited && leader_absent && worker_absent && leaf_absent && exact_reaped && group_empty_after_closure
+        && observation_error.is_none();
+    let host_live_at_drop_return = host_live_during_closure;
+    let reaper_live_at_drop_return = reaper_live_during_closure;
+    let sentinel_live_at_drop_return = sentinel_live_during_closure;
+    managed_atomic_record(&root.join("final-drop-closure-observed"), &format!(
+        "host={host_pid} host_start={host_start} reaper={reaper_pid} reaper_start={reaper_start} leader={} leader_start={leader_start} worker={} worker_start={worker_start} leaf={} leaf_start={leaf_start} group={group} observed={closure_observed} pidfds_exited={pidfds_exited} exact_reaped={exact_reaped} group_empty={group_empty_after_closure}\n",
+        leader["pid"], worker["pid"], leaf["pid"]));
 
     std::fs::write(fixture.path("host-exit-release"), b"final-drop boundary observed\n").unwrap();
     let stop = deadline.checked_sub(Duration::from_secs(2)).unwrap_or(deadline);
@@ -2111,13 +2193,13 @@ fn managed_spawn_final_clone_drop_closes_group_under_fixture_reaper() {
     drop(sentinel);
     let sentinel_reaped = pid_is_absent(sentinel_pid);
     let group_empty = unsafe { libc::kill(-group, 0) } == -1 && std::io::Error::last_os_error().raw_os_error() == Some(libc::ESRCH);
-    eprintln!("managed_final_drop_boundary nonfinal_preserved={nonfinal_drop_preserved_group} leader={} leader_start={leader_start} leader_record_start_matches_pidfd={leader_record_start_matches_pidfd} worker={} worker_start={worker_start} worker_record_start_matches_pidfd={worker_record_start_matches_pidfd} leaf={} leaf_start={leaf_start} leaf_record_start_matches_pidfd={leaf_record_start_matches_pidfd} worker_record_group_matches={worker_record_group_matches} leaf_record_group_matches={leaf_record_group_matches} group={group} leader_absent={leader_absent} worker_absent={worker_absent} leaf_absent={leaf_absent} exact_reaped={exact_reaped} host_live_before_drop={host_live_before_drop} reaper_live_before_drop={reaper_live_before_drop} sentinel_live_before_drop={sentinel_live_before_drop} host_live_at_drop_return={host_live_at_drop_return} reaper_live_at_drop_return={reaper_live_at_drop_return} sentinel_live_at_drop_return={sentinel_live_at_drop_return} api_bound={api_bound} pidfds_exited={pidfds_exited} final_members_live={final_members_live} reaper_ok={reaper_ok} host_absent_after_cleanup={host_absent_after_cleanup} sentinel_reaped={sentinel_reaped} group_empty={group_empty} api={api:?} reaped={reaped:?} cleanup={cleanup:?}", leader["pid"], worker["pid"], leaf["pid"]);
+    eprintln!("managed_final_drop_boundary nonfinal_preserved={nonfinal_drop_preserved_group} leader={} leader_start={leader_start} leader_record_start_matches_pidfd={leader_record_start_matches_pidfd} worker={} worker_start={worker_start} worker_record_start_matches_pidfd={worker_record_start_matches_pidfd} leaf={} leaf_start={leaf_start} leaf_record_start_matches_pidfd={leaf_record_start_matches_pidfd} worker_record_group_matches={worker_record_group_matches} leaf_record_group_matches={leaf_record_group_matches} group={group} drop_return_recorded={api_bound} closure_observed={closure_observed} leader_absent={leader_absent} worker_absent={worker_absent} leaf_absent={leaf_absent} exact_reaped={exact_reaped} host_live_before_drop={host_live_before_drop} reaper_live_before_drop={reaper_live_before_drop} sentinel_live_before_drop={sentinel_live_before_drop} host_live_through_closure={host_live_at_drop_return} reaper_live_through_closure={reaper_live_at_drop_return} sentinel_live_through_closure={sentinel_live_at_drop_return} pidfds_exited={pidfds_exited} final_members_live={final_members_live} reaper_ok={reaper_ok} host_absent_after_cleanup={host_absent_after_cleanup} sentinel_reaped={sentinel_reaped} group_empty_after_closure={group_empty_after_closure} observation_error={observation_error:?} api={api:?} reaped={reaped:?} cleanup={cleanup:?}", leader["pid"], worker["pid"], leaf["pid"]);
 
     assert!(leader_record_start_matches_pidfd && worker_record_start_matches_pidfd && leaf_record_start_matches_pidfd && worker_record_group_matches && leaf_record_group_matches, "fixture records must match exact acquired PIDFD identities and managed group");
     assert!(host_live_before_drop && reaper_live_before_drop && sentinel_live_before_drop, "host, fixture reaper, and sentinel must be live before final drop");
     assert!(nonfinal_drop_preserved_group, "dropping a nonfinal managed Child clone terminated its live group");
     assert!(api_bound, "host did not record the authorized final managed lease drop: {api}");
-    assert!(pidfds_exited && leader_absent && worker_absent && leaf_absent && exact_reaped, "final managed lease drop must close and exactly reap all owned members");
+    assert!(closure_observed && pidfds_exited && leader_absent && worker_absent && leaf_absent && exact_reaped && group_empty_after_closure, "final managed lease drop must be followed by independently observed exact group closure");
     assert!(host_live_at_drop_return && reaper_live_at_drop_return && sentinel_live_at_drop_return, "host, fixture reaper, and sentinel must remain live at the final-drop boundary");
     assert!(reaper_ok && cleanup.contains("complete=true") && host_absent_after_cleanup && sentinel_reaped && group_empty, "exact final-drop fixture cleanup must finish: {cleanup}");
     assert!(!final_members_live, "final managed Child lease drop left an exact process-group member live");
