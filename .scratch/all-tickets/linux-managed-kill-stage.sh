@@ -2,21 +2,21 @@
 set -euo pipefail
 
 repo=/Users/hoppworks/.codex/worktrees/linux-managed-success/rhai
-source_rev=d70e2c409c82b09ab205e2fc12b08a7c6b94acec
-stage=/root/rhai-linux-managed-kill-20261003-a17f40a7-97
-scope=/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-97
+source_rev=90a6ddea70a7d25f2554845cc5f1b3d9e62e7e07
+stage=/root/rhai-linux-managed-kill-20261003-a17f40a7-98
+scope=/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98
 lock="$repo/.scratch/all-tickets/current-msrv-examples-evidence/Cargo.lock"
 skills=/Users/hoppworks/projects/agent-skills/tools
 script_dir=$(cd -- "$(dirname -- "$0")" && pwd)
 base="$repo/.scratch/all-tickets/check-linux-current-msrv-examples.py"
 expected_lock=2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425
 expected_base=59ac8b7b9c71ab2331c13196b36d8d2794931e07138741c43d4a8c3d1d754b06
-expected_archive=4510841b868ad57cbff61129b2f6244c21b3915588d36caf760a54d653e9e43d
+expected_archive=450bf2f8dd3325e49e8a2e5e2e937903aee39e7a5381a0677b08bda3d977e9b9
 archive_helper=/Users/hoppworks/.codex/worktrees/all-tickets-continuation/rhai/.scratch/all-tickets/archive-build-source.py
 expected_archive_helper=a75b4e807f03e8247ed821df871ceb35e776b7f699046d7a099dd0b85199fd8b
-expected_proof=929e0509ba74c41fc294f03d99e6a8e157cc5a63a8fbcfc00b45d43b7f74f13b
+expected_proof=d6035236936abe7851ab592e4e419e3d9ff7e1085f7fc4c568ea913f01d4945f
 expected_old_proof=83e84145fdec770ee5469b8ef2d85eacb813bc073abbd2a37e80e605a224a1a0
-expected_test=9c6ca59e753ebae483a3f2bed6cf5ffd076e80a7c6ef1be76dc87e49c5ea00da
+expected_test=90b9216c4517384228418e57c2b6ec91ed779b590e68ff6b288b81760a6b537d
 expected_contract=1d8a61b5dffefc4f5891d12ed2b19b438637e4e752607e68c6495f96eb553d41
 
 git -C "$repo" cat-file -e "$source_rev^{commit}"

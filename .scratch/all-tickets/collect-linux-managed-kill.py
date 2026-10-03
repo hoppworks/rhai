@@ -4,33 +4,36 @@ from __future__ import annotations
 import argparse, hashlib, importlib.util, json, re, shlex, subprocess, sys, tarfile, tempfile
 from pathlib import Path, PurePosixPath
 
-STAGE='/root/rhai-linux-managed-kill-20261003-a17f40a7-97'
-SCOPE='/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-97'
-PHYSICAL='/var/roothome/rhai-linux-managed-kill-20261003-a17f40a7-97'
-REV='d70e2c409c82b09ab205e2fc12b08a7c6b94acec'
-ARCHIVE='4510841b868ad57cbff61129b2f6244c21b3915588d36caf760a54d653e9e43d'
+STAGE='/root/rhai-linux-managed-kill-20261003-a17f40a7-98'
+SCOPE='/root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-98'
+PHYSICAL='/var/roothome/rhai-linux-managed-kill-20261003-a17f40a7-98'
+REV='90a6ddea70a7d25f2554845cc5f1b3d9e62e7e07'
+ARCHIVE='450bf2f8dd3325e49e8a2e5e2e937903aee39e7a5381a0677b08bda3d977e9b9'
 LOCK='2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425'
-TEST='9c6ca59e753ebae483a3f2bed6cf5ffd076e80a7c6ef1be76dc87e49c5ea00da'
+TEST='90b9216c4517384228418e57c2b6ec91ed779b590e68ff6b288b81760a6b537d'
 CONTRACT='1d8a61b5dffefc4f5891d12ed2b19b438637e4e752607e68c6495f96eb553d41'
-PROOF='929e0509ba74c41fc294f03d99e6a8e157cc5a63a8fbcfc00b45d43b7f74f13b'; STAGE_RECIPE='6fe4319a1bd3b57c1e47a23cc97b837843566da6a867a40e88582ba7d2a52554'; LAUNCH='d7f90e31bb593171a5b7739463495f104497ecad65b17388c8bf4c06c5731be5'; OLD_PROOF='83e84145fdec770ee5469b8ef2d85eacb813bc073abbd2a37e80e605a224a1a0'
+PROOF='d6035236936abe7851ab592e4e419e3d9ff7e1085f7fc4c568ea913f01d4945f'; STAGE_RECIPE='cb634ba0404afab3dd0f0c48a5eaf68decddbdf076eed0f6ee32cf0e430b8fe5'; LAUNCH='20851ad36ea0b31bc66e1f2770ae699a43fbb8253b05d9d5ac1f8d79fe3d65db'; OLD_PROOF='83e84145fdec770ee5469b8ef2d85eacb813bc073abbd2a37e80e605a224a1a0'
 
-REMOTE=r'''import hashlib,json,pathlib,subprocess,sys
+REMOTE=r'''import hashlib,json,pathlib,re,subprocess,sys
 stage=pathlib.Path(sys.argv[1]); scope=pathlib.Path(sys.argv[2]); physical=pathlib.Path(sys.argv[3])
 if not stage.is_dir() or stage.is_symlink() or stage.resolve()!=physical: raise SystemExit('managed-kill stage identity mismatch')
 if scope.exists() or scope.is_symlink(): raise SystemExit('managed-kill private scope remains')
 subprocess.run(['sha256sum','--check','input-identities.sha256'],cwd=stage,check=True,stdout=subprocess.DEVNULL)
 def sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()
-if sha(stage/'source.tar')!='4510841b868ad57cbff61129b2f6244c21b3915588d36caf760a54d653e9e43d': raise SystemExit('source archive mismatch')
+if sha(stage/'source.tar')!='450bf2f8dd3325e49e8a2e5e2e937903aee39e7a5381a0677b08bda3d977e9b9': raise SystemExit('source archive mismatch')
 if sha(stage/'Cargo.lock.accepted')!='2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425': raise SystemExit('lock mismatch')
 if sha(stage/'contract-source.md')!='1d8a61b5dffefc4f5891d12ed2b19b438637e4e752607e68c6495f96eb553d41': raise SystemExit('contract mismatch')
-for name,digest in [('linux-managed-kill-proof.py','929e0509ba74c41fc294f03d99e6a8e157cc5a63a8fbcfc00b45d43b7f74f13b'),('stage.sh','6fe4319a1bd3b57c1e47a23cc97b837843566da6a867a40e88582ba7d2a52554'),('launch.sh','d7f90e31bb593171a5b7739463495f104497ecad65b17388c8bf4c06c5731be5')]:
+for name,digest in [('linux-managed-kill-proof.py','20b8bd21b670af54e00e0b47f8a625425aded09fa339f0182ec9bb34fc8d5683'),('stage.sh','6cea80b06f007ae0732a8498bf5a086ffba519b9250d2931864d94743b95c283'),('launch.sh','0b02fe1bee9dbea37b27237c7f76c228fa24c8dc0ab3cd33191e236f083f0b36')]:
  if sha(stage/name)!=digest: raise SystemExit(name+' recipe hash mismatch')
 contract=(stage/'contract.md').read_text()
 for line in ('exact_tests=8','feature_rows=4','positive_exact_invocations=6','negative_controls=2','test_exact_invocations=8','toolchain_setup_commands=3','helper_commands_expected=11','outer_timeout_seconds=600','run_scoped_timeout_seconds=585','helper_deadline_seconds=540','export_reserve_seconds=30','cargo_build_jobs=2','max_descendants=16','storage_preemptive_stop_kib=1572864','storage_hard_stop_kib=2097152','rss_hard_stop_kib=2097152'):
  if line not in contract.splitlines(): raise SystemExit('bounded contract mismatch: '+line)
 p=stage/'proof-evidence'
+expected_closures={'require-success-control-fixture-closure.json','require-sentinel-absent-control-fixture-closure.json',*[f'green-row-{i}-fixture-closure.json' for i in range(1,5)],'kill-package-native96-success-row1-fixture-closure.json','native96-held-row1-held-closure.json'}
+actual_closures={x.name for x in p.glob('*-closure.json')}
+if actual_closures!=expected_closures: raise SystemExit(f'required original closure inventory mismatch expected={sorted(expected_closures)} actual={sorted(actual_closures)}')
 rest=json.loads((p/'source-restoration.json').read_text())
-if not rest.get('restored') or rest.get('original_sha256',{}).get('tests/sys_process.rs')!='9c6ca59e753ebae483a3f2bed6cf5ffd076e80a7c6ef1be76dc87e49c5ea00da' or rest.get('error') is not None: raise SystemExit('frozen test source restoration mismatch')
+if not rest.get('restored') or rest.get('original_sha256',{}).get('tests/sys_process.rs')!='90b9216c4517384228418e57c2b6ec91ed779b590e68ff6b288b81760a6b537d' or rest.get('error') is not None: raise SystemExit('frozen test source restoration mismatch')
 e=stage/'outer-evidence'; names=('outer-status.txt','run-scoped.status','pid-readback.status','pid-readback-launcher.status')
 statuses={n:int((e/n).read_text().strip()) for n in names}
 if statuses!={n:0 for n in names}: raise SystemExit(f'outer/custody statuses mismatch: {statuses}')
@@ -61,13 +64,17 @@ import importlib.util
 def load(path,name,expected):
  if sha(path)!=expected: raise SystemExit(f'{path.name} hash mismatch')
  spec=importlib.util.spec_from_file_location(name,path); mod=importlib.util.module_from_spec(spec); sys.modules[name]=mod; spec.loader.exec_module(mod); return mod
-proof=load(stage/'linux-managed-kill-proof.py','kill_proof','929e0509ba74c41fc294f03d99e6a8e157cc5a63a8fbcfc00b45d43b7f74f13b')
+proof=load(stage/'linux-managed-kill-proof.py','kill_proof','20b8bd21b670af54e00e0b47f8a625425aded09fa339f0182ec9bb34fc8d5683')
 old=load(stage/'linux-managed-success-proof.py','accepted96_proof','83e84145fdec770ee5469b8ef2d85eacb813bc073abbd2a37e80e605a224a1a0')
-class Sink:
+class ComparisonSink:
  STAGE=p
  @staticmethod
- def write_json(path,value): path.write_text(json.dumps(value,sort_keys=True)+'\n')
-proof.BASE=Sink
+ def write_json(path,value):
+  if not path.is_file(): raise SystemExit(f'required original closure missing: {path.name}')
+  expected=json.dumps(value,indent=2,sort_keys=True)+'\n'
+  actual=path.read_text(errors='strict')
+  if actual!=expected: raise SystemExit(f'original closure differs from fresh exact identity/group readback: {path.name}')
+proof.BASE=ComparisonSink
 def read(label,suffix): return (p/(label+'.'+suffix)).read_text(errors='strict')
 def outer(label,name,failed):
  out=read(label,'stdout'); err=read(label,'stderr')
@@ -110,15 +117,12 @@ def kill_expected(label):
  check_closure(label+'-fixture-closure',ids,{f['group'],f['sentinel_group']},c['pidfds'])
 for label in ('require-success-control','require-sentinel-absent-control','green-row-1','green-row-2','green-row-3','green-row-4'): kill_expected(label)
 # Retained native96 cases are independently parsed and their strict closure artifacts are required.
-success_text=read('native96-success-row1','stdout')+read('native96-success-row1','stderr'); s=old.require_success(success_text); se=old.early_receipt(success_text,'native96-success-row1')
+success_text=read('native96-success-row1','stdout')+read('native96-success-row1','stderr'); old.identity_closure(success_text,'kill-package-native96-success-row1',proof.BASE,'native96-success-row1'); s=old.require_success(success_text); se=old.early_receipt(success_text,'native96-success-row1')
 success_ids={(n,*s[n]) for n in ('host','leader','worker','leaf','sentinel')}|{('reaper',*se['reaper'])}
 check_closure('kill-package-native96-success-row1-fixture-closure',success_ids,{s['group']},s['pidfds'])
 held_text=read('native96-held-row1','stdout')+read('native96-held-row1','stderr'); hids,hgroup,hrows=old.exact_boundary(held_text)
 held_ids={(n,pid,int(start)) for n,pid,start in hids}; hpidfds={int(x['pid']):(int(x['start_ticks']),int(x['ppid']),int(x['pgid'])) for x in hrows}
 check_closure('native96-held-row1-held-closure',held_ids,{hgroup},hpidfds)
-expected_closures={'require-success-control-fixture-closure.json','require-sentinel-absent-control-fixture-closure.json',*[f'green-row-{i}-fixture-closure.json' for i in range(1,5)],'kill-package-native96-success-row1-fixture-closure.json','native96-held-row1-held-closure.json'}
-actual={x.name for x in p.glob('*-closure.json')}
-if actual!=expected_closures: raise SystemExit(f'required closure inventory mismatch expected={sorted(expected_closures)} actual={sorted(actual)}')
 files={}; dirs=[]
 for x in sorted(stage.rglob('*')):
  rel=x.relative_to(stage).as_posix()
