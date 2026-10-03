@@ -87,3 +87,6 @@ This acceptance does not close ordinary managed success/foreign reaping, broader
 
 
 Final lifecycle readback now visible: linux-managed-zombie95-evidence/independent-owned-cleanup.json records hash-gated collector removal of52exact stage files/5directories followed by independent stage_absent/scope_absent true,99exact PID/start identities absent and empty groups783752/783677/783605/782399. This independently records the84helper/launcher identities plus15fixture identities across three cases. The preceding pending-citation note is superseded; no remaining material acceptance/lifecycle gap for this narrow package. ACCEPTED.
+
+
+Cleanup provenance clarification: independent-owned-cleanup.json was created by root from a fresh SSH absence readback after collector cleanup; collector cleanup stdout itself was not saved. Thus stage/scope absence,99identity absence and four empty groups are fresh independently observed facts.52files/5directories removed are the reported prior hash-gated collector removal, not a retained collector stdout receipt. This distinction preserves the acceptance conclusion while accurately describing available lifecycle evidence.

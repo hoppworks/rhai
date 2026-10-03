@@ -1,0 +1,24 @@
+diff --git a/.scratch/all-tickets/linux-managed-success-source-note.md b/.scratch/all-tickets/linux-managed-success-source-note.md
+index 1570434f..8f5d86c1 100644
+--- a/.scratch/all-tickets/linux-managed-success-source-note.md
++++ b/.scratch/all-tickets/linux-managed-success-source-note.md
+@@ -1,6 +1,6 @@
+ # Linux managed success closure source note
+ 
+-The test-only change adds `managed_run_succeeds_after_fixture_reaper_reaps_descendants` in `tests/sys_process.rs`. In prompt mode, a fixture-local Linux subreaper observes the exact worker and leaf PID, start tick, parent transition, and process group, then calls `waitpid(WNOHANG)` only after each member is an adopted zombie. The separate Engine host remains live while the outer test reads the API result and verifies PIDFD completion and `/proc` absence for leader, worker, and leaf. The test also records that an unrelated sentinel is live with its original start identity at API return, then releases and reaps that exact sentinel during cleanup.
++The test-only change adds `managed_run_succeeds_after_fixture_reaper_reaps_descendants` in `tests/sys_process.rs`. In prompt mode, a fixture-local Linux subreaper observes the exact worker and leaf PID, start tick, parent transition, and process group, then calls `waitpid(WNOHANG)` only after each member is an adopted zombie. The separate Engine host remains live while the outer test reads the API result and verifies PIDFD completion and `/proc` absence for leader, worker, and leaf. The test prints an exact pre-assertion receipt for reaper, host, leader, worker, leaf, their start identities and process group, plus the unrelated sentinel start identity. This makes the intentional held-mode RED independently auditable despite unwinding before the success-only receipt. The test also records that the sentinel is live with its original start identity at API return, then releases and reaps that exact sentinel during cleanup.
+ 
+ The existing held-zombie mode remains the default and was not changed semantically. The new test and fixture helpers are gated to Linux with `no_index` and `no_float` disabled. Source-level feature compatibility includes the ordinary f64 row, `sync`, `metadata`, `f32_float`, and `unchecked`; these combinations have not been compiled or run in this source-only stage. No claim covers `no_index` or `no_float`.
+ 
+diff --git a/tests/sys_process.rs b/tests/sys_process.rs
+index 6af65133..24d9e4d7 100644
+--- a/tests/sys_process.rs
++++ b/tests/sys_process.rs
+@@ -1711,6 +1711,7 @@ fn managed_run_reports_while_fixture_reaper_holds_stopped_zombies() {
+     let worker_start = pidfds.0.iter().find(|member| member.0 == worker_fields["pid"]).unwrap().2;
+     let leaf_start = pidfds.0.iter().find(|member| member.0 == leaf_fields["pid"]).unwrap().2;
+     std::fs::write(fixture.path("pidfd-identities"), format!("leader_start={leader_start} worker_start={worker_start} leaf_start={leaf_start} pgid={}\n", leader_fields["pgid"])).unwrap();
++    eprintln!("managed_prompt_reap_live_boundary reaper={reaper_pid} reaper_start={reaper_start} host={host_pid} host_start={host_start} leader={} leader_start={leader_start} worker={} worker_start={worker_start} leaf={} leaf_start={leaf_start} group={} sentinel={sentinel_pid} sentinel_start={sentinel_start}", leader_fields["pid"], worker_fields["pid"], leaf_fields["pid"], leader_fields["pgid"]);
+     std::fs::write(fixture.path("pidfd-ack"), b"observer holds exact live pidfds\n").unwrap();
+ 
+     let api_result_path = fixture.path("api-result");

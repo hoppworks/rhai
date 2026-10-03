@@ -1,0 +1,9 @@
+{
+  "revision": "45902682cd6a92f21f274cea1d4240997d32d4e6",
+  "archive_sha256": "fe65e9358b09c57bd97e88eb31d100c292a778bd4c510e06283fd745e0966025",
+  "archive_bytes": 6307840,
+  "tracked_source_blobs_byte_verified": 522,
+  "excluded_root": ".scratch",
+  "excluded_build_references": 0,
+  "native_acceptance": false
+}

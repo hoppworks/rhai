@@ -86,7 +86,7 @@ Current authoritative history through this rewrite is Git commit
 10d4a0d55400ebe8c24feff134e7161ff36bf8d5, this same state path. It retains
 all earlier cause/attempt/resource/source applicability records. Read that
 history for consumed work, not superseded next actions. No reset occurred.
-Last independently read-back fork main257edf695f953271adf17b12dcc70c4287ae76b5; only remote main, lowercase
+Last independently read-back fork main45902682cd6a92f21f274cea1d4240997d32d4e6; only remote main, lowercase
 human author/committer. Goal active and incomplete.
 
 ### Latest accepted package and next action
@@ -101,9 +101,37 @@ zombie-proof.md, linux-managed-zombie-review.md, linux-managed-zombie95-evidence
 Native94 infrastructure interleaving failure and44 originals remain preserved;
 95 repaired that harness cause, no product correction or hard-cap revision.
 Cumulative Unix95; unavailable cost/token usage unknown. No retained build.
-Next: commit/push this exact accepted package to sole fork main, independently
-read back head, then advance remaining Linux managed lifecycle/fault criteria.
-No claim of ordinary-success, wider matrix, performance or release completion.
+Integrated45902682: exact114files committed and pushed to sole fork main;
+independent ls-remote confirms exact head and sole branch. Lowercase human
+author/committer verified. Current coherent package is deterministic managed
+success at source003da064 in owned task/linux-managed-success, paired with the
+held-zombie case across four current-MSRV rows. Source and unchanged launcher
+are READY. Same Standard is live correcting one combined review batch: bind
+both test receipts separately; restore exact helper/launcher/fixture/group
+custody and required closure inventory; hash-check local exports before exact
+remote retirement. Submitted recipes69fc/db612/27e1/5613 are NOT READY (see
+linux-managed-success-review.md), not native evidence. No96 allocation or stage.
+Next corrected recipe freeze -> same affected review -> fresh workhorse inventory
+and absent-path checks -> one bounded native96. Root read-only SSH confirmed
+Linux7.2.7 and prospective stage/scope absent; this is not a slot reservation.
+Corrected recipe freeze confirmed by owner and root hashes: proofa2b1e16a,
+stageaf67b5a9, unchanged launch27e1ee59, collector72ad7fc5, preparef136ec40.
+Owner reports realistic combined six-PIDFD positive/four negatives, exact custody/
+closure inventory guards and changed-local-export rejection; no native acceptance.
+Same affected recheck rejects completed a2b1 correction: early receipt wrongly
+requires distinct start ticks (actual95 shares ticks), require_held calls items()
+on a returned list, REMOTE uses undefined SUCCESS/HELD, and success API host/
+capture flags remain unbound so common held stderr can mask malformed success.
+One failed completed recipe correction for receipt/custody cause; not native.
+Same Standard receives all four in one batch with actual helper/REMOTE control
+path purechecks and success-only mutation under combined stderr. Preserve initial
+69fc findings and a2b1 rejected baseline in same review report; source003da and
+launcher remain READY. At a second failed completed correction for this cause,
+apply the fresh non-fork Expert escalation rule without resetting history.
+Previous turn verified wait on live owner; current turn PROGRESS through affected
+independent evidence and concrete corrective route. Native96 remains unallocated. Keep600/585/540incl30export,
+jobs2/desc16/2GiB limits and original source/cause history. No claim of ordinary
+success, wider matrix, performance or release completion until valid acceptance.
 
 ### Accepted current Linux non-process package
 
@@ -1329,3 +1357,142 @@ Native95 terminal0 and narrow combined acceptance recorded in proof/tickets03/06
 All six statuses, source restoration, originals and final cleanup independently
 verified. This turn advances acceptance, not production. Own worktree remains
 active for related campaign corrections; foreign logs/worktrees untouched.
+
+Verified fork integration45902682cd6a92f21f274cea1d4240997d32d4e6, sole main.
+Normal fast-forward explicit-URL push terminal0, independent ls-remote exact.
+GitHub accepted the66.42MiB original source archive with size warning; originals
+remain immutable. All tracked package changes committed, foreign untracked logs
+untouched. Same linux_managed_gap continues read-only next-criterion diagnosis,
+no native allocation/SSH/build or new chain. Goal active/incomplete, Unix95.
+
+### Next coherent package: deterministic Linux managed success
+
+Same responsible Standard linux_managed_gap read-only diagnosis confirms legacy
+ordinary-success test assumes immediate ESRCH despite valid foreign zombies;
+pipe-closed-worker PIDFD readiness proves exit only, not full reaping. Current
+MSRV successful closure remains open. Root created/attached clean owned worktree
+/Users/hoppworks/.codex/worktrees/linux-managed-success/rhai at45902682, branch
+task/linux-managed-success. Standard assigned test-only deterministic prompt-
+reaper fixture with live host, exact identity-bound observations, successful
+API-return closure and unrelated sentinel preservation, failure-safe cleanup.
+Source stage only: no Cargo/build/SSH/native allocation or production change;
+30-minute planning checkpoint, actual RED/GREEN acceptance remains future.
+Relevant TDD/role/global/project reload required before action; currentfaba3db.
+Same combined reviewer will cover coherent source/evidence package, no new chain.
+Unix95 and all stopped/cause/budget histories retained. Root own worktree active,
+foreign resources preserved. Native95 proof remains valid; overall incomplete.
+
+Current goal turn PROGRESS: live registry confirms responsible Standard running;
+current source diagnosis identifies hold-only reaper extension with owned prompt
+reaping while host remains live, exact adopted zombie identities and wait receipts.
+Source-only implementation continues in task/linux-managed-success, no native
+allocation. Root archive-build-source.py excludes only historical .scratch proof
+payloads to prevent recursively growing build archives. Pure original Git check
+at45902682 verifies all522 included blob bytes, exact member set and source roots:
+6307840bytes/SHAfe65e9358b09c57bd97e88eb31d100c292a778bd4c510e06283fd745e0966025.
+No build-input references to .scratch observed in manifests/build/src/tests/tools.
+Accepted historical archives untouched. Utility and future recipes share combined
+review with this coherent package; this purecheck is not native acceptance.
+
+Current source checkpoint: owned linux-managed-success worktree has113-line
+new contract test managed_run_succeeds_after_fixture_reaper_reaps_descendants;
+fixture support remains in progress, no acceptance or product completion claim.
+Live native registry confirms same Standard running; waits refer to that exact
+agent, not an inferred lock. Root has not edited owner source. Follow-up recipe
+brief requests same supervised build for related supported feature rows where
+safe, without changing540/585/600/2GiB limits or allocating a native invocation.
+Source/recipe freeze then combined review is next; Unix95 remains consumed.
+
+Source implementation frozen7d045f21d2dc48ef6e7b0c4e75abeb23dd33181b in owned
+linux-managed-success worktree:219line test/helper delta plus source note, clean
+commit, lowercase author/committer independently verified. Owner initially
+reported a non-object32character string; corrected from actual Git log, history
+not reset. Root observed adopted-live transition risk before freeze; corrected
+same context to allow exact live reaper-parent state and reap only exact zombies.
+Format/diff source checks pass. Newtest preserves exact waited identities,
+API exit/capture/host/sentinel boundary and after-cleanup retained booleans for
+controls. Native behavior remains unverified; no Unix96 allocation.
+Same combined linux_shared_child_review is LIVE on immutable7d045f21 source,
+root archive utility and prior95/default held-path applicability. Same Standard
+continues one bounded related recipe package, no build/SSH/production edits.
+Supported prospective ordinary/sync/metadata/f32/unchecked rows exclude
+no_index/no_float; exact row count/command plan pending source/recipe readiness.
+Current turn PROGRESS: concrete source slice and immutable review dispatched;
+all previous95acceptance/cause/budget/stopped histories preserved.
+
+Same combined source/utility review READY, independently read full actual report
+linux-managed-success-review.md. Test SHAf7f7ae7e/source7d045f21 and archive
+utilitya75b4e80; reviewer independently verifies522 parent blobs. No material
+source blocker. Native/recipe acceptance remains pending. Prior95/default held
+semantics valid narrowly; old hardcoded panic line numbers cannot serve newsource.
+Planned integrated current MSRV four rows: testing-environ,sys; plus sync,metadata;
+plus f32_float; plus unchecked. Each original row selects only two exact tests
+(newsuccess+heldzombie), excluding fragile legacy tests. Three expected REDs
+(pre-mode fixture, after-cleanup wrong exit, after-cleanup wrong retained sentinel)
+plus four original rows =>7testcommands+3setupcommands, one sharedtarget/run.
+Source capacity estimate uses accepted90 five-row actual137.482s/storage1117404KiB/
+RSS987612KiB samples; no reservation/peak guarantee/hardcap revision. Bounds stay
+540helper including30export/585runner/600outer,2GiBhard/jobs2/desc16.96unallocated.
+For pre-modeRED, success receipt cannot exist: early exact identities/guard cleanup
+must independently establish closure and exact success-expectation panic. Root
+asked owner to add a small early identity receipt if current stderr insufficient,
+then freeze final pins and same affected review before execution. This is source/
+proof readiness, not a failed implementation correction or accepted native RED.
+Same responsible Standard remains live preparing coherent recipes in ownedtree.
+
+Amendment88c4a460e2019f8d2139f6f232aa09fa56b973dd independently read: early
+identity receipt accidentally inserted at identical anchor in OLD held-zombie
+function, referencing undefined sentinel identifiers there. Source correction
+not ready, one failed correction for cause early-receipt-wrong-function-anchor;
+no native/build/infrastructure launch consumed. Same Standard instructed to
+move only into new success function via function-scoped anchor and verify actual
+Git diff/scope before final pins. Earlier7d045 READY remains valid baseline;
+88c4 is not source-ready. Source/contract hashes must follow corrected freeze.
+
+Same owner repaired wrong-function anchor and amended final freeze003da06421fbd11c26e0c96ab5013416c0939a1d;
+root independently confirms actual Git object, testSHAe0034cf3a69ccf6107a9dfbc0854c0147ec2d93fdda8acf5ed6b07e683e1dc14,
+one early receipt solely NEW success function with defined sentinel identifiers,
+none in prior held test. Wrong88c4 patch preserved before object loss at
+linux-managed-success-early-receipt-failed.patch/SHAf85b8c6f8f19b747bb4142bdcf6dca20104dcaf330b541430751e8cbe085c325.
+One source correction cause retained, no history reset/native failure. SAME
+combined reviewer affected003da vs7d045 recheck running; no new broadreview.
+Standard recomputes stale source/archive/test/recipe pins to corrected freeze,
+recipes pending. Native96 remains unallocated, Unix95consumed, no retainedbuild.
+
+SAME affected review003da sourceREADY independently read from updated report;
+early receipt correctly defined before ACK, failed intermediate preserved. Source
+criterion implementation is ready, not native accepted. Owner now has untracked
+proof/stage/launch recipes in ownedtree, collector/purechecks/pins pending; root
+has not executed or copied partial recipes. Next await exact recipe freeze then
+same combined recipe review and fresh heavy-slot/owned-stage checks before96.
+CurrentturnPROGRESS (source freeze + accepted affected correction + bounded recipe
+preparation); not blocked. No source claim expands prior95native applicability.
+
+Recipe preparation checkpoint complete at source003da064; root independently
+read hashes: proof69fc66f3, stage db6126cb, launch27e1ee59, collector56131878;
+prepare note077323c0 in owned linux-managed-success tree. Five recipe/prep files
+remain untracked intentionally pending integrated native acceptance. Owner
+reports AST/bash/rustfmt/diff, pin-chain, parser sensitivity and local SSH
+argument-tokenization purechecks passed; no Cargo/SSH/staging/native action.
+Root caught raw SSH argv remote-shell splitting in collector cleanup before
+freeze; same owner repaired to single shlex-quoted remote command. Preparation
+defect, not native recovery; prior early-receipt correction history unchanged.
+Same combined Expert now reviews only affected recipe/export/cleanup/strict
+assertion coverage. Next READY -> fresh machine slot + exact absent paths ->
+stage/validate -> native96; Unix95consumed,96notallocated, no retainedbuild.
+Current continuation makes concrete recipe readiness progress; overall remains
+active and tickets03/06 open. Remote solemain45902682 unchanged.
+
+Same combined affected recipe review NOT READY; root read final report. Three
+material prelaunch defects: combined original output has six PIDFD acquisitions
+but each parser expects three globally; collector omits accepted exact helper/
+launcher census and held closures and allows missing fixture closure files;
+retirement lacks fresh local-original hash verification before remote deletion.
+Same Standard resumes one consolidated batch with test-bound receipt parsing,
+required closure inventory/identity/group readback, local export guard, saved
+cleanup receipts and affected positive/negative purechecks. Source003da and
+unchanged launcher remain READY; do not repeat their reviews. Submitted hashes
+remain in review report as immutable rejected baseline. No Cargo/SSH/stage/native,
+Unix95consumed/96unallocated. These are independent preparation findings, not
+native failed implementation/infrastructure outcomes. Next corrected freeze ->
+same affected recheck -> fresh slot and stage validation -> bounded native96.
