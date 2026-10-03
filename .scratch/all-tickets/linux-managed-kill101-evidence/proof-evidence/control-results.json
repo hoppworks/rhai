@@ -1,0 +1,44 @@
+[
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "require-success-control",
+    "required_diagnostics": [
+      "managed-child-kill-control require-success assertion"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "require-sentinel-absent-control",
+    "required_diagnostics": [
+      "managed-child-kill-control require-sentinel-absent assertion"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 43 filtered out; finished in 0.05s",
+    "name": "green-row-1",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 44 filtered out; finished in 0.05s",
+    "name": "green-row-2",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 43 filtered out; finished in 0.05s",
+    "name": "green-row-3",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 42 filtered out; finished in 0.05s",
+    "name": "green-row-4",
+    "status": 0
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "error": null,
+  "original_sha256": {
+    "tests/sys_process.rs": "dd4ceb43e32c3756b4bac5d5fed6f5600c70a8e7336cc286edcdf7b90b341d5d"
+  },
+  "overlay_sha256": {
+    "require-sentinel-absent-control": "53b4c5016ba3db6f43b334c8499c3c12691e20b43c9653d41921c7c1b7ed7662",
+    "require-success-control": "d9da83ab61df0c267ceaa2886cc837ef5ec0c79a7d719bce964d864680df4822"
+  },
+  "restored": true
+}

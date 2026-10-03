@@ -82,7 +82,7 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 ## Current step and next action
 
 Current instructions/roles revision faba3db3bef6891ad2c0b20d434963bb8fe9572d.
-Latest independently read-back fork main d736bf2fdadcc901719612735e17d4903e375300;
+Latest independently read-back fork main 0e5f2391367c98a92e4d512f2453b213111818cc;
 ONLY remote main. Lowercase human author and committer verified. Accepted96 subset
 is mapped explicitly to open tickets03/06; checkpoint/source remains unchanged.
 Workhorse installed revision independently read back at
@@ -1631,3 +1631,39 @@ remain in review report as immutable rejected baseline. No Cargo/SSH/stage/nativ
 Unix95consumed/96unallocated. These are independent preparation findings, not
 native failed implementation/infrastructure outcomes. Next corrected freeze ->
 same affected recheck -> fresh slot and stage validation -> bounded native96.
+
+Native101 sole Expert15 follow-up ALLOCATED after same combined source/recipe
+review EXECUTION READY/COLLECTION READY61f7bc66/5f78341a. Testdd4ceb43/archivea3a1fee7,
+proof4a80d60a/staged27764e8/launch14358b1c/collector8fe51b04 frozen fullhashes inwriter
+prepare note. Fresh Workhorse15:14:41Z exact heavyexec inventory[], private runtimes[],
+101paths absent, MemAvailable82876864kB; not reservation. Preserve cumulative100
+and failedcorrection1; one pending101 launch is solefollowup, same600/585/540s,
+jobs2/desc16/preempt1572864KiB/hard2097152KiB,20s fixturewatchdog. All8 original
+exacttests/4feature rows/2controls/2affected regressions and3setup unchanged.
+Stage and launch own exact101 only; acceptance pending, stop cause on failed
+follow-up/contradiction, no renewed chain.
+
+Native101 CONSUMED15:17:27Z/rootexec68253 runtimeagent-build-w5nw4857;
+all stagedinputs hashesOK. Running sole Expert15 boundedfollowup; cumulativeUnix101/
+killpackage5launches, samecause failure1 retained, no additionalallocation.
+
+Native101 ENDED0: all8exact statuses expected (6GREEN0/2namedcontrols101),
+3setup0, helper49.59s, sampledRSS958624KiB/storage967812KiB/desc7. Strictreaper
+status0 and savedproducer/PIDFDcomparisontrue observed; affectedprompt/heldpassed.
+Collector original74files6dirs8caseclosures verified/exported,145helper/launcher
+PID/startrowsabsent plusoriginalfixtureclosuresvalidated. Exactown74files6dirs
+removedafterfreshhashreadback; stage/scope/runtimeabsent, groups807009/807082empty.
+No retainedbuild. Originalsource restored/errornull. One optional launcher
+/proc807079/stat disappearance diagnostic, exactterminalcustodyall0; reviewer
+assessing. Samecombined finalacceptancepending, no ticketclosureyet. Expert15
+solefollowupconsumed; no additional101allocation orhistoryreset. Next: reviewer
+terminalacceptance, integrateownedwriter5f78341a and proof toforkmain then return
+toticket03 remainingcriteria.
+
+Same combined terminal review ACCEPTED native101 narrowpublic Child.killpackage:
+6GREEN/2meaningfulRED, strictreaper0/exactproducerstartbinding, originalrestoration,
+allimmutablehashes andexactcleanupverified. /proc exitracewarning doesnotinvalidate
+custody. Expert15 solefollowupPASSED; stablecauseclosedwithoutbudgetrenewal.
+Proof linux-managed-kill-proof.md andsame linux-managed-kill-review.md/original101.
+Remainingoverallprocess/platform/releasecriteriaOPEN. ResponsibleStandardnow
+read-onlyselectingonenextindependentmanagedcriterion, noimplementationallocation.

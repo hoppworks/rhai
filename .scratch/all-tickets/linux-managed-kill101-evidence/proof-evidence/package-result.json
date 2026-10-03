@@ -1,0 +1,25 @@
+{
+  "acceptance_claim": false,
+  "feature_rows": [
+    "testing-environ,sys",
+    "testing-environ,sys,sync,metadata",
+    "testing-environ,sys,f32_float",
+    "testing-environ,sys,unchecked"
+  ],
+  "green_rows": 4,
+  "limitations": [
+    "No no_float/no_index row is included. Native evidence and exact remote cleanup require collector readback."
+  ],
+  "native96_applicability": [
+    "managed_run_succeeds_after_fixture_reaper_reaps_descendants",
+    "managed_run_reports_while_fixture_reaper_holds_stopped_zombies"
+  ],
+  "source_restored": true,
+  "source_revision": "61f7bc66e75b4de3b0d4c444da0e610d952e903d",
+  "test": "managed_child_kill_reports_group_closed_under_fixture_reaper",
+  "test_sha256": "dd4ceb43e32c3756b4bac5d5fed6f5600c70a8e7336cc286edcdf7b90b341d5d",
+  "wrong_controls": [
+    "require-success-control",
+    "require-sentinel-absent-control"
+  ]
+}

@@ -251,3 +251,7 @@ This closes ordinary prompt-reaped managed success and adds these held-boundary
 feature rows on Linux. Managed deadline/overflow/explicit-kill/final-drop/escape/
 setup/drop-false criteria, performance, macOS/Windows and final current-source
 release gates remain open. No full ticket closure is claimed.
+
+## Accepted Linux managed Child.kill subset — 2026-10-03
+
+Native101 source61f7bc66, recipes5f78341a, privateRust1.77.2: public Engine spawn/kill/wait closes the managed group, returns a killed unsuccessful report with complete captures, preserves the unrelated sentinel, and independently verifies exact leader/worker/leaf identities and reaping plus successful reaper exit. Four feature rows pass; two post-cleanup opposite controls fail101; affected prompt/held base regressions pass. Same combined review accepted original74 files/eight case closures and fresh exact cleanup. Proof/review/originals: .scratch/all-tickets/linux-managed-kill-proof.md, linux-managed-kill-review.md, linux-managed-kill101-evidence/. This is a partial criterion closure; broader lifecycle/native-platform/current release gates remain open.

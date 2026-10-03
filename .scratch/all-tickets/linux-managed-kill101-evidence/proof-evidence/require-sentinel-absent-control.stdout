@@ -1,0 +1,21 @@
+
+running 1 test
+test managed_child_kill_reports_group_closed_under_fixture_reaper ... 
+running 1 test
+
+running 1 test
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 43 filtered out; finished in 0.04s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 43 filtered out; finished in 0.05s
+
+FAILED
+
+failures:
+
+failures:
+    managed_child_kill_reports_group_closed_under_fixture_reaper
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 43 filtered out; finished in 0.05s
+
