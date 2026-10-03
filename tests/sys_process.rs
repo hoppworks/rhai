@@ -1844,6 +1844,7 @@ fn managed_run_succeeds_after_fixture_reaper_reaps_descendants() {
     let worker_start = pidfds.0.iter().find(|member| member.0 == worker_fields["pid"]).unwrap().2;
     let leaf_start = pidfds.0.iter().find(|member| member.0 == leaf_fields["pid"]).unwrap().2;
     std::fs::write(fixture.path("pidfd-identities"), format!("leader_start={leader_start} worker_start={worker_start} leaf_start={leaf_start} pgid={}\n", leader_fields["pgid"])).unwrap();
+    eprintln!("managed_prompt_reap_live_boundary reaper={reaper_pid} reaper_start={reaper_start} host={host_pid} host_start={host_start} leader={} leader_start={leader_start} worker={} worker_start={worker_start} leaf={} leaf_start={leaf_start} group={} sentinel={sentinel_pid} sentinel_start={sentinel_start}", leader_fields["pid"], worker_fields["pid"], leaf_fields["pid"], leader_fields["pgid"]);
     std::fs::write(fixture.path("pidfd-ack"), b"observer holds exact live pidfds\n").unwrap();
 
     let api_result_path = fixture.path("api-result");
