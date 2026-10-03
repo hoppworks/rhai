@@ -624,7 +624,8 @@ Coordinator concretely recommends one additional source-fixture invocation with 
 Before dispatch: fresh workhorse/VM heavy-slot inventory, harness/nativePS5.1x64/parser0, exact17guestsourcepins/source-tree and all ancestors no reparse, existing Roslyn identity59,720bytes/SHA cf32c7b8e5691b962f1b6e92b03d87409dd9f7aebfd71c5bf778203cc56ee1, free2GiB and newly absent unique <private-session>/run/monitor-source-GUID required. Allocate unique run path only after successful gate; preserve oldscope/run/proof. Native original stdout/stderr/markers/primaryerror/closure and independent process/job/readback retained outside disposable outputs before own cleanup. A successful fixture package is source/native custody prerequisite only; not Windows Rust production Engine or realclient acceptance. Latest actual slot observation: Mac foreignPlaywright58136/60658 and Cargo60727/rustc60742; workhorse foreignCargo131936 plus queued foreignG32 work and make81053. No foreign process touched. Revalidate at launch, these observations are not a future free-slot receipt.
 
 ## Resources, counts and cause history
-Unix actual native invocation count84 consumed.82 failed before runtime;
+Unix actual native invocation count87 consumed; current shared Child section
+records86 compiler outcome and87 acceptance evidence. Historical82 failed before runtime;
 83 measurementCargo0 but originalouter1 due optional cmdline receipt validation.
 83 and84 are terminal; no live owned Unix process-test handle. Invocation84 was
 launched and consumed; its result is recorded in the current step and prior
@@ -774,7 +775,84 @@ one diagnosis, no product/native failure. Future launcher disables bytecode befo
 imports; executed version preserved unchanged in outer-evidence. No owned build
 or stage retention remains. Local owned OCR/summary temps removed exactly. Final independent cache-delta
 recheck confirms accepted feature behavior remains applicable; no build rerun.
-Next: integrate verified narrow proof to fork main with lowercase author/committer,
-then return to remaining full process/platform matrix. Owned root worktree remains
+Verified fork integration0fca4e88: author/committer lowercase hoppworks, fresh
+remote readback exact commit and only main. Return to remaining process/platform matrix. Owned root worktree remains
 needed for related campaign work; no retirement or foreign checkout cleanup.
 All missing full process/Windows/Darwin/final matrix criteria remain open.
+
+
+## Current Linux shared Child acceptance package — 2026-10-03
+Previous goal turn PROGRESS: two scalar process feature criteria accepted and
+fork main0fca4e88 independently verified, only main. Rules remain faba3db.
+Current root owns recipe adaptation of accepted Linux scoped flow to accepted
+shared Child source at2a8fdc49/e5937ac5. One integrated normal/sync/sync+no_float
+private Rust1.77.2 invocation, serial shared_child_contract tests; wrong first
+exit-status expectation17->19 RED101, exact restoration, GREEN and independent
+record/PID closure. Public Engine seam approved in project AGENTS. Sync channel
+does not prove condvar entry: that criterion remains open; no external forced
+controller custody, Windows/Darwin/overhead claims or stopped-chain renewal.
+Unix cumulative85 remains until dispatch; new correctness invocation86 pending
+source readiness and fresh workhorse slot/integrity. Historical overhead85 is
+separate unchanged/unlaunched. Outer600/scoped585/helper540 including30export,
+work510/jobs2/desc16/2GiB policy/storage sampled stop1572864KiB unchanged.
+One ordinary30-minute active-work planning checkpoint; failures preserve cause
+history and limits, no blind launches. Active combined Expert linux_shared_child_review
+reads focused brief/current rules, no descendants or execution; source review and
+native evidence review share responsible context. Recipe passes syntax; verifying
+actual receipt handling before native readiness. No heavy build launched yet.
+
+Combined review accepted current recipe after two preparation defects corrected
+in one batch: explicit runtime env and source-realistic log receipts. No product
+assertion or native failure. report linux-shared-child-review.md records faba3db
+and three recipe pins. Fresh root staged source/archive/recipe/launcher/lock pins
+independently match; workhorse heavy inventory empty immediately beforedispatch.
+Native correctness invocation86 dispatch now; Unix cumulative86 consumed, no
+retry allocated by this entry. Existing overhead85 remains separate/unlaunched.
+
+Invocation86 terminal1 before assertions: native Cargo E0308 fixture line52
+String passed to &str closure_receipt. This is first compiler infrastructure
+recovery for this newly compiled fixture, not failed product correction or
+expected assertion RED. No feature criteria accepted. Exact one-line &scenario
+borrow prepared; same combined reviewer checks affected source/recipe. Original
+86 commands/stdout/stderr/outer records retained, source restored, fresh root
+PID/start/group/runtime/scope absence verified. Source/native corrective reuse
+needs a new private runtime because scoped build is already removed. No stopped
+Windows/Darwin/overhead chain reopened. Unix cumulative86 remains consumed.
+
+Failed86 originals exported and read back. Exact stage cleanup matched43 own
+files, rmdir6dirs and verified stage absent; no retained build/stage. One-line
+fixture compile recovery frozen 4bb0848f8731df5896c789e9ec4f18c57891d00c; configured lowercase author. New source
+archive80203d948788f0f356b9a23f2bbd3d1c811d8b79f9208aaaa8c6f994c34e246d; prospective exact absent stage/scope20261003-4bb0848f.
+Same acceptance and hard resource ceilings, one new correctness invocation87
+proposed within ordinary repair checkpoint, no counters reset. Combined reviewer
+checks only affected borrow/pin/path delta; no native launch before readiness.
+
+Affected one-line compiler fix/pin/path review accepted; fresh staged pins and
+workhorse empty heavy inventory independently confirmed. Native invocation87
+dispatch now, Unix cumulative87 consumed. Same limits and three row criteria,
+no further automatic attempt allocation. Source4bb0848f; records for86 retained.
+
+Native87 terminal0: all three intended wrong-status101/restored GREEN0 rows
+observed,7/8/8 test counts include2no-op entry tests. Root independent readback
+127PID/start identities and80controller/fixture PID receipts absent, groups empty,
+source/manifest/lock restored, runtime/scope absent; original logs exported.
+Export43.682s, sampledRSS893368KiB/storage930176KiB/desc7, not continuous peaks.
+Exact stage87 cleanup58hashmatchedfiles/6dirs, absent; stage86 cleanup43/6absent.
+Combined reviewer completing acceptance evidence portion in same context.
+No build/stage/private cache retention; no foreign changes. Source4bb0848f
+awaits verified proof integration to fork main, related metadata includes86failure
+and one infrastructure repair. Full process/platform/release criteria remainopen.
+Root/direct preparation/review usage unavailable, unknown; this package reused
+accepted deterministic recipe and one review context, no duplicate broadbuild.
+
+Combined independent acceptance evidence portion accepted native87's stated
+Linux shared Child criteria. Proof linux-shared-child-proof.md; ticket03 records
+partial closure and actual condvar-entry/wider requirements still open. Both
+profiles withsync show bounded concurrent cancel/wait, no claim actualwaitentry.
+Current turn PROGRESS: source compiler defect corrected and three native rows
+prove substantive shared Child contracts. Next integrate source/proof only to
+sole fork main; then target still-open actual blocked-wait entry criterion at
+src/packages/sys/process/unix.rs::public_wait_is_cancelled_after_entering_condvar
+within its own existing source/history, preserving all hard limits and stopped
+Windows/Darwin routes. Owned root needed for campaign continuation. No own
+heavy run or retained build/stage now; foreign trees unchanged.

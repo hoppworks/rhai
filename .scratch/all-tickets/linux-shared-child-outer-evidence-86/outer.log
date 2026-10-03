@@ -1,0 +1,67 @@
+launch_utc=2026-10-03T08:01:57Z
+runner_timeout_seconds=585
+stage=/root/rhai-linux-shared-child-20261003-2a8fdc49
+scope=/root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49
+source.tar: OK
+Cargo.lock.accepted: OK
+check-linux-current-msrv-examples.py: OK
+linux-shared-child-proof.py: OK
+contract.md: OK
+stage.sh: OK
+launch.sh: OK
+runner/tools/run_scoped.py: OK
+runner/tools/agentskills/__init__.py: OK
+runner/tools/agentskills/pyguard.py: OK
+PRIVATE_RUNTIME /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17
+command=rustup-install argv=['/root/.cargo/bin/rustup', 'toolchain', 'install', '1.77.2-x86_64-unknown-linux-gnu', '--profile', 'minimal', '--no-self-update']
+sample={"descendants": 2, "monotonic_seconds": 0.364, "rss_kib": 45956, "storage_kib": 67340}
+sample={"descendants": 2, "monotonic_seconds": 1.378, "rss_kib": 103844, "storage_kib": 100192}
+sample={"descendants": 2, "monotonic_seconds": 2.391, "rss_kib": 56364, "storage_kib": 137900}
+sample={"descendants": 2, "monotonic_seconds": 3.405, "rss_kib": 56360, "storage_kib": 160664}
+sample={"descendants": 2, "monotonic_seconds": 4.418, "rss_kib": 56424, "storage_kib": 183472}
+sample={"descendants": 2, "monotonic_seconds": 5.431, "rss_kib": 216808, "storage_kib": 278228}
+sample={"descendants": 2, "monotonic_seconds": 6.445, "rss_kib": 276784, "storage_kib": 401620}
+sample={"descendants": 2, "monotonic_seconds": 7.459, "rss_kib": 432596, "storage_kib": 543788}
+sample={"descendants": 1, "monotonic_seconds": 8.072, "rss_kib": 30016, "storage_kib": 527028}
+status=rustup-install:0
+command=rustc-version argv=['/root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 8.085, "rss_kib": 30000, "storage_kib": 527036}
+sample={"descendants": 1, "monotonic_seconds": 8.196, "rss_kib": 30076, "storage_kib": 527040}
+status=rustc-version:0
+command=cargo-version argv=['/root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 8.207, "rss_kib": 30016, "storage_kib": 527044}
+sample={"descendants": 1, "monotonic_seconds": 8.317, "rss_kib": 30072, "storage_kib": 527048}
+status=cargo-version:0
+command=row-0-wrong-status argv=['/root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--features', 'testing-environ,sys', '--test', 'sys_process', 'shared_child_contract::', '--', '--nocapture', '--test-threads=1']
+sample={"descendants": 2, "monotonic_seconds": 8.329, "rss_kib": 51620, "storage_kib": 527056}
+sample={"descendants": 2, "monotonic_seconds": 9.342, "rss_kib": 72380, "storage_kib": 530332}
+sample={"descendants": 2, "monotonic_seconds": 10.354, "rss_kib": 73808, "storage_kib": 530552}
+sample={"descendants": 2, "monotonic_seconds": 11.367, "rss_kib": 79652, "storage_kib": 533876}
+sample={"descendants": 3, "monotonic_seconds": 12.387, "rss_kib": 250900, "storage_kib": 593380}
+sample={"descendants": 4, "monotonic_seconds": 13.408, "rss_kib": 640476, "storage_kib": 619968}
+sample={"descendants": 4, "monotonic_seconds": 14.426, "rss_kib": 387952, "storage_kib": 651176}
+sample={"descendants": 4, "monotonic_seconds": 15.447, "rss_kib": 799608, "storage_kib": 658352}
+sample={"descendants": 4, "monotonic_seconds": 16.466, "rss_kib": 501452, "storage_kib": 696084}
+sample={"descendants": 3, "monotonic_seconds": 17.486, "rss_kib": 319852, "storage_kib": 718132}
+sample={"descendants": 3, "monotonic_seconds": 18.507, "rss_kib": 543728, "storage_kib": 723380}
+sample={"descendants": 3, "monotonic_seconds": 19.527, "rss_kib": 698256, "storage_kib": 723392}
+sample={"descendants": 3, "monotonic_seconds": 20.547, "rss_kib": 895700, "storage_kib": 736520}
+sample={"descendants": 3, "monotonic_seconds": 21.568, "rss_kib": 905856, "storage_kib": 750724}
+sample={"descendants": 1, "monotonic_seconds": 22.188, "rss_kib": 30072, "storage_kib": 778504}
+status=row-0-wrong-status:101
+Traceback (most recent call last):
+  File "/root/rhai-linux-shared-child-20261003-2a8fdc49/linux-shared-child-proof.py", line 232, in <module>
+    status = main()
+  File "/root/rhai-linux-shared-child-20261003-2a8fdc49/linux-shared-child-proof.py", line 150, in main
+    h.verify_control(f"row-{index}-wrong-status", 101, 101, wrong_log,
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                     ["left: 17", "right: 19", "spawn_returns_while_large_stdin_is_blocked_and_wait_snapshots_are_stable", "FAILED"])
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-shared-child-20261003-2a8fdc49/check-linux-current-msrv-examples.py", line 404, in verify_control
+    raise RuntimeError(f'{name} did not fail at its intended assertion; '
+                       f'status={status}, missing diagnostics={missing!r}')
+RuntimeError: row-0-wrong-status did not fail at its intended assertion; status=101, missing diagnostics=['left: 17', 'right: 19', 'spawn_returns_while_large_stdin_is_blocked_and_wait_snapshots_are_stable', 'FAILED']
+./launch.sh: line 123: /proc/737718/stat: No such file or directory
+run_scoped_status=1
+runtime_cleanup_status=0 pid_readback_status=0 scope_cleanup_status=0
+outer_status=1

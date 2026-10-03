@@ -1,0 +1,63 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+helper	737722	737721	737721	570891	python3 /root/rhai-linux-shared-child-20261003-2a8fdc49/linux-shared-child-proof.py
+scoped-supervisor	737721	737718	737721	570889	/usr/bin/python3 /var/roothome/rhai-linux-shared-child-20261003-2a8fdc49/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-shared-child-20261003-2a8fdc49/linux-shared-child-proof.py
+command:rustup-install	737727	737722	737721	570928	/root/.cargo/bin/rustup toolchain install 1.77.2-x86_64-unknown-linux-gnu --profile minimal --no-self-update
+command:du	737736	737722	737721	570929	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17
+command:ps	737745	737722	737721	570929	/bin/ps -e -o pid=,ppid=,rss=
+command:du	737766	737722	737721	571030	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17
+command:ps	737767	737722	737721	571030	/bin/ps -e -o pid=,ppid=,rss=
+command:du	737781	737722	737721	571131	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17
+command:ps	737782	737722	737721	571132	/bin/ps -e -o pid=,ppid=,rss=
+command:du	737793	737722	737721	571233	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17
+command:ps	737794	737722	737721	571233	/bin/ps -e -o pid=,ppid=,rss=
+command:du	737812	737722	737721	571334	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17
+command:ps	737813	737722	737721	571334	/bin/ps -e -o pid=,ppid=,rss=
+command:du	737840	737722	737721	571435	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17
+command:ps	737841	737722	737721	571436	/bin/ps -e -o pid=,ppid=,rss=
+command:du	737853	737722	737721	571537	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17
+command:ps	737854	737722	737721	571537	/bin/ps -e -o pid=,ppid=,rss=
+command:du	737865	737722	737721	571638	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17
+command:ps	737866	737722	737721	571639	/bin/ps -e -o pid=,ppid=,rss=
+command:du	737875	737722	737721	571699	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17
+command:ps	737876	737722	737721	571700	/bin/ps -e -o pid=,ppid=,rss=
+command:rustc-version	737877	737722	737721	571701	/root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose
+command:du	737878	737722	737721	571701	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17
+command:ps	737879	737722	737721	571701	/bin/ps -e -o pid=,ppid=,rss=
+command:du	737881	737722	737721	571712	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17
+command:ps	737882	737722	737721	571712	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-version	737884	737722	737721	571713	/root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose
+command:du	737885	737722	737721	571713	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17
+command:ps	737896	737722	737721	571714	/bin/ps -e -o pid=,ppid=,rss=
+command:du	737899	737722	737721	571724	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17
+command:ps	737900	737722	737721	571725	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-wrong-status	737901	737722	737721	571725	/root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process shared_child_contract:: -- --nocapture --test-threads=1
+command:du	737902	737722	737721	571725	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17
+command:ps	737904	737722	737721	571726	/bin/ps -e -o pid=,ppid=,rss=
+command:du	737921	737722	737721	571826	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17
+command:ps	737922	737722	737721	571827	/bin/ps -e -o pid=,ppid=,rss=
+command:du	737935	737722	737721	571928	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17
+command:ps	737936	737722	737721	571928	/bin/ps -e -o pid=,ppid=,rss=
+command:du	737947	737722	737721	572029	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17
+command:ps	737948	737722	737721	572029	/bin/ps -e -o pid=,ppid=,rss=
+command:du	738068	737722	737721	572130	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17
+command:ps	738075	737722	737721	572131	/bin/ps -e -o pid=,ppid=,rss=
+command:du	738235	737722	737721	572232	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17
+command:ps	738239	737722	737721	572233	/bin/ps -e -o pid=,ppid=,rss=
+command:du	738527	737722	737721	572334	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17
+command:ps	738528	737722	737721	572335	/bin/ps -e -o pid=,ppid=,rss=
+command:du	738570	737722	737721	572436	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17
+command:ps	738571	737722	737721	572437	/bin/ps -e -o pid=,ppid=,rss=
+command:du	738643	737722	737721	572538	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17
+command:ps	738645	737722	737721	572539	/bin/ps -e -o pid=,ppid=,rss=
+command:du	738768	737722	737721	572640	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17
+command:ps	738769	737722	737721	572641	/bin/ps -e -o pid=,ppid=,rss=
+command:du	738815	737722	737721	572742	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17
+command:ps	738816	737722	737721	572743	/bin/ps -e -o pid=,ppid=,rss=
+command:du	738827	737722	737721	572844	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17
+command:ps	738828	737722	737721	572845	/bin/ps -e -o pid=,ppid=,rss=
+command:du	738845	737722	737721	572946	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17
+command:ps	738846	737722	737721	572947	/bin/ps -e -o pid=,ppid=,rss=
+command:du	738867	737722	737721	573048	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17
+command:ps	738868	737722	737721	573049	/bin/ps -e -o pid=,ppid=,rss=
+command:du	738891	737722	737721	573110	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17
+command:ps	738892	737722	737721	573111	/bin/ps -e -o pid=,ppid=,rss=

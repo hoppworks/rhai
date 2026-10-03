@@ -1,0 +1,19 @@
+{
+  "captured_before_stage_validation_or_external_command": true,
+  "helper": {
+    "cmdline": "python3 /root/rhai-linux-shared-child-20261003-4bb0848f/linux-shared-child-proof.py",
+    "pgid": 740473,
+    "pid": 740474,
+    "ppid": 740473,
+    "start_ticks": "601507"
+  },
+  "identity_errors": {},
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb",
+  "scoped_supervisor": {
+    "cmdline": "/usr/bin/python3 /var/roothome/rhai-linux-shared-child-20261003-4bb0848f/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-shared-child-20261003-4bb0848f/linux-shared-child-proof.py",
+    "pgid": 740473,
+    "pid": 740473,
+    "ppid": 740470,
+    "start_ticks": "601505"
+  }
+}

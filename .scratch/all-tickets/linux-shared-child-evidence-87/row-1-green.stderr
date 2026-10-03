@@ -1,0 +1,207 @@
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:668:13
+    |
+668 |         let mut wait_operation = "wait for child";
+    |             ----^^^^^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` on by default
+
+warning: unused variable: `termination`
+    --> src/packages/sys/process/unix.rs:1106:22
+     |
+1106 |                 let (termination, _operation) = if self.managed {
+     |                      ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_termination`
+     |
+     = note: `#[warn(unused_variables)]` on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2134:9
+     |
+2134 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2456:9
+     |
+2456 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variant `OnlyZombieLeader` is never constructed
+  --> src/packages/sys/process/unix.rs:50:5
+   |
+47 | enum GroupCloseOutcome {
+   |      ----------------- variant in this enum
+...
+50 |     OnlyZombieLeader,
+   |     ^^^^^^^^^^^^^^^^
+   |
+   = note: `GroupCloseOutcome` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+   = note: `#[warn(dead_code)]` on by default
+
+warning: methods `numeric_operations_probe`, `quarantine_observations_probe`, and `fail_reservation` are never used
+    --> src/packages/sys/process/unix.rs:1470:8
+     |
+1390 | impl ExecutionFaults {
+     | -------------------- methods in this implementation
+...
+1470 |     fn numeric_operations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1481 |     fn quarantine_observations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1506 |     fn fail_reservation(&self) -> bool {
+     |        ^^^^^^^^^^^^^^^^
+
+warning: `rhai` (lib) generated 7 warnings (run `cargo fix --lib -p rhai` to apply 4 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+   Compiling rhai v1.26.1 (/var/roothome/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb/source)
+warning: variable does not need to be mutable
+   --> tests/sys_process.rs:865:9
+    |
+865 |     let mut holder = command.spawn().expect("start escaped captured-pipe holder");
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` on by default
+
+warning: value assigned to `incomplete` is never read
+    --> tests/sys_process.rs:1178:17
+     |
+1178 |         let mut incomplete = false;
+     |                 ^^^^^^^^^^
+     |
+     = help: maybe it is overwritten before being read?
+     = note: `#[warn(unused_assignments)]` on by default
+
+warning: constant `DIRECT_DROP_RECORD_ENV` is never used
+  --> tests/sys_process.rs:38:7
+   |
+38 | const DIRECT_DROP_RECORD_ENV: &str = "RHAI_SYS_DIRECT_DROP_RECORD";
+   |       ^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: unused `Dynamic` that must be used
+   --> tests/fixtures/sys_process_shared_child_contract.rs:239:5
+    |
+239 |     engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("kill after completion is idempotent");
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` on by default
+help: use `let _ = ...` to ignore the resulting value
+    |
+239 |     let _ = engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("kill after completion is idempotent");
+    |     +++++++
+
+warning: unused `Dynamic` that must be used
+   --> tests/fixtures/sys_process_shared_child_contract.rs:240:5
+    |
+240 |     engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("repeated kill after completion is idempotent");
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+help: use `let _ = ...` to ignore the resulting value
+    |
+240 |     let _ = engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("repeated kill after completion is idempotent");
+    |     +++++++
+
+warning: unused `Dynamic` that must be used
+   --> tests/fixtures/sys_process_shared_child_contract.rs:338:5
+    |
+338 |     engine.eval_with_scope::<Dynamic>(&mut cancel_scope, "child.kill()").expect("concurrent public cancellation");
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+help: use `let _ = ...` to ignore the resulting value
+    |
+338 |     let _ = engine.eval_with_scope::<Dynamic>(&mut cancel_scope, "child.kill()").expect("concurrent public cancellation");
+    |     +++++++
+
+warning: `rhai` (test "sys_process") generated 6 warnings (run `cargo fix --test "sys_process"` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 0.85s
+     Running tests/sys_process.rs (/root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb/target/debug/deps/sys_process-413482db297fb8ad)
+shared-child controller_started scenario=drop_false pid=742097 root=/root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb/shared-child-fixture-742095-0
+shared-child controller_reaped scenario=drop_false pid=742097 status=exit status: 0
+shared-child controller_output scenario=drop_false stdout="\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 41 filtered out; finished in 0.02s\n\n" stderr="shared-child nonfinal-drop pid=742100 child_record=ready operational_probe=one\nshared-child final-drop kill_on_drop=false pid=742100 child_record=\"pid=742100 state=exited code=0\\n\" eventual_reap=ESRCH\n"
+shared-child controller_esrch pid=742097 verified=true
+shared-child scenario=drop_false controller_pid=742097 status=ok fixture_record=Some("pid=742100 state=exited code=0\n")
+shared-child watchdog fixture_closure=verified pid=742100 reap=ESRCH production_reap=true
+shared-child controller_started scenario=drop_true pid=742104 root=/root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb/shared-child-fixture-742095-1
+shared-child controller_reaped scenario=drop_true pid=742104 status=exit status: 0
+shared-child controller_output scenario=drop_true stdout="\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 41 filtered out; finished in 0.03s\n\n" stderr="shared-child nonfinal-drop pid=742107 child_record=ready operational_probe=one\nshared-child final-drop kill_on_drop=true pid=742107 reap=ESRCH\n"
+shared-child controller_esrch pid=742104 verified=true
+shared-child scenario=drop_true controller_pid=742104 status=ok fixture_record=Some("pid=742107 state=ready\n")
+shared-child watchdog fixture_closure=verified pid=742107 reap=ESRCH production_reap=true
+shared-child controller_started scenario=drop_false pid=742111 root=/root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb/shared-child-fixture-742095-2
+shared-child controller_reaped scenario=drop_false pid=742111 status=exit status: 0
+shared-child controller_output scenario=drop_false stdout="\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 41 filtered out; finished in 0.02s\n\n" stderr="shared-child nonfinal-drop pid=742114 child_record=ready operational_probe=one\nshared-child final-drop kill_on_drop=false pid=742114 child_record=\"pid=742114 state=exited code=0\\n\" eventual_reap=ESRCH\n"
+shared-child controller_esrch pid=742111 verified=true
+thread 'shared_child_contract::panic_expectation_rejects_success_and_unrelated_panics' panicked at tests/fixtures/sys_process_shared_child_contract.rs:443:13:
+expected controller panic for scenario drop_false, but it succeeded
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+shared-child watchdog fixture_closure=verified pid=742114 reap=ESRCH production_reap=true
+shared-child controller_started scenario=unrelated_panic_control pid=742116 root=/root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb/shared-child-fixture-742095-3
+shared-child controller_reaped scenario=unrelated_panic_control pid=742116 status=exit status: 101
+shared-child controller_output scenario=unrelated_panic_control stdout="\nrunning 1 test\nF\nfailures:\n\nfailures:\n    shared_child_contract::scenario_entry\n\ntest result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 41 filtered out; finished in 0.03s\n\n" stderr="thread 'shared_child_contract::scenario_entry' panicked at tests/fixtures/sys_process_shared_child_contract.rs:302:5:\nunrelated controller panic control\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\nshared-child controller-panic-cleanup scenario=unrelated_panic_control payload=\"unrelated controller panic control\" fixture_pid=742119 reap=ESRCH verified=true\n"
+shared-child controller_esrch pid=742116 verified=true
+thread 'shared_child_contract::panic_expectation_rejects_success_and_unrelated_panics' panicked at tests/fixtures/sys_process_shared_child_contract.rs:423:21:
+controller did not report the intended panic payload:
+
+running 1 test
+F
+failures:
+
+failures:
+    shared_child_contract::scenario_entry
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 41 filtered out; finished in 0.03s
+
+thread 'shared_child_contract::scenario_entry' panicked at tests/fixtures/sys_process_shared_child_contract.rs:302:5:
+unrelated controller panic control
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+shared-child controller-panic-cleanup scenario=unrelated_panic_control payload="unrelated controller panic control" fixture_pid=742119 reap=ESRCH verified=true
+
+shared-child watchdog fixture_closure=verified pid=742119 reap=ESRCH production_reap=true
+shared-child controller_started scenario=panic_cleanup pid=742123 root=/root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb/shared-child-fixture-742095-4
+shared-child controller_reaped scenario=panic_cleanup pid=742123 status=exit status: 101
+shared-child controller_output scenario=panic_cleanup stdout="\nrunning 1 test\nF\nfailures:\n\nfailures:\n    shared_child_contract::scenario_entry\n\ntest result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 41 filtered out; finished in 0.03s\n\n" stderr="thread 'shared_child_contract::scenario_entry' panicked at tests/fixtures/sys_process_shared_child_contract.rs:293:5:\nintentional scenario panic with an owned live fixture\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\nshared-child controller-panic-cleanup scenario=panic_cleanup payload=\"intentional scenario panic with an owned live fixture\" fixture_pid=742126 reap=ESRCH verified=true\n"
+shared-child controller_esrch pid=742123 verified=true
+shared-child panic-regression fixture_pid=742126 production_reap=verified record="pid=742126 state=exited code=0\n"
+shared-child watchdog fixture_closure=verified pid=742126 reap=ESRCH production_reap=true
+shared-child controller_started scenario=blocked_input_wait_snapshot pid=742131 root=/root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb/shared-child-fixture-742095-5
+shared-child controller_reaped scenario=blocked_input_wait_snapshot pid=742131 status=exit status: 0
+shared-child controller_output scenario=blocked_input_wait_snapshot stdout="\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 41 filtered out; finished in 1.41s\n\n" stderr="shared-child blocked-stdin ready pid=742134 spawn_elapsed_ms=2\nshared-child final pid=742134 child_record=\"pid=742134 state=exited code=17\\n\" reap=ESRCH stable-wait=1 stable-try-wait=1 repeated_post_completion_kill=2 cached_snapshot=unchanged\n"
+shared-child controller_esrch pid=742131 verified=true
+shared-child scenario=blocked_input_wait_snapshot controller_pid=742131 status=ok fixture_record=Some("pid=742134 state=exited code=17\n")
+shared-child watchdog fixture_closure=verified pid=742134 reap=ESRCH production_reap=true
+shared-child controller_started scenario=sync_wait_cancel pid=742154 root=/root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb/shared-child-fixture-742095-6
+shared-child controller_reaped scenario=sync_wait_cancel pid=742154 status=exit status: 0
+shared-child controller_output scenario=sync_wait_cancel stdout="\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 41 filtered out; finished in 0.03s\n\n" stderr="shared-child sync-cancel pid=742157 waiter_returned=1 final_wait=1 reap=ESRCH\n"
+shared-child controller_esrch pid=742154 verified=true
+shared-child scenario=sync_wait_cancel controller_pid=742154 status=ok fixture_record=Some("pid=742157 state=ready\n")
+shared-child watchdog fixture_closure=verified pid=742157 reap=ESRCH production_reap=true

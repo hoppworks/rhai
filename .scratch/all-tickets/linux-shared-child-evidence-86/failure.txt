@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/root/rhai-linux-shared-child-20261003-2a8fdc49/linux-shared-child-proof.py", line 232, in <module>
+    status = main()
+  File "/root/rhai-linux-shared-child-20261003-2a8fdc49/linux-shared-child-proof.py", line 150, in main
+    h.verify_control(f"row-{index}-wrong-status", 101, 101, wrong_log,
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                     ["left: 17", "right: 19", "spawn_returns_while_large_stdin_is_blocked_and_wait_snapshots_are_stable", "FAILED"])
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-shared-child-20261003-2a8fdc49/check-linux-current-msrv-examples.py", line 404, in verify_control
+    raise RuntimeError(f'{name} did not fail at its intended assertion; '
+                       f'status={status}, missing diagnostics={missing!r}')
+RuntimeError: row-0-wrong-status did not fail at its intended assertion; status=101, missing diagnostics=['left: 17', 'right: 19', 'spawn_returns_while_large_stdin_is_blocked_and_wait_snapshots_are_stable', 'FAILED']

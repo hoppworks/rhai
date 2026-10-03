@@ -1,0 +1,7 @@
+{
+  "destination": "/root/rhai-linux-shared-child-20261003-2a8fdc49/proof-evidence",
+  "elapsed_seconds_at_export": 22.192,
+  "export_reserve_seconds": 30,
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49/agent-build-ta2ptl17",
+  "scope": "/root/.local/share/agent-builds/rhai/linux-shared-child-20261003-2a8fdc49"
+}

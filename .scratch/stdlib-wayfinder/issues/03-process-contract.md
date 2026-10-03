@@ -224,3 +224,21 @@ Additional managed-scope acceptance cases:
 Record start latency, capture throughput and retained resource counts for each mode
 with identical fixture workloads and platform/toolchain details. Benchmarks describe
 observed overhead; no performance numbers are promised before measurement.
+
+## Accepted Linux shared Child subset — 2026-10-03
+
+Source4bb0848f, native Linux Rust/Cargo1.77.2, normal/sync/sync+no_float: public
+spawn returns with8MiB input still blocked, finite wait returns unit, later
+wait/try_wait snapshots remain stable after caller mutation and repeated
+post-completion kill; nonfinal clone drop remains operational; final-drop true
+reaps and false remains operational then eventually reaps after fixture release.
+Intended panic production-reap is verified and success/unrelated-panic controls
+rejected. All three wrong exit-status expectations fail101, restored GREEN0.
+Original evidence, root independent process closure and combined independent
+review: .scratch/all-tickets/linux-shared-child-proof.md and referenced originals.
+
+Sync concurrent cancel/wait passes, but actual blocking condvar entry remains
+unproven; do not close that complete criterion. Managed groups, externally
+forced controller custody, remaining options/I/O boundaries and platform/release
+requirements remain open. Ticket is not complete. Initial invocation86 compiler
+failure and one-borrow recovery87 retain consumed history and closure evidence.

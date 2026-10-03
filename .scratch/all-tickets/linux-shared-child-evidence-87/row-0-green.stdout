@@ -1,0 +1,12 @@
+
+running 7 tests
+test shared_child_contract::final_drop_honors_both_kill_on_drop_policies ... ok
+test shared_child_contract::fixture_entry ... ok
+test shared_child_contract::nonfinal_child_clone_drop_keeps_the_real_child_available ... ok
+test shared_child_contract::panic_expectation_rejects_success_and_unrelated_panics ... ok
+test shared_child_contract::scenario_entry ... ok
+test shared_child_contract::scenario_panic_releases_and_reaps_the_owned_fixture ... ok
+test shared_child_contract::spawn_returns_while_large_stdin_is_blocked_and_wait_snapshots_are_stable ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 34 filtered out; finished in 0.86s
+

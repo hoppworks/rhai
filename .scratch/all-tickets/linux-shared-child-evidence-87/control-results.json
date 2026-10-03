@@ -1,0 +1,56 @@
+[
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-0-wrong-status",
+    "required_diagnostics": [
+      "left: 17",
+      "right: 19",
+      "spawn_returns_while_large_stdin_is_blocked_and_wait_snapshots_are_stable",
+      "FAILED"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "7 passed; 0 failed;",
+    "name": "row-0-green",
+    "status": 0
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-1-wrong-status",
+    "required_diagnostics": [
+      "left: 17",
+      "right: 19",
+      "spawn_returns_while_large_stdin_is_blocked_and_wait_snapshots_are_stable",
+      "FAILED"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "8 passed; 0 failed;",
+    "name": "row-1-green",
+    "status": 0
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "row-2-wrong-status",
+    "required_diagnostics": [
+      "left: 17",
+      "right: 19",
+      "spawn_returns_while_large_stdin_is_blocked_and_wait_snapshots_are_stable",
+      "FAILED"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": "8 passed; 0 failed;",
+    "name": "row-2-green",
+    "status": 0
+  }
+]

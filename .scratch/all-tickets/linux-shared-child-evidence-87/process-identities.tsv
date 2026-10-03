@@ -1,0 +1,126 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+helper	740474	740473	740473	601507	python3 /root/rhai-linux-shared-child-20261003-4bb0848f/linux-shared-child-proof.py
+scoped-supervisor	740473	740470	740473	601505	/usr/bin/python3 /var/roothome/rhai-linux-shared-child-20261003-4bb0848f/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-shared-child-20261003-4bb0848f/linux-shared-child-proof.py
+command:rustup-install	740479	740474	740473	601545	/root/.cargo/bin/rustup toolchain install 1.77.2-x86_64-unknown-linux-gnu --profile minimal --no-self-update
+command:du	740480	740474	740473	601545	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	740498	740474	740473	601545	/bin/ps -e -o pid=,ppid=,rss=
+command:du	740518	740474	740473	601646	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	740519	740474	740473	601647	/bin/ps -e -o pid=,ppid=,rss=
+command:du	740532	740474	740473	601748	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	740533	740474	740473	601748	/bin/ps -e -o pid=,ppid=,rss=
+command:du	740544	740474	740473	601849	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	740545	740474	740473	601849	/bin/ps -e -o pid=,ppid=,rss=
+command:du	740556	740474	740473	601950	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	740557	740474	740473	601951	/bin/ps -e -o pid=,ppid=,rss=
+command:du	740576	740474	740473	602052	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	740577	740474	740473	602052	/bin/ps -e -o pid=,ppid=,rss=
+command:du	740597	740474	740473	602153	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	740598	740474	740473	602154	/bin/ps -e -o pid=,ppid=,rss=
+command:du	740609	740474	740473	602255	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	740610	740474	740473	602255	/bin/ps -e -o pid=,ppid=,rss=
+command:du	740619	740474	740473	602316	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	740620	740474	740473	602316	/bin/ps -e -o pid=,ppid=,rss=
+command:rustc-version	740621	740474	740473	602317	/root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose
+command:du	740622	740474	740473	602317	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	740623	740474	740473	602318	/bin/ps -e -o pid=,ppid=,rss=
+command:du	740625	740474	740473	602328	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	740626	740474	740473	602329	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-version	740628	740474	740473	602329	/root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose
+command:du	740629	740474	740473	602329	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	740641	740474	740473	602330	/bin/ps -e -o pid=,ppid=,rss=
+command:du	740643	740474	740473	602340	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	740644	740474	740473	602341	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-wrong-status	740645	740474	740473	602342	/root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process shared_child_contract:: -- --nocapture --test-threads=1
+command:du	740646	740474	740473	602342	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	740648	740474	740473	602342	/bin/ps -e -o pid=,ppid=,rss=
+command:du	740665	740474	740473	602443	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	740666	740474	740473	602443	/bin/ps -e -o pid=,ppid=,rss=
+command:du	740679	740474	740473	602544	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	740680	740474	740473	602545	/bin/ps -e -o pid=,ppid=,rss=
+command:du	740768	740474	740473	602645	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	740770	740474	740473	602647	/bin/ps -e -o pid=,ppid=,rss=
+command:du	740968	740474	740473	602747	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	740969	740474	740473	602749	/bin/ps -e -o pid=,ppid=,rss=
+command:du	741219	740474	740473	602849	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	741230	740474	740473	602851	/bin/ps -e -o pid=,ppid=,rss=
+command:du	741315	740474	740473	602951	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	741316	740474	740473	602953	/bin/ps -e -o pid=,ppid=,rss=
+command:du	741384	740474	740473	603054	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	741386	740474	740473	603055	/bin/ps -e -o pid=,ppid=,rss=
+command:du	741499	740474	740473	603156	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	741500	740474	740473	603157	/bin/ps -e -o pid=,ppid=,rss=
+command:du	741548	740474	740473	603258	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	741549	740474	740473	603259	/bin/ps -e -o pid=,ppid=,rss=
+command:du	741560	740474	740473	603360	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	741561	740474	740473	603361	/bin/ps -e -o pid=,ppid=,rss=
+command:du	741578	740474	740473	603462	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	741579	740474	740473	603463	/bin/ps -e -o pid=,ppid=,rss=
+command:du	741599	740474	740473	603564	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	741600	740474	740473	603565	/bin/ps -e -o pid=,ppid=,rss=
+command:du	741650	740474	740473	603666	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	741651	740474	740473	603667	/bin/ps -e -o pid=,ppid=,rss=
+command:du	741700	740474	740473	603768	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	741701	740474	740473	603769	/bin/ps -e -o pid=,ppid=,rss=
+command:du	741703	740474	740473	603780	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	741705	740474	740473	603781	/bin/ps -e -o pid=,ppid=,rss=
+command:row-0-green	741706	740474	740473	603781	/root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process shared_child_contract:: -- --nocapture --test-threads=1
+command:du	741707	740474	740473	603781	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	741712	740474	740473	603782	/bin/ps -e -o pid=,ppid=,rss=
+command:du	741787	740474	740473	603883	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	741788	740474	740473	603884	/bin/ps -e -o pid=,ppid=,rss=
+command:du	741796	740474	740473	603955	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	741797	740474	740473	603956	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-wrong-status	741798	740474	740473	603957	/root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process shared_child_contract:: -- --nocapture --test-threads=1
+command:du	741799	740474	740473	603957	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	741804	740474	740473	603959	/bin/ps -e -o pid=,ppid=,rss=
+command:du	741858	740474	740473	604059	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	741859	740474	740473	604061	/bin/ps -e -o pid=,ppid=,rss=
+command:du	741870	740474	740473	604161	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	741871	740474	740473	604163	/bin/ps -e -o pid=,ppid=,rss=
+command:du	741883	740474	740473	604263	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	741884	740474	740473	604265	/bin/ps -e -o pid=,ppid=,rss=
+command:du	741901	740474	740473	604365	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	741902	740474	740473	604367	/bin/ps -e -o pid=,ppid=,rss=
+command:du	741924	740474	740473	604467	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	741925	740474	740473	604469	/bin/ps -e -o pid=,ppid=,rss=
+command:du	741976	740474	740473	604569	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	741977	740474	740473	604571	/bin/ps -e -o pid=,ppid=,rss=
+command:du	742027	740474	740473	604672	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	742028	740474	740473	604673	/bin/ps -e -o pid=,ppid=,rss=
+command:du	742039	740474	740473	604773	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	742040	740474	740473	604774	/bin/ps -e -o pid=,ppid=,rss=
+command:du	742051	740474	740473	604805	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	742052	740474	740473	604806	/bin/ps -e -o pid=,ppid=,rss=
+command:row-1-green	742054	740474	740473	604807	/root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync --test sys_process shared_child_contract:: -- --nocapture --test-threads=1
+command:du	742055	740474	740473	604807	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	742060	740474	740473	604808	/bin/ps -e -o pid=,ppid=,rss=
+command:du	742129	740474	740473	604909	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	742136	740474	740473	604910	/bin/ps -e -o pid=,ppid=,rss=
+command:du	742147	740474	740473	605011	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	742148	740474	740473	605012	/bin/ps -e -o pid=,ppid=,rss=
+command:du	742161	740474	740473	605063	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	742162	740474	740473	605064	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-wrong-status	742163	740474	740473	605065	/root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync,no_float --test sys_process shared_child_contract:: -- --nocapture --test-threads=1
+command:du	742164	740474	740473	605065	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	742169	740474	740473	605066	/bin/ps -e -o pid=,ppid=,rss=
+command:du	742197	740474	740473	605167	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	742198	740474	740473	605168	/bin/ps -e -o pid=,ppid=,rss=
+command:du	742209	740474	740473	605269	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	742210	740474	740473	605270	/bin/ps -e -o pid=,ppid=,rss=
+command:du	742221	740474	740473	605371	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	742223	740474	740473	605372	/bin/ps -e -o pid=,ppid=,rss=
+command:du	742247	740474	740473	605473	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	742248	740474	740473	605474	/bin/ps -e -o pid=,ppid=,rss=
+command:du	742301	740474	740473	605575	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	742302	740474	740473	605577	/bin/ps -e -o pid=,ppid=,rss=
+command:du	742352	740474	740473	605677	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	742353	740474	740473	605679	/bin/ps -e -o pid=,ppid=,rss=
+command:du	742369	740474	740473	605689	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	742370	740474	740473	605690	/bin/ps -e -o pid=,ppid=,rss=
+command:row-2-green	742371	740474	740473	605691	/root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync,no_float --test sys_process shared_child_contract:: -- --nocapture --test-threads=1
+command:du	742372	740474	740473	605691	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	742377	740474	740473	605692	/bin/ps -e -o pid=,ppid=,rss=
+command:du	742452	740474	740473	605793	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	742454	740474	740473	605794	/bin/ps -e -o pid=,ppid=,rss=
+command:du	742470	740474	740473	605875	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-shared-child-20261003-4bb0848f/agent-build-za974fnb
+command:ps	742471	740474	740473	605876	/bin/ps -e -o pid=,ppid=,rss=
