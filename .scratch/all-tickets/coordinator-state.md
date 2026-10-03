@@ -200,7 +200,10 @@ Cargo registration, docs/sys-process.md and examples/sys_process.rs only. Root
 verified exact lowercase author/committer and the three-file diff. Compilation,
 review and real execution remain unverified. Writer reports accepted archive
 helper output d75e7b83289081ad95c097763ac93c55520815bb5ea20a2079834ad137fecd7e;
-archive identity has not yet been independently checked by root.
+Root independently reproduced the archive in memory using hash-verified accepted
+helpera75b4e:6471680 bytes, exact d75e7b digest, no .scratch members. Archived
+Cargo.toml/docs/sys-process.md/examples/sys_process.rs match frozen c0d Git bytes;
+the compatible lock2ba4 matches independently. No retained archive was created.
 At the latest live checkpoint the same Standard had wired the process example
 into the bounded MSRV checker with one same-build wrong-exit RED/restored GREEN,
 source restoration, independent host readbacks and cloned-cache markers. Remaining
@@ -219,8 +222,39 @@ is untouched; new original output is the distinct stage's proof-evidence.
 No Cargo, SSH, native allocation or OS acceptance. Root confirmed the writer
 live; observation timeouts are verified waits, not failure or a restart reason.
 
-Next: freeze/review the distinct process API example preparation -> fresh measured
-slot and existing scoped acceptance route. Native110 stays unallocated. Human
+Distinct package is now frozen at012e20f70dbef81fe08954af96459e59a03d1caf.
+Root verified exact hoppworks author/committer, seven-file total package scope,
+recipe-only final commit and unchanged source/test/example between c0d and012e.
+Four actual Git blob SHA256 identities match the writer's report: checker
+c0c80653674feda4d3834a202d5f23585d46b461cdccc9f517c3f6febe7d2544,
+stage570af5413b0f2d6faf56e655a89bbfc8e886e20139868053bad86fbebcf487e5,
+launcher a2892f29e42ee456c4d2ca6e88944e0da1f69d8dbdff2a5512fe220401c4456a,
+contract410055e2de6d9b856ab1a53f0fd07153c87369849bca11291f8753402d4c993c.
+Writer reports approximately30 total active minutes, not35; actual cost/CPU
+unknown. Same combined independent Expert escaped_recipe_review now owns the
+seven-file source/recipe acceptance review, report linux-process-example-review.md.
+Combined initial preparation review is NOT READY; all native execution remains
+pending. Archive root readback is closed narrowly. Complete seven-file review is
+linux-process-example-review.md: readiness file visibility races complete PID
+contents, and launcher uses600 rather than contracted585 scoped seconds. These
+are two initial preparation findings, not failed completed corrections. Other
+structural/model checks passed narrowly; no compilation or OS proof. Root
+checkpoint-only commit de8d9a0ba59ac47cda20f77b478a99cefadd029b was pushed and
+independently read back as the fork's sole remote main; no remote task ref.
+
+Same responsible Standard now owns one consolidated correction of both findings:
+atomic readiness publication preserving exact PID/release/pending assertions;
+600 outer/585 runner/540 helper with honest cooperative export/cleanup margin.
+Source change requires a new source freeze/archive and then coherent recipe pins.
+Permitted edits are example and narrowly affected launcher/helper/contract/pins;
+production/tests/stopped stdin parser and all old evidence remain untouched.
+No Cargo/SSH/stage/native allocation/push during preparation. Thirty-minute active
+planning checkpoint for correction; preserve initial approximately30 minutes and
+separate stopped classifier77+unknown. Correction failures for this package0.
+
+Next: collect frozen consolidated process-example correction -> same independent
+reviewer rechecks affected source/dependencies -> if READY, fresh measured slot
+and existing scoped real acceptance route. Native110 stays unallocated. Human
 permits Tauron window coordination if fresh contention requires it. Final native
 Linux/macOS/Windows, feature/MSRV/release and stdin/fault/lifecycle criteria remain
 open. Current turn PROGRESS: failed Expert18 follow-up recorded once and dependent
