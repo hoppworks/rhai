@@ -225,3 +225,17 @@ This closes only the current Linux MSRV held-zombie criterion. Ordinary managed
 success, remaining managed/fault/lifecycle paths, other feature/native-platform
 rows, performance and final release acceptance remain open. Prior valid proof
 and stopped cause/budget histories retain their recorded applicability.
+
+## Linux managed final-clone drop — native102, 2026-10-03
+
+The final-clone-drop public Engine test passed in four selected Rust 1.77.2
+Linux feature rows, with a named post-cleanup wrong-control and three affected
+base regressions. The proof records exact process identity/group closure,
+nonfinal-drop preservation, host/reaper/sentinel liveness through observed
+closure, source restoration, eight original closure records, and fresh owned
+resource cleanup. See `../../all-tickets/linux-managed-final-drop-proof.md` and
+the preserved native originals `../../all-tickets/linux-managed-final-drop102-evidence/`.
+The combined independent acceptance review remains pending.
+
+This is one partial managed lifecycle criterion only. Ticket 06's broader
+feature/platform matrix and final release gates remain open.
