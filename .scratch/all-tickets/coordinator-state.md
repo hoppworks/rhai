@@ -82,7 +82,7 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 ## Current step and next action
 
 Instructions faba3db unchanged/loaded; full goal active/incomplete. Sole fork
-main last independently read back ate16fd80004ce9bad5775ccea4eba75f6ae38bdb3.
+main last independently read back atf0e4a2b5a840fe54feecd7441e4d147abfe5c767.
 Accepted109 proof/source523 unchanged; no retained native resources, all finite
 concurrency exceptions expired. Unix109 consumed; native110 unallocated.
 
@@ -131,16 +131,27 @@ path has no fallback cleanup_complete) justified10additional estimated active
 minutes in the same batch. Writer finished in approximately35minutes this batch,
 plus prior18minutes and unknown earlier use: known reported total approximately
 53minutes, not measured full cumulative cost/CPU. No counters or hard caps reset.
-This failing repair path is stopped. Fresh non-fork Expert18
-stdin-debug-classification-input-binding is active with source-only15minute
-planning checkpoint; brief escalations/18-stdin-debug-classification-input-binding.md.
-It must audit prior14/16/17 overlap before any follow-up recommendation:14 is
-closed narrowly by native96 for different require_success/exact_boundary/closure
-code,16settled public API seam,17settled Rust Dynamic decoder/guard. Current new
-Python debug_fields grammar and actual-test/Cargo-inventory mismatch are concrete
-mechanisms, not permission to rename an exhausted cause. If overlap makes a
-follow-up unavailable, preserve that outcome. No new source/recipe repair until
-the answer; one bounded follow-up only if causally available. No counter reset.
+Fresh non-fork Expert18 completed the causal audit and exact emitter diagnosis;
+answer escalations/18-stdin-debug-classification-input-binding.answer.md. Prior14
+is closed narrowly by native96 for different require_success/exact_boundary and
+closure code;16 settled the public API seam;17 settled the Rust Dynamic decoder
+and guard. The current Python parser and actual-test/Cargo-inventory mismatch
+are distinct concrete mechanisms. The answer permits one recipe-only follow-up,
+without renewing those exhausted chains or resetting either completed failure.
+
+The same responsible Standard stdin_closure_test now owns that single follow-up
+from132e6: collect-red.py, baseline-proof.py and necessary contract/pin updates.
+Keep ee50 source unchanged. Correct actual Dynamic #{...} maps, top-level
+Some(...) fallback suffix and parsed positional sentinel phases, stable live
+identity with legitimate R/S transitions, exact source final-host equality,
+all map/scalar/provenance bindings and independently observed initial/final test
+digests. Execute complete actual-consumer source-shaped positive and mutation
+checks plus actual digest-producer mutation/deletion/symlink checks. These are
+harness models, not OS evidence. Existing static export/bounds/retirement closures
+remain applicable unless affected. Thirty-minute active planning checkpoint;
+preserve53minutes reported plus unknown earlier use. Expert elapsed/usage unknown.
+Stop this cause if the completed independent follow-up fails or an incompatible
+emission/outcome decision remains. No second Expert chain or counter reset.
 
 No Cargo/SSH/staging/native/production mutation or retained resources. Exact
 prospective stage /root/rhai-linux-stdin-closure-20261003-ee50c63e-110 and scope
@@ -152,14 +163,14 @@ preflight never executed. It requires canonical stage, absent scope/terminal,
 zero foreign runner/compiler and16GiB available RAM/disk. No slot reservation,
 expired exception reuse or native allowance renewal. Historical untracked
 lifecycle note and root CLI logs untouched.
-Next: Expert18 causal audit/exact parser route -> only causally available bounded
-correction and affected review -> fresh workhorse slot/capacity -> stage/allocation
-only if ready -> genuine native RED -> product correction and real acceptance.
-Human permits Tauron window coordination if fresh contention requires it.
-Final native Linux/macOS/Windows, feature/MSRV/release remain open. Previous
-turn PROGRESS: immutable correction/pins frozen. Current turn PROGRESS: final
-failed review closes three static findings and changes next action to source-only
-causal escalation18; no native or acceptance claim.
+Next: freeze the single Expert18 recipe follow-up -> affected independent review
+-> fresh workhorse slot/capacity -> stage/allocation only if READY -> genuine
+native RED -> product correction and real acceptance. Human explicitly permits
+Tauron window coordination if fresh contention requires it; authorization
+reconfirmed by the latest question reply, no additional message sent yet.
+Final native Linux/macOS/Windows, feature/MSRV/release remain open. Current turn
+PROGRESS: Expert18 diagnosis accepted as a source-only route and the single
+bounded follow-up dispatched; no native or acceptance claim.
 
 ### Earlier current-step history (retained, superseded)
 
