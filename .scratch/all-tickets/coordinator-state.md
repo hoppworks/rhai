@@ -82,7 +82,7 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 ## Current step and next action
 
 Instructions faba3db unchanged/loaded; full goal active/incomplete. Sole fork
-main last independently read back at4728b28cceb870f0919d53379cee5127ea6eba03.
+main last independently read back ate16fd80004ce9bad5775ccea4eba75f6ae38bdb3.
 Accepted109 proof/source523 unchanged; no retained native resources, all finite
 concurrency exceptions expired. Unix109 consumed; native110 unallocated.
 
@@ -110,16 +110,20 @@ exhausted native/Darwin/Windows chains and actual hard boundaries remain stopped
 Same Standard froze the consolidated recipe-only correction at
 132e6f83414d83be26b8c685e68b5bb125af8d7f, six recipe files only. Root checked
 all actual Git blob hashes and lowercase exact hoppworks author/committer;
-non-scratch source ee50 and testc247 are unchanged. Same combined reviewer now
-performs the affected recheck of its four final eeae50 findings. Syntax,
+non-scratch source ee50 and testc247 are unchanged. Same combined reviewer completed the affected recheck: NOT READY. Export tar
+lifetime/inventories, bounded540-second partial export and fresh deletion-boundary
+custody are statically repaired. Remaining blockers: compound first Unit, Display
+executable/bare host/literal provenance/normal sentinel-kill grammar, unstable
+scheduler-state equality, and test hash incorrectly demanded from Cargo-only
+manifest inventory. Full final findings are in linux-stdin-closure-review.md. Syntax,
 embedded remote/remove/absence scripts, bash and diff checks pass; source-shaped
 quoted/nested receipt, two sentinel lifecycle phases, invalid identity/zombie
 rejection and local tar/inventory models pass. These are modeled checks only,
-not observed OS/product RED or acceptance. No recipe READY verdict yet.
+not observed OS/product RED or acceptance. Recipes remain NOT READY.
 
 Cause history: c39 initial proposal NOT READY; first completed correctioneeae50
 failed its independent check (recipe corrective failure1). Current132e6 second
-corrective batch awaits review. Preserve source4ac/2c/9d and Expert17 history;
+corrective batch failed independent check: recipe corrective failure2. Preserve source4ac/2c/9d and Expert17 history;
 source decoding/guard repair is closed narrowly, consuming parser/export/custody
 was still open. Two draft mismatches diagnosed from the actual emitter at the
 30-minute checkpoint (unit=true value=(); sentinel_after emitted twice; normal
@@ -127,8 +131,16 @@ path has no fallback cleanup_complete) justified10additional estimated active
 minutes in the same batch. Writer finished in approximately35minutes this batch,
 plus prior18minutes and unknown earlier use: known reported total approximately
 53minutes, not measured full cumulative cost/CPU. No counters or hard caps reset.
-A second failed corrective recipe review, contradictory evidence or unresolved
-decision stops this path for fresh causal escalation audit.
+This failing repair path is stopped. Fresh non-fork Expert18
+stdin-debug-classification-input-binding is active with source-only15minute
+planning checkpoint; brief escalations/18-stdin-debug-classification-input-binding.md.
+It must audit prior14/16/17 overlap before any follow-up recommendation:14 is
+closed narrowly by native96 for different require_success/exact_boundary/closure
+code,16settled public API seam,17settled Rust Dynamic decoder/guard. Current new
+Python debug_fields grammar and actual-test/Cargo-inventory mismatch are concrete
+mechanisms, not permission to rename an exhausted cause. If overlap makes a
+follow-up unavailable, preserve that outcome. No new source/recipe repair until
+the answer; one bounded follow-up only if causally available. No counter reset.
 
 No Cargo/SSH/staging/native/production mutation or retained resources. Exact
 prospective stage /root/rhai-linux-stdin-closure-20261003-ee50c63e-110 and scope
@@ -140,12 +152,14 @@ preflight never executed. It requires canonical stage, absent scope/terminal,
 zero foreign runner/compiler and16GiB available RAM/disk. No slot reservation,
 expired exception reuse or native allowance renewal. Historical untracked
 lifecycle note and root CLI logs untouched.
-Next: affected review verdict -> fresh workhorse slot/capacity -> stage/allocation
+Next: Expert18 causal audit/exact parser route -> only causally available bounded
+correction and affected review -> fresh workhorse slot/capacity -> stage/allocation
 only if ready -> genuine native RED -> product correction and real acceptance.
 Human permits Tauron window coordination if fresh contention requires it.
 Final native Linux/macOS/Windows, feature/MSRV/release remain open. Previous
-turn verified wait on live owner; current turn PROGRESS: immutable recipe/checks,
-independent pins and execution preflight correction change authoritative state.
+turn PROGRESS: immutable correction/pins frozen. Current turn PROGRESS: final
+failed review closes three static findings and changes next action to source-only
+causal escalation18; no native or acceptance claim.
 
 ### Earlier current-step history (retained, superseded)
 
