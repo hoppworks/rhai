@@ -81,194 +81,108 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 
 ## Current step and next action
 
-Current instructions/roles revision faba3db3bef6891ad2c0b20d434963bb8fe9572d.
-Latest independently read-back fork main 408781f58975be2fca8e58b683e7d2b7051b1787;
-ONLY remote main. Lowercase human author and committer verified. Accepted96 subset
-is mapped explicitly to open tickets03/06; checkpoint/source remains unchanged.
-Workhorse installed revision independently read back at
-/var/home/workhorse/projects/agent-skills; global AGENTS loaded at faba3db.
-SSH root has no ~/.agents; installed user path was resolved read-only, with
-command-local Git safe.directory for the revision query, no config mutation.
-Previous goal
-turn PROGRESS: native96 accepted, reviewed source/recipe histories integrated,
-original evidence committed and pushed, exact own remote stage/runtime cleaned.
-Overall all-tickets goal active and incomplete; no scope reduction.
+Instructions/roles faba3db3bef6891ad2c0b20d434963bb8fe9572d loaded by root,
+responsible Standard and same combined reviewer. Workhorse installed rules resolved
+at /var/home/workhorse/.agents/AGENTS.md and /var/home/workhorse/projects/agent-skills;
+SSH root has no ~/.agents. Read-only resolution/command-local safe.directory only.
+Last verified fork main2e0344cb60febc61268e34b8ddb6d935f6dcde6e; sole remote main,
+lowercase human author/committer. Previous goal turn PROGRESS: public managed
+Child.kill native101 accepted and integrated; overall scope remains incomplete.
 
-### Latest acceptance and applicability
+### Current coherent requirement
 
-Native96 prompt-success and held-zombie boundaries ACCEPTED by same combined
-reviewer across4 Linux Rust/Cargo1.77.2 feature rows: testing-environ,sys; plus
-sync,metadata; plus f32_float; plus unchecked.8 exact GREEN tests,3 intended RED101.
-Original72files/6dirs and11closures hash-verified; source restored exacte003/errornull.
-Fresh independent210 recorded PID/start identities absent and13groups empty;
-these are row counts, not a claim of210 unique PIDs. Stage/scope/runtime absent,
-72files6dirs exact stage removed. No retained build. Source003da/teste003/archivef62
-integrated through merge92146c60 and recipe0b1; independent non-scratch diff empty.
-Proof applies at current main without duplicate build. Proof/review/originals:
-linux-managed-success-proof.md, linux-managed-success-review.md,
-linux-managed-success96-evidence/. Acceptance/history commit0a8ab057 retains
-full preceding preparation and correction state; no attempt history reset.
+Final-client-lease drop with kill_on_drop is being implemented source-only by same
+responsible Standard linux_managed_gap in owned protected
+/Users/hoppworks/.codex/worktrees/linux-managed-success/rhai, task/linux-managed-success.
+Baseline5f78341a already integrated through408781f5. Initial source106f24720cc4a0892b69fe601b61de4032cf2531
+frozen, same combined final-drop review NOT READY: ClientLease Drop asynchronously
+requests cleanup but initial observer snapshots immediate closure. One batched
+correction dispatched to responsible Standard: distinguish finaldrop-return from
+later bounded independent closure/reaping while host/reaper/sentinel remain live.
+Keep kill101 unchanged, strict exactidentity/reaper/group cleanup,20s watchdog and
+no extra kill/wait/deadline termination. New package initialfinding1, completed
+failed corrections0/native launches0. Ref linux-managed-final-drop-review.md.
+Prospective102 stage /root/rhai-linux-managed-final-drop-20261003-106f2472-102,
+physical /var/roothome/rhai-linux-managed-final-drop-20261003-106f2472-102,
+scope /root/.local/share/agent-builds/rhai/linux-managed-final-drop-20261003-106f2472-102.
+All uncreated/unallocated. Recipes draft source-only4featureGREEN/1namedRED plus
+3affected base kill/prompt/held regressions (8exact+3setup). Freeze correctedsource
+and dependent recipes before samecombinedaffectedrecheck; original101 custody
+mechanics retained without renewing passed14/15 chains. Existing regression
+managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not uses numeric
+PID absence only; ClientLease::drop in src/packages/sys/process/unix.rs triggers
+final cleanup. Bind live leader/worker/leaf and sentinel identities; nonfinal Rhai
+handle drop must leave managed processes live, final lease alone must close/reap
+the group while host/reaper/sentinel live, then exact independent full cleanup.
+Use existing isolated reaper/PIDFD/start/group mechanics and one post-cleanup
+wrong expectation that a managed member remains live. Explicit Child.kill or a
+spawn deadline cannot substitute for lease-drop. Preserve accepted101 logic;
+shared fixture changes require affected acceptance checks. Production unchanged
+unless meaningful failing contract establishes need. Thirty-minute active-work
+planning checkpoint. No native102/build/stage allocation yet. Next: source freeze,
+same combined affected review, coherent bounded acceptance recipe and fresh slot
+inventory; preserve exact existing hard caps and cumulative101 consumption.
 
-Original95 held-only current Linux MSRV acceptance remains valid independently:
-frozen257edf69/test8ec/lock2ba4, one testing-environ,sys row;52 originals,99exact
-identity rows absent,4groups empty; proof linux-managed-zombie-proof.md,
-linux-managed-zombie-review.md, linux-managed-zombie95-evidence/. Native94 parser
-interleaving infrastructure failure retained in original44files;95 repaired it.
+### Accepted current Linux managed subsets
+
+Native101 public Child.kill ACCEPTED by same combined independent reviewer at
+source61f7bc66e75b4de3b0d4c444da0e610d952e903d/recipes5f78341a2f78e109a1cdebc02be9f9bbc22821ea;
+testdd4ceb43/archivea3a1fee7/lock2ba4, private Rust1.77.2. Four feature rows:
+testing-environ,sys; +sync,metadata; +f32_float; +unchecked. Six GREEN0 (four kill
+rows plus affected original prompt/held base cases), two intended post-cleanup
+RED101. Exact leader-record start matches independent PIDFD start; strict reaper
+exit0, actual killed typed report/captures, exact descendant receipts, unrelated
+sentinel and full cleanup observed. Source restored/errornull. Original74files/
+6dirs/8case closures immutable and verified before export/cleanup. Fresh145 helper/
+launcher PID/start rows absent plus independently validated original fixture
+closures. Exact owned stage/scope/runtime gone; no retained build. Optional /proc
+exit-race warning independently judged immaterial to exact terminal custody.
+Proof linux-managed-kill-proof.md, same linux-managed-kill-review.md,
+linux-managed-kill101-evidence/. Acceptance d75f7fc7/source integration408781f5;
+non-scratch integrated diff vs writer5f783 empty, testhash exact. Tickets03/06 map
+partial closure and remain open. No no_float/no_index/other-OS/full-release claim.
+
+Original native96 prompt/held acceptance at003da064/teste003/archivef62: four Linux
+Rust1.77.2 rows8GREEN/3RED;72originals/6dirs11closures,210 recorded PID/start rows
+absent13groups empty, restoredsource/errornull, exact stage/scope/runtime gone.
+Refs linux-managed-success-proof.md/-review.md/-success96-evidence, integrated
+92146c60/proof0a8ab057. Current shared guard affected checks reran at101 base rows;
+old96 evidence remains valid at its original identified source, not an invented
+rerun. Native95 held-only acceptance257edf69/test8ec/lock2ba4 remains valid narrowly:
+52originals99rows4groups, linux-managed-zombie-proof.md/-review.md/-zombie95-evidence.
 
 ### Cause, budget and resource history
 
-Stable linux-managed-receipt-custody: initial69fc/5613 findings, completed a2b1/72ad
-and4cdd/2016 failed corrections count2; fresh non-fork Expert14 diagnosis and ONE
-follow-up83e84145/01068eee PASSED combined affected review and native96. Detailed
-source-format/mutation/export checks and frozen hashes retained in same review
-and escalations/14-linux-managed-receipt-custody.md plus answer. No renewed chain.
-Earlier misplaced early-source-receipt correction is distinct; immutable failed
-patch f85b8c6f retained. Native96 local Python3.9 tarfilter export setup failure
-recovered with existingPython3.12.14, empty owned destination rmdir; one local
-interpreter recovery, no native rerun or product correction. Raw original output
-whitespace/bytecode stays unchanged and hash-bound; source/docs diff-check passes.
+Unix101 consumed; native97–101 kill package5 launches:97 compile missing format
+args (infrastructure),98 du ENOENT transient sampling (infrastructure),99 initial
+reaper_ok=false/18s,100 completed first fallback correction failed same boundary,
+101 sole Expert15 follow-up PASSED. Stable managed-kill-reaper-exit-observation
+failed correction count1; Expert15 answer proved SPAWN leader-record lacked start,
+unlike normal-exit record. Exact start producer repair61f7 and PIDFD binding
+resolved it without weakening watchdog/closure. Sole Expert15 chain closed PASSED;
+no renewed repair budget. Escalations/15-*.md and answer preserved. Failures97/98/99/
+100 retain immutable original failure evidence, raw collectors and review refs;
+full chronology/source/recipe hashes in committed state2e0344cb and earlier proof
+commits87c48103,61923d81,ca763617,d736bf2f,0e5f2391. Historical collector adaptation
+first completed pin correction878cca failed embedded pin check; d045 corrected it.
+Sampler adaptereeea only retries full du for exactly parsed currently absent own
+runtime ENOENT paths, preserves limits and immutable baseline. Local raw export
+setup/pin refusals never granted product acceptance or rewrote originals.
 
-Cumulative Unix96 consumed. Native96 fixed limits600s outer/585s runner/540s
-helper including30s export reserve, jobs2, descendants16, storage preempt1572864KiB,
-RSS/storage hard2097152KiB. Helper work/export51.765s;1s sampledmaxRSS953840KiB,
-storage967628KiB,desc9, not continuous peaks or reservations. Cost/token usage
-unavailable; no invented savings. Prior allocation/safety histories retained in
-historical sections and referenced committed logs. Do not renew stopped macOS
-cause09, Darwin census12 or Windows JobExit13 chains.
+Stable linux-managed-receipt-custody count2 corrections then sole Expert14 follow-up
+PASSED native96; retained escalations14 and same original review. Never renew this
+chain. Stopped Mac cause09/Darwin12/Windows13 chains and their exact consumed caps
+stay stopped. No foreign process/build/worktree disruption. Owned writer pinned
+archival refused after snapshot; preserve and reuse while related work active.
 
-Owned writer linux_managed_gap on task/linux-managed-success remains clean at
-0b1c6431 in /Users/hoppworks/.codex/worktrees/linux-managed-success/rhai.
-Snapshot_sessions codex succeeded before attempted managed archival; archive
-refused due pinned task/workspace protection. Preserve, no fallback deletion or
-unpinning. Source/recipes/proof are integrated outside that worktree. All foreign
-worktrees and unrelated untracked CLI logs remain untouched.
-
-### Current coherent requirement and next action
-
-Public managed Child.kill group closure now ACCEPTED via native101. Current next
-criterion is final-client-lease drop with kill_on_drop, source-only implementation
-assigned to same responsible Standard; historical kill preparation follows.
-The same responsible Standard completed diagnosis at the owned writer's
-linux-managed-lifecycle-next.md: existing numeric-PID absence checks do not bind
-lifecycle identities under foreign reaping. Implement one minimal public spawn →
-kill → bounded wait fixture with external isolated subreaper, exact live
-leader/worker/leaf and sentinel identities, failed final report, host/reaper live
-API-return boundary and independent exact cleanup. Preserve native96 run cases.
-Final-clone drop, deadline, overflow and broader gates remain separately open.
-
-Standard is LIVE preparing this coherent slice in the same protected owned
-writer. The existing owner-approved Engine/script → host → OS seam applies.
-Initial sourcea17f40a7 test-only fixture frozen, follow-up1009b504 removes two
-accidental unconditional wrong-control assertions before any native run. Initial
-combined review consolidated five findings: opposites, missing kill-mode
-propagation after env_clear, invalid raw waitpid status=0 for killed descendants,
-untyped report.success default false, competing4s spawn deadline. All batched in
-corrected frozen d70e2c409c82b09ab205e2fc12b08a7c6b94acec; same reviewer affected
-recheck SOURCE READY: all five findings resolved, faba3db confirmed. Owner and root independently agree source archive4510841b868ad57cbff61129b2f6244c21b3915588d36caf760a54d653e9e43d and test9c6ca59e753ebae483a3f2bed6cf5ffd076e80a7c6ef1be76dc87e49c5ea00da.
-These are source preparation findings, no build/pre-mode RED/native assertion
-or completed native correction has occurred. Reviewer premature no-other-blocker
-milestone was superseded by complete five-finding batch, retained in report.
-Review context is linux_shared_child_review; report linux-managed-kill-review.md.
-Relevant shared fixture changes require original prompt/held cases in same build.
-
-Prospective native97 stage /root/rhai-linux-managed-kill-20261003-a17f40a7-97,
-scope /root/.local/share/agent-builds/rhai/linux-managed-kill-20261003-a17f40a7-97;
-Native97 ALLOCATED for ONE bounded run after independent EXECUTION READY at
-recipecec147/source d70; collector-only batch remains NOT READY. Exact stage and
-scope freshly observed absent. Workhorse Linux7.2.7 current process inventory has
-no heavy build/test candidates and no central private runtimes under root or
-workhorse user; MemAvailable82880032kB. This is a current observation, no slot or
-capacity reservation. Recorded campaign active runs none; do not disrupt foreign
-processes. Preserve all stage originals pending corrected read-only collection.
-Native97 CONSUMED launch2026-10-03T14:10:49Z, root exec session12956.
-Runtime agent-build-4pp9guh2 below exact scope, input hashes passed before helper.
-Three existing private-toolchain setup commands use runtime-scoped outputs/caches
-as in accepted96 recipe; no shared agent-home/system installation or config change.
-No retry/budget reset; Unix97 consumed, prior Unix96 retained. ENDED before intended assertions: Cargo101 compile failure at tests/sys_process.rs1921, three format placeholders without arguments. Empty test stdout; no fixture launched. Infrastructure/compiler-harness outcome, not intended RED or product failure. Source restored9c6/errornull. Runner status1; PID readback/runtime/scope cleanup statuses0. Raw-failure evidence preserved in linux-managed-kill97-failure-evidence/:42 original files/5dirs byte-identical, fresh70 recorded PID/start rows absent and2exactgroups empty. collect-linux-managed-kill97-failure.py explicitly rejects acceptance; original source/recipe pins retained. Exact stage removed only after local/freshremote inventories agreed; remote-cleanup.json verifies stage/scope/group absence. No retained build. Same reviewer independently verified raw-failure custody and immutable hashes; failure evidence committed/pushed87c48103. One minimal setup recovery under existing authorization; native98 not allocated. Writer source90a6ddea fixes only the three missing PID formatting arguments; reviewer source recheck passed. Recipe878cca affected collector recheck found stale embedded REMOTE proof/stage/launch hashes, despite correct top constants. First completed new collector correction fails static pin check; same responsible Standard applies minimal pin-only correction. Original three defects otherwise resolved: re imported, all8original closure files required, comparison-only typed sink, original96success independent identity closure. Native98 unallocated; no native product failure or old custody-chain renewal. Planned four existing feature rows for one new
-kill criterion, base-row original96 prompt/held affected regressions, two named
-report-success and sentinel-absent RED controls after full fixture cleanup, exact
-restored GREEN. Agent plan revised1→2 before launch to prove both newly claimed
-report/sentinel assertion paths; unchanged time/resource hardbounds, no consumption
-or userlimit change. Bounds remain
-600s outer/585runner/540helper incl30exportreserve, jobs2/desc16, preempt storage
-1572864KiB and RSS/storage hard2097152KiB. No budget reset; Unix96 consumed.
-Source d70 SOURCE READY; initial recipe-only commitcec147c3 has11commands
-(3setup,8exacttests:6positive/2controls). Initial recipe review NOT READY:
-collector REMOTE missing re import, writing sink can regenerate original closure
-artifacts, original96-success lacks fresh identity/group closure reader. Same
-responsible Standard applies one batch while reviewer finishes count/pin checks;
-execution independently READY while collector affected correction continues. New collector adaptation must
-compare preexisting originals read-only; historical96 helpers remain immutable.
-Initial recipe findings, zero completed corrective recipe attempts/native failures;
-no renewal of the historical PASSED receipt/custody Expert chain.
-Initial a17/1009 pins are obsolete for launch. One combined source/recipe/live evidence review, no extra pipeline.
-30-minute active-work planning checkpoint; ordinary reversible implementation
-continues under existing authorization. The passed receipt/custody history is
-retained without renewal; new outcomes classified by actual cause.
-
-Native98 preparation frozen source90a6ddea, recipesd045a90c after878cca
-and collector pin-only correction. Source test90b9216c/archive450bf2f8/lock2ba4;
-proofd6035236/stagecb634ba0/launch20851ad3. Same combined reviewer affected recheck atd045a90c EXECUTION READY and COLLECTION READY; stale REMOTEpins fixed, no material readiness findings. Native acceptance pending. Next authorized action after READY: allocate one fresh bounded98
-run, preserving97 consumed/compilerfailure and first collector staticpin failure.
-Planning estimate revised from one to two native launches because exact compiler
-cause is fixed by three missing arguments; no hard resource/time cap raised.
-Native98 CONSUMED launch2026-10-03T14:28:33Z, root execsession62968; inputs allshaOK, runtimeagent-build-vtv10lr9 within exact98central scope. ONE bounded run ENDED during compile before intendedassertions: originalbasehelper du -sk ENOENTrace on compiler-deleted .07/.08.rcgu.o files. Cargostatus-15/stdoutempty, noscenariofixture. Infrastructurestorage-sampler outcome distinctfromcompilerargs; no intendedRED/productfailure. Runtime/scope/readback cleanup0, outer/run1. Original98files preservedhashidentical, fresh exact recordedPID/startrowsabsent/groupsempty; exactstage removedafterlocal+freshremotecheck. Failure exporter initialpin wronglyderivedlivewriter changedproof; refusedbeforeexport/mutation, correctedtoimmutable d603 andsuccessful. Draftsyntaxfixedpreexecution. No renewedhistoricalcustodychain. CumulativeUnix98consumed, killpackage97compilerfailed+98running; no reset. Fresh inventory: exact98stage/scope absent, private
-runtimes absent, actual cargo/rustc/rustup/scoped-runner processes absent;
-MemAvailable82853008kB. A substring scan matched a foreign coordinator prompt,
-then exact executable/early argument scan excluded it; foreign session untouched.
-Same limits600outer/585runner/540helper incl30exportreserve, jobs2/desc16,
-1572864KiBstorage preempt and2097152KiBRSS/storage hard. Compilerargs recovery remains compile-unverified because samplerinterrupted. Newdu-ENOENTinfrastructurecause occurrence1, no unsuccessful recoveryyet. SameStandardminimal bounded full-du retry with exactownedpath diagnostics; no excludedfiles/ignorederrors or higherresourcecaps. Native99unallocated. Planning checkpoint: two distinct infrastructure diagnoses produced concrete minimal repairs; no producttesthasrun, no repeated no-progresssamplercorrection or hardlimitexhaustion. Continue one samplerrepair+same combinedreview within originalperrunlimits, existing30-minute active-work planning checkpoint renewed on this evidence without historicalreset. Firstcollectorstaticpinfailedbatch corrected d045, no nativecollectoracceptanceyet. Token/costusageunknown. Original98readback/export/cleanup in linux-managed-kill98-failure-evidence/, rawcollector98 explicitly NOTacceptance.
-
-Sampler recovery frozen eeea7775 changes only newkillrecipes; historicalBASE
-helper remains59ac unchanged, source90a6/test90b/archive450bf unchanged. Newproof7cf8,
-stagedec96/launchb3c/collector6d031eaf pathsprospective99. Full du traversal retry
-max4 only exactownedvanished ENOENTpaths; helperdeadline/RSS/descendants freshly
-checked betweenattempts, unknown/permissions fail. Targeted full-du/ps ordering,
-ceiling, bounds and fatalerrors pass; same reviewer affectedrevieweeea EXECUTION READY/COLLECTION READY; actualsampler focusedchecks independentlypassed; nativeacceptancepending.
-Fresh99inventory at2026-10-03T14:41:16Z actualheavy[], privateruntimes[], exactstage/
-scopeabsent, MemAvailable82885536kB; observationnotreservation. Native99 remains
-CONSUMED launch2026-10-03T14:44:37Z, rootexec45044, allstageinputshaOK; runtimeagent-build-aa371kh2 withinexact99scope. ENDED oneboundedrun aftereeea readiness: compilepassed andone actualduENOENT retry passed. Namedwrongrequire-successcontrol101 reached aftercleanup; actualpublicChildkill→wait returnedunsuccessfulchildreport withcompletecaptures, exact3PIDFDs/exitedmembersreaped/sentinel live alltrue, BUTreaper_okfalse. Nestedreaperteststdoutok18.00s outer18.01s; firstnativefixtureexit-observationcriterionfailure, nofullacceptance. Sampler/compile causesrecovered, notproductfailures. SameStandard diagnosisdeadline/statusobservationpending; native100unallocated. Original99raw43files5dirshashpreserved, source90b restored/errornull,112recordedPID/startrowsincl6fixtureabsentand4groupsempty, exactstage/scopecleanupverified. No retainedbuild. Proof refs linux-managed-kill99-failure-evidence/ andrawcollector99; same reviewer failurecustodyVERIFIED; NOT ACCEPTED. Original99 committed/pushedca763617. Concrete cause: ManagedZombieDrainGuard waits for absent leader-identity in killmode while exact leader-record exists; burns18s until outerstatuswait deadline. Sourcec69524f adds exactPID/startleader-recordfallback, keepsstrictreaper_ok/closure criteria. Testa29511c1/archivee16cd648/contractunchanged. No completedcorrectivelaunchyet forfixtureexit cause. Prospective100recipepins preparing, UNALLOCATED. CumulativeUnix99consumed, newkill3launches(97compilefailed/98samplerfailed/99running); planningestimate2→3dueknownsamplerrepair, nohardcapraised/nohistoryreset. Next one finite run with same600/585/540time bounds,
-30exportreserve/jobs2/desc16/1572864storagepreempt/2097152RSSstoragehard, preserving
-97compiler/98sampling consumption. Estimate mayadvance2→3 for this distinct known
-infrastructurecause; no repeated launchwithout newdiagnosis or limitsraised.
-
-Native100 ENDED: recipes18efd22d/sourcec69524f, test a295/archivee16,
-proofe396/stagec003/launch6eb760/collectorabbf89. Launch14:57:49Z consumed;
-compiler passed, named require-success control status101 but independent boundary
-failed reaper_ok=false, nested reaper18.00s, same as99. Group closure, exact worker/
-leaf wait_status9, host/reaper live at API return, sentinel survival and post-cleanup
-absence passed; no acceptance. This is FIRST failed corrective implementation for
-stable managed-kill-reaper-exit-observation cause. The absent leader-identity
-fallback diagnosis is contradicted by the unchanged18s outcome; fresh non-fork
-Expert escalation15 required before any further correction. No101 allocation.
-Raw100 evidence exported with42 original files/5dirs, byte-identical hashes,
-106 PID/start rows including6 fixtures absent,4groups empty; exact own stage,
-scope/runtime removed after independent readback. No retained build. Original
-source restored a295/errornull. Evidence linux-managed-kill100-failure-evidence/;
-raw-only exporter collect-linux-managed-kill100-failure.py claims no acceptance.
-Cumulative Unix100 consumed, managed-kill package4 launches97–100: compile
-infrastructure97, sampler infrastructure98, initial reaper failure99, first
-failed fixture-exit correction100. Fixed600s/585s/540s limits, jobs2, descendants16,
-1572864KiB preempt storage and2097152KiB hard RSS/storage unchanged. No renewal of
-receipt-custody14 PASSED or stopped Mac/Windows chains. Cost/token usage unknown.
-Raw100 original42 hashes and106 absence rows independently rechecked locally.
-Same combined reviewer follow-up dispatch unavailable (agent thread limit); review
-pending, no acceptance claimed. Expert15 fresh non-fork dispatched; responsible
-Standard notified to preserve source and wait for answer before correction.
-Expert15 ANSWER received: archived SPAWN leader-record lacks start=, unlike normal-exit
-producer. Guard exact-start parser keeps pending until18s despite corrected filename.
-Answer escalations/15-managed-kill-reaper-exit-observation.answer.md; revision
-faba3db confirmed. ONE bounded follow-up dispatched to same responsible Standard:
-write live exact Linux start in atomic spawn record; save producer/PIDFD comparison
-and assert only after full cleanup; strict reaper_ok/20s watchdog unchanged. Source/
-recipe-only preparation101; no native allocation yet. Same combined reviewer
-successfully resumed for raw100 custody plus subsequent affected source/pin check.
-Follow-up native estimate one launch after readiness and fresh slot inventory;
-retain600/585/540s, jobs2/desc16 and original resource caps. Failure/contradiction
-stops this cause; no second Expert or renewal. Current package one failed correction,
-sole Expert15 answer, follow-up preparation in progress, Unix100 consumed.
-Next: collect responsible correction, same combined affected review, then one
-bounded native101 original8 invocations if READY and machine capacity permits.
+Native101 launch15:17:27Z/rootexec68253 ENDED0; helper work/export49.59s,
+1s sampledmaxRSS958624KiB/storage967812KiB/desc7, not continuous peaks. Limits
+600s outer/585s runner/540s helper including30s exportreserve, jobs2/desc16,
+storage preempt1572864KiB, RSS/storage hard2097152KiB,20s fixturewatchdogs unchanged.
+Fresh heavy inventory before launch empty, private runtimes empty,101paths absent;
+not a reservation. All97–101 own stages/runtime/scopes cleaned after exact original
+custody/export checks, no retained builds. Cost/token usage unknown. Planning
+estimate increments preserved original consumption; no explicit hard cap raised.
 
 ### Accepted current Linux non-process package
 
@@ -1634,52 +1548,3 @@ Unix95consumed/96unallocated. These are independent preparation findings, not
 native failed implementation/infrastructure outcomes. Next corrected freeze ->
 same affected recheck -> fresh slot and stage validation -> bounded native96.
 
-Native101 sole Expert15 follow-up ALLOCATED after same combined source/recipe
-review EXECUTION READY/COLLECTION READY61f7bc66/5f78341a. Testdd4ceb43/archivea3a1fee7,
-proof4a80d60a/staged27764e8/launch14358b1c/collector8fe51b04 frozen fullhashes inwriter
-prepare note. Fresh Workhorse15:14:41Z exact heavyexec inventory[], private runtimes[],
-101paths absent, MemAvailable82876864kB; not reservation. Preserve cumulative100
-and failedcorrection1; one pending101 launch is solefollowup, same600/585/540s,
-jobs2/desc16/preempt1572864KiB/hard2097152KiB,20s fixturewatchdog. All8 original
-exacttests/4feature rows/2controls/2affected regressions and3setup unchanged.
-Stage and launch own exact101 only; acceptance pending, stop cause on failed
-follow-up/contradiction, no renewed chain.
-
-Native101 CONSUMED15:17:27Z/rootexec68253 runtimeagent-build-w5nw4857;
-all stagedinputs hashesOK. Running sole Expert15 boundedfollowup; cumulativeUnix101/
-killpackage5launches, samecause failure1 retained, no additionalallocation.
-
-Native101 ENDED0: all8exact statuses expected (6GREEN0/2namedcontrols101),
-3setup0, helper49.59s, sampledRSS958624KiB/storage967812KiB/desc7. Strictreaper
-status0 and savedproducer/PIDFDcomparisontrue observed; affectedprompt/heldpassed.
-Collector original74files6dirs8caseclosures verified/exported,145helper/launcher
-PID/startrowsabsent plusoriginalfixtureclosuresvalidated. Exactown74files6dirs
-removedafterfreshhashreadback; stage/scope/runtimeabsent, groups807009/807082empty.
-No retainedbuild. Originalsource restored/errornull. One optional launcher
-/proc807079/stat disappearance diagnostic, exactterminalcustodyall0; reviewer
-assessing. Samecombined finalacceptancepending, no ticketclosureyet. Expert15
-solefollowupconsumed; no additional101allocation orhistoryreset. Next: reviewer
-terminalacceptance, integrateownedwriter5f78341a and proof toforkmain then return
-toticket03 remainingcriteria.
-
-Same combined terminal review ACCEPTED native101 narrowpublic Child.killpackage:
-6GREEN/2meaningfulRED, strictreaper0/exactproducerstartbinding, originalrestoration,
-allimmutablehashes andexactcleanupverified. /proc exitracewarning doesnotinvalidate
-custody. Expert15 solefollowupPASSED; stablecauseclosedwithoutbudgetrenewal.
-Proof linux-managed-kill-proof.md andsame linux-managed-kill-review.md/original101.
-Remainingoverallprocess/platform/releasecriteriaOPEN. ResponsibleStandardnow
-read-onlyselectingonenextindependentmanagedcriterion, noimplementationallocation.
-
-Integration408781f5 independently readback soleforkmain; lowercasehumanauthor/
-committerverified, integratednon-scratchdiffvswriter5f783empty/testdd4hashmatches.
-Accepted101 evidence persistedoutsidewriter inrootcommittedd75f7fc7. Same owned
-protectedwriter reusedfor relatedfinal-client-lease drop (no retirement while
-active). Standardread-onlydiagnosis points existing tests/sys_process.rs2859–2917
-and ClientLease::drop unix.rs199–208: currentnumericPIDabsence lacksstrictidentity
-and independentlyownedreaper/groupboundary. Next coherentcriterion: nonfinal
-Rhai-clientdrop leaves exactmanageddescendantslive; finalkill_on_drop leasealone
-closes/reapsgroup, sentinel/host/reaperaliveatreturn thenexactcleanup. Native101
-killsemantics donotprovelease-drop. Source-onlyTDD contractimplementationdispatched
-to sameStandard,30min planningcheckpoint; no102 stage/build/nativeallocation.
-Preserveaccepted101 logic/proof; sharedguardchanges requireaffectedchecks.
-AllstoppedMac/Windowschains and consumedbudgetsretained.
