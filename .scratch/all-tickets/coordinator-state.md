@@ -85,7 +85,7 @@ Instructions/roles faba3db3bef6891ad2c0b20d434963bb8fe9572d loaded by root,
 responsible Standard and same combined reviewer. Workhorse installed rules resolved
 at /var/home/workhorse/.agents/AGENTS.md and /var/home/workhorse/projects/agent-skills;
 SSH root has no ~/.agents. Read-only resolution/command-local safe.directory only.
-Last verified fork maina7421a7a16a3d5ca3f71711ade76afc5f9b600ee; sole remote main,
+Last verified fork maind09748e5; sole remote main,
 lowercase human author/committer. Current goal turn PROGRESS: final managed lease
 drop102 accepted and integrated with original evidence. Overall scope incomplete.
 
@@ -198,6 +198,22 @@ Finaldrop102 remains ACCEPTED and integrated4df297d8; source61b3739/proof7173a89
 all original evidence and closed scope preserved. Finaldrop source correctioncount1
 resolved. Stopped Darwin/Mac/Windows chains remain stopped. Tickets03/06 OPEN;
 overall acceptance incomplete. No additional routine approval required.
+
+### Next independent criterion after deadline acceptance
+
+Read-only same Standard diagnosis: managed public run OutputLimit group closure
+is the next narrow real-OS requirement. Direct-scope existing n+1 prefix test does
+not establish descendant closure. Reuse exact deadline reaper/host/sentinel/PIDFD
+protocol, add bounded overflow leader after outer ACK with still-live worker/leaf,
+require typedOutputLimit/capped prefix/honest incomplete capture and exact closure
+before wrong-outcome post-cleanup control. Anchors tests/sys_process.rs managed
+host/deadline around1733/2285; production unix.rs read_ready2728/2773 -> fail2925
+already terminates managed child. No production defect assumed. Escaped retained
+pipe under run deadline/overflow and post-spawn real managed setup failure remain
+separate OPEN criteria; explicit Child.kill/injected unit proofs do not close them.
+No source/code/docs edits or launches from diagnosis. Next actual action: fresh
+workhorse heavy-slot inventory; when free launch staged104 once under unchanged
+bounds, export originals/independent custody/cleanup and same combined acceptance.
 
 ### Accepted current Linux managed subsets
 
