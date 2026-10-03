@@ -55,7 +55,7 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
   34 emitted PIDs/10 groups and exact runtime absent, three manifests matching.
   Cargo53.432s, sampled276896KiB; no continuous peak claim.
 - Remote branch cleanup CLOSED. Latest independent ls-remote readback shows ONLY
-  main at6199fcabc755355929ced07e9b6d306a33dded2e (reviewed Linux package integration readback). Nine remote task refs removed
+  main at0369048be7776fc9a34b8f79a874120ebe73220c (latest independent fork readback). Nine remote task refs removed
   in the final consolidation, one earlier; every exact tip was ancestor of pushed
   main before deletion. Histories preserved. Local active/foreign/dirty worktrees
   remain; remote cleanup does not authorize discarding them.
@@ -80,6 +80,42 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
   sys/net, changed platform/MSRV and final current-native release coverage open.
 
 ## Current step and next action
+
+Global/project instructions at faba3db remain loaded. Full goal active/incomplete.
+Authoritative remote readback: only fork main at
+0369048be7776fc9a34b8f79a874120ebe73220c. No upstream write or remote task branch.
+Accepted native109 proof and source523 remain unchanged; no retained native
+runtime/stage, no currently running native build, all finite exceptions expired.
+Unix109 consumed; stdin native110 remains unallocated.
+
+Current owner stdin_closure_test (Standard) is confirmed live. Same-owner
+consolidated correction addresses the affected 4ac NOT READY source review:
+Option conversion compile blockers, guarded exceptional cleanup, and original
+host/sentinel/report custody binding. Public spawn API seam and pre-close intent
+are correct per Expert16; separate run_raw positive uses write process stdin.
+One failed source check is recorded for the newly diagnosed extraction/guard/
+receipt causes. No native failure or infrastructure launch occurred. Preserve
+all earlier causes and exhausted chains; no renamed or renewed hard limits.
+
+At the actual 30-minute active-work planning checkpoint, the owner reports
+concrete progress: three Option::ok calls removed; checked report decoding;
+catch_unwind cleanup boundary with bounded public kill/wait and exact identity/
+group/sentinel readback; receipt expanded with full identity and fd0 evidence.
+Remaining before immutable freeze: healthy explicit-cleanup report assertions
+and equality of retained GREEN reports through cleanup/cloned repeats. Continue
+on that specific insight within existing safe source-only scope, not a new
+allocation or budget reset. No Cargo, staging, SSH build or production edits.
+
+After freeze: independently confirm exact source/archive and attribution, then
+same combined Expert affected recheck. Only SOURCE READY permits consuming
+recipe correction/freeze/review, fresh workhorse slot check, and meaningful
+native baseline RED. Human explicitly permits messaging Tauron for a build
+window if fresh contention requires it. Existing source/recipe drafts and
+historical original evidence remain preserved. No routine approval is missing.
+Previous goal turn VERIFIED WAIT: live owner polled and confirmed running;
+fork progress/review commit push and independent sole-main readback succeeded.
+
+### Superseded prior current-step history (retained, not readiness)
 
 Current instructions faba3db loaded by root/Expert/Standard. Full goal remains
 active and incomplete. Last pushed sole fork main1ae2521af41a0003f3648c9561c3f657d440ece9;
