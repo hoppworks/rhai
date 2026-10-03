@@ -49,7 +49,7 @@ fn scenario_entry() {
         match wait_for_recorded_fixture_reap(&root, Duration::from_secs(4)) {
             Some(pid) => {
                 eprintln!("shared-child controller-panic-cleanup scenario={scenario} payload={panic_payload:?} fixture_pid={pid} reap=ESRCH verified=true");
-                let receipt = closure_receipt(&root, scenario, std::process::id() as i32, pid);
+                let receipt = closure_receipt(&root, &scenario, std::process::id() as i32, pid);
                 let _ = std::fs::write(root.join("controller-production-reap-receipt"), receipt);
             }
             None => eprintln!(
