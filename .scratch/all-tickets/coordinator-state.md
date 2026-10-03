@@ -83,37 +83,42 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 
 Global/project instructions at faba3db remain loaded. Full goal active/incomplete.
 Authoritative remote readback: only fork main at
-0369048be7776fc9a34b8f79a874120ebe73220c. No upstream write or remote task branch.
+fece14158c61c346af0411d3a295c6d10d6b2e49. No upstream write or remote task branch.
 Accepted native109 proof and source523 remain unchanged; no retained native
 runtime/stage, no currently running native build, all finite exceptions expired.
 Unix109 consumed; stdin native110 remains unallocated.
 
-Current owner stdin_closure_test (Standard) is confirmed live. Same-owner
-consolidated correction addresses the affected 4ac NOT READY source review:
-Option conversion compile blockers, guarded exceptional cleanup, and original
-host/sentinel/report custody binding. Public spawn API seam and pre-close intent
-are correct per Expert16; separate run_raw positive uses write process stdin.
-One failed source check is recorded for the newly diagnosed extraction/guard/
-receipt causes. No native failure or infrastructure launch occurred. Preserve
-all earlier causes and exhausted chains; no renamed or renewed hard limits.
+Same Standard source repair is now frozen at
+2c0857ef17f496a17b2a7c8c6709887805adec37, tests/sys_process.rs only, production
+unchanged. Root independently confirmed author and committer both
+hoppworks <daniel@hoppworks.de>, test SHA256
+8cfa8950d7147dfe551a3d7e0cddaafb887a0c1f2048d307887e855540975873,
+and accepted archive-build-source.py archive SHA256
+18cb9eb2617a42a0bd8a5f32cd6af60a6ca23de482b1351bd9b38be74c92872e
+(6440960 bytes). Source syntax/diff checks passed, compile/native unclaimed.
+Same Expert escaped_recipe_review completed affected source recheck NOT READY:
+actual successful map schema contradicts its earlier assumption, and fallback
+cleanup conflates observation errors with absence. Fresh non-fork Expert17
+stdin_fixture_contract_expert now diagnoses these same extraction/guard/receipt
+causes before any further source repair. Public spawn API seam/preclose choreography remains Expert16.
+No SOURCE READY claim before recheck. Standard completed this source batch and
+preserves two interrupted recipe drafts and historical untracked note.
 
-At the actual 30-minute active-work planning checkpoint, the owner reports
-concrete progress: three Option::ok calls removed; checked report decoding;
-catch_unwind cleanup boundary with bounded public kill/wait and exact identity/
-group/sentinel readback; receipt expanded with full identity and fd0 evidence.
-Remaining before immutable freeze: healthy explicit-cleanup report assertions
-and equality of retained GREEN reports through cleanup/cloned repeats. Continue
-on that specific insight within existing safe source-only scope, not a new
-allocation or budget reset. No Cargo, staging, SSH build or production edits.
+Two failed source checks (4ac,2c) are recorded for these extraction/guard/receipt
+causes; Expert17 is their first escalation, with one bounded follow-up remaining. No native
+failure or infrastructure launch occurred. Earlier cause and exhausted-chain
+history unchanged; planning checkpoint extension was based on concrete source
+progress, not a hard-limit renewal. No Cargo/staging/SSH build/product edit.
 
-After freeze: independently confirm exact source/archive and attribution, then
-same combined Expert affected recheck. Only SOURCE READY permits consuming
-recipe correction/freeze/review, fresh workhorse slot check, and meaningful
-native baseline RED. Human explicitly permits messaging Tauron for a build
-window if fresh contention requires it. Existing source/recipe drafts and
-historical original evidence remain preserved. No routine approval is missing.
-Previous goal turn VERIFIED WAIT: live owner polled and confirmed running;
-fork progress/review commit push and independent sole-main readback succeeded.
+Next: Expert17 diagnosis, one same-Standard source follow-up and affected recheck;
+only after SOURCE READY resume consuming recipe repair, preserve prior c39 failure
+history and satisfy all four original export/classification/custody findings.
+Then recipe review, fresh workhorse slot check and meaningful native RED before
+production correction. Human permits Tauron build-window coordination if fresh
+contention requires it. No routine approval is missing. Previous goal turn
+PROGRESS: actual correction checkpoint and authoritative state rewrite/push;
+current turn PROGRESS: immutable source freeze/pins verified and affected review
+running. Full native platform/feature/MSRV/release scope remains open.
 
 ### Superseded prior current-step history (retained, not readiness)
 
@@ -2026,3 +2031,13 @@ Recheckaffectedsource afterfreeze; preserve interruptedrecipes/c39/4ac. Pending
 originalcollectionrecipe remainsblockedon sourceREADINESS, not missingpermission.
 Sourcearchivepins use acceptedarchive-build-source.py; plain gitarchivehash
 reported by Standard differs and mustnot replace accepted consumingpin.
+
+Affected2c source recheck NOT READY: actual Child snapshot success schema is
+String stdout/stderr, code/signal, no cleanup_diagnostics; inherited reviewer
+schema expectation was wrong and corrected in report. Guard fallback also
+conflates observation errors with absence. Conversion/guard scaffolding/full
+normal receipts valid narrowly. Failed extraction/guard/receipt source
+corrections2 (4ac,2c); native/infrastructurelaunches0,110unallocated. Fresh
+nonfork Expert17 brief prepared for first escalation of these causes; prior
+Expert16 API seam remains valid and not renewed. Next actual source diagnosis
+before one bounded sameowner followup. No production/native/stage action.
