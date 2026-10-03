@@ -207,3 +207,21 @@ invocations 91/92 and their causes remain preserved without product acceptance.
 This partially closes the Linux process feature requirements only. Managed
 groups, remaining fault/lifecycle criteria, performance, other native platforms
 and final release acceptance remain open.
+
+## Current Linux MSRV held-zombie boundary — 2026-10-03
+
+Native invocation 95 at frozen `257edf69`, private Rust/Cargo 1.77.2 and
+`testing-environ,sys` passes the exact held-zombie integration test after two
+meaningful wrong-expectation controls fail at their intended assertions. Real
+Engine/OS observations bind live host, reaped direct leader, exact held worker/
+leaf zombies, typed closure TimedOut, direct exit 0, complete captures and final
+fixture reaping. Source restoration, original receipts and independent combined
+acceptance are recorded in `../../all-tickets/linux-managed-zombie-proof.md`.
+Fresh readback confirms 99 exact PID/start identities absent, four groups empty,
+and all owned stage/runtime/scope resources removed. Invocation 94 remains an
+infrastructure output-parser failure; its originals and consumption are retained.
+
+This closes only the current Linux MSRV held-zombie criterion. Ordinary managed
+success, remaining managed/fault/lifecycle paths, other feature/native-platform
+rows, performance and final release acceptance remain open. Prior valid proof
+and stopped cause/budget histories retain their recorded applicability.

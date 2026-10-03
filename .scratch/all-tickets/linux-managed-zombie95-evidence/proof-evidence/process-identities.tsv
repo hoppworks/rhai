@@ -1,0 +1,83 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+helper	782400	782399	782399	1894360	python3 /root/rhai-linux-managed-zombie-20261003-257edf69-95/linux-managed-zombie-proof.py
+scoped-supervisor	782399	782396	782399	1894358	/usr/bin/python3 /var/roothome/rhai-linux-managed-zombie-20261003-257edf69-95/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-managed-zombie-20261003-257edf69-95/linux-managed-zombie-proof.py
+command:rustup-install	782406	782400	782399	1894408	/root/.cargo/bin/rustup toolchain install 1.77.2-x86_64-unknown-linux-gnu --profile minimal --no-self-update
+command:du	782407	782400	782399	1894408	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	782425	782400	782399	1894409	/bin/ps -e -o pid=,ppid=,rss=
+command:du	782437	782400	782399	1894510	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	782446	782400	782399	1894510	/bin/ps -e -o pid=,ppid=,rss=
+command:du	782458	782400	782399	1894611	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	782459	782400	782399	1894612	/bin/ps -e -o pid=,ppid=,rss=
+command:du	782478	782400	782399	1894713	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	782479	782400	782399	1894713	/bin/ps -e -o pid=,ppid=,rss=
+command:du	782491	782400	782399	1894814	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	782492	782400	782399	1894815	/bin/ps -e -o pid=,ppid=,rss=
+command:du	782503	782400	782399	1894916	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	782504	782400	782399	1894916	/bin/ps -e -o pid=,ppid=,rss=
+command:du	782524	782400	782399	1895017	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	782525	782400	782399	1895017	/bin/ps -e -o pid=,ppid=,rss=
+command:du	782536	782400	782399	1895118	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	782537	782400	782399	1895119	/bin/ps -e -o pid=,ppid=,rss=
+command:du	782543	782400	782399	1895150	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	782544	782400	782399	1895150	/bin/ps -e -o pid=,ppid=,rss=
+command:rustc-version	782545	782400	782399	1895151	/root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose
+command:du	782546	782400	782399	1895151	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	782547	782400	782399	1895152	/bin/ps -e -o pid=,ppid=,rss=
+command:du	782549	782400	782399	1895162	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	782551	782400	782399	1895163	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-version	782552	782400	782399	1895164	/root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose
+command:du	782553	782400	782399	1895164	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	782565	782400	782399	1895164	/bin/ps -e -o pid=,ppid=,rss=
+command:du	782567	782400	782399	1895175	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	782568	782400	782399	1895175	/bin/ps -e -o pid=,ppid=,rss=
+command:require-success-while-held	782569	782400	782399	1895176	/root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process managed_run_reports_while_fixture_reaper_holds_stopped_zombies -- --exact --nocapture --test-threads=1
+command:du	782570	782400	782399	1895176	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	782572	782400	782399	1895176	/bin/ps -e -o pid=,ppid=,rss=
+command:du	782586	782400	782399	1895277	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	782587	782400	782399	1895278	/bin/ps -e -o pid=,ppid=,rss=
+command:du	782598	782400	782399	1895379	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	782599	782400	782399	1895379	/bin/ps -e -o pid=,ppid=,rss=
+command:du	782615	782400	782399	1895480	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	782616	782400	782399	1895480	/bin/ps -e -o pid=,ppid=,rss=
+command:du	782628	782400	782399	1895581	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	782629	782400	782399	1895582	/bin/ps -e -o pid=,ppid=,rss=
+command:du	782827	782400	782399	1895683	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	782828	782400	782399	1895684	/bin/ps -e -o pid=,ppid=,rss=
+command:du	783029	782400	782399	1895785	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	783034	782400	782399	1895786	/bin/ps -e -o pid=,ppid=,rss=
+command:du	783239	782400	782399	1895887	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	783241	782400	782399	1895888	/bin/ps -e -o pid=,ppid=,rss=
+command:du	783270	782400	782399	1895989	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	783271	782400	782399	1895990	/bin/ps -e -o pid=,ppid=,rss=
+command:du	783377	782400	782399	1896091	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	783380	782400	782399	1896092	/bin/ps -e -o pid=,ppid=,rss=
+command:du	783480	782400	782399	1896193	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	783482	782400	782399	1896195	/bin/ps -e -o pid=,ppid=,rss=
+command:du	783499	782400	782399	1896295	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	783500	782400	782399	1896297	/bin/ps -e -o pid=,ppid=,rss=
+command:du	783511	782400	782399	1896398	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	783512	782400	782399	1896399	/bin/ps -e -o pid=,ppid=,rss=
+command:du	783532	782400	782399	1896500	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	783534	782400	782399	1896501	/bin/ps -e -o pid=,ppid=,rss=
+command:du	783567	782400	782399	1896602	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	783569	782400	782399	1896603	/bin/ps -e -o pid=,ppid=,rss=
+command:du	783615	782400	782399	1896704	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	783616	782400	782399	1896705	/bin/ps -e -o pid=,ppid=,rss=
+command:du	783626	782400	782399	1896796	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	783627	782400	782399	1896797	/bin/ps -e -o pid=,ppid=,rss=
+command:require-exit-seven	783629	782400	782399	1896799	/root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process managed_run_reports_while_fixture_reaper_holds_stopped_zombies -- --exact --nocapture --test-threads=1
+command:du	783630	782400	782399	1896799	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	783635	782400	782399	1896800	/bin/ps -e -o pid=,ppid=,rss=
+command:du	783685	782400	782399	1896901	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	783686	782400	782399	1896902	/bin/ps -e -o pid=,ppid=,rss=
+command:du	783697	782400	782399	1897003	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	783698	782400	782399	1897004	/bin/ps -e -o pid=,ppid=,rss=
+command:du	783700	782400	782399	1897015	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	783702	782400	782399	1897016	/bin/ps -e -o pid=,ppid=,rss=
+command:managed-zombie-green	783704	782400	782399	1897017	/root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process managed_run_reports_while_fixture_reaper_holds_stopped_zombies -- --exact --nocapture --test-threads=1
+command:du	783705	782400	782399	1897017	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	783710	782400	782399	1897018	/bin/ps -e -o pid=,ppid=,rss=
+command:du	783760	782400	782399	1897119	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	783761	782400	782399	1897120	/bin/ps -e -o pid=,ppid=,rss=
+command:du	783771	782400	782399	1897211	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95/agent-build-lk5byw7d
+command:ps	783772	782400	782399	1897212	/bin/ps -e -o pid=,ppid=,rss=

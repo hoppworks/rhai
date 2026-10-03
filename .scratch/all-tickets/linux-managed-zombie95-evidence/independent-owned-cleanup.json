@@ -1,0 +1,1 @@
+{"stage_absent": true, "scope_absent": true, "exact_pid_start_identities_absent": 99, "exact_groups_empty": [783752, 783677, 783605, 782399], "removed_stage_files": 52, "removed_stage_directories": 5, "cleanup_method": "hash-gated collector cleanup then independent absence readback"}

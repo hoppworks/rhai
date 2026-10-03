@@ -1,0 +1,872 @@
+{
+  "directories": [
+    "outer-evidence",
+    "proof-evidence",
+    "runner",
+    "runner/tools",
+    "runner/tools/agentskills"
+  ],
+  "files": {
+    "Cargo.lock.accepted": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+    "check-linux-current-msrv-examples.py": "59ac8b7b9c71ab2331c13196b36d8d2794931e07138741c43d4a8c3d1d754b06",
+    "contract-source.md": "f8c7520d931144f8e72e90b782455b1e6c32d4c3eb47c392ea7a74f8d3168ec7",
+    "contract.md": "a08db50b0e6a9fadc8e106c68f7ad5b1ca4d2f46563bff45faa49594286311e0",
+    "input-identities.sha256": "06ee0197b3a48d3abfbea48495a0fe9e895b8ca7f9b80a2c5d9ef926cf11cc1c",
+    "launch.sh": "687ac9ca540de8349547a580e1b3fb38237a272d00f7a9505cbfb59acc3f1eab",
+    "linux-managed-zombie-proof.py": "bc2650660bb1c3a576a6f33507f87b8254c74a9e17f7053e7e1f754238eb417d",
+    "outer-evidence/launcher-identities.tsv": "59a7f6656a4742d4b42ef175ff2943ea6907b09a60039497b8f7e1ef51465f02",
+    "outer-evidence/outer-status.txt": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "outer-evidence/outer.log": "941bd752905ed54c898f617b627713e0a2a917c5338568c591476384777b8114",
+    "outer-evidence/pid-readback-launcher.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "outer-evidence/pid-readback.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "outer-evidence/pid-readback.tsv": "3f2b1344814b1308bd4aecdcc12c362c102d456e32c8e0c702d2cbbaf41e3d1c",
+    "outer-evidence/run-scoped.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "outer-evidence/runtime-cleanup.tsv": "fc02aa516fb99c07110b1c29350fc4e7fd5ef6b1e6c5c0bea672b1fa1f7e71f5",
+    "outer-evidence/scope-cleanup.tsv": "ab1bedcba11ef0deb303da736790204cdcbd4de8a4abc782d87d6c28fd5fb1e0",
+    "proof-evidence/cargo-version.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "proof-evidence/cargo-version.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "proof-evidence/cargo-version.stdout": "bd859f92e30f43b3d238342da4f9a98eaecf6fb4d9dcf317c4e27346f28b4a69",
+    "proof-evidence/commands.json": "10a74003142badad204280bf7b7f2357ccf5090c7039d7ef893d021ece152d47",
+    "proof-evidence/control-results.json": "0f1821d685a762b3acd223e98646cf1af43f81573b16ec54de67455f02dd6c03",
+    "proof-evidence/early-runtime-identity.json": "ee3b74f6e61aebcd75537f8050843707ae35f06b3a6eb67b37a691662c4b12f1",
+    "proof-evidence/export.json": "a96d9141641a650c33a5abaacf8964bcef0b1c21342b2897505e3a3b505e7ca7",
+    "proof-evidence/green-fixture-closure.json": "f63d79d9fa88da4bd35166f8db2f96027eab90004c9b376667ec921def4accff",
+    "proof-evidence/managed-zombie-green.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "proof-evidence/managed-zombie-green.stderr": "e5ae664ca3b52e50f4482db3d2f7a644d15c373d7e759324f79f8365e8e0ce5a",
+    "proof-evidence/managed-zombie-green.stdout": "93da66a10247ef3b652fe93417174bb0d046ab8f3f0e679c302c730858cd110e",
+    "proof-evidence/package-result.json": "063e6a31ff1507070d656a418402340411a00eeaa0340eaae86668c7ef5806a4",
+    "proof-evidence/process-identities.tsv": "db0fe0c37c21c8c0078670f30ad6b2f1bafd35d060a3c6abe54b3c95b59ffbb4",
+    "proof-evidence/require-exit-seven-fixture-closure.json": "d416049c0afcbc792e8f837f7a9904c9fd522b0ec99ae8a3c23e16077d3e3081",
+    "proof-evidence/require-exit-seven.status": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c",
+    "proof-evidence/require-exit-seven.stderr": "4790dc39439ed4b4521553498e203ce25fa30491cc2fb02441804d8173caee4a",
+    "proof-evidence/require-exit-seven.stdout": "75b4e83cea2bb85ef9012a31d7547bd9f583cb9bbeca4fc56496a3c79b1fd94b",
+    "proof-evidence/require-success-while-held-fixture-closure.json": "7e1324ebdd0e32c087611ff575228ba033462e19f2080f44c5d60975617f2c2b",
+    "proof-evidence/require-success-while-held.status": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c",
+    "proof-evidence/require-success-while-held.stderr": "8d4fef0f8188e5f16d9943d40fbe274f44b051e32a651ef724717d126c5722ae",
+    "proof-evidence/require-success-while-held.stdout": "75b4e83cea2bb85ef9012a31d7547bd9f583cb9bbeca4fc56496a3c79b1fd94b",
+    "proof-evidence/rustc-version.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "proof-evidence/rustc-version.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "proof-evidence/rustc-version.stdout": "f4679d0dda28ffcd994b39583743b88e06b6fe4a89fd7359aa1d147e5e660f11",
+    "proof-evidence/rustup-install.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "proof-evidence/rustup-install.stderr": "2c2b1d035c5a27642a26ef93759dec9c7aa6d70b8326994af1f1273f88328f17",
+    "proof-evidence/rustup-install.stdout": "161155bc054a3dcbfa30ec0fd091dd1fbb639b63d3aea56da09bff04e6762c4c",
+    "proof-evidence/source-inputs.json": "5c4d20ad4f8763120cbe6e94b80893b12a62de484253f5e349b2354c9e46b192",
+    "proof-evidence/source-lock-manifests.json": "d8df3809e20ec5cb41cb96f5394321e53b7b4167eab0dcfd19462492cbdb3460",
+    "proof-evidence/source-restoration.json": "5b1df04a3afbc45ec0fe270fec4ace33e5c8fdac6967ffce6c853699fe81a666",
+    "runner/tools/agentskills/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runner/tools/agentskills/pyguard.py": "a3739f4947744303e1adf3fb0875ac743944a272e5b95c94b1baba53029d313f",
+    "runner/tools/run_scoped.py": "9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d",
+    "source.sha256": "30730ba16d0fb1b26946d8cf0969613ec84a1e9896d50be628b083c6439150e4",
+    "source.tar": "ea085b4d28ee5ce3c7b998044242a50c755d9e9252638dbcf28c036b3df7c922",
+    "stage.sh": "33125b53871f658df8943b41fd8ddbdbf9ef9888f0221a7b292746ba11496805"
+  },
+  "fixture_group": 783752,
+  "fixture_group_members_after_cleanup": [],
+  "fixture_pid_start_identities": [
+    {
+      "label": "leader",
+      "matching_identity_alive": false,
+      "pid": 783752,
+      "start_ticks": 1897098
+    },
+    {
+      "label": "worker",
+      "matching_identity_alive": false,
+      "pid": 783754,
+      "start_ticks": 1897098
+    },
+    {
+      "label": "leaf",
+      "matching_identity_alive": false,
+      "pid": 783756,
+      "start_ticks": 1897098
+    },
+    {
+      "label": "host",
+      "matching_identity_alive": false,
+      "pid": 783749,
+      "start_ticks": 1897098
+    },
+    {
+      "label": "fixture-reaper",
+      "matching_identity_alive": false,
+      "pid": 783747,
+      "start_ticks": 1897097
+    }
+  ],
+  "launcher_process_identities": [
+    {
+      "label": "launcher",
+      "matching_process_alive": false,
+      "pgid": 782329,
+      "pid": 782329,
+      "ppid": 782328,
+      "start_ticks": "1894349"
+    },
+    {
+      "label": "run-scoped",
+      "matching_process_alive": false,
+      "pgid": 782329,
+      "pid": 782396,
+      "ppid": 782329,
+      "start_ticks": "1894356"
+    }
+  ],
+  "managed_pidfd_acquired": {
+    "783752": {
+      "pgid": 783752,
+      "ppid": 783749,
+      "start_ticks": 1897098
+    },
+    "783754": {
+      "pgid": 783752,
+      "ppid": 783752,
+      "start_ticks": 1897098
+    },
+    "783756": {
+      "pgid": 783752,
+      "ppid": 783754,
+      "start_ticks": 1897098
+    }
+  },
+  "owned_process_groups": [
+    782399
+  ],
+  "owned_process_identities": [
+    {
+      "label": "helper",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782400,
+      "ppid": 782399,
+      "start_ticks": "1894360"
+    },
+    {
+      "label": "scoped-supervisor",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782399,
+      "ppid": 782396,
+      "start_ticks": "1894358"
+    },
+    {
+      "label": "command:rustup-install",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782406,
+      "ppid": 782400,
+      "start_ticks": "1894408"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782407,
+      "ppid": 782400,
+      "start_ticks": "1894408"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782425,
+      "ppid": 782400,
+      "start_ticks": "1894409"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782437,
+      "ppid": 782400,
+      "start_ticks": "1894510"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782446,
+      "ppid": 782400,
+      "start_ticks": "1894510"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782458,
+      "ppid": 782400,
+      "start_ticks": "1894611"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782459,
+      "ppid": 782400,
+      "start_ticks": "1894612"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782478,
+      "ppid": 782400,
+      "start_ticks": "1894713"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782479,
+      "ppid": 782400,
+      "start_ticks": "1894713"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782491,
+      "ppid": 782400,
+      "start_ticks": "1894814"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782492,
+      "ppid": 782400,
+      "start_ticks": "1894815"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782503,
+      "ppid": 782400,
+      "start_ticks": "1894916"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782504,
+      "ppid": 782400,
+      "start_ticks": "1894916"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782524,
+      "ppid": 782400,
+      "start_ticks": "1895017"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782525,
+      "ppid": 782400,
+      "start_ticks": "1895017"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782536,
+      "ppid": 782400,
+      "start_ticks": "1895118"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782537,
+      "ppid": 782400,
+      "start_ticks": "1895119"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782543,
+      "ppid": 782400,
+      "start_ticks": "1895150"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782544,
+      "ppid": 782400,
+      "start_ticks": "1895150"
+    },
+    {
+      "label": "command:rustc-version",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782545,
+      "ppid": 782400,
+      "start_ticks": "1895151"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782546,
+      "ppid": 782400,
+      "start_ticks": "1895151"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782547,
+      "ppid": 782400,
+      "start_ticks": "1895152"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782549,
+      "ppid": 782400,
+      "start_ticks": "1895162"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782551,
+      "ppid": 782400,
+      "start_ticks": "1895163"
+    },
+    {
+      "label": "command:cargo-version",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782552,
+      "ppid": 782400,
+      "start_ticks": "1895164"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782553,
+      "ppid": 782400,
+      "start_ticks": "1895164"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782565,
+      "ppid": 782400,
+      "start_ticks": "1895164"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782567,
+      "ppid": 782400,
+      "start_ticks": "1895175"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782568,
+      "ppid": 782400,
+      "start_ticks": "1895175"
+    },
+    {
+      "label": "command:require-success-while-held",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782569,
+      "ppid": 782400,
+      "start_ticks": "1895176"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782570,
+      "ppid": 782400,
+      "start_ticks": "1895176"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782572,
+      "ppid": 782400,
+      "start_ticks": "1895176"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782586,
+      "ppid": 782400,
+      "start_ticks": "1895277"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782587,
+      "ppid": 782400,
+      "start_ticks": "1895278"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782598,
+      "ppid": 782400,
+      "start_ticks": "1895379"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782599,
+      "ppid": 782400,
+      "start_ticks": "1895379"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782615,
+      "ppid": 782400,
+      "start_ticks": "1895480"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782616,
+      "ppid": 782400,
+      "start_ticks": "1895480"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782628,
+      "ppid": 782400,
+      "start_ticks": "1895581"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782629,
+      "ppid": 782400,
+      "start_ticks": "1895582"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782827,
+      "ppid": 782400,
+      "start_ticks": "1895683"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 782828,
+      "ppid": 782400,
+      "start_ticks": "1895684"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783029,
+      "ppid": 782400,
+      "start_ticks": "1895785"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783034,
+      "ppid": 782400,
+      "start_ticks": "1895786"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783239,
+      "ppid": 782400,
+      "start_ticks": "1895887"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783241,
+      "ppid": 782400,
+      "start_ticks": "1895888"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783270,
+      "ppid": 782400,
+      "start_ticks": "1895989"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783271,
+      "ppid": 782400,
+      "start_ticks": "1895990"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783377,
+      "ppid": 782400,
+      "start_ticks": "1896091"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783380,
+      "ppid": 782400,
+      "start_ticks": "1896092"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783480,
+      "ppid": 782400,
+      "start_ticks": "1896193"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783482,
+      "ppid": 782400,
+      "start_ticks": "1896195"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783499,
+      "ppid": 782400,
+      "start_ticks": "1896295"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783500,
+      "ppid": 782400,
+      "start_ticks": "1896297"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783511,
+      "ppid": 782400,
+      "start_ticks": "1896398"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783512,
+      "ppid": 782400,
+      "start_ticks": "1896399"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783532,
+      "ppid": 782400,
+      "start_ticks": "1896500"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783534,
+      "ppid": 782400,
+      "start_ticks": "1896501"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783567,
+      "ppid": 782400,
+      "start_ticks": "1896602"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783569,
+      "ppid": 782400,
+      "start_ticks": "1896603"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783615,
+      "ppid": 782400,
+      "start_ticks": "1896704"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783616,
+      "ppid": 782400,
+      "start_ticks": "1896705"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783626,
+      "ppid": 782400,
+      "start_ticks": "1896796"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783627,
+      "ppid": 782400,
+      "start_ticks": "1896797"
+    },
+    {
+      "label": "command:require-exit-seven",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783629,
+      "ppid": 782400,
+      "start_ticks": "1896799"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783630,
+      "ppid": 782400,
+      "start_ticks": "1896799"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783635,
+      "ppid": 782400,
+      "start_ticks": "1896800"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783685,
+      "ppid": 782400,
+      "start_ticks": "1896901"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783686,
+      "ppid": 782400,
+      "start_ticks": "1896902"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783697,
+      "ppid": 782400,
+      "start_ticks": "1897003"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783698,
+      "ppid": 782400,
+      "start_ticks": "1897004"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783700,
+      "ppid": 782400,
+      "start_ticks": "1897015"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783702,
+      "ppid": 782400,
+      "start_ticks": "1897016"
+    },
+    {
+      "label": "command:managed-zombie-green",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783704,
+      "ppid": 782400,
+      "start_ticks": "1897017"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783705,
+      "ppid": 782400,
+      "start_ticks": "1897017"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783710,
+      "ppid": 782400,
+      "start_ticks": "1897018"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783760,
+      "ppid": 782400,
+      "start_ticks": "1897119"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783761,
+      "ppid": 782400,
+      "start_ticks": "1897120"
+    },
+    {
+      "label": "command:du",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783771,
+      "ppid": 782400,
+      "start_ticks": "1897211"
+    },
+    {
+      "label": "command:ps",
+      "matching_process_alive": false,
+      "pgid": 782399,
+      "pid": 783772,
+      "ppid": 782400,
+      "start_ticks": "1897212"
+    }
+  ],
+  "scope": "/root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-95",
+  "selected_files": {
+    "Cargo.lock.accepted": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+    "check-linux-current-msrv-examples.py": "59ac8b7b9c71ab2331c13196b36d8d2794931e07138741c43d4a8c3d1d754b06",
+    "contract-source.md": "f8c7520d931144f8e72e90b782455b1e6c32d4c3eb47c392ea7a74f8d3168ec7",
+    "contract.md": "a08db50b0e6a9fadc8e106c68f7ad5b1ca4d2f46563bff45faa49594286311e0",
+    "input-identities.sha256": "06ee0197b3a48d3abfbea48495a0fe9e895b8ca7f9b80a2c5d9ef926cf11cc1c",
+    "launch.sh": "687ac9ca540de8349547a580e1b3fb38237a272d00f7a9505cbfb59acc3f1eab",
+    "linux-managed-zombie-proof.py": "bc2650660bb1c3a576a6f33507f87b8254c74a9e17f7053e7e1f754238eb417d",
+    "outer-evidence/launcher-identities.tsv": "59a7f6656a4742d4b42ef175ff2943ea6907b09a60039497b8f7e1ef51465f02",
+    "outer-evidence/outer-status.txt": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "outer-evidence/outer.log": "941bd752905ed54c898f617b627713e0a2a917c5338568c591476384777b8114",
+    "outer-evidence/pid-readback-launcher.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "outer-evidence/pid-readback.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "outer-evidence/pid-readback.tsv": "3f2b1344814b1308bd4aecdcc12c362c102d456e32c8e0c702d2cbbaf41e3d1c",
+    "outer-evidence/run-scoped.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "outer-evidence/runtime-cleanup.tsv": "fc02aa516fb99c07110b1c29350fc4e7fd5ef6b1e6c5c0bea672b1fa1f7e71f5",
+    "outer-evidence/scope-cleanup.tsv": "ab1bedcba11ef0deb303da736790204cdcbd4de8a4abc782d87d6c28fd5fb1e0",
+    "proof-evidence/cargo-version.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "proof-evidence/cargo-version.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "proof-evidence/cargo-version.stdout": "bd859f92e30f43b3d238342da4f9a98eaecf6fb4d9dcf317c4e27346f28b4a69",
+    "proof-evidence/commands.json": "10a74003142badad204280bf7b7f2357ccf5090c7039d7ef893d021ece152d47",
+    "proof-evidence/control-results.json": "0f1821d685a762b3acd223e98646cf1af43f81573b16ec54de67455f02dd6c03",
+    "proof-evidence/early-runtime-identity.json": "ee3b74f6e61aebcd75537f8050843707ae35f06b3a6eb67b37a691662c4b12f1",
+    "proof-evidence/export.json": "a96d9141641a650c33a5abaacf8964bcef0b1c21342b2897505e3a3b505e7ca7",
+    "proof-evidence/green-fixture-closure.json": "f63d79d9fa88da4bd35166f8db2f96027eab90004c9b376667ec921def4accff",
+    "proof-evidence/managed-zombie-green.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "proof-evidence/managed-zombie-green.stderr": "e5ae664ca3b52e50f4482db3d2f7a644d15c373d7e759324f79f8365e8e0ce5a",
+    "proof-evidence/managed-zombie-green.stdout": "93da66a10247ef3b652fe93417174bb0d046ab8f3f0e679c302c730858cd110e",
+    "proof-evidence/package-result.json": "063e6a31ff1507070d656a418402340411a00eeaa0340eaae86668c7ef5806a4",
+    "proof-evidence/process-identities.tsv": "db0fe0c37c21c8c0078670f30ad6b2f1bafd35d060a3c6abe54b3c95b59ffbb4",
+    "proof-evidence/require-exit-seven-fixture-closure.json": "d416049c0afcbc792e8f837f7a9904c9fd522b0ec99ae8a3c23e16077d3e3081",
+    "proof-evidence/require-exit-seven.status": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c",
+    "proof-evidence/require-exit-seven.stderr": "4790dc39439ed4b4521553498e203ce25fa30491cc2fb02441804d8173caee4a",
+    "proof-evidence/require-exit-seven.stdout": "75b4e83cea2bb85ef9012a31d7547bd9f583cb9bbeca4fc56496a3c79b1fd94b",
+    "proof-evidence/require-success-while-held-fixture-closure.json": "7e1324ebdd0e32c087611ff575228ba033462e19f2080f44c5d60975617f2c2b",
+    "proof-evidence/require-success-while-held.status": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c",
+    "proof-evidence/require-success-while-held.stderr": "8d4fef0f8188e5f16d9943d40fbe274f44b051e32a651ef724717d126c5722ae",
+    "proof-evidence/require-success-while-held.stdout": "75b4e83cea2bb85ef9012a31d7547bd9f583cb9bbeca4fc56496a3c79b1fd94b",
+    "proof-evidence/rustc-version.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "proof-evidence/rustc-version.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "proof-evidence/rustc-version.stdout": "f4679d0dda28ffcd994b39583743b88e06b6fe4a89fd7359aa1d147e5e660f11",
+    "proof-evidence/rustup-install.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "proof-evidence/rustup-install.stderr": "2c2b1d035c5a27642a26ef93759dec9c7aa6d70b8326994af1f1273f88328f17",
+    "proof-evidence/rustup-install.stdout": "161155bc054a3dcbfa30ec0fd091dd1fbb639b63d3aea56da09bff04e6762c4c",
+    "proof-evidence/source-inputs.json": "5c4d20ad4f8763120cbe6e94b80893b12a62de484253f5e349b2354c9e46b192",
+    "proof-evidence/source-lock-manifests.json": "d8df3809e20ec5cb41cb96f5394321e53b7b4167eab0dcfd19462492cbdb3460",
+    "proof-evidence/source-restoration.json": "5b1df04a3afbc45ec0fe270fec4ace33e5c8fdac6967ffce6c853699fe81a666",
+    "runner/tools/agentskills/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runner/tools/agentskills/pyguard.py": "a3739f4947744303e1adf3fb0875ac743944a272e5b95c94b1baba53029d313f",
+    "runner/tools/run_scoped.py": "9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d",
+    "source.sha256": "30730ba16d0fb1b26946d8cf0969613ec84a1e9896d50be628b083c6439150e4",
+    "source.tar": "ea085b4d28ee5ce3c7b998044242a50c755d9e9252638dbcf28c036b3df7c922",
+    "stage.sh": "33125b53871f658df8943b41fd8ddbdbf9ef9888f0221a7b292746ba11496805"
+  },
+  "selected_paths": [
+    "proof-evidence",
+    "outer-evidence",
+    "source.sha256",
+    "contract.md",
+    "input-identities.sha256",
+    "Cargo.lock.accepted",
+    "source.tar",
+    "check-linux-current-msrv-examples.py",
+    "linux-managed-zombie-proof.py",
+    "contract-source.md",
+    "stage.sh",
+    "launch.sh",
+    "runner/tools/run_scoped.py",
+    "runner/tools/agentskills/__init__.py",
+    "runner/tools/agentskills/pyguard.py"
+  ],
+  "stage": "/root/rhai-linux-managed-zombie-20261003-257edf69-95",
+  "statuses": {
+    "outer-status.txt": 0,
+    "pid-readback-launcher.status": 0,
+    "pid-readback.status": 0,
+    "run-scoped.status": 0
+  }
+}

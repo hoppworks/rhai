@@ -1,0 +1,36 @@
+{
+  "acceptance_claim": false,
+  "all_commands_passed": true,
+  "expected_controls": 2,
+  "features": "testing-environ,sys",
+  "observed_commands": [
+    {
+      "expected_status": 101,
+      "intended_assertion_observed": true,
+      "name": "require-success-while-held",
+      "required_diagnostics": [
+        "managed-zombie-control require-success assertion"
+      ],
+      "status": 101
+    },
+    {
+      "expected_status": 101,
+      "intended_assertion_observed": true,
+      "name": "require-exit-seven",
+      "required_diagnostics": [
+        "managed-zombie-control require-exit-seven assertion"
+      ],
+      "status": 101
+    },
+    {
+      "expected_status": 0,
+      "independent_readback": "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 41 filtered out; finished in 1.13s",
+      "name": "managed-zombie-green",
+      "status": 0
+    }
+  ],
+  "restoration_error": null,
+  "revision": "257edf695f953271adf17b12dcc70c4287ae76b5",
+  "source_restored": true,
+  "test": "managed_run_reports_while_fixture_reaper_holds_stopped_zombies"
+}

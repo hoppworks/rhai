@@ -1,0 +1,3 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+launcher	779362	779361	779362	1804371	/root/rhai-linux-managed-zombie-20261003-257edf69-94/launch.sh
+run-scoped	779430	779362	779362	1804378	python3 /root/rhai-linux-managed-zombie-20261003-257edf69-94/runner/tools/run_scoped.py --timeout 585 -- python3 /root/rhai-linux-managed-zombie-20261003-257edf69-94/linux-managed-zombie-proof.py

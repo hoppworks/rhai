@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/root/rhai-linux-managed-zombie-20261003-257edf69-94/linux-managed-zombie-proof.py", line 325, in <module>
+    status = main()
+  File "/root/rhai-linux-managed-zombie-20261003-257edf69-94/linux-managed-zombie-proof.py", line 251, in main
+    BASE.verify_control(control, 101, 101, output, expected)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-managed-zombie-20261003-257edf69-94/check-linux-current-msrv-examples.py", line 404, in verify_control
+    raise RuntimeError(f'{name} did not fail at its intended assertion; '
+                       f'status={status}, missing diagnostics={missing!r}')
+RuntimeError: require-success-while-held did not fail at its intended assertion; status=101, missing diagnostics=['test managed_run_reports_while_fixture_reaper_holds_stopped_zombies ... FAILED']

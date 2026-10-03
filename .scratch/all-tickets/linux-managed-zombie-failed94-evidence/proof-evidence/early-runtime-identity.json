@@ -1,0 +1,19 @@
+{
+  "captured_before_stage_validation_or_external_command": true,
+  "helper": {
+    "cmdline": "python3 /root/rhai-linux-managed-zombie-20261003-257edf69-94/linux-managed-zombie-proof.py",
+    "pgid": 779433,
+    "pid": 779434,
+    "ppid": 779433,
+    "start_ticks": "1804382"
+  },
+  "identity_errors": {},
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt",
+  "scoped_supervisor": {
+    "cmdline": "/usr/bin/python3 /var/roothome/rhai-linux-managed-zombie-20261003-257edf69-94/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-managed-zombie-20261003-257edf69-94/linux-managed-zombie-proof.py",
+    "pgid": 779433,
+    "pid": 779433,
+    "ppid": 779430,
+    "start_ticks": "1804381"
+  }
+}

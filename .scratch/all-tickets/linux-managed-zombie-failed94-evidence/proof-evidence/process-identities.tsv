@@ -1,0 +1,67 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+helper	779434	779433	779433	1804382	python3 /root/rhai-linux-managed-zombie-20261003-257edf69-94/linux-managed-zombie-proof.py
+scoped-supervisor	779433	779430	779433	1804381	/usr/bin/python3 /var/roothome/rhai-linux-managed-zombie-20261003-257edf69-94/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-managed-zombie-20261003-257edf69-94/linux-managed-zombie-proof.py
+command:rustup-install	779440	779434	779433	1804431	/root/.cargo/bin/rustup toolchain install 1.77.2-x86_64-unknown-linux-gnu --profile minimal --no-self-update
+command:du	779441	779434	779433	1804431	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	779459	779434	779433	1804432	/bin/ps -e -o pid=,ppid=,rss=
+command:du	779471	779434	779433	1804533	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	779472	779434	779433	1804533	/bin/ps -e -o pid=,ppid=,rss=
+command:du	779483	779434	779433	1804634	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	779484	779434	779433	1804635	/bin/ps -e -o pid=,ppid=,rss=
+command:du	779495	779434	779433	1804736	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	779496	779434	779433	1804736	/bin/ps -e -o pid=,ppid=,rss=
+command:du	779515	779434	779433	1804837	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	779516	779434	779433	1804837	/bin/ps -e -o pid=,ppid=,rss=
+command:du	779536	779434	779433	1804938	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	779537	779434	779433	1804939	/bin/ps -e -o pid=,ppid=,rss=
+command:du	779549	779434	779433	1805040	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	779550	779434	779433	1805040	/bin/ps -e -o pid=,ppid=,rss=
+command:du	779569	779434	779433	1805141	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	779570	779434	779433	1805142	/bin/ps -e -o pid=,ppid=,rss=
+command:du	779581	779434	779433	1805243	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	779582	779434	779433	1805243	/bin/ps -e -o pid=,ppid=,rss=
+command:du	779594	779434	779433	1805334	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	779595	779434	779433	1805335	/bin/ps -e -o pid=,ppid=,rss=
+command:rustc-version	779596	779434	779433	1805335	/root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose
+command:du	779597	779434	779433	1805336	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	779599	779434	779433	1805336	/bin/ps -e -o pid=,ppid=,rss=
+command:du	779601	779434	779433	1805347	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	779602	779434	779433	1805347	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-version	779603	779434	779433	1805348	/root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose
+command:du	779604	779434	779433	1805348	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	779616	779434	779433	1805349	/bin/ps -e -o pid=,ppid=,rss=
+command:du	779618	779434	779433	1805359	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	779619	779434	779433	1805360	/bin/ps -e -o pid=,ppid=,rss=
+command:require-success-while-held	779620	779434	779433	1805360	/root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process managed_run_reports_while_fixture_reaper_holds_stopped_zombies -- --exact --nocapture --test-threads=1
+command:du	779621	779434	779433	1805360	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	779623	779434	779433	1805361	/bin/ps -e -o pid=,ppid=,rss=
+command:du	779640	779434	779433	1805462	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	779641	779434	779433	1805462	/bin/ps -e -o pid=,ppid=,rss=
+command:du	779654	779434	779433	1805563	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	779655	779434	779433	1805564	/bin/ps -e -o pid=,ppid=,rss=
+command:du	779764	779434	779433	1805665	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	779765	779434	779433	1805666	/bin/ps -e -o pid=,ppid=,rss=
+command:du	779941	779434	779433	1805767	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	779943	779434	779433	1805768	/bin/ps -e -o pid=,ppid=,rss=
+command:du	780225	779434	779433	1805869	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	780228	779434	779433	1805870	/bin/ps -e -o pid=,ppid=,rss=
+command:du	780292	779434	779433	1805971	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	780293	779434	779433	1805972	/bin/ps -e -o pid=,ppid=,rss=
+command:du	780370	779434	779433	1806073	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	780372	779434	779433	1806074	/bin/ps -e -o pid=,ppid=,rss=
+command:du	780482	779434	779433	1806175	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	780484	779434	779433	1806176	/bin/ps -e -o pid=,ppid=,rss=
+command:du	780522	779434	779433	1806277	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	780523	779434	779433	1806278	/bin/ps -e -o pid=,ppid=,rss=
+command:du	780534	779434	779433	1806379	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	780535	779434	779433	1806380	/bin/ps -e -o pid=,ppid=,rss=
+command:du	780552	779434	779433	1806481	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	780553	779434	779433	1806483	/bin/ps -e -o pid=,ppid=,rss=
+command:du	780574	779434	779433	1806584	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	780575	779434	779433	1806585	/bin/ps -e -o pid=,ppid=,rss=
+command:du	780637	779434	779433	1806686	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	780639	779434	779433	1806687	/bin/ps -e -o pid=,ppid=,rss=
+command:du	780650	779434	779433	1806788	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	780651	779434	779433	1806789	/bin/ps -e -o pid=,ppid=,rss=
+command:du	780654	779434	779433	1806810	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command:ps	780655	779434	779433	1806811	/bin/ps -e -o pid=,ppid=,rss=

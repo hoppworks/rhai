@@ -1,0 +1,11 @@
+{
+  "acceptance_claim": false,
+  "all_commands_passed": false,
+  "expected_controls": 2,
+  "features": "testing-environ,sys",
+  "observed_commands": [],
+  "restoration_error": null,
+  "revision": "257edf695f953271adf17b12dcc70c4287ae76b5",
+  "source_restored": true,
+  "test": "managed_run_reports_while_fixture_reaper_holds_stopped_zombies"
+}

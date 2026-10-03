@@ -86,8 +86,24 @@ Current authoritative history through this rewrite is Git commit
 10d4a0d55400ebe8c24feff134e7161ff36bf8d5, this same state path. It retains
 all earlier cause/attempt/resource/source applicability records. Read that
 history for consumed work, not superseded next actions. No reset occurred.
-Last independently read-back fork main6c451c5c99e751e50023a08912a035a2c8754ff6; only remote main, lowercase
+Last independently read-back fork main257edf695f953271adf17b12dcc70c4287ae76b5; only remote main, lowercase
 human author/committer. Goal active and incomplete.
+
+### Latest accepted package and next action
+
+Native95 held-zombie current Linux MSRV criterion ACCEPTED by the same combined
+reviewer: setup/version statuses0/0/0, intended controls101/101, restored GREEN0.
+Frozen257edf69/test8ec/lock2ba4, one testing-environ,sys row. All52 original files
+hash-verified;99 exact PID/start identities absent, four groups empty,52files/
+5dirs stage removed, runtime/scope absent. Fresh cleanup receipt follows collector
+cleanup (its stdout was not saved). Proof/review and originals at linux-managed-
+zombie-proof.md, linux-managed-zombie-review.md, linux-managed-zombie95-evidence/.
+Native94 infrastructure interleaving failure and44 originals remain preserved;
+95 repaired that harness cause, no product correction or hard-cap revision.
+Cumulative Unix95; unavailable cost/token usage unknown. No retained build.
+Next: commit/push this exact accepted package to sole fork main, independently
+read back head, then advance remaining Linux managed lifecycle/fault criteria.
+No claim of ordinary-success, wider matrix, performance or release completion.
 
 ### Accepted current Linux non-process package
 
@@ -1191,3 +1207,125 @@ Noownedretainedresources; keepownedworktree for campaign. CumulativeUnix93,
 all91/92causes/stoppedhistories preserved, unavailableusageunknown. Next package
 remainingmanaged/faultcontractorplatformcustody prerequisite withinauthorizations,
 not duplicate unaffectedproof. Goalactive/incomplete.
+
+Verified integration257edf695f953271adf17b12dcc70c4287ae76b5:355 exact package
+files committed and normal fast-forward push to explicit fork URL succeeded;
+independent ls-remote confirms exact head and sole main. Author/committer
+lowercase hoppworks <daniel@hoppworks.de>. Source/recipes/docs whitespace
+check passed; immutable original evidence and embedded unified patch excluded
+from whitespace normalization to preserve recorded hashes. No native rerun.
+Foreign untracked historical logs preserved. Root current instructions and
+Coordinator template reloaded after compaction, unchanged faba3db.
+Next responsible Standard linux_managed_gap performs read-only diagnosis of
+smallest remaining Linux managed requirement, exact tests and valid proof reuse.
+No new native allocation, build or retention; cumulative Unix93 and hard-stopped
+causes unchanged. Worktree stays active for related campaign corrections.
+
+### Current Linux managed held-zombie MSRV boundary
+
+Standard linux_managed_gap confirmed current faba3db rules/role and diagnosed
+existing test managed_run_reports_while_fixture_reaper_holds_stopped_zombies.
+Prior native74/Rust1.93 held-boundary proof remains valid narrowly; do not claim
+no earlier managed evidence. Root git diff1241a5f8..257edf69 of process.rs and
+process/unix.rs shows only Darwin unit-test executable selection, no Linux
+production delta. Current privateRust1.77.2 boundary execution remains open.
+Normal-leader-success legacy test is not selected because foreign reaping can
+make success/absence fragile under the accepted zombie exception.
+Same responsible Standard prepares one-row frozen257edf69 source-only recipes,
+exact held-zombie test, two after-cleanup wrong assertions (success-report and
+exit7), followed by byte-restored GREEN. Proof must demand actual typed closure
+TimedOut/matching diagnostic, exact exit0/complete capture, live Engine host,
+reaped direct leader, exact pidfd/start/group held zombies and fixture reap.
+No production/test change or native allocation yet; prospective94, Unix93
+consumed. One row testing-environ,sys only; no broader managed matrix claim.
+600outer/585runner/540helper including30export reserve, jobs2/desc16 and2GiB
+bounds unchanged. Owned future stage/scope suffix257edf69-94, not created.
+Fresh read-only workhorse Linux7.2.7 inventory no heavy candidates; available
+687751620KiB, not reservation. Recheck before any launch. One combined review
+will cover recipes and eventual evidence; no renewal of stopped causes.
+
+Previous goal turn PROGRESS: verified257edf69 fork-main integration closes
+selected integer-only/unchecked/host-cap criteria; overall goal unchanged.
+Live registry confirms linux_managed_gap source preparation running, then
+source-ready five recipes at proof0abbe7b4/stageff1846c1/launch45561be3/
+collectorcb5bacf4. Archive257edf69/ea085b4d, test8ec and lock2ba4 frozen.
+AST/shell/in-memory two after-cleanup overlays pass; no SSH/build/native94.
+Same combined Expert linux_shared_child_review currentfaba3db confirmed and
+reviews exact prepared source/acceptance before launch. Root observed possible
+receipt-binding gaps and doc testname/reserve wording; consolidate in this one
+prelaunch batch. Original native74 receipt format predates newer trailing held/
+reaper_status fields; root read-only substring observer failed, corrected using
+current testsource1422/1676. No native failure/product correction or new budget.
+Unmodified74 behavior proof retained, currentassertion/toolchain coverage open.
+Native94 prospective only; cumulative Unix93, stopped histories unchanged.
+
+Combined managed-zombie source review NOT READY before any native allocation:
+collector incorrectly equated distinct child PIDs and carried stale stage pin;
+exact held/reaper/cleanup/PIDFD receipt bindings and contract preflight needed.
+Same responsible Standard fixes one consolidated batch with current-grammar
+valid/negative parser checks; same Expert performs affected recheck afterward.
+No native failure, launch or budget consumed; prospective94 remains unallocated.
+Root resumed current faba3db global/project/campaign/e2e instructions. Fresh
+Workhorse read-only inventory Linux7.2.7, no heavy candidates,687748400KiB
+available (not reserved), remote skill revision faba3db confirmed using command-
+local safe.directory after ownership guard, no configuration mutation. Existing
+proof and stopped routes preserved; overall goal active/incomplete.
+
+Affected source recheck caught current receipt grammar before native allocation:
+api-result includes cause_details/cleanup_diagnostics and a real trailing newline
+before eprintln's held field. Flattened synthetic input had missed this. Same
+Standard repairs both validators and uses real native74 diagnostic body plus
+current source-defined held/reaper suffix for positive purecases. Originals74
+remain unchanged; this is prelaunch harness correction, not failed native product
+or infrastructure run. Same review context rechecks delta/pins;94 unallocated.
+
+Final prelaunch grammar/pin batch: proof40146c59/stage394b85f1/launch45561be3/
+collector61f217dc; purechecks2accept and11reject each. Actual native74 lines140–151
+include held/reaper on the NEXT line, correcting root earlier line-only observer's
+mistaken absence inference. Original74 remains unchanged and valid narrowly;
+current Rust1.77.2 acceptance still required. Root verified final hashes, fresh
+heavy inventory empty,687748244KiB available, exact94 stage/scope absent. Same
+Expert affected review pending; native94 remains unallocated.
+
+Same Expert final source readiness READY, exact final pins and full multiline
+original parser validation accepted; no extra review chain. Stage completed0,
+every frozen manifest input OK. Root dispatch native94 now: cumulative Unix94
+consumed, one row/2expectedRED+1GREEN,6commands;600/585/540incl30reserve,
+jobs2/desc16/2GiBhard unchanged. Ownstage/scope exact257edf69-94; acceptance
+pending, unchanged priorproof/hard-stopped causes and broader open requirements.
+
+Native94 infrastructure outcome outer1: first intendedRED101 reached its named
+assertion with valid exact held-zombie/typedexit0/reapercleanup boundary, but
+helper contiguous libtest name+FAILED check rejected nested stdout interleaving.
+No product failure/acceptance,4commands executed; secondRED/GREEN not executed.
+First observed infrastructure cause outer-libtest-interleaving; ordinary bounded
+same Standard recipe repair authorized under task, no hardlimit revised.95
+prospective only; cumulative Unix94.44 original stage files hashverified exported
+linux-managed-zombie-failed94-evidence; fresh independent73PIDstarts/twogroups
+absent; exact44files/fivedirs stage cleaned, runtime/scope absent. Originals and
+source restoration retained, no owned retainedbuild. Same source/frozen inputs,
+limits unchanged. Repair outerresult predicates only against actual stdout;
+exactboundary checks remain. Same reviewer affectedrepair/evidence check next.
+
+Same-context interleaving repair prepared95 source-only: proofbc265066/
+stage33125b53/launch687ac9ca/collector90fc53a0; actual94stdout/err accepted by
+both outer parsers,5negativecases reject each; modeled green parseronly. Exact
+boundary unchanged, uniqueouterprefix/LASTsummary stdoutonly, failurelist/named
+panic1676/assertion stderr bound. Localpreflight AST/bash pass. Same independent
+review checks affected95delta;95unallocated,Unix94consumed. No broadreview or
+limits/history reset. Active-work planningcheckpoint stays ordinary bounded
+repair; specific rawstdout diagnosis supports same simpler acceptance route.
+
+95source delta READY after finalcollector launcher pin corrected to687ac9ca;
+collector771a9472/prepareff2a0986, independent affectedhashrecheck accepted.
+Stage95 completed0 before finalpincheck, no native then; all frozeninputs OK.
+Root fresh heavyinventory empty. Dispatch95now, cumulativeUnix95consumed;
+same6commands/600outer585runner540helperincluding30reserve,2GiBhard/jobs2/
+desc16 unchanged. One94infra interleavingcause retained; secondnativeattempt
+for this criterion, no failedproductcorrection, acceptancepending. Exactown
+stage/scope257edf69-95; no additional allocation or stoppedroute renewal.
+
+Native95 terminal0 and narrow combined acceptance recorded in proof/tickets03/06.
+All six statuses, source restoration, originals and final cleanup independently
+verified. This turn advances acceptance, not production. Own worktree remains
+active for related campaign corrections; foreign logs/worktrees untouched.

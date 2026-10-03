@@ -1,0 +1,9 @@
+{
+  "archive_sha256": "ea085b4d28ee5ce3c7b998044242a50c755d9e9252638dbcf28c036b3df7c922",
+  "base_helper_sha256": "59ac8b7b9c71ab2331c13196b36d8d2794931e07138741c43d4a8c3d1d754b06",
+  "features": "testing-environ,sys",
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "revision": "257edf695f953271adf17b12dcc70c4287ae76b5",
+  "test": "managed_run_reports_while_fixture_reaper_holds_stopped_zombies",
+  "test_file_sha256": "8ec4d456672338920249446618ce768bc2fa1d29798d571dca1e897db87a076b"
+}

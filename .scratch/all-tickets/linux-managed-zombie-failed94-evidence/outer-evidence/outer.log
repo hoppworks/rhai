@@ -1,0 +1,68 @@
+launch_utc=2026-10-03T11:27:32Z
+runner_timeout_seconds=585
+stage=/root/rhai-linux-managed-zombie-20261003-257edf69-94
+scope=/root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94
+source.tar: OK
+Cargo.lock.accepted: OK
+check-linux-current-msrv-examples.py: OK
+linux-managed-zombie-proof.py: OK
+contract-source.md: OK
+contract.md: OK
+stage.sh: OK
+launch.sh: OK
+runner/tools/run_scoped.py: OK
+runner/tools/agentskills/__init__.py: OK
+runner/tools/agentskills/pyguard.py: OK
+PRIVATE_RUNTIME /root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt
+command=rustup-install argv=['/root/.cargo/bin/rustup', 'toolchain', 'install', '1.77.2-x86_64-unknown-linux-gnu', '--profile', 'minimal', '--no-self-update']
+sample={"descendants": 2, "monotonic_seconds": 0.471, "rss_kib": 46964, "storage_kib": 76504}
+sample={"descendants": 2, "monotonic_seconds": 1.486, "rss_kib": 55832, "storage_kib": 88760}
+sample={"descendants": 2, "monotonic_seconds": 2.5, "rss_kib": 55824, "storage_kib": 89560}
+sample={"descendants": 2, "monotonic_seconds": 3.512, "rss_kib": 55900, "storage_kib": 90152}
+sample={"descendants": 2, "monotonic_seconds": 4.527, "rss_kib": 141356, "storage_kib": 137868}
+sample={"descendants": 2, "monotonic_seconds": 5.541, "rss_kib": 107984, "storage_kib": 288176}
+sample={"descendants": 2, "monotonic_seconds": 6.555, "rss_kib": 67184, "storage_kib": 325884}
+sample={"descendants": 2, "monotonic_seconds": 7.569, "rss_kib": 168112, "storage_kib": 378016}
+sample={"descendants": 2, "monotonic_seconds": 8.585, "rss_kib": 315564, "storage_kib": 536568}
+sample={"descendants": 1, "monotonic_seconds": 9.499, "rss_kib": 31344, "storage_kib": 536192}
+status=rustup-install:0
+command=rustc-version argv=['/root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 9.512, "rss_kib": 31400, "storage_kib": 536200}
+sample={"descendants": 1, "monotonic_seconds": 9.625, "rss_kib": 31420, "storage_kib": 536204}
+status=rustc-version:0
+command=cargo-version argv=['/root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 9.637, "rss_kib": 31420, "storage_kib": 536208}
+sample={"descendants": 1, "monotonic_seconds": 9.748, "rss_kib": 31304, "storage_kib": 536216}
+status=cargo-version:0
+command=require-success-while-held argv=['/root/.local/share/agent-builds/rhai/linux-managed-zombie-20261003-257edf69-94/agent-build-6jlejilt/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--features', 'testing-environ,sys', '--test', 'sys_process', 'managed_run_reports_while_fixture_reaper_holds_stopped_zombies', '--', '--exact', '--nocapture', '--test-threads=1']
+sample={"descendants": 2, "monotonic_seconds": 9.76, "rss_kib": 52976, "storage_kib": 536220}
+sample={"descendants": 2, "monotonic_seconds": 10.775, "rss_kib": 73920, "storage_kib": 539496}
+sample={"descendants": 2, "monotonic_seconds": 11.789, "rss_kib": 76816, "storage_kib": 542420}
+sample={"descendants": 4, "monotonic_seconds": 12.81, "rss_kib": 313464, "storage_kib": 600652}
+sample={"descendants": 4, "monotonic_seconds": 13.83, "rss_kib": 625880, "storage_kib": 627588}
+sample={"descendants": 4, "monotonic_seconds": 14.851, "rss_kib": 428828, "storage_kib": 660104}
+sample={"descendants": 4, "monotonic_seconds": 15.873, "rss_kib": 664372, "storage_kib": 676028}
+sample={"descendants": 4, "monotonic_seconds": 16.895, "rss_kib": 690028, "storage_kib": 688836}
+sample={"descendants": 4, "monotonic_seconds": 17.914, "rss_kib": 485228, "storage_kib": 726196}
+sample={"descendants": 3, "monotonic_seconds": 18.936, "rss_kib": 552164, "storage_kib": 732568}
+sample={"descendants": 3, "monotonic_seconds": 19.957, "rss_kib": 704620, "storage_kib": 732580}
+sample={"descendants": 3, "monotonic_seconds": 20.978, "rss_kib": 911240, "storage_kib": 745708}
+sample={"descendants": 3, "monotonic_seconds": 22.0, "rss_kib": 936488, "storage_kib": 759912}
+sample={"descendants": 8, "monotonic_seconds": 23.021, "rss_kib": 141688, "storage_kib": 801000}
+sample={"descendants": 7, "monotonic_seconds": 24.041, "rss_kib": 129016, "storage_kib": 801000}
+sample={"descendants": 1, "monotonic_seconds": 24.261, "rss_kib": 31288, "storage_kib": 800960}
+status=require-success-while-held:101
+Traceback (most recent call last):
+  File "/root/rhai-linux-managed-zombie-20261003-257edf69-94/linux-managed-zombie-proof.py", line 325, in <module>
+    status = main()
+  File "/root/rhai-linux-managed-zombie-20261003-257edf69-94/linux-managed-zombie-proof.py", line 251, in main
+    BASE.verify_control(control, 101, 101, output, expected)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-managed-zombie-20261003-257edf69-94/check-linux-current-msrv-examples.py", line 404, in verify_control
+    raise RuntimeError(f'{name} did not fail at its intended assertion; '
+                       f'status={status}, missing diagnostics={missing!r}')
+RuntimeError: require-success-while-held did not fail at its intended assertion; status=101, missing diagnostics=['test managed_run_reports_while_fixture_reaper_holds_stopped_zombies ... FAILED']
+/root/rhai-linux-managed-zombie-20261003-257edf69-94/launch.sh: line 123: /proc/779430/stat: No such file or directory
+run_scoped_status=1
+runtime_cleanup_status=0 pid_readback_status=0 scope_cleanup_status=0
+outer_status=1

@@ -1,0 +1,58 @@
+{
+  "cleanup_receipt_required": "managed_held_zombie_cleanup worker=... reaped=true leaf=... reaped=true",
+  "fixture_group": 780631,
+  "fixture_group_members_after_cleanup": [],
+  "fixture_pid_start_identities": [
+    {
+      "label": "leader",
+      "matching_identity_alive": false,
+      "pid": 780631,
+      "start_ticks": "1806685"
+    },
+    {
+      "label": "worker",
+      "matching_identity_alive": false,
+      "pid": 780633,
+      "start_ticks": "1806685"
+    },
+    {
+      "label": "leaf",
+      "matching_identity_alive": false,
+      "pid": 780635,
+      "start_ticks": "1806685"
+    },
+    {
+      "label": "host",
+      "matching_identity_alive": false,
+      "pid": 780628,
+      "start_ticks": "1806684"
+    },
+    {
+      "label": "fixture-reaper",
+      "matching_identity_alive": false,
+      "pid": 780626,
+      "start_ticks": "1806684"
+    }
+  ],
+  "managed_pidfd_acquired_identities": [
+    {
+      "pgid": 780631,
+      "pid": 780631,
+      "ppid": 780628,
+      "start_ticks": 1806685
+    },
+    {
+      "pgid": 780631,
+      "pid": 780633,
+      "ppid": 780631,
+      "start_ticks": 1806685
+    },
+    {
+      "pgid": 780631,
+      "pid": 780635,
+      "ppid": 780633,
+      "start_ticks": 1806685
+    }
+  ],
+  "test_watchdog_receipt_required": "reaper_status=ExitStatus(unix_wait_status(0))"
+}

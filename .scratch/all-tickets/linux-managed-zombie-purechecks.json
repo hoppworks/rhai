@@ -1,0 +1,24 @@
+{
+  "classification": "source-parser/harness validation only; original native94 control was expected assertion red with outer parser mismatch, not feature acceptance",
+  "run94_original_status": 101,
+  "run94_outer_summary_status": "FAILED. 0 passed; 1 failed",
+  "accepted_original_control_stdout_stderr": true,
+  "accepted_boundary_and_cleanup_receipt": true,
+  "green_terminal_tokens": "modeled from same stdout bytes; parser-only; no green native outcome claimed",
+  "outer_negative_cases": [
+    "wrong_test_prefix",
+    "missing_final_summary",
+    "wrong_failure_list",
+    "wrong_panic_origin",
+    "wrong_named_assertion"
+  ],
+  "rejected_negative_cases_per_outer_parser": 5,
+  "native_runs_in_this_repair": 0,
+  "source_revision": "257edf695f953271adf17b12dcc70c4287ae76b5",
+  "test_file_sha256": "8ec4d456672338920249446618ce768bc2fa1d29798d571dca1e897db87a076b",
+  "original_evidence_refs": [
+    ".scratch/all-tickets/linux-managed-zombie-failed94-evidence/proof-evidence/require-success-while-held.stdout",
+    ".scratch/all-tickets/linux-managed-zombie-failed94-evidence/proof-evidence/require-success-while-held.stderr",
+    ".scratch/all-tickets/linux-managed-zombie-failed94-evidence/proof-evidence/require-success-while-held.status"
+  ]
+}
