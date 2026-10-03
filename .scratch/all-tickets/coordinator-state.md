@@ -1931,7 +1931,7 @@ Next actual API seam answer -> source test correction -> affected combined revie
 -> recipe repair -> meaningful native RED -> production fix and real acceptance.
 
 API-seam Expert16 source-only answer received, faba3db confirmed. Genuine
-missingerror regression is public spawn/raw shared Child, bounded firstwaitunit
+missingerror regression is registered public spawn with shared Child, bounded firstwaitunit
 while exactchild live and fd0 absent, followed by separate explicitcleanup; GREEN
 retainedBrokenPipe writechildstdin automaticcleanup and sharedcachedreport.
 run_raw alreadyretained writeprocessstdin remains separatepositive, not RED.
@@ -1946,3 +1946,47 @@ samecombinedaffectedreview; responsiblecontext laterrepairsconsumingrecipes.
 No sourceREADY claim until recheck; native110unallocated/Unix109 unchanged.
 Current continuation PROGRESS: freshindependentdiagnosis and racecorrection
 change actualacceptance choreography, responsiblewriter nowimplementing.
+
+Previous goal turn PROGRESS: Expert16 completed exactAPI diagnosis and race-free
+closure proof; contract/answer integrated and pushed31532673950adf7cef1e02aac6f4a5cd94973cc6
+with independentsoleforkmain readback. Current Standard livecheckpoint reports
+newspawn regression and sharedfixture precloseintent implemented in tests/sys_process.rs
+only: clonedhandles,3sfirstwait,unit/live/fd0absence,explicitkill/separatebounded5s
+cleanup and postcleanupIoassertion. Removing unsupportedperspawn processgroupoption
+(Managed is SysConfig), correcting separaterunpositive op/truthfulflags, then
+purechecks/sourcefreeze. No productionchange/nativeallocation/acceptance. Current
+turn authoritative testchanges are progress; sameaffectedreview waitsimmutablefreeze.
+
+Previous goal turn VERIFIED WAIT: actual stdin_closure_test native agent was
+confirmed running; no native retry/acceptance/allocation inferred. Current turn
+PROGRESS: source-only followup frozen4ac2e799654b5ace809b29efb8c9e1860a7af7e2,
+only tests/sys_process.rs changed vs c4. TestSHA7b52441a4f3783ce9a2ee7265acdd15686251f583bb6231587f9c07d89e04759,
+archiveSHA7e0dd7014e3e9b117bbb1bfad080327add7129e00c24952061e42df7050a56a5
+independentlyverified. Initialunpublishedd7a attributionwrongDanielHopp corrected
+byordinaryownamend; currentactualauthorcommitterhoppworks<daniel@hoppworks.de>,
+sourcebytesidentical/archivefreshlyrehashed. No foreignref changed.
+Fixtureprecloseintent and actualspawn Childregression, separaterepairedrunpositive
+wrongop/truthfulflags, clonedwait/idempotentkill/report/custody changes now undergo
+samecombinedaffectedsource review. Syntaxparse/diffchecks passed, no compiled
+or nativeclaim. Same responsibleStandard resumes consumingrecipe preparation
+without sourcechanges/freeze untilSOURCE READY; rejectedc39 and partialdrafts
+retained. Fourexport/classification/custodyfindings remainrequired. Production
+unchanged,110unallocated/Unix109 consumed, no newhardcap or exhaustedchain renewed.
+
+Previous goal turn PROGRESS: immutable4ac source-onlyfreeze/pins confirmed and
+samecombinedaffectedreview dispatched. Current affected4ac verdict NOT READY:
+publicspawn seam/preclose race correction and separaterunpositive are valid,
+but three new Option.try_cast().ok compile mismatches, missing fixtureguard
+throughunexpectedoutcomes and incomplete originalhost/sentinel/baseline/GREEN
+report bindings prevent meaningfulacceptance. Consolidated report preserves
+allhistory. Completed failedsourcecorrection4ac count1; no nativefailedcorrection
+or infrastructurelaunch occurred. Expert16 API-path diagnosis/source routing
+correction is valid narrowly, not whole test/package acceptance; no exhausted
+chain is relabeled or renewed. New extraction/fixtureguard/receipt causes have
+one failedsourcecheck at4ac, concretefirstdiagnosis and no prior escalation.
+Same Standard assigned one ordinary bounded consolidatedsourcefix using exact
+report (30minuteactivework planningcheckpoint); productionunchanged,110unallocated.
+Recheckaffectedsource afterfreeze; preserve interruptedrecipes/c39/4ac. Pending
+originalcollectionrecipe remainsblockedon sourceREADINESS, not missingpermission.
+Sourcearchivepins use acceptedarchive-build-source.py; plain gitarchivehash
+reported by Standard differs and mustnot replace accepted consumingpin.
