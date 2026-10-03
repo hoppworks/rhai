@@ -85,7 +85,7 @@ Instructions/roles faba3db3bef6891ad2c0b20d434963bb8fe9572d loaded by root,
 responsible Standard and same combined reviewer. Workhorse installed rules resolved
 at /var/home/workhorse/.agents/AGENTS.md and /var/home/workhorse/projects/agent-skills;
 SSH root has no ~/.agents. Read-only resolution/command-local safe.directory only.
-Last verified fork main67483c695a908d730e135b100852b8d9ff3af35e; sole remote main,
+Last verified fork maina7421a7a16a3d5ca3f71711ade76afc5f9b600ee; sole remote main,
 lowercase human author/committer. Current goal turn PROGRESS: final managed lease
 drop102 accepted and integrated with original evidence. Overall scope incomplete.
 
@@ -167,7 +167,25 @@ Intermediate1d6ea010 mistaken later-eprintln edit corrected next commit, pre-nat
 preparation only; preserved Git history. Raw103collector immutablebb3ba1a3/SHA4794dbd8
 passed same affected custody review and root collect/cleanup; raw originals remain
 compiler-only NOT acceptance.104recipes frozen6bc123099197f24d21b0ef01f20afbb3afa9a5ee
-await affected actual dependency review before allocation.
+failed static affected pin review: proof helper had mismatching actual ARCHIVE/TEST_SHA,
+though stager/collector pins matched. Initial static104 input-pin finding before
+allocation, NOT native recovery/productfailure. Corrected0150adf3bc483ddacefd2b03b988be6c65ccef5e
+passed same affected consumer dependency review: execution/collection READY.
+Root light104 staging passed all exactinputhashes; native104 remains UNALLOCATED.
+Own source stage/root/rhai-linux-managed-deadline-20261003-bcecd9eb-104 contains
+reviewed sources/recipes only, no build/runtime; retire exactstage after104original
+export/cleanup or cancellation. Actualsourcef820/archiveab894ab2/test3e112b01;
+proof9b41554a/staged1f90be5/launcher867c880f/collector3035163d.
+No104central scope/runtime created before heavy launch.
+Fresh heavy inventory observes foreign tauron scoped run850979/850980 timeout5400,
+Cargo890262/rustc891086/891160/891176 and runtime
+/var/home/workhorse/.local/share/agent-builds/tauron/g4546p/agent-build-8ej5ajf0.
+Do not touch it; own heavy launch waits for free slot. Reading/review/light work
+continues; no machine-lock/reservation claim. Exact descendant observation shows
+foreign supervised postgres/sqlx-prepare run still performing Cargo check (new
+Cargo895688/rustc895692); earlier exactCargoPIDs ending is not a free-slot proof.
+Same Standard reads remaining ticket03 criteria/source for smallest next real OS
+regression, message only/no source/file changes; current104 freeze stays intact.
 Ordinary30min active-work planning checkpoint; maximum two consecutive launches
 without diagnosis/closed check. New compiler diagnosis permits bounded correction.
 CumulativeUnix103/deadlinenative1. Seven exact tests plus3setup remain planned:
