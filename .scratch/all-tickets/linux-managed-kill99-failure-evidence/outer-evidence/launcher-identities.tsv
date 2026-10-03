@@ -1,0 +1,3 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+launcher	800386	800385	800386	2986882	/root/rhai-linux-managed-kill-20261003-a17f40a7-99/launch.sh
+run-scoped	800454	800386	800386	2986886	python3 /root/rhai-linux-managed-kill-20261003-a17f40a7-99/runner/tools/run_scoped.py --timeout 585 -- python3 /root/rhai-linux-managed-kill-20261003-a17f40a7-99/linux-managed-kill-proof.py

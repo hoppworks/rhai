@@ -82,7 +82,7 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 ## Current step and next action
 
 Current instructions/roles revision faba3db3bef6891ad2c0b20d434963bb8fe9572d.
-Latest independently read-back fork main 87c48103abf7a0e196aac1c3fb393385d21b83e2;
+Latest independently read-back fork main 61923d81ec3cc3a1182c58da790c65c269aa687f;
 ONLY remote main. Lowercase human author and committer verified. Accepted96 subset
 is mapped explicitly to open tickets03/06; checkpoint/source remains unchanged.
 Workhorse installed revision independently read back at
@@ -215,7 +215,20 @@ runtimes absent, actual cargo/rustc/rustup/scoped-runner processes absent;
 MemAvailable82853008kB. A substring scan matched a foreign coordinator prompt,
 then exact executable/early argument scan excluded it; foreign session untouched.
 Same limits600outer/585runner/540helper incl30exportreserve, jobs2/desc16,
-1572864KiBstorage preempt and2097152KiBRSS/storage hard. Compilerargs recovery remains compile-unverified because samplerinterrupted. Newdu-ENOENTinfrastructurecause occurrence1, no unsuccessful recoveryyet. SameStandardminimal bounded full-du retry with exactownedpath diagnostics; no excludedfiles/ignorederrors or higherresourcecaps. Native99unallocated. Original98readback/export/cleanup in linux-managed-kill98-failure-evidence/, rawcollector98 explicitly NOTacceptance.
+1572864KiBstorage preempt and2097152KiBRSS/storage hard. Compilerargs recovery remains compile-unverified because samplerinterrupted. Newdu-ENOENTinfrastructurecause occurrence1, no unsuccessful recoveryyet. SameStandardminimal bounded full-du retry with exactownedpath diagnostics; no excludedfiles/ignorederrors or higherresourcecaps. Native99unallocated. Planning checkpoint: two distinct infrastructure diagnoses produced concrete minimal repairs; no producttesthasrun, no repeated no-progresssamplercorrection or hardlimitexhaustion. Continue one samplerrepair+same combinedreview within originalperrunlimits, existing30-minute active-work planning checkpoint renewed on this evidence without historicalreset. Firstcollectorstaticpinfailedbatch corrected d045, no nativecollectoracceptanceyet. Token/costusageunknown. Original98readback/export/cleanup in linux-managed-kill98-failure-evidence/, rawcollector98 explicitly NOTacceptance.
+
+Sampler recovery frozen eeea7775 changes only newkillrecipes; historicalBASE
+helper remains59ac unchanged, source90a6/test90b/archive450bf unchanged. Newproof7cf8,
+stagedec96/launchb3c/collector6d031eaf pathsprospective99. Full du traversal retry
+max4 only exactownedvanished ENOENTpaths; helperdeadline/RSS/descendants freshly
+checked betweenattempts, unknown/permissions fail. Targeted full-du/ps ordering,
+ceiling, bounds and fatalerrors pass; same reviewer affectedrevieweeea EXECUTION READY/COLLECTION READY; actualsampler focusedchecks independentlypassed; nativeacceptancepending.
+Fresh99inventory at2026-10-03T14:41:16Z actualheavy[], privateruntimes[], exactstage/
+scopeabsent, MemAvailable82885536kB; observationnotreservation. Native99 remains
+CONSUMED launch2026-10-03T14:44:37Z, rootexec45044, allstageinputshaOK; runtimeagent-build-aa371kh2 withinexact99scope. ENDED oneboundedrun aftereeea readiness: compilepassed andone actualduENOENT retry passed. Namedwrongrequire-successcontrol101 reached aftercleanup; actualpublicChildkill→wait returnedunsuccessfulchildreport withcompletecaptures, exact3PIDFDs/exitedmembersreaped/sentinel live alltrue, BUTreaper_okfalse. Nestedreaperteststdoutok18.00s outer18.01s; firstnativefixtureexit-observationcriterionfailure, nofullacceptance. Sampler/compile causesrecovered, notproductfailures. SameStandard diagnosisdeadline/statusobservationpending; native100unallocated. Original99raw43files5dirshashpreserved, source90b restored/errornull,112recordedPID/startrowsincl6fixtureabsentand4groupsempty, exactstage/scopecleanupverified. No retainedbuild. Proof refs linux-managed-kill99-failure-evidence/ andrawcollector99; reviewerfailurecustodypending. CumulativeUnix99consumed, newkill3launches(97compilefailed/98samplerfailed/99running); planningestimate2→3dueknownsamplerrepair, nohardcapraised/nohistoryreset. Next one finite run with same600/585/540time bounds,
+30exportreserve/jobs2/desc16/1572864storagepreempt/2097152RSSstoragehard, preserving
+97compiler/98sampling consumption. Estimate mayadvance2→3 for this distinct known
+infrastructurecause; no repeated launchwithout newdiagnosis or limitsraised.
 
 ### Accepted current Linux non-process package
 
