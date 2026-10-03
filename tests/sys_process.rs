@@ -1920,12 +1920,10 @@ fn managed_child_kill_reports_group_closed_under_fixture_reaper() {
     let group_empty = unsafe { libc::kill(-group, 0) } == -1 && std::io::Error::last_os_error().raw_os_error() == Some(libc::ESRCH);
     eprintln!("managed_child_kill_boundary host_live_at_return={host_live} reaper_live_at_return={reaper_live} leader={} leader_start={leader_start} leader_absent={leader_absent} worker={} worker_start={worker_start} worker_absent={worker_absent} leaf={} leaf_start={leaf_start} leaf_absent={leaf_absent} group={group} exact_descendants_reaped={exact_reaped} sentinel={sentinel_pid} sentinel_start={sentinel_start} sentinel_pgid={sentinel_pgid} sentinel_live_at_return={sentinel_live} sentinel_reaped_after_return={sentinel_reaped} api_bound={api_bound} report_returned={report_returned} killed_report={killed_report} capture_complete={capture_complete} pidfds_exited={pidfds_exited} reaper_ok={reaper_ok} host_absent_after_cleanup={host_absent_after_cleanup} group_empty={group_empty} api={api:?} reaped={reaped:?} cleanup={cleanup:?}");
     assert!(api_bound && report_returned, "public wait must return the exact host-bound Child report: {api}");
-    assert!(!killed_report, "managed-child-kill-control require-success assertion");
     assert!(killed_report, "public Child.kill report must record the killed child as unsuccessful");
     assert!(capture_complete, "public kill report must contain complete streams: {api}");
     assert!(pidfds_exited && leader_absent && worker_absent && leaf_absent && exact_reaped, "all exact managed members must be closed and reaped");
     assert!(host_live && reaper_live, "host and independent reaper must remain live at API return");
-    assert!(!sentinel_live, "managed-child-kill-control require-live-sentinel assertion");
     assert!(sentinel_live, "public Child.kill must preserve the unrelated sentinel at API return");
     assert!(reaper_ok && cleanup.contains("complete=true") && host_absent_after_cleanup && sentinel_reaped && group_empty, "exact fixture cleanup must finish: {cleanup}");
 }
