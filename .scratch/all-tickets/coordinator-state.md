@@ -85,7 +85,7 @@ Instructions/roles faba3db3bef6891ad2c0b20d434963bb8fe9572d loaded by root,
 responsible Standard and same combined reviewer. Workhorse installed rules resolved
 at /var/home/workhorse/.agents/AGENTS.md and /var/home/workhorse/projects/agent-skills;
 SSH root has no ~/.agents. Read-only resolution/command-local safe.directory only.
-Last verified fork main4df297d8b503b77280360f16eea0702728c54e75; sole remote main,
+Last verified fork main16ef422180c38584823af75eb1c82c9b2f22a745; sole remote main,
 lowercase human author/committer. Current goal turn PROGRESS: final managed lease
 drop102 accepted and integrated with original evidence. Overall scope incomplete.
 
@@ -144,11 +144,17 @@ Same independent Expert found sourceNOT READY, four consolidated initial finding
 OsString release.exists type, moved reaper_ready PathBuf, deadline observer20s
 window overlaps13s exceptional fallback without marker guard, and open-pipe
 fixture incorrectly expects timeout capture EOFcomplete=true. One report
-linux-managed-deadline-review.md being finalized, same Standard will apply one
-batched source repair then affected recheck. Initial findings are not completed
-failed corrections; native0 and no Expert escalation allocation. Deadline
-recipes draft6exacttests (1timeoutwrong+4GREEN+1affectedprompt)+3setup=9commands,
-unpinned/uncommitted pending corrected source readiness. No freeze/stage/launch.
+linux-managed-deadline-review.md retained. Same Standard froze one batched source
+repairb5243017a5ff2926c12c13e6108a2064091e843b, testde4cfc16a54b1cb5e0ef38337887c54d18a433114f3e7662a567d914f8918309.
+Fixes owned Path borrow/types, saves readiness receipt, observes before fallback
+with exceptional-start rejection, retained markers and honest incomplete EOF flags
+per original contract/root brief (not scope waiver). Same reviewer affected
+recheck SOURCE READY b524: all four fixed, original contract restored; watchdog
+guard fails closed through successful reaper exit. No failed completed correction. Initial findings are not failed completed corrections; native0
+and no Expert escalation allocation. Current correction count0 before verdict. Deadline
+recipes now preparing7exacttests (1timeoutwrong+4GREEN+2affectedprompt/held)
+plus3setup=10commands, unpinned/uncommitted before dependent recipe review.
+Same reviewer confirms unchanged accepted kill/finaldrop evidence applicable. No freeze/stage/launch.
 Prospective stage/root/rhai-linux-managed-deadline-20261003-bcecd9eb-103 and
 scope/root/.local/share/agent-builds/rhai/linux-managed-deadline-20261003-bcecd9eb-103
 uncreated/unallocated. Ordinary30min active-work planning checkpoint, existing
