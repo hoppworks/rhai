@@ -81,6 +81,44 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 
 ## Current step and next action
 
+Instructions faba3db unchanged/loaded; full goal active/incomplete. Sole fork
+main last independently read back at4dcdfa61bebabcb0cfb5f1205f765f7914bd0132.
+Accepted109 proof/source523 unchanged; no retained native resources, all finite
+concurrency exceptions expired. Unix109 consumed; native110 unallocated.
+
+Expert17 single bounded same-Standard follow-up frozen9d051412f7097bca559d92c1e7d10f061ad1b755,
+tests/sys_process.rs only; production unchanged. Root confirms exact hoppworks
+<daniel@hoppworks.de> author/committer, testSHA256
+492983eaf504e764bd0b2cc75fe8b421a229f9efc69a6cf8e670837f9313a827,
+acceptedarchivehelper SHA256
+a97367a1a823ebc163ca5841a40e2064828a77b8c44d63003d8c17caf38e98a7
+(6451200bytes). Syntax-only and committed diff checks passed; not compilation.
+Same combined Expert affected9d source check completed NOT READY: borrow after
+move, property/method mismatch, typed success consistency and incomplete fallback
+terminal validation. Text-map/schema and checkedabsence repairs valid narrowly.
+Same Standard continues these four known corrections inside existing Expert17
+source-only followup; no new Expert/package or native launch.
+No SOURCE READY/runtime claim. Standard completed sourcebatch, preserves dirty
+interruptedrecipe drafts and historicalnote; no mutation while source reviewed.
+
+Cause extraction/guard/receipt: two failedsourcechecks4ac/2c, firstExpert17,
+one justified followup ongoing after its source review checkpoint. Failedsource
+checks now3 (4ac,2c,9d), nativefailures0. No second Expert renewal or
+hardlimit increase; original wrong APIseam16 history remains independently
+settled. No Cargo/SSH/stage/native/product launch occurred. Previous goal turn
+VERIFIED WAIT on actuallylive Standard; current turn PROGRESS: immutable source
+freeze/pins independently verified and concrete affected recheck started.
+
+Next current four known source corrections/freeze/affected recheck -> only if
+READY resume SAMEStandard one existing recipebatch
+with currentpins and four c39 export/classification/custody findings, honest
+successmapprovenance/diagnosticsunavailable. Then combined affected recipecheck,
+fresh workhorse slot/capacity, actual native RED before product correction.
+Human permits Tauron buildwindow coordination if freshcontention requires it.
+Strict finalnativeLinux/macOS/Windows/feature/MSRV/release coverage remainsopen.
+
+### Earlier current-step history (retained, superseded)
+
 Global/project instructions at faba3db remain loaded. Full goal active/incomplete.
 Authoritative remote readback: only fork main at
 fece14158c61c346af0411d3a295c6d10d6b2e49. No upstream write or remote task branch.
@@ -2053,3 +2091,24 @@ production/push/recipe mutation. Two failedsourcecorrections4ac/2c preserved;
 firstExpert17, no secondchain/capreset. Root factual decision updated, source
 review pendingfreeze. Current goal turn PROGRESS: diagnosis closes API schema
 uncertainty and directly changes authorized correction; broader scope unchanged.
+
+Affected9d source review confirms four concrete remaining source/setup defects;
+originalfullreport preserved. Failedsourcecorrection3, no native0 altered.
+Authorization/limit reconciliation BEFORE inventing a missingapproval blocker:
+human “Ich nehme deine Empfehlungen für offene Fragen” and maximumquality
+instruction cover this finite ordinary reversible correction; current global
+Autonomous workflow covers setup repairs and changes of technique and replaces
+agent-proposed workflow gates. Expert17 specified20minute activework PLANNING
+checkpoint, not a user deadline/spend/launch/safety cap. “source freeze consumes
+followup” was an agent-selected checkpoint interpretation, not a human stop.
+There is concrete partial progress (actual public schema/checkedabsence repaired)
+and new exact diagnosis; four known source fixes may finish inside existing
+ONE bounded followup under permitted setup repairs. No secondExpert/newcause/
+newpackage/budgetreset. SameStandard asked to report actual cumulativework and,
+atcheckpoint, revise existing estimate to atmost30minutes TOTALactivework, not
+30newminutes; actualused remainsunknown pendingownerreceipt. Stop if no further
+progress or truehardlimit. Existing source-only/no Cargo/SSH/stage/native/product
+boundaries remain. All exhausted native/Darwin/Windows chains remain stopped.
+Currentturn PROGRESS: actual9d result closes valid schema/absence pieces and
+changes exactremainingfixbatch; current owner resumed in samecontext. Nextsource
+freeze/recheck, then pendingrecipes onlyafterREADY.
