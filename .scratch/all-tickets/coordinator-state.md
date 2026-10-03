@@ -82,7 +82,7 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 ## Current step and next action
 
 Instructions faba3db unchanged/loaded; full goal active/incomplete. Sole fork
-main last independently read back at727b1a78837e536201277e8bc8fa3f0e8b84a21b.
+main last independently read back at6e659810b7bd44a0d3c85cc75cbeef1d6fdff185.
 Accepted109 proof/source523 unchanged; no retained native resources, all finite
 concurrency exceptions expired. Unix109 consumed; native110 unallocated.
 
@@ -107,14 +107,27 @@ estimate is not a human safety-cap renewal. Native failures/launches remain0;
 no Cargo, SSH, stage, production change or native allocation occurred. All
 exhausted native/Darwin/Windows chains and actual hard boundaries remain stopped.
 
-Current owner: SAME Standard resumed the existing recipe batch after SOURCE
-READY with current pins and all four c39 export/classification/custody findings,
-actual text-map provenance and unavailable diagnostics. Recipe-only work, no
-Cargo/SSH/staging/native/production mutation. Next: affected
-recipe review, fresh workhorse slot/capacity check, meaningful native RED before
-production correction and real acceptance. The human authorized Tauron build
-window coordination if fresh contention requires it. Final native Linux/macOS/
-Windows, feature, MSRV and release coverage remain open.
+Current owner: SAME Standard is finishing the existing recipe batch after SOURCE
+READY with current pins and all four c39 export/classification/custody findings.
+Helper, classifier, launch, stage and contract are edited; separate original
+collector added, not executed. Python AST checks and both shell syntax checks
+passed. First modeled-valid fixture exposed printed-schema mismatches (actual
+child_reaped, no live_observed); owner is aligning and rerunning valid/corrupt
+modeled cases. This is pre-native recipe setup, not meaningful product RED or
+acceptance. Recipe active work approximately14minutes, earlier preparation
+approximately2–3minutes and precise cumulative earlier use unknown. Existing
+30minute planning checkpoint unchanged; no source/history/cap reset.
+
+No Cargo/SSH/staging/native/production mutation. Prospective exact stage/scope
+now use ee50c63e rather than c7; these are drafts, not allocated resources.
+Root's unexecuted earlier c7 preflight must consume final reviewed paths/pins
+before actual launch. Next: recipe freeze/checks -> SAME affected combined
+review -> fresh workhorse slot/capacity -> actual native RED -> production fix
+and real acceptance. Human permits Tauron window coordination if contention
+requires it. Final native Linux/macOS/Windows, feature/MSRV/release remain open.
+Previous goal turn PROGRESS: actual recipe edits and original collector changed
+preparation state. Current owner confirmed live; no missing approval or genuine
+external blocker. Source-only SOURCE READY never implies runtime acceptance.
 
 ### Earlier current-step history (retained, superseded)
 
