@@ -1,0 +1,200 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+helper	1713654	1713653	1713653	4952336	python3 /root/rhai-linux-managed-escaped-pipe-20261003-52360864-109/linux-managed-escaped-pipe-proof.py
+scoped-supervisor	1713653	1713650	1713653	4952334	/usr/bin/python3 /var/roothome/rhai-linux-managed-escaped-pipe-20261003-52360864-109/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-managed-escaped-pipe-20261003-52360864-109/linux-managed-escaped-pipe-proof.py
+command:rustup-install	1713656	1713654	1713653	4952344	/root/.cargo/bin/rustup toolchain install 1.77.2-x86_64-unknown-linux-gnu --profile minimal --no-self-update
+command:du	1713665	1713654	1713653	4952344	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1713674	1713654	1713653	4952344	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1713729	1713654	1713653	4952446	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1713730	1713654	1713653	4952446	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1713756	1713654	1713653	4952547	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1713757	1713654	1713653	4952547	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1713776	1713654	1713653	4952648	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1713777	1713654	1713653	4952648	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1713812	1713654	1713653	4952749	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1713813	1713654	1713653	4952750	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1713862	1713654	1713653	4952850	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1713863	1713654	1713653	4952852	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1713874	1713654	1713653	4952953	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1713875	1713654	1713653	4952953	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1713896	1713654	1713653	4953054	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1713897	1713654	1713653	4953054	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1714191	1713654	1713653	4953156	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1714192	1713654	1713653	4953156	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1714346	1713654	1713653	4953238	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1714347	1713654	1713653	4953238	/bin/ps -e -o pid=,ppid=,rss=
+command:rustc-version	1714350	1713654	1713653	4953240	/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose
+command:du	1714351	1713654	1713653	4953240	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1714352	1713654	1713653	4953240	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1714372	1713654	1713653	4953251	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1714374	1713654	1713653	4953252	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-version	1714377	1713654	1713653	4953252	/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose
+command:du	1714378	1713654	1713653	4953253	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1714383	1713654	1713653	4953253	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1714437	1713654	1713653	4953264	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1714438	1713654	1713653	4953264	/bin/ps -e -o pid=,ppid=,rss=
+command:require-escaped-holder-control	1714440	1713654	1713653	4953265	/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_run_deadline_cancels_escaped_pipe_holder_under_fixture_reaper
+command:du	1714441	1713654	1713653	4953265	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1714442	1713654	1713653	4953265	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1714534	1713654	1713653	4953367	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1714536	1713654	1713653	4953367	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1715175	1713654	1713653	4953468	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1715178	1713654	1713653	4953468	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1716049	1713654	1713653	4953571	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1716055	1713654	1713653	4953572	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1716911	1713654	1713653	4953675	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1716928	1713654	1713653	4953676	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1717883	1713654	1713653	4953778	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1717890	1713654	1713653	4953779	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1718806	1713654	1713653	4953881	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1718807	1713654	1713653	4953882	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1719273	1713654	1713653	4953983	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1719275	1713654	1713653	4953984	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1719461	1713654	1713653	4954085	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1719463	1713654	1713653	4954086	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1719552	1713654	1713653	4954187	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1719558	1713654	1713653	4954188	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1719779	1713654	1713653	4954289	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1719781	1713654	1713653	4954290	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1719875	1713654	1713653	4954391	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1719877	1713654	1713653	4954392	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1719902	1713654	1713653	4954493	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1719903	1713654	1713653	4954494	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1719927	1713654	1713653	4954595	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1719928	1713654	1713653	4954596	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1719950	1713654	1713653	4954697	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1719951	1713654	1713653	4954698	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1719974	1713654	1713653	4954799	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1719975	1713654	1713653	4954799	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1720022	1713654	1713653	4954900	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1720023	1713654	1713653	4954901	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1720067	1713654	1713653	4955002	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1720068	1713654	1713653	4955003	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1720081	1713654	1713653	4955104	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1720082	1713654	1713653	4955105	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1720093	1713654	1713653	4955206	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1720095	1713654	1713653	4955207	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1720106	1713654	1713653	4955308	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1720107	1713654	1713653	4955309	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1720110	1713654	1713653	4955330	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1720111	1713654	1713653	4955331	/bin/ps -e -o pid=,ppid=,rss=
+command:base-prompt-regression-row1	1720113	1713654	1713653	4955332	/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_run_succeeds_after_fixture_reaper_reaps_descendants
+command:du	1720114	1713654	1713653	4955332	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1720119	1713654	1713653	4955333	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1720175	1713654	1713653	4955434	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1720176	1713654	1713653	4955435	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1720194	1713654	1713653	4955466	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1720195	1713654	1713653	4955467	/bin/ps -e -o pid=,ppid=,rss=
+command:base-held-regression-row1	1720197	1713654	1713653	4955469	/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_run_reports_while_fixture_reaper_holds_stopped_zombies
+command:du	1720198	1713654	1713653	4955469	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1720204	1713654	1713653	4955470	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1720231	1713654	1713653	4955571	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1720232	1713654	1713653	4955572	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1720236	1713654	1713653	4955602	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1720237	1713654	1713653	4955603	/bin/ps -e -o pid=,ppid=,rss=
+command:base-retained-pipe-regression-row1	1720239	1713654	1713653	4955605	/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes
+command:du	1720240	1713654	1713653	4955605	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1720245	1713654	1713653	4955606	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1720258	1713654	1713653	4955637	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1720259	1713654	1713653	4955638	/bin/ps -e -o pid=,ppid=,rss=
+command:green-row-1	1720260	1713654	1713653	4955638	/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process -- --exact --nocapture --test-threads=1 managed_run_deadline_cancels_escaped_pipe_holder_under_fixture_reaper
+command:du	1720261	1713654	1713653	4955638	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1720266	1713654	1713653	4955639	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1720374	1713654	1713653	4955740	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1720376	1713654	1713653	4955741	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1720453	1713654	1713653	4955842	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1720454	1713654	1713653	4955843	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1720617	1713654	1713653	4955944	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1720618	1713654	1713653	4955945	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1720694	1713654	1713653	4956046	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1720695	1713654	1713653	4956047	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1720697	1713654	1713653	4956058	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1720698	1713654	1713653	4956059	/bin/ps -e -o pid=,ppid=,rss=
+command:green-row-2	1720700	1713654	1713653	4956061	/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,sync,metadata --test sys_process -- --exact --nocapture --test-threads=1 managed_run_deadline_cancels_escaped_pipe_holder_under_fixture_reaper
+command:du	1720701	1713654	1713653	4956061	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1720706	1713654	1713653	4956062	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1720786	1713654	1713653	4956163	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1720787	1713654	1713653	4956165	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1720819	1713654	1713653	4956266	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1720821	1713654	1713653	4956267	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1720897	1713654	1713653	4956368	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1720898	1713654	1713653	4956369	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1720909	1713654	1713653	4956470	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1720910	1713654	1713653	4956471	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1720921	1713654	1713653	4956573	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1720922	1713654	1713653	4956574	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1720936	1713654	1713653	4956675	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1720937	1713654	1713653	4956676	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1721488	1713654	1713653	4956777	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1721507	1713654	1713653	4956778	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1722362	1713654	1713653	4956879	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1722363	1713654	1713653	4956880	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1723188	1713654	1713653	4956981	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1723206	1713654	1713653	4956982	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1723871	1713654	1713653	4957083	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1723881	1713654	1713653	4957084	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1724638	1713654	1713653	4957185	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1724640	1713654	1713653	4957186	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1725253	1713654	1713653	4957288	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1725254	1713654	1713653	4957289	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1726513	1713654	1713653	4957390	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1726529	1713654	1713653	4957391	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1727987	1713654	1713653	4957493	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1728018	1713654	1713653	4957494	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1728236	1713654	1713653	4957509	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1728259	1713654	1713653	4957511	/bin/ps -e -o pid=,ppid=,rss=
+command:green-row-3	1728301	1713654	1713653	4957514	/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,f32_float --test sys_process -- --exact --nocapture --test-threads=1 managed_run_deadline_cancels_escaped_pipe_holder_under_fixture_reaper
+command:du	1728304	1713654	1713653	4957514	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1728319	1713654	1713653	4957516	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1729486	1713654	1713653	4957618	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1729505	1713654	1713653	4957620	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1730700	1713654	1713653	4957722	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1730747	1713654	1713653	4957724	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1731855	1713654	1713653	4957826	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1731861	1713654	1713653	4957827	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1732609	1713654	1713653	4957929	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1732614	1713654	1713653	4957930	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1733195	1713654	1713653	4958031	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1733200	1713654	1713653	4958032	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1733677	1713654	1713653	4958133	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1733679	1713654	1713653	4958134	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1733774	1713654	1713653	4958235	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1733775	1713654	1713653	4958236	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1733908	1713654	1713653	4958337	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1733910	1713654	1713653	4958338	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1734059	1713654	1713653	4958439	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1734060	1713654	1713653	4958440	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1734111	1713654	1713653	4958542	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1734112	1713654	1713653	4958543	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1734210	1713654	1713653	4958644	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1734211	1713654	1713653	4958644	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1734233	1713654	1713653	4958745	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1734234	1713654	1713653	4958746	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1734247	1713654	1713653	4958817	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1734249	1713654	1713653	4958818	/bin/ps -e -o pid=,ppid=,rss=
+command:green-row-4	1734251	1713654	1713653	4958820	/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys,unchecked --test sys_process -- --exact --nocapture --test-threads=1 managed_run_deadline_cancels_escaped_pipe_holder_under_fixture_reaper
+command:du	1734252	1713654	1713653	4958820	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1734257	1713654	1713653	4958821	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1734285	1713654	1713653	4958922	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1734286	1713654	1713653	4958923	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1734297	1713654	1713653	4959024	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1734298	1713654	1713653	4959025	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1734443	1713654	1713653	4959126	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1734453	1713654	1713653	4959127	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1734567	1713654	1713653	4959229	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1734568	1713654	1713653	4959230	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1734787	1713654	1713653	4959332	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1734788	1713654	1713653	4959333	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1734806	1713654	1713653	4959435	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1734808	1713654	1713653	4959436	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1734988	1713654	1713653	4959537	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1734990	1713654	1713653	4959538	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1735119	1713654	1713653	4959639	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1735120	1713654	1713653	4959640	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1735134	1713654	1713653	4959741	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1735135	1713654	1713653	4959742	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1735246	1713654	1713653	4959843	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1735247	1713654	1713653	4959844	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1735434	1713654	1713653	4959945	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1735435	1713654	1713653	4959946	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1735441	1713654	1713653	4959997	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap
+command:ps	1735442	1713654	1713653	4959998	/bin/ps -e -o pid=,ppid=,rss=

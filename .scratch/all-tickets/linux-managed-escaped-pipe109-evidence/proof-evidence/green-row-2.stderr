@@ -1,0 +1,220 @@
+ Downloading crates ...
+  Downloaded serde_derive v1.0.229
+  Downloaded spin v0.7.2
+  Downloaded syn v3.0.6
+   Compiling syn v3.0.6
+   Compiling serde v1.0.229
+   Compiling rhai v1.26.1 (/var/roothome/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap/source)
+   Compiling rhai_codegen v3.2.0 (/var/roothome/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap/source/codegen)
+   Compiling serde_derive v1.0.229
+   Compiling smallvec v1.16.2
+   Compiling rmp-serde v1.3.0
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:668:13
+    |
+668 |         let mut wait_operation = "wait for child";
+    |             ----^^^^^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` on by default
+
+warning: unused variable: `termination`
+    --> src/packages/sys/process/unix.rs:1106:22
+     |
+1106 |                 let (termination, _operation) = if self.managed {
+     |                      ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_termination`
+     |
+     = note: `#[warn(unused_variables)]` on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2134:9
+     |
+2134 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2456:9
+     |
+2456 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variant `OnlyZombieLeader` is never constructed
+  --> src/packages/sys/process/unix.rs:50:5
+   |
+47 | enum GroupCloseOutcome {
+   |      ----------------- variant in this enum
+...
+50 |     OnlyZombieLeader,
+   |     ^^^^^^^^^^^^^^^^
+   |
+   = note: `GroupCloseOutcome` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+   = note: `#[warn(dead_code)]` on by default
+
+warning: methods `numeric_operations_probe`, `quarantine_observations_probe`, and `fail_reservation` are never used
+    --> src/packages/sys/process/unix.rs:1470:8
+     |
+1390 | impl ExecutionFaults {
+     | -------------------- methods in this implementation
+...
+1470 |     fn numeric_operations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1481 |     fn quarantine_observations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1506 |     fn fail_reservation(&self) -> bool {
+     |        ^^^^^^^^^^^^^^^^
+
+warning: `rhai` (lib) generated 7 warnings (run `cargo fix --lib -p rhai` to apply 4 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: variable does not need to be mutable
+   --> tests/sys_process.rs:912:9
+    |
+912 |     let mut holder = command.spawn().expect("start escaped captured-pipe holder");
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` on by default
+
+warning: value assigned to `incomplete` is never read
+    --> tests/sys_process.rs:1329:17
+     |
+1329 |         let mut incomplete = false;
+     |                 ^^^^^^^^^^
+     |
+     = help: maybe it is overwritten before being read?
+     = note: `#[warn(unused_assignments)]` on by default
+
+warning: unused variable: `state`
+    --> tests/sys_process.rs:1631:26
+     |
+1631 |                 Ok(Some((state, parent, group, start)))
+     |                          ^^^^^ help: if this is intentional, prefix it with an underscore: `_state`
+     |
+     = note: `#[warn(unused_variables)]` on by default
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:2224:9
+     |
+2224 |     let mut sentinel = managed_spawn_sentinel();
+     |         ----^^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:2332:9
+     |
+2332 |     let mut sentinel = managed_spawn_sentinel();
+     |         ----^^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:2522:9
+     |
+2522 |     let mut sentinel = Sentinel(
+     |         ----^^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:2653:9
+     |
+2653 |     let mut sentinel = managed_spawn_sentinel();
+     |         ----^^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:2821:9
+     |
+2821 |     let mut sentinel = Sentinel(
+     |         ----^^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:2961:9
+     |
+2961 |     let mut sentinel = Sentinel(
+     |         ----^^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+warning: constant `DIRECT_DROP_RECORD_ENV` is never used
+  --> tests/sys_process.rs:38:7
+   |
+38 | const DIRECT_DROP_RECORD_ENV: &str = "RHAI_SYS_DIRECT_DROP_RECORD";
+   |       ^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: unused `Dynamic` that must be used
+   --> tests/fixtures/sys_process_shared_child_contract.rs:239:5
+    |
+239 |     engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("kill after completion is idempotent");
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` on by default
+help: use `let _ = ...` to ignore the resulting value
+    |
+239 |     let _ = engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("kill after completion is idempotent");
+    |     +++++++
+
+warning: unused `Dynamic` that must be used
+   --> tests/fixtures/sys_process_shared_child_contract.rs:240:5
+    |
+240 |     engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("repeated kill after completion is idempotent");
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+help: use `let _ = ...` to ignore the resulting value
+    |
+240 |     let _ = engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("repeated kill after completion is idempotent");
+    |     +++++++
+
+warning: unused `Dynamic` that must be used
+   --> tests/fixtures/sys_process_shared_child_contract.rs:338:5
+    |
+338 |     engine.eval_with_scope::<Dynamic>(&mut cancel_scope, "child.kill()").expect("concurrent public cancellation");
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+help: use `let _ = ...` to ignore the resulting value
+    |
+338 |     let _ = engine.eval_with_scope::<Dynamic>(&mut cancel_scope, "child.kill()").expect("concurrent public cancellation");
+    |     +++++++
+
+warning: `rhai` (test "sys_process") generated 13 warnings (run `cargo fix --test "sys_process"` to apply 8 suggestions)
+    Finished test [unoptimized] target(s) in 10.42s
+     Running tests/sys_process.rs (/root/.local/share/agent-builds/rhai/linux-managed-escaped-pipe-20261003-52360864-109/agent-build-vsvl7gap/target/debug/deps/sys_process-bcb9ea62b06a0869)
+managed_pipe_pidfd_acquired pid=1724063 start=4957105 ppid=1724045 pgid=1724063
+managed_pipe_pidfd_acquired pid=1724066 start=4957105 ppid=1724063 pgid=1724042
+managed-scope sentinel_cleanup pid=1724042 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_deadline_escaped_pipe_boundary host=1724045 host_start=4957104 reaper=1724043 reaper_start=4957104 leader=1724063 leader_start=4957105 leader_live=false leader_pidfd_exited=true managed_group=1724063 group_probe=-1 group_errno=3 holder=1724066 holder_start=4957105 holder_group=1724042 holder_live=true holder_pidfd_live=true host_live=true reaper_live=true sentinel=1724042 sentinel_start=4957104 sentinel_group=1724042 sentinel_live=true timeout_report=true partial_capture=true no_watchdog=true
+ api="host=1724045 host_start=4957104 api_success=true api_outcome=timeout_report success=Some(false) timed_out=Some(true) stdout_complete=Some(false) stderr_complete=Some(false) stdout_marker=true stderr_marker=true\n" challenge="pid=1724066 stdout_result=-1 stdout_error=32 stderr_result=-1 stderr_error=32\n" no_watchdog_through_challenge=true holder_reap="holder=1724066 start=4957105 pgid=1724042 reaped=true wait_status=25856\n" reaper_cleanup="pid=1724043 start=4957104 host_status=0 complete=true holder=1724066 start=4957105 pgid=1724042 reaped=true wait_status=25856\n" reaper_ok=true host_absent=true host_absence="not found" leader_absent=true leader_absence="not found" holder_absent=true holder_absence="not found" sentinel_absent=true sentinel_absence="not found" sentinel_group_probe=-1 sentinel_group_errno=3
+managed_fixture_cleanup worker_pid=None worker_esrch=false leaf_pid=None leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(1724063) leader_esrch=true

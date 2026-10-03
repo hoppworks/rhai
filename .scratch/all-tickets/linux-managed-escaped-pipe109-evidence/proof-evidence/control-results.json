@@ -1,0 +1,11 @@
+[
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "require-escaped-holder-control",
+    "required_diagnostics": [
+      "managed-escaped-pipe-control require-timeout-report assertion"
+    ],
+    "status": 101
+  }
+]

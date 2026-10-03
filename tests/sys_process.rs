@@ -487,6 +487,19 @@ fn managed_atomic_record(path: &std::path::Path, contents: &str) {
     std::fs::rename(temporary, path).unwrap();
 }
 
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_pipe_start_ticks(pid: i32) -> u64 {
+    #[cfg(target_os = "linux")]
+    {
+        return managed_proc_identity(pid).expect("read escaped-pipe process start time").3;
+    }
+    #[cfg(not(target_os = "linux"))]
+    {
+        let _ = pid;
+        0
+    }
+}
+
 /// Re-exec fixture moves the managed leader into a separate same-session group, then waits for
 /// fixture-owned release. This exercises exact direct-child cancellation independently of the
 /// original process-group signal.
@@ -907,7 +920,9 @@ fn managed_scope_retained_pipe_leader_fixture() {
     let holder_fields = managed_record_fields(&std::fs::read_to_string(&holder_record).expect("holder readiness record"));
     assert_eq!(holder_fields.get("pid"), Some(&holder_pid));
     assert_eq!(holder_fields.get("pgid"), Some(&sentinel_pgid));
-    managed_atomic_record(&leader_record, &format!("pid={leader_pid} pgid={leader_pgid} holder={holder_pid} holder_pgid={sentinel_pgid} sentinel_pgid={sentinel_pgid}\n"));
+    let leader_start = managed_pipe_start_ticks(leader_pid);
+    let holder_start = managed_pipe_start_ticks(holder_pid);
+    managed_atomic_record(&leader_record, &format!("pid={leader_pid} start={leader_start} pgid={leader_pgid} holder={holder_pid} holder_start={holder_start} holder_pgid={sentinel_pgid} sentinel_pgid={sentinel_pgid}\n"));
     let deadline = Instant::now() + Duration::from_secs(15);
     while !root.join("release-leader").exists() && Instant::now() < deadline {
         std::thread::sleep(Duration::from_millis(5));
@@ -940,7 +955,8 @@ fn managed_scope_retained_pipe_holder_fixture() {
     stderr.flush().unwrap();
     drop(stdout);
     drop(stderr);
-    managed_atomic_record(&record, &format!("pid={pid} pgid={pgid} ready=true\n"));
+    let start = managed_pipe_start_ticks(pid);
+    managed_atomic_record(&record, &format!("pid={pid} start={start} pgid={pgid} ready=true\n"));
     // Keep the holder alive after endpoint closure so raw writes can report EPIPE instead of
     // terminating it with SIGPIPE. It remains an independently owned fixture process.
     unsafe {
@@ -1305,7 +1321,7 @@ impl Drop for ManagedZombieDrainGuard {
             let _ = std::fs::write(self.root.join("cancel-before-run"), b"cancel before workload\n");
             return;
         }
-        for name in ["pidfd-ack", "release-worker", "release-leader", "kill-request", "host-exit-release", "reap-release"] {
+        for name in ["pidfd-ack", "release-worker", "release-leader", "holder-release", "kill-request", "host-exit-release", "reap-release"] {
             let _ = std::fs::write(self.root.join(name), b"exact fixture drain on exceptional exit\n");
         }
         let mut signaled = std::collections::HashSet::new();
@@ -1313,7 +1329,13 @@ impl Drop for ManagedZombieDrainGuard {
         let mut incomplete = false;
         loop {
             let mut pending = false;
-            for (file, fallback, label) in [("leader-identity", Some("leader-record"), "leader"), ("worker-record", None, "worker"), ("leaf-record", None, "leaf")] {
+            let escaped_pipe = std::env::var(MANAGED_ZOMBIE_REAP_MODE_ENV).as_deref() == Ok("deadline-pipe");
+            let owned_records = if escaped_pipe {
+                vec![("leader-record", None, "leader"), ("holder-record", None, "holder")]
+            } else {
+                vec![("leader-identity", Some("leader-record"), "leader"), ("worker-record", None, "worker"), ("leaf-record", None, "leaf")]
+            };
+            for (file, fallback, label) in owned_records {
                 // The kill-mode fixture publishes the leader's exact PID/start identity in
                 // leader-record; leader-identity is only emitted by the held-zombie modes.
                 let path = self.root.join(file);
@@ -1388,7 +1410,7 @@ impl Drop for ManagedZombieHostGuard {
     fn drop(&mut self) {
         let Some(child) = self.child.as_mut() else { return };
         if self.root.join("begin-run").exists() {
-            for name in ["pidfd-ack", "release-worker", "release-leader", "kill-request", "host-exit-release"] {
+            for name in ["pidfd-ack", "release-worker", "release-leader", "holder-release", "kill-request", "host-exit-release"] {
                 let _ = std::fs::write(self.root.join(name), b"owned host cleanup\n");
             }
         } else {
@@ -1417,7 +1439,7 @@ impl Drop for ManagedZombieReaperGuard {
         } else {
             // Release only the exact fixture's existing ACKs and wait gates. This never creates
             // begin-run, so failure before launch cannot accidentally start an Engine operation.
-            for name in ["pidfd-ack", "release-worker", "release-leader", "kill-request", "host-exit-release", "reap-release"] {
+        for name in ["pidfd-ack", "release-worker", "release-leader", "holder-release", "kill-request", "host-exit-release", "reap-release"] {
                 let _ = std::fs::write(self.root.join(name), b"owned fixture cleanup\n");
             }
         }
@@ -1470,6 +1492,9 @@ fn managed_zombie_reaper_process() {
         .env(MANAGED_LEAF_ENV, root.join("leaf-record"))
         .env(MANAGED_RELEASE_ENV, root.join("release-worker"))
         .env(MANAGED_PIDFD_ACK_ENV, root.join("pidfd-ack"));
+    if let Some(sentinel_group) = std::env::var_os(MANAGED_PIPE_SENTINEL_GROUP_ENV) {
+        host_command.env(MANAGED_PIPE_SENTINEL_GROUP_ENV, sentinel_group);
+    }
     let host = host_command.spawn().expect("start isolated Engine host");
     let host_deadline = Instant::now() + Duration::from_nanos(deadline_ns.saturating_sub(managed_zombie_monotonic_ns()).saturating_sub(6_000_000_000));
     let mut host = ManagedZombieHostGuard {
@@ -1564,6 +1589,70 @@ fn managed_zombie_reaper_process() {
         assert!(cleanup.contains("complete=true"), "prompt reaper cleanup receipt incomplete: {cleanup}");
         assert_eq!(status_code, 0, "Engine host must remain successful through fixture cleanup");
         managed_atomic_record(&root.join("reaper-cleanup"), &format!("pid={reaper_pid} prompt=true host_status={status_code} {cleanup}"));
+        return;
+    }
+
+    if reap_mode == "deadline-pipe" {
+        let status_code = host_status.and_then(|status| status.code()).unwrap_or(-1);
+        let leader_text = std::fs::read_to_string(root.join("leader-record")).expect("escaped-pipe leader identity record");
+        let leader_pid = managed_record_fields(&leader_text).get("pid").copied().expect("escaped leader PID");
+        let leader_start = managed_zombie_u64(&leader_text, "start").expect("escaped leader start time");
+        let holder_text = std::fs::read_to_string(root.join("holder-record")).expect("escaped holder identity record");
+        let holder_fields = managed_record_fields(&holder_text);
+        let holder_pid = holder_fields.get("pid").copied().expect("escaped holder PID");
+        let holder_start = managed_zombie_u64(&holder_text, "start").expect("escaped holder start time");
+        let holder_group = holder_fields.get("pgid").copied().expect("escaped holder group");
+        let expected_group = std::env::var(MANAGED_PIPE_SENTINEL_GROUP_ENV).expect("sentinel process-group identity").parse::<i32>().expect("valid sentinel process-group identity");
+        let mut holder_receipt = None;
+        let mut holder_error = None;
+        if holder_group != expected_group {
+            holder_error = Some(format!("holder group {holder_group} did not match sentinel group {expected_group}"));
+        }
+        if holder_error.is_none() && !managed_zombie_wait_for(&root.join("holder-release"), drain_deadline) {
+            holder_error = Some("holder release marker missed fixture cleanup deadline".to_owned());
+        }
+        while holder_receipt.is_none() && holder_error.is_none() && Instant::now() < drain_deadline {
+            match managed_proc_identity_checked(holder_pid) {
+                Ok(Some(('Z', parent, group, start))) if parent == reaper_pid && group == holder_group && start == holder_start => {
+                    let mut status = 0;
+                    let waited = unsafe { libc::waitpid(holder_pid, &mut status, libc::WNOHANG) };
+                    if waited == holder_pid {
+                        match managed_proc_identity_checked(holder_pid) {
+                            Ok(None) => holder_receipt = Some(format!("holder={holder_pid} start={holder_start} pgid={holder_group} reaped=true wait_status={status}")),
+                            Ok(Some(identity)) => holder_error = Some(format!("holder remained visible after exact waitpid: {identity:?}")),
+                            Err(error) => holder_error = Some(format!("could not verify holder absence after exact waitpid: {error}")),
+                        }
+                    } else if waited < 0 {
+                        holder_error = Some(format!("exact holder waitpid failed: {:?}", std::io::Error::last_os_error().raw_os_error()));
+                    } else {
+                        std::thread::sleep(Duration::from_millis(5));
+                    }
+                }
+                Ok(Some((state, parent, group, start)))
+                    if start == holder_start
+                        && group == holder_group
+                        && (parent == reaper_pid
+                            || (parent == leader_pid
+                                && managed_proc_identity_checked(leader_pid).is_ok_and(|identity| identity.is_some_and(|(_, _, _, current_start)| current_start == leader_start)))) =>
+                {
+                    // The leader may still own the live holder, or the holder may have
+                    // become a zombie immediately before orphan adoption. Wait for the
+                    // exact parent transition; only the reaper may waitpid it.
+                    std::thread::sleep(Duration::from_millis(5));
+                }
+                Ok(Some((state, parent, group, start))) => {
+                    holder_error = Some(format!("escaped holder identity changed: state={state} parent={parent} pgid={group} start={start}"));
+                }
+                Ok(None) => holder_error = Some("escaped holder disappeared without this reaper's exact waitpid".to_owned()),
+                Err(error) => holder_error = Some(format!("could not read escaped holder identity: {error}")),
+            }
+        }
+        let holder_reaped = holder_receipt.is_some();
+        let receipt = holder_receipt.unwrap_or_else(|| format!("holder={holder_pid} start={holder_start} pgid={holder_group} reaped=false error={:?}", holder_error.as_deref().unwrap_or("cleanup deadline")));
+        managed_atomic_record(&root.join("escaped-holder-reaped"), &format!("{receipt}\n"));
+        managed_atomic_record(&root.join("reaper-cleanup"), &format!("pid={reaper_pid} start={reaper_start} host_status={status_code} complete={} {receipt}\n", status_code == 0 && holder_error.is_none()));
+        assert_eq!(status_code, 0, "deadline host must exit successfully after API-boundary readback");
+        assert!(holder_reaped, "fixture reaper did not reap the exact escaped holder: {receipt}");
         return;
     }
 
@@ -1696,6 +1785,10 @@ fn managed_zombie_host_process() {
         managed_zombie_host_deadline(&root, host_pid, host_start, deadline);
         return;
     }
+    if std::env::var(MANAGED_ZOMBIE_REAP_MODE_ENV).as_deref() == Ok("deadline-pipe") {
+        managed_zombie_host_escaped_pipe_deadline(&root, host_pid, host_start, deadline);
+        return;
+    }
     if std::env::var(MANAGED_ZOMBIE_REAP_MODE_ENV).as_deref() == Ok("output-limit") {
         managed_zombie_host_output_limit(&root, host_pid, host_start, deadline);
         return;
@@ -1802,6 +1895,55 @@ fn managed_zombie_host_deadline(root: &std::path::Path, host_pid: i32, host_star
         }
     };
     managed_atomic_record(&root.join("api-result"), &format!("host={host_pid} host_start={host_start} {result}\n"));
+    while !root.join("host-exit-release").exists() && Instant::now() < deadline {
+        std::thread::sleep(Duration::from_millis(5));
+    }
+}
+
+#[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_zombie_host_escaped_pipe_deadline(root: &std::path::Path, host_pid: i32, host_start: u64, deadline: Instant) {
+    let executable = std::env::current_exe().expect("test executable");
+    let executable_text = executable.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let root_literal = root.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let holder_record = root.join("holder-record").to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let holder_release = root.join("holder-release").to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let holder_challenge = root.join("holder-challenge").to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let holder_ack = root.join("holder-ack").to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let leader_record = root.join("leader-record").to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let sentinel_group = std::env::var(MANAGED_PIPE_SENTINEL_GROUP_ENV).expect("sentinel process group");
+    let config = SysConfig::default()
+        .programs(ProgramPolicy::AllowList(vec![executable_text.clone()]))
+        .process_scope(ProcessScope::Managed)
+        .max_output(4096);
+    let engine = engine(config);
+    let script = format!(
+        r#"run("{executable_text}", ["--exact", "managed_scope_retained_pipe_leader_fixture", "--nocapture", "--quiet"], #{{
+            env_clear: true,
+            env: #{{ {MANAGED_PIPE_FIXTURE_ENV}: "leader", {MANAGED_PIPE_ROOT_ENV}: "{root_literal}", {MANAGED_PIPE_HOLDER_RECORD_ENV}: "{holder_record}", {MANAGED_PIPE_HOLDER_RELEASE_ENV}: "{holder_release}", {MANAGED_PIPE_HOLDER_CHALLENGE_ENV}: "{holder_challenge}", {MANAGED_PIPE_HOLDER_ACK_ENV}: "{holder_ack}", {MANAGED_PIPE_SENTINEL_GROUP_ENV}: "{sentinel_group}", {MANAGED_PIPE_LEADER_RECORD_ENV}: "{leader_record}" }},
+            timeout: 1.0,
+            max_output: 4096
+        }})"#
+    );
+    let outcome = match engine.eval::<Map>(&script) {
+        Ok(report) => {
+            let bool_field = |key: &str| report.get(key).and_then(|value| value.as_bool().ok());
+            let stdout_marker = report.get("stdout").and_then(|value| value.as_immutable_string_ref().ok()).is_some_and(|value| value.contains("escaped-holder-stdout-ready\n"));
+            let stderr_marker = report.get("stderr").and_then(|value| value.as_immutable_string_ref().ok()).is_some_and(|value| value.contains("escaped-holder-stderr-ready\n"));
+            format!("api_success=true api_outcome=timeout_report success={:?} timed_out={:?} stdout_complete={:?} stderr_complete={:?} stdout_marker={stdout_marker} stderr_marker={stderr_marker}", bool_field("success"), bool_field("timed_out"), bool_field("stdout_complete"), bool_field("stderr_complete"))
+        }
+        Err(error) => {
+            let sys_error = match error.as_ref() {
+                rhai::EvalAltResult::ErrorRuntime(value, _) => value.clone().try_cast::<SysError>(),
+                _ => None,
+            };
+            match sys_error {
+                Some(SysError::Process { cause: ProcessCause::Timeout(_), report }) => format!("api_success=false api_outcome=typed_timeout_error timed_out={} stdout_complete={} stderr_complete={} stdout_marker={} stderr_marker={}", report.timed_out(), report.stdout_complete(), report.stderr_complete(), report.stdout_bytes().windows(b"escaped-holder-stdout-ready\n".len()).any(|part| part == b"escaped-holder-stdout-ready\n"), report.stderr_bytes().windows(b"escaped-holder-stderr-ready\n".len()).any(|part| part == b"escaped-holder-stderr-ready\n")),
+                Some(other) => format!("api_success=false api_outcome=typed_non_timeout_error kind={}", other.kind()),
+                None => format!("api_success=false api_outcome=non_sys_error error={error:?}"),
+            }
+        }
+    };
+    managed_atomic_record(&root.join("api-result"), &format!("host={host_pid} host_start={host_start} {outcome}\n"));
     while !root.join("host-exit-release").exists() && Instant::now() < deadline {
         std::thread::sleep(Duration::from_millis(5));
     }
@@ -2498,6 +2640,174 @@ fn managed_run_deadline_reaps_group_under_fixture_reaper() {
     assert!(cleanup_exact, "fixture reaper did not independently wait for exact worker and leaf identities: {cleanup_text}");
 }
 
+/// A managed run deadline cancels capture readers while an escaped descendant remains owned by
+/// the fixture subreaper and still holds both inherited pipe writers.
+#[test]
+#[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_run_deadline_cancels_escaped_pipe_holder_under_fixture_reaper() {
+    const WATCHDOG: Duration = Duration::from_secs(20);
+    let fixture = ManagedFixture::new();
+    let root = fixture.root.path().to_path_buf();
+    let deadline_ns = managed_zombie_monotonic_ns() + WATCHDOG.as_nanos() as u64;
+    let deadline = Instant::now() + WATCHDOG;
+    let mut sentinel = managed_spawn_sentinel();
+    let sentinel_pid = sentinel.0.id() as i32;
+    let sentinel_start = managed_proc_identity(sentinel_pid).expect("read sentinel identity").3;
+    let sentinel_group = unsafe { libc::getpgid(sentinel_pid) };
+    assert_eq!(sentinel_group, sentinel_pid, "fixture sentinel must own a separate process group");
+
+    let mut command = Command::new(std::env::current_exe().expect("test executable"));
+    command
+        .args(["--exact", "process_fixture", "--nocapture", "--quiet"])
+        .env_clear()
+        .env(MANAGED_ZOMBIE_ROLE_ENV, "reaper")
+        .env(MANAGED_ZOMBIE_REAP_MODE_ENV, "deadline-pipe")
+        .env(MANAGED_ZOMBIE_ROOT_ENV, &root)
+        .env(MANAGED_ZOMBIE_DEADLINE_ENV, deadline_ns.to_string())
+        .env(MANAGED_PIPE_SENTINEL_GROUP_ENV, sentinel_group.to_string());
+    let reaper_child = command.spawn().expect("start fixture-owned subreaper");
+    let reaper_pid = reaper_child.id() as i32;
+    let mut reaper = ManagedZombieReaperGuard { root: root.clone(), child: reaper_child, launched: false, deadline };
+    let reaper_ready = fixture.path("reaper-ready");
+    let host_ready = fixture.path("host-ready");
+    while (!reaper_ready.exists() || !host_ready.exists()) && Instant::now() < deadline {
+        assert!(reaper.child.try_wait().unwrap().is_none(), "fixture subreaper exited before readiness");
+        std::thread::sleep(Duration::from_millis(5));
+    }
+    assert!(reaper_ready.exists() && host_ready.exists(), "subreaper/Engine host readiness exceeded watchdog");
+    let reaper_receipt = std::fs::read_to_string(&reaper_ready).unwrap();
+    let reaper_start = managed_zombie_u64(&reaper_receipt, "start").expect("subreaper start time");
+    let host_receipt = std::fs::read_to_string(&host_ready).unwrap();
+    let host_pid = managed_record_fields(&host_receipt)["pid"];
+    let host_start = managed_zombie_u64(&host_receipt, "start").expect("host start time");
+    assert!(matches!(managed_proc_identity(reaper_pid), Some((state, parent, _, start)) if state != 'Z' && parent == std::process::id() as i32 && start == reaper_start));
+    assert!(matches!(managed_proc_identity(host_pid), Some((state, parent, _, start)) if state != 'Z' && parent == reaper_pid && start == host_start));
+    reaper.launched = true;
+    std::fs::write(fixture.path("begin-run"), b"start escaped-pipe deadline fixture\n").unwrap();
+
+    let readiness_deadline = Instant::now() + Duration::from_secs(4);
+    while (!fixture.path("leader-record").exists() || !fixture.path("holder-record").exists()) && Instant::now() < readiness_deadline {
+        std::thread::sleep(Duration::from_millis(2));
+    }
+    let leader_text = std::fs::read_to_string(fixture.path("leader-record")).expect("escaped-pipe leader record");
+    let holder_text = std::fs::read_to_string(fixture.path("holder-record")).expect("escaped-pipe holder record");
+    let leader_fields = managed_record_fields(&leader_text);
+    let holder_fields = managed_record_fields(&holder_text);
+    let leader_pid = leader_fields["pid"];
+    let leader_group = leader_fields["pgid"];
+    let leader_start = managed_zombie_u64(&leader_text, "start").expect("leader start time");
+    let holder_pid = holder_fields["pid"];
+    let holder_group = holder_fields["pgid"];
+    let holder_start = managed_zombie_u64(&holder_text, "start").expect("holder start time");
+    assert_eq!(leader_pid, leader_group, "managed leader must own its group");
+    assert_eq!(leader_fields.get("holder"), Some(&holder_pid));
+    assert_eq!(managed_zombie_u64(&leader_text, "holder_start"), Some(holder_start));
+    assert_eq!(holder_group, sentinel_group, "holder must live in the fixture sentinel's group");
+    assert_ne!(holder_group, leader_group, "holder must escape the managed group");
+    let (leader_pidfd, acquired_leader_start) = acquire_managed_pidfd_for_exact_parent_group(leader_pid, host_pid, leader_group);
+    let (holder_pidfd, acquired_holder_start) = acquire_managed_pidfd_for_exact_parent_group(holder_pid, leader_pid, holder_group);
+    let pidfds = ManagedPidfds(vec![(leader_pid, leader_pidfd, acquired_leader_start), (holder_pid, holder_pidfd, acquired_holder_start)]);
+    let leader_pidfd = pidfds.0[0].1;
+    let holder_pidfd = pidfds.0[1].1;
+    assert_eq!((leader_start, holder_start), (acquired_leader_start, acquired_holder_start));
+    std::fs::write(
+        fixture.path("escaped-pipe-pidfd-identities"),
+        format!("leader={leader_pid} leader_start={leader_start} leader_group={leader_group} holder={holder_pid} holder_start={holder_start} holder_group={holder_group} sentinel={sentinel_pid} sentinel_start={sentinel_start} sentinel_group={sentinel_group}\n"),
+    )
+    .unwrap();
+
+    let normal_observation_deadline = deadline.checked_sub(Duration::from_secs(8)).unwrap_or(deadline);
+    let api_path = fixture.path("api-result");
+    while !api_path.exists() && Instant::now() < normal_observation_deadline {
+        assert!(!fixture.path("exceptional-cleanup-started").exists(), "fixture watchdog started before the API boundary");
+        std::thread::sleep(Duration::from_millis(2));
+    }
+    let api_result = std::fs::read_to_string(&api_path).unwrap_or_default();
+    let timeout_report = api_result.contains("api_success=true api_outcome=timeout_report success=Some(false) timed_out=Some(true)");
+    let partial_capture = api_result.contains("stdout_complete=Some(false) stderr_complete=Some(false) stdout_marker=true stderr_marker=true");
+    let api_for_host = api_result.contains(&format!("host={host_pid} host_start={host_start}"));
+    let leader_live = matches!(managed_proc_identity(leader_pid), Some((state, _, group, start)) if state != 'Z' && group == leader_group && start == leader_start);
+    let holder_boundary = matches!(managed_proc_identity(holder_pid), Some((state, parent, group, start)) if state != 'Z' && parent == reaper_pid && group == holder_group && start == holder_start);
+    let host_live = matches!(managed_proc_identity(host_pid), Some((state, parent, _, start)) if state != 'Z' && parent == reaper_pid && start == host_start);
+    let reaper_live = matches!(managed_proc_identity(reaper_pid), Some((state, parent, _, start)) if state != 'Z' && parent == std::process::id() as i32 && start == reaper_start);
+    let sentinel_live = matches!(managed_proc_identity(sentinel_pid), Some((state, parent, group, start)) if state != 'Z' && parent == std::process::id() as i32 && group == sentinel_group && start == sentinel_start);
+    let pidfd_is_live = |fd: i32| {
+        let mut pollfd = libc::pollfd { fd, events: libc::POLLIN, revents: 0 };
+        (unsafe { libc::poll(&mut pollfd, 1, 0) }) == 0
+    };
+    let leader_pidfd_exited = {
+        let mut pollfd = libc::pollfd { fd: leader_pidfd, events: libc::POLLIN, revents: 0 };
+        (unsafe { libc::poll(&mut pollfd, 1, 0) }) == 1 && pollfd.revents & libc::POLLIN != 0
+    };
+    let holder_pidfd_live = pidfd_is_live(holder_pidfd);
+    let group_probe = unsafe { libc::kill(-leader_group, 0) };
+    let group_errno = if group_probe < 0 { std::io::Error::last_os_error().raw_os_error().unwrap_or(0) } else { 0 };
+    let no_watchdog = !fixture.path("exceptional-cleanup-started").exists();
+    let boundary = format!("host={host_pid} host_start={host_start} reaper={reaper_pid} reaper_start={reaper_start} leader={leader_pid} leader_start={leader_start} leader_live={leader_live} leader_pidfd_exited={leader_pidfd_exited} managed_group={leader_group} group_probe={group_probe} group_errno={group_errno} holder={holder_pid} holder_start={holder_start} holder_group={holder_group} holder_live={holder_boundary} holder_pidfd_live={holder_pidfd_live} host_live={host_live} reaper_live={reaper_live} sentinel={sentinel_pid} sentinel_start={sentinel_start} sentinel_group={sentinel_group} sentinel_live={sentinel_live} timeout_report={timeout_report} partial_capture={partial_capture} no_watchdog={no_watchdog}\n");
+    std::fs::write(fixture.path("api-boundary"), &boundary).unwrap();
+
+    std::fs::write(fixture.path("holder-challenge"), b"probe after timeout return\n").unwrap();
+    let challenge_deadline = (Instant::now() + Duration::from_secs(2)).min(normal_observation_deadline);
+    while !fixture.path("holder-ack").exists() && Instant::now() < challenge_deadline {
+        assert!(!fixture.path("exceptional-cleanup-started").exists(), "fixture watchdog started before the escaped-pipe challenge");
+        std::thread::sleep(Duration::from_millis(2));
+    }
+    let ack = std::fs::read_to_string(fixture.path("holder-ack")).unwrap_or_default();
+    let no_watchdog_through_challenge = !fixture.path("exceptional-cleanup-started").exists();
+    let holder_fields = managed_record_fields(&ack);
+    let epiprobe = holder_fields.get("pid") == Some(&holder_pid)
+        && holder_fields.get("stdout_result") == Some(&-1)
+        && holder_fields.get("stdout_error") == Some(&libc::EPIPE)
+        && holder_fields.get("stderr_result") == Some(&-1)
+        && holder_fields.get("stderr_error") == Some(&libc::EPIPE);
+    std::fs::write(fixture.path("holder-release"), b"release exact escaped holder\n").unwrap();
+    std::fs::write(fixture.path("release-leader"), b"release if still running\n").unwrap();
+    std::fs::write(fixture.path("host-exit-release"), b"API boundary and challenge recorded\n").unwrap();
+    let cleanup_deadline = deadline.checked_sub(Duration::from_secs(2)).unwrap_or(deadline);
+    while !fixture.path("escaped-holder-reaped").exists() && Instant::now() < cleanup_deadline {
+        std::thread::sleep(Duration::from_millis(5));
+    }
+    let holder_reap = std::fs::read_to_string(fixture.path("escaped-holder-reaped")).unwrap_or_default();
+    let reaper_status = loop {
+        match reaper.child.try_wait().expect("observe exact fixture subreaper") {
+            Some(status) => break Some(status),
+            None if Instant::now() < cleanup_deadline => std::thread::sleep(Duration::from_millis(5)),
+            None => break None,
+        }
+    };
+    let reaper_cleanup = if reaper_status.as_ref().is_some_and(|status| status.success()) {
+        std::fs::read_to_string(fixture.path("reaper-cleanup")).unwrap_or_default()
+    } else {
+        String::new()
+    };
+    let holder_reaped_exactly = holder_reap.contains(&format!("holder={holder_pid} start={holder_start} pgid={holder_group} reaped=true"));
+    let identity_absent = |pid, expected_start| match managed_proc_identity_checked(pid) {
+        Ok(None) => (true, "not found".to_owned()),
+        Ok(Some((_, _, _, actual_start))) if actual_start != expected_start => (true, format!("PID reused at start={actual_start}")),
+        Ok(Some(identity)) => (false, format!("same start still visible: {identity:?}")),
+        Err(error) => (false, format!("identity read failed: {error}")),
+    };
+    let (host_absent, host_absence) = identity_absent(host_pid, host_start);
+    let (leader_absent, leader_absence) = identity_absent(leader_pid, leader_start);
+    let (holder_absent, holder_absence) = identity_absent(holder_pid, holder_start);
+    let reaper_ok = reaper_status.as_ref().is_some_and(|status| status.success()) && reaper_cleanup.contains("complete=true");
+    drop(sentinel);
+    let (sentinel_absent, sentinel_absence) = identity_absent(sentinel_pid, sentinel_start);
+    let sentinel_group_probe = unsafe { libc::kill(-sentinel_group, 0) };
+    let sentinel_group_errno = if sentinel_group_probe < 0 { std::io::Error::last_os_error().raw_os_error().unwrap_or(0) } else { 0 };
+    eprintln!("managed_deadline_escaped_pipe_boundary {boundary} api={api_result:?} challenge={ack:?} no_watchdog_through_challenge={no_watchdog_through_challenge} holder_reap={holder_reap:?} reaper_cleanup={reaper_cleanup:?} reaper_ok={reaper_ok} host_absent={host_absent} host_absence={host_absence:?} leader_absent={leader_absent} leader_absence={leader_absence:?} holder_absent={holder_absent} holder_absence={holder_absence:?} sentinel_absent={sentinel_absent} sentinel_absence={sentinel_absence:?} sentinel_group_probe={sentinel_group_probe} sentinel_group_errno={sentinel_group_errno}");
+
+    assert!(reaper_ok, "fixture subreaper did not complete exact holder cleanup: {reaper_cleanup}");
+    assert!(host_absent && leader_absent && holder_absent && sentinel_absent, "an exact fixture identity remained live after cleanup: {boundary}");
+    assert!(sentinel_group_probe == -1 && sentinel_group_errno == libc::ESRCH, "sentinel group remained after exact sentinel cleanup");
+    assert!(api_for_host, "timeout report belonged to an unexpected Engine host: {api_result}");
+    assert!(timeout_report && partial_capture, "managed run must return its bounded deadline report with partial incomplete captures: {api_result}");
+    assert!(!leader_live && leader_pidfd_exited && group_probe == -1 && group_errno == libc::ESRCH, "deadline did not close the exact managed group: {boundary}");
+    assert!(holder_boundary && holder_pidfd_live && host_live && reaper_live && sentinel_live && no_watchdog && no_watchdog_through_challenge, "escaped holder custody/live boundary was invalid: {boundary}");
+    assert!(epiprobe, "escaped holder did not observe EPIPE on both closed capture writers after return: {ack}");
+    assert!(holder_reaped_exactly, "fixture reaper did not exact-wait the escaped holder: {holder_reap}");
+}
+
 /// A managed output cap preserves the configured prefix and closes its full process group.
 #[test]
 #[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
@@ -2838,6 +3148,27 @@ fn assert_managed_pidfds_live(pidfds: &ManagedPidfds) {
         let mut pollfd = libc::pollfd { fd: *fd, events: libc::POLLIN, revents: 0 };
         let result = unsafe { libc::poll(&mut pollfd, 1, 0) };
         assert_eq!(result, 0, "control member pid={pid} start={start} unexpectedly exited before API return");
+    }
+}
+
+#[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
+fn acquire_managed_pidfd_for_exact_parent_group(pid: i32, expected_parent: i32, expected_group: i32) -> (i32, u64) {
+    let deadline = Instant::now() + Duration::from_secs(4);
+    loop {
+        if let Some((state, parent, group, start)) = managed_proc_identity(pid) {
+            if state != 'Z' && parent == expected_parent && group == expected_group {
+                let fd = unsafe { libc::syscall(libc::SYS_pidfd_open, pid, 0) as i32 };
+                if fd >= 0 {
+                    if matches!(managed_proc_identity(pid), Some((current_state, current_parent, current_group, current_start)) if current_state != 'Z' && current_parent == expected_parent && current_group == expected_group && current_start == start) {
+                        eprintln!("managed_pipe_pidfd_acquired pid={pid} start={start} ppid={expected_parent} pgid={expected_group}");
+                        return (fd, start);
+                    }
+                    unsafe { libc::close(fd) };
+                }
+            }
+        }
+        assert!(Instant::now() < deadline, "escaped-pipe PID {pid} did not reach the exact live parent/group identity");
+        std::thread::sleep(Duration::from_millis(2));
     }
 }
 

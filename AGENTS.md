@@ -189,3 +189,20 @@ regressions). Its finite exception has expired. Runtime and scope cleanup passed
 only the exact immutable diagnostic input/export stage remains until export
 and retirement. No foreign process was modified. Future launches require fresh
 measured slot/capacity checks; no exception transfers to109.
+
+## Workhorse finite concurrency exception for invocation109
+
+Permit only this one reviewed bounded109 run plus foreign launcher1683061/start4944420
+and supervisor1683065/start4944422, compiler group1683065. Fresh measurement:
+32CPU, MemAvailable79586836KiB, free728046215168bytes,
+foreign compiler RSS sample1085476KiB (not peak).
+Require immediate matching foreign identities/no thirdheavy,16GiB availableRAM
+and disk,all13frozeninputhashes,scope/terminalabsent. Rhai600/585/540secondbounds
+including30secondexportreserve,2jobs,16descendants,1572864KiB preemptstorage and
+2097152KiB hardRSS/storage remain unchanged. No foreign process modified.
+Exception expires109terminal; later runs defaultoneheavy with fresh checks.
+
+Invocation109 is terminal0. Its finite exception has expired. All71 original
+files and seven closure artifacts were exported and independently hash checked.
+Exact owned stage/scope retirement and fresh group absence passed; no retained
+109 resources and no foreign process modified. Future runs require fresh checks.

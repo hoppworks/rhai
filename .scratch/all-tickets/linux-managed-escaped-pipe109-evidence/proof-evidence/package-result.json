@@ -1,0 +1,25 @@
+{
+  "acceptance_claim": false,
+  "base_regressions": [
+    "managed_run_succeeds_after_fixture_reaper_reaps_descendants",
+    "managed_run_reports_while_fixture_reaper_holds_stopped_zombies",
+    "managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes"
+  ],
+  "feature_rows": [
+    "testing-environ,sys",
+    "testing-environ,sys,sync,metadata",
+    "testing-environ,sys,f32_float",
+    "testing-environ,sys,unchecked"
+  ],
+  "green_rows": 4,
+  "limitations": [
+    "No no_float/no_index feature row is included; full native acceptance and remote custody require collector readback."
+  ],
+  "source_restored": true,
+  "source_revision": "523608648dcae99bc0f6b46eaf2bb91fa4ecc752",
+  "test": "managed_run_deadline_cancels_escaped_pipe_holder_under_fixture_reaper",
+  "test_sha256": "5836af855f7410213367786e195c0b9b09c0da005cde37244cfa241baf59c4cb",
+  "wrong_controls": [
+    "require-escaped-holder-control"
+  ]
+}

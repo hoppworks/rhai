@@ -81,27 +81,37 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 
 ## Current step and next action
 
-Current applicable instructions faba3db loaded by root/Expert/Standard. Full goal
-active; last independently pushed soleforkmain6687d547, production53b unchanged.
-Source523 escaped deadline-pipe criterion remains SOURCE READY, not accepted.
-Native108 terminal1 after3setup0/control101/3baseGREEN0;4newfeature rows not run.
-WrongPIDFDprefix recovered; distinct retained-regression polarity infra1 corrected.
-Root exported/hashchecked55originals/fivedirs; fresh99helper+2launcher+24fixture
-rows absent/eightgroups empty. Exact stage/scope retirement0, savedreceipt.
-No retained107/108 build or remote input stage; finite exceptions expired.
+Current instructions faba3db loaded by root/Expert/Standard. Full goal remains
+active and incomplete. Last pushed sole fork main19764c1f; production53b unchanged.
+Native109 source523/frozen19764 recipes terminal0: three setup0, intended named
+post-cleanup control101, three base regressions0 and four new feature rows0.
+Source restoration passed. Root independently rehashed71 original files/five
+directories against remote inventory and custody manifest. Seven pre-existing
+original closure artifacts preserved. Fresh199 helper/command and two launcher
+identity rows are absent; retained regression three original PIDs are NotFound
+(no fabricated start ticks), its two groups empty. Collector collect0/cleanup0;
+exact stage71files/fivedirs removed, fresh stage/scope/fourgroups absence saved.
+No retained107/108/109 runtime, scope or input stage. All finite exceptions expired.
+The incidental disappeared /proc/1713650/stat warning in original launcher output
+is preserved; actual launcher custody and cleanup readbacks passed independently.
 
-Prospective109 generic recipes in root independently execution/collection READY:
-proof890de4a1/stagea438f452/launch4d9ae4c6/collector17af3216/prepbe2ce2db.
-Correct completed-report wait_unit=false asserted exactly once; conservative
-retained fixture PID NotFound-only and two-group census/finalabsence added.
-Source523 unchanged; no source/stdin edits. Freeze root own recipes/history/original
-capsules and push authorized soleforkmain before nextstage.109unallocated;
-Unix108/escapednative2 cumulative and all prior cause/hard-limit history preserved.
-Next fresh machine/inputguards -> stage frozen109 -> bounded proof/export/actual
-combined acceptance. Four feature rows remain required; no broad release claim.
-Standard owns writerlinux-managed-success transferred inactive formerowner;
-preserve historical untrackednote. Resume accepted stdin TDD next once frozen109
-stage isolates523. All remaining ticket03/06/fullOSfeaturesMSRVrelease gates open.
+Same combined Expert ACCEPTED actual109 originals and named escaped deadline
+pipe criterion. Root integrated exact523 test bytes SHA5836af855f; non-scratch
+source equals accepted523 exceptprojectAGENTS. Proof and partial03/06 closure
+recorded. Next commit and push only forkmain with independent remote readback.
+Native109 cumulativeUnix109/escapednative3; prefix cause recovery and retained
+polarity recovery passed, original causes/history preserved. Sampled maxima are
+samples, not continuous peaks; usage/cost unknown. No source correction failure.
+
+Same Standard owns writerlinux-managed-success; preserve historical untrackednote.
+Immutable109 stage isolated523 before stdin edits. Test-only realOS early stdin
+closure regression is being prepared, production unchanged and no native RED yet.
+Test-only b827 frozen; sameStandard prepares host/sentinel and named baseline
+RED receipt correction plus scoped recipes. Affected independent review, then
+fresh slot and bounded native
+baseline RED before any production correction. Remaining stdin/postspawn faults,
+lifecycle/performance/docs/examples, macOS/Windows and final MSRV/features/release
+criteria stay open. No exhausted safety/user cause chain is renewed.
 
 ### Current coherent requirement: final managed client lease drop
 
@@ -1846,3 +1856,14 @@ Native108 allocated 2026-10-03T19:57:28.180978+00:00 at source523608648dcae99bc0
 Native108 terminal ROOT_OUTER_STATUS1/runscoped1, runtime/readback/scopecleanup0. Three setup0/control101/threebaseGREEN0; newfourfeature rows NOT executed. WrongPIDFDprefix recovery succeeded actualcontrol and originalclosure. New infrastructure occurrence1 retained-regression receipt polarity: helper requires wait_unit=true, actual frozen killfixture yields completedreport false and test0. No product correction failure. Same Standard pausedstdin(noedits), corrects actual-semantic receipt/pins to prospective109;109unallocated. Root raw108 collector adapted accepted107 preserving three originalclosures with fresh exactidentity/group checks and alloriginalhashes, awaiting sameExpert affected review. No closure artifacts regenerated.108exception expired; originalstage retained only for export, expiryunchanged.
 
 Raw108 collection/cleanup completed0. Root independently rehashed55originalfiles/fivedirectories;99helper+2launcher+24fixture rows absent, eightgroups empty. Existingthreeclosures preserved, nofeatureclosures invented. Hash-gated exactremote stage55files/fivedirs retired; freshstage/scope/eightgroupsabsence saved remote-cleanup.json. No retained108resource. Root109recipe affectedreview underway; source523unchanged,109unallocated. Singleprepcollectorpin refreshed after reviewfinding, no source/native correction count.
+
+Freeze19764c1f57116350352a942e0f826ddb3c857889 pushed/readback exactsoleforkmain; lowercaseauthorcommitter. Only reviewed recipes/state/originalcapsules integrated, productionunchanged. Raw stdout whitespace warnings preserved intentionally (originalsimmutable); ownrecipe syntax/diffchecksPASS. Four exactowned/private/tmp107/108originalcopies bytecompared tocommittedcapsules thenremoved; guard moved onlybyownedcodecopy to new109guard, priorownedguardremoved.
+
+Reviewed19764 generic109stage completed0/all13hashesPASS; root owns exact /root/rhai-linux-managed-escaped-pipe-20261003-52360864-109 physical /var/roothome/same-name, source523/frozen19764recipes. Retain untilboundedproof/export or inspectionexpiry 2026-10-04T20:10:49.782282+00:00, whicheverfirst. No109allocation/privatebuild; freshcapacityguardnext.
+
+Native109 allocated 2026-10-03T20:12:12.116337+00:00 source523/frozen19764reviewedrecipes. Immediateall13hash/identitycapacityguardPASS: foreign1683061/start4944420 supervisor1683065/start4944422 compiler group1683065/no-thirdheavy, finite109exception. CumulativeUnix109/escapednative3; first bounded recovery retainedregressionreceiptpolarity, prefixcause recovered. Bounds600/585/540incl30export/jobs2/desc16/preempt1572864/hard2097152KiB unchanged. Read-onlyglobal-slot race earlier consumednoallocation. Launchonce, acceptanceunproven.
+
+Native109 combinedactualacceptance ACCEPTED, exact523 test integration and
+partial03/06 closure recorded. Original71files/sevenclosures custody/retirement
+review valid; no broader ticket or release closure. SameStandard nextstdin source
+preparation, productionunchanged and baselineREDpending. Cumulativehistory retained.

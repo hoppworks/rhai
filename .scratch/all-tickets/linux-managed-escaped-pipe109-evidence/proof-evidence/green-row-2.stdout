@@ -1,0 +1,16 @@
+
+running 1 test
+test managed_run_deadline_cancels_escaped_pipe_holder_under_fixture_reaper ... 
+running 1 test
+
+running 1 test
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 48 filtered out; finished in 1.02s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 48 filtered out; finished in 1.03s
+
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 48 filtered out; finished in 4.04s
+

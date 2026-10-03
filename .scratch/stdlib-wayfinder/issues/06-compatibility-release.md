@@ -299,3 +299,20 @@ linux-managed-output-limit106-evidence/. This closes only the named Linux overfl
 criterion and affected regressions. Escaped pipes, post-spawn faults, remaining
 lifecycle/performance, other native platforms and final release acceptance remain
 open. Earlier borrow correction count1 and other cause/budget history are retained.
+
+## Accepted Linux deadline with escaped capture pipes — native109, 2026-10-03
+
+Immutable source523608648dcae99bc0f6b46eaf2bb91fa4ecc752, reviewed recipes19764c1f,
+private Rust1.77.2: public Engine managed run returns typed timeout with retained
+markers and honest incomplete captures despite a live escaped holder. Exact
+leader/group closure at API return, live host/reaper/sentinel/holder, independent
+post-return EPIPE on both writers, then exact fixture release/reaping are proven.
+Four feature GREENs and three affected base regressions pass; named opposite
+control fails101 after full cleanup and source restoration passes. Same combined
+review ACCEPTED all71 immutable originals/seven closure artifacts, fresh custody
+and exact stage/scope retirement. See ../../all-tickets/linux-managed-escaped-pipe-proof.md,
+linux-managed-escaped-pipe-review.md and linux-managed-escaped-pipe109-evidence/.
+This closes only this Linux escaped-reader/deadline criterion. No no_float/no_index,
+macOS/Windows, stdin/postspawn faults, remaining lifecycle/performance or full
+current-source release acceptance is claimed. Native107 prefix and108 polarity
+infrastructure history, successful bounded recoveries and cumulativeUnix109 remain.
