@@ -1,0 +1,23 @@
+{
+  "source": "20d25ad8ed4483d4cd4079cf62c8481a629c00e3",
+  "native_example_launch": 3,
+  "preflight": {
+    "utc": "2026-10-04T02:49:43Z",
+    "stage": "/var/roothome/rhai-linux-sys-process-example-20d25ad8-20261004",
+    "inputs_verified": 10,
+    "scope_absent": true,
+    "heavy": [],
+    "mem_available_kib": 83502740,
+    "disk_free_bytes": 724821405696,
+    "load": [
+      2.306640625,
+      3.54638671875,
+      7.7880859375
+    ],
+    "ready": true
+  },
+  "outer_seconds": 600,
+  "runner_seconds": 585,
+  "helper_seconds": 540,
+  "history": "launches1+2 consumed; native110 unallocated; stopped chains unchanged"
+}

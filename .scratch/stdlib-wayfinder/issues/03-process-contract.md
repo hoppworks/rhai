@@ -438,3 +438,15 @@ This closes only this Linux escaped-reader/deadline criterion. No no_float/no_in
 macOS/Windows, stdin/postspawn faults, remaining lifecycle/performance or full
 current-source release acceptance is claimed. Native107 prefix and108 polarity
 infrastructure history, successful bounded recoveries and cumulativeUnix109 remain.
+
+
+## Accepted Linux runnable examples — native example3, 2026-10-04
+
+Source20d25ad8/private Rust1.77.2/lock2ba4: one same-build public Engine
+sys/net/sys_process package passes three restored runs after three meaningful
+wrong-expectation controls101. Independent host file, TCP peer and child record
+readbacks cover effects; process pending wait/release/eight cached fields agree.
+Combined review plus separate102 identity/two-group/four-path cleanup accept
+this scoped criterion. See ../../all-tickets/linux-process-example3-proof.md.
+Only three proven Cargo/example/docs files integrated, no unaccepted stdin
+changes. Other lifecycle/platform/feature/performance/release criteria stay open.

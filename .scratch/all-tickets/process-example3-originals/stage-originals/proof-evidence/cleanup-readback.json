@@ -1,0 +1,10 @@
+{
+  "all_scoped_example_directories_removed": true,
+  "example_directory_prefixes": [
+    "rhai-sys-example-*",
+    "rhai-sys-process-example-*"
+  ],
+  "net_peer_joined_before_its_assertion": true,
+  "private_tmp": "/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9/tmp",
+  "remaining_example_directories": []
+}

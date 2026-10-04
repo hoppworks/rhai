@@ -1,0 +1,178 @@
+[
+  {
+    "argv": [
+      "/root/.cargo/bin/rustup",
+      "toolchain",
+      "install",
+      "1.77.2-x86_64-unknown-linux-gnu",
+      "--profile",
+      "minimal",
+      "--no-self-update"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 6.975,
+    "name": "rustup-install",
+    "spawned": true,
+    "started_monotonic_seconds": 0.071,
+    "status": 0,
+    "stderr": "evidence/rustup-install.stderr",
+    "stdout": "evidence/rustup-install.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+      "--version",
+      "--verbose"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9/source",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 7.097,
+    "name": "rustc-version",
+    "spawned": true,
+    "started_monotonic_seconds": 6.975,
+    "status": 0,
+    "stderr": "evidence/rustc-version.stderr",
+    "stdout": "evidence/rustc-version.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "--version",
+      "--verbose"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9/source",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 7.219,
+    "name": "cargo-version",
+    "spawned": true,
+    "started_monotonic_seconds": 7.097,
+    "status": 0,
+    "stderr": "evidence/cargo-version.stderr",
+    "stdout": "evidence/cargo-version.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "build",
+      "--locked",
+      "--example",
+      "sys",
+      "--example",
+      "net",
+      "--example",
+      "sys_process",
+      "--features",
+      "testing-environ,sys,net"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9/source",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 23.642,
+    "name": "cargo-build-examples",
+    "spawned": true,
+    "started_monotonic_seconds": 7.229,
+    "status": 0,
+    "stderr": "evidence/cargo-build-examples.stderr",
+    "stdout": "evidence/cargo-build-examples.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9/target/debug/examples/sys"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9/source",
+    "env_overrides": {
+      "RHAI_EXAMPLE_SYS_EXPECTED_HOST": "deliberately wrong host contents"
+    },
+    "expected_status": 101,
+    "finished_monotonic_seconds": 23.778,
+    "name": "sys-red",
+    "spawned": true,
+    "started_monotonic_seconds": 23.644,
+    "status": 101,
+    "stderr": "evidence/sys-red.stderr",
+    "stdout": "evidence/sys-red.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9/target/debug/examples/sys"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9/source",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 23.91,
+    "name": "sys-green",
+    "spawned": true,
+    "started_monotonic_seconds": 23.778,
+    "status": 0,
+    "stderr": "evidence/sys-green.stderr",
+    "stdout": "evidence/sys-green.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9/target/debug/examples/net"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9/source",
+    "env_overrides": {
+      "RHAI_EXAMPLE_NET_EXPECTED_PEER": "wrong peer bytes"
+    },
+    "expected_status": 101,
+    "finished_monotonic_seconds": 24.045,
+    "name": "net-red",
+    "spawned": true,
+    "started_monotonic_seconds": 23.911,
+    "status": 101,
+    "stderr": "evidence/net-red.stderr",
+    "stdout": "evidence/net-red.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9/target/debug/examples/net"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9/source",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 24.178,
+    "name": "net-green",
+    "spawned": true,
+    "started_monotonic_seconds": 24.045,
+    "status": 0,
+    "stderr": "evidence/net-green.stderr",
+    "stdout": "evidence/net-green.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9/target/debug/examples/sys_process"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9/source",
+    "env_overrides": {
+      "RHAI_SYS_PROCESS_EXAMPLE_EXPECTED_EXIT": "8"
+    },
+    "expected_status": 101,
+    "finished_monotonic_seconds": 24.311,
+    "name": "sys-process-red",
+    "spawned": true,
+    "started_monotonic_seconds": 24.178,
+    "status": 101,
+    "stderr": "evidence/sys-process-red.stderr",
+    "stdout": "evidence/sys-process-red.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9/target/debug/examples/sys_process"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9/source",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 24.544,
+    "name": "sys-process-green",
+    "spawned": true,
+    "started_monotonic_seconds": 24.311,
+    "status": 0,
+    "stderr": "evidence/sys-process-green.stderr",
+    "stdout": "evidence/sys-process-green.stdout"
+  }
+]

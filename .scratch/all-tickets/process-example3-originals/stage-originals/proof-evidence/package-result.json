@@ -1,0 +1,93 @@
+{
+  "all_controls_and_positive_runs_passed": true,
+  "cargo_build_invocations": 1,
+  "compatible_lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "controls": [
+    {
+      "expected_status": 101,
+      "intended_assertion_observed": true,
+      "name": "sys-red",
+      "required_diagnostics": [
+        "host file independent readback",
+        "left: \"Rhaiting data\"",
+        "right: \"deliberately wrong host contents\""
+      ],
+      "required_output": [],
+      "status": 101
+    },
+    {
+      "expected_status": 0,
+      "independent_readback": [
+        "host file now contains \"Rhaiting data\""
+      ],
+      "name": "sys-green",
+      "status": 0
+    },
+    {
+      "expected_status": 101,
+      "intended_assertion_observed": true,
+      "name": "net-red",
+      "required_diagnostics": [
+        "independent peer received the script bytes",
+        "left: [112, 105, 110, 103]",
+        "right: [119, 114, 111, 110, 103, 32, 112, 101, 101, 114, 32, 98, 121, 116, 101, 115]"
+      ],
+      "required_output": [],
+      "status": 101
+    },
+    {
+      "expected_status": 0,
+      "independent_readback": [
+        "Peer received ping; script received pong."
+      ],
+      "name": "net-green",
+      "status": 0
+    },
+    {
+      "expected_status": 101,
+      "intended_assertion_observed": true,
+      "name": "sys-process-red",
+      "required_diagnostics": [
+        "RED control changes only the expected exit",
+        "left: 7",
+        "right: 8"
+      ],
+      "required_output": [
+        "Host read back run child record:",
+        "Host read back spawned child record:",
+        "Spawn wait was pending, then both cloned handles returned the same result."
+      ],
+      "status": 101
+    },
+    {
+      "expected_status": 0,
+      "independent_readback": [
+        "Host read back run child record: \"run child wrote its record\\n\"",
+        "Host read back spawned child record: \"spawn child observed release\\n\"",
+        "Spawn wait was pending, then both cloned handles returned the same result."
+      ],
+      "name": "sys-process-green",
+      "status": 0
+    }
+  ],
+  "examples": [
+    "sys",
+    "net",
+    "sys_process"
+  ],
+  "features": "testing-environ,sys,net",
+  "helper_exit_status": 0,
+  "process_example_sha256": "4ef8c462221c237521a2554be4800b74852b3525e734fdbcab097e869fa12321",
+  "process_result_fields": [
+    "success",
+    "timed_out",
+    "stdout_complete",
+    "stderr_complete",
+    "code",
+    "signal",
+    "stdout",
+    "stderr"
+  ],
+  "scope": "Rust 1.77.2 Linux x86_64 examples through real Engine; host file, loopback peer and self-reexecuted process fixture",
+  "source_revision": "20d25ad8ed4483d4cd4079cf62c8481a629c00e3"
+}

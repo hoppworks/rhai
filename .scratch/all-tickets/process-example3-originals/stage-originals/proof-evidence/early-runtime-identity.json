@@ -1,0 +1,19 @@
+{
+  "captured_before_stage_validation_or_external_command": true,
+  "helper": {
+    "cmdline": "python3 /root/rhai-linux-sys-process-example-20d25ad8-20261004/run-examples.py",
+    "pgid": 3774195,
+    "pid": 3774196,
+    "ppid": 3774195,
+    "start_ticks": "7337505"
+  },
+  "identity_errors": {},
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9",
+  "scoped_supervisor": {
+    "cmdline": "/usr/bin/python3 /var/roothome/rhai-linux-sys-process-example-20d25ad8-20261004/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-sys-process-example-20d25ad8-20261004/run-examples.py",
+    "pgid": 3774195,
+    "pid": 3774195,
+    "ppid": 3774192,
+    "start_ticks": "7337503"
+  }
+}

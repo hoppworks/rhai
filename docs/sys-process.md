@@ -109,3 +109,25 @@ example, stopped group members may remain as zombies under a foreign parent.
 The API reports incomplete cleanup instead of certifying group closure; direct
 reaping, captured output and cleanup diagnostics remain separate facts. Errors
 without a process report expose `()` through `SysError.process`.
+
+## Runnable process example
+
+On Unix, run the self-contained Engine example with
+`cargo run --example sys_process --features sys`. It allow-lists only its own
+absolute executable path, treats a child's exit code 7 as a completed `run`
+result, and starts a second copy that waits for a parent-created release file.
+The parent observes a pending timed wait, releases the child, then reads the
+completed result through two cloned handles and compares the cached results.
+The spawned child writes its readiness record to a sibling temporary file and
+atomically renames it before the parent reads the record and releases the
+child. Both child-written records are read independently by the host before
+the example's temporary directory is removed. The example uses no shell or
+external program and has finite fixture and cleanup waits.
+
+The process API is currently registered on Unix. The example needs the `sys`
+feature and ordinary object maps; its timed-wait call also requires floating
+point support, so `no_float` builds are not covered. The non-Unix binary prints
+an explicit unsupported-platform message. This example demonstrates the
+documented public behavior on the platform where process access is implemented;
+it does not certify Windows, every feature combination, or the full process
+lifecycle contract.

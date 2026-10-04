@@ -1,0 +1,101 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+helper	3774196	3774195	3774195	7337505	python3 /root/rhai-linux-sys-process-example-20d25ad8-20261004/run-examples.py
+scoped-supervisor	3774195	3774192	3774195	7337503	/usr/bin/python3 /var/roothome/rhai-linux-sys-process-example-20d25ad8-20261004/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-sys-process-example-20d25ad8-20261004/run-examples.py
+command:du	3774198	3774196	3774195	7337514	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3774199	3774196	3774195	7337514	/bin/ps -e -o pid=,ppid=,rss=
+command:rustup-install	3774200	3774196	3774195	7337515	/root/.cargo/bin/rustup toolchain install 1.77.2-x86_64-unknown-linux-gnu --profile minimal --no-self-update
+command:du	3774201	3774196	3774195	7337515	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3774210	3774196	3774195	7337515	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3774233	3774196	3774195	7337616	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3774234	3774196	3774195	7337617	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3774257	3774196	3774195	7337718	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3774258	3774196	3774195	7337718	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3774329	3774196	3774195	7337819	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3774330	3774196	3774195	7337819	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3774343	3774196	3774195	7337920	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3774344	3774196	3774195	7337921	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3774367	3774196	3774195	7338022	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3774368	3774196	3774195	7338022	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3774381	3774196	3774195	7338123	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3774382	3774196	3774195	7338123	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3774394	3774196	3774195	7338204	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3774395	3774196	3774195	7338205	/bin/ps -e -o pid=,ppid=,rss=
+command:rustc-version	3774396	3774196	3774195	7338206	/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose
+command:du	3774397	3774196	3774195	7338206	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3774398	3774196	3774195	7338206	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3774400	3774196	3774195	7338217	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3774401	3774196	3774195	7338217	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-version	3774403	3774196	3774195	7338218	/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose
+command:du	3774404	3774196	3774195	7338218	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3774408	3774196	3774195	7338218	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3774418	3774196	3774195	7338229	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3774419	3774196	3774195	7338229	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3774420	3774196	3774195	7338230	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3774421	3774196	3774195	7338230	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-build-examples	3774422	3774196	3774195	7338231	/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo build --locked --example sys --example net --example sys_process --features testing-environ,sys,net
+command:du	3774423	3774196	3774195	7338231	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3774424	3774196	3774195	7338231	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3774492	3774196	3774195	7338332	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3774493	3774196	3774195	7338332	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3774511	3774196	3774195	7338433	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3774512	3774196	3774195	7338434	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3774525	3774196	3774195	7338535	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3774526	3774196	3774195	7338535	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3774541	3774196	3774195	7338636	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3774542	3774196	3774195	7338636	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3774556	3774196	3774195	7338737	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3774557	3774196	3774195	7338738	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3774764	3774196	3774195	7338839	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3774765	3774196	3774195	7338840	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3774967	3774196	3774195	7338941	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3774970	3774196	3774195	7338942	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3775148	3774196	3774195	7339043	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3775154	3774196	3774195	7339044	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3775215	3774196	3774195	7339145	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3775216	3774196	3774195	7339146	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3775323	3774196	3774195	7339247	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3775324	3774196	3774195	7339247	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3775454	3774196	3774195	7339349	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3775456	3774196	3774195	7339349	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3775470	3774196	3774195	7339451	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3775471	3774196	3774195	7339451	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3775484	3774196	3774195	7339553	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3775485	3774196	3774195	7339553	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3775505	3774196	3774195	7339655	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3775506	3774196	3774195	7339655	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3775527	3774196	3774195	7339757	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3775528	3774196	3774195	7339757	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3775581	3774196	3774195	7339859	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3775582	3774196	3774195	7339859	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3775585	3774196	3774195	7339870	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3775587	3774196	3774195	7339871	/bin/ps -e -o pid=,ppid=,rss=
+command:sys-red	3775588	3774196	3774195	7339872	/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9/target/debug/examples/sys
+command:du	3775589	3774196	3774195	7339873	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3775590	3774196	3774195	7339873	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3775593	3774196	3774195	7339884	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3775594	3774196	3774195	7339885	/bin/ps -e -o pid=,ppid=,rss=
+command:sys-green	3775595	3774196	3774195	7339886	/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9/target/debug/examples/sys
+command:du	3775596	3774196	3774195	7339886	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3775597	3774196	3774195	7339887	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3775599	3774196	3774195	7339898	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3775600	3774196	3774195	7339898	/bin/ps -e -o pid=,ppid=,rss=
+command:net-red	3775601	3774196	3774195	7339899	/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9/target/debug/examples/net
+command:du	3775603	3774196	3774195	7339899	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3775604	3774196	3774195	7339900	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3775607	3774196	3774195	7339911	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3775608	3774196	3774195	7339912	/bin/ps -e -o pid=,ppid=,rss=
+command:net-green	3775609	3774196	3774195	7339913	/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9/target/debug/examples/net
+command:du	3775611	3774196	3774195	7339913	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3775612	3774196	3774195	7339913	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3775614	3774196	3774195	7339924	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3775615	3774196	3774195	7339925	/bin/ps -e -o pid=,ppid=,rss=
+command:sys-process-red	3775616	3774196	3774195	7339926	/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9/target/debug/examples/sys_process
+command:du	3775617	3774196	3774195	7339926	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3775621	3774196	3774195	7339927	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3775623	3774196	3774195	7339938	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3775624	3774196	3774195	7339938	/bin/ps -e -o pid=,ppid=,rss=
+command:sys-process-green	3775625	3774196	3774195	7339939	/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9/target/debug/examples/sys_process
+command:du	3775626	3774196	3774195	7339939	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3775629	3774196	3774195	7339940	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3775634	3774196	3774195	7339961	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9
+command:ps	3775635	3774196	3774195	7339962	/bin/ps -e -o pid=,ppid=,rss=

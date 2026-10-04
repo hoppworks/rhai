@@ -1,0 +1,12 @@
+{
+  "elapsed_seconds_at_export": 24.546,
+  "evidence_destination": "/root/rhai-linux-sys-process-example-20d25ad8-20261004/proof-evidence",
+  "expected_outer_scope": "/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004",
+  "export_deadline_checks_between_items": true,
+  "helper_deadline_seconds": 540,
+  "helper_work_deadline_seconds": 510,
+  "individual_copy_operations_preemptible": false,
+  "partial_evidence_may_remain_if_export_fails": true,
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-sys-process-example-20d25ad8-20261004/agent-build-tx7h81g9",
+  "runtime_cleanup_owner": "run_scoped.py; coordinator must independently read back"
+}

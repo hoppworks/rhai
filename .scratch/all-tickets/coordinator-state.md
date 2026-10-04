@@ -81,6 +81,51 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 
 ## Current step and next action
 
+Rules faba3db loaded; overall goal active and incomplete. Latest independently
+verified fork main867a2cb9ed87d56f9c564ec3a57eaa00e5fbe576. Production523 and
+prior valid proofs retain their recorded applicability. Native110 unallocated;
+stopped stdin/Darwin/Windows cause chains remain stopped.
+
+Native example launch3 at source20d25ad8ed4483d4cd4079cf62c8481a629c00e3 is
+terminal0. At2026-10-04T02:49:43Z the140th checked default preflight observed
+empty heavy inventory and verified all ten inputs, then allocated/started the
+run on the same SSH connection. No finite exception was written or used;
+no foreign process/resource changed. Authorized Tauron coordination was sent,
+but no granted-window reply is claimed. Root sent the terminal/cleanup result.
+
+Private Rust/Cargo1.77.2 single build0; sys/net/sys_process intended wrong
+expectations each fail101, correct real Engine/OS runs each pass0. Host file,
+loopback peer and self-reexecuted children independently expose expected effects.
+Process run code7, pending wait, fixture release and all eight cloned-handle
+cached result fields are covered. Actual raw logs, manifest restoration, tools
+and source/lock bindings are preserved in process-example3-originals.
+All71 original files/six directories and raw tar hash
+4061bf5d3441d61e05aeb428bd69ca523d0966b229e5f1e51c90b05dd1d12756
+independently match. Collector retired exact stage after fresh checks; separate
+root reader confirms102 identities absent/reused, groups3772732/3774195 empty,
+logical/physical stage, runtime and central scope absent. No retained own build.
+Resource44 periodic samples: maxima923112KiB RSS,743624KiB storage,7descendants,
+not continuous peaks. Native duration about25seconds; prior launches1+2 and
+one pre-wrapper SSH-quoting failure remain consumed/classified in history.
+
+Native3 combined review READY, exact three-file integration completed.
+Direct bytes match20d, production/codegen/build unchanged;492 unaccepted stdin
+lines excluded. linux-process-example3-proof.md closes Linux examples narrowly.
+Root local integration guards had phrase/untracked-diff artifacts, resolved by
+actual verdict and direct byte comparison; no native/source history reset.
+Next commit/push fork main and independent remote-only-main readback.
+
+Independent drop-false package remains with same Standard. Proposal118a2c40 and
+test-only patch against523 address the brief live-phase observation race through
+an opt-in Linux8second request/ACK barrier. Source/native acceptance unverified.
+Same owner is preparing narrow consuming driver/concurrent observer/collector;
+no SSH/stage/build/native allocation authorized in that preparation brief.
+Existing30minute active-work planning checkpoint preserves cumulative unknown
+work and exact600/585/540seconds/resource caps for a later reviewed launch.
+Broader process/fault/platform/feature/performance/release criteria remain open.
+
+### Previous example preparation and native2 history (preserved)
+
 Rules faba3db loaded; goal active and incomplete. Latest independently verified
 fork main3c90180295c2c73b64f4b43900b35c52056be515. Accepted production523 and
 native109 remain valid within recorded applicability. Native110 unallocated;
@@ -2716,3 +2761,25 @@ launch/acceptance or production integration inferred. Current turn PROGRESS.
 Affected ee50c63e source review SOURCE READY: all four9d findings closed, no
 new material affected source issue. Same responsible Standard resumed consuming
 recipes; no source acceptance, native allocation or production integration.
+
+## Atomic free-window observation route — 2026-10-04
+
+Attempts2/3 observed changed busy Tauron groups and did not allocate/launch.
+A finite candidate for group3732700 was generated but not reviewed/used; the
+foreign group ended before measurement, no AGENTS exception was recorded.
+Next root wrapper observes the exact unchanged reviewed default preflight for
+at most180seconds,1second between completed observations, then immediately
+launches on the same SSH connection only after check_returncode/ready/empty
+heavy verified. This is not a lock/reservation. No native3 allocated until its
+actual NATIVE3_ALLOCATED marker and exclusive remote allocation receipt.
+600/585/540 run limits and all cause/budget/history remain unchanged; local
+transport timeout810 allows the separate180second lightweight wait plus
+terminal delivery. Original observations/console are preserved in
+process-example3-slot-and-launch-console.log. No exception or foreign changes.
+
+Slot transport attempt1 failed before Python wrapper/guard/build execution:
+SSH joins command arguments through a shell; unquoted multiline-c arguments
+were split, yielding Python import SyntaxError and Bash syntax error. Original
+console retained. One infrastructure outcome; native3 remains unallocated.
+Correction: one shell-quoted remote command via shlex.quote(wrapper), unchanged
+wrapper/default guard/limits. Transport2 original console separately retained.

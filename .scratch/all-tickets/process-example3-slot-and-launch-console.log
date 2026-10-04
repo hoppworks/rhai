@@ -1,0 +1,6 @@
+  File "<string>", line 1
+    import
+          ^
+SyntaxError: Expected one or more names after 'import'
+bash: -c: line 2: syntax error near unexpected token `('
+bash: -c: line 2: `preflight=json.loads(sys.stdin.read());deadline=time.monotonic()+180'

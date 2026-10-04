@@ -157,6 +157,10 @@ name = "sys"
 required-features = ["sys"]
 
 [[example]]
+name = "sys_process"
+required-features = ["sys"]
+
+[[example]]
 name = "net"
 required-features = ["net"]
 
