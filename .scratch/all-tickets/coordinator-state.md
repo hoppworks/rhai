@@ -82,7 +82,7 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 ## Current step and next action
 
 Current instructions faba3db loaded. Goal active/incomplete; latest independently
-verified fork main0fc4f79c3b44fd52cd67ab34f79e490da6b225d1. Accepted production523
+verified fork main44c266f4890a6fda2948882af88c1c0a6c9e10f7. Accepted production523
 and native109 proof unchanged. Native110 unallocated; explicitly exhausted
 stdin/macOS/Windows chains stay stopped. Default one-heavy-run applies.
 
@@ -122,6 +122,30 @@ shows another active turn; no free-window confirmation. Next: preserve reviewed
 tooling/proof on fork main, obtain actual free slot, then explicit Python
 check=True guard followed by launcher. Never use unchecked shell fallthrough.
 Native examples need six actual controls plus independent host/resource readback.
+
+Exact corrected60048 collection configuration now READY. Same Standard committed
+728193aedd53211375d7057396eb131725fb3482; root copied only configurator source,
+SHA3aba4087c4de866774c8eed475f4570f3546ffa348db74a9efacaeecc6588f09.
+Fixed ea7 base hash and exact replacement guards restrict changes to the three
+paths, two provenance tables and ten preflight pins; no collector mode invoked.
+Root in-memory regeneration matches output SHA
+a36c1d720fd6898f6d4c30c1e590dd8e837ac19a4109d7d70511a89b7a1f01ce.
+Same combined reviewer accepted only affected configuration and refusal tests;
+no native/source behavioral acceptance. Configurator report in existing review.
+Writer owns /private/tmp/rhai-process-example60048-collector.py, exact configured
+source31018bytes retained for upcoming collection; root may read/execute it after
+actual native run, not delete writer-owned output without explicit transfer.
+No private build allocated. Configuration elapsed/cost unknown; 15minute planning
+checkpoint did not revise any existing consumed source/native history.
+
+This goal turn follows prior PROGRESS (real custody/retirement/push); it adds
+reviewed new-stage collection applicability. Slot wait independently verified:
+same foreign3276320/start6852456 and3276321/start6852459 live from01:45:58 through
+01:46:43Z. Fresh guard01:48:42Z still BUSY with same runner/supervisor and changed
+live Cargo/rustc descendants;10 pins intact, prospective scope absent. Original
+guard output process-example2-preflight-slot-wait.json. No heavy run launched or
+foreign resources modified. Continue at actual free slot/coordination response;
+no repeated status-only rounds or expired concurrency exception reuse.
 
 Frozen replay probe retains its original writer Git-history dependencies e537/
 c600 and absolute fixture reference. Exact control bytes are also preserved as

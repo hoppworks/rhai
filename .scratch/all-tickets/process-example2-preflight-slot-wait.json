@@ -1,0 +1,100 @@
+{
+  "utc": "2026-10-04T01:48:42Z",
+  "stage": "/var/roothome/rhai-linux-sys-process-example-60048ec4-20261004",
+  "inputs_verified": 10,
+  "scope_absent": true,
+  "heavy": [
+    {
+      "pid": 3276320,
+      "start": "6852456",
+      "pgid": 3276313,
+      "state": "S",
+      "argv": [
+        "python3",
+        "/home/workhorse/projects/agent-skills/tools/run_scoped.py",
+        "--timeout",
+        "4000"
+      ]
+    },
+    {
+      "pid": 3276321,
+      "start": "6852459",
+      "pgid": 3276321,
+      "state": "S",
+      "argv": [
+        "/usr/bin/python3",
+        "/var/home/workhorse/projects/agent-skills/tools/run_scoped.py",
+        "_supervise",
+        "4"
+      ]
+    },
+    {
+      "pid": 3351538,
+      "start": "6970631",
+      "pgid": 3276321,
+      "state": "S",
+      "argv": [
+        "/var/home/workhorse/.rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+        "check",
+        "--locked",
+        "-p"
+      ]
+    },
+    {
+      "pid": 3356113,
+      "start": "6971220",
+      "pgid": 3276321,
+      "state": "S",
+      "argv": [
+        "/home/workhorse/.rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/rustc",
+        "--crate-name",
+        "redis",
+        "--edition=2024"
+      ]
+    },
+    {
+      "pid": 3356148,
+      "start": "6971273",
+      "pgid": 3276321,
+      "state": "S",
+      "argv": [
+        "/home/workhorse/.rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/rustc",
+        "--crate-name",
+        "nalgebra",
+        "--edition=2024"
+      ]
+    },
+    {
+      "pid": 3356164,
+      "start": "6971300",
+      "pgid": 3276321,
+      "state": "S",
+      "argv": [
+        "/home/workhorse/.rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/rustc",
+        "--crate-name",
+        "tonic",
+        "--edition=2024"
+      ]
+    },
+    {
+      "pid": 3356177,
+      "start": "6971312",
+      "pgid": 3276321,
+      "state": "S",
+      "argv": [
+        "/home/workhorse/.rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/rustc",
+        "--crate-name",
+        "sqlx_postgres",
+        "--edition=2021"
+      ]
+    }
+  ],
+  "mem_available_kib": 81523728,
+  "disk_free_bytes": 519965757440,
+  "load": [
+    17.12109375,
+    16.724609375,
+    9.982421875
+  ],
+  "ready": false
+}
