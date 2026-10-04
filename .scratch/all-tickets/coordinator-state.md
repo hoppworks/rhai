@@ -82,7 +82,7 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 ## Current step and next action
 
 Rules faba3db loaded; goal active and incomplete. Latest independently verified
-fork main77d3ce6a7544b520d9e8e107403468c5f1f766fc. Accepted production523 and
+fork main3c90180295c2c73b64f4b43900b35c52056be515. Accepted production523 and
 native109 remain valid within recorded applicability. Native110 unallocated;
 exhausted stdin/macOS/Windows chains remain stopped. No active owned heavy run.
 
@@ -107,8 +107,9 @@ hash/identity/group recheck. Separate root SSH readback independently verifies
 all102 identities absent/reused, both groups empty and four logical/physical
 stage/scope/runtime paths absent. See process-example2-retirement-independent.json
 and readback-process-example2-retirement.py. No retained native2 build/stage.
-Configured writer-owned /private/tmp collector/source archive remain foreign
-owned pending owner cleanup; root will not delete them without transfer.
+The writer hash-verified and removed its two obsolete /private/tmp60048 files;
+root independently confirmed both exact paths absent. No current20d resource
+or foreign resource was removed.
 
 The single measured corrected60048 concurrency exception is EXPIRED. Immediate
 reviewed guard passed02:04:44Z before launch, explicit Python check=True enforced.
@@ -126,22 +127,45 @@ from the same combined affected reviewer. Example SHA256 independently matches
 all eight public snapshot fields are compared using supported typed values.
 Author/committer hoppworks <daniel@hoppworks.de> independently verified. Source
 compilation/native behavior unverified; do not merge whole writer history or
-claim controls. Same Standard is actively preparing only new exact source/path/
-pin recipe configuration, no SSH/staging/build/native action authorized there.
-Fresh read-only workhorse measurement after retirement found heavy=[]/32CPUs,
-MemAvailable83463852KiB/free726415319040bytes; this is a sample, not reserved slot.
-Next: collect prepared immutable recipes, same affected configuration review,
-then root fresh check=True default one-heavy guard and bounded native acceptance.
-Do not launch another run until that sequence; no finite capacity exception now.
-Independent drop-false work follows existing fixtures. Overall feature/MSRV/
-native platform/release gates remain open. No user answer is pending. Source
-preparation elapsed/cost unknown; existing planning/cause history retained.
+claim controls. Same Standard froze the twelve-file packet0dfc7349; the same
+combined independent reviewer found source and adapted configuration READY.
+Root regenerated and verified the source archive, copied immutable packet bytes,
+and staged the ten pinned inputs successfully on workhorse (stage exit0).
+No compiler/behavior acceptance is inferred from preparation.
 
-Current turn PROGRESS: actual native compiler outcome diagnosed, original proof
-preserved and exact own resource retirement independently closed. Guard candidate
-source failure1 and repaired READY verdict remain in review/history. Elapsed
-native sample about40seconds; source-active/time/cost unknown except earlier
-reported31-32collector source minutes plus unknown. Samples are not peaks.
+Immediate default-slot preflight on2026-10-04T02:34:53Z was BUSY/status3:
+foreign launcher3680000/start7238687 and supervisor3680001/start7238690,
+Cargo/rustc in group3680001. Ten input hashes passed, scope absent;
+MemAvailable81434312KiB, disk free724845391872bytes, load3.02/15.79/15.63.
+The check was enforced using explicit check_returncode before any launch.
+No owned native3 allocated or launched; native1+2 remain consumed, native110
+unallocated. No expired capacity exception used and no foreign process changed.
+Actual receipt: process-example3-launch-preflight.json.
+
+Using the owner's explicit authorization, root messaged Tauron chat
+01a0fe32-5425-71d2-887b-3bf1bac284e7 for a free600second window after its
+current bounded run, explicitly prohibiting interruption of that run.
+Next: wait for coordination or new actual progress; perform a fresh successful
+checked empty-heavy preflight before allocating/launching native3. Preserve
+all existing limits and cause history. Then collect actual original outcomes,
+independently verify custody and retire only the exact owned inputs/runtime.
+
+Retained preparation only (not a build): root-owned remote stage
+/root/rhai-linux-sys-process-example-20d25ad8-20261004, canonical
+/var/roothome/rhai-linux-sys-process-example-20d25ad8-20261004. Purpose: reviewed
+20d25 native example launch and original collection; input pins in frozen packet.
+Reuse ends at launch+collection/retirement or cancellation; preparation expiry
+2026-10-05T02:34:53Z. No runtime/private cache exists yet. On expiry inspect
+ownership/activity and preserve originals before exact cleanup; never delete
+active files. Root source packet and existing accepted evidence remain durable.
+
+Current turn PROGRESS: independent source/packet readiness closed, actual input
+staging verified, immediate launch guard correctly withheld a busy launch and
+actual cross-chat coordination sent. Reported local wording-probe failure has
+no durable script/log and supplies no acceptance; history preserved in review.
+No routine permission pending. Overall feature/MSRV/native-platform/release
+acceptance remains open. Source elapsed/cost unknown beyond earlier recorded
+estimates; historical budgets and stopped chains are unchanged.
 
 ### Previous continuation receipts and cause history (preserved)
 
