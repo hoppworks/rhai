@@ -81,25 +81,53 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 
 ## Current step and next action
 
-Current instructions faba3db loaded. Goal active/incomplete; only fork main last
-independently read back at b2c02c472bc1f726fc6861de9b508fbe1414ca6f.
-Accepted production523/native109 proof remain unchanged. Native110 unallocated;
-exhausted stdin/macOS/Windows chains stay stopped. Default one-heavy-run applies.
+Current instructions faba3db loaded. Goal active/incomplete; latest independently
+verified fork main0fc4f79c3b44fd52cd67ab34f79e490da6b225d1. Accepted production523
+and native109 proof unchanged. Native110 unallocated; explicitly exhausted
+stdin/macOS/Windows chains stay stopped. Default one-heavy-run applies.
 
-Current package: preserve and safely retire failed663 example originals, then
-verify the separately prepared60048 corrected example package on workhorse.
-All49 original files and tar are independently verified, committed and pushed;
-old failed custody receipt remains historical. Original663 stage is retained,
-runtime/scope historically absent. New60048 stage is prepared and unrun.
-Expert19 diagnosed actual emitter/consumer identity mismatch plus malformed proc
-start classification. Same Standard owns one consolidated consumer-only repair
-with20minute active-work planning checkpoint; no native allocation or limit reset.
-Next affected combined recheck, fresh named actual custody observation, exact
-retirement with independent readback; then actual free-slot guarded six-control
-example acceptance. Latest00:59:00Z preflight was busy; Tauron coordination is
-explicitly authorized and latest chat cursor14 confirms active backend work,
-not a reserved window. Prior guard fallthrough error and all consumed work remain
-preserved. No foreign processes/resources may be interrupted.
+Failed663 example resource custody and retirement CLOSED. All49 original files
+and tar remain preserved, verified and pushed; historical failed custody receipt
+unchanged. Reviewed collector ea7ca8f6b30c0a680378f565530a3f616c22b4eb freshly
+verified64+2 original rows/66 PID-start identities and two empty groups, then
+retired exactly49 files and6 directories. Separate root SSH readback confirms
+all66 original identities absent/reused, both groups empty, and four logical/
+physical stage/scope/runtime paths absent. See process-example1-originals/
+custody-readback-refresh.json, retirement-receipt.json and
+process-example1-retirement-independent.json. This is resource closure, not
+product acceptance. Same independent reviewer exported its actual model probes
+into process-example-independent-probe-evidence.md and hash-verified exact own
+temporary cleanup; no native/review rerun during preservation.
+
+Collector cause history preserved: Expert19, failed completed c600 correction1,
+then same consolidated repair closing three framing predicates. Root reconciled
+standing accept-recommendations/quality/continue and current autonomous rules:
+no human hard source-change count or time cap; ordinary reversible review-fix
+batching authorized. Closing edit planning5 minutes after25 consumed; writer
+reported6-7 minutes actual closing use, cumulative31-32 reported source minutes,
+earlier collector use unknown. No history reset, second Expert or renewal of
+explicitly stopped native chains. Combined affected review ea7 READY; root
+independently verified frozen hashes and exact lowercase Git attribution.
+
+Corrected source60048 and ten pinned recipe inputs prepared at
+/root/rhai-linux-sys-process-example-60048ec4-20261004, UNRUN; prospective central
+scope absent. Latest fresh guard01:37:35Z BUSY, all10 pins verified: foreign
+runner3276320/start6852456, supervisor3276321/start6852459, Cargo3311477 and
+rustc3311481/3311483. Capacity samples are not reservations. See
+process-example2-preflight-after-retirement.json. No new native launch.
+
+Explicitly authorized Tauron build-window message sent requesting600 seconds
+between bounded runs without interrupting its active work. Latest chat cursor16
+shows another active turn; no free-window confirmation. Next: preserve reviewed
+tooling/proof on fork main, obtain actual free slot, then explicit Python
+check=True guard followed by launcher. Never use unchecked shell fallthrough.
+Native examples need six actual controls plus independent host/resource readback.
+
+Frozen replay probe retains its original writer Git-history dependencies e537/
+c600 and absolute fixture reference. Exact control bytes are also preserved as
+process-example-collector-control-e537.py and -c600.py; a clean fork clone needs
+explicit replay dependency mapping. Do not claim these historical model probes
+are portable or real OS acceptance. Foreign historical CLI logs untouched.
 
 ### Prior package history and detailed applicability (preserved)
 

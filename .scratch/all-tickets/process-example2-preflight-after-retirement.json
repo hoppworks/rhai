@@ -1,0 +1,76 @@
+{
+  "disk_free_bytes": 722771292160,
+  "heavy": [
+    {
+      "argv": [
+        "python3",
+        "/home/workhorse/projects/agent-skills/tools/run_scoped.py",
+        "--timeout",
+        "4000"
+      ],
+      "pgid": 3276313,
+      "pid": 3276320,
+      "start": "6852456",
+      "state": "S"
+    },
+    {
+      "argv": [
+        "/usr/bin/python3",
+        "/var/home/workhorse/projects/agent-skills/tools/run_scoped.py",
+        "_supervise",
+        "4"
+      ],
+      "pgid": 3276321,
+      "pid": 3276321,
+      "start": "6852459",
+      "state": "S"
+    },
+    {
+      "argv": [
+        "/home/workhorse/.rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+        "check",
+        "--locked",
+        "-p"
+      ],
+      "pgid": 3276321,
+      "pid": 3311477,
+      "start": "6903979",
+      "state": "S"
+    },
+    {
+      "argv": [
+        "/home/workhorse/.rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/rustc",
+        "--crate-name",
+        "gateway",
+        "--edition=2021"
+      ],
+      "pgid": 3276321,
+      "pid": 3311481,
+      "start": "6904023",
+      "state": "S"
+    },
+    {
+      "argv": [
+        "/home/workhorse/.rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/rustc",
+        "--crate-name",
+        "gateway",
+        "--edition=2021"
+      ],
+      "pgid": 3276321,
+      "pid": 3311483,
+      "start": "6904023",
+      "state": "S"
+    }
+  ],
+  "inputs_verified": 10,
+  "load": [
+    3.498046875,
+    4.3935546875,
+    4.837890625
+  ],
+  "mem_available_kib": 79387332,
+  "ready": false,
+  "scope_absent": true,
+  "stage": "/var/roothome/rhai-linux-sys-process-example-60048ec4-20261004",
+  "utc": "2026-10-04T01:37:35Z"
+}
