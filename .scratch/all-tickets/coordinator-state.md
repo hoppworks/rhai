@@ -82,7 +82,7 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 ## Current step and next action
 
 Rules faba3db loaded; goal active and incomplete. Latest independently verified
-fork main1a3411abf2eb7045d4166df0448c097b523d83c2. Accepted production523 and
+fork main77d3ce6a7544b520d9e8e107403468c5f1f766fc. Accepted production523 and
 native109 remain valid within recorded applicability. Native110 unallocated;
 exhausted stdin/macOS/Windows chains remain stopped. No active owned heavy run.
 
@@ -120,9 +120,22 @@ Drop-false diagnosis preserves valid macOS81 behavior proof because actual test
 bodies/fixtures/production dependencies are unchanged to523. Independent managed
 member readback gap and Linux two exact-case native proof remain open; see
 linux-drop-false-next.md. No whole-file-hash-only rebuild or new harness needed.
-Next: review the corrected example source in same responsible contexts, then
-fresh measured native acceptance; independent drop-false work follows existing
-fixtures. Overall feature/MSRV/native platform/release gates remain open.
+Corrected source20d25ad8ed4483d4cd4079cf62c8481a629c00e3 is SOURCE READY
+from the same combined affected reviewer. Example SHA256 independently matches
+4ef8c462221c237521a2554be4800b74852b3525e734fdbcab097e869fa12321;
+all eight public snapshot fields are compared using supported typed values.
+Author/committer hoppworks <daniel@hoppworks.de> independently verified. Source
+compilation/native behavior unverified; do not merge whole writer history or
+claim controls. Same Standard is actively preparing only new exact source/path/
+pin recipe configuration, no SSH/staging/build/native action authorized there.
+Fresh read-only workhorse measurement after retirement found heavy=[]/32CPUs,
+MemAvailable83463852KiB/free726415319040bytes; this is a sample, not reserved slot.
+Next: collect prepared immutable recipes, same affected configuration review,
+then root fresh check=True default one-heavy guard and bounded native acceptance.
+Do not launch another run until that sequence; no finite capacity exception now.
+Independent drop-false work follows existing fixtures. Overall feature/MSRV/
+native platform/release gates remain open. No user answer is pending. Source
+preparation elapsed/cost unknown; existing planning/cause history retained.
 
 Current turn PROGRESS: actual native compiler outcome diagnosed, original proof
 preserved and exact own resource retirement independently closed. Guard candidate
