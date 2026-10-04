@@ -1,0 +1,9 @@
+{
+  "source_revision": "9dc92b16dad173eaffbde521310d1e2480e7be9c",
+  "pure_mutator_revision": "b83ffe431f76bd051312179e297e1dcc14a79ae4",
+  "source_sha256": "6b088870e6f4ed758c88e6fdc7e50475cae7cda90ba10dae58e45718a2ba3a98",
+  "mutant_sha256": "53ce5a454661ffd08e6f3d0a9bbac15c8ccd8f1ea397c042b777a066be756b23",
+  "poll_before_timeout_before_read": true,
+  "byte_length_preserved": true,
+  "classification": "local pure source-order probe only; no Cargo or native acceptance"
+}

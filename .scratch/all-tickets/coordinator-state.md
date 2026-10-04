@@ -185,25 +185,186 @@ missing-authorization blocker. Existing accepted proof below remains applicable.
 
 ## Current step and next action
 
-Root under revision6830c49, strict proof and automatic fork-main integration.
-HEAD and last verified sole remote main:8c0ee4634355aee4e841b455461a7dd5aac2aa18.
-Performance a7cef566 source/gate passed after one failed source correction;
-native allocation1 terminal0. All10start/6capture/2live/2closed rows preserved.
-Collector infrastructure failure1 (short-lived empty cmdline) recovered via
-reviewed5b708 consumer, exact populated argv binding and wrong-runtime control.
-Same archive resumed, fresh custody82IDs/62samplers/12heldfixtures and exactstage
-retirement passed; separate read84IDs/8groups/6paths passed. No performance resources
-retained, original archive unchanged. Final combined actual acceptance ACCEPTED for the Linux measurement criterion;
-root now commits proof/tickets/state and pushes only to authorized fork main.
-Hard600/585/540seconds and resource caps unchanged; native allocations1 total,
-failed source correction1; cost/active work unknown. Same12:38planning checkpoint.
-Independent next requirement: process overflow/deadline same-step precedence.
-Fresh named Standard process_overlap_acceptance has source-only30minute planning
-package in owned /Users/hoppworks/projects/rhai/.worktrees/process-overlap-acceptance,
-task/process-overlap-acceptance at8c baseline; brief process-overlap-acceptance-brief.md.
-Owner-approved public Engine/SysPackage/realOS seam, explicit readiness and exact
-cleanup, cfg(test) per-execution scheduling only if needed. No new nativeallocation.
-API21/stdin/Darwin/Windows exhausted paths remain stopped; overall goal incomplete.
+Goal all local tickets implemented and natively accepted remains active/incomplete.
+Root revision6830c49; strict verification, automatic verified fork-main integration.
+Root HEAD / freshly read-back sole remote main d79b2dfb6d7524aec16e697bde5b0c3965808561;
+exact author/committer hoppworks <daniel@hoppworks.de>. No upstream writes/task refs.
+Linux performance criterion accepted/integrated: source8c, a7 measurement overlay,
+5b collector repair, sole93 originals/8dirs, actual10start/6capture/2live/2closed rows,
+fresh custody and separate84IDs/8groups/6paths closure. No retained resources.
+See linux-process-performance-proof.md / review.md and committed evidence.
+
+Current package: ticket03 same-step readable-output overflow / expired deadline
+precedence. Named Standard process_overlap_acceptance confirmed live at this resume,
+owned /Users/hoppworks/projects/rhai/.worktrees/process-overlap-acceptance,
+task/process-overlap-acceptance. Named Expert process_overlap_combined_review completed
+the initial recipe review; reuse its same combined context for corrected freeze.
+One combined package review, process-overlap-review.md; both loaded6830c49.
+SOURCE frozen9dc92b16dad173eaffbde521310d1e2480e7be9c, Unix SHA
+6b088870e6f4ed758c88e6fdc7e50475cae7cda90ba10dae58e45718a2ba3a98.
+Root sourcearchive process-overlap-evidence/source.tar SHA
+2b46a48f0978de3f7c1a7958678d3474232a0b2246ac8ff8f85e9e931345c039;
+archivehelpera75b4e8..., acceptedlock2ba4b3a... unchanged. Rootd79->9dc only
+non-scratch delta unix.rs; fullproductionbaseline8c->9dc206test-onlyadditions,
+no production behavior changes. Exact Git identities checked. Source archive
+excludes scratch; scratch-only helper overlays separately frozen without newarchive.
+Source-readiness independently PASSED; test uncompiled/unrun, strict acceptanceopen.
+
+Preserved stable source-readiness history: initial457 exact1011 gate rejectsgreen
+1111 and expect_err aborts Timeout-first control beforecause; correction1cc329
+resolvedboth but Linux/proc fixture lacked Linuxgates (failed1); correction2b83
+Linuxgatedsharedrecord_field_pid breaking existingnonLinuxcallers (failed2).
+FreshExpert22 required; native spawn refusedthreadlimit, fresh configuredexternal
+Expert tools/launch.sh expert codex ephemeral session79660 terminal0, confirmed
+6830c49. Answer escalations/22-process-overlap-source-gating.answer.md.
+CLIreportedtokens36827 (CLI scope, total roles/costunknown). One boundedfollowup
+9dc removedONLYsharedhelperLinuxgate, passedsamecombinedindependentreview:
+baselineparserunchanged/all3callersavailable/fournewLinux-no_floatgatesintact,
+priorcause/readiness/closureunchanged. Cause CLOSED; 2failedcorrections+oneExpert+
+onepassedfollowup preserved; no renewedchain. Superseded cc329/b83freeze receipts
+retain archivehash/history; onlyownedunacceptedarchive replaced, no duplicatebuilds.
+
+Concrete runnable custody harness frozen at d0fbb437c66407906c70a5a6d2afcb0105c102c2,
+14 scratch-only files, no Rust changes, clean writer. Root selected every byte
+from immutable commit; existing source archive/freeze remained byte-identical.
+Package manifest286ea066abb7a157b25f7befcc9960d4f74ecfc0ec53bd570157a1ea7c8b5086.
+Four fully qualified Direct/Managed timeout-first controls then restored green
+use BASE.run_command sampler/status ledger and actual OS closure receipts.
+Root actual local recipe probe passed, including static mutant53ce5a45...;
+none of four native commands executed, no strict acceptance claim.
+Root admission preflighta0a89b70... and slot-wrapper6ffd5a41... created with
+14 frozen stage pins, exact new paths/source9dc, Linuxx86_64, strict proc stat
+framing/start checks, zeroheavy/current resource requirements. Actual local AST,
+manifest-order and bash syntax checks passed. Guard/wrapper separately bound
+by allocation (excluded circular manifest), root-intake.json records hashes.
+Same combined Expert completed initial concrete recipe review d0f NOT READY:
+R1 JSON integer/TSV string identity comparison rejects valid custody;
+R2 check_output(capture_output=True) raises before closure SSH;
+R3 adapted export drops helper540 deadline checks/elapsed receipt;
+R4 raw fixture receipt not bound to exact ledger identity/group fields and
+producer labels expected sleep argv as observed; R5 actual mutant hash not pinned;
+R6 consumer omits resource/maxima/tool/setup/private-runtime binding;
+R7 producer stat parser lacks strict framing/start checks. Report existing
+process-overlap-review.md. Initial concrete readiness rejection, not native
+failure or completed correction. Native allocations0, recoveries0; prior source
+cause CLOSED with preserved twofailedcorrections+Expert22+passed9dc followup.
+Consolidated scratch-only R1–R7 correction frozen3a789dac3328988def9cc9520dcef4c9070b28c8,
+seven intended changed files selected byte-exact by root with lowercasehoppworks
+identity check. Source9dc/archive/lock unchanged; initial intake receipt retained.
+Root executed actual recipe-probes: full valid synthetic collector receipt accepted,
+altered childgroup rejected, exportdeadline/copy path, strict proc parser,
+mutant/runtime/version/cap rejection and closure subprocess.run invocation pass.
+Local only, no native coverage. Root manifest/literal14pin order/bash checks pass.
+Preflight repinned b251f6fe...; wrapper unchanged6ffd5a41... . Same combined
+Expert recheck3a NOT READY: R1/R2/R3/R4/R5/R7 resolved; R6 partially resolved,
+remaining High collector expects TMPDIR/TMP/TEMP=SCOPE but actualrunner101
+rewrites allthree to runtime/tmp; producerproof146/167–173 recordsactual path.
+Synthetic full-valid probe repeated wrong SCOPE and masked the contract. Completed
+recipe correction1 FAILED; native0/infrastructure0. Second narrow correction frozen
+at dae1f541b8392fd343e635cd5b23c5587e1c2a93 passed the SAME combined Expert review:
+all R1-R7 closed, actual runner temporary variables runtime/tmp, direct actual
+validate_command_inventory probe accepts runtime/tmp and rejects outer SCOPE.
+Four intended scratch files selected byte-exact; source9dc/archive/lock unchanged.
+Root actual recipe probes, literal14pin order, manifest and bash syntax passed.
+Current preflight SHA f5ff74ea70371ef96657e63ed2198f85a435cb22669b158945c10d5492130570;
+wrapper6ffd5a41 unchanged; root-intake.json records full current pins. READY for
+native admission, not strict acceptance. Recipe completed failed corrections1,
+second correction PASSED. Source readiness CLOSED history remains unchanged.
+Writer accidentally started an unused fresh Expert before escalation threshold;
+root reconciled histories, writer interrupted it unused, cost unknown. Root resumed
+original combined reviewer successfully despite writer-side thread-limit error.
+
+Whole-package estimate revised60->90minutes TOTAL from12:36Z at13:36 checkpoint,
+because concrete actual-function checks closed R1-R7 and remaining work was bounded
+pins/readiness/native custody. Actual active use/cost unknown; no hard cap reset.
+Stage transfer completed before14:01Z, all14 frozen inputs verified. First reviewed
+slot wait SSH14852 ended3 at14:04Z after180seconds, native allocations0; no harness
+or product failure. Same staged inputs retained, no private runtime existed.
+Fresh14:04:25Z zeroheavy observation recorded capacity-after-slot.json, RAM83159648KiB,
+free727675555840bytes, load5.9224/5.6782/5.6123. Proposed capacity exception was
+unnecessary; no guard/wrapper/collector/rules changed. Second SAME reviewed wrapper
+SSH18614 rechecked ready14:04:41Z, all14pins, zeroheavy, RAM83051028KiB/free727675555840bytes,
+load4.9106/5.4648/5.5430. Native allocation1 created exclusively; original transport
+process-overlap-evidence/native-transport-2.log. Scope/runtime owned:
+/root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w.
+Adaptive actualrunner570seconds within585maximum; outer600/helper540 unchanged.
+Native handle18614 terminal0: exact timeout-first-direct/managed101/101 then
+restored-direct/managed0/0; 31.06second command sequence, runtime/scope cleanup0.
+No native acceptance claim until custody/fresh closure and independent review.
+Original collector infrastructure failure1 before custody/retirement: command
+rustup-install ledger observed cmdline empty, whereas six other command rows exact.
+PID1993181/start11387239,parent1993179/group1993178; checked producer records
+immediately after Popen, potentially exec/exit observation race. Do not assert argv
+was independently observed or silently loosen this predicate. Sole originals
+archive already exported, independently inventory/hash-checked and preserved;
+remote exact stage remains unchanged for custody/retirement. No second archive/build.
+Same combined Expert completed diagnosis in existing process-overlap-review.md:
+preserve native1; one collection-only adapter bounded to exact hash-bound empty
+rustup row PID1993181/start11387239/parent1993179/group1993178. Require actual
+reviewed spawn argv/env/cwd/status0, raw setup/private versions/helper ancestry,
+sole archive and ledger hashes. Keep all populated mismatch rejection; all other
+empty commands reject. Observed rustup argv unavailable, exact empty cause unknown.
+No new native required. NEXT implement narrow adapter + actual-corpus/tamper probes,
+same combined affected review, resume SAME sole archive collection, then actual
+custody/retirement/separate fresh closure/integration. First recovery candidate now collect-originals-recovery.py SHA
+edba89657810f2e8a5bf31debcf6f5a829969cf88b4a46134007b8d0bb1bff71,
+original-preserving copied consumer with narrowly guarded predicate and exact
+sole archive/10proof-file/Popen-producer hashes. Actual full native corpus validates
+99identities; collection-recovery-probes.py/json records changedstart, wrong
+populatedargv, wrongspawn/status/helpergroup, allsix otherempty commands, allsix
+populatedmismatches and altered originalbinding rejected. Local checks only.
+Same combined affected review accepted recovery READY. Actual recovery collected
+SAME archive and completed custody99identities/fourgroups and exact stage retirement.
+Separate actual fresh closure2026-10-04T14:13:26Z verified99identities/fourgroups/six
+path entries absent. Runtime/scope/stage retired; no foreign resources modified.
+Archive e5f0bf6cc804db36347e9a0603eda64fd7432fd3b25213a85170c57de0bf2990,
+6789120bytes/62files/5directories unchanged. Collection infrastructure failure1,
+recovery1 successful. Both controls intended101 then both pristine0; source/lock
+restored; sampled42/maxRSS918416KiB/storage685316KiB/descendants6, periodic notpeaks.
+Root selected exact tested unix.rs9dc SHA6b088..., existing source cleanbeforeselection;
+linux-process-overlap-proof.md records partial acceptance and honest setup-argv gap.
+Same combined final actual review ACCEPTED for ticket03 Linux DirectChild/Managed
+same-step precedence only; no material corrections. Proof/ticket partial closure
+updated. Wider requirements remain open.
+NEXT final disposition -> ticket03 partial criterion -> exact selected atomiccommit,
+authorized sole fork-main fast-forward/push/readback. Goal remainsincomplete.
+No source/recipe/cause history reset. Current turn PROGRESS actual corpus/tamper
+checks, successful collection/live closure and exact tested source intake.
+
+Whole-package90minute checkpoint reached with READY reviewed source/recipe and
+actual first native launch underway; revise planning estimate to120minutes TOTAL
+from12:36Z for this concrete native acceptance/custody/integration path. Consumed
+wall about89minutes, active/cost unknown. No hard cap, correction or cause reset.
+
+Native bounds600/585/540seconds incl30export,2jobs,16descendants,
+1572864KiB preemptstorage/2097152KiB hardRSS-storage unchanged.
+
+Preparation12:36Z original30minactiveplanningestimate, checkpoint13:07Z revised
+wholepackage total60minactive(30additional): sourceclosed and remaining concrete
+custodyrecipe identified; actualactiveuse/costunknown. Expert22analysis20min and
+solefollowup30minplanningcheckpoints bothcompleted; no hardlimitlifting/historyreset.
+Last read-only13:27:42Z workhorse: exact stage/scope absent; foreign scoped
+runner1730293/supervisor1730294 and Cargo1776165 active, so conservative zero-heavy
+admission currently unavailable. MemAvailable80195796KiB/free715442216960bytes,
+load11.8955/7.6538/9.9385. Capacity-preparation.json preserves observation.
+No foreign process modified; independent combined source/gate review continues.
+Observations notadmission/reservations/peaks. Workhorseinstalledglobalrules
+/home/workhorse/.agents/AGENTS.md SHAab3db16c8d14731e27554186cade63e70d97ea9f5bf20e9f8a248a0cd3b98ed1
+matcheslocal; runnerlogical/physical9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d.
+RemotecopiedskillsnotGit, revisionunavailable; actualrulesbytesread/verified.
+No installs/agenthome/config/credentials/foreign resources modified.
+
+Previous goal turn PROGRESS: frozen concrete d0f harness intaken byte-exact,
+root14-pin guard/wrapper created and locally checked; independent recipe review
+identified R1–R7 and changed next action to consolidated same-owner correction.
+No native allocation/acceptance. At current resume native registry confirms
+same Standard correction running; reviewer terminal with consolidated report.
+No missing authorization or stopped build is inferred from waiting. Next:
+corrected frozen recipe and actual-function probes, root repins, same combined
+affected review, guarded native controls/restored green and strict custody.
+API21/stdin/Darwin09/12/Windows02/13 exhaustedpaths staystopped. Broader firstcause/
+lifecycle, nativeplatforms, metadata/docs, feature/MSRV and release remainopen.
+Preserve rootuntrackedAPI21diagnostics/dirtyforeignwork and allbudgethistory.
 
 ### Preserved pipe/API preparation and cause history
 

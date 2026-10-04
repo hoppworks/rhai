@@ -1,0 +1,3 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+launcher	1993160	1993099	1993099	11387227	/root/rhai-linux-process-overlap-d79-20261004-1259/launch.sh
+run-scoped	1993169	1993160	1993099	11387227	bash /root/rhai-linux-process-overlap-d79-20261004-1259/launch.sh

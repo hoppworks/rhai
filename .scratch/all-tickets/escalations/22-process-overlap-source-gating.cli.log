@@ -1,0 +1,421 @@
+2026-10-04T13:02:12.314447Z  WARN sqlx::query: slow statement: execution time exceeded alert threshold summary="DELETE FROM logs WHERE …" db.statement="\n\nDELETE FROM logs WHERE ts < ?\n" rows_affected=89008 rows_returned=0 elapsed=3.799517958s elapsed_secs=3.799517958 slow_threshold=1s
+Reading additional input from stdin...
+2026-10-04T13:02:12.882603Z  WARN codex_skills::interface: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/
+2026-10-04T13:02:12.882625Z  WARN codex_skills::interface: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/
+2026-10-04T13:02:12.946972Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-10-04T13:02:12.959118Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-10-04T13:02:12.967458Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-10-04T13:02:12.977094Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-10-04T13:02:12.987011Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-10-04T13:02:12.995880Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-10-04T13:02:13.004900Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-10-04T13:02:13.014636Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-10-04T13:02:13.024553Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-10-04T13:02:13.028073Z  WARN codex_skills::interface: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/
+2026-10-04T13:02:13.028090Z  WARN codex_skills::interface: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/
+2026-10-04T13:02:13.033836Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-10-04T13:02:13.042130Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-10-04T13:02:13.054799Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+OpenAI Codex v0.159.0
+--------
+workdir: /Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery
+model: gpt-6.1-sol
+provider: openai
+approval: never
+sandbox: workspace-write [workdir, /tmp, $TMPDIR]
+reasoning effort: medium
+reasoning summaries: none
+session id: 01a10701-f98f-7132-b434-304a71774bb5
+--------
+user
+Read /Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/all-tickets/escalations/22-process-overlap-source-gating.md and follow it.
+2026-10-04T13:02:13.072609Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-10-04T13:02:13.091263Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-10-04T13:02:13.134863Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-10-04T13:02:13.152784Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-10-04T13:02:13.166630Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+2026-10-04T13:02:13.183269Z  WARN codex_rollout::list: state db discrepancy during find_thread_path_by_id_str_in_subdir: falling_back
+codex
+I’ll read the escalation brief and the project state, then follow its scope and checks.
+exec
+/bin/zsh -lc 'cat .scratch/all-tickets/escalations/22-process-overlap-source-gating.md' in /Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery
+ succeeded in 0ms:
+# Question
+
+Determine the minimal safe final source correction for the process overlap
+regression after two completed source corrections failed independent review.
+
+# Why escalated
+
+Initial457 observation gate rejected correct1111 and immediateexpect_err stopped
+Timeout-first control before intendedcause assertion. cc329 corrected both but
+added Linux/proc fixture without Linux test gates (failedcorrection1). b83 added
+Linux gates but also gated shared record_field_pid, used by existing non-Linux
+Unix tests (failedcorrection2). Global rules require fresh non-fork Expert and
+one bounded follow-up. This is source-readiness cause history, no native launch.
+
+# Context by reference
+
+Root /Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery.
+Writer /Users/hoppworks/projects/rhai/.worktrees/process-overlap-acceptance.
+Read current global ~/.agents/AGENTS.md, root AGENTS.md, Expert template and
+campaign escalation reference; confirm6830c49. Read root
+.scratch/all-tickets/process-overlap-review.md, process-overlap-acceptance-brief.md
+and immutable Git diff8c0ee4634355aee4e841b455461a7dd5aac2aa18..b83ffe431f76bd051312179e297e1dcc14a79ae4 for unix.rs, affected helper callers.
+Relevant current shared helperrecord_field_pid at4185 and inherited pipe tests
+at5267/5387; newly addedrecord_field_ticks and overlaptests near4405.
+Do not read entire coordinatorhistory or unrelated stoppedpackages.
+
+# Constraints and decisions
+
+PublicEngine/realOS proof, bothDirect/Managed, sameactualexpired/readablepollstep,
+OutputLimitwins, independentactualchildPID/start/PGID/readiness, cleanupbeforecause.
+cfg(test) only instrumentation; no production behavior change or publicAPI.
+NoDarwinclaim: LinuxgateonlyLinuxspecificnewwork, preserveexistingsharedhelper.
+Do notbuild/SSH/launch/signals/cleanup/install/Gitmutation. Existing stdin/API21/
+Darwin09/12/Windows02/13 paths remainstopped. Solefollowup cannotrenewhistory.
+
+# Tried so far
+
+Initial457, correctedcc329 (failed1), b83 (failed2), no nativeallocation.
+Root froze/replaced own unacceptedsourcearchive:31bc26c8b79317800a458045bed8ff0d6712f1225267266937eb48fa1d4a15dd,
+sourceSHA d4e09a1ccde117e0d7d81ba9cfa252984316f891851d2664c3bdb09994341c8b.
+CombinedreviewExpert foundsharedhelpergatingdependency, sourceblocked, writer
+notifiedstopRust. Independent concretehelper work maycontinue; its newinitial
+shorttestnames --exact defect is harnesspreparation, no nativefailures.
+
+# Deliverable
+
+Write answer besidebrief22-process-overlap-source-gating.answer.md. Exactminimal
+allowedsourcefix, affecteddependencycheck, whether oneboundedfollowup can close
+source-readiness and explicit stopcriteria. Include findings beyond obviousgate
+only when material. Return <=15lines pluspath. Do notapplyfixes.
+
+# Budget
+
+20minute active-work planningcheckpoint, finite one analysis, actualcostunknown.
+One subsequent bounded sourcefollowup perhistory (30minplanningcheckpoint);
+no source correction renewal if itfails independentreview. Nativehardbounds
+600/585/540secs andresourcecaps preserved forlaterunallocated acceptance.
+
+exec
+/bin/zsh -lc 'cat AGENTS.md' in /Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery
+ succeeded in 0ms:
+## Workflow choices
+
+- Verification: strict
+- Push: automatic
+- Merge: automatic
+
+## E2E verification
+
+Acceptance contract approved by the owner on 2026-09-30.
+
+- **Tool:** Cargo integration tests through real Rhai scripts, Engine, the registered
+  host package and the real OS. Acceptance proof does not mock files, sockets or
+  process execution.
+- **Start command:** No shared service is required. From the session worktree:
+  `cargo test --features testing-environ,sys,metadata --test sys_policy --test sys_env --test sys_fs --no-run`
+  The test command launches the test executables and their scoped fixtures.
+- **Test command:**
+  `cargo test --features testing-environ,sys,metadata --test sys_policy --test sys_env --test sys_fs`
+  A real test name may filter a targeted regression. Add process and net targets
+  when implemented. The release OS/feature/MSRV matrix remains a separate decision.
+- **Safe data reset:** Fixtures own unique temporary roots, sockets and child
+  processes. Clean up only those resources, using guards and explicit child
+  termination/reaping on exceptional paths. Investigate interrupted-run leftovers
+  by exact recorded path/PID before removal. Never reset shared services, delete
+  another session's fixtures or mutate the parent test environment/current directory.
+
+### Required evidence and test structure
+
+- Exercise the public script API and independently observe the effect: fresh host
+  file reads, an independent TCP peer, or child-written records plus exit/reaping.
+  Read-only behavior is compared with independent fixture truth; it need not create
+  a persistent write. Denied operations must leave protected state unchanged.
+- Demonstrate that the assertion fails for a wrong expectation or known-broken state,
+  restore the correct expectation, and show it passes before claiming acceptance.
+- New behavior starts with a meaningful failing contract test. Preserve bug
+  reproductions as regressions. Keep the existing sys test/support layout; supplement
+  with focused unit tests only where useful. Test counts and coverage percentages
+  are not substitutes for contract, policy and lifecycle evidence.
+- Isolate environment fixtures in child processes; use OS-selected TCP ports,
+  explicit readiness, bounded waits and cleanup/join/reap. Fixed sleeps do not prove
+  readiness. Timeouts fail with diagnostics rather than silently skipping behavior.
+- Record commands, features, OS/Rust versions, observed results, independent read-back,
+  the failing control, cleanup and unverified paths. Compilation or Wine alone does
+  not prove native platform behavior.
+- Existing sys regressions and global environment mutation remain open work. This
+  configuration defines acceptance; it does not certify the inherited implementation.
+
+Decision detail: [.scratch/stdlib-wayfinder/issues/01-acceptance-contract.md](.scratch/stdlib-wayfinder/issues/01-acceptance-contract.md).
+
+## Current remote authorization
+
+The owner initially selected fully private work on 2026-09-30, then explicitly
+authorized pushing this Session's integrated `task/all-tickets` branch to the
+existing `https://github.com/hoppworks/rhai.git` fork. That later instruction
+authorizes these pushes. Continue local and authorized workhorse VM work under
+the recorded scope. Preserve the existing remote history and visibility.
+
+The owner subsequently authorized merging this Session's verified work into
+`main` on that same fork. This does not authorize any write or pull request to
+the public upstream repository. Preserve foreign local main checkouts; use a
+verified fast-forward ref update when no merge commit is required, and read back
+the fork's exact main head after pushing.
+
+## Fork branch consolidation
+
+On 2026-10-02 the owner explicitly requested all existing fork branch histories
+and changes consolidated into main, with main as the only remote branch. Preserve
+current development work and report unfinished verification honestly. Publish
+future campaign commits to fork main through coordinator integration; do not
+recreate remote task branches. Local isolated task worktrees remain permitted
+while active. Preserve foreign or dirty worktrees and their uncommitted changes.
+This is repository consolidation, not release acceptance or production deployment.
+
+## Resource lifecycle
+
+For future POSIX builds and verification, use
+`/Users/hoppworks/projects/agent-skills/tools/run_scoped.py -- <command>`.
+Before invoking the runner, create an absent, owned session scope under
+`~/.local/share/agent-builds/rhai/<unique-session-id>/` and set `TMPDIR` to its
+absolute path. The runner creates a unique private runtime below that scope.
+Set `CARGO_TARGET_DIR="$AGENT_RUNTIME_DIR/target"` and
+`CARGO_HOME="$AGENT_RUNTIME_DIR/cargo-home"` inside that command. The runner sets
+temporary-directory variables. For Python proof helpers, set
+`PYTHONPYCACHEPREFIX="$AGENT_RUNTIME_DIR/pycache"` inside the command, or use
+`PYTHONDONTWRITEBYTECODE=1` when bytecode caching is unnecessary. Keep original
+sources and accepted evidence outside
+that runtime; the owned build source copy below is disposable isolation for
+Cargo-generated files. After all owned runs finish, retire only the exact empty
+session scope with `rmdir`; never migrate or clean another session scope. Build from an owned source copy inside the runtime,
+including the changes under test, so Cargo.lock and build.rs-generated source files
+also stay scoped. Keep related compilation, tests and assertion controls in one
+invocation, and export accepted evidence and needed diagnostics before it exits.
+
+The POSIX runner does not supervise Windows guest descendants through SSH.
+Before another native Windows build, supply equivalent guest process-tree ownership,
+bounded execution, output/cache isolation and cleanup on failure or interruption;
+the release ticket tracks this requirement. Reuse the accepted native baseline
+while its relevant source, assertions and environment remain unchanged.
+
+## Accepted package decisions
+
+On 2026-09-30 the owner accepted the concrete TCP authority/lifecycle and release
+proposals in `.scratch/all-tickets/tcp-proposal.md` and `release-proposal.md`.
+Implement connect and separately authorized listen/accept, with the specified
+bounds and shared lifecycle. Reject negative file reads and preserve resource
+bounds under unchecked. Core MSRV remains 1.66.0; optional sys/net target 1.77.2
+and require strict native Linux/macOS/Windows and the specified feature gates.
+
+The owner permits a project-local copy of the scoped runner solely to establish
+explicit POSIX supervision/runtime custody and whole-runner interruption proof.
+Do not modify the global runner. Independent source review precedes execution;
+record finite controls and limits before launching. Native Windows custody remains
+an independent prerequisite, not waived by these decisions.
+
+On 2026-10-02 the owner explicitly accepted a clear Unix incomplete-cleanup
+error when managed processes have stopped but remain zombies under foreign
+parents. Ticket03 records the revised completion contract. Preserve conservative
+closure checks, retained custody, direct-child reaping, bounded output and honest
+diagnostics; permission errors do not prove stopped membership. The owner also
+confirmed the local console and Windows VM are available for native verification.
+
+## Git attribution
+
+The owner requires author and committer names to be exactly `hoppworks` (lowercase).
+Keep the configured email. Use command-local `git -c user.name=hoppworks` when
+committing or merging; do not modify global or shared configuration. No agent
+co-author trailers or signatures.
+
+## Workhorse finite build concurrency exception
+
+For the single reviewed Linux OutputLimit invocation106 only, permit at most two
+heavy runs on workhorse: the already active foreign Tauron G47 run_scoped group
+1329949 (launcher1329948/start4447594, supervisor1329949/start4447596) and this
+Session's one bounded Rhai run. Read-only capacity measurement on 2026-10-03
+reported32 CPUs, MemAvailable79,580,232 KiB and
+727,025,782,784 bytes free on the source/runtime filesystem. The observed foreign
+Cargo/rustc RSS totaled about2,044,696 KiB; these are samples, not peaks.
+
+Rhai retains600/585/540-second outer/runner/helper limits, two Cargo jobs,
+16 descendants,1,572,864 KiB storage preemptive stop and2,097,152 KiB
+storage/RSS hard caps. Before launch require no third heavy runner/compiler
+group, at least16 GiB MemAvailable and16 GiB disk free. Preserve all foreign
+processes, limits and resources. This finite exception expires when invocation106
+is terminal; later work uses the global one-heavy-run default unless a new
+measured exception is recorded. This is a workflow convention, not a lock.
+
+Invocation 106 finished successfully on 2026-10-03. Independent read-back and
+exact export retirement completed; its finite concurrency exception has expired.
+New heavy runs use the global default unless separately justified by current
+measurements. No foreign process was stopped or modified.
+
+## Workhorse finite concurrency exception for escaped-pipe proof
+
+For the single reviewed escaped-pipe invocation107, permit at most two heavy
+runs: the existing foreign Tauron runner (launcher1408079/start4603295,
+supervisor1408080/start4603297, compiler group1408080) and one bounded Rhai run.
+Current read-only measurements report32 CPUs, load3.86/4.27/4.15,
+MemAvailable78,299,404 KiB,717,200,211,968 bytes free, and sampled foreign
+compiler RSS3,794,880 KiB. These are samples, not peak or reservation claims.
+
+Rhai retains600/585/540-second outer/runner/helper bounds including30 seconds
+for export, two Cargo jobs,16 descendants,1,572,864 KiB preemptive storage stop
+and2,097,152 KiB hard RSS/storage limits. Require immediate no-third-heavy
+runner/compiler group, exact current foreign identities and at least16 GiB
+available RAM/disk before launch. If the foreign run exits, recheck the global
+slot; a changed runner needs a fresh measured identity assessment. Never stop
+or modify foreign processes. This project workflow exception expires at107
+terminal completion; subsequent runs use the global default.
+
+Invocation107 is terminal. Its finite concurrency exception has expired; no
+foreign process was modified. A later invocation needs fresh slot/capacity checks.
+
+## Workhorse finite concurrency exception for invocation108
+
+For this single reviewed escaped-pipe invocation108 only permit at most two
+heavy runs: foreign launcher1532705/start4776357 and supervisor1532709/start4776360
+with compiler group1532709, plus this owned bounded Rhai run. Fresh measurement
+reports 32 CPUs, MemAvailable78030992KiB, free725398978560bytes
+and foreign compiler RSS sample3807908KiB (not peak).
+Require immediately matching foreign identities, no third heavy group, at least
+16GiB available RAM/disk and all13 frozen stage hashes. Retain600/585/540second
+bounds including30second export reserve, two Cargo jobs,16descendants,
+1572864KiB preemptive storage and2097152KiB hard RSS/storage limits. Never modify
+foreign processes/resources. Exception expires at108 terminal; future default
+is one heavy run. Workflow convention, not a lock or capacity reservation.
+
+Invocation108 is terminal (infrastructure parser failure after control and base
+regressions). Its finite exception has expired. Runtime and scope cleanup passed;
+only the exact immutable diagnostic input/export stage remains until export
+and retirement. No foreign process was modified. Future launches require fresh
+measured slot/capacity checks; no exception transfers to109.
+
+## Workhorse finite concurrency exception for invocation109
+
+Permit only this one reviewed bounded109 run plus foreign launcher1683061/start4944420
+and supervisor1683065/start4944422, compiler group1683065. Fresh measurement:
+32CPU, MemAvailable79586836KiB, free728046215168bytes,
+foreign compiler RSS sample1085476KiB (not peak).
+Require immediate matching foreign identities/no thirdheavy,16GiB availableRAM
+and disk,all13frozeninputhashes,scope/terminalabsent. Rhai600/585/540secondbounds
+including30secondexportreserve,2jobs,16descendants,1572864KiB preemptstorage and
+2097152KiB hardRSS/storage remain unchanged. No foreign process modified.
+Exception expires109terminal; later runs defaultoneheavy with fresh checks.
+
+Invocation109 is terminal0. Its finite exception has expired. All71 original
+files and seven closure artifacts were exported and independently hash checked.
+Exact owned stage/scope retirement and fresh group absence passed; no retained
+109 resources and no foreign process modified. Future runs require fresh checks.
+
+## Single corrected60048 example capacity exception
+
+For only the prepared corrected60048 example invocation, allow two heavy runs:
+foreign launcher3276320/start6852456 (PGID3276313), supervisor3276321/start6852459
+(PGID3276321), and this bounded Rhai run. Fresh read-only workhorse measurement
+on 2026-10-04 reports32 CPUs, MemAvailable78177216KiB, free519143673856bytes,
+load4.58/6.87/7.71 and sampled foreign heavy RSS7293216KiB. Samples are neither
+peaks nor reservations. No foreign process/resource may be changed.
+
+Require immediate ten frozen input hashes, absent own prospective scope/terminal,
+either a completely free slot or both exact foreign identities/argv and no third
+runner/compiler group. All foreign Cargo/rustc entries must belong to3276321;
+other heavy tools block launch. Require16GiB available RAM and disk and one-minute
+load below16 on32 CPUs. Rhai retains2 Cargo jobs,600/585/540second outer/runner/
+helper limits (including30second export reserve),16 descendants,1572864KiB
+preemptive storage and2097152KiB hard RSS/storage caps. Use the independently
+reviewed fixed finite-slot guard with explicit Python check=True before launcher.
+This workflow exception expires at this invocation's terminal outcome; it does
+not renew stopped stdin/native110, Darwin/Windows or any earlier exception.
+
+The corrected60048 invocation is terminal1 on 2026-10-04 after about40seconds:
+Cargo example compilation E0369 before behavior controls. Its single capacity
+exception has expired. All49 original files are preserved; exact stage retirement
+and independent102 PID/start, two-group and four-path absence checks passed.
+No foreign process/resource changed; future heavy runs require fresh checks.
+
+collab: Wait
+collab: Wait
+codex
+The review confirmed that the PID helper is shared by existing Unix tests. The minimal correction is to remove its new Linux gate while retaining the gates on the new Linux-specific helpers and tests. The review is checking the remaining dependencies before writing the answer; no build or source change is authorized by this brief.
+collab: Wait
+collab: Wait
+collab: Wait
+2026-10-04T13:03:50.134714Z  WARN codex_core::hook_runtime: failed to resolve parent transcript path for subagent hook parent_thread_id=01a10701-f98f-7132-b434-304a71774bb5 error=invalid thread-store request: no rollout found for thread id 01a10701-f98f-7132-b434-304a71774bb5
+exec
+/bin/zsh -lc 'cat .scratch/all-tickets/escalations/22-process-overlap-source-gating.answer.md' in /Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery
+ succeeded in 0ms:
+# Verdict
+
+One bounded source follow-up can close the identified source-readiness cause. In immutable candidate `b83ffe431f76bd051312179e297e1dcc14a79ae4`, delete only the newly added `#[cfg(all(target_os = "linux", not(feature = "no_float")))]` immediately above `record_field_pid` in `src/packages/sys/process/unix.rs:4185`. Restore that helper's baseline availability inside the existing test module. Keep the Linux/no-float gates on the new `record_field_ticks`, overlap case helper, and both overlap test wrappers unchanged.
+
+The current candidate remains NOT READY. This recommendation is a static source determination, not a corrected-source review result, a compilation result, or native acceptance. No additional material source defect was found in the scoped changed code and coupled callers.
+
+## Inputs and verification
+
+- Read current global instructions, root `AGENTS.md`, the current Expert template, campaign escalation and bounded-repair references, escalation 22, and the specified process-overlap review and acceptance brief.
+- Confirmed the instruction repository HEAD with a read-only lookup: `6830c49ed962a3dc1937d72d0d182150bb4c935c`.
+- Reviewed the immutable Rust diff from `8c0ee4634355aee4e841b455461a7dd5aac2aa18` to `b83ffe431f76bd051312179e297e1dcc14a79ae4`, the helper definitions, every live-source helper call, the overlap instrumentation and ordinary poll/read/timeout/cleanup paths. Independently confirmed the candidate Rust SHA-256: `d4e09a1ccde117e0d7d81ba9cfa252984316f891851d2664c3bdb09994341c8b`.
+- OCR preview and Rust rule lookup succeeded without installation or configuration. Preview found two reviewable files: the Rust file was reviewed; `.scratch/all-tickets/run-process-overlap-controls.py` was explicitly skipped because this escalation concerns source gating and the concrete recipe remains a separate preparation/review requirement. Coverage of the preview's reviewable files is therefore 1/2 (50%); scoped Rust coverage is 1/1. The unsupported Markdown preparation file was excluded by OCR; its original contents are outside this narrow escalation, with applicable requirements supplied by the acceptance brief and combined review.
+- No source fixes, builds, SSH, native launches, signals, cleanup, installation, or Git mutations were performed. The sole written artifact is this answer. Compilation and native behavior are unverified.
+
+## Exact minimal correction
+
+Apply this one-line deletion relative to the immutable candidate:
+
+```diff
+-    #[cfg(all(target_os = "linux", not(feature = "no_float")))]
+     fn record_field_pid(path: &Path, field: &str) -> io::Result<i32> {
+```
+
+Do not replace it with another gate, duplicate the parser, add Linux gates to inherited tests, change the tests' expectations, or broaden the fixture to Darwin. The helper only reads a supplied record and parses a named integer field. It has no `/proc` dependency. Its complete body is unchanged from the baseline, where it had no item-level gate. Restoring that exact baseline definition is smaller and safer than narrowing inherited test coverage.
+
+## Affected dependency check
+
+All line numbers below refer to immutable `b83ffe431f76bd051312179e297e1dcc14a79ae4`. A repository lookup restricted to live `src` and `tests` found exactly these three `record_field_pid` calls; archived scratch copies are independent evidence and must remain untouched.
+
+| Definition or caller | Existing gate and use | Required final state |
+|---|---|---|
+| `record_field_pid`, 4186 | Currently Linux plus no-float exclusion; portable text parser | Remove its new attribute; retain enclosing `#[cfg(test)]` module and enclosing Unix module availability |
+| Overlap case helper, 4425; PID-field call, 4449 | Linux plus no-float exclusion; parses actual fixture PGID | Keep its gate; shared parser is available |
+| `run_inner_inherited_pipe_holder_case`, 5164; call, 5267 | No-float exclusion only; parses portable `holder-pid` record | Preserve caller gate and behavior; restored parser is available on every Unix target where caller exists |
+| `inherited_pipe_holder_is_alive_at_timeout_and_fixture_releases_it`, 5332; call, 5387 | No-float exclusion only; outer fixture parses the same portable record and invokes the inner case | Preserve caller gate, exact nested test name and behavior |
+| `record_field_ticks`, 4199; sole call, 4451 | Linux plus no-float exclusion; positive start-tick parser used only by overlap case | Keep its gate unchanged |
+| DirectChild and Managed overlap wrappers, 4521 and 4530 | Linux plus no-float exclusion | Keep both gates unchanged |
+
+With float support enabled on non-Linux Unix, both inherited callers currently survive configuration while `record_field_pid` disappears. The resulting unresolved helper name is a test-compilation regression. The deletion restores the baseline relationship. With `no_float`, these callers and the overlap cases disappear; the portable parser can remain defined as it did in the baseline. Windows does not include the Unix module. None of these static observations proves native Darwin or Windows behavior or resumes their stopped work.
+
+The newly added scheduling adapter and observation fields/methods/calls consistently use `cfg(test)`; the arming helper is inside the test module. They contain no Linux-specific syscall or `/proc` access. Their remaining availability in other Unix test configurations is safe and does not require another gating change. Production behavior and the public API remain unchanged.
+
+## Preserved acceptance and other blockers
+
+Retain the corrected required-bit check (`observed & 0b1011 == 0b1011`) before the cause assertion, the deferred public outcome, and clean-timeout map normalization. These let the specific timeout-before-read control reach the intended OutputLimit assertion after independently checking fixture PID absence, scheduling acknowledgment and closure. Retain the final `0b1111` observation requirement and exact OutputLimit report assertions. The real poll readiness, ordinary overflow read, and closure observations remain in their existing positions; this fix must not change them.
+
+The child publishes its record after writing the two stdout bytes, and the adapter waits for the actual deadline before the ordinary poll/read step. Both scopes remain required. The source recommendation does not validate the native receipt, actual child identity/start/PGID or cleanup. Those need the later bounded real-OS proof.
+
+The independently recorded recipe defects remain separate: module-qualified names are required with `--exact`, receipts must match those names and actual test execution, and command accounting/export custody must use the accepted bounded mechanism. This answer does not approve the current Python recipe or allocate a native invocation. Existing stdin/API21/Darwin09/12/Windows02/13 stops and the future native 600/585/540-second limits and resource caps remain intact.
+
+## Concrete next action and stop criteria
+
+1. Record this answer against the existing source-readiness cause: initial review rejection, failed correction 1 (`cc329` portability gate), failed correction 2 (`b83` shared-helper gate), this single fresh analysis, and one remaining bounded follow-up. Keep cumulative work; cost remains unknown.
+2. Have the existing source owner perform only the one-line deletion above, within the recorded 30-minute active-work planning checkpoint. Permit narrow scratch documentation of the new immutable revision and its source hash; do not change unrelated source or native allocation. Freeze the corrected immutable candidate.
+3. Independently review its delta against `b83`, confirming that the only Rust change is this deletion, the parser matches the original baseline, all three callers remain correctly covered, the four new Linux/no-float item gates remain intact, and earlier cause/receipt/cleanup assertions remain unchanged. Recheck the full intended Rust diff against the production baseline for scope drift. A successful static check may close this source-readiness cause; the integrated package still awaits concrete recipe readiness and strict native acceptance.
+4. Stop this source path if the bounded follow-up fails independent review, changes acceptance or production semantics, encounters contradictory source evidence, or needs another source design decision. Do not renew the two-failure history, rename the cause, or open a second escalation chain. Report the blocker once and continue only independent authorized preparation. At the planning checkpoint, record actual progress and cumulative use; it is not permission to renew a failed correction.
+
+This finite analysis completed before its 20-minute active-work planning checkpoint. Actual monetary cost and precise active-work duration are unknown.
+
+codex
+Wrote the [answer](.scratch/all-tickets/escalations/22-process-overlap-source-gating.answer.md).
+
+The minimal fix is to remove only the new gate above `record_field_pid`, preserving the Linux gates on the new overlap tests. All affected callers were checked.
+
+One bounded follow-up may close source readiness after independent review. No fixes or builds were performed; native acceptance remains unverified.
+tokens used
+36,827
+Wrote the [answer](.scratch/all-tickets/escalations/22-process-overlap-source-gating.answer.md).
+
+The minimal fix is to remove only the new gate above `record_field_pid`, preserving the Linux gates on the new overlap tests. All affected callers were checked.
+
+One bounded follow-up may close source readiness after independent review. No fixes or builds were performed; native acceptance remains unverified.

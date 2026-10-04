@@ -1,0 +1,84 @@
+OVERLAP_SLOT_OBSERVATION {"returncode": 0, "stdout": "{\n  \"utc\": \"2026-10-04T14:04:41Z\",\n  \"ready\": true,\n  \"inputs_verified\": 14,\n  \"heavy\": [],\n  \"mem_available_kib\": 83051028,\n  \"disk_free_bytes\": 727675555840,\n  \"load\": [\n    4.91064453125,\n    5.46484375,\n    5.54296875\n  ],\n  \"scope_absent\": true\n}\n", "stderr": ""}
+OVERLAP_ALLOCATED {"source_revision": "9dc92b16dad173eaffbde521310d1e2480e7be9c", "native_launch": 1, "preflight_source_sha256": "f5ff74ea70371ef96657e63ed2198f85a435cb22669b158945c10d5492130570", "slot_wrapper_source_sha256": "6ffd5a4168a2cee02167168a6a46c30c6d8a1487b6031dec714678fa2135f329", "classification": "initial planning estimate, all launches counted", "preflight": {"utc": "2026-10-04T14:04:41Z", "ready": true, "inputs_verified": 14, "heavy": [], "mem_available_kib": 83051028, "disk_free_bytes": 727675555840, "load": [4.91064453125, 5.46484375, 5.54296875], "scope_absent": true}, "outer_seconds": 600, "runner_seconds": 585, "helper_seconds": 540}
+launch_utc=2026-10-04T14:04:41Z
+outer_timeout_seconds=600
+stage=/root/rhai-linux-process-overlap-d79-20261004-1259
+scope=/root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259
+archive-build-source.py: OK
+source.tar: OK
+Cargo.lock.accepted: OK
+check-linux-current-msrv-examples.py: OK
+source-freeze.json: OK
+contract.md: OK
+linux-process-overlap-proof.py: OK
+collect-originals.py: OK
+linux-process-overlap-fresh-closure.py: OK
+recipe-probes.py: OK
+launch.sh: OK
+runner/tools/run_scoped.py: OK
+runner/tools/agentskills/__init__.py: OK
+runner/tools/agentskills/pyguard.py: OK
+adaptive_runner_timeout_seconds=570
+PRIVATE_RUNTIME /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command=rustup-install argv=['/root/.cargo/bin/rustup', 'toolchain', 'install', '1.77.2-x86_64-unknown-linux-gnu', '--profile', 'minimal', '--no-self-update']
+sample={"descendants": 2, "monotonic_seconds": 0.027, "rss_kib": 43780, "storage_kib": 24}
+sample={"descendants": 2, "monotonic_seconds": 1.042, "rss_kib": 53264, "storage_kib": 15504}
+sample={"descendants": 2, "monotonic_seconds": 2.055, "rss_kib": 103032, "storage_kib": 89304}
+sample={"descendants": 2, "monotonic_seconds": 3.068, "rss_kib": 150516, "storage_kib": 227896}
+sample={"descendants": 2, "monotonic_seconds": 4.084, "rss_kib": 150576, "storage_kib": 249956}
+sample={"descendants": 2, "monotonic_seconds": 5.098, "rss_kib": 255512, "storage_kib": 301536}
+sample={"descendants": 2, "monotonic_seconds": 6.112, "rss_kib": 402528, "storage_kib": 460088}
+sample={"descendants": 1, "monotonic_seconds": 7.025, "rss_kib": 28132, "storage_kib": 459712}
+status=rustup-install:0
+command=rustc-version argv=['/root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 7.036, "rss_kib": 28228, "storage_kib": 459720}
+sample={"descendants": 1, "monotonic_seconds": 7.147, "rss_kib": 28288, "storage_kib": 459724}
+status=rustc-version:0
+command=cargo-version argv=['/root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 7.158, "rss_kib": 28212, "storage_kib": 459728}
+sample={"descendants": 1, "monotonic_seconds": 7.27, "rss_kib": 28228, "storage_kib": 459732}
+status=cargo-version:0
+command=timeout-first-direct argv=['/root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--lib', '--features', 'testing-environ,sys', 'packages::sys::process::unix::tests::readable_output_overflow_wins_when_deadline_expires_direct_child', '--', '--exact', '--nocapture', '--test-threads=1']
+sample={"descendants": 2, "monotonic_seconds": 7.333, "rss_kib": 51356, "storage_kib": 467004}
+sample={"descendants": 2, "monotonic_seconds": 8.347, "rss_kib": 72460, "storage_kib": 470280}
+sample={"descendants": 2, "monotonic_seconds": 9.362, "rss_kib": 72452, "storage_kib": 470500}
+sample={"descendants": 2, "monotonic_seconds": 10.381, "rss_kib": 107408, "storage_kib": 505720}
+sample={"descendants": 4, "monotonic_seconds": 11.401, "rss_kib": 566988, "storage_kib": 541072}
+sample={"descendants": 4, "monotonic_seconds": 12.421, "rss_kib": 466660, "storage_kib": 572748}
+sample={"descendants": 4, "monotonic_seconds": 13.442, "rss_kib": 453948, "storage_kib": 602308}
+sample={"descendants": 4, "monotonic_seconds": 14.461, "rss_kib": 781928, "storage_kib": 610984}
+sample={"descendants": 4, "monotonic_seconds": 15.482, "rss_kib": 384972, "storage_kib": 652032}
+sample={"descendants": 3, "monotonic_seconds": 16.504, "rss_kib": 329488, "storage_kib": 663192}
+sample={"descendants": 3, "monotonic_seconds": 17.528, "rss_kib": 551976, "storage_kib": 663204}
+sample={"descendants": 3, "monotonic_seconds": 18.552, "rss_kib": 681352, "storage_kib": 663204}
+sample={"descendants": 3, "monotonic_seconds": 19.576, "rss_kib": 862672, "storage_kib": 663228}
+sample={"descendants": 3, "monotonic_seconds": 20.6, "rss_kib": 918416, "storage_kib": 677436}
+sample={"descendants": 4, "monotonic_seconds": 21.648, "rss_kib": 116352, "storage_kib": 675264}
+sample={"descendants": 1, "monotonic_seconds": 21.791, "rss_kib": 29348, "storage_kib": 675264}
+status=timeout-first-direct:101
+command=timeout-first-managed argv=['/root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--lib', '--features', 'testing-environ,sys', 'packages::sys::process::unix::tests::readable_output_overflow_wins_when_deadline_expires_managed', '--', '--exact', '--nocapture', '--test-threads=1']
+sample={"descendants": 2, "monotonic_seconds": 21.835, "rss_kib": 65116, "storage_kib": 675284}
+sample={"descendants": 1, "monotonic_seconds": 22.074, "rss_kib": 29252, "storage_kib": 675292}
+status=timeout-first-managed:101
+command=restored-direct argv=['/root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--lib', '--features', 'testing-environ,sys', 'packages::sys::process::unix::tests::readable_output_overflow_wins_when_deadline_expires_direct_child', '--', '--exact', '--nocapture', '--test-threads=1']
+sample={"descendants": 2, "monotonic_seconds": 22.119, "rss_kib": 65144, "storage_kib": 675296}
+sample={"descendants": 3, "monotonic_seconds": 23.16, "rss_kib": 294500, "storage_kib": 675276}
+sample={"descendants": 3, "monotonic_seconds": 24.218, "rss_kib": 450904, "storage_kib": 675280}
+sample={"descendants": 3, "monotonic_seconds": 25.258, "rss_kib": 510892, "storage_kib": 675280}
+sample={"descendants": 3, "monotonic_seconds": 26.303, "rss_kib": 578276, "storage_kib": 675280}
+sample={"descendants": 3, "monotonic_seconds": 27.325, "rss_kib": 665600, "storage_kib": 675288}
+sample={"descendants": 3, "monotonic_seconds": 28.349, "rss_kib": 818216, "storage_kib": 675300}
+sample={"descendants": 3, "monotonic_seconds": 29.372, "rss_kib": 873044, "storage_kib": 685200}
+sample={"descendants": 6, "monotonic_seconds": 30.394, "rss_kib": 727968, "storage_kib": 685316}
+sample={"descendants": 1, "monotonic_seconds": 30.816, "rss_kib": 29332, "storage_kib": 675304}
+status=restored-direct:0
+command=restored-managed argv=['/root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--lib', '--features', 'testing-environ,sys', 'packages::sys::process::unix::tests::readable_output_overflow_wins_when_deadline_expires_managed', '--', '--exact', '--nocapture', '--test-threads=1']
+sample={"descendants": 2, "monotonic_seconds": 30.839, "rss_kib": 64888, "storage_kib": 675312}
+sample={"descendants": 1, "monotonic_seconds": 31.06, "rss_kib": 29324, "storage_kib": 675320}
+status=restored-managed:0
+evidence_exported=/root/rhai-linux-process-overlap-d79-20261004-1259/proof-evidence
+/root/rhai-linux-process-overlap-d79-20261004-1259/launch.sh: line 190: /proc/1993169/stat: No such file or directory
+run_scoped_status=0
+runtime_cleanup_status=0 pid_readback_status=0 scope_cleanup_status=0
+outer_status=0
+OVERLAP_TERMINAL 0

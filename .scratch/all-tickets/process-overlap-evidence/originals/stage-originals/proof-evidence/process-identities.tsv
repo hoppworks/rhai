@@ -1,0 +1,94 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+helper	1993179	1993178	1993178	11387235	python3 /root/rhai-linux-process-overlap-d79-20261004-1259/linux-process-overlap-proof.py
+scoped-supervisor	1993178	1993169	1993178	11387233	/usr/bin/python3 /var/roothome/rhai-linux-process-overlap-d79-20261004-1259/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-process-overlap-d79-20261004-1259/linux-process-overlap-proof.py
+command:rustup-install	1993181	1993179	1993178	11387239	
+command:du	1993182	1993179	1993178	11387239	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	1993183	1993179	1993178	11387240	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1993213	1993179	1993178	11387341	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	1993214	1993179	1993178	11387341	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1993244	1993179	1993178	11387443	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	1993245	1993179	1993178	11387443	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1993260	1993179	1993178	11387544	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	1993261	1993179	1993178	11387544	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1993329	1993179	1993178	11387645	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	1993330	1993179	1993178	11387646	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1993350	1993179	1993178	11387747	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	1993351	1993179	1993178	11387747	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1993364	1993179	1993178	11387848	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	1993365	1993179	1993178	11387849	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1993379	1993179	1993178	11387940	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	1993380	1993179	1993178	11387940	/bin/ps -e -o pid=,ppid=,rss=
+command:rustc-version	1993381	1993179	1993178	11387941	/root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose
+command:du	1993382	1993179	1993178	11387941	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	1993383	1993179	1993178	11387941	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1993385	1993179	1993178	11387952	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	1993386	1993179	1993178	11387952	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-version	1993387	1993179	1993178	11387953	/root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose
+command:du	1993388	1993179	1993178	11387953	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	1993390	1993179	1993178	11387953	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1993402	1993179	1993178	11387964	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	1993404	1993179	1993178	11387965	/bin/ps -e -o pid=,ppid=,rss=
+command:timeout-first-direct	1993405	1993179	1993178	11387970	/root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --lib --features testing-environ,sys packages::sys::process::unix::tests::readable_output_overflow_wins_when_deadline_expires_direct_child -- --exact --nocapture --test-threads=1
+command:du	1993406	1993179	1993178	11387971	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	1993407	1993179	1993178	11387971	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1993428	1993179	1993178	11388072	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	1993429	1993179	1993178	11388072	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1993445	1993179	1993178	11388173	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	1993446	1993179	1993178	11388174	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1993460	1993179	1993178	11388275	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	1993461	1993179	1993178	11388275	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1993669	1993179	1993178	11388377	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	1993670	1993179	1993178	11388377	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1993884	1993179	1993178	11388479	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	1993886	1993179	1993178	11388479	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1994086	1993179	1993178	11388581	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	1994087	1993179	1993178	11388582	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1994152	1993179	1993178	11388683	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	1994153	1993179	1993178	11388683	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1994278	1993179	1993178	11388785	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	1994280	1993179	1993178	11388786	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1995021	1993179	1993178	11388887	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	1995043	1993179	1993178	11388888	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1995875	1993179	1993178	11388989	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	1995885	1993179	1993178	11388990	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1996753	1993179	1993178	11389091	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	1996759	1993179	1993178	11389092	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1997491	1993179	1993178	11389194	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	1997493	1993179	1993178	11389195	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1998189	1993179	1993178	11389296	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	1998192	1993179	1993178	11389297	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1999209	1993179	1993178	11389399	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	1999285	1993179	1993178	11389400	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1999553	1993179	1993178	11389413	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	1999586	1993179	1993178	11389415	/bin/ps -e -o pid=,ppid=,rss=
+command:timeout-first-managed	1999651	1993179	1993178	11389418	/root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --lib --features testing-environ,sys packages::sys::process::unix::tests::readable_output_overflow_wins_when_deadline_expires_managed -- --exact --nocapture --test-threads=1
+command:du	1999653	1993179	1993178	11389418	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	1999678	1993179	1993178	11389420	/bin/ps -e -o pid=,ppid=,rss=
+command:du	2000175	1993179	1993178	11389442	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	2000218	1993179	1993178	11389444	/bin/ps -e -o pid=,ppid=,rss=
+command:restored-direct	2000268	1993179	1993178	11389446	/root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --lib --features testing-environ,sys packages::sys::process::unix::tests::readable_output_overflow_wins_when_deadline_expires_direct_child -- --exact --nocapture --test-threads=1
+command:du	2000278	1993179	1993178	11389447	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	2000308	1993179	1993178	11389448	/bin/ps -e -o pid=,ppid=,rss=
+command:du	2001453	1993179	1993178	11389551	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	2001476	1993179	1993178	11389552	/bin/ps -e -o pid=,ppid=,rss=
+command:du	2002304	1993179	1993178	11389655	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	2002310	1993179	1993178	11389657	/bin/ps -e -o pid=,ppid=,rss=
+command:du	2003504	1993179	1993178	11389761	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	2003520	1993179	1993178	11389762	/bin/ps -e -o pid=,ppid=,rss=
+command:du	2004566	1993179	1993178	11389864	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	2004577	1993179	1993178	11389866	/bin/ps -e -o pid=,ppid=,rss=
+command:du	2005263	1993179	1993178	11389969	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	2005266	1993179	1993178	11389970	/bin/ps -e -o pid=,ppid=,rss=
+command:du	2005854	1993179	1993178	11390071	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	2005859	1993179	1993178	11390072	/bin/ps -e -o pid=,ppid=,rss=
+command:du	2006281	1993179	1993178	11390173	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	2006289	1993179	1993178	11390174	/bin/ps -e -o pid=,ppid=,rss=
+command:du	2006381	1993179	1993178	11390276	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	2006384	1993179	1993178	11390277	/bin/ps -e -o pid=,ppid=,rss=
+command:du	2006453	1993179	1993178	11390318	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	2006455	1993179	1993178	11390319	/bin/ps -e -o pid=,ppid=,rss=
+command:restored-managed	2006457	1993179	1993178	11390320	/root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --lib --features testing-environ,sys packages::sys::process::unix::tests::readable_output_overflow_wins_when_deadline_expires_managed -- --exact --nocapture --test-threads=1
+command:du	2006459	1993179	1993178	11390320	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	2006464	1993179	1993178	11390321	/bin/ps -e -o pid=,ppid=,rss=
+command:du	2006497	1993179	1993178	11390342	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w
+command:ps	2006498	1993179	1993178	11390343	/bin/ps -e -o pid=,ppid=,rss=

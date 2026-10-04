@@ -1,0 +1,5 @@
+Wrote the [answer](.scratch/all-tickets/escalations/22-process-overlap-source-gating.answer.md).
+
+The minimal fix is to remove only the new gate above `record_field_pid`, preserving the Linux gates on the new overlap tests. All affected callers were checked.
+
+One bounded follow-up may close source readiness after independent review. No fixes or builds were performed; native acceptance remains unverified.

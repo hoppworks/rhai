@@ -510,3 +510,22 @@ This closes only the Linux measurement criterion at the stated revision/workload
 Remaining lifecycle/first-cause, stdin, native macOS/Windows, API metadata/docs,
 full current feature/MSRV and release acceptance stay open; stopped causes are
 not renewed. Prior unaffected proof is reused, not rerun.
+
+## Accepted Linux same-step overflow/deadline precedence — 2026-10-04
+
+Reviewed source9dc92b16 (production baseline8c0ee463), native Linuxx86_64 private
+Rust/Cargo1.77.2, testing-environ,sys. Both DirectChild and Managed public script
+runs observe actual child-written readiness, expired deadline and readable stdout
+in the same supervision step; OutputLimit wins, with retained prefix, timed_out=false
+and honest incomplete captures. Two actual timeout-first controls each select one
+test and fail101 for the intended cause assertion after cleanup; pristine source
+restoration yields0/0. Sole62originalfiles/5directories/archivee5f0bf6c are preserved.
+Live custody and separate fresh closure prove99PID/start identities/fourgroups/six
+path entries closed; exact owned stage/runtime/scope retired. No foreign work changed.
+The installer observed argv was unavailable; the independently accepted collection-
+only recovery binds exact original identity, reviewed spawn, raw setup/private
+versions and ancestry, rejecting populated mismatches/other empty command rows.
+See ../../all-tickets/linux-process-overlap-proof.md and process-overlap-review.md.
+Only this Linux requirement closes. First committed cause, stdin, other lifecycle/
+fault criteria, native macOS/Windows, API/docs, full current feature/MSRV matrix and
+release acceptance remain open. Existing stopped histories are preserved.

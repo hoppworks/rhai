@@ -1,0 +1,46 @@
+[
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "timeout-first-direct",
+    "required_diagnostics": [
+      "overflow must win over the simultaneously expired deadline"
+    ],
+    "required_output": [
+      "overlap-fixture mode=direct child_pid=1999171 child_start_ticks=11389397 child_pgid=1993178 child_write=acknowledged deadline=expired poll=stdout-readable overflow_observed=false reap=ESRCH owner=closed"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "timeout-first-managed",
+    "required_diagnostics": [
+      "overflow must win over the simultaneously expired deadline"
+    ],
+    "required_output": [
+      "overlap-fixture mode=managed child_pid=1999822 child_start_ticks=11389425 child_pgid=1999822 child_write=acknowledged deadline=expired poll=stdout-readable overflow_observed=false reap=ESRCH owner=closed"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": [
+      "test packages::sys::process::unix::tests::readable_output_overflow_wins_when_deadline_expires_direct_child ... ok",
+      "overlap-fixture mode=direct child_pid=2006411 child_start_ticks=11390298 child_pgid=1993178 child_write=acknowledged deadline=expired poll=stdout-readable overflow_observed=true reap=ESRCH owner=closed",
+      "test result: ok. 1 passed; 0 failed;"
+    ],
+    "name": "restored-direct",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": [
+      "test packages::sys::process::unix::tests::readable_output_overflow_wins_when_deadline_expires_managed ... ok",
+      "overlap-fixture mode=managed child_pid=2006469 child_start_ticks=11390323 child_pgid=2006469 child_write=acknowledged deadline=expired poll=stdout-readable overflow_observed=true reap=ESRCH owner=closed",
+      "test result: ok. 1 passed; 0 failed;"
+    ],
+    "name": "restored-managed",
+    "status": 0
+  }
+]

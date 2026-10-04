@@ -1,0 +1,25 @@
+{
+  "package_commit": "dae1f541b8392fd343e635cd5b23c5587e1c2a93",
+  "source_revision": "9dc92b16dad173eaffbde521310d1e2480e7be9c",
+  "pins": {
+    "archive-build-source.py": "a75b4e807f03e8247ed821df871ceb35e776b7f699046d7a099dd0b85199fd8b",
+    "source.tar": "2b46a48f0978de3f7c1a7958678d3474232a0b2246ac8ff8f85e9e931345c039",
+    "Cargo.lock.accepted": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+    "check-linux-current-msrv-examples.py": "cff7b61de24b37fe6e46523eee1f0a29b8ea6bb1e2069e60b76d050ca42e3c47",
+    "source-freeze.json": "d4146a9fda25ef8bafc47025e4facb0a008706a27506e2432c5ca0de17fdf883",
+    "contract.md": "a4eba240ef6c8e2cc44a8254e6ef4da4ace9d162769d432e10c386b405002a29",
+    "linux-process-overlap-proof.py": "692ca9e881b29da3d3431bf99ffe1ec1633a3970bf694b327f18e8c7838b143e",
+    "collect-originals.py": "a791e22350693ba47a253572f2b4a1d57a77481c767e0d4dc003f2b543b57a1b",
+    "linux-process-overlap-fresh-closure.py": "094fd8408af60202ffd2b6f3a7f692cf093b1207d696cc51f16d3c090a8c586e",
+    "recipe-probes.py": "e0273320b27bce76335b82609c2245aee658a23ab5d52d87c4070f7c7d3983e6",
+    "launch.sh": "54c6e7e1b183923a15ed77ab809f9f9823f4930f5e8fe04cb7c58d90772842f8",
+    "runner/tools/run_scoped.py": "9edd5bc53260c697174552498f6064e65ab821d28838af2291a0cbb6e510c36d",
+    "runner/tools/agentskills/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runner/tools/agentskills/pyguard.py": "a3739f4947744303e1adf3fb0875ac743944a272e5b95c94b1baba53029d313f"
+  },
+  "admission": {
+    "linux-process-overlap-preflight.py": "f5ff74ea70371ef96657e63ed2198f85a435cb22669b158945c10d5492130570",
+    "linux-process-overlap-slot-wrapper.py": "6ffd5a4168a2cee02167168a6a46c30c6d8a1487b6031dec714678fa2135f329"
+  },
+  "classification": "source-only; not admitted or executed"
+}

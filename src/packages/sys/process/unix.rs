@@ -1385,6 +1385,13 @@ struct ExecutionFaults {
     spawn_operations: Option<Arc<AtomicUsize>>,
     #[cfg(test)]
     scope_eperm_observations_remaining: usize,
+    #[cfg(test)]
+    overlap_readiness: Option<(
+        std::path::PathBuf,
+        Arc<std::sync::atomic::AtomicBool>,
+    )>,
+    #[cfg(test)]
+    overlap_observations: Option<Arc<AtomicUsize>>,
 }
 
 impl ExecutionFaults {
@@ -1428,6 +1435,53 @@ impl ExecutionFaults {
             count.fetch_add(1, Ordering::AcqRel);
         }
         true
+    }
+
+    #[cfg(test)]
+    fn synchronize_overflow_deadline(&mut self, started: Instant, timeout: Option<Duration>) {
+        let Some((readiness, synchronized)) = self.overlap_readiness.take() else {
+            return;
+        };
+        let Some(timeout) = timeout else {
+            return;
+        };
+
+        let readiness_deadline = Instant::now() + Duration::from_secs(3);
+        while !readiness.exists() && Instant::now() < readiness_deadline {
+            thread::sleep(Duration::from_millis(2));
+        }
+        if !readiness.exists() {
+            return;
+        }
+
+        let deadline = started + timeout;
+        while Instant::now() < deadline {
+            thread::sleep(deadline.saturating_duration_since(Instant::now()));
+        }
+        synchronized.store(true, Ordering::Release);
+    }
+
+    #[cfg(test)]
+    fn observe_overlap_poll(&self, expired: bool, poll_succeeded: bool, stdout_ready: bool) {
+        if expired && poll_succeeded && stdout_ready {
+            if let Some(observations) = &self.overlap_observations {
+                observations.fetch_or(0b011, Ordering::AcqRel);
+            }
+        }
+    }
+
+    #[cfg(test)]
+    fn observe_overlap_overflow(&self) {
+        if let Some(observations) = &self.overlap_observations {
+            observations.fetch_or(0b100, Ordering::AcqRel);
+        }
+    }
+
+    #[cfg(test)]
+    fn observe_overlap_owner_closed(&self) {
+        if let Some(observations) = &self.overlap_observations {
+            observations.fetch_or(0b1000, Ordering::AcqRel);
+        }
     }
 
     fn retirement_probe(&self) -> Option<Arc<AtomicBool>> {
@@ -2462,6 +2516,8 @@ fn supervise(
     let mut scope_wait_started = None;
     let mut provisional_scope_error = None;
     loop {
+        #[cfg(test)]
+        faults.synchronize_overflow_deadline(started, timeout);
         let mut expired = timeout.is_some_and(|t| started.elapsed() >= t);
         if driver.reaped && driver.managed {
             let observation = {
@@ -2680,6 +2736,8 @@ fn supervise(
         };
         #[cfg(not(test))]
         let rc = unsafe { libc::poll(fds.as_mut_ptr(), fds.len() as libc::nfds_t, millis) };
+        #[cfg(test)]
+        faults.observe_overlap_poll(expired, rc >= 0, fds[0].revents != 0);
         if rc < 0 {
             #[cfg(test)]
             let e = if injected_interrupt {
@@ -2725,6 +2783,8 @@ fn supervise(
         if fds[0].revents != 0 {
             match read_ready(stdout.as_mut().unwrap(), &mut out, limit) {
                 Ok(ReadState::Overflow) => {
+                    #[cfg(test)]
+                    faults.observe_overlap_overflow();
                     return fail(
                         &mut driver,
                         &mut stdin,
@@ -3061,6 +3121,8 @@ fn fail(
         if scope_closed {
             driver.completed = true;
             driver.reservation.active = false;
+            #[cfg(test)]
+            faults.observe_overlap_owner_closed();
         } else {
             if !diagnostics
                 .iter()
@@ -3590,6 +3652,22 @@ mod tests {
         retired
     }
 
+    fn synchronize_overflow_deadline_for_next_execution(
+        readiness: PathBuf,
+    ) -> (Arc<AtomicBool>, Arc<AtomicUsize>) {
+        let synchronized = Arc::new(AtomicBool::new(false));
+        let observations = Arc::new(AtomicUsize::new(0));
+        NEXT_EXECUTION_FAULTS.with(|next| {
+            let previous = next.borrow_mut().replace(ExecutionFaults {
+                overlap_readiness: Some((readiness, Arc::clone(&synchronized))),
+                overlap_observations: Some(Arc::clone(&observations)),
+                ..ExecutionFaults::default()
+            });
+            assert!(previous.is_none(), "an execution fault was already armed");
+        });
+        (synchronized, observations)
+    }
+
     #[cfg(not(feature = "no_float"))]
     fn interrupt_polls_for_next_execution(count: usize) -> Arc<std::sync::atomic::AtomicUsize> {
         let observed = Arc::new(std::sync::atomic::AtomicUsize::new(0));
@@ -4116,6 +4194,21 @@ mod tests {
             .map_err(|error| io::Error::new(io::ErrorKind::InvalidData, error))
     }
 
+    #[cfg(all(target_os = "linux", not(feature = "no_float")))]
+    fn record_field_ticks(path: &Path, field: &str) -> io::Result<u64> {
+        let record = fs::read_to_string(path)?;
+        let prefix = format!("{field}=");
+        let value = record
+            .split_whitespace()
+            .find_map(|part| part.strip_prefix(&prefix))
+            .ok_or_else(|| io::Error::new(io::ErrorKind::InvalidData, "invalid start record"))?;
+        value
+            .parse::<u64>()
+            .ok()
+            .filter(|ticks| *ticks > 0)
+            .ok_or_else(|| io::Error::new(io::ErrorKind::InvalidData, "invalid start ticks"))
+    }
+
     fn map_bool(map: &crate::Map, key: &str) -> bool {
         map.get(key)
             .expect("process result map key missing")
@@ -4325,6 +4418,119 @@ mod tests {
         drop(result);
         drop(engine);
         drop(package);
+    }
+
+    #[cfg(all(target_os = "linux", not(feature = "no_float")))]
+    fn readable_output_overflow_wins_when_run_deadline_expires_in_same_step(
+        name: &str,
+        scope: crate::packages::sys::ProcessScope,
+    ) {
+        let fixture = FixtureDir::new();
+        let readiness = fixture.0.join(format!("{name}-child-record"));
+        let (synchronized, observations) =
+            synchronize_overflow_deadline_for_next_execution(readiness.clone());
+        let mut engine = Engine::new();
+        let package = SysPackage::new(
+            SysConfig::default()
+                .programs(ProgramPolicy::Any)
+                .max_output(1)
+                .process_scope(scope),
+        )
+        .unwrap();
+        package.register_into_engine(&mut engine);
+        let script = format!(
+            "run(\"/bin/sh\", [\"-c\", \"tmp=\\\"$RHAI_TEST_OVERLAP_READY.tmp\\\"; printf 'xy'; python3 -c 'import pathlib,sys; raw=pathlib.Path(\\\"/proc/\\\"+sys.argv[1]+\\\"/stat\\\").read_text(); fields=raw[raw.rfind(\\\")\\\")+2:].split(); print(\\\"child-pid=\\\"+sys.argv[1]+\\\" child-pgid=\\\"+fields[2]+\\\" child-start=\\\"+fields[19]+\\\" ready=1\\\")' \\\"$$\\\" > \\\"$tmp\\\"; mv \\\"$tmp\\\" \\\"$RHAI_TEST_OVERLAP_READY\\\"; exec /bin/sleep 30\"], #{{ timeout: 0.1, max_output: 1, env: #{{ \"RHAI_TEST_OVERLAP_READY\": {} }} }})",
+            quote_rhai(readiness.to_str().unwrap()),
+        );
+
+        let outcome = engine.eval::<crate::Map>(&script);
+        let child_pid = record_pid(&readiness).expect("child readiness/PID record missing");
+        let child_pgid = record_field_pid(&readiness, "child-pgid")
+            .expect("child readiness/process-group record missing");
+        let child_start = record_field_ticks(&readiness, "child-start")
+            .expect("child readiness/start-time record missing");
+        assert_pid_reaped(child_pid);
+        assert!(
+            synchronized.load(Ordering::Acquire),
+            "test scheduling adapter did not establish ready output at an expired deadline"
+        );
+        assert!(
+            fs::read_to_string(&readiness)
+                .expect("child readiness record")
+                .contains("ready=1"),
+            "child output acknowledgment was incomplete"
+        );
+        let observed = observations.load(Ordering::Acquire);
+        assert_eq!(
+            observed & 0b1011,
+            0b1011,
+            "native overlap receipt must show expired deadline, readable stdout poll, and owner closure"
+        );
+        eprintln!(
+            "overlap-fixture mode={name} child_pid={child_pid} child_start_ticks={child_start} child_pgid={child_pgid} child_write=acknowledged deadline=expired poll=stdout-readable overflow_observed={} reap=ESRCH owner=closed",
+            observed & 0b100 != 0
+        );
+        let (cause, report) = match outcome {
+            Ok(result) => (
+                if map_bool(&result, "timed_out") {
+                    "Timeout"
+                } else {
+                    "UnexpectedSuccess"
+                },
+                None,
+            ),
+            Err(error) => {
+                let sys_error = match error.as_ref() {
+                    EvalAltResult::ErrorRuntime(value, _) => value
+                        .clone()
+                        .try_cast::<SysError>()
+                        .expect("typed process error"),
+                    other => panic!("expected typed process error, got {other:?}"),
+                };
+                let SysError::Process { cause, report } = sys_error else {
+                    panic!("expected typed process report error, got {sys_error:?}");
+                };
+                let label = match &cause {
+                    ProcessCause::OutputLimit(_) => "OutputLimit",
+                    ProcessCause::Timeout(_) => "Timeout",
+                    _ => "OtherProcessCause",
+                };
+                (label, Some(report))
+            }
+        };
+        assert_eq!(
+            cause, "OutputLimit",
+            "overflow must win over the simultaneously expired deadline"
+        );
+        assert_eq!(
+            observations.load(Ordering::Acquire),
+            0b1111,
+            "ordinary supervision must observe overflow during the same expired-deadline poll step"
+        );
+        let report = report.expect("typed OutputLimit process report");
+        assert_eq!(report.stdout_bytes(), b"x");
+        assert!(!report.timed_out());
+        assert!(!report.stdout_complete());
+        drop(engine);
+        drop(package);
+    }
+
+    #[cfg(all(target_os = "linux", not(feature = "no_float")))]
+    #[test]
+    fn readable_output_overflow_wins_when_deadline_expires_direct_child() {
+        readable_output_overflow_wins_when_run_deadline_expires_in_same_step(
+            "direct",
+            crate::packages::sys::ProcessScope::DirectChild,
+        );
+    }
+
+    #[cfg(all(target_os = "linux", not(feature = "no_float")))]
+    #[test]
+    fn readable_output_overflow_wins_when_deadline_expires_managed() {
+        readable_output_overflow_wins_when_run_deadline_expires_in_same_step(
+            "managed",
+            crate::packages::sys::ProcessScope::Managed,
+        );
     }
 
     fn wait_for_pid_reaped(pid: i32) {

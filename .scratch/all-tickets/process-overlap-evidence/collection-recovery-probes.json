@@ -1,0 +1,28 @@
+{
+  "adapter_sha256": "edba89657810f2e8a5bf31debcf6f5a829969cf88b4a46134007b8d0bb1bff71",
+  "original_archive_sha256": "e5f0bf6cc804db36347e9a0603eda64fd7432fd3b25213a85170c57de0bf2990",
+  "cases": [
+    "actual native corpus accepted without changing original bytes",
+    "empty identity reuse rejected",
+    "populated setup mismatch rejected",
+    "unsuccessful setup rejected",
+    "wrong setup spawn rejected",
+    "foreign helper group rejected",
+    "unapproved empty rustc-version rejected",
+    "populated mismatch rustc-version rejected",
+    "unapproved empty cargo-version rejected",
+    "populated mismatch cargo-version rejected",
+    "unapproved empty timeout-first-direct rejected",
+    "populated mismatch timeout-first-direct rejected",
+    "unapproved empty timeout-first-managed rejected",
+    "populated mismatch timeout-first-managed rejected",
+    "unapproved empty restored-direct rejected",
+    "populated mismatch restored-direct rejected",
+    "unapproved empty restored-managed rejected",
+    "populated mismatch restored-managed rejected",
+    "changed original binding rejected"
+  ],
+  "validated_identity_count": 99,
+  "scope": "local consumer probes; no SSH, signal, retirement or native allocation",
+  "observed_setup_argv": "unavailable; exact cause unknown"
+}

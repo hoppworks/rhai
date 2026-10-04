@@ -1,0 +1,14 @@
+{
+  "utc": "2026-10-04T14:04:25Z",
+  "ready": true,
+  "inputs_verified": 14,
+  "heavy": [],
+  "mem_available_kib": 83159648,
+  "disk_free_bytes": 727675555840,
+  "load": [
+    5.92236328125,
+    5.67822265625,
+    5.6123046875
+  ],
+  "scope_absent": true
+}

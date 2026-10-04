@@ -1,0 +1,19 @@
+{
+  "source_revision": "cc32969d338c2dcee717345feffcb2af494f8ab2",
+  "root_baseline": "d79b2dfb6d7524aec16e697bde5b0c3965808561",
+  "non_scratch_changed_files": [
+    "src/packages/sys/process/unix.rs"
+  ],
+  "author_committer": [
+    "hoppworks <daniel@hoppworks.de>",
+    "hoppworks <daniel@hoppworks.de>"
+  ],
+  "test_source_sha256": "34e10a7ad9094ced429eae24137eaadf4dce502147b4573b07ec35cec7b391ca",
+  "files": {
+    "source.tar": "2d7008653382c2a3168fd389c48ba8eacedf3774563df411fb1fcf721f009935",
+    "archive-build-source.py": "a75b4e807f03e8247ed821df871ceb35e776b7f699046d7a099dd0b85199fd8b",
+    "Cargo.lock.accepted": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425"
+  },
+  "native_allocations": 0,
+  "archive_excludes_scratch": true
+}

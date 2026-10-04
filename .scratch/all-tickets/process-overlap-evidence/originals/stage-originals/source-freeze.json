@@ -1,0 +1,22 @@
+{
+  "source_revision": "9dc92b16dad173eaffbde521310d1e2480e7be9c",
+  "root_baseline": "d79b2dfb6d7524aec16e697bde5b0c3965808561",
+  "non_scratch_changed_files": [
+    "src/packages/sys/process/unix.rs"
+  ],
+  "author_committer": [
+    "hoppworks <daniel@hoppworks.de>",
+    "hoppworks <daniel@hoppworks.de>"
+  ],
+  "test_source_sha256": "6b088870e6f4ed758c88e6fdc7e50475cae7cda90ba10dae58e45718a2ba3a98",
+  "files": {
+    "source.tar": "2b46a48f0978de3f7c1a7958678d3474232a0b2246ac8ff8f85e9e931345c039",
+    "archive-build-source.py": "a75b4e807f03e8247ed821df871ceb35e776b7f699046d7a099dd0b85199fd8b",
+    "Cargo.lock.accepted": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425"
+  },
+  "native_allocations": 0,
+  "archive_excludes_scratch": true,
+  "superseded_source_revision": "b83ffe431f76bd051312179e297e1dcc14a79ae4",
+  "superseded_archive_sha256": "31bc26c8b79317800a458045bed8ff0d6712f1225267266937eb48fa1d4a15dd",
+  "reason": "Expert22 sole bounded follow-up: restore shared record_field_pid availability, exact one-line gate deletion"
+}

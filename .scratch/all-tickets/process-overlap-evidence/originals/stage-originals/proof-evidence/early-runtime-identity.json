@@ -1,0 +1,19 @@
+{
+  "captured_before_stage_validation_or_external_command": true,
+  "helper": {
+    "cmdline": "python3 /root/rhai-linux-process-overlap-d79-20261004-1259/linux-process-overlap-proof.py",
+    "pgid": 1993178,
+    "pid": 1993179,
+    "ppid": 1993178,
+    "start_ticks": 11387235
+  },
+  "identity_errors": {},
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-process-overlap-d79-20261004-1259/agent-build-rkmq_u3w",
+  "scoped_supervisor": {
+    "cmdline": "/usr/bin/python3 /var/roothome/rhai-linux-process-overlap-d79-20261004-1259/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-process-overlap-d79-20261004-1259/linux-process-overlap-proof.py",
+    "pgid": 1993178,
+    "pid": 1993178,
+    "ppid": 1993169,
+    "start_ticks": 11387233
+  }
+}

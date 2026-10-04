@@ -1,0 +1,10 @@
+{
+  "deadline_checked_at_entry_between_items_and_after": true,
+  "deadline_checked_immediately_before_and_after_budget_receipt_copy": true,
+  "elapsed_seconds_at_export_start": 31.063,
+  "elapsed_seconds_before_budget_receipt_copy": 31.066,
+  "helper_deadline_seconds": 540,
+  "helper_work_deadline_seconds": 510,
+  "individual_copy_operations_preemptible": false,
+  "partial_evidence_may_remain_if_export_fails": true
+}

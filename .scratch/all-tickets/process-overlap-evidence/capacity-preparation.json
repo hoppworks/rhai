@@ -1,0 +1,42 @@
+{
+  "utc": "2026-10-04T13:27:42Z",
+  "stage_absent": true,
+  "scope_absent": true,
+  "heavy": [
+    {
+      "pid": 1730293,
+      "comm": "python3",
+      "argv": [
+        "python3",
+        "/home/workhorse/projects/agent-skills/tools/run_scoped.py",
+        "--timeout"
+      ]
+    },
+    {
+      "pid": 1730294,
+      "comm": "python3",
+      "argv": [
+        "/usr/bin/python3",
+        "/var/home/workhorse/projects/agent-skills/tools/run_scoped.py",
+        "_supervise"
+      ]
+    },
+    {
+      "pid": 1776165,
+      "comm": "cargo",
+      "argv": [
+        "/var/home/workhorse/.rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+        "check",
+        "--locked"
+      ]
+    }
+  ],
+  "mem_available_kib": 80195796,
+  "disk_free_bytes": 715442216960,
+  "load": [
+    11.8955078125,
+    7.65380859375,
+    9.9384765625
+  ],
+  "classification": "read-only preparation, not admission or reservation"
+}

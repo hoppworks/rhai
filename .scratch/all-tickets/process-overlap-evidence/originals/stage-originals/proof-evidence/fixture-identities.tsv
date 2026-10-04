@@ -1,0 +1,5 @@
+case	pid	start_ticks	pgid	write	deadline	poll	overflow	reap	owner	expected_command
+timeout-first-direct	1999171	11389397	1993178	acknowledged	expired	stdout-readable	false	ESRCH	closed	/bin/sleep 30
+timeout-first-managed	1999822	11389425	1999822	acknowledged	expired	stdout-readable	false	ESRCH	closed	/bin/sleep 30
+restored-direct	2006411	11390298	1993178	acknowledged	expired	stdout-readable	true	ESRCH	closed	/bin/sleep 30
+restored-managed	2006469	11390323	2006469	acknowledged	expired	stdout-readable	true	ESRCH	closed	/bin/sleep 30

@@ -1,0 +1,60 @@
+{
+  "utc": "2026-10-04T13:55:22Z",
+  "stage_absent": true,
+  "scope_absent": true,
+  "heavy": [
+    {
+      "pid": 1892767,
+      "comm": "python3",
+      "argv": [
+        "python3",
+        "/home/workhorse/projects/agent-skills/tools/run_scoped.py",
+        "--timeout"
+      ]
+    },
+    {
+      "pid": 1892769,
+      "comm": "python3",
+      "argv": [
+        "/usr/bin/python3",
+        "/var/home/workhorse/projects/agent-skills/tools/run_scoped.py",
+        "_supervise"
+      ]
+    },
+    {
+      "pid": 1935670,
+      "comm": "cargo",
+      "argv": [
+        "cargo",
+        "check",
+        "--locked"
+      ]
+    },
+    {
+      "pid": 1935677,
+      "comm": "rustc",
+      "argv": [
+        "/home/workhorse/.rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/rustc",
+        "--crate-name",
+        "gateway"
+      ]
+    },
+    {
+      "pid": 1935679,
+      "comm": "rustc",
+      "argv": [
+        "/home/workhorse/.rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/rustc",
+        "--crate-name",
+        "gateway"
+      ]
+    }
+  ],
+  "mem_available_kib": 79407808,
+  "disk_free_bytes": 717932224512,
+  "load": [
+    2.65087890625,
+    4.794921875,
+    5.86865234375
+  ],
+  "classification": "read-only pre-stage observation, not allocation or reservation"
+}
