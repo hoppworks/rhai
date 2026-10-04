@@ -91,11 +91,12 @@ precedence. No ordering between independent stdout and stderr events is promised
 
 ## Shared lifetime and failures
 
-Cloning a `Child` shares one process and its captured result. With the default
-`kill_on_drop(true)`, dropping the final client handle requests cancellation.
-With `kill_on_drop(false)`, dropping that handle lets execution continue under
-the cleanup service. Handle and package destruction do not synchronously wait
-for every retained process to be reaped.
+Cloning a `Child` shares one process and its captured result. The host selects
+this lifetime policy with `SysConfig::kill_on_drop`; scripts cannot change it.
+The default, `SysConfig::kill_on_drop(true)`, requests cancellation when the final
+client handle is dropped. With `SysConfig::kill_on_drop(false)`, dropping that
+handle lets execution continue under the cleanup service. Handle and package
+destruction do not synchronously wait for every retained process to be reaped.
 
 Execution and cleanup failures can carry an immutable `ProcessReport` in
 `SysError.process`. Inspect its `stdout`, `stderr`, completeness fields,
