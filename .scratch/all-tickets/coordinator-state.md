@@ -27,6 +27,11 @@ No installs, admin, credentials, agent-home/config or shared-service changes.
 Windows guest control belongs solely to windows_private_staging_readback; historical owner records remain preserved.
 
 ## Done steps and accepted evidence
+- Linux Rust1.77.2 runnable sys/net/sys_process examples accepted in one build
+  with three meaningful controls and independent host/peer/process readbacks.
+  Exact three-file integration cacb8530, proof linux-process-example3-proof.md;
+  all71 originals retained,102 identities/two groups/four exact paths retired
+  and independently checked. Partial03/06 criterion only, no full release claim.
 - Foundation filesystem/environment/file handles/TCP slices are integrated with
   earlier accepted proofs. Detailed slice applicability is preserved in the
   historical state and original evidence; final current-source matrix is open.
@@ -54,8 +59,8 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
   source, owner21/public29 passed. native81-root-cleanup-readback.json confirms
   34 emitted PIDs/10 groups and exact runtime absent, three manifests matching.
   Cargo53.432s, sampled276896KiB; no continuous peak claim.
-- Remote branch cleanup CLOSED. Latest independent ls-remote readback shows ONLY
-  main at0369048be7776fc9a34b8f79a874120ebe73220c (latest independent fork readback). Nine remote task refs removed
+- Remote branch cleanup CLOSED. Integration readback2026-10-04 shows ONLY
+  main atcacb85300447aef1f6843b668b9f26d6ec89e2b5. Nine remote task refs removed
   in the final consolidation, one earlier; every exact tip was ancestor of pushed
   main before deletion. Histories preserved. Local active/foreign/dirty worktrees
   remain; remote cleanup does not authorize discarding them.
@@ -81,8 +86,9 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 
 ## Current step and next action
 
-Rules faba3db loaded; overall goal active and incomplete. Latest independently
-verified fork main867a2cb9ed87d56f9c564ec3a57eaa00e5fbe576. Production523 and
+Rules faba3db loaded; overall goal active and incomplete. Last independently
+verified example integration on fork maincacb85300447aef1f6843b668b9f26d6ec89e2b5;
+only main exists remotely. Subsequent state-only commits do not change proof inputs. Production523 and
 prior valid proofs retain their recorded applicability. Native110 unallocated;
 stopped stdin/Darwin/Windows cause chains remain stopped.
 
@@ -113,7 +119,11 @@ Direct bytes match20d, production/codegen/build unchanged;492 unaccepted stdin
 lines excluded. linux-process-example3-proof.md closes Linux examples narrowly.
 Root local integration guards had phrase/untracked-diff artifacts, resolved by
 actual verdict and direct byte comparison; no native/source history reset.
-Next commit/push fork main and independent remote-only-main readback.
+Committed/pushed integration cacb85300447aef1f6843b668b9f26d6ec89e2b5;
+author/committer hoppworks <daniel@hoppworks.de>, independent remote-only-main
+readback passed. Exact original rustup stdout has a trailing blank line;
+raw proof was preserved and excluded only from whitespace formatting checks.
+Next sameowner drop-false executable preparation and one combined review.
 
 Independent drop-false package remains with same Standard. Proposal118a2c40 and
 test-only patch against523 address the brief live-phase observation race through
