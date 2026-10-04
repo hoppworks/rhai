@@ -81,10 +81,27 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 
 ## Current step and next action
 
-Instructions faba3db unchanged/loaded; full goal active/incomplete. Sole fork
-main last independently read back atc55f42f25cb865b56bebae379555ea21227862bf.
-Accepted109 proof/source523 unchanged; no retained native resources, all finite
-concurrency exceptions expired. Unix109 consumed; native110 unallocated.
+Current instructions faba3db loaded. Goal active/incomplete; only fork main last
+independently read back at b2c02c472bc1f726fc6861de9b508fbe1414ca6f.
+Accepted production523/native109 proof remain unchanged. Native110 unallocated;
+exhausted stdin/macOS/Windows chains stay stopped. Default one-heavy-run applies.
+
+Current package: preserve and safely retire failed663 example originals, then
+verify the separately prepared60048 corrected example package on workhorse.
+All49 original files and tar are independently verified, committed and pushed;
+old failed custody receipt remains historical. Original663 stage is retained,
+runtime/scope historically absent. New60048 stage is prepared and unrun.
+Expert19 diagnosed actual emitter/consumer identity mismatch plus malformed proc
+start classification. Same Standard owns one consolidated consumer-only repair
+with20minute active-work planning checkpoint; no native allocation or limit reset.
+Next affected combined recheck, fresh named actual custody observation, exact
+retirement with independent readback; then actual free-slot guarded six-control
+example acceptance. Latest00:59:00Z preflight was busy; Tauron coordination is
+explicitly authorized and latest chat cursor14 confirms active backend work,
+not a reserved window. Prior guard fallthrough error and all consumed work remain
+preserved. No foreign processes/resources may be interrupted.
+
+### Prior package history and detailed applicability (preserved)
 
 Same Standard completed the four known affected9d source fixes inside the
 existing Expert17 follow-up, frozen ee50c63e119ea22375e9cee2743ccf622d0a3aa3.
@@ -498,6 +515,24 @@ freshcustodyreadback/exactretirement, without repeating rawcollection. Workhorse
 coordination stillunconfirmed; latestTauroncursor0c42f2fc-8dd8-448e-8925-e56cf07c6c48:13 actualchatactive/backend
 repair, no idlewindowinferred. Goal turn PROGRESS: actualoriginal preservation/
 independentbyte proof and genuine emittercontract diagnosis alter nextaction.
+
+Expert19 answer received/read: collector-emitter-identity-contract has a narrow
+consumer correction, including all three malformed observed-start classifications.
+Original64+2 rows and all49 preserved files/tar remain immutable and verified.
+Same responsible Standard receives ONE consumer-only follow-up with20minute
+active-work planning checkpoint (estimate, no build allocation); zero prior fixes
+for this exact cause, earlier4358 receipt/rawscope failure remains recorded.
+Required original-shaped RED/GREEN and finite actual parser/receiver/model probes;
+owner counts/provenance/ancestry, unique positive PIDs, conservative proc reads,
+complete observations, hashes and exact retirement gates remain required.
+Historical failed custody receipt must remain unchanged; add fresh named receipt
+route without recollection. NO SSH/Cargo/native/staging/deletion/push for writer.
+Affected reviewer next; actual current custody and retirement only after READY.
+Own diagnostic /private/tmp/rhai-process-example1-original-build.stderr exact
+unlink completed after byte equality, preservation and successful b2c02c push.
+Latest actual00:59:00Z newstage preflight busy foreign3097567/3097568 with Cargo;
+no60048 launch. Tauron coordination authorized, confirmation still absent.
+Current rules faba3db unchanged and reread root; no hardchain renewal.
 
 ### Earlier current-step history (retained, superseded)
 
