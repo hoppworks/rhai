@@ -101,3 +101,47 @@ The collector uses exact prescribed logical/physical stage paths, rejects stage 
 Retirement currently emits only stage/scope boolean absence, leaving its immediate PID/group/runtime observations implicit in a successful exit. Preserve explicit final exact readback observations in the receipt when correcting the custody predicates; the existing local independent-readback is pre-deletion, not that final observation. Local copies are closed and hash-verified; no crash-durability/fsync guarantee is demonstrated, and no such native/storage claim is made here.
 
 Root preflight binds the reviewed ten input hashes, canonical physical stage, absent scope/terminal/evidence state, idle heavy-run inventory and minimum16GiB available RAM/disk. This collector addition does not change those guard inputs. Fresh guard execution and independently read-back original six controls, restoration, bounds, cleanup and source applicability remain necessary for real example acceptance. This review ran only AST/immutable blob and bounded actual-consumer corruption models; no remote custody, deletion or native acceptance was simulated as proof.
+
+
+---
+
+## Combined affected correction — source60048ec4 / recipes4358af92
+
+**Prepared execution: READY (source review only; compilation/native acceptance unverified). Collector collection/retirement package: NOT READY.** Reviewed `60048ec4d3d615fac3250404ce61b8cae14dfcb8` and `4358af92e6930514fac32d014b284591e58d47d3` against collector baseline2dc12ce3/fa0 execution recipe. Two consolidated collector blockers remain below. No Cargo, SSH, native launch, staging, cleanup, source edits or push ran. Existing failed compile1, preparation approximately45minutes plus unknown collector work, exhausted stdin history/native110-unallocated and other boundaries remain unchanged; no native acceptance, retry-count or cap reset is inferred.
+
+Current root project instructions were read; agent-skills revision reconfirmed `faba3db3bef6891ad2c0b20d434963bb8fe9572d`. Applicable global/campaign/e2e/ocr instructions retained at that unchanged revision. OCR preview/rule resolution covered all six affected files; five selected automatically, contract Markdown included explicitly and reviewed manually (6/6, skipped0). Earlier unaffected conclusions remain applicable.
+
+### Public API/compiler correction and prepared execution
+
+The earlier review implicitly treated the generic `rhai::Variant` bounds as externally available. That assumption is withdrawn: `src/lib.rs` exports `Variant` only with `internals`, absent from this selected profile. The actual failed build101 established the compiler defect; it was not an intended behavioral RED and supplied no process-example acceptance.
+
+The corrected example uses concrete public `Dynamic`/`INT` evaluation and public concrete `Dynamic::cast` conversions for bool/INT/String. No inaccessible generic trait name remains. `eval_with_scope` can be instantiated with these public types without naming its internal bound. The helper for `child.id` uses the actual property and concrete INT return. Pending waits/cleanup use Dynamic, terminal map conversion and all old assertions remain. String cast has the existing public conversion path. Atomic readiness, cloned cached-map equality, real host effects, exit7-as-data, completion/timeout flags and the wrong-exit8 final assertion are preserved. No source/API finding remains in this correction, but no compilation was performed here.
+
+Checker, stage, launcher and contract consistently consume source `60048ec4d3d615fac3250404ce61b8cae14dfcb8`, archive `ce8bcb76a6e839a5ee293f53d70784731bcfbb65b6694aa0e5b1ded2b00661d6`, unchanged lock2ba4 and unique `60048ec4-20261004` stage/scope. The six behavior controls, private MSRV1.77.2/build-once contract, adaptive runner/helper/export bounds and platform limitations are unchanged. New stage/scope remain unallocated. A fresh guard using these new paths and exact new recipe hashes is required before any launch; the earlier66379d30 preflight is not a guard for this new stage. Actual native acceptance remains pending.
+
+### Consolidated collector blockers
+
+1. **Final receipt always fails after exact stage deletion.** In `retire`'s embedded deletion script, `groups=set(c['groups'])`, but the final `json.dumps` dictionary contains `'final_groups':groups`. A set is not JSON serializable. The failure occurs after files/directories/stage removal and after final PID/group checks, causing the SSH command to fail and preventing the local `retirement-receipt.json` from being written. This would leave required custody acceptance incomplete after irreversible retirement. Convert the groups to the required sorted numeric list and independently execute the actual final receipt expression/receiver contract before authorizing retirement. The isolated actual AST final receipt expression was executed with a two-group set and raised `TypeError: Object of type set is not JSON serializable`; no destructive script statements were executed.
+
+2. **Raw acquisition still depends on a custody-scope query before tar export.** `REMOTE_INVENTORY` is documented as never querying the private scope, but its final output evaluates `scope.exists() or scope.is_symlink()` for `scope_present`. `collect()` calls this script before opening/exporting the tar. If this scope observation raises a permission/I/O error, readable stage originals still cannot be acquired. Remove the scope observation from raw inventory and its comparison keys, or capture unknown without aborting raw preservation; the separate custody call must remain responsible for scope absence and blocking retirement. A probe of the actual inventory output expression with a modeled denied scope observation raised `PermissionError` before any output. This is the remaining dependency in the original raw-preservation finding; it does not demonstrate an actual VM permission failure.
+
+### Resolved collector portions and modeled evidence
+
+The collector remains explicitly scoped to the original failed66379d30 invocation, never the new60048ec4 stage. It now embeds the exact original ten input pins and original manifest order, validates copied/fresh inventories, and repeats ten-input/manifest checks at deletion. Actual `validate_input_binding` accepted its consistent frozen-pin shape and rejected missing source, wrong manifest and inventory errors. This is modeled validation, not original remote proof.
+
+Custody parsing now validates header/unique required labels and PIDs, positive recorded PID/PPID/PGID/start fields, owner/command parent relationships and command provenance. It records PID/start observations; only NotFound proves absence, changed start records original-absent, unknown reads fail. Strict ps census permits an unrelated numeric PGID0 (valid Linux census data), rejects malformed rows, and records group-query failures as unknown. Runtime grammar requires one direct scope child and one original PRIVATE_RUNTIME marker; symlink/present scope/runtime states reject custody. Separate custody calls occur after the retained original tar/extraction/preservation records, and decoding/group errors no longer roll back those records.
+
+Actual embedded REMOTE_CUSTODY was run only against a bounded in-memory fake filesystem/proc/ps: valid owner relationships plus unrelated `1 0` census accepted; zero recorded PID, malformed ps rows, ps timeout and traversal runtime rejected. These probes verify the actual producer predicates, not OS custody. Root's supplementary66 identities/two groups/runtime-absence observation does not bypass collection binding or the reviewed gates.
+
+Local originals/tree/tar hashes and fresh stage/custody equality gates are retained, with fresh PID/group/runtime/scope checks before deletion and an intended explicit post-deletion observation receipt. The serialization blocker must be fixed before this final receipt can exist. All collector/embedded Python AST and both Bash syntax checks passed. No native result, host receipt or cleanup was fabricated.
+
+### Independently checked frozen hashes at4358af92
+
+| File | SHA256 |
+|---|---|
+| examples/sys_process.rs | b73d175fccc4e8e5112d6d36f1e55ea6984a93c23592c10be7f931a05cbbd25b |
+| check-linux-current-msrv-examples.py | c5422e7895f5afacf987be55df2297b63b0763618ccbdc2a8374116a1421edd9 |
+| collect-linux-sys-process-example.py | 1e23abab1ea53812c35703349ec8dbbfff2a8f30281bb06d52f979f1aff3b16d |
+| launch-linux-current-msrv-examples.sh | 1f544fd9c5bdd2594a17eaab9c803ed3b5a889ada66eaace6b0ce0a4d4b12675 |
+| stage-linux-current-msrv-examples.sh | 6bdc4dd245e6e3df82318d42fe1c5e409aafc93031acc41373cbbe5ad9fa3bd1 |
+| linux-sys-process-example-contract.md | 526a8d5a35910f097fc398fd218e8abae6cf1142c083aaf791bd08f4e9739abf |

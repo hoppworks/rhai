@@ -409,6 +409,58 @@ claimed reviewed or accepted. No new launch allocated, stdin110 unallocated,
 all histories and hard boundaries preserved. Previous goal turn PROGRESS:
 new PGID0 evidence changes the correction, beyond status reporting.
 
+Current package frozen: source60048ec4d3d615fac3250404ce61b8cae14dfcb8
+uses supported public Dynamic/concrete result types, source-only example edit.
+Collector/consumer correction4358af92e6930514fac32d014b284591e58d47d3
+contains five recipe files only; author/committer independently checked exact
+hoppworks. Root independently reproduced accepted-helper archive in memory:
+ce8bcb76a6e839a5ee293f53d70784731bcfbb65b6694aa0e5b1ded2b00661d6,
+6471680bytes, exact local owner archive bytes and Cargo.toml/docs/sys-process.md/
+example source members checked against frozen source. Initial root member
+inspection used nonexistent docs/sys.md, corrected to actual docs/sys-process.md;
+observational setup only, no native launch or product correction consumed.
+Writer confirms faba3db, syntax/pure positive-corruption checks, no remote/native
+activity. New consuming stage/scope60048ec4-20261004 exclusively prospective;
+collector remains original663 stage/frozen10inputs. Same Expert combined affected
+review assigned before any collection/staging/use; verdict pending, no READY or
+compile/runtime acceptance claimed. Root cleanup proof/state independently pushed
+and fork ls-remote confirms ONLY main1b380f9a80e77282ff464f7211715a8f32283bde.
+Known consumed examplepreparation45minutes plus collector/correctionunknown,
+failedcompilelaunch1, stdin110unallocated, stoppedchains/hardbounds unchanged.
+This goal turn PROGRESS: frozen correction and independent input reproduction
+change nextaction to affected review, then original preservation/retirement and
+fresh explicit-success free-slot guarded native acceptance if READY.
+
+Affected4358 combined review: prepared source/execution READY; actual
+compilation/native acceptance remains unverified. Collector NOTREADY2: final
+receipt serializes set groups after exact deletion; raw inventory still queries
+scope before preservation. Complete report updated with actual producer probes.
+First completed failedcollectorcorrection4358 count1, initial2dc prep findings
+not a failed completed correction. Same responsible Standard assigned ONE
+collector-only consolidated smallfix,15minute activework planningcheckpoint;
+source60048/four consuming recipes immutable/unaffected, no remote/native/cleanup
+activity allowed. Current faba confirmed, no escalation or hardcap reset.
+
+Root staged independently reviewed60048 package at unique owned logical
+/root/rhai-linux-sys-process-example-60048ec4-20261004 (physical
+/var/roothome/rhai-linux-sys-process-example-60048ec4-20261004); staging handle62538
+terminal0 and all10sha checksPASS. Root new process-example2-preflight.py differs
+only frozen source/archive/recipe pins and exact newpath from earlier guard;
+old guard retained. Fresh00:46:54Z independent preflight confirms10pins/exact
+manifest/canonicalstage and scope/terminal/proofabsent, but returns3 for busy
+slot: foreign runner3097567/start6598637 and supervisor3097568/start6598640
+with Cargo/rustc. MemAvailable80020128KiB/free726521851904bytes are samples,
+not a reservation or new concurrency exception. No build launched, no new
+runtime or example invocation consumed. Current defaultoneheavy remains.
+Authorized Tauron coordination message sent requesting a successor-free bounded
+window, no process interruption; no confirmation inferred. Final launch must
+use explicit Python check=True preflight sequencing, never shell fallthrough.
+Original663 stage remains untouched until reviewed collection/fresh retirement;
+new60048 stage owned/unrun pending actualnative acceptance. Next collectorfreeze/
+affectedrecheck and originalpreservation; then fresh free-slot guarded bounded
+six-example controls. Goal turn PROGRESS: materialreview findings/fixrouting,
+actual correctedstaging and live contention evidence change nextaction.
+
 ### Earlier current-step history (retained, superseded)
 
 Global/project instructions at faba3db remain loaded. Full goal active/incomplete.
