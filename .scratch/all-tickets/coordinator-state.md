@@ -461,6 +461,44 @@ affectedrecheck and originalpreservation; then fresh free-slot guarded bounded
 six-example controls. Goal turn PROGRESS: materialreview findings/fixrouting,
 actual correctedstaging and live contention evidence change nextaction.
 
+Collector-only e537a830200519eb39e4477ae46bb3cb144b089b frozen and root
+attribution/diff/SHA694d327c4a20f6c0c4c28cadbe0417e6865b3e4dfaf4a91a727b6f51e2bea8c9
+verified. Two4358receipt/rawscope findings closed by same affected independent
+review. RAW COLLECTION READY, CUSTODY/RETIREMENT NOTREADY: actual original
+emitter permits repeated command labels and empty fast-child argv, unlike
+consumer predicates. Fresh read-only original TSV confirms64 helper rows,
+command:du29/command:ps29, allPIDunique,3emptyargv commandrows (du,ps,rustup-install);
+required owner argv nonempty. This is actual emitter/consumer contradiction,
+not permission missing or original fake/missing data. No data fabricated.
+
+Root executed approved RAW collect only, exact collectorSHA checked, handle52351
+terminal0. Preserved process-example1-originals contains all49 originalfiles/
+6directories and raw tar3851968501ddfe01c5adcd96c64c239a72a3abb218defe87d903915a270e0672.
+Ten original input pins/manifest match. Root independently rehashed every copied
+file against first remoteinventory, compared every rawtarfile to extractedbytes
+and original compilerstderr to diagnosticcopy. Receipt
+process-example1-root-original-readback.json records exact closure scope,
+acceptancefalse, no retirement. Actual custodyreceipt preserves3emptyargv and
+duplicatecommandlabel errors. Original663stage remains untouched; no native
+productcontrols or new build launched. New60048stage retained unrun, no runtime.
+
+First fresh nonfork Expert19 collector-emitter-identity-contract assigned via
+existing campaign/global contradiction trigger, brief beside prior escalations.
+Read only localoriginal producer/TSV/consumer/receipts, exact minimalcontract and
+ONE bounded sameStandard followup,15minute activeworkplanningcheckpoint;
+NO SSH/Cargo/native/sourcechanges/deletion/push. faba unchanged, loadedrevision
+confirmation pending. Original reviewed inputbinding/rawpreservation/cleanup
+observation and preparedexecutionREADY unaffected. Prior failedcollector4358
+receipt/rawscope correction1 preserved; e537 closes those exact causes, actual
+identitycompatibility is inherited predicate contradiction with no correction
+attempt yet. No priorExpert for thiscause/no renewal of stdinExpert18 or other
+stoppedchains. Known45exampleminutes + collector/correctionunknown maintained.
+Next Expert19answer -> sameowner constrainedconsumerfix -> affectedrecheck ->
+freshcustodyreadback/exactretirement, without repeating rawcollection. Workhorse
+coordination stillunconfirmed; latestTauroncursor0c42f2fc-8dd8-448e-8925-e56cf07c6c48:13 actualchatactive/backend
+repair, no idlewindowinferred. Goal turn PROGRESS: actualoriginal preservation/
+independentbyte proof and genuine emittercontract diagnosis alter nextaction.
+
 ### Earlier current-step history (retained, superseded)
 
 Global/project instructions at faba3db remain loaded. Full goal active/incomplete.

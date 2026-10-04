@@ -1,0 +1,65 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+helper	3061411	3061410	3061410	6470853	python3 /root/rhai-linux-sys-process-example-66379d30-20261004/run-examples.py
+scoped-supervisor	3061410	3061407	3061410	6470851	/usr/bin/python3 /var/roothome/rhai-linux-sys-process-example-66379d30-20261004/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-sys-process-example-66379d30-20261004/run-examples.py
+command:du	3061413	3061411	3061410	6470862	
+command:ps	3061414	3061411	3061410	6470862	
+command:rustup-install	3061415	3061411	3061410	6470863	
+command:du	3061416	3061411	3061410	6470863	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b
+command:ps	3061417	3061411	3061410	6470863	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3061448	3061411	3061410	6470964	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b
+command:ps	3061449	3061411	3061410	6470965	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3061471	3061411	3061410	6471066	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b
+command:ps	3061472	3061411	3061410	6471069	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3061493	3061411	3061410	6471170	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b
+command:ps	3061495	3061411	3061410	6471174	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3061507	3061411	3061410	6471275	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b
+command:ps	3061508	3061411	3061410	6471276	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3061530	3061411	3061410	6471377	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b
+command:ps	3061531	3061411	3061410	6471379	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3061545	3061411	3061410	6471480	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b
+command:ps	3061546	3061411	3061410	6471482	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3061560	3061411	3061410	6471563	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b
+command:ps	3061561	3061411	3061410	6471563	/bin/ps -e -o pid=,ppid=,rss=
+command:rustc-version	3061562	3061411	3061410	6471564	/root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose
+command:du	3061563	3061411	3061410	6471564	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b
+command:ps	3061564	3061411	3061410	6471565	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3061567	3061411	3061410	6471576	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b
+command:ps	3061568	3061411	3061410	6471577	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-version	3061569	3061411	3061410	6471577	/root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose
+command:du	3061570	3061411	3061410	6471578	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b
+command:ps	3061572	3061411	3061410	6471578	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3061584	3061411	3061410	6471589	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b
+command:ps	3061585	3061411	3061410	6471589	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3061586	3061411	3061410	6471590	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b
+command:ps	3061587	3061411	3061410	6471590	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-build-examples	3061588	3061411	3061410	6471591	/root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo build --locked --example sys --example net --example sys_process --features testing-environ,sys,net
+command:du	3061589	3061411	3061410	6471591	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b
+command:ps	3061590	3061411	3061410	6471591	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3061609	3061411	3061410	6471692	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b
+command:ps	3061610	3061411	3061410	6471692	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3061626	3061411	3061410	6471793	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b
+command:ps	3061627	3061411	3061410	6471795	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3061648	3061411	3061410	6471896	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b
+command:ps	3061650	3061411	3061410	6471898	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3061844	3061411	3061410	6472000	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b
+command:ps	3061848	3061411	3061410	6472001	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3062115	3061411	3061410	6472102	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b
+command:ps	3062119	3061411	3061410	6472103	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3062255	3061411	3061410	6472205	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b
+command:ps	3062259	3061411	3061410	6472206	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3062305	3061411	3061410	6472307	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b
+command:ps	3062306	3061411	3061410	6472308	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3062411	3061411	3061410	6472409	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b
+command:ps	3062415	3061411	3061410	6472411	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3062512	3061411	3061410	6472513	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b
+command:ps	3062514	3061411	3061410	6472514	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3062526	3061411	3061410	6472615	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b
+command:ps	3062527	3061411	3061410	6472616	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3062540	3061411	3061410	6472717	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b
+command:ps	3062541	3061411	3061410	6472719	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3062560	3061411	3061410	6472820	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b
+command:ps	3062561	3061411	3061410	6472821	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3062586	3061411	3061410	6472923	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b
+command:ps	3062587	3061411	3061410	6472924	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3062626	3061411	3061410	6473005	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b
+command:ps	3062628	3061411	3061410	6473007	/bin/ps -e -o pid=,ppid=,rss=

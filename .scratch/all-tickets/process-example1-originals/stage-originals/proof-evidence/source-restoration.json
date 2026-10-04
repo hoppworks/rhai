@@ -1,0 +1,20 @@
+{
+  "cargo_lock_sha256_after_execution": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "injected_example_sha256": {
+    "examples/net.rs": "e9941c9e1a28217dd40767e33b653f8db5948994893a6ca5baec8b10e9d4cd4b",
+    "examples/sys.rs": "2a0fa2c2365dc100c962157c99553c5b0bc45738e602806a5a10facc93bf231c"
+  },
+  "manifests_sha256_after_restoration": {
+    "Cargo.toml": "cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e",
+    "codegen/Cargo.toml": "1ad774a34019adecf5321498e443999d0a6c38412e2eb77b06f4ccc66aa64dc3",
+    "codegen/tests/custom_root/Cargo.toml": "1000e24c121e5a377db8b38926f4450166460ddbe3c9863811168dbfab490d86",
+    "fuzz/Cargo.toml": "7b65fd0c1d36908f502ec12a18c86a299cafbc3415187731d8330053e4244b46",
+    "no_std/no_std_test/Cargo.toml": "b05325f695dbce8aeb8d62f7b2c5e4bb888e0ca782050d3c11bceb6a0804f152"
+  },
+  "original_example_sha256": {
+    "examples/net.rs": "779118884ecc593ae965332055f67dec69cf738161b6affe9722aa926c500003",
+    "examples/sys.rs": "c91ab9f49b096cfb47b64fd476a478844d3e42dce443122466c1c05cc231f2a8",
+    "examples/sys_process.rs": "3364188251bc581402398416a2b5ea8f3a16fdda35cb302d5f3260069de4d091"
+  },
+  "restored_examples_match_original_bytes": true
+}

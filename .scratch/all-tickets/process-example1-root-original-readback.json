@@ -1,0 +1,13 @@
+{
+  "observed_at": "2026-10-04T00:56:32.860197+00:00",
+  "copied_original_files": 49,
+  "copied_directories": 6,
+  "raw_tar_sha256": "3851968501ddfe01c5adcd96c64c239a72a3abb218defe87d903915a270e0672",
+  "all_extracted_file_hashes_equal_initial_remote_inventory": true,
+  "all_raw_tar_file_hashes_equal_extracted_files": true,
+  "ten_input_binding_verified": true,
+  "original_compiler_stderr_equal_diagnostic_copy": true,
+  "acceptance": false,
+  "custody_retirement": "not-ready; recorded original command identity contract under Expert19 analysis",
+  "stage_deleted": false
+}

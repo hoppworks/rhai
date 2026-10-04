@@ -1,0 +1,15 @@
+{
+  "all_controls_and_positive_runs_passed": false,
+  "cargo_build_invocations": 1,
+  "compatible_lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "controls": [],
+  "examples": [
+    "sys",
+    "net",
+    "sys_process"
+  ],
+  "features": "testing-environ,sys,net",
+  "helper_exit_status": 1,
+  "scope": "Rust 1.77.2 Linux x86_64 examples through real Engine; host file, loopback peer and self-reexecuted process fixture",
+  "source_revision": "66379d3012ae606e278a0aaba8498846e1bd24cb"
+}
