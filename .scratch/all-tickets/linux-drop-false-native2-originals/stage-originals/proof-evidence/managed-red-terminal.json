@@ -1,0 +1,61 @@
+{
+  "case": "managed",
+  "complete": true,
+  "fixture_root_absent": true,
+  "groups_censused": [
+    690689,
+    690691
+  ],
+  "marker": {
+    "challenge_ack_count": "3",
+    "challenge_ok": "1",
+    "fixture_root": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/tmp/rhai-sys-test-690687-managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit-0",
+    "group": "690691",
+    "host_pid": "690687",
+    "host_start_ticks": "9590066",
+    "leader_pgid": "690691",
+    "leader_pid": "690691",
+    "leader_ppid": "690687",
+    "leader_start_ticks": "9590066",
+    "leaf_pgid": "690691",
+    "leaf_pid": "690695",
+    "leaf_ppid": "690693",
+    "leaf_start_ticks": "9590066",
+    "sentinel_pgid": "690689",
+    "sentinel_pid": "690689",
+    "sentinel_ppid": "690687",
+    "sentinel_start_ticks": "9590066",
+    "worker_pgid": "690691",
+    "worker_pid": "690693",
+    "worker_ppid": "690691",
+    "worker_start_ticks": "9590066"
+  },
+  "readback_time_monotonic": 95901.030104393,
+  "terminal_identities": {
+    "host": {
+      "absent": true,
+      "pid": 690687,
+      "start_ticks": 9590066
+    },
+    "leader": {
+      "absent": true,
+      "pid": 690691,
+      "start_ticks": 9590066
+    },
+    "leaf": {
+      "absent": true,
+      "pid": 690695,
+      "start_ticks": 9590066
+    },
+    "sentinel": {
+      "absent": true,
+      "pid": 690689,
+      "start_ticks": 9590066
+    },
+    "worker": {
+      "absent": true,
+      "pid": 690693,
+      "start_ticks": 9590066
+    }
+  }
+}

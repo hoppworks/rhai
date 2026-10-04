@@ -1,0 +1,20 @@
+{
+  "cargo_lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "error": null,
+  "manifest_sha256": {
+    "Cargo.toml": "bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec",
+    "codegen/Cargo.toml": "1ad774a34019adecf5321498e443999d0a6c38412e2eb77b06f4ccc66aa64dc3",
+    "codegen/tests/custom_root/Cargo.toml": "1000e24c121e5a377db8b38926f4450166460ddbe3c9863811168dbfab490d86",
+    "fuzz/Cargo.toml": "7b65fd0c1d36908f502ec12a18c86a299cafbc3415187731d8330053e4244b46",
+    "no_std/no_std_test/Cargo.toml": "b05325f695dbce8aeb8d62f7b2c5e4bb888e0ca782050d3c11bceb6a0804f152"
+  },
+  "original_sha256": {
+    "tests/sys_process.rs": "5836af855f7410213367786e195c0b9b09c0da005cde37244cfa241baf59c4cb"
+  },
+  "overlay_sha256": {
+    "direct-wrong-expectation": "fa4208d925bfe3152b8995c5532e728c965bf2abd6f2b49edc56cc0ad4366296",
+    "managed-wrong-expectation": "754428e4b49a57b4faa04bb089dc0fe50477aac6f20ce2472057a4ebce0b8fc8"
+  },
+  "restored": true,
+  "restored_to_baseline_revision": true
+}

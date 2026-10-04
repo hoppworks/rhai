@@ -1,0 +1,11 @@
+
+running 1 test
+test managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit ... FAILED
+
+failures:
+
+failures:
+    managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 47 filtered out; finished in 0.30s
+

@@ -1,0 +1,51 @@
+{
+  "ack_written": true,
+  "cargo_process_identity": {
+    "cmdline": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process direct_spawn_kill_on_drop_false_preserves_child_and_capture -- --exact --nocapture --test-threads=1",
+    "pgid": 677084,
+    "pid": 690774,
+    "ppid": 677085,
+    "start_ticks": "9590103"
+  },
+  "live": {
+    "cargo": {
+      "pgid": 677084,
+      "pid": 690774,
+      "ppid": 677085,
+      "start_ticks": 9590103,
+      "state": "S"
+    },
+    "case": "direct",
+    "complete": true,
+    "fixture_root": "/var/roothome/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/tmp/rhai-sys-test-690825-direct_spawn_kill_on_drop_false_preserves_child_and_capture-0",
+    "host": {
+      "pgid": 677084,
+      "pid": 690825,
+      "ppid": 690774,
+      "start_ticks": 9590211,
+      "state": "S"
+    },
+    "identities": {
+      "child": {
+        "pgid": 677084,
+        "pid": 690828,
+        "ppid": 690825,
+        "start_ticks": 9590211,
+        "state": "S"
+      }
+    },
+    "observed_monotonic": 95902.130828744,
+    "request": {
+      "case": "direct",
+      "challenge_ack": "1",
+      "child_pgid": "677084",
+      "child_pid": "690828",
+      "child_start_ticks": "9590211",
+      "completion": "false",
+      "fixture_root": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/tmp/rhai-sys-test-690825-direct_spawn_kill_on_drop_false_preserves_child_and_capture-0",
+      "request_id": "direct-690825",
+      "test_pid": "690825",
+      "test_start_ticks": "9590211"
+    }
+  }
+}

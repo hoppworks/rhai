@@ -1,0 +1,116 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+helper	677085	677084	677084	9586106	python3 /root/rhai-linux-drop-false-523-20261004/linux-drop-false-proof.py
+scoped-supervisor	677084	677080	677084	9586104	/usr/bin/python3 /var/roothome/rhai-linux-drop-false-523-20261004/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-drop-false-523-20261004/linux-drop-false-proof.py
+command:rustup-install	677087	677085	677084	9586115	/root/.cargo/bin/rustup toolchain install 1.77.2-x86_64-unknown-linux-gnu --profile minimal --no-self-update
+command:du	677088	677085	677084	9586115	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	677105	677085	677084	9586115	/bin/ps -e -o pid=,ppid=,rss=
+command:du	677119	677085	677084	9586216	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	677120	677085	677084	9586216	/bin/ps -e -o pid=,ppid=,rss=
+command:du	677134	677085	677084	9586317	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	677135	677085	677084	9586318	/bin/ps -e -o pid=,ppid=,rss=
+command:du	677226	677085	677084	9586419	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	677227	677085	677084	9586419	/bin/ps -e -o pid=,ppid=,rss=
+command:du	678090	677085	677084	9586520	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	678091	677085	677084	9586520	/bin/ps -e -o pid=,ppid=,rss=
+command:du	678860	677085	677084	9586622	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	678861	677085	677084	9586622	/bin/ps -e -o pid=,ppid=,rss=
+command:du	679731	677085	677084	9586723	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	679737	677085	677084	9586723	/bin/ps -e -o pid=,ppid=,rss=
+command:du	680476	677085	677084	9586825	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	680478	677085	677084	9586825	/bin/ps -e -o pid=,ppid=,rss=
+command:du	681204	677085	677084	9586926	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	681205	677085	677084	9586927	/bin/ps -e -o pid=,ppid=,rss=
+command:du	682363	677085	677084	9587028	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	682368	677085	677084	9587028	/bin/ps -e -o pid=,ppid=,rss=
+command:du	683673	677085	677084	9587130	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	683680	677085	677084	9587131	/bin/ps -e -o pid=,ppid=,rss=
+command:du	684924	677085	677084	9587233	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	684934	677085	677084	9587234	/bin/ps -e -o pid=,ppid=,rss=
+command:du	685890	677085	677084	9587336	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	685891	677085	677084	9587337	/bin/ps -e -o pid=,ppid=,rss=
+command:du	687072	677085	677084	9587439	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	687091	677085	677084	9587439	/bin/ps -e -o pid=,ppid=,rss=
+command:du	687719	677085	677084	9587541	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	687720	677085	677084	9587541	/bin/ps -e -o pid=,ppid=,rss=
+command:du	688523	677085	677084	9587643	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	688554	677085	677084	9587644	/bin/ps -e -o pid=,ppid=,rss=
+command:du	689114	677085	677084	9587746	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	689115	677085	677084	9587746	/bin/ps -e -o pid=,ppid=,rss=
+command:du	689192	677085	677084	9587847	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	689193	677085	677084	9587847	/bin/ps -e -o pid=,ppid=,rss=
+command:du	689286	677085	677084	9587949	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	689287	677085	677084	9587949	/bin/ps -e -o pid=,ppid=,rss=
+command:du	689410	677085	677084	9588050	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	689411	677085	677084	9588050	/bin/ps -e -o pid=,ppid=,rss=
+command:du	689434	677085	677084	9588152	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	689435	677085	677084	9588152	/bin/ps -e -o pid=,ppid=,rss=
+command:du	689463	677085	677084	9588254	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	689464	677085	677084	9588254	/bin/ps -e -o pid=,ppid=,rss=
+command:du	689481	677085	677084	9588355	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	689482	677085	677084	9588355	/bin/ps -e -o pid=,ppid=,rss=
+command:du	689499	677085	677084	9588457	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	689500	677085	677084	9588457	/bin/ps -e -o pid=,ppid=,rss=
+command:du	689505	677085	677084	9588468	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	689506	677085	677084	9588468	/bin/ps -e -o pid=,ppid=,rss=
+command:rustc-version	689507	677085	677084	9588469	/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose
+command:du	689508	677085	677084	9588469	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	689509	677085	677084	9588469	/bin/ps -e -o pid=,ppid=,rss=
+command:du	689511	677085	677084	9588480	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	689513	677085	677084	9588481	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-version	689514	677085	677084	9588482	/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose
+command:du	689515	677085	677084	9588482	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	689519	677085	677084	9588482	/bin/ps -e -o pid=,ppid=,rss=
+command:du	689530	677085	677084	9588493	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	689531	677085	677084	9588493	/bin/ps -e -o pid=,ppid=,rss=
+command:direct-red	689534	677085	677084	9588494	/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process direct_spawn_kill_on_drop_false_preserves_child_and_capture -- --exact --nocapture --test-threads=1
+command:du	689535	677085	677084	9588494	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	689536	677085	677084	9588495	/bin/ps -e -o pid=,ppid=,rss=
+command:du	689556	677085	677084	9588596	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	689557	677085	677084	9588596	/bin/ps -e -o pid=,ppid=,rss=
+command:du	689603	677085	677084	9588697	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	689604	677085	677084	9588698	/bin/ps -e -o pid=,ppid=,rss=
+command:du	689726	677085	677084	9588799	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	689729	677085	677084	9588800	/bin/ps -e -o pid=,ppid=,rss=
+command:du	689884	677085	677084	9588901	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	689885	677085	677084	9588901	/bin/ps -e -o pid=,ppid=,rss=
+command:du	690155	677085	677084	9589003	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	690157	677085	677084	9589004	/bin/ps -e -o pid=,ppid=,rss=
+command:du	690248	677085	677084	9589105	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	690249	677085	677084	9589106	/bin/ps -e -o pid=,ppid=,rss=
+command:du	690318	677085	677084	9589207	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	690323	677085	677084	9589208	/bin/ps -e -o pid=,ppid=,rss=
+command:du	690442	677085	677084	9589309	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	690443	677085	677084	9589310	/bin/ps -e -o pid=,ppid=,rss=
+command:du	690500	677085	677084	9589411	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	690501	677085	677084	9589412	/bin/ps -e -o pid=,ppid=,rss=
+command:du	690514	677085	677084	9589513	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	690515	677085	677084	9589514	/bin/ps -e -o pid=,ppid=,rss=
+command:du	690528	677085	677084	9589615	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	690529	677085	677084	9589616	/bin/ps -e -o pid=,ppid=,rss=
+command:du	690551	677085	677084	9589717	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	690552	677085	677084	9589718	/bin/ps -e -o pid=,ppid=,rss=
+command:du	690588	677085	677084	9589819	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	690589	677085	677084	9589820	/bin/ps -e -o pid=,ppid=,rss=
+command:du	690629	677085	677084	9589921	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	690630	677085	677084	9589922	/bin/ps -e -o pid=,ppid=,rss=
+command:du	690636	677085	677084	9589953	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	690637	677085	677084	9589954	/bin/ps -e -o pid=,ppid=,rss=
+command:managed-red	690638	677085	677084	9589955	/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit -- --exact --nocapture --test-threads=1
+command:du	690639	677085	677084	9589955	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	690644	677085	677084	9589956	/bin/ps -e -o pid=,ppid=,rss=
+command:du	690683	677085	677084	9590057	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	690684	677085	677084	9590058	/bin/ps -e -o pid=,ppid=,rss=
+command:du	690771	677085	677084	9590099	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	690772	677085	677084	9590100	/bin/ps -e -o pid=,ppid=,rss=
+command:direct-green	690774	677085	677084	9590103	/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process direct_spawn_kill_on_drop_false_preserves_child_and_capture -- --exact --nocapture --test-threads=1
+command:du	690776	677085	677084	9590103	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	690781	677085	677084	9590104	/bin/ps -e -o pid=,ppid=,rss=
+command:du	690821	677085	677084	9590205	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	690823	677085	677084	9590206	/bin/ps -e -o pid=,ppid=,rss=
+command:du	690835	677085	677084	9590247	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	690836	677085	677084	9590248	/bin/ps -e -o pid=,ppid=,rss=
+command:managed-green	690838	677085	677084	9590250	/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit -- --exact --nocapture --test-threads=1
+command:du	690840	677085	677084	9590250	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	690845	677085	677084	9590251	/bin/ps -e -o pid=,ppid=,rss=
+command:du	690930	677085	677084	9590292	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz
+command:ps	690931	677085	677084	9590293	/bin/ps -e -o pid=,ppid=,rss=

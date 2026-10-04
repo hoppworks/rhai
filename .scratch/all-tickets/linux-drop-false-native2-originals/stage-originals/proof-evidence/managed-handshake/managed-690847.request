@@ -1,0 +1,8 @@
+request_id=managed-690847
+case=managed
+test_pid=690847
+test_start_ticks=9590253
+fixture_root=/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/tmp/rhai-sys-test-690847-managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit-0
+sentinel_pid=690849 sentinel_start_ticks=9590253 sentinel_pgid=690849
+leader_pid=690851 leader_start_ticks=9590253 leader_pgid=690851 worker_pid=690853 worker_start_ticks=9590253 worker_pgid=690851 leaf_pid=690855 leaf_start_ticks=9590253 leaf_pgid=690851 group=690851
+challenge_ack_count=3 challenge_ok=1

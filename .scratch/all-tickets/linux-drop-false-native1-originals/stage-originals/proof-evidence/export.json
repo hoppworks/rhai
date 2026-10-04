@@ -1,0 +1,9 @@
+{
+  "destination": "/root/rhai-linux-drop-false-523-20261004/proof-evidence",
+  "elapsed_seconds": 7.22,
+  "helper_deadline_seconds": 540,
+  "no_native_acceptance_claim": true,
+  "partial_export": true,
+  "source_revision": "523608648dcae99bc0f6b46eaf2bb91fa4ecc752",
+  "work_deadline_seconds": 510
+}

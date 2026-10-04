@@ -1,0 +1,31 @@
+{
+  "case": "direct",
+  "complete": true,
+  "fixture_root_absent": true,
+  "groups_censused": [],
+  "marker": {
+    "alive": "true",
+    "challenge_ack": "true",
+    "child_pgid": "677084",
+    "child_pid": "690626",
+    "child_ppid": "690623",
+    "child_start_ticks": "9589914",
+    "completion_exists": "false",
+    "fixture_root": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/tmp/rhai-sys-test-690623-direct_spawn_kill_on_drop_false_preserves_child_and_capture-0",
+    "host_pid": "690623",
+    "host_start_ticks": "9589914"
+  },
+  "readback_time_monotonic": 95899.557459729,
+  "terminal_identities": {
+    "child": {
+      "absent": true,
+      "pid": 690626,
+      "start_ticks": 9589914
+    },
+    "host": {
+      "absent": true,
+      "pid": 690623,
+      "start_ticks": 9589914
+    }
+  }
+}

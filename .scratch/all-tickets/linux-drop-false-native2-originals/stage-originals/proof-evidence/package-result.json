@@ -1,0 +1,222 @@
+{
+  "acceptance_claim": false,
+  "base_helper_sha256": "c5422e7895f5afacf987be55df2297b63b0763618ccbdc2a8374116a1421edd9",
+  "baseline_test_sha256": "5836af855f7410213367786e195c0b9b09c0da005cde37244cfa241baf59c4cb",
+  "cargo_manifests_sha256": {
+    "Cargo.toml": "bb4ebf58105b45638fe7018ebd8d78625c3fed3046a6327f5571ed53ef0f6dec",
+    "codegen/Cargo.toml": "1ad774a34019adecf5321498e443999d0a6c38412e2eb77b06f4ccc66aa64dc3",
+    "codegen/tests/custom_root/Cargo.toml": "1000e24c121e5a377db8b38926f4450166460ddbe3c9863811168dbfab490d86",
+    "fuzz/Cargo.toml": "7b65fd0c1d36908f502ec12a18c86a299cafbc3415187731d8330053e4244b46",
+    "no_std/no_std_test/Cargo.toml": "b05325f695dbce8aeb8d62f7b2c5e4bb888e0ca782050d3c11bceb6a0804f152"
+  },
+  "commands": [
+    {
+      "argv": [
+        "/root/.cargo/bin/rustup",
+        "toolchain",
+        "install",
+        "1.77.2-x86_64-unknown-linux-gnu",
+        "--profile",
+        "minimal",
+        "--no-self-update"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+      "env_overrides": {},
+      "expected_status": 0,
+      "finished_monotonic_seconds": 23.602,
+      "name": "rustup-install",
+      "spawned": true,
+      "started_monotonic_seconds": 0.057,
+      "status": 0,
+      "stderr": "evidence/rustup-install.stderr",
+      "stdout": "evidence/rustup-install.stdout"
+    },
+    {
+      "argv": [
+        "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+        "--version",
+        "--verbose"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/source",
+      "env_overrides": {},
+      "expected_status": 0,
+      "finished_monotonic_seconds": 23.728,
+      "name": "rustc-version",
+      "spawned": true,
+      "started_monotonic_seconds": 23.602,
+      "status": 0,
+      "stderr": "evidence/rustc-version.stderr",
+      "stdout": "evidence/rustc-version.stdout"
+    },
+    {
+      "argv": [
+        "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+        "--version",
+        "--verbose"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/source",
+      "env_overrides": {},
+      "expected_status": 0,
+      "finished_monotonic_seconds": 23.853,
+      "name": "cargo-version",
+      "spawned": true,
+      "started_monotonic_seconds": 23.728,
+      "status": 0,
+      "stderr": "evidence/cargo-version.stderr",
+      "stdout": "evidence/cargo-version.stdout"
+    },
+    {
+      "argv": [
+        "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys",
+        "--test",
+        "sys_process",
+        "direct_spawn_kill_on_drop_false_preserves_child_and_capture",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/source",
+      "env_overrides": {},
+      "expected_status": 101,
+      "finished_monotonic_seconds": 38.464,
+      "name": "direct-red",
+      "spawned": true,
+      "started_monotonic_seconds": 23.856,
+      "status": 101,
+      "stderr": "evidence/direct-red.stderr",
+      "stdout": "evidence/direct-red.stdout"
+    },
+    {
+      "argv": [
+        "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys",
+        "--test",
+        "sys_process",
+        "managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/source",
+      "env_overrides": {},
+      "expected_status": 101,
+      "finished_monotonic_seconds": 39.926,
+      "name": "managed-red",
+      "spawned": true,
+      "started_monotonic_seconds": 38.465,
+      "status": 101,
+      "stderr": "evidence/managed-red.stderr",
+      "stdout": "evidence/managed-red.stdout"
+    },
+    {
+      "argv": [
+        "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys",
+        "--test",
+        "sys_process",
+        "direct_spawn_kill_on_drop_false_preserves_child_and_capture",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/source",
+      "env_overrides": {},
+      "expected_status": 0,
+      "finished_monotonic_seconds": 41.398,
+      "name": "direct-green",
+      "spawned": true,
+      "started_monotonic_seconds": 39.937,
+      "status": 0,
+      "stderr": "evidence/direct-green.stderr",
+      "stdout": "evidence/direct-green.stdout"
+    },
+    {
+      "argv": [
+        "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys",
+        "--test",
+        "sys_process",
+        "managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/source",
+      "env_overrides": {},
+      "expected_status": 0,
+      "finished_monotonic_seconds": 41.849,
+      "name": "managed-green",
+      "spawned": true,
+      "started_monotonic_seconds": 41.409,
+      "status": 0,
+      "stderr": "evidence/managed-green.stderr",
+      "stdout": "evidence/managed-green.stdout"
+    }
+  ],
+  "compatible_lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "controls": [
+    {
+      "expected_status": 101,
+      "intended_assertion_observed": true,
+      "name": "direct-red",
+      "required_diagnostics": [
+        "drop_false-control direct survival expectation"
+      ],
+      "required_output": [],
+      "status": 101
+    },
+    {
+      "expected_status": 101,
+      "intended_assertion_observed": true,
+      "name": "managed-red",
+      "required_diagnostics": [
+        "drop_false-control managed survival expectation"
+      ],
+      "required_output": [],
+      "status": 101
+    },
+    {
+      "expected_status": 0,
+      "independent_readback": [
+        "test direct_spawn_kill_on_drop_false_preserves_child_and_capture ... ok"
+      ],
+      "name": "direct-green",
+      "status": 0
+    },
+    {
+      "expected_status": 0,
+      "independent_readback": [
+        "test managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit ... ok"
+      ],
+      "name": "managed-green",
+      "status": 0
+    }
+  ],
+  "interrupted_signal": null,
+  "source_archive_sha256": "998c31fab8c3026f292ef13484a8b112da90e5ead1e0288845bffeee9186179b",
+  "source_restored_to_baseline": true,
+  "source_revision": "523608648dcae99bc0f6b46eaf2bb91fa4ecc752",
+  "status": 0,
+  "test_only_handshake_patch_sha256": "78d7f123c570e5efb94563b77c737fd4ed97ac9a594090c4a7dba664b461e9dd",
+  "tests": [
+    "direct_spawn_kill_on_drop_false_preserves_child_and_capture",
+    "managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit"
+  ]
+}

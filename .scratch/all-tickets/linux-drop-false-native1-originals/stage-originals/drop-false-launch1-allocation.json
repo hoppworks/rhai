@@ -1,0 +1,23 @@
+{
+  "source": "523608648dcae99bc0f6b46eaf2bb91fa4ecc752",
+  "native_drop_false_launch": 1,
+  "preflight": {
+    "utc": "2026-10-04T08:46:23Z",
+    "stage": "/var/roothome/rhai-linux-drop-false-523-20261004",
+    "inputs_verified": 12,
+    "scope_absent": true,
+    "heavy": [],
+    "mem_available_kib": 82913160,
+    "disk_free_bytes": 724378578944,
+    "load": [
+      1.20947265625,
+      2.52734375,
+      3.81982421875
+    ],
+    "ready": true
+  },
+  "outer_seconds": 600,
+  "runner_seconds": 585,
+  "helper_seconds": 540,
+  "history": "drop-false native0 before allocation; failed corrections2, Expert20 single follow-up; native110 unallocated; stopped chains unchanged"
+}

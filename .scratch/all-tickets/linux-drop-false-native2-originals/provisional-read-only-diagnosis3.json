@@ -1,0 +1,1187 @@
+{
+  "not_acceptance_or_retirement": true,
+  "changes_for_diagnosis_only": [
+    "omitted missing resource file",
+    "corrected exact runner relative path",
+    "logical/canonical runtime roots"
+  ],
+  "observation": {
+    "fixture_cases_closed": [
+      "direct-red",
+      "managed-red",
+      "direct-green",
+      "managed-green"
+    ],
+    "fixture_identities": [
+      {
+        "case": "direct",
+        "kind": "observer",
+        "label": "host",
+        "pid": 690825,
+        "start_ticks": 9590211
+      },
+      {
+        "case": "direct",
+        "kind": "observer",
+        "label": "child",
+        "pid": 690828,
+        "start_ticks": 9590211
+      },
+      {
+        "case": "managed",
+        "kind": "observer",
+        "label": "host",
+        "pid": 690847,
+        "start_ticks": 9590253
+      },
+      {
+        "case": "managed",
+        "kind": "observer",
+        "label": "leader",
+        "pid": 690851,
+        "start_ticks": 9590253
+      },
+      {
+        "case": "managed",
+        "kind": "observer",
+        "label": "leaf",
+        "pid": 690855,
+        "start_ticks": 9590253
+      },
+      {
+        "case": "managed",
+        "kind": "observer",
+        "label": "sentinel",
+        "pid": 690849,
+        "start_ticks": 9590253
+      },
+      {
+        "case": "managed",
+        "kind": "observer",
+        "label": "worker",
+        "pid": 690853,
+        "start_ticks": 9590253
+      },
+      {
+        "case": "direct",
+        "kind": "red",
+        "label": "child",
+        "pid": 690626,
+        "start_ticks": 9589914
+      },
+      {
+        "case": "direct",
+        "kind": "red",
+        "label": "host",
+        "pid": 690623,
+        "start_ticks": 9589914
+      },
+      {
+        "case": "managed",
+        "kind": "red",
+        "label": "host",
+        "pid": 690687,
+        "start_ticks": 9590066
+      },
+      {
+        "case": "managed",
+        "kind": "red",
+        "label": "leader",
+        "pid": 690691,
+        "start_ticks": 9590066
+      },
+      {
+        "case": "managed",
+        "kind": "red",
+        "label": "leaf",
+        "pid": 690695,
+        "start_ticks": 9590066
+      },
+      {
+        "case": "managed",
+        "kind": "red",
+        "label": "sentinel",
+        "pid": 690689,
+        "start_ticks": 9590066
+      },
+      {
+        "case": "managed",
+        "kind": "red",
+        "label": "worker",
+        "pid": 690693,
+        "start_ticks": 9590066
+      }
+    ],
+    "groups_absent": [
+      677011,
+      677084,
+      690689,
+      690691,
+      690849,
+      690851
+    ],
+    "input_manifest_sha256": "2ba304fa89dcffc5b5f91fb2b1e7aac6dcaf5b4bf84a0575d79cd768caaeb1d2",
+    "inventory_sha256": "934a76a5fbd13ec90137a8ee41fe2b45b5a033f58a38b94b26ce9b812f9c012e",
+    "launcher_processes": [
+      {
+        "cmdline": "/root/rhai-linux-drop-false-523-20261004/launch.sh",
+        "label": "launcher",
+        "pgid": 677011,
+        "pid": 677071,
+        "pid_absent_or_reused": true,
+        "ppid": 677011,
+        "start_ticks": 9586101
+      },
+      {
+        "cmdline": "python3 /root/rhai-linux-drop-false-523-20261004/runner/tools/run_scoped.py --timeout 570 -- python3 /root/rhai-linux-drop-false-523-20261004/linux-drop-false-proof.py",
+        "label": "run-scoped",
+        "pgid": 677011,
+        "pid": 677080,
+        "pid_absent_or_reused": true,
+        "ppid": 677071,
+        "start_ticks": 9586102
+      }
+    ],
+    "owned_processes": [
+      {
+        "cmdline": "python3 /root/rhai-linux-drop-false-523-20261004/linux-drop-false-proof.py",
+        "label": "helper",
+        "pgid": 677084,
+        "pid": 677085,
+        "pid_absent_or_reused": true,
+        "ppid": 677084,
+        "start_ticks": 9586106
+      },
+      {
+        "cmdline": "/usr/bin/python3 /var/roothome/rhai-linux-drop-false-523-20261004/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-drop-false-523-20261004/linux-drop-false-proof.py",
+        "label": "scoped-supervisor",
+        "pgid": 677084,
+        "pid": 677084,
+        "pid_absent_or_reused": true,
+        "ppid": 677080,
+        "start_ticks": 9586104
+      },
+      {
+        "cmdline": "/root/.cargo/bin/rustup toolchain install 1.77.2-x86_64-unknown-linux-gnu --profile minimal --no-self-update",
+        "label": "command:rustup-install",
+        "pgid": 677084,
+        "pid": 677087,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9586115
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 677088,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9586115
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 677105,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9586115
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 677119,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9586216
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 677120,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9586216
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 677134,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9586317
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 677135,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9586318
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 677226,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9586419
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 677227,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9586419
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 678090,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9586520
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 678091,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9586520
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 678860,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9586622
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 678861,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9586622
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 679731,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9586723
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 679737,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9586723
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 680476,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9586825
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 680478,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9586825
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 681204,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9586926
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 681205,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9586927
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 682363,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9587028
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 682368,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9587028
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 683673,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9587130
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 683680,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9587131
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 684924,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9587233
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 684934,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9587234
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 685890,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9587336
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 685891,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9587337
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 687072,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9587439
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 687091,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9587439
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 687719,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9587541
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 687720,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9587541
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 688523,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9587643
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 688554,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9587644
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 689114,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9587746
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 689115,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9587746
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 689192,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9587847
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 689193,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9587847
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 689286,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9587949
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 689287,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9587949
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 689410,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588050
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 689411,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588050
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 689434,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588152
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 689435,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588152
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 689463,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588254
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 689464,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588254
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 689481,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588355
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 689482,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588355
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 689499,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588457
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 689500,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588457
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 689505,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588468
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 689506,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588468
+      },
+      {
+        "cmdline": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose",
+        "label": "command:rustc-version",
+        "pgid": 677084,
+        "pid": 689507,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588469
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 689508,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588469
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 689509,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588469
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 689511,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588480
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 689513,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588481
+      },
+      {
+        "cmdline": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose",
+        "label": "command:cargo-version",
+        "pgid": 677084,
+        "pid": 689514,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588482
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 689515,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588482
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 689519,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588482
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 689530,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588493
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 689531,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588493
+      },
+      {
+        "cmdline": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process direct_spawn_kill_on_drop_false_preserves_child_and_capture -- --exact --nocapture --test-threads=1",
+        "label": "command:direct-red",
+        "pgid": 677084,
+        "pid": 689534,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588494
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 689535,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588494
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 689536,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588495
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 689556,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588596
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 689557,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588596
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 689603,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588697
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 689604,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588698
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 689726,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588799
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 689729,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588800
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 689884,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588901
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 689885,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9588901
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 690155,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9589003
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 690157,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9589004
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 690248,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9589105
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 690249,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9589106
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 690318,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9589207
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 690323,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9589208
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 690442,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9589309
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 690443,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9589310
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 690500,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9589411
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 690501,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9589412
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 690514,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9589513
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 690515,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9589514
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 690528,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9589615
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 690529,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9589616
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 690551,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9589717
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 690552,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9589718
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 690588,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9589819
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 690589,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9589820
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 690629,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9589921
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 690630,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9589922
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 690636,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9589953
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 690637,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9589954
+      },
+      {
+        "cmdline": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit -- --exact --nocapture --test-threads=1",
+        "label": "command:managed-red",
+        "pgid": 677084,
+        "pid": 690638,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9589955
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 690639,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9589955
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 690644,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9589956
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 690683,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9590057
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 690684,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9590058
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 690771,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9590099
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 690772,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9590100
+      },
+      {
+        "cmdline": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process direct_spawn_kill_on_drop_false_preserves_child_and_capture -- --exact --nocapture --test-threads=1",
+        "label": "command:direct-green",
+        "pgid": 677084,
+        "pid": 690774,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9590103
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 690776,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9590103
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 690781,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9590104
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 690821,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9590205
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 690823,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9590206
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 690835,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9590247
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 690836,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9590248
+      },
+      {
+        "cmdline": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit -- --exact --nocapture --test-threads=1",
+        "label": "command:managed-green",
+        "pgid": 677084,
+        "pid": 690838,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9590250
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 690840,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9590250
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 690845,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9590251
+      },
+      {
+        "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+        "label": "command:du",
+        "pgid": 677084,
+        "pid": 690930,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9590292
+      },
+      {
+        "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+        "label": "command:ps",
+        "pgid": 677084,
+        "pid": 690931,
+        "pid_absent_or_reused": true,
+        "ppid": 677085,
+        "start_ticks": 9590293
+      }
+    ],
+    "runtime": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+    "runtime_absent": true,
+    "scope_absent": true,
+    "stage_inventory_still_exact": true
+  }
+}

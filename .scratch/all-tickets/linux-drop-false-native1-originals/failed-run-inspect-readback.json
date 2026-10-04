@@ -1,0 +1,265 @@
+{
+  "acceptance": false,
+  "directories_verified": 5,
+  "files_verified": 42,
+  "groups": [
+    620408,
+    620481
+  ],
+  "groups_empty": true,
+  "identities": [
+    {
+      "cmdline": "/root/rhai-linux-drop-false-523-20261004/launch.sh",
+      "label": "launcher",
+      "pgid": 620408,
+      "pid": 620468,
+      "ppid": 620408,
+      "start_ticks": 9477433
+    },
+    {
+      "cmdline": "python3 /root/rhai-linux-drop-false-523-20261004/runner/tools/run_scoped.py --timeout 570 -- python3 /root/rhai-linux-drop-false-523-20261004/linux-drop-false-proof.py",
+      "label": "run-scoped",
+      "pgid": 620408,
+      "pid": 620477,
+      "ppid": 620468,
+      "start_ticks": 9477434
+    },
+    {
+      "cmdline": "python3 /root/rhai-linux-drop-false-523-20261004/linux-drop-false-proof.py",
+      "label": "helper",
+      "pgid": 620481,
+      "pid": 620482,
+      "ppid": 620481,
+      "start_ticks": 9477438
+    },
+    {
+      "cmdline": "/usr/bin/python3 /var/roothome/rhai-linux-drop-false-523-20261004/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-drop-false-523-20261004/linux-drop-false-proof.py",
+      "label": "scoped-supervisor",
+      "pgid": 620481,
+      "pid": 620481,
+      "ppid": 620477,
+      "start_ticks": 9477436
+    },
+    {
+      "cmdline": "/root/.cargo/bin/rustup toolchain install 1.77.2-x86_64-unknown-linux-gnu --profile minimal --no-self-update",
+      "label": "command:rustup-install",
+      "pgid": 620481,
+      "pid": 620484,
+      "ppid": 620482,
+      "start_ticks": 9477446
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2",
+      "label": "command:du",
+      "pgid": 620481,
+      "pid": 620493,
+      "ppid": 620482,
+      "start_ticks": 9477446
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 620481,
+      "pid": 620502,
+      "ppid": 620482,
+      "start_ticks": 9477447
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2",
+      "label": "command:du",
+      "pgid": 620481,
+      "pid": 620526,
+      "ppid": 620482,
+      "start_ticks": 9477548
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 620481,
+      "pid": 620527,
+      "ppid": 620482,
+      "start_ticks": 9477548
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2",
+      "label": "command:du",
+      "pgid": 620481,
+      "pid": 620542,
+      "ppid": 620482,
+      "start_ticks": 9477649
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 620481,
+      "pid": 620543,
+      "ppid": 620482,
+      "start_ticks": 9477649
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2",
+      "label": "command:du",
+      "pgid": 620481,
+      "pid": 620563,
+      "ppid": 620482,
+      "start_ticks": 9477750
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 620481,
+      "pid": 620564,
+      "ppid": 620482,
+      "start_ticks": 9477751
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2",
+      "label": "command:du",
+      "pgid": 620481,
+      "pid": 620578,
+      "ppid": 620482,
+      "start_ticks": 9477852
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 620481,
+      "pid": 620579,
+      "ppid": 620482,
+      "start_ticks": 9477852
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2",
+      "label": "command:du",
+      "pgid": 620481,
+      "pid": 620599,
+      "ppid": 620482,
+      "start_ticks": 9477953
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 620481,
+      "pid": 620600,
+      "ppid": 620482,
+      "start_ticks": 9477953
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2",
+      "label": "command:du",
+      "pgid": 620481,
+      "pid": 620613,
+      "ppid": 620482,
+      "start_ticks": 9478055
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 620481,
+      "pid": 620614,
+      "ppid": 620482,
+      "start_ticks": 9478055
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2",
+      "label": "command:du",
+      "pgid": 620481,
+      "pid": 620628,
+      "ppid": 620482,
+      "start_ticks": 9478136
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 620481,
+      "pid": 620629,
+      "ppid": 620482,
+      "start_ticks": 9478136
+    },
+    {
+      "cmdline": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose",
+      "label": "command:rustc-version",
+      "pgid": 620481,
+      "pid": 620630,
+      "ppid": 620482,
+      "start_ticks": 9478137
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2",
+      "label": "command:du",
+      "pgid": 620481,
+      "pid": 620631,
+      "ppid": 620482,
+      "start_ticks": 9478137
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 620481,
+      "pid": 620632,
+      "ppid": 620482,
+      "start_ticks": 9478137
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2",
+      "label": "command:du",
+      "pgid": 620481,
+      "pid": 620634,
+      "ppid": 620482,
+      "start_ticks": 9478148
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 620481,
+      "pid": 620635,
+      "ppid": 620482,
+      "start_ticks": 9478149
+    },
+    {
+      "cmdline": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose",
+      "label": "command:cargo-version",
+      "pgid": 620481,
+      "pid": 620636,
+      "ppid": 620482,
+      "start_ticks": 9478150
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2",
+      "label": "command:du",
+      "pgid": 620481,
+      "pid": 620637,
+      "ppid": 620482,
+      "start_ticks": 9478150
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 620481,
+      "pid": 620641,
+      "ppid": 620482,
+      "start_ticks": 9478150
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2",
+      "label": "command:du",
+      "pgid": 620481,
+      "pid": 620652,
+      "ppid": 620482,
+      "start_ticks": 9478161
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 620481,
+      "pid": 620653,
+      "ppid": 620482,
+      "start_ticks": 9478161
+    }
+  ],
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2",
+  "runtime_absent": true,
+  "scope_absent": true,
+  "setup_failure_only": true,
+  "stage_removed": false
+}

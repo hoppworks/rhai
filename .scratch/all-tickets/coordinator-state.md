@@ -12,10 +12,9 @@ acceptance. Local Markdown tickets only; no Linear. Goal active and incomplete.
 
 ## Authorization and ownership
 Only https://github.com/hoppworks/rhai.git may receive writes; never public
-upstream. Root owns /Users/hoppworks/.codex/worktrees/all-tickets-continuation/rhai on
-task/all-tickets-continuation. The former owned checkout was externally removed
-a second time; retained committed4ac93a44 was used to create this attached managed
-checkout. Do not recreate/prune/remove the old missing worktree entry blindly.
+upstream. Root owns /Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery
+on task/all-tickets-environment-recovery. Former owned checkouts were externally
+removed; retained commits and accepted proof were recovered into this owned tree. Do not recreate/prune/remove the old missing worktree entry blindly.
 Committed proof is intact; removed uncommitted contents are not certified.
 The foreign primary checkout and foreign/dirty worktrees remain untouched.
 Author and committer exactly hoppworks <daniel@hoppworks.de>, command-local Git
@@ -27,6 +26,12 @@ No installs, admin, credentials, agent-home/config or shared-service changes.
 Windows guest control belongs solely to windows_private_staging_readback; historical owner records remain preserved.
 
 ## Done steps and accepted evidence
+- Linux final-handle kill_on_drop(false) direct/managed paths at523, private
+  Rust1.77.2 accepted with two namedRED101/restoredGREEN0, request-bound live
+  observers,131 identities/six groups and six exact path closure. Proof
+  linux-drop-false-native2-proof.md; final affectedreview READY0cec9a19.
+  Original69/tar preserved; receipt-harness error/lost deletion stdout transparent,
+  independent fresh retirement accepted. Partial03/06 only; no full release.
 - Linux Rust1.77.2 runnable sys/net/sys_process examples accepted in one build
   with three meaningful controls and independent host/peer/process readbacks.
   Exact three-file integration cacb8530, proof linux-process-example3-proof.md;
@@ -84,9 +89,169 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
   warrants a duplicate control or build solely for current integration. Combined
   sys/net, changed platform/MSRV and final current-native release coverage open.
 
+## Environment recovery and current repair — 2026-10-04
+
+Previous physical root/writer checkouts and writer handles disappeared in the
+refreshed environment; Git commits and accepted proof persisted. No process
+was interrupted or declared terminal from an observation timeout. Original
+writer branch task/linux-managed-success was restored at ad51284c97f70cd82214c5c0d417da8861dcc5d2
+and explicitly transferred to named Standard drop_false_consolidated_correction.
+Owned root task/all-tickets-environment-recovery lives at
+/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery.
+Foreign primarymain/other trees remain unchanged. Only the nine intended recipe/
+proposal/patch inputs and exact c5422e helper were recovered, never unaccepted
+stdin/production history. Root helper SHA independently matches ad512.
+
+Current rules6830c49ed962a3dc1937d72d0d182150bb4c935c loaded by root,
+Standard and combined reviewer. Latest human Machine limits are Mac1/workhorse3/
+lllm3 across projects with fresh inventory/capacity, not expired exceptions.
+Actual600/585/540second bounds,2jobs,16descendants,1572864KiB preemptive and
+2097152KiB hard RSS/storage caps remain. All stopped stdin/native110/Darwin/
+Windows histories and prior collector Expert19/EA7 contract remain unchanged.
+
+Combined affected ad512 review NOT READY is in linux-drop-false-recovered-review.md.
+Initial8f90 readiness rejection is not a correction; ad512 is completed failed
+correction1; native0. Same Standard owns one consolidated six-area correction
+under drop-false-correction-brief.md. No SSH/Cargo/native/production/push by writer.
+Same independent reviewer will recheck only affected delta after freeze.
+Earlier cumulative active work unknown. Owner checkpoints are elapsed estimates,
+not additive budgets:12/21/29/40minutes, no timer log. At29min new actual run_case
+and later PermissionError probe evidence justified revising same repair planning
+estimate to60min TOTAL (not60new); no actual safety cap or retry history reset.
+
+Latest owner40min checkpoint: source discovery and run_case Cargo/handshake
+separation are locally checked. Item3 now reportedly retains Cargo, each managed
+member, each terminal PID result and RED marker/terminal observation incrementally;
+later-member/terminal/control PermissionError probes preserve earlier reads and
+incomplete/error state, without a success receipt. Root earlier identified and
+corrected the host-only overclaim before this extension; no whole native closure.
+Item5 code rejects leader/group mismatch, binds exact request/RED group census
+set, includes command PGIDs, uses exact shlex token provenance and checks physical
+stage absence. Latest owner full isolated CUSTODY executes with actual argument/
+import namespace against valid exact synthetic fixture, rejects empty managed
+group census and foreign helper argv token. Probe resolved physical-stage argument
+and Cargo green identity mapping were corrected locally. This is useful new wiring
+evidence, not native acceptance or completed failed correction. Actual run_case
+and live/RED producers reportedly covered. Last managed-leaf later failure probe,
+exact Rust emitter expression mapping and final consistent pins/proposal/report/
+freeze still require confirmation. All same original findings, not new causes.
+Correction frozen7721356ac8c2eaf5adff502b3a27cd7131c87509, correct hoppworks
+attribution and clean writer; estimated50/60min total, earlier unknown. Actual
+stage prefix bash-eu before SSH validates c542 helper/input pins and fixes repo
+initialization order. Root selectively restored intended files/report and every
+file byte-matches772; helper matches exact retainedc542. Source/stdin unchanged.
+Same combined independent affected review dispatched via drop-false-772-review-brief.md.
+Native0, no stage/heavy run. Final completed review NOT READY at772 confirms
+failed correction2, five closed areas and actual coupled GREEN defect. Reviewer
+preliminary material finding:772 publishes cargo_process_identity only in finally
+after BASE.run_command returns, while actual GREEN observe requires it before
+ACK. RED-only run_case probe plus preseeded observer probes miss coupled GREEN.
+Reviewer reproduces actual coupled path and completes same affected review;
+no native dispatch. ad512 failed correction1 and772 failed correction2 retained.
+Fresh nonfork Expert escalation20 completed with answer at escalations/
+20-drop-false-command-handshake-coupling.answer.md. Callback publication followed
+by observer startup removes both late publication and spawn/record race. One
+bounded follow-up dispatched to original Standard; no new chain. Native0,
+failed corrections2, five other closures preserved. Estimated50/60 TOTAL active
+minutes with ten to next planning checkpoint; earlier cumulative unknown. No
+hard resources or stopped paths renewed. On second failed same-cause completed verdict,
+follow existing fresh nonfork Expert rule for identity/handshake coupling, never
+renew stopped collector19/stdin/Mac/Windows chains. Pure configured12-input
+preflight derivative also in SAME review: accepted inventory/capacity algorithm,
+conservative ZERO-heavy requirement, exact physicalstage/manifest/pins and30sec
+transport;11 local prerequisite pins matched. No preflight SSH or stage executed.
+Current turn PROGRESS through frozen selective intake/configured gate and actual
+coupled-GREEN diagnosis changing next action. All safety/history unchanged.
+
+Reviewed docs host SysConfig policy clarification was separately committed as
+63d948b1fe8f223b060492de92f70c7a466d0248 and pushed only fork main; independent
+ls-remote confirmed ONLY main at63d948b1. Correct hoppworks author/committer.
+No unready recipes/helper/production/tests included. Exact docs delta READY in
+same combined review and whitespace checked; no runtime acceptance inferred.
+Preliminary read-only workhorse sample: all prospective logical/physical/scope
+paths absent, MemAvailable77108120KiB, disk available705520108KiB,
+load2.10/2.07/2.27. Not slot/reservation/launch proof. Fresh inventory/capacity
+and frozen pins required before native launch. No own stage/build allocated.
+Previous goal turn PROGRESS corrected partial-preservation scope; current live
+registry confirms same writer running. Waiting on live correction is not a
+missing-authorization blocker. Existing accepted proof below remains applicable.
+
 ## Current step and next action
 
-Rules faba3db loaded; overall goal active and incomplete. Last independently
+Current action: integrate accepted Linux kill_on_drop(false) native2 recipe and
+evidence package to fork main. Final combined affected review READY at0cec9a19,
+no material finding. Actual direct/managed RED101 and GREEN0,131 identity/six-group
+custody and independent six-path retirement accepted in partial tickets03/06.
+Lost removal stdout/postcheck harness failure explicitly preserved; no fabrication.
+Original69 files/seven directories/sole tar intact; no owned remote resources.
+No product source change or new native/deletion run. Consumer28/30 estimate, prior
+15/30setup56/60package and earlier unknown costs/history preserved.
+Next existing post-spawn pipe setup failure package is owned by same Standard;
+prepare full executable recipes on accepted523 archive, two post-reap cause/report
+controls and restored GREEN. Pipe preparation10/30 estimate; no native allocation.
+Independent review and fresh machine/paths/capacity required before launch.
+All stopped stdin/native110/Darwin/Windows causes remain stopped; goal incomplete.
+
+### Final-drop package history
+
+Current action: Expert20 answer read back; one bounded follow-up dispatched
+to existing Standard. Publish identity in exact command-start callback before
+starting observer, prove actual coupled direct/managed ACK before command return
+for request-before/after-callback schedules. Owner checkpoint: actual coupled direct/managed probes reportedly pass both
+request schedules, exact ACK-before-return, original record-before-thread,
+complete identity at thread entry and terminal checks; missing/wrong identities
+reject conservatively and hook restored. Intended RED at unchanged772 recorded.
+Full synthetic recipe suite reportedly passes. Follow-up frozen3f3b7ebd plus proposal dependency88c77680, clean writer,
+exact hoppworks attribution. Root selectively matches immutable intended inputs;
+proof SHA9321ec01, configured preflight SHA1d68422e repinned and outer/embedded
+AST pass. Estimated56/60 TOTAL, earlier unknown. Independent affected verdict READY in linux-drop-false-expert20-followup-review.md.
+Coupled four GREEN schedules/adverse controls independently pass. Native0.
+Root11 local staged hashes match frozen88c, wrapper/preflight configurations
+reviewed READY. Stage terminal0; all12 staged hashes pass. First final-drop native allocation
+at2026-10-04T08:46:23Z on same SSH connection after empty heavy inventory,
+MemAvailable82913160KiB/free724378578944bytes/load1.21/2.53/3.82. Fresh observation,
+not reservation; no foreign changes. Native consumption1 terminal1, local execsession56802 completed. Setup cause
+missing-patch-tool: FileNotFoundError before test compile or behavior assertion;
+not a failed coupling correction or product RED. Toolchain/version commands0;
+controls empty. Runtime/group/scope launcher cleanup0. Forty-two originals/five
+folders and sole raw tarSHAecc85271f0750fa2085bfbcc66b1c492e918cbdef61439fe8ba9366fb712212f
+independently match remote inventory. Initial localPython3.9 extraction filter
+TypeError recovered using existing bundledPython3.12 from same sole raw tar,
+not another export/copy. No native acceptance. Root-owned exact failed-stage
+retirement gate needed before reuse; preserve until fresh identity/group/hash
+closure, no success-package custody waiver. Same Standard owns minimal present-
+git patch application setup repair, first infrastructure recovery for missing
+patch; no new Expert/coupling renewal. Previous56/60 estimate retained plus new setup15/30min checkpoint; earlier
+unknown. Standard reports exact523 patch equivalence atSHA90d55b205d93816b156dd0c592d05d1987d92f851dc8031f91dadaac0e040166
+using Git-only PATH with strict git apply --check --whitespace=error then apply;
+full synthetic suite reportedly passes, freeze/affected independent review open.
+Root failed-stage gate independent review ongoing; relative recorded raw-tar
+path mismatch found fail-closed before SSH and fixed by resolving under exact
+recovery repository without changing originals. Reviewed failed-run gate READY atSHA1d3aa3ad; actual inspect+retire0 and separate
+root fresh reader confirm31 identities absent/reused, groups620408/620481 empty,
+logical+physical stage, scope and runtime absent. Forty-two originals preserved,
+no retained remote native1 resources. No foreign changes. Missingpatch repair
+frozen25763960, exact intended sixfiles selectively copied; native1 consumed,
+zero tests. Preflight newproof61d82867; wrapper prospective native2 accurately
+records consumed setup and exact retired prior stage. Setup owner15/30min plus
+prior56/60 estimates retained; earlier unknown. Same infrastructure review next
+checks equivalent Git application/pins plus prospective wrapper configuration;
+no native2 allocation before READY and fresh guard.
+Root independently verifies11 current local input pins, embedded preflight/wrapper
+AST, and four exact frozen257 recipe copies. Same infrastructure reviewer rechecks
+only Git-apply equivalence and affected pins/prospective native2 configuration.
+Affected independent infrastructure review READY; exact equivalent Git application,
+restoration and pins passed. Root docs status correction independently recorded.
+Next: stage inputs,
+then same-SSH fresh zero-heavy guard and bounded native2. Native1 remains consumed
+setup-only with zero tests; all original evidence and failure history retained.
+No retained native1 stage/runtime/scope. No foreign changes. Hard600/585/540,
+2jobs,16descendants and storage/RSS limits unchanged. Never merge the writer's
+unaccepted stdin history. Fork main63d948b1 is the latest pushed docs revision,
+only main exists remotely. Root recovery checkout above remains current owner.
+
+Rules6830c49 loaded; overall goal active and incomplete. The environment recovery
+checkpoint above supersedes older pending writer/review status; history below remains. Last independently
 verified example integration on fork maincacb85300447aef1f6843b668b9f26d6ec89e2b5;
 only main exists remotely. Subsequent state-only commits do not change proof inputs. Production523 and
 prior valid proofs retain their recorded applicability. Native110 unallocated;
@@ -2835,3 +3000,84 @@ were split, yielding Python import SyntaxError and Bash syntax error. Original
 console retained. One infrastructure outcome; native3 remains unallocated.
 Correction: one shell-quoted remote command via shlex.quote(wrapper), unchanged
 wrapper/default guard/limits. Transport2 original console separately retained.
+
+## Native2 stage ownership — 2026-10-04T09:04:09.813062+00:00
+
+Owner root recovery Session. Exact logical stage /root/rhai-linux-drop-false-523-20261004,
+physical /var/roothome/rhai-linux-drop-false-523-20261004; previous native1 stage
+is retired with preserved originals/fresh closure. Fresh absent stage may now
+be created for one reviewed native2 acceptance run and original export. No
+build retention outside scoped runner. Stage retention ends at export plus exact
+custody closure, expiry 2026-10-04T11:04:09.813062+00:00. Same central scope
+/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004; prospective
+allocation2 only after immediate same-SSH checked guard. Native1 consumed setup-only,
+zero assertions. All caps/history/stopped paths unchanged.
+
+Native2 allocated2026-10-04T09:04:29Z after checked12 inputs/zeroheavy,
+MemAvailable82743096KiB/free724368683008bytes/load1.11/2.22/2.64.
+SameSSH launch; observation is not reservation. execsession11463 running,
+private runtime agent-build-l4b8wpaz, runner adaptive570<=585. No foreign
+change. Original console linux-drop-false-native2-console.log; acceptance pending.
+
+Native2 terminal0 after~42seconds; direct-red101 and managed-red101 at named
+survival assertions; direct-green0 and managed-green0. Actual Engine/nativeOS
+Linux/Rust1.77.2 testing-environ,sys, no_float/no_index absent. Outer/runscoped,
+runtime/PID/scope cleanup0. All69 originals/seven directories and sole tar
+preserved outside runtime and root independently rehashed; no behavior rerun.
+Collector analysis first infrastructure failure: resource-samples.jsonl was
+never emitted by custom exporter; actual periodic samples remain in original
+outer.log. Diagnostic read-only probes (explicitly not acceptance/retirement)
+identify two other exact emitter/consumer mismatches: runner path must include
+runner/tools; GREEN canonical fixture root is under /var/roothome while early
+runtime is lexical/root. With only these diagnostic predicates corrected,
+all remaining whole custody fresh predicates pass; no deletion occurred.
+Same Standard owns ONE consolidated consumer-only infrastructure correction
+with actual69-file original tree/probe, real outer sample binding, exact logical/
+canonical roots and all existing ancestry/PID/group/hash safety. 30minute active
+planning checkpoint; prior setup15/30, package56/60 and unknown earlier work
+preserved. No original file synthesized/replaced or frozen native2 input changed.
+No new native allocation, no production change, no stopped chain renewed.
+Stage retained only until corrected review/fresh closure/export retirement,
+original finite expiry unchanged. Complete acceptance remains pending custody.
+
+Consumer owner checkpoint:~8/30minutes current focused repair; independently
+observed53 actual samples and exact lexical/canonical path forms. Frozen native2
+source/proof untouched. Cumulative earlier costs/elapsed unknown; no reset.
+Root draft linux-drop-false-native2-proof.md records scope/outcomes and remains
+explicitly pending final consumer/readback/retirement. Production/codegen/build
+and tests/support match523 at63d948b1; only Cargo example registration differs.
+
+Consumer-only freeze071d1fe4 selectively intaken exact3files; collectorSHA5b5ca03e,
+proof61d8 unchanged. Same combined reviewer completes affected actual69-file
+consumer delta before fresh root custody/retirement. Owner~14/30 current estimate,
+prior15/30setup and56/60 package estimates plus earlier unknown preserved.
+Same Standard now prepares only next independent missing existing pipe-setup
+failure acceptance (actual existing publicEngine regression, targeted cause/
+incomplete-report controls and optionalMSRV1.77.2 Linux defaultfloat/index).
+No production edits/new product regression, SSH/Cargo/native or push by writer;
+30minute preparation checkpoint. Valid Linux80/macOS81 positives reused unchanged.
+No stopped stdin/native110/Darwin/Windows/custody cause renewed. Root still owns
+native2 original closure and current exact finite stage retention.
+
+Native2 fresh reviewed071 CUSTODY passed actual131 identities/six groups and exact
+original inventory. Same remote interpreter repeated full gate and deleted exact
+owned69 files/seven directories. Post-retirement read-only harness failed NameError
+physical undefined before saving removed stdout; no deletion receipt fabricated.
+Root separate fresh reader recovered131 PID/start absent/reused, allsix groups
+empty and allsix logical/canonical stage/scope/runtime paths absent. Originals
+and sole tar rehashed unchanged. Stage retention ended, no owned remote resources.
+Same infrastructure package narrow correction defines physical and persists removed
+receipt before postcheck for future runs; whole embedded postcheck probes/review
+pending. No new native allocation or deletion, no product/coupling retry counted.
+
+Narrow closure-harness fix frozen0cec9a19 and selectively copied exact3files.
+Collector5e877593/probesc6ea62e1/reportfdc942c9; defines physical path, validates
+and persists removed receipt before separate read-only postcheck. Wholepostcheck
+positive and malformed/unknown/PID/group/path negatives plus injected postcheck
+failure persistence pass in owner tests. Same affected reviewer pending. No
+remote rerun; native2 lost removal stdout remains transparently lost. Consumer
+checkpoint28/30 TOTAL estimate (14prior+14followup), prior15/30setup56/60package
+and earlier unknown remain. Same Standard resumes nextpipe full source recipes,
+correcting archive baseline to accepted523 rather than unaccepted writer071.
+Pipe preparation10/30 estimate, no native allocation; independent review before
+launch. Next package does not reopen stopped causes.

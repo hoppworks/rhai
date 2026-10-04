@@ -1,0 +1,38 @@
+[
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "direct-red",
+    "required_diagnostics": [
+      "drop_false-control direct survival expectation"
+    ],
+    "required_output": [],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "managed-red",
+    "required_diagnostics": [
+      "drop_false-control managed survival expectation"
+    ],
+    "required_output": [],
+    "status": 101
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": [
+      "test direct_spawn_kill_on_drop_false_preserves_child_and_capture ... ok"
+    ],
+    "name": "direct-green",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": [
+      "test managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit ... ok"
+    ],
+    "name": "managed-green",
+    "status": 0
+  }
+]

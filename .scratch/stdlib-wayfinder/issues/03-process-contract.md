@@ -450,3 +450,20 @@ Combined review plus separate102 identity/two-group/four-path cleanup accept
 this scoped criterion. See ../../all-tickets/linux-process-example3-proof.md.
 Only three proven Cargo/example/docs files integrated, no unaccepted stdin
 changes. Other lifecycle/platform/feature/performance/release criteria stay open.
+
+
+## Accepted Linux final handle drop with kill_on_drop(false) — 2026-10-04
+
+Baseline523/private Rust1.77.2, testing-environ,sys, default float/index: real
+public Engine direct and managed final-drop cases pass after named wrong-survival
+controls101. Independent request-bound observers prove held child/group survival
+and eventual closure. Combined review accepts69 immutable originals/seven
+directories, fresh131-identity/six-group custody and independent exact retirement
+readback. A post-retirement receipt-harness failure and missing deletion stdout
+remain explicitly recorded; independent fresh absence confirms closure, and the
+reviewed consumer fix requires early receipt persistence for future runs. See
+../../all-tickets/linux-drop-false-native2-proof.md and the combined infrastructure
+review. No production delta was required; relevant source matches integrated63d948b1.
+Only this Linux criterion closes. Remaining pipe-setup fault controls, stdin,
+other platforms/features, performance and final release acceptance remain open.
+No stopped retry/cause chain is renewed by this partial acceptance.

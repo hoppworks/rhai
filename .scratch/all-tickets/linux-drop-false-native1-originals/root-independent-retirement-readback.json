@@ -1,0 +1,14 @@
+{
+  "paths_absent": [
+    "/root/rhai-linux-drop-false-523-20261004",
+    "/var/roothome/rhai-linux-drop-false-523-20261004",
+    "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004",
+    "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2"
+  ],
+  "identities_checked": 31,
+  "groups_empty": [
+    620408,
+    620481
+  ],
+  "acceptance": false
+}

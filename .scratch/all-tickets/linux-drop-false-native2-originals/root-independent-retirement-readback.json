@@ -1,0 +1,21 @@
+{
+  "groups_empty": true,
+  "groups_rechecked": [
+    677011,
+    677084,
+    690689,
+    690691,
+    690849,
+    690851
+  ],
+  "identities_rechecked": 131,
+  "method": "independent read-only proc identity, full group census and exact lexical/canonical paths",
+  "paths_absent": [
+    "/root/rhai-linux-drop-false-523-20261004",
+    "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004",
+    "/var/roothome/rhai-linux-drop-false-523-20261004",
+    "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+    "/var/roothome/.local/share/agent-builds/rhai/linux-drop-false-523-20261004",
+    "/var/roothome/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz"
+  ]
+}

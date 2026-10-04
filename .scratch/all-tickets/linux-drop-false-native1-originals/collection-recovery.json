@@ -1,0 +1,8 @@
+{
+  "initial_interpreter": "Python3.9.6",
+  "initial_error": "extractall filter unsupported",
+  "recovery_interpreter": "Python3.12.14",
+  "raw_tar_preserved": true,
+  "fresh_remote_hashes_match": true,
+  "acceptance": false
+}

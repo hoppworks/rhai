@@ -1,0 +1,100 @@
+--- a/tests/sys_process.rs
++++ b/tests/sys_process.rs
+@@ -40,6 +40,8 @@
+ const DIRECT_DROP_RELEASE_ENV: &str = "RHAI_SYS_DIRECT_DROP_RELEASE";
+ #[cfg(all(unix, not(feature = "no_index")))]
+ const DIRECT_DROP_CHALLENGE_ENV: &str = "RHAI_SYS_DIRECT_DROP_CHALLENGE";
++#[cfg(target_os = "linux")]
++const DROP_FALSE_OBSERVER_DIR_ENV: &str = "RHAI_DROP_FALSE_OBSERVER_DIR";
+
+ /// The process API re-executes this test binary so stdout/stderr and exit status come from
+ /// an independently supervised OS process rather than a mocked command implementation.
+@@ -417,9 +419,23 @@
+     let ack = fixture.await_record("record.challenge-ack");
+     let ack_matches = ack.as_deref().is_some_and(|record| record.trim() == format!("pid={pid} alive=true"));
+     let alive_after_drop = pid_is_running(pid);
+-    eprintln!("direct_drop_after_final_client_drop pid={pid} alive={alive_after_drop} challenge_ack={ack_matches} completion_exists={}", fixture.path("record.complete").exists());
++    let host_pid = std::process::id();
++    let host_start_ticks = managed_pipe_start_ticks(host_pid as i32);
++    let child_identity = managed_proc_identity(pid as i32).expect("read direct child identity");
++    eprintln!("direct_drop_after_final_client_drop host_pid={host_pid} host_start_ticks={host_start_ticks} fixture_root={} child_pid={pid} child_start_ticks={} child_ppid={} child_pgid={} alive={alive_after_drop} challenge_ack={ack_matches} completion_exists={}", fixture.root.as_script_path(), child_identity.3, child_identity.1, child_identity.2, fixture.path("record.complete").exists());
+     assert!(alive_after_drop && ack_matches, "kill_on_drop(false) must preserve the child after final handle drop");
+     assert!(!fixture.path("record.complete").exists(), "child must still be blocked before fixture release");
++    #[cfg(target_os = "linux")]
++    drop_false_observer_barrier(
++        "direct",
++        fixture.root.path(),
++        &format!(
++            "child_pid={pid} child_start_ticks={} child_pgid={} challenge_ack={} completion=false\n",
++            managed_pipe_start_ticks(pid as i32),
++            managed_proc_identity(pid as i32).expect("read direct child identity").2,
++            u8::from(ack_matches),
++        ),
++    );
+
+     std::fs::write(fixture.path("release"), b"release\n").unwrap();
+     let complete = fixture.await_record("record.complete").expect("child completion record after pipe writes");
+@@ -487,6 +503,31 @@
+     std::fs::rename(temporary, path).unwrap();
+ }
+
++#[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
++fn drop_false_observer_barrier(case: &str, fixture_root: &std::path::Path, fields: &str) {
++    let Some(directory) = std::env::var_os(DROP_FALSE_OBSERVER_DIR_ENV).map(std::path::PathBuf::from) else {
++        return;
++    };
++    let test_pid = std::process::id();
++    let request_id = format!("{case}-{test_pid}");
++    let request = directory.join(format!("{request_id}.request"));
++    let acknowledgement = directory.join(format!("{request_id}.ack"));
++    assert!(!request.exists() && !acknowledgement.exists(), "observer request path must be fresh");
++    let host_start_ticks = managed_pipe_start_ticks(test_pid as i32);
++    let record = format!("request_id={request_id}\ncase={case}\ntest_pid={test_pid}\ntest_start_ticks={host_start_ticks}\nfixture_root={}\n{fields}", fixture_root.display());
++    managed_atomic_record(&request, &record);
++    let expected = format!("{record}observer_ack=true\n");
++    let deadline = Instant::now() + Duration::from_secs(8);
++    loop {
++        if let Ok(actual) = std::fs::read_to_string(&acknowledgement) {
++            assert_eq!(actual, expected, "observer acknowledgement must bind the exact request");
++            return;
++        }
++        assert!(Instant::now() < deadline, "independent live-process observer did not acknowledge the bounded fixture phase");
++        std::thread::sleep(Duration::from_millis(2));
++    }
++}
++
+ #[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+ fn managed_pipe_start_ticks(pid: i32) -> u64 {
+     #[cfg(target_os = "linux")]
+@@ -3579,7 +3620,31 @@
+         acks.iter().map(|ack| ack.get("pid").copied()).collect::<Vec<_>>(),
+         acks.iter().map(|ack| ack.get("pgid").copied()).collect::<Vec<_>>()
+     );
++    let host_pid = std::process::id();
++    let host_start_ticks = managed_pipe_start_ticks(host_pid as i32);
++    let sentinel_identity = managed_proc_identity(sentinel_pid).expect("read sentinel identity");
++    let leader_identity = managed_proc_identity(leader).expect("read leader identity");
++    let worker_identity = managed_proc_identity(worker).expect("read worker identity");
++    let leaf_identity = managed_proc_identity(leaf).expect("read leaf identity");
++    eprintln!("managed_drop_false_terminal host_pid={host_pid} host_start_ticks={host_start_ticks} fixture_root={} sentinel_pid={sentinel_pid} sentinel_start_ticks={} sentinel_ppid={} sentinel_pgid={sentinel_pgid} leader_pid={leader} leader_start_ticks={} leader_ppid={} leader_pgid={} worker_pid={worker} worker_start_ticks={} worker_ppid={} worker_pgid={} leaf_pid={leaf} leaf_start_ticks={} leaf_ppid={} leaf_pgid={} group={group} challenge_ack_count={} challenge_ok={}", fixture.root.as_script_path(), sentinel_identity.3, sentinel_identity.1, leader_identity.3, leader_identity.1, leader_identity.2, worker_identity.3, worker_identity.1, worker_identity.2, leaf_identity.3, leaf_identity.1, leaf_identity.2, acks.len(), u8::from(challenge_ok));
+     assert!(members_live && challenge_ok, "kill_on_drop(false) must preserve all managed members after final handle drop");
++    #[cfg(target_os = "linux")]
++    drop_false_observer_barrier(
++        "managed",
++        fixture.root.path(),
++        &format!(
++            "sentinel_pid={sentinel_pid} sentinel_start_ticks={} sentinel_pgid={sentinel_pgid}\nleader_pid={leader} leader_start_ticks={} leader_pgid={} worker_pid={worker} worker_start_ticks={} worker_pgid={} leaf_pid={leaf} leaf_start_ticks={} leaf_pgid={} group={group}\nchallenge_ack_count={} challenge_ok={}\n",
++            managed_pipe_start_ticks(sentinel_pid),
++            managed_pipe_start_ticks(leader),
++            managed_proc_identity(leader as i32).expect("read leader PGID").2,
++            managed_pipe_start_ticks(worker),
++            managed_proc_identity(worker as i32).expect("read worker PGID").2,
++            managed_pipe_start_ticks(leaf),
++            managed_proc_identity(leaf as i32).expect("read leaf PGID").2,
++            acks.len(),
++            u8::from(challenge_ok),
++        ),
++    );
+
+     std::fs::write(fixture.path("release-leader"), b"release\n").unwrap();
+     let deadline = Instant::now() + Duration::from_secs(5);

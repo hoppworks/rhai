@@ -1,0 +1,30 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+helper	620482	620481	620481	9477438	python3 /root/rhai-linux-drop-false-523-20261004/linux-drop-false-proof.py
+scoped-supervisor	620481	620477	620481	9477436	/usr/bin/python3 /var/roothome/rhai-linux-drop-false-523-20261004/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-drop-false-523-20261004/linux-drop-false-proof.py
+command:rustup-install	620484	620482	620481	9477446	/root/.cargo/bin/rustup toolchain install 1.77.2-x86_64-unknown-linux-gnu --profile minimal --no-self-update
+command:du	620493	620482	620481	9477446	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2
+command:ps	620502	620482	620481	9477447	/bin/ps -e -o pid=,ppid=,rss=
+command:du	620526	620482	620481	9477548	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2
+command:ps	620527	620482	620481	9477548	/bin/ps -e -o pid=,ppid=,rss=
+command:du	620542	620482	620481	9477649	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2
+command:ps	620543	620482	620481	9477649	/bin/ps -e -o pid=,ppid=,rss=
+command:du	620563	620482	620481	9477750	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2
+command:ps	620564	620482	620481	9477751	/bin/ps -e -o pid=,ppid=,rss=
+command:du	620578	620482	620481	9477852	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2
+command:ps	620579	620482	620481	9477852	/bin/ps -e -o pid=,ppid=,rss=
+command:du	620599	620482	620481	9477953	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2
+command:ps	620600	620482	620481	9477953	/bin/ps -e -o pid=,ppid=,rss=
+command:du	620613	620482	620481	9478055	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2
+command:ps	620614	620482	620481	9478055	/bin/ps -e -o pid=,ppid=,rss=
+command:du	620628	620482	620481	9478136	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2
+command:ps	620629	620482	620481	9478136	/bin/ps -e -o pid=,ppid=,rss=
+command:rustc-version	620630	620482	620481	9478137	/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose
+command:du	620631	620482	620481	9478137	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2
+command:ps	620632	620482	620481	9478137	/bin/ps -e -o pid=,ppid=,rss=
+command:du	620634	620482	620481	9478148	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2
+command:ps	620635	620482	620481	9478149	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-version	620636	620482	620481	9478150	/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose
+command:du	620637	620482	620481	9478150	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2
+command:ps	620641	620482	620481	9478150	/bin/ps -e -o pid=,ppid=,rss=
+command:du	620652	620482	620481	9478161	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2
+command:ps	620653	620482	620481	9478161	/bin/ps -e -o pid=,ppid=,rss=

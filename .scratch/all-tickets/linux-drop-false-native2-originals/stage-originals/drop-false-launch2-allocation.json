@@ -1,0 +1,23 @@
+{
+  "source": "523608648dcae99bc0f6b46eaf2bb91fa4ecc752",
+  "native_drop_false_launch": 2,
+  "preflight": {
+    "utc": "2026-10-04T09:04:29Z",
+    "stage": "/var/roothome/rhai-linux-drop-false-523-20261004",
+    "inputs_verified": 12,
+    "scope_absent": true,
+    "heavy": [],
+    "mem_available_kib": 82743096,
+    "disk_free_bytes": 724368683008,
+    "load": [
+      1.10693359375,
+      2.21826171875,
+      2.64013671875
+    ],
+    "ready": true
+  },
+  "outer_seconds": 600,
+  "runner_seconds": 585,
+  "helper_seconds": 540,
+  "history": "drop-false native1 consumed setup-only missingpatch, zero tests; first failed stage retired, native2 prospective; failed corrections2, Expert20 single follow-up; native110 unallocated; stopped chains unchanged"
+}

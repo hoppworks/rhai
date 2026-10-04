@@ -1,0 +1,19 @@
+{
+  "captured_before_stage_validation_or_external_command": true,
+  "helper": {
+    "cmdline": "python3 /root/rhai-linux-drop-false-523-20261004/linux-drop-false-proof.py",
+    "pgid": 677084,
+    "pid": 677085,
+    "ppid": 677084,
+    "start_ticks": "9586106"
+  },
+  "identity_errors": {},
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+  "scoped_supervisor": {
+    "cmdline": "/usr/bin/python3 /var/roothome/rhai-linux-drop-false-523-20261004/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-drop-false-523-20261004/linux-drop-false-proof.py",
+    "pgid": 677084,
+    "pid": 677084,
+    "ppid": 677080,
+    "start_ticks": "9586104"
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "cargo": {
+    "cmdline": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ,sys --test sys_process managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit -- --exact --nocapture --test-threads=1",
+    "pgid": 677084,
+    "pid": 690838,
+    "ppid": 677085,
+    "start_ticks": "9590250"
+  },
+  "case": "managed",
+  "complete": true,
+  "fixture_root": "/var/roothome/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/tmp/rhai-sys-test-690847-managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit-0",
+  "host": {
+    "pgid": 677084,
+    "pid": 690847,
+    "ppid": 690838,
+    "start_ticks": 9590253,
+    "state": "S"
+  },
+  "identities": {
+    "leader": {
+      "pgid": 690851,
+      "pid": 690851,
+      "ppid": 690847,
+      "start_ticks": 9590253,
+      "state": "S"
+    },
+    "leaf": {
+      "pgid": 690851,
+      "pid": 690855,
+      "ppid": 690853,
+      "start_ticks": 9590253,
+      "state": "S"
+    },
+    "sentinel": {
+      "pgid": 690849,
+      "pid": 690849,
+      "ppid": 690847,
+      "start_ticks": 9590253,
+      "state": "S"
+    },
+    "worker": {
+      "pgid": 690851,
+      "pid": 690853,
+      "ppid": 690851,
+      "start_ticks": 9590253,
+      "state": "S"
+    }
+  },
+  "observed_monotonic": 95902.812931896,
+  "request": {
+    "case": "managed",
+    "challenge_ack_count": "3",
+    "challenge_ok": "1",
+    "fixture_root": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/tmp/rhai-sys-test-690847-managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit-0",
+    "group": "690851",
+    "leader_pgid": "690851",
+    "leader_pid": "690851",
+    "leader_start_ticks": "9590253",
+    "leaf_pgid": "690851",
+    "leaf_pid": "690855",
+    "leaf_start_ticks": "9590253",
+    "request_id": "managed-690847",
+    "sentinel_pgid": "690849",
+    "sentinel_pid": "690849",
+    "sentinel_start_ticks": "9590253",
+    "test_pid": "690847",
+    "test_start_ticks": "9590253",
+    "worker_pgid": "690851",
+    "worker_pid": "690853",
+    "worker_start_ticks": "9590253"
+  }
+}

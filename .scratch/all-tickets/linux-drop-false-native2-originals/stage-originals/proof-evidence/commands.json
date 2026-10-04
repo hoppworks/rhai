@@ -1,0 +1,161 @@
+[
+  {
+    "argv": [
+      "/root/.cargo/bin/rustup",
+      "toolchain",
+      "install",
+      "1.77.2-x86_64-unknown-linux-gnu",
+      "--profile",
+      "minimal",
+      "--no-self-update"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 23.602,
+    "name": "rustup-install",
+    "spawned": true,
+    "started_monotonic_seconds": 0.057,
+    "status": 0,
+    "stderr": "evidence/rustup-install.stderr",
+    "stdout": "evidence/rustup-install.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+      "--version",
+      "--verbose"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/source",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 23.728,
+    "name": "rustc-version",
+    "spawned": true,
+    "started_monotonic_seconds": 23.602,
+    "status": 0,
+    "stderr": "evidence/rustc-version.stderr",
+    "stdout": "evidence/rustc-version.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "--version",
+      "--verbose"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/source",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 23.853,
+    "name": "cargo-version",
+    "spawned": true,
+    "started_monotonic_seconds": 23.728,
+    "status": 0,
+    "stderr": "evidence/cargo-version.stderr",
+    "stdout": "evidence/cargo-version.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys",
+      "--test",
+      "sys_process",
+      "direct_spawn_kill_on_drop_false_preserves_child_and_capture",
+      "--",
+      "--exact",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/source",
+    "env_overrides": {},
+    "expected_status": 101,
+    "finished_monotonic_seconds": 38.464,
+    "name": "direct-red",
+    "spawned": true,
+    "started_monotonic_seconds": 23.856,
+    "status": 101,
+    "stderr": "evidence/direct-red.stderr",
+    "stdout": "evidence/direct-red.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys",
+      "--test",
+      "sys_process",
+      "managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit",
+      "--",
+      "--exact",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/source",
+    "env_overrides": {},
+    "expected_status": 101,
+    "finished_monotonic_seconds": 39.926,
+    "name": "managed-red",
+    "spawned": true,
+    "started_monotonic_seconds": 38.465,
+    "status": 101,
+    "stderr": "evidence/managed-red.stderr",
+    "stdout": "evidence/managed-red.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys",
+      "--test",
+      "sys_process",
+      "direct_spawn_kill_on_drop_false_preserves_child_and_capture",
+      "--",
+      "--exact",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/source",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 41.398,
+    "name": "direct-green",
+    "spawned": true,
+    "started_monotonic_seconds": 39.937,
+    "status": 0,
+    "stderr": "evidence/direct-green.stderr",
+    "stdout": "evidence/direct-green.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys",
+      "--test",
+      "sys_process",
+      "managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit",
+      "--",
+      "--exact",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-l4b8wpaz/source",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 41.849,
+    "name": "managed-green",
+    "spawned": true,
+    "started_monotonic_seconds": 41.409,
+    "status": 0,
+    "stderr": "evidence/managed-green.stderr",
+    "stdout": "evidence/managed-green.stdout"
+  }
+]

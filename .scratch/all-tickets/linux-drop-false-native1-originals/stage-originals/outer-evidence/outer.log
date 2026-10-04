@@ -1,0 +1,64 @@
+launch_utc=2026-10-04T08:46:23Z
+outer_timeout_seconds=600
+stage=/root/rhai-linux-drop-false-523-20261004
+scope=/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004
+archive-build-source.py: OK
+source.tar: OK
+Cargo.lock.accepted: OK
+check-linux-current-msrv-examples.py: OK
+drop-false-observer-handshake.patch: OK
+drop-false-observer.py: OK
+linux-drop-false-proof.py: OK
+contract.md: OK
+launch.sh: OK
+runner/tools/run_scoped.py: OK
+runner/tools/agentskills/__init__.py: OK
+runner/tools/agentskills/pyguard.py: OK
+adaptive_runner_timeout_seconds=570
+PRIVATE_RUNTIME /root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2
+command=rustup-install argv=['/root/.cargo/bin/rustup', 'toolchain', 'install', '1.77.2-x86_64-unknown-linux-gnu', '--profile', 'minimal', '--no-self-update']
+sample={"descendants": 2, "monotonic_seconds": 0.071, "rss_kib": 44760, "storage_kib": 7228}
+sample={"descendants": 2, "monotonic_seconds": 1.085, "rss_kib": 67608, "storage_kib": 23840}
+sample={"descendants": 2, "monotonic_seconds": 2.099, "rss_kib": 55452, "storage_kib": 77916}
+sample={"descendants": 2, "monotonic_seconds": 3.112, "rss_kib": 171952, "storage_kib": 142920}
+sample={"descendants": 2, "monotonic_seconds": 4.126, "rss_kib": 151636, "storage_kib": 259788}
+sample={"descendants": 2, "monotonic_seconds": 5.14, "rss_kib": 265596, "storage_kib": 325124}
+sample={"descendants": 2, "monotonic_seconds": 6.154, "rss_kib": 414776, "storage_kib": 467292}
+sample={"descendants": 1, "monotonic_seconds": 6.967, "rss_kib": 29400, "storage_kib": 466916}
+status=rustup-install:0
+command=rustc-version argv=['/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 6.979, "rss_kib": 29408, "storage_kib": 466924}
+sample={"descendants": 1, "monotonic_seconds": 7.092, "rss_kib": 29260, "storage_kib": 466928}
+status=rustc-version:0
+command=cargo-version argv=['/root/.local/share/agent-builds/rhai/linux-drop-false-523-20261004/agent-build-lf2v0cr2/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 7.104, "rss_kib": 29256, "storage_kib": 466932}
+sample={"descendants": 1, "monotonic_seconds": 7.217, "rss_kib": 29400, "storage_kib": 466936}
+status=cargo-version:0
+Traceback (most recent call last):
+  File "/root/rhai-linux-drop-false-523-20261004/linux-drop-false-proof.py", line 265, in <module>
+    status = main()
+  File "/root/rhai-linux-drop-false-523-20261004/linux-drop-false-proof.py", line 179, in main
+    subprocess.run(['patch', '--batch', '--forward', '-p1', '-i', str(patch)], cwd=BASE.SOURCE, check=True,
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                   stdout=(BASE.STAGE / 'patch-apply.stdout').open('wb'), stderr=(BASE.STAGE / 'patch-apply.stderr').open('wb'))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.14/subprocess.py", line 555, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.14/subprocess.py", line 1039, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib64/python3.14/subprocess.py", line 1990, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'patch'
+/root/rhai-linux-drop-false-523-20261004/launch.sh: line 186: /proc/620477/stat: No such file or directory
+run_scoped_status=1
+runtime_cleanup_status=0 pid_readback_status=0 scope_cleanup_status=0
+outer_status=1
