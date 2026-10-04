@@ -82,7 +82,7 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 ## Current step and next action
 
 Instructions faba3db unchanged/loaded; full goal active/incomplete. Sole fork
-main last independently read back atea074cc3b841654ea3380787b59d5b20e9a9d623.
+main last independently read back atc55f42f25cb865b56bebae379555ea21227862bf.
 Accepted109 proof/source523 unchanged; no retained native resources, all finite
 concurrency exceptions expired. Unix109 consumed; native110 unallocated.
 
@@ -307,6 +307,31 @@ permits Tauron window coordination if fresh contention requires it. Final native
 Linux/macOS/Windows, feature/MSRV/release and stdin/fault/lifecycle criteria remain
 open. Current turn PROGRESS: failed Expert18 follow-up recorded once and dependent
 path stopped; independent required example package dispatched. No OS acceptance.
+
+Continuation checkpoint: previous goal turn VERIFIED WAIT on active Tauron
+turn01a10435-33b7-77d1-b68d-98f282f2c9a5. Fresh default-slot readback finds
+successor foreign launcher3002524/start6397841 and supervisor3002525/start6397844
+still matching and live, with Cargo/rustc in the supervisor group. Root sent the
+human-authorized window follow-up to the same Tauron chat after observing this
+successor; no foreign process was modified. Latest compact chat cursor:8 remains
+active/inProgress. No window confirmation or Rhai native launch.
+The new root-owned process-example-preflight.py verifies all ten actual input
+hashes, exact manifest ordering, canonical stage, absent prescribed scope/terminal/
+proof destination, available memory/disk and actual runner/compiler argv. Its
+first local manifest-order assertion was corrected to match the frozen manifest;
+this was a prelaunch infrastructure observation, not a native or product failure.
+Corrected preflight verified every input and refused launch because the foreign
+slot is occupied. No allocation and no consumed native slot. Source663 and
+recipefa0 remain unchanged. Root independently read fork solemainc55f42f2.
+Same responsible Standard now prepares only the minimal independent original
+collection/fresh-custody/hash-gated retirement recipe, reusing accepted sys/net
+patterns, in its owned worktree; no remote execution or source/recipe mutation.
+Current faba3db revision confirmed. Thirty-minute active planning checkpoint;
+keep prior approximately45-minute example preparation and stopped chains intact.
+Next freeze -> same combined reviewer affected collection delta -> free-slot
+fresh preflight -> existing bounded launcher -> original collection/readback and
+exact cleanup. The accepted example run recipe does not depend on the stopped
+stdin classifier. Overall release requirements remain open.
 
 ### Earlier current-step history (retained, superseded)
 
