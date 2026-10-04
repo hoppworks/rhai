@@ -45,3 +45,34 @@ Accepted source archive SHA256: `d75e7b83289081ad95c097763ac93c55520815bb5ea20a2
 | launch-linux-current-msrv-examples.sh | a2892f29e42ee456c4d2ca6e88944e0da1f69d8dbdff2a5512fe220401c4456a |
 | stage-linux-current-msrv-examples.sh | 570af5413b0f2d6faf56e655a89bbfc8e886e20139868053bad86fbebcf487e5 |
 | linux-sys-process-example-contract.md | 410055e2de6d9b856ab1a53f0fd07153c87369849bca11291f8753402d4c993c |
+
+
+---
+
+## Affected correction recheck — fa0d91d56ecb48c066a314ba9699f473204d954f
+
+**READY for bounded execution preparation; compilation/native acceptance unverified.** Compared only with the reviewed `012e20f70dbef81fe08954af96459e59a03d1caf` package and affected dependencies. Both original findings are resolved. No new material blocker found. This verdict supersedes the original preparation NOT READY while preserving its findings and evidence. Stdin Expert18 STOP, native110 unallocated, earlier limits/history and unaffected example-review conclusions remain unchanged.
+
+Applicable rules revision independently reconfirmed `faba3db3bef6891ad2c0b20d434963bb8fe9572d`; existing named Expert/ocr-delegate context retained. OCR preview identified six changed files, four selected and two Markdown exclusions (`unsupported_ext`). Explicit rule resolution included all six; both Markdown files manually reviewed. Coverage 6/6, skipped0. No Cargo/src/tests changes or unrelated proof re-review. No build, native run, SSH, staging, source/recipe edits, install, push or runtime cleanup.
+
+### Resolved findings and affected dependencies
+
+- The child now writes the entire PID/readiness record to `spawn-ready.tmp` and, only after successful `fs::write`, renames that sibling to `spawn-ready.txt`. Same-directory Unix rename publishes the finished record atomically to the existing parent `is_file`/read sequence. The directory is unique and owned; no second fixture writer or old ready file exists in this invocation. Write/rename errors propagate and the existing fixture/host cleanup owns failure. Exact `child.id` comparison, pending UNIT assertion before release, finite release wait, final result equality and independent host effects remain intact. Docs reflect this ordering. No compilation/runtime result is inferred.
+- Launcher passes the computed `runner_timeout_seconds` to `run_scoped.py`; the old 600-second runner argument is removed. It uses `min(585, 600 - elapsed - 15 - 1)`, rejects nonpositive budget before creating the scope, records the chosen bound, and reserves the one-second Bash rounding guard. The actual Bash arithmetic fragment independently returned584/583/564/484/1 for elapsed0/1/20/100/583, and refused elapsed584/600. These are local arithmetic models, not native launcher execution.
+- At elapsed595, an outstanding non-zombie runner is signalled only after its recorded numeric PID/start identity matches a fresh `/proc` read. A changed/unreadable identity stops dependent cleanup and preserves the scope. An already absent/zombie runner follows normal status collection. The reviewed pinned runner handles TERM by returning a nonzero signal status and cleaning its own supervised group. `runner_stop_requested` is retained and forces outer failure even if a later status could otherwise look successful. No broad process match or foreign group kill is introduced. The normal bounded wait ends at600; failure can preserve an outstanding runner/scope for exact later readback. This is an honest failure path, not proof of successful cleanup. The contract now correctly calls600 an outer wait bound; filesystem operations and the subsequent finite readback are not a hard wall-clock timer supplied by this script.
+- Cooperative helper deadlines remain work510/export540, with deadline checks between copied items. Checker export receipt and contract explicitly state that individual copies are not preemptible and partial original evidence may remain on failure. Existing refusal to overwrite evidence, finally restoration/export attempts, nonzero export failures, exact launcher readback and empty-scope removal are preserved. An incomplete/terminated invocation cannot satisfy acceptance. Independent host collection/hash comparison and fresh exact cleanup/readback remain required before accepting or retiring its retained stage, as recorded in the original review.
+
+Source freeze/pin consumers consistently name `66379d3012ae606e278a0aaba8498846e1bd24cb`, archive `0ab9ec63c8f4b5d603be0bbcd0f4d582d8ef0a3e08ceb188841ed961828c884b`, and the new `66379d30` stage/scope. The lock and pinned runner/helpers are unchanged. Parent independently reproduced accepted-helper archive identity and source/docs/example byte equality; no execution proof is supplied by that identity check. Source restoration records, same-build six controls, API/platform/no_float limitations and historical sys/net proof separation retain their earlier applicability. The new stage/scope are unallocated.
+
+Python AST and both Bash syntax checks passed. New termination wiring was reviewed structurally against the immutable pinned runner; no signal/proc behavior was modeled as OS proof. Real Rust1.77.2 compilation, process RED/GREEN, original output/status/resource receipts, complete export and independent host custody/cleanup are still required.
+
+### Independently checked frozen SHA256 values
+
+| File | SHA256 |
+|---|---|
+| examples/sys_process.rs | 3364188251bc581402398416a2b5ea8f3a16fdda35cb302d5f3260069de4d091 |
+| docs/sys-process.md | 494e600eaec6398675e0347ab1f7b83cb8ad87a13dc004c31fca18a21e699b78 |
+| check-linux-current-msrv-examples.py | 55c2a4a4c177f468757275a2691f73002a984a63b4c7cbba87314813a4b03d69 |
+| launch-linux-current-msrv-examples.sh | 2381ebb7dd8bb29bedb55f5dbcd9b1d12b732834c00f2fc747d439b0f6902d6d |
+| stage-linux-current-msrv-examples.sh | d80d5f8e353a160a400a0b3f851e65abe9eb314b771d5004524d51c54e0dd415 |
+| linux-sys-process-example-contract.md | cba45561b10b29689bbd712c7cc8b601647c71fd0c8f99d686f879a27abcbc4a |

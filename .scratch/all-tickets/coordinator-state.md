@@ -252,9 +252,57 @@ No Cargo/SSH/stage/native allocation/push during preparation. Thirty-minute acti
 planning checkpoint for correction; preserve initial approximately30 minutes and
 separate stopped classifier77+unknown. Correction failures for this package0.
 
-Next: collect frozen consolidated process-example correction -> same independent
-reviewer rechecks affected source/dependencies -> if READY, fresh measured slot
-and existing scoped real acceptance route. Native110 stays unallocated. Human
+First consolidated correction frozen fa0d91d56ecb48c066a314ba9699f473204d954f;
+source-only66379d3012ae606e278a0aaba8498846e1bd24cb changes example/docs only.
+Root independently reproduced accepted-helper archive0ab9ec63c8f4b5d603be0bbcd0f4d582d8ef0a3e08ceb188841ed961828c884b,
+6471680 bytes, .scratch excluded and manifest/example/docs match source Git.
+Root verified exact hoppworks author/committer, six-file affected correction,
+no production/test/manifest changes and recipe-only final commit. Four Git blob
+hashes independently match checker55c2a4a4c177f468757275a2691f73002a984a63b4c7cbba87314813a4b03d69,
+stage d80d5f8e353a160a400a0b3f851e65abe9eb314b771d5004524d51c54e0dd415,
+launcher2381ebb7dd8bb29bedb55f5dbcd9b1d12b732834c00f2fc747d439b0f6902d6d,
+contractcba45561b10b29689bbd712c7cc8b601647c71fd0c8f99d686f879a27abcbc4a.
+Writer reports local actual filesystem ordering reproduction and timeout models,
+AST/bash/rustfmt/archive/diff checks passed; these are not native proof. Corrective
+work approximately15 minutes plus initial30; stopped stdin77+unknown unchanged.
+Same Expert escaped_recipe_review is active on the affected source/dependency
+recheck; no failed completed correction counted until result. New66379d30
+stage/scope and all native resources unallocated. Latest fork independent
+readback only main48609a91884309c5ec33c73e87d61a5c8faf2f44.
+
+Affected independent recheck of fa0d91d5 is READY for bounded execution
+preparation: both initial findings closed; no new material blocker. Complete
+updated report linux-process-example-review.md retains initial history. Source,
+recipe and runner byte identities independently confirmed before staging.
+Compilation/native/custody/cleanup acceptance remains unverified; failed
+completed corrections for this distinct package0.
+Fresh workhorse measurement sees foreign Tauron G60f launcher2963401/start6353780
+and supervisor2963402/start6353782 (compiler group2963402),32CPU,
+MemAvailable78445360KiB, diskfree725563539456bytes, load4.27/12.19/13.46.
+No capacity reservation or concurrency exception. Owner-authorized Tauron message
+sent to chat01a0fe32-5425-71d2-887b-3bf1bac284e7 for a ten-minute window after
+its current bounded run; preserve all foreign processes. Use defaultoneheavy.
+Root will stage only this package's immutable source/recipes into absent owned
+/root/rhai-linux-sys-process-example-66379d30-20261004 (canonical identity will
+be read back). This is source/evidence staging, no retained build. Owned future
+scope /root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004
+must be absent before launch. Preserve originals, independent hash/custody export,
+then exact stage retirement; no broad cleanup. No native launch allocated yet.
+
+Staging finished status0. Root independently read every ten remote input hashes
+against frozen identities, including recipes/runner/archive/lock, and exact
+manifest equality; no self-generated manifest substituted for immutable pins.
+Canonical owned stage /var/roothome/rhai-linux-sys-process-example-66379d30-20261004.
+Scope, outer terminal and proof-evidence absent; native example not launched.
+Tauron chat is confirmed active; compact cursor
+0c42f2fc-8dd8-448e-8925-e56cf07c6c48:1, turn01a10435-33b7-77d1-b68d-98f282f2c9a5
+inProgress. Window request sent, no reply/slot acceptance yet. A transient wait
+or observation timeout is not terminal and cannot authorize restarting anything.
+
+Next: coordinate free heavy slot and fresh capacity/input check -> one bounded
+real examples invocation -> independent original receipts/readback and exact
+owned cleanup. All six control/positive
+rows and all source/lock/manifest/restoration/cleanup criteria must pass. Native110 stays unallocated. Human
 permits Tauron window coordination if fresh contention requires it. Final native
 Linux/macOS/Windows, feature/MSRV/release and stdin/fault/lifecycle criteria remain
 open. Current turn PROGRESS: failed Expert18 follow-up recorded once and dependent
