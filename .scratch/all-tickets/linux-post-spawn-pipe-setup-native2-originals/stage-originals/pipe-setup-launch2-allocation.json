@@ -1,0 +1,24 @@
+{
+  "source": "523608648dcae99bc0f6b46eaf2bb91fa4ecc752",
+  "native_pipe_setup_launch": 2,
+  "preflight": {
+    "utc": "2026-10-04T10:41:53Z",
+    "stage": "/var/roothome/rhai-linux-post-spawn-pipe-setup-523-20261004",
+    "inputs_verified": 10,
+    "scope_absent": true,
+    "heavy": [],
+    "allowed_heavy": true,
+    "mem_available_kib": 82351236,
+    "disk_free_bytes": 724395134976,
+    "load": [
+      2.02587890625,
+      2.45068359375,
+      3.322265625
+    ],
+    "ready": true
+  },
+  "outer_seconds": 600,
+  "runner_seconds": 585,
+  "helper_seconds": 540,
+  "history": "pipe-setup optionalMSRV followup, native1 setup-cwd failure consumed, native2 prospective; existing native80/mac81 positive unchanged; prior histories retained; native110 and stopped paths not renewed"
+}

@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/root/rhai-linux-post-spawn-pipe-setup-523-20261004/linux-post-spawn-pipe-setup-proof.py", line 131, in <module>
+    try: status=main()
+                ~~~~^^
+  File "/root/rhai-linux-post-spawn-pipe-setup-523-20261004/linux-post-spawn-pipe-setup-proof.py", line 84, in main
+    BASE.run_command('rustc-version',[str(rustc),'--version','--verbose'],env);BASE.run_command('cargo-version',[str(cargo),'--version','--verbose'],env)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-post-spawn-pipe-setup-523-20261004/check-linux-current-msrv-examples.py", line 271, in run_command
+    raise RuntimeError(f'command working directory does not exist: {command_cwd}')
+RuntimeError: command working directory does not exist: /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-57hvjg6e/source

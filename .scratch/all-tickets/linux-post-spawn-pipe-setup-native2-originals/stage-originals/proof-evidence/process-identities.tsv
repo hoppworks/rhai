@@ -1,0 +1,103 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+helper	1022194	1022193	1022193	10170414	python3 /root/rhai-linux-post-spawn-pipe-setup-523-20261004/linux-post-spawn-pipe-setup-proof.py
+scoped-supervisor	1022193	1022190	1022193	10170412	/usr/bin/python3 /var/roothome/rhai-linux-post-spawn-pipe-setup-523-20261004/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-post-spawn-pipe-setup-523-20261004/linux-post-spawn-pipe-setup-proof.py
+command:rustup-install	1022195	1022194	1022193	10170418	/root/.cargo/bin/rustup toolchain install 1.77.2-x86_64-unknown-linux-gnu --profile minimal --no-self-update
+command:du	1022196	1022194	1022193	10170418	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1022202	1022194	1022193	10170418	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1022235	1022194	1022193	10170519	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1022236	1022194	1022193	10170519	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1022251	1022194	1022193	10170621	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1022252	1022194	1022193	10170621	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1022273	1022194	1022193	10170722	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1022274	1022194	1022193	10170722	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1022288	1022194	1022193	10170823	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1022289	1022194	1022193	10170824	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1022310	1022194	1022193	10170925	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1022311	1022194	1022193	10170925	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1022325	1022194	1022193	10171026	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1022326	1022194	1022193	10171027	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1022337	1022194	1022193	10171098	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1022338	1022194	1022193	10171098	/bin/ps -e -o pid=,ppid=,rss=
+command:rustc-version	1022339	1022194	1022193	10171099	/root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose
+command:du	1022340	1022194	1022193	10171099	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1022341	1022194	1022193	10171099	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1022343	1022194	1022193	10171110	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1022344	1022194	1022193	10171110	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-version	1022345	1022194	1022193	10171111	/root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose
+command:du	1022346	1022194	1022193	10171111	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1022347	1022194	1022193	10171111	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1022360	1022194	1022193	10171122	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1022361	1022194	1022193	10171122	/bin/ps -e -o pid=,ppid=,rss=
+command:wrong-cause-red	1022363	1022194	1022193	10171128	/root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --lib --features testing-environ,sys packages::sys::process::unix::tests::post_spawn_pipe_setup_failure_preserves_cause_and_reaps_child -- --exact --nocapture --test-threads=1
+command:du	1022364	1022194	1022193	10171128	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1022365	1022194	1022193	10171128	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1022385	1022194	1022193	10171229	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1022386	1022194	1022193	10171229	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1022402	1022194	1022193	10171330	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1022403	1022194	1022193	10171331	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1022417	1022194	1022193	10171432	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1022418	1022194	1022193	10171432	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1022431	1022194	1022193	10171533	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1022432	1022194	1022193	10171533	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1022446	1022194	1022193	10171634	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1022447	1022194	1022193	10171635	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1022661	1022194	1022193	10171736	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1022662	1022194	1022193	10171737	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1022852	1022194	1022193	10171838	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1022856	1022194	1022193	10171839	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1023049	1022194	1022193	10171940	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1023053	1022194	1022193	10171941	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1023138	1022194	1022193	10172042	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1023139	1022194	1022193	10172043	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1023186	1022194	1022193	10172144	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1023192	1022194	1022193	10172145	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1023306	1022194	1022193	10172246	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1023307	1022194	1022193	10172247	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1023321	1022194	1022193	10172348	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1023322	1022194	1022193	10172349	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1023334	1022194	1022193	10172450	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1023335	1022194	1022193	10172451	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1023361	1022194	1022193	10172552	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1023362	1022194	1022193	10172553	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1023384	1022194	1022193	10172654	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1023386	1022194	1022193	10172655	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1023414	1022194	1022193	10172756	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1023415	1022194	1022193	10172757	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1023428	1022194	1022193	10172858	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1023429	1022194	1022193	10172859	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1023440	1022194	1022193	10172930	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1023442	1022194	1022193	10172931	/bin/ps -e -o pid=,ppid=,rss=
+command:wrong-incomplete-report-red	1023443	1022194	1022193	10172932	/root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --lib --features testing-environ,sys packages::sys::process::unix::tests::post_spawn_pipe_setup_failure_preserves_cause_and_reaps_child -- --exact --nocapture --test-threads=1
+command:du	1023444	1022194	1022193	10172932	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1023449	1022194	1022193	10172933	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1023465	1022194	1022193	10173034	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1023466	1022194	1022193	10173035	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1023478	1022194	1022193	10173136	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1023479	1022194	1022193	10173137	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1023492	1022194	1022193	10173238	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1023493	1022194	1022193	10173239	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1023519	1022194	1022193	10173340	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1023520	1022194	1022193	10173341	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1023549	1022194	1022193	10173442	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1023550	1022194	1022193	10173443	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1023563	1022194	1022193	10173544	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1023565	1022194	1022193	10173545	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1023580	1022194	1022193	10173646	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1023581	1022194	1022193	10173647	/bin/ps -e -o pid=,ppid=,rss=
+command:restored-green	1023582	1022194	1022193	10173648	/root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --lib --features testing-environ,sys packages::sys::process::unix::tests::post_spawn_pipe_setup_failure_preserves_cause_and_reaps_child -- --exact --nocapture --test-threads=1
+command:du	1023583	1022194	1022193	10173648	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1023588	1022194	1022193	10173649	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1023605	1022194	1022193	10173750	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1023606	1022194	1022193	10173751	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1023619	1022194	1022193	10173852	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1023620	1022194	1022193	10173853	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1023632	1022194	1022193	10173954	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1023633	1022194	1022193	10173955	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1023659	1022194	1022193	10174056	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1023660	1022194	1022193	10174057	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1023688	1022194	1022193	10174158	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1023689	1022194	1022193	10174159	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1023705	1022194	1022193	10174260	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1023706	1022194	1022193	10174261	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1023719	1022194	1022193	10174362	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command:ps	1023720	1022194	1022193	10174362	/bin/ps -e -o pid=,ppid=,rss=

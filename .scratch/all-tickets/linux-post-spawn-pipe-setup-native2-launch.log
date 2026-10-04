@@ -1,0 +1,7 @@
+SLOT_OBSERVATION {"returncode": 255, "stdout": "", "stderr": "Host key verification failed.\n"}
+Traceback (most recent call last):
+  File "<string>", line 13, in <module>
+    if p.returncode!=3:raise RuntimeError('preflight infrastructure failure: '+p.stderr)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: preflight infrastructure failure: Host key verification failed.
+

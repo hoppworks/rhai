@@ -1,0 +1,14 @@
+{
+  "identities_checked": 104,
+  "owned_groups_empty": [
+    1022120,
+    1022193
+  ],
+  "paths_absent": [
+    "/root/rhai-linux-post-spawn-pipe-setup-523-20261004",
+    "/var/roothome/rhai-linux-post-spawn-pipe-setup-523-20261004",
+    "/root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004",
+    "/root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_"
+  ],
+  "fresh_independent_closure": true
+}

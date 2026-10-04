@@ -1,0 +1,8 @@
+{
+  "cargo_lock_sha256_after_execution": null,
+  "error": "restoration incomplete",
+  "injected_example_sha256": {},
+  "manifest_sha256": {},
+  "original_example_sha256": {},
+  "restored_examples_match_original_bytes": false
+}

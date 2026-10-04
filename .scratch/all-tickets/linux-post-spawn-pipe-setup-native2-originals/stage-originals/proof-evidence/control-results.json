@@ -1,0 +1,38 @@
+[
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "wrong-cause-red",
+    "required_diagnostics": [
+      "primary cause must remain configure-pipe Io"
+    ],
+    "required_output": [
+      "setup-failure child_pid=1023407 reap=ESRCH owner_retired=true",
+      "setup-failure fixture child_pid=1023407 reap=ESRCH"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "wrong-incomplete-report-red",
+    "required_diagnostics": [
+      "setup failure must not fabricate EOF or timeout completion"
+    ],
+    "required_output": [
+      "setup-failure child_pid=1023547 reap=ESRCH owner_retired=true",
+      "setup-failure fixture child_pid=1023547 reap=ESRCH"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": [
+      "test packages::sys::process::unix::tests::post_spawn_pipe_setup_failure_preserves_cause_and_reaps_child ... ok",
+      "setup-failure child_pid=1023686 reap=ESRCH owner_retired=true",
+      "setup-failure fixture child_pid=1023686 reap=ESRCH"
+    ],
+    "name": "restored-green",
+    "status": 0
+  }
+]

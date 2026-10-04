@@ -345,3 +345,20 @@ review. No production delta was required; relevant source matches integrated63d9
 Only this Linux criterion closes. Remaining pipe-setup fault controls, stdin,
 other platforms/features, performance and final release acceptance remain open.
 No stopped retry/cause chain is renewed by this partial acceptance.
+
+
+## Accepted Linux post-spawn pipe configuration failure — 2026-10-04
+
+Baseline523608648dcae99bc0f6b46eaf2bb91fa4ecc752/currentba3 unchanged
+production/test source, private native Linux Rust/Cargo1.77.2, testing-environ,sys:
+a real Rhai Engine/SysPackage run and real shell child preserve the typed
+configure-pipe I/O cause, report honest incomplete captures, reap the child and
+retire the owner. Wrong-cause and wrong-completion controls each fail101 after
+inner/outer ESRCH readbacks; restored source passes0. Combined review accepts
+53 immutable originals/five directories,104 identity/two-group/four-path fresh
+closure and exact retirement. See ../../all-tickets/linux-post-spawn-pipe-setup-proof.md
+and the combined report. Native1 pre-extraction-cwd failure and native2 consumer
+cwd correction remain recorded; valid native proof was reused without another
+build or original export. Only this named Linux fault criterion closes. Stdin,
+other lifecycle/fault paths, other platforms/features, performance, API metadata
+and full release acceptance remain open; stopped retry histories are unchanged.

@@ -1,0 +1,181 @@
+{
+  "acceptance_claim": false,
+  "commands": [
+    {
+      "argv": [
+        "/root/.cargo/bin/rustup",
+        "toolchain",
+        "install",
+        "1.77.2-x86_64-unknown-linux-gnu",
+        "--profile",
+        "minimal",
+        "--no-self-update"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_",
+      "env_overrides": {},
+      "expected_status": 0,
+      "finished_monotonic_seconds": 6.819,
+      "name": "rustup-install",
+      "spawned": true,
+      "started_monotonic_seconds": 0.01,
+      "status": 0,
+      "stderr": "evidence/rustup-install.stderr",
+      "stdout": "evidence/rustup-install.stdout"
+    },
+    {
+      "argv": [
+        "/root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+        "--version",
+        "--verbose"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_",
+      "env_overrides": {},
+      "expected_status": 0,
+      "finished_monotonic_seconds": 6.94,
+      "name": "rustc-version",
+      "spawned": true,
+      "started_monotonic_seconds": 6.819,
+      "status": 0,
+      "stderr": "evidence/rustc-version.stderr",
+      "stdout": "evidence/rustc-version.stdout"
+    },
+    {
+      "argv": [
+        "/root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+        "--version",
+        "--verbose"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_",
+      "env_overrides": {},
+      "expected_status": 0,
+      "finished_monotonic_seconds": 7.059,
+      "name": "cargo-version",
+      "spawned": true,
+      "started_monotonic_seconds": 6.94,
+      "status": 0,
+      "stderr": "evidence/cargo-version.stderr",
+      "stdout": "evidence/cargo-version.stdout"
+    },
+    {
+      "argv": [
+        "/root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--locked",
+        "--lib",
+        "--features",
+        "testing-environ,sys",
+        "packages::sys::process::unix::tests::post_spawn_pipe_setup_failure_preserves_cause_and_reaps_child",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_/source",
+      "env_overrides": {},
+      "expected_status": 101,
+      "finished_monotonic_seconds": 25.149,
+      "name": "wrong-cause-red",
+      "spawned": true,
+      "started_monotonic_seconds": 7.108,
+      "status": 101,
+      "stderr": "evidence/wrong-cause-red.stderr",
+      "stdout": "evidence/wrong-cause-red.stdout"
+    },
+    {
+      "argv": [
+        "/root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--locked",
+        "--lib",
+        "--features",
+        "testing-environ,sys",
+        "packages::sys::process::unix::tests::post_spawn_pipe_setup_failure_preserves_cause_and_reaps_child",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_/source",
+      "env_overrides": {},
+      "expected_status": 101,
+      "finished_monotonic_seconds": 32.306,
+      "name": "wrong-incomplete-report-red",
+      "spawned": true,
+      "started_monotonic_seconds": 25.15,
+      "status": 101,
+      "stderr": "evidence/wrong-incomplete-report-red.stderr",
+      "stdout": "evidence/wrong-incomplete-report-red.stdout"
+    },
+    {
+      "argv": [
+        "/root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--locked",
+        "--lib",
+        "--features",
+        "testing-environ,sys",
+        "packages::sys::process::unix::tests::post_spawn_pipe_setup_failure_preserves_cause_and_reaps_child",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_/source",
+      "env_overrides": {},
+      "expected_status": 0,
+      "finished_monotonic_seconds": 39.464,
+      "name": "restored-green",
+      "spawned": true,
+      "started_monotonic_seconds": 32.307,
+      "status": 0,
+      "stderr": "evidence/restored-green.stderr",
+      "stdout": "evidence/restored-green.stdout"
+    }
+  ],
+  "compatible_lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "controls": [
+    {
+      "expected_status": 101,
+      "intended_assertion_observed": true,
+      "name": "wrong-cause-red",
+      "required_diagnostics": [
+        "primary cause must remain configure-pipe Io"
+      ],
+      "required_output": [
+        "setup-failure child_pid=1023407 reap=ESRCH owner_retired=true",
+        "setup-failure fixture child_pid=1023407 reap=ESRCH"
+      ],
+      "status": 101
+    },
+    {
+      "expected_status": 101,
+      "intended_assertion_observed": true,
+      "name": "wrong-incomplete-report-red",
+      "required_diagnostics": [
+        "setup failure must not fabricate EOF or timeout completion"
+      ],
+      "required_output": [
+        "setup-failure child_pid=1023547 reap=ESRCH owner_retired=true",
+        "setup-failure fixture child_pid=1023547 reap=ESRCH"
+      ],
+      "status": 101
+    },
+    {
+      "expected_status": 0,
+      "independent_readback": [
+        "test packages::sys::process::unix::tests::post_spawn_pipe_setup_failure_preserves_cause_and_reaps_child ... ok",
+        "setup-failure child_pid=1023686 reap=ESRCH owner_retired=true",
+        "setup-failure fixture child_pid=1023686 reap=ESRCH"
+      ],
+      "name": "restored-green",
+      "status": 0
+    }
+  ],
+  "features": "testing-environ,sys",
+  "interrupted_signal": null,
+  "source_archive_sha256": "998c31fab8c3026f292ef13484a8b112da90e5ead1e0288845bffeee9186179b",
+  "source_restored_to_baseline": true,
+  "source_revision": "523608648dcae99bc0f6b46eaf2bb91fa4ecc752",
+  "test_name": "packages::sys::process::unix::tests::post_spawn_pipe_setup_failure_preserves_cause_and_reaps_child",
+  "test_source_sha256": "1b60751c6d9ed695f79edc4f8a7972338274684ef53583bd1ea1009c1aca822a"
+}

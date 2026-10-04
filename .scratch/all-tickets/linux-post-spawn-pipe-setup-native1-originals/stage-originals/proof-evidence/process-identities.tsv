@@ -1,0 +1,20 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+helper	995976	995974	995974	10106456	python3 /root/rhai-linux-post-spawn-pipe-setup-523-20261004/linux-post-spawn-pipe-setup-proof.py
+scoped-supervisor	995974	995961	995974	10106455	/usr/bin/python3 /var/roothome/rhai-linux-post-spawn-pipe-setup-523-20261004/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-post-spawn-pipe-setup-523-20261004/linux-post-spawn-pipe-setup-proof.py
+command:rustup-install	995978	995976	995974	10106461	/root/.cargo/bin/rustup toolchain install 1.77.2-x86_64-unknown-linux-gnu --profile minimal --no-self-update
+command:du	995979	995976	995974	10106461	
+command:ps	995988	995976	995974	10106461	/bin/ps -e -o pid=,ppid=,rss=
+command:du	996029	995976	995974	10106562	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-57hvjg6e
+command:ps	996030	995976	995974	10106562	/bin/ps -e -o pid=,ppid=,rss=
+command:du	996066	995976	995974	10106663	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-57hvjg6e
+command:ps	996067	995976	995974	10106664	/bin/ps -e -o pid=,ppid=,rss=
+command:du	996206	995976	995974	10106765	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-57hvjg6e
+command:ps	996207	995976	995974	10106765	/bin/ps -e -o pid=,ppid=,rss=
+command:du	996233	995976	995974	10106866	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-57hvjg6e
+command:ps	996234	995976	995974	10106866	/bin/ps -e -o pid=,ppid=,rss=
+command:du	996415	995976	995974	10106968	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-57hvjg6e
+command:ps	996416	995976	995974	10106968	/bin/ps -e -o pid=,ppid=,rss=
+command:du	996449	995976	995974	10107069	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-57hvjg6e
+command:ps	996450	995976	995974	10107070	/bin/ps -e -o pid=,ppid=,rss=
+command:du	996465	995976	995974	10107171	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-57hvjg6e
+command:ps	996466	995976	995974	10107171	/bin/ps -e -o pid=,ppid=,rss=

@@ -1,0 +1,83 @@
+SLOT_OBSERVATION {"returncode": 0, "stdout": "{\n  \"utc\": \"2026-10-04T10:41:53Z\",\n  \"stage\": \"/var/roothome/rhai-linux-post-spawn-pipe-setup-523-20261004\",\n  \"inputs_verified\": 10,\n  \"scope_absent\": true,\n  \"heavy\": [],\n  \"allowed_heavy\": true,\n  \"mem_available_kib\": 82351236,\n  \"disk_free_bytes\": 724395134976,\n  \"load\": [\n    2.02587890625,\n    2.45068359375,\n    3.322265625\n  ],\n  \"ready\": true\n}\n", "stderr": ""}
+PIPE_SETUP_NATIVE2_ALLOCATED {"source": "523608648dcae99bc0f6b46eaf2bb91fa4ecc752", "native_pipe_setup_launch": 2, "preflight": {"utc": "2026-10-04T10:41:53Z", "stage": "/var/roothome/rhai-linux-post-spawn-pipe-setup-523-20261004", "inputs_verified": 10, "scope_absent": true, "heavy": [], "allowed_heavy": true, "mem_available_kib": 82351236, "disk_free_bytes": 724395134976, "load": [2.02587890625, 2.45068359375, 3.322265625], "ready": true}, "outer_seconds": 600, "runner_seconds": 585, "helper_seconds": 540, "history": "pipe-setup optionalMSRV followup, native1 setup-cwd failure consumed, native2 prospective; existing native80/mac81 positive unchanged; prior histories retained; native110 and stopped paths not renewed"}
+launch_utc=2026-10-04T10:41:53Z
+outer_timeout_seconds=600
+stage=/root/rhai-linux-post-spawn-pipe-setup-523-20261004
+scope=/root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004
+archive-build-source.py: OK
+source.tar: OK
+Cargo.lock.accepted: OK
+check-linux-current-msrv-examples.py: OK
+contract.md: OK
+linux-post-spawn-pipe-setup-proof.py: OK
+launch.sh: OK
+runner/tools/run_scoped.py: OK
+runner/tools/agentskills/__init__.py: OK
+runner/tools/agentskills/pyguard.py: OK
+adaptive_runner_timeout_seconds=570
+PRIVATE_RUNTIME /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_
+command=rustup-install argv=['/root/.cargo/bin/rustup', 'toolchain', 'install', '1.77.2-x86_64-unknown-linux-gnu', '--profile', 'minimal', '--no-self-update']
+sample={"descendants": 2, "monotonic_seconds": 0.022, "rss_kib": 44148, "storage_kib": 32}
+sample={"descendants": 2, "monotonic_seconds": 1.036, "rss_kib": 77252, "storage_kib": 18852}
+sample={"descendants": 2, "monotonic_seconds": 2.049, "rss_kib": 54448, "storage_kib": 72460}
+sample={"descendants": 2, "monotonic_seconds": 3.063, "rss_kib": 197044, "storage_kib": 169868}
+sample={"descendants": 2, "monotonic_seconds": 4.077, "rss_kib": 150624, "storage_kib": 253352}
+sample={"descendants": 2, "monotonic_seconds": 5.09, "rss_kib": 266244, "storage_kib": 317928}
+sample={"descendants": 2, "monotonic_seconds": 6.107, "rss_kib": 413672, "storage_kib": 460096}
+sample={"descendants": 1, "monotonic_seconds": 6.819, "rss_kib": 28532, "storage_kib": 459720}
+status=rustup-install:0
+command=rustc-version argv=['/root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 6.83, "rss_kib": 28420, "storage_kib": 459728}
+sample={"descendants": 1, "monotonic_seconds": 6.94, "rss_kib": 28400, "storage_kib": 459732}
+status=rustc-version:0
+command=cargo-version argv=['/root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 6.949, "rss_kib": 28548, "storage_kib": 459736}
+sample={"descendants": 1, "monotonic_seconds": 7.059, "rss_kib": 28540, "storage_kib": 459740}
+status=cargo-version:0
+command=wrong-cause-red argv=['/root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--lib', '--features', 'testing-environ,sys', 'packages::sys::process::unix::tests::post_spawn_pipe_setup_failure_preserves_cause_and_reaps_child', '--', '--exact', '--nocapture', '--test-threads=1']
+sample={"descendants": 2, "monotonic_seconds": 7.12, "rss_kib": 50780, "storage_kib": 466972}
+sample={"descendants": 2, "monotonic_seconds": 8.134, "rss_kib": 72016, "storage_kib": 470248}
+sample={"descendants": 2, "monotonic_seconds": 9.147, "rss_kib": 72568, "storage_kib": 470468}
+sample={"descendants": 2, "monotonic_seconds": 10.16, "rss_kib": 77920, "storage_kib": 473528}
+sample={"descendants": 2, "monotonic_seconds": 11.173, "rss_kib": 96176, "storage_kib": 477184}
+sample={"descendants": 2, "monotonic_seconds": 12.189, "rss_kib": 105796, "storage_kib": 487376}
+sample={"descendants": 4, "monotonic_seconds": 13.21, "rss_kib": 462300, "storage_kib": 541228}
+sample={"descendants": 7, "monotonic_seconds": 14.23, "rss_kib": 412320, "storage_kib": 571840}
+sample={"descendants": 4, "monotonic_seconds": 15.25, "rss_kib": 351004, "storage_kib": 601028}
+sample={"descendants": 4, "monotonic_seconds": 16.271, "rss_kib": 694212, "storage_kib": 610120}
+sample={"descendants": 4, "monotonic_seconds": 17.291, "rss_kib": 498964, "storage_kib": 637580}
+sample={"descendants": 3, "monotonic_seconds": 18.311, "rss_kib": 308496, "storage_kib": 663168}
+sample={"descendants": 3, "monotonic_seconds": 19.331, "rss_kib": 550296, "storage_kib": 663180}
+sample={"descendants": 3, "monotonic_seconds": 20.35, "rss_kib": 691924, "storage_kib": 663192}
+sample={"descendants": 3, "monotonic_seconds": 21.371, "rss_kib": 877816, "storage_kib": 666108}
+sample={"descendants": 3, "monotonic_seconds": 22.391, "rss_kib": 898500, "storage_kib": 681420}
+sample={"descendants": 3, "monotonic_seconds": 23.411, "rss_kib": 110480, "storage_kib": 675224}
+sample={"descendants": 3, "monotonic_seconds": 24.431, "rss_kib": 110472, "storage_kib": 675228}
+sample={"descendants": 1, "monotonic_seconds": 25.149, "rss_kib": 29280, "storage_kib": 675220}
+status=wrong-cause-red:101
+command=wrong-incomplete-report-red argv=['/root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--lib', '--features', 'testing-environ,sys', 'packages::sys::process::unix::tests::post_spawn_pipe_setup_failure_preserves_cause_and_reaps_child', '--', '--exact', '--nocapture', '--test-threads=1']
+sample={"descendants": 2, "monotonic_seconds": 25.168, "rss_kib": 64280, "storage_kib": 675228}
+sample={"descendants": 3, "monotonic_seconds": 26.188, "rss_kib": 470152, "storage_kib": 675212}
+sample={"descendants": 3, "monotonic_seconds": 27.208, "rss_kib": 591816, "storage_kib": 675212}
+sample={"descendants": 3, "monotonic_seconds": 28.229, "rss_kib": 770200, "storage_kib": 675228}
+sample={"descendants": 3, "monotonic_seconds": 29.249, "rss_kib": 862856, "storage_kib": 687316}
+sample={"descendants": 3, "monotonic_seconds": 30.269, "rss_kib": 68664, "storage_kib": 675244}
+sample={"descendants": 3, "monotonic_seconds": 31.288, "rss_kib": 68596, "storage_kib": 675244}
+sample={"descendants": 1, "monotonic_seconds": 32.306, "rss_kib": 29524, "storage_kib": 675236}
+status=wrong-incomplete-report-red:101
+command=restored-green argv=['/root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-vgmpziz_/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--lib', '--features', 'testing-environ,sys', 'packages::sys::process::unix::tests::post_spawn_pipe_setup_failure_preserves_cause_and_reaps_child', '--', '--exact', '--nocapture', '--test-threads=1']
+sample={"descendants": 2, "monotonic_seconds": 32.326, "rss_kib": 65048, "storage_kib": 675240}
+sample={"descendants": 3, "monotonic_seconds": 33.346, "rss_kib": 470440, "storage_kib": 675224}
+sample={"descendants": 3, "monotonic_seconds": 34.366, "rss_kib": 591740, "storage_kib": 675224}
+sample={"descendants": 3, "monotonic_seconds": 35.386, "rss_kib": 774440, "storage_kib": 675240}
+sample={"descendants": 3, "monotonic_seconds": 36.406, "rss_kib": 860996, "storage_kib": 687332}
+sample={"descendants": 3, "monotonic_seconds": 37.426, "rss_kib": 67272, "storage_kib": 675260}
+sample={"descendants": 3, "monotonic_seconds": 38.445, "rss_kib": 67264, "storage_kib": 675260}
+sample={"descendants": 1, "monotonic_seconds": 39.463, "rss_kib": 29672, "storage_kib": 675252}
+status=restored-green:0
+evidence_exported=/root/rhai-linux-post-spawn-pipe-setup-523-20261004/proof-evidence
+/root/rhai-linux-post-spawn-pipe-setup-523-20261004/launch.sh: line 186: /proc/1022190/stat: No such file or directory
+run_scoped_status=0
+runtime_cleanup_status=0 pid_readback_status=0 scope_cleanup_status=0
+outer_status=0
+PIPE_SETUP_NATIVE2_TERMINAL 0

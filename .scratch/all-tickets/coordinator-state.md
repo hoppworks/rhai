@@ -26,6 +26,13 @@ No installs, admin, credentials, agent-home/config or shared-service changes.
 Windows guest control belongs solely to windows_private_staging_readback; historical owner records remain preserved.
 
 ## Done steps and accepted evidence
+- Linux post-spawn pipe-setup failure accepted at523/currentba3, privateRust1.77.2:
+  meaningful wrongcause101/wrongcompletion101, restoredGREEN0, realEngine/OS
+  inner/outerESRCH and owner-retirement receipts.53 originals/fivedirs/solearchive
+  intact,104identity/twogroup/fourexactpath closure and retirement independently
+  read back. Proof linux-post-spawn-pipe-setup-proof.md; combined review ACCEPTED.
+  Native1 setupfailure and native2 consumer-cwd repair preserved, no build rerun.
+  Only this partial03/06 criterion closes; broader release remains open.
 - Linux final-handle kill_on_drop(false) direct/managed paths at523, private
   Rust1.77.2 accepted with two namedRED101/restoredGREEN0, request-bound live
   observers,131 identities/six groups and six exact path closure. Proof
@@ -178,19 +185,116 @@ missing-authorization blocker. Existing accepted proof below remains applicable.
 
 ## Current step and next action
 
-Current action: integrate accepted Linux kill_on_drop(false) native2 recipe and
-evidence package to fork main. Final combined affected review READY at0cec9a19,
-no material finding. Actual direct/managed RED101 and GREEN0,131 identity/six-group
-custody and independent six-path retirement accepted in partial tickets03/06.
-Lost removal stdout/postcheck harness failure explicitly preserved; no fabrication.
-Original69 files/seven directories/sole tar intact; no owned remote resources.
-No product source change or new native/deletion run. Consumer28/30 estimate, prior
-15/30setup56/60package and earlier unknown costs/history preserved.
-Next existing post-spawn pipe setup failure package is owned by same Standard;
-prepare full executable recipes on accepted523 archive, two post-reap cause/report
-controls and restored GREEN. Pipe preparation10/30 estimate; no native allocation.
-Independent review and fresh machine/paths/capacity required before launch.
-All stopped stdin/native110/Darwin/Windows causes remain stopped; goal incomplete.
+Root continues under current global/project rules (skills revision6830c49),
+strict proof and existing automatic fork-main authorization. Fork main remains
+ba3b14988d9db9d1cfab191b6cbe404ec3c8248b; no new push or remote task ref.
+Accepted final-drop and examples evidence remains applicable and unchanged.
+
+Pipe correction2faa6a9679a42f52a878fc075f16f6bc296c0bcc selectively intaken
+as exactly five intended files; no writer history merge. Same combined Expert
+rechecks five original readiness findings and coupled exporter/consumer/retirement
+plus root two repinned dependencies. Local synthetic probes reported pass,
+not native acceptance. Preparation40min plus correction20min estimates retained;
+30min correction checkpoint is a planning estimate, cost unknown. Native0,
+no remote stage/scope allocated. Fresh read-only workhorse sample no heavy groups,
+MemAvailable82475680KiB, free724340776960bytes, load0.17/1.27/2.89; samples
+not peaks/reservations. Recheck immediately before launch after review READY.
+
+API candidate8bf affected review found deterministic test/comment mismatches,
+positive-length EOF/zero-read ambiguity, effective cap omission and residual
+SysError kind wording. One consolidated same-owner correction dispatched;
+Child dirty docs excluded until actual SYS metadata RED. Native acceptance open.
+Native3 Mac admission guard expired status3 after180sec with foreign64227;
+no allocation/runtime/scope was created. Preserve native1 schema failure and
+native2 exact owned interruption143, all original logs and distinct cause histories.
+Current source correction is first rejected docs correction, not native failure;
+no cause reset or renewal of stopped native110/stdin/Darwin/Windows paths.
+
+Affected pipe review2faa found canonical supervisor argv mismatch on required
+/root -> /var/roothome alias and missing sampled du/ps ancestry binding. Whole
+CUSTODY alias negative control and corrupted sampler parent fixture demonstrate
+both; other four fix areas pass. This is completed ownership/binding correction1
+rejected by independent source check, not native failure. Same owner preparing
+one further consolidated correction after final batch; if correction2 fails same
+cause, fresh Expert escalation required. No native/stage allocation.
+Root prepared source-only api-metadata-evidence/linux-metadata.py using the
+unchanged540/510 resource sampler and read-only cachedLinux1.93 binaries;
+no installs, scope or remote stage. Same public metadata doc surface only,
+585runner/600outer,2jobs and prior caps retained. Sources/test frozen review
+must precede actual run; expectedSYSRED gates Childcomments freeze. Workhorse
+Python3.14.7 is available for safe tar extraction; no setup changes performed.
+
+Pipe custody correction2 at5960aced is independently source READY; alias and
+wrong-parent sampler controls pass. Correction1 rejected/history remains.
+First admitted pipe optionalMSRV allocation at2026-10-04T10:31:13Z terminal1
+failed before intended assertions: rustup install0, then version checks used
+not-yet-created source cwd. New infrastructure cause pre-extraction-version-cwd,
+failure1; no product RED/no acceptance. Original36 files/five dirs independently
+exported to linux-post-spawn-pipe-setup-native1-originals with sole raw tar
+SHA3cbe11f3ad77931a335378ad9f665d627e1db1ed3250105280ee1fb3afee2ce1.
+Runtime/scope runner cleanup0; same owner independently checking exact closure
+and retiring only failed immutable stage before reuse. No foreign changes.
+Source-only startup repair ea36197137f834e9b9e874b7e7c200b7fdde0415 runs
+version checks with explicit runtime cwd; real accepted run_command probe
+passes with source absent and refuses default missing source cwd. Root selectively
+intook four intended recipe files, proof/preflight pin and native2 allocation
+history labels. Combined affected startup/pin review pending. Native1 consumed,
+native2 unallocated;600/585/540 bounds and all resource limits unchanged.
+
+API metadata correction2 at07862c3 rejected assertion/docs mismatch. Fresh
+Expert21 answer and same-owner ONE bounded followup09ebce31f retain stable cause
+api-metadata-contract-assertions. Followup source-preflight PASS proves only
+static comments/signatures; independent affected review rejects receiver selection:
+local_addr exports NetListener, test defaults NetStream. Followup exhausted;
+STOP this correction path, no new chain/native/approval request. Dirty Child docs
+remain excluded; no SYS metadata RED yet. Root unlaunched09eb preparatory archives
+and complete file manifests preserve candidate provenance, not acceptance.
+linux-metadata.py also awaits named-result parsing repair for nocapture output;
+no launch while source test is rejected. Native Mac1 invalidschema/Mac2 owned
+admission interruption and Mac3 noallocation histories remain; all stopped
+stdin/native110/Darwin/Windows paths unchanged. Cost/active cumulative unknown.
+
+Failed pipe native1 stage retired after repeated36file/fivedir inventory,
+21 PID/start absence and two empty owned groups; receipts alongside originals.
+Independent startup/pin review READY, actual lightweight startup probe PASS;
+reviewer's exact completed fixture also retired. Re-stage session96889 terminal0,
+ten pins pass. Dispatch first attempted whole local preflight inside remote
+wrapper caused nested SSH host-key failure before allocation (not credential
+change/product RED); raw native2-launch.log preserved. Corrected transport
+extracts unchanged reviewed remote code via AST, no code/limit changes.
+Native2 admitted2026-10-04T10:41:53Z on fresh zero-heavy inventory,
+MemAvailable82351236KiB/free724395134976bytes/load2.03/2.45/3.32.
+Session58169 terminal0; runtime agent-build-vgmpziz_ and exact scope cleanup0.
+PrivateRust1.77.2 versions0, two intendedcontrols101 and restoredGREEN0.
+Sole native2 original export and every byte hash preserved; CUSTODY refused
+rustc-version cwd because unchanged collector expects source cwd while reviewed
+startup repair now legitimately uses runtime. New dependency-validation
+infrastructure recovery1, not product correction failure. Same Standard owns
+narrow versioncwd allowance + actual-emitter coupled probe and affected pins;
+no native rerun/re-export. Corrected source must pass independent affectedreview
+then resume CUSTODY/retirement against existing unchanged originals.
+Actual runner570sec (adaptive within585), outer600/helper540 unchanged.
+Native1 consumed setup-only; native2 consumed active, no acceptance yet.
+
+Collector startup dependency corrected89cc458d; actual-emitter CUSTODY positive
+and wrong-version/test-cwd negatives PASS; independent affectedreview READY.
+Wrong writer author DanielHopp excluded: never merge/push89cc; only3reviewed
+file contents selected into exacthoppworks coordinator integration. Native2 sole
+53originals/fivedirs/tarSHA3083b009dcfdbcb83f9d9acec60db250328de5d37fe73e9b5247f01624a2cca4
+unchanged; corrected resume terminal0,104identities/94samplerinstances/threeCargo
+cases/twopostreapcontrols validated. Exact stage removed after full freshinventory;
+root separate liveOS readback104identities absent/reused,twoownedgroups empty,
+fourexactpaths absent. No retained native2 build/stage resources. Final combined
+receipt readback ACCEPTED; proof linux-post-spawn-pipe-setup-proof.md covers narrow
+Linux setupfault criterion only.47samples maximaRSS898500KiB/storage687332KiB/
+7descendants,notcontinuouspeaks. Helper39.463s; cumulativeactive/costunknown.
+
+Next: ticket03/06 partial closure and selective
+atomic evidence/state integration with exacthoppworks attribution, pushforkmain
+and verifyremoteonlymain. Then choose remaining independent acceptance scope;
+API Expert21/stdin/Mac/Windows stoppedcauses remain unrenewed.
+Only source/test/proof-covered integrated requirements may close; fork main only
+receives verified coherent integration. Overall Goal active/incomplete.
 
 ### Final-drop package history
 
@@ -3081,3 +3185,119 @@ and earlier unknown remain. Same Standard resumes nextpipe full source recipes,
 correcting archive baseline to accepted523 rather than unaccepted writer071.
 Pipe preparation10/30 estimate, no native allocation; independent review before
 launch. Next package does not reopen stopped causes.
+
+Final-drop acceptance commitba3b14988 pushed only https://github.com/hoppworks/rhai.git
+HEAD:refs/heads/main after exact prior63d948b1 and fast-forward checks; independent
+ls-remote confirms only main atba3b14988. Worktree remains active for related next
+package, not retired. Goal active/incomplete; nextpipe Standard running source-only
+with focused523 accepted baseline and existing10/30preparation estimate.
+
+Current goal continuation classified previous turn PROGRESS: accepted final-drop
+criterion and verifiedforkmainba3b14988, not status-only. Live registry confirms
+same Standard running nextpipe prep. Owner17/30 total prep checkpoint:523archive
+recomputed exact998c31, lock2ba4/unixblob unchanged, unique523stage/scope recipes
+being prepared with realexistingpublicEngine testonly and restoredprivatecontrols.
+NoSSH/Cargo/native/stage allocated. Rootsourceinspection confirms outeratomicrecord,
+livenessassertion, gate, nestedwait, independentreap and receipt beforestatusassert;
+innerreap/retired beforecause/reportassertions. This bounds the two controls without
+newobserver/handshake or cross-stream timestamp assumptions. ChildPID-only output
+must not fabricate startticks; custody identities remain separate. Reviewed exact
+retirement must accompany export before finalacceptance. No stoppedpath reopened.
+
+Parallel light release requirement: fresh nonfork Expert stdlib_api_docs_acceptance_review
+reviews currentba3 publicAPI/rustdocs/examples against approved02..06 contracts.
+Namedrisk existingRustSysError payload/constructor compatibility and additive
+ProcessScope/cause/report, plus sharedhandles/TCP registration documentation.
+Onecombinedreview,30minute planningcheckpoint; reportstdlib-api-docs-review.md.
+No sourcefix/Cargo/SSH/native/installation/config/deletion/push; writerpipeprep
+remains independent. Confirmcurrentinstructionrevision before action. Existing
+behaviorproof retained, no newnative acceptance inferred. Costsunknown.
+
+Pipe ownercheckpoint35min cumulative (prior10+25current), original30minute planning
+checkpoint exceeded5min; revised40min TOTAL with concrete insight: innernamedRED
+followsinnerreap but precedesouterreap, while outerwrapperassertion followsouter
+reap. Sourceprobes/contract corrected that actual two-process order; no assumption
+that bothreceipts precede innerpanic. Newstagedmanifestpincheck and immediate full
+custody-before-removal added; localprobespass. Remaining hashwiring/syntax/probes/
+freeze. This is estimate revision with progress/safecapacity, nohardcap/historyreset
+and noSSH/Cargo/native. API/docsindependentreview running parallel light only.
+
+### Current pipe capacity update
+Fresh read-only workhorse observation: only foreign launcher838549/start9863873
+PGID838542 and supervisor838550/start9863876 PGID838550 with Cargo/rustc
+in838550; available78524844KiB, disk721020649472bytes, load2.87/2.87/3.01.
+Samples are not peaks/reservations. Current human Machine limit3 permits
+one owned run beside this foreign group. Revised own conservative zero gate
+to allow only these exact launcher/supervisor identities/argv plus their
+Cargo/rustc group or no heavy work; unexpected group refuses. Same600/585/540
+seconds,2jobs,16descendants and1572864/2097152KiB caps remain.
+Independent combined reviewer receives changed gate before any launch.
+No foreign resources touched. No pipe native allocation yet.
+API/metadata Standard owns newly created task/stdlib-api-metadata worktree
+at /Users/hoppworks/projects/rhai/.worktrees/stdlib-api-metadata, baselineba3;
+public Engine metadata seam already agreed, prepare genuine failing test first.
+Root coordinates scoped RED before comment implementation; no writer build.
+
+### API metadata native TDD owned run
+Root owns Mac scope /Users/hoppworks/.local/share/agent-builds/rhai/api-metadata-20261004-root1,
+created absent2026-10-04; purpose public Engine metadata REDd035 then frozen
+comment fix GREEN in same bounded1800second run. Source/caches/target inside
+AGENT_RUNTIME_DIR, CARGO_HOME/TARGET flags explicit; outputs api-metadata-evidence
+outside runtime. Native Mac Rust1.93 cached direct tools; fresh ps shows zero
+heavy foreign runs,157961660KiB disk free. Two Cargo jobs. Waiting fix boundary
+1500seconds; command total1650seconds plus cleanup/export margin. No exceptional
+retention: runner runtime removed at exit, exact empty scope rmdir afterward.
+Public metadata output is read-only behavior; independent raw JSON assertions
+plus meaningful actual missing-comment RED, no OS feature closure inferred.
+
+### Pipe initial readiness and metadata RED progress
+Combined initial6bdd review NOTREADY: five producer/consumer issues at
+linux-post-spawn-pipe-setup-review.md; outer-path shadow, repeated sampler labels,
+runtime/ancestry/argv binding, immediate finalinventory and existingtar overwrite.
+Same Standard correcting one consolidatedbatch sourceonly, no SSH/native/stage.
+Initial readiness is not failed product assertion or completed correction.
+Original40minute preparation plus correction checkpoint30minute estimate retained;
+all previous stopped cause histories untouched. Reviewer temporary fixture
+/private/tmp/pipe-review-tqjgfljt and possibly owned pycache remain unclassified
+for root cleanup: reviewer followup dispatch refused by agent thread limit,
+reviewer no longer reachable in live registry. Do not delete foreign/unknown work.
+Native Mac Rust1.93 publicmetadata d035RED executed: status101, existing name
+inventory passes, real doc_comments check fails read_blob at testline78;
+exact original stdout/stderr/json exported. Same private run waits bounded fix
+for GREEN, no second build/cache retention yet. Standard informed authentic RED
+and implements comments/minor corrections in own isolated tree.
+
+API metadata native1 terminal101 after GREENe9: test harness readwrong
+JSON keydoc_comments vs actualdocComments; originald035RED notaccepted
+as valid sensitivity despite absentread_blobcomments. Infrastructure schema
+cause1, notfailedproductcorrection. Rawlogs/status/revision archives preserved.
+Commands18.61s/3.71s, overall308.89s including boundedwaiting; costunknown.
+Scopedruntime removed byrunner and exactemptyscope independently inspected/rmdir.
+SameStandard fixingactualJSONkey, nextsingle boundedprivatebuild willprove
+correctedtestRED onba3 production source plus frozennewtest, thenGREENexactfix.
+Do not count currentTCP/docs criterionclosed.
+
+Correctedmetadata native2 planned: actualschema8bf test overlayonba3 TCPRED,
+TCPGREEN8bf, publicSYSRED8bf with Childcomments absent, then waitbounded
+finalChildfix forSYSGREEN and affectedintegratedTCPcheck in sameprivatebuild.
+Ownednewscope /Users/hoppworks/.local/share/agent-builds/rhai/api-metadata-20261004-root2
+absentbeforecreation. Same1800total/1650command/1500fixwait boundary,2jobs;
+privateCargoHome/target/sourceAGENT_RUNTIME_DIR, directcachedMacRust1.93.
+Native1faultyJSONkey evidence retained; schemainfrastructurefailure1, no retry
+reset/no acceptance. Exportsourcehashes/toolargv/rawlogs independently.
+
+Native2 metadata preparation was interrupted at infrastructure setup143: root
+printed freshps instead of gating launch and started beside foreignMacrunner
+64225/64227. Exact ownrunner64420 PID/ppid/lstart/argv rechecked and TERM
+requested; globalrunner removed its ownedruntime, emptyexactscope root2rmdir.
+No productassertion reached/statusreceived; partialoutput retained unchanged.
+No foreignprocess stopped. Concurrencyharnesscause1 distinctfromschemafailure1,
+no productcorrection count/escalation reset. Next launchmustgate freshly before
+create/run; actualcommand no newmetadataacceptance.
+
+Macslotgate localprep recovery1 failed before allocation: psargs is not
+shell-quoted, shlexsplit rejects arbitrary unrelated processargs with openquote.
+Corrected deterministic inventory to three numeric fields plus rawargs tokens
+(first3runnerbasename or directcompilerbasename), no shellinterpretation.
+Native3 notallocated by thatfailedobservation; sameconcurrencycausehistory
+retained, nextgate failuretriggersfreshExpert instead of further rootrepair.

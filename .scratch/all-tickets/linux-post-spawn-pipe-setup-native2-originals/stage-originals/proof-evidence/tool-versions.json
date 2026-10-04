@@ -1,0 +1,5 @@
+{
+  "cargo_stdout": "cargo 1.77.2 (e52e36006 2024-03-26)\nrelease: 1.77.2\ncommit-hash: e52e360061cacbbeac79f7f1215a7a90b6f08442\ncommit-date: 2024-03-26\nhost: x86_64-unknown-linux-gnu\nlibgit2: 1.7.2 (sys:0.18.2 vendored)\nlibcurl: 8.5.0-DEV (sys:0.4.70+curl-8.5.0 vendored ssl:OpenSSL/1.1.1w)\nssl: OpenSSL 1.1.1w  11 Sep 2023\nos: Linux 44 (Kinoite) [64-bit]\n",
+  "rustc_stdout": "rustc 1.77.2 (25ef9e3d8 2024-04-09)\nbinary: rustc\ncommit-hash: 25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04\ncommit-date: 2024-04-09\nhost: x86_64-unknown-linux-gnu\nrelease: 1.77.2\nLLVM version: 17.0.6\n",
+  "toolchain": "1.77.2-x86_64-unknown-linux-gnu"
+}

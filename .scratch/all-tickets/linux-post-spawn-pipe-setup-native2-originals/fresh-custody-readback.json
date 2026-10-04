@@ -1,0 +1,10 @@
+{
+  "cargo_rows_validated": 3,
+  "owned_groups_empty": true,
+  "post_reap_controls_validated": 2,
+  "process_identities_absent_or_reused": 104,
+  "restored_green_validated": true,
+  "sampler_instances_validated": 94,
+  "scope_absent": true,
+  "stage_inventory_exact": true
+}

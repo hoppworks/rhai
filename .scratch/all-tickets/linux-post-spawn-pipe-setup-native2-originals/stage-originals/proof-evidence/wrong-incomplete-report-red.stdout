@@ -1,0 +1,24 @@
+
+running 1 test
+test packages::sys::process::unix::tests::post_spawn_pipe_setup_failure_preserves_cause_and_reaps_child ... 
+running 1 test
+setup-failure child_pid=1023547 reap=ESRCH owner_retired=true
+test packages::sys::process::unix::tests::post_spawn_pipe_setup_failure_preserves_cause_and_reaps_child ... FAILED
+
+failures:
+
+failures:
+    packages::sys::process::unix::tests::post_spawn_pipe_setup_failure_preserves_cause_and_reaps_child
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 21 filtered out; finished in 0.02s
+
+setup-failure fixture child_pid=1023547 reap=ESRCH
+FAILED
+
+failures:
+
+failures:
+    packages::sys::process::unix::tests::post_spawn_pipe_setup_failure_preserves_cause_and_reaps_child
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 21 filtered out; finished in 2.03s
+

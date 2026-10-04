@@ -1,0 +1,35 @@
+{
+  "acceptance_claim": false,
+  "commands": [
+    {
+      "argv": [
+        "/root/.cargo/bin/rustup",
+        "toolchain",
+        "install",
+        "1.77.2-x86_64-unknown-linux-gnu",
+        "--profile",
+        "minimal",
+        "--no-self-update"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-57hvjg6e",
+      "env_overrides": {},
+      "expected_status": 0,
+      "finished_monotonic_seconds": 7.127,
+      "name": "rustup-install",
+      "spawned": true,
+      "started_monotonic_seconds": 0.011,
+      "status": 0,
+      "stderr": "evidence/rustup-install.stderr",
+      "stdout": "evidence/rustup-install.stdout"
+    }
+  ],
+  "compatible_lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "controls": [],
+  "features": "testing-environ,sys",
+  "interrupted_signal": null,
+  "source_archive_sha256": "998c31fab8c3026f292ef13484a8b112da90e5ead1e0288845bffeee9186179b",
+  "source_restored_to_baseline": false,
+  "source_revision": "523608648dcae99bc0f6b46eaf2bb91fa4ecc752",
+  "test_name": "packages::sys::process::unix::tests::post_spawn_pipe_setup_failure_preserves_cause_and_reaps_child",
+  "test_source_sha256": "1b60751c6d9ed695f79edc4f8a7972338274684ef53583bd1ea1009c1aca822a"
+}

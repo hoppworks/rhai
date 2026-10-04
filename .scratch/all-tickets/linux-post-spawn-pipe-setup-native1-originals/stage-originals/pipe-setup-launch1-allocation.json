@@ -1,0 +1,73 @@
+{
+  "source": "523608648dcae99bc0f6b46eaf2bb91fa4ecc752",
+  "native_pipe_setup_launch": 1,
+  "preflight": {
+    "utc": "2026-10-04T10:31:13Z",
+    "stage": "/var/roothome/rhai-linux-post-spawn-pipe-setup-523-20261004",
+    "inputs_verified": 10,
+    "scope_absent": true,
+    "heavy": [
+      {
+        "pid": 936149,
+        "start": "10042102",
+        "pgid": 936142,
+        "state": "S",
+        "argv": [
+          "python3",
+          "/home/workhorse/projects/agent-skills/tools/run_scoped.py",
+          "--timeout",
+          "5400"
+        ]
+      },
+      {
+        "pid": 936150,
+        "start": "10042105",
+        "pgid": 936150,
+        "state": "S",
+        "argv": [
+          "/usr/bin/python3",
+          "/var/home/workhorse/projects/agent-skills/tools/run_scoped.py",
+          "_supervise",
+          "4"
+        ]
+      },
+      {
+        "pid": 995866,
+        "start": "10106366",
+        "pgid": 936150,
+        "state": "S",
+        "argv": [
+          "/var/home/workhorse/.rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo",
+          "check",
+          "--locked",
+          "--all-targets"
+        ]
+      },
+      {
+        "pid": 995871,
+        "start": "10106387",
+        "pgid": 936150,
+        "state": "S",
+        "argv": [
+          "/home/workhorse/.rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/rustc",
+          "--crate-name",
+          "shared_models",
+          "--edition=2021"
+        ]
+      }
+    ],
+    "allowed_heavy": true,
+    "mem_available_kib": 80109920,
+    "disk_free_bytes": 717278609408,
+    "load": [
+      6.57275390625,
+      6.61962890625,
+      4.66162109375
+    ],
+    "ready": true
+  },
+  "outer_seconds": 600,
+  "runner_seconds": 585,
+  "helper_seconds": 540,
+  "history": "first pipe-setup optionalMSRV acceptance, native1 prospective; existing native80/mac81 positive unchanged; prior histories retained; native110 and stopped paths not renewed"
+}

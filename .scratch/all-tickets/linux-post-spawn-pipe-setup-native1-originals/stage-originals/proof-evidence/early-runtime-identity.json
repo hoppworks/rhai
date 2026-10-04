@@ -1,0 +1,19 @@
+{
+  "captured_before_stage_validation_or_external_command": true,
+  "helper": {
+    "cmdline": "python3 /root/rhai-linux-post-spawn-pipe-setup-523-20261004/linux-post-spawn-pipe-setup-proof.py",
+    "pgid": 995974,
+    "pid": 995976,
+    "ppid": 995974,
+    "start_ticks": "10106456"
+  },
+  "identity_errors": {},
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-57hvjg6e",
+  "scoped_supervisor": {
+    "cmdline": "/usr/bin/python3 /var/roothome/rhai-linux-post-spawn-pipe-setup-523-20261004/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-post-spawn-pipe-setup-523-20261004/linux-post-spawn-pipe-setup-proof.py",
+    "pgid": 995974,
+    "pid": 995974,
+    "ppid": 995961,
+    "start_ticks": "10106455"
+  }
+}

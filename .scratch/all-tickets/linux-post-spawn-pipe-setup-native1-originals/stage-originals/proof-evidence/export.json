@@ -1,0 +1,9 @@
+{
+  "acceptance_claim": false,
+  "destination": "/root/rhai-linux-post-spawn-pipe-setup-523-20261004/proof-evidence",
+  "elapsed_seconds": 7.128,
+  "helper_deadline_seconds": 540,
+  "partial_export_possible": true,
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-57hvjg6e",
+  "work_deadline_seconds": 510
+}

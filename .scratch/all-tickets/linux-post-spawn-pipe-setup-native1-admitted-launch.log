@@ -1,0 +1,44 @@
+SLOT_OBSERVATION {"returncode": 0, "stdout": "{\n  \"utc\": \"2026-10-04T10:31:13Z\",\n  \"stage\": \"/var/roothome/rhai-linux-post-spawn-pipe-setup-523-20261004\",\n  \"inputs_verified\": 10,\n  \"scope_absent\": true,\n  \"heavy\": [\n    {\n      \"pid\": 936149,\n      \"start\": \"10042102\",\n      \"pgid\": 936142,\n      \"state\": \"S\",\n      \"argv\": [\n        \"python3\",\n        \"/home/workhorse/projects/agent-skills/tools/run_scoped.py\",\n        \"--timeout\",\n        \"5400\"\n      ]\n    },\n    {\n      \"pid\": 936150,\n      \"start\": \"10042105\",\n      \"pgid\": 936150,\n      \"state\": \"S\",\n      \"argv\": [\n        \"/usr/bin/python3\",\n        \"/var/home/workhorse/projects/agent-skills/tools/run_scoped.py\",\n        \"_supervise\",\n        \"4\"\n      ]\n    },\n    {\n      \"pid\": 995866,\n      \"start\": \"10106366\",\n      \"pgid\": 936150,\n      \"state\": \"S\",\n      \"argv\": [\n        \"/var/home/workhorse/.rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo\",\n        \"check\",\n        \"--locked\",\n        \"--all-targets\"\n      ]\n    },\n    {\n      \"pid\": 995871,\n      \"start\": \"10106387\",\n      \"pgid\": 936150,\n      \"state\": \"S\",\n      \"argv\": [\n        \"/home/workhorse/.rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/rustc\",\n        \"--crate-name\",\n        \"shared_models\",\n        \"--edition=2021\"\n      ]\n    }\n  ],\n  \"allowed_heavy\": true,\n  \"mem_available_kib\": 80109920,\n  \"disk_free_bytes\": 717278609408,\n  \"load\": [\n    6.57275390625,\n    6.61962890625,\n    4.66162109375\n  ],\n  \"ready\": true\n}\n", "stderr": ""}
+PIPE_SETUP_NATIVE1_ALLOCATED {"source": "523608648dcae99bc0f6b46eaf2bb91fa4ecc752", "native_pipe_setup_launch": 1, "preflight": {"utc": "2026-10-04T10:31:13Z", "stage": "/var/roothome/rhai-linux-post-spawn-pipe-setup-523-20261004", "inputs_verified": 10, "scope_absent": true, "heavy": [{"pid": 936149, "start": "10042102", "pgid": 936142, "state": "S", "argv": ["python3", "/home/workhorse/projects/agent-skills/tools/run_scoped.py", "--timeout", "5400"]}, {"pid": 936150, "start": "10042105", "pgid": 936150, "state": "S", "argv": ["/usr/bin/python3", "/var/home/workhorse/projects/agent-skills/tools/run_scoped.py", "_supervise", "4"]}, {"pid": 995866, "start": "10106366", "pgid": 936150, "state": "S", "argv": ["/var/home/workhorse/.rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo", "check", "--locked", "--all-targets"]}, {"pid": 995871, "start": "10106387", "pgid": 936150, "state": "S", "argv": ["/home/workhorse/.rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/rustc", "--crate-name", "shared_models", "--edition=2021"]}], "allowed_heavy": true, "mem_available_kib": 80109920, "disk_free_bytes": 717278609408, "load": [6.57275390625, 6.61962890625, 4.66162109375], "ready": true}, "outer_seconds": 600, "runner_seconds": 585, "helper_seconds": 540, "history": "first pipe-setup optionalMSRV acceptance, native1 prospective; existing native80/mac81 positive unchanged; prior histories retained; native110 and stopped paths not renewed"}
+launch_utc=2026-10-04T10:31:13Z
+outer_timeout_seconds=600
+stage=/root/rhai-linux-post-spawn-pipe-setup-523-20261004
+scope=/root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004
+archive-build-source.py: OK
+source.tar: OK
+Cargo.lock.accepted: OK
+check-linux-current-msrv-examples.py: OK
+contract.md: OK
+linux-post-spawn-pipe-setup-proof.py: OK
+launch.sh: OK
+runner/tools/run_scoped.py: OK
+runner/tools/agentskills/__init__.py: OK
+runner/tools/agentskills/pyguard.py: OK
+adaptive_runner_timeout_seconds=570
+PRIVATE_RUNTIME /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-57hvjg6e
+command=rustup-install argv=['/root/.cargo/bin/rustup', 'toolchain', 'install', '1.77.2-x86_64-unknown-linux-gnu', '--profile', 'minimal', '--no-self-update']
+sample={"descendants": 2, "monotonic_seconds": 0.024, "rss_kib": 44232, "storage_kib": 32}
+sample={"descendants": 2, "monotonic_seconds": 1.039, "rss_kib": 53040, "storage_kib": 16356}
+sample={"descendants": 2, "monotonic_seconds": 2.052, "rss_kib": 53940, "storage_kib": 71224}
+sample={"descendants": 2, "monotonic_seconds": 3.066, "rss_kib": 207672, "storage_kib": 177788}
+sample={"descendants": 2, "monotonic_seconds": 4.082, "rss_kib": 151052, "storage_kib": 249852}
+sample={"descendants": 2, "monotonic_seconds": 5.098, "rss_kib": 252324, "storage_kib": 301544}
+sample={"descendants": 2, "monotonic_seconds": 6.113, "rss_kib": 397624, "storage_kib": 443712}
+sample={"descendants": 1, "monotonic_seconds": 7.126, "rss_kib": 28268, "storage_kib": 459720}
+status=rustup-install:0
+Traceback (most recent call last):
+  File "/root/rhai-linux-post-spawn-pipe-setup-523-20261004/linux-post-spawn-pipe-setup-proof.py", line 131, in <module>
+    try: status=main()
+                ~~~~^^
+  File "/root/rhai-linux-post-spawn-pipe-setup-523-20261004/linux-post-spawn-pipe-setup-proof.py", line 84, in main
+    BASE.run_command('rustc-version',[str(rustc),'--version','--verbose'],env);BASE.run_command('cargo-version',[str(cargo),'--version','--verbose'],env)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-post-spawn-pipe-setup-523-20261004/check-linux-current-msrv-examples.py", line 271, in run_command
+    raise RuntimeError(f'command working directory does not exist: {command_cwd}')
+RuntimeError: command working directory does not exist: /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-57hvjg6e/source
+evidence_exported=/root/rhai-linux-post-spawn-pipe-setup-523-20261004/proof-evidence
+/root/rhai-linux-post-spawn-pipe-setup-523-20261004/launch.sh: line 186: /proc/995961/stat: No such file or directory
+run_scoped_status=1
+runtime_cleanup_status=0 pid_readback_status=0 scope_cleanup_status=0
+outer_status=1
+PIPE_SETUP_NATIVE1_TERMINAL 1

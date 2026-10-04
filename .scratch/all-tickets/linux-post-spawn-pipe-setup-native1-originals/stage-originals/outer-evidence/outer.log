@@ -1,0 +1,41 @@
+launch_utc=2026-10-04T10:31:13Z
+outer_timeout_seconds=600
+stage=/root/rhai-linux-post-spawn-pipe-setup-523-20261004
+scope=/root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004
+archive-build-source.py: OK
+source.tar: OK
+Cargo.lock.accepted: OK
+check-linux-current-msrv-examples.py: OK
+contract.md: OK
+linux-post-spawn-pipe-setup-proof.py: OK
+launch.sh: OK
+runner/tools/run_scoped.py: OK
+runner/tools/agentskills/__init__.py: OK
+runner/tools/agentskills/pyguard.py: OK
+adaptive_runner_timeout_seconds=570
+PRIVATE_RUNTIME /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-57hvjg6e
+command=rustup-install argv=['/root/.cargo/bin/rustup', 'toolchain', 'install', '1.77.2-x86_64-unknown-linux-gnu', '--profile', 'minimal', '--no-self-update']
+sample={"descendants": 2, "monotonic_seconds": 0.024, "rss_kib": 44232, "storage_kib": 32}
+sample={"descendants": 2, "monotonic_seconds": 1.039, "rss_kib": 53040, "storage_kib": 16356}
+sample={"descendants": 2, "monotonic_seconds": 2.052, "rss_kib": 53940, "storage_kib": 71224}
+sample={"descendants": 2, "monotonic_seconds": 3.066, "rss_kib": 207672, "storage_kib": 177788}
+sample={"descendants": 2, "monotonic_seconds": 4.082, "rss_kib": 151052, "storage_kib": 249852}
+sample={"descendants": 2, "monotonic_seconds": 5.098, "rss_kib": 252324, "storage_kib": 301544}
+sample={"descendants": 2, "monotonic_seconds": 6.113, "rss_kib": 397624, "storage_kib": 443712}
+sample={"descendants": 1, "monotonic_seconds": 7.126, "rss_kib": 28268, "storage_kib": 459720}
+status=rustup-install:0
+Traceback (most recent call last):
+  File "/root/rhai-linux-post-spawn-pipe-setup-523-20261004/linux-post-spawn-pipe-setup-proof.py", line 131, in <module>
+    try: status=main()
+                ~~~~^^
+  File "/root/rhai-linux-post-spawn-pipe-setup-523-20261004/linux-post-spawn-pipe-setup-proof.py", line 84, in main
+    BASE.run_command('rustc-version',[str(rustc),'--version','--verbose'],env);BASE.run_command('cargo-version',[str(cargo),'--version','--verbose'],env)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-post-spawn-pipe-setup-523-20261004/check-linux-current-msrv-examples.py", line 271, in run_command
+    raise RuntimeError(f'command working directory does not exist: {command_cwd}')
+RuntimeError: command working directory does not exist: /root/.local/share/agent-builds/rhai/linux-post-spawn-pipe-setup-523-20261004/agent-build-57hvjg6e/source
+evidence_exported=/root/rhai-linux-post-spawn-pipe-setup-523-20261004/proof-evidence
+/root/rhai-linux-post-spawn-pipe-setup-523-20261004/launch.sh: line 186: /proc/995961/stat: No such file or directory
+run_scoped_status=1
+runtime_cleanup_status=0 pid_readback_status=0 scope_cleanup_status=0
+outer_status=1

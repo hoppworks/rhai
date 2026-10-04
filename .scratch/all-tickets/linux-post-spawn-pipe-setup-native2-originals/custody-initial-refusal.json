@@ -1,0 +1,7 @@
+{
+  "acceptance": false,
+  "phase": "CUSTODY before retirement",
+  "reason": "command cwd/environment escapes private source/runtime rustc-version",
+  "native_build_repeated": false,
+  "originals_preserved": true
+}

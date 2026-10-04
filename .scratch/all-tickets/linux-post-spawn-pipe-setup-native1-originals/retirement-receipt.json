@@ -1,0 +1,15 @@
+{
+  "postdelete_identities_checked": 21,
+  "postdelete_logical_absent": true,
+  "postdelete_owned_groups_empty": true,
+  "postdelete_physical_absent": true,
+  "postdelete_scope_runtime_absent": true,
+  "predelete_directories": 5,
+  "predelete_files": 36,
+  "predelete_stage_stat": {
+    "device": 58,
+    "inode": 115077601
+  },
+  "removed_logical_stage": "/root/rhai-linux-post-spawn-pipe-setup-523-20261004",
+  "removed_stage": "/var/roothome/rhai-linux-post-spawn-pipe-setup-523-20261004"
+}
