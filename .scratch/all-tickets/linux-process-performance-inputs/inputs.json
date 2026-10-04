@@ -1,0 +1,8 @@
+{
+  "source_revision": "8c0ee4634355aee4e841b455461a7dd5aac2aa18",
+  "source_tar_sha256": "4f049fda78ab245c5e482eef9392f7e8ae059d4fd4fada904941c631c43611f4",
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "purpose": "input freeze receipt; duplicate local archive/lock retired after byte equality with frozen writer source; no native originals involved",
+  "duplicate_input_retired": true,
+  "preserved_source_commit": "35ec5c0d37af2fb867f8c12747e427613fd6cc30"
+}

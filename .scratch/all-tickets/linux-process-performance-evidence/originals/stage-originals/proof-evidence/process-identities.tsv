@@ -1,0 +1,70 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+helper	1416685	1416684	1416684	10779106	python3 /root/rhai-linux-process-performance-8c0ee-20261004/linux-process-performance-proof.py
+scoped-supervisor	1416684	1416678	1416684	10779104	/usr/bin/python3 /var/roothome/rhai-linux-process-performance-8c0ee-20261004/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-process-performance-8c0ee-20261004/linux-process-performance-proof.py
+command:rustup-install	1416686	1416685	1416684	10779110	
+command:du	1416687	1416685	1416684	10779110	
+command:ps	1416688	1416685	1416684	10779110	
+command:du	1416727	1416685	1416684	10779212	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1416728	1416685	1416684	10779212	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1416743	1416685	1416684	10779313	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1416744	1416685	1416684	10779313	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1416892	1416685	1416684	10779415	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1416893	1416685	1416684	10779415	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1416919	1416685	1416684	10779516	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1416920	1416685	1416684	10779516	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1416949	1416685	1416684	10779618	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1416950	1416685	1416684	10779618	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1417056	1416685	1416684	10779719	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1417057	1416685	1416684	10779719	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1417077	1416685	1416684	10779820	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1417078	1416685	1416684	10779820	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1417102	1416685	1416684	10779902	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1417103	1416685	1416684	10779902	/bin/ps -e -o pid=,ppid=,rss=
+command:rustc-version	1417104	1416685	1416684	10779903	/root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose
+command:du	1417105	1416685	1416684	10779903	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1417106	1416685	1416684	10779903	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1417108	1416685	1416684	10779914	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1417109	1416685	1416684	10779914	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-version	1417110	1416685	1416684	10779915	/root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose
+command:du	1417111	1416685	1416684	10779915	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1417113	1416685	1416684	10779915	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1417126	1416685	1416684	10779926	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1417127	1416685	1416684	10779926	/bin/ps -e -o pid=,ppid=,rss=
+command:control-pass	1417170	1416685	1416684	10779932	/root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --test linux_process_performance --features testing-environ,sys measurement_controls_reject_corruption -- --exact --nocapture --test-threads=1
+command:du	1417171	1416685	1416684	10779932	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1417172	1416685	1416684	10779933	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1417244	1416685	1416684	10780034	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1417245	1416685	1416684	10780034	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1417259	1416685	1416684	10780135	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1417260	1416685	1416684	10780135	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1417274	1416685	1416684	10780236	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1417275	1416685	1416684	10780237	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1417475	1416685	1416684	10780338	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1417476	1416685	1416684	10780339	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1417741	1416685	1416684	10780440	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1417746	1416685	1416684	10780441	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1417934	1416685	1416684	10780542	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1417935	1416685	1416684	10780543	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1417969	1416685	1416684	10780644	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1417971	1416685	1416684	10780645	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1418062	1416685	1416684	10780746	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1418066	1416685	1416684	10780747	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1418173	1416685	1416684	10780848	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1418174	1416685	1416684	10780849	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1418199	1416685	1416684	10780950	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1418200	1416685	1416684	10780951	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1418214	1416685	1416684	10781053	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1418215	1416685	1416684	10781053	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1418287	1416685	1416684	10781155	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1418288	1416685	1416684	10781155	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1418332	1416685	1416684	10781257	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1418333	1416685	1416684	10781257	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1418372	1416685	1416684	10781309	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1418377	1416685	1416684	10781309	/bin/ps -e -o pid=,ppid=,rss=
+command:measurements	1418384	1416685	1416684	10781310	/root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --test linux_process_performance --features testing-environ,sys direct_managed_measurements -- --exact --ignored --nocapture --test-threads=1
+command:du	1418399	1416685	1416684	10781311	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1418409	1416685	1416684	10781311	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1418468	1416685	1416684	10781412	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1418469	1416685	1416684	10781413	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1418478	1416685	1416684	10781434	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command:ps	1418479	1416685	1416684	10781435	/bin/ps -e -o pid=,ppid=,rss=

@@ -1,0 +1,15 @@
+{
+  "utc": "2026-10-04T12:19:00Z",
+  "ready": true,
+  "heavy": [],
+  "mem_available_kib": 83033556,
+  "disk_free_bytes": 724339937280,
+  "load": [
+    0.33544921875,
+    5.91015625,
+    8.57421875
+  ],
+  "scope_absent": true,
+  "stage_absent": true,
+  "classification": "fresh pre-stage observation, not reservation"
+}

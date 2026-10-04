@@ -1,0 +1,13 @@
+{
+  "descendant_hard_stop": 16,
+  "maxima": {
+    "descendants": 7,
+    "rss_kib": 862348,
+    "storage_kib": 730888
+  },
+  "rss_hard_stop_kib": 2097152,
+  "sample_count": 31,
+  "samples_are_periodic_not_continuous_peak": true,
+  "storage_hard_stop_kib": 2097152,
+  "storage_preemptive_stop_kib": 1572864
+}

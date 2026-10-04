@@ -1,0 +1,73 @@
+{
+  "utc": "2026-10-04T12:05:55Z",
+  "heavy": [
+    {
+      "pid": 1321834,
+      "start_ticks": 10596078,
+      "pgid": 1321827,
+      "comm": "python3",
+      "argv": [
+        "python3",
+        "/home/workhorse/projects/agent-skills/tools/run_scoped.py",
+        "--timeout",
+        "5400"
+      ]
+    },
+    {
+      "pid": 1321835,
+      "start_ticks": 10596080,
+      "pgid": 1321835,
+      "comm": "python3",
+      "argv": [
+        "/usr/bin/python3",
+        "/var/home/workhorse/projects/agent-skills/tools/run_scoped.py",
+        "_supervise",
+        "4"
+      ]
+    },
+    {
+      "pid": 1382198,
+      "start_ticks": 10673936,
+      "pgid": 1321835,
+      "comm": "cargo",
+      "argv": [
+        "cargo",
+        "check",
+        "--locked",
+        "--keep-going"
+      ]
+    },
+    {
+      "pid": 1382203,
+      "start_ticks": 10673985,
+      "pgid": 1321835,
+      "comm": "rustc",
+      "argv": [
+        "/home/workhorse/.rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/rustc",
+        "--crate-name",
+        "gateway",
+        "--edition=2021"
+      ]
+    },
+    {
+      "pid": 1382205,
+      "start_ticks": 10673986,
+      "pgid": 1321835,
+      "comm": "rustc",
+      "argv": [
+        "/home/workhorse/.rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/rustc",
+        "--crate-name",
+        "gateway",
+        "--edition=2021"
+      ]
+    }
+  ],
+  "mem_available_kib": 79363492,
+  "disk_free_bytes": 717228503040,
+  "load": [
+    3.16357421875,
+    5.67626953125,
+    8.35107421875
+  ],
+  "classification": "read-only preparation, not admission or reservation"
+}

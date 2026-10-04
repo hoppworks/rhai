@@ -1,0 +1,104 @@
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:668:13
+    |
+668 |         let mut wait_operation = "wait for child";
+    |             ----^^^^^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` on by default
+
+warning: unused variable: `termination`
+    --> src/packages/sys/process/unix.rs:1106:22
+     |
+1106 |                 let (termination, _operation) = if self.managed {
+     |                      ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_termination`
+     |
+     = note: `#[warn(unused_variables)]` on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2134:9
+     |
+2134 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2456:9
+     |
+2456 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variant `OnlyZombieLeader` is never constructed
+  --> src/packages/sys/process/unix.rs:50:5
+   |
+47 | enum GroupCloseOutcome {
+   |      ----------------- variant in this enum
+...
+50 |     OnlyZombieLeader,
+   |     ^^^^^^^^^^^^^^^^
+   |
+   = note: `GroupCloseOutcome` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+   = note: `#[warn(dead_code)]` on by default
+
+warning: methods `numeric_operations_probe`, `quarantine_observations_probe`, and `fail_reservation` are never used
+    --> src/packages/sys/process/unix.rs:1470:8
+     |
+1390 | impl ExecutionFaults {
+     | -------------------- methods in this implementation
+...
+1470 |     fn numeric_operations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1481 |     fn quarantine_observations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1506 |     fn fail_reservation(&self) -> bool {
+     |        ^^^^^^^^^^^^^^^^
+
+warning: `rhai` (lib) generated 7 warnings (run `cargo fix --lib -p rhai` to apply 4 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 0.02s
+     Running tests/linux_process_performance.rs (/root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6/target/debug/deps/linux_process_performance-8850bc65227adefd)
+PERF_START,index=0,mode=direct,order=direct>managed,pid=1418414,start_ticks=10781314,pgid=1416684,ready_latency_ns=1461052
+PERF_START,index=0,mode=managed,order=direct>managed,pid=1418417,start_ticks=10781316,pgid=1418417,ready_latency_ns=1521011
+PERF_START,index=1,mode=managed,order=managed>direct,pid=1418420,start_ticks=10781318,pgid=1418420,ready_latency_ns=1552651
+PERF_START,index=1,mode=direct,order=managed>direct,pid=1418423,start_ticks=10781320,pgid=1416684,ready_latency_ns=1431532
+PERF_START,index=2,mode=direct,order=direct>managed,pid=1418427,start_ticks=10781322,pgid=1416684,ready_latency_ns=1356333
+PERF_START,index=2,mode=managed,order=direct>managed,pid=1418430,start_ticks=10781325,pgid=1418430,ready_latency_ns=1611501
+PERF_START,index=3,mode=managed,order=managed>direct,pid=1418433,start_ticks=10781327,pgid=1418433,ready_latency_ns=1536502
+PERF_START,index=3,mode=direct,order=managed>direct,pid=1418436,start_ticks=10781329,pgid=1416684,ready_latency_ns=1301682
+PERF_START,index=4,mode=direct,order=direct>managed,pid=1418440,start_ticks=10781331,pgid=1416684,ready_latency_ns=1243363
+PERF_START,index=4,mode=managed,order=direct>managed,pid=1418443,start_ticks=10781333,pgid=1418443,ready_latency_ns=1379852
+PERF_CAPTURE,index=0,mode=direct,order=direct>managed,bytes=1048576,captured_run_elapsed_ns=101152806,captured_run_bytes_per_second=10366257.165
+PERF_CAPTURE,index=0,mode=managed,order=direct>managed,bytes=1048576,captured_run_elapsed_ns=201227267,captured_run_bytes_per_second=5210904.147
+PERF_CAPTURE,index=1,mode=managed,order=managed>direct,bytes=1048576,captured_run_elapsed_ns=201206047,captured_run_bytes_per_second=5211453.709
+PERF_CAPTURE,index=1,mode=direct,order=managed>direct,bytes=1048576,captured_run_elapsed_ns=100860047,captured_run_bytes_per_second=10396346.534
+PERF_CAPTURE,index=2,mode=direct,order=direct>managed,bytes=1048576,captured_run_elapsed_ns=100831057,captured_run_bytes_per_second=10399335.594
+PERF_CAPTURE,index=2,mode=managed,order=direct>managed,bytes=1048576,captured_run_elapsed_ns=201447556,captured_run_bytes_per_second=5205205.865
+PERF_RESOURCE,sample_index=0,order=direct>managed,mode=direct,pid=1418472,start_ticks=10781428,pgid=1416684,live_ready_latency_ns=1765901,child_threads=1,child_fds=3,host_threads_before=2,host_fds_before=4,host_threads_live=3,host_fds_live=6,group_members=5,group_members_owned=false
+PERF_RESOURCE_CLOSED,mode=direct,host_threads_after=2,host_fds_after=4,host_threads_delta=0,host_fds_delta=0
+PERF_RESOURCE,sample_index=0,order=direct>managed,mode=managed,pid=1418475,start_ticks=10781431,pgid=1418475,live_ready_latency_ns=1634761,child_threads=1,child_fds=3,host_threads_before=2,host_fds_before=4,host_threads_live=3,host_fds_live=6,group_members=1,group_members_owned=true
+PERF_RESOURCE_CLOSED,mode=managed,host_threads_after=2,host_fds_after=4,host_threads_delta=0,host_fds_delta=0

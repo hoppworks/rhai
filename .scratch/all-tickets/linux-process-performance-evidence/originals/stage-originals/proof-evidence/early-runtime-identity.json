@@ -1,0 +1,19 @@
+{
+  "captured_before_stage_validation_or_external_command": true,
+  "helper": {
+    "cmdline": "python3 /root/rhai-linux-process-performance-8c0ee-20261004/linux-process-performance-proof.py",
+    "pgid": 1416684,
+    "pid": 1416685,
+    "ppid": 1416684,
+    "start_ticks": "10779106"
+  },
+  "identity_errors": {},
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6",
+  "scoped_supervisor": {
+    "cmdline": "/usr/bin/python3 /var/roothome/rhai-linux-process-performance-8c0ee-20261004/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-process-performance-8c0ee-20261004/linux-process-performance-proof.py",
+    "pgid": 1416684,
+    "pid": 1416684,
+    "ppid": 1416678,
+    "start_ticks": "10779104"
+  }
+}

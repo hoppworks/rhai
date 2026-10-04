@@ -1,0 +1,18 @@
+[
+  {
+    "expected_status": 0,
+    "independent_readback": [
+      "test measurement_controls_reject_corruption ... ok"
+    ],
+    "name": "control-pass",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": [
+      "test direct_managed_measurements ... ok"
+    ],
+    "name": "measurements",
+    "status": 0
+  }
+]

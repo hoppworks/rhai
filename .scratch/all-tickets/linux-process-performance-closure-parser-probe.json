@@ -1,0 +1,6 @@
+{
+  "exact_reader_function": "parse_start extracted from remote literal",
+  "valid_parenthesized_command": true,
+  "malformed_pid_framing_separator_short_zero_negative_nonnumeric_rejected": 6,
+  "native_execution": false
+}

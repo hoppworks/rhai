@@ -1,0 +1,3 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+launcher	1416668	1416605	1416605	10779101	/root/rhai-linux-process-performance-8c0ee-20261004/launch.sh
+run-scoped	1416678	1416668	1416605	10779101	python3 /root/rhai-linux-process-performance-8c0ee-20261004/runner/tools/run_scoped.py --timeout 570 -- python3 /root/rhai-linux-process-performance-8c0ee-20261004/linux-process-performance-proof.py

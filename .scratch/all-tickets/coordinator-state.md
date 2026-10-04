@@ -185,10 +185,27 @@ missing-authorization blocker. Existing accepted proof below remains applicable.
 
 ## Current step and next action
 
-Root continues under current global/project rules (skills revision6830c49),
-strict proof and existing automatic fork-main authorization. Fork main remains
-ba3b14988d9db9d1cfab191b6cbe404ec3c8248b; no new push or remote task ref.
-Accepted final-drop and examples evidence remains applicable and unchanged.
+Root under revision6830c49, strict proof and automatic fork-main integration.
+HEAD and last verified sole remote main:8c0ee4634355aee4e841b455461a7dd5aac2aa18.
+Performance a7cef566 source/gate passed after one failed source correction;
+native allocation1 terminal0. All10start/6capture/2live/2closed rows preserved.
+Collector infrastructure failure1 (short-lived empty cmdline) recovered via
+reviewed5b708 consumer, exact populated argv binding and wrong-runtime control.
+Same archive resumed, fresh custody82IDs/62samplers/12heldfixtures and exactstage
+retirement passed; separate read84IDs/8groups/6paths passed. No performance resources
+retained, original archive unchanged. Final combined actual acceptance ACCEPTED for the Linux measurement criterion;
+root now commits proof/tickets/state and pushes only to authorized fork main.
+Hard600/585/540seconds and resource caps unchanged; native allocations1 total,
+failed source correction1; cost/active work unknown. Same12:38planning checkpoint.
+Independent next requirement: process overflow/deadline same-step precedence.
+Fresh named Standard process_overlap_acceptance has source-only30minute planning
+package in owned /Users/hoppworks/projects/rhai/.worktrees/process-overlap-acceptance,
+task/process-overlap-acceptance at8c baseline; brief process-overlap-acceptance-brief.md.
+Owner-approved public Engine/SysPackage/realOS seam, explicit readiness and exact
+cleanup, cfg(test) per-execution scheduling only if needed. No new nativeallocation.
+API21/stdin/Darwin/Windows exhausted paths remain stopped; overall goal incomplete.
+
+### Preserved pipe/API preparation and cause history
 
 Pipe correction2faa6a9679a42f52a878fc075f16f6bc296c0bcc selectively intaken
 as exactly five intended files; no writer history merge. Same combined Expert
@@ -289,10 +306,10 @@ receipt readback ACCEPTED; proof linux-post-spawn-pipe-setup-proof.md covers nar
 Linux setupfault criterion only.47samples maximaRSS898500KiB/storage687332KiB/
 7descendants,notcontinuouspeaks. Helper39.463s; cumulativeactive/costunknown.
 
-Next: ticket03/06 partial closure and selective
-atomic evidence/state integration with exacthoppworks attribution, pushforkmain
-and verifyremoteonlymain. Then choose remaining independent acceptance scope;
-API Expert21/stdin/Mac/Windows stoppedcauses remain unrenewed.
+Pipe closure integration completed at8c0ee4634355aee4e841b455461a7dd5aac2aa18;
+author and committer exacthoppworks, push and sole remote-main readback passed.
+Next independent scope is Linux process performance; API Expert21/stdin/Mac/
+Windows stopped causes remain unrenewed.
 Only source/test/proof-covered integrated requirements may close; fork main only
 receives verified coherent integration. Overall Goal active/incomplete.
 
@@ -3301,3 +3318,107 @@ Corrected deterministic inventory to three numeric fields plus rawargs tokens
 (first3runnerbasename or directcompilerbasename), no shellinterpretation.
 Native3 notallocated by thatfailedobservation; sameconcurrencycausehistory
 retained, nextgate failuretriggersfreshExpert instead of further rootrepair.
+
+## Current independent Linux process performance package — 2026-10-04
+
+Pipe partial03/06 acceptance integrated and pushed at8c0ee4634355aee4e841b455461a7dd5aac2aa18, author/committer hoppworks; remote readback ONLY main atsamecommit. No retained pipe resources. API cause21 remains stopped after its sole Expert follow-up failed; originals/unaccepted sources preserved.
+Next owner Standard drop_false_consolidated_correction prepares Linux-only Direct/Managed latency, throughput and retained-resource measurements against frozen8c. Contract linux-process-performance-brief.md: initial one-launch planning estimate,5start+3oneMiBcapture samples/mode and one live plus one postclosure resource snapshot/mode, no native allocation yet. Preparation30minute active-work checkpoint; native600/585/540second bounds incl30second export,2jobs,16descendants,1572864KiB preemptdisk/2097152KiB hardRSS/disk, fresh capacity/slot. No foreign work or stopped path renewed. Source-only preparation then one combined independent review before native allocation. Consumed launches0; correction/recovery counts0 for this independent cause. Cost/token unavailable.
+
+Performance package planning clock: started2026-10-04T10:58Z, wall checkpoint11:38Z including setup/recovery/native; preparation active checkpoint30minutes measured by owner. Preliminary capacity receipt linux-process-performance-capacity-preparation.json records one foreignheavy group1046889, available78791148KiB and720894251008freebytes, sampled only. Fresh admission still required; no allocation.
+
+### Performance source freeze and initial review
+Source-only35ec5c0d37af2fb867f8c12747e427613fd6cc30 at owned writer, exacthoppworks author/committer, clean tree. Ten intended packagefiles only, no wholewriterhistory integration. Public Engine harness and fixed10start/6capture/2live/2closed rows, two minimal controls; parser positives/sevenmutants, AST/bash/rustfmt/pins passed. Those are source probes, no Rust typecheck or native measurements. Reviewer loaded6830c49 and initial combined findings in progress (missing Package trait import; group census hides read/parse failures; readiness/admission/export dependencies). Initial candidate readiness review, not completed failed correction. Root source-only preflight/slot-wrapper checks11 pins/freshzeroheavy/resources/load immediately before allocation; not executed/reviewed yet. Native allocation0; source/recovery counts0. Existing stopped causes unrenewed.
+
+### Performance initial consolidated correction
+Combined initial source review35ec5c0d NOTREADY, report linux-process-performance-review.md: P1 Package trait import; P2 conservative directory/stat census; P3 post-mv held-state acknowledgment; P4 bounded partial export and actual structured sampler records; P5 quotient/host counts/delta producer-consumer binding; P6 planning count versus hard limits. Concrete narrow post-run originals/custody/retirement gate also required before allocation. Initial readiness rejection, no failed completed correction/native recovery. Same Standard owns one consolidated source-only fix batch and narrow accepted originals-gate adaptation; no production changes. Root admission11pins/source routes reviewed statically, repin after next freeze.
+Planning estimate revised before next work from original40minute wall checkpoint11:38Z to70minute checkpoint12:08Z starting10:58Z, preserving elapsed (~32minutes through initial freeze/review) and native allocations0 of initial1. Concrete new insight: six source defects and missing coupled closure consumer now identified before native work; bounded source repair can close named checks, ample source-only capacity with no build admitted. Correction30minute active planning checkpoint; counters/time/cause preserved, no user/resource safety limit lifted. Per-run600/585/540/510seconds incl30export,2jobs,16descendants,1572864KiB preemptdisk/2097152KiB hardRSS/disk and finite5+3samples/mode unchanged. Fresh zero-heavy/capacity required before staging and launch; never stop foreign work.
+
+### Performance corrected source freeze
+Corrected4be671c12f7837281ba2d9d79fd3648b23963dba: six changed files including
+new narrow collector; initial sourceNOTREADY defects corrected as one batch.
+Root freeze receipt linux-process-performance-freeze.json records eleven intended
+files and repinned preflight5d8b9fe0.../wrapper544a5715...; wrapper reads actual
+staged admission bytes and binds preflight literal/stdin before emitting hashes.
+Collector dynamically binds staged/local reviewed admission bytes and allocation.
+Recipe probes reported10start/6capture/2live/2closed,14parser negatives and
+collector throughput/storage/provenance rejects plus actual local embedded custody
+preamble execution. These are source probes, not native acceptance. Same combined
+Expert affected recheck running. Native allocations0, correction acceptance pending;
+cumulative active time/cost unknown, package wall start10:58Z/checkpoint12:08Z
+unchanged. No own remote staging/runtime allocated. All hard limits/history retained.
+
+### Performance corrected-source rejection1
+Combined affected review4be671c12f7837281ba2d9d79fd3648b23963dba NOTREADY:
+collector destination parent missing; missing shutil import; required tool-versions
+receipt not emitted; proof-used imported before hash binding; launcher group census
+stale before groups added. Reviewer consolidates export failure Path serialization
+and actual probe applicability findings in same report. Completed source correction1
+rejected for coupled performance export/consumer readiness, not native infrastructure
+failure; allocations0/recoveries0. P1–P6 main fixes retain unaffected conclusions.
+Same-owner one consolidated further source repair follows final batch. A second
+failed correction for this cause requires fresh non-fork Expert escalation with
+preserved history; no stopped cause chains renewed. No remote stage/runtime exists.
+
+### Performance collector/export repair after correction1
+Final affected report C1–C5 consolidated: exact destination creation/import;
+actual tool-version receipt emission/raw binding; proof-used hash before import;
+complete launcher/public fixture PID-start/group census; Path serialization on
+actual export-failure branch. Same Standard retains context and fixes batch plus
+actual lightweight orchestration/producer/successful custody probes. No native,
+SSH or production changes. Source correction failures1, infrastructure recoveries0,
+native allocations0 preserved. P1/P2/P3/P5/P6 unaffected closures reused. Initial
+wall40minute estimate11:38Z, revised70minute12:08Z, now100minute12:38Z from
+same10:58Z start; approximately60minutes consumed, active time/cost unknown.
+Concrete new insight: actual producer/consumer/exact-group defects now identified
+before native allocation; safe source-only local capacity and bounded30minute
+repair can close named requirements. No hard cap raised. Actual native600/585/540
+seconds,2jobs,16descendants,1572864/2097152KiB and finite5+3samples unchanged.
+Second completed correction rejection for same cause triggers fresh Expert once.
+
+### Next independent process acceptance requirement
+While performance collector repair proceeds, root checked ticket03 input/output
+contract and test-first acceptance table: concurrent overflow/deadline must prefer
+OutputLimit within the same supervision step, otherwise preserve first committed
+cause. Frozen8c Unix run driver drains stdout/stderr before expired branch
+(src/packages/sys/process/unix.rs around2690–2855); existing proof/test names do
+not establish this exact overlap/first-cause criterion. It remains open, not a
+production defect claim. After current measurements, choose one narrow real-OS
+public Engine regression with explicit readiness plus an independent exact-cause
+control/readback; supplementary deterministic scheduling seam cannot replace OS
+acceptance. Do not reopen stopped stdin or platform custody chains. No new source,
+build or native allocation was made for this next requirement.
+
+### Performance correction2 freeze and affected review
+Frozen a7cef5661f696473631c2f71559561c43878ef6c, exact hoppworks author/committer,
+clean writer. Five intended files selected into root; unchanged main harness,
+launcher/source/archive/base retained. Freeze-correction2 receipt records updated
+admission6c777f64... and unchanged wrapper544a5715... . Local actual-function
+probes reported successful collector/export/custody/resume/retirement flow;
+wrong group/unknown identity, corrupted consumer before import, version emission
+and failure progress/receipt covered. Same combined Expert checks that applicability,
+not count alone. Native0/recoveries0; failed correction1 preserved, correction2
+acceptance pending. No stage/runtime allocated; same10:58–12:38 planning clock.
+Read-only capacity12:05:55Z showed foreign1321834/1321835 group,79,363,492KiB
+available RAM and717,228,503,040free bytes, preparation only/not admission.
+Fresh zero-heavy observation required before staging and guarded allocation.
+
+### Performance source/gate READY and fresh pre-stage admission
+Same combined Expert READY at a7cef5661f696473631c2f71559561c43878ef6c, C1–C5
+closed; reviewed pins and actual lightweight probe applicability accepted. Root
+receipt12:19:00Z has zero heavy runs,83,033,556KiB available RAM,
+724,339,937,280bytes free, load0.335/5.910/8.574; exact prospective stage/scope
+absent. Observation not reservation. Initial rejection and failed correction1
+preserved; correction2 passed, native allocations0 before staging. Root now stages
+only reviewed eleven inputs plus two reviewed admission sources, then runs staged
+wrapper with the AST-extracted preflight remote literal as JSON stdin. Wrapper
+performs fresh pins/zero-heavy/capacity admission and exclusively records actual
+allocation before launch. Native hard bounds unchanged, same12:38 checkpoint.
+
+### Performance native allocation1
+Reviewed stage completed; guarded staged wrapper admitted zero foreign heavy runs and verified11 inputs. Exclusive native allocation1 recorded with admission-source hashes and unchanged600/585/540second limits. Transport original: linux-process-performance-native1-transport.log. Measurement is running; no acceptance yet. Previous failed source correction1 and infrastructure recoveries0 preserved.
+
+### Performance native1 terminal and collector infrastructure failure1
+Native terminal0; control and measurement tests0, rows10start/6capture/2live/2closed. Sole originals archive and byte inventory preserved; local row/tool/source/sampler checks pass. Remote custody rejected sampler argv/runtime mismatch before retirement. Stage retained, build/scope removed by runner. Same Standard diagnoses narrowly against actual originals, no measurement rerun. Infra failure1/recoveries0; no product correction consumed. Acceptance pending fresh custody/retirement/closure and combined affected review.
+
+### Performance native1 recovery and closure
+Same-archive consumer5b708 affected READY, actual local wrong-runtime control rejects. Fresh custody82identities/62samplers/12heldfixtures and exact stage retirement passed. Separate root read confirmed84PID/start identities including two launchers,8ownedgroups,6logical/physical stage/scope/runtimepaths absent or reused/empty. All originals unchanged; one recovered collector infrastructure failure, source failed correction1 unchanged, native allocations1. No retained performance runtime/stage. Final combined actual proof review pending; same12:38planning checkpoint.

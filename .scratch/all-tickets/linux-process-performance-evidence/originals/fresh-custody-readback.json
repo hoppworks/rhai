@@ -1,0 +1,16 @@
+{
+  "exact_identities_absent_or_reused": 82,
+  "fresh_stage_inventory": true,
+  "managed_fixture_groups": [
+    1418417,
+    1418420,
+    1418430,
+    1418433,
+    1418443,
+    1418475
+  ],
+  "owned_groups_empty": true,
+  "public_fixture_identities_absent": 12,
+  "sampler_instances": 62,
+  "scope_absent": true
+}

@@ -484,3 +484,29 @@ cwd correction remain recorded; valid native proof was reused without another
 build or original export. Only this named Linux fault criterion closes. Stdin,
 other lifecycle/fault paths, other platforms/features, performance, API metadata
 and full release acceptance remain open; stopped retry histories are unchanged.
+
+## Accepted Linux Direct/Managed measurement subset — 2026-10-04
+
+Frozen production baseline8c0ee4634355aee4e841b455461a7dd5aac2aa18, reviewed
+measurement overlaya7cef566, private native Linux x86_64 Rust/Cargo1.77.2,
+`testing-environ,sys`, locked dependencies and2jobs. Public Engine/SysPackage
+and real children produced5start and3complete1MiB captured-run samples per mode,
+plus one held/closed resource observation per mode. Start-readiness medians were
+1.356ms Direct/1.537ms Managed; whole captured-run medians100.860ms/201.227ms.
+The rate includes startup/collection, not transfer-only throughput or causal overhead.
+Both modes returned the observed host thread/descriptor counts to their baselines.
+
+Three corruption/census controls passed. One native allocation finished0; the first
+custody consumer encountered exited sampler empty cmdline observations, then one
+reviewed collector repair recovered using the same unchanged sole originals archive.
+93original files/8directories, actual source/tool/lock/rows binding, fresh custody,
+exact retirement and separate84PID/start identity/8group/6path closure readback
+were independently accepted. No retained build or stage remains. Detailed ranges,
+commands, control limits and archive identity are in
+[the accepted measurement proof](../../all-tickets/linux-process-performance-proof.md)
+and [combined review](../../all-tickets/linux-process-performance-review.md).
+
+This closes only the Linux measurement criterion at the stated revision/workload.
+Remaining lifecycle/first-cause, stdin, native macOS/Windows, API metadata/docs,
+full current feature/MSRV and release acceptance stay open; stopped causes are
+not renewed. Prior unaffected proof is reused, not rerun.

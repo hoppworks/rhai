@@ -1,0 +1,22 @@
+{
+  "candidate_commit": "4be671c12f7837281ba2d9d79fd3648b23963dba",
+  "selected_files": [
+    ".scratch/all-tickets/linux-process-performance-evidence/Cargo.lock.accepted",
+    ".scratch/all-tickets/linux-process-performance-evidence/archive-build-source.py",
+    ".scratch/all-tickets/linux-process-performance-evidence/check-linux-current-msrv-examples.py",
+    ".scratch/all-tickets/linux-process-performance-evidence/collect-originals.py",
+    ".scratch/all-tickets/linux-process-performance-evidence/launch.sh",
+    ".scratch/all-tickets/linux-process-performance-evidence/linux-process-performance-proof.py",
+    ".scratch/all-tickets/linux-process-performance-evidence/linux_process_performance.rs",
+    ".scratch/all-tickets/linux-process-performance-evidence/measurement-contract.md",
+    ".scratch/all-tickets/linux-process-performance-evidence/recipe-probes.py",
+    ".scratch/all-tickets/linux-process-performance-evidence/source.tar",
+    ".scratch/all-tickets/linux-process-performance-evidence/stage.sh"
+  ],
+  "admission_sources": {
+    ".scratch/all-tickets/linux-process-performance-preflight.py": "5d8b9fe0f8fc4250674f0ff6aa7539b1193a0b8edba922687715f36403b0f848",
+    ".scratch/all-tickets/linux-process-performance-slot-wrapper.py": "544a5715eea0920016c5dec83fa023bafba8d8b11f03621877a477556eb2f3a7"
+  },
+  "native_allocations": 0,
+  "remote_stage_created": false
+}

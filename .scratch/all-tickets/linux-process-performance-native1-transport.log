@@ -1,0 +1,66 @@
+PERFORMANCE_SLOT_OBSERVATION {"returncode": 0, "stdout": "{\n  \"utc\": \"2026-10-04T12:23:19Z\",\n  \"ready\": true,\n  \"inputs_verified\": 11,\n  \"heavy\": [],\n  \"mem_available_kib\": 82994816,\n  \"disk_free_bytes\": 724332691456,\n  \"load\": [\n    0.16259765625,\n    2.58544921875,\n    6.51953125\n  ],\n  \"scope_absent\": true\n}\n", "stderr": ""}
+PERFORMANCE_ALLOCATED {"source_revision": "8c0ee4634355aee4e841b455461a7dd5aac2aa18", "native_launch": 1, "preflight_source_sha256": "6c777f645f3ffe3315332aef66998e631e35a07a144f027016f28160b7fd4b0e", "slot_wrapper_source_sha256": "544a5715eea0920016c5dec83fa023bafba8d8b11f03621877a477556eb2f3a7", "classification": "initial planning estimate, all launches counted", "preflight": {"utc": "2026-10-04T12:23:19Z", "ready": true, "inputs_verified": 11, "heavy": [], "mem_available_kib": 82994816, "disk_free_bytes": 724332691456, "load": [0.16259765625, 2.58544921875, 6.51953125], "scope_absent": true}, "outer_seconds": 600, "runner_seconds": 585, "helper_seconds": 540}
+launch_utc=2026-10-04T12:23:19Z
+outer_timeout_seconds=600
+stage=/root/rhai-linux-process-performance-8c0ee-20261004
+scope=/root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004
+source.tar: OK
+Cargo.lock.accepted: OK
+check-linux-current-msrv-examples.py: OK
+archive-build-source.py: OK
+linux_process_performance.rs: OK
+measurement-contract.md: OK
+linux-process-performance-proof.py: OK
+launch.sh: OK
+runner/tools/run_scoped.py: OK
+runner/tools/agentskills/__init__.py: OK
+runner/tools/agentskills/pyguard.py: OK
+adaptive_runner_timeout_seconds=570
+PRIVATE_RUNTIME /root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6
+command=rustup-install argv=['/root/.cargo/bin/rustup', 'toolchain', 'install', '1.77.2-x86_64-unknown-linux-gnu', '--profile', 'minimal', '--no-self-update']
+sample={"descendants": 2, "monotonic_seconds": 0.027, "rss_kib": 43904, "storage_kib": 56}
+sample={"descendants": 2, "monotonic_seconds": 1.04, "rss_kib": 99148, "storage_kib": 32924}
+sample={"descendants": 2, "monotonic_seconds": 2.054, "rss_kib": 54768, "storage_kib": 70552}
+sample={"descendants": 2, "monotonic_seconds": 3.069, "rss_kib": 54648, "storage_kib": 93204}
+sample={"descendants": 2, "monotonic_seconds": 4.085, "rss_kib": 54636, "storage_kib": 114972}
+sample={"descendants": 2, "monotonic_seconds": 5.099, "rss_kib": 169476, "storage_kib": 181612}
+sample={"descendants": 2, "monotonic_seconds": 6.112, "rss_kib": 318536, "storage_kib": 323780}
+sample={"descendants": 2, "monotonic_seconds": 7.124, "rss_kib": 285916, "storage_kib": 459680}
+sample={"descendants": 1, "monotonic_seconds": 7.936, "rss_kib": 28716, "storage_kib": 459744}
+status=rustup-install:0
+command=rustc-version argv=['/root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 7.948, "rss_kib": 28644, "storage_kib": 459752}
+sample={"descendants": 1, "monotonic_seconds": 8.058, "rss_kib": 28656, "storage_kib": 459756}
+status=rustc-version:0
+command=cargo-version argv=['/root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', '--version', '--verbose']
+sample={"descendants": 2, "monotonic_seconds": 8.069, "rss_kib": 28716, "storage_kib": 459760}
+sample={"descendants": 1, "monotonic_seconds": 8.182, "rss_kib": 28740, "storage_kib": 459764}
+status=cargo-version:0
+command=control-pass argv=['/root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--test', 'linux_process_performance', '--features', 'testing-environ,sys', 'measurement_controls_reject_corruption', '--', '--exact', '--nocapture', '--test-threads=1']
+sample={"descendants": 2, "monotonic_seconds": 8.246, "rss_kib": 50728, "storage_kib": 467048}
+sample={"descendants": 2, "monotonic_seconds": 9.259, "rss_kib": 71836, "storage_kib": 470304}
+sample={"descendants": 2, "monotonic_seconds": 10.272, "rss_kib": 72524, "storage_kib": 470544}
+sample={"descendants": 2, "monotonic_seconds": 11.287, "rss_kib": 106652, "storage_kib": 490028}
+sample={"descendants": 4, "monotonic_seconds": 12.308, "rss_kib": 472484, "storage_kib": 540848}
+sample={"descendants": 7, "monotonic_seconds": 13.328, "rss_kib": 392660, "storage_kib": 572204}
+sample={"descendants": 4, "monotonic_seconds": 14.349, "rss_kib": 541180, "storage_kib": 593760}
+sample={"descendants": 4, "monotonic_seconds": 15.369, "rss_kib": 718204, "storage_kib": 610392}
+sample={"descendants": 4, "monotonic_seconds": 16.391, "rss_kib": 703228, "storage_kib": 627800}
+sample={"descendants": 4, "monotonic_seconds": 17.413, "rss_kib": 643060, "storage_kib": 660176}
+sample={"descendants": 3, "monotonic_seconds": 18.433, "rss_kib": 594484, "storage_kib": 663384}
+sample={"descendants": 3, "monotonic_seconds": 19.454, "rss_kib": 762876, "storage_kib": 669088}
+sample={"descendants": 3, "monotonic_seconds": 20.473, "rss_kib": 862348, "storage_kib": 683016}
+sample={"descendants": 7, "monotonic_seconds": 21.494, "rss_kib": 435880, "storage_kib": 709240}
+sample={"descendants": 1, "monotonic_seconds": 22.014, "rss_kib": 29316, "storage_kib": 730720}
+status=control-pass:0
+command=measurements argv=['/root/.local/share/agent-builds/rhai/linux-process-performance-8c0ee-20261004/agent-build-jb7dpps6/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo', 'test', '--locked', '--test', 'linux_process_performance', '--features', 'testing-environ,sys', 'direct_managed_measurements', '--', '--exact', '--ignored', '--nocapture', '--test-threads=1']
+sample={"descendants": 2, "monotonic_seconds": 22.033, "rss_kib": 64816, "storage_kib": 730732}
+sample={"descendants": 4, "monotonic_seconds": 23.053, "rss_kib": 72200, "storage_kib": 730864}
+sample={"descendants": 1, "monotonic_seconds": 23.27, "rss_kib": 29188, "storage_kib": 730888}
+status=measurements:0
+evidence_exported=/root/rhai-linux-process-performance-8c0ee-20261004/proof-evidence
+/root/rhai-linux-process-performance-8c0ee-20261004/launch.sh: line 186: /proc/1416678/stat: No such file or directory
+run_scoped_status=0
+runtime_cleanup_status=0 pid_readback_status=0 scope_cleanup_status=0
+outer_status=0
+PERFORMANCE_TERMINAL 0

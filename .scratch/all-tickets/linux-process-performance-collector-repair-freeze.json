@@ -1,0 +1,11 @@
+{
+  "candidate": "5b7088339e15d8c2b5083d814891fa9ca2c7ee53",
+  "files": {
+    ".scratch/all-tickets/linux-process-performance-evidence/collect-originals.py": "c3663317be4930a556c63a48e9bdfb53ea435020788217450e5d804d317ce736",
+    ".scratch/all-tickets/linux-process-performance-evidence/recipe-probes.py": "cb2eea09915f51c6915a25166d54fe38df8449aa8d7b15c68e02b8ae7421c408",
+    ".scratch/all-tickets/linux-process-performance-evidence/sampler-argv-preserved-originals-result.json": "f22b68a23c75b334bb83ec27af1ddae091f8bd8cf8751e4f3e51c0ba3798c448"
+  },
+  "native_allocations": 1,
+  "sole_originals_unchanged": true,
+  "reason": "first actual custody attempt rejected exited sampler empty cmdline; require exact populated instance and reject populated wrong runtime"
+}

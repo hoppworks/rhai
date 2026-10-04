@@ -1,0 +1,24 @@
+{
+  "source_revision": "8c0ee4634355aee4e841b455461a7dd5aac2aa18",
+  "native_launch": 1,
+  "preflight_source_sha256": "6c777f645f3ffe3315332aef66998e631e35a07a144f027016f28160b7fd4b0e",
+  "slot_wrapper_source_sha256": "544a5715eea0920016c5dec83fa023bafba8d8b11f03621877a477556eb2f3a7",
+  "classification": "initial planning estimate, all launches counted",
+  "preflight": {
+    "utc": "2026-10-04T12:23:19Z",
+    "ready": true,
+    "inputs_verified": 11,
+    "heavy": [],
+    "mem_available_kib": 82994816,
+    "disk_free_bytes": 724332691456,
+    "load": [
+      0.16259765625,
+      2.58544921875,
+      6.51953125
+    ],
+    "scope_absent": true
+  },
+  "outer_seconds": 600,
+  "runner_seconds": 585,
+  "helper_seconds": 540
+}

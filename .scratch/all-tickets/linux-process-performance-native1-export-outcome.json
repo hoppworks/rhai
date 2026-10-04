@@ -1,0 +1,10 @@
+{
+  "native_allocation": 1,
+  "transport_status": 0,
+  "collector_status": 1,
+  "classification": "collector infrastructure mismatch before custody; native measurements and local validation successful, acceptance pending",
+  "error": "sampler argv/runtime mismatch",
+  "sole_archive_sha256": "9d9a76ada075e53e47ae605509f89ee72e49a8be64ad4e4118e3e1dd732d7473",
+  "archive_bytes": 6809600,
+  "retirement_performed": false
+}
