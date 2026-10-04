@@ -125,23 +125,41 @@ readback passed. Exact original rustup stdout has a trailing blank line;
 raw proof was preserved and excluded only from whitespace formatting checks.
 Next sameowner drop-false executable preparation and one combined review.
 
-Independent drop-false package remains with same Standard. Proposal118a2c40 and
-test-only patch against523 address the brief live-phase observation race through
-an opt-in Linux8second request/ACK barrier. Root found missing start identities
-and proposal/ACK digest mismatch before freeze; this is preparation feedback,
-not a failed native/product correction. Owner checkpoint confirms regenerated
-pinned523 patch includes host/member start and PGID fields; ACK echoes the exact
-request bytes, independently checked against live proc tuples. Driver binds test
-host PPID to recorded Cargo. Observer schema and collector terminal census are
-aligned. Local sensitivity/syntax checks and dependent pin freeze remain; source
-review and native acceptance unverified. No SSH/stage/build/native allocation
-in this preparation brief. Earlier cumulative active time remains unknown;
-owner explicitly preserved prior history instead of inventing/resetting totals.
-Existing30minute active-work planning checkpoint and exact600/585/540seconds/
-resource caps for a later reviewed launch remain. Human Tauron coordination
-permission is reconciled with already sent coordination/terminal messages; no
-window grant or renewed capacity exception is inferred from it.
-Broader process/fault/platform/feature/performance/release criteria remain open.
+Drop-false local preparation is frozen in writer8f90a91e04a1934324c9dfac7d622987d86f9fee,
+owned /Users/hoppworks/.codex/worktrees/linux-managed-success/rhai. Exactly eight
+recipe/proposal/patch files; production and unaccepted stdin tests not integrated.
+Root verified immutable commit attribution hoppworks <daniel@hoppworks.de> and
+all eight SHA256 pins. Local Python/embedded/shell syntax, pinned523 patch dry-run,
+stage input binding and whitespace checks passed; Linux proc behavior unverified.
+Root pre-freeze feedback corrected missing start/PGID identities and digest/ACK
+mismatch. This was preparation feedback, not failed native/product correction.
+ACK echoes exact complete request bytes; host parent binds to recorded Cargo,
+live and terminal fixture identities/groups receive independent readbacks.
+Combined independent review at8f90 is NOT READY, recorded in
+linux-drop-false-combined-review.md. Eight consolidated areas have deterministic
+actual-function/source-shaped probes: helper pin mismatch; packed request grammar
+rejected; initial request/ACK race and missing pre-ACK ancestry; overwritten
+package metadata; lost signal/partial/RED custody; SSH framing and repeated
+sample/owner contract mismatch; malformed proc/deletion-boundary closure;
+launcher elapsed-time bounds. These are initial recipe defects, not meaningful
+product RED or native failures. Historical custody19 and SSH quoting causes
+remain explicit; no reset/new exemption. Root sent ONE consolidated correction
+to same Standard stdin_closure_test, using full report and preferring existing
+accepted helper/EA7 collector/adaptive launcher logic with narrow configuration.
+No production change, staging, Cargo, native allocation or capacity exception.
+Next: receive coherent fix freeze with actual producer/consumer positive and
+corruption checks; same Expert affected-delta review, then root fresh default
+slot/pins for bounded native launch only after readiness.
+Fresh read-only workhorse observation03:19:40Z confirms foreign heavy launcher
+3858871/start7473769, supervisor3858875/start7473771 and Cargo/rustc in3858875.
+No process/resource modified. Occupied slot does not block local correction;
+human coordination authorization persists, no granted window is claimed.
+Earlier cumulative active work remains unknown, preserving all history.
+Planningcheckpoint30min and exact600/585/540second/resource caps remain.
+Latest prior state-only fork main68ad7db6edc172afcb6080fb084c66573a0453e5
+read back only remotehead; source/proof inputs unchanged. Current turn PROGRESS:
+independent concrete failures changed exact correction and prevented invalid
+allocation. No new drop-false criterion accepted. Broader scope remains open.
 
 ### Current lightweight pipe-setup evidence reuse diagnosis
 
