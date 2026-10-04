@@ -206,3 +206,29 @@ Invocation109 is terminal0. Its finite exception has expired. All71 original
 files and seven closure artifacts were exported and independently hash checked.
 Exact owned stage/scope retirement and fresh group absence passed; no retained
 109 resources and no foreign process modified. Future runs require fresh checks.
+
+## Single corrected60048 example capacity exception
+
+For only the prepared corrected60048 example invocation, allow two heavy runs:
+foreign launcher3276320/start6852456 (PGID3276313), supervisor3276321/start6852459
+(PGID3276321), and this bounded Rhai run. Fresh read-only workhorse measurement
+on 2026-10-04 reports32 CPUs, MemAvailable78177216KiB, free519143673856bytes,
+load4.58/6.87/7.71 and sampled foreign heavy RSS7293216KiB. Samples are neither
+peaks nor reservations. No foreign process/resource may be changed.
+
+Require immediate ten frozen input hashes, absent own prospective scope/terminal,
+either a completely free slot or both exact foreign identities/argv and no third
+runner/compiler group. All foreign Cargo/rustc entries must belong to3276321;
+other heavy tools block launch. Require16GiB available RAM and disk and one-minute
+load below16 on32 CPUs. Rhai retains2 Cargo jobs,600/585/540second outer/runner/
+helper limits (including30second export reserve),16 descendants,1572864KiB
+preemptive storage and2097152KiB hard RSS/storage caps. Use the independently
+reviewed fixed finite-slot guard with explicit Python check=True before launcher.
+This workflow exception expires at this invocation's terminal outcome; it does
+not renew stopped stdin/native110, Darwin/Windows or any earlier exception.
+
+The corrected60048 invocation is terminal1 on 2026-10-04 after about40seconds:
+Cargo example compilation E0369 before behavior controls. Its single capacity
+exception has expired. All49 original files are preserved; exact stage retirement
+and independent102 PID/start, two-group and four-path absence checks passed.
+No foreign process/resource changed; future heavy runs require fresh checks.

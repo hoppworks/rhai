@@ -81,6 +81,58 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 
 ## Current step and next action
 
+Rules faba3db loaded; goal active and incomplete. Latest independently verified
+fork main1a3411abf2eb7045d4166df0448c097b523d83c2. Accepted production523 and
+native109 remain valid within recorded applicability. Native110 unallocated;
+exhausted stdin/macOS/Windows chains remain stopped. No active owned heavy run.
+
+Corrected60048 example invocation2 is terminal1 after about40seconds. Rust/Cargo
+1.77.2 installation/version rows passed; cargo-build-examples101 at E0369,
+examples/sys_process.rs260: Map<Dynamic> has no Rust PartialEq. Initial663 E0405
+private Variant defect is absent in this run. Six behavior controls did not run;
+this is compiler infrastructure outcome, not meaningful RED or acceptance.
+One attempted compiler repair failed its native build check; initial launch1
+and current launch2 remain consumed, no history reset. Same Standard owns a
+bounded source-only public typed-field comparison correction,30minute active
+planning checkpoint with previous work retained. No production/test/SSH/stage/
+heavy-run permission in that brief. Source review and fresh capacity check are
+required before any next native launch; no expired exception carries forward.
+
+All49 originals and6directories plus raw tar preserved in process-example2-originals.
+Raw tar SHA256 f7a37e0345d9958fe321ea2b65cfde5aa4e7e30e12e1bb5675852fd721c665d9.
+Reviewed configured collector SHAa36c1d... verified exact ten-input binding,
+102 emitted PID/start identities, two empty groups3416800/3416871, absent
+runtime/scope. Exact retirement removed49 files/6directories after immediate
+hash/identity/group recheck. Separate root SSH readback independently verifies
+all102 identities absent/reused, both groups empty and four logical/physical
+stage/scope/runtime paths absent. See process-example2-retirement-independent.json
+and readback-process-example2-retirement.py. No retained native2 build/stage.
+Configured writer-owned /private/tmp collector/source archive remain foreign
+owned pending owner cleanup; root will not delete them without transfer.
+
+The single measured corrected60048 concurrency exception is EXPIRED. Immediate
+reviewed guard passed02:04:44Z before launch, explicit Python check=True enforced.
+No foreign process/resource changed. Authorized Tauron chat coordination sent
+both finite capacity notice and terminal outcome/resource status. Current default
+returns to one heavy run unless a fresh measured exception is recorded.
+
+Drop-false diagnosis preserves valid macOS81 behavior proof because actual test
+bodies/fixtures/production dependencies are unchanged to523. Independent managed
+member readback gap and Linux two exact-case native proof remain open; see
+linux-drop-false-next.md. No whole-file-hash-only rebuild or new harness needed.
+Next: review the corrected example source in same responsible contexts, then
+fresh measured native acceptance; independent drop-false work follows existing
+fixtures. Overall feature/MSRV/native platform/release gates remain open.
+
+Current turn PROGRESS: actual native compiler outcome diagnosed, original proof
+preserved and exact own resource retirement independently closed. Guard candidate
+source failure1 and repaired READY verdict remain in review/history. Elapsed
+native sample about40seconds; source-active/time/cost unknown except earlier
+reported31-32collector source minutes plus unknown. Samples are not peaks.
+
+### Previous continuation receipts and cause history (preserved)
+
+
 Current instructions faba3db loaded. Goal active/incomplete; latest independently
 verified fork main44c266f4890a6fda2948882af88c1c0a6c9e10f7. Accepted production523
 and native109 proof unchanged. Native110 unallocated; explicitly exhausted
@@ -146,6 +198,43 @@ live Cargo/rustc descendants;10 pins intact, prospective scope absent. Original
 guard output process-example2-preflight-slot-wait.json. No heavy run launched or
 foreign resources modified. Continue at actual free slot/coordination response;
 no repeated status-only rounds or expired concurrency exception reuse.
+
+Independent drop-false applicability diagnosis now narrows the remaining gap:
+macOS81 exact two test bodies, called fixtures and relevant production/Cargo
+compare unchanged to523; different whole-file SHA alone does not invalidate
+proof. Direct524288bytes per stream/challenge/reap and managed challenge/sentinel
+assertions retained. Independent macOS81 host readback covers direct53149 and
+sentinel53168, but not managed53169-53171/group53169. Linux89/90/102/109 do not
+establish both exact false-policy cases. Reuse valid macOS paths, preserve this
+independent managed-member gap and add Linux actual proof next; no fixture change
+or broad macOS rebuild justified. Refined linux-drop-false-next.md original hash
+6959f765bac07aa490f71792714badb2a4e99cd11db56c61369ed70c170f7d59.
+Writer commit index-lock denial is infrastructure only, no source/test failure;
+root copied exact note, no shared config/hook change. Active time unknown.
+
+Safe route checkpoint: default one-heavy-run is an explicit workflow convention,
+not a human safety cap; applicable global rules allow measured project higher
+limits. Fresh workhorse32CPU/load4.58/6.87/7.71/MemAvailable78177216KiB/free
+519143673856bytes/foreign heavy RSSsample7293216KiB justify a SINGLE corrected
+example two-heavy exception, no foreign modification. Same foreign3276320/
+6852456 and3276321/6852459 remain live. Record exact exception in owned AGENTS;
+fixed guard .scratch/all-tickets/process-example2-preflight-finite-slot.py
+SHA9d43e7dcb1bcbeff20197c93702db387ab1366dc4320acb04ad8046d245fb64a.
+Only empty census or both exact identities/argv plus same-group Cargo/rustc,
+no third group/tool,16GiBRAM/disk and load1<16 permitted. Ten pins/own scope and
+terminal absence unchanged; own600/585/540/2jobs/2GiB/16desc caps retained.
+Initial guard lost detected heavy classification: first completed candidate
+NOTREADY (source failure1), actual Flutter/compilerargv RED reproduced. Same
+package correction retains comm/runner classification, owners exact runnerTrue/
+python3; extra cargo/rustc require runnerFalse, comm=argv0basename and same group.
+Same reviewer affected census-to-predicate check READY at4c21 hash; no new cause,
+Expert or history reset. Exception expires at this one terminal outcome;
+no stopped chain or earlier exception renewed. Tauron coordination update sent
+explaining measured finite exception without process interruption. Immediate
+hash-pinned check=True guard passed at 2026-10-04T02:04:44Z; corrected example launch2
+now allocated (original failed compile1 retained), native110 remains unallocated.
+Original immediate guard output process-example2-launch-preflight.json; own
+600/585/540 limits and finite single-run capacity exception bind this launch.
 
 Frozen replay probe retains its original writer Git-history dependencies e537/
 c600 and absolute fixture reference. Exact control bytes are also preserved as

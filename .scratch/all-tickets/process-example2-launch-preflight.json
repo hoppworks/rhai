@@ -1,0 +1,15 @@
+{
+  "utc": "2026-10-04T02:04:44Z",
+  "stage": "/var/roothome/rhai-linux-sys-process-example-60048ec4-20261004",
+  "inputs_verified": 10,
+  "scope_absent": true,
+  "heavy": [],
+  "mem_available_kib": 82163364,
+  "disk_free_bytes": 722850295808,
+  "load": [
+    6.87744140625,
+    4.48095703125,
+    6.06787109375
+  ],
+  "ready": true
+}

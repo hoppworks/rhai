@@ -1,0 +1,15 @@
+{
+  "archive_sha256": "ce8bcb76a6e839a5ee293f53d70784731bcfbb65b6694aa0e5b1ded2b00661d6",
+  "cargo_manifests_sha256": {
+    "Cargo.toml": "cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e",
+    "codegen/Cargo.toml": "1ad774a34019adecf5321498e443999d0a6c38412e2eb77b06f4ccc66aa64dc3",
+    "codegen/tests/custom_root/Cargo.toml": "1000e24c121e5a377db8b38926f4450166460ddbe3c9863811168dbfab490d86",
+    "fuzz/Cargo.toml": "7b65fd0c1d36908f502ec12a18c86a299cafbc3415187731d8330053e4244b46",
+    "no_std/no_std_test/Cargo.toml": "b05325f695dbce8aeb8d62f7b2c5e4bb888e0ca782050d3c11bceb6a0804f152"
+  },
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "lock_source": "/root/rhai-linux-sys-process-example-60048ec4-20261004/Cargo.lock.accepted",
+  "private_environment_sets_rustflags_or_wrappers": false,
+  "revision": "60048ec4d3d615fac3250404ce61b8cae14dfcb8",
+  "tracked_root_cargo_config": false
+}

@@ -1,0 +1,101 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+helper	3416872	3416871	3416871	7067580	python3 /root/rhai-linux-sys-process-example-60048ec4-20261004/run-examples.py
+scoped-supervisor	3416871	3416868	3416871	7067579	/usr/bin/python3 /var/roothome/rhai-linux-sys-process-example-60048ec4-20261004/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-sys-process-example-60048ec4-20261004/run-examples.py
+command:du	3416874	3416872	3416871	7067593	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3416875	3416872	3416871	7067593	/bin/ps -e -o pid=,ppid=,rss=
+command:rustup-install	3416876	3416872	3416871	7067594	/root/.cargo/bin/rustup toolchain install 1.77.2-x86_64-unknown-linux-gnu --profile minimal --no-self-update
+command:du	3416877	3416872	3416871	7067594	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3416895	3416872	3416871	7067595	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3416909	3416872	3416871	7067696	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3416910	3416872	3416871	7067696	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3416923	3416872	3416871	7067798	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3416924	3416872	3416871	7067798	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3416937	3416872	3416871	7067899	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3416939	3416872	3416871	7067900	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3416953	3416872	3416871	7068002	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3416954	3416872	3416871	7068003	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3416968	3416872	3416871	7068106	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3416969	3416872	3416871	7068106	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3416990	3416872	3416871	7068207	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3416991	3416872	3416871	7068208	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3417004	3416872	3416871	7068309	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417005	3416872	3416871	7068311	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3417017	3416872	3416871	7068412	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417019	3416872	3416871	7068413	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3417042	3416872	3416871	7068514	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417043	3416872	3416871	7068516	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3417065	3416872	3416871	7068617	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417066	3416872	3416871	7068618	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3417080	3416872	3416871	7068720	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417081	3416872	3416871	7068720	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3417093	3416872	3416871	7068821	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417094	3416872	3416871	7068822	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3417107	3416872	3416871	7068923	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417108	3416872	3416871	7068924	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3417121	3416872	3416871	7069025	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417123	3416872	3416871	7069028	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3417135	3416872	3416871	7069129	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417136	3416872	3416871	7069132	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3417150	3416872	3416871	7069233	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417151	3416872	3416871	7069236	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3417163	3416872	3416871	7069337	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417164	3416872	3416871	7069338	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3417178	3416872	3416871	7069439	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417179	3416872	3416871	7069439	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3417192	3416872	3416871	7069540	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417194	3416872	3416871	7069540	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3417217	3416872	3416871	7069641	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417218	3416872	3416871	7069642	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3417230	3416872	3416871	7069743	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417231	3416872	3416871	7069744	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3417241	3416872	3416871	7069805	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417242	3416872	3416871	7069805	/bin/ps -e -o pid=,ppid=,rss=
+command:rustc-version	3417243	3416872	3416871	7069806	/root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose
+command:du	3417244	3416872	3416871	7069806	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417245	3416872	3416871	7069806	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3417248	3416872	3416871	7069817	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417249	3416872	3416871	7069818	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-version	3417250	3416872	3416871	7069818	/root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose
+command:du	3417251	3416872	3416871	7069819	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417253	3416872	3416871	7069819	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3417265	3416872	3416871	7069829	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417266	3416872	3416871	7069830	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3417267	3416872	3416871	7069831	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417268	3416872	3416871	7069831	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-build-examples	3417269	3416872	3416871	7069832	/root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo build --locked --example sys --example net --example sys_process --features testing-environ,sys,net
+command:du	3417270	3416872	3416871	7069832	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417271	3416872	3416871	7069832	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3417287	3416872	3416871	7069933	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417289	3416872	3416871	7069933	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3417306	3416872	3416871	7070034	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417307	3416872	3416871	7070035	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3417324	3416872	3416871	7070136	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417325	3416872	3416871	7070136	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3417340	3416872	3416871	7070237	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417341	3416872	3416871	7070237	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3417358	3416872	3416871	7070339	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417359	3416872	3416871	7070339	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3417471	3416872	3416871	7070440	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417473	3416872	3416871	7070441	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3417651	3416872	3416871	7070542	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417652	3416872	3416871	7070543	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3417955	3416872	3416871	7070644	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3417956	3416872	3416871	7070645	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3418240	3416872	3416871	7070746	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3418241	3416872	3416871	7070746	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3418271	3416872	3416871	7070848	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3418272	3416872	3416871	7070848	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3418437	3416872	3416871	7070950	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3418438	3416872	3416871	7070950	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3418521	3416872	3416871	7071052	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3418522	3416872	3416871	7071052	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3418537	3416872	3416871	7071153	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3418538	3416872	3416871	7071154	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3418550	3416872	3416871	7071255	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3418551	3416872	3416871	7071256	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3418575	3416872	3416871	7071357	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3418576	3416872	3416871	7071358	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3418600	3416872	3416871	7071459	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3418601	3416872	3416871	7071460	/bin/ps -e -o pid=,ppid=,rss=
+command:du	3418641	3416872	3416871	7071501	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td
+command:ps	3418642	3416872	3416871	7071502	/bin/ps -e -o pid=,ppid=,rss=

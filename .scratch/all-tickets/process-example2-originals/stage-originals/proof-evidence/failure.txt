@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/root/rhai-linux-sys-process-example-60048ec4-20261004/run-examples.py", line 707, in <module>
+    exit_status = main()
+  File "/root/rhai-linux-sys-process-example-60048ec4-20261004/run-examples.py", line 612, in main
+    run_command('cargo-build-examples', build_argv, env)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/rhai-linux-sys-process-example-60048ec4-20261004/run-examples.py", line 317, in run_command
+    raise RuntimeError(f'{name} expected status {expected_status}, got {status}')
+RuntimeError: cargo-build-examples expected status 0, got 101

@@ -1,0 +1,1552 @@
+{
+  "custody_ready": true,
+  "errors": [],
+  "group_census": [],
+  "groups": [
+    3416800,
+    3416871
+  ],
+  "groups_absent": true,
+  "launcher_identities": [
+    {
+      "cmdline": "/root/rhai-linux-sys-process-example-60048ec4-20261004/launch.sh",
+      "label": "launcher",
+      "pgid": 3416800,
+      "pid": 3416800,
+      "ppid": 3416799,
+      "start_ticks": 7067572
+    },
+    {
+      "cmdline": "python3 /root/rhai-linux-sys-process-example-60048ec4-20261004/runner/tools/run_scoped.py --timeout 584 -- python3 /root/rhai-linux-sys-process-example-60048ec4-20261004/run-examples.py",
+      "label": "run-scoped",
+      "pgid": 3416800,
+      "pid": 3416868,
+      "ppid": 3416800,
+      "start_ticks": 7067576
+    }
+  ],
+  "pid_start_observations": [
+    {
+      "label": "helper",
+      "pgid": 3416871,
+      "pid": 3416872,
+      "start_ticks": 7067580,
+      "state": "absent"
+    },
+    {
+      "label": "scoped-supervisor",
+      "pgid": 3416871,
+      "pid": 3416871,
+      "start_ticks": 7067579,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3416874,
+      "start_ticks": 7067593,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3416875,
+      "start_ticks": 7067593,
+      "state": "absent"
+    },
+    {
+      "label": "command:rustup-install",
+      "pgid": 3416871,
+      "pid": 3416876,
+      "start_ticks": 7067594,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3416877,
+      "start_ticks": 7067594,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3416895,
+      "start_ticks": 7067595,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3416909,
+      "start_ticks": 7067696,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3416910,
+      "start_ticks": 7067696,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3416923,
+      "start_ticks": 7067798,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3416924,
+      "start_ticks": 7067798,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3416937,
+      "start_ticks": 7067899,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3416939,
+      "start_ticks": 7067900,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3416953,
+      "start_ticks": 7068002,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3416954,
+      "start_ticks": 7068003,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3416968,
+      "start_ticks": 7068106,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3416969,
+      "start_ticks": 7068106,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3416990,
+      "start_ticks": 7068207,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3416991,
+      "start_ticks": 7068208,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417004,
+      "start_ticks": 7068309,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417005,
+      "start_ticks": 7068311,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417017,
+      "start_ticks": 7068412,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417019,
+      "start_ticks": 7068413,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417042,
+      "start_ticks": 7068514,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417043,
+      "start_ticks": 7068516,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417065,
+      "start_ticks": 7068617,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417066,
+      "start_ticks": 7068618,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417080,
+      "start_ticks": 7068720,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417081,
+      "start_ticks": 7068720,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417093,
+      "start_ticks": 7068821,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417094,
+      "start_ticks": 7068822,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417107,
+      "start_ticks": 7068923,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417108,
+      "start_ticks": 7068924,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417121,
+      "start_ticks": 7069025,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417123,
+      "start_ticks": 7069028,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417135,
+      "start_ticks": 7069129,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417136,
+      "start_ticks": 7069132,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417150,
+      "start_ticks": 7069233,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417151,
+      "start_ticks": 7069236,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417163,
+      "start_ticks": 7069337,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417164,
+      "start_ticks": 7069338,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417178,
+      "start_ticks": 7069439,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417179,
+      "start_ticks": 7069439,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417192,
+      "start_ticks": 7069540,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417194,
+      "start_ticks": 7069540,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417217,
+      "start_ticks": 7069641,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417218,
+      "start_ticks": 7069642,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417230,
+      "start_ticks": 7069743,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417231,
+      "start_ticks": 7069744,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417241,
+      "start_ticks": 7069805,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417242,
+      "start_ticks": 7069805,
+      "state": "absent"
+    },
+    {
+      "label": "command:rustc-version",
+      "pgid": 3416871,
+      "pid": 3417243,
+      "start_ticks": 7069806,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417244,
+      "start_ticks": 7069806,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417245,
+      "start_ticks": 7069806,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417248,
+      "start_ticks": 7069817,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417249,
+      "start_ticks": 7069818,
+      "state": "absent"
+    },
+    {
+      "label": "command:cargo-version",
+      "pgid": 3416871,
+      "pid": 3417250,
+      "start_ticks": 7069818,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417251,
+      "start_ticks": 7069819,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417253,
+      "start_ticks": 7069819,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417265,
+      "start_ticks": 7069829,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417266,
+      "start_ticks": 7069830,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417267,
+      "start_ticks": 7069831,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417268,
+      "start_ticks": 7069831,
+      "state": "absent"
+    },
+    {
+      "label": "command:cargo-build-examples",
+      "pgid": 3416871,
+      "pid": 3417269,
+      "start_ticks": 7069832,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417270,
+      "start_ticks": 7069832,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417271,
+      "start_ticks": 7069832,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417287,
+      "start_ticks": 7069933,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417289,
+      "start_ticks": 7069933,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417306,
+      "start_ticks": 7070034,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417307,
+      "start_ticks": 7070035,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417324,
+      "start_ticks": 7070136,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417325,
+      "start_ticks": 7070136,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417340,
+      "start_ticks": 7070237,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417341,
+      "start_ticks": 7070237,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417358,
+      "start_ticks": 7070339,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417359,
+      "start_ticks": 7070339,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417471,
+      "start_ticks": 7070440,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417473,
+      "start_ticks": 7070441,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417651,
+      "start_ticks": 7070542,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417652,
+      "start_ticks": 7070543,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417955,
+      "start_ticks": 7070644,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417956,
+      "start_ticks": 7070645,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3418240,
+      "start_ticks": 7070746,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3418241,
+      "start_ticks": 7070746,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3418271,
+      "start_ticks": 7070848,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3418272,
+      "start_ticks": 7070848,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3418437,
+      "start_ticks": 7070950,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3418438,
+      "start_ticks": 7070950,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3418521,
+      "start_ticks": 7071052,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3418522,
+      "start_ticks": 7071052,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3418537,
+      "start_ticks": 7071153,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3418538,
+      "start_ticks": 7071154,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3418550,
+      "start_ticks": 7071255,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3418551,
+      "start_ticks": 7071256,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3418575,
+      "start_ticks": 7071357,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3418576,
+      "start_ticks": 7071358,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3418600,
+      "start_ticks": 7071459,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3418601,
+      "start_ticks": 7071460,
+      "state": "absent"
+    },
+    {
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3418641,
+      "start_ticks": 7071501,
+      "state": "absent"
+    },
+    {
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3418642,
+      "start_ticks": 7071502,
+      "state": "absent"
+    },
+    {
+      "label": "launcher",
+      "pgid": 3416800,
+      "pid": 3416800,
+      "start_ticks": 7067572,
+      "state": "absent"
+    },
+    {
+      "label": "run-scoped",
+      "pgid": 3416800,
+      "pid": 3416868,
+      "start_ticks": 7067576,
+      "state": "absent"
+    }
+  ],
+  "process_identities": [
+    {
+      "cmdline": "python3 /root/rhai-linux-sys-process-example-60048ec4-20261004/run-examples.py",
+      "label": "helper",
+      "pgid": 3416871,
+      "pid": 3416872,
+      "ppid": 3416871,
+      "start_ticks": 7067580
+    },
+    {
+      "cmdline": "/usr/bin/python3 /var/roothome/rhai-linux-sys-process-example-60048ec4-20261004/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-sys-process-example-60048ec4-20261004/run-examples.py",
+      "label": "scoped-supervisor",
+      "pgid": 3416871,
+      "pid": 3416871,
+      "ppid": 3416868,
+      "start_ticks": 7067579
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3416874,
+      "ppid": 3416872,
+      "start_ticks": 7067593
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3416875,
+      "ppid": 3416872,
+      "start_ticks": 7067593
+    },
+    {
+      "cmdline": "/root/.cargo/bin/rustup toolchain install 1.77.2-x86_64-unknown-linux-gnu --profile minimal --no-self-update",
+      "label": "command:rustup-install",
+      "pgid": 3416871,
+      "pid": 3416876,
+      "ppid": 3416872,
+      "start_ticks": 7067594
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3416877,
+      "ppid": 3416872,
+      "start_ticks": 7067594
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3416895,
+      "ppid": 3416872,
+      "start_ticks": 7067595
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3416909,
+      "ppid": 3416872,
+      "start_ticks": 7067696
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3416910,
+      "ppid": 3416872,
+      "start_ticks": 7067696
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3416923,
+      "ppid": 3416872,
+      "start_ticks": 7067798
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3416924,
+      "ppid": 3416872,
+      "start_ticks": 7067798
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3416937,
+      "ppid": 3416872,
+      "start_ticks": 7067899
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3416939,
+      "ppid": 3416872,
+      "start_ticks": 7067900
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3416953,
+      "ppid": 3416872,
+      "start_ticks": 7068002
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3416954,
+      "ppid": 3416872,
+      "start_ticks": 7068003
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3416968,
+      "ppid": 3416872,
+      "start_ticks": 7068106
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3416969,
+      "ppid": 3416872,
+      "start_ticks": 7068106
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3416990,
+      "ppid": 3416872,
+      "start_ticks": 7068207
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3416991,
+      "ppid": 3416872,
+      "start_ticks": 7068208
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417004,
+      "ppid": 3416872,
+      "start_ticks": 7068309
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417005,
+      "ppid": 3416872,
+      "start_ticks": 7068311
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417017,
+      "ppid": 3416872,
+      "start_ticks": 7068412
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417019,
+      "ppid": 3416872,
+      "start_ticks": 7068413
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417042,
+      "ppid": 3416872,
+      "start_ticks": 7068514
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417043,
+      "ppid": 3416872,
+      "start_ticks": 7068516
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417065,
+      "ppid": 3416872,
+      "start_ticks": 7068617
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417066,
+      "ppid": 3416872,
+      "start_ticks": 7068618
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417080,
+      "ppid": 3416872,
+      "start_ticks": 7068720
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417081,
+      "ppid": 3416872,
+      "start_ticks": 7068720
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417093,
+      "ppid": 3416872,
+      "start_ticks": 7068821
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417094,
+      "ppid": 3416872,
+      "start_ticks": 7068822
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417107,
+      "ppid": 3416872,
+      "start_ticks": 7068923
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417108,
+      "ppid": 3416872,
+      "start_ticks": 7068924
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417121,
+      "ppid": 3416872,
+      "start_ticks": 7069025
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417123,
+      "ppid": 3416872,
+      "start_ticks": 7069028
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417135,
+      "ppid": 3416872,
+      "start_ticks": 7069129
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417136,
+      "ppid": 3416872,
+      "start_ticks": 7069132
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417150,
+      "ppid": 3416872,
+      "start_ticks": 7069233
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417151,
+      "ppid": 3416872,
+      "start_ticks": 7069236
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417163,
+      "ppid": 3416872,
+      "start_ticks": 7069337
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417164,
+      "ppid": 3416872,
+      "start_ticks": 7069338
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417178,
+      "ppid": 3416872,
+      "start_ticks": 7069439
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417179,
+      "ppid": 3416872,
+      "start_ticks": 7069439
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417192,
+      "ppid": 3416872,
+      "start_ticks": 7069540
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417194,
+      "ppid": 3416872,
+      "start_ticks": 7069540
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417217,
+      "ppid": 3416872,
+      "start_ticks": 7069641
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417218,
+      "ppid": 3416872,
+      "start_ticks": 7069642
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417230,
+      "ppid": 3416872,
+      "start_ticks": 7069743
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417231,
+      "ppid": 3416872,
+      "start_ticks": 7069744
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417241,
+      "ppid": 3416872,
+      "start_ticks": 7069805
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417242,
+      "ppid": 3416872,
+      "start_ticks": 7069805
+    },
+    {
+      "cmdline": "/root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose",
+      "label": "command:rustc-version",
+      "pgid": 3416871,
+      "pid": 3417243,
+      "ppid": 3416872,
+      "start_ticks": 7069806
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417244,
+      "ppid": 3416872,
+      "start_ticks": 7069806
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417245,
+      "ppid": 3416872,
+      "start_ticks": 7069806
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417248,
+      "ppid": 3416872,
+      "start_ticks": 7069817
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417249,
+      "ppid": 3416872,
+      "start_ticks": 7069818
+    },
+    {
+      "cmdline": "/root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose",
+      "label": "command:cargo-version",
+      "pgid": 3416871,
+      "pid": 3417250,
+      "ppid": 3416872,
+      "start_ticks": 7069818
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417251,
+      "ppid": 3416872,
+      "start_ticks": 7069819
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417253,
+      "ppid": 3416872,
+      "start_ticks": 7069819
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417265,
+      "ppid": 3416872,
+      "start_ticks": 7069829
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417266,
+      "ppid": 3416872,
+      "start_ticks": 7069830
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417267,
+      "ppid": 3416872,
+      "start_ticks": 7069831
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417268,
+      "ppid": 3416872,
+      "start_ticks": 7069831
+    },
+    {
+      "cmdline": "/root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo build --locked --example sys --example net --example sys_process --features testing-environ,sys,net",
+      "label": "command:cargo-build-examples",
+      "pgid": 3416871,
+      "pid": 3417269,
+      "ppid": 3416872,
+      "start_ticks": 7069832
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417270,
+      "ppid": 3416872,
+      "start_ticks": 7069832
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417271,
+      "ppid": 3416872,
+      "start_ticks": 7069832
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417287,
+      "ppid": 3416872,
+      "start_ticks": 7069933
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417289,
+      "ppid": 3416872,
+      "start_ticks": 7069933
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417306,
+      "ppid": 3416872,
+      "start_ticks": 7070034
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417307,
+      "ppid": 3416872,
+      "start_ticks": 7070035
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417324,
+      "ppid": 3416872,
+      "start_ticks": 7070136
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417325,
+      "ppid": 3416872,
+      "start_ticks": 7070136
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417340,
+      "ppid": 3416872,
+      "start_ticks": 7070237
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417341,
+      "ppid": 3416872,
+      "start_ticks": 7070237
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417358,
+      "ppid": 3416872,
+      "start_ticks": 7070339
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417359,
+      "ppid": 3416872,
+      "start_ticks": 7070339
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417471,
+      "ppid": 3416872,
+      "start_ticks": 7070440
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417473,
+      "ppid": 3416872,
+      "start_ticks": 7070441
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417651,
+      "ppid": 3416872,
+      "start_ticks": 7070542
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417652,
+      "ppid": 3416872,
+      "start_ticks": 7070543
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3417955,
+      "ppid": 3416872,
+      "start_ticks": 7070644
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3417956,
+      "ppid": 3416872,
+      "start_ticks": 7070645
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3418240,
+      "ppid": 3416872,
+      "start_ticks": 7070746
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3418241,
+      "ppid": 3416872,
+      "start_ticks": 7070746
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3418271,
+      "ppid": 3416872,
+      "start_ticks": 7070848
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3418272,
+      "ppid": 3416872,
+      "start_ticks": 7070848
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3418437,
+      "ppid": 3416872,
+      "start_ticks": 7070950
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3418438,
+      "ppid": 3416872,
+      "start_ticks": 7070950
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3418521,
+      "ppid": 3416872,
+      "start_ticks": 7071052
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3418522,
+      "ppid": 3416872,
+      "start_ticks": 7071052
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3418537,
+      "ppid": 3416872,
+      "start_ticks": 7071153
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3418538,
+      "ppid": 3416872,
+      "start_ticks": 7071154
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3418550,
+      "ppid": 3416872,
+      "start_ticks": 7071255
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3418551,
+      "ppid": 3416872,
+      "start_ticks": 7071256
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3418575,
+      "ppid": 3416872,
+      "start_ticks": 7071357
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3418576,
+      "ppid": 3416872,
+      "start_ticks": 7071358
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3418600,
+      "ppid": 3416872,
+      "start_ticks": 7071459
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3418601,
+      "ppid": 3416872,
+      "start_ticks": 7071460
+    },
+    {
+      "cmdline": "/usr/bin/du -sk /root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+      "label": "command:du",
+      "pgid": 3416871,
+      "pid": 3418641,
+      "ppid": 3416872,
+      "start_ticks": 7071501
+    },
+    {
+      "cmdline": "/bin/ps -e -o pid=,ppid=,rss=",
+      "label": "command:ps",
+      "pgid": 3416871,
+      "pid": 3418642,
+      "ppid": 3416872,
+      "start_ticks": 7071502
+    }
+  ],
+  "receipt_validated": true,
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+  "runtime_absent": true,
+  "runtime_state": "absent",
+  "scope_absent": true,
+  "scope_state": "absent"
+}

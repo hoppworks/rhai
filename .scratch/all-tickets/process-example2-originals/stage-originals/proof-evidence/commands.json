@@ -1,0 +1,82 @@
+[
+  {
+    "argv": [
+      "/root/.cargo/bin/rustup",
+      "toolchain",
+      "install",
+      "1.77.2-x86_64-unknown-linux-gnu",
+      "--profile",
+      "minimal",
+      "--no-self-update"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 22.228,
+    "name": "rustup-install",
+    "spawned": true,
+    "started_monotonic_seconds": 0.108,
+    "status": 0,
+    "stderr": "evidence/rustup-install.stderr",
+    "stdout": "evidence/rustup-install.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+      "--version",
+      "--verbose"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td/source",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 22.353,
+    "name": "rustc-version",
+    "spawned": true,
+    "started_monotonic_seconds": 22.228,
+    "status": 0,
+    "stderr": "evidence/rustc-version.stderr",
+    "stdout": "evidence/rustc-version.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "--version",
+      "--verbose"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td/source",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 22.475,
+    "name": "cargo-version",
+    "spawned": true,
+    "started_monotonic_seconds": 22.353,
+    "status": 0,
+    "stderr": "evidence/cargo-version.stderr",
+    "stdout": "evidence/cargo-version.stdout"
+  },
+  {
+    "argv": [
+      "/root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "build",
+      "--locked",
+      "--example",
+      "sys",
+      "--example",
+      "net",
+      "--example",
+      "sys_process",
+      "--features",
+      "testing-environ,sys,net"
+    ],
+    "cwd": "/root/.local/share/agent-builds/rhai/linux-sys-process-example-60048ec4-20261004/agent-build-rwmae0td/source",
+    "env_overrides": {},
+    "expected_status": 0,
+    "finished_monotonic_seconds": 39.202,
+    "name": "cargo-build-examples",
+    "spawned": true,
+    "started_monotonic_seconds": 22.485,
+    "status": 101,
+    "stderr": "evidence/cargo-build-examples.stderr",
+    "stdout": "evidence/cargo-build-examples.stdout"
+  }
+]
