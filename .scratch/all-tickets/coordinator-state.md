@@ -392,6 +392,23 @@ Next collector freeze/affected review -> preserve original failed run/fresh exac
 custody/hash-gated owned cleanup; source/public API correction freeze/affected
 review -> fresh free-slot bounded actual acceptance. No rerun solely for rules.
 
+Root continuation PROGRESS: fresh read-only diagnosis confirmed both original
+identity TSVs have exact headers and valid positive fields (64 helper rows and
+2 launcher rows). Prior independent observation failed because its blanket ps
+PGID-positive assumption rejected valid Linux kernel PGID0 rows; no native
+launch/correction or product failure was consumed. Global process inventory now
+validates PID>0/PGID>=0 while recorded owned target groups remain positive.
+Independent fresh cleanup receipt process-example1-independent-cleanup.json
+checks all66 original PID/start identities, both owned groups3061340/3061410
+empty, exact private runtime and scope absent by lstat. This closes this
+observation narrowly, not example behavior or original stage retirement.
+Original663 stage remains untouched pending reviewed frozen-binding raw
+collection and fresh retirement gates. Same Standard is confirmed live and
+working the existing collector/public-API compiler repair; source60048 is not
+claimed reviewed or accepted. No new launch allocated, stdin110 unallocated,
+all histories and hard boundaries preserved. Previous goal turn PROGRESS:
+new PGID0 evidence changes the correction, beyond status reporting.
+
 ### Earlier current-step history (retained, superseded)
 
 Global/project instructions at faba3db remain loaded. Full goal active/incomplete.

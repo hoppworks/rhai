@@ -1,0 +1,614 @@
+{
+  "observed_at": "2026-10-04T00:34:39.826077+00:00",
+  "stage": "/root/rhai-linux-sys-process-example-66379d30-20261004",
+  "identity_input_sha256": {
+    "outer-evidence/launcher-identities.tsv": "a3ef24e9092e530e7e41dc7d147bea70fe216769a321bcf2d49abd339d60de81",
+    "proof-evidence/process-identities.tsv": "f7949153ace6ecfc2b7a4b491308f6e1cd72d01b3c7d2fbab0a422a24a3a9aaf"
+  },
+  "identities": [
+    {
+      "label": "launcher",
+      "pid": 3061340,
+      "ppid": 3061339,
+      "pgid": 3061340,
+      "start_ticks": 6470844,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "run-scoped",
+      "pid": 3061407,
+      "ppid": 3061340,
+      "pgid": 3061340,
+      "start_ticks": 6470849,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "helper",
+      "pid": 3061411,
+      "ppid": 3061410,
+      "pgid": 3061410,
+      "start_ticks": 6470853,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "scoped-supervisor",
+      "pid": 3061410,
+      "ppid": 3061407,
+      "pgid": 3061410,
+      "start_ticks": 6470851,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:du",
+      "pid": 3061413,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6470862,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:ps",
+      "pid": 3061414,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6470862,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:rustup-install",
+      "pid": 3061415,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6470863,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:du",
+      "pid": 3061416,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6470863,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:ps",
+      "pid": 3061417,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6470863,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:du",
+      "pid": 3061448,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6470964,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:ps",
+      "pid": 3061449,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6470965,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:du",
+      "pid": 3061471,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471066,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:ps",
+      "pid": 3061472,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471069,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:du",
+      "pid": 3061493,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471170,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:ps",
+      "pid": 3061495,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471174,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:du",
+      "pid": 3061507,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471275,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:ps",
+      "pid": 3061508,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471276,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:du",
+      "pid": 3061530,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471377,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:ps",
+      "pid": 3061531,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471379,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:du",
+      "pid": 3061545,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471480,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:ps",
+      "pid": 3061546,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471482,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:du",
+      "pid": 3061560,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471563,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:ps",
+      "pid": 3061561,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471563,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:rustc-version",
+      "pid": 3061562,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471564,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:du",
+      "pid": 3061563,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471564,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:ps",
+      "pid": 3061564,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471565,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:du",
+      "pid": 3061567,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471576,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:ps",
+      "pid": 3061568,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471577,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:cargo-version",
+      "pid": 3061569,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471577,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:du",
+      "pid": 3061570,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471578,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:ps",
+      "pid": 3061572,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471578,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:du",
+      "pid": 3061584,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471589,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:ps",
+      "pid": 3061585,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471589,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:du",
+      "pid": 3061586,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471590,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:ps",
+      "pid": 3061587,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471590,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:cargo-build-examples",
+      "pid": 3061588,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471591,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:du",
+      "pid": 3061589,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471591,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:ps",
+      "pid": 3061590,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471591,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:du",
+      "pid": 3061609,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471692,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:ps",
+      "pid": 3061610,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471692,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:du",
+      "pid": 3061626,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471793,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:ps",
+      "pid": 3061627,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471795,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:du",
+      "pid": 3061648,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471896,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:ps",
+      "pid": 3061650,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6471898,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:du",
+      "pid": 3061844,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6472000,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:ps",
+      "pid": 3061848,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6472001,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:du",
+      "pid": 3062115,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6472102,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:ps",
+      "pid": 3062119,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6472103,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:du",
+      "pid": 3062255,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6472205,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:ps",
+      "pid": 3062259,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6472206,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:du",
+      "pid": 3062305,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6472307,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:ps",
+      "pid": 3062306,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6472308,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:du",
+      "pid": 3062411,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6472409,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:ps",
+      "pid": 3062415,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6472411,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:du",
+      "pid": 3062512,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6472513,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:ps",
+      "pid": 3062514,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6472514,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:du",
+      "pid": 3062526,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6472615,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:ps",
+      "pid": 3062527,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6472616,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:du",
+      "pid": 3062540,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6472717,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:ps",
+      "pid": 3062541,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6472719,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:du",
+      "pid": 3062560,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6472820,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:ps",
+      "pid": 3062561,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6472821,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:du",
+      "pid": 3062586,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6472923,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:ps",
+      "pid": 3062587,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6472924,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:du",
+      "pid": 3062626,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6473005,
+      "observation": "absent",
+      "current_start_ticks": null
+    },
+    {
+      "label": "command:ps",
+      "pid": 3062628,
+      "ppid": 3061411,
+      "pgid": 3061410,
+      "start_ticks": 6473007,
+      "observation": "absent",
+      "current_start_ticks": null
+    }
+  ],
+  "group_members": {
+    "3061340": [],
+    "3061410": []
+  },
+  "runtime": "/root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b",
+  "runtime_absent": true,
+  "scope": "/root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004",
+  "scope_absent": true,
+  "acceptance": false,
+  "note": "Independent read-only cleanup observation only; failed compilation did not execute behavior controls."
+}
