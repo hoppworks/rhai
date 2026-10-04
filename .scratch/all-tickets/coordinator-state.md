@@ -333,6 +333,65 @@ fresh preflight -> existing bounded launcher -> original collection/readback and
 exact cleanup. The accepted example run recipe does not depend on the stopped
 stdin classifier. Overall release requirements remain open.
 
+Process example invocation1 allocated after fresh00:24:30Z preflight: all10
+frozen input hashes/exact manifest and canonical stage verified, scope/terminal/
+proof absent, heavy processes0, MemAvailable83844720KiB, free726540066816bytes,
+load4.65/15.58/16.29. Both preceding foreign runner identities independently
+absent. Root notified the authorized Tauron chat that this bounded window starts.
+Source663/archive0ab9/recipesfa0 unchanged. Bounds outer600/runner<=585/helper540
+including30export/jobs2/desc16/storage-preempt1572864KiB/hard storage+RSS2097152KiB
+unchanged. This is the distinct examples invocation, not stopped stdin native110;
+no chain or budget reset. Execute once after immediate final preflight; actual
+six-row acceptance and cleanup still pending. Collector-only2dc12ce3/SHAcd1efdec
+frozen, exact scope/author/diff checked by root, same combined affected reviewer
+active before collector use; prior fa0 execution READY unaffected. Collector
+elapsed/cost unknown; completed within30min planning window, no native use yet.
+
+Actual launch divergence recorded immediately: final00:25:17Z preflight
+returned3 because successor foreign runner3050719/start6467813 and supervisor
+3050720/start6467815 with Cargo/rustc had started. The root shell invocation did
+not enable fail-fast/check that return status, so the subsequent SSH launcher
+started despite the failed final slot check. This is an unintended default-slot
+workflow violation, not an approved concurrency exception; do not retrospectively
+invent one or erase consumption. One actual example invocation consumed. Public
+user commentary acknowledged the error. No foreign process stopped/changed.
+Live root exec handle3822, exact private runtime
+/root/.local/share/agent-builds/rhai/linux-sys-process-example-66379d30-20261004/agent-build-rqtg34_b.
+Launcher started00:25:17Z, runner computed584seconds; original source/10pins
+PASS. Final snapshot MemAvailable79050576KiB/free725506605056bytes, load6.40/
+14.30/15.82. Existing finite owned limits remain unchanged and monitor active;
+preserve this already running bounded process per user instruction, no new
+launch or chain reset. Observe handle to terminal then independently preserve/
+review originals/custody and clean exact owned resources. Future guard+launch
+must explicitly stop on nonzero preflight, rather than relying on shell default.
+
+Example invocation1 terminal status1 at approximately22seconds; tool handle3822
+exit1. Private Rust install/version setup3 rows status0, cargo-build-examples101;
+actual original stderr E0405 at example96/106: rhai::Variant public export gated
+by internals. No six example behavior controls executed. Initial source setup
+failure for private-trait use: infrastructure occurrence1, no meaningful product
+RED or acceptance and no repeated correction count for this new cause. Original
+stderr read without mutation and exact temporary copy saved only for diagnosis
+/private/tmp/rhai-process-example1-original-build.stderr; compare to preserved
+original collection before removing this own copy. Launcher original runtime/
+PID/group/scope statuses all0; independent final custody still required. Owned
+source/evidence stage remains, no private build retained. Root notified user of
+actual compiler defect and guard error. No process interruption occurred.
+Collector2dc12ce3 affected combined review NOTREADY3material findings, initial
+preparation defects not yet failed completed correction: frozen input/source
+binding, conservative complete identities/runtime/group and final retirement
+receipt, raw preservation surviving custody-analysis errors. Full report remains
+linux-process-example-review.md. Same Standard owns ONE consolidated collector
+repair and public-API example compiler setup repair within existing package;
+no internals feature weakening, production/stdin edits or remote execution.
+Original663stage remains untouched; future corrected source/recipes must use new
+unique stage/scope and fresh explicit-success slot guard. No second actuallaunch
+allocated. Active-work30minute planning checkpoint; collector use/CPU/cost unknown,
+prior45example minutes/stopped77stdin minutes plus unknown use remain intact.
+Next collector freeze/affected review -> preserve original failed run/fresh exact
+custody/hash-gated owned cleanup; source/public API correction freeze/affected
+review -> fresh free-slot bounded actual acceptance. No rerun solely for rules.
+
 ### Earlier current-step history (retained, superseded)
 
 Global/project instructions at faba3db remain loaded. Full goal active/incomplete.
