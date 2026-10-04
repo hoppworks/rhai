@@ -127,12 +127,36 @@ Next sameowner drop-false executable preparation and one combined review.
 
 Independent drop-false package remains with same Standard. Proposal118a2c40 and
 test-only patch against523 address the brief live-phase observation race through
-an opt-in Linux8second request/ACK barrier. Source/native acceptance unverified.
-Same owner is preparing narrow consuming driver/concurrent observer/collector;
-no SSH/stage/build/native allocation authorized in that preparation brief.
-Existing30minute active-work planning checkpoint preserves cumulative unknown
-work and exact600/585/540seconds/resource caps for a later reviewed launch.
+an opt-in Linux8second request/ACK barrier. Root found missing start identities
+and proposal/ACK digest mismatch before freeze; this is preparation feedback,
+not a failed native/product correction. Owner checkpoint confirms regenerated
+pinned523 patch includes host/member start and PGID fields; ACK echoes the exact
+request bytes, independently checked against live proc tuples. Driver binds test
+host PPID to recorded Cargo. Observer schema and collector terminal census are
+aligned. Local sensitivity/syntax checks and dependent pin freeze remain; source
+review and native acceptance unverified. No SSH/stage/build/native allocation
+in this preparation brief. Earlier cumulative active time remains unknown;
+owner explicitly preserved prior history instead of inventing/resetting totals.
+Existing30minute active-work planning checkpoint and exact600/585/540seconds/
+resource caps for a later reviewed launch remain. Human Tauron coordination
+permission is reconciled with already sent coordination/terminal messages; no
+window grant or renewed capacity exception is inferred from it.
 Broader process/fault/platform/feature/performance/release criteria remain open.
+
+### Current lightweight pipe-setup evidence reuse diagnosis
+
+The existing public Engine regression
+packages::sys::process::unix::tests::post_spawn_pipe_setup_failure_preserves_cause_and_reaps_child
+already injects the post-spawn configure-pipe failure, checks the original typed
+Io cause and incomplete captures, retired owner and independent direct-child
+reaping. Linux80 unix-owner.log135-142 records child2783714/reapESRCH and
+macOS81 macos-process-refresh.pvRbIs413-420 records child53110/reapESRCH.
+Both were Rust1.93.0, not optionalMSRV1.77.2. Entire unix.rs is unchanged from
+accepted e5b55460 to52360864. Retain those positive-path observations; they do
+not supply a targeted pipe-failure false-green control or final MSRV/features.
+After the current drop-false package, reuse this existing regression and choose
+only the missing affected acceptance checks. No duplicate test or heavy run
+was created by this source investigation; no exhausted cause is renewed.
 
 ### Previous example preparation and native2 history (preserved)
 
