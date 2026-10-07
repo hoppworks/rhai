@@ -1,0 +1,58 @@
+{
+  "cargo_jobs": 2,
+  "command": [
+    "/var/home/workhorse/.rustup/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+    "test",
+    "--locked",
+    "--features",
+    "testing-environ,sys",
+    "--test",
+    "sys_process",
+    "direct_spawn_try_wait_returns_unit_until_child_exits",
+    "--",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "features": "testing-environ,sys",
+  "limits": {
+    "export_reserve_seconds": 30,
+    "helper_seconds": 540,
+    "max_owned_processes": 16,
+    "rss_hard_kib": 2097152,
+    "runner_seconds": 585,
+    "storage_hard_kib": 2097152,
+    "storage_preemptive_kib": 1572864,
+    "work_seconds": 510
+  },
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "runner_sha256": "25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e",
+  "sensitivity_control_reused": {
+    "mutant_red_diagnostic": "try_wait after child exit must return a result, got ()",
+    "mutant_red_status": 101,
+    "mutant_red_stderr_sha256": "4523682158b772ef1055ceb8635b10e16345b1c1b262528e334114cc1bc10ba7",
+    "mutant_red_stdout_sha256": "b54e5134c32374efd78ba7fac7c0189bf9e64145a430ee37cd8f268a1882c3a1",
+    "prior_attempt": ".scratch/all-tickets/process-try-wait-evidence/x24-try-wait-20261007-1705z-6a92d/attempt-03",
+    "prior_independent_readback": {
+      "alive_before_try_wait": true,
+      "pending_try_wait_is_unit": true,
+      "pid": 1760685,
+      "reaped_esrch": true,
+      "terminal_try_wait_exit_code": 0,
+      "terminal_try_wait_observed_before_wait": true,
+      "wait_exit_code": 0,
+      "wait_returned_cached_result": true
+    },
+    "restored_green_status": 0,
+    "scope": "Workhorse Linux x86_64, Rust/Cargo 1.93.0, testing-environ,sys only",
+    "test_source_sha256": "7ddc87f6e4b57d61d077445a81f1c3ef2f2e54cb35ac8c90a7ed328245d14017"
+  },
+  "source_archive_sha256": "d758387232e08a757798800f2c3fc576fde750decc2e16e9f69511bd155cf76b",
+  "source_revision": "d3eabc005242129dbb8ad124def0f0ada2aff71d",
+  "test": "tests/sys_process.rs::direct_spawn_try_wait_returns_unit_until_child_exits",
+  "test_source_sha256": "7ddc87f6e4b57d61d077445a81f1c3ef2f2e54cb35ac8c90a7ed328245d14017",
+  "toolchain": {
+    "cargo": "cargo 1.77.2 (e52e36006 2024-03-26)",
+    "rustc": "rustc 1.77.2 (25ef9e3d8 2024-04-09)"
+  }
+}

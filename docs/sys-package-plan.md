@@ -46,11 +46,12 @@ control. The frozen source, logs, checksums and setup history are recorded in
 Other OS, MSRV, feature and unrelated Ticket 03 rows remain open.
 
 Ticket 03 X24 is partially accepted for Workhorse Linux x86_64, Rust/Cargo
-1.93.0, and `testing-environ,sys`. Attempt 01 remains partial because `wait()`
-preceded the terminal `try_wait()`; attempt 02 stopped before Cargo on a helper
-identity check. Attempt 03 passed the direct post-exit observation and an exact
-assertion sensitivity control, with independent PID/reaping readback. Preserve
-the attempt records under
+1.93.0 and 1.77.2, and `testing-environ,sys`; the combined review is READY.
+Attempt 01 remains partial because `wait()` preceded the terminal `try_wait()`;
+attempt 02 stopped before Cargo on a helper identity check. Attempt 03 passed
+the direct post-exit observation and an exact assertion sensitivity control,
+with independent PID/reaping readback; attempt 04 adds the exact Rust/Cargo
+1.77.2 GREEN row. Preserve the attempt records under
 `../.scratch/all-tickets/process-try-wait-evidence/x24-try-wait-20261007-1705z-6a92d/`.
 Other OS, MSRV, feature and unrelated Ticket 03 rows remain open.
 
@@ -466,9 +467,22 @@ are sampled values, not continuous peaks. The private runtime was removed by the
 runner and the exact owned scope was retired after export; the cleanup receipt
 records 34 files and 140,317,766 bytes removed. Evidence is under
 `../.scratch/all-tickets/process-try-wait-evidence/x24-try-wait-20261007-1705z-6a92d/attempt-03/`.
-X24 is partially accepted for Workhorse Linux x86_64, Rust/Cargo 1.93.0, and
-`testing-environ,sys`; other OS, MSRV, feature and unrelated Ticket 03 rows
-remain open.
+**X24 attempt 04 — Workhorse Linux x86_64, Rust/Cargo 1.77.2; combined review READY.** The exact
+filtered test passed with `testing-environ,sys`. It observed the real child alive
+while public `try_wait()` returned unit, then obtained exit code 0 from terminal
+`try_wait()` before `wait()`, confirmed the cached `wait()` result, and verified
+the child was reaped (`ESRCH`). The assertion sensitivity control was reused from
+attempt 03 because the test source hash and product source hash are unchanged;
+the prior expected RED was not rerun. All six output hashes matched local
+readback. Periodic samples observed at most 6 owned processes, 962,432 KiB RSS,
+and 749,440 KiB private storage (not continuous peaks). The scoped runner removed
+its private runtime; after export, the exact Workhorse stage/output scope was
+removed and read back absent with no referencing processes. Evidence is under
+`../.scratch/all-tickets/process-try-wait-evidence/x24-try-wait-20261007-1705z-6a92d/attempt-04/`.
+The combined review found no material issue. X24 is partially accepted for
+Workhorse Linux x86_64, Rust/Cargo 1.93.0 and 1.77.2, with
+`testing-environ,sys`; other OS, feature and unrelated Ticket 03 rows remain
+open.
 ### 6.1 Applicable rules and historical investigation
 
 Current central repository: `/Users/hoppworks/projects/agent-skills`, local `main`
@@ -938,7 +952,7 @@ source test alone or by an unreviewed/provisional result.
 | X21 | Cap tests, `linux-process-overlap-proof.md`, managed output-limit proof | Accepted for named Linux DirectChild/Managed same-step overflow-vs-deadline cases and listed cap cases; other causes/platforms remain open. |
 | X22 | `run_reports_a_real_unix_child_signal_without_an_exit_code`; `process-signal-evidence/proof.md` | Partial (combined review READY 2026-10-07): Workhorse Linux x86_64/Rust/Cargo 1.93.0 and 1.77.2 with `testing-environ,sys` prove a real public-Engine SIGKILL child reports `success=false`, `code=()`, `signal=9`, is not timed out, has complete output, and is reaped (`ESRCH`). Other Unix platforms and feature rows remain open. |
 | X23 | Shared-child and `linux-process-example3-proof.md` | Accepted for named Linux rows: real spawn/wait, result map, clone snapshots and cached results. |
-| X24 | Shared-child pending `wait(timeout)` and completed snapshots | Partial: Workhorse Linux x86_64/Rust 1.93.0, `testing-environ,sys` proves pending `try_wait` returns unit and terminal result is observed directly before `wait`, with exit and ESRCH readback. Other OS/MSRV/features remain open. |
+| X24 | `tests/sys_process.rs::direct_spawn_try_wait_returns_unit_until_child_exits`; `.scratch/all-tickets/process-try-wait-evidence/x24-try-wait-20261007-1705z-6a92d/attempt-03/` and `attempt-04/proof.md` | Partial (combined review READY 2026-10-07): Workhorse Linux x86_64, Rust/Cargo 1.93.0 and 1.77.2, `testing-environ,sys` prove pending `try_wait` returns unit and terminal result is observed directly before `wait`, with exit and ESRCH readback; the exact assertion sensitivity result is reused. Other OS and feature rows remain open. |
 | X25 | Shared-child and managed-kill proofs | Accepted for named Linux cases: kill/wait completes with independent cleanup/readback. |
 | X26 | Shared-child proof repeats kill after completion | Accepted for named Linux rows: repeated kill is harmless and cached snapshots persist. |
 | X27 | Shared-child and managed final-drop proofs | Accepted for named Linux cases: `kill_on_drop=true` cleanup/reaping; only named feature rows. |

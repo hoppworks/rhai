@@ -1,0 +1,35 @@
+{
+  "archive_bytes": 1493624,
+  "archive_sha256": "d758387232e08a757798800f2c3fc576fde750decc2e16e9f69511bd155cf76b",
+  "base_commit": "d3eabc005242129dbb8ad124def0f0ada2aff71d",
+  "excluded_prefixes": [
+    ".scratch/"
+  ],
+  "files": [
+    {
+      "bytes": 321253,
+      "path": "tests/sys_process.rs",
+      "sha256": "7ddc87f6e4b57d61d077445a81f1c3ef2f2e54cb35ac8c90a7ed328245d14017"
+    },
+    {
+      "bytes": 10241,
+      "path": "src/packages/sys/process.rs",
+      "sha256": "090094476662417aa94e2ff519cb8038c1d3721e02be6ec166762502bfbff2e2"
+    },
+    {
+      "bytes": 8789,
+      "path": "Cargo.toml",
+      "sha256": "cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e"
+    },
+    {
+      "bytes": 6232,
+      "path": "src/api/definitions/builtin-functions.d.rhai",
+      "sha256": "24d9ae780377eb6bee7d7d750e27ee69d06c5459a3563222f87aa9a087a1cb1a"
+    },
+    {
+      "bytes": 6064,
+      "path": "src/api/definitions/builtin-operators.d.rhai",
+      "sha256": "01fd7d22000c3852bcb73ed541752ed361b3b214e61ae0277a62a6956d845c3b"
+    }
+  ]
+}

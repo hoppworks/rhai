@@ -1,0 +1,80 @@
+{
+  "children": [
+    "out",
+    "stage"
+  ],
+  "files": [
+    {
+      "bytes": 31347,
+      "path": "stage/Cargo.lock.accepted"
+    },
+    {
+      "bytes": 943,
+      "path": "stage/sensitivity-control.json"
+    },
+    {
+      "bytes": 41,
+      "path": "stage/source.commit"
+    },
+    {
+      "bytes": 1066,
+      "path": "stage/source-manifest.json"
+    },
+    {
+      "bytes": 1493624,
+      "path": "stage/source.tar.gz"
+    },
+    {
+      "bytes": 834,
+      "path": "stage/input-identities.json"
+    },
+    {
+      "bytes": 19002,
+      "path": "stage/run-x24-try-wait-proof.py"
+    },
+    {
+      "bytes": 2064,
+      "path": "out/outer-runner-attempt-04.stdout"
+    },
+    {
+      "bytes": 0,
+      "path": "out/outer-runner-attempt-04.stderr"
+    },
+    {
+      "bytes": 2,
+      "path": "out/outer-runner-attempt-04.status"
+    },
+    {
+      "bytes": 8838,
+      "path": "out/attempt-04/resource-samples.jsonl"
+    },
+    {
+      "bytes": 2314,
+      "path": "out/attempt-04/run-manifest.json"
+    },
+    {
+      "bytes": 178,
+      "path": "out/attempt-04/restored-green.stdout"
+    },
+    {
+      "bytes": 10689,
+      "path": "out/attempt-04/restored-green.stderr"
+    },
+    {
+      "bytes": 2,
+      "path": "out/attempt-04/restored-green.status"
+    },
+    {
+      "bytes": 2346,
+      "path": "out/attempt-04/proof-result.json"
+    },
+    {
+      "bytes": 521,
+      "path": "out/attempt-04/SHA256SUMS"
+    }
+  ],
+  "mode": "0o700",
+  "remaining_session_processes": [],
+  "scope": "/root/.local/share/agent-builds/rhai/x24-trywait-msrv-20261007-2cd5d0062869",
+  "uid": 0
+}

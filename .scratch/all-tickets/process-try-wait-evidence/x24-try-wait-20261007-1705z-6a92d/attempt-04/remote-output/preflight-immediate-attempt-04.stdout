@@ -1,0 +1,33 @@
+{
+  "active_cargo_rustc": [],
+  "available_bytes": 662504214528,
+  "expected_private_runtime_cap_bytes": 2147483648,
+  "host": "workhorse",
+  "load_average": [
+    1.77001953125,
+    0.83642578125,
+    0.505859375
+  ],
+  "meminfo_bytes": {
+    "MemAvailable": 86863638528,
+    "MemTotal": 98776092672
+  },
+  "platform": "Linux-7.2.8-ogc5.1.fc44.x86_64-x86_64-with-glibc2.43",
+  "runner_sha256": "25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e",
+  "scope": "/root/.local/share/agent-builds/rhai/x24-trywait-msrv-20261007-2cd5d0062869",
+  "source_archive_bytes": 1493624,
+  "source_archive_entries": 579,
+  "staged_files": {
+    "Cargo.lock.accepted": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+    "run-x24-try-wait-proof.py": "8c617b2b25d330ceae5459ebb8000f437cbb6e7d2b3bcbb405742dd04a79fbb0",
+    "sensitivity-control.json": "584513b5e2f7caa86fa52f94c485b31fc0aaa57b2a09570b0a3746f74ad3630e",
+    "source-manifest.json": "d673ce860119be885b58c22a6d6898e13bb151360227b4c6b02610a48200e6ec",
+    "source.commit": "d8ee93bcb4f36009ab5862d208a495e004ce0c29416823d135fc7549d2dc9b14",
+    "source.tar.gz": "d758387232e08a757798800f2c3fc576fde750decc2e16e9f69511bd155cf76b"
+  },
+  "toolchain": {
+    "cargo": "cargo 1.77.2 (e52e36006 2024-03-26)",
+    "rustc": "rustc 1.77.2 (25ef9e3d8 2024-04-09)"
+  },
+  "utc_epoch": 1791409764.3040936
+}
