@@ -689,14 +689,23 @@ recorded owner.
 The current task has no unresolved result/design choice requiring a user answer.
 Implementation feasibility of stopped routes remains explicit, not certified.
 
-**Current next action:** Package B's Ticket03 map in 6.7 remains an applicability
-map, not acceptance; its named no-primary behavior and other open rows remain
-unproven, and its three-launch route is stopped. Package E's metadata tests also
-remain unverified, and its route is stopped after allocation 3. Preserve every
-criterion and all consumed counts. The next execution must select an independently
-open requirement with an unspent route; no Package E or Package B rebuild follows
-from this status update. This is not a new approval gate or a declaration that the
-remaining tickets are infeasible.
+**Current next action:** X22 has a partial Linux x86_64/Rust 1.93.0
+`testing-environ,sys` acceptance in
+`.scratch/all-tickets/process-signal-evidence/proof.md`; its other platform,
+MSRV and feature rows remain open. Package B's Ticket03 map in 6.7 remains an
+applicability map, not acceptance; its named no-primary behavior and other open
+rows remain unproven, and its three-launch route is stopped. Package E's metadata
+tests also remain unverified, and its route is stopped after allocation 3.
+Preserve every criterion and all consumed counts. The X22 test is guarded by
+`cfg(all(unix, not(feature = "no_index")))` after review identified its Unix-only
+shell and process APIs; the Linux proof remains applicable because this compile
+guard selects the unchanged test body on Linux. The combined reviewer returned
+READY after checking the guard and proof applicability; no rerun was needed.
+Windows is not covered. After review and fork push, the next execution must
+select an independently open
+requirement with an unspent route; no Package E or Package B rebuild follows
+from this status update. This is not a new approval gate or a declaration that
+the remaining tickets are infeasible.
 
 The exact metadata command and its source/test mapping remain as recorded below.
 The full archive and pinned lock provenance remain available locally; the attempt-03
@@ -806,7 +815,7 @@ source test alone or by an unreviewed/provisional result.
 | X19 | Deadline tests; `linux-managed-deadline-proof.md` and options proof | Partial: Linux timeout/partial output and owned reaping are accepted in named cases; no scheduler-independent latency guarantee or full feature/platform coverage. |
 | X20 | Scalar success and `linux-managed-success-proof.md` | Accepted for named Linux rows: normal completion before deadline. |
 | X21 | Cap tests, `linux-process-overlap-proof.md`, managed output-limit proof | Accepted for named Linux DirectChild/Managed same-step overflow-vs-deadline cases and listed cap cases; other causes/platforms remain open. |
-| X22 | `sys_process_report.rs` constructs signal reports | Open: no real Unix child-killed-by-signal observation. |
+| X22 | `run_reports_a_real_unix_child_signal_without_an_exit_code`; `process-signal-evidence/proof.md` | Partial: Workhorse Linux x86_64/Rust 1.93.0 proves a real public-Engine SIGKILL child reports `success=false`, `code=()`, `signal=9`, is not timed out, and is reaped (`ESRCH`). Other Unix platforms, MSRV and feature rows remain open. |
 | X23 | Shared-child and `linux-process-example3-proof.md` | Accepted for named Linux rows: real spawn/wait, result map, clone snapshots and cached results. |
 | X24 | Shared-child proof observes pending `wait(timeout)` and completed snapshots | Partial: a pending `try_wait` returning unit is not established by the accepted evidence. |
 | X25 | Shared-child and managed-kill proofs | Accepted for named Linux cases: kill/wait completes with independent cleanup/readback. |

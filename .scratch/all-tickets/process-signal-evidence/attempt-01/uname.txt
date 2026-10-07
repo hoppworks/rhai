@@ -1,0 +1,1 @@
+Linux workhorse 7.2.7-ogc1.1.fc44.x86_64 #1 SMP PREEMPT_DYNAMIC Fri Sep 25 06:00:41 UTC 2026 x86_64 GNU/Linux

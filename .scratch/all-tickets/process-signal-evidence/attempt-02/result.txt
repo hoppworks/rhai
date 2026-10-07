@@ -1,0 +1,2 @@
+RED: wrong expected signal (10) failed at the assertion after observing actual signal 9.
+GREEN: restored exact test passed; child record and ESRCH readback were asserted.

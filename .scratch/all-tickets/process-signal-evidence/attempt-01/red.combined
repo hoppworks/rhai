@@ -1,0 +1,4 @@
+error: could not execute process `rustc -vV` (never executed)
+
+Caused by:
+  Permission denied (os error 13)

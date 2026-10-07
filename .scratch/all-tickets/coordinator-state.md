@@ -34,7 +34,7 @@ integration does not claim release acceptance. Do not recreate remote task refs.
 No installs, admin, credentials, agent-home/config or shared-service changes.
 Windows guest control belongs solely to windows_private_staging_readback; historical owner records remain preserved.
 
-## Current status — Package A accepted; Package E follow-up remains stopped (2026-10-07)
+## Current status — Package A accepted; Package E follow-up remains stopped; X22 Linux slice partially accepted (2026-10-07)
 
 Package A's narrow Linux/Rust 1.77.2 acceptance is complete after five cumulative
 native allocations. Attempt 4 passed its six controls, but a later combined review
@@ -81,9 +81,14 @@ all metadata, example, compatibility and release criteria stay open.
 
 Package A's scoped Linux/Rust 1.77.2 acceptance remains valid; Package B's
 criterion map remains useful but its three-launch route is also stopped. No
-other package or release is marked complete. The next campaign action must use
-an independently open requirement and an unspent execution route; no current
-Package E build is authorized by the exhausted allowance.
+other package or release is marked complete. The old next-action note at the
+end of this state named X21 overlap, but `.scratch/all-tickets/linux-process-overlap-proof.md`
+already accepts X21 for its named Linux DirectChild/Managed same-step cases.
+Reuse that proof; do not rerun the overlap package. X22 now has a partial
+Linux x86_64/Rust 1.93.0 `testing-environ,sys` acceptance in
+`.scratch/all-tickets/process-signal-evidence/proof.md`. Its other platform,
+MSRV and feature rows remain open. Package B and E remain stopped as recorded;
+this does not reopen either route or close the broader process ticket.
 
 ### P2/P10 public Engine process-policy slice — partial proof recorded
 
@@ -126,6 +131,124 @@ Rules re-read for this Session: central agent-skills HEAD
 `14617043b70d1ba2d40b720832cbad294fa8c008`; project and applicable skill hashes
 are recorded in the historical planning record below. This does not claim that
 other Sessions loaded the same revision.
+
+The central checkout had no tracked modifications; its uncommitted state was
+limited to untracked scratch directories: `acceptance-overhead-plan-20261006`,
+`build-age-automation-update.json`, `campaign-calibration-budgets`,
+`campaign-repair-packages`, `central-build-paths`,
+`container-cleanup-automation-update.json`, `disk-pressure-cleanup-20261007`,
+`harness-efficiency-20261003`, `machine-heavy-runs-20261004`,
+`owned-resource-cleanup`, `periodic-sync` and `streamline-acceptance`. No
+Agent-Skills files were changed or synchronized. The project's current
+`AGENTS.md` authorizes strict verification, automatic pushes and merges to the
+fork, exact lowercase `hoppworks <daniel@hoppworks.de>` attribution, and scoped
+POSIX builds. `e2e-proof` and `tdd` were re-read for this package; their public
+Engine/real-OS, independent readback and assertion-sensitivity requirements are
+applied below.
+
+### X22 real Unix child-signal acceptance — partial Linux proof accepted
+
+Remaining requirement: the full native platform/MSRV/feature matrix for a real
+Unix child terminated by signal. The Linux x86_64/Rust 1.93.0
+`testing-environ,sys` slice proves through the public `Engine` that the result is
+`success=false`, `code=()`, `signal=9`, and not a timeout.
+The focused test is
+`tests/sys_process.rs::run_reports_a_real_unix_child_signal_without_an_exit_code`.
+It invokes `/bin/sh` through the registered Rhai process API; the child writes
+its PID to a unique temporary file and sends itself SIGKILL. The test checks the
+exact result map and independently reads the PID record and requires `kill(pid,
+0)` to return `ESRCH`. This exact Engine-to-OS start path covers X22's behavior;
+report-constructor tests alone do not. A deliberately wrong expected signal (10)
+must fail at that assertion, then the restored source must pass.
+
+Run only on Workhorse Linux x86_64 with installed Rust/Cargo 1.93.0, exact pinned
+source archive
+`.scratch/all-tickets/process-signal-evidence/attempt-01/source.tar.gz`
+(`0ffccc22a21bcc178638356cae582129af3213f3cefcb3bdd18507745b5cd2b3`) and lock
+(`2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425`). No shared
+service is required. The canonical Workhorse runner is its central
+`tools/run_scoped.py`; `TMPDIR` is the unique owned session scope and all Cargo
+outputs and caches live under `AGENT_RUNTIME_DIR`. RED and restored GREEN share
+one bounded invocation. Preserve the process-family 600/585/540-second outer,
+runner and helper limits, two Cargo jobs, 16-descendant ceiling, 1,572,864 KiB
+storage preemption, 2,097,152 KiB sampled RSS/storage hard bounds and 16 GiB
+admission reserves. Before launch require fresh exact-input/runner/revision
+readback, an absent owned scope before staging, no competing heavy run, and
+measured free disk/RAM. Export raw output and independent pre/post cleanup
+readbacks before the runner removes its private runtime. One native allocation
+is consumed at launch; the wrong expectation is a sensitivity control, not a
+product correction. A setup failure is infrastructure, not test RED; stop and
+classify this route rather than automatically repeating the build. This closes
+only the proven Linux x86_64/Rust 1.93.0 `testing-environ,sys` row; other OS,
+MSRV and feature rows remain open.
+
+Preflight check 1 stopped before any build: the `runuser` environment could not
+execute `rustup` from root's `/root/.cargo/bin` PATH (EACCES). Read-only lookup
+confirmed the installed Workhorse Rustup proxy at
+`/home/linuxbrew/.linuxbrew/opt/rustup/bin/rustup`; only the preflight and test
+launcher references were corrected to that absolute path. No toolchain command,
+Cargo build, assertion or native allocation started. This is one repaired
+preflight-path error, not a test failure or product correction.
+
+The first bounded invocation then exited 126 before the scoped runner because
+the central `run_scoped.py` file is mode 0644, not executable. This confirms an
+entrypoint permission mismatch, not runner, Cargo or test behavior. Invoke the
+unchanged canonical script with `/usr/bin/python3`; validate that exact staged
+path with a no-op and confirm runtime cleanup before the one test allocation.
+Native allocations remain zero; no assertions have run.
+
+That no-op exited 0 and its subsequent exact-scope preflight found no runtime
+leftover, no competing heavy processes, 91,995,552 KiB MemAvailable and
+610,170,355,712 bytes free. The first native allocation then started Cargo but
+stopped before compilation or the test binary: Cargo could not execute `rustc
+-vV` because `runuser` inherited inaccessible `/root/.cargo/bin` shims. The
+captured RED status was 101, but no test assertion ran and the expected-RED
+classifier correctly refused to accept it. Raw stderr/status and source/lock
+hashes are in `process-signal-evidence/attempt-01/`; the scoped runner removed
+its private runtime, so no compiled artifact is reusable. This diagnosis
+justified one bounded correction of the complete toolchain PATH to Workhorse's
+installed proxy directory with `RUSTUP_TOOLCHAIN=1.93.0`, followed by fresh
+admission.
+
+The corrected scoped no-op and toolchain readback passed. Fresh admission found
+no competing heavy process, 92,200,308 KiB MemAvailable, and 610,170,155,008
+free bytes. Native allocation 2 ran RED and restored GREEN in one invocation:
+the wrong signal expectation failed at `left: 9`/`right: 10` (status 101), and
+the restored test passed exactly one case (status 0). It independently read the
+child PID and observed `kill(pid, 0) == -1`, `errno=ESRCH`. The public Engine
+result was `success=false`, `code=()`, `signal=9`, `timed_out=false`, and both
+streams complete. Exact outputs and source hashes are in
+`process-signal-evidence/attempt-02/`; the partial proof is
+`process-signal-evidence/proof.md`.
+
+Cumulative X22 route: two native allocations, one pre-assertion infrastructure
+stop, one expected assertion-sensitivity RED, one passing GREEN, zero product
+corrections. Runner readback found no private runtime or heavy process. All 15
+remote attempt-02 result files were exported and hash-compared. The exact owned
+Workhorse scope was removed; final readback found it absent, no runtime or heavy
+process, and 610,308,501,504 free bytes (`attempt-02/cleanup-readback.json`).
+The temporary local source archive, manifest and launch helpers were removed
+after preserving their hashes and raw outputs. No native process remains.
+
+The combined independent review of this staged package found one MEDIUM
+portability issue: the test used `/bin/sh` and Unix process/signal APIs while
+being gated only by `no_index`. The test gate is corrected to
+`cfg(all(unix, not(feature = "no_index")))`; the body and assertions remain
+unchanged. The existing Linux proof is applicable because its target satisfies
+the added `unix` condition. The combined reviewer rechecked the correction
+and returned READY without a build; current test-file SHA-256 is
+`42afe230d8c386d77a3738a6a8bcd9ab32f946946eec70f93466060fbf5bb0f9`. The frozen
+run hash remains the original tested input, with only the compile-selection
+attribute changed afterward. No new native run is needed solely for this guard.
+Preserve the Windows limitation and all other X22 rows as open.
+
+After the affected review is READY, atomically commit the exact staged X22 test,
+proof, plan and state files with the configured lowercase author/committer, then
+push only to fork `main` using an atomic fast-forward push and verify the remote
+has only that branch. The next campaign action after push is to select another
+independently open requirement with an unspent route. Preserve the stopped
+Package B/E routes and all remaining X22 platform/MSRV/feature rows; do not call
+X22 or the overall campaign complete.
 
 ## Historical Package E pre-follow-up record (superseded)
 
@@ -4069,18 +4192,14 @@ repair can close named requirements. No hard cap raised. Actual native600/585/54
 seconds,2jobs,16descendants,1572864/2097152KiB and finite5+3samples unchanged.
 Second completed correction rejection for same cause triggers fresh Expert once.
 
-### Next independent process acceptance requirement
-While performance collector repair proceeds, root checked ticket03 input/output
-contract and test-first acceptance table: concurrent overflow/deadline must prefer
-OutputLimit within the same supervision step, otherwise preserve first committed
-cause. Frozen8c Unix run driver drains stdout/stderr before expired branch
-(src/packages/sys/process/unix.rs around2690–2855); existing proof/test names do
-not establish this exact overlap/first-cause criterion. It remains open, not a
-production defect claim. After current measurements, choose one narrow real-OS
-public Engine regression with explicit readiness plus an independent exact-cause
-control/readback; supplementary deterministic scheduling seam cannot replace OS
-acceptance. Do not reopen stopped stdin or platform custody chains. No new source,
-build or native allocation was made for this next requirement.
+### Superseded next requirement — X21 overlap (accepted)
+This historical note predates `.scratch/all-tickets/linux-process-overlap-proof.md`.
+The accepted proof now establishes the named Linux DirectChild and Managed
+same-step overflow-versus-deadline cases with a public Engine, real child,
+independent cause observation and sensitivity controls. `docs/sys-package-plan.md`
+§6.7 marks that bounded X21 slice accepted. Do not repeat its build or reopen
+its stopped first-cause routes; other causes and platform/feature rows remain
+open. X22's real signal-terminated child is the next independent criterion.
 
 ### Performance correction2 freeze and affected review
 Frozen a7cef5661f696473631c2f71559561c43878ef6c, exact hoppworks author/committer,

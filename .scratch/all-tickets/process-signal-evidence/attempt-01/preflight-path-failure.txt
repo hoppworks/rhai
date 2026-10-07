@@ -1,0 +1,6 @@
+The first staged preflight stopped before invoking Rust/Cargo because `runuser`
+could not execute `rustup` resolved from `/root/.cargo/bin` (PermissionError:
+[Errno 13] Permission denied: 'rustup'). Workhorse's installed Rustup proxy was
+verified at `/home/linuxbrew/.linuxbrew/opt/rustup/bin/rustup`; only the
+preflight and launcher references were changed to this absolute path. No test
+build, assertion or native allocation started.

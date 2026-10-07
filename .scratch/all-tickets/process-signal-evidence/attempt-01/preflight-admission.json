@@ -1,0 +1,30 @@
+{
+  "active_heavy_processes": [],
+  "agent_skills_revision": "14617043b70d1ba2d40b720832cbad294fa8c008",
+  "archive_entries": 6738,
+  "cargo_version": "cargo 1.93.0 (083ac5135 2025-12-15)",
+  "disk_free_bytes": 610170425344,
+  "inputs": {
+    "remote-preflight.py": "477cc645542a3ded87e6e23fca0ca518fecbcb348ffa1d62b888e414ebe37db1",
+    "run.sh": "bfa81e4e51f00504476f082998f5fa361ffbdef1980bfd595e9addfe8c17207b",
+    "run_scoped.py": "25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e",
+    "source-manifest.sha256": "fe0a1e0fa6eef7c2bbee695e780444e362ed4a5c8576ee2648b5ab1da8f34509",
+    "source.tar.gz": "0ffccc22a21bcc178638356cae582129af3213f3cefcb3bdd18507745b5cd2b3"
+  },
+  "machine": {
+    "machine": "x86_64",
+    "release": "7.2.7-ogc1.1.fc44.x86_64",
+    "system": "Linux"
+  },
+  "mem_available_kib": 91995552,
+  "ready": true,
+  "rustc_version": "rustc 1.93.0 (254b59607 2026-01-19)",
+  "scope_entries": [
+    "remote-preflight.py",
+    "run.sh",
+    "source-manifest.sha256",
+    "source.tar.gz"
+  ],
+  "scope_owner_uid": 1000,
+  "utc_epoch": 1791376865
+}

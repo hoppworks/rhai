@@ -1,0 +1,1 @@
+PATH=/home/linuxbrew/.linuxbrew/opt/rustup/bin:/home/linuxbrew/.linuxbrew/bin:/usr/bin:/bin RUSTUP_TOOLCHAIN=1.93.0 cargo test --locked --features testing-environ,sys --test sys_process run_reports_a_real_unix_child_signal_without_an_exit_code -- --exact --nocapture --test-threads=1

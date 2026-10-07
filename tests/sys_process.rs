@@ -4285,6 +4285,55 @@ fn assert_output_limit_error(error: Box<rhai::EvalAltResult>, stream: &str, pref
 }
 
 #[test]
+#[cfg(all(unix, not(feature = "no_index")))]
+fn run_reports_a_real_unix_child_signal_without_an_exit_code() {
+    let engine = engine(SysConfig::default().programs(ProgramPolicy::Any));
+    let records = TempDir::new();
+    let record_path = records.path().join("signal-child.txt");
+    let record_literal = record_path.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let command = r#"printf 'child-pid=%s\n' "$$" > "$RECORD"; kill -KILL "$$""#
+        .replace('\\', "\\\\")
+        .replace('"', "\\\"");
+    let script = format!(
+        r#"run("/bin/sh", ["-c", "{command}"], #{{
+            env_clear: true,
+            env: #{{ RECORD: "{record_literal}" }},
+            timeout: 5,
+            max_output: 1024
+        }})"#
+    );
+
+    let result = engine.eval::<Map>(&script).unwrap();
+    assert!(!result["success"].as_bool().unwrap());
+    assert!(result["code"].is_unit(), "a signal-terminated child has no exit code");
+    assert_eq!(result["signal"].as_int().unwrap(), libc::SIGKILL as i64);
+    assert!(!result["timed_out"].as_bool().unwrap());
+    assert!(result["stdout_complete"].as_bool().unwrap());
+    assert!(result["stderr_complete"].as_bool().unwrap());
+
+    let record = std::fs::read_to_string(record_path).unwrap();
+    let pid: libc::pid_t = record
+        .strip_prefix("child-pid=")
+        .expect("child must record its own process id before receiving SIGKILL")
+        .trim()
+        .parse()
+        .unwrap();
+    let pid_probe = unsafe { libc::kill(pid, 0) };
+    let pid_probe_errno = std::io::Error::last_os_error().raw_os_error();
+    println!(
+        "x22_signal_readback success={} code_unit={} signal={} timed_out={} stdout_complete={} stderr_complete={} child_record={record:?} child_pid={pid} pid_probe={pid_probe} pid_probe_errno={pid_probe_errno:?}",
+        result["success"].as_bool().unwrap(),
+        result["code"].is_unit(),
+        result["signal"].as_int().unwrap(),
+        result["timed_out"].as_bool().unwrap(),
+        result["stdout_complete"].as_bool().unwrap(),
+        result["stderr_complete"].as_bool().unwrap(),
+    );
+    assert_eq!(pid_probe, -1, "signaled child {pid} is still present");
+    assert_eq!(pid_probe_errno, Some(libc::ESRCH));
+}
+
+#[test]
 #[cfg(not(feature = "no_index"))]
 fn process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps() {
     const INPUT_BYTES: usize = 128 * 1024;
