@@ -471,12 +471,18 @@ X24 is partially accepted for Workhorse Linux x86_64, Rust/Cargo 1.93.0, and
 remain open.
 ### 6.1 Applicable rules and historical investigation
 
-Current central repository: `/Users/hoppworks/projects/agent-skills`, inspected HEAD
-`14617043b70d1ba2d40b720832cbad294fa8c008`. No newer revision was explicitly pinned
-for this request. Loaded the actual `config/common/AGENTS.md`, this worktree's
-`AGENTS.md`, `skills/campaign/SKILL.md`, its `references/repair-package.md`,
-`skills/e2e-proof/SKILL.md`, `skills/wayfinder/SKILL.md`,
-`skills/ocr-delegate/SKILL.md` and `vendor/mattpocock--skills/tdd/SKILL.md`.
+Current central repository: `/Users/hoppworks/projects/agent-skills`, local `main`
+HEAD `0e846bfc577a51bd1a98a5606966aecda40320c2`. The requested revision
+`35ba734135a64100b891f422d4ced9d76795ab57` was inspected; the later local Main
+delta changes the campaign and E2E rules to remove fixed machine-wide heavy-run
+counts. The current supplied global rules agree with that delta. Loaded the current
+global instructions, this worktree's `AGENTS.md`, `skills/campaign/SKILL.md` and
+`skills/e2e-proof/SKILL.md`. Global AGENTS SHA-256 is
+`7a0f59e741c84d87cdd7554c97d749ec641dbcb2132c3fe8b6c90423e12d16c4`; project
+AGENTS SHA-256 is `06b73a9db5691ff5a0c5b34f98ce61e2c5df08e77161f3f93c7ce119d7c5de`.
+The central checkout has no tracked changes; its unrelated untracked `.scratch`
+material is preserved. `docs/agents/resource-lifecycle.md` is absent; the project
+AGENTS resource procedure is applicable.
 The central repository has no tracked modifications. Its untracked paths are
 `.scratch/acceptance-overhead-plan-20261006/`, `build-age-automation-update.json`,
 `campaign-calibration-budgets/`, `campaign-repair-packages/`, `central-build-paths/`,
@@ -498,14 +504,14 @@ Compared with the previous campaign revision `6830c49ed962a3dc1937d72d0d182150bb
 | Acceptance/state | Validate the complete real entry/input/transport/export/consumer path before expensive execution. Record product RED, product failure and infrastructure abort separately. No new wrapper framework or repeated status hierarchy. |
 
 The expired project concurrency exceptions do not reopen their named invocations.
-The current global ceiling is one heavy run on MacBook and up to three on workhorse
-or lllm, subject to measured pressure and stricter package conditions. The existing
-first-cause guard's zero-foreign-heavy condition is conservative and retained until
-an explicitly reviewed change; it does not prove a slot is reserved. The package's
-600/585/540-second limits, two Cargo jobs, 16 descendants, 1,572,864 KiB storage
-preemption, 2,097,152 KiB hard storage/RSS and 16 GiB admission reserves remain.
-No unresolved rule conflict requires an outcome change. Stopped repair routes
-below remain stopped; the new rules do not reset their history.
+There is no fixed machine-wide heavy-run count. Check active work and actual
+CPU/RAM/disk pressure before a run, apply the limits and reserves attached to that
+specific recipe, and do not wait for or claim a numerical slot. The first-cause
+recipe's zero-foreign-heavy guard and its 600/585/540-second, two-job, descendant,
+storage/RSS and 16 GiB admission limits remain specific to that recipe; they are
+not a machine-wide convention. The general 16 GiB disk reserve in §6.5 remains
+binding. Stopped repair routes below remain stopped; the new rules do not reset
+their history. No unresolved rule conflict changes acceptance scope.
 
 Read in full:
 `/Users/hoppworks/Documents/Codex/2026-10-06/codex-threads-01a0fe32-5425-71d2-887b/outputs/session-review-2026-10-06.md`.
@@ -813,24 +819,11 @@ with no material findings. Commit `8532b375c0a6f8121fcbc587fd53eef3990c1b2a`
 contains this package and was atomically pushed to the authorized fork `main`.
 This proof accepts only the named Linux/Rust/feature rows.
 
-**Next open work after this package is pushed:** X2 and X8 have partial Linux
-x86_64/Rust 1.93.0 `testing-environ,sys` acceptance in
-`.scratch/all-tickets/process-not-found-proof/proof.md`; their native OS, MSRV and
-other feature rows remain open. X22 also retains its partial Linux acceptance in
-`.scratch/all-tickets/process-signal-evidence/proof.md`; its other platform, MSRV
-and feature rows remain open. X4–X6 have partial Linux x86_64/Rust 1.93.0
-acceptance in `.scratch/all-tickets/process-argv-evidence/attempt-01/proof.md`;
-their other OS, MSRV and feature rows remain open. X11 and the newly covered
-X14/X16/X17 retain only their named Linux partials; their other matrix rows
-remain open. Package B's Ticket 03 map in §6.7 remains an applicability map, not
-acceptance; its named no-primary behavior and other open rows remain unproven,
-and its three-launch route is stopped. Package E's metadata tests remain
-unverified, and its route is stopped after allocation 3. Preserve every criterion
-and all consumed counts. The previously reviewed X22 guard remains unchanged;
-its combined review is reusable. After this package was pushed, the next step is
-to select an independently open requirement with an unspent route; do not retry
-Package E or Package B based on this status update. This is not a new approval
-gate or a declaration that the remaining tickets are infeasible.
+The earlier next-work snapshot for this X14/X16/X17 package is superseded by
+`.scratch/all-tickets/coordinator-state.md`. Current accepted scope and remaining
+criteria stay in §6.7; Package B/E stop causes and consumed counts remain in the
+ticket records and archived coordinator state. Do not use the old snapshot as a
+current next action.
 The exact metadata command and its source/test mapping remain as recorded below.
 The full archive and pinned lock provenance remain available locally; the attempt-03
 preflight passed, then the launcher stopped at line 23 before extraction/Cargo due
@@ -851,7 +844,7 @@ criterion. It does not exercise socket, process or file effects and cannot close
 Package E's example/readback requirements.
 
 The following allocation1/allocation2 detail is historical and is superseded by
-the terminal allocation3 outcome and current next action above.
+the terminal allocation3 result; remaining criteria stay in §6.7.
 
 Native3 allocation1 reached Cargo compilation but stopped before assertions because
 its staged source archive (SHA-256
@@ -946,7 +939,7 @@ source test alone or by an unreviewed/provisional result.
 | X26 | Shared-child proof repeats kill after completion | Accepted for named Linux rows: repeated kill is harmless and cached snapshots persist. |
 | X27 | Shared-child and managed final-drop proofs | Accepted for named Linux cases: `kill_on_drop=true` cleanup/reaping; only named feature rows. |
 | X28 | `linux-drop-false-native2-proof.md`; `linux-drop-false-next.md` | Partial: exact Linux direct/managed retention tests and independent group readback are accepted at the named default Linux row, and macOS direct/managed proof is reusable; Windows and other feature rows remain open. The later `linux-drop-false-next.md` is a planning note predating native2 and does not invalidate that accepted proof. |
-| X29 | `tests/fixtures/sys_process_shared_child_contract.rs::script_throw_drops_and_reaps_a_live_child`; `.scratch/all-tickets/x29-script-throw-20261007-9aec531ea61d42359544757b363f2422/proof.md` | Partial: Workhorse Linux x86_64, Rust/Cargo 1.93.0, `testing-environ,sys` proves a Rhai script throws while its public-Engine child is confirmed live; the expected error is matched, a wrong-message control is rejected, and the outer harness observes exact-PID `ESRCH` after drop. Other OS, MSRV and feature rows remain open. |
+| X29 | `tests/fixtures/sys_process_shared_child_contract.rs::script_throw_drops_and_reaps_a_live_child`; `.scratch/all-tickets/x29-script-throw-20261007-9aec531ea61d42359544757b363f2422/proof.md` | Accepted for Workhorse Linux x86_64, Rust/Cargo 1.93.0 and 1.77.2 with `testing-environ,sys`: expected RED verifies the fresh challenge gate, and both GREEN outputs show exact challenge/response, script-level `child.try_wait() == ()`, wrong-message rejection and independent ESRCH readback. Combined review confirms the current X29 source matches the tested GREEN snapshot; no rebuild was needed. Other OS, feature and MSRV rows remain open. |
 | X30 | `tests/sys_process.rs::repeated_public_run_calls_keep_fd_count_stable`; `.scratch/all-tickets/process-fd-stability-evidence/x30-fd-stability-20261007-1530z/attempt-06/` | Partial: attempt 06 proves that the exact-filtered acceptance test isolates its `/proc/self/fd` census in a fresh process, where 200 sequential public `run` calls leave the count unchanged; a wrong-count control fails and restored GREEN passes. The parent enforces a 60-second child deadline and terminates/reaps on timeout. Applies only to Linux x86_64, Rust/Cargo 1.93.0, `testing-environ,sys`; other OS, MSRV and feature rows, including Windows handle stability, remain open. |
 | X31 | `process_representation_is_send_sync_and_shareable`; sync shared-child proof | Accepted for named Linux sync rows: shared representation and concurrent cancellation/wait behavior; actual blocking-entry and wider feature rows remain limited. |
 | X32 | `tests/sys_process_windows.rs` | Open: no native Windows embedded-quote argv reconstruction test. |

@@ -97,7 +97,7 @@ fn fixture_entry() {
         "hold" => {
             let deadline = Instant::now() + Duration::from_secs(18);
             loop {
-                for nonce in ["one", "two", "three"] {
+                for nonce in ["one", "two", "three", "script-throw"] {
                     let request = root.join(format!("probe-{nonce}.request"));
                     if request.exists() {
                         let token = std::fs::read_to_string(&request).expect("read probe token");
@@ -332,6 +332,7 @@ fn script_throw_with_live_fixture(root: &Path) {
             env: #{{ "RHAI_SHARED_CHILD_FIXTURE": "hold", "RHAI_SHARED_CHILD_ROOT": {fixture_root:?} }}
         }});
         while !exists("release-throw") {{}}
+        if child.try_wait() != () {{ throw "fixture child exited before Rhai script throw"; }}
         throw "intentional Rhai script throw with live child";"#,
         executable = executable.to_string_lossy(),
         fixture_root = root.to_string_lossy(),
@@ -344,7 +345,7 @@ fn script_throw_with_live_fixture(root: &Path) {
         assert_script_throw_error(&detail, "__x29_wrong_expected_message_control__");
     }));
     assert!(wrong_expectation.is_err(), "wrong-message control unexpectedly accepted the Rhai error");
-    eprintln!("shared-child script-throw evaluation_error=observed wrong_expectation_rejected=true child_drop=expected");
+    eprintln!("shared-child script-throw evaluation_error=observed pre_throw_try_wait=unit wrong_expectation_rejected=true child_drop=expected");
 }
 
 fn assert_script_throw_error(detail: &str, expected: &str) {
@@ -465,7 +466,16 @@ fn run_bounded_controller_inner(scenario: &str, expect_panic: bool) {
                 if record.split_whitespace().any(|field| field == "state=ready") {
                     let fixture_pid = read_record_pid(&guard.record).expect("ready fixture PID record");
                     assert!(process_exists(fixture_pid), "fixture PID {fixture_pid} exited before the Rhai throw release");
-                    eprintln!("shared-child script-throw release fixture_pid={fixture_pid} state=ready pid_present=true");
+                    let request = root_path.join("probe-script-throw.request");
+                    let reply = root_path.join("probe-script-throw.reply");
+                    assert!(!request.exists() && !reply.exists(), "script-throw challenge must be fresh");
+                    let challenge = format!("script_throw_controller={controller_pid} fixture={fixture_pid}");
+                    std::fs::write(&request, &challenge).expect("send fresh live-fixture challenge");
+                    wait_for_file(&reply, Duration::from_secs(3));
+                    let response = std::fs::read_to_string(&reply).expect("read live-fixture challenge response");
+                    assert_eq!(response, challenge, "fixture PID {fixture_pid} must answer the fresh challenge");
+                    assert!(process_exists(fixture_pid), "fixture PID {fixture_pid} disappeared after answering the challenge");
+                    eprintln!("shared-child script-throw release fixture_pid={fixture_pid} state=ready challenge_response=verified pid_present=true");
                     std::fs::write(&throw_release, "release").expect("release the Rhai throw gate");
                 }
             }
