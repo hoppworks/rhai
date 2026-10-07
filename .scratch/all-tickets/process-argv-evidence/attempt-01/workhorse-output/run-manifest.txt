@@ -1,0 +1,12 @@
+scope=/home/workhorse/.local/share/agent-builds/rhai/x4-x6-argv-20261007-141000z
+runtime=/home/workhorse/.local/share/agent-builds/rhai/x4-x6-argv-20261007-141000z/agent-build-pj8i_94m
+rustc=rustc 1.93.0 (254b59607 2026-01-19)
+cargo=cargo 1.93.0 (083ac5135 2025-12-15)
+source_sha256=dd121c760ace68c651b8c87e2354683cc075a459fcf32e41c83a86c7b32d11d1
+lock_sha256=2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425
+runner_sha256=25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e
+test=tests/sys_process.rs::run_preserves_argv_boundaries_without_shell_interpolation
+command=cargo test --locked --features testing-environ,sys --test sys_process run_preserves_argv_boundaries_without_shell_interpolation -- --exact --nocapture --test-threads=1
+red_control=expected[0] XOR 1 in private runtime copy only
+cargo_jobs=2
+aggregate_cargo_seconds=16

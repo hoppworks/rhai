@@ -1,0 +1,55 @@
+diff --git a/tests/sys_process.rs b/tests/sys_process.rs
+index 77c42704f..045a06e03 100644
+--- a/tests/sys_process.rs
++++ b/tests/sys_process.rs
+@@ -3979,6 +3979,50 @@ fn run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data() {
+     }
+ }
+ 
++#[test]
++#[cfg(not(feature = "no_index"))]
++fn run_preserves_argv_boundaries_without_shell_interpolation() {
++    let engine = engine(SysConfig::default().programs(ProgramPolicy::Any));
++    let records = TempDir::new();
++    let argument_record = records.path().join("argv.bin");
++    let child_record = records.path().join("child-record.txt");
++    let marker = records.path().join("shell-expanded-marker");
++    let arguments = vec![
++        "value with spaces".to_owned(),
++        "double \"quotes\" and 'single quotes'".to_owned(),
++        "$HOME".to_owned(),
++        "literal|pipe".to_owned(),
++        "literal;semicolon".to_owned(),
++        "literal&&and".to_owned(),
++        format!("$(touch {})", marker.display()),
++        String::new(),
++    ];
++    let argument_literals = arguments.iter().map(|argument| format!("{argument:?}")).collect::<Vec<_>>().join(", ");
++    let shell_script = r#"argument_record=$1; child_record=$2; shift 2; printf '%s\0' "$@" > "$argument_record"; printf 'child-pid=%s child-exit=0\n' "$$" > "$child_record""#;
++    let script = format!(
++        r#"run("/bin/sh", ["-c", {shell_script:?}, "rhai-argv-fixture", {argument_record:?}, {child_record:?}, {argument_literals}], #{{ timeout: 5 }})"#,
++        shell_script = shell_script,
++        argument_record = argument_record.to_string_lossy(),
++        child_record = child_record.to_string_lossy(),
++    );
++
++    let result = engine.eval::<Map>(&script).expect("public run should execute the argv fixture");
++    assert_eq!(result["success"].as_bool(), Ok(true));
++    assert_eq!(result["code"].as_int(), Ok(0));
++    assert!(result["stdout_complete"].as_bool().unwrap());
++    assert!(result["stderr_complete"].as_bool().unwrap());
++
++    let observed = std::fs::read(&argument_record).expect("child argv readback");
++    let mut expected = Vec::new();
++    for argument in &arguments {
++        expected.extend_from_slice(argument.as_bytes());
++        expected.push(0);
++    }
++    assert_child_record(&child_record, 0);
++    assert!(!marker.exists(), "shell interpreted an argv value as command text");
++    assert_eq!(observed, expected, "child received different argv boundaries or bytes");
++}
++
+ #[test]
+ #[cfg(not(feature = "no_index"))]
+ fn default_and_nonmatching_process_policies_deny_public_run_without_starting_child() {

@@ -36,6 +36,74 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
 
 ## Current status — Package A accepted; Package E follow-up stopped; X2/X8 and X22 Linux slices partially accepted (2026-10-07)
 
+### Current coherent requirement: Ticket 03 X4–X6 argv preservation
+
+Before implementation, I selected the still-open X4/X5/X6 rows in
+`docs/sys-package-plan.md` §6.7 and the original process contract. The concrete
+acceptance test is
+`tests/sys_process.rs::run_preserves_argv_boundaries_without_shell_interpolation`;
+the public Rhai `run` call starts `/bin/sh`, which records its positional
+arguments as NUL-delimited bytes in a unique `TempDir`, then writes an independent
+child PID/exit record. Exact byte comparison covers spaces, both quote kinds,
+`$HOME`, `|`, `;`, `&&`, a command-substitution marker payload and a trailing
+empty argument. Marker absence proves the payload was not evaluated; the existing
+child-record helper proves direct-child reaping. The exact start command is
+`cargo test --locked --features testing-environ,sys --test sys_process run_preserves_argv_boundaries_without_shell_interpolation -- --exact --nocapture --test-threads=1`.
+The only prerequisites are the Unix sys integration target, `/bin/sh`, Rust/Cargo
+1.93.0 and the accepted lock hash below; no shared service or prebuilt artifact
+is required. Completion requires one assertion-sensitivity RED and the restored
+GREEN in one scoped Workhorse invocation, independent output/child readback,
+export and cleanup, followed by combined review. This can accept only the named
+Linux x86_64/Rust 1.93.0 `testing-environ,sys` row; other OS/MSRV/feature rows
+remain open.
+
+For this package, local and Workhorse agent-skills are both at
+`14617043b70d1ba2d40b720832cbad294fa8c008`; global AGENTS and campaign/TDD/
+e2e-proof skill hashes match across the two machines. The local project
+`AGENTS.md` is the applicable project rule source; no project checkout exists at
+the Workhorse home path. The only agent-skills changes are untracked scratch
+directories, with no tracked instruction changes. The accepted lock copied from
+process-policy attempt 02 hashes to
+`2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425`. Previous
+private build runtimes were removed, so build artifacts are not reusable. A
+fresh Workhorse admission at 2026-10-07 14:10 UTC found no active Cargo/rustc/
+scoped-runner candidate, 610,290,794,496 free bytes on the actual central-scope
+filesystem, and 91,843,600 kB MemAvailable. The default toolchain is 1.96.0, so
+the command will explicitly pin `RUSTUP_TOOLCHAIN=1.93.0`; that toolchain reports
+rustc 1.93.0 and cargo 1.93.0. The canonical runner hash is
+`25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e` and the
+Workhorse agent-skills HEAD is `14617043b70d1ba2d40b720832cbad294fa8c008`.
+
+The sole build scope for this package is owned by this Session at
+`/home/workhorse/.local/share/agent-builds/rhai/x4-x6-argv-20261007-141000z`,
+with a 0700 directory, `TMPDIR` set to that absolute path and a 15:30 UTC expiry.
+The runner's private target, Cargo home, extracted source and caches live under
+`AGENT_RUNTIME_DIR`; only staged source inputs and exported case logs live in
+the central Session scope. Limits remain one paired RED/GREEN Cargo sequence,
+540 seconds aggregate Cargo allowance inside the 585-second runner/600-second
+outer limit, two Cargo jobs, at most 16 descendants, and the project's 16 GiB
+free-storage/RAM admission floor and 2 GiB per-run storage cap. The paired
+public-Engine integration test ran on Workhorse Linux
+7.2.7-ogc1.1.fc44.x86_64 with Rust/Cargo 1.93.0 and completed in 16 aggregate
+Cargo seconds: the expected-byte mutant exited 101 at the exact argv assertion,
+then restored source exited 0 (`1 passed; 0 failed`). Captured stdout, stderr,
+statuses, manifest and independent hashes are in
+`.scratch/all-tickets/process-argv-evidence/attempt-01/workhorse-output/`; the
+reviewed test source, accepted lock and proof note are beside them. The tested
+source hash is `dd121c760ace68c651b8c87e2354683cc075a459fcf32e41c83a86c7b32d11d1`.
+After output readback, the runner runtime, exact staged inputs, output staging
+directory and central scope were removed. Fresh closure at 2026-10-07 14:16 UTC
+found no Cargo/rustc/scoped-runner process, no runtime/scope path, 610,134,818,816
+free bytes and 91,837,188 kB MemAvailable. No build artifact is reusable. This
+partially accepts only Ticket 03 X4–X6 for Linux x86_64/Rust 1.93.0 with
+`testing-environ,sys`; other platform, MSRV and feature rows remain open. No
+product correction was made and no further X4–X6 run is planned absent relevant
+input/assertion change or a new uncovered requirement. The combined independent
+review returned READY with no material findings;
+the source assertions, expected RED/restored GREEN outputs, evidence hashes,
+partial applicability and cleanup were consistent. The remaining action is the
+requested atomic commit and push to the Hoppworks fork only.
+
 Package A's narrow Linux/Rust 1.77.2 acceptance is complete after five cumulative
 native allocations. Attempt 4 passed its six controls, but a later combined review
 found that its `/proc` identity sample could occur after child exit. Attempt 5

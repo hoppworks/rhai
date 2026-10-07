@@ -1,0 +1,11 @@
+
+running 1 test
+test run_preserves_argv_boundaries_without_shell_interpolation ... FAILED
+
+failures:
+
+failures:
+    run_preserves_argv_boundaries_without_shell_interpolation
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 51 filtered out; finished in 0.10s
+
