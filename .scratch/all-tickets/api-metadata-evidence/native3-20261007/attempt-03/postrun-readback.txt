@@ -1,0 +1,7 @@
+2026-10-07T10:39:49Z
+scope=workhorse:workhorse mode=700
+Cargo.lock 30529 bytes 600 workhorse:workhorse
+run-recovery-red.sh 7546 bytes 700 workhorse:workhorse
+source.tar.gz 872530 bytes 600 workhorse:workhorse
+native-red.log=absent
+native-red.status=absent

@@ -1,0 +1,10 @@
+++ id -un
++ test workhorse = workhorse
++ test /home/workhorse = /home/workhorse
++ SESSION_SCOPE=/home/workhorse/.local/share/agent-builds/rhai/api-metadata-20261007-followup1-91bfc69cb698
++ export SESSION_SCOPE
++ export TMPDIR=/home/workhorse/.local/share/agent-builds/rhai/api-metadata-20261007-followup1-91bfc69cb698
++ TMPDIR=/home/workhorse/.local/share/agent-builds/rhai/api-metadata-20261007-followup1-91bfc69cb698
+++ readlink -f /home/workhorse/.local/share/agent-builds/rhai/api-metadata-20261007-followup1-91bfc69cb698
++ resolved_scope=/var/home/workhorse/.local/share/agent-builds/rhai/api-metadata-20261007-followup1-91bfc69cb698
++ test /var/home/workhorse/.local/share/agent-builds/rhai/api-metadata-20261007-followup1-91bfc69cb698 = /home/workhorse/.local/share/agent-builds/rhai/api-metadata-20261007-followup1-91bfc69cb698

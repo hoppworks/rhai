@@ -1,0 +1,18 @@
+/var/home/workhorse/.local/share/agent-builds/rhai/api-metadata-20261007-followup1-91bfc69cb698/source.tar.gz: OK
+/var/home/workhorse/.local/share/agent-builds/rhai/api-metadata-20261007-followup1-91bfc69cb698/Cargo.lock: OK
+/var/home/workhorse/.local/share/agent-builds/rhai/api-metadata-20261007-followup1-91bfc69cb698/run-recovery-red.sh: OK
+build.template
+identity=workhorse
+cwd=/var/home/workhorse
+scope=/var/home/workhorse/.local/share/agent-builds/rhai/api-metadata-20261007-followup1-91bfc69cb698
+staged-files
+Cargo.lock
+run-recovery-red.sh
+source.tar.gz
+source_sha256=a243fc96c513c70d86e0281e0f178d91c95e6338ab3dda24d1656f7dd8863de5
+lock_sha256=4ff0a7de6f504510af64092d446d411b86d95228b23a188b396bd188da367627
+launcher_sha256=bb0b7b98e0f8f2347d46cdc06f4143b8585a1401111e55876a41d442e814c4dd
+runner_sha256=25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e
+rustc=rustc 1.93.0 (254b59607 2026-01-19)
+cargo=cargo 1.93.0 (083ac5135 2025-12-15)
+preflight=PASS

@@ -1,0 +1,8 @@
+Captured at: 2026-10-07T10:49:41Z
+Exact owned scope: /var/home/workhorse/.local/share/agent-builds/rhai/api-metadata-20261007-followup1-91bfc69cb698
+Pre-cleanup readback: owner workhorse:workhorse, mode 700; only Cargo.lock,
+run-recovery-red.sh and source.tar.gz were present as regular files.
+Removed those three exact staged files and retired the empty scope with rmdir.
+Independent readback: cleanup=PASS; scope_absent=yes.
+No compiled build or private runtime was retained. No foreign process/resource
+was modified.

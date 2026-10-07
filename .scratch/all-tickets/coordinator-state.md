@@ -8,9 +8,18 @@ run/spawn/shared Child, managed Unix groups and Windows jobs, core Rust 1.66,
 optional sys/net Rust 1.77.2, required features and native Linux/macOS/Windows.
 Done only when every local ticket and final release gate is proven. Decision
 resolution, source review and repository consolidation are not implementation
-acceptance. Local Markdown tickets only; no Linear. Goal active and incomplete.
+acceptance. Local Markdown tickets only; no Linear. Goal resumed and incomplete by
+the owner's explicit 2026-10-07 instruction to begin implementation under the
+revised plan. Package A's scoped acceptance is complete; no ticket or release is
+complete.
 
 ## Authorization and ownership
+Current request: begin implementation under the updated plan. Ordinary owned code,
+test, setup and verification work is authorized within the established package,
+resource, strict-acceptance and foreign-work boundaries. Package A's reviewed fix
+is implemented after the native baseline and mutant RED controls. The owner has
+now explicitly requested an atomic commit and push; complete and review the
+coherent verified package before committing, and push only to the authorized fork.
 Only https://github.com/hoppworks/rhai.git may receive writes; never public
 upstream. Root owns /Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery
 on task/all-tickets-environment-recovery. Former owned checkouts were externally
@@ -24,6 +33,201 @@ histories consolidated into main with main the only remote branch; development
 integration does not claim release acceptance. Do not recreate remote task refs.
 No installs, admin, credentials, agent-home/config or shared-service changes.
 Windows guest control belongs solely to windows_private_staging_readback; historical owner records remain preserved.
+
+## Current status — Package E follow-up stopped (2026-10-07)
+
+Package E's one Expert24 follow-up has now been consumed. The exact staged
+archive, pinned lock, launcher, runner and Rust/Cargo 1.93.0 passed the remote
+preflight. The bounded launcher then exited with status 141 before Cargo and
+before every test assertion. A direct Workhorse reproduction confirms that
+`tar -tzf source.tar.gz | grep -Fxq build.template` returns 141 under `pipefail`:
+`grep -q` closes the pipe after finding the member, and the launcher uses
+`set -Eeuo pipefail`. The unchanged scoped runner independently passes a no-op;
+this does not prove product behavior. Evidence is under
+`api-metadata-evidence/native3-20261007/attempt-03/`, especially
+`classification.json` and `launcher-pipeline-readback.txt`.
+
+Cumulative native3: three allocations, three infrastructure stops before
+assertions, zero assertions and zero product corrections. Allocation 1 reached
+Cargo compilation but failed in `build.rs` because `build.template` was absent;
+allocations 2 and 3 stopped before Cargo. No Package E
+criterion is accepted. The one bounded post-escalation follow-up and its stop
+condition are exhausted; do not launch Cargo or another Package E build through
+this route. The staged source/lock/launcher were the only files in the owned
+Workhorse scope; their exact cleanup and absence are recorded in attempt-03.
+No compiled artifact exists to reuse. The metadata tests remain unverified, and
+all metadata, example, compatibility and release criteria stay open.
+
+Package A's scoped Linux/Rust 1.77.2 acceptance remains valid; Package B's
+criterion map remains useful but its three-launch route is also stopped. No
+other package or release is marked complete. The next campaign action must use
+an independently open requirement and an unspent execution route; no current
+Package E build is authorized by the exhausted allowance.
+
+Rules re-read for this Session: central agent-skills HEAD
+`14617043b70d1ba2d40b720832cbad294fa8c008`; project and applicable skill hashes
+are recorded in the historical planning record below. This does not claim that
+other Sessions loaded the same revision.
+
+## Historical Package E pre-follow-up record (superseded)
+
+The owner explicitly authorized implementation under the revised plan. The overall
+goal is active and incomplete; Package A remains accepted only at its stated
+Linux/Rust 1.77.2 scope. Package B remains open. Its required Ticket03
+criterion-to-evidence map is now in `docs/sys-package-plan.md` §6.7; that map
+reuses accepted proof only for named tests, source inputs, feature rows and
+platforms and preserves every partial/open criterion. B's three infrastructure
+stops, zero assertions, zero product corrections and exhausted post-escalation
+follow-up remain unchanged.
+
+Package E is the next independent package. The Workhorse native3 attempt started
+2026-10-07T09:29:27Z with Rust 1.93.0 and the named command in
+`api-metadata-evidence/native3-20261007/native3-infrastructure-failure.json`.
+It exited before assertions because the staged source archive omitted tracked
+`build.template`, required by `build.rs`: infrastructure failure, not TDD RED,
+product failure or correction. Preserve allocation1, assertions0 and
+product-corrections0. The original incomplete archive, logs, generated lock and
+classification remain under `api-metadata-evidence/native3-20261007/`.
+
+The replacement `source-full.tar.gz` contains 422 tracked inputs including
+`build.template`; the manifest and prior byte comparison establish that every
+archive entry matches current worktree bytes. Archive SHA-256 is
+`a243fc96c513c70d86e0281e0f178d91c95e6338ab3dda24d1656f7dd8863de5`; pinned lock
+SHA-256 is `4ff0a7de6f504510af64092d446d411b86d95228b23a188b396bd188da367627`.
+The old `run-red.sh` is unusable: it hard-codes the absent
+`api-metadata-20261007-workhorse-root1` scope and regenerates the lock. It remains
+preserved as historical evidence. The corrected `run-recovery-red.sh` verifies
+the exact source/lock hashes and `build.template`, extracts into the private
+runtime, pins Rust 1.93.0, uses `cargo test --locked`, and exports test output and
+status outside the runtime. The launcher now samples its exact helper process
+tree and private-runtime size once per second, records maxima, stops at the
+existing 16-descendant, 1,572,864 KiB storage preemption and 2,097,152 KiB
+sampled RSS/storage limits, and reserves 30 seconds within the 540-second helper
+bound after a 510-second work deadline. These are sampled stop thresholds, not
+continuous peak measurements. Guard/setup failures are classified separately
+from metadata RED. Its current SHA-256 is
+`bb0b7b98e0f8f2347d46cdc06f4143b8585a1401111e55876a41d442e814c4dd`;
+`bash -n` and compilation of the embedded Python pass. It does not run
+`cargo generate-lockfile`.
+
+Native3 allocation2 was launched after the complete archive, lock and launcher
+hashes were read back on Workhorse. It exited before Cargo and before every
+assertion because the launcher expected `source.tar.gz` while the staged file was
+named `source-full.tar.gz`. This is a confirmed source-stage-to-launch filename
+contract failure, not Cargo, test or product evidence. It is infrastructure stop
+2 in this source-input handoff chain; cumulative native3 allocations 2, assertions
+0 and product corrections 0. The raw log, exit status, exact staged file inventory,
+input hashes and postrun process/runtime readback are preserved under
+`api-metadata-evidence/native3-20261007/attempt-02/`; the cause classification is
+`api-metadata-source-stage-contract`. The first allocation's missing `build.template`
+and this second allocation's mismatched staged name are distinct immediate defects
+within the same unchecked source-stage contract. The observed `._*` sidecars are
+recorded; their producer is unverified because the original staging command was
+not preserved. Do not infer their provenance.
+
+The Workhorse runner had no active process at readback; its private runtime was
+already gone. After preserving and hashing all original outputs and verifying the
+owned scope contents, only the eight exact staged files were removed and the
+empty Session scope was removed with `rmdir`; absence was verified. No reusable
+compiled artifact exists. Tauron was informed that Rhai is terminal and the slot
+is available to its own admission-gated work.
+
+Escalation 24, `api-metadata-source-stage-contract`, is complete. Its answer is
+preserved at `escalations/24-api-metadata-source-stage-contract.answer.md` and
+confirms one minimal post-escalation follow-up: stage the complete archive at the
+exact `source.tar.gz` path consumed by the unchanged launcher, then validate the
+exact remote paths, hashes, archive membership and launcher syntax before heavy
+allocation. Keep allocation count 2, infrastructure stops 2, assertions 0 and
+product corrections 0. The Expert permits one bounded follow-up after fresh
+admission; another pre-assertion failure ends this route. No wrapper, product edit
+or history reset is part of that repair.
+
+The exact start command is
+`cargo test --locked --features testing-environ,sys,net,metadata --test net_metadata --test sys_policy metadata -- --nocapture --test-threads=1`.
+It selects `metadata_exposes_the_documented_tcp_surface` and
+`metadata_documents_tcp_handle_operations_and_overloads` in
+`tests/net_metadata.rs` and `test_function_metadata` in `tests/sys_policy.rs`.
+Those tests register the actual `NetPackage` or sys package with a public Rhai
+`Engine`, call `gen_fn_metadata_to_json(false)`, and assert exported receiver,
+arity, parameter/return types and documentation. This is the real start path for
+the currently open metadata criterion; it does not prove socket/process/file
+effects or close Package E's examples. Only the documented assertion failures
+count as TDD RED; compilation, input, transport or runner failures remain
+infrastructure outcomes.
+
+For a later launch, dependencies are: the exact complete archive and pinned lock;
+installed Workhorse Rust/Cargo 1.93.0 and the existing `run_scoped.py`; an owned
+unique scope under `/home/workhorse/.local/share/agent-builds/rhai/` with
+`TMPDIR` set to that absolute path; private `AGENT_RUNTIME_DIR` outputs/caches;
+fresh free-byte/RAM checks against the project 16-GiB reserves; and an available
+Workhorse heavy-run slot. No shared service is required. The 2026-10-07T09:56:49Z
+admission check found no active `run_scoped.py`, Cargo or rustc processes,
+80,850,876 KiB MemAvailable and 610,347,319,296 bytes free on the output filesystem,
+above the 16-GiB reserves; it was a point-in-time check, not a slot reservation.
+After allocation2 terminated, Tauron was informed that Rhai's process was gone and
+the slot was available to its own fresh admission. No foreign process was
+interrupted.
+
+The completed native3 allocation2 used exact scope
+`/home/workhorse/.local/share/agent-builds/rhai/api-metadata-40716b74107c4e65a50360c90116f4f0`,
+owned by `workhorse`, for the full hashed source archive, pinned lock, launcher
+and exported raw evidence. No build retention was used: run_scoped removed its
+private runtime; after evidence readback and process-absence verification, the
+eight exact staged files were removed and this empty scope was removed with
+`rmdir`. Launch bounds were 600
+seconds outer, 585 seconds scoped runner and 540 seconds helper; the helper stops
+work at 510 seconds to reserve 30 seconds for evidence. Repeat the immediate
+process/capacity/scope/permission/input checks after staging and before launch.
+
+Earlier light preflight established that the existing runner/toolchain are
+readable, the Rhai build-scope parent is writable by `workhorse`, the full archive
+has the expected SHA-256, and the public Cargo index is reachable. It did not
+verify that the filename staged remotely matched the launcher's expected
+`source.tar.gz`; escalation24's answer prescribes an exact staged-path preflight.
+The old scope was retired and is absent; no compiled artifact exists, and no
+Package E product source has changed. The next action is one fresh owned scope and
+an exact transfer of `source-full.tar.gz` as `source.tar.gz`, with the lock and
+launcher at their pinned names. Save the actual transfer mapping. Before allocating,
+run the Expert's inline hash/archive/syntax checks on Workhorse and recheck runner
+and Rust 1.93.0, process identities, terminal/scope state, measured output-filesystem
+and RAM reserves, heavy-slot availability and Tauron coordination. The 09:56
+snapshot is historical and not a reservation. Only after all checks pass may the
+existing bounded launcher run once, with the existing 600/585/540-second, 510-second
+work, 30-second export, two-job, 16-descendant, storage and sampled RSS limits.
+No new wrapper or product edit. Stage/preflight failure must consume no allocation;
+another post-launch pre-assertion failure stops this route. Preserve
+native3 allocations2/assertions0/product-corrections0.
+
+For this follow-up, the unique candidate scope resolves to
+`/var/home/workhorse/.local/share/agent-builds/rhai/api-metadata-20261007-followup1-91bfc69cb698`
+(the `/home/workhorse` path is a symlink alias), owned by this Session. Planned transfer mapping is local `source-full.tar.gz` to
+remote `source.tar.gz`, local `Cargo.lock` to remote `Cargo.lock`, and local
+`run-recovery-red.sh` to remote `run-recovery-red.sh`. This scope is only a staged
+input/evidence workspace, not a retained build; keep it through the immediate
+preflight and single launch, or remove its exact staged files and empty directory
+if launch is deferred. The finite staging checkpoint is 2026-10-07T10:45:00Z;
+normal completion/export and verified cleanup are earlier boundaries. No Cargo
+invocation has started. One preflight command first inherited an inaccessible root
+working directory and stopped at `find`; after correcting that, a trace showed
+`/home/workhorse` resolves to `/var/home/workhorse`. The archive/lock/launcher
+hash checks were not reached in the first command, so no hash mismatch is recorded.
+Use the canonical path consistently for `SESSION_SCOPE` and `TMPDIR`, while keeping
+the already staged files. Do not retain a compiled build; none exists to reuse.
+
+The root re-read `/Users/hoppworks/.agents/AGENTS.md`, the project's `AGENTS.md`,
+and applicable campaign, TDD, strict-e2e and OCR review/delegation skills. Current
+central agent-skills HEAD remains
+`14617043b70d1ba2d40b720832cbad294fa8c008`; the global common rule hash is
+`81b103fac482171e3ea72e23d6c0dffac553359f3f75f610506e00c182d1f277`, project
+`AGENTS.md` hash is
+`06b73a9db5691ff5a0c5b34f98ce61e2c5df08e77161f3f93c3f7ce119d7c5de`, and the
+campaign skill hash is
+`342885a50ec612bed6f43876457ec234f4a5784c5a94abdce592383987ce0d61`. The central
+checkout has no tracked changes and contains unrelated untracked `.scratch` paths;
+no rules were installed or changed. Other Sessions' loaded revisions remain
+unverified. The existing dirty coordinator and wayfinder state, plan, metadata
+tests and process evidence remain preserved. Escalation 24 completed with the
+answer above; no Expert review is currently pending for this package.
 
 ## Done steps and accepted evidence
 - Linux post-spawn pipe-setup failure accepted at523/currentba3, privateRust1.77.2:
@@ -96,7 +300,10 @@ Windows guest control belongs solely to windows_private_staging_readback; histor
   warrants a duplicate control or build solely for current integration. Combined
   sys/net, changed platform/MSRV and final current-native release coverage open.
 
-## Environment recovery and current repair — 2026-10-04
+## Historical environment recovery and repair — 2026-10-04
+
+This section preserves history; its next steps are superseded by the 2026-10-07
+current section below.
 
 Previous physical root/writer checkouts and writer handles disappeared in the
 refreshed environment; Git commits and accepted proof persisted. No process
@@ -183,32 +390,298 @@ Previous goal turn PROGRESS corrected partial-preservation scope; current live
 registry confirms same writer running. Waiting on live correction is not a
 missing-authorization blocker. Existing accepted proof below remains applicable.
 
-## Current step and next action
+### Historical step — Package B no-primary `Child.wait` proof
+
+The owner explicitly began implementation on 2026-10-07 under the revised plan.
+The overall goal is active/incomplete. Package A (committed Child cause) is
+complete at its narrow Linux/Rust 1.77.2 acceptance scope; Packages B–F, ticket
+completion and final release acceptance remain open. No foreign worktree or
+process has been modified or stopped. The owner-authorized Tauron build-window
+coordination was sent earlier; the fourth run proceeded only after fresh machine
+admission showed no heavy build, without treating the message as a reservation.
+The authoritative acceptance plan is [docs/sys-package-plan.md section 6](../../docs/sys-package-plan.md#6-remaining-acceptance-plan--revised-2026-10-07).
+
+Applicable central rules were reread in the planning continuation from agent-skills
+HEAD `14617043b70d1ba2d40b720832cbad294fa8c008`; the user supplied current
+AGENTS.md rules in the implementation request. Relevant project instructions and
+campaign, repair-package, e2e-proof, wayfinder, OCR-delegate and TDD rules are
+recorded in section 6. The central repository had no tracked changes; its twelve
+untracked `.scratch` paths were planning material, not installed rules. No sync,
+installation or Agent configuration change occurred. Other Sessions' loaded rule
+revision remains unverified. The final combined review returned READY for Package
+A's source, native proof, applicability and cleanup, with no material code findings.
+It confirmed the tested source hash, all six intended outcomes, source restoration,
+resource bounds and independent closure. No Package A rerun is indicated without a
+relevant source, assertion, dependency, toolchain, environment or uncovered-criterion
+change.
+
+Package B now has one focused regression in `tests/sys_process.rs` for the existing
+no-primary decoded-output limit path through public `spawn` and `Child.wait`. It
+checks the real child's exit/reap record, exact raw output bytes, complete streams,
+exit status, timeout state and empty cleanup diagnostics. The process capture cap is
+derived from expected raw output and the actual capture is checked against both
+capture and Engine limits. The combined independent review first found the fixed
+cap could mask this path; the correction was re-reviewed READY. `git diff --check`
+passes. Package B's first scoped Workhorse launch started at 2026-10-07T08:42:05Z
+after fresh admission (no heavy runs, 80,943,536 KiB MemAvailable,
+610,377,289,728 bytes free, load 1.00/1.00/1.16). A second launch started at
+2026-10-07T08:43:38Z after fresh admission (no heavy runs, 80,928,988 KiB
+MemAvailable, 610,368,192,512 bytes free, load 1.07/1.02/1.15). Both local outer
+logs end after Rustup reports 1.77.2 installed; neither leaves version output,
+the RED marker, or Package B test evidence in the persistent remote `evidence/`
+directory. The second staged recipe used absolute `rustc`/`cargo` paths under
+private `RUSTUP_HOME`. The live session reported `rustup is not installed at
+<private CARGO_HOME>`, but that exact stderr was not preserved. Older Package A
+`package-result.json` files contain a different raw-child-receipt error and are
+not evidence for these Package B launches. Correct the earlier proxy diagnosis:
+the durable Package B logs do not establish the precise failing command or root
+cause. Classify both as infrastructure stops before any Package B assertion,
+not product REDs or failed product corrections. The scoped runner removed each
+private runtime; no compiled artifact remains. Cumulative Package B counts:
+two launches, two infrastructure recoveries, zero reached assertions and zero
+product corrections. No product source changed in B. The stopped stdin Expert18
+classifier path remains closed and native110 remains unallocated.
+
+Cause history: `workhorse-rust-toolchain-dispatch` has two unsuccessful setup
+recoveries and the read-only Expert escalation is complete. Its answer is at
+`escalations/23-workhorse-rust-toolchain-dispatch.answer.md`; it recommends
+`--no-self-update` and durable phase/status/output capture as the smallest
+bounded test of the likely self-update cause. The historical exit remains
+unverified. This post-install Workhorse stop is distinct from escalation07's
+macOS component-download timeout; preserve both histories. The writer's existing
+Package B `run.sh` and `SHA256SUMS` were amended only for setup diagnostics and
+the Rustup flag; source/archive/patch/lock/test/runner pins remain unchanged. An
+independent review found the wrong-cause mutation would not compile because it
+removed a live binding. The recipe now substitutes `Timeout(message)`, retaining
+the binding, and Bash syntax plus all input hashes pass. Follow-up combined review is READY, including the final private-HOME amendment. The exact Package B staged inputs, prior admission records and launch logs remain under the writer evidence directory. Fresh admission at 2026-10-07T08:59:57Z found zero active heavy invocations on Workhorse, 80,837,672 KiB MemAvailable, 610,362,937,344 bytes free, load 1.19/1.81/1.74, the exact root-owned scope identity (device 58, inode 115187217), empty evidence, and all seven final-recipe hashes matching. The admission is recorded at writer `package-b-child-wait-01/admission-final-recipe.json`; it is a point-in-time check, not a reservation. The single post-escalation invocation started at 2026-10-07T09:00:55Z and exited 1 at run.sh line 4: SESSION_SCOPE: SESSION_SCOPE is required. The remote shell supplied TMPDIR but omitted SESSION_SCOPE; Rustup, Cargo and all test assertions were never started. This is a confirmed launcher-input failure, distinct from the two prior unverified post-install/toolchain stops. Classify it as infrastructure, not test RED, product failure or correction. Raw outer logs and classification are preserved in writer package-b-child-wait-01/attempt-03/; all four copied hashes matched remote readback. The runner removed its private runtime; no runner/Cargo/Rustc remained. After exact owner/device/inode and no process-reference checks, the disposable remote scope was removed and its absence verified at 09:02:10Z. Cumulative Package B: three launches, three infrastructure stops, zero reached assertions, zero product corrections, no acceptance. The one bounded post-escalation follow-up is consumed; do not retry this route or start a second Expert chain. Preserve Package A's accepted proof. The Ticket03 map and current Package E action are recorded in the current implementation section above; Package B remains open.
+
+Writer worktree `/Users/hoppworks/projects/rhai/.worktrees/process-first-cause`,
+branch `task/process-first-cause`, remains at HEAD
+`77149f19e017007281396dcbf2eb8e69b7b90a37` with owned dirty changes and untracked
+proof. Preserve all of them. The production fix is applied to
+`src/packages/sys/process/unix.rs`; its SHA-256 is
+`fced800d5b05a1582a4d1c27cadabda32dc1517522e5ed733865d7faab48e5d4`, exactly the
+proposed-fix and restored-fix hash that passed both native GREEN controls.
+`git diff --check` passes. The test adapter checks both captured streams reach EOF
+after child exit. Producer, collector and closure bind the exact libtest-selected
+test line, reject duplicate/wrong-test receipts, and recognize the receipt followed
+by a separate `ok` or `FAILED` line. Local coupled probes pass. The combined
+independent review is READY; no new build is needed merely because the tested patch
+was applied to the writer tree at the matching hash.
+
+Attempt 1 consumed native allocation 1 at 2026-10-07T06:47:41Z and failed during
+fixture compilation before assertion (E0308: u32 PGID parse vs i32 value). Treat it
+as fixture setup, not RED or failed product correction. Original diagnostics and
+cleanup are under writer `attempts/attempt-01/`; exact stage retirement checked 72
+PID/start identities, both owned groups empty and scope absent. No compiled artifact
+is reusable.
+
+Attempt 2 consumed native allocation 2 after admission at 2026-10-07T07:09:25Z.
+Rust 1.77.2 compiled; `baseline-red-direct` exited 101 at the intended public
+assertion. Actual cause was decoded-output `OutputLimit`; expected cause was the
+committed stdout `OutputLimit`. The child receipt confirms stdout committed,
+stderr overflow was observed and the child was reaped. This is valid baseline RED
+and partial lifecycle proof, not package acceptance. The producer stopped before
+the remaining five controls because it did not accept libtest's prefixed receipt.
+Raw proof and outer evidence were copied locally; 34 files match fresh Workhorse
+readback. Scope/runtime cleanup succeeded; no compiled artifact remains. A prior
+slot wait from 07:04:39Z to 07:07:39Z consumed 180 seconds without allocation and
+remains counted. No completed product correction has failed.
+
+Attempt 3 consumed native allocation 3 after fresh admission at 2026-10-07T07:36:39Z.
+Rust 1.77.2 compiled. Baseline RED and overwrite-mutant RED passed their intended
+cause assertions in both DirectChild and Managed. DirectChild restored GREEN passed
+the cause, cached-result, output-byte and child-lifecycle assertions, then failed
+at the stale EOF-completion assertion. The following cleanup-diagnostics assertion
+was not reached. Managed restored GREEN was not reached. This is a test assertion
+correction, not a failed production correction. The assertion was corrected and
+independently reviewed READY.
+
+All 49 attempt-3 evidence files were copied and SHA-256 matched Workhorse. Fresh
+read-only closure confirmed 120 recorded PID/start identities absent or reused,
+both owned process groups empty, and the private runtime and scope absent. No
+compiled artifact remains. Preserve attempt-3 outputs as valid corroborating RED
+proof; they do not constitute a complete package proof at the corrected frozen
+source.
+
+Attempt 4 used `/root/rhai-linux-process-first-cause-01a0f114-20261007-parserfix-02`
+(physical `/var/roothome/rhai-linux-process-first-cause-01a0f114-20261007-parserfix-02`).
+Its first 19-file readback was byte-correct but its generated preflight still
+asserted retired `parserfix-01`; no invocation used that input. The regression
+probe exposed the mismatch, the generator was corrected to bind the physical
+`parserfix-02` path, and the corrected 19-file stage was independently read back at
+08:06:21Z. Its preflight hash was
+`6fd72aade1d161133e704e3b5bf5ca9c0351c84e7794bde8d3d7387b7b879a63`; the reviewed
+slot wrapper was unchanged. The combined delta review returned READY. Original and
+corrected stage-readback receipts remain under the writer's `attempts/` directory.
+The stale `parserfix-01` stage was retired after checking 120 PID/start identities,
+empty groups and absent scope.
+
+One slot-wrapper call with empty stdin failed before admission; it created no
+allocation receipt, scope or output. Its JSON input was then constructed from the
+reviewed local literal. A separate read-only stage lookup through the unprivileged
+`workhorse` account initially reported no access; the authorized root SSH read
+confirmed the stage intact, with no mutation. At 08:21:43Z fresh admission reported
+ready, all 16 input pins valid, zero heavy runs, 80,968,296 KiB MemAvailable and
+610,377,433,088 free bytes on `/var`. The stage and central scope were absent before
+the invocation. Native allocation 4 then ran with unchanged 600-second outer,
+585-second runner, 540-second helper, two Cargo jobs, 16-descendant limit,
+1,572,864 KiB preemptive storage stop and 2,097,152 KiB hard RSS/storage bounds.
+
+All six controls passed their intended statuses: baseline RED and stderr-overwrite
+mutant RED exited 101 at the first-cause assertion in DirectChild and Managed;
+restored GREEN exited 0 in both modes. Both green phases used source hash
+`fced800d5b05a1582a4d1c27cadabda32dc1517522e5ed733865d7faab48e5d4`; the final
+restored baseline matched `cb59963a5166e4c92b4c6ee6f1c996ddabf61f14f0e7cc5486767336d9aaac21`.
+Assertions and child receipts bind the real argv, stdout commitment, acknowledged
+stdout/stderr writes, stderr overflow, captured bytes/EOF, PID/start/PGID, reap,
+Managed group closure and empty cleanup diagnostics. Export began at 39.265 seconds,
+within the bounded helper budget. Fifty-four periodic samples recorded maxima of
+950,608 KiB RSS, 697,712 KiB storage and four descendants; these are periodic
+samples, not continuous peak measurements. The runner returned zero and removed
+its private runtime. A transient `/proc/<runner>/stat` read raced process exit and
+printed a missing-file diagnostic, but run status, PID readback and cleanup statuses
+were zero. The collector and separate fresh closure then verified 127 identities,
+five owned groups and six paths absent/empty; originals were hash-read back and the
+exact stage, scope and runtime retired.
+
+Preserved proof is under writer
+`.scratch/all-tickets/process-first-cause-evidence/originals/`, including the
+six-control ledger, source hashes, raw outputs, resource samples, independent
+closure, custody and retirement receipts. No compiled build is reusable. The exact
+production patch is applied in the writer worktree and current source hash matches
+the tested restored-fix phase. The final combined reviewer returned READY with no
+material code findings. Package A closes only its scoped Linux/Rust 1.77.2
+requirement; Packages B–F and final ticket/release acceptance remain open.
+
+The prior accepted overlap/setup/performance proofs, six resolved decision
+contracts and P1–P14/E1–E5/F1–F23/X1–X38/R1–R7 coverage crosswalk remain intact.
+Package A closes from its native proof plus review, not preparation alone. Git
+writes remain limited to the fork; configured `hoppworks` attribution, main-only
+remote branch policy and prior explicit push/merge authority remain in force, but
+no Git write is part of this package step.
+
+## Historical current-step record through the 2026-10-04 pause — superseded
+
+The following records earlier decisions, preparation, measured observations and
+cause history. Its active/live/NEXT wording is not current authorization or state.
+
+
+USER PAUSE: The owner explicitly requested "bitte pausieren" on 2026-10-04.
+All goal work is paused; no further implementation, review, native launch or Git
+integration until user resume. Existing proof, dirty owned preparation and cause
+history remain preserved. Pause sent to process_first_cause_implementation;
+external review session64087/PID49344 receives explicit stop through its existing
+process-first-cause-review-input.json control marker. No heavy build is running
+in this package; do not interrupt unrelated or bounded processes. Resume by
+checking owner replies and live review handle, then collecting the immutable
+corrected package before admission generation or native execution.
 
 Goal all local tickets implemented and natively accepted remains active/incomplete.
-Root revision6830c49; strict verification, automatic verified fork-main integration.
-Root HEAD / freshly read-back sole remote main d79b2dfb6d7524aec16e697bde5b0c3965808561;
-exact author/committer hoppworks <daniel@hoppworks.de>. No upstream writes/task refs.
-Linux performance criterion accepted/integrated: source8c, a7 measurement overlay,
-5b collector repair, sole93 originals/8dirs, actual10start/6capture/2live/2closed rows,
-fresh custody and separate84IDs/8groups/6paths closure. No retained resources.
-See linux-process-performance-proof.md / review.md and committed evidence.
+Current rules6830c49; strict verification, automatic verified sole fork-main integration.
+Current root HEAD / verified sole remote main8e5fe089fbcc86979ed3d5b73c393bf8fec72150,
+exact author/committer hoppworks <daniel@hoppworks.de>. No upstream writes/task refs;
+foreign local main/a624 preserved. Native overlap package ACCEPTED and integrated:
+Linux DirectChild/Managed same-step readable overflow+expired deadline only,
+source9dc/testSHA6b088..., sole62files/5dirs archivee5f0bf6c, controls101/101 then
+pristine0/0, actual99identities/fourgroups/sixpath closure, all owned remote resources
+gone. Source/recipe/collector history below remains binding. See
+linux-process-overlap-proof.md, process-overlap-review.md and committed originals.
+Prior d79 performance and8c pipe-setup proof remain applicable, not rerun.
+Raw TSV empty cmdline field and raw test stdout newline formatting triggered cached
+whitespace check; exact originals were preserved, code/docs check excluding ONLY
+stage-original raw evidence passed. Atomic112file integration8e5 preserved tested
+source and reviewed evidence, published fast-forward to forkmain and read back.
+No unrelated API21 diagnostics/dirty writer source staged or discarded.
 
-Current package: ticket03 same-step readable-output overflow / expired deadline
-precedence. Named Standard process_overlap_acceptance confirmed live at this resume,
-owned /Users/hoppworks/projects/rhai/.worktrees/process-overlap-acceptance,
-task/process-overlap-acceptance. Named Expert process_overlap_combined_review completed
-the initial recipe review; reuse its same combined context for corrected freeze.
-One combined package review, process-overlap-review.md; both loaded6830c49.
-SOURCE frozen9dc92b16dad173eaffbde521310d1e2480e7be9c, Unix SHA
-6b088870e6f4ed758c88e6fdc7e50475cae7cda90ba10dae58e45718a2ba3a98.
-Root sourcearchive process-overlap-evidence/source.tar SHA
-2b46a48f0978de3f7c1a7958678d3474232a0b2246ac8ff8f85e9e931345c039;
-archivehelpera75b4e8..., acceptedlock2ba4b3a... unchanged. Rootd79->9dc only
-non-scratch delta unix.rs; fullproductionbaseline8c->9dc206test-onlyadditions,
-no production behavior changes. Exact Git identities checked. Source archive
-excludes scratch; scratch-only helper overlays separately frozen without newarchive.
-Source-readiness independently PASSED; test uncompiled/unrun, strict acceptanceopen.
+NEXT current requirement: ticket03 first COMMITTED terminal cause survives later
+events/secondary cleanup. Focused Expert first_cause_acceptance_design completed
+process-first-cause-design.md at rules6830c49/source8e5, no builds/source changes.
+Potential Child snapshot decoded-size substitution is identified, not yet native
+reproduced. First vertical slice is DirectChild/Managed committed stdout cause
+surviving real gated stderr overflow plus lossy expansion. Public Engine/SysPackage
+seam remains owner-approved. Native acceptance and overall implementation pending.
+Named Standard process_first_cause_implementation now owns the new clean worktree
+/Users/hoppworks/projects/rhai/.worktrees/process-first-cause on task/process-first-cause
+from8e5. Narrow brief process-first-cause-implementation-brief.md covers two realOS
+regressions/test-only scheduling and a separate proposed minimal fix patch;
+production correction must wait for meaningful actual baseline RED. One native
+six-case planning estimate (baseline RED pair, stderr-overwrite RED pair, restored
+GREEN pair) with full custody/export is preparation only, no allocation. Design's
+cleanup and no-primary extra cases follow validated first vertical slice, not
+horizontal speculative implementation. Combined independent review still required.
+Preparation30min active checkpoint is an estimate; cumulative earlier work/cost
+unknown. This new cause has zero completed failed corrections, zero infrastructure
+recoveries and zero native allocations. All prior STOP causes and hard limits
+remain binding. Root retains its owned recovery tree and prepares coordinator
+admission/intake; primary main and all foreign/dirty trees preserved.
+No current heavy process/private retained build or remote stage. Next native launch
+needs fresh machine inventory, capacity, source/recipe hash freeze and combined
+source readiness. Limits600/585/540seconds,2jobs/16descendants/1572864KiB storage
+preempt/2097152KiB hardRSS/storage unchanged; conservative zero-foreign-heavy guard.
+Read-only workhorse preparation at16:36:38UTC reports Linux7.2.7x86_64,
+/root=>/var/roothome, zeroheavy processes,83073016KiB MemAvailable,
+727588200448bytes free/load0.777/3.966/5.011, all prospective paths absent.
+This is not admission/reservation. Initial preparation-only query failed before
+printing because remote /root/.agents/AGENTS.md is absent; diagnostic confirmed
+absence and one adjusted read-only query completed. No native/Cargo allocation
+or home installation/change. Native commands remain subject to locally loaded
+rules6830c49 and project-local checked runner; absent remote Agent instructions
+must not be falsely reported as matching. Preserved transport/capacity JSON refs.
+Prospective stage/root and scope: identifier is
+rhai-linux-process-first-cause-8e5-20261004-1635 under/root, and
+linux-process-first-cause-8e5-20261004-1635 under/root/.local/share/agent-builds/rhai;
+physical stage alias/var/roothome. Standard informed; exact pins/admission pending.
+Completed owned process-overlap-acceptance worktree atdae1f541 was retired with
+exact clean git worktree remove (no force). Precheck confirmed clean/no ignored
+files and source identical to accepted8e5; required proof is preserved outside
+that writer in coordinator tree/pushed commit. Fresh read-back confirms exact
+path and registration absent; local branch tip/history retained atdae1f541 for
+unselected diagnostic preparation. No foreign worktree/branch/resources touched.
+Receipts process-overlap-worktree-retirement-{precheck,readback}.json.
+Standard prepared77149f19e017007281396dcbf2eb8e69b7b90a37 (clean owned tree):
+247 test-only lines, two gated real Child cases, separate production patch,
+213line six-case producer and32line deterministic shape probes. SourceSHA
+b6cace3d604004d9ffcfe62a006ec8291d14bba87b0026964d490362bca8cb0f.
+This is partial preparation, not independently reviewed readiness/failed correction
+or native acceptance. Concrete launcher/staging/hash freeze, specialized consumer,
+raw fixture/source mutation receipts and separate closure were missing from the
+original brief's runnable recipe. Root resumed SAME Standard with consolidated
+remaining work, no new agent/handoff/review pipeline. Root also identified need
+for exact proposed-patch binding and partial export on failure; actual predicate
+probes required, not AST/shape alone. Root preflight/slot derivative follows final
+pins. New cause counts remain0 failed corrections/0 native; planning30min active
+checkpoint/cumulative unknown preserved. Combined review brief prepared. Native Expert spawn and original overlap reviewer
+resume both refused total thread limit; neither started a review or consumes a
+correction. Configured tools/launch.sh expert codex ephemeral session64087/PID49344
+now owns independent combined review. It reviews immutable77149 source first,
+then waits for root process-first-cause-review-input.json with completed recipe,
+ref/pins/admission derivatives before same-context final verdict. CLI log/final
+paths process-first-cause-review-cli.{log,final.md}; no native build allocated.
+Root/Standard informed; one combined review, not an extra specialist pipeline.
+Same configured Expert preliminary review at77149 is NOT READY, reviewed all six
+changed files (OCR3reviewable+3manual extension exclusions), confirmed6830c49 and
+current Expert template. Material findings: private parent-called adapter entries,
+624byte Python arg exceeds512 engine cap before spawn, lifecycle assertion ordering
+lets RED skip real ack/observation checks and prints hardcoded facts, producer
+exceptional path loses partial export, BASE export overwrites Child result with
+example claims/unsetterminal/missingmutation hashes. Proposed minimal production
+patch/no-primaryguard preservation statically sound. Root sent one consolidated
+findings batch into same Standard's ongoing recipe completion; no native allocation
+or completed failed correction yet. Report process-first-cause-review.md. Expert
+session64087 remains live waiting for root immutable package input marker;
+this same context will recheck delta/full recipe and later actual evidence.
+Preparation30min checkpoint may be revised with completed77149 plus concrete
+review diagnosis, preserving cumulative unknown and actual hard limits. No stopped
+cause/budget renewed. Root own completed overlap writer retired independently;
+all valid original acceptance preserved. Next action: collect corrected complete
+writer ref/pins, create root frozen admission derivatives, supply SAME reviewer
+immutable input, only then native admission/build if READY.
+Current continuation PROGRESS: focused Expert design completed, exact owned writer
+worktree created, first vertical source/recipe preparation dispatched. No new
+acceptance or production correction claimed; existing Linux proofs preserved.
+
+Integrated overlap package history (not a new active retry chain) follows.
 
 Preserved stable source-readiness history: initial457 exact1011 gate rejectsgreen
 1111 and expect_err aborts Timeout-first control beforecause; correction1cc329
@@ -326,8 +799,7 @@ linux-process-overlap-proof.md records partial acceptance and honest setup-argv 
 Same combined final actual review ACCEPTED for ticket03 Linux DirectChild/Managed
 same-step precedence only; no material corrections. Proof/ticket partial closure
 updated. Wider requirements remain open.
-NEXT final disposition -> ticket03 partial criterion -> exact selected atomiccommit,
-authorized sole fork-main fast-forward/push/readback. Goal remainsincomplete.
+Integration completed as8e5fe089f, verified sole forkmain. Goal remainsincomplete.
 No source/recipe/cause history reset. Current turn PROGRESS actual corpus/tamper
 checks, successful collection/live closure and exact tested source intake.
 
@@ -2106,7 +2578,7 @@ terminal1, first infrastructure failure plus one unsuccessful recovery for same
 identity census cause; no third launch. Cause09 stopped/count84 preserved.
 Real observers SIGINT/SIGTERM proof remains accepted narrowly, not feature proof.
 
-## Current second-launch outcome and next action
+### Historical: Current second-launch outcome and next action
 
 Previous goal turn PROGRESS: accepted sampler source integrated/pushed e93c780f,
 sole-main exact readback. Current turn PROGRESS: actual signal/reap proof and
@@ -2172,7 +2644,7 @@ Coordinator concretely recommends one additional source-fixture invocation with 
 
 Before dispatch: fresh workhorse/VM heavy-slot inventory, harness/nativePS5.1x64/parser0, exact17guestsourcepins/source-tree and all ancestors no reparse, existing Roslyn identity59,720bytes/SHA cf32c7b8e5691b962f1b6e92b03d87409dd9f7aebfd71c5bf778203cc56ee1, free2GiB and newly absent unique <private-session>/run/monitor-source-GUID required. Allocate unique run path only after successful gate; preserve oldscope/run/proof. Native original stdout/stderr/markers/primaryerror/closure and independent process/job/readback retained outside disposable outputs before own cleanup. A successful fixture package is source/native custody prerequisite only; not Windows Rust production Engine or realclient acceptance. Latest actual slot observation: Mac foreignPlaywright58136/60658 and Cargo60727/rustc60742; workhorse foreignCargo131936 plus queued foreignG32 work and make81053. No foreign process touched. Revalidate at launch, these observations are not a future free-slot receipt.
 
-## Resources, counts and cause history
+### Historical: Resources, counts and cause history
 Unix actual native invocation count87 consumed; current shared Child section
 records86 compiler outcome and87 acceptance evidence. Historical82 failed before runtime;
 83 measurementCargo0 but originalouter1 due optional cmdline receipt validation.
@@ -2220,7 +2692,7 @@ Agent-selected estimates are checkpoints; actual safety/user caps remain binding
 After two failed corrections or recoveries for the same underlying cause follow
 one existing/new applicable Expert escalation; no second chain or blind retry.
 
-## Remaining acceptance
+### Historical: Remaining acceptance
 Ticket03 full run/spawn/shared Child/options/fault/setup/lifecycle/sync behavior,
 Windows job custody plus real client plus production implementation and native
 public Engine proof; final Linux/macOS/Windows source matrix, core1.66 and optional
@@ -2282,7 +2754,7 @@ usage per requirement unavailable; unknown. Root worktree remains needed for
 related repairs and campaign ownership; retire only after coherent work finishes.
 
 
-## Current independent Linux scalar feature package — 2026-10-03
+### Historical: Current independent Linux scalar feature package — 2026-10-03
 Previous turn PROGRESS: native Windows invocation2 gave new contradiction evidence,
 Expert13 classified same exhausted cause, originals and cleanup exported/verified,
 fork main2a8fdc49 independently read back; author/committer lowercase hoppworks.
@@ -2330,7 +2802,7 @@ needed for related campaign work; no retirement or foreign checkout cleanup.
 All missing full process/Windows/Darwin/final matrix criteria remain open.
 
 
-## Current Linux shared Child acceptance package — 2026-10-03
+### Historical: Current Linux shared Child acceptance package — 2026-10-03
 Previous goal turn PROGRESS: two scalar process feature criteria accepted and
 fork main0fca4e88 independently verified, only main. Rules remain faba3db.
 Current root owns recipe adaptation of accepted Linux scoped flow to accepted
@@ -2407,7 +2879,7 @@ Windows/Darwin routes. Owned root needed for campaign continuation. No own
 heavy run or retained build/stage now; foreign trees unchanged.
 
 
-## Current Linux actual wait-entry package — 2026-10-03
+### Historical: Current Linux actual wait-entry package — 2026-10-03
 Previous goal turn PROGRESS: shared Child compiler correction and three native
 rows accepted; fork main independently verified at08507d6831f73f28aa0b95a4255c5df8ebe2ec13,
 sole remote main. Rule revision faba3db reread by root; completed native reviewers
@@ -2462,7 +2934,7 @@ Elapsed native38.528s toexport; Role/token/cost/cache metrics unavailable/unknow
 Verified package integration9e56d5f2ef42303493907907454562f72a24b60b: push terminal0, independent ls-remote exact samehead and solemain, author/committer lowercase hoppworks.54packagefiles committed, foreign/historyCLIlogs unstaged/preserved. Whitespace check complaints only native raw stdout trailing blanklines; preserve unedited evidence rather than normalize. No live own process/build/stage. Goal incomplete; proceed remaining process/current platform matrix. This postpush state is owned continuation bookkeeping for next package.
 
 
-## Current Linux process IO/options package — 2026-10-03
+### Historical: Current Linux process IO/options package — 2026-10-03
 Root resumed user-authorized all-ticket work; global/project and relevant
 campaign/e2e-proof/tdd/ocr-delegate/current Coordinator role template reread at
 faba3db. Prior accepted proof and stopped cause histories remain unchanged.
@@ -2544,7 +3016,7 @@ nextremainingeightprocesscase sensitivity plus recordedplatform/releasegaps.
 This ownedpostpushbookkeeping entersnextcoherentpackage; rootworktreeremains
 needed forcampaign, no archivewhileactive.
 
-## Current remaining process-options sensitivity package
+### Historical: Current remaining process-options sensitivity package
 Source469998db6e23e3ce68f000fa01bf2dc44f709ced unchanged production/test inputs
 relative to accepted89. Remaining eight exact cases have positive evidence89;
 new controls target each claimed branch (raw/text, exit0/7, stdout/stderr and
@@ -3261,7 +3733,7 @@ Affected ee50c63e source review SOURCE READY: all four9d findings closed, no
 new material affected source issue. Same responsible Standard resumed consuming
 recipes; no source acceptance, native allocation or production integration.
 
-## Atomic free-window observation route — 2026-10-04
+### Historical: Atomic free-window observation route — 2026-10-04
 
 Attempts2/3 observed changed busy Tauron groups and did not allocate/launch.
 A finite candidate for group3732700 was generated but not reviewed/used; the
@@ -3283,7 +3755,7 @@ console retained. One infrastructure outcome; native3 remains unallocated.
 Correction: one shell-quoted remote command via shlex.quote(wrapper), unchanged
 wrapper/default guard/limits. Transport2 original console separately retained.
 
-## Native2 stage ownership — 2026-10-04T09:04:09.813062+00:00
+### Historical: Native2 stage ownership — 2026-10-04T09:04:09.813062+00:00
 
 Owner root recovery Session. Exact logical stage /root/rhai-linux-drop-false-523-20261004,
 physical /var/roothome/rhai-linux-drop-false-523-20261004; previous native1 stage
@@ -3480,7 +3952,7 @@ Corrected deterministic inventory to three numeric fields plus rawargs tokens
 Native3 notallocated by thatfailedobservation; sameconcurrencycausehistory
 retained, nextgate failuretriggersfreshExpert instead of further rootrepair.
 
-## Current independent Linux process performance package — 2026-10-04
+### Historical: Current independent Linux process performance package — 2026-10-04
 
 Pipe partial03/06 acceptance integrated and pushed at8c0ee4634355aee4e841b455461a7dd5aac2aa18, author/committer hoppworks; remote readback ONLY main atsamecommit. No retained pipe resources. API cause21 remains stopped after its sole Expert follow-up failed; originals/unaccepted sources preserved.
 Next owner Standard drop_false_consolidated_correction prepares Linux-only Direct/Managed latency, throughput and retained-resource measurements against frozen8c. Contract linux-process-performance-brief.md: initial one-launch planning estimate,5start+3oneMiBcapture samples/mode and one live plus one postclosure resource snapshot/mode, no native allocation yet. Preparation30minute active-work checkpoint; native600/585/540second bounds incl30second export,2jobs,16descendants,1572864KiB preemptdisk/2097152KiB hardRSS/disk, fresh capacity/slot. No foreign work or stopped path renewed. Source-only preparation then one combined independent review before native allocation. Consumed launches0; correction/recovery counts0 for this independent cause. Cost/token unavailable.

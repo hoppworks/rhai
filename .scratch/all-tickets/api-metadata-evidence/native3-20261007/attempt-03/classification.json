@@ -1,0 +1,27 @@
+{
+  "recorded_at_utc": "2026-10-07T10:44:15Z",
+  "attempt": 3,
+  "route": "Package E API metadata on Workhorse",
+  "outcome": "infrastructure_setup_failure_before_cargo_or_assertions",
+  "cause": "archive_member_validation_pipe_exits_141_under_pipefail",
+  "evidence": [
+    "outer.status",
+    "outer.log",
+    "staged-preflight-pass.log",
+    "launcher-pipeline-readback.txt",
+    "postrun-readback.txt",
+    "cleanup-readback.txt"
+  ],
+  "assertions_reached": 0,
+  "product_corrections": 0,
+  "package_acceptance": false,
+  "cumulative_native3": {
+    "allocations": 3,
+    "infrastructure_stops_before_assertions": 3,
+    "assertions_reached": 0,
+    "product_corrections": 0
+  },
+  "expert_escalation_24_follow_up": "consumed",
+  "route_status": "stopped_at_existing_post_launch_setup_failure_boundary",
+  "next_action": "Do not launch Cargo or another Package E build through this route. Preserve all original metadata, example, compatibility, and release acceptance criteria as open."
+}

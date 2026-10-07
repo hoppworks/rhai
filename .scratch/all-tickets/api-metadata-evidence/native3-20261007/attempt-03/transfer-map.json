@@ -1,0 +1,77 @@
+{
+  "recorded_at_utc": "2026-10-07T10:19:55.895977+00:00",
+  "owner": "workhorse (files transferred as root over existing SSH, then exact three files chowned to workhorse)",
+  "scope": "/home/workhorse/.local/share/agent-builds/rhai/api-metadata-20261007-followup1-91bfc69cb698",
+  "mapping": [
+    {
+      "local_source": "/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/all-tickets/api-metadata-evidence/native3-20261007/source-full.tar.gz",
+      "local_basename": "source-full.tar.gz",
+      "remote_path": "/home/workhorse/.local/share/agent-builds/rhai/api-metadata-20261007-followup1-91bfc69cb698/source.tar.gz",
+      "bytes": 872530,
+      "sha256": "a243fc96c513c70d86e0281e0f178d91c95e6338ab3dda24d1656f7dd8863de5",
+      "command": "scp -p -- .scratch/all-tickets/api-metadata-evidence/native3-20261007/source-full.tar.gz workhorse:/home/workhorse/.local/share/agent-builds/rhai/api-metadata-20261007-followup1-91bfc69cb698/source.tar.gz"
+    },
+    {
+      "local_source": "/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/all-tickets/api-metadata-evidence/native3-20261007/Cargo.lock",
+      "local_basename": "Cargo.lock",
+      "remote_path": "/home/workhorse/.local/share/agent-builds/rhai/api-metadata-20261007-followup1-91bfc69cb698/Cargo.lock",
+      "bytes": 30529,
+      "sha256": "4ff0a7de6f504510af64092d446d411b86d95228b23a188b396bd188da367627",
+      "command": "scp -p -- .scratch/all-tickets/api-metadata-evidence/native3-20261007/Cargo.lock workhorse:/home/workhorse/.local/share/agent-builds/rhai/api-metadata-20261007-followup1-91bfc69cb698/Cargo.lock"
+    },
+    {
+      "local_source": "/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/all-tickets/api-metadata-evidence/native3-20261007/run-recovery-red.sh",
+      "local_basename": "run-recovery-red.sh",
+      "remote_path": "/home/workhorse/.local/share/agent-builds/rhai/api-metadata-20261007-followup1-91bfc69cb698/run-recovery-red.sh",
+      "bytes": 7546,
+      "sha256": "bb0b7b98e0f8f2347d46cdc06f4143b8585a1401111e55876a41d442e814c4dd",
+      "command": "scp -p -- .scratch/all-tickets/api-metadata-evidence/native3-20261007/run-recovery-red.sh workhorse:/home/workhorse/.local/share/agent-builds/rhai/api-metadata-20261007-followup1-91bfc69cb698/run-recovery-red.sh"
+    }
+  ],
+  "initial_owner_mismatch": "SSH alias authenticated as root; exact new empty scope was corrected to workhorse:workhorse before transfer; no build was launched.",
+  "canonical_scope": "/var/home/workhorse/.local/share/agent-builds/rhai/api-metadata-20261007-followup1-91bfc69cb698",
+  "scope_alias_used_for_staging": "/home/workhorse/.local/share/agent-builds/rhai/api-metadata-20261007-followup1-91bfc69cb698",
+  "scope_resolution": "readlink -f on Workhorse resolves /home/workhorse to /var/home/workhorse; subsequent SESSION_SCOPE and TMPDIR will use canonical path.",
+  "preflight_history": [
+    {
+      "event": "initial ownership precondition",
+      "result": "remote SSH alias authenticated as root; exact newly-created empty scope was corrected to workhorse:workhorse before any staged files were copied."
+    },
+    {
+      "event": "first preflight diagnostic",
+      "result": "runuser inherited root cwd /var/roothome, which workhorse could not access; find reported Failed to restore initial working directory and stopped. No hashes or launcher checks were reached."
+    },
+    {
+      "event": "resolved-path preflight trace",
+      "result": "with cwd corrected, readlink -f returned /var/home/workhorse/... while test expected /home/workhorse/...; no staged input or runner was modified and no Cargo command ran."
+    }
+  ],
+  "hash_check_note": "The first composed preflight script contained an incorrect runner hash path in its hash block, but execution stopped earlier at find; this mismatch was not observed and is not counted as a failed hash check.",
+  "updated_at_utc": "2026-10-07T10:49:41Z",
+  "attempted_launch": {
+    "started_at_utc": "2026-10-07T10:31:54Z",
+    "session_scope": "/var/home/workhorse/.local/share/agent-builds/rhai/api-metadata-20261007-followup1-91bfc69cb698",
+    "tmpdir": "/var/home/workhorse/.local/share/agent-builds/rhai/api-metadata-20261007-followup1-91bfc69cb698",
+    "inner_command": "python3 /home/workhorse/projects/agent-skills/tools/run_scoped.py --timeout 585 -- bash /var/home/workhorse/.local/share/agent-builds/rhai/api-metadata-20261007-followup1-91bfc69cb698/run-recovery-red.sh",
+    "outer_timeout_seconds": 600,
+    "outer_status": 141,
+    "outer_log_bytes": 0,
+    "cargo_started": false,
+    "assertions_reached": 0,
+    "diagnosis": "tar -tzf source.tar.gz | grep -Fxq build.template returned 141 under pipefail because grep -q closed the pipe after finding the member."
+  },
+  "runner_noop_control": {
+    "result": "RUN_SCOPED_NOOP_OK",
+    "status": 0,
+    "scope": "/var/home/workhorse/.local/share/agent-builds/rhai/api-metadata-20261007-followup1-91bfc69cb698"
+  },
+  "cleanup": {
+    "recorded_at_utc": "2026-10-07T10:49:41Z",
+    "owner_verified": "workhorse:workhorse",
+    "mode_verified": "700",
+    "removed_exact_files": ["Cargo.lock", "run-recovery-red.sh", "source.tar.gz"],
+    "empty_scope_retired_with": "rmdir",
+    "scope_absent_readback": true,
+    "retained_compiled_artifact": false
+  }
+}

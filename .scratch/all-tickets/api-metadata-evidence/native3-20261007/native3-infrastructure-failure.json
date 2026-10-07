@@ -1,0 +1,30 @@
+{
+  "classification": "infrastructure_setup_failure_before_assertions",
+  "cause": "source archive omitted tracked build.template required by build.rs",
+  "native_allocation": 1,
+  "assertions_reached": 0,
+  "product_corrections": 0,
+  "rust_toolchain": "1.93.0 (254b59607 2026-01-19)",
+  "features": "testing-environ,sys,net,metadata",
+  "runner": "/home/workhorse/projects/agent-skills/tools/run_scoped.py --timeout 540",
+  "outer_timeout_seconds": 600,
+  "started_utc": "2026-10-07T09:29:27Z",
+  "test_command": "cargo test --locked --features testing-environ,sys,net,metadata --test net_metadata --test sys_policy metadata -- --nocapture --test-threads=1",
+  "cargo_test_status": 101,
+  "runner_status": 5,
+  "attempt_source_archive_sha256": "c34c9b889a1e9b4052f9c52b8256d6d7236b92baffdfc26784d1442fdc6381af",
+  "recovered_complete_source_archive_sha256": "a243fc96c513c70d86e0281e0f178d91c95e6338ab3dda24d1656f7dd8863de5",
+  "lock_sha256": "4ff0a7de6f504510af64092d446d411b86d95228b23a188b396bd188da367627",
+  "artifacts": {
+    "source-incomplete.tar.gz": "c34c9b889a1e9b4052f9c52b8256d6d7236b92baffdfc26784d1442fdc6381af",
+    "source-full.tar.gz": "a243fc96c513c70d86e0281e0f178d91c95e6338ab3dda24d1656f7dd8863de5",
+    "run-red.sh": "4e910959008e621f4dc7366f5aa50c659e5309a91e89e241d23d9f68affd1a3e",
+    "native-red.log": "3097e4cfe9d7bf1b6cf8b7f1db14ea4a86e58afa73612a19179f6dc4a1e30665",
+    "native-red.status": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c",
+    "Cargo.lock": "4ff0a7de6f504510af64092d446d411b86d95228b23a188b396bd188da367627",
+    "lock.sha256": "bfea8f8d2a78ac81e7edca6991776868a127fb8b5c961a35b2c2ff6d18370bf4",
+    "resolve.log": "7b81ab00558b935315d22c8d52d1469ee47526252a5b2d51f7da2247401f0a32"
+  },
+  "recovery": "Regenerated a complete source archive from all 422 tracked build/test inputs and byte-verified each entry; no retry launched yet.",
+  "next_plan_action": "Complete the plan-required lightweight ticket 03 criterion map before selecting the next independent package."
+}

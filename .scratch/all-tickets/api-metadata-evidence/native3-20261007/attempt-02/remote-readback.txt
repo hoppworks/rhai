@@ -1,0 +1,14 @@
+time=2026-10-07T10:01:44Z
+processes
+scope-owner-mode
+workhorse 700 /home/workhorse/.local/share/agent-builds/rhai/api-metadata-40716b74107c4e65a50360c90116f4f0
+scope-entries
+._Cargo.lock 163 workhorse 644
+Cargo.lock 30529 workhorse 644
+outer.log 145 workhorse 644
+outer.status 2 workhorse 644
+._run-recovery-red.sh 163 workhorse 644
+run-recovery-red.sh 7546 workhorse 644
+._source-full.tar.gz 163 workhorse 644
+source-full.tar.gz 872530 workhorse 644
+private-runtime-dirs

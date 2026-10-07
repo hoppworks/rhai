@@ -1,0 +1,42 @@
+{
+  "package": "E API metadata",
+  "attempt": 2,
+  "cause_slug": "api-metadata-source-stage-contract",
+  "classification": "infrastructure_setup_failure_before_cargo_or_assertions",
+  "attempt_window_utc": "after 2026-10-07T09:58:00Z and before 2026-10-07T10:01:44Z",
+  "remote_readback_utc": "2026-10-07T10:01:44Z",
+  "observed_error": "sha256sum: /home/workhorse/.local/share/agent-builds/rhai/api-metadata-40716b74107c4e65a50360c90116f4f0/source.tar.gz: No such file or directory",
+  "expected_remote_source_name": "source.tar.gz",
+  "staged_remote_source_name": "source-full.tar.gz",
+  "source_sha256": "a243fc96c513c70d86e0281e0f178d91c95e6338ab3dda24d1656f7dd8863de5",
+  "lock_sha256": "4ff0a7de6f504510af64092d446d411b86d95228b23a188b396bd188da367627",
+  "launcher_sha256": "bb0b7b98e0f8f2347d46cdc06f4143b8585a1401111e55876a41d442e814c4dd",
+  "runner_sha256": "25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e",
+  "outer_status": 1,
+  "cargo_started": false,
+  "assertions_reached": 0,
+  "product_corrections": 0,
+  "product_source_changed": false,
+  "remote_scope": "/home/workhorse/.local/share/agent-builds/rhai/api-metadata-40716b74107c4e65a50360c90116f4f0",
+  "scope_owner_mode": "workhorse:700",
+  "processes_at_readback": [],
+  "private_runtime_directories_at_readback": [],
+  "remote_scope_entries_at_readback": [
+    "._Cargo.lock",
+    "Cargo.lock",
+    "outer.log",
+    "outer.status",
+    "._run-recovery-red.sh",
+    "run-recovery-red.sh",
+    "._source-full.tar.gz",
+    "source-full.tar.gz"
+  ],
+  "remote_raw_evidence": {
+    "outer.log": "e8baf784ae065f7760cc65b86e1c8b2a3b039f36f9089d05aa6e1ad8cd9f7222",
+    "outer.status": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+    "remote-readback.txt": "1eb6b33d1584ef4dff671e6ca5bb8b75290431d58f282da827de1d65732b0785"
+  },
+  "prior_same_stage_chain_failure": "Attempt 1, native3-infrastructure-failure.json: the staged archive omitted tracked build.template; the complete replacement archive now matches all 422 tracked inputs.",
+  "resource_policy": "No build artifact was produced. run_scoped.py removed its private runtime; after preserving this exact readback, remove only the owned files in remote_scope and rmdir that scope. Preserve all existing time, process, RSS, storage and capacity bounds for any later run.",
+  "next_action": "Obtain one independent Expert diagnosis of the complete source-stage-to-launch path, then make one bounded repair without adding a wrapper layer or starting another build before that diagnosis."
+}

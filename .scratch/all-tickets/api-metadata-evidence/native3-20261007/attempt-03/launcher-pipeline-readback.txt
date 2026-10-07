@@ -1,0 +1,24 @@
+Captured at: 2026-10-07T10:44:15Z
+Machine: workhorse
+Staged source: /var/home/workhorse/.local/share/agent-builds/rhai/api-metadata-20261007-followup1-91bfc69cb698/source.tar.gz
+Launcher: .scratch/all-tickets/api-metadata-evidence/native3-20261007/run-recovery-red.sh, line 23
+
+Direct reproduction, outside Cargo and outside the launcher:
+  set -o pipefail
+  tar -tzf <staged source.tar.gz> | grep -Fxq build.template
+Observed pipeline_status=141.
+
+The member exists. grep -q exits after the match; tar's closed pipe yields status
+141, and pipefail makes the pipeline fail. With the launcher's set -Eeuo pipefail,
+execution exits at this check before extraction, Cargo, or any test assertion.
+The bounded launcher invocation's outer status is 141 and outer.log is empty.
+
+Runner control, no build:
+  SESSION_SCOPE=<the staged scope> TMPDIR=<the staged scope> \
+    python3 /home/workhorse/projects/agent-skills/tools/run_scoped.py --timeout 30 \
+    -- python3 -c 'print("RUN_SCOPED_NOOP_OK")'
+Observed output RUN_SCOPED_NOOP_OK and exit status 0.
+
+This confirms a launcher pipeline/setup failure, not a Cargo failure, test RED,
+product failure, or product correction. The no-op only checks runner startup and
+cleanup; it is not acceptance evidence.

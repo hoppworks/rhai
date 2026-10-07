@@ -1,6 +1,20 @@
 # Rhai `sys` package: contract, requirements matrix, and plan
 
-Status: decisions D1 to D12 accepted on 2026-09-29; phase 1 implemented on branch
+Current status (2026-10-07): implementation resumed by the owner's explicit
+instruction. Package A, committed Child cause, is complete at its bounded Linux /
+Rust 1.77.2 acceptance scope after four native allocations. Attempt 4 passed four
+intended baseline/mutant RED controls and both restored GREEN controls in one
+archive. The production fix is present in the writer worktree at the exact tested
+source hash `fced800d5b05a1582a4d1c27cadabda32dc1517522e5ed733865d7faab48e5d4`;
+the combined independent review returned READY with no material code findings.
+Independent readback and closure verified the preserved originals, process
+identities, groups and paths before the exact Workhorse stage and private runtime
+were retired. No compiled build is reusable. The package evidence is under
+`../.scratch/all-tickets/process-first-cause-evidence/originals/`. Packages B–F,
+the remaining ticket criteria, integrated platform acceptance and release closure
+remain open; no full ticket or release completion is claimed.
+
+Historical status: decisions D1 to D12 accepted on 2026-09-29; phase 1 implemented on branch
 `claude/vibrant-sagan-3g1pxn` (this fork only, no upstream submission yet). Supersedes the
 2026-09-29 precedents survey; that survey is condensed into Appendix A.
 
@@ -288,12 +302,16 @@ tests are written from scratch against this contract. Phase numbers refer to sec
 | R1 | `sys` off | no symbols exported, no dependency compiled | Rhai feature conventions | 1 |
 | R2 | `sys` + `no_std` | `compile_error!` | D10 | 1 |
 | R3 | `sys` + `no_index` | `run` without args still works; array-taking overloads absent | Rhai cfg conventions | 2 |
-| R4 | `sys` + `no_object` | result returned as Array or tuple type instead of Map, or feature marked incompatible | decision pending | 2 |
+| R4 | `sys` + `no_object` | incompatible; explicit `compile_error!` | accepted D10 and ticket06 | 2 |
 | R5 | `type_of` on `Child` | `"Child"` | Rhai time tests | 2 |
 | R6 | `metadata` feature | doc-comments on every function render | Rhai conventions | 4 |
 | R7 | `try { ... } catch (e)` around a denied call | `e` is a `SysError`; `e.kind` is the variant name, `e.message` starts with it, `e.io_kind` names the `io::ErrorKind` for I/O errors, and the script continues after the catch | D5 | 1 |
 
 ## 5. Test infrastructure
+
+The fixture design is retained. Earlier Wine/install and CI proposals below are
+historical; the native, no-install and disabled-Actions constraints in the accepted
+release contract and current section6 govern future execution.
 
 - Files: `tests/sys_policy.rs`, `tests/sys_env.rs`, `tests/sys_fs.rs`, `tests/sys_process.rs`,
   each starting with `#![cfg(feature = "sys")]`, following the existing `tests/time.rs` style.
@@ -329,7 +347,480 @@ tests are written from scratch against this contract. Phase numbers refer to sec
   ubuntu, plus `--features sys` on the existing windows and macos jobs. The wasm32 rows
   must not include `sys`.
 
-## 6. Phases
+## 6. Remaining acceptance plan — revised 2026-10-07
+
+**Current execution plan.** The owner explicitly resumed implementation after this
+plan was revised. Package A is complete at its recorded Linux/Rust 1.77.2 scope;
+Package B remains open after its documented infrastructure stops; its required
+criterion map is now complete. Package E's one bounded Expert24 follow-up has
+ended in a confirmed launcher infrastructure failure before Cargo/assertions. Its
+route is stopped with three infrastructure allocations, zero assertions and zero
+product corrections. Packages B–F and release acceptance remain open.
+This section is the single current plan; the campaign state records evidence and
+ownership. Historical estimates do not allocate retries or certify completion.
+
+### 6.1 Applicable rules and historical investigation
+
+Current central repository: `/Users/hoppworks/projects/agent-skills`, inspected HEAD
+`14617043b70d1ba2d40b720832cbad294fa8c008`. No newer revision was explicitly pinned
+for this request. Loaded the actual `config/common/AGENTS.md`, this worktree's
+`AGENTS.md`, `skills/campaign/SKILL.md`, its `references/repair-package.md`,
+`skills/e2e-proof/SKILL.md`, `skills/wayfinder/SKILL.md`,
+`skills/ocr-delegate/SKILL.md` and `vendor/mattpocock--skills/tdd/SKILL.md`.
+The central repository has no tracked modifications. Its untracked paths are
+`.scratch/acceptance-overhead-plan-20261006/`, `build-age-automation-update.json`,
+`campaign-calibration-budgets/`, `campaign-repair-packages/`, `central-build-paths/`,
+`container-cleanup-automation-update.json`, `disk-pressure-cleanup-20261007/`,
+`harness-efficiency-20261003/`, `machine-heavy-runs-20261004/`,
+`owned-resource-cleanup/`, `periodic-sync/` and `streamline-acceptance/`, all below
+`.scratch/`. These are not installed instructions. No installation, sync or Agent
+configuration change was made. Other Sessions' loaded revisions are unverified;
+no other Session was resumed or messaged for this planning request.
+
+Compared with the previous campaign revision `6830c49ed962a3dc1937d72d0d182150bb4c935c`:
+
+| Area | Applicable consequence for the open plan |
+|---|---|
+| Authorization and repairs | The owner's current instruction resumes the authorized implementation. Preserve consumed corrections and explicit finite actions; agent estimates and obsolete PENDING labels are not new approval gates. Reconcile existing human instructions before any later missing-authorization claim. |
+| Review and delegation | One combined independent review per coherent change package, with affected-delta checks and evidence readback; specialist review only for a named risk. Keep related repairs with one responsible context. |
+| Build/proof reuse | Reuse unchanged, applicable proof. Prefer related commands in one bounded build. Exceptional finite retention must be selected and recorded before use, with exact ownership, inputs, expiry and reuse boundary; a historical path or image ID is insufficient provenance. |
+| Resource lifetime | Check free bytes on actual output/cache filesystems against additional occupancy and binding reserves. Recover storage only from proven own obsolete resources. Separate immutable builds from mutable fixtures; export before exact cleanup. |
+| Acceptance/state | Validate the complete real entry/input/transport/export/consumer path before expensive execution. Record product RED, product failure and infrastructure abort separately. No new wrapper framework or repeated status hierarchy. |
+
+The expired project concurrency exceptions do not reopen their named invocations.
+The current global ceiling is one heavy run on MacBook and up to three on workhorse
+or lllm, subject to measured pressure and stricter package conditions. The existing
+first-cause guard's zero-foreign-heavy condition is conservative and retained until
+an explicitly reviewed change; it does not prove a slot is reserved. The package's
+600/585/540-second limits, two Cargo jobs, 16 descendants, 1,572,864 KiB storage
+preemption, 2,097,152 KiB hard storage/RSS and 16 GiB admission reserves remain.
+No unresolved rule conflict requires an outcome change. Stopped repair routes
+below remain stopped; the new rules do not reset their history.
+
+Read in full:
+`/Users/hoppworks/Documents/Codex/2026-10-06/codex-threads-01a0fe32-5425-71d2-887b/outputs/session-review-2026-10-06.md`.
+It describes four Tauron Sessions, not this Rhai Session. Its SQLx, UI, transport and
+AUTHZ diagnoses are not Rhai findings. The useful hypotheses were checked here:
+complete producer/consumer preflight, fewer handoffs, unchanged-proof reuse and
+real acceptance. No Tauron test counts or failure causes are imported.
+
+### 6.2 Reconstructed state and immediate bottleneck
+
+The detailed first-cause attempt narrative in this subsection is a historical
+snapshot from before native allocation 4. Its present-tense wording describes that
+earlier point in time; Package A's completed status and accepted evidence are
+recorded in 6.3 and 6.6 below. Do not treat its old staged wrapper or source pins as
+the current next action.
+
+Coordinator HEAD is `8e5fe089fbcc86979ed3d5b73c393bf8fec72150` in
+`/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery`.
+All six local decision tickets are resolved as specifications. Feature completion
+and release acceptance remain open. Existing filesystem/environment/file-handle/TCP
+proof, core Darwin Rust 1.66 Engine proof, optional compiler/nonprocess feature
+proof and named Linux lifecycle/example proofs remain accepted only within their
+recorded source, assertion, toolchain and platform applicability. Compilation,
+older native Windows 45-test proof and Wine do not close current process/TCP release
+acceptance. No fresh remote-head claim is made by this implementation continuation.
+
+The current first-cause writer is
+`/Users/hoppworks/projects/rhai/.worktrees/process-first-cause`, HEAD
+`77149f19e017007281396dcbf2eb8e69b7b90a37`, with preserved dirty source/recipe
+corrections and untracked staging/collector files. The production fix remains
+unapplied. Native allocation 1 was admitted at 2026-10-07T06:47:41Z and reached
+`baseline-red-direct`, but rustc stopped before any product assertion with E0308
+at `src/packages/sys/process/unix.rs:4703`: the test adapter parsed PGID as `u32`
+while the observed value is `i32`. The helper's missing raw-child receipt follows
+from that compile abort; the later `/proc` diagnostic is secondary. This is a
+fixture compilation failure, not a meaningful RED or completed failed product
+correction. Its original output, allocation and cleanup receipts are preserved in
+the writer's `attempts/attempt-01/`; the exact stage was retired after checking 72
+PID/start identities and both owned groups, and the private scope is absent.
+
+The one-line test-adapter correction parses PGID as `i32`; the production patch
+remains unapplied. Attempt 2 used the reviewed stage and fresh admission at
+2026-10-07T07:09:25Z (no heavy process; 81,014,168 KiB MemAvailable and
+610,395,287,552 free bytes). Its exact `baseline-red-direct` command compiled
+under Rust 1.77.2 and exited 101 at the intended public assertion: actual cause
+was `OutputLimit("decoded process output exceeded the engine string limit of 512 bytes")`,
+expected cause was `OutputLimit("stdout for `/usr/bin/python3` exceeded max_output of 512 bytes")`.
+The stdout receipt independently confirms the child committed stdout overflow,
+then observed stderr overflow and reaped the child. This is a meaningful product
+RED and partial lifecycle proof. The producer then rejected the receipt because
+libtest prefixes the selected test name on that same line; the helper exited 1
+before the other five controls. No GREEN, mutant control, package acceptance or
+production fix is claimed. The later `/proc/<pid>/stat` notice was a secondary
+child-exit polling race; runtime and scope cleanup/readback both succeeded.
+
+All 34 files from attempt-2 `proof-evidence` and `outer-evidence` were copied to
+the writer and matched against fresh Workhorse SHA-256 readback. Exact originals
+are under the writer's `attempts/attempt-02/`; no compiled artifact remains.
+Local test-first probes now exercise exact selected-test receipt binding,
+duplicate rejection, the split libtest `receipt\nok` / `receipt\nFAILED` status,
+and missing/wrong statuses. The actual attempt-2 RED is accepted by producer,
+collector and closure parsers. The same combined reviewer initially found the
+GREEN status parser still expected contiguous `... ok`; that was fixed in the
+same batch. The affected re-review returned READY. See
+[the review history](../.scratch/all-tickets/process-first-cause-review.md) and
+the current session state for exact evidence and consumed-work history.
+
+Attempt 3 used the first parser-fixed stage and a fresh admission at
+2026-10-07T07:36:39Z. Its 16 staged pins and wrapper/guard inputs were verified;
+fresh admission found no heavy run, 81,120,748 KiB MemAvailable and
+610,376,998,912 free bytes. Four controls—baseline RED and overwrite-mutant RED
+for DirectChild and Managed—exited at the intended public cause assertion. The
+DirectChild restored GREEN then reached the committed-cause, cached-result,
+stdout/stderr byte, child-lifecycle and empty-cleanup-diagnostic assertions. It
+stopped at the final completion-flag assertion because this exiting child had
+reached EOF on both captured streams. The test's expectation of incomplete
+streams was invalid; the corrected assertion now requires both streams complete.
+The Managed restored GREEN was not reached. The combined reviewer rechecked this
+test correction and returned READY. The exact test-only adapter changed after
+attempt 3, so its stage is stale for the next run.
+
+All 49 attempt-3 evidence files were copied and SHA-256 matched locally. A fresh
+read-only closure confirmed all 120 recorded PID/start identities were absent or
+reused, both owned process groups were empty, and the runtime scope and private
+runtime were absent. No compiled artifact remains. Cumulative native allocations
+are three; attempt 1 was a pre-assertion fixture compile failure, attempt 2 a
+valid RED followed by a parser infrastructure stop, and attempt 3 four valid
+REDs plus a restored-GREEN test assertion failure after the product assertions
+passed. This last failure is a test correction, not evidence that the production
+fix failed. Preserve all unaffected RED proof and partial OS evidence; no
+full acceptance is claimed.
+
+### 6.3 Open packages and observable exits
+
+Packages are acceptance groups inside the existing tickets, not new tickets or
+Sessions. Each may record partial criterion closures. They share the evidence and
+resource rules in 6.4–6.6; no row is done merely because this plan names it.
+
+| Package | Observable exit and dependencies | Cheap preflight and existing route | Real evidence, review and reuse |
+|---|---|---|---|
+| A. Committed Child cause | DirectChild and Managed retain the first actually committed stdout cause after gated stderr overflow/lossy expansion; cached results, captured bytes/EOF and cleanup agree. | Complete in native allocation 4 using the existing bounded six-control invocation: baseline RED and overwrite-mutant RED in both modes, followed by restored GREEN in both modes. All six expected statuses and assertions passed at one archive. The baseline fix's current source hash matches the tested GREEN phase. Combined independent review returned READY. | Original proof, source-phase hashes, child acknowledgments/argv/PID/start/group, captured bytes/EOF, lifecycle and cleanup receipts, independent identity/group/path closure, and custody/readback receipts are preserved under `../.scratch/all-tickets/process-first-cause-evidence/originals/`. 127 process identities, five owned groups and six paths were independently checked; stage and runtime are absent. The exact tested source change is implemented in the writer worktree. This closes Package A only for Linux/Rust 1.77.2; it does not close ticket 03 or other platform/features. Preserve accepted overlap/setup/performance proof. |
+| B. Remaining process terminal/cancellation semantics | First committed cause survives secondary cleanup; no-primary guard still reports the correct cause; stdin early close, cached wait/try_wait/kill, capture flags, owner/sentinel survival and bounded reaping meet ticket 03. Depends on A for the same Child capture path; stdin can be diagnosed independently. | A focused public-Engine Child.wait regression for no-primary decoded-output expansion is source-pinned and its affected review is READY, but its assertion has not executed. The last bounded Workhorse invocation exited at run.sh line 4 because the launcher omitted required SESSION_SCOPE; Rustup/Cargo/tests did not start. This is infrastructure, not RED or product failure. Preserve three Package B launches / three infrastructure stops / zero assertions. The one post-escalation follow-up is consumed; do not retry this path or use native110. | package-b-child-wait-01/attempt-03/outcome.json preserves outer logs and readback hashes; the private runtime and exact remote scope were cleaned. The named no-primary behavior remains unaccepted. The criterion map in 6.7 records exact test/proof applicability and gaps; do not retry the stopped path or use native110. Other open stdin, cache, cancellation, capture, owner/sentinel and bounded-reap cases remain open where no applicable accepted proof exists. One combined lifecycle review per affected implementation; preserve accepted Linux controls. |
+| C. Darwin native completion | Missing macOS lifecycle, process behavior and sys/net real examples/feature interactions pass on native Darwin at the selected Rust version. Depends on a proven custody/readback path; no dependence on re-running Linux foundations. | Compare current sources and selected dependency/tool graph with existing compiler/sys/net proof. Existing `.scratch/all-tickets/macos-process-overhead.py` and `darwin-process-reader.py` are the nominated path; verify all actual paths/imports/SDK/tool versions and original stdout grammar before a native launch. Old source pins and Expert09/12 failed follow-ups are not ready execution. | Public Engine, actual child/group state, independent native reader, TCP peer and file readback where applicable; intact host/sentinel. One combined review of changed custody plus affected behavior. Reuse compiler/nonprocess/EPERM proof where unchanged. Earlier overhead method measures API-entry-to-report, not spawn-to-first-byte; do not repeat a fulfilled measurement merely for a new plan. |
+| D. Windows custody then native behavior | Exact owned job survives connection loss under an independent lease/monitor, bounds work, reports truthful nonzero failure and exports/cleans; then native sys/process/net and quoting/policy/feature criteria pass. Custody is a prerequisite with its own partial exit. | Existing `windows-runner-gate.md`, Windows scoped-runner brief, Expert02/13 and `windows-resume-20261003/harness-command.txt` are the canonical design/history. Before compiler use, check the full console/client/job/status/export path. Current self-inclusive teardown has a source-supported failure-status explanation, not proven kernel causation. Preserve exhausted two harness attempts; no automatic third. | Native setup-failure, real 0/17, mismatch/restored, interrupted connection/supervisor, exact job membership/closure and retained primary diagnostics. Observer stays outside the failed job. Then real Engine, actual filesystem/TCP peer/process readback. One combined package review, extra Windows specialist only for a named unresolved job risk. Preserve installation/activation/native baseline and backups; never drive the other Session's guest. |
+| E. API metadata and usable documentation | Registered receiver/arity/type/doc-comments match actual Engine metadata; sys/net/process examples run with independent effects; public config/error compatibility and file API divergences are documented. | Existing API candidate09eb is rejected because `local_addr` selects `NetStream` instead of exported `NetListener`; working assertions include the receiver correction but remain unverified. Native3 consumed three allocations and stopped before assertions: allocation 1 reached Cargo compilation but failed because `build.template` was absent; allocation 2 stopped before Cargo because the staged filename mismatched; allocation 3 stopped before Cargo because the archive-member check pipeline exited 141 under `pipefail` after `grep -q` closed tar's pipe. Zero assertions and zero product corrections. Escalation 24's sole follow-up and stop condition are exhausted; no further Package E build may use this route. The final launcher/preflight and direct pipeline/no-op evidence are under `api-metadata-evidence/native3-20261007/attempt-03/`. Preserve Expert21 and the full open acceptance scope. | Still requires actual generated metadata through Engine, intended assertion RED/restored GREEN, and native examples with file/peer/child readback. One combined API/docs review at the eventual corrected package baseline; share changed metadata/example rows with F. Reuse accepted Linux examples where source/expectations remain unchanged. No new metadata normalization layer or unrelated prose sweep. |
+| F. Integrated compatibility/release closure | Every ticket criterion has applicable proof at the integrated revision: core1.66, optional1.77.2, native Linux/macOS/Windows, required semantic feature rows and explicit unsupported combinations. Depends only on relevant A–E criteria, not all preparation steps indiscriminately. | Diff source/assertions/manifests/lock/toolchain/config against existing accepted rows. Use project Cargo integration targets and the exact approved feature matrix in ticket06/release-proposal.md. Resolve actual archive inventory/tool availability/paths and expected error categories before compiling. | Share one build and real acceptance for related rows per machine/toolchain/feature identity. Reuse unaffected rows; rerun only changed dependency closures. Default sys/net and sync/no_index, metadata+serde/i32, unchecked/no_index/sync/metadata/f32 interactions remain covered. Core without OS deps; sys rejects no_std/no_object/WASM as decided. Combined integrated review/readback closes each criterion, not a count-only gate. Release readiness does not authorize publishing, deploying or enabling Actions. |
+
+No UI is part of Rhai's acceptance stack. The full path is script → real Engine →
+host package → OS. Storage proof is required for filesystem effects; independent
+peers and process observations replace storage writes for networking/process
+behavior. Read-only APIs compare independent truth. A mock or compiler success
+cannot replace these checks.
+
+### 6.4 Concrete command contract and current execution
+
+All paths below were read. The attempt-3 producer, collector and closure parsed
+the libtest-selected receipt and separate `ok`/`FAILED` result. Attempt 3
+provided four expected RED controls and a DirectChild restored-GREEN partial
+result. Attempt 4 used the corrected source and passed all six controls; its
+original outputs and exact phase hashes are preserved. The combined independent
+review and custody/readback checks are complete. Other proposed commands remain
+unexecuted until their inputs are frozen.
+POSIX commands run from an owned source copy within the existing bounded runner,
+not the coordinator's mutable source. Project ID is `rhai`. The invocation creates
+one unique owned absolute session scope and uses its path as `TMPDIR` for
+`/Users/hoppworks/projects/agent-skills/tools/run_scoped.py --timeout <bound> -- <command>`.
+Inside it set target/private Cargo and Python caches to `AGENT_RUNTIME_DIR`, using
+`CARGO_TARGET_DIR`, `CARGO_HOME`, `PYTHONPYCACHEPREFIX` (or disable bytecode) and the
+recipe's private `RUSTUP_HOME`. Direct Rust/Cargo paths must match the intended
+1.66 or 1.77.2 version; `stable` is not a substitute.
+
+For A, the existing native argument shape is:
+
+```text
+<private Rust1.77.2 cargo> test --locked --lib --features testing-environ,sys   packages::sys::process::unix::tests::committed_stdout_cause_survives_stderr_overflow_direct_child   -- --exact --nocapture --test-threads=1
+```
+
+The second exact test ends in `_managed`. The recipe executes four intended REDs
+and two restored GREENs in one bounded runtime, preserving phase hashes and raw
+receipts. Attempt 1 failed during fixture compilation before assertion; attempt 2
+reached the expected baseline RED, then its producer stopped before the remaining
+five controls because the receipt parser did not accept the observed libtest
+output. Attempt 3 passed four RED controls. DirectChild restored GREEN reached
+the cause, cached-result, output-byte and child-lifecycle assertions, then stopped
+at the stale EOF assertion; the following cleanup-diagnostics assertion was not
+reached. The reviewed correction now requires both streams complete after child
+exit.
+Preserve the 49 hash-matched attempt-3 files and independent closure as partial
+proof. Attempt 4 passed the complete six-control set at one exact archive, so no
+selective cross-run aggregation or additional acceptance runner was needed. The
+phase hashes show the production fix in both restored-GREEN cases and the
+baseline restored after the mutant. The exact stage and private runtime were
+retired only after evidence export, independent readback and closure.
+
+The accepted project baseline route remains:
+`cargo test --locked --features testing-environ,sys,metadata --test sys_policy --test sys_env --test sys_fs`.
+Add existing `sys_process`/net integration targets according to covered criteria,
+not a fabricated universal command. E's existing recipe selects
+`cargo test --locked --features testing-environ,sys,net,metadata --test <target> metadata -- --nocapture --test-threads=1`.
+Its old mutable stable/pin/receiver assumptions must be corrected before use.
+Windows has a design and recorded console command, not a proven executable
+release runner; no POSIX SSH wrapper can establish guest cleanup by itself.
+
+### 6.5 Evidence, actual artifact availability and lifecycle
+
+Read-only existence checks on 2026-10-07:
+
+| Resource | Actual availability and permitted reuse |
+|---|---|
+| Committed originals in this coordinator worktree | Overlap raw result/restoration/control ledgers and independent closure are present: source9dc, controls101/101 then0/0. Post-spawn setup originals are present: source523, wrong-cause101/wrong-completion101/restored0. These narrow accepted results remain proof, not new acceptance claims from producer acceptance_claim=false. |
+| Overlap workhorse stage/scope | Exact `/root/rhai-linux-process-overlap-d79-20261004-1259` and its central scope are absent, including symlink checks. No reusable compiled build remains there. |
+| First-cause attempt 1 | Original compile failure, raw diagnostics and allocation receipt remain under the writer's `attempts/attempt-01/`. The exact remote stage was independently retired; 72 PID/start identities and both owned groups were checked, scope is absent, and there is no reusable compiled output. One native allocation is consumed. |
+| First-cause attempt 2 | Its stale stage was retired after attempt-3 stage readback; original partial proof is under the writer's `attempts/attempt-02/`, with 34 files hash-matched locally. It contains one valid baseline RED and process receipt, not full acceptance. |
+| First-cause attempt 3 | Partial evidence is under the writer's `attempts/attempt-03/`; 49 files match Workhorse SHA-256 readback. Four expected REDs are valid. DirectChild restored GREEN reached the cause, cached-result, output-byte and child-lifecycle assertions, then failed at the old EOF assertion; the following cleanup-diagnostics assertion was not reached, and Managed GREEN did not run. Fresh closure verified 120 identities absent or reused, two owned groups empty and the private scope/runtime absent. Exact stale stage `parserfix-01` was retired at 2026-10-07T07:55:26Z after checking 120 PID/start identities and empty groups; the receipt also confirms scope absence. |
+| First-cause attempt 4 | Complete originals are preserved under `../.scratch/all-tickets/process-first-cause-evidence/originals/stage-originals/proof-evidence/`, with outer custody and independent-closure receipts under `../.scratch/all-tickets/process-first-cause-evidence/originals/`. Four intended RED controls exited 101 at the first-cause assertion; both restored GREEN controls exited 0 and independently read back one passed test. The phase source hash is `fced800d5b05a1582a4d1c27cadabda32dc1517522e5ed733865d7faab48e5d4`; final baseline restoration matched. Resource samples (54 periodic samples) recorded maxima 950,608 KiB RSS, 697,712 KiB storage and four descendants, below the recorded limits; these are sampled, not continuous peaks. Independent closure verified 127 identities, five owned groups and six paths. The exact stage, scope and private runtime are absent. No compiled artifact is reusable. |
+| First-cause stage | The `parserfix-02` stage was consumed by attempt 4, then independently read back and retired after preserving proof. It is absent at `/var/roothome/rhai-linux-process-first-cause-01a0f114-20261007-parserfix-02`; the central private scope and runner runtime are also absent. Do not reuse historical stage paths or claim a reusable build. |
+| Core private builds | All four paths in `core-current-msrv-root-readback.json` are still absent locally. Logs/control/restoration proof remains; no compiled-target reuse claim. |
+| macOS locked source audit | Historical source-integrity receipt remains, but its exact `macos-overhead-safeguards/.../macos-overhead-custody-source-audit` path is absent. Restore only required source inputs from verified surviving archives or acquire needed inputs later; do not claim the old 131-archive tree is available. |
+| Windows baseline/images | Read-only host listing confirms `/var/lib/libvirt/images/rhai-win11-quality` with system.qcow2, baseline and ready-baseline. Existence does not establish source/toolchain provenance or guest cache availability. Guest paths were not queried and remain unconfirmed; preserve this other owner's resources and snapshots. |
+
+There is no currently verified reusable owned compiled build. Prefer build/test/
+readback/export in the same invocation. Do not rebuild an unchanged artifact for
+an assertion-only control: reset uniquely owned fixture data separately. If a later
+package genuinely needs finite retained compilation, record exact central path,
+owner, input identity (sources, lock, toolchain, flags, SDK), byte ceiling, finite
+reuse boundary and expiry before configuring output outside the runner's private
+runtime. No exceptional retained build is allocated for package A.
+
+Before a heavy launch, measure free bytes on source/output/cache filesystems,
+active machine-wide runs and available RAM against the preserved limits/reserves.
+For each actual filesystem, require free bytes minus predicted additional occupancy
+to retain the binding16 GiB reserve; budget private output up to its2 GiB hard ceiling
+plus measured stage/export occupancy rather than treating16 GiB free as unlimited
+build space. No new retention size is allocated.
+Historical samples do not establish peaks or current slots. On insufficient disk,
+export proof and perform one bounded cleanup of exact obsolete own resources,
+recheck free bytes, then continue only if feasible. No broad cache purge, foreign
+stop, VM reset, worktree removal or install follows from this plan.
+
+Save source/lock/tool versions, raw stdout/stderr/status, phase identities, resource
+samples, partial results and diagnostics outside private runtimes as they complete.
+Independently read back actual effects and exact cleanup. Separate diagnostic
+collection on failed/partial runs from the success-only acceptance validator.
+Only then retire exact inactive own stage/runtime/containers and empty scope;
+Windows cleanup requires job/monitor ownership. Durable proof and foreign assets
+are preserved. Attempt 1's exact owned stage was retired after proof preservation.
+Attempt 2's partial proof has been copied and hash-checked locally; its exact stale
+stage was retired after the initial byte-level `parserfix-02` readback. A semantic
+audit then found the generated preflight's mismatched physical-stage assertion.
+The test caught this first as an expected local RED; after fixing the physical path
+mapping, the full recipe probes passed and the combined review returned READY. The
+old preflight and first receipt are retained; the corrected guard was read back
+with the other 18 stage files. No run or compiled artifact was created. No foreign
+or shared resource was cleaned. At this historical checkpoint Tauron Integration
+reported its selftest green and was checking cleanup; the latest Workhorse process
+listing showed no heavy process. The earlier authorized build-window request was
+subsequently resolved: Tauron was informed that Rhai's run had ended and its slot
+was available for Tauron's own fresh admission (see the later Package E record).
+Do not wait for the old signal; any future launch still needs fresh admission.
+
+### 6.6 Retry triggers, risk and critical path
+
+Critical path: Package A is accepted only at Linux/Rust 1.77.2 → Packages B and E
+remain open with their current bounded routes stopped; C and D retain unproven
+custody prerequisites → select an independently open requirement with an unspent
+route before any further heavy run → close only uncovered integrated rows in F →
+verified fork-main integration under existing Git authorization. No upstream
+writes, production release or new Goal are authorized.
+Do not repeat Package A's build or six controls. Its accepted proof is tied to the
+tested source/lock/toolchain and Linux environment recorded in the preserved
+receipts. A later A rerun needs a relevant source, assertion, dependency, toolchain
+or environment change that invalidates this proof, or a specific uncovered A
+criterion. A new Session, rule revision or renamed cause is insufficient.
+For Package B, first map the still-open ticket 03 criteria to existing code and
+original evidence; run the cheapest source/test-target checks before selecting one
+real-OS case for any genuinely uncovered behavior. A further expensive run needs
+a new product diagnosis/fix, changed relevant inputs or an uncovered acceptance
+criterion; do not respond to a new failure with a routine full-suite rerun or a
+new transport/wrapper layer.
+After repeated preparation failure inspect the entire actual composed path before
+allocation; do not append another transport/wrapper layer or rerun all packages.
+Expected assertion RED consumes its allocated command but is not a failed product
+correction. Compiler/parser/export aborts before assertions are infrastructure
+outcomes. Completed rejected repairs retain their cause counts. Two failed
+corrections/recoveries require the prescribed independent diagnosis; exhausted
+post-escalation follow-ups stop that route. No routine approval gates are added.
+
+Preserved stopped paths: stdin Expert18 (two failed corrections plus rejected sole
+follow-up2518238; native110 unallocated), Darwin custody Expert09/12, metadata
+Expert21 (two corrections plus rejected09eb follow-up) and Windows Expert02/13
+(two harness invocations consumed; real-client finite30-minute boundary unchanged).
+The task's standing acceptance of recommendations must be reconciled with the
+specific human limits before any later authorization conclusion. It cannot erase
+consumption or authorize a third run by renaming a cause. These are open execution
+risks, not reopened allowances or dropped acceptance criteria. A simpler route must
+retain the same observation/custody contract and explain why it avoids the proven
+failure mechanism; this plan does not assert such a route is already proven.
+
+Risks/counterarguments: A's accepted proof is narrow to its exact Linux/Rust
+1.77.2 source, lock and assertions; it does not prove B's other process semantics
+or Darwin/Windows behavior. Shared builds save setup only when inputs match;
+platform-specific cleanup cannot transfer from Linux to Windows. Package A's
+combined reviewer returned READY; Windows guest ownership remains with its
+recorded owner.
+The current task has no unresolved result/design choice requiring a user answer.
+Implementation feasibility of stopped routes remains explicit, not certified.
+
+**Current next action:** Package B's Ticket03 map in 6.7 remains an applicability
+map, not acceptance; its named no-primary behavior and other open rows remain
+unproven, and its three-launch route is stopped. Package E's metadata tests also
+remain unverified, and its route is stopped after allocation 3. Preserve every
+criterion and all consumed counts. The next execution must select an independently
+open requirement with an unspent route; no Package E or Package B rebuild follows
+from this status update. This is not a new approval gate or a declaration that the
+remaining tickets are infeasible.
+
+The exact metadata command and its source/test mapping remain as recorded below.
+The full archive and pinned lock provenance remain available locally; the attempt-03
+preflight passed, then the launcher stopped at line 23 before extraction/Cargo due
+to the `tar | grep -q` pipefail interaction. See the attempt-03 classification and
+readback files. No metadata criterion, runnable example, OS effect, compatibility
+row or release gate is closed by this attempt.
+
+The exact command is
+`cargo test --locked --features testing-environ,sys,net,metadata --test net_metadata --test sys_policy metadata -- --nocapture --test-threads=1`.
+It selects `metadata_exposes_the_documented_tcp_surface` and
+`metadata_documents_tcp_handle_operations_and_overloads` in
+`tests/net_metadata.rs`, which register `NetPackage` in a real `Engine`, serialize
+`gen_fn_metadata_to_json(false)`, and check exported TCP comments and signatures;
+it also selects `test_function_metadata` in `tests/sys_policy.rs`, which builds
+the sys `Engine` metadata and checks `SysError`/Unix `Child` comments and the exact
+Child signatures. Thus this start path reaches the registered public metadata
+criterion. It does not exercise socket, process or file effects and cannot close
+Package E's example/readback requirements.
+
+The following allocation1/allocation2 detail is historical and is superseded by
+the terminal allocation3 outcome and current next action above.
+
+Native3 allocation1 reached Cargo compilation but stopped before assertions because
+its staged source archive (SHA-256
+`c34c9b889a1e9b4052f9c52b8256d6d7236b92baffdfc26784d1442fdc6381af`) omitted
+tracked `build.template`; allocation2 stopped before Cargo because the
+launcher expected `source.tar.gz` while the complete archive was staged as
+`source-full.tar.gz`. Both are infrastructure outcomes in the unverified source
+handoff path, not RED or product corrections. Cumulative native3 counts are two
+allocations, two pre-Cargo/pre-assertion stops, zero assertions and zero product
+corrections. Allocation2's raw outputs, input hashes and postrun scope/runtime
+readback are under `.scratch/all-tickets/api-metadata-evidence/native3-20261007/attempt-02/`.
+The exact owned staging files and empty scope were removed after preserving proof;
+no compiled artifact is reusable. The full replacement source archive is
+`.scratch/all-tickets/api-metadata-evidence/native3-20261007/source-full.tar.gz`
+(422 current tracked inputs, SHA-256
+`a243fc96c513c70d86e0281e0f178d91c95e6338ab3dda24d1656f7dd8863de5`); the archive
+and each entry were checked against this worktree. Its pinned lock is
+`.scratch/all-tickets/api-metadata-evidence/native3-20261007/Cargo.lock`
+(SHA-256 `4ff0a7de6f504510af64092d446d411b86d95228b23a188b396bd188da367627`). The
+corrected bounded launcher is
+`.scratch/all-tickets/api-metadata-evidence/native3-20261007/run-recovery-red.sh`;
+it validates both hashes and `build.template`, uses Rust 1.93.0 and `--locked`,
+and preserves logs outside the runner's private runtime. Dependencies are the
+exact complete archive/lock, the installed pinned Workhorse toolchain and runner,
+at least the project admission reserves on the actual filesystem, and an available
+heavy-run slot. The prior Tauron Cargo/rustc group ended; Workhorse's read-only
+process/capacity snapshot at 2026-10-07T09:56:49Z found no active scoped
+runner/compiler, 80,850,876 KiB MemAvailable and 610,347,319,296 bytes free on
+the output filesystem. The owner-authorized message informed Tauron that Rhai is
+terminal and its run slot is free; Tauron may proceed only under its own fresh
+admission. That snapshot is not a slot reservation. The corrected launcher
+samples the exact helper process tree and private runtime once per second,
+records maxima and stops at the existing 16-descendant, 1,572,864 KiB
+storage-preemption and 2,097,152 KiB RSS/storage thresholds. Its 510-second work
+deadline leaves the existing 30-second reserve inside the 540-second helper cap;
+the scoped-runner and outer bounds are 585 and 600 seconds. Sampling reports
+bounded maxima, not continuous peaks. Guard/setup failures remain infrastructure
+outcomes, separate from metadata assertion RED.
+
+Escalation 24 asks for a read-only review of the complete archive-to-stage-to-
+launcher path and a single minimal repair/preflight. It does not authorize another
+wrapper, Cargo run during diagnosis, or product edit. After that bounded repair,
+recheck exact names and hashes, the launcher/runner/toolchain, process absence,
+Workhorse capacity and slot, then coordinate Tauron's own admission before one
+bounded metadata run. Only a named missing/inadequate metadata assertion is RED;
+another setup stop ends this route for diagnosis. After valid RED, make the
+smallest accurate documentation correction and rerun only affected metadata
+tests. Capture Engine JSON and exact test output, then perform one combined review.
+This closes only the metadata assertions; Package E still needs runnable examples
+with independent file/peer/child readback and the remaining compatibility/docs
+criteria. Keep Expert21 and all native history unchanged; no full matrix or
+unrelated rebuild is implied.
+
+### 6.7 Ticket 03 criterion-to-evidence map — checked 2026-10-07
+
+This map compares original requirements P2/P10/P11/P13 and X1–X38 with current
+test source and accepted proof artifacts. “Accepted” means only the named Linux
+cases and rows below; “partial” preserves the stated gap. No row is closed by a
+source test alone or by an unreviewed/provisional result.
+
+| ID | Current test/evidence | Applicability and remaining gap |
+|---|---|---|
+| P2 | `tests/sys_policy.rs`; no default-process test | Open: default Engine `run` denial and independent no-child observation are not covered. |
+| P10 | `ProgramPolicy` predicate tests in `tests/sys_policy.rs` | Open: no public Engine denied invocation with proof that no child was created. |
+| P11 | `process_cwd_uses_the_opened_filesystem_capability_after_root_replacement`; `linux-process-options-proof.md` | Partial: Linux capability-held cwd and denied symlink escape are accepted in named rows; escape denial proves no fixture record, not absence of every transient process, and does not cover every outside-root cwd form. |
+| P13 | `tests/sys_process_windows.rs` | Open: existing Windows test covers raw output/nonzero exit, not default `.bat`/`.cmd` denial. |
+| X1 | `scalar_run_with_cwd_works_without_collections`; `linux-scalar-process-proof.md` | Accepted for named Linux feature rows: public Engine success, exit 0 and independent child record; no wider matrix follows. |
+| X2 | No matching test in current `tests/sys_process.rs` | Open: missing program must yield NotFound and no child. |
+| X3 | `run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data`; `linux-process-options-proof.md` | Accepted for named Linux rows: exit 0/7 and exact raw bytes as result data. |
+| X4 | No exact-argv assertion identified | Open: spaces and quotes must round-trip exactly. |
+| X5 | No literal shell-metacharacter assertion identified | Open: `$HOME`, `|`, `;`, and `&&` must reach the fixture unchanged. |
+| X6 | No empty-argv assertion identified | Open: an empty argument must be preserved. |
+| X7 | `scalar_run_with_cwd_works_without_collections`; options proof | Accepted for named Linux rows: valid cwd is observed through child output and independent host readback. |
+| X8 | No missing-cwd test identified | Open: failure must be NotFound with no child. |
+| X9 | Scalar process proof records explicit `RECORD` override | Accepted for named Linux rows; other platform/feature combinations remain open. |
+| X10 | Scalar process proof uses `env_clear` and explicit override | Accepted for named Linux rows; does not imply every environment edge case. |
+| X11 | No exact `env_remove` child assertion identified | Open: removed variable must be absent in the child. |
+| X12 | Raw capture and options proof | Accepted for named Linux rows: stdout and stderr are separately observed. |
+| X13 | `process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps`; `linux-process-io-proof.md` | Accepted only for the two sensitivity-backed Linux claims and recorded feature rows; not a complete IO or platform matrix. |
+| X14 | No dedicated ordinary empty-output test identified | Open: zero-cap silent output is a different branch. |
+| X15 | Raw capture/options proof | Accepted for named Linux rows: exact raw bytes and lossy text behavior, including nonzero exit. |
+| X16 | Shared-child proof exercises large `spawn` stdin; no `run` string-echo test | Open: spawned stdin count/readback does not prove `run` string round-trip. |
+| X17 | No 1 MiB `run` blob round-trip test identified | Open: exact input/output and concurrent child output remain unproven. |
+| X18 | `unit_stdin_means_immediate_eof`; options proof | Accepted for named Linux rows: unit stdin produces EOF; other feature/platform rows remain open. |
+| X19 | Deadline tests; `linux-managed-deadline-proof.md` and options proof | Partial: Linux timeout/partial output and owned reaping are accepted in named cases; no scheduler-independent latency guarantee or full feature/platform coverage. |
+| X20 | Scalar success and `linux-managed-success-proof.md` | Accepted for named Linux rows: normal completion before deadline. |
+| X21 | Cap tests, `linux-process-overlap-proof.md`, managed output-limit proof | Accepted for named Linux DirectChild/Managed same-step overflow-vs-deadline cases and listed cap cases; other causes/platforms remain open. |
+| X22 | `sys_process_report.rs` constructs signal reports | Open: no real Unix child-killed-by-signal observation. |
+| X23 | Shared-child and `linux-process-example3-proof.md` | Accepted for named Linux rows: real spawn/wait, result map, clone snapshots and cached results. |
+| X24 | Shared-child proof observes pending `wait(timeout)` and completed snapshots | Partial: a pending `try_wait` returning unit is not established by the accepted evidence. |
+| X25 | Shared-child and managed-kill proofs | Accepted for named Linux cases: kill/wait completes with independent cleanup/readback. |
+| X26 | Shared-child proof repeats kill after completion | Accepted for named Linux rows: repeated kill is harmless and cached snapshots persist. |
+| X27 | Shared-child and managed final-drop proofs | Accepted for named Linux cases: `kill_on_drop=true` cleanup/reaping; only named feature rows. |
+| X28 | `linux-drop-false-native2-proof.md`; `linux-drop-false-next.md` | Partial: exact Linux direct/managed retention tests and independent group readback are accepted at the named default Linux row, and macOS direct/managed proof is reusable; Windows and other feature rows remain open. The later `linux-drop-false-next.md` is a planning note predating native2 and does not invalidate that accepted proof. |
+| X29 | Shared-child panic fixture | Open: Rust controller panic cleanup is not Rhai script `throw` cleanup. |
+| X30 | No 200-run resource stability test identified | Open: no sequential-run file-descriptor/handle stability acceptance. |
+| X31 | `process_representation_is_send_sync_and_shareable`; sync shared-child proof | Accepted for named Linux sync rows: shared representation and concurrent cancellation/wait behavior; actual blocking-entry and wider feature rows remain limited. |
+| X32 | `tests/sys_process_windows.rs` | Open: no native Windows embedded-quote argv reconstruction test. |
+| X33 | `tests/sys_process_windows.rs` | Open: no native Windows `.exe` suffix/PATH resolution test. |
+| X34 | Managed deadline, output-limit, kill, final-drop and escaped-pipe proofs | Partial: selected Linux managed cancellation cases are accepted; exact platform/feature/fault breadth and Windows Job behavior remain open. |
+| X35 | Managed success/held-zombie tests and `linux-managed-success-proof.md` | Partial: Linux managed leader-exit/worker closure is accepted; DirectChild distinction and other platform/feature rows need their own applicable proof. |
+| X36 | `linux-post-spawn-pipe-setup-proof.md` | Open: this proves post-spawn pipe setup failure, not managed scope setup failure/no fallback. |
+| X37 | Managed group/sentinel tests and accepted Linux managed proofs | Partial: named Linux host/sentinel survival is accepted; Windows Job membership and broader native rows are open. |
+| X38 | `linux-managed-escaped-pipe-proof.md` | Accepted for the named Linux escaped-reader case: capture cancellation/readers close while escaped holder and sentinel survive; no other OS/feature claim. |
+
+The crosswalk above preserves rather than reduces the original contracts. It is
+an applicability map, not new execution evidence. Package B remains open, and
+all partial/open rows still require their listed real observations at an
+applicable revision.
+
+### 6.8 Coverage check — no open requirement removed
+
+| Original requirement inventory | Preserved closure route |
+|---|---|
+| Ticket01 public API, independent observations, meaningful RED, isolation and cleanup | Applies to A–F; no mock/compile-only closure. |
+| Ticket02; P1–P9/P12/P14, E1–E5, F1–F23 | Existing foundation proof retained; native/platform/feature gaps and any invalidated path assertions close through C/D/F. Includes non-UTF8, OS-selected roots, unrestricted symlinks and macOS aliases. |
+| Ticket03; P2/P10/P11/P13, X1–X38 | A/B plus native C/D and affected F rows: stdin, caching, run/raw/spawn/kill/drop, fault/setup/no-primary/first-cause, managed cancellation/completion, honest incomplete cleanup, unrelated host/sentinel and escaped pipe. No stopped criterion is declared done. |
+| Compatible shared file handles and rhai-fs divergences | Existing implementation/proof retained; API docs E and native/feature/readback gaps C/D/F. Includes bounds, negative reads and unchecked behavior. |
+| Tickets04/05 TCP authority/API | Accepted separate connect/listen grants, numeric IPv4/IPv6, port0 listen, bytes/text/partial progress/EOF/half-close, clone close, resource limits and sync/cancellation remain; existing Linux proof plus missing C/D/F native/feature rows. No DNS/UDP/HTTP/TLS added. |
+| Ticket06; R1–R7 and release proposal | E/F preserve compatibility, metadata/docs/examples, core1.66/optional1.77.2, explicit no_std/no_object/WASM rejection, semantic feature matrix, native three-OS scope and source/dependency provenance. R4's historical alternative is resolved by rejection, not a new tuple API. |
+| Process performance/diagnostics and resource safeguards | Accepted narrow Linux performance and lifecycle diagnostics remain with measurement scope; uncovered native requirements C/D/F. No duplicate benchmark solely for this revision. |
+| Owner boundaries and repository outcome | No arbitrary-untrusted sandbox claim, parent env mutation, unrelated features, Actions enablement or publishing. Later verified integration only to hoppworks/rhai main, lowercase hoppworks attribution, foreign work preserved. This implementation continuation is authorized; no Git write is part of the current package step. |
+
+All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
+remain represented. This crosswalk is a coverage plan, not an executed acceptance
+matrix or closure count. Historical implementation notes and estimates follow.
+
+### 6.9 Historical phases — retained, superseded as execution instructions
 
 | Phase | Deliverable | Exit criteria | Effort |
 |---|---|---|---|
