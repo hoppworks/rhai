@@ -4024,6 +4024,71 @@ fn default_and_nonmatching_process_policies_deny_public_run_without_starting_chi
     );
 }
 
+#[test]
+#[cfg(not(feature = "no_index"))]
+fn missing_program_and_cwd_report_not_found_without_starting_child() {
+    let records = TempDir::new();
+    let executable = std::env::current_exe().expect("test executable");
+    let engine = engine(SysConfig::default().fs_unrestricted(FsAccess::Read).programs(ProgramPolicy::Any));
+    let script_path = |path: &std::path::Path| path.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let invocation = |program: &str, record: &std::path::Path, cwd: Option<&std::path::Path>| {
+        let program = program.replace('\\', "\\\\").replace('"', "\\\"");
+        let record = script_path(record);
+        let cwd_option = cwd.map(|path| format!("cwd: \"{}\",", script_path(path))).unwrap_or_default();
+        format!(
+            r#"run("{program}", ["--exact", "process_fixture", "--nocapture", "--quiet"], #{{
+                env_clear: true,
+                env: #{{ {FIXTURE_ENV}: "0", {FIXTURE_RECORD_ENV}: "{record}" }},
+                {cwd_option}
+                timeout: 5,
+                max_output: 1024
+            }})"#
+        )
+    };
+
+    // Confirm the independent marker works before using its absence to prove failed starts.
+    let control_record = records.path().join("control-child.txt");
+    let control = engine
+        .eval::<Map>(&invocation(&executable.to_string_lossy(), &control_record, None))
+        .expect("valid executable should start the process fixture");
+    assert!(control["success"].as_bool().unwrap());
+    assert_child_record(&control_record, 0);
+    eprintln!(
+        "x2_x8_valid_control child_record={:?} reap=ESRCH",
+        std::fs::read_to_string(&control_record).unwrap().trim()
+    );
+
+    let missing_program = records.path().join("missing-program");
+    assert!(!missing_program.exists());
+    let missing_program_record = records.path().join("missing-program-child.txt");
+    let error = sys_support::sys_err(&engine, &invocation(&missing_program.to_string_lossy(), &missing_program_record, None));
+    match error {
+        SysError::Io { op, target, kind, .. } => {
+            assert_eq!(op, "spawn process");
+            assert_eq!(kind, std::io::ErrorKind::NotFound);
+            assert_eq!(target, missing_program.to_string_lossy());
+        }
+        other => panic!("missing program returned {other:?}"),
+    }
+    assert!(!missing_program_record.exists(), "missing program started the child fixture");
+    eprintln!("x2_missing_program io_kind=NotFound child_record_absent=true");
+
+    let missing_cwd = records.path().join("missing-working-directory");
+    assert!(!missing_cwd.exists());
+    let missing_cwd_record = records.path().join("missing-cwd-child.txt");
+    let error = sys_support::sys_err(&engine, &invocation(&executable.to_string_lossy(), &missing_cwd_record, Some(&missing_cwd)));
+    match error {
+        SysError::Io { op, target, kind, .. } => {
+            assert_eq!(op, "open process working directory");
+            assert_eq!(kind, std::io::ErrorKind::NotFound);
+            assert_eq!(target, missing_cwd.to_string_lossy());
+        }
+        other => panic!("missing working directory returned {other:?}"),
+    }
+    assert!(!missing_cwd_record.exists(), "missing working directory started the child fixture");
+    eprintln!("x8_missing_cwd io_kind=NotFound child_record_absent=true");
+}
+
 #[cfg(not(feature = "no_index"))]
 fn assert_child_record(path: &std::path::Path, code: rhai::INT) {
     let record = std::fs::read_to_string(path).unwrap();

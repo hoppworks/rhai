@@ -1,0 +1,10 @@
+Started: 2026-10-07T13:27:44Z
+Completed: 2026-10-07T13:28:00Z
+One bounded run_scoped.py invocation; outer timeout 600 seconds; CARGO_BUILD_JOBS=2.
+TMPDIR was the exact session scope. CARGO_TARGET_DIR and CARGO_HOME were under
+AGENT_RUNTIME_DIR. run_scoped.py removed its private runtime
+/var/home/workhorse/.local/share/agent-builds/rhai/x2-x8-20261007-f0f08ebc/agent-build-vz2dwx5a;
+remote readback confirmed it absent. Mutable fixture data used TempDir and was
+removed by the test. After exporting the source identity, launcher and raw
+outputs, the exact owned session scope was removed as its owner; Workhorse
+readback confirmed the scope absent before review and commit.

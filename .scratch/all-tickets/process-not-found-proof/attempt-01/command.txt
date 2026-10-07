@@ -1,0 +1,9 @@
+Workhorse, owner workhorse; Linux x86_64.
+Toolchain: cargo 1.93.0; rustc 1.93.0 (254b59607 2026-01-19).
+Pinned locked invocation (executed three times in one bounded run):
+cargo test --locked --features testing-environ,sys --test sys_process missing_program_and_cwd_report_not_found_without_starting_child -- --exact --nocapture --test-threads=1
+
+The first run changed only X2's expected ErrorKind from NotFound to PermissionDenied.
+The second run restored that expectation and changed only X8's expected ErrorKind.
+The third run restored the committed test source. All commands ran through the
+public Engine test against the real Linux process API.

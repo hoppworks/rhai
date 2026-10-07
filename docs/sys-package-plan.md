@@ -689,23 +689,21 @@ recorded owner.
 The current task has no unresolved result/design choice requiring a user answer.
 Implementation feasibility of stopped routes remains explicit, not certified.
 
-**Current next action:** X22 has a partial Linux x86_64/Rust 1.93.0
-`testing-environ,sys` acceptance in
-`.scratch/all-tickets/process-signal-evidence/proof.md`; its other platform,
-MSRV and feature rows remain open. Package B's Ticket03 map in 6.7 remains an
+**Current next action:** X2 and X8 now have partial Linux x86_64/Rust 1.93.0
+testing-environ,sys acceptance in
+.scratch/all-tickets/process-not-found-proof/proof.md. Their native OS, MSRV and
+other feature rows remain open. X22 also retains its partial Linux acceptance in
+.scratch/all-tickets/process-signal-evidence/proof.md; its other platform, MSRV
+and feature rows remain open. Package B's Ticket03 map in 6.7 remains an
 applicability map, not acceptance; its named no-primary behavior and other open
 rows remain unproven, and its three-launch route is stopped. Package E's metadata
 tests also remain unverified, and its route is stopped after allocation 3.
-Preserve every criterion and all consumed counts. The X22 test is guarded by
-`cfg(all(unix, not(feature = "no_index")))` after review identified its Unix-only
-shell and process APIs; the Linux proof remains applicable because this compile
-guard selects the unchanged test body on Linux. The combined reviewer returned
-READY after checking the guard and proof applicability; no rerun was needed.
-Windows is not covered. After review and fork push, the next execution must
-select an independently open
-requirement with an unspent route; no Package E or Package B rebuild follows
-from this status update. This is not a new approval gate or a declaration that
-the remaining tickets are infeasible.
+Preserve every criterion and all consumed counts. The previously reviewed
+X22 Unix-only test guard remains unchanged; the combined reviewer returned READY
+for that correction without a rerun. After review and fork push, select an
+independently open requirement with an unspent route; do not rebuild Package E or
+Package B based on this status update. This is not a new approval gate or a
+declaration that the remaining tickets are infeasible.
 
 The exact metadata command and its source/test mapping remain as recorded below.
 The full archive and pinned lock provenance remain available locally; the attempt-03
@@ -795,13 +793,13 @@ source test alone or by an unreviewed/provisional result.
 | P11 | `process_cwd_uses_the_opened_filesystem_capability_after_root_replacement`; `linux-process-options-proof.md` | Partial: Linux capability-held cwd and denied symlink escape are accepted in named rows; escape denial proves no fixture record, not absence of every transient process, and does not cover every outside-root cwd form. |
 | P13 | `tests/sys_process_windows.rs` | Open: existing Windows test covers raw output/nonzero exit, not default `.bat`/`.cmd` denial. |
 | X1 | `scalar_run_with_cwd_works_without_collections`; `linux-scalar-process-proof.md` | Accepted for named Linux feature rows: public Engine success, exit 0 and independent child record; no wider matrix follows. |
-| X2 | No matching test in current `tests/sys_process.rs` | Open: missing program must yield NotFound and no child. |
+| X2 | tests/sys_process.rs::missing_program_and_cwd_report_not_found_without_starting_child; .scratch/all-tickets/process-not-found-proof/proof.md | Partial: Workhorse Linux x86_64/Rust 1.93.0 proves public Engine run returns Io/NotFound for a missing program and the fixture record stays absent, with a valid-child control and independent reaping readback. Other OS, MSRV and feature rows remain open. |
 | X3 | `run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data`; `linux-process-options-proof.md` | Accepted for named Linux rows: exit 0/7 and exact raw bytes as result data. |
 | X4 | No exact-argv assertion identified | Open: spaces and quotes must round-trip exactly. |
 | X5 | No literal shell-metacharacter assertion identified | Open: `$HOME`, `|`, `;`, and `&&` must reach the fixture unchanged. |
 | X6 | No empty-argv assertion identified | Open: an empty argument must be preserved. |
 | X7 | `scalar_run_with_cwd_works_without_collections`; options proof | Accepted for named Linux rows: valid cwd is observed through child output and independent host readback. |
-| X8 | No missing-cwd test identified | Open: failure must be NotFound with no child. |
+| X8 | tests/sys_process.rs::missing_program_and_cwd_report_not_found_without_starting_child; .scratch/all-tickets/process-not-found-proof/proof.md | Partial: Workhorse Linux x86_64/Rust 1.93.0 proves public Engine run returns Io/NotFound for a missing cwd and the fixture record stays absent, with a valid-child control and independent reaping readback. Other OS, MSRV and feature rows remain open. |
 | X9 | Scalar process proof records explicit `RECORD` override | Accepted for named Linux rows; other platform/feature combinations remain open. |
 | X10 | Scalar process proof uses `env_clear` and explicit override | Accepted for named Linux rows; does not imply every environment edge case. |
 | X11 | No exact `env_remove` child assertion identified | Open: removed variable must be absent in the child. |

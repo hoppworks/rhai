@@ -34,7 +34,7 @@ integration does not claim release acceptance. Do not recreate remote task refs.
 No installs, admin, credentials, agent-home/config or shared-service changes.
 Windows guest control belongs solely to windows_private_staging_readback; historical owner records remain preserved.
 
-## Current status — Package A accepted; Package E follow-up remains stopped; X22 Linux slice partially accepted (2026-10-07)
+## Current status — Package A accepted; Package E follow-up stopped; X2/X8 and X22 Linux slices partially accepted (2026-10-07)
 
 Package A's narrow Linux/Rust 1.77.2 acceptance is complete after five cumulative
 native allocations. Attempt 4 passed its six controls, but a later combined review
@@ -126,6 +126,29 @@ recording its SHA-256; source/test inputs and both attempts' raw results remain.
 P2/P10 acceptance is still open across the strict native OS, MSRV and feature
 matrix. Their stopped Package B and Package E routes and budgets are unchanged;
 this independent test does not reopen or reset either route.
+
+### X2/X8 missing-program and cwd acceptance — partial Linux proof
+
+The user-authorized test boundary is the public Engine run API through the real
+Linux process implementation, using the current integration-test executable as
+a child fixture. A valid-start control writes a child PID/exit record; the parent
+reads it independently and checks ESRCH. Missing-program and missing-cwd calls
+must return the matching SysError::Io operation, target and NotFound kind, and
+leave their fixture record absent. This covers the planned fixture-start
+behavior; it does not claim observation of every transient OS process.
+
+The single Workhorse Linux x86_64/Rust 1.93.0 testing-environ,sys run used the
+public Engine test
+tests/sys_process.rs::missing_program_and_cwd_report_not_found_without_starting_child.
+Wrong PermissionDenied expectations for X2 and X8 each exited 101 at the
+intended assertion; with the source restored, the same test passed and read back
+the valid child's record and ESRCH, plus absent records for both failures.
+No product source changed. Proof and raw outputs are under
+.scratch/all-tickets/process-not-found-proof/; details include source/lock
+identities, admission, runner and cleanup. This accepts only the named Linux
+slice; other OS, MSRV and feature rows remain open. One bounded run was consumed;
+the private runtime and exact owned session scope were removed after exporting
+the proof inputs and raw outputs, with absence confirmed on Workhorse.
 
 Rules re-read for this Session: central agent-skills HEAD
 `14617043b70d1ba2d40b720832cbad294fa8c008`; project and applicable skill hashes

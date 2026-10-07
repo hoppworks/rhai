@@ -1,0 +1,16 @@
+{
+  "measured_before_launch_utc": "2026-10-07T13:27:44Z",
+  "host": "workhorse",
+  "architecture": "x86_64",
+  "scope": "/var/home/workhorse/.local/share/agent-builds/rhai/x2-x8-20261007-f0f08ebc",
+  "scope_owner_mode": "workhorse:workhorse 0700",
+  "free_bytes_on_var": 609381453824,
+  "mem_available_kib": 91926008,
+  "candidate_heavy_processes": 0,
+  "rustc": "rustc 1.93.0 (254b59607 2026-01-19)",
+  "cargo": "cargo 1.93.0 (083ac5135 2025-12-15)",
+  "runner": "/var/home/workhorse/projects/agent-skills/tools/run_scoped.py",
+  "runner_sha256": "25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e",
+  "agent_skills_revision": "14617043b70d1ba2d40b720832cbad294fa8c008",
+  "global_storage_reserve_bytes": 17179869184
+}
