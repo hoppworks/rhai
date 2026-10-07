@@ -28,12 +28,14 @@ blocks implementation. Completing this map does not mean the library is implemen
   research only for missing facts, and TDD/e2e-proof during later implementation.
 - Existing contract: [sys package plan](../../docs/sys-package-plan.md).
   Current evidence: [network assessment](../../docs/net-package-assessment.md).
-  Prior review has four unresolved sys findings; do not treat inherited phase-complete
-  claims as verified acceptance. Review references are in the coordinator state.
-- Workflow remains strict verification and automatic Coordinator merge only after
-  selected checks pass. The owner's 2026-09-30 privacy decision overrides automatic
-  push: this effort stays local and on authorized workhorse; no remote publication,
-  upstream contact, PR, or merge is part of charting this map.
+  Current open packages and evidence applicability are in section 6 of that plan;
+  historical phase-complete claims are not acceptance. Campaign state is
+  [all-tickets/coordinator-state.md](../all-tickets/coordinator-state.md).
+- Workflow remains strict. Later explicit owner instructions authorized verified
+  pushes/Coordinator merges to the hoppworks/rhai fork main, superseding the earlier
+  local-only privacy instruction for that scope. Never write upstream. The owner
+  resumed implementation on 2026-10-07; current package status, proof and remaining
+  work are tracked in the all-tickets coordinator state.
 - Test patterns come from cap-std (path semantics), rustix (operation/platform cases),
   and Tokio (resource lifecycles); write tests against Rhai contracts rather than
   copying another library's expectations. Do not reopen the broad precedent survey.
@@ -49,21 +51,28 @@ blocks implementation. Completing this map does not mean the library is implemen
   control and isolated fixtures are binding; concrete commands are in AGENTS.md.
 - [Settle path semantics before repairing filesystem access](issues/02-filesystem-contract.md#answer):
   OS-selected roots, capability confinement, unrestricted host semantics and
-  consistent supported root spellings are required; reviewed defects remain open.
+  consistent supported root spellings are required; foundation proof exists and
+  current native/feature gaps remain in the campaign plan.
 
 - [Close process lifecycle and resource-limit ambiguities](issues/03-process-contract.md#answer):
   the initial release includes direct-child supervision and explicitly selected
   managed groups/jobs, with cancellation-safe capture, no silent fallback and
   native cleanup proof. Exact config/error representation is reviewed in ticket 06.
 
-## Not yet specified
+- [TCP authority](issues/04-tcp-authority.md): separate connect/listen grants,
+  numeric addresses, finite limits and no OS sandbox claim accepted.
+- [TCP API](issues/05-tcp-api.md): streams/listeners, byte/text lifecycle and
+  compatibility accepted; current native matrix remains implementation acceptance.
+- [Compatibility and release](issues/06-compatibility-release.md): core1.66,
+  optional1.77.2, native three-OS and feature/API/documentation gates accepted.
 
-- Exact implementation slices, ordered by the resolved contracts and quality gates.
-  Do not turn the old session estimates into delivery promises.
-- Shared host policy/configuration vocabulary across `sys` and `net`, if TCP authority
-  decisions demonstrate a real need; avoid introducing a common framework in advance.
-- Which property, fuzz, or mutation checks earn their maintenance cost after concrete
-  invariants and acceptance requirements have been chosen.
+## Current frontier
+
+All six decision tickets are resolved as specifications. Remaining implementation
+and acceptance packages A–F live in the existing sys plan, section6; this index is
+not a competing execution plan. The owner later resumed implementation under that
+plan. No decision tickets are reopened, exhausted attempts are not renewed, and
+the accepted contracts remain binding.
 
 ## Out of scope
 

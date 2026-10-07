@@ -1,11 +1,38 @@
 # Standard library wayfinder state
 
-## Goal
+## Current status — 2026-10-07 implementation resumed
+
+All six decision tickets are resolved (specification only). The former unresolved
+TCP/release decisions and privacy/remote-cleanup next actions below are historical.
+The owner later authorized verified integration only to the hoppworks/rhai fork main;
+upstream is excluded. Existing implementation and narrow accepted proof are recorded
+in [the campaign state](../all-tickets/coordinator-state.md). This map does not claim
+full implementation/release acceptance.
+
+The owner subsequently resumed implementation under the existing acceptance plan.
+The active implementation and proof state lives in
+[the all-tickets coordinator state](../all-tickets/coordinator-state.md); the
+remaining execution plan is [sys-package-plan.md section6](../../docs/sys-package-plan.md#6-remaining-acceptance-plan--revised-2026-10-07).
+The goal is active and incomplete. The 2026-10-07 planning-only boundary is
+historical and no longer controls current work. The current global/project rules
+and relevant skills were re-read for this Session; the loaded central revision and
+evidence applicability are recorded in the campaign state. This file preserves the
+earlier planning history without creating a second execution plan.
+
+## Historical record — preserved, superseded as current instructions
+
+Earlier scope, owner answers, provisioning proof, causes and consumed attempts follow.
+Do not execute their old next steps or infer current guest/build availability from
+these snapshots. Accepted baseline scope remains limited to its recorded inputs.
+
+### Original wayfinder record
+
+### Historical: Goal
 
 Chart an implementation-ready plan for sys completion and a separate TCP package,
 with high quality, low maintenance, strict verification, and Rhai conventions.
 
-## Done
+### Historical: Done
 
 - Owner accepted both recommendations on 2026-09-30: initial scope sys plus TCP;
   scripts are owned or reviewed, with explicit host authority and no OS sandbox claim.
@@ -21,14 +48,14 @@ with high quality, low maintenance, strict verification, and Rhai conventions.
 - Existing evidence: ../../docs/sys-package-plan.md and
   ../../docs/net-package-assessment.md; prior assessment state remains untouched.
 
-## Current step
+### Historical: Current step
 
 Tickets 01–03 are resolved. The owner explicitly included managed process groups/jobs
 in the first version after reviewing advantages, security and performance effects.
 Three decision tickets remain open. No implementation or native process proof has
 started. Maximum quality takes precedence over effort.
 
-## Decisions and constraints
+### Historical: Decisions and constraints
 
 - Verification strict; Coordinator merges automatic only green.
 - Owner selected fully private work on 2026-09-30 after public fork visibility
@@ -51,7 +78,7 @@ started. Maximum quality takes precedence over effort.
 - No new research tickets needed yet: prior source inventory and runtime diagnostics
   already answer reuse facts. Delegate research only when a decision exposes a gap.
 
-## Windows environment provisioning
+### Historical: Windows environment provisioning
 
 The owner authorized SSH work on workhorse and a Windows VM on 2026-09-30.
 SSH works; KVM/QEMU/libvirt/UEFI/TPM are present. The owned domain is
@@ -103,7 +130,7 @@ Cause history:
 No existing workloads were stopped, and no host tools were installed.
 Reuse ISO verification and unchanged host evidence. Details: windows-vm/README.md.
 
-## Rules refresh
+### Historical: Rules refresh
 
 On 2026-09-30 read global and project AGENTS.md plus current e2e-proof, wayfinder
 and rendered wayfinder-pack. The latest global instructions and changed e2e-proof
@@ -119,7 +146,7 @@ retain until replacement evidence is accepted or the owner ends this VM effort.
 The failed source copy C:\RhaiQuality\baseline-source is retained for diagnosis
 under the same ownership and cleanup boundary. No shared caches are cleanup targets.
 
-## Current remote cleanup request
+### Historical: Current remote cleanup request
 
 Owner explicitly requested cleaning the existing public fork while new work stays
 private. Remove remote branches only after their existing public heads are merged
@@ -138,7 +165,7 @@ is pending; a runtime repair is also required before the selected gate can pass.
 Do not merge/push/delete while failed checks remain.
 No private changes, remote history rewrite or upstream action is authorized.
 
-## Next action
+### Historical: Next action
 
 Current step: Windows VM/toolchain provisioning and the first native baseline are
 complete. Owner authorized resuming on 2026-09-30; no key was read or recorded.
