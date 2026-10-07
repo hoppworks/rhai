@@ -1,0 +1,12 @@
+{
+  "absent_after": true,
+  "active_processes": [],
+  "device": 59,
+  "inode": 636107259,
+  "mode": "0700",
+  "outputs_exported_and_hash_verified": true,
+  "owner": "workhorse",
+  "path": "/var/home/workhorse/.local/share/agent-builds/rhai/x22-sigkill-msrv-20261007-7dac936ff957",
+  "removed": true,
+  "runner_runtime_absent": true
+}

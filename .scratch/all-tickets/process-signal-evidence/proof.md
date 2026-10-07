@@ -1,8 +1,8 @@
 # X22 real Unix child-signal proof
 
 This is a partial acceptance for X22 only. It covers Workhorse Linux x86_64,
-Rust/Cargo 1.93.0, and `testing-environ,sys`. Other Unix platforms, MSRV and
-feature rows remain open.
+Rust/Cargo 1.93.0 and 1.77.2 with `testing-environ,sys`. Other Unix platforms
+and feature rows remain open.
 
 ## Frozen inputs and execution
 
@@ -82,3 +82,20 @@ returned READY without a build. The reviewed current `tests/sys_process.rs`
 SHA-256 is `42afe230d8c386d77a3738a6a8bcd9ab32f946946eec70f93466060fbf5bb0f9`;
 the frozen run hash above remains the original tested input, and the sole
 post-run change is this compile-selection attribute.
+
+## Additional Linux/MSRV acceptance (attempt-03)
+
+- Source commit: `33fcfe2dce717f6df8c4d6f9dec248bce27c1a9b`.
+- Source archive SHA-256: `752ce732a8480f3f19710d11f0f1e5e8e5231dc7f0f933bc4af3c3d95cba2499`.
+- `Cargo.lock` SHA-256: `2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425`.
+- `tests/sys_process.rs` SHA-256: `7ddc87f6e4b57d61d077445a81f1c3ef2f2e54cb35ac8c90a7ed328245d14017`.
+- X22 test block SHA-256: `782758e80015a099f35d295aa1aa2a8a3cb0f7d3d571cb94a306073ca77b64ab` (2,238 bytes); the block in current HEAD and the archived source is byte-identical. The whole-file hash changed only because later tests were added.
+- Agent-Skills Main: `0e846bfc577a51bd1a98a5606966aecda40320c2`, containing requested revision `35ba734135a64100b891f422d4ced9d76795ab57`. The Workhorse `tools/run_scoped.py` SHA-256 is `25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e`.
+- Workhorse: Linux x86_64, kernel `7.2.8-ogc5.1.fc44.x86_64`, Rust/Cargo `1.77.2`.
+- Fresh admission immediately before launch observed 32 CPUs, load averages `0.77/0.70/0.30`, 89,788,977,152 bytes available memory, and 663,682,400,256 free bytes. No Cargo or QEMU process was active. The admission reserved 16 GiB each for memory and disk plus an estimated 2 GiB additional build peak.
+- Focused command: `cargo test --locked --jobs 2 --features testing-environ,sys --test sys_process run_reports_a_real_unix_child_signal_without_an_exit_code -- --exact --nocapture --test-threads=1`.
+- Rust/Cargo 1.77.2 returned 0 with exactly one passing test. The public Engine result reported `success=false`, unit exit code, signal 9, no timeout, complete stdout/stderr, and child PID `33629`; the independent post-return `kill(pid, 0)` readback was `-1` with `errno=ESRCH` (3). The existing attempt-02 wrong-expectation sensitivity proof applies because the tested block and assertions are unchanged.
+- The runner's private Cargo target/cache runtime peaked at 1,267,691,988 bytes and was removed automatically. All remote output files passed local SHA-256 readback. After export, the exact owned scope `/var/home/workhorse/.local/share/agent-builds/rhai/x22-sigkill-msrv-20261007-7dac936ff957` was removed; the cleanup receipt records no active process and confirms the path is absent. The shared Rust 1.77.2 toolchain remains untouched.
+- Raw admission, compiler versions, command output, extracted source/lock hashes, archive-to-HEAD test-block identity, output checksums and cleanup receipt are preserved under `attempt-03/out/`.
+
+This adds only the named Workhorse Linux x86_64 Rust/Cargo 1.77.2 row. Other Unix platforms and feature rows remain open; no broader X22 matrix is claimed.

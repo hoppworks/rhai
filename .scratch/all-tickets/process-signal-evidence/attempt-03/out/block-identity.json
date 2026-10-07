@@ -1,0 +1,9 @@
+{
+  "archived_file_sha256": "7ddc87f6e4b57d61d077445a81f1c3ef2f2e54cb35ac8c90a7ed328245d14017",
+  "byte_identical_current_to_archive": true,
+  "file_sha256": "7ddc87f6e4b57d61d077445a81f1c3ef2f2e54cb35ac8c90a7ed328245d14017",
+  "source_commit": "33fcfe2dce717f6df8c4d6f9dec248bce27c1a9b",
+  "test_block_bytes": 2238,
+  "test_block_sha256": "782758e80015a099f35d295aa1aa2a8a3cb0f7d3d571cb94a306073ca77b64ab",
+  "test_name": "run_reports_a_real_unix_child_signal_without_an_exit_code"
+}

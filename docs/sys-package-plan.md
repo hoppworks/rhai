@@ -755,10 +755,14 @@ Do not wait for the old signal; any future launch still needs fresh admission.
 
 Critical path: Package A is accepted only at Linux/Rust 1.77.2 → Packages B and E
 remain open with their current bounded routes stopped; C and D retain unproven
-custody prerequisites → select an independently open requirement with an unspent
-route before any further heavy run → close only uncovered integrated rows in F →
-verified fork-main integration under existing Git authorization. No upstream
-writes, production release or new Goal are authorized.
+custody prerequisites → X22 now has combined-review-READY Linux x86_64/Rust
+1.93.0 and 1.77.2 executions with its existing sensitivity control; the 1.77.2
+output and cleanup readback are recorded in `process-signal-evidence/proof.md` →
+map the remaining §6 criteria to existing proof and choose the cheapest unspent
+route; close only uncovered integrated rows in F → verified fork-main integration
+under existing Git authorization. Do not rerun either X22 Linux toolchain or its
+sensitivity control absent a relevant invalidating change. No upstream writes,
+production release or new Goal are authorized.
 Do not repeat Package A's build or six controls. Its accepted proof is tied to the
 tested source/lock/toolchain and Linux environment recorded in the preserved
 receipts. A later A rerun needs a relevant source, assertion, dependency, toolchain
@@ -932,7 +936,7 @@ source test alone or by an unreviewed/provisional result.
 | X19 | Deadline tests; `linux-managed-deadline-proof.md` and options proof | Partial: Linux timeout/partial output and owned reaping are accepted in named cases; no scheduler-independent latency guarantee or full feature/platform coverage. |
 | X20 | Scalar success and `linux-managed-success-proof.md` | Accepted for named Linux rows: normal completion before deadline. |
 | X21 | Cap tests, `linux-process-overlap-proof.md`, managed output-limit proof | Accepted for named Linux DirectChild/Managed same-step overflow-vs-deadline cases and listed cap cases; other causes/platforms remain open. |
-| X22 | `run_reports_a_real_unix_child_signal_without_an_exit_code`; `process-signal-evidence/proof.md` | Partial: Workhorse Linux x86_64/Rust 1.93.0 proves a real public-Engine SIGKILL child reports `success=false`, `code=()`, `signal=9`, is not timed out, and is reaped (`ESRCH`). Other Unix platforms, MSRV and feature rows remain open. |
+| X22 | `run_reports_a_real_unix_child_signal_without_an_exit_code`; `process-signal-evidence/proof.md` | Partial (combined review READY 2026-10-07): Workhorse Linux x86_64/Rust/Cargo 1.93.0 and 1.77.2 with `testing-environ,sys` prove a real public-Engine SIGKILL child reports `success=false`, `code=()`, `signal=9`, is not timed out, has complete output, and is reaped (`ESRCH`). Other Unix platforms and feature rows remain open. |
 | X23 | Shared-child and `linux-process-example3-proof.md` | Accepted for named Linux rows: real spawn/wait, result map, clone snapshots and cached results. |
 | X24 | Shared-child pending `wait(timeout)` and completed snapshots | Partial: Workhorse Linux x86_64/Rust 1.93.0, `testing-environ,sys` proves pending `try_wait` returns unit and terminal result is observed directly before `wait`, with exit and ESRCH readback. Other OS/MSRV/features remain open. |
 | X25 | Shared-child and managed-kill proofs | Accepted for named Linux cases: kill/wait completes with independent cleanup/readback. |

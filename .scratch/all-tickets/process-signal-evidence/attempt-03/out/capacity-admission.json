@@ -1,0 +1,32 @@
+{
+  "admitted": true,
+  "cargo_processes": "",
+  "cpus": 32,
+  "disk_free_bytes": 663682400256,
+  "disk_reserve_bytes": 17179869184,
+  "estimated_additional_peak_bytes": 2147483648,
+  "expected_input_hashes": {
+    "Cargo.lock": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+    "run-x22.sh": "b47d4b1d7293b0c455c1663785dfa8250d7d2199846e035d3b366fd4607cdfad",
+    "source.tar.gz": "752ce732a8480f3f19710d11f0f1e5e8e5231dc7f0f933bc4af3c3d95cba2499"
+  },
+  "expected_runner_sha256": "25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e",
+  "host": "workhorse",
+  "input_hashes": {
+    "Cargo.lock": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+    "run-x22.sh": "b47d4b1d7293b0c455c1663785dfa8250d7d2199846e035d3b366fd4607cdfad",
+    "source.tar.gz": "752ce732a8480f3f19710d11f0f1e5e8e5231dc7f0f933bc4af3c3d95cba2499"
+  },
+  "load_average_1_5_15": [
+    0.77392578125,
+    0.697265625,
+    0.29833984375
+  ],
+  "mem_available_bytes": 89788977152,
+  "mem_reserve_bytes": 17179869184,
+  "qemu_processes": "",
+  "runner_sha256": "25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e",
+  "session_scope": "/home/workhorse/.local/share/agent-builds/rhai/x22-sigkill-msrv-20261007-7dac936ff957",
+  "source_commit": "33fcfe2dce717f6df8c4d6f9dec248bce27c1a9b",
+  "timestamp_unix": 1791408648.2440686
+}

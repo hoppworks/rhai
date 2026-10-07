@@ -1,65 +1,56 @@
 # Coordinator state: all-tickets
 
 ## Mode
-Continue the already-authorized all-tickets implementation under strict acceptance. No new Goal or status mutation. Current Agent-Skills revision: `35ba734135a64100b891f422d4ced9d76795ab57`.
+Continue the user's already-authorized implementation under strict acceptance. Do not create/reactivate a Goal. Preserve unrelated work and foreign resources.
 
 ## Decisions
-- User authorized implementation, atomic commits/pushes and consolidation into `main` on `https://github.com/hoppworks/rhai.git`; never write to public upstream. Keep only fork `main` remotely after verified integration and cleanup.
-- Git author and committer name must be lowercase `hoppworks`; retain configured email. No co-author trailers.
-- Local accepted ticket requirements and `docs/sys-package-plan.md` §§6, 6.7 govern. Strict backend proof uses public Engine → real OS → independent readback; UI proof is inapplicable.
-- Preserve unrelated/foreign work. Do not stage current `tests/net_metadata.rs`, `tests/sys_policy.rs`, unrelated fixture formatting, or other `.scratch` evidence.
+- User authorized implementation, atomic commits/pushes and eventual consolidation to only fork `main` at `https://github.com/hoppworks/rhai.git`; never write to public upstream.
+- Commit author/committer name must be lowercase `hoppworks`; preserve configured email; no co-author trailers.
+- Requirements/evidence crosswalk: `docs/sys-package-plan.md` §§6, 6.7. Backend strict proof uses public Engine → real OS → independent readback; UI is inapplicable.
+- Keep dirty `tests/net_metadata.rs`, `tests/sys_policy.rs`, unrelated fixture formatting and other evidence out of this package.
+- Agent-Skills Main `0e846bfc577a51bd1a98a5606966aecda40320c2` contains requested `35ba734135a64100b891f422d4ced9d76795ab57`. Global/project hashes `7a0f59e7…` / `06b73a9d…`; campaign, e2e-proof, tdd and ocr-delegate unchanged. Combined reviewer returned READY under this same revision. Refresh was sent to previously involved idle MSRV agents; no new work is assigned.
 
 ## Current step
-X29 test passed on one named Workhorse Linux x86_64 / Rust-Cargo 1.93.0 / `testing-environ,sys` row. Plan row and local proof note now report partial applicability only. The exact Workhorse scope was removed after local evidence hashes matched remote readback.
+X22 attempt-03 is accepted only for Workhorse Linux x86_64, Rust/Cargo 1.77.2, `testing-environ,sys`; together with existing attempt-02 it covers named Linux 1.93.0 and 1.77.2 rows. Combined review is READY. Other Unix and feature rows remain open.
 
 ## Next action
-Review is READY with no findings. Run cheap scope/whitespace checks, commit the X29 fixture, plan row, proof and compact state as `hoppworks`, push only to fork `main`, and read back its head. Then continue the next open requirement in §6 without broad rebuilds.
+Map the remaining §6.7 rows to valid proof. First read-only candidate: X24 Linux x86_64/Rust 1.77.2. Verify its attempt-03 frozen source/test block and Cargo.lock against current inputs, and confirm the existing 1.93.0 sensitivity applies. If exact identity holds, prepare one focused Workhorse run after fresh resource admission; do not rerun X22. Preserve B/E stopped routes.
 
 ## Goal
-Implement every approved local stdlib ticket and release gate.
+Implement all approved local stdlib tickets and release-gate criteria.
 
 ## Done when
-Each platform/feature/MSRV requirement has applicable strict proof and review, integrated work is on fork `main`, and remote branch cleanup leaves only `main`; no upstream write.
+Every approved criterion has applicable strict proof and review, changes are verified on fork `main`, and final remote cleanup leaves only `main`; no public upstream write.
 
 ## Steps
-1. Review and integrate the current X29 Linux partial package.
-2. Continue remaining ticket and release-matrix criteria in `docs/sys-package-plan.md`, reusing applicable proof.
-3. Verify fork `main`, then consolidate remote branches only after verified integration.
+1. Record and atomically push the reviewed X22 Linux partial acceptance to fork `main`.
+2. Advance one coherent uncovered criterion/package at a time using valid proof and the smallest real acceptance route; retain all partial-scope labels.
+3. Verify fork `main`; remove remote branches only after approved work is integrated and verified.
 
 ## Done steps
-- Previously accepted scoped rows and evidence remain listed in §6.7 and under Accepted evidence below.
-- X29 test passed for one Linux/Rust/features row; the combined independent review is READY with no findings.
+- X29 corrected real-child challenge passed expected RED and Linux x86_64 Rust/Cargo 1.93.0 and 1.77.2 GREEN; combined review READY. Only named Linux rows accepted. Commit `33fcfe2dce717f6df8c4d6f9dec248bce27c1a9b` is pushed/read back at fork `main`, author/committer `hoppworks`.
+- X22 attempt-03 passed one focused 1.77.2 real SIGKILL test; signal 9, no timeout, complete output; independent `kill(pid,0)` returned ESRCH. Test block/archive/lock identities matched, all 13 output hashes verified, and the exact owned Workhorse scope was cleaned. Combined review READY; existing 1.93.0 and sensitivity evidence reused.
 
 ## Accepted evidence
-- Crosswalk: `docs/sys-package-plan.md` §6.7; retain each row's scope and partial status.
-- X29 details and hashes: `.scratch/all-tickets/x29-script-throw-20261007-9aec531ea61d42359544757b363f2422/proof.md` and sibling `out/attempt-02/`.
-- X24: `.scratch/all-tickets/process-try-wait-evidence/x24-try-wait-20261007-1705z-6a92d/attempt-03/`.
-- X30: `.scratch/all-tickets/process-fd-stability-evidence/x30-fd-stability-20261007-1530z/attempt-06/`.
-- Other named partials remain as listed in §6.7. Existing Rust-controller panic evidence proves only that narrower scenario.
+See `docs/sys-package-plan.md` §6.7 and linked proof files. X22 is partial only for Workhorse Linux x86_64/Rust 1.93.0 and 1.77.2 with `testing-environ,sys`. Other Unix/feature rows remain open.
 
 ## Retained resources
-- Local X29 source snapshot and attempt logs remain under `.scratch/all-tickets/x29-script-throw-20261007-9aec531ea61d42359544757b363f2422/` for review and proof. Workhorse's exact owned scope is cleaned; no compiled build is reusable.
+No active owned X22 build remains. Shared Rust 1.77.2 toolchain is intact. Exact Workhorse scope `/var/home/workhorse/.local/share/agent-builds/rhai/x22-sigkill-msrv-20261007-7dac936ff957` was removed after export/hash readback; receipt confirms no active process and path absence.
 
 ## Cause history
-- Exact test `shared_child_contract::script_throw_drops_and_reaps_a_live_child` passed once; 1 passed, 0 failed, 59 filtered. Wrong-message control was rejected. Outer harness confirmed the fixture PID live before the throw gate and then independently recorded ESRCH after drop.
-- Input snapshot revision `acbffcc84763b160576337ee6602e6a839c880fe`; only the X29 fixture was overlaid, with the accepted X30 lockfile. Workhorse preflight had no active heavy groups and passed 16 GiB memory/disk reserves. Logs/source/output hashes are in `proof.md`.
-- Two pre-assertion setup stops: first admission found the owned scope at mode 0755; first runner invoked Cargo from the wrong CWD and stopped before compilation/test. Both causes were corrected; zero X29 product failures, one accepted test run. These are distinct setup issues, not correction attempts.
-- All approved tickets and the release platform/feature/MSRV matrix remain open except exact accepted rows in §6.7. Do not infer ticket closure from X29's Linux partial.
-- Package B no-primary `Child.wait`: 3 infrastructure stops, 0 assertions; sole Expert follow-up consumed. Package E API metadata: 3 infrastructure stops, 0 assertions; sole Expert follow-up consumed. Preserve histories; changed names or Sessions do not reset them.
-- Darwin/C and Windows/D retain prior owners/bounds; do not disturb Windows guest work. Full causes/budgets and earlier accepted evidence are in `.scratch/all-tickets/journal/state-b21551dc8cf742f7ac893d26b97e94ca.md` and the referenced evidence.
+- Package B (`Child.wait`) and Package E (API metadata): each three pre-assertion infrastructure stops, zero assertions, sole Expert follow-up consumed. Do not retry those routes. Details remain in journal/package evidence.
+- X29: two earlier setup stops; corrected run expected RED plus two GREEN, zero product assertion failures. Review closed live-child observation gap without rebuild.
+- X22 attempt-03: one scoped run, two Cargo jobs, GREEN; no correction retry. Tauron's resources were not modified; its QEMU ended before fresh admission. Authorized coordination message was sent.
 
 ## Open escalations
-No active escalation. Preserve earlier consumed Expert/recovery decisions in the archived state; do not reset by changing Session or route names.
+No active escalation. B/E stop decisions and prior Expert/recovery consumption remain binding; changing Session or route name does not reset them.
 
 ## Budgets
-- Heavy-run concurrency remains MacBook 1, Workhorse/LLLM up to 3 subject to pressure; inspect activity/capacity before any next heavy run. Current time/cost/token totals are unknown where source records say unknown.
-
-## Retrospective
-This state keeps current decisions, X29 result and next action together. Detailed ticket causes, budgets and proof remain in the journal and evidence paths, avoiding another tracking layer.
-
-## Rules and agents
-Global AGENTS hash `a6b21edff45b489def01af636bfba11c85e0e6555a189235ac4f4c24c4fe43bb`; project AGENTS hash `06b73a9db5691ff5a0c5b34f98ce61e2c5df08e77161f3f93c3f7ce119d7c5de`. Relevant campaign, TDD, strict e2e-proof, OCR review and resource rules were reloaded from revision 35ba734. The central Agent-Skills checkout is at that commit with unrelated untracked `.scratch` material preserved. The X29 reviewer confirmed reloading and completed READY/no-findings. Two idle MSRV agents were told to reload before any next action; confirmation is pending and neither is assigned work.
+X22 fresh admission: 32 CPUs, load 0.77/0.70/0.30, 89,788,977,152 available RAM bytes, 663,682,400,256 free disk bytes; reserved 16 GiB each for RAM/disk plus 2 GiB expected peak. Runtime peak 1,267,691,988 bytes. Active elapsed/cost/token totals unavailable; do not infer. Preserve earlier cumulative records in journal.
 
 ## History
-The previous coordinator state is archived at `.scratch/all-tickets/journal/state-b21551dc8cf742f7ac893d26b97e94ca.md`. Keep detailed proof, cost and cause history there and in the evidence paths; do not duplicate it here.
-- Previous state: journal/state-3401eae431a4419d9f59df0405402644.md
+`state.py rewrite` archives each previous state in `.scratch/all-tickets/journal/`. Earlier approvals, causes, budgets and proofs remain there and under linked package evidence; do not reset.
+- Previous state: journal/state-84b8bffb507346d2b136601292682578.md
+
+## Retrospective
+One targeted MSRV run completed X22's named Linux row. Existing 1.93.0 and sensitivity proof were valid, so no repeated execution was needed. Hash readback, independent process observation, cleanup and one combined review closed the row.
