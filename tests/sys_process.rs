@@ -3979,6 +3979,51 @@ fn run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data() {
     }
 }
 
+#[test]
+#[cfg(not(feature = "no_index"))]
+fn default_and_nonmatching_process_policies_deny_public_run_without_starting_child() {
+    let records = TempDir::new();
+    let executable = std::env::current_exe().expect("test executable");
+    let executable_value = executable.to_string_lossy().into_owned();
+    let executable_script = executable_value.replace('\\', "\\\\").replace('"', "\\\"");
+    let invocation = |record: &std::path::Path| {
+        let record = record.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+        format!(
+            r#"run("{executable_script}", ["--exact", "process_fixture", "--nocapture", "--quiet"], #{{
+                env_clear: true,
+                env: #{{ {FIXTURE_ENV}: "0", {FIXTURE_RECORD_ENV}: "{record}" }},
+                timeout: 5
+            }})"#
+        )
+    };
+
+    let default_record = records.path().join("default-policy-child.txt");
+    let default_engine = engine(SysConfig::default());
+    let default_error = sys_support::sys_err(&default_engine, &invocation(&default_record));
+    assert!(matches!(&default_error, SysError::Denied(_)), "default process policy returned {default_error:?}");
+    assert!(!default_record.exists(), "default-denied Engine run started the child");
+
+    let mismatch_record = records.path().join("allowlist-mismatch-child.txt");
+    let executable_parent = executable.parent().expect("test executable parent").to_string_lossy().into_owned();
+    let mismatch_engine = engine(SysConfig::default().programs(ProgramPolicy::AllowList(vec![executable_parent])));
+    let mismatch_error = sys_support::sys_err(&mismatch_engine, &invocation(&mismatch_record));
+    assert!(matches!(&mismatch_error, SysError::Denied(_)), "nonmatching allowlist returned {mismatch_error:?}");
+    assert!(!mismatch_record.exists(), "nonmatching allowlist started the child");
+
+    let control_record = records.path().join("allowlist-control-child.txt");
+    let control_engine = engine(SysConfig::default().programs(ProgramPolicy::AllowList(vec![executable_value])));
+    let control_result = control_engine.eval::<Map>(&invocation(&control_record)).expect("matching allowlist should run the fixture");
+    assert_eq!(control_result["success"].as_bool(), Ok(true));
+    assert_child_record(&control_record, 0);
+    let control_record_contents = std::fs::read_to_string(&control_record).unwrap();
+    eprintln!(
+        "denied child markers absent: default={}, allowlist-mismatch={}; allowed child record: {}",
+        !default_record.exists(),
+        !mismatch_record.exists(),
+        control_record_contents.trim()
+    );
+}
+
 #[cfg(not(feature = "no_index"))]
 fn assert_child_record(path: &std::path::Path, code: rhai::INT) {
     let record = std::fs::read_to_string(path).unwrap();

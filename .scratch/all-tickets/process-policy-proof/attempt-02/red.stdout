@@ -1,0 +1,11 @@
+
+running 1 test
+test default_and_nonmatching_process_policies_deny_public_run_without_starting_child ... FAILED
+
+failures:
+
+failures:
+    default_and_nonmatching_process_policies_deny_public_run_without_starting_child
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 48 filtered out; finished in 0.00s
+

@@ -781,8 +781,8 @@ source test alone or by an unreviewed/provisional result.
 
 | ID | Current test/evidence | Applicability and remaining gap |
 |---|---|---|
-| P2 | `tests/sys_policy.rs`; no default-process test | Open: default Engine `run` denial and independent no-child observation are not covered. |
-| P10 | `ProgramPolicy` predicate tests in `tests/sys_policy.rs` | Open: no public Engine denied invocation with proof that no child was created. |
+| P2 | `tests/sys_process.rs::default_and_nonmatching_process_policies_deny_public_run_without_starting_child`; Linux proof in `.scratch/all-tickets/process-policy-proof/attempt-02/proof.md` | Partial: Workhorse Linux x86_64/Rust 1.96.0 proves public Engine denial under default policy and no child marker. Strict native OS/MSRV and feature-matrix rows remain open. |
+| P10 | Same public Engine test and proof; exact allow-list success control | Partial: Workhorse Linux x86_64/Rust 1.96.0 proves a nonmatching allow-list returns `Denied`, leaves its child marker absent, and has an exact-match success control. Strict native OS/MSRV and feature-matrix rows remain open. |
 | P11 | `process_cwd_uses_the_opened_filesystem_capability_after_root_replacement`; `linux-process-options-proof.md` | Partial: Linux capability-held cwd and denied symlink escape are accepted in named rows; escape denial proves no fixture record, not absence of every transient process, and does not cover every outside-root cwd form. |
 | P13 | `tests/sys_process_windows.rs` | Open: existing Windows test covers raw output/nonzero exit, not default `.bat`/`.cmd` denial. |
 | X1 | `scalar_run_with_cwd_works_without_collections`; `linux-scalar-process-proof.md` | Accepted for named Linux feature rows: public Engine success, exit 0 and independent child record; no wider matrix follows. |

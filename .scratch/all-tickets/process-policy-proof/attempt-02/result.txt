@@ -1,0 +1,2 @@
+broken-policy control: expected failure at sys_support::sys_err expect_err
+restored test: passed; assertions verify both denied markers absent, exact allow-list child record read, and direct child reaped (ESRCH)

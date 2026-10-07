@@ -1,0 +1,49 @@
+{
+  "active_heavy_processes": [],
+  "agent_skills_revision": "14617043b70d1ba2d40b720832cbad294fa8c008",
+  "agent_skills_untracked_scratch": [
+    "?? .scratch/acceptance-overhead-plan-20261006/",
+    "?? .scratch/disk-pressure-cleanup-20261007/",
+    "?? .scratch/harness-efficiency-20261003/",
+    "?? .scratch/machine-heavy-runs-20261004/"
+  ],
+  "archive_entries": 6703,
+  "cargo_version": "cargo 1.96.0 (30a34c682 2026-05-25)",
+  "disk_free_bytes": 609391931392,
+  "inputs": {
+    "run.sh": "dd51d8279e4848f0da2583b1024d2139a0324a3f4bc4906a41b341094613c55b",
+    "run_scoped.py.local": "25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e",
+    "runner": "25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e",
+    "source.tar": "d4a1378c68ba17eb9e716f0b20d5a912aa64e753404fabd78548fe0fd73707a0",
+    "source/Cargo.lock": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+    "source/tests/sys_process.rs": "ddce2dcb86e423229b857f42d79d6bae59dd44776f6831ac1fe9c213574f500b"
+  },
+  "load": [
+    0.0,
+    0.0166015625,
+    0.04345703125
+  ],
+  "machine": {
+    "machine": "x86_64",
+    "release": "7.2.7-ogc1.1.fc44.x86_64",
+    "system": "Linux"
+  },
+  "mem_available_kib": 91709856,
+  "ready": true,
+  "rule_hashes": {
+    "campaign": "342885a50ec612bed6f43876457ec234f4a5784c5a94abdce592383987ce0d61",
+    "e2e-proof": "7f3f4d2c273e53bd89883e6254285b95aebc53976299c04d103d22be59846459",
+    "global": "81b103fac482171e3ea72e23d6c0dffac553359f3f75f610506e00c182d1f277",
+    "tdd": "cb01f66bebfaa25fa1f88e6b7e769cd9fd9f35b1120b8563749820738814c927"
+  },
+  "rustc_version": "rustc 1.96.0 (ac68faa20 2026-05-25)",
+  "scope_entries": [
+    "remote-preflight.py",
+    "run.sh",
+    "run_scoped.py.local",
+    "source",
+    "source.tar"
+  ],
+  "scope_owner_uid": 1000,
+  "utc_epoch": 1791375058
+}

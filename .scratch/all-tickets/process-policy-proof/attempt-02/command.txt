@@ -1,0 +1,1 @@
+cargo test --locked --features testing-environ,sys --test sys_process default_and_nonmatching_process_policies_deny_public_run_without_starting_child -- --exact --nocapture --test-threads=1

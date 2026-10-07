@@ -1,0 +1,286 @@
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded const-random v0.1.18
+  Downloaded ambient-authority v0.0.2
+  Downloaded crunchy v0.2.4
+  Downloaded errno v0.3.14
+  Downloaded const-random-macro v0.1.16
+  Downloaded cfg-if v1.0.5
+  Downloaded byteorder v1.5.0
+  Downloaded maybe-owned v0.3.4
+  Downloaded fs-set-times v0.20.3
+  Downloaded cap-std v4.0.3
+  Downloaded autocfg v1.5.1
+  Downloaded itoa v1.0.15
+  Downloaded bitflags v2.13.2
+  Downloaded ipnet v2.12.2
+  Downloaded io-lifetimes v3.0.1
+  Downloaded version_check v0.9.5
+  Downloaded getrandom v0.2.17
+  Downloaded smartstring v1.0.1
+  Downloaded paste v1.0.15
+  Downloaded tiny-keccak v2.0.2
+  Downloaded io-lifetimes v2.0.4
+  Downloaded static_assertions v1.1.0
+  Downloaded rmp v0.8.14
+  Downloaded rustix-linux-procfs v0.1.1
+  Downloaded quote v1.0.41
+  Downloaded ryu v1.0.20
+  Downloaded unicode-ident v1.0.22
+  Downloaded num-traits v0.2.19
+  Downloaded thin-vec v0.2.19
+  Downloaded rmp-serde v1.3.0
+  Downloaded ahash v0.8.12
+  Downloaded smallvec v1.16.2
+  Downloaded once_cell v1.21.4
+  Downloaded io-extras v0.19.0
+  Downloaded serde_core v1.0.229
+  Downloaded getrandom v0.3.4
+  Downloaded cap-primitives v4.0.3
+  Downloaded proc-macro2 v1.0.103
+  Downloaded memchr v2.8.3
+  Downloaded serde v1.0.229
+  Downloaded serde_json v1.0.145
+  Downloaded portable-atomic v1.15.0
+  Downloaded zerocopy v0.8.59
+  Downloaded syn v2.0.106
+  Downloaded rustix v1.1.5
+  Downloaded libc v0.2.189
+  Downloaded linux-raw-sys v0.12.1
+   Compiling autocfg v1.5.1
+   Compiling portable-atomic v1.15.0
+   Compiling version_check v0.9.5
+   Compiling crunchy v0.2.4
+   Compiling libc v0.2.189
+   Compiling rustix v1.1.5
+   Compiling cfg-if v1.0.5
+   Compiling io-lifetimes v2.0.4
+   Compiling bitflags v2.13.2
+   Compiling io-lifetimes v3.0.1
+   Compiling proc-macro2 v1.0.103
+   Compiling linux-raw-sys v0.12.1
+   Compiling tiny-keccak v2.0.2
+   Compiling once_cell v1.21.4
+   Compiling num-traits v0.2.19
+   Compiling unicode-ident v1.0.22
+   Compiling io-extras v0.19.0
+   Compiling quote v1.0.41
+   Compiling getrandom v0.2.17
+   Compiling cap-primitives v4.0.3
+   Compiling zerocopy v0.8.59
+   Compiling getrandom v0.3.4
+   Compiling serde_core v1.0.229
+   Compiling const-random-macro v0.1.16
+   Compiling fs-set-times v0.20.3
+   Compiling rustix-linux-procfs v0.1.1
+   Compiling ahash v0.8.12
+   Compiling smartstring v1.0.1
+   Compiling ambient-authority v0.0.2
+   Compiling paste v1.0.15
+   Compiling cap-std v4.0.3
+   Compiling ipnet v2.12.2
+   Compiling maybe-owned v0.3.4
+   Compiling syn v2.0.106
+   Compiling const-random v0.1.18
+   Compiling serde v1.0.229
+   Compiling rhai v1.26.1 (/var/home/workhorse/.local/share/agent-builds/rhai/rhai-process-policy-20261007-800babdf0222466d9fce718cb2c4a559/agent-build-r6aci0bs/source)
+   Compiling static_assertions v1.1.0
+   Compiling rhai_codegen v3.2.0 (/var/home/workhorse/.local/share/agent-builds/rhai/rhai-process-policy-20261007-800babdf0222466d9fce718cb2c4a559/agent-build-r6aci0bs/source/codegen)
+   Compiling serde_json v1.0.145
+   Compiling thin-vec v0.2.19
+   Compiling smallvec v1.16.2
+   Compiling byteorder v1.5.0
+   Compiling rmp v0.8.14
+   Compiling memchr v2.8.3
+   Compiling itoa v1.0.15
+   Compiling ryu v1.0.20
+   Compiling rmp-serde v1.3.0
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:678:13
+    |
+678 |         let mut wait_operation = "wait for child";
+    |             ----^^^^^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `termination`
+    --> src/packages/sys/process/unix.rs:1118:22
+     |
+1118 |                 let (termination, _operation) = if self.managed {
+     |                      ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_termination`
+     |
+     = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2192:9
+     |
+2192 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2514:9
+     |
+2514 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variant `OnlyZombieLeader` is never constructed
+  --> src/packages/sys/process/unix.rs:50:5
+   |
+47 | enum GroupCloseOutcome {
+   |      ----------------- variant in this enum
+...
+50 |     OnlyZombieLeader,
+   |     ^^^^^^^^^^^^^^^^
+   |
+   = note: `GroupCloseOutcome` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: methods `numeric_operations_probe`, `quarantine_observations_probe`, and `fail_reservation` are never used
+    --> src/packages/sys/process/unix.rs:1536:8
+     |
+1409 | impl ExecutionFaults {
+     | -------------------- methods in this implementation
+...
+1536 |     fn numeric_operations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1547 |     fn quarantine_observations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1572 |     fn fail_reservation(&self) -> bool {
+     |        ^^^^^^^^^^^^^^^^
+
+warning: `rhai` (lib) generated 6 warnings (run `cargo fix --lib -p rhai` to apply 4 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+   --> tests/sys_process.rs:912:9
+    |
+912 |     let mut holder = command.spawn().expect("start escaped captured-pipe holder");
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: value assigned to `incomplete` is never read
+    --> tests/sys_process.rs:1329:30
+     |
+1329 |         let mut incomplete = false;
+     |                              ^^^^^ this value is reassigned later and never used
+...
+1398 |                 incomplete = pending;
+     |                 -------------------- `incomplete` is overwritten here before the previous value is read
+     |
+     = note: `#[warn(unused_assignments)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `state`
+    --> tests/sys_process.rs:1631:26
+     |
+1631 |                 Ok(Some((state, parent, group, start)))
+     |                          ^^^^^ help: if this is intentional, prefix it with an underscore: `_state`
+     |
+     = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:2224:9
+     |
+2224 |     let mut sentinel = managed_spawn_sentinel();
+     |         ----^^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:2332:9
+     |
+2332 |     let mut sentinel = managed_spawn_sentinel();
+     |         ----^^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:2522:9
+     |
+2522 |     let mut sentinel = Sentinel(
+     |         ----^^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:2653:9
+     |
+2653 |     let mut sentinel = managed_spawn_sentinel();
+     |         ----^^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:2821:9
+     |
+2821 |     let mut sentinel = Sentinel(
+     |         ----^^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:2961:9
+     |
+2961 |     let mut sentinel = Sentinel(
+     |         ----^^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: constant `DIRECT_DROP_RECORD_ENV` is never used
+  --> tests/sys_process.rs:38:7
+   |
+38 | const DIRECT_DROP_RECORD_ENV: &str = "RHAI_SYS_DIRECT_DROP_RECORD";
+   |       ^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused `Dynamic` that must be used
+   --> tests/fixtures/sys_process_shared_child_contract.rs:239:5
+    |
+239 |     engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("kill after completion is idempotent");
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` (part of `#[warn(unused)]`) on by default
+help: use `let _ = ...` to ignore the resulting value
+    |
+239 |     let _ = engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("kill after completion is idempotent");
+    |     +++++++
+
+warning: unused `Dynamic` that must be used
+   --> tests/fixtures/sys_process_shared_child_contract.rs:240:5
+    |
+240 |     engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("repeated kill after completion is idempotent");
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+help: use `let _ = ...` to ignore the resulting value
+    |
+240 |     let _ = engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("repeated kill after completion is idempotent");
+    |     +++++++
+
+warning: `rhai` (test "sys_process") generated 12 warnings (run `cargo fix --test "sys_process" -p rhai` to apply 8 suggestions)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 14.88s
+     Running tests/sys_process.rs (/var/home/workhorse/.local/share/agent-builds/rhai/rhai-process-policy-20261007-800babdf0222466d9fce718cb2c4a559/agent-build-r6aci0bs/target/debug/deps/sys_process-94df0f6fe3844008)
+
+thread 'default_and_nonmatching_process_policies_deny_public_run_without_starting_child' (1680399) panicked at tests/sys_support/mod.rs:103:34:
+script should fail with a SysError: ()
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+error: test failed, to rerun pass `--test sys_process`

@@ -85,6 +85,43 @@ other package or release is marked complete. The next campaign action must use
 an independently open requirement and an unspent execution route; no current
 Package E build is authorized by the exhausted allowance.
 
+### P2/P10 public Engine process-policy slice — partial proof recorded
+
+The focused test `tests/sys_process.rs::default_and_nonmatching_process_policies_deny_public_run_without_starting_child`
+now covers public Engine `run` under the default process policy and a nonmatching
+exact allow-list. Both calls return `SysError::Denied` and leave independent child
+marker paths absent. An exact allow-list control runs the real test executable,
+reads its child-written PID/exit record, and verifies `kill(pid, 0)` returns
+`ESRCH`, proving the direct child was reaped before `run` returned. No product
+source changed. This closes only the tested Workhorse Linux x86_64/Rust 1.96.0
+slice; native OS, MSRV and required feature rows remain open, so P2/P10 remain
+partial and the ticket is open.
+
+Attempt 01 is preserved under `process-policy-proof/attempt-01/`: metadata and
+dependency compilation passed, then test compilation stopped because
+`Dynamic::as_bool()` returns `Result<bool, _>` while the new assertion expected an
+`Option`. It exited before either RED or GREEN assertion; this was one test-source
+compile correction, zero product failures and zero assertion evidence. Attempt 02
+used the same target after the type correction. Its deliberate broken-default
+control exited 101 at the expected `sys_err` assertion, and the restored source
+passed: `1 passed; 0 failed`. Raw outputs, command, tool versions, source/lock
+hashes and the preflight readback are in `process-policy-proof/attempt-02/`.
+`proof.md` records their applicability and limitations.
+
+The single 900-second/two-job run used Workhorse central `run_scoped.py` SHA-256
+`25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e` and Agent
+Skills revision `14617043b70d1ba2d40b720832cbad294fa8c008`. The pinned lock came
+from accepted Package A attempt 05 (`2ba4b3a0…`); manifests were unchanged since
+that accepted baseline. Workhorse input and result hashes matched on readback.
+The private runtime was removed by the runner. After confirming no Cargo/rustc or
+scoped runner remained, the exact owned session scope was cleaned; no compiled
+artifact is reusable. The 442 MiB attempt-01 staging archive was discarded after
+recording its SHA-256; source/test inputs and both attempts' raw results remain.
+
+P2/P10 acceptance is still open across the strict native OS, MSRV and feature
+matrix. Their stopped Package B and Package E routes and budgets are unchanged;
+this independent test does not reopen or reset either route.
+
 Rules re-read for this Session: central agent-skills HEAD
 `14617043b70d1ba2d40b720832cbad294fa8c008`; project and applicable skill hashes
 are recorded in the historical planning record below. This does not claim that
@@ -4079,3 +4116,11 @@ Native terminal0; control and measurement tests0, rows10start/6capture/2live/2cl
 
 ### Performance native1 recovery and closure
 Same-archive consumer5b708 affected READY, actual local wrong-runtime control rejects. Fresh custody82identities/62samplers/12heldfixtures and exact stage retirement passed. Separate root read confirmed84PID/start identities including two launchers,8ownedgroups,6logical/physical stage/scope/runtimepaths absent or reused/empty. All originals unchanged; one recovered collector infrastructure failure, source failed correction1 unchanged, native allocations1. No retained performance runtime/stage. Final combined actual proof review pending; same12:38planning checkpoint.
+
+### Process public-policy regression package review
+Combined independent review of the staged test, runner/preflight, plan and original
+attempt evidence found no actionable correctness, scope or proof-claim findings.
+The Linux/Rust 1.96.0 result closes only the exercised denial/allow-list child
+reaping behavior on that configuration; P2/P10 remain partial and open for the
+uncovered platform, MSRV and feature matrix. Unrelated dirty tests and historical
+scratch evidence remain outside this package.
