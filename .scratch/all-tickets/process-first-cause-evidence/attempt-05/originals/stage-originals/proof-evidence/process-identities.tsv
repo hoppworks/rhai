@@ -1,0 +1,106 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+helper	1668860	1668859	1668859	18682817	python3 /root/rhai-linux-process-first-cause-fc-20261007-ack05-7d11e2c4/linux-process-first-cause-proof.py
+scoped-supervisor	1668859	1668840	1668859	18682815	/usr/bin/python3 /var/roothome/rhai-linux-process-first-cause-fc-20261007-ack05-7d11e2c4/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-process-first-cause-fc-20261007-ack05-7d11e2c4/linux-process-first-cause-proof.py
+command:rustup-install	1668862	1668860	1668859	18682821	/root/.cargo/bin/rustup toolchain install 1.77.2-x86_64-unknown-linux-gnu --profile minimal --no-self-update
+command:du	1668863	1668860	1668859	18682821	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1668872	1668860	1668859	18682821	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1668893	1668860	1668859	18682922	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1668894	1668860	1668859	18682922	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1668914	1668860	1668859	18683023	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1668915	1668860	1668859	18683024	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1668934	1668860	1668859	18683124	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1668935	1668860	1668859	18683125	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1668947	1668860	1668859	18683225	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1668948	1668860	1668859	18683226	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1668967	1668860	1668859	18683326	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1668968	1668860	1668859	18683327	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1668980	1668860	1668859	18683428	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1668981	1668860	1668859	18683428	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1668992	1668860	1668859	18683509	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1668993	1668860	1668859	18683509	/bin/ps -e -o pid=,ppid=,rss=
+command:rustc-version	1668994	1668860	1668859	18683510	/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc --version --verbose
+command:du	1668995	1668860	1668859	18683510	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1668996	1668860	1668859	18683510	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1668998	1668860	1668859	18683521	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1668999	1668860	1668859	18683521	/bin/ps -e -o pid=,ppid=,rss=
+command:cargo-version	1669000	1668860	1668859	18683522	/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo --version --verbose
+command:du	1669001	1668860	1668859	18683522	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1669002	1668860	1668859	18683522	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1669015	1668860	1668859	18683532	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1669016	1668860	1668859	18683533	/bin/ps -e -o pid=,ppid=,rss=
+command:baseline-red-direct	1669018	1668860	1668859	18683539	/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --lib --features testing-environ,sys packages::sys::process::unix::tests::committed_stdout_cause_survives_stderr_overflow_direct_child -- --exact --nocapture --test-threads=1
+command:du	1669019	1668860	1668859	18683539	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1669020	1668860	1668859	18683539	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1669038	1668860	1668859	18683640	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1669039	1668860	1668859	18683640	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1669052	1668860	1668859	18683741	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1669053	1668860	1668859	18683741	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1669065	1668860	1668859	18683842	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1669066	1668860	1668859	18683843	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1669273	1668860	1668859	18683944	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1669274	1668860	1668859	18683944	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1669463	1668860	1668859	18684045	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1669468	1668860	1668859	18684046	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1669665	1668860	1668859	18684147	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1669666	1668860	1668859	18684148	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1669750	1668860	1668859	18684249	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1669751	1668860	1668859	18684249	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1669819	1668860	1668859	18684351	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1669820	1668860	1668859	18684351	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1669912	1668860	1668859	18684452	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1669913	1668860	1668859	18684453	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1669924	1668860	1668859	18684554	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1669925	1668860	1668859	18684555	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1669936	1668860	1668859	18684656	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1669938	1668860	1668859	18684657	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1669956	1668860	1668859	18684757	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1669957	1668860	1668859	18684758	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1669979	1668860	1668859	18684859	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1669980	1668860	1668859	18684860	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1669996	1668860	1668859	18684931	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1669997	1668860	1668859	18684932	/bin/ps -e -o pid=,ppid=,rss=
+command:baseline-red-managed	1669998	1668860	1668859	18684932	/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --lib --features testing-environ,sys packages::sys::process::unix::tests::committed_stdout_cause_survives_stderr_overflow_managed -- --exact --nocapture --test-threads=1
+command:du	1669999	1668860	1668859	18684933	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1670002	1668860	1668859	18684933	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1670011	1668860	1668859	18684944	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1670012	1668860	1668859	18684945	/bin/ps -e -o pid=,ppid=,rss=
+command:overwrite-red-direct	1670013	1668860	1668859	18684945	/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --lib --features testing-environ,sys packages::sys::process::unix::tests::committed_stdout_cause_survives_stderr_overflow_direct_child -- --exact --nocapture --test-threads=1
+command:du	1670014	1668860	1668859	18684946	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1670018	1668860	1668859	18684946	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1670034	1668860	1668859	18685047	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1670035	1668860	1668859	18685048	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1670046	1668860	1668859	18685149	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1670047	1668860	1668859	18685149	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1670058	1668860	1668859	18685250	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1670059	1668860	1668859	18685251	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1670084	1668860	1668859	18685352	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1670086	1668860	1668859	18685353	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1670109	1668860	1668859	18685454	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1670110	1668860	1668859	18685455	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1670112	1668860	1668859	18685465	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1670113	1668860	1668859	18685466	/bin/ps -e -o pid=,ppid=,rss=
+command:overwrite-red-managed	1670114	1668860	1668859	18685467	/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --lib --features testing-environ,sys packages::sys::process::unix::tests::committed_stdout_cause_survives_stderr_overflow_managed -- --exact --nocapture --test-threads=1
+command:du	1670115	1668860	1668859	18685467	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1670120	1668860	1668859	18685468	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1670127	1668860	1668859	18685479	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1670128	1668860	1668859	18685479	/bin/ps -e -o pid=,ppid=,rss=
+command:restored-green-direct	1670129	1668860	1668859	18685480	/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --lib --features testing-environ,sys packages::sys::process::unix::tests::committed_stdout_cause_survives_stderr_overflow_direct_child -- --exact --nocapture --test-threads=1
+command:du	1670130	1668860	1668859	18685480	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1670133	1668860	1668859	18685481	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1670150	1668860	1668859	18685582	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1670151	1668860	1668859	18685582	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1670162	1668860	1668859	18685683	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1670163	1668860	1668859	18685684	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1670174	1668860	1668859	18685785	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1670176	1668860	1668859	18685786	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1670198	1668860	1668859	18685886	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1670200	1668860	1668859	18685887	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1670225	1668860	1668859	18685988	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1670226	1668860	1668859	18685989	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1670228	1668860	1668859	18686000	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1670229	1668860	1668859	18686001	/bin/ps -e -o pid=,ppid=,rss=
+command:restored-green-managed	1670230	1668860	1668859	18686001	/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --lib --features testing-environ,sys packages::sys::process::unix::tests::committed_stdout_cause_survives_stderr_overflow_managed -- --exact --nocapture --test-threads=1
+command:du	1670231	1668860	1668859	18686001	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1670236	1668860	1668859	18686002	/bin/ps -e -o pid=,ppid=,rss=
+command:du	1670243	1668860	1668859	18686013	/usr/bin/du -sk /root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv
+command:ps	1670244	1668860	1668859	18686014	/bin/ps -e -o pid=,ppid=,rss=

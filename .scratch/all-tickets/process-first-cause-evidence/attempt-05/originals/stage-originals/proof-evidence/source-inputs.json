@@ -1,0 +1,15 @@
+{
+  "archive_sha256": "7349eb41f02f071692f3339e90a01e35f1f600c6b365b507f3968213917cc262",
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "phases": [
+    "baseline-red",
+    "overwrite-red",
+    "restored-green"
+  ],
+  "selected_tests": {
+    "direct": "packages::sys::process::unix::tests::committed_stdout_cause_survives_stderr_overflow_direct_child",
+    "managed": "packages::sys::process::unix::tests::committed_stdout_cause_survives_stderr_overflow_managed"
+  },
+  "source_revision": "ce1f40b23588ba08b260439c7f441d8318368425",
+  "source_sha256": "7e9fa4f523c4a9212af858222787849306b01087af6555b092d68fe717fd7ce4"
+}

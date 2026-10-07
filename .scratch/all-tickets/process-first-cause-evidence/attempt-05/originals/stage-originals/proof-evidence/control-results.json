@@ -1,0 +1,68 @@
+[
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "baseline-red-direct",
+    "required_diagnostics": [
+      "the first committed stdout overflow must remain the public cause"
+    ],
+    "required_output": [
+      "first-cause mode=direct"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "baseline-red-managed",
+    "required_diagnostics": [
+      "the first committed stdout overflow must remain the public cause"
+    ],
+    "required_output": [
+      "first-cause mode=managed"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "overwrite-red-direct",
+    "required_diagnostics": [
+      "the first committed stdout overflow must remain the public cause"
+    ],
+    "required_output": [
+      "first-cause mode=direct"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 101,
+    "intended_assertion_observed": true,
+    "name": "overwrite-red-managed",
+    "required_diagnostics": [
+      "the first committed stdout overflow must remain the public cause"
+    ],
+    "required_output": [
+      "first-cause mode=managed"
+    ],
+    "status": 101
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": [
+      "first-cause mode=direct",
+      "test result: ok. 1 passed; 0 failed;"
+    ],
+    "name": "restored-green-direct",
+    "status": 0
+  },
+  {
+    "expected_status": 0,
+    "independent_readback": [
+      "first-cause mode=managed",
+      "test result: ok. 1 passed; 0 failed;"
+    ],
+    "name": "restored-green-managed",
+    "status": 0
+  }
+]

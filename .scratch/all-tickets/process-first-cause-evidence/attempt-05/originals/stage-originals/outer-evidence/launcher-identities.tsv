@@ -1,0 +1,3 @@
+label	pid	ppid	pgid	start_ticks	cmdline
+launcher	1668831	1668771	1668771	18682807	/root/rhai-linux-process-first-cause-fc-20261007-ack05-7d11e2c4/launch.sh
+run-scoped	1668840	1668831	1668771	18682808	bash /root/rhai-linux-process-first-cause-fc-20261007-ack05-7d11e2c4/launch.sh

@@ -1,0 +1,25 @@
+{
+  "source_revision": "ce1f40b23588ba08b260439c7f441d8318368425",
+  "native_launch": 1,
+  "campaign_allocation": 5,
+  "preflight_source_sha256": "07db28d37bd0be926f2cb1ee944960d57cf1c3a2bd6198e6b1173e0181d1142c",
+  "slot_wrapper_source_sha256": "7b62a0658ed38097d110ea4e22814e534959e51fdd6e90dfb5e006f485177fa0",
+  "classification": "initial planning estimate, all launches counted",
+  "preflight": {
+    "utc": "2026-10-07T11:49:22Z",
+    "ready": true,
+    "inputs_verified": 16,
+    "heavy": [],
+    "mem_available_kib": 92099132,
+    "disk_free_bytes": 610318708736,
+    "load": [
+      0.54345703125,
+      0.2333984375,
+      0.1611328125
+    ],
+    "scope_absent": true
+  },
+  "outer_seconds": 600,
+  "runner_seconds": 585,
+  "helper_seconds": 540
+}

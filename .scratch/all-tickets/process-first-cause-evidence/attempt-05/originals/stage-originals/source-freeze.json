@@ -1,0 +1,10 @@
+{
+  "files": {
+    "Cargo.lock.accepted": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+    "source.tar": "7349eb41f02f071692f3339e90a01e35f1f600c6b365b507f3968213917cc262"
+  },
+  "fixture_adapter_patch_sha256": "9de7870aec0ffe080ffe64bf218c803e4d334f65558eeb38fd99be518be7d89c",
+  "format": 1,
+  "source_revision": "ce1f40b23588ba08b260439c7f441d8318368425",
+  "test_source_sha256": "7e9fa4f523c4a9212af858222787849306b01087af6555b092d68fe717fd7ce4"
+}

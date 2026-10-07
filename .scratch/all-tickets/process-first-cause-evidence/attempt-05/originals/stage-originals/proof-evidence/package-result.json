@@ -1,0 +1,580 @@
+{
+  "acceptance_claim": false,
+  "archive_sha256": "7349eb41f02f071692f3339e90a01e35f1f600c6b365b507f3968213917cc262",
+  "commands": [
+    {
+      "argv": [
+        "/root/.cargo/bin/rustup",
+        "toolchain",
+        "install",
+        "1.77.2-x86_64-unknown-linux-gnu",
+        "--profile",
+        "minimal",
+        "--no-self-update"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv",
+      "effective_env": {
+        "CARGO_BUILD_JOBS": "2",
+        "CARGO_HOME": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/cargo-home",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "0",
+        "CARGO_TARGET_DIR": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/target",
+        "CARGO_TERM_COLOR": "never",
+        "HOME": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/home",
+        "PATH": "/usr/bin:/bin:/usr/sbin:/sbin",
+        "RUSTUP_HOME": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home",
+        "RUST_BACKTRACE": "0",
+        "TEMP": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/tmp",
+        "TMP": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/tmp",
+        "TMPDIR": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/tmp"
+      },
+      "env_overrides": {},
+      "expected_status": 0,
+      "finished_monotonic_seconds": 6.899,
+      "name": "rustup-install",
+      "spawned": true,
+      "started_monotonic_seconds": 0.011,
+      "status": 0,
+      "stderr": "evidence/rustup-install.stderr",
+      "stdout": "evidence/rustup-install.stdout"
+    },
+    {
+      "argv": [
+        "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+        "--version",
+        "--verbose"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv",
+      "effective_env": {
+        "CARGO_BUILD_JOBS": "2",
+        "CARGO_HOME": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/cargo-home",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "0",
+        "CARGO_TARGET_DIR": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/target",
+        "CARGO_TERM_COLOR": "never",
+        "HOME": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/home",
+        "PATH": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "RUSTC": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+        "RUSTUP_HOME": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home",
+        "RUST_BACKTRACE": "0",
+        "TEMP": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/tmp",
+        "TMP": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/tmp",
+        "TMPDIR": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/tmp"
+      },
+      "env_overrides": {},
+      "expected_status": 0,
+      "finished_monotonic_seconds": 7.018,
+      "name": "rustc-version",
+      "spawned": true,
+      "started_monotonic_seconds": 6.899,
+      "status": 0,
+      "stderr": "evidence/rustc-version.stderr",
+      "stdout": "evidence/rustc-version.stdout"
+    },
+    {
+      "argv": [
+        "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+        "--version",
+        "--verbose"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv",
+      "effective_env": {
+        "CARGO_BUILD_JOBS": "2",
+        "CARGO_HOME": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/cargo-home",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "0",
+        "CARGO_TARGET_DIR": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/target",
+        "CARGO_TERM_COLOR": "never",
+        "HOME": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/home",
+        "PATH": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "RUSTC": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+        "RUSTUP_HOME": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home",
+        "RUST_BACKTRACE": "0",
+        "TEMP": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/tmp",
+        "TMP": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/tmp",
+        "TMPDIR": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/tmp"
+      },
+      "env_overrides": {},
+      "expected_status": 0,
+      "finished_monotonic_seconds": 7.138,
+      "name": "cargo-version",
+      "spawned": true,
+      "started_monotonic_seconds": 7.018,
+      "status": 0,
+      "stderr": "evidence/cargo-version.stderr",
+      "stdout": "evidence/cargo-version.stdout"
+    },
+    {
+      "argv": [
+        "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--locked",
+        "--lib",
+        "--features",
+        "testing-environ,sys",
+        "packages::sys::process::unix::tests::committed_stdout_cause_survives_stderr_overflow_direct_child",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/source",
+      "effective_env": {
+        "CARGO_BUILD_JOBS": "2",
+        "CARGO_HOME": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/cargo-home",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "0",
+        "CARGO_TARGET_DIR": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/target",
+        "CARGO_TERM_COLOR": "never",
+        "HOME": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/home",
+        "PATH": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "RUSTC": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+        "RUSTUP_HOME": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home",
+        "RUST_BACKTRACE": "0",
+        "TEMP": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/tmp",
+        "TMP": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/tmp",
+        "TMPDIR": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/tmp"
+      },
+      "env_overrides": {},
+      "expected_status": 101,
+      "finished_monotonic_seconds": 21.126,
+      "name": "baseline-red-direct",
+      "spawned": true,
+      "started_monotonic_seconds": 7.187,
+      "status": 101,
+      "stderr": "evidence/baseline-red-direct.stderr",
+      "stdout": "evidence/baseline-red-direct.stdout"
+    },
+    {
+      "argv": [
+        "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--locked",
+        "--lib",
+        "--features",
+        "testing-environ,sys",
+        "packages::sys::process::unix::tests::committed_stdout_cause_survives_stderr_overflow_managed",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/source",
+      "effective_env": {
+        "CARGO_BUILD_JOBS": "2",
+        "CARGO_HOME": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/cargo-home",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "0",
+        "CARGO_TARGET_DIR": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/target",
+        "CARGO_TERM_COLOR": "never",
+        "HOME": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/home",
+        "PATH": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "RUSTC": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+        "RUSTUP_HOME": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home",
+        "RUST_BACKTRACE": "0",
+        "TEMP": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/tmp",
+        "TMP": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/tmp",
+        "TMPDIR": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/tmp"
+      },
+      "env_overrides": {},
+      "expected_status": 101,
+      "finished_monotonic_seconds": 21.255,
+      "name": "baseline-red-managed",
+      "spawned": true,
+      "started_monotonic_seconds": 21.126,
+      "status": 101,
+      "stderr": "evidence/baseline-red-managed.stderr",
+      "stdout": "evidence/baseline-red-managed.stdout"
+    },
+    {
+      "argv": [
+        "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--locked",
+        "--lib",
+        "--features",
+        "testing-environ,sys",
+        "packages::sys::process::unix::tests::committed_stdout_cause_survives_stderr_overflow_direct_child",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/source",
+      "effective_env": {
+        "CARGO_BUILD_JOBS": "2",
+        "CARGO_HOME": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/cargo-home",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "0",
+        "CARGO_TARGET_DIR": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/target",
+        "CARGO_TERM_COLOR": "never",
+        "HOME": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/home",
+        "PATH": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "RUSTC": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+        "RUSTUP_HOME": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home",
+        "RUST_BACKTRACE": "0",
+        "TEMP": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/tmp",
+        "TMP": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/tmp",
+        "TMPDIR": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/tmp"
+      },
+      "env_overrides": {},
+      "expected_status": 101,
+      "finished_monotonic_seconds": 26.47,
+      "name": "overwrite-red-direct",
+      "spawned": true,
+      "started_monotonic_seconds": 21.256,
+      "status": 101,
+      "stderr": "evidence/overwrite-red-direct.stderr",
+      "stdout": "evidence/overwrite-red-direct.stdout"
+    },
+    {
+      "argv": [
+        "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--locked",
+        "--lib",
+        "--features",
+        "testing-environ,sys",
+        "packages::sys::process::unix::tests::committed_stdout_cause_survives_stderr_overflow_managed",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/source",
+      "effective_env": {
+        "CARGO_BUILD_JOBS": "2",
+        "CARGO_HOME": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/cargo-home",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "0",
+        "CARGO_TARGET_DIR": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/target",
+        "CARGO_TERM_COLOR": "never",
+        "HOME": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/home",
+        "PATH": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "RUSTC": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+        "RUSTUP_HOME": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home",
+        "RUST_BACKTRACE": "0",
+        "TEMP": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/tmp",
+        "TMP": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/tmp",
+        "TMPDIR": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/tmp"
+      },
+      "env_overrides": {},
+      "expected_status": 101,
+      "finished_monotonic_seconds": 26.602,
+      "name": "overwrite-red-managed",
+      "spawned": true,
+      "started_monotonic_seconds": 26.47,
+      "status": 101,
+      "stderr": "evidence/overwrite-red-managed.stderr",
+      "stdout": "evidence/overwrite-red-managed.stdout"
+    },
+    {
+      "argv": [
+        "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--locked",
+        "--lib",
+        "--features",
+        "testing-environ,sys",
+        "packages::sys::process::unix::tests::committed_stdout_cause_survives_stderr_overflow_direct_child",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/source",
+      "effective_env": {
+        "CARGO_BUILD_JOBS": "2",
+        "CARGO_HOME": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/cargo-home",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "0",
+        "CARGO_TARGET_DIR": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/target",
+        "CARGO_TERM_COLOR": "never",
+        "HOME": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/home",
+        "PATH": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "RUSTC": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+        "RUSTUP_HOME": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home",
+        "RUST_BACKTRACE": "0",
+        "TEMP": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/tmp",
+        "TMP": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/tmp",
+        "TMPDIR": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/tmp"
+      },
+      "env_overrides": {},
+      "expected_status": 0,
+      "finished_monotonic_seconds": 31.815,
+      "name": "restored-green-direct",
+      "spawned": true,
+      "started_monotonic_seconds": 26.602,
+      "status": 0,
+      "stderr": "evidence/restored-green-direct.stderr",
+      "stdout": "evidence/restored-green-direct.stdout"
+    },
+    {
+      "argv": [
+        "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--locked",
+        "--lib",
+        "--features",
+        "testing-environ,sys",
+        "packages::sys::process::unix::tests::committed_stdout_cause_survives_stderr_overflow_managed",
+        "--",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/source",
+      "effective_env": {
+        "CARGO_BUILD_JOBS": "2",
+        "CARGO_HOME": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/cargo-home",
+        "CARGO_INCREMENTAL": "0",
+        "CARGO_PROFILE_DEV_DEBUG": "0",
+        "CARGO_TARGET_DIR": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/target",
+        "CARGO_TERM_COLOR": "never",
+        "HOME": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/home",
+        "PATH": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "RUSTC": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+        "RUSTUP_HOME": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/rustup-home",
+        "RUST_BACKTRACE": "0",
+        "TEMP": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/tmp",
+        "TMP": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/tmp",
+        "TMPDIR": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv/tmp"
+      },
+      "env_overrides": {},
+      "expected_status": 0,
+      "finished_monotonic_seconds": 31.947,
+      "name": "restored-green-managed",
+      "spawned": true,
+      "started_monotonic_seconds": 31.815,
+      "status": 0,
+      "stderr": "evidence/restored-green-managed.stderr",
+      "stdout": "evidence/restored-green-managed.stdout"
+    }
+  ],
+  "controls": [
+    {
+      "expected_status": 101,
+      "intended_assertion_observed": true,
+      "name": "baseline-red-direct",
+      "required_diagnostics": [
+        "the first committed stdout overflow must remain the public cause"
+      ],
+      "required_output": [
+        "first-cause mode=direct"
+      ],
+      "status": 101
+    },
+    {
+      "expected_status": 101,
+      "intended_assertion_observed": true,
+      "name": "baseline-red-managed",
+      "required_diagnostics": [
+        "the first committed stdout overflow must remain the public cause"
+      ],
+      "required_output": [
+        "first-cause mode=managed"
+      ],
+      "status": 101
+    },
+    {
+      "expected_status": 101,
+      "intended_assertion_observed": true,
+      "name": "overwrite-red-direct",
+      "required_diagnostics": [
+        "the first committed stdout overflow must remain the public cause"
+      ],
+      "required_output": [
+        "first-cause mode=direct"
+      ],
+      "status": 101
+    },
+    {
+      "expected_status": 101,
+      "intended_assertion_observed": true,
+      "name": "overwrite-red-managed",
+      "required_diagnostics": [
+        "the first committed stdout overflow must remain the public cause"
+      ],
+      "required_output": [
+        "first-cause mode=managed"
+      ],
+      "status": 101
+    },
+    {
+      "expected_status": 0,
+      "independent_readback": [
+        "first-cause mode=direct",
+        "test result: ok. 1 passed; 0 failed;"
+      ],
+      "name": "restored-green-direct",
+      "status": 0
+    },
+    {
+      "expected_status": 0,
+      "independent_readback": [
+        "first-cause mode=managed",
+        "test result: ok. 1 passed; 0 failed;"
+      ],
+      "name": "restored-green-managed",
+      "status": 0
+    }
+  ],
+  "error": null,
+  "helper_exit_status": 0,
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "ordered_cases": [
+    {
+      "case": "baseline-red-direct",
+      "expected_status": 101,
+      "fixture": {
+        "case": "baseline-red-direct",
+        "expected_argv": "[\"/usr/bin/python3\",\"-c\",\"exec(open(__import__('os').environ['RHAI_FIRST_SCRIPT']).read())\"]",
+        "group_closed": "false",
+        "identity_confirmed": "true",
+        "identity_gate_released": "true",
+        "identity_wait": "acknowledged",
+        "observed_cmdline_hex": "2f7573722f62696e2f707974686f6e33002d630065786563286f70656e285f5f696d706f72745f5f28276f7327292e656e7669726f6e5b27524841495f46495253545f534352495054275d292e7265616428292900",
+        "pgid": "1668859",
+        "pid": "1669994",
+        "reap": "ESRCH",
+        "start_ticks": "18684920",
+        "stderr_overflow": "observed",
+        "stderr_write": "acknowledged",
+        "stdout_committed": "true",
+        "stdout_write": "acknowledged"
+      },
+      "observed_status": 101,
+      "result": "verified",
+      "selected_test": "packages::sys::process::unix::tests::committed_stdout_cause_survives_stderr_overflow_direct_child"
+    },
+    {
+      "case": "baseline-red-managed",
+      "expected_status": 101,
+      "fixture": {
+        "case": "baseline-red-managed",
+        "expected_argv": "[\"/usr/bin/python3\",\"-c\",\"exec(open(__import__('os').environ['RHAI_FIRST_SCRIPT']).read())\"]",
+        "group_closed": "true",
+        "identity_confirmed": "true",
+        "identity_gate_released": "true",
+        "identity_wait": "acknowledged",
+        "observed_cmdline_hex": "2f7573722f62696e2f707974686f6e33002d630065786563286f70656e285f5f696d706f72745f5f28276f7327292e656e7669726f6e5b27524841495f46495253545f534352495054275d292e7265616428292900",
+        "pgid": "1670009",
+        "pid": "1670009",
+        "reap": "ESRCH",
+        "start_ticks": "18684935",
+        "stderr_overflow": "observed",
+        "stderr_write": "acknowledged",
+        "stdout_committed": "true",
+        "stdout_write": "acknowledged"
+      },
+      "observed_status": 101,
+      "result": "verified",
+      "selected_test": "packages::sys::process::unix::tests::committed_stdout_cause_survives_stderr_overflow_managed"
+    },
+    {
+      "case": "overwrite-red-direct",
+      "expected_status": 101,
+      "fixture": {
+        "case": "overwrite-red-direct",
+        "expected_argv": "[\"/usr/bin/python3\",\"-c\",\"exec(open(__import__('os').environ['RHAI_FIRST_SCRIPT']).read())\"]",
+        "group_closed": "false",
+        "identity_confirmed": "true",
+        "identity_gate_released": "true",
+        "identity_wait": "acknowledged",
+        "observed_cmdline_hex": "2f7573722f62696e2f707974686f6e33002d630065786563286f70656e285f5f696d706f72745f5f28276f7327292e656e7669726f6e5b27524841495f46495253545f534352495054275d292e7265616428292900",
+        "pgid": "1668859",
+        "pid": "1670108",
+        "reap": "ESRCH",
+        "start_ticks": "18685453",
+        "stderr_overflow": "observed",
+        "stderr_write": "acknowledged",
+        "stdout_committed": "true",
+        "stdout_write": "acknowledged"
+      },
+      "observed_status": 101,
+      "result": "verified",
+      "selected_test": "packages::sys::process::unix::tests::committed_stdout_cause_survives_stderr_overflow_direct_child"
+    },
+    {
+      "case": "overwrite-red-managed",
+      "expected_status": 101,
+      "fixture": {
+        "case": "overwrite-red-managed",
+        "expected_argv": "[\"/usr/bin/python3\",\"-c\",\"exec(open(__import__('os').environ['RHAI_FIRST_SCRIPT']).read())\"]",
+        "group_closed": "true",
+        "identity_confirmed": "true",
+        "identity_gate_released": "true",
+        "identity_wait": "acknowledged",
+        "observed_cmdline_hex": "2f7573722f62696e2f707974686f6e33002d630065786563286f70656e285f5f696d706f72745f5f28276f7327292e656e7669726f6e5b27524841495f46495253545f534352495054275d292e7265616428292900",
+        "pgid": "1670125",
+        "pid": "1670125",
+        "reap": "ESRCH",
+        "start_ticks": "18685470",
+        "stderr_overflow": "observed",
+        "stderr_write": "acknowledged",
+        "stdout_committed": "true",
+        "stdout_write": "acknowledged"
+      },
+      "observed_status": 101,
+      "result": "verified",
+      "selected_test": "packages::sys::process::unix::tests::committed_stdout_cause_survives_stderr_overflow_managed"
+    },
+    {
+      "case": "restored-green-direct",
+      "expected_status": 0,
+      "fixture": {
+        "case": "restored-green-direct",
+        "expected_argv": "[\"/usr/bin/python3\",\"-c\",\"exec(open(__import__('os').environ['RHAI_FIRST_SCRIPT']).read())\"]",
+        "group_closed": "false",
+        "identity_confirmed": "true",
+        "identity_gate_released": "true",
+        "identity_wait": "acknowledged",
+        "observed_cmdline_hex": "2f7573722f62696e2f707974686f6e33002d630065786563286f70656e285f5f696d706f72745f5f28276f7327292e656e7669726f6e5b27524841495f46495253545f534352495054275d292e7265616428292900",
+        "pgid": "1668859",
+        "pid": "1670223",
+        "reap": "ESRCH",
+        "start_ticks": "18685985",
+        "stderr_overflow": "observed",
+        "stderr_write": "acknowledged",
+        "stdout_committed": "true",
+        "stdout_write": "acknowledged"
+      },
+      "observed_status": 0,
+      "result": "verified",
+      "selected_test": "packages::sys::process::unix::tests::committed_stdout_cause_survives_stderr_overflow_direct_child"
+    },
+    {
+      "case": "restored-green-managed",
+      "expected_status": 0,
+      "fixture": {
+        "case": "restored-green-managed",
+        "expected_argv": "[\"/usr/bin/python3\",\"-c\",\"exec(open(__import__('os').environ['RHAI_FIRST_SCRIPT']).read())\"]",
+        "group_closed": "true",
+        "identity_confirmed": "true",
+        "identity_gate_released": "true",
+        "identity_wait": "acknowledged",
+        "observed_cmdline_hex": "2f7573722f62696e2f707974686f6e33002d630065786563286f70656e285f5f696d706f72745f5f28276f7327292e656e7669726f6e5b27524841495f46495253545f534352495054275d292e7265616428292900",
+        "pgid": "1670241",
+        "pid": "1670241",
+        "reap": "ESRCH",
+        "start_ticks": "18686004",
+        "stderr_overflow": "observed",
+        "stderr_write": "acknowledged",
+        "stdout_committed": "true",
+        "stdout_write": "acknowledged"
+      },
+      "observed_status": 0,
+      "result": "verified",
+      "selected_test": "packages::sys::process::unix::tests::committed_stdout_cause_survives_stderr_overflow_managed"
+    }
+  ],
+  "package_status": "complete",
+  "scope": "six selected Child process first-cause tests; two each baseline RED, stderr-overwrite mutant RED, restored GREEN",
+  "selected_tests": {
+    "direct": "packages::sys::process::unix::tests::committed_stdout_cause_survives_stderr_overflow_direct_child",
+    "managed": "packages::sys::process::unix::tests::committed_stdout_cause_survives_stderr_overflow_managed"
+  },
+  "source_restored": true,
+  "source_revision": "ce1f40b23588ba08b260439c7f441d8318368425",
+  "source_sha256": "7e9fa4f523c4a9212af858222787849306b01087af6555b092d68fe717fd7ce4"
+}

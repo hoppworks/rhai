@@ -34,7 +34,28 @@ integration does not claim release acceptance. Do not recreate remote task refs.
 No installs, admin, credentials, agent-home/config or shared-service changes.
 Windows guest control belongs solely to windows_private_staging_readback; historical owner records remain preserved.
 
-## Current status — Package E follow-up stopped (2026-10-07)
+## Current status — Package A accepted; Package E follow-up remains stopped (2026-10-07)
+
+Package A's narrow Linux/Rust 1.77.2 acceptance is complete after five cumulative
+native allocations. Attempt 4 passed its six controls, but a later combined review
+found that its `/proc` identity sample could occur after child exit. Attempt 5
+added a parent-acknowledged live PID/PGID/start-ticks/argv observation before
+cancellation; all four intended RED controls exited 101 at the first-cause
+assertion, and both restored GREEN controls exited 0 with the complete real-child
+and cleanup assertions. The tested source is
+`src/packages/sys/process/unix.rs`, SHA-256
+`d4fc28906b624f6e9368d0bef16e82e3fc29cada5142da67406fd95962153115`. The combined
+independent reviewer returned READY. Seventy-one originals were read back; fresh
+closure checked 113 identities, five owned groups and six absent paths. The exact
+stage, scope and runtime are retired; no compiled artifact is reusable. Accepted
+proof is under `.scratch/all-tickets/process-first-cause-evidence/attempt-05/originals/`.
+The reviewed source and `docs/sys-package-plan.md` were committed atomically as
+`c6af5b1d8df7bcf6022ab7c88dac7cd5d6614a50` with exact `hoppworks` author and
+committer. `git push --atomic origin HEAD:refs/heads/main` succeeded; fresh remote
+readback confirms that the authorized fork has exactly one branch, `main`, at that
+commit. No public-upstream ref was written. Attempt-05 originals form the
+supplemental evidence for this accepted proof. The API metadata/policy test edits
+and their unaccepted attempt material remain outside this acceptance.
 
 Package E's one Expert24 follow-up has now been consumed. The exact staged
 archive, pinned lock, launcher, runner and Rust/Cargo 1.93.0 passed the remote
@@ -408,12 +429,14 @@ campaign, repair-package, e2e-proof, wayfinder, OCR-delegate and TDD rules are
 recorded in section 6. The central repository had no tracked changes; its twelve
 untracked `.scratch` paths were planning material, not installed rules. No sync,
 installation or Agent configuration change occurred. Other Sessions' loaded rule
-revision remains unverified. The final combined review returned READY for Package
-A's source, native proof, applicability and cleanup, with no material code findings.
-It confirmed the tested source hash, all six intended outcomes, source restoration,
-resource bounds and independent closure. No Package A rerun is indicated without a
-relevant source, assertion, dependency, toolchain, environment or uncovered-criterion
-change.
+revision remains unverified. At this historical checkpoint the combined review
+returned READY for Package A's source, native proof, applicability and cleanup. A
+subsequent review found that attempt 4's identity sample could occur after child
+exit, so attempt 4 alone did not prove the live-identity criterion. Attempt 5
+added that acknowledgment before cancellation and is the accepted proof for the
+full scoped Package A criterion. No further Package A rerun is indicated without
+a relevant source, assertion, dependency, toolchain, environment or uncovered-
+criterion change.
 
 Package B now has one focused regression in `tests/sys_process.rs` for the existing
 no-primary decoded-output limit path through public `spawn` and `Child.wait`. It
@@ -558,8 +581,9 @@ The prior accepted overlap/setup/performance proofs, six resolved decision
 contracts and P1–P14/E1–E5/F1–F23/X1–X38/R1–R7 coverage crosswalk remain intact.
 Package A closes from its native proof plus review, not preparation alone. Git
 writes remain limited to the fork; configured `hoppworks` attribution, main-only
-remote branch policy and prior explicit push/merge authority remain in force, but
-no Git write is part of this package step.
+remote branch policy and the owner's explicit commit/push authorization remain in
+force. This paragraph is historical; the current atomic commit/push action is
+recorded at the top of this state file.
 
 ## Historical current-step record through the 2026-10-04 pause — superseded
 

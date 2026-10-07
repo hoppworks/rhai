@@ -1,0 +1,12 @@
+
+running 1 test
+test packages::sys::process::unix::tests::committed_stdout_cause_survives_stderr_overflow_managed ... first-cause mode=managed child_pid=1670125 child_start_ticks=18685470 child_pgid=1670125 expected_program=/usr/bin/python3 expected_argv_count=3 child_cmdline_hex=2f7573722f62696e2f707974686f6e33002d630065786563286f70656e285f5f696d706f72745f5f28276f7327292e656e7669726f6e5b27524841495f46495253545f534352495054275d292e7265616428292900 identity_confirmed=true identity_gate_released=true identity_wait=acknowledged stdout_write=acknowledged stdout_committed=true stderr_write=acknowledged stderr_overflow=observed reap=ESRCH group_closed=true
+FAILED
+
+failures:
+
+failures:
+    packages::sys::process::unix::tests::committed_stdout_cause_survives_stderr_overflow_managed
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 25 filtered out; finished in 0.05s
+

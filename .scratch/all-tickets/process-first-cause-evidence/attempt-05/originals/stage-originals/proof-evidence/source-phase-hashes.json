@@ -1,0 +1,31 @@
+[
+  {
+    "bytes": 223783,
+    "phase": "baseline",
+    "sha256": "7e9fa4f523c4a9212af858222787849306b01087af6555b092d68fe717fd7ce4"
+  },
+  {
+    "bytes": 223304,
+    "phase": "proposed-fix",
+    "sha256": "d4fc28906b624f6e9368d0bef16e82e3fc29cada5142da67406fd95962153115"
+  },
+  {
+    "bytes": 223227,
+    "phase": "stderr-overwrite-mutant",
+    "sha256": "498fbced5abe15f95a02d95ecb58fff9c324668863f8b4764e76a32ce545d41b"
+  },
+  {
+    "bytes": 223304,
+    "phase": "restored-fix",
+    "sha256": "d4fc28906b624f6e9368d0bef16e82e3fc29cada5142da67406fd95962153115"
+  },
+  {
+    "phase": "pre-restoration",
+    "sha256": "d4fc28906b624f6e9368d0bef16e82e3fc29cada5142da67406fd95962153115"
+  },
+  {
+    "bytes": 223783,
+    "phase": "final-baseline-restored",
+    "sha256": "7e9fa4f523c4a9212af858222787849306b01087af6555b092d68fe717fd7ce4"
+  }
+]

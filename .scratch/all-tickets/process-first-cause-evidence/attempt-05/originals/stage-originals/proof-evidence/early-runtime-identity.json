@@ -1,0 +1,19 @@
+{
+  "captured_before_stage_validation_or_external_command": true,
+  "helper": {
+    "cmdline": "python3 /root/rhai-linux-process-first-cause-fc-20261007-ack05-7d11e2c4/linux-process-first-cause-proof.py",
+    "pgid": 1668859,
+    "pid": 1668860,
+    "ppid": 1668859,
+    "start_ticks": 18682817
+  },
+  "identity_errors": {},
+  "runtime": "/root/.local/share/agent-builds/rhai/fc-20261007-ack05-7d11e2c4/agent-build-u8tlb6gv",
+  "scoped_supervisor": {
+    "cmdline": "/usr/bin/python3 /var/roothome/rhai-linux-process-first-cause-fc-20261007-ack05-7d11e2c4/runner/tools/run_scoped.py _supervise 4 python3 /root/rhai-linux-process-first-cause-fc-20261007-ack05-7d11e2c4/linux-process-first-cause-proof.py",
+    "pgid": 1668859,
+    "pid": 1668859,
+    "ppid": 1668840,
+    "start_ticks": 18682815
+  }
+}

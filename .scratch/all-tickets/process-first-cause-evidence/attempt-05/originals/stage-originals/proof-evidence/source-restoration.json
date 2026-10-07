@@ -1,0 +1,37 @@
+{
+  "accepted_patch_sha256": "97a7f0557e6a7975e20e4893a6b77d64ccf046c11c5875b3e79fc473dcd5a82e",
+  "baseline_sha256": "7e9fa4f523c4a9212af858222787849306b01087af6555b092d68fe717fd7ce4",
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "phase_hashes": [
+    {
+      "bytes": 223783,
+      "phase": "baseline",
+      "sha256": "7e9fa4f523c4a9212af858222787849306b01087af6555b092d68fe717fd7ce4"
+    },
+    {
+      "bytes": 223304,
+      "phase": "proposed-fix",
+      "sha256": "d4fc28906b624f6e9368d0bef16e82e3fc29cada5142da67406fd95962153115"
+    },
+    {
+      "bytes": 223227,
+      "phase": "stderr-overwrite-mutant",
+      "sha256": "498fbced5abe15f95a02d95ecb58fff9c324668863f8b4764e76a32ce545d41b"
+    },
+    {
+      "bytes": 223304,
+      "phase": "restored-fix",
+      "sha256": "d4fc28906b624f6e9368d0bef16e82e3fc29cada5142da67406fd95962153115"
+    },
+    {
+      "phase": "pre-restoration",
+      "sha256": "d4fc28906b624f6e9368d0bef16e82e3fc29cada5142da67406fd95962153115"
+    },
+    {
+      "bytes": 223783,
+      "phase": "final-baseline-restored",
+      "sha256": "7e9fa4f523c4a9212af858222787849306b01087af6555b092d68fe717fd7ce4"
+    }
+  ],
+  "restored_baseline_matches": true
+}

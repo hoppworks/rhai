@@ -1,0 +1,30 @@
+diff --git a/src/packages/sys/process/unix.rs b/src/packages/sys/process/unix.rs
+index 81b7f171c..d240657cb 100644
+--- a/src/packages/sys/process/unix.rs
++++ b/src/packages/sys/process/unix.rs
+@@ -1853,20 +1853,12 @@ impl ProcessChild {
+             .into());
+         }
+         if let Some(error) = &state.error {
+-            let stdout = String::from_utf8_lossy(&state.stdout);
+-            let stderr = String::from_utf8_lossy(&state.stderr);
+-            let cause = if state.engine_limit > 0
+-                && (stdout.len() > state.engine_limit || stderr.len() > state.engine_limit)
+-            {
+-                ProcessCause::OutputLimit(format!(
+-                    "decoded process output exceeded the engine string limit of {} bytes",
+-                    state.engine_limit
+-                ))
+-            } else {
+-                error.clone()
+-            };
+             let report = child_process_report(&state);
+-            return Err(SysError::Process { cause, report }.into());
++            return Err(SysError::Process {
++                cause: error.clone(),
++                report,
++            }
++            .into());
+         }
+         if state.engine_limit > 0 {
+             let stdout = String::from_utf8_lossy(&state.stdout);
