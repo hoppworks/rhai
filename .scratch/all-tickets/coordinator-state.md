@@ -1,59 +1,49 @@
 # Coordinator state: all-tickets
 
 ## Mode
-Continue the user's authorized Rhai implementation under strict acceptance. Do not create or reactivate a Goal. Protect unrelated dirty work, all other Sessions, and Tauron processes/resources.
+Continue authorized implementation and strict acceptance. Do not create/reactivate a Goal.
 
 ## Decisions
-- User authorized reversible implementation and tests, combined reviews, atomic commits/pushes to fork `https://github.com/hoppworks/rhai.git` `main`, and eventual fork remote consolidation to only `main`. Never modify or push the public upstream. Merge verified work to fork `main` as earlier authorized.
-- Commit/committer name must be exactly lowercase `hoppworks`; preserve configured email, no agent co-author trailers.
-- Strict verification applies. Preserve exact ticket/platform/MSRV/feature scope. Production, publishing, external messages and other Sessions remain outside scope.
-- Agent-Skills Main `0e846bfc577a51bd1a98a5606966aecda40320c2` contains requested `35ba734135a64100b891f422d4ced9d76795ab57`. Loaded global SHA `7a0f59e7…e12d16c4`, project AGENTS SHA `06b73a9d…19d7c5de`, campaign SHA `8700372e…e293374b`, e2e-proof SHA `73daaac4…4b715db61`; skills match central copies. Central repo has no relevant tracked modifications. Project-local resource-lifecycle doc is absent; applied central resource-lifecycle rules and project AGENTS details.
-- No reviewer/build worker was active at audit. `/root/combined_package_proof` was re-engaged for one read-only X24 combined review and asked to verify current rule hashes/revision before acting.
+Owner authorizes atomic lowercase `hoppworks` commits, automatic push/merge to private fork `https://github.com/hoppworks/rhai.git`, and eventual remote-main-only consolidation; never write to public upstream; no release/deployment. Verification strict. Current local branch `task/all-tickets-environment-recovery`; publish integrated commits directly to fork `main`. Agent-Skills Main `35ba734135a64100b891f422d4ced9d76795ab57` is included in central HEAD `0e846bfc577a51bd1a98a5606966aecda40320c2`. Global, project, campaign, e2e-proof, TDD, OCR-delegate and resource rules are loaded. Central repo has unrelated untracked `.scratch` artifacts, no relevant rule changes. No active agents remain; the independent reviewer reloaded these rules and returned READY. Do not infer other Sessions' rule state.
 
 ## Current step
-X24 attempt 04 GREEN completed on Workhorse Linux x86_64, Rust/Cargo 1.77.2, `testing-environ,sys`; exact public Engine `try_wait` test returned 0 and independent PID/readiness/exit/ESRCH readback matched. Attempt 03 RED sensitivity is reused because test and product source hashes match. The combined independent review is READY with no material findings. X24 is accepted only for the two named Linux compiler rows. Evidence, hashes and cleanup receipts are under `.scratch/all-tickets/process-try-wait-evidence/x24-try-wait-20261007-1705z-6a92d/`; plan §6.6/§6.7 records scope.
+Darwin F23 prefix-path test correction is in `tests/sys_policy.rs`, atop `04d9a797784ba3e31d6b30d14784ef19cf46821e` (Package E already on fork main). Attempt 03 used private scoped Cargo caches, Rust 1.93.0, one job and accepted lock SHA with online `--locked` commands. The exact old-root test failed at the distinct-path assertion with equal scoped paths (expected RED); corrected root and nested-root public-Engine tests each passed with filesystem-policy and host-readback assertions. Inner result gates, hashes and logs are under `.scratch/all-tickets/darwin-system-prefix-evidence/attempt-03/`. Runtime was removed and exact scope retired. Parent zsh failed assigning its reserved variable `status`; outer `run_scoped.status` is absent. Combined review accepted the inner proof with that caveat. This covers only the two named alias assertions, not all F23/C.
 
 ## Next action
-Stage and inspect only the reviewed X24 proof bundle, plan and state; commit with author `hoppworks`, atomically push only fork `origin/main`, and read back its hash. Then continue at the next uncovered accepted criterion in plan §6.7, reusing applicable proof and avoiding another X24 run. Never stage unrelated dirty files.
+Atomically commit only `tests/sys_policy.rs`, `docs/sys-package-plan.md` and this state as lowercase `hoppworks`; remote `main` still reads `04d9a797...`. Push directly to the authorized private fork `main` and read back the exact head. Do not rerun the accepted tests. Then choose the next uncovered requirement from §§6.3/6.7–6.8 using existing evidence; full F23 and Package C remain open.
 
 ## Goal
-Implement all accepted Rhai stdlib tickets and release-gate criteria.
+Close every original ticket criterion with applicable proof and review at the tested revision; integrate to authorized fork main and finish fork-only consolidation.
 
 ## Done when
-Every accepted criterion has strict applicable proof and combined review; verified work is on fork `main`; final authorized fork cleanup leaves only remote `main`.
+All crosswalk criteria in `docs/sys-package-plan.md` §§6.7–6.8 have applicable strict proof on integrated fork main; authorized consolidation leaves remote `main` only. No upstream write or release/deployment.
 
 ## Steps
-1. Close uncovered acceptance rows in coherent packages, reusing unchanged proof and avoiding stopped routes.
-2. Review, commit and atomically push each verified package to fork `main`.
-3. After all criteria are verified, consolidate only the fork so only `main` remains.
+1. Integrate the reviewed Darwin F23 alias-test correction and read back fork `main`.
+2. Continue uncovered B/C/D/F criteria with source/assertion/environment-matched proof reuse.
+3. Complete affected combined reviews and fork-main readback, then classify branches/worktrees and consolidate only safe authorized fork histories.
 
 ## Done steps
-- Package A accepted only for its named Linux/Rust 1.77.2 row; review and lifecycle refs remain in `docs/sys-package-plan.md` §6.6.
-- X29 accepted only Workhorse Linux x86_64/Rust 1.93.0 and 1.77.2, `testing-environ,sys`; combined review READY. Commit `33fcfe2dce717f6df8c4d6f9dec248bce27c1a9b` is on fork `main`.
-- X22 accepted only Workhorse Linux x86_64/Rust 1.93.0 and 1.77.2, `testing-environ,sys`; combined review READY. Atomic push commit `d3eabc005242129dbb8ad124def0f0ada2aff71d` read back on fork `main`.
-- X24 accepted only Workhorse Linux x86_64/Rust 1.93.0 and 1.77.2, `testing-environ,sys`; attempt-03 sensitivity reused for attempt-04, combined review READY. Atomic fork push remains to be performed; see exact proof bundle in §6.6/§6.7.
+Package A accepted only for Linux/Rust 1.77.2. X22, X24, X29, X30, X14/X16/X17 have scoped Linux proof. Package E metadata/docs is reviewed and tested; commit `04d9a797...` is on fork main. Original requirements remain in §§6.7–6.8.
 
 ## Accepted evidence
-- X22 SIGKILL: `.scratch/all-tickets/process-signal-evidence/proof.md`; only named Linux rows.
-- X29 script throw: `.scratch/all-tickets/x29-script-throw-20261007-9aec531ea61d42359544757b363f2422/proof.md`; only named Linux rows.
-- X24 attempt 03 establishes Linux/Rust 1.93.0, including mutation RED and restored GREEN. Attempt 04 adds exact Linux/Rust 1.77.2 GREEN and direct exit/reaping readback; READY review confirms applicability. See its `proof.md`, `remote-output/attempt-04/SHA256SUMS`, and cleanup receipts. No other OS/features implied.
+E attempt 11 Darwin arm64/Rust 1.93 process/TCP metadata/example and host/cloned-wait readback; attempt 12 targeted `test_function_metadata` passes default-float and `no_float` with lock SHA `4ff0a7de...`. Reuse unchanged TCP/file real-peer/host readbacks at `.scratch/tcp-docs-example/proof.md` and `.scratch/file-handle-docs/proof.md`. Combined E review READY. Package A and process X14/X16/X17/X24 proofs remain Linux-only. E integration readback matched fork `main` at `04d9a797...`.
 
 ## Retained resources
-No active owned Workhorse build remains. X24 private runtime was removed by canonical `tools/run_scoped.py`; exact remote stage/output scope was removed after export and read back absent. No shared caches/toolchains/services or foreign work changed. Prior X22 scope also cleaned; Tauron untouched.
+Owned worktree `/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery`. Preserve unrelated dirty/untracked `.scratch` evidence and `tests/fixtures/sys_process_shared_child_contract.rs`; preserve foreign work. Tauron Docker build remains active (launcher PID 84681, supervisor 84683); do not touch. Preflight: 10 CPUs, ~55% memory free, 144,435,832 KiB disk free, load 4.16/4.90/6.12; 4 GiB expected output peak from sibling macOS preflights. Attempt 03 runtime and exact scope were removed after export. New builds use `~/.local/share/agent-builds/rhai/<unique-session-id>/`, TMPDIR on runner call, outputs/caches under AGENT_RUNTIME_DIR.
 
 ## Cause history
-Packages B and E each had three pre-assertion infrastructure stops; each sole Expert follow-up is consumed. Do not retry those routes without new diagnosis. X29 had two setup stops before corrected success. X24 attempt 01 was partial (`wait()` preceded terminal `try_wait`); attempt 02 stopped before Cargo on archive/overlay identity; attempt 03 passed Linux 1.93.0 RED/GREEN; attempt 04 passed Linux 1.77.2 GREEN. Preserve all cause/evidence histories in prior state archives and package evidence.
+B had three Workhorse pre-assertion infrastructure stops (`SESSION_SCOPE` missing), zero assertions; follow-up consumed. Darwin sys/net review found F1–F4 defects; cause11 accepted source corrections at `322ac6be`, but native rows remain unverified and do not certify current HEAD. E native3 had three pre-assertion stops and exhausted follow-up; E attempts 10–12 remain under `.scratch/all-tickets/api-metadata-evidence/`. Prefix attempts 01 (13.2 s) and 02 (16.2 s) were offline-cache infrastructure stops (`rustyline`, then `zerocopy 0.8.61`), no compile/assertions. Expert diagnosis confirmed one cache-completeness cause. Attempt03 is its one online locked follow-up; RED/GREEN passed; parent-shell status bookkeeping failed after inner success. No history was reset.
 
 ## Open escalations
-None. Continue other independent accepted criteria; do not reopen B/E routes absent a new cause diagnosis.
+Ticket03 B semantics; C Darwin lifecycle/feature behavior and custody; D Windows custody/native behavior; F integrated matrix remain open per §6.7. The F23 alias-test patch has combined review READY and proves only two named Darwin assertions; integrate it, while remaining F23 spellings and the full native matrix stay open. Preserve Windows/Workhorse limits; do not operate another Session's guest.
 
 ## Budgets
-X24 attempt 04 retained 510s work / 540s helper / 585s runner, 2 Cargo jobs, 16 owned processes, 1,572,864 KiB preemptive and 2,097,152 KiB hard storage/RSS. Actual run 18.967s; periodic maxima 962,432 KiB RSS / 749,440 KiB storage. Admission: 662,504,214,528 bytes free, 86,863,638,528 RAM available. X22 actual sampled storage peak 1,267,691,988 bytes. Older aggregate elapsed/cost/token totals unavailable; do not reset or invent them.
-
-## Retrospective
-X24 needed one 1.77.2 GREEN run; valid attempt-03 assertion sensitivity and exact test/product source were reused, not rebuilt as RED. Filtered tracked source archive excludes unrelated `.scratch/` and is 1,493,624 bytes versus 155,379,521 bytes from full archive. Six raw result hashes verified; run runtime and exact remote scope removed. No result was broadened beyond named rows.
+Prefix command time: attempts 01/02 total 29.4 s; attempt03 about 45 s. Prior statuses were 101 before compilation/assertions; attempt03 compiled and ran all three exact tests. Each invocation had an agent-selected 1200 s ceiling, not a user cap. Preserve all launches and consumed work. Total token/cost unavailable. E known active effort ~482 s plus unmeasured setup; attempts11/12 ~48/25 s, 12a stopped before Cargo.
 
 ## History
-`campaign/scripts/state.py rewrite/check` archives each predecessor under `.scratch/all-tickets/journal/`. Earlier decisions, approvals, limits, results and causes remain in archived states; previous archive refs include `state-d5fd50d6c5074ad496640d8ee1ed8d6d.md` and `state-84b8bffb507346d2b136601292682578.md`.
-- Previous state: journal/state-a918ce2103844f38aed8e564422fa68a.md
-- Previous state: journal/state-7717adc4440343f69ff1d43932fa1f2a.md
+Exact predecessor archived by `campaign/scripts/state.py rewrite`. Full cause, run and approval records remain under `.scratch/all-tickets/` and §§6.7–6.9; older compact states are in `.scratch/all-tickets/journal/`.
+- Previous state: journal/state-8c8814aa11d14f388bea5437850bfd0f.md
+
+## Retrospective
+Simplified this step to the two filesystem-policy paths under actual scoped TMPDIR, not the nine-row Darwin sys/net package. After two offline-cache misses, one Expert diagnosis led to one online `--locked` run. The inner proof succeeded; a zsh-reserved-variable bookkeeping defect omitted only the outer status file. No build was repeated.

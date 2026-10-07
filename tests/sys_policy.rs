@@ -312,15 +312,29 @@ fn test_absolute_path_through_symlinked_root_ancestor() {
 }
 
 #[cfg(target_os = "macos")]
+fn macos_system_prefix_spellings(path: &std::path::Path) -> (String, String) {
+    let canonical = path.canonicalize().unwrap();
+    let suffix = canonical.strip_prefix("/").unwrap().to_str().unwrap();
+    let var_path = format!("/var/../../{suffix}");
+    let private_var_path = format!("/private/var/../../{suffix}");
+    assert_ne!(var_path, private_var_path, "system-prefix spellings must differ");
+    assert_eq!(std::path::Path::new(&var_path).canonicalize().unwrap(), canonical);
+    assert_eq!(std::path::Path::new(&private_var_path).canonicalize().unwrap(), canonical);
+    (var_path, private_var_path)
+}
+
+#[cfg(target_os = "macos")]
 #[test]
 fn test_root_accepts_macos_system_prefix_aliases() {
     let t = TempDir::new();
     t.write("real/a.txt", "payload");
     std::os::unix::fs::symlink(t.path().join("real"), t.path().join("link")).unwrap();
-    let e = engine(SysConfig::default().fs_root(t.path().join("link"), FsAccess::Read));
+    let (var_root, private_root) = macos_system_prefix_spellings(&t.path().join("real"));
+    let e = engine(SysConfig::default().fs_root(&var_root, FsAccess::Read));
 
-    let var_path = format!("{}/real/a.txt", t.as_script_path());
-    let private_path = var_path.replacen("/var/", "/private/var/", 1);
+    let var_path = format!("{var_root}/a.txt");
+    let private_path = format!("{private_root}/a.txt");
+    assert_ne!(var_path, private_path, "system-prefix reads must use distinct paths");
     assert_eq!(e.eval::<String>(&format!(r#"read_file("{var_path}")"#)).unwrap(), "payload");
     assert_eq!(e.eval::<String>(&format!(r#"read_file("{private_path}")"#)).unwrap(), "payload");
     assert_eq!(err_kind(&e, &format!(r#"write_file("{private_path}", "changed")"#)), "Denied");
@@ -332,10 +346,11 @@ fn test_root_accepts_macos_system_prefix_aliases() {
 fn test_nested_roots_keep_permissions_through_system_prefix_aliases() {
     let t = TempDir::new();
     t.write("inner/marker.txt", "nested payload");
-    let outer_var = t.as_script_path();
-    let outer_private = outer_var.replacen("/var/", "/private/var/", 1);
+    let (outer_var, outer_private) = macos_system_prefix_spellings(t.path());
     let inner_var = format!("{outer_var}/inner");
-    let inner_private = inner_var.replacen("/var/", "/private/var/", 1);
+    let (_, inner_private) = macos_system_prefix_spellings(&t.path().join("inner"));
+    assert_ne!(outer_var, outer_private, "outer root spellings must differ");
+    assert_ne!(inner_var, inner_private, "inner root spellings must differ");
     let e = engine(SysConfig::default().fs_root(&outer_var, FsAccess::Read).fs_root(&inner_private, FsAccess::ReadWrite));
 
     for path in [format!("{inner_var}/marker.txt"), format!("{inner_private}/marker.txt")] {
