@@ -33,7 +33,8 @@ Ticket 03 X11 is also partially accepted for Linux x86_64/Rust 1.93.0 with
 `testing-environ,sys`. Its public `run` test, sensitivity control, child
 readback and reaping proof are recorded in
 `../.scratch/all-tickets/process-env-remove-evidence/attempt-01/proof.md`; commit
-`e234e3e13f617def5670f16e81c5e7a60f7334ba` is the current fork `main` head.
+`e234e3e13f617def5670f16e81c5e7a60f7334ba` was the fork `main` head before the
+X14/X16/X17 package commit.
 Ticket 03 X14/X16/X17 now have partial acceptance for Workhorse Linux x86_64,
 Rust/Cargo 1.93.0 and `testing-environ,sys`. The public Engine tests prove ordinary
 successful `run` with empty stdout/stderr, exact string stdin through `run`, and
@@ -729,9 +730,10 @@ service is needed. The bounded Workhorse invocation established the fixture RED,
 restored a three-test GREEN, rejected a wrong expected value for each criterion,
 and exported checksummed results before runtime cleanup. The setup-only first
 launch and its precise correction remain recorded; it ran no Cargo command. No
-compiled artifact is reusable. The combined independent review is the next step
-before committing and pushing this package to the authorized fork `main`. This
-proof accepts only the named Linux/Rust/feature rows.
+compiled artifact is reusable. The combined independent review returned READY
+with no material findings. Commit `8532b375c0a6f8121fcbc587fd53eef3990c1b2a`
+contains this package and was atomically pushed to the authorized fork `main`.
+This proof accepts only the named Linux/Rust/feature rows.
 
 **Next open work after this package is pushed:** X2 and X8 have partial Linux
 x86_64/Rust 1.93.0 `testing-environ,sys` acceptance in
@@ -747,10 +749,10 @@ acceptance; its named no-primary behavior and other open rows remain unproven,
 and its three-launch route is stopped. Package E's metadata tests remain
 unverified, and its route is stopped after allocation 3. Preserve every criterion
 and all consumed counts. The previously reviewed X22 guard remains unchanged;
-its combined review is reusable. After the requested atomic fork push, select an
-independently open requirement with an unspent route; do not retry Package E or
-Package B based on this status update. This is not a new approval gate or a
-declaration that the remaining tickets are infeasible.
+its combined review is reusable. After this package was pushed, the next step is
+to select an independently open requirement with an unspent route; do not retry
+Package E or Package B based on this status update. This is not a new approval
+gate or a declaration that the remaining tickets are infeasible.
 The exact metadata command and its source/test mapping remain as recorded below.
 The full archive and pinned lock provenance remain available locally; the attempt-03
 preflight passed, then the launcher stopped at line 23 before extraction/Cargo due
