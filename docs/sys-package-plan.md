@@ -1,6 +1,6 @@
 # Rhai `sys` package: contract, requirements matrix, and plan
 
-Current status (2026-10-07): implementation resumed by the owner's explicit
+Current status (2026-10-08): implementation resumed by the owner's explicit
 instruction. Package A, committed Child cause, is complete at its bounded Linux /
 Rust 1.77.2 acceptance scope after five cumulative native allocations. Attempt 5
 passed four intended baseline/mutant RED controls and both restored GREEN controls
@@ -388,18 +388,25 @@ release contract and current section6 govern future execution.
   ubuntu, plus `--features sys` on the existing windows and macos jobs. The wasm32 rows
   must not include `sys`.
 
-## 6. Remaining acceptance plan — revised 2026-10-07
+## 6. Remaining acceptance plan — revised 2026-10-08
 
 **Current execution plan.** The owner explicitly resumed implementation after this
 plan was revised. Package A is complete at its recorded Linux/Rust 1.77.2 scope
 after attempt 5 closed the live-child identity gap found in review of attempt 4;
-Package B remains open after its documented infrastructure stops; its required
-criterion map is now complete. Package E's one bounded Expert24 follow-up has
-ended in a confirmed launcher infrastructure failure before Cargo/assertions. Its
-route is stopped with three infrastructure allocations, zero assertions and zero
-product corrections. Packages B–F and release acceptance remain open.
-This section is the single current plan; the campaign state records evidence and
-ownership. Historical estimates do not allocate retries or certify completion.
+Package B remains open after its documented infrastructure stops, with its
+criterion map complete. Package E's Workhorse/native3 route remains stopped after
+three pre-assertion infrastructure failures and its exhausted follow-up. A separate
+bounded Darwin run passes the current sys/net metadata assertions and real
+process-example readbacks. Public API documentation is now updated; after a reviewer
+found the timed `Child.wait` comments omitted unit-on-timeout and non-cancellation,
+the targeted sys metadata assertion passed in both default-float and `no_float`
+profiles. The combined package review returned READY after rechecking the
+corrected comments, assertions, evidence and docs. Package E closes at verified
+fast-forward integration of this reviewed change to fork main; no new metadata
+or example build is planned absent a finding that invalidates current proof.
+Packages B, C, D, F and release acceptance remain open. This section is the
+single current plan; the campaign state records evidence and ownership.
+Historical estimates do not allocate retries or certify completion.
 
 **Accepted partial criterion: X30, Linux descriptor stability.** The real entry is
 `tests/sys_process.rs::repeated_public_run_calls_keep_fd_count_stable`: the
@@ -633,7 +640,7 @@ resource rules in 6.4–6.6; no row is done merely because this plan names it.
 | B. Remaining process terminal/cancellation semantics | First committed cause survives secondary cleanup; no-primary guard still reports the correct cause; stdin early close, cached wait/try_wait/kill, capture flags, owner/sentinel survival and bounded reaping meet ticket 03. Depends on A for the same Child capture path; stdin can be diagnosed independently. | A focused public-Engine Child.wait regression for no-primary decoded-output expansion is source-pinned and its affected review is READY, but its assertion has not executed. The last bounded Workhorse invocation exited at run.sh line 4 because the launcher omitted required SESSION_SCOPE; Rustup/Cargo/tests did not start. This is infrastructure, not RED or product failure. Preserve three Package B launches / three infrastructure stops / zero assertions. The one post-escalation follow-up is consumed; do not retry this path or use native110. | package-b-child-wait-01/attempt-03/outcome.json preserves outer logs and readback hashes; the private runtime and exact remote scope were cleaned. The named no-primary behavior remains unaccepted. The criterion map in 6.7 records exact test/proof applicability and gaps; do not retry the stopped path or use native110. Other open stdin, cache, cancellation, capture, owner/sentinel and bounded-reap cases remain open where no applicable accepted proof exists. One combined lifecycle review per affected implementation; preserve accepted Linux controls. |
 | C. Darwin native completion | Missing macOS lifecycle, process behavior and sys/net real examples/feature interactions pass on native Darwin at the selected Rust version. Depends on a proven custody/readback path; no dependence on re-running Linux foundations. | Compare current sources and selected dependency/tool graph with existing compiler/sys/net proof. Existing `.scratch/all-tickets/macos-process-overhead.py` and `darwin-process-reader.py` are the nominated path; verify all actual paths/imports/SDK/tool versions and original stdout grammar before a native launch. Old source pins and Expert09/12 failed follow-ups are not ready execution. | Public Engine, actual child/group state, independent native reader, TCP peer and file readback where applicable; intact host/sentinel. One combined review of changed custody plus affected behavior. Reuse compiler/nonprocess/EPERM proof where unchanged. Earlier overhead method measures API-entry-to-report, not spawn-to-first-byte; do not repeat a fulfilled measurement merely for a new plan. |
 | D. Windows custody then native behavior | Exact owned job survives connection loss under an independent lease/monitor, bounds work, reports truthful nonzero failure and exports/cleans; then native sys/process/net and quoting/policy/feature criteria pass. Custody is a prerequisite with its own partial exit. | Existing `windows-runner-gate.md`, Windows scoped-runner brief, Expert02/13 and `windows-resume-20261003/harness-command.txt` are the canonical design/history. Before compiler use, check the full console/client/job/status/export path. Current self-inclusive teardown has a source-supported failure-status explanation, not proven kernel causation. Preserve exhausted two harness attempts; no automatic third. | Native setup-failure, real 0/17, mismatch/restored, interrupted connection/supervisor, exact job membership/closure and retained primary diagnostics. Observer stays outside the failed job. Then real Engine, actual filesystem/TCP peer/process readback. One combined package review, extra Windows specialist only for a named unresolved job risk. Preserve installation/activation/native baseline and backups; never drive the other Session's guest. |
-| E. API metadata and usable documentation | Registered receiver/arity/type/doc-comments match actual Engine metadata; sys/net/process examples run with independent effects; public config/error compatibility and file API divergences are documented. | Existing API candidate09eb is rejected because `local_addr` selects `NetStream` instead of exported `NetListener`; working assertions include the receiver correction but remain unverified. Native3 consumed three allocations and stopped before assertions: allocation 1 reached Cargo compilation but failed because `build.template` was absent; allocation 2 stopped before Cargo because the staged filename mismatched; allocation 3 stopped before Cargo because the archive-member check pipeline exited 141 under `pipefail` after `grep -q` closed tar's pipe. Zero assertions and zero product corrections. Escalation 24's sole follow-up and stop condition are exhausted; no further Package E build may use this route. The final launcher/preflight and direct pipeline/no-op evidence are under `api-metadata-evidence/native3-20261007/attempt-03/`. Preserve Expert21 and the full open acceptance scope. | Still requires actual generated metadata through Engine, intended assertion RED/restored GREEN, and native examples with file/peer/child readback. One combined API/docs review at the eventual corrected package baseline; share changed metadata/example rows with F. Reuse accepted Linux examples where source/expectations remain unchanged. No new metadata normalization layer or unrelated prose sweep. |
+| E. API metadata and usable documentation | Registered receiver/arity/type/doc-comments match actual Engine metadata; sys/net/process examples run with independent effects; public config/error compatibility and file API divergences are documented. | The Workhorse/native3 route remains closed after three pre-assertion infrastructure failures and its exhausted follow-up. Darwin attempt 11 passed the prior metadata checks and process example/readbacks. After the combined review found the timed-wait comment gap, attempt 12 passed the targeted sys metadata assertion with both default-float and `no_float` profiles; its first preparation stopped before Cargo because the checkout omitted ignored `Cargo.lock`, then used the exact hash-pinned accepted lock. It reuses attempt 10's inspected TCP RED; no repeated RED or example build is needed. | Current Darwin metadata/process evidence is under `.scratch/all-tickets/api-metadata-evidence/macos-direct-20261008-9bcf4822/attempt-11.*` and `attempt-12/`; reusable native TCP and file readbacks are in `.scratch/tcp-docs-example/proof.md` and `.scratch/file-handle-docs/proof.md`. README documents SysConfig names/defaults, SysError/Rust matching, and intentional rhai-fs overlap/streaming differences; timed `Child.wait` metadata comments and assertions now describe unit-on-timeout without cancellation. The combined independent review returned READY for the corrected package at this revision; this closes only Package E, and relevant metadata/doc rows should be shared with F. Reuse while cited source/test/environment hashes remain applicable. |
 | F. Integrated compatibility/release closure | Every ticket criterion has applicable proof at the integrated revision: core1.66, optional1.77.2, native Linux/macOS/Windows, required semantic feature rows and explicit unsupported combinations. Depends only on relevant A–E criteria, not all preparation steps indiscriminately. | Diff source/assertions/manifests/lock/toolchain/config against existing accepted rows. Use project Cargo integration targets and the exact approved feature matrix in ticket06/release-proposal.md. Resolve actual archive inventory/tool availability/paths and expected error categories before compiling. | Share one build and real acceptance for related rows per machine/toolchain/feature identity. Reuse unaffected rows; rerun only changed dependency closures. Default sys/net and sync/no_index, metadata+serde/i32, unchecked/no_index/sync/metadata/f32 interactions remain covered. Core without OS deps; sys rejects no_std/no_object/WASM as decided. Combined integrated review/readback closes each criterion, not a count-only gate. Release readiness does not authorize publishing, deploying or enabling Actions. |
 
 No UI is part of Rhai's acceptance stack. The full path is script → real Engine →
@@ -767,9 +774,11 @@ Do not wait for the old signal; any future launch still needs fresh admission.
 
 ### 6.6 Retry triggers, risk and critical path
 
-Critical path: Package A is accepted only at Linux/Rust 1.77.2 → Packages B and E
-remain open with their current bounded routes stopped; C and D retain unproven
-custody prerequisites → X22 now has combined-review-READY Linux x86_64/Rust
+Critical path: Package A is accepted only at Linux/Rust 1.77.2 → Package B remains
+open with its bounded route stopped; Package E has current-scope Darwin metadata,
+process and reusable TCP/file evidence, with review READY and fork-main integration
+remaining; C and D
+retain unproven custody prerequisites → X22 now has combined-review-READY Linux x86_64/Rust
 1.93.0 and 1.77.2 executions with its existing sensitivity control; the 1.77.2
 output and cleanup readback are recorded in `process-signal-evidence/proof.md` →
 map the remaining §6 criteria to existing proof and choose the cheapest unspent
@@ -902,7 +911,7 @@ the scoped-runner and outer bounds are 585 and 600 seconds. Sampling reports
 bounded maxima, not continuous peaks. Guard/setup failures remain infrastructure
 outcomes, separate from metadata assertion RED.
 
-Escalation 24 asks for a read-only review of the complete archive-to-stage-to-
+Historical escalation 24 asked for a read-only review of the complete archive-to-stage-to-
 launcher path and a single minimal repair/preflight. It does not authorize another
 wrapper, Cargo run during diagnosis, or product edit. After that bounded repair,
 recheck exact names and hashes, the launcher/runner/toolchain, process absence,
@@ -911,10 +920,26 @@ bounded metadata run. Only a named missing/inadequate metadata assertion is RED;
 another setup stop ends this route for diagnosis. After valid RED, make the
 smallest accurate documentation correction and rerun only affected metadata
 tests. Capture Engine JSON and exact test output, then perform one combined review.
-This closes only the metadata assertions; Package E still needs runnable examples
-with independent file/peer/child readback and the remaining compatibility/docs
-criteria. Keep Expert21 and all native history unchanged; no full matrix or
-unrelated rebuild is implied.
+That plan predates the local Darwin route and remains valid only for its stopped
+Workhorse/native3 path. It does not authorize another Workhorse attempt or change
+its consumed history. Current Package E evidence is the one bounded Darwin attempt
+11 at Rust 1.93.0: the combined metadata command passed TCP and Child assertions;
+the process example's expected-exit control failed at its final exit assertion
+after both host records and cloned wait results were read back, and the restored
+example passed with the same readbacks. After the combined review found that the
+timed `Child.wait` overloads omitted unit-on-timeout and non-cancellation semantics,
+attempt 12 passed the targeted sys metadata check in default-float and `no_float`
+profiles. Its initial preparation stopped before Cargo because `Cargo.lock` was
+absent from the checkout; the rerun copied the exact hash-pinned accepted lock.
+Attempts 09–12, exact hashes, logs and
+statuses remain under `.scratch/all-tickets/api-metadata-evidence/macos-direct-20261008-9bcf4822/`.
+The existing `.scratch/tcp-docs-example/proof.md` and
+`.scratch/file-handle-docs/proof.md` cover the unchanged real peer and file effects.
+README and timed-wait metadata comments now cover the remaining public API details.
+The combined independent reviewer returned READY for these artifacts and docs at
+the corrected revision. Package E closes after verified fast-forward integration to
+fork main; no new metadata or example build is planned absent a finding that
+invalidates current proof.
 
 ### 6.7 Ticket 03 criterion-to-evidence map — checked 2026-10-07
 

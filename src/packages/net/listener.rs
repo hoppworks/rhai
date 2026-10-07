@@ -225,16 +225,19 @@ pub(super) fn register(module: &mut Module) {
 
 #[export_module]
 mod net_listener_functions {
+    /// Closes the listener for every clone of this handle.
     #[rhai_fn(name = "close")]
     pub fn close(listener: &mut super::NetListener) {
         listener.close();
     }
 
+    /// Whether this listener and all its clones are closed.
     #[rhai_fn(name = "closed", get = "closed")]
     pub fn closed(listener: &mut super::NetListener) -> bool {
         listener.is_closed()
     }
 
+    /// Returns the local TCP endpoint where this listener is bound, or raises NetError.
     #[rhai_fn(name = "local_addr", get = "local_addr", return_raw)]
     pub fn local_addr(
         listener: &mut super::NetListener,
@@ -242,6 +245,8 @@ mod net_listener_functions {
         listener.local_addr()
     }
 
+    /// Accepts one connection within a positive timeout in milliseconds, capped by the host accept deadline.
+    /// Raises NetError when the deadline expires or the listener cannot accept a connection.
     #[rhai_fn(name = "accept", return_raw)]
     pub fn accept(
         listener: &mut super::NetListener,

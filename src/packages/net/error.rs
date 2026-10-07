@@ -131,16 +131,19 @@ impl NetError {
 
 #[export_module]
 mod net_error_functions {
+    /// Primary error category, such as `Denied`, `InvalidInput`, `Io` or `Timeout`.
     #[rhai_fn(name = "kind", get = "kind", pure)]
     pub fn kind(err: &mut NetError) -> ImmutableString {
         err.kind().into()
     }
 
+    /// Human-readable explanation of the error.
     #[rhai_fn(name = "message", get = "message", pure)]
     pub fn message(err: &mut NetError) -> ImmutableString {
         err.message().into()
     }
 
+    /// Underlying I/O error kind, or unit when there is no I/O error kind.
     #[rhai_fn(name = "io_kind", get = "io_kind", pure)]
     pub fn io_kind(err: &mut NetError) -> Dynamic {
         err.io_kind()
@@ -148,16 +151,19 @@ mod net_error_functions {
             .unwrap_or(Dynamic::UNIT)
     }
 
+    /// Operation that failed, or unit when unavailable.
     #[rhai_fn(name = "op", get = "op", pure)]
     pub fn op(err: &mut NetError) -> ImmutableString {
         err.op().into()
     }
 
+    /// Resource target involved in the failed operation.
     #[rhai_fn(name = "target", get = "target", pure)]
     pub fn target(err: &mut NetError) -> ImmutableString {
         err.target().into()
     }
 
+    /// Bytes received or accepted before failure; this is not peer acknowledgement.
     #[rhai_fn(name = "partial_bytes", get = "partial_bytes", pure)]
     pub fn partial_bytes(err: &mut NetError) -> crate::INT {
         err.partial_bytes()

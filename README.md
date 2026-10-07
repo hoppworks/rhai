@@ -102,6 +102,34 @@ These streaming handles are separate from whole-file functions such as `read_fil
 and `write_file`. Whole-file reads use their own behavior and limits; for example, `read_file`
 replaces invalid UTF-8 with U+FFFD, while `FileHandle.read_string` reports invalid UTF-8.
 
+### Host configuration and errors
+
+The Rust host grants capabilities through `SysConfig`. `SysConfig::default()` denies filesystem,
+environment and program access; use `fs_root(path, access)`, `env(policy)` and `programs(policy)`
+to grant only what a script needs. The builder also sets process behavior and read/output limits,
+including `default_timeout`, `max_output`, `max_file_read`, `kill_on_drop`, `allow_batch_files`
+and `process_scope`. See the [`SysConfig` API](src/packages/sys/config.rs) and
+[`Child` process guide](docs/sys-process.md) for their defaults and effects.
+
+Script-visible failures are catchable `ErrorRuntime` values carrying `SysError`. Scripts can read
+`kind` and `message`; I/O failures also provide `io_kind`, `op` and `target`, while process failures
+may include a `process` report. Rust callers can recover the value from the runtime error payload.
+`SysError` is `Clone`, `Eq` and `Error`, and is marked `#[non_exhaustive]`: external Rust matches
+must account for future variants. Its `Io` variant stores the `ErrorKind` and message rather than
+the original `std::io::Error`.
+
+### Relationship to `rhai-fs`
+
+The optional [`rhai-fs` package](https://github.com/rhaiscript/rhai-fs) and `sys` overlap in several
+filesystem names. `sys` keeps the same names and argument order for `cwd()`, `exists(path)`,
+`create_dir(path)`, `remove_dir(path)` and `remove_file(path)`, but those operations are confined
+by the host's `SysConfig` grants. The streaming `FileHandle` API is a compatible subset with a
+different handle contract: it shares its byte cursor across clones, has no script-visible `close`,
+and applies the host `max_file_read` cap together with checked Engine limits. `read_blob` is not
+registered with `no_index`. Whole-file `read_file` replaces invalid UTF-8, whereas streaming
+`FileHandle.read_string` requires valid UTF-8. These differences are intentional; `sys` is not an
+unrestricted substitute for `rhai-fs`.
+
 See [`examples/sys.rs`](examples/sys.rs) for a runnable example that confines a script to a
 temporary directory and verifies the script's write from the host.
 

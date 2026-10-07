@@ -540,31 +540,38 @@ pub(super) fn register(module: &mut Module) {
 
 #[export_module]
 mod net_stream_functions {
+    /// Closes the socket for every clone of this stream.
     #[rhai_fn(name = "close")]
     pub fn close(stream: &mut super::NetStream) {
         stream.close();
     }
 
+    /// Shuts down receiving on the socket and returns unit; sending remains available. Raises NetError on failure.
     #[rhai_fn(name = "shutdown_read", return_raw)]
     pub fn shutdown_read(stream: &mut super::NetStream) -> Result<(), Box<crate::EvalAltResult>> {
         stream.shutdown(std::net::Shutdown::Read, "shutdown_read")
     }
 
+    /// Shuts down sending on the socket and returns unit; receiving remains available. Raises NetError on failure.
     #[rhai_fn(name = "shutdown_write", return_raw)]
     pub fn shutdown_write(stream: &mut super::NetStream) -> Result<(), Box<crate::EvalAltResult>> {
         stream.shutdown(std::net::Shutdown::Write, "shutdown_write")
     }
 
+    /// Whether this stream and all its clones are closed.
     #[rhai_fn(name = "closed", get = "closed", pure)]
     pub fn closed(stream: &mut super::NetStream) -> bool {
         stream.is_closed()
     }
 
+    /// Returns the remote TCP endpoint for this stream, or raises NetError.
     #[rhai_fn(name = "peer_addr", get = "peer_addr", return_raw)]
     pub fn peer_addr(stream: &mut super::NetStream) -> Result<String, Box<crate::EvalAltResult>> {
         stream.peer_addr()
     }
 
+    /// Attempts one socket write and returns accepted bytes; the result may be short.
+    /// The host write limit and checked Engine string limit apply. Raises NetError with accepted progress on failure.
     #[rhai_fn(name = "write_string", return_raw)]
     pub fn write_string(
         ctx: NativeCallContext,
@@ -578,6 +585,8 @@ mod net_stream_functions {
         stream.write_string(value, None, limit, false)
     }
 
+    /// Attempts one socket write with a positive timeout in milliseconds and returns accepted bytes; the result may be short.
+    /// The timeout is capped by the host write deadline; host and checked Engine string limits apply. Raises NetError on failure.
     #[rhai_fn(name = "write_string", return_raw)]
     pub fn write_string_with_timeout(
         ctx: NativeCallContext,
@@ -592,6 +601,8 @@ mod net_stream_functions {
         stream.write_string(value, Some(timeout_ms), limit, false)
     }
 
+    /// Completes the full string write and returns the accepted count.
+    /// The host write deadline, host limit and checked Engine string limit apply. Raises NetError with accepted progress on failure.
     #[rhai_fn(name = "write_all_string", return_raw)]
     pub fn write_all_string(
         ctx: NativeCallContext,
@@ -605,6 +616,8 @@ mod net_stream_functions {
         stream.write_string(value, None, limit, true)
     }
 
+    /// Completes the full string write using a positive timeout in milliseconds.
+    /// The timeout is capped by the host write deadline; host and checked Engine string limits apply. Raises NetError with accepted progress on failure.
     #[rhai_fn(name = "write_all_string", return_raw)]
     pub fn write_all_string_with_timeout(
         ctx: NativeCallContext,
@@ -620,6 +633,8 @@ mod net_stream_functions {
     }
 
     #[cfg(not(feature = "no_index"))]
+    /// Attempts one socket write and returns accepted bytes; the result may be short.
+    /// The host write limit and checked Engine blob limit apply. Raises NetError with accepted progress on failure.
     #[rhai_fn(name = "write_blob", return_raw)]
     pub fn write_blob(
         ctx: NativeCallContext,
@@ -634,6 +649,8 @@ mod net_stream_functions {
     }
 
     #[cfg(not(feature = "no_index"))]
+    /// Attempts one socket write with a positive timeout in milliseconds and returns accepted bytes; the result may be short.
+    /// The timeout is capped by the host write deadline; host and checked Engine blob limits apply. Raises NetError with accepted progress on failure.
     #[rhai_fn(name = "write_blob", return_raw)]
     pub fn write_blob_with_timeout(
         ctx: NativeCallContext,
@@ -649,6 +666,8 @@ mod net_stream_functions {
     }
 
     #[cfg(not(feature = "no_index"))]
+    /// Completes the full blob write and returns the accepted count.
+    /// The host write deadline, host limit and checked Engine blob limit apply. Raises NetError with accepted progress on failure.
     #[rhai_fn(name = "write_all_blob", return_raw)]
     pub fn write_all_blob(
         ctx: NativeCallContext,
@@ -663,6 +682,8 @@ mod net_stream_functions {
     }
 
     #[cfg(not(feature = "no_index"))]
+    /// Completes the full blob write using a positive timeout in milliseconds.
+    /// The timeout is capped by the host write deadline; host and checked Engine blob limits apply. Raises NetError with accepted progress on failure.
     #[rhai_fn(name = "write_all_blob", return_raw)]
     pub fn write_all_blob_with_timeout(
         ctx: NativeCallContext,
@@ -678,6 +699,8 @@ mod net_stream_functions {
     }
 
     #[cfg(not(feature = "no_index"))]
+    /// Reads one available blob prefix; a zero-length request returns immediately and a positive request means EOF when no bytes are received.
+    /// Host and checked Engine limits bound the bytes received. Raises NetError on failure.
     #[rhai_fn(name = "read_blob", return_raw)]
     pub fn read_blob(
         ctx: NativeCallContext,
@@ -692,6 +715,8 @@ mod net_stream_functions {
     }
 
     #[cfg(not(feature = "no_index"))]
+    /// Reads one available blob prefix with a positive timeout in milliseconds; a zero-length request returns immediately and a positive request means EOF when no bytes are received.
+    /// The timeout is capped by the host read deadline; host and checked Engine limits apply. Raises NetError on failure.
     #[rhai_fn(name = "read_blob", return_raw)]
     pub fn read_blob_with_timeout(
         ctx: NativeCallContext,
@@ -707,6 +732,8 @@ mod net_stream_functions {
     }
 
     #[cfg(not(feature = "no_index"))]
+    /// Reads a blob through EOF or the effective byte cap, the minimum of the requested byte limit, host limit and checked Engine limit.
+    /// Raises NetError on failure.
     #[rhai_fn(name = "read_to_end_blob", return_raw)]
     pub fn read_to_end_blob(
         ctx: NativeCallContext,
@@ -721,6 +748,8 @@ mod net_stream_functions {
     }
 
     #[cfg(not(feature = "no_index"))]
+    /// Reads a blob through EOF or the effective byte cap with a positive timeout in milliseconds.
+    /// The cap is the minimum of the requested byte limit, host limit and checked Engine limit; the timeout is capped by the host read deadline. Raises NetError on failure.
     #[rhai_fn(name = "read_to_end_blob", return_raw)]
     pub fn read_to_end_blob_with_timeout(
         ctx: NativeCallContext,
@@ -735,6 +764,8 @@ mod net_stream_functions {
         stream.read_blob(max_bytes, Some(timeout_ms), limit, true)
     }
 
+    /// Reads one available string prefix; a zero-length request returns immediately and a positive request means EOF when no bytes are received.
+    /// Host and checked Engine limits bound received bytes and decoded output. Raises NetError on failure.
     #[rhai_fn(name = "read_string", return_raw)]
     pub fn read_string(
         ctx: NativeCallContext,
@@ -748,6 +779,8 @@ mod net_stream_functions {
         stream.read_string(len, None, limit, false)
     }
 
+    /// Reads one available string prefix with a positive timeout in milliseconds; a zero-length request returns immediately and a positive request means EOF when no bytes are received.
+    /// The timeout is capped by the host read deadline; host and checked Engine limits apply. Raises NetError on failure.
     #[rhai_fn(name = "read_string", return_raw)]
     pub fn read_string_with_timeout(
         ctx: NativeCallContext,
@@ -762,6 +795,8 @@ mod net_stream_functions {
         stream.read_string(len, Some(timeout_ms), limit, false)
     }
 
+    /// Reads a string through EOF or the effective byte cap, the minimum of the requested byte limit, host limit and checked Engine limit.
+    /// Raises NetError on failure.
     #[rhai_fn(name = "read_to_end_string", return_raw)]
     pub fn read_to_end_string(
         ctx: NativeCallContext,
@@ -775,6 +810,8 @@ mod net_stream_functions {
         stream.read_string(max_bytes, None, limit, true)
     }
 
+    /// Reads a string through EOF or the effective byte cap with a positive timeout in milliseconds.
+    /// The cap is the minimum of the requested byte limit, host limit and checked Engine limit; the timeout is capped by the host read deadline. Raises NetError on failure.
     #[rhai_fn(name = "read_to_end_string", return_raw)]
     pub fn read_to_end_string_with_timeout(
         ctx: NativeCallContext,

@@ -91,7 +91,7 @@ impl SysError {
 
 #[export_module]
 mod sys_error_functions {
-    /// Name of the error variant: `Denied`, `Io`, `Timeout`, `OutputLimit` or `NotUtf8`.
+    /// Name of the error variant and primary process failure category, such as `Denied`, `Io`, `Timeout`, `OutputLimit` or `NotUtf8`.
     ///
     /// # Example
     ///
@@ -111,8 +111,8 @@ mod sys_error_functions {
     pub fn message(err: &mut SysError) -> ImmutableString {
         err.to_string().into()
     }
-    /// For `Io` errors, the name of the underlying `std::io::ErrorKind` such as `NotFound`
-    /// or `PermissionDenied`. `()` for other kinds.
+    /// For `Io` errors and process errors caused by I/O, the name of the underlying `std::io::ErrorKind` such as `NotFound`
+    /// or `PermissionDenied`. `()` when no I/O error kind is available.
     ///
     /// # Example
     ///
@@ -134,7 +134,8 @@ mod sys_error_functions {
             _ => Dynamic::UNIT,
         }
     }
-    /// For `Io` errors, what was attempted, e.g. `read file`. `()` for other kinds.
+    /// For `Io` errors and process I/O errors, the operation that failed for process I/O errors, e.g. `read file`.
+    /// `()` when no operation is available.
     #[rhai_fn(get = "op", pure)]
     pub fn op(err: &mut SysError) -> Dynamic {
         match err {
@@ -143,7 +144,8 @@ mod sys_error_functions {
             _ => Dynamic::UNIT,
         }
     }
-    /// For `Io` errors, the path or program involved. `()` for other kinds.
+    /// For `Io` errors, or process errors caused by I/O, the resource involved in process I/O failures, such as a path or program.
+    /// `()` when no resource target is available.
     #[rhai_fn(get = "target", pure)]
     pub fn target(err: &mut SysError) -> Dynamic {
         match err {
@@ -165,7 +167,7 @@ mod sys_error_functions {
     pub fn to_debug(err: &mut SysError) -> ImmutableString {
         format!("{err:?}").into()
     }
-    /// Process snapshot for process errors; `()` for other errors.
+    /// Process snapshot with captured output, completion and cleanup diagnostics for process errors; `()` for other errors.
     #[rhai_fn(get = "process", pure)]
     pub fn process(err: &mut SysError) -> Dynamic {
         match err {

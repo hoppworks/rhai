@@ -148,20 +148,32 @@ impl NetPackage {
         listener::register(&mut module);
 
         let st = state.clone();
-        reg(
+        let registration = reg(
             "connect",
-            &["/// Connect to an exact host-granted numeric IP address and port."],
-        )
-        .set_into_module(&mut module, move |address: &str, port: crate::INT| {
+            &[
+                "/// Connect to a host-granted numeric IP address and port from 1 through 65535.",
+                "/// The host connect deadline bounds the attempt. Raises NetError for invalid input, denied grants, resource limits, or I/O failures.",
+            ],
+        );
+        #[cfg(feature = "metadata")]
+        let registration =
+            registration.with_params_info(["address: &str", "port: crate::INT", "NetStream"]);
+        registration.set_into_module(&mut module, move |address: &str, port: crate::INT| {
             connect(&st, address, port)
         });
 
         let st = state.clone();
-        reg(
+        let registration = reg(
             "listen",
-            &["/// Listen on an exact host-granted numeric IP address and port."],
-        )
-        .set_into_module(&mut module, move |address: &str, port: crate::INT| {
+            &[
+                "/// Listen on a host-granted numeric IP address and port from 0 through 65535.",
+                "/// Port 0 requests an ephemeral port; inspect the bound endpoint with local_addr. Raises NetError for invalid input, denied grants, resource limits, or I/O failures.",
+            ],
+        );
+        #[cfg(feature = "metadata")]
+        let registration =
+            registration.with_params_info(["address: &str", "port: crate::INT", "NetListener"]);
+        registration.set_into_module(&mut module, move |address: &str, port: crate::INT| {
             listener::listen(&st, address, port)
         });
 

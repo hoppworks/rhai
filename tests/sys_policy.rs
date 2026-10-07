@@ -303,10 +303,7 @@ fn test_absolute_path_through_symlinked_root_ancestor() {
     assert_eq!(e.eval::<String>(&format!(r#"read_file("{via_alias}")"#)).unwrap(), "a");
     assert_eq!(e.eval::<String>(&format!(r#"read_file("{via_canonical}")"#)).unwrap(), "a");
     assert_eq!(
-        err_kind(
-            &e,
-            &format!(r#"write_file("{via_alias}", "changed")"#)
-        ),
+        err_kind(&e, &format!(r#"write_file("{via_alias}", "changed")"#)),
         "Denied"
     );
     assert_eq!(std::fs::read(t.path().join("real/sub/a.txt")).unwrap(), b"a");
@@ -525,4 +522,100 @@ fn test_function_metadata() {
     assert!(json.contains("\"name\": \"read_file\""), "{json}");
     assert!(json.contains("# Example"), "{json}");
     assert!(json.contains("SysError"), "{json}");
+
+    let metadata: serde_json::Value = serde_json::from_str(&json).unwrap();
+    let functions = metadata["functions"].as_array().expect("public function metadata");
+    let mut required_comments = vec![
+        ("get$kind", "SysError", "primary process failure category"),
+        ("get$message", "SysError", "Full error message"),
+        ("get$io_kind", "SysError", "process errors caused by I/O"),
+        ("get$op", "SysError", "operation that failed for process I/O errors"),
+        ("get$target", "SysError", "resource involved in process I/O failures"),
+        ("get$process", "SysError", "captured output, completion and cleanup diagnostics"),
+        ("to_string", "SysError", "Convert the error into its message"),
+        ("to_debug", "SysError", "debug representation"),
+    ];
+    #[cfg(unix)]
+    required_comments.extend([("get$id", "Child", "child process identifier"), ("try_wait", "Child", "without blocking"), ("wait", "Child", "result map"), ("kill", "Child", "requests cancellation")]);
+
+    for (name, receiver, expected_text) in required_comments {
+        let overloads: Vec<_> = functions
+            .iter()
+            .filter(|function| function["name"] == name)
+            .filter(|function| {
+                function["params"]
+                    .as_array()
+                    .and_then(|params| params.first())
+                    .is_some_and(|param| param["type"].as_str().is_some_and(|typ| typ.contains(receiver)))
+            })
+            .collect();
+        assert!(!overloads.is_empty(), "metadata omitted {name}: {json}");
+        for function in &overloads {
+            assert!(
+                function["docComments"].as_array().is_some_and(|comments| comments
+                    .iter()
+                    .filter_map(serde_json::Value::as_str)
+                    .any(|comment| comment.to_lowercase().contains(&expected_text.to_lowercase()))),
+                "every {name} metadata entry should mention {expected_text:?}: {function}"
+            );
+        }
+    }
+
+    for (name, return_type) in [("get$kind", "ImmutableString"), ("get$message", "ImmutableString"), ("get$io_kind", "Dynamic"), ("get$op", "Dynamic"), ("get$target", "Dynamic"), ("get$process", "Dynamic")] {
+        require_metadata_signature(functions, name, "SysError", &[("err", "&mut SysError")], return_type);
+    }
+
+    #[cfg(unix)]
+    {
+        let wait_overloads = functions
+            .iter()
+            .filter(|function| function["name"] == "wait")
+            .filter(|function| {
+                function["params"]
+                    .as_array()
+                    .and_then(|params| params.first())
+                    .is_some_and(|param| param["type"].as_str().is_some_and(|typ| typ.contains("Child")))
+            })
+            .collect::<Vec<_>>();
+        assert_eq!(wait_overloads.len(), 2, "Child.wait should expose the untimed and timed forms: {json}");
+        for function in wait_overloads {
+            let comments = function["docComments"].as_array().unwrap_or_else(|| panic!("Child.wait has no metadata comments: {function}"));
+            assert!(comments.iter().filter_map(serde_json::Value::as_str).any(|comment| comment.contains("result map")), "Child.wait overload is undocumented: {function}");
+            let params = function["params"].as_array().expect("Child.wait metadata parameters");
+            if params.len() == 2 {
+                assert!(comments.iter().filter_map(serde_json::Value::as_str).any(|comment| comment.contains("returns unit") && comment.contains("without cancelling the child")), "timed Child.wait must document timeout behavior: {function}");
+            }
+        }
+
+        require_metadata_signature(functions, "get$id", "Child", &[("child", "&mut Child")], "crate::INT");
+        require_metadata_signature(functions, "try_wait", "Child", &[("child", "&mut Child")], "Dynamic");
+        require_metadata_signature(functions, "wait", "Child", &[("child", "&mut Child")], "Map");
+        require_metadata_signature(functions, "wait", "Child", &[("child", "&mut Child"), ("seconds", if cfg!(feature = "no_float") { "crate::INT" } else { "crate::FLOAT" })], "Dynamic");
+        require_metadata_signature(functions, "kill", "Child", &[("child", "&mut Child")], "");
+    }
+}
+
+#[cfg(feature = "metadata")]
+fn require_metadata_signature(functions: &[serde_json::Value], name: &str, receiver: &str, expected_params: &[(&str, &str)], expected_return: &str) {
+    let matching = functions.iter().filter(|function| function["name"] == name).collect::<Vec<_>>();
+    let matching = matching
+        .into_iter()
+        .filter(|function| {
+            function["numParams"].as_u64() == Some(expected_params.len() as u64)
+                && function["params"]
+                    .as_array()
+                    .and_then(|params| params.first())
+                    .is_some_and(|param| param["type"].as_str().is_some_and(|typ| typ.contains(receiver)))
+        })
+        .collect::<Vec<_>>();
+    assert_eq!(matching.len(), 1, "expected one {receiver} {name} signature matching {expected_params:?} -> {expected_return}: {matching:?}");
+    let function = matching[0];
+    let params = function["params"].as_array().unwrap_or_else(|| panic!("{name} metadata omitted parameters: {function}"));
+    let actual = params
+        .iter()
+        .map(|param| (param["name"].as_str().unwrap_or_default(), param["type"].as_str().unwrap_or_default()))
+        .collect::<Vec<_>>();
+    assert_eq!(actual, expected_params, "{name} metadata parameter names/types differ: {function}");
+    assert_eq!(function["numParams"].as_u64(), Some(expected_params.len() as u64), "{name} numParams disagrees with its metadata parameters: {function}");
+    assert_eq!(function["returnType"].as_str().unwrap_or_default(), expected_return, "{name} metadata return type is wrong: {function}");
 }

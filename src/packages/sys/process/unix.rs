@@ -1734,12 +1734,26 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
     }
 }
 
+#[allow(unused_variables)]
+fn child_registration(name: &str, comments: &[&str], params: &[&str]) -> crate::FuncRegistration {
+    let registration = crate::FuncRegistration::new(name);
+    #[cfg(feature = "metadata")]
+    let registration = registration
+        .with_comments(comments)
+        .with_params_info(params);
+    registration
+}
+
 impl ProcessChild {
     fn register(module: &mut Module) {
         module.set_custom_type::<Self>("Child");
         let getter = crate::FuncRegistration::new(crate::engine::make_getter("id"))
             .with_purity(true)
             .with_volatility(false);
+        #[cfg(feature = "metadata")]
+        let getter = getter
+            .with_comments(["/// Child process identifier (PID)."])
+            .with_params_info(["child: &mut Child", "crate::INT"]);
         getter.set_into_module(module, |child: &mut Self| -> INT {
             child
                 .lease
@@ -1749,62 +1763,82 @@ impl ProcessChild {
                 .unwrap_or_else(|p| p.into_inner())
                 .pid as INT
         });
-        crate::FuncRegistration::new("try_wait")
-            .with_purity(false)
-            .set_into_module(module, |child: &mut Self| -> Res<Dynamic> {
-                child.snapshot(false, None)
-            });
-        crate::FuncRegistration::new("wait")
-            .with_purity(false)
-            .set_into_module(module, |child: &mut Self| -> Res<Map> {
-                match child.snapshot(true, None)? {
-                    value if value.is_unit() => unreachable!("blocking wait has no timeout"),
-                    value => Ok(value.cast()),
-                }
-            });
+        child_registration(
+            "try_wait",
+            &["/// Polls the child without blocking and returns a current result snapshot."],
+            &["child: &mut Child", "Dynamic"],
+        )
+        .with_purity(false)
+        .set_into_module(module, |child: &mut Self| -> Res<Dynamic> {
+            child.snapshot(false, None)
+        });
+        child_registration(
+            "wait",
+            &["/// Waits for the child to finish and returns its process result map."],
+            &["child: &mut Child", "Map"],
+        )
+        .with_purity(false)
+        .set_into_module(module, |child: &mut Self| -> Res<Map> {
+            match child.snapshot(true, None)? {
+                value if value.is_unit() => unreachable!("blocking wait has no timeout"),
+                value => Ok(value.cast()),
+            }
+        });
         #[cfg(not(feature = "no_float"))]
-        crate::FuncRegistration::new("wait")
-            .with_purity(false)
-            .set_into_module(
-                module,
-                |child: &mut Self, seconds: crate::FLOAT| -> Res<Dynamic> {
-                    let timeout =
-                        if seconds.is_finite() && seconds >= 0.0 {
-                            Some(Duration::try_from_secs_f64(seconds as f64).map_err(|_| {
-                                SysError::Denied("wait timeout is out of range".into())
-                            })?)
-                        } else {
-                            return Err(SysError::Denied(
-                                "wait timeout must be a finite non-negative number".into(),
-                            )
-                            .into());
-                        };
-                    child.snapshot(true, timeout)
-                },
-            );
+        child_registration(
+            "wait",
+            &["/// Waits up to the supplied timeout for the child and returns a result map when it finishes. If it is still running when the timeout expires, returns unit without cancelling the child."],
+            &["child: &mut Child", "seconds: crate::FLOAT", "Dynamic"],
+        )
+        .with_purity(false)
+        .set_into_module(
+            module,
+            |child: &mut Self, seconds: crate::FLOAT| -> Res<Dynamic> {
+                let timeout =
+                    if seconds.is_finite() && seconds >= 0.0 {
+                        Some(Duration::try_from_secs_f64(seconds as f64).map_err(|_| {
+                            SysError::Denied("wait timeout is out of range".into())
+                        })?)
+                    } else {
+                        return Err(SysError::Denied(
+                            "wait timeout must be a finite non-negative number".into(),
+                        )
+                        .into());
+                    };
+                child.snapshot(true, timeout)
+            },
+        );
         #[cfg(feature = "no_float")]
-        crate::FuncRegistration::new("wait")
-            .with_purity(false)
-            .set_into_module(module, |child: &mut Self, seconds: INT| -> Res<Dynamic> {
-                if seconds < 0 {
-                    return Err(SysError::Denied("wait timeout must be non-negative".into()).into());
-                }
-                child.snapshot(true, Some(Duration::from_secs(seconds as u64)))
-            });
-        crate::FuncRegistration::new("kill")
-            .with_purity(false)
-            .set_into_module(module, |child: &mut Self| {
-                let mut state = child
-                    .lease
-                    .control
-                    .snapshot
-                    .lock()
-                    .unwrap_or_else(|p| p.into_inner());
-                if !state.terminal {
-                    state.kill_requested = true;
-                    child.lease.registry.changed.notify_all();
-                }
-            });
+        child_registration(
+            "wait",
+            &["/// Waits up to the supplied timeout in whole seconds for the child and returns a result map when it finishes. If it is still running when the timeout expires, returns unit without cancelling the child."],
+            &["child: &mut Child", "seconds: crate::INT", "Dynamic"],
+        )
+        .with_purity(false)
+        .set_into_module(module, |child: &mut Self, seconds: INT| -> Res<Dynamic> {
+            if seconds < 0 {
+                return Err(SysError::Denied("wait timeout must be non-negative".into()).into());
+            }
+            child.snapshot(true, Some(Duration::from_secs(seconds as u64)))
+        });
+        child_registration(
+            "kill",
+            &["/// Requests cancellation of the child process."],
+            &["child: &mut Child"],
+        )
+        .with_purity(false)
+        .set_into_module(module, |child: &mut Self| {
+            let mut state = child
+                .lease
+                .control
+                .snapshot
+                .lock()
+                .unwrap_or_else(|p| p.into_inner());
+            if !state.terminal {
+                state.kill_requested = true;
+                child.lease.registry.changed.notify_all();
+            }
+        });
     }
 
     fn snapshot(&self, wait: bool, timeout: Option<Duration>) -> Res<Dynamic> {
