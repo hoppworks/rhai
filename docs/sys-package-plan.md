@@ -391,6 +391,34 @@ product corrections. Packages B–F and release acceptance remain open.
 This section is the single current plan; the campaign state records evidence and
 ownership. Historical estimates do not allocate retries or certify completion.
 
+**Accepted partial criterion: X30, Linux descriptor stability.** The real entry is
+`tests/sys_process.rs::repeated_public_run_calls_keep_fd_count_stable`: the
+ordinary acceptance test launches the ignored census test by exact name in a
+fresh child process, isolating its process-wide descriptor census from other
+integration tests. The child uses public Rhai `Engine::eval` to run `/bin/true`
+200 times after one warm-up and compares its OS `/proc/self/fd` census before
+and after. The exact command is
+`cargo +1.93.0 test --locked --features testing-environ,sys --test sys_process repeated_public_run_calls_keep_fd_count_stable -- --exact --nocapture --test-threads=1`.
+This is independent of the exhausted Package B and E routes and needs no shared
+service. The first run initializes the persistent package cleanup worker before
+the baseline. The parent test gives the isolated child a 60-second deadline,
+captures stdout/stderr in temporary files, and on timeout kills its process
+group, kills and reaps the direct child, and includes captured output in the
+failure. On 2026-10-07 attempt 06, a wrong expected descriptor count failed at
+the X30 assertion inside the isolated child, then the restored source passed
+all 200 calls. The independent `/proc/self/fd` census read back four
+descriptors both before and after; task and cleanup-worker counts also returned
+to baseline. This closes only the Linux
+x86_64, Rust/Cargo 1.93.0, `testing-environ,sys` row. Other X30 matrix rows and
+Ticket 03 remain open. No product correction was needed. The bounded run took
+31.534 seconds of aggregate Cargo time; periodic samples observed up to four
+owned processes, 910,152 KiB RSS, and 1,284,764 KiB private storage (not
+continuous peaks), with no sampler retry. The canonical scoped runner followed
+fresh Workhorse source/toolchain, active-slot and actual filesystem capacity
+checks. All nine test-output hashes and 21 staged/exported file hashes matched
+the Workhorse readback. The private runtime and exact owned scope were removed;
+no private Cargo build is reusable.
+
 ### 6.1 Applicable rules and historical investigation
 
 Current central repository: `/Users/hoppworks/projects/agent-skills`, inspected HEAD
@@ -869,7 +897,7 @@ source test alone or by an unreviewed/provisional result.
 | X27 | Shared-child and managed final-drop proofs | Accepted for named Linux cases: `kill_on_drop=true` cleanup/reaping; only named feature rows. |
 | X28 | `linux-drop-false-native2-proof.md`; `linux-drop-false-next.md` | Partial: exact Linux direct/managed retention tests and independent group readback are accepted at the named default Linux row, and macOS direct/managed proof is reusable; Windows and other feature rows remain open. The later `linux-drop-false-next.md` is a planning note predating native2 and does not invalidate that accepted proof. |
 | X29 | Shared-child panic fixture | Open: Rust controller panic cleanup is not Rhai script `throw` cleanup. |
-| X30 | No 200-run resource stability test identified | Open: no sequential-run file-descriptor/handle stability acceptance. |
+| X30 | `tests/sys_process.rs::repeated_public_run_calls_keep_fd_count_stable`; `.scratch/all-tickets/process-fd-stability-evidence/x30-fd-stability-20261007-1530z/attempt-06/` | Partial: attempt 06 proves that the exact-filtered acceptance test isolates its `/proc/self/fd` census in a fresh process, where 200 sequential public `run` calls leave the count unchanged; a wrong-count control fails and restored GREEN passes. The parent enforces a 60-second child deadline and terminates/reaps on timeout. Applies only to Linux x86_64, Rust/Cargo 1.93.0, `testing-environ,sys`; other OS, MSRV and feature rows, including Windows handle stability, remain open. |
 | X31 | `process_representation_is_send_sync_and_shareable`; sync shared-child proof | Accepted for named Linux sync rows: shared representation and concurrent cancellation/wait behavior; actual blocking-entry and wider feature rows remain limited. |
 | X32 | `tests/sys_process_windows.rs` | Open: no native Windows embedded-quote argv reconstruction test. |
 | X33 | `tests/sys_process_windows.rs` | Open: no native Windows `.exe` suffix/PATH resolution test. |

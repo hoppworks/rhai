@@ -4516,6 +4516,98 @@ fn run_reports_a_real_unix_child_signal_without_an_exit_code() {
 }
 
 #[test]
+#[cfg(all(target_os = "linux", not(feature = "no_index")))]
+fn repeated_public_run_calls_keep_fd_count_stable() {
+    let executable = std::env::current_exe().expect("locate sys_process test executable");
+    let output = TempDir::new();
+    let stdout_path = output.path().join("isolated-x30.stdout");
+    let stderr_path = output.path().join("isolated-x30.stderr");
+    let stdout_file = std::fs::File::create(&stdout_path).expect("create isolated X30 stdout log");
+    let stderr_file = std::fs::File::create(&stderr_path).expect("create isolated X30 stderr log");
+    let mut command = Command::new(executable);
+    command
+        .args([
+            "--ignored",
+            "--exact",
+            "repeated_public_run_calls_keep_fd_count_stable_isolated",
+            "--nocapture",
+            "--test-threads=1",
+        ])
+        .stdin(Stdio::null())
+        .stdout(Stdio::from(stdout_file))
+        .stderr(Stdio::from(stderr_file));
+    use std::os::unix::process::CommandExt as _;
+    command.process_group(0);
+    let mut child = command
+        .spawn()
+        .expect("run the isolated X30 descriptor census test");
+    let child_pgid = child.id() as libc::pid_t;
+    let deadline = Instant::now() + Duration::from_secs(60);
+    let status = loop {
+        match child.try_wait() {
+            Ok(Some(status)) => break status,
+            Ok(None) if Instant::now() < deadline => std::thread::sleep(Duration::from_millis(10)),
+            observed => {
+                let reason = match observed {
+                    Ok(None) => "timed out after 60 seconds".to_owned(),
+                    Err(error) => format!("failed while waiting for isolated test child: {error}"),
+                    Ok(Some(_)) => unreachable!(),
+                };
+                let group_signal = unsafe { libc::kill(-child_pgid, libc::SIGKILL) };
+                let group_signal_error = (group_signal == -1).then(std::io::Error::last_os_error);
+                let direct_child_kill = child.kill();
+                let reaped = child.wait();
+                let stdout = std::fs::read_to_string(&stdout_path)
+                    .unwrap_or_else(|error| format!("<read failed: {error}>"));
+                let stderr = std::fs::read_to_string(&stderr_path)
+                    .unwrap_or_else(|error| format!("<read failed: {error}>"));
+                panic!("isolated X30 census {reason}; process-group signal={group_signal} error={group_signal_error:?}; direct-child kill={direct_child_kill:?}; reap={reaped:?}\nstdout:\n{stdout}\nstderr:\n{stderr}");
+            }
+        }
+    };
+    let stdout = std::fs::read_to_string(&stdout_path).expect("read isolated X30 stdout log");
+    let stderr = std::fs::read_to_string(&stderr_path).expect("read isolated X30 stderr log");
+    assert!(
+        status.success(),
+        "isolated X30 census failed with {status}\nstdout:\n{stdout}\nstderr:\n{stderr}"
+    );
+    assert!(
+        stdout.contains("test repeated_public_run_calls_keep_fd_count_stable_isolated ... ok"),
+        "isolated test runner did not report the exact census test as passed\nstdout:\n{stdout}\nstderr:\n{stderr}"
+    );
+    let combined = format!("{stdout}{stderr}");
+    assert!(combined.contains("x30_process_run_fd_stability iterations=200"), "isolated test output lacks the 200-run descriptor read-back\nstdout:\n{stdout}\nstderr:\n{stderr}");
+    eprint!("{stdout}{stderr}");
+}
+#[test]
+#[ignore = "run by the public X30 test in a fresh process for a stable /proc census"]
+#[cfg(all(target_os = "linux", not(feature = "no_index")))]
+fn repeated_public_run_calls_keep_fd_count_stable_isolated() {
+    let engine = engine(SysConfig::default().programs(ProgramPolicy::Any));
+    let run_once = || engine.eval::<Map>(r#"run("/bin/true")"#).unwrap_or_else(|error| panic!("public Engine run failed: {error:?}"));
+
+    // The first run may start the package's persistent cleanup worker. Establish
+    // the descriptor baseline after that one-time initialization.
+    let warmup = run_once();
+    assert!(warmup["success"].as_bool().unwrap(), "warm-up result: {warmup:?}");
+    assert_eq!(warmup["code"].as_int(), Ok(0), "warm-up result: {warmup:?}");
+    let baseline = resource_census_snapshot();
+
+    for iteration in 0..200 {
+        let result = run_once();
+        assert!(result["success"].as_bool().unwrap(), "iteration {iteration}: {result:?}");
+        assert_eq!(result["code"].as_int(), Ok(0), "iteration {iteration}: {result:?}");
+    }
+
+    let after = resource_census_wait_for_baseline(baseline);
+    assert_eq!(after.1, baseline.1, "200 sequential public run calls changed the descriptor count");
+    eprintln!(
+        "x30_process_run_fd_stability iterations=200 baseline_tasks={} baseline_fds={} baseline_cleanup_workers={} after_tasks={} after_fds={} after_cleanup_workers={}",
+        baseline.0, baseline.1, baseline.2, after.0, after.1, after.2
+    );
+}
+
+#[test]
 #[cfg(not(feature = "no_index"))]
 fn run_io_contract_empty_output() {
     let engine = engine(SysConfig::default().programs(ProgramPolicy::Any));
