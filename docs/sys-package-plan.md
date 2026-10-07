@@ -2,15 +2,21 @@
 
 Current status (2026-10-07): implementation resumed by the owner's explicit
 instruction. Package A, committed Child cause, is complete at its bounded Linux /
-Rust 1.77.2 acceptance scope after four native allocations. Attempt 4 passed four
-intended baseline/mutant RED controls and both restored GREEN controls in one
-archive. The production fix is present in the writer worktree at the exact tested
-source hash `fced800d5b05a1582a4d1c27cadabda32dc1517522e5ed733865d7faab48e5d4`;
-the combined independent review returned READY with no material code findings.
-Independent readback and closure verified the preserved originals, process
-identities, groups and paths before the exact Workhorse stage and private runtime
-were retired. No compiled build is reusable. The package evidence is under
-`../.scratch/all-tickets/process-first-cause-evidence/originals/`. Packages B–F,
+Rust 1.77.2 acceptance scope after five cumulative native allocations. Attempt 5
+passed four intended baseline/mutant RED controls and both restored GREEN controls
+in one archive. The production fix is present at the exact tested source hash
+`d4fc28906b624f6e9368d0bef16e82e3fc29cada5142da67406fd95962153115`; the combined
+independent review returned READY with no material code findings. A review of
+attempt 4 had found that its process-identity observation could occur after child
+exit; attempt 5 added and proved a live-identity acknowledgment before
+cancellation. The 71 preserved originals were independently read back. The runner
+removed its private runtime and scope after exporting evidence; the collector then
+validated/exported the originals and retired the exact Workhorse stage. A fresh
+closure afterward verified 113 process identities, five groups and six paths
+absent. No compiled build is reusable.
+The accepted evidence is under
+`../.scratch/all-tickets/process-first-cause-evidence/attempt-05/originals/`;
+attempt-4 evidence remains preserved as historical corroboration. Packages B–F,
 the remaining ticket criteria, integrated platform acceptance and release closure
 remain open; no full ticket or release completion is claimed.
 
@@ -350,7 +356,8 @@ release contract and current section6 govern future execution.
 ## 6. Remaining acceptance plan — revised 2026-10-07
 
 **Current execution plan.** The owner explicitly resumed implementation after this
-plan was revised. Package A is complete at its recorded Linux/Rust 1.77.2 scope;
+plan was revised. Package A is complete at its recorded Linux/Rust 1.77.2 scope
+after attempt 5 closed the live-child identity gap found in review of attempt 4;
 Package B remains open after its documented infrastructure stops; its required
 criterion map is now complete. Package E's one bounded Expert24 follow-up has
 ended in a confirmed launcher infrastructure failure before Cargo/assertions. Its
@@ -406,14 +413,16 @@ real acceptance. No Tauron test counts or failure causes are imported.
 
 ### 6.2 Reconstructed state and immediate bottleneck
 
-The detailed first-cause attempt narrative in this subsection is a historical
-snapshot from before native allocation 4. Its present-tense wording describes that
-earlier point in time; Package A's completed status and accepted evidence are
-recorded in 6.3 and 6.6 below. Do not treat its old staged wrapper or source pins as
-the current next action.
+The detailed first-cause attempt narrative in this subsection is historical through
+native allocation 3. The attempt-4 record was also superseded as sole acceptance
+evidence when combined review found its identity observation could race child exit.
+Attempt 5 closes that specific gap; the accepted status and proof are recorded in
+6.3–6.5 below. Do not treat old staged wrappers or source pins as current inputs.
 
-Coordinator HEAD is `8e5fe089fbcc86979ed3d5b73c393bf8fec72150` in
-`/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery`.
+At the earlier planning checkpoint, coordinator HEAD was
+`8e5fe089fbcc86979ed3d5b73c393bf8fec72150` in
+`/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery`;
+that hash is historical, not the current implementation branch head.
 All six local decision tickets are resolved as specifications. Feature completion
 and release acceptance remain open. Existing filesystem/environment/file-handle/TCP
 proof, core Darwin Rust 1.66 Engine proof, optional compiler/nonprocess feature
@@ -422,11 +431,12 @@ recorded source, assertion, toolchain and platform applicability. Compilation,
 older native Windows 45-test proof and Wine do not close current process/TCP release
 acceptance. No fresh remote-head claim is made by this implementation continuation.
 
-The current first-cause writer is
+At the historical checkpoint below, the first-cause writer was
 `/Users/hoppworks/projects/rhai/.worktrees/process-first-cause`, HEAD
 `77149f19e017007281396dcbf2eb8e69b7b90a37`, with preserved dirty source/recipe
-corrections and untracked staging/collector files. The production fix remains
-unapplied. Native allocation 1 was admitted at 2026-10-07T06:47:41Z and reached
+corrections and untracked staging/collector files. At that checkpoint the
+production fix remained unapplied. Native allocation 1 was admitted at
+2026-10-07T06:47:41Z and reached
 `baseline-red-direct`, but rustc stopped before any product assertion with E0308
 at `src/packages/sys/process/unix.rs:4703`: the test adapter parsed PGID as `u32`
 while the observed value is `i32`. The helper's missing raw-child receipt follows
@@ -496,7 +506,7 @@ resource rules in 6.4–6.6; no row is done merely because this plan names it.
 
 | Package | Observable exit and dependencies | Cheap preflight and existing route | Real evidence, review and reuse |
 |---|---|---|---|
-| A. Committed Child cause | DirectChild and Managed retain the first actually committed stdout cause after gated stderr overflow/lossy expansion; cached results, captured bytes/EOF and cleanup agree. | Complete in native allocation 4 using the existing bounded six-control invocation: baseline RED and overwrite-mutant RED in both modes, followed by restored GREEN in both modes. All six expected statuses and assertions passed at one archive. The baseline fix's current source hash matches the tested GREEN phase. Combined independent review returned READY. | Original proof, source-phase hashes, child acknowledgments/argv/PID/start/group, captured bytes/EOF, lifecycle and cleanup receipts, independent identity/group/path closure, and custody/readback receipts are preserved under `../.scratch/all-tickets/process-first-cause-evidence/originals/`. 127 process identities, five owned groups and six paths were independently checked; stage and runtime are absent. The exact tested source change is implemented in the writer worktree. This closes Package A only for Linux/Rust 1.77.2; it does not close ticket 03 or other platform/features. Preserve accepted overlap/setup/performance proof. |
+| A. Committed Child cause | DirectChild and Managed retain the first actually committed stdout cause after gated stderr overflow/lossy expansion; cached results, captured bytes/EOF and cleanup agree. | Complete in native allocation 5 using the existing bounded six-control invocation: baseline RED and overwrite-mutant RED in both modes, followed by restored GREEN in both modes. All six expected statuses and assertions passed at one archive. The exact tested source hash is `d4fc28906b624f6e9368d0bef16e82e3fc29cada5142da67406fd95962153115`. Combined independent review returned READY. | Original proof, source-phase hashes, child acknowledgments/argv/PID/start/group, captured bytes/EOF, lifecycle and cleanup receipts, independent identity/group/path closure, and custody/readback receipts are preserved under `../.scratch/all-tickets/process-first-cause-evidence/attempt-05/originals/`. The live PID/PGID/start-ticks/argv handshake was acknowledged before cancellation; independent closure checked 113 process identities, five groups and six paths. Stage, scope and runtime are absent. This closes Package A only for Linux/Rust 1.77.2; it does not close ticket 03 or other platform/features. Preserve accepted overlap/setup/performance proof. |
 | B. Remaining process terminal/cancellation semantics | First committed cause survives secondary cleanup; no-primary guard still reports the correct cause; stdin early close, cached wait/try_wait/kill, capture flags, owner/sentinel survival and bounded reaping meet ticket 03. Depends on A for the same Child capture path; stdin can be diagnosed independently. | A focused public-Engine Child.wait regression for no-primary decoded-output expansion is source-pinned and its affected review is READY, but its assertion has not executed. The last bounded Workhorse invocation exited at run.sh line 4 because the launcher omitted required SESSION_SCOPE; Rustup/Cargo/tests did not start. This is infrastructure, not RED or product failure. Preserve three Package B launches / three infrastructure stops / zero assertions. The one post-escalation follow-up is consumed; do not retry this path or use native110. | package-b-child-wait-01/attempt-03/outcome.json preserves outer logs and readback hashes; the private runtime and exact remote scope were cleaned. The named no-primary behavior remains unaccepted. The criterion map in 6.7 records exact test/proof applicability and gaps; do not retry the stopped path or use native110. Other open stdin, cache, cancellation, capture, owner/sentinel and bounded-reap cases remain open where no applicable accepted proof exists. One combined lifecycle review per affected implementation; preserve accepted Linux controls. |
 | C. Darwin native completion | Missing macOS lifecycle, process behavior and sys/net real examples/feature interactions pass on native Darwin at the selected Rust version. Depends on a proven custody/readback path; no dependence on re-running Linux foundations. | Compare current sources and selected dependency/tool graph with existing compiler/sys/net proof. Existing `.scratch/all-tickets/macos-process-overhead.py` and `darwin-process-reader.py` are the nominated path; verify all actual paths/imports/SDK/tool versions and original stdout grammar before a native launch. Old source pins and Expert09/12 failed follow-ups are not ready execution. | Public Engine, actual child/group state, independent native reader, TCP peer and file readback where applicable; intact host/sentinel. One combined review of changed custody plus affected behavior. Reuse compiler/nonprocess/EPERM proof where unchanged. Earlier overhead method measures API-entry-to-report, not spawn-to-first-byte; do not repeat a fulfilled measurement merely for a new plan. |
 | D. Windows custody then native behavior | Exact owned job survives connection loss under an independent lease/monitor, bounds work, reports truthful nonzero failure and exports/cleans; then native sys/process/net and quoting/policy/feature criteria pass. Custody is a prerequisite with its own partial exit. | Existing `windows-runner-gate.md`, Windows scoped-runner brief, Expert02/13 and `windows-resume-20261003/harness-command.txt` are the canonical design/history. Before compiler use, check the full console/client/job/status/export path. Current self-inclusive teardown has a source-supported failure-status explanation, not proven kernel causation. Preserve exhausted two harness attempts; no automatic third. | Native setup-failure, real 0/17, mismatch/restored, interrupted connection/supervisor, exact job membership/closure and retained primary diagnostics. Observer stays outside the failed job. Then real Engine, actual filesystem/TCP peer/process readback. One combined package review, extra Windows specialist only for a named unresolved job risk. Preserve installation/activation/native baseline and backups; never drive the other Session's guest. |
@@ -509,15 +519,32 @@ peers and process observations replace storage writes for networking/process
 behavior. Read-only APIs compare independent truth. A mock or compiler success
 cannot replace these checks.
 
+Package A acceptance record: the entry point was a public `Engine::eval` call
+running a Rhai `spawn` script through the registered `sys` package to a real
+Unix child on Linux with Rust 1.77.2 and `testing-environ,sys`. The child emitted
+stdout and stderr under deterministic gates; an independent `/proc` readback
+matched its live PID, PGID, start ticks and argv before the parent released the
+child. The six controls comprised four intentional REDs (baseline and
+stderr-overwrite mutant, DirectChild and Managed) that exited 101 at the
+first-cause assertion, followed by two restored GREENs that exited 0 and passed
+the selected test. The green cases also verified cached results, exact captured
+bytes, stream EOF, child reaping, Managed group closure and empty cleanup
+diagnostics. The independent closure and preserved raw outputs are in
+`../.scratch/all-tickets/process-first-cause-evidence/attempt-05/originals/`.
+This proves Package A's stated Linux/Rust 1.77.2 criterion only; no cross-platform,
+other-feature, Package B, ticket-wide or release acceptance is inferred.
+
 ### 6.4 Concrete command contract and current execution
 
-All paths below were read. The attempt-3 producer, collector and closure parsed
-the libtest-selected receipt and separate `ok`/`FAILED` result. Attempt 3
-provided four expected RED controls and a DirectChild restored-GREEN partial
-result. Attempt 4 used the corrected source and passed all six controls; its
-original outputs and exact phase hashes are preserved. The combined independent
-review and custody/readback checks are complete. Other proposed commands remain
-unexecuted until their inputs are frozen.
+All paths below were read. Attempt 3 provided four expected RED controls and a
+DirectChild restored-GREEN partial result. Attempt 4 passed all six controls, but
+the subsequent combined review found its parent identity observation did not
+prove that the child was still live at observation time. Attempt 5 added a
+parent-acknowledged live identity handshake before cancellation and passed all
+six controls again; its exact phase hashes, original outputs and independent
+closure are preserved. The combined review and custody/readback checks are
+complete for this scoped criterion. Other proposed commands remain unexecuted
+until their inputs are frozen.
 POSIX commands run from an owned source copy within the existing bounded runner,
 not the coordinator's mutable source. Project ID is `rhai`. The invocation creates
 one unique owned absolute session scope and uses its path as `TMPDIR` for
@@ -535,20 +562,17 @@ For A, the existing native argument shape is:
 
 The second exact test ends in `_managed`. The recipe executes four intended REDs
 and two restored GREENs in one bounded runtime, preserving phase hashes and raw
-receipts. Attempt 1 failed during fixture compilation before assertion; attempt 2
-reached the expected baseline RED, then its producer stopped before the remaining
-five controls because the receipt parser did not accept the observed libtest
-output. Attempt 3 passed four RED controls. DirectChild restored GREEN reached
-the cause, cached-result, output-byte and child-lifecycle assertions, then stopped
-at the stale EOF assertion; the following cleanup-diagnostics assertion was not
-reached. The reviewed correction now requires both streams complete after child
-exit.
-Preserve the 49 hash-matched attempt-3 files and independent closure as partial
-proof. Attempt 4 passed the complete six-control set at one exact archive, so no
-selective cross-run aggregation or additional acceptance runner was needed. The
-phase hashes show the production fix in both restored-GREEN cases and the
-baseline restored after the mutant. The exact stage and private runtime were
-retired only after evidence export, independent readback and closure.
+receipts. Attempts 1–3 and their fixture/parser corrections remain historical
+and are detailed above. Attempt 4 passed all six controls, but the later review
+found its parent identity observation could occur after child exit. Attempt 5
+repeated the bounded six-control recipe with an explicit live-identity
+acknowledgment before cancellation; all six expected statuses and assertions
+passed at one exact archive. The phase hashes show the production fix in both
+restored-GREEN cases and the baseline restored after the mutant. Attempt-5 evidence
+was exported first; the runner removed its private runtime and scope, the collector
+validated/exported originals and retired the stage, then fresh closure verified
+that the identities, groups and paths were absent. No compiled build remains
+reusable.
 
 The accepted project baseline route remains:
 `cargo test --locked --features testing-environ,sys,metadata --test sys_policy --test sys_env --test sys_fs`.
@@ -571,7 +595,9 @@ Read-only existence checks on 2026-10-07:
 | First-cause attempt 2 | Its stale stage was retired after attempt-3 stage readback; original partial proof is under the writer's `attempts/attempt-02/`, with 34 files hash-matched locally. It contains one valid baseline RED and process receipt, not full acceptance. |
 | First-cause attempt 3 | Partial evidence is under the writer's `attempts/attempt-03/`; 49 files match Workhorse SHA-256 readback. Four expected REDs are valid. DirectChild restored GREEN reached the cause, cached-result, output-byte and child-lifecycle assertions, then failed at the old EOF assertion; the following cleanup-diagnostics assertion was not reached, and Managed GREEN did not run. Fresh closure verified 120 identities absent or reused, two owned groups empty and the private scope/runtime absent. Exact stale stage `parserfix-01` was retired at 2026-10-07T07:55:26Z after checking 120 PID/start identities and empty groups; the receipt also confirms scope absence. |
 | First-cause attempt 4 | Complete originals are preserved under `../.scratch/all-tickets/process-first-cause-evidence/originals/stage-originals/proof-evidence/`, with outer custody and independent-closure receipts under `../.scratch/all-tickets/process-first-cause-evidence/originals/`. Four intended RED controls exited 101 at the first-cause assertion; both restored GREEN controls exited 0 and independently read back one passed test. The phase source hash is `fced800d5b05a1582a4d1c27cadabda32dc1517522e5ed733865d7faab48e5d4`; final baseline restoration matched. Resource samples (54 periodic samples) recorded maxima 950,608 KiB RSS, 697,712 KiB storage and four descendants, below the recorded limits; these are sampled, not continuous peaks. Independent closure verified 127 identities, five owned groups and six paths. The exact stage, scope and private runtime are absent. No compiled artifact is reusable. |
-| First-cause stage | The `parserfix-02` stage was consumed by attempt 4, then independently read back and retired after preserving proof. It is absent at `/var/roothome/rhai-linux-process-first-cause-01a0f114-20261007-parserfix-02`; the central private scope and runner runtime are also absent. Do not reuse historical stage paths or claim a reusable build. |
+| First-cause attempt 5 (accepted) | All 71 original files are preserved under `../.scratch/all-tickets/process-first-cause-evidence/attempt-05/originals/`; source phases, raw outputs, parent child-identity acknowledgments, custody, independent closure and retirement receipts were read back. Four intentional RED controls exited 101 at the intended first-cause assertion and two restored GREEN controls exited 0; the final source hash is `d4fc28906b624f6e9368d0bef16e82e3fc29cada5142da67406fd95962153115`. A parent-acknowledged `/proc` observation proved PID/PGID/start ticks/argv while the child was live before cancellation. Independent closure verified 113 identities, five groups and six absent paths. Forty-seven periodic samples recorded maxima of 931,608 KiB RSS, 687,208 KiB storage and four descendants; sampled values are not continuous peaks and remained below recorded bounds. Exact stage, scope and private runtime are absent. No compiled artifact is reusable. |
+| First-cause attempt-4 interpretation | Attempt 4's six controls and evidence remain preserved as historical corroboration, but the later independent review found its process-identity sampling could occur after child exit. Do not use attempt 4 alone to claim the live-identity criterion; attempt 5 supplies that missing proof. |
+| First-cause stages | Attempt-4 `parserfix-02` was independently read back and retired. Attempt-5 stage `/root/rhai-linux-process-first-cause-fc-20261007-ack05-7d11e2c4` was retired after proof export; the fresh closure afterward confirmed stage, scope and runner runtime absence. Do not reuse historical stage paths or claim a reusable build. |
 | Core private builds | All four paths in `core-current-msrv-root-readback.json` are still absent locally. Logs/control/restoration proof remains; no compiled-target reuse claim. |
 | macOS locked source audit | Historical source-integrity receipt remains, but its exact `macos-overhead-safeguards/.../macos-overhead-custody-source-audit` path is absent. Restore only required source inputs from verified surviving archives or acquire needed inputs later; do not claim the old 131-archive tree is available. |
 | Windows baseline/images | Read-only host listing confirms `/var/lib/libvirt/images/rhai-win11-quality` with system.qcow2, baseline and ready-baseline. Existence does not establish source/toolchain provenance or guest cache availability. Guest paths were not queried and remain unconfirmed; preserve this other owner's resources and snapshots. |
@@ -814,7 +840,7 @@ applicable revision.
 | Tickets04/05 TCP authority/API | Accepted separate connect/listen grants, numeric IPv4/IPv6, port0 listen, bytes/text/partial progress/EOF/half-close, clone close, resource limits and sync/cancellation remain; existing Linux proof plus missing C/D/F native/feature rows. No DNS/UDP/HTTP/TLS added. |
 | Ticket06; R1–R7 and release proposal | E/F preserve compatibility, metadata/docs/examples, core1.66/optional1.77.2, explicit no_std/no_object/WASM rejection, semantic feature matrix, native three-OS scope and source/dependency provenance. R4's historical alternative is resolved by rejection, not a new tuple API. |
 | Process performance/diagnostics and resource safeguards | Accepted narrow Linux performance and lifecycle diagnostics remain with measurement scope; uncovered native requirements C/D/F. No duplicate benchmark solely for this revision. |
-| Owner boundaries and repository outcome | No arbitrary-untrusted sandbox claim, parent env mutation, unrelated features, Actions enablement or publishing. Later verified integration only to hoppworks/rhai main, lowercase hoppworks attribution, foreign work preserved. This implementation continuation is authorized; no Git write is part of the current package step. |
+| Owner boundaries and repository outcome | No arbitrary-untrusted sandbox claim, parent env mutation, unrelated features, Actions enablement or publishing. Verified integration only to hoppworks/rhai main, lowercase hoppworks attribution, foreign work preserved. The owner explicitly authorized atomic commit and push of this verified package to the fork; no public-upstream write is authorized. |
 
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance

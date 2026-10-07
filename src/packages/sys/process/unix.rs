@@ -180,6 +180,8 @@ struct SpawnRuntime {
     stdin: Option<ChildStdin>,
     stdout: Option<ChildStdout>,
     stderr: Option<ChildStderr>,
+    #[cfg(test)]
+    first_cause_plan: Option<tests::FirstCausePlan>,
 }
 
 /// A shared handle to a child process launched by the `sys` package.
@@ -545,6 +547,10 @@ fn pump_spawned_record(registry: &OwnerRegistry, record: &Arc<Mutex<OwnerRecord>
                         state.program, state.limit
                     )));
                 }
+                #[cfg(test)]
+                if let Some(plan) = runtime.first_cause_plan.as_mut() {
+                    plan.observe_stdout_commitment(&state.error, &state.program, state.limit);
+                }
                 state.kill_requested = true;
                 progressed = true;
             }
@@ -575,6 +581,10 @@ fn pump_spawned_record(registry: &OwnerRegistry, record: &Arc<Mutex<OwnerRecord>
                         "stderr for `{}` exceeded max_output of {} bytes",
                         state.program, state.limit
                     )));
+                }
+                #[cfg(test)]
+                if let Some(plan) = runtime.first_cause_plan.as_mut() {
+                    plan.observe_stderr_overflow();
                 }
                 state.kill_requested = true;
                 progressed = true;
@@ -1036,6 +1046,8 @@ impl LaunchReservation {
             stdin,
             stdout: Some(stdout),
             stderr: Some(stderr),
+            #[cfg(test)]
+            first_cause_plan: tests::take_first_cause_plan(),
         });
         owner.phase = OwnerPhase::Spawned;
         // From this point the retained service owns the child even if the caller unwinds.
@@ -1841,20 +1853,12 @@ impl ProcessChild {
             .into());
         }
         if let Some(error) = &state.error {
-            let stdout = String::from_utf8_lossy(&state.stdout);
-            let stderr = String::from_utf8_lossy(&state.stderr);
-            let cause = if state.engine_limit > 0
-                && (stdout.len() > state.engine_limit || stderr.len() > state.engine_limit)
-            {
-                ProcessCause::OutputLimit(format!(
-                    "decoded process output exceeded the engine string limit of {} bytes",
-                    state.engine_limit
-                ))
-            } else {
-                error.clone()
-            };
             let report = child_process_report(&state);
-            return Err(SysError::Process { cause, report }.into());
+            return Err(SysError::Process {
+                cause: error.clone(),
+                report,
+            }
+            .into());
         }
         if state.engine_limit > 0 {
             let stdout = String::from_utf8_lossy(&state.stdout);
@@ -3446,6 +3450,85 @@ mod tests {
 
     thread_local! {
         static NEXT_EXECUTION_FAULTS: RefCell<Option<ExecutionFaults>> = const { RefCell::new(None) };
+        static NEXT_FIRST_CAUSE_PLAN: RefCell<Option<FirstCausePlan>> = const { RefCell::new(None) };
+    }
+
+    pub(super) struct FirstCausePlan {
+        commitment: PathBuf,
+        gate: PathBuf,
+        identity_ack: PathBuf,
+        stderr_ack: PathBuf,
+        stderr_overflow: PathBuf,
+    }
+
+    impl FirstCausePlan {
+        pub(super) fn observe_stdout_commitment(
+            &self,
+            cause: &Option<ProcessCause>,
+            program: &str,
+            limit: usize,
+        ) {
+            let expected = ProcessCause::OutputLimit(format!(
+                "stdout for `{program}` exceeded max_output of {limit} bytes"
+            ));
+            assert_eq!(cause.as_ref(), Some(&expected),
+                "stdout commitment must observe the exact assigned OutputLimit cause");
+            fs::write(&self.commitment, b"stdout-output-limit-committed\n")
+                .expect("record stdout cause commitment");
+            fs::write(&self.gate, b"release\n").expect("release owned stderr gate");
+            let stderr_deadline = Instant::now() + Duration::from_secs(3);
+            while !self.stderr_ack.exists() && Instant::now() < stderr_deadline {
+                thread::sleep(Duration::from_millis(2));
+            }
+            let _ = fs::write(
+                self.commitment.with_extension("stderr-wait"),
+                if self.stderr_ack.exists() {
+                    b"acknowledged\n".as_slice()
+                } else {
+                    b"deadline\n".as_slice()
+                },
+            );
+            let identity_deadline = Instant::now() + Duration::from_secs(30);
+            while !self.identity_ack.exists() && Instant::now() < identity_deadline {
+                thread::sleep(Duration::from_millis(2));
+            }
+            let _ = fs::write(
+                self.commitment.with_extension("identity-wait"),
+                if self.identity_ack.exists() {
+                    b"acknowledged\n".as_slice()
+                } else {
+                    b"deadline\n".as_slice()
+                },
+            );
+        }
+
+        pub(super) fn observe_stderr_overflow(&self) {
+            fs::write(&self.stderr_overflow, b"stderr-output-limit-observed\n")
+                .expect("record stderr overflow observation");
+        }
+    }
+
+    pub(super) fn take_first_cause_plan() -> Option<FirstCausePlan> {
+        NEXT_FIRST_CAUSE_PLAN.with(|next| next.borrow_mut().take())
+    }
+
+    fn schedule_first_cause_plan(
+        commitment: PathBuf,
+        gate: PathBuf,
+        identity_ack: PathBuf,
+        stderr_ack: PathBuf,
+        stderr_overflow: PathBuf,
+    ) {
+        NEXT_FIRST_CAUSE_PLAN.with(|next| {
+            let previous = next.borrow_mut().replace(FirstCausePlan {
+                commitment,
+                gate,
+                identity_ack,
+                stderr_ack,
+                stderr_overflow,
+            });
+            assert!(previous.is_none(), "a first-cause plan was already armed");
+        });
     }
 
     pub(super) fn take_execution_faults() -> ExecutionFaults {
@@ -4195,6 +4278,27 @@ mod tests {
     }
 
     #[cfg(all(target_os = "linux", not(feature = "no_float")))]
+    fn record_field_string(path: &Path, field: &str) -> io::Result<String> {
+        let record = fs::read_to_string(path)?;
+        let prefix = format!("{field}=");
+        record
+            .split_whitespace()
+            .find_map(|part| part.strip_prefix(&prefix))
+            .map(str::to_owned)
+            .ok_or_else(|| io::Error::new(io::ErrorKind::InvalidData, "invalid string record"))
+    }
+
+    #[cfg(all(target_os = "linux", not(feature = "no_float")))]
+    fn decode_hex(value: &str) -> Vec<u8> {
+        assert_eq!(value.len() % 2, 0, "malformed observed command-line hex");
+        value.as_bytes().chunks_exact(2).map(|pair| {
+            let high = (pair[0] as char).to_digit(16).expect("hex high nibble");
+            let low = (pair[1] as char).to_digit(16).expect("hex low nibble");
+            ((high << 4) | low) as u8
+        }).collect()
+    }
+
+    #[cfg(all(target_os = "linux", not(feature = "no_float")))]
     fn record_field_ticks(path: &Path, field: &str) -> io::Result<u64> {
         let record = fs::read_to_string(path)?;
         let prefix = format!("{field}=");
@@ -4530,6 +4634,231 @@ mod tests {
         readable_output_overflow_wins_when_run_deadline_expires_in_same_step(
             "managed",
             crate::packages::sys::ProcessScope::Managed,
+        );
+    }
+
+    #[cfg(all(target_os = "linux", not(feature = "no_float")))]
+    fn committed_child_output_limit_survives_later_stderr_overflow(
+        scope: crate::packages::sys::ProcessScope,
+        name: &str,
+    ) {
+        const LIMIT: usize = 512;
+        let fixture = FixtureDir::new();
+        let identity = fixture.0.join("identity");
+        let stdout_ack = fixture.0.join("stdout-ack");
+        let stderr_ack = fixture.0.join("stderr-ack");
+        let commitment = fixture.0.join("stdout-commitment");
+        let gate = fixture.0.join("stderr-gate");
+        let identity_ack = fixture.0.join("identity-confirmed");
+        let stderr_overflow = fixture.0.join("stderr-overflow");
+        let child_script = concat!(
+            "import os,pathlib,sys,time\n",
+            "def atomic(path,data):\n",
+            " p=pathlib.Path(path); t=p.with_suffix(p.suffix+'.tmp'); t.write_bytes(data); t.replace(p)\n",
+            "pid=os.getpid(); proc=pathlib.Path('/proc/'+str(pid)); raw=proc.joinpath('stat').read_text(); fields=raw[raw.rfind(')')+2:].split(); cmd=proc.joinpath('cmdline').read_bytes().hex()\n",
+            "atomic(os.environ['RHAI_FIRST_ID'],f'child-pid={pid} child-pgid={os.getpgrp()} child-start={fields[19]} child-cmdline-hex={cmd}\\n'.encode())\n",
+            "os.write(1,b'\\xff'*513); atomic(os.environ['RHAI_FIRST_OUT_ACK'],b'child-stdout-write-acknowledged\\n')\n",
+            "gate=pathlib.Path(os.environ['RHAI_FIRST_GATE']); deadline=time.monotonic()+10\n",
+            "while not gate.exists() and time.monotonic()<deadline: time.sleep(.002)\n",
+            "os.write(2,b'\\xfe'*513); atomic(os.environ['RHAI_FIRST_ERR_ACK'],b'child-stderr-write-acknowledged\\n')\n",
+            "identity_gate=pathlib.Path(os.environ['RHAI_FIRST_IDENTITY_ACK']); deadline=time.monotonic()+30\n",
+            "while not identity_gate.exists() and time.monotonic()<deadline: time.sleep(.002)\n"
+        );
+        fs::write(fixture.0.join("child.py"), child_script).unwrap();
+        let child_code = "exec(open(__import__('os').environ['RHAI_FIRST_SCRIPT']).read())";
+        let mut engine = Engine::new();
+        engine.set_max_string_size(LIMIT);
+        let package = SysPackage::new(
+            SysConfig::default()
+                .programs(ProgramPolicy::Any)
+                .max_output(LIMIT)
+                .process_scope(scope),
+        )
+        .unwrap();
+        package.register_into_engine(&mut engine);
+        schedule_first_cause_plan(
+            commitment.clone(),
+            gate.clone(),
+            identity_ack.clone(),
+            stderr_ack.clone(),
+            stderr_overflow.clone(),
+        );
+        let script = format!(
+            "spawn(\"/usr/bin/python3\", [\"-c\", {}], #{{ env: #{{ \"RHAI_FIRST_ID\": {}, \"RHAI_FIRST_OUT_ACK\": {}, \"RHAI_FIRST_ERR_ACK\": {}, \"RHAI_FIRST_GATE\": {}, \"RHAI_FIRST_IDENTITY_ACK\": {}, \"RHAI_FIRST_SCRIPT\": {} }} }})",
+            quote_rhai(child_code),
+            quote_rhai(identity.to_str().unwrap()),
+            quote_rhai(stdout_ack.to_str().unwrap()),
+            quote_rhai(stderr_ack.to_str().unwrap()),
+            quote_rhai(gate.to_str().unwrap()),
+            quote_rhai(identity_ack.to_str().unwrap()),
+            quote_rhai(fixture.0.join("child.py").to_str().unwrap()),
+        );
+        let child = engine
+            .eval::<crate::Dynamic>(&script)
+            .expect("spawn real stdout/stderr fixture")
+            .cast::<super::ProcessChild>();
+
+        let identity_deadline = Instant::now() + Duration::from_secs(3);
+        while !identity.exists() && Instant::now() < identity_deadline {
+            thread::sleep(Duration::from_millis(2));
+        }
+        assert!(identity.exists(), "child identity receipt missing");
+        let child_pid = record_field_pid(&identity, "child-pid").unwrap();
+        let child_pgid = record_field_pid(&identity, "child-pgid").unwrap();
+        let child_start = record_field_ticks(&identity, "child-start").unwrap();
+        let child_cmdline_hex = record_field_string(&identity, "child-cmdline-hex").unwrap();
+        let stderr_deadline = Instant::now() + Duration::from_secs(3);
+        while !stderr_ack.exists() && Instant::now() < stderr_deadline {
+            thread::sleep(Duration::from_millis(2));
+        }
+        assert!(stderr_ack.exists(), "child must reach the post-stderr identity gate");
+        let proc_stat = fs::read_to_string(format!("/proc/{child_pid}/stat"))
+            .expect("fixture must remain live at its post-stderr identity gate");
+        let close = proc_stat.rfind(')').expect("proc stat comm terminator");
+        let fields = proc_stat[close + 2..].split_whitespace().collect::<Vec<_>>();
+        assert!(fields.len() >= 20, "malformed child proc stat fields");
+        assert_eq!(fields[2].parse::<i32>().unwrap(), child_pgid, "child PGID changed");
+        assert_eq!(fields[19].parse::<u64>().unwrap(), child_start, "child start ticks changed");
+        assert_ne!(fields[0], "Z", "child must remain live at the identity gate");
+        if scope == crate::packages::sys::ProcessScope::Managed {
+            assert_eq!(child_pid, child_pgid, "Managed child must own its process group");
+        }
+        fs::write(&identity_ack, b"parent-confirmed-live-child-identity\n").unwrap();
+
+        let first = public_child_error(&engine, child.clone(), "wait");
+        let cloned_wait = public_child_error(&engine, child.clone(), "wait");
+        let polled = public_child_error(&engine, child.clone(), "try_wait");
+        let mut kill_scope = crate::Scope::new();
+        kill_scope.push_dynamic("child", crate::Dynamic::from(child.clone()));
+        engine
+            .eval_with_scope::<crate::Dynamic>(&mut kill_scope, "child.kill()")
+            .expect("public kill after completion remains harmless");
+        let after_kill = public_child_error(&engine, child, "try_wait");
+
+        // Public wait is terminal only after real reap and Managed group closure.
+        assert_pid_reaped(child_pid);
+        if scope == crate::packages::sys::ProcessScope::Managed {
+            assert_managed_group_absent(child_pgid);
+        }
+        assert!(stdout_ack.exists(), "child stdout acknowledgement missing");
+        assert!(stderr_ack.exists(), "child stderr acknowledgement missing");
+        assert!(identity_ack.exists(), "parent identity acknowledgement missing");
+        assert!(commitment.exists(), "stdout commitment observation missing");
+        assert!(stderr_overflow.exists(), "ordinary stderr overflow not observed");
+        assert_eq!(fs::read(&stdout_ack).unwrap(), b"child-stdout-write-acknowledged\n");
+        assert_eq!(fs::read(&stderr_ack).unwrap(), b"child-stderr-write-acknowledged\n");
+        assert_eq!(fs::read(&identity_ack).unwrap(), b"parent-confirmed-live-child-identity\n");
+        assert_eq!(fs::read(&commitment).unwrap(), b"stdout-output-limit-committed\n");
+        assert_eq!(fs::read(&stderr_overflow).unwrap(), b"stderr-output-limit-observed\n");
+        assert_eq!(
+            fs::read(commitment.with_extension("stderr-wait")).unwrap(),
+            b"acknowledged\n",
+            "test adapter released stderr only after its child acknowledgement"
+        );
+        assert_eq!(
+            fs::read(commitment.with_extension("identity-wait")).unwrap(),
+            b"acknowledged\n",
+            "test adapter must wait for the main test's live-child identity readback"
+        );
+        let observed_cmdline = decode_hex(&child_cmdline_hex);
+        let mut expected_cmdline = b"/usr/bin/python3\0-c\0".to_vec();
+        expected_cmdline.extend_from_slice(child_code.as_bytes());
+        expected_cmdline.push(0);
+        assert_eq!(observed_cmdline, expected_cmdline, "observed child argv differs from checked spawn argv");
+        println!(
+            "first-cause mode={name} child_pid={child_pid} child_start_ticks={child_start} child_pgid={child_pgid} expected_program=/usr/bin/python3 expected_argv_count=3 child_cmdline_hex={child_cmdline_hex} identity_confirmed=true identity_gate_released=true identity_wait=acknowledged stdout_write=acknowledged stdout_committed=true stderr_write=acknowledged stderr_overflow=observed reap=ESRCH group_closed={}",
+            scope == crate::packages::sys::ProcessScope::Managed
+        );
+
+        assert_eq!(first, cloned_wait, "clone wait changed the full cause/report");
+        assert_eq!(first, polled, "try_wait changed the full cause/report");
+        assert_eq!(first, after_kill, "public kill changed the terminal cause/report");
+        let SysError::Process { cause, report } = &first else {
+            panic!("expected public process cause/report, got {first:?}");
+        };
+        assert_eq!(
+            cause,
+            &ProcessCause::OutputLimit(format!(
+                "stdout for `/usr/bin/python3` exceeded max_output of {LIMIT} bytes"
+            )),
+            "the first committed stdout overflow must remain the public cause"
+        );
+        assert_eq!(report.stdout_bytes(), &[0xff; LIMIT]);
+        assert_eq!(report.stderr_bytes(), &[0xfe; LIMIT]);
+        assert!(
+            report.stdout_complete() && report.stderr_complete(),
+            "the capped child exited and both captured streams reached EOF before wait returned"
+        );
+        assert!(report.cleanup_diagnostics().is_empty());
+        drop(engine);
+        drop(package);
+    }
+
+    fn public_child_error(
+        engine: &Engine,
+        child: super::ProcessChild,
+        operation: &str,
+    ) -> SysError {
+        let mut scope = crate::Scope::new();
+        scope.push_dynamic("child", crate::Dynamic::from(child));
+        let error = engine
+            .eval_with_scope::<crate::Dynamic>(&mut scope, &format!("child.{operation}()"))
+            .expect_err("terminal process error must be public");
+        match error.as_ref() {
+            EvalAltResult::ErrorRuntime(value, _) => value
+                .clone()
+                .try_cast::<SysError>()
+                .expect("typed public process error"),
+            other => panic!("expected typed process error, got {other:?}"),
+        }
+    }
+
+    #[cfg(all(target_os = "linux", not(feature = "no_float")))]
+    fn assert_managed_group_absent(pgid: i32) {
+        let entries = fs::read_dir("/proc").expect("read procfs for exact process-group readback");
+        for entry in entries.flatten() {
+            let Some(pid) = entry
+                .file_name()
+                .to_str()
+                .and_then(|s| s.parse::<i32>().ok())
+            else {
+                continue;
+            };
+            let Ok(stat) = fs::read_to_string(entry.path().join("stat")) else {
+                continue;
+            };
+            let Some(fields) = stat
+                .rsplit_once(')')
+                .map(|(_, tail)| tail.split_whitespace())
+            else {
+                continue;
+            };
+            if fields
+                .skip(2)
+                .next()
+                .and_then(|field| field.parse::<i32>().ok())
+                == Some(pgid)
+            {
+                panic!("managed process group {pgid} still contains pid {pid}");
+            }
+        }
+    }
+
+    #[cfg(all(target_os = "linux", not(feature = "no_float")))]
+    #[test]
+    fn committed_stdout_cause_survives_stderr_overflow_direct_child() {
+        committed_child_output_limit_survives_later_stderr_overflow(
+            crate::packages::sys::ProcessScope::DirectChild,
+            "direct",
+        );
+    }
+
+    #[cfg(all(target_os = "linux", not(feature = "no_float")))]
+    #[test]
+    fn committed_stdout_cause_survives_stderr_overflow_managed() {
+        committed_child_output_limit_survives_later_stderr_overflow(
+            crate::packages::sys::ProcessScope::Managed,
+            "managed",
         );
     }
 
