@@ -26,6 +26,8 @@ use sys_support::TempDir;
 
 const FIXTURE_ENV: &str = "RHAI_SYS_PROCESS_FIXTURE";
 const FIXTURE_RECORD_ENV: &str = "RHAI_SYS_PROCESS_FIXTURE_RECORD";
+const FIXTURE_ENV_QUERY: &str = "RHAI_SYS_PROCESS_FIXTURE_ENV_QUERY";
+const FIXTURE_ENV_QUERY_RECORD: &str = "RHAI_SYS_PROCESS_FIXTURE_ENV_QUERY_RECORD";
 const LIBTEST_QUIET_START: &[u8] = b"\nrunning 1 test\n";
 const ACTIVE_STDERR_MARKER: &str = "stderr-active-marker\n";
 const ACTIVE_STDERR_OUTPUT: &str = "stderr-active-marker\n";
@@ -200,6 +202,11 @@ fn process_fixture() {
         #[cfg(not(target_os = "linux"))]
         let census_identity = String::new();
         std::fs::write(record, format!("child-pid={child_id} child-exit={code}{census_identity}\n")).unwrap();
+        if let Ok(name) = std::env::var(FIXTURE_ENV_QUERY) {
+            let query_record = std::env::var_os(FIXTURE_ENV_QUERY_RECORD).expect("fixture environment query record path");
+            let present = std::env::var_os(&name).is_some();
+            std::fs::write(query_record, format!("variable={name} present={present}\n")).unwrap();
+        }
         if let Ok(count) = std::env::var("RHAI_SYS_PROCESS_INVALID_COUNT") {
             std::io::stdout().write_all(&vec![0xff; count.parse().unwrap()]).unwrap();
             process::exit(code.parse().unwrap());
@@ -4021,6 +4028,58 @@ fn run_preserves_argv_boundaries_without_shell_interpolation() {
     assert_child_record(&child_record, 0);
     assert!(!marker.exists(), "shell interpreted an argv value as command text");
     assert_eq!(observed, expected, "child received different argv boundaries or bytes");
+}
+
+#[test]
+#[cfg(not(feature = "no_index"))]
+fn run_removes_inherited_environment_variable_from_public_child() {
+    const REMOVED_VARIABLE: &str = "PATH";
+    assert!(std::env::var_os(REMOVED_VARIABLE).is_some(), "test requires an inherited PATH value");
+
+    let engine = engine(SysConfig::default().programs(ProgramPolicy::Any));
+    let executable = std::env::current_exe().expect("test executable");
+    let executable = executable.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let records = TempDir::new();
+    let invoke = |label: &str, remove_path: bool| {
+        let child_record = records.path().join(format!("{label}-child.txt"));
+        let query_record = records.path().join(format!("{label}-environment.txt"));
+        let child_record = child_record.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+        let query_record = query_record.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+        let remove_option = if remove_path { r#"env_remove: ["PATH"],"# } else { "" };
+        format!(
+            r#"run("{executable}", ["--exact", "process_fixture", "--nocapture", "--quiet"], #{{
+                env: #{{ {FIXTURE_ENV}: "0", {FIXTURE_RECORD_ENV}: "{child_record}", {FIXTURE_ENV_QUERY}: "{REMOVED_VARIABLE}", {FIXTURE_ENV_QUERY_RECORD}: "{query_record}" }},
+                {remove_option}
+                timeout: 5,
+                max_output: 1024
+            }})"#,
+            executable = executable,
+            child_record = child_record,
+            query_record = query_record,
+            remove_option = remove_option,
+        )
+    };
+
+    let removed_result = engine.eval::<Map>(&invoke("removed", true)).expect("public run should start the fixture with PATH removed");
+    assert_eq!(removed_result["success"].as_bool(), Ok(true));
+    assert_eq!(removed_result["code"].as_int(), Ok(0));
+    assert_child_record(&records.path().join("removed-child.txt"), 0);
+    let removed_record = std::fs::read_to_string(records.path().join("removed-environment.txt")).expect("independent child environment readback");
+    assert_eq!(removed_record, "variable=PATH present=false\n");
+
+    let control_result = engine.eval::<Map>(&invoke("control", false)).expect("public run should start the inherited-environment control");
+    assert_eq!(control_result["success"].as_bool(), Ok(true));
+    assert_eq!(control_result["code"].as_int(), Ok(0));
+    assert_child_record(&records.path().join("control-child.txt"), 0);
+    let control_record = std::fs::read_to_string(records.path().join("control-environment.txt")).expect("independent control environment readback");
+    assert_eq!(control_record, "variable=PATH present=true\n");
+    eprintln!(
+        "x11_env_remove removed_child={:?} removed_readback={:?} control_child={:?} control_readback={:?} direct_children_reaped=ESRCH",
+        std::fs::read_to_string(records.path().join("removed-child.txt")).unwrap().trim(),
+        removed_record.trim(),
+        std::fs::read_to_string(records.path().join("control-child.txt")).unwrap().trim(),
+        control_record.trim(),
+    );
 }
 
 #[test]
