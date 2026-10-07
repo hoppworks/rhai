@@ -1,6 +1,6 @@
 //! Public-Engine acceptance fixture for the shared `spawn`/`Child` API.
 
-use rhai::packages::sys::{ProgramPolicy, SysConfig, SysPackage};
+use rhai::packages::sys::{FsAccess, ProgramPolicy, SysConfig, SysPackage};
 use rhai::packages::Package;
 use rhai::{Dynamic, Engine, Map, Scope, INT};
 use std::path::{Path, PathBuf};
@@ -31,6 +31,7 @@ fn scenario_entry() {
         "drop_true" => drop_final_client(&root, true),
         "drop_false" => drop_final_client(&root, false),
         "panic_cleanup" => panic_with_live_fixture(&root),
+        "script_throw_cleanup" => script_throw_with_live_fixture(&root),
         "unrelated_panic_control" => panic_with_unrelated_live_fixture(&root),
         #[cfg(feature = "sync")]
         "sync_wait_cancel" => sync_wait_cancel(&root),
@@ -134,6 +135,11 @@ fn final_drop_honors_both_kill_on_drop_policies() {
 }
 
 #[test]
+fn script_throw_drops_and_reaps_a_live_child() {
+    run_bounded_controller("script_throw_cleanup");
+}
+
+#[test]
 fn scenario_panic_releases_and_reaps_the_owned_fixture() {
     run_bounded_controller_expect_panic("panic_cleanup");
 }
@@ -161,6 +167,21 @@ fn engine(kill_on_drop: bool) -> Engine {
     let config = SysConfig::default()
         .programs(ProgramPolicy::AllowList(vec![executable]))
         .kill_on_drop(kill_on_drop)
+        .max_output(64 * 1024);
+    let mut engine = Engine::new();
+    SysPackage::new(config)
+        .expect("construct sys package")
+        .register_into_engine(&mut engine);
+    engine
+}
+
+fn engine_with_read_root(root: &Path) -> Engine {
+    let executable = std::env::current_exe().expect("test executable");
+    let executable = executable.to_string_lossy().into_owned();
+    let config = SysConfig::default()
+        .fs_root(root, FsAccess::Read)
+        .programs(ProgramPolicy::AllowList(vec![executable]))
+        .kill_on_drop(true)
         .max_output(64 * 1024);
     let mut engine = Engine::new();
     SysPackage::new(config)
@@ -302,6 +323,34 @@ fn panic_with_unrelated_live_fixture(root: &Path) {
     panic!("unrelated controller panic control");
 }
 
+fn script_throw_with_live_fixture(root: &Path) {
+    let engine = engine_with_read_root(root);
+    let executable = std::env::current_exe().expect("test executable");
+    let script = format!(
+        r#"let child = spawn({executable:?}, ["--exact", "shared_child_contract::fixture_entry", "--quiet", "--nocapture"], #{{
+            env_clear: true,
+            env: #{{ "RHAI_SHARED_CHILD_FIXTURE": "hold", "RHAI_SHARED_CHILD_ROOT": {fixture_root:?} }}
+        }});
+        while !exists("release-throw") {{}}
+        throw "intentional Rhai script throw with live child";"#,
+        executable = executable.to_string_lossy(),
+        fixture_root = root.to_string_lossy(),
+    );
+
+    let error = engine.eval::<Dynamic>(&script).expect_err("Rhai script must throw while its child is live");
+    let detail = format!("{error:?}");
+    assert_script_throw_error(&detail, "intentional Rhai script throw with live child");
+    let wrong_expectation = catch_unwind(AssertUnwindSafe(|| {
+        assert_script_throw_error(&detail, "__x29_wrong_expected_message_control__");
+    }));
+    assert!(wrong_expectation.is_err(), "wrong-message control unexpectedly accepted the Rhai error");
+    eprintln!("shared-child script-throw evaluation_error=observed wrong_expectation_rejected=true child_drop=expected");
+}
+
+fn assert_script_throw_error(detail: &str, expected: &str) {
+    assert!(detail.contains(expected), "unexpected evaluation error; expected {expected:?}: {detail}");
+}
+
 #[cfg(feature = "sync")]
 fn sync_wait_cancel(root: &Path) {
     let engine = Arc::new(engine(false));
@@ -408,8 +457,19 @@ fn run_bounded_controller_inner(scenario: &str, expect_panic: bool) {
     let controller_pid = child.id() as i32;
     eprintln!("shared-child controller_started scenario={scenario} pid={controller_pid} root={}", root_path.display());
     let mut guard = ControllerGuard { child: Some(child), controller_pid, record: root_path.join("child.status") };
+    let throw_release = root_path.join("release-throw");
     let deadline = Instant::now() + Duration::from_secs(24);
     loop {
+        if scenario == "script_throw_cleanup" && !throw_release.exists() {
+            if let Ok(record) = std::fs::read_to_string(&guard.record) {
+                if record.split_whitespace().any(|field| field == "state=ready") {
+                    let fixture_pid = read_record_pid(&guard.record).expect("ready fixture PID record");
+                    assert!(process_exists(fixture_pid), "fixture PID {fixture_pid} exited before the Rhai throw release");
+                    eprintln!("shared-child script-throw release fixture_pid={fixture_pid} state=ready pid_present=true");
+                    std::fs::write(&throw_release, "release").expect("release the Rhai throw gate");
+                }
+            }
+        }
         if let Some(status) = guard.child.as_mut().unwrap().try_wait().expect("poll exact scenario child") {
             let output = guard.child.take().unwrap().wait_with_output().expect("reap exact scenario child");
             eprintln!("shared-child controller_reaped scenario={scenario} pid={controller_pid} status={status}");
@@ -440,6 +500,7 @@ fn run_bounded_controller_inner(scenario: &str, expect_panic: bool) {
             let receipt = format!("outer-observation scenario={scenario} controller_pid={controller_pid} fixture_pid={pid} fixture_record={:?} reap=ESRCH\n", fixture_record.trim());
             std::fs::write(guard.record.parent().unwrap().join("outer-fixture-closure-receipt"), receipt)
                 .expect("record outer fixture closure observation");
+            eprintln!("shared-child outer-observation scenario={scenario} controller_pid={controller_pid} fixture_pid={pid} fixture_record={:?} reap=ESRCH verified=true", fixture_record.trim());
             assert!(!expect_panic, "expected controller panic for scenario {scenario}, but it succeeded");
             eprintln!("shared-child scenario={scenario} controller_pid={controller_pid} status=ok fixture_record={:?}", std::fs::read_to_string(&guard.record).ok());
             return;
@@ -551,7 +612,7 @@ impl Drop for ControllerGuard {
 }
 
 fn release_fixture(root: &Path) {
-    for name in ["release-input", "release-exit"] {
+    for name in ["release-input", "release-exit", "release-throw"] {
         if let Err(error) = std::fs::write(root.join(name), "watchdog") {
             eprintln!("shared-child fixture_release_error file={name} error={error}");
         }
