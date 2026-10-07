@@ -45,6 +45,15 @@ control. The frozen source, logs, checksums and setup history are recorded in
 `../.scratch/all-tickets/process-io-contract-evidence/attempt-01/proof.md`.
 Other OS, MSRV, feature and unrelated Ticket 03 rows remain open.
 
+Ticket 03 X24 is partially accepted for Workhorse Linux x86_64, Rust/Cargo
+1.93.0, and `testing-environ,sys`. Attempt 01 remains partial because `wait()`
+preceded the terminal `try_wait()`; attempt 02 stopped before Cargo on a helper
+identity check. Attempt 03 passed the direct post-exit observation and an exact
+assertion sensitivity control, with independent PID/reaping readback. Preserve
+the attempt records under
+`../.scratch/all-tickets/process-try-wait-evidence/x24-try-wait-20261007-1705z-6a92d/`.
+Other OS, MSRV, feature and unrelated Ticket 03 rows remain open.
+
 Historical status: decisions D1 to D12 accepted on 2026-09-29; phase 1 implemented on branch
 `claude/vibrant-sagan-3g1pxn` (this fork only, no upstream submission yet). Supersedes the
 2026-09-29 precedents survey; that survey is condensed into Appendix A.
@@ -419,6 +428,47 @@ checks. All nine test-output hashes and 21 staged/exported file hashes matched
 the Workhorse readback. The private runtime and exact owned scope were removed;
 no private Cargo build is reusable.
 
+**X24 attempt 01 — partial historical evidence.** The test
+`tests/sys_process.rs::direct_spawn_try_wait_returns_unit_until_child_exits`
+started a real child through the public Rhai `spawn` API, matched the child PID
+to its readiness record, verified it remained alive while `try_wait()` returned
+unit, and later read a successful exit and reaping. Its test order called
+`wait()` before terminal `try_wait()`, however, so `wait()` could have consumed
+the exit and populated the cached snapshot. This run therefore did not establish
+that `try_wait()` itself observes natural exit. The original RED/GREEN logs,
+source identities, Workhorse export readback, nine case-output hashes and exact
+scope-cleanup receipt remain valid for the pending-state observation only at
+`../.scratch/all-tickets/process-try-wait-evidence/x24-try-wait-20261007-1705z-6a92d/attempt-01/`.
+
+The focused test polls public `Child.try_wait()` after opening the release gate,
+requires its non-unit exit map before any `wait()` call, validates code 0 and
+success, and then confirms `wait()` returns the cached result and the exact PID
+is reaped. Attempt 02 stopped before Cargo because its helper compared the
+modified test overlay (`7ddc87f6…d14017`) with the immutable archive's baseline
+test member (`166efccd…1013`); the frozen manifest confirms those are distinct
+identities. The corrected helper checks the archive member against its frozen
+per-file hash, then checks the replacement overlay separately. Attempt 03 reused
+only the unchanged byte-verified source archive and accepted Cargo lock, not the
+deleted private build. Its expected assertion RED reached the intended direct
+post-exit assertion (exit 101), then restored GREEN passed (exit 0). The result
+records PID 1760685 alive while pending, unit from pending `try_wait`, exit code
+0 directly observed by terminal `try_wait()` before `wait()`, `wait()` returning
+the cached result, and exact-PID ESRCH reaping. All nine proof-output hashes
+matched local readback; the eight attempt-03 stage files other than its unpinned
+staging note matched the stage. The remote 250-byte note is preserved at
+`../.scratch/all-tickets/process-try-wait-evidence/x24-try-wait-20261007-1705z-6a92d/attempt-02/remote-stage/staging-note.txt`
+and matches the cleanup receipt (SHA-256
+`a4f02291fb1216e92c654af77905f0d541fe5f2e57618b2c0c3564cd3050768c`). The
+later 459-byte attempt-03 local note was neither a pinned input nor uploaded.
+Periodic samples observed at
+most 3 owned processes, 884,124 KiB RSS, and 1,265,292 KiB private storage; these
+are sampled values, not continuous peaks. The private runtime was removed by the
+runner and the exact owned scope was retired after export; the cleanup receipt
+records 34 files and 140,317,766 bytes removed. Evidence is under
+`../.scratch/all-tickets/process-try-wait-evidence/x24-try-wait-20261007-1705z-6a92d/attempt-03/`.
+X24 is partially accepted for Workhorse Linux x86_64, Rust/Cargo 1.93.0, and
+`testing-environ,sys`; other OS, MSRV, feature and unrelated Ticket 03 rows
+remain open.
 ### 6.1 Applicable rules and historical investigation
 
 Current central repository: `/Users/hoppworks/projects/agent-skills`, inspected HEAD
@@ -891,7 +941,7 @@ source test alone or by an unreviewed/provisional result.
 | X21 | Cap tests, `linux-process-overlap-proof.md`, managed output-limit proof | Accepted for named Linux DirectChild/Managed same-step overflow-vs-deadline cases and listed cap cases; other causes/platforms remain open. |
 | X22 | `run_reports_a_real_unix_child_signal_without_an_exit_code`; `process-signal-evidence/proof.md` | Partial: Workhorse Linux x86_64/Rust 1.93.0 proves a real public-Engine SIGKILL child reports `success=false`, `code=()`, `signal=9`, is not timed out, and is reaped (`ESRCH`). Other Unix platforms, MSRV and feature rows remain open. |
 | X23 | Shared-child and `linux-process-example3-proof.md` | Accepted for named Linux rows: real spawn/wait, result map, clone snapshots and cached results. |
-| X24 | Shared-child proof observes pending `wait(timeout)` and completed snapshots | Partial: a pending `try_wait` returning unit is not established by the accepted evidence. |
+| X24 | Shared-child pending `wait(timeout)` and completed snapshots | Partial: Workhorse Linux x86_64/Rust 1.93.0, `testing-environ,sys` proves pending `try_wait` returns unit and terminal result is observed directly before `wait`, with exit and ESRCH readback. Other OS/MSRV/features remain open. |
 | X25 | Shared-child and managed-kill proofs | Accepted for named Linux cases: kill/wait completes with independent cleanup/readback. |
 | X26 | Shared-child proof repeats kill after completion | Accepted for named Linux rows: repeated kill is harmless and cached snapshots persist. |
 | X27 | Shared-child and managed final-drop proofs | Accepted for named Linux cases: `kill_on_drop=true` cleanup/reaping; only named feature rows. |

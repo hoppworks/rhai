@@ -34,9 +34,256 @@ integration does not claim release acceptance. Do not recreate remote task refs.
 No installs, admin, credentials, agent-home/config or shared-service changes.
 Windows guest control belongs solely to windows_private_staging_readback; historical owner records remain preserved.
 
-## Current status — Package A accepted; Package E follow-up stopped; X2/X8 and X22 Linux slices partially accepted (2026-10-07)
+## Current package — Ticket 03 X24 direct post-exit try_wait observation
 
-### Current coherent requirement: Ticket 03 X4–X6 argv preservation
+The open criterion is the public `Child.try_wait()` contract: while the real child is running Rhai returns unit; after natural exit `try_wait()` itself returns the terminal result. The test seam is `Engine::eval` -> public `spawn`/`Child` methods -> the real self-reexecuted integration-test process, with independent PID/readiness/reaping readback. The test in `tests/sys_process.rs::direct_spawn_try_wait_returns_unit_until_child_exits` holds the child on an exact release-file gate and proves the pending state. The owner explicitly authorized ordinary test boundary and regression work in the 2026-10-07 continuation request; no additional test-boundary approval is required.
+
+Attempt 01 remains partial historical evidence, not acceptance for the full criterion. It passed the pending-unit RED/GREEN pair and recorded exit/readback, but called `wait()` before terminal `try_wait()`, allowing `wait()` to consume the exit and populate the cached result. This is an evidence-ordering gap identified in combined review, not a product defect. Preserve its logs, hashes and cleanup receipt under `.scratch/all-tickets/process-try-wait-evidence/x24-try-wait-20261007-1705z-6a92d/attempt-01/`. Its remote runtime and 26-entry owned scope were verified absent after export; no private build survives. History remains one Workhorse invocation, zero failed product corrections, zero failed Workhorse runner recoveries, and one resolved local empty-tar staging probe (`ValueError: nothing to open`) before source read/remote build/test. A local zsh preflight wrapper also used reserved variable `status` after the read-only SSH preflight had completed; its receipt remains intact and no build started; subsequent shell wrappers use `rc`.
+
+Attempt 02 consumed one bounded `run_scoped.py` invocation but stopped before Cargo and the test assertion. Original stderr reports `RuntimeError: the archived test source does not match the pinned test overlay`. The helper incorrectly expected the modified overlay to equal the base source archive member. Independent inspection of the frozen archive and its manifest confirms the base member is SHA-256 `166efccd830f44126f59ca05683025012b862d11cb54f58a5c5500a4d1191013`, while the corrected overlay is `7ddc87f6e4b57d61d077445a81f1c3ef2f2e54cb35ac8c90a7ed328245d14017`. This is a helper setup defect, not a product failure or expected RED. All six remote outer/preflight files (1,082 bytes) were exported and matched remote readback; all seven staged input hashes match the original attempt-02 pin. The runner removed its private runtime; the exact owned scope still contains only the retained stage and per-attempt outputs. Preserve the attempt's full source and output readbacks under `.scratch/all-tickets/process-try-wait-evidence/x24-try-wait-20261007-1705z-6a92d/attempt-02/`. Cumulative count is two Workhorse invocations, one unsuccessful setup launch before Cargo, zero failed product corrections, and zero unexpected run_scoped failures. Do not reset these counts.
+
+The focused test releases the child, polls Rhai `child.try_wait()` with a five-second watchdog until it returns non-unit, asserts and validates code 0/success before calling `wait()`, then confirms `wait()` returns the cached result and independent `kill(pid, 0)` reaches `ESRCH`. The false-green control inverts precisely the post-exit non-unit assertion. Attempt 03 corrected only the proof helper: it verified the archive's actual test member against the frozen source-manifest per-file hash, copied the new overlay, and separately verified its hash. Staged and immediate preflights passed at 17:40:19Z and 17:41:07Z with seven inputs verified, zero active heavy groups, 91,768,984/91,830,212 KiB available RAM and 671,337,783,296/671,337,705,472 free bytes. Expected wrong-assertion RED reached the test and failed at the direct post-exit result assertion (exit 101); restored GREEN passed (exit 0). Exact source and lock pins were verified; the result records PID 1760685 alive while pending, a unit pending result, terminal `try_wait` exit code 0 observed before `wait`, the same cached result from `wait`, and exact-PID ESRCH reaping. The corrected run took 17.542 seconds; periodic samples observed at most 3 owned processes, 884,124 KiB RSS and 1,265,292 KiB private runtime storage, with no retry. These are sampled values, not continuous peaks. All nine proof-output hashes match local readback, as do the eight attempt-03 stage files other than its unpinned staging note. The remote 250-byte note is preserved at `attempt-02/remote-stage/staging-note.txt` and matches the cleanup receipt (SHA-256 `a4f02291fb1216e92c654af77905f0d541fe5f2e57618b2c0c3564cd3050768c`); the later 459-byte attempt-03 local note was neither a pinned input nor uploaded. The scoped runner removed its private runtime. Preserve attempt-03 outputs and stage under `.scratch/all-tickets/process-try-wait-evidence/x24-try-wait-20261007-1705z-6a92d/attempt-03/`. After export, exact ownership, canonical path, file hashes, no runtime and no process references were checked; only the scope's stage/out were removed and the empty scope retired. The receipt records 34 files and 140,317,766 bytes removed. An initial cleanup precheck rejected the expected `/root` to `/var/roothome` symlink alias before mutation; the corrected canonical-path check passed. Cumulative count is three Workhorse invocations, one setup stop before Cargo, zero failed product corrections, and a successful first run after the helper repair. Do not reset counts or rerun absent a relevant source, assertion, environment, or acceptance change.
+
+The owning Workhorse scope is `/root/.local/share/agent-builds/rhai/x24-direct-exit-20261007-1729z-6a92d` (resolved `/var/roothome/...`), unique to this package follow-up. It retained only staged immutable inputs and exported outputs during the bounded invocation; `TMPDIR` pointed to this exact scope and Cargo target/home used the scoped runner's `AGENT_RUNTIME_DIR`. The deleted attempt-01 Cargo build was not reusable; the unchanged archive SHA-256 `aa312fda6f85ab5744ffb68d0b9d3bdc8c7ad55845f6b60f3edfd631cf14b4e4` and accepted lock SHA-256 `2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425` were reused only as source inputs. Attempt-03 overlay SHA-256 is `7ddc87f6e4b57d61d077445a81f1c3ef2f2e54cb35ac8c90a7ed328245d14017`; proof helper SHA-256 `29a019d0029c13804ae4ad84bde6a13ed037d0026ef93199f077f94446e8375a`; preflight helper SHA-256 `d5a7d2a1b2bfc51f6151a9265f40f748beae6018a3ff4ba231939f5345ae24e6`; canonical runner SHA-256 remains `25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e`. Attempt-02 had fresh admission 17:31:20Z (zero heavy groups, 91,844,240 KiB RAM, 610,279,866,368 free bytes), staged admission 17:33:21Z (seven hashes, zero heavy groups, 91,607,604 KiB RAM, 610,279,800,832 free bytes) and immediate admission 17:34:02Z (zero heavy groups, 91,659,308 KiB RAM, 610,279,751,680 free bytes). Attempt-03 staged and immediate preflights passed at 17:40:19Z and 17:41:07Z with all seven pins verified, zero active heavy groups, 91,768,984/91,830,212 KiB available RAM and 671,337,783,296/671,337,705,472 free bytes. Its corrected runner passed the intended RED/GREEN pair; all nine proof-output hashes and the eight attempt-03 stage files other than the unpinned staging note matched local readback. The remote 250-byte note is preserved in `attempt-02/remote-stage/staging-note.txt` with the cleanup-receipt SHA-256 above. After export, the private runtime was absent and the exact 34-file, 140,317,766-byte owned scope was retired; absence is in `attempt-03/cleanup-readback.json`.
+
+Current rule inputs were re-read for this package: central Agent Skills HEAD `14617043b70d1ba2d40b720832cbad294fa8c008`; global AGENTS SHA-256 `81b103fac482171e3ea72e23d6c0dffac553359f3f75f610506e00c182d1f277`; project AGENTS SHA-256 `06b73a9db5691ff5a0c5b34f98ce61e2c5df08e77161f3f93c3f7ce119d7c5de`; campaign `342885a50ec612bed6f43876457ec234f4a5784c5a94abdce592383987ce0d61`; TDD `cb01f66bebfaa25fa1f88e6b7e769cd9fd9f35b1120b8563749820738814c927`; e2e-proof `7f3f4d2c273e53bd89883e6254285b95aebc53976299c04d103d22be59846459`. Workhorse's canonical runner identity was read back. No claim is made about other Sessions/Machines. After attempt 03, the exact combined package review, including this state and the plan crosswalk, must return READY before staging only the reviewed X24 test/plan/state files for the requested atomic fork commit and push. Keep all unrelated dirty files and scratch evidence out of the commit.
+
+## Completed package — Ticket 03 X30 Linux descriptor stability, partial acceptance committed and pushed
+
+Accepted partial criterion: show that 200 sequential public `run` calls leave Linux
+`/proc/self/fd` stable. The applicable partial row is Linux x86_64,
+Rust/Cargo 1.93.0, `testing-environ,sys`; other OS, MSRV and feature rows remain
+open. The ordinary acceptance test is
+`tests/sys_process.rs::repeated_public_run_calls_keep_fd_count_stable`. It now
+re-executes the ignored exact census test in a fresh test process, where public
+Rhai `Engine::eval` calls launch real `/bin/true` children. A warm-up initializes
+the cleanup worker before the baseline; every measured result must exit 0. The
+OS census is independent of the Rhai result map. The parent bounds the isolated
+child to 60 seconds, captures stdout/stderr in temporary files, and on timeout
+kills its owned process group, kills and reaps the direct child, and reports
+captured diagnostics. The exact command is
+`cargo +1.93.0 test --locked --features testing-environ,sys --test sys_process repeated_public_run_calls_keep_fd_count_stable -- --exact --nocapture --test-threads=1`.
+No shared service is needed. Attempt 04's wrong-count RED and restored GREEN
+remain historical evidence for the prior test source. The combined review found
+that an ordinary parallel `sys_process` suite could perturb its process-wide
+census; both the isolated-child test wrapper and the contradictory X30 crosswalk
+are corrected. Attempt 05's valid proof remains historical; the later review
+found the parent wrapper's unbounded wait, so attempt 06 verifies the bounded
+wrapper source. Its deliberately wrong FD expectation failed at the X30
+assertion (exit 101), then restored GREEN passed all 200 calls (exit 0).
+Independent readback was
+`baseline_fds=4`, `after_fds=4`, with task count 3 and cleanup-worker count 1 at
+both points. Aggregate Cargo time was 31.534 seconds; periodic samples observed
+up to 4 owned processes, 910,152 KiB RSS and 1,284,764 KiB private storage (not
+continuous peaks), with no sampler retry. All nine test-output hashes and all
+21 staged/exported file hashes match the Workhorse readback. Exact evidence is
+under `.scratch/all-tickets/process-fd-stability-evidence/x30-fd-stability-20261007-1530z/attempt-06/`;
+the cleanup receipt confirms its exact 22-file, 155,924,743-byte Workhorse
+scope was retired after export with no sampled process identities still live.
+The runner removed its private build runtime. Seven exact AppleDouble metadata
+sidecars created by macOS tar transport were removed before the final inventory.
+No product code changed and no private Cargo build is reusable.
+
+The combined independent review is READY (2026-10-07), with no material findings;
+its final report is `/tmp/x30-combined-review-final-20261007.md`. The reviewed
+two-file package was committed as `6a92d2b58bd426c742d4958376b61e3a168d5a05`
+(`test(sys): bound X30 descriptor census child`) with author and committer
+`hoppworks <daniel@hoppworks.de>`. It was pushed using `git push --atomic`
+only to `origin` at `https://github.com/hoppworks/rhai.git`, directly to
+`refs/heads/main`. Live `git ls-remote --heads origin` readback reports exactly
+one branch, `main`, at the commit above. The 60-second timeout path was reviewed
+in source but not forced in the evidence run. Other OS, MSRV, feature, Windows,
+full-suite and Ticket 03 acceptance rows remain open. The working tree's other
+pre-existing edits and evidence files remain uncommitted and untouched.
+
+Live Workhorse preflight on 2026-10-07 found the SSH user's actual project
+checkout path under `/home/workhorse/projects` (the prior `/root/projects` guess
+was absent); no files were changed by that failed read-only lookup. Agent Skills
+is `/home/workhorse/projects/agent-skills` at the same HEAD, `14617043b70d1ba2d40b720832cbad294fa8c008`, with only pre-existing untracked scratch directories. Its global AGENTS,
+campaign, TDD, e2e-proof, OCR delegate, and scoped-runner SHA-256 values match
+those recorded above and locally. Workhorse has no Rhai clone at that path, so
+the source archive was made from commit `56cf0c411cda4d35642cac641e15e579213e12ee`
+plus only this test overlay; the archived project AGENTS hash is
+`06b73a9db5691ff5a0c5b34f98ce61e2c5df08e77161f3f93c3f7ce119d7c5de`.
+The run used `/home/workhorse/projects/agent-skills/tools/run_scoped.py` (SHA-256
+`25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e`),
+`cargo +1.93.0`, `CARGO_TARGET_DIR=$AGENT_RUNTIME_DIR/target`,
+`CARGO_HOME=$AGENT_RUNTIME_DIR/cargo-home`, and a unique root-owned scope under
+`/root/.local/share/agent-builds/rhai/`. Rust/Cargo 1.93.0 are installed even
+though the remote default is 1.97.1. The fresh staged and immediate preflights
+found no active heavy process and verified both pinned toolchain binaries.
+Attempt 05's immediate check at 16:17:43 UTC measured 91,761,988 KiB
+MemAvailable and 610,124,533,760 bytes free on `/var`. Attempt 06's staged and
+immediate checks at 16:33:49 and 16:34:26 UTC measured 91,559,864 and
+91,665,724 KiB MemAvailable, and 610,280,247,296 and 610,280,239,104 bytes
+free, respectively, above the 16 GiB admission floors. The private runtime was
+removed by the scoped runner before readback; exported source and acceptance
+output were copied and matched the remote checksums before the exact owned
+scope was retired.
+
+The repository intentionally has no root `Cargo.lock`; a first local staging
+attempt stopped at that missing file before any remote scope, build, or test was
+started. The existing accepted lock from X11 is reusable: its SHA-256 is
+`2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425`, and
+`Cargo.toml`, `Cargo.msrv.lock`, `build.rs`, and `build.template` are byte-identical
+from X11's pinned source revision to the current source. That lock supplies the
+root `Cargo.lock` in the isolated archive; the prior private Cargo build/cache
+was deleted by its runner and is not reusable.
+
+X30 launch history is preserved without resetting counts. Launch 01 stopped
+before Cargo because direct execution of the mode-0644 canonical runner returned
+126; subsequent runs invoked it with Python. Attempt 02 reached Rust compilation
+and exposed the test's initial `Option`/`Result` mismatch for `Dynamic::as_int()`;
+the assertion was corrected to compare with `Ok(0)`, and no product assertion ran.
+Attempt 03 started Cargo but its resource sampler raised after `du` returned 1.
+The old helper omitted stderr, so the underlying cause remains unconfirmed and
+the test assertion did not run. Its periodic samples observed maxima of 3 owned
+processes, 882,732 KiB RSS, and 938,832 KiB private storage. The helper was
+revised to preserve `du` diagnostics and retry once only for all-ENOENT output
+while the runtime still exists. Attempt 04 corrected the staged test-overlay
+hash and passed the intended wrong-count RED plus restored GREEN in 32.388
+seconds, without a sampler retry. Its periodic samples observed maxima of 3
+owned processes, 907,584 KiB RSS, and 1,284,320 KiB private storage. These are
+sampled observations, not continuous peaks. A stale preflight manifest pin and
+one local-shell/remote-path invocation stopped before a build and were corrected
+without consuming a test run. Attempt 05 also had one launcher preparation error:
+the first shell tried to redirect preflight output into the not-yet-created
+`out/attempt-05/` directory. This stopped before preflight, Cargo or the test;
+the corrected invocation wrote launcher output into the existing owned `out/`
+directory and let the helper create its own attempt directory. It consumed no
+build/test launch and did not change the established limits.
+
+Current rules were reloaded for this package: Agent Skills HEAD
+`14617043b70d1ba2d40b720832cbad294fa8c008`, global AGENTS SHA-256
+`81b103fac482171e3ea72e23d6c0dffac553359f3f75f610506e00c182d1f277`, project
+AGENTS SHA-256 `06b73a9db5691ff5a0c5b34f98ce61e2c5df08e77161f3f93c3f7ce119d7c5de`,
+campaign `342885a50ec612bed6f43876457ec234f4a5784c5a94abdce592383987ce0d61`,
+TDD `cb01f66bebfaa25fa1f88e6b7e769cd9fd9f35b1120b8563749820738814c927`, and
+e2e-proof `7f3f4d2c273e53bd89883e6254285b95aebc53976299c04d103d22be59846459`.
+The user's test-boundary authorization covers this ordinary regression. The
+combined independent review first required isolation of the `/proc` census and
+correction of the contradictory X30 crosswalk; both were resolved before
+attempt 05. Its follow-up then identified the unbounded child wait. The wrapper
+now has a 60-second deadline, owned process-group termination, direct-child
+reaping and failure diagnostics, and attempt 06 proves the exact source. The
+final review returned READY with 2/2 files covered, verified all seven input
+hashes, 21 remote-readback hashes, 22 cleanup-receipt entries and nine
+test-output hashes, and confirmed that staged source matches attempt 06. The
+timeout branch itself was not exercised by this proof; its deadline and cleanup
+behavior were reviewed in source. Only
+`tests/sys_process.rs` and
+`docs/sys-package-plan.md` belong in this package; other dirty files remain
+excluded.
+Unverified Package E metadata changes remain untouched and excluded because its
+route is stopped; the shared-child fixture has formatting-only changes from
+another accepted package and will not be staged.
+
+## Completed package — Ticket 03 X14/X16/X17 (2026-10-07)
+
+Acceptance scope: X14 ordinary successful `run` with empty stdout/stderr (the
+existing zero-cap case is a distinct branch); X16 exact string stdin round-trip
+through `run`; X17 exact 1 MiB Blob stdin round-trip through `run_raw` while the
+real child concurrently writes both captured streams. A post-run same-host read
+measured a new OS pipe at 65,536 bytes, four times smaller than each 256 KiB
+stream; the individual pipes created by Rust std were not instrumented. The
+public seam is Rhai source through `Engine::eval` to the host process API and a
+real Unix child. The tests are `tests/sys_process.rs::run_io_contract_empty_output`,
+`::run_io_contract_string_stdin_round_trip`, and
+`::run_io_contract_blob_stdin_round_trip_with_concurrent_output`, selected by
+`cargo test --locked --features testing-environ,sys --test sys_process run_io_contract_ -- --nocapture --test-threads=1`.
+X14 uses `/bin/sh` to produce an independently readable PID/exit record with no
+captured output; X16 uses `/bin/sh` plus `/bin/cat` and verifies the exact string
+and reaped direct-child record; X17 extends the existing child I/O stress fixture
+to validate and independently persist received input, then echo it after
+concurrent stdout/stderr writes. Prerequisites are the Unix integration target,
+`/bin/sh`, `/bin/cat`, Workhorse Linux and pinned Rust/Cargo 1.93.0 plus the
+accepted lock; no shared service is required. Only these three Linux x86_64 /
+Rust 1.93.0 `testing-environ,sys` rows can be accepted; other matrix rows remain
+open. The attachment explicitly authorizes ordinary test-boundary choices, so
+the TDD seam is recorded without an extra confirmation gate.
+
+The current source is based on `e234e3e13f617def5670f16e81c5e7a60f7334ba`.
+Rules loaded: Agent Skills HEAD `14617043b70d1ba2d40b720832cbad294fa8c008`,
+global AGENTS SHA-256 `81b103fac482171e3ea72e23d6c0dffac553359f3f75f610506e00c182d1f277`,
+project AGENTS `06b73a9db5691ff5a0c5b34f98ce61e2c5df08e77161f3f93c3f7ce119d7c5de`,
+TDD `cb01f66bebfaa25fa1f88e6b7e769cd9fd9f35b1120b8563749820738814c927`,
+e2e-proof `7f3f4d2c273e53bd89883e6254285b95aebc53976299c04d103d22be59846459`,
+campaign `342885a50ec612bed6f43876457ec234f4a5784c5a94abdce592383987ce0d61`.
+No compiled build artifact is reusable. Scoped launch 01 stopped before source
+extraction, Cargo or assertions because the helper tried to create
+`AGENT_RUNTIME_DIR/tmp`, already created by `run_scoped.py` (`FileExistsError`).
+The runner removed its runtime; readback found only owned `stage` and `out`
+directories. This setup-only launch was consumed, but was not a product
+correction or heavy build. The exact error, classification and repair are in
+`.scratch/all-tickets/process-io-contract-evidence/attempt-01/setup-launch-01.json`.
+
+Scoped launch 02 reused the same acceptance and limits after the helper accepted
+the runner-created private tmp directory, staged hashes were refreshed, and a
+fresh Workhorse admission check passed. The canonical command ran six Cargo
+commands under Rust/Cargo 1.93.0: fixture RED (X14/X16 pass; X17 exposes the old
+fixture's repeated-`i` assumption), restored GREEN (3/3), one wrong-expectation
+control per criterion (each fails), and final restored GREEN (3/3). This is a
+fixture incompatibility, not a process-product failure. The final test overlay
+hash is `ffff44bfbd0cffc65fcbf4f61541d1bbfcd0bee512b025a3f5d0fa664a636d7b`;
+the accepted lock hash is `2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425`.
+X14 independently recorded child PID 1726899/exit 0 with both output strings
+empty; X16 recorded PID 1726902/exit 0 and echoed 51 exact input bytes; X17
+recorded PID 1726893, validated/read back 1,048,576 bytes, and captured exact
+1,310,736-byte stdout and 262,144-byte stderr. Each criterion checked direct
+child ESRCH reaping; X17's varied Blob was independently read from the child's
+received-input file. Exported outputs and hash verification are in
+`.scratch/all-tickets/process-io-contract-evidence/attempt-01/remote-output/out/`;
+the complete evidence note is `.../attempt-01/proof.md`. All exported
+`SHA256SUMS` entries passed local verification. One run took 21.476 seconds of
+aggregate Cargo time; 26 periodic samples observed up to 3 owned processes,
+870,800 KiB RSS and 832,556 KiB private runtime storage. These are sampled
+observations, not continuous peaks. The runner removed its private runtime.
+
+After all local output hashes passed, a final Workhorse readback found no running
+owned process and no private runtime. Only the exact staged inputs and outputs
+were removed; the session scope was retired with `rmdir`. The receipt is
+`.scratch/all-tickets/process-io-contract-evidence/attempt-01/cleanup-readback.json`.
+The combined independent package review returned READY with no material
+findings. Package commit `8532b375c0a6f8121fcbc587fd53eef3990c1b2a` contains
+only `tests/sys_process.rs` and `docs/sys-package-plan.md`, authored and
+committed as `hoppworks <daniel@hoppworks.de>`, and was atomically pushed to the
+authorized fork at `https://github.com/hoppworks/rhai.git`. A docs-only follow-up
+commit `56cf0c411cda4d35642cac641e15e579213e12ee` records the completed review
+and push. Live remote readback confirms the sole branch is `main` at the
+follow-up commit; no public-upstream ref was written.
+Default bounds remain 600/585/540 seconds, two Cargo jobs, 16 descendants,
+16 GiB RAM/disk admission floor and 2 GiB sampled per-run limits. Preserve both
+launch records and do not reset counts. Only X14/X16/X17's Linux x86_64,
+Rust 1.93.0, `testing-environ,sys` rows can be accepted; all other matrix rows
+remain open.
+
+## Current status — Package A accepted; X2/X8, X4–X6, X11, and X22 Linux slices partially accepted; stopped routes preserved (2026-10-07)
+
+### Current coherent requirement: Ticket 03 X11 env_remove — Linux partial accepted
+
+Plan §6.7 now records X11 as partial for Workhorse Linux x86_64, Rust/Cargo 1.93.0, and `testing-environ,sys`. The test `tests/sys_process.rs::run_removes_inherited_environment_variable_from_public_child` invokes the public Rhai Engine `run` API without `env_clear`, removes inherited PATH, and reads the child's independent environment file. Its inherited-value control proves PATH was set in the test host and survives the default child setup. Both runs verify separate child PID/exit records and direct-child ESRCH reaping. All other OS, MSRV, and feature rows remain open; no production code changed.
+
+The exact accepted command is `cargo test --locked --features testing-environ,sys --test sys_process run_removes_inherited_environment_variable_from_public_child -- --exact --nocapture --test-threads=1`. Source inputs are frozen from parent 8702248b508a7d02b87cb23f70b3853022e11a0e. The test overlay SHA-256 is b585903b21aa64d3725cd5c1bfb883f71c40104273f928404e1ba86997ba16e7; accepted lock SHA-256 is 2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425; runner SHA-256 is 25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e. The evidence note and all outputs are in `.scratch/all-tickets/process-env-remove-evidence/attempt-01/`.
+
+The corrected combined Workhorse invocation used Rust/Cargo 1.93.0, two Cargo jobs, and the unchanged strict bounds. Its run-only `run_map` mutation produced the intended assertion RED (exit 101, actual `variable=PATH present=true`, expected `...false`); `spawn_child` remained untouched. Exact source bytes were restored before GREEN (exit 0, `1 passed; 0 failed`). Independent readback recorded removed child PID 1721513 with exit 0 and `PATH present=false`, plus control child PID 1721515 with exit 0 and `PATH present=true`; both were reaped. The combined run took 19.959 seconds. Periodic samples, not continuous peaks, reached six owned processes, 865,048 KiB RSS, and 1,375,680 KiB private runtime storage, all below the limits. Per-file SHA-256 checks passed after output readback. At 2026-10-07T14:47:02Z the exact runtime was absent and no sampled PID/start-tick identity remained live.
+
+### X11 attempt and cause history
+
+The first staged preflight found mode 0755 on this Session's new scope/stage/output directories. Only those owned directories were set to 0700; the 2026-10-07T14:40:11Z staged preflight then passed with no active heavy process, 91,683,684 KiB available RAM, and 610,290,216,960 free bytes. Launch 1 was allocated but exited before Cargo because the helper searched for nonexistent `pub fn run(`; source inspection established that the public run path is `fn run_map(`. No assertion or product correction ran, and the runner removed its private runtime.
+
+Two later read-only staged-preflight attempts also refused before build because the local expected helper hash was stale: the preflight expected `8002d97ada5c1883725cd5c1bfb883f71c40104273f928404e1ba86997ba16e7`, while exact local and remote SHA-256 readback showed `8002d97ada5c1883728b52f70b6a34d4a55435eb7ca6bc82f26c36214f8a88ca`. The pin was corrected, and no build or assertion ran during either refusal. The final staged preflight passed at 2026-10-07T14:45:21Z with all five input hashes verified, no active heavy process, 91,739,724 KiB available RAM, and 610,134,118,400 free bytes. The corrected bounded launch 2 then passed as above. Preserve all failed-preflight and launch-1 history; do not reset cumulative counts. The triggered fresh Expert escalation and independent review are complete: the exact stale-pin cause was reproduced and corrected, final preflight passed, and the subsequent sensitivity/restoration run plus cleanup succeeded. No further repair or relaunch is justified for unchanged inputs.
+
+Workhorse SSH runs as root (`/root` resolves to `/var/roothome`). The exact owned scope was `/root/.local/share/agent-builds/rhai/x11-env-remove-20261007-1436z-8702248`, passed as TMPDIR. Stage, preflight, helper, launch-1 outputs, launch-2 outputs and receipts are retained locally outside the private runtime. The only compiled runtime was `/var/roothome/.local/share/agent-builds/rhai/x11-env-remove-20261007-1436z-8702248/agent-build-77av9d19`; it was removed by the scoped runner. No build artifact is reusable. After checksum-verified local export, cleanup removed only the exact owned scope at 2026-10-07T14:48:08Z: 22 files and 155,887,388 bytes, with zero live sampled process identities and no runtime; the scope was retired with `rmdir`. The receipt is `.scratch/all-tickets/process-env-remove-evidence/attempt-01/cleanup-readback.json`. Bounds were 600 seconds outer, 585 seconds runner, 540 seconds helper including 30 seconds export reserve, 510 seconds active work, two Cargo jobs, at most 16 owned processes, 1,572,864 KiB sampled storage preemptive stop, 2,097,152 KiB sampled storage/RSS hard caps, and a 16 GiB admission floor. Do not repeat the X11 build absent a relevant source/assertion/environment change or uncovered acceptance criterion.
+
+The current local/Workhorse Agent Skills revision is 14617043b70d1ba2d40b720832cbad294fa8c008. Global AGENTS SHA-256 81b103fac482171e3ea72e23d6c0dffac553359f3f75f610506e00c182d1f277; project AGENTS 06b73a9db5691ff5a0c5b34f98ce61e2c5df08e77161f3f93c3f7ce119d7c5de; campaign skill 342885a50ec612bed6f43876457ec234f4a5784c5a94abdce592383987ce0d61; TDD cb01f66bebfaa25fa1f88e6b7e769cd9fd9f35b1120b8563749820738814c927; e2e-proof 7f3f4d2c273e53bd89883e6254285b95aebc53976299c04d103d22be59846459. Workhorse was checked directly; no claim is made about other Sessions or Machines.
+
+The combined independent review/Expert escalation returned READY with no material findings; it covered exactly the two package files (100% package scope), inspected the nine evidence checksums and confirmed the Linux-only applicability. OCR directly reviewed the Rust test, and the Markdown plan row was reviewed outside OCR. The staged diff contained only `tests/sys_process.rs` and `docs/sys-package-plan.md`; `git diff --cached --check` passed. Commit `e234e3e13f617def5670f16e81c5e7a60f7334ba` (`test(sys): verify process env removal`) was created atomically with author and committer `hoppworks <daniel@hoppworks.de>`. It was pushed with `git push --atomic origin HEAD:refs/heads/main` only to `https://github.com/hoppworks/rhai.git`. Live `git ls-remote --heads origin` readback confirms the sole remote branch is `main` at `e234e3e13f617def5670f16e81c5e7a60f7334ba`. Unrelated dirty tests and scratch evidence remain untouched.
+
+X4–X6 atomic commit/push is complete at 8702248b508a7d02b87cb23f70b3853022e11a0e; live origin readback then showed only main at that revision.
+
+### Previous completed package: Ticket 03 X4–X6 argv preservation
+
+#### Acceptance evidence for the completed X4–X6 package
 
 Before implementation, I selected the still-open X4/X5/X6 rows in
 `docs/sys-package-plan.md` §6.7 and the original process contract. The concrete
@@ -101,8 +348,7 @@ product correction was made and no further X4–X6 run is planned absent relevan
 input/assertion change or a new uncovered requirement. The combined independent
 review returned READY with no material findings;
 the source assertions, expected RED/restored GREEN outputs, evidence hashes,
-partial applicability and cleanup were consistent. The remaining action is the
-requested atomic commit and push to the Hoppworks fork only.
+partial applicability and cleanup were consistent. The requested atomic commit and push completed to the Hoppworks fork only at 8702248b508a7d02b87cb23f70b3853022e11a0e; a fresh remote readback confirmed only main points at that commit.
 
 Package A's narrow Linux/Rust 1.77.2 acceptance is complete after five cumulative
 native allocations. Attempt 4 passed its six controls, but a later combined review

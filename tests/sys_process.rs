@@ -456,6 +456,95 @@ fn direct_spawn_kill_on_drop_false_preserves_child_and_capture() {
     assert!(fixture.release_and_wait(), "fixture-owned child cleanup must be exact and bounded");
 }
 
+/// A running public Child has no exit snapshot yet; after natural exit, try_wait returns it.
+#[test]
+#[cfg(all(unix, not(feature = "no_index")))]
+fn direct_spawn_try_wait_returns_unit_until_child_exits() {
+    let root = TempDir::new();
+    let record_path = root.path().join("ready");
+    let release_path = root.path().join("release");
+    let path_literal = |path: &std::path::Path| path.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let executable = path_literal(&std::env::current_exe().expect("current test executable"));
+    let record = path_literal(&record_path);
+    let release = path_literal(&release_path);
+    struct ReleaseChild(std::path::PathBuf);
+    impl Drop for ReleaseChild {
+        fn drop(&mut self) {
+            let _ = std::fs::write(&self.0, b"release\n");
+        }
+    }
+    let _release = ReleaseChild(release_path.clone());
+
+    let config = SysConfig::default().programs(ProgramPolicy::AllowList(vec![executable.clone()])).max_output(4096);
+    let engine = engine(config);
+    let script = format!(
+        r#"spawn("{executable}", ["--exact", "process_fixture", "--nocapture", "--quiet"], #{{
+            env_clear: true,
+            env: #{{ {FIXTURE_ENV}: "0", {FIXTURE_RECORD_ENV}: "{record}", RHAI_SYS_PROCESS_RESOURCE_HOLD: "1", RHAI_SYS_PROCESS_RESOURCE_RELEASE: "{release}" }}
+        }})"#
+    );
+    let child = engine.eval::<Dynamic>(&script).expect("public spawn returns a Child handle");
+    let mut scope = Scope::new();
+    scope.push_dynamic("child", child);
+    let handle_pid = engine.eval_with_scope::<rhai::INT>(&mut scope, "child.id").unwrap() as i32;
+
+    let deadline = Instant::now() + Duration::from_secs(5);
+    let ready = loop {
+        if let Ok(ready) = std::fs::read_to_string(&record_path) {
+            if ready.contains("child-ready=1") {
+                break ready;
+            }
+        }
+        assert!(Instant::now() < deadline, "child did not publish readiness before the bounded watchdog");
+        std::thread::sleep(Duration::from_millis(5));
+    };
+    let fixture_pid = ready
+        .split_whitespace()
+        .find_map(|field| field.strip_prefix("child-pid=").and_then(|value| value.parse::<i32>().ok()))
+        .expect("fixture readiness record includes its PID");
+    assert_eq!(handle_pid, fixture_pid, "public Child ID matches independent fixture PID");
+    assert!(ready.contains("child-ready=1"), "fixture published a complete ready record: {ready:?}");
+    assert!(!release_path.exists(), "positive control child remains behind the release gate");
+    assert_eq!(unsafe { libc::kill(fixture_pid, 0) }, 0, "OS confirms the held child is alive before try_wait");
+
+    let pending = engine.eval_with_scope::<Dynamic>(&mut scope, "child.try_wait()").unwrap();
+    assert!(pending.is_unit(), "try_wait on a running child must return unit, got {pending:?}");
+    assert_eq!(unsafe { libc::kill(fixture_pid, 0) }, 0, "try_wait leaves the independently observed child alive");
+    eprintln!("x24_running pid={fixture_pid} alive_before_try_wait=true result_is_unit={}", pending.is_unit());
+
+    std::fs::write(&release_path, b"release\n").expect("release held fixture");
+    let terminal_deadline = Instant::now() + Duration::from_secs(5);
+    let terminal = loop {
+        let result = engine.eval_with_scope::<Dynamic>(&mut scope, "child.try_wait()").unwrap();
+        if !result.is_unit() {
+            break result
+        }
+        assert!(Instant::now() < terminal_deadline, "try_wait did not observe natural child exit before the bounded watchdog");
+        std::thread::sleep(Duration::from_millis(5));
+    };
+    assert!(!terminal.is_unit(), "try_wait after child exit must return a result, got ()");
+    let terminal = terminal.try_cast::<Map>().expect("try_wait returns the exit result directly after natural child exit");
+    let terminal_code = terminal["code"].as_int().unwrap();
+    assert_eq!(terminal_code, 0, "try_wait directly observes the natural exit result");
+    assert!(terminal["success"].as_bool().unwrap());
+    eprintln!("x24_post_exit_try_wait pid={fixture_pid} result_observed_before_wait=true code={terminal_code} success=true");
+
+    let completed = engine.eval_with_scope::<Map>(&mut scope, "child.wait()").unwrap();
+    let wait_code = completed["code"].as_int().unwrap();
+    assert_eq!(wait_code, 0, "wait returns the result cached by the earlier terminal try_wait");
+    assert!(completed["success"].as_bool().unwrap());
+    let gone_deadline = Instant::now() + Duration::from_secs(5);
+    loop {
+        let result = unsafe { libc::kill(fixture_pid, 0) };
+        if result == -1 && std::io::Error::last_os_error().raw_os_error() == Some(libc::ESRCH) {
+            break;
+        }
+        assert!(Instant::now() < gone_deadline, "public wait did not reap exact fixture PID {fixture_pid}");
+        std::thread::sleep(Duration::from_millis(5));
+    }
+    eprintln!("x24_finished pid={fixture_pid} wait_code={wait_code} try_wait_code={terminal_code} success=true reaped_esrch=true");
+}
+
 #[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
 const MANAGED_FIXTURE_ENV: &str = "RHAI_SYS_MANAGED_FIXTURE";
 #[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
