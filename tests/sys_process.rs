@@ -89,6 +89,9 @@ fn process_fixture() {
             let expected = std::env::var("RHAI_SYS_PROCESS_IO_BYTES").unwrap().parse::<usize>().unwrap();
             let out_bytes = std::env::var("RHAI_SYS_PROCESS_STDOUT_BYTES").unwrap().parse::<usize>().unwrap();
             let err_bytes = std::env::var("RHAI_SYS_PROCESS_STDERR_BYTES").unwrap().parse::<usize>().unwrap();
+            let expected_input = std::env::var_os("RHAI_SYS_PROCESS_IO_EXPECTED").map(std::path::PathBuf::from);
+            let received_input = std::env::var_os("RHAI_SYS_PROCESS_IO_RECEIVED").map(std::path::PathBuf::from);
+            let echo_input = std::env::var_os("RHAI_SYS_PROCESS_IO_ECHO").is_some();
             let child_pid = process::id();
             let record_path = std::path::PathBuf::from(record);
             std::fs::write(&record_path, format!("child-pid={child_pid} child-ready=1\n")).unwrap();
@@ -103,12 +106,23 @@ fn process_fixture() {
             let mut input = Vec::new();
             std::io::stdin().read_to_end(&mut input).unwrap();
             assert_eq!(input.len(), expected);
-            assert!(input.iter().all(|byte| *byte == b'i'));
+            let input_valid = if let Some(path) = expected_input {
+                std::fs::read(path).map(|expected| expected == input).unwrap_or(false)
+            } else {
+                input.iter().all(|byte| *byte == b'i')
+            };
+            assert!(input_valid, "stress child input differs from its expected bytes");
+            if let Some(path) = received_input {
+                std::fs::write(path, &input).unwrap();
+            }
             let complete_record = record_path.with_extension("complete");
             std::fs::write(&complete_record, format!("child-pid={child_pid} input-bytes={} input-valid=true\n", input.len())).unwrap();
             std::fs::rename(complete_record, record_path).unwrap();
             stdout_writer.join().unwrap();
             stderr_writer.join().unwrap();
+            if echo_input {
+                std::io::stdout().write_all(&input).unwrap();
+            }
             process::exit(code.parse().unwrap());
         }
         if std::env::var_os("RHAI_SYS_PROCESS_DEADLINE_IO").is_some() {
@@ -4499,6 +4513,125 @@ fn run_reports_a_real_unix_child_signal_without_an_exit_code() {
     );
     assert_eq!(pid_probe, -1, "signaled child {pid} is still present");
     assert_eq!(pid_probe_errno, Some(libc::ESRCH));
+}
+
+#[test]
+#[cfg(not(feature = "no_index"))]
+fn run_io_contract_empty_output() {
+    let engine = engine(SysConfig::default().programs(ProgramPolicy::Any));
+    let records = TempDir::new();
+    let record_path = records.path().join("empty-output-child.txt");
+    let record_literal = record_path.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let script = format!(r#"run("/bin/sh", ["-c", "printf 'child-pid=%s\\nchild-exit=0\\n' \"$$\" > \"$RECORD\""], #{{ env_clear: true, env: #{{ RECORD: "{record_literal}" }}, max_output: 1024, timeout: 5 }})"#);
+
+    let result = engine.eval::<Map>(&script).unwrap();
+    assert!(result["success"].as_bool().unwrap());
+    assert_eq!(result["code"].as_int().unwrap(), 0);
+    assert!(!result["timed_out"].as_bool().unwrap());
+    assert!(result["stdout_complete"].as_bool().unwrap());
+    assert!(result["stderr_complete"].as_bool().unwrap());
+    assert_eq!(result["stdout"].as_immutable_string_ref().unwrap().as_str(), "");
+    assert_eq!(result["stderr"].as_immutable_string_ref().unwrap().as_str(), "");
+    let child_record = std::fs::read_to_string(&record_path).unwrap();
+    assert_child_record(&record_path, 0);
+    eprintln!("x14_empty_output stdout_len=0 stderr_len=0 child_record={:?} child_reaped=true", child_record.trim());
+}
+
+#[test]
+#[cfg(not(feature = "no_index"))]
+fn run_io_contract_string_stdin_round_trip() {
+    let engine = engine(SysConfig::default().programs(ProgramPolicy::Any));
+    let records = TempDir::new();
+    let record_path = records.path().join("string-stdin-child.txt");
+    let record_literal = record_path.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let expected = "first process input line\nsecond process input line\n";
+    let input_literal = expected.replace('\\', "\\\\").replace('\n', "\\n");
+    let script = format!(r#"run("/bin/sh", ["-c", "printf 'child-pid=%s\\nchild-exit=0\\n' \"$$\" > \"$RECORD\"; exec /bin/cat"], #{{ env_clear: true, env: #{{ RECORD: "{record_literal}" }}, stdin: "{input_literal}", max_output: 1024, timeout: 5 }})"#);
+
+    let result = engine.eval::<Map>(&script).unwrap();
+    assert!(result["success"].as_bool().unwrap());
+    assert_eq!(result["code"].as_int().unwrap(), 0);
+    assert!(!result["timed_out"].as_bool().unwrap());
+    assert!(result["stdout_complete"].as_bool().unwrap());
+    assert!(result["stderr_complete"].as_bool().unwrap());
+    assert_eq!(result["stdout"].as_immutable_string_ref().unwrap().as_str(), expected);
+    assert_eq!(result["stderr"].as_immutable_string_ref().unwrap().as_str(), "");
+    let child_record = std::fs::read_to_string(&record_path).unwrap();
+    assert_child_record(&record_path, 0);
+    eprintln!("x16_string_stdin bytes={} exact_round_trip=true child_record={:?} child_reaped=true", expected.len(), child_record.trim());
+}
+
+#[test]
+#[cfg(not(feature = "no_index"))]
+fn run_io_contract_blob_stdin_round_trip_with_concurrent_output() {
+    const INPUT_BYTES: usize = 1024 * 1024;
+    const STREAM_BYTES: usize = 256 * 1024;
+    const OUTPUT_LIMIT: usize = 2 * 1024 * 1024;
+    let engine = engine(SysConfig::default().programs(ProgramPolicy::Any));
+    let executable = std::env::current_exe().unwrap();
+    let executable = executable.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let records = TempDir::new();
+    let record_path = records.path().join("blob-stdin-child.txt");
+    let expected_path = records.path().join("expected-input.bin");
+    let received_path = records.path().join("received-input.bin");
+    let input: Blob = (0..INPUT_BYTES).map(|index| ((index * 31 + 17) & 0xff) as u8).collect();
+    std::fs::write(&expected_path, &input).unwrap();
+    let record_literal = record_path.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let expected_literal = expected_path.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let received_literal = received_path.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let script = format!(
+        r#"run_raw("{executable}", ["--exact", "process_fixture", "--nocapture", "--quiet"], #{{
+            env_clear: true,
+            env: #{{ {FIXTURE_ENV}: "0", {FIXTURE_RECORD_ENV}: "{record_literal}", RHAI_SYS_PROCESS_IO_STRESS: "1", RHAI_SYS_PROCESS_IO_BYTES: "{INPUT_BYTES}", RHAI_SYS_PROCESS_STDOUT_BYTES: "{STREAM_BYTES}", RHAI_SYS_PROCESS_STDERR_BYTES: "{STREAM_BYTES}", RHAI_SYS_PROCESS_IO_EXPECTED: "{expected_literal}", RHAI_SYS_PROCESS_IO_RECEIVED: "{received_literal}", RHAI_SYS_PROCESS_IO_ECHO: "1" }},
+            stdin: payload, max_output: {OUTPUT_LIMIT}, timeout: 10
+        }})"#
+    );
+    let mut scope = Scope::new();
+    scope.push("payload", input.clone());
+
+    let result = engine.eval_with_scope::<Map>(&mut scope, &script).unwrap();
+    assert!(result["success"].as_bool().unwrap(), "blob child exited unsuccessfully: code={:?}", result["code"]);
+    assert_eq!(result["code"].as_int().unwrap(), 0);
+    assert!(!result["timed_out"].as_bool().unwrap());
+    assert!(result["stdout_complete"].as_bool().unwrap());
+    assert!(result["stderr_complete"].as_bool().unwrap());
+    let stdout = result["stdout"].clone().try_cast::<Blob>().unwrap();
+    let stderr = result["stderr"].clone().try_cast::<Blob>().unwrap();
+    let mut expected_stdout = LIBTEST_QUIET_START.to_vec();
+    expected_stdout.extend(std::iter::repeat(b'o').take(STREAM_BYTES));
+    expected_stdout.extend_from_slice(&input);
+    let first_stdout_difference = stdout.iter().zip(&expected_stdout).position(|(actual, expected)| actual != expected);
+    assert!(
+        stdout == expected_stdout,
+        "stdout contract mismatch: observed_bytes={} expected_bytes={} first_difference={first_stdout_difference:?}",
+        stdout.len(),
+        expected_stdout.len()
+    );
+    let expected_stderr = vec![b'e'; STREAM_BYTES];
+    let first_stderr_difference = stderr.iter().zip(&expected_stderr).position(|(actual, expected)| actual != expected);
+    assert!(
+        stderr == expected_stderr,
+        "stderr contract mismatch: observed_bytes={} expected_bytes={} first_difference={first_stderr_difference:?}",
+        stderr.len(),
+        expected_stderr.len()
+    );
+    let received = std::fs::read(&received_path).unwrap();
+    let first_input_difference = received.iter().zip(&input).position(|(actual, expected)| actual != expected);
+    assert!(
+        received == input,
+        "child stdin readback mismatch: observed_bytes={} expected_bytes={} first_difference={first_input_difference:?}",
+        received.len(),
+        input.len()
+    );
+    let child_record = std::fs::read_to_string(&record_path).unwrap();
+    assert_io_stress_record(&record_path, INPUT_BYTES, true);
+    eprintln!(
+        "x17_blob_stdin bytes={INPUT_BYTES} received_bytes={} stdout_bytes={} stderr_bytes={} exact_round_trip=true concurrent_streams=true child_record={:?} child_reaped=true",
+        received.len(),
+        stdout.len(),
+        stderr.len(),
+        child_record.trim()
+    );
 }
 
 #[test]

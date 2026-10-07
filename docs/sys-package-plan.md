@@ -29,6 +29,21 @@ source/lock identities and exported Workhorse logs are recorded in
 `../.scratch/all-tickets/process-argv-evidence/attempt-01/proof.md`. Other OS,
 MSRV and feature rows remain open, as do unrelated Ticket 03 requirements.
 
+Ticket 03 X11 is also partially accepted for Linux x86_64/Rust 1.93.0 with
+`testing-environ,sys`. Its public `run` test, sensitivity control, child
+readback and reaping proof are recorded in
+`../.scratch/all-tickets/process-env-remove-evidence/attempt-01/proof.md`; commit
+`e234e3e13f617def5670f16e81c5e7a60f7334ba` is the current fork `main` head.
+Ticket 03 X14/X16/X17 now have partial acceptance for Workhorse Linux x86_64,
+Rust/Cargo 1.93.0 and `testing-environ,sys`. The public Engine tests prove ordinary
+successful `run` with empty stdout/stderr, exact string stdin through `run`, and
+exact 1 MiB Blob round-trip through `run_raw` while the child concurrently writes
+256 KiB to each captured stream. The child-written Blob readback and direct-child
+reaping are asserted independently; each criterion also has a wrong-expectation
+control. The frozen source, logs, checksums and setup history are recorded in
+`../.scratch/all-tickets/process-io-contract-evidence/attempt-01/proof.md`.
+Other OS, MSRV, feature and unrelated Ticket 03 rows remain open.
+
 Historical status: decisions D1 to D12 accepted on 2026-09-29; phase 1 implemented on branch
 `claude/vibrant-sagan-3g1pxn` (this fork only, no upstream submission yet). Supersedes the
 2026-09-29 precedents survey; that survey is condensed into Appendix A.
@@ -698,25 +713,44 @@ recorded owner.
 The current task has no unresolved result/design choice requiring a user answer.
 Implementation feasibility of stopped routes remains explicit, not certified.
 
-**Current next action:** X2 and X8 now have partial Linux x86_64/Rust 1.93.0
-testing-environ,sys acceptance in
-.scratch/all-tickets/process-not-found-proof/proof.md. Their native OS, MSRV and
+**Completed bounded package:** Ticket 03 X14/X16/X17 as one public-Engine
+process-I/O package. The exact source entry is the three tests in
+`tests/sys_process.rs`; the canonical command is
+`cargo test --locked --features testing-environ,sys --test sys_process run_io_contract_ -- --nocapture --test-threads=1`.
+X14 launches `/bin/sh` with a normal positive output cap and independently checks
+empty captured strings plus child exit/reaping; X16 launches `/bin/sh` and
+`/bin/cat`, sends a Rhai string through `run`, and compares exact captured bytes
+plus the child record/reaping; X17 uses the existing self-exec stress fixture
+through `run_raw`, sends a varied 1 MiB Blob, drains concurrent 256 KiB stdout
+and stderr payloads, and compares both the exact echoed bytes and a child-written
+copy of the received input. Prerequisites are Workhorse Linux x86_64, `/bin/sh`,
+`/bin/cat`, Rust/Cargo 1.93.0 and the accepted locked dependency graph; no shared
+service is needed. The bounded Workhorse invocation established the fixture RED,
+restored a three-test GREEN, rejected a wrong expected value for each criterion,
+and exported checksummed results before runtime cleanup. The setup-only first
+launch and its precise correction remain recorded; it ran no Cargo command. No
+compiled artifact is reusable. The combined independent review is the next step
+before committing and pushing this package to the authorized fork `main`. This
+proof accepts only the named Linux/Rust/feature rows.
+
+**Next open work after this package is pushed:** X2 and X8 have partial Linux
+x86_64/Rust 1.93.0 `testing-environ,sys` acceptance in
+`.scratch/all-tickets/process-not-found-proof/proof.md`; their native OS, MSRV and
 other feature rows remain open. X22 also retains its partial Linux acceptance in
-.scratch/all-tickets/process-signal-evidence/proof.md; its other platform, MSRV
-and feature rows remain open. X4–X6 now have partial Linux x86_64/Rust 1.93.0
+`.scratch/all-tickets/process-signal-evidence/proof.md`; its other platform, MSRV
+and feature rows remain open. X4–X6 have partial Linux x86_64/Rust 1.93.0
 acceptance in `.scratch/all-tickets/process-argv-evidence/attempt-01/proof.md`;
-their other OS, MSRV and feature rows remain open. Package B's Ticket03 map in 6.7 remains an
-applicability map, not acceptance; its named no-primary behavior and other open
-rows remain unproven, and its three-launch route is stopped. Package E's metadata
-tests also remain unverified, and its route is stopped after allocation 3.
-Preserve every criterion and all consumed counts. The previously reviewed
-X22 Unix-only test guard remains unchanged; the combined reviewer returned READY
-for that correction without a rerun. After review and the requested atomic fork
-push, select an
-independently open requirement with an unspent route; do not rebuild Package E or
+their other OS, MSRV and feature rows remain open. X11 and the newly covered
+X14/X16/X17 retain only their named Linux partials; their other matrix rows
+remain open. Package B's Ticket 03 map in §6.7 remains an applicability map, not
+acceptance; its named no-primary behavior and other open rows remain unproven,
+and its three-launch route is stopped. Package E's metadata tests remain
+unverified, and its route is stopped after allocation 3. Preserve every criterion
+and all consumed counts. The previously reviewed X22 guard remains unchanged;
+its combined review is reusable. After the requested atomic fork push, select an
+independently open requirement with an unspent route; do not retry Package E or
 Package B based on this status update. This is not a new approval gate or a
 declaration that the remaining tickets are infeasible.
-
 The exact metadata command and its source/test mapping remain as recorded below.
 The full archive and pinned lock provenance remain available locally; the attempt-03
 preflight passed, then the launcher stopped at line 23 before extraction/Cargo due
@@ -817,10 +851,10 @@ source test alone or by an unreviewed/provisional result.
 | X11 | `tests/sys_process.rs::run_removes_inherited_environment_variable_from_public_child`; `.scratch/all-tickets/process-env-remove-evidence/attempt-01/proof.md` | Partial: Workhorse Linux x86_64/Rust 1.93.0 with `testing-environ,sys` proves the public Engine `run` path removes inherited `PATH` from a real child, with an inherited-value control, independent child-written readback, direct-child reaping, and a run-only sensitivity mutation. Other OS, MSRV, and feature rows remain open. |
 | X12 | Raw capture and options proof | Accepted for named Linux rows: stdout and stderr are separately observed. |
 | X13 | `process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps`; `linux-process-io-proof.md` | Accepted only for the two sensitivity-backed Linux claims and recorded feature rows; not a complete IO or platform matrix. |
-| X14 | No dedicated ordinary empty-output test identified | Open: zero-cap silent output is a different branch. |
+| X14 | `tests/sys_process.rs::run_io_contract_empty_output`; `.scratch/all-tickets/process-io-contract-evidence/attempt-01/proof.md` | Partial: Workhorse Linux x86_64/Rust 1.93.0 `testing-environ,sys` proves a normal-cap successful public `run` returns empty stdout/stderr; the child-written PID/exit record and ESRCH reaping are asserted. Its wrong-stdout control fails as intended. The existing zero-cap silent-output branch is distinct. Other OS, MSRV and feature rows remain open. |
 | X15 | Raw capture/options proof | Accepted for named Linux rows: exact raw bytes and lossy text behavior, including nonzero exit. |
-| X16 | Shared-child proof exercises large `spawn` stdin; no `run` string-echo test | Open: spawned stdin count/readback does not prove `run` string round-trip. |
-| X17 | No 1 MiB `run` blob round-trip test identified | Open: exact input/output and concurrent child output remain unproven. |
+| X16 | `tests/sys_process.rs::run_io_contract_string_stdin_round_trip`; `.scratch/all-tickets/process-io-contract-evidence/attempt-01/proof.md` | Partial: the named Linux row proves a 51-byte string round-trip through public `run`, exact child-written PID/exit record, ESRCH reaping and a failing wrong-output control. Spawned stdin evidence is not applicable. Other OS, MSRV and feature rows remain open. |
+| X17 | `tests/sys_process.rs::run_io_contract_blob_stdin_round_trip_with_concurrent_output`; `.scratch/all-tickets/process-io-contract-evidence/attempt-01/proof.md` | Partial: the named Linux row proves a varied 1 MiB `run_raw` Blob round-trip, exact simultaneous 256 KiB stdout/stderr capture, child-written received-input readback, direct-child ESRCH reaping and a failing wrong-output control. Other OS, MSRV and feature rows remain open. |
 | X18 | `unit_stdin_means_immediate_eof`; options proof | Accepted for named Linux rows: unit stdin produces EOF; other feature/platform rows remain open. |
 | X19 | Deadline tests; `linux-managed-deadline-proof.md` and options proof | Partial: Linux timeout/partial output and owned reaping are accepted in named cases; no scheduler-independent latency guarantee or full feature/platform coverage. |
 | X20 | Scalar success and `linux-managed-success-proof.md` | Accepted for named Linux rows: normal completion before deadline. |
