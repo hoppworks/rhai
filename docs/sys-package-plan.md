@@ -468,25 +468,44 @@ the Workhorse readback. The private runtime and exact owned scope were removed;
 no private Cargo build is reusable.
 
 **Additional native result: X31, Linux blocking wait (combined review READY 2026-10-08).**
-The accepted shared-Child proof above covers its three named Rust/Cargo 1.77.2
-feature rows, but its synchronization signal precedes the public wait call. On
-2026-10-08, the existing
+The accepted shared-Child proof above covers three named Rust/Cargo 1.77.2
+feature rows, but its synchronization signal precedes the public wait call. A
+separately retained Workhorse proof adds Linux x86_64 blocking-entry rows at
+Rust/Cargo 1.77.2 for `testing-environ,sys,sync` and
+`testing-environ,sys,sync,no_float`. Both profiles have the expected assertion
+RED for a deliberately wrong wait-entry condition and a restored GREEN with one
+passing test. They observe wait entry, a nonterminal child at cancellation,
+waiter wakeup and exact-PID `ESRCH`; the compatible lock, restored test bytes,
+toolchain and process identities are retained in
+`../.scratch/all-tickets/linux-wait-entry-evidence-88/`; its inner
+`package-result.json` left `acceptance_claim:false` pending an independent
+cleanup readback. The outer evidence at
+`../.scratch/all-tickets/linux-wait-entry-outer-evidence-88/` records exact PID,
+scope and runtime cleanup, closing that dependency. The combined
+current-source review returned READY, as recorded in
+`../.scratch/all-tickets/linux-wait-entry-proof.md` and
+`../.scratch/all-tickets/linux-wait-entry-review.md`: the blocking-entry test
+function is byte-identical at its captured source
+`08507d6831f73f28aa0b95a4255c5df8ebe2ec13`
+and `c644085ccf65160bd3d39f5353e8b933310ffe03`, and the intervening production
+deltas do not change the exercised wait/kill behavior.
+
+On 2026-10-08, the current
 `src/packages/sys/process/unix.rs::tests::public_wait_is_cancelled_after_entering_condvar`
-test passed on Workhorse Linux x86_64 with Rust/Cargo 1.97.1 and
+test also passed on Workhorse Linux x86_64 with Rust/Cargo 1.97.1 and
 `testing-environ,sys,sync`. It evaluates Rhai `spawn`, `wait`, and `kill` with a
 real shell child held on a FIFO. The test observes the wait-entry counter and
 reacquires the child snapshot mutex while the independently recorded child is
 still nonterminal, confirming the waiter reached `Condvar::wait` before public
 cancellation; the waiter wakes and the exact PID is independently confirmed
-reaped with `ESRCH`. The source was archived at
-`c644085ccf65160bd3d39f5353e8b933310ffe03`; the retained compatible lock passed
-full `cargo metadata --locked` against the current manifest before the test.
-Full output, hashes, toolchain, resource measurements and cleanup readback are
-in `../.scratch/all-tickets/linux-shared-child-evidence-87/blocking-entry-current/`.
-This adds only the Linux x86_64, Rust/Cargo 1.97.1,
-`testing-environ,sys,sync` blocking-entry row. Other OS, MSRV and feature rows
-remain open; no product change or repeat of the existing shared-child matrix
-was needed.
+reaped with `ESRCH`. The retained compatible lock passed full
+`cargo metadata --locked` against the current manifest before the test. Full
+output, hashes, toolchain, resource measurements and cleanup readback are in
+`../.scratch/all-tickets/linux-shared-child-evidence-87/blocking-entry-current/`.
+These results add only the two Rust/Cargo 1.77.2 profiles above and the Linux
+x86_64 Rust/Cargo 1.97.1 `testing-environ,sys,sync` blocking-entry row. Other
+OS, MSRV and feature rows remain open; no product change or repeat of the
+existing shared-child matrix was needed.
 
 **X24 attempt 01 — partial historical evidence.** The test
 `tests/sys_process.rs::direct_spawn_try_wait_returns_unit_until_child_exits`
@@ -1070,7 +1089,7 @@ row is closed by a source test alone or by an unreviewed/provisional result.
 | X28 | `linux-drop-false-native2-proof.md`; historical Darwin direct/managed tests in `.scratch/all-tickets/macos-process-refresh-evidence/macos-process-refresh.pvRbIs.cargo.sys_process.log` | Partial (combined review READY 2026-10-08): exact Linux direct/managed retention tests and independent group readback are accepted at the named default Linux row. The existing full Darwin `sys_process` run at `e5b55460…`, arm64 macOS 27.0, Rust/Cargo 1.93.0 (private lock SHA-256 `2ba4b3a0…`) includes direct and managed `kill_on_drop=false` tests with live challenge/readback, natural completion, ESRCH cleanup, and sentinel preservation. Review confirms the relevant lease-drop logic and test/helper inputs remain applicable through `d3281a7…`; this is historical macOS 27.0 evidence, not a fresh macOS 27.0.1 run. Windows and other feature/toolchain rows remain open. The later `linux-drop-false-next.md` is a planning note predating native2 and does not invalidate that accepted Linux proof. |
 | X29 | `tests/fixtures/sys_process_shared_child_contract.rs::script_throw_drops_and_reaps_a_live_child`; `.scratch/all-tickets/x29-script-throw-20261007-9aec531ea61d42359544757b363f2422/proof.md`; Darwin `.scratch/all-tickets/darwin-x29-20261008/attempt-01/` | Partial (combined review READY 2026-10-08). Accepted Workhorse Linux x86_64 rows at Rust/Cargo 1.93.0 and 1.77.2 with `testing-environ,sys`: corrected expected RED/GREEN proves the fresh challenge, script-level `child.try_wait() == ()`, wrong-message rejection and independent ESRCH readback. Native Darwin arm64/macOS 27.0.1, Rust/Cargo 1.93.0, same features, also produced expected RED=101 and GREEN=0; the GREEN output records those same observations and exact-child ESRCH. Review confirmed the overlaid worktree fixture (SHA-256 `14a0808a…`) preserves the committed X29 behavior (fixture SHA-256 `1faf45c5…`). Other OS, feature and MSRV rows remain open. |
 | X30 | `tests/sys_process.rs::repeated_public_run_calls_keep_fd_count_stable`; `.scratch/all-tickets/process-fd-stability-evidence/x30-fd-stability-20261007-1530z/attempt-06/` | Partial (combined review READY 2026-10-08 for current-source applicability): attempt 06 proves that the exact-filtered acceptance test isolates its `/proc/self/fd` census in a fresh process, where 200 sequential public `run` calls leave the count unchanged; a wrong-count control fails and restored GREEN passes. The parent enforces a 60-second child deadline and terminates/reaps on timeout. Review confirms the X30 test and census helpers remain unchanged at `c644085c`. `run_map` adds Managed-scope fault setup and takes fault state earlier; the test uses default DirectChild scope, no injected fault and no custom cwd, so the changed setup does not alter its descriptor path. This remains applicable to Linux x86_64, Rust/Cargo 1.93.0, `testing-environ,sys`; other OS, MSRV and feature rows, including Windows handle stability, remain open. |
-| X31 | `process_representation_is_send_sync_and_shareable`; `.scratch/all-tickets/linux-shared-child-proof.md`; `.scratch/all-tickets/linux-shared-child-evidence-87/blocking-entry-current/proof.md` | Partial (combined review READY 2026-10-08): existing proof accepts shared representation and concurrent cancellation/wait for named Linux Rust/Cargo 1.77.2 rows (`testing-environ,sys`; `testing-environ,sys,sync`; and `testing-environ,sys,sync,no_float`). The current-source native Linux x86_64 Rust/Cargo 1.97.1 `testing-environ,sys,sync` test directly observes entry into the public blocking wait before cancellation, waiter wakeup and independent PID reaping. Other OS, MSRV and feature rows remain open. |
+| X31 | `process_representation_is_send_sync_and_shareable`; `.scratch/all-tickets/linux-shared-child-proof.md`; `.scratch/all-tickets/linux-wait-entry-proof.md`; `.scratch/all-tickets/linux-wait-entry-review.md`; `.scratch/all-tickets/linux-wait-entry-evidence-88/`; `.scratch/all-tickets/linux-wait-entry-outer-evidence-88/`; `.scratch/all-tickets/linux-shared-child-evidence-87/blocking-entry-current/proof.md` | Partial (combined review READY 2026-10-08): existing proof accepts shared representation and concurrent cancellation/wait for named Linux Rust/Cargo 1.77.2 rows (`testing-environ,sys`; `testing-environ,sys,sync`; and `testing-environ,sys,sync,no_float`). Reviewed blocking-entry evidence adds the 1.77.2 `sync` and `sync,no_float` rows: expected assertion RED/restored GREEN, exact test-function byte identity at source `08507d6…` and `c644085c`, and applicable wait/kill behavior with cleanup readback. The current-source native Linux x86_64 Rust/Cargo 1.97.1 `testing-environ,sys,sync` test also directly observes entry into the public blocking wait before cancellation, waiter wakeup and independent PID reaping. Other OS, non-sync blocking-entry, MSRV and feature rows remain open. |
 | X32 | `tests/sys_process_windows.rs` | Open: no native Windows embedded-quote argv reconstruction test. |
 | X33 | `tests/sys_process_windows.rs` | Open: no native Windows `.exe` suffix/PATH resolution test. |
 | X34 | Managed deadline, output-limit, kill, final-drop and escaped-pipe proofs | Partial: selected Linux managed cancellation cases are accepted; exact platform/feature/fault breadth and Windows Job behavior remain open. |

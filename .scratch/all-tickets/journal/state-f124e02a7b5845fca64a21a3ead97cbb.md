@@ -10,10 +10,10 @@ Authorized implementation, strict verification and private-fork integration for 
 - Preserve dirty `tests/fixtures/sys_process_shared_child_contract.rs`, unrelated scratch, foreign branches/worktrees/processes. Package B no-primary route stays closed; never use native110.
 
 ## Current step
-X18 is already accepted and committed (`17021f5d`): attempt02 raw assertion RED plus attempt03 restored GREEN share source, lock, features and Darwin environment; combined review READY. X31 Linux blocking-entry is READY at 1.77.2 `sync`/`sync,no_float` by reviewed historical proof reuse, plus current-source 1.97.1 `sync`. Plan, proof, review and crosswalk now record both; the reviewed proof package is next to integrate. No duplicate X18/X31 run or reusable build.
+X18 is already accepted and committed (`17021f5d`): attempt02 raw assertion RED plus attempt03 restored GREEN share source, lock, features and Darwin environment; combined review READY. X31 Linux blocking-entry is READY at 1.77.2 `sync`/`sync,no_float` by reviewed historical proof reuse, plus current-source 1.97.1 `sync`. Plan and crosswalk now record both; raw historical records are being integrated. No duplicate X18/X31 run or reusable build.
 
 ## Next action
-Run state/reference and diff checks; stage only X31 plan, proof/review summaries, state/archive and two raw evidence folders. Atomically commit/push to current private `main`, verify exact remote readback and sole branch. Then inspect whether Darwin X31 blocking-entry has reusable proof before considering a new run.
+Run state/reference and diff checks; stage only the X31 plan, state/archive and two reviewed evidence folders. Atomically commit/push to current private `main`, verify exact remote readback and sole branch. Then inspect whether Darwin X31 blocking-entry has reusable proof before considering a new run.
 
 ## Workflow choices
 - Verification: strict
@@ -34,13 +34,13 @@ Every criterion has strict applicable proof/review; verified work is on the fork
 ## Done steps
 - Linux X36 Rust/Cargo 1.77.2 `47035986`; Darwin X36 kernel denial `471cf269`.
 - Darwin X14/X16/X17 `bcb524b8`; X18 `17021f5d`; X20 `c644085c`.
-- X30 Linux applicability `5b99bb069`; X31 Linux blocking-entry 1.97.1 `5c3deeb7`. X31 1.77.2 proof/review and plan are ready; integration pending.
+- X30 Linux applicability `5b99bb069`; X31 Linux blocking-entry 1.97.1 `5c3deeb7`. X31 1.77.2 reuse is ready, not yet integrated.
 
 ## Accepted evidence
 - Matrix and original requirements: `docs/sys-package-plan.md` §§6.7–6.8.
 - X36 `.scratch/all-tickets/x36-managed-scope-setup/`; X14/X16/X17 `.scratch/all-tickets/darwin-io-contracts-20261008/` plus Linux controls; X18 `.scratch/all-tickets/darwin-x18-unit-stdin-20261008/` and Linux options; X20 `.scratch/all-tickets/darwin-x20-20261008/`.
 - X30 `.scratch/all-tickets/process-fd-stability-evidence/x30-fd-stability-20261007-1530z/attempt-06/`.
-- X31 base `.scratch/all-tickets/linux-shared-child-proof.md`; 1.77.2 `.scratch/all-tickets/linux-wait-entry-proof.md`, `linux-wait-entry-review.md`, raw evidence and outer cleanup folders; 1.97.1 `linux-shared-child-evidence-87/blocking-entry-current/`.
+- X31 base `.scratch/all-tickets/linux-shared-child-proof.md`; 1.77.2 `.scratch/all-tickets/linux-wait-entry-evidence-88/` and `linux-wait-entry-outer-evidence-88/`; 1.97.1 `linux-shared-child-evidence-87/blocking-entry-current/`.
 
 ## Retained resources
 No reusable build. X31 scopes/runtimes were removed with exact readbacks. Worktree `.worktrees/all-tickets-environment-recovery`, branch `task/all-tickets-environment-recovery`; private `origin/main` last verified at `5c3deeb71`. New runs use unique `~/.local/share/agent-builds/rhai/<session>`, scoped `TMPDIR` and `AGENT_RUNTIME_DIR` outputs via `tools/run_scoped.py`.
@@ -65,7 +65,6 @@ Windows X30/X32/X33; wider X34/X35/X37; remaining X36/X38; remaining Ticket 03 a
 ## History
 All prior states, approvals, budgets, proof decisions and cause details are retained under `.scratch/all-tickets/journal/`; this rewrite archives the exact predecessor.
 - Previous state: journal/state-17df735b5187473c8978fdd0bdf6099d.md
-- Previous state: journal/state-f124e02a7b5845fca64a21a3ead97cbb.md
 
 ## Retrospective
 Reuse valid proofs after current-source applicability review; combine review around acceptance requirements; avoid duplicate builds. Preserve expected RED, infrastructure stops and correction history distinctly. Keep foreign work untouched.

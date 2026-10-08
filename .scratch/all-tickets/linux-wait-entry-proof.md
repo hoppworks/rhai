@@ -73,3 +73,24 @@ and linux-wait-entry-stage-cleanup-88.json. No own build/stage/private cache rem
 No production change was needed; expected assertion RED is not a product failure.
 Unix cumulative88 consumed; no retry. This closes no other platform or wider
 process requirement. Review: linux-wait-entry-review.md.
+
+## Current-source applicability and closure (2026-10-08)
+
+The combined current-source review returned READY to reuse the two Linux
+x86_64 Rust/Cargo 1.77.2 blocking-entry rows, `testing-environ,sys,sync` and
+`testing-environ,sys,sync,no_float`, at production source
+`c644085ccf65160bd3d39f5353e8b933310ffe03`. The exact blocking-entry test
+function is byte-identical to the frozen source `08507d6831f73f28aa0b95a4255c5df8ebe2ec13`.
+The intervening snapshot change affects only child-error reporting; the tested
+wait still uses the same Condvar, and public kill preserves the state update and
+notification used by this test. Other run-map/scope changes do not affect the
+path. The compatible lock remains SHA-256
+`2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425`.
+
+The inner `package-result.json` records `acceptance_claim:false` because the
+independent cleanup readback was still pending when it was written. The outer
+readback documented above closes that dependency: recorded PID/start identities,
+fixture PIDs, process groups, runtime, scope and staging directory are absent.
+The review accepts that closure for these two rows. Non-sync blocking entry,
+other operating systems, feature rows and MSRVs remain open. No build, test or
+source edit was performed for this current-source reuse review.

@@ -59,3 +59,23 @@ Limitations remain: actual entry before cancellation with a nonterminal checkpoi
 
 
 Final proof-record wording readback: `linux-wait-entry-proof.md` accurately describes the real Engine/FIFO-held child path, counter plus mutex observation, RED guard versus GREEN public cancellation, native rows, source restoration, sampled measurements and independent closure. It keeps broader requirements open and avoids a continuous-sleep claim. The recorded Linux kernel identity is root-supplied live uname readback; original Rust/Cargo1.77.2 versions were independently inspected here. The record's “combined acceptance review pending” and “process/group/path closure ... remain pending” statements predate this completed review and should now be changed to accepted/verified for this narrow criterion; the /proc disappearance impact is resolved by the preceding review paragraph. These are completion bookkeeping updates, not evidence deficiencies or launch/retest blockers. No proof of other platforms/features is implied by “previous ... proofs remain applicable”; that applicability remains limited to their separately recorded original source/assertion/environment coverage.
+
+## Current-source reuse review — 2026-10-08
+
+Status: READY to reuse only the Linux x86_64 Rust/Cargo 1.77.2 blocking-entry
+rows `testing-environ,sys,sync` and `testing-environ,sys,sync,no_float` at
+production source `c644085ccf65160bd3d39f5353e8b933310ffe03`. The exact test
+function bytes match frozen source `08507d6831f73f28aa0b95a4255c5df8ebe2ec13`.
+The shared Condvar wait, nonterminal checkpoint and public kill state-update/
+notification path remain applicable; intervening snapshot error-reporting and
+unrelated run-map/scope changes do not alter these rows. The lock hash, toolchain,
+feature rows and expected RED/GREEN records match. The independent root readback
+and cleanup receipts resolve the earlier `package-result.json` pending-closure
+flag. The current-source review therefore supersedes the historical final note
+above that requested this bookkeeping update; no evidence failure or retest
+remains. Non-sync, other platform, feature and MSRV criteria stay open.
+
+For this update, global, project, campaign, e2e-proof and resource rules were
+reloaded at Agent-Skills Main `35ba734135a64100b891f422d4ced9d76795ab57` in
+central HEAD `0e846bfc577a51bd1a98a5606966aecda40320c2`. No build, test, SSH,
+source edit or new review cycle was used.
