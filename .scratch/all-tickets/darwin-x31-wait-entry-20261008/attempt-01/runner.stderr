@@ -1,0 +1,1 @@
+red-sync did not report exact test packages::sys::process::unix::tests::public_wait_is_cancelled_after_entering_condvar

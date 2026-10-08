@@ -1,0 +1,2 @@
+823844	/Users/hoppworks/.local/share/agent-builds/rhai/x31-darwin-wait-entry-20261008-attempt02-6E20FCE49BCE4470B9FBFABA4485690E/agent-build-g19znid2/target
+80052	/Users/hoppworks/.local/share/agent-builds/rhai/x31-darwin-wait-entry-20261008-attempt02-6E20FCE49BCE4470B9FBFABA4485690E/agent-build-g19znid2/cargo-home

@@ -1,0 +1,2 @@
+sync=testing-environ,sys,sync
+sync-no-float=testing-environ,sys,sync,no_float

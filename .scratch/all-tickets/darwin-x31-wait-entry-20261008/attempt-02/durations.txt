@@ -1,0 +1,4 @@
+red-sync_seconds=23
+green-sync_seconds=3
+red-sync-no-float_seconds=9
+green-sync-no-float_seconds=1

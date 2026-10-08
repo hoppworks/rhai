@@ -1,0 +1,5 @@
+source_commit=05320c2c9bf3d4396956632e0cc1706e96c94b15
+staged_source=/Users/hoppworks/.local/share/agent-builds/rhai/x31-darwin-wait-entry-20261008-attempt02-6E20FCE49BCE4470B9FBFABA4485690E/agent-build-g19znid2/source
+cargo_lock_source=/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/all-tickets/api-metadata-evidence/native3-20261007/Cargo.lock
+cargo_test_name=packages::sys::process::unix::tests::public_wait_is_cancelled_after_entering_condvar
+cargo_command=cargo +1.93.0 test --locked --lib --features <features> packages::sys::process::unix::tests::public_wait_is_cancelled_after_entering_condvar -- --exact --nocapture --test-threads=1

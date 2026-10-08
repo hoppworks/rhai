@@ -1,0 +1,2 @@
+session_scope_removed=true
+cleanup_status=0

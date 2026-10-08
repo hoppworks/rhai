@@ -1,0 +1,140 @@
+   Compiling rhai v1.26.1 (/Users/hoppworks/.local/share/agent-builds/rhai/x31-darwin-wait-entry-20261008-attempt02-6E20FCE49BCE4470B9FBFABA4485690E/agent-build-g19znid2/source)
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:678:13
+    |
+678 |         let mut wait_operation = "wait for child";
+    |             ----^^^^^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `termination`
+    --> src/packages/sys/process/unix.rs:1118:22
+     |
+1118 |                 let (termination, _operation) = if self.managed {
+     |                      ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_termination`
+     |
+     = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2378:9
+     |
+2378 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2721:9
+     |
+2721 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: function `schedule_first_cause_plan` is never used
+    --> src/packages/sys/process/unix.rs:3724:8
+     |
+3724 |     fn schedule_first_cause_plan(
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^
+     |
+     = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `refuse_kill_for_next_execution` is never used
+    --> src/packages/sys/process/unix.rs:3757:8
+     |
+3757 |     fn refuse_kill_for_next_execution() -> Arc<AtomicBool> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `fail_cleanup_wait_for_next_execution` is never used
+    --> src/packages/sys/process/unix.rs:3776:8
+     |
+3776 |     fn fail_cleanup_wait_for_next_execution() -> (Arc<AtomicBool>, Arc<AtomicBool>) {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `fail_cleanup_wait_echild_for_next_execution` is never used
+    --> src/packages/sys/process/unix.rs:3799:8
+     |
+3799 |     fn fail_cleanup_wait_echild_for_next_execution() -> (
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `synchronize_overflow_deadline_for_next_execution` is never used
+    --> src/packages/sys/process/unix.rs:3964:8
+     |
+3964 |     fn synchronize_overflow_deadline_for_next_execution(
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: struct `ReleaseFifoOnDrop` is never constructed
+    --> src/packages/sys/process/unix.rs:4361:12
+     |
+4361 |     struct ReleaseFifoOnDrop {
+     |            ^^^^^^^^^^^^^^^^^
+
+warning: method `finish` is never used
+    --> src/packages/sys/process/unix.rs:4367:12
+     |
+4366 |     impl ReleaseFifoOnDrop {
+     |     ---------------------- method in this implementation
+4367 |         fn finish(&mut self) {
+     |            ^^^^^^
+
+warning: function `try_release_fifo` is never used
+    --> src/packages/sys/process/unix.rs:4471:8
+     |
+4471 |     fn try_release_fifo(path: &Path) -> io::Result<()> {
+     |        ^^^^^^^^^^^^^^^^
+
+warning: function `record_field_pid` is never used
+    --> src/packages/sys/process/unix.rs:4494:8
+     |
+4494 |     fn record_field_pid(path: &Path, field: &str) -> io::Result<i32> {
+     |        ^^^^^^^^^^^^^^^^
+
+warning: function `map_string` is never used
+    --> src/packages/sys/process/unix.rs:4558:8
+     |
+4558 |     fn map_string<'a>(map: &'a crate::Map, key: &str) -> String {
+     |        ^^^^^^^^^^
+
+warning: function `public_child_error` is never used
+    --> src/packages/sys/process/unix.rs:5023:8
+     |
+5023 |     fn public_child_error(
+     |        ^^^^^^^^^^^^^^^^^^
+
+warning: unused `dynamic::Dynamic` that must be used
+    --> src/packages/sys/process/unix.rs:4672:9
+     |
+4672 | /         engine
+4673 | |             .eval_with_scope::<crate::Dynamic>(&mut cancel_scope, "child.kill()")
+4674 | |             .expect("public cancellation should wake the blocked waiter");
+     | |_________________________________________________________________________^
+     |
+     = note: `#[warn(unused_must_use)]` (part of `#[warn(unused)]`) on by default
+help: use `let _ = ...` to ignore the resulting value
+     |
+4672 |         let _ = engine
+     |         +++++++
+
+warning: `rhai` (lib test) generated 16 warnings (run `cargo fix --lib -p rhai --tests` to apply 4 suggestions)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 8.80s
+     Running unittests src/lib.rs (/Users/hoppworks/.local/share/agent-builds/rhai/x31-darwin-wait-entry-20261008-attempt02-6E20FCE49BCE4470B9FBFABA4485690E/agent-build-g19znid2/target/debug/deps/rhai-e964d242920d1c99)
+
+running 1 test
+test packages::sys::process::unix::tests::public_wait_is_cancelled_after_entering_condvar ... wait-entry checkpoint pid=40887 count=1 nonterminal=true
+
+thread 'packages::sys::process::unix::tests::public_wait_is_cancelled_after_entering_condvar' (8055834) panicked at src/packages/sys/process/unix.rs:4664:9:
+X31 RED: wait-entry assertion sensitivity control
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+wait-entry fixture cleanup pid=40887 reap=ESRCH
+FAILED
+
+failures:
+
+failures:
+    packages::sys::process::unix::tests::public_wait_is_cancelled_after_entering_condvar
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 21 filtered out; finished in 0.04s
+
+error: test failed, to rerun pass `--lib`

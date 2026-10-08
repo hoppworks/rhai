@@ -1,0 +1,1 @@
+session_scope=/Users/hoppworks/.local/share/agent-builds/rhai/x31-darwin-wait-entry-20261008-1218bf21a1ad461dd954609f62527fb92
