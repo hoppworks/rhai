@@ -799,19 +799,21 @@ failed at the permission assertion before the restored run passed. This closes
 only the macOS F23 sys-policy slice. Independent review accepted the test evidence and verified the corrected
 source-pin description. Commit/push this plan/state update without repeating the
 build. The direct `combined_sys_net.rs` coexistence target and its locked metadata,
-expected-RED, and green evidence are now recorded under
+expected-RED, and green evidence are recorded under
 `.scratch/all-tickets/combined-sys-net-darwin-20261008/`; its only proven scope is
-default sys/net coexistence. The combined independent review returned READY. Next map the unproven
-native Darwin process/lifecycle criteria to existing tests and evidence before
-selecting a focused target. C and D retain unproven custody prerequisites → X22 now has
-combined-review-READY Linux x86_64/Rust
-1.93.0 and 1.77.2 executions with its existing sensitivity control; the 1.77.2
-output and cleanup readback are recorded in `process-signal-evidence/proof.md` →
-map the remaining §6 criteria to existing proof and choose the cheapest unspent
-route; close only uncovered integrated rows in F → verified fork-main integration
-under existing Git authorization. Do not rerun either X22 Linux toolchain or its
-sensitivity control absent a relevant invalidating change. No upstream writes,
-production release or new Goal are authorized.
+default sys/net coexistence. The combined independent review returned READY.
+X22 also has Darwin arm64/macOS 27.0.1, Rust/Cargo 1.93.0 execution evidence for
+the real public-Engine SIGKILL child: the sensitivity control reports 9 versus
+10, and the restored Cargo test passes with host-file and ESRCH readbacks. Raw
+outputs and both validator-format errors are documented in
+`.scratch/all-tickets/darwin-signal-x22-20261008/proof.md`; combined independent
+review returned READY for this row only. C and D retain unproven custody
+prerequisites → map remaining §6 criteria to existing proof and choose the
+cheapest unspent route; close only
+uncovered integrated rows in F → verified fork-main integration under existing
+Git authorization. Do not rerun accepted X22 Linux toolchains or their sensitivity
+control absent a relevant invalidating change. No upstream writes, production
+release or new Goal are authorized.
 Do not repeat Package A's build or six controls. Its accepted proof is tied to the
 tested source/lock/toolchain and Linux environment recorded in the preserved
 receipts. A later A rerun needs a relevant source, assertion, dependency, toolchain
@@ -1000,7 +1002,7 @@ source test alone or by an unreviewed/provisional result.
 | X19 | Deadline tests; `linux-managed-deadline-proof.md` and options proof | Partial: Linux timeout/partial output and owned reaping are accepted in named cases; no scheduler-independent latency guarantee or full feature/platform coverage. |
 | X20 | Scalar success and `linux-managed-success-proof.md` | Accepted for named Linux rows: normal completion before deadline. |
 | X21 | Cap tests, `linux-process-overlap-proof.md`, managed output-limit proof | Accepted for named Linux DirectChild/Managed same-step overflow-vs-deadline cases and listed cap cases; other causes/platforms remain open. |
-| X22 | `run_reports_a_real_unix_child_signal_without_an_exit_code`; `process-signal-evidence/proof.md` | Partial (combined review READY 2026-10-07): Workhorse Linux x86_64/Rust/Cargo 1.93.0 and 1.77.2 with `testing-environ,sys` prove a real public-Engine SIGKILL child reports `success=false`, `code=()`, `signal=9`, is not timed out, has complete output, and is reaped (`ESRCH`). Other Unix platforms and feature rows remain open. |
+| X22 | `run_reports_a_real_unix_child_signal_without_an_exit_code`; Linux `process-signal-evidence/proof.md`; Darwin `.scratch/all-tickets/darwin-signal-x22-20261008/proof.md` | Partial (combined review READY for Linux rows 2026-10-07 and Darwin row 2026-10-08): Workhorse Linux x86_64/Rust/Cargo 1.93.0 and 1.77.2 plus native Darwin arm64/macOS 27.0.1/Rust/Cargo 1.93.0, all with `testing-environ,sys`, prove a real public-Engine SIGKILL child reports `success=false`, `code=()`, `signal=9`, is not timed out, has complete output and is independently reaped (`ESRCH`). Darwin Cargo RED/GREEN results and readbacks are preserved; two helper exit-1 results were incorrect libtest output-shape checks after Cargo completed. Other Unix platforms, toolchains and feature rows remain open. |
 | X23 | Shared-child and `linux-process-example3-proof.md`; Darwin `.scratch/all-tickets/darwin-process-example-20261008/attempt-01/proof.md` | Accepted for named Linux rows: real spawn/wait, result map, clone snapshots and cached results. Also accepted for the named Darwin example row (arm64/macOS 27.0.1, Rust/Cargo 1.93.0, `sys`): public Engine with real child-file readbacks, pending wait and identical cloned-handle results; expected RED/GREEN passed and scoped cleanup was verified. Combined independent review READY. Other Darwin lifecycle, features, MSRV and OS rows remain open. |
 | X24 | `tests/sys_process.rs::direct_spawn_try_wait_returns_unit_until_child_exits`; Linux `.scratch/all-tickets/process-try-wait-evidence/x24-try-wait-20261007-1705z-6a92d/attempt-03/` and `attempt-04/proof.md`; Darwin `.scratch/all-tickets/x24-darwin-trywait-20261008/attempt-02/proof.md` | Partial (combined reviews READY 2026-10-07/08): Workhorse Linux x86_64, Rust/Cargo 1.93.0 and 1.77.2, `testing-environ,sys`, plus Darwin arm64/macOS 27.0.1, Rust/Cargo 1.93.0, `testing-environ,sys`, prove pending `try_wait` returns unit and terminal result is observed directly before `wait`, with cached exit and independent ESRCH readback. Darwin raw expected RED/GREEN targets are valid; the wrapper status 1 was a separate-output-token validator error, superseded by the proof record. The Darwin RED mutates the cached `wait()` expectation; it does not claim a separate mutation of every `try_wait` assertion. Other OS, MSRV, and feature rows remain open. |
 | X25 | Shared-child and managed-kill proofs | Accepted for named Linux cases: kill/wait completes with independent cleanup/readback. |
