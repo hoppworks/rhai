@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "/Users/hoppworks/.local/share/agent-builds/rhai/darwin-process-minimum-qug9u80c/agent-build-escdy770/target/debug/deps/sys_process_report-0d531a63993b3651",
+    "--list"
+  ],
+  "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/darwin-process-minimum-qug9u80c/agent-build-escdy770/source",
+  "exit": 0,
+  "seconds": 0.2616132919999927
+}

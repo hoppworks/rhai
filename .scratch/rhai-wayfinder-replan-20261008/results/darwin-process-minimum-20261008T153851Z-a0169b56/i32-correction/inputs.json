@@ -1,0 +1,28 @@
+{
+  "archive": "/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/all-tickets/darwin-x21-cap-20261008/attempt-01/source.tar",
+  "archive_sha256": "635a59827900b02ad82b0e53499f6b3fb2a5c5233326cac541c88c3e8b61265f",
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "patch_sha256": "e57f1efff98d7457229fe5512ed556ba5c09defe44155f1c5651c56b5b8a17d6",
+  "source_revision": "da115c618c39fb1eca93aeba90a92478f09f5e29",
+  "rows": [
+    {
+      "name": "minimum-i32-integer-corrected",
+      "toolchain": "1.77.2",
+      "features": "sys,net,only_i32,no_float",
+      "targets": {
+        "sys_process": [
+          "run_io_contract_empty_output",
+          "process_script_output_option_cannot_raise_the_host_cap",
+          "run_reports_a_real_unix_child_signal_without_an_exit_code"
+        ]
+      }
+    }
+  ],
+  "baseline_skip": [
+    "process_fixture",
+    "shared_child_contract::fixture_entry",
+    "child_wait_preserves_decoded_expansion_reports_and_committed_primary_cause"
+  ],
+  "baseline_skip_regex": "fixture|isolated|measurement|resource_census",
+  "overlay_sha256": "45eb313e2352d148d0506b01a4f6ede917811336944cb1f84e49f77de9423220"
+}

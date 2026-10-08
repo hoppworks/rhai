@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "/Users/hoppworks/.local/share/agent-builds/rhai/darwin-process-minimum-qug9u80c/agent-build-escdy770/target/debug/deps/sys_process-a2e11f9faa2e3991",
+    "shared_child_contract::panic_expectation_rejects_success_and_unrelated_panics",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/darwin-process-minimum-qug9u80c/agent-build-escdy770/source",
+  "exit": 0,
+  "seconds": 0.14547362500000105
+}

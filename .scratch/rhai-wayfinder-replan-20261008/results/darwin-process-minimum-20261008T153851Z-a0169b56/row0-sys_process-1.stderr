@@ -1,0 +1,6 @@
+direct_drop_fixture_started root=/Users/hoppworks/.local/share/agent-builds/rhai/darwin-process-minimum-qug9u80c/agent-build-escdy770/tmp/rhai-sys-test-24076-direct_spawn_kill_on_drop_false_preserves_child_and_capture-0 test_pid=24076 child_pid=24077
+direct_drop_after_final_client_drop pid=24077 alive=true challenge_ack=true completion_exists=false
+direct_drop_completion pid=24077 record="pid=24077 stdout_bytes=524288 stderr_bytes=524288 complete=true\n"
+direct_drop_terminal pid=24077 esrch=true
+direct_drop_fixture_cleanup root=/Users/hoppworks/.local/share/agent-builds/rhai/darwin-process-minimum-qug9u80c/agent-build-escdy770/tmp/rhai-sys-test-24076-direct_spawn_kill_on_drop_false_preserves_child_and_capture-0 pid=24077 esrch=true
+direct_drop_fixture_cleanup root=/Users/hoppworks/.local/share/agent-builds/rhai/darwin-process-minimum-qug9u80c/agent-build-escdy770/tmp/rhai-sys-test-24076-direct_spawn_kill_on_drop_false_preserves_child_and_capture-0 pid=24077 esrch=true

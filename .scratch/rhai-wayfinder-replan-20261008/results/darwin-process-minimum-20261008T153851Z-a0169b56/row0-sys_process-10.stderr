@@ -1,0 +1,5 @@
+managed_escape_started root=/Users/hoppworks/.local/share/agent-builds/rhai/darwin-process-minimum-qug9u80c/agent-build-escdy770/tmp/rhai-sys-test-24163-managed_timeout_kills_leader_after_it_changes_process_group-0 test_pid=24163 sentinel_pid=24164 sentinel_pgid=24164
+managed_escape_sentinel_live pid=24164 live=true
+managed_escape_leader pid=24165 original_pgid=24165 escaped_pgid=24164 esrch=true
+managed_escape_fixture_cleanup pid=Some(24165) esrch=true
+managed-scope sentinel_cleanup pid=24164 status=Some(ExitStatus(unix_wait_status(9))) esrch=true

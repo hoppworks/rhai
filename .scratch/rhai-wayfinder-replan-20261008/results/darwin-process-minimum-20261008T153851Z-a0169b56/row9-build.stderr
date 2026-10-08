@@ -1,0 +1,3 @@
+   Compiling rhai v1.26.1 (/Users/hoppworks/.local/share/agent-builds/rhai/darwin-process-minimum-qug9u80c/agent-build-escdy770/source)
+error: could not compile `rhai` (test "sys_process") due to 2 previous errors; 2 warnings emitted
+warning: build failed, waiting for other jobs to finish...

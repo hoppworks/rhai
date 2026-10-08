@@ -1,0 +1,8 @@
+shared-child controller_started scenario=script_throw_cleanup pid=24222 root=/Users/hoppworks/.local/share/agent-builds/rhai/darwin-process-minimum-qug9u80c/agent-build-escdy770/shared-child-fixture-24221-0
+shared-child script-throw release fixture_pid=24223 state=ready challenge_response=verified pid_present=true
+shared-child controller_reaped scenario=script_throw_cleanup pid=24222 status=exit status: 0
+shared-child controller_output scenario=script_throw_cleanup stdout="\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 48 filtered out; finished in 0.02s\n\n" stderr="thread 'shared_child_contract::scenario_entry' panicked at tests/fixtures/sys_process_shared_child_contract.rs:352:5:\nunexpected evaluation error; expected \"__x29_wrong_expected_message_control__\": ErrorRuntime(\"intentional Rhai script throw with live child\", 7:9)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\nshared-child script-throw evaluation_error=observed pre_throw_try_wait=unit wrong_expectation_rejected=true child_drop=expected\n"
+shared-child controller_esrch pid=24222 verified=true
+shared-child outer-observation scenario=script_throw_cleanup controller_pid=24222 fixture_pid=24223 fixture_record="pid=24223 state=ready" reap=ESRCH verified=true
+shared-child scenario=script_throw_cleanup controller_pid=24222 status=ok fixture_record=Some("pid=24223 state=ready\n")
+shared-child watchdog fixture_closure=verified pid=24223 reap=ESRCH production_reap=true

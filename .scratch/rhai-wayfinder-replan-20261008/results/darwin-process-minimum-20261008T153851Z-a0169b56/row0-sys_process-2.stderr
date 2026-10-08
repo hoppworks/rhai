@@ -1,0 +1,3 @@
+x24_running pid=24080 alive_before_try_wait=true result_is_unit=true
+x24_post_exit_try_wait pid=24080 result_observed_before_wait=true code=0 success=true
+x24_finished pid=24080 wait_code=0 try_wait_code=0 success=true reaped_esrch=true

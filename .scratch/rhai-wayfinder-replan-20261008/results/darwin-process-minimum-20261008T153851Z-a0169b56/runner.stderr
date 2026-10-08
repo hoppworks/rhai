@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/rhai-wayfinder-replan-20261008/results/darwin-process-minimum-20261008T153851Z-a0169b56/verify.py", line 32, in <module>
+    tag='row'+str(n);r['environment'][row['toolchain']]=subprocess.check_output(['rustc','+'+row['toolchain'],'--version'],text=True).strip();artifacts=build(tag+'-build',row['toolchain'],row['features'],row['targets']);record={'name':row['name'],'features':row['features'],'toolchain':row['toolchain'],'results':[]};r['rows'].append(record)
+  File "/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/rhai-wayfinder-replan-20261008/results/darwin-process-minimum-20261008T153851Z-a0169b56/verify.py", line 12, in build
+    assert cmd(tag,argv+['--no-run','--message-format=json'],600)==0,'pre-assertion compiler failure '+tag
+AssertionError: pre-assertion compiler failure row9-build

@@ -1,0 +1,6 @@
+
+running 1 test
+test lossy_run_reports_engine_limit_expansion_without_returning_truncated_text ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 48 filtered out; finished in 0.11s
+

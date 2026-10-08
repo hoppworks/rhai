@@ -1,0 +1,52 @@
+{
+  "accepted": true,
+  "rows": [
+    {
+      "name": "minimum-i32-integer-corrected",
+      "features": "sys,net,only_i32,no_float",
+      "toolchain": "1.77.2",
+      "results": [
+        {
+          "target": "sys_process",
+          "selector": "run_io_contract_empty_output",
+          "exit": 0,
+          "log": "row0-sys_process-0",
+          "executable_sha256": "a2ef2c8eb1537ce4c1eb5e63a7bc92833af680b391be4b1a3cf6b0fea6329919"
+        },
+        {
+          "target": "sys_process",
+          "selector": "process_script_output_option_cannot_raise_the_host_cap",
+          "exit": 0,
+          "log": "row0-sys_process-1",
+          "executable_sha256": "a2ef2c8eb1537ce4c1eb5e63a7bc92833af680b391be4b1a3cf6b0fea6329919"
+        },
+        {
+          "target": "sys_process",
+          "selector": "run_reports_a_real_unix_child_signal_without_an_exit_code",
+          "exit": 0,
+          "log": "row0-sys_process-2",
+          "executable_sha256": "a2ef2c8eb1537ce4c1eb5e63a7bc92833af680b391be4b1a3cf6b0fea6329919"
+        }
+      ]
+    }
+  ],
+  "runtime": "/Users/hoppworks/.local/share/agent-builds/rhai/darwin-process-i32-k8o3xflp/agent-build-0slycd5o",
+  "runtime_identity": {
+    "device": 16777234,
+    "inode": 226434992
+  },
+  "environment": {
+    "os": "macOS-27.0.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "1.77.2": "rustc 1.77.2 (25ef9e3d8 2024-04-09)"
+  },
+  "bound_sources": {
+    "tests/sys_process.rs": "45eb313e2352d148d0506b01a4f6ede917811336944cb1f84e49f77de9423220",
+    "tests/sys_process_report.rs": "b081e8de1174433bd8ef5668945bfdda7b81fdcdeb6ef1b1d92a2c04d6f5c53f",
+    "tests/fixtures/sys_process_shared_child_contract.rs": "1faf45c57a4fefeaa05683043e064d3485e892887986fef749bedc974230b217",
+    "src/packages/sys/process/unix.rs": "55dc5ad528ad2b4fd56d3fcdd42f92af0b30bf3f96db37c476ee31320dcba713",
+    "Cargo.toml": "cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e",
+    "build.rs": "78adf9eeea2957e1aa1bd96ee260e43806476a07d665c2ed27db55bc101ed335"
+  },
+  "runtime_bytes": 962572288
+}

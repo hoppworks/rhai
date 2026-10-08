@@ -1,0 +1,466 @@
+{
+  "accepted": false,
+  "rows": [
+    {
+      "name": "minimum-baseline",
+      "features": "sys",
+      "toolchain": "1.77.2",
+      "results": [
+        {
+          "target": "sys_process",
+          "selector": "default_and_nonmatching_process_policies_deny_public_run_without_starting_child",
+          "exit": 0,
+          "log": "row0-sys_process-0",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "direct_spawn_kill_on_drop_false_preserves_child_and_capture",
+          "exit": 0,
+          "log": "row0-sys_process-1",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "direct_spawn_try_wait_returns_unit_until_child_exits",
+          "exit": 0,
+          "log": "row0-sys_process-2",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "lossy_run_reports_engine_limit_expansion_without_returning_truncated_text",
+          "exit": 0,
+          "log": "row0-sys_process-3",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "managed_run_closes_worker_after_leader_exit_and_preserves_sentinel",
+          "exit": 0,
+          "log": "row0-sys_process-4",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not",
+          "exit": 0,
+          "log": "row0-sys_process-5",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes",
+          "exit": 0,
+          "log": "row0-sys_process-6",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit",
+          "exit": 0,
+          "log": "row0-sys_process-7",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "managed_spawn_kill_stops_leader_worker_leaf_and_preserves_sentinel",
+          "exit": 0,
+          "log": "row0-sys_process-8",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "managed_spawn_post_reap_cancel_bounds_escaped_capture",
+          "exit": 0,
+          "log": "row0-sys_process-9",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "managed_timeout_kills_leader_after_it_changes_process_group",
+          "exit": 0,
+          "log": "row0-sys_process-10",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "missing_program_and_cwd_report_not_found_without_starting_child",
+          "exit": 0,
+          "log": "row0-sys_process-11",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "process_cwd_uses_the_opened_filesystem_capability_after_root_replacement",
+          "exit": 0,
+          "log": "row0-sys_process-12",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one",
+          "exit": 0,
+          "log": "row0-sys_process-13",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "process_script_output_option_cannot_raise_the_host_cap",
+          "exit": 0,
+          "log": "row0-sys_process-14",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps",
+          "exit": 0,
+          "log": "row0-sys_process-15",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "run_deadline_returns_bounded_partial_output_after_terminating_child",
+          "exit": 0,
+          "log": "row0-sys_process-16",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "run_deadline_with_blocked_stdin_and_active_stdout_stderr",
+          "exit": 0,
+          "log": "row0-sys_process-17",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "run_io_contract_blob_stdin_round_trip_with_concurrent_output",
+          "exit": 0,
+          "log": "row0-sys_process-18",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "run_io_contract_empty_output",
+          "exit": 0,
+          "log": "row0-sys_process-19",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "run_io_contract_string_stdin_round_trip",
+          "exit": 0,
+          "log": "row0-sys_process-20",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "run_preserves_argv_boundaries_without_shell_interpolation",
+          "exit": 0,
+          "log": "row0-sys_process-21",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data",
+          "exit": 0,
+          "log": "row0-sys_process-22",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "run_removes_inherited_environment_variable_from_public_child",
+          "exit": 0,
+          "log": "row0-sys_process-23",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "run_reports_a_real_unix_child_signal_without_an_exit_code",
+          "exit": 0,
+          "log": "row0-sys_process-24",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "shared_child_contract::final_drop_honors_both_kill_on_drop_policies",
+          "exit": 0,
+          "log": "row0-sys_process-25",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "shared_child_contract::nonfinal_child_clone_drop_keeps_the_real_child_available",
+          "exit": 0,
+          "log": "row0-sys_process-26",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "shared_child_contract::panic_expectation_rejects_success_and_unrelated_panics",
+          "exit": 0,
+          "log": "row0-sys_process-27",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "shared_child_contract::scenario_entry",
+          "exit": 0,
+          "log": "row0-sys_process-28",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "shared_child_contract::script_throw_drops_and_reaps_a_live_child",
+          "exit": 0,
+          "log": "row0-sys_process-29",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "shared_child_contract::spawn_returns_while_large_stdin_is_blocked_and_wait_snapshots_are_stable",
+          "exit": 0,
+          "log": "row0-sys_process-30",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "unit_stdin_means_immediate_eof",
+          "exit": 0,
+          "log": "row0-sys_process-31",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "unit_timeout_disables_configured_default_deadline",
+          "exit": 0,
+          "log": "row0-sys_process-32",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process",
+          "selector": "zero_output_cap_reports_output_limit_with_an_empty_retained_prefix",
+          "exit": 0,
+          "log": "row0-sys_process-33",
+          "executable_sha256": "8bc892204dc33ceecd65bfaaced1d7da678bcce9240a3d2b03ff57935f1196f6"
+        },
+        {
+          "target": "sys_process_report",
+          "selector": "absent_and_signal_exit_are_readable_through_engine",
+          "exit": 0,
+          "log": "row0-sys_process_report-0",
+          "executable_sha256": "39e4b282e0489687546c02ad123394050d2c69995cc700d7efdee49f234a020a"
+        },
+        {
+          "target": "sys_process_report",
+          "selector": "old_error_variants_keep_rhai_classification_and_have_no_process_report",
+          "exit": 0,
+          "log": "row0-sys_process_report-1",
+          "executable_sha256": "39e4b282e0489687546c02ad123394050d2c69995cc700d7efdee49f234a020a"
+        },
+        {
+          "target": "sys_process_report",
+          "selector": "prior_sys_error_variants_keep_display_and_classification",
+          "exit": 0,
+          "log": "row0-sys_process_report-2",
+          "executable_sha256": "39e4b282e0489687546c02ad123394050d2c69995cc700d7efdee49f234a020a"
+        },
+        {
+          "target": "sys_process_report",
+          "selector": "process_causes_retain_primary_classification_and_snapshot",
+          "exit": 0,
+          "log": "row0-sys_process_report-3",
+          "executable_sha256": "39e4b282e0489687546c02ad123394050d2c69995cc700d7efdee49f234a020a"
+        },
+        {
+          "target": "sys_process_report",
+          "selector": "process_report_rust_accessors_cover_absent_code_signal_and_diagnostics",
+          "exit": 0,
+          "log": "row0-sys_process_report-4",
+          "executable_sha256": "39e4b282e0489687546c02ad123394050d2c69995cc700d7efdee49f234a020a"
+        },
+        {
+          "target": "sys_process_report",
+          "selector": "scope_defaults_and_builder",
+          "exit": 0,
+          "log": "row0-sys_process_report-5",
+          "executable_sha256": "39e4b282e0489687546c02ad123394050d2c69995cc700d7efdee49f234a020a"
+        },
+        {
+          "target": "sys_process_report",
+          "selector": "script_mutating_copied_report_blobs_and_collections_does_not_change_snapshot",
+          "exit": 0,
+          "log": "row0-sys_process_report-6",
+          "executable_sha256": "39e4b282e0489687546c02ad123394050d2c69995cc700d7efdee49f234a020a"
+        }
+      ]
+    },
+    {
+      "name": "1.77.2-sys-sync",
+      "features": "sys,sync",
+      "toolchain": "1.77.2",
+      "results": [
+        {
+          "target": "sys_process",
+          "selector": "run_io_contract_empty_output",
+          "exit": 0,
+          "log": "row1-sys_process-0",
+          "executable_sha256": "420ba1f12683a2af304b09ebcba32da9bcc2b8d50b53ed168ff027c3e8e034a5"
+        },
+        {
+          "target": "sys_process",
+          "selector": "shared_child_contract::sync_waiter_can_be_cancelled_through_another_shared_child_handle",
+          "exit": 0,
+          "log": "row1-sys_process-1",
+          "executable_sha256": "420ba1f12683a2af304b09ebcba32da9bcc2b8d50b53ed168ff027c3e8e034a5"
+        },
+        {
+          "target": "sys_process_report",
+          "selector": "process_representation_is_send_sync_and_shareable",
+          "exit": 0,
+          "log": "row1-sys_process_report-0",
+          "executable_sha256": "f5c25073d6631a217afa755f3e96a3575825c0d2cd327597bc46f55c0c22a1b9"
+        }
+      ]
+    },
+    {
+      "name": "1.77.2-sys-no_float",
+      "features": "sys,no_float",
+      "toolchain": "1.77.2",
+      "results": [
+        {
+          "target": "sys_process",
+          "selector": "run_io_contract_empty_output",
+          "exit": 0,
+          "log": "row2-sys_process-0",
+          "executable_sha256": "216fee4a7101fb73df2b64a50a91fe5d0db0d2f8c9024709a93881a3a50c9843"
+        }
+      ]
+    },
+    {
+      "name": "1.77.2-sys-sync-no_float",
+      "features": "sys,sync,no_float",
+      "toolchain": "1.77.2",
+      "results": [
+        {
+          "target": "sys_process",
+          "selector": "run_io_contract_empty_output",
+          "exit": 0,
+          "log": "row3-sys_process-0",
+          "executable_sha256": "cf1e6981ab056e48452f3df920249776b510cf434431b729c16a0ca8c614fe72"
+        }
+      ]
+    },
+    {
+      "name": "1.93.0-sys-sync",
+      "features": "sys,sync",
+      "toolchain": "1.93.0",
+      "results": [
+        {
+          "target": "sys_process",
+          "selector": "run_io_contract_empty_output",
+          "exit": 0,
+          "log": "row4-sys_process-0",
+          "executable_sha256": "e2a2f8044c553459e30d1dd627ca91596d0ec5fb73df79279b97a25d175c5aaf"
+        }
+      ]
+    },
+    {
+      "name": "1.93.0-sys-no_float",
+      "features": "sys,no_float",
+      "toolchain": "1.93.0",
+      "results": [
+        {
+          "target": "sys_process",
+          "selector": "run_io_contract_empty_output",
+          "exit": 0,
+          "log": "row5-sys_process-0",
+          "executable_sha256": "343b3e9260c2120f25a02af76b9a8cd4c2841cccdeeb1778fa11cfbcfcf9e1b5"
+        }
+      ]
+    },
+    {
+      "name": "1.93.0-sys-sync-no_float",
+      "features": "sys,sync,no_float",
+      "toolchain": "1.93.0",
+      "results": [
+        {
+          "target": "sys_process",
+          "selector": "run_io_contract_empty_output",
+          "exit": 0,
+          "log": "row6-sys_process-0",
+          "executable_sha256": "ef4e9298412fb0995b7e7af153372671a50f6b5f55adfb825488ae996bbebdd4"
+        }
+      ]
+    },
+    {
+      "name": "minimum-scalar",
+      "features": "sys,net,no_index,sync,metadata",
+      "toolchain": "1.77.2",
+      "results": [
+        {
+          "target": "sys_process",
+          "selector": "scalar_run_with_cwd_works_without_collections",
+          "exit": 0,
+          "log": "row7-sys_process-0",
+          "executable_sha256": "2c6ca89ec6045f898750a624f3396744701f4157493d6230f208e93c3dd6fde6"
+        },
+        {
+          "target": "sys_process_report",
+          "selector": "no_index_keeps_scalar_and_indexed_diagnostic_access",
+          "exit": 0,
+          "log": "row7-sys_process_report-0",
+          "executable_sha256": "3871da227b63d5d1564a70e76d1cb243315293711eaa9c31fa757cd215fc0028"
+        },
+        {
+          "target": "sys_process_report",
+          "selector": "process_representation_is_send_sync_and_shareable",
+          "exit": 0,
+          "log": "row7-sys_process_report-1",
+          "executable_sha256": "3871da227b63d5d1564a70e76d1cb243315293711eaa9c31fa757cd215fc0028"
+        }
+      ]
+    },
+    {
+      "name": "minimum-unchecked",
+      "features": "sys,net,unchecked",
+      "toolchain": "1.77.2",
+      "results": [
+        {
+          "target": "sys_process",
+          "selector": "process_script_output_option_cannot_raise_the_host_cap",
+          "exit": 0,
+          "log": "row8-sys_process-0",
+          "executable_sha256": "20a7bec13b67f0639c438c3c6d8efb26b4ecb1ff697ad3098367b742c5fd15c0"
+        }
+      ]
+    }
+  ],
+  "runtime": "/Users/hoppworks/.local/share/agent-builds/rhai/darwin-process-minimum-qug9u80c/agent-build-escdy770",
+  "runtime_identity": {
+    "device": 16777234,
+    "inode": 226392365
+  },
+  "environment": {
+    "os": "macOS-27.0.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "1.77.2": "rustc 1.77.2 (25ef9e3d8 2024-04-09)",
+    "1.93.0": "rustc 1.93.0 (254b59607 2026-01-19)"
+  },
+  "bound_sources": {
+    "tests/sys_process.rs": "f7055a0a6161b6d3b63be9ee03b0aaf0d6611c5cc95af7387d3d68eef5e03bd1",
+    "tests/sys_process_report.rs": "b081e8de1174433bd8ef5668945bfdda7b81fdcdeb6ef1b1d92a2c04d6f5c53f",
+    "tests/fixtures/sys_process_shared_child_contract.rs": "1faf45c57a4fefeaa05683043e064d3485e892887986fef749bedc974230b217",
+    "src/packages/sys/process/unix.rs": "55dc5ad528ad2b4fd56d3fcdd42f92af0b30bf3f96db37c476ee31320dcba713",
+    "Cargo.toml": "cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e",
+    "build.rs": "78adf9eeea2957e1aa1bd96ee260e43806476a07d665c2ed27db55bc101ed335"
+  },
+  "control": {
+    "selector": "run_io_contract_empty_output",
+    "exit": 101,
+    "log": "x20-control",
+    "executable_sha256": "335cf64ae3db32d63077cb18ecbf085b166732665770ecd9c4325a46f83faa20"
+  },
+  "runtime_bytes": 4083937280,
+  "failure": "AssertionError('pre-assertion compiler failure row9-build')"
+}

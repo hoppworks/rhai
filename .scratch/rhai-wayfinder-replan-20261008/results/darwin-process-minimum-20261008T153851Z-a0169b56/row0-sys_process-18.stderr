@@ -1,0 +1,1 @@
+x17_blob_stdin bytes=1048576 received_bytes=1048576 stdout_bytes=1310736 stderr_bytes=262144 exact_round_trip=true concurrent_streams=true child_record="child-pid=24192 input-bytes=1048576 input-valid=true" child_reaped=true

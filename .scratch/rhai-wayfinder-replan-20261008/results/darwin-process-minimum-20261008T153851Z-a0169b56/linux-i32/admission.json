@@ -1,0 +1,5 @@
+{
+  "compilers": [],
+  "memory": "               total        used        free      shared  buff/cache   available\nMem:           94200       19503        8685         146       70147       74696\nSwap:          16383           1       16382\n",
+  "disk": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/nvme0n1p3  1.9T  1.4T  488G  74% /var\n"
+}

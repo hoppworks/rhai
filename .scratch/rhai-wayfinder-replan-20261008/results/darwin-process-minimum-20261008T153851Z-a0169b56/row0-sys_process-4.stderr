@@ -1,0 +1,7 @@
+managed_fixture_started root=/Users/hoppworks/.local/share/agent-builds/rhai/darwin-process-minimum-qug9u80c/agent-build-escdy770/tmp/rhai-sys-test-24083-managed_run_closes_worker_after_leader_exit_and_preserves_sentinel-0 test_pid=24083 sentinel_pid=24084
+managed_normal_leader pid=24085 pgid=24085 esrch=true
+managed_normal_worker_leaf worker_pid=24086 worker_esrch=true leaf_pid=24087 leaf_esrch=true
+managed_normal_sentinel pid=24084 live=true
+managed-scope sentinel_cleanup pid=24084 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(24086) worker_esrch=true leaf_pid=Some(24087) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(24085) leader_esrch=true

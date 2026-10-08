@@ -1,0 +1,7 @@
+managed_false_drop_started root=/Users/hoppworks/.local/share/agent-builds/rhai/darwin-process-minimum-qug9u80c/agent-build-escdy770/tmp/rhai-sys-test-24097-managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit-0 test_pid=24097 sentinel_pid=24098 sentinel_pgid=24098 leader=24099 worker=24100 leaf=24101 group=24099
+managed_false_drop_after_final_client_drop leader=24099 leader_live=true worker=24100 worker_live=true leaf=24101 leaf_live=true sentinel=24098 sentinel_live=true
+managed_false_drop_live_challenge leader=24099 worker=24100 leaf=24101 group=24099 ack_count=3 ack_pids=[Some(24099), Some(24100), Some(24101)] ack_groups=[Some(24099), Some(24099), Some(24099)]
+managed_false_drop_after_leader_exit leader=24099 leader_esrch=true worker=24100 worker_esrch=true leaf=24101 leaf_esrch=true sentinel=24098 sentinel_live=true
+managed-scope sentinel_cleanup pid=24098 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(24100) worker_esrch=true leaf_pid=Some(24101) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(24099) leader_esrch=true

@@ -1,0 +1,7 @@
+shared-child controller_started scenario=drop_false pid=24210 root=/Users/hoppworks/.local/share/agent-builds/rhai/darwin-process-minimum-qug9u80c/agent-build-escdy770/shared-child-fixture-24209-0
+shared-child controller_reaped scenario=drop_false pid=24210 status=exit status: 0
+shared-child controller_output scenario=drop_false stdout="\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 48 filtered out; finished in 0.06s\n\n" stderr="shared-child nonfinal-drop pid=24211 child_record=ready operational_probe=one\nshared-child final-drop kill_on_drop=false pid=24211 child_record=\"pid=24211 state=exited code=0\\n\" eventual_reap=ESRCH\n"
+shared-child controller_esrch pid=24210 verified=true
+shared-child outer-observation scenario=drop_false controller_pid=24210 fixture_pid=24211 fixture_record="pid=24211 state=exited code=0" reap=ESRCH verified=true
+shared-child scenario=drop_false controller_pid=24210 status=ok fixture_record=Some("pid=24211 state=exited code=0\n")
+shared-child watchdog fixture_closure=verified pid=24211 reap=ESRCH production_reap=true

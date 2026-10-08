@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "/root/.local/share/agent-builds/rhai/process-i32-39b945d2d4/agent-build-pk0s1k8q/target/debug/deps/sys_process-80c3f2cb523d74b8",
+    "run_reports_a_real_unix_child_signal_without_an_exit_code",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": "/root/.local/share/agent-builds/rhai/process-i32-39b945d2d4/agent-build-pk0s1k8q/source",
+  "exit": 0,
+  "seconds": 0.11372452399518806
+}

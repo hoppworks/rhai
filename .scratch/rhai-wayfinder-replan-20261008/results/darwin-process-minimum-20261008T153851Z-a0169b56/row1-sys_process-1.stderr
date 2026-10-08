@@ -1,0 +1,7 @@
+shared-child controller_started scenario=sync_wait_cancel pid=24274 root=/Users/hoppworks/.local/share/agent-builds/rhai/darwin-process-minimum-qug9u80c/agent-build-escdy770/shared-child-fixture-24273-0
+shared-child controller_reaped scenario=sync_wait_cancel pid=24274 status=exit status: 0
+shared-child controller_output scenario=sync_wait_cancel stdout="\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 49 filtered out; finished in 0.03s\n\n" stderr="shared-child sync-cancel pid=24275 waiter_returned=1 final_wait=1 reap=ESRCH\n"
+shared-child controller_esrch pid=24274 verified=true
+shared-child outer-observation scenario=sync_wait_cancel controller_pid=24274 fixture_pid=24275 fixture_record="pid=24275 state=ready" reap=ESRCH verified=true
+shared-child scenario=sync_wait_cancel controller_pid=24274 status=ok fixture_record=Some("pid=24275 state=ready\n")
+shared-child watchdog fixture_closure=verified pid=24275 reap=ESRCH production_reap=true

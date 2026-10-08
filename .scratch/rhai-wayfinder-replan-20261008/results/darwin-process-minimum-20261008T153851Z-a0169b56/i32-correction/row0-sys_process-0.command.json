@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "/Users/hoppworks/.local/share/agent-builds/rhai/darwin-process-i32-k8o3xflp/agent-build-0slycd5o/target/debug/deps/sys_process-b42ca9b6ed365e17",
+    "run_io_contract_empty_output",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/darwin-process-i32-k8o3xflp/agent-build-0slycd5o/source",
+  "exit": 0,
+  "seconds": 0.02610045900000202
+}

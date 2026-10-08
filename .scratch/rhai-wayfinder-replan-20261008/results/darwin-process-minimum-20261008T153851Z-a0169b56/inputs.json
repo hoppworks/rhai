@@ -1,0 +1,123 @@
+{
+  "archive": "/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/all-tickets/darwin-x21-cap-20261008/attempt-01/source.tar",
+  "archive_sha256": "635a59827900b02ad82b0e53499f6b3fb2a5c5233326cac541c88c3e8b61265f",
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "patch_sha256": "e57f1efff98d7457229fe5512ed556ba5c09defe44155f1c5651c56b5b8a17d6",
+  "source_revision": "da115c618c39fb1eca93aeba90a92478f09f5e29",
+  "rows": [
+    {
+      "name": "minimum-baseline",
+      "toolchain": "1.77.2",
+      "features": "sys",
+      "targets": {
+        "sys_process": "baseline",
+        "sys_process_report": "all"
+      }
+    },
+    {
+      "name": "1.77.2-sys-sync",
+      "toolchain": "1.77.2",
+      "features": "sys,sync",
+      "targets": {
+        "sys_process": [
+          "run_io_contract_empty_output",
+          "shared_child_contract::sync_waiter_can_be_cancelled_through_another_shared_child_handle"
+        ],
+        "sys_process_report": [
+          "process_representation_is_send_sync_and_shareable"
+        ]
+      }
+    },
+    {
+      "name": "1.77.2-sys-no_float",
+      "toolchain": "1.77.2",
+      "features": "sys,no_float",
+      "targets": {
+        "sys_process": [
+          "run_io_contract_empty_output"
+        ]
+      }
+    },
+    {
+      "name": "1.77.2-sys-sync-no_float",
+      "toolchain": "1.77.2",
+      "features": "sys,sync,no_float",
+      "targets": {
+        "sys_process": [
+          "run_io_contract_empty_output"
+        ]
+      }
+    },
+    {
+      "name": "1.93.0-sys-sync",
+      "toolchain": "1.93.0",
+      "features": "sys,sync",
+      "targets": {
+        "sys_process": [
+          "run_io_contract_empty_output"
+        ]
+      }
+    },
+    {
+      "name": "1.93.0-sys-no_float",
+      "toolchain": "1.93.0",
+      "features": "sys,no_float",
+      "targets": {
+        "sys_process": [
+          "run_io_contract_empty_output"
+        ]
+      }
+    },
+    {
+      "name": "1.93.0-sys-sync-no_float",
+      "toolchain": "1.93.0",
+      "features": "sys,sync,no_float",
+      "targets": {
+        "sys_process": [
+          "run_io_contract_empty_output"
+        ]
+      }
+    },
+    {
+      "name": "minimum-scalar",
+      "toolchain": "1.77.2",
+      "features": "sys,net,no_index,sync,metadata",
+      "targets": {
+        "sys_process": [
+          "scalar_run_with_cwd_works_without_collections"
+        ],
+        "sys_process_report": [
+          "no_index_keeps_scalar_and_indexed_diagnostic_access",
+          "process_representation_is_send_sync_and_shareable"
+        ]
+      }
+    },
+    {
+      "name": "minimum-unchecked",
+      "toolchain": "1.77.2",
+      "features": "sys,net,unchecked",
+      "targets": {
+        "sys_process": [
+          "process_script_output_option_cannot_raise_the_host_cap"
+        ]
+      }
+    },
+    {
+      "name": "minimum-i32-integer",
+      "toolchain": "1.77.2",
+      "features": "sys,net,only_i32,no_float",
+      "targets": {
+        "sys_process": [
+          "run_io_contract_empty_output",
+          "process_script_output_option_cannot_raise_the_host_cap"
+        ]
+      }
+    }
+  ],
+  "baseline_skip": [
+    "process_fixture",
+    "shared_child_contract::fixture_entry",
+    "child_wait_preserves_decoded_expansion_reports_and_committed_primary_cause"
+  ],
+  "baseline_skip_regex": "fixture|isolated|measurement|resource_census"
+}

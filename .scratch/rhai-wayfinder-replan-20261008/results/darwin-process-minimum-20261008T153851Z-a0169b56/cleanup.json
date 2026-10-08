@@ -1,0 +1,12 @@
+{
+  "runner_exit": 1,
+  "runtime_absent": true,
+  "scope_absent": true,
+  "retired_outer_identity": {
+    "path": "/Users/hoppworks/.local/share/agent-builds/rhai/darwin-process-minimum-qug9u80c",
+    "device": 16777234,
+    "inode": 226391685,
+    "uid": 501
+  },
+  "original_evidence_retained": true
+}

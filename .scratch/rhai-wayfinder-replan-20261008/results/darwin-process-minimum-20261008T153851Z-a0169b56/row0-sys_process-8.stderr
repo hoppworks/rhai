@@ -1,0 +1,5 @@
+managed_spawn_kill_started root=/Users/hoppworks/.local/share/agent-builds/rhai/darwin-process-minimum-qug9u80c/agent-build-escdy770/tmp/rhai-sys-test-24151-managed_spawn_kill_stops_leader_worker_leaf_and_preserves_sentinel-0 test_pid=24151 sentinel_pid=24152 sentinel_pgid=24152 leader=24153 worker=24154 leaf=24155 group=24153
+managed_spawn_kill leader=24153 leader_esrch=true worker=24154 worker_esrch=true leaf=24155 leaf_esrch=true all_esrch=true sentinel=24152 live=true wait_returned=true
+managed-scope sentinel_cleanup pid=24152 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(24154) worker_esrch=true leaf_pid=Some(24155) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(24153) leader_esrch=true

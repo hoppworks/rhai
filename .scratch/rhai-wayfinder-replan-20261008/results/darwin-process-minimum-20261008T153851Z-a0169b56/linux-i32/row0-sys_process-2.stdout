@@ -1,0 +1,7 @@
+
+running 1 test
+test run_reports_a_real_unix_child_signal_without_an_exit_code ... x22_signal_readback success=false code_unit=true signal=9 timed_out=false stdout_complete=true stderr_complete=true child_record="child-pid=1654016\n" child_pid=1654016 pid_probe=-1 pid_probe_errno=Some(3)
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 32 filtered out; finished in 0.10s
+

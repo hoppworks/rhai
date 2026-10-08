@@ -1,0 +1,7 @@
+shared-child controller_started scenario=blocked_input_wait_snapshot pid=24225 root=/Users/hoppworks/.local/share/agent-builds/rhai/darwin-process-minimum-qug9u80c/agent-build-escdy770/shared-child-fixture-24224-0
+shared-child controller_reaped scenario=blocked_input_wait_snapshot pid=24225 status=exit status: 0
+shared-child controller_output scenario=blocked_input_wait_snapshot stdout="\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 48 filtered out; finished in 0.57s\n\n" stderr="shared-child blocked-stdin ready pid=24226 spawn_elapsed_ms=1\nshared-child final pid=24226 child_record=\"pid=24226 state=exited code=17\\n\" reap=ESRCH stable-wait=1 stable-try-wait=1 repeated_post_completion_kill=2 cached_snapshot=unchanged\n"
+shared-child controller_esrch pid=24225 verified=true
+shared-child outer-observation scenario=blocked_input_wait_snapshot controller_pid=24225 fixture_pid=24226 fixture_record="pid=24226 state=exited code=17" reap=ESRCH verified=true
+shared-child scenario=blocked_input_wait_snapshot controller_pid=24225 status=ok fixture_record=Some("pid=24226 state=exited code=17\n")
+shared-child watchdog fixture_closure=verified pid=24226 reap=ESRCH production_reap=true

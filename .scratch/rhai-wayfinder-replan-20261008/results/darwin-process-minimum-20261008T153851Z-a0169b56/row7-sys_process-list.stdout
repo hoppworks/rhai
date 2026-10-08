@@ -1,0 +1,3 @@
+scalar_run_with_cwd_works_without_collections: test
+
+1 test, 0 benchmarks
