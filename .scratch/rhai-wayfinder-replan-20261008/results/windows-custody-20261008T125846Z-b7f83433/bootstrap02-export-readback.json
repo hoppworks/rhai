@@ -1,0 +1,120 @@
+{
+  "frames": 58,
+  "files": {
+    "bootstrap.stdout": {
+      "path": "bootstrap.stdout",
+      "sha256": "9db6d7bc46a5ba41eddf88049040cc083d3245d7ac01de533c851887581fd349",
+      "length": 510
+    },
+    "bootstrap.stderr": {
+      "path": "bootstrap.stderr",
+      "sha256": "06b89035ada1a4ddab300766f5d51f1b21296cce68eab9dbb313c8e51bf994a4",
+      "length": 556
+    },
+    "observer.json": {
+      "path": "observer.json",
+      "sha256": "a51477f177ca35d786e9c293cd75331c9280869e39cbda18b319b4e651aa0796",
+      "length": 590
+    },
+    "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/compile-native-driver.stderr.txt": {
+      "path": "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/compile-native-driver.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/compile-native-driver.stdout.txt": {
+      "path": "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/compile-native-driver.stdout.txt",
+      "sha256": "83a38aba0a614f1c25918cdd37577c72fe136eabbd8b509dc9a9e5a3d26ec72c",
+      "length": 3095
+    },
+    "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/compile-production-runner.stderr.txt": {
+      "path": "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/compile-production-runner.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/compile-production-runner.stdout.txt": {
+      "path": "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/compile-production-runner.stdout.txt",
+      "sha256": "6f0e424e1b31cd40700d1979eece6aeb3e2e186d37b10eb220177095a768a23d",
+      "length": 2811
+    },
+    "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/exit-code-regression-17-wrong-expected.stderr.txt": {
+      "path": "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/exit-code-regression-17-wrong-expected.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/exit-code-regression-17-wrong-expected.stdout.txt": {
+      "path": "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/exit-code-regression-17-wrong-expected.stdout.txt",
+      "sha256": "69826b89317496600a95e98535238d73a7091d7e0ff5c9585f08c25bb71a75c3",
+      "length": 40
+    },
+    "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/exit-code-regression-17.stderr.txt": {
+      "path": "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/exit-code-regression-17.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/exit-code-regression-17.stdout.txt": {
+      "path": "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/exit-code-regression-17.stdout.txt",
+      "sha256": "32d543b6dda9fd1365b76e3057e9fac50673187a4c91cb8c18413593043e1689",
+      "length": 25
+    },
+    "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/exit-code-regression-zero.stderr.txt": {
+      "path": "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/exit-code-regression-zero.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/exit-code-regression-zero.stdout.txt": {
+      "path": "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/exit-code-regression-zero.stdout.txt",
+      "sha256": "2b98ea68ce93cdb1de4a7d10f4c46c17aacc658cc11ed8e32cc0d15612e9c568",
+      "length": 27
+    },
+    "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/setup-failure-9988.txt": {
+      "path": "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/setup-failure-9988.txt",
+      "sha256": "11e61633ac467615b35d33952c0e9b0a4ebec0f697d2488f2b3f364271180731",
+      "length": 441
+    },
+    "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/setup-failure-child.stderr.txt": {
+      "path": "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/setup-failure-child.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/setup-failure-child.stdout.txt": {
+      "path": "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/setup-failure-child.stdout.txt",
+      "sha256": "8ff179f55be1a9908f3e33e97da8aafce587111fab0b67cd5a0cf189c4bad44d",
+      "length": 93
+    },
+    "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/setup-failure-control.stderr.txt": {
+      "path": "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/setup-failure-control.stderr.txt",
+      "sha256": "dc383c8e63001e4200c71dd2667219139fd7c53397e9e0b15ef4bff8bc79b12c",
+      "length": 81
+    },
+    "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/setup-failure-control.stdout.txt": {
+      "path": "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/setup-failure-control.stdout.txt",
+      "sha256": "a1064b1c88c57b95c4efbc4875ef110c1b3610960a8f19b8180b39c0e6a1a3b9",
+      "length": 118
+    },
+    "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/setup-failure-control.txt": {
+      "path": "run/monitor-source-c03ad72ea8c04bceaf8e624b133610f1/logs/setup-failure-control.txt",
+      "sha256": "9054659d75bebb158b250c30e363d3df8680fe4322ab72ddfca4a029179cb893",
+      "length": 210
+    }
+  },
+  "complete": true,
+  "begin": {
+    "id": "rhai-bootstrap02-20261008T125846Z-b7f83433",
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\bootstrap02-20261008-b7f83433",
+    "run": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\bootstrap02-20261008-b7f83433\\run\\monitor-source-c03ad72ea8c04bceaf8e624b133610f1",
+    "exit": -536870909,
+    "accepted": false,
+    "failure": "System.Management.Automation.RuntimeException: Bootstrap exited -536870909; preserve original logs.",
+    "input_manifest_sha256": "56ebf28211262f8c522e14fa2f014d568a9575ee64c3af20ba99937ccd4eb6f0",
+    "execution_policy_changed": false,
+    "driver_launched": false
+  },
+  "end": {
+    "id": "rhai-bootstrap02-20261008T125846Z-b7f83433",
+    "driver_launched": false,
+    "files": 19,
+    "accepted": false,
+    "exit": -536870909,
+    "guest_evidence_retained": true
+  }
+}

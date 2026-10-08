@@ -37,7 +37,6 @@ internal static class MonitorAcceptanceDriver
     [DllImport("kernel32.dll", SetLastError=true)] private static extern bool IsProcessInJob(IntPtr process, IntPtr job, out bool result);
     [DllImport("kernel32.dll", SetLastError=true)] private static extern bool CloseHandle(IntPtr handle);
     [DllImport("kernel32.dll", SetLastError=true)] private static extern bool TerminateProcess(IntPtr process,uint exitCode);
-    [DllImport("kernel32.dll", SetLastError=true)] private static extern bool TerminateJobObject(IntPtr job,uint exitCode);
     [DllImport("kernel32.dll")] private static extern ulong GetTickCount64();
 
     private sealed class Deadline

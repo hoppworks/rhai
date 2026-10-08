@@ -36,7 +36,7 @@ $expected = @{
 
 # The narrow native bootstrap compiles only the public runner, real-client driver
 # and finite payload. It never runs the driver inside this compiler owner's job.
-$expected['tools/windows-scoped-runner/MonitorAcceptanceDriver.cs'] = '80235547abbf1ccdaed6bac7aae816a236676ef38f3055366fb206255e95a550'
+$expected['tools/windows-scoped-runner/MonitorAcceptanceDriver.cs'] = '6e1516897be40b66585b25163bac51f9f283cc8b6b2b8ea3218338cc2d4bf019'
 if ($BuildOnly) {
     foreach ($relative in @($expected.Keys)) {
         if ($relative -like '*/fixtures/*' -and $relative -ne 'tools/windows-scoped-runner/fixtures/PayloadFixture.cs') {
@@ -599,18 +599,6 @@ catch {
 finally {
     if ($script:jobHandle -ne [IntPtr]::Zero) {
         try {
-            if (!$success) {
-                # Closing a self-inclusive kill-on-close job supplies no failure
-                # status: the native setup control observed exit zero. Preserve
-                # the primary diagnostics, then terminate only this exact job
-                # with an explicit nonzero status before owner teardown.
-                [Console]::Error.WriteLine('Failed source fixture: terminating the exact compiler job with status E0000003.')
-                [Console]::Error.Flush()
-                if (!$script:terminateJob.Invoke($script:jobHandle, [uint32]3758096387)) {
-                    [Environment]::FailFast('Failure TerminateJobObject failed; preserving exact job/watchdog through controller teardown.')
-                }
-                [Environment]::FailFast('Failure TerminateJobObject returned without terminating this exact controller; preserving job custody.')
-            }
             if ($success) {
                 # All owned children were synchronously waited; require the current
                 # PowerShell process to be the only remaining member before close.

@@ -1,0 +1,18 @@
+{
+  "id": "rhai-20261008T125846Z-b7f83433",
+  "user": "RHAI-WIN11\\RhaiTest",
+  "admin": false,
+  "os": "Microsoft Windows NT 10.0.26300.0",
+  "rust": "1.93.0-x86_64-pc-windows-msvc (active, default)\r\n",
+  "vsdev": true,
+  "csc": true,
+  "msvc": [
+    "14.44.35207"
+  ],
+  "sdk": [
+    "10.0.26100.0"
+  ],
+  "freeRamKiB": 5299268,
+  "freeDiskBytes": 73983844352,
+  "active": []
+}

@@ -1,0 +1,6 @@
+{
+  "vm_uuid": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19",
+  "device": "sdc",
+  "readonly_iso": "/var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/bootstrap03.iso",
+  "start_sha256": "2593d185d95a276aaa4d5a911641e220f80c2738d02d27ba810b3edb3608216a"
+}

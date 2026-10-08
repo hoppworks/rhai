@@ -1,10 +1,15 @@
 # Candidate Windows monitor/client custody source
 
-## Separate native acceptance route (source only)
+## Native bootstrap and separate custody acceptance route
 
-`MonitorAcceptanceDriver` is a separate route prepared for later Windows guest
-acceptance; it is not part of `fixtures/RunSourceFixtures.ps1`, and it has not
-been compiled or executed. It launches the public `ScopedRunner.exe
+`MonitorAcceptanceDriver` is a separate route prepared for Windows guest
+custody acceptance. On 2026-10-08, the narrow native BuildOnly bootstrap passed
+as non-admin RhaiTest: three compiled binaries, real exit-status and setup-cleanup
+controls, owner-only job disposition/watchdog drain, and a complete hash-verified
+24-file host export. The combined review accepts only that compiler prerequisite.
+See [the original proof](../../.scratch/rhai-wayfinder-replan-20261008/results/windows-custody-20261008T125846Z-b7f83433/bootstrap-proof.md). `fixtures/RunSourceFixtures.ps1 -BuildOnly` compiles it without
+launching it inside the compiler job. Native acceptance remains unproven until
+the actual driver and its OS readbacks pass. It launches the public `ScopedRunner.exe
 --lease-client`, transfers the canonical immutable `RHAI-LAUNCH/1`
 specification, and answers fresh monitor challenges. `success` requires a
 single-deadline bounded journal readback, canonical CRC32 frames, the exact
@@ -49,13 +54,35 @@ kill-on-close only after the exact client has exited and job accounting reports
 exactly the driver process. If that check or a cleanup API fails, the job
 remains kill-on-close and final status fails.
 
-### Compile and launch custody route (source only; not executed)
+### Compile and launch custody route
+
+Use the existing bootstrap's narrow `-BuildOnly` selection for this project's
+custody prerequisite. Launch the script in a new 64-bit PowerShell child, with
+`-SourceRoot <immutable-input>` and an absent
+`-RunRoot %USERPROFILE%\.local\share\agent-builds\rhai\<session>\run\monitor-source-<GUID>`.
+Create only that owned session's `run` parent first. `BuildOnly` retains the
+setup-failure and real exit-0/17/mismatch controls, verifies the nine production
+pins plus the driver/payload pins, and compiles only `ScopedRunner.exe`,
+`MonitorAcceptanceDriver.exe`, and `PayloadFixture.exe`. The missing-source
+compiler control must fail with CS2001. No synthetic suite or native driver runs
+inside this compiler job. Its wall deadline is 15 minutes, each compiler has
+180 seconds, output files are capped at 4 MiB, and the existing no-breakaway
+job retains its 1 GiB per-process / 2 GiB aggregate / 16-process limits.
+`build-manifest.txt` and `run-result.txt` are written after owner-only accounting,
+job disposition and watchdog drain. Preserve their exact compiler/source/binary
+hashes and original logs. `BUILD_ONLY_PASS` proves only this bootstrap slice;
+it does not prove public lease-client custody or native product behavior.
+
+Only after this compiler child has exited, invoke the driver from the independent
+uncontained console. The driver and runner must stay in the same retained build
+directory. Do not invoke the driver from the bootstrap or one of its descendants.
 
 The existing `RunSourceFixtures.ps1` output is reusable only when its retained
 `build/ScopedRunner.exe` was produced from the exact nine production-source
 hashes pinned by that harness and the accepted monitor-source checkpoint. Keep
 that fixture run directory intact. Copy that exact runner into a fresh direct
-child of `C:\RhaiQuality\runs` named `monitor-driver-<32 lowercase hex>` and
+child of the current user's private `<session>\run` directory named
+`monitor-driver-<32 lowercase hex>` and
 record/read back its SHA-256. Copy the nine pinned production sources,
 `MonitorAcceptanceDriver.cs`, and
 `fixtures/MonitorAcceptanceDriverFixture.cs` into that run's private `input`
@@ -66,10 +93,12 @@ existing 180-second per-compiler ceiling:
 
 The dependency freeze for this route is the nine-file source manifest in
 `RunSourceFixtures.ps1` (checkpoint `c8c6b18caaa855d2f66e0fc1f84e594d4f1e5e6b`),
-plus the driver and fixture from driver checkpoint
-`5583d7b3de50bb0f8c2706b837d2d4ba64ff9368`. Their SHA-256 values are
+plus the driver
+from checkpoint `5583d7b3de50bb0f8c2706b837d2d4ba64ff9368` with the native-proven
+missing `TerminateJobObject` declaration repair, and its unchanged pure fixture.
+Their current SHA-256 values are
 `MonitorAcceptanceDriver.cs`:
-`6e1516897be40b66585b25163bac51f9f283cc8b6b2b8ea3218338cc2d4bf019`, and
+`80235547abbf1ccdaed6bac7aae816a236676ef38f3055366fb206255e95a550`, and
 `fixtures/MonitorAcceptanceDriverFixture.cs`:
 `33581ea00e1dc536bf4afdd8842c0a9cc3fdd028514e228c8b1ca776d40e1db0`. Retain
 the unique run root, copied sources, runner and driver binaries, fixture result,
@@ -85,7 +114,7 @@ csc.exe /target:exe /define:SCOPED_RUNNER_TESTING /main:MonitorAcceptanceDriverF
 wrapper candidate. Its inputs are the source checkout, the retained
 `monitor-source-<GUID>\build\ScopedRunner.exe`, the independently accepted
 build's lowercase SHA-256 as `ExpectedRunnerSha256`, and a fresh
-`C:\RhaiQuality\runs\monitor-driver-<GUID>` root. It verifies the retained
+`%USERPROFILE%\.local\share\agent-builds\rhai\<session>\run\monitor-driver-<GUID>` root. It verifies the retained
 runner against that supplied accepted-build hash before and after copy,
 verifies the retained source tree against the nine production pins, copies and hashes those files
 plus the driver and pure fixture, compiles the driver and fixture, checks a
@@ -100,7 +129,7 @@ controller fail-closed before the watchdog or retained process owner is
 released; if close fails after the flag was cleared, it explicitly terminates
 the exactly-accounted job first. This wrapper source has not been compiled or executed on
 Windows; source-presence tests are scaffolding, not custody proof. The accepted
-source-fixture harness stays unchanged and cannot launch the driver from its
+source-fixture harness compiles the driver only under `BuildOnly` and cannot launch it from its
 no-breakaway job.
 
 Only after that compiler owner has exited, launch the driver directly from a
@@ -158,13 +187,11 @@ state before retrying. Host export is not implemented and remains open for all
 four modes; the driver verifies locally retained evidence and reports
 `HOST_EXPORTED=0`.
 
-This checkout contains intermediate Windows source only. It is **not accepted or
-ready to run**. The driver parser/control C# fixture is source-only scaffolding;
-its APIs directly exercise the driver's bounded frame decoder and semantic
-validator, but neither it nor any C# source in this substep has been compiled
-or executed. The Python source-presence checks are scaffolding only and do not
-prove those contracts. No package build, guest run, compiler bootstrap,
-installation, or staging backend operation was performed.
+The public custody route is **not accepted**. The native BuildOnly compiler
+prerequisite above is accepted; no public lease-client or Rhai product run follows
+from it. The separate driver parser/control fixture remains source-only
+scaffolding. Python source-presence checks do not prove native custody. No SDK
+installation or staging backend operation was performed by the bootstrap.
 
 The parser/control fixture has its own executable `Main`. Its isolated compile
 route explicitly selects `/main:MonitorAcceptanceDriverFixture` and uses the
@@ -176,7 +203,8 @@ full production source set already declared in `RunSourceFixtures.ps1`:
 `fixtures/MonitorAcceptanceDriverFixture.cs`. Compile with
 `/define:SCOPED_RUNNER_TESTING` and place output under the scoped private
 runtime directory. The fixture is not included in `RunSourceFixtures.ps1`;
-neither compile nor execution was performed in this source-preparation step.
+its compile and execution remain open; BuildOnly compiles the production driver
+and finite PayloadFixture, not this parser/control fixture.
 
 `ScopedRunner.exe --lease-client` is the only public source entrypoint. It starts
 a detached monitor with an explicit inherited-handle list containing two pipe

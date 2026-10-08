@@ -1,0 +1,70 @@
+{
+  "frames": 29,
+  "files": {
+    "bootstrap.stdout": {
+      "path": "bootstrap.stdout",
+      "sha256": "a1064b1c88c57b95c4efbc4875ef110c1b3610960a8f19b8180b39c0e6a1a3b9",
+      "length": 118
+    },
+    "bootstrap.stderr": {
+      "path": "bootstrap.stderr",
+      "sha256": "9e29d8e4690b4f8324b09934564c96f4c86ad1ad4694466a226e503764e5b987",
+      "length": 126
+    },
+    "observer.json": {
+      "path": "observer.json",
+      "sha256": "1d338d349ab472154e6d94bd6b2169e7b3dc46c0ff70e51cbe5f032a0f283ff6",
+      "length": 2387
+    },
+    "run/monitor-source-6effa368078d4edfa0a7b2f8f684edc1/logs/setup-failure-5800.txt": {
+      "path": "run/monitor-source-6effa368078d4edfa0a7b2f8f684edc1/logs/setup-failure-5800.txt",
+      "sha256": "8a7761a6573a7a6221dd18e398d6bcbb032a5b37965a299b01f0df83b2eff642",
+      "length": 92
+    },
+    "run/monitor-source-6effa368078d4edfa0a7b2f8f684edc1/logs/setup-failure-child.stderr.txt": {
+      "path": "run/monitor-source-6effa368078d4edfa0a7b2f8f684edc1/logs/setup-failure-child.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-6effa368078d4edfa0a7b2f8f684edc1/logs/setup-failure-child.stdout.txt": {
+      "path": "run/monitor-source-6effa368078d4edfa0a7b2f8f684edc1/logs/setup-failure-child.stdout.txt",
+      "sha256": "8ff179f55be1a9908f3e33e97da8aafce587111fab0b67cd5a0cf189c4bad44d",
+      "length": 93
+    },
+    "run/monitor-source-6effa368078d4edfa0a7b2f8f684edc1/logs/setup-failure-control.stderr.txt": {
+      "path": "run/monitor-source-6effa368078d4edfa0a7b2f8f684edc1/logs/setup-failure-control.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-6effa368078d4edfa0a7b2f8f684edc1/logs/setup-failure-control.stdout.txt": {
+      "path": "run/monitor-source-6effa368078d4edfa0a7b2f8f684edc1/logs/setup-failure-control.stdout.txt",
+      "sha256": "a1064b1c88c57b95c4efbc4875ef110c1b3610960a8f19b8180b39c0e6a1a3b9",
+      "length": 118
+    },
+    "run/monitor-source-6effa368078d4edfa0a7b2f8f684edc1/logs/setup-failure-control.txt": {
+      "path": "run/monitor-source-6effa368078d4edfa0a7b2f8f684edc1/logs/setup-failure-control.txt",
+      "sha256": "6a6845e67361ecc78134c9266c08472b5ad7eefa7fc2916ad39df12abdaf1169",
+      "length": 211
+    }
+  },
+  "complete": true,
+  "begin": {
+    "id": "rhai-bootstrap-20261008T125846Z-b7f83433",
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\bootstrap-20261008-b7f83433",
+    "run": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\bootstrap-20261008-b7f83433\\run\\monitor-source-6effa368078d4edfa0a7b2f8f684edc1",
+    "exit": 0,
+    "accepted": false,
+    "failure": "System.Management.Automation.MethodInvocationException: Exception calling \"ReadAllText\" with \"1\" argument(s): \"Could not find file 'C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\bootstrap-20261008-b7f83433\\run\\monitor-source-6effa368078d4edfa0a7b2f8f684edc1\\run-result.txt'.\" ---> System.IO.FileNotFoundException: Could not find file 'C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\bootstrap-20261008-b7f83433\\run\\monitor-source-6effa368078d4edfa0a7b2f8f684edc1\\run-result.txt'.\r\n   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)\r\n   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)\r\n   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)\r\n   at System.IO.StreamReader..ctor(String path, Encoding encoding, Boolean detectEncodingFromByteOrderMarks, Int32 bufferSize, Boolean checkHost)\r\n   at System.IO.File.InternalReadAllText(String path, Encoding encoding, Boolean checkHost)\r\n   at CallSite.Target(Closure , CallSite , Type , Object )\r\n   --- End of inner exception stack trace ---\r\n   at System.Management.Automation.ExceptionHandlingOps.CheckActionPreference(FunctionContext funcContext, Exception exception)\r\n   at System.Management.Automation.Interpreter.ActionCallInstruction`2.Run(InterpretedFrame frame)\r\n   at System.Management.Automation.Interpreter.EnterTryCatchFinallyInstruction.Run(InterpretedFrame frame)\r\n   at System.Management.Automation.Interpreter.EnterTryCatchFinallyInstruction.Run(InterpretedFrame frame)",
+    "input_manifest_sha256": "51fdb3aba8a824bab3e58f7429af7bfee6fdfa7d61535f2a1f472d3f5baaae9f",
+    "execution_policy_changed": false,
+    "driver_launched": false
+  },
+  "end": {
+    "id": "rhai-bootstrap-20261008T125846Z-b7f83433",
+    "driver_launched": false,
+    "files": 9,
+    "accepted": false,
+    "exit": 0,
+    "guest_evidence_retained": true
+  }
+}

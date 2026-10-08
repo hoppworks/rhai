@@ -36,7 +36,7 @@ $expected = @{
 
 # The narrow native bootstrap compiles only the public runner, real-client driver
 # and finite payload. It never runs the driver inside this compiler owner's job.
-$expected['tools/windows-scoped-runner/MonitorAcceptanceDriver.cs'] = '80235547abbf1ccdaed6bac7aae816a236676ef38f3055366fb206255e95a550'
+$expected['tools/windows-scoped-runner/MonitorAcceptanceDriver.cs'] = '6e1516897be40b66585b25163bac51f9f283cc8b6b2b8ea3218338cc2d4bf019'
 if ($BuildOnly) {
     foreach ($relative in @($expected.Keys)) {
         if ($relative -like '*/fixtures/*' -and $relative -ne 'tools/windows-scoped-runner/fixtures/PayloadFixture.cs') {

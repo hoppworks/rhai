@@ -1,0 +1,20 @@
+{
+  "accepted": true,
+  "scope": "native BuildOnly compiler/control prerequisite only",
+  "observer": {
+    "id": "rhai-bootstrap03-20261008T125846Z-b7f83433",
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\bootstrap03-20261008-b7f83433",
+    "run": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\bootstrap03-20261008-b7f83433\\run\\monitor-source-5158297562ef46ec9a1431d9ed3a2b89",
+    "exit": 0,
+    "accepted": true,
+    "failure": "",
+    "input_manifest_sha256": "ba5db9ecc7e1379245d9ae8cc1072dcba1c300b0f8023ee80c4d38667096cadc",
+    "execution_policy_changed": false,
+    "driver_launched": false
+  },
+  "files": 24,
+  "review_sha256": "e5ca199beae0a4b0cc522e8969d21cbeea3b14c6ad57f4e53908b4f44d98b1af",
+  "public_custody_accepted": false,
+  "product_accepted": false,
+  "guest_build_retained_for_next_gate": true
+}

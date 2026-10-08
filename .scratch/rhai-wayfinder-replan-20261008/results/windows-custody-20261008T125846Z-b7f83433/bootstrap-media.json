@@ -1,0 +1,9 @@
+{
+  "domain_uuid": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19",
+  "prior": "/var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/readiness.iso",
+  "new": "/var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/bootstrap.iso",
+  "input_start_sha256": "9bef30d82ff81fd1b79515f477bcbcd8be2a91539d3a62f09e6c967d120e4b39",
+  "input_manifest_sha256": "51fdb3aba8a824bab3e58f7429af7bfee6fdfa7d61535f2a1f472d3f5baaae9f",
+  "review_sha256": "9363cdbd6e1e2c8e1e2558699ef506d716ca73751b25b9cab179c08fa854e7f9",
+  "compiler_execution_started": false
+}

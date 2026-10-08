@@ -21,16 +21,18 @@ $productionExpected = @{
     'tools/windows-scoped-runner/MonitorTransport.cs' = '4a307370af955b49bae50b86fec5be9039db392c730897a3c87111e0191b89a7'
     'tools/windows-scoped-runner/ScopedRunner.cs' = '60c7998b834e87815092fc9003cad27812094028201906ec6e6dc05ea2b85695'
     'tools/windows-scoped-runner/SpecificationTransfer.cs' = '7a9edfe98d84868b55146280bd5ed29576ee0c8725cf9f6c785b784bc0ad25c2'
-    'tools/windows-scoped-runner/WindowsCustodyBackend.cs' = '664f4d61edc078ef711cfe439090f0acb94d32737b9b1eb3bbb6737caa40d30a'
+    'tools/windows-scoped-runner/WindowsCustodyBackend.cs' = '368e230e67b6712a29386b8623c69bf9e58ab404687a79078685ffe5cf061ee5'
 }
 $expected = @{} + $productionExpected
-$expected['tools/windows-scoped-runner/MonitorAcceptanceDriver.cs'] = '6e1516897be40b66585b25163bac51f9f283cc8b6b2b8ea3218338cc2d4bf019'
+$expected['tools/windows-scoped-runner/MonitorAcceptanceDriver.cs'] = '80235547abbf1ccdaed6bac7aae816a236676ef38f3055366fb206255e95a550'
 $expected['tools/windows-scoped-runner/fixtures/MonitorAcceptanceDriverFixture.cs'] = '33581ea00e1dc536bf4afdd8842c0a9cc3fdd028514e228c8b1ca776d40e1db0'
 $MaximumLogBytes = 4MB
 $OverallLimitMs = 3600000
 $CompilerLimitSeconds = 180
 $FixtureLimitSeconds = 180
-$allowedParent = 'C:\RhaiQuality\runs'
+$privateBuildRoot = [IO.Path]::GetFullPath((Join-Path $env:USERPROFILE '.local\share\agent-builds\rhai')).TrimEnd('\')
+$privatePrefix = $privateBuildRoot + '\'
+$allowedParent = Split-Path -Parent ([IO.Path]::GetFullPath($RunRoot))
 function Assert-NoReparsePath([string] $Path) {
     $full = [IO.Path]::GetFullPath($Path)
     $current = [IO.Path]::GetPathRoot($full)
@@ -45,17 +47,17 @@ function Assert-NoReparsePath([string] $Path) {
     }
 }
 $run = [IO.Path]::GetFullPath($RunRoot)
-if ($run -notmatch '^C:\\RhaiQuality\\runs\\monitor-driver-[0-9a-f]{32}$') {
-    throw 'RunRoot must be a unique direct monitor-driver-GUID child of C:\RhaiQuality\runs.'
+if (!$run.StartsWith($privatePrefix, [StringComparison]::OrdinalIgnoreCase)) {
+    throw 'RunRoot must be under the current user private agent-builds/rhai tree.'
 }
-foreach ($trusted in @('C:\RhaiQuality', $allowedParent)) {
-    if (!(Test-Path -LiteralPath $trusted -PathType Container)) { throw "Approved run ancestor absent: $trusted" }
-    if (((Get-Item -LiteralPath $trusted -Force).Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) {
-        throw "Approved run ancestor is a reparse point: $trusted"
-    }
+$relativeRun = $run.Substring($privatePrefix.Length)
+if ($relativeRun -notmatch '^[A-Za-z0-9][A-Za-z0-9._-]{0,95}\\run\\monitor-driver-[0-9a-f]{32}$') {
+    throw 'RunRoot must be <private-session-root>\run\monitor-driver-GUID.'
 }
+Assert-NoReparsePath $allowedParent
+if (!(Test-Path -LiteralPath $allowedParent -PathType Container)) { throw "Approved run ancestor absent: $allowedParent" }
 if (Test-Path -LiteralPath $run) { throw "RunRoot already exists; preserve and inspect it: $run" }
-if ([IO.DriveInfo]::new('C:').AvailableFreeSpace -lt 2GB) { throw 'At least 2 GiB free on C: is required.' }
+if ([IO.DriveInfo]::new([IO.Path]::GetPathRoot($run)).AvailableFreeSpace -lt 2GB) { throw 'At least 2 GiB free on the private runtime volume is required.' }
 
 $sourceCandidate = [IO.Path]::GetFullPath($SourceRoot)
 Assert-NoReparsePath $sourceCandidate

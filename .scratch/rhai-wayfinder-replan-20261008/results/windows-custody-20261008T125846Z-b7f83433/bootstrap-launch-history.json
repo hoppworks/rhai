@@ -1,0 +1,16 @@
+{
+  "source_start_sha256": "9bef30d82ff81fd1b79515f477bcbcd8be2a91539d3a62f09e6c967d120e4b39",
+  "guest_hash_observed": true,
+  "attempts": [
+    {
+      "console_command": "Get-Content E:\\start.ps1 | Invoke-Expression",
+      "outcome": "ParserError MissingEndCurlyBrace at first foreach: pipeline passed individual source lines; no native process/compiler/assertion started",
+      "evidence": "native screenshot observed; no export frames; first block preceded all session creation/process starts"
+    },
+    {
+      "console_command": "Get-Content -Raw E:\\start.ps1 | Invoke-Expression",
+      "correction": "single complete script string; source, pins, job/resource limits unchanged",
+      "state": "native outcome pending"
+    }
+  ]
+}
