@@ -1,0 +1,8 @@
+runner_runtime=/Users/hoppworks/.local/share/agent-builds/rhai/darwin-x20-20261008-82f295c8/agent-build-jnxp222b
+runner_runtime_absent=true
+owned_session_scope=/Users/hoppworks/.local/share/agent-builds/rhai/darwin-x20-20261008-82f295c8
+owned_session_scope_absent=true
+child_pid=83117
+child_pid_absent=true
+child_test_asserted_ESRCH=true
+readback_time_utc=2026-10-08T04:54:24Z

@@ -1,0 +1,5 @@
+--- a/tests/sys_process.rs (accepted baseline)
++++ b/tests/sys_process.rs (sensitivity mutant)
+@@ fn run_io_contract_empty_output
+-    assert!(!result["timed_out"].as_bool().unwrap());
++    assert!(result["timed_out"].as_bool().unwrap());

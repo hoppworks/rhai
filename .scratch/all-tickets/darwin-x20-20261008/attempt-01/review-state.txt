@@ -1,0 +1,4 @@
+combined_independent_review=READY
+scope=Ticket 03 X20 named Darwin partial acceptance
+reviewer_rules_reload=central Main 35ba734135a64100b891f422d4ced9d76795ab57 confirmed at HEAD 0e846bfc577a51bd1a98a5606966aecda40320c2
+review_basis=source and lock identities; intended RED and restored GREEN raw logs; real child record and ESRCH; scoped cleanup; Darwin-only crosswalk limits

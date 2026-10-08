@@ -1,0 +1,233 @@
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded ahash v0.8.12
+  Downloaded crunchy v0.2.4
+  Downloaded const-random-macro v0.1.16
+  Downloaded const-random v0.1.18
+  Downloaded byteorder v1.5.0
+  Downloaded cfg-if v1.0.5
+  Downloaded itoa v1.0.15
+  Downloaded errno v0.3.14
+  Downloaded ambient-authority v0.0.2
+  Downloaded maybe-owned v0.3.4
+  Downloaded version_check v0.9.5
+  Downloaded fs-set-times v0.20.3
+  Downloaded autocfg v1.5.1
+  Downloaded tiny-keccak v2.0.2
+  Downloaded static_assertions v1.1.0
+  Downloaded smartstring v1.0.1
+  Downloaded ipnet v2.12.2
+  Downloaded io-lifetimes v2.0.4
+  Downloaded cap-std v4.0.3
+  Downloaded thin-vec v0.2.19
+  Downloaded io-lifetimes v3.0.1
+  Downloaded serde_core v1.0.229
+  Downloaded unicode-ident v1.0.22
+  Downloaded serde v1.0.229
+  Downloaded cap-primitives v4.0.3
+  Downloaded memchr v2.8.3
+  Downloaded getrandom v0.3.4
+  Downloaded bitflags v2.13.2
+  Downloaded serde_json v1.0.145
+  Downloaded proc-macro2 v1.0.103
+  Downloaded once_cell v1.21.4
+  Downloaded zerocopy v0.8.59
+  Downloaded portable-atomic v1.15.0
+  Downloaded num-traits v0.2.19
+  Downloaded io-extras v0.19.0
+  Downloaded syn v2.0.106
+  Downloaded smallvec v1.16.2
+  Downloaded ryu v1.0.20
+  Downloaded rmp-serde v1.3.0
+  Downloaded paste v1.0.15
+  Downloaded getrandom v0.2.17
+  Downloaded rmp v0.8.14
+  Downloaded rustix v1.1.5
+  Downloaded quote v1.0.41
+  Downloaded libc v0.2.189
+ Downloading crates ...
+  Downloaded web-time v1.1.0
+   Compiling libc v0.2.189
+   Compiling autocfg v1.5.1
+   Compiling crunchy v0.2.4
+   Compiling version_check v0.9.5
+   Compiling io-lifetimes v3.0.1
+   Compiling io-lifetimes v2.0.4
+   Compiling rustix v1.1.5
+   Compiling proc-macro2 v1.0.103
+   Compiling tiny-keccak v2.0.2
+   Compiling cfg-if v1.0.5
+   Compiling errno v0.3.14
+   Compiling num-traits v0.2.19
+   Compiling portable-atomic v1.15.0
+   Compiling quote v1.0.41
+   Compiling unicode-ident v1.0.22
+   Compiling io-extras v0.19.0
+   Compiling bitflags v2.13.2
+   Compiling getrandom v0.2.17
+   Compiling getrandom v0.3.4
+   Compiling zerocopy v0.8.59
+   Compiling once_cell v1.21.4
+   Compiling serde_core v1.0.229
+   Compiling cap-primitives v4.0.3
+   Compiling const-random-macro v0.1.16
+   Compiling fs-set-times v0.20.3
+   Compiling ahash v0.8.12
+   Compiling smartstring v1.0.1
+   Compiling maybe-owned v0.3.4
+   Compiling cap-std v4.0.3
+   Compiling ambient-authority v0.0.2
+   Compiling ipnet v2.12.2
+   Compiling paste v1.0.15
+   Compiling syn v2.0.106
+   Compiling const-random v0.1.18
+   Compiling serde v1.0.229
+   Compiling rhai v1.26.1 (/Users/hoppworks/.local/share/agent-builds/rhai/darwin-x20-20261008-82f295c8/agent-build-jnxp222b/source)
+   Compiling static_assertions v1.1.0
+   Compiling rhai_codegen v3.2.0 (/Users/hoppworks/.local/share/agent-builds/rhai/darwin-x20-20261008-82f295c8/agent-build-jnxp222b/source/codegen)
+   Compiling smallvec v1.16.2
+   Compiling thin-vec v0.2.19
+   Compiling byteorder v1.5.0
+   Compiling serde_json v1.0.145
+   Compiling rmp v0.8.14
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:678:13
+    |
+678 |         let mut wait_operation = "wait for child";
+    |             ----^^^^^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `termination`
+    --> src/packages/sys/process/unix.rs:1118:22
+     |
+1118 |                 let (termination, _operation) = if self.managed {
+     |                      ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_termination`
+     |
+     = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2301:9
+     |
+2301 |     let mut faults = ExecutionFaults::take_for_execution();
+     |         ----^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2378:9
+     |
+2378 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: unused variable: `faults`
+    --> src/packages/sys/process/unix.rs:2301:9
+     |
+2301 |     let mut faults = ExecutionFaults::take_for_execution();
+     |         ^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_faults`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2721:9
+     |
+2721 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: methods `numeric_operations_probe`, `quarantine_observations_probe`, and `fail_reservation` are never used
+    --> src/packages/sys/process/unix.rs:1549:8
+     |
+1422 | impl ExecutionFaults {
+     | -------------------- methods in this implementation
+...
+1549 |     fn numeric_operations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1560 |     fn quarantine_observations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1585 |     fn fail_reservation(&self) -> bool {
+     |        ^^^^^^^^^^^^^^^^
+     |
+     = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (lib) generated 7 warnings (run `cargo fix --lib -p rhai` to apply 6 suggestions)
+   Compiling memchr v2.8.3
+   Compiling itoa v1.0.15
+   Compiling ryu v1.0.20
+   Compiling rmp-serde v1.3.0
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:1022:9
+     |
+1022 |     let mut holder = command.spawn().expect("start escaped captured-pipe holder");
+     |         ----^^^^^^
+     |         |
+     |         help: remove this `mut`
+     |
+     = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: constant `DIRECT_DROP_RECORD_ENV` is never used
+  --> tests/sys_process.rs:40:7
+   |
+40 | const DIRECT_DROP_RECORD_ENV: &str = "RHAI_SYS_DIRECT_DROP_RECORD";
+   |       ^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused `Dynamic` that must be used
+   --> tests/fixtures/sys_process_shared_child_contract.rs:260:5
+    |
+260 |     engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("kill after completion is idempotent");
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` (part of `#[warn(unused)]`) on by default
+help: use `let _ = ...` to ignore the resulting value
+    |
+260 |     let _ = engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("kill after completion is idempotent");
+    |     +++++++
+
+warning: unused `Dynamic` that must be used
+   --> tests/fixtures/sys_process_shared_child_contract.rs:261:5
+    |
+261 |     engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("repeated kill after completion is idempotent");
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+help: use `let _ = ...` to ignore the resulting value
+    |
+261 |     let _ = engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("repeated kill after completion is idempotent");
+    |     +++++++
+
+warning: `rhai` (test "sys_process") generated 4 warnings (run `cargo fix --test "sys_process" -p rhai` to apply 1 suggestion)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 34.38s
+     Running tests/sys_process.rs (/Users/hoppworks/.local/share/agent-builds/rhai/darwin-x20-20261008-82f295c8/agent-build-jnxp222b/target/debug/deps/sys_process-9d679bfc958d06a6)
+
+running 1 test
+test run_io_contract_empty_output ... 
+thread 'run_io_contract_empty_output' (7659934) panicked at tests/sys_process.rs:4711:5:
+assertion failed: result["timed_out"].as_bool().unwrap()
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+FAILED
+
+failures:
+
+failures:
+    run_io_contract_empty_output
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 47 filtered out; finished in 0.11s
+
+error: test failed, to rerun pass `--test sys_process`

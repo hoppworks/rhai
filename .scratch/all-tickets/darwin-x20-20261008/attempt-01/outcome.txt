@@ -1,0 +1,14 @@
+classification=verified_expected_red_and_restored_green
+red_status=101
+red_sensitivity_verified=true
+red_assertion='assertion failed: result["timed_out"].as_bool().unwrap()'
+red_summary='test result: FAILED. 0 passed; 1 failed'
+green_status=0
+green_passed=true
+green_summary='test result: ok. 1 passed; 0 failed'
+baseline_test_source_restored=true
+wrapper_matcher=false-positive-diagnosis=raw-libtest-interleaving
+runtime_cleanup=runner-owned-and-read-back
+session_scope_removed=true
+child_pid=83117
+child_pid_current_readback=absent

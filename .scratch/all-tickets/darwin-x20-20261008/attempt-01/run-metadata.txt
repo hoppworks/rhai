@@ -1,0 +1,14 @@
+revision=17021f5d3976501cd8e04dfe56aeb7e00967c431
+os=macOS 27.0.1
+arch=arm64
+rustc=rustc 1.93.0 (254b59607 2026-01-19)
+cargo=cargo 1.93.0 (083ac5135 2025-12-15)
+features=testing-environ,sys
+filter=run_io_contract_empty_output
+accepted_lock_sha256=2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425
+baseline_test_source_sha256=7ddc87f6e4b57d61d077445a81f1c3ef2f2e54cb35ac8c90a7ed328245d14017
+mutant_test_source_sha256=9dcb76f4eb86d0f03c2c23f79bc2e8d0be66302909d4d8908f18170d52a96da7
+command=cargo +1.93.0 test --locked --features testing-environ,sys --test sys_process run_io_contract_empty_output -- --exact --nocapture --test-threads=1
+cargo_jobs=1
+cargo_target_dir=/Users/hoppworks/.local/share/agent-builds/rhai/darwin-x20-20261008-82f295c8/agent-build-jnxp222b/target
+cargo_home=/Users/hoppworks/.local/share/agent-builds/rhai/darwin-x20-20261008-82f295c8/agent-build-jnxp222b/cargo-home
