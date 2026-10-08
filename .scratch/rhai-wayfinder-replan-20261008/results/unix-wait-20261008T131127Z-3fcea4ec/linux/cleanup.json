@@ -1,0 +1,1 @@
+{"runtime_absent": true, "scope_absent": true, "retired_identity": {"device": 58, "inode": 117279741}, "scope": "/root/.local/share/agent-builds/rhai/unix-wait-29a33c10da", "original_logs_readable": true, "fixture_esrch_in_green": true, "operation": "rmdir of exact empty owned scope only"}

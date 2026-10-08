@@ -1,0 +1,21 @@
+{
+  "revision": "ef423a516617e128835d54af16d75f559b2b1bce",
+  "source_archive": "/root/rhai-evidence/wayfinder-20261008/unix-wait-93576e4c32/source.tar",
+  "source_sha256": "635a59827900b02ad82b0e53499f6b3fb2a5c5233326cac541c88c3e8b61265f",
+  "owned_patch_sha256": "886a5bf343aec87113cffc372f4ac1bce59c4b84bb5a28280a7318b9f6f6bfa6",
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "test_source_sha256": "f7055a0a6161b6d3b63be9ee03b0aaf0d6611c5cc95af7387d3d68eef5e03bd1",
+  "selector": "child_wait_preserves_decoded_expansion_reports_and_committed_primary_cause",
+  "profiles": [
+    "sys",
+    "sys,sync",
+    "sys,no_float",
+    "sys,sync,no_float"
+  ],
+  "toolchain": "1.77.2",
+  "native_platform": "Linux x86_64",
+  "purpose": "new missing public Child.wait decoded expansion/no-primary and committed-cause assertion; no accepted rows repeated",
+  "prior_attempt": "../attempt02",
+  "correction": "Feature-correct timed wait signatures: FLOAT with floats, INT under no_float. Complete spawn/options/wait/terminal/capture/fixture/cleanup chain re-read before this attempt.",
+  "darwin_bound_result": "../attempt03/result.json"
+}

@@ -1,0 +1,1 @@
+{"runtime_absent": true, "scope_absent": true, "retired_identity": {"device": 16777234, "inode": 226039451}, "original_logs_readable": true, "fixture_esrch_in_green": true, "operation": "rmdir of verified empty owned scope"}

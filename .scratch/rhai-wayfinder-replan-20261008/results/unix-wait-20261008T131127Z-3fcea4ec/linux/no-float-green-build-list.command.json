@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "/root/.local/share/agent-builds/rhai/unix-wait-29a33c10da/agent-build-0vja0mc5/target/debug/deps/sys_process-f0b263e52b00639c",
+    "--list"
+  ],
+  "cwd": "/root/.local/share/agent-builds/rhai/unix-wait-29a33c10da/agent-build-0vja0mc5/source",
+  "exit": 0,
+  "seconds": 0.0013134430046193302
+}

@@ -1,0 +1,5 @@
+thread 'child_wait_preserves_decoded_expansion_reports_and_committed_primary_cause' panicked at tests/sys_process.rs:5274:17:
+assertion `left == right` failed: normally completed child exit is preserved
+  left: Some(0)
+ right: Some(1)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

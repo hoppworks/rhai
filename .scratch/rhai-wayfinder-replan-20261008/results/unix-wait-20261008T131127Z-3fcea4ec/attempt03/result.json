@@ -1,0 +1,82 @@
+{
+  "rows": [
+    {
+      "profile": "sys",
+      "phase": "red",
+      "exit": 101,
+      "executable_sha256": "396c42f65a7727937fcee88015ab59150011d5943c2607fd65957afaff078852",
+      "test_source_sha256": "582399a53d8dcf00057dcfc656c070180b66ca5c23665da3332f1076e9a3de3f",
+      "log": "standard-red"
+    },
+    {
+      "profile": "sys",
+      "phase": "green",
+      "exit": 0,
+      "executable_sha256": "2ef91d64b6a41252ed707044a3690ec88e8ce97516c51c848fbf88f83900a921",
+      "test_source_sha256": "f7055a0a6161b6d3b63be9ee03b0aaf0d6611c5cc95af7387d3d68eef5e03bd1",
+      "log": "standard-green"
+    },
+    {
+      "profile": "sys,sync",
+      "phase": "red",
+      "exit": 101,
+      "executable_sha256": "2f83facf1bd3090f1587d64e2c9eb3c1eed9d0ba10a3063e887c5169e4b1f333",
+      "test_source_sha256": "582399a53d8dcf00057dcfc656c070180b66ca5c23665da3332f1076e9a3de3f",
+      "log": "sync-red"
+    },
+    {
+      "profile": "sys,sync",
+      "phase": "green",
+      "exit": 0,
+      "executable_sha256": "b04248de4a1c72cec30a86fd8570ff8b51b596c17ce497ac2d5818e7ee9ecbe9",
+      "test_source_sha256": "f7055a0a6161b6d3b63be9ee03b0aaf0d6611c5cc95af7387d3d68eef5e03bd1",
+      "log": "sync-green"
+    },
+    {
+      "profile": "sys,no_float",
+      "phase": "red",
+      "exit": 101,
+      "executable_sha256": "139ce99c2c59c7748541dfd493462b390cc61b9ee69625c4b6260944b664899c",
+      "test_source_sha256": "582399a53d8dcf00057dcfc656c070180b66ca5c23665da3332f1076e9a3de3f",
+      "log": "no-float-red"
+    },
+    {
+      "profile": "sys,no_float",
+      "phase": "green",
+      "exit": 0,
+      "executable_sha256": "ee568def374d0fa1646651129c3340ee2dcee8888091edcd3c82456e27954ef1",
+      "test_source_sha256": "f7055a0a6161b6d3b63be9ee03b0aaf0d6611c5cc95af7387d3d68eef5e03bd1",
+      "log": "no-float-green"
+    },
+    {
+      "profile": "sys,sync,no_float",
+      "phase": "red",
+      "exit": 101,
+      "executable_sha256": "5501ac9ec0955ecd7ea3ef80e8322e6d85b7c6d20a240d8f676502712c90ce44",
+      "test_source_sha256": "582399a53d8dcf00057dcfc656c070180b66ca5c23665da3332f1076e9a3de3f",
+      "log": "sync-no-float-red"
+    },
+    {
+      "profile": "sys,sync,no_float",
+      "phase": "green",
+      "exit": 0,
+      "executable_sha256": "a929a661af7c5684b5bc4dac0f74a888d8d9cca605944e2758540d46ef976a95",
+      "test_source_sha256": "f7055a0a6161b6d3b63be9ee03b0aaf0d6611c5cc95af7387d3d68eef5e03bd1",
+      "log": "sync-no-float-green"
+    }
+  ],
+  "accepted": true,
+  "runtime": "/Users/hoppworks/.local/share/agent-builds/rhai/unix-wait-g8cd4t20/agent-build-7r9fqyx7",
+  "environment": {
+    "os": "macOS-27.0.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "rustc": "rustc 1.77.2 (25ef9e3d8 2024-04-09)",
+    "cargo": "cargo 1.77.2 (e52e36006 2024-03-26)"
+  },
+  "scope_bound_seconds": 1200,
+  "restored_test_sha256": "f7055a0a6161b6d3b63be9ee03b0aaf0d6611c5cc95af7387d3d68eef5e03bd1",
+  "runtime_identity": {
+    "device": 16777234,
+    "inode": 226039459
+  }
+}

@@ -1,0 +1,7 @@
+standard-red-build exit 0
+standard-red-build-list exit 0
+standard-red exit 101
+Traceback (most recent call last):
+  File "/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/rhai-wayfinder-replan-20261008/results/unix-wait-20261008T131127Z-3fcea4ec/verify-wait.py", line 31, in <module>
+    assert rc==101 and 'normally completed child exit is preserved' in err and re.search(r'left:\s*Some\(0\).*right:\s*Some\(1\)',err,re.S) and ('    '+i['selector']) in combined and '1 failed' in combined,'wrong RED: '+tag
+AssertionError: wrong RED: standard-red

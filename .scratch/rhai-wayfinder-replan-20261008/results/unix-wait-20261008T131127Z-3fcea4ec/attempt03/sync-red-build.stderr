@@ -1,0 +1,5 @@
+ Downloading crates ...
+  Downloaded spin v0.7.2
+   Compiling rhai v1.26.1 (/Users/hoppworks/.local/share/agent-builds/rhai/unix-wait-g8cd4t20/agent-build-7r9fqyx7/source)
+   Compiling rhai_codegen v3.2.0 (/Users/hoppworks/.local/share/agent-builds/rhai/unix-wait-g8cd4t20/agent-build-7r9fqyx7/source/codegen)
+    Finished test [unoptimized + debuginfo] target(s) in 13.47s

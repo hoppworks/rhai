@@ -1,0 +1,5 @@
+635a59827900b02ad82b0e53499f6b3fb2a5c5233326cac541c88c3e8b61265f  /root/rhai-evidence/wayfinder-20261008/unix-wait-93576e4c32/source.tar
+886a5bf343aec87113cffc372f4ac1bce59c4b84bb5a28280a7318b9f6f6bfa6  /root/rhai-evidence/wayfinder-20261008/unix-wait-93576e4c32/owned.patch
+2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425  /root/rhai-evidence/wayfinder-20261008/unix-wait-93576e4c32/Cargo.lock.accepted
+5f02dc4c6b8ad94241e2fd5212e40417bcdb65760eb1580996fc9b0a4e09fc64  /root/rhai-evidence/wayfinder-20261008/unix-wait-93576e4c32/verify-wait.py
+07e54fa45e4f3163f057d01911c973fdd0b70dbf48289bdff7fa8171e994dcf0  /root/rhai-evidence/wayfinder-20261008/unix-wait-93576e4c32/payload.sh

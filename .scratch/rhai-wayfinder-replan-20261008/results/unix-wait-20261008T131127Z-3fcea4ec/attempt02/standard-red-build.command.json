@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "cargo",
+    "+1.77.2",
+    "test",
+    "--locked",
+    "--features",
+    "testing-environ,sys",
+    "--test",
+    "sys_process",
+    "--no-run",
+    "--message-format=json"
+  ],
+  "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/unix-wait-h68c96d_/agent-build-qept59l_/source",
+  "exit": 0,
+  "seconds": 26.147881167
+}

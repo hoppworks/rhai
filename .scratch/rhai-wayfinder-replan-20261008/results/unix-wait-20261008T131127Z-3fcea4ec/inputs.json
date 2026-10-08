@@ -1,0 +1,18 @@
+{
+  "revision": "ef423a516617e128835d54af16d75f559b2b1bce",
+  "source_archive": "/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/all-tickets/darwin-x21-cap-20261008/attempt-01/source.tar",
+  "source_sha256": "635a59827900b02ad82b0e53499f6b3fb2a5c5233326cac541c88c3e8b61265f",
+  "owned_patch_sha256": "a07c6d1f38686340662c119901995d3a28ae4acfeab886e713d661e37cd36325",
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "test_source_sha256": "a67d569624eaeb8c475c7f5ff04a1139b3d7a73a145d4b2724ce8dd4e7e288ab",
+  "selector": "child_wait_preserves_decoded_expansion_reports_and_committed_primary_cause",
+  "profiles": [
+    "sys",
+    "sys,sync",
+    "sys,no_float",
+    "sys,sync,no_float"
+  ],
+  "toolchain": "1.77.2",
+  "native_platform": "Darwin arm64",
+  "purpose": "new missing public Child.wait decoded expansion/no-primary and committed-cause assertion; no accepted rows repeated"
+}

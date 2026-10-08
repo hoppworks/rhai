@@ -1,0 +1,78 @@
+diff --git a/tests/sys_process.rs b/tests/sys_process.rs
+index 192ec3cef..7e38099f4 100644
+--- a/tests/sys_process.rs
++++ b/tests/sys_process.rs
+@@ -5218,6 +5218,73 @@ fn lossy_run_reports_engine_limit_expansion_without_returning_truncated_text() {
+     }
+ }
+ 
++/// Text expansion is checked at the public wait boundary without changing raw capture
++/// or replacing an output-limit cause that the process supervisor already committed.
++#[test]
++#[cfg(all(not(feature = "no_index"), not(feature = "unchecked")))]
++fn child_wait_preserves_decoded_expansion_reports_and_committed_primary_cause() {
++    let executable = std::env::current_exe().unwrap().to_string_lossy().into_owned();
++    for primary_limit in [false, true] {
++        let records = TempDir::new();
++        let record = records.path().join("child-record.txt");
++        let record_literal = record.to_string_lossy();
++        let engine_limit = executable.len().max(record_literal.len()) + 24;
++        let invalid_count = if primary_limit { engine_limit * 2 } else { engine_limit / 2 };
++        let mut expected_raw = LIBTEST_QUIET_START.to_vec();
++        expected_raw.extend(std::iter::repeat(0xff).take(invalid_count));
++        assert!(String::from_utf8_lossy(&expected_raw).len() > engine_limit);
++        if !primary_limit {
++            assert!(expected_raw.len() < engine_limit);
++        } else {
++            expected_raw.truncate(engine_limit);
++        }
++        let mut engine = engine(SysConfig::default().programs(ProgramPolicy::AllowList(vec![executable.clone()])));
++        engine.set_max_string_size(engine_limit);
++        let script = format!(
++            r#"spawn({executable:?}, ["--exact", "process_fixture", "--nocapture", "--quiet"], #{{
++                env_clear: true,
++                env: #{{ {FIXTURE_ENV}: "0", {FIXTURE_RECORD_ENV}: {record_literal:?}, RHAI_SYS_PROCESS_INVALID_COUNT: "{invalid_count}" }},
++                max_output: 1024
++            }})"#
++        );
++        let child = engine.eval::<Dynamic>(&script).unwrap().cast::<rhai::packages::sys::Child>();
++        let mut scope = Scope::new();
++        scope.push("child", child.clone());
++        scope.push("sibling", child);
++        let mut first = None;
++        for expression in ["child.wait(5)", "sibling.wait(5)", "child.wait(0)"] {
++            let error = engine.eval_with_scope::<Dynamic>(&mut scope, expression).unwrap_err();
++            let sys_error = match error.as_ref() {
++                EvalAltResult::ErrorRuntime(value, _) => value.clone().try_cast::<SysError>().unwrap(),
++                other => panic!("expected a typed process error from {expression}, got {other:?}"),
++            };
++            let (cause, report) = match sys_error {
++                SysError::Process { cause: ProcessCause::OutputLimit(message), report } => (message, report),
++                other => panic!("expected preserved OutputLimit, got {other:?}"),
++            };
++            if primary_limit {
++                assert!(cause.starts_with("stdout for `"), "decoded expansion replaced the committed primary cause: {cause}");
++            } else {
++                assert!(cause.starts_with("decoded process output exceeded"), "unexpected no-primary cause: {cause}");
++                assert_eq!(report.exit_code(), Some(0), "normally completed child exit is preserved");
++                assert_eq!(report.exit_signal(), None);
++                assert!(report.stdout_complete() && report.stderr_complete());
++            }
++            assert_eq!(report.stdout_bytes(), expected_raw, "wait must retain exact raw bytes");
++            assert!(report.stderr_bytes().is_empty());
++            assert!(!report.timed_out());
++            let snapshot = (cause, report);
++            if let Some(first) = &first {
++                assert_eq!(&snapshot, first, "cloned and repeated waits must preserve the terminal report");
++            } else {
++                first = Some(snapshot);
++            }
++        }
++        assert_child_record(&record, 0);
++        eprintln!("child_wait_expansion primary_limit={primary_limit} raw_bytes={} exact=true cloned_snapshot=true child_reaped=true", expected_raw.len());
++    }
++}
++
+ /// The scalar text API remains registered and usable when collections are disabled.
+ #[cfg(feature = "no_index")]
+ #[test]

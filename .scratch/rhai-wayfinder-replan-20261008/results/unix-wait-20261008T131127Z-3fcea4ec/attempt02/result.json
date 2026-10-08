@@ -1,0 +1,18 @@
+{
+  "rows": [],
+  "accepted": false,
+  "runtime": "/Users/hoppworks/.local/share/agent-builds/rhai/unix-wait-h68c96d_/agent-build-qept59l_",
+  "environment": {
+    "os": "macOS-27.0.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "rustc": "rustc 1.77.2 (25ef9e3d8 2024-04-09)",
+    "cargo": "cargo 1.77.2 (e52e36006 2024-03-26)"
+  },
+  "scope_bound_seconds": 1200,
+  "failure": "AssertionError('wrong RED: standard-red')",
+  "restored_test_sha256": "c9032080d9bd2054b209500308af93ac22f1c917e4e5e32d0772d361cdb16083",
+  "runtime_identity": {
+    "device": 16777234,
+    "inode": 226002991
+  }
+}

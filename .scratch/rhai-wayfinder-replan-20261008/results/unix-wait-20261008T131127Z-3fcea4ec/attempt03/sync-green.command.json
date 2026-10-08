@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "/Users/hoppworks/.local/share/agent-builds/rhai/unix-wait-g8cd4t20/agent-build-7r9fqyx7/target/debug/deps/sys_process-8fea2128237605d2",
+    "child_wait_preserves_decoded_expansion_reports_and_committed_primary_cause",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/unix-wait-g8cd4t20/agent-build-7r9fqyx7/source",
+  "exit": 0,
+  "seconds": 0.07643495800000011
+}

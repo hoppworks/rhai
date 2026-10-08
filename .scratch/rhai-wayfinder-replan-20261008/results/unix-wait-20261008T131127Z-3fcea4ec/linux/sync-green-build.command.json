@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "/var/home/workhorse/.rustup/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+    "test",
+    "--locked",
+    "--features",
+    "testing-environ,sys,sync",
+    "--test",
+    "sys_process",
+    "--no-run",
+    "--message-format=json"
+  ],
+  "cwd": "/root/.local/share/agent-builds/rhai/unix-wait-29a33c10da/agent-build-0vja0mc5/source",
+  "exit": 0,
+  "seconds": 1.2153166200005217
+}

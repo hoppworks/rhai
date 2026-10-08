@@ -1,0 +1,19 @@
+{
+  "accepted": true,
+  "scope": "Child.wait decoded expansion and preserved committed cause only",
+  "platforms": [
+    "Darwin arm64",
+    "Linux x86_64"
+  ],
+  "rust": "1.77.2",
+  "profiles": [
+    "sys",
+    "sys,sync",
+    "sys,no_float",
+    "sys,sync,no_float"
+  ],
+  "review": "attempt03/review.md",
+  "review_sha256": "e35c2779a059292b6fcf8cff46fcb0df94c92e763ccd139ab6b35a0e01a543e9",
+  "product_backend_changed": false,
+  "full_package_complete": false
+}
