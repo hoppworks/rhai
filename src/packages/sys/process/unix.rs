@@ -1382,6 +1382,8 @@ struct ExecutionFaults {
     #[cfg(test)]
     managed_scope_setup_failure_pid_fd: Option<RawFd>,
     #[cfg(test)]
+    managed_scope_setup_failure_after_setpgid: bool,
+    #[cfg(test)]
     configure_pipe_gate: Option<std::path::PathBuf>,
     #[cfg(test)]
     retired: Option<std::sync::Arc<std::sync::atomic::AtomicBool>>,
@@ -1583,8 +1585,10 @@ impl ExecutionFaults {
     }
 
     #[cfg(test)]
-    fn take_managed_scope_setup_failure_pid_fd(&mut self) -> Option<RawFd> {
-        self.managed_scope_setup_failure_pid_fd.take()
+    fn take_managed_scope_setup_failure(&mut self) -> Option<(RawFd, bool)> {
+        self.managed_scope_setup_failure_pid_fd
+            .take()
+            .map(|fd| (fd, self.managed_scope_setup_failure_after_setpgid))
     }
 
     fn configure_pipe(&mut self, fd: RawFd) -> io::Result<()> {
@@ -1615,9 +1619,9 @@ impl ExecutionFaults {
 }
 
 /// Set up a managed process group inside `Command::pre_exec`.
-fn establish_managed_scope(failure_pid_fd: Option<RawFd>) -> io::Result<()> {
+fn establish_managed_scope(failure: Option<(RawFd, bool)>) -> io::Result<()> {
     #[cfg(test)]
-    if let Some(fd) = failure_pid_fd {
+    if let Some((fd, false)) = failure {
         let pid = unsafe { libc::getpid() };
         let bytes = pid.to_ne_bytes();
         // SAFETY: this is the test-only child-side identity receipt, written before forced failure.
@@ -1627,14 +1631,31 @@ fn establish_managed_scope(failure_pid_fd: Option<RawFd>) -> io::Result<()> {
         return Err(io::Error::from_raw_os_error(libc::EPERM));
     }
     #[cfg(not(test))]
-    let _ = failure_pid_fd;
+    let _ = failure;
 
     // SAFETY: setpgid is async-signal-safe and this helper runs only from pre_exec.
     if unsafe { libc::setpgid(0, 0) } < 0 {
-        Err(io::Error::last_os_error())
-    } else {
-        Ok(())
+        return Err(io::Error::last_os_error());
     }
+
+    #[cfg(test)]
+    if let Some((fd, true)) = failure {
+        let pid = unsafe { libc::getpid() };
+        let pgrp = unsafe { libc::getpgrp() };
+        let pid_bytes = pid.to_ne_bytes();
+        let pgrp_bytes = pgrp.to_ne_bytes();
+        // SAFETY: this is a test-only child-side identity receipt after managed group setup.
+        if unsafe { libc::write(fd, pid_bytes.as_ptr().cast(), pid_bytes.len()) }
+            != pid_bytes.len() as isize
+            || unsafe { libc::write(fd, pgrp_bytes.as_ptr().cast(), pgrp_bytes.len()) }
+                != pgrp_bytes.len() as isize
+        {
+            return Err(io::Error::last_os_error());
+        }
+        return Err(io::Error::from_raw_os_error(libc::EPERM));
+    }
+
+    Ok(())
 }
 
 type Res<T> = Result<T, Box<crate::EvalAltResult>>;
@@ -2206,9 +2227,9 @@ fn spawn_child(
         .transpose()?;
     let mut faults = ExecutionFaults::take_for_execution();
     #[cfg(test)]
-    let managed_scope_setup_failure_pid_fd = faults.take_managed_scope_setup_failure_pid_fd();
+    let managed_scope_setup_failure = faults.take_managed_scope_setup_failure();
     #[cfg(not(test))]
-    let managed_scope_setup_failure_pid_fd = None;
+    let managed_scope_setup_failure = None;
     let mut command = Command::new(OsStr::new(program));
     command
         .args(args)
@@ -2230,11 +2251,11 @@ fn spawn_child(
     }
     if cwd.is_some() || managed {
         let fd = cwd.as_ref().map(AsRawFd::as_raw_fd);
-        // SAFETY: only async-signal-safe setpgid/fchdir syscalls use copied values in the child.
+        // SAFETY: pre_exec uses async-signal-safe calls and copied values in the child.
         unsafe {
             command.pre_exec(move || {
                 if managed {
-                    establish_managed_scope(managed_scope_setup_failure_pid_fd)?;
+                    establish_managed_scope(managed_scope_setup_failure)?;
                 }
                 if let Some(fd) = fd {
                     if libc::fchdir(fd) < 0 {
@@ -2346,9 +2367,9 @@ fn run_map(
         .transpose()?;
     let mut faults = ExecutionFaults::take_for_execution();
     #[cfg(test)]
-    let managed_scope_setup_failure_pid_fd = faults.take_managed_scope_setup_failure_pid_fd();
+    let managed_scope_setup_failure = faults.take_managed_scope_setup_failure();
     #[cfg(not(test))]
-    let managed_scope_setup_failure_pid_fd = None;
+    let managed_scope_setup_failure = None;
     let mut command = Command::new(OsStr::new(program));
     command
         .args(args)
@@ -2370,11 +2391,11 @@ fn run_map(
     }
     if cwd.is_some() || managed {
         let fd = cwd.as_ref().map(AsRawFd::as_raw_fd);
-        // SAFETY: only async-signal-safe setpgid/fchdir syscalls use copied values in the child.
+        // SAFETY: pre_exec uses async-signal-safe calls and copied values in the child.
         unsafe {
             command.pre_exec(move || {
                 if managed {
-                    establish_managed_scope(managed_scope_setup_failure_pid_fd)?;
+                    establish_managed_scope(managed_scope_setup_failure)?;
                 }
                 if let Some(fd) = fd {
                     if libc::fchdir(fd) < 0 {
@@ -3815,11 +3836,15 @@ mod tests {
         retired
     }
 
-    fn fail_managed_scope_setup_for_next_execution(pid_fd: RawFd) -> Arc<AtomicBool> {
+    fn fail_managed_scope_setup_for_next_execution(
+        pid_fd: RawFd,
+        after_setpgid: bool,
+    ) -> Arc<AtomicBool> {
         let retired = Arc::new(AtomicBool::new(false));
         NEXT_EXECUTION_FAULTS.with(|next| {
             let previous = next.borrow_mut().replace(ExecutionFaults {
                 managed_scope_setup_failure_pid_fd: Some(pid_fd),
+                managed_scope_setup_failure_after_setpgid: after_setpgid,
                 retired: Some(Arc::clone(&retired)),
                 ..ExecutionFaults::default()
             });
@@ -5585,6 +5610,7 @@ mod tests {
         operation: &str,
         marker: &Path,
         pid_record: &Path,
+        after_setpgid: bool,
     ) -> i32 {
         let pid_capture = OpenOptions::new()
             .write(true)
@@ -5592,7 +5618,8 @@ mod tests {
             .mode(0o600)
             .open(pid_record)
             .unwrap();
-        let retired = fail_managed_scope_setup_for_next_execution(pid_capture.as_raw_fd());
+        let retired =
+            fail_managed_scope_setup_for_next_execution(pid_capture.as_raw_fd(), after_setpgid);
         let mut engine = Engine::new();
         let package = SysPackage::new(
             SysConfig::default()
@@ -5634,8 +5661,19 @@ mod tests {
             "managed scope setup failure executed the requested program"
         );
         let pid_bytes = fs::read(pid_record).unwrap();
-        assert_eq!(pid_bytes.len(), std::mem::size_of::<libc::pid_t>());
-        let pid = i32::from_ne_bytes(pid_bytes.try_into().unwrap());
+        let pid_size = std::mem::size_of::<libc::pid_t>();
+        assert_eq!(
+            pid_bytes.len(),
+            pid_size * if after_setpgid { 2 } else { 1 }
+        );
+        let pid = i32::from_ne_bytes(pid_bytes[..pid_size].try_into().unwrap());
+        if after_setpgid {
+            let pgrp = i32::from_ne_bytes(pid_bytes[pid_size..].try_into().unwrap());
+            assert_eq!(
+                pgrp, pid,
+                "injected failure did not follow managed group setup"
+            );
+        }
         assert_ne!(pid, std::process::id() as i32);
         wait_for_pid_reaped(pid);
         // SAFETY: signal zero observes only the exact process group derived from the captured PID.
@@ -5646,7 +5684,7 @@ mod tests {
             "failed launch reservation was not retired"
         );
         println!(
-            "managed-scope-setup operation={operation} child_pid={pid} pid=ESRCH group=ESRCH reservation=retired marker=absent"
+            "managed-scope-setup operation={operation} child_pid={pid} after_setpgid={after_setpgid} pid=ESRCH group=ESRCH reservation=retired marker=absent"
         );
         drop(error);
         drop(sys_error);
@@ -5667,7 +5705,7 @@ mod tests {
             ("run", &run_marker, &run_pid),
             ("spawn", &spawn_marker, &spawn_pid),
         ] {
-            assert_managed_scope_setup_failure(operation, marker, pid_record);
+            assert_managed_scope_setup_failure(operation, marker, pid_record, false);
             assert!(
                 !marker.exists(),
                 "{operation} command executed after setup failure"
@@ -5679,6 +5717,25 @@ mod tests {
             // SAFETY: signal zero observes only the exact process group derived from the captured PID.
             assert_eq!(unsafe { libc::kill(-pid, 0) }, -1);
             assert_eq!(io::Error::last_os_error().raw_os_error(), Some(libc::ESRCH));
+        }
+    }
+
+    #[test]
+    fn managed_scope_partial_setup_failure_cleans_created_group() {
+        let fixture = FixtureDir::new();
+        let run_marker = fixture.0.join("run-marker");
+        let spawn_marker = fixture.0.join("spawn-marker");
+        let run_pid = fixture.0.join("run-child-identity");
+        let spawn_pid = fixture.0.join("spawn-child-identity");
+        for (operation, marker, pid_record) in [
+            ("run", &run_marker, &run_pid),
+            ("spawn", &spawn_marker, &spawn_pid),
+        ] {
+            assert_managed_scope_setup_failure(operation, marker, pid_record, true);
+            assert!(
+                !marker.exists(),
+                "{operation} command executed after partial setup failure"
+            );
         }
     }
 

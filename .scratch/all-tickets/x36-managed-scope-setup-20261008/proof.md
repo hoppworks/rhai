@@ -1,37 +1,38 @@
 # X36: managed scope setup failure
 
 Status: partial. This accepts only the named Workhorse Linux x86_64 row with
-Rust/Cargo 1.96.0 and features `testing-environ,sys`. Other setup stages,
-partial OS membership cleanup, platforms, feature combinations and MSRV rows
-remain open.
+Rust/Cargo 1.96.0 and features `testing-environ,sys`. It covers cleanup after
+injected failure before and after successful `setpgid`. Later setup stages
+(including `fchdir` failure), kernel-generated `setpgid` denial, other platforms,
+feature combinations and MSRV rows remain open.
 
 ## Acceptance covered
 
 The open X36 criterion requires a managed-scope setup failure to avoid silently
-running an unmanaged child and to clean up the failed launch. The exact test
-`packages::sys::process::unix::tests::managed_scope_setup_failure_never_executes_unmanaged_child`
-registers the real `SysPackage` in a public Rhai `Engine`, then calls public
-`run` and `spawn` with a real `/bin/sh` child. A test-only child-side fault
-reports its exact PID and returns `EPERM` from the `pre_exec` setup hook. The
-test asserts a permission error, no marker file, exact child and process-group
-absence, and retirement of the pending reservation for both public operations.
-This is a backend/OS integration path; a UI layer does not apply.
+running an unmanaged child and to clean up the failed launch. Both tests register
+the real `SysPackage` in a public Rhai `Engine`, then call public `run` and
+`spawn` with a real `/bin/sh` child. The original
+`managed_scope_setup_failure_never_executes_unmanaged_child` injects `EPERM`
+before `setpgid`. The added
+`managed_scope_partial_setup_failure_cleans_created_group` runs real
+`setpgid(0, 0)`, records the child PID and process-group ID from inside the child,
+confirms they match, then injects `EPERM`. Both cases assert the public setup
+error, no marker file, exact child and process-group absence, and retirement of
+the pending reservation. This is a backend/OS integration path; a UI layer does
+not apply.
 
-The injected error is not a kernel-generated `setpgid` denial. It occurs before
-the real `setpgid` call, so this proof does not claim that a partially created
-OS process group is cleaned up. It proves the pre-exec failure path and no-fallback
-behavior for this named Linux row.
+The post-`setpgid` case proves cleanup after process-group membership has been
+created before a later setup error. Its `EPERM` is test-injected; it does not
+claim a kernel-generated `setpgid` denial or exercise later `fchdir` failure.
 
 ## Run and result
 
-- Command: `cargo test --locked --features testing-environ,sys --lib managed_scope_setup_failure_never_executes_unmanaged_child -- --nocapture --test-threads=1`.
-- Baseline: exit 0; the exact test passed (1 passed, 0 failed).
-- Sensitivity control: the test-copy mutation ignored the managed-scope setup error; the exact assertion failed because the real shell completed, exit 101.
-- Restored source: exit 0; the exact test passed (1 passed, 0 failed).
-- GREEN output records `run` child PID 139026 and `spawn` child PID 139028, with no marker, `pid=ESRCH`, `group=ESRCH`, and `reservation=retired`. A separate host-side readback confirmed both exact PIDs and groups absent.
-- Inputs: source snapshot SHA-256 `cf938e6317639f126a4d2723a9c4282fe1f1b77ef757de6e576dfeb63d0ab95d`; `Cargo.toml` SHA-256 `cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e`; accepted `Cargo.lock` SHA-256 `2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425`; tested Unix source SHA-256 `02e392792ea524ade719e44cc9e2b50761c4fdbb60c06e3f1fe76ccd1cd0a3d6`.
-- Canonical Workhorse runner SHA-256 `25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e`; the frozen run script passed `bash -n` and has SHA-256 `8781589745a106a222c8cb7fdd249f7a711a3731da13d36d6b5b2db14123b426`.
-- Raw baseline, mutation and restored logs, machine/tool versions, input manifest, statuses, result, and independent readback are retained in `attempt-02/evidence/`. Every exported file's SHA-256 matched Workhorse readback before its exact owned scope was retired. `attempt-02/cleanup-readback.txt` (SHA-256 `b740b51b6930a7a81c29440531d9db0c9f659a5c5a5ce96057f4ca8ff755d559`) confirms both exact owned scopes absent and the similarly named pre-existing scope preserved. The scoped runner removed its private Cargo runtime; no compiled build remains reusable.
+- Attempt 02 ran `cargo test --locked --features testing-environ,sys --lib managed_scope_setup_failure_never_executes_unmanaged_child -- --nocapture --test-threads=1`. Baseline and restored source passed; the ignored-error mutation failed because the real shell completed. Exact PIDs 139026/139028 and their groups were independently absent. Inputs and raw evidence remain in `attempt-02/`.
+- Attempt 03 ran that existing pre-`setpgid` test and `cargo test --locked --features testing-environ,sys --lib managed_scope_partial_setup_failure_cleans_created_group -- --nocapture --test-threads=1`. Baseline passed; a test-copy mutation disabling `setpgid` failed the expected `pgrp == pid` assertion (exit 101); restored partial-setup and existing pre-setup tests both passed.
+- Restored GREEN records `run` PID 152783 and `spawn` PID 152785 with `after_setpgid=true`, `pid=ESRCH`, `group=ESRCH`, `reservation=retired`, and `marker=absent`. An independent Workhorse readback confirmed both exact PIDs and groups absent.
+- Attempt 03 source base: `eb0aae40c994cba46cf5dbe367dd155e486fa764` with only `unix.rs` overlaid. Archive SHA-256 `63f603ee51d1adf3d71d6e9dad09628c27ecd46855573abf0baecb707dc18fe7`; `Cargo.toml` SHA-256 `cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e`; accepted `Cargo.lock` SHA-256 `2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425`; tested Unix source SHA-256 `6066728c6033c794b249017c40b0280166b90b65f9f20fd79d2d118e97519f62`. Historical `.scratch` files and the foreign dirty fixture were excluded from the source archive.
+- Canonical Workhorse runner SHA-256 `25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e`; attempt-03 script SHA-256 `98f0193764bba08b6be3115f7c23294bc561471770c7024e9a7b17236be2aba1` passed `bash -n`. Exported evidence archive SHA-256 `2f8bf07c745099fa9a08e7cd1fc5e1e7d37848426043b50bdeaa696e3f2e921f`.
+- Attempt-03 manifest and raw logs/readback are in `attempt-03/`. The 600-second scoped invocation used two Cargo jobs and took 19.2 seconds end-to-end. Its private Cargo runtime and exact session scope were absent after evidence export; no Cargo/Rust process remained (`attempt-03/cleanup-readback.txt`). No compiled artifact remains reusable.
 
 Attempt 01 stopped before assertions because a nested test helper lacked a
 `RawFd` import. That harness-only failure and its output remain in
