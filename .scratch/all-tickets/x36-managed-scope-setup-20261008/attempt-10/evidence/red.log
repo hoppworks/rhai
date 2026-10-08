@@ -1,0 +1,195 @@
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded autocfg v1.5.1
+  Downloaded byteorder v1.5.0
+  Downloaded crunchy v0.2.4
+  Downloaded errno v0.3.14
+  Downloaded maybe-owned v0.3.4
+  Downloaded const-random v0.1.18
+  Downloaded const-random-macro v0.1.16
+  Downloaded cfg-if v1.0.5
+  Downloaded ambient-authority v0.0.2
+  Downloaded fs-set-times v0.20.3
+  Downloaded version_check v0.9.5
+  Downloaded tiny-keccak v2.0.2
+  Downloaded smartstring v1.0.1
+  Downloaded static_assertions v1.1.0
+  Downloaded rmp v0.8.14
+  Downloaded itoa v1.0.15
+  Downloaded ryu v1.0.20
+  Downloaded io-extras v0.19.0
+  Downloaded getrandom v0.2.17
+  Downloaded ipnet v2.12.2
+  Downloaded io-lifetimes v2.0.4
+  Downloaded quote v1.0.41
+  Downloaded paste v1.0.15
+  Downloaded io-lifetimes v3.0.1
+  Downloaded unicode-ident v1.0.22
+  Downloaded serde_core v1.0.229
+  Downloaded proc-macro2 v1.0.103
+  Downloaded serde v1.0.229
+  Downloaded portable-atomic v1.15.0
+  Downloaded memchr v2.8.3
+  Downloaded cap-primitives v4.0.3
+  Downloaded serde_json v1.0.145
+  Downloaded getrandom v0.3.4
+  Downloaded bitflags v2.13.2
+  Downloaded ahash v0.8.12
+  Downloaded thin-vec v0.2.19
+  Downloaded smallvec v1.16.2
+  Downloaded rmp-serde v1.3.0
+  Downloaded zerocopy v0.8.59
+  Downloaded syn v2.0.106
+  Downloaded once_cell v1.21.4
+  Downloaded num-traits v0.2.19
+  Downloaded cap-std v4.0.3
+  Downloaded rustix v1.1.5
+  Downloaded libc v0.2.189
+   Compiling libc v0.2.189
+   Compiling autocfg v1.5.1
+   Compiling version_check v0.9.5
+   Compiling crunchy v0.2.4
+   Compiling serde_core v1.0.229
+   Compiling io-lifetimes v3.0.1
+   Compiling rustix v1.1.5
+   Compiling proc-macro2 v1.0.103
+   Compiling io-lifetimes v2.0.4
+   Compiling tiny-keccak v2.0.2
+   Compiling cfg-if v1.0.5
+   Compiling errno v0.3.14
+   Compiling num-traits v0.2.19
+   Compiling portable-atomic v1.15.0
+   Compiling io-extras v0.19.0
+   Compiling quote v1.0.41
+   Compiling unicode-ident v1.0.22
+   Compiling paste v1.0.15
+   Compiling bitflags v2.13.2
+   Compiling getrandom v0.2.17
+   Compiling once_cell v1.21.4
+   Compiling serde v1.0.229
+   Compiling zerocopy v0.8.59
+   Compiling cap-primitives v4.0.3
+   Compiling getrandom v0.3.4
+   Compiling const-random-macro v0.1.16
+   Compiling fs-set-times v0.20.3
+   Compiling smartstring v1.0.1
+   Compiling ahash v0.8.12
+   Compiling ipnet v2.12.2
+   Compiling cap-std v4.0.3
+   Compiling maybe-owned v0.3.4
+   Compiling byteorder v1.5.0
+   Compiling serde_json v1.0.145
+   Compiling ambient-authority v0.0.2
+   Compiling rmp v0.8.14
+   Compiling syn v2.0.106
+   Compiling const-random v0.1.18
+   Compiling rhai v1.26.1 (/Users/hoppworks/.local/share/agent-builds/rhai/x36-darwin-20261008-1bee7256ba7f4caca364d5c9724a14d2/agent-build-tve1y3u1/source)
+   Compiling memchr v2.8.3
+   Compiling ryu v1.0.20
+   Compiling static_assertions v1.1.0
+   Compiling itoa v1.0.15
+   Compiling rmp-serde v1.3.0
+   Compiling rhai_codegen v3.2.0 (/Users/hoppworks/.local/share/agent-builds/rhai/x36-darwin-20261008-1bee7256ba7f4caca364d5c9724a14d2/agent-build-tve1y3u1/source/codegen)
+   Compiling thin-vec v0.2.19
+   Compiling smallvec v1.16.2
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:678:13
+    |
+678 |         let mut wait_operation = "wait for child";
+    |             ----^^^^^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `termination`
+    --> src/packages/sys/process/unix.rs:1118:22
+     |
+1118 |                 let (termination, _operation) = if self.managed {
+     |                      ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_termination`
+     |
+     = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2376:9
+     |
+2376 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2719:9
+     |
+2719 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: function `create_kernel_managed_scope_setpgid_denial` is never used
+    --> src/packages/sys/process/unix.rs:1661:4
+     |
+1661 | fn create_kernel_managed_scope_setpgid_denial(fd: RawFd) -> io::Result<()> {
+     |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     |
+     = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `schedule_first_cause_plan` is never used
+    --> src/packages/sys/process/unix.rs:3722:8
+     |
+3722 |     fn schedule_first_cause_plan(
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `synchronize_overflow_deadline_for_next_execution` is never used
+    --> src/packages/sys/process/unix.rs:3962:8
+     |
+3962 |     fn synchronize_overflow_deadline_for_next_execution(
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: struct `CancelChildOnDrop` is never constructed
+    --> src/packages/sys/process/unix.rs:4395:12
+     |
+4395 |     struct CancelChildOnDrop {
+     |            ^^^^^^^^^^^^^^^^^
+
+warning: method `finish` is never used
+    --> src/packages/sys/process/unix.rs:4438:12
+     |
+4437 |     impl CancelChildOnDrop {
+     |     ---------------------- method in this implementation
+4438 |         fn finish(&mut self) {
+     |            ^^^^^^
+
+warning: function `try_release_fifo` is never used
+    --> src/packages/sys/process/unix.rs:4469:8
+     |
+4469 |     fn try_release_fifo(path: &Path) -> io::Result<()> {
+     |        ^^^^^^^^^^^^^^^^
+
+warning: function `public_child_error` is never used
+    --> src/packages/sys/process/unix.rs:5021:8
+     |
+5021 |     fn public_child_error(
+     |        ^^^^^^^^^^^^^^^^^^
+
+warning: `rhai` (lib test) generated 11 warnings (run `cargo fix --lib -p rhai --tests` to apply 4 suggestions)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 32.69s
+     Running unittests src/lib.rs (/Users/hoppworks/.local/share/agent-builds/rhai/x36-darwin-20261008-1bee7256ba7f4caca364d5c9724a14d2/agent-build-tve1y3u1/target/debug/deps/rhai-fe6309e319a98869)
+
+running 1 test
+test packages::sys::process::unix::tests::managed_scope_kernel_setpgid_denial_cleans_created_group ... 
+thread 'packages::sys::process::unix::tests::managed_scope_kernel_setpgid_denial_cleans_created_group' (7578900) panicked at src/packages/sys/process/unix.rs:5761:28:
+managed scope setup failure must not run the program: #{"code": 0, "signal": (), "stderr": "", "stderr_complete": true, "stdout": "", "stdout_complete": true, "success": true, "timed_out": false}
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+FAILED
+
+failures:
+
+failures:
+    packages::sys::process::unix::tests::managed_scope_kernel_setpgid_denial_cleans_created_group
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 25 filtered out; finished in 0.11s
+
+error: test failed, to rerun pass `--lib`

@@ -1,0 +1,76 @@
+utc=2026-10-08T04:06:55Z
+ProductName:		macOS
+ProductVersion:		27.0.1
+BuildVersion:		26A434
+Darwin Daniels-MacBook-Pro-2.local 27.0.0 Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:59 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8142 arm64
+scope=/Users/hoppworks/.local/share/agent-builds/rhai/x36-darwin-20261008-1bee7256ba7f4caca364d5c9724a14d2
+runtime=/Users/hoppworks/.local/share/agent-builds/rhai/x36-darwin-20261008-1bee7256ba7f4caca364d5c9724a14d2/agent-build-tve1y3u1
+tmpdir=/Users/hoppworks/.local/share/agent-builds/rhai/x36-darwin-20261008-1bee7256ba7f4caca364d5c9724a14d2/agent-build-tve1y3u1/tmp
+cargo_jobs=1
+rustc 1.93.0 (254b59607 2026-01-19)
+cargo 1.93.0 (083ac5135 2025-12-15)
+Filesystem      Size    Used   Avail Capacity iused ifree %iused  Mounted on
+/dev/disk3s5   926Gi   800Gi    93Gi    90%    8.2M  980M    1%   /System/Volumes/Data
+/dev/disk3s5   926Gi   800Gi    93Gi    90%    8.2M  980M    1%   /System/Volumes/Data
+Mach Virtual Memory Statistics: (page size of 16384 bytes)
+Pages free:                                    38017.
+Pages active:                                 535184.
+Pages inactive:                               533645.
+Pages speculative:                              1520.
+Pages throttled:                                   0.
+Pages wired down:                             201592.
+Pages purgeable:                                2424.
+"Translation faults":                     4679867447.
+Pages copy-on-write:                       168125635.
+Pages zero filled:                        2649827538.
+Pages reactivated:                         744841469.
+Pages purged:                               58202545.
+File-backed pages:                            214757.
+Anonymous pages:                              855592.
+Pages stored in compressor:                  1336873.
+Pages occupied by compressor:                 733033.
+Decompressions:                            652899372.
+Compressions:                              695522372.
+Pageins:                                   189761682.
+Pageouts:                                     551824.
+Swapins:                                     7747323.
+Swapouts:                                    9213705.
+Pages tagged:                                 135733.
+Pages tagged resident:                        121865.
+Pages tagged compressed:                       13868.
+Pages tag-storage:                             65536.
+Pages tag-storage holding tags:                 7430.
+Pages tag-storage free:                           53.
+Pages tag-storage non-tag pageable:            57928.
+Pages tag-storage non-tag wired:                  78.
+Bytes of compressed tags:                    1899008.
+Tagged compressions:                         8672730.
+Tagged decompressions:                       8167609.
+The system has 34359738368 (2097152 pages with a page size of 16384).
+
+Stats: 
+Pages free: 37826 
+Pages purgeable: 2424 
+Pages purged: 58202545 
+
+Swap I/O:
+Swapins: 7747323 
+Swapouts: 9213705 
+
+Page Q counts:
+Pages active: 535374 
+Pages inactive: 533645 
+Pages speculative: 1521 
+Pages throttled: 0 
+Pages wired down: 201592 
+
+Compressor Stats:
+Pages used by compressor: 733033 
+Pages decompressed: 652899372 
+Pages compressed: 695522372 
+
+File I/O:
+Pageins: 189761684 
+Pageouts: 551824 
+
+System-wide memory free percentage: 54%

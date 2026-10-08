@@ -1,0 +1,3 @@
+ad869e2f338e432a246fec6ce13d102c6b49a5a8c2d062306e98e1eb88601215  /Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/all-tickets/x36-managed-scope-setup-20261008/attempt-06/source-input.tar.gz
+6e6b6e1c281837c817dc5367a19bb022de4a90d9246418c34040af5d9b12920f  /Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/all-tickets/x36-managed-scope-setup-20261008/attempt-10/run-x36-darwin-redgreen.sh
+25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e  /Users/hoppworks/projects/agent-skills/tools/run_scoped.py

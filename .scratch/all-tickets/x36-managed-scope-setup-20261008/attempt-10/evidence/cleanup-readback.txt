@@ -1,0 +1,5 @@
+runtime_absent=true
+session_scope_removed=true
+scope=/Users/hoppworks/.local/share/agent-builds/rhai/x36-darwin-20261008-1bee7256ba7f4caca364d5c9724a14d2
+runtime=/Users/hoppworks/.local/share/agent-builds/rhai/x36-darwin-20261008-1bee7256ba7f4caca364d5c9724a14d2/agent-build-tve1y3u1
+runner_exit=0
