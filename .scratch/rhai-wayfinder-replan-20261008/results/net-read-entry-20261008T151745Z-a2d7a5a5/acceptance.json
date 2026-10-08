@@ -1,0 +1,10 @@
+{
+  "accepted": true,
+  "scope": "native Darwin/Linux actual public read entry, clone close cancellation and quota/EOF/joins; Windows remains open",
+  "combined_review": ".scratch/rhai-wayfinder-replan-20261008/results/darwin-semantic-20261008T144941Z-84e06498/review.md",
+  "review_sha256": "7a8f26203e13ceb9004b85011fbf3cc35d8dbb3f30664a80f885dc6c92491d28",
+  "independent_readiness_review": true,
+  "darwin_red": 101,
+  "four_native_greens": 0,
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425"
+}

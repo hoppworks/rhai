@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "/Users/hoppworks/.local/share/agent-builds/rhai/darwin-semantic-84w72wdv/agent-build-_jxigi5x/target/debug/deps/net_reads-db6b461e725665fa",
+    "one_shot_text_read_replaces_a_utf8_character_cut_by_the_available_prefix",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/darwin-semantic-84w72wdv/agent-build-_jxigi5x/source",
+  "exit": 0,
+  "seconds": 0.013279666999991946,
+  "control": null
+}

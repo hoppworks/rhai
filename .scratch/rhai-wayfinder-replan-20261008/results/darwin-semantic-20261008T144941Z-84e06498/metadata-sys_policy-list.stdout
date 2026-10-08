@@ -1,0 +1,29 @@
+test_absolute_path_through_symlinked_root_ancestor: test
+test_absolute_path_with_parent_components: test
+test_absolute_paths: test
+test_config_builder: test
+test_configured_root_symlink_then_parent_uses_os_resolution: test
+test_copy_across_roots: test
+test_default_config_denies_fs: test
+test_env_allow_list: test
+test_error_position: test
+test_error_variants: test
+test_errors_are_catchable: test
+test_function_metadata: test
+test_host_can_downcast: test
+test_missing_root_fails_early: test
+test_multiple_roots: test
+test_nested_roots_keep_permissions_through_system_prefix_aliases: test
+test_nested_roots_longest_prefix: test
+test_parent_traversal_is_denied: test
+test_plain_engine_has_no_sys_functions: test
+test_read_only_root: test
+test_remove_dir_all_needs_delete_access: test
+test_root_accepts_macos_system_prefix_aliases: test
+test_root_with_dot_components: test
+test_static_module_and_sharing: test
+test_symlink_escape_is_denied: test
+test_symlinked_root: test
+test_unrestricted_respects_access_level: test
+
+27 tests, 0 benchmarks

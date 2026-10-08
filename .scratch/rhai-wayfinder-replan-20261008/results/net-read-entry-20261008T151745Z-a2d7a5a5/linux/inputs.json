@@ -1,0 +1,12 @@
+{
+  "archive": "/root/rhai-evidence/wayfinder-20261008/unix-wait-93576e4c32/source.tar",
+  "archive_sha256": "635a59827900b02ad82b0e53499f6b3fb2a5c5233326cac541c88c3e8b61265f",
+  "red_patch_sha256": "478a90f0a248725edbb52a8611cc7599efcf31ac053953c5d301329c6ebacfb2",
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "test_red_sha256": "a9f795ede3f654b2415aea2104c9828e404c81b9ef585792a5edcb7fb19547e0",
+  "selector": "closing_a_clone_cancels_an_outstanding_read_and_releases_quota",
+  "profiles": [
+    "sys,net,sync",
+    "sys,net,no_index,sync,metadata"
+  ]
+}

@@ -1,0 +1,5 @@
+thread 'closing_a_clone_cancels_an_outstanding_read_and_releases_quota' panicked at tests/net_reads.rs:448:5:
+assertion `left == right` failed: read readiness must come from WouldBlock inside the actual public read operation
+  left: "thread_started"
+ right: "read_wait"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

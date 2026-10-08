@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "/Users/hoppworks/.local/share/agent-builds/rhai/darwin-semantic-84w72wdv/agent-build-_jxigi5x/target/debug/deps/sys_fs-c961f5a86ec807b3",
+    "test_file_handle_blob_read_is_omitted_under_no_index",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/darwin-semantic-84w72wdv/agent-build-_jxigi5x/source",
+  "exit": 0,
+  "seconds": 0.014118749999994407,
+  "control": null
+}

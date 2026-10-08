@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "/Users/hoppworks/.local/share/agent-builds/rhai/net-read-entry-x58rv1t_/agent-build-b9ignbb5/target/debug/deps/net_reads-ca4c0b6aa2176dc3",
+    "--list"
+  ],
+  "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/net-read-entry-x58rv1t_/agent-build-b9ignbb5/source",
+  "exit": 0,
+  "seconds": 0.24302499999998872
+}

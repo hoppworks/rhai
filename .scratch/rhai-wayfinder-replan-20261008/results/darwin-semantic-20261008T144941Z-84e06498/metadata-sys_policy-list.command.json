@@ -1,0 +1,10 @@
+{
+  "argv": [
+    "/Users/hoppworks/.local/share/agent-builds/rhai/darwin-semantic-84w72wdv/agent-build-_jxigi5x/target/debug/deps/sys_policy-3df6d8249a798310",
+    "--list"
+  ],
+  "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/darwin-semantic-84w72wdv/agent-build-_jxigi5x/source",
+  "exit": 0,
+  "seconds": 0.31537700000001223,
+  "control": null
+}

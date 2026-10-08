@@ -1,0 +1,5 @@
+registered_error_getters_are_callable_with_explicit_arguments: test
+registered_listener_functions_work_with_explicit_handle_arguments: test
+registered_stream_functions_work_without_dot_syntax: test
+
+3 tests, 0 benchmarks

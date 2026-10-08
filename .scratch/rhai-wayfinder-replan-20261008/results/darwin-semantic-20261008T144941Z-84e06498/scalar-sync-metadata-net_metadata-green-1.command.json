@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "/Users/hoppworks/.local/share/agent-builds/rhai/darwin-semantic-84w72wdv/agent-build-_jxigi5x/target/debug/deps/net_metadata-9d44d756cfaa0006",
+    "metadata_exposes_the_documented_tcp_surface",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/darwin-semantic-84w72wdv/agent-build-_jxigi5x/source",
+  "exit": 0,
+  "seconds": 0.011838874999995141,
+  "control": null
+}

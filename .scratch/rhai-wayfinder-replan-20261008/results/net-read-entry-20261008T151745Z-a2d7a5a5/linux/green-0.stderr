@@ -1,0 +1,2 @@
+public_read_wait_observed=true; read_result_pending=true; peer_open_without_bytes=true
+public_read_cancelled=true; reader_joined=true; quota_reused=true; peer_eof=true; peer_joined=true

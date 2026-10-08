@@ -1,0 +1,35 @@
+{
+  "accepted": true,
+  "rows": [
+    {
+      "phase": "green",
+      "features": "sys,net,sync",
+      "exit": 0,
+      "log": "green-0",
+      "executable_sha256": "1794dd451a53e7c3c68e5ed2a19d850604b228358281c963b96e4f8f99e2e5e6",
+      "test_sha256": "ade22ffae347d79f014600898a4859b1e565b7c2a40612d49cca4a3f3419bbc8",
+      "stream_sha256": "ce2b44b9ed42bd01026669f8e876db9471064af2297d1e3904a48392631c1d91"
+    },
+    {
+      "phase": "green",
+      "features": "sys,net,no_index,sync,metadata",
+      "exit": 0,
+      "log": "green-1",
+      "executable_sha256": "4017fa48ec6d920223931f2090a552ab55c4b4962bdeb512a1b706212e87ff61",
+      "test_sha256": "ade22ffae347d79f014600898a4859b1e565b7c2a40612d49cca4a3f3419bbc8",
+      "stream_sha256": "ce2b44b9ed42bd01026669f8e876db9471064af2297d1e3904a48392631c1d91"
+    }
+  ],
+  "runtime": "/root/.local/share/agent-builds/rhai/net-read-entry-d77a121d57/agent-build-1k8u_eo9",
+  "runtime_identity": {
+    "device": 58,
+    "inode": 117308692
+  },
+  "environment": {
+    "os": "Linux-7.2.8-ogc5.1.fc44.x86_64-x86_64-with-glibc2.43",
+    "machine": "x86_64",
+    "rustc": "rustc 1.77.2 (25ef9e3d8 2024-04-09)",
+    "cargo": "cargo 1.77.2 (e52e36006 2024-03-26)"
+  },
+  "runtime_bytes": 1822240768
+}

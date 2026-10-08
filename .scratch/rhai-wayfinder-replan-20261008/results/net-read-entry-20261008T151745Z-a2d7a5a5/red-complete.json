@@ -1,0 +1,25 @@
+{
+  "accepted": false,
+  "rows": [
+    {
+      "phase": "red",
+      "features": "sys,net,sync",
+      "exit": 101,
+      "log": "test-first-red",
+      "executable_sha256": "6a37d74209e903ce46b78fe7edf0f82a06434098a059ab98de15eeed55f6f711",
+      "test_sha256": "a9f795ede3f654b2415aea2104c9828e404c81b9ef585792a5edcb7fb19547e0",
+      "stream_sha256": "e846c03c38d2b7d930ba428f404ddf55d956130c3130a4e6cf0c809804ae607a"
+    }
+  ],
+  "runtime": "/Users/hoppworks/.local/share/agent-builds/rhai/net-read-entry-x58rv1t_/agent-build-b9ignbb5",
+  "runtime_identity": {
+    "device": 16777234,
+    "inode": 226335893
+  },
+  "environment": {
+    "os": "macOS-27.0.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "rustc": "rustc 1.77.2 (25ef9e3d8 2024-04-09)",
+    "cargo": "cargo 1.77.2 (e52e36006 2024-03-26)"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "argv": [
+    "cargo",
+    "+1.77.2",
+    "test",
+    "--locked",
+    "--features",
+    "testing-environ,net",
+    "--test",
+    "net_connect",
+    "--test",
+    "net_listen",
+    "--test",
+    "net_reads",
+    "--test",
+    "net_writes",
+    "--no-run",
+    "--message-format=json"
+  ],
+  "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/darwin-semantic-84w72wdv/agent-build-_jxigi5x/source",
+  "exit": 0,
+  "seconds": 8.289045666999996,
+  "control": null
+}

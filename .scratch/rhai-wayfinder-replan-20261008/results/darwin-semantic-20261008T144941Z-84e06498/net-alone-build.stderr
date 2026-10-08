@@ -1,0 +1,9 @@
+   Compiling libc v0.2.189
+   Compiling rhai v1.26.1 (/Users/hoppworks/.local/share/agent-builds/rhai/darwin-semantic-84w72wdv/agent-build-_jxigi5x/source)
+   Compiling getrandom v0.2.17
+   Compiling getrandom v0.3.4
+   Compiling const-random-macro v0.1.16
+   Compiling bitflags v2.13.2
+   Compiling const-random v0.1.18
+   Compiling ahash v0.8.12
+    Finished test [unoptimized + debuginfo] target(s) in 8.25s

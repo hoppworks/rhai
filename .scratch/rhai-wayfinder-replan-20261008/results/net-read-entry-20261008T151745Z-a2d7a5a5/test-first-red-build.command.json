@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "cargo",
+    "+1.77.2",
+    "test",
+    "--locked",
+    "--features",
+    "testing-environ,sys,net,sync",
+    "--test",
+    "net_reads",
+    "--no-run",
+    "--message-format=json"
+  ],
+  "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/net-read-entry-x58rv1t_/agent-build-b9ignbb5/source",
+  "exit": 0,
+  "seconds": 19.447895167
+}

@@ -1,0 +1,1032 @@
+{
+  "accepted": true,
+  "rows": [
+    {
+      "name": "sys-alone",
+      "features": "sys",
+      "target": "sys_policy",
+      "selected": [
+        {
+          "selector": "test_absolute_path_through_symlinked_root_ancestor",
+          "exit": 0,
+          "logs": "sys-alone-sys_policy-green-0",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_absolute_path_with_parent_components",
+          "exit": 0,
+          "logs": "sys-alone-sys_policy-green-1",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_absolute_paths",
+          "exit": 0,
+          "logs": "sys-alone-sys_policy-green-2",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_config_builder",
+          "exit": 0,
+          "logs": "sys-alone-sys_policy-green-3",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_configured_root_symlink_then_parent_uses_os_resolution",
+          "exit": 0,
+          "logs": "sys-alone-sys_policy-green-4",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_copy_across_roots",
+          "exit": 0,
+          "logs": "sys-alone-sys_policy-green-5",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_default_config_denies_fs",
+          "exit": 0,
+          "logs": "sys-alone-sys_policy-green-6",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_env_allow_list",
+          "exit": 0,
+          "logs": "sys-alone-sys_policy-green-7",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_error_position",
+          "exit": 0,
+          "logs": "sys-alone-sys_policy-green-8",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_error_variants",
+          "exit": 0,
+          "logs": "sys-alone-sys_policy-green-9",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_errors_are_catchable",
+          "exit": 0,
+          "logs": "sys-alone-sys_policy-green-10",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_host_can_downcast",
+          "exit": 0,
+          "logs": "sys-alone-sys_policy-green-11",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_missing_root_fails_early",
+          "exit": 0,
+          "logs": "sys-alone-sys_policy-green-12",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_multiple_roots",
+          "exit": 0,
+          "logs": "sys-alone-sys_policy-green-13",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_nested_roots_keep_permissions_through_system_prefix_aliases",
+          "exit": 0,
+          "logs": "sys-alone-sys_policy-green-14",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_nested_roots_longest_prefix",
+          "exit": 0,
+          "logs": "sys-alone-sys_policy-green-15",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_parent_traversal_is_denied",
+          "exit": 0,
+          "logs": "sys-alone-sys_policy-green-16",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_plain_engine_has_no_sys_functions",
+          "exit": 0,
+          "logs": "sys-alone-sys_policy-green-17",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_read_only_root",
+          "exit": 0,
+          "logs": "sys-alone-sys_policy-green-18",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_remove_dir_all_needs_delete_access",
+          "exit": 0,
+          "logs": "sys-alone-sys_policy-green-19",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_root_accepts_macos_system_prefix_aliases",
+          "exit": 0,
+          "logs": "sys-alone-sys_policy-green-20",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_root_with_dot_components",
+          "exit": 0,
+          "logs": "sys-alone-sys_policy-green-21",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_static_module_and_sharing",
+          "exit": 0,
+          "logs": "sys-alone-sys_policy-green-22",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_symlink_escape_is_denied",
+          "exit": 0,
+          "logs": "sys-alone-sys_policy-green-23",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_symlinked_root",
+          "exit": 0,
+          "logs": "sys-alone-sys_policy-green-24",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_unrestricted_respects_access_level",
+          "exit": 0,
+          "logs": "sys-alone-sys_policy-green-25",
+          "host_unavailable_notice": false
+        }
+      ],
+      "executable_sha256": "9988281b97ac980f133cab5d5e87462e50951ff18ca2d888490b9b62ee8e1ea1",
+      "source_sha256": "d7da166566d660277717cb87bfc9d26696005f4eeecdcd07e75e8ee64e4131fe"
+    },
+    {
+      "name": "sys-alone",
+      "features": "sys",
+      "target": "sys_fs",
+      "selected": [
+        {
+          "selector": "test_create_dir_cases",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-0",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_deep_tree_and_many_entries",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-1",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_empty_and_mixed_writes",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-2",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_file_handle_blob_read_respects_engine_array_limit",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-3",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_file_handle_read_blob_preserves_bytes_and_obeys_host_cap",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-4",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_file_handle_read_respects_engine_limit_below_host_cap",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-5",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_file_handle_read_string_advances_the_shared_cursor",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-6",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_file_handle_reads_fail_at_eof_and_on_write_only_handle",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-7",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-8",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_file_handle_string_read_requires_complete_utf8",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-9",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_large_file_round_trip",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-10",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_metadata_symlink_and_readonly",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-11",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_non_utf8_file_name",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-12",
+          "host_unavailable_notice": true
+        },
+        {
+          "selector": "test_open_file_checks_grants_before_mutation_and_stays_confined",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-13",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_open_file_default_preserves_contents_and_shares_cursor",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-14",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_open_file_modes_and_exclusive_create",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-15",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_path_spellings",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-16",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_predicates_and_metadata",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-17",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_read_binary",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-18",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_read_dir_cases",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-19",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_read_file_cases",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-20",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_remove_cases",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-21",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_rename_and_copy",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-22",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_rename_overwrite_and_directory",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-23",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_unicode_names",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-24",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_unrestricted_missing_parents",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-25",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_unrestricted_relative_paths",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-26",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_unrestricted_relative_paths_after_cwd_is_unlinked",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-27",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_unrestricted_round_trip",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-28",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_unrestricted_symlink_then_parent_uses_host_resolution",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-29",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_unrestricted_symlinks_follow_host_semantics",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-30",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_write_append_blob",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-31",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_write_into_missing_parent",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-32",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_wrong_entry_kind",
+          "exit": 0,
+          "logs": "sys-alone-sys_fs-green-33",
+          "host_unavailable_notice": false
+        }
+      ],
+      "executable_sha256": "511f3a083ebd5eae4f6bb47219999b44a1a8dea3e429872e194b3aeb6912fa57",
+      "source_sha256": "e1d0e35aa855341a5b19ad92e49f2e9f8f4075f262ba2e050a7a7deb68afd9ba"
+    },
+    {
+      "name": "sys-alone",
+      "features": "sys",
+      "target": "sys_env",
+      "selected": [
+        {
+          "selector": "test_cwd_matches_process",
+          "exit": 0,
+          "logs": "sys-alone-sys_env-green-0",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_env_allow_list_unset_variable",
+          "exit": 0,
+          "logs": "sys-alone-sys_env-green-1",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_env_allow_list_value",
+          "exit": 0,
+          "logs": "sys-alone-sys_env-green-2",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_env_default_policy_hides_all",
+          "exit": 0,
+          "logs": "sys-alone-sys_env-green-3",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_env_var_non_utf8",
+          "exit": 0,
+          "logs": "sys-alone-sys_env-green-4",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_env_var_set_and_unset",
+          "exit": 0,
+          "logs": "sys-alone-sys_env-green-5",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "test_env_vars_all",
+          "exit": 0,
+          "logs": "sys-alone-sys_env-green-6",
+          "host_unavailable_notice": false
+        }
+      ],
+      "executable_sha256": "445caefa2497f93c3a81b1e94a0dce501d3e4f40b1e3c078a104c8653dca3e6e",
+      "source_sha256": "bf47b0d7fc5fb5155fdf12574d8d380818805718fa950206c446ba2809a5cdea"
+    },
+    {
+      "name": "net-alone",
+      "features": "net",
+      "target": "net_listen",
+      "selected": [
+        {
+          "selector": "accepted_stream_uses_the_shared_package_quota_across_engines",
+          "exit": 0,
+          "logs": "net-alone-net_listen-green-0",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "authorized_listener_accepts_an_independent_peer",
+          "exit": 0,
+          "logs": "net-alone-net_listen-green-1",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "bind_failure_releases_listener_quota",
+          "exit": 0,
+          "logs": "net-alone-net_listen-green-2",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "denied_and_invalid_listener_endpoints_never_bind",
+          "exit": 0,
+          "logs": "net-alone-net_listen-green-3",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "listener_clones_share_close_and_final_drop_releases_the_bind",
+          "exit": 0,
+          "logs": "net-alone-net_listen-green-4",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "no_client_accept_times_out_with_catchable_net_error",
+          "exit": 0,
+          "logs": "net-alone-net_listen-green-5",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "quota_retry_deadline_expires_under_a_real_saturated_handle_limit",
+          "exit": 0,
+          "logs": "net-alone-net_listen-green-6",
+          "host_unavailable_notice": false
+        }
+      ],
+      "executable_sha256": "d0da14a1f1580d10e52c7ae3c6753eb024b35e44227759b04dc6bf2f5b925959",
+      "source_sha256": "c452d9625eb665dd7caee4ab185debeb71033cb30eeeecccc680061815995515"
+    },
+    {
+      "name": "net-alone",
+      "features": "net",
+      "target": "net_reads",
+      "selected": [
+        {
+          "selector": "accepted_stream_inherits_host_receive_cap",
+          "exit": 0,
+          "logs": "net-alone-net_reads-green-0",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "blob_reads_validate_lengths_return_exact_short_prefix_and_obey_host_cap",
+          "exit": 0,
+          "logs": "net-alone-net_reads-green-1",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "engine_string_limit_keeps_ascii_and_reports_lossy_expansion_progress",
+          "exit": 0,
+          "logs": "net-alone-net_reads-green-2",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "no_data_read_times_out_and_bounded_eof_loop_reports_partial_progress",
+          "exit": 0,
+          "logs": "net-alone-net_reads-green-3",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "one_shot_read_returns_an_available_short_prefix_without_waiting_for_more",
+          "exit": 0,
+          "logs": "net-alone-net_reads-green-4",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "one_shot_text_read_replaces_a_utf8_character_cut_by_the_available_prefix",
+          "exit": 0,
+          "logs": "net-alone-net_reads-green-5",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "stream_read_string_returns_exact_lossy_text_from_peer_bytes",
+          "exit": 0,
+          "logs": "net-alone-net_reads-green-6",
+          "host_unavailable_notice": false
+        }
+      ],
+      "executable_sha256": "89b6e5729b1489797ac3bbbbd40dee1429fdab497910090cd4d5ce0f95e23f18",
+      "source_sha256": "fee86f4e123b7ebc161e3ca6027f427079283b5df8bf41648aa89ec07f7f664e"
+    },
+    {
+      "name": "net-alone",
+      "features": "net",
+      "target": "net_connect",
+      "selected": [
+        {
+          "selector": "authorized_connect_is_observed_and_clone_close_is_shared",
+          "exit": 0,
+          "logs": "net-alone-net_connect-green-0",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "denied_and_invalid_endpoints_do_not_reach_peer_and_errors_are_catchable",
+          "exit": 0,
+          "logs": "net-alone-net_connect-green-1",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "net_config_rejects_zero_deadline_and_invalid_handle_limits",
+          "exit": 0,
+          "logs": "net-alone-net_connect-green-2",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "open_handle_limit_is_shared_across_package_engines_and_released_on_close",
+          "exit": 0,
+          "logs": "net-alone-net_connect-green-3",
+          "host_unavailable_notice": false
+        }
+      ],
+      "executable_sha256": "6838d8a719aa64be9b5a49fcadc98359b714646a9f5dc3943ec08030b1b4a7e1",
+      "source_sha256": "4d03943e8625cf08247068aa24b72bf87d3c505dfd4957634ed5f132a02356f4"
+    },
+    {
+      "name": "net-alone",
+      "features": "net",
+      "target": "net_writes",
+      "selected": [
+        {
+          "selector": "accepted_stream_inherits_host_write_cap",
+          "exit": 0,
+          "logs": "net-alone-net_writes-green-0",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "accepted_stream_writes_are_read_back_by_the_peer",
+          "exit": 0,
+          "logs": "net-alone-net_writes-green-1",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "bounded_write_timeout_reports_partial_bytes_matching_peer_readback",
+          "exit": 0,
+          "logs": "net-alone-net_writes-green-2",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "engine_string_limit_rejects_write_before_peer_bytes",
+          "exit": 0,
+          "logs": "net-alone-net_writes-green-3",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "host_write_cap_rejects_oversize_input_without_peer_bytes",
+          "exit": 0,
+          "logs": "net-alone-net_writes-green-4",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "invalid_host_write_bounds_are_rejected",
+          "exit": 0,
+          "logs": "net-alone-net_writes-green-5",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "read_half_close_is_idempotent_and_keeps_stream_open_for_close",
+          "exit": 0,
+          "logs": "net-alone-net_writes-green-6",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "script_write_blob_preserves_exact_bytes",
+          "exit": 0,
+          "logs": "net-alone-net_writes-green-7",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "script_writes_string_and_write_all_report_real_peer_bytes",
+          "exit": 0,
+          "logs": "net-alone-net_writes-green-8",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "write_half_close_keeps_the_read_direction_and_is_idempotent",
+          "exit": 0,
+          "logs": "net-alone-net_writes-green-9",
+          "host_unavailable_notice": false
+        }
+      ],
+      "executable_sha256": "0e31dfeeaa5b59eb623ab187e5a1dbf370468f37c5ee617173c2e15bcdd2831d",
+      "source_sha256": "2589742a18c684e6a261d2d6f4750e8ef7dc3351c6ca33e5b01a73d7a1dc5131"
+    },
+    {
+      "name": "combined",
+      "features": "sys,net",
+      "target": "combined_sys_net",
+      "selected": [
+        {
+          "selector": "sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors",
+          "exit": 0,
+          "logs": "combined-combined_sys_net-green-0",
+          "host_unavailable_notice": false
+        }
+      ],
+      "executable_sha256": "35dd4a2b8b177e8e3ad08e142610b9720698512db206d0d3f60e414a2303ddd3",
+      "source_sha256": "4197b3793a6bc00f4357fe9bdaae625417d6e7c792335516760d8b4792962f51"
+    },
+    {
+      "name": "sync",
+      "features": "sys,net,sync",
+      "target": "net_listen",
+      "selected": [
+        {
+          "selector": "closing_a_clone_unblocks_an_accept_waiting_on_shared_quota",
+          "exit": 0,
+          "logs": "sync-net_listen-green-0",
+          "host_unavailable_notice": false
+        }
+      ],
+      "executable_sha256": "24e3df5256dcdb919bd6bf48741f313283a702d60a3dd2fa96f537db6963c505",
+      "source_sha256": "c452d9625eb665dd7caee4ab185debeb71033cb30eeeecccc680061815995515"
+    },
+    {
+      "name": "sync",
+      "features": "sys,net,sync",
+      "target": "net_reads",
+      "selected": [
+        {
+          "selector": "closing_a_clone_cancels_an_outstanding_read_and_releases_quota",
+          "exit": 0,
+          "logs": "sync-net_reads-green-0",
+          "host_unavailable_notice": false
+        }
+      ],
+      "executable_sha256": "20110b27ab597da29e251df587d6a1ea60a8f62e57b76c73de73b08e5b077783",
+      "source_sha256": "fee86f4e123b7ebc161e3ca6027f427079283b5df8bf41648aa89ec07f7f664e"
+    },
+    {
+      "name": "sync",
+      "features": "sys,net,sync",
+      "target": "sys_fs",
+      "selected": [
+        {
+          "selector": "test_open_file_default_preserves_contents_and_shares_cursor",
+          "exit": 0,
+          "logs": "sync-sys_fs-green-0",
+          "host_unavailable_notice": false
+        }
+      ],
+      "executable_sha256": "f86dd8b32d2391d6c345a83775f3d583a2d562495b92d149d7ae4e9403039532",
+      "source_sha256": "e1d0e35aa855341a5b19ad92e49f2e9f8f4075f262ba2e050a7a7deb68afd9ba"
+    },
+    {
+      "name": "no-index",
+      "features": "sys,net,no_index",
+      "target": "sys_fs",
+      "selected": [
+        {
+          "selector": "test_file_handle_blob_read_is_omitted_under_no_index",
+          "exit": 0,
+          "logs": "no-index-sys_fs-green-0",
+          "host_unavailable_notice": false
+        }
+      ],
+      "executable_sha256": "db1614a2fbb266414d3acdc37713d6a422a2bbfed95a9cb05214c70396dd8370",
+      "source_sha256": "e1d0e35aa855341a5b19ad92e49f2e9f8f4075f262ba2e050a7a7deb68afd9ba"
+    },
+    {
+      "name": "no-index",
+      "features": "sys,net,no_index",
+      "target": "sys_process_report",
+      "selected": [
+        {
+          "selector": "no_index_keeps_scalar_and_indexed_diagnostic_access",
+          "exit": 0,
+          "logs": "no-index-sys_process_report-green-0",
+          "host_unavailable_notice": false
+        }
+      ],
+      "executable_sha256": "12556ac2556dc53676d5b41e0fc77d38c87026bc988b25c7d303aa23a829dcfe",
+      "source_sha256": "b081e8de1174433bd8ef5668945bfdda7b81fdcdeb6ef1b1d92a2c04d6f5c53f"
+    },
+    {
+      "name": "no-index",
+      "features": "sys,net,no_index",
+      "target": "net_reads",
+      "selected": [
+        {
+          "selector": "no_index_keeps_string_reads_and_omits_blob_methods",
+          "exit": 0,
+          "logs": "no-index-net_reads-green-0",
+          "host_unavailable_notice": false
+        }
+      ],
+      "executable_sha256": "4820b388a30cf3cf745723d26276e0d7dfbfdfd0af8a41750b81b17f87cb89b4",
+      "source_sha256": "fee86f4e123b7ebc161e3ca6027f427079283b5df8bf41648aa89ec07f7f664e"
+    },
+    {
+      "name": "no-index",
+      "features": "sys,net,no_index",
+      "target": "net_writes",
+      "selected": [
+        {
+          "selector": "no_index_keeps_string_writes_and_omits_blob_writes",
+          "exit": 0,
+          "logs": "no-index-net_writes-green-0",
+          "host_unavailable_notice": false
+        }
+      ],
+      "executable_sha256": "6f79a0dc90c00c9c39910bd5b25bac6860fff4afb96745db425c099fa3c6db6f",
+      "source_sha256": "2589742a18c684e6a261d2d6f4750e8ef7dc3351c6ca33e5b01a73d7a1dc5131"
+    },
+    {
+      "name": "metadata",
+      "features": "sys,net,metadata,serde",
+      "target": "sys_policy",
+      "selected": [
+        {
+          "selector": "test_function_metadata",
+          "exit": 0,
+          "logs": "metadata-sys_policy-green-0",
+          "host_unavailable_notice": false
+        }
+      ],
+      "executable_sha256": "00a413c44553330d6ac1d7b7e28a30def24940b33b18c487b360cd7769cd0d4f",
+      "source_sha256": "d7da166566d660277717cb87bfc9d26696005f4eeecdcd07e75e8ee64e4131fe"
+    },
+    {
+      "name": "metadata",
+      "features": "sys,net,metadata,serde",
+      "target": "net_metadata",
+      "selected": [
+        {
+          "selector": "metadata_documents_tcp_handle_operations_and_overloads",
+          "exit": 0,
+          "logs": "metadata-net_metadata-green-0",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "metadata_exposes_the_documented_tcp_surface",
+          "exit": 0,
+          "logs": "metadata-net_metadata-green-1",
+          "host_unavailable_notice": false
+        }
+      ],
+      "executable_sha256": "02376c419bc070ca0468c6d701521902a651f1156627060503e530161566b864",
+      "source_sha256": "258bf1dcb35e6d637ccd8c1f23cfdc9fc2533828ba092af89c00b4418fa861ac"
+    },
+    {
+      "name": "integer",
+      "features": "sys,net,only_i32,no_float",
+      "target": "combined_sys_net",
+      "selected": [
+        {
+          "selector": "sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors",
+          "exit": 0,
+          "logs": "integer-combined_sys_net-green-0",
+          "host_unavailable_notice": false
+        }
+      ],
+      "executable_sha256": "831330945ee10adacd5e2356df21f71124039bd148d6377139033c7079d687da",
+      "source_sha256": "4197b3793a6bc00f4357fe9bdaae625417d6e7c792335516760d8b4792962f51"
+    },
+    {
+      "name": "integer",
+      "features": "sys,net,only_i32,no_float",
+      "target": "sys_fs",
+      "selected": [
+        {
+          "selector": "test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving",
+          "exit": 0,
+          "logs": "integer-sys_fs-green-0",
+          "host_unavailable_notice": false
+        }
+      ],
+      "executable_sha256": "cc4833815630354cf250d8db3fca3fab6f2ced48bf2906e7b82a29010e0f198a",
+      "source_sha256": "e1d0e35aa855341a5b19ad92e49f2e9f8f4075f262ba2e050a7a7deb68afd9ba"
+    },
+    {
+      "name": "unchecked",
+      "features": "sys,net,unchecked",
+      "target": "net_reads",
+      "selected": [
+        {
+          "selector": "unchecked_mode_keeps_the_host_receive_cap",
+          "exit": 0,
+          "logs": "unchecked-net_reads-green-0",
+          "host_unavailable_notice": false
+        }
+      ],
+      "executable_sha256": "310c9ed8b1b45a30c1546701b9e3acce4fb0c18148c214b7de19e13b89cde892",
+      "source_sha256": "fee86f4e123b7ebc161e3ca6027f427079283b5df8bf41648aa89ec07f7f664e"
+    },
+    {
+      "name": "unchecked",
+      "features": "sys,net,unchecked",
+      "target": "sys_fs",
+      "selected": [
+        {
+          "selector": "test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving",
+          "exit": 0,
+          "logs": "unchecked-sys_fs-green-0",
+          "host_unavailable_notice": false
+        }
+      ],
+      "executable_sha256": "820166d142fab2d64e9b551bd618207a621b0e6c433b266c1998b6e566b1a4e2",
+      "source_sha256": "e1d0e35aa855341a5b19ad92e49f2e9f8f4075f262ba2e050a7a7deb68afd9ba"
+    },
+    {
+      "name": "unchecked",
+      "features": "sys,net,unchecked",
+      "target": "net_writes",
+      "selected": [
+        {
+          "selector": "host_write_cap_rejects_oversize_input_without_peer_bytes",
+          "exit": 0,
+          "logs": "unchecked-net_writes-green-0",
+          "host_unavailable_notice": false
+        }
+      ],
+      "executable_sha256": "d530a878a6771674c723c1474cc1ff650357ae32370a249af7c38067164bdac6",
+      "source_sha256": "2589742a18c684e6a261d2d6f4750e8ef7dc3351c6ca33e5b01a73d7a1dc5131"
+    },
+    {
+      "name": "scalar-sync-metadata",
+      "features": "sys,net,no_index,sync,metadata",
+      "target": "net_metadata",
+      "selected": [
+        {
+          "selector": "metadata_documents_tcp_handle_operations_and_overloads",
+          "exit": 0,
+          "logs": "scalar-sync-metadata-net_metadata-green-0",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "metadata_exposes_the_documented_tcp_surface",
+          "exit": 0,
+          "logs": "scalar-sync-metadata-net_metadata-green-1",
+          "host_unavailable_notice": false
+        }
+      ],
+      "executable_sha256": "2111c561ad93772ba6a17dc143ac9fca777bfa9ac1765c8b4d9c31e5af531173",
+      "source_sha256": "258bf1dcb35e6d637ccd8c1f23cfdc9fc2533828ba092af89c00b4418fa861ac"
+    },
+    {
+      "name": "scalar-sync-metadata",
+      "features": "sys,net,no_index,sync,metadata",
+      "target": "net_reads",
+      "selected": [
+        {
+          "selector": "closing_a_clone_cancels_an_outstanding_read_and_releases_quota",
+          "exit": 0,
+          "logs": "scalar-sync-metadata-net_reads-green-0",
+          "host_unavailable_notice": false
+        }
+      ],
+      "executable_sha256": "5f7b9cec9811b89d42558350fe522128589a771da30c1860dc7ad811d11176dd",
+      "source_sha256": "fee86f4e123b7ebc161e3ca6027f427079283b5df8bf41648aa89ec07f7f664e"
+    },
+    {
+      "name": "scalar-sync-metadata",
+      "features": "sys,net,no_index,sync,metadata",
+      "target": "sys_policy",
+      "selected": [
+        {
+          "selector": "test_function_metadata",
+          "exit": 0,
+          "logs": "scalar-sync-metadata-sys_policy-green-0",
+          "host_unavailable_notice": false
+        }
+      ],
+      "executable_sha256": "6ab60e8a85e91222e0bb9aaa5a04160ed8b7ead69797fef7e18ae1012d3ab553",
+      "source_sha256": "d7da166566d660277717cb87bfc9d26696005f4eeecdcd07e75e8ee64e4131fe"
+    },
+    {
+      "name": "scalar-sync-metadata",
+      "features": "sys,net,no_index,sync,metadata",
+      "target": "net_listen",
+      "selected": [
+        {
+          "selector": "closing_a_clone_unblocks_an_accept_waiting_on_shared_quota",
+          "exit": 0,
+          "logs": "scalar-sync-metadata-net_listen-green-0",
+          "host_unavailable_notice": false
+        }
+      ],
+      "executable_sha256": "eeb8fdbec9546927ccde535135bbbebc723e824d599f584ff64ea84fb8cde689",
+      "source_sha256": "c452d9625eb665dd7caee4ab185debeb71033cb30eeeecccc680061815995515"
+    },
+    {
+      "name": "f32",
+      "features": "sys,net,f32_float",
+      "target": "net_reads",
+      "selected": [
+        {
+          "selector": "f32_float_timeout_arguments_reject_fractional_and_non_finite_values",
+          "exit": 0,
+          "logs": "f32-net_reads-green-0",
+          "host_unavailable_notice": false
+        }
+      ],
+      "executable_sha256": "b236bac81f5ef0e16366630338c54e7ffa9b199813d625376c77c20ce35e7c83",
+      "source_sha256": "fee86f4e123b7ebc161e3ca6027f427079283b5df8bf41648aa89ec07f7f664e"
+    },
+    {
+      "name": "net-no-object",
+      "features": "net,no_object",
+      "target": "net_no_object",
+      "selected": [
+        {
+          "selector": "registered_error_getters_are_callable_with_explicit_arguments",
+          "exit": 0,
+          "logs": "net-no-object-net_no_object-green-0",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "registered_listener_functions_work_with_explicit_handle_arguments",
+          "exit": 0,
+          "logs": "net-no-object-net_no_object-green-1",
+          "host_unavailable_notice": false
+        },
+        {
+          "selector": "registered_stream_functions_work_without_dot_syntax",
+          "exit": 0,
+          "logs": "net-no-object-net_no_object-green-2",
+          "host_unavailable_notice": false
+        }
+      ],
+      "executable_sha256": "be660b2d91d88dec00783eb74a117eb6435e0f2b905b13310dd2adc41687ad40",
+      "source_sha256": "b547dda420d960cfb8ccc50f14a5c72a927f6ccda06ee379851021a0453d02a2"
+    }
+  ],
+  "controls": [
+    {
+      "row": "sys-alone",
+      "target": "sys_fs",
+      "selector": "test_open_file_default_preserves_contents_and_shares_cursor",
+      "env": "RHAI_FILE_HANDLE_WRONG_EXPECTATION",
+      "assertion": "right: [119, 114, 111, 110, 103",
+      "exit": 101,
+      "logs": "sys-alone-sys_fs-red",
+      "executable_sha256": "511f3a083ebd5eae4f6bb47219999b44a1a8dea3e429872e194b3aeb6912fa57"
+    },
+    {
+      "row": "net-alone",
+      "target": "net_reads",
+      "selector": "stream_read_string_returns_exact_lossy_text_from_peer_bytes",
+      "env": "RHAI_NET_WRONG_READ_EXPECTATION",
+      "assertion": "wrong peer payload",
+      "exit": 101,
+      "logs": "net-alone-net_reads-red",
+      "executable_sha256": "89b6e5729b1489797ac3bbbbd40dee1429fdab497910090cd4d5ce0f95e23f18"
+    },
+    {
+      "row": "combined",
+      "target": "combined_sys_net",
+      "selector": "sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors",
+      "env": "RHAI_COMBINED_WRONG_EXPECTATION",
+      "assertion": "fresh host readback must match independent expected bytes",
+      "exit": 101,
+      "logs": "combined-combined_sys_net-red",
+      "executable_sha256": "35dd4a2b8b177e8e3ad08e142610b9720698512db206d0d3f60e414a2303ddd3"
+    },
+    {
+      "row": "net-no-object",
+      "target": "net_no_object",
+      "selector": "registered_stream_functions_work_without_dot_syntax",
+      "env": "RHAI_NET_NO_OBJECT_WRONG_PEER_EXPECTATION",
+      "assertion": "deliberately wrong independent peer expectation",
+      "exit": 101,
+      "logs": "net-no-object-net_no_object-red",
+      "executable_sha256": "be660b2d91d88dec00783eb74a117eb6435e0f2b905b13310dd2adc41687ad40"
+    }
+  ],
+  "runtime": "/Users/hoppworks/.local/share/agent-builds/rhai/darwin-semantic-84w72wdv/agent-build-_jxigi5x",
+  "runtime_identity": {
+    "device": 16777234,
+    "inode": 226245675
+  },
+  "environment": {
+    "os": "macOS-27.0.1-arm64-arm-64bit",
+    "machine": "arm64",
+    "rustc": "rustc 1.77.2 (25ef9e3d8 2024-04-09)",
+    "cargo": "cargo 1.77.2 (e52e36006 2024-03-26)"
+  },
+  "runtime_bytes": 4742463488,
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425"
+}

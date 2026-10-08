@@ -1,0 +1,1 @@
+filesystem rejects non-UTF-8 fixture with EILSEQ: Illegal byte sequence (os error 92)

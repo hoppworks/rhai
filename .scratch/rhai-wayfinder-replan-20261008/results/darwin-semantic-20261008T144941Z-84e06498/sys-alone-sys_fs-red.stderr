@@ -1,0 +1,6 @@
+independent host readback: "original XYyload"
+thread 'test_open_file_default_preserves_contents_and_shares_cursor' panicked at tests/sys_fs.rs:42:5:
+assertion `left == right` failed
+  left: [111, 114, 105, 103, 105, 110, 97, 108, 32, 88, 89, 121, 108, 111, 97, 100]
+ right: [119, 114, 111, 110, 103, 32, 101, 120, 112, 101, 99, 116, 97, 116, 105, 111, 110]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

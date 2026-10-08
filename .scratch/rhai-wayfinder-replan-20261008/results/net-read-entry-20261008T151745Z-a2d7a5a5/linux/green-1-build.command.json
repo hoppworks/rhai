@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "/var/home/workhorse/.rustup/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+    "test",
+    "--locked",
+    "--features",
+    "testing-environ,sys,net,no_index,sync,metadata",
+    "--test",
+    "net_reads",
+    "--no-run",
+    "--message-format=json"
+  ],
+  "cwd": "/root/.local/share/agent-builds/rhai/net-read-entry-d77a121d57/agent-build-1k8u_eo9/source",
+  "exit": 0,
+  "seconds": 10.680285731999902
+}

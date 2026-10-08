@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "/root/.local/share/agent-builds/rhai/net-read-entry-d77a121d57/agent-build-1k8u_eo9/target/debug/deps/net_reads-890e09fca32ac192",
+    "closing_a_clone_cancels_an_outstanding_read_and_releases_quota",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": "/root/.local/share/agent-builds/rhai/net-read-entry-d77a121d57/agent-build-1k8u_eo9/source",
+  "exit": 0,
+  "seconds": 0.015384703001473099
+}

@@ -1,0 +1,11 @@
+
+running 1 test
+test test_open_file_default_preserves_contents_and_shares_cursor ... FAILED
+
+failures:
+
+failures:
+    test_open_file_default_preserves_contents_and_shares_cursor
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 33 filtered out; finished in 0.01s
+

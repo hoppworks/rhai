@@ -1,0 +1,12 @@
+{
+  "runner_exit": 0,
+  "runtime_absent": true,
+  "outer_scope_absent": true,
+  "retired_outer_identity": {
+    "path": "/Users/hoppworks/.local/share/agent-builds/rhai/net-read-entry-x58rv1t_",
+    "device": 16777234,
+    "inode": 226333938,
+    "uid": 501
+  },
+  "original_evidence_retained": true
+}

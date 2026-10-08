@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "/root/.local/share/agent-builds/rhai/net-read-entry-d77a121d57/agent-build-1k8u_eo9/target/debug/deps/net_reads-5a7fb7c73591e772",
+    "--list"
+  ],
+  "cwd": "/root/.local/share/agent-builds/rhai/net-read-entry-d77a121d57/agent-build-1k8u_eo9/source",
+  "exit": 0,
+  "seconds": 0.0013928620028309524
+}

@@ -1,0 +1,11 @@
+ Downloading crates ...
+  Downloaded serde_derive v1.0.229
+  Downloaded syn v3.0.6
+   Compiling syn v3.0.6
+   Compiling serde v1.0.229
+   Compiling rhai v1.26.1 (/Users/hoppworks/.local/share/agent-builds/rhai/darwin-semantic-84w72wdv/agent-build-_jxigi5x/source)
+   Compiling rhai_codegen v3.2.0 (/Users/hoppworks/.local/share/agent-builds/rhai/darwin-semantic-84w72wdv/agent-build-_jxigi5x/source/codegen)
+   Compiling serde_derive v1.0.229
+   Compiling smallvec v1.16.2
+   Compiling rmp-serde v1.3.0
+    Finished test [unoptimized + debuginfo] target(s) in 11.15s

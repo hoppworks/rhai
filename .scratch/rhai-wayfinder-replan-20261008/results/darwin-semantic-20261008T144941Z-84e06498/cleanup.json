@@ -1,0 +1,8 @@
+{
+  "accepted": true,
+  "runtime": "/Users/hoppworks/.local/share/agent-builds/rhai/darwin-semantic-84w72wdv/agent-build-_jxigi5x",
+  "runtime_absent": true,
+  "exact_empty_outer_absent": true,
+  "outer_exit": 0,
+  "all_evidence_outside_runtime": true
+}

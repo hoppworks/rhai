@@ -1,0 +1,5 @@
+thread 'registered_stream_functions_work_without_dot_syntax' panicked at tests/net_no_object.rs:78:9:
+assertion `left == right` failed: deliberately wrong independent peer expectation
+  left: [112, 105, 110, 103]
+ right: [112, 97, 110, 103]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

@@ -1,0 +1,10 @@
+{
+  "tests/net_reads.rs": {
+    "file": "net_reads.green.rs",
+    "sha256": "ade22ffae347d79f014600898a4859b1e565b7c2a40612d49cca4a3f3419bbc8"
+  },
+  "src/packages/net/stream.rs": {
+    "file": "stream.green.rs",
+    "sha256": "ce2b44b9ed42bd01026669f8e876db9471064af2297d1e3904a48392631c1d91"
+  }
+}
