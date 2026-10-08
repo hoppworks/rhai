@@ -1,60 +1,74 @@
 # Coordinator state: all-tickets
 
 ## Mode
-Continue already-authorized implementation and strict acceptance; do not create or reactivate a Goal.
+Continue the already authorized implementation and strict acceptance; do not create or reactivate a Goal.
 
 ## Decisions
-Atomic commits use lowercase `hoppworks`. Pushes and coordinator merges are authorized only to private fork `https://github.com/hoppworks/rhai.git` `main`; never write to public upstream. No release/deployment. Verification strict; automatic push/merge selected. Current worktree/branch `task/all-tickets-environment-recovery`, source HEAD `846d4ff0aa2aa1ded90dfe761a515f3f301979ec`. Preserve unrelated dirty shared-child fixture, X29 edits/evidence, foreign Tauron work and processes.
+- Verification is strict; automatic push and coordinator merge are selected.
+- Atomic integration and branch consolidation are authorized only on private fork `https://github.com/hoppworks/rhai.git`, with remote `main` as the sole final branch. Never write to public upstream. No release or deployment.
+- Use commit author name `hoppworks` as explicitly requested. Worktree: `task/all-tickets-environment-recovery`.
+- Preserve unrelated fixture/X29 changes, existing evidence and journals, foreign Tauron work, and all foreign processes. Stage only the package's evidence, plan and state.
 
 ## Current step
-Darwin X24 native row is accepted by combined independent review and recorded in `.scratch/all-tickets/x24-darwin-trywait-20261008/attempt-02/proof.md` and `docs/sys-package-plan.md`. No source/test change was needed. Package C and the wider X24 matrix remain open.
+Darwin X23 has one accepted example row at source `443f15cc85d82e2726888dcbf1bd47f826f7512a`. Native arm64/macOS 27.0.1, Rust/Cargo 1.93.0, `sys`: public Engine/`sys_process` example, real child-file readbacks, pending wait, identical cloned results, expected RED/GREEN, and scoped cleanup. Combined independent review: READY. Proof: `.scratch/all-tickets/darwin-process-example-20261008/attempt-01/proof.md`. This does not close Package C.
 
 ## Next action
-Inventory existing Darwin process/lifecycle tests and accepted native evidence against the still-open Package C criteria; select the smallest real gap and reuse applicable proof before proposing any new run. Do not rerun X24 unless relevant inputs/assertions/environment are invalidated.
+Inspect remaining Package C process/lifecycle criteria against existing tests and native evidence; choose the smallest open Darwin row with an observable OS effect. Reuse accepted F23, sys/net, X23 and X24 evidence. Do not rerun accepted rows without relevant source/assertion/environment change.
 
 ## Goal
-Close every original ticket criterion with applicable strict proof and combined review at the integrated revision, then complete authorized fork-only remote consolidation.
+Close every original criterion in plan §§6.7–6.8 with applicable strict proof and combined review at the integrated revision.
 
 ## Done when
-All original/crosswalk criteria in plan §§6.7–6.8 have applicable proof; after integration, safely consolidate authorized fork branches so remote `main` is sole branch. No public-upstream write, release or deployment.
+All original criteria have proof; verified changes are integrated on authorized fork `main`; remote `main` is the sole branch. No public-upstream write, release or deployment.
 
 ## Steps
-1. Close remaining B/C/D/F criteria in coherent packages with real applicable proof.
-2. Review once per coherent package, integrate to private fork main and read back exact head.
-3. Consolidate only branches proven safely mergeable; verify only remote main remains.
+1. Close remaining B/C/D/F criteria in coherent packages.
+2. Review each package once, integrate to fork `main`, and read back its exact head.
+3. Consolidate only safely mergeable fork branches; verify `main` alone remains.
 
 ## Done steps
-Package A: Linux/Rust 1.77.2 only. X22, X24, X29, X30 and X14/X16/X17 have scoped Linux evidence at plan rows. Package E metadata/docs integrated at `04d9a797...`; Darwin alias assertions at `ad980d80...`. F23 sys-policy slice integrated at `055a068...`; default-feature Darwin sys/net coexistence accepted at that source. X24 now also has one accepted Darwin row at `846d4ff...`.
+Package A: committed-child first-cause semantics, Linux/Rust 1.77.2 only; six controls and READY review at `d4fc2890…`. Package E metadata/docs integrated at `04d9a797…`; Darwin alias assertions at `ad980d80…`. F23 Darwin policy slice accepted at `055a068…`. Darwin sys/net coexistence accepted at `055a068…`. X23 and X24 now have named Darwin rows; neither closes Package C.
 
 ## Accepted evidence
-F23 `.scratch/all-tickets/darwin-f23-sys-policy-20261008/attempt-01/`: Darwin arm64/macOS 27.0.1, Rust 1.93.0, `testing-environ,sys`, RED plus 26/26 target tests; only macOS sys-policy slice. Combined sys/net `.scratch/all-tickets/combined-sys-net-darwin-20261008/{attempt-01,attempt-02}/`: source `055a068...`, same manifest/test/lock pins, Rust 1.93.0, `testing-environ,sys,net`, Engine file/TCP readbacks and typed errors; READY review; only default-feature coexistence slice. X24 Darwin `.scratch/all-tickets/x24-darwin-trywait-20261008/attempt-02/proof.md`: native public Engine, live child, pending unit, direct terminal result, cached wait, independent ESRCH; expected RED and GREEN; READY review. Adds only Darwin arm64/macOS 27.0.1, Rust 1.93.0, `testing-environ,sys`. Other platforms/features/MSRV and remaining Ticket 03 behavior remain open.
+- A evidence and custody refs are in plan §6.3.
+- F23: Darwin macOS `sys_policy`, 26/26 tests and READY review; other OS/features remain open.
+- Darwin default `sys,net`: host-file/TCP peer readbacks and typed errors, READY review; only this feature slice.
+- X23: proof `.scratch/all-tickets/darwin-process-example-20261008/attempt-01/proof.md`, source `443f15cc…`; public Engine example, child-file readbacks, pending wait, identical clone results, RED/GREEN and cleanup; READY review. Named Darwin profile only.
+- X24: Linux Rust 1.93/1.77 and Darwin 1.93 try-wait rows; direct terminal observation, cached result and independent reaping; READY review. Darwin proof `.scratch/all-tickets/x24-darwin-trywait-20261008/attempt-02/proof.md`.
+- Reuse only while source, assertions, lock, toolchain and environment remain applicable. Full P/E/F/X/R crosswalk is in plan §§6.7–6.8.
 
 ## Open work
-Ticket 03 B lifecycle/cancellation; C remaining Darwin process/lifecycle, TCP and feature rows; D Windows custody/native behavior; F integrated compatibility/release matrix; remaining F23 platform/feature rows. Preserve local contracts and original P/E/F/X/R requirements in plan §§6.7–6.8. Do not reopen exhausted Workhorse/Windows paths or drive another Session's guest. Release readiness is not publishing/deploy authorization.
+Ticket 03 B lifecycle/cancellation; C remaining Darwin process/lifecycle, TCP and feature rows; D Windows custody/native behavior; F integrated compatibility/release matrix; remaining F23 platform/feature rows. Preserve every original criterion and local contract. Stopped criteria remain open. Release readiness grants no publishing/deploy permission.
 
 ## Open escalations
-No active escalation. Cause 25 is closed by READY review and the record-only acceptance update; answer path is `.scratch/all-tickets/escalations/25-darwin-x24-libtest-output-shape.answer.md`. Cause 11 has its separate historical answer and is not reopened.
+None active. Cause 25 was closed by READY review and one record-only update; answer `.scratch/all-tickets/escalations/25-darwin-x24-libtest-output-shape.answer.md`. Earlier cause 11 remains historical and closed.
 
 ## Retained resources
-X24 attempts 01/02 export raw logs, source/lock/toolchain pins, validator outputs and exact scope-cleanup receipts; private scopes were removed. Build time recorded: 14.44+0.06s RED and 19.95+0.03s GREEN; 34.48s reported phases, not total active work or peak. No build is retained. Reuse prior artifacts only while source, assertions, lock, toolchain and environment match. Future builds require unique `~/.local/share/agent-builds/rhai/<session>`, canonical `tools/run_scoped.py`, scoped `TMPDIR` plus outputs/caches under `AGENT_RUNTIME_DIR`, and actual-filesystem capacity measurement. Clean only exact owned inactive disposable resources.
+No X23 build remains; proof confirms private runtime and owned TMPDIR removal. Future builds use a unique `~/.local/share/agent-builds/rhai/<session>`, `tools/run_scoped.py`, scoped TMPDIR and outputs/caches under `AGENT_RUNTIME_DIR`, with actual-filesystem capacity checks. Clean only proven owned inactive disposable resources.
 
 ## Cause history
-X24 cause `darwin-x24-libtest-output-shape`: attempt-01 reached deliberate `wait_code 0→7` assertion RED, Cargo 101; wrapper status 1 because it expected same-line test/status tokens. Attempt-02 exact target was green, Cargo 0 / 1 passed, with same-PID lifecycle markers and ESRCH; wrapper again returned 1 from the same parser assumption. Both `scope-cleanup.txt` receipts say PASS. These are two record-validator failures, not product/correction failures. Escalation 25 review READY and one record-only follow-up completed; answer `.scratch/all-tickets/escalations/25-darwin-x24-libtest-output-shape.answer.md` accepts the named Darwin row and distinguishes cached-wait sensitivity from direct try-wait assertions. Preserve erroneous `test-result.json` unchanged; proof supersedes only its classification. No third build or parser wrapper. Earlier split-stream cause 11 remains a separate answered issue; do not reopen it.
+- B: three Workhorse `SESSION_SCOPE` pre-assertion infrastructure stops; one follow-up consumed. No Rust assertion ran. Do not retry this stopped path or use native110.
+- E native3: three pre-assertion failures and exhausted follow-up. Darwin attempts 11/12 supply reusable proof; 12a stopped before Cargo.
+- F23 attempts 01/02 stopped before assertions on offline `rustyline` and `zerocopy 0.8.61`; attempt 03 passed online. Do not repeat absent invalidation.
+- X24 `darwin-x24-libtest-output-shape`: deliberate RED 101; GREEN 0/1 passed. Two wrappers returned 1 because they expected same-line libtest tokens. Validator failures, not product/correction failures. No third build; preserve raw derivatives. Side-branch `2f795ece…` is not an ancestor of fork main; its old source/lock pins are invalid here.
 
 ## Budgets
-X24's two launches used 34.48s of recorded compile/test phases; total active time and peaks unknown. Expert #25 completed before its 30-minute planning checkpoint; exact time/cost/tokens unknown. F23 attempts 01/02 stopped before assertions on incomplete offline Cargo caches (`rustyline`, then `zerocopy 0.8.61`); attempt 03 was online locked correction. Combined sys/net used about 23s RED and 22s GREEN. Package B had three Workhorse `SESSION_SCOPE` pre-assertion stops; follow-up consumed. Package E native3 had three pre-assertion failures and exhausted follow-up; attempts 11/12 provide reusable Darwin proof and 12a stopped before Cargo. Preserve all original counts and accepted evidence; never reset history. Older aggregate active time unavailable.
+X24 compile/test phases: 34.48s. X23 scoped run: 41.284s. Combined sys/net: about 23s RED and 22s GREEN. Package B/E counts above are cumulative. Expert #25 stayed within its 30-minute planning checkpoint. Total active time, peaks, and exact role cost/tokens are unknown when not recorded; never reset history.
 
 ## Rule state
-User supplied Main `35ba734135a64100b891f422d4ced9d76795ab57`; central repo HEAD is descendant `0e846bfc577a51bd1a98a5606966aecda40320c2`, with no relevant uncommitted rule changes. Coordinator read global/project AGENTS plus campaign, e2e-proof, tdd, ocr-delegate and resource rules. Fresh Expert independently read the specified commit, current descendant and current applicable rules; the applicable later change removes fixed heavy-run counts only. No other active subagents; other Sessions' loaded revisions are unknown. Project `docs/agents/resource-lifecycle.md` is absent; project AGENTS fallback applies.
+Required Agent-Skills Main `35ba734135a64100b891f422d4ced9d76795ab57` is an ancestor of central HEAD `0e846bfc577a51bd1a98a5606966aecda40320c2`; no relevant uncommitted rule changes. The only applicable later rule change removes fixed heavy-run counts. Coordinator and independent reviewer re-read global/project/applicable skills; reviewer confirmed the revision. No subagents are running; other Sessions' rule states are unknown. Project `docs/agents/resource-lifecycle.md` is absent; project AGENTS fallback applies. Preserve pre-existing dirty/untracked evidence and journals.
 
 ## History
-`campaign/scripts/state.py rewrite` archives replaced state under `.scratch/all-tickets/journal/`. Prior approvals, limits, criteria, proof and cause history remain there; detailed criterion map is plan §§6.7–6.8 and prior states. Side-branch `2f795ece...` is not an ancestor of integrated fork main and its old source/lock pins are invalid for this route.
-- Previous state: journal/state-d85ccd4c90904a87a6242cbef6e3b877.md
+`campaign/scripts/state.py rewrite` archives the replaced state under `.scratch/all-tickets/journal/`. Prior decisions, limits and cause details remain in those snapshots and plan §§6.7–6.8.
+- Previous state: journal/state-f37e1b5106b44fbda13eec8a94e583a7.md
 
 ## Retrospective
-The Darwin target passed; two wrapper failures shared one same-line output assumption. Preserve raw outcomes and correct the derivative classification once. Do not rebuild or add a parser layer for this record-only issue.
+Darwin X23 passed the intended RED/GREEN path and cleanup; one combined independent review accepted only the named row. Reuse accepted proof, avoid another wrapper or build, and keep Package C open.
 
 ## Workflow choices
+- Verification: strict
+- Push: automatic
+- Merge: automatic
 - Verification: strict
 - Push: automatic
 - Merge: automatic
