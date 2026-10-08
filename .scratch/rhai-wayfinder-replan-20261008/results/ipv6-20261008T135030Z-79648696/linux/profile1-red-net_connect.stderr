@@ -1,0 +1,5 @@
+thread 'ipv6_connect_requires_the_exact_numeric_endpoint_and_delivers_peer_bytes' panicked at tests/net_connect.rs:84:5:
+assertion `left == right` failed: independent IPv6 peer receives the exact script bytes
+  left: [105, 112, 118, 54, 45, 112, 101, 101, 114]
+ right: [119, 114, 111, 110, 103, 112, 101, 101, 114]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

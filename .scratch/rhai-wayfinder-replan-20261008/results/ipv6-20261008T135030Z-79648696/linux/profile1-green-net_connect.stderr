@@ -1,0 +1,1 @@
+ipv6_connect endpoint=[::1]:37817 denied_peer_absent=true exact_bytes=true eof=true

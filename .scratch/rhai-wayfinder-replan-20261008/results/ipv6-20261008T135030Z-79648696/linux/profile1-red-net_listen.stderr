@@ -1,0 +1,5 @@
+thread 'ipv6_port_zero_listener_uses_its_own_grant_and_reports_real_peer_bytes' panicked at tests/net_listen.rs:94:5:
+assertion `left == right` failed: independent IPv6 client receives exact accepted-stream bytes
+  left: [105, 112, 118, 54, 45, 108, 105, 115, 116, 101, 110]
+ right: [119, 114, 111, 110, 103, 108, 105, 115, 116, 101, 110]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

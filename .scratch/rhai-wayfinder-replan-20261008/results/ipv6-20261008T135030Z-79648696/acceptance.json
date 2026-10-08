@@ -1,0 +1,17 @@
+{
+  "accepted": true,
+  "review_sha256": "b65e34943033b15ab9ae661adbc67ec3d51a2efd101a57181b1eb25110d7e0c7",
+  "scope": "IPv6 exact connect/listen grants and independent bytes/EOF/refused-listener only",
+  "platforms": [
+    "Darwin arm64",
+    "Linux x86_64"
+  ],
+  "profiles": [
+    "net",
+    "net,sync,no_index"
+  ],
+  "toolchain": "1.77.2",
+  "accepted_selector_rows": 8,
+  "full_tcp_package_complete": false,
+  "product_backend_changed": false
+}

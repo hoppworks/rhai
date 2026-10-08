@@ -1,0 +1,35 @@
+{
+  "revision": "ef423a516617e128835d54af16d75f559b2b1bce",
+  "source_archive": "/root/rhai-evidence/wayfinder-20261008/unix-wait-93576e4c32/source.tar",
+  "source_sha256": "635a59827900b02ad82b0e53499f6b3fb2a5c5233326cac541c88c3e8b61265f",
+  "owned_patch_sha256": "e3bd8ba871f2f8e8c22be49544cdf59572d33402a3c778cf7c4d22b7137f426a",
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "profiles": [
+    "net",
+    "net,sync,no_index"
+  ],
+  "toolchain": "1.77.2",
+  "tests": [
+    {
+      "target": "net_connect",
+      "selector": "ipv6_connect_requires_the_exact_numeric_endpoint_and_delivers_peer_bytes",
+      "file": "tests/net_connect.rs",
+      "source_sha256": "4d03943e8625cf08247068aa24b72bf87d3c505dfd4957634ed5f132a02356f4",
+      "old": "b\"ipv6-peer\"",
+      "red": "b\"wrongpeer\"",
+      "assertion": "independent IPv6 peer receives the exact script bytes",
+      "readback": "ipv6_connect endpoint="
+    },
+    {
+      "target": "net_listen",
+      "selector": "ipv6_port_zero_listener_uses_its_own_grant_and_reports_real_peer_bytes",
+      "file": "tests/net_listen.rs",
+      "source_sha256": "c452d9625eb665dd7caee4ab185debeb71033cb30eeeecccc680061815995515",
+      "old": "b\"ipv6-listen\"",
+      "red": "b\"wronglisten\"",
+      "assertion": "independent IPv6 client receives exact accepted-stream bytes",
+      "readback": "ipv6_listen endpoint="
+    }
+  ],
+  "native_platform": "Linux x86_64"
+}

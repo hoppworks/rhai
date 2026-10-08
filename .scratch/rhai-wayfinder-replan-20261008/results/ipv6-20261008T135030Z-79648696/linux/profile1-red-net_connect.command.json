@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "/root/.local/share/agent-builds/rhai/ipv6-26e70d5b06/agent-build-nybly4ni/target/debug/deps/net_connect-a7adce20abb499e6",
+    "ipv6_connect_requires_the_exact_numeric_endpoint_and_delivers_peer_bytes",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": "/root/.local/share/agent-builds/rhai/ipv6-26e70d5b06/agent-build-nybly4ni/source",
+  "exit": 101,
+  "seconds": 0.0073679299966897815
+}

@@ -53,6 +53,41 @@ fn authorized_connect_is_observed_and_clone_close_is_shared() {
 }
 
 #[test]
+fn ipv6_connect_requires_the_exact_numeric_endpoint_and_delivers_peer_bytes() {
+    let listener = TcpListener::bind("[::1]:0").expect("native IPv6 loopback is required for this row");
+    let endpoint = listener.local_addr().unwrap();
+    let other_port = if endpoint.port() == u16::MAX { endpoint.port() - 1 } else { endpoint.port() + 1 };
+    for config in [
+        NetConfig::default(),
+        NetConfig::default().allow_connect(SocketAddr::new("127.0.0.1".parse().unwrap(), endpoint.port())),
+        NetConfig::default().allow_connect(SocketAddr::new(endpoint.ip(), other_port)),
+        NetConfig::default().allow_listen(endpoint),
+    ] {
+        let denied = build_engine(config)
+            .eval::<bool>(&format!(r#"let denied = false; try {{ connect("::1", {}); }} catch (err) {{ denied = err.kind == "Denied" && err.op == "connect"; }} denied"#, endpoint.port()))
+            .unwrap();
+        assert!(denied, "only the exact IPv6 connect grant authorizes this endpoint");
+    }
+    listener.set_nonblocking(true).unwrap();
+    assert!(matches!(listener.accept(), Err(error) if error.kind() == std::io::ErrorKind::WouldBlock), "denied grants must not create a peer connection");
+
+    let engine = build_engine(NetConfig::default().allow_connect(endpoint));
+    engine
+        .run(&format!(r#"let stream = connect("::1", {}); stream.write_all_string("ipv6-peer"); stream.close();"#, endpoint.port()))
+        .unwrap();
+    let mut peer = wait_accept(&listener);
+    assert_eq!(peer.local_addr().unwrap(), endpoint);
+    assert!(peer.peer_addr().unwrap().is_ipv6());
+    peer.set_read_timeout(Some(Duration::from_secs(2))).unwrap();
+    let mut observed = [0_u8; 9];
+    peer.read_exact(&mut observed).unwrap();
+    assert_eq!(&observed, b"ipv6-peer", "independent IPv6 peer receives the exact script bytes");
+    let mut tail = [0_u8; 1];
+    assert_eq!(peer.read(&mut tail).unwrap(), 0, "script close reaches the IPv6 peer as EOF");
+    eprintln!("ipv6_connect endpoint={endpoint} denied_peer_absent=true exact_bytes=true eof=true");
+}
+
+#[test]
 fn denied_and_invalid_endpoints_do_not_reach_peer_and_errors_are_catchable() {
     let listener = TcpListener::bind("127.0.0.1:0").unwrap();
     let engine = build_engine(NetConfig::default());

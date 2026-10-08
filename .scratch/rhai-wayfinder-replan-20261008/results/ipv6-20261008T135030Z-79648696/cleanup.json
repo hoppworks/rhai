@@ -1,0 +1,12 @@
+{
+  "runtime_absent": true,
+  "scope_absent": true,
+  "retired_outer_identity": {
+    "path": "/Users/hoppworks/.local/share/agent-builds/rhai/ipv6-n2he8tjp",
+    "device": 16777234,
+    "inode": 226106836,
+    "uid": 501
+  },
+  "logs_readable": true,
+  "socket_readbacks": "every GREEN: independent bytes, EOF, closed listener refusal"
+}

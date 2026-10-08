@@ -1,0 +1,101 @@
+{
+  "accepted": true,
+  "rows": [
+    {
+      "profile": "net",
+      "phase": "red",
+      "target": "net_connect",
+      "selector": "ipv6_connect_requires_the_exact_numeric_endpoint_and_delivers_peer_bytes",
+      "exit": 101,
+      "executable_sha256": "d8f020a72f4a0109e1b523bf53c08747ebff073a5195df4d0091ab8c7a72caf3",
+      "test_source_sha256": "5ddbdc353163a702f00c739a09488772b3d1f0d2924a33196552e01d4f46a47c",
+      "log": "profile0-red-net_connect"
+    },
+    {
+      "profile": "net",
+      "phase": "red",
+      "target": "net_listen",
+      "selector": "ipv6_port_zero_listener_uses_its_own_grant_and_reports_real_peer_bytes",
+      "exit": 101,
+      "executable_sha256": "b993c6419e581cd7b05cd1f3348351f4eb36b87b26fdeebd39ff33a8990bc217",
+      "test_source_sha256": "227bb6df67c6cdc85b1e8a72bcb95a5bc828f0f1e898cb5d59343ed21187aa16",
+      "log": "profile0-red-net_listen"
+    },
+    {
+      "profile": "net",
+      "phase": "green",
+      "target": "net_connect",
+      "selector": "ipv6_connect_requires_the_exact_numeric_endpoint_and_delivers_peer_bytes",
+      "exit": 0,
+      "executable_sha256": "f05ea4934996211e26992d1500d57cb94edf997d3c0c4709a21ef8debbb4655a",
+      "test_source_sha256": "4d03943e8625cf08247068aa24b72bf87d3c505dfd4957634ed5f132a02356f4",
+      "log": "profile0-green-net_connect"
+    },
+    {
+      "profile": "net",
+      "phase": "green",
+      "target": "net_listen",
+      "selector": "ipv6_port_zero_listener_uses_its_own_grant_and_reports_real_peer_bytes",
+      "exit": 0,
+      "executable_sha256": "4c5bb53f6426ae65d5391a7e9e88758f9442d84ac1037fcadd4a35914f65b693",
+      "test_source_sha256": "c452d9625eb665dd7caee4ab185debeb71033cb30eeeecccc680061815995515",
+      "log": "profile0-green-net_listen"
+    },
+    {
+      "profile": "net,sync,no_index",
+      "phase": "red",
+      "target": "net_connect",
+      "selector": "ipv6_connect_requires_the_exact_numeric_endpoint_and_delivers_peer_bytes",
+      "exit": 101,
+      "executable_sha256": "6f708ec330c91eadb8340d856df9158243dca7c1b15149d69de4934a95867e94",
+      "test_source_sha256": "5ddbdc353163a702f00c739a09488772b3d1f0d2924a33196552e01d4f46a47c",
+      "log": "profile1-red-net_connect"
+    },
+    {
+      "profile": "net,sync,no_index",
+      "phase": "red",
+      "target": "net_listen",
+      "selector": "ipv6_port_zero_listener_uses_its_own_grant_and_reports_real_peer_bytes",
+      "exit": 101,
+      "executable_sha256": "f2defc51a5a108ee52155960d959ec84ac3bb1b57c181f204cbdc063006a0e5d",
+      "test_source_sha256": "227bb6df67c6cdc85b1e8a72bcb95a5bc828f0f1e898cb5d59343ed21187aa16",
+      "log": "profile1-red-net_listen"
+    },
+    {
+      "profile": "net,sync,no_index",
+      "phase": "green",
+      "target": "net_connect",
+      "selector": "ipv6_connect_requires_the_exact_numeric_endpoint_and_delivers_peer_bytes",
+      "exit": 0,
+      "executable_sha256": "55c793264cb521e02a5fce0ef13f22da32a85c3acc3964c660ab218f2c9b4bc8",
+      "test_source_sha256": "4d03943e8625cf08247068aa24b72bf87d3c505dfd4957634ed5f132a02356f4",
+      "log": "profile1-green-net_connect"
+    },
+    {
+      "profile": "net,sync,no_index",
+      "phase": "green",
+      "target": "net_listen",
+      "selector": "ipv6_port_zero_listener_uses_its_own_grant_and_reports_real_peer_bytes",
+      "exit": 0,
+      "executable_sha256": "2999d4bfcc84095a6eb8bfd55267d683666ec23bd181a8031ba6807a595f25c6",
+      "test_source_sha256": "c452d9625eb665dd7caee4ab185debeb71033cb30eeeecccc680061815995515",
+      "log": "profile1-green-net_listen"
+    }
+  ],
+  "runtime": "/root/.local/share/agent-builds/rhai/ipv6-26e70d5b06/agent-build-nybly4ni",
+  "runtime_identity": {
+    "device": 58,
+    "inode": 117295409
+  },
+  "environment": {
+    "os": "Linux-7.2.8-ogc5.1.fc44.x86_64-x86_64-with-glibc2.43",
+    "machine": "x86_64",
+    "rustc": "rustc 1.77.2 (25ef9e3d8 2024-04-09)",
+    "cargo": "cargo 1.77.2 (e52e36006 2024-03-26)"
+  },
+  "runtime_bytes": 1664425984,
+  "restored_sources": {
+    "tests/net_connect.rs": "4d03943e8625cf08247068aa24b72bf87d3c505dfd4957634ed5f132a02356f4",
+    "tests/net_listen.rs": "c452d9625eb665dd7caee4ab185debeb71033cb30eeeecccc680061815995515"
+  }
+}

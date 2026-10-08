@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "/root/.local/share/agent-builds/rhai/ipv6-26e70d5b06/agent-build-nybly4ni/target/debug/deps/net_listen-c9a80d2ee31ece8f",
+    "ipv6_port_zero_listener_uses_its_own_grant_and_reports_real_peer_bytes",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": "/root/.local/share/agent-builds/rhai/ipv6-26e70d5b06/agent-build-nybly4ni/source",
+  "exit": 0,
+  "seconds": 0.015482585993595421
+}

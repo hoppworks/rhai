@@ -1,0 +1,102 @@
+diff --git a/tests/net_connect.rs b/tests/net_connect.rs
+index 221fa1bc6..8aa51796e 100644
+--- a/tests/net_connect.rs
++++ b/tests/net_connect.rs
+@@ -52,6 +52,41 @@ fn authorized_connect_is_observed_and_clone_close_is_shared() {
+     }
+ }
+ 
++#[test]
++fn ipv6_connect_requires_the_exact_numeric_endpoint_and_delivers_peer_bytes() {
++    let listener = TcpListener::bind("[::1]:0").expect("native IPv6 loopback is required for this row");
++    let endpoint = listener.local_addr().unwrap();
++    let other_port = if endpoint.port() == u16::MAX { endpoint.port() - 1 } else { endpoint.port() + 1 };
++    for config in [
++        NetConfig::default(),
++        NetConfig::default().allow_connect(SocketAddr::new("127.0.0.1".parse().unwrap(), endpoint.port())),
++        NetConfig::default().allow_connect(SocketAddr::new(endpoint.ip(), other_port)),
++        NetConfig::default().allow_listen(endpoint),
++    ] {
++        let denied = build_engine(config)
++            .eval::<bool>(&format!(r#"let denied = false; try {{ connect("::1", {}); }} catch (err) {{ denied = err.kind == "Denied" && err.op == "connect"; }} denied"#, endpoint.port()))
++            .unwrap();
++        assert!(denied, "only the exact IPv6 connect grant authorizes this endpoint");
++    }
++    listener.set_nonblocking(true).unwrap();
++    assert!(matches!(listener.accept(), Err(error) if error.kind() == std::io::ErrorKind::WouldBlock), "denied grants must not create a peer connection");
++
++    let engine = build_engine(NetConfig::default().allow_connect(endpoint));
++    engine
++        .run(&format!(r#"let stream = connect("::1", {}); stream.write_all_string("ipv6-peer"); stream.close();"#, endpoint.port()))
++        .unwrap();
++    let mut peer = wait_accept(&listener);
++    assert_eq!(peer.local_addr().unwrap(), endpoint);
++    assert!(peer.peer_addr().unwrap().is_ipv6());
++    peer.set_read_timeout(Some(Duration::from_secs(2))).unwrap();
++    let mut observed = [0_u8; 9];
++    peer.read_exact(&mut observed).unwrap();
++    assert_eq!(&observed, b"ipv6-peer", "independent IPv6 peer receives the exact script bytes");
++    let mut tail = [0_u8; 1];
++    assert_eq!(peer.read(&mut tail).unwrap(), 0, "script close reaches the IPv6 peer as EOF");
++    eprintln!("ipv6_connect endpoint={endpoint} denied_peer_absent=true exact_bytes=true eof=true");
++}
++
+ #[test]
+ fn denied_and_invalid_endpoints_do_not_reach_peer_and_errors_are_catchable() {
+     let listener = TcpListener::bind("127.0.0.1:0").unwrap();
+diff --git a/tests/net_listen.rs b/tests/net_listen.rs
+index 1b8dd88b5..bcb7b398c 100644
+--- a/tests/net_listen.rs
++++ b/tests/net_listen.rs
+@@ -3,6 +3,7 @@
+ use rhai::packages::net::{NetConfig, NetPackage};
+ use rhai::packages::Package;
+ use rhai::{Engine, Scope};
++use std::io::Read;
+ use std::net::{SocketAddr, TcpStream};
+ use std::time::{Duration, Instant};
+ 
+@@ -60,6 +61,43 @@ fn authorized_listener_accepts_an_independent_peer() {
+     assert_eq!(accepted_peer, expected_peer, "accepted peer matches the independently created socket");
+ }
+ 
++#[test]
++fn ipv6_port_zero_listener_uses_its_own_grant_and_reports_real_peer_bytes() {
++    for config in [
++        NetConfig::default(),
++        NetConfig::default().allow_connect("[::1]:1".parse().unwrap()),
++        NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()),
++        NetConfig::default().allow_listen("[::1]:1".parse().unwrap()),
++    ] {
++        let denied = build_engine(config)
++            .eval::<bool>(r#"let denied = false; try { listen("::1", 0); } catch (err) { denied = err.kind == "Denied" && err.op == "listen"; } denied"#)
++            .unwrap();
++        assert!(denied, "IPv6 port0 listen needs its own exact listen grant");
++    }
++    let engine = build_engine(NetConfig::default().allow_listen("[::1]:0".parse().unwrap()));
++    let mut scope = Scope::new();
++    engine.run_with_scope(&mut scope, r#"let listener = listen("::1", 0);"#).unwrap();
++    let address = engine.eval_with_scope::<String>(&mut scope, "listener.local_addr").unwrap();
++    let endpoint: SocketAddr = address.parse().unwrap();
++    assert_eq!(endpoint.ip(), "::1".parse::<std::net::IpAddr>().unwrap());
++    assert_ne!(endpoint.port(), 0, "the OS must select an actual IPv6 listener port");
++    let mut peer = TcpStream::connect_timeout(&endpoint, Duration::from_secs(2)).unwrap();
++    let peer_address = peer.local_addr().unwrap().to_string();
++    let accepted_address = engine
++        .eval_with_scope::<String>(&mut scope, "let accepted = listener.accept(500); accepted.peer_addr")
++        .unwrap();
++    assert_eq!(accepted_address, peer_address, "accepted IPv6 peer identity matches the independent socket");
++    engine.run_with_scope(&mut scope, r#"accepted.write_all_string("ipv6-listen"); accepted.close(); listener.close();"#).unwrap();
++    peer.set_read_timeout(Some(Duration::from_secs(2))).unwrap();
++    let mut observed = [0_u8; 11];
++    peer.read_exact(&mut observed).unwrap();
++    assert_eq!(&observed, b"ipv6-listen", "independent IPv6 client receives exact accepted-stream bytes");
++    let mut tail = [0_u8; 1];
++    assert_eq!(peer.read(&mut tail).unwrap(), 0);
++    assert!(matches!(TcpStream::connect_timeout(&endpoint, Duration::from_secs(2)), Err(error) if error.kind() == std::io::ErrorKind::ConnectionRefused), "closed IPv6 listener refuses a fresh peer");
++    eprintln!("ipv6_listen endpoint={endpoint} peer_identity=true exact_bytes=true eof=true listener_closed=true");
++}
++
+ #[test]
+ fn denied_and_invalid_listener_endpoints_never_bind() {
+     let occupied = std::net::TcpListener::bind("127.0.0.1:0").unwrap();

@@ -1,0 +1,19 @@
+{
+  "argv": [
+    "cargo",
+    "+1.77.2",
+    "test",
+    "--locked",
+    "--features",
+    "testing-environ,net,sync,no_index",
+    "--test",
+    "net_connect",
+    "--test",
+    "net_listen",
+    "--no-run",
+    "--message-format=json"
+  ],
+  "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/ipv6-n2he8tjp/agent-build-h1uzdcwo/source",
+  "exit": 0,
+  "seconds": 7.172890834
+}

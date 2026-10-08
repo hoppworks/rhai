@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "/root/.local/share/agent-builds/rhai/ipv6-26e70d5b06/agent-build-nybly4ni/target/debug/deps/net_listen-e688feb1068c17a5",
+    "--list"
+  ],
+  "cwd": "/root/.local/share/agent-builds/rhai/ipv6-26e70d5b06/agent-build-nybly4ni/source",
+  "exit": 0,
+  "seconds": 0.0011971930071013048
+}

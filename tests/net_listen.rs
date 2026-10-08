@@ -3,6 +3,7 @@
 use rhai::packages::net::{NetConfig, NetPackage};
 use rhai::packages::Package;
 use rhai::{Engine, Scope};
+use std::io::Read;
 use std::net::{SocketAddr, TcpStream};
 use std::time::{Duration, Instant};
 
@@ -58,6 +59,43 @@ fn authorized_listener_accepts_an_independent_peer() {
         .expect("script accepts the independent client and reports its peer");
     let expected_peer = if std::env::var_os("RHAI_NET_WRONG_PEER_EXPECTATION").is_some() { "127.0.0.1:1" } else { client_address.as_str() };
     assert_eq!(accepted_peer, expected_peer, "accepted peer matches the independently created socket");
+}
+
+#[test]
+fn ipv6_port_zero_listener_uses_its_own_grant_and_reports_real_peer_bytes() {
+    for config in [
+        NetConfig::default(),
+        NetConfig::default().allow_connect("[::1]:1".parse().unwrap()),
+        NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()),
+        NetConfig::default().allow_listen("[::1]:1".parse().unwrap()),
+    ] {
+        let denied = build_engine(config)
+            .eval::<bool>(r#"let denied = false; try { listen("::1", 0); } catch (err) { denied = err.kind == "Denied" && err.op == "listen"; } denied"#)
+            .unwrap();
+        assert!(denied, "IPv6 port0 listen needs its own exact listen grant");
+    }
+    let engine = build_engine(NetConfig::default().allow_listen("[::1]:0".parse().unwrap()));
+    let mut scope = Scope::new();
+    engine.run_with_scope(&mut scope, r#"let listener = listen("::1", 0);"#).unwrap();
+    let address = engine.eval_with_scope::<String>(&mut scope, "listener.local_addr").unwrap();
+    let endpoint: SocketAddr = address.parse().unwrap();
+    assert_eq!(endpoint.ip(), "::1".parse::<std::net::IpAddr>().unwrap());
+    assert_ne!(endpoint.port(), 0, "the OS must select an actual IPv6 listener port");
+    let mut peer = TcpStream::connect_timeout(&endpoint, Duration::from_secs(2)).unwrap();
+    let peer_address = peer.local_addr().unwrap().to_string();
+    let accepted_address = engine
+        .eval_with_scope::<String>(&mut scope, "let accepted = listener.accept(500); accepted.peer_addr")
+        .unwrap();
+    assert_eq!(accepted_address, peer_address, "accepted IPv6 peer identity matches the independent socket");
+    engine.run_with_scope(&mut scope, r#"accepted.write_all_string("ipv6-listen"); accepted.close(); listener.close();"#).unwrap();
+    peer.set_read_timeout(Some(Duration::from_secs(2))).unwrap();
+    let mut observed = [0_u8; 11];
+    peer.read_exact(&mut observed).unwrap();
+    assert_eq!(&observed, b"ipv6-listen", "independent IPv6 client receives exact accepted-stream bytes");
+    let mut tail = [0_u8; 1];
+    assert_eq!(peer.read(&mut tail).unwrap(), 0);
+    assert!(matches!(TcpStream::connect_timeout(&endpoint, Duration::from_secs(2)), Err(error) if error.kind() == std::io::ErrorKind::ConnectionRefused), "closed IPv6 listener refuses a fresh peer");
+    eprintln!("ipv6_listen endpoint={endpoint} peer_identity=true exact_bytes=true eof=true listener_closed=true");
 }
 
 #[test]

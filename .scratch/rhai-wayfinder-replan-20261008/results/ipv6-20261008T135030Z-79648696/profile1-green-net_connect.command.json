@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "/Users/hoppworks/.local/share/agent-builds/rhai/ipv6-n2he8tjp/agent-build-h1uzdcwo/target/debug/deps/net_connect-f365b4d87bc6864a",
+    "ipv6_connect_requires_the_exact_numeric_endpoint_and_delivers_peer_bytes",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/ipv6-n2he8tjp/agent-build-h1uzdcwo/source",
+  "exit": 0,
+  "seconds": 0.021737874999999462
+}

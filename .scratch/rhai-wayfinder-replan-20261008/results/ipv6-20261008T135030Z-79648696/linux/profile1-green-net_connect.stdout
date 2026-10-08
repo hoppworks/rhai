@@ -1,0 +1,6 @@
+
+running 1 test
+test ipv6_connect_requires_the_exact_numeric_endpoint_and_delivers_peer_bytes ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 4 filtered out; finished in 0.01s
+
