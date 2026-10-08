@@ -1,0 +1,2 @@
+all_rows=accepted
+source_restored=true

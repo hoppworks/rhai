@@ -1,0 +1,11 @@
+source_commit=05320c2c9bf3d4396956632e0cc1706e96c94b15
+lock_sha256=2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425
+unix_source_sha256=55dc5ad528ad2b4fd56d3fcdd42f92af0b30bf3f96db37c476ee31320dcba713
+process_package_sha256=090094476662417aa94e2ff519cb8038c1d3721e02be6ec166762502bfbff2e2
+manifest_sha256=cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e
+features=testing-environ,sys,sync;testing-environ,sys,sync,no_float
+test=packages::sys::process::unix::tests::public_wait_is_cancelled_after_entering_condvar
+overall_timeout_seconds=600
+cargo_jobs=1
+expected_peak_storage_bytes=4294967296
+failure_classification=exit status plus exact assertion marker and libtest result, with observed wait-entry and child ESRCH

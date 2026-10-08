@@ -1,0 +1,97 @@
+   Compiling rhai v1.26.1 (/Users/hoppworks/.local/share/agent-builds/rhai/x31-darwin-msrv-20261008-attempt05-411C257D0D7243AFB4D707707709D142/agent-build-c5dmhx1c/source)
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:678:13
+    |
+678 |         let mut wait_operation = "wait for child";
+    |             ----^^^^^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` on by default
+
+warning: unused variable: `termination`
+    --> src/packages/sys/process/unix.rs:1118:22
+     |
+1118 |                 let (termination, _operation) = if self.managed {
+     |                      ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_termination`
+     |
+     = note: `#[warn(unused_variables)]` on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2378:9
+     |
+2378 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2721:9
+     |
+2721 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: function `schedule_first_cause_plan` is never used
+    --> src/packages/sys/process/unix.rs:3724:8
+     |
+3724 |     fn schedule_first_cause_plan(
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^
+     |
+     = note: `#[warn(dead_code)]` on by default
+
+warning: function `synchronize_overflow_deadline_for_next_execution` is never used
+    --> src/packages/sys/process/unix.rs:3964:8
+     |
+3964 |     fn synchronize_overflow_deadline_for_next_execution(
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: function `try_release_fifo` is never used
+    --> src/packages/sys/process/unix.rs:4471:8
+     |
+4471 |     fn try_release_fifo(path: &Path) -> io::Result<()> {
+     |        ^^^^^^^^^^^^^^^^
+
+warning: function `public_child_error` is never used
+    --> src/packages/sys/process/unix.rs:5023:8
+     |
+5023 |     fn public_child_error(
+     |        ^^^^^^^^^^^^^^^^^^
+
+warning: unused `dynamic::Dynamic` that must be used
+    --> src/packages/sys/process/unix.rs:4672:9
+     |
+4672 | /         engine
+4673 | |             .eval_with_scope::<crate::Dynamic>(&mut cancel_scope, "child.kill()")
+4674 | |             .expect("public cancellation should wake the blocked waiter");
+     | |_________________________________________________________________________^
+     |
+     = note: `#[warn(unused_must_use)]` on by default
+help: use `let _ = ...` to ignore the resulting value
+     |
+4672 |         let _ = engine
+     |         +++++++
+
+warning: `rhai` (lib test) generated 10 warnings (run `cargo fix --lib -p rhai --tests` to apply 4 suggestions)
+    Finished test [unoptimized + debuginfo] target(s) in 1.81s
+     Running unittests src/lib.rs (/Users/hoppworks/.local/share/agent-builds/rhai/x31-darwin-msrv-20261008-attempt05-411C257D0D7243AFB4D707707709D142/agent-build-c5dmhx1c/target/debug/deps/rhai-e9edaeaa572eacc8)
+
+running 1 test
+test packages::sys::process::unix::tests::public_wait_is_cancelled_after_entering_condvar ... wait-entry checkpoint pid=45412 count=1 nonterminal=true
+shared-child entered-wait pid=45412 wait_entries=2 nonterminal_at_cancel=true waiter_woke=true reap=ESRCH
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 26 filtered out; finished in 0.05s
+

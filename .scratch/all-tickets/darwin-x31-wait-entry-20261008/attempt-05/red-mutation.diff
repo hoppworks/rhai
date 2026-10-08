@@ -1,0 +1,13 @@
+--- /Users/hoppworks/.local/share/agent-builds/rhai/x31-darwin-msrv-20261008-attempt05-411C257D0D7243AFB4D707707709D142/agent-build-c5dmhx1c/unix.original.rs	2026-10-08 07:57:52
++++ /Users/hoppworks/.local/share/agent-builds/rhai/x31-darwin-msrv-20261008-attempt05-411C257D0D7243AFB4D707707709D142/agent-build-c5dmhx1c/source/src/packages/sys/process/unix.rs	2026-10-08 07:58:26
+@@ -4662,8 +4662,8 @@
+         let entered_waits = control.wait_entries.load(Ordering::Acquire);
+         eprintln!("wait-entry checkpoint pid={pid} count={entered_waits} nonterminal=true");
+         assert!(
+-            entered_waits > 0,
+-            "observer acquired snapshot mutex after Condvar wait entry"
++            entered_waits == 0,
++            "X31 RED: wait-entry assertion sensitivity control"
+         );
+         drop(snapshot);
+ 

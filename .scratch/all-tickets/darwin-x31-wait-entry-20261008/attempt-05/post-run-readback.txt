@@ -1,0 +1,6 @@
+Independent post-run readback: all four exact fixture PIDs return ESRCH; owned session scope and staged runtime cwd are absent; runner status is 0.
+pid=45382 kill_0=ESRCH
+pid=45412 kill_0=ESRCH
+pid=45440 kill_0=ESRCH
+pid=45461 kill_0=ESRCH
+verified_cases=red-sync,green-sync,red-sync-no-float,green-sync-no-float

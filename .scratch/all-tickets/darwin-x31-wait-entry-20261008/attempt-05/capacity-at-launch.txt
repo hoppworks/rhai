@@ -1,0 +1,30 @@
+Filesystem   1024-blocks      Used Available Capacity  Mounted on
+/dev/disk3s5   971298980 826964844 110376492    89%    /System/Volumes/Data
+The system has 34359738368 (2097152 pages with a page size of 16384).
+
+Stats: 
+Pages free: 776878 
+Pages purgeable: 1741 
+Pages purged: 59495767 
+
+Swap I/O:
+Swapins: 9152176 
+Swapouts: 10661316 
+
+Page Q counts:
+Pages active: 441127 
+Pages inactive: 439347 
+Pages speculative: 1280 
+Pages throttled: 0 
+Pages wired down: 207307 
+
+Compressor Stats:
+Pages used by compressor: 177052 
+Pages decompressed: 694568398 
+Pages compressed: 739120453 
+
+File I/O:
+Pageins: 208210119 
+Pageouts: 559982 
+
+System-wide memory free percentage: 80%
