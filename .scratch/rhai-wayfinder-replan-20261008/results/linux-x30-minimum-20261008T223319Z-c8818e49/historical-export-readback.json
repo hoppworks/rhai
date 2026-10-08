@@ -1,0 +1,5 @@
+{
+  "all_original_output_manifest_entries_exist_and_match": true,
+  "late_import": "Only immutable historical resource-samples.jsonl added after current run. Frozen selection/oracle/current source inputs unchanged.",
+  "old_source_archive": "Archive identity retained, archive not recopied or rerun. Selected test overlay and committed shared support retained."
+}

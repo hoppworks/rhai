@@ -1,0 +1,17 @@
+{
+  "session_id": "linux-x30-minimum-efbf99cb698449e59723747749681d18",
+  "scope": "/root/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18",
+  "finite_limits": {
+    "wall_seconds": 1200,
+    "storage_bytes": 8589934592,
+    "rss_bytes": 8589934592,
+    "processes": 32,
+    "cargo_jobs": 2
+  },
+  "helper": "/var/roothome/projects/rhai-wayfinder-20261008/.scratch/rhai-wayfinder-replan-20261008/results/linux-x30-minimum-20261008T223319Z-c8818e49/verify-x30.py",
+  "helper_sha256": "d251cc3bf348a6f1bf218a3dd5774f513d042e3c58e06fd56f33b68c99353ebc",
+  "bootstrap_sampler_reuse": ".scratch/rhai-wayfinder-replan-20261008/results/linux-integer-example-20261008T214557Z-0fde4a20/verify-example.py",
+  "bootstrap_sampler_source_sha256": "e32b2d3296ca7497e282ac329b1a999d8d18b8df059ffc68204effa3f62d370e",
+  "new_action": "one targeted native minimum GREEN; no repeated RED or product changes",
+  "current_stage": "prepared; source review required before launch"
+}

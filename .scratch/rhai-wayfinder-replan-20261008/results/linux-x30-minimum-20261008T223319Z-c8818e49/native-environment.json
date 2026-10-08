@@ -1,0 +1,14 @@
+{
+  "uname": [
+    "Linux",
+    "lllm",
+    "7.2.0-ogc6.1.fc44.x86_64",
+    "#1 SMP PREEMPT_DYNAMIC Mon Aug 24 03:42:13 UTC 2026",
+    "x86_64"
+  ],
+  "rustc": "rustc 1.77.2 (25ef9e3d8 2024-04-09)",
+  "cargo": "cargo 1.77.2 (e52e36006 2024-03-26)",
+  "features": "testing-environ,sys",
+  "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18/agent-build-cg4paw9o/source",
+  "uid": 0
+}

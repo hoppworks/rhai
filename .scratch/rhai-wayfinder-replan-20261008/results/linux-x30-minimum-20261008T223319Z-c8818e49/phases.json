@@ -1,0 +1,16 @@
+{
+  "execution_complete": true,
+  "accepted": false,
+  "test": "repeated_public_run_calls_keep_fd_count_stable",
+  "exit": 0,
+  "executable_sha256": "4e60a39aec21e32d809b4f2506f6bc044a92a009bcc61eb146a237103ad36b9a",
+  "baseline_tasks": 3,
+  "baseline_fds": 4,
+  "baseline_cleanup_workers": 1,
+  "after_tasks": 3,
+  "after_fds": 4,
+  "after_cleanup_workers": 1,
+  "iterations": 200,
+  "reused_RED": "historical/mutant-red.{status,stdout,stderr}; exact oracle/helpers unchanged; independent combined review pending",
+  "scope": "Only native Linux X30 package-minimum row; historical wrong-FD-count RED reused, fresh 1.77.2 baseline GREEN; no Windows, Darwin or full matrix closure"
+}

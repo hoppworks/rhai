@@ -1,0 +1,165 @@
+{
+  "appledouble_sidecars_removed_before_readback": 7,
+  "bytes_removed": 155924743,
+  "files": [
+    {
+      "bytes": 773,
+      "mode": "0o644",
+      "path": "out/attempt-06/SHA256SUMS",
+      "sha256": "2b2664a9498e86b1f62780b050fd71ce095baece051be33a13ebef3901342d8d",
+      "uid": 0
+    },
+    {
+      "bytes": 4,
+      "mode": "0o644",
+      "path": "out/attempt-06/mutant-red.status",
+      "sha256": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c",
+      "uid": 0
+    },
+    {
+      "bytes": 10854,
+      "mode": "0o644",
+      "path": "out/attempt-06/mutant-red.stderr",
+      "sha256": "99ffc0f62775da49489ba1b5a26faeba3ce3d72df18e3f4bc92f305d49c720fe",
+      "uid": 0
+    },
+    {
+      "bytes": 253,
+      "mode": "0o644",
+      "path": "out/attempt-06/mutant-red.stdout",
+      "sha256": "952b6d4a88d197fdd5049ccf0bd05cce1e8aecfff133b12653aa2b4625ee974f",
+      "uid": 0
+    },
+    {
+      "bytes": 1030,
+      "mode": "0o644",
+      "path": "out/attempt-06/proof-result.json",
+      "sha256": "157c34d930d1308264b5b00a4cdafb4b80a6c56e3918a6cc07d816199ecc7a02",
+      "uid": 0
+    },
+    {
+      "bytes": 16005,
+      "mode": "0o644",
+      "path": "out/attempt-06/resource-samples.jsonl",
+      "sha256": "afd02f58eb4bfbc0cbf90565b547f5c02241b1cb4247f36eddb60e52061e1521",
+      "uid": 0
+    },
+    {
+      "bytes": 2,
+      "mode": "0o644",
+      "path": "out/attempt-06/restored-green.status",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "uid": 0
+    },
+    {
+      "bytes": 7020,
+      "mode": "0o644",
+      "path": "out/attempt-06/restored-green.stderr",
+      "sha256": "223399d3cef942dd0a16f073c4e1fd6c0b7d8b819c842f74091534def863103c",
+      "uid": 0
+    },
+    {
+      "bytes": 172,
+      "mode": "0o644",
+      "path": "out/attempt-06/restored-green.stdout",
+      "sha256": "d838b159eba76e7f284455e9ec958fc00285194d05219ffa41c16594c9a0d45c",
+      "uid": 0
+    },
+    {
+      "bytes": 1412,
+      "mode": "0o644",
+      "path": "out/attempt-06/run-manifest.json",
+      "sha256": "07a2a36ac8f491144e82bf3142f3a1d239291e069857cbabcdd8c004a7564c69",
+      "uid": 0
+    },
+    {
+      "bytes": 2,
+      "mode": "0o644",
+      "path": "out/outer-attempt-06.status",
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "uid": 0
+    },
+    {
+      "bytes": 0,
+      "mode": "0o644",
+      "path": "out/outer-attempt-06.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "uid": 0
+    },
+    {
+      "bytes": 914,
+      "mode": "0o644",
+      "path": "out/outer-attempt-06.stdout",
+      "sha256": "6a4cb1167e126d8850cb0e798ce9a06d8d6929e8e1b9d0100deec77d515a76ce",
+      "uid": 0
+    },
+    {
+      "bytes": 676,
+      "mode": "0o644",
+      "path": "out/preflight-immediate-attempt-06.json",
+      "sha256": "b1f91f10eca0765430ec476283f0939e6efc1cce2428f3fedaf4c8377beaad30",
+      "uid": 0
+    },
+    {
+      "bytes": 4529,
+      "mode": "0o644",
+      "path": "out/remote-readback.json",
+      "sha256": "60dab9b39b4b66edb1617f3c4494f411aadf38599f68b0d6be9b68eeedd0cb98",
+      "uid": 0
+    },
+    {
+      "bytes": 31347,
+      "mode": "0o600",
+      "path": "stage/Cargo.lock.accepted",
+      "sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+      "uid": 501
+    },
+    {
+      "bytes": 983,
+      "mode": "0o600",
+      "path": "stage/input-identities.json",
+      "sha256": "61c844cb2121432e6c6a011cba9c402d2cb7406a607d653d77e9f34da34a2de1",
+      "uid": 501
+    },
+    {
+      "bytes": 5521,
+      "mode": "0o600",
+      "path": "stage/preflight-x30.py",
+      "sha256": "1ea9738f8c785791d40ce4d9d9407f1ba5dce5ea359ad776f8fc5d4afef92ebb",
+      "uid": 501
+    },
+    {
+      "bytes": 16962,
+      "mode": "0o600",
+      "path": "stage/run-x30-fd-proof.py",
+      "sha256": "4f6e55a8af5b168f4b4840de6ec66b896b970fcbd906119385d9de070281673e",
+      "uid": 501
+    },
+    {
+      "bytes": 41,
+      "mode": "0o600",
+      "path": "stage/source.commit",
+      "sha256": "939a0fbda3f2beb0b155cea87cd1f7aa11afab616552a1ad1e1c17ffcd471fc7",
+      "uid": 501
+    },
+    {
+      "bytes": 155510018,
+      "mode": "0o600",
+      "path": "stage/source.tar.gz",
+      "sha256": "a90b77b07ee259d6bb4c81d3180f77c7ca4599cfb28d60a93608a98f5f6f1c06",
+      "uid": 501
+    },
+    {
+      "bytes": 316225,
+      "mode": "0o600",
+      "path": "stage/sys_process.rs",
+      "sha256": "2eb69ebae8744fa29926825a8478a8b623f71ba83ec8d45c4fd600ae9091890c",
+      "uid": 501
+    }
+  ],
+  "files_removed": 22,
+  "sampled_process_identities": 31,
+  "sampled_processes_still_live": [],
+  "scope": "/root/.local/share/agent-builds/rhai/x30-fd-stability-20261007-1530z",
+  "scope_removed": true
+}

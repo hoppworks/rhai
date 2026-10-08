@@ -1,0 +1,11 @@
+
+running 1 test
+test repeated_public_run_calls_keep_fd_count_stable ... FAILED
+
+failures:
+
+failures:
+    repeated_public_run_calls_keep_fd_count_stable
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 57 filtered out; finished in 6.63s
+

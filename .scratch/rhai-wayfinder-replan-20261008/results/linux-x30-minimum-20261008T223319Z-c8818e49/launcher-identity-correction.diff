@@ -1,0 +1,30 @@
+--- prepared-launcher-before
++++ prepared-launcher-after
+@@ -38,6 +38,7 @@
+ started=time.monotonic()
+ with (E/'runner.stdout').open('xb') as stdout,(E/'runner.stderr').open('xb') as stderr:
+  p=subprocess.Popen(argv,cwd=repo,env=env,stdout=stdout,stderr=stderr)
++ stat=None
+  try:
+   stat=(Path('/proc')/str(p.pid)/'stat').read_text()
+   data={'pid':p.pid,'start_stat':stat,'cwd':str(repo),'scope':str(scope),'scope_device':identity.st_dev,'scope_inode':identity.st_ino,'scope_uid':identity.st_uid,'argv':argv,'runner_sha256':sha(runner),'helper_sha256':sha(helper),'review_sha256':sha(review),'capacity':capacity,'outer_pid':os.getpid()}
+@@ -50,7 +51,7 @@
+ elapsed=round(time.monotonic()-started,3)
+ runtime_data=json.loads((E/'runtime-identity.json').read_text()) if (E/'runtime-identity.json').exists() else None
+ runtime_absent=runtime_data is not None and not Path(runtime_data['path']).exists()
+-identities=[{'pid':p.pid,'start':stat[stat.rindex(')')+2:].split()[19]}]
++identities=[{'pid':p.pid,'start':stat[stat.rindex(')')+2:].split()[19]}] if stat is not None else []
+ if (E/'result.json').exists():
+  for sample in json.loads((E/'result.json').read_text())['samples']:
+   identities.extend({'pid':r['pid'],'start':r['start']} for r in sample['processes'])
+@@ -59,8 +60,8 @@
+ same=scope.stat().st_dev==identity.st_dev and scope.stat().st_ino==identity.st_ino and scope.stat().st_uid==identity.st_uid
+ empty=not list(scope.iterdir())
+ retired=False
+-if code is not None and runtime_absent and same and empty and not remaining:
++if code is not None and stat is not None and runtime_absent and same and empty and not remaining:
+  scope.rmdir();retired=True
+-(E/'cleanup.json').write_text(json.dumps({'runner_exit':code,'outer_elapsed_seconds':elapsed,'runtime':runtime_data,'runtime_absent':runtime_absent,'scope':str(scope),'scope_identity_matches':same,'scope_empty':empty,'scope_retired':retired,'scope_absent':not scope.exists(),'observed_identities':len(unique),'remaining_owned_identities':remaining,'foreign_resources_changed':False},indent=2)+'\n')
++(E/'cleanup.json').write_text(json.dumps({'runner_exit':code,'runner_identity_captured':stat is not None,'outer_elapsed_seconds':elapsed,'runtime':runtime_data,'runtime_absent':runtime_absent,'scope':str(scope),'scope_identity_matches':same,'scope_empty':empty,'scope_retired':retired,'scope_absent':not scope.exists(),'observed_identities':len(unique),'remaining_owned_identities':remaining,'foreign_resources_changed':False},indent=2)+'\n')
+ print(json.dumps({'runner_exit':code,'outer_elapsed_seconds':elapsed,'runtime_absent':runtime_absent,'scope_retired':retired}),flush=True)
+ assert code==0 and retired,'Inspect exported originals; no automatic rerun'

@@ -1,0 +1,27 @@
+{
+  "runner_exit": 0,
+  "runner_identity_captured": true,
+  "outer_elapsed_seconds": 59.165,
+  "runtime": {
+    "path": "/var/roothome/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18/agent-build-cg4paw9o",
+    "device": 36,
+    "inode": 461229386,
+    "uid": 0,
+    "limits": {
+      "wall_seconds": 1200,
+      "storage_bytes": 8589934592,
+      "rss_bytes": 8589934592,
+      "processes": 32,
+      "cargo_jobs": 2
+    }
+  },
+  "runtime_absent": true,
+  "scope": "/root/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18",
+  "scope_identity_matches": true,
+  "scope_empty": true,
+  "scope_retired": true,
+  "scope_absent": true,
+  "observed_identities": 27,
+  "remaining_owned_identities": [],
+  "foreign_resources_changed": false
+}

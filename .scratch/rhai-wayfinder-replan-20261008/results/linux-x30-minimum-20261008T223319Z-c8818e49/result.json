@@ -1,0 +1,886 @@
+{
+  "started_utc": "2026-10-08T22:38:11.501483+00:00",
+  "runtime": "/var/roothome/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18/agent-build-cg4paw9o",
+  "source_revision": "0fad14acff5e09d2cd873eed5c64e0eff852737c",
+  "commands": [
+    {
+      "tag": "help-1.77.2-rustc-x86_64-unknown-linux-gnu",
+      "argv": [
+        "bash",
+        "/var/roothome/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18/agent-build-cg4paw9o/downloads/rustc-1.77.2-x86_64-unknown-linux-gnu/install.sh",
+        "--help"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18/agent-build-cg4paw9o/downloads/rustc-1.77.2-x86_64-unknown-linux-gnu",
+      "pid": 1910647,
+      "timeout_seconds": 15,
+      "exit": 0,
+      "elapsed": 0.118,
+      "stdout_sha256": "f6d0a6838fe0436afc1680e0bab109f515a5b1f246451bf9cd331b3beb7e2a93",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "tag": "install-1.77.2-rustc-x86_64-unknown-linux-gnu",
+      "argv": [
+        "bash",
+        "/var/roothome/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18/agent-build-cg4paw9o/downloads/rustc-1.77.2-x86_64-unknown-linux-gnu/install.sh",
+        "--prefix=/var/roothome/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18/agent-build-cg4paw9o/toolchain-1.77.2",
+        "--disable-ldconfig"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18/agent-build-cg4paw9o/downloads/rustc-1.77.2-x86_64-unknown-linux-gnu",
+      "pid": 1910649,
+      "timeout_seconds": 120,
+      "exit": 0,
+      "elapsed": 0.415,
+      "stdout_sha256": "12d38d7837ebe7f3fc5a34557a78eea21b2e63e22b9f2acef13d11c9d2bca0ac",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "tag": "help-1.77.2-cargo-x86_64-unknown-linux-gnu",
+      "argv": [
+        "bash",
+        "/var/roothome/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18/agent-build-cg4paw9o/downloads/cargo-1.77.2-x86_64-unknown-linux-gnu/install.sh",
+        "--help"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18/agent-build-cg4paw9o/downloads/cargo-1.77.2-x86_64-unknown-linux-gnu",
+      "pid": 1911691,
+      "timeout_seconds": 15,
+      "exit": 0,
+      "elapsed": 0.114,
+      "stdout_sha256": "68acd86f8cce32c677f490e21de0d9cc72c9ba05113546b92bb720eb340297f2",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "tag": "install-1.77.2-cargo-x86_64-unknown-linux-gnu",
+      "argv": [
+        "bash",
+        "/var/roothome/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18/agent-build-cg4paw9o/downloads/cargo-1.77.2-x86_64-unknown-linux-gnu/install.sh",
+        "--prefix=/var/roothome/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18/agent-build-cg4paw9o/toolchain-1.77.2",
+        "--disable-ldconfig"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18/agent-build-cg4paw9o/downloads/cargo-1.77.2-x86_64-unknown-linux-gnu",
+      "pid": 1911693,
+      "timeout_seconds": 120,
+      "exit": 0,
+      "elapsed": 0.613,
+      "stdout_sha256": "c1e54b7c031355277f66e2fc9d79c643a0c17d1289bbe46faf8aa9f05cc3bc2c",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "tag": "help-1.77.2-rust-std-x86_64-unknown-linux-gnu",
+      "argv": [
+        "bash",
+        "/var/roothome/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18/agent-build-cg4paw9o/downloads/rust-std-1.77.2-x86_64-unknown-linux-gnu/install.sh",
+        "--help"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18/agent-build-cg4paw9o/downloads/rust-std-1.77.2-x86_64-unknown-linux-gnu",
+      "pid": 1913454,
+      "timeout_seconds": 15,
+      "exit": 0,
+      "elapsed": 0.118,
+      "stdout_sha256": "016204df875a9cae4dcc2f0bcff126d64c699f6b180555ca278bc7351f79c635",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "tag": "install-1.77.2-rust-std-x86_64-unknown-linux-gnu",
+      "argv": [
+        "bash",
+        "/var/roothome/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18/agent-build-cg4paw9o/downloads/rust-std-1.77.2-x86_64-unknown-linux-gnu/install.sh",
+        "--prefix=/var/roothome/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18/agent-build-cg4paw9o/toolchain-1.77.2",
+        "--disable-ldconfig"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18/agent-build-cg4paw9o/downloads/rust-std-1.77.2-x86_64-unknown-linux-gnu",
+      "pid": 1913456,
+      "timeout_seconds": 120,
+      "exit": 0,
+      "elapsed": 0.515,
+      "stdout_sha256": "45c1a82e2120b46a6e2faa7fe31488d3534084f7d0368173c4f6095cd28ec904",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "tag": "cargo-1.77-version",
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18/agent-build-cg4paw9o/toolchain-1.77.2/bin/cargo",
+        "--version"
+      ],
+      "cwd": "/root/projects/rhai-wayfinder-20261008",
+      "pid": 1914646,
+      "timeout_seconds": 15,
+      "exit": 0,
+      "elapsed": 0.112,
+      "stdout_sha256": "6112bcce75ab9a1c5d664eec9c11d98776a7c36c3be3c3402d871d72f1401b20",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "tag": "rustc-1.77-version",
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18/agent-build-cg4paw9o/toolchain-1.77.2/bin/rustc",
+        "--version"
+      ],
+      "cwd": "/root/projects/rhai-wayfinder-20261008",
+      "pid": 1914649,
+      "timeout_seconds": 15,
+      "exit": 0,
+      "elapsed": 0.116,
+      "stdout_sha256": "8d95dab8b988abfc08735506e13455043a0a2f910e0672f4fdd48f37cc0a2f83",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "tag": "build",
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18/agent-build-cg4paw9o/toolchain-1.77.2/bin/cargo",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys",
+        "--test",
+        "sys_process",
+        "--no-run",
+        "--message-format=json"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18/agent-build-cg4paw9o/source",
+      "pid": 1914705,
+      "timeout_seconds": 480,
+      "exit": 0,
+      "elapsed": 23.7,
+      "stdout_sha256": "05b913ea39a2eba86669002515c2b9ff1378b3607d0741546be2948b68d0f84c",
+      "stderr_sha256": "aed73460ada147a996003d6fb1f89ef8bb30ce3d1242c8fddfa0f315809f71c5"
+    },
+    {
+      "tag": "test-list",
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18/agent-build-cg4paw9o/target/debug/deps/sys_process-2037c14dd2370964",
+        "--list"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18/agent-build-cg4paw9o/source",
+      "pid": 1920996,
+      "timeout_seconds": 15,
+      "exit": 0,
+      "elapsed": 0.14,
+      "stdout_sha256": "d91aa780c6979a14b7d35eaca97f095b9ab2f9935a00dbf6d201436ca16162c3",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "tag": "green",
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18/agent-build-cg4paw9o/target/debug/deps/sys_process-2037c14dd2370964",
+        "repeated_public_run_calls_keep_fd_count_stable",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18/agent-build-cg4paw9o/source",
+      "pid": 1921160,
+      "timeout_seconds": 75,
+      "exit": 0,
+      "elapsed": 7.479,
+      "stdout_sha256": "d9e8de200d85a1262929cad978735604ca03095462714769f90e0c7cd51e312a",
+      "stderr_sha256": "e3bd299745fcab0fd0cf97b0b1d765d79f3df97472c48d9b249b77ec532da108"
+    }
+  ],
+  "samples": [
+    {
+      "elapsed": 19.917,
+      "storage_bytes": 360660484,
+      "rss_bytes": 43900928,
+      "processes": [
+        {
+          "pid": 1909351,
+          "start": "30826337",
+          "rss_bytes": 15339520
+        },
+        {
+          "pid": 1909380,
+          "start": "30826340",
+          "rss_bytes": 28561408
+        },
+        {
+          "pid": 1910647,
+          "start": "30828334",
+          "rss_bytes": 0
+        }
+      ]
+    },
+    {
+      "elapsed": 20.033,
+      "storage_bytes": 360660484,
+      "rss_bytes": 47517696,
+      "processes": [
+        {
+          "pid": 1909351,
+          "start": "30826337",
+          "rss_bytes": 15339520
+        },
+        {
+          "pid": 1909380,
+          "start": "30826340",
+          "rss_bytes": 28561408
+        },
+        {
+          "pid": 1910649,
+          "start": "30828346",
+          "rss_bytes": 3616768
+        }
+      ]
+    },
+    {
+      "elapsed": 20.451,
+      "storage_bytes": 297402217,
+      "rss_bytes": 43900928,
+      "processes": [
+        {
+          "pid": 1909351,
+          "start": "30826337",
+          "rss_bytes": 15339520
+        },
+        {
+          "pid": 1909380,
+          "start": "30826340",
+          "rss_bytes": 28561408
+        }
+      ]
+    },
+    {
+      "elapsed": 21.575,
+      "storage_bytes": 338652164,
+      "rss_bytes": 43626496,
+      "processes": [
+        {
+          "pid": 1909351,
+          "start": "30826337",
+          "rss_bytes": 15339520
+        },
+        {
+          "pid": 1909380,
+          "start": "30826340",
+          "rss_bytes": 28286976
+        },
+        {
+          "pid": 1911691,
+          "start": "30828500",
+          "rss_bytes": 0
+        }
+      ]
+    },
+    {
+      "elapsed": 21.688,
+      "storage_bytes": 338652164,
+      "rss_bytes": 47247360,
+      "processes": [
+        {
+          "pid": 1909351,
+          "start": "30826337",
+          "rss_bytes": 15339520
+        },
+        {
+          "pid": 1909380,
+          "start": "30826340",
+          "rss_bytes": 28286976
+        },
+        {
+          "pid": 1911693,
+          "start": "30828512",
+          "rss_bytes": 3620864
+        }
+      ]
+    },
+    {
+      "elapsed": 22.304,
+      "storage_bytes": 330166813,
+      "rss_bytes": 43626496,
+      "processes": [
+        {
+          "pid": 1909351,
+          "start": "30826337",
+          "rss_bytes": 15339520
+        },
+        {
+          "pid": 1909380,
+          "start": "30826340",
+          "rss_bytes": 28286976
+        }
+      ]
+    },
+    {
+      "elapsed": 24.307,
+      "storage_bytes": 495275930,
+      "rss_bytes": 43872256,
+      "processes": [
+        {
+          "pid": 1909351,
+          "start": "30826337",
+          "rss_bytes": 15339520
+        },
+        {
+          "pid": 1909380,
+          "start": "30826340",
+          "rss_bytes": 28532736
+        },
+        {
+          "pid": 1913454,
+          "start": "30828773",
+          "rss_bytes": 0
+        }
+      ]
+    },
+    {
+      "elapsed": 24.423,
+      "storage_bytes": 495275930,
+      "rss_bytes": 47804416,
+      "processes": [
+        {
+          "pid": 1909351,
+          "start": "30826337",
+          "rss_bytes": 15339520
+        },
+        {
+          "pid": 1909380,
+          "start": "30826340",
+          "rss_bytes": 28532736
+        },
+        {
+          "pid": 1913456,
+          "start": "30828785",
+          "rss_bytes": 3932160
+        }
+      ]
+    },
+    {
+      "elapsed": 24.944,
+      "storage_bytes": 469704496,
+      "rss_bytes": 43872256,
+      "processes": [
+        {
+          "pid": 1909351,
+          "start": "30826337",
+          "rss_bytes": 15339520
+        },
+        {
+          "pid": 1909380,
+          "start": "30826340",
+          "rss_bytes": 28532736
+        }
+      ]
+    },
+    {
+      "elapsed": 24.955,
+      "storage_bytes": 469704496,
+      "rss_bytes": 52166656,
+      "processes": [
+        {
+          "pid": 1909351,
+          "start": "30826337",
+          "rss_bytes": 15339520
+        },
+        {
+          "pid": 1909380,
+          "start": "30826340",
+          "rss_bytes": 28532736
+        },
+        {
+          "pid": 1914646,
+          "start": "30828838",
+          "rss_bytes": 8294400
+        }
+      ]
+    },
+    {
+      "elapsed": 25.071,
+      "storage_bytes": 469704496,
+      "rss_bytes": 49008640,
+      "processes": [
+        {
+          "pid": 1909351,
+          "start": "30826337",
+          "rss_bytes": 15339520
+        },
+        {
+          "pid": 1909380,
+          "start": "30826340",
+          "rss_bytes": 28532736
+        },
+        {
+          "pid": 1914649,
+          "start": "30828850",
+          "rss_bytes": 5136384
+        }
+      ]
+    },
+    {
+      "elapsed": 26.938,
+      "storage_bytes": 963684823,
+      "rss_bytes": 68489216,
+      "processes": [
+        {
+          "pid": 1909351,
+          "start": "30826337",
+          "rss_bytes": 15339520
+        },
+        {
+          "pid": 1909380,
+          "start": "30826340",
+          "rss_bytes": 35065856
+        },
+        {
+          "pid": 1914705,
+          "start": "30829035",
+          "rss_bytes": 18083840
+        }
+      ]
+    },
+    {
+      "elapsed": 28.971,
+      "storage_bytes": 966881558,
+      "rss_bytes": 91070464,
+      "processes": [
+        {
+          "pid": 1909351,
+          "start": "30826337",
+          "rss_bytes": 15339520
+        },
+        {
+          "pid": 1909380,
+          "start": "30826340",
+          "rss_bytes": 35328000
+        },
+        {
+          "pid": 1914705,
+          "start": "30829035",
+          "rss_bytes": 40402944
+        }
+      ]
+    },
+    {
+      "elapsed": 31.015,
+      "storage_bytes": 1034457807,
+      "rss_bytes": 188854272,
+      "processes": [
+        {
+          "pid": 1909351,
+          "start": "30826337",
+          "rss_bytes": 15339520
+        },
+        {
+          "pid": 1909380,
+          "start": "30826340",
+          "rss_bytes": 35328000
+        },
+        {
+          "pid": 1914705,
+          "start": "30829035",
+          "rss_bytes": 74182656
+        },
+        {
+          "pid": 1915171,
+          "start": "30829439",
+          "rss_bytes": 64004096
+        }
+      ]
+    },
+    {
+      "elapsed": 33.055,
+      "storage_bytes": 1112238622,
+      "rss_bytes": 308842496,
+      "processes": [
+        {
+          "pid": 1909351,
+          "start": "30826337",
+          "rss_bytes": 15339520
+        },
+        {
+          "pid": 1909380,
+          "start": "30826340",
+          "rss_bytes": 35328000
+        },
+        {
+          "pid": 1914705,
+          "start": "30829035",
+          "rss_bytes": 74182656
+        },
+        {
+          "pid": 1915510,
+          "start": "30829635",
+          "rss_bytes": 78172160
+        },
+        {
+          "pid": 1915547,
+          "start": "30829645",
+          "rss_bytes": 83177472
+        },
+        {
+          "pid": 1915548,
+          "start": "30829645",
+          "rss_bytes": 3104768
+        },
+        {
+          "pid": 1915549,
+          "start": "30829646",
+          "rss_bytes": 2228224
+        },
+        {
+          "pid": 1915550,
+          "start": "30829646",
+          "rss_bytes": 17309696
+        }
+      ]
+    },
+    {
+      "elapsed": 35.099,
+      "storage_bytes": 1163308002,
+      "rss_bytes": 611528704,
+      "processes": [
+        {
+          "pid": 1909351,
+          "start": "30826337",
+          "rss_bytes": 15339520
+        },
+        {
+          "pid": 1909380,
+          "start": "30826340",
+          "rss_bytes": 35328000
+        },
+        {
+          "pid": 1914705,
+          "start": "30829035",
+          "rss_bytes": 74182656
+        },
+        {
+          "pid": 1915893,
+          "start": "30829773",
+          "rss_bytes": 250839040
+        },
+        {
+          "pid": 1915905,
+          "start": "30829784",
+          "rss_bytes": 235839488
+        }
+      ]
+    },
+    {
+      "elapsed": 37.139,
+      "storage_bytes": 1201416803,
+      "rss_bytes": 672571392,
+      "processes": [
+        {
+          "pid": 1909351,
+          "start": "30826337",
+          "rss_bytes": 15339520
+        },
+        {
+          "pid": 1909380,
+          "start": "30826340",
+          "rss_bytes": 35328000
+        },
+        {
+          "pid": 1914705,
+          "start": "30829035",
+          "rss_bytes": 74444800
+        },
+        {
+          "pid": 1915967,
+          "start": "30829867",
+          "rss_bytes": 382922752
+        },
+        {
+          "pid": 1916151,
+          "start": "30830020",
+          "rss_bytes": 164536320
+        }
+      ]
+    },
+    {
+      "elapsed": 39.18,
+      "storage_bytes": 1283880460,
+      "rss_bytes": 520278016,
+      "processes": [
+        {
+          "pid": 1909351,
+          "start": "30826337",
+          "rss_bytes": 15339520
+        },
+        {
+          "pid": 1909380,
+          "start": "30826340",
+          "rss_bytes": 35328000
+        },
+        {
+          "pid": 1914705,
+          "start": "30829035",
+          "rss_bytes": 74444800
+        },
+        {
+          "pid": 1916426,
+          "start": "30830131",
+          "rss_bytes": 350171136
+        },
+        {
+          "pid": 1916475,
+          "start": "30830258",
+          "rss_bytes": 44994560
+        }
+      ]
+    },
+    {
+      "elapsed": 41.226,
+      "storage_bytes": 1304038293,
+      "rss_bytes": 656113664,
+      "processes": [
+        {
+          "pid": 1909351,
+          "start": "30826337",
+          "rss_bytes": 15339520
+        },
+        {
+          "pid": 1909380,
+          "start": "30826340",
+          "rss_bytes": 35328000
+        },
+        {
+          "pid": 1914705,
+          "start": "30829035",
+          "rss_bytes": 74444800
+        },
+        {
+          "pid": 1916426,
+          "start": "30830131",
+          "rss_bytes": 531001344
+        }
+      ]
+    },
+    {
+      "elapsed": 43.272,
+      "storage_bytes": 1343427229,
+      "rss_bytes": 885571584,
+      "processes": [
+        {
+          "pid": 1909351,
+          "start": "30826337",
+          "rss_bytes": 15339520
+        },
+        {
+          "pid": 1909380,
+          "start": "30826340",
+          "rss_bytes": 35328000
+        },
+        {
+          "pid": 1914705,
+          "start": "30829035",
+          "rss_bytes": 74444800
+        },
+        {
+          "pid": 1916426,
+          "start": "30830131",
+          "rss_bytes": 760459264
+        }
+      ]
+    },
+    {
+      "elapsed": 45.317,
+      "storage_bytes": 1388566972,
+      "rss_bytes": 964427776,
+      "processes": [
+        {
+          "pid": 1909351,
+          "start": "30826337",
+          "rss_bytes": 15339520
+        },
+        {
+          "pid": 1909380,
+          "start": "30826340",
+          "rss_bytes": 35328000
+        },
+        {
+          "pid": 1914705,
+          "start": "30829035",
+          "rss_bytes": 74444800
+        },
+        {
+          "pid": 1916426,
+          "start": "30830131",
+          "rss_bytes": 839315456
+        }
+      ]
+    },
+    {
+      "elapsed": 47.363,
+      "storage_bytes": 1444012001,
+      "rss_bytes": 972386304,
+      "processes": [
+        {
+          "pid": 1909351,
+          "start": "30826337",
+          "rss_bytes": 15339520
+        },
+        {
+          "pid": 1909380,
+          "start": "30826340",
+          "rss_bytes": 35328000
+        },
+        {
+          "pid": 1914705,
+          "start": "30829035",
+          "rss_bytes": 73908224
+        },
+        {
+          "pid": 1916426,
+          "start": "30830131",
+          "rss_bytes": 847810560
+        }
+      ]
+    },
+    {
+      "elapsed": 49.408,
+      "storage_bytes": 1692580643,
+      "rss_bytes": 472997888,
+      "processes": [
+        {
+          "pid": 1909351,
+          "start": "30826337",
+          "rss_bytes": 15339520
+        },
+        {
+          "pid": 1909380,
+          "start": "30826340",
+          "rss_bytes": 35328000
+        },
+        {
+          "pid": 1914705,
+          "start": "30829035",
+          "rss_bytes": 73908224
+        },
+        {
+          "pid": 1919873,
+          "start": "30831161",
+          "rss_bytes": 348422144
+        }
+      ]
+    },
+    {
+      "elapsed": 50.682,
+      "storage_bytes": 1772666949,
+      "rss_bytes": 50507776,
+      "processes": [
+        {
+          "pid": 1909351,
+          "start": "30826337",
+          "rss_bytes": 15339520
+        },
+        {
+          "pid": 1909380,
+          "start": "30826340",
+          "rss_bytes": 35168256
+        },
+        {
+          "pid": 1920996,
+          "start": "30831408",
+          "rss_bytes": 0
+        }
+      ]
+    },
+    {
+      "elapsed": 50.821,
+      "storage_bytes": 1772667030,
+      "rss_bytes": 56328192,
+      "processes": [
+        {
+          "pid": 1909351,
+          "start": "30826337",
+          "rss_bytes": 15339520
+        },
+        {
+          "pid": 1909380,
+          "start": "30826340",
+          "rss_bytes": 35168256
+        },
+        {
+          "pid": 1921160,
+          "start": "30831422",
+          "rss_bytes": 5820416
+        }
+      ]
+    },
+    {
+      "elapsed": 52.866,
+      "storage_bytes": 1772667030,
+      "rss_bytes": 56328192,
+      "processes": [
+        {
+          "pid": 1909351,
+          "start": "30826337",
+          "rss_bytes": 15339520
+        },
+        {
+          "pid": 1909380,
+          "start": "30826340",
+          "rss_bytes": 35168256
+        },
+        {
+          "pid": 1921160,
+          "start": "30831422",
+          "rss_bytes": 5820416
+        }
+      ]
+    },
+    {
+      "elapsed": 54.914,
+      "storage_bytes": 1772667030,
+      "rss_bytes": 56328192,
+      "processes": [
+        {
+          "pid": 1909351,
+          "start": "30826337",
+          "rss_bytes": 15339520
+        },
+        {
+          "pid": 1909380,
+          "start": "30826340",
+          "rss_bytes": 35168256
+        },
+        {
+          "pid": 1921160,
+          "start": "30831422",
+          "rss_bytes": 5820416
+        }
+      ]
+    },
+    {
+      "elapsed": 56.96,
+      "storage_bytes": 1772667030,
+      "rss_bytes": 56328192,
+      "processes": [
+        {
+          "pid": 1909351,
+          "start": "30826337",
+          "rss_bytes": 15339520
+        },
+        {
+          "pid": 1909380,
+          "start": "30826340",
+          "rss_bytes": 35168256
+        },
+        {
+          "pid": 1921160,
+          "start": "30831422",
+          "rss_bytes": 5820416
+        }
+      ]
+    },
+    {
+      "elapsed": 58.301,
+      "storage_bytes": 1772666949,
+      "rss_bytes": 50507776,
+      "processes": [
+        {
+          "pid": 1909351,
+          "start": "30826337",
+          "rss_bytes": 15339520
+        },
+        {
+          "pid": 1909380,
+          "start": "30826340",
+          "rss_bytes": 35168256
+        }
+      ]
+    }
+  ],
+  "scope": "Only native Linux X30 package-minimum row; historical wrong-FD-count RED reused, fresh 1.77.2 baseline GREEN; no Windows, Darwin or full matrix closure"
+}

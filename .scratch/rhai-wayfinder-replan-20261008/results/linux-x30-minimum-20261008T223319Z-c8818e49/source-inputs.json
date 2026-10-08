@@ -1,0 +1,14 @@
+{
+  "revision": "0fad14acff5e09d2cd873eed5c64e0eff852737c",
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "files": {
+    "Cargo.toml": "cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e",
+    "build.rs": "78adf9eeea2957e1aa1bd96ee260e43806476a07d665c2ed27db55bc101ed335",
+    "src/packages/sys/process.rs": "090094476662417aa94e2ff519cb8038c1d3721e02be6ec166762502bfbff2e2",
+    "src/packages/sys/process/unix.rs": "55dc5ad528ad2b4fd56d3fcdd42f92af0b30bf3f96db37c476ee31320dcba713",
+    "tests/sys_process.rs": "86f1142ff1ae8de5a8b813e892e407a90c1bec70eab864c20b7735f53015bf41",
+    "tests/fixtures/sys_process_shared_child_contract.rs": "1faf45c57a4fefeaa05683043e064d3485e892887986fef749bedc974230b217",
+    "tests/sys_support/mod.rs": "96faddd40f6162c4893af1d510b1acd77de645c9e7d2e6454a7ab1dde81f7872"
+  },
+  "dirty_or_foreign_source_overlaid": false
+}

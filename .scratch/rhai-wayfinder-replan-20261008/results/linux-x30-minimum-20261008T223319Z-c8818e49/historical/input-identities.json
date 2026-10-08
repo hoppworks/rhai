@@ -1,0 +1,15 @@
+{
+  "accepted_lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "agent_skills_revision": "14617043b70d1ba2d40b720832cbad294fa8c008",
+  "files": {
+    "Cargo.lock.accepted": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+    "run-x30-fd-proof.py": "4f6e55a8af5b168f4b4840de6ec66b896b970fcbd906119385d9de070281673e",
+    "source.commit": "939a0fbda3f2beb0b155cea87cd1f7aa11afab616552a1ad1e1c17ffcd471fc7",
+    "source.tar.gz": "a90b77b07ee259d6bb4c81d3180f77c7ca4599cfb28d60a93608a98f5f6f1c06",
+    "sys_process.rs": "2eb69ebae8744fa29926825a8478a8b623f71ba83ec8d45c4fd600ae9091890c"
+  },
+  "global_agents_sha256": "81b103fac482171e3ea72e23d6c0dffac553359f3f75f610506e00c182d1f277",
+  "project_agents_sha256": "06b73a9db5691ff5a0c5b34f98ce61e2c5df08e77161f3f93c7fce119d7c5de",
+  "runner_sha256": "25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e",
+  "source_revision": "56cf0c411cda4d35642cac641e15e579213e12ee"
+}

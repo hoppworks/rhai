@@ -1,0 +1,36 @@
+{
+  "pid": 1909346,
+  "start_stat": "1909346 (python3) R 1909307 1909217 1909217 0 -1 4194560 5 0 0 0 0 0 0 0 20 0 1 0 30826334 425984 0 18446744073709551615 94081869864960 94081869866169 140732165279104 0 0 0 0 0 0 0 0 0 17 29 0 0 0 0 0 94081869876584 94081869877252 94082017865728 140732165286155 140732165286542 140732165286542 140732165287911 0\n",
+  "cwd": "/var/roothome/projects/rhai-wayfinder-20261008",
+  "scope": "/root/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18",
+  "scope_device": 36,
+  "scope_inode": 461229379,
+  "scope_uid": 0,
+  "argv": [
+    "python3",
+    "-B",
+    "/home/Daniel/projects/agent-skills/tools/run_scoped.py",
+    "--timeout",
+    "1200",
+    "--",
+    "python3",
+    "-B",
+    "/var/roothome/projects/rhai-wayfinder-20261008/.scratch/rhai-wayfinder-replan-20261008/results/linux-x30-minimum-20261008T223319Z-c8818e49/verify-x30.py",
+    "/var/roothome/projects/rhai-wayfinder-20261008/.scratch/rhai-wayfinder-replan-20261008/results/linux-x30-minimum-20261008T223319Z-c8818e49"
+  ],
+  "runner_sha256": "25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e",
+  "helper_sha256": "d251cc3bf348a6f1bf218a3dd5774f513d042e3c58e06fd56f33b68c99353ebc",
+  "review_sha256": "fdf76038a6316109d5e051049e6e15623c1363338a35b7fbf9b49eb869302968",
+  "capacity": {
+    "mem_available_bytes": 109691789312,
+    "disk_available_bytes": 337118814208,
+    "cpu_count": 32,
+    "load": [
+      5.609375,
+      5.65673828125,
+      5.123046875
+    ],
+    "heavy_processes": []
+  },
+  "outer_pid": 1909307
+}

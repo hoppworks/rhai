@@ -1,0 +1,33 @@
+{
+  "accepted": true,
+  "criteria": [
+    "X30"
+  ],
+  "scope": "Native Linux x86_64, Rust/Cargo1.77.2, testing-environ,sys only",
+  "source_revision": "0fad14acff5e09d2cd873eed5c64e0eff852737c",
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "GREEN": {
+    "exit": 0,
+    "executable_sha256": "4e60a39aec21e32d809b4f2506f6bc044a92a009bcc61eb146a237103ad36b9a",
+    "iterations": 200,
+    "tasks": [
+      3,
+      3
+    ],
+    "descriptors": [
+      4,
+      4
+    ],
+    "cleanup_workers": [
+      1,
+      1
+    ]
+  },
+  "RED": "Applicable historical Rust1.93 wrong-count assertion exit101, four exact test/census functions and shared Engine/TempDir support byte-identical; no replay",
+  "combined_review_file": "combined-review.md",
+  "combined_review_excerpt_sha256": "3e32e963a4f29e90bd4ffeb846e55d430a39b629676f9789e3534bf981c77b00",
+  "complete_original_combined_report_sha256_at_acceptance": "304bb1c3ba0c50f67eecca060e9b9684530de69d768f8e5fbe6cc3a5e340fa9b",
+  "cleanup": "Actual runner0; private runtime and exact empty scope retired; 27 observed PID/start identities absent",
+  "remaining": "Other OS/feature X30, native Windows, release matrix/Ticket03/A-F remain open; no build/cache/artifact claimed reusable",
+  "raw_pending_marker": "phases.json accepted:false is unchanged original pre-review execution data."
+}

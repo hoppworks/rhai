@@ -1,0 +1,62 @@
+{
+  "revision": "0fad14acff5e09d2cd873eed5c64e0eff852737c",
+  "host": "lllm",
+  "target": "x86_64-unknown-linux-gnu",
+  "toolchain": "1.77.2",
+  "features": "testing-environ,sys",
+  "test": "repeated_public_run_calls_keep_fd_count_stable",
+  "criteria": [
+    "X30"
+  ],
+  "scope": "Only native Linux X30 package-minimum row; historical wrong-FD-count RED reused, fresh 1.77.2 baseline GREEN; no Windows, Darwin or full matrix closure",
+  "runner_sha256": "25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e",
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "source_sha256": {
+    "Cargo.toml": "cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e",
+    "build.rs": "78adf9eeea2957e1aa1bd96ee260e43806476a07d665c2ed27db55bc101ed335",
+    "src/packages/sys/process.rs": "090094476662417aa94e2ff519cb8038c1d3721e02be6ec166762502bfbff2e2",
+    "src/packages/sys/process/unix.rs": "55dc5ad528ad2b4fd56d3fcdd42f92af0b30bf3f96db37c476ee31320dcba713",
+    "tests/sys_process.rs": "86f1142ff1ae8de5a8b813e892e407a90c1bec70eab864c20b7735f53015bf41",
+    "tests/fixtures/sys_process_shared_child_contract.rs": "1faf45c57a4fefeaa05683043e064d3485e892887986fef749bedc974230b217",
+    "tests/sys_support/mod.rs": "96faddd40f6162c4893af1d510b1acd77de645c9e7d2e6454a7ab1dde81f7872"
+  },
+  "oracle_functions_sha256": {
+    "resource_census_snapshot": "7eda2d9cf363ebbf3b9baea6729e7173fcf3bee956c66431cacb76a49371798b",
+    "resource_census_wait_for_baseline": "bf90659d8a759d2037b9cc8e24415b05c1f414396a202fa4a00f23df68c8461b",
+    "repeated_public_run_calls_keep_fd_count_stable": "ce9a46cbaae3ea73d88340a14701b6de15620c67d9ac738bad363bb2d81ff1de",
+    "repeated_public_run_calls_keep_fd_count_stable_isolated": "ce05c6d05b3152aa250325e6b7598cd1f8b63aec61aa93ad789f40c10089ad33"
+  },
+  "shared_support_sha256": "96faddd40f6162c4893af1d510b1acd77de645c9e7d2e6454a7ab1dde81f7872",
+  "historical_revision": "56cf0c411cda4d35642cac641e15e579213e12ee",
+  "historical_toolchain": {
+    "cargo": "cargo 1.93.0 (083ac5135 2025-12-15)",
+    "rustc": "rustc 1.93.0 (254b59607 2026-01-19)"
+  },
+  "historical_files": {
+    "historical/sys_process.rs": "2eb69ebae8744fa29926825a8478a8b623f71ba83ec8d45c4fd600ae9091890c",
+    "historical/input-identities.json": "61c844cb2121432e6c6a011cba9c402d2cb7406a607d653d77e9f34da34a2de1",
+    "historical/run-x30-fd-proof.py": "4f6e55a8af5b168f4b4840de6ec66b896b970fcbd906119385d9de070281673e",
+    "historical/cleanup-readback.json": "df4a79e56a8d955601ec3cedb1fbffd1e1e1bb8353603d1251efbc4204fab75e",
+    "historical/mutant-red.status": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c",
+    "historical/mutant-red.stdout": "952b6d4a88d197fdd5049ccf0bd05cce1e8aecfff133b12653aa2b4625ee974f",
+    "historical/mutant-red.stderr": "99ffc0f62775da49489ba1b5a26faeba3ce3d72df18e3f4bc92f305d49c720fe",
+    "historical/restored-green.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+    "historical/restored-green.stdout": "d838b159eba76e7f284455e9ec958fc00285194d05219ffa41c16594c9a0d45c",
+    "historical/restored-green.stderr": "223399d3cef942dd0a16f073c4e1fd6c0b7d8b819c842f74091534def863103c",
+    "historical/proof-result.json": "157c34d930d1308264b5b00a4cdafb4b80a6c56e3918a6cc07d816199ecc7a02",
+    "historical/run-manifest.json": "07a2a36ac8f491144e82bf3142f3a1d239291e069857cbabcdd8c004a7564c69",
+    "historical/SHA256SUMS": "2b2664a9498e86b1f62780b050fd71ce095baece051be33a13ebef3901342d8d",
+    "historical/sys_support-mod.rs": "96faddd40f6162c4893af1d510b1acd77de645c9e7d2e6454a7ab1dde81f7872"
+  },
+  "private_limits": {
+    "wall_seconds": 1200,
+    "storage_bytes": 8589934592,
+    "rss_bytes": 8589934592,
+    "processes": 32,
+    "cargo_jobs": 2
+  },
+  "product_source": "Committed fork revision only. No dirty source/test/Windows/foreign overlay.",
+  "preflight_history": [
+    "Read-only function inventory initially searched for engine in sys_process.rs; actual helper is imported from sys_support. Corrected by exact historical/current shared-support equality. No toolchain/download/build/test started."
+  ]
+}

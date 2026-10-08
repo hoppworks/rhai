@@ -1,0 +1,28 @@
+{
+  "acceptance_scope": "Linux x86_64, Rust/Cargo 1.93.0, testing-environ,sys only",
+  "aggregate_elapsed_seconds": 31.534,
+  "cases": [
+    {
+      "case": "mutant-red",
+      "diagnostic": "200 sequential public run calls changed the descriptor count",
+      "elapsed_seconds": 23.98,
+      "status": 101,
+      "stderr_sha256": "99ffc0f62775da49489ba1b5a26faeba3ce3d72df18e3f4bc92f305d49c720fe",
+      "stdout_sha256": "952b6d4a88d197fdd5049ccf0bd05cce1e8aecfff133b12653aa2b4625ee974f"
+    },
+    {
+      "case": "restored-green",
+      "diagnostic": null,
+      "elapsed_seconds": 6.64,
+      "status": 0,
+      "stderr_sha256": "223399d3cef942dd0a16f073c4e1fd6c0b7d8b819c842f74091534def863103c",
+      "stdout_sha256": "d838b159eba76e7f284455e9ec958fc00285194d05219ffa41c16594c9a0d45c"
+    }
+  ],
+  "runtime_storage_sample_retries": [],
+  "sampled_max_owned_processes": 4,
+  "sampled_max_rss_kib": 910152,
+  "sampled_max_storage_kib": 1284764,
+  "samples_are_periodic_not_continuous_peaks": true,
+  "source_restored": true
+}

@@ -1,8 +1,6 @@
 # Current execution state
 
 Updated: 2026-10-09. Autonomous implementation authorized; no new Goal.
-Accepted Linux1.77.2 baseline X30: real200-run census tasks3/fds4/workers1 unchanged;
-results/linux-x30-minimum-20261008T223319Z-c8818e49/ binds reused RED, review and cleanup.
 
 Next: after the pending encrypted-console answer, compile only held Payload via
 existing CompilerClosureOnly (Runner/Driver reuse), then prove full native custody.
@@ -84,7 +82,7 @@ See results/{example-20261008T090938Z-zmj63_0i,unix-wait-20261008T131127Z-3fcea4
 ipv6-20261008T135030Z-79648696,net-read-entry-20261008T151745Z-a2d7a5a5,
 darwin-process-minimum-20261008T153851Z-a0169b56,f32-process-20261008T162316Z-515571ed}/.
 
-Fork main:10 prior reviewed commits through0fad14ac plus this accepted Linux X30 packet;
+Fork main:0fad14acff5e09d2cd873eed5c64e0eff852737c;10 reviewed owned commits;
 atomic push/readback verifies main as the only remote branch. Laptop main stays
 read-only at c63. Exclude foreign tests/fixtures/sys_process_shared_child_contract.rs
 (SHA14a0808a…) and all unowned changes. Fork hoppworks/rhai main only;

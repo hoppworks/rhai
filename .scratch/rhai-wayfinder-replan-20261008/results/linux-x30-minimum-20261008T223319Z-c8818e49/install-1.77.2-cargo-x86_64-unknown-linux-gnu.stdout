@@ -1,0 +1,5 @@
+install: creating uninstall script at /var/roothome/.local/share/agent-builds/rhai/linux-x30-minimum-efbf99cb698449e59723747749681d18/agent-build-cg4paw9o/toolchain-1.77.2/lib/rustlib/uninstall.sh
+install: installing component 'cargo'
+
+    cargo installed.
+
