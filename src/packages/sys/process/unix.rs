@@ -1382,7 +1382,7 @@ struct ExecutionFaults {
     #[cfg(test)]
     managed_scope_setup_failure_pid_fd: Option<RawFd>,
     #[cfg(test)]
-    managed_scope_setup_failure_after_setpgid: bool,
+    managed_scope_setup_failure_point: Option<ManagedScopeSetupFailurePoint>,
     #[cfg(test)]
     configure_pipe_gate: Option<std::path::PathBuf>,
     #[cfg(test)]
@@ -1408,6 +1408,14 @@ struct ExecutionFaults {
     )>,
     #[cfg(test)]
     overlap_observations: Option<Arc<AtomicUsize>>,
+}
+
+#[cfg(test)]
+#[derive(Clone, Copy, Debug)]
+enum ManagedScopeSetupFailurePoint {
+    BeforeSetpgid,
+    AfterSetpgid,
+    Fchdir,
 }
 
 impl ExecutionFaults {
@@ -1585,10 +1593,19 @@ impl ExecutionFaults {
     }
 
     #[cfg(test)]
-    fn take_managed_scope_setup_failure(&mut self) -> Option<(RawFd, bool)> {
-        self.managed_scope_setup_failure_pid_fd
+    fn take_managed_scope_setup_failure(&mut self) -> (Option<(RawFd, bool)>, Option<RawFd>) {
+        let Some(fd) = self.managed_scope_setup_failure_pid_fd.take() else {
+            return (None, None);
+        };
+        match self
+            .managed_scope_setup_failure_point
             .take()
-            .map(|fd| (fd, self.managed_scope_setup_failure_after_setpgid))
+            .expect("managed-scope setup failure requires a failure point")
+        {
+            ManagedScopeSetupFailurePoint::BeforeSetpgid => (Some((fd, false)), None),
+            ManagedScopeSetupFailurePoint::AfterSetpgid => (Some((fd, true)), None),
+            ManagedScopeSetupFailurePoint::Fchdir => (None, Some(fd)),
+        }
     }
 
     fn configure_pipe(&mut self, fd: RawFd) -> io::Result<()> {
@@ -1616,6 +1633,24 @@ impl ExecutionFaults {
         }
         set_nonblock(fd)
     }
+}
+
+#[cfg(test)]
+fn record_managed_scope_identity(fd: RawFd) -> io::Result<()> {
+    // SAFETY: `getpid` and `getpgrp` are async-signal-safe in this post-fork child hook.
+    let pid = unsafe { libc::getpid() };
+    let pgrp = unsafe { libc::getpgrp() };
+    let pid_bytes = pid.to_ne_bytes();
+    let pgrp_bytes = pgrp.to_ne_bytes();
+    // SAFETY: this test-only child-side receipt writes to its private identity record file.
+    if unsafe { libc::write(fd, pid_bytes.as_ptr().cast(), pid_bytes.len()) }
+        != pid_bytes.len() as isize
+        || unsafe { libc::write(fd, pgrp_bytes.as_ptr().cast(), pgrp_bytes.len()) }
+            != pgrp_bytes.len() as isize
+    {
+        return Err(io::Error::last_os_error());
+    }
+    Ok(())
 }
 
 /// Set up a managed process group inside `Command::pre_exec`.
@@ -2227,7 +2262,8 @@ fn spawn_child(
         .transpose()?;
     let mut faults = ExecutionFaults::take_for_execution();
     #[cfg(test)]
-    let managed_scope_setup_failure = faults.take_managed_scope_setup_failure();
+    let (managed_scope_setup_failure, managed_scope_fchdir_failure) =
+        faults.take_managed_scope_setup_failure();
     #[cfg(not(test))]
     let managed_scope_setup_failure = None;
     let mut command = Command::new(OsStr::new(program));
@@ -2258,6 +2294,14 @@ fn spawn_child(
                     establish_managed_scope(managed_scope_setup_failure)?;
                 }
                 if let Some(fd) = fd {
+                    #[cfg(test)]
+                    if let Some(identity_fd) = managed_scope_fchdir_failure {
+                        record_managed_scope_identity(identity_fd)?;
+                        // Close only this child's inherited cwd descriptor to make real fchdir fail.
+                        if libc::close(fd) < 0 {
+                            return Err(io::Error::last_os_error());
+                        }
+                    }
                     if libc::fchdir(fd) < 0 {
                         return Err(io::Error::last_os_error());
                     }
@@ -2367,7 +2411,8 @@ fn run_map(
         .transpose()?;
     let mut faults = ExecutionFaults::take_for_execution();
     #[cfg(test)]
-    let managed_scope_setup_failure = faults.take_managed_scope_setup_failure();
+    let (managed_scope_setup_failure, managed_scope_fchdir_failure) =
+        faults.take_managed_scope_setup_failure();
     #[cfg(not(test))]
     let managed_scope_setup_failure = None;
     let mut command = Command::new(OsStr::new(program));
@@ -2398,6 +2443,14 @@ fn run_map(
                     establish_managed_scope(managed_scope_setup_failure)?;
                 }
                 if let Some(fd) = fd {
+                    #[cfg(test)]
+                    if let Some(identity_fd) = managed_scope_fchdir_failure {
+                        record_managed_scope_identity(identity_fd)?;
+                        // Close only this child's inherited cwd descriptor to make real fchdir fail.
+                        if libc::close(fd) < 0 {
+                            return Err(io::Error::last_os_error());
+                        }
+                    }
                     if libc::fchdir(fd) < 0 {
                         return Err(io::Error::last_os_error());
                     }
@@ -3256,11 +3309,12 @@ fn fail(
 #[cfg(test)]
 mod tests {
     use super::{
-        completion_ready, read_ready, CleanupService, ExecutionFaults, ManagedScopeState,
-        ReadState, ScopeObservation,
+        completion_ready, read_ready, CleanupService, ExecutionFaults,
+        ManagedScopeSetupFailurePoint, ManagedScopeState, ReadState, ScopeObservation,
     };
     use crate::packages::sys::{
-        ProcessCause, ProcessExit, ProcessScope, ProgramPolicy, SysConfig, SysError, SysPackage,
+        FsAccess, ProcessCause, ProcessExit, ProcessScope, ProgramPolicy, SysConfig, SysError,
+        SysPackage,
     };
     use crate::packages::Package;
     use crate::{Engine, EvalAltResult};
@@ -3838,13 +3892,13 @@ mod tests {
 
     fn fail_managed_scope_setup_for_next_execution(
         pid_fd: RawFd,
-        after_setpgid: bool,
+        failure_point: ManagedScopeSetupFailurePoint,
     ) -> Arc<AtomicBool> {
         let retired = Arc::new(AtomicBool::new(false));
         NEXT_EXECUTION_FAULTS.with(|next| {
             let previous = next.borrow_mut().replace(ExecutionFaults {
                 managed_scope_setup_failure_pid_fd: Some(pid_fd),
-                managed_scope_setup_failure_after_setpgid: after_setpgid,
+                managed_scope_setup_failure_point: Some(failure_point),
                 retired: Some(Arc::clone(&retired)),
                 ..ExecutionFaults::default()
             });
@@ -5610,7 +5664,9 @@ mod tests {
         operation: &str,
         marker: &Path,
         pid_record: &Path,
-        after_setpgid: bool,
+        failure_point: ManagedScopeSetupFailurePoint,
+        cwd: Option<&str>,
+        fs_root: Option<&Path>,
     ) -> i32 {
         let pid_capture = OpenOptions::new()
             .write(true)
@@ -5619,27 +5675,33 @@ mod tests {
             .open(pid_record)
             .unwrap();
         let retired =
-            fail_managed_scope_setup_for_next_execution(pid_capture.as_raw_fd(), after_setpgid);
+            fail_managed_scope_setup_for_next_execution(pid_capture.as_raw_fd(), failure_point);
         let mut engine = Engine::new();
-        let package = SysPackage::new(
-            SysConfig::default()
-                .programs(ProgramPolicy::Any)
-                .process_scope(ProcessScope::Managed),
-        )
-        .unwrap();
+        let mut config = SysConfig::default()
+            .programs(ProgramPolicy::Any)
+            .process_scope(ProcessScope::Managed);
+        if let Some(root) = fs_root {
+            config = config.fs_root(root, FsAccess::Read);
+        }
+        let package = SysPackage::new(config).unwrap();
         package.register_into_engine(&mut engine);
 
         let shell = "printf managed-child-executed > \"$RHAI_TEST_SCOPE_MARKER\"";
+        let cwd_option = cwd
+            .map(|cwd| format!("cwd: {}, ", quote_rhai(cwd)))
+            .unwrap_or_default();
+        let options = format!(
+            "#{{ {cwd_option}env: #{{ \"RHAI_TEST_SCOPE_MARKER\": {} }} }}",
+            quote_rhai(marker.to_str().unwrap()),
+        );
         let script = match operation {
             "run" => format!(
-                "run(\"/bin/sh\", [\"-c\", {}], #{{ env: #{{ \"RHAI_TEST_SCOPE_MARKER\": {} }} }})",
+                "run(\"/bin/sh\", [\"-c\", {}], {options})",
                 quote_rhai(shell),
-                quote_rhai(marker.to_str().unwrap()),
             ),
             "spawn" => format!(
-                "let child = spawn(\"/bin/sh\", [\"-c\", {}], #{{ env: #{{ \"RHAI_TEST_SCOPE_MARKER\": {} }} }}); child.kill(); child.wait()",
+                "let child = spawn(\"/bin/sh\", [\"-c\", {}], {options}); child.kill(); child.wait()",
                 quote_rhai(shell),
-                quote_rhai(marker.to_str().unwrap()),
             ),
             other => panic!("unexpected operation {other}"),
         };
@@ -5650,9 +5712,21 @@ mod tests {
             other => panic!("expected managed-scope spawn error, got {other:?}"),
         };
         match &sys_error {
-            SysError::Io { op, kind, .. } => {
+            SysError::Io {
+                op, kind, message, ..
+            } => {
                 assert_eq!(*op, "spawn process");
-                assert_eq!(*kind, io::ErrorKind::PermissionDenied);
+                match failure_point {
+                    ManagedScopeSetupFailurePoint::BeforeSetpgid
+                    | ManagedScopeSetupFailurePoint::AfterSetpgid => {
+                        assert_eq!(*kind, io::ErrorKind::PermissionDenied);
+                    }
+                    ManagedScopeSetupFailurePoint::Fchdir => {
+                        let expected = io::Error::from_raw_os_error(libc::EBADF);
+                        assert_eq!(*kind, expected.kind());
+                        assert_eq!(message, &expected.to_string());
+                    }
+                }
             }
             other => panic!("expected setup Io error without fallback, got {other:?}"),
         }
@@ -5662,6 +5736,7 @@ mod tests {
         );
         let pid_bytes = fs::read(pid_record).unwrap();
         let pid_size = std::mem::size_of::<libc::pid_t>();
+        let after_setpgid = !matches!(failure_point, ManagedScopeSetupFailurePoint::BeforeSetpgid);
         assert_eq!(
             pid_bytes.len(),
             pid_size * if after_setpgid { 2 } else { 1 }
@@ -5684,7 +5759,7 @@ mod tests {
             "failed launch reservation was not retired"
         );
         println!(
-            "managed-scope-setup operation={operation} child_pid={pid} after_setpgid={after_setpgid} pid=ESRCH group=ESRCH reservation=retired marker=absent"
+            "managed-scope-setup operation={operation} child_pid={pid} failure_point={failure_point:?} pid=ESRCH group=ESRCH reservation=retired marker=absent"
         );
         drop(error);
         drop(sys_error);
@@ -5705,7 +5780,14 @@ mod tests {
             ("run", &run_marker, &run_pid),
             ("spawn", &spawn_marker, &spawn_pid),
         ] {
-            assert_managed_scope_setup_failure(operation, marker, pid_record, false);
+            assert_managed_scope_setup_failure(
+                operation,
+                marker,
+                pid_record,
+                ManagedScopeSetupFailurePoint::BeforeSetpgid,
+                None,
+                None,
+            );
             assert!(
                 !marker.exists(),
                 "{operation} command executed after setup failure"
@@ -5731,10 +5813,45 @@ mod tests {
             ("run", &run_marker, &run_pid),
             ("spawn", &spawn_marker, &spawn_pid),
         ] {
-            assert_managed_scope_setup_failure(operation, marker, pid_record, true);
+            assert_managed_scope_setup_failure(
+                operation,
+                marker,
+                pid_record,
+                ManagedScopeSetupFailurePoint::AfterSetpgid,
+                None,
+                None,
+            );
             assert!(
                 !marker.exists(),
                 "{operation} command executed after partial setup failure"
+            );
+        }
+    }
+
+    #[test]
+    fn managed_scope_fchdir_failure_cleans_created_group() {
+        let fixture = FixtureDir::new();
+        let cwd = fixture.0.join("workdir");
+        fs::create_dir(&cwd).unwrap();
+        let run_marker = fixture.0.join("run-marker");
+        let spawn_marker = fixture.0.join("spawn-marker");
+        let run_pid = fixture.0.join("run-child-identity");
+        let spawn_pid = fixture.0.join("spawn-child-identity");
+        for (operation, marker, pid_record) in [
+            ("run", &run_marker, &run_pid),
+            ("spawn", &spawn_marker, &spawn_pid),
+        ] {
+            assert_managed_scope_setup_failure(
+                operation,
+                marker,
+                pid_record,
+                ManagedScopeSetupFailurePoint::Fchdir,
+                Some("workdir"),
+                Some(&fixture.0),
+            );
+            assert!(
+                !marker.exists(),
+                "{operation} command executed after fchdir failure"
             );
         }
     }
