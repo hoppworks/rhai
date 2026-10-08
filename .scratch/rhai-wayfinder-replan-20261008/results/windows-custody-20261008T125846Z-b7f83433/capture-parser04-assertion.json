@@ -1,0 +1,14 @@
+{
+  "capture_exit": 0,
+  "capture_assertions": 5,
+  "capture_journal_records": 8,
+  "capture_evidence_readback_runtime_removed": true,
+  "closure_fixture": "scripted zero-count seam, not native Job proof",
+  "parser_exit": 1,
+  "parser_assertion": "FAILED: independent canonical journal GUID accepted",
+  "owner_exit": -536870909,
+  "verified_originals": 27,
+  "full_public_loop_green": false,
+  "host": "lllm/native Windows preserved guest",
+  "source_binding": "capture-parser04-binding.json"
+}

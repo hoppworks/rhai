@@ -1,0 +1,1 @@
+MonitorAcceptanceDriverFixture assertions=24

@@ -1,0 +1,10 @@
+PASS private-run-root policy cases: valid, old-root, depth, traversal, reparse, nonstandard ancestors, drive binding
+PASS setup-failure-control: child PID 8040; primary exception retained; nested job teardown removed owned child; outer job returned to owner-only.
+PASS exit-code-regression-17-wrong-expected rejected with actual 17 expected 0
+PASS exit-code-regression-zero exit=0
+PASS exit-code-regression-17 exit=17
+PASS exit-code-regression-unavailable rejected
+PASS compile-PayloadFixture exit=0
+UNRUN RunProcessCreationFixtures.ps1: it exercises the disabled legacy --source entrypoint.
+RETAINED run root: C:\Users\RhaiTest\.local\share\agent-builds\rhai\csc-cl01-b7f83433\run\monitor-source-523f048638654f59a7fda5d95e992292
+BUILD_ONLY_PASS: retained native binaries and original logs at C:\Users\RhaiTest\.local\share\agent-builds\rhai\csc-cl01-b7f83433\run\monitor-source-523f048638654f59a7fda5d95e992292; driver must be launched from an independent uncontained process.

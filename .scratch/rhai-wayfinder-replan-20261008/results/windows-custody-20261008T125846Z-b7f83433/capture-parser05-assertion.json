@@ -1,0 +1,14 @@
+{
+  "parser_exit": 0,
+  "parser_assertions": 24,
+  "capture_exit": 0,
+  "production_compiles": 3,
+  "compiler_negative": 1,
+  "owner_exit": -2146232797,
+  "owner_status_hex": "80131623",
+  "owner_disposition": "OPEN, no manifest or BUILD_ONLY_PASS receipt",
+  "verified_originals": 34,
+  "expected_parser_red": "capture-parser04-assertion.json",
+  "public_loop_green": false,
+  "cause": "not yet identified; first bounded1026 event query returned NoEventsFoundError; broader ownmessage readback pending"
+}

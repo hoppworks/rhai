@@ -1,0 +1,185 @@
+{
+  "frames": 101,
+  "files": {
+    "bootstrap.stdout": {
+      "path": "bootstrap.stdout",
+      "sha256": "4e798d7b9fe46fbefa268a0f2175243bd9877dce46c686b72fcb3c0fb60530e0",
+      "length": 1296
+    },
+    "bootstrap.stderr": {
+      "path": "bootstrap.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "observer.json": {
+      "path": "observer.json",
+      "sha256": "16681168c8dc825486fd68f38ccef17ab2d6eca211b684035846f0753d19a8ca",
+      "length": 505
+    },
+    "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/compile-native-driver.stderr.txt": {
+      "path": "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/compile-native-driver.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/compile-native-driver.stdout.txt": {
+      "path": "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/compile-native-driver.stdout.txt",
+      "sha256": "b8b7f2e74fc9e43c8cdedd746818f8b21e8f7472eccfadcbd73b5522f4756dc2",
+      "length": 2859
+    },
+    "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/compile-native-runtime-acl.stderr.txt": {
+      "path": "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/compile-native-runtime-acl.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/compile-native-runtime-acl.stdout.txt": {
+      "path": "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/compile-native-runtime-acl.stdout.txt",
+      "sha256": "2271ff6669cf4b21eecc8b92896dbf29b65743bf335caaf30f9be5e702db326b",
+      "length": 3634
+    },
+    "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/compile-native-scope-policy.stderr.txt": {
+      "path": "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/compile-native-scope-policy.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/compile-native-scope-policy.stdout.txt": {
+      "path": "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/compile-native-scope-policy.stdout.txt",
+      "sha256": "b8b7f2e74fc9e43c8cdedd746818f8b21e8f7472eccfadcbd73b5522f4756dc2",
+      "length": 2859
+    },
+    "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/compile-PayloadFixture.stderr.txt": {
+      "path": "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/compile-PayloadFixture.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/compile-PayloadFixture.stdout.txt": {
+      "path": "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/compile-PayloadFixture.stdout.txt",
+      "sha256": "7d6f399bc4ddebe9af0b4976bbe3450aac7fb48c8eba5ec95e37cae5283c787d",
+      "length": 131
+    },
+    "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/compile-production-runner.stderr.txt": {
+      "path": "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/compile-production-runner.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/compile-production-runner.stdout.txt": {
+      "path": "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/compile-production-runner.stdout.txt",
+      "sha256": "b8b7f2e74fc9e43c8cdedd746818f8b21e8f7472eccfadcbd73b5522f4756dc2",
+      "length": 2859
+    },
+    "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/exit-code-regression-17-wrong-expected.stderr.txt": {
+      "path": "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/exit-code-regression-17-wrong-expected.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/exit-code-regression-17-wrong-expected.stdout.txt": {
+      "path": "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/exit-code-regression-17-wrong-expected.stdout.txt",
+      "sha256": "69826b89317496600a95e98535238d73a7091d7e0ff5c9585f08c25bb71a75c3",
+      "length": 40
+    },
+    "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/exit-code-regression-17.stderr.txt": {
+      "path": "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/exit-code-regression-17.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/exit-code-regression-17.stdout.txt": {
+      "path": "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/exit-code-regression-17.stdout.txt",
+      "sha256": "32d543b6dda9fd1365b76e3057e9fac50673187a4c91cb8c18413593043e1689",
+      "length": 25
+    },
+    "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/exit-code-regression-zero.stderr.txt": {
+      "path": "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/exit-code-regression-zero.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/exit-code-regression-zero.stdout.txt": {
+      "path": "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/exit-code-regression-zero.stdout.txt",
+      "sha256": "2b98ea68ce93cdb1de4a7d10f4c46c17aacc658cc11ed8e32cc0d15612e9c568",
+      "length": 27
+    },
+    "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/expected-compiler-failure.stderr.txt": {
+      "path": "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/expected-compiler-failure.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/expected-compiler-failure.stdout.txt": {
+      "path": "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/expected-compiler-failure.stdout.txt",
+      "sha256": "3f7aa1c628a899d6da06d5cb4d535ceb4c090a159cced105d20e03f2d6aa9575",
+      "length": 366
+    },
+    "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/run-native-runtime-acl.stderr.txt": {
+      "path": "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/run-native-runtime-acl.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/run-native-runtime-acl.stdout.txt": {
+      "path": "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/run-native-runtime-acl.stdout.txt",
+      "sha256": "3813886889d75880dee8845e9d3d6952100d48082bce61c71fee5f4684b9c99e",
+      "length": 4871
+    },
+    "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/run-native-scope-policy.stderr.txt": {
+      "path": "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/run-native-scope-policy.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/run-native-scope-policy.stdout.txt": {
+      "path": "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/run-native-scope-policy.stdout.txt",
+      "sha256": "17ebb3446b7238ac9d1a5627cce14cc677a0ea2f7969700d164d4d7cf7c7a433",
+      "length": 144
+    },
+    "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/setup-failure-child.stderr.txt": {
+      "path": "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/setup-failure-child.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/setup-failure-child.stdout.txt": {
+      "path": "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/setup-failure-child.stdout.txt",
+      "sha256": "8ff179f55be1a9908f3e33e97da8aafce587111fab0b67cd5a0cf189c4bad44d",
+      "length": 93
+    },
+    "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/setup-failure-control.stderr.txt": {
+      "path": "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/setup-failure-control.stderr.txt",
+      "sha256": "dc383c8e63001e4200c71dd2667219139fd7c53397e9e0b15ef4bff8bc79b12c",
+      "length": 81
+    },
+    "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/setup-failure-control.stdout.txt": {
+      "path": "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/setup-failure-control.stdout.txt",
+      "sha256": "a1064b1c88c57b95c4efbc4875ef110c1b3610960a8f19b8180b39c0e6a1a3b9",
+      "length": 118
+    },
+    "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/setup-failure-control.txt": {
+      "path": "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/logs/setup-failure-control.txt",
+      "sha256": "67546ec796e44f49e71cb880ff751026c59165883944d10a192089c33edbef2d",
+      "length": 212
+    },
+    "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/build-manifest.txt": {
+      "path": "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/build-manifest.txt",
+      "sha256": "73ea53e641d63addd3efcdeae69d1bf51562273475cf00e20207f4b9ed273c08",
+      "length": 2127
+    },
+    "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/run-result.txt": {
+      "path": "run/monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a/run-result.txt",
+      "sha256": "79c5b9102422b2f755e2aed8ef416a0a3ab0156de7c5ba4c85dbeda2e6ac6761",
+      "length": 124
+    }
+  },
+  "complete": true,
+  "begin": {
+    "id": "rhai-runtime-acl-green02-20261008T125846Z-b7f83433",
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\runtime-acl-green02-20261008-b7f83433",
+    "run": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\runtime-acl-green02-20261008-b7f83433\\run\\monitor-source-f5d92b7bceaa46e8b751d9359c3b0f6a",
+    "exit": 0,
+    "accepted": true,
+    "failure": "",
+    "input_manifest_sha256": "b26a6156d74c0949182f70fdd60e0d28d15dc22e3fc79ad37ac2a34d324b9ec3",
+    "execution_policy_changed": false,
+    "driver_launched": false
+  },
+  "end": {
+    "id": "rhai-runtime-acl-green02-20261008T125846Z-b7f83433",
+    "driver_launched": false,
+    "files": 32,
+    "accepted": true,
+    "exit": 0,
+    "guest_evidence_retained": true
+  }
+}

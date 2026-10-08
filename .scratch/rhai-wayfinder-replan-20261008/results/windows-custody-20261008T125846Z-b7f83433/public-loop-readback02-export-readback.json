@@ -1,0 +1,71 @@
+{
+  "frames": 31,
+  "files": {
+    "bootstrap.stdout": {
+      "path": "bootstrap.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "bootstrap.stderr": {
+      "path": "bootstrap.stderr",
+      "sha256": "637584322863a97de7e2ab7999be5d5eec8a98f04f4dd88ea243b6145bca4a1e",
+      "length": 66
+    },
+    "observer.json": {
+      "path": "observer.json",
+      "sha256": "e6d1d73c4f6a39a619da0cbe76ebbdff69233c11a0bd5d4495ac3fc4af4687d5",
+      "length": 889
+    },
+    "run/.scoped-run-cc02de661397432f834f871a94012429.journal": {
+      "path": "run/.scoped-run-cc02de661397432f834f871a94012429.journal",
+      "sha256": "80c36e9ae97c4caa7c578fa00e5a662a40d02c7e0f40ed4aff90269ccc7694c0",
+      "length": 2279
+    },
+    "run/.scoped-evidence-eebd858296ed4437bda95f040b1e0802/manifest.txt": {
+      "path": "run/.scoped-evidence-eebd858296ed4437bda95f040b1e0802/manifest.txt",
+      "sha256": "3bef20b7682084fc5eebd3dffcb1f4e021f6158764c1ae62851dd5ebc40722ad",
+      "length": 395
+    },
+    "run/.scoped-evidence-eebd858296ed4437bda95f040b1e0802/stderr.log": {
+      "path": "run/.scoped-evidence-eebd858296ed4437bda95f040b1e0802/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/.scoped-evidence-eebd858296ed4437bda95f040b1e0802/stdout.log": {
+      "path": "run/.scoped-evidence-eebd858296ed4437bda95f040b1e0802/stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/.scoped-evidence-eebd858296ed4437bda95f040b1e0802/runtime/fixture.exe": {
+      "path": "run/.scoped-evidence-eebd858296ed4437bda95f040b1e0802/runtime/fixture.exe",
+      "sha256": "99d5f8135ae38e439bf909d54b3556485882fec3b35fd38daf84ba09324d83b4",
+      "length": 4096
+    },
+    "run/.scoped-evidence-eebd858296ed4437bda95f040b1e0802/runtime/payload-record.txt": {
+      "path": "run/.scoped-evidence-eebd858296ed4437bda95f040b1e0802/runtime/payload-record.txt",
+      "sha256": "47cc3b9137299b2bc87647aaeaaebdebf8f8e494c26f9247a9d3a44603338d92",
+      "length": 17
+    }
+  },
+  "complete": true,
+  "begin": {
+    "id": "rhai-public-loop-readback02-20261008T125846Z-b7f83433",
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\custody-loop02-20261008-b7f83433",
+    "exit": 2,
+    "accepted": false,
+    "driver_launched": false,
+    "read_only_original_snapshot": true,
+    "active_custody_names": 0,
+    "prior_exact_driver_exited": true,
+    "prior_pipes_drained": true,
+    "product_run": false
+  },
+  "end": {
+    "id": "rhai-public-loop-readback02-20261008T125846Z-b7f83433",
+    "driver_launched": false,
+    "files": 9,
+    "accepted": false,
+    "exit": 2,
+    "guest_evidence_retained": true
+  }
+}

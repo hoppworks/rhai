@@ -1,0 +1,3 @@
+NATIVE_PRIVATE_SCOPE_ASSERTION: System.InvalidOperationException: native custody root must equal the explicitly selected current-user private scope
+   at NativeScopePolicyFixture.Check(Boolean condition, String message)
+   at NativeScopePolicyFixture.Main()

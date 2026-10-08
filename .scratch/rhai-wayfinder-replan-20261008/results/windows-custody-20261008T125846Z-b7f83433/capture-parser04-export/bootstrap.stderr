@@ -1,0 +1,2 @@
+Primary source-fixture failure: System.Management.Automation.RuntimeException: run-native-driver-parser exited 1 (expected 0); inspect C:\Users\RhaiTest\.local\share\agent-builds\rhai\cap-g04-b7f83433\run\monitor-source-3f5a7e0c39fd4b9bbdcaf7228a320a47\logs\run-native-driver-parser.stdout.txt and C:\Users\RhaiTest\.local\share\agent-builds\rhai\cap-g04-b7f83433\run\monitor-source-3f5a7e0c39fd4b9bbdcaf7228a320a47\logs\run-native-driver-parser.stderr.txt
+Failed source fixture: terminating the exact compiler job with status E0000003.

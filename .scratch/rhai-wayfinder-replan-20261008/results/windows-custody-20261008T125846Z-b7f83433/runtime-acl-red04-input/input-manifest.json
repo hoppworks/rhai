@@ -1,0 +1,16 @@
+{
+  "tools/windows-scoped-runner/LaunchSpecification.cs": "e08957b13d5ed5f86cb37d0545aa876aac50e507692d112b39882f465fff8f2b",
+  "tools/windows-scoped-runner/LeaseMonitor.cs": "72c79f18c96e28f27cd1b7b39b1025da9a250e0608885de7dc48934512a46bfc",
+  "tools/windows-scoped-runner/MonitorAcceptanceDriver.cs": "d6c37fafc3ce96650e28d506ac06c97ea5a3554c5a9103ad5dae60c329eeb199",
+  "tools/windows-scoped-runner/MonitorPayloadJob.cs": "ac5c62bdcd4402b1f103131e082ab6e35a6d979b80629ea6ffef82b386f2353b",
+  "tools/windows-scoped-runner/MonitorSpecificationIntake.cs": "0f0a71563e6c3d99f0c643644d4b56951f6c69ceb3b10b03157f68dc37bb8412",
+  "tools/windows-scoped-runner/MonitorStagingHandoff.cs": "c541f7d885d032c074461a5a0173b9ae6291ef7d8cd1b9fd2ce4a4f56d1e0e6e",
+  "tools/windows-scoped-runner/MonitorTransport.cs": "4a307370af955b49bae50b86fec5be9039db392c730897a3c87111e0191b89a7",
+  "tools/windows-scoped-runner/ScopedRunner.cs": "d3a77f0daeebd5beed2b277fae9dc6a522acf1454bb5d8d776d84e1dc8e896c8",
+  "tools/windows-scoped-runner/SpecificationTransfer.cs": "7a9edfe98d84868b55146280bd5ed29576ee0c8725cf9f6c785b784bc0ad25c2",
+  "tools/windows-scoped-runner/WindowsCustodyBackend.cs": "a962f14e0147fa5ff78d589533af9e62abc79f1a056ac566dad6c835827946b8",
+  "tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs": "4d0ec278445be0220dffef8db31f25dbb424a88833b2b434328d6969e085c07c",
+  "tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs": "8f43d33928262ae181aa5396feffef9b0260653609b5be8b01da7b0a7e7b00f7",
+  "tools/windows-scoped-runner/fixtures/PayloadFixture.cs": "e806b393f9f7fe24d349879e70ff247479592373831a1eb30f55e5950d341676",
+  "tools/windows-scoped-runner/fixtures/RunSourceFixtures.ps1": "3a9f7b065801f5554b54bad0d97f78681419765ef972ddaeaeaffa4778495ba8"
+}

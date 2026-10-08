@@ -1,0 +1,16 @@
+{
+  "fixture_exit": 1,
+  "bootstrap_exit": -536870909,
+  "accepted": false,
+  "original_export_files": 23,
+  "failure": "Actual production CapturePayloadEvidence reopening own runtime directory conflicts with retained DELETE-access handle",
+  "journal_records": [
+    "INTENT|a5aebf8f729e4dc8b09524e76a1f9b11|C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\cap-r01-b7f83433\\run\\monitor-source-5245e5b64cd0433081906592d29eabd8\\temp\\ev-5c878f7a\\scoped-a5aebf8f729e4dc8b09524e76a1f9b11|C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\cap-r01-b7f83433\\run\\monitor-source-5245e5b64cd0433081906592d29eabd8\\temp\\ev-5c878f7a\\.scoped-run-d614b4ee309445d4b24f2f6f55e24924.journal|46E8EB5AE8EB46B1:00028333000000040000000000000000|46E8EB5AE8EB46B1:0002833b000000040000000000000000",
+    "IDENTITY|a5aebf8f729e4dc8b09524e76a1f9b11|46E8EB5AE8EB46B1:0002833c000000040000000000000000|46E8EB5AE8EB46B1:00028333000000040000000000000000|46E8EB5AE8EB46B1:0002833b000000040000000000000000",
+    "STAGED|a5aebf8f729e4dc8b09524e76a1f9b11|7|64|13881B989D2A5F86C482D61E8BDA2B12424694D41ACBBD2E0484F942E96CD6BF|E63EF6B36D313561C13ADB5233200E9328D685FD4EA71C9168D29EED06DC1C08|46E8EB5AE8EB46B1:0002833e000000040000000000000000",
+    "LIFECYCLE|a5aebf8f729e4dc8b09524e76a1f9b11|46E8EB5AE8EB46B1:0002833c000000040000000000000000|deadline=16524593|operation=NONE|cleanup=NONE|cleanup_confirmed=1"
+  ],
+  "journal_sha256": "ada00e412dbf6a421085cec45f0ac2c6d93610c90b08923ea5e5ee3228cf4cf8",
+  "scripted_closure_not_native_job_proof": true,
+  "later_manifest_sharing_hypothesis": "Unproven; execution stopped at earlier runtime re-open."
+}

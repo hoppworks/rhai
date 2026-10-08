@@ -1,0 +1,2 @@
+Primary source-fixture failure: System.Management.Automation.RuntimeException: run-native-runtime-acl exited 1 (expected 0); inspect C:\Users\RhaiTest\.local\share\agent-builds\rhai\runtime-acl-red04-20261008-b7f83433\run\monitor-source-1ade65a0b63946258fd8793e39e2846b\logs\run-native-runtime-acl.stdout.txt and C:\Users\RhaiTest\.local\share\agent-builds\rhai\runtime-acl-red04-20261008-b7f83433\run\monitor-source-1ade65a0b63946258fd8793e39e2846b\logs\run-native-runtime-acl.stderr.txt
+Failed source fixture: terminating the exact compiler job with status E0000003.

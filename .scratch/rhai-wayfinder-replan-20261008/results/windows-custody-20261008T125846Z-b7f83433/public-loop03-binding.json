@@ -1,0 +1,11 @@
+{
+  "entry_sha256": "05fef2061a336e7fafc1a50395d194db29fd45336cee9f530dd12f96f2b0c3b3",
+  "new_driver_sha256": "c73bed48edb7b8fba7249244e1fabfdc18538157658d4825144fc2ac51c5cec7",
+  "reused_runner_sha256": "bf1f880e3d8ba2112afecd29f6b1551ae3e2cca1343141cd4f92e214c6fdc57f",
+  "reused_payload_sha256": "99d5f8135ae38e439bf909d54b3556485882fec3b35fd38daf84ba09324d83b4",
+  "new_driver_origin": "driver-identity01 nativefixture27/ownerBUILD_ONLY_PASS,24 originals71frames",
+  "prior_red": "public-loop02 driver exit2 INTENT invalid; independent original journal eight verifiedrecords endingREMOVED",
+  "observer_bound_seconds": 10,
+  "no_build": true,
+  "executed": false
+}

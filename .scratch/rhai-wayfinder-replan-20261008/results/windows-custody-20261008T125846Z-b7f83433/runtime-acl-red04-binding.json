@@ -1,0 +1,8 @@
+{
+  "start_sha256": "3a43b531b665979bef87c861dfaaef6517888f0b040476466f9e24d9bd7c9b67",
+  "input_manifest_sha256": "4436b0f15b73a4a515d4ea53605175f7418d4d80e07a98994aa3018478a10c58",
+  "expected_fixture_exit": 1,
+  "expected_assertion": "FAIL ordinary inherited private runtime entries are removed",
+  "backend_unchanged": true,
+  "readback_order_fix_only": "negative journal read after live no-sharing allocation disposed"
+}

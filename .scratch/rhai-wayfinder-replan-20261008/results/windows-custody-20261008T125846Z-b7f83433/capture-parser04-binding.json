@@ -1,0 +1,15 @@
+{
+  "entry_sha256": "f3182e296d7e8443e3ec68d8d025e423f9814b55d645c2f1c051cb0add25cb7e",
+  "manifest_sha256": "15842c2be4c6c40891b3f291d489a4ab02ec35b93b1c64cde66d96e302c260d8",
+  "backend_sha256": "ba8c3a97fb07e424f18db33bfe814f00f9d9034a6de39094235dc7429b8724a2",
+  "transport_sha256": "ed23c8615af7d8c1b545d3108342640c46f7e245b4e6a83a7c98bf1720a74de8",
+  "custody_fixture_sha256": "1cd3885d596ab5c847ab9d7f38a8c3a821860a445839b128153f4ec10fb88d8a",
+  "parser_fixture_sha256": "901bca7dafffcc611cdddec5262aaeee5845bc32e3c038fb2f5743f3721347ad",
+  "selected": "payload-evidence then pure driver parser",
+  "expected": "captureGREEN then parser meaningful RED; original production parser still rejects independent journal GUID",
+  "target_host": "lllm only, after verified cold migration",
+  "scope": "cap-g04-b7f83433",
+  "run_child": "monitor-source-3f5a7e0c39fd4b9bbdcaf7228a320a47",
+  "not_native_job_proof": true,
+  "source_review_finding": "Guaranteed CRC nibble mutation resolves P2 no-op negative control; parser03 preserved unexecuted."
+}

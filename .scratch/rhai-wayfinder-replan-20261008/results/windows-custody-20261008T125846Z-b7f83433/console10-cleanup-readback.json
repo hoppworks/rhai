@@ -1,0 +1,15 @@
+{
+  "local_controller_pid": 54390,
+  "local_websocket_pid": 54394,
+  "both_absent": true,
+  "outer_exec_exit": 143,
+  "termination_cause": "unconfirmed; observed absent before own stop attempt",
+  "scope_absent": true,
+  "validated_device": 16777234,
+  "validated_inode": 226843349,
+  "validated_uid": 501,
+  "open_scope_handles": false,
+  "general_cua_codex_processes_untouched": true,
+  "reusable_cached_original": "console-client-source.tar",
+  "new_local_proxy_started": false
+}

@@ -1,0 +1,15 @@
+{
+  "entry_sha256": "1614d780806d3d63b3207a6e39917a48d27782eecd90067f74bafbd2001c77e1",
+  "retained_binaries": {
+    "ScopedRunner.exe": "bf1f880e3d8ba2112afecd29f6b1551ae3e2cca1343141cd4f92e214c6fdc57f",
+    "MonitorAcceptanceDriver.exe": "fbbd168faf214fc5017e175f1505c5325d27c83b316c08b4141c4ee87eadbad5",
+    "PayloadFixture.exe": "99d5f8135ae38e439bf909d54b3556485882fec3b35fd38daf84ba09324d83b4"
+  },
+  "origin": "capture-parser05 actual production compile0; artifact-readback01 14 matching source pins, same compiler and no active custody/compiler process",
+  "prior_red": "public-loop01-assertion.json",
+  "scope": "custody-loop02-20261008-b7f83433",
+  "observer_bound_seconds": 10,
+  "no_build": true,
+  "executed": false,
+  "owner_closure05_still_open": true
+}

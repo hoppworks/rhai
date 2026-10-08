@@ -1,0 +1,7 @@
+payload evidence capture fixture failed: System.IO.IOException: CreateFileW(pin directory) failed: C:\Users\RhaiTest\.local\share\agent-builds\rhai\cap-r01-b7f83433\run\monitor-source-5245e5b64cd0433081906592d29eabd8\temp\ev-5c878f7a\scoped-a5aebf8f729e4dc8b09524e76a1f9b11 ---> System.ComponentModel.Win32Exception: The process cannot access the file because it is being used by another process
+   --- End of inner exception stack trace ---
+   at WindowsCustodyBackend.OpenDirectory(String path, Boolean includeDeleteAccess, Boolean includeListAccess)
+   at WindowsCustodyBackend.RuntimeAllocation.CapturePayloadEvidence(ExactJobClosureProof proof, Nullable`1 payloadExitCode, PayloadSupervisionOutcome supervision, UInt64 deadline)
+   at CustodyBackendFixture.PayloadEvidenceCaptureContracts(String fixture)
+FAIL production evidence capture receipt binds exact proof and independent snapshot readback
+FAIL evidence receipt cannot be rebound and production removal follows evidence and outcome records

@@ -1,0 +1,49 @@
+{
+  "frames": 10,
+  "files": {
+    "bootstrap.stdout": {
+      "path": "bootstrap.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "bootstrap.stderr": {
+      "path": "bootstrap.stderr",
+      "sha256": "637584322863a97de7e2ab7999be5d5eec8a98f04f4dd88ea243b6145bca4a1e",
+      "length": 66
+    },
+    "observer.json": {
+      "path": "observer.json",
+      "sha256": "e6d1d73c4f6a39a619da0cbe76ebbdff69233c11a0bd5d4495ac3fc4af4687d5",
+      "length": 889
+    }
+  },
+  "complete": true,
+  "begin": {
+    "id": "rhai-public-loop02-20261008T125846Z-b7f83433",
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\custody-loop02-20261008-b7f83433",
+    "run": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\custody-loop02-20261008-b7f83433\\run",
+    "exit": 2,
+    "accepted": false,
+    "failure": "System.Management.Automation.RuntimeException: Public native driver exited 2; preserve exact original logs and session.",
+    "fresh_host_record": false,
+    "parent_environment_changed": false,
+    "driver_launched": true,
+    "exact_driver_exited": true,
+    "pipes_drained": true,
+    "retained_driver_handles": false,
+    "retained_binaries": {
+      "PayloadFixture.exe": "99d5f8135ae38e439bf909d54b3556485882fec3b35fd38daf84ba09324d83b4",
+      "MonitorAcceptanceDriver.exe": "fbbd168faf214fc5017e175f1505c5325d27c83b316c08b4141c4ee87eadbad5",
+      "ScopedRunner.exe": "bf1f880e3d8ba2112afecd29f6b1551ae3e2cca1343141cd4f92e214c6fdc57f"
+    },
+    "product_run": false
+  },
+  "end": {
+    "id": "rhai-public-loop02-20261008T125846Z-b7f83433",
+    "driver_launched": true,
+    "files": 3,
+    "accepted": false,
+    "exit": 2,
+    "guest_evidence_retained": true
+  }
+}

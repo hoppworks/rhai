@@ -1,0 +1,10 @@
+{
+  "start_sha256": "135c88f78bb448216da090bf615d57ed8f265bd60683f36933e8ab031f556e56",
+  "input_manifest_sha256": "b26a6156d74c0949182f70fdd60e0d28d15dc22e3fc79ad37ac2a34d324b9ec3",
+  "expected_fixture_exit": 0,
+  "red": "runtime-acl-red04",
+  "fixture_unchanged_from_clean_red": true,
+  "backend_sha256": "14e4231986ac7b95fd4f142b37a68bf295aec124b9ee66a6b5018fa0b07b2a46",
+  "delta": "descendant-only exact inherited ACL; reject callback/opaque CommonAce before permissions test",
+  "previous_frozen_green": "runtime-acl-green unexecuted; preserved"
+}

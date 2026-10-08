@@ -1,0 +1,66 @@
+{
+  "frames": 26,
+  "files": {
+    "bootstrap.stdout": {
+      "path": "bootstrap.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "bootstrap.stderr": {
+      "path": "bootstrap.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "observer.json": {
+      "path": "observer.json",
+      "sha256": "6849356403edf04d9cf23d7fe5957757d367c33b6c79e23d2c48ae9f4f2c454b",
+      "length": 890
+    },
+    "run/.scoped-run-597f1207381c4494801acff56d3c057a.journal": {
+      "path": "run/.scoped-run-597f1207381c4494801acff56d3c057a.journal",
+      "sha256": "1318113cf30389755ab1f324168700c62bf7ad3a5a880d52bb7636fd4e37a8da",
+      "length": 1039
+    },
+    "run/.scoped-evidence-150ff594290149edb9c68406cda5d6f7/stderr.log": {
+      "path": "run/.scoped-evidence-150ff594290149edb9c68406cda5d6f7/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/.scoped-evidence-150ff594290149edb9c68406cda5d6f7/stdout.log": {
+      "path": "run/.scoped-evidence-150ff594290149edb9c68406cda5d6f7/stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/scoped-150ff594290149edb9c68406cda5d6f7/fixture.exe": {
+      "path": "run/scoped-150ff594290149edb9c68406cda5d6f7/fixture.exe",
+      "sha256": "ffaad1a2194e9b1dd94a8880d734ec0b31ba3e43aca61eaad87cd8983b72449f",
+      "length": 4096
+    },
+    "run/scoped-150ff594290149edb9c68406cda5d6f7/payload-record.txt": {
+      "path": "run/scoped-150ff594290149edb9c68406cda5d6f7/payload-record.txt",
+      "sha256": "47cc3b9137299b2bc87647aaeaaebdebf8f8e494c26f9247a9d3a44603338d92",
+      "length": 17
+    }
+  },
+  "complete": true,
+  "begin": {
+    "id": "rhai-public-loop-readback01-20261008T125846Z-b7f83433",
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\custody-loop01-20261008-b7f83433",
+    "exit": -1,
+    "accepted": false,
+    "driver_launched": false,
+    "read_only_original_snapshot": true,
+    "active_custody_names": 0,
+    "prior_exact_driver_exited": true,
+    "prior_pipes_drained": true,
+    "product_run": false
+  },
+  "end": {
+    "id": "rhai-public-loop-readback01-20261008T125846Z-b7f83433",
+    "driver_launched": false,
+    "files": 8,
+    "accepted": false,
+    "exit": -1,
+    "guest_evidence_retained": true
+  }
+}

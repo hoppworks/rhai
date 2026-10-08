@@ -1,0 +1,6 @@
+{"id": "rhai-public-loop-readback02-20261008T125846Z-b7f83433", "driver_launched": false, "files": 9, "accepted": false, "exit": 2, "guest_evidence_retained": true}
+bootstrap.stdout:
+
+bootstrap.stderr:
+driver failure: InvalidDataException: INTENT fields/path invalid
+

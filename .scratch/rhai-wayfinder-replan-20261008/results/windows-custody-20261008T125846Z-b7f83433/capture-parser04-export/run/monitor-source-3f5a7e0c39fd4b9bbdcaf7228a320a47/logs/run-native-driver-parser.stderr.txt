@@ -1,0 +1,4 @@
+System.InvalidOperationException: FAILED: independent canonical journal GUID accepted
+   at MonitorAcceptanceDriverFixture.Expect(String name, Boolean ok)
+   at MonitorAcceptanceDriverFixture.Run()
+   at MonitorAcceptanceDriverFixture.Main()

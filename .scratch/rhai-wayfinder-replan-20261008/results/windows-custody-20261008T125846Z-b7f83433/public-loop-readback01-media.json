@@ -1,0 +1,7 @@
+{
+  "readonly_iso": "/var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/public-loop-readback01.iso",
+  "readback": "2d5d1d4f863e21e371afef7763b08f40f7d93876c0e09f0272e8271ad8cb31c2  /var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/public-loop-readback01.iso\nae2198f9f9feb79e5199d5d659c55d1759ee958292d12f5be25139ca675de66c  /var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/public-loop-readback01-input/Start.ps1\n",
+  "attached": true,
+  "device": "sdc",
+  "media_change": "Successfully updated media.\n"
+}

@@ -1,0 +1,16 @@
+{"id": "rhai-runtime-acl-red04-20261008T125846Z-b7f83433", "driver_launched": false, "files": 23, "accepted": false, "exit": -536870909, "guest_evidence_retained": true}
+bootstrap.stdout:
+PASS private-run-root policy cases: valid, old-root, depth, traversal, reparse, nonstandard ancestors, drive binding
+PASS setup-failure-control: child PID 7676; primary exception retained; nested job teardown removed owned child; outer job returned to owner-only.
+PASS exit-code-regression-17-wrong-expected rejected with actual 17 expected 0
+PASS exit-code-regression-zero exit=0
+PASS exit-code-regression-17 exit=17
+PASS exit-code-regression-unavailable rejected
+PASS compile-native-scope-policy exit=0
+PASS run-native-scope-policy exit=0
+PASS compile-native-runtime-acl exit=0
+
+bootstrap.stderr:
+Primary source-fixture failure: System.Management.Automation.RuntimeException: run-native-runtime-acl exited 1 (expected 0); inspect C:\Users\RhaiTest\.local\share\agent-builds\rhai\runtime-acl-red04-20261008-b7f83433\run\monitor-source-1ade65a0b63946258fd8793e39e2846b\logs\run-native-runtime-acl.stdout.txt and C:\Users\RhaiTest\.local\share\agent-builds\rhai\runtime-acl-red04-20261008-b7f83433\run\monitor-source-1ade65a0b63946258fd8793e39e2846b\logs\run-native-runtime-acl.stderr.txt
+Failed source fixture: terminating the exact compiler job with status E0000003.
+

@@ -1,0 +1,4 @@
+CONTROL_INJECTED_AFTER_JOB_ASSIGNMENT_BEFORE_TIMER
+PowerShellPid=8236
+ChildPid=9152
+System.Management.Automation.RuntimeException: Injected setup failure after job assignment and before watchdog construction.

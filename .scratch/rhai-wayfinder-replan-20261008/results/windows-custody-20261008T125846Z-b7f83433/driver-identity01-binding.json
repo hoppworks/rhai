@@ -1,0 +1,9 @@
+{
+  "entry_sha256": "51369a2b0ad2717628b6d6f25ea6362ec47c9f053368cc2ac394add8bee303ed",
+  "manifest_sha256": "8ccb0f5634af0507612ec1356d3effd11490a6f98af19c5e9d8c240dbc5521dd",
+  "driver_sha256": "dae12f910058773b16eb0eb48ad47ef94edb413aa812d640435a564bc1d31bad",
+  "fixture_sha256": "e27fa58588b1988ec0085ac4ec0379f686e5dd48254cd559f5278c057851f054",
+  "expected": "two affected compiles plus pure parser27 assertions; reuse unchanged native Runner/Payload; no capture/policy/production rebuild",
+  "prior_red": "public-loop02 driver exit2 INTENT invalid; readback02 original eight CRC-verified native records ending REMOVED",
+  "executed": false
+}

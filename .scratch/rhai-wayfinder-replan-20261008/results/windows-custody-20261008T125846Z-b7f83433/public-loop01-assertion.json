@@ -1,0 +1,20 @@
+{
+  "native_loop": "get-content -raw E:\\Start.ps1 | Invoke-Expression",
+  "entry_sha256": "3b5241e177356027d6b31b73a549e87e73eb4d4a6a2acff0e1493e041b6d6184",
+  "same_retained_binaries_as": "public-success02",
+  "changed": "fresh owned scope and independent10second observer only",
+  "exit": -1,
+  "accepted": false,
+  "exact_driver_exited": true,
+  "pipes_drained": true,
+  "active_names_at_readonly_snapshot": 0,
+  "native_payload_record_verified": true,
+  "journal_records": [
+    "INTENT|150ff594290149edb9c68406cda5d6f7|C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\custody-loop01-20261008-b7f83433\\run\\scoped-150ff594290149edb9c68406cda5d6f7|C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\custody-loop01-20261008-b7f83433\\run\\.scoped-run-597f1207381c4494801acff56d3c057a.journal|46E8EB5AE8EB46B1:000282f1000000050000000000000000|46E8EB5AE8EB46B1:000282f6000000040000000000000000",
+    "IDENTITY|150ff594290149edb9c68406cda5d6f7|46E8EB5AE8EB46B1:000282f7000000040000000000000000|46E8EB5AE8EB46B1:000282f1000000050000000000000000|46E8EB5AE8EB46B1:000282f6000000040000000000000000",
+    "STAGED|150ff594290149edb9c68406cda5d6f7|2|4096|107E84F73E3A7D284A69CB98E1AA3352C8E3700472F40B028182A032150CA04F|1B787762377029231E98454905EC586DC4379E27119F1F6FC0A9682F9C190F4C|46E8EB5AE8EB46B1:000282f8000000040000000000000000",
+    "LIFECYCLE|150ff594290149edb9c68406cda5d6f7|46E8EB5AE8EB46B1:000282f7000000040000000000000000|deadline=16076296|operation=NONE|cleanup=NONE|cleanup_confirmed=1"
+  ],
+  "journal_sha256": "1318113cf30389755ab1f324168700c62bf7ad3a5a880d52bb7636fd4e37a8da",
+  "current_cause": "Unproven; actual closure succeeded but evidence/outcome/removal missing."
+}

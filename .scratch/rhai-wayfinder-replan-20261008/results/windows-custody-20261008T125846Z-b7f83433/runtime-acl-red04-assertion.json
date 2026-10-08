@@ -1,0 +1,9 @@
+{
+  "selected_fixture_exit": 1,
+  "intended_assertion_failed": true,
+  "later_observer_error": false,
+  "broadened_acl_control_passed": true,
+  "backend_sha256": "a962f14e0147fa5ff78d589533af9e62abc79f1a056ac566dad6c835827946b8",
+  "compiler_owner_exit": -536870909,
+  "public_driver_launched": false
+}

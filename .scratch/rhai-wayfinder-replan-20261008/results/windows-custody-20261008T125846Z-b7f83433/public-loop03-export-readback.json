@@ -1,0 +1,79 @@
+{
+  "frames": 31,
+  "files": {
+    "bootstrap.stdout": {
+      "path": "bootstrap.stdout",
+      "sha256": "65eed14d97ea09b4baa31e268d6d9cc2ee9da01c55d74071ccd003c59e01da76",
+      "length": 555
+    },
+    "bootstrap.stderr": {
+      "path": "bootstrap.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "observer.json": {
+      "path": "observer.json",
+      "sha256": "34c93e6816e0ebd3c88c635d62c5592cc95d497149abd27b7cbaea21390729a5",
+      "length": 768
+    },
+    "run/.scoped-run-58fcca58445c4a11b49810f82532a5ef.journal": {
+      "path": "run/.scoped-run-58fcca58445c4a11b49810f82532a5ef.journal",
+      "sha256": "ace85ca42b3ec7d66ebed7890c03efb37403db4a29d52e9dc537f74cf4257977",
+      "length": 2279
+    },
+    "run/.scoped-evidence-802ced71b54043d79dfb07a15e34d33a/manifest.txt": {
+      "path": "run/.scoped-evidence-802ced71b54043d79dfb07a15e34d33a/manifest.txt",
+      "sha256": "4db68bf44e8bb32e426274e78dca1921f030cad64cfca9892376643924b785e0",
+      "length": 395
+    },
+    "run/.scoped-evidence-802ced71b54043d79dfb07a15e34d33a/stderr.log": {
+      "path": "run/.scoped-evidence-802ced71b54043d79dfb07a15e34d33a/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/.scoped-evidence-802ced71b54043d79dfb07a15e34d33a/stdout.log": {
+      "path": "run/.scoped-evidence-802ced71b54043d79dfb07a15e34d33a/stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/.scoped-evidence-802ced71b54043d79dfb07a15e34d33a/runtime/fixture.exe": {
+      "path": "run/.scoped-evidence-802ced71b54043d79dfb07a15e34d33a/runtime/fixture.exe",
+      "sha256": "99d5f8135ae38e439bf909d54b3556485882fec3b35fd38daf84ba09324d83b4",
+      "length": 4096
+    },
+    "run/.scoped-evidence-802ced71b54043d79dfb07a15e34d33a/runtime/payload-record.txt": {
+      "path": "run/.scoped-evidence-802ced71b54043d79dfb07a15e34d33a/runtime/payload-record.txt",
+      "sha256": "47cc3b9137299b2bc87647aaeaaebdebf8f8e494c26f9247a9d3a44603338d92",
+      "length": 17
+    }
+  },
+  "complete": true,
+  "begin": {
+    "id": "rhai-public-loop03-20261008T125846Z-b7f83433",
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\custody-loop03-20261008-b7f83433",
+    "run": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\custody-loop03-20261008-b7f83433\\run",
+    "exit": 0,
+    "accepted": true,
+    "failure": "",
+    "fresh_host_record": true,
+    "parent_environment_changed": false,
+    "driver_launched": true,
+    "exact_driver_exited": true,
+    "pipes_drained": true,
+    "retained_driver_handles": false,
+    "retained_binaries": {
+      "PayloadFixture.exe": "99d5f8135ae38e439bf909d54b3556485882fec3b35fd38daf84ba09324d83b4",
+      "MonitorAcceptanceDriver.exe": "c73bed48edb7b8fba7249244e1fabfdc18538157658d4825144fc2ac51c5cec7",
+      "ScopedRunner.exe": "bf1f880e3d8ba2112afecd29f6b1551ae3e2cca1343141cd4f92e214c6fdc57f"
+    },
+    "product_run": false
+  },
+  "end": {
+    "id": "rhai-public-loop03-20261008T125846Z-b7f83433",
+    "driver_launched": true,
+    "files": 9,
+    "accepted": true,
+    "exit": 0,
+    "guest_evidence_retained": true
+  }
+}

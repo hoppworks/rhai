@@ -1,0 +1,23 @@
+{"id": "rhai-capture-parser05-20261008T125846Z-b7f83433", "driver_launched": false, "files": 34, "accepted": false, "exit": -2146232797, "guest_evidence_retained": true}
+bootstrap.stdout:
+PASS private-run-root policy cases: valid, old-root, depth, traversal, reparse, nonstandard ancestors, drive binding
+PASS setup-failure-control: child PID 9832; primary exception retained; nested job teardown removed owned child; outer job returned to owner-only.
+PASS exit-code-regression-17-wrong-expected rejected with actual 17 expected 0
+PASS exit-code-regression-zero exit=0
+PASS exit-code-regression-17 exit=17
+PASS exit-code-regression-unavailable rejected
+PASS compile-native-scope-policy exit=0
+PASS run-native-scope-policy exit=0
+PASS compile-native-runtime-acl exit=0
+PASS run-native-payload-evidence exit=0
+PASS compile-native-driver-parser exit=0
+PASS run-native-driver-parser exit=0
+PASS compile-production-runner exit=0
+PASS compile-native-driver exit=0
+PASS expected-compiler-failure exit=1
+PASS compile-PayloadFixture exit=0
+UNRUN RunProcessCreationFixtures.ps1: it exercises the disabled legacy --source entrypoint.
+RETAINED run root: C:\Users\RhaiTest\.local\share\agent-builds\rhai\cap-g05-b7f83433\run\monitor-source-497d77ab72bb4928bd7eacad0e4858b3
+
+bootstrap.stderr:
+

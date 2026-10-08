@@ -1,0 +1,13 @@
+{
+  "native_driver_exit": 0,
+  "fresh_payload_record": true,
+  "client_exit_hex": "0000004E",
+  "payload_exit_hex": "00000000",
+  "supervision": "PayloadExited",
+  "runtime_removed": true,
+  "host_exported": false,
+  "journal_records": 8,
+  "journal_sha256": "ace85ca42b3ec7d66ebed7890c03efb37403db4a29d52e9dc537f74cf4257977",
+  "verified_originals": 9,
+  "prior_red": "public-loop02"
+}

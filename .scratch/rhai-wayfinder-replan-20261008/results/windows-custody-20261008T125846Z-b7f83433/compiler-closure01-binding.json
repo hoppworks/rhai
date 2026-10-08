@@ -1,0 +1,13 @@
+{
+  "entry_sha256": "852cc61e21dc94ca89565ea77dfe217bc4cf47baa4e1ae59de41304027fab854",
+  "manifest_sha256": "8648f2d0514540a3c977f245159cf38e8b970523ccc6335ab8be2cc80d6e3785",
+  "expected": "one existing PayloadFixture compilation, native ownedJob member census and unchanged strictowner closure; no parser/capture rerun",
+  "scope": "csc-cl01-b7f83433",
+  "run_child": "monitor-source-523f048638654f59a7fda5d95e992292",
+  "target_host": "lllm/native Windows",
+  "prior_red": "capture-parser05-assertion.json",
+  "diagnostic_event": "disposition-readback02-original.json event1025 record1511: active2",
+  "executed": false,
+  "review_correction": "Diagnostic stdout failures cannot prevent mandatory FailFast; source and freeze updated before execution.",
+  "bootstrap_sha256": "6beded18e7a5894125910749dd6a322fd528d9300c0ac9c7e88c6cdcf6813583"
+}

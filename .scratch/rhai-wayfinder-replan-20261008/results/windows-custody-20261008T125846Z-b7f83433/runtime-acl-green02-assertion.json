@@ -1,0 +1,21 @@
+{
+  "fixture_exit": 0,
+  "observer_exit": 0,
+  "accepted": true,
+  "original_files_hash_verified": 32,
+  "ordinary_removal_sentinel_and_world_denial_pass": true,
+  "journals": {
+    "ORDINARY": {
+      "sha256": "98361db6ee05a88d6ee3b9c183a6a9d73a374ad50c1910c6b3169134d7d5bf6f",
+      "bytes": 1321,
+      "has_removed": true
+    },
+    "DENIED": {
+      "sha256": "6ce191ffc6806a318ee56b75eda472504009f2cb6478680752d859b247da0e8c",
+      "bytes": 1168,
+      "has_removed": false
+    }
+  },
+  "backend_sha256": "14e4231986ac7b95fd4f142b37a68bf295aec124b9ee66a6b5018fa0b07b2a46",
+  "scope": "fixture-only NoPayload authorization; production custody open"
+}

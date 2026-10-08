@@ -1,0 +1,7 @@
+{
+  "readonly_iso": "/var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/capture-pin02.iso",
+  "readback": "39e0c91e6c25148fe3dc727f17f3a9bdef67f882c600224d6d25b24425265dc7  /var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/capture-pin02.iso\nd795eba7aba6b99e97b8f5b0f2dbca8972578f84871ec8196ef41348457d4a76  /var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/capture-pin02-input/Start.ps1\n1f76e046b9ec9244b853b794bc4f351773209fd6a75114c07ec3df1c25432956  /var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/capture-pin02-input/input-manifest.json\n",
+  "attached": true,
+  "vm_uuid": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19",
+  "media_change": "Successfully updated media.\n"
+}

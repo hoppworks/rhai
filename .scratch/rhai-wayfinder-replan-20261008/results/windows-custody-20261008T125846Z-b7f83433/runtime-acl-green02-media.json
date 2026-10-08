@@ -1,0 +1,8 @@
+{
+  "readonly_iso": "/var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/runtime-acl-green02.iso",
+  "readback": "8c201878b32c63460a3456eaab81e7cdf557a8e3a12c2aca94f36e9d79ec2fd0  /var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/runtime-acl-green02.iso\n135c88f78bb448216da090bf615d57ed8f265bd60683f36933e8ab031f556e56  /var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/runtime-acl-green02-input/start.ps1\nb26a6156d74c0949182f70fdd60e0d28d15dc22e3fc79ad37ac2a34d324b9ec3  /var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/runtime-acl-green02-input/input-manifest.json\n",
+  "attached": true,
+  "device": "sdc",
+  "vm_uuid": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19",
+  "media_change": "Successfully updated media.\n"
+}
