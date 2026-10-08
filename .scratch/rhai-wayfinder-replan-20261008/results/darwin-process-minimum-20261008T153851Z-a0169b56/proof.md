@@ -32,3 +32,7 @@ shared-wait selector alone is not newly accepted wait-entry timing proof.
 This closes only these selected native rows: Windows, additional unselected
 setup/lifecycle functions, f32 process conversion, complete matrix and A–F remain
 open. Directory absence alone is not interruption/process-closure proof.
+
+Combined review counts59 raw GREEN selections and58 supported assertions;
+one idle report/helper selection contributes no semantic proof. Actual shared
+wait-entry timing/cancellation remains open.

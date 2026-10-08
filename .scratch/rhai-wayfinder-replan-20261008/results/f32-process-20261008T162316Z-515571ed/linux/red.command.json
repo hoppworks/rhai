@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "/root/.local/share/agent-builds/rhai/f32-process-2a78b9a082/agent-build-m3rfzsqo/target/debug/deps/sys_process-3b8da0dd986a6562",
+    "f32_process_timeouts_validate_before_launch_and_preserve_host_output_bounds",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": "/root/.local/share/agent-builds/rhai/f32-process-2a78b9a082/agent-build-m3rfzsqo/source",
+  "exit": 101,
+  "seconds": 0.11351857900444884
+}

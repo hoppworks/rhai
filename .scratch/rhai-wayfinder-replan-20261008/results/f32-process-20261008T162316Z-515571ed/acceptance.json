@@ -1,0 +1,8 @@
+{
+  "accepted": true,
+  "scope": "Darwin/Linux1.77.2 testing-environ,sys,net,f32_float public process duration/host cap/reap only",
+  "review_path": ".scratch/rhai-wayfinder-replan-20261008/results/unix-wait-20261008T131127Z-3fcea4ec/attempt03/review.md",
+  "review_sha256": "e8a291fdfcbbc8e8a70408f18baca258cc199c594412fe361b265c384f8588c5",
+  "x31_historical_rows_reused": true,
+  "windows_and_whole_package_open": true
+}

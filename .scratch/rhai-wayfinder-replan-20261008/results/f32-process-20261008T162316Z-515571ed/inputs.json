@@ -1,0 +1,13 @@
+{
+  "archive": "/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/all-tickets/darwin-x21-cap-20261008/attempt-01/source.tar",
+  "archive_sha256": "635a59827900b02ad82b0e53499f6b3fb2a5c5233326cac541c88c3e8b61265f",
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "patch_sha256": "8f64d6202887f19f221a66ed45dc623b14c32a376c4b482c5e6a5082ec17384c",
+  "source_revision": "7335294345181d1b29a9ecda1d851e497ae3f83a",
+  "green_sha256": "86f1142ff1ae8de5a8b813e892e407a90c1bec70eab864c20b7735f53015bf41",
+  "red_sha256": "1ba2978344424418e0079f3fd9c2fc55065db4a4380187d27499b7e08693f7ff",
+  "selector": "f32_process_timeouts_validate_before_launch_and_preserve_host_output_bounds",
+  "features": "testing-environ,sys,net,f32_float",
+  "toolchain": "1.77.2",
+  "foreign_fixture_excluded": true
+}

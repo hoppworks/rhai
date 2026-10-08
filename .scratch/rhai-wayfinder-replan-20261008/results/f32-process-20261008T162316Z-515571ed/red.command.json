@@ -1,0 +1,12 @@
+{
+  "argv": [
+    "/Users/hoppworks/.local/share/agent-builds/rhai/darwin-f32-process-g0ucm42g/agent-build-7qkn7fxb/target/debug/deps/sys_process-7db88392aefc429f",
+    "f32_process_timeouts_validate_before_launch_and_preserve_host_output_bounds",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/darwin-f32-process-g0ucm42g/agent-build-7qkn7fxb/source",
+  "exit": 101,
+  "seconds": 0.15066708300000187
+}

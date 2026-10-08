@@ -1,0 +1,387 @@
+diff --git a/examples/sys_process.rs b/examples/sys_process.rs
+index 62ca7c7a7..a0b5c4039 100644
+--- a/examples/sys_process.rs
++++ b/examples/sys_process.rs
+@@ -103,6 +103,14 @@ mod unix_example {
+         Ok(engine.eval_with_scope::<Dynamic>(&mut scope, expression)?)
+     }
+ 
++    fn nonblocking_wait_expression() -> &'static str {
++        if cfg!(feature = "no_float") {
++            "child.wait(0)"
++        } else {
++            "child.wait(0.0)"
++        }
++    }
++
+     fn child_id(engine: &Engine, child: &Child) -> Result<INT, Box<dyn std::error::Error>> {
+         let mut scope = Scope::new();
+         scope.push_dynamic("child", Dynamic::from(child.clone()));
+@@ -172,7 +180,7 @@ mod unix_example {
+         deadline: Instant,
+     ) -> Result<Map, Box<dyn std::error::Error>> {
+         loop {
+-            let result = child_call(engine, child, "child.wait(0.0)")?;
++            let result = child_call(engine, child, nonblocking_wait_expression())?;
+             if !result.is_unit() {
+                 return Ok(result.cast::<Map>());
+             }
+@@ -199,7 +207,7 @@ mod unix_example {
+             let _ = child_call(self.engine, &self.child, "child.kill()");
+             let deadline = Instant::now() + Duration::from_secs(2);
+             while Instant::now() < deadline {
+-                match child_call(self.engine, &self.child, "child.wait(0.0)") {
++                match child_call(self.engine, &self.child, nonblocking_wait_expression()) {
+                     Ok(value) if !value.is_unit() => return,
+                     Err(_) => return,
+                     _ => thread::sleep(Duration::from_millis(10)),
+@@ -279,7 +287,7 @@ mod unix_example {
+             .ok_or("spawn fixture readiness record has no PID")?
+             .parse::<INT>()?;
+         assert_eq!(ready_pid, child_id, "host observed the exact spawned child");
+-        let early = child_call(&engine, &sibling, "child.wait(0.0)")?;
++        let early = child_call(&engine, &sibling, nonblocking_wait_expression())?;
+         assert!(
+             early.is_unit(),
+             "the child is pending while it awaits release"
+diff --git a/src/packages/net/stream.rs b/src/packages/net/stream.rs
+index bbdfee6d4..c23e92df2 100644
+--- a/src/packages/net/stream.rs
++++ b/src/packages/net/stream.rs
+@@ -43,6 +43,8 @@ struct SharedStreamState {
+     write_shutdown: AtomicBool,
+     shutdown_lock: Mutex<()>,
+     target: String,
++    #[cfg(feature = "testing-environ")]
++    read_entry_notifier: Mutex<Option<std::sync::mpsc::SyncSender<&'static str>>>,
+     #[cfg(test)]
+     read_wait_notifier: Mutex<Option<std::sync::mpsc::SyncSender<()>>>,
+     #[cfg(test)]
+@@ -73,6 +75,8 @@ impl NetStream {
+             write_shutdown: AtomicBool::new(false),
+             shutdown_lock: Mutex::new(()),
+             target,
++            #[cfg(feature = "testing-environ")]
++            read_entry_notifier: Mutex::new(None),
+             #[cfg(test)]
+             read_wait_notifier: Mutex::new(None),
+             #[cfg(test)]
+@@ -80,6 +84,24 @@ impl NetStream {
+         }))
+     }
+ 
++    /// Observe the next real socket read that returns `WouldBlock`.
++    ///
++    /// This host-only test hook does not register a script function or alter the
++    /// socket/deadline. A one-shot nonblocking send reports an entered public
++    /// read operation; a caller must separately establish that it is unfinished.
++    #[cfg(feature = "testing-environ")]
++    #[doc(hidden)]
++    pub fn observe_read_wait_for_testing(
++        &self,
++        notifier: std::sync::mpsc::SyncSender<&'static str>,
++    ) {
++        *self
++            .0
++            .read_entry_notifier
++            .lock()
++            .unwrap_or_else(|poisoned| poisoned.into_inner()) = Some(notifier);
++    }
++
+     fn socket(&self, op: &'static str) -> Result<Arc<TcpStream>, Box<EvalAltResult>> {
+         self.0
+             .socket
+@@ -474,6 +496,16 @@ impl NetStream {
+                     }
+                 }
+                 Err(error) if error.kind() == io::ErrorKind::WouldBlock => {
++                    #[cfg(feature = "testing-environ")]
++                    if let Some(notifier) = self
++                        .0
++                        .read_entry_notifier
++                        .lock()
++                        .unwrap_or_else(|poisoned| poisoned.into_inner())
++                        .take()
++                    {
++                        let _ = notifier.try_send("read_wait");
++                    }
+                     #[cfg(test)]
+                     if captured > 0 {
+                         if let Some(notifier) = self
+diff --git a/tests/net_connect.rs b/tests/net_connect.rs
+index 221fa1bc6..8aa51796e 100644
+--- a/tests/net_connect.rs
++++ b/tests/net_connect.rs
+@@ -52,6 +52,41 @@ fn authorized_connect_is_observed_and_clone_close_is_shared() {
+     }
+ }
+ 
++#[test]
++fn ipv6_connect_requires_the_exact_numeric_endpoint_and_delivers_peer_bytes() {
++    let listener = TcpListener::bind("[::1]:0").expect("native IPv6 loopback is required for this row");
++    let endpoint = listener.local_addr().unwrap();
++    let other_port = if endpoint.port() == u16::MAX { endpoint.port() - 1 } else { endpoint.port() + 1 };
++    for config in [
++        NetConfig::default(),
++        NetConfig::default().allow_connect(SocketAddr::new("127.0.0.1".parse().unwrap(), endpoint.port())),
++        NetConfig::default().allow_connect(SocketAddr::new(endpoint.ip(), other_port)),
++        NetConfig::default().allow_listen(endpoint),
++    ] {
++        let denied = build_engine(config)
++            .eval::<bool>(&format!(r#"let denied = false; try {{ connect("::1", {}); }} catch (err) {{ denied = err.kind == "Denied" && err.op == "connect"; }} denied"#, endpoint.port()))
++            .unwrap();
++        assert!(denied, "only the exact IPv6 connect grant authorizes this endpoint");
++    }
++    listener.set_nonblocking(true).unwrap();
++    assert!(matches!(listener.accept(), Err(error) if error.kind() == std::io::ErrorKind::WouldBlock), "denied grants must not create a peer connection");
++
++    let engine = build_engine(NetConfig::default().allow_connect(endpoint));
++    engine
++        .run(&format!(r#"let stream = connect("::1", {}); stream.write_all_string("ipv6-peer"); stream.close();"#, endpoint.port()))
++        .unwrap();
++    let mut peer = wait_accept(&listener);
++    assert_eq!(peer.local_addr().unwrap(), endpoint);
++    assert!(peer.peer_addr().unwrap().is_ipv6());
++    peer.set_read_timeout(Some(Duration::from_secs(2))).unwrap();
++    let mut observed = [0_u8; 9];
++    peer.read_exact(&mut observed).unwrap();
++    assert_eq!(&observed, b"ipv6-peer", "independent IPv6 peer receives the exact script bytes");
++    let mut tail = [0_u8; 1];
++    assert_eq!(peer.read(&mut tail).unwrap(), 0, "script close reaches the IPv6 peer as EOF");
++    eprintln!("ipv6_connect endpoint={endpoint} denied_peer_absent=true exact_bytes=true eof=true");
++}
++
+ #[test]
+ fn denied_and_invalid_endpoints_do_not_reach_peer_and_errors_are_catchable() {
+     let listener = TcpListener::bind("127.0.0.1:0").unwrap();
+diff --git a/tests/net_listen.rs b/tests/net_listen.rs
+index 1b8dd88b5..bcb7b398c 100644
+--- a/tests/net_listen.rs
++++ b/tests/net_listen.rs
+@@ -3,6 +3,7 @@
+ use rhai::packages::net::{NetConfig, NetPackage};
+ use rhai::packages::Package;
+ use rhai::{Engine, Scope};
++use std::io::Read;
+ use std::net::{SocketAddr, TcpStream};
+ use std::time::{Duration, Instant};
+ 
+@@ -60,6 +61,43 @@ fn authorized_listener_accepts_an_independent_peer() {
+     assert_eq!(accepted_peer, expected_peer, "accepted peer matches the independently created socket");
+ }
+ 
++#[test]
++fn ipv6_port_zero_listener_uses_its_own_grant_and_reports_real_peer_bytes() {
++    for config in [
++        NetConfig::default(),
++        NetConfig::default().allow_connect("[::1]:1".parse().unwrap()),
++        NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()),
++        NetConfig::default().allow_listen("[::1]:1".parse().unwrap()),
++    ] {
++        let denied = build_engine(config)
++            .eval::<bool>(r#"let denied = false; try { listen("::1", 0); } catch (err) { denied = err.kind == "Denied" && err.op == "listen"; } denied"#)
++            .unwrap();
++        assert!(denied, "IPv6 port0 listen needs its own exact listen grant");
++    }
++    let engine = build_engine(NetConfig::default().allow_listen("[::1]:0".parse().unwrap()));
++    let mut scope = Scope::new();
++    engine.run_with_scope(&mut scope, r#"let listener = listen("::1", 0);"#).unwrap();
++    let address = engine.eval_with_scope::<String>(&mut scope, "listener.local_addr").unwrap();
++    let endpoint: SocketAddr = address.parse().unwrap();
++    assert_eq!(endpoint.ip(), "::1".parse::<std::net::IpAddr>().unwrap());
++    assert_ne!(endpoint.port(), 0, "the OS must select an actual IPv6 listener port");
++    let mut peer = TcpStream::connect_timeout(&endpoint, Duration::from_secs(2)).unwrap();
++    let peer_address = peer.local_addr().unwrap().to_string();
++    let accepted_address = engine
++        .eval_with_scope::<String>(&mut scope, "let accepted = listener.accept(500); accepted.peer_addr")
++        .unwrap();
++    assert_eq!(accepted_address, peer_address, "accepted IPv6 peer identity matches the independent socket");
++    engine.run_with_scope(&mut scope, r#"accepted.write_all_string("ipv6-listen"); accepted.close(); listener.close();"#).unwrap();
++    peer.set_read_timeout(Some(Duration::from_secs(2))).unwrap();
++    let mut observed = [0_u8; 11];
++    peer.read_exact(&mut observed).unwrap();
++    assert_eq!(&observed, b"ipv6-listen", "independent IPv6 client receives exact accepted-stream bytes");
++    let mut tail = [0_u8; 1];
++    assert_eq!(peer.read(&mut tail).unwrap(), 0);
++    assert!(matches!(TcpStream::connect_timeout(&endpoint, Duration::from_secs(2)), Err(error) if error.kind() == std::io::ErrorKind::ConnectionRefused), "closed IPv6 listener refuses a fresh peer");
++    eprintln!("ipv6_listen endpoint={endpoint} peer_identity=true exact_bytes=true eof=true listener_closed=true");
++}
++
+ #[test]
+ fn denied_and_invalid_listener_endpoints_never_bind() {
+     let occupied = std::net::TcpListener::bind("127.0.0.1:0").unwrap();
+diff --git a/tests/net_reads.rs b/tests/net_reads.rs
+index de23623bc..581e67e41 100644
+--- a/tests/net_reads.rs
++++ b/tests/net_reads.rs
+@@ -361,7 +361,7 @@ fn no_index_keeps_string_reads_and_omits_blob_methods() {
+     assert!(actual, "no_index preserves string reads and does not register blob reads");
+ }
+ 
+-#[cfg(feature = "sync")]
++#[cfg(all(feature = "sync", feature = "testing-environ"))]
+ #[test]
+ fn closing_a_clone_cancels_an_outstanding_read_and_releases_quota() {
+     let listener = TcpListener::bind("127.0.0.1:0").unwrap();
+@@ -388,7 +388,7 @@ fn closing_a_clone_cancels_an_outstanding_read_and_releases_quota() {
+             }
+         };
+         peer_ready_tx.send(()).unwrap();
+-        if peer_release_rx.recv_timeout(Duration::from_secs(4)).is_err() {
++        if peer_release_rx.recv_timeout(Duration::from_secs(4)) != Ok(true) {
+             return;
+         }
+         listener.set_nonblocking(true).unwrap();
+@@ -411,34 +411,56 @@ fn closing_a_clone_cancels_an_outstanding_read_and_releases_quota() {
+         }
+     });
+ 
++    struct Cleanup {
++        engine: Engine,
++        scope: Scope<'static>,
++        reader: Option<std::thread::JoinHandle<()>>,
++        peer: Option<std::thread::JoinHandle<()>>,
++        release: mpsc::SyncSender<bool>,
++    }
++    impl Drop for Cleanup {
++        fn drop(&mut self) {
++            if self.scope.contains("stream") {
++                let _ = self.engine.run_with_scope(&mut self.scope, "stream.close();");
++            }
++            let _ = self.release.try_send(false);
++            if let Some(reader) = self.reader.take() { let _ = reader.join(); }
++            if let Some(peer) = self.peer.take() { let _ = peer.join(); }
++        }
++    }
++    let mut cleanup = Cleanup { engine: control_engine, scope: Scope::new(), reader: None,
++        peer: Some(peer), release: peer_release_tx };
+     let mut reader_scope = Scope::new();
+     reader_engine
+         .run_with_scope(&mut reader_scope, &format!(r#"let stream = connect("127.0.0.1", {}); let copy = stream;"#, endpoint.port()))
+         .unwrap();
+     let close_copy = reader_scope.get_value::<rhai::packages::net::NetStream>("copy").unwrap();
+-    peer_ready_rx.recv_timeout(Duration::from_secs(1)).unwrap();
+-
+     let (ready_tx, ready_rx) = mpsc::sync_channel(1);
++    close_copy.observe_read_wait_for_testing(ready_tx);
++    cleanup.scope.push("stream", close_copy);
++    peer_ready_rx.recv_timeout(Duration::from_secs(1)).unwrap();
+     let (result_tx, result_rx) = mpsc::sync_channel(1);
+-    let reader = std::thread::spawn(move || {
+-        let _ = ready_tx.send(());
++    cleanup.reader = Some(std::thread::spawn(move || {
+         let result = reader_engine.eval_with_scope::<String>(&mut reader_scope, "stream.read_string(1)");
+         let _ = result_tx.send(result.map_err(|error| error.to_string()));
+-    });
+-    ready_rx.recv_timeout(Duration::from_secs(1)).unwrap();
++    }));
++    assert_eq!(ready_rx.recv_timeout(Duration::from_secs(1)).unwrap(), "read_wait",
++        "read readiness must come from WouldBlock inside the actual public read operation");
++    assert!(matches!(result_rx.try_recv(), Err(mpsc::TryRecvError::Empty)),
++        "the observed read must still be outstanding before clone close");
++    eprintln!("public_read_wait_observed=true; read_result_pending=true; peer_open_without_bytes=true");
+ 
+     // The peer remains open and sends no bytes; clone close must end this operation before its host deadline.
+     let started = std::time::Instant::now();
+-    let mut close_scope = Scope::new();
+-    close_scope.push("stream", close_copy);
+-    control_engine.run_with_scope(&mut close_scope, "stream.close();").unwrap();
++    cleanup.engine.run_with_scope(&mut cleanup.scope, "stream.close();").unwrap();
+     let result = result_rx.recv_timeout(Duration::from_secs(1)).unwrap();
+     assert!(started.elapsed() < Duration::from_secs(1), "close cancels ahead of the two-second read deadline");
+     assert!(result.is_err(), "shutdown reports the cancelled active read as an error");
+-    reader.join().unwrap();
+-    peer_release_tx.send(()).unwrap();
+-    control_engine
++    cleanup.reader.take().unwrap().join().unwrap();
++    cleanup.release.send(true).unwrap();
++    cleanup.engine
+         .eval::<bool>(&format!(r#"let stream = connect("127.0.0.1", {}); stream.close(); true"#, endpoint.port()))
+         .unwrap();
+-    peer.join().unwrap();
++    cleanup.peer.take().unwrap().join().unwrap();
++    eprintln!("public_read_cancelled=true; reader_joined=true; quota_reused=true; peer_eof=true; peer_joined=true");
+ }
+diff --git a/tests/sys_process.rs b/tests/sys_process.rs
+index 192ec3cef..59e33d5e9 100644
+--- a/tests/sys_process.rs
++++ b/tests/sys_process.rs
+@@ -5218,6 +5218,78 @@ fn lossy_run_reports_engine_limit_expansion_without_returning_truncated_text() {
+     }
+ }
+ 
++/// Text expansion is checked at the public wait boundary without changing raw capture
++/// or replacing an output-limit cause that the process supervisor already committed.
++#[test]
++#[cfg(all(not(feature = "no_index"), not(feature = "unchecked")))]
++fn child_wait_preserves_decoded_expansion_reports_and_committed_primary_cause() {
++    let executable = std::env::current_exe().unwrap().to_string_lossy().into_owned();
++    for primary_limit in [false, true] {
++        let records = TempDir::new();
++        let record = records.path().join("child-record.txt");
++        let record_literal = record.to_string_lossy();
++        let engine_limit = executable.len().max(record_literal.len()) + 24;
++        let invalid_count = if primary_limit { engine_limit * 2 } else { engine_limit / 2 };
++        let mut expected_raw = LIBTEST_QUIET_START.to_vec();
++        expected_raw.extend(std::iter::repeat(0xff).take(invalid_count));
++        assert!(String::from_utf8_lossy(&expected_raw).len() > engine_limit);
++        if !primary_limit {
++            assert!(expected_raw.len() < engine_limit);
++        } else {
++            expected_raw.truncate(engine_limit);
++        }
++        let mut engine = engine(SysConfig::default().programs(ProgramPolicy::AllowList(vec![executable.clone()])));
++        engine.set_max_string_size(engine_limit);
++        let script = format!(
++            r#"spawn({executable:?}, ["--exact", "process_fixture", "--nocapture", "--quiet"], #{{
++                env_clear: true,
++                env: #{{ {FIXTURE_ENV}: "0", {FIXTURE_RECORD_ENV}: {record_literal:?}, RHAI_SYS_PROCESS_INVALID_COUNT: "{invalid_count}" }},
++                max_output: 1024
++            }})"#
++        );
++        let child = engine.eval::<Dynamic>(&script).unwrap().cast::<rhai::packages::sys::Child>();
++        let mut scope = Scope::new();
++        scope.push("child", child.clone());
++        scope.push("sibling", child);
++        let mut first = None;
++        let waits = if cfg!(feature = "no_float") {
++            ["child.wait(5)", "sibling.wait(5)", "child.wait(0)"]
++        } else {
++            ["child.wait(5.0)", "sibling.wait(5.0)", "child.wait(0.0)"]
++        };
++        for expression in waits {
++            let error = engine.eval_with_scope::<Dynamic>(&mut scope, expression).unwrap_err();
++            let sys_error = match error.as_ref() {
++                EvalAltResult::ErrorRuntime(value, _) => value.clone().try_cast::<SysError>().unwrap(),
++                other => panic!("expected a typed process error from {expression}, got {other:?}"),
++            };
++            let (cause, report) = match sys_error {
++                SysError::Process { cause: ProcessCause::OutputLimit(message), report } => (message, report),
++                other => panic!("expected preserved OutputLimit, got {other:?}"),
++            };
++            if primary_limit {
++                assert!(cause.starts_with("stdout for `"), "decoded expansion replaced the committed primary cause: {cause}");
++            } else {
++                assert!(cause.starts_with("decoded process output exceeded"), "unexpected no-primary cause: {cause}");
++                assert_eq!(report.exit_code(), Some(0), "normally completed child exit is preserved");
++                assert_eq!(report.exit_signal(), None);
++                assert!(report.stdout_complete() && report.stderr_complete());
++            }
++            assert_eq!(report.stdout_bytes(), expected_raw, "wait must retain exact raw bytes");
++            assert!(report.stderr_bytes().is_empty());
++            assert!(!report.timed_out());
++            let snapshot = (cause, report);
++            if let Some(first) = &first {
++                assert_eq!(&snapshot, first, "cloned and repeated waits must preserve the terminal report");
++            } else {
++                first = Some(snapshot);
++            }
++        }
++        assert_child_record(&record, 0);
++        eprintln!("child_wait_expansion primary_limit={primary_limit} raw_bytes={} exact=true cloned_snapshot=true child_reaped=true", expected_raw.len());
++    }
++}
++
+ /// The scalar text API remains registered and usable when collections are disabled.
+ #[cfg(feature = "no_index")]
+ #[test]

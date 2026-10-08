@@ -4741,7 +4741,7 @@ fn f32_process_timeouts_validate_before_launch_and_preserve_host_output_bounds()
     scope.push("seconds", 0.5 as rhai::FLOAT);
     let result = engine.eval_with_scope::<Map>(&mut scope, &script).unwrap();
     assert_child_record(&record, 0);
-    assert_eq!(result["code"].as_int().unwrap(), 0, "finite fractional f32 timeout preserves normal completion");
+    assert_eq!(result["code"].as_int().unwrap(), 9, "finite fractional f32 timeout preserves normal completion");
     assert!(result["success"].as_bool().unwrap());
     assert!(!result["timed_out"].as_bool().unwrap());
     assert!(result["stdout_complete"].as_bool().unwrap() && result["stderr_complete"].as_bool().unwrap());

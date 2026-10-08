@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "/Users/hoppworks/.local/share/agent-builds/rhai/darwin-f32-process-g0ucm42g/agent-build-7qkn7fxb/target/debug/deps/sys_process-7db88392aefc429f",
+    "--list"
+  ],
+  "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/darwin-f32-process-g0ucm42g/agent-build-7qkn7fxb/source",
+  "exit": 0,
+  "seconds": 0.259251625000001
+}

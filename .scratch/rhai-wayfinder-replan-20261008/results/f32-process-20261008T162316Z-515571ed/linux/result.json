@@ -1,0 +1,58 @@
+{
+  "execution_passed": true,
+  "runtime": "/root/.local/share/agent-builds/rhai/f32-process-2a78b9a082/agent-build-m3rfzsqo",
+  "runtime_identity": {
+    "device": 58,
+    "inode": 117336921
+  },
+  "environment": {
+    "os": "Linux-7.2.8-ogc5.1.fc44.x86_64-x86_64-with-glibc2.43",
+    "machine": "x86_64",
+    "rustc": "rustc 1.77.2 (25ef9e3d8 2024-04-09)",
+    "cargo": "cargo 1.77.2 (e52e36006 2024-03-26)"
+  },
+  "runs": [
+    {
+      "label": "red",
+      "executable_sha256": "b2a66689b33899c5b28aece5fc0de05bb3ea9fb69fc0e0587811d52559560bf9",
+      "source_sha256": "1ba2978344424418e0079f3fd9c2fc55065db4a4380187d27499b7e08693f7ff",
+      "argv": [
+        "/root/.local/share/agent-builds/rhai/f32-process-2a78b9a082/agent-build-m3rfzsqo/target/debug/deps/sys_process-3b8da0dd986a6562",
+        "f32_process_timeouts_validate_before_launch_and_preserve_host_output_bounds",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/f32-process-2a78b9a082/agent-build-m3rfzsqo/source",
+      "exit": 101,
+      "seconds": 0.11351857900444884
+    },
+    {
+      "label": "green",
+      "executable_sha256": "17ba2bbc2a2fcf026c95326e91c655ddf620b4a72470d52625352e9b4c933d15",
+      "source_sha256": "86f1142ff1ae8de5a8b813e892e407a90c1bec70eab864c20b7735f53015bf41",
+      "argv": [
+        "/root/.local/share/agent-builds/rhai/f32-process-2a78b9a082/agent-build-m3rfzsqo/target/debug/deps/sys_process-3b8da0dd986a6562",
+        "f32_process_timeouts_validate_before_launch_and_preserve_host_output_bounds",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/root/.local/share/agent-builds/rhai/f32-process-2a78b9a082/agent-build-m3rfzsqo/source",
+      "exit": 0,
+      "seconds": 0.16364923500805162
+    }
+  ],
+  "bound_sources": {
+    "src/packages/sys/process/unix.rs": "55dc5ad528ad2b4fd56d3fcdd42f92af0b30bf3f96db37c476ee31320dcba713",
+    "src/packages/sys/process.rs": "090094476662417aa94e2ff519cb8038c1d3721e02be6ec166762502bfbff2e2",
+    "src/packages/sys/config.rs": "723da516ad26082ae25ca32b791d629d8b7e29e8c7272b2843ad7d6c3192a845",
+    "src/packages/sys/mod.rs": "ee2dfc0900d64481d09d6d20bbd64b75ac05a316e02788cdf58e9fe52c6be0c5",
+    "tests/sys_process.rs": "86f1142ff1ae8de5a8b813e892e407a90c1bec70eab864c20b7735f53015bf41",
+    "tests/fixtures/sys_process_shared_child_contract.rs": "1faf45c57a4fefeaa05683043e064d3485e892887986fef749bedc974230b217",
+    "Cargo.toml": "cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e",
+    "Cargo.lock": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+    "build.rs": "78adf9eeea2957e1aa1bd96ee260e43806476a07d665c2ed27db55bc101ed335"
+  },
+  "runtime_bytes": 1317896192
+}

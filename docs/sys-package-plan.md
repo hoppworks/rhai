@@ -467,6 +467,23 @@ checks. All nine test-output hashes and 21 staged/exported file hashes matched
 the Workhorse readback. The private runtime and exact owned scope were removed;
 no private Cargo build is reusable.
 
+
+**Native f32 process addendum (combined review READY, 2026-10-08).**
+Darwin arm64 and Linux x86_64, Rust1.77.2,
+`testing-environ,sys,net,f32_float`, accept the exact public Engine process test
+`f32_process_timeouts_validate_before_launch_and_preserve_host_output_bounds`.
+Five invalid duration values are denied before child effects; a finite fractional
+timeout completes a real child normally; script4096 cannot raise the host4-byte
+output cap. Fresh child records, exact bounded output and ESRCH reaping support
+the result. Each OS has one intended equality-assertion RED101 and restored
+GREEN0 with exact source/lock/profile bindings. Original export and owned scope
+retirement are recorded in
+[the f32 proof](../.scratch/rhai-wayfinder-replan-20261008/results/f32-process-20261008T162316Z-515571ed/proof.md).
+Existing actual Condvar-entry X31 proofs remain applicable at unchanged Unix
+backend bytes; a newer before-call fixture pass does not establish wait entry
+or invalidate those original rows. These are narrow accepted rows; Windows,
+unselected lifecycle/fault/profile work and integrated A–F closure remain open.
+
 **Additional native result: X31, Linux blocking wait (combined review READY 2026-10-08).**
 The accepted shared-Child proof above covers three named Rust/Cargo 1.77.2
 feature rows, but its synchronization signal precedes the public wait call. A

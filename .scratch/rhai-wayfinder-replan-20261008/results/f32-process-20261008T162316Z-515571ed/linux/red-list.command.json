@@ -1,0 +1,9 @@
+{
+  "argv": [
+    "/root/.local/share/agent-builds/rhai/f32-process-2a78b9a082/agent-build-m3rfzsqo/target/debug/deps/sys_process-3b8da0dd986a6562",
+    "--list"
+  ],
+  "cwd": "/root/.local/share/agent-builds/rhai/f32-process-2a78b9a082/agent-build-m3rfzsqo/source",
+  "exit": 0,
+  "seconds": 0.001374262006720528
+}

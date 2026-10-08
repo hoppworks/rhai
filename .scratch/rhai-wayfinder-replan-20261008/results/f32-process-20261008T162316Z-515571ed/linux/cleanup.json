@@ -1,0 +1,13 @@
+{
+  "runner_exit": 0,
+  "runtime_absent": true,
+  "scope_absent": true,
+  "retired_outer_identity": {
+    "path": "/root/.local/share/agent-builds/rhai/f32-process-2a78b9a082",
+    "device": 58,
+    "inode": 117336915,
+    "uid": 0
+  },
+  "originals_retained": true,
+  "elapsed_seconds": 21.19846822100226
+}

@@ -1,0 +1,12 @@
+{
+  "runner_exit": 0,
+  "runtime_absent": true,
+  "scope_absent": true,
+  "retired_outer_identity": {
+    "path": "/Users/hoppworks/.local/share/agent-builds/rhai/darwin-f32-process-g0ucm42g",
+    "device": 16777234,
+    "inode": 226529786
+  },
+  "originals_retained": true,
+  "scope_only_empty_rmdir": true
+}

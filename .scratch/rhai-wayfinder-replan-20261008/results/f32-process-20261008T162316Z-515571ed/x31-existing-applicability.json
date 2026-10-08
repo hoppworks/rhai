@@ -1,0 +1,12 @@
+{
+  "linux_minimum": ".scratch/all-tickets/linux-wait-entry-proof.md",
+  "linux_current": ".scratch/all-tickets/linux-shared-child-evidence-87/blocking-entry-current/proof.md",
+  "darwin_minimum": ".scratch/all-tickets/darwin-x31-wait-entry-20261008/attempt-05/proof.md",
+  "darwin_manifest_entries_checked": 36,
+  "unchanged_unix_sha256": "55dc5ad528ad2b4fd56d3fcdd42f92af0b30bf3f96db37c476ee31320dcba713",
+  "old_darwin_revision": "05320c2c9bf3d4396956632e0cc1706e96c94b15",
+  "old_linux_current_revision": "c644085ccf65160bd3d39f5353e8b933310ffe03",
+  "current_revision": "31d3615430414ceb050f7f078aaea51c60609420",
+  "reuse": "named accepted native sync and sync,no_float Condvar-entry/cancel/reap rows; no rerun",
+  "excluded": "recent shared_child fixture before-call readiness alone; non-sync/timed/new Windows claim"
+}

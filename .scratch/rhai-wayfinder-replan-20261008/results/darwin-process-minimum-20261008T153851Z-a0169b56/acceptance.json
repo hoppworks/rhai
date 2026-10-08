@@ -3,5 +3,8 @@
   "scope": "selected53 Darwin minimum/endpoint GREENs and corrected3 Darwin +3 Linux i32 selectors",
   "combined_review": ".scratch/rhai-wayfinder-replan-20261008/results/unix-wait-20261008T131127Z-3fcea4ec/attempt03/review.md",
   "review_sha256": "4277ce725fc0ee30eab6c7e854a94ca66c091bc18ebbece6ae556d5889c70a20",
-  "full_A_F_complete": false
+  "full_A_F_complete": false,
+  "raw_green_selections": 59,
+  "supported_assertions": 58,
+  "actual_shared_wait_entry_not_accepted": true
 }
