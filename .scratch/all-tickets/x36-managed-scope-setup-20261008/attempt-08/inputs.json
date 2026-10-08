@@ -1,0 +1,30 @@
+{
+  "project_revision": "78f722d11f97aafd6255b9fdad7967d2583845ce",
+  "archive_base_revision": "397761661b87e8ab452bb752af16fdc7ca155c85",
+  "archive_delta": "Reuse the accepted immutable attempt-06/07 source archive. Its Cargo.toml, Cargo.lock, and unix.rs SHA-256 values match the current reviewed product inputs; git diff from archive base to current HEAD changes only src/packages/sys/process/unix.rs among Cargo manifests, src, and tests.",
+  "archive_sha256": "ad869e2f338e432a246fec6ce13d102c6b49a5a8c2d062306e98e1eb88601215",
+  "files": {
+    "Cargo.lock": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+    "Cargo.toml": "cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e",
+    "src/packages/sys/process/unix.rs": "55dc5ad528ad2b4fd56d3fcdd42f92af0b30bf3f96db37c476ee31320dcba713"
+  },
+  "features": "testing-environ,sys",
+  "test_filter": "cargo +1.77.2 test --locked --features testing-environ,sys --lib managed_scope_ -- --nocapture --test-threads=1",
+  "target": "Workhorse Linux x86_64",
+  "toolchain": "Rust/Cargo 1.77.2; installed only in AGENT_RUNTIME_DIR",
+  "limits": {
+    "cargo_jobs": 2,
+    "runner_timeout_seconds": 600,
+    "estimated_additional_peak_bytes": 3221225472,
+    "prelaunch_disk_available_bytes": 657912061952,
+    "prelaunch_memavailable_bytes": 89560829952,
+    "active_cargo_or_rustc_processes": 0
+  },
+  "run_scoped_path": "/home/workhorse/projects/agent-skills/tools/run_scoped.py",
+  "run_scoped_sha256": "25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e",
+  "runner_script_sha256": "3e0e8e26006a350e8d2aacef8161341c49334bf32d8d2c4f8e2473ae145b660e",
+  "scope": "/var/roothome/.local/share/agent-builds/rhai/x36-msrv1772-20261008-d791ec24",
+  "session_id": "x36-msrv1772-20261008-d791ec24",
+  "reused_source_archive_from": "../attempt-06/source-input.tar.gz",
+  "prior_mutation_evidence": "../attempt-06/evidence-export/mutation-control.txt and mutation-source-sha256.txt; source/assertion unchanged, expected test sensitivity remains applicable."
+}

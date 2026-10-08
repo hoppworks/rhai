@@ -1,0 +1,1 @@
+Workhorse readback after export: exact owned session scope absent; no process command line referenced that scope. The session scope was removed only after all exported evidence hashes verified locally.

@@ -1,0 +1,2 @@
+six related managed_scope tests passed on Rust/Cargo 1.77.2
+eight run/spawn failure cases had absent exact child and process-group IDs

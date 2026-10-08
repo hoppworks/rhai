@@ -1,0 +1,11 @@
+utc=2026-10-08T03:42:03Z
+Linux workhorse 7.2.8-ogc5.1.fc44.x86_64 #1 SMP PREEMPT_DYNAMIC Tue Oct  6 18:06:42 UTC 2026 x86_64 GNU/Linux
+rustup=rustup 1.29.1 (d95a37b6a 2026-08-13)
+runtime=/var/roothome/.local/share/agent-builds/rhai/x36-msrv1772-20261008-d791ec24/agent-build-5flvxrzi
+tmpdir=/var/roothome/.local/share/agent-builds/rhai/x36-msrv1772-20261008-d791ec24/agent-build-5flvxrzi/tmp
+archive_sha256=ad869e2f338e432a246fec6ce13d102c6b49a5a8c2d062306e98e1eb88601215
+runner_sha256=25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e
+Filesystem         1B-blocks          Used    Available Use% Mounted on
+/dev/nvme0n1p3 1997621166080 1294689181696 657912061952  67% /var
+cargo=cargo 1.77.2 (e52e36006 2024-03-26)
+rustc=rustc 1.77.2 (25ef9e3d8 2024-04-09)

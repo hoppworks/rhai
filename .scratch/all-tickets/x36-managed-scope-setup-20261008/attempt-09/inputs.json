@@ -1,0 +1,34 @@
+{
+  "project_revision": "78f722d11f97aafd6255b9fdad7967d2583845ce",
+  "archive_base_revision": "397761661b87e8ab452bb752af16fdc7ca155c85",
+  "archive_sha256": "ad869e2f338e432a246fec6ce13d102c6b49a5a8c2d062306e98e1eb88601215",
+  "archive_delta": "Reuse the immutable attempt-06 source archive whose manifest, lock and unix.rs hashes match current source; no product source edit after attempt-08.",
+  "files": {
+    "Cargo.lock": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+    "Cargo.toml": "cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e",
+    "src/packages/sys/process/unix.rs": "55dc5ad528ad2b4fd56d3fcdd42f92af0b30bf3f96db37c476ee31320dcba713"
+  },
+  "features": "testing-environ,sys",
+  "target": "Workhorse Linux x86_64",
+  "toolchain": "Rust/Cargo 1.77.2 in private AGENT_RUNTIME_DIR",
+  "test_filter": "managed_scope_kernel_setpgid_denial_cleans_created_group",
+  "phases": [
+    "kernel denial seam disabled: expected assertion RED (exit 101)",
+    "restore hash-matched unix.rs: targeted GREEN"
+  ],
+  "limits": {
+    "cargo_jobs": 2,
+    "runner_timeout_seconds": 600,
+    "estimated_additional_peak_bytes": 3221225472,
+    "prelaunch_disk_available_bytes": 657913044992,
+    "prelaunch_memavailable_kib": 87511216,
+    "active_cargo_or_rustc_processes": 0
+  },
+  "run_scoped_path": "/home/workhorse/projects/agent-skills/tools/run_scoped.py",
+  "run_scoped_sha256": "25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e",
+  "runner_script_sha256": "9b4d429ed3acc316b6444bb15b0cbd3ae47bbac557e0743556ffbe1e9827e9d7",
+  "scope": "/var/roothome/.local/share/agent-builds/rhai/x36-msrv1772-redgreen-20261008-7870fc0b49bf46868f759045676c0df0",
+  "session_id": "x36-msrv1772-redgreen-20261008-7870fc0b49bf46868f759045676c0df0",
+  "source_archive_ref": "../attempt-06/source-input.tar.gz",
+  "review_finding": "Attempt-06 mutation is not assumed applicable across the changed process/toolchain path; targeted RED and restored GREEN must run on Rust/Cargo 1.77.2."
+}

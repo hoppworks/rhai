@@ -1,0 +1,2 @@
+operation=run pid=184402 pid_absent=true group_absent=true
+operation=spawn pid=184404 pid_absent=true group_absent=true

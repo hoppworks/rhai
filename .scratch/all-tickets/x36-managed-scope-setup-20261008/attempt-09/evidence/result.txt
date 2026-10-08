@@ -1,0 +1,3 @@
+kernel-denial mutation RED passed on Rust/Cargo 1.77.2
+restored targeted GREEN passed on Rust/Cargo 1.77.2
+public run and spawn assertions and in-run PID/group readback passed

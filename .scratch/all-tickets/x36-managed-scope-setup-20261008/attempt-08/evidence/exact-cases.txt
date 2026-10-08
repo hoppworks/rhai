@@ -1,0 +1,8 @@
+operation=run failure_point=Fchdir pid=181901
+operation=spawn failure_point=Fchdir pid=181903
+operation=run failure_point=KernelSetpgidDenial pid=181906
+operation=spawn failure_point=KernelSetpgidDenial pid=181908
+operation=run failure_point=AfterSetpgid pid=181912
+operation=spawn failure_point=AfterSetpgid pid=181914
+operation=run failure_point=BeforeSetpgid pid=181917
+operation=spawn failure_point=BeforeSetpgid pid=181919
