@@ -817,8 +817,13 @@ the real public-Engine SIGKILL child: the sensitivity control reports 9 versus
 10, and the restored Cargo test passes with host-file and ESRCH readbacks. Raw
 outputs and both validator-format errors are documented in
 `.scratch/all-tickets/darwin-signal-x22-20261008/proof.md`; combined independent
-review returned READY for this row only. C and D retain unproven custody
-prerequisites → map remaining §6 criteria to existing proof and choose the
+review returned READY for this row only. Darwin X38's named
+`managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes` test
+also passed its reviewed assertion-sensitivity RED/GREEN at arm64/macOS 27.0.1,
+Rust/Cargo 1.93.0 with `testing-environ,sys`; its independent pipe, process and
+cleanup readbacks are in `.scratch/all-tickets/darwin-x38-20261008/attempt-03/`.
+This closes only that named Darwin assertion row; other X38 platforms, features,
+and MSRVs remain open. C and D retain unproven custody prerequisites → map remaining §6 criteria to existing proof and choose the
 cheapest unspent route; close only
 uncovered integrated rows in F → verified fork-main integration under existing
 Git authorization. Do not rerun accepted X22 Linux toolchains or their sensitivity
@@ -978,12 +983,12 @@ The combined independent reviewer returned READY for these artifacts and docs at
 the corrected revision. Package E is integrated at fork main `04d9a797...`; no new
 metadata or example build is planned absent a finding that invalidates current proof.
 
-### 6.7 Ticket 03 criterion-to-evidence map — checked 2026-10-07
+### 6.7 Ticket 03 criterion-to-evidence map — checked 2026-10-08
 
 This map compares original requirements P2/P10/P11/P13 and X1–X38 with current
-test source and accepted proof artifacts. “Accepted” means only the named Linux
-cases and rows below; “partial” preserves the stated gap. No row is closed by a
-source test alone or by an unreviewed/provisional result.
+test source and accepted proof artifacts. “Accepted” means only the named OS,
+toolchain, feature cases and rows below; “partial” preserves the stated gap. No
+row is closed by a source test alone or by an unreviewed/provisional result.
 
 | ID | Current test/evidence | Applicability and remaining gap |
 |---|---|---|
@@ -1028,7 +1033,7 @@ source test alone or by an unreviewed/provisional result.
 | X35 | Managed success/held-zombie tests and `linux-managed-success-proof.md` | Partial: Linux managed leader-exit/worker closure is accepted; DirectChild distinction and other platform/feature rows need their own applicable proof. |
 | X36 | `linux-post-spawn-pipe-setup-proof.md` | Open: this proves post-spawn pipe setup failure, not managed scope setup failure/no fallback. |
 | X37 | Managed group/sentinel tests and accepted Linux managed proofs | Partial: named Linux host/sentinel survival is accepted; Windows Job membership and broader native rows are open. |
-| X38 | `linux-managed-escaped-pipe-proof.md` | Accepted for the named Linux escaped-reader case: capture cancellation/readers close while escaped holder and sentinel survive; no other OS/feature claim. |
+| X38 | Linux `.scratch/all-tickets/linux-managed-escaped-pipe-proof.md`; Darwin test `tests/sys_process.rs::managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes`; Darwin `.scratch/all-tickets/darwin-x38-20261008/attempt-03/` | Accepted for the named Linux escaped-reader case and the named Darwin assertion-sensitivity row (arm64/macOS 27.0.1, Rust/Cargo 1.93.0, `testing-environ,sys`). Darwin expected RED=101 and restored GREEN=0, independent pipe/process observations and exact cleanup readback passed; combined review READY. Other OS, feature, and MSRV rows remain open. |
 
 The crosswalk above preserves rather than reduces the original contracts. It is
 an applicability map, not new execution evidence. Package B remains open, and
@@ -1041,7 +1046,7 @@ applicable revision.
 |---|---|
 | Ticket01 public API, independent observations, meaningful RED, isolation and cleanup | Applies to A–F; no mock/compile-only closure. |
 | Ticket02; P1–P9/P12/P14, E1–E5, F1–F23 | Existing foundation proof retained; native/platform/feature gaps and any invalidated path assertions close through C/D/F. Includes non-UTF8, OS-selected roots, unrestricted symlinks and macOS aliases. Two system-prefix alias assertions are reviewed/integrated at `ad980d80...`; attempt 01 records the reviewed passing full Darwin `sys_policy` target (26 tests, including five root-path cases). This closes only the macOS F23 sys-policy slice; all remaining OS/feature rows stay open. |
-| Ticket03; P2/P10/P11/P13, X1–X38 | A/B plus native C/D and affected F rows: stdin, caching, run/raw/spawn/kill/drop, fault/setup/no-primary/first-cause, managed cancellation/completion, honest incomplete cleanup, unrelated host/sentinel and escaped pipe. No stopped criterion is declared done. |
+| Ticket03; P2/P10/P11/P13, X1–X38 | A/B plus native C/D and affected F rows: stdin, caching, run/raw/spawn/kill/drop, fault/setup/no-primary/first-cause, managed cancellation/completion, honest incomplete cleanup, unrelated host/sentinel and escaped pipe. Linux X38 and the named Darwin X38 assertion row are accepted only at their listed scopes; remaining platform, feature and MSRV rows stay open. No stopped criterion is declared done. |
 | Compatible shared file handles and rhai-fs divergences | Existing implementation/proof retained; API docs E and native/feature/readback gaps C/D/F. Includes bounds, negative reads and unchecked behavior. |
 | Tickets04/05 TCP authority/API | Accepted separate connect/listen grants, numeric IPv4/IPv6, port0 listen, bytes/text/partial progress/EOF/half-close, clone close, resource limits and sync/cancellation remain; existing Linux proof plus missing C/D/F native/feature rows. The new Darwin test proves only one default-feature connect/read/write coexistence path with independent peer readback and typed denial. No DNS/UDP/HTTP/TLS added. |
 | Ticket06; R1–R7 and release proposal | E/F preserve compatibility, metadata/docs/examples, core1.66/optional1.77.2, explicit no_std/no_object/WASM rejection, semantic feature matrix, native three-OS scope and source/dependency provenance. R4's historical alternative is resolved by rejection, not a new tuple API. |
