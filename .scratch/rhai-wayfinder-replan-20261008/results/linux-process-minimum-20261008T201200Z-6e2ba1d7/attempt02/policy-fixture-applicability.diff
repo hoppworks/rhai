@@ -1,0 +1,49 @@
+--- policy original
++++ current
+@@ -40,6 +40,9 @@
+             let expected = std::env::var("RHAI_SYS_PROCESS_IO_BYTES").unwrap().parse::<usize>().unwrap();
+             let out_bytes = std::env::var("RHAI_SYS_PROCESS_STDOUT_BYTES").unwrap().parse::<usize>().unwrap();
+             let err_bytes = std::env::var("RHAI_SYS_PROCESS_STDERR_BYTES").unwrap().parse::<usize>().unwrap();
++            let expected_input = std::env::var_os("RHAI_SYS_PROCESS_IO_EXPECTED").map(std::path::PathBuf::from);
++            let received_input = std::env::var_os("RHAI_SYS_PROCESS_IO_RECEIVED").map(std::path::PathBuf::from);
++            let echo_input = std::env::var_os("RHAI_SYS_PROCESS_IO_ECHO").is_some();
+             let child_pid = process::id();
+             let record_path = std::path::PathBuf::from(record);
+             std::fs::write(&record_path, format!("child-pid={child_pid} child-ready=1\n")).unwrap();
+@@ -54,12 +57,23 @@
+             let mut input = Vec::new();
+             std::io::stdin().read_to_end(&mut input).unwrap();
+             assert_eq!(input.len(), expected);
+-            assert!(input.iter().all(|byte| *byte == b'i'));
++            let input_valid = if let Some(path) = expected_input {
++                std::fs::read(path).map(|expected| expected == input).unwrap_or(false)
++            } else {
++                input.iter().all(|byte| *byte == b'i')
++            };
++            assert!(input_valid, "stress child input differs from its expected bytes");
++            if let Some(path) = received_input {
++                std::fs::write(path, &input).unwrap();
++            }
+             let complete_record = record_path.with_extension("complete");
+             std::fs::write(&complete_record, format!("child-pid={child_pid} input-bytes={} input-valid=true\n", input.len())).unwrap();
+             std::fs::rename(complete_record, record_path).unwrap();
+             stdout_writer.join().unwrap();
+             stderr_writer.join().unwrap();
++            if echo_input {
++                std::io::stdout().write_all(&input).unwrap();
++            }
+             process::exit(code.parse().unwrap());
+         }
+         if std::env::var_os("RHAI_SYS_PROCESS_DEADLINE_IO").is_some() {
+@@ -153,6 +167,11 @@
+         #[cfg(not(target_os = "linux"))]
+         let census_identity = String::new();
+         std::fs::write(record, format!("child-pid={child_id} child-exit={code}{census_identity}\n")).unwrap();
++        if let Ok(name) = std::env::var(FIXTURE_ENV_QUERY) {
++            let query_record = std::env::var_os(FIXTURE_ENV_QUERY_RECORD).expect("fixture environment query record path");
++            let present = std::env::var_os(&name).is_some();
++            std::fs::write(query_record, format!("variable={name} present={present}\n")).unwrap();
++        }
+         if let Ok(count) = std::env::var("RHAI_SYS_PROCESS_INVALID_COUNT") {
+             std::io::stdout().write_all(&vec![0xff; count.parse().unwrap()]).unwrap();
+             process::exit(code.parse().unwrap());

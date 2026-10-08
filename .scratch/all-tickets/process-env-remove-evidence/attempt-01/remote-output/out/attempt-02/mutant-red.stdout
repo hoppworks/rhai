@@ -1,0 +1,11 @@
+
+running 1 test
+test run_removes_inherited_environment_variable_from_public_child ... FAILED
+
+failures:
+
+failures:
+    run_removes_inherited_environment_variable_from_public_child
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 52 filtered out; finished in 0.00s
+

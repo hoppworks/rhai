@@ -1,0 +1,27 @@
+{
+  "acceptance_scope": "Linux x86_64, Rust/Cargo 1.93.0, testing-environ,sys only",
+  "aggregate_elapsed_seconds": 19.959,
+  "cases": [
+    {
+      "case": "mutant-red",
+      "diagnostic": "variable=PATH present=true",
+      "elapsed_seconds": 16.551,
+      "status": 101,
+      "stderr_sha256": "5cb14949426a791a6eba59882ed67eeac87be0471dae851258942dfcdb2a80ed",
+      "stdout_sha256": "6db8baf8fb67f1f861ff1b9d8fbd875ca134c89a1659134e82e6041256072a73"
+    },
+    {
+      "case": "restored-green",
+      "diagnostic": null,
+      "elapsed_seconds": 2.507,
+      "status": 0,
+      "stderr_sha256": "f6c647d0a992aef9a1d93730b4d14d7551d831a6b65a77f40b28c240a6d1c8e5",
+      "stdout_sha256": "a83be1331a2b55ed31c25d8c400056d2b290025fd04193acfe8dbedc3398708d"
+    }
+  ],
+  "sampled_max_owned_processes": 6,
+  "sampled_max_rss_kib": 865048,
+  "sampled_max_storage_kib": 1375680,
+  "samples_are_periodic_not_continuous_peaks": true,
+  "source_restored": true
+}

@@ -1,0 +1,20 @@
+{
+  "exact_cache": "/root/.local/share/agent-builds/rhai/portable-1772-6e2ba1d7-6_9iq0mv",
+  "identity_verified": true,
+  "verified_components": {
+    "rustc-1.77.2-x86_64-unknown-linux-gnu.tar.xz": "7fa3779e7693825728e99639c9b34b9475bfc0dc4a31f730d1f2fbb6764e183c",
+    "cargo-1.77.2-x86_64-unknown-linux-gnu.tar.xz": "b57b050ee48123e05021aff43f84da4b10d1d777dd350dd54fbc14448cd3d2d8",
+    "rust-std-1.77.2-x86_64-unknown-linux-gnu.tar.xz": "23119121fae4b7163b9c2ff5cbaad03d08f80d55da011a025d6b17d27489df7f"
+  },
+  "no_open_file_users": true,
+  "bytes_retired": 97169676,
+  "cache_absent": true,
+  "build_runtime_and_outer_already_absent": {
+    "runner_exit": 0,
+    "runtime_absent": true,
+    "exact_outer_scope_absent": true,
+    "identity_verified": true,
+    "foreign_resources_changed": false
+  },
+  "foreign_resources_changed": false
+}

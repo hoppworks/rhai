@@ -1,0 +1,1 @@
+x11_env_remove removed_child="child-pid=676220 child-exit=0" removed_readback="variable=PATH present=false" control_child="child-pid=676222 child-exit=0" control_readback="variable=PATH present=true" direct_children_reaped=ESRCH

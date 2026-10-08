@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/var/roothome/projects/rhai-wayfinder-20261008/.scratch/rhai-wayfinder-replan-20261008/results/linux-process-minimum-20261008T201200Z-6e2ba1d7/verify-minimum.py", line 60, in <module>
+    installer=downloads/name/'install.sh';text=installer.read_text();assert '--disable-ldconfig' in text and '--prefix' in text
+                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+Traceback (most recent call last):
+  File "/var/roothome/projects/rhai-wayfinder-20261008/.scratch/rhai-wayfinder-replan-20261008/results/linux-process-minimum-20261008T201200Z-6e2ba1d7/verify-minimum.py", line 60, in <module>
+    installer=downloads/name/'install.sh';text=installer.read_text();assert '--disable-ldconfig' in text and '--prefix' in text
+                                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

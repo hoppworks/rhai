@@ -1,0 +1,8 @@
+{
+  "original": "../runner.stderr",
+  "actual_cause": "Official installer generates --prefix and --disable-ldconfig from valopt prefix / opt ldconfig; searching literal generated strings in its source was invalid.",
+  "correction": "Record official installer source, run side-effect-free --help and validate actual options before private installation. Preserve and reuse SHA-verified component archives until package outcome.",
+  "source_oracle_changed": false,
+  "product_run_in_attempt01": false,
+  "helper_sha256": "691b9e5967132deb0b8045f534d343caa8cad298d24b92e630d0ff3102c4fa57"
+}

@@ -2,9 +2,9 @@
 
 Updated: 2026-10-08. Autonomous implementation authorized; no new Goal.
 
-Next: finish the combined review/publication of the narrow Windows custody-path
-repairs, then implement finite held-payload interruption/sentinel/monitor-death
-controls. Public-loop03 native GREEN0 is verified: client78, payload0,
+Next: publish the reviewed Linux minimum addendum, then finish Windows held-payload
+interruption controls and backend source while console access is pending. Windows
+Child/cache exact-handle contract test is WIP, not compiled/run or accepted. Public-loop03 native GREEN0 is verified: client78, payload0,
 PayloadExited, exact eight-record journal, fresh record, confirmed runtime removal,
 and9 hash-verified originals. Parser now accepts the backend's canonical X16 volume
 plus lowercase Guid N file ID; native fixture27/ownerBUILD_ONLY_PASS passes.
@@ -31,7 +31,7 @@ and grandchild exit, nested/assignment/setup/refusal/output/evidence/cleanup fau
 private product work retirement and bounded export. No native Windows Cargo yet.
 
 Execution host: SSH lllm only. Actual current independent Git checkout:
-/root/projects/rhai-wayfinder-20261008, fork main c63 plus the verified owned WIP.
+/root/projects/rhai-wayfinder-20261008, fork main8b226b24 plus owned Windows test WIP.
 Latest human host steering was verified in origin thread01a1101b-e9cc-7a02-a5f6-c5673c302ef3;
 no project builds/tests/servers/proxies or further implementation edits on Laptop.
 Workhorse is now available for other assigned projects; rhai remains on lllm.
@@ -53,15 +53,17 @@ profiles; numericIPv6 bothOSes net/sync+no_index; actual TCP-read-entry4profiles
 Darwin semantic119 supported rows/120 raw excluding host-unavailable EILSEQ;
 process-minimum58 supported assertions/59 raw including affected i32 bothOSes;
 f32 real invalid/valid duration and host-output bounds Darwin/Linux RED101/GREEN0.
+Linux minimum policy/NotFound/argv/env_remove addendum accepts4 new GREENs
+and5 original RED controls;8 criteria covered at1.77.2, all own resources retired.
 Historical X31 actual Condvar-entry proof remains applicable: current Unix backend
 byte-identical to accepted snapshots. All Unix runtime/outer scopes retired.
 See results/{example-20261008T090938Z-zmj63_0i,unix-wait-20261008T131127Z-3fcea4ec,
 ipv6-20261008T135030Z-79648696,net-read-entry-20261008T151745Z-a2d7a5a5,
 darwin-process-minimum-20261008T153851Z-a0169b56,f32-process-20261008T162316Z-515571ed}/.
 
-Fork main: c63b45993eb96afd9f3a4eefe8ac69a362d61612;7 owned reviewed commits,
-atomic push/readback and primary-main fast-forward complete. Next coherent Windows
-delta uncommitted; exclude foreign tests/fixtures/sys_process_shared_child_contract.rs
+Fork main:8b226b24fa24cc8edc9cdcc69126e55b61dd0b3e;8 owned reviewed commits,
+atomic push/readback verifies main as the only remote branch. Laptop main stays
+read-only at c63. Exclude foreign tests/fixtures/sys_process_shared_child_contract.rs
 (SHA14a0808a…) and all unowned changes. Fork hoppworks/rhai main only;
 lowercase author/committer hoppworks; no upstream/PR/Actions/deploy/publish,
 credential/admin/shared-service change or foreign process/resource/session changes.

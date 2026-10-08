@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/root/.local/share/agent-builds/rhai/x11-env-remove-20261007-1436z-8702248/stage/run-env-remove-proof.py", line 259, in <module>
+    start = text.index("pub fn run(")
+ValueError: substring not found

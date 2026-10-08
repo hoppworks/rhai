@@ -1,0 +1,10 @@
+{
+  "bytes_removed": 155887388,
+  "files_removed": 22,
+  "output_copy": "remote-output/out",
+  "owned_process_identities_live": 0,
+  "runtime_present": false,
+  "scope_removed": "/root/.local/share/agent-builds/rhai/x11-env-remove-20261007-1436z-8702248",
+  "sha256sums_verified": true,
+  "utc": "2026-10-07T14:48:08Z"
+}

@@ -1,0 +1,9 @@
+{
+  "started_utc": "2026-10-08T19:46:41.053358+00:00",
+  "runtime": "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-l7jai7mk/agent-build-8n05c1o_",
+  "source_revision": "8b226b24fa24cc8edc9cdcc69126e55b61dd0b3e",
+  "commands": [],
+  "GREEN": [],
+  "samples": [],
+  "scope": "four new Linux1.77.2 baseline selectors only; original RED reused; combined review pending"
+}

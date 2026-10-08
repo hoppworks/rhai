@@ -1,0 +1,109 @@
+{
+  "revision": "8b226b24fa24cc8edc9cdcc69126e55b61dd0b3e",
+  "host": "lllm",
+  "target": "x86_64-unknown-linux-gnu",
+  "toolchain": "1.77.2",
+  "features": "testing-environ,sys",
+  "criteria": [
+    "P2",
+    "P10",
+    "X2",
+    "X4",
+    "X5",
+    "X6",
+    "X8",
+    "X11"
+  ],
+  "tests": [
+    {
+      "test": "default_and_nonmatching_process_policies_deny_public_run_without_starting_child",
+      "historical_key": "policy",
+      "test_function_sha256": "7eb1dc34c7a41fb5351b52163d70557575a9488acdb5a46dcfa1c62eb0f141ea",
+      "test_and_reap_helper_byte_identical": true,
+      "fixture_diff": "policy-fixture-applicability.diff",
+      "fixture_applicability": "Unrelated added stress-IO branches. Added environment-query branch is only selected by env_remove and is already in its saved overlay. Policy env_clear excludes query; NotFound control has no query; argv uses shell. Full process_fixture identity is not claimed.",
+      "historical_revision": "662ab227566414b2099a7732417c844d322d52f2"
+    },
+    {
+      "test": "missing_program_and_cwd_report_not_found_without_starting_child",
+      "historical_key": "not_found",
+      "test_function_sha256": "7947c39ce5a1b8621afc6fc151aa9e612f584739f65118a7004954648a827d4c",
+      "test_and_reap_helper_byte_identical": true,
+      "fixture_diff": "not_found-fixture-applicability.diff",
+      "fixture_applicability": "Unrelated added stress-IO branches. Added environment-query branch is only selected by env_remove and is already in its saved overlay. Policy env_clear excludes query; NotFound control has no query; argv uses shell. Full process_fixture identity is not claimed.",
+      "historical_revision": "17a41496ea14f9cb2345ca7abb02da2b5afaec92"
+    },
+    {
+      "test": "run_preserves_argv_boundaries_without_shell_interpolation",
+      "historical_key": "argv",
+      "test_function_sha256": "f71d29eac79287270d0df842299ab85d8cfe631488370b1ca1c974d40f69e899",
+      "test_and_reap_helper_byte_identical": true,
+      "fixture_diff": "argv-fixture-applicability.diff",
+      "fixture_applicability": "Unrelated added stress-IO branches. Added environment-query branch is only selected by env_remove and is already in its saved overlay. Policy env_clear excludes query; NotFound control has no query; argv uses shell. Full process_fixture identity is not claimed.",
+      "historical_revision": "saved-original-overlay"
+    },
+    {
+      "test": "run_removes_inherited_environment_variable_from_public_child",
+      "historical_key": "env_remove",
+      "test_function_sha256": "383aa98def1a98487640d9a7f56f85ce5b44655d06e9d03efb97f64ff5117190",
+      "test_and_reap_helper_byte_identical": true,
+      "fixture_diff": "env_remove-fixture-applicability.diff",
+      "fixture_applicability": "Unrelated added stress-IO branches. Added environment-query branch is only selected by env_remove and is already in its saved overlay. Policy env_clear excludes query; NotFound control has no query; argv uses shell. Full process_fixture identity is not claimed.",
+      "historical_revision": "saved-original-overlay"
+    }
+  ],
+  "reused_RED": [
+    {
+      "test": "default_and_nonmatching_process_policies_deny_public_run_without_starting_child",
+      "marker": "script should fail with a SysError",
+      "files": {
+        ".scratch/all-tickets/process-policy-proof/attempt-02/red.exit": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c",
+        ".scratch/all-tickets/process-policy-proof/attempt-02/red.stderr": "ff3cc406f768db1d907964bbf3bc27c7d951ec65bed6ac726261577a3a3bf8f0",
+        ".scratch/all-tickets/process-policy-proof/attempt-02/red.stdout": "a799d6a5b55fed7fa28562cd01b951e78c295e349fc2f2aedb202a6fa26a8ca9"
+      }
+    },
+    {
+      "test": "missing_program_and_cwd_report_not_found_without_starting_child",
+      "marker": "PermissionDenied",
+      "files": {
+        ".scratch/all-tickets/process-not-found-proof/attempt-01/x2-red.exit": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c",
+        ".scratch/all-tickets/process-not-found-proof/attempt-01/x2-red.stderr": "53fcc2eba7d2a12db8dc2fda3ed2b95f9d580a758bb243a90334ac5e9e8feec5",
+        ".scratch/all-tickets/process-not-found-proof/attempt-01/x2-red.stdout.gz": "e5ddd9a107b79ce18598aa6cb41a20db2f46ff49856aad073ad87a05e0e84f46"
+      }
+    },
+    {
+      "test": "missing_program_and_cwd_report_not_found_without_starting_child",
+      "marker": "PermissionDenied",
+      "files": {
+        ".scratch/all-tickets/process-not-found-proof/attempt-01/x8-red.exit": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c",
+        ".scratch/all-tickets/process-not-found-proof/attempt-01/x8-red.stderr": "e8cc0b94a66510aa691965efae5cc198d4f72a4c1b5e4ed003228ce2832496b9",
+        ".scratch/all-tickets/process-not-found-proof/attempt-01/x8-red.stdout.gz": "e5ddd9a107b79ce18598aa6cb41a20db2f46ff49856aad073ad87a05e0e84f46"
+      }
+    },
+    {
+      "test": "run_preserves_argv_boundaries_without_shell_interpolation",
+      "marker": "child received different argv boundaries or bytes",
+      "files": {
+        ".scratch/all-tickets/process-argv-evidence/attempt-01/workhorse-output/red.status": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c",
+        ".scratch/all-tickets/process-argv-evidence/attempt-01/workhorse-output/red.stderr": "1a3ce8614771bb562f076d3233fe6e5ce604145c368e729aa286e9fd5c4e1fa3",
+        ".scratch/all-tickets/process-argv-evidence/attempt-01/workhorse-output/red.stdout": "d127e0cdd3aec99f6309cd0ddf4f65b1d943782028d6274b08311e8aaf4015a0"
+      }
+    },
+    {
+      "test": "run_removes_inherited_environment_variable_from_public_child",
+      "marker": "variable=PATH present=true",
+      "files": {
+        ".scratch/all-tickets/process-env-remove-evidence/attempt-01/remote-output/out/attempt-02/mutant-red.status": "39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c",
+        ".scratch/all-tickets/process-env-remove-evidence/attempt-01/remote-output/out/attempt-02/mutant-red.stderr": "5cb14949426a791a6eba59882ed67eeac87be0471dae851258942dfcdb2a80ed",
+        ".scratch/all-tickets/process-env-remove-evidence/attempt-01/remote-output/out/attempt-02/mutant-red.stdout": "6db8baf8fb67f1f861ff1b9d8fbd875ca134c89a1659134e82e6041256072a73"
+      }
+    }
+  ],
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "runner_sha256": "25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e",
+  "preflight_history": [
+    "Full fixture equality refused; actual unrelated IO/query deltas inspected before any download/build.",
+    "First historical P2 analysis expected a guessed sys_err marker; actual saved assertion is script should fail with a SysError. Analysis corrected against original stderr; no execution repeated."
+  ],
+  "reuse": "5 meaningful saved RED controls, byte-identical test oracles/reap helper; 4 new Linux1.77.2 GREEN selectors only."
+}

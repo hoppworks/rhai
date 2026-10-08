@@ -1,0 +1,3 @@
+x2_x8_valid_control child_record="child-pid=676208 child-exit=0" reap=ESRCH
+x2_missing_program io_kind=NotFound child_record_absent=true
+x8_missing_cwd io_kind=NotFound child_record_absent=true

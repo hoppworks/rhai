@@ -1,0 +1,14 @@
+{
+  "active_heavy": [],
+  "disk_free_bytes": 610290229248,
+  "home_resolved": "/var/roothome",
+  "input_hashes_verified": 0,
+  "mem_available_kib": 91857000,
+  "phase": "before",
+  "ready": true,
+  "runner_sha256": "25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e",
+  "session_scope": "/root/.local/share/agent-builds/rhai/x11-env-remove-20261007-1436z-8702248",
+  "session_scope_resolved": "/var/roothome/.local/share/agent-builds/rhai/x11-env-remove-20261007-1436z-8702248",
+  "user": 0,
+  "utc": "2026-10-07T14:39:41Z"
+}

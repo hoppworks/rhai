@@ -1,0 +1,7 @@
+{
+  "type": "AssertionError",
+  "message": "",
+  "elapsed": 18.105,
+  "GREEN_completed": 0,
+  "classification": "inspect exact command/status; no automatic product RED or full rerun"
+}

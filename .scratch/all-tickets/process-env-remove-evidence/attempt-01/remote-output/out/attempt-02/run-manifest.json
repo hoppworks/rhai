@@ -1,0 +1,39 @@
+{
+  "cargo_jobs": 2,
+  "command": [
+    "cargo",
+    "test",
+    "--locked",
+    "--features",
+    "testing-environ,sys",
+    "--test",
+    "sys_process",
+    "run_removes_inherited_environment_variable_from_public_child",
+    "--",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "features": "testing-environ,sys",
+  "limits": {
+    "export_reserve_seconds": 30,
+    "helper_seconds": 540,
+    "max_owned_processes": 16,
+    "rss_hard_kib": 2097152,
+    "storage_hard_kib": 2097152,
+    "storage_preemptive_kib": 1572864,
+    "work_seconds": 510
+  },
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "mutant_product_source_sha256": "30f89117aa7370acf07fb51daaed6814bb112316e46aa4254b4f3a820eeb76e0",
+  "product_source_sha256": "d4fc28906b624f6e9368d0bef16e82e3fc29cada5142da67406fd95962153115",
+  "runner_sha256": "25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e",
+  "source_archive_sha256": "5faabf07990049bfd34272cac294de21a63386803ceefeddcb9262ffb9f05132",
+  "source_revision": "8702248b508a7d02b87cb23f70b3853022e11a0e",
+  "test": "tests/sys_process.rs::run_removes_inherited_environment_variable_from_public_child",
+  "test_sha256": "b585903b21aa64d3725cd5c1bfb883f71c40104273f928404e1ba86997ba16e7",
+  "toolchain": {
+    "cargo": "cargo 1.93.0 (083ac5135 2025-12-15)",
+    "rustc": "rustc 1.93.0 (254b59607 2026-01-19)"
+  }
+}

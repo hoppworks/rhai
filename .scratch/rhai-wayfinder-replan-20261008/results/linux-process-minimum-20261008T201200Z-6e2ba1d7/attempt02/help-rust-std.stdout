@@ -1,0 +1,21 @@
+
+Usage: /var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/downloads/rust-std-1.77.2-x86_64-unknown-linux-gnu/install.sh [options]
+
+Options:
+
+    --uninstall                      only uninstall from the installation prefix
+    --destdir=[<none>]               set installation root
+    --prefix=[/usr/local]            set installation prefix
+    --without=[<none>]               comma-separated list of components to not install
+    --components=[<none>]            comma-separated list of components to install
+    --list-components                list available components
+    --sysconfdir=[/etc]              install system configuration files
+    --bindir=[/bin]                  install binaries
+    --libdir=[/lib]                  install libraries
+    --datadir=[/share]               install data
+    --mandir=[/share/man]            install man pages in PATH
+    --docdir=[\<default\>]           install documentation in PATH
+    --disable-ldconfig               don't run ldconfig after installation (Linux only)
+    --disable-verify                 don't obsolete
+    --verbose                        run with verbose output
+

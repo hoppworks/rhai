@@ -1,0 +1,5 @@
+install: creating uninstall script at /var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/toolchain/lib/rustlib/uninstall.sh
+install: installing component 'rust-std-x86_64-unknown-linux-gnu'
+
+    rust std installed.
+

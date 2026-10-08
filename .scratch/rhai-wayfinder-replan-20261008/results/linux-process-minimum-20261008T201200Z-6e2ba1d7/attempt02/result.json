@@ -1,0 +1,972 @@
+{
+  "started_utc": "2026-10-08T19:50:12.674819+00:00",
+  "runtime": "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b",
+  "source_revision": "8b226b24fa24cc8edc9cdcc69126e55b61dd0b3e",
+  "commands": [
+    {
+      "tag": "help-rustc",
+      "argv": [
+        "bash",
+        "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/downloads/rustc-1.77.2-x86_64-unknown-linux-gnu/install.sh",
+        "--help"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/downloads/rustc-1.77.2-x86_64-unknown-linux-gnu",
+      "pid": 662282,
+      "timeout_seconds": 15,
+      "exit": 0,
+      "elapsed": 0.115,
+      "stdout_sha256": "e503afb824518bb033bbba258663d12af9a32b16bcbaf38a3484a98789c2f417",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "tag": "install-rustc",
+      "argv": [
+        "bash",
+        "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/downloads/rustc-1.77.2-x86_64-unknown-linux-gnu/install.sh",
+        "--prefix=/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/toolchain",
+        "--disable-ldconfig"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/downloads/rustc-1.77.2-x86_64-unknown-linux-gnu",
+      "pid": 662316,
+      "timeout_seconds": 120,
+      "exit": 0,
+      "elapsed": 0.415,
+      "stdout_sha256": "061a7f1fff63e744fc4de7cd5c004e77e6f7fffd2baffc4ebbd17b6243a74fb2",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "tag": "help-cargo",
+      "argv": [
+        "bash",
+        "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/downloads/cargo-1.77.2-x86_64-unknown-linux-gnu/install.sh",
+        "--help"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/downloads/cargo-1.77.2-x86_64-unknown-linux-gnu",
+      "pid": 663905,
+      "timeout_seconds": 15,
+      "exit": 0,
+      "elapsed": 0.119,
+      "stdout_sha256": "c8d382c594305eafd2aad4d5c6ee9c52d9672e65fdb64d7f5792eacaea4d0e6f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "tag": "install-cargo",
+      "argv": [
+        "bash",
+        "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/downloads/cargo-1.77.2-x86_64-unknown-linux-gnu/install.sh",
+        "--prefix=/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/toolchain",
+        "--disable-ldconfig"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/downloads/cargo-1.77.2-x86_64-unknown-linux-gnu",
+      "pid": 664211,
+      "timeout_seconds": 120,
+      "exit": 0,
+      "elapsed": 0.618,
+      "stdout_sha256": "6ceec60349eb6f8b0fc5d5e2b38d81693449f5a8cf6798d1e5d388b2cf5a9ae9",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "tag": "help-rust-std",
+      "argv": [
+        "bash",
+        "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/downloads/rust-std-1.77.2-x86_64-unknown-linux-gnu/install.sh",
+        "--help"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/downloads/rust-std-1.77.2-x86_64-unknown-linux-gnu",
+      "pid": 667889,
+      "timeout_seconds": 15,
+      "exit": 0,
+      "elapsed": 0.12,
+      "stdout_sha256": "3f75c3486f76ca9711d009ef0c0bd830e2ecb59a031e0d604b08117a7944f0a5",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "tag": "install-rust-std",
+      "argv": [
+        "bash",
+        "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/downloads/rust-std-1.77.2-x86_64-unknown-linux-gnu/install.sh",
+        "--prefix=/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/toolchain",
+        "--disable-ldconfig"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/downloads/rust-std-1.77.2-x86_64-unknown-linux-gnu",
+      "pid": 667891,
+      "timeout_seconds": 120,
+      "exit": 0,
+      "elapsed": 0.515,
+      "stdout_sha256": "99903d56813bfca7ad73153ee718aace3ab732076344f2472a346f8cac718f87",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "tag": "cargo-version",
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/toolchain/bin/cargo",
+        "--version"
+      ],
+      "cwd": "/root/projects/rhai-wayfinder-20261008",
+      "pid": 668995,
+      "timeout_seconds": 15,
+      "exit": 0,
+      "elapsed": 0.119,
+      "stdout_sha256": "6112bcce75ab9a1c5d664eec9c11d98776a7c36c3be3c3402d871d72f1401b20",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "tag": "rustc-version",
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/toolchain/bin/rustc",
+        "--version"
+      ],
+      "cwd": "/root/projects/rhai-wayfinder-20261008",
+      "pid": 668997,
+      "timeout_seconds": 15,
+      "exit": 0,
+      "elapsed": 0.116,
+      "stdout_sha256": "8d95dab8b988abfc08735506e13455043a0a2f910e0672f4fdd48f37cc0a2f83",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "tag": "compile",
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/toolchain/bin/cargo",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys",
+        "--test",
+        "sys_process",
+        "--no-run",
+        "--message-format=json"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/source",
+      "pid": 669351,
+      "timeout_seconds": 480,
+      "exit": 0,
+      "elapsed": 24.679,
+      "stdout_sha256": "6bfa6435d67557b94e3fcd91946e0a5e86e4c1e3066542fd4bf9d262dbc3e012",
+      "stderr_sha256": "39b4a6bfdb03dc1a3e84e450325f57f09c9791d4f94273cc19443fe1333245ed"
+    },
+    {
+      "tag": "test-list",
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/target/debug/deps/sys_process-2037c14dd2370964",
+        "--list"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/source",
+      "pid": 675954,
+      "timeout_seconds": 30,
+      "exit": 0,
+      "elapsed": 0.14,
+      "stdout_sha256": "d91aa780c6979a14b7d35eaca97f095b9ab2f9935a00dbf6d201436ca16162c3",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "tag": "green-policy",
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/target/debug/deps/sys_process-2037c14dd2370964",
+        "default_and_nonmatching_process_policies_deny_public_run_without_starting_child",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/source",
+      "pid": 675956,
+      "timeout_seconds": 30,
+      "exit": 0,
+      "elapsed": 0.14,
+      "stdout_sha256": "86625bdc9c06be26b17ceb8f1aa1b2fb92ea49eac3b30f90acaa99c0000a45bd",
+      "stderr_sha256": "1163fb4d7a2e876c3894160f715fa1ab9034fff5daa598431ac919d24563a808"
+    },
+    {
+      "tag": "green-not_found",
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/target/debug/deps/sys_process-2037c14dd2370964",
+        "missing_program_and_cwd_report_not_found_without_starting_child",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/source",
+      "pid": 676205,
+      "timeout_seconds": 30,
+      "exit": 0,
+      "elapsed": 0.142,
+      "stdout_sha256": "f07275fb8131eafb4fbcd231ca39b35e86f87274f3f5200cb49e63b2a38aad5d",
+      "stderr_sha256": "2a37b79829196c6ce4a0993d6efdb0ac9bd31601ba7de21f5423ab7b3796fdb5"
+    },
+    {
+      "tag": "green-argv",
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/target/debug/deps/sys_process-2037c14dd2370964",
+        "run_preserves_argv_boundaries_without_shell_interpolation",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/source",
+      "pid": 676212,
+      "timeout_seconds": 30,
+      "exit": 0,
+      "elapsed": 0.137,
+      "stdout_sha256": "da2402c4c1a789ae49f97e5deb03bdfa7376f9504a2813b72e71f085935444b7",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "tag": "green-env_remove",
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/target/debug/deps/sys_process-2037c14dd2370964",
+        "run_removes_inherited_environment_variable_from_public_child",
+        "--exact",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/source",
+      "pid": 676217,
+      "timeout_seconds": 30,
+      "exit": 0,
+      "elapsed": 0.139,
+      "stdout_sha256": "a372eb511d25b68144fd2b22416f7de84f75b918edea97411135c322364d6cd2",
+      "stderr_sha256": "54ab060a7da73687f4d6021db137573919bac891b8c9d62a0b228cc0bae806b2"
+    }
+  ],
+  "GREEN": [
+    {
+      "test": "default_and_nonmatching_process_policies_deny_public_run_without_starting_child",
+      "exit": 0,
+      "artifact_sha256": "3d31c736995cb02363bfa2ee6126908eb67fc3c1873a806e81a1a6db98f4fcad",
+      "test_function_sha256": "7eb1dc34c7a41fb5351b52163d70557575a9488acdb5a46dcfa1c62eb0f141ea",
+      "independent_oracle": "public Engine plus exact child-written record/bytes/absence and direct child ESRCH checked in unchanged test",
+      "review_pending": true
+    },
+    {
+      "test": "missing_program_and_cwd_report_not_found_without_starting_child",
+      "exit": 0,
+      "artifact_sha256": "3d31c736995cb02363bfa2ee6126908eb67fc3c1873a806e81a1a6db98f4fcad",
+      "test_function_sha256": "7947c39ce5a1b8621afc6fc151aa9e612f584739f65118a7004954648a827d4c",
+      "independent_oracle": "public Engine plus exact child-written record/bytes/absence and direct child ESRCH checked in unchanged test",
+      "review_pending": true
+    },
+    {
+      "test": "run_preserves_argv_boundaries_without_shell_interpolation",
+      "exit": 0,
+      "artifact_sha256": "3d31c736995cb02363bfa2ee6126908eb67fc3c1873a806e81a1a6db98f4fcad",
+      "test_function_sha256": "f71d29eac79287270d0df842299ab85d8cfe631488370b1ca1c974d40f69e899",
+      "independent_oracle": "public Engine plus exact child-written record/bytes/absence and direct child ESRCH checked in unchanged test",
+      "review_pending": true
+    },
+    {
+      "test": "run_removes_inherited_environment_variable_from_public_child",
+      "exit": 0,
+      "artifact_sha256": "3d31c736995cb02363bfa2ee6126908eb67fc3c1873a806e81a1a6db98f4fcad",
+      "test_function_sha256": "383aa98def1a98487640d9a7f56f85ce5b44655d06e9d03efb97f64ff5117190",
+      "independent_oracle": "public Engine plus exact child-written record/bytes/absence and direct child ESRCH checked in unchanged test",
+      "review_pending": true
+    }
+  ],
+  "samples": [
+    {
+      "elapsed": 1.995,
+      "storage_bytes": 297397364,
+      "rss_bytes": 45035520,
+      "processes": [
+        {
+          "pid": 661870,
+          "start": "29818454",
+          "rss_bytes": 15810560
+        },
+        {
+          "pid": 661871,
+          "start": "29818456",
+          "rss_bytes": 29224960
+        },
+        {
+          "pid": 662282,
+          "start": "29818659",
+          "rss_bytes": 0
+        }
+      ]
+    },
+    {
+      "elapsed": 2.11,
+      "storage_bytes": 297397364,
+      "rss_bytes": 48361472,
+      "processes": [
+        {
+          "pid": 661870,
+          "start": "29818454",
+          "rss_bytes": 15810560
+        },
+        {
+          "pid": 661871,
+          "start": "29818456",
+          "rss_bytes": 29224960
+        },
+        {
+          "pid": 662316,
+          "start": "29818671",
+          "rss_bytes": 3325952
+        }
+      ]
+    },
+    {
+      "elapsed": 4.0,
+      "storage_bytes": 627647720,
+      "rss_bytes": 45404160,
+      "processes": [
+        {
+          "pid": 661870,
+          "start": "29818454",
+          "rss_bytes": 15810560
+        },
+        {
+          "pid": 661871,
+          "start": "29818456",
+          "rss_bytes": 29593600
+        },
+        {
+          "pid": 663905,
+          "start": "29818859",
+          "rss_bytes": 0
+        }
+      ]
+    },
+    {
+      "elapsed": 4.118,
+      "storage_bytes": 627647720,
+      "rss_bytes": 49262592,
+      "processes": [
+        {
+          "pid": 661870,
+          "start": "29818454",
+          "rss_bytes": 15810560
+        },
+        {
+          "pid": 661871,
+          "start": "29818456",
+          "rss_bytes": 29593600
+        },
+        {
+          "pid": 664211,
+          "start": "29818871",
+          "rss_bytes": 3858432
+        }
+      ]
+    },
+    {
+      "elapsed": 11.843,
+      "storage_bytes": 800007191,
+      "rss_bytes": 43847680,
+      "processes": [
+        {
+          "pid": 661870,
+          "start": "29818454",
+          "rss_bytes": 15810560
+        },
+        {
+          "pid": 661871,
+          "start": "29818456",
+          "rss_bytes": 28037120
+        },
+        {
+          "pid": 667889,
+          "start": "29819644",
+          "rss_bytes": 0
+        }
+      ]
+    },
+    {
+      "elapsed": 11.959,
+      "storage_bytes": 800007191,
+      "rss_bytes": 47710208,
+      "processes": [
+        {
+          "pid": 661870,
+          "start": "29818454",
+          "rss_bytes": 15810560
+        },
+        {
+          "pid": 661871,
+          "start": "29818456",
+          "rss_bytes": 28037120
+        },
+        {
+          "pid": 667891,
+          "start": "29819656",
+          "rss_bytes": 3862528
+        }
+      ]
+    },
+    {
+      "elapsed": 12.479,
+      "storage_bytes": 939545766,
+      "rss_bytes": 43847680,
+      "processes": [
+        {
+          "pid": 661870,
+          "start": "29818454",
+          "rss_bytes": 15810560
+        },
+        {
+          "pid": 661871,
+          "start": "29818456",
+          "rss_bytes": 28037120
+        },
+        {
+          "pid": 668995,
+          "start": "29819707",
+          "rss_bytes": 0
+        }
+      ]
+    },
+    {
+      "elapsed": 12.596,
+      "storage_bytes": 939545766,
+      "rss_bytes": 50593792,
+      "processes": [
+        {
+          "pid": 661870,
+          "start": "29818454",
+          "rss_bytes": 15810560
+        },
+        {
+          "pid": 661871,
+          "start": "29818456",
+          "rss_bytes": 28037120
+        },
+        {
+          "pid": 668997,
+          "start": "29819719",
+          "rss_bytes": 6746112
+        }
+      ]
+    },
+    {
+      "elapsed": 14.527,
+      "storage_bytes": 1932350397,
+      "rss_bytes": 68112384,
+      "processes": [
+        {
+          "pid": 661870,
+          "start": "29818454",
+          "rss_bytes": 15810560
+        },
+        {
+          "pid": 661871,
+          "start": "29818456",
+          "rss_bytes": 34734080
+        },
+        {
+          "pid": 669351,
+          "start": "29819910",
+          "rss_bytes": 17567744
+        }
+      ]
+    },
+    {
+      "elapsed": 16.568,
+      "storage_bytes": 1935468847,
+      "rss_bytes": 89194496,
+      "processes": [
+        {
+          "pid": 661870,
+          "start": "29818454",
+          "rss_bytes": 15810560
+        },
+        {
+          "pid": 661871,
+          "start": "29818456",
+          "rss_bytes": 34734080
+        },
+        {
+          "pid": 669351,
+          "start": "29819910",
+          "rss_bytes": 38649856
+        }
+      ]
+    },
+    {
+      "elapsed": 18.614,
+      "storage_bytes": 1986886289,
+      "rss_bytes": 378150912,
+      "processes": [
+        {
+          "pid": 661870,
+          "start": "29818454",
+          "rss_bytes": 15810560
+        },
+        {
+          "pid": 661871,
+          "start": "29818456",
+          "rss_bytes": 34734080
+        },
+        {
+          "pid": 669351,
+          "start": "29819910",
+          "rss_bytes": 74727424
+        },
+        {
+          "pid": 670306,
+          "start": "29820301",
+          "rss_bytes": 127848448
+        },
+        {
+          "pid": 670307,
+          "start": "29820301",
+          "rss_bytes": 125030400
+        }
+      ]
+    },
+    {
+      "elapsed": 20.655,
+      "storage_bytes": 2062096374,
+      "rss_bytes": 533200896,
+      "processes": [
+        {
+          "pid": 661870,
+          "start": "29818454",
+          "rss_bytes": 15810560
+        },
+        {
+          "pid": 661871,
+          "start": "29818456",
+          "rss_bytes": 34734080
+        },
+        {
+          "pid": 669351,
+          "start": "29819910",
+          "rss_bytes": 74727424
+        },
+        {
+          "pid": 670466,
+          "start": "29820392",
+          "rss_bytes": 320393216
+        },
+        {
+          "pid": 670725,
+          "start": "29820522",
+          "rss_bytes": 87535616
+        }
+      ]
+    },
+    {
+      "elapsed": 22.7,
+      "storage_bytes": 2131908242,
+      "rss_bytes": 505868288,
+      "processes": [
+        {
+          "pid": 661870,
+          "start": "29818454",
+          "rss_bytes": 15810560
+        },
+        {
+          "pid": 661871,
+          "start": "29818456",
+          "rss_bytes": 34734080
+        },
+        {
+          "pid": 669351,
+          "start": "29819910",
+          "rss_bytes": 74727424
+        },
+        {
+          "pid": 671853,
+          "start": "29820682",
+          "rss_bytes": 201711616
+        },
+        {
+          "pid": 671869,
+          "start": "29820706",
+          "rss_bytes": 178884608
+        }
+      ]
+    },
+    {
+      "elapsed": 24.746,
+      "storage_bytes": 2177469534,
+      "rss_bytes": 404111360,
+      "processes": [
+        {
+          "pid": 661870,
+          "start": "29818454",
+          "rss_bytes": 15810560
+        },
+        {
+          "pid": 661871,
+          "start": "29818456",
+          "rss_bytes": 34734080
+        },
+        {
+          "pid": 669351,
+          "start": "29819910",
+          "rss_bytes": 74727424
+        },
+        {
+          "pid": 672013,
+          "start": "29820891",
+          "rss_bytes": 174559232
+        },
+        {
+          "pid": 672020,
+          "start": "29820924",
+          "rss_bytes": 75096064
+        },
+        {
+          "pid": 672028,
+          "start": "29820931",
+          "rss_bytes": 3129344
+        },
+        {
+          "pid": 672029,
+          "start": "29820931",
+          "rss_bytes": 2609152
+        },
+        {
+          "pid": 672030,
+          "start": "29820931",
+          "rss_bytes": 23445504
+        }
+      ]
+    },
+    {
+      "elapsed": 26.791,
+      "storage_bytes": 2230681145,
+      "rss_bytes": 445743104,
+      "processes": [
+        {
+          "pid": 661870,
+          "start": "29818454",
+          "rss_bytes": 15810560
+        },
+        {
+          "pid": 661871,
+          "start": "29818456",
+          "rss_bytes": 34734080
+        },
+        {
+          "pid": 669351,
+          "start": "29819910",
+          "rss_bytes": 74727424
+        },
+        {
+          "pid": 672924,
+          "start": "29821061",
+          "rss_bytes": 224108544
+        },
+        {
+          "pid": 673212,
+          "start": "29821132",
+          "rss_bytes": 96362496
+        }
+      ]
+    },
+    {
+      "elapsed": 28.843,
+      "storage_bytes": 2264428106,
+      "rss_bytes": 598446080,
+      "processes": [
+        {
+          "pid": 661870,
+          "start": "29818454",
+          "rss_bytes": 15810560
+        },
+        {
+          "pid": 661871,
+          "start": "29818456",
+          "rss_bytes": 34734080
+        },
+        {
+          "pid": 669351,
+          "start": "29819910",
+          "rss_bytes": 74727424
+        },
+        {
+          "pid": 672924,
+          "start": "29821061",
+          "rss_bytes": 473174016
+        }
+      ]
+    },
+    {
+      "elapsed": 30.895,
+      "storage_bytes": 2287535298,
+      "rss_bytes": 779657216,
+      "processes": [
+        {
+          "pid": 661870,
+          "start": "29818454",
+          "rss_bytes": 15810560
+        },
+        {
+          "pid": 661871,
+          "start": "29818456",
+          "rss_bytes": 34734080
+        },
+        {
+          "pid": 669351,
+          "start": "29819910",
+          "rss_bytes": 74727424
+        },
+        {
+          "pid": 672924,
+          "start": "29821061",
+          "rss_bytes": 654385152
+        }
+      ]
+    },
+    {
+      "elapsed": 32.936,
+      "storage_bytes": 2327455847,
+      "rss_bytes": 1068060672,
+      "processes": [
+        {
+          "pid": 661870,
+          "start": "29818454",
+          "rss_bytes": 15810560
+        },
+        {
+          "pid": 661871,
+          "start": "29818456",
+          "rss_bytes": 34734080
+        },
+        {
+          "pid": 669351,
+          "start": "29819910",
+          "rss_bytes": 74727424
+        },
+        {
+          "pid": 672924,
+          "start": "29821061",
+          "rss_bytes": 942788608
+        }
+      ]
+    },
+    {
+      "elapsed": 34.979,
+      "storage_bytes": 2387177364,
+      "rss_bytes": 989540352,
+      "processes": [
+        {
+          "pid": 661870,
+          "start": "29818454",
+          "rss_bytes": 15810560
+        },
+        {
+          "pid": 661871,
+          "start": "29818456",
+          "rss_bytes": 34734080
+        },
+        {
+          "pid": 669351,
+          "start": "29819910",
+          "rss_bytes": 74727424
+        },
+        {
+          "pid": 672924,
+          "start": "29821061",
+          "rss_bytes": 864268288
+        }
+      ]
+    },
+    {
+      "elapsed": 37.026,
+      "storage_bytes": 2599763863,
+      "rss_bytes": 439787520,
+      "processes": [
+        {
+          "pid": 661870,
+          "start": "29818454",
+          "rss_bytes": 15810560
+        },
+        {
+          "pid": 661871,
+          "start": "29818456",
+          "rss_bytes": 34734080
+        },
+        {
+          "pid": 669351,
+          "start": "29819910",
+          "rss_bytes": 74727424
+        },
+        {
+          "pid": 675620,
+          "start": "29822126",
+          "rss_bytes": 95535104
+        },
+        {
+          "pid": 675621,
+          "start": "29822126",
+          "rss_bytes": 178032640
+        },
+        {
+          "pid": 675683,
+          "start": "29822159",
+          "rss_bytes": 3125248
+        },
+        {
+          "pid": 675684,
+          "start": "29822159",
+          "rss_bytes": 2539520
+        },
+        {
+          "pid": 675685,
+          "start": "29822159",
+          "rss_bytes": 35282944
+        }
+      ]
+    },
+    {
+      "elapsed": 39.069,
+      "storage_bytes": 2741201632,
+      "rss_bytes": 357187584,
+      "processes": [
+        {
+          "pid": 661870,
+          "start": "29818454",
+          "rss_bytes": 15810560
+        },
+        {
+          "pid": 661871,
+          "start": "29818456",
+          "rss_bytes": 34734080
+        },
+        {
+          "pid": 669351,
+          "start": "29819910",
+          "rss_bytes": 74727424
+        },
+        {
+          "pid": 675621,
+          "start": "29822126",
+          "rss_bytes": 231915520
+        }
+      ]
+    },
+    {
+      "elapsed": 39.243,
+      "storage_bytes": 2741202700,
+      "rss_bytes": 50483200,
+      "processes": [
+        {
+          "pid": 661870,
+          "start": "29818454",
+          "rss_bytes": 15810560
+        },
+        {
+          "pid": 661871,
+          "start": "29818456",
+          "rss_bytes": 34672640
+        },
+        {
+          "pid": 675954,
+          "start": "29822382",
+          "rss_bytes": 0
+        }
+      ]
+    },
+    {
+      "elapsed": 39.383,
+      "storage_bytes": 2741202700,
+      "rss_bytes": 62164992,
+      "processes": [
+        {
+          "pid": 661870,
+          "start": "29818454",
+          "rss_bytes": 15810560
+        },
+        {
+          "pid": 661871,
+          "start": "29818456",
+          "rss_bytes": 34672640
+        },
+        {
+          "pid": 675956,
+          "start": "29822396",
+          "rss_bytes": 11681792
+        }
+      ]
+    },
+    {
+      "elapsed": 39.526,
+      "storage_bytes": 2741202700,
+      "rss_bytes": 50483200,
+      "processes": [
+        {
+          "pid": 661870,
+          "start": "29818454",
+          "rss_bytes": 15810560
+        },
+        {
+          "pid": 661871,
+          "start": "29818456",
+          "rss_bytes": 34672640
+        },
+        {
+          "pid": 676205,
+          "start": "29822410",
+          "rss_bytes": 0
+        }
+      ]
+    },
+    {
+      "elapsed": 39.665,
+      "storage_bytes": 2741202700,
+      "rss_bytes": 50483200,
+      "processes": [
+        {
+          "pid": 661870,
+          "start": "29818454",
+          "rss_bytes": 15810560
+        },
+        {
+          "pid": 661871,
+          "start": "29818456",
+          "rss_bytes": 34672640
+        },
+        {
+          "pid": 676212,
+          "start": "29822424",
+          "rss_bytes": 0
+        }
+      ]
+    },
+    {
+      "elapsed": 39.804,
+      "storage_bytes": 2741202700,
+      "rss_bytes": 61546496,
+      "processes": [
+        {
+          "pid": 661870,
+          "start": "29818454",
+          "rss_bytes": 15810560
+        },
+        {
+          "pid": 661871,
+          "start": "29818456",
+          "rss_bytes": 34672640
+        },
+        {
+          "pid": 676217,
+          "start": "29822438",
+          "rss_bytes": 11063296
+        }
+      ]
+    },
+    {
+      "elapsed": 39.942,
+      "storage_bytes": 2741202700,
+      "rss_bytes": 50483200,
+      "processes": [
+        {
+          "pid": 661870,
+          "start": "29818454",
+          "rss_bytes": 15810560
+        },
+        {
+          "pid": 661871,
+          "start": "29818456",
+          "rss_bytes": 34672640
+        }
+      ]
+    }
+  ],
+  "scope": "four new Linux1.77.2 baseline selectors only; original RED reused; combined review pending"
+}

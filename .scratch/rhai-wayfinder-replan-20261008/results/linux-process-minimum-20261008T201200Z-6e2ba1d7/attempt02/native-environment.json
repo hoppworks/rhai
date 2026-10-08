@@ -1,0 +1,22 @@
+{
+  "uname": [
+    "Linux",
+    "lllm",
+    "7.2.0-ogc6.1.fc44.x86_64",
+    "#1 SMP PREEMPT_DYNAMIC Mon Aug 24 03:42:13 UTC 2026",
+    "x86_64"
+  ],
+  "python": "3.14.7 (main, Aug 10 2026, 00:00:00) [GCC 16.1.1 20260515 (Red Hat 16.1.1-2)]",
+  "uid": 0,
+  "runtime_identity": {
+    "device": 36,
+    "inode": 456367683
+  },
+  "limits": {
+    "wall_seconds": 1200,
+    "storage_bytes": 8589934592,
+    "owned_rss_bytes": 8589934592,
+    "owned_processes": 32,
+    "cargo_jobs": 2
+  }
+}

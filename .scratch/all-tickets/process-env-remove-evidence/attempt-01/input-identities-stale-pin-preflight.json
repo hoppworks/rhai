@@ -1,0 +1,15 @@
+{
+  "attempt": "attempt-02",
+  "embedded_helper_sha256": "8002d97ada5c1883728b52f70b6a34d4a55435eb7ca6bc82f26c36214f8a88ca",
+  "files": {
+    "Cargo.lock.accepted": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+    "run-env-remove-proof.py": "8002d97ada5c1883728b52f70b6a34d4a55435eb7ca6bc82f26c36214f8a88ca",
+    "source.tar.gz": "5faabf07990049bfd34272cac294de21a63386803ceefeddcb9262ffb9f05132",
+    "sys_process.rs": "b585903b21aa64d3725cd5c1bfb883f71c40104273f928404e1ba86997ba16e7"
+  },
+  "helper_sha256": "8002d97ada5c1883728b52f70b6a34d4a55435eb7ca6bc82f26c36214f8a88ca",
+  "input_manifest_sha256": "183ae840cc05d3acedfa7b41806557bbbd2a62b217ea8c307a18639ed822ea3f",
+  "preflight_sha256": "23966c90d2b31f4bbc2706a9544d71ccb74a7e920981117c66992bd21891c3f3",
+  "runner_sha256": "25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e",
+  "source_revision": "8702248b508a7d02b87cb23f70b3853022e11a0e"
+}

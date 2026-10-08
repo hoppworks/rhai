@@ -1,0 +1,23 @@
+[
+  {
+    "component": "rustc",
+    "url": "https://static.rust-lang.org/dist/rustc-1.77.2-x86_64-unknown-linux-gnu.tar.xz",
+    "bytes": 63263120,
+    "sha256": "7fa3779e7693825728e99639c9b34b9475bfc0dc4a31f730d1f2fbb6764e183c",
+    "private_prefix": "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/toolchain"
+  },
+  {
+    "component": "cargo",
+    "url": "https://static.rust-lang.org/dist/cargo-1.77.2-x86_64-unknown-linux-gnu.tar.xz",
+    "bytes": 8396232,
+    "sha256": "b57b050ee48123e05021aff43f84da4b10d1d777dd350dd54fbc14448cd3d2d8",
+    "private_prefix": "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/toolchain"
+  },
+  {
+    "component": "rust-std",
+    "url": "https://static.rust-lang.org/dist/rust-std-1.77.2-x86_64-unknown-linux-gnu.tar.xz",
+    "bytes": 25510324,
+    "sha256": "23119121fae4b7163b9c2ff5cbaad03d08f80d55da011a025d6b17d27489df7f",
+    "private_prefix": "/var/roothome/.local/share/agent-builds/rhai/linux-minimum-6e2ba1d7-t1y_bgkg/agent-build-lr1fzy6b/toolchain"
+  }
+]
