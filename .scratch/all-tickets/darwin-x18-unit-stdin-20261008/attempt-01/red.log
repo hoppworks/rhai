@@ -1,0 +1,5 @@
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+error: cannot create the lock file /Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/Cargo.lock because --locked was passed to prevent this
+help: to generate the lock file without accessing the network, remove the --locked flag and use --offline instead.

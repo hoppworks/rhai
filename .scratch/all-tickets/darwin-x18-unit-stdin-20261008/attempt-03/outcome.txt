@@ -1,0 +1,6 @@
+classification=accepted
+green_status=0
+green_passed=true
+baseline_source_restored=true
+red_evidence=.scratch/all-tickets/darwin-x18-unit-stdin-20261008/attempt-02/red.log
+lock_sha256=2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425

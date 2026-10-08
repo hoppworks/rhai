@@ -1,0 +1,11 @@
+{
+  "classification": "infrastructure_pre_assertion",
+  "cause": "cargo command inherited worktree cwd instead of archived source cwd",
+  "cargo_exit": 101,
+  "test_started": false,
+  "product_assertions": 0,
+  "build_acceptance": false,
+  "correction": "cd into AGENT_RUNTIME_DIR/source before cargo",
+  "scope_cleanup": "exact owned empty scope removed",
+  "product_source_changed": false
+}

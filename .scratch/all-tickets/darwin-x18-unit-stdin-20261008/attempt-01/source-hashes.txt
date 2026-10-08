@@ -1,0 +1,4 @@
+cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e  /Users/hoppworks/.local/share/agent-builds/rhai/darwin-x18-unit-stdin-20261008-01457467-9491-4194-8476-d0e62e1d4e52/agent-build-jmvfwlmg/source/Cargo.toml
+7ddc87f6e4b57d61d077445a81f1c3ef2f2e54cb35ac8c90a7ed328245d14017  /Users/hoppworks/.local/share/agent-builds/rhai/darwin-x18-unit-stdin-20261008-01457467-9491-4194-8476-d0e62e1d4e52/agent-build-jmvfwlmg/source/tests/sys_process.rs
+1faf45c57a4fefeaa05683043e064d3485e892887986fef749bedc974230b217  /Users/hoppworks/.local/share/agent-builds/rhai/darwin-x18-unit-stdin-20261008-01457467-9491-4194-8476-d0e62e1d4e52/agent-build-jmvfwlmg/source/tests/fixtures/sys_process_shared_child_contract.rs
+2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425  /Users/hoppworks/.local/share/agent-builds/rhai/darwin-x18-unit-stdin-20261008-01457467-9491-4194-8476-d0e62e1d4e52/agent-build-jmvfwlmg/source/Cargo.lock

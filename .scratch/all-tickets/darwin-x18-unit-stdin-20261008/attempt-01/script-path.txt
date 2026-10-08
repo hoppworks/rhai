@@ -1,0 +1,1 @@
+/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/all-tickets/darwin-x18-unit-stdin-20261008/attempt-01/run.sh

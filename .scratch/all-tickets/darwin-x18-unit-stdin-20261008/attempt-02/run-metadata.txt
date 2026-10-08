@@ -1,0 +1,11 @@
+revision=bcb524b866103f9a684b8da41725c802a00d2458
+features=testing-environ,sys
+filter=unit_stdin_means_immediate_eof
+command=cargo +1.93.0 test --locked --features testing-environ,sys --test sys_process unit_stdin_means_immediate_eof -- --exact --nocapture --test-threads=1
+lock_sha256=2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425
+ProductName:		macOS
+ProductVersion:		27.0.1
+BuildVersion:		26A434
+arm64
+rustc 1.93.0 (254b59607 2026-01-19)
+cargo 1.93.0 (083ac5135 2025-12-15)

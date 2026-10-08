@@ -1,0 +1,15 @@
+/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/all-tickets/darwin-x18-unit-stdin-20261008/attempt-02/cleanup-readback.txt: OK
+/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/all-tickets/darwin-x18-unit-stdin-20261008/attempt-02/launch-context.txt: OK
+/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/all-tickets/darwin-x18-unit-stdin-20261008/attempt-02/outcome.txt: OK
+/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/all-tickets/darwin-x18-unit-stdin-20261008/attempt-02/private-runtime.txt: OK
+/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/all-tickets/darwin-x18-unit-stdin-20261008/attempt-02/red.log: OK
+/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/all-tickets/darwin-x18-unit-stdin-20261008/attempt-02/red.status: OK
+/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/all-tickets/darwin-x18-unit-stdin-20261008/attempt-02/run-metadata.txt: OK
+/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/all-tickets/darwin-x18-unit-stdin-20261008/attempt-02/run-result.txt: OK
+/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/all-tickets/darwin-x18-unit-stdin-20261008/attempt-02/run.sh: OK
+/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/all-tickets/darwin-x18-unit-stdin-20261008/attempt-02/runner.log: OK
+/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/all-tickets/darwin-x18-unit-stdin-20261008/attempt-02/runner.status: OK
+/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/all-tickets/darwin-x18-unit-stdin-20261008/attempt-02/session-id.txt: OK
+/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/all-tickets/darwin-x18-unit-stdin-20261008/attempt-02/session-scope.txt: OK
+/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/all-tickets/darwin-x18-unit-stdin-20261008/attempt-02/source-hashes.txt: OK
+/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/all-tickets/darwin-x18-unit-stdin-20261008/attempt-02/sys_process-restored.rs: OK

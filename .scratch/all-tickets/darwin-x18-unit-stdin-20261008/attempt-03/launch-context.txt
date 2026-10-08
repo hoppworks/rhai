@@ -1,0 +1,18 @@
+started_utc=2026-10-08T04:41:53Z
+revision=bcb524b866103f9a684b8da41725c802a00d2458
+branch=task/all-tickets-environment-recovery
+disk=/dev/disk3s5   971298980 842820556  95569352    90%    /System/Volumes/Data
+memory_pressure=System-wide memory free percentage: 38%
+memory_bytes=34359738368
+active_rhai_compilers:
+known_foreign_work:
+  PID ELAPSED COMM
+67049   58:01 /opt/homebrew/Cellar/python@3.14/3.14.8/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python
+67051   58:01 /opt/homebrew/Cellar/python@3.14/3.14.8/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python
+67069   58:01 node
+67094   58:00 node
+70155   41:49 /Users/hoppworks/.hermes/node/bin/node
+70695   38:31 ssh
+scope=/Users/hoppworks/.local/share/agent-builds/rhai/darwin-x18-unit-stdin-20261008-dd893961-fc15-4c44-9c87-6b8e491084fa
+finished_utc=2026-10-08T04:42:36Z
+runner_exit=0

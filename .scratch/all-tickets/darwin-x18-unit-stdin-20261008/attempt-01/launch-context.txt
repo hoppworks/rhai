@@ -1,0 +1,17 @@
+revision=bcb524b866103f9a684b8da41725c802a00d2458
+remote_main=bcb524b866103f9a684b8da41725c802a00d2458
+platform=Darwin Daniels-MacBook-Pro-2.local 27.0.0 Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:59 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8142 arm64
+ProductName:		macOS
+ProductVersion:		27.0.1
+BuildVersion:		26A434
+rust=rustc 1.93.0 (254b59607 2026-01-19)
+cargo=cargo 1.93.0 (083ac5135 2025-12-15)
+disk=Filesystem   1024-blocks      Used Available Capacity  Mounted on
+/dev/disk3s5   971298980 841910948  95429320    90%    /System/Volumes/Data
+/dev/disk3s5   971298980 841910948  95429320    90%    /System/Volumes/Data
+memory=System-wide memory free percentage: 47%
+load={ 12.63 12.43 11.65 }
+active_builds=67049 99389   5280       51:14 /opt/homebrew/Cellar/python@3.14/3.14.8/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python /Users/hoppworks/projects/agent-skills/tools/run_scoped.py --timeout 5400 -- bash -lc set +e; export TABLETOP_E2E_PORT=5181; npm run test:e2e > "$AGENT_RUNTIME_DIR/run.log" 2>&1; rc=$?; out=/Users/hoppworks/.codex/worktrees/ticket39-scenarios/TableTop/.scratch/combat-mode-build/evidence/ticket39/final-gates/full-suite-20261008-rerun; mkdir -p "$out"; cp "$AGENT_RUNTIME_DIR/run.log" "$out/run.log"; tail -n 45 "$out/run.log"; exit $rc
+67051 67049   4208       51:14 /opt/homebrew/Cellar/python@3.14/3.14.8/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python /Users/hoppworks/projects/agent-skills/tools/run_scoped.py _supervise 4 bash -lc set +e; export TABLETOP_E2E_PORT=5181; npm run test:e2e > "$AGENT_RUNTIME_DIR/run.log" 2>&1; rc=$?; out=/Users/hoppworks/.codex/worktrees/ticket39-scenarios/TableTop/.scratch/combat-mode-build/evidence/ticket39/final-gates/full-suite-20261008-rerun; mkdir -p "$out"; cp "$AGENT_RUNTIME_DIR/run.log" "$out/run.log"; tail -n 45 "$out/run.log"; exit $rc
+76321 99389   6048       00:13 ssh lllm cd /var/home/Daniel/.local/share/agent-builds/tauron-b706aeb8f772/patrol-bo09-cgroup-contract-20261008-lllm-run04-expandfix/recovery && TMPDIR=/var/home/Daniel/.local/share/agent-builds/tauron-b706aeb8f772/patrol-bo09-alias-regression-20261008-suite /usr/bin/python3.14 /var/home/Daniel/projects/agent-skills/tools/run_scoped.py --timeout 300 -- /usr/bin/python3.14 -B -c 'import os,pathlib,unittest; evidence=pathlib.Path(os.environ["AGENT_RUNTIME_DIR"])/"route-evidence"; evidence.mkdir(mode=0o700); os.environ["P01_ROUTE_EVIDENCE_DIR"]=str(evidence); suite=unittest.defaultTestLoader.discover(".",pattern="test_*.py"); result=unittest.TextTestRunner(verbosity=2).run(suite); raise SystemExit(0 if result.wasSuccessful() else 1)'
+estimated_additional_peak=3GiB (planning estimate; not measured)

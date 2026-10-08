@@ -1,0 +1,8 @@
+test_process_started=true
+test_name_in_failure=true
+assertion_failed=true
+actual_eof_bytes=true
+mutated_expected_bytes=true
+one_test_failed=true
+status_101=true
+baseline_source_hash_matches_commit=true

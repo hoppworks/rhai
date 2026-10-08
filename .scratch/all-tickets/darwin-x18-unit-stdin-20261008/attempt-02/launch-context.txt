@@ -1,0 +1,21 @@
+started_utc=2026-10-08T04:38:36Z
+revision=bcb524b866103f9a684b8da41725c802a00d2458
+branch=task/all-tickets-environment-recovery
+disk=/dev/disk3s5   971298980 842341000  96048908    90%    /System/Volumes/Data
+memory_pressure=System-wide memory free percentage: 44%
+memory_bytes=34359738368
+active_builds:
+67049 99389 67049       54:44   5248 /opt/homebrew/Cellar/python@3.14/3.14.8/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python /Users/hoppworks/projects/agent-skills/tools/run_scoped.py --timeout 5400 -- bash -lc set +e; export TABLETOP_E2E_PORT=5181; npm run test:e2e > "$AGENT_RUNTIME_DIR/run.log" 2>&1; rc=$?; out=/Users/hoppworks/.codex/worktrees/ticket39-scenarios/TableTop/.scratch/combat-mode-build/evidence/ticket39/final-gates/full-suite-20261008-rerun; mkdir -p "$out"; cp "$AGENT_RUNTIME_DIR/run.log" "$out/run.log"; tail -n 45 "$out/run.log"; exit $rc
+67051 67049 67051       54:44   4176 /opt/homebrew/Cellar/python@3.14/3.14.8/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python /Users/hoppworks/projects/agent-skills/tools/run_scoped.py _supervise 4 bash -lc set +e; export TABLETOP_E2E_PORT=5181; npm run test:e2e > "$AGENT_RUNTIME_DIR/run.log" 2>&1; rc=$?; out=/Users/hoppworks/.codex/worktrees/ticket39-scenarios/TableTop/.scratch/combat-mode-build/evidence/ticket39/final-gates/full-suite-20261008-rerun; mkdir -p "$out"; cp "$AGENT_RUNTIME_DIR/run.log" "$out/run.log"; tail -n 45 "$out/run.log"; exit $rc
+67052 67051 67051       54:44    704 bash -lc set +e; export TABLETOP_E2E_PORT=5181; npm run test:e2e > "$AGENT_RUNTIME_DIR/run.log" 2>&1; rc=$?; out=/Users/hoppworks/.codex/worktrees/ticket39-scenarios/TableTop/.scratch/combat-mode-build/evidence/ticket39/final-gates/full-suite-20261008-rerun; mkdir -p "$out"; cp "$AGENT_RUNTIME_DIR/run.log" "$out/run.log"; tail -n 45 "$out/run.log"; exit $rc
+67069 67055 67051       54:44  43856 node /Users/hoppworks/.codex/worktrees/ticket39-scenarios/TableTop/prototype/node_modules/.bin/playwright test
+67094 67070 67070       54:43  69728 node /Users/hoppworks/.codex/worktrees/ticket39-scenarios/TableTop/prototype/node_modules/.bin/vite --config vite.config.ts --port 5181 --strictPort
+70155 67069 67051       38:32 362880 /Users/hoppworks/.hermes/node/bin/node /Users/hoppworks/.codex/worktrees/ticket39-scenarios/TableTop/prototype/node_modules/playwright/lib/worker/workerProcessEntry.js
+70695 99389 70695       35:14   3232 ssh lllm env P2_EXCLUSIVE_SOURCES_RELEASED=1 P2_PACKAGE_START_EPOCH=1791394472 P2_PACKAGE_ACTIVE_SECONDS=47630 P2_PACKAGE_ACTIVE_DEADLINE_EPOCH=1791442102 P2_SESSION_ID=authz-gf02-full-rerun3-a911f2e8 P2_DART_REUSE_ALL=1 P2_DART_REUSE_PROOF_DIR=/var/lib/uirush/worktrees/tauron-authz-p3-gf02-main-4eb9/.scratch/authz-p3-gf02/private-patrol-gf02/gf02-recipe-outputs/setup/20261008T031305Z-752d2bda /var/lib/uirush/worktrees/tauron-authz-p3-gf02-main-4eb9/.scratch/authz-p3-gf02/private-patrol-gf02/launch_gf02_acceptance.sh
+77993 99389 77993       00:11   6096 ssh -o BatchMode=yes workhorse git clone --branch task/ticket39-scenarios --single-branch https://github.com/hoppworks/TableTop.git /var/srv/workspaces/TableTop
+tool_versions:
+rustc 1.93.0 (254b59607 2026-01-19)
+cargo 1.93.0 (083ac5135 2025-12-15)
+scope=/Users/hoppworks/.local/share/agent-builds/rhai/darwin-x18-unit-stdin-20261008-8c7ec7ce-1aa8-4b4f-b1f0-34e7335f2cba
+finished_utc=2026-10-08T04:39:16Z
+runner_exit=1
