@@ -1,0 +1,6 @@
+no-float-build exit 0 seconds 21.76
+no-float-red exit 101 seconds 0.458
+no-float-green exit 0 seconds 0.179
+sync-no-float-build exit 0 seconds 7.819
+sync-no-float-red exit 101 seconds 0.456
+sync-no-float-green exit 0 seconds 0.04

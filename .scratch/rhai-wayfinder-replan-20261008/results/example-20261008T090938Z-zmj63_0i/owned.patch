@@ -1,0 +1,46 @@
+diff --git a/examples/sys_process.rs b/examples/sys_process.rs
+index 62ca7c7a7..a0b5c4039 100644
+--- a/examples/sys_process.rs
++++ b/examples/sys_process.rs
+@@ -103,6 +103,14 @@ mod unix_example {
+         Ok(engine.eval_with_scope::<Dynamic>(&mut scope, expression)?)
+     }
+ 
++    fn nonblocking_wait_expression() -> &'static str {
++        if cfg!(feature = "no_float") {
++            "child.wait(0)"
++        } else {
++            "child.wait(0.0)"
++        }
++    }
++
+     fn child_id(engine: &Engine, child: &Child) -> Result<INT, Box<dyn std::error::Error>> {
+         let mut scope = Scope::new();
+         scope.push_dynamic("child", Dynamic::from(child.clone()));
+@@ -172,7 +180,7 @@ mod unix_example {
+         deadline: Instant,
+     ) -> Result<Map, Box<dyn std::error::Error>> {
+         loop {
+-            let result = child_call(engine, child, "child.wait(0.0)")?;
++            let result = child_call(engine, child, nonblocking_wait_expression())?;
+             if !result.is_unit() {
+                 return Ok(result.cast::<Map>());
+             }
+@@ -199,7 +207,7 @@ mod unix_example {
+             let _ = child_call(self.engine, &self.child, "child.kill()");
+             let deadline = Instant::now() + Duration::from_secs(2);
+             while Instant::now() < deadline {
+-                match child_call(self.engine, &self.child, "child.wait(0.0)") {
++                match child_call(self.engine, &self.child, nonblocking_wait_expression()) {
+                     Ok(value) if !value.is_unit() => return,
+                     Err(_) => return,
+                     _ => thread::sleep(Duration::from_millis(10)),
+@@ -279,7 +287,7 @@ mod unix_example {
+             .ok_or("spawn fixture readiness record has no PID")?
+             .parse::<INT>()?;
+         assert_eq!(ready_pid, child_id, "host observed the exact spawned child");
+-        let early = child_call(&engine, &sibling, "child.wait(0.0)")?;
++        let early = child_call(&engine, &sibling, nonblocking_wait_expression())?;
+         assert!(
+             early.is_unit(),
+             "the child is pending while it awaits release"

@@ -1,0 +1,15 @@
+{
+  "checked_at_utc": "2026-10-08T13:02:42.619763+00:00",
+  "runtime": "/Users/hoppworks/.local/share/agent-builds/rhai/example-c58997ha/agent-build-6enomxxh",
+  "runtime_absent": true,
+  "outer_scope": "/Users/hoppworks/.local/share/agent-builds/rhai/example-c58997ha",
+  "verified_retired_identity": {
+    "device": 16777234,
+    "inode": 225778809
+  },
+  "outer_scope_absent": true,
+  "operation": "rmdir of verified empty owned scope only",
+  "original_logs_readable": true,
+  "contemporaneous_fixture_esrch_retained": true,
+  "numeric_pid_signals_during_finalization": false
+}

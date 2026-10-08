@@ -1,0 +1,66 @@
+{
+  "rows": [
+    {
+      "profile": "no-float",
+      "expected_exit": 8,
+      "exit": 101,
+      "spawn_pid": 80141,
+      "spawn_post_exit_probe": "ESRCH",
+      "binary_sha256": "b00a4ae71cfcaa2423b2aaf0f4edb6cce3b4a651f4b75786374a0aa5820f4d21",
+      "example_sha256": "02f6b6b77341977248c46fb06e0b3c51b258c9cf33ba3023f53c12c5fc3de2a4"
+    },
+    {
+      "profile": "no-float",
+      "expected_exit": 7,
+      "exit": 0,
+      "spawn_pid": 80146,
+      "spawn_post_exit_probe": "ESRCH",
+      "binary_sha256": "b00a4ae71cfcaa2423b2aaf0f4edb6cce3b4a651f4b75786374a0aa5820f4d21",
+      "example_sha256": "02f6b6b77341977248c46fb06e0b3c51b258c9cf33ba3023f53c12c5fc3de2a4"
+    },
+    {
+      "profile": "sync-no-float",
+      "expected_exit": 8,
+      "exit": 101,
+      "spawn_pid": 80170,
+      "spawn_post_exit_probe": "ESRCH",
+      "binary_sha256": "6f3e4b6e3652eba129000cb42c59646697afcd35591446e52fefcfdbbbdfe134",
+      "example_sha256": "02f6b6b77341977248c46fb06e0b3c51b258c9cf33ba3023f53c12c5fc3de2a4"
+    },
+    {
+      "profile": "sync-no-float",
+      "expected_exit": 7,
+      "exit": 0,
+      "spawn_pid": 80174,
+      "spawn_post_exit_probe": "ESRCH",
+      "binary_sha256": "6f3e4b6e3652eba129000cb42c59646697afcd35591446e52fefcfdbbbdfe134",
+      "example_sha256": "02f6b6b77341977248c46fb06e0b3c51b258c9cf33ba3023f53c12c5fc3de2a4"
+    }
+  ],
+  "accepted": true,
+  "runtime": "/Users/hoppworks/.local/share/agent-builds/rhai/example-c58997ha/agent-build-6enomxxh",
+  "runtime_identity": {
+    "device": 16777234,
+    "inode": 225781619
+  },
+  "environment": {
+    "os": "ProductName:\t\tmacOS\nProductVersion:\t\t27.0.1\nBuildVersion:\t\t26A434\n",
+    "architecture": "arm64",
+    "rustc": "rustc 1.77.2 (25ef9e3d8 2024-04-09)",
+    "cargo": "cargo 1.77.2 (e52e36006 2024-03-26)",
+    "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+    "cargo_home": "/Users/hoppworks/.local/share/agent-builds/rhai/example-c58997ha/agent-build-6enomxxh/cargo-home",
+    "target": "/Users/hoppworks/.local/share/agent-builds/rhai/example-c58997ha/agent-build-6enomxxh/target",
+    "tmpdir": "/Users/hoppworks/.local/share/agent-builds/rhai/example-c58997ha/agent-build-6enomxxh/tmp",
+    "cargo_jobs": "2",
+    "build_environment": {
+      "RUSTFLAGS": null,
+      "CARGO_ENCODED_RUSTFLAGS": null,
+      "RUSTUP_HOME": null,
+      "RUSTUP_TOOLCHAIN": null,
+      "CC": null,
+      "CFLAGS": null,
+      "MACOSX_DEPLOYMENT_TARGET": null
+    }
+  }
+}

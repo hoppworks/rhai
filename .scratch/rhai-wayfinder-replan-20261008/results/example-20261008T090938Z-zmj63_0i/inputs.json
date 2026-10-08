@@ -1,0 +1,22 @@
+{
+  "revision": "ef423a516617e128835d54af16d75f559b2b1bce",
+  "repo": "/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery",
+  "scope": "/Users/hoppworks/.local/share/agent-builds/rhai/example-c58997ha",
+  "evidence": "/Users/hoppworks/projects/rhai/.worktrees/all-tickets-environment-recovery/.scratch/rhai-wayfinder-replan-20261008/results/example-20261008T090938Z-zmj63_0i",
+  "inputs": {
+    "source.tar": "635a59827900b02ad82b0e53499f6b3fb2a5c5233326cac541c88c3e8b61265f",
+    "owned.patch": "885978cdd5e46442e04bf92a1a60ebeb8d88b84d5e721fcd8fe12ac216dc0f90",
+    "Cargo.lock.accepted": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425"
+  },
+  "working_files": {
+    "AGENTS.md": "06b73a9db5691ff5a0c5b34f98ce61e2c5df08e77161f3f93c3f7ce119d7c5de",
+    "Cargo.toml": "cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e",
+    "build.rs": "78adf9eeea2957e1aa1bd96ee260e43806476a07d665c2ed27db55bc101ed335",
+    "examples/sys_process.rs": "02f6b6b77341977248c46fb06e0b3c51b258c9cf33ba3023f53c12c5fc3de2a4",
+    "src/packages/sys/process.rs": "090094476662417aa94e2ff519cb8038c1d3721e02be6ec166762502bfbff2e2",
+    "src/packages/sys/process/unix.rs": "55dc5ad528ad2b4fd56d3fcdd42f92af0b30bf3f96db37c476ee31320dcba713",
+    "tests/fixtures/sys_process_shared_child_contract.rs": "14a0808a8a5735d8f141ca1533d638d7b460392332d0021793f08da5b92c4fc2",
+    ".scratch/all-tickets/coordinator-state.md": "6049b35e04b3e9f874de4ac6d80cbaebe740cd3acab7e5a92325f47850b0a890",
+    "docs/sys-package-plan.md": "e97820f903666673bfb2038a7ffd17ab9d5c188992a0ba9a22aaf86187193fc3"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "checked_at_utc": "2026-10-08T12:57:59.963795+00:00",
+  "frozen_and_relevant_source_hashes": {
+    "source.tar": true,
+    "owned.patch": true,
+    "Cargo.lock.accepted": true,
+    "payload.sh": true,
+    "verify-example.py": true,
+    "inputs.json": true,
+    "working:AGENTS.md": true,
+    "working:Cargo.toml": true,
+    "working:build.rs": true,
+    "working:examples/sys_process.rs": true,
+    "working:src/packages/sys/process.rs": true,
+    "working:src/packages/sys/process/unix.rs": true
+  },
+  "compiler_artifact_and_phase_status_readback": true,
+  "runtime_absent": true,
+  "scope_empty": true,
+  "scope_identity": {
+    "device": 16777234,
+    "inode": 225778809
+  },
+  "no_test_or_build_repeated": true
+}
