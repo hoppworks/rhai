@@ -1,0 +1,2 @@
+expected_red=assertion_failed_when_kernel_denial_seam_disabled
+exit=101

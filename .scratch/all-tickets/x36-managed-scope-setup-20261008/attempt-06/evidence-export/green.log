@@ -1,0 +1,92 @@
+   Compiling rhai v1.26.1 (/var/home/workhorse/.local/share/agent-builds/rhai/x36-kernel-setpgid-20261008-eb7c90fcbdd8/agent-build-6j3gprbc/source)
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:678:13
+    |
+678 |         let mut wait_operation = "wait for child";
+    |             ----^^^^^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `termination`
+    --> src/packages/sys/process/unix.rs:1118:22
+     |
+1118 |                 let (termination, _operation) = if self.managed {
+     |                      ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_termination`
+     |
+     = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2378:9
+     |
+2378 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2721:9
+     |
+2721 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variant `OnlyZombieLeader` is never constructed
+  --> src/packages/sys/process/unix.rs:50:5
+   |
+47 | enum GroupCloseOutcome {
+   |      ----------------- variant in this enum
+...
+50 |     OnlyZombieLeader,
+   |     ^^^^^^^^^^^^^^^^
+   |
+   = note: `GroupCloseOutcome` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: struct `CancelChildOnDrop` is never constructed
+    --> src/packages/sys/process/unix.rs:4397:12
+     |
+4397 |     struct CancelChildOnDrop {
+     |            ^^^^^^^^^^^^^^^^^
+
+warning: method `finish` is never used
+    --> src/packages/sys/process/unix.rs:4440:12
+     |
+4439 |     impl CancelChildOnDrop {
+     |     ---------------------- method in this implementation
+4440 |         fn finish(&mut self) {
+     |            ^^^^^^
+
+warning: function `try_release_fifo` is never used
+    --> src/packages/sys/process/unix.rs:4471:8
+     |
+4471 |     fn try_release_fifo(path: &Path) -> io::Result<()> {
+     |        ^^^^^^^^^^^^^^^^
+
+warning: unused `dynamic::Dynamic` that must be used
+    --> src/packages/sys/process/unix.rs:4959:9
+     |
+4959 | /         engine
+4960 | |             .eval_with_scope::<crate::Dynamic>(&mut kill_scope, "child.kill()")
+4961 | |             .expect("public kill after completion remains harmless");
+     | |____________________________________________________________________^
+     |
+     = note: `#[warn(unused_must_use)]` (part of `#[warn(unused)]`) on by default
+help: use `let _ = ...` to ignore the resulting value
+     |
+4959 |         let _ = engine
+     |         +++++++
+
+warning: `rhai` (lib test) generated 9 warnings (run `cargo fix --lib -p rhai --tests` to apply 4 suggestions)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 1.90s
+     Running unittests src/lib.rs (/home/workhorse/.local/share/agent-builds/rhai/x36-kernel-setpgid-20261008-eb7c90fcbdd8/agent-build-6j3gprbc/target/debug/deps/rhai-74529fee61c2d6f2)
+
+running 1 test
+test packages::sys::process::unix::tests::managed_scope_kernel_setpgid_denial_cleans_created_group ... managed-scope-setup operation=run child_pid=176035 failure_point=KernelSetpgidDenial pid=ESRCH group=ESRCH reservation=retired marker=absent
+managed-scope-setup operation=spawn child_pid=176037 failure_point=KernelSetpgidDenial pid=ESRCH group=ESRCH reservation=retired marker=absent
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 29 filtered out; finished in 0.00s
+

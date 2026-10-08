@@ -1,0 +1,8 @@
+operation=run failure_point=Fchdir pid=179100 pid_absent=true group_absent=true
+operation=spawn failure_point=Fchdir pid=179102 pid_absent=true group_absent=true
+operation=run failure_point=KernelSetpgidDenial pid=179105 pid_absent=true group_absent=true
+operation=spawn failure_point=KernelSetpgidDenial pid=179107 pid_absent=true group_absent=true
+operation=run failure_point=AfterSetpgid pid=179111 pid_absent=true group_absent=true
+operation=spawn failure_point=AfterSetpgid pid=179113 pid_absent=true group_absent=true
+operation=run failure_point=BeforeSetpgid pid=179116 pid_absent=true group_absent=true
+operation=spawn failure_point=BeforeSetpgid pid=179118 pid_absent=true group_absent=true

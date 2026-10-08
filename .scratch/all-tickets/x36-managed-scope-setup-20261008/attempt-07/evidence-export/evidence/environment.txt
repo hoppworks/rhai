@@ -1,0 +1,9 @@
+utc=2026-10-08T03:29:45Z
+Linux workhorse 7.2.8-ogc5.1.fc44.x86_64 #1 SMP PREEMPT_DYNAMIC Tue Oct  6 18:06:42 UTC 2026 x86_64 GNU/Linux
+cargo 1.97.1 (c980f4866 2026-06-30)
+rustc 1.97.1 (8bab26f4f 2026-07-14)
+TMPDIR=/home/workhorse/.local/share/agent-builds/rhai/x36-setup-recheck-20261008-71245bb09076/agent-build-d4i4_yqz/tmp
+AGENT_RUNTIME_DIR=/home/workhorse/.local/share/agent-builds/rhai/x36-setup-recheck-20261008-71245bb09076/agent-build-d4i4_yqz
+runner_sha256=25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e
+Filesystem         1B-blocks          Used    Available Use% Mounted on
+/dev/nvme0n1p3 1997621166080 1294688919552 657912258560  67% /var/home

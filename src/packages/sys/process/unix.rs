@@ -1415,6 +1415,7 @@ struct ExecutionFaults {
 enum ManagedScopeSetupFailurePoint {
     BeforeSetpgid,
     AfterSetpgid,
+    KernelSetpgidDenial,
     Fchdir,
 }
 
@@ -1593,18 +1594,21 @@ impl ExecutionFaults {
     }
 
     #[cfg(test)]
-    fn take_managed_scope_setup_failure(&mut self) -> (Option<(RawFd, bool)>, Option<RawFd>) {
+    fn take_managed_scope_setup_failure(
+        &mut self,
+    ) -> (Option<(RawFd, bool)>, Option<RawFd>, Option<RawFd>) {
         let Some(fd) = self.managed_scope_setup_failure_pid_fd.take() else {
-            return (None, None);
+            return (None, None, None);
         };
         match self
             .managed_scope_setup_failure_point
             .take()
             .expect("managed-scope setup failure requires a failure point")
         {
-            ManagedScopeSetupFailurePoint::BeforeSetpgid => (Some((fd, false)), None),
-            ManagedScopeSetupFailurePoint::AfterSetpgid => (Some((fd, true)), None),
-            ManagedScopeSetupFailurePoint::Fchdir => (None, Some(fd)),
+            ManagedScopeSetupFailurePoint::BeforeSetpgid => (Some((fd, false)), None, None),
+            ManagedScopeSetupFailurePoint::AfterSetpgid => (Some((fd, true)), None, None),
+            ManagedScopeSetupFailurePoint::KernelSetpgidDenial => (None, None, Some(fd)),
+            ManagedScopeSetupFailurePoint::Fchdir => (None, Some(fd), None),
         }
     }
 
@@ -1653,8 +1657,35 @@ fn record_managed_scope_identity(fd: RawFd) -> io::Result<()> {
     Ok(())
 }
 
+#[cfg(test)]
+fn create_kernel_managed_scope_setpgid_denial(fd: RawFd) -> io::Result<()> {
+    // SAFETY: this test-only child hook uses async-signal-safe process and write calls.
+    let session = unsafe { libc::setsid() };
+    if session < 0 {
+        return Err(io::Error::last_os_error());
+    }
+    let pid = unsafe { libc::getpid() };
+    let pgrp = unsafe { libc::getpgrp() };
+    let identity = [pid, pgrp, session];
+    // SAFETY: this test-only child-side receipt writes its identity to a private record file.
+    if unsafe {
+        libc::write(
+            fd,
+            identity.as_ptr().cast(),
+            std::mem::size_of_val(&identity),
+        )
+    } != std::mem::size_of_val(&identity) as isize
+    {
+        return Err(io::Error::last_os_error());
+    }
+    Ok(())
+}
+
 /// Set up a managed process group inside `Command::pre_exec`.
-fn establish_managed_scope(failure: Option<(RawFd, bool)>) -> io::Result<()> {
+fn establish_managed_scope(
+    failure: Option<(RawFd, bool)>,
+    kernel_setpgid_denial: Option<RawFd>,
+) -> io::Result<()> {
     #[cfg(test)]
     if let Some((fd, false)) = failure {
         let pid = unsafe { libc::getpid() };
@@ -1667,6 +1698,13 @@ fn establish_managed_scope(failure: Option<(RawFd, bool)>) -> io::Result<()> {
     }
     #[cfg(not(test))]
     let _ = failure;
+
+    #[cfg(test)]
+    if let Some(fd) = kernel_setpgid_denial {
+        create_kernel_managed_scope_setpgid_denial(fd)?;
+    }
+    #[cfg(not(test))]
+    let _ = kernel_setpgid_denial;
 
     // SAFETY: setpgid is async-signal-safe and this helper runs only from pre_exec.
     if unsafe { libc::setpgid(0, 0) } < 0 {
@@ -2262,10 +2300,15 @@ fn spawn_child(
         .transpose()?;
     let mut faults = ExecutionFaults::take_for_execution();
     #[cfg(test)]
-    let (managed_scope_setup_failure, managed_scope_fchdir_failure) =
-        faults.take_managed_scope_setup_failure();
+    let (
+        managed_scope_setup_failure,
+        managed_scope_fchdir_failure,
+        managed_scope_kernel_setpgid_denial,
+    ) = faults.take_managed_scope_setup_failure();
     #[cfg(not(test))]
     let managed_scope_setup_failure = None;
+    #[cfg(not(test))]
+    let managed_scope_kernel_setpgid_denial = None;
     let mut command = Command::new(OsStr::new(program));
     command
         .args(args)
@@ -2291,7 +2334,10 @@ fn spawn_child(
         unsafe {
             command.pre_exec(move || {
                 if managed {
-                    establish_managed_scope(managed_scope_setup_failure)?;
+                    establish_managed_scope(
+                        managed_scope_setup_failure,
+                        managed_scope_kernel_setpgid_denial,
+                    )?;
                 }
                 if let Some(fd) = fd {
                     #[cfg(test)]
@@ -2411,10 +2457,15 @@ fn run_map(
         .transpose()?;
     let mut faults = ExecutionFaults::take_for_execution();
     #[cfg(test)]
-    let (managed_scope_setup_failure, managed_scope_fchdir_failure) =
-        faults.take_managed_scope_setup_failure();
+    let (
+        managed_scope_setup_failure,
+        managed_scope_fchdir_failure,
+        managed_scope_kernel_setpgid_denial,
+    ) = faults.take_managed_scope_setup_failure();
     #[cfg(not(test))]
     let managed_scope_setup_failure = None;
+    #[cfg(not(test))]
+    let managed_scope_kernel_setpgid_denial = None;
     let mut command = Command::new(OsStr::new(program));
     command
         .args(args)
@@ -2440,7 +2491,10 @@ fn run_map(
         unsafe {
             command.pre_exec(move || {
                 if managed {
-                    establish_managed_scope(managed_scope_setup_failure)?;
+                    establish_managed_scope(
+                        managed_scope_setup_failure,
+                        managed_scope_kernel_setpgid_denial,
+                    )?;
                 }
                 if let Some(fd) = fd {
                     #[cfg(test)]
@@ -5718,8 +5772,16 @@ mod tests {
                 assert_eq!(*op, "spawn process");
                 match failure_point {
                     ManagedScopeSetupFailurePoint::BeforeSetpgid
-                    | ManagedScopeSetupFailurePoint::AfterSetpgid => {
-                        assert_eq!(*kind, io::ErrorKind::PermissionDenied);
+                    | ManagedScopeSetupFailurePoint::AfterSetpgid
+                    | ManagedScopeSetupFailurePoint::KernelSetpgidDenial => {
+                        let expected = io::Error::from_raw_os_error(libc::EPERM);
+                        assert_eq!(*kind, expected.kind());
+                        if matches!(
+                            failure_point,
+                            ManagedScopeSetupFailurePoint::KernelSetpgidDenial
+                        ) {
+                            assert_eq!(message, &expected.to_string());
+                        }
                     }
                     ManagedScopeSetupFailurePoint::Fchdir => {
                         let expected = io::Error::from_raw_os_error(libc::EBADF);
@@ -5736,17 +5798,33 @@ mod tests {
         );
         let pid_bytes = fs::read(pid_record).unwrap();
         let pid_size = std::mem::size_of::<libc::pid_t>();
-        let after_setpgid = !matches!(failure_point, ManagedScopeSetupFailurePoint::BeforeSetpgid);
-        assert_eq!(
-            pid_bytes.len(),
-            pid_size * if after_setpgid { 2 } else { 1 }
-        );
+        let identity_fields = match failure_point {
+            ManagedScopeSetupFailurePoint::BeforeSetpgid => 1,
+            ManagedScopeSetupFailurePoint::KernelSetpgidDenial => 3,
+            ManagedScopeSetupFailurePoint::AfterSetpgid
+            | ManagedScopeSetupFailurePoint::Fchdir => 2,
+        };
+        assert_eq!(pid_bytes.len(), pid_size * identity_fields);
         let pid = i32::from_ne_bytes(pid_bytes[..pid_size].try_into().unwrap());
-        if after_setpgid {
+        if matches!(
+            failure_point,
+            ManagedScopeSetupFailurePoint::AfterSetpgid | ManagedScopeSetupFailurePoint::Fchdir
+        ) {
             let pgrp = i32::from_ne_bytes(pid_bytes[pid_size..].try_into().unwrap());
             assert_eq!(
                 pgrp, pid,
                 "injected failure did not follow managed group setup"
+            );
+        } else if matches!(
+            failure_point,
+            ManagedScopeSetupFailurePoint::KernelSetpgidDenial
+        ) {
+            let pgrp = i32::from_ne_bytes(pid_bytes[pid_size..pid_size * 2].try_into().unwrap());
+            let session = i32::from_ne_bytes(pid_bytes[pid_size * 2..].try_into().unwrap());
+            assert_eq!(pgrp, pid, "setsid did not create the child's process group");
+            assert_eq!(
+                session, pid,
+                "setsid did not make the child a session leader"
             );
         }
         assert_ne!(pid, std::process::id() as i32);
@@ -5852,6 +5930,32 @@ mod tests {
             assert!(
                 !marker.exists(),
                 "{operation} command executed after fchdir failure"
+            );
+        }
+    }
+
+    #[test]
+    fn managed_scope_kernel_setpgid_denial_cleans_created_group() {
+        let fixture = FixtureDir::new();
+        let run_marker = fixture.0.join("run-marker");
+        let spawn_marker = fixture.0.join("spawn-marker");
+        let run_pid = fixture.0.join("run-child-session");
+        let spawn_pid = fixture.0.join("spawn-child-session");
+        for (operation, marker, pid_record) in [
+            ("run", &run_marker, &run_pid),
+            ("spawn", &spawn_marker, &spawn_pid),
+        ] {
+            assert_managed_scope_setup_failure(
+                operation,
+                marker,
+                pid_record,
+                ManagedScopeSetupFailurePoint::KernelSetpgidDenial,
+                None,
+                None,
+            );
+            assert!(
+                !marker.exists(),
+                "{operation} command executed after kernel setpgid denial"
             );
         }
     }

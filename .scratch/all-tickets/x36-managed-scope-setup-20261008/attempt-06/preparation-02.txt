@@ -1,0 +1,1 @@
+Archive generation initially packaged the full repository and over-escaped runner-script literals, producing a 145 MiB unusable input; no remote scope or process was started. Rebuilt from the existing 1.18 MiB source archive and overlaid only the reviewed unix.rs, preserving Cargo.toml and Cargo.lock hashes.

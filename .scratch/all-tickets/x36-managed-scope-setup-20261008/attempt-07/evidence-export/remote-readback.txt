@@ -1,0 +1,28 @@
+68a0ef97faa0b4bf22bc624e2ba8b8d9913339143495627bd8a614191a541bc3  /home/workhorse/.local/share/agent-builds/rhai/x36-setup-recheck-20261008-71245bb09076/evidence/environment.txt
+5f05535803a808a0f84485267e0171e59a5d459aa5c8fffc331f2039725b8878  /home/workhorse/.local/share/agent-builds/rhai/x36-setup-recheck-20261008-71245bb09076/evidence/independent-readback.txt
+5aee63c87b702638b8907cf37450ce4381ecdadf2eeefd5199b86b7484045569  /home/workhorse/.local/share/agent-builds/rhai/x36-setup-recheck-20261008-71245bb09076/evidence/related-tests.log
+76494fd077af04bf87dc3b5e621b9fa16b85e85a8bbc069b41877a79807584e8  /home/workhorse/.local/share/agent-builds/rhai/x36-setup-recheck-20261008-71245bb09076/evidence/result.txt
+32ac0f9648f5e0476711c8a03b734b52eb998831247a90c77618a56f8cdd3625  /home/workhorse/.local/share/agent-builds/rhai/x36-setup-recheck-20261008-71245bb09076/evidence/script-exit.txt
+031ed0f4922f8a4272859fd670e1af515420fc3f07af9146af551087de54a606  /home/workhorse/.local/share/agent-builds/rhai/x36-setup-recheck-20261008-71245bb09076/evidence/status.txt
+utc=2026-10-08T03:29:45Z
+Linux workhorse 7.2.8-ogc5.1.fc44.x86_64 #1 SMP PREEMPT_DYNAMIC Tue Oct  6 18:06:42 UTC 2026 x86_64 GNU/Linux
+cargo 1.97.1 (c980f4866 2026-06-30)
+rustc 1.97.1 (8bab26f4f 2026-07-14)
+TMPDIR=/home/workhorse/.local/share/agent-builds/rhai/x36-setup-recheck-20261008-71245bb09076/agent-build-d4i4_yqz/tmp
+AGENT_RUNTIME_DIR=/home/workhorse/.local/share/agent-builds/rhai/x36-setup-recheck-20261008-71245bb09076/agent-build-d4i4_yqz
+runner_sha256=25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e
+Filesystem         1B-blocks          Used    Available Use% Mounted on
+/dev/nvme0n1p3 1997621166080 1294688919552 657912258560  67% /var/home
+cargo_test_exit=0
+elapsed_seconds=17
+script_exit=0
+operation=run failure_point=Fchdir pid=179100 pid_absent=true group_absent=true
+operation=spawn failure_point=Fchdir pid=179102 pid_absent=true group_absent=true
+operation=run failure_point=KernelSetpgidDenial pid=179105 pid_absent=true group_absent=true
+operation=spawn failure_point=KernelSetpgidDenial pid=179107 pid_absent=true group_absent=true
+operation=run failure_point=AfterSetpgid pid=179111 pid_absent=true group_absent=true
+operation=spawn failure_point=AfterSetpgid pid=179113 pid_absent=true group_absent=true
+operation=run failure_point=BeforeSetpgid pid=179116 pid_absent=true group_absent=true
+operation=spawn failure_point=BeforeSetpgid pid=179118 pid_absent=true group_absent=true
+runtime_absent=true
+scope_present_for_export=true

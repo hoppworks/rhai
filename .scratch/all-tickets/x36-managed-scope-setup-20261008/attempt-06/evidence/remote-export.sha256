@@ -1,0 +1,13 @@
+ad869e2f338e432a246fec6ce13d102c6b49a5a8c2d062306e98e1eb88601215  /home/workhorse/.local/share/agent-builds/rhai/x36-kernel-setpgid-20261008-eb7c90fcbdd8/source-input.tar.gz
+da421e4360f3854d6678c9d4871e2711d8d429903409ef9b00c2f3ec6d33866b  /home/workhorse/.local/share/agent-builds/rhai/x36-kernel-setpgid-20261008-eb7c90fcbdd8/inputs.json
+d53dd3b1ca4341c431fae77cc4e0fb62441f26b05ed0e3bc7645daaaa51cfc15  /home/workhorse/.local/share/agent-builds/rhai/x36-kernel-setpgid-20261008-eb7c90fcbdd8/run-x36-kernel-denial.sh
+acab749186324c442cb4f37218398d732d78313296865a56fcec2b85122793b5  /home/workhorse/.local/share/agent-builds/rhai/x36-kernel-setpgid-20261008-eb7c90fcbdd8/evidence/environment.txt
+99c5e58da17d958095d4ca9626ed1efa315a2d882c5f2a3fe01d1a3d9b77a74d  /home/workhorse/.local/share/agent-builds/rhai/x36-kernel-setpgid-20261008-eb7c90fcbdd8/evidence/green.log
+967b0d8fb469f56d75761b3b9191d0e6255486028ec05f40c20598e4c0f4afc1  /home/workhorse/.local/share/agent-builds/rhai/x36-kernel-setpgid-20261008-eb7c90fcbdd8/evidence/independent-readback.txt
+21a3199e2fa26129f6daff2388c02fba9a06939475510b63bfb0cf81835411c7  /home/workhorse/.local/share/agent-builds/rhai/x36-kernel-setpgid-20261008-eb7c90fcbdd8/evidence/mutation-control.txt
+aa03b101d59cb715fd309680ccb266bb0f77d5e30c24613a4f0b27dde209903d  /home/workhorse/.local/share/agent-builds/rhai/x36-kernel-setpgid-20261008-eb7c90fcbdd8/evidence/mutation-source-sha256.txt
+07c4ff8b63f77de795c62bf1f534186d3b579dba4696b3b2f17f4e5da0eb7fdc  /home/workhorse/.local/share/agent-builds/rhai/x36-kernel-setpgid-20261008-eb7c90fcbdd8/evidence/red.log
+81773f3890ac3ac6fb31b16cb6e191f3188a242351f6cd8ad83b28d57b5a6299  /home/workhorse/.local/share/agent-builds/rhai/x36-kernel-setpgid-20261008-eb7c90fcbdd8/evidence/restored-source-sha256.txt
+bb4c8f1a7eb40969dcbff606fa22e89612013f5df3c2767d448def0252a1d3c7  /home/workhorse/.local/share/agent-builds/rhai/x36-kernel-setpgid-20261008-eb7c90fcbdd8/evidence/result.txt
+32ac0f9648f5e0476711c8a03b734b52eb998831247a90c77618a56f8cdd3625  /home/workhorse/.local/share/agent-builds/rhai/x36-kernel-setpgid-20261008-eb7c90fcbdd8/evidence/script-exit.txt
+cbe24d24499db37f11a2a801375fc2f1e1096099f94d57e62bcb28d6aaa95bc2  /home/workhorse/.local/share/agent-builds/rhai/x36-kernel-setpgid-20261008-eb7c90fcbdd8/evidence/statuses.csv

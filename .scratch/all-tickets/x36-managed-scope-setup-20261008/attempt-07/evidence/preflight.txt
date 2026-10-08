@@ -1,0 +1,9 @@
+2026-10-08T03:28:28Z
+Linux workhorse 7.2.8-ogc5.1.fc44.x86_64 #1 SMP PREEMPT_DYNAMIC Tue Oct  6 18:06:42 UTC 2026 x86_64 GNU/Linux
+32
+MemTotal:       96461028 kB
+MemAvailable:   87473324 kB
+Filesystem         1B-blocks          Used    Available Use% Mounted on
+/dev/nvme0n1p3 1997621166080 1294687653888 657913524224  67% /var/home
+active cargo/rustc comms:
+scope_absent

@@ -1,0 +1,24 @@
+{
+  "archive_base_revision": "397761661b87e8ab452bb752af16fdc7ca155c85",
+  "archive_bytes": 1191559,
+  "archive_delta": "Replace only src/packages/sys/process/unix.rs with the reviewed current candidate; Cargo.lock and Cargo.toml hashes match accepted inputs.",
+  "archive_sha256": "ad869e2f338e432a246fec6ce13d102c6b49a5a8c2d062306e98e1eb88601215",
+  "files": {
+    "Cargo.lock": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+    "Cargo.toml": "cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e",
+    "src/packages/sys/process/unix.rs": "55dc5ad528ad2b4fd56d3fcdd42f92af0b30bf3f96db37c476ee31320dcba713"
+  },
+  "limits": {
+    "cargo_jobs": 2,
+    "estimated_additional_peak_bytes": 2147483648,
+    "prelaunch_disk_available_bytes": 657913733120,
+    "prelaunch_memavailable_bytes": 89668173824,
+    "runner_timeout_seconds": 600
+  },
+  "project_revision": "edb197b4df39ab27fcfe00612b6658b9a3f739ab",
+  "run_scoped_path": "/home/workhorse/projects/agent-skills/tools/run_scoped.py",
+  "run_scoped_sha256": "25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e",
+  "runner_script_sha256": "d53dd3b1ca4341c431fae77cc4e0fb62441f26b05ed0e3bc7645daaaa51cfc15",
+  "scope": "/home/workhorse/.local/share/agent-builds/rhai/x36-kernel-setpgid-20261008-eb7c90fcbdd8",
+  "session_id": "x36-kernel-setpgid-20261008-eb7c90fcbdd8"
+}

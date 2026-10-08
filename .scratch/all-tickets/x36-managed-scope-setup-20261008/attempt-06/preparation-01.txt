@@ -1,0 +1,1 @@
+Initial local evidence-script generation hit a Python quoting syntax error before creating files or contacting Workhorse; no build, test, scope or remote resource was started. Corrected generator prepared as preparation-02.\n

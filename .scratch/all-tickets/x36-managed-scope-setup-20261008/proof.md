@@ -2,9 +2,9 @@
 
 Status: partial. This accepts only named Workhorse Linux x86_64 rows with
 features `testing-environ,sys`: the earlier before/after-`setpgid` proof at
-Rust/Cargo 1.96.0 and the later `fchdir` proof at Rust/Cargo 1.97.1. Kernel-
-generated `setpgid` denial, other platforms, feature combinations and MSRV rows
-remain open.
+Rust/Cargo 1.96.0, and the later `fchdir` and kernel-generated `setpgid`
+denial proofs at Rust/Cargo 1.97.1. Other platforms, feature combinations and
+MSRV rows remain open.
 
 ## Acceptance covered
 
@@ -28,8 +28,18 @@ claim a kernel-generated `setpgid` denial. The added
 `setpgid(0, 0)`, records PID/PGRP, closes only the child's inherited cwd fd,
 then reaches the real `fchdir` call and receives `EBADF`. Through public Rhai
 `run` and `spawn`, it asserts that exact OS error, no marker execution, exact
-child and group absence, and reservation retirement. It tests one later setup
-stage without claiming the remaining stages or kernel-generated denial.
+child and group absence, and reservation retirement.
+
+The added `managed_scope_kernel_setpgid_denial_cleans_created_group` test
+reaches a real Linux kernel `setpgid(0, 0)` denial. Its test-only child hook
+calls `setsid()`, records PID/PGRP/SID, and then lets normal setup call
+`setpgid`; because the child is now a session leader, Linux returns `EPERM`.
+Public `run` and `spawn` assert the exact `PermissionDenied`/`EPERM` error,
+PID=PGRP=SID, no marker execution, exact child and process-group absence, and
+reservation retirement. A mutation disabling the hook made the public test
+fail because the command ran, so the assertions detect the intended path.
+This establishes only the named Workhorse Linux row; other platforms,
+features and MSRVs remain open.
 
 ## Run and result
 
@@ -49,3 +59,8 @@ Attempt 01 stopped before assertions because a nested test helper lacked a
 `RawFd` import. That harness-only failure and its output remain in
 `attempt-01/`; it was corrected before attempt 02 and does not count as product
 RED or acceptance.
+
+## Kernel denial and affected setup recheck
+
+- Attempt 06 (`attempt-06/`) covered the kernel-generated denial on Workhorse Linux x86_64, Rust/Cargo 1.97.1, features `testing-environ,sys`. Its source archive is based on `397761661b87e8ab452bb752af16fdc7ca155c85`, replacing only `unix.rs`; archive SHA-256 is `ad869e2f338e432a246fec6ce13d102c6b49a5a8c2d062306e98e1eb88601215`, source SHA-256 `55dc5ad528ad2b4fd56d3fcdd42f92af0b30bf3f96db37c476ee31320dcba713`, and runner SHA-256 `25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e`. Its one bounded 600-second invocation (two Cargo jobs) first disabled the test-only denial hook: the public test failed as expected (exit 101) because the shell ran. Restored-source GREEN passed; exact run/spawn PIDs 176035/176037 and groups were independently absent. `inputs.json`, source archive, mutation/restored hashes, logs, environment, statuses and readback are retained. The private runtime and exact session scope were removed after export; no compiled output is reusable.
+- Attempt 07 (`attempt-07/`) rechecked the six tests affected by the shared setup-failure helper/tuple change using the identical source archive and dependency hashes from attempt 06. The runner script SHA-256 is `9bc8991ae547c7c0b2b6d5e6ea321bebb9c5ed8975da335e3a890d46860cc0ba`; its 600-second scoped invocation used two Cargo jobs and finished in 17 seconds. `cargo test --locked --features testing-environ,sys --lib managed_scope_ -- --nocapture --test-threads=1` passed all 6 tests (24 filtered). Independent readback verified all eight exact run/spawn IDs across BeforeSetpgid, AfterSetpgid, Fchdir and KernelSetpgidDenial absent as both PID and process group. It reuses `../attempt-06/source-input.tar.gz` (SHA-256 `ad869e2f338e432a246fec6ce13d102c6b49a5a8c2d062306e98e1eb88601215`); each of six exported raw evidence files matched its remote SHA-256. The runtime and owned scope were absent after export, and no Cargo/Rust process remained. The remote hash transcript, extracted raw evidence, transport logs and cleanup readback are retained; byte-identical transport archives were removed. No compiled output is reusable.

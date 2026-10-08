@@ -1,0 +1,3 @@
+scope_removed=true
+runtime_absent=true
+compiler_processes_absent=true
