@@ -1,0 +1,2 @@
+runtime_absent=true path=/root/.local/share/agent-builds/rhai/x31-blocking-entry-20261008-6cb71f4c/agent-build-d97ni49j
+scope_absent=true path=/root/.local/share/agent-builds/rhai/x31-blocking-entry-20261008-6cb71f4c

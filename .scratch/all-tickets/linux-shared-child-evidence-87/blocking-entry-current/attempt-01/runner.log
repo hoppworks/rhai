@@ -1,0 +1,280 @@
+source_revision=c644085ccf65160bd3d39f5353e8b933310ffe03
+runtime=/root/.local/share/agent-builds/rhai/x31-blocking-entry-20261008-6cb71f4c/agent-build-d97ni49j
+toolchain
+rustc 1.97.1 (8bab26f4f 2026-07-14)
+binary: rustc
+commit-hash: 8bab26f4f68e0e26f0bb7960be334d5b520ea452
+commit-date: 2026-07-14
+host: x86_64-unknown-linux-gnu
+release: 1.97.1
+LLVM version: 22.1.6
+cargo 1.97.1 (c980f4866 2026-06-30)
+source_and_lock_hashes
+cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e  /root/.local/share/agent-builds/rhai/x31-blocking-entry-20261008-6cb71f4c/agent-build-d97ni49j/source/Cargo.toml
+2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425  /root/.local/share/agent-builds/rhai/x31-blocking-entry-20261008-6cb71f4c/agent-build-d97ni49j/source/Cargo.lock
+55dc5ad528ad2b4fd56d3fcdd42f92af0b30bf3f96db37c476ee31320dcba713  /root/.local/share/agent-builds/rhai/x31-blocking-entry-20261008-6cb71f4c/agent-build-d97ni49j/source/src/packages/sys/process/unix.rs
+b081e8de1174433bd8ef5668945bfdda7b81fdcdeb6ef1b1d92a2c04d6f5c53f  /root/.local/share/agent-builds/rhai/x31-blocking-entry-20261008-6cb71f4c/agent-build-d97ni49j/source/tests/sys_process_report.rs
+space_before
+Filesystem     1024-blocks       Used Available Capacity Mounted on
+/dev/nvme0n1p3  1950801920 1265972644 640888444      67% /var
+cargo_metadata= cargo metadata --locked --manifest-path source/Cargo.toml --format-version 1
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded equivalent v1.0.2
+  Downloaded autocfg v1.5.1
+  Downloaded ahash v0.8.12
+  Downloaded cfg-if v1.0.5
+  Downloaded toml_datetime v0.6.11
+  Downloaded const-random v0.1.18
+  Downloaded const-random-macro v0.1.16
+  Downloaded serde_spanned v0.6.9
+  Downloaded itoa v1.0.15
+  Downloaded crunchy v0.2.4
+  Downloaded toml_write v0.1.2
+  Downloaded windows-targets v0.53.5
+  Downloaded version_check v0.9.5
+  Downloaded windows-link v0.2.1
+  Downloaded winapi-util v0.1.11
+  Downloaded wasm-bindgen-macro v0.2.114
+  Downloaded smartstring v1.0.1
+  Downloaded tiny-keccak v2.0.2
+  Downloaded termcolor v1.4.1
+  Downloaded byteorder v1.5.0
+  Downloaded rustversion v1.0.23
+  Downloaded glob v0.3.4
+  Downloaded paste v1.0.15
+  Downloaded rmp v0.8.14
+  Downloaded static_assertions v1.1.0
+  Downloaded wasm-bindgen-shared v0.2.114
+  Downloaded smallvec v1.16.2
+  Downloaded toml v0.8.23
+  Downloaded bitflags v2.13.2
+  Downloaded web-time v1.1.0
+  Downloaded wasi v0.11.1+wasi-snapshot-preview1
+  Downloaded getrandom v0.2.17
+  Downloaded thin-vec v0.2.19
+  Downloaded quote v1.0.41
+  Downloaded once_cell v1.21.4
+  Downloaded ryu v1.0.20
+  Downloaded trybuild v1.0.90
+  Downloaded unicode-ident v1.0.22
+  Downloaded num-traits v0.2.19
+  Downloaded rmp-serde v1.3.0
+  Downloaded serde_core v1.0.229
+  Downloaded getrandom v0.3.4
+  Downloaded r-efi v5.3.0
+  Downloaded wasm-bindgen v0.2.114
+  Downloaded proc-macro2 v1.0.103
+  Downloaded serde_derive v1.0.229
+  Downloaded wasm-bindgen-macro-support v0.2.114
+  Downloaded bumpalo v3.14.0
+  Downloaded wit-bindgen v0.57.1
+  Downloaded serde v1.0.229
+  Downloaded toml_edit v0.22.27
+  Downloaded js-sys v0.3.91
+  Downloaded memchr v2.8.3
+  Downloaded indexmap v2.11.4
+  Downloaded hashbrown v0.16.1
+  Downloaded wasip2 v1.0.4+wasi-0.2.12
+  Downloaded serde_json v1.0.145
+  Downloaded zerocopy-derive v0.8.59
+  Downloaded winnow v0.7.15
+  Downloaded portable-atomic v1.15.0
+  Downloaded syn v2.0.106
+  Downloaded syn v3.0.6
+  Downloaded zerocopy v0.8.59
+  Downloaded windows_aarch64_gnullvm v0.53.1
+  Downloaded windows_x86_64_gnullvm v0.53.1
+  Downloaded windows_x86_64_msvc v0.53.1
+  Downloaded windows_aarch64_msvc v0.53.1
+  Downloaded windows_i686_gnullvm v0.53.1
+  Downloaded libc v0.2.189
+  Downloaded windows_x86_64_gnu v0.53.1
+  Downloaded windows_i686_gnu v0.53.1
+  Downloaded windows_i686_msvc v0.53.1
+  Downloaded windows-sys v0.60.2
+cargo_metadata_status=0 metadata_sha256=baac70026edba58b526455b01f132360506b9023bab9b603288c61fc8c0e0368  /root/.local/share/agent-builds/rhai/x31-blocking-entry-20261008-6cb71f4c/agent-build-d97ni49j/cargo-metadata.json
+test_command=cargo test --locked --manifest-path source/Cargo.toml --lib --features testing-environ,sys,sync public_wait_is_cancelled_after_entering_condvar -- --nocapture --test-threads=1
+ Downloading crates ...
+  Downloaded ambient-authority v0.0.2
+  Downloaded errno v0.3.14
+  Downloaded fs-set-times v0.20.3
+  Downloaded cap-primitives v4.0.3
+  Downloaded maybe-owned v0.3.4
+  Downloaded io-extras v0.19.0
+  Downloaded ipnet v2.12.2
+  Downloaded rustix-linux-procfs v0.1.1
+  Downloaded spin v0.7.2
+  Downloaded cap-std v4.0.3
+  Downloaded io-lifetimes v2.0.4
+  Downloaded io-lifetimes v3.0.1
+  Downloaded rustix v1.1.5
+  Downloaded linux-raw-sys v0.12.1
+   Compiling autocfg v1.5.1
+   Compiling portable-atomic v1.15.0
+   Compiling libc v0.2.189
+   Compiling crunchy v0.2.4
+   Compiling rustix v1.1.5
+   Compiling version_check v0.9.5
+   Compiling io-lifetimes v3.0.1
+   Compiling tiny-keccak v2.0.2
+   Compiling proc-macro2 v1.0.103
+   Compiling bitflags v2.13.2
+   Compiling serde_core v1.0.229
+   Compiling io-lifetimes v2.0.4
+   Compiling linux-raw-sys v0.12.1
+   Compiling cfg-if v1.0.5
+   Compiling quote v1.0.41
+   Compiling io-extras v0.19.0
+   Compiling unicode-ident v1.0.22
+   Compiling paste v1.0.15
+   Compiling cap-primitives v4.0.3
+   Compiling once_cell v1.21.4
+   Compiling serde v1.0.229
+   Compiling zerocopy v0.8.59
+   Compiling getrandom v0.3.4
+   Compiling ipnet v2.12.2
+   Compiling serde_json v1.0.145
+   Compiling maybe-owned v0.3.4
+   Compiling cap-std v4.0.3
+   Compiling byteorder v1.5.0
+   Compiling ambient-authority v0.0.2
+   Compiling rhai v1.26.1 (/root/.local/share/agent-builds/rhai/x31-blocking-entry-20261008-6cb71f4c/agent-build-d97ni49j/source)
+   Compiling itoa v1.0.15
+   Compiling static_assertions v1.1.0
+   Compiling ryu v1.0.20
+   Compiling memchr v2.8.3
+   Compiling smallvec v1.16.2
+   Compiling thin-vec v0.2.19
+   Compiling ahash v0.8.12
+   Compiling num-traits v0.2.19
+   Compiling smartstring v1.0.1
+   Compiling syn v2.0.106
+   Compiling rmp v0.8.14
+   Compiling getrandom v0.2.17
+   Compiling const-random-macro v0.1.16
+   Compiling const-random v0.1.18
+   Compiling rmp-serde v1.3.0
+   Compiling rustix-linux-procfs v0.1.1
+   Compiling fs-set-times v0.20.3
+   Compiling rhai_codegen v3.2.0 (/root/.local/share/agent-builds/rhai/x31-blocking-entry-20261008-6cb71f4c/agent-build-d97ni49j/source/codegen)
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:678:13
+    |
+678 |         let mut wait_operation = "wait for child";
+    |             ----^^^^^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `termination`
+    --> src/packages/sys/process/unix.rs:1118:22
+     |
+1118 |                 let (termination, _operation) = if self.managed {
+     |                      ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_termination`
+     |
+     = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2378:9
+     |
+2378 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2721:9
+     |
+2721 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variant `OnlyZombieLeader` is never constructed
+  --> src/packages/sys/process/unix.rs:50:5
+   |
+47 | enum GroupCloseOutcome {
+   |      ----------------- variant in this enum
+...
+50 |     OnlyZombieLeader,
+   |     ^^^^^^^^^^^^^^^^
+   |
+   = note: `GroupCloseOutcome` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: function `try_release_fifo` is never used
+    --> src/packages/sys/process/unix.rs:4471:8
+     |
+4471 |     fn try_release_fifo(path: &Path) -> io::Result<()> {
+     |        ^^^^^^^^^^^^^^^^
+
+warning: unused `dynamic::Dynamic` that must be used
+    --> src/packages/sys/process/unix.rs:4672:9
+     |
+4672 | /         engine
+4673 | |             .eval_with_scope::<crate::Dynamic>(&mut cancel_scope, "child.kill()")
+4674 | |             .expect("public cancellation should wake the blocked waiter");
+     | |_________________________________________________________________________^
+     |
+     = note: `#[warn(unused_must_use)]` (part of `#[warn(unused)]`) on by default
+help: use `let _ = ...` to ignore the resulting value
+     |
+4672 |         let _ = engine
+     |         +++++++
+
+warning: unused `dynamic::Dynamic` that must be used
+    --> src/packages/sys/process/unix.rs:4959:9
+     |
+4959 | /         engine
+4960 | |             .eval_with_scope::<crate::Dynamic>(&mut kill_scope, "child.kill()")
+4961 | |             .expect("public kill after completion remains harmless");
+     | |____________________________________________________________________^
+     |
+help: use `let _ = ...` to ignore the resulting value
+     |
+4959 |         let _ = engine
+     |         +++++++
+
+warning: `rhai` (lib test) generated 8 warnings (run `cargo fix --lib -p rhai --tests` to apply 4 suggestions)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 7.83s
+     Running unittests src/lib.rs (/root/.local/share/agent-builds/rhai/x31-blocking-entry-20261008-6cb71f4c/agent-build-d97ni49j/target/debug/deps/rhai-be0fb232d9b208da)
+
+running 1 test
+test packages::sys::process::unix::tests::public_wait_is_cancelled_after_entering_condvar ... wait-entry checkpoint pid=192939 count=1 nonterminal=true
+shared-child entered-wait pid=192939 wait_entries=2 nonterminal_at_cancel=true waiter_woke=true reap=ESRCH
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 30 filtered out; finished in 0.03s
+
+	Command being timed: "cargo test --locked --manifest-path /root/.local/share/agent-builds/rhai/x31-blocking-entry-20261008-6cb71f4c/agent-build-d97ni49j/source/Cargo.toml --lib --features testing-environ,sys,sync public_wait_is_cancelled_after_entering_condvar -- --nocapture --test-threads=1"
+	User time (seconds): 19.43
+	System time (seconds): 3.13
+	Percent of CPU this job got: 286%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:07.87
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 948644
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 79
+	Minor (reclaiming a frame) page faults: 2028702
+	Voluntary context switches: 23593
+	Involuntary context switches: 7062
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 1348520
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+runtime_usage
+564396	/root/.local/share/agent-builds/rhai/x31-blocking-entry-20261008-6cb71f4c/agent-build-d97ni49j/target
+161508	/root/.local/share/agent-builds/rhai/x31-blocking-entry-20261008-6cb71f4c/agent-build-d97ni49j/cargo-home
+Filesystem     1024-blocks       Used Available Capacity Mounted on
+/dev/nvme0n1p3  1950801920 1265972644 640888444      67% /var

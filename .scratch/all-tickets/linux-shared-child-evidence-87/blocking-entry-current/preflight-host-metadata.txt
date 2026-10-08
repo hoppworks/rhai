@@ -1,0 +1,17 @@
+session_id=x31-blocking-entry-20261008-6cb71f4b
+scope=/root/.local/share/agent-builds/rhai/x31-blocking-entry-20261008-6cb71f4b
+repo=/var/srv/workspaces/rhai
+source_revision=c644085ccf65160bd3d39f5353e8b933310ffe03
+toolchain
+rustc 1.97.1 (8bab26f4f 2026-07-14)
+binary: rustc
+commit-hash: 8bab26f4f68e0e26f0bb7960be334d5b520ea452
+commit-date: 2026-07-14
+host: x86_64-unknown-linux-gnu
+release: 1.97.1
+LLVM version: 22.1.6
+cargo 1.97.1 (c980f4866 2026-06-30)
+input_hashes
+cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e  /var/srv/workspaces/rhai/Cargo.toml
+55dc5ad528ad2b4fd56d3fcdd42f92af0b30bf3f96db37c476ee31320dcba713  /var/srv/workspaces/rhai/src/packages/sys/process/unix.rs
+b081e8de1174433bd8ef5668945bfdda7b81fdcdeb6ef1b1d92a2c04d6f5c53f  /var/srv/workspaces/rhai/tests/sys_process_report.rs
