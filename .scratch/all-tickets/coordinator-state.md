@@ -3,52 +3,58 @@
 ## Mode
 Authorized implementation, strict verification, and private-fork main integration for `docs/sys-package-plan.md` §§6.7–6.8. Do not create or reactivate a Goal.
 
+## Workflow choices
+- Verification: strict
+- Push: automatic (authorized integrated work to private `origin/main` only)
+- Merge: automatic (same fork only; no public upstream)
+
 ## Decisions
-- Verification: strict; Push: automatic; Merge: automatic (project `AGENTS.md`). User-authorized repository target is the private `origin/main` only; public upstream is excluded. Preserve the fork's existing history and leave only remote `main`.
-- Commit author/committer name must be exactly `hoppworks`; retain configured email. No deployment or release.
-- Agent-Skills Main `35ba734135a64100b891f422d4ced9d76795ab57` is an ancestor of central repo HEAD `0e846bfc577a51bd1a98a5606966aecda40320c2`. Global, project, campaign, e2e-proof, resource-lifecycle and repo-reconcile rules were reloaded. Active X36 reviewer also confirmed the Main revision before its review; other listed subagents are complete, with no pending work.
+- Preserve fork history and leave only remote `main`. Commit author/committer name must be exactly `hoppworks`; retain configured email. No deployment or release.
+- Reloaded the user-designated Agent-Skills Main `35ba734135a64100b891f422d4ced9d76795ab57`, global rules, project `AGENTS.md`, and relevant campaign, e2e-proof, resource-lifecycle and repo-reconcile rules. Local central HEAD `0e846bfc577a51bd1a98a5606966aecda40320c2` contains Main; later central changes remove its inherited fixed heavy-run convention, consistent with the current global instructions. Review agents are complete and were notified to reload before any future action; none is active.
 
 ## Current step
-X36 attempt10 has combined review READY for only Darwin arm64/macOS 27.0.1, Rust/Cargo 1.93.0, `testing-environ,sys`, kernel-generated `setpgid` denial. Proof and plan crosswalk now reflect that bounded result. Linux 1.77.2 remains accepted; X36 overall is partial.
+X36 attempt10 remains reviewed READY only for arm64/macOS 27.0.1, Rust/Cargo 1.93.0, `testing-environ,sys`, kernel-generated `setpgid` denial. Ticket 03 X14/X16/X17 are partially accepted for Linux x86_64 and Darwin arm64/macOS 27.0.1, both Rust/Cargo 1.93.0 with `testing-environ,sys`. Darwin's three public-Engine tests passed; the combined review returned READY after confirming assertion-control reuse, exact cleanup, no live child PIDs and five valid hashes. Proof and plan crosswalk name only these rows. Private `origin/main` is at `471cf2698dce1571c6e875c093c2cd2c9ffd6093` pending this package push.
 
 ## Next action
-Fetch private `origin`; verify it is still the authorized fork and inspect `origin/main`. Stage only the owned X36 attempt10 evidence, its proof, the X36 crosswalk row, and this state plus its newly archived predecessor. Review that exact staged diff, make one atomic `hoppworks` commit and push atomically to `origin/main`; read back the exact remote head and verify `main` is the sole remote branch. Then advance the next open acceptance criterion without repeating unaffected proof.
+Review the exact owned staged diff, commit the accepted Darwin X14/X16/X17 proof/crosswalk/state with committer name `hoppworks`, and push atomically only to private `origin/main`; read back the remote head and confirm `main` remains its sole branch. Then advance an open criterion by reusing applicable existing proof before considering any new build. Preserve all other platform, feature and MSRV gaps. Keep Package B's three infrastructure stops and exhausted post-escalation follow-up; do not rerun its no-primary path or use native110.
 
 ## Goal
-Close every original criterion in `docs/sys-package-plan.md` §§6.7–6.8 at a revision with applicable proof. Preserve the crosswalk's original requirement scope.
+Close every original criterion in `docs/sys-package-plan.md` §§6.7–6.8 with applicable proof; preserve the original requirement scope.
 
 ## Done when
-Every criterion has strict proof and independent review as applicable; own accepted changes are on private `origin/main`; the remote has only `main`. Local consolidation must preserve foreign, dirty and unmerged work.
+Every criterion has strict proof and review as applicable; accepted work is on private `origin/main`; remote has only `main`. Preserve foreign, dirty and unmerged local work.
 
 ## Steps
-1. Integrate reviewed Darwin X36 kernel-denial evidence as one atomic package; keep other Darwin X36 fault points open.
-2. Continue remaining X30–X38, Ticket 03 and §6.7–6.8 requirements in coherent acceptance packages; change product code only for demonstrated product failures.
-3. Reuse unchanged applicable proof; review each changed package once; commit/push and read back the private remote.
+1. Map Package B gaps to source/test/proof; keep stopped routes closed.
+2. Advance open platform, fault, feature and Ticket03 criteria in coherent acceptance packages; change product code only for demonstrated failures.
+3. Reuse valid proof; combine related acceptance and review once; push integrated packages and read back remote state.
 
 ## Done steps
-- Linux X36 Rust/Cargo 1.77.2 expected mutation RED/restored GREEN and readbacks accepted; commit `47035986d03aabe202b749b983973ed256ae0c37` is on private `origin/main`.
-- Darwin X36 attempt10 ran once; expected RED=101/restored GREEN=0, independent exact PID/group readback, 16 evidence hashes and exact owned-scope cleanup verified. Combined review READY; no product source changed.
-- Last remote reconciliation found only `main`; current fetch/readback is the next action.
+- Linux X36 Rust/Cargo 1.77.2 sensitivity/restored test accepted; commit `47035986d03aabe202b749b983973ed256ae0c37` is on private `main`.
+- Darwin X36 attempt10 evidence, proof, crosswalk and state committed as `471cf2698dce1571c6e875c093c2cd2c9ffd6093`, authored/committed `hoppworks`; atomic push and remote readback succeeded.
+- Attempt10's 16 evidence hashes match; exact PIDs/groups were independently absent; owned runtime/scope were removed. No product source changed.
+- Darwin X14/X16/X17 one-command run passed 3/3 on arm64/macOS 27.0.1, Rust/Cargo 1.93.0, `testing-environ,sys`; combined review READY. Five evidence hashes and cleanup/PID readback verified. No product source changed.
 
 ## Accepted evidence
-- Requirement inventory and remaining applicability: `docs/sys-package-plan.md` §§6.7–6.8.
-- X36 evidence and full cause history: `.scratch/all-tickets/x36-managed-scope-setup-20261008/proof.md`, attempts 01–10. Attempt06 source archive SHA-256 `ad869e2f338e432a246fec6ce13d102c6b49a5a8c2d062306e98e1eb88601215`; archived manifest inputs and current `unix.rs` hash match. Attempt10 only supports the named Darwin 1.93.0 kernel-denial row. Other evidence remains linked from the crosswalk; do not infer wider coverage.
+- Requirement inventory and open applicability: `docs/sys-package-plan.md` §§6.7–6.8.
+- X36 evidence and cause history: `.scratch/all-tickets/x36-managed-scope-setup-20261008/proof.md`, attempts 01–10. Attempt06 immutable archive SHA-256 `ad869e2f338e432a246fec6ce13d102c6b49a5a8c2d062306e98e1eb88601215`; relevant inputs match. Attempt10 supports only its named Darwin kernel-denial row. Other valid proof remains linked in the crosswalk.
 
 ## Retained resources
-No build output is reusable. Attempt10's exact session scope and private runtime were removed after proof export. Worktree `.worktrees/all-tickets-environment-recovery`, branch `task/all-tickets-environment-recovery`, was at `origin/main` 4703598 before integration. Preserve modified foreign fixture `tests/fixtures/sys_process_shared_child_contract.rs`, other unclassified `.scratch` artifacts, dirty/foreign worktrees and active processes. Future runs use `~/.local/share/agent-builds/rhai/<unique-session-id>` as `TMPDIR` for `tools/run_scoped.py`; route real outputs/caches through `AGENT_RUNTIME_DIR` with project flags.
+No build output is reusable. Attempt10's exact scope/runtime were removed after export. Worktree `.worktrees/all-tickets-environment-recovery`, branch `task/all-tickets-environment-recovery`, was at origin/main 471cf after push. Preserve modified foreign `tests/fixtures/sys_process_shared_child_contract.rs`, other unclassified `.scratch`, dirty/foreign worktrees and active processes. Future runs use `~/.local/share/agent-builds/rhai/<unique-session-id>` as `TMPDIR` for `tools/run_scoped.py`; route real outputs/caches via `AGENT_RUNTIME_DIR` and project flags.
 
 ## Cause history
-Attempts 01–10, their preparation/product classifications and recovery history are in X36 `proof.md` and archived states. Attempt08 first stopped before Cargo due to a missing parent; its corrected six-test run passed. Attempts09/10 REDs were intended sensitivity controls, not product failures. Package B's three pre-assertion infrastructure failures and no-wrapper diagnosis remain in §6.8/escalation history.
+Attempts 01–10 and preparation/product classifications are in X36 `proof.md` and archived states. Attempt08's first launch stopped before Cargo for a missing parent; corrected six-test run passed. Attempts09/10 REDs were intended controls, not product failures. Package B's three pre-assertion infrastructure failures and no-wrapper diagnosis remain in §6.8/escalation history.
 
 ## Open escalations
-No active escalation. Open scope remains in the plan: Windows X30/X32/X33; additional X34/X35/X37 platform/fault rows; X36 other Darwin fault points, platforms, feature combinations and MSRVs; uncovered X38 rows; Ticket 03 and remaining §6.7–6.8 criteria.
+No active escalation. Open criteria remain: Windows X30/X32/X33; additional X34/X35/X37 platform/fault rows; X36 other Darwin faults/platforms/features/MSRVs; uncovered X38 rows; Package B/Ticket03 and other §6.7–6.8 requirements.
 
 ## Budgets
-Attempts08/09 used one 600-second Workhorse invocation each, two Cargo jobs, observed 20/28 seconds; attempt09 estimated 3 GiB peak. Attempt10 used one 600-second Darwin invocation, one Cargo job, 41.36 seconds environment-to-result, estimated 3 GiB additional peak (actual peak unsampled). Earlier campaign consumption remains in history; do not reset it. Token/cost totals are unknown. No foreign process was stopped or changed.
+Attempts08/09: one 600-second Workhorse run each, two Cargo jobs, observed 20/28 seconds; attempt09 estimated 3 GiB peak. Attempt10: one 600-second Darwin run, one job, 41.36 seconds environment-to-result, 3 GiB estimated additional peak (actual peak unsampled). Earlier consumption remains archived; do not reset. Cost/token totals unknown. No foreign process changed.
+Darwin X14/X16/X17: one scoped Cargo invocation, two jobs, 28.31 seconds overall, 25.35 seconds Cargo build/test setup and 0.27 seconds tests; actual peak unsampled. Launch sample: 53% memory free on 32 GiB, 96,307,252 KiB disk free, load 12.47/11.28/10.21, no Cargo/rustc active; one unrelated E2E active. Cost/tokens unknown. No foreign process changed. This review/update adds no build or repeated review.
 
 ## History
-Each `state.py rewrite` archives the exact predecessor under `.scratch/all-tickets/journal/`. This is current state, not an append log. The archive retains prior decisions, proof applicability, causes and budgets.
-- Previous state: journal/state-390e5d477305412f868ae52b41f5384e.md
+`state.py rewrite` archives each exact predecessor under `.scratch/all-tickets/journal/`. Detailed attempts, decisions and budgets remain in proof/journal references; this is current state, not an append log.
+- Previous state: journal/state-5b54f5be86174d67b588c60ca265c20e.md
 
 ## Retrospective
-Attempt10 reused the immutable attempt06 source archive and avoided a redundant six-test group. It produced no product-source changes. The combined review reused execution evidence and required no second build. No unrelated artifact was cleaned because its ownership/activity was not established.
+Attempt10 reused the immutable attempt06 source and avoided a redundant six-test group. Review needed no rebuild. No unrelated artifacts were removed because their ownership/activity was unclassified.

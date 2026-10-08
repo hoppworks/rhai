@@ -35,14 +35,18 @@ readback and reaping proof are recorded in
 `../.scratch/all-tickets/process-env-remove-evidence/attempt-01/proof.md`; commit
 `e234e3e13f617def5670f16e81c5e7a60f7334ba` was the fork `main` head before the
 X14/X16/X17 package commit.
-Ticket 03 X14/X16/X17 now have partial acceptance for Workhorse Linux x86_64,
-Rust/Cargo 1.93.0 and `testing-environ,sys`. The public Engine tests prove ordinary
-successful `run` with empty stdout/stderr, exact string stdin through `run`, and
-exact 1 MiB Blob round-trip through `run_raw` while the child concurrently writes
-256 KiB to each captured stream. The child-written Blob readback and direct-child
-reaping are asserted independently; each criterion also has a wrong-expectation
-control. The frozen source, logs, checksums and setup history are recorded in
-`../.scratch/all-tickets/process-io-contract-evidence/attempt-01/proof.md`.
+Ticket 03 X14/X16/X17 have partial acceptance for Workhorse Linux x86_64 and
+Darwin arm64/macOS 27.0.1 (kernel 27.0.0), both with Rust/Cargo 1.93.0 and
+`testing-environ,sys`. The public Engine tests prove ordinary successful `run`
+with empty stdout/stderr, exact string stdin through `run`, and an exact 1 MiB
+Blob round-trip through `run_raw` while the child concurrently writes 256 KiB to
+each captured stream. Child-written readback and direct-child reaping are
+asserted independently. The Linux wrong-expectation controls are reused for the
+byte-identical Darwin test functions/helper; the combined review confirmed this
+transfer is applicable. Linux evidence is in
+`../.scratch/all-tickets/process-io-contract-evidence/attempt-01/proof.md`;
+Darwin's run, cleanup readback and READY review are in
+`../.scratch/all-tickets/darwin-io-contracts-20261008/attempt-01/proof.md`.
 Other OS, MSRV, feature and unrelated Ticket 03 rows remain open.
 
 Ticket 03 X24 is partially accepted for Workhorse Linux x86_64, Rust/Cargo
@@ -868,7 +872,7 @@ recorded owner.
 The current task has no unresolved result/design choice requiring a user answer.
 Implementation feasibility of stopped routes remains explicit, not certified.
 
-**Completed bounded package:** Ticket 03 X14/X16/X17 as one public-Engine
+**Completed bounded Linux package:** Ticket 03 X14/X16/X17 as one public-Engine
 process-I/O package. The exact source entry is the three tests in
 `tests/sys_process.rs`; the canonical command is
 `cargo test --locked --features testing-environ,sys --test sys_process run_io_contract_ -- --nocapture --test-threads=1`.
@@ -888,6 +892,20 @@ compiled artifact is reusable. The combined independent review returned READY
 with no material findings. Commit `8532b375c0a6f8121fcbc587fd53eef3990c1b2a`
 contains this package and was atomically pushed to the authorized fork `main`.
 This proof accepts only the named Linux/Rust/feature rows.
+
+The same acceptance package has a Darwin partial result at
+`.scratch/all-tickets/darwin-io-contracts-20261008/attempt-01/proof.md`. One
+bounded scoped Cargo command on arm64/macOS 27.0.1 (kernel 27.0.0), Rust/Cargo
+1.93.0, `testing-environ,sys` passed all three public-Engine tests: empty output,
+the exact 51-byte string round-trip, and the varied 1 MiB Blob round-trip with
+exact 1,310,736-byte stdout and 262,144-byte stderr captured concurrently.
+Child-written records/input readback and direct-child reaping were checked.
+The combined independent review returned READY after a focused cleanup
+readback follow-up; all five exported run/cleanup hashes verify. The existing
+Linux wrong-expectation controls remain valid because the test bodies/helper
+are byte-identical and the controls exercise ordinary Rust assertions. This
+accepts only the named Darwin OS/toolchain/feature rows; other matrix and Ticket
+03 requirements remain open. No compiled artifact is retained for reuse.
 
 The earlier next-work snapshot for this X14/X16/X17 package is superseded by
 `.scratch/all-tickets/coordinator-state.md`. Current accepted scope and remaining
@@ -1009,10 +1027,10 @@ row is closed by a source test alone or by an unreviewed/provisional result.
 | X11 | `tests/sys_process.rs::run_removes_inherited_environment_variable_from_public_child`; `.scratch/all-tickets/process-env-remove-evidence/attempt-01/proof.md` | Partial: Workhorse Linux x86_64/Rust 1.93.0 with `testing-environ,sys` proves the public Engine `run` path removes inherited `PATH` from a real child, with an inherited-value control, independent child-written readback, direct-child reaping, and a run-only sensitivity mutation. Other OS, MSRV, and feature rows remain open. |
 | X12 | Raw capture and options proof | Accepted for named Linux rows: stdout and stderr are separately observed. |
 | X13 | `process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps`; `linux-process-io-proof.md` | Accepted only for the two sensitivity-backed Linux claims and recorded feature rows; not a complete IO or platform matrix. |
-| X14 | `tests/sys_process.rs::run_io_contract_empty_output`; `.scratch/all-tickets/process-io-contract-evidence/attempt-01/proof.md` | Partial: Workhorse Linux x86_64/Rust 1.93.0 `testing-environ,sys` proves a normal-cap successful public `run` returns empty stdout/stderr; the child-written PID/exit record and ESRCH reaping are asserted. Its wrong-stdout control fails as intended. The existing zero-cap silent-output branch is distinct. Other OS, MSRV and feature rows remain open. |
+| X14 | `tests/sys_process.rs::run_io_contract_empty_output`; `.scratch/all-tickets/process-io-contract-evidence/attempt-01/proof.md`; `.scratch/all-tickets/darwin-io-contracts-20261008/attempt-01/proof.md` | Partial accepted: Workhorse Linux x86_64 and Darwin arm64/macOS 27.0.1, Rust/Cargo 1.93.0, `testing-environ,sys`. Both real public `run` cases return empty stdout/stderr and assert child exit/reaping; the combined review accepts reuse of the Linux wrong-output sensitivity control because the assertion source/helper are byte-identical. The zero-cap silent-output branch is distinct. Other OS, MSRV and feature rows remain open. |
 | X15 | Raw capture/options proof | Accepted for named Linux rows: exact raw bytes and lossy text behavior, including nonzero exit. |
-| X16 | `tests/sys_process.rs::run_io_contract_string_stdin_round_trip`; `.scratch/all-tickets/process-io-contract-evidence/attempt-01/proof.md` | Partial: the named Linux row proves a 51-byte string round-trip through public `run`, exact child-written PID/exit record, ESRCH reaping and a failing wrong-output control. Spawned stdin evidence is not applicable. Other OS, MSRV and feature rows remain open. |
-| X17 | `tests/sys_process.rs::run_io_contract_blob_stdin_round_trip_with_concurrent_output`; `.scratch/all-tickets/process-io-contract-evidence/attempt-01/proof.md` | Partial: the named Linux row proves a varied 1 MiB `run_raw` Blob round-trip, exact simultaneous 256 KiB stdout/stderr capture, child-written received-input readback, direct-child ESRCH reaping and a failing wrong-output control. Other OS, MSRV and feature rows remain open. |
+| X16 | `tests/sys_process.rs::run_io_contract_string_stdin_round_trip`; `.scratch/all-tickets/process-io-contract-evidence/attempt-01/proof.md`; `.scratch/all-tickets/darwin-io-contracts-20261008/attempt-01/proof.md` | Partial accepted: Workhorse Linux x86_64 and Darwin arm64/macOS 27.0.1, Rust/Cargo 1.93.0, `testing-environ,sys`, prove the exact 51-byte string stdin round-trip through public `run`, child-written PID/exit record and direct-child reaping. Linux assertion-control reuse is covered by the combined review. Spawned stdin evidence is not applicable. Other OS, MSRV and feature rows remain open. |
+| X17 | `tests/sys_process.rs::run_io_contract_blob_stdin_round_trip_with_concurrent_output`; `.scratch/all-tickets/process-io-contract-evidence/attempt-01/proof.md`; `.scratch/all-tickets/darwin-io-contracts-20261008/attempt-01/proof.md` | Partial accepted: Workhorse Linux x86_64 and Darwin arm64/macOS 27.0.1, Rust/Cargo 1.93.0, `testing-environ,sys`, prove a varied 1 MiB `run_raw` Blob round-trip, exact concurrent 256 KiB child streams, child-written input readback and direct-child reaping. Linux assertion-control reuse is covered by the combined review. Other OS, MSRV and feature rows remain open. |
 | X18 | `unit_stdin_means_immediate_eof`; options proof | Accepted for named Linux rows: unit stdin produces EOF; other feature/platform rows remain open. |
 | X19 | Deadline tests; `linux-managed-deadline-proof.md` and options proof | Partial: Linux timeout/partial output and owned reaping are accepted in named cases; no scheduler-independent latency guarantee or full feature/platform coverage. |
 | X20 | Scalar success and `linux-managed-success-proof.md` | Accepted for named Linux rows: normal completion before deadline. |

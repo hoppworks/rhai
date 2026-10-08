@@ -1,0 +1,8 @@
+checked_at_utc=2026-10-08T04:24:32Z
+session_scope=/Users/hoppworks/.local/share/agent-builds/rhai/darwin-io-contracts-20261008-b7c57b02-c751-468e-8c8f-ba44a6dd4b61
+session_scope=absent
+private_runtime=/Users/hoppworks/.local/share/agent-builds/rhai/darwin-io-contracts-20261008-b7c57b02-c751-468e-8c8f-ba44a6dd4b61/agent-build-jh_9hucs
+private_runtime=absent
+recorded_child_pids=73654,73655,73656
+ps_readback_begin
+ps_readback_end

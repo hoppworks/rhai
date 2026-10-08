@@ -1,0 +1,11 @@
+revision=471cf2698dce1571c6e875c093c2cd2c9ffd6093
+os=macOS 27.0.1
+arch=arm64
+rustc=rustc 1.93.0 (254b59607 2026-01-19)
+cargo=cargo 1.93.0 (083ac5135 2025-12-15)
+accepted_lock_sha256=2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425
+test_source_sha256=7ddc87f6e4b57d61d077445a81f1c3ef2f2e54cb35ac8c90a7ed328245d14017
+cargo_jobs=2
+cargo_target_dir=/Users/hoppworks/.local/share/agent-builds/rhai/darwin-io-contracts-20261008-b7c57b02-c751-468e-8c8f-ba44a6dd4b61/agent-build-jh_9hucs/target
+cargo_home=/Users/hoppworks/.local/share/agent-builds/rhai/darwin-io-contracts-20261008-b7c57b02-c751-468e-8c8f-ba44a6dd4b61/agent-build-jh_9hucs/cargo-home
+test_command=cargo +1.93.0 test --locked --features testing-environ,sys --test sys_process run_io_contract_ -- --nocapture --test-threads=1
