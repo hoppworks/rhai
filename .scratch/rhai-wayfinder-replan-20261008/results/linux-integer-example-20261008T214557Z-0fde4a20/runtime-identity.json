@@ -1,0 +1,13 @@
+{
+  "path": "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj",
+  "device": 36,
+  "inode": 459685588,
+  "uid": 0,
+  "limits": {
+    "wall_seconds": 1200,
+    "storage_bytes": 8589934592,
+    "rss_bytes": 8589934592,
+    "processes": 32,
+    "cargo_jobs": 2
+  }
+}

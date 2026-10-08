@@ -1,0 +1,13 @@
+{
+  "os": "Linux 7.2.0-ogc6.1.fc44.x86_64 #1 SMP PREEMPT_DYNAMIC Mon Aug 24 03:42:13 UTC 2026",
+  "architecture": "x86_64",
+  "rustc": "rustc 1.77.2 (25ef9e3d8 2024-04-09)",
+  "cargo": "cargo 1.77.2 (e52e36006 2024-03-26)",
+  "features": [
+    "sys,no_float",
+    "sys,sync,only_i32,no_float"
+  ],
+  "lock_sha256": "00afc549992181ed794021239a6c0f68b031991a32386db7eff94047629fbb25",
+  "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/source",
+  "runtime": "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj"
+}

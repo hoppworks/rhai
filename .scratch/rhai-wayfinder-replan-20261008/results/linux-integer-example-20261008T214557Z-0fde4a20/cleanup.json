@@ -1,0 +1,30 @@
+{
+  "checked_unix_time": 1791496550.7539835,
+  "runtime_absent": true,
+  "outer_scope_absent": true,
+  "outer_scope_identity_verified": true,
+  "runner_exit": null,
+  "outer_launcher_exit": 1,
+  "native_helper_completed_status": 0,
+  "runner_exit_reason": "Parent launcher failed after starting the finite runner, before wait receipt; do not infer or fabricate its exit. All original native command statuses exported, runner/supervisor/helper identity absent, group empty and runtime removed independently.",
+  "exact_owner_probes": [
+    {
+      "pid": 1646441,
+      "original_start": "30563366",
+      "state": "absent"
+    },
+    {
+      "pid": 1646443,
+      "original_start": "30563369",
+      "state": "absent"
+    },
+    {
+      "pid": 1646444,
+      "original_start": "30563371",
+      "state": "absent"
+    }
+  ],
+  "supervisor_group": 1646443,
+  "group_members": [],
+  "foreign_resources_changed": false
+}

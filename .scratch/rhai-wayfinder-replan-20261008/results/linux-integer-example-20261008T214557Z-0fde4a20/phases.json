@@ -1,0 +1,44 @@
+{
+  "rows": [
+    {
+      "profile": "no-float",
+      "expected_exit": 8,
+      "exit": 101,
+      "spawn_pid": 1652142,
+      "spawn_post_exit_probe": "ESRCH",
+      "binary_sha256": "4eb0fd035d178b09c5fb1b11c3f8245cb0a84b378fd2d0bd08ca16083d78acfc",
+      "example_sha256": "b8674785272bd8904dc3ae1973e98d6dfb25f7b399ac79139c423a59837c7ca1"
+    },
+    {
+      "profile": "no-float",
+      "expected_exit": 7,
+      "exit": 0,
+      "spawn_pid": 1652147,
+      "spawn_post_exit_probe": "ESRCH",
+      "binary_sha256": "4eb0fd035d178b09c5fb1b11c3f8245cb0a84b378fd2d0bd08ca16083d78acfc",
+      "example_sha256": "b8674785272bd8904dc3ae1973e98d6dfb25f7b399ac79139c423a59837c7ca1"
+    },
+    {
+      "profile": "sync-i32-no-float",
+      "expected_exit": 8,
+      "exit": 101,
+      "spawn_pid": 1652813,
+      "spawn_post_exit_probe": "ESRCH",
+      "binary_sha256": "91c68e54aff2776f685edbb1a47468d59bb1cab80c420178b71150e65062c8f7",
+      "example_sha256": "b8674785272bd8904dc3ae1973e98d6dfb25f7b399ac79139c423a59837c7ca1"
+    },
+    {
+      "profile": "sync-i32-no-float",
+      "expected_exit": 7,
+      "exit": 0,
+      "spawn_pid": 1652819,
+      "spawn_post_exit_probe": "ESRCH",
+      "binary_sha256": "91c68e54aff2776f685edbb1a47468d59bb1cab80c420178b71150e65062c8f7",
+      "example_sha256": "b8674785272bd8904dc3ae1973e98d6dfb25f7b399ac79139c423a59837c7ca1"
+    }
+  ],
+  "accepted": false,
+  "runtime": "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj",
+  "execution_complete": true,
+  "scope": "Native Linux minimum integer example rows; independent combined review still required"
+}

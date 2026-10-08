@@ -1,0 +1,40 @@
+{
+  "revision": "0a0636f42533ec29170881ac9b14d50de758d6f9",
+  "owned_files": [
+    "Cargo.toml",
+    "src/packages/sys/mod.rs",
+    "src/packages/sys/process.rs",
+    "src/packages/sys/process/windows.rs",
+    "src/packages/sys/process/windows/native.rs",
+    "src/packages/sys/process/windows/cwd.rs",
+    "src/packages/sys/process/windows/command.rs",
+    "tests/sys_process_windows.rs",
+    "tests/sys_policy.rs",
+    "examples/sys_process.rs",
+    "src/packages/sys/process/windows/RUST-LICENSE-MIT"
+  ],
+  "sha256": {
+    "Cargo.toml": "8db8c6a01dc2cd0bc831dda2a2ad368065f0ec1cc4ae0799961977ba0b8682db",
+    "src/packages/sys/mod.rs": "db74f90c5a80daa9f5cf81409c61c80edd3346380037dbb6b1ea62b2bcda7d52",
+    "src/packages/sys/process.rs": "5fb4aa2ac169be3e94db5b22743198fbfdfd90dfae806a2acb9f5b484e9d1a9c",
+    "src/packages/sys/process/windows.rs": "cbf5650d4d4d518c3f69a83227bd99a11660a3778c4366560866a976ebdb6cb8",
+    "src/packages/sys/process/windows/native.rs": "55c6e8671cdd781adae9eae88d934e2a9da1601bb712ac4d2470984ca460ffe6",
+    "src/packages/sys/process/windows/cwd.rs": "e127d912cc5d23030cd69cfaaf339310d1173a458b264af903c265ca2517b56b",
+    "src/packages/sys/process/windows/command.rs": "a1781a8042f6f28332a5eba6fb5ac410831ec87fcadfe486068bbe8795c82281",
+    "tests/sys_process_windows.rs": "95054b7987a5b73a606de1c93002c68e3e66af91a18ff015e70362a0f4be8ff3",
+    "tests/sys_policy.rs": "26c67628d7a9d28983db291b2207cc321c586eaefb5c74b9c662b2a284e8f271",
+    "examples/sys_process.rs": "b8674785272bd8904dc3ae1973e98d6dfb25f7b399ac79139c423a59837c7ca1",
+    "src/packages/sys/process/windows/RUST-LICENSE-MIT": "1d55b34d3ad787b6b496984c9306b32eeb6bd9d83b973992d9c391e7e33f20ba"
+  },
+  "old_lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "new_lock_sha256": "00afc549992181ed794021239a6c0f68b031991a32386db7eff94047629fbb25",
+  "runner_sha256": "25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e",
+  "scope": "Uncovered native Linux1.77.2 X23 integer example: sys,no_float and sys,sync,only_i32,no_float. Existing example body/meaningful wrong-exit8 oracle, fresh run/spawn records, pending/clone snapshots and ESRCH. No existing accepted row replay and no new product source.",
+  "private_limits": {
+    "wall_seconds": 1200,
+    "storage_bytes": 8589934592,
+    "rss_bytes": 8589934592,
+    "processes": 32,
+    "cargo_jobs": 2
+  }
+}

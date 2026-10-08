@@ -1,0 +1,20 @@
+{
+  "tag": "no-float-build",
+  "argv": [
+    "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/toolchain-1.77.2/bin/cargo",
+    "build",
+    "--locked",
+    "--features",
+    "sys,no_float",
+    "--example",
+    "sys_process",
+    "--message-format=json"
+  ],
+  "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/source",
+  "pid": 1650295,
+  "timeout_seconds": 480,
+  "exit": 0,
+  "elapsed": 22.124,
+  "stdout_sha256": "5668f02d054cee0c885dd1d9c48a389045de4c105ab81ee3f4b18a5d40c84ca5",
+  "stderr_sha256": "1b5841bf5a137ad71d6abe2290de2c4720ab79e2f9d3db0c0eefa3cc2e163f5c"
+}

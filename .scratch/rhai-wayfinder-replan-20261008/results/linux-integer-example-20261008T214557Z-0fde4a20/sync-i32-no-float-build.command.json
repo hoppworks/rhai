@@ -1,0 +1,20 @@
+{
+  "tag": "sync-i32-no-float-build",
+  "argv": [
+    "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/toolchain-1.77.2/bin/cargo",
+    "build",
+    "--locked",
+    "--features",
+    "sys,sync,only_i32,no_float",
+    "--example",
+    "sys_process",
+    "--message-format=json"
+  ],
+  "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/source",
+  "pid": 1652163,
+  "timeout_seconds": 480,
+  "exit": 0,
+  "elapsed": 9.298,
+  "stdout_sha256": "6990588ca968e5ad00543e30bd0c1f2ee59812d76e7a7312b883f79fe7c64d64",
+  "stderr_sha256": "02f4184af67227197698afa842332d4e0c8adef89e003eef8f07cb34528a1fcf"
+}

@@ -1,0 +1,3 @@
+Host read back run child record: "run child wrote its record\n"
+Host read back spawned child record: "spawn child observed release\n" (pid 1652819)
+Spawn wait was pending, then both cloned handles returned the same result.

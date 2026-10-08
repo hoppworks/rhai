@@ -1,0 +1,1002 @@
+{
+  "started_utc": "2026-10-08T21:54:21.815894+00:00",
+  "runtime": "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj",
+  "source_revision": "0a0636f42533ec29170881ac9b14d50de758d6f9",
+  "commands": [
+    {
+      "tag": "help-1.77.2-rustc-x86_64-unknown-linux-gnu",
+      "argv": [
+        "bash",
+        "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/downloads/rustc-1.77.2-x86_64-unknown-linux-gnu/install.sh",
+        "--help"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/downloads/rustc-1.77.2-x86_64-unknown-linux-gnu",
+      "pid": 1646554,
+      "timeout_seconds": 15,
+      "exit": 0,
+      "elapsed": 0.116,
+      "stdout_sha256": "272ca5f4f87e4bb92e73ac380c4acbe9cc002384794c322890056e6ca38b9e02",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "tag": "install-1.77.2-rustc-x86_64-unknown-linux-gnu",
+      "argv": [
+        "bash",
+        "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/downloads/rustc-1.77.2-x86_64-unknown-linux-gnu/install.sh",
+        "--prefix=/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/toolchain-1.77.2",
+        "--disable-ldconfig"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/downloads/rustc-1.77.2-x86_64-unknown-linux-gnu",
+      "pid": 1646556,
+      "timeout_seconds": 120,
+      "exit": 0,
+      "elapsed": 0.41,
+      "stdout_sha256": "f9044a92f28f4f309e8818b4715e7812852923b88e1dbd13ed5da5bd55330543",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "tag": "help-1.77.2-cargo-x86_64-unknown-linux-gnu",
+      "argv": [
+        "bash",
+        "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/downloads/cargo-1.77.2-x86_64-unknown-linux-gnu/install.sh",
+        "--help"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/downloads/cargo-1.77.2-x86_64-unknown-linux-gnu",
+      "pid": 1647490,
+      "timeout_seconds": 15,
+      "exit": 0,
+      "elapsed": 0.114,
+      "stdout_sha256": "af64cbd70e35641a73f9991a0f4d1679f23a5379849fe4661779708a16e9c315",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "tag": "install-1.77.2-cargo-x86_64-unknown-linux-gnu",
+      "argv": [
+        "bash",
+        "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/downloads/cargo-1.77.2-x86_64-unknown-linux-gnu/install.sh",
+        "--prefix=/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/toolchain-1.77.2",
+        "--disable-ldconfig"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/downloads/cargo-1.77.2-x86_64-unknown-linux-gnu",
+      "pid": 1647574,
+      "timeout_seconds": 120,
+      "exit": 0,
+      "elapsed": 0.615,
+      "stdout_sha256": "62d22326140644f50e8e77c6f477f4b48a55f1700627697a31de41ca16562c28",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "tag": "help-1.77.2-rust-std-x86_64-unknown-linux-gnu",
+      "argv": [
+        "bash",
+        "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/downloads/rust-std-1.77.2-x86_64-unknown-linux-gnu/install.sh",
+        "--help"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/downloads/rust-std-1.77.2-x86_64-unknown-linux-gnu",
+      "pid": 1649164,
+      "timeout_seconds": 15,
+      "exit": 0,
+      "elapsed": 0.115,
+      "stdout_sha256": "f1e38fd465f43eb94bb10d3659f2b924bdbda53c8b05d4f9442e44a702f0ecd3",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "tag": "install-1.77.2-rust-std-x86_64-unknown-linux-gnu",
+      "argv": [
+        "bash",
+        "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/downloads/rust-std-1.77.2-x86_64-unknown-linux-gnu/install.sh",
+        "--prefix=/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/toolchain-1.77.2",
+        "--disable-ldconfig"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/downloads/rust-std-1.77.2-x86_64-unknown-linux-gnu",
+      "pid": 1649182,
+      "timeout_seconds": 120,
+      "exit": 0,
+      "elapsed": 0.514,
+      "stdout_sha256": "2377d33f8296c5a22581684560ab656c8c6cacaf7cdaa0629f851915a4815736",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "tag": "cargo-1.77-version",
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/toolchain-1.77.2/bin/cargo",
+        "--version"
+      ],
+      "cwd": "/root/projects/rhai-wayfinder-20261008",
+      "pid": 1650287,
+      "timeout_seconds": 15,
+      "exit": 0,
+      "elapsed": 0.111,
+      "stdout_sha256": "6112bcce75ab9a1c5d664eec9c11d98776a7c36c3be3c3402d871d72f1401b20",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "tag": "rustc-1.77-version",
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/toolchain-1.77.2/bin/rustc",
+        "--version"
+      ],
+      "cwd": "/root/projects/rhai-wayfinder-20261008",
+      "pid": 1650289,
+      "timeout_seconds": 15,
+      "exit": 0,
+      "elapsed": 0.111,
+      "stdout_sha256": "8d95dab8b988abfc08735506e13455043a0a2f910e0672f4fdd48f37cc0a2f83",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "tag": "no-float-build",
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/toolchain-1.77.2/bin/cargo",
+        "build",
+        "--locked",
+        "--features",
+        "sys,no_float",
+        "--example",
+        "sys_process",
+        "--message-format=json"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/source",
+      "pid": 1650295,
+      "timeout_seconds": 480,
+      "exit": 0,
+      "elapsed": 22.124,
+      "stdout_sha256": "5668f02d054cee0c885dd1d9c48a389045de4c105ab81ee3f4b18a5d40c84ca5",
+      "stderr_sha256": "1b5841bf5a137ad71d6abe2290de2c4720ab79e2f9d3db0c0eefa3cc2e163f5c"
+    },
+    {
+      "tag": "no-float-red",
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/target/debug/examples/sys_process"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/source",
+      "pid": 1652138,
+      "timeout_seconds": 30,
+      "exit": 101,
+      "elapsed": 0.138,
+      "stdout_sha256": "b9a01e6d9e186c7b0608c748445e090aecbbbd2194357078e75dc242d6a8fc5a",
+      "stderr_sha256": "98dcb10f6a6cabc0a101c673db3c989dbadb41922c347772e70ea3d4434e2973"
+    },
+    {
+      "tag": "no-float-green",
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/target/debug/examples/sys_process"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/source",
+      "pid": 1652143,
+      "timeout_seconds": 30,
+      "exit": 0,
+      "elapsed": 0.239,
+      "stdout_sha256": "626097a08412285fc35efb3e363e3451a9867ce6b6a6c4360870a5ae9397c912",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "tag": "sync-i32-no-float-build",
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/toolchain-1.77.2/bin/cargo",
+        "build",
+        "--locked",
+        "--features",
+        "sys,sync,only_i32,no_float",
+        "--example",
+        "sys_process",
+        "--message-format=json"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/source",
+      "pid": 1652163,
+      "timeout_seconds": 480,
+      "exit": 0,
+      "elapsed": 9.298,
+      "stdout_sha256": "6990588ca968e5ad00543e30bd0c1f2ee59812d76e7a7312b883f79fe7c64d64",
+      "stderr_sha256": "02f4184af67227197698afa842332d4e0c8adef89e003eef8f07cb34528a1fcf"
+    },
+    {
+      "tag": "sync-i32-no-float-red",
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/target/debug/examples/sys_process"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/source",
+      "pid": 1652810,
+      "timeout_seconds": 30,
+      "exit": 101,
+      "elapsed": 0.14,
+      "stdout_sha256": "b1d721a9c9de6175c04410d4143a334774b5b552db2d7d058d16ecf51e511007",
+      "stderr_sha256": "98dcb10f6a6cabc0a101c673db3c989dbadb41922c347772e70ea3d4434e2973"
+    },
+    {
+      "tag": "sync-i32-no-float-green",
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/target/debug/examples/sys_process"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/source",
+      "pid": 1652815,
+      "timeout_seconds": 30,
+      "exit": 0,
+      "elapsed": 0.14,
+      "stdout_sha256": "897df7f4b3b7e4d053079c781c3b303b906b2b5a848495eb9bb11ba2c0999058",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "samples": [
+    {
+      "elapsed": 5.794,
+      "storage_bytes": 360660484,
+      "rss_bytes": 44621824,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 29249536
+        },
+        {
+          "pid": 1646554,
+          "start": "30563953",
+          "rss_bytes": 0
+        }
+      ]
+    },
+    {
+      "elapsed": 5.905,
+      "storage_bytes": 360660484,
+      "rss_bytes": 48562176,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 29249536
+        },
+        {
+          "pid": 1646556,
+          "start": "30563965",
+          "rss_bytes": 3940352
+        }
+      ]
+    },
+    {
+      "elapsed": 6.322,
+      "storage_bytes": 297403105,
+      "rss_bytes": 44883968,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 29511680
+        }
+      ]
+    },
+    {
+      "elapsed": 7.083,
+      "storage_bytes": 338653052,
+      "rss_bytes": 44986368,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 29614080
+        },
+        {
+          "pid": 1647490,
+          "start": "30564082",
+          "rss_bytes": 0
+        }
+      ]
+    },
+    {
+      "elapsed": 7.197,
+      "storage_bytes": 338653052,
+      "rss_bytes": 48893952,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 29614080
+        },
+        {
+          "pid": 1647574,
+          "start": "30564094",
+          "rss_bytes": 3907584
+        }
+      ]
+    },
+    {
+      "elapsed": 7.814,
+      "storage_bytes": 330168321,
+      "rss_bytes": 44986368,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 29614080
+        }
+      ]
+    },
+    {
+      "elapsed": 9.823,
+      "storage_bytes": 495277438,
+      "rss_bytes": 44310528,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 28938240
+        },
+        {
+          "pid": 1649164,
+          "start": "30564356",
+          "rss_bytes": 0
+        }
+      ]
+    },
+    {
+      "elapsed": 9.937,
+      "storage_bytes": 495277438,
+      "rss_bytes": 48226304,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 28938240
+        },
+        {
+          "pid": 1649182,
+          "start": "30564368",
+          "rss_bytes": 3915776
+        }
+      ]
+    },
+    {
+      "elapsed": 10.453,
+      "storage_bytes": 469705856,
+      "rss_bytes": 44310528,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 28938240
+        }
+      ]
+    },
+    {
+      "elapsed": 10.464,
+      "storage_bytes": 469705856,
+      "rss_bytes": 48250880,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 28938240
+        },
+        {
+          "pid": 1650287,
+          "start": "30564421",
+          "rss_bytes": 3940352
+        }
+      ]
+    },
+    {
+      "elapsed": 10.575,
+      "storage_bytes": 469705856,
+      "rss_bytes": 44597248,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 28938240
+        },
+        {
+          "pid": 1650289,
+          "start": "30564432",
+          "rss_bytes": 286720
+        }
+      ]
+    },
+    {
+      "elapsed": 12.372,
+      "storage_bytes": 963454760,
+      "rss_bytes": 67506176,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 35098624
+        },
+        {
+          "pid": 1650295,
+          "start": "30564610",
+          "rss_bytes": 17035264
+        }
+      ]
+    },
+    {
+      "elapsed": 14.412,
+      "storage_bytes": 966651519,
+      "rss_bytes": 90644480,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 35098624
+        },
+        {
+          "pid": 1650295,
+          "start": "30564610",
+          "rss_bytes": 40173568
+        }
+      ]
+    },
+    {
+      "elapsed": 16.449,
+      "storage_bytes": 1024913147,
+      "rss_bytes": 129945600,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 35098624
+        },
+        {
+          "pid": 1650295,
+          "start": "30564610",
+          "rss_bytes": 79474688
+        }
+      ]
+    },
+    {
+      "elapsed": 18.485,
+      "storage_bytes": 1102248203,
+      "rss_bytes": 510050304,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 35098624
+        },
+        {
+          "pid": 1650295,
+          "start": "30564610",
+          "rss_bytes": 78192640
+        },
+        {
+          "pid": 1650585,
+          "start": "30565124",
+          "rss_bytes": 279785472
+        },
+        {
+          "pid": 1650655,
+          "start": "30565219",
+          "rss_bytes": 101601280
+        }
+      ]
+    },
+    {
+      "elapsed": 20.523,
+      "storage_bytes": 1188576650,
+      "rss_bytes": 339021824,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 35098624
+        },
+        {
+          "pid": 1650295,
+          "start": "30564610",
+          "rss_bytes": 78192640
+        },
+        {
+          "pid": 1650935,
+          "start": "30565417",
+          "rss_bytes": 72962048
+        },
+        {
+          "pid": 1650938,
+          "start": "30565418",
+          "rss_bytes": 106827776
+        },
+        {
+          "pid": 1650945,
+          "start": "30565422",
+          "rss_bytes": 3067904
+        },
+        {
+          "pid": 1650946,
+          "start": "30565422",
+          "rss_bytes": 2183168
+        },
+        {
+          "pid": 1650947,
+          "start": "30565422",
+          "rss_bytes": 25317376
+        }
+      ]
+    },
+    {
+      "elapsed": 22.56,
+      "storage_bytes": 1204952667,
+      "rss_bytes": 814854144,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 35098624
+        },
+        {
+          "pid": 1650295,
+          "start": "30564610",
+          "rss_bytes": 78192640
+        },
+        {
+          "pid": 1650999,
+          "start": "30565453",
+          "rss_bytes": 321118208
+        },
+        {
+          "pid": 1651109,
+          "start": "30565479",
+          "rss_bytes": 365072384
+        }
+      ]
+    },
+    {
+      "elapsed": 24.6,
+      "storage_bytes": 1283943782,
+      "rss_bytes": 465559552,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 35098624
+        },
+        {
+          "pid": 1650295,
+          "start": "30564610",
+          "rss_bytes": 78192640
+        },
+        {
+          "pid": 1651532,
+          "start": "30565792",
+          "rss_bytes": 175484928
+        },
+        {
+          "pid": 1651538,
+          "start": "30565798",
+          "rss_bytes": 161411072
+        }
+      ]
+    },
+    {
+      "elapsed": 26.637,
+      "storage_bytes": 1313064857,
+      "rss_bytes": 581357568,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 35098624
+        },
+        {
+          "pid": 1650295,
+          "start": "30564610",
+          "rss_bytes": 78192640
+        },
+        {
+          "pid": 1651538,
+          "start": "30565798",
+          "rss_bytes": 452694016
+        }
+      ]
+    },
+    {
+      "elapsed": 28.684,
+      "storage_bytes": 1351555649,
+      "rss_bytes": 776998912,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 35098624
+        },
+        {
+          "pid": 1650295,
+          "start": "30564610",
+          "rss_bytes": 78192640
+        },
+        {
+          "pid": 1651538,
+          "start": "30565798",
+          "rss_bytes": 648335360
+        }
+      ]
+    },
+    {
+      "elapsed": 30.726,
+      "storage_bytes": 1395046513,
+      "rss_bytes": 965283840,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 35098624
+        },
+        {
+          "pid": 1650295,
+          "start": "30564610",
+          "rss_bytes": 78192640
+        },
+        {
+          "pid": 1651538,
+          "start": "30565798",
+          "rss_bytes": 836620288
+        }
+      ]
+    },
+    {
+      "elapsed": 32.766,
+      "storage_bytes": 1452729641,
+      "rss_bytes": 930664448,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 35098624
+        },
+        {
+          "pid": 1650295,
+          "start": "30564610",
+          "rss_bytes": 78192640
+        },
+        {
+          "pid": 1651538,
+          "start": "30565798",
+          "rss_bytes": 802000896
+        }
+      ]
+    },
+    {
+      "elapsed": 34.508,
+      "storage_bytes": 1678654312,
+      "rss_bytes": 59396096,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 35098624
+        },
+        {
+          "pid": 1652138,
+          "start": "30566822",
+          "rss_bytes": 8925184
+        }
+      ]
+    },
+    {
+      "elapsed": 34.674,
+      "storage_bytes": 1678654312,
+      "rss_bytes": 58863616,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 34816000
+        },
+        {
+          "pid": 1652143,
+          "start": "30566839",
+          "rss_bytes": 8675328
+        }
+      ]
+    },
+    {
+      "elapsed": 34.936,
+      "storage_bytes": 1678654285,
+      "rss_bytes": 69001216,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 34820096
+        },
+        {
+          "pid": 1652163,
+          "start": "30566865",
+          "rss_bytes": 18808832
+        }
+      ]
+    },
+    {
+      "elapsed": 36.975,
+      "storage_bytes": 1718443673,
+      "rss_bytes": 434892800,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 34820096
+        },
+        {
+          "pid": 1652163,
+          "start": "30566865",
+          "rss_bytes": 35078144
+        },
+        {
+          "pid": 1652338,
+          "start": "30566942",
+          "rss_bytes": 349622272
+        }
+      ]
+    },
+    {
+      "elapsed": 39.019,
+      "storage_bytes": 1737470010,
+      "rss_bytes": 617930752,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 34820096
+        },
+        {
+          "pid": 1652163,
+          "start": "30566865",
+          "rss_bytes": 35078144
+        },
+        {
+          "pid": 1652338,
+          "start": "30566942",
+          "rss_bytes": 532660224
+        }
+      ]
+    },
+    {
+      "elapsed": 41.058,
+      "storage_bytes": 1785836699,
+      "rss_bytes": 825454592,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 34820096
+        },
+        {
+          "pid": 1652163,
+          "start": "30566865",
+          "rss_bytes": 35078144
+        },
+        {
+          "pid": 1652338,
+          "start": "30566942",
+          "rss_bytes": 740184064
+        }
+      ]
+    },
+    {
+      "elapsed": 43.097,
+      "storage_bytes": 1850653265,
+      "rss_bytes": 811966464,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 34820096
+        },
+        {
+          "pid": 1652163,
+          "start": "30566865",
+          "rss_bytes": 35078144
+        },
+        {
+          "pid": 1652338,
+          "start": "30566942",
+          "rss_bytes": 726695936
+        }
+      ]
+    },
+    {
+      "elapsed": 44.24,
+      "storage_bytes": 2035945673,
+      "rss_bytes": 58589184,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 35082240
+        },
+        {
+          "pid": 1652810,
+          "start": "30567795",
+          "rss_bytes": 8134656
+        }
+      ]
+    },
+    {
+      "elapsed": 44.402,
+      "storage_bytes": 2035945655,
+      "rss_bytes": 58736640,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 35209216
+        },
+        {
+          "pid": 1652815,
+          "start": "30567812",
+          "rss_bytes": 8155136
+        }
+      ]
+    },
+    {
+      "elapsed": 44.561,
+      "storage_bytes": 2035945628,
+      "rss_bytes": 50581504,
+      "processes": [
+        {
+          "pid": 1646443,
+          "start": "30563369",
+          "rss_bytes": 15372288
+        },
+        {
+          "pid": 1646444,
+          "start": "30563371",
+          "rss_bytes": 35209216
+        }
+      ]
+    }
+  ],
+  "scope": "Uncovered native Linux1.77.2 X23 integer example: sys,no_float and sys,sync,only_i32,no_float. Existing example body/meaningful wrong-exit8 oracle, fresh run/spawn records, pending/clone snapshots and ESRCH. No existing accepted row replay and no new product source."
+}

@@ -1,0 +1,29 @@
+{
+  "status": "Accepted two named native Linux example slices only",
+  "criteria": [
+    "X23 native integer process example",
+    "Ticket06 applicable no_float and only_i32/sync example semantics"
+  ],
+  "profiles": [
+    "sys,no_float",
+    "sys,sync,only_i32,no_float"
+  ],
+  "review_original_sha256": "ea92197ea0f73c1bc6d913764c7fe3645c9821198e2de2b4ac14290decd27a1e",
+  "review_export_sha256": "f7535f986f5b3c1268cc5527b38a29df4e0e4e59c9517e738069426c7aa4abd5",
+  "raw_phases_sha256": "16cb5058ac6d405972f521168f633cc13361d8e85f82eca318828b6219e5a6bc",
+  "native_environment_sha256": "64aeb9651c946eb750a4cb32051619828277351ff2f7a10023d9cb372e01d512",
+  "source_selection_sha256": "61ed44d994d2e90b219f71afb9713f7589590766864d0f33e32bd0dabea5c422",
+  "result_sha256": "cb294da0cdfd4890ee0034d8d24863c103ffea89a5fa624058ae79b920efa3ec",
+  "cleanup_sha256": "2104515e9e17945a8474d361f7d246a3f133a507dcdc5be908fa3363283b29e5",
+  "outer_runner_exit": null,
+  "outer_launcher_exit": 1,
+  "historical_prepared_label_correction": "X23/R5 was too broad: R5 no_index scalar/Windows Child registration is not claimed by these integer examples. Source/results unchanged.",
+  "not_accepted": [
+    "full X23",
+    "R5 no_index scalar gate",
+    "full Ticket06 row",
+    "native Windows",
+    "full custody",
+    "release readiness"
+  ]
+}

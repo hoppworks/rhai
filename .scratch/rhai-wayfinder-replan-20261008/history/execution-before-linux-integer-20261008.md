@@ -1,10 +1,9 @@
 # Current execution state
 
-Updated: 2026-10-09. Autonomous implementation authorized; no new Goal.
+Updated: 2026-10-08. Autonomous implementation authorized; no new Goal.
 
-Next: close the remaining Windows lifetime test source while native UI access is
-pending; accepted Linux integer-example evidence is published with this packet. Windows source03/04 checks
-are complete with exported originals and exact cleanup. All3 source P2 findings are corrected:
+Next: finish the affected Windows1.77 source check, retain originals/cleanup
+and reuse the same combined review. All3 source P2 findings are corrected:
 checked close before clean publication; typed failed-start cleanup report;
 indeterminate overlapped I/O retains its exact buffer/worker/permit.
 Native Windows product/interruption runs still need permitted encrypted UI access;
@@ -18,9 +17,8 @@ returned0. Their frozen earlier source bindings remain. The graph wrapper's
 libc mistake was corrected against saved originals, without another build.
 Affected-check02 aborted34.813s in storage sampling when Cargo removed a transient
 rmeta; this is infrastructure, not a product assertion RED. Exact scope retired.
-Reviewed affected-check03 passed baseline/no_index+sync; affected-check04 passed
-new tests with sys alone/no_index. Source-only, not native Windows acceptance.
-Owned transient ENOENT is recorded with limits kept; core/profiles reused.
+Reviewed affected-check03 runs baseline and no_index+sync together; it records
+owned transient ENOENT and keeps limits. Earlier unaffected core/profiles reused.
 Lock00afc549… adds only root windows-sys0.59; no dependency version/checksum changes.
 
 Current Windows results: results/windows-custody-20261008T125846Z-b7f83433/.
@@ -44,7 +42,7 @@ and grandchild exit, nested/assignment/setup/refusal/output/evidence/cleanup fau
 private product work retirement and bounded export. No native Windows Cargo yet.
 
 Execution host: SSH lllm only. Actual current independent Git checkout:
-/root/projects/rhai-wayfinder-20261008, fork main (exact receipt in fork-publication.json), plus owned Windows source WIP.
+/root/projects/rhai-wayfinder-20261008, fork main0a0636f4 plus owned Windows backend/test/held-fixture WIP.
 Latest human host steering was verified in origin thread01a1101b-e9cc-7a02-a5f6-c5673c302ef3;
 no project builds/tests/servers/proxies or further implementation edits on Laptop.
 Workhorse is now available for other assigned projects; rhai remains on lllm.
@@ -70,18 +68,11 @@ Linux minimum policy/NotFound/argv/env_remove addendum accepts4 new GREENs
 and5 original RED controls;8 criteria covered at1.77.2, all own resources retired.
 Historical X31 actual Condvar-entry proof remains applicable: current Unix backend
 byte-identical to accepted snapshots. All Unix runtime/outer scopes retired.
-Completed Linux integer example route: results/linux-integer-example-20261008T214557Z-0fde4a20/.
-Profiles sys,no_float and sys,sync,only_i32,no_float share one1.77.2 private build.
-Same binary expected8 RED101/restored7 GREEN0, fresh records/clone/ESRCH required.
-Both profiles have accepted RED101/GREEN0, combined review and exact cleanup.
-Only X23/Ticket06 example slices close; R5/full matrix and prior rows unchanged.
-Post-spawn launcher PID-receipt TypeError did not interrupt/restart the44.562s run;
-outer exit unknown. Native statuses and independent exact cleanup are preserved.
 See results/{example-20261008T090938Z-zmj63_0i,unix-wait-20261008T131127Z-3fcea4ec,
 ipv6-20261008T135030Z-79648696,net-read-entry-20261008T151745Z-a2d7a5a5,
 darwin-process-minimum-20261008T153851Z-a0169b56,f32-process-20261008T162316Z-515571ed}/.
 
-Fork main:9 prior reviewed commits through0a0636f4 plus this Linux proof packet;
+Fork main:0a0636f42533ec29170881ac9b14d50de758d6f9;9 owned reviewed commits,
 atomic push/readback verifies main as the only remote branch. Laptop main stays
 read-only at c63. Exclude foreign tests/fixtures/sys_process_shared_child_contract.rs
 (SHA14a0808a…) and all unowned changes. Fork hoppworks/rhai main only;

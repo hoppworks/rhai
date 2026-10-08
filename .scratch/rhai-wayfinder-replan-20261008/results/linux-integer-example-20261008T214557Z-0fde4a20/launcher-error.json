@@ -1,0 +1,12 @@
+{
+  "classification": "Post-spawn launcher bookkeeping failure; bounded owned run continues, not restarted",
+  "error": "TypeError: str / str while writing /proc/<runner-pid>/stat receipt",
+  "runner_pid": 1646441,
+  "runner_start_ticks": "30563366",
+  "supervisor_pid": 1646443,
+  "supervisor_start_ticks": "30563369",
+  "helper_pid": 1646444,
+  "helper_start_ticks": "30563371",
+  "affected_product_assertions": false,
+  "status_recovery": "read original helper statuses, exact runner identity disposition and independently validate runtime/scope cleanup; no fabricated outer exit"
+}

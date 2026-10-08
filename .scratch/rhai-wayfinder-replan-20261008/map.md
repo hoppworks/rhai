@@ -2,7 +2,7 @@
 
 Type: map
 Label: wayfinder:map
-Status: route specified; planning complete; implementation currently paused
+Status: route specified; autonomous implementation authorized; see execution-state.md
 Owner: repository owner
 Tracker: local Markdown
 
@@ -15,6 +15,11 @@ behavior needs, a meaningful failure control, exact source/lock/toolchain bindin
 and an independent review. This map is a proposed route, not evidence of closure.
 
 ## Notes
+
+- Execution override: the owner subsequently authorized autonomous implementation
+  of the companion plan. The following planning-pass restrictions are historical;
+  current host/permission decisions and next action live in [execution state](execution-state.md).
+  No new Goal is created or reactivated. Technical/native acceptance stays binding.
 
 - This planning pass is limited to new documents in this directory. The existing
   Goal remains paused. It starts no code work, build, test, VM, service, cleanup,

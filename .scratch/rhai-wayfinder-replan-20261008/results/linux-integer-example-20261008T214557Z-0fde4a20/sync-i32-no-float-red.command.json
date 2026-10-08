@@ -1,0 +1,13 @@
+{
+  "tag": "sync-i32-no-float-red",
+  "argv": [
+    "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/target/debug/examples/sys_process"
+  ],
+  "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/source",
+  "pid": 1652810,
+  "timeout_seconds": 30,
+  "exit": 101,
+  "elapsed": 0.14,
+  "stdout_sha256": "b1d721a9c9de6175c04410d4143a334774b5b552db2d7d058d16ecf51e511007",
+  "stderr_sha256": "98dcb10f6a6cabc0a101c673db3c989dbadb41922c347772e70ea3d4434e2973"
+}

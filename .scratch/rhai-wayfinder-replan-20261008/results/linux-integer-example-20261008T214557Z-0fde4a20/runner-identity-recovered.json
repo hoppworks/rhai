@@ -1,0 +1,17 @@
+{
+  "pid": 1646441,
+  "start_ticks": "30563366",
+  "argv": [
+    "python3",
+    "-B",
+    "/home/Daniel/projects/agent-skills/tools/run_scoped.py",
+    "--timeout",
+    "1200",
+    "--",
+    "python3",
+    "-B",
+    "/var/roothome/projects/rhai-wayfinder-20261008/.scratch/rhai-wayfinder-replan-20261008/results/linux-integer-example-20261008T214557Z-0fde4a20/verify-example.py",
+    "/var/roothome/projects/rhai-wayfinder-20261008/.scratch/rhai-wayfinder-replan-20261008/results/linux-integer-example-20261008T214557Z-0fde4a20"
+  ],
+  "source": "Fresh exact live /proc read after original post-spawn launcher failed; not a relaunch"
+}

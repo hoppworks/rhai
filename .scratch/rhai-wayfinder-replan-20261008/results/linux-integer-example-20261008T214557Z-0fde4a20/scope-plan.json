@@ -1,0 +1,12 @@
+{
+  "native_requirements": "X23/R5 promised integer-only process example on native Linux at minimum1.77.2; default Linux and Darwin integer evidence retained",
+  "profiles": [
+    "sys,no_float",
+    "sys,sync,only_i32,no_float"
+  ],
+  "canonical_entry": "existing examples/sys_process.rs; existing verified example_phase oracle reused unchanged",
+  "oracle_source_sha256": "22ec8c1c2f9291fbaa02a2de30b073d987d6b2a18daa273c76e5714cb6193901",
+  "current_helper_sha256": "e32b2d3296ca7497e282ac329b1a999d8d18b8df059ffc68204effa3f62d370e",
+  "native_windows_execution": false,
+  "hard_boundaries": "LLLM SSH only, no Laptop product edits/builds; no VM/foreign process/resource/session/config/Git mutation; own finite1200s scope8GiB RSS/storage,32members,2Cargo jobs"
+}

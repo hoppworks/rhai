@@ -1,0 +1,13 @@
+{
+  "tag": "no-float-green",
+  "argv": [
+    "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/target/debug/examples/sys_process"
+  ],
+  "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-integer-example-edafd90d56a14a1c803e90ffbf8293c3/agent-build-mk391jtj/source",
+  "pid": 1652143,
+  "timeout_seconds": 30,
+  "exit": 0,
+  "elapsed": 0.239,
+  "stdout_sha256": "626097a08412285fc35efb3e363e3451a9867ce6b6a6c4360870a5ae9397c912",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}
