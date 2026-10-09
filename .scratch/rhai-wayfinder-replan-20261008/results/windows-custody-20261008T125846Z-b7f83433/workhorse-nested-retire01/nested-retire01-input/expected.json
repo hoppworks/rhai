@@ -1,0 +1,53 @@
+{
+  "files": [
+    {
+      "root": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\nested-refusal-8eaf92ee5060484ab71ba657435578ea",
+      "relative": "observer.json",
+      "length": 1774,
+      "sha256": "9a6eb1570ade1273c4e5924e47c84ce3743f8b199d811dfb111b4978f1daf511"
+    },
+    {
+      "root": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\nested-refusal-33b851a725484c8bb830280181963963",
+      "relative": "observer.json",
+      "length": 730,
+      "sha256": "8a785dfdefc1f93421fc8997a44f08228a10f30f611e50e78804259db70a6cea"
+    },
+    {
+      "root": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\nested-refusal-33b851a725484c8bb830280181963963",
+      "relative": "driver.stdout",
+      "length": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "root": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\nested-refusal-33b851a725484c8bb830280181963963",
+      "relative": "driver.stderr",
+      "length": 115,
+      "sha256": "2d401e97effe1190e1ec9a1009fff182f00a09ab35f429d03755c7017ec28a11"
+    }
+  ],
+  "identities": [
+    {
+      "creation": 134360239088517759,
+      "pid": 3128
+    },
+    {
+      "creation": 134360250946086458,
+      "pid": 5276
+    },
+    {
+      "creation": 134360250953900239,
+      "pid": 652
+    }
+  ],
+  "directory_bindings": [],
+  "empty_dirs": [
+    {
+      "root": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\nested-refusal-8eaf92ee5060484ab71ba657435578ea",
+      "relative": "input"
+    },
+    {
+      "root": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\nested-refusal-33b851a725484c8bb830280181963963",
+      "relative": "input"
+    }
+  ]
+}

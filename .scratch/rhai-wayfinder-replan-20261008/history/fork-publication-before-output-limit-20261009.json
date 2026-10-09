@@ -1,0 +1,38 @@
+{
+  "fork": "https://github.com/hoppworks/rhai.git",
+  "main": "fd16c9b1d8eeb6b2c08ad99208153e7f2f29e852",
+  "previous_main": "f69526e496b0d0b794c60c7d550fa79a7b3bfc9c",
+  "atomic_push": true,
+  "remote_heads": [
+    "fd16c9b1d8eeb6b2c08ad99208153e7f2f29e852\trefs/heads/main"
+  ],
+  "remote_only_main": true,
+  "owned_reviewed_commits_this_execution": 15,
+  "attribution": "hoppworks|daniel@hoppworks.de|hoppworks|daniel@hoppworks.de",
+  "execution_host": "workhorse (native proof); lllm (source/integration)",
+  "active_checkout": "/root/projects/rhai-wayfinder-20261008",
+  "active_main_verified": true,
+  "primary_main_fast_forwarded": false,
+  "primary_main_note": "Laptop checkout preserved read-only at prior c63; no local mutation under current host boundary.",
+  "no_upstream_write": true,
+  "latest_package": {
+    "scope": "Native monitor loss / real ordinary grandchild / sentinel / observer-owned reset only; full custody OPEN",
+    "checkpoint": "fd16c9b1d8eeb6b2c08ad99208153e7f2f29e852",
+    "combined_review_sha256": "b156db3381fe2909cbbaaf3296199038fa71d95f9448498d5fd7e5e9a9e03fd8",
+    "runtime_original_files": 27,
+    "runtime_frames": 116,
+    "atomic_push": true,
+    "unaccepted_windows_product_wip_excluded": true,
+    "corrected_observer_excluded": true,
+    "originals": "Raw byte-exact serial frames/inventories/bindings preserve all originals without normalizing CRLF or publishing ignored binary copies."
+  },
+  "historical_receipt": ".scratch/rhai-wayfinder-replan-20261008/history/fork-publication-before-held-interruption-20261009.json",
+  "normalization": "Removed own stale/duplicate publication fields. Current commit and count above are backed by actual atomic push and exact remote readback; historical evidence unchanged.",
+  "previous_head": "fd16c9b1d8eeb6b2c08ad99208153e7f2f29e852",
+  "head": "b1b5e4377c4df944bafa8fe314c5a4002f241eed",
+  "only_remote_main": true,
+  "package": "native ordinary-exit residual-child cleanup",
+  "combined_review": "37dc3f53994172cf99b328db050f97066f20ca3fb066f5d946d264c5b50b0b97",
+  "prior_head": "372da9b0095074afd6d3f76070b16ac844457c28",
+  "payload_failure_review_sha256": "dd2f2917715a8edd76abdc9d1e91b03fef6ac0a88e0d543e39eaaa94faff1323"
+}

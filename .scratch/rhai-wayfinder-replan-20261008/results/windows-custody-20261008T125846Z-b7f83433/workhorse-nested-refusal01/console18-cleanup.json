@@ -1,0 +1,8 @@
+{
+  "runner_exit": 124,
+  "runtime": "/var/roothome/.local/share/agent-builds/rhai/c18-77185df1734c4ce0/agent-build-llym8496",
+  "runtime_absent": true,
+  "exact_scope": true,
+  "scope_empty": true,
+  "scope_retired": true
+}

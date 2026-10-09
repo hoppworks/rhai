@@ -1,0 +1,26 @@
+{
+  "frames": 7,
+  "files": {
+    "retirement.json": {
+      "path": "retirement.json",
+      "sha256": "f5b26eed59465f3064a005d572d9e1e9278e81f278648eb2ac3c91b3816166cb",
+      "length": 2138
+    }
+  },
+  "complete": true,
+  "begin": {
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\nested-retire-fccf8c711daf44dd81bb93dc38b825ce",
+    "accepted": true,
+    "full_record": "retirement.json",
+    "id": "rhai-nested-retire01-fccf8c711daf44dd81bb93dc38b825ce",
+    "exit": 0
+  },
+  "end": {
+    "id": "rhai-nested-retire01-fccf8c711daf44dd81bb93dc38b825ce",
+    "driver_launched": false,
+    "files": 1,
+    "accepted": true,
+    "exit": 0,
+    "guest_evidence_retained": true
+  }
+}

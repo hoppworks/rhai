@@ -1,0 +1,6 @@
+{
+  "iso": "/var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/nested-refusal01.iso",
+  "sha256": "655e03fcf3fbb59393302867882adf691a1e6f9e69dde36f30549b80270bac4c",
+  "bytes": 385024,
+  "native_started": false
+}

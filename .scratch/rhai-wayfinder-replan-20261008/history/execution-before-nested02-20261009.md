@@ -1,22 +1,22 @@
 # Current execution state
 Updated: 2026-10-09. Autonomous implementation remains authorized.
-Cleaned AGENTS37f95ff6/installed skills/Memory reread; reviewer confirmed. Legacy config/common inactive.
+Cleaned AGENTS SHA37f95ff6 and Memory reread; build-efficiently1b6e1da/TDD reloaded.
 Capacity comes from live resources; archived exceptions/PIDs/model mappings confer no authority.
 Accepted Linux1.77.2 baseline X30: real200-run census tasks3/fds4/workers1 unchanged;
 results/linux-x30-minimum-20261008T223319Z-c8818e49/ binds reused RED, review and cleanup.
-Next: publish accepted refusal/retirement checkpoint; implement remaining setup/evidence fault controls.
+Next: read pending metadata via own console; freeze corrected nested02; then remaining faults.
 PublicToolsOnly accepted; disconnect/replay native0 + wrong-marker RED acceptedf2de2fe9….
 20 originals/70 frames; payload125, exact identity stopped and runtime absent.
 Client-death01 failure preserved; corrected02 accepted999cb27f:GREEN0/markerRED/PID stopped.
 Driver-fix02 build0/parser27 accepted by combined review;24 originals/71 frames verified.
 Reused473be314…/c3d91a8…/caf4afaa…;four runtime modes accepted8d1631d7,39files/137frames.
 Monitor-death/grandchild/sentinel+reset accepted c8aee870:27 originals/116frames; no rerun.
-Nested01 infrastructure2 preserved; corrected02 native0/Driver2/RED, metadata4/144/48; 3files/10frames accepted72753515; retirement0/3actors absent accepted746588c9. Windows source03/04 checks
+Nested01 infrastructure2 before Driver: SizeOf overload; correctedae32883d reviewed9ad7, Int32 probe4; layouts pending. Windows source03/04 checks
 are complete with exported originals and exact cleanup. All3 source P2 findings are corrected:
 checked close before clean publication; typed failed-start cleanup report;
 indeterminate overlapped I/O retains its exact buffer/worker/permit.
 Owner2026-10-09 explicitly moved execution to workhorse; actual SSH/VNC console succeeds.
-LLLM console failures preserved; console18 retired; own console19/SSH6001 active. Verify live identities for cleanup.
+LLLM console12/13 SELinux-denied; originals retained. Workhorse console18 terminal124; exact scope retired. Local bounded SSH72438 still alive.
 Output-limit/retirement accepted2e337810:root/child125,64MiB fullhash,16files/60frames; exact30-file retirement0. Native gate OPEN; backend/cfg/metadata/example,
 no_index/native-handle tests and held C# fixture remain unaccepted/unpublished WIP.
 Held-Payload compile on workhorse: exit0,19 original files/54 frames, owner-only before/after.
@@ -57,7 +57,7 @@ Execution host: workhorse. Latest source/evidence checkout remains preserved on 
 Latest human host steering was verified in origin thread01a1101b-e9cc-7a02-a5f6-c5673c302ef3;
 no project builds/tests/servers/proxies or further implementation edits on Laptop.
 Own console10/11/12/13 retired; exact cleanup receipts retained; Codex/CUA untouched.
-No guest QGA; own workhorse console19 uses authenticated SSH, private loopback5909→5900
+No guest QGA; workhorse console18 uses authenticated SSH, private loopback5908→5900
 for native UI control. No Laptop servers or unauthenticated LAN VNC exposure.
 Workhorse VM running; older disk/companions reflink-backed up. LLLM ACPI shutdown requested,
 not confirmed; no forced stop/live disk copy. Fixture02b1/source711 reused for accepted parent/failure slices. Prior migration

@@ -1,14 +1,19 @@
 {
   "fork": "https://github.com/hoppworks/rhai.git",
-  "main": "8b226b24fa24cc8edc9cdcc69126e55b61dd0b3e",
+  "main": "d7350a177b3d1e6c0e82cf7f4a5a706d6034c114",
+  "previous_main": "b1b5e4377c4df944bafa8fe314c5a4002f241eed",
   "atomic_push": true,
+  "remote_heads": [
+    "d7350a177b3d1e6c0e82cf7f4a5a706d6034c114\trefs/heads/main"
+  ],
   "remote_only_main": true,
-  "primary_main_fast_forwarded": false,
-  "owned_reviewed_commits_this_execution": 8,
-  "no_upstream_write": true,
+  "attribution": "hoppworks|daniel@hoppworks.de|hoppworks|daniel@hoppworks.de",
+  "execution_host": "workhorse native; lllm source/integration",
   "active_checkout": "/root/projects/rhai-wayfinder-20261008",
-  "execution_host": "lllm",
-  "active_main_verified": true,
-  "primary_main_note": "Laptop checkout preserved read-only at prior c63; no local mutation under current host boundary.",
-  "latest_package": "Windows custody completion/canonical parser; narrow native success only; full custody OPEN"
+  "latest_package": "Native output-limit/failclosed and exact observer-owned retirement only; full custody OPEN",
+  "combined_review_sha256": "2e3378100364c931c205a0ec36c16c9d1294c281eb7701926273cd4ec095a7fc",
+  "originals": "19 compiler/54frames,16 output/60frames,1 retirement/15frames; all raw serial and inventories secured",
+  "retired": "2 exact guest roots;3 unmounted owned obsolete ISOs; reusable native artifacts retained",
+  "historical_receipt": ".scratch/rhai-wayfinder-replan-20261008/history/fork-publication-before-output-limit-20261009.json",
+  "no_upstream_write": true
 }

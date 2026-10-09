@@ -1,0 +1,19 @@
+{
+  "utc": "2026-10-09T11:18:53.946040+00:00",
+  "exact_retired_images": [
+    {
+      "iso": "/var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/nested-refusal02.iso",
+      "sha256": "e3896662bd0454c5421710dceb67dc7476013f6ab242feee96cb56d44ffa187d",
+      "bytes": 389120
+    },
+    {
+      "iso": "/var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/nested-retire01.iso",
+      "sha256": "a8c7c1ef97848f24e9153708149b05d35cf3e4164b2799dfd5c10c468c0f8d8a",
+      "bytes": 382976,
+      "build_exit": 0,
+      "scope_retired": "/root/.local/share/agent-builds/rhai/nested-retire-media-8e4c138daf81457f9a22840e2d43ee6b"
+    }
+  ],
+  "all_domain_references_absent": true,
+  "preserved": "accepted originals/inputs on LLLM and workhorse; reusable Driver/Runner untouched"
+}

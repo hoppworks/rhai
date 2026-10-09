@@ -1,0 +1,19 @@
+{
+  "id": "rhai-nested-retire01-fccf8c711daf44dd81bb93dc38b825ce",
+  "nonce": "fccf8c711daf44dd81bb93dc38b825ce",
+  "entry_sha256": "41cecd2e534e14e7b5a63577961cb43ec4b6c3221f2d2018e215ae648371c7a6",
+  "expected_sha256": "396a557203a8f56f1e2a67b1760d5fe9f80f852e2e24d501c273af8b95302a8b",
+  "roots": [
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\nested-refusal-8eaf92ee5060484ab71ba657435578ea",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\nested-refusal-33b851a725484c8bb830280181963963"
+  ],
+  "actor_count": 3,
+  "original_files": 4,
+  "source_base": "accepted output-limit01 retirement observer; only exact inventory/ids and explicit empty input guards changed",
+  "review": "pending",
+  "limits_seconds": 150,
+  "utc": "2026-10-09T11:18:06.508851+00:00",
+  "serial_offset": 1323749,
+  "serial_inode": 102529120,
+  "review_sha256": "eb3bb6ae851ec9053c1ff6a5f10afe3a025e2a63f174fbf69ccb6674e91ba6c5"
+}

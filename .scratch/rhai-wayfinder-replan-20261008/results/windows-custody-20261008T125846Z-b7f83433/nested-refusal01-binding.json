@@ -1,0 +1,51 @@
+{
+  "id": "rhai-nested-refusal01-8eaf92ee5060484ab71ba657435578ea",
+  "nonce": "8eaf92ee5060484ab71ba657435578ea",
+  "source_sha256": "50884e9ca927c3ac7fcf8962f9b0c0a1357735dda8f557a4803ee8de285ff39c",
+  "entry_sha256": "ee783f8d1472bdabd4fcf2212d3a80b8d61dadc9482e7af2ace23e996e027790",
+  "native_started": true,
+  "criterion_accepted": false,
+  "bounds": {
+    "observer_seconds": 30,
+    "export_seconds": 30,
+    "files": 3,
+    "export_bytes": 65536,
+    "diagnostic_chars_per_channel": 16384
+  },
+  "reuse": "Unchanged accepted Drivercaf4/Runnerc3d; no compiler",
+  "contract": "Real child native ambient-job refusal, wrong expected success RED, exact child PID+creation/membership/exit2, exact own job owner-only before release; protected input/private runtime/parentenv/cwd unchanged.",
+  "capacity_observation": {
+    "utc": "2026-10-09T10:43:59.982421+00:00",
+    "guest_free_memory_kib": 5397644,
+    "guest_free_disk_bytes": 74521600000,
+    "source": "Fresh native Get-CimInstance/Get-PSDrive console readback; sample, not reservation",
+    "job_memory_bytes": 2147483648,
+    "hard_guest_memory_reserve_bytes": 1073741824,
+    "guest_disk_reserve_bytes": 2147483648,
+    "additional_data_peak_estimate_bytes": 262144
+  },
+  "prelaunch_correction": "P2 diagnostic prefixes now saved on all failed paths with finite finaldrain, truthful worker/exit state. Native attempts0.",
+  "observer_exit": 2,
+  "native_driver_runs": 0,
+  "cause": "PowerShell chose Marshal.SizeOf(object), treating RuntimeType as struct; failed before SetLimits/selfassignment/driverStart.",
+  "original_files": 1,
+  "frames": 6,
+  "raw_serial_bytes": 4582,
+  "correction_source_sha256": "ae32883d25de43797d048258b3bc836d80b47f182383af99063358e90ba211e8",
+  "correction_review_sha256": "9ad7c794e419d9a03cfb4333fd733cb2b7fdbe638624e12b9e1b0ad3519953f9",
+  "cheap_metadata_observation": {
+    "int32_size": 4,
+    "route": "Native fresh own PowerShell; exact Marshal.SizeOf(Type) MethodInfo.Invoke; visible output4 and returned prompt",
+    "utc": "2026-10-09T11:04:16.435601+00:00",
+    "job_created": false,
+    "driver_launched": false,
+    "actual_driver_struct_sizes": "Command delivered near console18 expiry; current result unconfirmed, inspect on next own connection rather than claim or restart."
+  },
+  "resources": {
+    "obsolete_iso_retired": true,
+    "own_console18_terminal": 124,
+    "console18_scope_retired": true,
+    "guest_diagnostic_root_retained": "nested-refusal-8eaf92ee5060484ab71ba657435578ea; one observer original hash9a6eb1570ade1273c4e5924e47c84ce3743f8b199d811dfb111b4978f1daf511",
+    "reusable_driver_runner_retained": true
+  }
+}

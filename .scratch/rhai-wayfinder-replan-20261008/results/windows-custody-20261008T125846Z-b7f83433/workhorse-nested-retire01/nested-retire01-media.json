@@ -1,0 +1,7 @@
+{
+  "iso": "/var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/nested-retire01.iso",
+  "sha256": "a8c7c1ef97848f24e9153708149b05d35cf3e4164b2799dfd5c10c468c0f8d8a",
+  "bytes": 382976,
+  "build_exit": 0,
+  "scope_retired": "/root/.local/share/agent-builds/rhai/nested-retire-media-8e4c138daf81457f9a22840e2d43ee6b"
+}

@@ -1,0 +1,11 @@
+{
+  "id": "rhai-nested-refusal01-8eaf92ee5060484ab71ba657435578ea",
+  "utc": "2026-10-09T10:51:39.500776+00:00",
+  "serial_offset": 1315321,
+  "serial_inode": 102529120,
+  "entry_sha256": "ee783f8d1472bdabd4fcf2212d3a80b8d61dadc9482e7af2ace23e996e027790",
+  "source_sha256": "50884e9ca927c3ac7fcf8962f9b0c0a1357735dda8f557a4803ee8de285ff39c",
+  "review_sha256": "ba3346e6bd09c0e81f66d84687ca79a6444789dff2f4c4461d4031d4b50f592f",
+  "maximum_seconds": 63,
+  "native_attempts": 1
+}

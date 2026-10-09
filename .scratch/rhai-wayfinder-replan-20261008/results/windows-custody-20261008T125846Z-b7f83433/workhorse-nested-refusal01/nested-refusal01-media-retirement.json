@@ -1,0 +1,8 @@
+{
+  "utc": "2026-10-09T11:02:28.296520+00:00",
+  "iso": "/var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/nested-refusal01.iso",
+  "sha256": "7e4aeb7ab8826fe619b61afc773ac14d09d009ab9b3f324c7e448f0f4a99a69d",
+  "absent": true,
+  "originals_secured": true,
+  "retained_native_driver_and_runner": true
+}

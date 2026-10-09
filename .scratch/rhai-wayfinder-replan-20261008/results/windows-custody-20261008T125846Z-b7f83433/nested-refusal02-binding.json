@@ -1,0 +1,16 @@
+{
+  "nonce": "33b851a725484c8bb830280181963963",
+  "id": "rhai-nested-refusal02-33b851a725484c8bb830280181963963",
+  "entry_sha256": "be373768d7acfe96a7a0f46b4ea9a53c8208cecfcb36e4db8506b19d13c4d11f",
+  "source_sha256": "ae32883d25de43797d048258b3bc836d80b47f182383af99063358e90ba211e8",
+  "metadata_sha256": "8be7e07d952bdb590dcdf4df8419bc786b32f4b52577603690f529c687e7a41f",
+  "native_started": true,
+  "source_review": "9ad7c794e419d9a03cfb4333fd733cb2b7fdbe638624e12b9e1b0ad3519953f9",
+  "previous_cause": "Native01 pre-Driver Marshal overload failure, originals preserved; long UI-only layout query malformed/unexecuted. Short metadata.ps1 avoids long keyboard input.",
+  "native_terminal": true,
+  "native_exit": 0,
+  "accepted_scope": "Native Driver ambient-job refusal only",
+  "evidence": "workhorse-nested-refusal02",
+  "retirement": "workhorse-nested-retire01",
+  "review_sha256": "72753515d1e811ea8df7c69a813a6b095146d23e47ba2b456b5448522dae6a71"
+}

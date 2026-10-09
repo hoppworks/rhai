@@ -1,0 +1,26 @@
+{
+  "frames": 6,
+  "files": {
+    "observer.json": {
+      "path": "observer.json",
+      "sha256": "9a6eb1570ade1273c4e5924e47c84ce3743f8b199d811dfb111b4978f1daf511",
+      "length": 1774
+    }
+  },
+  "complete": true,
+  "begin": {
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\nested-refusal-8eaf92ee5060484ab71ba657435578ea",
+    "accepted": false,
+    "full_record": "observer.json",
+    "id": "rhai-nested-refusal01-8eaf92ee5060484ab71ba657435578ea",
+    "exit": 2
+  },
+  "end": {
+    "id": "rhai-nested-refusal01-8eaf92ee5060484ab71ba657435578ea",
+    "driver_launched": false,
+    "files": 1,
+    "accepted": false,
+    "exit": 2,
+    "guest_evidence_retained": true
+  }
+}
