@@ -1,0 +1,12 @@
+Darwin Daniels-MBP-2.fritz.box 27.0.0 Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:59 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8142 arm64
+ProductName:		macOS
+ProductVersion:		27.0.1
+BuildVersion:		26A434
+rustc 1.77.2 (25ef9e3d8 2024-04-09)
+binary: rustc
+commit-hash: 25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04
+commit-date: 2024-04-09
+host: aarch64-apple-darwin
+release: 1.77.2
+LLVM version: 17.0.6
+cargo 1.77.2 (e52e36006 2024-03-26)

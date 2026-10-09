@@ -1,0 +1,192 @@
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: unused variable: `ctx`
+   --> src/packages/sys/fs.rs:566:36
+    |
+566 |     .set_into_module(module, move |ctx: NativeCallContext, file: FileHandle| -> Res<String> {
+    |                                    ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: unused variable: `ctx`
+   --> src/packages/sys/fs.rs:591:36
+    |
+591 |     .set_into_module(module, move |ctx: NativeCallContext, file: FileHandle, len: INT| -> Res<String> {
+    |                                    ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/sys/fs.rs:619:40
+    |
+619 |         .set_into_module(module, move |ctx: NativeCallContext, file: FileHandle| -> Res<crate::Blob> {
+    |                                        ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/sys/fs.rs:636:40
+    |
+636 |         .set_into_module(module, move |ctx: NativeCallContext, file: FileHandle, len: INT| -> Res<crate::Blob> {
+    |                                        ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:678:13
+    |
+678 |         let mut wait_operation = "wait for child";
+    |             ----^^^^^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` on by default
+
+warning: unused variable: `termination`
+    --> src/packages/sys/process/unix.rs:1118:22
+     |
+1118 |                 let (termination, _operation) = if self.managed {
+     |                      ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_termination`
+
+warning: unused variable: `faults`
+    --> src/packages/sys/process/unix.rs:2301:13
+     |
+2301 |     let mut faults = ExecutionFaults::take_for_execution();
+     |             ^^^^^^ help: if this is intentional, prefix it with an underscore: `_faults`
+
+warning: unused variable: `ctx`
+    --> src/packages/sys/process/unix.rs:2269:5
+     |
+2269 |     ctx: &NativeCallContext,
+     |     ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2301:9
+     |
+2301 |     let mut faults = ExecutionFaults::take_for_execution();
+     |         ----^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2378:9
+     |
+2378 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: unused variable: `ctx`
+    --> src/packages/sys/process/unix.rs:2420:5
+     |
+2420 |     ctx: &NativeCallContext,
+     |     ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2721:9
+     |
+2721 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: methods `numeric_operations_probe`, `quarantine_observations_probe`, and `fail_reservation` are never used
+    --> src/packages/sys/process/unix.rs:1549:8
+     |
+1422 | impl ExecutionFaults {
+     | -------------------- methods in this implementation
+...
+1549 |     fn numeric_operations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1560 |     fn quarantine_observations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1585 |     fn fail_reservation(&self) -> bool {
+     |        ^^^^^^^^^^^^^^^^
+     |
+     = note: `#[warn(dead_code)]` on by default
+
+warning: `rhai` (lib) generated 14 warnings (run `cargo fix --lib -p rhai` to apply 12 suggestions)
+   Compiling rhai v1.26.1 (/Users/hoppworks/.local/share/agent-builds/rhai/ticket03-x25-unchecked-darwin-20261010T001500Z/agent-build-x7w5yu6o/source)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:1210:9
+     |
+1210 |     let mut holder = command.spawn().expect("start escaped captured-pipe holder");
+     |         ----^^^^^^
+     |         |
+     |         help: remove this `mut`
+     |
+     = note: `#[warn(unused_mut)]` on by default
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:6185:9
+     |
+6185 |     let mut engine = engine(config);
+     |         ----^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: constant `DIRECT_DROP_RECORD_ENV` is never used
+  --> tests/sys_process.rs:40:7
+   |
+40 | const DIRECT_DROP_RECORD_ENV: &str = "RHAI_SYS_DIRECT_DROP_RECORD";
+   |       ^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: function `valid_child_success_map` is never used
+    --> tests/sys_process.rs:5205:4
+     |
+5205 | fn valid_child_success_map(value: &Dynamic) -> bool {
+     |    ^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: unused `Dynamic` that must be used
+   --> tests/fixtures/sys_process_shared_child_contract.rs:260:5
+    |
+260 |     engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("kill after completion is idempotent");
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` on by default
+help: use `let _ = ...` to ignore the resulting value
+    |
+260 |     let _ = engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("kill after completion is idempotent");
+    |     +++++++
+
+warning: unused `Dynamic` that must be used
+   --> tests/fixtures/sys_process_shared_child_contract.rs:261:5
+    |
+261 |     engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("repeated kill after completion is idempotent");
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+help: use `let _ = ...` to ignore the resulting value
+    |
+261 |     let _ = engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("repeated kill after completion is idempotent");
+    |     +++++++
+
+warning: `rhai` (test "sys_process") generated 6 warnings (run `cargo fix --test "sys_process"` to apply 2 suggestions)
+    Finished test [unoptimized + debuginfo] target(s) in 0.79s
+     Running tests/sys_process.rs (/Users/hoppworks/.local/share/agent-builds/rhai/ticket03-x25-unchecked-darwin-20261010T001500Z/agent-build-x7w5yu6o/target/debug/deps/sys_process-d50e9b1323328202)
+
+running 1 test
+managed_spawn_kill_started root=/Users/hoppworks/.local/share/agent-builds/rhai/ticket03-x25-unchecked-darwin-20261010T001500Z/agent-build-x7w5yu6o/tmp/rhai-sys-test-48253-managed_spawn_kill_stops_leader_worker_leaf_and_preserves_sentinel-0 test_pid=48253 sentinel_pid=48257 sentinel_pgid=48257 leader=48258 worker=48259 leaf=48260 group=48258
+managed_spawn_kill leader=48258 leader_esrch=true worker=48259 worker_esrch=true leaf=48260 leaf_esrch=true all_esrch=true sentinel=48257 live=true wait_returned=true
+managed-scope sentinel_cleanup pid=48257 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(48259) worker_esrch=true leaf_pid=Some(48260) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(48258) leader_esrch=true
+test managed_spawn_kill_stops_leader_worker_leaf_and_preserves_sentinel ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 46 filtered out; finished in 0.05s
+

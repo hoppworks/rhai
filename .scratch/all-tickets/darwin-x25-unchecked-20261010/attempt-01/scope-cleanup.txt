@@ -1,0 +1,1 @@
+rmdir and absence readback passed for exact scope: /Users/hoppworks/.local/share/agent-builds/rhai/ticket03-x25-unchecked-darwin-20261010T001500Z

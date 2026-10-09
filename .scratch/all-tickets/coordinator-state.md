@@ -1,6 +1,6 @@
 # Current coordinator state
 
-**Next action:** Run the exact Darwin X25 managed `spawn`/`kill`/bounded-`wait` leader-worker-leaf/sentinel contract under `testing-environ,sys,unchecked`, using one scoped RED/GREEN invocation. Darwin X24 base/`unchecked` and X27 managed final-drop base rows are accepted. Native Windows remains gated on guest process-tree custody.
+**Next action:** Continue Package B at the next uncovered native process criterion using the X25–X38 applicability rows; reuse accepted Linux/Workhorse evidence. Darwin X24 base/`unchecked`, X25 base/`unchecked`, and X27 managed final-drop base rows are accepted. Native Windows remains gated on guest process-tree custody.
 
 **Authority:** Autonomous strict implementation is authorized. Publish only to `https://github.com/hoppworks/rhai.git` `main`; never write to public upstream. Commit author and committer names must be lowercase `hoppworks`. Preserve foreign and dirty work.
 
@@ -19,6 +19,8 @@
 **Accepted Darwin X24 unchecked:** Exact test/profile `testing-environ,sys,unchecked`, same lock/product source. One scoped invocation produced assertion RED101 and restored GREEN1/1 with PID/reaping readback; combined review PASS; exact scope retired, no cache. Proof: `x24-darwin-unchecked-rust177-20261009/proof.md` and `attempt-01/`.
 
 **Accepted Darwin X27 managed final-drop base row:** `managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not`, `testing-environ,sys`, Rust/Cargo1.77.2: inverted all-gone assertion RED101; restored GREEN0 proves nonfinal liveness, final leader/worker/leaf ESRCH, sentinel live then reaped. Combined review PASS; scope retired, no cache. Proof/logs: `darwin-x27-managed-final-drop-20261009/attempt-01/`.
+
+**Accepted Darwin X25 unchecked:** `managed_spawn_kill_stops_leader_worker_leaf_and_preserves_sentinel`, `testing-environ,sys,unchecked`, Rust/Cargo1.77.2: assertion RED101/GREEN0, exact managed members ESRCH, bounded wait, sentinel alive at API return then reaped. Combined review PASS; exact scope retired, no cache. Proof: `darwin-x25-unchecked-20261010/attempt-01/`.
 
 **Product state:** Unix stdin pumping preserves first I/O cause and maps pending-byte zero writes to `WriteZero`; fix at `0c6c51b98f57cb2e3ca3c8a56a64ea84f93981e3`, published on fork main. Combined Standards/Spec review passed. This does not close Ticket03 or A–F.
 
