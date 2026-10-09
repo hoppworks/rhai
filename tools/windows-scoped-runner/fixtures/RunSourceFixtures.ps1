@@ -4,6 +4,7 @@ param(
     [switch] $SetupFailureControl,
     [switch] $BuildOnly,
     [switch] $CompilerClosureOnly,
+    [switch] $MonitorDeathFixtureOnly,
     [switch] $DriverOnly,
     [switch] $PublicToolsOnly,
     [switch] $DriverParserFixture,
@@ -11,6 +12,9 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+if ($MonitorDeathFixtureOnly -and (!$BuildOnly -or $CompilerClosureOnly -or $DriverParserFixture -or $SetupFailureControl -or $DriverOnly -or $PublicToolsOnly)) {
+    throw 'MonitorDeathFixtureOnly requires BuildOnly without other diagnostic selections.'
+}
 if ($CompilerClosureOnly -and (!$BuildOnly -or $DriverParserFixture -or $SetupFailureControl -or $DriverOnly -or $PublicToolsOnly)) {
     throw 'CompilerClosureOnly requires BuildOnly without other diagnostic selections.'
 }
@@ -53,12 +57,14 @@ $expected = @{
 $expected['tools/windows-scoped-runner/MonitorAcceptanceDriver.cs'] = '016c313d545b52df233f0e9607e3b21fa23d9abe7183f89bbac5cc569ab44555'
 $expected['tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs'] = '8f43d33928262ae181aa5396feffef9b0260653609b5be8b01da7b0a7e7b00f7'
 if ($DriverParserFixture) { $expected['tools/windows-scoped-runner/fixtures/MonitorAcceptanceDriverFixture.cs'] = 'e27fa58588b1988ec0085ac4ec0379f686e5dd48254cd559f5278c057851f054' }
+if ($MonitorDeathFixtureOnly) { $expected['tools/windows-scoped-runner/fixtures/MonitorDeathFixture.cs'] = '08b6f9c8bd510e66a6e3cb1b34c07f3d0bbccf7af1d3fde4de67cbe0bbff0ab8' }
 if ($BuildOnly) {
     foreach ($relative in @($expected.Keys)) {
         if ($relative -like '*/fixtures/*' -and $relative -ne 'tools/windows-scoped-runner/fixtures/PayloadFixture.cs' -and
             $relative -ne 'tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs' -and
             $relative -ne 'tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs' -and
-            !($DriverParserFixture -and $relative -eq 'tools/windows-scoped-runner/fixtures/MonitorAcceptanceDriverFixture.cs')) {
+            !($DriverParserFixture -and $relative -eq 'tools/windows-scoped-runner/fixtures/MonitorAcceptanceDriverFixture.cs') -and
+            !($MonitorDeathFixtureOnly -and $relative -eq 'tools/windows-scoped-runner/fixtures/MonitorDeathFixture.cs')) {
             $expected.Remove($relative)
         }
     }
@@ -580,7 +586,7 @@ if (!$SetupFailureControl) { Test-OwnedProcessExitCodes $childPowerShell }
         'MonitorStagingHandoff.cs','MonitorTransport.cs','ScopedRunner.cs','SpecificationTransfer.cs','WindowsCustodyBackend.cs'
     ) | ForEach-Object { Join-Path $expectedRoot ('tools/windows-scoped-runner/' + $_) }
     $allProduction = @($production)
-    if ($BuildOnly -and !$CompilerClosureOnly -and !$DriverOnly -and !$PublicToolsOnly) {
+    if ($BuildOnly -and !$CompilerClosureOnly -and !$DriverOnly -and !$PublicToolsOnly -and !$MonitorDeathFixtureOnly) {
         $policySource = Join-Path $expectedRoot 'tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs'
         $policyExe = Join-Path $buildRoot 'NativeScopePolicyFixture.exe'
         Invoke-OwnedProcess $compiler (@('/target:exe','/main:NativeScopePolicyFixture',('/out:'+$policyExe)) + $allProduction + @($policySource)) 'compile-native-scope-policy' 180
@@ -601,7 +607,7 @@ if (!$SetupFailureControl) { Test-OwnedProcessExitCodes $childPowerShell }
     }
     $runner = Join-Path $buildRoot 'ScopedRunner.exe'
     if ($PublicToolsOnly) { Save-OwnedJobMembers 'before-public-tools-compiler' }
-    if (!$CompilerClosureOnly -and !$DriverOnly) { Invoke-OwnedProcess $compiler (@('/target:exe','/main:ScopedRunner',('/out:'+$runner)) + $allProduction) 'compile-production-runner' 180 }
+    if (!$CompilerClosureOnly -and !$DriverOnly -and !$MonitorDeathFixtureOnly) { Invoke-OwnedProcess $compiler (@('/target:exe','/main:ScopedRunner',('/out:'+$runner)) + $allProduction) 'compile-production-runner' 180 }
 
     if ($PublicToolsOnly) { Save-OwnedJobMembers 'after-exact-runner-compiler-exit' }
 
@@ -624,7 +630,7 @@ if (!$SetupFailureControl) { Test-OwnedProcessExitCodes $childPowerShell }
         $exe = Join-Path $buildRoot ($case.Name + '.exe')
         Invoke-OwnedProcess $compiler (@('/target:exe','/define:SCOPED_RUNNER_TESTING',('/main:'+$case.Name),('/out:'+$exe)) + $allProduction + $fixtureSources) ('compile-' + $case.Name) 180
     }
-    if ($BuildOnly -and !$CompilerClosureOnly) {
+    if ($BuildOnly -and !$CompilerClosureOnly -and !$MonitorDeathFixtureOnly) {
         $driverSource = Join-Path $expectedRoot 'tools/windows-scoped-runner/MonitorAcceptanceDriver.cs'
         $driverExe = Join-Path $buildRoot 'MonitorAcceptanceDriver.exe'
         Invoke-OwnedProcess $compiler (@('/target:exe','/main:MonitorAcceptanceDriver',('/out:'+$driverExe)) + $allProduction + @($driverSource)) 'compile-native-driver' 180
@@ -640,8 +646,16 @@ if (!$SetupFailureControl) { Test-OwnedProcessExitCodes $childPowerShell }
     $payloadSource = Join-Path $expectedRoot 'tools/windows-scoped-runner/fixtures/PayloadFixture.cs'
     $payloadExe = Join-Path $buildRoot 'PayloadFixture.exe'
     if ($CompilerClosureOnly) { Save-OwnedJobMembers 'before-compiler' }
-    if (!$DriverOnly -and !$PublicToolsOnly) { Invoke-OwnedProcess $compiler @('/target:exe','/main:PayloadFixture',('/out:'+$payloadExe),$payloadSource) 'compile-PayloadFixture' 180 }
+    if (!$DriverOnly -and !$PublicToolsOnly -and !$MonitorDeathFixtureOnly) { Invoke-OwnedProcess $compiler @('/target:exe','/main:PayloadFixture',('/out:'+$payloadExe),$payloadSource) 'compile-PayloadFixture' 180 }
     if ($CompilerClosureOnly) { Save-OwnedJobMembers 'after-exact-compiler-exit' }
+
+    if ($MonitorDeathFixtureOnly) {
+        Save-OwnedJobMembers 'before-monitor-fixture-compiler'
+        $deathSource = Join-Path $expectedRoot 'tools/windows-scoped-runner/fixtures/MonitorDeathFixture.cs'
+        $deathExe = Join-Path $buildRoot 'MonitorDeathFixture.exe'
+        Invoke-OwnedProcess $compiler @('/target:exe','/main:MonitorDeathFixture',('/out:'+$deathExe),$deathSource) 'compile-MonitorDeathFixture' 180
+        Save-OwnedJobMembers 'after-exact-monitor-fixture-compiler-exit'
+    }
 
     foreach ($case in $fixtureCases) {
         $exe = Join-Path $buildRoot ($case.Name + '.exe')

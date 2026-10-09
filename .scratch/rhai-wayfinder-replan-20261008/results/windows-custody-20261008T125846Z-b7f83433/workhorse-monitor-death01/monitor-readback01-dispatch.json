@@ -1,0 +1,10 @@
+{
+  "id": "rhai-monitor-readback-3e39cbc7bc1a4710a2d6f1acdf83b61c",
+  "entry_sha256": "d0a505dc2d8d400979572f32c8be2ad12ab944802fe59da589bfcd4826abe337",
+  "source_review": "b19575ee5198b36a7c5911d9b320b21c3869af051456b518d28e7fb9ae519c1e",
+  "serial_inode": 102529120,
+  "serial_offset": 1035507,
+  "prepared_at": 1791533411.7998843,
+  "execution_started": true,
+  "control_rerun": false
+}

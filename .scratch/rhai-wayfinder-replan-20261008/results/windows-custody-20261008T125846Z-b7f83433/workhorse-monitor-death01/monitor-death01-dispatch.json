@@ -1,0 +1,27 @@
+{
+  "id": "rhai-monitor-death01-db023375475c485f8ed6ea9a8e8f3f6c",
+  "observer_sha256": "83d87c752338585a51db453712ab4eb918b216405ee6b2dad6c618fb3003ec0a",
+  "entry_sha256": "0a666fe8f098fe32bc3558bf78bc7c31057dbabe90070f0cfa545ac4ac0d7e1a",
+  "fixture_binary_sha256": "b82e73f128b024cd0f4bb4bd5eb866456e55963eabe5d30cfdbea8b773d81c65",
+  "source_review_required_before_execution": true,
+  "execution_started": true,
+  "guest_free_ram_kib_observed": 5481136,
+  "guest_free_disk_bytes_observed": 74536927232,
+  "unchanged_builds_reused": true,
+  "serial_inode": 102529120,
+  "serial_offset": 929601,
+  "native_entry_hash_visually_verified": true,
+  "dispatch_pending": false,
+  "source_review": "74f8207aa01dd9a08dd2834c193d2906fe81461b703780dacb678ff1d3c0b4f6",
+  "prepared_at": 1791532473.2130044,
+  "limits": {
+    "observer_seconds": 190,
+    "driver_seconds": 180,
+    "fixture_seconds": 120,
+    "export_seconds": 180,
+    "files": 64,
+    "total_bytes": 16777216,
+    "file_bytes": 4194304
+  },
+  "started_at": 1791532495.796352
+}

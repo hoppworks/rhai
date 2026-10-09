@@ -1,0 +1,155 @@
+{
+  "files": {
+    "observer.json": {
+      "path": "observer.json",
+      "sha256": "a927cf18b1c4b6f8bad58ed87efc67fb8bb770bb4f2e98ed1009955d98a3eb20",
+      "length": 2885
+    },
+    "target/bootstrap.stderr": {
+      "path": "target/bootstrap.stderr",
+      "sha256": "632e986024709796535978b45e448e952ed57e8c1c0ebc7b94c67f47271a4524",
+      "length": 377
+    },
+    "target/bootstrap.stdout": {
+      "path": "target/bootstrap.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "target/run/.scoped-run-93ee8c71a012424ca6153a249d7937f8.journal": {
+      "path": "target/run/.scoped-run-93ee8c71a012424ca6153a249d7937f8.journal",
+      "sha256": "9682b8968754c76b2f4c91c804ee24c7c52f94536e7b1765f139f7b003bf1e14",
+      "length": 908
+    },
+    "target/run/scoped-cbccb01bc01346cd8a66654e193371be/fixture.exe": {
+      "path": "target/run/scoped-cbccb01bc01346cd8a66654e193371be/fixture.exe",
+      "sha256": "b82e73f128b024cd0f4bb4bd5eb866456e55963eabe5d30cfdbea8b773d81c65",
+      "length": 9216
+    },
+    "target/run/scoped-cbccb01bc01346cd8a66654e193371be/monitor-witness.child.identity": {
+      "path": "target/run/scoped-cbccb01bc01346cd8a66654e193371be/monitor-witness.child.identity",
+      "sha256": "fbe85df7859a2fb9223c05dddba777bb6e25e8baf87849b664249c7613f0ce0b",
+      "length": 38
+    },
+    "target/run/scoped-cbccb01bc01346cd8a66654e193371be/monitor-witness.child.ready": {
+      "path": "target/run/scoped-cbccb01bc01346cd8a66654e193371be/monitor-witness.child.ready",
+      "sha256": "9ea468d8a8ce7ba674d1b12c6021d6b6f963e55f7afd30bf288cd1d535fa7af3",
+      "length": 12
+    },
+    "target/run/scoped-cbccb01bc01346cd8a66654e193371be/monitor-witness.client": {
+      "path": "target/run/scoped-cbccb01bc01346cd8a66654e193371be/monitor-witness.client",
+      "sha256": "bdf69797da56b3468edd097e8f7f4c5c89e9b8d3e4dec034e42f119cef7b36ab",
+      "length": 38
+    },
+    "target/run/scoped-cbccb01bc01346cd8a66654e193371be/monitor-witness.driver": {
+      "path": "target/run/scoped-cbccb01bc01346cd8a66654e193371be/monitor-witness.driver",
+      "sha256": "e0a48c6b0c0149d9b09b53130f40dea8e940b356b56363ec42bfa0dad4add41c",
+      "length": 38
+    },
+    "target/run/scoped-cbccb01bc01346cd8a66654e193371be/monitor-witness.identity": {
+      "path": "target/run/scoped-cbccb01bc01346cd8a66654e193371be/monitor-witness.identity",
+      "sha256": "507718fa964b46a20838fdb005706a85c5884cef4123a312a0b2c608935ef9d7",
+      "length": 38
+    },
+    "target/run/scoped-cbccb01bc01346cd8a66654e193371be/monitor-witness.monitor": {
+      "path": "target/run/scoped-cbccb01bc01346cd8a66654e193371be/monitor-witness.monitor",
+      "sha256": "5244820ed568d07fb0665700265bbc61b54b48398cf68f7adf1a9f8d550d31dc",
+      "length": 38
+    },
+    "target/run/scoped-cbccb01bc01346cd8a66654e193371be/monitor-witness.ready": {
+      "path": "target/run/scoped-cbccb01bc01346cd8a66654e193371be/monitor-witness.ready",
+      "sha256": "3a559e24a983eca2b8632e108596e45d67d12eab9f5e74519b806e1a28ca83b9",
+      "length": 24
+    },
+    "target/run/.scoped-evidence-cbccb01bc01346cd8a66654e193371be/stderr.log": {
+      "path": "target/run/.scoped-evidence-cbccb01bc01346cd8a66654e193371be/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "target/run/.scoped-evidence-cbccb01bc01346cd8a66654e193371be/stdout.log": {
+      "path": "target/run/.scoped-evidence-cbccb01bc01346cd8a66654e193371be/stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "target/input/fixture.exe": {
+      "path": "target/input/fixture.exe",
+      "sha256": "b82e73f128b024cd0f4bb4bd5eb866456e55963eabe5d30cfdbea8b773d81c65",
+      "length": 9216
+    },
+    "sentinel/bootstrap.stderr": {
+      "path": "sentinel/bootstrap.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "sentinel/bootstrap.stdout": {
+      "path": "sentinel/bootstrap.stdout",
+      "sha256": "ee53b971fa09dee14381ebaa65483a8c6ac2d731d7d854f223c8e3c852451f28",
+      "length": 602
+    },
+    "sentinel/run/.scoped-run-9ac0a16b07dc487c9c0dd32e96d83891.journal": {
+      "path": "sentinel/run/.scoped-run-9ac0a16b07dc487c9c0dd32e96d83891.journal",
+      "sha256": "304d7f01c030aa82486233c367d2cc9de6e0e63db21f28606c283f451a4afb92",
+      "length": 2326
+    },
+    "sentinel/run/.scoped-evidence-d26b448913c244c695b90aef14ec097c/manifest.txt": {
+      "path": "sentinel/run/.scoped-evidence-d26b448913c244c695b90aef14ec097c/manifest.txt",
+      "sha256": "e751041b191e025f58b3ebb09f1e1f10c018d34d530719f02575033d77143a69",
+      "length": 551
+    },
+    "sentinel/run/.scoped-evidence-d26b448913c244c695b90aef14ec097c/stderr.log": {
+      "path": "sentinel/run/.scoped-evidence-d26b448913c244c695b90aef14ec097c/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "sentinel/run/.scoped-evidence-d26b448913c244c695b90aef14ec097c/stdout.log": {
+      "path": "sentinel/run/.scoped-evidence-d26b448913c244c695b90aef14ec097c/stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "sentinel/run/.scoped-evidence-d26b448913c244c695b90aef14ec097c/runtime/fixture.exe": {
+      "path": "sentinel/run/.scoped-evidence-d26b448913c244c695b90aef14ec097c/runtime/fixture.exe",
+      "sha256": "b82e73f128b024cd0f4bb4bd5eb866456e55963eabe5d30cfdbea8b773d81c65",
+      "length": 9216
+    },
+    "sentinel/run/.scoped-evidence-d26b448913c244c695b90aef14ec097c/runtime/sentinel.identity": {
+      "path": "sentinel/run/.scoped-evidence-d26b448913c244c695b90aef14ec097c/runtime/sentinel.identity",
+      "sha256": "8dcd64965cf3feb8cb5fb6a92afe55c227fe3b4cb54716277d6ffc606499c9c6",
+      "length": 38
+    },
+    "sentinel/run/.scoped-evidence-d26b448913c244c695b90aef14ec097c/runtime/sentinel.ready": {
+      "path": "sentinel/run/.scoped-evidence-d26b448913c244c695b90aef14ec097c/runtime/sentinel.ready",
+      "sha256": "9ea468d8a8ce7ba674d1b12c6021d6b6f963e55f7afd30bf288cd1d535fa7af3",
+      "length": 12
+    },
+    "sentinel/input/fixture.exe": {
+      "path": "sentinel/input/fixture.exe",
+      "sha256": "b82e73f128b024cd0f4bb4bd5eb866456e55963eabe5d30cfdbea8b773d81c65",
+      "length": 9216
+    }
+  },
+  "identities": {
+    "sentinel": {
+      "pid": 2688,
+      "creation": 134360132813359578
+    },
+    "driver": {
+      "pid": 7196,
+      "creation": 134360132817534310
+    },
+    "client": {
+      "pid": 9288,
+      "creation": 134360132818240410
+    },
+    "monitor": {
+      "pid": 9900,
+      "creation": 134360132818782882
+    },
+    "payload": {
+      "pid": 6680,
+      "creation": 134360132822529132
+    },
+    "grandchild": {
+      "pid": 3704,
+      "creation": 134360132825761663
+    }
+  }
+}

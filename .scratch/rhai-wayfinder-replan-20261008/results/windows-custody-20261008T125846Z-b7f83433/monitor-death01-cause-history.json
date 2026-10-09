@@ -1,0 +1,25 @@
+{
+  "native_control_attempts": 1,
+  "recovery_export_runs": 1,
+  "new_builds_this_control": 0,
+  "reused_binaries": [
+    "b82e73f1",
+    "caf4afaa",
+    "c3d91a8"
+  ],
+  "first_failure": "Observer fresh ReadAllText opened target stderr while the observer StreamWriter remained open; FileShare.Read rejected the outstanding writer.",
+  "second_failure": "Original full Exception.ToString in BEGIN exceeded the bounded 3500-character frame; full original observer.json remained saved.",
+  "recovery": "Independently reviewed read-only export preserved 25 originals/107 frames with byte-exact hashes; no control rerun.",
+  "observed_before_readout_failure": {
+    "wrong_expectation_red": true,
+    "monitor_killed": true,
+    "target_stopped": true,
+    "sentinel_survived": true
+  },
+  "unclosed": [],
+  "product_defect_claimed": false,
+  "source_fix": "1e866813cfe4b3f1574eced15cc31c86d8c9ef1b52b3d7e6ac325c303eee66a2",
+  "fixed_observer_executed": false,
+  "narrow_criterion_accepted": "c8aee87034bf3345c9fa1fbe087cfd4b24f22a760d71b2909d9e688ab888c252",
+  "full_custody_remains_open": true
+}

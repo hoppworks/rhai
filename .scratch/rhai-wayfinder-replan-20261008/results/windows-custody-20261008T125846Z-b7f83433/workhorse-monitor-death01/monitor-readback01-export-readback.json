@@ -1,0 +1,31 @@
+{
+  "frames": 9,
+  "files": {
+    "after-cleanup.json": {
+      "path": "after-cleanup.json",
+      "sha256": "06e21a59b09dd8503adbad3eb9a3866d68b1332829c36bd9c501b52a49ca5c6f",
+      "length": 1025
+    },
+    "before-cleanup.json": {
+      "path": "before-cleanup.json",
+      "sha256": "3015580fc8768ccbd132103a0c0b95bc78e38028cfbec4a4f10eb1d27774ed03",
+      "length": 993
+    }
+  },
+  "complete": true,
+  "begin": {
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\monitor-readback-3e39cbc7bc1a4710a2d6f1acdf83b61c",
+    "accepted": false,
+    "readback_only": true,
+    "id": "rhai-monitor-readback-3e39cbc7bc1a4710a2d6f1acdf83b61c",
+    "exit": 0
+  },
+  "end": {
+    "id": "rhai-monitor-readback-3e39cbc7bc1a4710a2d6f1acdf83b61c",
+    "driver_launched": true,
+    "files": 2,
+    "accepted": false,
+    "exit": 0,
+    "guest_evidence_retained": true
+  }
+}

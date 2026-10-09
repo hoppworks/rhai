@@ -20,8 +20,9 @@ controls, owner-only job disposition/watchdog drain, and a complete hash-verifie
 24-file host export. The combined review accepts only that compiler prerequisite.
 See [the original proof](../../.scratch/rhai-wayfinder-replan-20261008/results/windows-custody-20261008T125846Z-b7f83433/bootstrap-proof.md). `fixtures/RunSourceFixtures.ps1 -BuildOnly` compiles it without
 launching it inside the compiler job. The native public success path subsequently
-passed with independent evidence-file readback and runtime removal; interruption,
-monitor-death and product-work retirement controls remain open. See
+passed with independent evidence-file readback and runtime removal. Selected
+client/disconnect/replay and monitor-death rows are accepted below; remaining
+fault controls, full custody and product-work retirement remain open. See
 [the current custody evidence](../../.scratch/rhai-wayfinder-replan-20261008/results/windows-custody-20261008T125846Z-b7f83433/custody-progress.md).
 It launches the public `ScopedRunner.exe
 --lease-client`, transfers the canonical immutable `RHAI-LAUNCH/1`
@@ -126,7 +127,7 @@ compiler arguments and original native results are linked in the current custody
 evidence; older checkpoint hashes describe their historical inputs only.
 Current SHA-256 values are
 `MonitorAcceptanceDriver.cs`:
-`dae12f910058773b16eb0eb48ad47ef94edb413aa812d640435a564bc1d31bad`, and
+`016c313d545b52df233f0e9607e3b21fa23d9abe7183f89bbac5cc569ab44555`, and
 `fixtures/MonitorAcceptanceDriverFixture.cs`:
 `e27fa58588b1988ec0085ac4ec0379f686e5dd48254cd559f5278c057851f054`. Retain
 the unique run root, copied sources, runner and driver binaries, fixture result,
@@ -192,7 +193,8 @@ Affected native success02, disconnect-alive02 and replay02 also returned driver 
 with marker assertion controls and runtime-removal readback. Their original
 compiler/source/binary bindings and combined review are recorded under
 `.scratch/rhai-wayfinder-replan-20261008/results/windows-custody-20261008T125846Z-b7f83433/`.
-These narrow cases do not close monitor-death, fault controls or product custody.
+These four driver modes do not close fault controls or product custody.
+A separate monitor-death control is documented below.
 The driver hashes saved manifests and stdout/stderr logs; the backend performs
 complete snapshot/readback, and the independent observer reads fresh payload bytes.
 
@@ -203,8 +205,34 @@ path. Native tiny success, connection loss while the client remains alive,
 exact client death and replayed challenge now pass with their bound artifacts.
 Held negative controls establish a created payload, exact termination125,
 independent payload identity stopped and runtime removal. Absent or contradictory
-termination evidence still fails closed. Residual-child cleanup, monitor death,
-remaining fault controls and Cargo work retirement remain open.
+termination evidence still fails closed. Ordinary-exit residual-child cleanup, remaining fault controls and Cargo work
+retirement remain open.
+
+### Native monitor-death control
+
+The finite input in `fixtures/MonitorDeathFixture.cs` creates a real ordinary
+grandchild and records exact PID/creation identities. Its leaf mode also supplies
+an independent sentinel under a separate monitor. The one native control reused
+the accepted runner/driver and the single-fixture native build, without a new
+Cargo build. A deliberately wrong live-target expectation failed before the
+validated monitor was terminated; the real monitor, payload and grandchild then
+stopped, while the sentinel remained alive and later completed normally at exit126.
+
+The observer encountered a log-sharing error after those assertions. A bounded
+read-only export recovered all25 original files/107 frames without repeating the
+control. The original target driver rejected the incomplete completion grammar
+and refused controller release; neither is a monitor cleanup receipt. A separate
+fresh native readback verified all25 hashes and all6 original process identities
+as absent, verified sentinel runtime absence, and removed only the exact exported
+target runtime. Its2 original records/9 frames preserve before/after custody truth.
+See [the bound original evidence](../../.scratch/rhai-wayfinder-replan-20261008/results/windows-custody-20261008T125846Z-b7f83433/monitor-death-acceptance-20261009.json).
+
+The corrected observer draft has not been executed. Recovery/readback END frames
+inherited an inaccurate `driver_launched=true` field; their original records
+explicitly say export-only/readback-only, and neither launched a driver.
+This accepts only monitor-loss termination, ordinary-grandchild containment,
+sentinel noninterference and observer-owned reset. Full custody, ordinary-exit
+residual children, fault controls and native Rust/Cargo acceptance remain open.
 
 The full Expert02 native set remains required under its one-hour outer bound,
 2 GiB job memory cap,

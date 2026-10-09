@@ -1,0 +1,32 @@
+{
+  "id": "rhai-monitor-fixture01-7204331df0994553a1d4278556ab3210",
+  "tag": "monitor-fixture01",
+  "entry_sha256": "f942c308e31cc4dd1d05374d031ab871b06dd4222c932b0820b448ce8bec7a26",
+  "manifest_sha256": "1c1ea1cfa80072f2d150b3ccee73c1a67afb248068dfdc01672778fc715c5601",
+  "fixture_sha256": "08b6f9c8bd510e66a6e3cb1b34c07f3d0bbccf7af1d3fde4de67cbe0bbff0ab8",
+  "bootstrap_sha256": "568123e2fb6c2f12369a540650082dce8c1f24647d780bdd269727c9cf41d28c",
+  "flags": [
+    "BuildOnly",
+    "MonitorDeathFixtureOnly"
+  ],
+  "native_started": true,
+  "accepted": true,
+  "limits": {
+    "compiler_seconds": 180,
+    "owner_seconds": 900,
+    "observer_seconds": 930,
+    "export_seconds": 180,
+    "files": 64,
+    "total_bytes": 16777216,
+    "file_bytes": 4194304
+  },
+  "retention": "exact own fixture build until dependent monitor-death closure/cancellation or changed source/compiler; no reused production compile",
+  "serial_inode": 102529120,
+  "serial_offset": 905021,
+  "source_review": "3fa2e8d45c3c2aab3231af215ac8a21296c04dbf8da1c8c79c7442534a14467a",
+  "native_entry_hash_visually_verified": true,
+  "recorded_at": 1791531405.8296046,
+  "dispatch_pending": false,
+  "native_exit": 0,
+  "independent_review_sha256": "c1f42b0aa8f914ba4d88e30dadf4ecc47086cfb0775ff7456388d9ecdbef2b2b"
+}

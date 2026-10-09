@@ -1,5 +1,22 @@
 # Windows custody-path progress and original evidence
 
+## Current update — 2026-10-09
+
+Execution is now on the workhorse copy of the same owned VM; the historical host
+statements below describe their original checkpoints. Fork main f69526e4 includes
+the corrected driver and four accepted driver modes. The separate monitor-death
+control reused those binaries and the native single-fixture build. Its real
+monitor/payload/grandchild stop, wrong-expectation RED and independent sentinel
+survival/normal completion are accepted by combined review b19575ee.
+A fresh native readback found all6 original identities absent, verified all25
+exported original hashes and retired only the exact exported target runtime.
+Original log-sharing/export failures and conservative controller-release refusal
+remain preserved; no complete monitor cleanup receipt is claimed. The corrected
+observer draft is unexecuted. [The current binding](monitor-death-acceptance-20261009.json)
+records the2-file/9-frame readback and final combined review c8aee870.
+Full Windows custody, native Rust/Cargo and all87 original requirements remain open.
+
+
 This closes the narrow public success path, not the complete custody prerequisite,
 the Windows process backend, native Cargo acceptance or the whole A–F package.
 The same combined independent review is [custody-review.md](custody-review.md).
