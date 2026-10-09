@@ -1,0 +1,2 @@
+owned_scope_retired=true
+scope=/Users/hoppworks/.local/share/agent-builds/rhai/ticket03-darwin-process-lifecycle-base-20261009T232015Z

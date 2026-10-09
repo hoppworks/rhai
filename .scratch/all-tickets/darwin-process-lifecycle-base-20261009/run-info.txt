@@ -1,0 +1,15 @@
+base_revision=62a238ce6527d6efb838611dfab4b92ec9dc2bbf
+test_source_sha256=a8fdc21e73b56bf12c82603c941b7c22b01c942a56d5f649ff2ec98b494c935c
+fixture_source_sha256=1faf45c57a4fefeaa05683043e064d3485e892887986fef749bedc974230b217
+cargo_lock_sha256=2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425
+host=Daniels-MBP-2.fritz.box
+os=27.0.1
+arch=arm64
+rustc=rustc 1.77.2 (25ef9e3d8 2024-04-09)
+cargo=cargo 1.77.2 (e52e36006 2024-03-26)
+features=testing-environ,sys
+tests=direct_spawn_kill_on_drop_false_preserves_child_and_capture; shared_child_contract::script_throw_drops_and_reaps_a_live_child
+command1=cargo +1.77.2 test --locked --features testing-environ,sys --test sys_process direct_spawn_kill_on_drop_false_preserves_child_and_capture -- --exact --nocapture --test-threads=1
+command2=cargo +1.77.2 test --locked --features testing-environ,sys --test sys_process shared_child_contract::script_throw_drops_and_reaps_a_live_child -- --exact --nocapture --test-threads=1
+runner_timeout_seconds=600
+cargo_build_jobs=2
