@@ -46,7 +46,7 @@ $targetStopped=$false;$observerRemoved=$false;$sentinelCompleted=$false;$targetR
 $observations=[ordered]@{}
 $targetCustodyValidated=$false;$monitor=$null
 $parentReleaseRequested=$false;$targetExitCodes=$null;$normalClosure=$false
-$payloadFailureConfirmed=$false;$wrongPayloadExitRed=$false;$payloadFailureKind='None'
+$payloadFailureConfirmed=$false;$wrongPayloadExitRed=$false
 function Bound{
  if($deadline.Elapsed.TotalSeconds -ge 190){throw 'Monitor-death observer exceeded its 190-second bound.'}
 }
@@ -276,18 +276,9 @@ try{
    if($payloadError.Count -ne 1){throw 'Independent payload failure stderr inventory mismatch.'}
    No-Reparse $payloadError[0].FullName
    $errorText=[IO.File]::ReadAllText($payloadError[0].FullName)
-   $invalidReleaseError=$errorText.Contains('System.IO.InvalidDataException: parent release input mismatch')
-   # A sharing exception at the same exact owned release is also a genuine
-   # payload failure. Preserve its observed kind; do not call it invalid-data validation.
-   $releasePath=Join-Path $targetRuntime 'monitor-witness.release'
-   $releaseSharingError=$errorText.StartsWith('System.IO.IOException: The process cannot access the file ') -and
-    $errorText.Contains(("'"+$releasePath+"'")) -and
-    $errorText.Contains('because it is being used by another process.') -and
-    $errorText.Contains('at System.IO.File.InternalReadAllText(')
-   if(!$invalidReleaseError -and !$releaseSharingError){
+   if(!$errorText.Contains('System.IO.InvalidDataException: parent release input mismatch')){
     throw 'Independent real payload exception readback missing.'
    }
-   $payloadFailureKind=if($invalidReleaseError){'InvalidReleaseData'}else{'ReleaseSharingIOException'}
    $payloadFailureConfirmed=$true
   }
   $normalClosure=$true;$complete=$true;$status=0
@@ -348,7 +339,7 @@ if(!$complete){$status=2}
 $driverWasStarted=@($actors|Where-Object {$_.Started}).Count -gt 0
 $record=[ordered]@{id=$id;scope=$session;exit=$status;accepted=$complete;failure=$failure;driver_launched=$driverWasStarted;
  action=$Action;parent_release_requested=$parentReleaseRequested;target_exit_codes=$targetExitCodes;
- payload_failure_confirmed=$payloadFailureConfirmed;wrong_payload_exit_red=$wrongPayloadExitRed;payload_failure_kind=$payloadFailureKind;
+ payload_failure_confirmed=$payloadFailureConfirmed;wrong_payload_exit_red=$wrongPayloadExitRed;
  monitor_killed=$monitorKilled;wrong_expectation_red=$wrongExpectationRed;target_stopped=$targetStopped;
  sentinel_survived=$sentinelSurvived;sentinel_completed=$sentinelCompleted;observer_runtime_removed=$observerRemoved;
  monitor_cleanup_receipt_claimed=$normalClosure;target_custody_validated=$targetCustodyValidated;identities=$observations;fixture_sha256=$FixtureSha256;

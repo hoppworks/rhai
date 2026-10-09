@@ -1,0 +1,13 @@
+{
+  "attempt": 1,
+  "native_entry_invoked": true,
+  "native_driver_started": false,
+  "reached_product_assertions": false,
+  "scope_created": false,
+  "error": "Exact fresh private session guard rejected inherited USERPROFILE",
+  "cause": "CUA helper lacked plus mapping: intended Test-Path ($env:USERPROFILE+literal) became environment assignment with equals. USERPROFILE changed only in owned interactive PowerShell environment; guard rejected relative/doubled profile. No fixture/driver/build or external persistent environment mutation occurred.",
+  "fix": "Restore own shell USERPROFILE from independent Windows GetFolderPath(UserProfile), verify exact baseline, avoid concatenation in Test-Path and map plus to shift+equal in own CUA helper. Frozen runner/observer/entry/binaries unchanged.",
+  "classification": "infrastructure before product assertions, not valid RED",
+  "accepted_previous_cases_unchanged": true,
+  "native_driver_run_count": 0
+}

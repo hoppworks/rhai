@@ -1,0 +1,172 @@
+{
+  "frames": 125,
+  "files": {
+    "observer.json": {
+      "path": "observer.json",
+      "sha256": "0d7057a15651b7c9db4d73bd10c2f5447cace0034432d4c3536224a5188455a6",
+      "length": 1198
+    },
+    "monitor-death-evidence/.scoped-run-37a5e4c66f88413386a608d149b9b877.journal": {
+      "path": "monitor-death-evidence/.scoped-run-37a5e4c66f88413386a608d149b9b877.journal",
+      "sha256": "c930d6f8f9828bc1108abd07cad1fafd860ed3f01790c611489884e2780cb293",
+      "length": 2345
+    },
+    "monitor-death-evidence/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/manifest.txt": {
+      "path": "monitor-death-evidence/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/manifest.txt",
+      "sha256": "ab4a77cae602b26749ebb1f1cc6fed6949c052155e34d05081e32367bd978d99",
+      "length": 1570
+    },
+    "monitor-death-evidence/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/stderr.log": {
+      "path": "monitor-death-evidence/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/stderr.log",
+      "sha256": "3b4b72fc49a082a4b2cd5a26e243f3584a50d88a553b0c488ea4506838923957",
+      "length": 1137
+    },
+    "monitor-death-evidence/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/stdout.log": {
+      "path": "monitor-death-evidence/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "monitor-death-evidence/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/fixture.exe": {
+      "path": "monitor-death-evidence/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/fixture.exe",
+      "sha256": "b1c3b284dc443eb187166a52412ce068c981a55e41a970903d9ba8ed58643680",
+      "length": 9728
+    },
+    "monitor-death-evidence/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.child.identity": {
+      "path": "monitor-death-evidence/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.child.identity",
+      "sha256": "9c5009bc85addf19eddea75a0a1220a8ef6c02164d95783ce67614a1526c1ad8",
+      "length": 38
+    },
+    "monitor-death-evidence/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.child.ready": {
+      "path": "monitor-death-evidence/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.child.ready",
+      "sha256": "9ea468d8a8ce7ba674d1b12c6021d6b6f963e55f7afd30bf288cd1d535fa7af3",
+      "length": 12
+    },
+    "monitor-death-evidence/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.client": {
+      "path": "monitor-death-evidence/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.client",
+      "sha256": "559276b6d19200b0b5995c18224af2e9f8cbf13976765db395e747a62dea9723",
+      "length": 38
+    },
+    "monitor-death-evidence/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.driver": {
+      "path": "monitor-death-evidence/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.driver",
+      "sha256": "cdc2614557b26906d36412fd2e1a0fec2d9611bbf64718a86b35a0bdc4ee56ce",
+      "length": 38
+    },
+    "monitor-death-evidence/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.identity": {
+      "path": "monitor-death-evidence/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.identity",
+      "sha256": "5cf1bea851d4ec19f15a0d41ba36d6bd191d9a21b1418173c8a8fe3ab2b05c56",
+      "length": 38
+    },
+    "monitor-death-evidence/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.monitor": {
+      "path": "monitor-death-evidence/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.monitor",
+      "sha256": "182a6cf7fcdee33cd78f316dc944ce0d66ae937a1c07e5fca8c798471fac0514",
+      "length": 38
+    },
+    "monitor-death-evidence/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.ready": {
+      "path": "monitor-death-evidence/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.ready",
+      "sha256": "3a559e24a983eca2b8632e108596e45d67d12eab9f5e74519b806e1a28ca83b9",
+      "length": 24
+    },
+    "monitor-death-evidence/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.release": {
+      "path": "monitor-death-evidence/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.release",
+      "sha256": "00c6b75dd27ec248e74d8044d635deb05fcb5900eddb3fff58f7761eeaea50be",
+      "length": 24
+    },
+    "target/bootstrap.stderr": {
+      "path": "target/bootstrap.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "target/bootstrap.stdout": {
+      "path": "target/bootstrap.stdout",
+      "sha256": "0d4b496d8ed507924e640603cda9b5694d32866567d074111b01c56685d654b2",
+      "length": 617
+    },
+    "target/run/.scoped-run-37a5e4c66f88413386a608d149b9b877.journal": {
+      "path": "target/run/.scoped-run-37a5e4c66f88413386a608d149b9b877.journal",
+      "sha256": "c930d6f8f9828bc1108abd07cad1fafd860ed3f01790c611489884e2780cb293",
+      "length": 2345
+    },
+    "target/run/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/manifest.txt": {
+      "path": "target/run/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/manifest.txt",
+      "sha256": "ab4a77cae602b26749ebb1f1cc6fed6949c052155e34d05081e32367bd978d99",
+      "length": 1570
+    },
+    "target/run/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/stderr.log": {
+      "path": "target/run/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/stderr.log",
+      "sha256": "3b4b72fc49a082a4b2cd5a26e243f3584a50d88a553b0c488ea4506838923957",
+      "length": 1137
+    },
+    "target/run/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/stdout.log": {
+      "path": "target/run/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "target/run/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/fixture.exe": {
+      "path": "target/run/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/fixture.exe",
+      "sha256": "b1c3b284dc443eb187166a52412ce068c981a55e41a970903d9ba8ed58643680",
+      "length": 9728
+    },
+    "target/run/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.child.identity": {
+      "path": "target/run/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.child.identity",
+      "sha256": "9c5009bc85addf19eddea75a0a1220a8ef6c02164d95783ce67614a1526c1ad8",
+      "length": 38
+    },
+    "target/run/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.child.ready": {
+      "path": "target/run/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.child.ready",
+      "sha256": "9ea468d8a8ce7ba674d1b12c6021d6b6f963e55f7afd30bf288cd1d535fa7af3",
+      "length": 12
+    },
+    "target/run/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.client": {
+      "path": "target/run/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.client",
+      "sha256": "559276b6d19200b0b5995c18224af2e9f8cbf13976765db395e747a62dea9723",
+      "length": 38
+    },
+    "target/run/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.driver": {
+      "path": "target/run/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.driver",
+      "sha256": "cdc2614557b26906d36412fd2e1a0fec2d9611bbf64718a86b35a0bdc4ee56ce",
+      "length": 38
+    },
+    "target/run/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.identity": {
+      "path": "target/run/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.identity",
+      "sha256": "5cf1bea851d4ec19f15a0d41ba36d6bd191d9a21b1418173c8a8fe3ab2b05c56",
+      "length": 38
+    },
+    "target/run/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.monitor": {
+      "path": "target/run/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.monitor",
+      "sha256": "182a6cf7fcdee33cd78f316dc944ce0d66ae937a1c07e5fca8c798471fac0514",
+      "length": 38
+    },
+    "target/run/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.ready": {
+      "path": "target/run/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.ready",
+      "sha256": "3a559e24a983eca2b8632e108596e45d67d12eab9f5e74519b806e1a28ca83b9",
+      "length": 24
+    },
+    "target/run/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.release": {
+      "path": "target/run/.scoped-evidence-803cac6b2e564408ad3a80e8477ca10b/runtime/monitor-witness.release",
+      "sha256": "00c6b75dd27ec248e74d8044d635deb05fcb5900eddb3fff58f7761eeaea50be",
+      "length": 24
+    },
+    "target/input/fixture.exe": {
+      "path": "target/input/fixture.exe",
+      "sha256": "b1c3b284dc443eb187166a52412ce068c981a55e41a970903d9ba8ed58643680",
+      "length": 9728
+    }
+  },
+  "complete": true,
+  "begin": {
+    "id": "rhai-payload-failure01-export-dcbf2e673c7648f68bf8f45a1cd3fcfd",
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\monitor-payload-failure-d2882f5c40e244ef8bfc3a94c6c8db76",
+    "export_only": true,
+    "accepted": false,
+    "exit": 2,
+    "original_observer_retained": true
+  },
+  "end": {
+    "id": "rhai-payload-failure01-export-dcbf2e673c7648f68bf8f45a1cd3fcfd",
+    "driver_launched": false,
+    "files": 30,
+    "accepted": false,
+    "exit": 2,
+    "guest_evidence_retained": true
+  }
+}

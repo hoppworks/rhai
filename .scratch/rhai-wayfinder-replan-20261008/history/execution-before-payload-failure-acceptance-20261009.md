@@ -4,7 +4,7 @@ Cleaned AGENTS SHA37f95ff6 and Memory reread; build-efficiently1b6e1da/TDD reloa
 Capacity comes from live resources; archived exceptions/PIDs/model mappings confer no authority.
 Accepted Linux1.77.2 baseline X30: real200-run census tasks3/fds4/workers1 unchanged;
 results/linux-x30-minimum-20261008T223319Z-c8818e49/ binds reused RED, review and cleanup.
-Next: output-limit custody fault using retained binaries; payload-failure review dd2f2917 accepted.
+Next: source review then payload-failure01 with fixtureb1/Drivercaf/Runnerc3d; no new build.
 PublicToolsOnly accepted; disconnect/replay native0 + wrong-marker RED acceptedf2de2fe9….
 20 originals/70 frames; payload125, exact identity stopped and runtime absent.
 Client-death01 failure preserved; corrected02 accepted999cb27f:GREEN0/markerRED/PID stopped.
@@ -50,7 +50,7 @@ selector RED/GREEN28-file export; descendant-only exact inherited user/SYSTEM
 ACL RED04/GREEN02 with32 originals, broader World ACL denied and sentinel intact.
 Strict root/staging/evidence ACLs retained; callback/opaque ACEs reject.
 Monitor-death/grandchild/sentinel/reset accepted; full custody remains OPEN:
-Parent-exit accepted37dc3f53; payload failure accepted789196ae:root2/child-1,30files/125frames;
+Parent-exit01 accepted37dc3f53:root0/child125,17files/62frames; remaining custody faults,
 private product work retirement and bounded export. No native Windows Cargo before custody closure.
 Execution host: workhorse. Latest source/evidence checkout remains preserved on LLLM:
 /root/projects/rhai-wayfinder-20261008, fork main (exact receipt in fork-publication.json), plus owned Windows source WIP.
@@ -60,7 +60,7 @@ Own console10/11/12/13 retired; exact cleanup receipts retained; Codex/CUA untou
 No guest QGA; workhorse console17 uses authenticated SSH, private loopback5908→5900
 for native UI control. No Laptop servers or unauthenticated LAN VNC exposure.
 Workhorse VM running; older disk/companions reflink-backed up. LLLM ACPI shutdown requested,
-not confirmed; no forced stop/live disk copy. Fixture02b1/source711 reused for accepted parent/failure slices. Prior migration
+not confirmed; no forced stop/live disk copy. Current fixture02 binaryb1c3b284 is bound to source711813ab; runtime acceptance pending. Prior migration
 preserves exact UUID dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19, disk SHA95e2c28d…,
 249 companions, exact private SecureBoot firmware/NVRAM/TPM. Native guest verifies
 SecureBoot1, RhaiTest non-admin, MSVC14.44/SDK10.0.26100, Rust1.93;1.77.2 absent.

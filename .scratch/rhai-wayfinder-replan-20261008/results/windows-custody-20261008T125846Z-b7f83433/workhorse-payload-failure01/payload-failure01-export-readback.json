@@ -1,0 +1,36 @@
+{
+  "frames": 11,
+  "files": {
+    "observer.json": {
+      "path": "observer.json",
+      "sha256": "0d7057a15651b7c9db4d73bd10c2f5447cace0034432d4c3536224a5188455a6",
+      "length": 1198
+    },
+    "target/bootstrap.stdout": {
+      "path": "target/bootstrap.stdout",
+      "sha256": "0d4b496d8ed507924e640603cda9b5694d32866567d074111b01c56685d654b2",
+      "length": 617
+    },
+    "target/bootstrap.stderr": {
+      "path": "target/bootstrap.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    }
+  },
+  "complete": true,
+  "begin": {
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\monitor-payload-failure-d2882f5c40e244ef8bfc3a94c6c8db76",
+    "accepted": false,
+    "full_record": "observer.json",
+    "id": "rhai-payload-failure01-d2882f5c40e244ef8bfc3a94c6c8db76",
+    "exit": 2
+  },
+  "end": {
+    "id": "rhai-payload-failure01-d2882f5c40e244ef8bfc3a94c6c8db76",
+    "driver_launched": true,
+    "files": 3,
+    "accepted": false,
+    "exit": 2,
+    "guest_evidence_retained": true
+  }
+}

@@ -4,13 +4,13 @@ param(
  [Parameter(Mandatory=$true)][string]$DriverBuild,
  [Parameter(Mandatory=$true)][string]$Session,
  [Parameter(Mandatory=$true)][string]$Id,
- [ValidateSet('monitor-death','parent-exit','payload-failure')][string]$Action='monitor-death'
+ [ValidateSet('monitor-death','parent-exit')][string]$Action='monitor-death'
 )
 $ErrorActionPreference='Stop'
 $id=$Id;$session=[IO.Path]::GetFullPath($Session)
 $private=Join-Path $env:USERPROFILE '.local\share\agent-builds\rhai'
 if([IO.Directory]::GetParent($session).FullName -cne $private -or
- [IO.Path]::GetFileName($session) -notmatch '^monitor-(death|parent-exit|payload-failure)-[0-9a-f]{32}$'){
+ [IO.Path]::GetFileName($session) -notmatch '^monitor-(death|parent-exit)-[0-9a-f]{32}$'){
  throw 'Monitor-death requires its exact fresh private session root.'
 }
 if(Test-Path -LiteralPath $session){throw 'Owned monitor-death session exists; preserve it.'}
@@ -32,8 +32,7 @@ foreach($path in $expected.Keys){
  No-Reparse $path
  if((Get-FileHash -LiteralPath $path).Hash.ToLowerInvariant() -cne $expected[$path]){throw "Retained artifact changed: $path"}
 }
-$normalParentPath=$Action -ne 'monitor-death'
-$roles=if($normalParentPath){@('target')}else{@('target','sentinel')}
+$roles=if($Action -eq 'parent-exit'){@('target')}else{@('target','sentinel')}
 foreach($role in $roles){
  $root=$session+'-'+$role;No-Reparse $root
  if(Test-Path -LiteralPath $root){throw 'Owned actor session exists; preserve it.'}
@@ -46,7 +45,6 @@ $targetStopped=$false;$observerRemoved=$false;$sentinelCompleted=$false;$targetR
 $observations=[ordered]@{}
 $targetCustodyValidated=$false;$monitor=$null
 $parentReleaseRequested=$false;$targetExitCodes=$null;$normalClosure=$false
-$payloadFailureConfirmed=$false;$wrongPayloadExitRed=$false;$payloadFailureKind='None'
 function Bound{
  if($deadline.Elapsed.TotalSeconds -ge 190){throw 'Monitor-death observer exceeded its 190-second bound.'}
 }
@@ -144,9 +142,8 @@ try{
  }
  $sentinel=Identity-Handle (Join-Path $sentinelRuntime 'sentinel.identity') 'sentinel'
  }
- $fixtureArgs=if($normalParentPath){'--parent-exit monitor-witness'}else{'--parent monitor-witness'}
- $expectedPayloadExit=if($Action -eq 'payload-failure'){'00000002'}else{'00000000'}
- $targetActor=Start-Driver 'target' $expectedPayloadExit $fixtureArgs
+ $fixtureArgs=if($Action -eq 'parent-exit'){'--parent-exit monitor-witness'}else{'--parent monitor-witness'}
+ $targetActor=Start-Driver 'target' '00000000' $fixtureArgs
  while(!$targetRuntime){
   Poll-Drivers;if($targetActor.Exited){throw 'Target driver exited before parent/child readiness.'}
   $targetRuntime=Runtime-Ready $targetActor 'monitor-witness' 'parent-and-child-ready'
@@ -180,8 +177,7 @@ try{
   if((Test-Path -LiteralPath $release) -or (Test-Path -LiteralPath ($release+'.pending'))){throw 'Parent release input already exists.'}
   $stream=[IO.FileStream]::new(($release+'.pending'),[IO.FileMode]::CreateNew,[IO.FileAccess]::Write,[IO.FileShare]::None)
   try{
-   $releaseText=if($Action -eq 'payload-failure'){'invalid-parent-release'}else{'exit-parent'}
-   $bytes=[Text.Encoding]::UTF8.GetBytes($releaseText+[char]13+[char]10)
+   $bytes=[Text.Encoding]::UTF8.GetBytes('exit-parent'+[char]13+[char]10)
    $stream.Write($bytes,0,$bytes.Length);$stream.Flush($true)
   }finally{$stream.Dispose()}
   [IO.File]::Move(($release+'.pending'),$release);$parentReleaseRequested=$true
@@ -192,20 +188,8 @@ try{
  Assert-TargetStopped $true;$targetStopped=$true
  if($payload.ExitCode -eq 126 -or $grandchild.ExitCode -eq 126){throw 'Natural expiry cannot prove monitor-death termination.'}
  $targetExitCodes=[ordered]@{payload=[int]$payload.ExitCode;grandchild=[int]$grandchild.ExitCode;client=[int]$client.ExitCode;monitor=[int]$monitor.ExitCode}
- if($normalParentPath){
-  if($Action -eq 'payload-failure'){
-   try{
-    if($payload.ExitCode -ne 0){throw 'Payload exit wrong-expectation assertion mismatch.'}
-   }catch{
-    if($_.Exception.Message -cne 'Payload exit wrong-expectation assertion mismatch.'){throw}
-    $wrongPayloadExitRed=$true
-   }
-   if(!$wrongPayloadExitRed -or $payload.ExitCode -ne 2 -or $grandchild.ExitCode -ne -1){
-    throw 'Controlled payload failure must preserve root2 and exact fixture-owned child kill status minus1.'
-   }
-  }elseif($payload.ExitCode -ne 0 -or $grandchild.ExitCode -ne 125){
-   throw 'Ordinary parent exit must be0 and exact residual-child termination125.'
-  }
+ if($Action -eq 'parent-exit'){
+  if($payload.ExitCode -ne 0 -or $grandchild.ExitCode -ne 125){throw 'Ordinary parent exit must be0 and exact residual-child termination125.'}
  }else{
   $sentinelSurvived=!$sentinel.HasExited
   if(!$sentinelSurvived){throw 'Independent sentinel did not survive target monitor death.'}
@@ -252,7 +236,7 @@ try{
  }else{
   if($targetActor.Status -ne 0){throw 'Ordinary parent-exit driver failed.'}
   $output=[IO.File]::ReadAllText((Join-Path $targetActor.Root 'bootstrap.stdout'))
-  foreach($line in @('CLIENT_EXIT=0x0000004E',('PAYLOAD_EXIT='+$expectedPayloadExit),'SUPERVISION=PayloadExited','CLEANUP_CONFIRMED=True','RUNTIME_REMOVED=True')){
+  foreach($line in @('CLIENT_EXIT=0x0000004E','PAYLOAD_EXIT=00000000','SUPERVISION=PayloadExited','CLEANUP_CONFIRMED=True','RUNTIME_REMOVED=True')){
    if(!$output.Contains($line)){throw 'Ordinary parent-exit completion receipt missing.'}
   }
   if(Test-Path -LiteralPath $targetRuntime){throw 'Ordinary parent-exit runtime remains.'}
@@ -264,32 +248,6 @@ try{
   $identity=$observations['grandchild']
   $expected='pid='+$identity.pid+' creation='+$identity.creation+[char]13+[char]10
   if([IO.File]::ReadAllText($witness[0].FullName) -cne $expected){throw 'Independent residual-child snapshot identity mismatch.'}
-  if($Action -eq 'payload-failure'){
-   $releaseWitness=@(Get-ChildItem -LiteralPath $snapshot -Recurse -File -Filter 'monitor-witness.release')
-   $normalExitWitness=@(Get-ChildItem -LiteralPath $snapshot -Recurse -File -Filter 'monitor-witness.parent-exit')
-   if($releaseWitness.Count -ne 1 -or $normalExitWitness.Count -ne 0){throw 'Payload failure witness inventory mismatch.'}
-   No-Reparse $releaseWitness[0].FullName
-   if([IO.File]::ReadAllText($releaseWitness[0].FullName) -cne ('invalid-parent-release'+[char]13+[char]10)){
-    throw 'Independent payload failure input readback mismatch.'
-   }
-   $payloadError=@(Get-ChildItem -LiteralPath $snapshot -Recurse -File -Filter 'stderr.log')
-   if($payloadError.Count -ne 1){throw 'Independent payload failure stderr inventory mismatch.'}
-   No-Reparse $payloadError[0].FullName
-   $errorText=[IO.File]::ReadAllText($payloadError[0].FullName)
-   $invalidReleaseError=$errorText.Contains('System.IO.InvalidDataException: parent release input mismatch')
-   # A sharing exception at the same exact owned release is also a genuine
-   # payload failure. Preserve its observed kind; do not call it invalid-data validation.
-   $releasePath=Join-Path $targetRuntime 'monitor-witness.release'
-   $releaseSharingError=$errorText.StartsWith('System.IO.IOException: The process cannot access the file ') -and
-    $errorText.Contains(("'"+$releasePath+"'")) -and
-    $errorText.Contains('because it is being used by another process.') -and
-    $errorText.Contains('at System.IO.File.InternalReadAllText(')
-   if(!$invalidReleaseError -and !$releaseSharingError){
-    throw 'Independent real payload exception readback missing.'
-   }
-   $payloadFailureKind=if($invalidReleaseError){'InvalidReleaseData'}else{'ReleaseSharingIOException'}
-   $payloadFailureConfirmed=$true
-  }
   $normalClosure=$true;$complete=$true;$status=0
  }
 }catch{$failure=$_.Exception.ToString()}
@@ -348,7 +306,6 @@ if(!$complete){$status=2}
 $driverWasStarted=@($actors|Where-Object {$_.Started}).Count -gt 0
 $record=[ordered]@{id=$id;scope=$session;exit=$status;accepted=$complete;failure=$failure;driver_launched=$driverWasStarted;
  action=$Action;parent_release_requested=$parentReleaseRequested;target_exit_codes=$targetExitCodes;
- payload_failure_confirmed=$payloadFailureConfirmed;wrong_payload_exit_red=$wrongPayloadExitRed;payload_failure_kind=$payloadFailureKind;
  monitor_killed=$monitorKilled;wrong_expectation_red=$wrongExpectationRed;target_stopped=$targetStopped;
  sentinel_survived=$sentinelSurvived;sentinel_completed=$sentinelCompleted;observer_runtime_removed=$observerRemoved;
  monitor_cleanup_receipt_claimed=$normalClosure;target_custody_validated=$targetCustodyValidated;identities=$observations;fixture_sha256=$FixtureSha256;
