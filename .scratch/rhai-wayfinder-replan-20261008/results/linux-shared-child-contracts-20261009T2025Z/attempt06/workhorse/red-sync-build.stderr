@@ -1,0 +1,5 @@
+ Downloading crates ...
+  Downloaded spin v0.7.2
+   Compiling rhai v1.26.1 (/var/roothome/.local/share/agent-builds/rhai/shared-child-contracts-20261009T1730Z-06/agent-build-yjhj75sd/source)
+   Compiling rhai_codegen v3.2.0 (/var/roothome/.local/share/agent-builds/rhai/shared-child-contracts-20261009T1730Z-06/agent-build-yjhj75sd/source/codegen)
+    Finished test [unoptimized + debuginfo] target(s) in 10.59s

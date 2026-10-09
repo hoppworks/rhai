@@ -1,0 +1,17 @@
+
+running 1 test
+test direct_spawn_try_wait_returns_unit_until_child_exits ... x24_running pid=210438 alive_before_try_wait=true result_is_unit=true
+thread 'direct_spawn_try_wait_returns_unit_until_child_exits' panicked at tests/sys_process.rs:528:5:
+assertion `left == right` failed: RED control: terminal try_wait result must match wrong exit-code expectation
+  left: 0
+ right: 9
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+FAILED
+
+failures:
+
+failures:
+    direct_spawn_try_wait_returns_unit_until_child_exits
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 32 filtered out; finished in 0.02s
+

@@ -1,0 +1,32 @@
+
+running 1 test
+
+running 1 test
+
+running 1 test
+managed_pidfd_acquired pid=2444743 start=8330493 ppid=2444740 pgid=2444743
+managed_pidfd_acquired pid=2444745 start=8330493 ppid=2444743 pgid=2444743
+managed_pidfd_acquired pid=2444747 start=8330493 ppid=2444745 pgid=2444743
+managed_final_drop_live reaper=2444738 reaper_start=8330492 host=2444740 host_start=8330493 leader=2444743 leader_start=8330493 worker=2444745 worker_start=8330493 leaf=2444747 leaf_start=8330493 group=2444743 sentinel=2444737 sentinel_start=8330492 sentinel_pgid=2444737
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.14s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.14s
+
+managed-scope sentinel_cleanup pid=2444737 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_final_drop_boundary nonfinal_preserved=true leader=2444743 leader_start=8330493 leader_record_start_matches_pidfd=true worker=2444745 worker_start=8330493 worker_record_start_matches_pidfd=true leaf=2444747 leaf_start=8330493 leaf_record_start_matches_pidfd=true worker_record_group_matches=true leaf_record_group_matches=true group=2444743 drop_return_recorded=true closure_observed=true exceptional_cleanup_not_started=true leader_absent=true worker_absent=true leaf_absent=true exact_reaped=true host_live_before_drop=true reaper_live_before_drop=true sentinel_live_before_drop=true host_live_through_closure=true reaper_live_through_closure=true sentinel_live_through_closure=true pidfds_exited=true final_members_live=false reaper_ok=true reaper_status=Some(ExitStatus(unix_wait_status(0))) host_absent_after_cleanup=true sentinel_reaped=true group_empty_after_closure=true observation_error=None api="host=2444740 host_start=8330493 final_drop_returned=true nonfinal_wait_unit=true\n" reaped="worker=2444745 start=8330493 pgid=2444743 reaped=true wait_status=9 leaf=2444747 start=8330493 pgid=2444743 reaped=true wait_status=9 complete=true\n" cleanup="pid=2444738 prompt=true host_status=0 worker=2444745 start=8330493 pgid=2444743 reaped=true wait_status=9 leaf=2444747 start=8330493 pgid=2444743 reaped=true wait_status=9 complete=true\n"
+thread 'managed_spawn_final_clone_drop_closes_group_under_fixture_reaper' panicked at tests/sys_process.rs:2619:5:
+RED control: exact members unexpectedly absent after final clone drop
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+managed_fixture_cleanup worker_pid=Some(2444745) worker_esrch=true leaf_pid=Some(2444747) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2444743) leader_esrch=true
+test managed_spawn_final_clone_drop_closes_group_under_fixture_reaper ... FAILED
+
+failures:
+
+failures:
+    managed_spawn_final_clone_drop_closes_group_under_fixture_reaper
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.14s
+

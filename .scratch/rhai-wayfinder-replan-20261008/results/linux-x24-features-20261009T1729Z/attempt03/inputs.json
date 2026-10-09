@@ -1,0 +1,19 @@
+{
+  "package": "Darwin X24 package-minimum baseline",
+  "source_revision": "fe87e3467a8c2f374e680bc1213522c2014f6a9d",
+  "source_archive_sha256": "ae84afaefe73f411d10b10d627f8d6dd9d0ceceeff8cc462c7031505105d8a80",
+  "source_archive_bytes": 145897803,
+  "accepted_lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "test_source_sha256": "86f1142ff1ae8de5a8b813e892e407a90c1bec70eab864c20b7735f53015bf41",
+  "product_process_source_sha256": "090094476662417aa94e2ff519cb8038c1d3721e02be6ec166762502bfbff2e2",
+  "selector_function_sha256": "21db2d7a36f3692ea1c3775fc895707676d2334fcc430d99e0a07051e6547793",
+  "selector_function_boundary": "tests/sys_process.rs lines 462-546 inclusive; 4,880 bytes including final newline",
+  "profile": "testing-environ,sys",
+  "platform": "Darwin arm64 native Mac",
+  "toolchain": "Rust/Cargo 1.77.2",
+  "limits": {
+    "runner_timeout_seconds": 600,
+    "cargo_build_jobs": 2
+  },
+  "source_archive_path": "../attempt02/source.tar.gz"
+}

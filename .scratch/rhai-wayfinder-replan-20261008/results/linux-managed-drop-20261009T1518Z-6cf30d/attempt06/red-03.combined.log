@@ -1,0 +1,22 @@
+
+running 1 test
+test direct_run_returns_with_pipe_closed_worker_live_control ... FAILED
+
+failures:
+
+failures:
+    direct_run_returns_with_pipe_closed_worker_live_control
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.12s
+
+managed_fixture_started root=/root/.local/share/agent-builds/rhai/linux-x35-20261009T1620Z-cd51a2/agent-build-j87fmo9m/tmp/rhai-sys-test-979815-direct_run_returns_with_pipe_closed_worker_live_control-0 test_pid=979815
+managed_pidfd_acquired pid=979819 start=8145982 ppid=979815 pgid=959420
+managed_pidfd_acquired pid=979821 start=8145983 ppid=979819 pgid=959420
+managed_pidfd_acquired pid=979823 start=8145983 ppid=979821 pgid=959420
+thread 'direct_run_returns_with_pipe_closed_worker_live_control' panicked at tests/sys_process.rs:3241:9:
+assertion `left == right` failed: managed member pid=979821 start=8145983 remained live at API return
+  left: 0
+ right: 1
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+managed_fixture_cleanup worker_pid=Some(979821) worker_esrch=true leaf_pid=Some(979823) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(979819) leader_esrch=true

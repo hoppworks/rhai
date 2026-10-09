@@ -1,0 +1,9 @@
+{
+  "source_revision": "ef423a516617e128835d54af16d75f559b2b1bce",
+  "reconstruction": "git archive --format=tar <source_revision> | shasum -a 256",
+  "reconstructed_sha256": "635a59827900b02ad82b0e53499f6b3fb2a5c5233326cac541c88c3e8b61265f",
+  "inputs_json_sha256": "9e266c2428e85c553ae5836a3bdd8509be7830a674b219a6eb10894afe0dd448",
+  "archive_file_retained": false,
+  "reason": "The exact tar stream was regenerated and hash-matched from the source commit; no duplicate archive is needed in this proof bundle.",
+  "result": "source archive hash reproduced exactly from committed Git tree"
+}

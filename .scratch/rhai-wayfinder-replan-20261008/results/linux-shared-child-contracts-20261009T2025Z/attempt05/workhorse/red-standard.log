@@ -1,0 +1,13 @@
+
+running 1 test
+test shared_child_contract::nonfinal_child_clone_drop_keeps_the_real_child_available ... shared-child controller_started scenario=drop_true pid=3643920 root=/root/.local/share/agent-builds/rhai/shared-child-contracts-20261009T1728Z-05/agent-build-_yv4zkhc/shared-child-fixture-3643918-0
+shared-child controller_reaped scenario=drop_true pid=3643920 status=exit status: 0
+shared-child controller_output scenario=drop_true stdout="\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.01s\n\n" stderr="shared-child nonfinal-drop pid=3643923 child_record=ready operational_probe=one\nshared-child final-drop kill_on_drop=true pid=3643923 reap=ESRCH\n"
+shared-child controller_esrch pid=3643920 verified=true
+shared-child outer-observation scenario=drop_true controller_pid=3643920 fixture_pid=3643923 fixture_record="pid=3643923 state=ready" reap=ESRCH verified=true
+shared-child scenario=drop_true controller_pid=3643920 status=ok fixture_record=Some("pid=3643923 state=ready\n")
+shared-child watchdog fixture_closure=verified pid=3643923 reap=ESRCH production_reap=true
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.02s
+

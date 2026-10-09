@@ -1,0 +1,7 @@
+managed_fixture_started root=/root/.local/share/agent-builds/rhai/linux-x35-20261009T1620Z-cd51a2/agent-build-j87fmo9m/tmp/rhai-sys-test-981257-managed_run_closes_worker_after_leader_exit_and_preserves_sentinel-0 test_pid=981257 sentinel_pid=981259
+managed_normal_leader pid=981261 pgid=981261 esrch=true
+managed_normal_worker_leaf worker_pid=981263 worker_esrch=true leaf_pid=981265 leaf_esrch=true
+managed_normal_sentinel pid=981259 live=true
+managed-scope sentinel_cleanup pid=981259 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(981263) worker_esrch=true leaf_pid=Some(981265) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(981261) leader_esrch=true

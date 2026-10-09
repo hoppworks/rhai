@@ -1,0 +1,38 @@
+
+running 1 test
+test shared_child_contract::script_throw_drops_and_reaps_a_live_child ... shared-child controller_started scenario=script_throw_cleanup pid=3227020 root=/root/.local/share/agent-builds/rhai/shared-child-contracts-20261009T1715Z-02/agent-build-cioje82u/shared-child-fixture-3227018-0
+shared-child script-throw release fixture_pid=3227023 state=ready challenge_response=verified pid_present=true
+shared-child controller_reaped scenario=script_throw_cleanup pid=3227020 status=exit status: 101
+shared-child controller_output scenario=script_throw_cleanup stdout="\nrunning 1 test\nF\nfailures:\n\nfailures:\n    shared_child_contract::scenario_entry\n\ntest result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.04s\n\n" stderr="thread 'shared_child_contract::scenario_entry' panicked at tests/fixtures/sys_process_shared_child_contract.rs:352:5:\nunexpected evaluation error; expected \"RED control: expected unrelated Rhai error\": ErrorRuntime(\"intentional Rhai script throw with live child\", 7:9)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\nshared-child controller-panic-cleanup scenario=script_throw_cleanup payload=\"unexpected evaluation error; expected \\\"RED control: expected unrelated Rhai error\\\": ErrorRuntime(\\\"intentional Rhai script throw with live child\\\", 7:9)\" fixture_pid=3227023 reap=ESRCH verified=true\n"
+shared-child controller_esrch pid=3227020 verified=true
+thread 'shared_child_contract::script_throw_drops_and_reaps_a_live_child' panicked at tests/fixtures/sys_process_shared_child_contract.rs:505:17:
+scenario script_throw_cleanup failed (exit status: 101)
+stdout:
+
+running 1 test
+F
+failures:
+
+failures:
+    shared_child_contract::scenario_entry
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.04s
+
+
+stderr:
+thread 'shared_child_contract::scenario_entry' panicked at tests/fixtures/sys_process_shared_child_contract.rs:352:5:
+unexpected evaluation error; expected "RED control: expected unrelated Rhai error": ErrorRuntime("intentional Rhai script throw with live child", 7:9)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+shared-child controller-panic-cleanup scenario=script_throw_cleanup payload="unexpected evaluation error; expected \"RED control: expected unrelated Rhai error\": ErrorRuntime(\"intentional Rhai script throw with live child\", 7:9)" fixture_pid=3227023 reap=ESRCH verified=true
+
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+shared-child watchdog fixture_closure=verified pid=3227023 reap=ESRCH production_reap=true
+FAILED
+
+failures:
+
+failures:
+    shared_child_contract::script_throw_drops_and_reaps_a_live_child
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.05s
+

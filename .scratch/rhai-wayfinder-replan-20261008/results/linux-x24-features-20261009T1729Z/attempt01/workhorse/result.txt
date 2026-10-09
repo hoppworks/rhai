@@ -1,0 +1,10 @@
+source_archive_sha256=68444772248d81587ee19d157c4d49d35a6ba12482233264bba0c622a113f644
+test_source_sha256=86f1142ff1ae8de5a8b813e892e407a90c1bec70eab864c20b7735f53015bf41
+lock_sha256=2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425
+selector=direct_spawn_try_wait_returns_unit_until_child_exits
+profiles=testing-environ,sys,sync; testing-environ,sys,no_float; testing-environ,sys,sync,no_float
+red_status=101 all 3 profiles; wrong expected terminal code9 vs actual0; exact PID ESRCH readback
+restored_test_sha256=86f1142ff1ae8de5a8b813e892e407a90c1bec70eab864c20b7735f53015bf41
+green_status=0 all 3 profiles; terminal try_wait result before wait; cached wait result; exact PID ESRCH
+standard_profile=not rerun; compatible accepted Linux standard proof reused from .scratch/all-tickets/process-try-wait-evidence/x24-try-wait-20261007-1705z-6a92d/attempt-04/proof.md
+scope_runtime=/root/.local/share/agent-builds/rhai/x24-features-20261009T1735Z-01/agent-build-06i2qp8b

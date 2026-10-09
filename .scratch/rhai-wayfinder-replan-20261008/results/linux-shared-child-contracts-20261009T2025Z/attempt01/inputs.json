@@ -1,0 +1,14 @@
+{
+  "package": "Linux shared Child lease, blocked stdin, script-throw and sync-wait contracts",
+  "source_revision": "34e0fa61a3d12fe6c41902c44618ff44e20d73d4",
+  "source_archive_sha256": "68444772248d81587ee19d157c4d49d35a6ba12482233264bba0c622a113f644",
+  "sys_process_test_sha256": "86f1142ff1ae8de5a8b813e892e407a90c1bec70eab864c20b7735f53015bf41",
+  "committed_shared_fixture_sha256": "1faf45c57a4fefeaa05683043e064d3485e892887986fef749bedc974230b217",
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "platform": "Linux x86_64 Workhorse",
+  "toolchain": "Rust/Cargo 1.77.2",
+  "profiles": ["testing-environ,sys", "testing-environ,sys,sync"],
+  "selectors": ["shared_child_contract::spawn_returns_while_large_stdin_is_blocked_and_wait_snapshots_are_stable", "shared_child_contract::nonfinal_child_clone_drop_keeps_the_real_child_available", "shared_child_contract::final_drop_honors_both_kill_on_drop_policies", "shared_child_contract::script_throw_drops_and_reaps_a_live_child", "shared_child_contract::sync_waiter_can_be_cancelled_through_another_shared_child_handle"],
+  "boundaries": {"runner_timeout_seconds": 600, "cargo_build_jobs": 2},
+  "source_policy": "extract accepted committed source archive only; preserve foreign dirty local fixture; mutate private scoped copy; restore source SHA before GREEN"
+}

@@ -1,0 +1,25 @@
+
+running 1 test
+
+running 1 test
+
+running 1 test
+managed_pidfd_acquired pid=2446702 start=8330733 ppid=2446699 pgid=2446702
+managed_pidfd_acquired pid=2446704 start=8330733 ppid=2446702 pgid=2446702
+managed_pidfd_acquired pid=2446706 start=8330734 ppid=2446704 pgid=2446702
+managed_prompt_reap_live_boundary reaper=2446697 reaper_start=8330732 host=2446699 host_start=8330733 leader=2446702 leader_start=8330733 worker=2446704 worker_start=8330733 leaf=2446706 leaf_start=8330734 group=2446702 sentinel=2446696 sentinel_start=8330732
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.22s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.23s
+
+managed-scope sentinel_cleanup pid=2446696 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_prompt_reap_success host=2446699 host_start=8330733 leader=2446702 leader_start=8330733 leader_absent=true worker=2446704 worker_start=8330733 worker_absent=true leaf=2446706 leaf_start=8330734 leaf_absent=true sentinel=2446696 sentinel_start=8330732 sentinel_live_at_return=true sentinel_reaped_after_return=true api_exit_zero_at_return=true captures_complete_at_return=true api=host=2446699 host_start=8330733 api_success=true api_outcome=success_report code=0 exit=Some(0) stdout_complete=true stderr_complete=true cause=none diagnostic=none
+ cleanup="worker=2446704 start=8330733 pgid=2446702 reaped=true wait_status=9 leaf=2446706 start=8330734 pgid=2446702 reaped=true wait_status=9 complete=true\n"
+managed_fixture_cleanup worker_pid=Some(2446704) worker_esrch=true leaf_pid=Some(2446706) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2446702) leader_esrch=true
+test managed_run_succeeds_after_fixture_reaper_reaps_descendants ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.23s
+

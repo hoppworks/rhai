@@ -1,0 +1,31 @@
+
+running 1 test
+
+running 1 test
+
+running 1 test
+managed_pipe_pidfd_acquired pid=2627067 start=8353096 ppid=2627064 pgid=2627067
+managed_pipe_pidfd_acquired pid=2627069 start=8353096 ppid=2627067 pgid=2627061
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 1.03s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 1.03s
+
+managed-scope sentinel_cleanup pid=2627061 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_deadline_escaped_pipe_boundary host=2627064 host_start=8353095 reaper=2627062 reaper_start=8353095 leader=2627067 leader_start=8353096 leader_live=false leader_pidfd_exited=true managed_group=2627067 group_probe=-1 group_errno=3 holder=2627069 holder_start=8353096 holder_group=2627061 holder_live=true holder_pidfd_live=true host_live=true reaper_live=true sentinel=2627061 sentinel_start=8353095 sentinel_group=2627061 sentinel_live=true timeout_report=true partial_capture=true no_watchdog=true
+ api="host=2627064 host_start=8353095 api_success=true api_outcome=timeout_report success=Some(false) timed_out=Some(true) stdout_complete=Some(false) stderr_complete=Some(false) stdout_marker=true stderr_marker=true\n" challenge="pid=2627069 stdout_result=-1 stdout_error=32 stderr_result=-1 stderr_error=32\n" no_watchdog_through_challenge=true holder_reap="holder=2627069 start=8353096 pgid=2627061 reaped=true wait_status=25856\n" reaper_cleanup="pid=2627062 start=8353095 host_status=0 complete=true holder=2627069 start=8353096 pgid=2627061 reaped=true wait_status=25856\n" reaper_ok=true host_absent=true host_absence="not found" leader_absent=true leader_absence="not found" holder_absent=true holder_absence="not found" sentinel_absent=true sentinel_absence="not found" sentinel_group_probe=-1 sentinel_group_errno=3
+thread 'managed_run_deadline_cancels_escaped_pipe_holder_under_fixture_reaper' panicked at tests/sys_process.rs:2917:5:
+RED control: escaped holder unexpectedly observed EPIPE
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+managed_fixture_cleanup worker_pid=None worker_esrch=false leaf_pid=None leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2627067) leader_esrch=true
+test managed_run_deadline_cancels_escaped_pipe_holder_under_fixture_reaper ... FAILED
+
+failures:
+
+failures:
+    managed_run_deadline_cancels_escaped_pipe_holder_under_fixture_reaper
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 60 filtered out; finished in 4.04s
+

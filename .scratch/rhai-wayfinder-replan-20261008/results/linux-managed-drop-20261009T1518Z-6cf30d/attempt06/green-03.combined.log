@@ -1,0 +1,12 @@
+
+running 1 test
+test direct_run_returns_with_pipe_closed_worker_live_control ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.12s
+
+managed_fixture_started root=/root/.local/share/agent-builds/rhai/linux-x35-20261009T1620Z-cd51a2/agent-build-j87fmo9m/tmp/rhai-sys-test-981776-direct_run_returns_with_pipe_closed_worker_live_control-0 test_pid=981776
+managed_pidfd_acquired pid=981780 start=8146194 ppid=981776 pgid=959420
+managed_pidfd_acquired pid=981782 start=8146194 ppid=981780 pgid=959420
+managed_pidfd_acquired pid=981784 start=8146194 ppid=981782 pgid=959420
+managed_fixture_cleanup worker_pid=Some(981782) worker_esrch=true leaf_pid=Some(981784) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(981780) leader_esrch=true

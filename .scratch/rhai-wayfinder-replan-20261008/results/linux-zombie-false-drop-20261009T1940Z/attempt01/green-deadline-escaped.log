@@ -1,0 +1,23 @@
+
+running 1 test
+
+running 1 test
+
+running 1 test
+managed_pipe_pidfd_acquired pid=2633605 start=8353807 ppid=2633602 pgid=2633605
+managed_pipe_pidfd_acquired pid=2633607 start=8353807 ppid=2633605 pgid=2633599
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 1.02s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 1.03s
+
+managed-scope sentinel_cleanup pid=2633599 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_deadline_escaped_pipe_boundary host=2633602 host_start=8353806 reaper=2633600 reaper_start=8353806 leader=2633605 leader_start=8353807 leader_live=false leader_pidfd_exited=true managed_group=2633605 group_probe=-1 group_errno=3 holder=2633607 holder_start=8353807 holder_group=2633599 holder_live=true holder_pidfd_live=true host_live=true reaper_live=true sentinel=2633599 sentinel_start=8353806 sentinel_group=2633599 sentinel_live=true timeout_report=true partial_capture=true no_watchdog=true
+ api="host=2633602 host_start=8353806 api_success=true api_outcome=timeout_report success=Some(false) timed_out=Some(true) stdout_complete=Some(false) stderr_complete=Some(false) stdout_marker=true stderr_marker=true\n" challenge="pid=2633607 stdout_result=-1 stdout_error=32 stderr_result=-1 stderr_error=32\n" no_watchdog_through_challenge=true holder_reap="holder=2633607 start=8353807 pgid=2633599 reaped=true wait_status=25856\n" reaper_cleanup="pid=2633600 start=8353806 host_status=0 complete=true holder=2633607 start=8353807 pgid=2633599 reaped=true wait_status=25856\n" reaper_ok=true host_absent=true host_absence="not found" leader_absent=true leader_absence="not found" holder_absent=true holder_absence="not found" sentinel_absent=true sentinel_absence="not found" sentinel_group_probe=-1 sentinel_group_errno=3
+managed_fixture_cleanup worker_pid=None worker_esrch=false leaf_pid=None leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2633605) leader_esrch=true
+test managed_run_deadline_cancels_escaped_pipe_holder_under_fixture_reaper ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 4.04s
+

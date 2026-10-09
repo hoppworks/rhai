@@ -1,0 +1,6 @@
+red_build=0
+red_test=101
+green_build=0
+green_test=0
+red_reached_after_host_record_and_esrch=true
+green_verified_no_primary_and_preserved_primary=true

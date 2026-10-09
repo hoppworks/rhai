@@ -1,0 +1,20 @@
+2026-10-09T17:39:17Z
+Linux workhorse 7.2.8-ogc5.1.fc44.x86_64 #1 SMP PREEMPT_DYNAMIC Tue Oct  6 18:06:42 UTC 2026 x86_64 GNU/Linux
+               total        used        free      shared  buff/cache   available
+Mem:     98777878528 30152060928 21534011392  2018394112 50024673280 68625817600
+Swap:    17179865088  2028777472 15151087616
+Filesystem          1-blocks          Used    Available Capacity Mounted on
+/dev/nvme0n1p3 1997621166080 1624920186880 335336120320      83% /var/home
+ 19:39:17 up 23:48, 13 users,  load average: 3.09, 2.45, 2.92
+25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e  /var/home/workhorse/projects/agent-skills/tools/run_scoped.py
+usage: run_scoped.py [-h] [--timeout TIMEOUT] ...
+
+Run a build/verification command with automatic cleanup of its private
+runtime.
+
+positional arguments:
+  command
+
+options:
+  -h, --help         show this help message and exit
+  --timeout TIMEOUT

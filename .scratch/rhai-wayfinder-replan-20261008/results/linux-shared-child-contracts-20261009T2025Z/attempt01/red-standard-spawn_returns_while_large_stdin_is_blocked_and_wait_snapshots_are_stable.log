@@ -1,0 +1,40 @@
+
+running 1 test
+test shared_child_contract::spawn_returns_while_large_stdin_is_blocked_and_wait_snapshots_are_stable ... shared-child controller_started scenario=blocked_input_wait_snapshot pid=3118375 root=/root/.local/share/agent-builds/rhai/shared-child-contracts-20261009T2025Z-01/agent-build-uu5iz6t8/shared-child-fixture-3118373-0
+shared-child controller_reaped scenario=blocked_input_wait_snapshot pid=3118375 status=exit status: 101
+shared-child controller_output scenario=blocked_input_wait_snapshot stdout="\nrunning 1 test\nF\nfailures:\n\nfailures:\n    shared_child_contract::scenario_entry\n\ntest result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.17s\n\n" stderr="shared-child blocked-stdin ready pid=3118378 spawn_elapsed_ms=3\nthread 'shared_child_contract::scenario_entry' panicked at tests/fixtures/sys_process_shared_child_contract.rs:244:5:\nassertion `left == right` failed: RED control: blocked-input child exit code unexpectedly matched\n  left: 17\n right: 18\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\nshared-child controller-panic-cleanup scenario=blocked_input_wait_snapshot payload=\"assertion `left == right` failed: RED control: blocked-input child exit code unexpectedly matched\\n  left: 17\\n right: 18\" fixture_pid=3118378 reap=ESRCH verified=true\n"
+shared-child controller_esrch pid=3118375 verified=true
+thread 'shared_child_contract::spawn_returns_while_large_stdin_is_blocked_and_wait_snapshots_are_stable' panicked at tests/fixtures/sys_process_shared_child_contract.rs:505:17:
+scenario blocked_input_wait_snapshot failed (exit status: 101)
+stdout:
+
+running 1 test
+F
+failures:
+
+failures:
+    shared_child_contract::scenario_entry
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.17s
+
+
+stderr:
+shared-child blocked-stdin ready pid=3118378 spawn_elapsed_ms=3
+thread 'shared_child_contract::scenario_entry' panicked at tests/fixtures/sys_process_shared_child_contract.rs:244:5:
+assertion `left == right` failed: RED control: blocked-input child exit code unexpectedly matched
+  left: 17
+ right: 18
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+shared-child controller-panic-cleanup scenario=blocked_input_wait_snapshot payload="assertion `left == right` failed: RED control: blocked-input child exit code unexpectedly matched\n  left: 17\n right: 18" fixture_pid=3118378 reap=ESRCH verified=true
+
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+shared-child watchdog fixture_closure=verified pid=3118378 reap=ESRCH production_reap=true
+FAILED
+
+failures:
+
+failures:
+    shared_child_contract::spawn_returns_while_large_stdin_is_blocked_and_wait_snapshots_are_stable
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.18s
+

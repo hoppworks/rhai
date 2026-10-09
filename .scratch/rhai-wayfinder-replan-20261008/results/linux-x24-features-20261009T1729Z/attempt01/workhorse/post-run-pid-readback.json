@@ -1,0 +1,54 @@
+{
+  "platform": "Linux x86_64 Workhorse",
+  "readback": "independent exact PID absence via kill(pid,0)",
+  "rows": [
+    {
+      "phase": "red",
+      "profile": "sync",
+      "pid": 3992966,
+      "probe": "kill(pid,0)",
+      "errno": "ESRCH",
+      "observed_at": "2026-10-09T17:32:18.817254+00:00"
+    },
+    {
+      "phase": "red",
+      "profile": "no_float",
+      "pid": 4001915,
+      "probe": "kill(pid,0)",
+      "errno": "ESRCH",
+      "observed_at": "2026-10-09T17:32:18.817289+00:00"
+    },
+    {
+      "phase": "red",
+      "profile": "sync-no-float",
+      "pid": 4009510,
+      "probe": "kill(pid,0)",
+      "errno": "ESRCH",
+      "observed_at": "2026-10-09T17:32:18.817305+00:00"
+    },
+    {
+      "phase": "green",
+      "profile": "sync",
+      "pid": 4012593,
+      "probe": "kill(pid,0)",
+      "errno": "ESRCH",
+      "observed_at": "2026-10-09T17:32:18.817317+00:00"
+    },
+    {
+      "phase": "green",
+      "profile": "no_float",
+      "pid": 4015245,
+      "probe": "kill(pid,0)",
+      "errno": "ESRCH",
+      "observed_at": "2026-10-09T17:32:18.817327+00:00"
+    },
+    {
+      "phase": "green",
+      "profile": "sync-no-float",
+      "pid": 4015783,
+      "probe": "kill(pid,0)",
+      "errno": "ESRCH",
+      "observed_at": "2026-10-09T17:32:18.817337+00:00"
+    }
+  ]
+}

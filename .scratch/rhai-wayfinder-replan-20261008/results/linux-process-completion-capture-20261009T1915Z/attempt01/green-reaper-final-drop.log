@@ -1,0 +1,24 @@
+
+running 1 test
+
+running 1 test
+
+running 1 test
+managed_pidfd_acquired pid=2446805 start=8330757 ppid=2446788 pgid=2446805
+managed_pidfd_acquired pid=2446807 start=8330757 ppid=2446805 pgid=2446805
+managed_pidfd_acquired pid=2446809 start=8330757 ppid=2446807 pgid=2446805
+managed_final_drop_live reaper=2446781 reaper_start=8330756 host=2446788 host_start=8330756 leader=2446805 leader_start=8330757 worker=2446807 worker_start=8330757 leaf=2446809 leaf_start=8330757 group=2446805 sentinel=2446776 sentinel_start=8330756 sentinel_pgid=2446776
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.14s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.14s
+
+managed-scope sentinel_cleanup pid=2446776 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_final_drop_boundary nonfinal_preserved=true leader=2446805 leader_start=8330757 leader_record_start_matches_pidfd=true worker=2446807 worker_start=8330757 worker_record_start_matches_pidfd=true leaf=2446809 leaf_start=8330757 leaf_record_start_matches_pidfd=true worker_record_group_matches=true leaf_record_group_matches=true group=2446805 drop_return_recorded=true closure_observed=true exceptional_cleanup_not_started=true leader_absent=true worker_absent=true leaf_absent=true exact_reaped=true host_live_before_drop=true reaper_live_before_drop=true sentinel_live_before_drop=true host_live_through_closure=true reaper_live_through_closure=true sentinel_live_through_closure=true pidfds_exited=true final_members_live=false reaper_ok=true reaper_status=Some(ExitStatus(unix_wait_status(0))) host_absent_after_cleanup=true sentinel_reaped=true group_empty_after_closure=true observation_error=None api="host=2446788 host_start=8330756 final_drop_returned=true nonfinal_wait_unit=true\n" reaped="worker=2446807 start=8330757 pgid=2446805 reaped=true wait_status=9 leaf=2446809 start=8330757 pgid=2446805 reaped=true wait_status=9 complete=true\n" cleanup="pid=2446781 prompt=true host_status=0 worker=2446807 start=8330757 pgid=2446805 reaped=true wait_status=9 leaf=2446809 start=8330757 pgid=2446805 reaped=true wait_status=9 complete=true\n"
+managed_fixture_cleanup worker_pid=Some(2446807) worker_esrch=true leaf_pid=Some(2446809) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2446805) leader_esrch=true
+test managed_spawn_final_clone_drop_closes_group_under_fixture_reaper ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.14s
+

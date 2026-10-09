@@ -1,0 +1,9 @@
+
+running 1 test
+test direct_spawn_try_wait_returns_unit_until_child_exits ... x24_running pid=97721 alive_before_try_wait=true result_is_unit=true
+x24_post_exit_try_wait pid=97721 result_observed_before_wait=true code=0 success=true
+x24_finished pid=97721 wait_code=0 try_wait_code=0 success=true reaped_esrch=true
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 48 filtered out; finished in 0.04s
+

@@ -1,0 +1,30 @@
+{
+  "source_revision": "34e0fa61a3d12fe6c41902c44618ff44e20d73d4",
+  "source_archive_sha256": "68444772248d81587ee19d157c4d49d35a6ba12482233264bba0c622a113f644",
+  "cargo_lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "base_test_source_sha256": "86f1142ff1ae8de5a8b813e892e407a90c1bec70eab864c20b7735f53015bf41",
+  "fixture_identity_patch_sha256": "50715dce138e6f74fbee7cc12ce153a07748060db943764a553a14eaf51a2abb",
+  "instrumented_test_source_sha256": "0962adb8e4e74d0ac223c65e160ac58a3d56a34da708eac602bc87839147ca0d",
+  "red_patch_sha256": "0b6cbf102934780859d4d3b35cd332d191a3d2cf1f4c370ca2d3083c39f24d97",
+  "red_source_sha256": "9897fe27bd4fe10c114a712b3aec469bb110c45c3347a8f8c262519fdd59392f",
+  "selector_set": [
+    "managed_run_closes_worker_after_leader_exit_and_preserves_sentinel",
+    "managed_run_closes_pipe_closed_worker_before_return",
+    "direct_run_returns_with_pipe_closed_worker_live_control"
+  ],
+  "scope_session_id": "linux-x35-20261009T1620Z-cd51a2",
+  "features": "testing-environ,sys",
+  "target": "x86_64-unknown-linux-gnu",
+  "red_controls": {
+    "managed_run_closes_worker_after_leader_exit_and_preserves_sentinel": "invert final unrelated-sentinel-preserved assertion",
+    "managed_run_closes_pipe_closed_worker_before_return": "assert live managed descendants after the API has returned and PIDfds observe exit",
+    "direct_run_returns_with_pipe_closed_worker_live_control": "assert all PIDfd members exited though direct-child scope preserves descendants"
+  },
+  "why_fixture_identity_patch": "emit exact owned temporary-root and test-PID readback for two PIDfd selectors so external post-run observer can prove fixture cleanup.",
+  "red_source_manifest_sha256": "520217ee2f9a7e67cf92310d996e413fed1a3792cea11bfeee9fa2aa4a396f06",
+  "payload_sha256": "c4ad1035dbdb275b6cac5dc19d895ed5f59b1b143f5fc8371c401a8519f6dba1",
+  "cleanup_helper_sha256": "d6886fe98dbee3001838661b149a828a55199cbe9e177bf4d7f0d2531bda29d8",
+  "launcher_python_sha256": "1b3b8243932aa16b48de4a738a8783f658fcd204ff2eb4a395e56d661573fe60",
+  "scoped_runner_sha256": "25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e",
+  "attempt_id": "attempt06"
+}

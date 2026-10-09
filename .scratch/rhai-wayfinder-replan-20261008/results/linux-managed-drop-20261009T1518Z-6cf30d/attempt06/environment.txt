@@ -1,0 +1,7 @@
+uname=Linux workhorse 7.2.8-ogc5.1.fc44.x86_64 #1 SMP PREEMPT_DYNAMIC Tue Oct  6 18:06:42 UTC 2026 x86_64 GNU/Linux
+rustc=rustc 1.77.2 (25ef9e3d8 2024-04-09)
+cargo=cargo 1.77.2 (e52e36006 2024-03-26)
+features=testing-environ,sys
+target=x86_64-unknown-linux-gnu
+jobs=2
+lock=2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425

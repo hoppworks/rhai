@@ -1,0 +1,11 @@
+managed_fixture_started root=/root/.local/share/agent-builds/rhai/linux-x35-20261009T1620Z-cd51a2/agent-build-j87fmo9m/tmp/rhai-sys-test-979718-managed_run_closes_pipe_closed_worker_before_return-0 test_pid=979718
+managed_pidfd_acquired pid=979722 start=8145959 ppid=979718 pgid=979722
+managed_pidfd_acquired pid=979724 start=8145960 ppid=979722 pgid=979722
+managed_pidfd_acquired pid=979726 start=8145960 ppid=979724 pgid=979722
+thread 'managed_run_closes_pipe_closed_worker_before_return' panicked at tests/sys_process.rs:3260:9:
+assertion `left == right` failed: control member pid=979724 start=8145960 unexpectedly exited before API return
+  left: 1
+ right: 0
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+managed_fixture_cleanup worker_pid=Some(979724) worker_esrch=true leaf_pid=Some(979726) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(979722) leader_esrch=true

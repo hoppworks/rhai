@@ -1,0 +1,2 @@
+cwd=/root/.local/share/agent-builds/rhai/linux-x35-20261009T1620Z-cd51a2/agent-build-j87fmo9m/source
+argv=/var/home/workhorse/.rustup/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo test --locked --features testing-environ\,sys --test sys_process --no-run --message-format=json 

@@ -1,0 +1,13 @@
+
+running 1 test
+managed_false_drop_started root=/root/.local/share/agent-builds/rhai/zombie-false-drop-20261009T1940Z-01/agent-build-byksv8ix/tmp/rhai-sys-test-2636709-managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit-0 test_pid=2636709 sentinel_pid=2636711 sentinel_pgid=2636711 leader=2636713 worker=2636715 leaf=2636717 group=2636713
+managed_false_drop_after_final_client_drop leader=2636713 leader_live=true worker=2636715 worker_live=true leaf=2636717 leaf_live=true sentinel=2636711 sentinel_live=true
+managed_false_drop_live_challenge leader=2636713 worker=2636715 leaf=2636717 group=2636713 ack_count=3 ack_pids=[Some(2636713), Some(2636715), Some(2636717)] ack_groups=[Some(2636713), Some(2636713), Some(2636713)]
+managed_false_drop_after_leader_exit leader=2636713 leader_esrch=true worker=2636715 worker_esrch=true leaf=2636717 leaf_esrch=true sentinel=2636711 sentinel_live=true
+managed-scope sentinel_cleanup pid=2636711 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(2636715) worker_esrch=true leaf_pid=Some(2636717) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2636713) leader_esrch=true
+test managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.28s
+

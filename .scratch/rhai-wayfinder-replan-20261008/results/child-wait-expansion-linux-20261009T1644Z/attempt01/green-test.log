@@ -1,0 +1,8 @@
+
+running 1 test
+child_wait_expansion primary_limit=false raw_bytes=134 exact=true cloned_snapshot=true child_reaped=true
+child_wait_expansion primary_limit=true raw_bytes=237 exact=true cloned_snapshot=true child_reaped=true
+test child_wait_preserves_decoded_expansion_reports_and_committed_primary_cause ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.04s
+

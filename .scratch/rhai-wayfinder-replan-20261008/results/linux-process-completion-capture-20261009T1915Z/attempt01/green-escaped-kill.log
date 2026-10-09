@@ -1,0 +1,11 @@
+
+running 1 test
+managed_escaped_pipe_wait root=/root/.local/share/agent-builds/rhai/process-completion-capture-20261009T1915Z-01/agent-build-8ebfdc60/tmp/rhai-sys-test-2446833-managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes-0 test_pid=2446833 leader=2446837 leader_pgid=2446837 leader_esrch=true holder=2446839 holder_pgid=2446835 holder_live_after_wait=true sentinel=2446835 sentinel_pgid=2446835 sentinel_live_after_wait=true wait_unit=false probe="pid=2446839 stdout_result=-1 stdout_error=32 stderr_result=-1 stderr_error=32\n" identity_ok=true
+managed_escaped_pipe_cleanup root=/root/.local/share/agent-builds/rhai/process-completion-capture-20261009T1915Z-01/agent-build-8ebfdc60/tmp/rhai-sys-test-2446833-managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes-0 leader=Some(2446837) leader_esrch=true holder=Some(2446839) holder_esrch=true
+managed-scope sentinel_cleanup pid=2446835 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_escaped_pipe_terminal leader=Some(2446837) leader_esrch=true holder=Some(2446839) holder_esrch=true sentinel=2446835 sentinel_esrch=true
+managed_escaped_pipe_cleanup root=/root/.local/share/agent-builds/rhai/process-completion-capture-20261009T1915Z-01/agent-build-8ebfdc60/tmp/rhai-sys-test-2446833-managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes-0 leader=Some(2446837) leader_esrch=true holder=Some(2446839) holder_esrch=true
+test managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.23s
+

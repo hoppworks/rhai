@@ -1,0 +1,18 @@
+--- a/tests/sys_process.rs
++++ b/tests/sys_process.rs
+@@ -3368,6 +3368,7 @@
+ #[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
+ fn managed_run_closes_pipe_closed_worker_before_return() {
+     let fixture = ManagedFixture::new();
++    eprintln!("managed_fixture_started root={} test_pid={}", fixture.root.path().display(), std::process::id());
+     let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+     let root = fixture.root.as_script_path();
+     let worker_record = fixture.path("worker-record").to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+@@ -3412,6 +3413,7 @@
+ #[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
+ fn direct_run_returns_with_pipe_closed_worker_live_control() {
+     let fixture = ManagedFixture::new();
++    eprintln!("managed_fixture_started root={} test_pid={}", fixture.root.path().display(), std::process::id());
+     let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+     let root = fixture.root.as_script_path();
+     let worker_record = fixture.path("worker-record").to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");

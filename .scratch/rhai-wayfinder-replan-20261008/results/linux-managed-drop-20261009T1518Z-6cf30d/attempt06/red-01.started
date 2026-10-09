@@ -1,0 +1,2 @@
+selector=managed_run_closes_worker_after_leader_exit_and_preserves_sentinel
+source_sha256=9897fe27bd4fe10c114a712b3aec469bb110c45c3347a8f8c262519fdd59392f

@@ -1,0 +1,29 @@
+
+running 1 test
+
+running 1 test
+
+running 1 test
+managed_pidfd_acquired pid=2626590 start=8352968 ppid=2626587 pgid=2626590
+managed_pidfd_acquired pid=2626592 start=8352968 ppid=2626590 pgid=2626590
+managed_pidfd_acquired pid=2626594 start=8352968 ppid=2626592 pgid=2626590
+thread 'managed_run_reports_while_fixture_reaper_holds_stopped_zombies' panicked at tests/sys_process.rs:2273:5:
+RED control: managed API outcome unexpectedly recognized
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 1.22s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 1.23s
+
+managed_fixture_cleanup worker_pid=Some(2626592) worker_esrch=true leaf_pid=Some(2626594) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2626590) leader_esrch=true
+test managed_run_reports_while_fixture_reaper_holds_stopped_zombies ... FAILED
+
+failures:
+
+failures:
+    managed_run_reports_while_fixture_reaper_holds_stopped_zombies
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 60 filtered out; finished in 1.23s
+

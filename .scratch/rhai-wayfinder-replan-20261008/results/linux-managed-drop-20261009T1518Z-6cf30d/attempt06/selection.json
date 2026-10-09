@@ -1,0 +1,10 @@
+{
+  "selectors": [
+    "managed_run_closes_worker_after_leader_exit_and_preserves_sentinel",
+    "managed_run_closes_pipe_closed_worker_before_return",
+    "direct_run_returns_with_pipe_closed_worker_live_control"
+  ],
+  "required": "one exact RED and GREEN run per selector; one build per source state; independent PIDfd and fixture cleanup readbacks",
+  "attempt_id": "attempt06",
+  "scope_session_id": "linux-x35-20261009T1620Z-cd51a2"
+}

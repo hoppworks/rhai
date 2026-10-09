@@ -1,0 +1,17 @@
+{
+  "platform": "Darwin arm64",
+  "readback": [
+    {
+      "phase": "red",
+      "pid": 97705,
+      "probe": "os.kill(pid,0)",
+      "result": "ProcessLookupError/ESRCH"
+    },
+    {
+      "phase": "green",
+      "pid": 97721,
+      "probe": "os.kill(pid,0)",
+      "result": "ProcessLookupError/ESRCH"
+    }
+  ]
+}

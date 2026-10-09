@@ -1,0 +1,12 @@
+source_archive_sha256=68444772248d81587ee19d157c4d49d35a6ba12482233264bba0c622a113f644
+sys_process_test_baseline_sha256=86f1142ff1ae8de5a8b813e892e407a90c1bec70eab864c20b7735f53015bf41
+committed_shared_fixture_sha256=1faf45c57a4fefeaa05683043e064d3485e892887986fef749bedc974230b217
+lock_sha256=2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425
+red_mutated_fixture_sha256=0e302635320bb47ea2307e58d955e86e09591e236ec9d71cad16117b6baa08dd
+selector=shared_child_contract::final_drop_honors_both_kill_on_drop_policies
+red_profiles=testing-environ,sys; testing-environ,sys,sync
+red_exit_status=101 for both profiles
+red_assertion=final kill_on_drop=false two-challenge expectation inverted; one-challenge remains correct for false-drop scenario
+cleanup=watchdog fixture_closure verified and exact PID ESRCH verified in both logs
+green_reused_from=../attempt02/workhorse/green-standard-final_drop_honors_both_kill_on_drop_policies.log and green-sync-final_drop_honors_both_kill_on_drop_policies.log; original fixture restored hash matches committed fixture; source/toolchain/features/lock unchanged
+scope_runtime=/root/.local/share/agent-builds/rhai/shared-child-contracts-20261009T1718Z-03/agent-build-2pfacld9

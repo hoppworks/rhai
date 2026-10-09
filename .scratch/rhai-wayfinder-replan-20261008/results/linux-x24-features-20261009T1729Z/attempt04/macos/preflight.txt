@@ -1,0 +1,57 @@
+2026-10-09T17:46:17Z
+ProductName:		macOS
+ProductVersion:		27.0.1
+BuildVersion:		26A434
+Darwin Daniels-MBP-2.fritz.box 27.0.0 Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:59 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8142 arm64
+The system has 34359738368 (2097152 pages with a page size of 16384).
+
+Stats: 
+Pages free: 40701 
+Pages purgeable: 4400 
+Pages purged: 61737836 
+
+Swap I/O:
+Swapins: 9412709 
+Swapouts: 10741315 
+
+Page Q counts:
+Pages active: 702720 
+Pages inactive: 699807 
+Pages speculative: 2097 
+Pages throttled: 0 
+Pages wired down: 211179 
+
+Compressor Stats:
+Pages used by compressor: 386487 
+Pages decompressed: 705116970 
+Pages compressed: 753036685 
+
+File I/O:
+Pageins: 262280454 
+Pageouts: 566802 
+
+System-wide memory free percentage: 70%
+vm.loadavg: { 1.94 3.46 3.99 }
+Filesystem   1024-blocks      Used Available Capacity  Mounted on
+/dev/disk3s5   971298980 880168852  62414580    94%    /System/Volumes/Data
+55025 10770   4336   0.0    02:35:44 ssh workhorse runuser -u workhorse -g workhorse -G docker -- env BASH_ENV=/dev/null DOCKER_CONFIG=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/docker-client TMPDIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/tmp PATH=/usr/local/bin:/usr/bin:/bin:/var/home/workhorse/.local/bin:/var/home/workhorse/.cargo/bin CARGO_TARGET_DIR=/var/home/workhorse/.local/share/agent-builds/tauron/avacita-care-receipt-20261009 CARGO_BUILD_JOBS=4 AGENT_RUNTIME_DIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime E2E_LEASE_LOCK_DIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/leases PATROL_LANE_LEASE_STATE_DIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/lane-claims E2E_LANE=h bash --noprofile --norc -c 'cd /var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current && mkdir -p build/evidence/avacita-a08/20261009 && node .scratch/avacita-runtime/marionette-debug-proxy.mjs > build/evidence/avacita-a08/20261009/a08-debug-proxy.log 2>&1'
+55069 10770   4336   0.0    02:35:26 ssh workhorse runuser -u workhorse -g workhorse -G docker -- env BASH_ENV=/dev/null DOCKER_CONFIG=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/docker-client TMPDIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/tmp PATH=/usr/local/bin:/usr/bin:/bin:/var/home/workhorse/.local/bin:/var/home/workhorse/.cargo/bin CARGO_TARGET_DIR=/var/home/workhorse/.local/share/agent-builds/tauron/avacita-care-receipt-20261009 CARGO_BUILD_JOBS=4 AGENT_RUNTIME_DIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime E2E_LEASE_LOCK_DIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/leases PATROL_LANE_LEASE_STATE_DIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/lane-claims E2E_LANE=h CHROME_EXECUTABLE=/var/home/workhorse/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome bash --noprofile --norc -c 'cd /var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current && export TMPDIR=$(cat .scratch/avacita-runtime/marionette-temp-path) && cd apps/avacita && /var/home/workhorse/.local/share/agent-builds/tauron/avacita-b32-flutter-sdk-20261008/bin/flutter run --no-pub -d chrome --web-hostname=127.0.0.1 --web-port=62175 --web-launch-url=http://127.0.0.1:62176 --dart-define=API_BASE_URL= --dart-define=E2E_SAME_ORIGIN=true --dart-define=ENABLE_MARIONETTE=true --web-browser-flag=--headless=new --web-browser-flag=--no-sandbox --web-browser-flag=--disable-dev-shm-usage > /var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/build/evidence/avacita-a08/20261009/a08-marionette-v7.log 2>&1'
+65708 10770   4352   0.0    01:59:48 ssh workhorse runuser -u workhorse -g workhorse -G docker -- env BASH_ENV=/dev/null DOCKER_CONFIG=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/docker-client TMPDIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/tmp PATH=/usr/local/bin:/usr/bin:/bin:/var/home/workhorse/.local/bin:/var/home/workhorse/.cargo/bin CARGO_TARGET_DIR=/var/home/workhorse/.local/share/agent-builds/tauron/avacita-care-receipt-20261009 CARGO_BUILD_JOBS=4 AGENT_RUNTIME_DIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime E2E_LEASE_LOCK_DIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/leases PATROL_LANE_LEASE_STATE_DIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/lane-claims E2E_LANE=h node /var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/a07-cockpit-g-allowed-proxy.mjs
+98455 10770  20912   0.0       00:42 /opt/homebrew/Cellar/python@3.14/3.14.8/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python /Users/hoppworks/projects/agent-skills/tools/run_scoped.py --timeout 600 -- bash .scratch/combat-mode-build/evidence/mumak-physical-body-20261009/gates.sh
+98457 98455  18528   0.0       00:42 /opt/homebrew/Cellar/python@3.14/3.14.8/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python /Users/hoppworks/projects/agent-skills/tools/run_scoped.py _supervise 4 bash .scratch/combat-mode-build/evidence/mumak-physical-body-20261009/gates.sh
+98763 10770  20768   0.0       00:02 /opt/homebrew/Cellar/python@3.14/3.14.8/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python /Users/hoppworks/projects/agent-skills/tools/run_scoped.py --timeout 240 -- sh -c cd prototype && export TABLETOP_REGELBUCH=/Users/hoppworks/projects/TableTop/docs/regelbuch/Tabletop_Regelbuch.md TABLETOP_FIGUREN_PDF=/Users/hoppworks/Downloads/Figuren_Tabletop.pdf && npm run typecheck > ../.scratch/combat-mode-build/evidence/t36-machine-public-extraction-20261009/sabotage-final-typecheck.log 2>&1 && npm test > ../.scratch/combat-mode-build/evidence/t36-machine-public-extraction-20261009/sabotage-final-tests.log 2>&1 && npm run build -- --outDir "$AGENT_RUNTIME_DIR/dist" > ../.scratch/combat-mode-build/evidence/t36-machine-public-extraction-20261009/sabotage-final-build.log 2>&1 && git diff --check > ../.scratch/combat-mode-build/evidence/t36-machine-public-extraction-20261009/sabotage-final-diff-check.log 2>&1
+98765 98763  18912   0.0       00:02 /opt/homebrew/Cellar/python@3.14/3.14.8/Frameworks/Python.framework/Versions/3.14/Resources/Python.app/Contents/MacOS/Python /Users/hoppworks/projects/agent-skills/tools/run_scoped.py _supervise 4 sh -c cd prototype && export TABLETOP_REGELBUCH=/Users/hoppworks/projects/TableTop/docs/regelbuch/Tabletop_Regelbuch.md TABLETOP_FIGUREN_PDF=/Users/hoppworks/Downloads/Figuren_Tabletop.pdf && npm run typecheck > ../.scratch/combat-mode-build/evidence/t36-machine-public-extraction-20261009/sabotage-final-typecheck.log 2>&1 && npm test > ../.scratch/combat-mode-build/evidence/t36-machine-public-extraction-20261009/sabotage-final-tests.log 2>&1 && npm run build -- --outDir "$AGENT_RUNTIME_DIR/dist" > ../.scratch/combat-mode-build/evidence/t36-machine-public-extraction-20261009/sabotage-final-build.log 2>&1 && git diff --check > ../.scratch/combat-mode-build/evidence/t36-machine-public-extraction-20261009/sabotage-final-diff-check.log 2>&1
+98820 98799   3760   0.0       00:00 rg run_scoped.py|cargo|rustc
+88284 10770   4640   0.0       38:37 ssh -tt workhorse runuser -u workhorse -g workhorse -G docker -- env BASH_ENV=/dev/null DOCKER_CONFIG=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/docker-client TMPDIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/tmp PATH=/var/home/workhorse/.local/share/agent-builds/tauron/avacita-b32-flutter-sdk-20261008/bin:/usr/local/bin:/usr/bin:/bin:/var/home/workhorse/.local/bin:/var/home/workhorse/.cargo/bin CARGO_TARGET_DIR=/var/home/workhorse/.local/share/agent-builds/tauron/avacita-care-receipt-20261009 CARGO_BUILD_JOBS=4 AGENT_RUNTIME_DIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime E2E_LEASE_LOCK_DIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/leases PATROL_LANE_LEASE_STATE_DIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/lane-claims E2E_LANE=h bash --noprofile --norc -c 'cd /var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/apps/hoppworks && cockpit_tmp=$(cat /var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/cockpit-temp-path) && TMPDIR="$cockpit_tmp" flutter run --no-pub -d chrome --web-hostname=127.0.0.1 --web-port=62185 --web-launch-url=http://localhost:61174 --dart-define=API_BASE_URL= --dart-define=ENABLE_MARIONETTE=true --web-browser-flag=--headless=new --web-browser-flag=--no-sandbox --web-browser-flag=--disable-dev-shm-usage > /var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/build/evidence/avacita-a08/20261009/cockpit-debug-log-collector.log 2>&1'
+25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e  /Users/hoppworks/projects/agent-skills/tools/run_scoped.py
+usage: run_scoped.py [-h] [--timeout TIMEOUT] ...
+
+Run a build/verification command with automatic cleanup of its private
+runtime.
+
+positional arguments:
+  command
+
+options:
+  -h, --help         show this help message and exit
+  --timeout TIMEOUT

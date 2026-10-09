@@ -1,0 +1,15 @@
+
+running 1 test
+managed_post_reap_ordinary_wait root=/root/.local/share/agent-builds/rhai/process-completion-capture-20261009T1915Z-01/agent-build-8ebfdc60/tmp/rhai-sys-test-2447371-managed_spawn_post_reap_cancel_bounds_escaped_capture-0 test_pid=2447371 leader=2447375 holder=2447377 sentinel=2447373 wait_unit=true holder_live=true
+managed_post_reap_typed_error unexpected=None
+managed_post_reap_leader leader=2447375 exit_record_matches=true exit_record="pid=2447375 release_seen=true exit_intent=true\n" try_wait_unit=true try_wait_error=None ps_status=Ok("") leader_esrch=true holder=2447377 holder_live=true
+managed_post_reap_uncancelled_wait leader=2447375 wait_unit=true holder=2447377 holder_live=true sentinel=2447373 sentinel_live=true
+managed_escaped_pipe_cleanup root=/root/.local/share/agent-builds/rhai/process-completion-capture-20261009T1915Z-01/agent-build-8ebfdc60/tmp/rhai-sys-test-2447371-managed_spawn_post_reap_cancel_bounds_escaped_capture-0 leader=Some(2447375) leader_esrch=true holder=Some(2447377) holder_esrch=true
+managed-scope sentinel_cleanup pid=2447373 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_escaped_pipe_terminal leader=Some(2447375) leader_esrch=true holder=Some(2447377) holder_esrch=true sentinel=2447373 sentinel_esrch=true
+managed_post_reap_cancel root=/root/.local/share/agent-builds/rhai/process-completion-capture-20261009T1915Z-01/agent-build-8ebfdc60/tmp/rhai-sys-test-2447371-managed_spawn_post_reap_cancel_bounds_escaped_capture-0 test_pid=2447371 leader=2447375 leader_esrch_before_kill=true leader_esrch=true holder=2447377 holder_live_after_cancel=true holder_esrch=true sentinel=2447373 sentinel_esrch=true probe="pid=2447377 stdout_result=-1 stdout_error=32 stderr_result=-1 stderr_error=32\n" wait_unit=false
+managed_escaped_pipe_cleanup root=/root/.local/share/agent-builds/rhai/process-completion-capture-20261009T1915Z-01/agent-build-8ebfdc60/tmp/rhai-sys-test-2447371-managed_spawn_post_reap_cancel_bounds_escaped_capture-0 leader=Some(2447375) leader_esrch=true holder=Some(2447377) holder_esrch=true
+test managed_spawn_post_reap_cancel_bounds_escaped_capture ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.60s
+

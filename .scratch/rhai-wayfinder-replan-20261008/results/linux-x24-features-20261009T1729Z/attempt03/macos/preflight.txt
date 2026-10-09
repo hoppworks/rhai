@@ -1,0 +1,53 @@
+2026-10-09T17:42:31Z
+ProductName:		macOS
+ProductVersion:		27.0.1
+BuildVersion:		26A434
+Darwin Daniels-MBP-2.fritz.box 27.0.0 Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:59 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8142 arm64
+The system has 34359738368 (2097152 pages with a page size of 16384).
+
+Stats: 
+Pages free: 129527 
+Pages purgeable: 5529 
+Pages purged: 61736974 
+
+Swap I/O:
+Swapins: 9412709 
+Swapouts: 10741315 
+
+Page Q counts:
+Pages active: 659425 
+Pages inactive: 655825 
+Pages speculative: 3110 
+Pages throttled: 0 
+Pages wired down: 205600 
+
+Compressor Stats:
+Pages used by compressor: 389504 
+Pages decompressed: 705113314 
+Pages compressed: 753036685 
+
+File I/O:
+Pageins: 262227973 
+Pageouts: 566802 
+
+System-wide memory free percentage: 70%
+vm.loadavg: { 2.39 4.89 4.54 }
+Filesystem   1024-blocks      Used Available Capacity  Mounted on
+/dev/disk3s5   971298980 879982980  62600452    94%    /System/Volumes/Data
+55025 10770   4336   0.0    02:31:58 ssh workhorse runuser -u workhorse -g workhorse -G docker -- env BASH_ENV=/dev/null DOCKER_CONFIG=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/docker-client TMPDIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/tmp PATH=/usr/local/bin:/usr/bin:/bin:/var/home/workhorse/.local/bin:/var/home/workhorse/.cargo/bin CARGO_TARGET_DIR=/var/home/workhorse/.local/share/agent-builds/tauron/avacita-care-receipt-20261009 CARGO_BUILD_JOBS=4 AGENT_RUNTIME_DIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime E2E_LEASE_LOCK_DIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/leases PATROL_LANE_LEASE_STATE_DIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/lane-claims E2E_LANE=h bash --noprofile --norc -c 'cd /var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current && mkdir -p build/evidence/avacita-a08/20261009 && node .scratch/avacita-runtime/marionette-debug-proxy.mjs > build/evidence/avacita-a08/20261009/a08-debug-proxy.log 2>&1'
+55069 10770   4336   0.0    02:31:40 ssh workhorse runuser -u workhorse -g workhorse -G docker -- env BASH_ENV=/dev/null DOCKER_CONFIG=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/docker-client TMPDIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/tmp PATH=/usr/local/bin:/usr/bin:/bin:/var/home/workhorse/.local/bin:/var/home/workhorse/.cargo/bin CARGO_TARGET_DIR=/var/home/workhorse/.local/share/agent-builds/tauron/avacita-care-receipt-20261009 CARGO_BUILD_JOBS=4 AGENT_RUNTIME_DIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime E2E_LEASE_LOCK_DIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/leases PATROL_LANE_LEASE_STATE_DIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/lane-claims E2E_LANE=h CHROME_EXECUTABLE=/var/home/workhorse/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome bash --noprofile --norc -c 'cd /var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current && export TMPDIR=$(cat .scratch/avacita-runtime/marionette-temp-path) && cd apps/avacita && /var/home/workhorse/.local/share/agent-builds/tauron/avacita-b32-flutter-sdk-20261008/bin/flutter run --no-pub -d chrome --web-hostname=127.0.0.1 --web-port=62175 --web-launch-url=http://127.0.0.1:62176 --dart-define=API_BASE_URL= --dart-define=E2E_SAME_ORIGIN=true --dart-define=ENABLE_MARIONETTE=true --web-browser-flag=--headless=new --web-browser-flag=--no-sandbox --web-browser-flag=--disable-dev-shm-usage > /var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/build/evidence/avacita-a08/20261009/a08-marionette-v7.log 2>&1'
+65708 10770   4352   0.0    01:56:02 ssh workhorse runuser -u workhorse -g workhorse -G docker -- env BASH_ENV=/dev/null DOCKER_CONFIG=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/docker-client TMPDIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/tmp PATH=/usr/local/bin:/usr/bin:/bin:/var/home/workhorse/.local/bin:/var/home/workhorse/.cargo/bin CARGO_TARGET_DIR=/var/home/workhorse/.local/share/agent-builds/tauron/avacita-care-receipt-20261009 CARGO_BUILD_JOBS=4 AGENT_RUNTIME_DIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime E2E_LEASE_LOCK_DIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/leases PATROL_LANE_LEASE_STATE_DIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/lane-claims E2E_LANE=h node /var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/a07-cockpit-g-allowed-proxy.mjs
+97344 97332    224   0.0       00:00 rg run_scoped.py|cargo|rustc
+88284 10770   4640   0.0       34:51 ssh -tt workhorse runuser -u workhorse -g workhorse -G docker -- env BASH_ENV=/dev/null DOCKER_CONFIG=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/docker-client TMPDIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/tmp PATH=/var/home/workhorse/.local/share/agent-builds/tauron/avacita-b32-flutter-sdk-20261008/bin:/usr/local/bin:/usr/bin:/bin:/var/home/workhorse/.local/bin:/var/home/workhorse/.cargo/bin CARGO_TARGET_DIR=/var/home/workhorse/.local/share/agent-builds/tauron/avacita-care-receipt-20261009 CARGO_BUILD_JOBS=4 AGENT_RUNTIME_DIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime E2E_LEASE_LOCK_DIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/leases PATROL_LANE_LEASE_STATE_DIR=/var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/lane-claims E2E_LANE=h bash --noprofile --norc -c 'cd /var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/apps/hoppworks && cockpit_tmp=$(cat /var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/.scratch/avacita-runtime/cockpit-temp-path) && TMPDIR="$cockpit_tmp" flutter run --no-pub -d chrome --web-hostname=127.0.0.1 --web-port=62185 --web-launch-url=http://localhost:61174 --dart-define=API_BASE_URL= --dart-define=ENABLE_MARIONETTE=true --web-browser-flag=--headless=new --web-browser-flag=--no-sandbox --web-browser-flag=--disable-dev-shm-usage > /var/home/workhorse/projects/tauron-worktrees/avacita-continuation-20261008-current/build/evidence/avacita-a08/20261009/cockpit-debug-log-collector.log 2>&1'
+25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e  /Users/hoppworks/projects/agent-skills/tools/run_scoped.py
+usage: run_scoped.py [-h] [--timeout TIMEOUT] ...
+
+Run a build/verification command with automatic cleanup of its private
+runtime.
+
+positional arguments:
+  command
+
+options:
+  -h, --help         show this help message and exit
+  --timeout TIMEOUT

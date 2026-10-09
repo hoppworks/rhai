@@ -1,0 +1,13 @@
+
+running 1 test
+test shared_child_contract::sync_waiter_can_be_cancelled_through_another_shared_child_handle ... shared-child controller_started scenario=sync_wait_cancel pid=3240425 root=/root/.local/share/agent-builds/rhai/shared-child-contracts-20261009T1715Z-02/agent-build-cioje82u/shared-child-fixture-3240423-0
+shared-child controller_reaped scenario=sync_wait_cancel pid=3240425 status=exit status: 0
+shared-child controller_output scenario=sync_wait_cancel stdout="\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 61 filtered out; finished in 0.03s\n\n" stderr="shared-child sync-cancel pid=3240428 waiter_returned=1 final_wait=1 reap=ESRCH\n"
+shared-child controller_esrch pid=3240425 verified=true
+shared-child outer-observation scenario=sync_wait_cancel controller_pid=3240425 fixture_pid=3240428 fixture_record="pid=3240428 state=ready" reap=ESRCH verified=true
+shared-child scenario=sync_wait_cancel controller_pid=3240425 status=ok fixture_record=Some("pid=3240428 state=ready\n")
+shared-child watchdog fixture_closure=verified pid=3240428 reap=ESRCH production_reap=true
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 61 filtered out; finished in 0.03s
+

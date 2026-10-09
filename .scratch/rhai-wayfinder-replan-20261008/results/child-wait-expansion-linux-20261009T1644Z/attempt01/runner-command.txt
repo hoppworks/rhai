@@ -1,0 +1,4 @@
+TMPDIR=/root/.local/share/agent-builds/rhai/child-wait-expansion-20261009T1644Z
+runner=/var/home/workhorse/projects/agent-skills/tools/run_scoped.py
+timeout_seconds=600
+argv=python3 run_scoped.py --timeout 600 -- bash payload.sh

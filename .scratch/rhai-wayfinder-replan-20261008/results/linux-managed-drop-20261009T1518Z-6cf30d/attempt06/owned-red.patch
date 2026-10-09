@@ -1,0 +1,29 @@
+--- a/tests/sys_process.rs
++++ b/tests/sys_process.rs
+@@ -3357,7 +3357,7 @@
+     assert!(leader_gone, "leader must be reaped before run returns");
+     assert!(worker_gone, "managed worker must be gone before run returns");
+     assert!(leaf_gone, "managed grandchild must be gone before run returns");
+-    assert!(sentinel_live, "managed cleanup terminated unrelated sentinel");
++    assert!(!sentinel_live, "RED control expects unrelated sentinel to be killed");
+     drop(sentinel);
+     assert!(pid_is_absent(sentinel_pid), "fixture-owned sentinel cleanup must reap its exact child");
+ }
+@@ -3403,7 +3403,7 @@
+     assert_eq!(result["success"].as_bool().unwrap(), true);
+     assert_eq!(result["code"].as_int().unwrap(), 0);
+     let pidfds = observed.lock().unwrap().take().expect("live PIDfd proof was published before the fixture leader exited");
+-    assert_managed_pidfds_exited(&pidfds);
++    assert_managed_pidfds_live(&pidfds);
+     observer.join().expect("PIDfd observer completed");
+ }
+ 
+@@ -3448,7 +3448,7 @@
+     assert_eq!(result["success"].as_bool().unwrap(), true);
+     let pidfds = observed.lock().unwrap().take().expect("live PIDfd proof was published before the fixture leader exited");
+     assert_managed_pidfd_exited(&pidfds.0[0]);
+-    assert_managed_pidfds_live(&pidfds);
++    assert_managed_pidfds_exited(&pidfds);
+     observer.join().expect("PIDfd observer completed");
+ }
+ 

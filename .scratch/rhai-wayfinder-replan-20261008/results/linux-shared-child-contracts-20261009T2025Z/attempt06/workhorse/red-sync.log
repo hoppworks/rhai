@@ -1,0 +1,38 @@
+
+running 1 test
+test shared_child_contract::nonfinal_child_clone_drop_keeps_the_real_child_available ... shared-child controller_started scenario=drop_true pid=3699174 root=/root/.local/share/agent-builds/rhai/shared-child-contracts-20261009T1730Z-06/agent-build-yjhj75sd/shared-child-fixture-3699172-0
+shared-child controller_reaped scenario=drop_true pid=3699174 status=exit status: 101
+shared-child controller_output scenario=drop_true stdout="\nrunning 1 test\nF\nfailures:\n\nfailures:\n    shared_child_contract::scenario_entry\n\ntest result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 61 filtered out; finished in 0.03s\n\n" stderr="shared-child nonfinal-drop pid=3699177 child_record=ready operational_probe=one\nthread 'shared_child_contract::scenario_entry' panicked at tests/fixtures/sys_process_shared_child_contract.rs:295:9:\nRED control: kill_on_drop=true child unexpectedly disappeared after final drop\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\nshared-child controller-panic-cleanup scenario=drop_true payload=\"RED control: kill_on_drop=true child unexpectedly disappeared after final drop\" fixture_pid=3699177 reap=ESRCH verified=true\n"
+shared-child controller_esrch pid=3699174 verified=true
+thread 'shared_child_contract::nonfinal_child_clone_drop_keeps_the_real_child_available' panicked at tests/fixtures/sys_process_shared_child_contract.rs:509:17:
+scenario drop_true failed (exit status: 101)
+stdout:
+
+running 1 test
+F
+failures:
+
+failures:
+    shared_child_contract::scenario_entry
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 61 filtered out; finished in 0.03s
+
+
+stderr:
+shared-child nonfinal-drop pid=3699177 child_record=ready operational_probe=one
+thread 'shared_child_contract::scenario_entry' panicked at tests/fixtures/sys_process_shared_child_contract.rs:295:9:
+RED control: kill_on_drop=true child unexpectedly disappeared after final drop
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+shared-child controller-panic-cleanup scenario=drop_true payload="RED control: kill_on_drop=true child unexpectedly disappeared after final drop" fixture_pid=3699177 reap=ESRCH verified=true
+
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+shared-child watchdog fixture_closure=verified pid=3699177 reap=ESRCH production_reap=true
+FAILED
+
+failures:
+
+failures:
+    shared_child_contract::nonfinal_child_clone_drop_keeps_the_real_child_available
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 61 filtered out; finished in 0.04s
+

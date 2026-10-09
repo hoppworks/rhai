@@ -1,0 +1,1 @@
+Three X35 exact selectors: each function-anchored RED101 at its named assertion and restored instrumented-source GREEN0; independent PIDfd/process and fixture cleanup readbacks required.

@@ -1,0 +1,38 @@
+
+running 1 test
+test shared_child_contract::final_drop_honors_both_kill_on_drop_policies ... shared-child controller_started scenario=drop_false pid=3391758 root=/root/.local/share/agent-builds/rhai/shared-child-contracts-20261009T1718Z-03/agent-build-2pfacld9/shared-child-fixture-3391756-0
+shared-child controller_reaped scenario=drop_false pid=3391758 status=exit status: 101
+shared-child controller_output scenario=drop_false stdout="\nrunning 1 test\nF\nfailures:\n\nfailures:\n    shared_child_contract::scenario_entry\n\ntest result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.04s\n\n" stderr="shared-child nonfinal-drop pid=3391761 child_record=ready operational_probe=one\nthread 'shared_child_contract::scenario_entry' panicked at tests/fixtures/sys_process_shared_child_contract.rs:304:9:\nRED control: kill_on_drop=false child unexpectedly remained operational\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\nshared-child controller-panic-cleanup scenario=drop_false payload=\"RED control: kill_on_drop=false child unexpectedly remained operational\" fixture_pid=3391761 reap=ESRCH verified=true\n"
+shared-child controller_esrch pid=3391758 verified=true
+thread 'shared_child_contract::final_drop_honors_both_kill_on_drop_policies' panicked at tests/fixtures/sys_process_shared_child_contract.rs:512:17:
+scenario drop_false failed (exit status: 101)
+stdout:
+
+running 1 test
+F
+failures:
+
+failures:
+    shared_child_contract::scenario_entry
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.04s
+
+
+stderr:
+shared-child nonfinal-drop pid=3391761 child_record=ready operational_probe=one
+thread 'shared_child_contract::scenario_entry' panicked at tests/fixtures/sys_process_shared_child_contract.rs:304:9:
+RED control: kill_on_drop=false child unexpectedly remained operational
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+shared-child controller-panic-cleanup scenario=drop_false payload="RED control: kill_on_drop=false child unexpectedly remained operational" fixture_pid=3391761 reap=ESRCH verified=true
+
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+shared-child watchdog fixture_closure=verified pid=3391761 reap=ESRCH production_reap=true
+FAILED
+
+failures:
+
+failures:
+    shared_child_contract::final_drop_honors_both_kill_on_drop_policies
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.04s
+

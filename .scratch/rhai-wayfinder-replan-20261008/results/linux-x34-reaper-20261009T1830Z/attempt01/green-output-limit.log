@@ -1,0 +1,24 @@
+
+running 1 test
+
+running 1 test
+
+running 1 test
+managed_pidfd_acquired pid=2131088 start=8290958 ppid=2131078 pgid=2131088
+managed_pidfd_acquired pid=2131090 start=8290958 ppid=2131088 pgid=2131088
+managed_pidfd_acquired pid=2131092 start=8290959 ppid=2131090 pgid=2131088
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.03s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.04s
+
+managed-scope sentinel_cleanup pid=2131075 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_output_limit_group_boundary host=2131078 host_start=8290958 reaper=2131076 reaper_start=8290957 leader=2131088 leader_start=8290958 leader_absent=true worker=2131090 worker_start=8290958 worker_absent=true leaf=2131092 leaf_start=8290959 leaf_absent=true group=2131088 group_probe=-1 group_errno=3 host_live=true reaper_live=true sentinel=2131075 sentinel_start=8290957 sentinel_live=true output_limit=true prefix_preserved=true captures_honest=true pidfds_exited=true cleanup_exact=true no_watchdog_cleanup_through_boundary=true
+ api="host=2131078 host_start=8290958 api_success=false api_outcome=typed_output_limit stdout_len=4096 stdout_prefix_exact=true stdout_complete=false stderr_len=0 stderr_complete=false timed_out=false exit=None\n" cleanup="worker=2131090 start=8290958 pgid=2131088 reaped=true wait_status=9 leaf=2131092 start=8290959 pgid=2131088 reaped=true wait_status=9 complete=true\n" reaper_ok=true sentinel_reaped=true no_watchdog_cleanup_after_reap=true
+managed_fixture_cleanup worker_pid=Some(2131090) worker_esrch=true leaf_pid=Some(2131092) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2131088) leader_esrch=true
+test managed_run_output_limit_reaps_group_under_fixture_reaper ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.04s
+

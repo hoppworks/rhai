@@ -1,0 +1,20 @@
+
+running 1 test
+managed_spawn_drop_started root=/root/.local/share/agent-builds/rhai/managed-spawn-lifecycle-20261009T1850Z-01/agent-build-gjpzluwx/tmp/rhai-sys-test-2289804-managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not-0 test_pid=2289804 sentinel_pid=2289806 sentinel_pgid=2289806 leader=2289808 worker=2289810 leaf=2289812 group=2289808
+managed_spawn_nonfinal_drop leader=2289808 leader_live=true worker=2289810 worker_live=true leaf=2289812 leaf_live=true all_live=true
+managed_spawn_final_drop leader=2289808 leader_esrch=true worker=2289810 worker_esrch=true leaf=2289812 leaf_esrch=true all_esrch=true sentinel=2289806 live=true
+thread 'managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not' panicked at tests/sys_process.rs:4044:5:
+RED control: final Child drop unexpectedly terminated the group
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+managed-scope sentinel_cleanup pid=2289806 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(2289810) worker_esrch=true leaf_pid=Some(2289812) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2289808) leader_esrch=true
+test managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not ... FAILED
+
+failures:
+
+failures:
+    managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.13s
+

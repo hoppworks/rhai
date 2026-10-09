@@ -1,0 +1,11 @@
+
+running 1 test
+test direct_run_returns_with_pipe_closed_worker_live_control ... FAILED
+
+failures:
+
+failures:
+    direct_run_returns_with_pipe_closed_worker_live_control
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.12s
+

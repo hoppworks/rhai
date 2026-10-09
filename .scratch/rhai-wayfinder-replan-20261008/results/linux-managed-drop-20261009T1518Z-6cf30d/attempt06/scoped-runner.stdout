@@ -1,0 +1,19 @@
+source.tar.gz: OK
+Cargo.lock.accepted: OK
+owned-red.patch: OK
+inputs.json: OK
+selection.json: OK
+test-source.rs: OK
+payload.sh: OK
+cleanup-after-run.py: OK
+fixture-identity.patch: OK
+inputs.json: OK
+owned-red.patch: OK
+payload.sh: OK
+red-source.sha256: OK
+run-attempt06.py: OK
+selection.json: OK
+test-source-instrumented.rs: OK
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.21s
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.21s
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.12s

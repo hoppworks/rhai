@@ -1,0 +1,14 @@
+{
+  "package": "Targeted RED for final kill_on_drop(false) client-release contract",
+  "source_revision": "34e0fa61a3d12fe6c41902c44618ff44e20d73d4",
+  "source_archive_sha256": "68444772248d81587ee19d157c4d49d35a6ba12482233264bba0c622a113f644",
+  "sys_process_test_sha256": "86f1142ff1ae8de5a8b813e892e407a90c1bec70eab864c20b7735f53015bf41",
+  "committed_shared_fixture_sha256": "1faf45c57a4fefeaa05683043e064d3485e892887986fef749bedc974230b217",
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "platform": "Linux x86_64 Workhorse",
+  "toolchain": "Rust/Cargo 1.77.2",
+  "profiles": ["testing-environ,sys", "testing-environ,sys,sync"],
+  "selector": "shared_child_contract::final_drop_honors_both_kill_on_drop_policies",
+  "limits": {"runner_timeout_seconds": 600, "cargo_build_jobs": 2},
+  "green_reuse": "attempt02 exact selector both profiles, source restored hash matched committed fixture; no relevant changes"
+}

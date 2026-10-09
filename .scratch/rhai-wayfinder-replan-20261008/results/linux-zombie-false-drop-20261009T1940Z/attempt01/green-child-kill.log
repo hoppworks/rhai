@@ -1,0 +1,24 @@
+
+running 1 test
+
+running 1 test
+
+running 1 test
+managed_pidfd_acquired pid=2633590 start=8353802 ppid=2633587 pgid=2633590
+managed_pidfd_acquired pid=2633592 start=8353802 ppid=2633590 pgid=2633590
+managed_pidfd_acquired pid=2633594 start=8353802 ppid=2633592 pgid=2633590
+managed_child_kill_live reaper=2633585 reaper_start=8353801 host=2633587 host_start=8353801 leader=2633590 leader_start=8353802 worker=2633592 worker_start=8353802 leaf=2633594 leaf_start=8353802 group=2633590 sentinel=2633584 sentinel_start=8353801 sentinel_pgid=2633584
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.04s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.04s
+
+managed-scope sentinel_cleanup pid=2633584 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_child_kill_boundary host_live_at_return=true reaper_live_at_return=true leader=2633590 leader_start=8353802 leader_record_start_matches_pidfd=true leader_absent=true worker=2633592 worker_start=8353802 worker_absent=true leaf=2633594 leaf_start=8353802 leaf_absent=true group=2633590 exact_descendants_reaped=true sentinel=2633584 sentinel_start=8353801 sentinel_pgid=2633584 sentinel_live_at_return=true sentinel_reaped_after_return=true api_bound=true report_returned=true killed_report=true capture_complete=true pidfds_exited=true reaper_ok=true host_absent_after_cleanup=true group_empty=true api="host=2633587 host_start=8353801 api_success=true api_outcome=child_report success=false code=None signal=Some(9) stdout_complete=true stderr_complete=true cause=none diagnostic=none\n" reaped="worker=2633592 start=8353802 pgid=2633590 reaped=true wait_status=9 leaf=2633594 start=8353802 pgid=2633590 reaped=true wait_status=9 complete=true\n" cleanup="pid=2633585 prompt=true host_status=0 worker=2633592 start=8353802 pgid=2633590 reaped=true wait_status=9 leaf=2633594 start=8353802 pgid=2633590 reaped=true wait_status=9 complete=true\n"
+managed_fixture_cleanup worker_pid=Some(2633592) worker_esrch=true leaf_pid=Some(2633594) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2633590) leader_esrch=true
+test managed_child_kill_reports_group_closed_under_fixture_reaper ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.04s
+

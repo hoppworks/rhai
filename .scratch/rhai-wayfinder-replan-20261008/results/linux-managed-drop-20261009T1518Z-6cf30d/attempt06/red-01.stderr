@@ -1,0 +1,10 @@
+managed_fixture_started root=/root/.local/share/agent-builds/rhai/linux-x35-20261009T1620Z-cd51a2/agent-build-j87fmo9m/tmp/rhai-sys-test-979558-managed_run_closes_worker_after_leader_exit_and_preserves_sentinel-0 test_pid=979558 sentinel_pid=979560
+managed_normal_leader pid=979562 pgid=979562 esrch=true
+managed_normal_worker_leaf worker_pid=979564 worker_esrch=true leaf_pid=979566 leaf_esrch=true
+managed_normal_sentinel pid=979560 live=true
+thread 'managed_run_closes_worker_after_leader_exit_and_preserves_sentinel' panicked at tests/sys_process.rs:3360:5:
+RED control expects unrelated sentinel to be killed
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+managed-scope sentinel_cleanup pid=979560 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(979564) worker_esrch=true leaf_pid=Some(979566) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(979562) leader_esrch=true

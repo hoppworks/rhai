@@ -1,0 +1,2 @@
+launcher_exit=1
+reason=launcher expected absent ATTEMPT directory after files had been staged there; run_scoped was not invoked

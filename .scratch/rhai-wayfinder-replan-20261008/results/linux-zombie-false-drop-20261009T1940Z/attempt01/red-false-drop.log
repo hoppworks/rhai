@@ -1,0 +1,20 @@
+
+running 1 test
+managed_false_drop_started root=/root/.local/share/agent-builds/rhai/zombie-false-drop-20261009T1940Z-01/agent-build-byksv8ix/tmp/rhai-sys-test-2630981-managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit-0 test_pid=2630981 sentinel_pid=2630983 sentinel_pgid=2630983 leader=2630985 worker=2630987 leaf=2630989 group=2630985
+managed_false_drop_after_final_client_drop leader=2630985 leader_live=true worker=2630987 worker_live=true leaf=2630989 leaf_live=true sentinel=2630983 sentinel_live=true
+managed_false_drop_live_challenge leader=2630985 worker=2630987 leaf=2630989 group=2630985 ack_count=3 ack_pids=[Some(2630985), Some(2630987), Some(2630989)] ack_groups=[Some(2630985), Some(2630985), Some(2630985)]
+thread 'managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit' panicked at tests/sys_process.rs:3692:5:
+RED control: kill_on_drop(false) members unexpectedly remained live
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+managed-scope sentinel_cleanup pid=2630983 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(2630987) worker_esrch=true leaf_pid=Some(2630989) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2630985) leader_esrch=true
+test managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit ... FAILED
+
+failures:
+
+failures:
+    managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.30s
+

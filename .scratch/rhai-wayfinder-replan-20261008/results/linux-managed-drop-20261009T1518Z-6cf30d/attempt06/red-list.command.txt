@@ -1,0 +1,2 @@
+cwd=/root/.local/share/agent-builds/rhai/linux-x35-20261009T1620Z-cd51a2/agent-build-j87fmo9m/source
+argv=/root/.local/share/agent-builds/rhai/linux-x35-20261009T1620Z-cd51a2/agent-build-j87fmo9m/target/debug/deps/sys_process-2037c14dd2370964 --list 

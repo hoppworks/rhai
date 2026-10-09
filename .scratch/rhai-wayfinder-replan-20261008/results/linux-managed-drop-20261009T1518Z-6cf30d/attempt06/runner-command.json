@@ -1,0 +1,14 @@
+{
+  "TMPDIR": "/root/.local/share/agent-builds/rhai/linux-x35-20261009T1620Z-cd51a2",
+  "argv": [
+    "/usr/bin/python3",
+    "/var/home/workhorse/projects/agent-skills/tools/run_scoped.py",
+    "--timeout",
+    "1200",
+    "--",
+    "bash",
+    "/var/roothome/rhai-evidence/linux-managed-drop-attempt02-20261009T1733Z-a7c3e1/linux-managed-drop-20261009T1518Z-6cf30d/attempt06/payload.sh",
+    "/var/roothome/rhai-evidence/linux-managed-drop-attempt02-20261009T1733Z-a7c3e1/linux-managed-drop-20261009T1518Z-6cf30d"
+  ],
+  "cwd": "/var/roothome/rhai-evidence/linux-managed-drop-attempt02-20261009T1733Z-a7c3e1/linux-managed-drop-20261009T1518Z-6cf30d"
+}

@@ -1,0 +1,32 @@
+
+running 1 test
+
+running 1 test
+
+running 1 test
+managed_pidfd_acquired pid=2128497 start=8290656 ppid=2128412 pgid=2128497
+managed_pidfd_acquired pid=2128499 start=8290656 ppid=2128497 pgid=2128497
+managed_pidfd_acquired pid=2128501 start=8290656 ppid=2128499 pgid=2128497
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.77s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.78s
+
+managed-scope sentinel_cleanup pid=2128409 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_deadline_group_boundary host=2128412 host_start=8290655 reaper=2128410 reaper_start=8290655 leader=2128497 leader_start=8290656 leader_absent=true worker=2128499 worker_start=8290656 worker_absent=true leaf=2128501 leaf_start=8290656 leaf_absent=true group=2128497 group_probe=-1 group_errno=3 host_live=true reaper_live=true sentinel=2128409 sentinel_start=8290655 sentinel_live=true timed_out=true captures_incomplete=true partial_output=true pidfds_exited=true cleanup_exact=true no_watchdog_cleanup_through_boundary=true
+ api="host=2128412 host_start=8290655 api_success=true api_outcome=timeout_report success=Some(false) timed_out=Some(true) stdout_complete=Some(false) stderr_complete=Some(false) stdout_marker=true stderr_marker=true\n" cleanup="worker=2128499 start=8290656 pgid=2128497 reaped=true wait_status=9 leaf=2128501 start=8290656 pgid=2128497 reaped=true wait_status=9 complete=true\n" reaper_ok=true sentinel_reaped=true no_watchdog_cleanup_after_reap=true
+thread 'managed_run_deadline_reaps_group_under_fixture_reaper' panicked at tests/sys_process.rs:2744:5:
+RED control: deadline report unexpectedly present
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+managed_fixture_cleanup worker_pid=Some(2128499) worker_esrch=true leaf_pid=Some(2128501) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2128497) leader_esrch=true
+test managed_run_deadline_reaps_group_under_fixture_reaper ... FAILED
+
+failures:
+
+failures:
+    managed_run_deadline_reaps_group_under_fixture_reaper
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.78s
+

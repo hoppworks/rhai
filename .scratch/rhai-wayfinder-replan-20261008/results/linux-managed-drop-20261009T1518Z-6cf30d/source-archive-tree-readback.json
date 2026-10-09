@@ -1,0 +1,17 @@
+{
+  "source_revision": "34e0fa61a3d12fe6c41902c44618ff44e20d73d4",
+  "read_only_remote": "https://github.com/hoppworks/rhai.git",
+  "fetch": "git fetch --no-tags origin 34e0fa61a3d12fe6c41902c44618ff44e20d73d4",
+  "archive_sha256": "68444772248d81587ee19d157c4d49d35a6ba12482233264bba0c622a113f644",
+  "comparison": "git archive --format=tar <source_revision> versus source.tar.gz",
+  "git_archive_file_count": 9199,
+  "source_archive_file_count": 9199,
+  "missing_files": 0,
+  "extra_files": 0,
+  "content_executable_mode_or_symlink_mismatches": 0,
+  "result": "exact full archive tree match",
+  "archive_path_on_workhorse": "/var/roothome/rhai-evidence/wayfinder-20261009/linux-managed-drop-20261009T1518Z-6cf30d/source.tar.gz",
+  "second_verified_workhorse_copy": "/var/roothome/rhai-evidence/linux-managed-drop-attempt02-20261009T1733Z-a7c3e1/linux-managed-drop-20261009T1518Z-6cf30d/source.tar.gz",
+  "local_duplicate_removed_after_verification": true,
+  "local_duplicate_reason": "145 MiB archive is exactly reproducible from the committed Git tree; retained both Workhorse copies, the source revision in the fork, archive hash, and complete tree comparison."
+}

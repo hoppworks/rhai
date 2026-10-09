@@ -1,0 +1,25 @@
+
+running 1 test
+managed_post_reap_ordinary_wait root=/root/.local/share/agent-builds/rhai/process-completion-capture-20261009T1915Z-01/agent-build-8ebfdc60/tmp/rhai-sys-test-2445404-managed_spawn_post_reap_cancel_bounds_escaped_capture-0 test_pid=2445404 leader=2445408 holder=2445410 sentinel=2445406 wait_unit=true holder_live=true
+managed_post_reap_typed_error unexpected=None
+managed_post_reap_leader leader=2445408 exit_record_matches=true exit_record="pid=2445408 release_seen=true exit_intent=true\n" try_wait_unit=true try_wait_error=None ps_status=Ok("") leader_esrch=true holder=2445410 holder_live=true
+managed_post_reap_uncancelled_wait leader=2445408 wait_unit=true holder=2445410 holder_live=true sentinel=2445406 sentinel_live=true
+managed_escaped_pipe_cleanup root=/root/.local/share/agent-builds/rhai/process-completion-capture-20261009T1915Z-01/agent-build-8ebfdc60/tmp/rhai-sys-test-2445404-managed_spawn_post_reap_cancel_bounds_escaped_capture-0 leader=Some(2445408) leader_esrch=true holder=Some(2445410) holder_esrch=true
+managed-scope sentinel_cleanup pid=2445406 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_escaped_pipe_terminal leader=Some(2445408) leader_esrch=true holder=Some(2445410) holder_esrch=true sentinel=2445406 sentinel_esrch=true
+managed_post_reap_cancel root=/root/.local/share/agent-builds/rhai/process-completion-capture-20261009T1915Z-01/agent-build-8ebfdc60/tmp/rhai-sys-test-2445404-managed_spawn_post_reap_cancel_bounds_escaped_capture-0 test_pid=2445404 leader=2445408 leader_esrch_before_kill=true leader_esrch=true holder=2445410 holder_live_after_cancel=true holder_esrch=true sentinel=2445406 sentinel_esrch=true probe="pid=2445410 stdout_result=-1 stdout_error=32 stderr_result=-1 stderr_error=32\n" wait_unit=false
+thread 'managed_spawn_post_reap_cancel_bounds_escaped_capture' panicked at tests/sys_process.rs:3975:5:
+assertion `left == right` failed: RED control: post-reap capture unexpectedly complete
+  left: false
+ right: true
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+managed_escaped_pipe_cleanup root=/root/.local/share/agent-builds/rhai/process-completion-capture-20261009T1915Z-01/agent-build-8ebfdc60/tmp/rhai-sys-test-2445404-managed_spawn_post_reap_cancel_bounds_escaped_capture-0 leader=Some(2445408) leader_esrch=true holder=Some(2445410) holder_esrch=true
+test managed_spawn_post_reap_cancel_bounds_escaped_capture ... FAILED
+
+failures:
+
+failures:
+    managed_spawn_post_reap_cancel_bounds_escaped_capture
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.60s
+

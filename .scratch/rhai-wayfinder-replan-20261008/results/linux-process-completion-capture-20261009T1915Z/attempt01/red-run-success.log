@@ -1,0 +1,31 @@
+
+running 1 test
+
+running 1 test
+
+running 1 test
+managed_pidfd_acquired pid=2444214 start=8330470 ppid=2444211 pgid=2444214
+managed_pidfd_acquired pid=2444216 start=8330470 ppid=2444214 pgid=2444214
+managed_pidfd_acquired pid=2444218 start=8330470 ppid=2444216 pgid=2444214
+managed_prompt_reap_live_boundary reaper=2444209 reaper_start=8330469 host=2444211 host_start=8330469 leader=2444214 leader_start=8330470 worker=2444216 worker_start=8330470 leaf=2444218 leaf_start=8330470 group=2444214 sentinel=2444208 sentinel_start=8330469
+thread 'managed_run_succeeds_after_fixture_reaper_reaps_descendants' panicked at tests/sys_process.rs:3142:5:
+RED control: successful managed run report unexpectedly present
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.22s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.23s
+
+managed-scope sentinel_cleanup pid=2444208 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(2444216) worker_esrch=true leaf_pid=Some(2444218) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2444214) leader_esrch=true
+test managed_run_succeeds_after_fixture_reaper_reaps_descendants ... FAILED
+
+failures:
+
+failures:
+    managed_run_succeeds_after_fixture_reaper_reaps_descendants
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.23s
+

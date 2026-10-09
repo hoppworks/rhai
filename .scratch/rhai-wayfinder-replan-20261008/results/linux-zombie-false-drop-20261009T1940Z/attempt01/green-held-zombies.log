@@ -1,0 +1,24 @@
+
+running 1 test
+
+running 1 test
+
+running 1 test
+managed_pidfd_acquired pid=2632156 start=8353679 ppid=2632153 pgid=2632156
+managed_pidfd_acquired pid=2632158 start=8353679 ppid=2632156 pgid=2632156
+managed_pidfd_acquired pid=2632160 start=8353679 ppid=2632158 pgid=2632156
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 1.22s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 1.23s
+
+managed_held_zombie_boundary host_live_at_return=true leader=2632156 leader_start=8353679 leader_reaped=true worker=2632158 worker_start=8353679 worker_state=Z worker_pgid=2632156 leaf=2632160 leaf_start=8353679 leaf_state=Z leaf_pgid=2632156 group=2632156 kill_zero_result=0 kill_zero_errno=0 capture_complete=true host=2632153 host_start=8353678 api_success=false api_outcome=typed_process_io cause_op=observe_process_group_closure cause_op_matches=true kind=TimedOut exit=Some(0) stdout_complete=true stderr_complete=true diagnostic=true cause_details=Some(Process { cause: Io { op: "observe process group closure", target: "/var/roothome/.local/share/agent-builds/rhai/zombie-false-drop-20261009T1940Z-01/agent-build-byksv8ix/target/debug/deps/sys_process-2037c14dd2370964", kind: TimedOut, message: "managed process scope remained present after leader reap" }, report: ProcessReport { stdout: [10, 114, 117, 110, 110, 105, 110, 103, 32, 49, 32, 116, 101, 115, 116, 10, 46, 10, 116, 101, 115, 116, 32, 114, 101, 115, 117, 108, 116, 58, 32, 111, 107, 46, 32, 49, 32, 112, 97, 115, 115, 101, 100, 59, 32, 48, 32, 102, 97, 105, 108, 101, 100, 59, 32, 48, 32, 105, 103, 110, 111, 114, 101, 100, 59, 32, 48, 32, 109, 101, 97, 115, 117, 114, 101, 100, 59, 32, 54, 48, 32, 102, 105, 108, 116, 101, 114, 101, 100, 32, 111, 117, 116, 59, 32, 102, 105, 110, 105, 115, 104, 101, 100, 32, 105, 110, 32, 48, 46, 48, 49, 115, 10, 10], stderr: [], stdout_complete: true, stderr_complete: true, exit: Some(Code(0)), timed_out: false, cleanup_diagnostics: [ProcessDiagnostic { operation: "observe process group closure", io_kind: None, message: "managed scope remains present under retained process ownership" }] } }) cleanup_diagnostics=[ProcessDiagnostic { operation: "observe process group closure", io_kind: None, message: "managed scope remains present under retained process ownership" }]
+ held="pid=2632151 start=8353678 host_status=0 worker=Some(2632158) worker_start=Some(8353679) leaf=Some(2632160) leaf_start=Some(8353679) held_zombies=true\n" reaper_status=ExitStatus(unix_wait_status(0))
+managed_held_zombie_cleanup worker=2632158 reaped=true leaf=2632160 reaped=true
+managed_fixture_cleanup worker_pid=Some(2632158) worker_esrch=true leaf_pid=Some(2632160) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2632156) leader_esrch=true
+test managed_run_reports_while_fixture_reaper_holds_stopped_zombies ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 1.23s
+

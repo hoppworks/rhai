@@ -1,0 +1,13 @@
+
+running 1 test
+test shared_child_contract::spawn_returns_while_large_stdin_is_blocked_and_wait_snapshots_are_stable ... shared-child controller_started scenario=blocked_input_wait_snapshot pid=3239063 root=/root/.local/share/agent-builds/rhai/shared-child-contracts-20261009T1715Z-02/agent-build-cioje82u/shared-child-fixture-3239041-0
+shared-child controller_reaped scenario=blocked_input_wait_snapshot pid=3239063 status=exit status: 0
+shared-child controller_output scenario=blocked_input_wait_snapshot stdout="\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.21s\n\n" stderr="shared-child blocked-stdin ready pid=3239175 spawn_elapsed_ms=3\nshared-child final pid=3239175 child_record=\"pid=3239175 state=exited code=17\\n\" reap=ESRCH stable-wait=1 stable-try-wait=1 repeated_post_completion_kill=2 cached_snapshot=unchanged\n"
+shared-child controller_esrch pid=3239063 verified=true
+shared-child outer-observation scenario=blocked_input_wait_snapshot controller_pid=3239063 fixture_pid=3239175 fixture_record="pid=3239175 state=exited code=17" reap=ESRCH verified=true
+shared-child scenario=blocked_input_wait_snapshot controller_pid=3239063 status=ok fixture_record=Some("pid=3239175 state=exited code=17\n")
+shared-child watchdog fixture_closure=verified pid=3239175 reap=ESRCH production_reap=true
+ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.22s
+

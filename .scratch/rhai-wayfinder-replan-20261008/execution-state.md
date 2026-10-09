@@ -1,100 +1,17 @@
-# Current execution state
-Updated: 2026-10-09. Autonomous implementation remains authorized.
-Cleaned AGENTS37f95ff6/installed skills/Memory reread; reviewer confirmed. Legacy config/common inactive.
-Capacity comes from live resources; archived exceptions/PIDs/model mappings confer no authority.
-Accepted Linux1.77.2 baseline X30: real200-run census tasks3/fds4/workers1 unchanged;
-results/linux-x30-minimum-20261008T223319Z-c8818e49/ binds reused RED, review and cleanup.
-Next: publish accepted refusal/retirement checkpoint; implement remaining setup/evidence fault controls.
-PublicToolsOnly accepted; disconnect/replay native0 + wrong-marker RED acceptedf2de2fe9….
-20 originals/70 frames; payload125, exact identity stopped and runtime absent.
-Client-death01 failure preserved; corrected02 accepted999cb27f:GREEN0/markerRED/PID stopped.
-Driver-fix02 build0/parser27 accepted by combined review;24 originals/71 frames verified.
-Reused473be314…/c3d91a8…/caf4afaa…;four runtime modes accepted8d1631d7,39files/137frames.
-Monitor-death/grandchild/sentinel+reset accepted c8aee870:27 originals/116frames; no rerun.
-Nested01 infrastructure2 preserved; corrected02 native0/Driver2/RED, metadata4/144/48; 3files/10frames accepted72753515; retirement0/3actors absent accepted746588c9. Windows source03/04 checks
-are complete with exported originals and exact cleanup. All3 source P2 findings are corrected:
-checked close before clean publication; typed failed-start cleanup report;
-indeterminate overlapped I/O retains its exact buffer/worker/permit.
-Owner2026-10-09 explicitly moved execution to workhorse; actual SSH/VNC console succeeds.
-LLLM console failures preserved; console18 retired; own console19/SSH6001 active. Verify live identities for cleanup.
-Output-limit/retirement accepted2e337810:root/child125,64MiB fullhash,16files/60frames; exact30-file retirement0. Native gate OPEN; backend/cfg/metadata/example,
-no_index/native-handle tests and held C# fixture remain unaccepted/unpublished WIP.
-Held-Payload compile on workhorse: exit0,19 original files/54 frames, owner-only before/after.
-Results: windows-custody-20261008T125846Z-b7f83433/workhorse-held-compiler01/; compile accepted.
-Reuse public-loop03 and unchanged accepted custody/results, not a full rerun.
-Source checks: results/windows-backend-source-20261008T203635Z-297071df/.
-Initial5 Windows1.77 cross checks and actual Linux default-core1.66 check/tree
-returned0. Their frozen earlier source bindings remain. Graph-wrapper libc analysis corrected against saved originals, without another build.
-Affected-check02 aborted34.813s in storage sampling when Cargo removed a transient
-rmeta; this is infrastructure, not a product assertion RED. Exact scope retired.
-Reviewed affected-check03 passed baseline/no_index+sync; affected-check04 passed
-new tests with sys alone/no_index. Source-only, not native Windows acceptance.
-Owned transient ENOENT is recorded with limits kept; core/profiles reused.
-Source05 kill/cache/final-drop/package-drop/throw checks passed3profiles;42.438s
-outer0, exact cleanup and same review confirmed. Source4e2bb291… corrects its
-pre-observer guard P2; native lifecycle criteria remain OPEN.
-Lock00afc549… adds only root windows-sys0.59; no dependency version/checksum changes.
-Current Windows results: results/windows-custody-20261008T125846Z-b7f83433/.
-Public02 native RED2 was a parser oracle failure; its independent readback has
-all8 CRC-verified completion records. Public01 previously timed out with four
-records; capture-root handle duplication, manifest-writer close and finished-worker
-shutdown now pass native capture04/05 and public03. Parser04 RED/05 GREEN24 and
-capture05 GREEN remain valid. Native05 owner's80131623 refusal is historical:
-Application event1025 record1511 reports2 active processes; their identities are
-unknown. Minimized compiler-closure01 passes owner-only before/after one compile
-(19 originals/54 frames); targeted driver-identity01 also passes owner/watchdog
-closure (24 originals/71 frames). Neither proves the earlier extra PID's cause.
-Do not repeat accepted parser/capture or silently declare that cause resolved.
-Accepted narrow prerequisites: native bootstrap24-file export; private-scope
-selector RED/GREEN28-file export; descendant-only exact inherited user/SYSTEM
-ACL RED04/GREEN02 with32 originals, broader World ACL denied and sentinel intact.
-Strict root/staging/evidence ACLs retained; callback/opaque ACEs reject.
-Monitor-death/grandchild/sentinel/reset accepted; full custody remains OPEN:
-Parent-exit accepted37dc3f53; payload failure accepted789196ae:root2/child-1,30files/125frames;
-private product work retirement and bounded export. No native Windows Cargo before custody closure.
-Execution host: workhorse. Latest source/evidence checkout remains preserved on LLLM:
-/root/projects/rhai-wayfinder-20261008, fork main (exact receipt in fork-publication.json), plus owned Windows source WIP.
-Latest human host steering was verified in origin thread01a1101b-e9cc-7a02-a5f6-c5673c302ef3;
-no project builds/tests/servers/proxies or further implementation edits on Laptop.
-Own console10/11/12/13 retired; exact cleanup receipts retained; Codex/CUA untouched.
-No guest QGA; own workhorse console19 uses authenticated SSH, private loopback5909→5900
-for native UI control. No Laptop servers or unauthenticated LAN VNC exposure.
-Workhorse VM running; older disk/companions reflink-backed up. LLLM ACPI shutdown requested,
-not confirmed; no forced stop/live disk copy. Fixture02b1/source711 reused for accepted parent/failure slices. Prior migration
-preserves exact UUID dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19, disk SHA95e2c28d…,
-249 companions, exact private SecureBoot firmware/NVRAM/TPM. Native guest verifies
-SecureBoot1, RhaiTest non-admin, MSVC14.44/SDK10.0.26100, Rust1.93;1.77.2 absent.
-Official1.77.2 archives verified locally, not installed. Migration originals in
-host-migration-lllm/. Missing Mac-native rows stay open under the Laptop boundary.
-Canonical route: [implementation-plan.md](implementation-plan.md).
-Accepted Unix rows reuse their bound originals and combined review:
-X23 Darwin integer examples; wait/cause4 profiles and numericIPv6/read-entry reused;
-Darwin semantic119 supported rows/120 raw excluding host-unavailable EILSEQ;
-process-minimum58 supported assertions/59 raw including affected i32 bothOSes;
-f32 real invalid/valid duration and host-output bounds Darwin/Linux RED101/GREEN0.
-Linux minimum policy/NotFound/argv/env_remove addendum accepts4 new GREENs
-and5 original RED controls;8 criteria covered at1.77.2, all own resources retired.
-Historical X31 actual Condvar-entry proof remains applicable: current Unix backend
-byte-identical to accepted snapshots. Completed Linux integer example route: results/linux-integer-example-20261008T214557Z-0fde4a20/.
-Profiles sys,no_float / sys,sync,only_i32,no_float: same-binary RED101/GREEN0,
-fresh records/clone/ESRCH; only X23/Ticket06 slices, no R5/full-matrix claim.
-Both profiles have accepted RED101/GREEN0, combined review and exact cleanup.
-Post-spawn launcher PID-receipt TypeError did not interrupt/restart the44.562s run;
-outer exit unknown. Native statuses and independent exact cleanup are preserved.
+# Current coordinator state
 
-Git gates reread: no active local hooks/custom hooksPath; CI Cargo matrix remains an
-integration gate, not a reason to rebuild unchanged Rust for a PowerShell selector.
-Fork maind7350a17: output/retirement accepted; payload/parent/monitor proofs preserved;
-atomic push/readback verifies main as the only remote branch. Laptop main stays
-read-only at c63. Exclude foreign tests/fixtures/sys_process_shared_child_contract.rs
-(SHA14a0808a…) and all unowned changes. Fork hoppworks/rhai main only;
-lowercase author/committer hoppworks; no upstream/PR/Actions/deploy/publish,
-credential/admin/shared-service change or foreign process/resource/session changes.
+Updated 2026-10-09. Owner-authorized A–F implementation and acceptance continue; no new Goal. Current fork `main` is `34e0fa61a3d12fe6c41902c44618ff44e20d73d4`, with only `main` on the remote. The eight remote commits after local `fe87e3467` are preserved and contain no changes to X24's bound Rust process source, integration test or lock. My accepted X24 evidence checkpoint is committed locally and being replayed atop that fork history before its authorized atomic push.
 
-All original87 criteria/extensions and A–F remain binding; narrow acceptance
-never closes the whole plan. Existing approvals, resource/cause/budget history and
-valid evidence are retained in the canonical plan, linked original results and
-[previous execution state](history/execution-before-public-success-20261008.md).
-Legacy global layer remains disabled by owner; unchanged Matt-Pocock Wayfinder
-and project technical/security contracts apply. No historical PENDING label or
-agent-owned retry estimate creates a new approval gate.
+**Next action:** Continue the existing Windows-custody prerequisite on Workhorse over SSH, respecting the latest host boundary. First refresh read-only host/domain/guest readiness, live capacity, and exact owned console/process identities. Treat previously recorded session/process IDs as history until independently matched; do not terminate or restart anything based on old IDs. Then perform the cheapest still-open setup/evidence fault control through the existing monitor/driver route. No Windows Cargo/product build before custody closure. Darwin X25 remains the next Unix row when native Mac execution is within the active host boundary; do not repeat X24 selectors or start a Laptop project build now.
+
+Current rules reread: project `AGENTS.md` SHA `37f95ff6a80be28bc21e9e523674f46f3ce6153a1923c708b86333bf21bba37c`; `~/.agents/AGENTS.md` is absent. Relevant build-efficiently skill SHA `58f676b48691ea2ed476f67f13ef68aedcdb73cd4`; code-review skill SHA `09eb147f793e4647949edd32dbad278f0554dfb56e0d46b699cd4c2c55bf0357`. Memory entry points were reread; no Rhai-specific memory applies. Central agent-skills HEAD `1b6e1da85f87cad25f7aafc91aa782319ac6ef93` is not asserted as installed global policy. No active subagents remain. The previous 100-line coordinator state is preserved in `history/execution-state-before-x24-checkpoint-20261009.md`.
+
+Human boundaries: Workhorse via SSH for current work; preserve foreign processes, fixtures, dirty worktrees and Windows VM. Publish only to `https://github.com/hoppworks/rhai.git` fork `main`, never public upstream. Commit author/committer exactly lowercase `hoppworks`, configured email retained. Keep remote branch consolidation at main only. `.worktrees/` is foreign/untracked and remains unstaged.
+
+X24 is accepted by combined independent review: Linux x86_64/Rust1.77.2 reuses the accepted standard row and adds `sync`, `no_float`, `sync,no_float`, `only_i32,no_float`; Darwin arm64/macOS27.0.1/Rust1.77.2 adds standard and `sync`. New rows each have exact assertion RED/restored GREEN, public Engine/real Child behavior, independent PID ESRCH and scoped cleanup. Packet, bindings, logs and verified 192-file manifest: `results/linux-x24-features-20261009T1729Z/`. Root docs/state and accepted owned result packets are in the same checkpoint.
+
+X24 bindings: attempt01 revision `34e0fa61a3d12fe6c41902c44618ff44e20d73d4`; attempts02–04 revision `fe87e3467a8c2f374e680bc1213522c2014f6a9d`. Exact `tests/sys_process.rs` and `src/packages/sys/process.rs` hashes match across runs; lock SHA `2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425`. Selector SHA `21db2d7a36f3692ea1c3775fc895707676d2334fcc430d99e0a07051e6547793`. Reused Linux standard proof; removed two byte-identical 146 MB source-archive duplicates and reverified every current manifest entry. Linux attempt01 completed 59s; attempt02's first help invocation exited126 before Cargo, then corrected run completed 19s. Darwin standard/sync completed 23s/29s. Workhorse's first Rust1.77.2 version probe installed official toolchain components; versions were read back and install remains. These setup events are not product failures; consumed invocations stay in evidence.
+
+Windows custody remains OPEN. Accepted remote checkpoints include X30 baseline, public-tools/disconnect-replay, client-death/driver fixes, monitor/grandchild/sentinel/reset, nested refusal and retirement, output cap and exact retirement, plus refusal/retirement checkpoint at remote `34e0fa61a`. Combined reviews and original receipts remain in the linked results. Three source P2 fixes and source checks are recorded. Remaining controls include project-work retirement with bounded export, native setup/evidence/cleanup failure handling and exact host readback. Do not start native Windows Cargo until the gate passes. Previous console/SSH session observations are archived; verify live identity before any cleanup or reuse.
+
+Preserve earlier accepted Unix/Linux evidence and cause/budget history. X30/X34/X35/X37/X38, Child.wait, shared-child and previous Windows-control packets are indexed by `implementation-plan.md`, `docs/sys-package-plan.md`, result roots and `history/execution-before-public-success-20261008.md`. Historical RED-parser and wrong-cwd failures remain classified as harness failures; only actual assertion RED counts. Reuse proofs only while source, assertion, lock, feature, toolchain and environment bindings apply. Full X24, A–F, Windows, remaining Darwin/Linux features/MSRV, Base sys/TCP/integration/docs and release acceptance remain open.

@@ -31,27 +31,31 @@ upstream, enable Actions, publish, deploy, change credentials/admin rights, rese
 the Windows image, change shared services, stop foreign work or stage foreign
 changes. A real missing access prerequisite is a blocker, not implied authority.
 
-First later action: finalize the existing X23 example proof at
-`results/example-20261008T090938Z-zmj63_0i` as specified in **Example correction**.
-Its two affected profiles already have raw RED/GREEN results. Revalidate their
-binding, obtain the existing combined-review result, save the final proof/manifest
-and cleanup receipt, and retire only its verified empty owned outer scope. Do not
-start Cargo for that action. Do not begin with another overall tracking pass.
+Current accepted checkpoints include Linux shared Child lease/wait on revision
+`34e0fa61a3d12fe6c41902c44618ff44e20d73d4`, Rust/Cargo1.77.2, standard/sync;
+and X24 Linux standard reuse plus four RED/GREEN feature rows (sync, no_float,
+sync+no_float, only_i32+no_float) and native Darwin arm64/macOS27.0.1 standard at
+Rust/Cargo1.77.2. The full X24 packet review, exact source/lock bindings and attempt
+history are in `results/linux-x24-features-20261009T1729Z/`; Linux shared-child
+review is in `results/linux-shared-child-contracts-20261009T2025Z/`. Existing
+Linux X31 Condvar-entry evidence is reused only at its reviewed source binding.
+X24 and X31 remain partial overall; other Darwin profiles, Windows, and A–F remain
+open. Continue with the next uncovered native Unix/process row; do not repeat these
+unchanged X24 selectors. Windows custody is an independent prerequisite.
 
-Rule baseline: unchanged installed Matt-Pocock Wayfinder
-`f3fc5632f401156837ee3872f14fe33ccf1024ea`, resolved below
-`/Users/hoppworks/.local/share/mattpocock-skills/`; its Local Markdown tracker;
-project `AGENTS.md` for product/security/ownership requirements. The user's
-October 8 planning instruction disables the old global agent-skills layer and
-overrides old harness, automatic-continuation, fixed-budget and forced-wrapper
-rules. The old archived runner is an available POSIX mechanism, not a new global
-policy. Do not reload or reinstall the disabled layer. Future agents, if needed
-for an independent review, receive this baseline and the current authorized scope.
+Rule baseline reloaded 2026-10-09: central Agent Skills HEAD
+`1b6e1da85f87cad25f7aafc91aa782319ac6ef93`, project `AGENTS.md`, and only the
+relevant current skills. Project contracts and explicit human boundaries remain
+binding. Use current build-efficiently/resource-lifecycle instructions, including
+owned TMPDIR scopes, `run_scoped.py`, and actual `AGENT_RUNTIME_DIR` outputs. Legacy
+setup/Hermes text, duplicate model mappings, expired run exceptions and fixed
+machine-wide heavy-run counts are not active policy. Do not install or sync rules
+as part of this work. Future reviewers must read the current sources before action.
 
-Previous finite invocations and their consumption remain history. Invocation-only
-exceptions have expired. Agent-generated “one repair spent”, old PENDING labels
-and machine-slot conventions do not create new human approval requirements. A
-repeat nevertheless needs a concrete changed input or unresolved assertion.
+Previous finite invocations and their consumption remain history. Agent-generated
+PENDING/blocked labels and estimates do not create human approval gates; preserve
+actual hard limits and consumed work. A repeat needs a changed relevant input or
+an unresolved assertion.
 
 ## Observed starting state and proof reuse
 
@@ -197,11 +201,12 @@ accepts `--timeout SECONDS -- COMMAND`; it does not implement old RSS/storage/
 descendant flags. It creates AGENT_RUNTIME_DIR below TMPDIR, supervises its own
 process group and deletes the verified runtime on exit. It cannot by itself
 reap a fixture that intentionally leaves that process group.
-Its inspected `agentskills/pyguard.py` only selects Python >=3.11; it does not load
-old global policies or change configuration. The remote
-`tools/agentskills/pyguard.py` was read and has this same interpreter-only behavior,
-SHA-256 `a3739f4947744303e1adf3fb0875ac743944a272e5b95c94b1baba53029d313f`.
-A missing interpreter is a cheap precondition failure, not a Cargo RED.
+Its inspected `agentskills/pyguard.py` only selects Python >=3.11; it neither
+loads the current Agent Skills rules nor changes configuration. The remote
+`tools/agentskills/pyguard.py` has the same interpreter-only behavior, SHA-256
+`a3739f4947744303e1adf3fb0875ac743944a272e5b95c94b1baba53029d313f`. Load active
+rules from the central repository separately. A missing interpreter is a cheap
+precondition failure, not a Cargo RED.
 
 The following is a future invocation recipe, with `EVIDENCE` set to the newly
 created durable directory and `BASE` to the reviewed commit. It is not an already
@@ -266,15 +271,13 @@ goes directly to durable log files; record its exit separately. Do not let `set 
 discard an expected RED. Export observations continuously because a timeout also
 deletes runtime. Install fixture guards before launching child/socket work.
 
-Before a heavy run read current capacity/processes, preserving foreign work.
-Use measured availability; historical resource samples are not reservations.
-Two Cargo jobs and one owned heavy run per machine are initial scheduling choices,
-not new hard user limits. Wait or do independent light work when capacity is
-insufficient; no message to another chat is needed to make progress elsewhere.
-Use an initial 8 GiB private disk envelope and 20-minute POSIX deadline, leaving
-time for export. These are operational estimates, not user repair budgets. Monitor
-actual use; terminate only the exact owned run if its declared envelope is reached.
-Diagnose and revise the next scope based on that evidence, not a blind repeat.
+Before a heavy run measure current CPU/RAM/disk and active shared work, preserving
+foreign processes and files. Select job count and concurrency from those facts; no
+machine-wide heavy-run slot exists. Historical resource samples are not
+reservations. Record any invocation-specific hard cap with its user/project/safety
+source; distinguish it from a revisable estimate. Monitor actual use and stop only
+at an applicable explicit limit or unsafe condition. Diagnose the next step from
+evidence rather than repeating blindly.
 
 Keep related profiles, control/restoration and selective dependent tests in one
 runtime. Cargo may reuse unchanged dependency artifacts within it. A test-oracle
@@ -434,23 +437,21 @@ decision tickets or separate handoff orders. Use this deterministic ready queue:
 
 | Priority / package | Actual prerequisite | Smallest observable finish | Reuse / next dependent action |
 |---|---|---|---|
-| First: Example correction | Saved X23 input/result binding and existing independent review | Final proof for the two already-run affected profiles; complete export and exact cleanup receipt | No Cargo. Retain standard/sync and unrelated X24; then take the next ready package. |
+| Completed: Example correction | Saved X23 input/result binding and existing independent review | Final proof for the two already-run affected profiles; complete export and exact cleanup receipt | No Cargo. Retain standard/sync and unrelated X24; take the next ready package. |
 | Early: Windows custody prerequisite | Correct domain/console/token/compiler and reviewed composed entry | Tiny fixture proves bounded payload, interruptions, sentinel survival, independent export and cleanup | Reuse installed VM and unchanged tools; enables native Windows product execution only. |
-| Unix process closure | Owned source/test delta, installed native compiler, guarded fixtures | Missing Unix lifecycle/report assertions, including public Child.wait decoded expansion | Reuse X18–X20 and accepted X21–X38 subsets; share related test artifacts/cache. |
+| Unix process closure | Bound source/lock, native compiler and guarded fixtures | Linux Child.wait expansion, X34 reapers, managed-spawn lifecycle, escaped-pipe, held-zombie/Child.kill/false-drop and shared Child lease/wait contracts accepted at their named inputs. X24 now adds Linux 1.77.2 sync/no_float/only_i32 rows and Darwin 1.77.2 standard/sync rows. | Next close Darwin package-minimum X25 `managed_spawn_kill_stops_leader_worker_leaf_and_preserves_sentinel` on arm64/macOS27.0.1/Rust1.77.2, preserving compatible X25 1.93 evidence only after exact assertion/input applicability review; do not repeat X24 selectors. |
 | Windows process backend | Common process contract and owned source; custody/toolchain only before native execution | Public run/raw/spawn/Child with real native lifecycle, argv, cwd and Job proof | Source implementation is independent of console availability. Native closure waits for custody; preserve Unix proof outside shared changes. |
 | Base sys and shared file handles | Native platform available; Windows execution needs custody | Missing P/E/F/file-handle effects, permissions and native path boundaries | Reuse Linux semantic rows and applicable Darwin/Windows readbacks. |
 | TCP native closure | Native loopback/peer fixture; Windows execution needs custody | Missing numeric IPv6 and TCP authority/data/lifetime observations | Reuse unchanged Linux behavior and existing coexistence proof. |
 | Last: Integrated compatibility, documentation and fork main | Prior package outcomes and complete applicability crosswalk | All87 numbered criteria plus extensions, native/feature/MSRV and documentation obligations closed at tested fork revision | Only affected shared/merge/feature deltas; atomic fork-main publication and owned-resource retirement. |
 
-After finalizing the saved example, perform Windows's cheap readiness/composition
-checks early, before substantial Windows coding or another expensive guest setup.
-If that route is ready, complete its small custody gate; if unavailable, record the
-specific prerequisite once and immediately take Unix closure, then uncovered Base
-sys/TCP work. Ordinary Windows source implementation can continue without a live
-guest, but compilation/emulation never substitutes for native acceptance. Do not
-serialize all Unix work ahead of diagnosing the Windows dependency. On one machine
-share a scope for compatible source/lock/feature work; different outcomes still
-keep their individual acceptance rows and independent fixture data.
+The saved example is finalized and accepted. Windows readiness/composition was
+checked; the remaining encrypted-console prerequisite is unavailable, so do not
+repeat that loop. Continue unblocked Unix closure, then uncovered Base sys/TCP work.
+Ordinary Windows source implementation can proceed without a live guest, but
+compilation/emulation never substitutes for native acceptance. Share a scope for
+compatible source/lock/feature work; different outcomes still keep their individual
+acceptance rows and independent fixture data.
 
 Before each package, form its finite selection from the coverage crosswalk plus
 historical §6.7: **accepted/applicable → reuse; changed dependency closure → targeted
@@ -464,8 +465,11 @@ gap. This process does not require a new plan or routine permission between pack
 **Outcome:** finalize X23 integer-only example proof at Darwin package minimum:
 real run/spawn file records, nonzero exit7 as data, pending wait, identical clone
 results and child cleanup. **Inputs:** current owned example patch and pinned lock.
-**Current state:** both affected profiles have completed raw results; final proof
-and combined review are pending. Planning creates no acceptance/cleanup files.
+**Accepted (2026-10-08):** both affected profiles have exact RED/GREEN rows,
+independent combined review, proof, cleanup receipt and finalization readback in this
+directory. `acceptance.json` records the scope. The original source archive was not
+retained in this directory; `source-archive-tree-readback.json` reproduces its hash
+from the exact Git revision. The final manifest validates. No build/test rerun.
 
 Use the existing evidence directory
 `results/example-20261008T090938Z-zmj63_0i`. It binds HEAD `ef423a516617e128835d54af16d75f559b2b1bce`,
@@ -483,31 +487,28 @@ preserved in `inputs.json`, `result.json`, `recipe.sha256` and original logs.
 | sys,sync,no_float RED | expected8, exit101, same intended assertion | Fresh records; child80170 ESRCH |
 | sys,sync,no_float GREEN | expected7, exit0; same profile executable as RED | Fresh records, pending→identical clone wait; child80174 ESRCH |
 
-Exact first later action, from the inspected worktree: read `inputs.json` and
-`recipe.sha256`, recompute the three frozen-input and current example hashes,
-inspect saved compiler artifacts and four phase status/stdout/stderr files against
-this table, and read the existing `x23_example_combined_review` result if finished.
-Do not reinvoke `verify-example.py`, `payload.sh` or Cargo: those execute the work.
-Check the review covers patch, oracle, input/cwd/native binding and cleanup; reuse
-its applicable independent analysis. If that existing review is still pending,
-continue another ready package; if missing/incomplete, obtain only the missing
-combined evidence review after later authorization, not a new test run.
-
-Save `proof.md`, the original review result, a final file-hash manifest and
-`cleanup.json` in this same result directory. Verify recorded runtime absence,
-export readability and empty owned outer-scope identity before `rmdir` of
-`/Users/hoppworks/.local/share/agent-builds/rhai/example-c58997ha`; if anything
-appeared or ownership changed, preserve it and leave retirement open. The existing
-ESRCH probes are contemporaneous readback; do not later signal those numeric PIDs.
-Only then mark these two feature rows accepted. Preserve X23 standard/sys+sync
-and independent X24 evidence. A new relevant example/backend/lock/oracle change
-can require a targeted row later; the plan revision alone cannot.
+Finalization recheck performed without Cargo: `recipe.sha256` and the final
+`manifest.sha256` validate; `result.json` binds four expected RED/GREEN rows and
+same-profile executable hashes; `review.md`, `proof.md`, `acceptance.json`,
+`finalization-readback.json` and `cleanup.json` are present. The empty outer scope
+is currently absent. `source-archive-tree-readback.json` reconstructs the missing
+archive exactly from the recorded commit hash. Numeric PID probes remain historical;
+do not signal them. Standard/sys+sync X23 and independent X24 remain separate.
 
 ### Unix process closure
 
 **Outcome:** uncovered Unix lifecycle, setup/fault and report rows close without
 rerunning X18–X20 or the accepted portions of X21–X38. **Prerequisite:** current
 source-bound crosswalk, isolated fixture guards, explicit exact selectors.
+
+**Accepted checkpoint (2026-10-09):** Linux X35's three selectors are accepted
+for source `34e0fa61a3d12fe6c41902c44618ff44e20d73d4`, the bound archive and lock,
+`testing-environ,sys`, Linux x86_64, Rust/Cargo 1.77.2. The RED/GREEN, process
+readbacks, cleanup and combined review are in
+`results/linux-managed-drop-20261009T1518Z-6cf30d/`; the 9,199-file archive-to-Git
+tree comparison is `source-archive-tree-readback.json`. Do not rerun unless a
+relevant input or assertion changes. X34 timeouts/caps, X36 setup/refusal, remaining
+X37 cases, X38, other platforms/features and A–F remain open.
 
 Use `--test sys_process --test sys_process_report` and the existing shared-fixture
 module. The committed fixture snapshot remains independent of the foreign dirty
@@ -518,17 +519,81 @@ The formerly stopped **Package B** has no verified available attempt03 result at
 the previously cited local path. Do not rebuild its archive/SSH/launcher stack.
 Preserve its three launches, three pre-assertion infrastructure stops and zero
 executed assertions; do not retry native110 or count those stops as product RED.
-Add one focused public regression next to
-`lossy_run_reports_engine_limit_expansion_without_returning_truncated_text`:
-spawn a finite child producing invalid UTF-8 whose raw length stays below the
-Engine limit but decoded text exceeds it; normal exit0; call `Child.wait` and
-cloned/repeated waits. Require typed Process/OutputLimit, exact raw bytes,
-stdout/stderr completeness, exit0, no timed_out, stable report and no pre-existing
-primary cause, child-written record and independent reap. Repeat on a failure
-whose primary cause is already committed and require that it is not replaced by
-decoded expansion. Use same fixture output/capture code and host oracle. Under
-unchecked, omit Engine-limit-specific assertion and retain host cap assertion.
-This is new missing verification, not a proven current product defect.
+The public regression for `Child.wait` decoded UTF-8 expansion is already committed.
+Linux checked/default acceptance is complete at source34e0fa61, lock2ba4b3a0,
+features testing-environ,sys and Rust/Cargo1.77.2. It covers invalid UTF-8 whose raw
+length stays below the Engine limit but decoded text exceeds it, normal exit0,
+cloned/repeated waits, exact raw bytes, complete stdout/stderr, stable typed
+Process/OutputLimit, no timeout, a child-written record and independent reap. A
+second case verifies that committed primary OutputLimit is preserved. The corrected
+wrong-raw-byte RED and restored GREEN with combined review are in
+`results/child-wait-expansion-linux-20261009T1644Z/`; the initial forced-panic RED
+is excluded. Do not repeat absent a relevant input change. Darwin and unchecked/
+other feature variants remain open; unchecked retains its host output-cap assertion.
+
+**Accepted checkpoint (2026-10-09):** the exact Linux X34 selectors
+`managed_run_deadline_reaps_group_under_fixture_reaper` and
+`managed_run_output_limit_reaps_group_under_fixture_reaper` each reached a deliberate
+wrong-outcome assertion RED (101) and passed restored-source GREEN (1/1) in one
+scoped Workhorse run. The independent review binds archive/revision, lock, test
+source, features, toolchain and native platform, and confirms PIDFD, process-group,
+fixture-reaper, host/sentinel and cleanup observations. The deadline API returns a
+report map; OutputLimit is typed. Evidence and review:
+`results/linux-x34-reaper-20261009T1830Z/`. This accepts only those two Linux
+selectors at 1.77.2/default checked profile; Darwin existing rows remain separate.
+
+**Accepted checkpoint (2026-10-09):** Linux exact selectors
+`managed_spawn_kill_stops_leader_worker_leaf_and_preserves_sentinel` and
+`managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not` each reached
+a meaningful wrong-expectation RED (101) and restored-source GREEN (1/1) at the same
+revision/lock/features. The combined review verifies public Rhai kill/wait and shared
+handle behavior, independent member ESRCH and sentinel observations, scoped cleanup,
+and limits the verdict to these selectors. Evidence:
+`results/linux-managed-spawn-lifecycle-20261009T1850Z/`. The probes use PID records,
+not PIDFD/start-time custody or interruption; do not generalize this result.
+
+**Accepted checkpoint (2026-10-09):** four exact Linux selectors are accepted
+with meaningful RED101 and restored-source GREEN1/1 in one scoped run:
+`managed_run_succeeds_after_fixture_reaper_reaps_descendants`,
+`managed_spawn_final_clone_drop_closes_group_under_fixture_reaper`,
+`managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes`, and
+`managed_spawn_post_reap_cancel_bounds_escaped_capture`. The combined review confirms
+source/lock/features/toolchain, exact reaper/PIDFD group closure, live sentinel
+boundaries, escaped-holder challenge/Readback and EPIPE, and exact cleanup.
+`results/linux-process-completion-capture-20261009T1915Z/`.
+
+**Accepted checkpoint (2026-10-09):** Linux exact selectors
+`managed_run_reports_while_fixture_reaper_holds_stopped_zombies`,
+`managed_child_kill_reports_group_closed_under_fixture_reaper`,
+`managed_run_deadline_cancels_escaped_pipe_holder_under_fixture_reaper`, and
+`managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit` each reached a
+meaningful RED101 and restored-source GREEN1/1 in one scoped run. The review confirms
+the held-zombie case returns the owner-approved typed closure error with custody
+retained (not a product defect), exact reaping after release, PIDFD/group/sentinel
+boundaries, EPIPE challenge/Readback and the live false-drop challenge.
+`results/linux-zombie-false-drop-20261009T1940Z/`.
+
+**Accepted checkpoint (2026-10-09):** the Linux shared Child lease/wait contracts
+above are accepted for the bound archive/revision, lock, Rust/Cargo 1.77.2, and
+`testing-environ,sys` plus `testing-environ,sys,sync`. Four standard and five sync
+selectors have meaningful RED and restored-source GREEN; attempt03 and attempt06 add
+targeted false-policy operational and true-policy final-reap REDs, while all compatible
+GREENs are reused. Combined review:
+`results/linux-shared-child-contracts-20261009T2025Z/combined-review.md`;
+proof/history: `results/linux-shared-child-contracts-20261009T2025Z/package-summary.md`.
+The packet's timed sync selector is not actual wait-entry proof. Reuse separate Linux
+X31 `sync` and `sync,no_float` Condvar-entry rows only under the existing source
+applicability review; full X31 and other platforms/features/MSRVs remain open.
+
+X24 checkpoint: retain the accepted Linux standard row and add four native Linux
+Rust/Cargo1.77.2 RED/GREEN feature rows (`sync`, `no_float`, `sync,no_float`,
+`only_i32,no_float`) plus Darwin arm64/macOS27.0.1 Rust/Cargo1.77.2
+`testing-environ,sys`. The complete function bytes are lines462–546 inclusive with
+final newline, SHA-256 `21db2d7a36f3692ea1c3775fc895707676d2334fcc430d99e0a07051e6547793`.
+The packet review accepts these named rows only; full X24 and A–F remain open.
+Next close an uncovered native Unix/process lifecycle criterion using existing
+selectors and reusable source/lock inputs; preserve compatible standard/X31 proof
+and do not repeat unchanged X24 rows.
 
 Close uncovered cases using these existing selectors; prefix shared names with
 `shared_child_contract::` when invoking their executable:
@@ -1067,7 +1132,8 @@ The next largest implementation risk is Windows capability-cwd and nested Job
 ownership: these must pass native identity and failure controls. This plan reduces
 overhead by reusing current sources/proofs, testing the complete entry path cheaply,
 sharing private builds for related controls, and refusing parser failures as a
-reason to rebuild. It remains a plan, not a successfully executed acceptance run.
+reason to rebuild. The plan is not acceptance evidence; use the linked per-package
+results and current execution state for completed and remaining work.
 
 ## Planning validation and limits
 
@@ -1082,13 +1148,9 @@ proofs and the saved latest X23 result files exist. The remote runner/import and
 direct compiler version readbacks were checked; live guest entry, new flags,
 snapshot/work transition and proposed new tests remain unexecuted prerequisites.
 
-SHA-256 readback against the saved pre-existing input manifest confirms that
-AGENTS.md, Cargo.toml, build.rs, the owned example, process common/Unix code,
-foreign shared fixture, old coordinator state and old sys plan are unchanged by
-this pass. Only new planning documents here were written; their previous versions
-are retained under `history/`. No product code, test, runner, skill or configuration
-was changed. No build/test/VM/service, cleanup, install, commit/push/merge, new
-Goal or other-session message was initiated. The explicitly paused Goal remains
-paused. A previously running finite review was left alone; its later applicable
-result can be reused without repeating tests. Planning is complete; execution
-requires the later explicit instruction and starts with saved X23 proof finalization.
+The preceding paragraphs preserve the read-only planning snapshot from
+2026-10-08; at that point no product or runtime work had started. That snapshot is
+historical, not current status. Implementation was later authorized. X23 and X35
+acceptance are recorded above and in `execution-state.md`; their original build and
+review evidence remains linked. The existing paused Goal remains paused, and no new
+Goal is needed. Continue with the next open package in the ready queue.

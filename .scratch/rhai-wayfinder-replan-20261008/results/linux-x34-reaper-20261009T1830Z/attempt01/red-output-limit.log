@@ -1,0 +1,32 @@
+
+running 1 test
+
+running 1 test
+
+running 1 test
+managed_pidfd_acquired pid=2129226 start=8290734 ppid=2129212 pgid=2129226
+managed_pidfd_acquired pid=2129230 start=8290734 ppid=2129226 pgid=2129226
+managed_pidfd_acquired pid=2129242 start=8290734 ppid=2129230 pgid=2129226
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.03s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.04s
+
+managed-scope sentinel_cleanup pid=2129209 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_output_limit_group_boundary host=2129212 host_start=8290733 reaper=2129210 reaper_start=8290733 leader=2129226 leader_start=8290734 leader_absent=true worker=2129230 worker_start=8290734 worker_absent=true leaf=2129242 leaf_start=8290734 leaf_absent=true group=2129226 group_probe=-1 group_errno=3 host_live=true reaper_live=true sentinel=2129209 sentinel_start=8290733 sentinel_live=true output_limit=true prefix_preserved=true captures_honest=true pidfds_exited=true cleanup_exact=true no_watchdog_cleanup_through_boundary=true
+ api="host=2129212 host_start=8290733 api_success=false api_outcome=typed_output_limit stdout_len=4096 stdout_prefix_exact=true stdout_complete=false stderr_len=0 stderr_complete=false timed_out=false exit=None\n" cleanup="worker=2129230 start=8290734 pgid=2129226 reaped=true wait_status=9 leaf=2129242 start=8290734 pgid=2129226 reaped=true wait_status=9 complete=true\n" reaper_ok=true sentinel_reaped=true no_watchdog_cleanup_after_reap=true
+thread 'managed_run_output_limit_reaps_group_under_fixture_reaper' panicked at tests/sys_process.rs:3052:5:
+RED control: OutputLimit unexpectedly present
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+managed_fixture_cleanup worker_pid=Some(2129230) worker_esrch=true leaf_pid=Some(2129242) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2129226) leader_esrch=true
+test managed_run_output_limit_reaps_group_under_fixture_reaper ... FAILED
+
+failures:
+
+failures:
+    managed_run_output_limit_reaps_group_under_fixture_reaper
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.04s
+

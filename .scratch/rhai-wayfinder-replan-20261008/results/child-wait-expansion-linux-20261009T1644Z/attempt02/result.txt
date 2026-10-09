@@ -1,0 +1,6 @@
+red_build=0
+red_test=101
+failure=wrong_expected_first_raw_byte
+assertion=wait must retain exact raw bytes
+restored_source_sha256=86f1142ff1ae8de5a8b813e892e407a90c1bec70eab864c20b7735f53015bf41
+green_reused_from=../attempt01/green-test.log
