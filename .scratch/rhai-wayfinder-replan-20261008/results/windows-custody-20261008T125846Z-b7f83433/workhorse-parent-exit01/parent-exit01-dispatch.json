@@ -1,0 +1,23 @@
+{
+  "id": "rhai-parent-exit01-2a34e9b8f16543bca8ed6fd6d5e93fd7",
+  "nonce": "2a34e9b8f16543bca8ed6fd6d5e93fd7",
+  "entry_sha256": "ff0b4d3738c5335d635201d63cc7dad217c3bbaf42006507846a871a2a9ac78e",
+  "observer_sha256": "612a613fbba4c51b2b993646b19f1b46223dd5d14647c53a8e3b49fbc535d081",
+  "fixture_binary_sha256": "b1c3b284dc443eb187166a52412ce068c981a55e41a970903d9ba8ed58643680",
+  "source_review": "b8906a04a8deabb9c7b706966348be26e83141880da250de61fb5b6ff87297ec",
+  "native_started": true,
+  "action": "parent-exit",
+  "serial_inode": 102529120,
+  "serial_offset": 1065344,
+  "source_entry_review": "112a87274b9244e94e0ab05b3aa3736abfcfe4fc30fe54f6c1d48d1dcf9ee223",
+  "prepared_unix": 1791535370.7372763,
+  "limits": {
+    "observer_seconds": 190,
+    "driver_seconds": 180,
+    "export_seconds": 180,
+    "file_bytes": 4194304,
+    "export_bytes": 16777216,
+    "file_count": 64
+  },
+  "launch_unix": 1791535385.4054601
+}

@@ -1,5 +1,17 @@
 # Windows custody-path progress and original evidence
 
+## Current ordinary-exit acceptance — 2026-10-09
+
+Parent-exit01 is accepted by combined review37dc3f53: public Driver0,
+ordinary root0, actual residual child125, live wrong-expectation RED, eight
+CRC records,17 hash-verified originals/62 frames and independent runtime absence.
+No observer monitor kill or repeated sentinel120s was used. Fixture02 compiler0
+is accepted112a8727 with19 originals/54 frames; Driver/Runner were reused.
+Bindings: parent-exit01-binding.json and monitor-fixture02-binding.json.
+Saved sessions/evidence remain owned and retained; runtime removal is complete,
+whole session retirement is not claimed. Next is a missing payload-failure control.
+Full custody, remaining faults/product work, native Rust/Cargo and release stay open.
+
 ## Current update — 2026-10-09
 
 Execution is now on the workhorse copy of the same owned VM; the historical host

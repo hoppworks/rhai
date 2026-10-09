@@ -507,3 +507,20 @@ boundaries. It has not been compiled or executed. Source fixtures prove neither
 pipe connectivity nor process, job, or native custody. The separately accepted
 native tiny success proves only its selected composition and compiler inputs;
 remaining full-custody gates stay open.
+
+
+## Native ordinary-exit residual child acceptance (2026-10-09)
+
+The current fixture02 and parent-exit01 control passed on the owned Workhorse Windows
+VM. The public driver returned0; ordinary parent exit0 left a real child terminated125
+by the monitor-owned Job. A wrong live-target expectation failed first. Fresh native
+handles, copied child identity, eight CRC-verified journal records, all snapshot
+hashes and actual runtime absence establish this narrow criterion. The observer
+never killed the monitor on this successful path. Compiler proof is19 originals/54
+frames; control proof is17 originals/62 frames. Driver/Runner binaries were reused.
+
+Originals and bindings are in the existing
+.scratch/rhai-wayfinder-replan-20261008/results/windows-custody-20261008T125846Z-b7f83433/
+workhorse-monitor-fixture02 and workhorse-parent-exit01; parent-exit01-binding.json
+links the combined review37dc3f53. Remaining fault controls, retained session/work
+retirement, full custody, native Rust/Cargo and release acceptance remain open.

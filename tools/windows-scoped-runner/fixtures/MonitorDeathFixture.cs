@@ -68,9 +68,9 @@ internal static class MonitorDeathFixture
     }
     private static int Main(string[] args)
     {
-        if(args.Length!=2||(args[0]!="--parent"&&args[0]!="--leaf"))return 64;
+        if(args.Length!=2||(args[0]!="--parent"&&args[0]!="--leaf"&&args[0]!="--parent-exit"))return 64;
         string prefix=Path.GetFullPath(args[1]);
-        Process child=null;bool childStarted=false,childExited=false;int result=126;
+        Process child=null;bool childStarted=false,childExited=false,childTransferred=false;int result=126;
         try
         {
             using(var self=Process.GetCurrentProcess())
@@ -103,13 +103,25 @@ internal static class MonitorDeathFixture
                    File.ReadAllText(prefix+".child.identity")!=expected)
                     throw new InvalidDataException("child readiness/identity mismatch");
                 Record(prefix+".ready","parent-and-child-ready");
-                Hold();
+                if(args[0]=="--parent-exit") {
+                    var release=Stopwatch.StartNew();
+                    while(!File.Exists(prefix+".release")) {
+                        if(child.HasExited)throw new InvalidOperationException("residual child stopped before parent release");
+                        if(release.ElapsedMilliseconds>=30000)throw new TimeoutException("parent release exceeded30seconds");
+                        Thread.Sleep(10);
+                    }
+                    if(File.ReadAllText(prefix+".release")!="exit-parent\r\n")
+                        throw new InvalidDataException("parent release input mismatch");
+                    Record(prefix+".parent-exit","normal-parent-exit");
+                    // Leave the ordinary child alive for the real monitor Job closure.
+                    childTransferred=true;result=0;
+                } else Hold();
             }
         }
         catch(Exception error) {Console.Error.WriteLine(error.ToString());result=2;}
         finally
         {
-            if(childStarted)
+            if(childStarted&&!childTransferred)
             {
                 try {
                     if(!child.HasExited)child.Kill();
@@ -118,7 +130,7 @@ internal static class MonitorDeathFixture
                 }
                 catch(Exception error) {Console.Error.WriteLine("exact-child cleanup: "+error);result=2;}
             }
-            if(child!=null&&(!childStarted||childExited))child.Dispose();
+            if(child!=null&&(!childStarted||childExited||childTransferred))child.Dispose();
         }
         return result;
     }

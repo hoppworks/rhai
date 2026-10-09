@@ -1,0 +1,19 @@
+{
+  "id": "rhai-monitor-fixture02-120ba26aa9814b8bac58fad709eaf1ed",
+  "serial_inode": 102529120,
+  "serial_offset": 1041172,
+  "entry_sha256": "b3bf7430632461c6ddbe1a75f054b5f04756851b98dacdbb76169e65416b0554",
+  "source_review": "b8906a04a8deabb9c7b706966348be26e83141880da250de61fb5b6ff87297ec",
+  "guest_free_kib": 5379188,
+  "guest_disk_free": 74530430976,
+  "execution_started": true,
+  "prepared_unix": 1791535061.0539722,
+  "bounds": {
+    "observer_seconds": 930,
+    "compile_seconds": 180,
+    "export_seconds": 180,
+    "children": 16,
+    "job_bytes": 2147483648
+  },
+  "launch_unix": 1791535075.3373017
+}
