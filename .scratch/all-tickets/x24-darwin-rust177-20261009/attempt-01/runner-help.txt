@@ -1,0 +1,11 @@
+usage: run_scoped.py [-h] [--timeout TIMEOUT] ...
+
+Run a build/verification command with automatic cleanup of its private
+runtime.
+
+positional arguments:
+  command
+
+options:
+  -h, --help         show this help message and exit
+  --timeout TIMEOUT

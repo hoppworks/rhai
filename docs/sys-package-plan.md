@@ -666,6 +666,32 @@ The combined review found no material issue. X24 is partially accepted for
 Workhorse Linux x86_64, Rust/Cargo 1.93.0 and 1.77.2, with
 `testing-environ,sys`; other OS, feature and unrelated Ticket 03 rows remain
 open.
+
+**X24 Darwin `testing-environ,sys`, Rust/Cargo 1.77.2 — accepted partial row.**
+The public-Engine test passed as part of the unfiltered Darwin `sys_process`
+target at source `8da9a875…`, with a matching assertion-sensitive RED run on the
+same lock and Unix product source. It observed live-child/unit while pending,
+terminal exit code 0 from `try_wait()` before `wait()`, the cached `wait()`
+result, and exact-PID ESRCH after reaping. Combined review confirmed that the
+X24 function and execution path are unchanged even though unrelated additions
+changed the containing test-file hash. The GREEN log records Darwin arm64 and
+kernel 27.0.0 but omitted macOS `ProductVersion`; this partial claim does not
+assert a GREEN product-version value. Evidence and hashes:
+`../.scratch/all-tickets/x24-darwin-rust177-20261009/proof.md`. Other X24
+platform, feature and MSRV rows and the rest of Ticket 03 remain open.
+
+**X24 Darwin `testing-environ,sys,unchecked`, Rust/Cargo 1.77.2 — accepted
+partial row.** The focused public-Engine contract ran expected RED and restored
+GREEN in one owned scoped invocation. RED changed only the cached `wait()`
+exit-code expectation and failed at that assertion; GREEN independently
+observed pending unit while the child was live, terminal `try_wait()` before
+`wait()`, cached result and exact PID reaping. Lock and Unix product-source
+hashes match the accepted Darwin base row. Evidence and cleanup are recorded in
+`../.scratch/all-tickets/x24-darwin-unchecked-rust177-20261009/proof.md` and
+its attempt directory. Combined Standards/Spec and evidence review passed;
+the reviewer confirmed the scoped profile and cleanup. Other X24 rows and
+Ticket 03 remain open.
+
 ### 6.1 Applicable rules and historical investigation
 
 Current central repository: `/Users/hoppworks/projects/agent-skills`, local `main`

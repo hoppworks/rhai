@@ -1,0 +1,4 @@
+Owned scope: /Users/hoppworks/.local/share/agent-builds/rhai/ticket03-x24-darwin-unchecked-20261009T231500Z
+Owner: X24 Darwin unchecked attempt-01 in this session.
+The bounded runner invocation returned status 0 after exporting logs and environment readback. The enclosing `set -e` command then ran `rmdir` on this exact scope followed by `test ! -e`; the enclosing command returned exit 0. Since `rmdir` only succeeds for an empty directory, this confirms the owned scope was empty at retirement. A later independent readback again found the exact path absent. The scoped runner removed its private AGENT_RUNTIME_DIR before returning.
+No unrelated scope or retained cache was touched.
