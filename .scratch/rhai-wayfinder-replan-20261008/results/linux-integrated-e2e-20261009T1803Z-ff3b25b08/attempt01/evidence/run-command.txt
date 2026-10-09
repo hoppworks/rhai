@@ -1,0 +1,1 @@
+cargo +1.77.2 test --locked --jobs 2 --features testing-environ,sys,net,metadata --no-fail-fast --test sys_policy --test sys_env --test sys_fs --test sys_process --test sys_net -- --test-threads=2

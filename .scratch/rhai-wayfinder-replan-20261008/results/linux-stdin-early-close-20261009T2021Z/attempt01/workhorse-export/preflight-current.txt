@@ -1,0 +1,14 @@
+2026-10-09T20:28:05+02:00
+ 20:28:05 up 1 day, 36 min, 14 users,  load average: 1.47, 1.94, 2.65
+               total        used        free      shared  buff/cache   available
+Mem:            91Gi        28Gi        24Gi       2.0Gi        41Gi        63Gi
+Swap:           15Gi       1.9Gi        14Gi
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme0n1p3  1.9T  1.5T  312G  83% /var
+some avg10=0.00 avg60=0.00 avg300=0.00 total=667902962
+full avg10=0.00 avg60=0.00 avg300=0.00 total=0
+some avg10=0.00 avg60=0.00 avg300=0.00 total=33959407
+full avg10=0.00 avg60=0.00 avg300=0.00 total=33246524
+some avg10=0.00 avg60=0.01 avg300=0.08 total=149425965
+full avg10=0.00 avg60=0.01 avg300=0.07 total=129672878
+scope=/root/.local/share/agent-builds/rhai/stdin-early-close-20261009T2021Z-ff3b25b08 dev=58 inode=119928609 owner=root:root mode=700

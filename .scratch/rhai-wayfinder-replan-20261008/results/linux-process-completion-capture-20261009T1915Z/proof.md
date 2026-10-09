@@ -1,6 +1,6 @@
 # Linux process completion, exact reaper drop and escaped-pipe cancellation
 
-**Result:** Four exact selectors each reached a meaningful wrong-expectation RED (101) and passed restored-source GREEN (1/1) on native Workhorse Linux x86_64, Rust/Cargo 1.77.2, `testing-environ,sys` plus default features, checked test profile. This packet is pending combined independent review; acceptance, if reviewed, is limited to these selectors/configuration.
+**Result:** Four exact selectors each reached a meaningful wrong-expectation RED (101) and passed restored-source GREEN (1/1) on native Workhorse Linux x86_64, Rust/Cargo 1.77.2, `testing-environ,sys` plus default features, checked test profile. The combined independent review accepted only these selectors/configuration; see [combined review](combined-review.md).
 
 ## Binding and run
 

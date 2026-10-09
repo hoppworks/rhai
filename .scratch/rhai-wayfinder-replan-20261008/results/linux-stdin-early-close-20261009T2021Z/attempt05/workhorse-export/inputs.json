@@ -1,0 +1,18 @@
+{
+  "revision": "ff3b25b0889c32e0e505517fc605d4b6cd2d5208",
+  "source_archive_sha256": "e61848e59f702130c48acadc98c29638372190493d74906cd4e1a9c77039ee12",
+  "owned_patch_sha256": "66a03b3a649b5f1ce4592bafc4776e10b329e4dc48c21a7052d5aeb59da1bc96",
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "test": "run_io_contract_run_and_run_raw_child_closing_stdin_early_still_return_result",
+  "host": "Workhorse Linux x86_64",
+  "rust_cargo": "1.77.2",
+  "features": [
+    "testing-environ",
+    "sys"
+  ],
+  "runner_sha256": "25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e",
+  "timeout_seconds": 600,
+  "cargo_jobs": 2,
+  "payload_bytes_per_child": 8388608,
+  "run_and_run_raw_both_in_one_selector": true
+}

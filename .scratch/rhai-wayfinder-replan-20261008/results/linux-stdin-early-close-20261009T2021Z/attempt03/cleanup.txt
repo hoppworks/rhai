@@ -1,0 +1,1 @@
+All 21 Workhorse files in this attempt matched the local export by SHA-256. Runner runtime was absent; the exact scope device/inode/owner/mode was 58 / 120096340 / root / 0700. No process cwd referenced it. Only files in this owned scope were removed, then the empty scope was retired with rmdir.

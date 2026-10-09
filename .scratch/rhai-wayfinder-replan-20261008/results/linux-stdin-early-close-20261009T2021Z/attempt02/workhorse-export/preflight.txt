@@ -1,0 +1,13 @@
+2026-10-09T20:31:12+02:00
+ 20:31:12 up 1 day, 39 min, 16 users,  load average: 5.88, 3.71, 3.20
+               total        used        free      shared  buff/cache   available
+Mem:            91Gi        29Gi        13Gi       2.0Gi        51Gi        62Gi
+Swap:           15Gi       1.9Gi        14Gi
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme0n1p3  1.9T  1.5T  311G  83% /var
+some avg10=0.37 avg60=0.37 avg300=0.13 total=669440895
+full avg10=0.00 avg60=0.00 avg300=0.00 total=0
+some avg10=0.05 avg60=0.06 avg300=0.01 total=34186437
+full avg10=0.04 avg60=0.04 avg300=0.00 total=33456188
+some avg10=0.55 avg60=1.15 avg300=0.41 total=151007053
+full avg10=0.52 avg60=1.07 avg300=0.39 total=131109099

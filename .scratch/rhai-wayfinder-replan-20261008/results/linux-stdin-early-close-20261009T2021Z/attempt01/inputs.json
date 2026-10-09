@@ -1,0 +1,20 @@
+{
+  "revision": "ff3b25b0889c32e0e505517fc605d4b6cd2d5208",
+  "source_archive_sha256": "e61848e59f702130c48acadc98c29638372190493d74906cd4e1a9c77039ee12",
+  "owned_patch_sha256": "e346a438cffe861a05c8700d912e41394599e9ab42c257514a2c9d25688e671b",
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "test": "run_io_contract_child_closing_stdin_early_still_returns_child_result",
+  "host": "Workhorse Linux x86_64",
+  "rust_cargo": "1.77.2",
+  "features": [
+    "testing-environ",
+    "sys"
+  ],
+  "runner_sha256": "25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e",
+  "timeout_seconds": 600,
+  "cargo_jobs": 2,
+  "payload_bytes": 8388608,
+  "source_archive_path": "source.tar.gz",
+  "source_archive_bytes": 1215708,
+  "path_manifest_sha256": "f787e99a2d288d9cb0a4d17cd1e047ac74379c386d8a4bbbf7cceba497af394c"
+}

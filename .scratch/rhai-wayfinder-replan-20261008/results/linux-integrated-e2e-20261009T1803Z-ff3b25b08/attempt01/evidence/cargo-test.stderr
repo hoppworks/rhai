@@ -1,0 +1,4 @@
+error: failed to parse manifest at `/var/roothome/.local/share/agent-builds/rhai/linux-e2e-20261009T1803Z-ff3b25b08/agent-build-d_wswv44/source/Cargo.toml`
+
+Caused by:
+  can't find `serde` example at `examples/serde.rs` or `examples/serde/main.rs`. Please specify example.path if you want to use a non-default path.

@@ -1,0 +1,145 @@
+diff --git a/src/packages/sys/process/unix.rs b/src/packages/sys/process/unix.rs
+index 30b52b520..fde5efea7 100644
+--- a/src/packages/sys/process/unix.rs
++++ b/src/packages/sys/process/unix.rs
+@@ -3084,13 +3084,15 @@ fn supervise(
+             }
+         }
+         if fds[2].revents != 0 {
++            let mut close_stdin = false;
+             if let Some(pipe) = stdin.as_mut() {
+                 match pipe.write(&pending[offset..]) {
+-                    Ok(0) => {}
++                    Ok(0) => close_stdin = true,
+                     Ok(n) => offset += n,
+                     Err(e)
+                         if e.kind() == io::ErrorKind::WouldBlock
+                             || e.kind() == io::ErrorKind::Interrupted => {}
++                    Err(e) if e.kind() == io::ErrorKind::BrokenPipe => close_stdin = true,
+                     Err(e) => {
+                         return fail(
+                             &mut driver,
+@@ -3114,6 +3116,9 @@ fn supervise(
+                     }
+                 }
+             }
++            if close_stdin {
++                stdin.take();
++            }
+         }
+         // Drain readable bytes first so observed output overflow wins when it coincides with
+         // deadline expiry; otherwise the deadline owns the cancellation.
+diff --git a/tests/sys_process.rs b/tests/sys_process.rs
+index c80250ec3..40bf97c88 100644
+--- a/tests/sys_process.rs
++++ b/tests/sys_process.rs
+@@ -4780,6 +4780,109 @@ fn run_io_contract_string_stdin_round_trip() {
+     eprintln!("x16_string_stdin bytes={} exact_round_trip=true child_record={:?} child_reaped=true", expected.len(), child_record.trim());
+ }
+ 
++#[test]
++#[cfg(all(not(feature = "no_index"), not(feature = "no_float")))]
++fn run_io_contract_run_and_run_raw_child_closing_stdin_early_still_return_result() {
++    let engine = engine(SysConfig::default().programs(ProgramPolicy::Any));
++    let run_success = assert_early_stdin_close_result(&engine, "run", false);
++    let raw_success = assert_early_stdin_close_result(&engine, "run_raw", true);
++    assert!(
++        run_success && raw_success,
++        "early child stdin closure must preserve successful results for run and run_raw"
++    );
++}
++
++#[cfg(all(not(feature = "no_index"), not(feature = "no_float")))]
++fn assert_early_stdin_close_result(engine: &Engine, api: &str, raw: bool) -> bool {
++    const INPUT_BYTES: usize = 8 * 1024 * 1024;
++    let records = TempDir::new();
++    let ready_path = records.path().join("stdin-closed-ready.txt");
++    let release_path = records.path().join("stdin-closed-release.txt");
++    let record_path = records.path().join("stdin-closed-child.txt");
++    let encode = |path: &std::path::Path| {
++        path.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"")
++    };
++    let ready = encode(&ready_path);
++    let release = encode(&release_path);
++    let record = encode(&record_path);
++    let child = r#"exec 0<&-; printf 'ready\n' > "$READY"; while [ ! -e "$RELEASE" ]; do /bin/sleep 0.01; done; printf 'child-pid=%s child-exit=0\n' "$$" > "$RECORD"; printf 'stdin-closed\n'"#;
++    let child = child.replace('\\', "\\\\").replace('"', "\\\"");
++    let script = format!(
++        r#"{api}("/bin/sh", ["-c", "{child}"], #{{
++            env_clear: true,
++            env: #{{ READY: "{ready}", RELEASE: "{release}", RECORD: "{record}" }},
++            stdin: input,
++            timeout: 5.0,
++            max_output: 1024
++        }})"#
++    );
++    let mut scope = Scope::new();
++    scope.push("input", Blob::from(vec![b'i'; INPUT_BYTES]));
++
++    // The child publishes readiness only after closing its input descriptor. Keep it
++    // alive briefly after that observable handshake so the oversized input writer
++    // encounters the closed pipe before the child exits.
++    let waiter_ready = ready_path.clone();
++    let waiter_release = release_path.clone();
++    let release_child = std::thread::spawn(move || {
++        let deadline = Instant::now() + Duration::from_secs(4);
++        while !waiter_ready.exists() && Instant::now() < deadline {
++            std::thread::sleep(Duration::from_millis(5));
++        }
++        let ready_seen = waiter_ready.exists();
++        if ready_seen {
++            std::thread::sleep(Duration::from_millis(250));
++        }
++        std::fs::write(waiter_release, b"release").unwrap();
++        ready_seen
++    });
++
++    let evaluation = engine.eval_with_scope::<Map>(&mut scope, &script);
++    let child_ready_after_close = release_child.join().unwrap();
++    assert!(
++        child_ready_after_close,
++        "child did not confirm that stdin was closed before release"
++    );
++    assert_eq!(std::fs::read_to_string(&ready_path).unwrap(), "ready\n");
++    assert_eq!(std::fs::read_to_string(&release_path).unwrap(), "release");
++    let result = match evaluation {
++        Ok(result) => result,
++        Err(error) => {
++            let detail = match error.as_ref() {
++                EvalAltResult::ErrorRuntime(value, _) => value
++                    .clone()
++                    .try_cast::<SysError>()
++                    .map(|value| format!("{value:?}"))
++                    .unwrap_or_else(|| format!("{value:?}")),
++                other => format!("{other:?}"),
++            };
++            panic!("early child stdin close replaced its result: {detail}");
++        }
++    };
++    assert_eq!(result["code"].as_int().unwrap(), 0);
++    assert!(!result["timed_out"].as_bool().unwrap());
++    assert!(result["stdout_complete"].as_bool().unwrap());
++    assert!(result["stderr_complete"].as_bool().unwrap());
++    if raw {
++        assert_eq!(
++            result["stdout"].clone().try_cast::<Blob>().unwrap(),
++            b"stdin-closed\n".to_vec()
++        );
++        assert!(result["stderr"].clone().try_cast::<Blob>().unwrap().is_empty());
++    } else {
++        assert_eq!(
++            result["stdout"].as_immutable_string_ref().unwrap().as_str(),
++            "stdin-closed\n"
++        );
++        assert_eq!(result["stderr"].as_immutable_string_ref().unwrap().as_str(), "");
++    }
++    assert_child_record(&record_path, 0);
++    eprintln!(
++        "x16_early_stdin_close api={api} input_bytes={INPUT_BYTES} child_closed_input_before_release=true child_exit=0 reaped=true"
++    );
++    result["success"].as_bool().unwrap()
++}
++
+ #[test]
+ #[cfg(not(feature = "no_index"))]
+ fn run_io_contract_blob_stdin_round_trip_with_concurrent_output() {

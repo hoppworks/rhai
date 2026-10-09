@@ -1,0 +1,4 @@
+cwd=/root/.local/share/agent-builds/rhai/stdin-early-close-20261009T2021Z-ff3b25b08/agent-build-b3t2dsf7/source
+rustc=rustc 1.77.2 (25ef9e3d8 2024-04-09)
+cargo=cargo 1.77.2 (e52e36006 2024-03-26)
+2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425  Cargo.lock

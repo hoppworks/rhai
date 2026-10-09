@@ -1,6 +1,6 @@
 # Linux held-zombie closure, Child.kill, escaped deadline holder and false-drop policy
 
-**Result:** Four exact selectors each reached a deliberate wrong-outcome assertion RED (101) and passed restored-source GREEN (1/1) on native Workhorse Linux x86_64, Rust/Cargo 1.77.2, `testing-environ,sys` plus default features, checked test profile. Pending combined independent review; no wider acceptance follows.
+**Result:** Four exact selectors each reached a deliberate wrong-outcome assertion RED (101) and passed restored-source GREEN (1/1) on native Workhorse Linux x86_64, Rust/Cargo 1.77.2, `testing-environ,sys` plus default features, checked test profile. The combined independent review accepted only these selectors/configuration; see [combined review](../linux-process-completion-capture-20261009T1915Z/combined-review.md). No wider acceptance follows.
 
 ## Bound inputs and execution
 

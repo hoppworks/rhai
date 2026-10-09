@@ -1,0 +1,1 @@
+An initial diagnostic-launcher rendering emitted invalid awk text (`{print \\$2}`) and stopped before invoking the runner or Cargo. The launcher was rewritten as a fixed, saved shell script with the exact read-back scope identity; attempt02 then completed its intended diagnostic run.

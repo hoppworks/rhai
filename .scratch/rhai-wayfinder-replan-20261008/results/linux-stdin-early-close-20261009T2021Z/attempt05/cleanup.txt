@@ -1,0 +1,1 @@
+All 21 Workhorse files in the final run+run_raw attempt matched the local export by SHA-256. Runner runtime was absent; scope identity was device 58 / inode 120231792 / root / 0700. No process cwd referenced it. Only this owned scope was retired with rmdir after export.

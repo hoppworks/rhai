@@ -1,0 +1,15 @@
+{
+  "revision": "ff3b25b0889c32e0e505517fc605d4b6cd2d5208",
+  "source_archive_sha256": "4d3a8e3a1ddfa7608996b3d14c986b22737ab2a3f2e574893e13011453dc83a6",
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "features": ["testing-environ", "sys", "net", "metadata"],
+  "targets": ["sys_policy", "sys_env", "sys_fs", "sys_process", "sys_process_report", "combined_sys_net", "net_connect", "net_listen", "net_metadata", "net_reads", "net_writes"],
+  "host": "Workhorse Linux x86_64",
+  "rustc": "1.77.2 (25ef9e3d8 2024-04-09)",
+  "cargo": "1.77.2 (e52e36006 2024-03-26)",
+  "runner_sha256": "25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e",
+  "session_scope": "/root/.local/share/agent-builds/rhai/linux-e2e-20261009T1803Z-ff3b25b08-attempt02",
+  "timeout_seconds": 1200,
+  "cargo_jobs": 2,
+  "test_threads": 2
+}

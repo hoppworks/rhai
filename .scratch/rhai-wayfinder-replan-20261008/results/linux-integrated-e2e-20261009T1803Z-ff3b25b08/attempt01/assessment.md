@@ -1,0 +1,5 @@
+# Attempt 01 classification
+
+The sole invocation stopped with Cargo/runner exit 101 after one second. Cargo failed while parsing the workspace manifest because `examples/serde.rs` was absent from the reduced source archive. `cargo-test.stdout` is empty; no test target compiled or ran, and no product assertion was reached. The runner recorded the exact private runtime absent after cleanup. This is a source-staging/pre-assertion setup failure, not product RED and not acceptance.
+
+Before the one corrected run, the full Cargo target inventory exposed another command-selection defect: there is no `sys_net` test target. The real integrated target is `combined_sys_net`; the implemented native net tests are `net_connect`, `net_listen`, `net_metadata`, `net_reads`, and `net_writes`. The corrected attempt includes the complete `examples/` and `benches/` trees, verifies the manifest with `cargo metadata --locked --no-deps`, then runs the existing sys/process/combined-sys-net/net integration targets. `net_no_object` is feature-specific and is not claimed by this default-feature integrated slice.

@@ -1,0 +1,83 @@
+diff --git a/tests/sys_process.rs b/tests/sys_process.rs
+index c80250ec3..28c8937c0 100644
+--- a/tests/sys_process.rs
++++ b/tests/sys_process.rs
+@@ -4780,6 +4780,78 @@ fn run_io_contract_string_stdin_round_trip() {
+     eprintln!("x16_string_stdin bytes={} exact_round_trip=true child_record={:?} child_reaped=true", expected.len(), child_record.trim());
+ }
+ 
++#[test]
++#[cfg(all(not(feature = "no_index"), not(feature = "no_float")))]
++fn run_io_contract_child_closing_stdin_early_still_returns_child_result() {
++    const INPUT_BYTES: usize = 8 * 1024 * 1024;
++    let engine = engine(SysConfig::default().programs(ProgramPolicy::Any));
++    let records = TempDir::new();
++    let ready_path = records.path().join("stdin-closed-ready.txt");
++    let release_path = records.path().join("stdin-closed-release.txt");
++    let record_path = records.path().join("stdin-closed-child.txt");
++    let encode = |path: &std::path::Path| {
++        path.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"")
++    };
++    let ready = encode(&ready_path);
++    let release = encode(&release_path);
++    let record = encode(&record_path);
++    let child = r#"exec 0<&-; printf 'ready\n' > "$READY"; while [ ! -e "$RELEASE" ]; do /bin/sleep 0.01; done; printf 'child-pid=%s child-exit=0\n' "$$" > "$RECORD"; printf 'stdin-closed\n'"#;
++    let child = child.replace('\\', "\\\\").replace('"', "\\\"");
++    let script = format!(
++        r#"run("/bin/sh", ["-c", "{child}"], #{{
++            env_clear: true,
++            env: #{{ READY: "{ready}", RELEASE: "{release}", RECORD: "{record}" }},
++            stdin: input,
++            timeout: 5.0,
++            max_output: 1024
++        }})"#
++    );
++    let mut scope = Scope::new();
++    scope.push("input", Blob::from(vec![b'i'; INPUT_BYTES]));
++
++    // The child publishes readiness only after closing its input descriptor. Keep it
++    // alive briefly after that observable handshake so the oversized input writer
++    // encounters the closed pipe before the child exits.
++    let waiter_ready = ready_path.clone();
++    let waiter_release = release_path.clone();
++    let release_child = std::thread::spawn(move || {
++        let deadline = Instant::now() + Duration::from_secs(4);
++        while !waiter_ready.exists() && Instant::now() < deadline {
++            std::thread::sleep(Duration::from_millis(5));
++        }
++        let ready_seen = waiter_ready.exists();
++        if ready_seen {
++            std::thread::sleep(Duration::from_millis(250));
++        }
++        std::fs::write(waiter_release, b"release").unwrap();
++        ready_seen
++    });
++
++    let evaluation = engine.eval_with_scope::<Map>(&mut scope, &script);
++    let child_ready_after_close = release_child.join().unwrap();
++    assert!(
++        child_ready_after_close,
++        "child did not confirm that stdin was closed before release"
++    );
++    let result = evaluation.unwrap_or_else(|error| {
++        panic!("early child stdin close replaced its result: {error:?}")
++    });
++    assert!(result["success"].as_bool().unwrap());
++    assert_eq!(result["code"].as_int().unwrap(), 0);
++    assert!(!result["timed_out"].as_bool().unwrap());
++    assert!(result["stdout_complete"].as_bool().unwrap());
++    assert!(result["stderr_complete"].as_bool().unwrap());
++    assert_eq!(
++        result["stdout"].as_immutable_string_ref().unwrap().as_str(),
++        "stdin-closed\n"
++    );
++    assert_eq!(result["stderr"].as_immutable_string_ref().unwrap().as_str(), "");
++    assert_child_record(&record_path, 0);
++    eprintln!(
++        "x16_early_stdin_close input_bytes={INPUT_BYTES} child_closed_input_before_release=true child_exit=0 reaped=true"
++    );
++}
++
+ #[test]
+ #[cfg(not(feature = "no_index"))]
+ fn run_io_contract_blob_stdin_round_trip_with_concurrent_output() {

@@ -1,6 +1,6 @@
 # Linux managed-spawn group-kill and clone-drop lifecycle
 
-**Result:** Both exact selectors have meaningful semantic REDs and restored-source GREENs on native Workhorse Linux x86_64, Rust/Cargo 1.77.2, `testing-environ,sys` plus default features and checked test profile. Acceptance is pending the combined independent review and applies only to these selectors/configuration.
+**Result:** Both exact selectors have meaningful semantic REDs and restored-source GREENs on native Workhorse Linux x86_64, Rust/Cargo 1.77.2, `testing-environ,sys` plus default features and checked test profile. The combined independent review accepted only these selectors/configuration; see [combined review](../linux-process-completion-capture-20261009T1915Z/combined-review.md).
 
 ## Bound inputs and run
 

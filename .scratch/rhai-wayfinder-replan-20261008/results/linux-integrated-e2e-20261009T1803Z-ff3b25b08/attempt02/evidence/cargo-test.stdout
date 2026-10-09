@@ -1,0 +1,293 @@
+
+running 1 test
+test sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+
+running 5 tests
+test authorized_connect_is_observed_and_clone_close_is_shared ... ok
+test denied_and_invalid_endpoints_do_not_reach_peer_and_errors_are_catchable ... ok
+test net_config_rejects_zero_deadline_and_invalid_handle_limits ... ok
+test open_handle_limit_is_shared_across_package_engines_and_released_on_close ... ok
+test ipv6_connect_requires_the_exact_numeric_endpoint_and_delivers_peer_bytes ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+
+running 8 tests
+test authorized_listener_accepts_an_independent_peer ... ok
+test accepted_stream_uses_the_shared_package_quota_across_engines ... ok
+test bind_failure_releases_listener_quota ... ok
+test denied_and_invalid_listener_endpoints_never_bind ... ok
+test listener_clones_share_close_and_final_drop_releases_the_bind ... ok
+test ipv6_port_zero_listener_uses_its_own_grant_and_reports_real_peer_bytes ... ok
+test quota_retry_deadline_expires_under_a_real_saturated_handle_limit ... ok
+test no_client_accept_times_out_with_catchable_net_error ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.10s
+
+
+running 2 tests
+test metadata_exposes_the_documented_tcp_surface ... ok
+test metadata_documents_tcp_handle_operations_and_overloads ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+
+running 7 tests
+test accepted_stream_inherits_host_receive_cap ... ok
+test blob_reads_validate_lengths_return_exact_short_prefix_and_obey_host_cap ... ok
+test engine_string_limit_keeps_ascii_and_reports_lossy_expansion_progress ... ok
+test one_shot_read_returns_an_available_short_prefix_without_waiting_for_more ... ok
+test one_shot_text_read_replaces_a_utf8_character_cut_by_the_available_prefix ... ok
+test stream_read_string_returns_exact_lossy_text_from_peer_bytes ... ok
+test no_data_read_times_out_and_bounded_eof_loop_reports_partial_progress ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.24s
+
+
+running 10 tests
+test accepted_stream_writes_are_read_back_by_the_peer ... ok
+test accepted_stream_inherits_host_write_cap ... ok
+test engine_string_limit_rejects_write_before_peer_bytes ... ok
+test host_write_cap_rejects_oversize_input_without_peer_bytes ... ok
+test invalid_host_write_bounds_are_rejected ... ok
+test read_half_close_is_idempotent_and_keeps_stream_open_for_close ... ok
+test script_write_blob_preserves_exact_bytes ... ok
+test script_writes_string_and_write_all_report_real_peer_bytes ... ok
+test write_half_close_keeps_the_read_direction_and_is_idempotent ... ok
+test bounded_write_timeout_reports_partial_bytes_matching_peer_readback ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+
+running 7 tests
+test test_cwd_matches_process ... ok
+test test_env_allow_list_unset_variable ... ok
+test test_env_default_policy_hides_all ... ok
+test test_env_allow_list_value ... ok
+test test_env_var_non_utf8 ... ok
+test test_env_var_set_and_unset ... ok
+test test_env_vars_all ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+
+running 35 tests
+test test_create_dir_cases ... ok
+test test_empty_and_mixed_writes ... ok
+test test_file_handle_blob_read_respects_engine_array_limit ... ok
+test test_deep_tree_and_many_entries ... ok
+test test_file_handle_read_blob_preserves_bytes_and_obeys_host_cap ... ok
+test test_file_handle_read_respects_engine_limit_below_host_cap ... ok
+test test_file_handle_read_string_advances_the_shared_cursor ... ok
+test test_file_handle_reads_fail_at_eof_and_on_write_only_handle ... ok
+test test_file_handle_string_read_requires_complete_utf8 ... ok
+test test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving ... ok
+test test_metadata_symlink_and_readonly ... ok
+test test_no_handle_leak ... ok
+test test_non_utf8_file_name ... ok
+test test_open_file_checks_grants_before_mutation_and_stays_confined ... ok
+test test_open_file_default_preserves_contents_and_shares_cursor ... ok
+test test_open_file_modes_and_exclusive_create ... ok
+test test_path_spellings ... ok
+test test_predicates_and_metadata ... ok
+test test_read_binary ... ok
+test test_read_dir_cases ... ok
+test test_read_file_cases ... ok
+test test_remove_cases ... ok
+test test_rename_and_copy ... ok
+test test_rename_overwrite_and_directory ... ok
+test test_unicode_names ... ok
+test test_unrestricted_missing_parents ... ok
+test test_large_file_round_trip ... ok
+test test_unrestricted_relative_paths ... ok
+test test_unrestricted_round_trip ... ok
+test test_unrestricted_symlink_then_parent_uses_host_resolution ... ok
+test test_unrestricted_symlinks_follow_host_semantics ... ok
+test test_write_append_blob ... ok
+test test_write_into_missing_parent ... ok
+test test_wrong_entry_kind ... ok
+test test_unrestricted_relative_paths_after_cwd_is_unlinked ... ok
+
+test result: ok. 35 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.11s
+
+
+running 25 tests
+test test_absolute_path_with_parent_components ... ok
+test test_absolute_path_through_symlinked_root_ancestor ... ok
+test test_config_builder ... ok
+test test_absolute_paths ... ok
+test test_configured_root_symlink_then_parent_uses_os_resolution ... ok
+test test_copy_across_roots ... ok
+test test_default_config_denies_fs ... ok
+test test_error_position ... ok
+test test_error_variants ... ok
+test test_errors_are_catchable ... ok
+test test_env_allow_list ... ok
+test test_host_can_downcast ... ok
+test test_missing_root_fails_early ... ok
+test test_function_metadata ... ok
+test test_multiple_roots ... ok
+test test_nested_roots_longest_prefix ... ok
+test test_parent_traversal_is_denied ... ok
+test test_plain_engine_has_no_sys_functions ... ok
+test test_read_only_root ... ok
+test test_root_with_dot_components ... ok
+test test_remove_dir_all_needs_delete_access ... ok
+test test_symlink_escape_is_denied ... ok
+test test_static_module_and_sharing ... ok
+test test_symlinked_root ... ok
+test test_unrestricted_respects_access_level ... ok
+
+test result: ok. 25 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
+
+running 61 tests
+test default_and_nonmatching_process_policies_deny_public_run_without_starting_child ... ok
+test child_wait_preserves_decoded_expansion_reports_and_committed_primary_cause ... ok
+test direct_run_returns_with_pipe_closed_worker_live_control ... ok
+test direct_spawn_try_wait_returns_unit_until_child_exits ... ok
+test lossy_run_reports_engine_limit_expansion_without_returning_truncated_text ... ok
+
+running 1 test
+
+running 1 test
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.04s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.05s
+
+test managed_child_kill_reports_group_closed_under_fixture_reaper ... ok
+test managed_false_drop_leader_fixture ... ok
+test managed_false_drop_leaf_fixture ... ok
+test managed_false_drop_worker_fixture ... ok
+test managed_run_closes_pipe_closed_worker_before_return ... ok
+test direct_spawn_kill_on_drop_false_preserves_child_and_capture ... ok
+
+running 1 test
+
+running 1 test
+test managed_run_closes_worker_after_leader_exit_and_preserves_sentinel ... ok
+
+running 1 test
+
+running 1 test
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.77s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.78s
+
+test managed_run_deadline_reaps_group_under_fixture_reaper ... ok
+
+running 1 test
+
+running 1 test
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.03s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.04s
+
+test managed_run_output_limit_reaps_group_under_fixture_reaper ... ok
+
+running 1 test
+
+running 1 test
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 1.02s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 1.03s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 1.23s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 1.24s
+
+test managed_run_reports_while_fixture_reaper_holds_stopped_zombies ... ok
+
+running 1 test
+
+running 1 test
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.22s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.23s
+
+test managed_run_succeeds_after_fixture_reaper_reaps_descendants ... ok
+test managed_scope_escape_fixture ... ok
+test managed_scope_leader_fixture ... ok
+test managed_scope_leaf_fixture ... ok
+test managed_scope_retained_pipe_holder_fixture ... ok
+test managed_scope_retained_pipe_leader_fixture ... ok
+test managed_scope_spawn_leader_fixture ... ok
+test managed_scope_worker_fixture ... ok
+
+running 1 test
+
+running 1 test
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.14s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.14s
+
+test managed_spawn_final_clone_drop_closes_group_under_fixture_reaper ... ok
+test managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not ... ok
+test managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes ... ok
+test managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit ... ok
+test managed_spawn_kill_stops_leader_worker_leaf_and_preserves_sentinel ... ok
+test managed_spawn_post_reap_cancel_bounds_escaped_capture ... ok
+test managed_run_deadline_cancels_escaped_pipe_holder_under_fixture_reaper ... ok
+test missing_program_and_cwd_report_not_found_without_starting_child ... ok
+test process_cwd_uses_the_opened_filesystem_capability_after_root_replacement ... ok
+test process_fixture ... ok
+test process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one ... ok
+test process_scope_overhead_measurement ... ignored, bounded POSIX process-scope overhead measurement; invoke with the dedicated driver
+test process_scope_retained_resource_census ... ignored, bounded Linux retained-resource census; invoke with the dedicated resource driver
+test process_script_output_option_cannot_raise_the_host_cap ... ok
+test managed_timeout_kills_leader_after_it_changes_process_group ... ok
+test process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps ... ok
+test repeated_public_run_calls_keep_fd_count_stable_isolated ... ignored, run by the public X30 test in a fresh process for a stable /proc census
+test run_deadline_returns_bounded_partial_output_after_terminating_child ... ok
+test run_deadline_with_blocked_stdin_and_active_stdout_stderr ... ok
+test run_io_contract_blob_stdin_round_trip_with_concurrent_output ... ok
+test run_io_contract_empty_output ... ok
+test run_io_contract_string_stdin_round_trip ... ok
+test run_preserves_argv_boundaries_without_shell_interpolation ... ok
+test run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data ... ok
+test run_removes_inherited_environment_variable_from_public_child ... ok
+test run_reports_a_real_unix_child_signal_without_an_exit_code ... ok
+test shared_child_contract::final_drop_honors_both_kill_on_drop_policies ... ok
+test shared_child_contract::fixture_entry ... ok
+test shared_child_contract::nonfinal_child_clone_drop_keeps_the_real_child_available ... ok
+test shared_child_contract::panic_expectation_rejects_success_and_unrelated_panics ... ok
+test shared_child_contract::scenario_entry ... ok
+test shared_child_contract::scenario_panic_releases_and_reaps_the_owned_fixture ... ok
+test shared_child_contract::script_throw_drops_and_reaps_a_live_child ... ok
+test shared_child_contract::spawn_returns_while_large_stdin_is_blocked_and_wait_snapshots_are_stable ... ok
+test unit_stdin_means_immediate_eof ... ok
+test unit_timeout_disables_configured_default_deadline ... ok
+test zero_output_cap_reports_output_limit_with_an_empty_retained_prefix ... ok
+test repeated_public_run_calls_keep_fd_count_stable ... ok
+
+test result: ok. 58 passed; 0 failed; 3 ignored; 0 measured; 0 filtered out; finished in 13.02s
+
+
+running 7 tests
+test absent_and_signal_exit_are_readable_through_engine ... ok
+test prior_sys_error_variants_keep_display_and_classification ... ok
+test process_causes_retain_primary_classification_and_snapshot ... ok
+test process_report_rust_accessors_cover_absent_code_signal_and_diagnostics ... ok
+test scope_defaults_and_builder ... ok
+test old_error_variants_keep_rhai_classification_and_have_no_process_report ... ok
+test script_mutating_copied_report_blobs_and_collections_does_not_change_snapshot ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
