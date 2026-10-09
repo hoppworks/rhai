@@ -1423,7 +1423,7 @@ fn managed_proc_identity_checked(pid: i32) -> std::io::Result<Option<(char, i32,
     Ok(Some((state, parent, group, start)))
 }
 
-#[cfg(all(target_os = "macos", not(feature = "unchecked"), not(feature = "no_index"), not(feature = "no_float")))]
+#[cfg(all(target_os = "macos", not(feature = "no_index"), not(feature = "no_float")))]
 #[derive(Debug, Clone, PartialEq, Eq)]
 struct DarwinProcessIdentity {
     pid: i32,
@@ -1433,14 +1433,14 @@ struct DarwinProcessIdentity {
     start: String,
 }
 
-#[cfg(all(target_os = "macos", not(feature = "unchecked"), not(feature = "no_index"), not(feature = "no_float")))]
+#[cfg(all(target_os = "macos", not(feature = "no_index"), not(feature = "no_float")))]
 impl DarwinProcessIdentity {
     fn same_process(&self, other: &Self) -> bool {
         self.pid == other.pid && self.parent == other.parent && self.group == other.group && self.start == other.start
     }
 }
 
-#[cfg(all(target_os = "macos", not(feature = "unchecked"), not(feature = "no_index"), not(feature = "no_float")))]
+#[cfg(all(target_os = "macos", not(feature = "no_index"), not(feature = "no_float")))]
 fn darwin_process_identity(pid: i32) -> std::io::Result<Option<DarwinProcessIdentity>> {
     let output = Command::new("/bin/ps")
         .args(["-o", "ppid=", "-o", "pgid=", "-o", "state=", "-o", "lstart=", "-p", &pid.to_string()])
@@ -1471,7 +1471,7 @@ fn darwin_process_identity(pid: i32) -> std::io::Result<Option<DarwinProcessIden
     Ok(Some(DarwinProcessIdentity { pid, parent, group, state, start }))
 }
 
-#[cfg(all(target_os = "macos", not(feature = "unchecked"), not(feature = "no_index"), not(feature = "no_float")))]
+#[cfg(all(target_os = "macos", not(feature = "no_index"), not(feature = "no_float")))]
 fn darwin_process_fd_is_open(pid: i32, fd: i32) -> std::io::Result<bool> {
     let output = Command::new("/usr/sbin/lsof").args(["-nP", "-a", "-p", &pid.to_string(), "-d", &fd.to_string(), "-Fpcf"]).output()?;
     if !output.status.success() && output.status.code() != Some(1) {
@@ -1502,7 +1502,7 @@ fn darwin_process_fd_is_open(pid: i32, fd: i32) -> std::io::Result<bool> {
     Ok(process_present && fd_present)
 }
 
-#[cfg(all(target_os = "macos", not(feature = "unchecked"), not(feature = "no_index"), not(feature = "no_float")))]
+#[cfg(all(target_os = "macos", not(feature = "no_index"), not(feature = "no_float")))]
 fn darwin_sdk_pipe_bounds() -> std::io::Result<(std::path::PathBuf, usize, usize)> {
     let output = Command::new("/usr/bin/xcrun").arg("--show-sdk-path").output()?;
     if !output.status.success() {
@@ -1534,10 +1534,10 @@ fn darwin_sdk_pipe_bounds() -> std::io::Result<(std::path::PathBuf, usize, usize
     Ok((header_path, min_prefill, max_pipe_bytes))
 }
 
-#[cfg(all(target_os = "macos", not(feature = "unchecked"), not(feature = "no_index"), not(feature = "no_float")))]
+#[cfg(all(target_os = "macos", not(feature = "no_index"), not(feature = "no_float")))]
 struct DarwinSentinel(Child);
 
-#[cfg(all(target_os = "macos", not(feature = "unchecked"), not(feature = "no_index"), not(feature = "no_float")))]
+#[cfg(all(target_os = "macos", not(feature = "no_index"), not(feature = "no_float")))]
 impl Drop for DarwinSentinel {
     fn drop(&mut self) {
         let pid = self.0.id() as i32;
@@ -1546,7 +1546,7 @@ impl Drop for DarwinSentinel {
     }
 }
 
-#[cfg(all(target_os = "macos", not(feature = "unchecked"), not(feature = "no_index"), not(feature = "no_float")))]
+#[cfg(all(target_os = "macos", not(feature = "no_index"), not(feature = "no_float")))]
 fn kill_and_reap_darwin_sentinel(child: &mut Child, timeout: Duration) -> std::io::Result<(std::io::Result<()>, std::process::ExitStatus)> {
     if let Some(status) = child.try_wait()? {
         return Ok((Ok(()), status));
@@ -5585,7 +5585,7 @@ fn spawn_retains_error_when_child_closes_stdin_with_unsent_input() {
     }
 }
 #[test]
-#[cfg(all(target_os = "macos", not(feature = "unchecked"), not(feature = "no_index"), not(feature = "no_float")))]
+#[cfg(all(target_os = "macos", not(feature = "no_index"), not(feature = "no_float")))]
 fn spawn_retains_error_when_child_closes_stdin_with_unsent_input_darwin() {
     const INPUT_BYTES: usize = 4 * 1024 * 1024;
     // Resolve bounds from the active SDK rather than assuming a Darwin pipe size.

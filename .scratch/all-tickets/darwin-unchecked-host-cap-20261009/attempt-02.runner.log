@@ -1,0 +1,15 @@
+run-darwin-unchecked-cap.sh: OK
+attempt-01.md: OK
+attempt-01.red.log: OK
+attempt-01.red.status: OK
+attempt-01.runner.log: OK
+attempt-01.runner.status: OK
+attempt-01.scope-cleanup.txt: OK
+attempt-02.Cargo.toml: OK
+attempt-02.Cargo.lock: OK
+attempt-02.sys_process.rs: OK
+attempt-02.red.log: OK
+attempt-02.red.status: OK
+attempt-02.green.log: OK
+attempt-02.green.status: OK
+attempt-02.run-info.txt: OK

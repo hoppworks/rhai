@@ -1,0 +1,22 @@
+base_revision=1b7513339c13a781933d4492a3ede98955ceac2a
+host=Daniels-MBP-2.fritz.box
+os=27.0.1 Darwin Daniels-MBP-2.fritz.box 27.0.0 Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:59 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8142 arm64
+rustc 1.77.2 (25ef9e3d8 2024-04-09)
+binary: rustc
+commit-hash: 25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04
+commit-date: 2024-04-09
+host: aarch64-apple-darwin
+release: 1.77.2
+LLVM version: 17.0.6
+cargo 1.77.2 (e52e36006 2024-03-26)
+features=testing-environ,sys,unchecked
+test=process_script_output_option_cannot_raise_the_host_cap
+command=cargo +1.77.2 test --locked --features testing-environ,sys,unchecked --test sys_process process_script_output_option_cannot_raise_the_host_cap -- --exact --nocapture
+runner_timeout_seconds=600
+cargo_build_jobs=2
+red_status=101
+green_status=0
+cargo_lock_sha256=2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425
+manifest_sha256=cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e
+tested_test_source_sha256=a47197f8a2dd7cbdd59a4f1627715721129b62553c0adabc7a847b933f0c012a
+disk_after=/dev/disk3s5   926Gi   859Gi    40Gi    96%    8.5M  419M    2%   /System/Volumes/Data
