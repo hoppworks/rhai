@@ -4,7 +4,7 @@ Cleaned AGENTS SHA37f95ff6 and Memory reread; build-efficiently1b6e1da/TDD reloa
 Capacity comes from live resources; archived exceptions/PIDs/model mappings confer no authority.
 Accepted Linux1.77.2 baseline X30: real200-run census tasks3/fds4/workers1 unchanged;
 results/linux-x30-minimum-20261008T223319Z-c8818e49/ binds reused RED, review and cleanup.
-Next: nested/setup/evidence/cleanup faults using retained builds; no accepted-case rerun.
+Next: reviewed exact output-case retirement; then nested/setup/evidence/cleanup faults, no accepted-case rerun.
 PublicToolsOnly accepted; disconnect/replay native0 + wrong-marker RED acceptedf2de2fe9….
 20 originals/70 frames; payload125, exact identity stopped and runtime absent.
 Client-death01 failure preserved; corrected02 accepted999cb27f:GREEN0/markerRED/PID stopped.
@@ -17,7 +17,7 @@ checked close before clean publication; typed failed-start cleanup report;
 indeterminate overlapped I/O retains its exact buffer/worker/permit.
 Owner2026-10-09 explicitly moved execution to workhorse; actual SSH/VNC console succeeds.
 LLLM console12/13 SELinux-denied; originals retained. Workhorse console18 connected; console17 expired naturally and exact scope retired.
-Output-limit/retirement accepted2e337810:root/child125,64MiB fullhash,16files/60frames; exact30-file retirement0. Native gate OPEN; backend/cfg/metadata/example,
+Output-limit acceptedd16ff487:root/child125,64MiB fullhash,16files/60frames; retirement pending. Native gate OPEN; backend/cfg/metadata/example,
 no_index/native-handle tests and held C# fixture remain unaccepted/unpublished WIP.
 Held-Payload compile on workhorse: exit0,19 original files/54 frames, owner-only before/after.
 Results: windows-custody-20261008T125846Z-b7f83433/workhorse-held-compiler01/; compile accepted.

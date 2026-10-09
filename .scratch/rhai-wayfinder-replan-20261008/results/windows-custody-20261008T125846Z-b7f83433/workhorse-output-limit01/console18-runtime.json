@@ -1,0 +1,10 @@
+{
+  "runtime": "/var/roothome/.local/share/agent-builds/rhai/c18-77185df1734c4ce0/agent-build-llym8496",
+  "assets": "/var/roothome/.local/share/agent-builds/rhai/c18-77185df1734c4ce0/agent-build-llym8496/assets",
+  "pid": 3531903,
+  "endpoint": "127.0.0.1:5908",
+  "target": "127.0.0.1:5900",
+  "maximum_seconds": 3600,
+  "all_servers": "workhorse",
+  "transport": "Existing authenticated SSH via workhorse; local client performs only SSH forwarding"
+}

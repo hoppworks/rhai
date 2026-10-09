@@ -1,0 +1,26 @@
+{
+  "runner_pid": 3531900,
+  "runner_stat": "3531900 (python3) R 3531783 3531783 3531783 0 -1 4194304 23 0 0 0 0 0 0 0 20 0 1 0 5820095 7565312 74 18446744073709551615 94174857703424 94174857704633 140729085543680 0 0 0 0 0 0 0 0 0 17 22 0 0 0 0 0 94174857715048 94174857715716 94175359426560 140729085549102 140729085549275 140729085549275 140729085550567 0\n",
+  "outer_pid": 3531783,
+  "argv": [
+    "python3",
+    "-B",
+    "/home/workhorse/projects/agent-skills/tools/run_scoped.py",
+    "--timeout",
+    "3600",
+    "--",
+    "python3",
+    "-B",
+    "/var/roothome/projects/rhai-workhorse-resume-20261009/console18-payload.py"
+  ],
+  "scope": {
+    "scope": "/root/.local/share/agent-builds/rhai/c18-77185df1734c4ce0",
+    "device": 58,
+    "inode": 118814043,
+    "uid": 0,
+    "payload_sha256": "643e1c9c32eb9fde6fa61916c1bd3b1bc12f81e4c4152b6a6e399116cbc5ec3e",
+    "route": "Accepted console17 helper and finite launcher; names only changed; previous own scope confirmed retired",
+    "maximum_seconds": 3600
+  },
+  "maximum_seconds": 3600
+}

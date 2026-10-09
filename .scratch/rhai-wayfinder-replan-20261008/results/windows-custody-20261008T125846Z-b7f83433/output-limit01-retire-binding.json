@@ -1,0 +1,21 @@
+{
+  "id": "rhai-output-retire01-31b4968cac024f8a8714ea203aa8aa5d",
+  "entry_sha256": "605ff39844d180978f88561f920c98e41301fdf635e70083bc97fa35c0c37582",
+  "expected_sha256": "01261345c76f10cd22c030a79975954d3a2a9463f63e6d9a52b6829b43c4cbf8",
+  "files": 30,
+  "native_started": true,
+  "bounds": {
+    "retirement_seconds": 120,
+    "export_seconds": 30,
+    "entries_per_root": 64,
+    "maximum_file_bytes": 67108864
+  },
+  "purpose": "Only exact inactive output-limit case and target roots after full-log/inventory/native-directory-ID/PID-creation rechecks; do not mint backend cleanup authorization",
+  "runtime_retired": true,
+  "retirement_exit": 0,
+  "retirement_evidence": "workhorse-output-limit01-retire/",
+  "retirement_record_sha256": "1cecd9f8cf8cff161cf29a2947a2c6edabc8d050f23f63c6f8d5be8c297f1032",
+  "backend_cleanup_receipt_claimed": false,
+  "review_sha256": "2e3378100364c931c205a0ec36c16c9d1294c281eb7701926273cd4ec095a7fc",
+  "criterion_accepted": true
+}

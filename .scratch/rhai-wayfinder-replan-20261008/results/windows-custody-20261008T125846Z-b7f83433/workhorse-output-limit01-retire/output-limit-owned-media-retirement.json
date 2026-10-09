@@ -1,0 +1,28 @@
+{
+  "utc": "2026-10-09T10:35:49.003309+00:00",
+  "removed": [
+    {
+      "path": "/var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/output-limit01-retire.iso",
+      "sha256": "51116ea9335983eca08c4a68b877ba6744b1dbf23f1fa02252821510ea58b412",
+      "bytes": 391168,
+      "native_inputs_and_originals_secured": true,
+      "absent": true
+    },
+    {
+      "path": "/var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/output-limit01.iso",
+      "sha256": "a15cf0baf4f5d6f93d22eabe8f67e89a031462d31b934b2c6f30fe425e914191",
+      "bytes": 403456,
+      "native_inputs_and_originals_secured": true,
+      "absent": true
+    },
+    {
+      "path": "/var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/monitor-fixture03.iso",
+      "sha256": "278fec81a72f26c9ea24ea0488ed7128c52dc8bc58664e9446082fd9e6920f49",
+      "bytes": 1140736,
+      "native_inputs_and_originals_secured": true,
+      "absent": true
+    }
+  ],
+  "foreign_resources_modified": false,
+  "reusable_guest_binaries_retained": true
+}

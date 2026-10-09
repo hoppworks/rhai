@@ -1,0 +1,101 @@
+{
+  "frames": 60,
+  "files": {
+    "observer.json": {
+      "path": "observer.json",
+      "sha256": "ef3f8d07fe0ca94a64e66d65f33309f6137d2906459c7bcc19320e02d7e47403",
+      "length": 1636
+    },
+    "target/bootstrap.stdout": {
+      "path": "target/bootstrap.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "target/bootstrap.stderr": {
+      "path": "target/bootstrap.stderr",
+      "sha256": "b1ceadd9c05b8ead63108495d7526b97de86d39a2bdc12294a93f433397535a2",
+      "length": 102
+    },
+    "monitor-death-evidence/.scoped-run-14cf263fc7084b7babbaad563a4c79e1.journal": {
+      "path": "monitor-death-evidence/.scoped-run-14cf263fc7084b7babbaad563a4c79e1.journal",
+      "sha256": "d8a37ec880d0efb5f94915267c02d2901ab31d331a38ac9f52b385b18aae63cc",
+      "length": 1212
+    },
+    "monitor-death-evidence/output-limit-readback.json": {
+      "path": "monitor-death-evidence/output-limit-readback.json",
+      "sha256": "6f15931658c240bc9cd4f1da4e7df45c9b6ca0045f1ee4336461ea8de8630a86",
+      "length": 433
+    },
+    "monitor-death-evidence/.scoped-evidence-21debf0620be4c6ea865cfc1ca211ac9/stderr.log": {
+      "path": "monitor-death-evidence/.scoped-evidence-21debf0620be4c6ea865cfc1ca211ac9/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "monitor-death-evidence/scoped-21debf0620be4c6ea865cfc1ca211ac9/fixture.exe": {
+      "path": "monitor-death-evidence/scoped-21debf0620be4c6ea865cfc1ca211ac9/fixture.exe",
+      "sha256": "5e9d818d2e2e5a5adab0b32229f4b0e0cc390a4417231cd55dc5d7eb4d13386e",
+      "length": 11264
+    },
+    "monitor-death-evidence/scoped-21debf0620be4c6ea865cfc1ca211ac9/monitor-witness.child.identity": {
+      "path": "monitor-death-evidence/scoped-21debf0620be4c6ea865cfc1ca211ac9/monitor-witness.child.identity",
+      "sha256": "cd858557ebdd1841097970013ae3a86de474947f6fecac77da45909067b5a096",
+      "length": 38
+    },
+    "monitor-death-evidence/scoped-21debf0620be4c6ea865cfc1ca211ac9/monitor-witness.child.ready": {
+      "path": "monitor-death-evidence/scoped-21debf0620be4c6ea865cfc1ca211ac9/monitor-witness.child.ready",
+      "sha256": "9ea468d8a8ce7ba674d1b12c6021d6b6f963e55f7afd30bf288cd1d535fa7af3",
+      "length": 12
+    },
+    "monitor-death-evidence/scoped-21debf0620be4c6ea865cfc1ca211ac9/monitor-witness.client": {
+      "path": "monitor-death-evidence/scoped-21debf0620be4c6ea865cfc1ca211ac9/monitor-witness.client",
+      "sha256": "8fca0930919faa0f86908c06708ff5b5205a2c6b3b563d19c964a08a29b2b9e8",
+      "length": 38
+    },
+    "monitor-death-evidence/scoped-21debf0620be4c6ea865cfc1ca211ac9/monitor-witness.driver": {
+      "path": "monitor-death-evidence/scoped-21debf0620be4c6ea865cfc1ca211ac9/monitor-witness.driver",
+      "sha256": "faf92712657956f8a96006d9ad2facd36ae0cdaf2e6a75a18fc8dc2e52fd74ac",
+      "length": 38
+    },
+    "monitor-death-evidence/scoped-21debf0620be4c6ea865cfc1ca211ac9/monitor-witness.identity": {
+      "path": "monitor-death-evidence/scoped-21debf0620be4c6ea865cfc1ca211ac9/monitor-witness.identity",
+      "sha256": "d878a4b86a49cacd32633e96681994ddd09ad0451bfc198f4919e14e9b81d9e7",
+      "length": 39
+    },
+    "monitor-death-evidence/scoped-21debf0620be4c6ea865cfc1ca211ac9/monitor-witness.monitor": {
+      "path": "monitor-death-evidence/scoped-21debf0620be4c6ea865cfc1ca211ac9/monitor-witness.monitor",
+      "sha256": "01cf5e5e96cae4a6036c656ab1aa0868125232e80ff08896fe51d072dbf6e28c",
+      "length": 38
+    },
+    "monitor-death-evidence/scoped-21debf0620be4c6ea865cfc1ca211ac9/monitor-witness.output-start": {
+      "path": "monitor-death-evidence/scoped-21debf0620be4c6ea865cfc1ca211ac9/monitor-witness.output-start",
+      "sha256": "5ceddfece18563db7bbc7482cef5abeaa83c1ad543c1ec54acd96afedd074876",
+      "length": 49
+    },
+    "monitor-death-evidence/scoped-21debf0620be4c6ea865cfc1ca211ac9/monitor-witness.ready": {
+      "path": "monitor-death-evidence/scoped-21debf0620be4c6ea865cfc1ca211ac9/monitor-witness.ready",
+      "sha256": "3a559e24a983eca2b8632e108596e45d67d12eab9f5e74519b806e1a28ca83b9",
+      "length": 24
+    },
+    "monitor-death-evidence/scoped-21debf0620be4c6ea865cfc1ca211ac9/monitor-witness.release": {
+      "path": "monitor-death-evidence/scoped-21debf0620be4c6ea865cfc1ca211ac9/monitor-witness.release",
+      "sha256": "4311d552d08a18419afe07a97ea4d8aacd3294b8228241d411f63cccd9d87198",
+      "length": 14
+    }
+  },
+  "complete": true,
+  "begin": {
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\monitor-output-limit-b7fd2bab746b4f01b1b0431365d52bd4",
+    "accepted": true,
+    "full_record": "observer.json",
+    "id": "rhai-output-limit01-b7fd2bab746b4f01b1b0431365d52bd4",
+    "exit": 0
+  },
+  "end": {
+    "id": "rhai-output-limit01-b7fd2bab746b4f01b1b0431365d52bd4",
+    "driver_launched": true,
+    "files": 16,
+    "accepted": true,
+    "exit": 0,
+    "guest_evidence_retained": true
+  }
+}

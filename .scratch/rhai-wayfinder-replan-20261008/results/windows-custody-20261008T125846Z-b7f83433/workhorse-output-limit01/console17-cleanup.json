@@ -1,0 +1,8 @@
+{
+  "runner_exit": 124,
+  "runtime": "/var/roothome/.local/share/agent-builds/rhai/c17-e9e40f8086b546ad/agent-build-581gog_x",
+  "runtime_absent": true,
+  "exact_scope": true,
+  "scope_empty": true,
+  "scope_retired": true
+}

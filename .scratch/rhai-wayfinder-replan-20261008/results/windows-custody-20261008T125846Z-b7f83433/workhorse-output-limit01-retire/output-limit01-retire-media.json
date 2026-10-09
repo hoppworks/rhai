@@ -1,0 +1,8 @@
+{
+  "iso": "/var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/output-limit01-retire.iso",
+  "sha256": "51116ea9335983eca08c4a68b877ba6744b1dbf23f1fa02252821510ea58b412",
+  "bytes": 391168,
+  "native_started": false,
+  "entry_sha256": "605ff39844d180978f88561f920c98e41301fdf635e70083bc97fa35c0c37582",
+  "expected_sha256": "01261345c76f10cd22c030a79975954d3a2a9463f63e6d9a52b6829b43c4cbf8"
+}

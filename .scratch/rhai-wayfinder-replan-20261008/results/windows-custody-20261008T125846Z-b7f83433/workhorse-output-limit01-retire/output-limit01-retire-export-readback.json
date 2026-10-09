@@ -1,0 +1,26 @@
+{
+  "frames": 15,
+  "files": {
+    "retirement.json": {
+      "path": "retirement.json",
+      "sha256": "1cecd9f8cf8cff161cf29a2947a2c6edabc8d050f23f63c6f8d5be8c297f1032",
+      "length": 10734
+    }
+  },
+  "complete": true,
+  "begin": {
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\output-limit-retire-31b4968cac024f8a8714ea203aa8aa5d",
+    "accepted": true,
+    "full_record": "retirement.json",
+    "id": "rhai-output-retire01-31b4968cac024f8a8714ea203aa8aa5d",
+    "exit": 0
+  },
+  "end": {
+    "id": "rhai-output-retire01-31b4968cac024f8a8714ea203aa8aa5d",
+    "driver_launched": false,
+    "files": 1,
+    "accepted": true,
+    "exit": 0,
+    "guest_evidence_retained": true
+  }
+}

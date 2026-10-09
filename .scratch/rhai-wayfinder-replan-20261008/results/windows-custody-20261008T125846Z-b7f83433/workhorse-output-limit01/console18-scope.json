@@ -1,0 +1,9 @@
+{
+  "scope": "/root/.local/share/agent-builds/rhai/c18-77185df1734c4ce0",
+  "device": 58,
+  "inode": 118814043,
+  "uid": 0,
+  "payload_sha256": "643e1c9c32eb9fde6fa61916c1bd3b1bc12f81e4c4152b6a6e399116cbc5ec3e",
+  "route": "Accepted console17 helper and finite launcher; names only changed; previous own scope confirmed retired",
+  "maximum_seconds": 3600
+}

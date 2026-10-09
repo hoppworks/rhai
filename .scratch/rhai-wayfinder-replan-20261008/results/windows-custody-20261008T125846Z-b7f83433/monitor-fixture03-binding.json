@@ -1,0 +1,24 @@
+{
+  "nonce": "f60e80b2fd474b9ca0ed7d8678a13bb4",
+  "source_sha256": "f9b24970b8befd8432ca16d7d17ebd8087f4f85490251deca39b6000704835b3",
+  "entry_sha256": "12d546869a2ae2e45193b8d8f0b23e69348304f239e0148e08824281126a48a0",
+  "input_manifest_sha256": "c9f1dcc53084259fae8aa44a3ccf549027369eb80dbc4908d737efa3fa78ddf1",
+  "input_files": 27,
+  "changed_inputs": [
+    "tools/windows-scoped-runner/fixtures/MonitorDeathFixture.cs",
+    "tools/windows-scoped-runner/fixtures/RunSourceFixtures.ps1"
+  ],
+  "compiled": true,
+  "native_started": true,
+  "purpose": "Only changed finite output-limit native fixture; original Driver/Runner binaries reused unchanged",
+  "scope_leaf": "monitor-fixture03-f60e80b2fd47",
+  "bootstrap_limits": "Unchanged reviewed compiler Job/bootstrap and930-second outer observer,180-second export; exact original input pins except changed fixture",
+  "fixture_reuse_boundary": "Remaining connected custody controls; source changes invalidate its source binding",
+  "bootstrap_sha256": "588b1f77e0dd22628d7c18707fe9f67f604b21c9a689a010fdcfc1d904164075",
+  "source_pin_corrected_before_native": true,
+  "native_compiler_exit": 0,
+  "fixture_binary_sha256": "5e9d818d2e2e5a5adab0b32229f4b0e0cc390a4417231cd55dc5d7eb4d13386e",
+  "native_compile_acceptance_review": "accepted prerequisite;19 originals/54frames; unchanged Driver/Runner reused",
+  "original_files": 19,
+  "review_sha256": "2e3378100364c931c205a0ec36c16c9d1294c281eb7701926273cd4ec095a7fc"
+}

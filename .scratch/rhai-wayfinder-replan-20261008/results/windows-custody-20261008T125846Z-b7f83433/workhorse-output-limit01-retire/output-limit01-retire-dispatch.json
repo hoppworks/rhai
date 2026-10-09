@@ -1,0 +1,10 @@
+{
+  "id": "rhai-output-retire01-31b4968cac024f8a8714ea203aa8aa5d",
+  "utc": "2026-10-09T10:32:12.415463+00:00",
+  "serial_offset": 1293446,
+  "serial_inode": 102529120,
+  "entry_sha256": "605ff39844d180978f88561f920c98e41301fdf635e70083bc97fa35c0c37582",
+  "review_sha256": "a3d02c74407ed15e3485f2d3b3110062b1f7f0bd3d5066de8a724b9f8a682fb1",
+  "command": "powershell -noprofile -executionpolicy bypass -file e:\\start.ps1",
+  "driver_launch": false
+}

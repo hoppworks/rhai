@@ -1,0 +1,8 @@
+{
+  "iso": "/var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/monitor-fixture03.iso",
+  "sha256": "5b4ae98278e59966d5a9588da2ec024fe3e1f54b79fe6f999ab8ec7d510a5a96",
+  "bytes": 1140736,
+  "native_started": false,
+  "runtime": "/root/.local/share/agent-builds/rhai/fixture03-media-59cc991f63b34f8fac427201d62cd8bb/agent-build-392g5_gv",
+  "source_manifest_sha256": "0f48cd35195da230157290b16ad6454cb3656d7632bd87e5442062d7cba6b042"
+}
