@@ -87,3 +87,32 @@ of other sessions are changed. A permitted encrypted native console route is nee
 before further GUI launch; no unauthenticated LAN VNC is introduced. Missing Mac-native
 rows remain open. Original logs/source snapshots are secured before any later owned
 resource retirement. The foreign shared-child fixture remains excluded.
+
+
+## Workhorse held disconnect and replay — 2026-10-09
+
+The current public tools were compiled once under PublicToolsOnly: selection
+RED1, compiler GREEN0, owner-only before/after both exact compiler exits, and
+23 original files reconstructed from69 ordered frames. Runner SHA
+c3d91a8bcf550ef8087b7c057455ac876fe0a958b4e22de816b55daa659cb486;
+driver SHA0eb9ead3e501038f248e47bbddca462cb2f5f9a15cdee89b39a8a6d4360f87ac.
+The separately accepted held fixture SHA473be314d4d8d04e3205776d1e4f382aeb1eec1f5bf438eeb821f4fc0016b88b was reused.
+
+Disconnect-alive and replay each returned driver0/client78/payload125 and
+MonitorStopped, with cleanup and removal true. Each case exports10 original
+files in35 ordered frames; the combined review verified all16 CRC journal records.
+A deliberately wrong fresh marker expectation failed before the correct
+expectation passed. Independent fresh records bind payload PID and creation,
+and readback confirms those exact identities no longer live. Runtime absence,
+driver exit and pipe drain were checked separately. No compiler was rerun.
+
+Original bindings/entries/results: workhorse-public-tools01/,
+workhorse-held-compiler01/ and workhorse-interrupt01/.
+Combined review SHA f2de2fe92630efa8d3d87980d641bfeb0e26638698b55c956cbb016e97977955.
+These are narrow controls; full custody and native product acceptance remain open.
+Client-death01 returned driver2 with a sharing IOException while opening the
+still-written journal. This is runner-readiness failure before the exit oracle,
+not the anticipated exit-assertion RED. The separately reviewed Kill/exit mismatch
+also remains open. No criterion was closed from this failure. Guest build roots stay owned and retained for dependent controls
+until custody completion/cancellation or a source/compiler binding change;
+exact inactive-root retirement follows evidence export. No foreign work changed.

@@ -5,13 +5,17 @@ param(
     [switch] $BuildOnly,
     [switch] $CompilerClosureOnly,
     [switch] $DriverOnly,
+    [switch] $PublicToolsOnly,
     [switch] $DriverParserFixture,
     [ValidateSet('ordinary-runtime','payload-evidence')] [string] $CustodyFixtureMode = 'ordinary-runtime'
 )
 
 $ErrorActionPreference = 'Stop'
-if ($CompilerClosureOnly -and (!$BuildOnly -or $DriverParserFixture -or $SetupFailureControl -or $DriverOnly)) {
+if ($CompilerClosureOnly -and (!$BuildOnly -or $DriverParserFixture -or $SetupFailureControl -or $DriverOnly -or $PublicToolsOnly)) {
     throw 'CompilerClosureOnly requires BuildOnly without other diagnostic selections.'
+}
+if ($PublicToolsOnly -and (!$BuildOnly -or $CompilerClosureOnly -or $DriverOnly -or $DriverParserFixture -or $SetupFailureControl)) {
+    throw 'PublicToolsOnly requires BuildOnly without other diagnostic selections.'
 }
 if ($DriverOnly -and (!$BuildOnly -or !$DriverParserFixture -or $SetupFailureControl)) {
     throw 'DriverOnly requires BuildOnly and DriverParserFixture without SetupFailureControl.'
@@ -40,7 +44,7 @@ $expected = @{
     'tools/windows-scoped-runner/fixtures/MonitorPayloadJobFixture.cs' = 'd9aae76fd68a2cb52721618cd0746af36892a7951c9d0c4d11867a05e11ca7c0'
     'tools/windows-scoped-runner/fixtures/MonitorSpecificationIntakeFixture.cs' = '3e774455bc25a3f0fa40162e4ca3f5d59f35270d27b41c3e2aceb0f144f73d8d'
     'tools/windows-scoped-runner/fixtures/MonitorStagingHandoffFixture.cs' = '463273337d01e64b4285031858188b5ef886bb5cf150f6dabe2ac637bca999d5'
-    'tools/windows-scoped-runner/fixtures/PayloadFixture.cs' = 'e806b393f9f7fe24d349879e70ff247479592373831a1eb30f55e5950d341676'
+    'tools/windows-scoped-runner/fixtures/PayloadFixture.cs' = 'ac7184606f80563c684c6618ef48526e44f7cafac18c4a0ebe58462066fe034a'
     'tools/windows-scoped-runner/fixtures/SpecificationTransferFixture.cs' = 'a6b901d0a9cf59faba2d5f056d983ef627b92b2e9535277b60a1e2e75541e504'
 }
 
@@ -576,7 +580,7 @@ if (!$SetupFailureControl) { Test-OwnedProcessExitCodes $childPowerShell }
         'MonitorStagingHandoff.cs','MonitorTransport.cs','ScopedRunner.cs','SpecificationTransfer.cs','WindowsCustodyBackend.cs'
     ) | ForEach-Object { Join-Path $expectedRoot ('tools/windows-scoped-runner/' + $_) }
     $allProduction = @($production)
-    if ($BuildOnly -and !$CompilerClosureOnly -and !$DriverOnly) {
+    if ($BuildOnly -and !$CompilerClosureOnly -and !$DriverOnly -and !$PublicToolsOnly) {
         $policySource = Join-Path $expectedRoot 'tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs'
         $policyExe = Join-Path $buildRoot 'NativeScopePolicyFixture.exe'
         Invoke-OwnedProcess $compiler (@('/target:exe','/main:NativeScopePolicyFixture',('/out:'+$policyExe)) + $allProduction + @($policySource)) 'compile-native-scope-policy' 180
@@ -596,7 +600,10 @@ if (!$SetupFailureControl) { Test-OwnedProcessExitCodes $childPowerShell }
         Invoke-OwnedProcess $parserExe @() 'run-native-driver-parser' 30
     }
     $runner = Join-Path $buildRoot 'ScopedRunner.exe'
+    if ($PublicToolsOnly) { Save-OwnedJobMembers 'before-public-tools-compiler' }
     if (!$CompilerClosureOnly -and !$DriverOnly) { Invoke-OwnedProcess $compiler (@('/target:exe','/main:ScopedRunner',('/out:'+$runner)) + $allProduction) 'compile-production-runner' 180 }
+
+    if ($PublicToolsOnly) { Save-OwnedJobMembers 'after-exact-runner-compiler-exit' }
 
     $fixtureCases = if ($BuildOnly) { @() } else { @(
         @{ Name='CustodyBackendFixture'; Timeout=720 },
@@ -621,16 +628,19 @@ if (!$SetupFailureControl) { Test-OwnedProcessExitCodes $childPowerShell }
         $driverSource = Join-Path $expectedRoot 'tools/windows-scoped-runner/MonitorAcceptanceDriver.cs'
         $driverExe = Join-Path $buildRoot 'MonitorAcceptanceDriver.exe'
         Invoke-OwnedProcess $compiler (@('/target:exe','/main:MonitorAcceptanceDriver',('/out:'+$driverExe)) + $allProduction + @($driverSource)) 'compile-native-driver' 180
-        $missingSource = Join-Path $expectedRoot 'deliberately-missing-compiler-control.cs'
-        Invoke-OwnedProcess $compiler @('/target:library',$missingSource) 'expected-compiler-failure' 180 1
-        $compilerControl = [IO.File]::ReadAllText((Join-Path $logRoot 'expected-compiler-failure.stdout.txt')) + [IO.File]::ReadAllText((Join-Path $logRoot 'expected-compiler-failure.stderr.txt'))
-        if (!$compilerControl.Contains('error CS2001')) { throw 'The missing-source control did not reach the intended compiler diagnostic.' }
+        if ($PublicToolsOnly) { Save-OwnedJobMembers 'after-exact-driver-compiler-exit' }
+        if (!$PublicToolsOnly) {
+            $missingSource = Join-Path $expectedRoot 'deliberately-missing-compiler-control.cs'
+            Invoke-OwnedProcess $compiler @('/target:library',$missingSource) 'expected-compiler-failure' 180 1
+            $compilerControl = [IO.File]::ReadAllText((Join-Path $logRoot 'expected-compiler-failure.stdout.txt')) + [IO.File]::ReadAllText((Join-Path $logRoot 'expected-compiler-failure.stderr.txt'))
+            if (!$compilerControl.Contains('error CS2001')) { throw 'The missing-source control did not reach the intended compiler diagnostic.' }
+        }
     }
 
     $payloadSource = Join-Path $expectedRoot 'tools/windows-scoped-runner/fixtures/PayloadFixture.cs'
     $payloadExe = Join-Path $buildRoot 'PayloadFixture.exe'
     if ($CompilerClosureOnly) { Save-OwnedJobMembers 'before-compiler' }
-    if (!$DriverOnly) { Invoke-OwnedProcess $compiler @('/target:exe','/main:PayloadFixture',('/out:'+$payloadExe),$payloadSource) 'compile-PayloadFixture' 180 }
+    if (!$DriverOnly -and !$PublicToolsOnly) { Invoke-OwnedProcess $compiler @('/target:exe','/main:PayloadFixture',('/out:'+$payloadExe),$payloadSource) 'compile-PayloadFixture' 180 }
     if ($CompilerClosureOnly) { Save-OwnedJobMembers 'after-exact-compiler-exit' }
 
     foreach ($case in $fixtureCases) {

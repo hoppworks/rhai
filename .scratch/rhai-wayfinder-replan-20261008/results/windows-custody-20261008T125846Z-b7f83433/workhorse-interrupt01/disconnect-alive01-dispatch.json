@@ -1,0 +1,25 @@
+{
+  "binding": {
+    "mode": "disconnect-alive",
+    "tag": "disconnect-alive01",
+    "id": "rhai-disconnect-alive01-84cc9e7f154640eabe6d3045ef447299",
+    "entry": "disconnect-alive.ps1",
+    "sha256": "784b608aa32226acb4255893701794a29df853dbeb0df3ff74a5bab295b75877",
+    "driver_seconds": 180,
+    "observer_seconds": 190,
+    "reap_seconds": 10,
+    "drain_seconds": 10,
+    "export_seconds": 180,
+    "scope": "negative-mode custody plus independent held record/identity; no grandchild/monitor-death/full gate claim"
+  },
+  "serial_inode": 102529120,
+  "serial_offset": 700971,
+  "guest_free_bytes": 74534854656,
+  "projected_additional_bytes_estimate": 16777216,
+  "binding_free_reserve_bytes": 2147483648,
+  "entry_native_hash_verified": true,
+  "native_parser": "PARSE_OK",
+  "review_sha256": "8c93372d76ae11e31870b6cebb9d09c368a2d19e06c235d6c4ee4bbf6d3cab7b",
+  "time": 1791527786.950697,
+  "capacity_transcription_corrected_from_cua": true
+}

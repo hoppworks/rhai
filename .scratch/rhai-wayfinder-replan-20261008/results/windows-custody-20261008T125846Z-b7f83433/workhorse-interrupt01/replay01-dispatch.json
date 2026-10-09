@@ -1,0 +1,21 @@
+{
+  "binding": {
+    "mode": "replay",
+    "tag": "replay01",
+    "id": "rhai-replay01-aa212325460f439095e08b33caf5bfc8",
+    "entry": "replay.ps1",
+    "sha256": "a4f05e9ce1273530721ff3526c492eda71bba8908f090563f17107b71650b9fc",
+    "driver_seconds": 180,
+    "observer_seconds": 190,
+    "reap_seconds": 10,
+    "drain_seconds": 10,
+    "export_seconds": 180,
+    "scope": "negative-mode custody plus independent held record/identity; no grandchild/monitor-death/full gate claim"
+  },
+  "serial_inode": 102529120,
+  "serial_offset": 728005,
+  "entry_native_hash_verified": true,
+  "native_parser": "PARSE_OK",
+  "review_sha256": "8c93372d76ae11e31870b6cebb9d09c368a2d19e06c235d6c4ee4bbf6d3cab7b",
+  "time": 1791527839.2971973
+}

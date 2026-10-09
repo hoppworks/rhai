@@ -1,0 +1,16 @@
+{
+  "accepted": true,
+  "scope": "PublicToolsOnly native compiler prerequisite only",
+  "review_sha256": "c9b3772c911bcacbfbb676f82a3f3b6f5361ac895deaa5b925fe734538654b32",
+  "red_exit": 1,
+  "green_exit": 0,
+  "files": 23,
+  "frames": 69,
+  "full_custody_accepted": false,
+  "native_product_accepted": false,
+  "retained_root": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\tools-wh01-b3801b325536\\run\\monitor-source-b3801b3255364e68b1da6d50ec37d038",
+  "owner": "this Rhai session",
+  "purpose": "immediately dependent native interruption controls",
+  "reuse_boundary": "custody package completion/cancellation or changed source/compiler binding",
+  "cleanup": "export needed evidence before exact owned inactive root retirement; preserve foreign work"
+}

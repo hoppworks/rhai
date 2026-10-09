@@ -1,0 +1,16 @@
+{
+  "acceptance": "held-Payload native compile prerequisite only",
+  "compiler_exit": 0,
+  "observer_exit": 0,
+  "original_files": 19,
+  "frames": 54,
+  "job_members": "owner-only before and after exact compiler exit; final disposition and watchdog drain precede observer success",
+  "payload_source_sha256": "ac7184606f80563c684c6618ef48526e44f7cafac18c4a0ebe58462066fe034a",
+  "payload_binary_sha256": "473be314d4d8d04e3205776d1e4f382aeb1eec1f5bf438eeb821f4fc0016b88b",
+  "compiler_sha256": "cf32cb7e8e5691b962e1b6f92b03d87409dd9e7afbed71c5bf77b8203cc56ee1",
+  "independent_review_sha256": "3d1bd903be8d3b7ed7be696425519285a8873633e183155a655da9bba5ec927d",
+  "held_behavior": false,
+  "full_custody_gate": false,
+  "native_product_acceptance": false,
+  "retention": "exact guest native binary/source/log root retained for next dependent custody controls; exported originals independently hash checked"
+}

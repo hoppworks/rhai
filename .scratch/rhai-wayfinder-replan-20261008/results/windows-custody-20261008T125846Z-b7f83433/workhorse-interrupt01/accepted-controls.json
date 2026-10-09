@@ -1,0 +1,14 @@
+{
+  "accepted": [
+    "disconnect-alive01",
+    "replay01"
+  ],
+  "combined_review_sha256": "f2de2fe92630efa8d3d87980d641bfeb0e26638698b55c956cbb016e97977955",
+  "files": 20,
+  "frames": 70,
+  "crc_journal_records": 16,
+  "full_custody_accepted": false,
+  "client_death_accepted": false,
+  "client_death01": "driver2 IOException sharing journal while monitor writes; exit assertion not reached",
+  "resources": "own guest builds retained only until dependent custody completion/cancellation or source/compiler binding change; exact inactive roots retired after export"
+}

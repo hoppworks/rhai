@@ -1,0 +1,24 @@
+{
+  "id": "rhai-public-tools01-b3801b3255364e68b1da6d50ec37d038",
+  "tag": "public-tools01",
+  "entry_sha256": "98af6de015d80cf7e6ca1213e7c964b4075021a71e88da2029c3885f4a684463",
+  "manifest_sha256": "14bfd2f1610cdfaf8d2ed7fe6f3dc4706d031c6d98624633ad4fecda04a50a84",
+  "bootstrap_sha256": "96b5c468f0b5765bdc9939b4710157db8cd2c02e3c00479d84bd99fce394c69d",
+  "selection": "BuildOnly/PublicToolsOnly; only two current public binaries; reused native held473be3 outside this fresh root",
+  "red": "conflicting compiler selections exit1 plus exact diagnostic plus no compile-root effect",
+  "green": "exit0; exact two-file binary inventory; owner-only before/after each csc; successful disposition/drained watchdog; independently hashed serial export",
+  "limits": {
+    "selection_control_seconds": 30,
+    "exact_child_reap_seconds": 10,
+    "compiler_each_seconds": 180,
+    "compiler_owner_seconds": 900,
+    "observer_seconds": 930,
+    "export_seconds": 180,
+    "files": 64,
+    "total_bytes": 16777216,
+    "file_bytes": 4194304
+  },
+  "native_started": false,
+  "accepted": false,
+  "review_fix": "P2: export observer/control evidence even before positive bootstrap logs exist"
+}

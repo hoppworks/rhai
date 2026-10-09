@@ -1,0 +1,27 @@
+{
+  "id": "rhai-held-compiler01-02768f93f8804056ac6b010425894629",
+  "tag": "held-compiler01",
+  "entry_sha256": "cfec6975dc6d997e7db90d0edc9b97065c8c0829fec0c6bae60927abb9a1ff91",
+  "manifest_sha256": "c73464ac81468a0c23ada5f51b3a30934c0d1f8b2ff05ff11daee76a2e489aca",
+  "payload_sha256": "ac7184606f80563c684c6618ef48526e44f7cafac18c4a0ebe58462066fe034a",
+  "bootstrap_sha256": "57740e3829de7b514fe0256c3c30a3d3283ffaba10ea642796151a0971d915f7",
+  "source_host": "lllm current owned WIP",
+  "execution_host": "workhorse",
+  "selection": "BuildOnly CompilerClosureOnly: compile changed held Payload only; no Runner/Driver/parser/Cargo/old controls",
+  "limits": {
+    "bootstrap_seconds": 930,
+    "compiler_seconds": 180,
+    "export_seconds": 180,
+    "files": 64,
+    "total_bytes": 16777216,
+    "file_bytes": 4194304
+  },
+  "accepted": false,
+  "native_started": false,
+  "native_entry_verified_sha256": "cfec6975dc6d997e7db90d0edc9b97065c8c0829fec0c6bae60927abb9a1ff91",
+  "serial_offset": 637907,
+  "serial_inode": 102529120,
+  "review_sha256": "af7987619c16526015e19211abd6a913b59c06867228f66de8b6163c82ed5fc8",
+  "iso_sha256": "775778d53082e1dbb453d32ff98adecf19e88bd3c61e4042cc7b7048407ecd88",
+  "native_dispatch_prepared": true
+}

@@ -2,6 +2,17 @@
 
 ## Native bootstrap and separate custody acceptance route
 
+
+The BuildOnly/CompilerClosureOnly selection compiles only the changed finite payload.
+When retained public tools are unavailable or their source/compiler binding differs,
+BuildOnly/PublicToolsOnly compiles only ScopedRunner and MonitorAcceptanceDriver
+in the same owned compiler job. It records owner-only membership before compilation
+and after each exact compiler exits. It preserves setup, exit-status, private-root,
+watchdog and final Job-disposition checks while skipping previously accepted
+policy/parser fixtures and payload compilation. These build selections do not
+launch the driver or satisfy the interruption gate.
+
+
 `MonitorAcceptanceDriver` is a separate route prepared for Windows guest
 custody acceptance. On 2026-10-08, the narrow native BuildOnly bootstrap passed
 as non-admin RhaiTest: three compiled binaries, real exit-status and setup-cleanup
@@ -173,9 +184,10 @@ The success validator requires the caller's exact expected payload exit,
 `PayloadExited`, client exit 78, confirmed cleanup/removal, and independent
 evidence hashes. Negative validators require the exact driver action,
 `MonitorStopped`, payload exit `0000007D`, client exit 1 for client-death and
-78 otherwise, confirmed cleanup/removal, and evidence hashes. The narrow native
-`success` composition is accepted; the three interruption modes remain unexecuted
-and open. The driver hashes the saved manifest and stdout/stderr logs; the backend
+78 otherwise, confirmed cleanup/removal, and evidence hashes. The narrow native success, disconnect-alive and replay compositions are
+accepted for their bound inputs. Client-death remains open: its unchanged native
+control returned a journal sharing IOException before the exit oracle. Bounded
+completion readiness and exact termination remain affected work. The driver hashes the saved manifest and stdout/stderr logs; the backend
 performs complete snapshot/readback, and the independent observer reads fresh payload bytes.
 
 The driver's workload path is the public `--lease-client` entrypoint, which
@@ -186,8 +198,9 @@ the client remains alive, exact client death, and a replayed challenge remain
 to be exercised with a finite held payload. The
 negative controls need a created payload to establish the expected
 `TerminateJobObject(..., 125)` result; absent or contradictory termination
-evidence must fail closed. The three negative native cases remain open; the tiny
-success does not prove residual-child cleanup or Cargo work retirement.
+evidence must fail closed. Disconnect and replay passed with the finite held payload, independently read
+payload identity, exact termination125 and actual runtime removal. Client-death,
+residual-child cleanup and Cargo work retirement remain open.
 
 The full Expert02 native set remains required under its one-hour outer bound,
 2 GiB job memory cap,
