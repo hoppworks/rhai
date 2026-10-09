@@ -68,6 +68,80 @@ fn process_fixture() {
             }
             process::exit(code.parse().unwrap());
         }
+        #[cfg(target_os = "linux")]
+        if std::env::var_os("RHAI_SYS_PROCESS_CLOSE_STDIN").is_some() {
+            let pid = process::id();
+            let pipe_capacity = unsafe { libc::fcntl(libc::STDIN_FILENO, libc::F_GETPIPE_SZ) };
+            assert!(pipe_capacity > 0, "query actual child stdin pipe capacity: {}", std::io::Error::last_os_error());
+            let start_ticks = resource_census_start_ticks(pid as i32)
+                .expect("read early-close fixture start ticks")
+                .expect("early-close fixture identity exists");
+            let process_group = unsafe { libc::getpgid(0) };
+            assert!(process_group > 0, "read early-close fixture process group: {}", std::io::Error::last_os_error());
+            let temporary = std::path::PathBuf::from(&record).with_extension("ready-tmp");
+            std::fs::write(&temporary, format!("child-pid={pid} child-start={start_ticks} child-pgid={process_group} pipe-capacity={pipe_capacity} ready=true\n")).unwrap();
+            std::fs::rename(temporary, &record).unwrap();
+            let ack = std::path::PathBuf::from(std::env::var_os("RHAI_SYS_PROCESS_CLOSE_STDIN_ACK").expect("observer acknowledgement path"));
+            let watchdog = std::time::Instant::now() + std::time::Duration::from_secs(10);
+            while !ack.exists() && std::time::Instant::now() < watchdog {
+                std::thread::sleep(std::time::Duration::from_millis(1));
+            }
+            assert!(ack.exists(), "independent observer did not acknowledge the live fixture before its watchdog");
+            std::io::stdout().write_all(b"early-close-stdout\n").unwrap();
+            std::io::stdout().flush().unwrap();
+            std::io::stderr().write_all(b"early-close-stderr\n").unwrap();
+            std::io::stderr().flush().unwrap();
+            let prefill_path = std::env::var_os("RHAI_SYS_PROCESS_CLOSE_STDIN_PREFILL");
+            let close_ack_path = std::env::var_os("RHAI_SYS_PROCESS_CLOSE_STDIN_CLOSE_ACK");
+            let input_bytes_raw = std::env::var_os("RHAI_SYS_PROCESS_CLOSE_STDIN_INPUT_BYTES");
+            let input_bytes = input_bytes_raw.as_ref().and_then(|raw| raw.to_str()).and_then(|value| value.parse::<usize>().ok());
+            let configured = [prefill_path.is_some(), close_ack_path.is_some(), input_bytes_raw.is_some()]
+                .into_iter()
+                .filter(|present| *present)
+                .count();
+            assert!(configured == 0 || configured == 3, "all optional pre-close observation variables must be configured together");
+            if configured == 3 {
+                let prefill = prefill_path.expect("prefill path");
+                let close_ack = close_ack_path.expect("close acknowledgement path");
+                let input_bytes = input_bytes.expect("positive numeric input byte count");
+                let prefill = std::path::PathBuf::from(prefill);
+                let close_ack = std::path::PathBuf::from(close_ack);
+                let prefill_deadline = std::time::Instant::now() + std::time::Duration::from_secs(4);
+                let unread = loop {
+                    let mut unread = 0i32;
+                    let result = unsafe { libc::ioctl(libc::STDIN_FILENO, libc::FIONREAD, &mut unread) };
+                    assert_eq!(result, 0, "observe unread child stdin bytes: {}", std::io::Error::last_os_error());
+                    assert!(unread >= 0, "kernel reported negative unread stdin bytes: {unread}");
+                    if unread as usize == pipe_capacity as usize {
+                        break unread;
+                    }
+                    assert!(std::time::Instant::now() < prefill_deadline, "stdin pipe did not fill before the bounded pre-close deadline: unread={unread} capacity={pipe_capacity}");
+                    std::thread::sleep(std::time::Duration::from_millis(2));
+                };
+                let temporary = prefill.with_extension("prefill-tmp");
+                std::fs::write(
+                    &temporary,
+                    format!("child-pid={pid} child-start={start_ticks} child-pgid={process_group} stdin-prefill-bytes={unread} pipe-capacity={pipe_capacity} input-bytes={input_bytes} ready-to-close=true\n"),
+                )
+                .unwrap();
+                std::fs::rename(temporary, &prefill).unwrap();
+                let close_watchdog = std::time::Instant::now() + std::time::Duration::from_secs(10);
+                while !close_ack.exists() && std::time::Instant::now() < close_watchdog {
+                    std::thread::sleep(std::time::Duration::from_millis(1));
+                }
+                assert!(close_ack.exists(), "independent observer did not acknowledge the full open stdin pipe before its watchdog");
+            }
+            let intent = std::path::PathBuf::from(std::env::var_os("RHAI_SYS_PROCESS_CLOSE_STDIN_INTENT").expect("close intent path"));
+            let temporary = intent.with_extension("intent-tmp");
+            std::fs::write(&temporary, format!("child-pid={pid} child-start={start_ticks} child-pgid={process_group} stdin-close-intent=true\n")).unwrap();
+            std::fs::rename(temporary, intent).unwrap();
+            assert_eq!(unsafe { libc::close(libc::STDIN_FILENO) }, 0, "close actual child fd 0: {}", std::io::Error::last_os_error());
+            // The bounded parent run deadline is only a safety net. Normal completion
+            // requires the owning process runner to terminate this still-live child.
+            loop {
+                std::thread::sleep(std::time::Duration::from_secs(1));
+            }
+        }
         if std::env::var_os("RHAI_SYS_PROCESS_HOLD").is_some() {
             std::fs::write(record, format!("child-pid={} child-ready=1\n", process::id())).unwrap();
             let hold_for = std::env::var("RHAI_SYS_PROCESS_HOLD_FOR_MS").ok().map(|value| value.parse::<u64>().unwrap());
@@ -517,7 +591,7 @@ fn direct_spawn_try_wait_returns_unit_until_child_exits() {
     let terminal = loop {
         let result = engine.eval_with_scope::<Dynamic>(&mut scope, "child.try_wait()").unwrap();
         if !result.is_unit() {
-            break result
+            break result;
         }
         assert!(Instant::now() < terminal_deadline, "try_wait did not observe natural child exit before the bounded watchdog");
         std::thread::sleep(Duration::from_millis(5));
@@ -1032,7 +1106,10 @@ fn managed_scope_retained_pipe_leader_fixture() {
     assert_eq!(holder_fields.get("pgid"), Some(&sentinel_pgid));
     let leader_start = managed_pipe_start_ticks(leader_pid);
     let holder_start = managed_pipe_start_ticks(holder_pid);
-    managed_atomic_record(&leader_record, &format!("pid={leader_pid} start={leader_start} pgid={leader_pgid} holder={holder_pid} holder_start={holder_start} holder_pgid={sentinel_pgid} sentinel_pgid={sentinel_pgid}\n"));
+    managed_atomic_record(
+        &leader_record,
+        &format!("pid={leader_pid} start={leader_start} pgid={leader_pgid} holder={holder_pid} holder_start={holder_start} holder_pgid={sentinel_pgid} sentinel_pgid={sentinel_pgid}\n"),
+    );
     let deadline = Instant::now() + Duration::from_secs(15);
     while !root.join("release-leader").exists() && Instant::now() < deadline {
         std::thread::sleep(Duration::from_millis(5));
@@ -1274,12 +1351,7 @@ fn managed_proc_identity_checked(pid: i32) -> std::io::Result<Option<(char, i32,
         .1
         .split_whitespace()
         .collect::<Vec<_>>();
-    let field = |index: usize| {
-        fields
-            .get(index)
-            .copied()
-            .ok_or_else(|| std::io::Error::new(std::io::ErrorKind::InvalidData, "short proc stat"))
-    };
+    let field = |index: usize| fields.get(index).copied().ok_or_else(|| std::io::Error::new(std::io::ErrorKind::InvalidData, "short proc stat"));
     let state = fields
         .first()
         .and_then(|field| field.chars().next())
@@ -1549,7 +1621,7 @@ impl Drop for ManagedZombieReaperGuard {
         } else {
             // Release only the exact fixture's existing ACKs and wait gates. This never creates
             // begin-run, so failure before launch cannot accidentally start an Engine operation.
-        for name in ["pidfd-ack", "release-worker", "release-leader", "holder-release", "kill-request", "host-exit-release", "reap-release"] {
+            for name in ["pidfd-ack", "release-worker", "release-leader", "holder-release", "kill-request", "host-exit-release", "reap-release"] {
                 let _ = std::fs::write(self.root.join(name), b"owned fixture cleanup\n");
             }
         }
@@ -1712,7 +1784,10 @@ fn managed_zombie_reaper_process() {
         let holder_pid = holder_fields.get("pid").copied().expect("escaped holder PID");
         let holder_start = managed_zombie_u64(&holder_text, "start").expect("escaped holder start time");
         let holder_group = holder_fields.get("pgid").copied().expect("escaped holder group");
-        let expected_group = std::env::var(MANAGED_PIPE_SENTINEL_GROUP_ENV).expect("sentinel process-group identity").parse::<i32>().expect("valid sentinel process-group identity");
+        let expected_group = std::env::var(MANAGED_PIPE_SENTINEL_GROUP_ENV)
+            .expect("sentinel process-group identity")
+            .parse::<i32>()
+            .expect("valid sentinel process-group identity");
         let mut holder_receipt = None;
         let mut holder_error = None;
         if holder_group != expected_group {
@@ -1739,11 +1814,7 @@ fn managed_zombie_reaper_process() {
                     }
                 }
                 Ok(Some((state, parent, group, start)))
-                    if start == holder_start
-                        && group == holder_group
-                        && (parent == reaper_pid
-                            || (parent == leader_pid
-                                && managed_proc_identity_checked(leader_pid).is_ok_and(|identity| identity.is_some_and(|(_, _, _, current_start)| current_start == leader_start)))) =>
+                    if start == holder_start && group == holder_group && (parent == reaper_pid || (parent == leader_pid && managed_proc_identity_checked(leader_pid).is_ok_and(|identity| identity.is_some_and(|(_, _, _, current_start)| current_start == leader_start)))) =>
                 {
                     // The leader may still own the live holder, or the holder may have
                     // become a zombie immediately before orphan adoption. Wait for the
@@ -1988,9 +2059,21 @@ fn managed_zombie_host_deadline(root: &std::path::Path, host_pid: i32, host_star
     let result = match engine.eval::<Map>(&script) {
         Ok(report) => {
             let bool_field = |key: &str| report.get(key).and_then(|value| value.as_bool().ok());
-            let stdout_marker = report.get("stdout").and_then(|value| value.as_immutable_string_ref().ok()).is_some_and(|value| value.contains("managed-deadline-stdout\n"));
-            let stderr_marker = report.get("stderr").and_then(|value| value.as_immutable_string_ref().ok()).is_some_and(|value| value.contains("managed-deadline-stderr\n"));
-            format!("api_success=true api_outcome=timeout_report success={:?} timed_out={:?} stdout_complete={:?} stderr_complete={:?} stdout_marker={stdout_marker} stderr_marker={stderr_marker}", bool_field("success"), bool_field("timed_out"), bool_field("stdout_complete"), bool_field("stderr_complete"))
+            let stdout_marker = report
+                .get("stdout")
+                .and_then(|value| value.as_immutable_string_ref().ok())
+                .is_some_and(|value| value.contains("managed-deadline-stdout\n"));
+            let stderr_marker = report
+                .get("stderr")
+                .and_then(|value| value.as_immutable_string_ref().ok())
+                .is_some_and(|value| value.contains("managed-deadline-stderr\n"));
+            format!(
+                "api_success=true api_outcome=timeout_report success={:?} timed_out={:?} stdout_complete={:?} stderr_complete={:?} stdout_marker={stdout_marker} stderr_marker={stderr_marker}",
+                bool_field("success"),
+                bool_field("timed_out"),
+                bool_field("stdout_complete"),
+                bool_field("stderr_complete")
+            )
         }
         Err(error) => {
             let sys_error = match error.as_ref() {
@@ -1998,7 +2081,14 @@ fn managed_zombie_host_deadline(root: &std::path::Path, host_pid: i32, host_star
                 _ => None,
             };
             match sys_error {
-                Some(SysError::Process { cause: ProcessCause::Timeout(_), report }) => format!("api_success=false api_outcome=typed_timeout_error timed_out={} stdout_complete={} stderr_complete={} exit={:?} diagnostics={:?}", report.timed_out(), report.stdout_complete(), report.stderr_complete(), report.exit_code(), report.cleanup_diagnostics()),
+                Some(SysError::Process { cause: ProcessCause::Timeout(_), report }) => format!(
+                    "api_success=false api_outcome=typed_timeout_error timed_out={} stdout_complete={} stderr_complete={} exit={:?} diagnostics={:?}",
+                    report.timed_out(),
+                    report.stdout_complete(),
+                    report.stderr_complete(),
+                    report.exit_code(),
+                    report.cleanup_diagnostics()
+                ),
                 Some(other) => format!("api_success=false api_outcome=typed_non_timeout_error kind={}", other.kind()),
                 None => format!("api_success=false api_outcome=non_sys_error error={error:?}"),
             }
@@ -2037,9 +2127,21 @@ fn managed_zombie_host_escaped_pipe_deadline(root: &std::path::Path, host_pid: i
     let outcome = match engine.eval::<Map>(&script) {
         Ok(report) => {
             let bool_field = |key: &str| report.get(key).and_then(|value| value.as_bool().ok());
-            let stdout_marker = report.get("stdout").and_then(|value| value.as_immutable_string_ref().ok()).is_some_and(|value| value.contains("escaped-holder-stdout-ready\n"));
-            let stderr_marker = report.get("stderr").and_then(|value| value.as_immutable_string_ref().ok()).is_some_and(|value| value.contains("escaped-holder-stderr-ready\n"));
-            format!("api_success=true api_outcome=timeout_report success={:?} timed_out={:?} stdout_complete={:?} stderr_complete={:?} stdout_marker={stdout_marker} stderr_marker={stderr_marker}", bool_field("success"), bool_field("timed_out"), bool_field("stdout_complete"), bool_field("stderr_complete"))
+            let stdout_marker = report
+                .get("stdout")
+                .and_then(|value| value.as_immutable_string_ref().ok())
+                .is_some_and(|value| value.contains("escaped-holder-stdout-ready\n"));
+            let stderr_marker = report
+                .get("stderr")
+                .and_then(|value| value.as_immutable_string_ref().ok())
+                .is_some_and(|value| value.contains("escaped-holder-stderr-ready\n"));
+            format!(
+                "api_success=true api_outcome=timeout_report success={:?} timed_out={:?} stdout_complete={:?} stderr_complete={:?} stdout_marker={stdout_marker} stderr_marker={stderr_marker}",
+                bool_field("success"),
+                bool_field("timed_out"),
+                bool_field("stdout_complete"),
+                bool_field("stderr_complete")
+            )
         }
         Err(error) => {
             let sys_error = match error.as_ref() {
@@ -2047,7 +2149,20 @@ fn managed_zombie_host_escaped_pipe_deadline(root: &std::path::Path, host_pid: i
                 _ => None,
             };
             match sys_error {
-                Some(SysError::Process { cause: ProcessCause::Timeout(_), report }) => format!("api_success=false api_outcome=typed_timeout_error timed_out={} stdout_complete={} stderr_complete={} stdout_marker={} stderr_marker={}", report.timed_out(), report.stdout_complete(), report.stderr_complete(), report.stdout_bytes().windows(b"escaped-holder-stdout-ready\n".len()).any(|part| part == b"escaped-holder-stdout-ready\n"), report.stderr_bytes().windows(b"escaped-holder-stderr-ready\n".len()).any(|part| part == b"escaped-holder-stderr-ready\n")),
+                Some(SysError::Process { cause: ProcessCause::Timeout(_), report }) => format!(
+                    "api_success=false api_outcome=typed_timeout_error timed_out={} stdout_complete={} stderr_complete={} stdout_marker={} stderr_marker={}",
+                    report.timed_out(),
+                    report.stdout_complete(),
+                    report.stderr_complete(),
+                    report
+                        .stdout_bytes()
+                        .windows(b"escaped-holder-stdout-ready\n".len())
+                        .any(|part| part == b"escaped-holder-stdout-ready\n"),
+                    report
+                        .stderr_bytes()
+                        .windows(b"escaped-holder-stderr-ready\n".len())
+                        .any(|part| part == b"escaped-holder-stderr-ready\n")
+                ),
                 Some(other) => format!("api_success=false api_outcome=typed_non_timeout_error kind={}", other.kind()),
                 None => format!("api_success=false api_outcome=non_sys_error error={error:?}"),
             }
@@ -2186,9 +2301,7 @@ fn managed_zombie_host_final_drop(root: &std::path::Path, host_pid: i32, host_st
     managed_atomic_record(&root.join("child-ready"), &format!("host={host_pid} host_start={host_start}\n"));
 
     drop(scope.remove::<Dynamic>("nonfinal"));
-    let nonfinal_wait_unit = engine
-        .eval_with_scope::<Dynamic>(&mut scope, "final.wait(0.1)")
-        .is_ok_and(|result| result.is_unit());
+    let nonfinal_wait_unit = engine.eval_with_scope::<Dynamic>(&mut scope, "final.wait(0.1)").is_ok_and(|result| result.is_unit());
     managed_atomic_record(&root.join("nonfinal-drop-done"), &format!("host={host_pid} host_start={host_start} wait_unit={nonfinal_wait_unit}\n"));
     while !root.join("kill-request").exists() && Instant::now() < deadline {
         std::thread::sleep(Duration::from_millis(2));
@@ -2503,11 +2616,10 @@ fn managed_spawn_final_clone_drop_closes_group_under_fixture_reaper() {
     let reaper_live_before_drop = matches!(managed_proc_identity(reaper_pid), Some((state, actual_parent, _, start)) if state != 'Z' && actual_parent == parent && start == reaper_start);
     let host_live_before_drop = matches!(managed_proc_identity(host_pid), Some((state, actual_parent, _, start)) if state != 'Z' && actual_parent == reaper_pid && start == host_start);
     let sentinel_live_before_drop = matches!(managed_proc_identity(sentinel_pid), Some((state, actual_parent, pgid, start)) if state != 'Z' && actual_parent == parent && pgid == sentinel_pgid && start == sentinel_start);
-    let nonfinal_members_live = [leader["pid"], worker["pid"], leaf["pid"]].into_iter().all(|pid| {
-        managed_proc_identity(pid).is_some_and(|(state, _, observed_group, start)| state != 'Z' && observed_group == group && start == pidfd_start(pid))
-    });
-    let nonfinal_drop_preserved_group = nonfinal.get("host") == Some(&host_pid) && nonfinal_members_live
-        && std::fs::read_to_string(fixture.path("nonfinal-drop-done")).is_ok_and(|receipt| receipt.contains("wait_unit=true"));
+    let nonfinal_members_live = [leader["pid"], worker["pid"], leaf["pid"]]
+        .into_iter()
+        .all(|pid| managed_proc_identity(pid).is_some_and(|(state, _, observed_group, start)| state != 'Z' && observed_group == group && start == pidfd_start(pid)));
+    let nonfinal_drop_preserved_group = nonfinal.get("host") == Some(&host_pid) && nonfinal_members_live && std::fs::read_to_string(fixture.path("nonfinal-drop-done")).is_ok_and(|receipt| receipt.contains("wait_unit=true"));
     std::fs::write(fixture.path("kill-request"), b"exact live identities recorded; authorize final lease drop\n").unwrap();
     while !fixture.path("api-result").exists() && Instant::now() < deadline {
         std::thread::sleep(Duration::from_millis(2));
@@ -2557,25 +2669,23 @@ fn managed_spawn_final_clone_drop_closes_group_under_fixture_reaper() {
             (unsafe { libc::poll(&mut pollfd, 1, 0) }) == 1 && pollfd.revents & libc::POLLIN != 0 && *pid > 0
         });
         let expected = [(leader["pid"], leader_start), (worker["pid"], worker_start), (leaf["pid"], leaf_start)];
-        let absent = expected.iter().zip(member_identities.iter()).map(|((pid, start), identity)| {
-            match identity.as_ref() {
+        let absent = expected
+            .iter()
+            .zip(member_identities.iter())
+            .map(|((pid, start), identity)| match identity.as_ref() {
                 None => true,
                 Some((_, _, _, observed_start)) => observed_start != start || *pid <= 0,
-            }
-        }).collect::<Vec<_>>();
+            })
+            .collect::<Vec<_>>();
         [leader_absent, worker_absent, leaf_absent] = [absent[0], absent[1], absent[2]];
         reaped = std::fs::read_to_string(fixture.path("prompt-reaper-cleanup")).unwrap_or_default();
-        exact_reaped = reaped.contains(&format!("worker={} start={worker_start} pgid={group} reaped=true wait_status=", worker["pid"]))
-            && reaped.contains(&format!("leaf={} start={leaf_start} pgid={group} reaped=true wait_status=", leaf["pid"]))
-            && reaped.contains("complete=true");
+        exact_reaped = reaped.contains(&format!("worker={} start={worker_start} pgid={group} reaped=true wait_status=", worker["pid"])) && reaped.contains(&format!("leaf={} start={leaf_start} pgid={group} reaped=true wait_status=", leaf["pid"])) && reaped.contains("complete=true");
         let group_result = unsafe { libc::kill(-group, 0) };
         let group_error = if group_result == -1 { std::io::Error::last_os_error().raw_os_error() } else { None };
         group_empty_after_closure = group_result == -1 && group_error == Some(libc::ESRCH);
-        final_members_live = member_identities.iter().zip(expected.iter()).any(|(identity, (pid, start))| {
-            match identity {
-                Some((state, _, observed_group, observed_start)) => *state != 'Z' && *observed_group == group && observed_start == start && *pid > 0,
-                None => false,
-            }
+        final_members_live = member_identities.iter().zip(expected.iter()).any(|(identity, (pid, start))| match identity {
+            Some((state, _, observed_group, observed_start)) => *state != 'Z' && *observed_group == group && observed_start == start && *pid > 0,
+            None => false,
         });
         if pidfds_exited && leader_absent && worker_absent && leaf_absent && exact_reaped && group_empty_after_closure {
             break;
@@ -2583,8 +2693,7 @@ fn managed_spawn_final_clone_drop_closes_group_under_fixture_reaper() {
         std::thread::sleep(Duration::from_millis(5));
     }
     let exceptional_cleanup_not_started = !fixture.path("exceptional-cleanup-started").exists();
-    let closure_observed = pidfds_exited && leader_absent && worker_absent && leaf_absent && exact_reaped && group_empty_after_closure
-        && exceptional_cleanup_not_started && observation_error.is_none();
+    let closure_observed = pidfds_exited && leader_absent && worker_absent && leaf_absent && exact_reaped && group_empty_after_closure && exceptional_cleanup_not_started && observation_error.is_none();
     let host_live_at_drop_return = host_live_during_closure;
     let reaper_live_at_drop_return = reaper_live_during_closure;
     let sentinel_live_at_drop_return = sentinel_live_during_closure;
@@ -2609,11 +2718,17 @@ fn managed_spawn_final_clone_drop_closes_group_under_fixture_reaper() {
     let group_empty = unsafe { libc::kill(-group, 0) } == -1 && std::io::Error::last_os_error().raw_os_error() == Some(libc::ESRCH);
     eprintln!("managed_final_drop_boundary nonfinal_preserved={nonfinal_drop_preserved_group} leader={} leader_start={leader_start} leader_record_start_matches_pidfd={leader_record_start_matches_pidfd} worker={} worker_start={worker_start} worker_record_start_matches_pidfd={worker_record_start_matches_pidfd} leaf={} leaf_start={leaf_start} leaf_record_start_matches_pidfd={leaf_record_start_matches_pidfd} worker_record_group_matches={worker_record_group_matches} leaf_record_group_matches={leaf_record_group_matches} group={group} drop_return_recorded={api_bound} closure_observed={closure_observed} exceptional_cleanup_not_started={exceptional_cleanup_not_started} leader_absent={leader_absent} worker_absent={worker_absent} leaf_absent={leaf_absent} exact_reaped={exact_reaped} host_live_before_drop={host_live_before_drop} reaper_live_before_drop={reaper_live_before_drop} sentinel_live_before_drop={sentinel_live_before_drop} host_live_through_closure={host_live_at_drop_return} reaper_live_through_closure={reaper_live_at_drop_return} sentinel_live_through_closure={sentinel_live_at_drop_return} pidfds_exited={pidfds_exited} final_members_live={final_members_live} reaper_ok={reaper_ok} reaper_status={status:?} host_absent_after_cleanup={host_absent_after_cleanup} sentinel_reaped={sentinel_reaped} group_empty_after_closure={group_empty_after_closure} observation_error={observation_error:?} api={api:?} reaped={reaped:?} cleanup={cleanup:?}", leader["pid"], worker["pid"], leaf["pid"]);
 
-    assert!(leader_record_start_matches_pidfd && worker_record_start_matches_pidfd && leaf_record_start_matches_pidfd && worker_record_group_matches && leaf_record_group_matches, "fixture records must match exact acquired PIDFD identities and managed group");
+    assert!(
+        leader_record_start_matches_pidfd && worker_record_start_matches_pidfd && leaf_record_start_matches_pidfd && worker_record_group_matches && leaf_record_group_matches,
+        "fixture records must match exact acquired PIDFD identities and managed group"
+    );
     assert!(host_live_before_drop && reaper_live_before_drop && sentinel_live_before_drop, "host, fixture reaper, and sentinel must be live before final drop");
     assert!(nonfinal_drop_preserved_group, "dropping a nonfinal managed Child clone terminated its live group");
     assert!(api_bound, "host did not record the authorized final managed lease drop: {api}");
-    assert!(closure_observed && pidfds_exited && leader_absent && worker_absent && leaf_absent && exact_reaped && group_empty_after_closure, "final managed lease drop must be followed by independently observed exact group closure");
+    assert!(
+        closure_observed && pidfds_exited && leader_absent && worker_absent && leaf_absent && exact_reaped && group_empty_after_closure,
+        "final managed lease drop must be followed by independently observed exact group closure"
+    );
     assert!(host_live_at_drop_return && reaper_live_at_drop_return && sentinel_live_at_drop_return, "host, fixture reaper, and sentinel must remain live at the final-drop boundary");
     assert!(reaper_ok && cleanup.contains("complete=true") && host_absent_after_cleanup && sentinel_reaped && group_empty, "exact final-drop fixture cleanup must finish: {cleanup}");
     assert!(!final_members_live, "final managed Child lease drop left an exact process-group member live");
@@ -2650,7 +2765,12 @@ fn managed_run_deadline_reaps_group_under_fixture_reaper() {
         .env(MANAGED_ZOMBIE_DEADLINE_ENV, deadline_ns.to_string());
     let reaper_child = command.spawn().expect("start fixture-owned reaper");
     let reaper_pid = reaper_child.id() as i32;
-    let mut reaper = ManagedZombieReaperGuard { root: root.clone(), child: reaper_child, launched: false, deadline };
+    let mut reaper = ManagedZombieReaperGuard {
+        root: root.clone(),
+        child: reaper_child,
+        launched: false,
+        deadline,
+    };
     let reaper_ready = fixture.path("reaper-ready");
     let host_ready = fixture.path("host-ready");
     while (!reaper_ready.exists() || !host_ready.exists()) && Instant::now() < deadline {
@@ -2705,8 +2825,7 @@ fn managed_run_deadline_reaps_group_under_fixture_reaper() {
     let leaf_absent = managed_proc_identity(leaf_fields["pid"]).map_or(true, |identity| identity.3 != leaf_start);
     let pidfds_exited = pidfds.0.iter().all(|(pid, fd, start)| {
         let mut pollfd = libc::pollfd { fd: *fd, events: libc::POLLIN, revents: 0 };
-        (unsafe { libc::poll(&mut pollfd, 1, 0) }) == 1 && pollfd.revents & libc::POLLIN != 0
-            && managed_proc_identity(*pid).map_or(true, |identity| identity.3 != *start)
+        (unsafe { libc::poll(&mut pollfd, 1, 0) }) == 1 && pollfd.revents & libc::POLLIN != 0 && managed_proc_identity(*pid).map_or(true, |identity| identity.3 != *start)
     });
     let host_live_at_return = matches!(managed_proc_identity(host_pid), Some((state, parent, _, start)) if state != 'Z' && parent == reaper_pid && start == host_start);
     let reaper_live_at_return = matches!(managed_proc_identity(reaper_pid), Some((state, parent, _, start)) if state != 'Z' && parent == std::process::id() as i32 && start == reaper_start);
@@ -2718,9 +2837,8 @@ fn managed_run_deadline_reaps_group_under_fixture_reaper() {
         std::thread::sleep(Duration::from_millis(2));
     }
     let cleanup_text = std::fs::read_to_string(cleanup_path).unwrap_or_default();
-    let cleanup_exact = cleanup_text.contains(&format!("worker={} start={worker_start} pgid={group} reaped=true", worker_fields["pid"]))
-        && cleanup_text.contains(&format!("leaf={} start={leaf_start} pgid={group} reaped=true", leaf_fields["pid"]))
-        && cleanup_text.contains("complete=true");
+    let cleanup_exact =
+        cleanup_text.contains(&format!("worker={} start={worker_start} pgid={group} reaped=true", worker_fields["pid"])) && cleanup_text.contains(&format!("leaf={} start={leaf_start} pgid={group} reaped=true", leaf_fields["pid"])) && cleanup_text.contains("complete=true");
     let no_watchdog_cleanup_through_boundary = no_watchdog_cleanup_at_return && !fixture.path("exceptional-cleanup-started").exists();
     let boundary = format!("host={host_pid} host_start={host_start} reaper={reaper_pid} reaper_start={reaper_start} leader={} leader_start={leader_start} leader_absent={leader_absent} worker={} worker_start={worker_start} worker_absent={worker_absent} leaf={} leaf_start={leaf_start} leaf_absent={leaf_absent} group={group} group_probe={group_probe} group_errno={group_errno} host_live={host_live_at_return} reaper_live={reaper_live_at_return} sentinel={sentinel_pid} sentinel_start={sentinel_start} sentinel_live={sentinel_live_at_return} timed_out={api_is_timed_out} captures_incomplete={captures_incomplete} partial_output={partial_output_preserved} pidfds_exited={pidfds_exited} cleanup_exact={cleanup_exact} no_watchdog_cleanup_through_boundary={no_watchdog_cleanup_through_boundary}\n", leader_fields["pid"], worker_fields["pid"], leaf_fields["pid"]);
     std::fs::write(fixture.path("api-boundary"), &boundary).unwrap();
@@ -2730,7 +2848,9 @@ fn managed_run_deadline_reaps_group_under_fixture_reaper() {
     let mut reaper_status = None;
     while reaper_status.is_none() && Instant::now() < observation_deadline {
         reaper_status = reaper.child.try_wait().expect("observe exact fixture reaper");
-        if reaper_status.is_none() { std::thread::sleep(Duration::from_millis(5)); }
+        if reaper_status.is_none() {
+            std::thread::sleep(Duration::from_millis(5));
+        }
     }
     let reaper_ok = reaper_status.is_some_and(|status| status.success());
     let no_watchdog_cleanup_after_reap = !fixture.path("exceptional-cleanup-started").exists();
@@ -2777,7 +2897,12 @@ fn managed_run_deadline_cancels_escaped_pipe_holder_under_fixture_reaper() {
         .env(MANAGED_PIPE_SENTINEL_GROUP_ENV, sentinel_group.to_string());
     let reaper_child = command.spawn().expect("start fixture-owned subreaper");
     let reaper_pid = reaper_child.id() as i32;
-    let mut reaper = ManagedZombieReaperGuard { root: root.clone(), child: reaper_child, launched: false, deadline };
+    let mut reaper = ManagedZombieReaperGuard {
+        root: root.clone(),
+        child: reaper_child,
+        launched: false,
+        deadline,
+    };
     let reaper_ready = fixture.path("reaper-ready");
     let host_ready = fixture.path("host-ready");
     while (!reaper_ready.exists() || !host_ready.exists()) && Instant::now() < deadline {
@@ -2865,11 +2990,7 @@ fn managed_run_deadline_cancels_escaped_pipe_holder_under_fixture_reaper() {
     let ack = std::fs::read_to_string(fixture.path("holder-ack")).unwrap_or_default();
     let no_watchdog_through_challenge = !fixture.path("exceptional-cleanup-started").exists();
     let holder_fields = managed_record_fields(&ack);
-    let epiprobe = holder_fields.get("pid") == Some(&holder_pid)
-        && holder_fields.get("stdout_result") == Some(&-1)
-        && holder_fields.get("stdout_error") == Some(&libc::EPIPE)
-        && holder_fields.get("stderr_result") == Some(&-1)
-        && holder_fields.get("stderr_error") == Some(&libc::EPIPE);
+    let epiprobe = holder_fields.get("pid") == Some(&holder_pid) && holder_fields.get("stdout_result") == Some(&-1) && holder_fields.get("stdout_error") == Some(&libc::EPIPE) && holder_fields.get("stderr_result") == Some(&-1) && holder_fields.get("stderr_error") == Some(&libc::EPIPE);
     std::fs::write(fixture.path("holder-release"), b"release exact escaped holder\n").unwrap();
     std::fs::write(fixture.path("release-leader"), b"release if still running\n").unwrap();
     std::fs::write(fixture.path("host-exit-release"), b"API boundary and challenge recorded\n").unwrap();
@@ -2913,7 +3034,10 @@ fn managed_run_deadline_cancels_escaped_pipe_holder_under_fixture_reaper() {
     assert!(api_for_host, "timeout report belonged to an unexpected Engine host: {api_result}");
     assert!(timeout_report && partial_capture, "managed run must return its bounded deadline report with partial incomplete captures: {api_result}");
     assert!(!leader_live && leader_pidfd_exited && group_probe == -1 && group_errno == libc::ESRCH, "deadline did not close the exact managed group: {boundary}");
-    assert!(holder_boundary && holder_pidfd_live && host_live && reaper_live && sentinel_live && no_watchdog && no_watchdog_through_challenge, "escaped holder custody/live boundary was invalid: {boundary}");
+    assert!(
+        holder_boundary && holder_pidfd_live && host_live && reaper_live && sentinel_live && no_watchdog && no_watchdog_through_challenge,
+        "escaped holder custody/live boundary was invalid: {boundary}"
+    );
     assert!(epiprobe, "escaped holder did not observe EPIPE on both closed capture writers after return: {ack}");
     assert!(holder_reaped_exactly, "fixture reaper did not exact-wait the escaped holder: {holder_reap}");
 }
@@ -3008,11 +3132,9 @@ fn managed_run_output_limit_reaps_group_under_fixture_reaper() {
         std::thread::sleep(Duration::from_millis(2));
     }
     let cleanup_text = std::fs::read_to_string(cleanup_path).unwrap_or_default();
-    let absent_or_reused = |pid, expected_start| {
-        match managed_proc_identity_checked(pid).expect("read exact managed member identity after OutputLimit") {
-            None => true,
-            Some(identity) => identity.3 != expected_start,
-        }
+    let absent_or_reused = |pid, expected_start| match managed_proc_identity_checked(pid).expect("read exact managed member identity after OutputLimit") {
+        None => true,
+        Some(identity) => identity.3 != expected_start,
     };
     let leader_absent = absent_or_reused(leader_fields["pid"], leader_start);
     let worker_absent = absent_or_reused(worker_fields["pid"], worker_start);
@@ -3026,8 +3148,9 @@ fn managed_run_output_limit_reaps_group_under_fixture_reaper() {
     let sentinel_live_at_return = matches!(managed_proc_identity_checked(sentinel_pid).expect("read sentinel identity at OutputLimit return"), Some((state, parent, _, start)) if state != 'Z' && parent == std::process::id() as i32 && start == sentinel_start);
     let group_probe = unsafe { libc::kill(-group, 0) };
     let group_errno = if group_probe == -1 { std::io::Error::last_os_error().raw_os_error().unwrap_or(0) } else { 0 };
-    let cleanup_exact =
-        cleanup_text.contains(&format!("worker={} start={worker_start} pgid={group} reaped=true wait_status=", worker_fields["pid"])) && cleanup_text.contains(&format!("leaf={} start={leaf_start} pgid={group} reaped=true wait_status=", leaf_fields["pid"])) && cleanup_text.contains("complete=true");
+    let cleanup_exact = cleanup_text.contains(&format!("worker={} start={worker_start} pgid={group} reaped=true wait_status=", worker_fields["pid"]))
+        && cleanup_text.contains(&format!("leaf={} start={leaf_start} pgid={group} reaped=true wait_status=", leaf_fields["pid"]))
+        && cleanup_text.contains("complete=true");
     let no_watchdog_cleanup_through_boundary = no_watchdog_cleanup_at_return && !fixture.path("exceptional-cleanup-started").exists();
     let boundary = format!("host={host_pid} host_start={host_start} reaper={reaper_pid} reaper_start={reaper_start} leader={} leader_start={leader_start} leader_absent={leader_absent} worker={} worker_start={worker_start} worker_absent={worker_absent} leaf={} leaf_start={leaf_start} leaf_absent={leaf_absent} group={group} group_probe={group_probe} group_errno={group_errno} host_live={host_live_at_return} reaper_live={reaper_live_at_return} sentinel={sentinel_pid} sentinel_start={sentinel_start} sentinel_live={sentinel_live_at_return} output_limit={api_is_output_limit} prefix_preserved={prefix_preserved} captures_honest={captures_honest} pidfds_exited={pidfds_exited} cleanup_exact={cleanup_exact} no_watchdog_cleanup_through_boundary={no_watchdog_cleanup_through_boundary}\n", leader_fields["pid"], worker_fields["pid"], leaf_fields["pid"]);
     std::fs::write(fixture.path("api-boundary"), &boundary).unwrap();
@@ -4259,10 +4382,7 @@ fn missing_program_and_cwd_report_not_found_without_starting_child() {
         .expect("valid executable should start the process fixture");
     assert!(control["success"].as_bool().unwrap());
     assert_child_record(&control_record, 0);
-    eprintln!(
-        "x2_x8_valid_control child_record={:?} reap=ESRCH",
-        std::fs::read_to_string(&control_record).unwrap().trim()
-    );
+    eprintln!("x2_x8_valid_control child_record={:?} reap=ESRCH", std::fs::read_to_string(&control_record).unwrap().trim());
 
     let missing_program = records.path().join("missing-program");
     assert!(!missing_program.exists());
@@ -4562,9 +4682,7 @@ fn run_reports_a_real_unix_child_signal_without_an_exit_code() {
     let records = TempDir::new();
     let record_path = records.path().join("signal-child.txt");
     let record_literal = record_path.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
-    let command = r#"printf 'child-pid=%s\n' "$$" > "$RECORD"; kill -KILL "$$""#
-        .replace('\\', "\\\\")
-        .replace('"', "\\\"");
+    let command = r#"printf 'child-pid=%s\n' "$$" > "$RECORD"; kill -KILL "$$""#.replace('\\', "\\\\").replace('"', "\\\"");
     let script = format!(
         r#"run("/bin/sh", ["-c", "{command}"], #{{
             env_clear: true,
@@ -4615,21 +4733,13 @@ fn repeated_public_run_calls_keep_fd_count_stable() {
     let stderr_file = std::fs::File::create(&stderr_path).expect("create isolated X30 stderr log");
     let mut command = Command::new(executable);
     command
-        .args([
-            "--ignored",
-            "--exact",
-            "repeated_public_run_calls_keep_fd_count_stable_isolated",
-            "--nocapture",
-            "--test-threads=1",
-        ])
+        .args(["--ignored", "--exact", "repeated_public_run_calls_keep_fd_count_stable_isolated", "--nocapture", "--test-threads=1"])
         .stdin(Stdio::null())
         .stdout(Stdio::from(stdout_file))
         .stderr(Stdio::from(stderr_file));
     use std::os::unix::process::CommandExt as _;
     command.process_group(0);
-    let mut child = command
-        .spawn()
-        .expect("run the isolated X30 descriptor census test");
+    let mut child = command.spawn().expect("run the isolated X30 descriptor census test");
     let child_pgid = child.id() as libc::pid_t;
     let deadline = Instant::now() + Duration::from_secs(60);
     let status = loop {
@@ -4646,20 +4756,15 @@ fn repeated_public_run_calls_keep_fd_count_stable() {
                 let group_signal_error = (group_signal == -1).then(std::io::Error::last_os_error);
                 let direct_child_kill = child.kill();
                 let reaped = child.wait();
-                let stdout = std::fs::read_to_string(&stdout_path)
-                    .unwrap_or_else(|error| format!("<read failed: {error}>"));
-                let stderr = std::fs::read_to_string(&stderr_path)
-                    .unwrap_or_else(|error| format!("<read failed: {error}>"));
+                let stdout = std::fs::read_to_string(&stdout_path).unwrap_or_else(|error| format!("<read failed: {error}>"));
+                let stderr = std::fs::read_to_string(&stderr_path).unwrap_or_else(|error| format!("<read failed: {error}>"));
                 panic!("isolated X30 census {reason}; process-group signal={group_signal} error={group_signal_error:?}; direct-child kill={direct_child_kill:?}; reap={reaped:?}\nstdout:\n{stdout}\nstderr:\n{stderr}");
             }
         }
     };
     let stdout = std::fs::read_to_string(&stdout_path).expect("read isolated X30 stdout log");
     let stderr = std::fs::read_to_string(&stderr_path).expect("read isolated X30 stderr log");
-    assert!(
-        status.success(),
-        "isolated X30 census failed with {status}\nstdout:\n{stdout}\nstderr:\n{stderr}"
-    );
+    assert!(status.success(), "isolated X30 census failed with {status}\nstdout:\n{stdout}\nstderr:\n{stderr}");
     assert!(
         stdout.contains("test repeated_public_run_calls_keep_fd_count_stable_isolated ... ok"),
         "isolated test runner did not report the exact census test as passed\nstdout:\n{stdout}\nstderr:\n{stderr}"
@@ -4696,6 +4801,589 @@ fn repeated_public_run_calls_keep_fd_count_stable_isolated() {
     );
 }
 
+#[test]
+#[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
+fn run_retains_error_when_child_closes_stdin_with_unsent_input() {
+    const INPUT_BYTES: usize = 4 * 1024 * 1024;
+    let config = SysConfig::default().max_output(1024 * 1024).programs(ProgramPolicy::Any).process_scope(ProcessScope::Managed);
+    let mut engine = engine(config);
+    engine.set_max_string_size(INPUT_BYTES + 4096);
+
+    let executable = std::env::current_exe().unwrap();
+    let executable = executable.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let records = TempDir::new();
+    let record_path = records.path().join("early-close-record.txt");
+    let ack_path = records.path().join("early-close-observer-ack");
+    let intent_path = records.path().join("early-close-intent");
+    let record_literal = record_path.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let ack_literal = ack_path.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let intent_literal = intent_path.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let input = "i".repeat(INPUT_BYTES);
+    let script = format!(
+        r#"run_raw("{executable}", ["--exact", "process_fixture", "--nocapture", "--quiet"], #{{
+            env_clear: true,
+            env: #{{ {FIXTURE_ENV}: "0", {FIXTURE_RECORD_ENV}: "{record_literal}", RHAI_SYS_PROCESS_CLOSE_STDIN_ACK: "{ack_literal}", RHAI_SYS_PROCESS_CLOSE_STDIN_INTENT: "{intent_literal}", RHAI_SYS_PROCESS_CLOSE_STDIN: "1" }},
+            stdin: "{input}", max_output: 1048576, timeout: 3.0
+        }})"#
+    );
+
+    let host_pid = std::process::id() as i32;
+    let host_start = resource_census_start_ticks(host_pid).unwrap().expect("test host start identity");
+    let mut sentinel = Sentinel(
+        Command::new("/bin/sleep")
+            .arg("60")
+            .stdin(Stdio::null())
+            .stdout(Stdio::null())
+            .stderr(Stdio::null())
+            .spawn()
+            .expect("spawn unrelated live sentinel"),
+    );
+    let sentinel_pid = sentinel.0.id() as i32;
+    let (sentinel_state, sentinel_parent, sentinel_group, sentinel_start) = managed_proc_identity(sentinel_pid).expect("read exact sentinel identity");
+    assert_ne!(sentinel_state, 'Z', "sentinel must be live before the API call");
+    assert_eq!(sentinel_parent, host_pid, "sentinel must remain an exact child of the test host");
+
+    let returned = std::sync::Arc::new(std::sync::atomic::AtomicBool::new(false));
+    let monitor_returned = std::sync::Arc::clone(&returned);
+    let monitor_record = record_path.clone();
+    let monitor = std::thread::spawn(move || {
+        let deadline = Instant::now() + Duration::from_secs(4);
+        while !monitor_record.exists() && Instant::now() < deadline {
+            std::thread::sleep(Duration::from_millis(1));
+        }
+        let Ok(record) = std::fs::read_to_string(&monitor_record) else {
+            return false;
+        };
+        let fields: std::collections::HashMap<_, _> = record.split_whitespace().filter_map(|field| field.split_once('=')).collect();
+        let (Some(pid), Some(start)) = (fields.get("child-pid"), fields.get("child-start")) else {
+            return false;
+        };
+        let (Ok(pid), Ok(start)) = (pid.parse::<i32>(), start.parse::<u64>()) else {
+            return false;
+        };
+        let mut observed_alive = false;
+        while !monitor_returned.load(std::sync::atomic::Ordering::Acquire) && Instant::now() < deadline {
+            if resource_census_start_ticks(pid).ok().flatten() == Some(start) {
+                observed_alive = true;
+                if std::fs::write(&ack_path, b"observer confirmed live child\n").is_err() {
+                    return false;
+                }
+                break;
+            }
+            std::thread::sleep(Duration::from_millis(1));
+        }
+        observed_alive
+    });
+    let result = engine.eval::<Map>(&script);
+    returned.store(true, std::sync::atomic::Ordering::Release);
+    let observed_alive = monitor.join().expect("fixture liveness observer");
+    let record_deadline = Instant::now() + Duration::from_secs(2);
+    while !record_path.exists() && Instant::now() < record_deadline {
+        std::thread::sleep(Duration::from_millis(5));
+    }
+    let record = std::fs::read_to_string(&record_path).expect("child readiness and capacity receipt");
+    let fields: std::collections::HashMap<_, _> = record.split_whitespace().filter_map(|field| field.split_once('=')).collect();
+    let pid = fields["child-pid"].parse::<i32>().unwrap();
+    let start = fields["child-start"].parse::<u64>().unwrap();
+    let pgid = fields["child-pgid"].parse::<i32>().unwrap();
+    let capacity = fields["pipe-capacity"].parse::<usize>().unwrap();
+    assert_eq!(fields["ready"], "true");
+    assert!(capacity > 0 && INPUT_BYTES > capacity, "input bytes {INPUT_BYTES} must exceed actual fd 0 pipe capacity {capacity}");
+    assert!(observed_alive, "independent observer must prove fixture {pid}/{start} stayed alive until runner termination");
+    assert_eq!(pgid, pid, "Managed child group must be led by the exact owned direct child");
+    assert_ne!(pgid, unsafe { libc::getpgrp() }, "Managed child group must be separate from the test host group");
+    let child_reap_readback = resource_census_start_ticks(pid);
+    assert!(matches!(child_reap_readback, Ok(None)), "exact direct child {pid}/{start} must be reaped before checking API outcome: {child_reap_readback:?}");
+    let group_probe = unsafe { libc::kill(-pgid, 0) };
+    assert_eq!(group_probe, -1, "owned process group {pgid} remains after cleanup");
+    assert_eq!(std::io::Error::last_os_error().raw_os_error(), Some(libc::ESRCH));
+    assert_ne!(pgid, sentinel_group, "sentinel must be outside the owned process group");
+    assert_eq!(resource_census_start_ticks(host_pid).unwrap(), Some(host_start), "Engine host identity must remain live through API return");
+    assert!(
+        matches!(
+            managed_proc_identity(sentinel_pid),
+            Some((state, parent, group, start)) if state != 'Z' && parent == host_pid && group == sentinel_group && start == sentinel_start
+        ),
+        "unrelated sentinel identity must remain live at the API boundary"
+    );
+
+    let (cause, stdout, stderr, stdout_complete, stderr_complete, timed_out) = match result {
+        Err(error) => match error.as_ref() {
+            EvalAltResult::ErrorRuntime(value, _) => match value.clone().try_cast::<SysError>().unwrap() {
+                SysError::Process { cause, report } => (Some(cause), report.stdout_bytes().to_vec(), report.stderr_bytes().to_vec(), report.stdout_complete(), report.stderr_complete(), report.timed_out()),
+                other => panic!("unexpected sys error after cleanup: {other:?}"),
+            },
+            other => panic!("unexpected evaluation error after cleanup: {other:?}"),
+        },
+        Ok(result) => (
+            None,
+            result["stdout"].clone().try_cast::<Blob>().expect("raw stdout report"),
+            result["stderr"].clone().try_cast::<Blob>().expect("raw stderr report"),
+            result["stdout_complete"].as_bool().unwrap(),
+            result["stderr_complete"].as_bool().unwrap(),
+            result["timed_out"].as_bool().unwrap(),
+        ),
+    };
+    let stdout_marker = stdout.windows(b"early-close-stdout\n".len()).any(|bytes| bytes == b"early-close-stdout\n");
+    let stderr_marker = stderr.windows(b"early-close-stderr\n".len()).any(|bytes| bytes == b"early-close-stderr\n");
+    let sentinel_kill = sentinel.0.kill();
+    let sentinel_wait = sentinel.0.wait();
+    let sentinel_reaped = pid_is_absent(sentinel_pid);
+    eprintln!(
+        "stdin-closure-boundary child={pid} child_start={start} child_pgid={pgid} capacity={capacity} input_bytes={INPUT_BYTES} live_observed={observed_alive} child_reaped=true group_empty=true host={host_pid} host_start={host_start} host_live=true sentinel={sentinel_pid} sentinel_start={sentinel_start} sentinel_pgid={sentinel_group} sentinel_live_at_return=true sentinel_kill={sentinel_kill:?} sentinel_wait={sentinel_wait:?} sentinel_reaped={sentinel_reaped} timed_out={timed_out} stdout_complete={stdout_complete} stderr_complete={stderr_complete} stdout_marker={stdout_marker} stderr_marker={stderr_marker} cause={cause:?} stdout_capture={stdout:?} stderr_capture={stderr:?}"
+    );
+    assert!(sentinel_kill.is_ok() && sentinel_wait.is_ok() && sentinel_reaped, "exact sentinel cleanup must finish before outcome assertions");
+    assert!(
+        matches!(
+            cause,
+            Some(ProcessCause::Io {
+                op: "write process stdin",
+                kind: std::io::ErrorKind::BrokenPipe,
+                ..
+            })
+        ),
+        "wrong primary process cause: {cause:?}"
+    );
+    assert!(!timed_out, "child stdin closure must not be reported as a deadline");
+    assert!(stdout_marker && stderr_marker, "fixture output markers must be retained after child cleanup");
+}
+
+#[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
+fn valid_child_success_map(value: &Dynamic) -> bool {
+    let Some(map) = value.clone().try_cast::<Map>() else {
+        return false;
+    };
+    const KEYS: [&str; 8] = ["code", "signal", "success", "timed_out", "stdout", "stderr", "stdout_complete", "stderr_complete"];
+    if map.len() != KEYS.len() || KEYS.iter().any(|key| !map.contains_key(*key)) {
+        return false;
+    }
+    let Some(success) = map.get("success").and_then(|value| value.as_bool().ok()) else {
+        return false;
+    };
+    let Some(timed_out) = map.get("timed_out").and_then(|value| value.as_bool().ok()) else {
+        return false;
+    };
+    let Some(_) = map.get("stdout_complete").and_then(|value| value.as_bool().ok()) else {
+        return false;
+    };
+    let Some(_) = map.get("stderr_complete").and_then(|value| value.as_bool().ok()) else {
+        return false;
+    };
+    let Some(stdout) = map.get("stdout").cloned().and_then(|value| value.try_cast::<String>()) else {
+        return false;
+    };
+    let Some(stderr) = map.get("stderr").cloned().and_then(|value| value.try_cast::<String>()) else {
+        return false;
+    };
+    if timed_out || stdout.len() > 1024 * 1024 || stderr.len() > 1024 * 1024 {
+        return false;
+    }
+    let exit = |key: &str| {
+        let value = map.get(key)?;
+        if value.is_unit() {
+            Some(None)
+        } else {
+            value.as_int().ok().and_then(|raw| i32::try_from(raw).ok()).map(Some)
+        }
+    };
+    let (Some(code), Some(signal)) = (exit("code"), exit("signal")) else {
+        return false;
+    };
+    if code.is_some() == signal.is_some() {
+        return false;
+    }
+    success == code.map(|value| value == 0).unwrap_or(false)
+}
+
+#[test]
+#[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
+fn spawn_retains_error_when_child_closes_stdin_with_unsent_input() {
+    const INPUT_BYTES: usize = 4 * 1024 * 1024;
+    let config = SysConfig::default().max_output(1024 * 1024).programs(ProgramPolicy::Any).process_scope(ProcessScope::Managed);
+    let mut engine = engine(config);
+    engine.set_max_string_size(INPUT_BYTES + 4096);
+    let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let records = TempDir::new();
+    let record_path = records.path().join("spawn-early-close-record.txt");
+    let ack_path = records.path().join("spawn-early-close-ack");
+    let prefill_path = records.path().join("spawn-early-close-prefill");
+    let close_ack_path = records.path().join("spawn-early-close-close-ack");
+    let intent_path = records.path().join("spawn-early-close-intent");
+    let quote = |path: &std::path::Path| path.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let record = quote(&record_path);
+    let ack = quote(&ack_path);
+    let prefill = quote(&prefill_path);
+    let close_ack = quote(&close_ack_path);
+    let intent = quote(&intent_path);
+    let input = "i".repeat(INPUT_BYTES);
+    let script = format!(
+        r#"spawn("{executable}", ["--exact", "process_fixture", "--nocapture", "--quiet"], #{{
+            env_clear: true,
+            env: #{{ {FIXTURE_ENV}: "0", {FIXTURE_RECORD_ENV}: "{record}", RHAI_SYS_PROCESS_CLOSE_STDIN_ACK: "{ack}", RHAI_SYS_PROCESS_CLOSE_STDIN_PREFILL: "{prefill}", RHAI_SYS_PROCESS_CLOSE_STDIN_CLOSE_ACK: "{close_ack}", RHAI_SYS_PROCESS_CLOSE_STDIN_INPUT_BYTES: "{INPUT_BYTES}", RHAI_SYS_PROCESS_CLOSE_STDIN_INTENT: "{intent}", RHAI_SYS_PROCESS_CLOSE_STDIN: "1" }},
+            stdin: "{input}", max_output: 1048576
+        }})"#
+    );
+
+    let host_pid = std::process::id() as i32;
+    let mut sentinel = Sentinel(
+        Command::new("/bin/sleep")
+            .arg("60")
+            .stdin(Stdio::null())
+            .stdout(Stdio::null())
+            .stderr(Stdio::null())
+            .spawn()
+            .expect("spawn unrelated sentinel"),
+    );
+    let sentinel_pid = sentinel.0.id() as i32;
+    let mut scope = Scope::new();
+    let mut original_handle: Option<Dynamic> = None;
+    let mut original_host_identity = None;
+    let mut original_sentinel_identity = None;
+    let mut observed_child: Option<(i32, u64)> = None;
+    let mut observed_group: Option<i32> = None;
+    let mut custody_validated = false;
+    let partial = std::cell::RefCell::new(String::new());
+    let guarded = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
+        let host_identity = managed_proc_identity_checked(host_pid).expect("read exact host identity").expect("host identity exists");
+        original_host_identity = Some(host_identity);
+        let host_start = host_identity.3;
+        let sentinel_identity = managed_proc_identity_checked(sentinel_pid).expect("read exact sentinel identity").expect("sentinel identity exists");
+        original_sentinel_identity = Some(sentinel_identity);
+        let (sentinel_state, sentinel_parent, sentinel_group, sentinel_start) = sentinel_identity;
+        assert_ne!(sentinel_state, 'Z', "sentinel must be a live non-zombie before spawn");
+        assert_eq!(sentinel_parent, host_pid);
+        let original = engine.eval::<Dynamic>(&script).expect("public spawn returns child handle");
+        original_handle = Some(original.clone());
+        scope.push_dynamic("child", original.clone());
+        scope.push_dynamic("observer", original);
+        let readiness_deadline = Instant::now() + Duration::from_secs(4);
+        while !record_path.exists() && Instant::now() < readiness_deadline {
+            std::thread::sleep(Duration::from_millis(2));
+        }
+        let ready = std::fs::read_to_string(&record_path).expect("child readiness receipt");
+        let fields: std::collections::HashMap<_, _> = ready.split_whitespace().filter_map(|field| field.split_once('=')).collect();
+        let pid = fields["child-pid"].parse::<i32>().unwrap();
+        let start = fields["child-start"].parse::<u64>().unwrap();
+        let pgid = fields["child-pgid"].parse::<i32>().unwrap();
+        partial.borrow_mut().push_str(&format!("ready_child={pid}/{start}/{pgid};"));
+        let capacity = fields["pipe-capacity"].parse::<usize>().unwrap();
+        assert_eq!(fields["ready"], "true");
+        assert!(INPUT_BYTES > capacity && capacity > 0, "input {INPUT_BYTES} must exceed actual pipe capacity {capacity}");
+        assert!(pid > 0 && start > 0 && pgid > 0, "fixture identity fields must be positive");
+        assert_eq!(pgid, pid, "managed group leader is the exact spawned child");
+        assert_ne!(pgid, unsafe { libc::getpgrp() }, "child group is distinct from host group");
+        assert_ne!(pgid, sentinel_group, "sentinel remains outside owned group");
+        let public_id = engine
+            .eval_with_scope::<Dynamic>(&mut scope, "child.id")
+            .expect("public Child.id is available")
+            .as_int()
+            .expect("public Child.id is an integer");
+        assert_eq!(i32::try_from(public_id).expect("child id fits platform pid"), pid, "fixture PID must match the owned public Child handle");
+        let pre_ack_identity = managed_proc_identity_checked(pid);
+        assert!(
+            matches!(&pre_ack_identity, Ok(Some((state, parent, group, ticks))) if *state != 'Z' && *parent == host_pid && *group == pgid && *ticks == start),
+            "full exact non-zombie child identity must be live before observer acknowledgement: {pre_ack_identity:?}"
+        );
+        observed_child = Some((pid, start));
+        observed_group = Some(pgid);
+        custody_validated = true;
+        partial.borrow_mut().push_str(&format!("custody_validated={custody_validated};pre_ack={pre_ack_identity:?};"));
+        std::fs::write(&ack_path, b"observer confirmed live child\n").unwrap();
+
+        let prefill_deadline = Instant::now() + Duration::from_secs(4);
+        while !prefill_path.exists() && Instant::now() < prefill_deadline {
+            std::thread::sleep(Duration::from_millis(2));
+        }
+        let prefill_record = std::fs::read_to_string(&prefill_path).expect("full open stdin pipe receipt");
+        let prefill_fields: std::collections::HashMap<_, _> = prefill_record.split_whitespace().filter_map(|field| field.split_once('=')).collect();
+        let prefill_bytes = prefill_fields["stdin-prefill-bytes"].parse::<usize>().unwrap();
+        let prefill_capacity = prefill_fields["pipe-capacity"].parse::<usize>().unwrap();
+        let prefill_input_bytes = prefill_fields["input-bytes"].parse::<usize>().unwrap();
+        assert_eq!(prefill_fields["child-pid"], pid.to_string());
+        assert_eq!(prefill_fields["child-start"], start.to_string());
+        assert_eq!(prefill_fields["child-pgid"], pgid.to_string());
+        assert_eq!(prefill_fields["ready-to-close"], "true");
+        assert_eq!(prefill_capacity, capacity);
+        assert_eq!(prefill_bytes, capacity, "fixture must observe a full unread stdin pipe");
+        assert!(prefill_input_bytes > capacity);
+        let preclose_identity_before = managed_proc_identity_checked(pid);
+        let preclose_fd0_before = std::fs::symlink_metadata(format!("/proc/{pid}/fd/0"));
+        let preclose_wait = engine.eval_with_scope::<Dynamic>(&mut scope, "child.wait(0.1)");
+        let preclose_identity_after = managed_proc_identity_checked(pid);
+        let preclose_fd0_after = std::fs::symlink_metadata(format!("/proc/{pid}/fd/0"));
+        let preclose_live = |identity: &std::io::Result<Option<(char, i32, i32, u64)>>| matches!(identity, Ok(Some((state, parent, group, ticks))) if *state != 'Z' && *parent == host_pid && *group == pgid && *ticks == start);
+        assert!(preclose_wait.as_ref().is_ok_and(Dynamic::is_unit), "bounded wait before child closes stdin must only time out: {preclose_wait:?}");
+        assert!(
+            preclose_live(&preclose_identity_before) && preclose_live(&preclose_identity_after),
+            "exact child must remain live through pre-close wait: before={preclose_identity_before:?} after={preclose_identity_after:?}"
+        );
+        assert!(
+            preclose_fd0_before.is_ok() && preclose_fd0_after.is_ok(),
+            "child fd 0 must remain open throughout the bounded pre-close wait: before={preclose_fd0_before:?} after={preclose_fd0_after:?}"
+        );
+        partial.borrow_mut().push_str(&format!(
+            "prefill={prefill_record:?};preclose_wait={preclose_wait:?};preclose_identity_before_after={preclose_identity_before:?}/{preclose_identity_after:?};preclose_fd0_before_after={}/{};",
+            preclose_fd0_before.is_ok(),
+            preclose_fd0_after.is_ok()
+        ));
+        std::fs::write(&close_ack_path, b"observer confirmed full pipe and open child fd 0\n").unwrap();
+
+        let intent_deadline = Instant::now() + Duration::from_secs(4);
+        while !intent_path.exists() && Instant::now() < intent_deadline {
+            std::thread::sleep(Duration::from_millis(2));
+        }
+        let intent_record = std::fs::read_to_string(&intent_path).expect("pre-close intent receipt");
+        partial.borrow_mut().push_str(&format!("intent={intent_record:?};"));
+        assert!(intent_record.contains(&format!("child-pid={pid} child-start={start} child-pgid={pgid} stdin-close-intent=true")));
+
+        // Preserve this first bounded observation: a correct implementation reports BrokenPipe here;
+        // the baseline currently returns Unit while the child remains live after closing fd 0.
+        let first = engine.eval_with_scope::<Dynamic>(&mut scope, "child.wait(3.0)");
+        partial.borrow_mut().push_str(&format!("first_wait={first:?};"));
+        let first_cause = first.as_ref().err().and_then(|error| match error.as_ref() {
+            EvalAltResult::ErrorRuntime(value, _) => value.clone().try_cast::<SysError>(),
+            _ => None,
+        });
+        let was_unit = first.as_ref().is_ok_and(Dynamic::is_unit);
+        let mut fd_zero_absent_while_live = false;
+        let mut fd0_live_before_after = None;
+        if was_unit {
+            let live_before = managed_proc_identity_checked(pid);
+            let fd_observation = std::fs::symlink_metadata(format!("/proc/{pid}/fd/0"));
+            let fd_absent = matches!(&fd_observation, Err(error) if error.kind() == std::io::ErrorKind::NotFound);
+            let live_after = managed_proc_identity_checked(pid);
+            let exact_live_before_after = fd_absent
+                && matches!(&live_before, Ok(Some((state, parent, group, ticks))) if *state != 'Z' && *parent == host_pid && *group == pgid && *ticks == start)
+                && matches!(&live_after, Ok(Some((state, parent, group, ticks))) if *state != 'Z' && *parent == host_pid && *group == pgid && *ticks == start);
+            fd0_live_before_after = Some((live_before, fd_absent, live_after));
+            partial
+                .borrow_mut()
+                .push_str(&format!("fd0_observation={fd_observation:?};fd0_live_before_after={fd0_live_before_after:?};"));
+            fd_zero_absent_while_live = exact_live_before_after;
+        }
+
+        let kill_result = engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()");
+        partial.borrow_mut().push_str(&format!("kill_original={kill_result:?};"));
+        let cleanup = engine.eval_with_scope::<Dynamic>(&mut scope, "observer.wait(5.0)");
+        partial.borrow_mut().push_str(&format!("cleanup_original={cleanup:?};"));
+        let repeated_wait = engine.eval_with_scope::<Dynamic>(&mut scope, "observer.wait(0.1)");
+        partial.borrow_mut().push_str(&format!("repeated_wait_original={repeated_wait:?};"));
+        let repeated_try_wait = engine.eval_with_scope::<Dynamic>(&mut scope, "child.try_wait()");
+        partial.borrow_mut().push_str(&format!("repeated_try_wait_original={repeated_try_wait:?};"));
+        let repeated_kill = engine.eval_with_scope::<Dynamic>(&mut scope, "observer.kill()");
+        partial.borrow_mut().push_str(&format!("repeated_kill_original={repeated_kill:?};"));
+        let retained_error = |error: &Box<EvalAltResult>| match error.as_ref() {
+            EvalAltResult::ErrorRuntime(value, _) => value.clone().try_cast::<SysError>().map(|error| format!("{error:?}")),
+            _ => None,
+        };
+        let first_error_text = first.as_ref().err().and_then(retained_error);
+        let first_typed_cause = first_cause.clone();
+        let repeated_error_text = repeated_wait.as_ref().err().and_then(retained_error);
+        let repeated_try_error_text = repeated_try_wait.as_ref().err().and_then(retained_error);
+        let cleanup_error_text = cleanup.as_ref().err().and_then(retained_error);
+        let cleanup_cause = cleanup.as_ref().err().and_then(|error| match error.as_ref() {
+            EvalAltResult::ErrorRuntime(value, _) => value.clone().try_cast::<SysError>(),
+            _ => None,
+        });
+        let repeated_cause = repeated_wait.as_ref().err().and_then(|error| match error.as_ref() {
+            EvalAltResult::ErrorRuntime(value, _) => value.clone().try_cast::<SysError>(),
+            _ => None,
+        });
+        let repeated_try_cause = repeated_try_wait.as_ref().err().and_then(|error| match error.as_ref() {
+            EvalAltResult::ErrorRuntime(value, _) => value.clone().try_cast::<SysError>(),
+            _ => None,
+        });
+        let (cleanup_outcome, stdout, stderr, stdout_complete, stderr_complete, timed_out, exit_code, exit_signal, success, cleanup_diagnostics, raw_markers) = match cleanup {
+            Ok(value) if value.is_unit() => {
+                panic!("bounded final Child.wait unexpectedly returned unit: {value:?}")
+            }
+            Ok(value) => {
+                let original_map = value.clone();
+                partial
+                    .borrow_mut()
+                    .push_str(&format!("cleanup_original_success_map={original_map:?};capture_source=child-success-map-lossy-utf8;cleanup_diagnostics=unavailable-public-map;"));
+                assert!(valid_child_success_map(&value), "terminal Child.wait success must have the exact checked public map schema: {original_map:?}");
+                let report = value.try_cast::<Map>().expect("validated nonunit Child.wait result must be a report map");
+                let field = |key: &str| report.get(key).cloned().unwrap_or_else(|| panic!("success map missing required field {key}"));
+                let output = |key: &str| field(key).try_cast::<String>().unwrap_or_else(|| panic!("success map {key} must be a string"));
+                let flag = |key: &str| field(key).as_bool().unwrap_or_else(|_| panic!("success map {key} must be a bool"));
+                let optional_exit = |key: &str| {
+                    let value = field(key);
+                    if value.is_unit() {
+                        None
+                    } else {
+                        Some(i32::try_from(value.as_int().unwrap_or_else(|_| panic!("success map {key} must be integer or unit"))).unwrap_or_else(|_| panic!("success map {key} does not fit i32")))
+                    }
+                };
+                let stdout = output("stdout");
+                let stderr = output("stderr");
+                let stdout_complete = flag("stdout_complete");
+                let stderr_complete = flag("stderr_complete");
+                let timed_out = flag("timed_out");
+                let success = flag("success");
+                let exit_code = optional_exit("code");
+                let exit_signal = optional_exit("signal");
+                (format!("success-map:{original_map:?}"), stdout, stderr, stdout_complete, stderr_complete, Some(timed_out), exit_code, exit_signal, Some(success), None, None)
+            }
+            Err(error) => {
+                partial
+                    .borrow_mut()
+                    .push_str(&format!("cleanup_original_error={error:?};capture_source=typed-ProcessReport-raw-bytes;"));
+                let retained = match error.as_ref() {
+                    EvalAltResult::ErrorRuntime(value, _) => value.clone().try_cast::<SysError>(),
+                    _ => None,
+                };
+                match retained {
+                    Some(SysError::Process { report, .. }) => {
+                        let raw_stdout_marker = report.stdout_bytes().windows(b"early-close-stdout\n".len()).any(|bytes| bytes == b"early-close-stdout\n");
+                        let raw_stderr_marker = report.stderr_bytes().windows(b"early-close-stderr\n".len()).any(|bytes| bytes == b"early-close-stderr\n");
+                        (
+                            format!("error:{error:?}"),
+                            String::from_utf8_lossy(report.stdout_bytes()).into_owned(),
+                            String::from_utf8_lossy(report.stderr_bytes()).into_owned(),
+                            report.stdout_complete(),
+                            report.stderr_complete(),
+                            Some(report.timed_out()),
+                            report.exit_code(),
+                            report.exit_signal(),
+                            None,
+                            Some(report.cleanup_diagnostics().len()),
+                            Some((raw_stdout_marker, raw_stderr_marker)),
+                        )
+                    }
+                    _ => panic!("final Child.wait error did not contain a decodable Process report: {error:?}"),
+                }
+            }
+        };
+        partial.borrow_mut().push_str(&format!(
+            "cleanup={cleanup_outcome};stdout_utf8={stdout:?};stderr_utf8={stderr:?};stdout_complete={stdout_complete};stderr_complete={stderr_complete};timed_out={timed_out:?};exit_code={exit_code:?};exit_signal={exit_signal:?};success={success:?};diagnostics={cleanup_diagnostics:?};"
+        ));
+        let stdout_marker = stdout.contains("early-close-stdout\n");
+        let stderr_marker = stderr.contains("early-close-stderr\n");
+        let child_after = managed_proc_identity_checked(pid);
+        let child_reaped = matches!(&child_after, Ok(None));
+        let group_probe = if custody_validated && pgid > 0 { Some(unsafe { libc::kill(-pgid, 0) }) } else { None };
+        let group_errno = group_probe.filter(|result| *result == -1).map(|_| std::io::Error::last_os_error().raw_os_error());
+        let group_empty = group_probe == Some(-1) && group_errno == Some(Some(libc::ESRCH));
+        let host_after = managed_proc_identity_checked(host_pid);
+        let host_live = matches!(&host_after, Ok(Some((state, parent, group, ticks))) if *state != 'Z' && *parent == host_identity.1 && *group == host_identity.2 && *ticks == host_start);
+        let sentinel_after = managed_proc_identity_checked(sentinel_pid);
+        let sentinel_live = matches!(&sentinel_after, Ok(Some((state, parent, group, ticks))) if *state != 'Z' && *parent == host_pid && *group == sentinel_group && *ticks == sentinel_start);
+        partial
+            .borrow_mut()
+            .push_str(&format!("child_after={child_after:?};group_probe={group_probe:?}/{group_errno:?};host_after={host_after:?};sentinel_after={sentinel_after:?};"));
+        let first_text = match &first {
+            Ok(value) => format!("unit={} value={value:?}", value.is_unit()),
+            Err(error) => format!("error={error:?}"),
+        };
+        eprintln!("spawn-stdin-closure child={pid} start={start} pgid={pgid} capacity={capacity} input_bytes={INPUT_BYTES} executable={executable} first={first_text} prefill={prefill_record:?} preclose_wait={preclose_wait:?} preclose_identity_before_after={preclose_identity_before:?}/{preclose_identity_after:?} preclose_fd0_before_after={}/{} intent={intent_record:?} pre_ack={pre_ack_identity:?} fd0_before_absent_after={fd0_live_before_after:?} fd0_absent_while_live={fd_zero_absent_while_live} kill={kill_result:?} cleanup={cleanup_outcome} repeated_wait={repeated_wait:?} repeated_try_wait={repeated_try_wait:?} repeated_kill={repeated_kill:?} reaped={child_reaped} group_empty={group_empty} host={host_pid}/{host_identity:?}/{host_after:?} host_live={host_live} sentinel={sentinel_pid}/{sentinel_state}/{sentinel_parent}/{sentinel_group}/{sentinel_start} sentinel_live={sentinel_live} timed_out={timed_out:?} stdout_complete={stdout_complete} stderr_complete={stderr_complete} stdout_marker={stdout_marker} stderr_marker={stderr_marker} stdout={stdout:?} stderr={stderr:?}", preclose_fd0_before.is_ok(), preclose_fd0_after.is_ok());
+
+        let sentinel_kill = sentinel.0.kill();
+        let sentinel_wait_deadline = Instant::now() + Duration::from_secs(2);
+        let mut sentinel_wait = sentinel.0.try_wait();
+        while matches!(&sentinel_wait, Ok(None)) && Instant::now() < sentinel_wait_deadline {
+            std::thread::sleep(Duration::from_millis(10));
+            sentinel_wait = sentinel.0.try_wait();
+        }
+        let sentinel_after = managed_proc_identity_checked(sentinel_pid);
+        let sentinel_reaped = matches!(&sentinel_wait, Ok(Some(_))) && matches!(&sentinel_after, Ok(None));
+        let final_host_identity = managed_proc_identity_checked(host_pid);
+        let host_unchanged_after_sentinel = matches!((&final_host_identity, host_identity), (Ok(Some((state, parent, group, ticks))), (original_state, original_parent, original_group, original_ticks)) if *state != 'Z' && *state == original_state && *parent == original_parent && *group == original_group && *ticks == original_ticks);
+        partial
+            .borrow_mut()
+            .push_str(&format!("sentinel_kill={sentinel_kill:?};sentinel_try_wait={sentinel_wait:?};sentinel_after={sentinel_after:?};final_host_identity={final_host_identity:?};"));
+        eprintln!("spawn-stdin-closure-final sentinel_kill={sentinel_kill:?} sentinel_wait={sentinel_wait:?} sentinel_reaped={sentinel_reaped} child={pid}/{start}/{pgid} child_reaped={child_reaped} group_empty={group_empty} host={host_pid}/{host_start} sentinel_original={sentinel_state}/{sentinel_parent}/{sentinel_group}/{sentinel_start}");
+        assert!(kill_result.is_ok(), "explicit public Child.kill must complete");
+        assert!(child_reaped && group_empty && host_live && sentinel_live, "owned child/group cleanup and unrelated identities must be proven before outcome assertion");
+        assert!(
+            sentinel_kill.is_ok() && sentinel_reaped && host_unchanged_after_sentinel,
+            "sentinel cleanup and unchanged host must be proven before outcome assertion: host={final_host_identity:?}"
+        );
+        assert!(!was_unit || fd_zero_absent_while_live, "Unit baseline requires exact live child identity before and after observing fd 0 absent");
+        if was_unit {
+            assert!(cleanup_error_text.is_none(), "baseline explicit cleanup must produce a healthy process report, not an error: {cleanup_error_text:?}");
+        }
+        assert_eq!(timed_out, Some(false), "Child reports must not claim a run deadline");
+        assert!(exit_code.is_some() ^ exit_signal.is_some(), "final cleanup report must include exactly one exit variant: exit_code={exit_code:?}, exit_signal={exit_signal:?}");
+        if cleanup_diagnostics.is_none() {
+            assert_eq!(success, exit_code.map(|code| code == 0).or_else(|| exit_signal.map(|_| false)), "successful map flag must agree with the observed exit");
+        }
+        assert!(stdout.len() <= 1024 * 1024 && stderr.len() <= 1024 * 1024, "decoded captures must respect configured per-stream output bound");
+        if cleanup_diagnostics.is_some() {
+            assert_eq!(cleanup_diagnostics, Some(0), "typed ProcessReport must have no cleanup diagnostics");
+        }
+        assert!(stdout_marker && stderr_marker, "bounded final report must retain both pre-close markers");
+        if cleanup_diagnostics.is_some() {
+            assert_eq!(raw_markers, Some((true, true)), "typed GREEN ProcessReport must retain both markers in its actual raw bytes");
+        }
+        if first_error_text.is_some() {
+            assert_eq!(cleanup_error_text, first_error_text, "cleanup wait must preserve the original process cause and report");
+            assert_eq!(cleanup_cause, first_cause, "cleanup must preserve the original cause, raw bytes, flags, exit and diagnostics");
+            assert_eq!(repeated_cause, first_typed_cause, "repeated wait must preserve the complete typed process report");
+            assert_eq!(repeated_try_cause, first_typed_cause, "try_wait must preserve the complete typed process report");
+        }
+        assert!(
+            matches!(first_cause, Some(SysError::Process { cause: ProcessCause::Io { op: "write child stdin", target, kind: std::io::ErrorKind::BrokenPipe, message }, .. }) if target == executable && !message.is_empty()),
+            "first bounded Child.wait must retain stdin BrokenPipe with executable target and OS message; observed {first_text}; live_fd0_absence={fd_zero_absent_while_live}"
+        );
+        assert!(repeated_wait.is_err() && repeated_try_wait.is_err() && repeated_kill.is_ok(), "cloned handles must retain terminal error and idempotent kill");
+        assert_eq!(repeated_error_text, first_error_text, "repeated bounded wait through cloned handle must preserve the original error and report");
+        assert_eq!(repeated_try_error_text, first_error_text, "try_wait through the other cloned handle must preserve the original error and report");
+    }));
+    if let Err(payload) = guarded {
+        // Keep ownership explicit when parsing or an assertion unwinds before normal cleanup.
+        let fallback_kill = engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()");
+        let fallback_wait = engine.eval_with_scope::<Dynamic>(&mut scope, "observer.wait(5.0)");
+        let valid_terminal_process_error = |error: &Box<EvalAltResult>| match error.as_ref() {
+            EvalAltResult::ErrorRuntime(value, _) => match value.clone().try_cast::<SysError>() {
+                Some(SysError::Process { report, .. }) => report.timed_out() == false && (report.exit_code().is_some() ^ report.exit_signal().is_some()),
+                _ => false,
+            },
+            _ => false,
+        };
+        let fallback_wait_kind = match &fallback_wait {
+            Ok(value) if value.is_unit() => "unit",
+            Ok(value) if valid_child_success_map(value) => "terminal-success-map",
+            Ok(_) => "unexpected-value",
+            Err(error) if valid_terminal_process_error(error) => "terminal-typed-process-error",
+            Err(_) => "unexpected-error",
+        };
+        partial
+            .borrow_mut()
+            .push_str(&format!("fallback_kill={fallback_kill:?};fallback_wait={fallback_wait:?};fallback_wait_kind={fallback_wait_kind};"));
+        let child_readback = observed_child.map(|(pid, start)| (pid, start, managed_proc_identity_checked(pid)));
+        let group_readback = observed_group.map(|pgid| {
+            let result = unsafe { libc::kill(-pgid, 0) };
+            (pgid, result, std::io::Error::last_os_error().raw_os_error())
+        });
+        let original_sentinel = original_sentinel_identity;
+        let sentinel_before_cleanup = managed_proc_identity_checked(sentinel_pid);
+        let sentinel_probe = sentinel.0.try_wait();
+        let sentinel_probe_text = format!("{sentinel_probe:?}");
+        let sentinel_identity_bound = match (original_sentinel.as_ref(), &sentinel_before_cleanup, &sentinel_probe) {
+            (Some((original_state, original_parent, original_group, original_start)), Ok(Some((state, parent, group, start))), _) => *original_state != 'Z' && *state != 'Z' && parent == original_parent && group == original_group && start == original_start,
+            (Some((original_state, _, _, _)), Ok(None), Ok(Some(_))) => *original_state != 'Z',
+            _ => false,
+        };
+        let sentinel_kill = if !matches!(&sentinel_probe, Ok(Some(_))) { Some(sentinel.0.kill()) } else { None };
+        let sentinel_deadline = Instant::now() + Duration::from_secs(2);
+        let mut sentinel_wait = sentinel_probe;
+        while matches!(&sentinel_wait, Ok(None)) && Instant::now() < sentinel_deadline {
+            std::thread::sleep(Duration::from_millis(10));
+            sentinel_wait = sentinel.0.try_wait();
+        }
+        let sentinel_after = managed_proc_identity_checked(sentinel_pid);
+        let host_after = managed_proc_identity_checked(host_pid);
+        let sentinel_reaped = matches!(&sentinel_wait, Ok(Some(_))) && matches!(&sentinel_after, Ok(None));
+        let host_unchanged = matches!((&original_host_identity, &host_after), (Some((_, parent, group, start)), Ok(Some((state, now_parent, now_group, now_start)))) if *state != 'Z' && parent == now_parent && group == now_group && start == now_start);
+        let child_absent = matches!(&child_readback, Some((_, _, Ok(None))));
+        let group_absent = custody_validated && group_readback.is_some_and(|(_, result, error)| result == -1 && error == Some(libc::ESRCH));
+        let terminal = matches!(fallback_wait_kind, "terminal-success-map" | "terminal-typed-process-error");
+        let cleanup_complete = child_absent && group_absent && host_unchanged && sentinel_identity_bound && sentinel_reaped && fallback_kill.is_ok() && terminal;
+        eprintln!("spawn-stdin-closure-partial observations={} child={child_readback:?} group={group_readback:?} host={host_pid}/{original_host_identity:?}/{host_after:?} sentinel={sentinel_pid}/{original_sentinel:?} sentinel_before={sentinel_before_cleanup:?} sentinel_probe={sentinel_probe_text} sentinel_identity_bound={sentinel_identity_bound} sentinel_kill={sentinel_kill:?} sentinel_wait={sentinel_wait:?} sentinel_after={sentinel_after:?} sentinel_reaped={sentinel_reaped} fallback_kill={fallback_kill:?} fallback_wait={fallback_wait:?} fallback_wait_kind={fallback_wait_kind} cleanup_complete={cleanup_complete}", partial.into_inner());
+        std::panic::resume_unwind(payload);
+    }
+}
 #[test]
 #[cfg(not(feature = "no_index"))]
 fn run_io_contract_empty_output() {
@@ -4820,28 +5508,13 @@ fn run_io_contract_blob_stdin_round_trip_with_concurrent_output() {
     expected_stdout.extend(std::iter::repeat(b'o').take(STREAM_BYTES));
     expected_stdout.extend_from_slice(&input);
     let first_stdout_difference = stdout.iter().zip(&expected_stdout).position(|(actual, expected)| actual != expected);
-    assert!(
-        stdout == expected_stdout,
-        "stdout contract mismatch: observed_bytes={} expected_bytes={} first_difference={first_stdout_difference:?}",
-        stdout.len(),
-        expected_stdout.len()
-    );
+    assert!(stdout == expected_stdout, "stdout contract mismatch: observed_bytes={} expected_bytes={} first_difference={first_stdout_difference:?}", stdout.len(), expected_stdout.len());
     let expected_stderr = vec![b'e'; STREAM_BYTES];
     let first_stderr_difference = stderr.iter().zip(&expected_stderr).position(|(actual, expected)| actual != expected);
-    assert!(
-        stderr == expected_stderr,
-        "stderr contract mismatch: observed_bytes={} expected_bytes={} first_difference={first_stderr_difference:?}",
-        stderr.len(),
-        expected_stderr.len()
-    );
+    assert!(stderr == expected_stderr, "stderr contract mismatch: observed_bytes={} expected_bytes={} first_difference={first_stderr_difference:?}", stderr.len(), expected_stderr.len());
     let received = std::fs::read(&received_path).unwrap();
     let first_input_difference = received.iter().zip(&input).position(|(actual, expected)| actual != expected);
-    assert!(
-        received == input,
-        "child stdin readback mismatch: observed_bytes={} expected_bytes={} first_difference={first_input_difference:?}",
-        received.len(),
-        input.len()
-    );
+    assert!(received == input, "child stdin readback mismatch: observed_bytes={} expected_bytes={} first_difference={first_input_difference:?}", received.len(), input.len());
     let child_record = std::fs::read_to_string(&record_path).unwrap();
     assert_io_stress_record(&record_path, INPUT_BYTES, true);
     eprintln!(
