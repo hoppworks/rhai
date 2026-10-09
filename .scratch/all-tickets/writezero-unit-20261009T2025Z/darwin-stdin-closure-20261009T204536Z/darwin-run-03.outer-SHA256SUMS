@@ -1,0 +1,9 @@
+e6580a4f773bfc36b0ab8afaa2128a1a536976d371355483485e5c058f479baf  .scratch/all-tickets/writezero-unit-20261009T2025Z/darwin-stdin-closure-20261009T204536Z/darwin-run-03.SHA256SUMS
+4dd0eddb955bf2a5ff85bef15920e29b927da69ea73dee384e1b519073fb6ccb  .scratch/all-tickets/writezero-unit-20261009T2025Z/darwin-stdin-closure-20261009T204536Z/darwin-run-03.outer.log
+9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa  .scratch/all-tickets/writezero-unit-20261009T2025Z/darwin-stdin-closure-20261009T204536Z/darwin-run-03.runner-status
+30ae0aec5e8f6655425b3f61493e6c1e9f2581039ca0ff23672c9aedcc0dddfa  .scratch/all-tickets/writezero-unit-20261009T2025Z/darwin-stdin-closure-20261009T204536Z/darwin-run-03.scope-cleanup
+e8db13e6097fbcfb07e7771dc5072e3ca432cb5857fa2237a5e57c7f4e2ca2ed  .scratch/all-tickets/writezero-unit-20261009T2025Z/darwin-stdin-closure-20261009T204536Z/darwin-run-03.md
+fe104997cb45b24d9a7bd0311a886caa38ec9877bfae148296f7321599d3f2ea  .scratch/all-tickets/writezero-unit-20261009T2025Z/proof.md
+622231c814f7a689f02bff11c265853534e107b345d70e345d3264704391e509  docs/sys-package-plan.md
+0453927118b186272a398420752da9ce51c0776fbdcafed330e78de69fdd9d55  .scratch/all-tickets/coordinator-state.md
+d5031a7717d541cc2249103e95fbb89a26b9c741fb9e01556f9fa191a43b5b4b  tests/sys_process.rs

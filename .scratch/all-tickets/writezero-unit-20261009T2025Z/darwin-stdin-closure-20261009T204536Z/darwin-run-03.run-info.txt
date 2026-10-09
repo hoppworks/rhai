@@ -1,0 +1,37 @@
+base_revision=d1170c2d51fbb0dec072182f5232a6132b26550d
+baseline_product_revision=b04b486d2f7a6d80729c90d276523bfcdd89e6b9
+baseline_delta=d52450aa8 BrokenPipe-only revert in private source copy
+host=Daniels-MBP-2.fritz.box
+os=27.0.1 Darwin Daniels-MBP-2.fritz.box 27.0.0 Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:59 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8142 arm64
+rustc 1.77.2 (25ef9e3d8 2024-04-09)
+binary: rustc
+commit-hash: 25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04
+commit-date: 2024-04-09
+host: aarch64-apple-darwin
+release: 1.77.2
+LLVM version: 17.0.6
+cargo 1.77.2 (e52e36006 2024-03-26)
+features=testing-environ,sys
+test=spawn_retains_error_when_child_closes_stdin_with_unsent_input_darwin
+command=cargo +1.77.2 test --locked --features testing-environ,sys --test sys_process spawn_retains_error_when_child_closes_stdin_with_unsent_input_darwin -- --exact --nocapture
+cargo_build_jobs=2
+runner_timeout_seconds=600
+cpu_count=10
+memory_bytes=34359738368
+disk_before=/dev/disk3s5   926Gi   857Gi    42Gi    96%    8.4M  437M    2%   /System/Volumes/Data
+expected_peak_kib=1048576
+expected_peak_basis=previous comparable bounded Cargo run measured 733060 KiB; rounded-up planning estimate, not a hard limit
+binding_disk_reserve=none specified by current project or user instructions
+red_status=101
+green_status=0
+lock_sha256=2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425
+lock_reused_from=/Users/hoppworks/projects/rhai/.scratch/all-tickets/linux-stdin-closure110-evidence/original-export/Cargo.lock.accepted
+manifest_sha256=cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e
+test_source_sha256=d5031a7717d541cc2249103e95fbb89a26b9c741fb9e01556f9fa191a43b5b4b
+current_unix_source_sha256=7abd009fcccf9ad81a5a60de4c5978177243c66c3a73118d44aa99b1bcdcc234
+baseline_unix_source_sha256=3ec3e000a5afec63f2f9498744ac3ebc8773e12b9cc902f00d47b68a3c277cfd
+sdk_pipe_header=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/pipe.h
+70:#define PIPE_SIZE       16384
+76:#define BIG_PIPE_SIZE   (64*1024)
+sdk_pipe_header_sha256=db3b7f2d82cf0bc758ba3016f0fc69f332b2d574e2fd4709e7964b3a7b89cf19
+disk_after=/dev/disk3s5   926Gi   858Gi    40Gi    96%    8.5M  425M    2%   /System/Volumes/Data

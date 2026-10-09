@@ -1,0 +1,7 @@
+# Darwin real-pipe BrokenPipe RED/GREEN attempt 03
+
+Expected RED exited 101 on the nominated retained-BrokenPipe assertion after observing the real 65,536-byte pipe prefill, fd 0 closure and the same exact child still live. Fallback cleanup and all independent host/sentinel/child/group checks passed. Restored GREEN exited 0, returned typed `BrokenPipe` (`write child stdin`), retained full capture and cached cause behavior, and confirmed child/group cleanup plus host/sentinel preservation. The exact assertion outputs are in `darwin-run-03.red.log` and `darwin-run-03.green.log`.
+
+Native Darwin arm64, macOS 27.0.1 (kernel 27.0.0), Rust/Cargo 1.77.2; features `testing-environ,sys`; locked exact test command is recorded in `darwin-run-03.run-info.txt`. Red used the reviewed BrokenPipe-only revert in the private source copy. Current test-source SHA-256 `d5031a7717d541cc2249103e95fbb89a26b9c741fb9e01556f9fa191a43b5b4`; Unix source SHA-256 `7abd009fcccf9ad81a5a60de4c5978177243c66c3a73118d44aa99b1bcdcc234`; lock SHA-256 `2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425`; SDK-header SHA-256 `db3b7f2d82cf0bc758ba3016f0fc69f332b2d574e2fd4709e7964b3a7b89cf19`.
+
+Combined independent Standards/Spec review passed the focused test correction. Runner status was 0; owned session TMPDIR and private runtime were retired. Internal evidence hashes are in `darwin-run-03.SHA256SUMS`; this file plus outer status/log/cleanup will be hash-read in the outer manifest.
