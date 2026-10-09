@@ -1,6 +1,6 @@
 # Current coordinator state
 
-**Next action:** Continue Ticket 03 Package B with the Darwin X25 `testing-environ,sys` row on Rust/Cargo 1.77.2; reuse compatible lifecycle setup and checks, but retain a named case-level acceptance result. Keep Windows behind its recorded native guest-custody prerequisite.
+**Next action:** Review the saved Darwin X24 `testing-environ,sys` Rust/Cargo 1.77.2 GREEN against its accepted RED; if source, lock, assertion and environment match, record that named row without rebuilding. Continue Package B; Windows remains behind native guest custody.
 
 **Mode / authority:** Owner-authorized autonomous implementation and strict acceptance continue. Push only to `https://github.com/hoppworks/rhai.git` `main`; never write to public upstream. Commit author/committer must be lowercase `hoppworks`. Preserve foreign work.
 
@@ -17,6 +17,8 @@
 **Accepted Darwin X28 unchecked row:** `direct_spawn_kill_on_drop_false_preserves_child_and_capture` accepted only for Darwin arm64/macOS27.0.1, Rust/Cargo1.77.2, `testing-environ,sys,unchecked`. Attempt06 binds source `a8fdc21e…c935c`, mutant `2055c935…262a`, lock `2ba4b3a0…5425`; intended RED101 and identity-matched SIGKILL/ESRCH cleanup; GREEN1/1 with live challenge, 524288 bytes per stream and exact ESRCH. Combined review PASS. `darwin-drop-false-unchecked-20261009/attempt-06.md` has hashes/details. Attempts01/05 cwd stops, 02/03 parser misses, 04 ambiguous mutation anchor remain classified as harness history. Scope retired, no cache; other rows open.
 
 **Accepted Darwin X29 unchecked row:** `script_throw_drops_and_reaps_a_live_child` passed 1/1 on Darwin27.0.1/Rust1.77.2 `testing-environ,sys,unchecked`, with wrong-message control, independent controller/fixture ESRCH and watchdog closure. Combined review PASS; hashes/raw output: `darwin-x29-unchecked-20261009/attempt-01.md`. Cargo status 0; outer runner status unknown after zsh bookkeeping error. Runtime absence and exact scope retirement verified. Initial runner permission error was pre-test; no product failure.
+
+**Accepted Darwin X25 base row:** Native Darwin arm64/macOS 27.0.1, Rust/Cargo 1.77.2, `testing-environ,sys`, source `76fdebd77cfcd5cc6e27df9cc95198a9cf030746`: expected sentinel-reap RED101 and restored GREEN0 bind source/lock/environment; public managed spawn/kill/wait observes leader/worker/leaf ESRCH, sentinel live at return then reaped. Combined review PASS. Evidence: `darwin-x25-rust177-20261009/proof.md`. Attempt01 stopped pre-test on ambiguous anchor; attempt02 ran valid RED but parser returned runner1; attempt03 GREEN/runner0. All exact scopes retired; no cache.
 
 **Accepted Darwin X28/X29 base rows:** One scoped Rust/Cargo1.77.2 `testing-environ,sys` build; both exact tests and runner status 0. X28 proves live challenge, 524288-byte streams and natural ESRCH; X29 proves live-child throw, wrong-message rejection and controller/fixture/watchdog ESRCH. Review reused X28's byte-identical unchecked RED/cleanup control. Proof: `darwin-process-lifecycle-base-20261009/attempt-01.md`; other rows open.
 

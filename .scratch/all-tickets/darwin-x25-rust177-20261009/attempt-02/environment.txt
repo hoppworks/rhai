@@ -1,0 +1,9 @@
+76fdebd77cfcd5cc6e27df9cc95198a9cf030746
+7abd009fcccf9ad81a5a60de4c5978177243c66c3a73118d44aa99b1bcdcc234  /Users/hoppworks/projects/rhai/src/packages/sys/process/unix.rs
+2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425  /Users/hoppworks/projects/rhai/.scratch/all-tickets/darwin-drop-false-unchecked-20261009/attempt-06/Cargo.lock
+Darwin Daniels-MBP-2.fritz.box 27.0.0 Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:59 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8142 arm64
+ProductName:		macOS
+ProductVersion:		27.0.1
+BuildVersion:		26A434
+rustc 1.77.2 (25ef9e3d8 2024-04-09)
+cargo 1.77.2 (e52e36006 2024-03-26)
