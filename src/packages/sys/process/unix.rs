@@ -506,8 +506,12 @@ fn pump_spawned_record(registry: &OwnerRegistry, record: &Arc<Mutex<OwnerRecord>
                 Err(error) if error.kind() == io::ErrorKind::WouldBlock => {}
                 Err(error) if error.kind() == io::ErrorKind::Interrupted => {}
                 Err(error) if error.kind() == io::ErrorKind::BrokenPipe => {
-                    state.stdin_offset = state.stdin.len();
+                    if state.error.is_none() {
+                        state.error =
+                            Some(process_io_cause("write child stdin", &state.program, error));
+                    }
                     close_stdin = true;
+                    state.kill_requested = true;
                     progressed = true;
                 }
                 Err(error) => {
