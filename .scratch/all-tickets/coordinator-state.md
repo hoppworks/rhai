@@ -1,6 +1,6 @@
 # Current coordinator state
 
-**Next action:** Continue Ticket 03 package B at the next uncovered native-platform row; the Linux spawned-stdin regression and injected `Ok(0)` branch now have current-source evidence. Keep the public Engine/OS readback and exact cleanup contract; do not repeat the unchanged Linux row.
+**Next action:** Continue Ticket 03 package B with a native Darwin public-Engine early-stdin-close/BrokenPipe row. The current fixture is Linux-only because it depends on `/proc` and `F_GETPIPE_SZ`; add a Darwin-specific observation seam only if it preserves actual-pipe behavior, pending-byte proof, child/group cleanup and independent host/sentinel checks. The full Darwin target is already green; do not repeat it solely for planning.
 
 **Mode / authority:** Owner-authorized autonomous implementation and strict acceptance continue. Push only to `https://github.com/hoppworks/rhai.git` `main`; never write to public upstream. Commit author/committer must be lowercase `hoppworks`. Preserve foreign work.
 
@@ -10,7 +10,9 @@
 
 **Accepted injected criterion:** The distinct pending-byte `Ok(0)` path now maps to `WriteZero`. A ZeroWriter unit test failed on the prior helper and passed 1/1 on the updated source, Darwin arm64/macOS 27.0.0, Rust/Cargo 1.77.2, `testing-environ,sys`; combined Standards/Spec review passed. This is injected branch proof, not native pipe or full macOS stdin acceptance. Details, log hashes and lock/source identities are in `writezero-unit-20261009T2025Z/proof.md` and `docs/sys-package-plan.md`.
 
-**Product state:** `HEAD` and fork `origin/main` are `0c6c51b98f57cb2e3ca3c8a56a64ea84f93981e3`. Unix `spawn` converts pending-byte zero writes to `WriteZero`; positive writes alone advance the offset. Existing error handling retains the first cause, closes stdin and uses owned cleanup. `run` and `run_raw` are untouched. Combined Standards/Spec review passed. BrokenPipe and injected WriteZero are separate partial criteria; neither closes all Ticket 03 or A–F.
+**Accepted Darwin regression scope:** At `8da9a8750e38709551a6db31736cc869a60fc3f5`, full `sys_process` on Darwin arm64/macOS 27.0.0, Rust/Cargo 1.77.2, `testing-environ,sys` passed 48, failed 0, ignored 1. The public blocked-stdin/spawn snapshot passed. The early-close/BrokenPipe fixture is Linux-only, so this does not accept native Darwin stdin-error behavior. Log hash and run metadata are in `writezero-unit-20261009T2025Z/darwin-followup/`.
+
+**Product state:** Fork `HEAD`/`origin/main` is `8da9a8750e38709551a6db31736cc869a60fc3f5`; product code is at `0c6c51b98f57cb2e3ca3c8a56a64ea84f93981e3`. Unix `spawn` converts pending-byte zero writes to `WriteZero`; positive writes alone advance the offset. Existing error handling retains the first cause, closes stdin and uses owned cleanup. `run` and `run_raw` are untouched. Combined Standards/Spec review passed. BrokenPipe and injected WriteZero are separate partial criteria; neither closes all Ticket 03 or A–F.
 
 **Harness cause/fixes:** Cargo GREEN itself succeeded; the first wrapper returned 1 because parser incorrectly required a panic-only partial marker. Offline replay now binds exact missing-marker ValueError, immutable traces/source/test/lock/toolchain, GREEN assertion, zero partial markers and process custody. Combined independent Standards/Spec review passed, including negative single/duplicate partial-marker cases. Exporter corrections were reviewed: stage aliases resolve canonically while exact run-config path remains bound; custody deduplicates `(pid,start_ticks)` not repeated `du`/`ps` role labels; system census accepts numeric PGID 0 while requiring PID>0. Re-export/readback/retirement then passed.
 
