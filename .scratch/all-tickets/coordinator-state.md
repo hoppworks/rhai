@@ -1,11 +1,19 @@
-# Current coordinator reference
+# Current coordinator state
 
-The owner authorized autonomous execution of the current Wayfinder plan on
-2026-10-08. The single current working state is
-[execution-state.md](../rhai-wayfinder-replan-20261008/execution-state.md), which
-links the canonical implementation plan and original results.
+**Next action:** Commit the reviewed Unix spawned-stdin `Ok(0)` → `WriteZero` fix with its package-plan crosswalk update, then atomically fast-forward-push to fork `main` and read back the exact head. Afterward continue the next open Ticket 03 lifecycle/capture/cache/platform criterion; do not repeat the completed `sys_process` build for the already accepted BrokenPipe row.
 
-Previous approvals, limits, consumption, causes and evidence are preserved in
-[the exact previous state](../rhai-wayfinder-replan-20261008/history/coordinator-before-execution-consolidation-20261008.md)
-and its references. Historical PENDING/retry labels are not new approval gates.
-Preserve human security/ownership boundaries; foreign work remains excluded.
+**Mode / authority:** Owner-authorized autonomous implementation and strict acceptance continue. Push only to `https://github.com/hoppworks/rhai.git` `main`; never write to public upstream. Commit author/committer must be lowercase `hoppworks`. Preserve foreign work.
+
+**Current rules:** Agent-skills HEAD `1b6e1da85f87cad25f7aafc91aa782319ac6ef93`; common AGENTS SHA `f71e8f97…feec8`; project AGENTS SHA `37f95ff6…bba37c`. Relevant global/project/resource/build/E2E/review/campaign/TDD rules reread. `~/.agents/AGENTS.md` is absent; no Rhai-specific memory applies. Both involved reviewers confirmed current rules before review.
+
+**Accepted Linux criterion:** On product revision `d52450aa827a58f1b7dac84a12b4cd81755932ca`, Workhorse native Linux x86_64, Rust/Cargo 1.77.2, features `testing-environ,sys`, the full unfiltered `sys_process` target passed 60, failed 0, ignored 3; exact regression `spawn_retains_error_when_child_closes_stdin_with_unsent_input` passed. Expected RED is attempt03 (`b04b486d…`); source/test identity unchanged at GREEN. The panic-only partial receipt is absent in GREEN as designed. Harness parser-only replay and independent remote inventory/readback passed. Export: `linux-stdin-closure110-evidence/original-export/` (48 files, 6 dirs; manifest/readback hashes recorded). Fresh custody showed scope/runtime absent, no live fixture groups; exact owned Workhorse stage/scope retired after export.
+
+**Accepted injected criterion:** The distinct pending-byte `Ok(0)` path now maps to `WriteZero`. A ZeroWriter unit test failed on the prior helper and passed 1/1 on the updated source, Darwin arm64/macOS 27.0.0, Rust/Cargo 1.77.2, `testing-environ,sys`; combined Standards/Spec review passed. This is injected branch proof, not native pipe or full macOS stdin acceptance. Details, log hashes and lock/source identities are in `writezero-unit-20261009T2025Z/proof.md` and `docs/sys-package-plan.md`.
+
+**Product state:** `HEAD` and fork `origin/main` are `2aaf0db0323728ea251d88811acea246ed7552da`. The reviewed source change is currently uncommitted: Unix `spawn` now converts pending-byte zero writes to `WriteZero`; positive writes alone advance the offset. The existing error branch retains the first cause, closes stdin and uses owned cleanup. `run` and `run_raw` are untouched. Combined Standards/Spec review passed. The earlier BrokenPipe and this injected WriteZero criterion are separate; neither closes all Ticket 03 or A–F.
+
+**Harness cause/fixes:** Cargo GREEN itself succeeded; the first wrapper returned 1 because parser incorrectly required a panic-only partial marker. Offline replay now binds exact missing-marker ValueError, immutable traces/source/test/lock/toolchain, GREEN assertion, zero partial markers and process custody. Combined independent Standards/Spec review passed, including negative single/duplicate partial-marker cases. Exporter corrections were reviewed: stage aliases resolve canonically while exact run-config path remains bound; custody deduplicates `(pid,start_ticks)` not repeated `du`/`ps` role labels; system census accepts numeric PGID 0 while requiring PID>0. Re-export/readback/retirement then passed.
+
+**Consumed limits/history:** GREEN used one bounded native build: helper 540s, runner 585s, outer 600s, export reserve 30s, Cargo jobs 2, descendants 16, storage/RSS caps 2,097,152 KiB. Actual helper ~33s, Cargo ~9.72s; sampled max RSS 883,848 KiB, storage 737,816 KiB, descendants 14. Prior attempts01/02 pre-assertion failures and attempt03 expected RED remain documented under `escalations/25-*`, attempt03 replay evidence and `execution-state.md`. Parser replays/local selftests used no Cargo build. One initial local selftest attempt and export parser failures are explained by harness corrections above; no extra build consumed.
+
+**Remaining campaign:** This closes only the targeted Linux BrokenPipe lifecycle criterion, not all Ticket 03 or A–F. Ticket 03 still needs applicable capture/cache and platform evidence; native Windows remains gated on guest process-tree custody. Broader OS/MSRV/feature acceptance remains open. `.worktrees/` is foreign/untracked and unchanged.

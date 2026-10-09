@@ -6,6 +6,7 @@ use crate::{Array, Blob};
 use crate::{Dynamic, ImmutableString, Map, Module, NativeCallContext, Shared, INT};
 use std::ffi::OsStr;
 use std::io::{self, Read, Write};
+use std::num::NonZeroUsize;
 use std::os::fd::{AsRawFd, RawFd};
 use std::os::unix::process::{CommandExt, ExitStatusExt};
 use std::process::{Child as OsChild, ChildStderr, ChildStdin, ChildStdout, Command, Stdio};
@@ -493,14 +494,9 @@ fn pump_spawned_record(registry: &OwnerRegistry, record: &Arc<Mutex<OwnerRecord>
     let mut close_stdin = false;
     if let Some(stdin) = runtime.stdin.as_mut() {
         if state.stdin_offset < state.stdin.len() {
-            match stdin.write(&state.stdin[state.stdin_offset..]) {
-                Ok(0) => {
-                    state.stdin_offset = state.stdin.len();
-                    close_stdin = true;
-                    progressed = true;
-                }
+            match write_pending_stdin(stdin, &state.stdin[state.stdin_offset..]) {
                 Ok(count) => {
-                    state.stdin_offset += count;
+                    state.stdin_offset += count.get();
                     progressed = true;
                 }
                 Err(error) if error.kind() == io::ErrorKind::WouldBlock => {}
@@ -3364,10 +3360,20 @@ fn fail(
     ))
 }
 
+fn write_pending_stdin<W: Write>(stdin: &mut W, pending: &[u8]) -> io::Result<NonZeroUsize> {
+    match stdin.write(pending)? {
+        0 => Err(io::Error::new(
+            io::ErrorKind::WriteZero,
+            "child stdin accepted no bytes",
+        )),
+        count => Ok(NonZeroUsize::new(count).expect("write returned nonzero bytes")),
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::{
-        completion_ready, read_ready, CleanupService, ExecutionFaults,
+        completion_ready, read_ready, write_pending_stdin, CleanupService, ExecutionFaults,
         ManagedScopeSetupFailurePoint, ManagedScopeState, ReadState, ScopeObservation,
     };
     use crate::packages::sys::{
@@ -3392,6 +3398,26 @@ mod tests {
     use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};
 
     const EXPECTED_READ_BUDGET: usize = 64 * 1024;
+
+    struct ZeroWriter;
+
+    impl Write for ZeroWriter {
+        fn write(&mut self, _: &[u8]) -> io::Result<usize> {
+            Ok(0)
+        }
+
+        fn flush(&mut self) -> io::Result<()> {
+            Ok(())
+        }
+    }
+
+    #[test]
+    fn pending_stdin_zero_write_reports_write_zero() {
+        let error = write_pending_stdin(&mut ZeroWriter, b"pending bytes")
+            .expect_err("a pending write that transfers zero bytes must fail");
+        assert_eq!(error.kind(), io::ErrorKind::WriteZero);
+        assert_eq!(error.to_string(), "child stdin accepted no bytes");
+    }
 
     #[test]
     fn managed_close_submission_is_not_scope_completion() {
