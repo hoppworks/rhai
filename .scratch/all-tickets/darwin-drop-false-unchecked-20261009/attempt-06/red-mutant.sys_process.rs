@@ -532,7 +532,7 @@ impl DirectDropFixture {
     }
 
     fn release_and_wait(&mut self) -> bool {
-        let _ = std::fs::write(self.path("release"), b"release\n");
+        // RED control: withhold release to exercise exact-child panic cleanup.
         let deadline = Instant::now() + Duration::from_secs(6);
         while let Some(pid) = self.pid {
             if pid_is_absent(pid) {
@@ -627,7 +627,7 @@ fn direct_spawn_kill_on_drop_false_preserves_child_and_capture() {
     let ack_matches = ack.as_deref().is_some_and(|record| record.trim() == format!("pid={pid} alive=true"));
     let alive_after_drop = pid_is_running(pid);
     eprintln!("direct_drop_after_final_client_drop pid={pid} alive={alive_after_drop} challenge_ack={ack_matches} completion_exists={}", fixture.path("record.complete").exists());
-    assert!(alive_after_drop && ack_matches, "kill_on_drop(false) must preserve the child after final handle drop");
+    assert!(!alive_after_drop && ack_matches, "kill_on_drop(false) must preserve the child after final handle drop");
     assert!(!fixture.path("record.complete").exists(), "child must still be blocked before fixture release");
 
     std::fs::write(fixture.path("release"), b"release\n").unwrap();

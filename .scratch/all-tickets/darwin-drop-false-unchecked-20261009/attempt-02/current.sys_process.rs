@@ -483,35 +483,16 @@ impl Drop for ResourceCensusRelease {
     }
 }
 
-#[cfg(all(any(target_os = "linux", target_os = "macos"), not(feature = "no_index"), not(feature = "no_float")))]
-#[derive(Debug, Clone, PartialEq, Eq)]
-struct DirectDropProcessIdentity {
-    parent: i32,
-    group: i32,
-    start: String,
-}
-
-#[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
-fn direct_drop_process_identity(pid: i32) -> std::io::Result<Option<DirectDropProcessIdentity>> {
-    Ok(managed_proc_identity_checked(pid)?.map(|(_, parent, group, start)| DirectDropProcessIdentity { parent, group, start: start.to_string() }))
-}
-
-#[cfg(all(target_os = "macos", not(feature = "no_index"), not(feature = "no_float")))]
-fn direct_drop_process_identity(pid: i32) -> std::io::Result<Option<DirectDropProcessIdentity>> {
-    Ok(darwin_process_identity(pid)?.map(|identity| DirectDropProcessIdentity { parent: identity.parent, group: identity.group, start: identity.start }))
-}
-
-#[cfg(all(any(target_os = "linux", target_os = "macos"), not(feature = "no_index"), not(feature = "no_float")))]
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
 struct DirectDropFixture {
     root: TempDir,
     pid: Option<i32>,
-    identity: Option<DirectDropProcessIdentity>,
 }
 
-#[cfg(all(any(target_os = "linux", target_os = "macos"), not(feature = "no_index"), not(feature = "no_float")))]
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
 impl DirectDropFixture {
     fn new() -> Self {
-        Self { root: TempDir::new(), pid: None, identity: None }
+        Self { root: TempDir::new(), pid: None }
     }
 
     fn path(&self, name: &str) -> std::path::PathBuf {
@@ -540,41 +521,8 @@ impl DirectDropFixture {
                 return true;
             }
             if Instant::now() >= deadline {
-                if pid_is_absent(pid) {
-                    eprintln!("direct_drop_fixture_cleanup root={} pid={pid} esrch=true after=bounded_wait", self.root.path().display());
-                    return true;
-                }
-                let expected = match self.identity.as_ref() {
-                    Some(identity) => identity,
-                    None => {
-                        eprintln!("direct_drop_fixture_cleanup root={} pid={pid} esrch=false signal=refused identity_missing=true", self.root.path().display());
-                        return false;
-                    }
-                };
-                let current = match direct_drop_process_identity(pid) {
-                    Ok(identity) => identity,
-                    Err(error) => {
-                        eprintln!("direct_drop_fixture_cleanup root={} pid={pid} esrch=false identity_error={error}", self.root.path().display());
-                        return false;
-                    }
-                };
-                if current.as_ref() != Some(expected) {
-                    eprintln!("direct_drop_fixture_cleanup root={} pid={pid} esrch=false signal=refused identity_match=false", self.root.path().display());
-                    return false;
-                }
-                let signal = unsafe { libc::kill(pid, libc::SIGKILL) };
-                let signal_error = if signal == -1 { Some(std::io::Error::last_os_error()) } else { None };
-                eprintln!("direct_drop_fixture_cleanup root={} pid={pid} signal=SIGKILL sent={} error={signal_error:?}", self.root.path().display(), signal == 0);
-                if signal == -1 && signal_error.as_ref().and_then(std::io::Error::raw_os_error) != Some(libc::ESRCH) {
-                    return false;
-                }
-                let reap_deadline = Instant::now() + Duration::from_secs(2);
-                while Instant::now() < reap_deadline && !pid_is_absent(pid) {
-                    std::thread::sleep(Duration::from_millis(10));
-                }
-                let reaped = pid_is_absent(pid);
-                eprintln!("direct_drop_fixture_cleanup root={} pid={pid} esrch={reaped} after=SIGKILL", self.root.path().display());
-                return reaped;
+                eprintln!("direct_drop_fixture_cleanup root={} pid={pid} esrch=false", self.root.path().display());
+                return false;
             }
             std::thread::sleep(Duration::from_millis(10));
         }
@@ -583,7 +531,7 @@ impl DirectDropFixture {
     }
 }
 
-#[cfg(all(any(target_os = "linux", target_os = "macos"), not(feature = "no_index"), not(feature = "no_float")))]
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
 impl Drop for DirectDropFixture {
     fn drop(&mut self) {
         let _ = self.release_and_wait();
@@ -593,7 +541,7 @@ impl Drop for DirectDropFixture {
 /// Public false-policy final-drop contract: the retained owner must leave the OS child alive,
 /// continue draining its captured pipes, and eventually reap it after the child exits.
 #[test]
-#[cfg(all(any(target_os = "linux", target_os = "macos"), not(feature = "no_index"), not(feature = "no_float")))]
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
 fn direct_spawn_kill_on_drop_false_preserves_child_and_capture() {
     let mut fixture = DirectDropFixture::new();
     let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
@@ -617,7 +565,6 @@ fn direct_spawn_kill_on_drop_false_preserves_child_and_capture() {
     let pid = *fields.get("pid").expect("ready record PID");
     assert!(ready.contains("ready=true"), "fixture must publish complete readiness atomically");
     fixture.pid = Some(pid);
-    fixture.identity = Some(direct_drop_process_identity(pid).expect("capture exact child identity").expect("exact child exists after readiness"));
     eprintln!("direct_drop_fixture_started root={} test_pid={} child_pid={pid}", fixture.root.path().display(), std::process::id());
     drop(child); // The only public client lease is gone here.
     drop(engine); // The retained service must outlive the package owner while it drains/reaps.
@@ -1476,7 +1423,7 @@ fn managed_proc_identity_checked(pid: i32) -> std::io::Result<Option<(char, i32,
     Ok(Some((state, parent, group, start)))
 }
 
-#[cfg(all(target_os = "macos", not(feature = "no_index"), not(feature = "no_float")))]
+#[cfg(all(target_os = "macos", not(feature = "unchecked"), not(feature = "no_index"), not(feature = "no_float")))]
 #[derive(Debug, Clone, PartialEq, Eq)]
 struct DarwinProcessIdentity {
     pid: i32,
@@ -1493,7 +1440,7 @@ impl DarwinProcessIdentity {
     }
 }
 
-#[cfg(all(target_os = "macos", not(feature = "no_index"), not(feature = "no_float")))]
+#[cfg(all(target_os = "macos", not(feature = "unchecked"), not(feature = "no_index"), not(feature = "no_float")))]
 fn darwin_process_identity(pid: i32) -> std::io::Result<Option<DarwinProcessIdentity>> {
     let output = Command::new("/bin/ps")
         .args(["-o", "ppid=", "-o", "pgid=", "-o", "state=", "-o", "lstart=", "-p", &pid.to_string()])

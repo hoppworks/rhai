@@ -1,0 +1,11 @@
+eea06efb835bb20cf7b102c9781fe91592cf53a4af5759005455829ccc4406ec  /Users/hoppworks/projects/rhai/.scratch/all-tickets/darwin-drop-false-unchecked-20261009/attempt-06/run-info.txt
+a8fdc21e73b56bf12c82603c941b7c22b01c942a56d5f649ff2ec98b494c935c  /Users/hoppworks/projects/rhai/.scratch/all-tickets/darwin-drop-false-unchecked-20261009/attempt-06/current.sys_process.rs
+2055c935f0502cd287acc270e626880faf18ba9b928da6db608a16dedb82262a  /Users/hoppworks/projects/rhai/.scratch/all-tickets/darwin-drop-false-unchecked-20261009/attempt-06/red-mutant.sys_process.rs
+2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425  /Users/hoppworks/projects/rhai/.scratch/all-tickets/darwin-drop-false-unchecked-20261009/attempt-06/Cargo.lock
+fd0bb5b9718e152e0b2c3d6fb2482926369cf89fd75366510ae585af401648d2  /Users/hoppworks/projects/rhai/.scratch/all-tickets/darwin-drop-false-unchecked-20261009/attempt-06/red.log
+39b8dc3fc8b44765c8e6f1adee04c5b465e555ab791cc42d0d9e810d5b64297c  /Users/hoppworks/projects/rhai/.scratch/all-tickets/darwin-drop-false-unchecked-20261009/attempt-06/red.status
+35c98e13ded516030e0560a3cc6e76084e06de3534ba76a5339ba5eb097ebdc4  /Users/hoppworks/projects/rhai/.scratch/all-tickets/darwin-drop-false-unchecked-20261009/attempt-06/green.log
+9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa  /Users/hoppworks/projects/rhai/.scratch/all-tickets/darwin-drop-false-unchecked-20261009/attempt-06/green.status
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  runner.log
+9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa  runner.status
+e5b833cc37df6c9966c4f8b481afc271886b4759591fb225262836bedae0d8be  scope-cleanup.txt

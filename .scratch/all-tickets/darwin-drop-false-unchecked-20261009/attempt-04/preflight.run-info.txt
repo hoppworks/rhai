@@ -1,0 +1,11 @@
+base_revision=d32f4563677c09631715fe1b76a646604e770e3d
+worktree_test_source_sha256=a8fdc21e73b56bf12c82603c941b7c22b01c942a56d5f649ff2ec98b494c935c
+host=Daniels-MBP-2.fritz.box
+os=27.0.1 Darwin Daniels-MBP-2.fritz.box 27.0.0 Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:59 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8142 arm64
+rustc=rustc 1.77.2 (25ef9e3d8 2024-04-09)
+cargo=cargo 1.77.2 (e52e36006 2024-03-26)
+features=testing-environ,sys,unchecked
+test=direct_spawn_kill_on_drop_false_preserves_child_and_capture
+command=cargo +1.77.2 test --locked --features testing-environ,sys,unchecked --test sys_process direct_spawn_kill_on_drop_false_preserves_child_and_capture -- --exact --nocapture --test-threads=1
+runner_timeout_seconds=600
+cargo_build_jobs=2

@@ -472,6 +472,19 @@ OS, feature and MSRV rows remain open. This section is the single current plan;
 the campaign state records evidence and ownership. Historical estimates do not
 allocate retries or certify completion.
 
+**Accepted partial criterion: X28, Darwin `unchecked`.** On Darwin arm64/macOS
+27.0.1 with Rust/Cargo 1.77.2 and `testing-environ,sys,unchecked`, the public
+Engine test `direct_spawn_kill_on_drop_false_preserves_child_and_capture` passed
+with an assertion-sensitivity RED and restored GREEN. After dropping the final
+client handle and Engine, the child remained alive, acknowledged an independent
+challenge, completed 524288-byte stdout and stderr writes, and was independently
+observed absent after natural exit. The exceptional cleanup guard also passed an
+inverted-assertion RED after verifying exact process identity, issuing SIGKILL,
+and reading ESRCH. Current source, mutant and lock hashes plus raw logs are in
+`../.scratch/all-tickets/darwin-drop-false-unchecked-20261009/attempt-06.md` and
+its attempt directory; combined independent review passed. Other X28 platforms
+and feature profiles, and the remaining Ticket 03 criteria, remain open.
+
 **Accepted partial criterion: X30, Linux descriptor stability.** The real entry is
 `tests/sys_process.rs::repeated_public_run_calls_keep_fd_count_stable`: the
 ordinary acceptance test launches the ignored census test by exact name in a
