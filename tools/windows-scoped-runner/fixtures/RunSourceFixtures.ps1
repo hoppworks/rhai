@@ -50,7 +50,7 @@ $expected = @{
 
 # The narrow native bootstrap compiles only the public runner, real-client driver
 # and finite payload. It never runs the driver inside this compiler owner's job.
-$expected['tools/windows-scoped-runner/MonitorAcceptanceDriver.cs'] = 'dae12f910058773b16eb0eb48ad47ef94edb413aa812d640435a564bc1d31bad'
+$expected['tools/windows-scoped-runner/MonitorAcceptanceDriver.cs'] = '016c313d545b52df233f0e9607e3b21fa23d9abe7183f89bbac5cc569ab44555'
 $expected['tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs'] = '8f43d33928262ae181aa5396feffef9b0260653609b5be8b01da7b0a7e7b00f7'
 if ($DriverParserFixture) { $expected['tools/windows-scoped-runner/fixtures/MonitorAcceptanceDriverFixture.cs'] = 'e27fa58588b1988ec0085ac4ec0379f686e5dd48254cd559f5278c057851f054' }
 if ($BuildOnly) {

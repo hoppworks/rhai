@@ -255,7 +255,7 @@ internal static class MonitorAcceptanceDriver
                 if(mode=="replay" && control.ReplayPrimed) { if(!replaySent) { Thread.Sleep(Math.Min(10000,deadline.Remaining)); deadline.Check("delayed replay control"); input.WriteLine(replayFrame); input.Flush(); replaySent=true; control.ReplaySent=true; } continue; }
                 input.WriteLine(response); input.Flush();
                 if(mode=="disconnect-alive" && control.PostTransferChallenges>=4 && !control.HostDisconnected) { input.Close(); control.HostDisconnected=true; }
-                if(mode=="client-death" && control.PostTransferChallenges>=4) { client.Kill(); control.ClientKilledByDriver=true; return; }
+                if(mode=="client-death" && control.PostTransferChallenges>=4) { Check(TerminateProcess(client.Handle,1),"TerminateProcess(exact client-death control)"); control.ClientKilledByDriver=true; return; }
                 continue;
             }
             throw new InvalidDataException("unexpected monitor frame: "+line);
@@ -394,8 +394,25 @@ internal static class MonitorAcceptanceDriver
     {
         var old=new HashSet<string>(before,StringComparer.OrdinalIgnoreCase); string[] added=after.Where(p=>!old.Contains(p)).ToArray(); if(added.Length!=1)throw new InvalidDataException("expected exactly one new journal");
         d.Check("journal open/readback"); RejectReparse(added[0]); byte[] bytes;
-        using(var fs=new FileStream(added[0],FileMode.Open,FileAccess.Read,FileShare.Read)) { if(fs.Length<=0||fs.Length>MaximumJournalBytes)throw new InvalidDataException("journal size bound"); bytes=new byte[(int)fs.Length]; int at=0,n; while(at<bytes.Length) { d.Check("bounded journal read"); n=fs.Read(bytes,at,Math.Min(4096,bytes.Length-at)); if(n<=0)throw new EndOfStreamException("journal changed during readback"); at+=n; } if(fs.ReadByte()!=-1)throw new InvalidDataException("journal grew past prechecked bound"); }
+        using(var fs=OpenCompletedJournal(added[0],d)) { if(fs.Length<=0||fs.Length>MaximumJournalBytes)throw new InvalidDataException("journal size bound"); bytes=new byte[(int)fs.Length]; int at=0,n; while(at<bytes.Length) { d.Check("bounded journal read"); n=fs.Read(bytes,at,Math.Min(4096,bytes.Length-at)); if(n<=0)throw new EndOfStreamException("journal changed during readback"); at+=n; } if(fs.ReadByte()!=-1)throw new InvalidDataException("journal grew past prechecked bound"); }
         JournalReport r=ParseRecords(DecodeJournalFrames(bytes),RunsRoot); BindOpenedJournal(r,added[0],RunsRoot); if(Directory.Exists(r.RuntimePath))RejectReparse(r.RuntimePath); return r;
+    }
+    private static FileStream OpenCompletedJournal(string path,Deadline d)
+    {
+        // Client death can precede detached monitor finalization. A read handle
+        // that denies writers proves the journal owner has released its writer;
+        // a delay alone or a partial/torn parse never proves completion.
+        for(;;)
+        {
+            d.Check("journal writer completion"); RejectReparse(path);
+            try { return new FileStream(path,FileMode.Open,FileAccess.Read,FileShare.Read); }
+            catch(IOException error)
+            {
+                if((error.HResult & 0xffff)!=32) throw; // ERROR_SHARING_VIOLATION only.
+                d.Check("journal writer completion");
+                Thread.Sleep(Math.Min(20,d.Remaining));
+            }
+        }
     }
     private static void VerifyEvidence(JournalReport r,Deadline d)
     {

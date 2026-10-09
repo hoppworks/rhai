@@ -1,0 +1,22 @@
+{
+  "tag": "success02",
+  "id": "rhai-success02-91e3f91a86854883bf7de4f4fd316b89",
+  "file": "success.ps1",
+  "entry_sha256": "c3bd44e63d7e102b088dc098783e20885c5620fc32625876dad8590cf53fbbde",
+  "native_started": false,
+  "accepted": false,
+  "readback": "fresh marker RED/GREEN plus runtime absence; nonheld accepted fixture does not write identity",
+  "serial_inode": 102529120,
+  "serial_offset": 826265,
+  "source_review": "999cb27f63b3b6243d9c1250c441424a16ce3c1101076484ba4657a615e1806f",
+  "native_entry_hash_visually_verified": true,
+  "prepared_at": 1791530144.5095623,
+  "limits": {
+    "driver_seconds": 180,
+    "observer_seconds": 190,
+    "export_seconds": 180,
+    "files": 64,
+    "total_bytes": 16777216,
+    "file_bytes": 4194304
+  }
+}

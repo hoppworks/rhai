@@ -1,0 +1,14 @@
+{
+  "accepted": "corrected driver native compile/parser prerequisite and success/client-death/disconnect-alive/replay runtime modes only",
+  "source_sha256": "016c313d545b52df233f0e9607e3b21fa23d9abe7183f89bbac5cc569ab44555",
+  "bootstrap_sha256": "106f7f0aad6fbfb15f5ddcf5b0c509cb0bc884d191da948bcc6d42e794129bfc",
+  "binary_sha256": "caf4afaa2f604fb47fc554c82d9493854be0959c8d329bff7a88fd7fe9e827cb",
+  "runtime_original_files": 39,
+  "runtime_frames": 137,
+  "runtime_crc_records": 32,
+  "review_sha256": "8d1631d70ccd95b64489c42a886e1e0b6ae0136e20a0f6825ca2f83eb23ffa1d",
+  "original_failure": "client-death01 sharing IOException before exit oracle; not exit-assertion RED",
+  "regressions": "actual wrong-marker assertions rejected; correct marker readback passes; held payload identities stopped; runtime removed and exact driver/pipes completed",
+  "build_retention": "own exact native driver/Runner/Payload roots retained solely until dependent custody completion/cancellation or changed inputs/compiler; mutable runtimes removed; exported originals kept",
+  "open": "monitor-death, grandchild/sentinel, residual-child, nested/assignment/output/evidence/cleanup fault controls, product work retirement and native Windows product/matrix"
+}

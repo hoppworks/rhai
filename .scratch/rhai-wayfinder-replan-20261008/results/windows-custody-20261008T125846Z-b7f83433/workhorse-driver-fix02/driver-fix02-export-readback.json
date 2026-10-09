@@ -1,0 +1,146 @@
+{
+  "frames": 71,
+  "files": {
+    "observer.json": {
+      "path": "observer.json",
+      "sha256": "aa60673771dc7942c4dd77623487c56863ca2ea6bb3b5e0a0a44bd16b8597233",
+      "length": 503
+    },
+    "bootstrap.stdout": {
+      "path": "bootstrap.stdout",
+      "sha256": "adaac884c38d7bd473290ab24e5a9bf2efbc8a06fe32004cc78f4e0f3973bf71",
+      "length": 1120
+    },
+    "bootstrap.stderr": {
+      "path": "bootstrap.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/compile-native-driver-parser.stderr.txt": {
+      "path": "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/compile-native-driver-parser.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/compile-native-driver-parser.stdout.txt": {
+      "path": "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/compile-native-driver-parser.stdout.txt",
+      "sha256": "0834146686473b87a7b7b78e70829c3a068e1ac1ae7e9106b8d50b5200a336f2",
+      "length": 2781
+    },
+    "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/compile-native-driver.stderr.txt": {
+      "path": "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/compile-native-driver.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/compile-native-driver.stdout.txt": {
+      "path": "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/compile-native-driver.stdout.txt",
+      "sha256": "0834146686473b87a7b7b78e70829c3a068e1ac1ae7e9106b8d50b5200a336f2",
+      "length": 2781
+    },
+    "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/exit-code-regression-17-wrong-expected.stderr.txt": {
+      "path": "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/exit-code-regression-17-wrong-expected.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/exit-code-regression-17-wrong-expected.stdout.txt": {
+      "path": "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/exit-code-regression-17-wrong-expected.stdout.txt",
+      "sha256": "69826b89317496600a95e98535238d73a7091d7e0ff5c9585f08c25bb71a75c3",
+      "length": 40
+    },
+    "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/exit-code-regression-17.stderr.txt": {
+      "path": "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/exit-code-regression-17.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/exit-code-regression-17.stdout.txt": {
+      "path": "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/exit-code-regression-17.stdout.txt",
+      "sha256": "32d543b6dda9fd1365b76e3057e9fac50673187a4c91cb8c18413593043e1689",
+      "length": 25
+    },
+    "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/exit-code-regression-zero.stderr.txt": {
+      "path": "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/exit-code-regression-zero.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/exit-code-regression-zero.stdout.txt": {
+      "path": "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/exit-code-regression-zero.stdout.txt",
+      "sha256": "2b98ea68ce93cdb1de4a7d10f4c46c17aacc658cc11ed8e32cc0d15612e9c568",
+      "length": 27
+    },
+    "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/expected-compiler-failure.stderr.txt": {
+      "path": "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/expected-compiler-failure.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/expected-compiler-failure.stdout.txt": {
+      "path": "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/expected-compiler-failure.stdout.txt",
+      "sha256": "362ffa8225ff70c451a4f3d4d9a08e65f7e7bea6da3f7ebc5feb5dbffb8733f7",
+      "length": 353
+    },
+    "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/run-native-driver-parser.stderr.txt": {
+      "path": "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/run-native-driver-parser.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/run-native-driver-parser.stdout.txt": {
+      "path": "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/run-native-driver-parser.stdout.txt",
+      "sha256": "fd4f5b9745a1fb6133cfa9b584f9055832d844c0e6335a150fc0feba27109075",
+      "length": 46
+    },
+    "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/setup-failure-child.stderr.txt": {
+      "path": "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/setup-failure-child.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/setup-failure-child.stdout.txt": {
+      "path": "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/setup-failure-child.stdout.txt",
+      "sha256": "8ff179f55be1a9908f3e33e97da8aafce587111fab0b67cd5a0cf189c4bad44d",
+      "length": 93
+    },
+    "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/setup-failure-control.stderr.txt": {
+      "path": "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/setup-failure-control.stderr.txt",
+      "sha256": "dc383c8e63001e4200c71dd2667219139fd7c53397e9e0b15ef4bff8bc79b12c",
+      "length": 81
+    },
+    "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/setup-failure-control.stdout.txt": {
+      "path": "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/setup-failure-control.stdout.txt",
+      "sha256": "a1064b1c88c57b95c4efbc4875ef110c1b3610960a8f19b8180b39c0e6a1a3b9",
+      "length": 118
+    },
+    "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/setup-failure-control.txt": {
+      "path": "run/monitor-source-af46729dd10c4493afc2264f240c8992/logs/setup-failure-control.txt",
+      "sha256": "c76c4dfe0ffaa87c5b6a473d8cc06a003c6999e9d43e4344f61e981b00594be2",
+      "length": 211
+    },
+    "run/monitor-source-af46729dd10c4493afc2264f240c8992/build-manifest.txt": {
+      "path": "run/monitor-source-af46729dd10c4493afc2264f240c8992/build-manifest.txt",
+      "sha256": "a2b94d6149ba16309d562b4b7d00db8f65b1520779efb9e83543553655a9a532",
+      "length": 1990
+    },
+    "run/monitor-source-af46729dd10c4493afc2264f240c8992/run-result.txt": {
+      "path": "run/monitor-source-af46729dd10c4493afc2264f240c8992/run-result.txt",
+      "sha256": "79c5b9102422b2f755e2aed8ef416a0a3ab0156de7c5ba4c85dbeda2e6ac6761",
+      "length": 124
+    }
+  },
+  "complete": true,
+  "begin": {
+    "id": "rhai-driver-fix02-af46729dd10c4493afc2264f240c8992",
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\driver-wh02-af46729dd10c",
+    "run": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\driver-wh02-af46729dd10c\\run\\monitor-source-af46729dd10c4493afc2264f240c8992",
+    "exit": 0,
+    "selection_red_exit": -1,
+    "accepted": true,
+    "failure": "",
+    "input_manifest_sha256": "604aa0cbc7ca2c1952e6751b31f8259efdf3ece36d8f30205386ec458f497a38",
+    "execution_policy_changed": false,
+    "driver_launched": false
+  },
+  "end": {
+    "id": "rhai-driver-fix02-af46729dd10c4493afc2264f240c8992",
+    "driver_launched": false,
+    "files": 24,
+    "accepted": true,
+    "exit": 0,
+    "guest_evidence_retained": true
+  }
+}

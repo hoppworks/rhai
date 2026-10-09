@@ -1,0 +1,21 @@
+{
+  "tag": "disconnect-alive02",
+  "id": "rhai-disconnect-alive02-4ae440a8cc6145a89bb10fd8a5f025e3",
+  "file": "disconnect-alive.ps1",
+  "entry_sha256": "ff454be909640e7b7c5bfe8872bab483a60e9b29d22f56a51b1999281efc0b4c",
+  "native_started": false,
+  "accepted": false,
+  "serial_inode": 102529120,
+  "serial_offset": 826265,
+  "source_review": "999cb27f63b3b6243d9c1250c441424a16ce3c1101076484ba4657a615e1806f",
+  "native_entry_hash_visually_verified": true,
+  "prepared_at": 1791530144.5094185,
+  "limits": {
+    "driver_seconds": 180,
+    "observer_seconds": 190,
+    "export_seconds": 180,
+    "files": 64,
+    "total_bytes": 16777216,
+    "file_bytes": 4194304
+  }
+}

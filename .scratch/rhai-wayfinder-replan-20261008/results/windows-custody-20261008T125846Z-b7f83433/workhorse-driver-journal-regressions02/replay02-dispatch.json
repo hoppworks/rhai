@@ -1,0 +1,21 @@
+{
+  "tag": "replay02",
+  "id": "rhai-replay02-94574af26a8141f088105a12fa1cd274",
+  "file": "replay.ps1",
+  "entry_sha256": "2b9b5c6c9985efe7898516e83bc9da026c96cc86f5dc89d0e35369219e2c22c5",
+  "native_started": false,
+  "accepted": false,
+  "serial_inode": 102529120,
+  "serial_offset": 826265,
+  "source_review": "999cb27f63b3b6243d9c1250c441424a16ce3c1101076484ba4657a615e1806f",
+  "native_entry_hash_visually_verified": true,
+  "prepared_at": 1791530144.5095258,
+  "limits": {
+    "driver_seconds": 180,
+    "observer_seconds": 190,
+    "export_seconds": 180,
+    "files": 64,
+    "total_bytes": 16777216,
+    "file_bytes": 4194304
+  }
+}

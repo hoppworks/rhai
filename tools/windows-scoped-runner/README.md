@@ -184,23 +184,27 @@ The success validator requires the caller's exact expected payload exit,
 `PayloadExited`, client exit 78, confirmed cleanup/removal, and independent
 evidence hashes. Negative validators require the exact driver action,
 `MonitorStopped`, payload exit `0000007D`, client exit 1 for client-death and
-78 otherwise, confirmed cleanup/removal, and evidence hashes. The narrow native success, disconnect-alive and replay compositions are
-accepted for their bound inputs. Client-death remains open: its unchanged native
-control returned a journal sharing IOException before the exit oracle. Bounded
-completion readiness and exact termination remain affected work. The driver hashes the saved manifest and stdout/stderr logs; the backend
-performs complete snapshot/readback, and the independent observer reads fresh payload bytes.
+78 otherwise, confirmed cleanup/removal, and evidence hashes. Native client-death02
+now passes with checked exact-client termination at exit 1 and bounded
+writer-release readiness before strict journal parsing. The earlier sharing
+IOException is retained as the original failure, rather than an exit-oracle RED.
+Affected native success02, disconnect-alive02 and replay02 also returned driver 0
+with marker assertion controls and runtime-removal readback. Their original
+compiler/source/binary bindings and combined review are recorded under
+`.scratch/rhai-wayfinder-replan-20261008/results/windows-custody-20261008T125846Z-b7f83433/`.
+These narrow cases do not close monitor-death, fault controls or product custody.
+The driver hashes saved manifests and stdout/stderr logs; the backend performs
+complete snapshot/readback, and the independent observer reads fresh payload bytes.
 
 The driver's workload path is the public `--lease-client` entrypoint, which
 receives the immutable source/executable specification over the protocol; it
 does not call the refused legacy direct `ScopedRunner.Main --source/--exe`
-path. The native tiny successful payload run has passed. Connection loss while
-the client remains alive, exact client death, and a replayed challenge remain
-to be exercised with a finite held payload. The
-negative controls need a created payload to establish the expected
-`TerminateJobObject(..., 125)` result; absent or contradictory termination
-evidence must fail closed. Disconnect and replay passed with the finite held payload, independently read
-payload identity, exact termination125 and actual runtime removal. Client-death,
-residual-child cleanup and Cargo work retirement remain open.
+path. Native tiny success, connection loss while the client remains alive,
+exact client death and replayed challenge now pass with their bound artifacts.
+Held negative controls establish a created payload, exact termination125,
+independent payload identity stopped and runtime removal. Absent or contradictory
+termination evidence still fails closed. Residual-child cleanup, monitor death,
+remaining fault controls and Cargo work retirement remain open.
 
 The full Expert02 native set remains required under its one-hour outer bound,
 2 GiB job memory cap,

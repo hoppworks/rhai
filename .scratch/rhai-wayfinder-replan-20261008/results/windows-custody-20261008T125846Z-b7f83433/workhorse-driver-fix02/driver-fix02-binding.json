@@ -1,0 +1,26 @@
+{
+  "id": "rhai-driver-fix02-af46729dd10c4493afc2264f240c8992",
+  "tag": "driver-fix02",
+  "entry_sha256": "fca073f27d7802b4da893fcaa65bd7a6fc35ad24168f803e9471fe0e4b895972",
+  "manifest_sha256": "604aa0cbc7ca2c1952e6751b31f8259efdf3ece36d8f30205386ec458f497a38",
+  "driver_sha256": "016c313d545b52df233f0e9607e3b21fa23d9abe7183f89bbac5cc569ab44555",
+  "bootstrap_sha256": "106f7f0aad6fbfb15f5ddcf5b0c509cb0bc884d191da948bcc6d42e794129bfc",
+  "flags": [
+    "BuildOnly",
+    "DriverOnly",
+    "DriverParserFixture"
+  ],
+  "scope": "changed driver plus unchanged parser fixture only; retain compiler cleanup/exit/CS2001 controls; no runner/payload/policy/capture compile",
+  "native_started": false,
+  "accepted": false,
+  "limits": {
+    "compiler_each_seconds": 180,
+    "parser_seconds": 30,
+    "owner_seconds": 900,
+    "observer_seconds": 930,
+    "export_seconds": 180,
+    "files": 64,
+    "total_bytes": 16777216,
+    "file_bytes": 4194304
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "rhai-client-death02-6c4d8884b2f34c6aa2020fe67bd9e084",
+  "tag": "client-death02",
+  "entry_sha256": "ec818cf59df6645786a70c332e6a00b211c76bc1b05253b591b33e7566c43f6f",
+  "driver_binary": "caf4afaa2f604fb47fc554c82d9493854be0959c8d329bff7a88fd7fe9e827cb",
+  "native_started": true,
+  "accepted": false,
+  "limits": {
+    "driver_seconds": 180,
+    "observer_seconds": 190,
+    "export_seconds": 180,
+    "files": 64,
+    "bytes": 16777216
+  },
+  "reuse": "unchanged held payload and public runner; driver-fix02 native binary",
+  "serial_inode": 102529120,
+  "serial_offset": 799455,
+  "recorded_at": 1791529853.6917808,
+  "source_review": "e7de2c6cae4d7f2e1d7be250ac0f96a201845cf6edbffe8369412646780b60bf",
+  "native_entry_hash_visually_verified": true,
+  "dispatch_pending": false,
+  "dispatched_at": 1791529877.3844647
+}
