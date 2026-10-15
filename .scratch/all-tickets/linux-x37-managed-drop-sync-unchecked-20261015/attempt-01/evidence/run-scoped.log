@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/var/home/Daniel/projects/rhai/.scratch/all-tickets/linux-x37-managed-drop-sync-unchecked-20261015/attempt-01/postrun-readback.py", line 10, in <module>
+    assert cleanup and int(cleanup.group(1))==sentinel_pid, 'exact sentinel cleanup missing'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: exact sentinel cleanup missing

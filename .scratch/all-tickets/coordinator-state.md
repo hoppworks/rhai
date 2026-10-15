@@ -8,7 +8,7 @@
 
 **Accepted partial rows:**
 - X35 Linux `testing-environ,sys` and `unchecked`: DirectChild/Managed lifecycle and assertion controls accepted; base outer checker failed after Cargo. Proofs `linux-x35-direct-managed-20261015/` and `linux-x35-direct-managed-unchecked-20261015/`.
-- X37 Linux same profiles: final-clone-drop/sentinel rows accepted with process/group readback. Base Cargo RED/GREEN accepted; outer parser status 1 is documented. Proofs `linux-x37-managed-drop-base-20261015/`, `linux-x37-managed-drop-unchecked-20261015/`.
+- X37 Linux same profiles: final-clone-drop/sentinel rows accepted with process/group readback. Base Cargo RED/GREEN accepted; outer parser status 1 is documented. Proofs `linux-x37-managed-drop-base-20261015/`, `linux-x37-managed-drop-unchecked-20261015/`, and `linux-x37-managed-drop-sync-unchecked-20261015/`; the new row has Cargo RED/GREEN and independent readback accepted, outer parser status 1, and a recorded concurrent-build capacity deviation.
 - X38 Linux base and unchecked named deadline/escaped-reader, kill-capture, post-reap-cancel selectors accepted; unchecked outer status 127 remains unexplained. Reuse exact reviewed base evidence; see plan and `linux-escaped-capture-unchecked-20261015/`.
 - X36 Linux base, Darwin base, and Linux unchecked named kernel-denial rows accepted. Attempt 11 compile-aborted before assertions; attempt 12 corrected cfg and accepted only its named row. See `x36-managed-scope-setup-20261008/`.
 - Ticket06 Linux host negative gates: `sys,no_std`, `net,no_std`, combined `sys,net,no_std`, and `sys,no_object` accepted with intended diagnostics and fail-closed guard-removal control. WASM targets remain unverified; see `unsupported-feature-release-20261015/proof.md`.

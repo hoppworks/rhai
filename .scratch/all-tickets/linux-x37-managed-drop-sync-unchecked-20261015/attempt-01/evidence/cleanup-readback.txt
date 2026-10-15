@@ -1,0 +1,6 @@
+runner_status=1
+runtime_absent=true
+owned_session_scope_removed=true
+corrected_readback=passed
+managed leader=2432481 worker=2432483 leaf=2432485 pgid=2432481 absent=true
+sentinel pid=2432468 pgid=2432468 absent=true
