@@ -1,0 +1,1 @@
+wasm_target=not installed for Rust 1.77.2; sys-only, net-only and combined sys+net WASM gates unverified without installation

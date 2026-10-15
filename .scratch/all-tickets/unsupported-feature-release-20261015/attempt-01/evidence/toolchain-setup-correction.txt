@@ -1,0 +1,7 @@
+Toolchain inspection correction (2026-10-15)
+
+The accepted scoped compiler run used the preexisting project toolchain directly from /home/Daniel/.rustup/toolchains/1.77.2-x86_64-unknown-linux-gnu. That toolchain was present before this package and its direct rustc/cargo versions remain 1.77.2 (25ef9e3d8 / e52e36006).
+
+After the independent review, an inspection command invoked cargo +1.77.2 with root RUSTUP_HOME, creating a separate root-owned Rust 1.77.2 installation at 11:05. It was removed with rustup uninstall. A later rustup target-list inspection against /home/Daniel/.rustup unexpectedly synchronized channel components and another root-owned Rust 1.77.2 installation appeared at 11:09. No rustup process remained; only that exact root toolchain was removed. Its path is absent, the preexisting /home/Daniel toolchain remains present, and direct binary version checks still report the expected versions. No recently modified files remained in /root/.rustup/downloads.
+
+The toolchain-install assertion in combined-review.md was written before these inspection incidents and is superseded by this correction. The incidents occurred after the compiler gates and review, did not participate in or alter the scoped test run, and did not modify the project toolchain used by that run. No further rustup or cargo +toolchain inspection was used.

@@ -1,0 +1,13 @@
+{
+  "project_revision": "a98f5ce47c152900002904a45b060405ee722abb",
+  "project_id": "rhai",
+  "session_id": "release-gates-20261015-01",
+  "toolchain": "Rust/Cargo 1.77.2 already installed",
+  "target": "x86_64-unknown-linux-gnu",
+  "features": ["sys,no_std", "net,no_std", "sys,net,no_std", "sys,no_object"],
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "source_copy": "private under AGENT_RUNTIME_DIR",
+  "cargo_jobs": 1,
+  "wasm_target": "not installed; no installation attempted",
+  "limits": "single run_scoped invocation, 600-second wall bound"
+}

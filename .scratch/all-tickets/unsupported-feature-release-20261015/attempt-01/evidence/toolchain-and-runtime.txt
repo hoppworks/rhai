@@ -1,0 +1,5 @@
+cargo=cargo 1.77.2 (e52e36006 2024-03-26)
+rustc=rustc 1.77.2 (25ef9e3d8 2024-04-09)
+target=x86_64-unknown-linux-gnu
+jobs=1
+runtime=/root/.local/share/agent-builds/rhai/release-gates-20261015-01/agent-build-zwaa_glr

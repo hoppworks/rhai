@@ -1,0 +1,4491 @@
+   Compiling rhai v1.26.1 (/var/roothome/.local/share/agent-builds/rhai/release-gates-20261015-01/agent-build-zwaa_glr/source)
+error: the `net` feature requires `std`; it cannot be combined with `no_std`
+  --> src/packages/net/mod.rs:36:1
+   |
+36 | compile_error!("the `net` feature requires `std`; it cannot be combined with `no_std`");
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error: the `sys` feature requires `std`; it cannot be combined with `no_std`
+  --> src/packages/sys/mod.rs:31:1
+   |
+31 | compile_error!("the `sys` feature requires `std`; it cannot be combined with `no_std`");
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+error[E0432]: unresolved import `std::net`
+ --> src/packages/net/config.rs:3:10
+  |
+3 | use std::net::SocketAddr;
+  |          ^^^ could not find `net` in `std`
+
+error[E0432]: unresolved import `std::error`
+ --> src/packages/net/error.rs:5:10
+  |
+5 | use std::error::Error;
+  |          ^^^^^ could not find `error` in `std`
+
+error[E0432]: unresolved import `std::io`
+ --> src/packages/net/error.rs:7:5
+  |
+7 | use std::io;
+  |     ^^^^^^^ no `io` in the root
+  |
+help: a similar name exists in the module
+  |
+7 | use std::i8;
+  |          ~~
+help: consider importing one of these items instead
+  |
+7 | use core::io;
+  |     ~~~~~~~~
+7 | use std::io;
+  |     ~~~~~~~
+7 | use std::os::unix::io;
+  |     ~~~~~~~~~~~~~~~~~
+
+error[E0432]: unresolved import `std::io`
+ --> src/packages/net/listener.rs:6:5
+  |
+6 | use std::io;
+  |     ^^^^^^^ no `io` in the root
+  |
+help: a similar name exists in the module
+  |
+6 | use std::i8;
+  |          ~~
+help: consider importing one of these items instead
+  |
+6 | use core::io;
+  |     ~~~~~~~~
+6 | use std::io;
+  |     ~~~~~~~
+6 | use std::os::unix::io;
+  |     ~~~~~~~~~~~~~~~~~
+
+error[E0432]: unresolved import `std::net`
+ --> src/packages/net/listener.rs:7:10
+  |
+7 | use std::net::{IpAddr, SocketAddr, TcpListener};
+  |          ^^^ could not find `net` in `std`
+
+error[E0432]: unresolved import `std::sync::Mutex`
+   --> src/packages/net/listener.rs:9:22
+    |
+9   | use std::sync::{Arc, Mutex};
+    |                      ^^^^^ no `Mutex` in `generated::sync`
+    |
+    = help: consider importing this struct instead:
+            std::sync::Mutex
+note: found an item that was configured out
+   --> /root/.local/share/agent-builds/rhai/release-gates-20261015-01/agent-build-zwaa_glr/cargo-home/git/checkouts/no-std-compat-f7c23488b2e6b399/47a5dfb/src/generated.rs:177:75
+    |
+177 |     #[cfg(all(feature = "alloc", feature = "compat_sync"))] pub use spin::Mutex;
+    |                                                                           ^^^^^
+
+error[E0432]: unresolved import `std::time::Instant`
+  --> src/packages/net/listener.rs:10:27
+   |
+10 | use std::time::{Duration, Instant};
+   |                           ^^^^^^^ no `Instant` in `generated::time`
+   |
+   = help: consider importing one of these items instead:
+           cap_std::time::Instant
+           std::time::Instant
+
+error[E0432]: unresolved imports `std::io`, `std::io`
+ --> src/packages/net/stream.rs:5:10
+  |
+5 | use std::io::{self, Read, Write};
+  |          ^^   ^^^^ no `io` in the root
+  |          |
+  |          could not find `io` in `std`
+  |          help: a similar name exists in the module: `i8`
+  |
+  = help: consider importing one of these items instead:
+          core::io
+          std::io
+          std::os::unix::io
+
+error[E0432]: unresolved import `std::net`
+ --> src/packages/net/stream.rs:6:10
+  |
+6 | use std::net::{Shutdown, TcpStream};
+  |          ^^^ could not find `net` in `std`
+
+error[E0432]: unresolved import `std::sync::Mutex`
+   --> src/packages/net/stream.rs:8:22
+    |
+8   | use std::sync::{Arc, Mutex};
+    |                      ^^^^^ no `Mutex` in `generated::sync`
+    |
+    = help: consider importing this struct instead:
+            std::sync::Mutex
+note: found an item that was configured out
+   --> /root/.local/share/agent-builds/rhai/release-gates-20261015-01/agent-build-zwaa_glr/cargo-home/git/checkouts/no-std-compat-f7c23488b2e6b399/47a5dfb/src/generated.rs:177:75
+    |
+177 |     #[cfg(all(feature = "alloc", feature = "compat_sync"))] pub use spin::Mutex;
+    |                                                                           ^^^^^
+
+error[E0432]: unresolved import `std::time::Instant`
+ --> src/packages/net/stream.rs:9:27
+  |
+9 | use std::time::{Duration, Instant};
+  |                           ^^^^^^^ no `Instant` in `generated::time`
+  |
+  = help: consider importing one of these items instead:
+          cap_std::time::Instant
+          std::time::Instant
+
+error[E0432]: unresolved import `std::net`
+  --> src/packages/net/mod.rs:56:10
+   |
+56 | use std::net::{IpAddr, SocketAddr, TcpStream};
+   |          ^^^ could not find `net` in `std`
+
+error[E0432]: unresolved import `std::path`
+ --> src/packages/sys/config.rs:3:10
+  |
+3 | use std::path::{Path, PathBuf};
+  |          ^^^^ could not find `path` in `std`
+
+error[E0432]: unresolved import `std::error`
+ --> src/packages/sys/error.rs:6:10
+  |
+6 | use std::error::Error;
+  |          ^^^^^ could not find `error` in `std`
+
+error[E0432]: unresolved import `std::io`
+ --> src/packages/sys/error.rs:8:5
+  |
+8 | use std::io;
+  |     ^^^^^^^ no `io` in the root
+  |
+help: a similar name exists in the module
+  |
+8 | use std::i8;
+  |          ~~
+help: consider importing one of these items instead
+  |
+8 | use core::io;
+  |     ~~~~~~~~
+8 | use std::io;
+  |     ~~~~~~~
+8 | use std::os::unix::io;
+  |     ~~~~~~~~~~~~~~~~~
+
+error[E0432]: unresolved imports `std::io`, `std::io`
+  --> src/packages/sys/fs.rs:18:10
+   |
+18 | use std::io::{self, Read, Seek, SeekFrom, Write};
+   |          ^^   ^^^^ no `io` in the root
+   |          |
+   |          could not find `io` in `std`
+   |          help: a similar name exists in the module: `i8`
+   |
+   = help: consider importing one of these items instead:
+           core::io
+           std::io
+           std::os::unix::io
+
+error[E0432]: unresolved import `std::path`
+  --> src/packages/sys/fs.rs:19:10
+   |
+19 | use std::path::{Component, Path, PathBuf};
+   |          ^^^^ could not find `path` in `std`
+
+error[E0432]: unresolved import `std::io`
+ --> src/packages/sys/process.rs:4:5
+  |
+4 | use std::io;
+  |     ^^^^^^^ no `io` in the root
+  |
+help: a similar name exists in the module
+  |
+4 | use std::i8;
+  |          ~~
+help: consider importing one of these items instead
+  |
+4 | use core::io;
+  |     ~~~~~~~~
+4 | use std::io;
+  |     ~~~~~~~
+4 | use std::os::unix::io;
+  |     ~~~~~~~~~~~~~~~~~
+
+error[E0432]: unresolved import `std::ffi::OsStr`
+ --> src/packages/sys/process/unix.rs:7:5
+  |
+7 | use std::ffi::OsStr;
+  |     ^^^^^^^^^^^^^^^ no `OsStr` in `generated::ffi`
+  |
+help: consider importing this struct instead
+  |
+7 | use std::ffi::OsStr;
+  |     ~~~~~~~~~~~~~~~
+
+error[E0433]: failed to resolve: could not find `os` in `std`
+  --> src/packages/sys/process/unix.rs:10:10
+   |
+10 | use std::os::fd::{AsRawFd, RawFd};
+   |          ^^ could not find `os` in `std`
+
+error[E0433]: failed to resolve: could not find `os` in `std`
+  --> src/packages/sys/process/unix.rs:11:10
+   |
+11 | use std::os::unix::process::{CommandExt, ExitStatusExt};
+   |          ^^ could not find `os` in `std`
+
+error[E0432]: unresolved imports `std::io`, `std::io`
+ --> src/packages/sys/process/unix.rs:8:10
+  |
+8 | use std::io::{self, Read, Write};
+  |          ^^   ^^^^ no `io` in the root
+  |          |
+  |          could not find `io` in `std`
+  |          help: a similar name exists in the module: `i8`
+  |
+  = help: consider importing one of these items instead:
+          core::io
+          crate::packages::sys::process::io
+          std::io
+          std::os::unix::io
+
+error[E0432]: unresolved import `std::process`
+  --> src/packages/sys/process/unix.rs:12:10
+   |
+12 | use std::process::{Child as OsChild, ChildStderr, ChildStdin, ChildStdout, Command, Stdio};
+   |          ^^^^^^^ could not find `process` in `std`
+
+error[E0432]: unresolved imports `std::sync::Condvar`, `std::sync::Mutex`
+   --> src/packages/sys/process/unix.rs:14:22
+    |
+14  | use std::sync::{Arc, Condvar, Mutex};
+    |                      ^^^^^^^  ^^^^^ no `Mutex` in `generated::sync`
+    |                      |
+    |                      no `Condvar` in `generated::sync`
+    |
+    = help: consider importing this struct instead:
+            std::sync::Condvar
+    = help: consider importing this struct instead:
+            std::sync::Mutex
+note: found an item that was configured out
+   --> /root/.local/share/agent-builds/rhai/release-gates-20261015-01/agent-build-zwaa_glr/cargo-home/git/checkouts/no-std-compat-f7c23488b2e6b399/47a5dfb/src/generated.rs:177:75
+    |
+177 |     #[cfg(all(feature = "alloc", feature = "compat_sync"))] pub use spin::Mutex;
+    |                                                                           ^^^^^
+
+error[E0432]: unresolved imports `std::thread`, `std::thread`
+  --> src/packages/sys/process/unix.rs:15:10
+   |
+15 | use std::thread::{self, JoinHandle};
+   |          ^^^^^^   ^^^^ no `thread` in the root
+   |          |
+   |          could not find `thread` in `std`
+   |
+   = help: consider importing one of these items instead:
+           std::os::unix::thread
+           std::thread
+
+error[E0432]: unresolved import `std::time::Instant`
+  --> src/packages/sys/process/unix.rs:16:27
+   |
+16 | use std::time::{Duration, Instant};
+   |                           ^^^^^^^ no `Instant` in `generated::time`
+   |
+   = help: consider importing one of these items instead:
+           cap_std::time::Instant
+           std::time::Instant
+
+error: cannot find macro `format` in this scope
+   --> src/packages/sys/process.rs:298:33
+    |
+298 |                     .map(|kind| format!("{kind:?}").into())
+    |                                 ^^^^^^
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::format;
+    |
+3   + use crate::format;
+    |
+3   + use no_std_compat::prelude::v1::format;
+    |
+3   + use std::format;
+    |
+
+error: cannot find macro `vec` in this scope
+    --> src/packages/sys/process/unix.rs:3186:27
+     |
+3186 |     let mut diagnostics = vec![];
+     |                           ^^^
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::vec;
+     |
+2    + use crate::vec;
+     |
+2    + use no_std_compat::prelude::v1::vec;
+     |
+2    + use std::vec;
+     |
+
+error: cannot find macro `vec` in this scope
+    --> src/packages/sys/process/unix.rs:3162:9
+     |
+3162 |         vec![],
+     |         ^^^
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::vec;
+     |
+2    + use crate::vec;
+     |
+2    + use no_std_compat::prelude::v1::vec;
+     |
+2    + use std::vec;
+     |
+
+error: cannot find macro `format` in this scope
+    --> src/packages/sys/process/unix.rs:3126:39
+     |
+3126 |                 ProcessCause::Timeout(format!("process `{program}` exceeded deadline")),
+     |                                       ^^^^^^
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::format;
+     |
+2    + use crate::format;
+     |
+2    + use no_std_compat::prelude::v1::format;
+     |
+2    + use std::format;
+     |
+
+error: cannot find macro `format` in this scope
+    --> src/packages/sys/process/unix.rs:3049:51
+     |
+3049 |                         ProcessCause::OutputLimit(format!(
+     |                                                   ^^^^^^
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::format;
+     |
+2    + use crate::format;
+     |
+2    + use no_std_compat::prelude::v1::format;
+     |
+2    + use std::format;
+     |
+
+error: cannot find macro `format` in this scope
+    --> src/packages/sys/process/unix.rs:3004:51
+     |
+3004 |                         ProcessCause::OutputLimit(format!(
+     |                                                   ^^^^^^
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::format;
+     |
+2    + use crate::format;
+     |
+2    + use no_std_compat::prelude::v1::format;
+     |
+2    + use std::format;
+     |
+
+error: cannot find macro `vec` in this scope
+    --> src/packages/sys/process/unix.rs:2712:17
+     |
+2712 |                 vec![],
+     |                 ^^^
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::vec;
+     |
+2    + use crate::vec;
+     |
+2    + use no_std_compat::prelude::v1::vec;
+     |
+2    + use std::vec;
+     |
+
+error: cannot find macro `vec` in this scope
+    --> src/packages/sys/process/unix.rs:2711:17
+     |
+2711 |                 vec![],
+     |                 ^^^
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::vec;
+     |
+2    + use crate::vec;
+     |
+2    + use no_std_compat::prelude::v1::vec;
+     |
+2    + use std::vec;
+     |
+
+error: cannot find macro `format` in this scope
+    --> src/packages/sys/process/unix.rs:2562:50
+     |
+2562 |                 cause: ProcessCause::OutputLimit(format!(
+     |                                                  ^^^^^^
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::format;
+     |
+2    + use crate::format;
+     |
+2    + use no_std_compat::prelude::v1::format;
+     |
+2    + use std::format;
+     |
+
+error: cannot find macro `format` in this scope
+    --> src/packages/sys/process/unix.rs:2428:37
+     |
+2428 |         return Err(SysError::Denied(format!("program `{program}` is not allowed")).into());
+     |                                     ^^^^^^
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::format;
+     |
+2    + use crate::format;
+     |
+2    + use no_std_compat::prelude::v1::format;
+     |
+2    + use std::format;
+     |
+
+error: cannot find macro `format` in this scope
+    --> src/packages/sys/process/unix.rs:2276:37
+     |
+2276 |         return Err(SysError::Denied(format!("program `{program}` is not allowed")).into());
+     |                                     ^^^^^^
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::format;
+     |
+2    + use crate::format;
+     |
+2    + use no_std_compat::prelude::v1::format;
+     |
+2    + use std::format;
+     |
+
+error: cannot find macro `vec` in this scope
+    --> src/packages/sys/process/unix.rs:2162:17
+     |
+2162 |         None => vec![],
+     |                 ^^^
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::vec;
+     |
+2    + use crate::vec;
+     |
+2    + use no_std_compat::prelude::v1::vec;
+     |
+2    + use std::vec;
+     |
+
+error: cannot find macro `vec` in this scope
+    --> src/packages/sys/process/unix.rs:2145:17
+     |
+2145 |         None => vec![],
+     |                 ^^^
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::vec;
+     |
+2    + use crate::vec;
+     |
+2    + use no_std_compat::prelude::v1::vec;
+     |
+2    + use std::vec;
+     |
+
+error: cannot find macro `format` in this scope
+    --> src/packages/sys/process/unix.rs:2131:42
+     |
+2131 |                         SysError::Denied(format!("process option `{key}` must be a string")).into()
+     |                                          ^^^^^^
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::format;
+     |
+2    + use crate::format;
+     |
+2    + use no_std_compat::prelude::v1::format;
+     |
+2    + use std::format;
+     |
+
+error: cannot find macro `format` in this scope
+    --> src/packages/sys/process/unix.rs:2121:41
+     |
+2121 |             return Err(SysError::Denied(format!("unknown process option `{key}`")).into());
+     |                                         ^^^^^^
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::format;
+     |
+2    + use crate::format;
+     |
+2    + use no_std_compat::prelude::v1::format;
+     |
+2    + use std::format;
+     |
+
+error: cannot find macro `vec` in this scope
+    --> src/packages/sys/process/unix.rs:2116:21
+     |
+2116 |     let mut known = vec!["cwd", "env", "env_clear", "stdin", "timeout", "max_output"];
+     |                     ^^^
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::vec;
+     |
+2    + use crate::vec;
+     |
+2    + use no_std_compat::prelude::v1::vec;
+     |
+2    + use std::vec;
+     |
+
+error: cannot find macro `format` in this scope
+    --> src/packages/sys/process/unix.rs:2027:54
+     |
+2027 |                     cause: ProcessCause::OutputLimit(format!(
+     |                                                      ^^^^^^
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::format;
+     |
+2    + use crate::format;
+     |
+2    + use no_std_compat::prelude::v1::format;
+     |
+2    + use std::format;
+     |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/sys/process/unix.rs:580:66
+    |
+580 |                     state.error = Some(ProcessCause::OutputLimit(format!(
+    |                                                                  ^^^^^^
+    |
+help: consider importing one of these items
+    |
+2   + use alloc::format;
+    |
+2   + use crate::format;
+    |
+2   + use no_std_compat::prelude::v1::format;
+    |
+2   + use std::format;
+    |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/sys/process/unix.rs:545:66
+    |
+545 |                     state.error = Some(ProcessCause::OutputLimit(format!(
+    |                                                                  ^^^^^^
+    |
+help: consider importing one of these items
+    |
+2   + use alloc::format;
+    |
+2   + use crate::format;
+    |
+2   + use no_std_compat::prelude::v1::format;
+    |
+2   + use std::format;
+    |
+
+error: cannot find macro `format` in this scope
+    --> src/packages/sys/fs.rs:1065:45
+     |
+1065 |                 return Err(SysError::Denied(format!(
+     |                                             ^^^^^^
+     |
+help: consider importing one of these items
+     |
+12   + use alloc::format;
+     |
+12   + use crate::format;
+     |
+12   + use no_std_compat::prelude::v1::format;
+     |
+12   + use std::format;
+     |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/sys/fs.rs:342:40
+    |
+342 |         .map_err(|s| SysError::NotUtf8(format!("{what} {s:?}")))
+    |                                        ^^^^^^
+    |
+help: consider importing one of these items
+    |
+12  + use alloc::format;
+    |
+12  + use crate::format;
+    |
+12  + use no_std_compat::prelude::v1::format;
+    |
+12  + use std::format;
+    |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/sys/fs.rs:334:26
+    |
+334 |         SysError::Denied(format!("path `{path}` escapes its root"))
+    |                          ^^^^^^
+    |
+help: consider importing one of these items
+    |
+12  + use alloc::format;
+    |
+12  + use crate::format;
+    |
+12  + use no_std_compat::prelude::v1::format;
+    |
+12  + use std::format;
+    |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/sys/fs.rs:284:49
+    |
+284 |                     return Err(SysError::Denied(format!(
+    |                                                 ^^^^^^
+    |
+help: consider importing one of these items
+    |
+12  + use alloc::format;
+    |
+12  + use crate::format;
+    |
+12  + use no_std_compat::prelude::v1::format;
+    |
+12  + use std::format;
+    |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/sys/fs.rs:266:53
+    |
+266 |                         return Err(SysError::Denied(format!(
+    |                                                     ^^^^^^
+    |
+help: consider importing one of these items
+    |
+12  + use alloc::format;
+    |
+12  + use crate::format;
+    |
+12  + use no_std_compat::prelude::v1::format;
+    |
+12  + use std::format;
+    |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/sys/fs.rs:231:49
+    |
+231 |                     return Err(SysError::Denied(format!(
+    |                                                 ^^^^^^
+    |
+help: consider importing one of these items
+    |
+12  + use alloc::format;
+    |
+12  + use crate::format;
+    |
+12  + use no_std_compat::prelude::v1::format;
+    |
+12  + use std::format;
+    |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/sys/fs.rs:217:45
+    |
+217 |                 return Err(SysError::Denied(format!("path `{path}` escapes its root")));
+    |                                             ^^^^^^
+    |
+help: consider importing one of these items
+    |
+12  + use alloc::format;
+    |
+12  + use crate::format;
+    |
+12  + use no_std_compat::prelude::v1::format;
+    |
+12  + use std::format;
+    |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/sys/fs.rs:213:49
+    |
+213 |                     return Err(SysError::Denied(format!("path `{path}` escapes its root")));
+    |                                                 ^^^^^^
+    |
+help: consider importing one of these items
+    |
+12  + use alloc::format;
+    |
+12  + use crate::format;
+    |
+12  + use no_std_compat::prelude::v1::format;
+    |
+12  + use std::format;
+    |
+
+error: cannot find macro `vec` in this scope
+   --> src/packages/sys/fs.rs:180:23
+    |
+180 |     let mut aliases = vec![given.to_path_buf(), canonical.to_path_buf()];
+    |                       ^^^
+    |
+help: consider importing one of these items
+    |
+12  + use alloc::vec;
+    |
+12  + use crate::vec;
+    |
+12  + use no_std_compat::prelude::v1::vec;
+    |
+12  + use std::vec;
+    |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/sys/error.rs:168:9
+    |
+168 |         format!("{err:?}").into()
+    |         ^^^^^^
+    |
+help: consider importing one of these items
+    |
+94  +     use alloc::format;
+    |
+94  +     use crate::format;
+    |
+94  +     use no_std_compat::prelude::v1::format;
+    |
+94  +     use std::format;
+    |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/sys/error.rs:132:29
+    |
+132 |                 .map(|kind| format!("{kind:?}").into())
+    |                             ^^^^^^
+    |
+help: consider importing one of these items
+    |
+94  +     use alloc::format;
+    |
+94  +     use crate::format;
+    |
+94  +     use no_std_compat::prelude::v1::format;
+    |
+94  +     use std::format;
+    |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/sys/error.rs:129:42
+    |
+129 |             SysError::Io { kind, .. } => format!("{kind:?}").into(),
+    |                                          ^^^^^^
+    |
+help: consider importing one of these items
+    |
+94  +     use alloc::format;
+    |
+94  +     use crate::format;
+    |
+94  +     use no_std_compat::prelude::v1::format;
+    |
+94  +     use std::format;
+    |
+
+error: cannot find macro `format` in this scope
+  --> src/packages/sys/env.rs:73:44
+   |
+73 |             .map_err(|s| SysError::NotUtf8(format!("current directory {s:?}")).into())
+   |                                            ^^^^^^
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::format;
+   |
+3  + use crate::format;
+   |
+3  + use no_std_compat::prelude::v1::format;
+   |
+3  + use std::format;
+   |
+
+error: cannot find macro `vec` in this scope
+   --> src/packages/sys/config.rs:186:69
+    |
+186 |             FsPolicy::Unrestricted(..) => self.fs = FsPolicy::Roots(vec![root]),
+    |                                                                     ^^^
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::vec;
+    |
+3   + use crate::vec;
+    |
+3   + use no_std_compat::prelude::v1::vec;
+    |
+3   + use std::vec;
+    |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/net/mod.rs:199:18
+    |
+199 |     let target = format!("{address}:{port}");
+    |                  ^^^^^^
+    |
+help: consider importing one of these items
+    |
+46  + use alloc::format;
+    |
+46  + use crate::format;
+    |
+46  + use no_std_compat::prelude::v1::format;
+    |
+46  + use std::format;
+    |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/net/mod.rs:113:17
+    |
+113 |                 format!("{:?}", config.write_timeout),
+    |                 ^^^^^^
+    |
+help: consider importing one of these items
+    |
+46  + use alloc::format;
+    |
+46  + use crate::format;
+    |
+46  + use no_std_compat::prelude::v1::format;
+    |
+46  + use std::format;
+    |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/net/mod.rs:102:17
+    |
+102 |                 format!("{:?}", config.read_timeout),
+    |                 ^^^^^^
+    |
+help: consider importing one of these items
+    |
+46  + use alloc::format;
+    |
+46  + use crate::format;
+    |
+46  + use no_std_compat::prelude::v1::format;
+    |
+46  + use std::format;
+    |
+
+error: cannot find macro `format` in this scope
+  --> src/packages/net/mod.rs:91:17
+   |
+91 |                 format!("{:?}", config.accept_timeout),
+   |                 ^^^^^^
+   |
+help: consider importing one of these items
+   |
+46 + use alloc::format;
+   |
+46 + use crate::format;
+   |
+46 + use no_std_compat::prelude::v1::format;
+   |
+46 + use std::format;
+   |
+
+error: cannot find macro `format` in this scope
+  --> src/packages/net/mod.rs:80:17
+   |
+80 |                 format!("{:?}", config.connect_timeout),
+   |                 ^^^^^^
+   |
+help: consider importing one of these items
+   |
+46 + use alloc::format;
+   |
+46 + use crate::format;
+   |
+46 + use no_std_compat::prelude::v1::format;
+   |
+46 + use std::format;
+   |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/net/stream.rs:188:17
+    |
+188 |                 format!("write input exceeds the {limit}-byte per-call limit"),
+    |                 ^^^^^^
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::format;
+    |
+3   + use crate::format;
+    |
+3   + use no_std_compat::prelude::v1::format;
+    |
+3   + use std::format;
+    |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/net/listener.rs:154:18
+    |
+154 |     let target = format!("{address}:{port}");
+    |                  ^^^^^^
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::format;
+    |
+3   + use crate::format;
+    |
+3   + use no_std_compat::prelude::v1::format;
+    |
+3   + use std::format;
+    |
+
+error: cannot find macro `format` in this scope
+   --> src/packages/net/error.rs:150:25
+    |
+150 |             .map(|kind| format!("{kind:?}").into())
+    |                         ^^^^^^
+    |
+help: consider importing one of these items
+    |
+134 +     use alloc::format;
+    |
+134 +     use crate::format;
+    |
+134 +     use no_std_compat::prelude::v1::format;
+    |
+134 +     use std::format;
+    |
+
+error[E0412]: cannot find type `Vec` in this scope
+ --> src/packages/net/config.rs:9:25
+  |
+9 |     pub(crate) connect: Vec<SocketAddr>,
+  |                         ^^^ not found in this scope
+  |
+help: consider importing one of these items
+  |
+3 + use alloc::vec::Vec;
+  |
+3 + use crate::Vec;
+  |
+3 + use no_std_compat::vec::Vec;
+  |
+3 + use std::vec::Vec;
+  |
+
+error[E0412]: cannot find type `Vec` in this scope
+  --> src/packages/net/config.rs:10:24
+   |
+10 |     pub(crate) listen: Vec<SocketAddr>,
+   |                        ^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::vec::Vec;
+   |
+3  + use crate::Vec;
+   |
+3  + use no_std_compat::vec::Vec;
+   |
+3  + use std::vec::Vec;
+   |
+
+error[E0433]: failed to resolve: use of undeclared type `Vec`
+  --> src/packages/net/config.rs:23:22
+   |
+23 |             connect: Vec::new(),
+   |                      ^^^ use of undeclared type `Vec`
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::vec::Vec;
+   |
+3  + use crate::Vec;
+   |
+3  + use no_std_compat::vec::Vec;
+   |
+3  + use std::vec::Vec;
+   |
+
+error[E0433]: failed to resolve: use of undeclared type `Vec`
+  --> src/packages/net/config.rs:24:21
+   |
+24 |             listen: Vec::new(),
+   |                     ^^^ use of undeclared type `Vec`
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::vec::Vec;
+   |
+3  + use crate::Vec;
+   |
+3  + use no_std_compat::vec::Vec;
+   |
+3  + use std::vec::Vec;
+   |
+
+error[E0412]: cannot find type `String` in this scope
+  --> src/packages/net/error.rs:13:14
+   |
+13 |     message: String,
+   |              ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::string::String;
+   |
+3  + use crate::String;
+   |
+3  + use no_std_compat::string::String;
+   |
+3  + use smartstring::alias::String;
+   |
+     and 1 other candidate
+
+error[E0412]: cannot find type `String` in this scope
+  --> src/packages/net/error.rs:16:13
+   |
+16 |     target: String,
+   |             ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::string::String;
+   |
+3  + use crate::String;
+   |
+3  + use no_std_compat::string::String;
+   |
+3  + use smartstring::alias::String;
+   |
+     and 1 other candidate
+
+error[E0412]: cannot find type `String` in this scope
+  --> src/packages/net/error.rs:23:27
+   |
+23 |         target: impl Into<String>,
+   |                           ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::string::String;
+   |
+3  + use crate::String;
+   |
+3  + use no_std_compat::string::String;
+   |
+3  + use smartstring::alias::String;
+   |
+     and 1 other candidate
+
+error[E0412]: cannot find type `String` in this scope
+  --> src/packages/net/error.rs:24:28
+   |
+24 |         message: impl Into<String>,
+   |                            ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::string::String;
+   |
+3  + use crate::String;
+   |
+3  + use no_std_compat::string::String;
+   |
+3  + use smartstring::alias::String;
+   |
+     and 1 other candidate
+
+error[E0412]: cannot find type `String` in this scope
+  --> src/packages/net/error.rs:38:27
+   |
+38 |         target: impl Into<String>,
+   |                           ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::string::String;
+   |
+3  + use crate::String;
+   |
+3  + use no_std_compat::string::String;
+   |
+3  + use smartstring::alias::String;
+   |
+     and 1 other candidate
+
+error[E0412]: cannot find type `String` in this scope
+  --> src/packages/net/error.rs:39:28
+   |
+39 |         message: impl Into<String>,
+   |                            ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::string::String;
+   |
+3  + use crate::String;
+   |
+3  + use no_std_compat::string::String;
+   |
+3  + use smartstring::alias::String;
+   |
+     and 1 other candidate
+
+error[E0412]: cannot find type `String` in this scope
+  --> src/packages/net/error.rs:53:27
+   |
+53 |         target: impl Into<String>,
+   |                           ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::string::String;
+   |
+3  + use crate::String;
+   |
+3  + use no_std_compat::string::String;
+   |
+3  + use smartstring::alias::String;
+   |
+     and 1 other candidate
+
+error[E0412]: cannot find type `String` in this scope
+  --> src/packages/net/error.rs:54:28
+   |
+54 |         message: impl Into<String>,
+   |                            ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::string::String;
+   |
+3  + use crate::String;
+   |
+3  + use no_std_compat::string::String;
+   |
+3  + use smartstring::alias::String;
+   |
+     and 1 other candidate
+
+error[E0412]: cannot find type `String` in this scope
+  --> src/packages/net/error.rs:66:58
+   |
+66 |     pub(crate) fn io(op: &'static str, target: impl Into<String>, source: &io::Error) -> Self {
+   |                                                          ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::string::String;
+   |
+3  + use crate::String;
+   |
+3  + use no_std_compat::string::String;
+   |
+3  + use smartstring::alias::String;
+   |
+     and 1 other candidate
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/error.rs:198:25
+    |
+198 | impl From<NetError> for Box<EvalAltResult> {
+    |                         ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::boxed::Box;
+    |
+3   + use crate::Box;
+    |
+3   + use no_std_compat::prelude::v1::Box;
+    |
+3   + use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `String` in this scope
+  --> src/packages/net/listener.rs:48:40
+   |
+48 |     fn local_addr(&mut self) -> Result<String, Box<EvalAltResult>> {
+   |                                        ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::string::String;
+   |
+3  + use crate::String;
+   |
+3  + use no_std_compat::string::String;
+   |
+3  + use smartstring::alias::String;
+   |
+     and 1 other candidate
+
+error[E0412]: cannot find type `Box` in this scope
+  --> src/packages/net/listener.rs:48:48
+   |
+48 |     fn local_addr(&mut self) -> Result<String, Box<EvalAltResult>> {
+   |                                                ^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::boxed::Box;
+   |
+3  + use crate::Box;
+   |
+3  + use no_std_compat::prelude::v1::Box;
+   |
+3  + use std::boxed::Box;
+   |
+
+error[E0412]: cannot find type `Box` in this scope
+  --> src/packages/net/listener.rs:70:78
+   |
+70 |     fn accept(&mut self, timeout_ms: crate::INT) -> Result<super::NetStream, Box<EvalAltResult>> {
+   |                                                                              ^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::boxed::Box;
+   |
+3  + use crate::Box;
+   |
+3  + use no_std_compat::prelude::v1::Box;
+   |
+3  + use std::boxed::Box;
+   |
+
+error[E0433]: failed to resolve: could not find `thread` in `std`
+   --> src/packages/net/listener.rs:137:26
+    |
+137 |                     std::thread::sleep(remaining.min(Duration::from_millis(5)));
+    |                          ^^^^^^ could not find `thread` in `std`
+    |
+help: consider importing this module
+    |
+3   + use std::thread;
+    |
+help: if you import `thread`, refer to it directly
+    |
+137 -                     std::thread::sleep(remaining.min(Duration::from_millis(5)));
+137 +                     thread::sleep(remaining.min(Duration::from_millis(5)));
+    |
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/listener.rs:153:26
+    |
+153 | ) -> Result<NetListener, Box<EvalAltResult>> {
+    |                          ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::boxed::Box;
+    |
+3   + use crate::Box;
+    |
+3   + use no_std_compat::prelude::v1::Box;
+    |
+3   + use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/listener.rs:204:43
+    |
+204 | fn accept_timeout(address: SocketAddr) -> Box<EvalAltResult> {
+    |                                           ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::boxed::Box;
+    |
+3   + use crate::Box;
+    |
+3   + use no_std_compat::prelude::v1::Box;
+    |
+3   + use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/listener.rs:218:6
+    |
+218 | ) -> Box<EvalAltResult> {
+    |      ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::boxed::Box;
+    |
+3   + use crate::Box;
+    |
+3   + use no_std_compat::prelude::v1::Box;
+    |
+3   + use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `String` in this scope
+   --> src/packages/net/listener.rs:244:17
+    |
+244 |     ) -> Result<String, Box<crate::EvalAltResult>> {
+    |                 ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+228 +     use alloc::string::String;
+    |
+228 +     use crate::String;
+    |
+228 +     use no_std_compat::string::String;
+    |
+228 +     use smartstring::alias::String;
+    |
+      and 1 other candidate
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/listener.rs:244:25
+    |
+244 |     ) -> Result<String, Box<crate::EvalAltResult>> {
+    |                         ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+228 +     use alloc::boxed::Box;
+    |
+228 +     use crate::Box;
+    |
+228 +     use no_std_compat::prelude::v1::Box;
+    |
+228 +     use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/listener.rs:254:42
+    |
+254 |     ) -> Result<super::super::NetStream, Box<crate::EvalAltResult>> {
+    |                                          ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+228 +     use alloc::boxed::Box;
+    |
+228 +     use crate::Box;
+    |
+228 +     use no_std_compat::prelude::v1::Box;
+    |
+228 +     use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `String` in this scope
+  --> src/packages/net/stream.rs:45:13
+   |
+45 |     target: String,
+   |             ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::string::String;
+   |
+3  + use crate::String;
+   |
+3  + use no_std_compat::string::String;
+   |
+3  + use smartstring::alias::String;
+   |
+     and 1 other candidate
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:105:66
+    |
+105 |     fn socket(&self, op: &'static str) -> Result<Arc<TcpStream>, Box<EvalAltResult>> {
+    |                                                                  ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::boxed::Box;
+    |
+3   + use crate::Box;
+    |
+3   + use no_std_compat::prelude::v1::Box;
+    |
+3   + use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:137:77
+    |
+137 |     fn shutdown(&self, direction: Shutdown, op: &'static str) -> Result<(), Box<EvalAltResult>> {
+    |                                                                             ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::boxed::Box;
+    |
+3   + use crate::Box;
+    |
+3   + use no_std_compat::prelude::v1::Box;
+    |
+3   + use std::boxed::Box;
+    |
+
+error[E0433]: failed to resolve: use of undeclared type `Box`
+   --> src/packages/net/stream.rs:153:13
+    |
+153 |             Box::<EvalAltResult>::from(super::NetError::io(op, self.0.target.clone(), &error))
+    |             ^^^ use of undeclared type `Box`
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::boxed::Box;
+    |
+3   + use crate::Box;
+    |
+3   + use no_std_compat::prelude::v1::Box;
+    |
+3   + use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:166:29
+    |
+166 |     ) -> Result<crate::INT, Box<EvalAltResult>> {
+    |                             ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::boxed::Box;
+    |
+3   + use crate::Box;
+    |
+3   + use no_std_compat::prelude::v1::Box;
+    |
+3   + use std::boxed::Box;
+    |
+
+error[E0433]: failed to resolve: could not find `thread` in `std`
+   --> src/packages/net/stream.rs:278:26
+    |
+278 |                     std::thread::sleep(remaining.min(MAX_POLL_INTERVAL));
+    |                          ^^^^^^ could not find `thread` in `std`
+    |
+help: consider importing this module
+    |
+3   + use std::thread;
+    |
+help: if you import `thread`, refer to it directly
+    |
+278 -                     std::thread::sleep(remaining.min(MAX_POLL_INTERVAL));
+278 +                     thread::sleep(remaining.min(MAX_POLL_INTERVAL));
+    |
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:290:78
+    |
+290 |     fn write_timeout_error(&self, op: &'static str, partial_bytes: usize) -> Box<EvalAltResult> {
+    |                                                                              ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::boxed::Box;
+    |
+3   + use crate::Box;
+    |
+3   + use no_std_compat::prelude::v1::Box;
+    |
+3   + use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:306:29
+    |
+306 |     ) -> Result<crate::INT, Box<EvalAltResult>> {
+    |                             ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::boxed::Box;
+    |
+3   + use crate::Box;
+    |
+3   + use no_std_compat::prelude::v1::Box;
+    |
+3   + use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:327:29
+    |
+327 |     ) -> Result<crate::INT, Box<EvalAltResult>> {
+    |                             ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::boxed::Box;
+    |
+3   + use crate::Box;
+    |
+3   + use no_std_compat::prelude::v1::Box;
+    |
+3   + use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `String` in this scope
+   --> src/packages/net/stream.rs:349:39
+    |
+349 |     fn peer_addr(&mut self) -> Result<String, Box<EvalAltResult>> {
+    |                                       ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::string::String;
+    |
+3   + use crate::String;
+    |
+3   + use no_std_compat::string::String;
+    |
+3   + use smartstring::alias::String;
+    |
+      and 1 other candidate
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:349:47
+    |
+349 |     fn peer_addr(&mut self) -> Result<String, Box<EvalAltResult>> {
+    |                                               ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::boxed::Box;
+    |
+3   + use crate::Box;
+    |
+3   + use no_std_compat::prelude::v1::Box;
+    |
+3   + use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `Vec` in this scope
+   --> src/packages/net/stream.rs:363:17
+    |
+363 |     ) -> Result<Vec<u8>, Box<EvalAltResult>> {
+    |                 ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::vec::Vec;
+    |
+3   + use crate::Vec;
+    |
+3   + use no_std_compat::vec::Vec;
+    |
+3   + use std::vec::Vec;
+    |
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:363:26
+    |
+363 |     ) -> Result<Vec<u8>, Box<EvalAltResult>> {
+    |                          ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::boxed::Box;
+    |
+3   + use crate::Box;
+    |
+3   + use no_std_compat::prelude::v1::Box;
+    |
+3   + use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `String` in this scope
+   --> src/packages/net/stream.rs:383:17
+    |
+383 |     ) -> Result<String, Box<EvalAltResult>> {
+    |                 ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::string::String;
+    |
+3   + use crate::String;
+    |
+3   + use no_std_compat::string::String;
+    |
+3   + use smartstring::alias::String;
+    |
+      and 1 other candidate
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:383:25
+    |
+383 |     ) -> Result<String, Box<EvalAltResult>> {
+    |                         ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::boxed::Box;
+    |
+3   + use crate::Box;
+    |
+3   + use no_std_compat::prelude::v1::Box;
+    |
+3   + use std::boxed::Box;
+    |
+
+error[E0433]: failed to resolve: use of undeclared type `String`
+   --> src/packages/net/stream.rs:408:12
+    |
+408 |         Ok(String::from_utf8_lossy(&bytes).into_owned())
+    |            ^^^^^^ use of undeclared type `String`
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::string::String;
+    |
+3   + use crate::String;
+    |
+3   + use no_std_compat::string::String;
+    |
+3   + use smartstring::alias::String;
+    |
+      and 1 other candidate
+
+error[E0412]: cannot find type `Vec` in this scope
+   --> src/packages/net/stream.rs:418:17
+    |
+418 |     ) -> Result<Vec<u8>, Box<EvalAltResult>> {
+    |                 ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::vec::Vec;
+    |
+3   + use crate::Vec;
+    |
+3   + use no_std_compat::vec::Vec;
+    |
+3   + use std::vec::Vec;
+    |
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:418:26
+    |
+418 |     ) -> Result<Vec<u8>, Box<EvalAltResult>> {
+    |                          ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::boxed::Box;
+    |
+3   + use crate::Box;
+    |
+3   + use no_std_compat::prelude::v1::Box;
+    |
+3   + use std::boxed::Box;
+    |
+
+error[E0433]: failed to resolve: use of undeclared type `Vec`
+   --> src/packages/net/stream.rs:428:23
+    |
+428 |             return Ok(Vec::new());
+    |                       ^^^ use of undeclared type `Vec`
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::vec::Vec;
+    |
+3   + use crate::Vec;
+    |
+3   + use no_std_compat::vec::Vec;
+    |
+3   + use std::vec::Vec;
+    |
+
+error[E0433]: failed to resolve: use of undeclared type `Vec`
+   --> src/packages/net/stream.rs:459:23
+    |
+459 |             return Ok(Vec::new());
+    |                       ^^^ use of undeclared type `Vec`
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::vec::Vec;
+    |
+3   + use crate::Vec;
+    |
+3   + use no_std_compat::vec::Vec;
+    |
+3   + use std::vec::Vec;
+    |
+
+error[E0433]: failed to resolve: use of undeclared type `Vec`
+   --> src/packages/net/stream.rs:463:25
+    |
+463 |         let mut bytes = Vec::new();
+    |                         ^^^ use of undeclared type `Vec`
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::vec::Vec;
+    |
+3   + use crate::Vec;
+    |
+3   + use no_std_compat::vec::Vec;
+    |
+3   + use std::vec::Vec;
+    |
+
+error[E0433]: failed to resolve: could not find `thread` in `std`
+   --> src/packages/net/stream.rs:525:26
+    |
+525 |                     std::thread::sleep(remaining.min(MAX_POLL_INTERVAL));
+    |                          ^^^^^^ could not find `thread` in `std`
+    |
+help: consider importing this module
+    |
+3   + use std::thread;
+    |
+help: if you import `thread`, refer to it directly
+    |
+525 -                     std::thread::sleep(remaining.min(MAX_POLL_INTERVAL));
+525 +                     thread::sleep(remaining.min(MAX_POLL_INTERVAL));
+    |
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:537:72
+    |
+537 |     fn timeout_error(&self, op: &'static str, partial_bytes: usize) -> Box<EvalAltResult> {
+    |                                                                        ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::boxed::Box;
+    |
+3   + use crate::Box;
+    |
+3   + use no_std_compat::prelude::v1::Box;
+    |
+3   + use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:583:71
+    |
+583 |     pub fn shutdown_read(stream: &mut super::NetStream) -> Result<(), Box<crate::EvalAltResult>> {
+    |                                                                       ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+575 +     use alloc::boxed::Box;
+    |
+575 +     use crate::Box;
+    |
+575 +     use no_std_compat::prelude::v1::Box;
+    |
+575 +     use std::boxed::Box;
+    |
+
+error[E0433]: failed to resolve: could not find `net` in `std`
+   --> src/packages/net/stream.rs:584:30
+    |
+584 |         stream.shutdown(std::net::Shutdown::Read, "shutdown_read")
+    |                              ^^^ could not find `net` in `std`
+    |
+help: consider importing one of these items
+    |
+575 +     use cap_std::net::Shutdown;
+    |
+575 +     use std::net::Shutdown;
+    |
+help: if you import `Shutdown`, refer to it directly
+    |
+584 -         stream.shutdown(std::net::Shutdown::Read, "shutdown_read")
+584 +         stream.shutdown(Shutdown::Read, "shutdown_read")
+    |
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:589:72
+    |
+589 |     pub fn shutdown_write(stream: &mut super::NetStream) -> Result<(), Box<crate::EvalAltResult>> {
+    |                                                                        ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+575 +     use alloc::boxed::Box;
+    |
+575 +     use crate::Box;
+    |
+575 +     use no_std_compat::prelude::v1::Box;
+    |
+575 +     use std::boxed::Box;
+    |
+
+error[E0433]: failed to resolve: could not find `net` in `std`
+   --> src/packages/net/stream.rs:590:30
+    |
+590 |         stream.shutdown(std::net::Shutdown::Write, "shutdown_write")
+    |                              ^^^ could not find `net` in `std`
+    |
+help: consider importing one of these items
+    |
+575 +     use cap_std::net::Shutdown;
+    |
+575 +     use std::net::Shutdown;
+    |
+help: if you import `Shutdown`, refer to it directly
+    |
+590 -         stream.shutdown(std::net::Shutdown::Write, "shutdown_write")
+590 +         stream.shutdown(Shutdown::Write, "shutdown_write")
+    |
+
+error[E0412]: cannot find type `String` in this scope
+   --> src/packages/net/stream.rs:601:63
+    |
+601 |     pub fn peer_addr(stream: &mut super::NetStream) -> Result<String, Box<crate::EvalAltResult>> {
+    |                                                               ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+575 +     use alloc::string::String;
+    |
+575 +     use crate::String;
+    |
+575 +     use no_std_compat::string::String;
+    |
+575 +     use smartstring::alias::String;
+    |
+      and 1 other candidate
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:601:71
+    |
+601 |     pub fn peer_addr(stream: &mut super::NetStream) -> Result<String, Box<crate::EvalAltResult>> {
+    |                                                                       ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+575 +     use alloc::boxed::Box;
+    |
+575 +     use crate::Box;
+    |
+575 +     use no_std_compat::prelude::v1::Box;
+    |
+575 +     use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:612:29
+    |
+612 |     ) -> Result<crate::INT, Box<crate::EvalAltResult>> {
+    |                             ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+575 +     use alloc::boxed::Box;
+    |
+575 +     use crate::Box;
+    |
+575 +     use no_std_compat::prelude::v1::Box;
+    |
+575 +     use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:628:29
+    |
+628 |     ) -> Result<crate::INT, Box<crate::EvalAltResult>> {
+    |                             ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+575 +     use alloc::boxed::Box;
+    |
+575 +     use crate::Box;
+    |
+575 +     use no_std_compat::prelude::v1::Box;
+    |
+575 +     use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:643:29
+    |
+643 |     ) -> Result<crate::INT, Box<crate::EvalAltResult>> {
+    |                             ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+575 +     use alloc::boxed::Box;
+    |
+575 +     use crate::Box;
+    |
+575 +     use no_std_compat::prelude::v1::Box;
+    |
+575 +     use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:659:29
+    |
+659 |     ) -> Result<crate::INT, Box<crate::EvalAltResult>> {
+    |                             ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+575 +     use alloc::boxed::Box;
+    |
+575 +     use crate::Box;
+    |
+575 +     use no_std_compat::prelude::v1::Box;
+    |
+575 +     use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:675:29
+    |
+675 |     ) -> Result<crate::INT, Box<crate::EvalAltResult>> {
+    |                             ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+575 +     use alloc::boxed::Box;
+    |
+575 +     use crate::Box;
+    |
+575 +     use no_std_compat::prelude::v1::Box;
+    |
+575 +     use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:692:29
+    |
+692 |     ) -> Result<crate::INT, Box<crate::EvalAltResult>> {
+    |                             ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+575 +     use alloc::boxed::Box;
+    |
+575 +     use crate::Box;
+    |
+575 +     use no_std_compat::prelude::v1::Box;
+    |
+575 +     use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:708:29
+    |
+708 |     ) -> Result<crate::INT, Box<crate::EvalAltResult>> {
+    |                             ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+575 +     use alloc::boxed::Box;
+    |
+575 +     use crate::Box;
+    |
+575 +     use no_std_compat::prelude::v1::Box;
+    |
+575 +     use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:725:29
+    |
+725 |     ) -> Result<crate::INT, Box<crate::EvalAltResult>> {
+    |                             ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+575 +     use alloc::boxed::Box;
+    |
+575 +     use crate::Box;
+    |
+575 +     use no_std_compat::prelude::v1::Box;
+    |
+575 +     use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:741:30
+    |
+741 |     ) -> Result<crate::Blob, Box<crate::EvalAltResult>> {
+    |                              ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+575 +     use alloc::boxed::Box;
+    |
+575 +     use crate::Box;
+    |
+575 +     use no_std_compat::prelude::v1::Box;
+    |
+575 +     use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:758:30
+    |
+758 |     ) -> Result<crate::Blob, Box<crate::EvalAltResult>> {
+    |                              ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+575 +     use alloc::boxed::Box;
+    |
+575 +     use crate::Box;
+    |
+575 +     use no_std_compat::prelude::v1::Box;
+    |
+575 +     use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:774:30
+    |
+774 |     ) -> Result<crate::Blob, Box<crate::EvalAltResult>> {
+    |                              ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+575 +     use alloc::boxed::Box;
+    |
+575 +     use crate::Box;
+    |
+575 +     use no_std_compat::prelude::v1::Box;
+    |
+575 +     use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:791:30
+    |
+791 |     ) -> Result<crate::Blob, Box<crate::EvalAltResult>> {
+    |                              ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+575 +     use alloc::boxed::Box;
+    |
+575 +     use crate::Box;
+    |
+575 +     use no_std_compat::prelude::v1::Box;
+    |
+575 +     use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `String` in this scope
+   --> src/packages/net/stream.rs:806:17
+    |
+806 |     ) -> Result<String, Box<crate::EvalAltResult>> {
+    |                 ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+575 +     use alloc::string::String;
+    |
+575 +     use crate::String;
+    |
+575 +     use no_std_compat::string::String;
+    |
+575 +     use smartstring::alias::String;
+    |
+      and 1 other candidate
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:806:25
+    |
+806 |     ) -> Result<String, Box<crate::EvalAltResult>> {
+    |                         ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+575 +     use alloc::boxed::Box;
+    |
+575 +     use crate::Box;
+    |
+575 +     use no_std_compat::prelude::v1::Box;
+    |
+575 +     use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `String` in this scope
+   --> src/packages/net/stream.rs:822:17
+    |
+822 |     ) -> Result<String, Box<crate::EvalAltResult>> {
+    |                 ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+575 +     use alloc::string::String;
+    |
+575 +     use crate::String;
+    |
+575 +     use no_std_compat::string::String;
+    |
+575 +     use smartstring::alias::String;
+    |
+      and 1 other candidate
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:822:25
+    |
+822 |     ) -> Result<String, Box<crate::EvalAltResult>> {
+    |                         ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+575 +     use alloc::boxed::Box;
+    |
+575 +     use crate::Box;
+    |
+575 +     use no_std_compat::prelude::v1::Box;
+    |
+575 +     use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `String` in this scope
+   --> src/packages/net/stream.rs:837:17
+    |
+837 |     ) -> Result<String, Box<crate::EvalAltResult>> {
+    |                 ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+575 +     use alloc::string::String;
+    |
+575 +     use crate::String;
+    |
+575 +     use no_std_compat::string::String;
+    |
+575 +     use smartstring::alias::String;
+    |
+      and 1 other candidate
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:837:25
+    |
+837 |     ) -> Result<String, Box<crate::EvalAltResult>> {
+    |                         ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+575 +     use alloc::boxed::Box;
+    |
+575 +     use crate::Box;
+    |
+575 +     use no_std_compat::prelude::v1::Box;
+    |
+575 +     use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `String` in this scope
+   --> src/packages/net/stream.rs:853:17
+    |
+853 |     ) -> Result<String, Box<crate::EvalAltResult>> {
+    |                 ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+575 +     use alloc::string::String;
+    |
+575 +     use crate::String;
+    |
+575 +     use no_std_compat::string::String;
+    |
+575 +     use smartstring::alias::String;
+    |
+      and 1 other candidate
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/stream.rs:853:25
+    |
+853 |     ) -> Result<String, Box<crate::EvalAltResult>> {
+    |                         ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+575 +     use alloc::boxed::Box;
+    |
+575 +     use crate::Box;
+    |
+575 +     use no_std_compat::prelude::v1::Box;
+    |
+575 +     use std::boxed::Box;
+    |
+
+error[E0433]: failed to resolve: could not find `Instant` in `time`
+  --> src/packages/net/mod.rs:74:27
+   |
+74 |             || std::time::Instant::now()
+   |                           ^^^^^^^ could not find `Instant` in `time`
+   |
+help: consider importing one of these items
+   |
+46 + use cap_std::time::Instant;
+   |
+46 + use std::time::Instant;
+   |
+help: if you import `Instant`, refer to it directly
+   |
+74 -             || std::time::Instant::now()
+74 +             || Instant::now()
+   |
+
+error[E0433]: failed to resolve: could not find `Instant` in `time`
+  --> src/packages/net/mod.rs:85:27
+   |
+85 |             || std::time::Instant::now()
+   |                           ^^^^^^^ could not find `Instant` in `time`
+   |
+help: consider importing one of these items
+   |
+46 + use cap_std::time::Instant;
+   |
+46 + use std::time::Instant;
+   |
+help: if you import `Instant`, refer to it directly
+   |
+85 -             || std::time::Instant::now()
+85 +             || Instant::now()
+   |
+
+error[E0433]: failed to resolve: could not find `Instant` in `time`
+  --> src/packages/net/mod.rs:96:27
+   |
+96 |             || std::time::Instant::now()
+   |                           ^^^^^^^ could not find `Instant` in `time`
+   |
+help: consider importing one of these items
+   |
+46 + use cap_std::time::Instant;
+   |
+46 + use std::time::Instant;
+   |
+help: if you import `Instant`, refer to it directly
+   |
+96 -             || std::time::Instant::now()
+96 +             || Instant::now()
+   |
+
+error[E0433]: failed to resolve: could not find `Instant` in `time`
+   --> src/packages/net/mod.rs:107:27
+    |
+107 |             || std::time::Instant::now()
+    |                           ^^^^^^^ could not find `Instant` in `time`
+    |
+help: consider importing one of these items
+    |
+46  + use cap_std::time::Instant;
+    |
+46  + use std::time::Instant;
+    |
+help: if you import `Instant`, refer to it directly
+    |
+107 -             || std::time::Instant::now()
+107 +             || Instant::now()
+    |
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/mod.rs:198:24
+    |
+198 | ) -> Result<NetStream, Box<crate::EvalAltResult>> {
+    |                        ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+46  + use alloc::boxed::Box;
+    |
+46  + use crate::Box;
+    |
+46  + use no_std_compat::prelude::v1::Box;
+    |
+46  + use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `String` in this scope
+   --> src/packages/net/mod.rs:265:23
+    |
+265 |     target: impl Into<String>,
+    |                       ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+46  + use alloc::string::String;
+    |
+46  + use crate::String;
+    |
+46  + use no_std_compat::string::String;
+    |
+46  + use smartstring::alias::String;
+    |
+      and 1 other candidate
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/mod.rs:266:32
+    |
+266 | ) -> Result<HandleReservation, Box<crate::EvalAltResult>> {
+    |                                ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+46  + use alloc::boxed::Box;
+    |
+46  + use crate::Box;
+    |
+46  + use no_std_compat::prelude::v1::Box;
+    |
+46  + use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `String` in this scope
+   --> src/packages/net/mod.rs:274:23
+    |
+274 |     target: impl Into<String>,
+    |                       ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+46  + use alloc::string::String;
+    |
+46  + use crate::String;
+    |
+46  + use no_std_compat::string::String;
+    |
+46  + use smartstring::alias::String;
+    |
+      and 1 other candidate
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/net/mod.rs:275:32
+    |
+275 | ) -> Result<HandleReservation, Box<crate::EvalAltResult>> {
+    |                                ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+46  + use alloc::boxed::Box;
+    |
+46  + use crate::Box;
+    |
+46  + use no_std_compat::prelude::v1::Box;
+    |
+46  + use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `Vec` in this scope
+  --> src/packages/sys/config.rs:24:15
+   |
+24 |     AllowList(Vec<String>),
+   |               ^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::vec::Vec;
+   |
+3  + use crate::Vec;
+   |
+3  + use no_std_compat::vec::Vec;
+   |
+3  + use std::vec::Vec;
+   |
+
+error[E0412]: cannot find type `String` in this scope
+  --> src/packages/sys/config.rs:24:19
+   |
+24 |     AllowList(Vec<String>),
+   |                   ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::string::String;
+   |
+3  + use crate::String;
+   |
+3  + use no_std_compat::string::String;
+   |
+3  + use smartstring::alias::String;
+   |
+     and 1 other candidate
+
+error[E0412]: cannot find type `Vec` in this scope
+  --> src/packages/sys/config.rs:50:15
+   |
+50 |     AllowList(Vec<String>),
+   |               ^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::vec::Vec;
+   |
+3  + use crate::Vec;
+   |
+3  + use no_std_compat::vec::Vec;
+   |
+3  + use std::vec::Vec;
+   |
+
+error[E0412]: cannot find type `String` in this scope
+  --> src/packages/sys/config.rs:50:19
+   |
+50 |     AllowList(Vec<String>),
+   |                   ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::string::String;
+   |
+3  + use crate::String;
+   |
+3  + use no_std_compat::string::String;
+   |
+3  + use smartstring::alias::String;
+   |
+     and 1 other candidate
+
+error[E0412]: cannot find type `Vec` in this scope
+  --> src/packages/sys/config.rs:91:11
+   |
+91 |     Roots(Vec<FsRoot>),
+   |           ^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::vec::Vec;
+   |
+3  + use crate::Vec;
+   |
+3  + use no_std_compat::vec::Vec;
+   |
+3  + use std::vec::Vec;
+   |
+
+error[E0433]: failed to resolve: use of undeclared type `Vec`
+  --> src/packages/sys/config.rs:99:21
+   |
+99 |         Self::Roots(Vec::new())
+   |                     ^^^ use of undeclared type `Vec`
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::vec::Vec;
+   |
+3  + use crate::Vec;
+   |
+3  + use no_std_compat::vec::Vec;
+   |
+3  + use std::vec::Vec;
+   |
+
+error[E0433]: failed to resolve: could not find `env` in `std`
+  --> src/packages/sys/env.rs:28:20
+   |
+28 |         match std::env::var(name) {
+   |                    ^^^ could not find `env` in `std`
+   |
+help: consider importing this module
+   |
+3  + use std::env;
+   |
+help: if you import `env`, refer to it directly
+   |
+28 -         match std::env::var(name) {
+28 +         match env::var(name) {
+   |
+
+error[E0433]: failed to resolve: could not find `env` in `std`
+  --> src/packages/sys/env.rs:49:35
+   |
+49 |         for (name, value) in std::env::vars_os() {
+   |                                   ^^^ could not find `env` in `std`
+   |
+help: consider importing this module
+   |
+3  + use std::env;
+   |
+help: if you import `env`, refer to it directly
+   |
+49 -         for (name, value) in std::env::vars_os() {
+49 +         for (name, value) in env::vars_os() {
+   |
+
+error[E0412]: cannot find type `String` in this scope
+  --> src/packages/sys/env.rs:68:48
+   |
+68 |     .set_into_module(module, move || -> Result<String, Box<EvalAltResult>> {
+   |                                                ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::string::String;
+   |
+3  + use crate::String;
+   |
+3  + use no_std_compat::string::String;
+   |
+3  + use smartstring::alias::String;
+   |
+     and 1 other candidate
+
+error[E0412]: cannot find type `Box` in this scope
+  --> src/packages/sys/env.rs:68:56
+   |
+68 |     .set_into_module(module, move || -> Result<String, Box<EvalAltResult>> {
+   |                                                        ^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::boxed::Box;
+   |
+3  + use crate::Box;
+   |
+3  + use no_std_compat::prelude::v1::Box;
+   |
+3  + use std::boxed::Box;
+   |
+
+error[E0433]: failed to resolve: could not find `env` in `std`
+  --> src/packages/sys/env.rs:70:18
+   |
+70 |             std::env::current_dir().map_err(|e| SysError::io("get current directory", ".", &e))?;
+   |                  ^^^ could not find `env` in `std`
+   |
+help: consider importing this module
+   |
+3  + use std::env;
+   |
+help: if you import `env`, refer to it directly
+   |
+70 -             std::env::current_dir().map_err(|e| SysError::io("get current directory", ".", &e))?;
+70 +             env::current_dir().map_err(|e| SysError::io("get current directory", ".", &e))?;
+   |
+
+error[E0412]: cannot find type `String` in this scope
+  --> src/packages/sys/error.rs:34:12
+   |
+34 |     Denied(String),
+   |            ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::string::String;
+   |
+3  + use crate::String;
+   |
+3  + use no_std_compat::string::String;
+   |
+3  + use smartstring::alias::String;
+   |
+     and 1 other candidate
+
+error[E0412]: cannot find type `String` in this scope
+  --> src/packages/sys/error.rs:40:17
+   |
+40 |         target: String,
+   |                 ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::string::String;
+   |
+3  + use crate::String;
+   |
+3  + use no_std_compat::string::String;
+   |
+3  + use smartstring::alias::String;
+   |
+     and 1 other candidate
+
+error[E0412]: cannot find type `String` in this scope
+  --> src/packages/sys/error.rs:44:18
+   |
+44 |         message: String,
+   |                  ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::string::String;
+   |
+3  + use crate::String;
+   |
+3  + use no_std_compat::string::String;
+   |
+3  + use smartstring::alias::String;
+   |
+     and 1 other candidate
+
+error[E0412]: cannot find type `String` in this scope
+  --> src/packages/sys/error.rs:47:13
+   |
+47 |     Timeout(String),
+   |             ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::string::String;
+   |
+3  + use crate::String;
+   |
+3  + use no_std_compat::string::String;
+   |
+3  + use smartstring::alias::String;
+   |
+     and 1 other candidate
+
+error[E0412]: cannot find type `String` in this scope
+  --> src/packages/sys/error.rs:49:17
+   |
+49 |     OutputLimit(String),
+   |                 ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::string::String;
+   |
+3  + use crate::String;
+   |
+3  + use no_std_compat::string::String;
+   |
+3  + use smartstring::alias::String;
+   |
+     and 1 other candidate
+
+error[E0412]: cannot find type `String` in this scope
+  --> src/packages/sys/error.rs:51:13
+   |
+51 |     NotUtf8(String),
+   |             ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::string::String;
+   |
+3  + use crate::String;
+   |
+3  + use no_std_compat::string::String;
+   |
+3  + use smartstring::alias::String;
+   |
+     and 1 other candidate
+
+error[E0412]: cannot find type `String` in this scope
+  --> src/packages/sys/error.rs:76:58
+   |
+76 |     pub(crate) fn io(op: &'static str, target: impl Into<String>, source: &io::Error) -> Self {
+   |                                                          ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::string::String;
+   |
+3  + use crate::String;
+   |
+3  + use no_std_compat::string::String;
+   |
+3  + use smartstring::alias::String;
+   |
+     and 1 other candidate
+
+error[E0412]: cannot find type `Box` in this scope
+   --> src/packages/sys/error.rs:200:25
+    |
+200 | impl From<SysError> for Box<EvalAltResult> {
+    |                         ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::boxed::Box;
+    |
+3   + use crate::Box;
+    |
+3   + use no_std_compat::prelude::v1::Box;
+    |
+3   + use std::boxed::Box;
+    |
+
+error[E0412]: cannot find type `Box` in this scope
+  --> src/packages/sys/fs.rs:21:25
+   |
+21 | type Res<T> = Result<T, Box<EvalAltResult>>;
+   |                         ^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+12 + use alloc::boxed::Box;
+   |
+12 + use crate::Box;
+   |
+12 + use no_std_compat::prelude::v1::Box;
+   |
+12 + use std::boxed::Box;
+   |
+
+error[E0412]: cannot find type `Vec` in this scope
+  --> src/packages/sys/fs.rs:30:14
+   |
+30 |     aliases: Vec<PathBuf>,
+   |              ^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+12 + use alloc::vec::Vec;
+   |
+12 + use crate::Vec;
+   |
+12 + use no_std_compat::vec::Vec;
+   |
+12 + use std::vec::Vec;
+   |
+
+error[E0412]: cannot find type `Vec` in this scope
+  --> src/packages/sys/fs.rs:37:11
+   |
+37 |     Roots(Vec<OpenRoot>),
+   |           ^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+12 + use alloc::vec::Vec;
+   |
+12 + use crate::Vec;
+   |
+12 + use no_std_compat::vec::Vec;
+   |
+12 + use std::vec::Vec;
+   |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+  --> src/packages/sys/fs.rs:41:38
+   |
+41 | type FileHandle = Shared<Locked<std::fs::File>>;
+   |                                      ^^ could not find `fs` in `std`
+   |
+help: consider importing one of these items
+   |
+12 + use cap_std::fs;
+   |
+12 + use std::fs;
+   |
+help: if you import `fs`, refer to it directly
+   |
+41 - type FileHandle = Shared<Locked<std::fs::File>>;
+41 + type FileHandle = Shared<Locked<fs::File>>;
+   |
+
+error[E0433]: failed to resolve: use of undeclared type `Vec`
+  --> src/packages/sys/fs.rs:48:34
+   |
+48 |                 let mut opened = Vec::with_capacity(roots.len());
+   |                                  ^^^ use of undeclared type `Vec`
+   |
+help: consider importing one of these items
+   |
+12 + use alloc::vec::Vec;
+   |
+12 + use crate::Vec;
+   |
+12 + use no_std_compat::vec::Vec;
+   |
+12 + use std::vec::Vec;
+   |
+
+error[E0433]: failed to resolve: could not find `env` in `std`
+  --> src/packages/sys/fs.rs:53:30
+   |
+53 |                         std::env::current_dir()
+   |                              ^^^ could not find `env` in `std`
+   |
+help: consider importing this module
+   |
+12 + use std::env;
+   |
+help: if you import `env`, refer to it directly
+   |
+53 -                         std::env::current_dir()
+53 +                         env::current_dir()
+   |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+  --> src/packages/sys/fs.rs:59:30
+   |
+59 |                         std::fs::canonicalize(&given)
+   |                              ^^ could not find `fs` in `std`
+   |
+help: consider importing this module
+   |
+12 + use std::fs;
+   |
+help: if you import `fs`, refer to it directly
+   |
+59 -                         std::fs::canonicalize(&given)
+59 +                         fs::canonicalize(&given)
+   |
+
+error[E0412]: cannot find type `Vec` in this scope
+   --> src/packages/sys/fs.rs:179:52
+    |
+179 | fn root_aliases(given: &Path, canonical: &Path) -> Vec<PathBuf> {
+    |                                                    ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+12  + use alloc::vec::Vec;
+    |
+12  + use crate::Vec;
+    |
+12  + use no_std_compat::vec::Vec;
+    |
+12  + use std::vec::Vec;
+    |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+   --> src/packages/sys/fs.rs:182:40
+    |
+182 |         let Ok(resolved_prefix) = std::fs::canonicalize(prefix) else {
+    |                                        ^^ could not find `fs` in `std`
+    |
+help: consider importing this module
+    |
+12  + use std::fs;
+    |
+help: if you import `fs`, refer to it directly
+    |
+182 -         let Ok(resolved_prefix) = std::fs::canonicalize(prefix) else {
+182 +         let Ok(resolved_prefix) = fs::canonicalize(prefix) else {
+    |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+   --> src/packages/sys/fs.rs:193:43
+    |
+193 |         let Ok(resolved_candidate) = std::fs::canonicalize(&candidate) else {
+    |                                           ^^ could not find `fs` in `std`
+    |
+help: consider importing this module
+    |
+12  + use std::fs;
+    |
+help: if you import `fs`, refer to it directly
+    |
+193 -         let Ok(resolved_candidate) = std::fs::canonicalize(&candidate) else {
+193 +         let Ok(resolved_candidate) = fs::canonicalize(&candidate) else {
+    |
+
+error[E0412]: cannot find type `Vec` in this scope
+   --> src/packages/sys/fs.rs:249:42
+    |
+249 |                         let mut aliases: Vec<&Path> = root.aliases.iter().map(PathBuf::as_path).collect();
+    |                                          ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+12  + use alloc::vec::Vec;
+    |
+12  + use crate::Vec;
+    |
+12  + use no_std_compat::vec::Vec;
+    |
+12  + use std::vec::Vec;
+    |
+
+error[E0412]: cannot find type `OsString` in module `std::ffi`
+   --> src/packages/sys/fs.rs:340:42
+    |
+340 | fn os_to_string(what: &str, s: std::ffi::OsString) -> Result<String, SysError> {
+    |                                          ^^^^^^^^ not found in `std::ffi`
+    |
+help: consider importing this struct
+    |
+12  + use std::ffi::OsString;
+    |
+help: if you import `OsString`, refer to it directly
+    |
+340 - fn os_to_string(what: &str, s: std::ffi::OsString) -> Result<String, SysError> {
+340 + fn os_to_string(what: &str, s: OsString) -> Result<String, SysError> {
+    |
+
+error[E0412]: cannot find type `String` in this scope
+   --> src/packages/sys/fs.rs:340:62
+    |
+340 | fn os_to_string(what: &str, s: std::ffi::OsString) -> Result<String, SysError> {
+    |                                                              ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+12  + use alloc::string::String;
+    |
+12  + use crate::String;
+    |
+12  + use no_std_compat::string::String;
+    |
+12  + use smartstring::alias::String;
+    |
+      and 1 other candidate
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+   --> src/packages/sys/fs.rs:429:48
+    |
+429 |     fn apply_to_host(&self, options: &mut std::fs::OpenOptions) {
+    |                                                ^^ could not find `fs` in `std`
+    |
+help: consider importing one of these items
+    |
+12  + use cap_std::fs;
+    |
+12  + use std::fs;
+    |
+12  + use std::os::unix::fs;
+    |
+help: if you import `fs`, refer to it directly
+    |
+429 -     fn apply_to_host(&self, options: &mut std::fs::OpenOptions) {
+429 +     fn apply_to_host(&self, options: &mut fs::OpenOptions) {
+    |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+   --> src/packages/sys/fs.rs:457:36
+    |
+457 |             let mut options = std::fs::OpenOptions::new();
+    |                                    ^^ could not find `fs` in `std`
+    |
+help: consider importing one of these items
+    |
+12  + use cap_std::fs::OpenOptions;
+    |
+12  + use std::fs::OpenOptions;
+    |
+help: if you import `OpenOptions`, refer to it directly
+    |
+457 -             let mut options = std::fs::OpenOptions::new();
+457 +             let mut options = OpenOptions::new();
+    |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+   --> src/packages/sys/fs.rs:489:30
+    |
+489 |     f: impl FnOnce(&mut std::fs::File) -> io::Result<T>,
+    |                              ^^ could not find `fs` in `std`
+    |
+help: consider importing one of these items
+    |
+12  + use cap_std::fs;
+    |
+12  + use std::fs;
+    |
+help: if you import `fs`, refer to it directly
+    |
+489 -     f: impl FnOnce(&mut std::fs::File) -> io::Result<T>,
+489 +     f: impl FnOnce(&mut fs::File) -> io::Result<T>,
+    |
+
+error[E0412]: cannot find type `Vec` in this scope
+   --> src/packages/sys/fs.rs:511:10
+    |
+511 | ) -> Res<Vec<u8>> {
+    |          ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+12  + use alloc::vec::Vec;
+    |
+12  + use crate::Vec;
+    |
+12  + use no_std_compat::vec::Vec;
+    |
+12  + use std::vec::Vec;
+    |
+
+error[E0433]: failed to resolve: use of undeclared type `Vec`
+   --> src/packages/sys/fs.rs:535:19
+    |
+535 |         return Ok(Vec::new());
+    |                   ^^^ use of undeclared type `Vec`
+    |
+help: consider importing one of these items
+    |
+12  + use alloc::vec::Vec;
+    |
+12  + use crate::Vec;
+    |
+12  + use no_std_compat::vec::Vec;
+    |
+12  + use std::vec::Vec;
+    |
+
+error[E0433]: failed to resolve: use of undeclared type `Vec`
+   --> src/packages/sys/fs.rs:538:21
+    |
+538 |     let mut bytes = Vec::new();
+    |                     ^^^ use of undeclared type `Vec`
+    |
+help: consider importing one of these items
+    |
+12  + use alloc::vec::Vec;
+    |
+12  + use crate::Vec;
+    |
+12  + use no_std_compat::vec::Vec;
+    |
+12  + use std::vec::Vec;
+    |
+
+error[E0412]: cannot find type `String` in this scope
+   --> src/packages/sys/fs.rs:566:85
+    |
+566 |     .set_into_module(module, move |ctx: NativeCallContext, file: FileHandle| -> Res<String> {
+    |                                                                                     ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+12  + use alloc::string::String;
+    |
+12  + use crate::String;
+    |
+12  + use no_std_compat::string::String;
+    |
+12  + use smartstring::alias::String;
+    |
+      and 1 other candidate
+
+error[E0433]: failed to resolve: use of undeclared type `String`
+   --> src/packages/sys/fs.rs:578:9
+    |
+578 |         String::from_utf8(bytes).map_err(|e| {
+    |         ^^^^^^ use of undeclared type `String`
+    |
+help: consider importing one of these items
+    |
+12  + use alloc::string::String;
+    |
+12  + use crate::String;
+    |
+12  + use no_std_compat::string::String;
+    |
+12  + use smartstring::alias::String;
+    |
+      and 1 other candidate
+
+error[E0412]: cannot find type `String` in this scope
+   --> src/packages/sys/fs.rs:591:95
+    |
+591 |     .set_into_module(module, move |ctx: NativeCallContext, file: FileHandle, len: INT| -> Res<String> {
+    |                                                                                               ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+12  + use alloc::string::String;
+    |
+12  + use crate::String;
+    |
+12  + use no_std_compat::string::String;
+    |
+12  + use smartstring::alias::String;
+    |
+      and 1 other candidate
+
+error[E0433]: failed to resolve: use of undeclared type `String`
+   --> src/packages/sys/fs.rs:603:9
+    |
+603 |         String::from_utf8(bytes).map_err(|e| {
+    |         ^^^^^^ use of undeclared type `String`
+    |
+help: consider importing one of these items
+    |
+12  + use alloc::string::String;
+    |
+12  + use crate::String;
+    |
+12  + use no_std_compat::string::String;
+    |
+12  + use smartstring::alias::String;
+    |
+      and 1 other candidate
+
+error[E0412]: cannot find type `String` in this scope
+   --> src/packages/sys/fs.rs:742:29
+    |
+742 |         |path: &str| -> Res<String> {
+    |                             ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+12  + use alloc::string::String;
+    |
+12  + use crate::String;
+    |
+12  + use no_std_compat::string::String;
+    |
+12  + use smartstring::alias::String;
+    |
+      and 1 other candidate
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+   --> src/packages/sys/fs.rs:745:36
+    |
+745 |                 Some(path) => std::fs::read(path),
+    |                                    ^^ could not find `fs` in `std`
+    |
+help: consider importing this module
+    |
+12  + use std::fs;
+    |
+help: if you import `fs`, refer to it directly
+    |
+745 -                 Some(path) => std::fs::read(path),
+745 +                 Some(path) => fs::read(path),
+    |
+
+error[E0433]: failed to resolve: use of undeclared type `String`
+   --> src/packages/sys/fs.rs:749:16
+    |
+749 |             Ok(String::from_utf8_lossy(&bytes).into_owned())
+    |                ^^^^^^ use of undeclared type `String`
+    |
+help: consider importing one of these items
+    |
+12  + use alloc::string::String;
+    |
+12  + use crate::String;
+    |
+12  + use no_std_compat::string::String;
+    |
+12  + use smartstring::alias::String;
+    |
+      and 1 other candidate
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+   --> src/packages/sys/fs.rs:762:36
+    |
+762 |                 Some(path) => std::fs::read(path),
+    |                                    ^^ could not find `fs` in `std`
+    |
+help: consider importing this module
+    |
+12  + use std::fs;
+    |
+help: if you import `fs`, refer to it directly
+    |
+762 -                 Some(path) => std::fs::read(path),
+762 +                 Some(path) => fs::read(path),
+    |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+   --> src/packages/sys/fs.rs:787:36
+    |
+787 |                 Some(path) => std::fs::write(path, data.as_bytes()),
+    |                                    ^^ could not find `fs` in `std`
+    |
+help: consider importing this module
+    |
+12  + use std::fs;
+    |
+help: if you import `fs`, refer to it directly
+    |
+787 -                 Some(path) => std::fs::write(path, data.as_bytes()),
+787 +                 Some(path) => fs::write(path, data.as_bytes()),
+    |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+   --> src/packages/sys/fs.rs:803:36
+    |
+803 |                 Some(path) => std::fs::write(path, &data),
+    |                                    ^^ could not find `fs` in `std`
+    |
+help: consider importing this module
+    |
+12  + use std::fs;
+    |
+help: if you import `fs`, refer to it directly
+    |
+803 -                 Some(path) => std::fs::write(path, &data),
+803 +                 Some(path) => fs::write(path, &data),
+    |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+   --> src/packages/sys/fs.rs:886:34
+    |
+886 |                     let m = std::fs::metadata(host_path).map_err(|e| map_io("read metadata of", path, &e))?;
+    |                                  ^^ could not find `fs` in `std`
+    |
+help: consider importing this module
+    |
+12  + use std::fs;
+    |
+help: if you import `fs`, refer to it directly
+    |
+886 -                     let m = std::fs::metadata(host_path).map_err(|e| map_io("read metadata of", path, &e))?;
+886 +                     let m = fs::metadata(host_path).map_err(|e| map_io("read metadata of", path, &e))?;
+    |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+   --> src/packages/sys/fs.rs:887:35
+    |
+887 |                     let sm = std::fs::symlink_metadata(host_path).map_err(|e| map_io("read metadata of", path, &e))?;
+    |                                   ^^ could not find `fs` in `std`
+    |
+help: consider importing this module
+    |
+12  + use std::fs;
+    |
+help: if you import `fs`, refer to it directly
+    |
+887 -                     let sm = std::fs::symlink_metadata(host_path).map_err(|e| map_io("read metadata of", path, &e))?;
+887 +                     let sm = fs::symlink_metadata(host_path).map_err(|e| map_io("read metadata of", path, &e))?;
+    |
+
+error[E0425]: cannot find value `UNIX_EPOCH` in module `std::time`
+   --> src/packages/sys/fs.rs:897:60
+    |
+897 |                 Ok(t) => match t.duration_since(std::time::UNIX_EPOCH) {
+    |                                                            ^^^^^^^^^^ not found in `std::time`
+    |
+help: consider importing this constant
+    |
+12  + use std::time::UNIX_EPOCH;
+    |
+help: if you import `UNIX_EPOCH`, refer to it directly
+    |
+897 -                 Ok(t) => match t.duration_since(std::time::UNIX_EPOCH) {
+897 +                 Ok(t) => match t.duration_since(UNIX_EPOCH) {
+    |
+
+error[E0433]: failed to resolve: use of undeclared type `Vec`
+   --> src/packages/sys/fs.rs:931:29
+    |
+931 |             let mut names = Vec::new();
+    |                             ^^^ use of undeclared type `Vec`
+    |
+help: consider importing one of these items
+    |
+12  + use alloc::vec::Vec;
+    |
+12  + use crate::Vec;
+    |
+12  + use no_std_compat::vec::Vec;
+    |
+12  + use std::vec::Vec;
+    |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+   --> src/packages/sys/fs.rs:934:39
+    |
+934 |                     for entry in std::fs::read_dir(host_path)
+    |                                       ^^ could not find `fs` in `std`
+    |
+help: consider importing one of these items
+    |
+12  + use cap_std::fs;
+    |
+12  + use std::fs;
+    |
+help: if you import `fs`, refer to it directly
+    |
+934 -                     for entry in std::fs::read_dir(host_path)
+934 +                     for entry in fs::read_dir(host_path)
+    |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+   --> src/packages/sys/fs.rs:965:36
+    |
+965 |                 Some(path) => std::fs::create_dir(path),
+    |                                    ^^ could not find `fs` in `std`
+    |
+help: consider importing this module
+    |
+12  + use std::fs;
+    |
+help: if you import `fs`, refer to it directly
+    |
+965 -                 Some(path) => std::fs::create_dir(path),
+965 +                 Some(path) => fs::create_dir(path),
+    |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+   --> src/packages/sys/fs.rs:988:36
+    |
+988 |                 Some(path) => std::fs::create_dir_all(path),
+    |                                    ^^ could not find `fs` in `std`
+    |
+help: consider importing this module
+    |
+12  + use std::fs;
+    |
+help: if you import `fs`, refer to it directly
+    |
+988 -                 Some(path) => std::fs::create_dir_all(path),
+988 +                 Some(path) => fs::create_dir_all(path),
+    |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+    --> src/packages/sys/fs.rs:1003:36
+     |
+1003 |                 Some(path) => std::fs::remove_file(path),
+     |                                    ^^ could not find `fs` in `std`
+     |
+help: consider importing this module
+     |
+12   + use std::fs;
+     |
+help: if you import `fs`, refer to it directly
+     |
+1003 -                 Some(path) => std::fs::remove_file(path),
+1003 +                 Some(path) => fs::remove_file(path),
+     |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+    --> src/packages/sys/fs.rs:1018:36
+     |
+1018 |                 Some(path) => std::fs::remove_dir(path),
+     |                                    ^^ could not find `fs` in `std`
+     |
+help: consider importing this module
+     |
+12   + use std::fs;
+     |
+help: if you import `fs`, refer to it directly
+     |
+1018 -                 Some(path) => std::fs::remove_dir(path),
+1018 +                 Some(path) => fs::remove_dir(path),
+     |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+    --> src/packages/sys/fs.rs:1041:36
+     |
+1041 |                 Some(path) => std::fs::remove_dir_all(path),
+     |                                    ^^ could not find `fs` in `std`
+     |
+help: consider importing this module
+     |
+12   + use std::fs;
+     |
+help: if you import `fs`, refer to it directly
+     |
+1041 -                 Some(path) => std::fs::remove_dir_all(path),
+1041 +                 Some(path) => fs::remove_dir_all(path),
+     |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+    --> src/packages/sys/fs.rs:1071:48
+     |
+1071 |                 (Some(from), Some(to)) => std::fs::rename(from, to),
+     |                                                ^^ could not find `fs` in `std`
+     |
+help: consider importing this module
+     |
+12   + use std::fs;
+     |
+help: if you import `fs`, refer to it directly
+     |
+1071 -                 (Some(from), Some(to)) => std::fs::rename(from, to),
+1071 +                 (Some(from), Some(to)) => fs::rename(from, to),
+     |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+    --> src/packages/sys/fs.rs:1095:58
+     |
+1095 |                 (Some(from_path), Some(to_path)) => std::fs::copy(from_path, to_path).map(|_| ()),
+     |                                                          ^^ could not find `fs` in `std`
+     |
+help: consider importing this module
+     |
+12   + use std::fs;
+     |
+help: if you import `fs`, refer to it directly
+     |
+1095 -                 (Some(from_path), Some(to_path)) => std::fs::copy(from_path, to_path).map(|_| ()),
+1095 +                 (Some(from_path), Some(to_path)) => fs::copy(from_path, to_path).map(|_| ()),
+     |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+    --> src/packages/sys/fs.rs:1106:29
+     |
+1106 |         let mut file = std::fs::OpenOptions::new()
+     |                             ^^ could not find `fs` in `std`
+     |
+help: consider importing one of these items
+     |
+12   + use cap_std::fs::OpenOptions;
+     |
+12   + use std::fs::OpenOptions;
+     |
+help: if you import `OpenOptions`, refer to it directly
+     |
+1106 -         let mut file = std::fs::OpenOptions::new()
+1106 +         let mut file = OpenOptions::new()
+     |
+
+error[E0433]: failed to resolve: could not find `fs` in `std`
+    --> src/packages/sys/fs.rs:1128:28
+     |
+1128 |         Some(path) => std::fs::metadata(path).map(|m| (m.is_file(), m.is_dir())),
+     |                            ^^ could not find `fs` in `std`
+     |
+help: consider importing this module
+     |
+12   + use std::fs;
+     |
+help: if you import `fs`, refer to it directly
+     |
+1128 -         Some(path) => std::fs::metadata(path).map(|m| (m.is_file(), m.is_dir())),
+1128 +         Some(path) => fs::metadata(path).map(|m| (m.is_file(), m.is_dir())),
+     |
+
+error[E0412]: cannot find type `String` in this scope
+   --> src/packages/sys/process/unix.rs:160:14
+    |
+160 |     program: String,
+    |              ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+2   + use alloc::string::String;
+    |
+2   + use crate::String;
+    |
+2   + use no_std_compat::string::String;
+    |
+2   + use smartstring::alias::String;
+    |
+      and 1 other candidate
+
+error[E0412]: cannot find type `Vec` in this scope
+   --> src/packages/sys/process/unix.rs:162:12
+    |
+162 |     stdin: Vec<u8>,
+    |            ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+2   + use alloc::vec::Vec;
+    |
+2   + use crate::Vec;
+    |
+2   + use no_std_compat::vec::Vec;
+    |
+2   + use std::vec::Vec;
+    |
+
+error[E0412]: cannot find type `Vec` in this scope
+   --> src/packages/sys/process/unix.rs:164:13
+    |
+164 |     stdout: Vec<u8>,
+    |             ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+2   + use alloc::vec::Vec;
+    |
+2   + use crate::Vec;
+    |
+2   + use no_std_compat::vec::Vec;
+    |
+2   + use std::vec::Vec;
+    |
+
+error[E0412]: cannot find type `Vec` in this scope
+   --> src/packages/sys/process/unix.rs:165:13
+    |
+165 |     stderr: Vec<u8>,
+    |             ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+2   + use alloc::vec::Vec;
+    |
+2   + use crate::Vec;
+    |
+2   + use no_std_compat::vec::Vec;
+    |
+2   + use std::vec::Vec;
+    |
+
+error[E0412]: cannot find type `Vec` in this scope
+   --> src/packages/sys/process/unix.rs:173:26
+    |
+173 |     cleanup_diagnostics: Vec<super::ProcessDiagnostic>,
+    |                          ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+2   + use alloc::vec::Vec;
+    |
+2   + use crate::Vec;
+    |
+2   + use no_std_compat::vec::Vec;
+    |
+2   + use std::vec::Vec;
+    |
+
+error[E0412]: cannot find type `Vec` in this scope
+   --> src/packages/sys/process/unix.rs:214:20
+    |
+214 |     records: Mutex<Vec<Arc<Mutex<OwnerRecord>>>>,
+    |                    ^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+2   + use alloc::vec::Vec;
+    |
+2   + use crate::Vec;
+    |
+2   + use no_std_compat::vec::Vec;
+    |
+2   + use std::vec::Vec;
+    |
+
+error[E0433]: failed to resolve: use of undeclared type `Vec`
+   --> src/packages/sys/process/unix.rs:232:37
+    |
+232 |                 records: Mutex::new(Vec::new()),
+    |                                     ^^^ use of undeclared type `Vec`
+    |
+help: consider importing one of these items
+    |
+2   + use alloc::vec::Vec;
+    |
+2   + use crate::Vec;
+    |
+2   + use no_std_compat::vec::Vec;
+    |
+2   + use std::vec::Vec;
+    |
+
+error[E0433]: failed to resolve: could not find `process` in `std`
+   --> src/packages/sys/process/unix.rs:798:30
+    |
+798 | fn process_exit(status: std::process::ExitStatus) -> ProcessExit {
+    |                              ^^^^^^^ could not find `process` in `std`
+    |
+help: consider importing this module
+    |
+2   + use std::process;
+    |
+help: if you import `process`, refer to it directly
+    |
+798 - fn process_exit(status: std::process::ExitStatus) -> ProcessExit {
+798 + fn process_exit(status: process::ExitStatus) -> ProcessExit {
+    |
+
+error[E0433]: failed to resolve: could not find `process` in `std`
+    --> src/packages/sys/process/unix.rs:1164:30
+     |
+1164 |     exit_status: Option<std::process::ExitStatus>,
+     |                              ^^^^^^^ could not find `process` in `std`
+     |
+help: consider importing this module
+     |
+2    + use std::process;
+     |
+help: if you import `process`, refer to it directly
+     |
+1164 -     exit_status: Option<std::process::ExitStatus>,
+1164 +     exit_status: Option<process::ExitStatus>,
+     |
+
+error[E0433]: failed to resolve: could not find `process` in `std`
+    --> src/packages/sys/process/unix.rs:1172:47
+     |
+1172 |     fn observe_reaped(&mut self, status: std::process::ExitStatus) {
+     |                                               ^^^^^^^ could not find `process` in `std`
+     |
+help: consider importing this module
+     |
+2    + use std::process;
+     |
+help: if you import `process`, refer to it directly
+     |
+1172 -     fn observe_reaped(&mut self, status: std::process::ExitStatus) {
+1172 +     fn observe_reaped(&mut self, status: process::ExitStatus) {
+     |
+
+error[E0433]: failed to resolve: could not find `process` in `std`
+    --> src/packages/sys/process/unix.rs:1531:33
+     |
+1531 |     ) -> io::Result<Option<std::process::ExitStatus>> {
+     |                                 ^^^^^^^ could not find `process` in `std`
+     |
+help: consider importing this module
+     |
+2    + use std::process;
+     |
+help: if you import `process`, refer to it directly
+     |
+1531 -     ) -> io::Result<Option<std::process::ExitStatus>> {
+1531 +     ) -> io::Result<Option<process::ExitStatus>> {
+     |
+
+error[E0412]: cannot find type `Box` in this scope
+    --> src/packages/sys/process/unix.rs:1734:25
+     |
+1734 | type Res<T> = Result<T, Box<crate::EvalAltResult>>;
+     |                         ^^^ not found in this scope
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::boxed::Box;
+     |
+2    + use crate::Box;
+     |
+2    + use no_std_compat::prelude::v1::Box;
+     |
+2    + use std::boxed::Box;
+     |
+
+error[E0433]: failed to resolve: use of undeclared type `String`
+    --> src/packages/sys/process/unix.rs:2022:26
+     |
+2022 |             let stdout = String::from_utf8_lossy(&state.stdout);
+     |                          ^^^^^^ use of undeclared type `String`
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::string::String;
+     |
+2    + use crate::String;
+     |
+2    + use no_std_compat::string::String;
+     |
+2    + use smartstring::alias::String;
+     |
+       and 1 other candidate
+
+error[E0433]: failed to resolve: use of undeclared type `String`
+    --> src/packages/sys/process/unix.rs:2023:26
+     |
+2023 |             let stderr = String::from_utf8_lossy(&state.stderr);
+     |                          ^^^^^^ use of undeclared type `String`
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::string::String;
+     |
+2    + use crate::String;
+     |
+2    + use no_std_compat::string::String;
+     |
+2    + use smartstring::alias::String;
+     |
+       and 1 other candidate
+
+error[E0433]: failed to resolve: use of undeclared type `String`
+    --> src/packages/sys/process/unix.rs:2085:23
+     |
+2085 |         Dynamic::from(String::from_utf8_lossy(&state.stdout).into_owned()),
+     |                       ^^^^^^ use of undeclared type `String`
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::string::String;
+     |
+2    + use crate::String;
+     |
+2    + use no_std_compat::string::String;
+     |
+2    + use smartstring::alias::String;
+     |
+       and 1 other candidate
+
+error[E0433]: failed to resolve: use of undeclared type `String`
+    --> src/packages/sys/process/unix.rs:2089:23
+     |
+2089 |         Dynamic::from(String::from_utf8_lossy(&state.stderr).into_owned()),
+     |                       ^^^^^^ use of undeclared type `String`
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::string::String;
+     |
+2    + use crate::String;
+     |
+2    + use no_std_compat::string::String;
+     |
+2    + use smartstring::alias::String;
+     |
+       and 1 other candidate
+
+error[E0412]: cannot find type `Vec` in this scope
+    --> src/packages/sys/process/unix.rs:2095:35
+     |
+2095 | fn parse_args(args: Array) -> Res<Vec<String>> {
+     |                                   ^^^ not found in this scope
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::vec::Vec;
+     |
+2    + use crate::Vec;
+     |
+2    + use no_std_compat::vec::Vec;
+     |
+2    + use std::vec::Vec;
+     |
+
+error[E0412]: cannot find type `String` in this scope
+    --> src/packages/sys/process/unix.rs:2095:39
+     |
+2095 | fn parse_args(args: Array) -> Res<Vec<String>> {
+     |                                       ^^^^^^ not found in this scope
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::string::String;
+     |
+2    + use crate::String;
+     |
+2    + use no_std_compat::string::String;
+     |
+2    + use smartstring::alias::String;
+     |
+       and 1 other candidate
+
+error[E0412]: cannot find type `String` in this scope
+    --> src/packages/sys/process/unix.rs:2106:17
+     |
+2106 |     cwd: Option<String>,
+     |                 ^^^^^^ not found in this scope
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::string::String;
+     |
+2    + use crate::String;
+     |
+2    + use no_std_compat::string::String;
+     |
+2    + use smartstring::alias::String;
+     |
+       and 1 other candidate
+
+error[E0412]: cannot find type `Vec` in this scope
+    --> src/packages/sys/process/unix.rs:2107:10
+     |
+2107 |     env: Vec<(String, String)>,
+     |          ^^^ not found in this scope
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::vec::Vec;
+     |
+2    + use crate::Vec;
+     |
+2    + use no_std_compat::vec::Vec;
+     |
+2    + use std::vec::Vec;
+     |
+
+error[E0412]: cannot find type `String` in this scope
+    --> src/packages/sys/process/unix.rs:2107:15
+     |
+2107 |     env: Vec<(String, String)>,
+     |               ^^^^^^ not found in this scope
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::string::String;
+     |
+2    + use crate::String;
+     |
+2    + use no_std_compat::string::String;
+     |
+2    + use smartstring::alias::String;
+     |
+       and 1 other candidate
+
+error[E0412]: cannot find type `String` in this scope
+    --> src/packages/sys/process/unix.rs:2107:23
+     |
+2107 |     env: Vec<(String, String)>,
+     |                       ^^^^^^ not found in this scope
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::string::String;
+     |
+2    + use crate::String;
+     |
+2    + use no_std_compat::string::String;
+     |
+2    + use smartstring::alias::String;
+     |
+       and 1 other candidate
+
+error[E0412]: cannot find type `Vec` in this scope
+    --> src/packages/sys/process/unix.rs:2108:17
+     |
+2108 |     env_remove: Vec<String>,
+     |                 ^^^ not found in this scope
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::vec::Vec;
+     |
+2    + use crate::Vec;
+     |
+2    + use no_std_compat::vec::Vec;
+     |
+2    + use std::vec::Vec;
+     |
+
+error[E0412]: cannot find type `String` in this scope
+    --> src/packages/sys/process/unix.rs:2108:21
+     |
+2108 |     env_remove: Vec<String>,
+     |                     ^^^^^^ not found in this scope
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::string::String;
+     |
+2    + use crate::String;
+     |
+2    + use no_std_compat::string::String;
+     |
+2    + use smartstring::alias::String;
+     |
+       and 1 other candidate
+
+error[E0412]: cannot find type `Vec` in this scope
+    --> src/packages/sys/process/unix.rs:2110:19
+     |
+2110 |     stdin: Option<Vec<u8>>,
+     |                   ^^^ not found in this scope
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::vec::Vec;
+     |
+2    + use crate::Vec;
+     |
+2    + use no_std_compat::vec::Vec;
+     |
+2    + use std::vec::Vec;
+     |
+
+error[E0412]: cannot find type `String` in this scope
+    --> src/packages/sys/process/unix.rs:2124:63
+     |
+2124 |     let string = |key: &str, options: &mut Map| -> Res<Option<String>> {
+     |                                                               ^^^^^^ not found in this scope
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::string::String;
+     |
+2    + use crate::String;
+     |
+2    + use no_std_compat::string::String;
+     |
+2    + use smartstring::alias::String;
+     |
+       and 1 other candidate
+
+error[E0412]: cannot find type `Vec` in this scope
+    --> src/packages/sys/process/unix.rs:2157:28
+     |
+2157 |             .collect::<Res<Vec<_>>>()?,
+     |                            ^^^ not found in this scope
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::vec::Vec;
+     |
+2    + use crate::Vec;
+     |
+2    + use no_std_compat::vec::Vec;
+     |
+2    + use std::vec::Vec;
+     |
+
+error[E0412]: cannot find type `Vec` in this scope
+    --> src/packages/sys/process/unix.rs:2174:28
+     |
+2174 |             .collect::<Res<Vec<_>>>()?,
+     |                            ^^^ not found in this scope
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::vec::Vec;
+     |
+2    + use crate::Vec;
+     |
+2    + use no_std_compat::vec::Vec;
+     |
+2    + use std::vec::Vec;
+     |
+
+error[E0412]: cannot find type `Vec` in this scope
+    --> src/packages/sys/process/unix.rs:2246:39
+     |
+2246 | fn parse_stdin(value: Dynamic) -> Res<Vec<u8>> {
+     |                                       ^^^ not found in this scope
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::vec::Vec;
+     |
+2    + use crate::Vec;
+     |
+2    + use no_std_compat::vec::Vec;
+     |
+2    + use std::vec::Vec;
+     |
+
+error[E0412]: cannot find type `String` in this scope
+    --> src/packages/sys/process/unix.rs:2272:13
+     |
+2272 |     args: &[String],
+     |             ^^^^^^ not found in this scope
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::string::String;
+     |
+2    + use crate::String;
+     |
+2    + use no_std_compat::string::String;
+     |
+2    + use smartstring::alias::String;
+     |
+       and 1 other candidate
+
+error[E0433]: failed to resolve: use of undeclared type `Vec`
+    --> src/packages/sys/process/unix.rs:2389:21
+     |
+2389 |             stdout: Vec::new(),
+     |                     ^^^ use of undeclared type `Vec`
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::vec::Vec;
+     |
+2    + use crate::Vec;
+     |
+2    + use no_std_compat::vec::Vec;
+     |
+2    + use std::vec::Vec;
+     |
+
+error[E0433]: failed to resolve: use of undeclared type `Vec`
+    --> src/packages/sys/process/unix.rs:2390:21
+     |
+2390 |             stderr: Vec::new(),
+     |                     ^^^ use of undeclared type `Vec`
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::vec::Vec;
+     |
+2    + use crate::Vec;
+     |
+2    + use no_std_compat::vec::Vec;
+     |
+2    + use std::vec::Vec;
+     |
+
+error[E0433]: failed to resolve: use of undeclared type `Vec`
+    --> src/packages/sys/process/unix.rs:2398:34
+     |
+2398 |             cleanup_diagnostics: Vec::new(),
+     |                                  ^^^ use of undeclared type `Vec`
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::vec::Vec;
+     |
+2    + use crate::Vec;
+     |
+2    + use no_std_compat::vec::Vec;
+     |
+2    + use std::vec::Vec;
+     |
+
+error[E0412]: cannot find type `String` in this scope
+    --> src/packages/sys/process/unix.rs:2423:13
+     |
+2423 |     args: &[String],
+     |             ^^^^^^ not found in this scope
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::string::String;
+     |
+2    + use crate::String;
+     |
+2    + use no_std_compat::string::String;
+     |
+2    + use smartstring::alias::String;
+     |
+       and 1 other candidate
+
+error[E0412]: cannot find type `Vec` in this scope
+    --> src/packages/sys/process/unix.rs:2642:18
+     |
+2642 |     output: &mut Vec<u8>,
+     |                  ^^^ not found in this scope
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::vec::Vec;
+     |
+2    + use crate::Vec;
+     |
+2    + use no_std_compat::vec::Vec;
+     |
+2    + use std::vec::Vec;
+     |
+
+error[E0412]: cannot find type `Vec` in this scope
+    --> src/packages/sys/process/unix.rs:2684:19
+     |
+2684 |     input: Option<Vec<u8>>,
+     |                   ^^^ not found in this scope
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::vec::Vec;
+     |
+2    + use crate::Vec;
+     |
+2    + use no_std_compat::vec::Vec;
+     |
+2    + use std::vec::Vec;
+     |
+
+error[E0433]: failed to resolve: use of undeclared type `Vec`
+    --> src/packages/sys/process/unix.rs:2723:19
+     |
+2723 |     let mut out = Vec::new();
+     |                   ^^^ use of undeclared type `Vec`
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::vec::Vec;
+     |
+2    + use crate::Vec;
+     |
+2    + use no_std_compat::vec::Vec;
+     |
+2    + use std::vec::Vec;
+     |
+
+error[E0433]: failed to resolve: use of undeclared type `Vec`
+    --> src/packages/sys/process/unix.rs:2724:19
+     |
+2724 |     let mut err = Vec::new();
+     |                   ^^^ use of undeclared type `Vec`
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::vec::Vec;
+     |
+2    + use crate::Vec;
+     |
+2    + use no_std_compat::vec::Vec;
+     |
+2    + use std::vec::Vec;
+     |
+
+error[E0412]: cannot find type `Vec` in this scope
+    --> src/packages/sys/process/unix.rs:3172:10
+     |
+3172 |     out: Vec<u8>,
+     |          ^^^ not found in this scope
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::vec::Vec;
+     |
+2    + use crate::Vec;
+     |
+2    + use no_std_compat::vec::Vec;
+     |
+2    + use std::vec::Vec;
+     |
+
+error[E0412]: cannot find type `Vec` in this scope
+    --> src/packages/sys/process/unix.rs:3173:10
+     |
+3173 |     err: Vec<u8>,
+     |          ^^^ not found in this scope
+     |
+help: consider importing one of these items
+     |
+2    + use alloc::vec::Vec;
+     |
+2    + use crate::Vec;
+     |
+2    + use no_std_compat::vec::Vec;
+     |
+2    + use std::vec::Vec;
+     |
+
+error[E0412]: cannot find type `String` in this scope
+  --> src/packages/sys/process.rs:25:16
+   |
+25 |     operation: String,
+   |                ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::string::String;
+   |
+3  + use crate::String;
+   |
+3  + use no_std_compat::string::String;
+   |
+3  + use smartstring::alias::String;
+   |
+     and 1 other candidate
+
+error[E0412]: cannot find type `String` in this scope
+  --> src/packages/sys/process.rs:27:14
+   |
+27 |     message: String,
+   |              ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::string::String;
+   |
+3  + use crate::String;
+   |
+3  + use no_std_compat::string::String;
+   |
+3  + use smartstring::alias::String;
+   |
+     and 1 other candidate
+
+error[E0412]: cannot find type `String` in this scope
+  --> src/packages/sys/process.rs:33:30
+   |
+33 |         operation: impl Into<String>,
+   |                              ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::string::String;
+   |
+3  + use crate::String;
+   |
+3  + use no_std_compat::string::String;
+   |
+3  + use smartstring::alias::String;
+   |
+     and 1 other candidate
+
+error[E0412]: cannot find type `String` in this scope
+  --> src/packages/sys/process.rs:35:28
+   |
+35 |         message: impl Into<String>,
+   |                            ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::string::String;
+   |
+3  + use crate::String;
+   |
+3  + use no_std_compat::string::String;
+   |
+3  + use smartstring::alias::String;
+   |
+     and 1 other candidate
+
+error[E0412]: cannot find type `Vec` in this scope
+  --> src/packages/sys/process.rs:60:13
+   |
+60 |     stdout: Vec<u8>,
+   |             ^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::vec::Vec;
+   |
+3  + use crate::Vec;
+   |
+3  + use no_std_compat::vec::Vec;
+   |
+3  + use std::vec::Vec;
+   |
+
+error[E0412]: cannot find type `Vec` in this scope
+  --> src/packages/sys/process.rs:61:13
+   |
+61 |     stderr: Vec<u8>,
+   |             ^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::vec::Vec;
+   |
+3  + use crate::Vec;
+   |
+3  + use no_std_compat::vec::Vec;
+   |
+3  + use std::vec::Vec;
+   |
+
+error[E0412]: cannot find type `Vec` in this scope
+  --> src/packages/sys/process.rs:66:26
+   |
+66 |     cleanup_diagnostics: Vec<ProcessDiagnostic>,
+   |                          ^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::vec::Vec;
+   |
+3  + use crate::Vec;
+   |
+3  + use no_std_compat::vec::Vec;
+   |
+3  + use std::vec::Vec;
+   |
+
+error[E0412]: cannot find type `Vec` in this scope
+  --> src/packages/sys/process.rs:72:17
+   |
+72 |         stdout: Vec<u8>,
+   |                 ^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::vec::Vec;
+   |
+3  + use crate::Vec;
+   |
+3  + use no_std_compat::vec::Vec;
+   |
+3  + use std::vec::Vec;
+   |
+
+error[E0412]: cannot find type `Vec` in this scope
+  --> src/packages/sys/process.rs:73:17
+   |
+73 |         stderr: Vec<u8>,
+   |                 ^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::vec::Vec;
+   |
+3  + use crate::Vec;
+   |
+3  + use no_std_compat::vec::Vec;
+   |
+3  + use std::vec::Vec;
+   |
+
+error[E0412]: cannot find type `Vec` in this scope
+  --> src/packages/sys/process.rs:78:30
+   |
+78 |         cleanup_diagnostics: Vec<ProcessDiagnostic>,
+   |                              ^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::vec::Vec;
+   |
+3  + use crate::Vec;
+   |
+3  + use no_std_compat::vec::Vec;
+   |
+3  + use std::vec::Vec;
+   |
+
+error[E0412]: cannot find type `String` in this scope
+  --> src/packages/sys/process.rs:99:29
+   |
+99 |     pub fn stdout(&self) -> String {
+   |                             ^^^^^^ not found in this scope
+   |
+help: consider importing one of these items
+   |
+3  + use alloc::string::String;
+   |
+3  + use crate::String;
+   |
+3  + use no_std_compat::string::String;
+   |
+3  + use smartstring::alias::String;
+   |
+     and 1 other candidate
+
+error[E0433]: failed to resolve: use of undeclared type `String`
+   --> src/packages/sys/process.rs:100:9
+    |
+100 |         String::from_utf8_lossy(&self.stdout).into_owned()
+    |         ^^^^^^ use of undeclared type `String`
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::string::String;
+    |
+3   + use crate::String;
+    |
+3   + use no_std_compat::string::String;
+    |
+3   + use smartstring::alias::String;
+    |
+      and 1 other candidate
+
+error[E0412]: cannot find type `String` in this scope
+   --> src/packages/sys/process.rs:103:29
+    |
+103 |     pub fn stderr(&self) -> String {
+    |                             ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::string::String;
+    |
+3   + use crate::String;
+    |
+3   + use no_std_compat::string::String;
+    |
+3   + use smartstring::alias::String;
+    |
+      and 1 other candidate
+
+error[E0433]: failed to resolve: use of undeclared type `String`
+   --> src/packages/sys/process.rs:104:9
+    |
+104 |         String::from_utf8_lossy(&self.stderr).into_owned()
+    |         ^^^^^^ use of undeclared type `String`
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::string::String;
+    |
+3   + use crate::String;
+    |
+3   + use no_std_compat::string::String;
+    |
+3   + use smartstring::alias::String;
+    |
+      and 1 other candidate
+
+error[E0412]: cannot find type `String` in this scope
+   --> src/packages/sys/process.rs:156:17
+    |
+156 |         target: String,
+    |                 ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::string::String;
+    |
+3   + use crate::String;
+    |
+3   + use no_std_compat::string::String;
+    |
+3   + use smartstring::alias::String;
+    |
+      and 1 other candidate
+
+error[E0412]: cannot find type `String` in this scope
+   --> src/packages/sys/process.rs:160:18
+    |
+160 |         message: String,
+    |                  ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::string::String;
+    |
+3   + use crate::String;
+    |
+3   + use no_std_compat::string::String;
+    |
+3   + use smartstring::alias::String;
+    |
+      and 1 other candidate
+
+error[E0412]: cannot find type `String` in this scope
+   --> src/packages/sys/process.rs:163:13
+    |
+163 |     Timeout(String),
+    |             ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::string::String;
+    |
+3   + use crate::String;
+    |
+3   + use no_std_compat::string::String;
+    |
+3   + use smartstring::alias::String;
+    |
+      and 1 other candidate
+
+error[E0412]: cannot find type `String` in this scope
+   --> src/packages/sys/process.rs:165:17
+    |
+165 |     OutputLimit(String),
+    |                 ^^^^^^ not found in this scope
+    |
+help: consider importing one of these items
+    |
+3   + use alloc::string::String;
+    |
+3   + use crate::String;
+    |
+3   + use no_std_compat::string::String;
+    |
+3   + use smartstring::alias::String;
+    |
+      and 1 other candidate
+
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/core/src/prelude/mod.rs:46:30
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+Some errors have detailed explanations: E0412, E0425, E0432, E0433.
+For more information about an error, try `rustc --explain E0412`.
+warning: `rhai` (lib) generated 1 warning
+error: could not compile `rhai` (lib) due to 271 previous errors; 1 warning emitted

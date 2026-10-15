@@ -1,0 +1,6 @@
+cargo check --locked --no-default-features --features sys\,no_std
+cargo check --locked --no-default-features --features net\,no_std
+cargo check --locked --no-default-features --features sys\,net\,no_std
+cargo check --locked --no-default-features --features sys\,no_object
+cargo check --locked --no-default-features --features sys,no_object (sys/no_object guard temporarily removed in private source)
+cargo check --locked --no-default-features --features sys\,no_object

@@ -1,0 +1,4 @@
+cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e  /root/.local/share/agent-builds/rhai/release-gates-20261015-01/agent-build-zwaa_glr/source/Cargo.toml
+2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425  /root/.local/share/agent-builds/rhai/release-gates-20261015-01/agent-build-zwaa_glr/source/Cargo.lock
+ee2dfc0900d64481d09d6d20bbd64b75ac05a316e02788cdf58e9fe52c6be0c5  /root/.local/share/agent-builds/rhai/release-gates-20261015-01/agent-build-zwaa_glr/source/src/packages/sys/mod.rs
+8c7dbba945f9128df4022d3af651624f7fe2f87a1782ce18feb35c4896f8c576  /root/.local/share/agent-builds/rhai/release-gates-20261015-01/agent-build-zwaa_glr/source/src/packages/net/mod.rs

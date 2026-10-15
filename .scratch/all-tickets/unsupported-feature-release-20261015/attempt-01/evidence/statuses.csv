@@ -1,0 +1,7 @@
+check,exit,expected_diagnostic
+sys_no_std,101,the `sys` feature requires `std`; it cannot be combined with `no_std`
+net_no_std,101,the `net` feature requires `std`; it cannot be combined with `no_std`
+sys_net_no_std,101,the `sys` feature requires `std`; it cannot be combined with `no_std`
+sys_no_object,101,the `sys` feature requires object maps; it cannot be combined with `no_object`
+guard_removed_control,101,expected diagnostic absent; matcher rejects
+sys_no_object_restored,101,the `sys` feature requires object maps; it cannot be combined with `no_object`

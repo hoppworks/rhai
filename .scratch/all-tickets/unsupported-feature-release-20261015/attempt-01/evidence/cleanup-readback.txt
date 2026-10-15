@@ -1,0 +1,2 @@
+runtime_removed=true
+owned_scope_removed=true

@@ -390,6 +390,8 @@ tests are written from scratch against this contract. Phase numbers refer to sec
 | R6 | `metadata` feature | doc-comments on every function render | Rhai conventions | 4 |
 | R7 | `try { ... } catch (e)` around a denied call | `e` is a `SysError`; `e.kind` is the variant name, `e.message` starts with it, `e.io_kind` names the `io::ErrorKind` for I/O errors, and the script continues after the catch | D5 | 1 |
 
+Linux host-target negative-gate status (2026-10-15): R2 (`sys,no_std`) and R4 (`sys,no_object`) have accepted compiler-diagnostic proofs on lllm Linux x86_64/Rust 1.77.2; the related `net,no_std` and combined `sys,net,no_std` checks also emit their intended diagnostics. See `.scratch/all-tickets/unsupported-feature-release-20261015/proof.md`. WASM gates remain open because the target was not installed; this host proof does not close the release matrix.
+
 ## 5. Test infrastructure
 
 The fixture design is retained. Earlier Wine/install and CI proposals below are
