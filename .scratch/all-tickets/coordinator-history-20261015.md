@@ -73,3 +73,19 @@ The first attempt to execute run_scoped.py directly was denied before any build
 because its executable bit is unset; invoking it through python3 succeeded.
 Proof and complete logs: linux-x34-unchecked-20261015/. Next missing paired
 profile identified: testing-environ,sys,sync without unchecked.
+
+## X34 Linux checked sync deadline and OutputLimit (2026-10-15)
+
+At integrated fork-main revision aedf7857e3aca48797b6f3ee178c4209aad90ea1,
+the same two named X34 deadline and OutputLimit selectors ran under
+testing-environ,sys,sync with unchecked disabled. Rust/Cargo 1.77.2 on lllm
+Linux x86_64/Bazzite 44, one-job scoped invocation and one compiled target:
+both intentional assertion REDs exited 101, both restored GREENs passed 1/1,
+runner status 0. Exact PIDFD/group ESRCH, live host/reaper/sentinel at the API
+boundary, output/capture contract and fixture cleanup were observed. Cargo
+command times were 39.759s, 0.091s, 3.070s and 0.086s. A separate one-job
+Tauron Cargo build was active and untouched. The initial post-run source hash
+check used the wrong cwd and a cosmetic status-check command had a shell
+formatting error; direct source/lock/revision/runner/scope readbacks passed.
+Combined review passes only these selectors/profile. Proof:
+linux-x34-sync-20261015/.
