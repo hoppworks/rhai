@@ -1,0 +1,8 @@
+scope=/root/.local/share/agent-builds/rhai/x34-base-current-20261015-1140
+runtime_removed=per_run_scoped.py_cleanup
+owned_session_scope_removed=true
+runner_status=0
+postrun=2026-10-15T11:39:35+02:00
+active cargo/rustc=/bin/sh -c cargo install cargo-chef --version "${CARGO_CHEF_VERSION}" --locked
+/usr/local/rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/cargo install cargo-chef --version 0.1.77 --locked
+/usr/local/rustup/toolchains/1.98.1-x86_64-unknown-linux-gnu/bin/rustc --crate-name jiff --edition=2021 /usr/local/cargo/registry/src/index.crates.io-1949cf8c6b5b557f/jiff-0.2.22/src/lib.rs --error-format=json --json=diagnostic-rendered-ansi,artifacts,future-incompat --crate-type lib --emit=dep-info,metadata,link -C opt-level=3 -C embed-bitcode=no --allow=unexpected_cfgs --check-cfg cfg(docsrs_jiff) --cfg feature="alloc" --cfg feature="std" --check-cfg cfg(docsrs,test) --check-cfg cfg(feature, values("alloc", "default", "js", "logging", "perf-inline", "serde", "static", "static-tz", "std", "tz-fat", "tz-system", "tzdb-bundle-always", "tzdb-bundle-platform", "tzdb-concatenated", "tzdb-zoneinfo")) -C metadata=95ba593ee937ae44 -C extra-filename=-5f06fcd8647cfcf5 --out-dir /tmp/cargo-install5QYOLW/release/deps -C strip=debuginfo -L dependency=/tmp/cargo-install5QYOLW/release/deps --cap-lints allow
