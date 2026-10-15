@@ -1,0 +1,12 @@
+checked_sync-direct-red_status=101
+checked_sync-direct-red_elapsed_ms=41143
+checked_sync-direct-green_status=0
+checked_sync-direct-green_elapsed_ms=2313
+checked_sync-managed-green_status=0
+checked_sync-managed-green_elapsed_ms=159
+unchecked_sync-direct-red_status=101
+unchecked_sync-direct-red_elapsed_ms=20039
+unchecked_sync-direct-green_status=0
+unchecked_sync-direct-green_elapsed_ms=2389
+unchecked_sync-managed-green_status=0
+unchecked_sync-managed-green_elapsed_ms=268
