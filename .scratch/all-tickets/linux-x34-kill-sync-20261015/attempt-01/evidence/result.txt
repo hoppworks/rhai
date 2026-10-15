@@ -1,0 +1,1 @@
+Both sync Child.kill profiles: assertion RED=101 and restored GREEN=1/1; independent process/group/reaper/host/sentinel readbacks recorded.

@@ -1,0 +1,8 @@
+2026-10-15T10:24:00Z
+               total        used        free      shared  buff/cache   available
+Mem:           124Gi        29Gi        48Gi       389Mi        54Gi        95Gi
+Swap:           15Gi        15Gi       512Ki
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme0n1p3  1.9T  1.2T  671G  64% /var/home
+2974469 2974467 Ss         00:00 bash -c cd /var/home/Daniel/projects/rhai && date -u +%FT%TZ > .scratch/all-tickets/linux-x34-kill-sync-20261015/attempt-01/evidence/capacity-after.txt && free -h >> .scratch/all-tickets/linux-x34-kill-sync-20261015/attempt-01/evidence/capacity-after.txt && df -h /var/home >> .scratch/all-tickets/linux-x34-kill-sync-20261015/attempt-01/evidence/capacity-after.txt && ps -eo pid,ppid,stat,etime,cmd | grep -E "[c]argo|[r]ustc|run_scoped.py" >> .scratch/all-tickets/linux-x34-kill-sync-20261015/attempt-01/evidence/capacity-after.txt || true cd /var/home/Daniel/projects/rhai && sha256sum /var/home/Daniel/projects/agent-skills/tools/run_scoped.py && cat .scratch/all-tickets/linux-x34-kill-sync-20261015/attempt-01/evidence/capacity-before.txt && cat .scratch/all-tickets/linux-x34-kill-sync-20261015/attempt-01/evidence/capacity-after.txt && sha256sum .scratch/all-tickets/linux-x35-direct-managed-20261015/attempt-02/source-Cargo.lock src/packages/sys/process/unix.rs tests/sys_process.rs && for f in .scratch/all-tickets/linux-x34-kill-sync-20261015/attempt-01/evidence/*green-source.sha256; do diff -u <(sha256sum .scratch/all-tickets/linux-x35-direct-managed-20261015/attempt-02/source-Cargo.lock | sed "s#  .scratch/.*/source-Cargo.lock#  Cargo.lock#") <(head -3 "$f") || true; done
+2974541 2974469 S          00:00 grep -E [c]argo|[r]ustc|run_scoped.py

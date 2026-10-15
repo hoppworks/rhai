@@ -130,3 +130,16 @@ at API return, and sentinel cleanup. Combined review accepts only these two
 Linux profiles for this selector. Proofs: `linux-x34-kill-base-20261015/` and
 `linux-x34-kill-unchecked-20261015/`. One-job Tauron work remained untouched;
 owned runtime and empty scope were removed.
+
+## X34 Linux managed Child.kill sync rows (2026-10-15)
+
+At fork-main revision eee64f0f832f673ed60ae01ebf4ecca75d2a75fd, the named
+selector passed assertion RED101/restored GREEN1/1 in checked
+`testing-environ,sys,sync` and unchecked `testing-environ,sys,sync,unchecked`.
+One scoped run: runner0; compile/test 38.934s/2.290s checked and
+18.625s/2.245s unchecked. Both rows record PIDFD-backed leader/worker/leaf
+closure, group ESRCH, exact reaper waits, failed Child report with complete
+captures, host/reaper/sentinel live at API return, and sentinel cleanup. Combined
+review accepts only these two Linux sync profiles for this selector. Proof:
+`linux-x34-kill-sync-20261015/`. No competing build was active; own runtime and
+scope were removed.
