@@ -1,0 +1,1 @@
+Final clone drop: sentinel-live assertion RED=101; restored X37 sync GREEN=1/1 with exact managed-group and sentinel observations.

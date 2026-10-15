@@ -89,3 +89,16 @@ check used the wrong cwd and a cosmetic status-check command had a shell
 formatting error; direct source/lock/revision/runner/scope readbacks passed.
 Combined review passes only these selectors/profile. Proof:
 linux-x34-sync-20261015/.
+
+## X37 Linux checked sync final-clone drop (2026-10-15)
+
+At integrated fork-main revision f6089906d586b038800e2649e01c88f7074986be,
+managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not ran under
+testing-environ,sys,sync with unchecked disabled. Linux x86_64/Bazzite 44,
+Rust/Cargo 1.77.2: sentinel-live assertion RED101; restored GREEN1/1; scoped
+runner0. The logs show nonfinal drop preserving exact leader/worker/leaf,
+final drop closing all three while the unrelated sentinel remained live, and
+the test's exact sentinel cleanup assertion. One-job compile/test took 40.520s
+for RED and 2.132s for GREEN. A Tauron one-job build was active and untouched.
+Combined review accepts only this checked sync X37 row. Proof:
+linux-x37-sync-20261015/.
