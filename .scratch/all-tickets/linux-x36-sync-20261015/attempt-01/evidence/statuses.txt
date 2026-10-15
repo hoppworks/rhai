@@ -1,0 +1,4 @@
+checked-sync-red features=testing-environ,sys,sync status=101 expected=101
+checked-sync-green features=testing-environ,sys,sync status=0 expected=0
+unchecked-sync-red features=testing-environ,sys,sync,unchecked status=101 expected=101
+unchecked-sync-green features=testing-environ,sys,sync,unchecked status=0 expected=0

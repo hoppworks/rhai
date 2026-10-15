@@ -1,0 +1,1 @@
+All three exact owned X36 session scopes are absent; runner exit is 0 and the private runtime was removed. No Rhai compiler remains. Foreign Tauron work was excluded from cleanup.
