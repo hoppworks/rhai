@@ -102,3 +102,17 @@ the test's exact sentinel cleanup assertion. One-job compile/test took 40.520s
 for RED and 2.132s for GREEN. A Tauron one-job build was active and untouched.
 Combined review accepts only this checked sync X37 row. Proof:
 linux-x37-sync-20261015/.
+
+## X34 Linux managed Child.kill unchecked row (2026-10-15)
+
+At integrated fork-main revision 29d3a44096fb35c315931926af142b2af00300bf,
+managed_child_kill_reports_group_closed_under_fixture_reaper ran under
+testing-environ,sys,unchecked. Linux x86_64/Bazzite 44, Rust/Cargo 1.77.2:
+deliberately inverted public failed-report assertion RED101 after process and
+cleanup readbacks; restored GREEN1/1; scoped runner0. The boundary confirms the
+failed Child report, complete captures, exact leader/worker/leaf PIDFD exit and
+group closure, exact reaper waits, live host/reaper/sentinel at API return and
+sentinel cleanup afterward. One-job compile/test took 38.216s for RED and
+2.223s incremental for GREEN. A one-job Tauron build was preserved. Combined
+review passes only this named Linux unchecked row. Proof:
+linux-x34-kill-unchecked-20261015/. This does not independently close X25.

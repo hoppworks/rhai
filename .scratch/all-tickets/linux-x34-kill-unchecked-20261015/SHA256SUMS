@@ -1,0 +1,15 @@
+f60cf819dcb4c43e8be88b364c140e17ed65636f14cc1d14fd96e5c1d9a18815  ./attempt-01/attempt-history.md
+1452b1ab4d087499a5553d019c4e492a72f68b559b2e9eaf2ba9f6e16a0b9488  ./attempt-01/combined-review.md
+963ae6e7cc65516a315810ec24dbb16e847b4f75326f56d7700b024fa3c79016  ./attempt-01/evidence/environment.txt
+b61e544de3ac2efedf5f41f36c85782835f65d271074af8119122165fd0d780a  ./attempt-01/evidence/green.log
+9e2ff840e87f9035ad67aa49c6ccea3d8b1a651ac025197720aede68d6cfbb50  ./attempt-01/evidence/green-source.sha256
+236affe26b7f57e134b036d5a6a15fc744969e3632b4010dcc444089d40da364  ./attempt-01/evidence/preflight.txt
+22339607ffc128d91984643a6ad3510cda5306103bec52b2544b9cbb3d080cbe  ./attempt-01/evidence/red.log
+08b815327ea48e8b321518aca4409b3af632250e636afc8879cbb646b8d6b1fa  ./attempt-01/evidence/red-source.sha256
+4cdf37b5b4cc751c01789a044b62923251a854b9f5b348c9f7b2ac27fbac5a78  ./attempt-01/evidence/result.txt
+e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  ./attempt-01/evidence/runner.log
+7fc0684d3a1af5c5ef0d9055809c8ac118d3cacf5f7f744719f71bdde7669d6e  ./attempt-01/evidence/runner-status.txt
+9de88ef47293e18aebef5b84f086b5695a00ca7f8fa9e623e087ea8849588b37  ./attempt-01/evidence/statuses.txt
+f7432786aa9e4f80ecbb2718054cc01e6933e45b36335a5c24e13f1a5a5efef8  ./attempt-01/run-x34-kill-unchecked.sh
+952bb918948ff96edb319a2cf617a0895c22c7a44b2815f8a5dced2f86aa7d53  ./proof.md
+24ebc184cc34678809b595f5081959c3e071501992db6d761bd69619c00388f0  ./revision-binding.md

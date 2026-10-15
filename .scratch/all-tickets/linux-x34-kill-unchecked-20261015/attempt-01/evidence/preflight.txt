@@ -1,0 +1,19 @@
+utc=2026-10-15T10:12:56Z
+ 12:12:56 up 10 days,  1:12, 13 users,  load average: 3.39, 3.91, 4.37
+               total        used        free      shared  buff/cache   available
+Mem:           124Gi        28Gi        51Gi       389Mi        51Gi        96Gi
+Swap:           15Gi        15Gi       316Ki
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme0n1p3  1.9T  1.2T  671G  64% /var/home
+/dev/nvme0n1p3  1.9T  1.2T  671G  64% /var
+32
+## main...origin/main
+?? .scratch/all-tickets/darwin-escaped-capture-20261010/
+?? .scratch/all-tickets/linux-x34-kill-unchecked-20261015/
+29d3a44096fb35c315931926af142b2af00300bf
+cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e  /var/home/Daniel/projects/rhai/Cargo.toml
+2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425  /var/home/Daniel/projects/rhai/.scratch/all-tickets/linux-x35-direct-managed-20261015/attempt-02/source-Cargo.lock
+2eee89d216ab1edfab6e56b0e6f056195a3708b888395b9429c367412add25f6  /var/home/Daniel/projects/rhai/src/packages/sys/process/unix.rs
+9b031886eb3b4d365664a244e68ab574ef110e3cc7d41efe5f457d0d1fcb1dbe  /var/home/Daniel/projects/rhai/tests/sys_process.rs
+scope=/root/.local/share/agent-builds/rhai/x34-kill-unchecked-20261015-lllm-a1
+expected peak=one owned Cargo job alongside any observed foreign work; 900s bound; 1GiB estimate, not hard cap

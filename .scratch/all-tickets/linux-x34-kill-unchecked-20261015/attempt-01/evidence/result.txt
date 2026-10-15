@@ -1,0 +1,1 @@
+Public Child.kill row: assertion RED=101; restored unchecked-profile GREEN=1/1; exact process/group and fixture readbacks recorded.
