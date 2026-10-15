@@ -1,0 +1,1 @@
+Attempt 01 runner stopped before Cargo: environment hash collection ran before cd to the owned source copy. No selector ran; new attempt moves to the source copy before reading its lock/product/test inputs.
