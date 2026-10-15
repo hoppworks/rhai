@@ -1,0 +1,1 @@
+Preparation attempt 01 stopped before run_scoped.py or Cargo: the script referenced a historical Darwin staging path that is absent on lllm. No test or build process started. Correct source is the previously verified source-Cargo.lock in the Darwin escaped-capture packet.

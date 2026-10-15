@@ -1,0 +1,6 @@
+               total        used        free      shared  buff/cache   available
+Mem:     134136598528 31730511872 24346996736   448122880 85954662400 102406086656
+Swap:    17179865088 16981823488   198041600
+Filesystem         1B-blocks          Used    Available Use% Mounted on
+/dev/nvme0n1p3 2045630218240 1215627841536 756646686720  62% /var/home
+ 09:59:44 up 9 days, 22:59, 14 users,  load average: 5.36, 4.94, 4.37

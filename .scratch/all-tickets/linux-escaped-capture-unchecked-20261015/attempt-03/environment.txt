@@ -1,0 +1,35 @@
+HEAD=9042ee19628e9794ff37d5814386406a894a0c0d
+Linux lllm 7.2.0-ogc6.1.fc44.x86_64 #1 SMP PREEMPT_DYNAMIC Mon Aug 24 03:42:13 UTC 2026 x86_64 GNU/Linux
+NAME="Bazzite"
+VERSION="44.20260825.0 (Kinoite)"
+RELEASE_TYPE=stable
+ID=bazzite
+ID_LIKE="fedora"
+VERSION_ID=44
+VERSION_CODENAME="Kinoite"
+PRETTY_NAME="Bazzite"
+ANSI_COLOR="0;38;2;138;43;226"
+LOGO=bazzite-logo
+CPE_NAME="cpe:/o:universal-blue:bazzite:44"
+DEFAULT_HOSTNAME="bazzite"
+HOME_URL="https://bazzite.gg"
+DOCUMENTATION_URL="https://docs.bazzite.gg"
+SUPPORT_URL="https://discord.bazzite.gg"
+BUG_REPORT_URL="https://github.com/ublue-os/bazzite/issues/"
+SUPPORT_END=2027-05-19
+VARIANT="Kinoite"
+VARIANT_ID=bazzite
+OSTREE_VERSION='44.20260825.0'
+BUILD_ID="Stable (F44.20260825)"
+BOOTLOADER_NAME="Bazzite Stable (F44.20260825)"
+IMAGE_ID="bazzite-44.20260825"
+rustc 1.77.2 (25ef9e3d8 2024-04-09)
+binary: rustc
+commit-hash: 25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04
+commit-date: 2024-04-09
+host: x86_64-unknown-linux-gnu
+release: 1.77.2
+LLVM version: 17.0.6
+cargo 1.77.2 (e52e36006 2024-03-26)
+features=testing-environ,sys,unchecked
+profile=default

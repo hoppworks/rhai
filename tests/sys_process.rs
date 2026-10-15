@@ -5060,6 +5060,7 @@ fn run_retains_error_when_child_closes_stdin_with_unsent_input() {
     const INPUT_BYTES: usize = 4 * 1024 * 1024;
     let config = SysConfig::default().max_output(1024 * 1024).programs(ProgramPolicy::Any).process_scope(ProcessScope::Managed);
     let mut engine = engine(config);
+    #[cfg(not(feature = "unchecked"))]
     engine.set_max_string_size(INPUT_BYTES + 4096);
 
     let executable = std::env::current_exe().unwrap();
@@ -5254,6 +5255,7 @@ fn spawn_retains_error_when_child_closes_stdin_with_unsent_input() {
     const INPUT_BYTES: usize = 4 * 1024 * 1024;
     let config = SysConfig::default().max_output(1024 * 1024).programs(ProgramPolicy::Any).process_scope(ProcessScope::Managed);
     let mut engine = engine(config);
+    #[cfg(not(feature = "unchecked"))]
     engine.set_max_string_size(INPUT_BYTES + 4096);
     let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
     let records = TempDir::new();

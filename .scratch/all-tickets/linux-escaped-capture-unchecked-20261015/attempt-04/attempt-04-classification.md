@@ -1,0 +1,5 @@
+# Attempt 04 classification
+
+The restored post-reap Cargo test itself exited 0 and printed `test result: ok. 1 passed; 0 failed`; the output records the direct leader reaped before cancellation, holder/sentinel alive through the uncancelled wait and post-cancellation challenge, exact leader/holder/sentinel cleanup, and EPIPE on both capture writers. The test command and assertion summaries are preserved in `post-reap-green.log` and `post-reap-green.status`.
+
+The outer `run_scoped.py` command returned 127 even though the script reached the environment and log-hash exports; its captured outer log is empty, so the source of that wrapper status is unresolved. Do not represent the runner result as green. The scoped private runtime path recorded in the test log was read back absent, and the owned TMPDIR scope was empty and retired. Combined review must decide whether the independently recorded Cargo result, fixture cleanup and runtime readback suffice for this named criterion or require another run.

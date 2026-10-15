@@ -1,0 +1,13 @@
+{
+  "package": "Linux managed-run completion, reaper final-drop, and escaped-pipe cancellation",
+  "source_revision": "34e0fa61a3d12fe6c41902c44618ff44e20d73d4",
+  "source_archive_sha256": "68444772248d81587ee19d157c4d49d35a6ba12482233264bba0c622a113f644",
+  "test_source_sha256": "86f1142ff1ae8de5a8b813e892e407a90c1bec70eab864c20b7735f53015bf41",
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "platform": "Linux x86_64 Workhorse",
+  "toolchain": "Rust/Cargo 1.77.2",
+  "features": ["testing-environ", "sys"],
+  "selectors": ["managed_run_succeeds_after_fixture_reaper_reaps_descendants", "managed_spawn_final_clone_drop_closes_group_under_fixture_reaper", "managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes", "managed_spawn_post_reap_cancel_bounds_escaped_capture"],
+  "boundaries": {"runner_timeout_seconds": 600, "cargo_build_jobs": 2},
+  "scope_policy": "unique owned TMPDIR; run_scoped.py; source copy, Cargo home and target below AGENT_RUNTIME_DIR; evidence exported outside runtime"
+}
