@@ -1,0 +1,1 @@
+Both escaped-pipe selectors passed assertion RED=101 and restored GREEN=1/1 in checked and unchecked sync profiles; independent holder/leader/sentinel and EPIPE readbacks recorded.

@@ -1,0 +1,16 @@
+checked_sync-kill_capture-red_status=101
+checked_sync-kill_capture-red_elapsed_ms=39369
+checked_sync-kill_capture-green_status=0
+checked_sync-kill_capture-green_elapsed_ms=2224
+checked_sync-post_reap-red_status=101
+checked_sync-post_reap-red_elapsed_ms=2731
+checked_sync-post_reap-green_status=0
+checked_sync-post_reap-green_elapsed_ms=2733
+unchecked_sync-kill_capture-red_status=101
+unchecked_sync-kill_capture-red_elapsed_ms=19265
+unchecked_sync-kill_capture-green_status=0
+unchecked_sync-kill_capture-green_elapsed_ms=2229
+unchecked_sync-post_reap-red_status=101
+unchecked_sync-post_reap-red_elapsed_ms=2584
+unchecked_sync-post_reap-green_status=0
+unchecked_sync-post_reap-green_elapsed_ms=2561
