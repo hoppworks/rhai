@@ -1,0 +1,8 @@
+checked_sync-red_status=101
+checked_sync-red_elapsed_ms=40509
+checked_sync-green_status=0
+checked_sync-green_elapsed_ms=1816
+unchecked_sync-red_status=101
+unchecked_sync-red_elapsed_ms=18599
+unchecked_sync-green_status=0
+unchecked_sync-green_elapsed_ms=1779

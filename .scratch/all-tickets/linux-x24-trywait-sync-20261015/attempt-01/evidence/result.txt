@@ -1,0 +1,1 @@
+The public try_wait/cached-wait selector passed assertion RED=101 and restored GREEN=1/1 in checked and unchecked sync profiles, with real child readiness, terminal result and ESRCH readback.

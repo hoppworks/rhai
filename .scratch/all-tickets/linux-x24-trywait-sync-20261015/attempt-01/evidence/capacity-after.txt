@@ -1,0 +1,7 @@
+2026-10-15T10:40:48Z
+               total        used        free      shared  buff/cache   available
+Mem:           124Gi        29Gi        47Gi       389Mi        55Gi        95Gi
+Swap:           15Gi        15Gi       1.0Mi
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme0n1p3  1.9T  1.2T  669G  64% /var/home
+3001397 2998238 S          00:00 grep -E [c]argo|[r]ustc|run_scoped.py
