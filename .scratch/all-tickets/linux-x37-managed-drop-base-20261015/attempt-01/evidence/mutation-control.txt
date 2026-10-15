@@ -1,0 +1,2 @@
+expected_red=only_sentinel_live_assertion_inverted
+exit=101

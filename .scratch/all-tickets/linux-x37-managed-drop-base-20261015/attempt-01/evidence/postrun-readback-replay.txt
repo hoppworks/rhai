@@ -1,0 +1,2 @@
+managed leader=2166249 worker=2166251 leaf=2166253 pgid=2166249 absent=true
+sentinel pid=2166247 pgid=2166247 absent=true

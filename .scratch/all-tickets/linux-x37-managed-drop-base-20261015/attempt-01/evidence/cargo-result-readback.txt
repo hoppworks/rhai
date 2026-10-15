@@ -1,0 +1,1 @@
+RED exit 101: intended inverted sentinel-live assertion; GREEN exit 0: restored test 1/1.
