@@ -1,6 +1,6 @@
-# Current coordinator state
+**Next action:** Add checked and unchecked Linux sync-profile X35 coverage for the existing pipe-closed-worker DirectChild/Managed pair; assertion control, direct-mode live PIDFDs, managed PIDFD closure and sentinel-safe cleanup in one scoped run. Reuse accepted base/unchecked rows; preserve foreign work and leave the Windows VM untouched.
 
-**Next action:** Inspect remaining X34/X38 fault/cancellation selectors against the plan and accepted evidence; identify the smallest uncovered Linux row that can close with one scoped run. Reuse exact reviewed rows, preserve foreign work, and keep the Windows VM untouched.
+**Next action:** Add checked and unchecked Linux sync-profile X35 coverage for the existing pipe-closed-worker DirectChild/Managed pair; assertion control, direct-mode live PIDFDs, managed PIDFD closure and sentinel-safe cleanup in one scoped run. Reuse accepted base/unchecked rows; preserve foreign work and leave the Windows VM untouched.
 
 **Authority:** Autonomous strict implementation and atomic commit/push to `https://github.com/hoppworks/rhai.git` `main` are authorized. Never write to public upstream. Commit author/committer exactly `hoppworks`; preserve foreign work.
 
