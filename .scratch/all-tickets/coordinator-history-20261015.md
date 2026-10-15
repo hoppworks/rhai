@@ -53,3 +53,23 @@ Attempt 11 failed at compile before test assertions: Engine::set_max_string_size
 The R3 Linux base-profile no-argument/array-overload slice used four owned scoped invocations (three reached Cargo) and four targeted Cargo test invocations. Attempt 03 stopped before Cargo because the script referenced a nonexistent package-local lock path; the valid accepted lock was at the X35 attempt-02 evidence path. Attempt 04 used the corrected lock: initial compile took 34.41 s, its incremental second test 0.73 s, the deliberately inverted no-argument expectation reached RED (Cargo 101, 0 passed/1 failed), then the restored attempt reached Rhai's disabled array-literal parser and stopped before overload resolution (Cargo 101); runner status 1. Attempt 05 corrected the input using a Rust-injected `Scope` Array. Its deliberately inverted overload expectation reached the intended `ErrorFunctionNotFound` RED (Cargo 101, 0 passed/1 failed); compile/test took 35.35 s. The outer matcher incorrectly searched for the assertion formula instead of the emitted custom diagnostic, so it returned 1 before GREEN. Attempt 06 ran restored source only; compile/test took 34.57 s and passed 1/1 with Cargo and runner status 0. The no-argument RED remains valid from attempt 04; attempt 05 is the overload RED; attempt 06 is the final combined GREEN. These are harness/test-input causes, not product failures.
 
 All actual Cargo runs used one job, Rust/Cargo 1.77.2, the same lock hash `2ba4b3a0…`, a source copy under the private runtime, and the current `testing-environ,sys,no_index` profile. All four exact owned session scopes and runtime children were retired after evidence export. No foreign process or build was stopped or modified. Detailed outputs and capacity snapshots are in `.scratch/all-tickets/linux-r3-noindex-scalar-20261015/attempt-03/` through `attempt-06/`.
+
+## X34 Linux standalone unchecked deadline and OutputLimit (2026-10-15)
+
+At integrated fork-main revision 197bd802d8ca4f91c47b577d2a70700b62908e61,
+the two named selectors
+managed_run_deadline_reaps_group_under_fixture_reaper and
+managed_run_output_limit_reaps_group_under_fixture_reaper were run with
+testing-environ,sys,unchecked (no sync), Rust/Cargo 1.77.2 on lllm Linux
+x86_64/Bazzite 44. Deliberately inverted public assertions each exited Cargo
+101 after the fixture emitted exact PIDFD, group ESRCH, host/reaper/sentinel and
+cleanup observations. Restored runs passed 1/1 each; OutputLimit preserved the
+exact 4096-byte prefix and honest incomplete-capture state. One scoped runner
+used one Cargo job, compiled once, reused the target for all four selectors,
+and exited 0. Cargo command times were 39.556s, 0.094s, 2.968s and 0.101s.
+The exact runtime and owned scope were retired; no cache was retained. Combined
+review passes Standards and Spec/acceptance for only these named selectors.
+The first attempt to execute run_scoped.py directly was denied before any build
+because its executable bit is unset; invoking it through python3 succeeded.
+Proof and complete logs: linux-x34-unchecked-20261015/. Next missing paired
+profile identified: testing-environ,sys,sync without unchecked.

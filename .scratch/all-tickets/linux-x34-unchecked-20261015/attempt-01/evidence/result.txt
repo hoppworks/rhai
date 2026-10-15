@@ -1,0 +1,1 @@
+Both standalone unchecked X34 controls: assertion RED=101; restored deadline and output-limit GREEN=1/1.
