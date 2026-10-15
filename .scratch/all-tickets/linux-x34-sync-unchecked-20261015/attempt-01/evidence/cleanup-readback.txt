@@ -1,0 +1,5 @@
+runner_status=0
+runtime_absent=true
+owned_empty_session_scope_removed=true
+scope=/root/.local/share/agent-builds/rhai/x34-sync-unchecked-20261015-01
+runtime=/root/.local/share/agent-builds/rhai/x34-sync-unchecked-20261015-01/agent-build-cphj4g_7

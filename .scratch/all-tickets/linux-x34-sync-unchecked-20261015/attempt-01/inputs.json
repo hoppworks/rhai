@@ -1,0 +1,27 @@
+{
+  "project_revision": "6af3cae30a233880eafc92c4f742534a926e6a88",
+  "host": "lllm Linux x86_64/Bazzite 44",
+  "features": "testing-environ,sys,sync,unchecked",
+  "profile": "default",
+  "toolchain": "Rust/Cargo 1.77.2 direct binaries",
+  "tests": [
+    "managed_run_deadline_reaps_group_under_fixture_reaper",
+    "managed_run_output_limit_reaps_group_under_fixture_reaper"
+  ],
+  "red_control": "invert only api_is_timed_out assertion in private source copy",
+  "cargo_lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "cargo_toml_sha256": "cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e",
+  "unix_source_sha256": "2eee89d216ab1edfab6e56b0e6f056195a3708b888395b9429c367412add25f6",
+  "test_source_sha256": "ddd5a6259b80647528fc1640f77f2c9f69acd913a20bf84b2a0942d3aec09cbf",
+  "run_scoped_path": "/var/home/Daniel/projects/agent-skills/tools/run_scoped.py",
+  "run_scoped_sha256": "25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e",
+  "scope": "/root/.local/share/agent-builds/rhai/x34-sync-unchecked-20261015-01",
+  "session_id": "x34-sync-unchecked-20261015-01",
+  "phase_timeout_seconds": 300,
+  "outer_timeout_seconds": 900,
+  "jobs": 1,
+  "idle_preflight_samples_seconds": [
+    0,
+    10
+  ]
+}

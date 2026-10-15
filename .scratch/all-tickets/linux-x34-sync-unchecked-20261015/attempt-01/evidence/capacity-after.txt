@@ -1,0 +1,5 @@
+ 11:24:58 up 10 days, 24 min, 14 users,  load average: 5.97, 5.83, 5.50
+MemAvailable:   100027804 kB
+SwapFree:           2724 kB
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme0n1p3  1.9T  1.2T  639G  66% /var/home

@@ -1,0 +1,16 @@
+preflight-1
+{
+  "utc": "2026-10-15T09:23:14Z",
+  "uptime": "11:23:14 up 10 days, 22 min, 14 users,  load average: 6.10, 5.75, 5.44",
+  "mem": "MemAvailable:   98284948 kB\nSwapFree:           2156 kB",
+  "disk": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/nvme0n1p3  1.9T  1.2T  639G  66% /var/home",
+  "active": ""
+}
+preflight-2-after-10s
+{
+  "utc": "2026-10-15T09:23:24Z",
+  "uptime": "11:23:24 up 10 days, 22 min, 14 users,  load average: 6.02, 5.74, 5.44",
+  "mem": "MemAvailable:   98022228 kB\nSwapFree:           2164 kB",
+  "disk": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/nvme0n1p3  1.9T  1.2T  639G  66% /var/home",
+  "active": ""
+}

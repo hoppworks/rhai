@@ -1,0 +1,4 @@
+phase=exit
+red=101
+green_deadline=0
+green_output_limit=0
