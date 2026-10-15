@@ -1,0 +1,1 @@
+restored GREEN=1/1; public scalar run reported cwd/captures/exit; independent child record and ESRCH readback; run_raw absent assertion passed

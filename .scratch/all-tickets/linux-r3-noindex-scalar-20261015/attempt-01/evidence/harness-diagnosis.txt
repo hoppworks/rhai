@@ -1,0 +1,1 @@
+runner status 1 came from outer harness grep expecting child-pid= while the real test emitted child_pid=; Cargo RED itself was valid: exit 101, named RED_CONTROL assertion, exact test result 0 passed/1 failed, and test readback printed reap=ESRCH. The shell stopped after RED before restoring source/GREEN; run_scoped removed the runtime. No product source changed.

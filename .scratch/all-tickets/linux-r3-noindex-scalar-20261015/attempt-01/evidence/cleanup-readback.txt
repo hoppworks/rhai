@@ -1,0 +1,3 @@
+scope=/root/.local/share/agent-builds/rhai/r3-noindex-scalar-20261015-1129
+empty=true
+removed=true
