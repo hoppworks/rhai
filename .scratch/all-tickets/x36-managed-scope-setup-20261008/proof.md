@@ -4,10 +4,9 @@ Status: partial. Accepted Workhorse Linux x86_64 rows use features
 `testing-environ,sys`: before/after-`setpgid` proof at Rust/Cargo 1.96.0,
 `fchdir` and kernel-generated `setpgid` denial at 1.97.1, and a six-test
 recheck plus kernel-denial mutation sensitivity at 1.77.2. The combined
-independent review accepted the named Linux 1.77.2 row. Attempt 10 adds a
-Darwin arm64/macOS 27.0.1 proof for the kernel-generated `setpgid` denial on
-Rust/Cargo 1.93.0 with the same features; its combined review is READY for this
-named row.
+independent review accepted the named Linux 1.77.2 row. Attempt 10 adds and independently accepts a Darwin arm64/macOS 27.0.1 proof for the kernel-generated `setpgid` denial on
+Rust/Cargo 1.93.0 with the same features. The combined review accepts only
+this named row; other Darwin fault points remain open.
 Other Darwin failure points, platforms, feature combinations and MSRV rows
 remain open.
 
