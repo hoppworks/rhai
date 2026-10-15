@@ -384,7 +384,7 @@ tests are written from scratch against this contract. Phase numbers refer to sec
 |---|---|---|---|---|
 | R1 | `sys` off | no symbols exported, no dependency compiled | Rhai feature conventions | 1 |
 | R2 | `sys` + `no_std` | `compile_error!` | D10 | 1 |
-| R3 | `sys` + `no_index` | `run` without args still works; array-taking overloads absent | Rhai cfg conventions; partial Linux scalar process evidence: `.scratch/all-tickets/linux-r3-noindex-scalar-20261015/proof.md` accepts only the named public scalar `run`/cwd/child-readback/absent-`run_raw` test under `testing-environ,sys,no_index,sync,unchecked`; no-argument and array-overload requirements remain open | 2 |
+| R3 | `sys` + `no_index` | `run` without args still works; array-taking overloads absent | Linux accepted: default-profile public Engine `run(program)` returns success/code 0 and complete captures; a host-Scope-injected Rhai Array is rejected with `ErrorFunctionNotFound` for `run(program, args)`. Reuse the accepted `testing-environ,sys,no_index,sync,unchecked` scalar `run(program, options)`/cwd/child-readback/absent-`run_raw` evidence. Full source/lock binding and attempt history: `.scratch/all-tickets/linux-r3-noindex-scalar-20261015/attempt-06/proof.md`. Other release target/platform coverage remains open. | 2 |
 | R4 | `sys` + `no_object` | incompatible; explicit `compile_error!` | accepted D10 and ticket06 | 2 |
 | R5 | `type_of` on `Child` | `"Child"` | Rhai time tests | 2 |
 | R6 | `metadata` feature | doc-comments on every function render | Rhai conventions | 4 |

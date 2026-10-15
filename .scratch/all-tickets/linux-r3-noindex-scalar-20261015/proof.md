@@ -1,4 +1,8 @@
-# Linux R3 no_index scalar process proof (partial), 2026-10-15
+# Linux R3 no_index process proof history, 2026-10-15
+
+## Current status
+
+The Linux R3 requirements are now accepted at the integrated candidate for `testing-environ,sys,no_index`: `run(program)` succeeds without an argument list and array-taking `run` overloads are absent. See [attempt 06](attempt-06/proof.md) for current-source binding and the restored GREEN; [attempt 05](attempt-05/evidence/classification.txt) records the valid intended RED. The attempt-02 text below is historical evidence for its narrower scalar-options row; its “partial” status was accurate at that earlier point and is superseded for Linux R3 by attempt 06. This does not close R3 on other release targets or the broader A–F/Ticket03 acceptance.
 
 ## Scope
 
@@ -16,4 +20,4 @@ Attempt 02 is the targeted restored-source GREEN only: Cargo exited 0 and the ex
 
 Each attempt used an absent owned scope under `/root/.local/share/agent-builds/rhai/`, passed as absolute `TMPDIR` to the existing `run_scoped.py`. The runner created private `AGENT_RUNTIME_DIR`; source copy, Cargo home and target were isolated there. Both used one Cargo job. The exact runtime and empty session-scope cleanup are recorded. The green run's two preflight snapshots had no Cargo/rustc, 95 GiB available memory and more than 642 GiB free disk. A foreign Tauron Cargo build appeared in the post-run snapshot and was not touched; possible late overlap is explicitly recorded. No owned output or test fixture remains.
 
-This is a named partial Linux no_index process row, not full R3 or X34 acceptance. The broader R3 requirements (including no-argument and array-overload behavior), other platforms/features/MSRVs, Windows custody, and remaining A–F / Ticket03 criteria remain open.
+At the time of attempt 02 this was a named partial Linux no_index process row, not full R3 or X34 acceptance. Attempt 06 closes the named Linux R3 no-argument and array-overload behavior. Other release targets/platforms/features/MSRVs, Windows custody, and remaining A–F / Ticket03 criteria remain open.

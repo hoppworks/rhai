@@ -1,0 +1,1 @@
+Restored GREEN passed 1/1 at the exact selector. Public Engine run(program) completed /bin/true with code 0 and complete stdout/stderr. A Rust-injected Array supplied through Scope produced ErrorFunctionNotFound for run(program, args); the array-taking overload is absent.

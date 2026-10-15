@@ -1,4 +1,10 @@
-# R3 no_index scalar process row: execution binding
+# R3 no_index process execution bindings
+
+## Current Linux R3 no-argument and array-overload row (attempts 05/06)
+
+Current candidate: integrated revision `42c117e84669f4d105b5d76b5f0c07611622708b`, Linux x86_64/Bazzite 44, Rust/Cargo 1.77.2, default profile, `testing-environ,sys,no_index`. The restored GREEN copies the working-tree test source SHA-256 `9b031886eb3b4d365664a244e68ab574ef110e3cc7d41efe5f457d0d1fcb1dbe`; production `src/packages/sys/process/unix.rs` remains SHA-256 `2eee89d216ab1edfab6e56b0e6f056195a3708b888395b9429c367412add25f6`; Cargo.lock SHA-256 is `2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425`. Attempt 05 uses the same current test with only the array-overload expectation inverted; its mutant hash is in `attempt-05/evidence/red-source.sha256`. It reaches the exact `ErrorFunctionNotFound` assertion and is an expected RED despite the outer matcher's status 1. Attempt 06 restores the source and passes the exact selector 1/1 with Cargo and runner status 0. Full details: `attempt-06/proof.md`.
+
+## Historical scalar-options row (attempts 01/02)
 
 Both phases use integrated fork-main revision `9b01104639c4032c892f142a4e049f66ea65fba2`, Linux x86_64 Bazzite 44, Rust/Cargo 1.77.2, default profile, and `testing-environ,sys,no_index,sync,unchecked`. Both use the same preserved Cargo.lock SHA-256 `2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425`, Cargo.toml hash `cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e`, Unix process source hash `2eee89d216ab1edfab6e56b0e6f056195a3708b888395b9429c367412add25f6`, and unmodified test source hash `ddd5a6259b80647528fc1640f77f2c9f69acd913a20bf84b2a0942d3aec09cbf`.
 

@@ -6513,3 +6513,27 @@ fn scalar_run_with_cwd_works_without_collections() {
     let missing_raw_api = engine.eval::<Map>(r#"run_raw("/bin/pwd")"#).unwrap_err();
     assert!(matches!(missing_raw_api.as_ref(), rhai::EvalAltResult::ErrorFunctionNotFound(name, _) if name.starts_with("run_raw")), "run_raw remains registered: {missing_raw_api:?}");
 }
+
+/// The scalar no-argument process API works while array-taking overloads stay absent.
+#[cfg(feature = "no_index")]
+#[test]
+fn run_without_arguments_works_and_array_overloads_are_absent() {
+    let engine = engine(SysConfig::permissive());
+    let result = engine.eval::<Map>(r#"run("/bin/true")"#).unwrap();
+    assert!(result["success"].as_bool().unwrap());
+    assert_eq!(result["code"].as_int().unwrap(), 0);
+    assert!(result["stdout_complete"].as_bool().unwrap());
+    assert!(result["stderr_complete"].as_bool().unwrap());
+    eprintln!("no-index run no-args success=true code=0 stdout_complete=true stderr_complete=true");
+
+    let mut scope = Scope::new();
+    scope.push("supplied_args", vec![Dynamic::from("must-not-run")]);
+    let array_overload = engine
+        .eval_with_scope::<Map>(&mut scope, r#"run("/bin/echo", supplied_args)"#)
+        .unwrap_err();
+    assert!(
+        matches!(array_overload.as_ref(), EvalAltResult::ErrorFunctionNotFound(name, _) if name.starts_with("run")),
+        "array-taking run overload remains registered: {array_overload:?}"
+    );
+    eprintln!("no-index array-taking run overload absent=true");
+}
