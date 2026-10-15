@@ -143,3 +143,7 @@ captures, host/reaper/sentinel live at API return, and sentinel cleanup. Combine
 review accepts only these two Linux sync profiles for this selector. Proof:
 `linux-x34-kill-sync-20261015/`. No competing build was active; own runtime and
 scope were removed.
+
+## X38 Linux escaped-pipe sync rows (2026-10-15)
+
+At integrated fork-main revision 2a1fce7916e9d6e97404f3d68caaf646dc3077a9, the two named kill-capture and post-reap-cancel selectors ran under checked testing-environ,sys,sync and unchecked testing-environ,sys,sync,unchecked on lllm Linux x86_64/Bazzite 44, Rust/Cargo 1.77.2. One scoped one-job invocation: four expected assertion REDs (101), four restored GREENs (1/1), outer runner 0. Durations RED/GREEN: checked kill 39.369/2.224s, checked cancel 2.731/2.733s, unchecked kill 19.265/2.229s, unchecked cancel 2.584/2.561s. Combined independent review accepts exactly these rows and source-bound reuse of the existing base rows. Escaped holder/sentinel, leader exit, EPIPE and cleanup/reaping readbacks are recorded. Owned runtime and exact session scope were removed. Proof and review: linux-x38-escaped-sync-20261015/. Existing unchecked outer status 127 remains unexplained; no broader X38 or A–F closure is claimed.

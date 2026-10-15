@@ -1,0 +1,11 @@
+# Combined independent review — X38 escaped capture, sync profiles
+
+**Result: PASS for the exact rows below.** This review covers only the two named selectors under checked testing-environ,sys,sync and unchecked testing-environ,sys,sync,unchecked, on Linux x86_64/Bazzite 44 with Rust/Cargo 1.77.2.
+
+The review bound the run to integrated fork-main revision 2a1fce7916e9d6e97404f3d68caaf646dc3077a9, Cargo.lock SHA-256 2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425, Unix source SHA-256 2eee89d216ab1edfab6e56b0e6f056195a3708b888395b9429c367412add25f6, test source SHA-256 9b031886eb3b4d365664a244e68ab574ef110e3cc7d41efe5f457d0d1fcb1dbe, and scoped runner SHA-256 25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e.
+
+For both selectors in both profiles, the intentionally inverted assertion exited Cargo 101 and the restored assertion passed 1/1. The tests exercise the public Rhai spawn/kill/wait path. Independent lifecycle evidence records leader exit, the escaped pipe-holding descendant and separate sentinel alive at the API boundary, challenge responses, fresh stdout/stderr write probes returning EPIPE, and fixture-owned cleanup/reaping. The post-reap cancellation case records leader exit before cancellation and preserves the escaped holder until cleanup. The scoped runner exited 0.
+
+The checked and unchecked base-profile rows are reusable from the previously reviewed exact-source evidence. The intervening source delta was checked: it adds an unrelated checked-only stdin test gate and later stdin/no-index test material; it does not change either target selector or their implementation path. Lock, Rust toolchain, relevant features and assertion contract match. Existing X38 unchecked outer-runner status 127 remains unexplained; its individually recorded Cargo results remain usable only within the prior review's stated scope and this review does not reinterpret that wrapper status.
+
+This does not close other X38 selectors, feature profiles, operating systems, MSRVs, fault breadth, or any whole A–F package. Raw commands, outputs, statuses, source hashes, environment, capacity snapshots and cleanup receipt are retained in this attempt directory.
