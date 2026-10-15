@@ -1,0 +1,7 @@
+runner_status=0
+runtime_absent=true
+session_scope_removed=true
+scope=/root/.local/share/agent-builds/rhai/x36-unchecked-20261015-02
+runtime=/root/.local/share/agent-builds/rhai/x36-unchecked-20261015-02/agent-build-dwd4j9gl
+operation=run pid=2031932 pid_absent=true group_absent=true
+operation=spawn pid=2031934 pid_absent=true group_absent=true

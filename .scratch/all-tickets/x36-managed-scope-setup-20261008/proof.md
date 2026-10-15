@@ -1,14 +1,13 @@
 # X36: managed scope setup failure
 
-Status: partial. Accepted Workhorse Linux x86_64 rows use features
-`testing-environ,sys`: before/after-`setpgid` proof at Rust/Cargo 1.96.0,
-`fchdir` and kernel-generated `setpgid` denial at 1.97.1, and a six-test
-recheck plus kernel-denial mutation sensitivity at 1.77.2. The combined
-independent review accepted the named Linux 1.77.2 row. Attempt 10 adds and independently accepts a Darwin arm64/macOS 27.0.1 proof for the kernel-generated `setpgid` denial on
-Rust/Cargo 1.93.0 with the same features. The combined review accepts only
-this named row; other Darwin fault points remain open.
-Other Darwin failure points, platforms, feature combinations and MSRV rows
-remain open.
+Status: partial. Accepted Workhorse Linux x86_64 testing-environ,sys rows
+cover setup failure before/after setpgid, real fchdir EBADF, and
+kernel-generated setpgid EPERM; attempt 09 supplies the named Rust/Cargo
+1.77.2 mutation-sensitivity row. Attempt 12 and combined review accept the
+named Linux testing-environ,sys,unchecked kernel-denial row on Rust/Cargo
+1.77.2. Attempt 10 and combined review accept the named Darwin arm64/macOS
+27.0.1 base kernel-denial row on Rust/Cargo 1.93.0. Other Darwin setup points,
+platforms, feature combinations, MSRVs, and X36 as a whole remain open.
 
 ## Acceptance covered
 
@@ -73,3 +72,33 @@ RED or acceptance.
 - Attempt 09 (`attempt-09/`) closes that mutation-sensitivity question for the named Workhorse Linux x86_64, Rust/Cargo 1.77.2, `testing-environ,sys` row. It reuses attempt 06's immutable source archive (SHA-256 `ad869e2f338e432a246fec6ce13d102c6b49a5a8c2d062306e98e1eb88601215`); `Cargo.toml`, `Cargo.lock`, and `unix.rs` hashes match its manifest, with tested `unix.rs` SHA-256 `55dc5ad528ad2b4fd56d3fcdd42f92af0b30bf3f96db37c476ee31320dcba713`. In one 600-second scoped invocation with two Cargo jobs, the exact `managed_scope_kernel_setpgid_denial_cleans_created_group` test first ran with only the test-only kernel-denial seam disabled and reached the intended public assertion failure (expected RED, exit 101: the shell ran); after byte-identical source restoration, the same test passed (GREEN, exit 0). Cargo/rustc were 1.77.2. Invocation script SHA-256 is `9b4d429ed3acc316b6444bb15b0cbd3ae47bbac557e0743556ffbe1e9827e9d7`; input manifest SHA-256 is `1c87de405180e7440341a9f88c4aee4c96e9976181ad05144ffa047b2dc34f53`; canonical `run_scoped.py` SHA-256 remains `25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e`. Raw red/green logs and 13 execution-evidence files were exported before cleanup; each exported evidence hash matches the Workhorse copy. The local post-cleanup readback was then added, and the final 14-file manifest `attempt-09/evidence-export.sha256` covers all local evidence. The test reported run PID 184402 and spawn PID 184404, with no marker execution and retired reservations; in-run and independent Workhorse readback confirmed both exact PIDs and process groups absent. The exact scope was `/var/roothome/.local/share/agent-builds/rhai/x36-msrv1772-redgreen-20261008-7870fc0b49bf46868f759045676c0df0`; the invocation returned exit 0, the scoped private runtime was absent, and the session scope was removed after export. The combined independent review returned READY for this named 1.77.2 row; X36 overall remains partial. No compiled output is reusable. The expected RED is a successful mutation control, not a product failure.
 
 - Attempt 10 (`attempt-10/`) accepts only the named Darwin arm64/macOS 27.0.1 kernel-denial case at Rust/Cargo 1.93.0 with `testing-environ,sys`. It reuses attempt 06's immutable source archive (SHA-256 `ad869e2f338e432a246fec6ce13d102c6b49a5a8c2d062306e98e1eb88601215`); archived `Cargo.toml`, `Cargo.lock`, and `unix.rs` hashes match `inputs.json`, and the tested source SHA-256 is `55dc5ad528ad2b4fd56d3fcdd42f92af0b30bf3f96db37c476ee31320dcba713`. One 600-second scoped invocation with one Cargo job ran the exact `managed_scope_kernel_setpgid_denial_cleans_created_group` public-Engine `run`/`spawn` test. Disabling only the test denial seam produced the expected public assertion RED (exit 101: the real shell ran); byte-identical restored source passed GREEN (exit 0). Exact PIDs 71596/71597 had no marker, retired reservations, and were absent with their process groups both in the test and in independent post-run Python readback after the scoped runner exited. The runner returned 0; environment-to-result evidence timestamps show 41.36 seconds, below the 600-second cap. Source archive, script, environment, mutation/restored hashes, logs, and cleanup readback are retained under `attempt-10/`; 16 exported evidence files have verified hashes. The private runtime and exact session scope were removed after export. No compiled output is reusable. Combined review is READY for this named row; other X36 Darwin fault points remain open.
+
+## Linux unchecked feature row
+
+Attempt 11 (attempt-11/) stopped before the intended assertion. The targeted
+Cargo invocation compiled all library tests and found an existing test-helper
+call to Engine::set_max_string_size, which src/api/limits.rs deliberately
+omits under unchecked. Cargo returned 101 during compilation; the harness did
+not accept it as the expected RED because the intended assertion text was
+absent. The private runtime was removed by the scoped runner and the exact
+empty session scope was retired after readback. This was a test-build
+compatibility failure, not product RED.
+
+Attempt 12 (attempt-12/) adds only #[cfg(not(feature = "unchecked"))] to
+that helper's Engine string-limit call. The process SysConfig.max_output
+exercise and X36 test remain compiled under unchecked. The owned source copy
+uses revision ffeab7c7958e69ebada7064aa9d0ca31f84edb13, overlays the one-line
+working-tree patch (SHA-256
+b8d09cfd02366307350b180131d79912eb1cd7e2213ef168c2a37d955819c711), and
+uses the accepted lock SHA-256
+2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425.
+On lllm Linux x86_64, Rust/Cargo 1.77.2, features
+testing-environ,sys,unchecked, the targeted
+managed_scope_kernel_setpgid_denial_cleans_created_group test produced
+expected assertion RED 101 with only the denial seam disabled, then restored
+GREEN 1/1. Both public run and spawn reported no marker, retired
+reservation, and exact PID/group absence; independent post-run readback
+confirmed PIDs 2031932 and 2031934 absent. The scoped runner exited 0, the
+runtime and exact scope were removed, and every evidence hash verified.
+Combined review accepts only this named Linux unchecked row:
+attempt-12/combined-review.md. No build cache remains.

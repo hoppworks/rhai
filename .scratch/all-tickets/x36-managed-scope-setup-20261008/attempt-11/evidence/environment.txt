@@ -1,0 +1,18 @@
+utc=2026-10-15T08:44:33Z
+Linux lllm 7.2.0-ogc6.1.fc44.x86_64 #1 SMP PREEMPT_DYNAMIC Mon Aug 24 03:42:13 UTC 2026 x86_64 GNU/Linux
+revision=ffeab7c7958e69ebada7064aa9d0ca31f84edb13
+runtime=/root/.local/share/agent-builds/rhai/x36-unchecked-20261015-01/agent-build-6h6yty17
+tmpdir=/root/.local/share/agent-builds/rhai/x36-unchecked-20261015-01/agent-build-6h6yty17/tmp
+scope=/root/.local/share/agent-builds/rhai/x36-unchecked-20261015-01
+run_scoped_sha256=25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e
+lock_archive_sha256=ad869e2f338e432a246fec6ce13d102c6b49a5a8c2d062306e98e1eb88601215
+cargo_jobs=1
+estimated_additional_peak_bytes=3221225472
+Filesystem         1B-blocks          Used    Available Use% Mounted on
+/dev/nvme0n1p3 2045630218240 1259650387968 714027560960  64% /var
+MemTotal:       130992772 kB
+MemAvailable:   96040112 kB
+cargo=cargo 1.77.2 (e52e36006 2024-03-26)
+rustc=rustc 1.77.2 (25ef9e3d8 2024-04-09)
+features=testing-environ,sys,unchecked
+test=managed_scope_kernel_setpgid_denial_cleans_created_group

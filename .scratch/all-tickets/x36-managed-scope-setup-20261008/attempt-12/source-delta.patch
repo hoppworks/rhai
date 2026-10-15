@@ -1,0 +1,12 @@
+diff --git a/src/packages/sys/process/unix.rs b/src/packages/sys/process/unix.rs
+index 44d11443..19598543 100644
+--- a/src/packages/sys/process/unix.rs
++++ b/src/packages/sys/process/unix.rs
+@@ -4923,6 +4923,7 @@ mod tests {
+         fs::write(fixture.0.join("child.py"), child_script).unwrap();
+         let child_code = "exec(open(__import__('os').environ['RHAI_FIRST_SCRIPT']).read())";
+         let mut engine = Engine::new();
++        #[cfg(not(feature = "unchecked"))]
+         engine.set_max_string_size(LIMIT);
+         let package = SysPackage::new(
+             SysConfig::default()

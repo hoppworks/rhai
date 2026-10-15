@@ -4923,6 +4923,7 @@ mod tests {
         fs::write(fixture.0.join("child.py"), child_script).unwrap();
         let child_code = "exec(open(__import__('os').environ['RHAI_FIRST_SCRIPT']).read())";
         let mut engine = Engine::new();
+        #[cfg(not(feature = "unchecked"))]
         engine.set_max_string_size(LIMIT);
         let package = SysPackage::new(
             SysConfig::default()
