@@ -1,0 +1,1 @@
+scope_retired=empty_and_absent

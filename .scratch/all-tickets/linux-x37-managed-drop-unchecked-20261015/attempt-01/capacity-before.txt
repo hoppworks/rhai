@@ -1,0 +1,10 @@
+preflight_utc=2026-10-15T08:33:02Z
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme0n1p3  1.9T  1.2T  689G  63% /var/home
+tmpfs            63G  848M   62G   2% /tmp
+               total        used        free      shared  buff/cache   available
+Mem:           124Gi        30Gi       9.2Gi       427Mi        92Gi        94Gi
+Swap:           15Gi        15Gi       195Mi
+ 10:33:02 up 9 days, 23:32, 14 users,  load average: 4.71, 4.58, 4.80
+cargo=cargo 1.77.2 (e52e36006 2024-03-26)
+rustc=rustc 1.77.2 (25ef9e3d8 2024-04-09)

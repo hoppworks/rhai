@@ -1,0 +1,387 @@
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded ambient-authority v0.0.2
+  Downloaded cfg-if v1.0.5
+  Downloaded const-random v0.1.18
+  Downloaded byteorder v1.5.0
+  Downloaded autocfg v1.5.1
+  Downloaded cap-std v4.0.3
+  Downloaded ahash v0.8.12
+  Downloaded const-random-macro v0.1.16
+  Downloaded itoa v1.0.15
+  Downloaded crunchy v0.2.4
+  Downloaded errno v0.3.14
+  Downloaded fs-set-times v0.20.3
+  Downloaded maybe-owned v0.3.4
+  Downloaded bitflags v2.13.2
+  Downloaded version_check v0.9.5
+  Downloaded static_assertions v1.1.0
+  Downloaded quote v1.0.41
+  Downloaded tiny-keccak v2.0.2
+  Downloaded smartstring v1.0.1
+  Downloaded paste v1.0.15
+  Downloaded ipnet v2.12.2
+  Downloaded io-lifetimes v2.0.4
+  Downloaded io-lifetimes v3.0.1
+  Downloaded rustix-linux-procfs v0.1.1
+  Downloaded cap-primitives v4.0.3
+  Downloaded unicode-ident v1.0.22
+  Downloaded smallvec v1.16.2
+  Downloaded thin-vec v0.2.19
+  Downloaded serde_core v1.0.229
+  Downloaded getrandom v0.3.4
+  Downloaded proc-macro2 v1.0.103
+  Downloaded rmp-serde v1.3.0
+  Downloaded once_cell v1.21.4
+  Downloaded getrandom v0.2.17
+  Downloaded num-traits v0.2.19
+  Downloaded ryu v1.0.20
+  Downloaded rmp v0.8.14
+  Downloaded io-extras v0.19.0
+  Downloaded serde v1.0.229
+  Downloaded memchr v2.8.3
+  Downloaded serde_json v1.0.145
+  Downloaded portable-atomic v1.15.0
+  Downloaded syn v2.0.106
+  Downloaded zerocopy v0.8.59
+  Downloaded rustix v1.1.5
+  Downloaded libc v0.2.189
+  Downloaded linux-raw-sys v0.12.1
+ Downloading crates ...
+  Downloaded web-time v1.1.0
+   Compiling autocfg v1.5.1
+   Compiling portable-atomic v1.15.0
+   Compiling rustix v1.1.5
+   Compiling version_check v0.9.5
+   Compiling libc v0.2.189
+   Compiling crunchy v0.2.4
+   Compiling cfg-if v1.0.5
+   Compiling bitflags v2.13.2
+   Compiling linux-raw-sys v0.12.1
+   Compiling io-lifetimes v2.0.4
+   Compiling proc-macro2 v1.0.103
+   Compiling tiny-keccak v2.0.2
+   Compiling io-lifetimes v3.0.1
+   Compiling once_cell v1.21.4
+   Compiling num-traits v0.2.19
+   Compiling quote v1.0.41
+   Compiling unicode-ident v1.0.22
+   Compiling io-extras v0.19.0
+   Compiling getrandom v0.2.17
+   Compiling zerocopy v0.8.59
+   Compiling serde_core v1.0.229
+   Compiling cap-primitives v4.0.3
+   Compiling getrandom v0.3.4
+   Compiling const-random-macro v0.1.16
+   Compiling fs-set-times v0.20.3
+   Compiling rustix-linux-procfs v0.1.1
+   Compiling ahash v0.8.12
+   Compiling smartstring v1.0.1
+   Compiling ambient-authority v0.0.2
+   Compiling cap-std v4.0.3
+   Compiling ipnet v2.12.2
+   Compiling maybe-owned v0.3.4
+   Compiling paste v1.0.15
+   Compiling syn v2.0.106
+   Compiling const-random v0.1.18
+   Compiling rhai v1.26.1 (/var/home/Daniel/.local/share/agent-builds/rhai/lllm-x37-unchecked-20261015T083302Z/agent-build-35mnslac/source)
+   Compiling serde v1.0.229
+   Compiling static_assertions v1.1.0
+   Compiling rhai_codegen v3.2.0 (/var/home/Daniel/.local/share/agent-builds/rhai/lllm-x37-unchecked-20261015T083302Z/agent-build-35mnslac/source/codegen)
+   Compiling byteorder v1.5.0
+   Compiling thin-vec v0.2.19
+   Compiling serde_json v1.0.145
+   Compiling smallvec v1.16.2
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: unused variable: `ctx`
+   --> src/packages/sys/fs.rs:566:36
+    |
+566 |     .set_into_module(module, move |ctx: NativeCallContext, file: FileHandle| -> Res<String> {
+    |                                    ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: unused variable: `ctx`
+   --> src/packages/sys/fs.rs:591:36
+    |
+591 |     .set_into_module(module, move |ctx: NativeCallContext, file: FileHandle, len: INT| -> Res<String> {
+    |                                    ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/sys/fs.rs:619:40
+    |
+619 |         .set_into_module(module, move |ctx: NativeCallContext, file: FileHandle| -> Res<crate::Blob> {
+    |                                        ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src/packages/sys/fs.rs:636:40
+    |
+636 |         .set_into_module(module, move |ctx: NativeCallContext, file: FileHandle, len: INT| -> Res<crate::Blob> {
+    |                                        ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:678:13
+    |
+678 |         let mut wait_operation = "wait for child";
+    |             ----^^^^^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` on by default
+
+warning: unused variable: `termination`
+    --> src/packages/sys/process/unix.rs:1118:22
+     |
+1118 |                 let (termination, _operation) = if self.managed {
+     |                      ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_termination`
+
+warning: unused variable: `faults`
+    --> src/packages/sys/process/unix.rs:2301:13
+     |
+2301 |     let mut faults = ExecutionFaults::take_for_execution();
+     |             ^^^^^^ help: if this is intentional, prefix it with an underscore: `_faults`
+
+warning: unused variable: `ctx`
+    --> src/packages/sys/process/unix.rs:2269:5
+     |
+2269 |     ctx: &NativeCallContext,
+     |     ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2301:9
+     |
+2301 |     let mut faults = ExecutionFaults::take_for_execution();
+     |         ----^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2378:9
+     |
+2378 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: unused variable: `ctx`
+    --> src/packages/sys/process/unix.rs:2420:5
+     |
+2420 |     ctx: &NativeCallContext,
+     |     ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2721:9
+     |
+2721 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variant `OnlyZombieLeader` is never constructed
+  --> src/packages/sys/process/unix.rs:51:5
+   |
+48 | enum GroupCloseOutcome {
+   |      ----------------- variant in this enum
+...
+51 |     OnlyZombieLeader,
+   |     ^^^^^^^^^^^^^^^^
+   |
+   = note: `GroupCloseOutcome` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+   = note: `#[warn(dead_code)]` on by default
+
+warning: methods `numeric_operations_probe`, `quarantine_observations_probe`, and `fail_reservation` are never used
+    --> src/packages/sys/process/unix.rs:1549:8
+     |
+1422 | impl ExecutionFaults {
+     | -------------------- methods in this implementation
+...
+1549 |     fn numeric_operations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1560 |     fn quarantine_observations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1585 |     fn fail_reservation(&self) -> bool {
+     |        ^^^^^^^^^^^^^^^^
+
+warning: `rhai` (lib) generated 15 warnings (run `cargo fix --lib -p rhai` to apply 12 suggestions)
+   Compiling rmp v0.8.14
+   Compiling ryu v1.0.20
+   Compiling memchr v2.8.3
+   Compiling itoa v1.0.15
+   Compiling rmp-serde v1.3.0
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:1210:9
+     |
+1210 |     let mut holder = command.spawn().expect("start escaped captured-pipe holder");
+     |         ----^^^^^^
+     |         |
+     |         help: remove this `mut`
+     |
+     = note: `#[warn(unused_mut)]` on by default
+
+warning: value assigned to `incomplete` is never read
+    --> tests/sys_process.rs:1764:17
+     |
+1764 |         let mut incomplete = false;
+     |                 ^^^^^^^^^^
+     |
+     = help: maybe it is overwritten before being read?
+     = note: `#[warn(unused_assignments)]` on by default
+
+warning: unused variable: `state`
+    --> tests/sys_process.rs:2069:26
+     |
+2069 |                 Ok(Some((state, parent, group, start)))
+     |                          ^^^^^ help: if this is intentional, prefix it with an underscore: `_state`
+     |
+     = note: `#[warn(unused_variables)]` on by default
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:2700:9
+     |
+2700 |     let mut sentinel = managed_spawn_sentinel();
+     |         ----^^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:2808:9
+     |
+2808 |     let mut sentinel = managed_spawn_sentinel();
+     |         ----^^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:3000:9
+     |
+3000 |     let mut sentinel = Sentinel(
+     |         ----^^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:3136:9
+     |
+3136 |     let mut sentinel = managed_spawn_sentinel();
+     |         ----^^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:3308:9
+     |
+3308 |     let mut sentinel = Sentinel(
+     |         ----^^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:3447:9
+     |
+3447 |     let mut sentinel = Sentinel(
+     |         ----^^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:5062:9
+     |
+5062 |     let mut engine = engine(config);
+     |         ----^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:5257:9
+     |
+5257 |     let mut engine = engine(config);
+     |         ----^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:6187:9
+     |
+6187 |     let mut engine = engine(config);
+     |         ----^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: constant `DIRECT_DROP_RECORD_ENV` is never used
+  --> tests/sys_process.rs:40:7
+   |
+40 | const DIRECT_DROP_RECORD_ENV: &str = "RHAI_SYS_DIRECT_DROP_RECORD";
+   |       ^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: unused `Dynamic` that must be used
+   --> tests/fixtures/sys_process_shared_child_contract.rs:260:5
+    |
+260 |     engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("kill after completion is idempotent");
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` on by default
+help: use `let _ = ...` to ignore the resulting value
+    |
+260 |     let _ = engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("kill after completion is idempotent");
+    |     +++++++
+
+warning: unused `Dynamic` that must be used
+   --> tests/fixtures/sys_process_shared_child_contract.rs:261:5
+    |
+261 |     engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("repeated kill after completion is idempotent");
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+help: use `let _ = ...` to ignore the resulting value
+    |
+261 |     let _ = engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("repeated kill after completion is idempotent");
+    |     +++++++
+
+warning: `rhai` (test "sys_process") generated 15 warnings (run `cargo fix --test "sys_process"` to apply 11 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized + debuginfo] target(s) in 40.44s
+     Running tests/sys_process.rs (/home/Daniel/.local/share/agent-builds/rhai/lllm-x37-unchecked-20261015T083302Z/agent-build-35mnslac/target/debug/deps/sys_process-ab918177818c9096)
+
+running 1 test
+test managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not ... managed_spawn_drop_started root=/home/Daniel/.local/share/agent-builds/rhai/lllm-x37-unchecked-20261015T083302Z/agent-build-35mnslac/tmp/rhai-sys-test-1896370-managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not-0 test_pid=1896370 sentinel_pid=1896372 sentinel_pgid=1896372 leader=1896374 worker=1896376 leaf=1896378 group=1896374
+managed_spawn_nonfinal_drop leader=1896374 leader_live=true worker=1896376 worker_live=true leaf=1896378 leaf_live=true all_live=true
+managed_spawn_final_drop leader=1896374 leader_esrch=true worker=1896376 worker_esrch=true leaf=1896378 leaf_esrch=true all_esrch=true sentinel=1896372 live=true
+thread 'managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not' panicked at tests/sys_process.rs:4421:5:
+final Child drop terminated the unrelated sentinel
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+managed-scope sentinel_cleanup pid=1896372 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(1896376) worker_esrch=true leaf_pid=Some(1896378) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(1896374) leader_esrch=true
+FAILED
+
+failures:
+
+failures:
+    managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 60 filtered out; finished in 0.14s
+
+error: test failed, to rerun pass `--test sys_process`
