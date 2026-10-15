@@ -1,0 +1,5 @@
+Public managed Child.kill selector, Linux base checked profile:
+assertion-sensitivity RED=101 at deliberate public kill-report inversion;
+restored GREEN=1/1; exact PIDFD, process-group, fixture-reaper, host and sentinel
+observations recorded. Scoped runner=0; owned runtime and exact empty session
+scope removed after evidence export.

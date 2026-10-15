@@ -116,3 +116,17 @@ sentinel cleanup afterward. One-job compile/test took 38.216s for RED and
 2.223s incremental for GREEN. A one-job Tauron build was preserved. Combined
 review passes only this named Linux unchecked row. Proof:
 linux-x34-kill-unchecked-20261015/. This does not independently close X25.
+
+## X34 Linux managed Child.kill checked + unchecked rows (2026-10-15)
+
+At integrated fork-main revision fc441c5115302d277c62ff653f9a242700146fce,
+managed_child_kill_reports_group_closed_under_fixture_reaper passed assertion
+RED101/restored GREEN1/1 in checked `testing-environ,sys` (one scoped runner,
+runner0; compile/test 38.750s, incremental GREEN 2.311s). Reused the exact
+current-source unchecked row accepted at revision 29d3a44096fb35c315931926af142b2af00300bf.
+Both profiles have exact leader/worker/leaf PIDFD closure, group ESRCH, reaper
+waits, failed Child report with complete captures, host/reaper/sentinel survival
+at API return, and sentinel cleanup. Combined review accepts only these two
+Linux profiles for this selector. Proofs: `linux-x34-kill-base-20261015/` and
+`linux-x34-kill-unchecked-20261015/`. One-job Tauron work remained untouched;
+owned runtime and empty scope were removed.
