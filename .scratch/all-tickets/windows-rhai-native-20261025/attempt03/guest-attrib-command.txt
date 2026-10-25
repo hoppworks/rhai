@@ -1,0 +1,1 @@
+(Get-FileHash C:\Windows\System32\attrib.exe).Hash.ToLowerInvariant();$env:SystemRoot

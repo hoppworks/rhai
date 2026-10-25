@@ -1,0 +1,8 @@
+    Updating git repository `https://github.com/schungx/rustyline`
+error: failed to load source for dependency `rustyline`
+
+Caused by:
+  Unable to update https://github.com/schungx/rustyline?branch=v15_fake#8c27e028
+
+Caused by:
+  path too long: 'C:/Users/RhaiTest/.local/share/agent-builds/rhai/rhai-native-3e02fab1e0f047538d581fa4c9a52c85/run/scoped-94560fa849c34f74b733b2304dae87f6/work/cargo-home/git/checkouts/rustyline-36d35ad65bb96db4/8c27e02/.git/'; class=Filesystem (30)

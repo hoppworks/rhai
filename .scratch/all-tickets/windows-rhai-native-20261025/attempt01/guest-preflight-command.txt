@@ -1,0 +1,1 @@
+(gci $HOME/.cargo/registry/cache -r -file -ea 0|measure).Count;(gci $HOME/.cargo/registry/src -r -file -ea 0|measure).Count;(gdr C).Free/1GB

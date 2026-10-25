@@ -1,0 +1,27 @@
+@echo off
+setlocal EnableExtensions DisableDelayedExpansion
+cd /d "%~dp0"
+if errorlevel 1 exit /b 60
+set RHAI_FILE_HANDLE_WRONG_EXPECTATION=1
+"%~dp0cargo.exe" test --locked --features testing-environ,sys,metadata --test sys_fs test_open_file_default_preserves_contents_and_shares_cursor -- --exact --nocapture > red.log 2>&1
+set RED_EXIT=%ERRORLEVEL%
+set RHAI_FILE_HANDLE_WRONG_EXPECTATION=
+type red.log
+if not "%RED_EXIT%"=="101" exit /b 61
+findstr /C:"independent host readback:" red.log > NUL
+if errorlevel 1 exit /b 62
+findstr /C:"test result: FAILED. 0 passed; 1 failed" red.log > NUL
+if errorlevel 1 exit /b 63
+findstr /C:"test_open_file_default_preserves_contents_and_shares_cursor" red.log > NUL
+if errorlevel 1 exit /b 64
+echo RHAI_RED_EXPECTED_ASSERTION_CONFIRMED
+"%~dp0cargo.exe" test --locked --features testing-environ,sys,metadata --test sys_fs test_open_file_default_preserves_contents_and_shares_cursor -- --exact --nocapture > green.log 2>&1
+set GREEN_EXIT=%ERRORLEVEL%
+type green.log
+if not "%GREEN_EXIT%"=="0" exit /b 65
+findstr /C:"independent host readback:" green.log > NUL
+if errorlevel 1 exit /b 66
+findstr /C:"test result: ok. 1 passed; 0 failed" green.log > NUL
+if errorlevel 1 exit /b 67
+echo RHAI_GREEN_HOST_READBACK_CONFIRMED
+exit /b 0

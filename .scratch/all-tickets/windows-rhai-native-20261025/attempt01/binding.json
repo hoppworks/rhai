@@ -1,0 +1,32 @@
+{
+  "owner": "this Rhai session",
+  "purpose": "one native public-Engine sys_fs RED/GREEN with independent host-file readback under public Windows Job custody",
+  "source_commit": "25e78217dc75f4ccda64a16710ac1f53bee521cb",
+  "integrated_head_at_preflight": "f352232bb08ee1c050d6433c77482c67b67196c3",
+  "product_source_delta_from_source_commit": [],
+  "vm_uuid": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19",
+  "guest_user": "RhaiTest",
+  "nonce": "3e02fab1e0f047538d581fa4c9a52c85",
+  "guest_scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\rhai-native-3e02fab1e0f047538d581fa4c9a52c85",
+  "host_stage": "/var/roothome/.local/share/agent-builds/rhai/windows-rhai-native-3e02fab1e0f047538d581fa4c9a52c85",
+  "medium": "/var/lib/libvirt/images/rhai-win11-quality/rhai-native-3e02fab1e0f047538d581fa4c9a52c85.iso",
+  "medium_sha256": "4fd6cbe27775c9118458c57b887a1dde640384ca456001921316e5145e27540e",
+  "inputs_sha256": {
+    "rhai-source.zip": "422507c89fef8094387a82e6af18d80453af1c56579ee12a55b332aaff30be93",
+    "source-manifest.json": "1ed2dc76e988d82654f588e2c9e7c32c8526f2d888c44fbbaee9b996f7c847a1",
+    "Cargo.lock": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+    "RunRhaiContract.cmd": "2600784687b66ff4a543ea8948d6d2c6e6d5867aa4df8e61ff14db9542d7f672",
+    "RunRhaiContractControl.ps1": "90a0db9dcb380661624ce564964d1a93e53bcc12ce051a8adfdd1f95444324fb",
+    "Start.ps1": "1931843b66faa535ea16a754876dbfc1398cda7ee91d40fce65de1796d5be091"
+  },
+  "accepted_public_build_manifest_sha256": "613361eba54c1edfaa0da576ccece3a6cb0009cfc4e35af582d46f967e1a320a",
+  "public_build_original_expiry_utc": "2026-10-25T19:14:01.279906Z",
+  "guest_cmd_sha256": "15cd209c995b7d3009c91ca40892d5b8f1fb162f3e5f10716642ea278e8e0d7b",
+  "planned_driver": "public default, 180s finite bound",
+  "outer_observer_seconds": 185,
+  "serial_export_seconds": 180,
+  "max_export_files": 64,
+  "max_export_file_bytes": 4194304,
+  "max_export_total_bytes": 16777216,
+  "status": "pre-execution source review pending; no native Rhai test started"
+}

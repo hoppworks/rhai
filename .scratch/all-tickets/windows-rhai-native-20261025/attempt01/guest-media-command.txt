@@ -1,0 +1,1 @@
+(Get-FileHash E:\Start.ps1).Hash.ToLowerInvariant();Test-Path E:\RunRhaiContract.cmd

@@ -1,0 +1,1 @@
+gci $HOME/.local/share/agent-builds/rhai/n-97a0dde0/run/scoped-1d3ca445a6de4718a53fbc11ddaff76f -Force|select Name,Length

@@ -1,0 +1,1 @@
+gci $HOME/.local/share/agent-builds/rhai/n-97a0dde0/run -Force|select Name,Length

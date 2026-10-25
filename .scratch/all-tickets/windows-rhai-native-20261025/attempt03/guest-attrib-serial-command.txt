@@ -1,0 +1,1 @@
+$s=[IO.Ports.SerialPort]::new('COM1',115200);$s.Open();$s.WriteLine((Get-FileHash C:\Windows\System32\attrib.exe).Hash);$s.Dispose()
