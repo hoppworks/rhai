@@ -1,0 +1,44 @@
+{
+  "accepted": true,
+  "source_commit": "25e78217dc75f4ccda64a16710ac1f53bee521cb",
+  "source_manifest_sha256": "1ed2dc76e988d82654f588e2c9e7c32c8526f2d888c44fbbaee9b996f7c847a1",
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "features": "testing-environ,sys,metadata",
+  "native_os": "Windows 11 Pro build 26300",
+  "cargo_version": "cargo 1.93.0 (083ac5135 2025-12-15)",
+  "rustc_version": "rustc 1.93.0 (254b59607 2026-01-19)",
+  "public_build_manifest_sha256": "90e10dd760e2d24eb9cb9dd2f5fc7028e4a3bb981f7a6280055682e9d0549116",
+  "compile_targets": [
+    "sys_env",
+    "sys_fs",
+    "sys_policy"
+  ],
+  "red": "expected assertion; 0 passed/1 failed; independent host readback original XYyload",
+  "green_passed_by_target": {
+    "sys_env": 6,
+    "sys_fs": 29,
+    "sys_policy": 21
+  },
+  "green_total_passed": 56,
+  "green_failed": 0,
+  "green_ignored": 0,
+  "journal_transitions": [
+    "INTENT",
+    "IDENTITY",
+    "STAGED",
+    "LIFECYCLE",
+    "EVIDENCE",
+    "OUTCOME",
+    "REMOVE_INTENT",
+    "REMOVED"
+  ],
+  "journal_crc_valid": true,
+  "runtime_absent": true,
+  "driver_exit": 0,
+  "driver_elapsed_seconds": 60.4665037,
+  "export_frames": 214,
+  "export_files": 13,
+  "export_bytes": 182898,
+  "serial_sha256": "6309089b8993ffa21ee6c6aa2994e1f1c0cefdc57e6e663fa4264256d0b7a757",
+  "serial_bytes": 367256
+}
