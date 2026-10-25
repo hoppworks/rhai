@@ -1,0 +1,1 @@
+$r=Join-Path $env:USERPROFILE '.local\share\agent-builds\rhai\project-control-49243ecf52d64c609a876e3c52409500';$f=@(Get-ChildItem $r -File -Recurse -Force);$d=@(Get-ChildItem $r -Directory -Recurse -Force);"FILES=$($f.Count) DIRS=$($d.Count) BYTES=$(($f|Measure-Object Length -Sum).Sum)"

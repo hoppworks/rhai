@@ -1,0 +1,1 @@
+$p=Get-Content E:\cleanup-host-manifest.json -Raw|ConvertFrom-Json;"COUNT=$($p.files.PSObject.Properties.Count) ENUM=$(@($p.files.PSObject.Properties).Count) MAX=$($p.max_files),$($p.max_entries),$($p.max_bytes) SCOPE=$($p.scope)"

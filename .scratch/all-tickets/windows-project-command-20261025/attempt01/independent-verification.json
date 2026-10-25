@@ -1,0 +1,27 @@
+{
+  "accepted": true,
+  "source_commit": "25e78217dc75f4ccda64a16710ac1f53bee521cb",
+  "native_driver_exit": 0,
+  "driver_seconds": 6.6222324,
+  "wrong_expectation_rejected": true,
+  "cargo_metadata_packages": [
+    [
+      "rhai",
+      "1.26.1"
+    ],
+    [
+      "rhai_codegen",
+      "3.2.0"
+    ],
+    [
+      "custom_root",
+      "0.1.0"
+    ]
+  ],
+  "journal_crc_records": 8,
+  "export_files": 10,
+  "export_bytes": 201438,
+  "serial_sha256": "c5ee47e90d2d5726e630fbb3c6e7f8b3df1edc33f168897a5870c31ca1894a3a",
+  "scope_runtime_removed": true,
+  "product_test_run": false
+}

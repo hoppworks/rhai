@@ -1,0 +1,13 @@
+{
+  "medium": "/var/lib/libvirt/images/rhai-win11-quality/project-command-49243ecf52d64c609a876e3c52409500-v2.iso",
+  "sha256": "a74246479471d3761f758fe3ad08e35e9dc9a428376cc645f756db55e72041df",
+  "files": {
+    "project-command-49243ecf52d64c609a876e3c52409500.bundle": "83ae096d1bb212a739c03d1ef0133b8a1c765906c0e1bfd6fb63ef077d72ea05",
+    "rhai-source.zip": "422507c89fef8094387a82e6af18d80453af1c56579ee12a55b332aaff30be93",
+    "RunProjectCommandControl.ps1": "50b8bb22866f18ae3f25f6ba47d40e18fb03ac043518b7e9e3b20c8899fbb01a",
+    "source-manifest.json": "1ed2dc76e988d82654f588e2c9e7c32c8526f2d888c44fbbaee9b996f7c847a1",
+    "Start.ps1": "2d031d4ce137d9034bf1a83ae473a0c87fa4619705a6551cc14c812653da99a8"
+  },
+  "previous_medium_retired": true,
+  "native_started": false
+}

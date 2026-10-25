@@ -1,0 +1,5 @@
+1b2dee6183df056375603e7dc1a9be16d4330c7985492e22c9ef3714f40f27d6  /var/lib/libvirt/images/rhai-win11-quality/project-retire-49243ecf52d64c609a876e3c52409500-v5.iso
+047d06bc87277971d68ff762c786ed859e79e9f46a421de70eda585bc9f473cb  -
+047d06bc87277971d68ff762c786ed859e79e9f46a421de70eda585bc9f473cb  /var/roothome/.local/share/agent-builds/rhai/project-command-49243ecf52d64c609a876e3c52409500/retire-media/RetireProjectOriginals.ps1
+f4b49a4faaa508d6f7fc3831d0c032a0d5488854d837e9c13b568a0454f287b5  -
+f4b49a4faaa508d6f7fc3831d0c032a0d5488854d837e9c13b568a0454f287b5  /var/roothome/.local/share/agent-builds/rhai/project-command-49243ecf52d64c609a876e3c52409500/retire-media/cleanup-host-manifest.json

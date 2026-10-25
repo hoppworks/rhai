@@ -1,0 +1,1 @@
+if ((Get-FileHash E:\ExportProjectOriginals.ps1).Hash -eq '4094E856B99373B69FF346894E909215064CB1FD5EB213BF37420F27496A7BC2') { & ([scriptblock]::Create((Get-Content E:\ExportProjectOriginals.ps1 -Raw))) } else { throw 'EXPORT_SOURCE_MISMATCH' }

@@ -1,0 +1,14 @@
+{
+  "host_utc_before_enter": "2026-10-25T17:55:21.906120+00:00",
+  "original_expiry_utc": "2026-10-25T19:14:01.279906+00:00",
+  "completion_reserve_seconds": 600,
+  "vm_uuid": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19",
+  "medium_sha256": "d9cf0791531ee8e0ebdea19c276796bc793c369eccbcb1b016b1dfb3a9e6b96d",
+  "start_sha256": "b182f9970c3bc4a39fb1ba62e23de3fe9cca7094711a9ef47d6d14c47f0ddf99",
+  "serial_path": "/var/log/libvirt/qemu/rhai-win11-quality-serial0.log",
+  "serial_inode": 126690363,
+  "serial_offset": 1040246,
+  "command": "if ((Get-FileHash E:\\Start.ps1).Hash -eq B182F9970C3BC4A39FB1BA62E23DE3FE9CCA7094711A9EF47D6D14C47F0DDF99) { & E:\\Start.ps1 } else { throw SOURCE_MISMATCH }",
+  "parse_readback": "PROJECT_PARSE_OK in parse-result.png",
+  "native_started": false
+}

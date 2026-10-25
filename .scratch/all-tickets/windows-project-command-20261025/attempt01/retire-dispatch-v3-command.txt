@@ -1,0 +1,1 @@
+if ((Get-FileHash E:\RetireProjectOriginals.ps1).Hash -eq '36813159B2DF9C1BFDE0230C06DADD0D9123AE69756A3ACD11FC56967FACAC25') { & ([scriptblock]::Create((Get-Content E:\RetireProjectOriginals.ps1 -Raw))) -ManifestSha256 '1fe6394d65b872e012ebedca7ac0893dd2668206746865b3e7ff8873f9009c49' } else { throw 'RETIRE_SOURCE_MISMATCH' }

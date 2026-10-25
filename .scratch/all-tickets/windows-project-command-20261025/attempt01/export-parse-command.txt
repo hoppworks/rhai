@@ -1,0 +1,1 @@
+$t=$null;$e=$null;[void][Management.Automation.Language.Parser]::ParseFile('E:\ExportProjectOriginals.ps1',[ref]$t,[ref]$e);"PARSE=$($e.Count) HASH=$((Get-FileHash E:\ExportProjectOriginals.ps1).Hash.ToLowerInvariant())"

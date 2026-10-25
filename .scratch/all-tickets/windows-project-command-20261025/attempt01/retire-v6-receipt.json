@@ -1,0 +1,20 @@
+{
+  "serial_sha256": "8316b1d06aabb30baff5fb4ec9a94aa39db672d9f3e391d6d475317112ed106d",
+  "serial_bytes": 844,
+  "prepared": {
+    "id": "rhai-project-command-49243ecf52d64c609a876e3c52409500",
+    "original_bytes": 36210018,
+    "manifest_sha256": "ce6e0dac8f99c08871d713720498e947f758563f76eec97b647639adc3772cdc",
+    "driver_generation_absent": true,
+    "original_files": 888,
+    "runtime_absent": true
+  },
+  "complete": {
+    "id": "rhai-project-command-49243ecf52d64c609a876e3c52409500",
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\project-control-49243ecf52d64c609a876e3c52409500",
+    "manifest_sha256": "ce6e0dac8f99c08871d713720498e947f758563f76eec97b647639adc3772cdc",
+    "scope_absent": true,
+    "original_files": 888,
+    "foreign_resources_touched": false
+  }
+}

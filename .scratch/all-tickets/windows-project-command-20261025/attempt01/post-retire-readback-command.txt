@@ -1,0 +1,1 @@
+$p=Join-Path $env:USERPROFILE '.local\share\agent-builds\rhai';"PROJECT=$(Test-Path (Join-Path $p 'project-control-49243ecf52d64c609a876e3c52409500')) PUBLIC=$(Test-Path (Join-Path $p 'backend-public-3cd277ed37eb4926b06e55c9c44279a4')) FIXTURE=$(Test-Path (Join-Path $p 'backend-fixture-3cd277ed37eb4926b06e55c9c44279a4'))"

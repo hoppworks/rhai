@@ -1,0 +1,7 @@
+Successfully updated media.
+ Type   Device   Target   Source
+------------------------------------------------------------------------------------------------------------------------------
+ file   disk     sda      /var/lib/libvirt/images/rhai-win11-quality/system.qcow2
+ file   cdrom    sdb      /var/lib/libvirt/images/rhai-win11-quality/work-retirement-bounds-20261009-c18e85827e6f4404.iso
+ file   cdrom    sdc      /var/lib/libvirt/images/rhai-win11-quality/project-command-49243ecf52d64c609a876e3c52409500-v2.iso
+

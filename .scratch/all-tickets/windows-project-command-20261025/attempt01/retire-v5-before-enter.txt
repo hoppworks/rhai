@@ -1,0 +1,9 @@
+2026-10-25T18:20:45Z
+1b2dee6183df056375603e7dc1a9be16d4330c7985492e22c9ef3714f40f27d6  /var/lib/libvirt/images/rhai-win11-quality/project-retire-49243ecf52d64c609a876e3c52409500-v5.iso
+126690363 1443691
+ Target   Source
+-------------------------------------------------------------------------------------------------------------
+ sda      /var/lib/libvirt/images/rhai-win11-quality/system.qcow2
+ sdb      /var/lib/libvirt/images/rhai-win11-quality/work-retirement-bounds-20261009-c18e85827e6f4404.iso
+ sdc      /var/lib/libvirt/images/rhai-win11-quality/project-retire-49243ecf52d64c609a876e3c52409500-v5.iso
+

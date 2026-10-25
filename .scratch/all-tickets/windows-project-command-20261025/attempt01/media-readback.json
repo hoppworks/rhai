@@ -1,0 +1,13 @@
+{
+  "stage": "/var/roothome/.local/share/agent-builds/rhai/project-command-49243ecf52d64c609a876e3c52409500/media-input",
+  "medium": "/var/lib/libvirt/images/rhai-win11-quality/project-command-49243ecf52d64c609a876e3c52409500.iso",
+  "sha256": "d9cf0791531ee8e0ebdea19c276796bc793c369eccbcb1b016b1dfb3a9e6b96d",
+  "files": {
+    "project-command-49243ecf52d64c609a876e3c52409500.bundle": "83ae096d1bb212a739c03d1ef0133b8a1c765906c0e1bfd6fb63ef077d72ea05",
+    "rhai-source.zip": "422507c89fef8094387a82e6af18d80453af1c56579ee12a55b332aaff30be93",
+    "RunProjectCommandControl.ps1": "50b8bb22866f18ae3f25f6ba47d40e18fb03ac043518b7e9e3b20c8899fbb01a",
+    "source-manifest.json": "1ed2dc76e988d82654f588e2c9e7c32c8526f2d888c44fbbaee9b996f7c847a1",
+    "Start.ps1": "b182f9970c3bc4a39fb1ba62e23de3fe9cca7094711a9ef47d6d14c47f0ddf99"
+  },
+  "native_started": false
+}

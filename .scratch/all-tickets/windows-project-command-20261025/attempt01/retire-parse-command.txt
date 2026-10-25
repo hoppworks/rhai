@@ -1,0 +1,1 @@
+$t=$null;$e=$null;[void][Management.Automation.Language.Parser]::ParseFile('E:\RetireProjectOriginals.ps1',[ref]$t,[ref]$e);"PARSE=$($e.Count) SCRIPT=$((Get-FileHash E:\RetireProjectOriginals.ps1).Hash.ToLowerInvariant()) MANIFEST=$((Get-FileHash E:\cleanup-host-manifest.json).Hash.ToLowerInvariant())"

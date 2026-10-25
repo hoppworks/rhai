@@ -1,0 +1,7 @@
+Successfully updated media.
+ Target   Source
+-----------------------------------------------------------------------------------------------------------------
+ sda      /var/lib/libvirt/images/rhai-win11-quality/system.qcow2
+ sdb      /var/lib/libvirt/images/rhai-win11-quality/work-retirement-bounds-20261009-c18e85827e6f4404.iso
+ sdc      /var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/monitor-fixture02.iso
+

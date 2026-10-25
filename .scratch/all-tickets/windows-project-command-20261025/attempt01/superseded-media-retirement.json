@@ -1,0 +1,8 @@
+{
+  "retired_utc": "2026-10-25T17:57:06.916374+00:00",
+  "path": "/var/lib/libvirt/images/rhai-win11-quality/project-command-49243ecf52d64c609a876e3c52409500.iso",
+  "sha256": "d9cf0791531ee8e0ebdea19c276796bc793c369eccbcb1b016b1dfb3a9e6b96d",
+  "bytes": 1558528,
+  "all_vm_mounts_checked": true,
+  "exact_path_absent": true
+}

@@ -1,0 +1,5 @@
+{
+  "vm_uuid": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19",
+  "stage": "/var/roothome/.local/share/agent-builds/rhai/os-readback-ad552d11876d43f59e8ffe6a2cf1618f",
+  "purpose": "read-only native Windows OS edition/build readback after project-command combined review"
+}

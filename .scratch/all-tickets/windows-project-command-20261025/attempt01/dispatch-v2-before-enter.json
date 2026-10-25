@@ -1,0 +1,16 @@
+{
+  "host_utc_before_enter": "2026-10-25T17:58:36.957009+00:00",
+  "original_expiry_utc": "2026-10-25T19:14:01.279906+00:00",
+  "completion_reserve_seconds": 600,
+  "vm_uuid": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19",
+  "medium_sha256": "a74246479471d3761f758fe3ad08e35e9dc9a428376cc645f756db55e72041df",
+  "start_sha256": "2d031d4ce137d9034bf1a83ae473a0c87fa4619705a6551cc14c812653da99a8",
+  "serial_path": "/var/log/libvirt/qemu/rhai-win11-quality-serial0.log",
+  "serial_inode": 126690363,
+  "serial_offset": 1040246,
+  "command_file": "dispatch-v2-command.txt",
+  "command_visible": "dispatch-v2-typed.png",
+  "parse_readback": "START_V2_PARSE_OK in parse-v2-result.png",
+  "two_preentry_failures": true,
+  "native_started": false
+}
