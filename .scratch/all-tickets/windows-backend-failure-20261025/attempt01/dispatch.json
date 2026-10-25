@@ -1,0 +1,17 @@
+{
+  "host_utc": "2026-10-25T17:18:18.685391+00:00",
+  "vm_uuid": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19",
+  "media_sha256": "b8d47948597dd3f60ffbed80baabab9db1ecd50047af7a105e7f181c5e8f5bd3",
+  "start_sha256": "4d90d309a0d7ddb30944bf13b42ce91525edd3be845106a6d39be0727c997301",
+  "serial_path": "/var/log/libvirt/qemu/rhai-win11-quality-serial0.log",
+  "serial_inode": 126689886,
+  "serial_offset": 1139583,
+  "command": "if ((get-filehash e:\\start.ps1).hash -eq '4d90d309a0d7ddb30944bf13b42ce91525edd3be845106a6d39be0727c997301') { & ([scriptblock]::create((get-content e:\\start.ps1 -raw))) } else { throw 'source mismatch' }",
+  "native_launches_before_enter": 0,
+  "parser_readback": "START_PARSE_OK in screenshot parse-result.png",
+  "planned_compilers": 3,
+  "planned_drivers": 2,
+  "expiry_host_utc": "2026-10-25T19:14:01.279906+00:00",
+  "enter_sent": true,
+  "enter_host_utc": "2026-10-25T17:18:57.775134+00:00"
+}

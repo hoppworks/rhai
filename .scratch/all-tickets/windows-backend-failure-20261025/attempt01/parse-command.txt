@@ -1,0 +1,1 @@
+([scriptblock]::create((get-content e:\start.ps1 -raw))) | out-null; 'START_PARSE_OK'

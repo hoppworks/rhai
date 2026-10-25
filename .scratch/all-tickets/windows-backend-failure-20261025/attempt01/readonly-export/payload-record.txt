@@ -1,0 +1,7 @@
+mode=cleanup-readonly
+runtime=C:\Users\RhaiTest\.local\share\agent-builds\rhai\env-control-60e5e70f35564d85bf8f08f18e911f5d\run\scoped-c0e556a3bb0b411daa0ae95b1020be1d
+file=C:\Users\RhaiTest\.local\share\agent-builds\rhai\env-control-60e5e70f35564d85bf8f08f18e911f5d\run\scoped-c0e556a3bb0b411daa0ae95b1020be1d\cleanup-readonly.txt
+link=
+pid=7640
+creation_filetime_utc=134374259732982170
+job_member=True

@@ -18,6 +18,10 @@ internal static class PayloadFixture
         if (args.Length == 2 && args[1] == "--job-quota") return JobQuotaContract(args[0]);
         if (args.Length == 2 && (args[1] == "--job-quota-leaf" || args[1] == "--job-quota-excess"))
             return JobQuotaLeaf(args[0], args[1] == "--job-quota-excess");
+        if (args.Length == 2 && args[1] == "--backend-evidence-hardlink")
+            return BackendFailureInput(args[0], true);
+        if (args.Length == 2 && args[1] == "--backend-cleanup-readonly")
+            return BackendFailureInput(args[0], false);
         bool held = args.Length == 2 && args[1] == "--hold";
         if (args.Length != 1 && !held) return 64;
         File.WriteAllText(args[0], "payload-started\r\n");
@@ -42,6 +46,51 @@ internal static class PayloadFixture
     private static extern bool VirtualFree(IntPtr address, UIntPtr bytes, uint freeType);
     [DllImport("kernel32.dll", SetLastError = true)]
     private static extern bool IsProcessInJob(IntPtr process, IntPtr job, out bool inJob);
+    [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
+    private static extern bool CreateHardLink(string link, string existing, IntPtr securityAttributes);
+
+    // Real payload inputs for the monitor's failure path. The independent
+    // record is outside the runtime so it survives withheld backend removal.
+    private static int BackendFailureInput(string record, bool hardlink)
+    {
+        string runtime = Path.GetFullPath(Environment.CurrentDirectory).TrimEnd('\\');
+        string outside = Path.GetFullPath(record);
+        if (outside.Equals(runtime, StringComparison.OrdinalIgnoreCase) ||
+            outside.StartsWith(runtime + "\\", StringComparison.OrdinalIgnoreCase))
+            throw new InvalidOperationException("independent record must be outside the owned runtime");
+        string file = Path.Combine(runtime, hardlink ? "evidence-hardlink-primary.txt" : "cleanup-readonly.txt");
+        File.WriteAllText(file, hardlink ? "evidence must be withheld\r\n" : "cleanup must remain incomplete\r\n",
+            new System.Text.UTF8Encoding(false));
+        string link = "";
+        if (hardlink)
+        {
+            link = Path.Combine(runtime, "evidence-hardlink-alias.txt");
+            if (!CreateHardLink(link, file, IntPtr.Zero))
+                throw new IOException("CreateHardLink failed", new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error()));
+        }
+        else
+        {
+            File.SetAttributes(file, FileAttributes.ReadOnly);
+            if ((File.GetAttributes(file) & FileAttributes.ReadOnly) == 0)
+                throw new IOException("read-only input attribute was not observed");
+        }
+        using (Process self = Process.GetCurrentProcess())
+        {
+            bool inJob;
+            if (!IsProcessInJob(self.Handle, IntPtr.Zero, out inJob) || !inJob)
+                throw new IOException("backend failure input did not run inside the native Job");
+            File.WriteAllLines(outside, new[] {
+                "mode=" + (hardlink ? "evidence-hardlink" : "cleanup-readonly"),
+                "runtime=" + runtime,
+                "file=" + file,
+                "link=" + link,
+                "pid=" + self.Id.ToString(System.Globalization.CultureInfo.InvariantCulture),
+                "creation_filetime_utc=" + self.StartTime.ToUniversalTime().ToFileTimeUtc().ToString(System.Globalization.CultureInfo.InvariantCulture),
+                "job_member=True"
+            }, new System.Text.UTF8Encoding(false));
+        }
+        return 0;
+    }
     [DllImport("kernel32.dll", SetLastError = true)]
     private static extern bool GlobalMemoryStatusEx(ref MemoryStatus status);
 

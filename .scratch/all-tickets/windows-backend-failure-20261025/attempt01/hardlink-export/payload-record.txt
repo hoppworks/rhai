@@ -1,0 +1,7 @@
+mode=evidence-hardlink
+runtime=C:\Users\RhaiTest\.local\share\agent-builds\rhai\env-control-0e6872acee8647af927c9023af25d331\run\scoped-ce799fb3d94a4af19fda4a60cefc0459
+file=C:\Users\RhaiTest\.local\share\agent-builds\rhai\env-control-0e6872acee8647af927c9023af25d331\run\scoped-ce799fb3d94a4af19fda4a60cefc0459\evidence-hardlink-primary.txt
+link=C:\Users\RhaiTest\.local\share\agent-builds\rhai\env-control-0e6872acee8647af927c9023af25d331\run\scoped-ce799fb3d94a4af19fda4a60cefc0459\evidence-hardlink-alias.txt
+pid=5508
+creation_filetime_utc=134374259495162154
+job_member=True

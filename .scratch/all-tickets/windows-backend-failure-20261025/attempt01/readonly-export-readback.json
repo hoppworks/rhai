@@ -1,0 +1,190 @@
+{
+  "id": "rhai-backend-cleanup-60e5e70f35564d85bf8f08f18e911f5d",
+  "frames": 591,
+  "files": {
+    "observer.json": {
+      "path": "observer.json",
+      "sha256": "5354cb48c1ac121f5497bbddb0a95657d94267e6c376512f11e088ae097aa238",
+      "length": 3235
+    },
+    "bootstrap.stdout": {
+      "path": "bootstrap.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "bootstrap.stderr": {
+      "path": "bootstrap.stderr",
+      "sha256": "b1ceadd9c05b8ead63108495d7526b97de86d39a2bdc12294a93f433397535a2",
+      "length": 102
+    },
+    "payload-record.txt": {
+      "path": "payload-record.txt",
+      "sha256": "c7bbb662398d71ee24efae0a15eb49a6f7abaae122e2a04e60e9c9551fdbf242",
+      "length": 411
+    },
+    "run/.scoped-run-571b18ef43c440588e5da29c757f4f51.journal": {
+      "path": "run/.scoped-run-571b18ef43c440588e5da29c757f4f51.journal",
+      "sha256": "2c0f8248092ba14a98fae7d2d922492bd2ad27b1adf095877a8126a663dada99",
+      "length": 2244
+    },
+    "run/.scoped-evidence-c0e556a3bb0b411daa0ae95b1020be1d/manifest.txt": {
+      "path": "run/.scoped-evidence-c0e556a3bb0b411daa0ae95b1020be1d/manifest.txt",
+      "sha256": "17da34dac64e1dd3abc0d7060d0d56bcff0f17d8f6c831cb5a70576bb60261cb",
+      "length": 397
+    },
+    "run/.scoped-evidence-c0e556a3bb0b411daa0ae95b1020be1d/stderr.log": {
+      "path": "run/.scoped-evidence-c0e556a3bb0b411daa0ae95b1020be1d/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/.scoped-evidence-c0e556a3bb0b411daa0ae95b1020be1d/stdout.log": {
+      "path": "run/.scoped-evidence-c0e556a3bb0b411daa0ae95b1020be1d/stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/.scoped-evidence-c0e556a3bb0b411daa0ae95b1020be1d/runtime/cleanup-readonly.txt": {
+      "path": "run/.scoped-evidence-c0e556a3bb0b411daa0ae95b1020be1d/runtime/cleanup-readonly.txt",
+      "sha256": "b5245fdbfa4764a6c7c36b5a6d1e7fc793e411d5f327b0fa2eb953a423a57fe8",
+      "length": 32
+    },
+    "run/.scoped-evidence-c0e556a3bb0b411daa0ae95b1020be1d/runtime/fixture.exe": {
+      "path": "run/.scoped-evidence-c0e556a3bb0b411daa0ae95b1020be1d/runtime/fixture.exe",
+      "sha256": "5b200bbe5bfd3fd58ca298193c12fac28166d0e5aca6b32cb33b50a616569083",
+      "length": 37888
+    },
+    "run/scoped-c0e556a3bb0b411daa0ae95b1020be1d/cleanup-readonly.txt": {
+      "path": "run/scoped-c0e556a3bb0b411daa0ae95b1020be1d/cleanup-readonly.txt",
+      "sha256": "b5245fdbfa4764a6c7c36b5a6d1e7fc793e411d5f327b0fa2eb953a423a57fe8",
+      "length": 32
+    },
+    "run/scoped-c0e556a3bb0b411daa0ae95b1020be1d/fixture.exe": {
+      "path": "run/scoped-c0e556a3bb0b411daa0ae95b1020be1d/fixture.exe",
+      "sha256": "5b200bbe5bfd3fd58ca298193c12fac28166d0e5aca6b32cb33b50a616569083",
+      "length": 37888
+    },
+    "bin/MonitorAcceptanceDriver.exe": {
+      "path": "bin/MonitorAcceptanceDriver.exe",
+      "sha256": "08484cf776f65e0e57dba1cf120dfaa907c65bcfed1096bf63946e1a15690c44",
+      "length": 207872
+    },
+    "bin/ScopedRunner.exe": {
+      "path": "bin/ScopedRunner.exe",
+      "sha256": "10922b75828a63754d9a8f46b9e2fe68d292062c95c2fd6365ad5b8485d919bf",
+      "length": 179712
+    },
+    "input/fixture.exe": {
+      "path": "input/fixture.exe",
+      "sha256": "5b200bbe5bfd3fd58ca298193c12fac28166d0e5aca6b32cb33b50a616569083",
+      "length": 37888
+    },
+    "fixture-build-readback/bootstrap.stderr": {
+      "path": "fixture-build-readback/bootstrap.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "fixture-build-readback/bootstrap.stdout": {
+      "path": "fixture-build-readback/bootstrap.stdout",
+      "sha256": "867a7ea4e90ff398cc09aa0131eaf0781c394946a6ccccdc8184d015788683fc",
+      "length": 1050
+    },
+    "fixture-build-readback/build-manifest.txt": {
+      "path": "fixture-build-readback/build-manifest.txt",
+      "sha256": "d34e6235bc8c53243feb68fc78f95fdc92dcaa629549fa0e3c95053722381111",
+      "length": 1735
+    },
+    "fixture-build-readback/build-observer.json": {
+      "path": "fixture-build-readback/build-observer.json",
+      "sha256": "1baff7ee22a67ad59a0eeaba12227c323a2393ebb0d37223420ee8a35a056ce8",
+      "length": 573
+    },
+    "fixture-build-readback/run-result.txt": {
+      "path": "fixture-build-readback/run-result.txt",
+      "sha256": "79c5b9102422b2f755e2aed8ef416a0a3ab0156de7c5ba4c85dbeda2e6ac6761",
+      "length": 124
+    },
+    "fixture-build-readback/logs/compile-PayloadFixture.stderr.txt": {
+      "path": "fixture-build-readback/logs/compile-PayloadFixture.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "fixture-build-readback/logs/compile-PayloadFixture.stdout.txt": {
+      "path": "fixture-build-readback/logs/compile-PayloadFixture.stdout.txt",
+      "sha256": "7d6f399bc4ddebe9af0b4976bbe3450aac7fb48c8eba5ec95e37cae5283c787d",
+      "length": 131
+    },
+    "fixture-build-readback/logs/job-members.jsonl": {
+      "path": "fixture-build-readback/logs/job-members.jsonl",
+      "sha256": "869b44043dac86edc8f68eadfa6ca3220d8fff8108fd5b8d1a6dfac8442c947b",
+      "length": 376
+    },
+    "build-readback/bootstrap.stderr": {
+      "path": "build-readback/bootstrap.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "build-readback/bootstrap.stdout": {
+      "path": "build-readback/bootstrap.stdout",
+      "sha256": "82b99b9a319dade0584da04978efc1f2107d37800cd766aaf5cdac93f9dc09ab",
+      "length": 1085
+    },
+    "build-readback/build-manifest.txt": {
+      "path": "build-readback/build-manifest.txt",
+      "sha256": "613361eba54c1edfaa0da576ccece3a6cb0009cfc4e35af582d46f967e1a320a",
+      "length": 1834
+    },
+    "build-readback/build-observer.json": {
+      "path": "build-readback/build-observer.json",
+      "sha256": "fcbe2a97f9ed6cf816413f3edb77bd7ddc633fac8ff42a41e0a6074832443f12",
+      "length": 595
+    },
+    "build-readback/run-result.txt": {
+      "path": "build-readback/run-result.txt",
+      "sha256": "79c5b9102422b2f755e2aed8ef416a0a3ab0156de7c5ba4c85dbeda2e6ac6761",
+      "length": 124
+    },
+    "build-readback/logs/compile-native-driver.stderr.txt": {
+      "path": "build-readback/logs/compile-native-driver.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "build-readback/logs/compile-native-driver.stdout.txt": {
+      "path": "build-readback/logs/compile-native-driver.stdout.txt",
+      "sha256": "50dff7eeccbf8579d12843332bbabf41e11f8169ee13f46a343dd7de6b4eedd7",
+      "length": 2919
+    },
+    "build-readback/logs/compile-production-runner.stderr.txt": {
+      "path": "build-readback/logs/compile-production-runner.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "build-readback/logs/compile-production-runner.stdout.txt": {
+      "path": "build-readback/logs/compile-production-runner.stdout.txt",
+      "sha256": "50dff7eeccbf8579d12843332bbabf41e11f8169ee13f46a343dd7de6b4eedd7",
+      "length": 2919
+    },
+    "build-readback/logs/job-members.jsonl": {
+      "path": "build-readback/logs/job-members.jsonl",
+      "sha256": "9787ec918f3dcddb9eb7543a6202094d8384f691e1b6f430aacbbf5a7d979ba7",
+      "length": 596
+    }
+  },
+  "begin": {
+    "id": "rhai-backend-cleanup-60e5e70f35564d85bf8f08f18e911f5d",
+    "exit": 2,
+    "driver_creation": 134374259717044754,
+    "accepted": true,
+    "contract": "backend-cleanup-readonly",
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-60e5e70f35564d85bf8f08f18e911f5d",
+    "phase": "GREEN",
+    "driver_pid": 9152
+  },
+  "end": {
+    "id": "rhai-backend-cleanup-60e5e70f35564d85bf8f08f18e911f5d",
+    "driver_launched": true,
+    "files": 33,
+    "accepted": true,
+    "exit": 2,
+    "guest_evidence_retained": true
+  },
+  "bytes": 521762
+}

@@ -1,0 +1,23 @@
+{
+  "nonce": "3cd277ed37eb4926b06e55c9c44279a4",
+  "purpose": "retire exactly two accepted negative-control guest scopes after preserved native export",
+  "vm_uuid": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19",
+  "guest_user": "RhaiTest",
+  "source_sha256": "0fbd1e6aa68269debd4964f67a8ea62bd33fc077a4f49eab0f712ea590c28eba",
+  "manifest_sha256": "5e927b3b5b9df80d402455732acb87923c0919e7d2d0157d493cd67293ecfbe9",
+  "host_stage": "/var/roothome/.local/share/agent-builds/rhai/backend-failure-3cd277ed37eb4926b06e55c9c44279a4/retirement",
+  "medium": "/var/lib/libvirt/images/rhai-win11-quality/backend-failure-cleanup-3cd277ed37eb4926b06e55c9c44279a4.iso",
+  "previous_sdc": "/var/lib/libvirt/images/rhai-win11-quality/backend-failure-3cd277ed37eb4926b06e55c9c44279a4.iso",
+  "original_sdc": "/var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/monitor-fixture02.iso",
+  "original_sdb": "/var/lib/libvirt/images/rhai-win11-quality/work-retirement-bounds-20261009-c18e85827e6f4404.iso",
+  "host_expiry_utc": "2026-10-25T19:14:01.279906+00:00",
+  "limits": {
+    "max_scopes": 2,
+    "max_entries_per_scope": 128,
+    "max_bytes_per_scope": 33554432,
+    "actor_count": 4,
+    "serial_frame_chars": 3500
+  },
+  "planning_estimate_guest_action_seconds": 120,
+  "limit_note": "Finite file/byte/frame/actor bounds are enforced by cleanup.ps1; 120 seconds is an observation estimate, not a kill deadline."
+}

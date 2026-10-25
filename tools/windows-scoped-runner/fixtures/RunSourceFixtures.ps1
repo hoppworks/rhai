@@ -62,7 +62,7 @@ $expected = @{
     'tools/windows-scoped-runner/fixtures/MonitorPayloadJobFixture.cs' = 'd9aae76fd68a2cb52721618cd0746af36892a7951c9d0c4d11867a05e11ca7c0'
     'tools/windows-scoped-runner/fixtures/MonitorSpecificationIntakeFixture.cs' = '3e774455bc25a3f0fa40162e4ca3f5d59f35270d27b41c3e2aceb0f144f73d8d'
     'tools/windows-scoped-runner/fixtures/MonitorStagingHandoffFixture.cs' = '463273337d01e64b4285031858188b5ef886bb5cf150f6dabe2ac637bca999d5'
-    'tools/windows-scoped-runner/fixtures/PayloadFixture.cs' = 'f073b677a74cdb0e02f51034bc149163e545109415ec1f4fbab99c67783ffa72'
+    'tools/windows-scoped-runner/fixtures/PayloadFixture.cs' = '1769562b359a47aff6fe008c7702df9f56a3a757541817fa86be48aed8ccb7aa'
     'tools/windows-scoped-runner/fixtures/SpecificationTransferFixture.cs' = 'a6b901d0a9cf59faba2d5f056d983ef627b92b2e9535277b60a1e2e75541e504'
 }
 

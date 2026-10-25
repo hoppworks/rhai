@@ -1,0 +1,1 @@
+'READONLY_ATTR='+[IO.File]::GetAttributes('C:\Users\RhaiTest\.local\share\agent-builds\rhai\env-control-60e5e70f35564d85bf8f08f18e911f5d\run\scoped-c0e556a3bb0b411daa0ae95b1020be1d\cleanup-readonly.txt'); if (Get-Process -Id 7640 -ea SilentlyContinue) { 'ACTOR7640_PRESENT' } else { 'ACTOR7640_ABSENT' }

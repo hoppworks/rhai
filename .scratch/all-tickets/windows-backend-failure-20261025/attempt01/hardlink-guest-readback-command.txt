@@ -1,0 +1,1 @@
+fsutil hardlink list C:\Users\RhaiTest\.local\share\agent-builds\rhai\env-control-0e6872acee8647af927c9023af25d331\run\scoped-ce799fb3d94a4af19fda4a60cefc0459\evidence-hardlink-primary.txt; if (Get-Process -Id 5508 -ea SilentlyContinue) { 'ACTOR5508_PRESENT' } else { 'ACTOR5508_ABSENT' }

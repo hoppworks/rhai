@@ -1,0 +1,9 @@
+{
+  "host_utc": "2026-10-25T17:30:36.831303+00:00",
+  "vm_uuid": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19",
+  "before": " Type   Device   Target   Source\n---------------------------------------------------------------------------------------------------------------------------\n file   disk     sda      /var/lib/libvirt/images/rhai-win11-quality/system.qcow2\n file   cdrom    sdb      /var/lib/libvirt/images/rhai-win11-quality/work-retirement-bounds-20261009-c18e85827e6f4404.iso\n file   cdrom    sdc      /var/lib/libvirt/images/rhai-win11-quality/backend-failure-3cd277ed37eb4926b06e55c9c44279a4.iso\n\n",
+  "after": " Type   Device   Target   Source\n-----------------------------------------------------------------------------------------------------------------------------------\n file   disk     sda      /var/lib/libvirt/images/rhai-win11-quality/system.qcow2\n file   cdrom    sdb      /var/lib/libvirt/images/rhai-win11-quality/work-retirement-bounds-20261009-c18e85827e6f4404.iso\n file   cdrom    sdc      /var/lib/libvirt/images/rhai-win11-quality/backend-failure-cleanup-3cd277ed37eb4926b06e55c9c44279a4.iso\n\n",
+  "medium_sha256": "b4f3452f11f7234cbf99fd39a911a27aa4ecdd65c07e12ce13a500b8d805b349",
+  "source_sha256": "0fbd1e6aa68269debd4964f67a8ea62bd33fc077a4f49eab0f712ea590c28eba",
+  "manifest_sha256": "5e927b3b5b9df80d402455732acb87923c0919e7d2d0157d493cd67293ecfbe9"
+}

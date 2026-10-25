@@ -4,7 +4,7 @@ param(
  [Parameter(Mandatory=$true)][string]$Session,
  [Parameter(Mandatory=$true)][ValidateLength(1,96)][ValidatePattern('^[a-z0-9-]+$')][string]$Id,
  [ValidateSet('RED','GREEN','RETIREMENT_ABORT')][string]$Phase='RED',
- [ValidateSet('environment','job-resources','job-quota','job-memory')][string]$Contract='environment',
+ [ValidateSet('environment','job-resources','job-quota','job-memory','backend-evidence-hardlink','backend-cleanup-readonly')][string]$Contract='environment',
  [Parameter(Mandatory=$true)][string]$BuildRoot,
  [string]$FixtureBuildRoot,
  [switch]$ReturnStatusToCaller
@@ -40,6 +40,7 @@ $fixtureBuild=Read-CompiledBuild $FixtureBuildRoot @('PayloadFixture.exe')
 $build=$publicBuild.build;$buildManifest=$publicBuild.manifest;$expected=$publicBuild.pins
 if([IO.Path]::GetFullPath($FixturePath) -cne (Join-Path $fixtureBuild.build 'PayloadFixture.exe') -or $FixtureSha256 -cne $fixtureBuild.pins['PayloadFixture.exe']){throw 'Fixture path/hash differs from its actual compiled component.'}
 if($Contract -cin @('job-quota','job-memory') -and $Phase -cne 'GREEN'){throw 'Actual Job limit denials use current bounded production tools and GREEN phase.'}
+if($Contract -cin @('backend-evidence-hardlink','backend-cleanup-readonly') -and $Phase -cne 'GREEN'){throw 'Native backend failure controls require the current GREEN fixture input.'}
 
 No-Reparse $session;No-Reparse $FixturePath
 if((Get-FileHash -LiteralPath $FixturePath).Hash.ToLowerInvariant() -cne $FixtureSha256){throw 'Native environment fixture changed.'}
@@ -83,10 +84,11 @@ $runtimeAbsenceRed=$false;$runtimeAbsent=$false;
 $jobResourcesObserved=@{};$jobResourcesRed=$false;$jobResourcesGreen=$false;$jobResourcesSensitivity=$false;$jobActorsStopped=$false
 $environmentObserved=@{};$environmentMismatches=@();$runtimeObserved=$null
 $environmentRed=$false;$environmentGreen=$false;$workRetirementRed=$false;$workRetirementGreen=$false;$parentChanged=$false
+$backendFailureObserved=@{};$backendFailureSensitivity=$false;$backendFailureAccepted=$false
 $stdout = Join-Path $session 'bootstrap.stdout'; $stderr = Join-Path $session 'bootstrap.stderr'
 $info = [Diagnostics.ProcessStartInfo]::new()
 $info.FileName = Join-Path $bin 'MonitorAcceptanceDriver.exe'
-$payloadArguments=if($Phase -ceq 'RETIREMENT_ABORT'){'--retirement-abort'}elseif($Contract -ceq 'job-resources'){'payload-job-resources.txt --job-resources'}elseif($Contract -ceq 'job-quota'){'payload-job-quota.txt --job-quota'}elseif($Contract -ceq 'job-memory'){'payload-job-memory.txt --job-memory'}else{'payload-environment.txt --environment'}
+$payloadArguments=if($Phase -ceq 'RETIREMENT_ABORT'){'--retirement-abort'}elseif($Contract -ceq 'job-resources'){'payload-job-resources.txt --job-resources'}elseif($Contract -ceq 'job-quota'){'payload-job-quota.txt --job-quota'}elseif($Contract -ceq 'job-memory'){'payload-job-memory.txt --job-memory'}elseif($Contract -ceq 'backend-evidence-hardlink'){('"'+(Join-Path $session 'payload-record.txt')+'" --backend-evidence-hardlink')}elseif($Contract -ceq 'backend-cleanup-readonly'){('"'+(Join-Path $session 'payload-record.txt')+'" --backend-cleanup-readonly')}else{'payload-environment.txt --environment'}
 $info.Arguments = '--mode success --source "'+$input+'" --exe fixture.exe --expected-payload-exit '+$expectedPayload+' -- '+$payloadArguments
 $info.WorkingDirectory = $bin; $info.UseShellExecute = $false; $info.CreateNoWindow = $true
 $info.RedirectStandardOutput = $true; $info.RedirectStandardError = $true
@@ -99,7 +101,7 @@ $global:RhaiPayloadPendingCustody=[pscustomobject]@{Process=$process;Readers=$re
 $status=-1;$complete=$false;$failure='';$started=$false;$exited=$false;$pipesDrained=$false
 $observerDeadline=[Diagnostics.Stopwatch]::StartNew()
 $hostRecord=$false;$processDisposed=$false;$observerKillUsed=$false;$driverElapsedSeconds=0.0;$driverPid=0;$driverCreation=0L;$ownExecutablesStopped=$false
-$driverBound=if($Contract -cin @('job-quota','job-memory')){190}elseif($Phase -ceq 'RETIREMENT_ABORT'){180}else{10}
+$driverBound=if($Contract -cin @('job-quota','job-memory')){190}elseif($Phase -ceq 'RETIREMENT_ABORT'){180}elseif($Contract -like 'backend-*'){30}else{10}
 function Save-CompletedChunk([object] $Channel) {
  if ($null -eq $Channel.Task -or !$Channel.Task.IsCompleted) { return }
  try {
@@ -187,7 +189,7 @@ if($started -and $exited -and $pipesDrained -and !$custodyPending){
   [Threading.Thread]::Sleep(20)
  }while($true)
 }
-if ($started -and $exited -and $pipesDrained -and !$custodyPending -and $ownExecutablesStopped -and !$failure) {
+if ($Contract -notlike 'backend-*' -and $started -and $exited -and $pipesDrained -and !$custodyPending -and $ownExecutablesStopped -and !$failure) {
  try {
   if($observerKillUsed){throw 'Observer termination cannot certify public payload acceptance.'}
   $output = [IO.File]::ReadAllText($stdout)
@@ -420,10 +422,58 @@ if ($started -and $exited -and $pipesDrained -and !$custodyPending -and $ownExec
   $hostRecord = $true; $complete = $true
  } catch { $failure = $_.Exception.ToString() }
 }
-$record = [ordered]@{id=$id;scope=$session;run=$run;exit=$status;accepted=$complete;failure=$failure;fresh_host_record=$hostRecord;phase=$Phase;contract=$Contract;driver_elapsed_seconds=$driverElapsedSeconds;driver_pid=$driverPid;driver_creation=$driverCreation;observer_kill_used=$observerKillUsed;process_disposed=$processDisposed;custody_pending=$custodyPending;channel_closure=$channelClosure;owned_executables_stopped=$ownExecutablesStopped;job_memory_observed=$jobMemoryObserved;job_memory_green=$jobMemoryGreen;job_memory_sensitivity=$jobMemorySensitivity;memory_actors_stopped=$memoryActorsStopped;job_quota_observed=$jobQuotaObserved;job_quota_green=$jobQuotaGreen;job_quota_sensitivity=$jobQuotaSensitivity;quota_protected_sensitivity=$quotaProtectedSensitivity;quota_actors_stopped=$quotaActorsStopped;job_resources_observed=$jobResourcesObserved;job_resources_red=$jobResourcesRed;job_resources_green=$jobResourcesGreen;job_resources_sensitivity=$jobResourcesSensitivity;job_actors_stopped=$jobActorsStopped;expected_payload_exit=$expectedPayload;work_retirement_red=$workRetirementRed;work_retirement_green=$workRetirementGreen;environment_contract_red=$environmentRed;environment_contract_green=$environmentGreen;allocated_runtime=$runtimeObserved;runtime_absent_readback=$runtimeAbsent;runtime_absence_negative_control=$runtimeAbsenceRed;environment_observed=$environmentObserved;environment_mismatches=$environmentMismatches;parent_environment_changed=$parentChanged;fixture_sha256=$FixtureSha256;fixture_build_manifest_sha256=((Get-FileHash -LiteralPath $fixtureBuild.manifest).Hash.ToLowerInvariant());fixture_build=$fixtureBuild.build;driver_launched=$started;exact_driver_exited=$exited;pipes_drained=$pipesDrained;retained_driver_handles=$custodyPending;retained_binaries=$expected;product_run=$false}
+if ($Contract -like 'backend-*' -and $started -and $exited -and $pipesDrained -and !$custodyPending -and $ownExecutablesStopped -and !$failure) {
+ try {
+  if($observerKillUsed -or $status -ne 2){throw 'Expected negative public Driver result 2 was not observed.'}
+  $recordPath=Join-Path $session 'payload-record.txt'
+  $recordLines=[IO.File]::ReadAllLines($recordPath)
+  if($recordLines.Count -ne 7){throw 'Independent payload failure-input record is incomplete.'}
+  $values=@{}
+  foreach($line in $recordLines){if($line -cnotmatch '^([a-z_]+)=(.*)$' -or $values.ContainsKey($Matches[1])){throw 'Payload failure-input record is malformed.'};$values[$Matches[1]]=$Matches[2]}
+  $expectedMode=if($Contract -ceq 'backend-evidence-hardlink'){'evidence-hardlink'}else{'cleanup-readonly'}
+  if($values.mode -cne $expectedMode -or $values.job_member -cne 'True' -or $values.pid -cnotmatch '^[1-9][0-9]*$' -or $values.creation_filetime_utc -cnotmatch '^[1-9][0-9]*$'){throw 'Native Job payload did not create the selected failure input.'}
+  $runtimes=@(Get-ChildItem -LiteralPath $run -Directory -Force -Filter 'scoped-*')
+  $journals=@(Get-ChildItem -LiteralPath $run -File -Force -Filter '.scoped-run-*.journal')
+  $evidenceRoots=@(Get-ChildItem -LiteralPath $run -Directory -Force -Filter '.scoped-evidence-*')
+  if($runtimes.Count -ne 1 -or $journals.Count -ne 1 -or $evidenceRoots.Count -ne 1){throw 'Exact negative runtime/journal/evidence inventory is incomplete.'}
+  $runtimeObserved=$runtimes[0].FullName
+  if(![string]::Equals($values.runtime,$runtimeObserved,[StringComparison]::OrdinalIgnoreCase) -or [IO.Path]::GetDirectoryName($runtimeObserved) -cne $run -or [IO.Path]::GetFileName($runtimeObserved) -notmatch '^scoped-[0-9a-f]{32}$'){throw 'Payload runtime differs from exact monitor allocation.'}
+  $selectedName=if($Contract -ceq 'backend-evidence-hardlink'){'evidence-hardlink-primary.txt'}else{'cleanup-readonly.txt'}
+  $selectedFile=Join-Path $runtimeObserved $selectedName
+  $selectedLink=if($Contract -ceq 'backend-evidence-hardlink'){Join-Path $runtimeObserved 'evidence-hardlink-alias.txt'}else{''}
+  if(![string]::Equals($values.file,$selectedFile,[StringComparison]::OrdinalIgnoreCase) -or ![string]::Equals($values.link,$selectedLink,[StringComparison]::OrdinalIgnoreCase) -or !(Test-Path -LiteralPath $selectedFile -PathType Leaf)){throw 'Exact failure input was not retained.'}
+  if($selectedLink){if(!(Test-Path -LiteralPath $selectedLink -PathType Leaf) -or [IO.File]::ReadAllText($selectedFile) -cne [IO.File]::ReadAllText($selectedLink)){throw 'Hardlink input is incomplete.'}}
+  else{if((([IO.File]::GetAttributes($selectedFile)) -band [IO.FileAttributes]::ReadOnly) -eq 0){throw 'Real read-only cleanup input is missing.'}}
+  $actor=$null;try{$actor=[Diagnostics.Process]::GetProcessById([int]$values.pid)}catch [ArgumentException]{}
+  if($null -ne $actor){try{if(!$actor.HasExited -and $actor.StartTime.ToUniversalTime().ToFileTimeUtc() -eq [long]$values.creation_filetime_utc){throw 'Exact failure-input payload actor remains live.'}}finally{$actor.Dispose()}}
+  $journalLines=[IO.File]::ReadAllLines($journals[0].FullName);$decoded=@()
+  foreach($line in $journalLines){if($line -cnotmatch '^[0-9A-Fa-f]{4}:[0-9A-Fa-f]{8}:(.+)$'){throw 'Original journal framing is malformed.'};$decoded+=,$Matches[1]}
+  $lifecycle=@($decoded|Where-Object{$_.StartsWith('LIFECYCLE|')})
+  $evidence=@($decoded|Where-Object{$_.StartsWith('EVIDENCE|')})
+  $outcome=@($decoded|Where-Object{$_.StartsWith('OUTCOME|')})
+  $intent=@($decoded|Where-Object{$_.StartsWith('REMOVE_INTENT|')})
+  $removed=@($decoded|Where-Object{$_.StartsWith('REMOVED|')})
+  if($lifecycle.Count -ne 1 -or !$lifecycle[0].Contains('cleanup_confirmed=1') -or $removed.Count -ne 0){throw 'Negative backend journal falsely claims completion or lacks real Job closure.'}
+  function Assert-BackendFailureCounts([int]$ExpectedEvidence,[int]$ExpectedOutcome,[int]$ExpectedIntent){
+   if($evidence.Count -ne $ExpectedEvidence -or $outcome.Count -ne $ExpectedOutcome -or $intent.Count -ne $ExpectedIntent){throw 'Backend failure record counts differ from expectation.'}
+  }
+  $wanted=if($Contract -ceq 'backend-evidence-hardlink'){@(0,0,0)}else{@(1,1,1)}
+  try{Assert-BackendFailureCounts (1-$wanted[0]) $wanted[1] $wanted[2]}catch{if($_.Exception.Message -cne 'Backend failure record counts differ from expectation.'){throw};$backendFailureSensitivity=$true}
+  if(!$backendFailureSensitivity){throw 'Wrong backend outcome expectation did not fail.'}
+  Assert-BackendFailureCounts $wanted[0] $wanted[1] $wanted[2]
+  if($outcome.Count -eq 1 -and (!$outcome[0].Contains('host_exported=0') -or !$outcome[0].Contains('runtime_removed=0'))){throw 'Partial outcome falsely claims host export or runtime removal.'}
+  foreach($key in $parentEnvironment.Keys){if([Environment]::GetEnvironmentVariable($key) -cne $parentEnvironment[$key]){$parentChanged=$true}}
+  if([Environment]::CurrentDirectory -cne $parentCwd){$parentChanged=$true}
+  if($parentChanged){throw 'Observer parent environment/cwd changed.'}
+  $backendFailureObserved=@{mode=$expectedMode;runtime=$runtimeObserved;journal=$journals[0].FullName;evidence=$evidenceRoots[0].FullName;payload_pid=[int]$values.pid;payload_creation=[long]$values.creation_filetime_utc;original_records=$decoded.Count;payload_actor_stopped=$true;runtime_retained=$true}
+  $backendFailureAccepted=$true;$hostRecord=$true;$complete=$true
+ } catch {$failure=$_.Exception.ToString()}
+}
+$record = [ordered]@{id=$id;scope=$session;run=$run;exit=$status;accepted=$complete;failure=$failure;fresh_host_record=$hostRecord;phase=$Phase;contract=$Contract;driver_elapsed_seconds=$driverElapsedSeconds;driver_pid=$driverPid;driver_creation=$driverCreation;observer_kill_used=$observerKillUsed;process_disposed=$processDisposed;custody_pending=$custodyPending;channel_closure=$channelClosure;owned_executables_stopped=$ownExecutablesStopped;backend_failure_observed=$backendFailureObserved;backend_failure_sensitivity=$backendFailureSensitivity;backend_failure_accepted=$backendFailureAccepted;job_memory_observed=$jobMemoryObserved;job_memory_green=$jobMemoryGreen;job_memory_sensitivity=$jobMemorySensitivity;memory_actors_stopped=$memoryActorsStopped;job_quota_observed=$jobQuotaObserved;job_quota_green=$jobQuotaGreen;job_quota_sensitivity=$jobQuotaSensitivity;quota_protected_sensitivity=$quotaProtectedSensitivity;quota_actors_stopped=$quotaActorsStopped;job_resources_observed=$jobResourcesObserved;job_resources_red=$jobResourcesRed;job_resources_green=$jobResourcesGreen;job_resources_sensitivity=$jobResourcesSensitivity;job_actors_stopped=$jobActorsStopped;expected_payload_exit=$expectedPayload;work_retirement_red=$workRetirementRed;work_retirement_green=$workRetirementGreen;environment_contract_red=$environmentRed;environment_contract_green=$environmentGreen;allocated_runtime=$runtimeObserved;runtime_absent_readback=$runtimeAbsent;runtime_absence_negative_control=$runtimeAbsenceRed;environment_observed=$environmentObserved;environment_mismatches=$environmentMismatches;parent_environment_changed=$parentChanged;fixture_sha256=$FixtureSha256;fixture_build_manifest_sha256=((Get-FileHash -LiteralPath $fixtureBuild.manifest).Hash.ToLowerInvariant());fixture_build=$fixtureBuild.build;driver_launched=$started;exact_driver_exited=$exited;pipes_drained=$pipesDrained;retained_driver_handles=$custodyPending;retained_binaries=$expected;product_run=$false}
 [IO.File]::WriteAllText((Join-Path $session 'observer.json'),($record|ConvertTo-Json -Compress -Depth 8),[Text.UTF8Encoding]::new($false))
 $files=@(Get-Item -LiteralPath (Join-Path $session 'observer.json'))
 foreach($path in @($stdout,$stderr)){if(Test-Path -LiteralPath $path -PathType Leaf){$files+=@(Get-Item -LiteralPath $path)}}
+if(Test-Path -LiteralPath (Join-Path $session 'payload-record.txt') -PathType Leaf){$files+=@(Get-Item -LiteralPath (Join-Path $session 'payload-record.txt'))}
 # Enumerate runtime evidence only after the validated completion/removal receipt.
 # On an observer/control failure export stable originals and preserve guest custody.
 if (!$custodyPending -and $ownExecutablesStopped) { $files += @(Get-ChildItem -LiteralPath $run -Recurse -File) }

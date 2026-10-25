@@ -1,0 +1,15 @@
+{
+  "accepted": true,
+  "removed_control_scopes": [
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-0e6872acee8647af927c9023af25d331",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-60e5e70f35564d85bf8f08f18e911f5d"
+  ],
+  "stopped_actor_generations": 4,
+  "retained_build_scopes": [
+    "backend-public-3cd277ed37eb4926b06e55c9c44279a4",
+    "backend-fixture-3cd277ed37eb4926b06e55c9c44279a4"
+  ],
+  "medium_sha256": "b4f3452f11f7234cbf99fd39a911a27aa4ecdd65c07e12ce13a500b8d805b349",
+  "serial_sha256": "e437b76415d7233e47c07374f58184d38ce5271ba32af28d419abec59d91610d",
+  "foreign_resources_touched": false
+}

@@ -1,0 +1,34 @@
+{
+  "accepted_named_backend_failures": true,
+  "source_base": "fb439ba2e9c9073b6aec7f17762fb590a16930de",
+  "start_sha256": "4d90d309a0d7ddb30944bf13b42ce91525edd3be845106a6d39be0727c997301",
+  "medium_sha256": "b8d47948597dd3f60ffbed80baabab9db1ecd50047af7a105e7f181c5e8f5bd3",
+  "results": [
+    {
+      "case": "hardlink",
+      "native_driver_exit": 2,
+      "driver_seconds": 6.7386561,
+      "frames": 548,
+      "files": 31,
+      "journal_crc_records": 4,
+      "retained_runtime": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-0e6872acee8647af927c9023af25d331\\run\\scoped-ce799fb3d94a4af19fda4a60cefc0459",
+      "payload_pid": 5508,
+      "payload_creation_filetime_utc": 134374259495162154,
+      "wrong_expectation_rejected": true
+    },
+    {
+      "case": "readonly",
+      "native_driver_exit": 2,
+      "driver_seconds": 10.8408948,
+      "frames": 591,
+      "files": 33,
+      "journal_crc_records": 7,
+      "retained_runtime": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-60e5e70f35564d85bf8f08f18e911f5d\\run\\scoped-c0e556a3bb0b411daa0ae95b1020be1d",
+      "payload_pid": 7640,
+      "payload_creation_filetime_utc": 134374259732982170,
+      "wrong_expectation_rejected": true
+    }
+  ],
+  "full_windows_gate": false,
+  "native_rhai_cargo_started": false
+}

@@ -1,0 +1,10 @@
+{
+  "source": "/var/roothome/.local/share/agent-builds/rhai/backend-failure-3cd277ed37eb4926b06e55c9c44279a4/retirement",
+  "medium": "/var/lib/libvirt/images/rhai-win11-quality/backend-failure-cleanup-3cd277ed37eb4926b06e55c9c44279a4.iso",
+  "sha256": "b4f3452f11f7234cbf99fd39a911a27aa4ecdd65c07e12ce13a500b8d805b349",
+  "files": {
+    "cleanup-host-manifest.json": "5e927b3b5b9df80d402455732acb87923c0919e7d2d0157d493cd67293ecfbe9",
+    "cleanup.ps1": "0fbd1e6aa68269debd4964f67a8ea62bd33fc077a4f49eab0f712ea590c28eba"
+  },
+  "native_started": false
+}
