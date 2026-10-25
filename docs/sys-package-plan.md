@@ -862,6 +862,25 @@ package proof. The fresh public build retains only its original finite
 lifetime. This closes the three named Windows target slices, not Windows
 Package D, all feature profiles or the release matrix.
 
+The six named native Windows `combined_sys_net`, `net_connect`, `net_listen`,
+`net_metadata`, `net_reads` and `net_writes` targets now pass at source
+`a1ebdc5d`, Windows 11 Pro build 26300, Cargo/Rustc 1.93.0 and
+`testing-environ,sys,net,metadata`. Attempt07 stopped during compilation on an
+LLVM allocation failure; attempt08 compiled under unchanged Job limits with
+reduced private Cargo debug/incremental settings, but its final IPv6 listener
+assertion prescribed `ConnectionRefused` without requiring that error kind in
+the accepted contract. Attempt09 retained the no-new-peer assertion and printed
+the native result: `Err(TimedOut)` after independent peer identity, exact bytes
+and EOF. An intended `net_connect` wrong-EOF RED failed; restored GREEN passed
+all six targets (1 + 5 + 8 + 2 + 7 + 10 = 33, zero failed/ignored). The public
+Driver exited 0, its eight journal transitions passed CRC checks, and the
+exact runtime was absent. Its 222-frame/13-file original export, independent
+readback and combined review PASS are in
+`../.scratch/all-tickets/windows-rhai-native-20261025/attempt09/`. The outer
+guest scope awaits exact retirement. This accepts these native target slices
+only; Windows process/policy, other feature/MSRV rows, Package D and release
+closure remain open.
+
 No UI is part of Rhai's acceptance stack. The full path is script → real Engine →
 host package → OS. Storage proof is required for filesystem effects; independent
 peers and process observations replace storage writes for networking/process

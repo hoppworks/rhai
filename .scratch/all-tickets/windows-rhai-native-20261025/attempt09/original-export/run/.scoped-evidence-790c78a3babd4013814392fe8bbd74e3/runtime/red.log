@@ -1,0 +1,55 @@
+warning: unused variable: `module`
+   --> src\packages\sys\process.rs:143:24
+    |
+143 | pub(super) fn register(module: &mut Module, state: &crate::Shared<super::SysState>) {
+    |                        ^^^^^^ help: if this is intentional, prefix it with an underscore: `_module`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `state`
+   --> src\packages\sys\process.rs:143:45
+    |
+143 | pub(super) fn register(module: &mut Module, state: &crate::Shared<super::SysState>) {
+    |                                             ^^^^^ help: if this is intentional, prefix it with an underscore: `_state`
+
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (lib) generated 3 warnings (run `cargo fix --lib -p rhai` to apply 2 suggestions)
+warning: unused import: `PathBuf`
+ --> src\bin\rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 0.17s
+     Running tests\net_connect.rs (work\target\debug\deps\net_connect-8734a7dea3fcbba8.exe)
+
+running 1 test
+
+thread 'authorized_connect_is_observed_and_clone_close_is_shared' (2024) panicked at tests\net_connect.rs:49:9:
+assertion `left != right` failed: deliberately wrong peer EOF expectation
+  left: 0
+ right: 0
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test authorized_connect_is_observed_and_clone_close_is_shared ... FAILED
+
+failures:
+
+failures:
+    authorized_connect_is_observed_and_clone_close_is_shared
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 4 filtered out; finished in 0.02s
+
+error: test failed, to rerun pass `--test net_connect`
