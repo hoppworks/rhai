@@ -1,0 +1,10 @@
+{
+  "base": "57ee7c36442f37c915017c74f687cb627cbac628",
+  "path": "tools/windows-scoped-runner/MonitorPayloadJob.cs",
+  "base_sha256": "21e59d116fab58332ec4fea648cf5abfadc26782756da9cbf6343085b8af2942",
+  "candidate_sha256": "5ed36c457b5cfaaacfc00e4d131d4330b52085d4d89d74703d7c195d1bf74468",
+  "normal_build_tokens_equal": true,
+  "token_count": 9209,
+  "native_execution": false,
+  "scope": "Default no-define body only; fault profiles are separately compiled and exercised on native Windows."
+}

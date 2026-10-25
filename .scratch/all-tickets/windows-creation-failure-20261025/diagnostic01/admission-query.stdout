@@ -1,0 +1,5 @@
+dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19
+
+126649917 227443
+Filesystem         1B-blocks          Used    Available Use% Mounted on
+/dev/nvme0n1p3 1997621166080 1850213847040 113260998656  95% /var

@@ -1,0 +1,13 @@
+{
+  "utc": "2026-10-25T11:07:58.805310+00:00",
+  "serial_inode": 126648834,
+  "serial_offset": 543003,
+  "source_sha256": "ab1b9d0ca5e3c461a0140c9f682e700872bc69bbd4c6e92e4d228615f9936d5e",
+  "manifest_sha256": "db5a26c8c7dc923a2a3dc3cba3d038dfd35634fcfaa7e6669b66a6e1b51ff664",
+  "medium_sha256": "2b4058d5749e32e85920976536b4171b8027a75c7c040dcf88aaa73df9b34ac9",
+  "enter_sent": true,
+  "capacity": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19\n\n126648834 543003\nFilesystem         1B-blocks          Used    Available Use% Mounted on\n/dev/nvme0n1p3 1997621166080 1849854865408 113613754368  95% /var\n",
+  "native_launches_before_enter": 0,
+  "enter_sent_utc": "2026-10-25T11:08:39.919208+00:00",
+  "typed_command_independently_viewed": true
+}

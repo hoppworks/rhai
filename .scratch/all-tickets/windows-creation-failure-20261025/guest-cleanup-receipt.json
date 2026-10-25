@@ -1,0 +1,39 @@
+{
+  "nonce": "5fa1dfcc5d504bafa9f2219bf0f0fbca",
+  "host_manifest_sha256": "aa6c730f0ecb4ddcb46f19afdd33f1d352978e28c9e53702e969d9b23876dcd1",
+  "host_receipt_sha256": "46f0ba7b593dd4059efe9b621826a1700212c5803425ce7c3ceaa3e2333a91ce",
+  "retained_build": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\job-resource-build-green-cdcd7eebb7ec4c89b8aa2f9e8f2054f4",
+  "retained_build_preserved": true,
+  "actor_checks": [
+    {
+      "pid_recycled": false,
+      "original_alive": false,
+      "pid": "5516",
+      "creation": "134374037366735775"
+    },
+    {
+      "pid_recycled": false,
+      "original_alive": false,
+      "pid": "7792",
+      "creation": "134374040869979950"
+    },
+    {
+      "pid_recycled": false,
+      "original_alive": false,
+      "pid": "9864",
+      "creation": "134374044231931919"
+    }
+  ],
+  "failed_originals_exported": true,
+  "retired": [
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\creation-build-5fa1dfcc5d504bafa9f2219bf0f0fbca",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\creation-control-0c8fb9dbbefb4d89a8988cc4803eef12",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\creation-control-4761e32fc7d04d779133ce983943dc52",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\creation-build-b72d8e60d49e490d9355925e9b379158",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\creation-control-92daebd4d1444f3087da0597e0791145",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\creation-build-50629a73efc34ced96046d9a8044fe40",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\creation-control-9d5034e5056b4d2ab163d43a31714868"
+  ],
+  "all_scopes_absent": true,
+  "foreign_resources_touched": false
+}

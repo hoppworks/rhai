@@ -1,0 +1,14 @@
+profile=post-create-abort
+create_called=True
+create_succeeded=True
+create_error=0
+process_returned=True
+thread_returned=True
+process_id=5516
+creation=134374037366735775
+transferred=False
+job_empty=True
+process_closed_or_absent=True
+thread_closed_or_absent=True
+job_closed=True
+cleanup_error=True

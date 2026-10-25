@@ -9,6 +9,13 @@ using System.Text;
 using System.Threading;
 using Microsoft.Win32.SafeHandles;
 
+#if (SCOPED_RUNNER_ASSOCIATION_DENIED || SCOPED_RUNNER_POST_CREATE_ABORT) && !SCOPED_RUNNER_TESTING
+#error Native creation controls require a dedicated SCOPED_RUNNER_TESTING build.
+#endif
+#if SCOPED_RUNNER_ASSOCIATION_DENIED && SCOPED_RUNNER_POST_CREATE_ABORT
+#error Select only one native creation failure profile.
+#endif
+
 // SafeHandle keeps ownership alive after owner-object loss. A job-handle
 // finalization attempt terminates the exact job before closing the sole
 // noninheritable handle, so abandoned owners still get kernel fallback.
@@ -587,6 +594,15 @@ internal sealed class MonitorPayloadJob : IDisposable
     [DllImport("kernel32.dll", SetLastError=true)] private static extern bool GetExitCodeProcess(IntPtr process, out uint exitCode);
     [DllImport("kernel32.dll", SetLastError=true)] private static extern bool CloseHandle(IntPtr handle);
     [DllImport("kernel32.dll")] private static extern ulong GetTickCount64();
+#if SCOPED_RUNNER_ASSOCIATION_DENIED
+    [DllImport("kernel32.dll", SetLastError=true)]
+    private static extern bool DuplicateHandle(IntPtr sourceProcess,IntPtr source,IntPtr targetProcess,
+        out IntPtr target,uint access,bool inherit,uint options);
+#endif
+#if SCOPED_RUNNER_POST_CREATE_ABORT
+    [DllImport("kernel32.dll", SetLastError=true)]
+    private static extern bool GetProcessTimes(IntPtr process,out long creation,out long exit,out long kernel,out long user);
+#endif
 
     internal sealed class ClosureReceipt
     {
@@ -697,6 +713,20 @@ internal sealed class MonitorPayloadJob : IDisposable
         MonitorPayloadJob result=null;
         ulong setupCleanupDeadline=0;
         Exception primaryFailure=null, cleanupFailure=null;
+#if SCOPED_RUNNER_ASSOCIATION_DENIED || SCOPED_RUNNER_POST_CREATE_ABORT
+        bool controlCreateCalled=false,controlCreateSucceeded=false,controlProcessReturned=false,
+            controlThreadReturned=false,controlJobEmpty=false;
+        int controlCreateError=0;
+        uint controlProcessId=0;
+        long controlCreation=0;
+        bool controlRootTerminationFailed=false,controlRootSignaledAfterTerminationFailure=false;
+        int controlRootTerminationError=0;
+#endif
+#if SCOPED_RUNNER_ASSOCIATION_DENIED
+        // A query-only duplicate of the same real Job cannot grant assignment.
+        // The original full-right owner remains responsible for native unwind.
+        MonitorOwnedKernelHandle controlQueryJob=new MonitorOwnedKernelHandle(false);
+#endif
         try
         {
             setupCleanupDeadline=GetTickCount64()+CleanupWaitMs;
@@ -729,7 +759,16 @@ internal sealed class MonitorPayloadJob : IDisposable
             jobArray=Marshal.AllocHGlobal(IntPtr.Size);
             inheritedArray=Marshal.AllocHGlobal(IntPtr.Size*3);
             if(attributes==IntPtr.Zero || jobArray==IntPtr.Zero || inheritedArray==IntPtr.Zero) throw new OutOfMemoryException("job/handle-list attribute allocation failed");
+#if SCOPED_RUNNER_ASSOCIATION_DENIED
+            IntPtr duplicate=IntPtr.Zero;
+            bool duplicated=DuplicateHandle(new IntPtr(-1),ownedJob.ExactValue,new IntPtr(-1),out duplicate,4,false,0);
+            int duplicateError=duplicated ? 0 : Marshal.GetLastWin32Error();
+            if(duplicate!=IntPtr.Zero) controlQueryJob.Adopt(duplicate);
+            if(!duplicated) throw new Win32Exception(duplicateError,"DuplicateHandle(query-only association control)");
+            Marshal.WriteIntPtr(jobArray,controlQueryJob.ExactValue);
+#else
             Marshal.WriteIntPtr(jobArray,ownedJob.ExactValue);
+#endif
             Marshal.WriteIntPtr(inheritedArray,0,stdinOwner.ExactValue);
             Marshal.WriteIntPtr(inheritedArray,IntPtr.Size,outputCapture.StdoutWriter);
             Marshal.WriteIntPtr(inheritedArray,IntPtr.Size*2,outputCapture.StderrWriter);
@@ -747,12 +786,28 @@ internal sealed class MonitorPayloadJob : IDisposable
             string command=specification.BuildQuotedCommandLine(executable);
             var startup=new StartupInfoEx { StartupInfo=new StartupInfo { cb=Marshal.SizeOf(typeof(StartupInfoEx)),Flags=STARTF_USESTDHANDLES,
                 StdInput=stdinOwner.ExactValue,StdOutput=outputCapture.StdoutWriter,StdError=outputCapture.StderrWriter }, AttributeList=attributes };
+#if SCOPED_RUNNER_ASSOCIATION_DENIED || SCOPED_RUNNER_POST_CREATE_ABORT
+            controlCreateCalled=true;
+#endif
             bool createdOk=CreateProcessW(executable,new StringBuilder(command),IntPtr.Zero,IntPtr.Zero,true,
                 EXTENDED_STARTUPINFO_PRESENT|CREATE_SUSPENDED|CREATE_UNICODE_ENVIRONMENT,environment,
                 allocation.RuntimePath,ref startup,out created);
             int createError=createdOk ? 0 : Marshal.GetLastWin32Error();
+#if SCOPED_RUNNER_ASSOCIATION_DENIED || SCOPED_RUNNER_POST_CREATE_ABORT
+            controlCreateSucceeded=createdOk;controlCreateError=createError;
+            controlProcessReturned=created.Process!=IntPtr.Zero;controlThreadReturned=created.Thread!=IntPtr.Zero;
+            controlProcessId=created.ProcessId;
+#endif
             if(created.Process!=IntPtr.Zero) { ownedProcess.Adopt(created.Process); created.Process=IntPtr.Zero; }
             if(created.Thread!=IntPtr.Zero) { ownedThread.Adopt(created.Thread); created.Thread=IntPtr.Zero; }
+#if SCOPED_RUNNER_POST_CREATE_ABORT
+            if(createdOk && Owned(ownedProcess) && Owned(ownedThread)) {
+                long exited,kernel,user;
+                if(!GetProcessTimes(ownedProcess.ExactValue,out controlCreation,out exited,out kernel,out user))
+                    throw Error("GetProcessTimes(exact suspended control root)");
+                throw new InvalidOperationException("CONTROL_ABORT_AFTER_REAL_SUSPENDED_CREATE");
+            }
+#endif
             Exception parentWriterCloseFailure=null,stdinCloseFailure=null;
             try { outputCapture.CloseParentWriters(); } catch(Exception error) { parentWriterCloseFailure=error; }
             CloseOwned(ref stdinOwner,ref stdinCloseFailure);
@@ -794,7 +849,30 @@ internal sealed class MonitorPayloadJob : IDisposable
                 catch(Exception error) { RecordFailure(ref cleanupFailure,error); }
                 // Exact process-handle termination covers an unexpected
                 // membership verification failure without guessing a PID.
-                try { if(!TerminateProcess(exactRoot,126)) RecordFailure(ref cleanupFailure,Error("TerminateProcess(exact setup handle)")); }
+                try {
+#if SCOPED_RUNNER_POST_CREATE_ABORT
+                    // Deterministically exercise the real already-stopped race:
+                    // observe this exact root killed by the Job before retrying
+                    // individual termination. This wait shares the cleanup bound.
+                    uint controlWait=WaitForSingleObject(exactRoot,Remaining(setupCleanupDeadline));
+                    if(controlWait!=WAIT_OBJECT_0)
+                        RecordFailure(ref cleanupFailure,controlWait==WAIT_TIMEOUT ? new TimeoutException("control root did not signal after Job termination") : Error("WaitForSingleObject(exact stopped-root control)"));
+#endif
+                    if(!TerminateProcess(exactRoot,126)) {
+                        var terminationFailure=Error("TerminateProcess(exact setup handle)");
+                        // Job termination can win the race. Permission/errors
+                        // alone never prove stopped: require this exact retained
+                        // process handle to be signaled, then retain the bounded
+                        // root wait and complete Job-empty check below.
+                        bool alreadyStopped=WaitForSingleObject(exactRoot,0)==WAIT_OBJECT_0;
+#if SCOPED_RUNNER_ASSOCIATION_DENIED || SCOPED_RUNNER_POST_CREATE_ABORT
+                        controlRootTerminationFailed=true;
+                        controlRootTerminationError=((Win32Exception)terminationFailure).NativeErrorCode;
+                        controlRootSignaledAfterTerminationFailure=alreadyStopped;
+#endif
+                        if(!alreadyStopped) RecordFailure(ref cleanupFailure,terminationFailure);
+                    }
+                }
                 catch(Exception error) { RecordFailure(ref cleanupFailure,error); }
                 try
                 {
@@ -821,7 +899,11 @@ internal sealed class MonitorPayloadJob : IDisposable
             CloseOwned(ref ownedProcess,ref cleanupFailure);
             if(!transferred && Owned(ownedJob) && !Owned(ownedProcess))
             {
-                try { WaitForJobEmpty(new NativeClosureOperations(),ownedJob.ExactValue,"setup unwind",setupCleanupDeadline); }
+                try { WaitForJobEmpty(new NativeClosureOperations(),ownedJob.ExactValue,"setup unwind",setupCleanupDeadline);
+#if SCOPED_RUNNER_ASSOCIATION_DENIED || SCOPED_RUNNER_POST_CREATE_ABORT
+                    controlJobEmpty=true;
+#endif
+                }
                 catch(Exception error) { RecordFailure(ref cleanupFailure,error); }
             }
             if(attributes!=IntPtr.Zero)
@@ -832,7 +914,36 @@ internal sealed class MonitorPayloadJob : IDisposable
             if(environment!=IntPtr.Zero) try { Marshal.FreeHGlobal(environment); } catch(Exception error) { RecordFailure(ref cleanupFailure,error); }
             if(jobArray!=IntPtr.Zero) try { Marshal.FreeHGlobal(jobArray); } catch(Exception error) { RecordFailure(ref cleanupFailure,error); }
             if(inheritedArray!=IntPtr.Zero) try { Marshal.FreeHGlobal(inheritedArray); } catch(Exception error) { RecordFailure(ref cleanupFailure,error); }
+#if SCOPED_RUNNER_ASSOCIATION_DENIED
+            CloseOwned(ref controlQueryJob,ref cleanupFailure);
+#endif
             CloseOwned(ref ownedJob,ref cleanupFailure);
+#if SCOPED_RUNNER_ASSOCIATION_DENIED || SCOPED_RUNNER_POST_CREATE_ABORT
+            try {
+                string profile=
+#if SCOPED_RUNNER_ASSOCIATION_DENIED
+                    "association-denied";
+#else
+                    "post-create-abort";
+#endif
+                string text="profile="+profile+"\r\ncreate_called="+controlCreateCalled+
+                    "\r\ncreate_succeeded="+controlCreateSucceeded+"\r\ncreate_error="+controlCreateError+
+                    "\r\nprocess_returned="+controlProcessReturned+"\r\nthread_returned="+controlThreadReturned+
+                    "\r\nprocess_id="+controlProcessId+"\r\ncreation="+controlCreation+
+                    "\r\ntransferred="+transferred+"\r\njob_empty="+controlJobEmpty+
+                    "\r\nroot_termination_failed="+controlRootTerminationFailed+
+                    "\r\nroot_termination_error="+controlRootTerminationError+
+                    "\r\nroot_signaled_after_termination_failure="+controlRootSignaledAfterTerminationFailure+
+                    "\r\nprocess_closed_or_absent="+!Owned(ownedProcess)+
+                    "\r\nthread_closed_or_absent="+!Owned(ownedThread)+"\r\njob_closed="+!Owned(ownedJob)+
+#if SCOPED_RUNNER_ASSOCIATION_DENIED
+                    "\r\nquery_duplicate_closed="+!Owned(controlQueryJob)+
+#endif
+                    "\r\ncleanup_error="+(cleanupFailure!=null)+
+                    "\r\ncleanup_detail_base64="+Convert.ToBase64String(Encoding.UTF8.GetBytes(cleanupFailure==null ? "" : cleanupFailure.ToString()))+"\r\n";
+                File.WriteAllText(Path.Combine(allocation.RuntimePath,"native-creation-control.txt"),text,new UTF8Encoding(false));
+            } catch(Exception error) { RecordFailure(ref cleanupFailure,error); }
+#endif
         }
         if(primaryFailure!=null && cleanupFailure!=null) throw new AggregateException("payload creation failed and cleanup is incomplete; SafeHandle retains unresolved exact ownership for finalizer fallback",primaryFailure,cleanupFailure);
         if(primaryFailure!=null) throw primaryFailure;

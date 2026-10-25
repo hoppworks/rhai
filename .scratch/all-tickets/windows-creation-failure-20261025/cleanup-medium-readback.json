@@ -1,0 +1,10 @@
+{
+  "source": "/var/roothome/projects/rhai-creation-failure-20261025-5fa1dfcc/cleanup",
+  "medium": "/var/lib/libvirt/images/rhai-win11-quality/creation-cleanup-5fa1dfcc5d504bafa9f2219bf0f0fbca.iso",
+  "sha256": "4278a98acdc97b12d29d8f5d0a11702e6edf85f2cf1d0595d14080ef3fe7dbcb",
+  "files": {
+    "cleanup-host-manifest.json": "aa6c730f0ecb4ddcb46f19afdd33f1d352978e28c9e53702e969d9b23876dcd1",
+    "cleanup.ps1": "d64cc91d6c01bf498949d1f097b7a96eb583d9d5332345196d5d9f616fdf8dc4"
+  },
+  "native_started": false
+}

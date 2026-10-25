@@ -1,0 +1,1 @@
+Host-only metadata parse stopped before CD change, typing, build or Driver. virsh domuuid includes a blank line; fixed positional splitlines[1] was replaced by unique canonical inode/size row matching. Native launches0; original traceback: ValueError: not enough values to unpack(expected2, got0) at type-command.py line10. Scoped runtime and empty session were retired.

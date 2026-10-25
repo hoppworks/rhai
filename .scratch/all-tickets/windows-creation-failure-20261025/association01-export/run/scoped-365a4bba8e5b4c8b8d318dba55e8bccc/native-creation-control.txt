@@ -1,0 +1,15 @@
+profile=association-denied
+create_called=True
+create_succeeded=False
+create_error=5
+process_returned=False
+thread_returned=False
+process_id=0
+creation=0
+transferred=False
+job_empty=True
+process_closed_or_absent=True
+thread_closed_or_absent=True
+job_closed=True
+query_duplicate_closed=True
+cleanup_error=False

@@ -1,0 +1,103 @@
+{
+  "base": "57ee7c36442f37c915017c74f687cb627cbac628",
+  "nonce": "5fa1dfcc5d504bafa9f2219bf0f0fbca",
+  "tag": "creation01",
+  "id": "rhai-creation-5fa1dfcc5d504bafa9f2219bf0f0fbca",
+  "bundle": "creation-5fa1dfcc5d504bafa9f2219bf0f0fbca",
+  "build_scope_leaf": "creation-build-5fa1dfcc5d504bafa9f2219bf0f0fbca",
+  "controls": [
+    {
+      "profile": "ASSOCIATION_DENIED",
+      "nonce": "0c8fb9dbbefb4d89a8988cc4803eef12",
+      "scope_leaf": "creation-control-0c8fb9dbbefb4d89a8988cc4803eef12",
+      "id": "rhai-creation-association-denied-0c8fb9dbbefb4d89a8988cc4803eef12",
+      "tag": "association01"
+    },
+    {
+      "profile": "POST_CREATE_ABORT",
+      "nonce": "4761e32fc7d04d779133ce983943dc52",
+      "scope_leaf": "creation-control-4761e32fc7d04d779133ce983943dc52",
+      "id": "rhai-creation-post-create-abort-4761e32fc7d04d779133ce983943dc52",
+      "tag": "handles01"
+    }
+  ],
+  "retained": {
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\job-resource-build-green-cdcd7eebb7ec4c89b8aa2f9e8f2054f4",
+    "build": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\job-resource-build-green-cdcd7eebb7ec4c89b8aa2f9e8f2054f4\\run\\monitor-source-cdcd7eebb7ec4c89b8aa2f9e8f2054f4\\build",
+    "source_pins": {
+      "tools/windows-scoped-runner/LaunchSpecification.cs": "e08957b13d5ed5f86cb37d0545aa876aac50e507692d112b39882f465fff8f2b",
+      "tools/windows-scoped-runner/LeaseMonitor.cs": "72c79f18c96e28f27cd1b7b39b1025da9a250e0608885de7dc48934512a46bfc",
+      "tools/windows-scoped-runner/MonitorAcceptanceDriver.cs": "3961723da38fbba05f800ef76a5d65a6225e25eb79303a05ff420634e0dc1914",
+      "tools/windows-scoped-runner/MonitorPayloadJob.cs": "21e59d116fab58332ec4fea648cf5abfadc26782756da9cbf6343085b8af2942",
+      "tools/windows-scoped-runner/MonitorSpecificationIntake.cs": "0f0a71563e6c3d99f0c643644d4b56951f6c69ceb3b10b03157f68dc37bb8412",
+      "tools/windows-scoped-runner/MonitorStagingHandoff.cs": "c541f7d885d032c074461a5a0173b9ae6291ef7d8cd1b9fd2ce4a4f56d1e0e6e",
+      "tools/windows-scoped-runner/MonitorTransport.cs": "ed23c8615af7d8c1b545d3108342640c46f7e245b4e6a83a7c98bf1720a74de8",
+      "tools/windows-scoped-runner/ScopedRunner.cs": "d3a77f0daeebd5beed2b277fae9dc6a522acf1454bb5d8d776d84e1dc8e896c8",
+      "tools/windows-scoped-runner/SpecificationTransfer.cs": "7a9edfe98d84868b55146280bd5ed29576ee0c8725cf9f6c785b784bc0ad25c2",
+      "tools/windows-scoped-runner/WindowsCustodyBackend.cs": "26b7468a0868271a555f6ed450212267b01d7d3fd0a8dd5b3fb51b01b7a05629",
+      "tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs": "38745833e7b23535cdc2ce225655074c6c5f50e204c0d3cf38d6805f49cb53eb",
+      "tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs": "8f43d33928262ae181aa5396feffef9b0260653609b5be8b01da7b0a7e7b00f7",
+      "tools/windows-scoped-runner/fixtures/PayloadFixture.cs": "e89c5fad040783326d117fe09860ab8535144756be0145bb38c0e4a148c0a465",
+      "tools/windows-scoped-runner/fixtures/RunPayloadEnvironmentControl.ps1": "6cc3d4f947f7fb20ea04dd581b9c9b5ba50ea8e32b7380042603989a2c71ebae",
+      "tools/windows-scoped-runner/fixtures/RunSourceFixtures.ps1": "17c639e8b230728ee7619726967f7694fff75f9afa65baef95186c3dd4aec410"
+    },
+    "binaries": {
+      "PayloadFixture.exe": "4ce2f3f13ab9ed2bef02a675fd607ca993e90488e1c8f48e4bc160881f137846",
+      "MonitorAcceptanceDriver.exe": "531259b5a4003abbdab2eca4521da64c295563d33a7486c898645402e8e4ac76",
+      "ScopedRunner.exe": "b783cc945caf6d5fd7156525b19114ba0adb6283c5263f62d6995117b99ef285"
+    },
+    "expires_utc": "2026-10-25T12:13:54.403215+00:00",
+    "purpose": "same-source compatible immediate custody followups; preserve one useful current build rather than duplicate/rebuild for Session boundary",
+    "retire_at": "earlier ended/cancelled reuse or expiry, after exact ownership/inactivity/proof checks"
+  },
+  "host_admission_utc": "2026-10-25T11:00:24.229346+00:00",
+  "count": {
+    "new_profile_compilers": 2,
+    "public_drivers": 2
+  },
+  "limits": {
+    "compiler_seconds_each": 180,
+    "bootstrap_seconds": 450,
+    "bootstrap_kill_reserve": 30,
+    "driver_seconds": 180,
+    "observer_seconds": 190,
+    "monitor_exit_seconds": 60,
+    "export_seconds": 180,
+    "max_files": 64,
+    "max_file_bytes": 4194304,
+    "max_total_bytes": 16777216,
+    "peak_additional_bytes_estimate": 268435456,
+    "guest_available_floor_bytes": 2147483648
+  },
+  "ownership": "only own exact central session scopes, source ISO and host staging; originals retained until host semantic acceptance/cleanup readback",
+  "retention": "No profile-build cache retention beyond this package. Retained Driver/Payload reuse before original host UTC expiry, do not reset.",
+  "files": {
+    "tools/windows-scoped-runner/LaunchSpecification.cs": "e08957b13d5ed5f86cb37d0545aa876aac50e507692d112b39882f465fff8f2b",
+    "tools/windows-scoped-runner/LeaseMonitor.cs": "72c79f18c96e28f27cd1b7b39b1025da9a250e0608885de7dc48934512a46bfc",
+    "tools/windows-scoped-runner/MonitorAcceptanceDriver.cs": "3961723da38fbba05f800ef76a5d65a6225e25eb79303a05ff420634e0dc1914",
+    "tools/windows-scoped-runner/MonitorPayloadJob.cs": "5ed36c457b5cfaaacfc00e4d131d4330b52085d4d89d74703d7c195d1bf74468",
+    "tools/windows-scoped-runner/MonitorSpecificationIntake.cs": "0f0a71563e6c3d99f0c643644d4b56951f6c69ceb3b10b03157f68dc37bb8412",
+    "tools/windows-scoped-runner/MonitorStagingHandoff.cs": "c541f7d885d032c074461a5a0173b9ae6291ef7d8cd1b9fd2ce4a4f56d1e0e6e",
+    "tools/windows-scoped-runner/MonitorTransport.cs": "ed23c8615af7d8c1b545d3108342640c46f7e245b4e6a83a7c98bf1720a74de8",
+    "tools/windows-scoped-runner/ScopedRunner.cs": "d3a77f0daeebd5beed2b277fae9dc6a522acf1454bb5d8d776d84e1dc8e896c8",
+    "tools/windows-scoped-runner/SpecificationTransfer.cs": "7a9edfe98d84868b55146280bd5ed29576ee0c8725cf9f6c785b784bc0ad25c2",
+    "tools/windows-scoped-runner/WindowsCustodyBackend.cs": "26b7468a0868271a555f6ed450212267b01d7d3fd0a8dd5b3fb51b01b7a05629",
+    "tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs": "38745833e7b23535cdc2ce225655074c6c5f50e204c0d3cf38d6805f49cb53eb",
+    "tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs": "8f43d33928262ae181aa5396feffef9b0260653609b5be8b01da7b0a7e7b00f7",
+    "tools/windows-scoped-runner/fixtures/PayloadFixture.cs": "e89c5fad040783326d117fe09860ab8535144756be0145bb38c0e4a148c0a465",
+    "tools/windows-scoped-runner/fixtures/RunSourceFixtures.ps1": "783a00b9adf251dfa5637efbff837b268d3cdac9e8e978ae1cceba0d41b8dc27",
+    "tools/windows-scoped-runner/fixtures/RunCreationFailureControl.ps1": "aee93130da6bd795d977124dfe7ed163211e4ba5f566e648316d6bcaa2c06acd"
+  },
+  "input_manifest_sha256": "db5a26c8c7dc923a2a3dc3cba3d038dfd35634fcfaa7e6669b66a6e1b51ff664",
+  "start_sha256": "ab1b9d0ca5e3c461a0140c9f682e700872bc69bbd4c6e92e4d228615f9936d5e",
+  "review_corrections": [
+    "Association: no_handles_returned_job_empty, never falsely claim a never-returned actor was stopped.",
+    "Unconfirmed exact Driver/pipe owner retained globally before ScriptBlock exit.",
+    "Final snapshot and Start hash bound before native dispatch."
+  ],
+  "host_source_root": "/var/roothome/projects/rhai-creation-failure-20261025-5fa1dfcc",
+  "medium": "/var/lib/libvirt/images/rhai-win11-quality/creation-failure-5fa1dfcc5d504bafa9f2219bf0f0fbca.iso",
+  "source_ready_utc": "2026-10-25T11:07:09.312724+00:00",
+  "expert_answer": "../escalations/25-creation-observer-exceptional-custody.answer.md",
+  "source_review": "Combined reviewer PASS after complete exceptional ownership correction; native not launched yet."
+}

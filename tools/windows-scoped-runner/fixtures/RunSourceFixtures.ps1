@@ -9,10 +9,16 @@ param(
     [switch] $PublicToolsOnly,
     [switch] $DriverParserFixture,
     [switch] $PayloadWorkRetirementAbortOnly,
+    [switch] $CreationFailureFixturesOnly,
+    [ValidateSet('ASSOCIATION_DENIED','POST_CREATE_ABORT')] [string] $CreationFailureProfile,
     [ValidateSet('ordinary-runtime','payload-evidence')] [string] $CustodyFixtureMode = 'ordinary-runtime'
 )
 
 $ErrorActionPreference = 'Stop'
+if ($CreationFailureProfile -and !$CreationFailureFixturesOnly) { throw 'CreationFailureProfile requires CreationFailureFixturesOnly.' }
+if ($CreationFailureFixturesOnly -and (!$BuildOnly -or $CompilerClosureOnly -or $MonitorDeathFixtureOnly -or $DriverOnly -or $PublicToolsOnly -or $DriverParserFixture -or $SetupFailureControl -or $PayloadWorkRetirementAbortOnly)) {
+    throw 'CreationFailureFixturesOnly requires BuildOnly without competing diagnostic selections.'
+}
 if ($MonitorDeathFixtureOnly -and (!$BuildOnly -or $CompilerClosureOnly -or $DriverParserFixture -or $SetupFailureControl -or $DriverOnly -or $PublicToolsOnly)) {
     throw 'MonitorDeathFixtureOnly requires BuildOnly without other diagnostic selections.'
 }
@@ -39,7 +45,7 @@ if ([IntPtr]::Size -ne 8) { throw 'The accepted Windows guest and job layout req
 $expected = @{
     'tools/windows-scoped-runner/LaunchSpecification.cs' = 'e08957b13d5ed5f86cb37d0545aa876aac50e507692d112b39882f465fff8f2b'
     'tools/windows-scoped-runner/LeaseMonitor.cs' = '72c79f18c96e28f27cd1b7b39b1025da9a250e0608885de7dc48934512a46bfc'
-    'tools/windows-scoped-runner/MonitorPayloadJob.cs' = '21e59d116fab58332ec4fea648cf5abfadc26782756da9cbf6343085b8af2942'
+    'tools/windows-scoped-runner/MonitorPayloadJob.cs' = '559fda324f59768f2d5119c2f2fec7442c2cff543b694dc744b4c4ecc2524e4f'
     'tools/windows-scoped-runner/MonitorSpecificationIntake.cs' = '0f0a71563e6c3d99f0c643644d4b56951f6c69ceb3b10b03157f68dc37bb8412'
     'tools/windows-scoped-runner/MonitorStagingHandoff.cs' = 'c541f7d885d032c074461a5a0173b9ae6291ef7d8cd1b9fd2ce4a4f56d1e0e6e'
     'tools/windows-scoped-runner/MonitorTransport.cs' = 'ed23c8615af7d8c1b545d3108342640c46f7e245b4e6a83a7c98bf1720a74de8'
@@ -592,7 +598,7 @@ if (!$SetupFailureControl) { Test-OwnedProcessExitCodes $childPowerShell }
         'MonitorStagingHandoff.cs','MonitorTransport.cs','ScopedRunner.cs','SpecificationTransfer.cs','WindowsCustodyBackend.cs'
     ) | ForEach-Object { Join-Path $expectedRoot ('tools/windows-scoped-runner/' + $_) }
     $allProduction = @($production)
-    if ($BuildOnly -and !$PayloadWorkRetirementAbortOnly -and !$CompilerClosureOnly -and !$DriverOnly -and !$PublicToolsOnly -and !$MonitorDeathFixtureOnly) {
+    if ($BuildOnly -and !$CreationFailureFixturesOnly -and !$PayloadWorkRetirementAbortOnly -and !$CompilerClosureOnly -and !$DriverOnly -and !$PublicToolsOnly -and !$MonitorDeathFixtureOnly) {
         $policySource = Join-Path $expectedRoot 'tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs'
         $policyExe = Join-Path $buildRoot 'NativeScopePolicyFixture.exe'
         Invoke-OwnedProcess $compiler (@('/target:exe','/main:NativeScopePolicyFixture',('/out:'+$policyExe)) + $allProduction + @($policySource)) 'compile-native-scope-policy' 180
@@ -613,7 +619,14 @@ if (!$SetupFailureControl) { Test-OwnedProcessExitCodes $childPowerShell }
     }
     $runner = Join-Path $buildRoot 'ScopedRunner.exe'
     if ($PublicToolsOnly) { Save-OwnedJobMembers 'before-public-tools-compiler' }
-    if (!$CompilerClosureOnly -and !$DriverOnly -and !$MonitorDeathFixtureOnly) { Invoke-OwnedProcess $compiler (@('/target:exe','/main:ScopedRunner',('/out:'+$runner)) + $allProduction) 'compile-production-runner' 180 }
+    if ($CreationFailureFixturesOnly) {
+        $creationProfiles=if($CreationFailureProfile){@($CreationFailureProfile)}else{@('ASSOCIATION_DENIED','POST_CREATE_ABORT')}
+        foreach ($profile in $creationProfiles) {
+            $output = Join-Path $buildRoot ('ScopedRunner-'+$profile+'.exe')
+            Invoke-OwnedProcess $compiler (@('/target:exe','/main:ScopedRunner',('/define:SCOPED_RUNNER_TESTING,SCOPED_RUNNER_'+$profile),('/out:'+$output)) + $allProduction) ('compile-creation-'+$profile) 180
+        }
+    }
+    elseif (!$CompilerClosureOnly -and !$DriverOnly -and !$MonitorDeathFixtureOnly) { Invoke-OwnedProcess $compiler (@('/target:exe','/main:ScopedRunner',('/out:'+$runner)) + $allProduction) 'compile-production-runner' 180 }
 
     if ($PublicToolsOnly) { Save-OwnedJobMembers 'after-exact-runner-compiler-exit' }
 
@@ -636,7 +649,7 @@ if (!$SetupFailureControl) { Test-OwnedProcessExitCodes $childPowerShell }
         $exe = Join-Path $buildRoot ($case.Name + '.exe')
         Invoke-OwnedProcess $compiler (@('/target:exe','/define:SCOPED_RUNNER_TESTING',('/main:'+$case.Name),('/out:'+$exe)) + $allProduction + $fixtureSources) ('compile-' + $case.Name) 180
     }
-    if ($BuildOnly -and !$CompilerClosureOnly -and !$MonitorDeathFixtureOnly) {
+    if ($BuildOnly -and !$CreationFailureFixturesOnly -and !$CompilerClosureOnly -and !$MonitorDeathFixtureOnly) {
         $driverSource = Join-Path $expectedRoot 'tools/windows-scoped-runner/MonitorAcceptanceDriver.cs'
         $driverExe = Join-Path $buildRoot 'MonitorAcceptanceDriver.exe'
         Invoke-OwnedProcess $compiler (@('/target:exe','/main:MonitorAcceptanceDriver',('/out:'+$driverExe)) + $allProduction + @($driverSource)) 'compile-native-driver' 180
@@ -652,7 +665,7 @@ if (!$SetupFailureControl) { Test-OwnedProcessExitCodes $childPowerShell }
     $payloadSource = Join-Path $expectedRoot 'tools/windows-scoped-runner/fixtures/PayloadFixture.cs'
     $payloadExe = Join-Path $buildRoot 'PayloadFixture.exe'
     if ($CompilerClosureOnly) { Save-OwnedJobMembers 'before-compiler' }
-    if (!$DriverOnly -and !$PublicToolsOnly -and !$MonitorDeathFixtureOnly) { Invoke-OwnedProcess $compiler @('/target:exe','/main:PayloadFixture',('/out:'+$payloadExe),$payloadSource) 'compile-PayloadFixture' 180 }
+    if (!$CreationFailureFixturesOnly -and !$DriverOnly -and !$PublicToolsOnly -and !$MonitorDeathFixtureOnly) { Invoke-OwnedProcess $compiler @('/target:exe','/main:PayloadFixture',('/out:'+$payloadExe),$payloadSource) 'compile-PayloadFixture' 180 }
     if ($CompilerClosureOnly) { Save-OwnedJobMembers 'after-exact-compiler-exit' }
 
     if ($MonitorDeathFixtureOnly) {
@@ -775,6 +788,9 @@ finally {
 
 if ($success -and $BuildOnly) {
     $manifest = @('compiler_sha256=' + (Get-FileHash -LiteralPath $compiler -Algorithm SHA256).Hash.ToLowerInvariant())
+    if ($CreationFailureFixturesOnly) {
+        $manifest += 'creation_control_defines='+(($creationProfiles|ForEach-Object{'SCOPED_RUNNER_TESTING,SCOPED_RUNNER_'+$_}) -join ';')
+    }
     $manifest += @($expected.Keys | Sort-Object | ForEach-Object { "$($expected[$_])  $_" })
     $manifest += @(Get-ChildItem -LiteralPath $buildRoot -File | Sort-Object Name | ForEach-Object { "$((Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant())  build/$($_.Name)" })
     [IO.File]::WriteAllLines((Join-Path $run 'build-manifest.txt'), [string[]]$manifest, [Text.Encoding]::ASCII)
