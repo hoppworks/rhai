@@ -1,0 +1,215 @@
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded ambient-authority v0.0.2
+  Downloaded ahash v0.8.12
+  Downloaded bitflags v2.13.2
+  Downloaded windows-targets v0.52.6
+  Downloaded windows-targets v0.53.5
+  Downloaded winx v0.36.4
+  Downloaded tiny-keccak v2.0.2
+  Downloaded smartstring v1.0.1
+  Downloaded quote v1.0.41
+  Downloaded ryu v1.0.20
+  Downloaded proc-macro2 v1.0.103
+  Downloaded thin-vec v0.2.19
+  Downloaded once_cell v1.21.4
+  Downloaded getrandom v0.2.17
+  Downloaded unicode-ident v1.0.22
+  Downloaded serde v1.0.229
+  Downloaded cap-primitives v4.0.3
+  Downloaded memchr v2.8.3
+  Downloaded num-traits v0.2.19
+  Downloaded serde_json v1.0.145
+  Downloaded serde_derive v1.0.229
+  Downloaded portable-atomic v1.15.0
+  Downloaded serde_core v1.0.229
+  Downloaded smallvec v1.16.2
+  Downloaded rmp-serde v1.3.0
+  Downloaded zerocopy v0.8.59
+  Downloaded syn v2.0.106
+  Downloaded syn v3.0.6
+  Downloaded cap-std v4.0.3
+  Downloaded getrandom v0.3.4
+  Downloaded rmp v0.8.14
+  Downloaded io-extras v0.19.0
+  Downloaded paste v1.0.15
+  Downloaded ipnet v2.12.2
+  Downloaded io-lifetimes v3.0.1
+  Downloaded itoa v1.0.15
+  Downloaded byteorder v1.5.0
+  Downloaded static_assertions v1.1.0
+  Downloaded maybe-owned v0.3.4
+  Downloaded fs-set-times v0.20.3
+  Downloaded const-random-macro v0.1.16
+  Downloaded const-random v0.1.18
+  Downloaded cfg-if v1.0.5
+  Downloaded version_check v0.9.5
+  Downloaded io-lifetimes v2.0.4
+  Downloaded crunchy v0.2.4
+  Downloaded autocfg v1.5.1
+  Downloaded windows_x86_64_msvc v0.53.1
+  Downloaded windows_x86_64_msvc v0.52.6
+  Downloaded windows-sys v0.59.0
+  Downloaded windows-sys v0.60.2
+ Downloading crates ...
+  Downloaded libc v0.2.189
+ Downloading crates ...
+  Downloaded web-time v1.1.0
+   Compiling proc-macro2 v1.0.103
+   Compiling unicode-ident v1.0.22
+   Compiling quote v1.0.41
+   Compiling autocfg v1.5.1
+   Compiling windows_x86_64_msvc v0.52.6
+   Compiling windows_x86_64_msvc v0.53.1
+   Compiling version_check v0.9.5
+   Compiling serde_core v1.0.229
+   Compiling crunchy v0.2.4
+   Compiling windows-targets v0.52.6
+   Compiling io-lifetimes v2.0.4
+   Compiling cfg-if v1.0.5
+   Compiling io-lifetimes v3.0.1
+   Compiling tiny-keccak v2.0.2
+   Compiling windows-targets v0.53.5
+   Compiling syn v3.0.6
+   Compiling windows-sys v0.59.0
+   Compiling num-traits v0.2.19
+   Compiling serde v1.0.229
+   Compiling portable-atomic v1.15.0
+   Compiling io-extras v0.19.0
+   Compiling serde_derive v1.0.229
+   Compiling windows-sys v0.60.2
+   Compiling getrandom v0.2.17
+   Compiling once_cell v1.21.4
+   Compiling bitflags v2.13.2
+   Compiling cap-primitives v4.0.3
+   Compiling zerocopy v0.8.59
+   Compiling getrandom v0.3.4
+   Compiling winx v0.36.4
+   Compiling const-random-macro v0.1.16
+   Compiling fs-set-times v0.20.3
+   Compiling smartstring v1.0.1
+   Compiling ahash v0.8.12
+   Compiling cap-std v4.0.3
+   Compiling ipnet v2.12.2
+   Compiling ambient-authority v0.0.2
+   Compiling paste v1.0.15
+   Compiling maybe-owned v0.3.4
+   Compiling serde_json v1.0.145
+   Compiling const-random v0.1.18
+   Compiling syn v2.0.106
+   Compiling itoa v1.0.15
+   Compiling static_assertions v1.1.0
+   Compiling memchr v2.8.3
+   Compiling ryu v1.0.20
+   Compiling rhai v1.26.1 (C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-d4ece7b0\run\scoped-e949f57a6f344c69938abc6c068786f7)
+   Compiling smallvec v1.16.2
+   Compiling byteorder v1.5.0
+   Compiling thin-vec v0.2.19
+   Compiling rmp v0.8.14
+   Compiling rhai_codegen v3.2.0 (C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-d4ece7b0\run\scoped-e949f57a6f344c69938abc6c068786f7\codegen)
+   Compiling rmp-serde v1.3.0
+warning: unused variable: `module`
+   --> src\packages\sys\process.rs:143:24
+    |
+143 | pub(super) fn register(module: &mut Module, state: &crate::Shared<super::SysState>) {
+    |                        ^^^^^^ help: if this is intentional, prefix it with an underscore: `_module`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `state`
+   --> src\packages\sys\process.rs:143:45
+    |
+143 | pub(super) fn register(module: &mut Module, state: &crate::Shared<super::SysState>) {
+    |                                             ^^^^^ help: if this is intentional, prefix it with an underscore: `_state`
+
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (lib) generated 3 warnings (run `cargo fix --lib -p rhai` to apply 2 suggestions)
+warning: unused import: `PathBuf`
+ --> src\bin\rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 44.78s
+     Running tests\sys_fs.rs (work\target\debug\deps\sys_fs-c80f757c4c7c1d40.exe)
+
+running 1 test
+independent host readback: "original XYyload"
+
+thread 'test_open_file_default_preserves_contents_and_shares_cursor' (6924) panicked at tests\sys_fs.rs:42:5:
+assertion `left == right` failed
+  left: [111, 114, 105, 103, 105, 110, 97, 108, 32, 88, 89, 121, 108, 111, 97, 100]
+ right: [119, 114, 111, 110, 103, 32, 101, 120, 112, 101, 99, 116, 97, 116, 105, 111, 110]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test test_open_file_default_preserves_contents_and_shares_cursor ... FAILED
+
+failures:
+
+failures:
+    test_open_file_default_preserves_contents_and_shares_cursor
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 28 filtered out; finished in 0.01s
+
+error: test failed, to rerun pass `--test sys_fs`
+RHAI_RED_EXPECTED_ASSERTION_CONFIRMED
+warning: unused variable: `module`
+   --> src\packages\sys\process.rs:143:24
+    |
+143 | pub(super) fn register(module: &mut Module, state: &crate::Shared<super::SysState>) {
+    |                        ^^^^^^ help: if this is intentional, prefix it with an underscore: `_module`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `state`
+   --> src\packages\sys\process.rs:143:45
+    |
+143 | pub(super) fn register(module: &mut Module, state: &crate::Shared<super::SysState>) {
+    |                                             ^^^^^ help: if this is intentional, prefix it with an underscore: `_state`
+
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (lib) generated 3 warnings (run `cargo fix --lib -p rhai` to apply 2 suggestions)
+warning: unused import: `PathBuf`
+ --> src\bin\rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 0.16s
+     Running tests\sys_fs.rs (work\target\debug\deps\sys_fs-c80f757c4c7c1d40.exe)
+
+running 1 test
+independent host readback: "original XYyload"
+test test_open_file_default_preserves_contents_and_shares_cursor ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 28 filtered out; finished in 0.02s
+
+RHAI_WORK_READONLY_CLEARED
+RHAI_GREEN_HOST_READBACK_CONFIRMED

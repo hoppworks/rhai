@@ -1,0 +1,1 @@
+$pre=$w2.Substring(2).TrimEnd("\")+"\";$bad=0;foreach($f in $r){$links=@(fsutil hardlink list $f.FullName);if($LASTEXITCODE -ne 0 -or $links.Count -eq 0 -or @($links|? {!([string]$_).Trim().StartsWith($pre,[StringComparison]::OrdinalIgnoreCase)}).Count -ne 0){$bad++}};"ALIASES_BAD=$bad READONLY=$($r.Count)"

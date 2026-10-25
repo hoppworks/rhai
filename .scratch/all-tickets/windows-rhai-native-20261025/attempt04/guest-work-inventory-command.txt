@@ -1,0 +1,1 @@
+$w="$HOME\.local\share\agent-builds\rhai\n-d4ece7b0\run\scoped-e949f57a6f344c69938abc6c068786f7\work";$a=@(Get-ChildItem -LiteralPath $w -Recurse -Force -File -ErrorAction Stop);"COUNT=$($a.Count) BYTES=$(($a|Measure-Object Length -Sum).Sum) READONLY=$(@($a|Where-Object IsReadOnly).Count)"

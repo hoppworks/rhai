@@ -1,0 +1,1 @@
+"MAXPATH=$(($a|% FullName|% Length|Measure-Object -Maximum).Maximum) REPARSE=$(@(Get-ChildItem -LiteralPath $w -Recurse -Force|? {$_.Attributes -band [IO.FileAttributes]::ReparsePoint}).Count)";$p=$a[0].FullName;$q=Get-Acl -LiteralPath $p;"ACLCOUNT=$($q.Access.Count) PROTECTED=$($q.AreAccessRulesProtected) PATH=$p"

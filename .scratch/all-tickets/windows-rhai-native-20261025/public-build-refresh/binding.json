@@ -1,0 +1,31 @@
+{
+  "purpose": "refresh native public Runner/Driver BuildOnly for Windows Rhai acceptance",
+  "owner": "this Rhai session",
+  "nonce": "3b2a5af2029c4c89b3a4e48d9284f2e5",
+  "vm_uuid": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19",
+  "guest_user": "RhaiTest",
+  "guest_scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\public-refresh-3b2a5af2029c4c89b3a4e48d9284f2e5",
+  "host_stage": "/var/roothome/.local/share/agent-builds/rhai/windows-public-refresh-3b2a5af2029c4c89b3a4e48d9284f2e5",
+  "host_media": "/var/lib/libvirt/images/rhai-win11-quality/public-refresh-3b2a5af2029c4c89b3a4e48d9284f2e5.iso",
+  "original_sdc": "/var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/monitor-fixture02.iso",
+  "previous_sdc": "/var/lib/libvirt/images/rhai-win11-quality/rhai-native-88b0797744d34d97861d1b3e681069fb.iso",
+  "prepared_host_utc": "2026-10-25T19:16:54Z",
+  "expires_host_utc": "2026-10-25T21:16:54Z",
+  "source_input_manifest_sha256": "175fee88ce1625dcd9efca0fb904d5c7cfeb7b96a9a80e25bc90187099a8a276",
+  "start_sha256": "f3ed43edd80e1c040d40ea3d135604e1a283b413b9158570d7ae1e0abc07ba22",
+  "host_iso_sha256": "c246c2d2f1692d6b1ec9d7a26d363e008e04d649fa5b51448eada10a3e988d57",
+  "dispatch_sha256": "6fb17de161a37f49b41c66bc7010b8c20a9a1e4c68074978bab3dc09b98483ca",
+  "limits": {
+    "build_seconds": 600,
+    "outer_reap_seconds": 30,
+    "serial_export_seconds": 180,
+    "host_min_free_bytes": 4294967296,
+    "guest_min_disk_bytes": 2147483648,
+    "guest_min_ram_bytes": 1073741824
+  },
+  "planned": {
+    "public_csc_builds": 1,
+    "public_drivers": 0
+  },
+  "native_started": false
+}

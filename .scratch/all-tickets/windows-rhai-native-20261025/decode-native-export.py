@@ -7,7 +7,7 @@ import sys
 
 root = Path(sys.argv[1]).resolve()
 raw = (root / "serial-original.bin").read_bytes()
-identity = "rhai-native-" + {"attempt01": "3e02fab1e0f047538d581fa4c9a52c85", "attempt02": "97a0dde027334ae09b0603240dc1bbda", "attempt03": "88b0797744d34d97861d1b3e681069fb"}[root.name]
+identity = "rhai-native-" + {"attempt01": "3e02fab1e0f047538d581fa4c9a52c85", "attempt02": "97a0dde027334ae09b0603240dc1bbda", "attempt03": "88b0797744d34d97861d1b3e681069fb", "attempt04": "d4ece7b0690446ddb5853c2b8592e872", "attempt05": "cdfb68cc215f49ef80b96585aca5aae9"}[root.name]
 prefix = ("RHAI_BOOTSTRAP " + identity + " ").encode()
 frames = []
 for line in raw.splitlines():

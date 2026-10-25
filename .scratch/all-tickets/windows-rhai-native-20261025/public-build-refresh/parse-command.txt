@@ -1,0 +1,1 @@
+$t=$null;$e=$null;$null=[Management.Automation.Language.Parser]::ParseFile('E:\Start.ps1',[ref]$t,[ref]$e);'PARSE_ERRORS='+$e.Count

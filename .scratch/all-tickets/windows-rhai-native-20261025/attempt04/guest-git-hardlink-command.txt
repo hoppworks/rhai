@@ -1,0 +1,1 @@
+$p=($a|Where-Object {$_.FullName -like "*\git\*"}|Select-Object -First 1).FullName;"PATH=$p";fsutil hardlink list $p

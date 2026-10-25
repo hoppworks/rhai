@@ -1,0 +1,1 @@
+(Get-FileHash C:\Windows\System32\fsutil.exe).Hash -eq '3fca44b7ce971031c08296647821e04dc7aa62c0f5846a3a0dc7015d5a4bc501'

@@ -1,0 +1,1 @@
+'E:\Start.ps1','E:\RunRhaiContractControl.ps1','E:\ClearOwnedWorkReadOnly.ps1' | % { $t=$null;$e=$null;$null=[Management.Automation.Language.Parser]::ParseFile($_,[ref]$t,[ref]$e);$_+' PARSE_ERRORS='+$e.Count }

@@ -1,0 +1,44 @@
+{
+  "id": "rhai-public-refresh-3b2a5af2029c4c89b3a4e48d9284f2e5",
+  "frames": 21,
+  "files": {
+    "build-observer.json": {
+      "path": "build-observer.json",
+      "sha256": "f87f084d704328cf5625d9ada65435c28e6c6159742dd17a4087d694222a9272",
+      "length": 595
+    },
+    "project-readback.json": {
+      "path": "project-readback.json",
+      "sha256": "dbbd1da1260b576b19f9301e132b48f3230d046f509b0e3dcd697c65efdc7e90",
+      "length": 833
+    },
+    "bootstrap.stdout": {
+      "path": "bootstrap.stdout",
+      "sha256": "4749e90b77708fcf45e7a51ab3eb7bce9745e2cb8d842711ff1f21310f69c793",
+      "length": 1086
+    },
+    "bootstrap.stderr": {
+      "path": "bootstrap.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-3b2a5af2029c4c89b3a4e48d9284f2e5/run-result.txt": {
+      "path": "run/monitor-source-3b2a5af2029c4c89b3a4e48d9284f2e5/run-result.txt",
+      "sha256": "79c5b9102422b2f755e2aed8ef416a0a3ab0156de7c5ba4c85dbeda2e6ac6761",
+      "length": 124
+    },
+    "run/monitor-source-3b2a5af2029c4c89b3a4e48d9284f2e5/build-manifest.txt": {
+      "path": "run/monitor-source-3b2a5af2029c4c89b3a4e48d9284f2e5/build-manifest.txt",
+      "sha256": "90e10dd760e2d24eb9cb9dd2f5fc7028e4a3bb981f7a6280055682e9d0549116",
+      "length": 1834
+    }
+  },
+  "bytes": 4472,
+  "serial_sha256": "3bfcf69301c940477db511be1ab3716b0aa5da593a69523be159db9b6a9636be",
+  "serial_bytes": 12898,
+  "manifest_sha256": "90e10dd760e2d24eb9cb9dd2f5fc7028e4a3bb981f7a6280055682e9d0549116",
+  "binary_sha256": {
+    "ScopedRunner.exe": "f3adeb067012134766a80daac2b5996c89a6be545012d9e4879e586983567908",
+    "MonitorAcceptanceDriver.exe": "9d4afcebcfb153b323f92c9d8caa8221ea3d39918c9fe9930db5408026168e04"
+  }
+}

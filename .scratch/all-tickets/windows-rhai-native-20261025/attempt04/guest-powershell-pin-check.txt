@@ -1,0 +1,1 @@
+(Get-FileHash C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe).Hash -eq '60c9b29843624dd8af6b6a7b26147753be6aeef65098b9a503cc50850afe410f'

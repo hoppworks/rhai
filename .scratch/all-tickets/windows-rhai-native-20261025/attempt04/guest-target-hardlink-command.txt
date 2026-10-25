@@ -1,0 +1,1 @@
+$p=$a[0].FullName;"PATH=$p";fsutil hardlink list $p;Get-ChildItem -LiteralPath $w -Force|Select-Object Name,Attributes
