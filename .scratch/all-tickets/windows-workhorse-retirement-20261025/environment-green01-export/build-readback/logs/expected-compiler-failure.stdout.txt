@@ -1,0 +1,4 @@
+Microsoft (R) Visual C# Compiler version 4.14.0-3.26424.7 (a528c90a)
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+error CS2001: Source file 'C:\Users\RhaiTest\.local\share\agent-builds\rhai\work-abort-build-4e92c3e57fa14837992fd1d20a3f2f8a\run\monitor-source-4e92c3e57fa14837992fd1d20a3f2f8a\input\deliberately-missing-compiler-control.cs' could not be found.

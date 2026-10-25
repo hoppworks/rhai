@@ -8,6 +8,7 @@ param(
     [switch] $DriverOnly,
     [switch] $PublicToolsOnly,
     [switch] $DriverParserFixture,
+    [switch] $PayloadWorkRetirementAbortOnly,
     [ValidateSet('ordinary-runtime','payload-evidence')] [string] $CustodyFixtureMode = 'ordinary-runtime'
 )
 
@@ -23,6 +24,9 @@ if ($PublicToolsOnly -and (!$BuildOnly -or $CompilerClosureOnly -or $DriverOnly 
 }
 if ($DriverOnly -and (!$BuildOnly -or !$DriverParserFixture -or $SetupFailureControl)) {
     throw 'DriverOnly requires BuildOnly and DriverParserFixture without SetupFailureControl.'
+}
+if ($PayloadWorkRetirementAbortOnly -and (!$BuildOnly -or $CompilerClosureOnly -or $MonitorDeathFixtureOnly -or $DriverOnly -or $PublicToolsOnly -or $DriverParserFixture -or $SetupFailureControl)) {
+    throw 'PayloadWorkRetirementAbortOnly requires BuildOnly without competing diagnostic selections.'
 }
 
 if ($PSVersionTable.PSVersion -lt [version]'5.1') {
@@ -41,22 +45,22 @@ $expected = @{
     'tools/windows-scoped-runner/MonitorTransport.cs' = 'ed23c8615af7d8c1b545d3108342640c46f7e245b4e6a83a7c98bf1720a74de8'
     'tools/windows-scoped-runner/ScopedRunner.cs' = 'd3a77f0daeebd5beed2b277fae9dc6a522acf1454bb5d8d776d84e1dc8e896c8'
     'tools/windows-scoped-runner/SpecificationTransfer.cs' = '7a9edfe98d84868b55146280bd5ed29576ee0c8725cf9f6c785b784bc0ad25c2'
-    'tools/windows-scoped-runner/WindowsCustodyBackend.cs' = 'ae25df2c9e8d26b725cbe605dfa9c56902636c04dbefa018dcde7c4e35c785d8'
-    'tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs' = '1cd3885d596ab5c847ab9d7f38a8c3a821860a445839b128153f4ec10fb88d8a'
+    'tools/windows-scoped-runner/WindowsCustodyBackend.cs' = '26b7468a0868271a555f6ed450212267b01d7d3fd0a8dd5b3fb51b01b7a05629'
+    'tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs' = '38745833e7b23535cdc2ce225655074c6c5f50e204c0d3cf38d6805f49cb53eb'
     'tools/windows-scoped-runner/fixtures/LaunchSpecificationFixture.cs' = '5acc9ddd831fef39bdcd5c540a5404c5dd077abda731a67d16ecd4d92c82313e'
     'tools/windows-scoped-runner/fixtures/LeaseProtocolFixture.cs' = 'c466da5498e6908f273158384c73d58b055f083930bc9fac7c7af2a7dbf12251'
     'tools/windows-scoped-runner/fixtures/MonitorPayloadJobFixture.cs' = 'd9aae76fd68a2cb52721618cd0746af36892a7951c9d0c4d11867a05e11ca7c0'
     'tools/windows-scoped-runner/fixtures/MonitorSpecificationIntakeFixture.cs' = '3e774455bc25a3f0fa40162e4ca3f5d59f35270d27b41c3e2aceb0f144f73d8d'
     'tools/windows-scoped-runner/fixtures/MonitorStagingHandoffFixture.cs' = '463273337d01e64b4285031858188b5ef886bb5cf150f6dabe2ac637bca999d5'
-    'tools/windows-scoped-runner/fixtures/PayloadFixture.cs' = '033764026c35da5d0474dc76bdb640010f6a8b66955b4a75bc015ddd30df7ba3'
+    'tools/windows-scoped-runner/fixtures/PayloadFixture.cs' = '6f48ce06a01f06bb8a064aa450624f4dd29ffcbcba1dbaf9c3e52a62b0acaebb'
     'tools/windows-scoped-runner/fixtures/SpecificationTransferFixture.cs' = 'a6b901d0a9cf59faba2d5f056d983ef627b92b2e9535277b60a1e2e75541e504'
 }
 
 # The narrow native bootstrap compiles only the public runner, real-client driver
 # and finite payload. It never runs the driver inside this compiler owner's job.
-$expected['tools/windows-scoped-runner/MonitorAcceptanceDriver.cs'] = '016c313d545b52df233f0e9607e3b21fa23d9abe7183f89bbac5cc569ab44555'
+$expected['tools/windows-scoped-runner/MonitorAcceptanceDriver.cs'] = '3961723da38fbba05f800ef76a5d65a6225e25eb79303a05ff420634e0dc1914'
 $expected['tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs'] = '8f43d33928262ae181aa5396feffef9b0260653609b5be8b01da7b0a7e7b00f7'
-if ($DriverParserFixture) { $expected['tools/windows-scoped-runner/fixtures/MonitorAcceptanceDriverFixture.cs'] = 'e27fa58588b1988ec0085ac4ec0379f686e5dd48254cd559f5278c057851f054' }
+if ($DriverParserFixture) { $expected['tools/windows-scoped-runner/fixtures/MonitorAcceptanceDriverFixture.cs'] = '2cd12d8de5f65eb48cd1f8e53e1d8850838c7fc55ce6e441cc17228f1b9fff40' }
 if ($MonitorDeathFixtureOnly) { $expected['tools/windows-scoped-runner/fixtures/MonitorDeathFixture.cs'] = 'f9b24970b8befd8432ca16d7d17ebd8087f4f85490251deca39b6000704835b3' }
 if ($BuildOnly) {
     foreach ($relative in @($expected.Keys)) {
@@ -64,7 +68,9 @@ if ($BuildOnly) {
             $relative -ne 'tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs' -and
             $relative -ne 'tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs' -and
             !($DriverParserFixture -and $relative -eq 'tools/windows-scoped-runner/fixtures/MonitorAcceptanceDriverFixture.cs') -and
-            !($MonitorDeathFixtureOnly -and $relative -eq 'tools/windows-scoped-runner/fixtures/MonitorDeathFixture.cs')) {
+            !($MonitorDeathFixtureOnly -and $relative -eq 'tools/windows-scoped-runner/fixtures/MonitorDeathFixture.cs') -and
+            !($PayloadWorkRetirementAbortOnly -and ($relative -eq 'tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs' -or
+                $relative -eq 'tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs'))) {
             $expected.Remove($relative)
         }
     }
@@ -586,7 +592,7 @@ if (!$SetupFailureControl) { Test-OwnedProcessExitCodes $childPowerShell }
         'MonitorStagingHandoff.cs','MonitorTransport.cs','ScopedRunner.cs','SpecificationTransfer.cs','WindowsCustodyBackend.cs'
     ) | ForEach-Object { Join-Path $expectedRoot ('tools/windows-scoped-runner/' + $_) }
     $allProduction = @($production)
-    if ($BuildOnly -and !$CompilerClosureOnly -and !$DriverOnly -and !$PublicToolsOnly -and !$MonitorDeathFixtureOnly) {
+    if ($BuildOnly -and !$PayloadWorkRetirementAbortOnly -and !$CompilerClosureOnly -and !$DriverOnly -and !$PublicToolsOnly -and !$MonitorDeathFixtureOnly) {
         $policySource = Join-Path $expectedRoot 'tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs'
         $policyExe = Join-Path $buildRoot 'NativeScopePolicyFixture.exe'
         Invoke-OwnedProcess $compiler (@('/target:exe','/main:NativeScopePolicyFixture',('/out:'+$policyExe)) + $allProduction + @($policySource)) 'compile-native-scope-policy' 180

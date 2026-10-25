@@ -1,0 +1,46 @@
+{
+  "base": "b0b3656394ba8b76172e5b3b7daabbc2c916455d",
+  "native_builds": 1,
+  "native_public_drivers": 2,
+  "changed": [
+    {
+      "path": "tools/windows-scoped-runner/WindowsCustodyBackend.cs",
+      "previous_sha256": "ae25df2c9e8d26b725cbe605dfa9c56902636c04dbefa018dcde7c4e35c785d8",
+      "current_sha256": "26b7468a0868271a555f6ed450212267b01d7d3fd0a8dd5b3fb51b01b7a05629",
+      "frozen_input_sha256": "26b7468a0868271a555f6ed450212267b01d7d3fd0a8dd5b3fb51b01b7a05629"
+    },
+    {
+      "path": "tools/windows-scoped-runner/MonitorAcceptanceDriver.cs",
+      "previous_sha256": "016c313d545b52df233f0e9607e3b21fa23d9abe7183f89bbac5cc569ab44555",
+      "current_sha256": "3961723da38fbba05f800ef76a5d65a6225e25eb79303a05ff420634e0dc1914",
+      "frozen_input_sha256": "3961723da38fbba05f800ef76a5d65a6225e25eb79303a05ff420634e0dc1914"
+    },
+    {
+      "path": "tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs",
+      "previous_sha256": "1cd3885d596ab5c847ab9d7f38a8c3a821860a445839b128153f4ec10fb88d8a",
+      "current_sha256": "38745833e7b23535cdc2ce225655074c6c5f50e204c0d3cf38d6805f49cb53eb",
+      "frozen_input_sha256": "38745833e7b23535cdc2ce225655074c6c5f50e204c0d3cf38d6805f49cb53eb"
+    },
+    {
+      "path": "tools/windows-scoped-runner/fixtures/PayloadFixture.cs",
+      "previous_sha256": "033764026c35da5d0474dc76bdb640010f6a8b66955b4a75bc015ddd30df7ba3",
+      "current_sha256": "6f48ce06a01f06bb8a064aa450624f4dd29ffcbcba1dbaf9c3e52a62b0acaebb",
+      "frozen_input_sha256": "6f48ce06a01f06bb8a064aa450624f4dd29ffcbcba1dbaf9c3e52a62b0acaebb"
+    },
+    {
+      "path": "tools/windows-scoped-runner/fixtures/RunSourceFixtures.ps1",
+      "previous_sha256": "0ceea8a189cb46ad333779dfde4ec865c7ac900f027c67acc8e053112d4eaba7",
+      "current_sha256": "2f6e300bddf4098e09c041a120b2b3bd1f98a98492d99c826e10156ff559c7c1",
+      "frozen_input_sha256": "2f6e300bddf4098e09c041a120b2b3bd1f98a98492d99c826e10156ff559c7c1"
+    },
+    {
+      "path": "tools/windows-scoped-runner/fixtures/RunPayloadEnvironmentControl.ps1",
+      "previous_sha256": null,
+      "current_sha256": "a455419f08633af1767da4e849b07928f12d7b95b61d1459e597d41ea27a39c5",
+      "frozen_input_sha256": "f313d83b470341adf4a60b9cb47b8005c6ff626f77fa77f384dd2b4b3877f135"
+    }
+  ],
+  "observer_delta": "two CRLF-safe regex literals, exactly the in-memory text executed by the successful native environment GREEN",
+  "alternate_wrapper": "three dependent source hash literals refreshed; pure parser fixture has one canonical schema literal update matching the frozen harness pin2cd12d8; optional fixture/wrapper remain unexecuted this resume",
+  "optional_parser_fixture": "parser-fixture-grammar-update.json"
+}

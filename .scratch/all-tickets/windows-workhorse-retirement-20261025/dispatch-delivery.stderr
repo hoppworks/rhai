@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "<string>", line 11, in <module>
+    send([event(k,True)]);time.sleep(.035);send([event(k,False)]);time.sleep(.035)
+    ~~~~^^^^^^^^^^^^^^^^^
+  File "<string>", line 7, in send
+    assert 'error' not in p.stdout,p.stdout
+           ^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {"id":"libvirt-874","error":{"class":"GenericError","desc":"Parameter 'data' does not accept value '&'"}}
+
+

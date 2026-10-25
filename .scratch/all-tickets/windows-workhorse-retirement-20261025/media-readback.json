@@ -1,0 +1,11 @@
+{
+  "source": "/var/roothome/projects/rhai-retirement-proof-20261025-3e27c8c6",
+  "output_medium": "/var/lib/libvirt/images/rhai-win11-quality/retirement-readback-20261025.iso",
+  "iso_sha256": "867e45d0eb648da89e1f0282982d876d2f7a0956ad6c14d6f94fc4ce17318856",
+  "files": {
+    "environment-green.ps1": "76c782ddf46ec1fa0c035cb4667cad5aab1e428db710003b47e6ceb77dad59ed",
+    "readback-only.ps1": "240f12cdfe51a3aba23b6f7ed75a15da52ec33b8bafb7e07c489af2f2e060c18"
+  },
+  "execution": "not yet",
+  "lifetime": "exact own immutable source medium; detach/remove after two proof steps; no compiler cache retained"
+}

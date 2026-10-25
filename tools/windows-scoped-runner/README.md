@@ -1,5 +1,33 @@
 # Candidate Windows monitor/client custody source
 
+## Native work-retirement checkpoint —2026-10-25
+
+The real public Driver/Runner abort path now proves private-work retirement after
+exact Job closure: payload exit42 is data, Driver exit0 is truthful,2107entries
+and613419011bytes are retired before the bounded snapshot, a265-character relative
+path is exercised, and the runtime is absent. The separate environment GREEN on
+the same build verifies all five private child paths and parent preservation.
+[Originals, controls, parser recovery and review](../../.scratch/all-tickets/windows-workhorse-retirement-20261025/proof.md)
+record the exact scope. Other custody faults and Windows Rust/Cargo remain open.
+
+Private work has separate cleanup bounds:65536entries,depth64,path32763UTF-16
+units and8GiB total. Immutable staging and evidence keep their existing bounds.
+Retirement requires this allocation's recorded work identity and exact closed-Job
+proof; a missing proof or identity/limit failure retains evidence and fails closed.
+
+Use `fixtures/RunSourceFixtures.ps1 -BuildOnly -PayloadWorkRetirementAbortOnly`
+with its normal owned source/run parameters to compile the three required tools.
+The independent control is `fixtures/RunPayloadEnvironmentControl.ps1`; it accepts
+the exact retained BuildRoot and fixture SHA and rejects an existing control scope.
+Read source/binary/compiler bindings and real retained-path availability first.
+In a console where script-file execution is disabled, the reviewed entry is
+`& ([scriptblock]::Create((Get-Content -LiteralPath $control -Raw))) <parameters>`
+after verifying `$control` against its expected SHA. This preserves parameter
+binding and uses absolute parameters/USERPROFILE/PSHOME for paths. No persistent
+execution-policy change is required. Parse Windows manifest lines individually;
+stdout RUNTIME/JOURNAL captures explicitly accept CRLF. Parser repair starts with
+saved output rather than another compiler or payload invocation.
+
 ## Native bootstrap and separate custody acceptance route
 
 
@@ -22,7 +50,8 @@ See [the original proof](../../.scratch/rhai-wayfinder-replan-20261008/results/w
 launching it inside the compiler job. The native public success path subsequently
 passed with independent evidence-file readback and runtime removal. Selected
 client/disconnect/replay and monitor-death rows are accepted below; remaining
-fault controls, full custody and product-work retirement remain open. See
+fault controls and full custody remain open; the named large-work abort retirement
+criterion is accepted at the checkpoint above. See
 [the current custody evidence](../../.scratch/rhai-wayfinder-replan-20261008/results/windows-custody-20261008T125846Z-b7f83433/custody-progress.md).
 It launches the public `ScopedRunner.exe
 --lease-client`, transfers the canonical immutable `RHAI-LAUNCH/1`
@@ -127,9 +156,9 @@ compiler arguments and original native results are linked in the current custody
 evidence; older checkpoint hashes describe their historical inputs only.
 Current SHA-256 values are
 `MonitorAcceptanceDriver.cs`:
-`016c313d545b52df233f0e9607e3b21fa23d9abe7183f89bbac5cc569ab44555`, and
+`3961723da38fbba05f800ef76a5d65a6225e25eb79303a05ff420634e0dc1914`, and
 `fixtures/MonitorAcceptanceDriverFixture.cs`:
-`e27fa58588b1988ec0085ac4ec0379f686e5dd48254cd559f5278c057851f054`. Retain
+`2cd12d8de5f65eb48cd1f8e53e1d8850838c7fc55ce6e441cc17228f1b9fff40`. Retain
 the unique run root, copied sources, runner and driver binaries, fixture result,
 compiler logs, and hashes for inspection; do not reuse or delete it after a
 failed run.

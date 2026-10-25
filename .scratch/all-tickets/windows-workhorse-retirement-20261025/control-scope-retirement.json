@@ -1,0 +1,10 @@
+{
+  "retired_guest_scopes": [
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-4e92c3e57fa14837992fd1d20a3f2f8a",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-e527e19ef6234cc499498b967dbff2ee"
+  ],
+  "guards": "scope owner/profile, exact observer scope, Driver0/exited/drained/no handles, no reparse entries, bounded inventory/bytes, no runtime children; both checked before either deletion",
+  "readback": "guest-control-cleanup.png shows successful deletion and independent Test-Path absence guards, returned prompt",
+  "build": "retained outside these roots for immediately compatible custody followups under unchanged expiry in execution-binding.json",
+  "foreign_resources_removed": false
+}

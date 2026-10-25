@@ -21,11 +21,11 @@ $productionExpected = @{
     'tools/windows-scoped-runner/MonitorTransport.cs' = 'ed23c8615af7d8c1b545d3108342640c46f7e245b4e6a83a7c98bf1720a74de8'
     'tools/windows-scoped-runner/ScopedRunner.cs' = 'd3a77f0daeebd5beed2b277fae9dc6a522acf1454bb5d8d776d84e1dc8e896c8'
     'tools/windows-scoped-runner/SpecificationTransfer.cs' = '7a9edfe98d84868b55146280bd5ed29576ee0c8725cf9f6c785b784bc0ad25c2'
-    'tools/windows-scoped-runner/WindowsCustodyBackend.cs' = 'ae25df2c9e8d26b725cbe605dfa9c56902636c04dbefa018dcde7c4e35c785d8'
+    'tools/windows-scoped-runner/WindowsCustodyBackend.cs' = '26b7468a0868271a555f6ed450212267b01d7d3fd0a8dd5b3fb51b01b7a05629'
 }
 $expected = @{} + $productionExpected
-$expected['tools/windows-scoped-runner/MonitorAcceptanceDriver.cs'] = '016c313d545b52df233f0e9607e3b21fa23d9abe7183f89bbac5cc569ab44555'
-$expected['tools/windows-scoped-runner/fixtures/MonitorAcceptanceDriverFixture.cs'] = 'e27fa58588b1988ec0085ac4ec0379f686e5dd48254cd559f5278c057851f054'
+$expected['tools/windows-scoped-runner/MonitorAcceptanceDriver.cs'] = '3961723da38fbba05f800ef76a5d65a6225e25eb79303a05ff420634e0dc1914'
+$expected['tools/windows-scoped-runner/fixtures/MonitorAcceptanceDriverFixture.cs'] = '2cd12d8de5f65eb48cd1f8e53e1d8850838c7fc55ce6e441cc17228f1b9fff40'
 $MaximumLogBytes = 4MB
 $OverallLimitMs = 3600000
 $CompilerLimitSeconds = 180

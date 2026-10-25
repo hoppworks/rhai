@@ -31,7 +31,7 @@ internal static class MonitorAcceptanceDriverFixture
             "IDENTITY|"+id+"|"+runtimeId+"|"+parent+"|"+journalId,
             "STAGED|"+id+"|1|10|"+hash+"|"+hash+"|"+exeId,
             "LIFECYCLE|"+id+"|"+runtimeId+"|deadline=123|operation=NONE|cleanup=NONE|cleanup_confirmed=1",
-            "EVIDENCE|"+id+"|"+runtimeId+"|proof=EXACT|exit="+exit+"|supervision="+supervision+"|evidence_identity="+evidenceId+"|manifest="+hash+"|stdout="+digest+"|stderr="+digest+"|runtime_bytes=10|logs_bytes=0|deadline=123",
+            "EVIDENCE|"+id+"|"+runtimeId+"|proof=EXACT|exit="+exit+"|supervision="+supervision+"|evidence_identity="+evidenceId+"|manifest="+hash+"|stdout="+digest+"|stderr="+digest+"|runtime_bytes=10|logs_bytes=0|work_identity=NONE|work_entries=0|work_bytes=0|deadline=123",
             "OUTCOME|"+id+"|"+runtimeId+"|payload="+exit+"|supervision="+supervision+"|cleanup=CONFIRMED|diagnostics_saved=1|local_metadata_saved=1|payload_evidence_saved=1|evidence="+hash+"|evidence_identity="+evidenceId+"|evidence_bytes=10|host_exported=0|runtime_removed=0",
             "REMOVE_INTENT|"+id+"|"+runtimeId+"|"+parent,
             "REMOVED|"+id+"|"+runtimeId+"|"+parent

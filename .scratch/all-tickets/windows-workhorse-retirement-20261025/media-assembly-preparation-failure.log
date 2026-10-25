@@ -1,0 +1,4 @@
+  File "<string>", line 11
+    (src/'media-readback.json').write_text(json.dumps({'source':str(src),'output_medium':str(out),'iso_sha256':hashlib.sha256(out.read_bytes()).hexdigest(),'files':verified,'execution':'not yet','resource_kind':'immutable reviewed input medium; export for native proof, not a retained compiler cache','lifetime':'detach then remove exact owned image after readback/environment controls; original build expiry unchanged'},indent=2)+'
+                                                                                                                                                                                                                                                                                                                                                                                                                                               ^
+SyntaxError: unterminated string literal (detected at line 11)

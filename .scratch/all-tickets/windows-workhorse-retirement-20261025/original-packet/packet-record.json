@@ -1,0 +1,101 @@
+{
+  "invocation_id": "rhai-work-aborted-retirement-20261009-4e92c3e57fa14837992fd1d20a3f2f8a",
+  "bundle_id": "work-aborted-retirement-20261009-4e92c3e57fa14837",
+  "nonce": "4e92c3e57fa14837992fd1d20a3f2f8a",
+  "source_checkout": "/root/projects/rhai-wayfinder-20261008",
+  "source_head": "34e0fa61a3d12fe6c41902c44618ff44e20d73d4",
+  "input_manifest_sha256": "d7c82e92af18ef7367dd73478c3509baf63d2ff92c9f1af804c4f93cc75dc133",
+  "start_sha256": "890cdc7a21a880b9eb6b70f5696ef4396aebfd8fb0de8bc1781b938e4bf4cbeb",
+  "iso_sha256": "70cf18f7a107e4c0b3c0bdd5626417bb11c51422d8338db0967ff85c1332a4f6",
+  "iso_bytes": 980992,
+  "input_count": 15,
+  "iso_file_count": 18,
+  "limits": {
+    "build_seconds": 930,
+    "termination_reserve_seconds": 30,
+    "driver_seconds": 180,
+    "serial_export_seconds": 180,
+    "max_files": 64,
+    "max_file_bytes": 4194304,
+    "max_total_bytes": 16777216,
+    "frame_chars": 3500
+  },
+  "execution_status": "NOT_STARTED",
+  "review_status": "READY",
+  "package_files": {
+    "Start.ps1": "890cdc7a21a880b9eb6b70f5696ef4396aebfd8fb0de8bc1781b938e4bf4cbeb",
+    "input-manifest.json": "d7c82e92af18ef7367dd73478c3509baf63d2ff92c9f1af804c4f93cc75dc133",
+    "input/tools/windows-scoped-runner/LaunchSpecification.cs": "e08957b13d5ed5f86cb37d0545aa876aac50e507692d112b39882f465fff8f2b",
+    "input/tools/windows-scoped-runner/LeaseMonitor.cs": "72c79f18c96e28f27cd1b7b39b1025da9a250e0608885de7dc48934512a46bfc",
+    "input/tools/windows-scoped-runner/MonitorAcceptanceDriver.cs": "3961723da38fbba05f800ef76a5d65a6225e25eb79303a05ff420634e0dc1914",
+    "input/tools/windows-scoped-runner/MonitorPayloadJob.cs": "adf9cd13ac7b46323d2beae799e0eff08fc08504d1b1cb6426998127401663d0",
+    "input/tools/windows-scoped-runner/MonitorSpecificationIntake.cs": "0f0a71563e6c3d99f0c643644d4b56951f6c69ceb3b10b03157f68dc37bb8412",
+    "input/tools/windows-scoped-runner/MonitorStagingHandoff.cs": "c541f7d885d032c074461a5a0173b9ae6291ef7d8cd1b9fd2ce4a4f56d1e0e6e",
+    "input/tools/windows-scoped-runner/MonitorTransport.cs": "ed23c8615af7d8c1b545d3108342640c46f7e245b4e6a83a7c98bf1720a74de8",
+    "input/tools/windows-scoped-runner/ScopedRunner.cs": "d3a77f0daeebd5beed2b277fae9dc6a522acf1454bb5d8d776d84e1dc8e896c8",
+    "input/tools/windows-scoped-runner/SpecificationTransfer.cs": "7a9edfe98d84868b55146280bd5ed29576ee0c8725cf9f6c785b784bc0ad25c2",
+    "input/tools/windows-scoped-runner/WindowsCustodyBackend.cs": "26b7468a0868271a555f6ed450212267b01d7d3fd0a8dd5b3fb51b01b7a05629",
+    "input/tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs": "38745833e7b23535cdc2ce225655074c6c5f50e204c0d3cf38d6805f49cb53eb",
+    "input/tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs": "8f43d33928262ae181aa5396feffef9b0260653609b5be8b01da7b0a7e7b00f7",
+    "input/tools/windows-scoped-runner/fixtures/PayloadFixture.cs": "6f48ce06a01f06bb8a064aa450624f4dd29ffcbcba1dbaf9c3e52a62b0acaebb",
+    "input/tools/windows-scoped-runner/fixtures/RunPayloadEnvironmentControl.ps1": "f313d83b470341adf4a60b9cb47b8005c6ff626f77fa77f384dd2b4b3877f135",
+    "input/tools/windows-scoped-runner/fixtures/RunSourceFixtures.ps1": "2f6e300bddf4098e09c041a120b2b3bd1f98a98492d99c826e10156ff559c7c1",
+    "rhai-work-aborted-retirement-20261009-4e92c3e57fa14837.bundle": "7b2058e8767c5434c92d80a236546a4c65a9aba6761217d9930830aa19a90c7a",
+    "combined-review-aborted-work-retirement.md": "e7b140b3c25e9f9b791eb3803531fe39e916a70df5ce2570c0b8e723cca07426",
+    "workhorse-aborted-work-retirement.iso": "70cf18f7a107e4c0b3c0bdd5626417bb11c51422d8338db0967ff85c1332a4f6"
+  },
+  "superseded_isos": [
+    {
+      "sha256": "fa190b21bd46185813fbb42ba0f4cea5aa61280b20f3dc2be36a57101cbfbcda",
+      "reason": "Rejected before execution: abort branch control still required the environment-contract marker, which the retirement-abort payload does not emit. Control-flow guard was corrected; use only the new bound ISO."
+    },
+    {
+      "sha256": "97ea10bef52a18b88cd15fbd0c7aa73e1ae7aa3aa922669df0e83809466d3360",
+      "reason": "Rejected before execution: successful control export did not read the outer build session observer/bootstrap logs. Export now requires and copies those files."
+    },
+    {
+      "sha256": "d802adf721b81cff7f9dea236289ea723dd4174e079cee010c5a277afd524592",
+      "reason": "Rejected before execution: outer Start did not reliably propagate the control script failure exit status. Control now returns an explicit status to Start, which exits with that status."
+    },
+    {
+      "sha256": "c88c8926e655200e637ae09c5181aadaae101032c62a7ee5580817ccb78d967e",
+      "reason": "Rejected before execution: Workhorse interactive PowerShell could see the source ISO, but the child PowerShell -File invocation could not resolve its Start.ps1 path. No build or test started. Start now stages the complete pinned source inventory into this invocation's private guest scope and verifies it before spawning the bootstrap."
+    },
+    {
+      "sha256": "48dc8394c7fabd44368db25c59e8f515373a22e6cd0e89659d719e1008ef5279",
+      "reason": "Rejected before execution by exact ISO readback: genisoimage stripped the input directory, so Start could not find the expected input-manifest-bound source under input/. No build or test ran. Rebuilt with an explicit graft point preserving input/."
+    },
+    {
+      "sha256": "5f8bc1ca6bf6cb97ed6aab16abce356dcdc75672c494a0ab7b4b06394755ebf5",
+      "reason": "Rejected before execution during combined review: observer used $PSCommandPath, which could be empty if Start were loaded with Invoke-Expression. No build/test ran. Start now hashes its exact pinned file on the read-only medium directly."
+    }
+  ],
+  "combined_review": "combined-review-aborted-work-retirement-final-20261009.md",
+  "review_hash": "4b8bf149b316ed8c50fc6b52ae3fe7fe478fd1ee08938c76d519ff098bbfc51a",
+  "review_scope": "Combined independent source and exact frozen packet review; source/package ready only, no execution or native acceptance.",
+  "prelaunch_observations": {
+    "host_utc": "2026-10-09T15:06:06Z",
+    "host_cpus": 32,
+    "host_load_1_5_15m": "3.29 4.08 3.30",
+    "host_memory_available_gib": 59,
+    "host_var_available_gib": 347,
+    "guest_state": "running",
+    "guest_display": "Windows secure Ctrl+Alt+Delete screen; user unlock required",
+    "guest_free_memory": "not available while locked; guest agent unconfigured",
+    "guest_free_disk": "not re-read in this session",
+    "screenshot": "results/workhorse-aborted-work-retirement-20261009-host-observations/guest-locked-prelaunch-20261009.png",
+    "screenshot_sha256": "832477a057479adb972aff307da1fdc24640d45983096ee25fb66a72505526a9",
+    "other_work": "Tauron Patrol native VM/worker active; left untouched"
+  },
+  "prior_review": {
+    "path": "combined-review-aborted-work-retirement.md",
+    "sha256": "e7b140b3c25e9f9b791eb3803531fe39e916a70df5ce2570c0b8e723cca07426",
+    "status": "READY for prior ISO only; does not approve revised Start"
+  },
+  "reviewed_hashes": {
+    "Start.ps1": "890cdc7a21a880b9eb6b70f5696ef4396aebfd8fb0de8bc1781b938e4bf4cbeb",
+    "input-manifest.json": "d7c82e92af18ef7367dd73478c3509baf63d2ff92c9f1af804c4f93cc75dc133",
+    "ISO": "70cf18f7a107e4c0b3c0bdd5626417bb11c51422d8338db0967ff85c1332a4f6"
+  },
+  "execution_blocker": "Guest console locked; no build or test launched. Resume after user unlocks, then recheck guest memory/disk and proceed with this reviewed packet."
+}

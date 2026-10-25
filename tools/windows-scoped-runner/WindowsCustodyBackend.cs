@@ -57,6 +57,12 @@ internal static class WindowsCustodyBackend
     private const ulong LocalFinalizationBudgetMs = 30000;
     internal const int MaximumPathLengthForSpecification = 248;
     private const int MaximumPathLength = MaximumPathLengthForSpecification;
+    // Cargo work is disposable and is retired before the bounded evidence snapshot.
+    // Keep its cleanup limits separate from immutable-input and result limits.
+    private const int MaximumWorkInventoryEntries = 65536;
+    private const int MaximumWorkDepth = 64;
+    private const int MaximumWorkPathLength = 32763;
+    private const long MaximumWorkBytes = 8L * 1024L * 1024L * 1024L;
     private const uint FILE_READ_ATTRIBUTES = 0x0080;
     private const uint FILE_LIST_DIRECTORY = 0x00000001;
     private const uint DELETE_ACCESS = 0x00010000;
@@ -439,13 +445,22 @@ internal static class WindowsCustodyBackend
         finally { Marshal.FreeHGlobal(buffer); }
     }
 
+    private static string ToExtendedPath(string path)
+    {
+        if(String.IsNullOrEmpty(path) || path.Length>MaximumWorkPathLength || path.Length<3 ||
+            !IsAsciiLetter(path[0]) || path[1]!=':' || path[2]!='\\')
+            throw new IOException("disposition path is not a bounded local absolute path");
+        return path.StartsWith("\\\\?\\",StringComparison.Ordinal) ? path : "\\\\?\\"+path;
+    }
+
     private static SafeFileHandle OpenDispositionEntry(string path)
     {
-        SafeFileHandle handle = CreateFileW(path, DELETE_ACCESS | READ_CONTROL | FILE_READ_ATTRIBUTES | GENERIC_READ,
+        string nativePath=ToExtendedPath(path);
+        SafeFileHandle handle = CreateFileW(nativePath, DELETE_ACCESS | READ_CONTROL | FILE_READ_ATTRIBUTES | GENERIC_READ,
             FILE_SHARE_READ | FILE_SHARE_WRITE, IntPtr.Zero, OPEN_EXISTING,
             FILE_FLAG_BACKUP_SEMANTICS | FILE_FLAG_OPEN_REPARSE_POINT, IntPtr.Zero);
         if (handle == null || handle.IsInvalid)
-            throw new IOException("CreateFileW(open no-follow runtime entry) failed: " + path,
+            throw new IOException("CreateFileW(open no-follow runtime entry) failed: " + BoundPath(path),
                 new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error()));
         return handle;
     }
@@ -523,6 +538,7 @@ internal static class WindowsCustodyBackend
 #if SCOPED_RUNNER_TESTING
         private readonly bool injectIdentityFailure;
         private Action<string> fixtureEvidenceAfterCopy;
+        private bool fixtureSkipPrivateWorkRetirement;
 #endif
         private SafeFileHandle runtimeHandle;
         private SafeFileHandle stagedExecutableHandle;
@@ -542,6 +558,10 @@ internal static class WindowsCustodyBackend
         private string payloadEvidencePath;
         private FileIdentity payloadEvidenceIdentity;
         private FileIdentity payloadStdoutIdentity,payloadStderrIdentity;
+        private FileIdentity privateWorkIdentity,retiredWorkIdentity;
+        private bool privateWorkPrepared;
+        private int retiredWorkEntries;
+        private long retiredWorkBytes;
         private bool evidenceCaptureStarted;
         private bool evidenceCaptureComplete;
         private PayloadEvidenceReceipt payloadEvidenceReceipt;
@@ -598,7 +618,7 @@ internal static class WindowsCustodyBackend
             {
                 EnsureFinalizationBudget(deadline,"payload environment preparation");
                 if(disposed || !IsStaged || State!=AllocationState.IdentityRecorded ||
-                    evidenceCaptureStarted || RuntimeIdentity==null ||
+                    evidenceCaptureStarted || privateWorkPrepared || RuntimeIdentity==null ||
                     !ReadIdentity(runtimeHandle).SameAs(RuntimeIdentity))
                     throw new InvalidOperationException("private payload environment requires the exact staged allocation");
                 var variables=new SortedDictionary<string,string>(StringComparer.OrdinalIgnoreCase);
@@ -631,6 +651,7 @@ internal static class WindowsCustodyBackend
                 }
                 block.Append('\0');
                 var directoryPins=new List<SafeFileHandle>();
+                FileIdentity createdWorkIdentity=null;
                 try
                 {
                     SecurityIdentifier user;
@@ -644,6 +665,8 @@ internal static class WindowsCustodyBackend
                         SafeFileHandle pin=OpenDirectory(path);
                         directoryPins.Add(pin);
                         VerifyProtectedDacl(pin,user,AceFlags.ContainerInherit|AceFlags.ObjectInherit,"private payload work directory");
+                        if(String.Equals(path,work,StringComparison.OrdinalIgnoreCase))
+                            createdWorkIdentity=ReadIdentity(pin);
                     }
                 }
                 finally
@@ -651,6 +674,9 @@ internal static class WindowsCustodyBackend
                     for(int i=directoryPins.Count-1;i>=0;i--) directoryPins[i].Dispose();
                 }
                 EnsureFinalizationBudget(deadline,"payload environment ready");
+                if(createdWorkIdentity==null) throw new IOException("private payload work root identity was not recorded");
+                privateWorkIdentity=createdWorkIdentity;
+                privateWorkPrepared=true;
                 return block.ToString();
             }
         }
@@ -796,6 +822,8 @@ internal static class WindowsCustodyBackend
         internal void FailNextJournalAppendForFixture() { journal.FailNextAppendForFixture(); }
         internal void SetEvidenceReadbackMutationForFixture(Action<string> mutation)
         { fixtureEvidenceAfterCopy=mutation ?? throw new ArgumentNullException("mutation"); }
+        internal void SetPrivateWorkRetirementSkipForFixture(bool skip)
+        { fixtureSkipPrivateWorkRetirement=skip; }
         internal void CorruptEvidenceIdentityForFixture()
         {
             if(payloadEvidenceIdentity==null) throw new InvalidOperationException("payload evidence identity is unavailable");
@@ -875,6 +903,53 @@ internal static class WindowsCustodyBackend
             }
         }
 
+        private void RetirePrivateWork(LeaseMonitor.ExactJobClosureProof proof,ulong deadline)
+        {
+            if(!privateWorkPrepared)
+            {
+                if(DirectoryEntryExists(runtimeHandle,RuntimePath,"work",MaximumInventoryEntries+2))
+                    throw new IOException("unprepared work tree has no recorded identity and cannot be retired");
+                return;
+            }
+            if(privateWorkIdentity==null)
+                throw new IOException("private payload work identity is unavailable; evidence remains open");
+            if(proof==null || RuntimeIdentity==null || !proof.Authorizes(this,RuntimeIdentity) ||
+                !ReadIdentity(runtimeHandle).SameAs(RuntimeIdentity))
+                throw new IOException("private work retirement requires this allocation's exact closed Job proof");
+            EnsureFinalizationBudget(deadline,"before private work retirement");
+            string path=Path.Combine(RuntimePath,"work");
+            if(path.Length>MaximumPathLength) throw new IOException("private work root path exceeds the allocation path bound");
+            SecurityIdentifier user;
+            using(WindowsIdentity current=WindowsIdentity.GetCurrent()) user=current==null ? null : current.User;
+            if(user==null) throw new IOException("current user SID unavailable during private work retirement");
+            int entries=0;
+            long bytes=0;
+            var seen=new HashSet<string>(StringComparer.Ordinal);
+            AddUniqueIdentity(seen,privateWorkIdentity,"private work root");
+            using(SafeFileHandle work=OpenDirectory(path,true))
+            {
+                if(!ReadIdentity(work).SameAs(privateWorkIdentity))
+                    throw new IOException("private work root identity changed; work retained");
+                VerifyProtectedDacl(work,user,AceFlags.ContainerInherit|AceFlags.ObjectInherit,"private work retirement root");
+                RemoveRuntimeDirectoryContents(path,work,String.Empty,0,seen,user,CancellationToken.None,
+                    MaximumWorkInventoryEntries,MaximumWorkDepth,DispositionFailurePoint.None,deadline,
+                    MaximumWorkPathLength,MaximumWorkBytes,ref entries,ref bytes);
+                EnsureFinalizationBudget(deadline,"before private work root disposition");
+                if(!ReadIdentity(work).SameAs(privateWorkIdentity))
+                    throw new IOException("private work root identity changed before disposition");
+                MarkForDisposition(work,"private work root");
+            }
+            if(DirectoryEntryExists(runtimeHandle,RuntimePath,"work",MaximumInventoryEntries+2))
+                throw new IOException("private work root remains visible after identity-bound removal");
+            EnsureFinalizationBudget(deadline,"after private work absence readback");
+            if(!ReadIdentity(runtimeHandle).SameAs(RuntimeIdentity))
+                throw new IOException("runtime identity changed during private work retirement");
+            retiredWorkIdentity=privateWorkIdentity;
+            privateWorkIdentity=null;
+            retiredWorkEntries=entries;
+            retiredWorkBytes=bytes;
+        }
+
         internal PayloadEvidenceReceipt CapturePayloadEvidence(LeaseMonitor.ExactJobClosureProof proof,
             uint? payloadExitCode,PayloadSupervisionOutcome supervision,ulong deadline)
         {
@@ -895,6 +970,11 @@ internal static class WindowsCustodyBackend
                 using(SafeFileHandle evidenceRoot=OpenDirectory(payloadEvidencePath))
                 {
                     if(!ReadIdentity(evidenceRoot).SameAs(payloadEvidenceIdentity)) throw new IOException("payload evidence root identity changed before capture");
+#if SCOPED_RUNNER_TESTING
+                    if(!fixtureSkipPrivateWorkRetirement) RetirePrivateWork(proof,deadline);
+#else
+                    RetirePrivateWork(proof,deadline);
+#endif
                     string snapshotPath=Path.Combine(payloadEvidencePath,"runtime");
                     if(snapshotPath.Length>MaximumPathLength) throw new IOException("payload snapshot path exceeds fixed bound");
                     CreateDestinationDirectory(snapshotPath);
@@ -972,7 +1052,7 @@ internal static class WindowsCustodyBackend
                         if(supervision==PayloadSupervisionOutcome.TransitionFailed) throw new InvalidOperationException("failed transition cannot produce successful evidence");
                         EnsureFinalizationBudget(deadline,"before payload evidence journal record");
                         string record="EVIDENCE|"+invocationId.ToString("N")+"|"+FormatIdentity(RuntimeIdentity)+"|proof=EXACT|exit="+(payloadExitCode.HasValue?payloadExitCode.Value.ToString("X8"):"NONE")+
-                            "|supervision="+supervision.ToString()+"|evidence_identity="+FormatIdentity(payloadEvidenceIdentity)+"|manifest="+manifestHash+"|stdout="+stdoutHash+"|stderr="+stderrHash+"|runtime_bytes="+sourceBytes.ToString()+"|logs_bytes="+payloadLogBytes.ToString()+"|deadline="+deadline.ToString();
+                            "|supervision="+supervision.ToString()+"|evidence_identity="+FormatIdentity(payloadEvidenceIdentity)+"|manifest="+manifestHash+"|stdout="+stdoutHash+"|stderr="+stderrHash+"|runtime_bytes="+sourceBytes.ToString()+"|logs_bytes="+payloadLogBytes.ToString()+"|work_identity="+(retiredWorkIdentity==null?"NONE":FormatIdentity(retiredWorkIdentity))+"|work_entries="+retiredWorkEntries.ToString()+"|work_bytes="+retiredWorkBytes.ToString()+"|deadline="+deadline.ToString();
                         journal.Append(record);
                         EnsureFinalizationBudget(deadline,"after payload evidence journal flush");
                         totalBytes=checked(totalBytes+manifestBytes.LongLength);
@@ -1118,8 +1198,10 @@ internal static class WindowsCustodyBackend
                 dispositionCount = 0;
                 var seen = new HashSet<string>(StringComparer.Ordinal);
                 AddUniqueIdentity(seen, RuntimeIdentity, "runtime root");
-                RemoveRuntimeDirectoryContents(RuntimePath, runtimeHandle, String.Empty, 0, seen, user,
-                    cancellationToken, entryLimit, depthLimit, failurePoint,deadline);
+                long disposedBytes=0;
+                RemoveRuntimeDirectoryContents(RuntimePath,runtimeHandle,String.Empty,0,seen,user,
+                    cancellationToken,entryLimit,depthLimit,failurePoint,deadline,MaximumPathLength,long.MaxValue,
+                    ref dispositionEntries,ref disposedBytes);
 
                 cancellationToken.ThrowIfCancellationRequested();
                 EnsureRemovalBudget(cancellationToken,deadline,"before runtime root disposition");
@@ -1165,80 +1247,80 @@ internal static class WindowsCustodyBackend
 #endif
         }
 
-        private void RemoveRuntimeDirectoryContents(string directoryPath, SafeFileHandle directoryHandle, string relativeDirectory,
-            int depth, HashSet<string> seen, SecurityIdentifier user, CancellationToken cancellationToken,
-            int entryLimit, int depthLimit, DispositionFailurePoint failurePoint, ulong deadline)
+        private void RemoveRuntimeDirectoryContents(string directoryPath,SafeFileHandle directoryHandle,string relativeDirectory,
+            int depth,HashSet<string> seen,SecurityIdentifier user,CancellationToken cancellationToken,
+            int entryLimit,int depthLimit,DispositionFailurePoint failurePoint,ulong deadline,
+            int pathLimit,long byteLimit,ref int observedEntries,ref long observedBytes)
         {
             EnsureRemovalBudget(cancellationToken,deadline,"during runtime inventory");
-            if (depth > depthLimit) throw new IOException("runtime depth exceeds the fixture limit (production bound is fixed)");
-            FileIdentity parentIdentity = ReadIdentity(directoryHandle);
-            List<DirectoryEntrySnapshot> entries = ReadDirectoryEntries(directoryHandle, directoryPath, entryLimit, ref dispositionEntries);
-            for (int i = 0; i < entries.Count; i++)
+            if(depth>depthLimit) throw new IOException("runtime depth exceeds its explicit disposition bound");
+            FileIdentity parentIdentity=ReadIdentity(directoryHandle);
+            List<DirectoryEntrySnapshot> entries=ReadDirectoryEntries(directoryHandle,directoryPath,entryLimit,ref observedEntries);
+            for(int i=0;i<entries.Count;i++)
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 EnsureRemovalBudget(cancellationToken,deadline,"before runtime entry disposition");
-                DirectoryEntrySnapshot listed = entries[i];
+                DirectoryEntrySnapshot listed=entries[i];
                 ValidateSourceComponent(listed.Name);
-                string relative = relativeDirectory.Length == 0 ? listed.Name : relativeDirectory + "\\" + listed.Name;
-                if (relative.Length > MaximumPathLength) throw new IOException("runtime entry path exceeds the fixed path bound: " + relative);
-                string path = System.IO.Path.Combine(directoryPath, listed.Name);
-                if (path.Length > MaximumPathLength) throw new IOException("runtime entry path exceeds the fixed path bound: " + path);
-                SafeFileHandle entry = OpenDispositionEntry(path);
-                bool dispositionRequested = false;
+                string relative=relativeDirectory.Length==0 ? listed.Name : relativeDirectory+"\\"+listed.Name;
+                if(relative.Length>pathLimit) throw new IOException("runtime relative entry path exceeds its disposition bound: "+relative.Length);
+                string path=System.IO.Path.Combine(directoryPath,listed.Name);
+                if(path.Length>pathLimit) throw new IOException("runtime entry path exceeds its disposition bound: "+path.Length);
+                SafeFileHandle entry=OpenDispositionEntry(path);
+                bool dispositionRequested=false;
                 try
                 {
                     FileAttributeTagInfo tag;
-                    Check(GetFileInformationByHandleEx(entry, FileAttributeTagInfoClass, out tag,
-                        (uint)Marshal.SizeOf(typeof(FileAttributeTagInfo))), "FileAttributeTagInfo(runtime entry)");
-                    if ((tag.Attributes & FILE_ATTRIBUTE_REPARSE_POINT) != 0)
-                        throw new IOException("runtime reparse point is refused and retained: " + relative);
-                    FileIdentity identity = ReadIdentity(entry);
-                    if (!HasUsable128BitFileId(listed.FileId) || !HasUsable128BitFileId(identity.FileId) ||
-                        identity.VolumeSerial != parentIdentity.VolumeSerial || identity.FileId != listed.FileId)
-                        throw new IOException("runtime entry identity changed between pinned-parent enumeration and no-follow open: " + relative);
-                    AddUniqueIdentity(seen, identity, "runtime entry " + relative);
-                    bool isDirectory = (tag.Attributes & FILE_ATTRIBUTE_DIRECTORY) != 0;
-                    if (isDirectory != ((listed.Attributes & FILE_ATTRIBUTE_DIRECTORY) != 0))
-                        throw new IOException("runtime entry type changed after enumeration: " + relative);
-                    if ((tag.Attributes & FILE_ATTRIBUTE_READONLY) != 0)
-                        throw new IOException("read-only runtime entry is refused without changing attributes: " + relative);
-                    VerifyRuntimeEntryDacl(entry, user, isDirectory ? AceFlags.ContainerInherit | AceFlags.ObjectInherit : AceFlags.None,
+                    Check(GetFileInformationByHandleEx(entry,FileAttributeTagInfoClass,out tag,
+                        (uint)Marshal.SizeOf(typeof(FileAttributeTagInfo))),"FileAttributeTagInfo(runtime entry)");
+                    if((tag.Attributes&FILE_ATTRIBUTE_REPARSE_POINT)!=0)
+                        throw new IOException("runtime reparse point is refused and retained: "+relative);
+                    FileIdentity identity=ReadIdentity(entry);
+                    if(!HasUsable128BitFileId(listed.FileId)||!HasUsable128BitFileId(identity.FileId)||
+                        identity.VolumeSerial!=parentIdentity.VolumeSerial||identity.FileId!=listed.FileId)
+                        throw new IOException("runtime entry identity changed between pinned-parent enumeration and no-follow open: "+relative);
+                    AddUniqueIdentity(seen,identity,"runtime entry "+relative);
+                    bool isDirectory=(tag.Attributes&FILE_ATTRIBUTE_DIRECTORY)!=0;
+                    if(isDirectory!=((listed.Attributes&FILE_ATTRIBUTE_DIRECTORY)!=0))
+                        throw new IOException("runtime entry type changed after enumeration: "+relative);
+                    if((tag.Attributes&FILE_ATTRIBUTE_READONLY)!=0)
+                        throw new IOException("read-only runtime entry is refused without changing attributes: "+relative);
+                    VerifyRuntimeEntryDacl(entry,user,isDirectory ? AceFlags.ContainerInherit|AceFlags.ObjectInherit : AceFlags.None,
                         isDirectory ? "runtime directory entry" : "runtime file entry");
                     FileStandardInfo standard;
-                    Check(GetFileInformationByHandleEx(entry, FileStandardInfoClass, out standard,
-                        (uint)Marshal.SizeOf(typeof(FileStandardInfo))), "FileStandardInfo(runtime entry)");
-                    if (standard.DeletePending || standard.Directory != isDirectory || (!isDirectory && standard.NumberOfLinks != 1))
-                        throw new IOException("runtime entry has an unexpected type, pending disposition, or hard link: " + relative);
-                    if (isDirectory)
-                        RemoveRuntimeDirectoryContents(path, entry, relative, depth + 1, seen, user,
-                            cancellationToken, entryLimit, depthLimit, failurePoint,deadline);
-
+                    Check(GetFileInformationByHandleEx(entry,FileStandardInfoClass,out standard,
+                        (uint)Marshal.SizeOf(typeof(FileStandardInfo))),"FileStandardInfo(runtime entry)");
+                    if(standard.DeletePending||standard.Directory!=isDirectory||(!isDirectory&&standard.NumberOfLinks!=1)||standard.EndOfFile<0)
+                        throw new IOException("runtime entry has unexpected type, length, pending disposition, or hard link: "+relative);
+                    if(!isDirectory)
+                    {
+                        observedBytes=checked(observedBytes+standard.EndOfFile);
+                        if(observedBytes>byteLimit) throw new IOException("runtime work bytes exceed their explicit retirement bound");
+                    }
+                    if(isDirectory)
+                        RemoveRuntimeDirectoryContents(path,entry,relative,depth+1,seen,user,cancellationToken,
+                            entryLimit,depthLimit,failurePoint,deadline,pathLimit,byteLimit,ref observedEntries,ref observedBytes);
                     cancellationToken.ThrowIfCancellationRequested();
                     EnsureRemovalBudget(cancellationToken,deadline,"before runtime entry disposition");
-                    MarkForDisposition(entry, relative);
-                    dispositionRequested = true;
+                    MarkForDisposition(entry,relative);
+                    dispositionRequested=true;
                     entry.Dispose();
-                    entry = null;
+                    entry=null;
                     dispositionCount++;
 #if SCOPED_RUNNER_TESTING
-                    if (failurePoint == DispositionFailurePoint.AfterFirstDisposition && dispositionCount == 1)
+                    if(failurePoint==DispositionFailurePoint.AfterFirstDisposition&&dispositionCount==1)
                         throw new IOException("fixture injected a partial runtime removal after the first disposition");
 #endif
                 }
-                finally
-                {
-                    if (entry != null) entry.Dispose();
-                }
-                // Each directory's final handle-based readback below proves all
-                // child names absent after their disposition handles closed.
-                if (!dispositionRequested) throw new IOException("runtime entry was not dispositioned: " + relative);
+                finally { if(entry!=null) entry.Dispose(); }
+                if(!dispositionRequested) throw new IOException("runtime entry was not dispositioned: "+relative);
             }
             cancellationToken.ThrowIfCancellationRequested();
             EnsureRemovalBudget(cancellationToken,deadline,"after runtime directory readback");
-            List<DirectoryEntrySnapshot> residual = ReadDirectoryEntries(directoryHandle, directoryPath, entryLimit, ref dispositionEntries, false);
-            if (residual.Count != 0) throw new IOException("runtime directory acquired or retained entries during bottom-up removal: " + directoryPath);
-            if (!ReadIdentity(directoryHandle).SameAs(parentIdentity))
-                throw new IOException("pinned runtime directory identity changed during child removal: " + directoryPath);
+            List<DirectoryEntrySnapshot> residual=ReadDirectoryEntries(directoryHandle,directoryPath,entryLimit,ref observedEntries,false);
+            if(residual.Count!=0) throw new IOException("runtime directory acquired or retained entries during bottom-up removal: "+directoryPath);
+            if(!ReadIdentity(directoryHandle).SameAs(parentIdentity))
+                throw new IOException("pinned runtime directory identity changed during child removal: "+directoryPath);
         }
 
         internal RuntimeAllocation(PinnedDirectory ownedParent, Guid id
@@ -2346,6 +2428,12 @@ internal static class WindowsCustodyBackend
     }
 
 #if SCOPED_RUNNER_TESTING
+    internal static string ReadDirectoryIdentityForFixture(string path)
+    {
+        using (SafeFileHandle handle = OpenDirectory(path, true))
+            return FormatIdentity(ReadIdentity(handle));
+    }
+
     internal static string[] ReadJournalForFixture(string path)
     {
         var result = new List<string>();

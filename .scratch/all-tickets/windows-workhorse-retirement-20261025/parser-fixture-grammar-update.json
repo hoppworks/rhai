@@ -1,0 +1,7 @@
+{
+  "fixture": "tools/windows-scoped-runner/fixtures/MonitorAcceptanceDriverFixture.cs",
+  "current_sha256": "2cd12d8de5f65eb48cd1f8e53e1d8850838c7fc55ce6e441cc17228f1b9fff40",
+  "delta": "one canonical EVIDENCE literal gains NONE/0/0 work metadata in strict Driver order; it now matches the optional fixture hash already pinned in the original frozen RunSourceFixtures. Alternate wrapper hash/README refreshed.",
+  "native_parser_fixture_executed_this_resume": false,
+  "reason": "Dependency completeness check found legacy positive grammar input while new Driver requires work fields. Mechanical data-literal correction preserves existing cases; no C# rebuild or native fixture execution claimed."
+}

@@ -1,0 +1,16 @@
+{
+  "scope": "separate historical filesystem fixture; not a production Job run",
+  "relevant_inputs": {
+    "tools/windows-scoped-runner/WindowsCustodyBackend.cs": {
+      "native_manifest": "26b7468a0868271a555f6ed450212267b01d7d3fd0a8dd5b3fb51b01b7a05629",
+      "current": "26b7468a0868271a555f6ed450212267b01d7d3fd0a8dd5b3fb51b01b7a05629",
+      "equal": true
+    },
+    "tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs": {
+      "native_manifest": "38745833e7b23535cdc2ce225655074c6c5f50e204c0d3cf38d6805f49cb53eb",
+      "current": "38745833e7b23535cdc2ce225655074c6c5f50e204c0d3cf38d6805f49cb53eb",
+      "equal": true
+    }
+  },
+  "reexecuted": false
+}

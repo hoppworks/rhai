@@ -1,0 +1,20 @@
+--- frozen-control.ps1
++++ observer-line-ending-fix.ps1
+@@ -151,7 +151,7 @@
+   }
+   $evidence = @(Get-ChildItem -LiteralPath $run -Directory -Filter '.scoped-evidence-*')
+   if ($evidence.Count -ne 1) { throw 'Expected one invocation-owned evidence directory.' }
+-  $runtimeMatches=[regex]::Matches($output,'(?m)^RUNTIME=([^\r\n]+)$')
++  $runtimeMatches=[regex]::Matches($output,'(?m)^RUNTIME=([^\r\n]+)\r?$')
+   if($runtimeMatches.Count -ne 1){throw 'Exact allocated runtime report unavailable.'}
+   $runtimeObserved=$runtimeMatches[0].Groups[1].Value
+   if($Phase -ceq 'RETIREMENT_ABORT'){
+@@ -161,7 +161,7 @@
+    if(Test-Path -LiteralPath (Join-Path $runtimeObserved 'work')){throw 'Exact payload runtime still contains private work after retirement.'}
+    $evidenceManifest=[IO.File]::ReadAllText((Join-Path $evidence[0].FullName 'manifest.txt'))
+    if($evidenceManifest -match '(?im)(^|[\\/])work([\\/]|$)'){throw 'Bounded snapshot still contains a work subtree.'}
+-   $journalMatches=[regex]::Matches($output,'(?m)^JOURNAL=([^\r\n]+)$')
++   $journalMatches=[regex]::Matches($output,'(?m)^JOURNAL=([^\r\n]+)\r?$')
+    if($journalMatches.Count -ne 1){throw 'Exact local outcome journal path unavailable.'}
+    $journalPath=$journalMatches[0].Groups[1].Value;No-Reparse $journalPath
+    $journalLines=[IO.File]::ReadAllLines($journalPath);$decoded=@()

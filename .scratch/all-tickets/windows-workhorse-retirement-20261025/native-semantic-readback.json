@@ -1,0 +1,33 @@
+{
+  "retirement": {
+    "native_public_driver_launches": 1,
+    "native_driver_exit": 0,
+    "native_payload_exit": 42,
+    "original_observer_accepted": false,
+    "recovered_parser_only": true,
+    "work_entries": 2107,
+    "work_bytes": 613419011,
+    "wrong_entry_expectation_rejected": true,
+    "restored_expectation_passed": true,
+    "crc_valid_journal_records": 8,
+    "independent_runtime_absence": true,
+    "child_witness_bound_to_snapshot_hashes": true,
+    "compiler_builds_repeated": 0,
+    "manifest_source_pins_verified": 13,
+    "actual_compiled_source_files": 11,
+    "inventory_only_not_compiled": [
+      "CustodyBackendFixture.cs",
+      "NativeScopePolicyFixture.cs"
+    ]
+  },
+  "environment": {
+    "native_public_driver_launches": 1,
+    "native_driver_exit": 0,
+    "native_payload_exit": 0,
+    "all_five_private_paths_pass": true,
+    "wrong_TMP_expectation_rejected": true,
+    "parent_preserved": true,
+    "crc_valid_journal_records": 8,
+    "compiler_builds_repeated": 0
+  }
+}

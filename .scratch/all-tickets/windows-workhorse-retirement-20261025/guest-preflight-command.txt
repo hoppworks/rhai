@@ -1,0 +1,1 @@
+get-psdrive c; $psversiontable.psversion; get-ciminstance win32_operatingsystem | select version,freephysicalmemory; test-path "$env:userprofile\.local\share\agent-builds\rhai\work-abort-build-4e92c3e57fa14837992fd1d20a3f2f8a"; test-path "$env:userprofile\.local\share\agent-builds\rhai\env-control-4e92c3e57fa14837992fd1d20a3f2f8a"

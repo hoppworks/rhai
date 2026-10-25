@@ -1,0 +1,1 @@
+$psversiontable.psversion;(gcim win32_operatingsystem).freephysicalmemory;test-path "$home\.local\share\agent-builds\rhai\work-abort-build-4e92c3e57fa14837992fd1d20a3f2f8a";test-path "$home\.local\share\agent-builds\rhai\env-control-4e92c3e57fa14837992fd1d20a3f2f8a"

@@ -1,0 +1,1 @@
+if ((get-filehash e:\environment-green.ps1).hash -eq '76c782ddf46ec1fa0c035cb4667cad5aab1e428db710003b47e6ceb77dad59ed') { & ([scriptblock]::create((get-content e:\environment-green.ps1 -raw))) } else {throw 'environment source mismatch'}

@@ -32,6 +32,7 @@ internal static class CustodyBackendFixture
         if (args.Length == 1 && args[0] == "--payload-evidence")
         {
             PayloadEvidenceCaptureContracts(Path.GetTempPath());
+            PayloadWorkRetirementBoundContracts(Path.GetTempPath());
             return failures == 0 ? 0 : 1;
         }
         if (args.Length != 0) return 64;
@@ -91,6 +92,7 @@ internal static class CustodyBackendFixture
             PayloadPendingIoOwnershipContracts();
             PayloadLogBoundContracts(fixture);
             PayloadEvidenceCaptureContracts(fixture);
+            PayloadWorkRetirementBoundContracts(fixture);
             PayloadEvidenceFailureContracts(fixture);
             RuntimeDispositionContracts(fixture);
         }
@@ -876,13 +878,21 @@ internal static class CustodyBackendFixture
             bool staged=allocation.CreateRuntime() && allocation.StageSourceTreeForFixture(source, @"bin\runner.exe",CancellationToken.None,null,null);
             Expect("evidence capture fixture owns a complete staged runtime",staged && allocation.IsStaged);
             if(!staged) { RetainPair("payload evidence capture refusal",runtime,journal); return; }
+            ulong deadline=WindowsCustodyBackend.RuntimeAllocation.StartLocalFinalizationDeadline();
+            string environment=allocation.PreparePayloadEnvironment(deadline);
+            string work=Path.Combine(runtime,"work");
+            Directory.CreateDirectory(Path.Combine(work,"fixture-output","nested"));
+            File.WriteAllText(Path.Combine(work,"fixture-output","nested","payload.txt"),"disposable product work");
+            Expect("private work environment points every mutable output below its owned work root",
+                environment.Contains("CARGO_TARGET_DIR="+Path.Combine(work,"target")) &&
+                environment.Contains("CARGO_HOME="+Path.Combine(work,"cargo-home")) &&
+                environment.Contains("TMP="+Path.Combine(work,"temp")));
             File.WriteAllText(Path.Combine(runtime,"payload-record.txt"),"ordinary payload output");
             using(WindowsCustodyBackend.RuntimeAllocation.PayloadLogHandles logs=allocation.CreatePayloadLogHandles())
             {
                 Expect("payload log handles belong to the allocation evidence root",logs.EvidenceIdentity!=null &&
                     logs.EvidenceIdentity.SameAs(allocation.PayloadEvidenceIdentity));
             }
-            ulong deadline=WindowsCustodyBackend.RuntimeAllocation.StartLocalFinalizationDeadline();
             var job=MonitorPayloadJob.ForClosureFixture(allocation,
                 new MonitorPayloadJob.ScriptedClosureOperations { ActiveCounts=new uint[] { 0 } });
             MonitorPayloadJob.ClosureReceipt closure=job.CloseAndVerify(deadline);
@@ -897,7 +907,8 @@ internal static class CustodyBackendFixture
                 evidence!=null && evidence.CapturedBytes>0 && evidence.Deadline==deadline &&
                 File.ReadAllText(Path.Combine(snapshot,"data","nested","inner.txt"))=="nested disposition fixture payload" &&
                 File.Exists(Path.Combine(snapshot,"bin","runner.exe")) && File.Exists(Path.Combine(allocation.PayloadEvidencePath,"manifest.txt")) &&
-                File.ReadAllText(Path.Combine(snapshot,"payload-record.txt"))=="ordinary payload output");
+                File.ReadAllText(Path.Combine(snapshot,"payload-record.txt"))=="ordinary payload output" &&
+                !Directory.Exists(work) && !Directory.Exists(Path.Combine(snapshot,"work")));
             if(evidence!=null)
             {
             changedEvidenceOutcomeRejected=false;
@@ -921,6 +932,147 @@ internal static class CustodyBackendFixture
             HasRecord(records,"OUTCOME|") && HasRecord(records,"REMOVE_INTENT|") && HasRecord(records,"REMOVED|"));
         Console.WriteLine("EVIDENCE_JOURNAL_BYTES:"+Convert.ToBase64String(File.ReadAllBytes(journal)));
         RetainPair("payload evidence capture",runtime,journal);
+    }
+
+    private static string ExtendedFixturePath(string path)
+    {
+        if (path.StartsWith(@"\\?\", StringComparison.Ordinal)) return path;
+        return @"\\?\" + path;
+    }
+
+    private static void CreateExtendedFixtureDirectoryTree(string parent, string target)
+    {
+        string relative = target.Substring(parent.Length).TrimStart(Path.DirectorySeparatorChar);
+        string current = parent;
+        foreach (string component in relative.Split(new[] { Path.DirectorySeparatorChar }, StringSplitOptions.RemoveEmptyEntries))
+        {
+            current = Path.Combine(current, component);
+            if (!CreateDirectoryForFixture(ExtendedFixturePath(current), IntPtr.Zero))
+                throw new IOException("fixture CreateDirectoryW failed for extended path", new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error()));
+        }
+    }
+
+    private static void WriteExtendedFixtureFile(string path, byte value)
+    {
+        using (SafeFileHandle file = CreateFileForFixture(ExtendedFixturePath(path), 0x40000000, 0,
+            IntPtr.Zero, 1, 0x00000080, IntPtr.Zero))
+        {
+            if (file == null || file.IsInvalid)
+                throw new IOException("fixture CreateFileW failed for extended path", new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error()));
+            uint written;
+            byte[] content = new[] { value };
+            if (!WriteFileForFixture(file, content, 1, out written, IntPtr.Zero) || written != 1)
+                throw new IOException("fixture WriteFile failed for extended path", new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error()));
+        }
+    }
+
+    private static void PayloadWorkRetirementBoundContracts(string fixture)
+    {
+        string root=Path.Combine(fixture,"work-bounds-"+Guid.NewGuid().ToString("N").Substring(0,8));
+        Directory.CreateDirectory(root);
+        string source=PrepareDispositionTree(root,true);
+        string runtime,journal;
+        bool removed=false,red=false,green=false;
+        string redReason=null;
+        int expectedWorkEntries=2050+9+1;
+        long expectedWorkBytes=2050+9L*65L*1024L*1024L+1;
+        string work=null,snapshot=null,originalWorkIdentity=null;
+        int relativePathLength=0;
+        using(WindowsCustodyBackend.RuntimeAllocation allocation=BeginStageAllocation(root,out runtime,out journal))
+        {
+            bool staged=allocation.CreateRuntime()&&allocation.StageSourceTreeForFixture(source,@"bin\runner.exe",CancellationToken.None,null,null);
+            Expect("oversized work fixture has an exact staged runtime",staged&&allocation.IsStaged);
+            if(!staged){RetainPair("oversized work staging refusal",runtime,journal);return;}
+            work=Path.Combine(runtime,"work");
+            ulong setupDeadline=WindowsCustodyBackend.RuntimeAllocation.StartLocalFinalizationDeadline();
+            allocation.PreparePayloadEnvironment(setupDeadline);
+            for(int i=0;i<2050;i++) File.WriteAllText(Path.Combine(work,"entry-"+i.ToString("D4")+".txt"),"x");
+            for(int i=0;i<9;i++)
+            {
+                string oversized=Path.Combine(work,"oversized-"+i.ToString("D2")+".bin");
+                using(FileStream stream=new FileStream(oversized,FileMode.CreateNew,FileAccess.Write,FileShare.None))
+                    stream.SetLength(65L*1024L*1024L);
+            }
+            string longDirectory=work;
+            while(Path.Combine(longDirectory,"long-path.txt").Substring(work.Length+1).Length<=
+                WindowsCustodyBackend.MaximumPathLengthForSpecification)
+                longDirectory=Path.Combine(longDirectory,new string('d',20));
+            string longFile=Path.Combine(longDirectory,"long-path.txt");
+            CreateExtendedFixtureDirectoryTree(work,longDirectory);
+            WriteExtendedFixtureFile(longFile,(byte)'x');
+            relativePathLength=longFile.Substring(work.Length+1).Length;
+            originalWorkIdentity=WindowsCustodyBackend.ReadDirectoryIdentityForFixture(work);
+            Expect("work fixture exceeds former snapshot entry, per-file, total-byte and path limits",
+                expectedWorkEntries>WindowsCustodyBackend.MaximumInventoryEntries&&
+                65L*1024L*1024L>WindowsCustodyBackend.MaximumSingleStagedFileBytes&&
+                expectedWorkBytes>WindowsCustodyBackend.MaximumTotalStagedBytes&&
+                relativePathLength>WindowsCustodyBackend.MaximumPathLengthForSpecification);
+            using(WindowsCustodyBackend.RuntimeAllocation.PayloadLogHandles logs=allocation.CreatePayloadLogHandles()) { }
+            ulong deadline=WindowsCustodyBackend.RuntimeAllocation.StartLocalFinalizationDeadline();
+            var job=MonitorPayloadJob.ForClosureFixture(allocation,
+                new MonitorPayloadJob.ScriptedClosureOperations{ActiveCounts=new uint[]{0}});
+            MonitorPayloadJob.ClosureReceipt closure=job.CloseAndVerify(deadline);
+            LeaseMonitor.ExactJobClosureProof proof=job.ClosureAuthorization;
+            allocation.RecordLifecycleDiagnostics(null,null,proof,deadline);
+            snapshot=Path.Combine(allocation.PayloadEvidencePath,"runtime");
+            allocation.SetPrivateWorkRetirementSkipForFixture(true);
+            try { allocation.CapturePayloadEvidence(proof,0,WindowsCustodyBackend.PayloadSupervisionOutcome.MonitorStopped,deadline); }
+            catch(IOException error) { redReason=error.Message; }
+            bool oldPathRejected=redReason!=null&&(redReason.Contains("fixed entry bound")||redReason.Contains("fixed inventory bound")||
+                redReason.Contains("single-file")||redReason.Contains("single staged file")||
+                redReason.Contains("byte bound")||(redReason.Contains("path")&&redReason.Contains("bound")));
+            red=oldPathRejected&&Directory.Exists(work)&&Directory.Exists(snapshot)&&
+                Directory.GetFileSystemEntries(snapshot).Length==0;
+            Expect("RED: unretired oversized work is refused by the old snapshot bound and retained",red);
+            if(Directory.Exists(snapshot))
+            {
+                if(Directory.GetFileSystemEntries(snapshot).Length!=0)
+                    throw new IOException("RED snapshot unexpectedly contains copied evidence; retain it for diagnosis");
+                Directory.Delete(snapshot,false);
+            }
+            allocation.SetPrivateWorkRetirementSkipForFixture(false);
+            WindowsCustodyBackend.RuntimeAllocation.PayloadEvidenceReceipt evidence=null;
+            try { evidence=allocation.CapturePayloadEvidence(proof,0,WindowsCustodyBackend.PayloadSupervisionOutcome.MonitorStopped,deadline); }
+            catch(Exception error) { Console.Error.WriteLine("bounded work retirement GREEN failed: "+error); }
+            green=evidence!=null&&evidence.CapturedBytes<8L*1024L*1024L&&
+                !Directory.Exists(work)&&Directory.Exists(snapshot)&&!Directory.Exists(Path.Combine(snapshot,"work"))&&
+                File.Exists(Path.Combine(allocation.PayloadEvidencePath,"manifest.txt"));
+            Expect("GREEN: exact closed-job work is fully removed before bounded snapshot and readback",green);
+            if(green)
+            {
+                var metadata=allocation.RecordLocalOutcomeMetadata(proof,0,
+                    WindowsCustodyBackend.PayloadSupervisionOutcome.MonitorStopped,deadline,evidence);
+                removed=metadata!=null&&allocation.TryRemoveRuntimeAfterOutcomeMetadata(metadata,CancellationToken.None);
+            }
+            GC.KeepAlive(closure);
+        }
+        string[] records=WindowsCustodyBackend.ReadJournalForFixture(journal);
+        int evidenceCount=0;
+        string evidenceRecord=null;
+        foreach(string record in records)
+            if(record.StartsWith("EVIDENCE|",StringComparison.Ordinal)){evidenceCount++;evidenceRecord=record;}
+        string workIdentity=null,workEntriesText=null,workBytesText=null;
+        if(evidenceRecord!=null)
+            foreach(string field in evidenceRecord.Split('|'))
+            {
+                if(field.StartsWith("work_identity=",StringComparison.Ordinal)) workIdentity=field.Substring(14);
+                else if(field.StartsWith("work_entries=",StringComparison.Ordinal)) workEntriesText=field.Substring(13);
+                else if(field.StartsWith("work_bytes=",StringComparison.Ordinal)) workBytesText=field.Substring(11);
+            }
+        int recordedEntries;
+        long recordedBytes;
+        bool journalBound=evidenceCount==1&&workIdentity!=null&&workIdentity==originalWorkIdentity&&workIdentity.Length==49&&
+            Int32.TryParse(workEntriesText,out recordedEntries)&&recordedEntries>=expectedWorkEntries&&
+            Int64.TryParse(workBytesText,out recordedBytes)&&recordedBytes==expectedWorkBytes;
+        Expect("only GREEN has one EVIDENCE receipt with exact retired work identity, entry and byte readback",red&&green&&removed&&journalBound&&
+            HasRecord(records,"OUTCOME|")&&HasRecord(records,"REMOVED|")&&!Directory.Exists(runtime));
+        Console.WriteLine("WORK_RETIREMENT_RED_REASON:"+((redReason??"").Substring(0,Math.Min((redReason??"").Length,192))));
+        Console.WriteLine("WORK_RETIREMENT_EXPECTED_ENTRIES:"+expectedWorkEntries.ToString());
+        Console.WriteLine("WORK_RETIREMENT_EXPECTED_BYTES:"+expectedWorkBytes.ToString());
+        Console.WriteLine("WORK_RETIREMENT_LONG_RELATIVE_PATH:"+relativePathLength.ToString());
+        Console.WriteLine("WORK_RETIREMENT_JOURNAL_BYTES:"+Convert.ToBase64String(File.ReadAllBytes(journal)));
+        RetainPair("bounded private work retirement",runtime,journal);
+        if(removed&&Directory.Exists(source)) Directory.Delete(source,true);
     }
 
     private static void PayloadEvidenceFailureContracts(string fixture)
@@ -1135,6 +1287,17 @@ internal static class CustodyBackendFixture
             if (records[i].StartsWith(prefix, StringComparison.Ordinal)) return true;
         return false;
     }
+
+    [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true, EntryPoint = "CreateDirectoryW")]
+    private static extern bool CreateDirectoryForFixture(string path, IntPtr securityAttributes);
+
+    [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true, EntryPoint = "CreateFileW")]
+    private static extern SafeFileHandle CreateFileForFixture(string path, uint access, uint shareMode,
+        IntPtr securityAttributes, uint creationDisposition, uint flagsAndAttributes, IntPtr templateFile);
+
+    [DllImport("kernel32.dll", SetLastError = true, EntryPoint = "WriteFile")]
+    private static extern bool WriteFileForFixture(SafeFileHandle file, byte[] buffer, uint bytesToWrite,
+        out uint bytesWritten, IntPtr overlapped);
 
     [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true, EntryPoint = "CreateSymbolicLinkW")]
     private static extern bool CreateSymbolicLink(string link, string target, uint flags);
