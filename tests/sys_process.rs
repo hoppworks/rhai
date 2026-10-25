@@ -14,7 +14,7 @@ use rhai::{Dynamic, Engine, EvalAltResult, Map, Scope};
 #[cfg(not(feature = "no_index"))]
 use std::io::{Read, Write};
 #[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
-use std::os::unix::process::CommandExt;
+use std::os::unix::process::{CommandExt, ExitStatusExt};
 #[cfg(not(feature = "no_index"))]
 use std::process;
 #[cfg(not(feature = "no_index"))]
@@ -786,15 +786,25 @@ fn managed_atomic_record(path: &std::path::Path, contents: &str) {
 }
 
 #[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
-fn managed_pipe_start_ticks(pid: i32) -> u64 {
+fn managed_pipe_start_identity(pid: i32) -> String {
     #[cfg(target_os = "linux")]
     {
-        return managed_proc_identity(pid).expect("read escaped-pipe process start time").3;
+        return managed_proc_identity(pid).expect("read escaped-pipe process start time").3.to_string();
     }
-    #[cfg(not(target_os = "linux"))]
+    #[cfg(target_os = "macos")]
+    {
+        return darwin_process_identity(pid)
+            .expect("read escaped-pipe process identity")
+            .expect("escaped-pipe process identity exists")
+            .start
+            .split_whitespace()
+            .collect::<Vec<_>>()
+            .join("_");
+    }
+    #[cfg(not(any(target_os = "linux", target_os = "macos")))]
     {
         let _ = pid;
-        0
+        "unsupported".to_owned()
     }
 }
 
@@ -1218,8 +1228,8 @@ fn managed_scope_retained_pipe_leader_fixture() {
     let holder_fields = managed_record_fields(&std::fs::read_to_string(&holder_record).expect("holder readiness record"));
     assert_eq!(holder_fields.get("pid"), Some(&holder_pid));
     assert_eq!(holder_fields.get("pgid"), Some(&sentinel_pgid));
-    let leader_start = managed_pipe_start_ticks(leader_pid);
-    let holder_start = managed_pipe_start_ticks(holder_pid);
+    let leader_start = managed_pipe_start_identity(leader_pid);
+    let holder_start = managed_pipe_start_identity(holder_pid);
     managed_atomic_record(
         &leader_record,
         &format!("pid={leader_pid} start={leader_start} pgid={leader_pgid} holder={holder_pid} holder_start={holder_start} holder_pgid={sentinel_pgid} sentinel_pgid={sentinel_pgid}\n"),
@@ -1256,7 +1266,7 @@ fn managed_scope_retained_pipe_holder_fixture() {
     stderr.flush().unwrap();
     drop(stdout);
     drop(stderr);
-    let start = managed_pipe_start_ticks(pid);
+    let start = managed_pipe_start_identity(pid);
     managed_atomic_record(&record, &format!("pid={pid} start={start} pgid={pgid} ready=true\n"));
     // Keep the holder alive after endpoint closure so raw writes can report EPIPE instead of
     // terminating it with SIGPIPE. It remains an independently owned fixture process.
@@ -1337,6 +1347,25 @@ struct ManagedEscapedPipeFixture {
 }
 
 #[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct ManagedPipeCleanup {
+    leader_pid: Option<i32>,
+    holder_pid: Option<i32>,
+    leader_absent: bool,
+    holder_absent: bool,
+    leader_signal_sent: bool,
+    holder_signal_sent: bool,
+}
+
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct ManagedPipeProcessIdentity {
+    pid: i32,
+    pgid: i32,
+    start: String,
+}
+
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
 impl ManagedEscapedPipeFixture {
     fn new() -> Self {
         Self { root: TempDir::new(), released: false }
@@ -1351,26 +1380,170 @@ impl ManagedEscapedPipeFixture {
     }
 
     fn release_and_wait(&mut self) -> (Option<i32>, Option<i32>, bool, bool) {
+        let cleanup = self.release_and_wait_with_limits(Duration::from_secs(5), Duration::from_secs(2));
+        (cleanup.leader_pid, cleanup.holder_pid, cleanup.leader_absent, cleanup.holder_absent)
+    }
+
+    fn release_and_wait_with_limits(&mut self, process_wait: Duration, reap_wait: Duration) -> ManagedPipeCleanup {
         if !self.released {
             let _ = std::fs::write(self.path("release-leader"), b"release\n");
             let _ = std::fs::write(self.path("release-holder"), b"release\n");
             self.released = true;
         }
-        let leader_pid = std::fs::read_to_string(self.path("leader-record"))
-            .ok()
-            .and_then(|record| managed_record_fields(&record).get("pid").copied());
-        let holder_pid = std::fs::read_to_string(self.path("holder-record"))
-            .ok()
-            .and_then(|record| managed_record_fields(&record).get("pid").copied());
-        let deadline = Instant::now() + Duration::from_secs(5);
+        let leader = managed_pipe_record_identity(&self.path("leader-record"));
+        let holder = managed_pipe_record_identity(&self.path("holder-record"));
+        let leader_pid = leader.as_ref().map(|identity| identity.pid);
+        let holder_pid = holder.as_ref().map(|identity| identity.pid);
+        let deadline = Instant::now() + process_wait;
         while Instant::now() < deadline && (leader_pid.is_some_and(|pid| !pid_is_absent(pid)) || holder_pid.is_some_and(|pid| !pid_is_absent(pid))) {
             std::thread::sleep(Duration::from_millis(10));
         }
-        let leader_esrch = leader_pid.map_or(false, pid_is_absent);
-        let holder_esrch = holder_pid.map_or(false, pid_is_absent);
+        let mut leader_esrch = leader_pid.map_or(false, pid_is_absent);
+        let mut holder_esrch = holder_pid.map_or(false, pid_is_absent);
+        let mut leader_signal_sent = false;
+        let mut holder_signal_sent = false;
+        if !leader_esrch {
+            leader_signal_sent = leader.as_ref().is_some_and(signal_managed_pipe_process_exact);
+            eprintln!("managed_escaped_pipe_cleanup_escalation member=leader pid={leader_pid:?} exact_identity_signal={leader_signal_sent}");
+        }
+        if !holder_esrch {
+            holder_signal_sent = holder.as_ref().is_some_and(signal_managed_pipe_process_exact);
+            eprintln!("managed_escaped_pipe_cleanup_escalation member=holder pid={holder_pid:?} exact_identity_signal={holder_signal_sent}");
+        }
+        let reap_deadline = Instant::now() + reap_wait;
+        while Instant::now() < reap_deadline && (leader_pid.is_some_and(|pid| !pid_is_absent(pid)) || holder_pid.is_some_and(|pid| !pid_is_absent(pid))) {
+            std::thread::sleep(Duration::from_millis(10));
+        }
+        leader_esrch = leader_pid.map_or(false, pid_is_absent);
+        holder_esrch = holder_pid.map_or(false, pid_is_absent);
         eprintln!("managed_escaped_pipe_cleanup root={} leader={leader_pid:?} leader_esrch={leader_esrch} holder={holder_pid:?} holder_esrch={holder_esrch}", self.root.path().display());
-        (leader_pid, holder_pid, leader_esrch, holder_esrch)
+        ManagedPipeCleanup {
+            leader_pid,
+            holder_pid,
+            leader_absent: leader_esrch,
+            holder_absent: holder_esrch,
+            leader_signal_sent,
+            holder_signal_sent,
+        }
     }
+}
+
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_pipe_record_identity(path: &std::path::Path) -> Option<ManagedPipeProcessIdentity> {
+    let record = std::fs::read_to_string(path).ok()?;
+    let value = |key: &str| {
+        record
+            .split_whitespace()
+            .find_map(|field| field.strip_prefix(&format!("{key}=")))
+            .map(str::to_owned)
+    };
+    Some(ManagedPipeProcessIdentity {
+        pid: value("pid")?.parse().ok()?,
+        pgid: value("pgid")?.parse().ok()?,
+        start: value("start")?,
+    })
+}
+
+#[cfg(all(target_os = "linux", not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_pipe_process_identity(pid: i32) -> std::io::Result<Option<ManagedPipeProcessIdentity>> {
+    Ok(managed_proc_identity_checked(pid)?.map(|(_, _, pgid, start)| ManagedPipeProcessIdentity { pid, pgid, start: start.to_string() }))
+}
+
+#[cfg(all(target_os = "macos", not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_pipe_process_identity(pid: i32) -> std::io::Result<Option<ManagedPipeProcessIdentity>> {
+    Ok(darwin_process_identity(pid)?.map(|identity| ManagedPipeProcessIdentity {
+        pid,
+        pgid: identity.group,
+        start: identity.start.split_whitespace().collect::<Vec<_>>().join("_"),
+    }))
+}
+
+#[cfg(all(unix, not(any(target_os = "linux", target_os = "macos")), not(feature = "no_index"), not(feature = "no_float")))]
+fn managed_pipe_process_identity(_pid: i32) -> std::io::Result<Option<ManagedPipeProcessIdentity>> {
+    Err(std::io::Error::new(std::io::ErrorKind::Unsupported, "exact process identity is unavailable on this Unix target"))
+}
+
+#[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+fn signal_managed_pipe_process_exact(expected: &ManagedPipeProcessIdentity) -> bool {
+    let current = match managed_pipe_process_identity(expected.pid) {
+        Ok(Some(current)) => current,
+        Ok(None) => return true,
+        Err(error) => {
+            eprintln!("managed_escaped_pipe_cleanup_signal_refused pid={} identity_error={error}", expected.pid);
+            return false;
+        }
+    };
+    if current != *expected {
+        eprintln!("managed_escaped_pipe_cleanup_signal_refused pid={} expected={expected:?} current={current:?}", expected.pid);
+        return false;
+    }
+    let result = unsafe { libc::kill(expected.pid, libc::SIGKILL) };
+    if result == 0 {
+        return true;
+    }
+    std::io::Error::last_os_error().raw_os_error() == Some(libc::ESRCH)
+}
+
+#[cfg(all(any(target_os = "linux", target_os = "macos"), not(feature = "no_index"), not(feature = "no_float")))]
+#[test]
+fn managed_escaped_fixture_cleanup_signals_only_exact_process_identity() {
+    let mut fixture = ManagedEscapedPipeFixture::new();
+    let mut sentinel = managed_spawn_sentinel();
+    let sentinel_pid = sentinel.0.id() as i32;
+    let sentinel_pgid = unsafe { libc::getpgid(sentinel_pid) };
+    assert_eq!(sentinel_pgid, sentinel_pid);
+
+    let mut command = Command::new("/bin/sleep");
+    command.arg("30").stdin(Stdio::null()).stdout(Stdio::null()).stderr(Stdio::null());
+    // SAFETY: this owned child joins the fixture-owned sentinel group so the test detects a
+    // process-group signal that would incorrectly terminate an unrelated member.
+    unsafe {
+        command.pre_exec(move || {
+            if libc::setpgid(0, sentinel_pgid) < 0 {
+                return Err(std::io::Error::last_os_error());
+            }
+            Ok(())
+        });
+    }
+    let mut target = command.spawn().expect("start exact-identity cleanup target");
+    let pid = target.id() as i32;
+    let identity = match managed_pipe_process_identity(pid) {
+        Ok(Some(identity)) => identity,
+        other => {
+            let _ = target.kill();
+            let _ = target.wait();
+            panic!("read exact cleanup target identity: {other:?}");
+        }
+    };
+    let target_joined_sentinel_group = identity.pgid == sentinel_pgid;
+    let wrong_start = format!("{}-wrong", identity.start);
+    let refused_mismatch = !signal_managed_pipe_process_exact(&ManagedPipeProcessIdentity { start: wrong_start, ..identity.clone() });
+    let target_survived_mismatch = target.try_wait().map(|status| status.is_none()).unwrap_or(false);
+    if let Err(error) = std::fs::write(fixture.path("holder-record"), format!("pid={} start={} pgid={}\n", identity.pid, identity.start, identity.pgid)) {
+        let _ = target.kill();
+        let _ = target.wait();
+        panic!("record exact cleanup target: {error}");
+    }
+    let cleanup = fixture.release_and_wait_with_limits(Duration::from_millis(50), Duration::from_millis(500));
+    if !cleanup.holder_signal_sent {
+        let _ = target.kill();
+    }
+    let target_status = target.wait().expect("reap exact cleanup target");
+    let target_was_sigkilled = target_status.signal() == Some(libc::SIGKILL);
+    let target_absent = pid_is_absent(pid);
+    let sentinel_alive = sentinel.0.try_wait().expect("check unrelated sentinel").is_none();
+    eprintln!("managed_pipe_exact_cleanup pid={pid} pgid={} refused_mismatch={refused_mismatch} survived_mismatch={target_survived_mismatch} exact_identity_signal={} holder_record={:?} absent_before_owner_reap={} target_sigkill={target_was_sigkilled} target_esrch={target_absent} sentinel={sentinel_pid} sentinel_alive={sentinel_alive}", identity.pgid, cleanup.holder_signal_sent, cleanup.holder_pid, cleanup.holder_absent);
+    assert!(target_joined_sentinel_group, "fixture target must share the sentinel group");
+    assert!(refused_mismatch, "cleanup must refuse a PID with a different recorded start identity");
+    assert!(target_survived_mismatch, "refused cleanup must leave the exact fixture child alive");
+    assert_eq!(cleanup.holder_pid, Some(pid));
+    assert!(!cleanup.holder_absent, "the owning parent must reap its direct child after the fixture sends the exact cleanup signal");
+    assert!(cleanup.holder_signal_sent, "fixture cleanup must signal the process matching the recorded PID, group and start identity");
+    assert!(target_was_sigkilled, "fixture cleanup must use its bounded SIGKILL escalation for the stuck exact child");
+    assert!(target_absent, "exact cleanup must leave the target PID absent after reap");
+    assert!(sentinel_alive, "exact-PID cleanup must preserve the unrelated member of the same process group");
+    drop(sentinel);
+    assert!(pid_is_absent(sentinel_pid), "fixture must reap its exact sentinel");
 }
 
 #[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]

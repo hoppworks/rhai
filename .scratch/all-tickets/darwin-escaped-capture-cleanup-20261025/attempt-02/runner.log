@@ -1,0 +1,5 @@
+run_scoped_status=0
+managed_escaped_fixture_cleanup_signals_only_exact_process_identity=0
+managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes=0
+managed_spawn_post_reap_cancel_bounds_escaped_capture=0
+session scope retired empty and absence-verified

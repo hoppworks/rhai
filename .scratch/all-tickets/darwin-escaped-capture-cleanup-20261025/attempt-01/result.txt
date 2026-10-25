@@ -1,0 +1,1 @@
+all targeted Darwin GREEN selectors passed; outer run_scoped status is recorded by the caller

@@ -1,0 +1,1 @@
+exact empty scope retired and absence verified after first complete attempt: /Users/hoppworks/.local/share/agent-builds/rhai/darwin-capture-cleanup-20261025-01

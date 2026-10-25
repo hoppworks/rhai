@@ -1,0 +1,3 @@
+# Attempt history
+
+`attempt-01` first compiled on 2026-10-25 and passed the exact-identity cleanup helper test plus both restored X38 GREEN selectors. The outer zsh wrapper then failed to assign the exit code to its reserved read-only `status` parameter. All three Cargo status receipts were 0, `result.txt` was written, the private runtime was removed, and the exact empty session scope was subsequently retired. This is a harness bookkeeping defect, not a product/test failure. The first cleanup test exercised the signal helper directly; after review of that coverage boundary, the same test was strengthened to exercise the fixture's bounded timeout escalation end to end. The final run will bind all three criteria to that stronger test source.

@@ -1,0 +1,1 @@
+TMPDIR=/Users/hoppworks/.local/share/agent-builds/rhai/darwin-capture-cleanup-20261025-03 PYTHONDONTWRITEBYTECODE=1 python3 /Users/hoppworks/projects/agent-skills/tools/run_scoped.py --timeout 600 -- bash /Users/hoppworks/.codex/worktrees/darwin-capture-cleanup/rhai/.scratch/all-tickets/darwin-escaped-capture-cleanup-20261025/attempt-03/run.sh
