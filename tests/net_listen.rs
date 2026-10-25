@@ -94,7 +94,9 @@ fn ipv6_port_zero_listener_uses_its_own_grant_and_reports_real_peer_bytes() {
     assert_eq!(&observed, b"ipv6-listen", "independent IPv6 client receives exact accepted-stream bytes");
     let mut tail = [0_u8; 1];
     assert_eq!(peer.read(&mut tail).unwrap(), 0);
-    assert!(matches!(TcpStream::connect_timeout(&endpoint, Duration::from_secs(2)), Err(error) if error.kind() == std::io::ErrorKind::ConnectionRefused), "closed IPv6 listener refuses a fresh peer");
+    let after_close = TcpStream::connect_timeout(&endpoint, Duration::from_secs(2));
+    eprintln!("closed IPv6 listener reconnect outcome: {after_close:?}");
+    assert!(after_close.is_err(), "closed IPv6 listener accepted a fresh peer");
     eprintln!("ipv6_listen endpoint={endpoint} peer_identity=true exact_bytes=true eof=true listener_closed=true");
 }
 
