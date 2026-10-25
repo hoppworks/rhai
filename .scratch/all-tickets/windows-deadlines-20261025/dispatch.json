@@ -1,0 +1,11 @@
+{
+  "utc": "2026-10-25T12:01:01.285984+00:00",
+  "serial_inode": 126649917,
+  "serial_offset": 1986997,
+  "source_sha256": "6cc292e2431119778b62c717a11bb18722a236ae797d23e957b9d3e913f5d9dd",
+  "manifest_sha256": "06f62e3738f47812213fa229c4f70cfa6f45c1e2893fffda44a64a346beb1a53",
+  "enter_sent": true,
+  "capacity": "126649917 1986997\nFilesystem         1B-blocks          Used    Available Use% Mounted on\n/dev/nvme0n1p3 1997621166080 1850312138752 113163984896  95% /var\n",
+  "typed_command_independently_viewed": true,
+  "enter_sent_utc": "2026-10-25T12:02:47.285410+00:00"
+}

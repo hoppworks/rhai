@@ -1,0 +1,14 @@
+{
+  "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\deadline-control-e8b0c81f1f9448d78dae7dd0bfd96b4a",
+  "old_driver_pid": 10696,
+  "old_driver_creation": 134374071656370600,
+  "original_case_id": "rhai-deadline-absolute-e8b0c81f1f9448d78dae7dd0bfd96b4a",
+  "readback_id": "rhai-deadline-absolute-e8b0c81f1f9448d78dae7dd0bfd96b4a-readback",
+  "minimum_new_boot_filetime": 134374084805000000,
+  "files_max": 64,
+  "file_bytes_max": 4194304,
+  "total_bytes_max": 16777216,
+  "export_seconds": 180,
+  "readback_only": true,
+  "product_accepted": false
+}

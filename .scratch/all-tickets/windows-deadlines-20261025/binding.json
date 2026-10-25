@@ -1,0 +1,97 @@
+{
+  "base": "fbb0af29e1a54922875e673bb27e17ed9b102bf0",
+  "nonce": "4c3d5d7636d642529e5c02ecd3d6c188",
+  "id": "rhai-deadlines-4c3d5d7636d642529e5c02ecd3d6c188",
+  "bundle": "deadlines-4c3d5d7636d642529e5c02ecd3d6c188",
+  "build_scope_leaf": "deadline-build-4c3d5d7636d642529e5c02ecd3d6c188",
+  "host_source_root": "/var/roothome/projects/rhai-deadlines-20261025-2fc664e3",
+  "medium": "/var/lib/libvirt/images/rhai-win11-quality/deadlines-4c3d5d7636d642529e5c02ecd3d6c188.iso",
+  "created_utc": "2026-10-25T11:56:35.990483+00:00",
+  "count": {
+    "profile_compilers": 4,
+    "public_drivers": 3
+  },
+  "limits": {
+    "compiler_seconds_each": 180,
+    "bootstrap_seconds": 840,
+    "termination_reserve_seconds": 30,
+    "watchdog_driver_seconds": 180,
+    "watchdog_observer_seconds": 200,
+    "absolute_driver_seconds": 1920,
+    "absolute_observer_seconds": 1950,
+    "monitor_absolute_milliseconds": 1800000,
+    "client_companion_seconds": 2100,
+    "absolute_payload_hold_seconds": 2100,
+    "closure_seconds": 60,
+    "export_seconds_each": 180,
+    "max_files": 64,
+    "max_file_bytes": 4194304,
+    "max_total_bytes": 16777216,
+    "additional_storage_bytes_estimate": 268435456,
+    "guest_available_floor_bytes": 2147483648,
+    "max_host_raw_serial_bytes": 67108864
+  },
+  "retention": {
+    "owner": "current Rhai coordinator, workhorse/rhai-win11-quality/RhaiTest",
+    "purpose": "one shared immutable4component build for real180s watchdog and unchanged real30minute monitor controls, then proof export/cleanup",
+    "expires_host_utc": "2026-10-25T13:36:35.990595+00:00",
+    "retire_at": "earlier completed/cancelled proof reuse or this finite expiry; preserve failed originals before deletion",
+    "retired_host_utc": "2026-10-25T13:27:37.380707+00:00",
+    "all_guest_scopes_retired": true,
+    "all_host_media_and_staging_retired": true,
+    "physical_build_available": false
+  },
+  "controls": [
+    {
+      "mode": "watchdog",
+      "nonce": "f11d200d497f4cafbf61eaa88701819c",
+      "scope_leaf": "deadline-control-f11d200d497f4cafbf61eaa88701819c",
+      "id": "rhai-deadline-watchdog-f11d200d497f4cafbf61eaa88701819c",
+      "tag": "watchdog01"
+    },
+    {
+      "mode": "absolute",
+      "nonce": "2b784c5369ce4e2d8b51391433fd0d7e",
+      "scope_leaf": "deadline-control-2b784c5369ce4e2d8b51391433fd0d7e",
+      "id": "rhai-deadline-absolute-2b784c5369ce4e2d8b51391433fd0d7e",
+      "tag": "absolute02"
+    }
+  ],
+  "source_review": "PASS final combined independent source, both required-mode native results, interrupted originals,4root manifest, native closure and host/media retirement. Full Windows gate remains open.",
+  "files": {
+    "tools/windows-scoped-runner/LaunchSpecification.cs": "e08957b13d5ed5f86cb37d0545aa876aac50e507692d112b39882f465fff8f2b",
+    "tools/windows-scoped-runner/LeaseMonitor.cs": "49591cc15aaa68add9d8632188506e153179de37e0158d814a81d49d98252550",
+    "tools/windows-scoped-runner/MonitorAcceptanceDriver.cs": "98df6be690e4cfe1440d6eb11358688e75ca1f0adde12ef003d20dc2a8426c6c",
+    "tools/windows-scoped-runner/MonitorPayloadJob.cs": "559fda324f59768f2d5119c2f2fec7442c2cff543b694dc744b4c4ecc2524e4f",
+    "tools/windows-scoped-runner/MonitorSpecificationIntake.cs": "0f0a71563e6c3d99f0c643644d4b56951f6c69ceb3b10b03157f68dc37bb8412",
+    "tools/windows-scoped-runner/MonitorStagingHandoff.cs": "c541f7d885d032c074461a5a0173b9ae6291ef7d8cd1b9fd2ce4a4f56d1e0e6e",
+    "tools/windows-scoped-runner/MonitorTransport.cs": "792918d1cac67691fc9f7ee4c9e82b0c4377ba869c33458fedd56e9519e71c7c",
+    "tools/windows-scoped-runner/ScopedRunner.cs": "d3a77f0daeebd5beed2b277fae9dc6a522acf1454bb5d8d776d84e1dc8e896c8",
+    "tools/windows-scoped-runner/SpecificationTransfer.cs": "7a9edfe98d84868b55146280bd5ed29576ee0c8725cf9f6c785b784bc0ad25c2",
+    "tools/windows-scoped-runner/WindowsCustodyBackend.cs": "26b7468a0868271a555f6ed450212267b01d7d3fd0a8dd5b3fb51b01b7a05629",
+    "tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs": "38745833e7b23535cdc2ce225655074c6c5f50e204c0d3cf38d6805f49cb53eb",
+    "tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs": "8f43d33928262ae181aa5396feffef9b0260653609b5be8b01da7b0a7e7b00f7",
+    "tools/windows-scoped-runner/fixtures/PayloadFixture.cs": "e89c5fad040783326d117fe09860ab8535144756be0145bb38c0e4a148c0a465",
+    "tools/windows-scoped-runner/fixtures/RunSourceFixtures.ps1": "759fe8903a5257d38b7b842abc1833052a17c565b881a67d462801e3b3300b43",
+    "tools/windows-scoped-runner/fixtures/RunDeadlineControl.ps1": "ecaba25e3c1bdee7ab6b20f7de6892322b258419267e69a0b11c2c286f9f2da1",
+    "tools/windows-scoped-runner/fixtures/MonitorDeathFixture.cs": "2d80ddda3abc956d65592404c4e5b5c7f4cbacb404e2b45c838adc2b4b416e9a"
+  },
+  "input_manifest_sha256": "06f62e3738f47812213fa229c4f70cfa6f45c1e2893fffda44a64a346beb1a53",
+  "start_sha256": "6cc292e2431119778b62c717a11bb18722a236ae797d23e957b9d3e913f5d9dd",
+  "interrupted_controls": [
+    {
+      "mode": "absolute",
+      "nonce": "e8b0c81f1f9448d78dae7dd0bfd96b4a",
+      "scope_leaf": "deadline-control-e8b0c81f1f9448d78dae7dd0bfd96b4a",
+      "id": "rhai-deadline-absolute-e8b0c81f1f9448d78dae7dd0bfd96b4a",
+      "tag": "absolute01",
+      "accepted": false,
+      "classification": "infrastructure interruption before assertion: guest planned service-pack/OS-upgrade restart",
+      "last_driver_pid": 10696,
+      "last_driver_creation": 134374071656370600,
+      "last_live_seconds": 1142.3918355,
+      "new_boot_proves_old_process_identity_ended": true
+    }
+  ],
+  "recovery": "One same-build bounded absolute retry after independently observed planned OS update reboot; originals and consumed interrupted run preserved. Current registry reboot flags false, own executable inventory empty. Original finite retention unchanged."
+}

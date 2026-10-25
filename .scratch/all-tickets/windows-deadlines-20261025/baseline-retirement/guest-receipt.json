@@ -1,0 +1,9 @@
+{
+  "all_scopes_absent": true,
+  "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\job-resource-build-green-cdcd7eebb7ec4c89b8aa2f9e8f2054f4",
+  "manifest_sha256": "674c610334f66399d77eb256d148f5dd5c98ae497c112d6decc5949e14f57f6f",
+  "reason": "ended compatible reuse before original expiry",
+  "original_accepted_proof_sha256": "83676a51c8f3d9f752ea3530266a3ec590cf456ae45f28106fa3bc31ca987f94",
+  "foreign_resources_touched": false,
+  "file_count": 55
+}

@@ -1,0 +1,1 @@
+if ((get-filehash e:\cleanup.ps1).hash -eq 'f80437291a87b837cb7f8aeb0db3629e62e15fefd1a13a0be61d3f01fee137ea') { & ([scriptblock]::create((get-content e:\cleanup.ps1 -raw))) -ManifestSha256 'cb728983891d1f8eb5679f45d7b0ab038429fc3dc3760d1cc83e7711552231d4' } else { throw 'source mismatch' }

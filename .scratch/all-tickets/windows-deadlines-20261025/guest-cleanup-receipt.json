@@ -1,0 +1,42 @@
+{
+  "nonce": "4c3d5d7636d642529e5c02ecd3d6c188",
+  "host_manifest_sha256": "bea71e32e69d7944e259194e734dc90a4a53d1702a2aa00fc602b19db1a408d4",
+  "host_receipt_sha256": "39945fef1b2b3e0965a9e42ef53bbefcc31af33c78f7e309615a4b9f8ad242c8",
+  "interrupted_originals_sha256": "a33357babd777a053ea108b45ae2ef000c4c31df452694956c34e6b10d6a1044",
+  "actor_checks": [
+    {
+      "pid_recycled": false,
+      "original_alive": false,
+      "pid": 9776,
+      "creation": 134374069826878648
+    },
+    {
+      "pid_recycled": false,
+      "original_alive": false,
+      "pid": 8648,
+      "creation": 134374069829612239
+    },
+    {
+      "pid_recycled": false,
+      "original_alive": false,
+      "pid": 7888,
+      "creation": 134374097260569696
+    },
+    {
+      "pid_recycled": false,
+      "original_alive": false,
+      "pid": 4808,
+      "creation": 134374097263089933
+    }
+  ],
+  "interrupted_originals_exported": true,
+  "retired": [
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\deadline-build-4c3d5d7636d642529e5c02ecd3d6c188",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\deadline-control-f11d200d497f4cafbf61eaa88701819c",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\deadline-control-2b784c5369ce4e2d8b51391433fd0d7e",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\deadline-control-e8b0c81f1f9448d78dae7dd0bfd96b4a"
+  ],
+  "all_scopes_absent": true,
+  "foreign_resources_touched": false,
+  "interrupted_runtime_retirement": "observer retirement after boot, not native automatic cleanup acceptance"
+}

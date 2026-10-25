@@ -12,6 +12,13 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 
+#if (SCOPED_RUNNER_DRIVER_ABSOLUTE_CONTROL || SCOPED_RUNNER_DRIVER_WATCHDOG_CONTROL) && !SCOPED_RUNNER_TESTING
+#error Driver deadline controls require a dedicated SCOPED_RUNNER_TESTING build.
+#endif
+#if SCOPED_RUNNER_DRIVER_ABSOLUTE_CONTROL && SCOPED_RUNNER_DRIVER_WATCHDOG_CONTROL
+#error Select only one driver deadline control.
+#endif
+
 internal static class MonitorAcceptanceDriver
 {
     private static string RunsRoot { get { return WindowsCustodyBackend.AuthorizedRoot; } }
@@ -64,8 +71,17 @@ internal static class MonitorAcceptanceDriver
         if(args.Length<9 || args[0]!="--mode" || args[2]!="--source" || args[4]!="--exe" || args[6]!="--expected-payload-exit" || args[8]!="--")
         { Console.Error.WriteLine("usage: MonitorAcceptanceDriver --mode success|disconnect-alive|client-death|replay --source DIR --exe RELATIVE --expected-payload-exit HEX -- [payload-args...]"); return 64; }
         string mode=args[1], source=args[3], executable=args[5], expectedPayloadExit;
-        if(mode!="success" && mode!="disconnect-alive" && mode!="client-death" && mode!="replay" || !Hex8(args[7],out expectedPayloadExit)) return 64;
-        string[] payloadArgs=args.Skip(9).ToArray(); Deadline deadline=new Deadline(180000);
+        bool supportedMode=mode=="success" || mode=="disconnect-alive" || mode=="client-death" || mode=="replay";
+#if SCOPED_RUNNER_DRIVER_ABSOLUTE_CONTROL
+        supportedMode=supportedMode || mode=="absolute-deadline";
+#endif
+        if(!supportedMode || !Hex8(args[7],out expectedPayloadExit)) return 64;
+#if SCOPED_RUNNER_DRIVER_ABSOLUTE_CONTROL
+        const uint driverBound=1920000;
+#else
+        const uint driverBound=180000;
+#endif
+        string[] payloadArgs=args.Skip(9).ToArray(); Deadline deadline=new Deadline(driverBound);
         IntPtr job=IntPtr.Zero; Process selfProcess=Process.GetCurrentProcess(); IntPtr self=selfProcess.Handle; Process client=null; bool clientStarted=false, clientWaited=false, safeToRelease=false;
         int clientExit=Int32.MinValue, result=2; Exception cleanupFailure=null;
         var watchdogStop=new ManualResetEvent(false);
@@ -90,7 +106,18 @@ internal static class MonitorAcceptanceDriver
             Check(IsProcessInJob(client.Handle,job,out ambient)&&ambient,"lease client is not a member of controller job");
             pipes=new BoundedPipes(client,deadline);
             ControlState control=new ControlState();
+#if SCOPED_RUNNER_DRIVER_WATCHDOG_CONTROL
+            var protocolWorker=new Thread(()=>{
+                try { DriveProtocol(client,pipes,spec,mode,deadline,control); }
+                catch(Exception error) { Console.Error.WriteLine("watchdog control protocol worker: {0}: {1}",error.GetType().Name,error.Message); }
+            }) { IsBackground=true,Name="watchdog-control-live-protocol" };
+            protocolWorker.Start();
+            Console.WriteLine("WATCHDOG_CONTROL_MAIN_STALLED;BOUND_MS=180000");
+            using(var deliberateStall=new ManualResetEvent(false)) deliberateStall.WaitOne(195000);
+            throw new InvalidOperationException("native watchdog did not terminate the deliberately stalled driver");
+#else
             DriveProtocol(client,pipes,spec,mode,deadline,control);
+#endif
             deadline.Check("client completion wait");
             if(!client.WaitForExit(deadline.Remaining)) throw new TimeoutException("exact client did not exit before whole-driver deadline");
             clientWaited=true; clientExit=client.ExitCode;
@@ -380,6 +407,13 @@ internal static class MonitorAcceptanceDriver
     private static void ValidateMode(JournalReport r,string mode,string expected,int clientExit,ControlState c)
     {
         if(!r.CleanupConfirmed||!r.Removed||r.HostExported||r.Evidence["exit"]!=r.PayloadExit||r.Evidence["supervision"]!=r.Supervision)throw new InvalidDataException("completion receipt or evidence binding absent");
+#if SCOPED_RUNNER_DRIVER_ABSOLUTE_CONTROL
+        if(mode=="absolute-deadline") {
+            if(!c.TransferComplete||c.PostTransferChallenges<800||r.Supervision!="MonitorStopped"||r.PayloadExit!="0000007D"||expected!="0000007D"||clientExit!=78)
+                throw new InvalidDataException("real monitor absolute-deadline completion contract missing");
+            return;
+        }
+#endif
         if(mode=="success") { if(!c.TransferComplete||r.Supervision!="PayloadExited"||r.PayloadExit!=expected||clientExit!=78)throw new InvalidDataException("success does not match exact payload/client exit contract"); }
         else { bool action=mode=="disconnect-alive"?c.HostDisconnected:mode=="client-death"?c.ClientKilledByDriver:c.ReplaySent; int expectedClient=mode=="client-death"?1:78; if(!c.TransferComplete||!action||r.Supervision!="MonitorStopped"||expected!="0000007D"||r.PayloadExit!=expected||clientExit!=expectedClient)throw new InvalidDataException("negative control lacks its exact action, expected job-termination payload exit 0000007D, MonitorStopped outcome, or client exit"); }
     }
@@ -429,6 +463,10 @@ internal static class MonitorAcceptanceDriver
     private static void RejectReparse(string path) { FileAttributes a=File.GetAttributes(path); if((a&FileAttributes.ReparsePoint)!=0)throw new InvalidDataException("reparse point refused: "+Path.GetFileName(path)); }
     private static uint Crc32(byte[] bytes) { uint crc=0xffffffff; foreach(byte b in bytes) { crc^=b; for(int i=0;i<8;i++)crc=(crc&1)!=0?0xedb88320^(crc>>1):crc>>1; } return ~crc; }
     private static void PrintReport(JournalReport r,int exit,string mode,ControlState c)
-    { bool action=mode=="success"?c.TransferComplete:mode=="disconnect-alive"?c.HostDisconnected:mode=="client-death"?c.ClientKilledByDriver:c.ReplaySent; Console.WriteLine("CLIENT_EXIT=0x{0:X8}",exit); Console.WriteLine("MODE={0};ACTION_CONFIRMED={1};POST_TRANSFER_CHALLENGES={2}",mode,action,c.PostTransferChallenges); Console.WriteLine("JOURNAL={0}",r.Path); Console.WriteLine("RUNTIME={0}",r.RuntimePath); Console.WriteLine("RUNTIME_IDENTITY={0}",r.RuntimeIdentity); Console.WriteLine("PAYLOAD_EXIT={0}",r.PayloadExit); Console.WriteLine("SUPERVISION={0}",r.Supervision); Console.WriteLine("CLEANUP_CONFIRMED={0}",r.CleanupConfirmed); Console.WriteLine("RUNTIME_REMOVED={0}",r.Removed); Console.WriteLine("HOST_EXPORTED={0}",r.HostExported); }
+    { bool action=mode=="success"?c.TransferComplete:mode=="disconnect-alive"?c.HostDisconnected:mode=="client-death"?c.ClientKilledByDriver:c.ReplaySent;
+#if SCOPED_RUNNER_DRIVER_ABSOLUTE_CONTROL
+        if(mode=="absolute-deadline") action=c.TransferComplete;
+#endif
+        Console.WriteLine("CLIENT_EXIT=0x{0:X8}",exit); Console.WriteLine("MODE={0};ACTION_CONFIRMED={1};POST_TRANSFER_CHALLENGES={2}",mode,action,c.PostTransferChallenges); Console.WriteLine("JOURNAL={0}",r.Path); Console.WriteLine("RUNTIME={0}",r.RuntimePath); Console.WriteLine("RUNTIME_IDENTITY={0}",r.RuntimeIdentity); Console.WriteLine("PAYLOAD_EXIT={0}",r.PayloadExit); Console.WriteLine("SUPERVISION={0}",r.Supervision); Console.WriteLine("CLEANUP_CONFIRMED={0}",r.CleanupConfirmed); Console.WriteLine("RUNTIME_REMOVED={0}",r.Removed); Console.WriteLine("HOST_EXPORTED={0}",r.HostExported); }
     private static void Check(bool ok,string operation) { if(!ok)throw new InvalidOperationException(operation+" failed: "+Marshal.GetLastWin32Error().ToString(CultureInfo.InvariantCulture)); }
 }

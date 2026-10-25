@@ -1,0 +1,15 @@
+{
+  "host_observed_utc": "2026-10-25T12:51:32.375924+00:00",
+  "live": {
+    "mode": "absolute",
+    "driver_exited": false,
+    "id": "rhai-deadline-absolute-2b784c5369ce4e2d8b51391433fd0d7e",
+    "creation": 134374097246658358,
+    "exact_handle_owned": true,
+    "elapsed_seconds": 151.791369,
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\deadline-control-2b784c5369ce4e2d8b51391433fd0d7e",
+    "last_pair_live_seconds": 151.6958429,
+    "pid": 7820,
+    "pair_seen_live": true
+  }
+}

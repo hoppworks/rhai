@@ -269,6 +269,28 @@ the separate30minute monitor deadline. See [the complete original proof and boun
 The previous cached binaries and all owned fixtures/media have been retired.
 Full custody and native Rust/Cargo acceptance remain open.
 
+### Real watchdog and monitor absolute deadlines
+
+The separate real watchdog124 and monitor1800000ms criteria now pass on native
+Windows. `RunSourceFixtures.ps1 -BuildOnly -DeadlineFixturesOnly` compiles four
+dedicated components once; `RunDeadlineControl.ps1` accepts their canonical,
+manifest-bound BuildRoot and a fresh own scope, with watchdog/absolute mode.
+Test-only defines keep the monitor ProductionPolicy unchanged while companion
+and ordinary fixture waits outlast it. The watchdog deliberately stalls its main
+while protocol leases stay fresh; the absolute case proves the exact real-clock
+expiry reason and a lease capped at that same deadline.
+
+Each accepted case independently verifies real Job members/work, stopped exact
+PID/start identities, snapshot hashes,8 journal CRCs and runtime absence. Both
+573-frame/45-file exports are preserved. The first absolute attempt was interrupted
+by planned OS updates; its readback remains accepted=false and its later observer
+retirement is not claimed as native automatic cleanup. Pre-/post-update environment
+scopes are separate. The shared build, all4 guest scopes,3 media and host staging
+have been retired; their physical paths cannot be reused. See [the controls,
+results and remaining gate](../../.scratch/all-tickets/windows-deadlines-20261025/proof.md).
+Failed export/cleanup, quota denial, project composition and native Rhai/release
+acceptance remain open. COM1 progress/export users must execute sequentially.
+
 ### Native monitor-death control
 
 The finite input in `fixtures/MonitorDeathFixture.cs` creates a real ordinary

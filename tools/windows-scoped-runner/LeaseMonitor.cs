@@ -5,6 +5,10 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
+#if SCOPED_RUNNER_MONITOR_DEADLINE_CONTROL && !SCOPED_RUNNER_TESTING
+#error Monitor deadline observations require a dedicated SCOPED_RUNNER_TESTING build.
+#endif
+
 internal static class LeaseMonitor
 {
     internal enum State { Ready, CreateAuthorized, Suspended, ResumeAuthorized, Running, Stopping }
@@ -64,14 +68,35 @@ internal static class LeaseMonitor
             State = State.Ready;
         }
         internal static Policy ProductionPolicy() { return new Policy(2000, 15000, 120000, 1800000, 30000, 30000); }
+#if SCOPED_RUNNER_MONITOR_DEADLINE_CONTROL
+        private string controlExpiry="None";
+        private long controlExpiredAt,controlLeaseAtExpiry;
+        internal string ControlDeadlineRecord()
+        {
+            lock(sync) return "started="+started+"\r\nabsolute_ms="+policy.AbsoluteDeadline+
+                "\r\nexpiry="+controlExpiry+"\r\nexpired_at="+controlExpiredAt+
+                "\r\nlease_at_expiry="+controlLeaseAtExpiry+"\r\n";
+        }
+#endif
 #if SCOPED_RUNNER_TESTING
         internal static Policy TestPolicy() { return new Policy(2, 5, 12, 30, 5, 5); }
 #endif
         private bool Expired(long now)
         {
             if (!hasStarted) return false;
-            if (now >= started + policy.AbsoluteDeadline || now >= leaseDeadline) return true;
-            return State != State.Running && now >= started + policy.SetupDeadline;
+            bool expired=now >= started + policy.AbsoluteDeadline || now >= leaseDeadline;
+#if SCOPED_RUNNER_MONITOR_DEADLINE_CONTROL
+            if(expired && controlExpiry=="None") {
+                controlExpiry=now >= started+policy.AbsoluteDeadline ? "AbsoluteDeadline" : "LeaseDeadline";
+                controlExpiredAt=now;controlLeaseAtExpiry=leaseDeadline;
+            }
+#endif
+            if(expired) return true;
+            bool setupExpired=State != State.Running && now >= started + policy.SetupDeadline;
+#if SCOPED_RUNNER_MONITOR_DEADLINE_CONTROL
+            if(setupExpired && controlExpiry=="None") {controlExpiry="SetupDeadline";controlExpiredAt=now;controlLeaseAtExpiry=leaseDeadline;}
+#endif
+            return setupExpired;
         }
         private void Stop() { lock(sync) { State = State.Stopping; outstanding = null; createHandshake=false; resumeHandshake=false; requestedTransition=State.Stopping; } }
         internal void Start(long now) { lock(sync) { if(hasStarted) return; hasStarted=true; started = now; leaseDeadline = now + policy.LeaseDuration; nextChallenge = now; } }

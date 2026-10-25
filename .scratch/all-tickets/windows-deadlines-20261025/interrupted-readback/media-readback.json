@@ -1,0 +1,10 @@
+{
+  "source": "/var/roothome/projects/rhai-deadlines-20261025-2fc664e3/interrupted-readback",
+  "medium": "/var/lib/libvirt/images/rhai-win11-quality/deadline-interrupted-readback-2de17ac8c2e942ad8baf1f6c2fa0a680.iso",
+  "sha256": "e7d2f7a40f6679f4172a0bc76c0e0dc5c239f8e6afe9033d5638f24da4926efc",
+  "files": {
+    "cleanup-host-manifest.json": "cb728983891d1f8eb5679f45d7b0ab038429fc3dc3760d1cc83e7711552231d4",
+    "cleanup.ps1": "f80437291a87b837cb7f8aeb0db3629e62e15fefd1a13a0be61d3f01fee137ea"
+  },
+  "native_started": false
+}

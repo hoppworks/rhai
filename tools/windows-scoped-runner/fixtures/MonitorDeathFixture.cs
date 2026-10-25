@@ -74,9 +74,10 @@ internal static class MonitorDeathFixture
         }
         if(File.ReadAllText(path)!=expected+"\r\n")throw new InvalidDataException("membership handshake mismatch");
     }
-    private static int MembershipControl(string prefix,bool leaf,bool deadline)
+    private static int MembershipControl(string prefix,bool leaf,bool deadline,bool absolute=false)
     {
         Process child=null;bool childStarted=false,transferred=false;
+        int holdMilliseconds=absolute ? 2100000 : 240000;
         try {
             using(var self=Process.GetCurrentProcess()) {
                 Record(prefix+".identity",Identity(self));
@@ -87,11 +88,11 @@ internal static class MonitorDeathFixture
                         WaitForRecord(prefix+".release","both-members-confirmed",parent);
                         Record(prefix+".work","child-work-after-both-membership");
                     }
-                    using(var hold=new ManualResetEvent(false))hold.WaitOne(240000);
+                    using(var hold=new ManualResetEvent(false))hold.WaitOne(holdMilliseconds);
                     return 126;
                 }
                 child=new Process {StartInfo=new ProcessStartInfo {
-                    FileName=self.MainModule.FileName,Arguments="--membership-leaf \""+prefix+".child\"",
+                    FileName=self.MainModule.FileName,Arguments=(absolute ? "--membership-absolute-leaf" : "--membership-leaf")+" \""+prefix+".child\"",
                     WorkingDirectory=Environment.CurrentDirectory,UseShellExecute=false,CreateNoWindow=true}};
                 if(!child.Start())throw new InvalidOperationException("membership child did not start");
                 childStarted=true;
@@ -109,7 +110,7 @@ internal static class MonitorDeathFixture
                 // Ordinary child remains in the public monitor's exact Job. The
                 // deadline variant cannot naturally finish before Driver180s.
                 transferred=true;
-                if(deadline) {using(var hold=new ManualResetEvent(false))hold.WaitOne(240000);return 126;}
+                if(deadline) {using(var hold=new ManualResetEvent(false))hold.WaitOne(holdMilliseconds);return 126;}
                 return 0;
             }
         } finally {
@@ -160,8 +161,8 @@ internal static class MonitorDeathFixture
     }
     private static int Main(string[] args)
     {
-        if(args.Length==2&&(args[0]=="--membership"||args[0]=="--membership-deadline"||args[0]=="--membership-leaf")) {
-            try {return MembershipControl(Path.GetFullPath(args[1]),args[0]=="--membership-leaf",args[0]=="--membership-deadline");}
+        if(args.Length==2&&(args[0]=="--membership"||args[0]=="--membership-deadline"||args[0]=="--membership-leaf"||args[0]=="--membership-absolute"||args[0]=="--membership-absolute-leaf")) {
+            try {return MembershipControl(Path.GetFullPath(args[1]),args[0]=="--membership-leaf"||args[0]=="--membership-absolute-leaf",args[0]=="--membership-deadline"||args[0]=="--membership-absolute",args[0]=="--membership-absolute"||args[0]=="--membership-absolute-leaf");}
             catch(Exception error) {
                 // A spawned console-less child may not inherit the monitor's
                 // diagnostic pipe. Preserve its original error beside its identity.

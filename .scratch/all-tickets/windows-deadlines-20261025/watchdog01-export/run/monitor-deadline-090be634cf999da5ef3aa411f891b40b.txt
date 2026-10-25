@@ -1,0 +1,7 @@
+started=16260187
+absolute_ms=1800000
+expiry=None
+expired_at=0
+lease_at_expiry=0
+loop_stopped_at=16439187
+client_signaled=True

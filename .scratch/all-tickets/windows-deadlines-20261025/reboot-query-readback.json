@@ -1,0 +1,45 @@
+{
+  "boot": "/Date(1792934880500)/",
+  "events": [
+    {
+      "TimeCreated": "/Date(1792934885181)/",
+      "Id": 12,
+      "Message": "LSASS.exe was started as a protected process with level: 4."
+    },
+    {
+      "TimeCreated": "/Date(1792934880726)/",
+      "Id": 12,
+      "Message": "The operating system started at system time \u200e2026\u200e-\u200e10\u200e-\u200e25T13:28:00.500000000Z."
+    },
+    {
+      "TimeCreated": "/Date(1792934871657)/",
+      "Id": 1074,
+      "Message": "The process C:\\WINDOWS\\servicing\\TrustedInstaller.exe (RHAI-WIN11) has initiated the restart of computer RHAI-WIN11 on behalf of user NT AUTHORITY\\SYSTEM for the following reason: Operating System: Upgrade (Planned)\r\n Reason Code: 0x80020003\r\n Shutdown Type: restart\r\n Comment: "
+    },
+    {
+      "TimeCreated": "/Date(1792934836081)/",
+      "Id": 12,
+      "Message": "LSASS.exe was started as a protected process with level: 4."
+    },
+    {
+      "TimeCreated": "/Date(1792934831721)/",
+      "Id": 12,
+      "Message": "The operating system started at system time \u200e2026\u200e-\u200e10\u200e-\u200e25T13:27:11.500000000Z."
+    },
+    {
+      "TimeCreated": "/Date(1792934724812)/",
+      "Id": 1074,
+      "Message": "The process C:\\WINDOWS\\uus\\AMD64\\MoUsoCoreWorker.exe (RHAI-WIN11) has initiated the restart of computer RHAI-WIN11 on behalf of user NT AUTHORITY\\SYSTEM for the following reason: Operating System: Service pack (Planned)\r\n Reason Code: 0x80020010\r\n Shutdown Type: restart\r\n Comment: "
+    },
+    {
+      "TimeCreated": "/Date(1792917117615)/",
+      "Id": 12,
+      "Message": "LSASS.exe was started as a protected process with level: 4."
+    },
+    {
+      "TimeCreated": "/Date(1792917113727)/",
+      "Id": 12,
+      "Message": "The operating system started at system time \u200e2026\u200e-\u200e10\u200e-\u200e25T08:31:53.500000000Z."
+    }
+  ]
+}

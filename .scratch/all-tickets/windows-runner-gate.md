@@ -3,7 +3,7 @@
 Status: native compiler bootstrap and named public custody rows accepted; the
 complete gate before Windows project Cargo/Rust acceptance remains open. Current
 pair-membership, Driver180s stop/closure, actual atomic-association denial and
-returned-handle setup-unwind rows are accepted at their recorded scopes.
+returned-handle setup-unwind rows are accepted at their recorded scopes. The separate real watchdog124 and monitor30min absolute expiry now also pass at their recorded environments.
 
 ## Current route and resources
 
@@ -25,9 +25,7 @@ distinct. Host export does not rewrite native HOST_EXPORTED=False.
 Reuse compatible tools only after source/compiler/hash/physical-path checks and
 within recorded ownership/purpose/expiry. Old10-10 guest builds and the now-retired current compiler cache are historical
 references. The membership/deadline package retired all8 exact own guest scopes and
-all6 own media after host-bound export. A later resource-limit package now retains
-one new compatible GREEN build under its exact finite record; use
-`windows-job-resources-20261025/retained-green-build.json`, not historical paths. Never reset the VM, touch backups/baselines/foreign work, or treat SSH
+all6 own media after host-bound export. The later resource-limit GREEN cache was also retired after ended compatible reuse; its record is historical. The deadline package subsequently retired its separate four-component build, all four own guest scopes, three media and28 host staging files after verified export; its binding now records physical_build_available=false. Reuse its accepted evidence, not deleted paths. Never reset the VM, touch backups/baselines/foreign work, or treat SSH
 loss as guest supervision. No new routine approval gate or fixed heavy-run slot.
 
 ## Required outcomes and current proof
@@ -35,7 +33,7 @@ loss as guest supervision. No new routine approval gate or fixed heavy-run slot.
 | Outcome | Accepted scope | Still open |
 |---|---|---|
 | Payload and grandchild actual Job membership before useful work | Current native complete four-PID lists independently include both exact payload/ordinary-child PID/start identities before work; public normal Driver0/root0 and complete Job closure | No gap in this named row at its source/guest scope; no arbitrary nested-execution or product acceptance inferred |
-| Success, failure, deadline stop members and retire runtime | Normal success/private env; generic failure narrow actual cause; parent-exit residual child; real large ordinary-abort retirement2107entries/613419011bytes; current empty-work lease stops; current normal membership/root-exit closure and deliberate Driver180s timeout with post-teardown actor/runtime closure | Monitor30min absolute deadline, explicit watchdog124 termination branch and bounded real project-command composition/product duration |
+| Success, failure, deadline stop members and retire runtime | Normal success/private env; generic failure narrow actual cause; parent-exit residual child; real large ordinary-abort retirement2107entries/613419011bytes; current empty-work lease stops; current normal membership/root-exit closure and deliberate Driver180s timeout with post-teardown actor/runtime closure | Real watchdog124 and monitor1800000ms outcomes accepted separately in the deadline packet, exact closure/runtime absence/8CRCs each. Bounded real project-command composition/product duration remains open. |
 | Supervisor death, independent observer, unrelated sentinel | Original monitor-death run and later readback: six identities stopped, sentinel survival/natural completion, exact target runtime observer-retired; original sharing/release failures preserved | No clean monitor/backend receipt inferred; current changed-composition and failed cleanup/export applicability remain to establish |
 | Failed association/nested context; no fallback | Native nested-refusal; current real CreateProcessW JOB_LIST query-handle denial/error5/no returned handles; separate real successful suspended-create abort proves returned-handle unwind and exact already-stopped termination-race correction | No false-return/nonzero-partial-handle permutation or arbitrary API interruption/nested-execution guarantee claimed; current named denial and returned-real-handle cases are accepted |
 | Controlling connection/lease failure | Current disconnect-alive/client-death/replay: Drivers0, payload125, client78/1/78,4/4/5challenges, each8CRC records, PID/start stopped, literal runtime absent | Nonempty product work/further failure paths are not directly claimed by the three empty-work cases |
@@ -73,5 +71,6 @@ a separate successful-create fault exercised real returned process/thread handle
 No hypothetical partial-return or full Windows/Rhai acceptance is inferred.
 The creation packet subsequently retired all7own guest scopes,4own media and
 76-entry host staging after independent host-bound export; original CDs are restored.
-Only the previously useful baseline remains under its original finite retention,
-with Driver/Payload compatibility and an older normal Runner explicitly distinguished.
+That previously useful baseline has since been retired at ended reuse; its accepted proof remains applicable at its stated source. The separate deadline build/control packet has also completed export and retired its exact finite resources.
+
+Real watchdog124 and independent monitor1800000ms acceptance are scoped in [the deadline proof](windows-deadlines-20261025/proof.md). Each has its own actual result; interrupted absolute01 remains unaccepted, and no identical pre-/post-update OS image or full Windows gate is inferred.

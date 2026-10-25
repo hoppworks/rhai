@@ -1,0 +1,13 @@
+{
+  "host_source_root": "/var/roothome/projects/rhai-deadlines-20261025-2fc664e3/cleanup",
+  "medium": "/var/lib/libvirt/images/rhai-win11-quality/deadline-cleanup-2034bf09c99b4e4d8b8826f9fdfd030a.iso",
+  "owner": "current Rhai coordinator",
+  "purpose": "Hash-bound retirement of4exact completed/inactive own scopes afteracceptedmodeproofandinterruptedoriginalexport",
+  "expires_host_utc": "2026-10-25T13:36:35.990595+00:00",
+  "source_sha256": "4a1e8ff45c7332fd0bafebf24589772d9de16202e81150826f6a56053cedecb7",
+  "manifest_sha256": "bea71e32e69d7944e259194e734dc90a4a53d1702a2aa00fc602b19db1a408d4",
+  "native_executed": true,
+  "mounted": false,
+  "source_and_manifest_independently_reviewed": true,
+  "retired": true
+}

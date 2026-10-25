@@ -8,6 +8,10 @@ using System.Collections.Generic;
 
 // Windows pipe/process boundary. Only three explicit handles cross the launch:
 // monitor input, monitor output, and a real restricted handle to this client.
+#if SCOPED_RUNNER_MONITOR_DEADLINE_CONTROL && !SCOPED_RUNNER_TESTING
+#error Monitor deadline observations require a dedicated SCOPED_RUNNER_TESTING build.
+#endif
+
 internal static class MonitorTransport
 {
     private const uint DETACHED_PROCESS = 0x00000008, EXTENDED_STARTUPINFO_PRESENT = 0x00080000, CREATE_BREAKAWAY_FROM_JOB = 0x01000000;
@@ -92,7 +96,12 @@ internal static class MonitorTransport
                 uint wait=WaitForSingleObject(child.Process,100);
                 if(wait==WAIT_OBJECT_0) break;
                 if(wait!=WAIT_TIMEOUT) throw Error("WaitForSingleObject(monitor)");
-                if(GetTickCount64()-clientStart>=1800000UL) { Console.Error.WriteLine("client monitor wait reached fixed absolute deadline; closing client-side handles without terminating monitor"); return 124; }
+#if SCOPED_RUNNER_MONITOR_DEADLINE_CONTROL
+                const ulong clientWaitLimit=2100000UL; // only the companion waits beyond the unchanged real monitor30min limit
+#else
+                const ulong clientWaitLimit=1800000UL;
+#endif
+                if(GetTickCount64()-clientStart>=clientWaitLimit) { Console.Error.WriteLine("client monitor wait reached fixed absolute deadline; closing client-side handles without terminating monitor"); return 124; }
             }
             uint code; Check(GetExitCodeProcess(child.Process,out code),"GetExitCodeProcess(monitor)"); return unchecked((int)code);
         }
@@ -197,6 +206,16 @@ internal static class MonitorTransport
             if(staging.IsFailed || staging.WorkerFinished) { dispatcher.Stop(); break; }
             Thread.Sleep(25); // finite watchdog poll; never waits for a pipe or worker join
         }
+#if SCOPED_RUNNER_MONITOR_DEADLINE_CONTROL
+        string controlRoot=Environment.GetEnvironmentVariable("AGENT_RUNTIME_DIR");
+        if(String.IsNullOrEmpty(controlRoot)) throw new InvalidOperationException("deadline control requires its explicit owned runtime parent");
+        string controlPath=Path.Combine(controlRoot,"monitor-deadline-"+token+".txt");
+        using(var controlFile=new FileStream(controlPath,FileMode.CreateNew,FileAccess.Write,FileShare.Read))
+        using(var controlText=new StreamWriter(controlFile,new System.Text.UTF8Encoding(false))) {
+            controlText.Write(protocol.ControlDeadlineRecord());
+            controlText.Write("loop_stopped_at="+GetTickCount64()+"\r\nclient_signaled="+(WaitForSingleObject(client,0)==WAIT_OBJECT_0)+"\r\n");
+        }
+#endif
         dispatcher.Stop();
         staging.Stop(); // signal only; a worker blocked in I/O keeps ownership
         // The accepted owner worker owns create/resume and exact-job cleanup.

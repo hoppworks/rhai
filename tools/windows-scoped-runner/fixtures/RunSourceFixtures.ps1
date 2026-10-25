@@ -10,11 +10,15 @@ param(
     [switch] $DriverParserFixture,
     [switch] $PayloadWorkRetirementAbortOnly,
     [switch] $CreationFailureFixturesOnly,
+    [switch] $DeadlineFixturesOnly,
     [ValidateSet('ASSOCIATION_DENIED','POST_CREATE_ABORT')] [string] $CreationFailureProfile,
     [ValidateSet('ordinary-runtime','payload-evidence')] [string] $CustodyFixtureMode = 'ordinary-runtime'
 )
 
 $ErrorActionPreference = 'Stop'
+if ($DeadlineFixturesOnly -and (!$BuildOnly -or $CompilerClosureOnly -or $MonitorDeathFixtureOnly -or $DriverOnly -or $PublicToolsOnly -or $DriverParserFixture -or $SetupFailureControl -or $PayloadWorkRetirementAbortOnly -or $CreationFailureFixturesOnly -or $CreationFailureProfile)) {
+    throw 'DeadlineFixturesOnly requires BuildOnly without competing diagnostic selections.'
+}
 if ($CreationFailureProfile -and !$CreationFailureFixturesOnly) { throw 'CreationFailureProfile requires CreationFailureFixturesOnly.' }
 if ($CreationFailureFixturesOnly -and (!$BuildOnly -or $CompilerClosureOnly -or $MonitorDeathFixtureOnly -or $DriverOnly -or $PublicToolsOnly -or $DriverParserFixture -or $SetupFailureControl -or $PayloadWorkRetirementAbortOnly)) {
     throw 'CreationFailureFixturesOnly requires BuildOnly without competing diagnostic selections.'
@@ -44,11 +48,11 @@ if ([IntPtr]::Size -ne 8) { throw 'The accepted Windows guest and job layout req
 # 2026-10-01. Update them only with a separately reviewed source change.
 $expected = @{
     'tools/windows-scoped-runner/LaunchSpecification.cs' = 'e08957b13d5ed5f86cb37d0545aa876aac50e507692d112b39882f465fff8f2b'
-    'tools/windows-scoped-runner/LeaseMonitor.cs' = '72c79f18c96e28f27cd1b7b39b1025da9a250e0608885de7dc48934512a46bfc'
+    'tools/windows-scoped-runner/LeaseMonitor.cs' = '49591cc15aaa68add9d8632188506e153179de37e0158d814a81d49d98252550'
     'tools/windows-scoped-runner/MonitorPayloadJob.cs' = '559fda324f59768f2d5119c2f2fec7442c2cff543b694dc744b4c4ecc2524e4f'
     'tools/windows-scoped-runner/MonitorSpecificationIntake.cs' = '0f0a71563e6c3d99f0c643644d4b56951f6c69ceb3b10b03157f68dc37bb8412'
     'tools/windows-scoped-runner/MonitorStagingHandoff.cs' = 'c541f7d885d032c074461a5a0173b9ae6291ef7d8cd1b9fd2ce4a4f56d1e0e6e'
-    'tools/windows-scoped-runner/MonitorTransport.cs' = 'ed23c8615af7d8c1b545d3108342640c46f7e245b4e6a83a7c98bf1720a74de8'
+    'tools/windows-scoped-runner/MonitorTransport.cs' = '792918d1cac67691fc9f7ee4c9e82b0c4377ba869c33458fedd56e9519e71c7c'
     'tools/windows-scoped-runner/ScopedRunner.cs' = 'd3a77f0daeebd5beed2b277fae9dc6a522acf1454bb5d8d776d84e1dc8e896c8'
     'tools/windows-scoped-runner/SpecificationTransfer.cs' = '7a9edfe98d84868b55146280bd5ed29576ee0c8725cf9f6c785b784bc0ad25c2'
     'tools/windows-scoped-runner/WindowsCustodyBackend.cs' = '26b7468a0868271a555f6ed450212267b01d7d3fd0a8dd5b3fb51b01b7a05629'
@@ -64,17 +68,17 @@ $expected = @{
 
 # The narrow native bootstrap compiles only the public runner, real-client driver
 # and finite payload. It never runs the driver inside this compiler owner's job.
-$expected['tools/windows-scoped-runner/MonitorAcceptanceDriver.cs'] = '3961723da38fbba05f800ef76a5d65a6225e25eb79303a05ff420634e0dc1914'
+$expected['tools/windows-scoped-runner/MonitorAcceptanceDriver.cs'] = '98df6be690e4cfe1440d6eb11358688e75ca1f0adde12ef003d20dc2a8426c6c'
 $expected['tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs'] = '8f43d33928262ae181aa5396feffef9b0260653609b5be8b01da7b0a7e7b00f7'
 if ($DriverParserFixture) { $expected['tools/windows-scoped-runner/fixtures/MonitorAcceptanceDriverFixture.cs'] = '2cd12d8de5f65eb48cd1f8e53e1d8850838c7fc55ce6e441cc17228f1b9fff40' }
-if ($MonitorDeathFixtureOnly) { $expected['tools/windows-scoped-runner/fixtures/MonitorDeathFixture.cs'] = '1a28841a7acbc270f8466a48cd1d51fb90952678573b2bb7cd60e117987c7a09' }
+if ($MonitorDeathFixtureOnly -or $DeadlineFixturesOnly) { $expected['tools/windows-scoped-runner/fixtures/MonitorDeathFixture.cs'] = '2d80ddda3abc956d65592404c4e5b5c7f4cbacb404e2b45c838adc2b4b416e9a' }
 if ($BuildOnly) {
     foreach ($relative in @($expected.Keys)) {
         if ($relative -like '*/fixtures/*' -and $relative -ne 'tools/windows-scoped-runner/fixtures/PayloadFixture.cs' -and
             $relative -ne 'tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs' -and
             $relative -ne 'tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs' -and
             !($DriverParserFixture -and $relative -eq 'tools/windows-scoped-runner/fixtures/MonitorAcceptanceDriverFixture.cs') -and
-            !($MonitorDeathFixtureOnly -and $relative -eq 'tools/windows-scoped-runner/fixtures/MonitorDeathFixture.cs') -and
+            !(($MonitorDeathFixtureOnly -or $DeadlineFixturesOnly) -and $relative -eq 'tools/windows-scoped-runner/fixtures/MonitorDeathFixture.cs') -and
             !($PayloadWorkRetirementAbortOnly -and ($relative -eq 'tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs' -or
                 $relative -eq 'tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs'))) {
             $expected.Remove($relative)
@@ -598,7 +602,7 @@ if (!$SetupFailureControl) { Test-OwnedProcessExitCodes $childPowerShell }
         'MonitorStagingHandoff.cs','MonitorTransport.cs','ScopedRunner.cs','SpecificationTransfer.cs','WindowsCustodyBackend.cs'
     ) | ForEach-Object { Join-Path $expectedRoot ('tools/windows-scoped-runner/' + $_) }
     $allProduction = @($production)
-    if ($BuildOnly -and !$CreationFailureFixturesOnly -and !$PayloadWorkRetirementAbortOnly -and !$CompilerClosureOnly -and !$DriverOnly -and !$PublicToolsOnly -and !$MonitorDeathFixtureOnly) {
+    if ($BuildOnly -and !$DeadlineFixturesOnly -and !$CreationFailureFixturesOnly -and !$PayloadWorkRetirementAbortOnly -and !$CompilerClosureOnly -and !$DriverOnly -and !$PublicToolsOnly -and !$MonitorDeathFixtureOnly) {
         $policySource = Join-Path $expectedRoot 'tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs'
         $policyExe = Join-Path $buildRoot 'NativeScopePolicyFixture.exe'
         Invoke-OwnedProcess $compiler (@('/target:exe','/main:NativeScopePolicyFixture',('/out:'+$policyExe)) + $allProduction + @($policySource)) 'compile-native-scope-policy' 180
@@ -619,7 +623,15 @@ if (!$SetupFailureControl) { Test-OwnedProcessExitCodes $childPowerShell }
     }
     $runner = Join-Path $buildRoot 'ScopedRunner.exe'
     if ($PublicToolsOnly) { Save-OwnedJobMembers 'before-public-tools-compiler' }
-    if ($CreationFailureFixturesOnly) {
+    if ($DeadlineFixturesOnly) {
+        Invoke-OwnedProcess $compiler (@('/target:exe','/main:ScopedRunner','/define:SCOPED_RUNNER_TESTING,SCOPED_RUNNER_MONITOR_DEADLINE_CONTROL',('/out:'+(Join-Path $buildRoot 'ScopedRunnerDeadlineControl.exe'))) + $allProduction) 'compile-deadline-runner' 180
+        $driverSource=Join-Path $expectedRoot 'tools/windows-scoped-runner/MonitorAcceptanceDriver.cs'
+        foreach($profile in @('ABSOLUTE','WATCHDOG')) {
+            Invoke-OwnedProcess $compiler (@('/target:exe','/main:MonitorAcceptanceDriver',('/define:SCOPED_RUNNER_TESTING,SCOPED_RUNNER_DRIVER_'+$profile+'_CONTROL'),('/out:'+(Join-Path $buildRoot ('Monitor'+$profile+'Driver.exe')))) + $allProduction + @($driverSource)) ('compile-deadline-driver-'+$profile) 180
+        }
+        Invoke-OwnedProcess $compiler @('/target:exe','/main:MonitorDeathFixture',('/out:'+(Join-Path $buildRoot 'MonitorDeadlineFixture.exe')),(Join-Path $expectedRoot 'tools/windows-scoped-runner/fixtures/MonitorDeathFixture.cs')) 'compile-deadline-payload' 180
+    }
+    elseif ($CreationFailureFixturesOnly) {
         $creationProfiles=if($CreationFailureProfile){@($CreationFailureProfile)}else{@('ASSOCIATION_DENIED','POST_CREATE_ABORT')}
         foreach ($profile in $creationProfiles) {
             $output = Join-Path $buildRoot ('ScopedRunner-'+$profile+'.exe')
@@ -649,7 +661,7 @@ if (!$SetupFailureControl) { Test-OwnedProcessExitCodes $childPowerShell }
         $exe = Join-Path $buildRoot ($case.Name + '.exe')
         Invoke-OwnedProcess $compiler (@('/target:exe','/define:SCOPED_RUNNER_TESTING',('/main:'+$case.Name),('/out:'+$exe)) + $allProduction + $fixtureSources) ('compile-' + $case.Name) 180
     }
-    if ($BuildOnly -and !$CreationFailureFixturesOnly -and !$CompilerClosureOnly -and !$MonitorDeathFixtureOnly) {
+    if ($BuildOnly -and !$DeadlineFixturesOnly -and !$CreationFailureFixturesOnly -and !$CompilerClosureOnly -and !$MonitorDeathFixtureOnly) {
         $driverSource = Join-Path $expectedRoot 'tools/windows-scoped-runner/MonitorAcceptanceDriver.cs'
         $driverExe = Join-Path $buildRoot 'MonitorAcceptanceDriver.exe'
         Invoke-OwnedProcess $compiler (@('/target:exe','/main:MonitorAcceptanceDriver',('/out:'+$driverExe)) + $allProduction + @($driverSource)) 'compile-native-driver' 180
@@ -665,7 +677,7 @@ if (!$SetupFailureControl) { Test-OwnedProcessExitCodes $childPowerShell }
     $payloadSource = Join-Path $expectedRoot 'tools/windows-scoped-runner/fixtures/PayloadFixture.cs'
     $payloadExe = Join-Path $buildRoot 'PayloadFixture.exe'
     if ($CompilerClosureOnly) { Save-OwnedJobMembers 'before-compiler' }
-    if (!$CreationFailureFixturesOnly -and !$DriverOnly -and !$PublicToolsOnly -and !$MonitorDeathFixtureOnly) { Invoke-OwnedProcess $compiler @('/target:exe','/main:PayloadFixture',('/out:'+$payloadExe),$payloadSource) 'compile-PayloadFixture' 180 }
+    if (!$DeadlineFixturesOnly -and !$CreationFailureFixturesOnly -and !$DriverOnly -and !$PublicToolsOnly -and !$MonitorDeathFixtureOnly) { Invoke-OwnedProcess $compiler @('/target:exe','/main:PayloadFixture',('/out:'+$payloadExe),$payloadSource) 'compile-PayloadFixture' 180 }
     if ($CompilerClosureOnly) { Save-OwnedJobMembers 'after-exact-compiler-exit' }
 
     if ($MonitorDeathFixtureOnly) {
@@ -790,6 +802,12 @@ if ($success -and $BuildOnly) {
     $manifest = @('compiler_sha256=' + (Get-FileHash -LiteralPath $compiler -Algorithm SHA256).Hash.ToLowerInvariant())
     if ($CreationFailureFixturesOnly) {
         $manifest += 'creation_control_defines='+(($creationProfiles|ForEach-Object{'SCOPED_RUNNER_TESTING,SCOPED_RUNNER_'+$_}) -join ';')
+    }
+    if ($DeadlineFixturesOnly) {
+        $manifest += 'deadline_runner_defines=SCOPED_RUNNER_TESTING,SCOPED_RUNNER_MONITOR_DEADLINE_CONTROL'
+        $manifest += 'deadline_absolute_driver_defines=SCOPED_RUNNER_TESTING,SCOPED_RUNNER_DRIVER_ABSOLUTE_CONTROL'
+        $manifest += 'deadline_watchdog_driver_defines=SCOPED_RUNNER_TESTING,SCOPED_RUNNER_DRIVER_WATCHDOG_CONTROL'
+        $manifest += 'deadline_payload_defines=NONE'
     }
     $manifest += @($expected.Keys | Sort-Object | ForEach-Object { "$($expected[$_])  $_" })
     $manifest += @(Get-ChildItem -LiteralPath $buildRoot -File | Sort-Object Name | ForEach-Object { "$((Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant())  build/$($_.Name)" })
