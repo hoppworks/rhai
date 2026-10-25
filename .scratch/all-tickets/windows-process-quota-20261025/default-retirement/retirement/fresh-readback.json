@@ -1,0 +1,7 @@
+{
+  "observed_line": "DEFAULT_BUILD_ABSENT=True",
+  "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\quota-build-e6ce6222dba147a8b43b2c79187d3184",
+  "scope_present": false,
+  "screenshot_sha256": "9b3277bcb5f5192c1e0546aeb5235a2376321fb6138b38a467404ddd9cef2425",
+  "basis": "independent read-only Test-Path from PowerShell console after cleanup receipt"
+}

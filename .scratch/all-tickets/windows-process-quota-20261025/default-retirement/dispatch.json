@@ -1,0 +1,13 @@
+{
+  "host_utc": "2026-10-25T16:44:56.526221+00:00",
+  "expiry_host_utc": "2026-10-25T17:01:47.008186+00:00",
+  "medium_sha256": "6377ba8c22fb279be0bdf528c80410ef89f21eb8a59cfd62e1d6f7dd14ab95e1",
+  "serial_inode": 126689632,
+  "serial_offset": 66788,
+  "source_sha256": "52c2ca339bddd4ea5c20bd5388594a743586c15d5610ac6c15455d57242d348a",
+  "manifest_sha256": "0f117068ced7f85150a99684b45afe96f873639022fc7e0e8534f9968eff1ca5",
+  "collector_source_sha256": "b81d00ecd93842c4774e4a52ebdf549bc97bc2b4af796208ef3b544e86add936",
+  "command": "if ((get-filehash e:\\cleanup.ps1).hash -eq '52c2ca339bddd4ea5c20bd5388594a743586c15d5610ac6c15455d57242d348a') { & ([scriptblock]::create((get-content e:\\cleanup.ps1 -raw))) -ManifestSha256 '0f117068ced7f85150a99684b45afe96f873639022fc7e0e8534f9968eff1ca5' } else { throw 'source mismatch' }",
+  "readback_only": true,
+  "native_compilers_or_drivers": 0
+}

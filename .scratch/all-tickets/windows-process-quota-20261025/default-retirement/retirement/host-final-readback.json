@@ -1,0 +1,8 @@
+{
+  "readback_utc": "2026-10-25T16:53:39.256417+00:00",
+  "host_stage_absent": true,
+  "own_media_absent": true,
+  "original_media_present": true,
+  "domblklist": " Type   Device   Target   Source\n---------------------------------------------------------------------------------------------------------------------------------\n file   disk     sda      /var/lib/libvirt/images/rhai-win11-quality/system.qcow2\n file   cdrom    sdb      /var/lib/libvirt/images/rhai-win11-quality/work-retirement-bounds-20261009-c18e85827e6f4404.iso\n file   cdrom    sdc      /var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/monitor-fixture02.iso\n\n",
+  "foreign_resources_touched": false
+}

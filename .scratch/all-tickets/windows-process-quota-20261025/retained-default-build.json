@@ -20,9 +20,10 @@
     "process_disposed": true,
     "owned_executables_stopped": true
   },
-  "remaining_compatible_reuse": true,
-  "physical_build_available": true,
-  "last_verified": "retirement02 receipt: all three physical binary hashes and manifest checked before and after removal of other scopes",
+  "remaining_compatible_reuse": false,
+  "physical_build_available": false,
+  "last_verified": "2026-10-25T16:53:39.256417+00:00 workhorse: exact original guest scope absent, two own ISOs and 13-file stage absent, original sdb/sdc restored; see default-retirement/proof.md",
   "accepted_quota_fixture_available": false,
-  "accepted_quota_fixture_retired": true
+  "accepted_quota_fixture_retired": true,
+  "retirement_proof": "windows-process-quota-20261025/default-retirement/proof.md"
 }

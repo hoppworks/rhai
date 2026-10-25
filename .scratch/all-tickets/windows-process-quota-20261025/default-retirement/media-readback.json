@@ -1,0 +1,10 @@
+{
+  "source": "/var/roothome/projects/rhai-default-build-retirement-20261025-278b19c6e05ac1725763aa778e031945",
+  "medium": "/var/lib/libvirt/images/rhai-win11-quality/default-build-readback-278b19c6e05ac1725763aa778e031945.iso",
+  "sha256": "6377ba8c22fb279be0bdf528c80410ef89f21eb8a59cfd62e1d6f7dd14ab95e1",
+  "files": {
+    "cleanup-host-manifest.json": "0f117068ced7f85150a99684b45afe96f873639022fc7e0e8534f9968eff1ca5",
+    "cleanup.ps1": "52c2ca339bddd4ea5c20bd5388594a743586c15d5610ac6c15455d57242d348a"
+  },
+  "native_started": false
+}

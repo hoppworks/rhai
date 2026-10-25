@@ -1,0 +1,10 @@
+[
+  {
+    "creation": 134374148821174672,
+    "source": "Win32_Process current census",
+    "original_alive": false,
+    "pid": 3948,
+    "pid_recycled": false,
+    "observed_creation": 0
+  }
+]

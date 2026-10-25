@@ -1,0 +1,63 @@
+{
+  "root": "/var/roothome/projects/rhai-default-build-retirement-20261025-278b19c6e05ac1725763aa778e031945",
+  "files": {
+    "cleanup.ps1": {
+      "size": 6072,
+      "sha256": "52c2ca339bddd4ea5c20bd5388594a743586c15d5610ac6c15455d57242d348a"
+    },
+    "cleanup-host-manifest.json": {
+      "size": 2567,
+      "sha256": "0f117068ced7f85150a99684b45afe96f873639022fc7e0e8534f9968eff1ca5"
+    },
+    "binding.json": {
+      "size": 644,
+      "sha256": "2e90542cff33252d2325dff9d2cc2fe5386f292650f8a20a2742621f8c5306b8"
+    },
+    "assemble-medium.py": {
+      "size": 1423,
+      "sha256": "9d2deb21a769a61b33f5951db79f1d0193b8c3749d93f94b8182c213ed446f8c"
+    },
+    "console-key-input.py": {
+      "size": 1149,
+      "sha256": "cee8cf1139b8f817e2b49e99013c7ce7f93a5b4319875fa7cb4f4c31a8367929"
+    },
+    "media-readback.json": {
+      "size": 544,
+      "sha256": "49782f7b3cfff3062d513be54bfc0d416495d6774221b166c29be1b907baf2e0"
+    },
+    "collect-live-serial.py": {
+      "size": 3263,
+      "sha256": "b81d00ecd93842c4774e4a52ebdf549bc97bc2b4af796208ef3b544e86add936"
+    },
+    "serial-all-original.bin": {
+      "size": 3168858,
+      "sha256": "9e24fbd0b88ec5594e9af35d9408b3830f08e77936f2cdd3ff2c9107d00c04f0"
+    },
+    "serial-collection.json": {
+      "size": 322,
+      "sha256": "2a989e28e0927eb68c931af34302537368747a0b6d23c0bf8e8db281a3a6c842"
+    },
+    "retirement/cleanup.ps1": {
+      "size": 8572,
+      "sha256": "f769d427a1c5ea7e257c20f1fc21d405ada2ba36ca2a4bd7adcd18b5081c1237"
+    },
+    "retirement/cleanup-host-manifest.json": {
+      "size": 10634,
+      "sha256": "470d95f498846bca40a0d6508a9bdfd18d0ba00a8855c4fd2291294b2db6d607"
+    },
+    "retirement/media-readback.json": {
+      "size": 557,
+      "sha256": "9815b4cee7f234ad9fe51e515728cde25c9998debfce9efea3cb34ec3f6d1cc9"
+    },
+    "retirement/serial-original.bin": {
+      "size": 1089,
+      "sha256": "bef2f1c71eed7aa58856be0179b174a86aae28242ba1ada36cb6158f1822f752"
+    }
+  },
+  "directories": [
+    "retirement"
+  ],
+  "archive": "host-stage-export.tar",
+  "archive_sha256": "4cd1e709baf80289efbfc8813a9aebe4c42fcb4118f3303e6446e111ce25a925",
+  "archived_all_files": true
+}

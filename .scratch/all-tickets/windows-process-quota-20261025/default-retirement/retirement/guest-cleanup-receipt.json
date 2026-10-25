@@ -1,0 +1,14 @@
+{
+  "nonce": "278b19c6e05ac1725763aa778e031945",
+  "manifest_sha256": "470d95f498846bca40a0d6508a9bdfd18d0ba00a8855c4fd2291294b2db6d607",
+  "host_receipt_sha256": "004639806b019a8d99c2a2ee096ca82701b38f3399e3d9f7572155308789a74d",
+  "actor_check_count": 1,
+  "actor_checks_sha256": "5194210f1eceb5952a8710b580f574fe0bd22074dfaa14e91505f9b8b7a0239c",
+  "retired": [
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\quota-build-e6ce6222dba147a8b43b2c79187d3184"
+  ],
+  "all_scopes_absent": true,
+  "original_build_retired": true,
+  "foreign_resources_touched": false,
+  "failure_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+}

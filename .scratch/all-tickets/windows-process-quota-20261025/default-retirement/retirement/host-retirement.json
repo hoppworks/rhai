@@ -1,0 +1,15 @@
+{
+  "retired_media": {
+    "/var/lib/libvirt/images/rhai-win11-quality/default-build-readback-278b19c6e05ac1725763aa778e031945.iso": "6377ba8c22fb279be0bdf528c80410ef89f21eb8a59cfd62e1d6f7dd14ab95e1",
+    "/var/lib/libvirt/images/rhai-win11-quality/default-build-retirement-278b19c6e05ac1725763aa778e031945.iso": "66cde43eae36095b1b02d053ab346f39a41b563201a50eb044584d4e1beadeac"
+  },
+  "retired_media_count": 2,
+  "original_sdc_restored": "/var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/monitor-fixture02.iso",
+  "original_sdb_preserved": true,
+  "host_staging": "/var/roothome/projects/rhai-default-build-retirement-20261025-278b19c6e05ac1725763aa778e031945",
+  "host_staging_files": 13,
+  "host_staging_directories": 1,
+  "host_staging_absent": true,
+  "all_exact_media_absent": true,
+  "foreign_resources_touched": false
+}

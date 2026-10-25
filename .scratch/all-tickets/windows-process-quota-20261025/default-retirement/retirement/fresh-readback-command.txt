@@ -1,0 +1,1 @@
+'DEFAULT_BUILD_ABSENT=' + (-not (Test-Path 'C:\Users\RhaiTest\.local\share\agent-builds\rhai\quota-build-e6ce6222dba147a8b43b2c79187d3184'))

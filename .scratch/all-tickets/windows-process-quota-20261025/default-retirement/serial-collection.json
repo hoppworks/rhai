@@ -1,0 +1,18 @@
+{
+  "frames": 1640,
+  "last_sequence": 1639,
+  "bytes": 3168858,
+  "sha256": "9e24fbd0b88ec5594e9af35d9408b3830f08e77936f2cdd3ff2c9107d00c04f0",
+  "sources": [
+    {
+      "inode": 126689632,
+      "start": 66788
+    },
+    {
+      "inode": 126689886,
+      "start": 0
+    }
+  ],
+  "end_seen": true,
+  "read_only": true
+}
