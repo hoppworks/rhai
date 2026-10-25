@@ -1,0 +1,30 @@
+{
+  "features": "testing-environ,sys,metadata",
+  "executables": {
+    "sys_env": {
+      "path": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/target/debug/deps/sys_env-fad259a454284f7b",
+      "sha256": "0246ce7f5a3d0ff5642437104e7408265a5261df8a25dc047df365f6173a1337",
+      "fresh": false
+    },
+    "sys_policy": {
+      "path": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/target/debug/deps/sys_policy-3b25ec1590253e33",
+      "sha256": "561d36447de4b6216bb3695ebedd270c2aa6921cb15a06ba0fd827af1a0a3d3a",
+      "fresh": false
+    },
+    "sys_fs": {
+      "path": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/target/debug/deps/sys_fs-4e007274d42e3c00",
+      "sha256": "a0de1d2184d8084177994f789d7f155c22c3b07d8dc4e7d1c5443ed034b86be7",
+      "fresh": false
+    }
+  },
+  "library_artifacts": [
+    {
+      "kind": "rhai-lib",
+      "fresh": true,
+      "filenames": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/target/debug/deps/librhai-5cc615d264854cf8.rlib",
+        "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/target/debug/deps/librhai-5cc615d264854cf8.rmeta"
+      ]
+    }
+  ]
+}

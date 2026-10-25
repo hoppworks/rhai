@@ -1,0 +1,7 @@
+error: failed to load source for dependency `rustyline`
+
+Caused by:
+  Unable to update https://github.com/schungx/rustyline?branch=v15_fake#8c27e028
+
+Caused by:
+  can't checkout from 'https://github.com/schungx/rustyline': you are in the offline mode (--offline)

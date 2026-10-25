@@ -1,0 +1,12 @@
+
+running 7 tests
+test test_cwd_matches_process ... ok
+test test_env_allow_list_unset_variable ... ok
+test test_env_allow_list_value ... ok
+test test_env_default_policy_hides_all ... ok
+test test_env_var_non_utf8 ... ok
+test test_env_var_set_and_unset ... ok
+test test_env_vars_all ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+

@@ -1,0 +1,431 @@
+{
+  "base": "fbb0af29e1a54922875e673bb27e17ed9b102bf0",
+  "nonce": "23772744e88b4fbbb0d61632a74ee2f3",
+  "runtime": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90",
+  "source": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/source",
+  "accepted": true,
+  "commands": [
+    {
+      "argv": [
+        "/var/roothome/.rustup/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+        "--version",
+        "--verbose"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/source",
+      "label": "rustc-version",
+      "bound_seconds": 15,
+      "exit": 0,
+      "elapsed_seconds": 0.004829411976970732
+    },
+    {
+      "argv": [
+        "/var/roothome/.rustup/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+        "--version"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/source",
+      "label": "cargo-version",
+      "bound_seconds": 15,
+      "exit": 0,
+      "elapsed_seconds": 0.0020810390124097466
+    },
+    {
+      "argv": [
+        "uname",
+        "-a"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/source",
+      "label": "os",
+      "bound_seconds": 15,
+      "exit": 0,
+      "elapsed_seconds": 0.0005265370127744973
+    },
+    {
+      "argv": [
+        "df",
+        "-B1",
+        "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/source",
+      "label": "capacity",
+      "bound_seconds": 15,
+      "exit": 0,
+      "elapsed_seconds": 0.0006676670163869858
+    },
+    {
+      "argv": [
+        "free",
+        "-b"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/source",
+      "label": "memory",
+      "bound_seconds": 15,
+      "exit": 0,
+      "elapsed_seconds": 0.001784570049494505
+    },
+    {
+      "argv": [
+        "findmnt",
+        "-T",
+        "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90",
+        "-no",
+        "FSTYPE,SOURCE,TARGET"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/source",
+      "label": "filesystem",
+      "bound_seconds": 15,
+      "exit": 0,
+      "elapsed_seconds": 0.0008726450032554567
+    },
+    {
+      "argv": [
+        "/var/roothome/.rustup/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+        "metadata",
+        "--locked",
+        "--format-version",
+        "1",
+        "--filter-platform",
+        "x86_64-unknown-linux-gnu"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/source",
+      "label": "locked-metadata",
+      "bound_seconds": 120,
+      "exit": 0,
+      "elapsed_seconds": 2.356787137046922
+    },
+    {
+      "argv": [
+        "/var/roothome/.rustup/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys,metadata",
+        "--no-run",
+        "--message-format=json",
+        "--test",
+        "sys_fs"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/source",
+      "label": "red-base",
+      "bound_seconds": 450,
+      "exit": 0,
+      "elapsed_seconds": 13.514058834000025
+    },
+    {
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/target/debug/deps/sys_fs-4e007274d42e3c00",
+        "--exact",
+        "test_non_utf8_file_name",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/source",
+      "label": "red-test_non_utf8_file_name",
+      "bound_seconds": 90,
+      "exit": 101,
+      "elapsed_seconds": 0.0038770080427639186
+    },
+    {
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/target/debug/deps/sys_fs-4e007274d42e3c00",
+        "--exact",
+        "test_unrestricted_symlinks_follow_host_semantics",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/source",
+      "label": "red-test_unrestricted_symlinks_follow_host_semantics",
+      "bound_seconds": 90,
+      "exit": 101,
+      "elapsed_seconds": 0.0034579900093376637
+    },
+    {
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/target/debug/deps/sys_fs-4e007274d42e3c00",
+        "--exact",
+        "test_unrestricted_symlink_then_parent_uses_host_resolution",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/source",
+      "label": "red-test_unrestricted_symlink_then_parent_uses_host_resolution",
+      "bound_seconds": 90,
+      "exit": 101,
+      "elapsed_seconds": 0.0035153600038029253
+    },
+    {
+      "argv": [
+        "/var/roothome/.rustup/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys,metadata",
+        "--no-run",
+        "--message-format=json",
+        "--test",
+        "sys_fs",
+        "--test",
+        "sys_policy",
+        "--test",
+        "sys_env"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/source",
+      "label": "green-0",
+      "bound_seconds": 450,
+      "exit": 0,
+      "elapsed_seconds": 0.9193862159736454
+    },
+    {
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/target/debug/deps/sys_fs-4e007274d42e3c00",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/source",
+      "label": "green-0-sys_fs",
+      "bound_seconds": 90,
+      "exit": 0,
+      "elapsed_seconds": 0.17893771297531202
+    },
+    {
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/target/debug/deps/sys_policy-3b25ec1590253e33",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/source",
+      "label": "green-0-sys_policy",
+      "bound_seconds": 90,
+      "exit": 0,
+      "elapsed_seconds": 0.06859728001290932
+    },
+    {
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/target/debug/deps/sys_env-fad259a454284f7b",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/source",
+      "label": "green-0-sys_env",
+      "bound_seconds": 90,
+      "exit": 0,
+      "elapsed_seconds": 0.07225416001165286
+    },
+    {
+      "argv": [
+        "/var/roothome/.rustup/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys,metadata,sync",
+        "--no-run",
+        "--message-format=json",
+        "--test",
+        "sys_fs",
+        "--test",
+        "sys_policy",
+        "--test",
+        "sys_env"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/source",
+      "label": "green-1",
+      "bound_seconds": 450,
+      "exit": 0,
+      "elapsed_seconds": 6.882281861966476
+    },
+    {
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/target/debug/deps/sys_fs-21b8b4da1023ca67",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/source",
+      "label": "green-1-sys_fs",
+      "bound_seconds": 90,
+      "exit": 0,
+      "elapsed_seconds": 0.18352876597782597
+    },
+    {
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/target/debug/deps/sys_policy-acf1923ec60cf178",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/source",
+      "label": "green-1-sys_policy",
+      "bound_seconds": 90,
+      "exit": 0,
+      "elapsed_seconds": 0.10317299299640581
+    },
+    {
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/target/debug/deps/sys_env-47bac4c48a23112f",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/source",
+      "label": "green-1-sys_env",
+      "bound_seconds": 90,
+      "exit": 0,
+      "elapsed_seconds": 0.07251677697058767
+    },
+    {
+      "argv": [
+        "/var/roothome/.rustup/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys,metadata,unchecked",
+        "--no-run",
+        "--message-format=json",
+        "--test",
+        "sys_fs",
+        "--test",
+        "sys_policy",
+        "--test",
+        "sys_env"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/source",
+      "label": "green-2",
+      "bound_seconds": 450,
+      "exit": 0,
+      "elapsed_seconds": 6.236565921048168
+    },
+    {
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/target/debug/deps/sys_fs-5838b4f47c027a53",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/source",
+      "label": "green-2-sys_fs",
+      "bound_seconds": 90,
+      "exit": 0,
+      "elapsed_seconds": 0.17949218896683306
+    },
+    {
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/target/debug/deps/sys_policy-64d1b4fc9f438513",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/source",
+      "label": "green-2-sys_policy",
+      "bound_seconds": 90,
+      "exit": 0,
+      "elapsed_seconds": 0.06840333103900775
+    },
+    {
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/target/debug/deps/sys_env-0a323e69b93e6246",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/source",
+      "label": "green-2-sys_env",
+      "bound_seconds": 90,
+      "exit": 0,
+      "elapsed_seconds": 0.07246670802123845
+    },
+    {
+      "argv": [
+        "/var/roothome/.rustup/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys,metadata,sync,unchecked",
+        "--no-run",
+        "--message-format=json",
+        "--test",
+        "sys_fs",
+        "--test",
+        "sys_policy",
+        "--test",
+        "sys_env"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/source",
+      "label": "green-3",
+      "bound_seconds": 450,
+      "exit": 0,
+      "elapsed_seconds": 6.309631794982124
+    },
+    {
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/target/debug/deps/sys_fs-f1d195fd0548f824",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/source",
+      "label": "green-3-sys_fs",
+      "bound_seconds": 90,
+      "exit": 0,
+      "elapsed_seconds": 0.17696941399481148
+    },
+    {
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/target/debug/deps/sys_policy-1a78af2215cb05f7",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/source",
+      "label": "green-3-sys_policy",
+      "bound_seconds": 90,
+      "exit": 0,
+      "elapsed_seconds": 0.07198626000899822
+    },
+    {
+      "argv": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/target/debug/deps/sys_env-715d48c6eb01919b",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/source",
+      "label": "green-3-sys_env",
+      "bound_seconds": 90,
+      "exit": 0,
+      "elapsed_seconds": 0.07231183897238225
+    }
+  ],
+  "counts": {
+    "cargo_builds": 6,
+    "red_tests": 3,
+    "green_targets": 12,
+    "metadata_queries": 2
+  },
+  "counts_scope": "cumulative_package_including_preparation01_and_preparation02",
+  "prior_consumption": {
+    "cargo_builds": 1,
+    "red_tests": 0,
+    "green_targets": 0,
+    "metadata_queries": 1
+  },
+  "environment": {
+    "rustc-version": "rustc 1.77.2 (25ef9e3d8 2024-04-09)\nbinary: rustc\ncommit-hash: 25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04\ncommit-date: 2024-04-09\nhost: x86_64-unknown-linux-gnu\nrelease: 1.77.2\nLLVM version: 17.0.6\n",
+    "cargo-version": "cargo 1.77.2 (e52e36006 2024-03-26)\n",
+    "os": "Linux workhorse 7.2.9-ogc3.1.fc44.x86_64 #1 SMP PREEMPT_DYNAMIC Mon Oct 12 22:17:26 UTC 2026 x86_64 GNU/Linux\n",
+    "capacity": "Filesystem         1B-blocks          Used    Available Use% Mounted on\n/dev/nvme0n1p3 1997621166080 1851589095424 111893843968  95% /var\n",
+    "memory": "               total        used        free      shared  buff/cache   available\nMem:     98776084480 19690803200  2963582976   121876480 80219230208 79085281280\nSwap:    17179865088  1596862464 15583002624\n",
+    "filesystem": "btrfs /dev/nvme0n1p3[/var] /var\n"
+  },
+  "failure": "",
+  "source_pins": {
+    "Cargo.toml": "cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e",
+    "src/packages/sys/fs.rs": "5721967d6fce9f5a463432ccab46caf95a334c6c45ab9f96113df4e4ecf6e4e6",
+    "tests/sys_fs.rs": "e1d0e35aa855341a5b19ad92e49f2e9f8f4075f262ba2e050a7a7deb68afd9ba",
+    "tests/sys_policy.rs": "d7da166566d660277717cb87bfc9d26696005f4eeecdcd07e75e8ee64e4131fe",
+    "tests/sys_env.rs": "bf47b0d7fc5fb5155fdf12574d8d380818805718fa950206c446ba2809a5cdea",
+    "tests/sys_support/mod.rs": "96faddd40f6162c4893af1d510b1acd77de645c9e7d2e6454a7ab1dde81f7872"
+  },
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "non_utf8_prerequisite": true,
+  "private_git_databases": [
+    "no-std-compat-1a8bbbe2479aaf7a",
+    "no-std-compat-f7c23488b2e6b399",
+    "rustyline-1e75f5f8f9628c4f",
+    "rustyline-36d35ad65bb96db4"
+  ],
+  "metadata_package_count": 51,
+  "mutated_sys_fs_sha256": "05a891c8e2cb90d6c74c31b4fc2906d36f20631c09043389b5b427d9387f810e",
+  "fixture_temp_absent": true,
+  "parent_context_preserved": true,
+  "remaining_capacity_bytes": 111807967232
+}

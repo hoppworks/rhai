@@ -1,0 +1,11 @@
+{
+  "host_staging_absent": true,
+  "scopes_absent": [
+    "/var/roothome/.local/share/agent-builds/rhai/linux-fs-23772744e88b4fbbb0d61632a74ee2f3",
+    "/var/roothome/.local/share/agent-builds/rhai/linux-fs-recovery-b9a41f91c65049ceaa322ab54d0839b2",
+    "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e"
+  ],
+  "files_retired": 108,
+  "local_transfer_absent": true,
+  "accepted_evidence_preserved": true
+}

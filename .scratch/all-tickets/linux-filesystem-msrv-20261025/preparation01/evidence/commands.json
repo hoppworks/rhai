@@ -1,0 +1,92 @@
+[
+  {
+    "argv": [
+      "/var/roothome/.rustup/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+      "--version",
+      "--verbose"
+    ],
+    "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-23772744e88b4fbbb0d61632a74ee2f3/agent-build-en7y7an1/source",
+    "label": "rustc-version",
+    "bound_seconds": 15,
+    "exit": 0,
+    "elapsed_seconds": 0.004932943033054471
+  },
+  {
+    "argv": [
+      "/var/roothome/.rustup/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "--version"
+    ],
+    "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-23772744e88b4fbbb0d61632a74ee2f3/agent-build-en7y7an1/source",
+    "label": "cargo-version",
+    "bound_seconds": 15,
+    "exit": 0,
+    "elapsed_seconds": 0.013234248966909945
+  },
+  {
+    "argv": [
+      "uname",
+      "-a"
+    ],
+    "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-23772744e88b4fbbb0d61632a74ee2f3/agent-build-en7y7an1/source",
+    "label": "os",
+    "bound_seconds": 15,
+    "exit": 0,
+    "elapsed_seconds": 0.0004013379802927375
+  },
+  {
+    "argv": [
+      "df",
+      "-B1",
+      "/var/roothome/.local/share/agent-builds/rhai/linux-fs-23772744e88b4fbbb0d61632a74ee2f3/agent-build-en7y7an1"
+    ],
+    "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-23772744e88b4fbbb0d61632a74ee2f3/agent-build-en7y7an1/source",
+    "label": "capacity",
+    "bound_seconds": 15,
+    "exit": 0,
+    "elapsed_seconds": 0.001619191956706345
+  },
+  {
+    "argv": [
+      "free",
+      "-b"
+    ],
+    "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-23772744e88b4fbbb0d61632a74ee2f3/agent-build-en7y7an1/source",
+    "label": "memory",
+    "bound_seconds": 15,
+    "exit": 0,
+    "elapsed_seconds": 0.0017946609877981246
+  },
+  {
+    "argv": [
+      "findmnt",
+      "-T",
+      "/var/roothome/.local/share/agent-builds/rhai/linux-fs-23772744e88b4fbbb0d61632a74ee2f3/agent-build-en7y7an1",
+      "-no",
+      "FSTYPE,SOURCE,TARGET"
+    ],
+    "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-23772744e88b4fbbb0d61632a74ee2f3/agent-build-en7y7an1/source",
+    "label": "filesystem",
+    "bound_seconds": 15,
+    "exit": 0,
+    "elapsed_seconds": 0.0009965849458239973
+  },
+  {
+    "argv": [
+      "/var/roothome/.rustup/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "test",
+      "--locked",
+      "--offline",
+      "--features",
+      "testing-environ,sys,metadata",
+      "--no-run",
+      "--message-format=json",
+      "--test",
+      "sys_fs"
+    ],
+    "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-23772744e88b4fbbb0d61632a74ee2f3/agent-build-en7y7an1/source",
+    "label": "red-base",
+    "bound_seconds": 450,
+    "exit": 101,
+    "elapsed_seconds": 0.02596251101931557
+  }
+]

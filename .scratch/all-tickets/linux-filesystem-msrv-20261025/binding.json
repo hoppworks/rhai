@@ -1,0 +1,60 @@
+{
+  "base": "fbb0af29e1a54922875e673bb27e17ed9b102bf0",
+  "nonce": "23772744e88b4fbbb0d61632a74ee2f3",
+  "transfer_source_path": "/Users/hoppworks/.local/share/agent-builds/rhai/linux-fs-input-23772744e88b4fbbb0d61632a74ee2f3",
+  "transfer_expiry_utc": "2026-10-25T12:58:10.894947+00:00",
+  "host_staging": "/var/roothome/projects/rhai-linux-fs-20261025-23772744",
+  "session_scope": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e",
+  "source_lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "outer_seconds": 1500,
+  "cargo_build_seconds": 450,
+  "test_seconds": 90,
+  "cargo_jobs": 2,
+  "profile_features": [
+    "testing-environ,sys,metadata",
+    "testing-environ,sys,metadata,sync",
+    "testing-environ,sys,metadata,unchecked",
+    "testing-environ,sys,metadata,sync,unchecked"
+  ],
+  "targets": [
+    "sys_fs",
+    "sys_policy",
+    "sys_env"
+  ],
+  "controlled_tests": [
+    "test_non_utf8_file_name",
+    "test_unrestricted_symlinks_follow_host_semantics",
+    "test_unrestricted_symlink_then_parent_uses_host_resolution"
+  ],
+  "source_pins": {
+    "Cargo.toml": "cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e",
+    "src/packages/sys/fs.rs": "5721967d6fce9f5a463432ccab46caf95a334c6c45ab9f96113df4e4ecf6e4e6",
+    "tests/sys_fs.rs": "e1d0e35aa855341a5b19ad92e49f2e9f8f4075f262ba2e050a7a7deb68afd9ba",
+    "tests/sys_policy.rs": "d7da166566d660277717cb87bfc9d26696005f4eeecdcd07e75e8ee64e4131fe",
+    "tests/sys_env.rs": "bf47b0d7fc5fb5155fdf12574d8d380818805718fa950206c446ba2809a5cdea",
+    "tests/sys_support/mod.rs": "96faddd40f6162c4893af1d510b1acd77de645c9e7d2e6454a7ab1dde81f7872"
+  },
+  "archive_sha256": "d6a01eff9570209794d05bace0276da158a06560d1bbafa955d2bcba854e685c",
+  "archive_bytes": 7004160,
+  "runner_sha256": "f4d2cc5e5b77562b9509c7841166fd71e594d25a4cb7e129ccfd7655ca56e1f1",
+  "source_ready": "Combined independent source review passed; exact archive/lock bytes and all tracked members match bound base. RUSTC_BOOTSTRAP cleared in private child environment for genuine stable MSRV.",
+  "preparation_history": {
+    "original_cargo_build_calls": 1,
+    "original_test_executions": 0,
+    "cause": "Private Cargo home copied registry cache/index but omitted the two pinned Git patch object DBs. No product assertion or rustc compilation reached.",
+    "recovery": "Read-only copy only matching rustyline/no-std-compat Git DBs, reconstruct own checkouts offline; full locked/filtered metadata resolution before build. No network/install/lock change.",
+    "source_scope_history": "First runtime/scope removed, original outputs preserved under preparation01.",
+    "recovery02": "Shared cache visibly contains arbitrary1.4.2/index entry but Cargo1.77 private offline resolution cannot match it; cache-layout/identity compatibility is an unconfirmed cause. Stop copying registry layouts; fresh private Cargo registry with locked online metadata/builds, no version/lock/source changes or global writes. Existing pinned Git DBs alone reused. First recovery ended before rustc/tests; cumulative counts preserved."
+  },
+  "prior_consumption": {
+    "cargo_builds": 1,
+    "red_tests": 0,
+    "green_targets": 0,
+    "metadata_queries": 1
+  },
+  "prior_session_scope": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-23772744e88b4fbbb0d61632a74ee2f3",
+  "prior_session_scopes": [
+    "/var/roothome/.local/share/agent-builds/rhai/linux-fs-23772744e88b4fbbb0d61632a74ee2f3",
+    "/var/roothome/.local/share/agent-builds/rhai/linux-fs-recovery-b9a41f91c65049ceaa322ab54d0839b2"
+  ]
+}

@@ -1,0 +1,5 @@
+thread 'test_unrestricted_symlinks_follow_host_semantics' panicked at tests/sys_fs.rs:534:5:
+assertion `left == right` failed: CONTROL_F22_LINK_SENSITIVITY
+  left: "absolute target"
+ right: "WRONG_F22_TARGET"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace

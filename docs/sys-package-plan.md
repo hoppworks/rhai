@@ -1311,12 +1311,27 @@ the gated feature only (D8), and `sys` incompatible with `no_object` via `compil
   the canonical form with that prefix stripped. The current configured-root lexical
   normalization is not the accepted contract for symlink/parent paths: P14 requires
   OS-selected root semantics. Wine evidence does not replace native Windows proof.
-- Unrestricted mode currently opens the nearest existing ancestor as an ambient `Dir`.
-  The review demonstrated that this imposes unintended symlink restrictions; F22
-  requires ordinary host semantics. The mechanism is historical, not a design mandate.
+- The reviewed pre-repair unrestricted implementation opened the nearest existing
+  ancestor as an ambient `Dir`, imposing unintended symlink restrictions. F22
+  requires ordinary host semantics. The Linux result below verifies the repaired
+  source at its stated scope; other-platform evidence remains independently required.
 - F19 requires a native filesystem that supports creating the non-UTF-8 fixture.
   The reviewed APFS fixture-creation failure is a coverage limitation; repair the
   fixture handling and obtain appropriate native evidence without weakening NotUtf8.
+
+### Native Linux F19/F22 result (2026-10-25)
+
+The F19/F22 native Linux/Rust1.77.2 row is now accepted at Rust source
+`fbb0af29e1a54922875e673bb27e17ed9b102bf0`: three intended assertion controls and
+restored full `sys_fs`, `sys_policy`, `sys_env` in base, sync, unchecked and
+sync+unchecked profiles, all with testing-environ,sys,metadata. Real btrfs supports
+the byte-name fixture; all three targeted regressions actually ran in every
+profile. See [the source/lock-bound proof and combined review](../.scratch/all-tickets/linux-filesystem-msrv-20261025/proof.md).
+The APFS fixture limitation above remains platform-specific. This result closes
+only the named Linux row; it neither certifies Windows/macOS nor the full release
+matrix. Both pre-assertion dependency preparations and cumulative consumption are
+preserved. The final runtime, source-transfer and staging copies are retired;
+reuse the accepted evidence rather than historical deleted build paths.
 
 ## Appendix A: precedents, condensed
 

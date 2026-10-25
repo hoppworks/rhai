@@ -1,0 +1,90 @@
+[
+  {
+    "argv": [
+      "/var/roothome/.rustup/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+      "--version",
+      "--verbose"
+    ],
+    "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-recovery-b9a41f91c65049ceaa322ab54d0839b2/agent-build-gre1pe8j/source",
+    "label": "rustc-version",
+    "bound_seconds": 15,
+    "exit": 0,
+    "elapsed_seconds": 0.005163920985069126
+  },
+  {
+    "argv": [
+      "/var/roothome/.rustup/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "--version"
+    ],
+    "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-recovery-b9a41f91c65049ceaa322ab54d0839b2/agent-build-gre1pe8j/source",
+    "label": "cargo-version",
+    "bound_seconds": 15,
+    "exit": 0,
+    "elapsed_seconds": 0.0020854779868386686
+  },
+  {
+    "argv": [
+      "uname",
+      "-a"
+    ],
+    "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-recovery-b9a41f91c65049ceaa322ab54d0839b2/agent-build-gre1pe8j/source",
+    "label": "os",
+    "bound_seconds": 15,
+    "exit": 0,
+    "elapsed_seconds": 0.00145743100438267
+  },
+  {
+    "argv": [
+      "df",
+      "-B1",
+      "/var/roothome/.local/share/agent-builds/rhai/linux-fs-recovery-b9a41f91c65049ceaa322ab54d0839b2/agent-build-gre1pe8j"
+    ],
+    "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-recovery-b9a41f91c65049ceaa322ab54d0839b2/agent-build-gre1pe8j/source",
+    "label": "capacity",
+    "bound_seconds": 15,
+    "exit": 0,
+    "elapsed_seconds": 0.0015649409615434706
+  },
+  {
+    "argv": [
+      "free",
+      "-b"
+    ],
+    "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-recovery-b9a41f91c65049ceaa322ab54d0839b2/agent-build-gre1pe8j/source",
+    "label": "memory",
+    "bound_seconds": 15,
+    "exit": 0,
+    "elapsed_seconds": 0.0017324999789707363
+  },
+  {
+    "argv": [
+      "findmnt",
+      "-T",
+      "/var/roothome/.local/share/agent-builds/rhai/linux-fs-recovery-b9a41f91c65049ceaa322ab54d0839b2/agent-build-gre1pe8j",
+      "-no",
+      "FSTYPE,SOURCE,TARGET"
+    ],
+    "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-recovery-b9a41f91c65049ceaa322ab54d0839b2/agent-build-gre1pe8j/source",
+    "label": "filesystem",
+    "bound_seconds": 15,
+    "exit": 0,
+    "elapsed_seconds": 0.0009375250083394349
+  },
+  {
+    "argv": [
+      "/var/roothome/.rustup/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "metadata",
+      "--locked",
+      "--offline",
+      "--format-version",
+      "1",
+      "--filter-platform",
+      "x86_64-unknown-linux-gnu"
+    ],
+    "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-recovery-b9a41f91c65049ceaa322ab54d0839b2/agent-build-gre1pe8j/source",
+    "label": "offline-metadata",
+    "bound_seconds": 60,
+    "exit": 101,
+    "elapsed_seconds": 0.0387251729844138
+  }
+]

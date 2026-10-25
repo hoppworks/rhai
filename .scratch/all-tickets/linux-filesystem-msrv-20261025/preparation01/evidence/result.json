@@ -1,0 +1,125 @@
+{
+  "base": "fbb0af29e1a54922875e673bb27e17ed9b102bf0",
+  "nonce": "23772744e88b4fbbb0d61632a74ee2f3",
+  "runtime": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-23772744e88b4fbbb0d61632a74ee2f3/agent-build-en7y7an1",
+  "source": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-23772744e88b4fbbb0d61632a74ee2f3/agent-build-en7y7an1/source",
+  "accepted": false,
+  "commands": [
+    {
+      "argv": [
+        "/var/roothome/.rustup/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+        "--version",
+        "--verbose"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-23772744e88b4fbbb0d61632a74ee2f3/agent-build-en7y7an1/source",
+      "label": "rustc-version",
+      "bound_seconds": 15,
+      "exit": 0,
+      "elapsed_seconds": 0.004932943033054471
+    },
+    {
+      "argv": [
+        "/var/roothome/.rustup/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+        "--version"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-23772744e88b4fbbb0d61632a74ee2f3/agent-build-en7y7an1/source",
+      "label": "cargo-version",
+      "bound_seconds": 15,
+      "exit": 0,
+      "elapsed_seconds": 0.013234248966909945
+    },
+    {
+      "argv": [
+        "uname",
+        "-a"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-23772744e88b4fbbb0d61632a74ee2f3/agent-build-en7y7an1/source",
+      "label": "os",
+      "bound_seconds": 15,
+      "exit": 0,
+      "elapsed_seconds": 0.0004013379802927375
+    },
+    {
+      "argv": [
+        "df",
+        "-B1",
+        "/var/roothome/.local/share/agent-builds/rhai/linux-fs-23772744e88b4fbbb0d61632a74ee2f3/agent-build-en7y7an1"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-23772744e88b4fbbb0d61632a74ee2f3/agent-build-en7y7an1/source",
+      "label": "capacity",
+      "bound_seconds": 15,
+      "exit": 0,
+      "elapsed_seconds": 0.001619191956706345
+    },
+    {
+      "argv": [
+        "free",
+        "-b"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-23772744e88b4fbbb0d61632a74ee2f3/agent-build-en7y7an1/source",
+      "label": "memory",
+      "bound_seconds": 15,
+      "exit": 0,
+      "elapsed_seconds": 0.0017946609877981246
+    },
+    {
+      "argv": [
+        "findmnt",
+        "-T",
+        "/var/roothome/.local/share/agent-builds/rhai/linux-fs-23772744e88b4fbbb0d61632a74ee2f3/agent-build-en7y7an1",
+        "-no",
+        "FSTYPE,SOURCE,TARGET"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-23772744e88b4fbbb0d61632a74ee2f3/agent-build-en7y7an1/source",
+      "label": "filesystem",
+      "bound_seconds": 15,
+      "exit": 0,
+      "elapsed_seconds": 0.0009965849458239973
+    },
+    {
+      "argv": [
+        "/var/roothome/.rustup/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+        "test",
+        "--locked",
+        "--offline",
+        "--features",
+        "testing-environ,sys,metadata",
+        "--no-run",
+        "--message-format=json",
+        "--test",
+        "sys_fs"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-23772744e88b4fbbb0d61632a74ee2f3/agent-build-en7y7an1/source",
+      "label": "red-base",
+      "bound_seconds": 450,
+      "exit": 101,
+      "elapsed_seconds": 0.02596251101931557
+    }
+  ],
+  "counts": {
+    "cargo_builds": 1,
+    "red_tests": 0,
+    "green_targets": 0
+  },
+  "environment": {
+    "rustc-version": "rustc 1.77.2 (25ef9e3d8 2024-04-09)\nbinary: rustc\ncommit-hash: 25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04\ncommit-date: 2024-04-09\nhost: x86_64-unknown-linux-gnu\nrelease: 1.77.2\nLLVM version: 17.0.6\n",
+    "cargo-version": "cargo 1.77.2 (e52e36006 2024-03-26)\n",
+    "os": "Linux workhorse 7.2.9-ogc3.1.fc44.x86_64 #1 SMP PREEMPT_DYNAMIC Mon Oct 12 22:17:26 UTC 2026 x86_64 GNU/Linux\n",
+    "capacity": "Filesystem         1B-blocks          Used    Available Use% Mounted on\n/dev/nvme0n1p3 1997621166080 1850316050432 113160302592  95% /var\n",
+    "memory": "               total        used        free      shared  buff/cache   available\nMem:     98776084480 19258695680  9409695744   121987072 74156384256 79517388800\nSwap:    17179865088  1593700352 15586164736\n",
+    "filesystem": "btrfs /dev/nvme0n1p3[/var] /var\n"
+  },
+  "failure": "Traceback (most recent call last):\n  File \"/var/roothome/projects/rhai-linux-fs-20261025-23772744/run.py\", line 78, in <module>\n    red=build(b['profile_features'][0],'red-base',['sys_fs'])\n  File \"/var/roothome/projects/rhai-linux-fs-20261025-23772744/run.py\", line 41, in build\n    item,stdout,stderr=command(args,label,450);assert item['exit']==0,(label,stderr[-4000:])\n                                                      ^^^^^^^^^^^^^^^\nAssertionError: ('red-base', b\"error: failed to load source for dependency `rustyline`\\n\\nCaused by:\\n  Unable to update https://github.com/schungx/rustyline?branch=v15_fake#8c27e028\\n\\nCaused by:\\n  can't checkout from 'https://github.com/schungx/rustyline': you are in the offline mode (--offline)\\n\")\n",
+  "source_pins": {
+    "Cargo.toml": "cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e",
+    "src/packages/sys/fs.rs": "5721967d6fce9f5a463432ccab46caf95a334c6c45ab9f96113df4e4ecf6e4e6",
+    "tests/sys_fs.rs": "e1d0e35aa855341a5b19ad92e49f2e9f8f4075f262ba2e050a7a7deb68afd9ba",
+    "tests/sys_policy.rs": "d7da166566d660277717cb87bfc9d26696005f4eeecdcd07e75e8ee64e4131fe",
+    "tests/sys_env.rs": "bf47b0d7fc5fb5155fdf12574d8d380818805718fa950206c446ba2809a5cdea",
+    "tests/sys_support/mod.rs": "96faddd40f6162c4893af1d510b1acd77de645c9e7d2e6454a7ab1dde81f7872"
+  },
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "non_utf8_prerequisite": true,
+  "mutated_sys_fs_sha256": "05a891c8e2cb90d6c74c31b4fc2906d36f20631c09043389b5b427d9387f810e",
+  "remaining_capacity_bytes": 113160302592
+}

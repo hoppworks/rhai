@@ -1,0 +1,20 @@
+{
+  "features": "testing-environ,sys,metadata",
+  "executables": {
+    "sys_fs": {
+      "path": "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/target/debug/deps/sys_fs-4e007274d42e3c00",
+      "sha256": "e5ff5c7fa3ba7c4ba554d9a798eb74d535172e0b99e5d6bf06102183cc5e1368",
+      "fresh": false
+    }
+  },
+  "library_artifacts": [
+    {
+      "kind": "rhai-lib",
+      "fresh": false,
+      "filenames": [
+        "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/target/debug/deps/librhai-5cc615d264854cf8.rlib",
+        "/var/roothome/.local/share/agent-builds/rhai/linux-fs-fresh-cache-90b93d3bc7a341f295e0c9518bcae56e/agent-build-7ijd1g90/target/debug/deps/librhai-5cc615d264854cf8.rmeta"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/var/roothome/projects/rhai-linux-fs-20261025-23772744/run.py", line 81, in <module>
+    assert item['exit']==0,stderr[-4000:]
+           ^^^^^^^^^^^^^^^
+AssertionError: b"error: no matching package named `arbitrary` found\nlocation searched: registry `crates-io`\nrequired by package `rhai v1.26.1 (/var/roothome/.local/share/agent-builds/rhai/linux-fs-recovery-b9a41f91c65049ceaa322ab54d0839b2/agent-build-gre1pe8j/source)`\nAs a reminder, you're using offline mode (--offline) which can sometimes cause surprising resolution failures, if this error is too confusing you may wish to retry without the offline flag.\n"

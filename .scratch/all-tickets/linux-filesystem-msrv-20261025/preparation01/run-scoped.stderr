@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/var/roothome/projects/rhai-linux-fs-20261025-23772744/run.py", line 78, in <module>
+    red=build(b['profile_features'][0],'red-base',['sys_fs'])
+  File "/var/roothome/projects/rhai-linux-fs-20261025-23772744/run.py", line 41, in build
+    item,stdout,stderr=command(args,label,450);assert item['exit']==0,(label,stderr[-4000:])
+                                                      ^^^^^^^^^^^^^^^
+AssertionError: ('red-base', b"error: failed to load source for dependency `rustyline`\n\nCaused by:\n  Unable to update https://github.com/schungx/rustyline?branch=v15_fake#8c27e028\n\nCaused by:\n  can't checkout from 'https://github.com/schungx/rustyline': you are in the offline mode (--offline)\n")
