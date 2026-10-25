@@ -1,0 +1,63 @@
+diff --git a/src/packages/mod.rs b/src/packages/mod.rs
+index be2b764f4..282f6d472 100644
+--- a/src/packages/mod.rs
++++ b/src/packages/mod.rs
+@@ -14,13 +14,19 @@ pub(crate) mod lang_core;
+ pub(crate) mod logic;
+ pub(crate) mod map_basic;
+ pub(crate) mod math_basic;
+-#[cfg(feature = "net")]
++#[cfg(all(feature = "net", target_family = "wasm"))]
++compile_error!("the `net` feature is not available on WASM targets");
++
++#[cfg(all(feature = "net", not(target_family = "wasm")))]
+ pub mod net;
+ pub(crate) mod pkg_core;
+ pub(crate) mod pkg_std;
+ pub(crate) mod string_basic;
+ pub(crate) mod string_more;
+-#[cfg(feature = "sys")]
++#[cfg(all(feature = "sys", target_family = "wasm"))]
++compile_error!("the `sys` feature is not available on WASM targets");
++
++#[cfg(all(feature = "sys", not(target_family = "wasm")))]
+ pub mod sys;
+ pub(crate) mod time_basic;
+ 
+@@ -44,7 +50,7 @@ pub use pkg_core::CorePackage;
+ pub use pkg_std::StandardPackage;
+ pub use string_basic::BasicStringPackage;
+ pub use string_more::MoreStringPackage;
+-#[cfg(feature = "sys")]
++#[cfg(all(feature = "sys", not(target_family = "wasm")))]
+ pub use sys::SysPackage;
+ #[cfg(not(feature = "no_time"))]
+ pub use time_basic::BasicTimePackage;
+diff --git a/src/packages/net/mod.rs b/src/packages/net/mod.rs
+index 2f17927f2..196f9c686 100644
+--- a/src/packages/net/mod.rs
++++ b/src/packages/net/mod.rs
+@@ -35,9 +35,6 @@
+ #[cfg(feature = "no_std")]
+ compile_error!("the `net` feature requires `std`; it cannot be combined with `no_std`");
+ 
+-#[cfg(target_family = "wasm")]
+-compile_error!("the `net` feature is not available on WASM targets");
+-
+ mod config;
+ mod error;
+ mod listener;
+diff --git a/src/packages/sys/mod.rs b/src/packages/sys/mod.rs
+index 0a49e8034..d0c588cd4 100644
+--- a/src/packages/sys/mod.rs
++++ b/src/packages/sys/mod.rs
+@@ -33,9 +33,6 @@ compile_error!("the `sys` feature requires `std`; it cannot be combined with `no
+ #[cfg(feature = "no_object")]
+ compile_error!("the `sys` feature requires object maps; it cannot be combined with `no_object`");
+ 
+-#[cfg(target_family = "wasm")]
+-compile_error!("the `sys` feature is not available on WASM targets");
+-
+ mod config;
+ mod env;
+ mod error;

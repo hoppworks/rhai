@@ -1,0 +1,9 @@
+    Checking once_cell v1.21.4
+   Compiling ahash v0.8.12
+    Checking wasm-bindgen v0.2.114
+   Compiling smartstring v1.0.1
+   Compiling num-traits v0.2.19
+   Compiling rhai v1.26.1 (/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source)
+    Checking js-sys v0.3.91
+    Checking web-time v1.1.0
+    Finished `dev` profile [unoptimized] target(s) in 5.41s

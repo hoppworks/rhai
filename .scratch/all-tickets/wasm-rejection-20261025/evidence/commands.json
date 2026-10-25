@@ -1,0 +1,205 @@
+[
+  {
+    "argv": [
+      "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc",
+      "--version",
+      "--verbose"
+    ],
+    "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source",
+    "label": "rustc-version",
+    "bound_seconds": 15,
+    "exit": 0,
+    "elapsed_seconds": 0.00446853501489386
+  },
+  {
+    "argv": [
+      "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+      "--version"
+    ],
+    "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source",
+    "label": "cargo-version",
+    "bound_seconds": 15,
+    "exit": 0,
+    "elapsed_seconds": 0.0021032480290159583
+  },
+  {
+    "argv": [
+      "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc",
+      "--print",
+      "cfg",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source",
+    "label": "target-cfg",
+    "bound_seconds": 15,
+    "exit": 0,
+    "elapsed_seconds": 0.0045685540535487235
+  },
+  {
+    "argv": [
+      "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc",
+      "--print",
+      "target-libdir",
+      "--target",
+      "wasm32-unknown-unknown"
+    ],
+    "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source",
+    "label": "target-libdir",
+    "bound_seconds": 15,
+    "exit": 0,
+    "elapsed_seconds": 0.003770949027966708
+  },
+  {
+    "argv": [
+      "uname",
+      "-a"
+    ],
+    "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source",
+    "label": "os",
+    "bound_seconds": 15,
+    "exit": 0,
+    "elapsed_seconds": 0.00037704798160120845
+  },
+  {
+    "argv": [
+      "df",
+      "-B1",
+      "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56"
+    ],
+    "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source",
+    "label": "capacity",
+    "bound_seconds": 15,
+    "exit": 0,
+    "elapsed_seconds": 0.001631519990041852
+  },
+  {
+    "argv": [
+      "free",
+      "-b"
+    ],
+    "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source",
+    "label": "memory",
+    "bound_seconds": 15,
+    "exit": 0,
+    "elapsed_seconds": 0.0016719799605198205
+  },
+  {
+    "argv": [
+      "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+      "metadata",
+      "--locked",
+      "--format-version",
+      "1",
+      "--filter-platform",
+      "wasm32-unknown-unknown"
+    ],
+    "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source",
+    "label": "locked-metadata",
+    "bound_seconds": 120,
+    "exit": 0,
+    "elapsed_seconds": 2.976204092032276
+  },
+  {
+    "argv": [
+      "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+      "check",
+      "--locked",
+      "--lib",
+      "--no-default-features",
+      "--features",
+      "sys",
+      "--target",
+      "wasm32-unknown-unknown",
+      "--message-format=json"
+    ],
+    "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source",
+    "label": "wasm-0",
+    "bound_seconds": 120,
+    "exit": 101,
+    "elapsed_seconds": 8.831208672025241
+  },
+  {
+    "argv": [
+      "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+      "check",
+      "--locked",
+      "--lib",
+      "--no-default-features",
+      "--features",
+      "net",
+      "--target",
+      "wasm32-unknown-unknown",
+      "--message-format=json"
+    ],
+    "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source",
+    "label": "wasm-1",
+    "bound_seconds": 120,
+    "exit": 101,
+    "elapsed_seconds": 2.097011931997258
+  },
+  {
+    "argv": [
+      "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+      "check",
+      "--locked",
+      "--lib",
+      "--no-default-features",
+      "--features",
+      "sys,net",
+      "--target",
+      "wasm32-unknown-unknown",
+      "--message-format=json"
+    ],
+    "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source",
+    "label": "wasm-2",
+    "bound_seconds": 120,
+    "exit": 101,
+    "elapsed_seconds": 2.135616494982969
+  },
+  {
+    "argv": [
+      "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+      "check",
+      "--locked",
+      "--lib",
+      "--no-default-features",
+      "--target",
+      "wasm32-unknown-unknown",
+      "--message-format=json"
+    ],
+    "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source",
+    "label": "core-wasm-positive",
+    "bound_seconds": 120,
+    "exit": 0,
+    "elapsed_seconds": 5.415257646003738
+  },
+  {
+    "argv": [
+      "/var/roothome/.rustup/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+      "--version",
+      "--verbose"
+    ],
+    "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source",
+    "label": "native-rustc-version",
+    "bound_seconds": 15,
+    "exit": 0,
+    "elapsed_seconds": 0.004766222962643951
+  },
+  {
+    "argv": [
+      "/var/roothome/.rustup/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+      "check",
+      "--locked",
+      "--lib",
+      "--features",
+      "sys,net",
+      "--message-format=json"
+    ],
+    "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source",
+    "label": "native-optional-positive",
+    "bound_seconds": 120,
+    "exit": 0,
+    "elapsed_seconds": 9.595556606014725
+  }
+]

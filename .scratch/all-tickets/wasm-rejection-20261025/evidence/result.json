@@ -1,0 +1,320 @@
+{
+  "base": "198232f3d2b2bf772c4786da40ef69b947c7a4dd",
+  "nonce": "5015507b2728473597a1bbe53381b4dd",
+  "runtime": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56",
+  "source": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source",
+  "accepted": true,
+  "commands": [
+    {
+      "argv": [
+        "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc",
+        "--version",
+        "--verbose"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source",
+      "label": "rustc-version",
+      "bound_seconds": 15,
+      "exit": 0,
+      "elapsed_seconds": 0.00446853501489386
+    },
+    {
+      "argv": [
+        "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "--version"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source",
+      "label": "cargo-version",
+      "bound_seconds": 15,
+      "exit": 0,
+      "elapsed_seconds": 0.0021032480290159583
+    },
+    {
+      "argv": [
+        "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc",
+        "--print",
+        "cfg",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source",
+      "label": "target-cfg",
+      "bound_seconds": 15,
+      "exit": 0,
+      "elapsed_seconds": 0.0045685540535487235
+    },
+    {
+      "argv": [
+        "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc",
+        "--print",
+        "target-libdir",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source",
+      "label": "target-libdir",
+      "bound_seconds": 15,
+      "exit": 0,
+      "elapsed_seconds": 0.003770949027966708
+    },
+    {
+      "argv": [
+        "uname",
+        "-a"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source",
+      "label": "os",
+      "bound_seconds": 15,
+      "exit": 0,
+      "elapsed_seconds": 0.00037704798160120845
+    },
+    {
+      "argv": [
+        "df",
+        "-B1",
+        "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source",
+      "label": "capacity",
+      "bound_seconds": 15,
+      "exit": 0,
+      "elapsed_seconds": 0.001631519990041852
+    },
+    {
+      "argv": [
+        "free",
+        "-b"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source",
+      "label": "memory",
+      "bound_seconds": 15,
+      "exit": 0,
+      "elapsed_seconds": 0.0016719799605198205
+    },
+    {
+      "argv": [
+        "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "metadata",
+        "--locked",
+        "--format-version",
+        "1",
+        "--filter-platform",
+        "wasm32-unknown-unknown"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source",
+      "label": "locked-metadata",
+      "bound_seconds": 120,
+      "exit": 0,
+      "elapsed_seconds": 2.976204092032276
+    },
+    {
+      "argv": [
+        "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "check",
+        "--locked",
+        "--lib",
+        "--no-default-features",
+        "--features",
+        "sys",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--message-format=json"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source",
+      "label": "wasm-0",
+      "bound_seconds": 120,
+      "exit": 101,
+      "elapsed_seconds": 8.831208672025241
+    },
+    {
+      "argv": [
+        "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "check",
+        "--locked",
+        "--lib",
+        "--no-default-features",
+        "--features",
+        "net",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--message-format=json"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source",
+      "label": "wasm-1",
+      "bound_seconds": 120,
+      "exit": 101,
+      "elapsed_seconds": 2.097011931997258
+    },
+    {
+      "argv": [
+        "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "check",
+        "--locked",
+        "--lib",
+        "--no-default-features",
+        "--features",
+        "sys,net",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--message-format=json"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source",
+      "label": "wasm-2",
+      "bound_seconds": 120,
+      "exit": 101,
+      "elapsed_seconds": 2.135616494982969
+    },
+    {
+      "argv": [
+        "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "check",
+        "--locked",
+        "--lib",
+        "--no-default-features",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--message-format=json"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source",
+      "label": "core-wasm-positive",
+      "bound_seconds": 120,
+      "exit": 0,
+      "elapsed_seconds": 5.415257646003738
+    },
+    {
+      "argv": [
+        "/var/roothome/.rustup/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+        "--version",
+        "--verbose"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source",
+      "label": "native-rustc-version",
+      "bound_seconds": 15,
+      "exit": 0,
+      "elapsed_seconds": 0.004766222962643951
+    },
+    {
+      "argv": [
+        "/var/roothome/.rustup/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/cargo",
+        "check",
+        "--locked",
+        "--lib",
+        "--features",
+        "sys,net",
+        "--message-format=json"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source",
+      "label": "native-optional-positive",
+      "bound_seconds": 120,
+      "exit": 0,
+      "elapsed_seconds": 9.595556606014725
+    }
+  ],
+  "counts": {
+    "cargo_checks": 6,
+    "metadata_queries": 2,
+    "matcher_controls": 8
+  },
+  "counts_scope": "cumulative_pre_repair_contract_RED_and_one_repair",
+  "prior_consumption": {
+    "cargo_checks": 1,
+    "metadata_queries": 1,
+    "matcher_controls": 2
+  },
+  "environment": {
+    "rustc-version": "rustc 1.97.1 (8bab26f4f 2026-07-14)\nbinary: rustc\ncommit-hash: 8bab26f4f68e0e26f0bb7960be334d5b520ea452\ncommit-date: 2026-07-14\nhost: x86_64-unknown-linux-gnu\nrelease: 1.97.1\nLLVM version: 22.1.6\n",
+    "cargo-version": "cargo 1.97.1 (c980f4866 2026-06-30)\n",
+    "target-cfg": "debug_assertions\npanic=\"abort\"\ntarget_abi=\"\"\ntarget_arch=\"wasm32\"\ntarget_endian=\"little\"\ntarget_env=\"\"\ntarget_family=\"wasm\"\ntarget_feature=\"bulk-memory\"\ntarget_feature=\"multivalue\"\ntarget_feature=\"mutable-globals\"\ntarget_feature=\"nontrapping-fptoint\"\ntarget_feature=\"reference-types\"\ntarget_feature=\"sign-ext\"\ntarget_has_atomic=\"16\"\ntarget_has_atomic=\"32\"\ntarget_has_atomic=\"64\"\ntarget_has_atomic=\"8\"\ntarget_has_atomic=\"ptr\"\ntarget_has_atomic_primitive_alignment=\"16\"\ntarget_has_atomic_primitive_alignment=\"32\"\ntarget_has_atomic_primitive_alignment=\"64\"\ntarget_has_atomic_primitive_alignment=\"8\"\ntarget_has_atomic_primitive_alignment=\"ptr\"\ntarget_os=\"unknown\"\ntarget_pointer_width=\"32\"\ntarget_vendor=\"unknown\"\n",
+    "target-libdir": "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/wasm32-unknown-unknown/lib\n",
+    "os": "Linux workhorse 7.2.9-ogc3.1.fc44.x86_64 #1 SMP PREEMPT_DYNAMIC Mon Oct 12 22:17:26 UTC 2026 x86_64 GNU/Linux\n",
+    "capacity": "Filesystem         1B-blocks          Used    Available Use% Mounted on\n/dev/nvme0n1p3 1997621166080 1851630690304 111853953024  95% /var\n",
+    "memory": "               total        used        free      shared  buff/cache   available\nMem:     98776084480 19306270720  4789215232   121016320 78857297920 79469813760\nSwap:    17179865088  1605255168 15574609920\n",
+    "native-rustc-version": "rustc 1.77.2 (25ef9e3d8 2024-04-09)\nbinary: rustc\ncommit-hash: 25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04\ncommit-date: 2024-04-09\nhost: x86_64-unknown-linux-gnu\nrelease: 1.77.2\nLLVM version: 17.0.6\n"
+  },
+  "failure": "",
+  "source_pins": {
+    "Cargo.toml": "cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e",
+    "src/lib.rs": "f801ddce36e4b428fe4631fa2e2d18a31d66b3d2485b5c47ac374e949e2165aa",
+    "src/packages/sys/mod.rs": "60e0bbc1936d9401ad9173624d498255e73ac768e37121f7d8851a4d43505415",
+    "src/packages/net/mod.rs": "a93585fd97adfb21dc0956258786eb2ead13641588b84911f772c321b4c12fdb",
+    "src/packages/mod.rs": "f5931051809962b5b7a0e527492bd6529b0c901ec4b30e7712cf155463db151d"
+  },
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "tool_hashes": {
+    "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc": "d3a664c970a9fd8361b64194861bebc1ae37b9054e5ee3400dc1c9e691797eea",
+    "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo": "828980723df339d62434390e9fb8ef8831036583343ae2316b7ab5646b5c1953",
+    "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/wasm32-unknown-unknown/lib/libstd-30fc09a4fa755135.rlib": "c3ec3ebfa10dcbd039ada1e1af42bc5352842ff969e44a6d2fec7039854fe2d9"
+  },
+  "private_git_databases": [
+    "no-std-compat-1a8bbbe2479aaf7a",
+    "no-std-compat-f7c23488b2e6b399",
+    "rustyline-1e75f5f8f9628c4f",
+    "rustyline-36d35ad65bb96db4"
+  ],
+  "metadata_package_count": 58,
+  "rows": [
+    {
+      "features": "sys",
+      "target": "wasm32-unknown-unknown",
+      "exit": 101,
+      "intentional_diagnostics": [
+        "the `sys` feature is not available on WASM targets"
+      ],
+      "actual_project_errors": [
+        "the `sys` feature is not available on WASM targets"
+      ],
+      "wrong_expectation_red": true,
+      "extra_error_rejected": true,
+      "restored_expectation_green": true,
+      "elapsed_seconds": 8.831208672025241
+    },
+    {
+      "features": "net",
+      "target": "wasm32-unknown-unknown",
+      "exit": 101,
+      "intentional_diagnostics": [
+        "the `net` feature is not available on WASM targets"
+      ],
+      "actual_project_errors": [
+        "the `net` feature is not available on WASM targets"
+      ],
+      "wrong_expectation_red": true,
+      "extra_error_rejected": true,
+      "restored_expectation_green": true,
+      "elapsed_seconds": 2.097011931997258
+    },
+    {
+      "features": "sys,net",
+      "target": "wasm32-unknown-unknown",
+      "exit": 101,
+      "intentional_diagnostics": [
+        "the `sys` feature is not available on WASM targets",
+        "the `net` feature is not available on WASM targets"
+      ],
+      "actual_project_errors": [
+        "the `net` feature is not available on WASM targets",
+        "the `sys` feature is not available on WASM targets"
+      ],
+      "wrong_expectation_red": true,
+      "extra_error_rejected": true,
+      "restored_expectation_green": true,
+      "elapsed_seconds": 2.135616494982969
+    }
+  ],
+  "positive_rows": [
+    {
+      "features": "none",
+      "target": "wasm32-unknown-unknown",
+      "toolchain": "1.97.1",
+      "exit": 0
+    },
+    {
+      "features": "sys,net",
+      "target": "x86_64-unknown-linux-gnu",
+      "toolchain": "1.77.2",
+      "exit": 0
+    }
+  ],
+  "parent_context_preserved": true,
+  "source_lock_unchanged": true,
+  "remaining_capacity_bytes": 111853035520
+}

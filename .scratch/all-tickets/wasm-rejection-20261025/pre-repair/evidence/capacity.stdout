@@ -1,0 +1,2 @@
+Filesystem         1B-blocks          Used    Available Use% Mounted on
+/dev/nvme0n1p3 1997621166080 1851625058304 111859486720  95% /var

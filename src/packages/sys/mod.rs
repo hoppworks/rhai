@@ -33,9 +33,6 @@ compile_error!("the `sys` feature requires `std`; it cannot be combined with `no
 #[cfg(feature = "no_object")]
 compile_error!("the `sys` feature requires object maps; it cannot be combined with `no_object`");
 
-#[cfg(target_family = "wasm")]
-compile_error!("the `sys` feature is not available on WASM targets");
-
 mod config;
 mod env;
 mod error;

@@ -35,9 +35,6 @@
 #[cfg(feature = "no_std")]
 compile_error!("the `net` feature requires `std`; it cannot be combined with `no_std`");
 
-#[cfg(target_family = "wasm")]
-compile_error!("the `net` feature is not available on WASM targets");
-
 mod config;
 mod error;
 mod listener;

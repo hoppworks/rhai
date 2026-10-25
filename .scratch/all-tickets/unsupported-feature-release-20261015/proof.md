@@ -20,3 +20,7 @@ WASM target checks (sys-only, net-only, and combined sys+net) remain unverified 
 A post-review toolchain inspection accidentally caused two root-owned Rust 1.77.2 installations, each removed after identifying it as this session's own resource. The project toolchain at `/home/Daniel/.rustup/toolchains/1.77.2-x86_64-unknown-linux-gnu` was already present, remained intact, and was used directly by the accepted run. See the correction evidence. The root installation was not used for project compilation.
 
 This proof closes only the four named Linux host-target negative gates. WASM, release matrix, platform/MSRV rows, and the wider Ticket06/A-F package remain open.
+
+## Later WASM result — 2026-10-25
+
+The historical missing-target condition above no longer blocks the three named compiler cases: an existing workhorse Rust1.97.1 target was used without installation, with a minimal cfg repair after a meaningful sys/import-error RED. See [the source-bound compiler proof](../wasm-rejection-20261025/proof.md). The old1.77.2 host negative results remain at their original scope; no1.77.2 WASM execution or complete release acceptance is inferred.

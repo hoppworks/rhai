@@ -1,0 +1,167 @@
+{
+  "base": "198232f3d2b2bf772c4786da40ef69b947c7a4dd",
+  "nonce": "5015507b2728473597a1bbe53381b4dd",
+  "runtime": "/var/roothome/.local/share/agent-builds/rhai/wasm-rejection-5015507b2728473597a1bbe53381b4dd/agent-build-ab5o2oo8",
+  "source": "/var/roothome/.local/share/agent-builds/rhai/wasm-rejection-5015507b2728473597a1bbe53381b4dd/agent-build-ab5o2oo8/source",
+  "accepted": false,
+  "commands": [
+    {
+      "argv": [
+        "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc",
+        "--version",
+        "--verbose"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-rejection-5015507b2728473597a1bbe53381b4dd/agent-build-ab5o2oo8/source",
+      "label": "rustc-version",
+      "bound_seconds": 15,
+      "exit": 0,
+      "elapsed_seconds": 0.0049082410405389965
+    },
+    {
+      "argv": [
+        "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "--version"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-rejection-5015507b2728473597a1bbe53381b4dd/agent-build-ab5o2oo8/source",
+      "label": "cargo-version",
+      "bound_seconds": 15,
+      "exit": 0,
+      "elapsed_seconds": 0.013019755017012358
+    },
+    {
+      "argv": [
+        "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc",
+        "--print",
+        "cfg",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-rejection-5015507b2728473597a1bbe53381b4dd/agent-build-ab5o2oo8/source",
+      "label": "target-cfg",
+      "bound_seconds": 15,
+      "exit": 0,
+      "elapsed_seconds": 0.019897655001841486
+    },
+    {
+      "argv": [
+        "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc",
+        "--print",
+        "target-libdir",
+        "--target",
+        "wasm32-unknown-unknown"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-rejection-5015507b2728473597a1bbe53381b4dd/agent-build-ab5o2oo8/source",
+      "label": "target-libdir",
+      "bound_seconds": 15,
+      "exit": 0,
+      "elapsed_seconds": 0.005585018021520227
+    },
+    {
+      "argv": [
+        "uname",
+        "-a"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-rejection-5015507b2728473597a1bbe53381b4dd/agent-build-ab5o2oo8/source",
+      "label": "os",
+      "bound_seconds": 15,
+      "exit": 0,
+      "elapsed_seconds": 0.0005585170001722872
+    },
+    {
+      "argv": [
+        "df",
+        "-B1",
+        "/var/roothome/.local/share/agent-builds/rhai/wasm-rejection-5015507b2728473597a1bbe53381b4dd/agent-build-ab5o2oo8"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-rejection-5015507b2728473597a1bbe53381b4dd/agent-build-ab5o2oo8/source",
+      "label": "capacity",
+      "bound_seconds": 15,
+      "exit": 0,
+      "elapsed_seconds": 0.0017325300141237676
+    },
+    {
+      "argv": [
+        "free",
+        "-b"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-rejection-5015507b2728473597a1bbe53381b4dd/agent-build-ab5o2oo8/source",
+      "label": "memory",
+      "bound_seconds": 15,
+      "exit": 0,
+      "elapsed_seconds": 0.0017264210036955774
+    },
+    {
+      "argv": [
+        "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "metadata",
+        "--locked",
+        "--format-version",
+        "1",
+        "--filter-platform",
+        "wasm32-unknown-unknown"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-rejection-5015507b2728473597a1bbe53381b4dd/agent-build-ab5o2oo8/source",
+      "label": "locked-metadata",
+      "bound_seconds": 120,
+      "exit": 0,
+      "elapsed_seconds": 1.9915034709847532
+    },
+    {
+      "argv": [
+        "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo",
+        "check",
+        "--locked",
+        "--lib",
+        "--no-default-features",
+        "--features",
+        "sys",
+        "--target",
+        "wasm32-unknown-unknown",
+        "--message-format=json"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/wasm-rejection-5015507b2728473597a1bbe53381b4dd/agent-build-ab5o2oo8/source",
+      "label": "wasm-0",
+      "bound_seconds": 120,
+      "exit": 101,
+      "elapsed_seconds": 8.805040771956556
+    }
+  ],
+  "counts": {
+    "cargo_checks": 1,
+    "metadata_queries": 1,
+    "matcher_controls": 2
+  },
+  "counts_scope": "one_bounded_invocation_no_prior_attempts",
+  "prior_consumption": {},
+  "environment": {
+    "rustc-version": "rustc 1.97.1 (8bab26f4f 2026-07-14)\nbinary: rustc\ncommit-hash: 8bab26f4f68e0e26f0bb7960be334d5b520ea452\ncommit-date: 2026-07-14\nhost: x86_64-unknown-linux-gnu\nrelease: 1.97.1\nLLVM version: 22.1.6\n",
+    "cargo-version": "cargo 1.97.1 (c980f4866 2026-06-30)\n",
+    "target-cfg": "debug_assertions\npanic=\"abort\"\ntarget_abi=\"\"\ntarget_arch=\"wasm32\"\ntarget_endian=\"little\"\ntarget_env=\"\"\ntarget_family=\"wasm\"\ntarget_feature=\"bulk-memory\"\ntarget_feature=\"multivalue\"\ntarget_feature=\"mutable-globals\"\ntarget_feature=\"nontrapping-fptoint\"\ntarget_feature=\"reference-types\"\ntarget_feature=\"sign-ext\"\ntarget_has_atomic=\"16\"\ntarget_has_atomic=\"32\"\ntarget_has_atomic=\"64\"\ntarget_has_atomic=\"8\"\ntarget_has_atomic=\"ptr\"\ntarget_has_atomic_primitive_alignment=\"16\"\ntarget_has_atomic_primitive_alignment=\"32\"\ntarget_has_atomic_primitive_alignment=\"64\"\ntarget_has_atomic_primitive_alignment=\"8\"\ntarget_has_atomic_primitive_alignment=\"ptr\"\ntarget_os=\"unknown\"\ntarget_pointer_width=\"32\"\ntarget_vendor=\"unknown\"\n",
+    "target-libdir": "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/wasm32-unknown-unknown/lib\n",
+    "os": "Linux workhorse 7.2.9-ogc3.1.fc44.x86_64 #1 SMP PREEMPT_DYNAMIC Mon Oct 12 22:17:26 UTC 2026 x86_64 GNU/Linux\n",
+    "capacity": "Filesystem         1B-blocks          Used    Available Use% Mounted on\n/dev/nvme0n1p3 1997621166080 1851625058304 111859486720  95% /var\n",
+    "memory": "               total        used        free      shared  buff/cache   available\nMem:     98776084480 19157786624  5330382848   121028608 78464790528 79618297856\nSwap:    17179865088  1605226496 15574638592\n"
+  },
+  "failure": "Traceback (most recent call last):\n  File \"/var/roothome/projects/rhai-wasm-rejection-20261025-5015507b/run.py\", line 78, in <module>\n    assert passed,(features,item,diagnostics,stderr[-4000:])\n           ^^^^^^\nAssertionError: ('sys', {'argv': ['/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo', 'check', '--locked', '--lib', '--no-default-features', '--features', 'sys', '--target', 'wasm32-unknown-unknown', '--message-format=json'], 'cwd': '/var/roothome/.local/share/agent-builds/rhai/wasm-rejection-5015507b2728473597a1bbe53381b4dd/agent-build-ab5o2oo8/source', 'label': 'wasm-0', 'bound_seconds': 120, 'exit': 101, 'elapsed_seconds': 8.805040771956556}, ['the `sys` feature is not available on WASM targets', 'cannot find module or crate `cap_std` in this scope', 'unresolved import `cap_std`', 'cannot find module or crate `cap_std` in this scope'], b' Downloading crates ...\\n  Downloaded io-extras v0.19.0\\n  Downloaded io-lifetimes v2.0.4\\n  Downloaded rustix-linux-procfs v0.1.1\\n  Downloaded errno v0.3.14\\n  Downloaded cap-std v4.0.3\\n  Downloaded fs-set-times v0.20.3\\n  Downloaded maybe-owned v0.3.4\\n  Downloaded ambient-authority v0.0.2\\n  Downloaded io-lifetimes v3.0.1\\n  Downloaded ipnet v2.12.2\\n  Downloaded cap-primitives v4.0.3\\n  Downloaded rustix v1.1.5\\n  Downloaded linux-raw-sys v0.12.1\\n   Compiling proc-macro2 v1.0.103\\n   Compiling wasm-bindgen-shared v0.2.114\\n   Compiling unicode-ident v1.0.22\\n   Compiling quote v1.0.41\\n   Compiling portable-atomic v1.15.0\\n   Compiling rustversion v1.0.23\\n   Compiling autocfg v1.5.1\\n   Compiling syn v2.0.106\\n   Compiling crunchy v0.2.4\\n   Compiling libc v0.2.189\\n   Compiling version_check v0.9.5\\n   Compiling bumpalo v3.14.0\\n   Compiling tiny-keccak v2.0.2\\n   Compiling wasm-bindgen v0.2.114\\n    Checking once_cell v1.21.4\\n   Compiling cfg-if v1.0.5\\n   Compiling getrandom v0.2.17\\n   Compiling wasm-bindgen-macro-support v0.2.114\\n   Compiling zerocopy v0.8.59\\n   Compiling const-random-macro v0.1.16\\n   Compiling ahash v0.8.12\\n   Compiling smartstring v1.0.1\\n   Compiling num-traits v0.2.19\\n    Checking const-random v0.1.18\\n   Compiling wasm-bindgen-macro v0.2.114\\n    Checking js-sys v0.3.91\\n   Compiling rhai v1.26.1 (/var/roothome/.local/share/agent-builds/rhai/wasm-rejection-5015507b2728473597a1bbe53381b4dd/agent-build-ab5o2oo8/source)\\n    Checking static_assertions v1.1.0\\n   Compiling rhai_codegen v3.2.0 (/var/roothome/.local/share/agent-builds/rhai/wasm-rejection-5015507b2728473597a1bbe53381b4dd/agent-build-ab5o2oo8/source/codegen)\\n    Checking smallvec v1.16.2\\n    Checking thin-vec v0.2.19\\n    Checking bitflags v2.13.2\\n    Checking web-time v1.1.0\\nerror: could not compile `rhai` (lib) due to 4 previous errors; 2 warnings emitted\\n')\n",
+  "source_pins": {
+    "Cargo.toml": "cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e",
+    "src/lib.rs": "f801ddce36e4b428fe4631fa2e2d18a31d66b3d2485b5c47ac374e949e2165aa",
+    "src/packages/sys/mod.rs": "ee2dfc0900d64481d09d6d20bbd64b75ac05a316e02788cdf58e9fe52c6be0c5",
+    "src/packages/net/mod.rs": "8c7dbba945f9128df4022d3af651624f7fe2f87a1782ce18feb35c4896f8c576"
+  },
+  "lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "tool_hashes": {
+    "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/rustc": "d3a664c970a9fd8361b64194861bebc1ae37b9054e5ee3400dc1c9e691797eea",
+    "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin/cargo": "828980723df339d62434390e9fb8ef8831036583343ae2316b7ab5646b5c1953",
+    "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/wasm32-unknown-unknown/lib/libstd-30fc09a4fa755135.rlib": "c3ec3ebfa10dcbd039ada1e1af42bc5352842ff969e44a6d2fec7039854fe2d9"
+  },
+  "private_git_databases": [
+    "no-std-compat-1a8bbbe2479aaf7a",
+    "no-std-compat-f7c23488b2e6b399",
+    "rustyline-1e75f5f8f9628c4f",
+    "rustyline-36d35ad65bb96db4"
+  ],
+  "metadata_package_count": 58,
+  "rows": [],
+  "remaining_capacity_bytes": 111859486720
+}

@@ -1,0 +1,2 @@
+   Compiling rhai v1.26.1 (/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18/agent-build-1u2hal56/source)
+error: could not compile `rhai` (lib) due to 2 previous errors

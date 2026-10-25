@@ -1,0 +1,10 @@
+{
+  "host_staging_absent": true,
+  "scopes_absent": [
+    "/var/roothome/.local/share/agent-builds/rhai/wasm-rejection-5015507b2728473597a1bbe53381b4dd",
+    "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18"
+  ],
+  "files_retired": 62,
+  "local_transfer_absent": true,
+  "accepted_evidence_preserved": true
+}

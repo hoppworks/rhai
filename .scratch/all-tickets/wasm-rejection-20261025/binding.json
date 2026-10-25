@@ -1,0 +1,50 @@
+{
+  "base": "198232f3d2b2bf772c4786da40ef69b947c7a4dd",
+  "nonce": "5015507b2728473597a1bbe53381b4dd",
+  "transfer_source_path": "/Users/hoppworks/.local/share/agent-builds/rhai/wasm-input-5015507b2728473597a1bbe53381b4dd",
+  "transfer_expiry_utc": "2026-10-25T13:36:40.678102+00:00",
+  "host_staging": "/var/roothome/projects/rhai-wasm-rejection-20261025-5015507b",
+  "session_scope": "/var/roothome/.local/share/agent-builds/rhai/wasm-repaired-3325134b57254457925bddece6aa9d18",
+  "prior_session_scopes": [
+    "/var/roothome/.local/share/agent-builds/rhai/wasm-rejection-5015507b2728473597a1bbe53381b4dd"
+  ],
+  "archive_sha256": "001716015727a8e161679ed4be8a1c5e9002f742ac19fbe04d90614227a86f4f",
+  "archive_bytes": 7608320,
+  "source_lock_sha256": "2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425",
+  "source_pins": {
+    "Cargo.toml": "cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e",
+    "src/lib.rs": "f801ddce36e4b428fe4631fa2e2d18a31d66b3d2485b5c47ac374e949e2165aa",
+    "src/packages/sys/mod.rs": "60e0bbc1936d9401ad9173624d498255e73ac768e37121f7d8851a4d43505415",
+    "src/packages/net/mod.rs": "a93585fd97adfb21dc0956258786eb2ead13641588b84911f772c321b4c12fdb",
+    "src/packages/mod.rs": "f5931051809962b5b7a0e527492bd6529b0c901ec4b30e7712cf155463db151d"
+  },
+  "target": "wasm32-unknown-unknown",
+  "toolchain": "/var/roothome/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/bin",
+  "expected_rust_version": "1.97.1",
+  "outer_seconds": 750,
+  "cargo_check_seconds": 120,
+  "metadata_seconds": 120,
+  "max_log_bytes": 4194304,
+  "cargo_jobs": 2,
+  "additional_storage_bytes_estimate": 2147483648,
+  "negative_features": [
+    "sys",
+    "net",
+    "sys,net"
+  ],
+  "scope": "Intentional compile-time WASM rejection only; no WASM execution or optional1.77.2 claim, existing installed target only; no installation/global writes.",
+  "runner_sha256": "09f47186dff965ddc3f4535480e8ae80fd7dd307726f6bed71c1b7b4cb2e2818",
+  "source_review": "PASS samecombined independent review of3cfg-only overrides/archive/patch/exactmatcher/positivechecks; nativecondition truth-tableequivalent, priorEngineproofapplicable subjecttonativepositivecheck; no repairrunyet.",
+  "source_overrides": [
+    "src/packages/mod.rs",
+    "src/packages/sys/mod.rs",
+    "src/packages/net/mod.rs"
+  ],
+  "patch_sha256": "a4187a6fed10e08997aaeb2783e45becab979ddf2cc021439d131ec589bedc7c",
+  "prior_consumption": {
+    "cargo_checks": 1,
+    "metadata_queries": 1,
+    "matcher_controls": 2
+  },
+  "cause": "Meaningful contract RED: intentional sysWASM rejection accompanied by3 cap_std name-resolution errors because unsupported-target module implementation still loaded. Not infrastructure/parser failure."
+}

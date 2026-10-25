@@ -1319,6 +1319,20 @@ the gated feature only (D8), and `sys` incompatible with `no_object` via `compil
   The reviewed APFS fixture-creation failure is a coverage limitation; repair the
   fixture handling and obtain appropriate native evidence without weakening NotUtf8.
 
+### Explicit WASM rejection result (2026-10-25)
+
+The missing unsupported-WASM compiler cases now pass at the three-file cfg repair
+bound to base198232f3d: sys-only, net-only and combined each produce exactly their
+intentional diagnostics. The initial real sys RED additionally emitted three
+cap_std import failures; selecting unsupported modules caused those incidental
+errors. Guards now live before module selection. Existing installed native host
+Rust1.97.1/wasm32 target performs the compiler checks; no toolchain installation or
+WASM execution occurred. Core-only WASM remains compilable, and native sys+net
+passes under1.77.2. Native selection is equivalent and implementation/tests remain
+unchanged, so the combined reviewer retains applicable native Engine evidence.
+[Original RED, fixed results, exact source/lock and cleanup](../.scratch/all-tickets/wasm-rejection-20261025/proof.md)
+close only these three compiler cases; no1.77.2 WASM or full release claim is made.
+
 ### Native Linux F19/F22 result (2026-10-25)
 
 The F19/F22 native Linux/Rust1.77.2 row is now accepted at Rust source

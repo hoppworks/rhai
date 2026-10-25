@@ -1,0 +1,9 @@
+229ac82cc0f5caecadd9ee6f8b04479e768c8ffb42b3ed013f3ac3d7cc1f4d2d  /var/roothome/projects/rhai-wasm-rejection-20261025-5015507b/source.tar
+2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425  /var/roothome/projects/rhai-wasm-rejection-20261025-5015507b/Cargo.lock
+7e3141b0511dc666b902853d61c9146ffacd8f0101beaaa5c722f84662c1468c  /var/roothome/projects/rhai-wasm-rejection-20261025-5015507b/run.py
+Filesystem         1B-blocks          Used    Available Use% Mounted on
+/dev/nvme0n1p3 1997621166080 1851617345536 111867133952  95% /var
+               total        used        free      shared  buff/cache   available
+Mem:     98776084480 19201523712  5504352256   121024512 78246932480 79574560768
+Swap:    17179865088  1605226496 15574638592
+ 13:57:17 up 3 days,  7:38,  3 users,  load average: 1.15, 0.72, 0.62

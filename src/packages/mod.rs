@@ -14,13 +14,19 @@ pub(crate) mod lang_core;
 pub(crate) mod logic;
 pub(crate) mod map_basic;
 pub(crate) mod math_basic;
-#[cfg(feature = "net")]
+#[cfg(all(feature = "net", target_family = "wasm"))]
+compile_error!("the `net` feature is not available on WASM targets");
+
+#[cfg(all(feature = "net", not(target_family = "wasm")))]
 pub mod net;
 pub(crate) mod pkg_core;
 pub(crate) mod pkg_std;
 pub(crate) mod string_basic;
 pub(crate) mod string_more;
-#[cfg(feature = "sys")]
+#[cfg(all(feature = "sys", target_family = "wasm"))]
+compile_error!("the `sys` feature is not available on WASM targets");
+
+#[cfg(all(feature = "sys", not(target_family = "wasm")))]
 pub mod sys;
 pub(crate) mod time_basic;
 
@@ -44,7 +50,7 @@ pub use pkg_core::CorePackage;
 pub use pkg_std::StandardPackage;
 pub use string_basic::BasicStringPackage;
 pub use string_more::MoreStringPackage;
-#[cfg(feature = "sys")]
+#[cfg(all(feature = "sys", not(target_family = "wasm")))]
 pub use sys::SysPackage;
 #[cfg(not(feature = "no_time"))]
 pub use time_basic::BasicTimePackage;
