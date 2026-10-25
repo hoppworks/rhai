@@ -1,0 +1,10 @@
+{
+  "source": "/var/roothome/projects/rhai-process-quota-20261025-475b06d7/retirement02",
+  "medium": "/var/lib/libvirt/images/rhai-win11-quality/quota-retirement02-48d19d95797f4b4f84f6962bac3f955c.iso",
+  "sha256": "54ef6e8a55de4752c08dc4d665d431a878fc8cdb8e6117dbcf5d31b2a61c8c76",
+  "files": {
+    "cleanup-host-manifest.json": "c35f1bef0db2ed9a081681fbb2c14b1ce406083729b6273aac8f3af081978251",
+    "cleanup.ps1": "911dcd7ef398373ab1988d06df0770cbc0d098cb2f1bc444ffa57ecb5dcc3bec"
+  },
+  "native_started": false
+}

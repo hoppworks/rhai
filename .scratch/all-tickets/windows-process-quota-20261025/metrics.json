@@ -1,0 +1,78 @@
+{
+  "native_compilers": 6,
+  "native_bootstraps": 4,
+  "public_drivers": 6,
+  "native_driver_elapsed_seconds_sum": 19.661121100000003,
+  "native_driver_elapsed_seconds_each": [
+    4.6288846,
+    2.2271609,
+    7.378198899999999,
+    3.0267092,
+    1.2407289,
+    1.1594385999999999
+  ],
+  "compiler_elapsed_seconds": "unknown",
+  "peak_rss_bytes": "unknown",
+  "model_cost_tokens": "unknown",
+  "source_base": "ff3ccb877e34370bb9d6bad3e66d067c2e27c2dd",
+  "all_attempts_accepted": false,
+  "current_three_cases_accepted": true,
+  "host_readback_saved_utc": "2026-10-25T15:01:17.539543+00:00",
+  "deduplicated_identical_raw_aliases": [
+    {
+      "removed_identical_alias": "quota01-serial-original.txt",
+      "canonical": "serial-all-original.bin",
+      "sha256": "149a0f18fe64519b5148b5b3a0f32cb6acae7fe87d2178ed3e755ab199853b63",
+      "bytes": 904078
+    },
+    {
+      "removed_identical_alias": "attempt02/quota02-serial-original.txt",
+      "canonical": "attempt02/serial-all-original.bin",
+      "sha256": "3a3f3a7aefea0a0b47fcda0175373f37e153ee45061ddbfd49b4e04f7ca53a16",
+      "bytes": 943304
+    },
+    {
+      "removed_identical_alias": "attempt03/quota03-serial-original.txt",
+      "canonical": "attempt03/serial-all-original.bin",
+      "sha256": "fedc9a39d14e283a52ff2e8b1d090b54ee9a624bd4d5e1f613a1c779ac416ab4",
+      "bytes": 939782
+    },
+    {
+      "removed_identical_alias": "attempt04/quota04-serial-original.txt",
+      "canonical": "attempt04/serial-all-original.bin",
+      "sha256": "ef0481f461141ff15587f2e54149985a8b4e9c9adc54a5c0cb67410fad8e2e5b",
+      "bytes": 2898804
+    },
+    {
+      "removed_identical_alias": "attempt04/resources04-serial-original.txt",
+      "canonical": "attempt04/serial-all-original.bin",
+      "sha256": "ef0481f461141ff15587f2e54149985a8b4e9c9adc54a5c0cb67410fad8e2e5b",
+      "bytes": 2898804
+    },
+    {
+      "removed_identical_alias": "attempt04/environment04-serial-original.txt",
+      "canonical": "attempt04/serial-all-original.bin",
+      "sha256": "ef0481f461141ff15587f2e54149985a8b4e9c9adc54a5c0cb67410fad8e2e5b",
+      "bytes": 2898804
+    }
+  ],
+  "readonly_build_exports": 2,
+  "readonly_build_export_files": [
+    48,
+    48
+  ],
+  "readonly_build_export_frames": [
+    1270,
+    1285
+  ],
+  "guest_cleanup_invocations": 2,
+  "guest_cleanup_predeletion_setup_failures": 1,
+  "retired_guest_scopes": 9,
+  "retired_guest_files": 411,
+  "current_generation_checks": 94,
+  "recycled_pids": 1,
+  "retired_host_media": 8,
+  "retired_host_files": 99,
+  "retired_host_dirs": 24,
+  "retained_guest_builds": 1
+}

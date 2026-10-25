@@ -1,0 +1,11 @@
+Filesystem         1B-blocks          Used    Available Use% Mounted on
+/dev/nvme0n1p3 1997621166080 1851687395328 111799738368  95% /var
+               total        used        free      shared  buff/cache   available
+Mem:     98776084480 19156238336  6055403520   120606720 77773279232 79619846144
+Swap:    17179865088  1606422528 15573442560
+ 15:14:43 up 3 days,  8:55,  3 users,  load average: 0.26, 0.29, 0.40
+maximum      config         4
+maximum      live           4
+current      config         4
+current      live           4
+

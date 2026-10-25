@@ -1,0 +1,28 @@
+{
+  "owner": "current Rhai coordinator, workhorse/rhai-win11-quality/RhaiTest",
+  "purpose": "Reuse unchanged default Runner/Driver and unchanged generic fixture methods for remaining memory-denial, failed export/cleanup and bounded project-command prerequisites. Compile changed fixture components separately. The initial quota method is not accepted and must not be reused for quota acceptance.",
+  "expires_host_utc": "2026-10-25T17:01:47.008186+00:00",
+  "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\quota-build-e6ce6222dba147a8b43b2c79187d3184",
+  "build": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\quota-build-e6ce6222dba147a8b43b2c79187d3184\\run\\monitor-source-e6ce6222dba147a8b43b2c79187d3184\\build",
+  "input_manifest_sha256": "40c530f260ed931d27eb289c0916c08831d9c3a19bfb633fb43fc8997957d219",
+  "start_sha256": "fb9aca4313a3f8abf912132c795ebb6cfd4249b88d13342fe9c7af027b45653f",
+  "compiler_sha256": "cf32cb7e8e5691b962e1b6f92b03d87409dd9e7afbed71c5bf77b8203cc56ee1",
+  "binaries": {
+    "MonitorAcceptanceDriver.exe": "ac032063f99e976bec450b41aeee41bece876630073a776ac380c00b2058ab24",
+    "PayloadFixture.exe": "abaf1ae805adc061a987f0b5fa2379dea59872dcc6c727a4b74411060eb53d82",
+    "ScopedRunner.exe": "30a33cdb5e13089ba71dca135b61a838b32e8f03823b55abcaf61ef8acae3c62"
+  },
+  "build_custody_closed": true,
+  "controls": {
+    "original": "rhai-process-quota-quota01-911a10854db94505b29817e3720d551f",
+    "exact_exit": true,
+    "pipes_drained": true,
+    "process_disposed": true,
+    "owned_executables_stopped": true
+  },
+  "remaining_compatible_reuse": true,
+  "physical_build_available": true,
+  "last_verified": "retirement02 receipt: all three physical binary hashes and manifest checked before and after removal of other scopes",
+  "accepted_quota_fixture_available": false,
+  "accepted_quota_fixture_retired": true
+}

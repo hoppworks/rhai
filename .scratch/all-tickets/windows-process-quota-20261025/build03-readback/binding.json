@@ -1,0 +1,9 @@
+{
+  "nonce": "61233f37b1ce4ddc847ba9b8ff2a14ed",
+  "medium": "/var/lib/libvirt/images/rhai-win11-quality/quota-build-readback-61233f37b1ce4ddc847ba9b8ff2a14ed.iso",
+  "host_source_root": "/var/roothome/projects/rhai-process-quota-20261025-475b06d7/build03-readback",
+  "source_sha256": "632028d00d86defdf8c4d2bde0d8c640923f26656893be0e89dfde39dd46798f",
+  "manifest_sha256": "a3a9e1fa0f5d00b33767b01fc098e5cdb5f52c9ce84349ed087cf4d66373a40a",
+  "native_compilers_or_drivers": 0,
+  "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\quota-fixture-61233f37b1ce4ddc847ba9b8ff2a14ed"
+}

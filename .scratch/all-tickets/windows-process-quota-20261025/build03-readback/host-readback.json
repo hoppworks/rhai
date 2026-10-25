@@ -1,0 +1,12 @@
+{
+  "readback_only": true,
+  "complete": true,
+  "files": 48,
+  "frames": 1270,
+  "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\quota-fixture-61233f37b1ce4ddc847ba9b8ff2a14ed",
+  "native_compilers": 0,
+  "native_drivers": 0,
+  "product_accepted": false,
+  "build_custody_accepted": true,
+  "raw_sha256": "c27b25e74779968c634baa01b85859fd9add5da2ce0db191a960eab87577a0f8"
+}

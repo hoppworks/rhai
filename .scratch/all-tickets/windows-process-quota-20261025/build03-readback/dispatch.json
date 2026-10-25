@@ -1,0 +1,9 @@
+{
+  "host_utc": "2026-10-25T15:14:26.480616+00:00",
+  "serial_path": "/var/log/libvirt/qemu/rhai-win11-quality-serial0.log",
+  "inode": 126688658,
+  "offset": 420864,
+  "command": "if ((get-filehash e:\\cleanup.ps1).hash -eq '632028d00d86defdf8c4d2bde0d8c640923f26656893be0e89dfde39dd46798f') { & ([scriptblock]::create((get-content e:\\cleanup.ps1 -raw))) -ManifestSha256 'a3a9e1fa0f5d00b33767b01fc098e5cdb5f52c9ce84349ed087cf4d66373a40a' } else { throw 'source mismatch' }",
+  "read_only": true,
+  "source_review": "same independently reviewed read-only logic; only exact priorbuild scope/case/input pins changed, no deletion"
+}

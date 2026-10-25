@@ -1,0 +1,24 @@
+{
+  "nonce": "48d19d95797f4b4f84f6962bac3f955c",
+  "manifest_sha256": "c35f1bef0db2ed9a081681fbb2c14b1ce406083729b6273aac8f3af081978251",
+  "host_receipt_sha256": "612762147839f9abbb4ed19bfbd314d7de2cc803dcd1e37be8716ac30a156b41",
+  "actor_check_count": 94,
+  "actor_checks_sha256": "635039ea906a5930ab607e1057bb9f2f131ab4593ec26d1ce7bd39ca13c6af18",
+  "retired": [
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-911a10854db94505b29817e3720d551f",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-50a587ef233d4b54a1586bf029a426e9",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-b8761d9bb62643179a967b942e6bc3a3",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-45c8571772d5463eb5e4ca442df4b979",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-1ad6339a9548413db5ce9f948ff63aaa",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-55e61c971bf447f7a2e1332a66375ca3",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\quota-fixture-c8d7629099fd47d1b6f10ef65649db5e",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\quota-fixture-61233f37b1ce4ddc847ba9b8ff2a14ed",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\quota-fixture-48d19d95797f4b4f84f6962bac3f955c"
+  ],
+  "all_scopes_absent": true,
+  "retained_scope_leaf": "quota-build-e6ce6222dba147a8b43b2c79187d3184",
+  "retained_manifest_sha256": "bb73f281ff87b2c767cef156c4f5aa3a552706002f8552011abce0f3232cbc01",
+  "retained_verified": true,
+  "foreign_resources_touched": false,
+  "failure_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+}

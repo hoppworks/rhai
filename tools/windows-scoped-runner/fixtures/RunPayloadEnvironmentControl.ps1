@@ -2,10 +2,11 @@ param(
  [Parameter(Mandatory=$true)][string]$FixturePath,
  [Parameter(Mandatory=$true)][string]$FixtureSha256,
  [Parameter(Mandatory=$true)][string]$Session,
- [Parameter(Mandatory=$true)][string]$Id,
+ [Parameter(Mandatory=$true)][ValidateLength(1,96)][ValidatePattern('^[a-z0-9-]+$')][string]$Id,
  [ValidateSet('RED','GREEN','RETIREMENT_ABORT')][string]$Phase='RED',
- [ValidateSet('environment','job-resources')][string]$Contract='environment',
- [string]$BuildRoot,
+ [ValidateSet('environment','job-resources','job-quota')][string]$Contract='environment',
+ [Parameter(Mandatory=$true)][string]$BuildRoot,
+ [string]$FixtureBuildRoot,
  [switch]$ReturnStatusToCaller
 )
 $ErrorActionPreference='Stop'
@@ -19,31 +20,27 @@ function No-Reparse([string]$Path){
   $parent=[IO.Directory]::GetParent($cursor);$cursor=if($null -eq $parent){$null}else{$parent.FullName}
  }
 }
-$expected=@{}
-if($BuildRoot){
- $build=[IO.Path]::GetFullPath($BuildRoot);No-Reparse $build
- if([IO.Path]::GetFileName($build) -cne 'build'){throw 'BuildRoot must be the exact compiled build directory.'}
- $buildRun=[IO.Directory]::GetParent($build).FullName
- if([IO.Path]::GetFileName($buildRun) -notmatch '^monitor-source-[0-9a-f]{32}$'){throw 'BuildRoot must belong to a canonical monitor-source run.'}
- $buildParent=[IO.Directory]::GetParent($buildRun).FullName
- if([IO.Path]::GetFileName($buildParent) -cne 'run' -or [IO.Directory]::GetParent($buildParent).Parent.FullName -cne $private){throw 'BuildRoot must be inside its own canonical private session scope.'}
- $buildManifest=Join-Path $buildRun 'build-manifest.txt';No-Reparse $buildManifest
- if(!(Test-Path -LiteralPath $buildManifest -PathType Leaf)){throw 'Retained build manifest is missing.'}
- $buildManifestLines=[IO.File]::ReadAllLines($buildManifest)
- foreach($name in @('ScopedRunner.exe','MonitorAcceptanceDriver.exe','PayloadFixture.exe')){
-  $matches=@($buildManifestLines | Where-Object {$_ -match ('^(?<hash>[0-9a-f]{64})  build/'+[regex]::Escape($name)+'$')})
-  if($matches.Count -ne 1){throw 'Build manifest does not bind exactly one required binary.'}
-  $hash=[regex]::Match($matches[0],'^([0-9a-f]{64})  ').Groups[1].Value
-  $expected[$name]=$hash
-  $file=Join-Path $build $name;No-Reparse $file
-  if((Get-FileHash -LiteralPath $file).Hash.ToLowerInvariant() -cne $hash){throw 'Compiled binary differs from its retained build manifest.'}
+function Read-CompiledBuild([string]$Directory,[string[]]$Names){
+ $build=[IO.Path]::GetFullPath($Directory);No-Reparse $build
+ if([IO.Path]::GetFileName($build) -cne 'build'){throw 'Compiled build directory basename invalid.'}
+ $buildRun=[IO.Directory]::GetParent($build).FullName;$buildParent=[IO.Directory]::GetParent($buildRun).FullName
+ if([IO.Path]::GetFileName($buildRun) -notmatch '^monitor-source-[0-9a-f]{32}$' -or [IO.Path]::GetFileName($buildParent) -cne 'run' -or [IO.Directory]::GetParent($buildParent).Parent.FullName -cne $private){throw 'Compiled build must be inside canonical own private scope.'}
+ $manifest=Join-Path $buildRun 'build-manifest.txt';No-Reparse $manifest;$rows=[IO.File]::ReadAllLines($manifest);$pins=@{}
+ foreach($name in $Names){
+  $matches=@($rows|Where-Object{$_ -cmatch ('^[0-9a-f]{64}  build/'+[regex]::Escape($name)+'$')})
+  if($matches.Count -ne 1){throw 'Compiled build must bind each requested binary exactly once.'}
+  $pins[$name]=$matches[0].Substring(0,64);$file=Join-Path $build $name;No-Reparse $file
+  if((Get-FileHash -LiteralPath $file).Hash.ToLowerInvariant() -cne $pins[$name]){throw 'Compiled binary differs from manifest.'}
  }
-}else{
- $build=Join-Path $env:USERPROFILE '.local\share\agent-builds\rhai\driver-wh02-af46729dd10c\run\monitor-source-af46729dd10c4493afc2264f240c8992\build'
- $expected=@{'ScopedRunner.exe'='c3d91a8bcf550ef8087b7c057455ac876fe0a958b4e22de816b55daa659cb486';'MonitorAcceptanceDriver.exe'='caf4afaa2f604fb47fc554c82d9493854be0959c8d329bff7a88fd7fe9e827cb'}
- foreach($name in $expected.Keys){$file=Join-Path $build $name;No-Reparse $file;if((Get-FileHash -LiteralPath $file).Hash.ToLowerInvariant() -cne $expected[$name]){throw 'Retained production binary changed.'}}
+ return @{build=$build;run=$buildRun;session=([IO.Directory]::GetParent($buildParent).FullName);manifest=$manifest;pins=$pins}
 }
-if(($Phase -ceq 'RETIREMENT_ABORT' -or $Contract -ceq 'job-resources') -and !$BuildRoot){throw 'This contract requires the current source-bound build.'}
+$publicBuild=Read-CompiledBuild $BuildRoot @('ScopedRunner.exe','MonitorAcceptanceDriver.exe')
+if(!$FixtureBuildRoot){$FixtureBuildRoot=$BuildRoot}
+$fixtureBuild=Read-CompiledBuild $FixtureBuildRoot @('PayloadFixture.exe')
+$build=$publicBuild.build;$buildManifest=$publicBuild.manifest;$expected=$publicBuild.pins
+if([IO.Path]::GetFullPath($FixturePath) -cne (Join-Path $fixtureBuild.build 'PayloadFixture.exe') -or $FixtureSha256 -cne $fixtureBuild.pins['PayloadFixture.exe']){throw 'Fixture path/hash differs from its actual compiled component.'}
+if($Contract -ceq 'job-quota' -and $Phase -cne 'GREEN'){throw 'Actual quota denial uses current bounded production tools and GREEN phase.'}
+
 No-Reparse $session;No-Reparse $FixturePath
 if((Get-FileHash -LiteralPath $FixturePath).Hash.ToLowerInvariant() -cne $FixtureSha256){throw 'Native environment fixture changed.'}
 if(Test-Path -LiteralPath $session){throw 'Own environment scope exists; preserve it.'}
@@ -52,26 +49,34 @@ foreach($key in @('AGENT_RUNTIME_DIR','TMP','TEMP','CARGO_HOME','CARGO_TARGET_DI
 $parentCwd=[Environment]::CurrentDirectory
 $run=Join-Path $session 'run';$input=Join-Path $session 'input'
 New-Item -ItemType Directory -Path $run,$input | Out-Null
-$buildReadback=$null
-if($BuildRoot){
- $buildReadback=Join-Path $session 'build-readback';New-Item -ItemType Directory -Path $buildReadback | Out-Null
- Copy-Item -LiteralPath $buildManifest -Destination $buildReadback
- Copy-Item -LiteralPath (Join-Path $buildRun 'run-result.txt') -Destination $buildReadback
- $buildSession=[IO.Directory]::GetParent($buildParent).FullName
- foreach($outerName in @('build-observer.json','bootstrap.stdout','bootstrap.stderr')){
-  $outerPath=Join-Path $buildSession $outerName;No-Reparse $outerPath
-  if(!(Test-Path -LiteralPath $outerPath -PathType Leaf)){throw ('Required outer build readback is missing: '+$outerName)}
-  Copy-Item -LiteralPath $outerPath -Destination $buildReadback
+function Copy-CompiledReadback([object]$Component,[string]$Destination,[bool]$FixtureCompilerOnly=$false){
+ New-Item -ItemType Directory -Path $Destination|Out-Null
+ foreach($name in @('build-manifest.txt','run-result.txt')){Copy-Item -LiteralPath (Join-Path $Component.run $name) -Destination $Destination}
+ foreach($name in @('build-observer.json','bootstrap.stdout','bootstrap.stderr')){Copy-Item -LiteralPath (Join-Path $Component.session $name) -Destination $Destination}
+ $logs=Join-Path $Component.run 'logs'
+ if($FixtureCompilerOnly){
+  $selected=Join-Path $Destination 'logs';New-Item -ItemType Directory -Path $selected|Out-Null
+  # Earlier full exports retain the unchanged harness controls. This component
+  # needs its exact compile result and before/after native owner accounting.
+  foreach($name in @('compile-PayloadFixture.stdout.txt','compile-PayloadFixture.stderr.txt','job-members.jsonl')){Copy-Item -LiteralPath (Join-Path $logs $name) -Destination $selected}
+ }elseif(Test-Path -LiteralPath $logs -PathType Container){
+  $selected=Join-Path $Destination 'logs';New-Item -ItemType Directory -Path $selected|Out-Null
+  foreach($file in @(Get-ChildItem -LiteralPath $logs -File | Where-Object{$_.Name -like 'compile-*.stdout.txt' -or $_.Name -like 'compile-*.stderr.txt' -or $_.Name -ceq 'job-members.jsonl'})){Copy-Item -LiteralPath $file.FullName -Destination $selected}
  }
- $buildLogs=Join-Path $buildRun 'logs'
- if(Test-Path -LiteralPath $buildLogs -PathType Container){Copy-Item -LiteralPath $buildLogs -Destination $buildReadback -Recurse}
- foreach($readbackFile in (Get-ChildItem -LiteralPath $buildReadback -Recurse -File)){
-  No-Reparse $readbackFile.FullName
-  if($readbackFile.Length -gt 4MB){throw 'A build diagnostic exceeds the bounded export file cap.'}
- }
+ foreach($file in @(Get-ChildItem -LiteralPath $Destination -File -Recurse)){No-Reparse $file.FullName;if($file.Length -gt 4MB){throw 'Build component diagnostic exceeds4MiB.'}}
 }
+$buildReadback=Join-Path $session 'build-readback';Copy-CompiledReadback $publicBuild $buildReadback
+$fixtureReadback=$null
+if($fixtureBuild.build -cne $publicBuild.build){$fixtureReadback=Join-Path $session 'fixture-build-readback';Copy-CompiledReadback $fixtureBuild $fixtureReadback $true}
 Copy-Item -LiteralPath $FixturePath -Destination (Join-Path $input 'fixture.exe')
 if((Get-FileHash -LiteralPath (Join-Path $input 'fixture.exe')).Hash.ToLowerInvariant() -cne $FixtureSha256){throw 'Fixture copy mismatch.'}
+$bin=Join-Path $session 'bin';New-Item -ItemType Directory -Path $bin|Out-Null
+foreach($name in @('ScopedRunner.exe','MonitorAcceptanceDriver.exe')){
+ $sourceBinary=Join-Path $build $name;No-Reparse $sourceBinary
+ Copy-Item -LiteralPath $sourceBinary -Destination (Join-Path $bin $name)
+ if((Get-FileHash -LiteralPath (Join-Path $bin $name)).Hash.ToLowerInvariant() -cne $expected[$name]){throw 'Owned public tool copy differs from source-bound build.'}
+}
+$jobQuotaObserved=@{};$jobQuotaGreen=$false;$jobQuotaSensitivity=$false;$quotaProtectedSensitivity=$false;$quotaActorsStopped=$false
 $expectedPayload=if($Phase -ceq 'GREEN'){'00000000'}else{'0000002A'}
 $runtimeAbsenceRed=$false;$runtimeAbsent=$false;
 $jobResourcesObserved=@{};$jobResourcesRed=$false;$jobResourcesGreen=$false;$jobResourcesSensitivity=$false;$jobActorsStopped=$false
@@ -79,43 +84,52 @@ $environmentObserved=@{};$environmentMismatches=@();$runtimeObserved=$null
 $environmentRed=$false;$environmentGreen=$false;$workRetirementRed=$false;$workRetirementGreen=$false;$parentChanged=$false
 $stdout = Join-Path $session 'bootstrap.stdout'; $stderr = Join-Path $session 'bootstrap.stderr'
 $info = [Diagnostics.ProcessStartInfo]::new()
-$info.FileName = Join-Path $build 'MonitorAcceptanceDriver.exe'
-$payloadArguments=if($Phase -ceq 'RETIREMENT_ABORT'){'--retirement-abort'}elseif($Contract -ceq 'job-resources'){'payload-job-resources.txt --job-resources'}else{'payload-environment.txt --environment'}
+$info.FileName = Join-Path $bin 'MonitorAcceptanceDriver.exe'
+$payloadArguments=if($Phase -ceq 'RETIREMENT_ABORT'){'--retirement-abort'}elseif($Contract -ceq 'job-resources'){'payload-job-resources.txt --job-resources'}elseif($Contract -ceq 'job-quota'){'payload-job-quota.txt --job-quota'}else{'payload-environment.txt --environment'}
 $info.Arguments = '--mode success --source "'+$input+'" --exe fixture.exe --expected-payload-exit '+$expectedPayload+' -- '+$payloadArguments
-$info.WorkingDirectory = $build; $info.UseShellExecute = $false; $info.CreateNoWindow = $true
+$info.WorkingDirectory = $bin; $info.UseShellExecute = $false; $info.CreateNoWindow = $true
 $info.RedirectStandardOutput = $true; $info.RedirectStandardError = $true
 $info.EnvironmentVariables['AGENT_RUNTIME_DIR'] = $run
-$process = [Diagnostics.Process]::new(); $process.StartInfo = $info
-$status = -1; $complete = $false; $failure = ''; $hostRecord = $false
-$started = $false; $exited = $false; $pipesDrained = $false; $readers = @()
-$observerDeadline = [Diagnostics.Stopwatch]::StartNew()
+if($null -ne $global:RhaiPayloadPendingCustody){throw 'Previous exact public-payload custody is unresolved; preserve it.'}
+$process=[Diagnostics.Process]::new();$process.StartInfo=$info
+$readers=[Collections.Generic.List[object]]::new()
+# Publish stable owners before Start and before acquisition into each channel.
+$global:RhaiPayloadPendingCustody=[pscustomobject]@{Process=$process;Readers=$readers;Scope=$session;ExactExitConfirmed=$false;PipesDrained=$false;ProcessDisposed=$false}
+$status=-1;$complete=$false;$failure='';$started=$false;$exited=$false;$pipesDrained=$false
+$observerDeadline=[Diagnostics.Stopwatch]::StartNew()
+$hostRecord=$false;$processDisposed=$false;$observerKillUsed=$false;$driverElapsedSeconds=0.0;$driverPid=0;$driverCreation=0L;$ownExecutablesStopped=$false
+$driverBound=if($Contract -ceq 'job-quota'){190}elseif($Phase -ceq 'RETIREMENT_ABORT'){180}else{10}
 function Save-CompletedChunk([object] $Channel) {
  if ($null -eq $Channel.Task -or !$Channel.Task.IsCompleted) { return }
- $task = $Channel.Task; $Channel.Task = $null
- try { $count = $task.GetAwaiter().GetResult() } catch { $Channel.Error = $_.Exception.ToString(); throw }
- if ($count -eq 0) { $Channel.Eof = $true; return }
- $bytes = [Text.Encoding]::UTF8.GetByteCount($Channel.Buffer,0,$count)
- $Channel.Bytes += $bytes
- if ($Channel.Bytes -gt 4MB) { $Channel.Error = 'Driver log exceeded 4MiB; only bounded original prefix retained.'; throw $Channel.Error }
- $Channel.Writer.Write($Channel.Buffer,0,$count); $Channel.Writer.Flush()
- $Channel.Task = $Channel.Reader.ReadAsync($Channel.Buffer,0,$Channel.Buffer.Length)
+ try {
+  $task=$Channel.Task;$Channel.Task=$null
+  $count=$task.GetAwaiter().GetResult()
+  if($count -eq 0){$Channel.Eof=$true;return}
+  $Channel.Bytes += [Text.Encoding]::UTF8.GetByteCount($Channel.Buffer,0,$count)
+  if($Channel.Bytes -gt 4MB){throw 'Driver log exceeded4MiB; bounded original prefix retained.'}
+  $Channel.Writer.Write($Channel.Buffer,0,$count);$Channel.Writer.Flush()
+  $Channel.Task=$Channel.Reader.ReadAsync($Channel.Buffer,0,$Channel.Buffer.Length)
+ }catch{$Channel.Error=$_.Exception.ToString();throw}
 }
 try {
  if (!$process.Start()) { throw 'Native driver did not start.' }; $started = $true
+ $driverPid=$process.Id;$driverCreation=$process.StartTime.ToUniversalTime().ToFileTimeUtc()
  $handle = $process.Handle
  if ($handle -eq [IntPtr]::Zero) { throw 'Exact retained driver handle missing.' }
  # A single async chunk per stream is in flight. Save each original chunk to its
  # bounded durable file immediately; no ReadToEnd result is lost on later failure.
- foreach ($definition in @(@{Reader=$process.StandardOutput;Path=$stdout},@{Reader=$process.StandardError;Path=$stderr})) {
-  $channel = [pscustomobject]@{Reader=$definition.Reader;Writer=[IO.StreamWriter]::new($definition.Path,$false,[Text.UTF8Encoding]::new($false));Buffer=[char[]]::new(1024);Task=$null;Bytes=0;Eof=$false;Error=''}
-  $readers += $channel; $channel.Task = $channel.Reader.ReadAsync($channel.Buffer,0,$channel.Buffer.Length)
+ foreach ($definition in @(@{Output=$true;Path=$stdout},@{Output=$false;Path=$stderr})) {
+  $channel=[pscustomobject]@{Reader=$null;Writer=$null;Buffer=[char[]]::new(1024);Task=$null;Bytes=0;Eof=$false;Error='';WriterDisposed=$false;ReaderDisposed=$false}
+  $readers.Add($channel)
+  $channel.Reader=if($definition.Output){$process.StandardOutput}else{$process.StandardError}
+  $channel.Writer=[IO.StreamWriter]::new($definition.Path,$false,[Text.UTF8Encoding]::new($false))
+  $channel.Task=$channel.Reader.ReadAsync($channel.Buffer,0,$channel.Buffer.Length)
  }
  while (!$process.WaitForExit(20)) {
   foreach ($channel in $readers) { Save-CompletedChunk $channel }
-  $driverBound=if($Phase -ceq 'RETIREMENT_ABORT'){180}else{10}
   if ($observerDeadline.Elapsed.TotalSeconds -ge $driverBound) { throw ('Public fixture driver exceeded its independent '+$driverBound.ToString()+'-second observer bound.') }
  }
- $exited = $true
+ $exited = $true;$driverElapsedSeconds=$observerDeadline.Elapsed.TotalSeconds
  $process.Refresh(); if ($null -eq $process.ExitCode) { throw 'Driver exit unavailable.' }; $status = [int]$process.ExitCode
 } catch { $failure = $_.Exception.ToString() }
 finally {
@@ -123,7 +137,7 @@ finally {
  # it or enumerate mutable runtime evidence while exact exit remains unconfirmed.
  if ($started -and !$exited) {
   try {
-   if (!$process.HasExited) { $process.Kill() }
+   if (!$process.HasExited) { $observerKillUsed=$true;$process.Kill() }
    if (!$process.WaitForExit(10000)) { throw 'Exact driver did not exit after observer cleanup.' }
    $exited = $true; $process.Refresh(); $status = [int]$process.ExitCode
   } catch { $failure += "`nExact driver cleanup failed: " + $_.Exception.ToString() }
@@ -139,14 +153,42 @@ finally {
   [Threading.Thread]::Sleep(10)
  } while ($drainDeadline.Elapsed.TotalSeconds -lt 10)
  $pipesDrained = $readers.Count -eq 2 -and @($readers | Where-Object { !$_.Eof -or $_.Error }).Count -eq 0
- foreach ($channel in $readers) { $channel.Writer.Flush(); $channel.Writer.Dispose() }
- if ($started -and !$pipesDrained) { $failure += "`nOriginal pipe drain incomplete; retained tasks/handles and guest runtime are not retired." }
- if (!(Test-Path -LiteralPath $stdout)) { [IO.File]::WriteAllText($stdout,'',[Text.UTF8Encoding]::new($false)) }
- if (!(Test-Path -LiteralPath $stderr)) { [IO.File]::WriteAllText($stderr,'',[Text.UTF8Encoding]::new($false)) }
- if ($exited -and $pipesDrained) { foreach ($channel in $readers) { $channel.Reader.Dispose() }; $process.Dispose() }
+ $global:RhaiPayloadPendingCustody.ExactExitConfirmed=$exited
+ $global:RhaiPayloadPendingCustody.PipesDrained=$pipesDrained
+ foreach($channel in $readers){
+  if($null -ne $channel.Writer){
+   try{$channel.Writer.Flush()}catch{$failure+="`nOriginal log Flush failed: "+$_.Exception.ToString()}
+   finally{try{$channel.Writer.Dispose();$channel.WriterDisposed=$true}catch{$failure+="`nOriginal log Dispose failed: "+$_.Exception.ToString()}}
+  }
+ }
+ if($started -and !$pipesDrained){$failure+="`nOriginal pipe drain incomplete; retain exact owners and guest runtime."}
+ if($exited -and $pipesDrained){
+  foreach($channel in $readers){
+   if($null -ne $channel.Reader){try{$channel.Reader.Dispose();$channel.ReaderDisposed=$true}catch{$failure+="`nOriginal reader Dispose failed: "+$_.Exception.ToString()}}
+  }
+  if(@($readers|Where-Object{!$_.WriterDisposed -or !$_.ReaderDisposed}).Count -eq 0){
+   try{$process.Dispose();$global:RhaiPayloadPendingCustody.ProcessDisposed=$true}catch{$failure+="`nExact Process Dispose failed: "+$_.Exception.ToString()}
+  }
+ }
+ $processDisposed=$global:RhaiPayloadPendingCustody.ProcessDisposed
+ if($exited -and $pipesDrained -and $processDisposed -and @($readers|Where-Object{!$_.WriterDisposed -or !$_.ReaderDisposed}).Count -eq 0){$global:RhaiPayloadPendingCustody=$null}
 }
-if ($started -and $exited -and $pipesDrained -and !$failure) {
+$custodyPending=$null -ne $global:RhaiPayloadPendingCustody
+$channelClosure=@($readers|ForEach-Object{@{reader_acquired=($null -ne $_.Reader);reader_disposed=$_.ReaderDisposed;writer_acquired=($null -ne $_.Writer);writer_disposed=$_.WriterDisposed;eof=$_.Eof;error=$_.Error;pending_task=($null -ne $_.Task)}})
+
+
+if($started -and $exited -and $pipesDrained -and !$custodyPending){
+ $closure=[Diagnostics.Stopwatch]::StartNew()
+ do{
+  $active=@(Get-CimInstance Win32_Process|Where-Object{$_.ExecutablePath -and $_.ExecutablePath.StartsWith($session+'\',[StringComparison]::OrdinalIgnoreCase)})
+  if($active.Count -eq 0){$ownExecutablesStopped=$true;break}
+  if($closure.Elapsed.TotalSeconds -ge 60){$failure+="`nOwned public payload executables did not stop within60seconds.";break}
+  [Threading.Thread]::Sleep(20)
+ }while($true)
+}
+if ($started -and $exited -and $pipesDrained -and !$custodyPending -and $ownExecutablesStopped -and !$failure) {
  try {
+  if($observerKillUsed){throw 'Observer termination cannot certify public payload acceptance.'}
   $output = [IO.File]::ReadAllText($stdout)
   if ($status -ne 0) { throw "Public native driver exited $status; preserve exact original logs and session." }
   foreach ($line in @('CLIENT_EXIT=0x0000004E','MODE=success;ACTION_CONFIRMED=True;',('PAYLOAD_EXIT='+$expectedPayload),'SUPERVISION=PayloadExited','CLEANUP_CONFIRMED=True','RUNTIME_REMOVED=True','HOST_EXPORTED=False')) {
@@ -183,6 +225,85 @@ if ($started -and $exited -and $pipesDrained -and !$failure) {
    if(!$wrongExpectationRejected){throw 'Negative control accepted an impossible work-entry expectation.'}
    Assert-WorkRetirementReadback $fields 2060 613419011
    $workRetirementRed=$wrongExpectationRejected;$workRetirementGreen=$true
+  }elseif($Contract -ceq 'job-quota'){
+   $snapshotRoot=Join-Path $evidence[0].FullName 'runtime'
+   if($driverElapsedSeconds -ge 110){throw 'Quota closure did not precede the120second natural leaf expiry.'}
+   $quotaText=[IO.File]::ReadAllText((Join-Path $snapshotRoot 'payload-job-quota.txt'))
+   if($quotaText.Length -gt 4096 -or !$quotaText.EndsWith("`r`n")){throw 'Quota record size/terminator invalid.'}
+   $keys=@('pid','creation','active_limit','payload_count','accounting_full','accounting_after','accounting_recovered','members','members_after','spawned','api_create_returned','api_error','excess_pid','excess_creation','excess_exit','excess_wait_confirmed','released_fixture_children','recovered_members','recovery_pid','recovery_creation','excess_user_code','protected_unchanged_at_denial','countercase_user_code','contract')
+   $rows=$quotaText.Substring(0,$quotaText.Length-2).Split(';');$q=@{}
+   if($rows.Count -ne $keys.Count){throw 'Quota record field count invalid.'}
+   for($index=0;$index -lt $keys.Count;$index++){$prefix=$keys[$index]+'=';if(!$rows[$index].StartsWith($prefix)){throw 'Quota field order invalid.'};$q[$keys[$index]]=$rows[$index].Substring($prefix.Length)}
+   foreach($key in @('pid','creation','spawned','accounting_full','accounting_after','accounting_recovered','recovery_pid','recovery_creation')){if($q[$key] -cnotmatch '^[1-9][0-9]*$'){throw 'Quota identity/count format invalid.'}}
+   foreach($key in @('api_error','excess_pid','excess_creation')){if($q[$key] -cnotmatch '^(0|[1-9][0-9]*)$'){throw 'Quota admission numeric field invalid.'}}
+   $members=@($q.members.Split(',')|ForEach-Object{[int]$_});$after=@($q.members_after.Split(',')|ForEach-Object{[int]$_});$recovered=@($q.recovered_members.Split(',')|ForEach-Object{[int]$_});$spawned=[int]$q.spawned
+   if($spawned -ne 15 -or $q.payload_count -cne '16' -or $q.active_limit -cne '16' -or $q.released_fixture_children -cne '2' -or $q.excess_user_code -cne 'False' -or $q.protected_unchanged_at_denial -cne 'True' -or $q.countercase_user_code -cne 'True' -or $q.contract -cne 'PASS'){throw 'Quota outcome contract invalid.'}
+   if($q.api_create_returned -ceq 'True'){
+    if($q.excess_wait_confirmed -cne 'True' -or $q.api_error -cne '0' -or $q.excess_exit -cnotmatch '^[0-9A-F]{8}$' -or $q.excess_exit -ceq '00000000' -or [int]$q.excess_pid -le 0 -or [long]$q.excess_creation -le 0){throw 'Returned excess process lacks exact stopped nonzero startup disposition.'}
+   }elseif($q.api_create_returned -ceq 'False'){
+    if([int]$q.api_error -le 0 -or $q.excess_pid -cne '0' -or $q.excess_creation -cne '0' -or $q.excess_exit -cne 'NONE' -or $q.excess_wait_confirmed -cne 'False'){throw 'Native API denial disposition invalid.'}
+   }else{throw 'Quota API result invalid.'}
+   $admissionText=[IO.File]::ReadAllText((Join-Path $snapshotRoot 'payload-job-quota.txt.admission'))
+   $expectedAdmission='create_returned='+$q.api_create_returned+';api_error='+$q.api_error+';pid='+$q.excess_pid+';creation='+$q.excess_creation+';wait_confirmed='+$q.excess_wait_confirmed+';exit='+$q.excess_exit+';before='+$q.members+"`r`n"
+   if($admissionText -cne $expectedAdmission){throw 'Durable exact admission differs from final quota result.'}
+   $diagnostic=[IO.File]::ReadAllText((Join-Path $snapshotRoot 'quota-observation.log'))
+   if($diagnostic.Length -gt 262144 -or !$diagnostic.Contains('phase=before-start;before='+$q.members+"`r`n") -or !$diagnostic.Contains('phase=start-result;create_returned='+$q.api_create_returned+';native_error='+$q.api_error+"`r`n") -or !$diagnostic.Contains(';phase=settled-denial;class=3;capacity=64;bytes=520;success=True;native_error=0;') -or $diagnostic.Contains('phase=failure')){throw 'Bounded phase/query diagnostics do not bind the actual denial.'}
+   $fixtureActors=@(@{pid=[int]$q.pid;creation=[long]$q.creation})
+   for($index=0;$index -lt $spawned;$index++){
+    $file='quota-child-'+$index.ToString('D2',[Globalization.CultureInfo]::InvariantCulture)+'.txt'
+    $text=[IO.File]::ReadAllText((Join-Path $snapshotRoot $file))
+    if($text -cnotmatch '^pid=([1-9][0-9]*);creation=([1-9][0-9]*);job_member=True\r\n$'){throw 'Exact quota fixture child record invalid.'}
+    $fixtureActors+=@{pid=[int]$Matches[1];creation=[long]$Matches[2]}
+   }
+   function Read-QuotaMembers([string]$Name){
+    $values=@();foreach($row in [IO.File]::ReadAllLines((Join-Path $snapshotRoot $Name))){
+     if($row -cnotmatch '^pid=([1-9][0-9]*);creation=([1-9][0-9]*)$'){throw 'Full quota member identity invalid.'}
+     $values+=@{pid=[int]$Matches[1];creation=[long]$Matches[2]}
+    };return $values
+   }
+   $allMembers=@(Read-QuotaMembers 'quota-members.txt');$recoveredMembers=@(Read-QuotaMembers 'quota-recovered-members.txt')
+   function Assert-QuotaProof([int]$Wanted){
+    if($fixtureActors.Count -ne $Wanted -or $members.Count -lt $Wanted -or $members.Count -gt 32 -or $allMembers.Count -ne $members.Count -or ($members-join ',') -cne ($after-join ',') -or ($members-join ',') -cne (@($members|Sort-Object -Unique)-join ',') -or $members -contains 0 -or (($allMembers|ForEach-Object{$_.pid})-join ',') -cne ($members-join ',')){throw 'Native quota proof mismatch.'}
+    foreach($actor in $fixtureActors){if(@($allMembers|Where-Object{$_.pid -eq $actor.pid -and $_.creation -eq $actor.creation}).Count -ne 1){throw 'Native quota proof mismatch.'}}
+   }
+   try{Assert-QuotaProof 17}catch{if($_.Exception.Message -cne 'Native quota proof mismatch.'){throw};$jobQuotaSensitivity=$true};if(!$jobQuotaSensitivity){throw 'Quota wrong-count control missing.'};Assert-QuotaProof 16
+   if($recovered.Count -lt 1 -or $recovered.Count -gt 32 -or ($recovered-join ',') -cne (@($recovered|Sort-Object -Unique)-join ',') -or (($recoveredMembers|ForEach-Object{$_.pid})-join ',') -cne ($recovered-join ',')){throw 'Countercase complete Job identity binding invalid.'}
+   $recovery=@{pid=[int]$q.recovery_pid;creation=[long]$q.recovery_creation}
+   if(@($recoveredMembers|Where-Object{$_.pid -eq $recovery.pid -and $_.creation -eq $recovery.creation}).Count -ne 1){throw 'Countercase actor not in its real bounded Job.'}
+   if([IO.File]::ReadAllText((Join-Path $snapshotRoot 'quota-excess.txt')) -cne ('pid='+$recovery.pid+';creation='+$recovery.creation+";job_member=True`r`n")){throw 'Countercase fresh user-code record invalid.'}
+   function Assert-ProtectedQuota([string]$Expected){if([IO.File]::ReadAllText((Join-Path $snapshotRoot 'quota-protected-after-denial.txt')) -cne $Expected){throw 'Protected quota state mismatch.'}}
+   try{Assert-ProtectedQuota "WRONG_PROTECTED_QUOTA_EXPECTATION`r`n"}catch{if($_.Exception.Message -cne 'Protected quota state mismatch.'){throw};$quotaProtectedSensitivity=$true};if(!$quotaProtectedSensitivity){throw 'Protected quota sensitivity missing.'};Assert-ProtectedQuota "protected-before-quota`r`n"
+   if([IO.File]::ReadAllText((Join-Path $snapshotRoot 'quota-protected.txt')) -cne "protected-before-quota`r`nEXCESS_PROCESS_RAN`r`n"){throw 'Allowed countercase effect missing.'}
+   function Assert-QuotaImages([string]$Name,[object[]]$Census,[object[]]$Fixtures){
+    $rows=[IO.File]::ReadAllLines((Join-Path $snapshotRoot $Name));if($rows.Count -ne $Census.Count){throw 'Quota image census is incomplete.'}
+    $seen=@();$imageObservations=@()
+    foreach($row in $rows){
+     if($row -cnotmatch '^pid=([1-9][0-9]*);creation=([1-9][0-9]*);image_b64=([A-Za-z0-9+/]+={0,2})$'){throw 'Quota image record format invalid.'}
+     $pidValue=[int]$Matches[1];$creation=[long]$Matches[2];$image=[Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($Matches[3]))
+     if($seen -contains $pidValue -or @($Census|Where-Object{$_.pid -eq $pidValue -and $_.creation -eq $creation}).Count -ne 1){throw 'Quota image identity differs from complete Job census.'};$seen+=,$pidValue
+     $isFixture=@($Fixtures|Where-Object{$_.pid -eq $pidValue -and $_.creation -eq $creation}).Count -eq 1
+     $expectedImage=if($isFixture){Join-Path $runtimeObserved 'fixture.exe'}else{Join-Path ([Environment]::SystemDirectory) 'conhost.exe'}
+     if(![string]::Equals($image,$expectedImage,[StringComparison]::OrdinalIgnoreCase)){throw 'Unclassified quota member image.'}
+     $imageObservations+=@{pid=$pidValue;creation=$creation;image=$image;fixture=$isFixture}
+    };return $imageObservations
+   }
+   $fullImages=@(Assert-QuotaImages 'quota-member-images.txt' $allMembers $fixtureActors)
+   $recoveredFixtures=@($fixtureActors[0])+@($fixtureActors|Select-Object -Skip 3)+@($recovery)
+   foreach($actor in $recoveredFixtures){if(@($recoveredMembers|Where-Object{$_.pid -eq $actor.pid -and $_.creation -eq $actor.creation}).Count -ne 1){throw 'Recovered fixture actor absent from full census.'}}
+   $recoveredImages=@(Assert-QuotaImages 'quota-recovered-images.txt' $recoveredMembers $recoveredFixtures)
+   foreach($entry in @(@{phase='before-admission';field='accounting_full'},@{phase='settled-denial';field='accounting_after'},@{phase='recovered-countercase';field='accounting_recovered'})){
+    $pattern='(?m)^accounting;phase='+$entry.phase+';success=True;native_error=0;total=([0-9]+);active=([0-9]+);terminated=([0-9]+)\r?$'
+    $matched=[regex]::Matches($diagnostic,$pattern)
+    if($matched.Count -ne 1 -or $matched[0].Groups[2].Value -cne $q[$entry.field] -or [int]$q[$entry.field] -lt 1 -or [int]$q[$entry.field] -gt 64){throw 'Quota accounting diagnostics differ from recorded actual counts.'}
+   }
+   $allObserved=@($allMembers)+@($recoveredMembers)
+   if($q.api_create_returned -ceq 'True'){$allObserved+=@{pid=[int]$q.excess_pid;creation=[long]$q.excess_creation}}
+   foreach($identity in $allObserved){
+    $actor=$null;try{$actor=[Diagnostics.Process]::GetProcessById($identity.pid)}catch [ArgumentException]{}
+    if($null -ne $actor){try{if(!$actor.HasExited -and $actor.StartTime.ToUniversalTime().ToFileTimeUtc() -eq $identity.creation){throw 'Exact quota identity remains live.'}}finally{$actor.Dispose()}}
+   }
+   $jobQuotaObserved=@{root=$fixtureActors[0];actors=$allMembers;fixture_actors=$fixtureActors;recovered_actors=$recoveredMembers;recovery=$recovery;members=$members;members_after=$after;recovered_members=$recovered;spawned=$spawned;admission=$q;full_images=$fullImages;recovered_images=$recoveredImages;ordinary_payload_limit=16;physical_os_actor_limit_claimed=$false}
+   $quotaActorsStopped=$true;$jobQuotaGreen=$true
   }elseif($Contract -ceq 'job-resources'){
    function Read-JobResourceRecord([string]$Path){
     $rows=[IO.File]::ReadAllLines($Path);$keys=@('pid','creation','flags','active_process_limit','process_memory_bytes','job_memory_bytes','contract');$values=@{}
@@ -258,12 +379,15 @@ if ($started -and $exited -and $pipesDrained -and !$failure) {
   $hostRecord = $true; $complete = $true
  } catch { $failure = $_.Exception.ToString() }
 }
-$record = [ordered]@{id=$id;scope=$session;run=$run;exit=$status;accepted=$complete;failure=$failure;fresh_host_record=$hostRecord;phase=$Phase;contract=$Contract;job_resources_observed=$jobResourcesObserved;job_resources_red=$jobResourcesRed;job_resources_green=$jobResourcesGreen;job_resources_sensitivity=$jobResourcesSensitivity;job_actors_stopped=$jobActorsStopped;expected_payload_exit=$expectedPayload;work_retirement_red=$workRetirementRed;work_retirement_green=$workRetirementGreen;environment_contract_red=$environmentRed;environment_contract_green=$environmentGreen;allocated_runtime=$runtimeObserved;runtime_absent_readback=$runtimeAbsent;runtime_absence_negative_control=$runtimeAbsenceRed;environment_observed=$environmentObserved;environment_mismatches=$environmentMismatches;parent_environment_changed=$parentChanged;fixture_sha256=$FixtureSha256;driver_launched=$started;exact_driver_exited=$exited;pipes_drained=$pipesDrained;retained_driver_handles=($started -and (!$exited -or !$pipesDrained));retained_binaries=$expected;product_run=$false}
-[IO.File]::WriteAllText((Join-Path $session 'observer.json'),($record|ConvertTo-Json -Compress -Depth 5),[Text.UTF8Encoding]::new($false))
-$files = @(Get-Item -LiteralPath $stdout,$stderr,(Join-Path $session 'observer.json'))
+$record = [ordered]@{id=$id;scope=$session;run=$run;exit=$status;accepted=$complete;failure=$failure;fresh_host_record=$hostRecord;phase=$Phase;contract=$Contract;driver_elapsed_seconds=$driverElapsedSeconds;driver_pid=$driverPid;driver_creation=$driverCreation;observer_kill_used=$observerKillUsed;process_disposed=$processDisposed;custody_pending=$custodyPending;channel_closure=$channelClosure;owned_executables_stopped=$ownExecutablesStopped;job_quota_observed=$jobQuotaObserved;job_quota_green=$jobQuotaGreen;job_quota_sensitivity=$jobQuotaSensitivity;quota_protected_sensitivity=$quotaProtectedSensitivity;quota_actors_stopped=$quotaActorsStopped;job_resources_observed=$jobResourcesObserved;job_resources_red=$jobResourcesRed;job_resources_green=$jobResourcesGreen;job_resources_sensitivity=$jobResourcesSensitivity;job_actors_stopped=$jobActorsStopped;expected_payload_exit=$expectedPayload;work_retirement_red=$workRetirementRed;work_retirement_green=$workRetirementGreen;environment_contract_red=$environmentRed;environment_contract_green=$environmentGreen;allocated_runtime=$runtimeObserved;runtime_absent_readback=$runtimeAbsent;runtime_absence_negative_control=$runtimeAbsenceRed;environment_observed=$environmentObserved;environment_mismatches=$environmentMismatches;parent_environment_changed=$parentChanged;fixture_sha256=$FixtureSha256;fixture_build_manifest_sha256=((Get-FileHash -LiteralPath $fixtureBuild.manifest).Hash.ToLowerInvariant());fixture_build=$fixtureBuild.build;driver_launched=$started;exact_driver_exited=$exited;pipes_drained=$pipesDrained;retained_driver_handles=$custodyPending;retained_binaries=$expected;product_run=$false}
+[IO.File]::WriteAllText((Join-Path $session 'observer.json'),($record|ConvertTo-Json -Compress -Depth 8),[Text.UTF8Encoding]::new($false))
+$files=@(Get-Item -LiteralPath (Join-Path $session 'observer.json'))
+foreach($path in @($stdout,$stderr)){if(Test-Path -LiteralPath $path -PathType Leaf){$files+=@(Get-Item -LiteralPath $path)}}
 # Enumerate runtime evidence only after the validated completion/removal receipt.
 # On an observer/control failure export stable originals and preserve guest custody.
-if ($complete) { $files += @(Get-ChildItem -LiteralPath $run -Recurse -File) }
+if (!$custodyPending -and $ownExecutablesStopped) { $files += @(Get-ChildItem -LiteralPath $run -Recurse -File) }
+$files+=@(Get-ChildItem -LiteralPath $bin -File);$files+=@(Get-ChildItem -LiteralPath $input -File)
+if($fixtureReadback){$files+=@(Get-ChildItem -LiteralPath $fixtureReadback -Recurse -File)}
 if ($buildReadback -and (Test-Path -LiteralPath $buildReadback -PathType Container)) {
  $files += @(Get-ChildItem -LiteralPath $buildReadback -Recurse -File)
 }
@@ -279,7 +403,7 @@ function Emit-Frame([string] $Kind, [object] $Value) {
     $script:sequence++
 }
 try {
-    $serial.Open(); Emit-Frame 'BEGIN' $record
+    $serial.Open(); Emit-Frame 'BEGIN' @{id=$id;scope=$session;phase=$Phase;contract=$Contract;accepted=$complete;exit=$status;driver_pid=$driverPid;driver_creation=$driverCreation}
     foreach ($file in $files) {
         if ($file.Length -gt 4MB -or ($file.Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) { throw 'Export file exceeds cap or is a reparse point.' }
         $relative = $file.FullName.Substring($session.Length + 1).Replace('\','/')

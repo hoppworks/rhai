@@ -1,0 +1,10 @@
+{
+  "utc": "2026-10-25T14:14:44.069172+00:00",
+  "serial_inode": 126687411,
+  "serial_offset": 674642,
+  "source_sha256": "fb9aca4313a3f8abf912132c795ebb6cfd4249b88d13342fe9c7af027b45653f",
+  "manifest_sha256": "40c530f260ed931d27eb289c0916c08831d9c3a19bfb633fb43fc8997957d219",
+  "source_and_entry_independently_reviewed": true,
+  "typed_command_independently_viewed": true,
+  "enter_sent": true
+}

@@ -1,0 +1,11 @@
+{
+  "host_utc": "2026-10-25T14:43:16.776057+00:00",
+  "serial_path": "/var/log/libvirt/qemu/rhai-win11-quality-serial0.log",
+  "inode": 126688224,
+  "offset": 424872,
+  "start_sha256": "df474288a17a6537ca117a38049a716bd399c86386273d7b378847bc2901f88c",
+  "command": "if ((get-filehash e:\\start.ps1).hash -eq 'df474288a17a6537ca117a38049a716bd399c86386273d7b378847bc2901f88c') { & ([scriptblock]::create((get-content e:\\start.ps1 -raw))) } else { throw 'source mismatch' }",
+  "default_tools_compilers": 0,
+  "fixture_compiler_planned": 1,
+  "drivers_planned": 3
+}

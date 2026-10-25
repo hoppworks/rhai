@@ -1,0 +1,179 @@
+{
+  "frames": 534,
+  "files": {
+    "observer.json": {
+      "path": "observer.json",
+      "sha256": "c8033bdf99b57963687c795ad344f1b47ffd0e9e85c0143b25bd3700b559fc7b",
+      "length": 3237
+    },
+    "bootstrap.stdout": {
+      "path": "bootstrap.stdout",
+      "sha256": "6ca5014530063611e554f548d93554d9a5710a078737350c182079fcaf1b74ff",
+      "length": 579
+    },
+    "bootstrap.stderr": {
+      "path": "bootstrap.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/.scoped-run-4a97523137774e18bf933fb870a3c763.journal": {
+      "path": "run/.scoped-run-4a97523137774e18bf933fb870a3c763.journal",
+      "sha256": "7536b64ed1b6475d2119ea69227f3546e29537c744291a71fc16df62bbb51977",
+      "length": 2398
+    },
+    "run/.scoped-evidence-1eaedfcb2c7e4f38834e9341dfc9f36e/manifest.txt": {
+      "path": "run/.scoped-evidence-1eaedfcb2c7e4f38834e9341dfc9f36e/manifest.txt",
+      "sha256": "a36c1c15bec1c068cf1b15577cadc952296ce350946d49701df0a14dbe02984e",
+      "length": 403
+    },
+    "run/.scoped-evidence-1eaedfcb2c7e4f38834e9341dfc9f36e/stderr.log": {
+      "path": "run/.scoped-evidence-1eaedfcb2c7e4f38834e9341dfc9f36e/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/.scoped-evidence-1eaedfcb2c7e4f38834e9341dfc9f36e/stdout.log": {
+      "path": "run/.scoped-evidence-1eaedfcb2c7e4f38834e9341dfc9f36e/stdout.log",
+      "sha256": "5ce072dee71ce6c468ef618c76b9f1b1fc9462020feedfdaa7688761c7ad992f",
+      "length": 41
+    },
+    "run/.scoped-evidence-1eaedfcb2c7e4f38834e9341dfc9f36e/runtime/fixture.exe": {
+      "path": "run/.scoped-evidence-1eaedfcb2c7e4f38834e9341dfc9f36e/runtime/fixture.exe",
+      "sha256": "e6333f1c445595463669babb5d6f7f5a37980795974e41aa40b47bf6bf9250b5",
+      "length": 28160
+    },
+    "run/.scoped-evidence-1eaedfcb2c7e4f38834e9341dfc9f36e/runtime/payload-environment.txt": {
+      "path": "run/.scoped-evidence-1eaedfcb2c7e4f38834e9341dfc9f36e/runtime/payload-environment.txt",
+      "sha256": "b73eb136ca88254305905ab67bd5f11a605488d3491fd55a7e7a5f1b5af167e5",
+      "length": 1250
+    },
+    "bin/MonitorAcceptanceDriver.exe": {
+      "path": "bin/MonitorAcceptanceDriver.exe",
+      "sha256": "ac032063f99e976bec450b41aeee41bece876630073a776ac380c00b2058ab24",
+      "length": 207872
+    },
+    "bin/ScopedRunner.exe": {
+      "path": "bin/ScopedRunner.exe",
+      "sha256": "30a33cdb5e13089ba71dca135b61a838b32e8f03823b55abcaf61ef8acae3c62",
+      "length": 179712
+    },
+    "input/fixture.exe": {
+      "path": "input/fixture.exe",
+      "sha256": "e6333f1c445595463669babb5d6f7f5a37980795974e41aa40b47bf6bf9250b5",
+      "length": 28160
+    },
+    "fixture-build-readback/bootstrap.stderr": {
+      "path": "fixture-build-readback/bootstrap.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "fixture-build-readback/bootstrap.stdout": {
+      "path": "fixture-build-readback/bootstrap.stdout",
+      "sha256": "0cf8a0049555ae1eee403999ee62fb70b6766ee72c749b87117fe1fa152d92b4",
+      "length": 1046
+    },
+    "fixture-build-readback/build-manifest.txt": {
+      "path": "fixture-build-readback/build-manifest.txt",
+      "sha256": "12fa43699b4f989a01d8c93f8dcaa5e009adc0b8d49e17f96edb7169f60523b6",
+      "length": 1735
+    },
+    "fixture-build-readback/build-observer.json": {
+      "path": "fixture-build-readback/build-observer.json",
+      "sha256": "df00daa3183231f83f3d2ac949e0dfa63e15adb3cd0e7d57ca1dd838d8b74dbf",
+      "length": 1613
+    },
+    "fixture-build-readback/run-result.txt": {
+      "path": "fixture-build-readback/run-result.txt",
+      "sha256": "79c5b9102422b2f755e2aed8ef416a0a3ab0156de7c5ba4c85dbeda2e6ac6761",
+      "length": 124
+    },
+    "fixture-build-readback/logs/compile-PayloadFixture.stderr.txt": {
+      "path": "fixture-build-readback/logs/compile-PayloadFixture.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "fixture-build-readback/logs/compile-PayloadFixture.stdout.txt": {
+      "path": "fixture-build-readback/logs/compile-PayloadFixture.stdout.txt",
+      "sha256": "7d6f399bc4ddebe9af0b4976bbe3450aac7fb48c8eba5ec95e37cae5283c787d",
+      "length": 131
+    },
+    "fixture-build-readback/logs/job-members.jsonl": {
+      "path": "fixture-build-readback/logs/job-members.jsonl",
+      "sha256": "4a872480e94e391df7dea26b33baa24d268c4d6859be60330d44fe77aae15133",
+      "length": 376
+    },
+    "build-readback/bootstrap.stderr": {
+      "path": "build-readback/bootstrap.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "build-readback/bootstrap.stdout": {
+      "path": "build-readback/bootstrap.stdout",
+      "sha256": "5c252624f74b65b7275e4867f48d3a0fdc076a1f5c5bbee9893b8f9f39dc4162",
+      "length": 1116
+    },
+    "build-readback/build-manifest.txt": {
+      "path": "build-readback/build-manifest.txt",
+      "sha256": "bb73f281ff87b2c767cef156c4f5aa3a552706002f8552011abce0f3232cbc01",
+      "length": 1926
+    },
+    "build-readback/build-observer.json": {
+      "path": "build-readback/build-observer.json",
+      "sha256": "6085b82b7e4c74e19b210cfc387881330b5798a39f336ef5b6b4c51ea3287dca",
+      "length": 1620
+    },
+    "build-readback/run-result.txt": {
+      "path": "build-readback/run-result.txt",
+      "sha256": "79c5b9102422b2f755e2aed8ef416a0a3ab0156de7c5ba4c85dbeda2e6ac6761",
+      "length": 124
+    },
+    "build-readback/logs/compile-native-driver.stderr.txt": {
+      "path": "build-readback/logs/compile-native-driver.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "build-readback/logs/compile-native-driver.stdout.txt": {
+      "path": "build-readback/logs/compile-native-driver.stdout.txt",
+      "sha256": "6dfe32204c5bb3ed0021c74c2147972d4acdc8b4b12842601d5275992daca692",
+      "length": 2901
+    },
+    "build-readback/logs/compile-PayloadFixture.stderr.txt": {
+      "path": "build-readback/logs/compile-PayloadFixture.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "build-readback/logs/compile-PayloadFixture.stdout.txt": {
+      "path": "build-readback/logs/compile-PayloadFixture.stdout.txt",
+      "sha256": "7d6f399bc4ddebe9af0b4976bbe3450aac7fb48c8eba5ec95e37cae5283c787d",
+      "length": 131
+    },
+    "build-readback/logs/compile-production-runner.stderr.txt": {
+      "path": "build-readback/logs/compile-production-runner.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "build-readback/logs/compile-production-runner.stdout.txt": {
+      "path": "build-readback/logs/compile-production-runner.stdout.txt",
+      "sha256": "6dfe32204c5bb3ed0021c74c2147972d4acdc8b4b12842601d5275992daca692",
+      "length": 2901
+    }
+  },
+  "complete": true,
+  "begin": {
+    "id": "rhai-process-quota-environment04-55e61c971bf447f7a2e1332a66375ca3",
+    "exit": 0,
+    "driver_creation": 134374175664060720,
+    "accepted": true,
+    "contract": "environment",
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-55e61c971bf447f7a2e1332a66375ca3",
+    "phase": "GREEN",
+    "driver_pid": 8612
+  },
+  "end": {
+    "id": "rhai-process-quota-environment04-55e61c971bf447f7a2e1332a66375ca3",
+    "driver_launched": true,
+    "files": 31,
+    "accepted": true,
+    "exit": 0,
+    "guest_evidence_retained": true
+  }
+}

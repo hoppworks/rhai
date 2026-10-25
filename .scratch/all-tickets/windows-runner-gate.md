@@ -59,7 +59,7 @@ Actual payload resource setup is now21e59d11: kill-close/no breakaway,16active,
 Native old-source RED then current root+child resource GREEN and same-build
 private-environment GREEN pass: [resource proof](windows-job-resources-20261025/proof.md).
 These observe real kernel configuration/inheritance and small-workload closure;
-quota-exhaustion and real project-command behavior remain open. Older deadline/
+The ordinary-payload process-quota row is now accepted as scoped below; actual memory-limit denial and real project-command behavior remain open. Older deadline/
 lease/membership rows keep their original-revision scope, not new-limit labels.
 
 Native creation-failure proof now closes the actual denial and returned-real-handle
@@ -74,3 +74,5 @@ The creation packet subsequently retired all7own guest scopes,4own media and
 That previously useful baseline has since been retired at ended reuse; its accepted proof remains applicable at its stated source. The separate deadline build/control packet has also completed export and retired its exact finite resources.
 
 Real watchdog124 and independent monitor1800000ms acceptance are scoped in [the deadline proof](windows-deadlines-20261025/proof.md). Each has its own actual result; interrupted absolute01 remains unaccepted, and no identical pre-/post-update OS image or full Windows gate is inferred.
+
+Native ordinary-payload process quota is accepted at the unchanged kernel setting 16 in [the quota proof](windows-process-quota-20261025/proof.md). The root, 15 ready payloads and 16 exact-image conhost helpers produce 32 actual members; extra creation is denied with error 1816 and no effect. The identical command then runs after two owned slots are released. All full/recovered identities stop and the runtime is absent; resource/environment regressions pass with eight CRC records each. Accounting 32/30 is retained; no universal ceiling of 16 physical OS actors or retrospective helper classification is claimed. Three earlier attempts remain unaccepted. Nine guest scopes, eight media and the 99-file host staging root are retired; only the compatible default build remains under its original finite expiry. Actual memory denial, failed backend export/cleanup, bounded project commands and native Rhai/release remain open.

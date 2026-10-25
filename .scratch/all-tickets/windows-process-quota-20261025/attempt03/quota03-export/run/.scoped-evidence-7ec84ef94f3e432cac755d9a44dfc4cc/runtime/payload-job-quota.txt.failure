@@ -1,0 +1,3 @@
+phase=admission-wait
+System.IO.InvalidDataException: full-capacity admission did not stop before excess user code
+   at PayloadFixture.JobQuotaContract(String path)

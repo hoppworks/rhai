@@ -607,3 +607,5 @@ Originals and bindings are in the existing
 workhorse-monitor-fixture02 and workhorse-parent-exit01; parent-exit01-binding.json
 links the combined review37dc3f53. Remaining fault controls, retained session/work
 retirement, full custody, native Rust/Cargo and release acceptance remain open.
+
+Native ordinary-payload quota acceptance (2026-10-25) is recorded in `.scratch/all-tickets/windows-process-quota-20261025/proof.md`: root plus 15 ready payloads, complete PID/start/image census including verified canonical conhost helpers, actual error 1816 with no useful effect, and the same command succeeding after capacity is freed. Affected resource/environment controls pass. The configured `ActiveProcessLimit=16` is tested for ordinary payloads; census/accounting includes 32 members at full and 30 after recovery, so no ceiling of 16 physical OS processes is asserted. Memory denial, failed export/cleanup, project-command and full native Rhai/release gates remain open.

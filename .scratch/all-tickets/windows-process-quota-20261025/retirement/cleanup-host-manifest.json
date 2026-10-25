@@ -1,0 +1,953 @@
+{
+  "nonce": "48d19d95797f4b4f84f6962bac3f955c",
+  "accepted_for_cleanup": true,
+  "host_receipt_sha256": "612762147839f9abbb4ed19bfbd314d7de2cc803dcd1e37be8716ac30a156b41",
+  "build_readback_sha256": "70bcd1e72930025987247db138d0486857ba64803b52b81810c79ccb3a367732",
+  "scopes": [
+    {
+      "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-911a10854db94505b29817e3720d551f",
+      "kind": "completed-control",
+      "id": "rhai-process-quota-quota01-911a10854db94505b29817e3720d551f",
+      "contract": "job-quota",
+      "expected_accepted": false,
+      "runtime": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-911a10854db94505b29817e3720d551f\\run\\scoped-0e43ccfeb74142beb0c599b939278057",
+      "actors": [
+        {
+          "pid": 424,
+          "creation": 134374149035825322
+        },
+        {
+          "pid": 1332,
+          "creation": 134374149036464358
+        },
+        {
+          "pid": 2076,
+          "creation": 134374149036948582
+        },
+        {
+          "pid": 3352,
+          "creation": 134374149007961870
+        },
+        {
+          "pid": 4452,
+          "creation": 134374149034775160
+        },
+        {
+          "pid": 4816,
+          "creation": 134374149037383025
+        },
+        {
+          "pid": 5392,
+          "creation": 134374149036905482
+        },
+        {
+          "pid": 5984,
+          "creation": 134374149036417601
+        },
+        {
+          "pid": 6116,
+          "creation": 134374149034182990
+        },
+        {
+          "pid": 6308,
+          "creation": 134374149035350725
+        },
+        {
+          "pid": 6528,
+          "creation": 134374149034731959
+        },
+        {
+          "pid": 7400,
+          "creation": 134374149032262325
+        },
+        {
+          "pid": 7696,
+          "creation": 134374149035295101
+        },
+        {
+          "pid": 7932,
+          "creation": 134374149031392753
+        },
+        {
+          "pid": 7940,
+          "creation": 134374149035872747
+        },
+        {
+          "pid": 8416,
+          "creation": 134374149034067917
+        },
+        {
+          "pid": 9024,
+          "creation": 134374149037431255
+        }
+      ],
+      "files": {
+        "observer.json": "9ca6aeb57f28e8e1d827f89f6ac07710bab82a81f95d910c92190cf6a452dce2",
+        "bootstrap.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bootstrap.stderr": "f1c0b6c5cd5726c1f2f4628ca377762150c20d37f5838c49c59ae2575e4927f6",
+        "run/.scoped-run-d131360f29aa4d55b6f7a166e7001e9b.journal": "8dff7c5908fa18abb42f29e06924e931e249bb18955d25b888f1cf0ad1df569b",
+        "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/manifest.txt": "dc7ef25f81f16eab99dff58cc435a1160fcf1375787ea858c4cf84b67e9c612c",
+        "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/stderr.log": "9e89798a70236b75f34e4686e7adbc3b3de006c74c15e1a53fd89b5db63b2cce",
+        "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/fixture.exe": "abaf1ae805adc061a987f0b5fa2379dea59872dcc6c727a4b74411060eb53d82",
+        "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/payload-job-quota.txt.failure": "6c8c5789f9a62f276e3af1063455f2717ce4945af2667de2048883680926af67",
+        "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/quota-child-00.txt": "101dba70a940cfbb494215807e89f79aa4149233fbf6f849fd3475111e5d36c4",
+        "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/quota-child-01.txt": "9f64a8bd6d7f330a0b57482dcdeb4006d9b5d2337b24a9363d91fc17910d7387",
+        "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/quota-child-02.txt": "16b8b931ef2380fcc454362d95d7c1817816ff5cd8db28f8a64f33c50cbab461",
+        "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/quota-child-03.txt": "5656b8584d33b0b4056a5cfbb579f1efa9622bdd89b959e793b60955b5375652",
+        "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/quota-child-04.txt": "13db865f4b80153181f32e2cbd65e04e1126d1fa22416c0cc7416f2c8cef719f",
+        "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/quota-child-05.txt": "690f54ca583d70009ff1d4bfaf8c151896d325976d9bce14993aca5c7086b575",
+        "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/quota-child-06.txt": "2d77fae08207162ae755fa9c6c1ab0fbc8dcadf95cc7bd0681fe51c5849ae19f",
+        "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/quota-members.txt": "1b2b0cd8ab2237441f08c2aaff54b872f8843ecce8b4e38226009d87ed5a6405",
+        "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/quota-protected.txt": "1123ff518601acacaf71f18ec041729608ef19a509b8025fd1ff727a02e23e74",
+        "bin/MonitorAcceptanceDriver.exe": "ac032063f99e976bec450b41aeee41bece876630073a776ac380c00b2058ab24",
+        "bin/ScopedRunner.exe": "30a33cdb5e13089ba71dca135b61a838b32e8f03823b55abcaf61ef8acae3c62",
+        "input/fixture.exe": "abaf1ae805adc061a987f0b5fa2379dea59872dcc6c727a4b74411060eb53d82",
+        "build-readback/bootstrap.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/bootstrap.stdout": "5c252624f74b65b7275e4867f48d3a0fdc076a1f5c5bbee9893b8f9f39dc4162",
+        "build-readback/build-manifest.txt": "bb73f281ff87b2c767cef156c4f5aa3a552706002f8552011abce0f3232cbc01",
+        "build-readback/build-observer.json": "6085b82b7e4c74e19b210cfc387881330b5798a39f336ef5b6b4c51ea3287dca",
+        "build-readback/run-result.txt": "79c5b9102422b2f755e2aed8ef416a0a3ab0156de7c5ba4c85dbeda2e6ac6761",
+        "build-readback/logs/compile-native-driver.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/logs/compile-native-driver.stdout.txt": "6dfe32204c5bb3ed0021c74c2147972d4acdc8b4b12842601d5275992daca692",
+        "build-readback/logs/compile-PayloadFixture.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/logs/compile-PayloadFixture.stdout.txt": "7d6f399bc4ddebe9af0b4976bbe3450aac7fb48c8eba5ec95e37cae5283c787d",
+        "build-readback/logs/compile-production-runner.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/logs/compile-production-runner.stdout.txt": "6dfe32204c5bb3ed0021c74c2147972d4acdc8b4b12842601d5275992daca692",
+        "build-readback/logs/exit-code-regression-17-wrong-expected.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/logs/exit-code-regression-17-wrong-expected.stdout.txt": "69826b89317496600a95e98535238d73a7091d7e0ff5c9585f08c25bb71a75c3",
+        "build-readback/logs/exit-code-regression-17.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/logs/exit-code-regression-17.stdout.txt": "32d543b6dda9fd1365b76e3057e9fac50673187a4c91cb8c18413593043e1689",
+        "build-readback/logs/exit-code-regression-zero.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/logs/exit-code-regression-zero.stdout.txt": "2b98ea68ce93cdb1de4a7d10f4c46c17aacc658cc11ed8e32cc0d15612e9c568",
+        "build-readback/logs/setup-failure-child.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/logs/setup-failure-child.stdout.txt": "8ff179f55be1a9908f3e33e97da8aafce587111fab0b67cd5a0cf189c4bad44d",
+        "build-readback/logs/setup-failure-control.stderr.txt": "dc383c8e63001e4200c71dd2667219139fd7c53397e9e0b15ef4bff8bc79b12c",
+        "build-readback/logs/setup-failure-control.stdout.txt": "a1064b1c88c57b95c4efbc4875ef110c1b3610960a8f19b8180b39c0e6a1a3b9",
+        "build-readback/logs/setup-failure-control.txt": "34a4db6d2ed96f595b2ad6490e6375abb65a88b092715b36c0e44d7b46b2be5d"
+      },
+      "empty_dirs": [
+        "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime"
+      ]
+    },
+    {
+      "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-50a587ef233d4b54a1586bf029a426e9",
+      "kind": "completed-control",
+      "id": "rhai-process-quota-quota02-50a587ef233d4b54a1586bf029a426e9",
+      "contract": "job-quota",
+      "expected_accepted": false,
+      "runtime": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-50a587ef233d4b54a1586bf029a426e9\\run\\scoped-b260ce4643cc427db10918f6d2e20195",
+      "actors": [
+        {
+          "pid": 392,
+          "creation": 134374161340631642
+        },
+        {
+          "pid": 1540,
+          "creation": 134374161343234554
+        },
+        {
+          "pid": 2460,
+          "creation": 134374161327770136
+        },
+        {
+          "pid": 2672,
+          "creation": 134374161344877207
+        },
+        {
+          "pid": 3044,
+          "creation": 134374161345367493
+        },
+        {
+          "pid": 4484,
+          "creation": 134374161342484333
+        },
+        {
+          "pid": 5072,
+          "creation": 134374161342595889
+        },
+        {
+          "pid": 5660,
+          "creation": 134374161345920585
+        },
+        {
+          "pid": 5796,
+          "creation": 134374161343884224
+        },
+        {
+          "pid": 6080,
+          "creation": 134374161339902944
+        },
+        {
+          "pid": 6164,
+          "creation": 134374161343833060
+        },
+        {
+          "pid": 6376,
+          "creation": 134374161344386114
+        },
+        {
+          "pid": 7676,
+          "creation": 134374161344833185
+        },
+        {
+          "pid": 7796,
+          "creation": 134374161345966580
+        },
+        {
+          "pid": 8036,
+          "creation": 134374161344340443
+        },
+        {
+          "pid": 8272,
+          "creation": 134374161343276439
+        },
+        {
+          "pid": 9144,
+          "creation": 134374161345319188
+        }
+      ],
+      "files": {
+        "observer.json": "40ce425a40c48a445157e59dc79a8dce817c5530e58966c7bc36e5356100b708",
+        "bootstrap.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bootstrap.stderr": "f1c0b6c5cd5726c1f2f4628ca377762150c20d37f5838c49c59ae2575e4927f6",
+        "run/.scoped-run-3e408e08cd9f427a883cadad7ad74e57.journal": "b5a6afaf6dc703eb1cbdf28fc153a20de8d686b940c777d2866ede5384dbd68f",
+        "run/.scoped-evidence-b260ce4643cc427db10918f6d2e20195/manifest.txt": "e1cc39fda8683a4576c634c8828448dce913326586a4b5e85bf0ff127e8ee4ca",
+        "run/.scoped-evidence-b260ce4643cc427db10918f6d2e20195/stderr.log": "e2b7dce75631238a0a01e4940c7d6910ef47ebb7dd3ce9c0153740f995be9a44",
+        "run/.scoped-evidence-b260ce4643cc427db10918f6d2e20195/stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "run/.scoped-evidence-b260ce4643cc427db10918f6d2e20195/runtime/fixture.exe": "6dd13ac2e830d95ed7985294a83a4938f01eb882f960af0caaea28b7919129c0",
+        "run/.scoped-evidence-b260ce4643cc427db10918f6d2e20195/runtime/payload-job-quota.txt.failure": "3187a8b634c8df0150a4e6535a4979fb40d2902f4c671d1dd324817ad13d7896",
+        "run/.scoped-evidence-b260ce4643cc427db10918f6d2e20195/runtime/quota-child-00.txt": "bdf124af7daec39e6ace81d7a2e4c4e2f822ef475e3f9b2608ae95e132a25d1b",
+        "run/.scoped-evidence-b260ce4643cc427db10918f6d2e20195/runtime/quota-child-01.txt": "d02197aee9841dd8c38452d1a97bf5abedb2d3cf263f9e2382826b2752dcfa2b",
+        "run/.scoped-evidence-b260ce4643cc427db10918f6d2e20195/runtime/quota-child-02.txt": "9860030bac9e3c815f4c328abb049c5aa850218c60d65a83d7801d23f3815019",
+        "run/.scoped-evidence-b260ce4643cc427db10918f6d2e20195/runtime/quota-child-03.txt": "161cda4f669c1bd1cf64c3e072625e7e8c273473679741c3166570522adec0af",
+        "run/.scoped-evidence-b260ce4643cc427db10918f6d2e20195/runtime/quota-child-04.txt": "12a0a5dd71a17c6b9f562a56e403e20d65a63a0b11a356d1deb3ff5d165ba648",
+        "run/.scoped-evidence-b260ce4643cc427db10918f6d2e20195/runtime/quota-child-05.txt": "8f83d16054642085b03ef28850d83ade7e269c408594d2ce01e2c431f7832ff7",
+        "run/.scoped-evidence-b260ce4643cc427db10918f6d2e20195/runtime/quota-child-06.txt": "45c53860a60868184279d8fa2a2b890fb1b98c369acb352c0ef4b4c6b4be6e11",
+        "run/.scoped-evidence-b260ce4643cc427db10918f6d2e20195/runtime/quota-members.txt": "b73308d6b77430a98ceacafebbdb27bee5d3ba62d57f4a53b66cb9ed77352b6a",
+        "run/.scoped-evidence-b260ce4643cc427db10918f6d2e20195/runtime/quota-protected.txt": "1123ff518601acacaf71f18ec041729608ef19a509b8025fd1ff727a02e23e74",
+        "bin/MonitorAcceptanceDriver.exe": "ac032063f99e976bec450b41aeee41bece876630073a776ac380c00b2058ab24",
+        "bin/ScopedRunner.exe": "30a33cdb5e13089ba71dca135b61a838b32e8f03823b55abcaf61ef8acae3c62",
+        "input/fixture.exe": "6dd13ac2e830d95ed7985294a83a4938f01eb882f960af0caaea28b7919129c0",
+        "fixture-build-readback/bootstrap.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "fixture-build-readback/bootstrap.stdout": "f36038dd728b35ee74490e12f578083783dce3f2f4a4b72fc19fca066d35c808",
+        "fixture-build-readback/build-manifest.txt": "147a0a2018f4cdcbef71220cb2d576157fe401f61093a2821242a8b91ca01c21",
+        "fixture-build-readback/build-observer.json": "ad8b9eddd49589be529e235a72c426240b8dd100beb0ca90c5b7f01983b94e2f",
+        "fixture-build-readback/run-result.txt": "79c5b9102422b2f755e2aed8ef416a0a3ab0156de7c5ba4c85dbeda2e6ac6761",
+        "fixture-build-readback/logs/compile-PayloadFixture.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "fixture-build-readback/logs/compile-PayloadFixture.stdout.txt": "7d6f399bc4ddebe9af0b4976bbe3450aac7fb48c8eba5ec95e37cae5283c787d",
+        "fixture-build-readback/logs/exit-code-regression-17-wrong-expected.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "fixture-build-readback/logs/exit-code-regression-17-wrong-expected.stdout.txt": "69826b89317496600a95e98535238d73a7091d7e0ff5c9585f08c25bb71a75c3",
+        "fixture-build-readback/logs/exit-code-regression-17.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "fixture-build-readback/logs/exit-code-regression-17.stdout.txt": "32d543b6dda9fd1365b76e3057e9fac50673187a4c91cb8c18413593043e1689",
+        "fixture-build-readback/logs/exit-code-regression-zero.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "fixture-build-readback/logs/exit-code-regression-zero.stdout.txt": "2b98ea68ce93cdb1de4a7d10f4c46c17aacc658cc11ed8e32cc0d15612e9c568",
+        "fixture-build-readback/logs/job-members.jsonl": "c292753880f29b4df447b354579aa74f0c1b38a6ad0941ccb2e9f08dba40206d",
+        "fixture-build-readback/logs/setup-failure-child.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "fixture-build-readback/logs/setup-failure-child.stdout.txt": "8ff179f55be1a9908f3e33e97da8aafce587111fab0b67cd5a0cf189c4bad44d",
+        "fixture-build-readback/logs/setup-failure-control.stderr.txt": "dc383c8e63001e4200c71dd2667219139fd7c53397e9e0b15ef4bff8bc79b12c",
+        "fixture-build-readback/logs/setup-failure-control.stdout.txt": "a1064b1c88c57b95c4efbc4875ef110c1b3610960a8f19b8180b39c0e6a1a3b9",
+        "fixture-build-readback/logs/setup-failure-control.txt": "0a6c6fb8a7689131bec969c9b6fc55776663ca28bdf2d2df9bcde7572c0b4bb0",
+        "build-readback/bootstrap.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/bootstrap.stdout": "5c252624f74b65b7275e4867f48d3a0fdc076a1f5c5bbee9893b8f9f39dc4162",
+        "build-readback/build-manifest.txt": "bb73f281ff87b2c767cef156c4f5aa3a552706002f8552011abce0f3232cbc01",
+        "build-readback/build-observer.json": "6085b82b7e4c74e19b210cfc387881330b5798a39f336ef5b6b4c51ea3287dca",
+        "build-readback/run-result.txt": "79c5b9102422b2f755e2aed8ef416a0a3ab0156de7c5ba4c85dbeda2e6ac6761",
+        "build-readback/logs/compile-native-driver.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/logs/compile-native-driver.stdout.txt": "6dfe32204c5bb3ed0021c74c2147972d4acdc8b4b12842601d5275992daca692",
+        "build-readback/logs/compile-PayloadFixture.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/logs/compile-PayloadFixture.stdout.txt": "7d6f399bc4ddebe9af0b4976bbe3450aac7fb48c8eba5ec95e37cae5283c787d",
+        "build-readback/logs/compile-production-runner.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/logs/compile-production-runner.stdout.txt": "6dfe32204c5bb3ed0021c74c2147972d4acdc8b4b12842601d5275992daca692",
+        "build-readback/logs/exit-code-regression-17-wrong-expected.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/logs/exit-code-regression-17-wrong-expected.stdout.txt": "69826b89317496600a95e98535238d73a7091d7e0ff5c9585f08c25bb71a75c3",
+        "build-readback/logs/exit-code-regression-17.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/logs/exit-code-regression-17.stdout.txt": "32d543b6dda9fd1365b76e3057e9fac50673187a4c91cb8c18413593043e1689",
+        "build-readback/logs/exit-code-regression-zero.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/logs/exit-code-regression-zero.stdout.txt": "2b98ea68ce93cdb1de4a7d10f4c46c17aacc658cc11ed8e32cc0d15612e9c568",
+        "build-readback/logs/setup-failure-child.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/logs/setup-failure-child.stdout.txt": "8ff179f55be1a9908f3e33e97da8aafce587111fab0b67cd5a0cf189c4bad44d",
+        "build-readback/logs/setup-failure-control.stderr.txt": "dc383c8e63001e4200c71dd2667219139fd7c53397e9e0b15ef4bff8bc79b12c",
+        "build-readback/logs/setup-failure-control.stdout.txt": "a1064b1c88c57b95c4efbc4875ef110c1b3610960a8f19b8180b39c0e6a1a3b9",
+        "build-readback/logs/setup-failure-control.txt": "34a4db6d2ed96f595b2ad6490e6375abb65a88b092715b36c0e44d7b46b2be5d"
+      },
+      "empty_dirs": [
+        "run/.scoped-evidence-b260ce4643cc427db10918f6d2e20195/runtime"
+      ]
+    },
+    {
+      "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-b8761d9bb62643179a967b942e6bc3a3",
+      "kind": "completed-control",
+      "id": "rhai-process-quota-quota03-b8761d9bb62643179a967b942e6bc3a3",
+      "contract": "job-quota",
+      "expected_accepted": false,
+      "runtime": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-b8761d9bb62643179a967b942e6bc3a3\\run\\scoped-7ec84ef94f3e432cac755d9a44dfc4cc",
+      "actors": [
+        {
+          "pid": 1312,
+          "creation": 134374165995680547
+        },
+        {
+          "pid": 1376,
+          "creation": 134374165991322543
+        },
+        {
+          "pid": 1976,
+          "creation": 134374165993221108
+        },
+        {
+          "pid": 2260,
+          "creation": 134374165996369548
+        },
+        {
+          "pid": 2752,
+          "creation": 134374165993864639
+        },
+        {
+          "pid": 2800,
+          "creation": 134374165995092793
+        },
+        {
+          "pid": 3176,
+          "creation": 134374165977499811
+        },
+        {
+          "pid": 4892,
+          "creation": 134374165995045429
+        },
+        {
+          "pid": 4904,
+          "creation": 134374165993818932
+        },
+        {
+          "pid": 5308,
+          "creation": 134374165990807977
+        },
+        {
+          "pid": 6296,
+          "creation": 134374165994459025
+        },
+        {
+          "pid": 7260,
+          "creation": 134374165993164450
+        },
+        {
+          "pid": 7384,
+          "creation": 134374165995726902
+        },
+        {
+          "pid": 7392,
+          "creation": 134374165996873172
+        },
+        {
+          "pid": 7624,
+          "creation": 134374165996828081
+        },
+        {
+          "pid": 7636,
+          "creation": 134374165994407211
+        },
+        {
+          "pid": 7876,
+          "creation": 134374165996323777
+        },
+        {
+          "pid": 8116,
+          "creation": 134374165997543800
+        }
+      ],
+      "files": {
+        "observer.json": "398488ec7c664bf45f272bdabf888e68d7c668263578d8e8ad7c56690b83d5be",
+        "bootstrap.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bootstrap.stderr": "f1c0b6c5cd5726c1f2f4628ca377762150c20d37f5838c49c59ae2575e4927f6",
+        "run/.scoped-run-0563c40015fb4faca6824833b094d98f.journal": "c4c3d7ef6a5021b57942b9b4c13c637d6b9e5d61fd5527515eecd83f7e102dc6",
+        "run/.scoped-evidence-7ec84ef94f3e432cac755d9a44dfc4cc/manifest.txt": "6487bc0e939a19d12ef8e217ed6d87ede79c62bc53b0441cbc7b02fad5a10d36",
+        "run/.scoped-evidence-7ec84ef94f3e432cac755d9a44dfc4cc/stderr.log": "f10b06491fac7b78259b643b3f536fca69947994a3b183c7e382cac15255ab41",
+        "run/.scoped-evidence-7ec84ef94f3e432cac755d9a44dfc4cc/stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "run/.scoped-evidence-7ec84ef94f3e432cac755d9a44dfc4cc/runtime/fixture.exe": "130f6c6e2babdbf2fe5dbbbe423cd6977470aa30fda39f533b125672cd392153",
+        "run/.scoped-evidence-7ec84ef94f3e432cac755d9a44dfc4cc/runtime/payload-job-quota.txt.admission": "1192c4af5aeb388e27f16154817959e1a5e493b4a47328e9f9824ae670bcf908",
+        "run/.scoped-evidence-7ec84ef94f3e432cac755d9a44dfc4cc/runtime/payload-job-quota.txt.failure": "69b15395e1483eec321e3839f6ecfa8aa2a3ced7f86c193af687799193f9c2ed",
+        "run/.scoped-evidence-7ec84ef94f3e432cac755d9a44dfc4cc/runtime/quota-child-00.txt": "40a107976c09badcfa88a0e8461a43fd73d35761cfd2de22e968c5fdaf95c63a",
+        "run/.scoped-evidence-7ec84ef94f3e432cac755d9a44dfc4cc/runtime/quota-child-01.txt": "05b98c7ff63c6d4bd9c19c51ff5cd65d34772a41b9b6c8b8e98d8f2e5a7e1a4b",
+        "run/.scoped-evidence-7ec84ef94f3e432cac755d9a44dfc4cc/runtime/quota-child-02.txt": "54e75b95c213096155d35c078fa962ed11df4659b8ef0279058452755c4a05ef",
+        "run/.scoped-evidence-7ec84ef94f3e432cac755d9a44dfc4cc/runtime/quota-child-03.txt": "952bb5705f575f44fcc677f3fe5f4c43193169043cd7ca5aec0d38c3515591e9",
+        "run/.scoped-evidence-7ec84ef94f3e432cac755d9a44dfc4cc/runtime/quota-child-04.txt": "32c40ccf8091bc39ea29c7bfc4a31fbc360d7b34afc5f03933e2ee398cd353b5",
+        "run/.scoped-evidence-7ec84ef94f3e432cac755d9a44dfc4cc/runtime/quota-child-05.txt": "56ac706dfa84e011f639008592ba650b07afbe18f6deebbb730974cc4b28a204",
+        "run/.scoped-evidence-7ec84ef94f3e432cac755d9a44dfc4cc/runtime/quota-child-06.txt": "a8fa45aab6cde09c172a654b1b80598d2377d26fc4ee64a68043b245fb58edb3",
+        "run/.scoped-evidence-7ec84ef94f3e432cac755d9a44dfc4cc/runtime/quota-excess.txt": "881906d82a96d4d7b6ebfcd2b45bafc9b4493fef13a43fdb85c1114510c09109",
+        "run/.scoped-evidence-7ec84ef94f3e432cac755d9a44dfc4cc/runtime/quota-members.txt": "05d019651c1e1c84bd692d776e661330fbd4374c5dc88d125e9cd94d0af7cade",
+        "run/.scoped-evidence-7ec84ef94f3e432cac755d9a44dfc4cc/runtime/quota-observation.log": "0f7fbf121d1f17ebe4925c14fa549c036a8e47d6025e9136f562630aa57859d6",
+        "run/.scoped-evidence-7ec84ef94f3e432cac755d9a44dfc4cc/runtime/quota-protected.txt": "eed21053aa44c152ae118008b7066a06c8e86043cccd6b496db76e03d6935480",
+        "bin/MonitorAcceptanceDriver.exe": "ac032063f99e976bec450b41aeee41bece876630073a776ac380c00b2058ab24",
+        "bin/ScopedRunner.exe": "30a33cdb5e13089ba71dca135b61a838b32e8f03823b55abcaf61ef8acae3c62",
+        "input/fixture.exe": "130f6c6e2babdbf2fe5dbbbe423cd6977470aa30fda39f533b125672cd392153",
+        "fixture-build-readback/bootstrap.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "fixture-build-readback/bootstrap.stdout": "dbda605c512ae0702d37c342242d088a542c11339de4d92f5bf7a2c8cbc48c32",
+        "fixture-build-readback/build-manifest.txt": "0d50e5bd47986cc6501420fcffb32882c1d729861af6d8410881a9a1f5e08d35",
+        "fixture-build-readback/build-observer.json": "930cb67a5f9b7539731066306b95e1aa496db5b120abd766c519dd36d9527e08",
+        "fixture-build-readback/run-result.txt": "79c5b9102422b2f755e2aed8ef416a0a3ab0156de7c5ba4c85dbeda2e6ac6761",
+        "fixture-build-readback/logs/compile-PayloadFixture.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "fixture-build-readback/logs/compile-PayloadFixture.stdout.txt": "7d6f399bc4ddebe9af0b4976bbe3450aac7fb48c8eba5ec95e37cae5283c787d",
+        "fixture-build-readback/logs/job-members.jsonl": "1e15fbc05b1d398b859d7c36c69fa6aa1a98c8e6a3412e37900823e1dc3fd600",
+        "build-readback/bootstrap.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/bootstrap.stdout": "5c252624f74b65b7275e4867f48d3a0fdc076a1f5c5bbee9893b8f9f39dc4162",
+        "build-readback/build-manifest.txt": "bb73f281ff87b2c767cef156c4f5aa3a552706002f8552011abce0f3232cbc01",
+        "build-readback/build-observer.json": "6085b82b7e4c74e19b210cfc387881330b5798a39f336ef5b6b4c51ea3287dca",
+        "build-readback/run-result.txt": "79c5b9102422b2f755e2aed8ef416a0a3ab0156de7c5ba4c85dbeda2e6ac6761",
+        "build-readback/logs/compile-native-driver.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/logs/compile-native-driver.stdout.txt": "6dfe32204c5bb3ed0021c74c2147972d4acdc8b4b12842601d5275992daca692",
+        "build-readback/logs/compile-PayloadFixture.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/logs/compile-PayloadFixture.stdout.txt": "7d6f399bc4ddebe9af0b4976bbe3450aac7fb48c8eba5ec95e37cae5283c787d",
+        "build-readback/logs/compile-production-runner.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/logs/compile-production-runner.stdout.txt": "6dfe32204c5bb3ed0021c74c2147972d4acdc8b4b12842601d5275992daca692"
+      },
+      "empty_dirs": [
+        "run/.scoped-evidence-7ec84ef94f3e432cac755d9a44dfc4cc/runtime"
+      ]
+    },
+    {
+      "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-45c8571772d5463eb5e4ca442df4b979",
+      "kind": "completed-control",
+      "id": "rhai-process-quota-quota04-45c8571772d5463eb5e4ca442df4b979",
+      "contract": "job-quota",
+      "expected_accepted": true,
+      "runtime": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-45c8571772d5463eb5e4ca442df4b979\\run\\scoped-69c65fa25a1a48bdbc6196908966cd26",
+      "actors": [
+        {
+          "pid": 164,
+          "creation": 134374175389454789
+        },
+        {
+          "pid": 832,
+          "creation": 134374175398503344
+        },
+        {
+          "pid": 1376,
+          "creation": 134374175397345320
+        },
+        {
+          "pid": 1484,
+          "creation": 134374175392005300
+        },
+        {
+          "pid": 1700,
+          "creation": 134374175396266213
+        },
+        {
+          "pid": 1844,
+          "creation": 134374175396738371
+        },
+        {
+          "pid": 1964,
+          "creation": 134374175399764747
+        },
+        {
+          "pid": 2108,
+          "creation": 134374175397394139
+        },
+        {
+          "pid": 2828,
+          "creation": 134374175393172728
+        },
+        {
+          "pid": 3684,
+          "creation": 134374175395024619
+        },
+        {
+          "pid": 4136,
+          "creation": 134374175399178198
+        },
+        {
+          "pid": 4244,
+          "creation": 134374175399120185
+        },
+        {
+          "pid": 4680,
+          "creation": 134374175396782712
+        },
+        {
+          "pid": 5208,
+          "creation": 134374175399808686
+        },
+        {
+          "pid": 5440,
+          "creation": 134374175391957816
+        },
+        {
+          "pid": 5976,
+          "creation": 134374175395622914
+        },
+        {
+          "pid": 6348,
+          "creation": 134374175394979739
+        },
+        {
+          "pid": 6352,
+          "creation": 134374175400654136
+        },
+        {
+          "pid": 6564,
+          "creation": 134374175375693649
+        },
+        {
+          "pid": 6804,
+          "creation": 134374175393217790
+        },
+        {
+          "pid": 6820,
+          "creation": 134374175391293637
+        },
+        {
+          "pid": 6824,
+          "creation": 134374175394455838
+        },
+        {
+          "pid": 7384,
+          "creation": 134374175398034719
+        },
+        {
+          "pid": 7584,
+          "creation": 134374175397990664
+        },
+        {
+          "pid": 7600,
+          "creation": 134374175388616884
+        },
+        {
+          "pid": 7764,
+          "creation": 134374175393870023
+        },
+        {
+          "pid": 8004,
+          "creation": 134374175392584125
+        },
+        {
+          "pid": 8024,
+          "creation": 134374175396219332
+        },
+        {
+          "pid": 8168,
+          "creation": 134374175398550578
+        },
+        {
+          "pid": 8488,
+          "creation": 134374175391343601
+        },
+        {
+          "pid": 8560,
+          "creation": 134374175400706809
+        },
+        {
+          "pid": 8716,
+          "creation": 134374175395574480
+        },
+        {
+          "pid": 8832,
+          "creation": 134374175392540002
+        },
+        {
+          "pid": 8848,
+          "creation": 134374175394504634
+        },
+        {
+          "pid": 9032,
+          "creation": 134374175393822051
+        }
+      ],
+      "files": {
+        "observer.json": "a2944243b2143a95e65d18ce3e58d7e9c609d18a68c61d4442e60d49908af54d",
+        "bootstrap.stdout": "7555839f323fcf329f113b4f298d9224abf4dbb29ed49e336c13ddefcdffc897",
+        "bootstrap.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "run/.scoped-run-8c9cb3ade7364313a4523d16ae136a68.journal": "c12c91d1ba284e1051e6254461db3708d8362577d8bb4b3760705f80a45c1da4",
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/manifest.txt": "88255c89f4a48f5634abb6160384950260a34e8e7071ffc61b38eff72bd497f2",
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/stdout.log": "18248d01a1392be1542f4855c65441a24c8e56f46fbb707ea082d863a73c740e",
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/runtime/fixture.exe": "e6333f1c445595463669babb5d6f7f5a37980795974e41aa40b47bf6bf9250b5",
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/runtime/payload-job-quota.txt": "4d7a75f381db9a24e9211dbbc06995bdd34b69d0ad10d4458c47c109e4ab9670",
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/runtime/payload-job-quota.txt.admission": "825082c8b009f8534266375d563ad849261d60e958285cd4e8df1bb49b2a069f",
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/runtime/quota-child-00.txt": "c548294d08c122fc0a911ffaab8b3b91dc5796f03893f41d761c50ff072b7c24",
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/runtime/quota-child-01.txt": "120b87e8b12093a74088070bd326a80a58835bdc8c3ae3f8ddea07c425045219",
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/runtime/quota-child-02.txt": "150f5314fa713dd6edac55a0656cc829b905f3fd6b31d330007b755f6d8ecbc6",
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/runtime/quota-child-03.txt": "d14d0958325857cc1e1c1fad59cdc51dfd674a85af0c855fa420f77f38498a52",
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/runtime/quota-child-04.txt": "a78f90d96fae054d709d4a46d509a54b28f3f6a5c23a484cd49df37430efac6f",
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/runtime/quota-child-05.txt": "5aba542c9ec80770aa4161554dc0396857103d3c3b52f45df2936c51c537a8a3",
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/runtime/quota-child-06.txt": "9ad5750a6b4d3f76892f65430731003b49c1d82f629a13cd5ab69a45df4bf26b",
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/runtime/quota-child-07.txt": "e5fb236bc39e4972fe3dd5d305f4bf9db91a68b63d49ddae0997501804d9f401",
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/runtime/quota-child-08.txt": "7b9b7eac8c4db37da09a0a6a26b158e94d45bd3d9226861746954cd01830428d",
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/runtime/quota-child-09.txt": "2e1be080f84b1f7b660857d277b2a9a1de1739005624defc407587eff86f2d32",
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/runtime/quota-child-10.txt": "df387cdb3bdc603ae407c70e1783bd731a417451af75b9a859ce0d09ce210668",
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/runtime/quota-child-11.txt": "8d21db0831a551fe4322a4e6582f264e35a26f70312f4fec050e492f40965f0d",
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/runtime/quota-child-12.txt": "2d9bc19ea084752e8521f070c88ada5b20e48f64ef95f29aa9e4bda0f9d4493c",
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/runtime/quota-child-13.txt": "dcb1681dd78a712be9c404983b0522574d3fd03f9042465a4fec2a7862f5411e",
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/runtime/quota-child-14.txt": "e380af2456ac5d958d57bfffd2f7b61b556add2fd34af7f93c74239f5e036b26",
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/runtime/quota-excess.txt": "b937071ed15f706afcdce18790f2f1fee78566b9f4b6a6655d0a703e67f87fc4",
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/runtime/quota-member-images.txt": "c3d9e9c9cd6b2220814e903b4d87103ccd79f55a4f9b4662d7d9c341cc947878",
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/runtime/quota-members.txt": "08cea2948a89b64b5955551e7903dcfdbb9537754221c4ff10e5a7099a8fe229",
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/runtime/quota-observation.log": "33836ae0899e797191ff86a50413151a5ea77d92d381fe5baf0bf286ee024eb5",
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/runtime/quota-protected-after-denial.txt": "1123ff518601acacaf71f18ec041729608ef19a509b8025fd1ff727a02e23e74",
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/runtime/quota-protected.txt": "eed21053aa44c152ae118008b7066a06c8e86043cccd6b496db76e03d6935480",
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/runtime/quota-recovered-images.txt": "20dd032311c76a1040e685d57992fdff6f3b2dbecb575d0d1bdc135e6c4f238d",
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/runtime/quota-recovered-members.txt": "abbf7aadff49c5489e33448dea32851cc51dec365c25a657a493561fca199efb",
+        "bin/MonitorAcceptanceDriver.exe": "ac032063f99e976bec450b41aeee41bece876630073a776ac380c00b2058ab24",
+        "bin/ScopedRunner.exe": "30a33cdb5e13089ba71dca135b61a838b32e8f03823b55abcaf61ef8acae3c62",
+        "input/fixture.exe": "e6333f1c445595463669babb5d6f7f5a37980795974e41aa40b47bf6bf9250b5",
+        "fixture-build-readback/bootstrap.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "fixture-build-readback/bootstrap.stdout": "0cf8a0049555ae1eee403999ee62fb70b6766ee72c749b87117fe1fa152d92b4",
+        "fixture-build-readback/build-manifest.txt": "12fa43699b4f989a01d8c93f8dcaa5e009adc0b8d49e17f96edb7169f60523b6",
+        "fixture-build-readback/build-observer.json": "df00daa3183231f83f3d2ac949e0dfa63e15adb3cd0e7d57ca1dd838d8b74dbf",
+        "fixture-build-readback/run-result.txt": "79c5b9102422b2f755e2aed8ef416a0a3ab0156de7c5ba4c85dbeda2e6ac6761",
+        "fixture-build-readback/logs/compile-PayloadFixture.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "fixture-build-readback/logs/compile-PayloadFixture.stdout.txt": "7d6f399bc4ddebe9af0b4976bbe3450aac7fb48c8eba5ec95e37cae5283c787d",
+        "fixture-build-readback/logs/job-members.jsonl": "4a872480e94e391df7dea26b33baa24d268c4d6859be60330d44fe77aae15133",
+        "build-readback/bootstrap.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/bootstrap.stdout": "5c252624f74b65b7275e4867f48d3a0fdc076a1f5c5bbee9893b8f9f39dc4162",
+        "build-readback/build-manifest.txt": "bb73f281ff87b2c767cef156c4f5aa3a552706002f8552011abce0f3232cbc01",
+        "build-readback/build-observer.json": "6085b82b7e4c74e19b210cfc387881330b5798a39f336ef5b6b4c51ea3287dca",
+        "build-readback/run-result.txt": "79c5b9102422b2f755e2aed8ef416a0a3ab0156de7c5ba4c85dbeda2e6ac6761",
+        "build-readback/logs/compile-native-driver.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/logs/compile-native-driver.stdout.txt": "6dfe32204c5bb3ed0021c74c2147972d4acdc8b4b12842601d5275992daca692",
+        "build-readback/logs/compile-PayloadFixture.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/logs/compile-PayloadFixture.stdout.txt": "7d6f399bc4ddebe9af0b4976bbe3450aac7fb48c8eba5ec95e37cae5283c787d",
+        "build-readback/logs/compile-production-runner.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/logs/compile-production-runner.stdout.txt": "6dfe32204c5bb3ed0021c74c2147972d4acdc8b4b12842601d5275992daca692"
+      },
+      "empty_dirs": [
+        "run/.scoped-evidence-69c65fa25a1a48bdbc6196908966cd26/runtime"
+      ]
+    },
+    {
+      "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-1ad6339a9548413db5ce9f948ff63aaa",
+      "kind": "completed-control",
+      "id": "rhai-process-quota-resources04-1ad6339a9548413db5ce9f948ff63aaa",
+      "contract": "job-resources",
+      "expected_accepted": true,
+      "runtime": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-1ad6339a9548413db5ce9f948ff63aaa\\run\\scoped-3e654b6faf9e4030a4e8cc33a19f2cc5",
+      "actors": [
+        {
+          "pid": 3304,
+          "creation": 134374175541842117
+        },
+        {
+          "pid": 3520,
+          "creation": 134374175544564706
+        },
+        {
+          "pid": 7704,
+          "creation": 134374175535844682
+        }
+      ],
+      "files": {
+        "observer.json": "50e653bb8c7cbeffe331da5eee07df0e04f17a65fa0776584a83dd5a71130fbf",
+        "bootstrap.stdout": "995abac726e1b2811fb541c40a5ac08c4ee12474e3f475258be0506f6ad9bc24",
+        "bootstrap.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "run/.scoped-run-eeb63e723db5454d8bebcbfbce1240df.journal": "b1688feaf58e8adf1261c4831c45ec04c7579996ff45a609ebee6ed870fdfb2a",
+        "run/.scoped-evidence-3e654b6faf9e4030a4e8cc33a19f2cc5/manifest.txt": "c0fe3049a38e4ca1976ffe7dffadeaadc0b59a296dbf0d330138f14ebfdbd73f",
+        "run/.scoped-evidence-3e654b6faf9e4030a4e8cc33a19f2cc5/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "run/.scoped-evidence-3e654b6faf9e4030a4e8cc33a19f2cc5/stdout.log": "f7e476b3dd33e853a92fcdabb9de03daade1c73c3da1cb1c4af12aa5d512f3f2",
+        "run/.scoped-evidence-3e654b6faf9e4030a4e8cc33a19f2cc5/runtime/fixture.exe": "e6333f1c445595463669babb5d6f7f5a37980795974e41aa40b47bf6bf9250b5",
+        "run/.scoped-evidence-3e654b6faf9e4030a4e8cc33a19f2cc5/runtime/payload-job-resources.txt": "47e5b2ba73cc836b727e087da35f5458eb09e4ec693a4396ee323c8bed78f47a",
+        "run/.scoped-evidence-3e654b6faf9e4030a4e8cc33a19f2cc5/runtime/payload-job-resources.txt.child": "656e0ca0d4d6b4ac011dab1e5013c75fb7454765988ef02c1985cd635d79e62f",
+        "run/.scoped-evidence-3e654b6faf9e4030a4e8cc33a19f2cc5/runtime/payload-job-resources.txt.work": "3b1d798fda05c5414a39d91c0213561106d7743d94329671ca98cc8d32b47168",
+        "bin/MonitorAcceptanceDriver.exe": "ac032063f99e976bec450b41aeee41bece876630073a776ac380c00b2058ab24",
+        "bin/ScopedRunner.exe": "30a33cdb5e13089ba71dca135b61a838b32e8f03823b55abcaf61ef8acae3c62",
+        "input/fixture.exe": "e6333f1c445595463669babb5d6f7f5a37980795974e41aa40b47bf6bf9250b5",
+        "fixture-build-readback/bootstrap.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "fixture-build-readback/bootstrap.stdout": "0cf8a0049555ae1eee403999ee62fb70b6766ee72c749b87117fe1fa152d92b4",
+        "fixture-build-readback/build-manifest.txt": "12fa43699b4f989a01d8c93f8dcaa5e009adc0b8d49e17f96edb7169f60523b6",
+        "fixture-build-readback/build-observer.json": "df00daa3183231f83f3d2ac949e0dfa63e15adb3cd0e7d57ca1dd838d8b74dbf",
+        "fixture-build-readback/run-result.txt": "79c5b9102422b2f755e2aed8ef416a0a3ab0156de7c5ba4c85dbeda2e6ac6761",
+        "fixture-build-readback/logs/compile-PayloadFixture.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "fixture-build-readback/logs/compile-PayloadFixture.stdout.txt": "7d6f399bc4ddebe9af0b4976bbe3450aac7fb48c8eba5ec95e37cae5283c787d",
+        "fixture-build-readback/logs/job-members.jsonl": "4a872480e94e391df7dea26b33baa24d268c4d6859be60330d44fe77aae15133",
+        "build-readback/bootstrap.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/bootstrap.stdout": "5c252624f74b65b7275e4867f48d3a0fdc076a1f5c5bbee9893b8f9f39dc4162",
+        "build-readback/build-manifest.txt": "bb73f281ff87b2c767cef156c4f5aa3a552706002f8552011abce0f3232cbc01",
+        "build-readback/build-observer.json": "6085b82b7e4c74e19b210cfc387881330b5798a39f336ef5b6b4c51ea3287dca",
+        "build-readback/run-result.txt": "79c5b9102422b2f755e2aed8ef416a0a3ab0156de7c5ba4c85dbeda2e6ac6761",
+        "build-readback/logs/compile-native-driver.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/logs/compile-native-driver.stdout.txt": "6dfe32204c5bb3ed0021c74c2147972d4acdc8b4b12842601d5275992daca692",
+        "build-readback/logs/compile-PayloadFixture.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/logs/compile-PayloadFixture.stdout.txt": "7d6f399bc4ddebe9af0b4976bbe3450aac7fb48c8eba5ec95e37cae5283c787d",
+        "build-readback/logs/compile-production-runner.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/logs/compile-production-runner.stdout.txt": "6dfe32204c5bb3ed0021c74c2147972d4acdc8b4b12842601d5275992daca692"
+      },
+      "empty_dirs": [
+        "run/.scoped-evidence-3e654b6faf9e4030a4e8cc33a19f2cc5/runtime"
+      ]
+    },
+    {
+      "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-55e61c971bf447f7a2e1332a66375ca3",
+      "kind": "completed-control",
+      "id": "rhai-process-quota-environment04-55e61c971bf447f7a2e1332a66375ca3",
+      "contract": "environment",
+      "expected_accepted": true,
+      "runtime": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-55e61c971bf447f7a2e1332a66375ca3\\run\\scoped-1eaedfcb2c7e4f38834e9341dfc9f36e",
+      "actors": [
+        {
+          "pid": 8612,
+          "creation": 134374175664060720
+        }
+      ],
+      "files": {
+        "observer.json": "c8033bdf99b57963687c795ad344f1b47ffd0e9e85c0143b25bd3700b559fc7b",
+        "bootstrap.stdout": "6ca5014530063611e554f548d93554d9a5710a078737350c182079fcaf1b74ff",
+        "bootstrap.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "run/.scoped-run-4a97523137774e18bf933fb870a3c763.journal": "7536b64ed1b6475d2119ea69227f3546e29537c744291a71fc16df62bbb51977",
+        "run/.scoped-evidence-1eaedfcb2c7e4f38834e9341dfc9f36e/manifest.txt": "a36c1c15bec1c068cf1b15577cadc952296ce350946d49701df0a14dbe02984e",
+        "run/.scoped-evidence-1eaedfcb2c7e4f38834e9341dfc9f36e/stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "run/.scoped-evidence-1eaedfcb2c7e4f38834e9341dfc9f36e/stdout.log": "5ce072dee71ce6c468ef618c76b9f1b1fc9462020feedfdaa7688761c7ad992f",
+        "run/.scoped-evidence-1eaedfcb2c7e4f38834e9341dfc9f36e/runtime/fixture.exe": "e6333f1c445595463669babb5d6f7f5a37980795974e41aa40b47bf6bf9250b5",
+        "run/.scoped-evidence-1eaedfcb2c7e4f38834e9341dfc9f36e/runtime/payload-environment.txt": "b73eb136ca88254305905ab67bd5f11a605488d3491fd55a7e7a5f1b5af167e5",
+        "bin/MonitorAcceptanceDriver.exe": "ac032063f99e976bec450b41aeee41bece876630073a776ac380c00b2058ab24",
+        "bin/ScopedRunner.exe": "30a33cdb5e13089ba71dca135b61a838b32e8f03823b55abcaf61ef8acae3c62",
+        "input/fixture.exe": "e6333f1c445595463669babb5d6f7f5a37980795974e41aa40b47bf6bf9250b5",
+        "fixture-build-readback/bootstrap.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "fixture-build-readback/bootstrap.stdout": "0cf8a0049555ae1eee403999ee62fb70b6766ee72c749b87117fe1fa152d92b4",
+        "fixture-build-readback/build-manifest.txt": "12fa43699b4f989a01d8c93f8dcaa5e009adc0b8d49e17f96edb7169f60523b6",
+        "fixture-build-readback/build-observer.json": "df00daa3183231f83f3d2ac949e0dfa63e15adb3cd0e7d57ca1dd838d8b74dbf",
+        "fixture-build-readback/run-result.txt": "79c5b9102422b2f755e2aed8ef416a0a3ab0156de7c5ba4c85dbeda2e6ac6761",
+        "fixture-build-readback/logs/compile-PayloadFixture.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "fixture-build-readback/logs/compile-PayloadFixture.stdout.txt": "7d6f399bc4ddebe9af0b4976bbe3450aac7fb48c8eba5ec95e37cae5283c787d",
+        "fixture-build-readback/logs/job-members.jsonl": "4a872480e94e391df7dea26b33baa24d268c4d6859be60330d44fe77aae15133",
+        "build-readback/bootstrap.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/bootstrap.stdout": "5c252624f74b65b7275e4867f48d3a0fdc076a1f5c5bbee9893b8f9f39dc4162",
+        "build-readback/build-manifest.txt": "bb73f281ff87b2c767cef156c4f5aa3a552706002f8552011abce0f3232cbc01",
+        "build-readback/build-observer.json": "6085b82b7e4c74e19b210cfc387881330b5798a39f336ef5b6b4c51ea3287dca",
+        "build-readback/run-result.txt": "79c5b9102422b2f755e2aed8ef416a0a3ab0156de7c5ba4c85dbeda2e6ac6761",
+        "build-readback/logs/compile-native-driver.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/logs/compile-native-driver.stdout.txt": "6dfe32204c5bb3ed0021c74c2147972d4acdc8b4b12842601d5275992daca692",
+        "build-readback/logs/compile-PayloadFixture.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/logs/compile-PayloadFixture.stdout.txt": "7d6f399bc4ddebe9af0b4976bbe3450aac7fb48c8eba5ec95e37cae5283c787d",
+        "build-readback/logs/compile-production-runner.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "build-readback/logs/compile-production-runner.stdout.txt": "6dfe32204c5bb3ed0021c74c2147972d4acdc8b4b12842601d5275992daca692"
+      },
+      "empty_dirs": [
+        "run/.scoped-evidence-1eaedfcb2c7e4f38834e9341dfc9f36e/runtime"
+      ]
+    },
+    {
+      "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\quota-fixture-c8d7629099fd47d1b6f10ef65649db5e",
+      "kind": "completed-build",
+      "id": "rhai-process-quota-c8d7629099fd47d1b6f10ef65649db5e",
+      "files": {
+        "bootstrap.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/run-result.txt": "79c5b9102422b2f755e2aed8ef416a0a3ab0156de7c5ba4c85dbeda2e6ac6761",
+        "bootstrap.stdout": "f36038dd728b35ee74490e12f578083783dce3f2f4a4b72fc19fca066d35c808",
+        "build-observer.json": "ad8b9eddd49589be529e235a72c426240b8dd100beb0ca90c5b7f01983b94e2f",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/build-manifest.txt": "147a0a2018f4cdcbef71220cb2d576157fe401f61093a2821242a8b91ca01c21",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/logs/exit-code-regression-zero.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/logs/setup-failure-child.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/logs/setup-failure-control.txt": "0a6c6fb8a7689131bec969c9b6fc55776663ca28bdf2d2df9bcde7572c0b4bb0",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/logs/exit-code-regression-17-wrong-expected.stdout.txt": "69826b89317496600a95e98535238d73a7091d7e0ff5c9585f08c25bb71a75c3",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/logs/compile-PayloadFixture.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/logs/exit-code-regression-17.stdout.txt": "32d543b6dda9fd1365b76e3057e9fac50673187a4c91cb8c18413593043e1689",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/logs/setup-failure-control.stderr.txt": "dc383c8e63001e4200c71dd2667219139fd7c53397e9e0b15ef4bff8bc79b12c",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/logs/setup-failure-child.stdout.txt": "8ff179f55be1a9908f3e33e97da8aafce587111fab0b67cd5a0cf189c4bad44d",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/logs/exit-code-regression-zero.stdout.txt": "2b98ea68ce93cdb1de4a7d10f4c46c17aacc658cc11ed8e32cc0d15612e9c568",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/logs/job-members.jsonl": "c292753880f29b4df447b354579aa74f0c1b38a6ad0941ccb2e9f08dba40206d",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/logs/exit-code-regression-17-wrong-expected.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/logs/compile-PayloadFixture.stdout.txt": "7d6f399bc4ddebe9af0b4976bbe3450aac7fb48c8eba5ec95e37cae5283c787d",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/logs/setup-failure-control.stdout.txt": "a1064b1c88c57b95c4efbc4875ef110c1b3610960a8f19b8180b39c0e6a1a3b9",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/logs/exit-code-regression-17.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "source-input/tools/windows-scoped-runner/LaunchSpecification.cs": "e08957b13d5ed5f86cb37d0545aa876aac50e507692d112b39882f465fff8f2b",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/input/tools/windows-scoped-runner/LaunchSpecification.cs": "e08957b13d5ed5f86cb37d0545aa876aac50e507692d112b39882f465fff8f2b",
+        "source-input/tools/windows-scoped-runner/LeaseMonitor.cs": "49591cc15aaa68add9d8632188506e153179de37e0158d814a81d49d98252550",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/input/tools/windows-scoped-runner/LeaseMonitor.cs": "49591cc15aaa68add9d8632188506e153179de37e0158d814a81d49d98252550",
+        "source-input/tools/windows-scoped-runner/MonitorAcceptanceDriver.cs": "98df6be690e4cfe1440d6eb11358688e75ca1f0adde12ef003d20dc2a8426c6c",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/input/tools/windows-scoped-runner/MonitorAcceptanceDriver.cs": "98df6be690e4cfe1440d6eb11358688e75ca1f0adde12ef003d20dc2a8426c6c",
+        "source-input/tools/windows-scoped-runner/MonitorPayloadJob.cs": "559fda324f59768f2d5119c2f2fec7442c2cff543b694dc744b4c4ecc2524e4f",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/input/tools/windows-scoped-runner/MonitorPayloadJob.cs": "559fda324f59768f2d5119c2f2fec7442c2cff543b694dc744b4c4ecc2524e4f",
+        "source-input/tools/windows-scoped-runner/MonitorSpecificationIntake.cs": "0f0a71563e6c3d99f0c643644d4b56951f6c69ceb3b10b03157f68dc37bb8412",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/input/tools/windows-scoped-runner/MonitorSpecificationIntake.cs": "0f0a71563e6c3d99f0c643644d4b56951f6c69ceb3b10b03157f68dc37bb8412",
+        "source-input/tools/windows-scoped-runner/MonitorStagingHandoff.cs": "c541f7d885d032c074461a5a0173b9ae6291ef7d8cd1b9fd2ce4a4f56d1e0e6e",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/input/tools/windows-scoped-runner/MonitorStagingHandoff.cs": "c541f7d885d032c074461a5a0173b9ae6291ef7d8cd1b9fd2ce4a4f56d1e0e6e",
+        "source-input/tools/windows-scoped-runner/MonitorTransport.cs": "792918d1cac67691fc9f7ee4c9e82b0c4377ba869c33458fedd56e9519e71c7c",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/input/tools/windows-scoped-runner/MonitorTransport.cs": "792918d1cac67691fc9f7ee4c9e82b0c4377ba869c33458fedd56e9519e71c7c",
+        "source-input/tools/windows-scoped-runner/ScopedRunner.cs": "d3a77f0daeebd5beed2b277fae9dc6a522acf1454bb5d8d776d84e1dc8e896c8",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/input/tools/windows-scoped-runner/ScopedRunner.cs": "d3a77f0daeebd5beed2b277fae9dc6a522acf1454bb5d8d776d84e1dc8e896c8",
+        "source-input/tools/windows-scoped-runner/SpecificationTransfer.cs": "7a9edfe98d84868b55146280bd5ed29576ee0c8725cf9f6c785b784bc0ad25c2",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/input/tools/windows-scoped-runner/SpecificationTransfer.cs": "7a9edfe98d84868b55146280bd5ed29576ee0c8725cf9f6c785b784bc0ad25c2",
+        "source-input/tools/windows-scoped-runner/WindowsCustodyBackend.cs": "26b7468a0868271a555f6ed450212267b01d7d3fd0a8dd5b3fb51b01b7a05629",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/input/tools/windows-scoped-runner/WindowsCustodyBackend.cs": "26b7468a0868271a555f6ed450212267b01d7d3fd0a8dd5b3fb51b01b7a05629",
+        "source-input/tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs": "38745833e7b23535cdc2ce225655074c6c5f50e204c0d3cf38d6805f49cb53eb",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/input/tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs": "38745833e7b23535cdc2ce225655074c6c5f50e204c0d3cf38d6805f49cb53eb",
+        "source-input/tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs": "8f43d33928262ae181aa5396feffef9b0260653609b5be8b01da7b0a7e7b00f7",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/input/tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs": "8f43d33928262ae181aa5396feffef9b0260653609b5be8b01da7b0a7e7b00f7",
+        "source-input/tools/windows-scoped-runner/fixtures/PayloadFixture.cs": "57661586cc954f73aa19e369577ed09132b360d20731b953ace58e174ea6bd54",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/input/tools/windows-scoped-runner/fixtures/PayloadFixture.cs": "57661586cc954f73aa19e369577ed09132b360d20731b953ace58e174ea6bd54",
+        "source-input/tools/windows-scoped-runner/fixtures/RunSourceFixtures.ps1": "9c6d0865409c24a29c285a112dfc739ebe8391447705eb62d2e062a5fe7daadc",
+        "source-input/tools/windows-scoped-runner/fixtures/RunPayloadEnvironmentControl.ps1": "8d21cd64189163a8b4784fb44c4e77cf59593cf8d302644bde3910b3cc1171d7",
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/build/PayloadFixture.exe": "6dd13ac2e830d95ed7985294a83a4938f01eb882f960af0caaea28b7919129c0"
+      },
+      "empty_dirs": [
+        "run/monitor-source-c8d7629099fd47d1b6f10ef65649db5e/temp"
+      ]
+    },
+    {
+      "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\quota-fixture-61233f37b1ce4ddc847ba9b8ff2a14ed",
+      "kind": "completed-build",
+      "id": "rhai-process-quota-61233f37b1ce4ddc847ba9b8ff2a14ed",
+      "files": {
+        "bootstrap.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bootstrap.stdout": "dbda605c512ae0702d37c342242d088a542c11339de4d92f5bf7a2c8cbc48c32",
+        "build-observer.json": "930cb67a5f9b7539731066306b95e1aa496db5b120abd766c519dd36d9527e08",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/build-manifest.txt": "0d50e5bd47986cc6501420fcffb32882c1d729861af6d8410881a9a1f5e08d35",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/run-result.txt": "79c5b9102422b2f755e2aed8ef416a0a3ab0156de7c5ba4c85dbeda2e6ac6761",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/build/PayloadFixture.exe": "130f6c6e2babdbf2fe5dbbbe423cd6977470aa30fda39f533b125672cd392153",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/input/tools/windows-scoped-runner/LaunchSpecification.cs": "e08957b13d5ed5f86cb37d0545aa876aac50e507692d112b39882f465fff8f2b",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/input/tools/windows-scoped-runner/LeaseMonitor.cs": "49591cc15aaa68add9d8632188506e153179de37e0158d814a81d49d98252550",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/input/tools/windows-scoped-runner/MonitorAcceptanceDriver.cs": "98df6be690e4cfe1440d6eb11358688e75ca1f0adde12ef003d20dc2a8426c6c",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/input/tools/windows-scoped-runner/MonitorPayloadJob.cs": "559fda324f59768f2d5119c2f2fec7442c2cff543b694dc744b4c4ecc2524e4f",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/input/tools/windows-scoped-runner/MonitorSpecificationIntake.cs": "0f0a71563e6c3d99f0c643644d4b56951f6c69ceb3b10b03157f68dc37bb8412",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/input/tools/windows-scoped-runner/MonitorStagingHandoff.cs": "c541f7d885d032c074461a5a0173b9ae6291ef7d8cd1b9fd2ce4a4f56d1e0e6e",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/input/tools/windows-scoped-runner/MonitorTransport.cs": "792918d1cac67691fc9f7ee4c9e82b0c4377ba869c33458fedd56e9519e71c7c",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/input/tools/windows-scoped-runner/ScopedRunner.cs": "d3a77f0daeebd5beed2b277fae9dc6a522acf1454bb5d8d776d84e1dc8e896c8",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/input/tools/windows-scoped-runner/SpecificationTransfer.cs": "7a9edfe98d84868b55146280bd5ed29576ee0c8725cf9f6c785b784bc0ad25c2",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/input/tools/windows-scoped-runner/WindowsCustodyBackend.cs": "26b7468a0868271a555f6ed450212267b01d7d3fd0a8dd5b3fb51b01b7a05629",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/input/tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs": "38745833e7b23535cdc2ce225655074c6c5f50e204c0d3cf38d6805f49cb53eb",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/input/tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs": "8f43d33928262ae181aa5396feffef9b0260653609b5be8b01da7b0a7e7b00f7",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/input/tools/windows-scoped-runner/fixtures/PayloadFixture.cs": "fdca338e529682126cc1e06c04c9a4430c20f75814ab320b1f24e5533ee6b5d2",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/logs/compile-PayloadFixture.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/logs/compile-PayloadFixture.stdout.txt": "7d6f399bc4ddebe9af0b4976bbe3450aac7fb48c8eba5ec95e37cae5283c787d",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/logs/exit-code-regression-17-wrong-expected.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/logs/exit-code-regression-17-wrong-expected.stdout.txt": "69826b89317496600a95e98535238d73a7091d7e0ff5c9585f08c25bb71a75c3",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/logs/exit-code-regression-17.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/logs/exit-code-regression-17.stdout.txt": "32d543b6dda9fd1365b76e3057e9fac50673187a4c91cb8c18413593043e1689",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/logs/exit-code-regression-zero.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/logs/exit-code-regression-zero.stdout.txt": "2b98ea68ce93cdb1de4a7d10f4c46c17aacc658cc11ed8e32cc0d15612e9c568",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/logs/job-members.jsonl": "1e15fbc05b1d398b859d7c36c69fa6aa1a98c8e6a3412e37900823e1dc3fd600",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/logs/setup-failure-child.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/logs/setup-failure-child.stdout.txt": "8ff179f55be1a9908f3e33e97da8aafce587111fab0b67cd5a0cf189c4bad44d",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/logs/setup-failure-control.stderr.txt": "dc383c8e63001e4200c71dd2667219139fd7c53397e9e0b15ef4bff8bc79b12c",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/logs/setup-failure-control.stdout.txt": "a1064b1c88c57b95c4efbc4875ef110c1b3610960a8f19b8180b39c0e6a1a3b9",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/logs/setup-failure-control.txt": "b360725397822a5eacd9ace6863e4e216df0a6d45138049b0bd2dec2b9f9cee5",
+        "source-input/tools/windows-scoped-runner/LaunchSpecification.cs": "e08957b13d5ed5f86cb37d0545aa876aac50e507692d112b39882f465fff8f2b",
+        "source-input/tools/windows-scoped-runner/LeaseMonitor.cs": "49591cc15aaa68add9d8632188506e153179de37e0158d814a81d49d98252550",
+        "source-input/tools/windows-scoped-runner/MonitorAcceptanceDriver.cs": "98df6be690e4cfe1440d6eb11358688e75ca1f0adde12ef003d20dc2a8426c6c",
+        "source-input/tools/windows-scoped-runner/MonitorPayloadJob.cs": "559fda324f59768f2d5119c2f2fec7442c2cff543b694dc744b4c4ecc2524e4f",
+        "source-input/tools/windows-scoped-runner/MonitorSpecificationIntake.cs": "0f0a71563e6c3d99f0c643644d4b56951f6c69ceb3b10b03157f68dc37bb8412",
+        "source-input/tools/windows-scoped-runner/MonitorStagingHandoff.cs": "c541f7d885d032c074461a5a0173b9ae6291ef7d8cd1b9fd2ce4a4f56d1e0e6e",
+        "source-input/tools/windows-scoped-runner/MonitorTransport.cs": "792918d1cac67691fc9f7ee4c9e82b0c4377ba869c33458fedd56e9519e71c7c",
+        "source-input/tools/windows-scoped-runner/ScopedRunner.cs": "d3a77f0daeebd5beed2b277fae9dc6a522acf1454bb5d8d776d84e1dc8e896c8",
+        "source-input/tools/windows-scoped-runner/SpecificationTransfer.cs": "7a9edfe98d84868b55146280bd5ed29576ee0c8725cf9f6c785b784bc0ad25c2",
+        "source-input/tools/windows-scoped-runner/WindowsCustodyBackend.cs": "26b7468a0868271a555f6ed450212267b01d7d3fd0a8dd5b3fb51b01b7a05629",
+        "source-input/tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs": "38745833e7b23535cdc2ce225655074c6c5f50e204c0d3cf38d6805f49cb53eb",
+        "source-input/tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs": "8f43d33928262ae181aa5396feffef9b0260653609b5be8b01da7b0a7e7b00f7",
+        "source-input/tools/windows-scoped-runner/fixtures/PayloadFixture.cs": "fdca338e529682126cc1e06c04c9a4430c20f75814ab320b1f24e5533ee6b5d2",
+        "source-input/tools/windows-scoped-runner/fixtures/RunPayloadEnvironmentControl.ps1": "215c6ea55850ff89826ecf622d11081394eeab8d850f0867a50e805ab674b77d",
+        "source-input/tools/windows-scoped-runner/fixtures/RunSourceFixtures.ps1": "b2e71bcfb568fb0fd46d6211b366dde4493649995780145a29101542b9c9b4f5"
+      },
+      "empty_dirs": [
+        "run",
+        "source-input",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/build",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/input",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/logs",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/temp",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/input/tools",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/input/tools/windows-scoped-runner",
+        "run/monitor-source-61233f37b1ce4ddc847ba9b8ff2a14ed/input/tools/windows-scoped-runner/fixtures",
+        "source-input/tools",
+        "source-input/tools/windows-scoped-runner",
+        "source-input/tools/windows-scoped-runner/fixtures"
+      ]
+    },
+    {
+      "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\quota-fixture-48d19d95797f4b4f84f6962bac3f955c",
+      "kind": "completed-build",
+      "id": "rhai-process-quota-48d19d95797f4b4f84f6962bac3f955c",
+      "files": {
+        "bootstrap.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bootstrap.stdout": "0cf8a0049555ae1eee403999ee62fb70b6766ee72c749b87117fe1fa152d92b4",
+        "build-observer.json": "df00daa3183231f83f3d2ac949e0dfa63e15adb3cd0e7d57ca1dd838d8b74dbf",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/build-manifest.txt": "12fa43699b4f989a01d8c93f8dcaa5e009adc0b8d49e17f96edb7169f60523b6",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/run-result.txt": "79c5b9102422b2f755e2aed8ef416a0a3ab0156de7c5ba4c85dbeda2e6ac6761",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/build/PayloadFixture.exe": "e6333f1c445595463669babb5d6f7f5a37980795974e41aa40b47bf6bf9250b5",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/input/tools/windows-scoped-runner/LaunchSpecification.cs": "e08957b13d5ed5f86cb37d0545aa876aac50e507692d112b39882f465fff8f2b",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/input/tools/windows-scoped-runner/LeaseMonitor.cs": "49591cc15aaa68add9d8632188506e153179de37e0158d814a81d49d98252550",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/input/tools/windows-scoped-runner/MonitorAcceptanceDriver.cs": "98df6be690e4cfe1440d6eb11358688e75ca1f0adde12ef003d20dc2a8426c6c",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/input/tools/windows-scoped-runner/MonitorPayloadJob.cs": "559fda324f59768f2d5119c2f2fec7442c2cff543b694dc744b4c4ecc2524e4f",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/input/tools/windows-scoped-runner/MonitorSpecificationIntake.cs": "0f0a71563e6c3d99f0c643644d4b56951f6c69ceb3b10b03157f68dc37bb8412",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/input/tools/windows-scoped-runner/MonitorStagingHandoff.cs": "c541f7d885d032c074461a5a0173b9ae6291ef7d8cd1b9fd2ce4a4f56d1e0e6e",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/input/tools/windows-scoped-runner/MonitorTransport.cs": "792918d1cac67691fc9f7ee4c9e82b0c4377ba869c33458fedd56e9519e71c7c",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/input/tools/windows-scoped-runner/ScopedRunner.cs": "d3a77f0daeebd5beed2b277fae9dc6a522acf1454bb5d8d776d84e1dc8e896c8",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/input/tools/windows-scoped-runner/SpecificationTransfer.cs": "7a9edfe98d84868b55146280bd5ed29576ee0c8725cf9f6c785b784bc0ad25c2",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/input/tools/windows-scoped-runner/WindowsCustodyBackend.cs": "26b7468a0868271a555f6ed450212267b01d7d3fd0a8dd5b3fb51b01b7a05629",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/input/tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs": "38745833e7b23535cdc2ce225655074c6c5f50e204c0d3cf38d6805f49cb53eb",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/input/tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs": "8f43d33928262ae181aa5396feffef9b0260653609b5be8b01da7b0a7e7b00f7",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/input/tools/windows-scoped-runner/fixtures/PayloadFixture.cs": "409a6f1dab04e80e1a327b06c74174f1a1e107356aa5ea7e6413516c9b0558eb",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/logs/compile-PayloadFixture.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/logs/compile-PayloadFixture.stdout.txt": "7d6f399bc4ddebe9af0b4976bbe3450aac7fb48c8eba5ec95e37cae5283c787d",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/logs/exit-code-regression-17-wrong-expected.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/logs/exit-code-regression-17-wrong-expected.stdout.txt": "69826b89317496600a95e98535238d73a7091d7e0ff5c9585f08c25bb71a75c3",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/logs/exit-code-regression-17.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/logs/exit-code-regression-17.stdout.txt": "32d543b6dda9fd1365b76e3057e9fac50673187a4c91cb8c18413593043e1689",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/logs/exit-code-regression-zero.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/logs/exit-code-regression-zero.stdout.txt": "2b98ea68ce93cdb1de4a7d10f4c46c17aacc658cc11ed8e32cc0d15612e9c568",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/logs/job-members.jsonl": "4a872480e94e391df7dea26b33baa24d268c4d6859be60330d44fe77aae15133",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/logs/setup-failure-child.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/logs/setup-failure-child.stdout.txt": "8ff179f55be1a9908f3e33e97da8aafce587111fab0b67cd5a0cf189c4bad44d",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/logs/setup-failure-control.stderr.txt": "dc383c8e63001e4200c71dd2667219139fd7c53397e9e0b15ef4bff8bc79b12c",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/logs/setup-failure-control.stdout.txt": "a1064b1c88c57b95c4efbc4875ef110c1b3610960a8f19b8180b39c0e6a1a3b9",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/logs/setup-failure-control.txt": "123ecf2c1ba5d602f03bb38beb19df02ab49acdc10e14bd67473bd22df8086f0",
+        "source-input/tools/windows-scoped-runner/LaunchSpecification.cs": "e08957b13d5ed5f86cb37d0545aa876aac50e507692d112b39882f465fff8f2b",
+        "source-input/tools/windows-scoped-runner/LeaseMonitor.cs": "49591cc15aaa68add9d8632188506e153179de37e0158d814a81d49d98252550",
+        "source-input/tools/windows-scoped-runner/MonitorAcceptanceDriver.cs": "98df6be690e4cfe1440d6eb11358688e75ca1f0adde12ef003d20dc2a8426c6c",
+        "source-input/tools/windows-scoped-runner/MonitorPayloadJob.cs": "559fda324f59768f2d5119c2f2fec7442c2cff543b694dc744b4c4ecc2524e4f",
+        "source-input/tools/windows-scoped-runner/MonitorSpecificationIntake.cs": "0f0a71563e6c3d99f0c643644d4b56951f6c69ceb3b10b03157f68dc37bb8412",
+        "source-input/tools/windows-scoped-runner/MonitorStagingHandoff.cs": "c541f7d885d032c074461a5a0173b9ae6291ef7d8cd1b9fd2ce4a4f56d1e0e6e",
+        "source-input/tools/windows-scoped-runner/MonitorTransport.cs": "792918d1cac67691fc9f7ee4c9e82b0c4377ba869c33458fedd56e9519e71c7c",
+        "source-input/tools/windows-scoped-runner/ScopedRunner.cs": "d3a77f0daeebd5beed2b277fae9dc6a522acf1454bb5d8d776d84e1dc8e896c8",
+        "source-input/tools/windows-scoped-runner/SpecificationTransfer.cs": "7a9edfe98d84868b55146280bd5ed29576ee0c8725cf9f6c785b784bc0ad25c2",
+        "source-input/tools/windows-scoped-runner/WindowsCustodyBackend.cs": "26b7468a0868271a555f6ed450212267b01d7d3fd0a8dd5b3fb51b01b7a05629",
+        "source-input/tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs": "38745833e7b23535cdc2ce225655074c6c5f50e204c0d3cf38d6805f49cb53eb",
+        "source-input/tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs": "8f43d33928262ae181aa5396feffef9b0260653609b5be8b01da7b0a7e7b00f7",
+        "source-input/tools/windows-scoped-runner/fixtures/PayloadFixture.cs": "409a6f1dab04e80e1a327b06c74174f1a1e107356aa5ea7e6413516c9b0558eb",
+        "source-input/tools/windows-scoped-runner/fixtures/RunPayloadEnvironmentControl.ps1": "efa352742152a20d19cd387f7e38b4bdbdbf4bded79c56e269c3da7de284697b",
+        "source-input/tools/windows-scoped-runner/fixtures/RunSourceFixtures.ps1": "e59f55ca9694e7912e2dad301d07dcecb3ef6645adf3e88941cd8d40c0880ff6"
+      },
+      "empty_dirs": [
+        "run",
+        "source-input",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/build",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/input",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/logs",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/temp",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/input/tools",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/input/tools/windows-scoped-runner",
+        "run/monitor-source-48d19d95797f4b4f84f6962bac3f955c/input/tools/windows-scoped-runner/fixtures",
+        "source-input/tools",
+        "source-input/tools/windows-scoped-runner",
+        "source-input/tools/windows-scoped-runner/fixtures"
+      ]
+    }
+  ],
+  "retained": {
+    "owner": "current Rhai coordinator, workhorse/rhai-win11-quality/RhaiTest",
+    "purpose": "one default uninstrumented Runner/Driver/fixture build for active-process quota, affected resource/environment regressions, then compatible remaining memory quota/export/cleanup/project-command prerequisites; source/binary provenance checked before each reuse",
+    "expires_host_utc": "2026-10-25T17:01:47.008186+00:00",
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\quota-build-e6ce6222dba147a8b43b2c79187d3184",
+    "build": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\quota-build-e6ce6222dba147a8b43b2c79187d3184\\run\\monitor-source-e6ce6222dba147a8b43b2c79187d3184\\build",
+    "input_manifest_sha256": "40c530f260ed931d27eb289c0916c08831d9c3a19bfb633fb43fc8997957d219",
+    "start_sha256": "fb9aca4313a3f8abf912132c795ebb6cfd4249b88d13342fe9c7af027b45653f",
+    "compiler_sha256": "cf32cb7e8e5691b962e1b6f92b03d87409dd9e7afbed71c5bf77b8203cc56ee1",
+    "binaries": {
+      "MonitorAcceptanceDriver.exe": "ac032063f99e976bec450b41aeee41bece876630073a776ac380c00b2058ab24",
+      "PayloadFixture.exe": "abaf1ae805adc061a987f0b5fa2379dea59872dcc6c727a4b74411060eb53d82",
+      "ScopedRunner.exe": "30a33cdb5e13089ba71dca135b61a838b32e8f03823b55abcaf61ef8acae3c62"
+    },
+    "build_custody_closed": true,
+    "controls": {
+      "original": "rhai-process-quota-quota01-911a10854db94505b29817e3720d551f",
+      "exact_exit": true,
+      "pipes_drained": true,
+      "process_disposed": true,
+      "owned_executables_stopped": true
+    },
+    "remaining_compatible_reuse": true
+  },
+  "retained_manifest_sha256": "bb73f281ff87b2c767cef156c4f5aa3a552706002f8552011abce0f3232cbc01",
+  "keep_other_resources": true
+}

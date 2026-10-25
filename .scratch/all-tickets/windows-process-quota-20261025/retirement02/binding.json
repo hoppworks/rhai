@@ -1,0 +1,24 @@
+{
+  "nonce": "48d19d95797f4b4f84f6962bac3f955c",
+  "medium": "/var/lib/libvirt/images/rhai-win11-quality/quota-retirement02-48d19d95797f4b4f84f6962bac3f955c.iso",
+  "host_source_root": "/var/roothome/projects/rhai-process-quota-20261025-475b06d7/retirement02",
+  "source_sha256": "911dcd7ef398373ab1988d06df0770cbc0d098cb2f1bc444ffa57ecb5dcc3bec",
+  "manifest_sha256": "c35f1bef0db2ed9a081681fbb2c14b1ce406083729b6273aac8f3af081978251",
+  "native_compilers_or_drivers": 0,
+  "planned_exact_scopes": 9,
+  "planned_exact_files": 411,
+  "retained_default_scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\quota-build-e6ce6222dba147a8b43b2c79187d3184",
+  "source_review": "PASS narrowedsamecombinedreview: CIMgenerationfailsclosed; metadataexport/portopen/writes beforefirstRemoveItem;9roots411files/all3retainedpins unchanged; priorerrorpreserved",
+  "actual_result": {
+    "accepted": true,
+    "retired_scopes": 9,
+    "retired_files": 411,
+    "actor_checks": 94,
+    "recycled": 1,
+    "retained3tools_verified": true,
+    "foreign_resources_touched": false,
+    "readback_parser_note": "First offline timestamp parser rejected7fractionaldigits; exact100nsmanualparse on savedbytes passes; nativecleanup not repeated."
+  },
+  "repair_history": "Retirement01 null method frozenline41 before anyRemoveItem; underlyinggetterreasonunconfirmed. One bounded setupcorrection: supportedOS Win32_Process census; absent or definitelydifferentcreation (>1sconservative) only, unknown/near-matchfailsbeforedeletion; exportactorproof chunks. No compiler/Driver/test repeat, same9roots411files/all3retainedpins/expiry.",
+  "preexecution_correction": "Actor proof/serial open and bounded writes now precede firstRemoveItem; no nativeexecution of earlier candidate; finalreceipt afterdeletion."
+}

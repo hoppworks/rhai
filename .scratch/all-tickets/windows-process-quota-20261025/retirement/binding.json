@@ -1,0 +1,20 @@
+{
+  "nonce": "48d19d95797f4b4f84f6962bac3f955c",
+  "medium": "/var/lib/libvirt/images/rhai-win11-quality/quota-retirement-48d19d95797f4b4f84f6962bac3f955c.iso",
+  "host_source_root": "/var/roothome/projects/rhai-process-quota-20261025-475b06d7/retirement",
+  "source_sha256": "f8a9d598f048551e91bbcc9b9cfd48838e5e31c376f323e6aeaf64601c0d3807",
+  "manifest_sha256": "c35f1bef0db2ed9a081681fbb2c14b1ce406083729b6273aac8f3af081978251",
+  "native_compilers_or_drivers": 0,
+  "planned_exact_scopes": 9,
+  "planned_exact_files": 411,
+  "retained_default_scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\quota-build-e6ce6222dba147a8b43b2c79187d3184",
+  "source_review": "PASS independent narrowedretained3binary fix;9scope411hashesmatchedalloriginals; rootcurrent48fullproofs; all3retainedmanifest/binarypins matched beforeexecution",
+  "actual_result": {
+    "accepted": false,
+    "serial_receipt_bytes": 0,
+    "cause": "PowerShell InvokeMethodOnNull at frozen cleanup script line41 during managed actor StartTime/Dispose chain; underlying getter reason unproven. This is before the first Remove-Item statement. No blind replay.",
+    "original_screenshot": "after-entry.png",
+    "stack_screenshot": "stack-readback.png",
+    "product_proofs_repeated": false
+  }
+}

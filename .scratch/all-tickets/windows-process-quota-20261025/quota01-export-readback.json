@@ -1,0 +1,239 @@
+{
+  "frames": 548,
+  "files": {
+    "observer.json": {
+      "path": "observer.json",
+      "sha256": "9ca6aeb57f28e8e1d827f89f6ac07710bab82a81f95d910c92190cf6a452dce2",
+      "length": 2142
+    },
+    "bootstrap.stdout": {
+      "path": "bootstrap.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "bootstrap.stderr": {
+      "path": "bootstrap.stderr",
+      "sha256": "f1c0b6c5cd5726c1f2f4628ca377762150c20d37f5838c49c59ae2575e4927f6",
+      "length": 97
+    },
+    "run/.scoped-run-d131360f29aa4d55b6f7a166e7001e9b.journal": {
+      "path": "run/.scoped-run-d131360f29aa4d55b6f7a166e7001e9b.journal",
+      "sha256": "8dff7c5908fa18abb42f29e06924e931e249bb18955d25b888f1cf0ad1df569b",
+      "length": 2399
+    },
+    "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/manifest.txt": {
+      "path": "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/manifest.txt",
+      "sha256": "dc7ef25f81f16eab99dff58cc435a1160fcf1375787ea858c4cf84b67e9c612c",
+      "length": 1858
+    },
+    "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/stderr.log": {
+      "path": "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/stderr.log",
+      "sha256": "9e89798a70236b75f34e4686e7adbc3b3de006c74c15e1a53fd89b5db63b2cce",
+      "length": 180
+    },
+    "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/stdout.log": {
+      "path": "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/fixture.exe": {
+      "path": "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/fixture.exe",
+      "sha256": "abaf1ae805adc061a987f0b5fa2379dea59872dcc6c727a4b74411060eb53d82",
+      "length": 20480
+    },
+    "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/payload-job-quota.txt.failure": {
+      "path": "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/payload-job-quota.txt.failure",
+      "sha256": "6c8c5789f9a62f276e3af1063455f2717ce4945af2667de2048883680926af67",
+      "length": 135
+    },
+    "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/quota-child-00.txt": {
+      "path": "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/quota-child-00.txt",
+      "sha256": "101dba70a940cfbb494215807e89f79aa4149233fbf6f849fd3475111e5d36c4",
+      "length": 54
+    },
+    "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/quota-child-01.txt": {
+      "path": "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/quota-child-01.txt",
+      "sha256": "9f64a8bd6d7f330a0b57482dcdeb4006d9b5d2337b24a9363d91fc17910d7387",
+      "length": 54
+    },
+    "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/quota-child-02.txt": {
+      "path": "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/quota-child-02.txt",
+      "sha256": "16b8b931ef2380fcc454362d95d7c1817816ff5cd8db28f8a64f33c50cbab461",
+      "length": 54
+    },
+    "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/quota-child-03.txt": {
+      "path": "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/quota-child-03.txt",
+      "sha256": "5656b8584d33b0b4056a5cfbb579f1efa9622bdd89b959e793b60955b5375652",
+      "length": 53
+    },
+    "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/quota-child-04.txt": {
+      "path": "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/quota-child-04.txt",
+      "sha256": "13db865f4b80153181f32e2cbd65e04e1126d1fa22416c0cc7416f2c8cef719f",
+      "length": 54
+    },
+    "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/quota-child-05.txt": {
+      "path": "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/quota-child-05.txt",
+      "sha256": "690f54ca583d70009ff1d4bfaf8c151896d325976d9bce14993aca5c7086b575",
+      "length": 54
+    },
+    "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/quota-child-06.txt": {
+      "path": "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/quota-child-06.txt",
+      "sha256": "2d77fae08207162ae755fa9c6c1ab0fbc8dcadf95cc7bd0681fe51c5849ae19f",
+      "length": 54
+    },
+    "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/quota-members.txt": {
+      "path": "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/quota-members.txt",
+      "sha256": "1b2b0cd8ab2237441f08c2aaff54b872f8843ecce8b4e38226009d87ed5a6405",
+      "length": 607
+    },
+    "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/quota-protected.txt": {
+      "path": "run/.scoped-evidence-0e43ccfeb74142beb0c599b939278057/runtime/quota-protected.txt",
+      "sha256": "1123ff518601acacaf71f18ec041729608ef19a509b8025fd1ff727a02e23e74",
+      "length": 24
+    },
+    "bin/MonitorAcceptanceDriver.exe": {
+      "path": "bin/MonitorAcceptanceDriver.exe",
+      "sha256": "ac032063f99e976bec450b41aeee41bece876630073a776ac380c00b2058ab24",
+      "length": 207872
+    },
+    "bin/ScopedRunner.exe": {
+      "path": "bin/ScopedRunner.exe",
+      "sha256": "30a33cdb5e13089ba71dca135b61a838b32e8f03823b55abcaf61ef8acae3c62",
+      "length": 179712
+    },
+    "input/fixture.exe": {
+      "path": "input/fixture.exe",
+      "sha256": "abaf1ae805adc061a987f0b5fa2379dea59872dcc6c727a4b74411060eb53d82",
+      "length": 20480
+    },
+    "build-readback/bootstrap.stderr": {
+      "path": "build-readback/bootstrap.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "build-readback/bootstrap.stdout": {
+      "path": "build-readback/bootstrap.stdout",
+      "sha256": "5c252624f74b65b7275e4867f48d3a0fdc076a1f5c5bbee9893b8f9f39dc4162",
+      "length": 1116
+    },
+    "build-readback/build-manifest.txt": {
+      "path": "build-readback/build-manifest.txt",
+      "sha256": "bb73f281ff87b2c767cef156c4f5aa3a552706002f8552011abce0f3232cbc01",
+      "length": 1926
+    },
+    "build-readback/build-observer.json": {
+      "path": "build-readback/build-observer.json",
+      "sha256": "6085b82b7e4c74e19b210cfc387881330b5798a39f336ef5b6b4c51ea3287dca",
+      "length": 1620
+    },
+    "build-readback/run-result.txt": {
+      "path": "build-readback/run-result.txt",
+      "sha256": "79c5b9102422b2f755e2aed8ef416a0a3ab0156de7c5ba4c85dbeda2e6ac6761",
+      "length": 124
+    },
+    "build-readback/logs/compile-native-driver.stderr.txt": {
+      "path": "build-readback/logs/compile-native-driver.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "build-readback/logs/compile-native-driver.stdout.txt": {
+      "path": "build-readback/logs/compile-native-driver.stdout.txt",
+      "sha256": "6dfe32204c5bb3ed0021c74c2147972d4acdc8b4b12842601d5275992daca692",
+      "length": 2901
+    },
+    "build-readback/logs/compile-PayloadFixture.stderr.txt": {
+      "path": "build-readback/logs/compile-PayloadFixture.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "build-readback/logs/compile-PayloadFixture.stdout.txt": {
+      "path": "build-readback/logs/compile-PayloadFixture.stdout.txt",
+      "sha256": "7d6f399bc4ddebe9af0b4976bbe3450aac7fb48c8eba5ec95e37cae5283c787d",
+      "length": 131
+    },
+    "build-readback/logs/compile-production-runner.stderr.txt": {
+      "path": "build-readback/logs/compile-production-runner.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "build-readback/logs/compile-production-runner.stdout.txt": {
+      "path": "build-readback/logs/compile-production-runner.stdout.txt",
+      "sha256": "6dfe32204c5bb3ed0021c74c2147972d4acdc8b4b12842601d5275992daca692",
+      "length": 2901
+    },
+    "build-readback/logs/exit-code-regression-17-wrong-expected.stderr.txt": {
+      "path": "build-readback/logs/exit-code-regression-17-wrong-expected.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "build-readback/logs/exit-code-regression-17-wrong-expected.stdout.txt": {
+      "path": "build-readback/logs/exit-code-regression-17-wrong-expected.stdout.txt",
+      "sha256": "69826b89317496600a95e98535238d73a7091d7e0ff5c9585f08c25bb71a75c3",
+      "length": 40
+    },
+    "build-readback/logs/exit-code-regression-17.stderr.txt": {
+      "path": "build-readback/logs/exit-code-regression-17.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "build-readback/logs/exit-code-regression-17.stdout.txt": {
+      "path": "build-readback/logs/exit-code-regression-17.stdout.txt",
+      "sha256": "32d543b6dda9fd1365b76e3057e9fac50673187a4c91cb8c18413593043e1689",
+      "length": 25
+    },
+    "build-readback/logs/exit-code-regression-zero.stderr.txt": {
+      "path": "build-readback/logs/exit-code-regression-zero.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "build-readback/logs/exit-code-regression-zero.stdout.txt": {
+      "path": "build-readback/logs/exit-code-regression-zero.stdout.txt",
+      "sha256": "2b98ea68ce93cdb1de4a7d10f4c46c17aacc658cc11ed8e32cc0d15612e9c568",
+      "length": 27
+    },
+    "build-readback/logs/setup-failure-child.stderr.txt": {
+      "path": "build-readback/logs/setup-failure-child.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "build-readback/logs/setup-failure-child.stdout.txt": {
+      "path": "build-readback/logs/setup-failure-child.stdout.txt",
+      "sha256": "8ff179f55be1a9908f3e33e97da8aafce587111fab0b67cd5a0cf189c4bad44d",
+      "length": 93
+    },
+    "build-readback/logs/setup-failure-control.stderr.txt": {
+      "path": "build-readback/logs/setup-failure-control.stderr.txt",
+      "sha256": "dc383c8e63001e4200c71dd2667219139fd7c53397e9e0b15ef4bff8bc79b12c",
+      "length": 81
+    },
+    "build-readback/logs/setup-failure-control.stdout.txt": {
+      "path": "build-readback/logs/setup-failure-control.stdout.txt",
+      "sha256": "a1064b1c88c57b95c4efbc4875ef110c1b3610960a8f19b8180b39c0e6a1a3b9",
+      "length": 118
+    },
+    "build-readback/logs/setup-failure-control.txt": {
+      "path": "build-readback/logs/setup-failure-control.txt",
+      "sha256": "34a4db6d2ed96f595b2ad6490e6375abb65a88b092715b36c0e44d7b46b2be5d",
+      "length": 211
+    }
+  },
+  "complete": true,
+  "begin": {
+    "id": "rhai-process-quota-quota01-911a10854db94505b29817e3720d551f",
+    "exit": 2,
+    "driver_creation": 134374149007961870,
+    "accepted": false,
+    "contract": "job-quota",
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-911a10854db94505b29817e3720d551f",
+    "phase": "GREEN",
+    "driver_pid": 3352
+  },
+  "end": {
+    "id": "rhai-process-quota-quota01-911a10854db94505b29817e3720d551f",
+    "driver_launched": true,
+    "files": 43,
+    "accepted": false,
+    "exit": 2,
+    "guest_evidence_retained": true
+  }
+}

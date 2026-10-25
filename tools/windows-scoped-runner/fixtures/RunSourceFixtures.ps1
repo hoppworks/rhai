@@ -62,7 +62,7 @@ $expected = @{
     'tools/windows-scoped-runner/fixtures/MonitorPayloadJobFixture.cs' = 'd9aae76fd68a2cb52721618cd0746af36892a7951c9d0c4d11867a05e11ca7c0'
     'tools/windows-scoped-runner/fixtures/MonitorSpecificationIntakeFixture.cs' = '3e774455bc25a3f0fa40162e4ca3f5d59f35270d27b41c3e2aceb0f144f73d8d'
     'tools/windows-scoped-runner/fixtures/MonitorStagingHandoffFixture.cs' = '463273337d01e64b4285031858188b5ef886bb5cf150f6dabe2ac637bca999d5'
-    'tools/windows-scoped-runner/fixtures/PayloadFixture.cs' = 'e89c5fad040783326d117fe09860ab8535144756be0145bb38c0e4a148c0a465'
+    'tools/windows-scoped-runner/fixtures/PayloadFixture.cs' = '409a6f1dab04e80e1a327b06c74174f1a1e107356aa5ea7e6413516c9b0558eb'
     'tools/windows-scoped-runner/fixtures/SpecificationTransferFixture.cs' = 'a6b901d0a9cf59faba2d5f056d983ef627b92b2e9535277b60a1e2e75541e504'
 }
 
@@ -666,7 +666,7 @@ if (!$SetupFailureControl) { Test-OwnedProcessExitCodes $childPowerShell }
         $driverExe = Join-Path $buildRoot 'MonitorAcceptanceDriver.exe'
         Invoke-OwnedProcess $compiler (@('/target:exe','/main:MonitorAcceptanceDriver',('/out:'+$driverExe)) + $allProduction + @($driverSource)) 'compile-native-driver' 180
         if ($PublicToolsOnly) { Save-OwnedJobMembers 'after-exact-driver-compiler-exit' }
-        if (!$PublicToolsOnly) {
+        if (!$PublicToolsOnly -and !$PayloadWorkRetirementAbortOnly) {
             $missingSource = Join-Path $expectedRoot 'deliberately-missing-compiler-control.cs'
             Invoke-OwnedProcess $compiler @('/target:library',$missingSource) 'expected-compiler-failure' 180 1
             $compilerControl = [IO.File]::ReadAllText((Join-Path $logRoot 'expected-compiler-failure.stdout.txt')) + [IO.File]::ReadAllText((Join-Path $logRoot 'expected-compiler-failure.stderr.txt'))

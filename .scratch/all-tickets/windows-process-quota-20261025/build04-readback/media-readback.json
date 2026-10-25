@@ -1,0 +1,10 @@
+{
+  "source": "/var/roothome/projects/rhai-process-quota-20261025-475b06d7/build04-readback",
+  "medium": "/var/lib/libvirt/images/rhai-win11-quality/quota-build-readback-48d19d95797f4b4f84f6962bac3f955c.iso",
+  "sha256": "773350adfbe72012ed00ca9077be2fb14922e5341c3f5a62f2e50d34c51e0691",
+  "files": {
+    "cleanup-host-manifest.json": "a0e06700e6674fa41931a676a8c3efbbeb96f8c26f75276488b85ac3d23b265c",
+    "cleanup.ps1": "986415d46c261723f25237348ec885261e2a841f8a92d55de85d9fd767cc387b"
+  },
+  "native_started": false
+}

@@ -1,0 +1,132 @@
+{
+  "base": "ff3ccb877e34370bb9d6bad3e66d067c2e27c2dd",
+  "nonce": "c8d7629099fd47d1b6f10ef65649db5e",
+  "id": "rhai-process-quota-c8d7629099fd47d1b6f10ef65649db5e",
+  "bundle": "process-quota-c8d7629099fd47d1b6f10ef65649db5e",
+  "build_scope_leaf": "quota-fixture-c8d7629099fd47d1b6f10ef65649db5e",
+  "host_source_root": "/var/roothome/projects/rhai-process-quota-20261025-475b06d7/attempt02",
+  "medium": "/var/lib/libvirt/images/rhai-win11-quality/process-quota-c8d7629099fd47d1b6f10ef65649db5e.iso",
+  "created_host_utc": "2026-10-25T14:33:10.822034+00:00",
+  "files": {
+    "tools/windows-scoped-runner/LaunchSpecification.cs": "e08957b13d5ed5f86cb37d0545aa876aac50e507692d112b39882f465fff8f2b",
+    "tools/windows-scoped-runner/LeaseMonitor.cs": "49591cc15aaa68add9d8632188506e153179de37e0158d814a81d49d98252550",
+    "tools/windows-scoped-runner/MonitorAcceptanceDriver.cs": "98df6be690e4cfe1440d6eb11358688e75ca1f0adde12ef003d20dc2a8426c6c",
+    "tools/windows-scoped-runner/MonitorPayloadJob.cs": "559fda324f59768f2d5119c2f2fec7442c2cff543b694dc744b4c4ecc2524e4f",
+    "tools/windows-scoped-runner/MonitorSpecificationIntake.cs": "0f0a71563e6c3d99f0c643644d4b56951f6c69ceb3b10b03157f68dc37bb8412",
+    "tools/windows-scoped-runner/MonitorStagingHandoff.cs": "c541f7d885d032c074461a5a0173b9ae6291ef7d8cd1b9fd2ce4a4f56d1e0e6e",
+    "tools/windows-scoped-runner/MonitorTransport.cs": "792918d1cac67691fc9f7ee4c9e82b0c4377ba869c33458fedd56e9519e71c7c",
+    "tools/windows-scoped-runner/ScopedRunner.cs": "d3a77f0daeebd5beed2b277fae9dc6a522acf1454bb5d8d776d84e1dc8e896c8",
+    "tools/windows-scoped-runner/SpecificationTransfer.cs": "7a9edfe98d84868b55146280bd5ed29576ee0c8725cf9f6c785b784bc0ad25c2",
+    "tools/windows-scoped-runner/WindowsCustodyBackend.cs": "26b7468a0868271a555f6ed450212267b01d7d3fd0a8dd5b3fb51b01b7a05629",
+    "tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs": "38745833e7b23535cdc2ce225655074c6c5f50e204c0d3cf38d6805f49cb53eb",
+    "tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs": "8f43d33928262ae181aa5396feffef9b0260653609b5be8b01da7b0a7e7b00f7",
+    "tools/windows-scoped-runner/fixtures/PayloadFixture.cs": "57661586cc954f73aa19e369577ed09132b360d20731b953ace58e174ea6bd54",
+    "tools/windows-scoped-runner/fixtures/RunSourceFixtures.ps1": "9c6d0865409c24a29c285a112dfc739ebe8391447705eb62d2e062a5fe7daadc",
+    "tools/windows-scoped-runner/fixtures/RunPayloadEnvironmentControl.ps1": "8d21cd64189163a8b4784fb44c4e77cf59593cf8d302644bde3910b3cc1171d7"
+  },
+  "controls": [
+    {
+      "contract": "job-quota",
+      "tag": "quota02",
+      "nonce": "50a587ef233d4b54a1586bf029a426e9",
+      "scope_leaf": "env-control-50a587ef233d4b54a1586bf029a426e9",
+      "id": "rhai-process-quota-quota02-50a587ef233d4b54a1586bf029a426e9"
+    },
+    {
+      "contract": "job-resources",
+      "tag": "resources02",
+      "nonce": "f2d86c851ad3489b9400719bb8db2490",
+      "scope_leaf": "env-control-f2d86c851ad3489b9400719bb8db2490",
+      "id": "rhai-process-quota-resources02-f2d86c851ad3489b9400719bb8db2490"
+    },
+    {
+      "contract": "environment",
+      "tag": "environment02",
+      "nonce": "48845f7338c94693a54b957d6b6c8b96",
+      "scope_leaf": "env-control-48845f7338c94693a54b957d6b6c8b96",
+      "id": "rhai-process-quota-environment02-48845f7338c94693a54b957d6b6c8b96"
+    }
+  ],
+  "planned_counts": {
+    "fixture_compilers": 1,
+    "public_drivers": 3
+  },
+  "actual_counts": {
+    "fixture_compilers": 1,
+    "public_drivers": 1
+  },
+  "limits": {
+    "compiler_seconds_each": 180,
+    "bootstrap_seconds": 240,
+    "termination_reserve_seconds": 30,
+    "default_driver_seconds": 180,
+    "quota_observer_seconds": 190,
+    "other_observer_seconds": 10,
+    "quota_accept_driver_seconds_below": 110,
+    "leaf_natural_seconds": 120,
+    "child_readiness_seconds_each": 5,
+    "maximum_successful_fill_children": 15,
+    "maximum_excess_attempts": 2,
+    "drain_seconds": 10,
+    "closure_seconds": 60,
+    "export_seconds_each": 180,
+    "max_files": 64,
+    "max_file_bytes": 4194304,
+    "max_total_bytes": 16777216,
+    "max_host_raw_serial_bytes": 67108864,
+    "additional_storage_bytes_estimate": 268435456,
+    "guest_free_disk_floor_bytes": 2147483648,
+    "guest_free_physical_floor_bytes": 1073741824,
+    "excess_exact_exit_seconds": 5,
+    "countercase_release_seconds_each": 5,
+    "countercase_capacity_seconds": 5,
+    "countercase_readiness_seconds": 5
+  },
+  "retention": {
+    "owner": "current Rhai coordinator, workhorse/rhai-win11-quality/RhaiTest",
+    "purpose": "fixture-only component plus unchanged default public tools for process quota, affected regressions and compatible named custody follow-ups; original expiry unchanged",
+    "expires_host_utc": "2026-10-25T17:01:47.008186+00:00",
+    "retire_at": "earlier ended/cancelled compatible reuse or finite expiry; preserve needed originals before removing exact own inactive build",
+    "physical_build_available": true
+  },
+  "source_review": "PASS combined independent changed-source/entry, centrald6024420+dirty rules confirmed;15pins/Start/manifest/component reuse/limits/export sizing verified; no native claim.",
+  "input_manifest_sha256": "573b944522a9721406b380a7e0d2169aaae3fea6b9a14a72127981481ad97ef3",
+  "start_sha256": "4edcb2223a286724189f3e8b3e4bb19fa086be5b74c70ee267d1f946ba1c6982",
+  "reused_public_build": {
+    "owner": "current Rhai coordinator, workhorse/rhai-win11-quality/RhaiTest",
+    "purpose": "one default uninstrumented Runner/Driver/fixture build for active-process quota, affected resource/environment regressions, then compatible remaining memory quota/export/cleanup/project-command prerequisites; source/binary provenance checked before each reuse",
+    "expires_host_utc": "2026-10-25T17:01:47.008186+00:00",
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\quota-build-e6ce6222dba147a8b43b2c79187d3184",
+    "build": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\quota-build-e6ce6222dba147a8b43b2c79187d3184\\run\\monitor-source-e6ce6222dba147a8b43b2c79187d3184\\build",
+    "input_manifest_sha256": "40c530f260ed931d27eb289c0916c08831d9c3a19bfb633fb43fc8997957d219",
+    "start_sha256": "fb9aca4313a3f8abf912132c795ebb6cfd4249b88d13342fe9c7af027b45653f",
+    "compiler_sha256": "cf32cb7e8e5691b962e1b6f92b03d87409dd9e7afbed71c5bf77b8203cc56ee1",
+    "binaries": {
+      "MonitorAcceptanceDriver.exe": "ac032063f99e976bec450b41aeee41bece876630073a776ac380c00b2058ab24",
+      "PayloadFixture.exe": "abaf1ae805adc061a987f0b5fa2379dea59872dcc6c727a4b74411060eb53d82",
+      "ScopedRunner.exe": "30a33cdb5e13089ba71dca135b61a838b32e8f03823b55abcaf61ef8acae3c62"
+    },
+    "build_custody_closed": true,
+    "controls": {
+      "original": "rhai-process-quota-quota01-911a10854db94505b29817e3720d551f",
+      "exact_exit": true,
+      "pipes_drained": true,
+      "process_disposed": true,
+      "owned_executables_stopped": true
+    },
+    "remaining_compatible_reuse": true
+  },
+  "result": {
+    "accepted": false,
+    "driver_exit": 2,
+    "elapsed_seconds": 2.2271609,
+    "cause": "Actual16member record exists; next QuotaMembers API query failed before admission disposition captured; native error code/header/phase not preserved by current exception. No product defect established.",
+    "original_files_preserved": 62,
+    "frames": 610,
+    "raw_sha256": "3a3f3a7aefea0a0b47fcda0175373f37e153ee45061ddbfd49b4e04f7ca53a16",
+    "unrun_controls": [
+      "rhai-process-quota-resources02-f2d86c851ad3489b9400719bb8db2490",
+      "rhai-process-quota-environment02-48845f7338c94693a54b957d6b6c8b96"
+    ]
+  }
+}
