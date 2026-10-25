@@ -1,0 +1,3 @@
+scope=/Users/hoppworks/.local/share/agent-builds/rhai/darwin-pipeclosed-20261025-01
+scope_absent=True
+private runtime removed; no retained build/cache

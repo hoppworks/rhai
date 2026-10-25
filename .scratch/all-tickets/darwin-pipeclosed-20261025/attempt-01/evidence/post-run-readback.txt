@@ -1,0 +1,41 @@
+base-regression-green.log: scope=DirectChild pid=43424 absent=True
+base-regression-green.log: scope=DirectChild pid=43425 absent=True
+base-regression-green.log: scope=DirectChild pid=43426 absent=True
+base-regression-green.log: scope=DirectChild pid=43423 absent=True
+base-regression-green.log: scope=Managed pid=43428 absent=True
+base-regression-green.log: scope=Managed pid=43429 absent=True
+base-regression-green.log: scope=Managed pid=43430 absent=True
+base-regression-green.log: scope=Managed pid=43427 absent=True
+base-regression-green.log: managed_pgid=43428 absent=True
+known-broken-red.log: scope=DirectChild pid=43404 absent=True
+known-broken-red.log: scope=DirectChild pid=43405 absent=True
+known-broken-red.log: scope=DirectChild pid=43406 absent=True
+known-broken-red.log: scope=DirectChild pid=43403 absent=True
+testing-environ_sys_sync-darwin_direct_run_returns_with_pipe_closed_descendants_live.log: scope=DirectChild pid=43612 absent=True
+testing-environ_sys_sync-darwin_direct_run_returns_with_pipe_closed_descendants_live.log: scope=DirectChild pid=43613 absent=True
+testing-environ_sys_sync-darwin_direct_run_returns_with_pipe_closed_descendants_live.log: scope=DirectChild pid=43614 absent=True
+testing-environ_sys_sync-darwin_direct_run_returns_with_pipe_closed_descendants_live.log: scope=DirectChild pid=43611 absent=True
+testing-environ_sys_sync-darwin_managed_run_closes_pipe_closed_descendants_before_return.log: scope=Managed pid=43605 absent=True
+testing-environ_sys_sync-darwin_managed_run_closes_pipe_closed_descendants_before_return.log: scope=Managed pid=43606 absent=True
+testing-environ_sys_sync-darwin_managed_run_closes_pipe_closed_descendants_before_return.log: scope=Managed pid=43607 absent=True
+testing-environ_sys_sync-darwin_managed_run_closes_pipe_closed_descendants_before_return.log: scope=Managed pid=43604 absent=True
+testing-environ_sys_sync-darwin_managed_run_closes_pipe_closed_descendants_before_return.log: managed_pgid=43605 absent=True
+testing-environ_sys_sync_unchecked-darwin_direct_run_returns_with_pipe_closed_descendants_live.log: scope=DirectChild pid=43676 absent=True
+testing-environ_sys_sync_unchecked-darwin_direct_run_returns_with_pipe_closed_descendants_live.log: scope=DirectChild pid=43677 absent=True
+testing-environ_sys_sync_unchecked-darwin_direct_run_returns_with_pipe_closed_descendants_live.log: scope=DirectChild pid=43678 absent=True
+testing-environ_sys_sync_unchecked-darwin_direct_run_returns_with_pipe_closed_descendants_live.log: scope=DirectChild pid=43675 absent=True
+testing-environ_sys_sync_unchecked-darwin_managed_run_closes_pipe_closed_descendants_before_return.log: scope=Managed pid=43669 absent=True
+testing-environ_sys_sync_unchecked-darwin_managed_run_closes_pipe_closed_descendants_before_return.log: scope=Managed pid=43670 absent=True
+testing-environ_sys_sync_unchecked-darwin_managed_run_closes_pipe_closed_descendants_before_return.log: scope=Managed pid=43671 absent=True
+testing-environ_sys_sync_unchecked-darwin_managed_run_closes_pipe_closed_descendants_before_return.log: scope=Managed pid=43668 absent=True
+testing-environ_sys_sync_unchecked-darwin_managed_run_closes_pipe_closed_descendants_before_return.log: managed_pgid=43669 absent=True
+testing-environ_sys_unchecked-darwin_direct_run_returns_with_pipe_closed_descendants_live.log: scope=DirectChild pid=43648 absent=True
+testing-environ_sys_unchecked-darwin_direct_run_returns_with_pipe_closed_descendants_live.log: scope=DirectChild pid=43649 absent=True
+testing-environ_sys_unchecked-darwin_direct_run_returns_with_pipe_closed_descendants_live.log: scope=DirectChild pid=43650 absent=True
+testing-environ_sys_unchecked-darwin_direct_run_returns_with_pipe_closed_descendants_live.log: scope=DirectChild pid=43647 absent=True
+testing-environ_sys_unchecked-darwin_managed_run_closes_pipe_closed_descendants_before_return.log: scope=Managed pid=43641 absent=True
+testing-environ_sys_unchecked-darwin_managed_run_closes_pipe_closed_descendants_before_return.log: scope=Managed pid=43642 absent=True
+testing-environ_sys_unchecked-darwin_managed_run_closes_pipe_closed_descendants_before_return.log: scope=Managed pid=43643 absent=True
+testing-environ_sys_unchecked-darwin_managed_run_closes_pipe_closed_descendants_before_return.log: scope=Managed pid=43640 absent=True
+testing-environ_sys_unchecked-darwin_managed_run_closes_pipe_closed_descendants_before_return.log: managed_pgid=43641 absent=True
+counts={'flows': 9, 'pid_checks': 36, 'managed_group_checks': 4}

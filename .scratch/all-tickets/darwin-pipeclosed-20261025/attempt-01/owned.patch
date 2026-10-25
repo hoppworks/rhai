@@ -1,0 +1,234 @@
+diff --git a/tests/sys_process.rs b/tests/sys_process.rs
+index 16247154a..c33714f22 100644
+--- a/tests/sys_process.rs
++++ b/tests/sys_process.rs
+@@ -1659,6 +1659,63 @@ struct DarwinProcessIdentity {
+     start: String,
+ }
+ 
++#[cfg(all(target_os = "macos", not(feature = "no_index"), not(feature = "no_float")))]
++#[derive(Debug, Clone)]
++struct DarwinPipeMember {
++    pid: i32,
++    parent: i32,
++    group: i32,
++    start_seconds: u64,
++    start_micros: u64,
++    state: u32,
++}
++
++#[cfg(all(target_os = "macos", not(feature = "no_index"), not(feature = "no_float")))]
++impl DarwinPipeMember {
++    fn same_instance(&self, other: &Self) -> bool {
++        self.pid == other.pid
++            && self.group == other.group
++            && self.start_seconds == other.start_seconds
++            && self.start_micros == other.start_micros
++    }
++
++    fn is_live(&self) -> bool {
++        self.state != 0 && self.state != libc::SZOMB
++    }
++}
++
++#[cfg(all(target_os = "macos", not(feature = "no_index"), not(feature = "no_float")))]
++fn darwin_pipe_member(pid: i32) -> std::io::Result<Option<DarwinPipeMember>> {
++    if pid <= 0 {
++        return Err(std::io::Error::new(std::io::ErrorKind::InvalidInput, "expected a positive owned PID"));
++    }
++    let mut info = std::mem::MaybeUninit::<libc::proc_bsdinfo>::uninit();
++    let size = std::mem::size_of::<libc::proc_bsdinfo>() as i32;
++    // SAFETY: libproc receives a correctly sized, writable proc_bsdinfo buffer. Read it only
++    // after the kernel reports that the complete structure was written.
++    let received = unsafe { libc::proc_pidinfo(pid, libc::PROC_PIDTBSDINFO, 0, info.as_mut_ptr().cast(), size) };
++    if received <= 0 {
++        let error = std::io::Error::last_os_error();
++        return if error.raw_os_error() == Some(libc::ESRCH) { Ok(None) } else { Err(error) };
++    }
++    if received != size {
++        return Err(std::io::Error::new(std::io::ErrorKind::InvalidData, format!("proc_pidinfo returned {received}/{size} bytes for PID {pid}")));
++    }
++    // SAFETY: the complete structure was initialized by the successful call above.
++    let info = unsafe { info.assume_init() };
++    if info.pbi_pid != pid as u32 {
++        return Err(std::io::Error::new(std::io::ErrorKind::InvalidData, "proc_pidinfo returned a different PID"));
++    }
++    Ok(Some(DarwinPipeMember {
++        pid,
++        parent: info.pbi_ppid as i32,
++        group: info.pbi_pgid as i32,
++        start_seconds: info.pbi_start_tvsec,
++        start_micros: info.pbi_start_tvusec,
++        state: info.pbi_status,
++    }))
++}
++
+ #[cfg(all(target_os = "macos", not(feature = "unchecked"), not(feature = "no_index"), not(feature = "no_float")))]
+ impl DarwinProcessIdentity {
+     fn same_process(&self, other: &Self) -> bool {
+@@ -3999,6 +4056,165 @@ fn direct_run_returns_with_pipe_closed_worker_live_control() {
+     observer.join().expect("PIDfd observer completed");
+ }
+ 
++/// The native observer retains kernel start identities before releasing the leader. Its guard
++/// cleans only those exact PIDs; DirectChild members share the host group and must not receive
++/// a group signal from fixture cleanup.
++#[cfg(all(target_os = "macos", not(feature = "no_index"), not(feature = "no_float")))]
++struct DarwinPipeCustody<'a> {
++    root: &'a std::path::Path,
++    members: std::sync::Mutex<Vec<DarwinPipeMember>>,
++}
++
++#[cfg(all(target_os = "macos", not(feature = "no_index"), not(feature = "no_float")))]
++impl Drop for DarwinPipeCustody<'_> {
++    fn drop(&mut self) {
++        for marker in ["release-worker", "release-leader"] {
++            if let Err(error) = std::fs::write(self.root.join(marker), b"release\n") {
++                eprintln!("darwin_pipe_release_failed marker={marker} error={error}");
++            }
++        }
++        let members = self.members.lock().unwrap_or_else(|error| error.into_inner()).clone();
++        let deadline = Instant::now() + Duration::from_secs(2);
++        while members.iter().any(|member| !pid_is_absent(member.pid)) && Instant::now() < deadline {
++            std::thread::sleep(Duration::from_millis(5));
++        }
++        for member in &members {
++            match darwin_pipe_member(member.pid) {
++                Ok(Some(current)) if member.same_instance(&current) && current.is_live() => {
++                    // SAFETY: rechecked the exact fixture PID/group/kernel start identity. This
++                    // sends no process-group signal and cannot select the inherited host group.
++                    let sent = unsafe { libc::kill(member.pid, libc::SIGKILL) } == 0;
++                    eprintln!("darwin_pipe_cleanup_signal pid={} exact_identity=true sent={sent}", member.pid);
++                }
++                Ok(None) => {}
++                other => eprintln!("darwin_pipe_cleanup_retained pid={} observation={other:?}", member.pid),
++            }
++        }
++        let deadline = Instant::now() + Duration::from_secs(2);
++        while members.iter().any(|member| !pid_is_absent(member.pid)) && Instant::now() < deadline {
++            std::thread::sleep(Duration::from_millis(5));
++        }
++        for member in &members {
++            eprintln!("darwin_pipe_fixture_cleanup pid={} start_seconds={} start_micros={} absent={}", member.pid, member.start_seconds, member.start_micros, pid_is_absent(member.pid));
++        }
++    }
++}
++
++#[cfg(all(target_os = "macos", not(feature = "no_index"), not(feature = "no_float")))]
++fn observe_darwin_pipe_closed_members(custody: &DarwinPipeCustody<'_>, scope: ProcessScope, host_pid: i32, host_group: i32, sentinel_pid: i32, ack: &std::path::Path) -> Vec<DarwinPipeMember> {
++    let deadline = Instant::now() + Duration::from_secs(4);
++    loop {
++        let records = ["leader-record", "worker-record", "leaf-record"].map(|name| std::fs::read_to_string(custody.root.join(name)));
++        if records.iter().all(Result::is_ok) {
++            let fields = records.map(|record| managed_record_fields(&record.unwrap()));
++            let pids = [fields[0]["pid"], fields[1]["pid"], fields[2]["pid"]];
++            let group = if scope == ProcessScope::Managed { pids[0] } else { host_group };
++            let parents = [host_pid, pids[0], pids[1]];
++            assert_eq!(fields[0]["worker"], pids[1], "leader receipt must identify the worker");
++            assert_eq!(fields[0]["leaf"], pids[2], "leader receipt must identify the leaf");
++            let mut members = Vec::new();
++            for (index, pid) in pids.into_iter().enumerate() {
++                let identity = darwin_pipe_member(pid).expect("read native fixture identity").expect("fixture member is live before leader release");
++                assert_ne!(pid, host_pid, "fixture receipt must not select the host");
++                assert_ne!(pid, sentinel_pid, "fixture receipt must not select the unrelated sentinel");
++                assert!(identity.is_live(), "fixture member must not be a zombie before release: {identity:?}");
++                assert_eq!(identity.parent, parents[index], "fixture parent relationship must be independently observed");
++                assert_eq!(identity.group, group, "fixture process group must match its host-selected scope");
++                assert_eq!(fields[index]["pgid"], group, "child receipt and kernel group must agree");
++                custody.members.lock().unwrap().push(identity.clone());
++                members.push(identity);
++            }
++            for member in &members {
++                let current = darwin_pipe_member(member.pid).expect("reread live native identity").expect("fixture member remains live until acknowledgment");
++                assert!(member.same_instance(&current) && current.parent == member.parent && current.is_live(), "identity changed before readiness acknowledgment: {member:?} -> {current:?}");
++                eprintln!("darwin_pipe_live pid={} parent={} pgid={} start_seconds={} start_micros={} live=true", member.pid, member.parent, member.group, member.start_seconds, member.start_micros);
++            }
++            std::fs::write(ack, b"native kernel identities validated before leader exit\n").expect("acknowledge native live identities");
++            return members;
++        }
++        for record in &records {
++            if let Err(error) = record {
++                assert_eq!(error.kind(), std::io::ErrorKind::NotFound, "unexpected fixture receipt failure: {error}");
++            }
++        }
++        assert!(Instant::now() < deadline, "native pipe-closed fixture readiness timed out");
++        std::thread::sleep(Duration::from_millis(2));
++    }
++}
++
++#[cfg(all(target_os = "macos", not(feature = "no_index"), not(feature = "no_float")))]
++fn assert_darwin_pipe_closed_scope(configured_scope: ProcessScope, expect_descendants_closed: bool) {
++    let fixture = ManagedFixture::new();
++    let custody = DarwinPipeCustody { root: fixture.root.path(), members: std::sync::Mutex::new(Vec::new()) };
++    let mut sentinel = managed_spawn_sentinel();
++    let sentinel_pid = sentinel.0.id() as i32;
++    let host_pid = std::process::id() as i32;
++    // SAFETY: read-only query of this test process's current group; no group signal is sent.
++    let host_group = unsafe { libc::getpgrp() };
++    let host_before = darwin_pipe_member(host_pid).expect("read native host identity").expect("host exists");
++    let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
++    let root = fixture.root.as_script_path();
++    let path = |name| fixture.path(name).to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
++    let ack = fixture.path("native-identity-ack");
++    let configured = SysConfig::default().programs(ProgramPolicy::AllowList(vec![executable.clone()])).process_scope(configured_scope);
++    let engine = engine(configured);
++    let script = format!(r#"run("{executable}", ["--exact", "managed_scope_leader_fixture", "--nocapture", "--quiet"], #{{
++        env_clear: true,
++        env: #{{ {MANAGED_FIXTURE_ENV}: "leader-closed-io", {MANAGED_ROOT_ENV}: "{root}", {MANAGED_WORKER_ENV}: "{}", {MANAGED_LEAF_ENV}: "{}", {MANAGED_RELEASE_ENV}: "{}", {MANAGED_PIDFD_ACK_ENV}: "{}" }},
++        timeout: 8.0
++    }})"#, path("worker-record"), path("leaf-record"), path("release-worker"), path("native-identity-ack"));
++    let (result, members) = std::thread::scope(|threads| {
++        let observer = threads.spawn(|| observe_darwin_pipe_closed_members(&custody, configured_scope, host_pid, host_group, sentinel_pid, &ack));
++        let result = engine.eval::<Map>(&script);
++        let members = observer.join().expect("native identity observer completed");
++        (result, members)
++    });
++    let leader_absent = pid_is_absent(members[0].pid);
++    let worker_absent = pid_is_absent(members[1].pid);
++    let leaf_absent = pid_is_absent(members[2].pid);
++    let descendants_live = members.iter().skip(1).all(|member| {
++        darwin_pipe_member(member.pid).expect("observe descendant at API return")
++            .is_some_and(|current| member.same_instance(&current) && current.is_live())
++    });
++    let sentinel_live = sentinel.0.try_wait().expect("observe unrelated sentinel").is_none();
++    let host_after = darwin_pipe_member(host_pid).expect("reread host identity").expect("host remains live");
++    let host_unchanged = host_before.same_instance(&host_after) && host_after.is_live();
++    eprintln!("darwin_pipe_return scope={configured_scope:?} expect_closed={expect_descendants_closed} leader={} leader_absent={leader_absent} worker={} worker_absent={worker_absent} leaf={} leaf_absent={leaf_absent} descendants_live={descendants_live} sentinel={sentinel_pid} sentinel_live={sentinel_live} host={host_pid} host_unchanged={host_unchanged} result_ok={}", members[0].pid, members[1].pid, members[2].pid, result.is_ok());
++    // Finish exact fixture custody before any contract assertion, including the known-broken
++    // DirectChild control for the managed expectation.
++    drop(custody);
++    drop(fixture);
++    let all_absent_after_cleanup = members.iter().all(|member| pid_is_absent(member.pid));
++    drop(sentinel);
++    let sentinel_absent = pid_is_absent(sentinel_pid);
++    eprintln!("darwin_pipe_terminal leader={} worker={} leaf={} all_absent={all_absent_after_cleanup} sentinel={sentinel_pid} sentinel_absent={sentinel_absent}", members[0].pid, members[1].pid, members[2].pid);
++    assert!(all_absent_after_cleanup && sentinel_absent, "native fixture must retire all exact owned PIDs");
++    let result = result.expect("public run with pipe-closed descendants must complete normally");
++    assert!(result["success"].as_bool().unwrap());
++    assert_eq!(result["code"].as_int().unwrap(), 0);
++    assert!(!result["timed_out"].as_bool().unwrap());
++    assert!(result["stdout_complete"].as_bool().unwrap() && result["stderr_complete"].as_bool().unwrap());
++    assert!(leader_absent, "public run must reap its direct leader");
++    assert!(sentinel_live && host_unchanged, "scope cleanup must preserve the host and unrelated sentinel");
++    if expect_descendants_closed {
++        assert!(worker_absent && leaf_absent, "managed scope must close pipe-closed descendants before API return");
++    } else {
++        assert!(descendants_live && !worker_absent && !leaf_absent, "DirectChild must preserve the same live pipe-closed descendants at API return");
++    }
++}
++
++#[test]
++#[cfg(all(target_os = "macos", not(feature = "no_index"), not(feature = "no_float")))]
++fn darwin_managed_run_closes_pipe_closed_descendants_before_return() {
++    assert_darwin_pipe_closed_scope(ProcessScope::Managed, true);
++}
++
++#[test]
++#[cfg(all(target_os = "macos", not(feature = "no_index"), not(feature = "no_float")))]
++fn darwin_direct_run_returns_with_pipe_closed_descendants_live() {
++    assert_darwin_pipe_closed_scope(ProcessScope::DirectChild, false);
++}
++
+ #[cfg(all(unix, not(feature = "no_index"), not(feature = "no_float")))]
+ struct ManagedEscapeFixture {
+     root: TempDir,

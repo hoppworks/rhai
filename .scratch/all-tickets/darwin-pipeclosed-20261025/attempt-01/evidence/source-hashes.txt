@@ -1,0 +1,5 @@
+cd6177f4aa38a6953c5907846a15edd6a4952bddcb663bb2dc34b3b9ed18970e  Cargo.toml
+2ba4b3a0807e32b613ff2e972b893c3fd2e0923fd91803611963f09e93265425  Cargo.lock
+2eee89d216ab1edfab6e56b0e6f056195a3708b888395b9429c367412add25f6  src/packages/sys/process/unix.rs
+06dc0ed35c2a6edbbe16e54eda59bd3a278eab8d07cef619b99caa7589cd8f43  tests/sys_process.rs
+57efff4d3fa2ba0819c76a3d466da63594ad8c3c4a1bed571dbe246a118559fd  /Users/hoppworks/.codex/worktrees/darwin-capture-cleanup/rhai/.scratch/all-tickets/darwin-pipeclosed-20261025/attempt-01/owned.patch

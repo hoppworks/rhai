@@ -1,0 +1,11 @@
+--- /Users/hoppworks/.local/share/agent-builds/rhai/darwin-pipeclosed-20261025-01/agent-build-o1ewa8ei/sys_process.correct.rs	2026-10-25 08:01:15
++++ tests/sys_process.rs	2026-10-25 08:01:15
+@@ -4206,7 +4206,7 @@
+ #[test]
+ #[cfg(all(target_os = "macos", not(feature = "no_index"), not(feature = "no_float")))]
+ fn darwin_managed_run_closes_pipe_closed_descendants_before_return() {
+-    assert_darwin_pipe_closed_scope(ProcessScope::Managed, true);
++    assert_darwin_pipe_closed_scope(ProcessScope::DirectChild, true);
+ }
+ 
+ #[test]

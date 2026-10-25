@@ -1,0 +1,1 @@
+known-broken DirectChild control failed at intended managed contract; restored full base target and both new tests in all four profiles passed

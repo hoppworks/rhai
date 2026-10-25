@@ -1,0 +1,11 @@
+{
+  "scope": "one native Darwin pipe-closed package invocation; one known-broken RED, full base target and six exact profile GREEN commands",
+  "cargo_commands": 8,
+  "cargo_preparation_seconds_sum": 52.36,
+  "wall_envelope_seconds": 66.744,
+  "wall_method": "mtime(result.txt) minus mtime(capacity-before.txt), includes source staging and Cargo commands, excludes later observer/review",
+  "outer_timeout_seconds": 600,
+  "cargo_jobs": 2,
+  "tokens": "unknown",
+  "cost": "unknown"
+}

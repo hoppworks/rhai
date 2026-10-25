@@ -1,0 +1,21 @@
+utc=2026-10-25T07:01:15Z
+revision=9527d655c715348da519e414f55a7fa3207550c2
+runtime=/Users/hoppworks/.local/share/agent-builds/rhai/darwin-pipeclosed-20261025-01/agent-build-o1ewa8ei
+TMPDIR=/Users/hoppworks/.local/share/agent-builds/rhai/darwin-pipeclosed-20261025-01/agent-build-o1ewa8ei/tmp
+outer_timeout_seconds=600
+cargo_jobs=2
+Darwin Daniels-MacBook-Pro-2.fritz.box 27.0.0 Darwin Kernel Version 27.0.0: Tue Aug 11 21:02:59 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T8142 arm64
+ProductName:		macOS
+ProductVersion:		27.0.1
+BuildVersion:		26A434
+rustc 1.77.2 (25ef9e3d8 2024-04-09)
+binary: rustc
+commit-hash: 25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04
+commit-date: 2024-04-09
+host: aarch64-apple-darwin
+release: 1.77.2
+LLVM version: 17.0.6
+cargo 1.77.2 (e52e36006 2024-03-26)
+25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e  /Users/hoppworks/projects/agent-skills/tools/run_scoped.py
+246d87709fc6b9157ce5cf3c475656ac48e0e1ae8bbdc46cf45acd34294448cd  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/libproc.h
+e427fa96b348537b21552b9de71e01039410bcad2cedee5584c5e5fddafd70fc  /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/proc_info.h
