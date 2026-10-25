@@ -1,0 +1,1 @@
+if ((get-filehash e:\start.ps1).hash -eq '22721ca04c369a78fc558cc5f12960d495262c9e7492ce8633cbc6fb36b0fed2') { & ([scriptblock]::create((get-content e:\start.ps1 -raw))) } else { throw 'source mismatch' }

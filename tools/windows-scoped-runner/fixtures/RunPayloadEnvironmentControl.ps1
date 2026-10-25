@@ -4,7 +4,7 @@ param(
  [Parameter(Mandatory=$true)][string]$Session,
  [Parameter(Mandatory=$true)][ValidateLength(1,96)][ValidatePattern('^[a-z0-9-]+$')][string]$Id,
  [ValidateSet('RED','GREEN','RETIREMENT_ABORT')][string]$Phase='RED',
- [ValidateSet('environment','job-resources','job-quota')][string]$Contract='environment',
+ [ValidateSet('environment','job-resources','job-quota','job-memory')][string]$Contract='environment',
  [Parameter(Mandatory=$true)][string]$BuildRoot,
  [string]$FixtureBuildRoot,
  [switch]$ReturnStatusToCaller
@@ -39,7 +39,7 @@ if(!$FixtureBuildRoot){$FixtureBuildRoot=$BuildRoot}
 $fixtureBuild=Read-CompiledBuild $FixtureBuildRoot @('PayloadFixture.exe')
 $build=$publicBuild.build;$buildManifest=$publicBuild.manifest;$expected=$publicBuild.pins
 if([IO.Path]::GetFullPath($FixturePath) -cne (Join-Path $fixtureBuild.build 'PayloadFixture.exe') -or $FixtureSha256 -cne $fixtureBuild.pins['PayloadFixture.exe']){throw 'Fixture path/hash differs from its actual compiled component.'}
-if($Contract -ceq 'job-quota' -and $Phase -cne 'GREEN'){throw 'Actual quota denial uses current bounded production tools and GREEN phase.'}
+if($Contract -cin @('job-quota','job-memory') -and $Phase -cne 'GREEN'){throw 'Actual Job limit denials use current bounded production tools and GREEN phase.'}
 
 No-Reparse $session;No-Reparse $FixturePath
 if((Get-FileHash -LiteralPath $FixturePath).Hash.ToLowerInvariant() -cne $FixtureSha256){throw 'Native environment fixture changed.'}
@@ -77,6 +77,7 @@ foreach($name in @('ScopedRunner.exe','MonitorAcceptanceDriver.exe')){
  if((Get-FileHash -LiteralPath (Join-Path $bin $name)).Hash.ToLowerInvariant() -cne $expected[$name]){throw 'Owned public tool copy differs from source-bound build.'}
 }
 $jobQuotaObserved=@{};$jobQuotaGreen=$false;$jobQuotaSensitivity=$false;$quotaProtectedSensitivity=$false;$quotaActorsStopped=$false
+$jobMemoryObserved=@{};$jobMemoryGreen=$false;$jobMemorySensitivity=$false;$memoryActorsStopped=$false
 $expectedPayload=if($Phase -ceq 'GREEN'){'00000000'}else{'0000002A'}
 $runtimeAbsenceRed=$false;$runtimeAbsent=$false;
 $jobResourcesObserved=@{};$jobResourcesRed=$false;$jobResourcesGreen=$false;$jobResourcesSensitivity=$false;$jobActorsStopped=$false
@@ -85,7 +86,7 @@ $environmentRed=$false;$environmentGreen=$false;$workRetirementRed=$false;$workR
 $stdout = Join-Path $session 'bootstrap.stdout'; $stderr = Join-Path $session 'bootstrap.stderr'
 $info = [Diagnostics.ProcessStartInfo]::new()
 $info.FileName = Join-Path $bin 'MonitorAcceptanceDriver.exe'
-$payloadArguments=if($Phase -ceq 'RETIREMENT_ABORT'){'--retirement-abort'}elseif($Contract -ceq 'job-resources'){'payload-job-resources.txt --job-resources'}elseif($Contract -ceq 'job-quota'){'payload-job-quota.txt --job-quota'}else{'payload-environment.txt --environment'}
+$payloadArguments=if($Phase -ceq 'RETIREMENT_ABORT'){'--retirement-abort'}elseif($Contract -ceq 'job-resources'){'payload-job-resources.txt --job-resources'}elseif($Contract -ceq 'job-quota'){'payload-job-quota.txt --job-quota'}elseif($Contract -ceq 'job-memory'){'payload-job-memory.txt --job-memory'}else{'payload-environment.txt --environment'}
 $info.Arguments = '--mode success --source "'+$input+'" --exe fixture.exe --expected-payload-exit '+$expectedPayload+' -- '+$payloadArguments
 $info.WorkingDirectory = $bin; $info.UseShellExecute = $false; $info.CreateNoWindow = $true
 $info.RedirectStandardOutput = $true; $info.RedirectStandardError = $true
@@ -98,7 +99,7 @@ $global:RhaiPayloadPendingCustody=[pscustomobject]@{Process=$process;Readers=$re
 $status=-1;$complete=$false;$failure='';$started=$false;$exited=$false;$pipesDrained=$false
 $observerDeadline=[Diagnostics.Stopwatch]::StartNew()
 $hostRecord=$false;$processDisposed=$false;$observerKillUsed=$false;$driverElapsedSeconds=0.0;$driverPid=0;$driverCreation=0L;$ownExecutablesStopped=$false
-$driverBound=if($Contract -ceq 'job-quota'){190}elseif($Phase -ceq 'RETIREMENT_ABORT'){180}else{10}
+$driverBound=if($Contract -cin @('job-quota','job-memory')){190}elseif($Phase -ceq 'RETIREMENT_ABORT'){180}else{10}
 function Save-CompletedChunk([object] $Channel) {
  if ($null -eq $Channel.Task -or !$Channel.Task.IsCompleted) { return }
  try {
@@ -225,6 +226,46 @@ if ($started -and $exited -and $pipesDrained -and !$custodyPending -and $ownExec
    if(!$wrongExpectationRejected){throw 'Negative control accepted an impossible work-entry expectation.'}
    Assert-WorkRetirementReadback $fields 2060 613419011
    $workRetirementRed=$wrongExpectationRejected;$workRetirementGreen=$true
+  }elseif($Contract -ceq 'job-memory'){
+   $snapshotRoot=Join-Path $evidence[0].FullName 'runtime'
+   if($driverElapsedSeconds -ge 110){throw 'Memory closure did not precede the120second natural leaf expiry.'}
+   function Read-MemoryLine([string]$Name,[string]$Pattern){
+    $text=[IO.File]::ReadAllText((Join-Path $snapshotRoot $Name))
+    if($text.Length -gt 4096){throw ('Actual memory record exceeds bound: '+$Name)}
+    if($text -cmatch $Pattern){return $Matches}
+    throw ('Actual memory record invalid: '+$Name)
+   }
+   $root=Read-MemoryLine 'payload-job-memory.txt.root' '^pid=([1-9][0-9]*);creation=([1-9][0-9]*);job_member=True;flags=([0-9A-F]{8});process_limit=([1-9][0-9]*);job_limit=([1-9][0-9]*);global_available_commit=([1-9][0-9]*);private_bytes=([1-9][0-9]*)\r\n$'
+   if([long]$root[6] -lt 3221225472 -or [long]$root[7] -ge 536870912){throw 'Global or process commit headroom did not separate Job limits from system exhaustion.'}
+   $processDenial=Read-MemoryLine 'payload-job-memory.txt.process-denial' '^bytes=1073741824;returned=False;native_error=([1-9][0-9]*);protected_unchanged=True\r\n$'
+   $job=Read-MemoryLine 'payload-job-memory.txt.job-denial' '^bytes=536870912;returned=False;native_error=([1-9][0-9]*);root_private_before=([1-9][0-9]*);global_available_commit_before=([1-9][0-9]*);protected_unchanged=True\r\n$'
+   $leaf0=Read-MemoryLine 'payload-job-memory.txt.leaf-0' '^pid=([1-9][0-9]*);creation=([1-9][0-9]*);job_member=True;committed_bytes=805306368;private_bytes=([1-9][0-9]*)\r\n$'
+   $leaf1=Read-MemoryLine 'payload-job-memory.txt.leaf-1' '^pid=([1-9][0-9]*);creation=([1-9][0-9]*);job_member=True;committed_bytes=805306368;private_bytes=([1-9][0-9]*)\r\n$'
+   if([long]$job[2] -ge 536870912 -or [long]$job[3] -lt 1073741824 -or [long]$leaf0[3] -lt 805306368 -or [long]$leaf1[3] -lt 805306368){throw 'Actual committed-memory headroom or leaf charges do not separate per-process and Job denials.'}
+   $outcome=Read-MemoryLine 'payload-job-memory.txt' '^pid=([1-9][0-9]*);creation=([1-9][0-9]*);job_member=True;process_error=([1-9][0-9]*);job_error=([1-9][0-9]*);released_leaf=([1-9][0-9]*);retained_leaf=([1-9][0-9]*);retries=(0|[1-9][0-9]*);contract=PASS\r\n$'
+   if($root[1] -cne $outcome[1] -or $root[2] -cne $outcome[2] -or $processDenial[1] -cne $outcome[3] -or $job[1] -cne $outcome[4] -or $leaf0[1] -cne $outcome[5] -or $leaf1[1] -cne $outcome[6] -or $root[1] -ceq $leaf0[1] -or $root[1] -ceq $leaf1[1] -or $leaf0[1] -ceq $leaf1[1]){throw 'Memory root, leaves or native denials are not bound to the final result.'}
+   function Assert-MemoryLimits([long]$ExpectedProcess,[long]$ExpectedJob){
+    if($root[3] -cne '00002308' -or [long]$root[4] -ne $ExpectedProcess -or [long]$root[5] -ne $ExpectedJob){throw 'Actual memory limit expectation mismatch.'}
+   }
+   try{Assert-MemoryLimits 1073741825 2147483648}catch{if($_.Exception.Message -cne 'Actual memory limit expectation mismatch.'){throw};$jobMemorySensitivity=$true}
+   if(!$jobMemorySensitivity){throw 'Memory wrong-limit expectation did not fail.'}
+   Assert-MemoryLimits 1073741824 2147483648
+   if([IO.File]::ReadAllText((Join-Path $snapshotRoot 'payload-job-memory.txt.protected')) -cne "same-allocation-succeeded-after-exact-leaf-exit`r`n"){throw 'Memory countercase did not produce the independently read protected marker.'}
+   $memoryDiagnostic=[IO.File]::ReadAllText((Join-Path $evidence[0].FullName 'stderr.log'))
+   if($memoryDiagnostic -match '(?i)memory (child cleanup failed|child wait incomplete|root VirtualFree failed|leaf VirtualFree failed)'){throw 'Memory actor cleanup reported an incomplete native operation.'}
+   $jobMemoryObserved=@{root=@{pid=[int]$root[1];creation=[long]$root[2];private_before=[long]$root[7]};released_leaf=@{pid=[int]$leaf0[1];creation=[long]$leaf0[2];private_bytes=[long]$leaf0[3]};retained_leaf=@{pid=[int]$leaf1[1];creation=[long]$leaf1[2];private_bytes=[long]$leaf1[3]};process_native_error=[int]$processDenial[1];job_native_error=[int]$job[1];root_private_before_job_denial=[long]$job[2];global_available_commit=[long]$root[6];global_available_commit_before_job_denial=[long]$job[3];recovery_attempts=[int]$outcome[7]}
+   $liveProcesses=@(Get-CimInstance Win32_Process)
+   if($liveProcesses.Count -lt 1 -or @($liveProcesses|Where-Object{$_.ProcessId -eq $PID}).Count -ne 1){throw 'Current OS process census is incomplete.'}
+   foreach($actor in @($jobMemoryObserved.root,$jobMemoryObserved.released_leaf,$jobMemoryObserved.retained_leaf)){
+    $rows=@($liveProcesses|Where-Object{$_.ProcessId -eq $actor.pid})
+    if($rows.Count -gt 1){throw 'Memory actor process generation is ambiguous.'}
+    if($rows.Count -eq 1){
+     if($null -eq $rows[0].CreationDate -or $rows[0].CreationDate -isnot [DateTime]){throw 'Current memory actor creation data unavailable.'}
+     $observedCreation=$rows[0].CreationDate.ToUniversalTime().ToFileTimeUtc()
+     if([Math]::Abs([decimal]$observedCreation-[decimal]$actor.creation) -le 10000000){throw 'Original or indistinguishable memory actor generation remains live.'}
+    }
+   }
+   $memoryActorsStopped=$true;$jobMemoryGreen=$true
   }elseif($Contract -ceq 'job-quota'){
    $snapshotRoot=Join-Path $evidence[0].FullName 'runtime'
    if($driverElapsedSeconds -ge 110){throw 'Quota closure did not precede the120second natural leaf expiry.'}
@@ -379,7 +420,7 @@ if ($started -and $exited -and $pipesDrained -and !$custodyPending -and $ownExec
   $hostRecord = $true; $complete = $true
  } catch { $failure = $_.Exception.ToString() }
 }
-$record = [ordered]@{id=$id;scope=$session;run=$run;exit=$status;accepted=$complete;failure=$failure;fresh_host_record=$hostRecord;phase=$Phase;contract=$Contract;driver_elapsed_seconds=$driverElapsedSeconds;driver_pid=$driverPid;driver_creation=$driverCreation;observer_kill_used=$observerKillUsed;process_disposed=$processDisposed;custody_pending=$custodyPending;channel_closure=$channelClosure;owned_executables_stopped=$ownExecutablesStopped;job_quota_observed=$jobQuotaObserved;job_quota_green=$jobQuotaGreen;job_quota_sensitivity=$jobQuotaSensitivity;quota_protected_sensitivity=$quotaProtectedSensitivity;quota_actors_stopped=$quotaActorsStopped;job_resources_observed=$jobResourcesObserved;job_resources_red=$jobResourcesRed;job_resources_green=$jobResourcesGreen;job_resources_sensitivity=$jobResourcesSensitivity;job_actors_stopped=$jobActorsStopped;expected_payload_exit=$expectedPayload;work_retirement_red=$workRetirementRed;work_retirement_green=$workRetirementGreen;environment_contract_red=$environmentRed;environment_contract_green=$environmentGreen;allocated_runtime=$runtimeObserved;runtime_absent_readback=$runtimeAbsent;runtime_absence_negative_control=$runtimeAbsenceRed;environment_observed=$environmentObserved;environment_mismatches=$environmentMismatches;parent_environment_changed=$parentChanged;fixture_sha256=$FixtureSha256;fixture_build_manifest_sha256=((Get-FileHash -LiteralPath $fixtureBuild.manifest).Hash.ToLowerInvariant());fixture_build=$fixtureBuild.build;driver_launched=$started;exact_driver_exited=$exited;pipes_drained=$pipesDrained;retained_driver_handles=$custodyPending;retained_binaries=$expected;product_run=$false}
+$record = [ordered]@{id=$id;scope=$session;run=$run;exit=$status;accepted=$complete;failure=$failure;fresh_host_record=$hostRecord;phase=$Phase;contract=$Contract;driver_elapsed_seconds=$driverElapsedSeconds;driver_pid=$driverPid;driver_creation=$driverCreation;observer_kill_used=$observerKillUsed;process_disposed=$processDisposed;custody_pending=$custodyPending;channel_closure=$channelClosure;owned_executables_stopped=$ownExecutablesStopped;job_memory_observed=$jobMemoryObserved;job_memory_green=$jobMemoryGreen;job_memory_sensitivity=$jobMemorySensitivity;memory_actors_stopped=$memoryActorsStopped;job_quota_observed=$jobQuotaObserved;job_quota_green=$jobQuotaGreen;job_quota_sensitivity=$jobQuotaSensitivity;quota_protected_sensitivity=$quotaProtectedSensitivity;quota_actors_stopped=$quotaActorsStopped;job_resources_observed=$jobResourcesObserved;job_resources_red=$jobResourcesRed;job_resources_green=$jobResourcesGreen;job_resources_sensitivity=$jobResourcesSensitivity;job_actors_stopped=$jobActorsStopped;expected_payload_exit=$expectedPayload;work_retirement_red=$workRetirementRed;work_retirement_green=$workRetirementGreen;environment_contract_red=$environmentRed;environment_contract_green=$environmentGreen;allocated_runtime=$runtimeObserved;runtime_absent_readback=$runtimeAbsent;runtime_absence_negative_control=$runtimeAbsenceRed;environment_observed=$environmentObserved;environment_mismatches=$environmentMismatches;parent_environment_changed=$parentChanged;fixture_sha256=$FixtureSha256;fixture_build_manifest_sha256=((Get-FileHash -LiteralPath $fixtureBuild.manifest).Hash.ToLowerInvariant());fixture_build=$fixtureBuild.build;driver_launched=$started;exact_driver_exited=$exited;pipes_drained=$pipesDrained;retained_driver_handles=$custodyPending;retained_binaries=$expected;product_run=$false}
 [IO.File]::WriteAllText((Join-Path $session 'observer.json'),($record|ConvertTo-Json -Compress -Depth 8),[Text.UTF8Encoding]::new($false))
 $files=@(Get-Item -LiteralPath (Join-Path $session 'observer.json'))
 foreach($path in @($stdout,$stderr)){if(Test-Path -LiteralPath $path -PathType Leaf){$files+=@(Get-Item -LiteralPath $path)}}

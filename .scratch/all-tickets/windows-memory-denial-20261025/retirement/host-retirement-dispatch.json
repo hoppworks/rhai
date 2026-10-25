@@ -1,0 +1,6 @@
+{
+  "host_utc_after": "2026-10-25T16:36:47.971112+00:00",
+  "script_sha256": "f775d8bfe8379e71eece3ae10c3c73843cbf49efdf0c1abc9546955322c3b0f4",
+  "result_sha256": "055166a48bc64322eda13ef018e1451d736e43d34579f5fff81ac4cc65b74854",
+  "review": "PASS after PYTHONOPTIMIZE fail-closed fix"
+}

@@ -1,0 +1,14 @@
+{
+  "attempt": "attempt01",
+  "accepted": false,
+  "phase": "entry-parse",
+  "native_compilers": 0,
+  "public_drivers": 0,
+  "cause": "PowerShell ParseException at Start.ps1 line 49: missing closing parenthesis in finite-expiry condition. No native fixture/control was invoked.",
+  "evidence": [
+    "after-entry.png",
+    "dispatch.json",
+    "media/attempt01.iso"
+  ],
+  "original_media_sha256": "a748d5871ef579f3b46ad1edb66be5717fe6468d9be92147cfebfc7f6caa29f2"
+}

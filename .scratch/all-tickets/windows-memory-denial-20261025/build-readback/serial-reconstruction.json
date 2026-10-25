@@ -1,0 +1,29 @@
+{
+  "sources": [
+    {
+      "path": "/var/log/libvirt/qemu/rhai-win11-quality-serial0.log.1",
+      "inode": 126688759,
+      "length": 2097152,
+      "sha256": "a82b5fb4d60800b0d5286f8359ccc22d86ab06f060b52612b737570b0d4dd73a"
+    },
+    {
+      "path": "/var/log/libvirt/qemu/rhai-win11-quality-serial0.log.0",
+      "inode": 126689629,
+      "length": 2097152,
+      "sha256": "be61cb75387989d5dd88bcdcde2d934de83a463009e75a9658b913dc035d9c6c"
+    },
+    {
+      "path": "/var/log/libvirt/qemu/rhai-win11-quality-serial0.log",
+      "inode": 126689632,
+      "length": 64565,
+      "sha256": "bbafbf20d4586ce9e944261294819d7979fd06320fd4288cf1a893b72e87b9f5"
+    }
+  ],
+  "start_offset": 1734954,
+  "original_length": 2523915,
+  "original_sha256": "f75a04e9a40be79f26a1331a6829a3cb49dba7e8bb3612d031523c7f2a8a342b",
+  "frames": 1321,
+  "first_seq": 0,
+  "last_seq": 1320,
+  "read_only_reconstruction": true
+}

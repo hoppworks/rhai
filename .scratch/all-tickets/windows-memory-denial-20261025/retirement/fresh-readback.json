@@ -1,0 +1,9 @@
+{
+  "command": "$r=Join-Path $env:USERPROFILE \".local\\share\\agent-builds\\rhai\"; \"MEMORY_READBACK {0} {1} {2}\" -f (Test-Path (Join-Path $r \"env-control-b6391212cbfa4d38a24bc8bb3b3583ac\")),(Test-Path (Join-Path $r \"memory-fixture-63a597390756484cbc31eb5c9bdeff3d\")),(Test-Path (Join-Path $r \"quota-build-e6ce6222dba147a8b43b2c79187d3184\"))",
+  "screen_sha256": "1c0f4507e00445d62c0ed5af3ba23dcec70507fe636943fd71438a7510278867",
+  "source": "native Windows PowerShell console after cleanup; visual screen readback",
+  "control_scope_present": false,
+  "fixture_build_scope_present": false,
+  "retained_default_scope_present": true,
+  "observed_line": "MEMORY_READBACK False False True"
+}

@@ -1,0 +1,13 @@
+{
+  "accepted": true,
+  "own_scopes_removed": [
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-b6391212cbfa4d38a24bc8bb3b3583ac",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\memory-fixture-63a597390756484cbc31eb5c9bdeff3d"
+  ],
+  "actor_count": 5,
+  "retained_default_verified": true,
+  "foreign_resources_touched": false,
+  "serial_sha256": "8dcc1b73fe9d1f737926156e5583b56087aa1916246fcd577fb8d76a56da4e80",
+  "manifest_sha256": "d364706067678aa09e2cdc791d06b8676999183ab6e1f1df62cb23da706b219a",
+  "media_sha256": "121a381b94e8abc392cf14ccdf1c5d16bd61bdba01ab095caa731960ef53bb06"
+}

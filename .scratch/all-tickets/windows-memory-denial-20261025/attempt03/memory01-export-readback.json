@@ -1,0 +1,209 @@
+{
+  "frames": 567,
+  "files": {
+    "observer.json": {
+      "path": "observer.json",
+      "sha256": "b11b70b5c7b1c2a4343deebfe4c4137754cca5daa2727be03c4746e7db565315",
+      "length": 2920
+    },
+    "bootstrap.stdout": {
+      "path": "bootstrap.stdout",
+      "sha256": "d510a624a4806d7d6ed134e7afdba50ba48616a6c1fafb655057257de6945ba2",
+      "length": 579
+    },
+    "bootstrap.stderr": {
+      "path": "bootstrap.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/.scoped-run-21360b95af5a42e7a883461f04e86f99.journal": {
+      "path": "run/.scoped-run-21360b95af5a42e7a883461f04e86f99.journal",
+      "sha256": "8942431da959194b59d37e5e8a2febfad1dc9c18a4bb8937fe82db5fd126d597",
+      "length": 2400
+    },
+    "run/.scoped-evidence-243ab0f2a97d49e29ae524f22df9f383/manifest.txt": {
+      "path": "run/.scoped-evidence-243ab0f2a97d49e29ae524f22df9f383/manifest.txt",
+      "sha256": "5d085592833bc02be693150a3064189c7a9ee5b4b23e460568fa556a5795a186",
+      "length": 1450
+    },
+    "run/.scoped-evidence-243ab0f2a97d49e29ae524f22df9f383/stderr.log": {
+      "path": "run/.scoped-evidence-243ab0f2a97d49e29ae524f22df9f383/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/.scoped-evidence-243ab0f2a97d49e29ae524f22df9f383/stdout.log": {
+      "path": "run/.scoped-evidence-243ab0f2a97d49e29ae524f22df9f383/stdout.log",
+      "sha256": "d3b7cad27c64247157157eca5925a275d32ef7bd9ae7a2c718a6fa0f01f2483a",
+      "length": 54
+    },
+    "run/.scoped-evidence-243ab0f2a97d49e29ae524f22df9f383/runtime/fixture.exe": {
+      "path": "run/.scoped-evidence-243ab0f2a97d49e29ae524f22df9f383/runtime/fixture.exe",
+      "sha256": "dd672cd0c4c666e885dd099d0379019b021dd45b76a61ea492fc583502cdf469",
+      "length": 36352
+    },
+    "run/.scoped-evidence-243ab0f2a97d49e29ae524f22df9f383/runtime/payload-job-memory.txt": {
+      "path": "run/.scoped-evidence-243ab0f2a97d49e29ae524f22df9f383/runtime/payload-job-memory.txt",
+      "sha256": "50452f8ae827e6ed3b2615c8916bd38c3a1c7875f8455ea492352c82bfce486a",
+      "length": 150
+    },
+    "run/.scoped-evidence-243ab0f2a97d49e29ae524f22df9f383/runtime/payload-job-memory.txt.job-denial": {
+      "path": "run/.scoped-evidence-243ab0f2a97d49e29ae524f22df9f383/runtime/payload-job-memory.txt.job-denial",
+      "sha256": "e201d5a63c2a5c968668d6f7f006edb1fff6b28ff5dcad507cf51bc2b6a44177",
+      "length": 146
+    },
+    "run/.scoped-evidence-243ab0f2a97d49e29ae524f22df9f383/runtime/payload-job-memory.txt.leaf-0": {
+      "path": "run/.scoped-evidence-243ab0f2a97d49e29ae524f22df9f383/runtime/payload-job-memory.txt.leaf-0",
+      "sha256": "024413ab981abe01b6f70cef706a707085d84ce65f082e706bf5fb0528ce45c4",
+      "length": 104
+    },
+    "run/.scoped-evidence-243ab0f2a97d49e29ae524f22df9f383/runtime/payload-job-memory.txt.leaf-1": {
+      "path": "run/.scoped-evidence-243ab0f2a97d49e29ae524f22df9f383/runtime/payload-job-memory.txt.leaf-1",
+      "sha256": "37e38bbb8bdd49b3aba00376a6d425135ad1db016dac9a6766ef09698fb222b0",
+      "length": 104
+    },
+    "run/.scoped-evidence-243ab0f2a97d49e29ae524f22df9f383/runtime/payload-job-memory.txt.process-denial": {
+      "path": "run/.scoped-evidence-243ab0f2a97d49e29ae524f22df9f383/runtime/payload-job-memory.txt.process-denial",
+      "sha256": "540a9b80ff64ba54d1dab48a8d4bac0458e1ca022bb48155326f96cb5965837c",
+      "length": 76
+    },
+    "run/.scoped-evidence-243ab0f2a97d49e29ae524f22df9f383/runtime/payload-job-memory.txt.protected": {
+      "path": "run/.scoped-evidence-243ab0f2a97d49e29ae524f22df9f383/runtime/payload-job-memory.txt.protected",
+      "sha256": "992710f16bc31239036b3427d4bdcc141b3524ff53b391ab8fbf16cc15dcf54b",
+      "length": 49
+    },
+    "run/.scoped-evidence-243ab0f2a97d49e29ae524f22df9f383/runtime/payload-job-memory.txt.root": {
+      "path": "run/.scoped-evidence-243ab0f2a97d49e29ae524f22df9f383/runtime/payload-job-memory.txt.root",
+      "sha256": "a2f858593b3a8aab2012f3214ea3983feee2c3f3be0f17644e8faefb6c06ca0c",
+      "length": 173
+    },
+    "bin/MonitorAcceptanceDriver.exe": {
+      "path": "bin/MonitorAcceptanceDriver.exe",
+      "sha256": "ac032063f99e976bec450b41aeee41bece876630073a776ac380c00b2058ab24",
+      "length": 207872
+    },
+    "bin/ScopedRunner.exe": {
+      "path": "bin/ScopedRunner.exe",
+      "sha256": "30a33cdb5e13089ba71dca135b61a838b32e8f03823b55abcaf61ef8acae3c62",
+      "length": 179712
+    },
+    "input/fixture.exe": {
+      "path": "input/fixture.exe",
+      "sha256": "dd672cd0c4c666e885dd099d0379019b021dd45b76a61ea492fc583502cdf469",
+      "length": 36352
+    },
+    "fixture-build-readback/bootstrap.stderr": {
+      "path": "fixture-build-readback/bootstrap.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "fixture-build-readback/bootstrap.stdout": {
+      "path": "fixture-build-readback/bootstrap.stdout",
+      "sha256": "c567bcfe4eb01ba8903f864209cf5de0d8142b6c26bb877cc137e7ecffa3ea6b",
+      "length": 1048
+    },
+    "fixture-build-readback/build-manifest.txt": {
+      "path": "fixture-build-readback/build-manifest.txt",
+      "sha256": "a5bdcffbb9361c02f51566c0806abab2223804866edd56d1bba370f1e7224f38",
+      "length": 1735
+    },
+    "fixture-build-readback/build-observer.json": {
+      "path": "fixture-build-readback/build-observer.json",
+      "sha256": "36a628b054736e913f8e23a39cd21df302ba7785585b7381e60bcf5616dcdefc",
+      "length": 1409
+    },
+    "fixture-build-readback/run-result.txt": {
+      "path": "fixture-build-readback/run-result.txt",
+      "sha256": "79c5b9102422b2f755e2aed8ef416a0a3ab0156de7c5ba4c85dbeda2e6ac6761",
+      "length": 124
+    },
+    "fixture-build-readback/logs/compile-PayloadFixture.stderr.txt": {
+      "path": "fixture-build-readback/logs/compile-PayloadFixture.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "fixture-build-readback/logs/compile-PayloadFixture.stdout.txt": {
+      "path": "fixture-build-readback/logs/compile-PayloadFixture.stdout.txt",
+      "sha256": "7d6f399bc4ddebe9af0b4976bbe3450aac7fb48c8eba5ec95e37cae5283c787d",
+      "length": 131
+    },
+    "fixture-build-readback/logs/job-members.jsonl": {
+      "path": "fixture-build-readback/logs/job-members.jsonl",
+      "sha256": "f8b85aa242d1823c32186ad6eabb98aa4d70166d551b7c5c9ef7ffe0797ed299",
+      "length": 376
+    },
+    "build-readback/bootstrap.stderr": {
+      "path": "build-readback/bootstrap.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "build-readback/bootstrap.stdout": {
+      "path": "build-readback/bootstrap.stdout",
+      "sha256": "5c252624f74b65b7275e4867f48d3a0fdc076a1f5c5bbee9893b8f9f39dc4162",
+      "length": 1116
+    },
+    "build-readback/build-manifest.txt": {
+      "path": "build-readback/build-manifest.txt",
+      "sha256": "bb73f281ff87b2c767cef156c4f5aa3a552706002f8552011abce0f3232cbc01",
+      "length": 1926
+    },
+    "build-readback/build-observer.json": {
+      "path": "build-readback/build-observer.json",
+      "sha256": "6085b82b7e4c74e19b210cfc387881330b5798a39f336ef5b6b4c51ea3287dca",
+      "length": 1620
+    },
+    "build-readback/run-result.txt": {
+      "path": "build-readback/run-result.txt",
+      "sha256": "79c5b9102422b2f755e2aed8ef416a0a3ab0156de7c5ba4c85dbeda2e6ac6761",
+      "length": 124
+    },
+    "build-readback/logs/compile-native-driver.stderr.txt": {
+      "path": "build-readback/logs/compile-native-driver.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "build-readback/logs/compile-native-driver.stdout.txt": {
+      "path": "build-readback/logs/compile-native-driver.stdout.txt",
+      "sha256": "6dfe32204c5bb3ed0021c74c2147972d4acdc8b4b12842601d5275992daca692",
+      "length": 2901
+    },
+    "build-readback/logs/compile-PayloadFixture.stderr.txt": {
+      "path": "build-readback/logs/compile-PayloadFixture.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "build-readback/logs/compile-PayloadFixture.stdout.txt": {
+      "path": "build-readback/logs/compile-PayloadFixture.stdout.txt",
+      "sha256": "7d6f399bc4ddebe9af0b4976bbe3450aac7fb48c8eba5ec95e37cae5283c787d",
+      "length": 131
+    },
+    "build-readback/logs/compile-production-runner.stderr.txt": {
+      "path": "build-readback/logs/compile-production-runner.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "build-readback/logs/compile-production-runner.stdout.txt": {
+      "path": "build-readback/logs/compile-production-runner.stdout.txt",
+      "sha256": "6dfe32204c5bb3ed0021c74c2147972d4acdc8b4b12842601d5275992daca692",
+      "length": 2901
+    }
+  },
+  "complete": true,
+  "begin": {
+    "id": "rhai-memory-denial-memory01-b6391212cbfa4d38a24bc8bb3b3583ac",
+    "exit": 0,
+    "driver_creation": 134374222252589229,
+    "accepted": true,
+    "contract": "job-memory",
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-b6391212cbfa4d38a24bc8bb3b3583ac",
+    "phase": "GREEN",
+    "driver_pid": 5416
+  },
+  "end": {
+    "id": "rhai-memory-denial-memory01-b6391212cbfa4d38a24bc8bb3b3583ac",
+    "driver_launched": true,
+    "files": 37,
+    "accepted": true,
+    "exit": 0,
+    "guest_evidence_retained": true
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "named_criterion": "native Windows per-process and per-Job committed-memory denial with protected-state sensitivity and same-allocation recovery",
+  "accepted": true,
+  "product_exit": 0,
+  "native_frames": 567,
+  "native_files": 37,
+  "build_readback_frames": 1321,
+  "build_readback_files": 48,
+  "guest_actor_census_count": 5,
+  "guest_scopes_removed": 2,
+  "host_media_removed": 5,
+  "host_staging_absent": true,
+  "retained_default_build_preserved": true,
+  "original_sdb_sdc_preserved": true,
+  "source_hashes": {
+    "native": "6aa7f39eb0e34eca3dfe4f103421a5cc70357ad7d33099e4c8b3fb7fbec94bd2",
+    "build_readback": "4a0a0f469435c5ddbdea1eda8e1763a110ac250e20f8ba409ec1357a6418c3e9",
+    "guest_cleanup": "8e757c40d6482057b3d6081bfd870fd16ca4b0b2b7f0913f6109499cee1da416",
+    "host_cleanup": "055166a48bc64322eda13ef018e1451d736e43d34579f5fff81ac4cc65b74854",
+    "fresh_guest_console": "eb605b418c14edaeabd90f1ceed5614bbacb61da99d30d6c9128140461c4d612"
+  },
+  "unaccepted": [
+    "failed backend export/cleanup",
+    "bounded real project commands",
+    "native Rhai API/feature/MSRV/release matrix",
+    "overall A-F/Ticket03"
+  ]
+}

@@ -13,6 +13,8 @@ internal static class PayloadFixture
         if (args.Length == 2 && args[1] == "--environment") return EnvironmentContract(args[0]);
         if (args.Length == 2 && args[1] == "--job-resources") return JobResourceContract(args[0], false);
         if (args.Length == 2 && args[1] == "--job-resources-leaf") return JobResourceContract(args[0], true);
+        if (args.Length == 2 && args[1] == "--job-memory") return JobMemoryContract(args[0]);
+        if (args.Length == 2 && args[1] == "--job-memory-leaf") return JobMemoryLeaf(args[0]);
         if (args.Length == 2 && args[1] == "--job-quota") return JobQuotaContract(args[0]);
         if (args.Length == 2 && (args[1] == "--job-quota-leaf" || args[1] == "--job-quota-excess"))
             return JobQuotaLeaf(args[0], args[1] == "--job-quota-excess");
@@ -32,6 +34,177 @@ internal static class PayloadFixture
         }
         using (ManualResetEvent hold = new ManualResetEvent(false)) hold.WaitOne(120000);
         return 126;
+    }
+
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern IntPtr VirtualAlloc(IntPtr address, UIntPtr bytes, uint allocationType, uint protection);
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern bool VirtualFree(IntPtr address, UIntPtr bytes, uint freeType);
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern bool IsProcessInJob(IntPtr process, IntPtr job, out bool inJob);
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern bool GlobalMemoryStatusEx(ref MemoryStatus status);
+
+    [StructLayout(LayoutKind.Sequential)]
+    private struct MemoryStatus
+    {
+        public uint length, load;
+        public ulong totalPhysical, availablePhysical, totalPageFile, availablePageFile;
+        public ulong totalVirtual, availableVirtual, availableExtendedVirtual;
+    }
+
+    private static void MemoryRecord(string path, string text)
+    {
+        using (FileStream file = new FileStream(path + ".pending", FileMode.CreateNew, FileAccess.Write, FileShare.Read)) {
+            byte[] bytes = new System.Text.UTF8Encoding(false).GetBytes(text + "\r\n");
+            file.Write(bytes, 0, bytes.Length); file.Flush(true);
+        }
+        File.Move(path + ".pending", path);
+    }
+
+    private static string MemoryIdentity(Process process)
+    {
+        bool inJob;
+        if (!IsProcessInJob(process.Handle, IntPtr.Zero, out inJob) || !inJob)
+            throw new InvalidDataException("memory actor is not in the actual Job");
+        return "pid=" + process.Id.ToString(System.Globalization.CultureInfo.InvariantCulture) +
+            ";creation=" + process.StartTime.ToUniversalTime().ToFileTimeUtc().ToString(System.Globalization.CultureInfo.InvariantCulture) + ";job_member=True";
+    }
+
+    private static int JobMemoryLeaf(string path)
+    {
+        // Commit without touching pages: Job limits charge committed memory,
+        // while this fixture does not consume 768 MiB of physical RAM.
+        IntPtr allocation = VirtualAlloc(IntPtr.Zero, new UIntPtr(768UL * 1024UL * 1024UL), 0x3000, 4);
+        if (allocation == IntPtr.Zero) {
+            MemoryRecord(path + ".failure", "phase=leaf-commit;native_error=" + Marshal.GetLastWin32Error());
+            return 42;
+        }
+        try {
+            using (Process self = Process.GetCurrentProcess())
+                MemoryRecord(path, MemoryIdentity(self) + ";committed_bytes=805306368;private_bytes=" + self.PrivateMemorySize64);
+            using (ManualResetEvent hold = new ManualResetEvent(false)) hold.WaitOne(120000);
+            return 126;
+        } finally {
+            if (!VirtualFree(allocation, UIntPtr.Zero, 0x8000))
+                Console.Error.WriteLine("memory leaf VirtualFree failed: " + Marshal.GetLastWin32Error());
+        }
+    }
+
+    private static int JobMemoryContract(string path)
+    {
+        if (IntPtr.Size != 8) throw new InvalidOperationException("memory contract requires 64-bit Job layout");
+        Process[] leaves = new Process[2]; bool[] started = new bool[2];
+        IntPtr recovered = IntPtr.Zero; string phase = "initial";
+        try {
+            IntPtr limits = Marshal.AllocHGlobal(144);
+            uint flags, active; ulong processLimit, jobLimit;
+            try {
+                phase = "query-limits";
+                if (!QueryInformationJobObject(IntPtr.Zero, 9, limits, 144, IntPtr.Zero))
+                    throw new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error(), "query actual memory Job limits");
+                flags = unchecked((uint)Marshal.ReadInt32(limits, 16));
+                active = unchecked((uint)Marshal.ReadInt32(limits, 40));
+                processLimit = unchecked((ulong)Marshal.ReadInt64(limits, 112));
+                jobLimit = unchecked((ulong)Marshal.ReadInt64(limits, 120));
+            } finally { Marshal.FreeHGlobal(limits); }
+            if (flags != 0x2308 || active != 16 || processLimit != 1073741824UL || jobLimit != 2147483648UL)
+                throw new InvalidDataException("actual memory Job limits differ from the contract");
+            MemoryStatus memory = new MemoryStatus(); memory.length = (uint)Marshal.SizeOf(typeof(MemoryStatus));
+            if (!GlobalMemoryStatusEx(ref memory) || memory.availablePageFile < 3221225472UL)
+                throw new InvalidOperationException("global commit headroom below 3 GiB before memory denial controls");
+            using (Process self = Process.GetCurrentProcess())
+                MemoryRecord(path + ".root", MemoryIdentity(self) + ";flags=00002308;process_limit=1073741824;job_limit=2147483648;global_available_commit=" + memory.availablePageFile + ";private_bytes=" + self.PrivateMemorySize64);
+
+            phase = "process-limit-denial";
+            IntPtr tooLarge = VirtualAlloc(IntPtr.Zero, new UIntPtr(1073741824UL), 0x3000, 4);
+            int processError = tooLarge == IntPtr.Zero ? Marshal.GetLastWin32Error() : 0;
+            if (tooLarge != IntPtr.Zero) {
+                VirtualFree(tooLarge, UIntPtr.Zero, 0x8000);
+                throw new InvalidDataException("1 GiB allocation unexpectedly succeeded despite root baseline");
+            }
+            MemoryRecord(path + ".process-denial", "bytes=1073741824;returned=False;native_error=" + processError + ";protected_unchanged=" + !File.Exists(path + ".protected"));
+            if (processError == 0 || File.Exists(path + ".protected"))
+                throw new InvalidDataException("process memory denial has no native error or changed protected state");
+
+            string executable;
+            using (Process self = Process.GetCurrentProcess()) executable = self.MainModule.FileName;
+            for (int index = 0; index < 2; index++) {
+                phase = "leaf-" + index + "-start";
+                string leafPath = Path.GetFullPath(path + ".leaf-" + index);
+                leaves[index] = new Process { StartInfo = new ProcessStartInfo {
+                    FileName = executable, Arguments = "\"" + leafPath + "\" --job-memory-leaf",
+                    WorkingDirectory = Environment.CurrentDirectory, UseShellExecute = false, CreateNoWindow = true } };
+                if (!leaves[index].Start()) throw new InvalidOperationException("memory leaf did not start");
+                started[index] = true;
+                Stopwatch ready = Stopwatch.StartNew();
+                while (!File.Exists(leafPath)) {
+                    if (leaves[index].HasExited) throw new InvalidOperationException("memory leaf exited before committed readiness");
+                    if (ready.ElapsedMilliseconds >= 5000) throw new TimeoutException("memory leaf readiness exceeded5seconds");
+                    Thread.Sleep(10);
+                }
+                string observed = File.ReadAllText(leafPath);
+                string expected = MemoryIdentity(leaves[index]) + ";committed_bytes=805306368;private_bytes=";
+                long privateBytes;
+                if (!observed.StartsWith(expected) || !observed.EndsWith("\r\n") ||
+                    !long.TryParse(observed.Substring(expected.Length, observed.Length - expected.Length - 2), out privateBytes) ||
+                    privateBytes < 805306368L || leaves[index].HasExited)
+                    throw new InvalidDataException("memory leaf identity/readiness mismatch");
+            }
+
+            phase = "job-limit-denial";
+            long rootPrivate;
+            using (Process self = Process.GetCurrentProcess()) rootPrivate = self.PrivateMemorySize64;
+            if (rootPrivate <= 0 || rootPrivate >= 536870912L)
+                throw new InvalidDataException("root private memory leaves no independent per-process headroom for Job denial");
+            MemoryStatus beforeJob = new MemoryStatus(); beforeJob.length = (uint)Marshal.SizeOf(typeof(MemoryStatus));
+            if (!GlobalMemoryStatusEx(ref beforeJob) || beforeJob.availablePageFile < 1073741824UL)
+                throw new InvalidOperationException("global commit headroom below 1 GiB immediately before Job denial");
+            IntPtr denied = VirtualAlloc(IntPtr.Zero, new UIntPtr(536870912UL), 0x3000, 4);
+            int jobError = denied == IntPtr.Zero ? Marshal.GetLastWin32Error() : 0;
+            if (denied != IntPtr.Zero) {
+                VirtualFree(denied, UIntPtr.Zero, 0x8000);
+                throw new InvalidDataException("job-wide 512 MiB allocation unexpectedly succeeded with two committed leaves");
+            }
+            MemoryRecord(path + ".job-denial", "bytes=536870912;returned=False;native_error=" + jobError + ";root_private_before=" + rootPrivate +
+                ";global_available_commit_before=" + beforeJob.availablePageFile + ";protected_unchanged=" + !File.Exists(path + ".protected"));
+            if (jobError == 0 || File.Exists(path + ".protected"))
+                throw new InvalidDataException("job memory denial has no native error or changed protected state");
+
+            phase = "release-and-retry";
+            leaves[0].Kill();
+            if (!leaves[0].WaitForExit(5000)) throw new TimeoutException("memory leaf release exceeded5seconds");
+            Stopwatch retry = Stopwatch.StartNew(); int retries = 0;
+            do {
+                recovered = VirtualAlloc(IntPtr.Zero, new UIntPtr(536870912UL), 0x3000, 4);
+                if (recovered != IntPtr.Zero) break;
+                retries++;
+                if (retry.ElapsedMilliseconds >= 5000) throw new TimeoutException("identical 512 MiB allocation stayed denied after exact leaf exit");
+                Thread.Sleep(10);
+            } while (true);
+            MemoryRecord(path + ".protected", "same-allocation-succeeded-after-exact-leaf-exit");
+            using (Process self = Process.GetCurrentProcess())
+                MemoryRecord(path, MemoryIdentity(self) + ";process_error=" + processError + ";job_error=" + jobError +
+                    ";released_leaf=" + leaves[0].Id + ";retained_leaf=" + leaves[1].Id +
+                    ";retries=" + retries + ";contract=PASS");
+            Console.WriteLine("PASS native process and Job committed-memory denials");
+            return 0;
+        } catch (Exception error) {
+            try { MemoryRecord(path + ".failure", "phase=" + phase + ";" + error); } catch { }
+            Console.Error.WriteLine("FAIL native Job committed-memory contract: " + error);
+            return 42;
+        } finally {
+            if (recovered != IntPtr.Zero && !VirtualFree(recovered, UIntPtr.Zero, 0x8000))
+                Console.Error.WriteLine("memory root VirtualFree failed: " + Marshal.GetLastWin32Error());
+            for (int index = 0; index < leaves.Length; index++) if (leaves[index] != null) {
+                try {
+                    if (started[index] && !leaves[index].HasExited) leaves[index].Kill();
+                    if (started[index] && !leaves[index].WaitForExit(10000))
+                        Console.Error.WriteLine("memory child wait incomplete; Job closure retains ownership");
+                } catch (Exception cleanupError) { Console.Error.WriteLine("memory child cleanup failed: " + cleanupError); }
+                finally { leaves[index].Dispose(); }
+            }
+        }
     }
     [DllImport("kernel32.dll", SetLastError = true)]
     private static extern bool QueryInformationJobObject(IntPtr job, int kind, IntPtr buffer, uint bytes, IntPtr returned);

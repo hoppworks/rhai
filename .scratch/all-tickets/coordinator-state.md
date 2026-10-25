@@ -1,17 +1,17 @@
 # Current Rhai implementation state
 
 ## Mode
-Autonomous implementation on workhorse. A–F, Ticket03 and full release remain open. Git history/readback is authoritative; the latest accepted package is the Windows ordinary-process quota prerequisite.
+Autonomous implementation on workhorse. A–F, Ticket03 and full release remain open. Git history/readback is authoritative; the latest accepted package is the named native Windows memory-denial prerequisite.
 
 ## Decisions
 Automatic atomic integration to `https://github.com/hoppworks/rhai.git` main only; no upstream write/PR or remote task branches. Git author/committer exactly `hoppworks`, configured email, no signatures/coauthors. Preserve foreign/dirty work, services, processes and guests. No Linear. Human limits and consumed history persist; old PENDING labels are not missing authority.
 Current rules: central `d6024420` plus applicable dirty edits; common SHA `e1a3b95adcd4384e5c65b447c482f2ce0f86d13dab37a36a53fc2d9129b81932`, project `37f95ff6a80be28bc21e9e523674f46f3ce6153a1923c708b86333bf21bba37c`. Reviewer/Expert26 confirmed reload; workhorse common `989dcc707a9e…` is separately verified, not claimed identical. One combined review per coherent package; reuse unaffected proof. Actual capacity governs heavy work, not fixed slots. Use current role config and scoped resource custody.
 
 ## Current step
-Ordinary-payload quota plus affected resource/environment cases are accepted at their recorded source/environment. Nine guest scopes/411 files, eight media and host staging (99 files/24 directories) are retired; original CDs and foreign work preserved. Only the compatible default build remains.
+Ordinary-payload quota and named per-process/Job memory denial are accepted at their recorded sources. The memory packet retired its two guest scopes, five media and 73-file host staging after original readback; original CDs and foreign work remain. Only the compatible default build remains.
 
 ## Next action
-Use the existing native path and compatible default tools for actual memory-limit denials, failed backend export/cleanup and bounded real project commands. Check changed inputs/capacity first. No Windows project Cargo/Rhai until full custody is accepted; then complete native API/release/profile/MSRV coverage. Do not repeat accepted deadline/creation/Unix/WASM cases without relevant change.
+Use the existing native path and compatible default tools for actual failed backend export/cleanup and bounded real project commands. Check changed inputs/capacity first. No Windows project Cargo/Rhai until full custody is accepted; then complete native API/release/profile/MSRV coverage. Do not repeat accepted deadline/creation/Unix/WASM cases without relevant change.
 
 ## Goal
 Implement all requirements in `docs/sys-package-plan.md`; retain every original criterion and accepted scope. The Windows prerequisite is tracked in `.scratch/all-tickets/windows-runner-gate.md`.
@@ -27,23 +27,23 @@ Retain scoped Linux X24/X25/X34/X35/X36/X37/X38 sync/unchecked and R3 no_index; 
 Windows earlier proofs cover generic failure/private environment, large-work retirement, lease failures, actual membership/Driver180s closure, configuration inheritance, creation denial and returned-handle unwind. Watchdog124 and monitor1800000ms are separately accepted; interrupted absolute01 remains unaccepted. Pre/post-update environments remain distinct. Old artifacts are retired; no arbitrary-interruption/partial-handle guarantee is inferred.
 
 ## Accepted evidence
-`windows-process-quota-20261025/attempt04/` proves 16 known payloads plus 16 exact-image conhost helpers; extra creation denied1816/no useful effect, original census unchanged, identical-command success after two owned children stop. Accounting32/30 is diagnostic; no universal16-OS-actor ceiling. All full/recovered actors stop and runtime disappears. Quota/resource/environment Drivers0 at3.0267/1.2407/1.1594s;55/33/31 files,639/538/534 frames, eight CRCs each. Saved-data verifier and combined review pass. Three earlier quota attempts remain unaccepted; their unknown helpers are not retrospectively classified. Native Rhai/release is unverified.
+`windows-process-quota-20261025/attempt04/` proves 16 known payloads plus 16 exact-image conhost helpers; extra creation denied1816/no useful effect, original census unchanged, identical-command success after two owned children stop. Accounting32/30 is diagnostic; no universal16-OS-actor ceiling. All full/recovered actors stop and runtime disappears. Quota/resource/environment Drivers0 at3.0267/1.2407/1.1594s;55/33/31 files,639/538/534 frames, eight CRCs each. Saved-data verifier and combined review pass. Three earlier quota attempts remain unaccepted; their unknown helpers are not retrospectively classified. Native Rhai/release is unverified. The named Windows memory packet (`windows-memory-denial-20261025/proof.md`) adds native error1455 for process and Job limits despite ample global commit, wrong-limit sensitivity, protected-state readback and same-size recovery. One Driver0/37 files/567 frames/8 CRCs; a read-only 48-file/1321-frame build export; five stopped actor generations; two own guest scopes and five media plus 73-file staging retired. Combined review passed. Failed backend export/cleanup and real project commands remain open.
 
 ## Retained resources
 Workhorse VM `dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19`, RhaiTest. This coordinator retains only `C:\Users\RhaiTest\.local\share\agent-builds\rhai\quota-build-e6ce6222dba147a8b43b2c79187d3184` for compatible memory/export/cleanup/project prerequisites. Exact source/compiler/three binary pins and permitted unchanged methods: `windows-process-quota-20261025/retained-default-build.json`. Expiry stays17:01:47.008186 UTC2026-10-25, or earlier ended reuse. Quota fixture builds are retired. Never treat historical paths as live caches. Last host free bytes111651549184; remeasure for heavy work. POSIX uses the global runner/private outputs; Windows uses its owned bootstrap.
 
 ## Cause history
-Quota API-return assumption, query-before-durable-admission and wrong raw-PID fullness were diagnosed without a proven product defect. Same-cause Expert26 supplements and corrected combined review preserve all counts. Retirement01 failed before deletion on a managed property chain, underlying reason unknown. The CIM generation correction passed:94 checks, one recycled PID. A seven-digit timestamp parser was corrected on saved bytes, without native replay. Source review findings were fixed before execution.
+Quota API-return assumption, query-before-durable-admission and wrong raw-PID fullness were diagnosed without a proven product defect. Same-cause Expert26 supplements and corrected combined review preserve all counts. Retirement01 failed before deletion on a managed property chain, underlying reason unknown. The CIM generation correction passed:94 checks, one recycled PID. A seven-digit timestamp parser was corrected on saved bytes, without native replay. Source review findings were fixed before execution. Memory attempt01 stopped at parser pre-entry, attempt02 at skewed guest UTC pre-entry; attempt03 checked host UTC. Rotated serial readback was recovered from original inodes without native rerun. Host-retirement review found optimized-Python assert bypass; both interpreters now fail closed, and the exact cleanup passed.
 
 ## Open escalations
 Expert26 answered: `escalations/26-windows-quota-observation.answer.md`. Earlier Expert25/creation and all historical limits remain archived. No new outcome decision or routine permission gate is pending.
 
 ## Budgets
-Quota package: six compilers, four bootstraps, six Drivers;19.6611211s measured Driver time. Compiler time, peak RSS, model cost/tokens unknown. Two read-only48-file exports, zero compiler/Driver reruns. Cleanup: one pre-deletion setup failure, one corrected success; host retirement succeeded once. Kernel/memory/time/output caps and original expiry unchanged. Earlier package totals remain in history and proof packets.
+Quota package: six compilers, four bootstraps, six Drivers;19.6611211s measured Driver time. Compiler time, peak RSS, model cost/tokens unknown. Two read-only48-file exports, zero compiler/Driver reruns. Cleanup: one pre-deletion setup failure, one corrected success; host retirement succeeded once. Kernel/memory/time/output caps and original expiry unchanged. Memory package: one Csc/one public Driver; two pre-entry failures with zero compilers/Drivers, one read-only build export, one exact guest cleanup and one host retirement. Earlier totals remain in history and proof packets.
 
 ## History
 `coordinator-history-20261015.md`, original packets and escalation answers retain approvals, decisions, causes, budgets and applicable evidence. The rewrite archives its exact predecessor under journal/. Canonical requirements are not reduced by this state.
-- Previous state: journal/state-8c5033b3ab9042b8b180aeb298806b53.md
+- Previous state: journal/state-7c90b94c30dd00655ee530e5e2a3d89.md
 
 ## Retrospective
 Set explicit working directories; record actual exit/authority/effects before later queries; classify helpers rather than assuming counts. Parser fixes start with saved traces. Reuse unchanged public tools, group related controls and export proof before exact owned cleanup.

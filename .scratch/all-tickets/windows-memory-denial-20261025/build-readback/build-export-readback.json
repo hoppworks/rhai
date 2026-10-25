@@ -1,0 +1,283 @@
+{
+  "frames": 1321,
+  "files": {
+    "bootstrap.stderr": {
+      "path": "bootstrap.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "bootstrap.stdout": {
+      "path": "bootstrap.stdout",
+      "sha256": "c567bcfe4eb01ba8903f864209cf5de0d8142b6c26bb877cc137e7ecffa3ea6b",
+      "length": 1048
+    },
+    "build-observer.json": {
+      "path": "build-observer.json",
+      "sha256": "36a628b054736e913f8e23a39cd21df302ba7785585b7381e60bcf5616dcdefc",
+      "length": 1409
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/build-manifest.txt": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/build-manifest.txt",
+      "sha256": "a5bdcffbb9361c02f51566c0806abab2223804866edd56d1bba370f1e7224f38",
+      "length": 1735
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/run-result.txt": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/run-result.txt",
+      "sha256": "79c5b9102422b2f755e2aed8ef416a0a3ab0156de7c5ba4c85dbeda2e6ac6761",
+      "length": 124
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/build/PayloadFixture.exe": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/build/PayloadFixture.exe",
+      "sha256": "dd672cd0c4c666e885dd099d0379019b021dd45b76a61ea492fc583502cdf469",
+      "length": 36352
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input/tools/windows-scoped-runner/LaunchSpecification.cs": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input/tools/windows-scoped-runner/LaunchSpecification.cs",
+      "sha256": "e08957b13d5ed5f86cb37d0545aa876aac50e507692d112b39882f465fff8f2b",
+      "length": 15288
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input/tools/windows-scoped-runner/LeaseMonitor.cs": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input/tools/windows-scoped-runner/LeaseMonitor.cs",
+      "sha256": "49591cc15aaa68add9d8632188506e153179de37e0158d814a81d49d98252550",
+      "length": 13386
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input/tools/windows-scoped-runner/MonitorAcceptanceDriver.cs": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input/tools/windows-scoped-runner/MonitorAcceptanceDriver.cs",
+      "sha256": "98df6be690e4cfe1440d6eb11358688e75ca1f0adde12ef003d20dc2a8426c6c",
+      "length": 42609
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input/tools/windows-scoped-runner/MonitorPayloadJob.cs": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input/tools/windows-scoped-runner/MonitorPayloadJob.cs",
+      "sha256": "559fda324f59768f2d5119c2f2fec7442c2cff543b694dc744b4c4ecc2524e4f",
+      "length": 73527
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input/tools/windows-scoped-runner/MonitorSpecificationIntake.cs": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input/tools/windows-scoped-runner/MonitorSpecificationIntake.cs",
+      "sha256": "0f0a71563e6c3d99f0c643644d4b56951f6c69ceb3b10b03157f68dc37bb8412",
+      "length": 8684
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input/tools/windows-scoped-runner/MonitorStagingHandoff.cs": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input/tools/windows-scoped-runner/MonitorStagingHandoff.cs",
+      "sha256": "c541f7d885d032c074461a5a0173b9ae6291ef7d8cd1b9fd2ce4a4f56d1e0e6e",
+      "length": 21617
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input/tools/windows-scoped-runner/MonitorTransport.cs": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input/tools/windows-scoped-runner/MonitorTransport.cs",
+      "sha256": "792918d1cac67691fc9f7ee4c9e82b0c4377ba869c33458fedd56e9519e71c7c",
+      "length": 18412
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input/tools/windows-scoped-runner/ScopedRunner.cs": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input/tools/windows-scoped-runner/ScopedRunner.cs",
+      "sha256": "d3a77f0daeebd5beed2b277fae9dc6a522acf1454bb5d8d776d84e1dc8e896c8",
+      "length": 23939
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input/tools/windows-scoped-runner/SpecificationTransfer.cs": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input/tools/windows-scoped-runner/SpecificationTransfer.cs",
+      "sha256": "7a9edfe98d84868b55146280bd5ed29576ee0c8725cf9f6c785b784bc0ad25c2",
+      "length": 22721
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input/tools/windows-scoped-runner/WindowsCustodyBackend.cs": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input/tools/windows-scoped-runner/WindowsCustodyBackend.cs",
+      "sha256": "26b7468a0868271a555f6ed450212267b01d7d3fd0a8dd5b3fb51b01b7a05629",
+      "length": 157955
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input/tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input/tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs",
+      "sha256": "38745833e7b23535cdc2ce225655074c6c5f50e204c0d3cf38d6805f49cb53eb",
+      "length": 92080
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input/tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input/tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs",
+      "sha256": "8f43d33928262ae181aa5396feffef9b0260653609b5be8b01da7b0a7e7b00f7",
+      "length": 2537
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input/tools/windows-scoped-runner/fixtures/PayloadFixture.cs": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input/tools/windows-scoped-runner/fixtures/PayloadFixture.cs",
+      "sha256": "f073b677a74cdb0e02f51034bc149163e545109415ec1f4fbab99c67783ffa72",
+      "length": 48314
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/logs/compile-PayloadFixture.stderr.txt": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/logs/compile-PayloadFixture.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/logs/compile-PayloadFixture.stdout.txt": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/logs/compile-PayloadFixture.stdout.txt",
+      "sha256": "7d6f399bc4ddebe9af0b4976bbe3450aac7fb48c8eba5ec95e37cae5283c787d",
+      "length": 131
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/logs/exit-code-regression-17-wrong-expected.stderr.txt": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/logs/exit-code-regression-17-wrong-expected.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/logs/exit-code-regression-17-wrong-expected.stdout.txt": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/logs/exit-code-regression-17-wrong-expected.stdout.txt",
+      "sha256": "69826b89317496600a95e98535238d73a7091d7e0ff5c9585f08c25bb71a75c3",
+      "length": 40
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/logs/exit-code-regression-17.stderr.txt": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/logs/exit-code-regression-17.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/logs/exit-code-regression-17.stdout.txt": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/logs/exit-code-regression-17.stdout.txt",
+      "sha256": "32d543b6dda9fd1365b76e3057e9fac50673187a4c91cb8c18413593043e1689",
+      "length": 25
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/logs/exit-code-regression-zero.stderr.txt": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/logs/exit-code-regression-zero.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/logs/exit-code-regression-zero.stdout.txt": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/logs/exit-code-regression-zero.stdout.txt",
+      "sha256": "2b98ea68ce93cdb1de4a7d10f4c46c17aacc658cc11ed8e32cc0d15612e9c568",
+      "length": 27
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/logs/job-members.jsonl": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/logs/job-members.jsonl",
+      "sha256": "f8b85aa242d1823c32186ad6eabb98aa4d70166d551b7c5c9ef7ffe0797ed299",
+      "length": 376
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/logs/setup-failure-child.stderr.txt": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/logs/setup-failure-child.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/logs/setup-failure-child.stdout.txt": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/logs/setup-failure-child.stdout.txt",
+      "sha256": "8ff179f55be1a9908f3e33e97da8aafce587111fab0b67cd5a0cf189c4bad44d",
+      "length": 93
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/logs/setup-failure-control.stderr.txt": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/logs/setup-failure-control.stderr.txt",
+      "sha256": "dc383c8e63001e4200c71dd2667219139fd7c53397e9e0b15ef4bff8bc79b12c",
+      "length": 81
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/logs/setup-failure-control.stdout.txt": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/logs/setup-failure-control.stdout.txt",
+      "sha256": "a1064b1c88c57b95c4efbc4875ef110c1b3610960a8f19b8180b39c0e6a1a3b9",
+      "length": 118
+    },
+    "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/logs/setup-failure-control.txt": {
+      "path": "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/logs/setup-failure-control.txt",
+      "sha256": "e5f206712f2a8574e0482d7678487f0deb68f1fe1ce891a09f7031084e59ddbf",
+      "length": 211
+    },
+    "source-input/tools/windows-scoped-runner/LaunchSpecification.cs": {
+      "path": "source-input/tools/windows-scoped-runner/LaunchSpecification.cs",
+      "sha256": "e08957b13d5ed5f86cb37d0545aa876aac50e507692d112b39882f465fff8f2b",
+      "length": 15288
+    },
+    "source-input/tools/windows-scoped-runner/LeaseMonitor.cs": {
+      "path": "source-input/tools/windows-scoped-runner/LeaseMonitor.cs",
+      "sha256": "49591cc15aaa68add9d8632188506e153179de37e0158d814a81d49d98252550",
+      "length": 13386
+    },
+    "source-input/tools/windows-scoped-runner/MonitorAcceptanceDriver.cs": {
+      "path": "source-input/tools/windows-scoped-runner/MonitorAcceptanceDriver.cs",
+      "sha256": "98df6be690e4cfe1440d6eb11358688e75ca1f0adde12ef003d20dc2a8426c6c",
+      "length": 42609
+    },
+    "source-input/tools/windows-scoped-runner/MonitorPayloadJob.cs": {
+      "path": "source-input/tools/windows-scoped-runner/MonitorPayloadJob.cs",
+      "sha256": "559fda324f59768f2d5119c2f2fec7442c2cff543b694dc744b4c4ecc2524e4f",
+      "length": 73527
+    },
+    "source-input/tools/windows-scoped-runner/MonitorSpecificationIntake.cs": {
+      "path": "source-input/tools/windows-scoped-runner/MonitorSpecificationIntake.cs",
+      "sha256": "0f0a71563e6c3d99f0c643644d4b56951f6c69ceb3b10b03157f68dc37bb8412",
+      "length": 8684
+    },
+    "source-input/tools/windows-scoped-runner/MonitorStagingHandoff.cs": {
+      "path": "source-input/tools/windows-scoped-runner/MonitorStagingHandoff.cs",
+      "sha256": "c541f7d885d032c074461a5a0173b9ae6291ef7d8cd1b9fd2ce4a4f56d1e0e6e",
+      "length": 21617
+    },
+    "source-input/tools/windows-scoped-runner/MonitorTransport.cs": {
+      "path": "source-input/tools/windows-scoped-runner/MonitorTransport.cs",
+      "sha256": "792918d1cac67691fc9f7ee4c9e82b0c4377ba869c33458fedd56e9519e71c7c",
+      "length": 18412
+    },
+    "source-input/tools/windows-scoped-runner/ScopedRunner.cs": {
+      "path": "source-input/tools/windows-scoped-runner/ScopedRunner.cs",
+      "sha256": "d3a77f0daeebd5beed2b277fae9dc6a522acf1454bb5d8d776d84e1dc8e896c8",
+      "length": 23939
+    },
+    "source-input/tools/windows-scoped-runner/SpecificationTransfer.cs": {
+      "path": "source-input/tools/windows-scoped-runner/SpecificationTransfer.cs",
+      "sha256": "7a9edfe98d84868b55146280bd5ed29576ee0c8725cf9f6c785b784bc0ad25c2",
+      "length": 22721
+    },
+    "source-input/tools/windows-scoped-runner/WindowsCustodyBackend.cs": {
+      "path": "source-input/tools/windows-scoped-runner/WindowsCustodyBackend.cs",
+      "sha256": "26b7468a0868271a555f6ed450212267b01d7d3fd0a8dd5b3fb51b01b7a05629",
+      "length": 157955
+    },
+    "source-input/tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs": {
+      "path": "source-input/tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs",
+      "sha256": "38745833e7b23535cdc2ce225655074c6c5f50e204c0d3cf38d6805f49cb53eb",
+      "length": 92080
+    },
+    "source-input/tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs": {
+      "path": "source-input/tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs",
+      "sha256": "8f43d33928262ae181aa5396feffef9b0260653609b5be8b01da7b0a7e7b00f7",
+      "length": 2537
+    },
+    "source-input/tools/windows-scoped-runner/fixtures/PayloadFixture.cs": {
+      "path": "source-input/tools/windows-scoped-runner/fixtures/PayloadFixture.cs",
+      "sha256": "f073b677a74cdb0e02f51034bc149163e545109415ec1f4fbab99c67783ffa72",
+      "length": 48314
+    },
+    "source-input/tools/windows-scoped-runner/fixtures/RunPayloadEnvironmentControl.ps1": {
+      "path": "source-input/tools/windows-scoped-runner/fixtures/RunPayloadEnvironmentControl.ps1",
+      "sha256": "f93bf78974859c675886ef55c68c701fdc154748b28d4f7a999d05745879fbce",
+      "length": 45177
+    },
+    "source-input/tools/windows-scoped-runner/fixtures/RunSourceFixtures.ps1": {
+      "path": "source-input/tools/windows-scoped-runner/fixtures/RunSourceFixtures.ps1",
+      "sha256": "caf26cabf908d1e5b41a986039d40df8b73b2c98d6836bd49e6d2ec2efdb5525",
+      "length": 56704
+    }
+  },
+  "complete": true,
+  "begin": {
+    "exit": 0,
+    "native_removal_claimed": false,
+    "id": "rhai-memory-build-readback-01b8323d031c4d37b38935b342ed484a",
+    "original_id": "rhai-memory-denial-63a597390756484cbc31eb5c9bdeff3d",
+    "native_reexecution": false,
+    "observer_present": true,
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\memory-fixture-63a597390756484cbc31eb5c9bdeff3d",
+    "directories": [
+      "run",
+      "source-input",
+      "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d",
+      "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/build",
+      "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input",
+      "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/logs",
+      "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/temp",
+      "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input/tools",
+      "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input/tools/windows-scoped-runner",
+      "run/monitor-source-63a597390756484cbc31eb5c9bdeff3d/input/tools/windows-scoped-runner/fixtures",
+      "source-input/tools",
+      "source-input/tools/windows-scoped-runner",
+      "source-input/tools/windows-scoped-runner/fixtures"
+    ],
+    "readback_only": true,
+    "build_accepted": true,
+    "accepted": false
+  },
+  "end": {
+    "readback_only": true,
+    "exit": 0,
+    "guest_evidence_retained": true,
+    "id": "rhai-memory-build-readback-01b8323d031c4d37b38935b342ed484a",
+    "accepted": false,
+    "files": 48,
+    "product_accepted": false,
+    "native_reexecution": false
+  }
+}

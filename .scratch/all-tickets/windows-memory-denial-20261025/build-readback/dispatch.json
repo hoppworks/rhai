@@ -1,0 +1,12 @@
+{
+  "host_utc": "2026-10-25T16:21:49.879469+00:00",
+  "serial_path": "/var/log/libvirt/qemu/rhai-win11-quality-serial0.log",
+  "inode": 126688759,
+  "offset": 1734954,
+  "source_sha256": "ba77851b0b20842741536fa1c909d535688cc16c86948468b2d9f29a48bc14d3",
+  "manifest_sha256": "507ac965918dada4454ccbc15e6d1b6b269727160ffc747de844f56448d0d76b",
+  "medium_sha256": "90bf0c16d21c55bfea9362da43182ee9e75bf97d585d0986dbddea9c08bdf1a7",
+  "command": "if ((get-filehash e:\\cleanup.ps1).hash -eq 'ba77851b0b20842741536fa1c909d535688cc16c86948468b2d9f29a48bc14d3') { & ([scriptblock]::create((get-content e:\\cleanup.ps1 -raw))) -ManifestSha256 '507ac965918dada4454ccbc15e6d1b6b269727160ffc747de844f56448d0d76b' } else { throw 'source mismatch' }",
+  "readback_only": true,
+  "native_compilers_or_drivers": 0
+}

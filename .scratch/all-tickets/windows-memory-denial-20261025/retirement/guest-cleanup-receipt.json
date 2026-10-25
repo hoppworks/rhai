@@ -1,0 +1,17 @@
+{
+  "nonce": "197434e7a73dd8d7f20fd2f296895dce",
+  "manifest_sha256": "d364706067678aa09e2cdc791d06b8676999183ab6e1f1df62cb23da706b219a",
+  "host_receipt_sha256": "6aa7f39eb0e34eca3dfe4f103421a5cc70357ad7d33099e4c8b3fb7fbec94bd2",
+  "actor_check_count": 5,
+  "actor_checks_sha256": "1f07a0d3f41b595f93a1ac51ed085f01d74064c74bb89b973ddc4ecbd0fe188c",
+  "retired": [
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-b6391212cbfa4d38a24bc8bb3b3583ac",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\memory-fixture-63a597390756484cbc31eb5c9bdeff3d"
+  ],
+  "all_scopes_absent": true,
+  "retained_scope_leaf": "quota-build-e6ce6222dba147a8b43b2c79187d3184",
+  "retained_manifest_sha256": "bb73f281ff87b2c767cef156c4f5aa3a552706002f8552011abce0f3232cbc01",
+  "retained_verified": true,
+  "foreign_resources_touched": false,
+  "failure_sha256": "0000000000000000000000000000000000000000000000000000000000000000"
+}

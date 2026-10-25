@@ -1,0 +1,11 @@
+{
+  "host_utc": "2026-10-25T16:16:22.187192+00:00",
+  "retained_expiry_host_utc": "2026-10-25T17:01:47.008186+00:00",
+  "seconds_until_expiry": 2724.820994,
+  "media_start_sha256": "3ff2c93d4abc8b34ba14d8acfd300699e64ebd3471b3be37f162f12eac7f6167",
+  "media_sha256": "827fd7cf7138df1c7d5a48e7eafcd624d876dbf3617c7f8a6a695017fcafb8f0",
+  "live_sdc": "/var/lib/libvirt/images/rhai-win11-quality/memory-denial-63a597390756484cbc31eb5c9bdeff3d.iso",
+  "free_host_bytes": 111640186880,
+  "parse_preflight": "START_PARSE_OK observed in guest",
+  "native_started": false
+}

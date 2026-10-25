@@ -1,0 +1,18 @@
+{
+  "attempt": "attempt02",
+  "accepted": false,
+  "phase": "pre-build finite-expiry guard",
+  "native_compilers": 0,
+  "public_drivers": 0,
+  "cause": "Guest DateTime.UtcNow was about one hour ahead of the independent workhorse UTC clock. The guest-only guard rejected the original 17:01:47 UTC expiry while the host was at 16:13 UTC. The PowerShell Start parse preflight passed.",
+  "guest_clock_observed": "2026-10-25T17:14:17.6209027Z",
+  "host_clock_observed": "2026-10-25T16:14:09.150176940Z",
+  "evidence": [
+    "parse-result.png",
+    "after-entry.png",
+    "guest-clock.png",
+    "dispatch.json",
+    "../media/attempt02.iso"
+  ],
+  "original_media_sha256": "68a2695292e2eafbf347b8143c5fc2489c4681d484104629acda864e5aee6403"
+}

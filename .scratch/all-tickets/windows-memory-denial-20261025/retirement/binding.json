@@ -1,0 +1,10 @@
+{
+  "nonce": "197434e7a73dd8d7f20fd2f296895dce",
+  "source_sha256": "c082a3ee5ec7917a059b1aeb120b5b0adcf1b53157d4843d4ffaa86b76c45b4c",
+  "manifest_sha256": "d364706067678aa09e2cdc791d06b8676999183ab6e1f1df62cb23da706b219a",
+  "media_sha256": "121a381b94e8abc392cf14ccdf1c5d16bd61bdba01ab095caa731960ef53bb06",
+  "scope_count": 2,
+  "native_compilers_or_drivers": 0,
+  "source_review": "PASS for exact two-scope retirement; guest execution pending",
+  "original_sdc": "/var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/monitor-fixture02.iso"
+}

@@ -1,0 +1,1 @@
+Independent review of new native memory fixture/control found two P2 issues: unguarded Process.StartTime readback and only an early global commit sample. Both were corrected with a conservative current CIM generation census and an immediate pre-denial GlobalMemoryStatusEx sample; narrow follow-up PASS. No build or native work performed by reviewer.

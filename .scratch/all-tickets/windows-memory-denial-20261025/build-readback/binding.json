@@ -1,0 +1,10 @@
+{
+  "nonce": "01b8323d031c4d37b38935b342ed484a",
+  "readback_id": "rhai-memory-build-readback-01b8323d031c4d37b38935b342ed484a",
+  "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\memory-fixture-63a597390756484cbc31eb5c9bdeff3d",
+  "source_sha256": "ba77851b0b20842741536fa1c909d535688cc16c86948468b2d9f29a48bc14d3",
+  "manifest_sha256": "507ac965918dada4454ccbc15e6d1b6b269727160ffc747de844f56448d0d76b",
+  "native_compilers_or_drivers": 0,
+  "readback_only": true,
+  "delete_allowed": false
+}

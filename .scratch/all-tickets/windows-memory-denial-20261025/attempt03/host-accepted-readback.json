@@ -1,0 +1,28 @@
+{
+  "accepted": true,
+  "driver_exit": 0,
+  "driver_elapsed_seconds": 2.7212673,
+  "files": 37,
+  "frames": 567,
+  "crc_records": 8,
+  "actors": [
+    {
+      "pid": 7576,
+      "creation": 134374222272665116
+    },
+    {
+      "pid": 4144,
+      "creation": 134374222275222251
+    },
+    {
+      "pid": 4244,
+      "creation": 134374222275837468
+    }
+  ],
+  "process_error": 1455,
+  "job_error": 1455,
+  "global_commit_before_process": 6267580416,
+  "global_commit_before_job": 4617801728,
+  "same_allocation_recovered": true,
+  "fresh_census_at_cleanup": "pending"
+}
