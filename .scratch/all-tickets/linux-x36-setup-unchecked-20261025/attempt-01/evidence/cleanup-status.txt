@@ -1,0 +1,3 @@
+session_scope=/var/roothome/.local/share/agent-builds/rhai/x36-setup-unchecked-20261025-01
+scope_absent=True
+private runtime removed; no cross-invocation build retained

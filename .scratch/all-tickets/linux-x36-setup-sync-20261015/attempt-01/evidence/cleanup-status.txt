@@ -1,0 +1,3 @@
+exact_scope_absent=/root/.local/share/agent-builds/rhai/x36-setup-sync-20261015-01
+matching_Rhai_runner_or_compiler_processes=0
+foreign Tauron work preserved

@@ -1,0 +1,7 @@
+testing-environ_sys_unchecked-managed_scope_fchdir_failure_cleans_created_group.log: operation=run failure=Fchdir pid=1594994 pid_absent=True group_absent=True
+testing-environ_sys_unchecked-managed_scope_fchdir_failure_cleans_created_group.log: operation=spawn failure=Fchdir pid=1594996 pid_absent=True group_absent=True
+testing-environ_sys_unchecked-managed_scope_partial_setup_failure_cleans_created_group.log: operation=run failure=AfterSetpgid pid=1594980 pid_absent=True group_absent=True
+testing-environ_sys_unchecked-managed_scope_partial_setup_failure_cleans_created_group.log: operation=spawn failure=AfterSetpgid pid=1594982 pid_absent=True group_absent=True
+testing-environ_sys_unchecked-managed_scope_setup_failure_never_executes_unmanaged_child.log: operation=run failure=BeforeSetpgid pid=1594966 pid_absent=True group_absent=True
+testing-environ_sys_unchecked-managed_scope_setup_failure_never_executes_unmanaged_child.log: operation=spawn failure=BeforeSetpgid pid=1594968 pid_absent=True group_absent=True
+independent_readback_count=6

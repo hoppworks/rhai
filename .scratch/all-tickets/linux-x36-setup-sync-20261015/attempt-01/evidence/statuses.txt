@@ -1,0 +1,8 @@
+features=testing-environ,sys,sync selector=packages::sys::process::unix::tests::managed_scope_setup_failure_never_executes_unmanaged_child status=0
+features=testing-environ,sys,sync selector=packages::sys::process::unix::tests::managed_scope_partial_setup_failure_cleans_created_group status=0
+features=testing-environ,sys,sync selector=packages::sys::process::unix::tests::managed_scope_fchdir_failure_cleans_created_group status=0
+features=testing-environ,sys,sync selector=packages::sys::process::unix::tests::managed_scope_kernel_setpgid_denial_cleans_created_group status=0
+features=testing-environ,sys,sync,unchecked selector=packages::sys::process::unix::tests::managed_scope_setup_failure_never_executes_unmanaged_child status=0
+features=testing-environ,sys,sync,unchecked selector=packages::sys::process::unix::tests::managed_scope_partial_setup_failure_cleans_created_group status=0
+features=testing-environ,sys,sync,unchecked selector=packages::sys::process::unix::tests::managed_scope_fchdir_failure_cleans_created_group status=0
+features=testing-environ,sys,sync,unchecked selector=packages::sys::process::unix::tests::managed_scope_kernel_setpgid_denial_cleans_created_group status=0

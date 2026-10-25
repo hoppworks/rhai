@@ -2,8 +2,10 @@
 
 Status: autonomous implementation authorized by the owner on 2026-10-08.
 The user instruction “planinhalte implementieren (autonome Umsetzung)” triggers
-execution of this plan. No new Goal is needed; the historical Goal remains paused.
-Previously produced results remain available and are not repeated for replanning.
+execution of this plan. The existing Goal `neuen plan umsetzen` is active; do not
+create another Goal. The current execution state and next action are maintained in
+[coordinator-state](../all-tickets/coordinator-state.md); dated observations below
+remain historical. Preserve accepted results and do not repeat them for replanning.
 
 This is the single executable companion to [the Wayfinder map](map.md). It
 supersedes the proposed execution order in [assessment.md](assessment.md), not

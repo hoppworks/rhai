@@ -1,0 +1,5 @@
+Filesystem      1K-blocks       Used Available Use% Mounted on
+/dev/nvme0n1p3 1997685760 1679068796 263028804  87% /var
+               total        used        free      shared  buff/cache   available
+Mem:          127922       50811        8970        6794       82036       77110
+Swap:          16383       16379           4

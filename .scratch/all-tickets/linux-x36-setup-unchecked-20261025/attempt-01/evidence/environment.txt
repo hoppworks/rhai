@@ -1,0 +1,13 @@
+utc=2026-10-25T06:27:53Z
+Linux lllm 7.2.0-ogc6.1.fc44.x86_64 #1 SMP PREEMPT_DYNAMIC Mon Aug 24 03:42:13 UTC 2026 x86_64 GNU/Linux
+revision=2cb6b67a9b13c2b5f363e2d2767ac6ec40898038
+runtime=/var/roothome/.local/share/agent-builds/rhai/x36-setup-unchecked-20261025-01/agent-build-ru6wcj0s
+TMPDIR=/var/roothome/.local/share/agent-builds/rhai/x36-setup-unchecked-20261025-01/agent-build-ru6wcj0s/tmp
+runner_sha256=25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e
+cargo_jobs=1
+max_test_seconds=300
+               total        used        free      shared  buff/cache   available
+Mem:           124Gi        49Gi       8.8Gi       6.6Gi        80Gi        75Gi
+Swap:           15Gi        15Gi       4.5Mi
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/nvme0n1p3  1.9T  1.6T  251G  87% /var/home
