@@ -1,0 +1,38 @@
+--- /Users/hoppworks/.local/share/agent-builds/rhai/x36-darwin-setup-20261025-01/agent-build-as6hty7c/unix.correct.rs	2026-10-25 07:37:48
++++ src/packages/sys/process/unix.rs	2026-10-25 07:37:48
+@@ -5898,7 +5898,7 @@
+                 None,
+             );
+             assert!(
+-                !marker.exists(),
++                marker.exists(),
+                 "{operation} command executed after setup failure"
+             );
+             let pid_bytes = fs::read(pid_record).unwrap();
+@@ -5931,7 +5931,7 @@
+                 None,
+             );
+             assert!(
+-                !marker.exists(),
++                marker.exists(),
+                 "{operation} command executed after partial setup failure"
+             );
+         }
+@@ -5959,7 +5959,7 @@
+                 Some(&fixture.0),
+             );
+             assert!(
+-                !marker.exists(),
++                marker.exists(),
+                 "{operation} command executed after fchdir failure"
+             );
+         }
+@@ -5985,7 +5985,7 @@
+                 None,
+             );
+             assert!(
+-                !marker.exists(),
++                marker.exists(),
+                 "{operation} command executed after kernel setpgid denial"
+             );
+         }

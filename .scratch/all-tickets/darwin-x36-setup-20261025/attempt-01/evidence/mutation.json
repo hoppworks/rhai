@@ -1,0 +1,10 @@
+{
+  "selectors": [
+    "managed_scope_setup_failure_never_executes_unmanaged_child",
+    "managed_scope_partial_setup_failure_cleans_created_group",
+    "managed_scope_fchdir_failure_cleans_created_group",
+    "managed_scope_kernel_setpgid_denial_cleans_created_group"
+  ],
+  "change": "Invert only the final marker-absence assertion in each named test after its public run setup failure and helper cleanup. Expect a marker that must be absent.",
+  "production_code_changed": false
+}

@@ -1,0 +1,12 @@
+{
+  "scope": "one Darwin X36 scoped invocation, four expected REDs and sixteen GREENs",
+  "cargo_command_count": 20,
+  "cargo_preparation_seconds_sum": 45.1,
+  "libtest_execution_seconds_sum": 0.18,
+  "wall_envelope_seconds": 48.907,
+  "wall_method": "mtime(result.txt) minus mtime(capacity-before.txt); includes source staging and all Cargo commands, excludes later independent observer/review",
+  "outer_timeout_seconds": 600,
+  "cargo_jobs": 2,
+  "tokens": "unknown",
+  "cost": "unknown"
+}
