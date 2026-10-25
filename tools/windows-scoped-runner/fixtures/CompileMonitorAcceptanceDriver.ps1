@@ -15,7 +15,7 @@ if ($PSVersionTable.PSVersion.Major -ne 5 -or [IntPtr]::Size -ne 8) {
 $productionExpected = @{
     'tools/windows-scoped-runner/LaunchSpecification.cs' = 'e08957b13d5ed5f86cb37d0545aa876aac50e507692d112b39882f465fff8f2b'
     'tools/windows-scoped-runner/LeaseMonitor.cs' = '72c79f18c96e28f27cd1b7b39b1025da9a250e0608885de7dc48934512a46bfc'
-    'tools/windows-scoped-runner/MonitorPayloadJob.cs' = 'adf9cd13ac7b46323d2beae799e0eff08fc08504d1b1cb6426998127401663d0'
+    'tools/windows-scoped-runner/MonitorPayloadJob.cs' = '21e59d116fab58332ec4fea648cf5abfadc26782756da9cbf6343085b8af2942'
     'tools/windows-scoped-runner/MonitorSpecificationIntake.cs' = '0f0a71563e6c3d99f0c643644d4b56951f6c69ceb3b10b03157f68dc37bb8412'
     'tools/windows-scoped-runner/MonitorStagingHandoff.cs' = 'c541f7d885d032c074461a5a0173b9ae6291ef7d8cd1b9fd2ce4a4f56d1e0e6e'
     'tools/windows-scoped-runner/MonitorTransport.cs' = 'ed23c8615af7d8c1b545d3108342640c46f7e245b4e6a83a7c98bf1720a74de8'

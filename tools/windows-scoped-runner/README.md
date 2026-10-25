@@ -237,6 +237,20 @@ independent payload identity stopped and runtime removal. Absent or contradictor
 termination evidence still fails closed. Ordinary-exit residual-child cleanup, remaining fault controls and Cargo work
 retirement remain open.
 
+### Actual payload Job resource limits
+
+The detached monitor configures the actual payload Job with kill-on-close,
+16active processes,1GiB committed memory per process and2GiB per Job. Breakaway is
+not granted. These limits apply before suspended atomic process association;
+controller limits alone are insufficient after monitor breakaway.
+
+`PayloadFixture --job-resources` and the existing control's `-Contract job-resources`
+query real root/ordinary-child kernel limits before work. Old kill-only source
+has an accepted contract RED, current source and same-build private environment
+have native GREEN, exact actor stop and runtime absence. See [original proof and
+remaining coverage](../../.scratch/all-tickets/windows-job-resources-20261025/proof.md).
+Configuration/inheritance proof does not claim quota exhaustion or Cargo acceptance.
+
 ### Native membership and Driver deadline
 
 `fixtures/MonitorDeathFixture.cs --membership` queries complete bounded Job PID

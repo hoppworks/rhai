@@ -1,0 +1,15 @@
+{
+  "expected_contract_red": true,
+  "actual_flags": "00002000",
+  "actual_active_process_limit": 0,
+  "actual_process_memory_bytes": 0,
+  "actual_job_memory_bytes": 0,
+  "payload_exit": 42,
+  "driver_exit": 0,
+  "crc_records": 8,
+  "protected_source": "production unchanged adf9cd13 before fix",
+  "fresh_actor_stopped": true,
+  "runtime_absent": true,
+  "frames": 112,
+  "files": 33
+}

@@ -1,0 +1,10 @@
+CLIENT_EXIT=0x0000004E
+MODE=success;ACTION_CONFIRMED=True;POST_TRANSFER_CHALLENGES=2
+JOURNAL=C:\Users\RhaiTest\.local\share\agent-builds\rhai\env-control-cdcd7eebb7ec4c89b8aa2f9e8f2054f4\run\.scoped-run-3b75a328fb6042a9ba5ef7dc020a269a.journal
+RUNTIME=C:\Users\RhaiTest\.local\share\agent-builds\rhai\env-control-cdcd7eebb7ec4c89b8aa2f9e8f2054f4\run\scoped-6892bfc9067d4e0697a3c0c8704524f2
+RUNTIME_IDENTITY=46E8EB5AE8EB46B1:00038cad000000060000000000000000
+PAYLOAD_EXIT=00000000
+SUPERVISION=PayloadExited
+CLEANUP_CONFIRMED=True
+RUNTIME_REMOVED=True
+HOST_EXPORTED=False

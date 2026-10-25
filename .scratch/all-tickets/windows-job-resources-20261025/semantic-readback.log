@@ -1,0 +1,66 @@
+{"frames": 118, "files": 35, "end": {"id": "rhai-job-resources-green-cdcd7eebb7ec4c89b8aa2f9e8f2054f4", "driver_launched": true, "files": 35, "accepted": true, "exit": 0, "guest_evidence_retained": true}}
+{"frames": 114, "files": 33, "end": {"id": "rhai-job-resources-environment-3851f0f9a4274b59a0d9cb8fdb06c40b", "driver_launched": true, "files": 33, "accepted": true, "exit": 0, "guest_evidence_retained": true}}
+{
+  "accepted": true,
+  "cases": [
+    {
+      "tag": "resource-red01",
+      "contract": "job-resources",
+      "phase": "RED",
+      "expected_contract_result": "FAIL",
+      "driver_exit": 0,
+      "payload_exit": "0000002A",
+      "crc_records": 8,
+      "frames": 112,
+      "files": 33,
+      "actor_identities": [
+        {
+          "pid": 11064,
+          "creation": 134374005091111323
+        }
+      ],
+      "source": "adf9cd13ac7b46323d2beae799e0eff08fc08504d1b1cb6426998127401663d0"
+    },
+    {
+      "tag": "resource-green01",
+      "contract": "job-resources",
+      "phase": "GREEN",
+      "expected_contract_result": "PASS",
+      "driver_exit": 0,
+      "payload_exit": "00000000",
+      "crc_records": 8,
+      "frames": 118,
+      "files": 35,
+      "actor_identities": [
+        {
+          "pid": 10024,
+          "creation": 134374015338821968
+        },
+        {
+          "pid": 6856,
+          "creation": 134374015341455375
+        }
+      ],
+      "source": "21e59d116fab58332ec4fea648cf5abfadc26782756da9cbf6343085b8af2942"
+    },
+    {
+      "tag": "resource-environment01",
+      "contract": "environment",
+      "phase": "GREEN",
+      "expected_contract_result": "PASS",
+      "driver_exit": 0,
+      "payload_exit": "00000000",
+      "crc_records": 8,
+      "frames": 114,
+      "files": 33,
+      "actor_identities": [],
+      "source": "21e59d116fab58332ec4fea648cf5abfadc26782756da9cbf6343085b8af2942"
+    }
+  ],
+  "native_build_allocations": 2,
+  "compiler_processes": 8,
+  "compiler_processes_detail": "six binary compiles plus two canonical deliberate missing-source controls",
+  "public_drivers": 3,
+  "quota_exhaustion_or_project_command_proof": false
+}
+

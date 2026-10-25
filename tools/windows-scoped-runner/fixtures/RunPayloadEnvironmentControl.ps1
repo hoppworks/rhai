@@ -4,6 +4,7 @@ param(
  [Parameter(Mandatory=$true)][string]$Session,
  [Parameter(Mandatory=$true)][string]$Id,
  [ValidateSet('RED','GREEN','RETIREMENT_ABORT')][string]$Phase='RED',
+ [ValidateSet('environment','job-resources')][string]$Contract='environment',
  [string]$BuildRoot,
  [switch]$ReturnStatusToCaller
 )
@@ -42,7 +43,7 @@ if($BuildRoot){
  $expected=@{'ScopedRunner.exe'='c3d91a8bcf550ef8087b7c057455ac876fe0a958b4e22de816b55daa659cb486';'MonitorAcceptanceDriver.exe'='caf4afaa2f604fb47fc554c82d9493854be0959c8d329bff7a88fd7fe9e827cb'}
  foreach($name in $expected.Keys){$file=Join-Path $build $name;No-Reparse $file;if((Get-FileHash -LiteralPath $file).Hash.ToLowerInvariant() -cne $expected[$name]){throw 'Retained production binary changed.'}}
 }
-if($Phase -ceq 'RETIREMENT_ABORT' -and !$BuildRoot){throw 'The retirement-abort phase requires the current source-bound build.'}
+if(($Phase -ceq 'RETIREMENT_ABORT' -or $Contract -ceq 'job-resources') -and !$BuildRoot){throw 'This contract requires the current source-bound build.'}
 No-Reparse $session;No-Reparse $FixturePath
 if((Get-FileHash -LiteralPath $FixturePath).Hash.ToLowerInvariant() -cne $FixtureSha256){throw 'Native environment fixture changed.'}
 if(Test-Path -LiteralPath $session){throw 'Own environment scope exists; preserve it.'}
@@ -72,12 +73,14 @@ if($BuildRoot){
 Copy-Item -LiteralPath $FixturePath -Destination (Join-Path $input 'fixture.exe')
 if((Get-FileHash -LiteralPath (Join-Path $input 'fixture.exe')).Hash.ToLowerInvariant() -cne $FixtureSha256){throw 'Fixture copy mismatch.'}
 $expectedPayload=if($Phase -ceq 'GREEN'){'00000000'}else{'0000002A'}
+$runtimeAbsenceRed=$false;$runtimeAbsent=$false;
+$jobResourcesObserved=@{};$jobResourcesRed=$false;$jobResourcesGreen=$false;$jobResourcesSensitivity=$false;$jobActorsStopped=$false
 $environmentObserved=@{};$environmentMismatches=@();$runtimeObserved=$null
 $environmentRed=$false;$environmentGreen=$false;$workRetirementRed=$false;$workRetirementGreen=$false;$parentChanged=$false
 $stdout = Join-Path $session 'bootstrap.stdout'; $stderr = Join-Path $session 'bootstrap.stderr'
 $info = [Diagnostics.ProcessStartInfo]::new()
 $info.FileName = Join-Path $build 'MonitorAcceptanceDriver.exe'
-$payloadArguments=if($Phase -ceq 'RETIREMENT_ABORT'){'--retirement-abort'}else{'payload-environment.txt --environment'}
+$payloadArguments=if($Phase -ceq 'RETIREMENT_ABORT'){'--retirement-abort'}elseif($Contract -ceq 'job-resources'){'payload-job-resources.txt --job-resources'}else{'payload-environment.txt --environment'}
 $info.Arguments = '--mode success --source "'+$input+'" --exe fixture.exe --expected-payload-exit '+$expectedPayload+' -- '+$payloadArguments
 $info.WorkingDirectory = $build; $info.UseShellExecute = $false; $info.CreateNoWindow = $true
 $info.RedirectStandardOutput = $true; $info.RedirectStandardError = $true
@@ -180,6 +183,40 @@ if ($started -and $exited -and $pipesDrained -and !$failure) {
    if(!$wrongExpectationRejected){throw 'Negative control accepted an impossible work-entry expectation.'}
    Assert-WorkRetirementReadback $fields 2060 613419011
    $workRetirementRed=$wrongExpectationRejected;$workRetirementGreen=$true
+  }elseif($Contract -ceq 'job-resources'){
+   function Read-JobResourceRecord([string]$Path){
+    $rows=[IO.File]::ReadAllLines($Path);$keys=@('pid','creation','flags','active_process_limit','process_memory_bytes','job_memory_bytes','contract');$values=@{}
+    if($rows.Count -ne 7){throw 'Actual Job resource record incomplete.'}
+    for($index=0;$index -lt $keys.Count;$index++){$prefix=$keys[$index]+'=';if(!$rows[$index].StartsWith($prefix)){throw 'Job resource key/order invalid.'};$values[$keys[$index]]=$rows[$index].Substring($prefix.Length)}
+    if($values.pid -notmatch '^[1-9][0-9]*$' -or $values.creation -notmatch '^[1-9][0-9]*$' -or $values.flags -cnotmatch '^[0-9A-F]{8}$'){throw 'Job resource identity/flags invalid.'}
+    foreach($key in @('active_process_limit','process_memory_bytes','job_memory_bytes')){if($values[$key] -notmatch '^(0|[1-9][0-9]*)$'){throw 'Job resource bound invalid.'}}
+    return $values
+   }
+   function Assert-JobResources([object]$Values,[string]$ExpectedFlags='00002308'){
+    if($Values.flags -cne $ExpectedFlags -or $Values.active_process_limit -cne '16' -or $Values.process_memory_bytes -cne '1073741824' -or $Values.job_memory_bytes -cne '2147483648' -or $Values.contract -cne 'PASS'){throw 'Actual payload Job resource contract mismatch.'}
+   }
+   function Assert-ActorStopped([object]$Values){
+    $actor=$null;try{$actor=[Diagnostics.Process]::GetProcessById([int]$Values.pid)}catch [ArgumentException]{}
+    if($null -ne $actor){try{if(!$actor.HasExited -and $actor.StartTime.ToUniversalTime().ToFileTimeUtc() -eq [long]$Values.creation){throw 'Exact resource actor remains live.'}}finally{$actor.Dispose()}}
+   }
+   $recordPath=Join-Path $evidence[0].FullName 'runtime\payload-job-resources.txt'
+   $rootValues=Read-JobResourceRecord $recordPath;$jobResourcesObserved.root=$rootValues
+   if($Phase -ceq 'RED'){
+    $rejected=$false;try{Assert-JobResources $rootValues}catch{if($_.Exception.Message -cne 'Actual payload Job resource contract mismatch.'){throw};$rejected=$true}
+    $diagnostic=[IO.File]::ReadAllText((Join-Path $evidence[0].FullName 'stderr.log'))
+    if(!$rejected -or $rootValues.contract -cne 'FAIL' -or !$diagnostic.Contains('FAIL native payload Job resource contract')){throw 'Expected real Job resource RED was not reached.'}
+    $jobResourcesRed=$true
+   }else{
+    try{Assert-JobResources $rootValues '00002309'}catch{if($_.Exception.Message -cne 'Actual payload Job resource contract mismatch.'){throw};$jobResourcesSensitivity=$true}
+    if(!$jobResourcesSensitivity){throw 'Wrong Job flag expectation was not rejected.'}
+    Assert-JobResources $rootValues
+    $childValues=Read-JobResourceRecord ($recordPath+'.child');$jobResourcesObserved.child=$childValues
+    Assert-JobResources $childValues
+    if($childValues.pid -ceq $rootValues.pid -or [IO.File]::ReadAllText($recordPath+'.work') -cne "both-actors-resource-bounded`r`n"){throw 'Distinct child/useful-work readback missing.'}
+    Assert-ActorStopped $childValues
+    $jobResourcesGreen=$true
+   }
+   Assert-ActorStopped $rootValues;$jobActorsStopped=$true
   }else{
    $marker=Join-Path $evidence[0].FullName 'runtime\payload-environment.txt'
    $lines=[IO.File]::ReadAllLines($marker)
@@ -211,11 +248,17 @@ if ($started -and $exited -and $pipesDrained -and !$failure) {
   foreach($key in $parentEnvironment.Keys){if([Environment]::GetEnvironmentVariable($key) -cne $parentEnvironment[$key]){$parentChanged=$true}}
   if([Environment]::CurrentDirectory -cne $parentCwd){$parentChanged=$true}
   if($parentChanged){throw 'Observer parent environment/cwd changed.'}
-  if (@(Get-ChildItem -LiteralPath $run -Directory -Filter 'scoped-*').Count -ne 0) { throw 'Actual runtime presence contradicts cleanup receipt.' }
+  $actualRuntime=[IO.Path]::GetFullPath($runtimeObserved)
+  if([IO.Path]::GetDirectoryName($actualRuntime) -cne $run -or [IO.Path]::GetFileName($actualRuntime) -notmatch '^scoped-[0-9a-f]{32}$'){throw 'Actual runtime is outside this exact control.'}
+  function Assert-RuntimeAbsent([string]$Path){if(Test-Path -LiteralPath $Path){throw 'Actual runtime absence mismatch.'}}
+  try{Assert-RuntimeAbsent $evidence[0].FullName}catch{if($_.Exception.Message -cne 'Actual runtime absence mismatch.'){throw};$runtimeAbsenceRed=$true}
+  if(!$runtimeAbsenceRed){throw 'Runtime absence negative control missing.'}
+  Assert-RuntimeAbsent $actualRuntime;$runtimeAbsent=$true
+  if (@(Get-ChildItem -LiteralPath $run -Force -Directory -Filter 'scoped-*').Count -ne 0) { throw 'Actual runtime presence contradicts cleanup receipt.' }
   $hostRecord = $true; $complete = $true
  } catch { $failure = $_.Exception.ToString() }
 }
-$record = [ordered]@{id=$id;scope=$session;run=$run;exit=$status;accepted=$complete;failure=$failure;fresh_host_record=$hostRecord;phase=$Phase;expected_payload_exit=$expectedPayload;work_retirement_red=$workRetirementRed;work_retirement_green=$workRetirementGreen;environment_contract_red=$environmentRed;environment_contract_green=$environmentGreen;allocated_runtime=$runtimeObserved;environment_observed=$environmentObserved;environment_mismatches=$environmentMismatches;parent_environment_changed=$parentChanged;fixture_sha256=$FixtureSha256;driver_launched=$started;exact_driver_exited=$exited;pipes_drained=$pipesDrained;retained_driver_handles=($started -and (!$exited -or !$pipesDrained));retained_binaries=$expected;product_run=$false}
+$record = [ordered]@{id=$id;scope=$session;run=$run;exit=$status;accepted=$complete;failure=$failure;fresh_host_record=$hostRecord;phase=$Phase;contract=$Contract;job_resources_observed=$jobResourcesObserved;job_resources_red=$jobResourcesRed;job_resources_green=$jobResourcesGreen;job_resources_sensitivity=$jobResourcesSensitivity;job_actors_stopped=$jobActorsStopped;expected_payload_exit=$expectedPayload;work_retirement_red=$workRetirementRed;work_retirement_green=$workRetirementGreen;environment_contract_red=$environmentRed;environment_contract_green=$environmentGreen;allocated_runtime=$runtimeObserved;runtime_absent_readback=$runtimeAbsent;runtime_absence_negative_control=$runtimeAbsenceRed;environment_observed=$environmentObserved;environment_mismatches=$environmentMismatches;parent_environment_changed=$parentChanged;fixture_sha256=$FixtureSha256;driver_launched=$started;exact_driver_exited=$exited;pipes_drained=$pipesDrained;retained_driver_handles=($started -and (!$exited -or !$pipesDrained));retained_binaries=$expected;product_run=$false}
 [IO.File]::WriteAllText((Join-Path $session 'observer.json'),($record|ConvertTo-Json -Compress -Depth 5),[Text.UTF8Encoding]::new($false))
 $files = @(Get-Item -LiteralPath $stdout,$stderr,(Join-Path $session 'observer.json'))
 # Enumerate runtime evidence only after the validated completion/removal receipt.

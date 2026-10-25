@@ -11,6 +11,8 @@ internal static class PayloadFixture
     {
         if (args.Length == 1 && args[0] == "--retirement-abort") return WorkRetirementAbort();
         if (args.Length == 2 && args[1] == "--environment") return EnvironmentContract(args[0]);
+        if (args.Length == 2 && args[1] == "--job-resources") return JobResourceContract(args[0], false);
+        if (args.Length == 2 && args[1] == "--job-resources-leaf") return JobResourceContract(args[0], true);
         bool held = args.Length == 2 && args[1] == "--hold";
         if (args.Length != 1 && !held) return 64;
         File.WriteAllText(args[0], "payload-started\r\n");
@@ -28,6 +30,80 @@ internal static class PayloadFixture
         using (ManualResetEvent hold = new ManualResetEvent(false)) hold.WaitOne(120000);
         return 126;
     }
+    [DllImport("kernel32.dll", SetLastError = true)]
+    private static extern bool QueryInformationJobObject(IntPtr job, int kind, IntPtr buffer, uint bytes, IntPtr returned);
+
+    // Read the real caller Job's configured limits. Both actors publish their
+    // own kernel readback before useful work; no controller-limit inference.
+    private static int JobResourceContract(string record, bool leaf)
+    {
+        if (IntPtr.Size != 8) throw new InvalidOperationException("resource contract requires the reviewed64bit native layout");
+        IntPtr information = Marshal.AllocHGlobal(144);
+        uint flags, active; ulong processBytes, jobBytes;
+        try {
+            if (!QueryInformationJobObject(IntPtr.Zero, 9, information, 144, IntPtr.Zero))
+                throw new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error(), "query actual payload Job limits");
+            flags = unchecked((uint)Marshal.ReadInt32(information, 16));
+            active = unchecked((uint)Marshal.ReadInt32(information, 40));
+            processBytes = unchecked((ulong)Marshal.ReadInt64(information, 112));
+            jobBytes = unchecked((ulong)Marshal.ReadInt64(information, 120));
+        } finally { Marshal.FreeHGlobal(information); }
+        bool passed = flags == 0x2308 && active == 16 && processBytes == 1073741824UL && jobBytes == 2147483648UL;
+        using (Process self = Process.GetCurrentProcess()) {
+            string[] values = {
+                "pid=" + self.Id.ToString(System.Globalization.CultureInfo.InvariantCulture),
+                "creation=" + self.StartTime.ToUniversalTime().ToFileTimeUtc().ToString(System.Globalization.CultureInfo.InvariantCulture),
+                "flags=" + flags.ToString("X8", System.Globalization.CultureInfo.InvariantCulture),
+                "active_process_limit=" + active.ToString(System.Globalization.CultureInfo.InvariantCulture),
+                "process_memory_bytes=" + processBytes.ToString(System.Globalization.CultureInfo.InvariantCulture),
+                "job_memory_bytes=" + jobBytes.ToString(System.Globalization.CultureInfo.InvariantCulture),
+                "contract=" + (passed ? "PASS" : "FAIL")
+            };
+            string pending = record + ".pending";
+            using (FileStream stream = new FileStream(pending, FileMode.CreateNew, FileAccess.Write, FileShare.Read))
+            using (StreamWriter writer = new StreamWriter(stream, new System.Text.UTF8Encoding(false))) {
+                foreach (string value in values) writer.Write(value + "\r\n");
+                writer.Flush(); stream.Flush(true);
+            }
+            File.Move(pending, record);
+            if (!passed) { Console.Error.WriteLine("FAIL native payload Job resource contract"); return 42; }
+            if (leaf) {
+                using (ManualResetEvent hold = new ManualResetEvent(false)) hold.WaitOne(120000);
+                return 126;
+            }
+            Process child = null; bool started = false, transferred = false;
+            try {
+                child = new Process { StartInfo = new ProcessStartInfo {
+                    FileName = self.MainModule.FileName, Arguments = "\"" + Path.GetFullPath(record + ".child") + "\" --job-resources-leaf",
+                    WorkingDirectory = Environment.CurrentDirectory, UseShellExecute = false, CreateNoWindow = true } };
+                if (!child.Start()) throw new InvalidOperationException("resource child did not start");
+                started = true;
+                Stopwatch ready = Stopwatch.StartNew();
+                while (!File.Exists(record + ".child")) {
+                    if (child.HasExited) throw new InvalidOperationException("resource child exited before readiness");
+                    if (ready.ElapsedMilliseconds >= 5000) throw new TimeoutException("resource child readiness exceeded5seconds");
+                    Thread.Sleep(10);
+                }
+                string[] observed = File.ReadAllLines(record + ".child");
+                if (observed.Length != 7 || observed[0] != "pid=" + child.Id.ToString(System.Globalization.CultureInfo.InvariantCulture) ||
+                    observed[1] != "creation=" + child.StartTime.ToUniversalTime().ToFileTimeUtc().ToString(System.Globalization.CultureInfo.InvariantCulture) ||
+                    observed[6] != "contract=PASS") throw new InvalidDataException("exact child resource contract failed");
+                File.WriteAllText(record + ".work", "both-actors-resource-bounded\r\n", new System.Text.UTF8Encoding(false));
+                // Public monitor retains the ordinary child and closes the whole
+                // Job after root exit. Natural leaf126 cannot satisfy early stop.
+                transferred = true;
+                Console.WriteLine("PASS native payload Job resource contract");
+                return 0;
+            } finally {
+                if (started && !transferred) {
+                    if (!child.HasExited) child.Kill();
+                    if (!child.WaitForExit(10000)) throw new TimeoutException("resource child cleanup did not finish");
+                }
+                if (child != null) child.Dispose();
+            }
+        }
+    }
+
     private const int FormerInventoryBound = 2048;
     private const long FormerSingleFileBound = 64L * 1024L * 1024L;
     private const long ExpectedWorkBytes = 613419011L;

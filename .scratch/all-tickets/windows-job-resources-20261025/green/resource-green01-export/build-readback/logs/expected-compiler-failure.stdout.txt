@@ -1,0 +1,4 @@
+Microsoft (R) Visual C# Compiler version 4.14.0-3.26424.7 (a528c90a)
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+error CS2001: Source file 'C:\Users\RhaiTest\.local\share\agent-builds\rhai\job-resource-build-green-cdcd7eebb7ec4c89b8aa2f9e8f2054f4\run\monitor-source-cdcd7eebb7ec4c89b8aa2f9e8f2054f4\input\deliberately-missing-compiler-control.cs' could not be found.

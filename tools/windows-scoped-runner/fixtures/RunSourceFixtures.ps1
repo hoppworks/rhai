@@ -39,7 +39,7 @@ if ([IntPtr]::Size -ne 8) { throw 'The accepted Windows guest and job layout req
 $expected = @{
     'tools/windows-scoped-runner/LaunchSpecification.cs' = 'e08957b13d5ed5f86cb37d0545aa876aac50e507692d112b39882f465fff8f2b'
     'tools/windows-scoped-runner/LeaseMonitor.cs' = '72c79f18c96e28f27cd1b7b39b1025da9a250e0608885de7dc48934512a46bfc'
-    'tools/windows-scoped-runner/MonitorPayloadJob.cs' = 'adf9cd13ac7b46323d2beae799e0eff08fc08504d1b1cb6426998127401663d0'
+    'tools/windows-scoped-runner/MonitorPayloadJob.cs' = '21e59d116fab58332ec4fea648cf5abfadc26782756da9cbf6343085b8af2942'
     'tools/windows-scoped-runner/MonitorSpecificationIntake.cs' = '0f0a71563e6c3d99f0c643644d4b56951f6c69ceb3b10b03157f68dc37bb8412'
     'tools/windows-scoped-runner/MonitorStagingHandoff.cs' = 'c541f7d885d032c074461a5a0173b9ae6291ef7d8cd1b9fd2ce4a4f56d1e0e6e'
     'tools/windows-scoped-runner/MonitorTransport.cs' = 'ed23c8615af7d8c1b545d3108342640c46f7e245b4e6a83a7c98bf1720a74de8'
@@ -52,7 +52,7 @@ $expected = @{
     'tools/windows-scoped-runner/fixtures/MonitorPayloadJobFixture.cs' = 'd9aae76fd68a2cb52721618cd0746af36892a7951c9d0c4d11867a05e11ca7c0'
     'tools/windows-scoped-runner/fixtures/MonitorSpecificationIntakeFixture.cs' = '3e774455bc25a3f0fa40162e4ca3f5d59f35270d27b41c3e2aceb0f144f73d8d'
     'tools/windows-scoped-runner/fixtures/MonitorStagingHandoffFixture.cs' = '463273337d01e64b4285031858188b5ef886bb5cf150f6dabe2ac637bca999d5'
-    'tools/windows-scoped-runner/fixtures/PayloadFixture.cs' = '6f48ce06a01f06bb8a064aa450624f4dd29ffcbcba1dbaf9c3e52a62b0acaebb'
+    'tools/windows-scoped-runner/fixtures/PayloadFixture.cs' = 'e89c5fad040783326d117fe09860ab8535144756be0145bb38c0e4a148c0a465'
     'tools/windows-scoped-runner/fixtures/SpecificationTransferFixture.cs' = 'a6b901d0a9cf59faba2d5f056d983ef627b92b2e9535277b60a1e2e75541e504'
 }
 

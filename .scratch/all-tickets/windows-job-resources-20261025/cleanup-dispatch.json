@@ -1,0 +1,8 @@
+{
+  "utc": "2026-10-25T10:40:31.691662+00:00",
+  "cleanup_source_sha256": "09e4e6f4e017fc0b6cf86409d20a80769c7c460b99a78207fa7b56eff8eeabae",
+  "host_manifest_sha256": "ebd672874f3d72ab86566430d4dca51a2c51a167dadd90e75ec24b2e496e86d0",
+  "source_and_actual_manifest_review": "PASS",
+  "retire": "four completed exact own scopes",
+  "retain": "current GREEN build only, finite original expiry in retained-green-build.json"
+}

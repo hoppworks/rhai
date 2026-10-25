@@ -1,0 +1,10 @@
+{
+  "source": "/var/roothome/projects/rhai-job-resources-20261025-4b6f1af1",
+  "medium": "/var/lib/libvirt/images/rhai-win11-quality/job-resources-cleanup-20261025-4b6f1af1.iso",
+  "sha256": "a020a1a9e6d9e21339e72a53bf1f71655024138d57bfd146dc81cc44a887c766",
+  "files": {
+    "cleanup-host-manifest.json": "ebd672874f3d72ab86566430d4dca51a2c51a167dadd90e75ec24b2e496e86d0",
+    "cleanup.ps1": "09e4e6f4e017fc0b6cf86409d20a80769c7c460b99a78207fa7b56eff8eeabae"
+  },
+  "native_started": false
+}

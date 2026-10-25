@@ -1,0 +1,15 @@
+{
+  "nonce": "4b6f1af18783499eba100bef0e0a4930",
+  "host_manifest_sha256": "ebd672874f3d72ab86566430d4dca51a2c51a167dadd90e75ec24b2e496e86d0",
+  "host_receipt_sha256": "83676a51c8f3d9f752ea3530266a3ec590cf456ae45f28106fa3bc31ca987f94",
+  "retained_build": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\job-resource-build-green-cdcd7eebb7ec4c89b8aa2f9e8f2054f4",
+  "retained_build_preserved": true,
+  "retired": [
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\job-resource-build-red-4b6f1af18783499eba100bef0e0a4930",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-4b6f1af18783499eba100bef0e0a4930",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-cdcd7eebb7ec4c89b8aa2f9e8f2054f4",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-3851f0f9a4274b59a0d9cb8fdb06c40b"
+  ],
+  "all_scopes_absent": true,
+  "foreign_resources_touched": false
+}

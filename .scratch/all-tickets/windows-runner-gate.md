@@ -24,7 +24,9 @@ distinct. Host export does not rewrite native HOST_EXPORTED=False.
 Reuse compatible tools only after source/compiler/hash/physical-path checks and
 within recorded ownership/purpose/expiry. Old10-10 guest builds and the now-retired current compiler cache are historical
 references. The membership/deadline package retired all8 exact own guest scopes and
-all6 own media after host-bound export; no cached binary remains available. Never reset the VM, touch backups/baselines/foreign work, or treat SSH
+all6 own media after host-bound export. A later resource-limit package now retains
+one new compatible GREEN build under its exact finite record; use
+`windows-job-resources-20261025/retained-green-build.json`, not historical paths. Never reset the VM, touch backups/baselines/foreign work, or treat SSH
 loss as guest supervision. No new routine approval gate or fixed heavy-run slot.
 
 ## Required outcomes and current proof
@@ -53,8 +55,10 @@ EXACT Job closure and runtime absent. Orderly client/controller release failed b
 Driver teardown; retained kill-on-close completed that path. Keep those original
 diagnostics. It does not establish the separate monitor30min or watchdog124 branch.
 
-Before real project commands, verify the agreed resource caps at the actual payload
-Job. Current CreateSuspended configures that Job with kill-on-close only; the
-compiler/controller memory/process caps do not themselves prove payload limits.
-This source-level gap belongs to bounded project-command custody, not a failure
-of the two small fixed-workload rows accepted here.
+Actual payload resource setup is now21e59d11: kill-close/no breakaway,16active,
+1GiB committed memory per process and2GiB per Job before atomic association.
+Native old-source RED then current root+child resource GREEN and same-build
+private-environment GREEN pass: [resource proof](windows-job-resources-20261025/proof.md).
+These observe real kernel configuration/inheritance and small-workload closure;
+quota-exhaustion and real project-command behavior remain open. Older deadline/
+lease/membership rows keep their original-revision scope, not new-limit labels.

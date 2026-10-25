@@ -1,0 +1,275 @@
+{
+  "root": "/var/roothome/projects/rhai-job-resources-20261025-4b6f1af1",
+  "entries": [
+    {
+      "path": "red",
+      "directory": true,
+      "sha256": null
+    },
+    {
+      "path": "assemble-medium.py",
+      "directory": false,
+      "sha256": "9d2deb21a769a61b33f5951db79f1d0193b8c3749d93f94b8182c213ed446f8c"
+    },
+    {
+      "path": "green",
+      "directory": true,
+      "sha256": null
+    },
+    {
+      "path": "cleanup.ps1",
+      "directory": false,
+      "sha256": "09e4e6f4e017fc0b6cf86409d20a80769c7c460b99a78207fa7b56eff8eeabae"
+    },
+    {
+      "path": "cleanup-host-manifest.json",
+      "directory": false,
+      "sha256": "ebd672874f3d72ab86566430d4dca51a2c51a167dadd90e75ec24b2e496e86d0"
+    },
+    {
+      "path": "media-readback.json",
+      "directory": false,
+      "sha256": "ec106178ea8cf2a65d3c701ff5ef9831426361a10fd0850e0f792f1077fbf451"
+    },
+    {
+      "path": "red/input-manifest.json",
+      "directory": false,
+      "sha256": "06ebfdf53afbadca75b05540abf4455d21f041c88db100cfacaa21db4f12b622"
+    },
+    {
+      "path": "red/binding.json",
+      "directory": false,
+      "sha256": "e61ce0a598a14d0d42a71022ad8cc7f7364e15f88ebc3634347fede3ea166b3c"
+    },
+    {
+      "path": "red/job-resources-red-4b6f1af18783499eba100bef0e0a4930.bundle",
+      "directory": false,
+      "sha256": "ce9caf430a0a2075b29a89bf7e9249dccfbd94c90adf27f18be1acdb26577d3c"
+    },
+    {
+      "path": "red/input",
+      "directory": true,
+      "sha256": null
+    },
+    {
+      "path": "red/Start.ps1",
+      "directory": false,
+      "sha256": "3d39de8a9e418023b141fadff7c83bebc709c09d4300bc5e838540e1ba2bd2b8"
+    },
+    {
+      "path": "red/media-readback.json",
+      "directory": false,
+      "sha256": "e29feb52cf7b1c61c87447a9c402692264ce62623712dcfce687c4044837b082"
+    },
+    {
+      "path": "green/job-resources-green-cdcd7eebb7ec4c89b8aa2f9e8f2054f4.bundle",
+      "directory": false,
+      "sha256": "cbaaf4ef4880069076409c03185f35aaca8120ef1604454e0662c8b0f71f2b7d"
+    },
+    {
+      "path": "green/input-manifest.json",
+      "directory": false,
+      "sha256": "37997dc31d493f04f09ef5a4e08ffa77ba42c80567cec556559d8d1f45e1639e"
+    },
+    {
+      "path": "green/binding.json",
+      "directory": false,
+      "sha256": "65ac98d75897b397458c9a4ba17c81a9afda2c469d7781a23d12b5ec3bcecf1e"
+    },
+    {
+      "path": "green/input",
+      "directory": true,
+      "sha256": null
+    },
+    {
+      "path": "green/Start.ps1",
+      "directory": false,
+      "sha256": "cd1c3ac9e826b027fa640cf9c0aa56f69869dd0a8c1a1baac8129b2eb5ea4ad5"
+    },
+    {
+      "path": "green/media-readback.json",
+      "directory": false,
+      "sha256": "b3c35f78d83c8a96854e20f5e9cf3939b50251e5ee1a93f90609c64f3b4dbcd9"
+    },
+    {
+      "path": "green/input/tools",
+      "directory": true,
+      "sha256": null
+    },
+    {
+      "path": "green/input/tools/windows-scoped-runner",
+      "directory": true,
+      "sha256": null
+    },
+    {
+      "path": "green/input/tools/windows-scoped-runner/MonitorAcceptanceDriver.cs",
+      "directory": false,
+      "sha256": "3961723da38fbba05f800ef76a5d65a6225e25eb79303a05ff420634e0dc1914"
+    },
+    {
+      "path": "green/input/tools/windows-scoped-runner/MonitorStagingHandoff.cs",
+      "directory": false,
+      "sha256": "c541f7d885d032c074461a5a0173b9ae6291ef7d8cd1b9fd2ce4a4f56d1e0e6e"
+    },
+    {
+      "path": "green/input/tools/windows-scoped-runner/SpecificationTransfer.cs",
+      "directory": false,
+      "sha256": "7a9edfe98d84868b55146280bd5ed29576ee0c8725cf9f6c785b784bc0ad25c2"
+    },
+    {
+      "path": "green/input/tools/windows-scoped-runner/ScopedRunner.cs",
+      "directory": false,
+      "sha256": "d3a77f0daeebd5beed2b277fae9dc6a522acf1454bb5d8d776d84e1dc8e896c8"
+    },
+    {
+      "path": "green/input/tools/windows-scoped-runner/MonitorTransport.cs",
+      "directory": false,
+      "sha256": "ed23c8615af7d8c1b545d3108342640c46f7e245b4e6a83a7c98bf1720a74de8"
+    },
+    {
+      "path": "green/input/tools/windows-scoped-runner/WindowsCustodyBackend.cs",
+      "directory": false,
+      "sha256": "26b7468a0868271a555f6ed450212267b01d7d3fd0a8dd5b3fb51b01b7a05629"
+    },
+    {
+      "path": "green/input/tools/windows-scoped-runner/LeaseMonitor.cs",
+      "directory": false,
+      "sha256": "72c79f18c96e28f27cd1b7b39b1025da9a250e0608885de7dc48934512a46bfc"
+    },
+    {
+      "path": "green/input/tools/windows-scoped-runner/fixtures",
+      "directory": true,
+      "sha256": null
+    },
+    {
+      "path": "green/input/tools/windows-scoped-runner/MonitorPayloadJob.cs",
+      "directory": false,
+      "sha256": "21e59d116fab58332ec4fea648cf5abfadc26782756da9cbf6343085b8af2942"
+    },
+    {
+      "path": "green/input/tools/windows-scoped-runner/LaunchSpecification.cs",
+      "directory": false,
+      "sha256": "e08957b13d5ed5f86cb37d0545aa876aac50e507692d112b39882f465fff8f2b"
+    },
+    {
+      "path": "green/input/tools/windows-scoped-runner/MonitorSpecificationIntake.cs",
+      "directory": false,
+      "sha256": "0f0a71563e6c3d99f0c643644d4b56951f6c69ceb3b10b03157f68dc37bb8412"
+    },
+    {
+      "path": "green/input/tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs",
+      "directory": false,
+      "sha256": "38745833e7b23535cdc2ce225655074c6c5f50e204c0d3cf38d6805f49cb53eb"
+    },
+    {
+      "path": "green/input/tools/windows-scoped-runner/fixtures/RunPayloadEnvironmentControl.ps1",
+      "directory": false,
+      "sha256": "6cc3d4f947f7fb20ea04dd581b9c9b5ba50ea8e32b7380042603989a2c71ebae"
+    },
+    {
+      "path": "green/input/tools/windows-scoped-runner/fixtures/PayloadFixture.cs",
+      "directory": false,
+      "sha256": "e89c5fad040783326d117fe09860ab8535144756be0145bb38c0e4a148c0a465"
+    },
+    {
+      "path": "green/input/tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs",
+      "directory": false,
+      "sha256": "8f43d33928262ae181aa5396feffef9b0260653609b5be8b01da7b0a7e7b00f7"
+    },
+    {
+      "path": "green/input/tools/windows-scoped-runner/fixtures/RunSourceFixtures.ps1",
+      "directory": false,
+      "sha256": "17c639e8b230728ee7619726967f7694fff75f9afa65baef95186c3dd4aec410"
+    },
+    {
+      "path": "red/input/tools",
+      "directory": true,
+      "sha256": null
+    },
+    {
+      "path": "red/input/tools/windows-scoped-runner",
+      "directory": true,
+      "sha256": null
+    },
+    {
+      "path": "red/input/tools/windows-scoped-runner/MonitorAcceptanceDriver.cs",
+      "directory": false,
+      "sha256": "3961723da38fbba05f800ef76a5d65a6225e25eb79303a05ff420634e0dc1914"
+    },
+    {
+      "path": "red/input/tools/windows-scoped-runner/MonitorStagingHandoff.cs",
+      "directory": false,
+      "sha256": "c541f7d885d032c074461a5a0173b9ae6291ef7d8cd1b9fd2ce4a4f56d1e0e6e"
+    },
+    {
+      "path": "red/input/tools/windows-scoped-runner/SpecificationTransfer.cs",
+      "directory": false,
+      "sha256": "7a9edfe98d84868b55146280bd5ed29576ee0c8725cf9f6c785b784bc0ad25c2"
+    },
+    {
+      "path": "red/input/tools/windows-scoped-runner/ScopedRunner.cs",
+      "directory": false,
+      "sha256": "d3a77f0daeebd5beed2b277fae9dc6a522acf1454bb5d8d776d84e1dc8e896c8"
+    },
+    {
+      "path": "red/input/tools/windows-scoped-runner/MonitorTransport.cs",
+      "directory": false,
+      "sha256": "ed23c8615af7d8c1b545d3108342640c46f7e245b4e6a83a7c98bf1720a74de8"
+    },
+    {
+      "path": "red/input/tools/windows-scoped-runner/WindowsCustodyBackend.cs",
+      "directory": false,
+      "sha256": "26b7468a0868271a555f6ed450212267b01d7d3fd0a8dd5b3fb51b01b7a05629"
+    },
+    {
+      "path": "red/input/tools/windows-scoped-runner/LeaseMonitor.cs",
+      "directory": false,
+      "sha256": "72c79f18c96e28f27cd1b7b39b1025da9a250e0608885de7dc48934512a46bfc"
+    },
+    {
+      "path": "red/input/tools/windows-scoped-runner/fixtures",
+      "directory": true,
+      "sha256": null
+    },
+    {
+      "path": "red/input/tools/windows-scoped-runner/MonitorPayloadJob.cs",
+      "directory": false,
+      "sha256": "adf9cd13ac7b46323d2beae799e0eff08fc08504d1b1cb6426998127401663d0"
+    },
+    {
+      "path": "red/input/tools/windows-scoped-runner/LaunchSpecification.cs",
+      "directory": false,
+      "sha256": "e08957b13d5ed5f86cb37d0545aa876aac50e507692d112b39882f465fff8f2b"
+    },
+    {
+      "path": "red/input/tools/windows-scoped-runner/MonitorSpecificationIntake.cs",
+      "directory": false,
+      "sha256": "0f0a71563e6c3d99f0c643644d4b56951f6c69ceb3b10b03157f68dc37bb8412"
+    },
+    {
+      "path": "red/input/tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs",
+      "directory": false,
+      "sha256": "38745833e7b23535cdc2ce225655074c6c5f50e204c0d3cf38d6805f49cb53eb"
+    },
+    {
+      "path": "red/input/tools/windows-scoped-runner/fixtures/RunPayloadEnvironmentControl.ps1",
+      "directory": false,
+      "sha256": "6cc3d4f947f7fb20ea04dd581b9c9b5ba50ea8e32b7380042603989a2c71ebae"
+    },
+    {
+      "path": "red/input/tools/windows-scoped-runner/fixtures/PayloadFixture.cs",
+      "directory": false,
+      "sha256": "e89c5fad040783326d117fe09860ab8535144756be0145bb38c0e4a148c0a465"
+    },
+    {
+      "path": "red/input/tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs",
+      "directory": false,
+      "sha256": "8f43d33928262ae181aa5396feffef9b0260653609b5be8b01da7b0a7e7b00f7"
+    },
+    {
+      "path": "red/input/tools/windows-scoped-runner/fixtures/RunSourceFixtures.ps1",
+      "directory": false,
+      "sha256": "8eb1d77b58af3871e8d6f644fb8b510784bac03909b30ccbeccb3b558af9518e"
+    }
+  ]
+}

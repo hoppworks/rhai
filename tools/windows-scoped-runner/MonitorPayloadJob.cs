@@ -1,6 +1,6 @@
 // Monitor-owned payload process creation and exact-handle lifetime owner.
-// Native creation, resume, cleanup, and host transport behavior remain
-// unverified until the authorized Windows acceptance gates run.
+// Named native acceptance and remaining coverage are tracked in
+// .scratch/all-tickets/windows-runner-gate.md.
 using System;
 using System.ComponentModel;
 using System.IO;
@@ -529,6 +529,9 @@ internal sealed class MonitorPayloadJob : IDisposable
     }
 #endif
     private const uint JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE = 0x00002000;
+    private const uint JOB_OBJECT_LIMIT_ACTIVE_PROCESS = 0x00000008;
+    private const uint JOB_OBJECT_LIMIT_PROCESS_MEMORY = 0x00000100;
+    private const uint JOB_OBJECT_LIMIT_JOB_MEMORY = 0x00000200;
     private const uint CREATE_SUSPENDED = 0x00000004;
     private const uint CREATE_UNICODE_ENVIRONMENT = 0x00000400;
     private const uint EXTENDED_STARTUPINFO_PRESENT = 0x00080000;
@@ -701,9 +704,18 @@ internal sealed class MonitorPayloadJob : IDisposable
             IntPtr rawJob=CreateJobObjectW(ref security, null);
             if (rawJob==IntPtr.Zero) throw Error("CreateJobObjectW(private unnamed job)");
             ownedJob.Adopt(rawJob);
-            var limits=new JobExtendedLimitInformation { Basic=new BasicLimitInformation { LimitFlags=JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE } };
+            // The detached monitor does not inherit the controller's limits.
+            // Bound the actual workload Job before atomic process association;
+            // omit breakaway flags so ordinary descendants retain these caps.
+            var limits=new JobExtendedLimitInformation {
+                Basic=new BasicLimitInformation {
+                    LimitFlags=JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE|JOB_OBJECT_LIMIT_ACTIVE_PROCESS|
+                        JOB_OBJECT_LIMIT_PROCESS_MEMORY|JOB_OBJECT_LIMIT_JOB_MEMORY,
+                    ActiveProcessLimit=16 },
+                ProcessMemoryLimit=new UIntPtr(1024UL*1024*1024),
+                JobMemoryLimit=new UIntPtr(2UL*1024*1024*1024) };
             Check(SetInformationJobObject(ownedJob.ExactValue, JobObjectExtendedLimitInformation, ref limits,
-                (uint)Marshal.SizeOf(typeof(JobExtendedLimitInformation))), "SetInformationJobObject(kill on last close)");
+                (uint)Marshal.SizeOf(typeof(JobExtendedLimitInformation))), "SetInformationJobObject(payload resource limits and kill on last close)");
 
             environment=Marshal.StringToHGlobalUni(allocation.PreparePayloadEnvironment(setupCleanupDeadline));
             outputCapture=new PayloadOutputCapture(allocation,setupCleanupDeadline);

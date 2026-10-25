@@ -1,0 +1,7 @@
+pid=11064
+creation=134374005091111323
+flags=00002000
+active_process_limit=0
+process_memory_bytes=0
+job_memory_bytes=0
+contract=FAIL

@@ -1,0 +1,10 @@
+{
+  "utc": "2026-10-25T10:28:17.927904+00:00",
+  "source_sha256": "cd1c3ac9e826b027fa640cf9c0aa56f69869dd0a8c1a1baac8129b2eb5ea4ad5",
+  "manifest_sha256": "37997dc31d493f04f09ef5a4e08ffa77ba42c80567cec556559d8d1f45e1639e",
+  "phase": "resource GREEN then environment GREEN, one shared current build",
+  "source_review": "PASS source21e59d11 and bound shared entry, no native GREEN implied before results",
+  "stage_bound_seconds": 720,
+  "serial_inode": 126648834,
+  "serial_offset": 281538
+}

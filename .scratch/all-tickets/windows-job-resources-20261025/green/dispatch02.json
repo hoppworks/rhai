@@ -1,0 +1,12 @@
+{
+  "utc": "2026-10-25T10:31:47.101597+00:00",
+  "source_sha256": "cd1c3ac9e826b027fa640cf9c0aa56f69869dd0a8c1a1baac8129b2eb5ea4ad5",
+  "same_command_bytes": true,
+  "reason": "Recovery of dispatch01 parser-only failure, which started no build/control. This second dispatch subsequently completed one GREEN build and both controls.",
+  "stage_bound_seconds": 720,
+  "result": "resource GREEN and same-build environment GREEN accepted",
+  "result_refs": [
+    "resource-green01-export-readback.json",
+    "resource-environment01-export-readback.json"
+  ]
+}
