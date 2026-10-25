@@ -1,0 +1,10 @@
+CLIENT_EXIT=0x00000001
+MODE=client-death;ACTION_CONFIRMED=True;POST_TRANSFER_CHALLENGES=4
+JOURNAL=C:\Users\RhaiTest\.local\share\agent-builds\rhai\custody-client-death-f9f42704c04c\run\.scoped-run-d9e363692705493baaeb1578090cdabb.journal
+RUNTIME=C:\Users\RhaiTest\.local\share\agent-builds\rhai\custody-client-death-f9f42704c04c\run\scoped-2eb238fde5fe4bccadbc26b1aa94fb3e
+RUNTIME_IDENTITY=46E8EB5AE8EB46B1:000308a3000000050000000000000000
+PAYLOAD_EXIT=0000007D
+SUPERVISION=MonitorStopped
+CLEANUP_CONFIRMED=True
+RUNTIME_REMOVED=True
+HOST_EXPORTED=False

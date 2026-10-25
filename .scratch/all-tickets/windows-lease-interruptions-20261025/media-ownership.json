@@ -1,0 +1,9 @@
+{
+  "remote_source_copy": "/var/roothome/projects/rhai-lease-controls-20261025-eac5ff47",
+  "scope": "/var/roothome/.local/share/agent-builds/rhai/lease-medium-65aedd56a05d4334a72dc6711a00ddf0",
+  "output_input_medium": "/var/lib/libvirt/images/rhai-win11-quality/lease-controls-20261025.iso",
+  "purpose": "three source-bound current lease controls and later own-scope cleanup",
+  "expiry": "2026-10-25T09:35:52.869113+00:00",
+  "new_compilations": 0,
+  "actual_iso_output": "AGENT_RUNTIME_DIR/recovery.iso; verified medium exported for native input"
+}

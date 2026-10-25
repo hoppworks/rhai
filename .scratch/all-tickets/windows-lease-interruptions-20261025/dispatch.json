@@ -1,0 +1,17 @@
+{
+  "state": "three native current-binary rows accepted, combined review PASS, guest scopes/media/source copy retired",
+  "utc": "2026-10-25T08:40:30.539413+00:00",
+  "serial_inode": 102529120,
+  "serial_offset": 1854155,
+  "start_sha256": "7dafdc57b4697c0e332767db26dcdf5af1e96f8e3bf499fba644f6956c0451d1",
+  "native_compiler_launches": 0,
+  "driver_cases_expected": 3,
+  "expiry_unchanged": "2026-10-25T09:35:52.869113+00:00",
+  "guest_screen": "RhaiTest original console prompt; black display woke with Shift, no authentication or process restart",
+  "host_capacity": "74GiB RAM available;169448202240bytes free images filesystem; native cached build only",
+  "native_public_driver_launches": 3,
+  "semantic_results": "semantic-results.json",
+  "cleanup": "guest-cleanup-receipt.json",
+  "decoder_first_failure": "private stage-name collision at second replay; no native assertion/test rerun",
+  "build": "original retained build remains untouched, original expiry unchanged"
+}

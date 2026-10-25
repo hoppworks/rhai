@@ -265,3 +265,86 @@ Start's ReadAllText end-anchor rejected CRLF after successful build. ReadAllLine
 Combined affected review PASS; sole record-count ambiguity corrected:13manifest pins versus11actual compiled files. New canonical control matches executed text except sourcefile placement; two exact CRLF regex substitutions, alternate wrapper dependent pins refreshed. Original frozen sources, native exports, reviews, parser failures and source/negative controls retained in `windows-workhorse-retirement-20261025/`. Fast-input corruption/unmappedampersand occurred before Start; media assembly SyntaxError occurred before genisoimage, exact empty scope retired; plain helper then two tiny input images (second metadata correction). These are preparation history, not product REDs. Duration/cost/tokens absent from receipts unknown; native allocation bounds unchanged930+30/180compiler/180Driver/180export,64files/4MiBeach/16MiBtotal.
 
 Both new control scopes verified terminal/nonreparse/bounded/no runtime, removed and fresh Test-Path absence guards passed; screenshot records cleanup. Original sdb/sdc restored, exact owned ISO copies removed after hash-verified export; assembly source copy and all owned POSIX scopes retired. Retain only exact current guest C# build under original2h expiry and input applicability for immediately compatible remaining custody controls; expiry not reset. Never reuse historical10-10 guest builds by path alone. Other custody faults/current-binary coverage, Windows Rust/Cargo, all product/native feature/MSRV/release and fullA–F remain open.
+
+## Superseded Windows gate proposal wording (2026-10-25)
+
+# Native Windows scoped execution gate
+
+Status: implementation and native proof required before another Windows build.
+
+## Proposed mechanism
+
+Use a small native guest supervisor that owns an unnamed job object with
+JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE. Keep its handle private and non-inheritable.
+Create the payload suspended, assign its process handle to the job, and resume only
+after assignment succeeds. On failure, terminate and wait for the suspended process;
+never start unowned work. A stopped supervisor closes the last job handle so owned
+members are terminated. Normal completion also closes remaining task members.
+
+This follows Microsoft's documented
+[job lifetime and membership](https://learn.microsoft.com/en-us/windows/win32/procthread/job-objects),
+[process creation](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessw)
+and [job assignment](https://learn.microsoft.com/en-us/windows/win32/api/jobapi2/nf-jobapi2-assignprocesstojobobject)
+APIs; it remains a design proposal, not tested guest behavior.
+
+## Resources
+
+- Allocate an exact unique effort-owned runtime below C:\RhaiQuality\runs.
+- Copy the source under that runtime. Scope CARGO_HOME, CARGO_TARGET_DIR, TEMP and
+  TMP there; generated Cargo.lock/build source must stay in the source copy.
+- An independent guest monitor retains runtime ownership after supervisor death,
+  confirms no active owned job members, exports evidence, and removes only that
+  recorded runtime. Stopping SSH alone cannot fulfill this role.
+- Never touch baseline-source-v2, baseline-source, backups or unrelated processes.
+- Export logs, exit status and explicit cleanup outcomes before deleting runtime.
+- Keep native compilation and reused test binaries in one bounded invocation.
+
+## Required proof
+
+1. Payload and grandchild report actual job membership before acceptance work.
+2. Success, failure and guest deadline stop all owned members and remove runtime.
+3. Deliberately stop supervisor while grandchild is alive; independently confirm
+   termination plus runtime cleanup, preserving a separately owned sentinel.
+4. Exercise assignment failure and nested job context; no silent fallback.
+5. Abort controlling connection while work is running; guest lease/watchdog still
+   bounds work and exports diagnostic status.
+6. Negative assertion control must fail; restored assertion must pass.
+
+## Unverified
+
+All implementation, interruption/lease behavior, native runtime cleanup and
+integration with this project's Windows test command remain unverified.
+
+
+## Superseded compact state before current lease controls (2026-10-25)
+
+**Next action:** Continue current-binary Windows custody fault coverage on workhorse. Compare existing disconnect/client-death/replay/monitor-death bindings/helpers with the now-tested source and choose the genuinely missing affected control. Reuse the exact retained C# build only while its sources/compiler/limits and original expiry in `windows-workhorse-retirement-20261025/execution-binding.json` apply. Do not repeat the accepted abort/environment cases or start Windows Cargo before complete custody.
+
+
+
+**Authority:** Autonomous strict implementation and atomic commit/push to `https://github.com/hoppworks/rhai.git` main; no public-upstream writes or remote task branches. Author/committer exactly `hoppworks`. Preserve foreign work, processes and guests. Existing human instructions supersede agent-created pending/stop labels; actual safety boundaries and consumed limits remain.
+
+**Rules:** Local central agent-skills d6024420e9a829e97e1857ae3a853d832348c83f plus current uncommitted applicable core/skill edits; common SHA e1a3b95adcd4384e5c65b447c482f2ce0f86d13dab37a36a53fc2d9129b81932. Lllm tracked central same HEAD, common fa1c6e656d0f1d3e9c3c7596cf911203ae27094d38be5484d7a385ae11a3f65b; do not assert uncommitted rules identical. Project AGENTS37f95ff6a80be28bc21e9e523674f46f3ce6153a1923c708b86333bf21bba37c. Reuse unchanged proof; one combined review per coherent package. No fixed heavy-slot count.
+
+**Current integrated source:** Private child environment published asb0b365639 on fork main; current retirement integration is the next atomic candidate. All13 native manifest source pins match;11 were actual compiled inputs. Original abort Driver0/payload42 recovered after parser failure,2107entries/613419011bytes retired, exact snapshot/CRC/runtime proof and affected environment GREEN pass combined review. Original observer false preserved. Proof: `windows-workhorse-retirement-20261025/`.
+
+**Accepted scope:** A closes Linux/Rust1.77.2 committed-first-cause only. E metadata/docs closes at its recorded source scope. B/C/D/F and full Ticket03/release remain open. Linux typed stdin BrokenPipe and focused injected WriteZero are integrated as0c6c51b9; Darwin native stdin counterpart accepted. Exact platform/profile applicability lives in `docs/sys-package-plan.md` and original proof folders, not a blanket ticket closure.
+
+**Recent named rows:** Linux X24/X25/X34/X35/X36/X37/X38 sync/unchecked criteria and R3 no_index are accepted at their recorded scopes. Native Darwin1.77.2 X36 four setup selectors pass four profiles (16GREEN); X25kill/X37finaldrop/X38capture gained11profile rows; paired DirectChild/Managed pipe-closed ownership gained8rows with full base sys_process52/0/1preexistingignored. Proofs `darwin-x36-setup-20261025/`, `darwin-lifecycle-profiles-20261025/`, `darwin-pipeclosed-20261025/`. All corresponding independent reviews pass. Detailed Linux row inventory and old status preserved in history below; original accepted evidence remains authoritative.
+
+**Windows accepted scope:** Generic payload-failure remains accepted narrowly, not its intended lock cause. Private child env has original native RED42/GREEN0 and current affected GREEN on the retirement backend; assertion method unchanged. Real production Job large-work abort retirement now accepted. Filesystem-only fixture remains separate, reused at exact source hashes. One BuildOnly allocation/four compiler processes (three outputs + expected missing-file control), two public Drivers; no rebuild/abort repeat. Saved parser repair and readback validate16CRC records plus wrong-entry/wrongTMP expectations. Full Windows custody/Rust/product remains open.
+
+**Windows resources:** User-selected workhorse VMUUIDdc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19 is running, RhaiTest accessible. Both new mutable control scopes removed/read back absent; owned media removed after restoring originals; assembly sources/POSIX scopes retired. Only exact current guest C# build retained under unchanged2h expiry for compatible followups. Original guest scopes/builds with expired10-10 retention are historical references. Preserve dirty original checkouts; no guest/image reset or foreign process action.
+
+**Resources/history:** Owned POSIX scopes and builds for accepted recent rows retired exactly; Windows source adoption used two offline-only scopes; subsequent native retirement resources are accounted above. Cumulative durations, causes, allocations, old accepted rows and the superseded compact state are in `coordinator-history-20261015.md` and original receipts. Parser/setup failures are distinct from product assertions; expected REDs are not correction failures. Cost/token totals unavailable. Strict SSH alias lllm works without key changes; historical IP mismatch remains recorded. Preserve dirty `/home/Daniel/projects/rhai`, `/root/projects/rhai-wayfinder-20261008` and original Mac checkout.
+
+
+## Current Windows lease controls (2026-10-25)
+
+At base38c2cb815, three previously accepted02 scripts were retargeted to the same current colocated native Runner/Driver/Payload and fresh unique scopes. Obsolete copy-runner-into-new-driver-root preparation removed; shared preflight verifies accepted native build receipt,13source/manifests/3binaries/compiler, script hashes/PSsyntax/fresh absent roots and disk, with unchanged original expiry09:35:52UTC. Execution bodies retain mode/status/identity/marker/drain/export checks. Targeted CRLF-safe literalRUNTIME binding+negative existing-snapshot absence control and Force leftovers checks strengthen readback. Reviewer initially conflated active scoped-GUID with retained .scoped-evidence-GUID; actual allocation/snapshot source and prior native stdout corrected that finding. No snapshot was rejected or deleted as an active runtime. Actual cleanup gap fixed with host-validated export binding.
+
+All three current cases pass once: disconnect-alive/client-death/replay Driver0,payload125, clients78/1/78, fresh post-transfer challenges4/4/5,8CRC-valid ordered journals each, EXACTJob proof and snapshot identity/hash binding, marker wrong-expectation and existing-snapshot-as-absent RED before positives, independent exactPID/start stopped/literalruntimeabsent. Work11entries/0bytes each: empty work only. Each41contiguous frames/10files; host receipt e0d978b6 binds all3 full file/hash inventories. No C# compiler, no success/abort rerun. Source/acceptance combined review PASS. Durations/cost/tokens not captured are unknown. Bounds180driver/190observer/10exit/10drain/180export/64files/4MiBeach/16MiBtotal/3500framechars;3cases worst1170s. Newscope within original cache expiry admitted on host clock; guest clock not used to renew it.
+
+Initial medium89b877 was neverattached/executed; replaced after sourcecorrections. Two later media6c3eb/5a42 deliver exactsame six sourcefiles plus actual hostvalidationreceipt, all ISOfile bytes read back. A saved-data decoder stage-name collision stopped before second decode; tag-specific stage fixed, validatedfirstexport reused, remaining2savedstreams decoded, no native rerun. Failed log preserved, local scopes retired. Exact cleanup source eff1a22c and hostreceiptSHA guarded in invocation; all3roots checked against every exported original+inputfixture, rejection ofunknown entries, allobserverflags/currentPIDstart/runtime, before anyremove. Native RHAI_CUSTODY_CLEANUP receipt confirms3roots absent and retained build untouched. Original sdc restored,2own media hash-verified/exported/unlinked, exact sourcecopy retired. Only compatible C# build remains under unchanged expiry.
+
+Gate audit preserves oldmonitor-death actual6identity stop/sentinel andobserverruntime retirement without claiming a complete monitor/backend receipt; nested-refusal is publicadmission only. Real gaps are both-member pre-work membership, deadline, failed atomiccreation/jobassociation, failed export/cleanup and bounded project-command composition. PayloadJOB_LIST is inside suspendedCreateProcessW, not separateAssignProcessToJobObject; oldgate wording archived and existinggateupdated. NativeRhaiRust/sys/net/platform/feature/MSRV/release/fullA–F remain open. Next implement bounded pair/deadline composition, not additional ordinarylease repeats.

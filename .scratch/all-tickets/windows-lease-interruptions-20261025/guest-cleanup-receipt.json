@@ -1,0 +1,11 @@
+{
+  "batch": "rhai-current-lease-controls-3b8e6247b6114950b100e00d121f704a",
+  "host_receipt_sha256": "e0d978b65c47883051dcf94a4e1e5a18e42efd4b3c4fc69e49ca8a670fa3d508",
+  "retired": [
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\custody-disconnect-alive-c2815485ebee",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\custody-client-death-f9f42704c04c",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\custody-replay-229f06e521c0"
+  ],
+  "retained_build_touched": false,
+  "all_scopes_absent": true
+}

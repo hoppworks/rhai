@@ -1,0 +1,91 @@
+{
+  "frames": 41,
+  "files": {
+    "bootstrap.stdout": {
+      "path": "bootstrap.stdout",
+      "sha256": "437c4f509bce42295ff1e196129e5b606a9ec1f0dc6f2b543d55c428ae4bd74c",
+      "length": 575
+    },
+    "bootstrap.stderr": {
+      "path": "bootstrap.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "observer.json": {
+      "path": "observer.json",
+      "sha256": "8e17ede26439ec2eff3bfa0956f21ba4a20e97482131637dfe251d0ab5500e4c",
+      "length": 1148
+    },
+    "run/.scoped-run-cfc48aca3f47459c82ff032da7fda5c1.journal": {
+      "path": "run/.scoped-run-cfc48aca3f47459c82ff032da7fda5c1.journal",
+      "sha256": "668868482813ecefb1b3caef22723f0fec16be4473dc344533187c040317dc07",
+      "length": 2383
+    },
+    "run/.scoped-evidence-67f1a78d0a15413b8be228a40e126e00/manifest.txt": {
+      "path": "run/.scoped-evidence-67f1a78d0a15413b8be228a40e126e00/manifest.txt",
+      "sha256": "d7ee948ff7b6b95ed7b36ec4c68b003964f208f4da8369fd8f33a3d2e265a5f9",
+      "length": 565
+    },
+    "run/.scoped-evidence-67f1a78d0a15413b8be228a40e126e00/stderr.log": {
+      "path": "run/.scoped-evidence-67f1a78d0a15413b8be228a40e126e00/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/.scoped-evidence-67f1a78d0a15413b8be228a40e126e00/stdout.log": {
+      "path": "run/.scoped-evidence-67f1a78d0a15413b8be228a40e126e00/stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/.scoped-evidence-67f1a78d0a15413b8be228a40e126e00/runtime/fixture.exe": {
+      "path": "run/.scoped-evidence-67f1a78d0a15413b8be228a40e126e00/runtime/fixture.exe",
+      "sha256": "8564df0bdf03e771c3cc27c7b1b01a77fe3184d44ef9e0a52e1053404a0a3058",
+      "length": 9728
+    },
+    "run/.scoped-evidence-67f1a78d0a15413b8be228a40e126e00/runtime/payload-record.txt": {
+      "path": "run/.scoped-evidence-67f1a78d0a15413b8be228a40e126e00/runtime/payload-record.txt",
+      "sha256": "47cc3b9137299b2bc87647aaeaaebdebf8f8e494c26f9247a9d3a44603338d92",
+      "length": 17
+    },
+    "run/.scoped-evidence-67f1a78d0a15413b8be228a40e126e00/runtime/payload-record.txt.identity": {
+      "path": "run/.scoped-evidence-67f1a78d0a15413b8be228a40e126e00/runtime/payload-record.txt.identity",
+      "sha256": "4e16d9822de8de35ffee725d9c8ca8c1ad237bbb602a60004e183d811d2c1f08",
+      "length": 39
+    }
+  },
+  "complete": true,
+  "begin": {
+    "id": "rhai-disconnect-alive-current-c2815485ebee42e7b7eb1c99b6f7a20a",
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\custody-disconnect-alive-c2815485ebee",
+    "run": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\custody-disconnect-alive-c2815485ebee\\run",
+    "exit": 0,
+    "accepted": true,
+    "failure": "",
+    "fresh_host_record": true,
+    "wrong_expectation_red": true,
+    "payload_stopped_readback": true,
+    "payload_pid": 10288,
+    "payload_creation": 134373948495157320,
+    "allocated_runtime": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\custody-disconnect-alive-c2815485ebee\\run\\scoped-67f1a78d0a15413b8be228a40e126e00",
+    "runtime_absent_readback": true,
+    "runtime_absence_negative_control": true,
+    "parent_environment_changed": false,
+    "driver_launched": true,
+    "exact_driver_exited": true,
+    "pipes_drained": true,
+    "retained_driver_handles": false,
+    "retained_binaries": {
+      "ScopedRunner.exe": "72b029407411bacf82c0451b1528ba2faa9644537d386e7b0ac4952c2a3986b2",
+      "MonitorAcceptanceDriver.exe": "27b1e6f380b5e75f425db2a993793f5a61f64be74827a8ba1957b0e18d5f059a",
+      "PayloadFixture.exe": "8564df0bdf03e771c3cc27c7b1b01a77fe3184d44ef9e0a52e1053404a0a3058"
+    },
+    "product_run": false
+  },
+  "end": {
+    "id": "rhai-disconnect-alive-current-c2815485ebee42e7b7eb1c99b6f7a20a",
+    "driver_launched": true,
+    "files": 10,
+    "accepted": true,
+    "exit": 0,
+    "guest_evidence_retained": true
+  }
+}

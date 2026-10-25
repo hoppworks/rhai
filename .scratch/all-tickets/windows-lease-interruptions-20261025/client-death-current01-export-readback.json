@@ -1,0 +1,91 @@
+{
+  "frames": 41,
+  "files": {
+    "bootstrap.stdout": {
+      "path": "bootstrap.stdout",
+      "sha256": "6a4f77e2efa670aebdd29fd1013218f64fea68a5891bd2319c52f479ecee0d17",
+      "length": 563
+    },
+    "bootstrap.stderr": {
+      "path": "bootstrap.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "observer.json": {
+      "path": "observer.json",
+      "sha256": "857d92fd5269c55bb4728971745e32117702a2b413a0d4a013b4f365cc59a62c",
+      "length": 1131
+    },
+    "run/.scoped-run-d9e363692705493baaeb1578090cdabb.journal": {
+      "path": "run/.scoped-run-d9e363692705493baaeb1578090cdabb.journal",
+      "sha256": "ebd21a200776cc1038fb4b75cd9a8090f30bf932ae28c9b0ccc3a328184d5089",
+      "length": 2375
+    },
+    "run/.scoped-evidence-2eb238fde5fe4bccadbc26b1aa94fb3e/manifest.txt": {
+      "path": "run/.scoped-evidence-2eb238fde5fe4bccadbc26b1aa94fb3e/manifest.txt",
+      "sha256": "7a3b5acda8bfd298ca2291253872c27aa11999424cb486bedbafb3af16bd515b",
+      "length": 565
+    },
+    "run/.scoped-evidence-2eb238fde5fe4bccadbc26b1aa94fb3e/stderr.log": {
+      "path": "run/.scoped-evidence-2eb238fde5fe4bccadbc26b1aa94fb3e/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/.scoped-evidence-2eb238fde5fe4bccadbc26b1aa94fb3e/stdout.log": {
+      "path": "run/.scoped-evidence-2eb238fde5fe4bccadbc26b1aa94fb3e/stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/.scoped-evidence-2eb238fde5fe4bccadbc26b1aa94fb3e/runtime/fixture.exe": {
+      "path": "run/.scoped-evidence-2eb238fde5fe4bccadbc26b1aa94fb3e/runtime/fixture.exe",
+      "sha256": "8564df0bdf03e771c3cc27c7b1b01a77fe3184d44ef9e0a52e1053404a0a3058",
+      "length": 9728
+    },
+    "run/.scoped-evidence-2eb238fde5fe4bccadbc26b1aa94fb3e/runtime/payload-record.txt": {
+      "path": "run/.scoped-evidence-2eb238fde5fe4bccadbc26b1aa94fb3e/runtime/payload-record.txt",
+      "sha256": "47cc3b9137299b2bc87647aaeaaebdebf8f8e494c26f9247a9d3a44603338d92",
+      "length": 17
+    },
+    "run/.scoped-evidence-2eb238fde5fe4bccadbc26b1aa94fb3e/runtime/payload-record.txt.identity": {
+      "path": "run/.scoped-evidence-2eb238fde5fe4bccadbc26b1aa94fb3e/runtime/payload-record.txt.identity",
+      "sha256": "f29a7e3121b8a85c4a32b98464408cba07591a28a2fb7fcd4726a8c710b0bd42",
+      "length": 38
+    }
+  },
+  "complete": true,
+  "begin": {
+    "id": "rhai-client-death-current-f9f42704c04c432e866e40380ec2da47",
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\custody-client-death-f9f42704c04c",
+    "run": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\custody-client-death-f9f42704c04c\\run",
+    "exit": 0,
+    "accepted": true,
+    "failure": "",
+    "fresh_host_record": true,
+    "wrong_expectation_red": true,
+    "payload_stopped_readback": true,
+    "payload_pid": 9944,
+    "payload_creation": 134373948548066571,
+    "allocated_runtime": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\custody-client-death-f9f42704c04c\\run\\scoped-2eb238fde5fe4bccadbc26b1aa94fb3e",
+    "runtime_absent_readback": true,
+    "runtime_absence_negative_control": true,
+    "parent_environment_changed": false,
+    "driver_launched": true,
+    "exact_driver_exited": true,
+    "pipes_drained": true,
+    "retained_driver_handles": false,
+    "retained_binaries": {
+      "ScopedRunner.exe": "72b029407411bacf82c0451b1528ba2faa9644537d386e7b0ac4952c2a3986b2",
+      "MonitorAcceptanceDriver.exe": "27b1e6f380b5e75f425db2a993793f5a61f64be74827a8ba1957b0e18d5f059a",
+      "PayloadFixture.exe": "8564df0bdf03e771c3cc27c7b1b01a77fe3184d44ef9e0a52e1053404a0a3058"
+    },
+    "product_run": false
+  },
+  "end": {
+    "id": "rhai-client-death-current-f9f42704c04c432e866e40380ec2da47",
+    "driver_launched": true,
+    "files": 10,
+    "accepted": true,
+    "exit": 0,
+    "guest_evidence_retained": true
+  }
+}

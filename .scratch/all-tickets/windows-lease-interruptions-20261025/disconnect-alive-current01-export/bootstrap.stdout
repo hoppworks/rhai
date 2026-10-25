@@ -1,0 +1,10 @@
+CLIENT_EXIT=0x0000004E
+MODE=disconnect-alive;ACTION_CONFIRMED=True;POST_TRANSFER_CHALLENGES=4
+JOURNAL=C:\Users\RhaiTest\.local\share\agent-builds\rhai\custody-disconnect-alive-c2815485ebee\run\.scoped-run-cfc48aca3f47459c82ff032da7fda5c1.journal
+RUNTIME=C:\Users\RhaiTest\.local\share\agent-builds\rhai\custody-disconnect-alive-c2815485ebee\run\scoped-67f1a78d0a15413b8be228a40e126e00
+RUNTIME_IDENTITY=46E8EB5AE8EB46B1:000299870000000a0000000000000000
+PAYLOAD_EXIT=0000007D
+SUPERVISION=MonitorStopped
+CLEANUP_CONFIRMED=True
+RUNTIME_REMOVED=True
+HOST_EXPORTED=False

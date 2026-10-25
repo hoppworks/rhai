@@ -1,0 +1,1 @@
+One saved-data decoder orchestration failed before the second case because the reused single-case helper allocated the same private stage name twice. Use the unique case tag for each stage; reuse the already validated first export and decode the two remaining archived streams. No native Driver, build or assertion was repeated. The failed log is preserved.

@@ -1,0 +1,91 @@
+{
+  "frames": 41,
+  "files": {
+    "bootstrap.stdout": {
+      "path": "bootstrap.stdout",
+      "sha256": "bca06ae00bfa598e0ba5b68aecf594647870f11be7500911736ddf819c9b9cc8",
+      "length": 545
+    },
+    "bootstrap.stderr": {
+      "path": "bootstrap.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "observer.json": {
+      "path": "observer.json",
+      "sha256": "c46acfe91152f02fd19ace6bd768ceed31c990aa9d562225ea265ea900d2a4fb",
+      "length": 1107
+    },
+    "run/.scoped-run-ee4124ab67c24bf29adc0cc42d396569.journal": {
+      "path": "run/.scoped-run-ee4124ab67c24bf29adc0cc42d396569.journal",
+      "sha256": "f3dd6960245e9d3af1939f7cdc804fbbce3cf3d971cd3bfd3b625efe90142d69",
+      "length": 2363
+    },
+    "run/.scoped-evidence-cbe56f13cff94677bb24a5b6eb6716da/manifest.txt": {
+      "path": "run/.scoped-evidence-cbe56f13cff94677bb24a5b6eb6716da/manifest.txt",
+      "sha256": "71e023d3cbd73e9b4d9b27e42bf2e38c4ee46114015972e287991bda3183fc90",
+      "length": 565
+    },
+    "run/.scoped-evidence-cbe56f13cff94677bb24a5b6eb6716da/stderr.log": {
+      "path": "run/.scoped-evidence-cbe56f13cff94677bb24a5b6eb6716da/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/.scoped-evidence-cbe56f13cff94677bb24a5b6eb6716da/stdout.log": {
+      "path": "run/.scoped-evidence-cbe56f13cff94677bb24a5b6eb6716da/stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/.scoped-evidence-cbe56f13cff94677bb24a5b6eb6716da/runtime/fixture.exe": {
+      "path": "run/.scoped-evidence-cbe56f13cff94677bb24a5b6eb6716da/runtime/fixture.exe",
+      "sha256": "8564df0bdf03e771c3cc27c7b1b01a77fe3184d44ef9e0a52e1053404a0a3058",
+      "length": 9728
+    },
+    "run/.scoped-evidence-cbe56f13cff94677bb24a5b6eb6716da/runtime/payload-record.txt": {
+      "path": "run/.scoped-evidence-cbe56f13cff94677bb24a5b6eb6716da/runtime/payload-record.txt",
+      "sha256": "47cc3b9137299b2bc87647aaeaaebdebf8f8e494c26f9247a9d3a44603338d92",
+      "length": 17
+    },
+    "run/.scoped-evidence-cbe56f13cff94677bb24a5b6eb6716da/runtime/payload-record.txt.identity": {
+      "path": "run/.scoped-evidence-cbe56f13cff94677bb24a5b6eb6716da/runtime/payload-record.txt.identity",
+      "sha256": "59ef030fcf3daafd1229d00641b9131648db2808fc53f1f0a5c1f0333a946e4a",
+      "length": 38
+    }
+  },
+  "complete": true,
+  "begin": {
+    "id": "rhai-replay-current-229f06e521c0433d81600fd5e4c379e3",
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\custody-replay-229f06e521c0",
+    "run": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\custody-replay-229f06e521c0\\run",
+    "exit": 0,
+    "accepted": true,
+    "failure": "",
+    "fresh_host_record": true,
+    "wrong_expectation_red": true,
+    "payload_stopped_readback": true,
+    "payload_pid": 1820,
+    "payload_creation": 134373948600186764,
+    "allocated_runtime": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\custody-replay-229f06e521c0\\run\\scoped-cbe56f13cff94677bb24a5b6eb6716da",
+    "runtime_absent_readback": true,
+    "runtime_absence_negative_control": true,
+    "parent_environment_changed": false,
+    "driver_launched": true,
+    "exact_driver_exited": true,
+    "pipes_drained": true,
+    "retained_driver_handles": false,
+    "retained_binaries": {
+      "ScopedRunner.exe": "72b029407411bacf82c0451b1528ba2faa9644537d386e7b0ac4952c2a3986b2",
+      "MonitorAcceptanceDriver.exe": "27b1e6f380b5e75f425db2a993793f5a61f64be74827a8ba1957b0e18d5f059a",
+      "PayloadFixture.exe": "8564df0bdf03e771c3cc27c7b1b01a77fe3184d44ef9e0a52e1053404a0a3058"
+    },
+    "product_run": false
+  },
+  "end": {
+    "id": "rhai-replay-current-229f06e521c0433d81600fd5e4c379e3",
+    "driver_launched": true,
+    "files": 10,
+    "accepted": true,
+    "exit": 0,
+    "guest_evidence_retained": true
+  }
+}

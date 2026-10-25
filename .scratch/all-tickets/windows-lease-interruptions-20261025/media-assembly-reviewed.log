@@ -1,0 +1,15 @@
+{
+  "source": "/var/roothome/projects/rhai-lease-controls-20261025-eac5ff47",
+  "output_medium": "/var/lib/libvirt/images/rhai-win11-quality/lease-controls-20261025.iso",
+  "iso_sha256": "6c3eb07492b84b2fdf929e9b49cec9693c5db18a60b6de8018368ccb9fe676cf",
+  "files": {
+    "Start.ps1": "7dafdc57b4697c0e332767db26dcdf5af1e96f8e3bf499fba644f6956c0451d1",
+    "bindings.json": "e9bdcbe82ea9ef2d9496e8252a5ffccaaff9cd2ea0eff454c9ee2bda0d45b363",
+    "cleanup.ps1": "eff1a22c0969c338053f638ba0a413822a8798bc97f429d12fd30949bf1b6ece",
+    "client-death.ps1": "231aa2147f8e7e321892857dd642b53a854d74b283257cb4f04ff233af750a8c",
+    "disconnect-alive.ps1": "1e3022a5ceb6a6d14963d6ad6cc3b778fa4ab6f3dd396a689e67fc8b7f3fc1a4",
+    "replay.ps1": "a4ae25aee3789f36d5eeb38c36ea99a40d8bbea9e84fed23cdd3d3ffd8660146"
+  },
+  "execution": "not yet",
+  "lifetime": "exact own immutable source medium; detach/remove after two proof steps; no compiler cache retained"
+}

@@ -1,0 +1,1 @@
+if ((get-filehash e:\start.ps1).hash -eq '7dafdc57b4697c0e332767db26dcdf5af1e96f8e3bf499fba644f6956c0451d1') { & ([scriptblock]::create((get-content e:\start.ps1 -raw))) } else {throw 'batch source mismatch'}
