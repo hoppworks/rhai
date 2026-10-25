@@ -1,0 +1,27 @@
+{
+  "id": "rhai-environment-tools01-1ffc166139d641328a2c769eb7f56d9b",
+  "native_end": {
+    "accepted": true,
+    "exit": 0,
+    "driver_launched": false,
+    "frames": 69,
+    "files": 23,
+    "serial_sha256": "c0e13049cf0a81a42b13cd2aadf9adce33d7d47825b535a10227e713c55bdbfa",
+    "serial_bytes": 39489
+  },
+  "compiler": {
+    "version": "4.14.0-3.26424.7",
+    "runner_exit": 0,
+    "driver_exit": 0,
+    "compiled_source_files_matching_manifest": 13
+  },
+  "binaries": {
+    "MonitorAcceptanceDriver.exe": "afd26a3356956e73f7afd653d12a7098c172c8bf1bb9d870102d3f9425e9d2f0",
+    "ScopedRunner.exe": "b948dcba85ac207b94fe4a4e4bb157fe83492aa6f5d458057c6b4ea0fdc5c8c3"
+  },
+  "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-tools01-1ffc166139d6\\run\\monitor-source-1ffc166139d641328a2c769eb7f56d9b",
+  "fixture_reuse": {
+    "path": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-fixture01-33ae77140048\\run\\monitor-source-33ae77140048452c913934f8cecccf9f\\build\\PayloadFixture.exe",
+    "sha256": "e663ad3f7acd1b2b170433e0335e5d29c499a80751f15eb077e7df8b51e498b2"
+  }
+}

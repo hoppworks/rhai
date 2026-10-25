@@ -1,0 +1,98 @@
+{
+  "frames": 35,
+  "files": {
+    "bootstrap.stdout": {
+      "path": "bootstrap.stdout",
+      "sha256": "ba1b66ac91fdea6928214a07f92e80e32dc5e50b930d8d896449b1ad8007d0f5",
+      "length": 579
+    },
+    "bootstrap.stderr": {
+      "path": "bootstrap.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "observer.json": {
+      "path": "observer.json",
+      "sha256": "d198ca2f7533e2941652d6001d883918d495532f3a3ff56daa208ed546ad5059",
+      "length": 1468
+    },
+    "run/.scoped-run-d3b34bb6d8ce4696b897ad139ecc3509.journal": {
+      "path": "run/.scoped-run-d3b34bb6d8ce4696b897ad139ecc3509.journal",
+      "sha256": "8584ac6d75909dc60e2a5c35d7552146764b32d623a793c7ea243c69bfde3350",
+      "length": 2306
+    },
+    "run/.scoped-evidence-e5d6179102ee420485edf3c692ba143e/manifest.txt": {
+      "path": "run/.scoped-evidence-e5d6179102ee420485edf3c692ba143e/manifest.txt",
+      "sha256": "c6b949aa2352fc906e2b32a73dcd4098508e55e182c3c5cc8b385a240a48841b",
+      "length": 401
+    },
+    "run/.scoped-evidence-e5d6179102ee420485edf3c692ba143e/stderr.log": {
+      "path": "run/.scoped-evidence-e5d6179102ee420485edf3c692ba143e/stderr.log",
+      "sha256": "6bd81cddbfd37125148df50d0423f11da31fcc8ba47295d2ec5b74b10691e767",
+      "length": 260
+    },
+    "run/.scoped-evidence-e5d6179102ee420485edf3c692ba143e/stdout.log": {
+      "path": "run/.scoped-evidence-e5d6179102ee420485edf3c692ba143e/stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/.scoped-evidence-e5d6179102ee420485edf3c692ba143e/runtime/fixture.exe": {
+      "path": "run/.scoped-evidence-e5d6179102ee420485edf3c692ba143e/runtime/fixture.exe",
+      "sha256": "e663ad3f7acd1b2b170433e0335e5d29c499a80751f15eb077e7df8b51e498b2",
+      "length": 6144
+    },
+    "run/.scoped-evidence-e5d6179102ee420485edf3c692ba143e/runtime/payload-environment.txt": {
+      "path": "run/.scoped-evidence-e5d6179102ee420485edf3c692ba143e/runtime/payload-environment.txt",
+      "sha256": "30aae88d970b615ef71474c740a200e5cdd2e207b8530211a7b6354ccdb0c4d7",
+      "length": 498
+    }
+  },
+  "complete": true,
+  "begin": {
+    "id": "rhai-environment-red01-1d8b0ab26dbc4516b26d7f23ec9e868a",
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-1d8b0ab26dbc4516b26d7f23ec9e868a",
+    "run": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-1d8b0ab26dbc4516b26d7f23ec9e868a\\run",
+    "exit": 0,
+    "accepted": true,
+    "failure": "",
+    "fresh_host_record": true,
+    "phase": "RED",
+    "expected_payload_exit": "0000002A",
+    "environment_contract_red": true,
+    "environment_contract_green": false,
+    "allocated_runtime": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-1d8b0ab26dbc4516b26d7f23ec9e868a\\run\\scoped-e5d6179102ee420485edf3c692ba143e",
+    "environment_observed": {
+      "AGENT_RUNTIME_DIR": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-control-1d8b0ab26dbc4516b26d7f23ec9e868a\\run",
+      "TMP": "C:\\Users\\RhaiTest\\AppData\\Local\\Temp",
+      "TEMP": "C:\\Users\\RhaiTest\\AppData\\Local\\Temp",
+      "CARGO_HOME": "",
+      "CARGO_TARGET_DIR": ""
+    },
+    "environment_mismatches": [
+      "AGENT_RUNTIME_DIR",
+      "TMP",
+      "TEMP",
+      "CARGO_HOME",
+      "CARGO_TARGET_DIR"
+    ],
+    "parent_environment_changed": false,
+    "fixture_sha256": "e663ad3f7acd1b2b170433e0335e5d29c499a80751f15eb077e7df8b51e498b2",
+    "driver_launched": true,
+    "exact_driver_exited": true,
+    "pipes_drained": true,
+    "retained_driver_handles": false,
+    "retained_binaries": {
+      "ScopedRunner.exe": "c3d91a8bcf550ef8087b7c057455ac876fe0a958b4e22de816b55daa659cb486",
+      "MonitorAcceptanceDriver.exe": "caf4afaa2f604fb47fc554c82d9493854be0959c8d329bff7a88fd7fe9e827cb"
+    },
+    "product_run": false
+  },
+  "end": {
+    "id": "rhai-environment-red01-1d8b0ab26dbc4516b26d7f23ec9e868a",
+    "driver_launched": true,
+    "files": 9,
+    "accepted": true,
+    "exit": 0,
+    "guest_evidence_retained": true
+  }
+}

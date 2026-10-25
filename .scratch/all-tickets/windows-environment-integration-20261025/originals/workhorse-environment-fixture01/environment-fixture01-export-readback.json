@@ -1,0 +1,120 @@
+{
+  "frames": 54,
+  "files": {
+    "bootstrap.stdout": {
+      "path": "bootstrap.stdout",
+      "sha256": "28cb57c9315d0fa871da52a2e00bba30b8b19113a2fa24e5abe8911e14b6871e",
+      "length": 1006
+    },
+    "bootstrap.stderr": {
+      "path": "bootstrap.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "observer.json": {
+      "path": "observer.json",
+      "sha256": "4cf4f9503ec07b013930af6dbde99cec2cf2217cf8268e1984aaa86340e690f6",
+      "length": 492
+    },
+    "run/monitor-source-33ae77140048452c913934f8cecccf9f/logs/compile-PayloadFixture.stderr.txt": {
+      "path": "run/monitor-source-33ae77140048452c913934f8cecccf9f/logs/compile-PayloadFixture.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-33ae77140048452c913934f8cecccf9f/logs/compile-PayloadFixture.stdout.txt": {
+      "path": "run/monitor-source-33ae77140048452c913934f8cecccf9f/logs/compile-PayloadFixture.stdout.txt",
+      "sha256": "7d6f399bc4ddebe9af0b4976bbe3450aac7fb48c8eba5ec95e37cae5283c787d",
+      "length": 131
+    },
+    "run/monitor-source-33ae77140048452c913934f8cecccf9f/logs/exit-code-regression-17-wrong-expected.stderr.txt": {
+      "path": "run/monitor-source-33ae77140048452c913934f8cecccf9f/logs/exit-code-regression-17-wrong-expected.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-33ae77140048452c913934f8cecccf9f/logs/exit-code-regression-17-wrong-expected.stdout.txt": {
+      "path": "run/monitor-source-33ae77140048452c913934f8cecccf9f/logs/exit-code-regression-17-wrong-expected.stdout.txt",
+      "sha256": "69826b89317496600a95e98535238d73a7091d7e0ff5c9585f08c25bb71a75c3",
+      "length": 40
+    },
+    "run/monitor-source-33ae77140048452c913934f8cecccf9f/logs/exit-code-regression-17.stderr.txt": {
+      "path": "run/monitor-source-33ae77140048452c913934f8cecccf9f/logs/exit-code-regression-17.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-33ae77140048452c913934f8cecccf9f/logs/exit-code-regression-17.stdout.txt": {
+      "path": "run/monitor-source-33ae77140048452c913934f8cecccf9f/logs/exit-code-regression-17.stdout.txt",
+      "sha256": "32d543b6dda9fd1365b76e3057e9fac50673187a4c91cb8c18413593043e1689",
+      "length": 25
+    },
+    "run/monitor-source-33ae77140048452c913934f8cecccf9f/logs/exit-code-regression-zero.stderr.txt": {
+      "path": "run/monitor-source-33ae77140048452c913934f8cecccf9f/logs/exit-code-regression-zero.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-33ae77140048452c913934f8cecccf9f/logs/exit-code-regression-zero.stdout.txt": {
+      "path": "run/monitor-source-33ae77140048452c913934f8cecccf9f/logs/exit-code-regression-zero.stdout.txt",
+      "sha256": "2b98ea68ce93cdb1de4a7d10f4c46c17aacc658cc11ed8e32cc0d15612e9c568",
+      "length": 27
+    },
+    "run/monitor-source-33ae77140048452c913934f8cecccf9f/logs/job-members.jsonl": {
+      "path": "run/monitor-source-33ae77140048452c913934f8cecccf9f/logs/job-members.jsonl",
+      "sha256": "9110b3171669a1e1a4fbc76cba97facb0b9cf8ecb310c91a828177aa0c45ff83",
+      "length": 372
+    },
+    "run/monitor-source-33ae77140048452c913934f8cecccf9f/logs/setup-failure-child.stderr.txt": {
+      "path": "run/monitor-source-33ae77140048452c913934f8cecccf9f/logs/setup-failure-child.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-33ae77140048452c913934f8cecccf9f/logs/setup-failure-child.stdout.txt": {
+      "path": "run/monitor-source-33ae77140048452c913934f8cecccf9f/logs/setup-failure-child.stdout.txt",
+      "sha256": "8ff179f55be1a9908f3e33e97da8aafce587111fab0b67cd5a0cf189c4bad44d",
+      "length": 93
+    },
+    "run/monitor-source-33ae77140048452c913934f8cecccf9f/logs/setup-failure-control.stderr.txt": {
+      "path": "run/monitor-source-33ae77140048452c913934f8cecccf9f/logs/setup-failure-control.stderr.txt",
+      "sha256": "dc383c8e63001e4200c71dd2667219139fd7c53397e9e0b15ef4bff8bc79b12c",
+      "length": 81
+    },
+    "run/monitor-source-33ae77140048452c913934f8cecccf9f/logs/setup-failure-control.stdout.txt": {
+      "path": "run/monitor-source-33ae77140048452c913934f8cecccf9f/logs/setup-failure-control.stdout.txt",
+      "sha256": "a1064b1c88c57b95c4efbc4875ef110c1b3610960a8f19b8180b39c0e6a1a3b9",
+      "length": 118
+    },
+    "run/monitor-source-33ae77140048452c913934f8cecccf9f/logs/setup-failure-control.txt": {
+      "path": "run/monitor-source-33ae77140048452c913934f8cecccf9f/logs/setup-failure-control.txt",
+      "sha256": "de440a552fe4dd754a203a0dc3efce44e1bc70d2409a4ad1278e7350323f7428",
+      "length": 211
+    },
+    "run/monitor-source-33ae77140048452c913934f8cecccf9f/build-manifest.txt": {
+      "path": "run/monitor-source-33ae77140048452c913934f8cecccf9f/build-manifest.txt",
+      "sha256": "df653fa183fa5c51037dfca2242b2b7e97132d02b74be8003277877cfb8efb38",
+      "length": 1735
+    },
+    "run/monitor-source-33ae77140048452c913934f8cecccf9f/run-result.txt": {
+      "path": "run/monitor-source-33ae77140048452c913934f8cecccf9f/run-result.txt",
+      "sha256": "79c5b9102422b2f755e2aed8ef416a0a3ab0156de7c5ba4c85dbeda2e6ac6761",
+      "length": 124
+    }
+  },
+  "complete": true,
+  "begin": {
+    "id": "rhai-environment-fixture01-33ae77140048452c913934f8cecccf9f",
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-fixture01-33ae77140048",
+    "run": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-fixture01-33ae77140048\\run\\monitor-source-33ae77140048452c913934f8cecccf9f",
+    "exit": 0,
+    "accepted": true,
+    "failure": "",
+    "input_manifest_sha256": "0b0736f4d9527dca037591b1f37c4e75f99133fab426acbc49efdbb50709d8ce",
+    "execution_policy_changed": false,
+    "driver_launched": false
+  },
+  "end": {
+    "id": "rhai-environment-fixture01-33ae77140048452c913934f8cecccf9f",
+    "driver_launched": false,
+    "files": 19,
+    "accepted": true,
+    "exit": 0,
+    "guest_evidence_retained": true
+  }
+}

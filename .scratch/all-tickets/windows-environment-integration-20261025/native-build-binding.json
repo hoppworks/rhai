@@ -1,0 +1,26 @@
+{
+  "native_compiler_sha256": "cf32cb7e8e5691b962e1b6f92b03d87409dd9e7afbed71c5bf77b8203cc56ee1",
+  "native_reexecution": false,
+  "manifests": {
+    "environment-tools01": {
+      "build_manifest": "readback/environment-tools01/run/monitor-source-1ffc166139d641328a2c769eb7f56d9b/build-manifest.txt",
+      "compiled_source_pins": 13,
+      "output_binary_pins": {
+        "build/MonitorAcceptanceDriver.exe": "afd26a3356956e73f7afd653d12a7098c172c8bf1bb9d870102d3f9425e9d2f0",
+        "build/ScopedRunner.exe": "b948dcba85ac207b94fe4a4e4bb157fe83492aa6f5d458057c6b4ea0fdc5c8c3"
+      },
+      "scope": "all tool sources match current; fixture witness source matches current"
+    },
+    "environment-fixture01": {
+      "build_manifest": "readback/environment-fixture01/run/monitor-source-33ae77140048452c913934f8cecccf9f/build-manifest.txt",
+      "compiled_source_pins": 13,
+      "output_binary_pins": {
+        "build/PayloadFixture.exe": "e663ad3f7acd1b2b170433e0335e5d29c499a80751f15eb077e7df8b51e498b2"
+      },
+      "scope": "fixture source and output binary only; other manifest inputs describe original pre-fix RED tool build"
+    }
+  },
+  "all_frozen_inputs_equal_before_wrapper_pin_fix": 26,
+  "frozen_inputs_equal_current": 25,
+  "current_delta": "CompileMonitorAcceptanceDriver.ps1 only: three source hash literals refreshed; compiled C# closure unchanged"
+}

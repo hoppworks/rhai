@@ -588,6 +588,73 @@ internal static class WindowsCustodyBackend
             }
         }
 
+        // Prepare one immutable child environment and private work paths while
+        // the exact allocation is pinned and before any payload can run. Parent
+        // variables never change. An existing staged "work" path is a collision,
+        // not authority to reuse or reset another tree.
+        internal string PreparePayloadEnvironment(ulong deadline)
+        {
+            lock(this)
+            {
+                EnsureFinalizationBudget(deadline,"payload environment preparation");
+                if(disposed || !IsStaged || State!=AllocationState.IdentityRecorded ||
+                    evidenceCaptureStarted || RuntimeIdentity==null ||
+                    !ReadIdentity(runtimeHandle).SameAs(RuntimeIdentity))
+                    throw new InvalidOperationException("private payload environment requires the exact staged allocation");
+                var variables=new SortedDictionary<string,string>(StringComparer.OrdinalIgnoreCase);
+                foreach(System.Collections.DictionaryEntry entry in Environment.GetEnvironmentVariables())
+                {
+                    EnsureFinalizationBudget(deadline,"payload environment snapshot");
+                    string key=entry.Key as string, value=entry.Value as string;
+                    bool driveKey=key!=null && key.Length==3 && key[0]=='=' &&
+                        ((key[1]>='A' && key[1]<='Z') || (key[1]>='a' && key[1]<='z')) && key[2]==':';
+                    if(String.IsNullOrEmpty(key) || value==null || key.IndexOf('\0')>=0 ||
+                        value.IndexOf('\0')>=0 || (key.IndexOf('=')>=0 && !driveKey))
+                        throw new IOException("invalid inherited payload environment entry");
+                    if(variables.Count>=512) throw new IOException("payload environment exceeds512variables");
+                    variables[key]=value;
+                }
+                string work=Path.Combine(RuntimePath,"work");
+                string temp=Path.Combine(work,"temp");
+                string cargoHome=Path.Combine(work,"cargo-home");
+                string target=Path.Combine(work,"target");
+                variables["AGENT_RUNTIME_DIR"]=RuntimePath;
+                variables["TMP"]=temp; variables["TEMP"]=temp;
+                variables["CARGO_HOME"]=cargoHome; variables["CARGO_TARGET_DIR"]=target;
+                if(variables.Count>512) throw new IOException("private payload environment exceeds512variables");
+                var block=new StringBuilder();
+                foreach(var pair in variables)
+                {
+                    long required=(long)block.Length+pair.Key.Length+pair.Value.Length+3;
+                    if(required>32767) throw new IOException("payload environment exceeds32767UTF16characters");
+                    block.Append(pair.Key).Append('=').Append(pair.Value).Append('\0');
+                }
+                block.Append('\0');
+                var directoryPins=new List<SafeFileHandle>();
+                try
+                {
+                    SecurityIdentifier user;
+                    using(WindowsIdentity current=WindowsIdentity.GetCurrent()) user=current==null ? null : current.User;
+                    if(user==null) throw new IOException("current user SID unavailable for private payload work");
+                    foreach(string path in new[]{work,temp,cargoHome,target})
+                    {
+                        EnsureFinalizationBudget(deadline,"private payload work directory");
+                        if(path.Length>MaximumPathLength) throw new IOException("private payload work path exceeds bound");
+                        CreateDestinationDirectory(path);
+                        SafeFileHandle pin=OpenDirectory(path);
+                        directoryPins.Add(pin);
+                        VerifyProtectedDacl(pin,user,AceFlags.ContainerInherit|AceFlags.ObjectInherit,"private payload work directory");
+                    }
+                }
+                finally
+                {
+                    for(int i=directoryPins.Count-1;i>=0;i--) directoryPins[i].Dispose();
+                }
+                EnsureFinalizationBudget(deadline,"payload environment ready");
+                return block.ToString();
+            }
+        }
+
         internal PayloadLogHandles CreatePayloadLogHandles()
         {
             lock(this)

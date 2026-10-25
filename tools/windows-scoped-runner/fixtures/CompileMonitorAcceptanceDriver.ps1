@@ -15,16 +15,16 @@ if ($PSVersionTable.PSVersion.Major -ne 5 -or [IntPtr]::Size -ne 8) {
 $productionExpected = @{
     'tools/windows-scoped-runner/LaunchSpecification.cs' = 'e08957b13d5ed5f86cb37d0545aa876aac50e507692d112b39882f465fff8f2b'
     'tools/windows-scoped-runner/LeaseMonitor.cs' = '72c79f18c96e28f27cd1b7b39b1025da9a250e0608885de7dc48934512a46bfc'
-    'tools/windows-scoped-runner/MonitorPayloadJob.cs' = 'ac5c62bdcd4402b1f103131e082ab6e35a6d979b80629ea6ffef82b386f2353b'
+    'tools/windows-scoped-runner/MonitorPayloadJob.cs' = 'adf9cd13ac7b46323d2beae799e0eff08fc08504d1b1cb6426998127401663d0'
     'tools/windows-scoped-runner/MonitorSpecificationIntake.cs' = '0f0a71563e6c3d99f0c643644d4b56951f6c69ceb3b10b03157f68dc37bb8412'
     'tools/windows-scoped-runner/MonitorStagingHandoff.cs' = 'c541f7d885d032c074461a5a0173b9ae6291ef7d8cd1b9fd2ce4a4f56d1e0e6e'
     'tools/windows-scoped-runner/MonitorTransport.cs' = 'ed23c8615af7d8c1b545d3108342640c46f7e245b4e6a83a7c98bf1720a74de8'
     'tools/windows-scoped-runner/ScopedRunner.cs' = 'd3a77f0daeebd5beed2b277fae9dc6a522acf1454bb5d8d776d84e1dc8e896c8'
     'tools/windows-scoped-runner/SpecificationTransfer.cs' = '7a9edfe98d84868b55146280bd5ed29576ee0c8725cf9f6c785b784bc0ad25c2'
-    'tools/windows-scoped-runner/WindowsCustodyBackend.cs' = 'ba8c3a97fb07e424f18db33bfe814f00f9d9034a6de39094235dc7429b8724a2'
+    'tools/windows-scoped-runner/WindowsCustodyBackend.cs' = 'ae25df2c9e8d26b725cbe605dfa9c56902636c04dbefa018dcde7c4e35c785d8'
 }
 $expected = @{} + $productionExpected
-$expected['tools/windows-scoped-runner/MonitorAcceptanceDriver.cs'] = 'dae12f910058773b16eb0eb48ad47ef94edb413aa812d640435a564bc1d31bad'
+$expected['tools/windows-scoped-runner/MonitorAcceptanceDriver.cs'] = '016c313d545b52df233f0e9607e3b21fa23d9abe7183f89bbac5cc569ab44555'
 $expected['tools/windows-scoped-runner/fixtures/MonitorAcceptanceDriverFixture.cs'] = 'e27fa58588b1988ec0085ac4ec0379f686e5dd48254cd559f5278c057851f054'
 $MaximumLogBytes = 4MB
 $OverallLimitMs = 3600000

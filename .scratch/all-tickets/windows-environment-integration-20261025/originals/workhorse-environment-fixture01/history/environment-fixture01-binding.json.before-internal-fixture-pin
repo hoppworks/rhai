@@ -1,0 +1,13 @@
+{
+  "id": "rhai-environment-fixture01-33ae77140048452c913934f8cecccf9f",
+  "nonce": "33ae77140048452c913934f8cecccf9f",
+  "phase": "Compile new real child-environment contract only; production Runner/Driver retained unchanged for first RED",
+  "entry_sha256": "63fd1561db0f60d49d34bd20b724fcf1d528a880a33c31d2caf9f585da3a7f27",
+  "input_manifest_sha256": "a4fe46b797d64f52f6b9f5e74d4a8ac39b71e647323c669cf2eb4a1569a5caeb",
+  "fixture_sha256": "033764026c35da5d0474dc76bdb640010f6a8b66955b4a75bc015ddd30df7ba3",
+  "bootstrap_sha256": "57740e3829de7b514fe0256c3c30a3d3283ffaba10ea642796151a0971d915f7",
+  "native_started": false,
+  "reuse_boundary": "new PayloadFixture.exe retained only through native environment RED/GREEN then exact disposition",
+  "limits": "existing reviewed930s independent observer; only one csc PayloadFixture compilation; no Cargo/Driver/Runner compile",
+  "later_red": "actual public Driver expected0, child42 with specific FAIL native payload private environment and independent base64 fixture record. Parent variables/cwd independently compare."
+}

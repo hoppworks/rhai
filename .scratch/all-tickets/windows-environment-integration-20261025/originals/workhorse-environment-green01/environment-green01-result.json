@@ -1,0 +1,94 @@
+{
+  "criterion": "Windows native payload private-environment contract (RED/GREEN)",
+  "result": "GREEN accepted with combined independent review; native Windows private-environment criterion closed; overall custody remains open",
+  "red": {
+    "id": "rhai-environment-red01-1d8b0ab26dbc4516b26d7f23ec9e868a",
+    "binding_sha256": "1c12e8149fad99611a8055037c7db538edbd53ec2447556ce6274506b71e62d7",
+    "observer_sha256": "d198ca2f7533e2941652d6001d883918d495532f3a3ff56daa208ed546ad5059",
+    "serial_sha256": "ef3bb9e5f4a415662aeecfe4e097e0f10ea1b6d60b0ebe482b049c60431a1213",
+    "readback_sha256": "3d3e7bd849e7ceb3db91ecf7b0e1449e8feefcd3c34c157c59ad70994865298a",
+    "phase": "RED",
+    "exit": 0,
+    "accepted": true,
+    "expected_payload_exit": "0000002A",
+    "mismatches": [
+      "AGENT_RUNTIME_DIR",
+      "TMP",
+      "TEMP",
+      "CARGO_HOME",
+      "CARGO_TARGET_DIR"
+    ],
+    "fixture_sha256": "e663ad3f7acd1b2b170433e0335e5d29c499a80751f15eb077e7df8b51e498b2",
+    "driver_sha256": "caf4afaa2f604fb47fc554c82d9493854be0959c8d329bff7a88fd7fe9e827cb",
+    "runner_sha256": "c3d91a8bcf550ef8087b7c057455ac876fe0a958b4e22de816b55daa659cb486",
+    "frames": 35,
+    "files": 9
+  },
+  "green": {
+    "id": "rhai-environment-green01-2f7925c491f84b7bbf9e4ff1a118e7f3",
+    "binding_sha256": "8e8c1879c4369d4570da1947229c56596eb005f36aca54ebc8d65d04126f65ad",
+    "dispatch_sha256": "282e826199477102f5d54d64ce24bc149a201b05206f2ceafbd712ffbe61d714",
+    "review_sha256": "210343d6c004541d9755df832d79982d4b15410615165797b4beb0d66ba17f97",
+    "manifest_sha256": "b39b5f20daf479ab1f855f138f08dbead3ea7aa02d95491ccb7286ad405fbaa9",
+    "iso_sha256": "da1c33e56cf3877f163a5d915f4d56b689d80a9d967eaff41722fa437d838d25",
+    "serial_sha256": "3b2cf616d226a580f667e923488e78f85cd90d45e6c05d91340027844c9943ee",
+    "readback_sha256": "20d9075ac0ada429b5e310c7b61077bac6b72a06b70fc5d803105395f5a217ac",
+    "observer_sha256": "058ecd7956a376a8652d023d81ab056dfd5ebff25af039caf995155a9938f83d",
+    "payload_record_sha256": "de10d4b9d4f6ad4785a2f88e9e05caeca0b7d0bafc9859b8b0ff68c92b66a555",
+    "phase": "GREEN",
+    "exit": 0,
+    "accepted": true,
+    "expected_payload_exit": "00000000",
+    "mismatches": [],
+    "fixture_sha256": "e663ad3f7acd1b2b170433e0335e5d29c499a80751f15eb077e7df8b51e498b2",
+    "driver_sha256": "afd26a3356956e73f7afd653d12a7098c172c8bf1bb9d870102d3f9425e9d2f0",
+    "runner_sha256": "b948dcba85ac207b94fe4a4e4bb157fe83492aa6f5d458057c6b4ea0fdc5c8c3",
+    "runtime_removed_guest_readback": true,
+    "frames": 36,
+    "files": 9,
+    "serial_bytes": 34798
+  },
+  "applicability": {
+    "fixture_identical": true,
+    "assertion_source_change": "RED and GREEN observer source differ only in build directory and exact Runner/Driver hashes; all assertion/oracle lines identical.",
+    "observer_source_red_sha256": "4895b277961b3006ef23aaedee7d1517729f433f917a3eba33315dac3f421429",
+    "observer_source_green_sha256": "b20374c2188493a27c7a703f14522fd20c5b4a4c97d2d08dc9ddd78e4a81ce6e",
+    "removed_build_pin_lines": [
+      "$build=Join-Path $env:USERPROFILE '.local\\share\\agent-builds\\rhai\\driver-wh02-af46729dd10c\\run\\monitor-source-af46729dd10c4493afc2264f240c8992\\build'",
+      "$expected=@{'ScopedRunner.exe'='c3d91a8bcf550ef8087b7c057455ac876fe0a958b4e22de816b55daa659cb486';'MonitorAcceptanceDriver.exe'='caf4afaa2f604fb47fc554c82d9493854be0959c8d329bff7a88fd7fe9e827cb'}"
+    ],
+    "added_build_pin_lines": [
+      "$build=Join-Path $env:USERPROFILE '.local\\share\\agent-builds\\rhai\\env-tools01-1ffc166139d6\\run\\monitor-source-1ffc166139d641328a2c769eb7f56d9b\\build'",
+      "$expected=@{'ScopedRunner.exe'='b948dcba85ac207b94fe4a4e4bb157fe83492aa6f5d458057c6b4ea0fdc5c8c3';'MonitorAcceptanceDriver.exe'='afd26a3356956e73f7afd653d12a7098c172c8bf1bb9d870102d3f9425e9d2f0'}"
+    ],
+    "green_native_os": "Windows 11 x86_64 guest on workhorse VM dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19",
+    "green_csharp_compiler": "4.14.0-3.26424.7; runner+driver compile exit 0; 13 compiled source files matched frozen 26-input manifest",
+    "green_build_receipt_sha256": "50ea5ef8602d35be2e0fc5d65b0d764425c9d8711f2b7fbfa26445cf5b1185b7",
+    "cargo_lock_or_feature_gate": "Not applicable to this native PowerShell/C# environment-control harness; this does not close Rust Windows/product acceptance."
+  },
+  "bounds": {
+    "observer_seconds": 10,
+    "exact_driver_exit_wait_seconds": 10,
+    "pipe_drain_seconds": 10,
+    "serial_export_seconds": 180,
+    "max_files": 64,
+    "max_file_bytes": 4194304,
+    "max_total_bytes": 16777216
+  },
+  "preparation_history": {
+    "errors": [
+      "GUI command key timing caused an extra standalone c after a successful disk query.",
+      "Initial guest source hash command mapped colon to semicolon and failed path resolution; corrected Start and observer hashes matched.",
+      "First serial collector invocation failed before parsing because its in-memory exec lacked __file__; same raw bytes were parsed successfully by supplying exact case path.",
+      "First post-parse helper attempted base64 decoding of contract=PASS as data; corrected to parse six encoded fields and literal seventh assertion line."
+    ],
+    "all_prelaunch_or_readback_only": true,
+    "no_extra_native_or_build_rerun": true,
+    "result_preparation_repairs": [
+      "Removed escaped literal newline after the JSON object and corrected the guest readback semantic to true (Test-Path returned False); the receipt was validated before review."
+    ]
+  },
+  "combined_review_report_sha256": "18141e0f60ce3c48bf671d9bd05956340fb51d0fcbd8341c07e8ca50e7036733",
+  "combined_review_verdict": "ACCEPT: only native Windows child private-environment criterion",
+  "remaining_full_custody": "OPEN: private product work retirement and bounded verified export, including aborted run"
+}

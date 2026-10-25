@@ -1,0 +1,6 @@
+{
+  "iso": "/var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/environment-red01.iso",
+  "sha256": "96885c6f6bf9ecaa8e89ecf3eca5d0cb12220b70727010dd1ef0dda72d096ccb",
+  "bytes": 387072,
+  "scope_retired": "/root/.local/share/agent-builds/rhai/env-red-media-1b070358afc04c169fc9c6b00c3929e4"
+}

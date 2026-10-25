@@ -1,0 +1,25 @@
+{
+  "id": "rhai-environment-tools01-1ffc166139d641328a2c769eb7f56d9b",
+  "time_utc": "2026-10-09T12:01:40Z",
+  "serial_inode": 102529120,
+  "serial_offset": 1384712,
+  "serial_path": "/var/log/libvirt/qemu/rhai-win11-quality-serial0.log",
+  "vm": "rhai-win11-quality",
+  "device": "sdc",
+  "medium": "/var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/environment-tools01.iso",
+  "medium_sha256": "4cec059b50b3ddbf4ae3fbbec7a590fdff7613792ac466a9515aba351c9db36e",
+  "medium_bytes": 1138688,
+  "guest_scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-tools01-1ffc166139d6\\run\\monitor-source-1ffc166139d641328a2c769eb7f56d9b",
+  "expected_start": "powershell -noprofile -executionpolicy bypass -file e:\\start.ps1",
+  "native_started": true,
+  "host_mem_available_bytes": 81902583808,
+  "host_disk_free_bytes": 398258204672,
+  "host_load": [
+    "2.41",
+    "5.56",
+    "11.50"
+  ],
+  "start_dispatched_at_utc": "2026-10-09T12:04:58Z",
+  "prelaunch_error": "UI key entry prefixed command with x; PowerShell rejected xpowershell before bootstrap execution; serial inode/offset unchanged.",
+  "retry_number": 1
+}

@@ -1,0 +1,1 @@
+offline replay scope retired; no guest input or native run

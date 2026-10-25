@@ -1,0 +1,25 @@
+{
+  "id": "rhai-environment-fixture01-33ae77140048452c913934f8cecccf9f",
+  "nonce": "33ae77140048452c913934f8cecccf9f",
+  "phase": "Compile new real child-environment contract only; production Runner/Driver retained unchanged for first RED",
+  "entry_sha256": "63fd1561db0f60d49d34bd20b724fcf1d528a880a33c31d2caf9f585da3a7f27",
+  "input_manifest_sha256": "0b0736f4d9527dca037591b1f37c4e75f99133fab426acbc49efdbb50709d8ce",
+  "fixture_sha256": "033764026c35da5d0474dc76bdb640010f6a8b66955b4a75bc015ddd30df7ba3",
+  "bootstrap_sha256": "a0b4e6306c4d7a4107dd4a539dfa3c6e9d71948cc8ceebd0f8999b0d67c4bcbd",
+  "native_started": false,
+  "reuse_boundary": "new PayloadFixture.exe retained only through native environment RED/GREEN then exact disposition",
+  "limits": "existing reviewed930s independent observer; only one csc PayloadFixture compilation; no Cargo/Driver/Runner compile",
+  "later_red": "actual public Driver expected0, child42 with specific FAIL native payload private environment and independent base64 fixture record. Parent variables/cwd independently compare.",
+  "preparation_correction": "Only internal fixture pin updated before execution; original bootstrap held-compiler source57740 retained; no native attempt.",
+  "utc": "2026-10-09T11:28:52.964654+00:00",
+  "serial_offset": 1329131,
+  "serial_inode": 102529120,
+  "review_sha256": "b68201b3a0fab7850510b376ab6f20c1f7770032929826e0c2ab164473821bbf",
+  "current_capacity": {
+    "guest_free_memory_kib": 5305416,
+    "guest_free_disk_bytes": 74518491136,
+    "host_available_memory_kib": 68180144,
+    "host_free_disk_bytes": 379025563648
+  },
+  "native_attempt": 1
+}

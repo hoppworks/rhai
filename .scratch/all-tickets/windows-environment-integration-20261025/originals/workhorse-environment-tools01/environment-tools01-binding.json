@@ -1,0 +1,17 @@
+{
+  "id": "rhai-environment-tools01-1ffc166139d641328a2c769eb7f56d9b",
+  "nonce": "1ffc166139d641328a2c769eb7f56d9b",
+  "entry_sha256": "ada3515cb3ac74d2bce6ff431d2681d3367467180292289e07d7db536676bb9a",
+  "manifest_sha256": "1f554508bc59f000f7c495197785febb5ac60126b531058593e33d6ecb7c3932",
+  "bootstrap_sha256": "0ceea8a189cb46ad333779dfde4ec865c7ac900f027c67acc8e053112d4eaba7",
+  "updated_internal_pins": [
+    "tools/windows-scoped-runner/MonitorPayloadJob.cs",
+    "tools/windows-scoped-runner/WindowsCustodyBackend.cs",
+    "tools/windows-scoped-runner/fixtures/PayloadFixture.cs"
+  ],
+  "native_started": false,
+  "phase": "Build affected Runner and Driver once through existing accepted PublicToolsOnly selector. Reuse e663 payload fixture for GREEN. No Rust/Cargo build or unrelated suite.",
+  "reuse_boundary": "Environment GREEN and affected custody regressions, cancellation or expiry2026-10-10T12:00Z; exact owned retirement afterwards",
+  "limits": "unchanged accepted compiler owner limits; two C# tool compiles and original source-owner prerequisites; whole-observer930s/export180s",
+  "review_correction": "Retain all directory pins through descendant creation and verification; no native attempt launched."
+}

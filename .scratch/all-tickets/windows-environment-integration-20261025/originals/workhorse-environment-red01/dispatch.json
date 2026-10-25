@@ -1,0 +1,17 @@
+{
+  "id": "rhai-environment-red01-1d8b0ab26dbc4516b26d7f23ec9e868a",
+  "nonce": "1d8b0ab26dbc4516b26d7f23ec9e868a",
+  "source_sha256": "4895b277961b3006ef23aaedee7d1517729f433f917a3eba33315dac3f421429",
+  "entry_sha256": "f8a061a60e7991a39945a57915bf405d5975470620620cac29d48d6536f04b46",
+  "fixture_binary_sha256": "e663ad3f7acd1b2b170433e0335e5d29c499a80751f15eb077e7df8b51e498b2",
+  "phase": "RED fixture exit42, real Driver expected42 only to validate closure; original private-environment contract remains failing",
+  "bounds": "10s observer +10s exact child cleanup +10s pipe drain; export180s/64files/16MiBtotal/4MiBeach",
+  "source_base": "accepted public-loop03 observer actual source; only environment-control paths/assertions and exact retained hash pins",
+  "native_started": false,
+  "compiler_review": "50d64a39f99bef982cf9067f499deebd8905660f0b3ef0153918d03c099438ac",
+  "observer_exit": "0 only if RED phase observed and closure/readbacks/parent checks pass; otherwise2",
+  "serial_offset": 1353487,
+  "serial_inode": 102529120,
+  "review_sha256": "1a2c3ce3b576339b5d94419923fe9047fd6b5123bf8186ed55952d57cdd0537f",
+  "native_attempt": 1
+}

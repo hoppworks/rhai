@@ -1,0 +1,2 @@
+$ErrorActionPreference='Stop'
+& (Join-Path $PSScriptRoot 'tools\windows-scoped-runner\fixtures\RunPayloadEnvironmentControl.ps1') -FixturePath 'C:\Users\RhaiTest\.local\share\agent-builds\rhai\env-fixture01-33ae77140048\run\monitor-source-33ae77140048452c913934f8cecccf9f\build\PayloadFixture.exe' -FixtureSha256 'e663ad3f7acd1b2b170433e0335e5d29c499a80751f15eb077e7df8b51e498b2' -Session 'C:\Users\RhaiTest\.local\share\agent-builds\rhai\env-control-2f7925c491f84b7bbf9e4ff1a118e7f3' -Id 'rhai-environment-green01-2f7925c491f84b7bbf9e4ff1a118e7f3' -Phase GREEN

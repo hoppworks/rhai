@@ -1,0 +1,9 @@
+{
+  "iso": "/var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/environment-fixture01.iso",
+  "sha256": "5e2707b01084547ce5515d3741cebcbcb217a2de42e9b244c2fe9a6f85ee022b",
+  "bytes": 1124352,
+  "build_exit": 0,
+  "scope_retired": "/root/.local/share/agent-builds/rhai/env-fixture-media-ff1964269e094c68ac2e83525ed89874",
+  "retired_unmounted": true,
+  "cause": "Pre-execution internal fixture-pin correction; zero native launches"
+}

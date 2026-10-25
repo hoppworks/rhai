@@ -1,0 +1,24 @@
+{
+  "RED": {
+    "payload_exit": "0000002A",
+    "mismatch_keys": [
+      "AGENT_RUNTIME_DIR",
+      "TMP",
+      "TEMP",
+      "CARGO_HOME",
+      "CARGO_TARGET_DIR"
+    ],
+    "child_cwd_matches_independent_allocated_runtime": true,
+    "crc_valid_ordered_journal_records": 8,
+    "parent_preservation_checked_by_original_observer": true,
+    "native_reexecution": false
+  },
+  "GREEN": {
+    "payload_exit": "00000000",
+    "mismatch_keys": [],
+    "child_cwd_matches_independent_allocated_runtime": true,
+    "crc_valid_ordered_journal_records": 8,
+    "parent_preservation_checked_by_original_observer": true,
+    "native_reexecution": false
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "iso": "/var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/environment-fixture01.iso",
+  "sha256": "a0eb02d28de30165906d20b3788704a2d72dc4a92af988fe5d9ad543d3d9ae4f",
+  "bytes": 1124352,
+  "scope_retired": "/root/.local/share/agent-builds/rhai/env-fixture-media-e1911d1f668248b281d2423e318d9c2f",
+  "corrected_internal_pin": true
+}

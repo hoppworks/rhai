@@ -685,7 +685,7 @@ internal sealed class MonitorPayloadJob : IDisposable
         MonitorOwnedKernelHandle ownedThread=new MonitorOwnedKernelHandle(false);
         long createAt=(long)GetTickCount64();
         if (!protocol.AuthorizeCreate(createAt)) throw new InvalidOperationException("fresh monitor create challenge is unavailable");
-        IntPtr attributes=IntPtr.Zero, jobArray=IntPtr.Zero, inheritedArray=IntPtr.Zero;
+        IntPtr attributes=IntPtr.Zero, jobArray=IntPtr.Zero, inheritedArray=IntPtr.Zero, environment=IntPtr.Zero;
         MonitorOwnedKernelHandle stdinOwner=new MonitorOwnedKernelHandle(false);
         PayloadOutputCapture outputCapture=null;
         bool attributesInitialized=false;
@@ -705,6 +705,7 @@ internal sealed class MonitorPayloadJob : IDisposable
             Check(SetInformationJobObject(ownedJob.ExactValue, JobObjectExtendedLimitInformation, ref limits,
                 (uint)Marshal.SizeOf(typeof(JobExtendedLimitInformation))), "SetInformationJobObject(kill on last close)");
 
+            environment=Marshal.StringToHGlobalUni(allocation.PreparePayloadEnvironment(setupCleanupDeadline));
             outputCapture=new PayloadOutputCapture(allocation,setupCleanupDeadline);
             PayloadOutputCapture.CreateInheritableNullInput(stdinOwner);
             IntPtr size=IntPtr.Zero;
@@ -735,7 +736,7 @@ internal sealed class MonitorPayloadJob : IDisposable
             var startup=new StartupInfoEx { StartupInfo=new StartupInfo { cb=Marshal.SizeOf(typeof(StartupInfoEx)),Flags=STARTF_USESTDHANDLES,
                 StdInput=stdinOwner.ExactValue,StdOutput=outputCapture.StdoutWriter,StdError=outputCapture.StderrWriter }, AttributeList=attributes };
             bool createdOk=CreateProcessW(executable,new StringBuilder(command),IntPtr.Zero,IntPtr.Zero,true,
-                EXTENDED_STARTUPINFO_PRESENT|CREATE_SUSPENDED|CREATE_UNICODE_ENVIRONMENT,IntPtr.Zero,
+                EXTENDED_STARTUPINFO_PRESENT|CREATE_SUSPENDED|CREATE_UNICODE_ENVIRONMENT,environment,
                 allocation.RuntimePath,ref startup,out created);
             int createError=createdOk ? 0 : Marshal.GetLastWin32Error();
             if(created.Process!=IntPtr.Zero) { ownedProcess.Adopt(created.Process); created.Process=IntPtr.Zero; }
@@ -816,6 +817,7 @@ internal sealed class MonitorPayloadJob : IDisposable
                 if(attributesInitialized) try { DeleteProcThreadAttributeList(attributes); } catch(Exception error) { RecordFailure(ref cleanupFailure,error); }
                 try { Marshal.FreeHGlobal(attributes); } catch(Exception error) { RecordFailure(ref cleanupFailure,error); }
             }
+            if(environment!=IntPtr.Zero) try { Marshal.FreeHGlobal(environment); } catch(Exception error) { RecordFailure(ref cleanupFailure,error); }
             if(jobArray!=IntPtr.Zero) try { Marshal.FreeHGlobal(jobArray); } catch(Exception error) { RecordFailure(ref cleanupFailure,error); }
             if(inheritedArray!=IntPtr.Zero) try { Marshal.FreeHGlobal(inheritedArray); } catch(Exception error) { RecordFailure(ref cleanupFailure,error); }
             CloseOwned(ref ownedJob,ref cleanupFailure);

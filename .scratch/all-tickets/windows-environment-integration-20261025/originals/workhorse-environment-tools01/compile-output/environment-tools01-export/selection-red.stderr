@@ -1,0 +1,7 @@
+CompilerClosureOnly requires BuildOnly without other diagnostic selections.
+At E:\input\tools\windows-scoped-runner\fixtures\RunSourceFixtures.ps1:19 char:5
++     throw 'CompilerClosureOnly requires BuildOnly without other diagn ...
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : OperationStopped: (CompilerClosure...tic selections.:String) [], RuntimeException
+    + FullyQualifiedErrorId : CompilerClosureOnly requires BuildOnly without other diagnostic selections.
+ 

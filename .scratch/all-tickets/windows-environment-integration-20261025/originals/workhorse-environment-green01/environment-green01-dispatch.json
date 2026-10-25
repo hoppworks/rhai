@@ -1,0 +1,51 @@
+{
+  "id": "rhai-environment-green01-2f7925c491f84b7bbf9e4ff1a118e7f3",
+  "session": "env-control-2f7925c491f84b7bbf9e4ff1a118e7f3",
+  "phase": "GREEN",
+  "native_started": true,
+  "prepared_utc": "2026-10-09T12:20:36Z",
+  "host": "workhorse",
+  "vm": "rhai-win11-quality",
+  "vm_uuid": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19",
+  "guest_start_command": "powershell -noprofile -executionpolicy bypass -file e:\\\\start.ps1",
+  "input_manifest_sha256": "b39b5f20daf479ab1f855f138f08dbead3ea7aa02d95491ccb7286ad405fbaa9",
+  "start_sha256": "cc422b60b20bde80dbe5368099d80bb083c2935728a45f1fd3687b6a1789c635",
+  "observer_sha256": "b20374c2188493a27c7a703f14522fd20c5b4a4c97d2d08dc9ddd78e4a81ce6e",
+  "binding_sha256": "8e8c1879c4369d4570da1947229c56596eb005f36aca54ebc8d65d04126f65ad",
+  "review_sha256": "210343d6c004541d9755df832d79982d4b15410615165797b4beb0d66ba17f97",
+  "fixture_sha256": "e663ad3f7acd1b2b170433e0335e5d29c499a80751f15eb077e7df8b51e498b2",
+  "driver_sha256": "afd26a3356956e73f7afd653d12a7098c172c8bf1bb9d870102d3f9425e9d2f0",
+  "runner_sha256": "b948dcba85ac207b94fe4a4e4bb157fe83492aa6f5d458057c6b4ea0fdc5c8c3",
+  "build_id": "rhai-environment-tools01-1ffc166139d641328a2c769eb7f56d9b",
+  "reuse_expiry": "2026-10-10T12:00:00Z",
+  "iso_sha256": "da1c33e56cf3877f163a5d915f4d56b689d80a9d967eaff41722fa437d838d25",
+  "guest_start_hash_readback": "CC422B60B20BDE80DBE5368099D80BB083C2935728A45F1FD3687B6A1789C635",
+  "guest_observer_hash_readback": "B20374C2188493A27C7A703F14522FD20C5B4A4C97D2D08DC9DDD78E4A81CE6E",
+  "guest_c_free_gib": 69.4,
+  "serial": {
+    "path": "/var/log/libvirt/qemu/rhai-win11-quality-serial0.log",
+    "device": 58,
+    "inode": 102529120,
+    "offset": 1424201,
+    "captured_on": "workhorse"
+  },
+  "bounds": {
+    "observer_seconds": 10,
+    "exact_driver_exit_wait_seconds": 10,
+    "pipe_drain_seconds": 10,
+    "serial_export_seconds": 180,
+    "max_files": 64,
+    "max_file_bytes": 4194304,
+    "max_total_bytes": 16777216
+  },
+  "preflight_keyboard_errors": [
+    "get-psdrive extra c was interpreted as a separate command; disk query succeeded; no guest run",
+    "first guest path check mapped colon incorrectly and failed path resolution; corrected readback succeeded; no guest run"
+  ],
+  "preparation_repairs": [
+    "Removed an escaped literal newline from the JSON terminator before native launch; receipt was not consumed and native_started remained false.",
+    "Rejected LLLM-local serial cursor during preparation; replaced it with the unchanged workhorse VM serial inode/device/offset before launch."
+  ],
+  "launch_prepared_utc": "2026-10-09T12:21:40+00:00",
+  "launch_trigger": "Return key after exact command visual verification"
+}

@@ -1,0 +1,23 @@
+{
+  "id": "rhai-environment-fixture01-33ae77140048452c913934f8cecccf9f",
+  "nonce": "33ae77140048452c913934f8cecccf9f",
+  "phase": "Compile new real child-environment contract only; production Runner/Driver retained unchanged for first RED",
+  "entry_sha256": "63fd1561db0f60d49d34bd20b724fcf1d528a880a33c31d2caf9f585da3a7f27",
+  "input_manifest_sha256": "0b0736f4d9527dca037591b1f37c4e75f99133fab426acbc49efdbb50709d8ce",
+  "fixture_sha256": "033764026c35da5d0474dc76bdb640010f6a8b66955b4a75bc015ddd30df7ba3",
+  "bootstrap_sha256": "a0b4e6306c4d7a4107dd4a539dfa3c6e9d71948cc8ceebd0f8999b0d67c4bcbd",
+  "native_started": true,
+  "reuse_boundary": "new PayloadFixture.exe retained only through native environment RED/GREEN then exact disposition",
+  "limits": "existing reviewed930s independent observer; only one csc PayloadFixture compilation; no Cargo/Driver/Runner compile",
+  "later_red": "actual public Driver expected0, child42 with specific FAIL native payload private environment and independent base64 fixture record. Parent variables/cwd independently compare.",
+  "preparation_correction": "Only internal fixture pin updated before execution; original bootstrap held-compiler source57740 retained; no native attempt.",
+  "native_terminal": true,
+  "native_exit": 0,
+  "original_files": 19,
+  "frames": 54,
+  "binary_sha256": "e663ad3f7acd1b2b170433e0335e5d29c499a80751f15eb077e7df8b51e498b2",
+  "accepted_review_sha256": "50d64a39f99bef982cf9067f499deebd8905660f0b3ef0153918d03c099438ac",
+  "retained_scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\env-fixture01-33ae77140048",
+  "retention_expiry_utc": "2026-10-10T12:00:00Z",
+  "cleanup_boundary": "Environment RED/GREEN completion, cancellation, or expiry, whichever is earlier; preserve original source/evidence outside runtime."
+}

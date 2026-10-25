@@ -1,0 +1,7 @@
+{
+  "path": "tools/windows-scoped-runner/fixtures/CompileMonitorAcceptanceDriver.ps1",
+  "previous_sha256": "e160eac5c38ef0b24d74a74047478b01bf547c236de1a60820fc594dbaf90a55",
+  "current_sha256": "225a3c45bf0c7b8d2779f6c358189e479cd81e4883291c0aa7f2322d5e3c61bf",
+  "changes": "Only three source hash literals refreshed, including previously stale Driver pin; native wrapper execution remains unverified. Actual native compiled C# source closure unchanged.",
+  "native_reexecution": false
+}
