@@ -1,0 +1,11 @@
+{
+  "scope": "one Darwin lifecycle profile invocation, eleven new GREEN rows; no repeated accepted base rows/REDs",
+  "cargo_commands": 11,
+  "cargo_preparation_seconds_sum": 40.25,
+  "wall_envelope_seconds": 46.437,
+  "wall_method": "mtime(result.txt) minus mtime(capacity-before.txt), includes source staging and all Cargo commands; excludes independent observer/review",
+  "outer_timeout_seconds": 600,
+  "cargo_jobs": 2,
+  "tokens": "unknown",
+  "cost": "unknown"
+}

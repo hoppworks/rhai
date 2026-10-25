@@ -1,0 +1,1 @@
+eleven previously uncovered native Darwin lifecycle/capture GREEN rows passed; original native RED/base receipts are reused

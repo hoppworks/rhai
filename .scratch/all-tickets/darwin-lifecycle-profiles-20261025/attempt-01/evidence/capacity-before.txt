@@ -1,0 +1,4 @@
+Filesystem   1024-blocks      Used Available Capacity iused      ifree %iused  Mounted on
+/dev/disk3s5   971298980 690514424 252071740    74% 7992732 2520717400    0%   /System/Volumes/Data
+
+System-wide memory free percentage: 84%

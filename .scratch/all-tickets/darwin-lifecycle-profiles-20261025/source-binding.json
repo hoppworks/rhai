@@ -1,0 +1,33 @@
+{
+  "candidate": "c0fc47e403f685624c611d94783aa5dffc609c64",
+  "old_kill_drop_revision": "76fdebd77cfcd5cc6e27df9cc95198a9cf030746",
+  "old_kill_drop_test_file_sha256": "a8fdc21e73b56bf12c82603c941b7c22b01c942a56d5f649ff2ec98b494c935c",
+  "current_test_file_sha256": "3c22dd7428b0a3299905d384e661d845bf7510ba488d58c23d1aa83700124172",
+  "unchanged_kill_drop_functions_and_support": {
+    "managed_spawn_kill_stops_leader_worker_leaf_and_preserves_sentinel": "a6f997a16c8e02f6c6604188dde0a36b8aad6496c5bf75a661a8946b65463f44",
+    "managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not": "4b60d85b56b1c157b33df5704a638b606f540d10440072ce7e8821d6f71bdcdd",
+    "managed_scope_worker_fixture": "11b21c316b97318fd821d777a4e0149d485596fd9ec3a48a3442922bcec4613d",
+    "managed_scope_leaf_fixture": "cda55e1d89c17d0e2918acc70459999c5d73d39c010a004d3d8ec47ac40d09f2",
+    "managed_scope_spawn_leader_fixture": "fcf81184d7087e6bb698cd850c4be3b7e57eab23ecc420556b38dddc913f2538",
+    "managed_spawn_sentinel": "96bfbfb3ff8e067ba2279ff77967cef98fbdf8ccf6fa9be4a2a2ba50a51753df",
+    "managed_spawn_script": "da2ca39423aa72685a20b45eb1e46a7b6e58215867f9a7fb75bfceb7037bcc2a",
+    "managed_fixture_member_pids": "f868eb9e42ebd9b578070778f8ab74802e4430485ce2d7360594ae98367e2bbd",
+    "pid_is_absent": "e9f75ab10c13234cde66bcbbf79ddf7f0facdbdd8bccb8a1a8327523bdb9c1be",
+    "pid_is_alive": "f4a21b33709a6789c95ccedd0bf15cf81435e2c24045f56f23ab5bf8db2eedf4",
+    "managed_record_fields": "a4b8bde9dc90bf5d084dbe592cebe06e8ac0b5f46bf83b94f9db23f26ac64f68",
+    "managed_atomic_record": "61a376176c7975815fd1807d899449fe4235b4c9d7271e483e66de7216004aa1",
+    "struct ManagedFixture {": "89c66d378bab92122e7ad1e723707ea6826225db9565e495c7344ed919934afc",
+    "struct Sentinel(Child);": "1a8f4891f54318f54f881c6dc1fe2454e83426af9f0b6f15bf6cc918045e3e58",
+    "managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes": "0b422b5f4c4c4be41bdd115699981ef784e98e7561af5a47ad073804a719e678",
+    "managed_spawn_post_reap_cancel_bounds_escaped_capture": "282cd43fe8b89611707d1dda1461461041f794ad2e230fff328c227f5a54fba1"
+  },
+  "product_delta": "76fdebd7..candidate Unix source differs only by a not(unchecked) cfg in an unrelated library unit test; runtime implementation unchanged",
+  "capture_support": "The complete current test file matches accepted darwin-escaped-capture-cleanup-20261025/attempt-03/source-bindings.txt; no capture source change since that native base proof.",
+  "reused_rows": [
+    "X25 native1.77.2 base",
+    "X25 native1.77.2 base unchecked",
+    "X27 managed-final-drop native1.77.2 base also covers the same X37 host/sentinel oracle",
+    "X38 two named native1.77.2 base capture selectors"
+  ],
+  "reused_controls": "Original native REDs and restored GREENs remain in their original proof directories; no fresh RED/base repeat claimed."
+}
