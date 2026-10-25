@@ -1,0 +1,1 @@
+if ((get-filehash e:\readback-failed.ps1).hash -eq '79186cb0247bc253e6f46c97f4c7195a4fdf9eea2f1009e160891a18c1e14332') { & ([scriptblock]::create((get-content e:\readback-failed.ps1 -raw))) } else { throw 'source mismatch' }

@@ -1,0 +1,10 @@
+{
+  "old_inode": 102529120,
+  "old_retained_as": "serial0.log.0",
+  "old_size": 2097152,
+  "start_offset": 1966931,
+  "new_inode": 126648834,
+  "new_start": 0,
+  "native_reexecution": false,
+  "complete_frames_verified": true
+}

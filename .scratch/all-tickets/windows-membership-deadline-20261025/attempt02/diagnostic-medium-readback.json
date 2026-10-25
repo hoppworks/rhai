@@ -1,0 +1,27 @@
+{
+  "source": "/var/roothome/projects/rhai-membership-controls-20261025-063d8c3e/attempt02",
+  "medium": "/var/lib/libvirt/images/rhai-win11-quality/membership-readback02-20261025-63730933.iso",
+  "sha256": "eb4474ed96c87e0fa051fc7ef5c405fa5eea0baa73aca9d31cdefd530269d86a",
+  "files": {
+    "Start.ps1": "8c439c96d4e8cf75862f7be77e31084850ef058d85fb4b8049edb2710ba94a83",
+    "bindings.json": "7d8d95a5677c0a3474549774a8f4e5f9255e35f1a5751b365b80287da7b9621f",
+    "readback-failed.ps1": "bcb85d771e4a6b981cd5f0f05b01a4c0414b29d5908b63a348d9bbfae7d67fc0",
+    "source/tools/windows-scoped-runner/LaunchSpecification.cs": "e08957b13d5ed5f86cb37d0545aa876aac50e507692d112b39882f465fff8f2b",
+    "source/tools/windows-scoped-runner/LeaseMonitor.cs": "72c79f18c96e28f27cd1b7b39b1025da9a250e0608885de7dc48934512a46bfc",
+    "source/tools/windows-scoped-runner/MonitorAcceptanceDriver.cs": "3961723da38fbba05f800ef76a5d65a6225e25eb79303a05ff420634e0dc1914",
+    "source/tools/windows-scoped-runner/MonitorPayloadJob.cs": "adf9cd13ac7b46323d2beae799e0eff08fc08504d1b1cb6426998127401663d0",
+    "source/tools/windows-scoped-runner/MonitorSpecificationIntake.cs": "0f0a71563e6c3d99f0c643644d4b56951f6c69ceb3b10b03157f68dc37bb8412",
+    "source/tools/windows-scoped-runner/MonitorStagingHandoff.cs": "c541f7d885d032c074461a5a0173b9ae6291ef7d8cd1b9fd2ce4a4f56d1e0e6e",
+    "source/tools/windows-scoped-runner/MonitorTransport.cs": "ed23c8615af7d8c1b545d3108342640c46f7e245b4e6a83a7c98bf1720a74de8",
+    "source/tools/windows-scoped-runner/ScopedRunner.cs": "d3a77f0daeebd5beed2b277fae9dc6a522acf1454bb5d8d776d84e1dc8e896c8",
+    "source/tools/windows-scoped-runner/SpecificationTransfer.cs": "7a9edfe98d84868b55146280bd5ed29576ee0c8725cf9f6c785b784bc0ad25c2",
+    "source/tools/windows-scoped-runner/WindowsCustodyBackend.cs": "26b7468a0868271a555f6ed450212267b01d7d3fd0a8dd5b3fb51b01b7a05629",
+    "source/tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs": "38745833e7b23535cdc2ce225655074c6c5f50e204c0d3cf38d6805f49cb53eb",
+    "source/tools/windows-scoped-runner/fixtures/MonitorDeathFixture.cs": "e60edcce70a2609455c0d06a0bca017960074c671bc9ed61a503bca9d24795fc",
+    "source/tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs": "8f43d33928262ae181aa5396feffef9b0260653609b5be8b01da7b0a7e7b00f7",
+    "source/tools/windows-scoped-runner/fixtures/PayloadFixture.cs": "6f48ce06a01f06bb8a064aa450624f4dd29ffcbcba1dbaf9c3e52a62b0acaebb",
+    "source/tools/windows-scoped-runner/fixtures/RunMembershipControl.ps1": "2f580529c6ec3440bbf63345dc48cd953bef3f13655fe293c5356207a2b8fffc",
+    "source/tools/windows-scoped-runner/fixtures/RunSourceFixtures.ps1": "5b84c50e4782a2483dc0c1e16a27effa1cc1da7767f768c7eec4bd1584170c81"
+  },
+  "executed": false
+}

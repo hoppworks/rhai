@@ -1,0 +1,18 @@
+{
+  "owner": "current Rhai task",
+  "path": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\work-abort-build-4e92c3e57fa14837992fd1d20a3f2f8a",
+  "created_utc": "2026-10-25T07:35:52.869113+00:00",
+  "original_expiry_utc": "2026-10-25T09:35:52.869113+00:00",
+  "revised_expiry_utc": "2026-10-25T10:05:52.869113+00:00",
+  "revised_before_expiry_utc": "2026-10-25T09:28:21.482360+00:00",
+  "total_lifetime_seconds": 9000,
+  "extension_seconds": 1800,
+  "boundary_source": "agent-selected resource retention, not an explicit human spend/deadline/attempt cap",
+  "reason": "Preserve compatible current Runner/Driver in-place for one bounded informative leaf-error diagnostic and immediately dependent custody work. No changed production inputs, no foreign resources, no duplicate cached tools or unnecessary rebuild solely at an agent estimate.",
+  "input_applicability": "All13 old source/3binary/compiler/native manifest pins rechecked by accepted attempt02 Start/build; fixture change compiled separately only.",
+  "capacity": "Current host /var available104323104768 bytes, available RAM76151MiB; Start native C volume >2GiB checked immediately before accepted2.43s compiler run. Own immutable cache and new fixture sources are small, bounded file inventories, no product build.",
+  "retire_at": "earlier ended/cancelled reuse or revised expiry; exact inactive owned inventory after original proof export",
+  "budgets": "Original2h retention and all failed/public allocations/cause history preserved. No attempt counter reset, no Windows Cargo or monitor30min proof inferred; diagnostic is one additional public call, source-reviewed.",
+  "current_dependent_build_scope_leaf": "membership-build-bf4ee445b3e245d6b22e79ea9c486d2c",
+  "additional_owned_build_scope_lifetime": "new one-file build scopes use the same finite current acceptance boundary10:05:52UTC, retired earlier after needed original export; no expired old sources reused"
+}

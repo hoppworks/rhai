@@ -1,7 +1,8 @@
 # Native Windows scoped execution gate
 
 Status: native compiler bootstrap and named public custody rows accepted; the
-complete gate before Windows project Cargo/Rust acceptance remains open.
+complete gate before Windows project Cargo/Rust acceptance remains open. Current
+pair-membership and Driver180s stop/closure rows are accepted at the recorded scope.
 
 ## Current route and resources
 
@@ -21,25 +22,39 @@ outer evidence scope. Runtime `scoped-GUID` and retained `.scoped-evidence-GUID`
 distinct. Host export does not rewrite native HOST_EXPORTED=False.
 
 Reuse compatible tools only after source/compiler/hash/physical-path checks and
-within recorded ownership/purpose/expiry. Old10-10 guest builds are historical
-references. Never reset the VM, touch backups/baselines/foreign work, or treat SSH
+within recorded ownership/purpose/expiry. Old10-10 guest builds and the now-retired current compiler cache are historical
+references. The membership/deadline package retired all8 exact own guest scopes and
+all6 own media after host-bound export; no cached binary remains available. Never reset the VM, touch backups/baselines/foreign work, or treat SSH
 loss as guest supervision. No new routine approval gate or fixed heavy-run slot.
 
 ## Required outcomes and current proof
 
 | Outcome | Accepted scope | Still open |
 |---|---|---|
-| Payload and grandchild actual Job membership before useful work | Existing root ownership and historical descendant stop/identity proofs retained | A current direct both-member pre-work observation; do not infer it from counts alone |
-| Success, failure, deadline stop members and retire runtime | Normal success/private env; generic failure narrow actual cause; parent-exit residual child; real large ordinary-abort retirement2107entries/613419011bytes; current empty-work lease stops | Deliberate deadline with descendant/runtime closure; bounded real project-command composition/product duration |
+| Payload and grandchild actual Job membership before useful work | Current native complete four-PID lists independently include both exact payload/ordinary-child PID/start identities before work; public normal Driver0/root0 and complete Job closure | No gap in this named row at its source/guest scope; no arbitrary nested-execution or product acceptance inferred |
+| Success, failure, deadline stop members and retire runtime | Normal success/private env; generic failure narrow actual cause; parent-exit residual child; real large ordinary-abort retirement2107entries/613419011bytes; current empty-work lease stops; current normal membership/root-exit closure and deliberate Driver180s timeout with post-teardown actor/runtime closure | Monitor30min absolute deadline, explicit watchdog124 termination branch and bounded real project-command composition/product duration |
 | Supervisor death, independent observer, unrelated sentinel | Original monitor-death run and later readback: six identities stopped, sentinel survival/natural completion, exact target runtime observer-retired; original sharing/release failures preserved | No clean monitor/backend receipt inferred; current changed-composition and failed cleanup/export applicability remain to establish |
 | Failed association/nested context; no fallback | Native nested-refusal proves public ambient/nested admission refusal before payload launch | Actual failure to establish atomic JOB_LIST association; conservative termination/wait if any child handles were returned |
 | Controlling connection/lease failure | Current disconnect-alive/client-death/replay: Drivers0, payload125, client78/1/78,4/4/5challenges, each8CRC records, PID/start stopped, literal runtime absent | Nonempty product work/further failure paths are not directly claimed by the three empty-work cases |
-| Assertion sensitivity and truthful export/cleanup | Wrong marker and snapshot-as-absent controls; restored positives; hash/length/CRC host readback; host-bound exact-scope retirement | Additional failed export/cleanup outcomes do not become done from a healthy export |
+| Assertion sensitivity and truthful export/cleanup | Wrong marker and snapshot-as-absent controls; restored positives; hash/length/CRC host readback; host-bound exact-scope retirement | Additional backend failed export/cleanup outcomes do not become done from healthy export; Driver deadline logs retain failed orderly client/controller disposition and kill-on-close through teardown |
 
-Evidence: [current lease cases](windows-lease-interruptions-20261025/proof.md),
+Evidence: [current membership/Driver deadline](windows-membership-deadline-20261025/proof.md),
+[current lease cases](windows-lease-interruptions-20261025/proof.md),
 [real work retirement/environment](windows-workhorse-retirement-20261025/proof.md),
 and original bindings under
 `../rhai-wayfinder-replan-20261008/results/windows-custody-20261008T125846Z-b7f83433/`.
 The preserved canonical plan is `../../docs/sys-package-plan.md`; this gate table
 updates actual requirements/evidence, not the overall scope. No Windows Rust/Cargo
 product acceptance, release or full A–F closure is claimed.
+
+Driver180s acceptance is a real deadline/stop outcome: exact timeout diagnostic at180.2336s,
+independent observer kill not reached, both actor identities seen live then stopped,
+EXACT Job closure and runtime absent. Orderly client/controller release failed before
+Driver teardown; retained kill-on-close completed that path. Keep those original
+diagnostics. It does not establish the separate monitor30min or watchdog124 branch.
+
+Before real project commands, verify the agreed resource caps at the actual payload
+Job. Current CreateSuspended configures that Job with kill-on-close only; the
+compiler/controller memory/process caps do not themselves prove payload limits.
+This source-level gap belongs to bounded project-command custody, not a failure
+of the two small fixed-workload rows accepted here.

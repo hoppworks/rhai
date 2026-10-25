@@ -1,0 +1,10 @@
+{
+  "phase": "membership",
+  "utc": "2026-10-25T09:28:21.510663+00:00",
+  "bound_seconds": 490,
+  "transport_reserve_seconds": 45,
+  "expiry": "2026-10-25T10:05:52.869113+00:00",
+  "retention_amendment": "../retention-amendment.json",
+  "source_sha256": "8c439c96d4e8cf75862f7be77e31084850ef058d85fb4b8049edb2710ba94a83",
+  "purpose": "one bounded observability followup; no speculative membership change; no deadline until normal passed"
+}

@@ -1,0 +1,75 @@
+{
+  "frames": 47,
+  "files": {
+    "bootstrap.stdout": {
+      "path": "bootstrap.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "bootstrap.stderr": {
+      "path": "bootstrap.stderr",
+      "sha256": "f1c0b6c5cd5726c1f2f4628ca377762150c20d37f5838c49c59ae2575e4927f6",
+      "length": 97
+    },
+    "observer.json": {
+      "path": "observer.json",
+      "sha256": "1dc736e1c8f8507ac8a5a70c637a80c295e0613509095daadcdd2f8c8b7d4068",
+      "length": 1178
+    },
+    "run/.scoped-run-92068fde8ecf4ad0917a2cbd326094d9.journal": {
+      "path": "run/.scoped-run-92068fde8ecf4ad0917a2cbd326094d9.journal",
+      "sha256": "362c0311c75a4315e663ea4a0bbeefb428b9a878b76852cf0bb6732dd30c2303",
+      "length": 2419
+    },
+    "run/.scoped-evidence-91a0344e65ea40fdad00912aff903fc1/manifest.txt": {
+      "path": "run/.scoped-evidence-91a0344e65ea40fdad00912aff903fc1/manifest.txt",
+      "sha256": "3222dbbb8487bf85b168fe35a5b527443bcc10f993796650a47df1b273aebe8c",
+      "length": 553
+    },
+    "run/.scoped-evidence-91a0344e65ea40fdad00912aff903fc1/stderr.log": {
+      "path": "run/.scoped-evidence-91a0344e65ea40fdad00912aff903fc1/stderr.log",
+      "sha256": "074d7fcfcca2c9e73797151b5ed910bace7a92efcc6d197e13cc18cd7cf989ba",
+      "length": 294
+    },
+    "run/.scoped-evidence-91a0344e65ea40fdad00912aff903fc1/stdout.log": {
+      "path": "run/.scoped-evidence-91a0344e65ea40fdad00912aff903fc1/stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/.scoped-evidence-91a0344e65ea40fdad00912aff903fc1/runtime/fixture.exe": {
+      "path": "run/.scoped-evidence-91a0344e65ea40fdad00912aff903fc1/runtime/fixture.exe",
+      "sha256": "16e58a223ea9c4a907d91215c21b340c4c9f93b5496bfc594b91967a3081fe1f",
+      "length": 14848
+    },
+    "run/.scoped-evidence-91a0344e65ea40fdad00912aff903fc1/runtime/pair.child.identity": {
+      "path": "run/.scoped-evidence-91a0344e65ea40fdad00912aff903fc1/runtime/pair.child.identity",
+      "sha256": "a46ebc241c523c3c1bc21bda76907a9541b929728ed779eb5fb2af574a84336f",
+      "length": 38
+    },
+    "run/.scoped-evidence-91a0344e65ea40fdad00912aff903fc1/runtime/pair.identity": {
+      "path": "run/.scoped-evidence-91a0344e65ea40fdad00912aff903fc1/runtime/pair.identity",
+      "sha256": "0f82ae26af74ba3a6f7a6eff063a68a39b6801b384dba3c3a13eb053d5a44ce7",
+      "length": 38
+    }
+  },
+  "complete": true,
+  "begin": {
+    "id": "rhai-membership-7756151b9a8b488ea7df3c92b5a04494-readback",
+    "exit": 0,
+    "accepted": false,
+    "readback_only": true,
+    "native_reexecution": false,
+    "original_id": "rhai-membership-7756151b9a8b488ea7df3c92b5a04494",
+    "original_observer_accepted": false,
+    "runtime_absent": true,
+    "original_runtime": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\membership-membership-7756151b9a8b488ea7df3c92b5a04494\\run\\scoped-91a0344e65ea40fdad00912aff903fc1"
+  },
+  "end": {
+    "id": "rhai-membership-7756151b9a8b488ea7df3c92b5a04494-readback",
+    "driver_launched": false,
+    "files": 10,
+    "accepted": false,
+    "exit": 0,
+    "guest_evidence_retained": true
+  }
+}

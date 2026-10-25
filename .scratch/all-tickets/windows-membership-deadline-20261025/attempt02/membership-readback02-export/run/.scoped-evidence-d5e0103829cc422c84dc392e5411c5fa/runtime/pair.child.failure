@@ -1,0 +1,4 @@
+System.IO.InvalidDataException: expected complete exact two-member Job
+   at MonitorDeathFixture.Membership(Process self, Process peer)
+   at MonitorDeathFixture.MembershipControl(String prefix, Boolean leaf, Boolean deadline)
+   at MonitorDeathFixture.Main(String[] args)

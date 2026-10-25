@@ -1,0 +1,10 @@
+{
+  "phase": "build",
+  "utc": "2026-10-25T09:18:34.844836+00:00",
+  "bound_seconds": 480,
+  "expiry": "2026-10-25T09:35:52.869113+00:00",
+  "serial_inode": 102529120,
+  "serial_offset": 1966931,
+  "source_sha256": "7a062cabbbbe08e9475906634ab100e4206a53d282c86c4deefc4dcd7101ec87",
+  "original_sdc": "/var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/monitor-fixture02.iso"
+}

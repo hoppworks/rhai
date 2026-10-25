@@ -1,0 +1,9 @@
+{
+  "phase": "deadline",
+  "utc": "2026-10-25T09:35:05.162354+00:00",
+  "bound_seconds": 490,
+  "transport_reserve_seconds": 45,
+  "expiry": "2026-10-25T10:05:52.869113+00:00",
+  "source_sha256": "857adae92b091df96e8b9a5cd1a2f4c048620e5eadca1ce0459ff3c33afcbb8d",
+  "purpose": "fresh actors hold240s; deliberate unchanged Driver180s; exact live-to-stopped PID/start and full Job closure; normal already passed; no compiler"
+}

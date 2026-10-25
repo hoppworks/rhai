@@ -1,0 +1,10 @@
+{
+  "source": "/var/roothome/projects/rhai-membership-controls-20261025-063d8c3e/cleanup-source",
+  "medium": "/var/lib/libvirt/images/rhai-win11-quality/membership-cleanup-20261025-063d8c3e.iso",
+  "sha256": "9353dd163ec3ef631d200a7a7307aa50e26273edc169fd3f4571e572573b56a2",
+  "files": {
+    "cleanup-host-manifest.json": "c15944ec3d381fef293c416b49caeca823819c4b4f572f12cd560cf907dbe176",
+    "cleanup.ps1": "4dbc105d475a466a93bd138fe4eb2faec7979f9d5cae12c9a8cdd34aa557b1b1"
+  },
+  "executed": false
+}

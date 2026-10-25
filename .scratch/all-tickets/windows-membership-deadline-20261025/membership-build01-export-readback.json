@@ -1,0 +1,122 @@
+{
+  "frames": 74,
+  "files": {
+    "bootstrap.stdout": {
+      "path": "bootstrap.stdout",
+      "sha256": "fcd108f558961bf7aef6b83d77bd5f96c31479a36bb72dbcc7e37044dc981ccb",
+      "length": 1057
+    },
+    "bootstrap.stderr": {
+      "path": "bootstrap.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "build-observer.json": {
+      "path": "build-observer.json",
+      "sha256": "a714ce5a6432f97aafa42d78f74226b7caa3d9e4cdc5f8b8e573b7352b03a5eb",
+      "length": 2827
+    },
+    "run/monitor-source-063d8c3e91ef44028497a3309e69d510/build-manifest.txt": {
+      "path": "run/monitor-source-063d8c3e91ef44028497a3309e69d510/build-manifest.txt",
+      "sha256": "950bf4fe9383604ac8a3bca19c597d82441a3618ab3cb67abb2ae1a33f4b265f",
+      "length": 1867
+    },
+    "run/monitor-source-063d8c3e91ef44028497a3309e69d510/run-result.txt": {
+      "path": "run/monitor-source-063d8c3e91ef44028497a3309e69d510/run-result.txt",
+      "sha256": "79c5b9102422b2f755e2aed8ef416a0a3ab0156de7c5ba4c85dbeda2e6ac6761",
+      "length": 124
+    },
+    "run/monitor-source-063d8c3e91ef44028497a3309e69d510/build/MonitorDeathFixture.exe": {
+      "path": "run/monitor-source-063d8c3e91ef44028497a3309e69d510/build/MonitorDeathFixture.exe",
+      "sha256": "16e58a223ea9c4a907d91215c21b340c4c9f93b5496bfc594b91967a3081fe1f",
+      "length": 14848
+    },
+    "run/monitor-source-063d8c3e91ef44028497a3309e69d510/logs/compile-MonitorDeathFixture.stderr.txt": {
+      "path": "run/monitor-source-063d8c3e91ef44028497a3309e69d510/logs/compile-MonitorDeathFixture.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-063d8c3e91ef44028497a3309e69d510/logs/compile-MonitorDeathFixture.stdout.txt": {
+      "path": "run/monitor-source-063d8c3e91ef44028497a3309e69d510/logs/compile-MonitorDeathFixture.stdout.txt",
+      "sha256": "7d6f399bc4ddebe9af0b4976bbe3450aac7fb48c8eba5ec95e37cae5283c787d",
+      "length": 131
+    },
+    "run/monitor-source-063d8c3e91ef44028497a3309e69d510/logs/exit-code-regression-17-wrong-expected.stderr.txt": {
+      "path": "run/monitor-source-063d8c3e91ef44028497a3309e69d510/logs/exit-code-regression-17-wrong-expected.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-063d8c3e91ef44028497a3309e69d510/logs/exit-code-regression-17-wrong-expected.stdout.txt": {
+      "path": "run/monitor-source-063d8c3e91ef44028497a3309e69d510/logs/exit-code-regression-17-wrong-expected.stdout.txt",
+      "sha256": "69826b89317496600a95e98535238d73a7091d7e0ff5c9585f08c25bb71a75c3",
+      "length": 40
+    },
+    "run/monitor-source-063d8c3e91ef44028497a3309e69d510/logs/exit-code-regression-17.stderr.txt": {
+      "path": "run/monitor-source-063d8c3e91ef44028497a3309e69d510/logs/exit-code-regression-17.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-063d8c3e91ef44028497a3309e69d510/logs/exit-code-regression-17.stdout.txt": {
+      "path": "run/monitor-source-063d8c3e91ef44028497a3309e69d510/logs/exit-code-regression-17.stdout.txt",
+      "sha256": "32d543b6dda9fd1365b76e3057e9fac50673187a4c91cb8c18413593043e1689",
+      "length": 25
+    },
+    "run/monitor-source-063d8c3e91ef44028497a3309e69d510/logs/exit-code-regression-zero.stderr.txt": {
+      "path": "run/monitor-source-063d8c3e91ef44028497a3309e69d510/logs/exit-code-regression-zero.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-063d8c3e91ef44028497a3309e69d510/logs/exit-code-regression-zero.stdout.txt": {
+      "path": "run/monitor-source-063d8c3e91ef44028497a3309e69d510/logs/exit-code-regression-zero.stdout.txt",
+      "sha256": "2b98ea68ce93cdb1de4a7d10f4c46c17aacc658cc11ed8e32cc0d15612e9c568",
+      "length": 27
+    },
+    "run/monitor-source-063d8c3e91ef44028497a3309e69d510/logs/job-members.jsonl": {
+      "path": "run/monitor-source-063d8c3e91ef44028497a3309e69d510/logs/job-members.jsonl",
+      "sha256": "d19cfb3b7d74d92a69f91793396cb9a7b1f7daa931728e3dd24a401fd195c9b9",
+      "length": 408
+    },
+    "run/monitor-source-063d8c3e91ef44028497a3309e69d510/logs/setup-failure-child.stderr.txt": {
+      "path": "run/monitor-source-063d8c3e91ef44028497a3309e69d510/logs/setup-failure-child.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-063d8c3e91ef44028497a3309e69d510/logs/setup-failure-child.stdout.txt": {
+      "path": "run/monitor-source-063d8c3e91ef44028497a3309e69d510/logs/setup-failure-child.stdout.txt",
+      "sha256": "8ff179f55be1a9908f3e33e97da8aafce587111fab0b67cd5a0cf189c4bad44d",
+      "length": 93
+    },
+    "run/monitor-source-063d8c3e91ef44028497a3309e69d510/logs/setup-failure-control.stderr.txt": {
+      "path": "run/monitor-source-063d8c3e91ef44028497a3309e69d510/logs/setup-failure-control.stderr.txt",
+      "sha256": "dc383c8e63001e4200c71dd2667219139fd7c53397e9e0b15ef4bff8bc79b12c",
+      "length": 81
+    },
+    "run/monitor-source-063d8c3e91ef44028497a3309e69d510/logs/setup-failure-control.stdout.txt": {
+      "path": "run/monitor-source-063d8c3e91ef44028497a3309e69d510/logs/setup-failure-control.stdout.txt",
+      "sha256": "a1064b1c88c57b95c4efbc4875ef110c1b3610960a8f19b8180b39c0e6a1a3b9",
+      "length": 118
+    },
+    "run/monitor-source-063d8c3e91ef44028497a3309e69d510/logs/setup-failure-control.txt": {
+      "path": "run/monitor-source-063d8c3e91ef44028497a3309e69d510/logs/setup-failure-control.txt",
+      "sha256": "1985392f98d03ddec69ea7fbbeda7b449f3deb3ee1b18b1612fede3d9ee30092",
+      "length": 211
+    }
+  },
+  "complete": true,
+  "begin": {
+    "id": "rhai-membership-build-063d8c3e91ef44028497a3309e69d510",
+    "accepted": true,
+    "exit": 0,
+    "exact_build_exited": true,
+    "fixture_sha256": "16e58a223ea9c4a907d91215c21b340c4c9f93b5496bfc594b91967a3081fe1f",
+    "driver_launched": false
+  },
+  "end": {
+    "id": "rhai-membership-build-063d8c3e91ef44028497a3309e69d510",
+    "driver_launched": false,
+    "files": 20,
+    "accepted": true,
+    "exit": 0,
+    "guest_evidence_retained": true
+  }
+}

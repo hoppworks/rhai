@@ -1,0 +1,138 @@
+{
+  "base": "059bb5b10167e97cda6995dec860e3eb86a55207",
+  "nonce": "bf4ee445b3e245d6b22e79ea9c486d2c",
+  "old_build": {
+    "base": "38c2cb81540660e19e4b899415ce0fbca315b3ec",
+    "batch_id": "rhai-current-lease-controls-3b8e6247b6114950b100e00d121f704a",
+    "owner": "current Rhai task",
+    "host": "workhorse",
+    "domain": "rhai-win11-quality",
+    "uuid": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19",
+    "build_relative": ".local\\share\\agent-builds\\rhai\\work-abort-build-4e92c3e57fa14837992fd1d20a3f2f8a\\run\\monitor-source-4e92c3e57fa14837992fd1d20a3f2f8a\\build",
+    "build_scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\work-abort-build-4e92c3e57fa14837992fd1d20a3f2f8a",
+    "build_reuse_expires_utc": "2026-10-25T09:35:52.869113+00:00",
+    "compiler_sha256": "cf32cb7e8e5691b962e1b6f92b03d87409dd9e7afbed71c5bf77b8203cc56ee1",
+    "binaries": {
+      "PayloadFixture.exe": "8564df0bdf03e771c3cc27c7b1b01a77fe3184d44ef9e0a52e1053404a0a3058",
+      "MonitorAcceptanceDriver.exe": "27b1e6f380b5e75f425db2a993793f5a61f64be74827a8ba1957b0e18d5f059a",
+      "ScopedRunner.exe": "72b029407411bacf82c0451b1528ba2faa9644537d386e7b0ac4952c2a3986b2"
+    },
+    "source_pins": {
+      "tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs": "38745833e7b23535cdc2ce225655074c6c5f50e204c0d3cf38d6805f49cb53eb",
+      "tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs": "8f43d33928262ae181aa5396feffef9b0260653609b5be8b01da7b0a7e7b00f7",
+      "tools/windows-scoped-runner/fixtures/PayloadFixture.cs": "6f48ce06a01f06bb8a064aa450624f4dd29ffcbcba1dbaf9c3e52a62b0acaebb",
+      "tools/windows-scoped-runner/LaunchSpecification.cs": "e08957b13d5ed5f86cb37d0545aa876aac50e507692d112b39882f465fff8f2b",
+      "tools/windows-scoped-runner/LeaseMonitor.cs": "72c79f18c96e28f27cd1b7b39b1025da9a250e0608885de7dc48934512a46bfc",
+      "tools/windows-scoped-runner/MonitorAcceptanceDriver.cs": "3961723da38fbba05f800ef76a5d65a6225e25eb79303a05ff420634e0dc1914",
+      "tools/windows-scoped-runner/MonitorPayloadJob.cs": "adf9cd13ac7b46323d2beae799e0eff08fc08504d1b1cb6426998127401663d0",
+      "tools/windows-scoped-runner/MonitorSpecificationIntake.cs": "0f0a71563e6c3d99f0c643644d4b56951f6c69ceb3b10b03157f68dc37bb8412",
+      "tools/windows-scoped-runner/MonitorStagingHandoff.cs": "c541f7d885d032c074461a5a0173b9ae6291ef7d8cd1b9fd2ce4a4f56d1e0e6e",
+      "tools/windows-scoped-runner/MonitorTransport.cs": "ed23c8615af7d8c1b545d3108342640c46f7e245b4e6a83a7c98bf1720a74de8",
+      "tools/windows-scoped-runner/ScopedRunner.cs": "d3a77f0daeebd5beed2b277fae9dc6a522acf1454bb5d8d776d84e1dc8e896c8",
+      "tools/windows-scoped-runner/SpecificationTransfer.cs": "7a9edfe98d84868b55146280bd5ed29576ee0c8725cf9f6c785b784bc0ad25c2",
+      "tools/windows-scoped-runner/WindowsCustodyBackend.cs": "26b7468a0868271a555f6ed450212267b01d7d3fd0a8dd5b3fb51b01b7a05629"
+    },
+    "cases": [
+      {
+        "mode": "disconnect-alive",
+        "tag": "disconnect-alive-current01",
+        "id": "rhai-disconnect-alive-current-c2815485ebee42e7b7eb1c99b6f7a20a",
+        "file": "disconnect-alive.ps1",
+        "sha256": "1e3022a5ceb6a6d14963d6ad6cc3b778fa4ab6f3dd396a689e67fc8b7f3fc1a4",
+        "scope_leaf": "custody-disconnect-alive-c2815485ebee",
+        "original_source": "driver-journal-regressions02-input/disconnect-alive.ps1",
+        "original_sha256": "ff454be909640e7b7c5bfe8872bab483a60e9b29d22f56a51b1999281efc0b4c",
+        "body_unchanged_except_scope": false,
+        "body_delta": "exact CRLF-safe runtime path binding/absence with existing-snapshot negative control; explicit result fields; all process/status/identity/export code retained"
+      },
+      {
+        "mode": "client-death",
+        "tag": "client-death-current01",
+        "id": "rhai-client-death-current-f9f42704c04c432e866e40380ec2da47",
+        "file": "client-death.ps1",
+        "sha256": "231aa2147f8e7e321892857dd642b53a854d74b283257cb4f04ff233af750a8c",
+        "scope_leaf": "custody-client-death-f9f42704c04c",
+        "original_source": "client-death02-input/client-death.ps1",
+        "original_sha256": "ec818cf59df6645786a70c332e6a00b211c76bc1b05253b591b33e7566c43f6f",
+        "body_unchanged_except_scope": false,
+        "body_delta": "exact CRLF-safe runtime path binding/absence with existing-snapshot negative control; explicit result fields; all process/status/identity/export code retained"
+      },
+      {
+        "mode": "replay",
+        "tag": "replay-current01",
+        "id": "rhai-replay-current-229f06e521c0433d81600fd5e4c379e3",
+        "file": "replay.ps1",
+        "sha256": "a4ae25aee3789f36d5eeb38c36ea99a40d8bbea9e84fed23cdd3d3ffd8660146",
+        "scope_leaf": "custody-replay-229f06e521c0",
+        "original_source": "driver-journal-regressions02-input/replay.ps1",
+        "original_sha256": "2b9b5c6c9985efe7898516e83bc9da026c96cc86f5dc89d0e35369219e2c22c5",
+        "body_unchanged_except_scope": false,
+        "body_delta": "exact CRLF-safe runtime path binding/absence with existing-snapshot negative control; explicit result fields; all process/status/identity/export code retained"
+      }
+    ],
+    "limits": {
+      "cases": 3,
+      "new_compiler_launches": 0,
+      "driver_seconds": 180,
+      "observer_seconds": 190,
+      "exit_reserve_seconds": 10,
+      "drain_seconds": 10,
+      "export_seconds": 180,
+      "export_files": 64,
+      "export_file_bytes": 4194304,
+      "export_total_bytes": 16777216,
+      "encoded_frame_characters": 3500,
+      "batch_worst_case_seconds": 1170
+    },
+    "stop": "Stop after the first incomplete case; export/retain originals and custody. No automatic repeat, source change or rebuild.",
+    "reason": "Current Backend retirement changes negative cleanup; original protocol/lease findings and assertion controls retained."
+  },
+  "retained_expiry_utc": "2026-10-25T09:35:52.869113+00:00",
+  "cases": [
+    {
+      "mode": "membership",
+      "id": "rhai-membership-6aa1c4f318f1495e833dddde643c7627",
+      "scope_leaf": "membership-membership-6aa1c4f318f1495e833dddde643c7627",
+      "tag": "membership03"
+    },
+    {
+      "mode": "deadline",
+      "id": "rhai-deadline-5bead7469f7e40e18e9aa931bd8ab587",
+      "scope_leaf": "membership-deadline-5bead7469f7e40e18e9aa931bd8ab587",
+      "tag": "deadline03"
+    }
+  ],
+  "new_source_pins": {
+    "tools/windows-scoped-runner/LaunchSpecification.cs": "e08957b13d5ed5f86cb37d0545aa876aac50e507692d112b39882f465fff8f2b",
+    "tools/windows-scoped-runner/LeaseMonitor.cs": "72c79f18c96e28f27cd1b7b39b1025da9a250e0608885de7dc48934512a46bfc",
+    "tools/windows-scoped-runner/MonitorPayloadJob.cs": "adf9cd13ac7b46323d2beae799e0eff08fc08504d1b1cb6426998127401663d0",
+    "tools/windows-scoped-runner/MonitorSpecificationIntake.cs": "0f0a71563e6c3d99f0c643644d4b56951f6c69ceb3b10b03157f68dc37bb8412",
+    "tools/windows-scoped-runner/MonitorStagingHandoff.cs": "c541f7d885d032c074461a5a0173b9ae6291ef7d8cd1b9fd2ce4a4f56d1e0e6e",
+    "tools/windows-scoped-runner/MonitorTransport.cs": "ed23c8615af7d8c1b545d3108342640c46f7e245b4e6a83a7c98bf1720a74de8",
+    "tools/windows-scoped-runner/ScopedRunner.cs": "d3a77f0daeebd5beed2b277fae9dc6a522acf1454bb5d8d776d84e1dc8e896c8",
+    "tools/windows-scoped-runner/SpecificationTransfer.cs": "7a9edfe98d84868b55146280bd5ed29576ee0c8725cf9f6c785b784bc0ad25c2",
+    "tools/windows-scoped-runner/WindowsCustodyBackend.cs": "26b7468a0868271a555f6ed450212267b01d7d3fd0a8dd5b3fb51b01b7a05629",
+    "tools/windows-scoped-runner/MonitorAcceptanceDriver.cs": "3961723da38fbba05f800ef76a5d65a6225e25eb79303a05ff420634e0dc1914",
+    "tools/windows-scoped-runner/fixtures/PayloadFixture.cs": "6f48ce06a01f06bb8a064aa450624f4dd29ffcbcba1dbaf9c3e52a62b0acaebb",
+    "tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs": "8f43d33928262ae181aa5396feffef9b0260653609b5be8b01da7b0a7e7b00f7",
+    "tools/windows-scoped-runner/fixtures/CustodyBackendFixture.cs": "38745833e7b23535cdc2ce225655074c6c5f50e204c0d3cf38d6805f49cb53eb",
+    "tools/windows-scoped-runner/fixtures/MonitorDeathFixture.cs": "1a28841a7acbc270f8466a48cd1d51fb90952678573b2bb7cd60e117987c7a09",
+    "tools/windows-scoped-runner/fixtures/RunSourceFixtures.ps1": "2fbcd3b061db4c1b4c9546c759d59cd4b4d843f15ca145203fc3225c2b579dd0",
+    "tools/windows-scoped-runner/fixtures/RunMembershipControl.ps1": "8928e526aae282827b3d6aefab7aed324d0f6d6b00177b1a3880a005b1665182"
+  },
+  "build_session_leaf": "membership-build-bf4ee445b3e245d6b22e79ea9c486d2c",
+  "build_tag": "membership-build01",
+  "build_id": "rhai-membership-build-bf4ee445b3e245d6b22e79ea9c486d2c",
+  "limits": {
+    "build_observer_seconds": 270,
+    "termination_seconds": 30,
+    "normal_driver_observer_seconds": 240,
+    "deadline_driver_observer_seconds": 240,
+    "closure_observer_seconds": 60,
+    "pipe_drain_seconds": 10,
+    "export_seconds_per_case": 180,
+    "max_files": 64,
+    "max_file_bytes": 4194304,
+    "max_total_bytes": 16777216
+  }
+}

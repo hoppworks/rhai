@@ -1,0 +1,10 @@
+{
+  "phase": "build",
+  "utc": "2026-10-25T09:32:57.972121+00:00",
+  "bound_seconds": 480,
+  "transport_reserve_seconds": 45,
+  "expiry": "2026-10-25T10:05:52.869113+00:00",
+  "source_sha256": "857adae92b091df96e8b9a5cd1a2f4c048620e5eadca1ce0459ff3c33afcbb8d",
+  "correction": "complete bounded Job PID list including both exact actors; no exclusivity assumption",
+  "source_review": "PASS fixture1a28841a/control8928e526; native validation pending"
+}

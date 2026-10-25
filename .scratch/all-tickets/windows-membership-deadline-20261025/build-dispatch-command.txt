@@ -1,0 +1,1 @@
+if ((get-filehash e:\start.ps1).hash -eq '7a062cabbbbe08e9475906634ab100e4206a53d282c86c4deefc4dcd7101ec87') { & ([scriptblock]::create((get-content e:\start.ps1 -raw))) -Phase build } else { throw 'source mismatch' }

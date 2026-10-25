@@ -1,0 +1,4 @@
+System.InvalidOperationException: exact peer exited before handshake
+   at MonitorDeathFixture.WaitForRecord(String path, String expected, Process peer)
+   at MonitorDeathFixture.MembershipControl(String prefix, Boolean leaf, Boolean deadline)
+   at MonitorDeathFixture.Main(String[] args)

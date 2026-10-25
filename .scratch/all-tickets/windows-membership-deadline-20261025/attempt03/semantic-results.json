@@ -1,0 +1,40 @@
+{
+  "accepted": true,
+  "cases": [
+    {
+      "mode": "membership",
+      "accepted": true,
+      "driver_exit": 0,
+      "payload_exit": "00000000",
+      "supervision": "PayloadExited",
+      "crc_records": 8,
+      "frames": 69,
+      "files": 17,
+      "actor_count": 2,
+      "membership_lists": [
+        "self=pid=4572 creation=134373980376037619;peer=pid=3404 creation=134373980378709568;members=3404,3608,4572,9124;assigned=4;returned=4",
+        "self=pid=3404 creation=134373980378709568;peer=pid=4572 creation=134373980376037619;members=3404,3608,4572,9124;assigned=4;returned=4"
+      ],
+      "elapsed_seconds": 2.0517925999999997
+    },
+    {
+      "mode": "deadline",
+      "accepted": true,
+      "driver_exit": 2,
+      "payload_exit": "0000007D",
+      "supervision": "MonitorStopped",
+      "crc_records": 8,
+      "frames": 69,
+      "files": 17,
+      "actor_count": 2,
+      "membership_lists": [
+        "self=pid=10164 creation=134373981247926443;peer=pid=5532 creation=134373981250367603;members=2784,5532,9788,10164;assigned=4;returned=4",
+        "self=pid=5532 creation=134373981250367603;peer=pid=10164 creation=134373981247926443;members=2784,5532,9788,10164;assigned=4;returned=4"
+      ],
+      "elapsed_seconds": 180.23360029999998
+    }
+  ],
+  "compiler_launches": 1,
+  "public_drivers": 2,
+  "monitor_absolute_30minute_deadline": "not proved"
+}

@@ -1,0 +1,60 @@
+{
+  "frames": 11,
+  "files": {
+    "bootstrap.stdout": {
+      "path": "bootstrap.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "bootstrap.stderr": {
+      "path": "bootstrap.stderr",
+      "sha256": "f1c0b6c5cd5726c1f2f4628ca377762150c20d37f5838c49c59ae2575e4927f6",
+      "length": 97
+    },
+    "observer.json": {
+      "path": "observer.json",
+      "sha256": "1dc736e1c8f8507ac8a5a70c637a80c295e0613509095daadcdd2f8c8b7d4068",
+      "length": 1178
+    }
+  },
+  "complete": true,
+  "begin": {
+    "id": "rhai-membership-7756151b9a8b488ea7df3c92b5a04494",
+    "mode": "membership",
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\membership-membership-7756151b9a8b488ea7df3c92b5a04494",
+    "run": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\membership-membership-7756151b9a8b488ea7df3c92b5a04494\\run",
+    "exit": 2,
+    "accepted": false,
+    "failure": "System.Management.Automation.RuntimeException: Normal public Driver contract failed.",
+    "fresh_host_record": false,
+    "wrong_expectation_red": false,
+    "membership_negative_control": false,
+    "actors": [],
+    "actors_stopped": false,
+    "pair_seen_live": false,
+    "live_identities": [],
+    "allocated_runtime": null,
+    "runtime_absent_readback": false,
+    "runtime_absence_negative_control": false,
+    "journal": null,
+    "driver_launched": true,
+    "exact_driver_exited": true,
+    "pipes_drained": true,
+    "retained_driver_handles": false,
+    "retained_binaries": {
+      "MonitorAcceptanceDriver.exe": "27b1e6f380b5e75f425db2a993793f5a61f64be74827a8ba1957b0e18d5f059a",
+      "ScopedRunner.exe": "72b029407411bacf82c0451b1528ba2faa9644537d386e7b0ac4952c2a3986b2"
+    },
+    "fixture_sha256": "16e58a223ea9c4a907d91215c21b340c4c9f93b5496bfc594b91967a3081fe1f",
+    "elapsed_seconds": 1.5679201999999999,
+    "product_run": false
+  },
+  "end": {
+    "id": "rhai-membership-7756151b9a8b488ea7df3c92b5a04494",
+    "driver_launched": true,
+    "files": 3,
+    "accepted": false,
+    "exit": 2,
+    "guest_evidence_retained": true
+  }
+}

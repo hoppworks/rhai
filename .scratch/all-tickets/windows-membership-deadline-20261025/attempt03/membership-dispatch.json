@@ -1,0 +1,9 @@
+{
+  "phase": "membership",
+  "utc": "2026-10-25T09:33:36.735626+00:00",
+  "bound_seconds": 490,
+  "transport_reserve_seconds": 45,
+  "expiry": "2026-10-25T10:05:52.869113+00:00",
+  "source_sha256": "857adae92b091df96e8b9a5cd1a2f4c048620e5eadca1ce0459ff3c33afcbb8d",
+  "purpose": "one evidence-based oracle correction: complete list includes real pair; no exact-two exclusivity; no deadline until normal passes"
+}

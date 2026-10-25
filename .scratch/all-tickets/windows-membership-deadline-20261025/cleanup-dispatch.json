@@ -1,0 +1,7 @@
+{
+  "utc": "2026-10-25T09:42:13.130990+00:00",
+  "cleanup_source_sha256": "4dbc105d475a466a93bd138fe4eb2faec7979f9d5cae12c9a8cdd34aa557b1b1",
+  "host_manifest_sha256": "c15944ec3d381fef293c416b49caeca823819c4b4f572f12cd560cf907dbe176",
+  "semantic_originals_review": "PASS named two criteria, failed first two remain failed; all eight scopes closed/exported; preserve original diagnostics",
+  "no_test_reexecution": true
+}

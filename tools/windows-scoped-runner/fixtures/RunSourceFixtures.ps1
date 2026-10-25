@@ -61,7 +61,7 @@ $expected = @{
 $expected['tools/windows-scoped-runner/MonitorAcceptanceDriver.cs'] = '3961723da38fbba05f800ef76a5d65a6225e25eb79303a05ff420634e0dc1914'
 $expected['tools/windows-scoped-runner/fixtures/NativeScopePolicyFixture.cs'] = '8f43d33928262ae181aa5396feffef9b0260653609b5be8b01da7b0a7e7b00f7'
 if ($DriverParserFixture) { $expected['tools/windows-scoped-runner/fixtures/MonitorAcceptanceDriverFixture.cs'] = '2cd12d8de5f65eb48cd1f8e53e1d8850838c7fc55ce6e441cc17228f1b9fff40' }
-if ($MonitorDeathFixtureOnly) { $expected['tools/windows-scoped-runner/fixtures/MonitorDeathFixture.cs'] = 'f9b24970b8befd8432ca16d7d17ebd8087f4f85490251deca39b6000704835b3' }
+if ($MonitorDeathFixtureOnly) { $expected['tools/windows-scoped-runner/fixtures/MonitorDeathFixture.cs'] = '1a28841a7acbc270f8466a48cd1d51fb90952678573b2bb7cd60e117987c7a09' }
 if ($BuildOnly) {
     foreach ($relative in @($expected.Keys)) {
         if ($relative -like '*/fixtures/*' -and $relative -ne 'tools/windows-scoped-runner/fixtures/PayloadFixture.cs' -and

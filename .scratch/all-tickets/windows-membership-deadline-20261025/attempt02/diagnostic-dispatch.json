@@ -1,0 +1,8 @@
+{
+  "utc": "2026-10-25T09:29:30.997585+00:00",
+  "readback_only": true,
+  "native_reexecution": false,
+  "source_sha256": "bcb85d771e4a6b981cd5f0f05b01a4c0414b29d5908b63a348d9bbfae7d67fc0",
+  "bound_seconds": 180,
+  "source_review": "same accepted read-only body, only exact case ID/scope changed to original attempt02 observer"
+}

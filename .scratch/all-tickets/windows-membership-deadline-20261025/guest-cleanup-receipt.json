@@ -1,0 +1,17 @@
+{
+  "nonce": "063d8c3e91ef44028497a3309e69d510",
+  "host_manifest_sha256": "c15944ec3d381fef293c416b49caeca823819c4b4f572f12cd560cf907dbe176",
+  "semantic_results_sha256": "a5be2a70d518afbf41bb35853c7a130a0bcbe87bdce0055a30bf9f36dcc1a4da",
+  "retired": [
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\work-abort-build-4e92c3e57fa14837992fd1d20a3f2f8a",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\membership-build-063d8c3e91ef44028497a3309e69d510",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\membership-membership-7756151b9a8b488ea7df3c92b5a04494",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\membership-build-63730933ca144794993ee3aaa8ce5158",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\membership-membership-82b6b206d2a54d4b99a973c672e9aeac",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\membership-build-bf4ee445b3e245d6b22e79ea9c486d2c",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\membership-membership-6aa1c4f318f1495e833dddde643c7627",
+    "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\membership-deadline-5bead7469f7e40e18e9aa931bd8ab587"
+  ],
+  "all_scopes_absent": true,
+  "foreign_resources_touched": false
+}

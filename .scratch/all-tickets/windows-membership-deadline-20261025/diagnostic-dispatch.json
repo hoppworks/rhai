@@ -1,0 +1,8 @@
+{
+  "utc": "2026-10-25T09:23:24.901748+00:00",
+  "readback_only": true,
+  "native_reexecution": false,
+  "source_sha256": "79186cb0247bc253e6f46c97f4c7195a4fdf9eea2f1009e160891a18c1e14332",
+  "bound_seconds": 180,
+  "source_review": "PASS; corrected binding guards preserve null original allocation"
+}

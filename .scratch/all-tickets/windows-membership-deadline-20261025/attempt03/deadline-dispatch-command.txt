@@ -1,0 +1,1 @@
+if ((get-filehash e:\start.ps1).hash -eq '857adae92b091df96e8b9a5cd1a2f4c048620e5eadca1ce0459ff3c33afcbb8d') { & ([scriptblock]::create((get-content e:\start.ps1 -raw))) -Phase deadline } else { throw 'source mismatch' }

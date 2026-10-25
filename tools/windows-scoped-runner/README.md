@@ -237,6 +237,24 @@ independent payload identity stopped and runtime removal. Absent or contradictor
 termination evidence still fails closed. Ordinary-exit residual-child cleanup, remaining fault controls and Cargo work
 retirement remain open.
 
+### Native membership and Driver deadline
+
+`fixtures/MonitorDeathFixture.cs --membership` queries complete bounded Job PID
+lists in the payload and its ordinary child before either writes useful work.
+The `--membership-deadline` variant holds both actors for240s; the existing Driver
+reaches its180s deadline first. `fixtures/RunMembershipControl.ps1` independently
+checks exact PID/start identities, native membership/work records, negative
+controls, complete journal/snapshot binding and final runtime absence.
+
+The current native pair and Driver-deadline rows pass. The observed Job lists
+contain four PIDs, including both exact actors; exclusivity is not required. The
+Driver deadline returns2 with the intended timeout, retaining kill-on-close custody
+through process teardown after orderly client/controller disposition fails. This
+proves post-teardown closure, not successful orderly disposition, watchdog124 or
+the separate30minute monitor deadline. See [the complete original proof and bounds](../../.scratch/all-tickets/windows-membership-deadline-20261025/proof.md).
+The previous cached binaries and all owned fixtures/media have been retired.
+Full custody and native Rust/Cargo acceptance remain open.
+
 ### Native monitor-death control
 
 The finite input in `fixtures/MonitorDeathFixture.cs` creates a real ordinary

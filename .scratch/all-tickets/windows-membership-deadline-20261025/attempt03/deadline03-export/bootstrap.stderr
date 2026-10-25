@@ -1,0 +1,5 @@
+driver failure: TimeoutException: whole-driver deadline expired during monitor frame wait
+cleanup failure: TimeoutException: could not confirm exact client exit during cleanup
+cleanup failure (restoring fail-closed job custody): InvalidOperationException: cannot release controller job: exact client is not confirmed exited or active process count is not exactly the driver
+process/pipe handles retained until driver process teardown because exact exit or worker joins were not confirmed
+controller job retains kill-on-close custody until driver process teardown
