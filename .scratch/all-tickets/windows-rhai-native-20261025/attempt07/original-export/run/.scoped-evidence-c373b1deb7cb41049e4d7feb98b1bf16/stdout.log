@@ -1,0 +1,144 @@
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded windows-targets v0.52.6
+  Downloaded ambient-authority v0.0.2
+  Downloaded const-random-macro v0.1.16
+  Downloaded smartstring v1.0.1
+  Downloaded version_check v0.9.5
+  Downloaded ryu v1.0.20
+  Downloaded tiny-keccak v2.0.2
+  Downloaded fs-set-times v0.20.3
+  Downloaded winx v0.36.4
+  Downloaded paste v1.0.15
+  Downloaded unicode-ident v1.0.22
+  Downloaded serde_core v1.0.229
+  Downloaded static_assertions v1.1.0
+  Downloaded serde v1.0.229
+  Downloaded rmp-serde v1.3.0
+  Downloaded bitflags v2.13.2
+  Downloaded smallvec v1.16.2
+  Downloaded rmp v0.8.14
+  Downloaded proc-macro2 v1.0.103
+  Downloaded syn v2.0.106
+  Downloaded serde_json v1.0.145
+  Downloaded num-traits v0.2.19
+  Downloaded syn v3.0.6
+  Downloaded cap-primitives v4.0.3
+  Downloaded zerocopy v0.8.59
+  Downloaded portable-atomic v1.15.0
+  Downloaded memchr v2.8.3
+  Downloaded cap-std v4.0.3
+  Downloaded once_cell v1.21.4
+  Downloaded io-extras v0.19.0
+  Downloaded getrandom v0.3.4
+  Downloaded cfg-if v1.0.5
+  Downloaded thin-vec v0.2.19
+  Downloaded maybe-owned v0.3.4
+  Downloaded const-random v0.1.18
+  Downloaded io-lifetimes v3.0.1
+  Downloaded io-lifetimes v2.0.4
+  Downloaded getrandom v0.2.17
+  Downloaded autocfg v1.5.1
+  Downloaded windows-targets v0.53.5
+  Downloaded itoa v1.0.15
+  Downloaded crunchy v0.2.4
+  Downloaded ahash v0.8.12
+  Downloaded serde_derive v1.0.229
+  Downloaded ipnet v2.12.2
+  Downloaded byteorder v1.5.0
+  Downloaded quote v1.0.41
+  Downloaded windows_x86_64_msvc v0.53.1
+  Downloaded windows_x86_64_msvc v0.52.6
+  Downloaded windows-sys v0.59.0
+  Downloaded windows-sys v0.60.2
+ Downloading crates ...
+  Downloaded libc v0.2.189
+ Downloading crates ...
+  Downloaded web-time v1.1.0
+   Compiling proc-macro2 v1.0.103
+   Compiling unicode-ident v1.0.22
+   Compiling quote v1.0.41
+   Compiling autocfg v1.5.1
+   Compiling windows_x86_64_msvc v0.52.6
+   Compiling windows_x86_64_msvc v0.53.1
+   Compiling version_check v0.9.5
+   Compiling serde_core v1.0.229
+   Compiling crunchy v0.2.4
+   Compiling windows-targets v0.52.6
+   Compiling io-lifetimes v2.0.4
+   Compiling cfg-if v1.0.5
+   Compiling io-lifetimes v3.0.1
+   Compiling tiny-keccak v2.0.2
+   Compiling windows-targets v0.53.5
+   Compiling windows-sys v0.59.0
+   Compiling syn v3.0.6
+   Compiling num-traits v0.2.19
+   Compiling io-extras v0.19.0
+   Compiling serde v1.0.229
+   Compiling portable-atomic v1.15.0
+   Compiling serde_derive v1.0.229
+   Compiling windows-sys v0.60.2
+   Compiling getrandom v0.2.17
+   Compiling getrandom v0.3.4
+   Compiling once_cell v1.21.4
+   Compiling zerocopy v0.8.59
+   Compiling bitflags v2.13.2
+   Compiling cap-primitives v4.0.3
+   Compiling winx v0.36.4
+   Compiling const-random-macro v0.1.16
+   Compiling fs-set-times v0.20.3
+   Compiling smartstring v1.0.1
+   Compiling ahash v0.8.12
+   Compiling cap-std v4.0.3
+   Compiling ambient-authority v0.0.2
+   Compiling ipnet v2.12.2
+   Compiling serde_json v1.0.145
+   Compiling maybe-owned v0.3.4
+   Compiling paste v1.0.15
+   Compiling const-random v0.1.18
+   Compiling syn v2.0.106
+   Compiling rhai v1.26.1 (C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-f0574ef3\run\scoped-c373b1deb7cb41049e4d7feb98b1bf16)
+   Compiling itoa v1.0.15
+   Compiling memchr v2.8.3
+   Compiling static_assertions v1.1.0
+   Compiling ryu v1.0.20
+   Compiling smallvec v1.16.2
+   Compiling thin-vec v0.2.19
+   Compiling byteorder v1.5.0
+   Compiling rmp v0.8.14
+   Compiling rhai_codegen v3.2.0 (C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-f0574ef3\run\scoped-c373b1deb7cb41049e4d7feb98b1bf16\codegen)
+   Compiling rmp-serde v1.3.0
+warning: unused variable: `module`
+   --> src\packages\sys\process.rs:143:24
+    |
+143 | pub(super) fn register(module: &mut Module, state: &crate::Shared<super::SysState>) {
+    |                        ^^^^^^ help: if this is intentional, prefix it with an underscore: `_module`
+    |
+    = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default
+
+warning: unused variable: `state`
+   --> src\packages\sys\process.rs:143:45
+    |
+143 | pub(super) fn register(module: &mut Module, state: &crate::Shared<super::SysState>) {
+    |                                             ^^^^^ help: if this is intentional, prefix it with an underscore: `_state`
+
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+rustc-LLVM ERROR: out of memory
+Allocation failed
+warning: `rhai` (lib) generated 3 warnings (run `cargo fix --lib -p rhai` to apply 2 suggestions)
+error: could not compile `rhai` (lib); 3 warnings emitted
+
+Caused by:
+  process didn't exit successfully: `C:\Users\RhaiTest\.rustup\toolchains\1.93.0-x86_64-pc-windows-msvc\bin\rustc.exe --crate-name rhai --edition=2021 src\lib.rs --error-format=json --json=diagnostic-rendered-ansi,artifacts,future-incompat --crate-type lib --emit=dep-info,metadata,link -C embed-bitcode=no -C debuginfo=2 --cfg "feature=\"default\"" --cfg "feature=\"metadata\"" --cfg "feature=\"net\"" --cfg "feature=\"serde\"" --cfg "feature=\"serde_json\"" --cfg "feature=\"std\"" --cfg "feature=\"sys\"" --cfg "feature=\"testing-environ\"" --check-cfg cfg(docsrs,test) --check-cfg "cfg(feature, values(\"arbitrary\", \"bin-features\", \"core-error\", \"debugging\", \"decimal\", \"default\", \"document-features\", \"f32_float\", \"fuzz\", \"getrandom\", \"grain\", \"hashbrown\", \"internals\", \"libm\", \"metadata\", \"net\", \"no-std-compat\", \"no_ast\", \"no_closure\", \"no_custom_syntax\", \"no_float\", \"no_function\", \"no_index\", \"no_module\", \"no_object\", \"no_optimize\", \"no_position\", \"no_std\", \"no_time\", \"only_i32\", \"only_i64\", \"rust_decimal\", \"rustyline\", \"serde\", \"serde_json\", \"std\", \"sync\", \"sys\", \"testing-environ\", \"unchecked\", \"unicode-xid\", \"unicode-xid-ident\", \"unstable\", \"wasm-bindgen\"))" -C metadata=ea1947e9df304233 -C extra-filename=-c86199c4b0a01704 --out-dir C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-f0574ef3\run\scoped-c373b1deb7cb41049e4d7feb98b1bf16\work\target\debug\deps -C incremental=C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-f0574ef3\run\scoped-c373b1deb7cb41049e4d7feb98b1bf16\work\target\debug\incremental -L dependency=C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-f0574ef3\run\scoped-c373b1deb7cb41049e4d7feb98b1bf16\work\target\debug\deps --extern ahash=C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-f0574ef3\run\scoped-c373b1deb7cb41049e4d7feb98b1bf16\work\target\debug\deps\libahash-312d824ae2da2e80.rmeta --extern bitflags=C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-f0574ef3\run\scoped-c373b1deb7cb41049e4d7feb98b1bf16\work\target\debug\deps\libbitflags-b15035198eac7475.rmeta --extern cap_std=C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-f0574ef3\run\scoped-c373b1deb7cb41049e4d7feb98b1bf16\work\target\debug\deps\libcap_std-968f085e0d2cab51.rmeta --extern num_traits=C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-f0574ef3\run\scoped-c373b1deb7cb41049e4d7feb98b1bf16\work\target\debug\deps\libnum_traits-1e4071fa1c7963d4.rmeta --extern once_cell=C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-f0574ef3\run\scoped-c373b1deb7cb41049e4d7feb98b1bf16\work\target\debug\deps\libonce_cell-d4049c63050aae61.rmeta --extern rhai_codegen=C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-f0574ef3\run\scoped-c373b1deb7cb41049e4d7feb98b1bf16\work\target\debug\deps\rhai_codegen-32c41a95f247d0f4.dll --extern serde=C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-f0574ef3\run\scoped-c373b1deb7cb41049e4d7feb98b1bf16\work\target\debug\deps\libserde-67ae9329a4d1cea6.rmeta --extern serde_json=C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-f0574ef3\run\scoped-c373b1deb7cb41049e4d7feb98b1bf16\work\target\debug\deps\libserde_json-be7b89974f5b7e66.rmeta --extern smallvec=C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-f0574ef3\run\scoped-c373b1deb7cb41049e4d7feb98b1bf16\work\target\debug\deps\libsmallvec-bfe738f6412b277f.rmeta --extern smartstring=C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-f0574ef3\run\scoped-c373b1deb7cb41049e4d7feb98b1bf16\work\target\debug\deps\libsmartstring-367be30cc31c66c1.rmeta --extern thin_vec=C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-f0574ef3\run\scoped-c373b1deb7cb41049e4d7feb98b1bf16\work\target\debug\deps\libthin_vec-44b65b275c0678c8.rmeta -L native=C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-f0574ef3\run\scoped-c373b1deb7cb41049e4d7feb98b1bf16\work\cargo-home\registry\src\index.crates.io-1949cf8c6b5b557f\windows_x86_64_msvc-0.52.6\lib -L native=C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-f0574ef3\run\scoped-c373b1deb7cb41049e4d7feb98b1bf16\work\cargo-home\registry\src\index.crates.io-1949cf8c6b5b557f\windows_x86_64_msvc-0.53.1\lib` (exit code: 0xc0000409, STATUS_STACK_BUFFER_OVERRUN)
