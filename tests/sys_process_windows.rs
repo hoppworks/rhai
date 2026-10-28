@@ -17,10 +17,13 @@ const FIXTURE_FAST_RECORD_ENV: &str = "RHAI_SYS_WINDOWS_PROCESS_FAST_RECORD";
 const FIXTURE_INVALID_COUNT_ENV: &str = "RHAI_SYS_WINDOWS_PROCESS_INVALID_COUNT";
 const WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_PROCESS_WRONG_EXPECTATION";
 const TEXT_LIMIT_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_TEXT_LIMIT_WRONG_EXPECTATION";
+const TIMEOUT_RECORD_ENV: &str = "RHAI_WINDOWS_TIMEOUT_RECORD";
+const TIMEOUT_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_TIMEOUT_WRONG_EXPECTATION";
 const LIBTEST_QUIET_START: &[u8] = b"\nrunning 1 test\n";
 
 type Handle = *mut c_void;
 const PROCESS_QUERY_LIMITED_INFORMATION: u32 = 0x1000;
+const PROCESS_TERMINATE: u32 = 0x0001;
 const SYNCHRONIZE: u32 = 0x0010_0000;
 const WAIT_OBJECT_0: u32 = 0;
 
@@ -29,6 +32,7 @@ extern "system" {
     fn OpenProcess(access: u32, inherit: i32, pid: u32) -> Handle;
     fn WaitForSingleObject(handle: Handle, milliseconds: u32) -> u32;
     fn GetExitCodeProcess(handle: Handle, exit_code: *mut u32) -> i32;
+    fn TerminateProcess(handle: Handle, exit_code: u32) -> i32;
     fn CloseHandle(handle: Handle) -> i32;
 }
 
@@ -37,6 +41,31 @@ struct OwnedProcessHandle(Handle);
 impl Drop for OwnedProcessHandle {
     fn drop(&mut self) {
         unsafe { CloseHandle(self.0) };
+    }
+}
+
+struct TimeoutChildGuard {
+    handle: OwnedProcessHandle,
+    pid: u32,
+    exit_observed: bool,
+}
+
+impl Drop for TimeoutChildGuard {
+    fn drop(&mut self) {
+        if self.exit_observed {
+            return;
+        }
+        if unsafe { WaitForSingleObject(self.handle.0, 0) } == WAIT_OBJECT_0 {
+            return;
+        }
+        let terminated = unsafe { TerminateProcess(self.handle.0, 1) };
+        if terminated == 0 {
+            eprintln!("failed to terminate exact timeout fixture {}: {}", self.pid, std::io::Error::last_os_error());
+        }
+        let wait = unsafe { WaitForSingleObject(self.handle.0, 10_000) };
+        if wait != WAIT_OBJECT_0 {
+            eprintln!("exact timeout fixture {} remained unconfirmed after cleanup: {wait:#x}", self.pid);
+        }
     }
 }
 
@@ -103,6 +132,111 @@ fn windows_process_fast_probe() {
         return;
     };
     std::fs::write(record, format!("pid={}\n", process::id())).expect("write fast child record");
+}
+
+/// A real child writes its PID only after flushing the bytes the supervisor must retain.
+#[test]
+fn windows_timeout_fixture() {
+    let Ok(record) = std::env::var(TIMEOUT_RECORD_ENV) else {
+        return;
+    };
+    std::io::Write::write_all(&mut std::io::stdout(), b"timeout-ready").unwrap();
+    std::io::Write::flush(&mut std::io::stdout()).unwrap();
+    let path = std::path::Path::new(&record);
+    let temporary = path.with_extension("tmp");
+    std::fs::write(&temporary, format!("pid={}\n", process::id())).unwrap();
+    std::fs::rename(&temporary, path).unwrap();
+    let observed = path.with_extension("observed");
+    let safety_deadline = Instant::now() + Duration::from_secs(20);
+    while !observed.exists() {
+        assert!(Instant::now() < safety_deadline, "observer never acquired child handle");
+        thread::sleep(Duration::from_millis(10));
+    }
+    while Instant::now() < safety_deadline {
+        thread::sleep(Duration::from_millis(20));
+    }
+    panic!("parent did not terminate the child before its safety deadline");
+}
+
+#[test]
+fn windows_run_raw_timeout_terminates_exact_child_and_retains_output() {
+    use rhai::packages::sys::ProcessCause;
+
+    let records = TempDir::new();
+    let record = records.path().join("timeout-child.txt");
+    let observed = record.with_extension("observed");
+    let observer = thread::spawn({
+        let record = record.clone();
+        move || {
+            let deadline = Instant::now() + Duration::from_secs(4);
+            let text = loop {
+                match std::fs::read_to_string(&record) {
+                    Ok(text) => break text,
+                    Err(error) if error.kind() == std::io::ErrorKind::NotFound && Instant::now() < deadline => {
+                        thread::sleep(Duration::from_millis(10));
+                    }
+                    Err(error) => panic!("timeout child readiness unavailable: {error}"),
+                }
+            };
+            let pid = text.trim().strip_prefix("pid=").unwrap().parse::<u32>().unwrap();
+            let raw = unsafe { OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | PROCESS_TERMINATE | SYNCHRONIZE, 0, pid) };
+            assert!(!raw.is_null(), "open exact timeout child {pid}: {}", std::io::Error::last_os_error());
+            let mut guard = TimeoutChildGuard {
+                handle: OwnedProcessHandle(raw),
+                pid,
+                exit_observed: false,
+            };
+            std::fs::write(observed, b"handle acquired\n").unwrap();
+            let wait = unsafe { WaitForSingleObject(guard.handle.0, 15_000) };
+            assert_eq!(wait, WAIT_OBJECT_0, "exact timeout child {pid} did not terminate: {wait:#x}");
+            guard.exit_observed = true;
+            let mut exit_code = u32::MAX;
+            assert_ne!(unsafe { GetExitCodeProcess(guard.handle.0, &mut exit_code) }, 0, "query exact timeout child {pid}: {}", std::io::Error::last_os_error());
+            (pid, exit_code)
+        }
+    });
+    let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let script_record = record.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let script = format!(
+        r#"run_raw("{executable}", ["--exact", "windows_timeout_fixture", "--nocapture", "--quiet"], #{{
+            env_clear: true,
+            env: #{{ {TIMEOUT_RECORD_ENV}: "{script_record}" }},
+            max_output: 1024,
+            timeout: 5
+        }})"#
+    );
+    let result = engine(SysConfig::default().programs(ProgramPolicy::Any)).eval::<Map>(&script);
+    let (pid, observed_exit) = observer.join().expect("join exact timeout-child observer");
+    eprintln!("windows_timeout_child_readback pid={pid} exit={observed_exit} exact_handle_signaled=true");
+    let error = result.expect_err("a running child must time out");
+    let sys_error = match *error {
+        EvalAltResult::ErrorRuntime(value, _) => value.try_cast::<SysError>().expect("typed process error"),
+        other => panic!("unexpected error: {other:?}"),
+    };
+    match sys_error {
+        SysError::Process { cause: ProcessCause::Timeout(_), report } => {
+            eprintln!(
+                "windows_timeout_report timed_out={} stdout_complete={} stderr_complete={} exit={:?} diagnostics={:?}",
+                report.timed_out(),
+                report.stdout_complete(),
+                report.stderr_complete(),
+                report.exit_code(),
+                report.cleanup_diagnostics()
+            );
+            if std::env::var_os(TIMEOUT_WRONG_EXPECTATION_ENV).is_some() {
+                assert!(!report.timed_out(), "deliberately wrong timeout expectation");
+            }
+            assert!(report.timed_out());
+            let mut expected = LIBTEST_QUIET_START.to_vec();
+            expected.extend_from_slice(b"timeout-ready");
+            assert_eq!(report.stdout_bytes(), expected);
+            assert_eq!(report.exit_code().map(|code| code as u32), Some(observed_exit), "report differs from exact child exit status");
+            eprintln!("windows_timeout_capture stdout_complete={} stderr_complete={}", report.stdout_complete(), report.stderr_complete());
+            assert!(report.cleanup_diagnostics().is_empty(), "cleanup diagnostics: {:?}", report.cleanup_diagnostics());
+        }
+        other => panic!("expected a timeout with a retained report, got {other:?}"),
+    }
+    assert_eq!(std::fs::read_to_string(&record).unwrap().trim(), format!("pid={pid}"));
 }
 
 #[test]
@@ -188,6 +322,7 @@ fn windows_run_raw_captures_output_and_nonzero_exit() {
 fn windows_run_returns_lossy_text_and_nonzero_exit() {
     let mut engine = engine(SysConfig::default().programs(ProgramPolicy::Any));
     // Leave room for the four argument literals while keeping the raw output larger.
+    #[cfg(not(feature = "unchecked"))]
     engine.set_max_array_size(16);
     let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
     for code in [0, 7] {

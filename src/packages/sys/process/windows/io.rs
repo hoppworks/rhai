@@ -37,6 +37,14 @@ pub(super) struct PipeReader {
     eof: bool,
 }
 
+/// Outcome of one bounded cancellation attempt. Incomplete operations retain their
+/// kernel-borrowed storage; completed reads may still have delivered bytes.
+pub(super) struct CancelRead {
+    pub completed: bool,
+    pub bytes: Vec<u8>,
+    pub errors: Vec<io::Error>,
+}
+
 // SAFETY: the kernel borrows only the boxed buffer and OVERLAPPED allocations, whose addresses
 // remain stable when this owner moves. No Rust reference is shared across threads; the cleanup
 // worker takes exclusive ownership and uses CancelIoEx, which may target another thread's I/O.
@@ -230,39 +238,41 @@ impl PipeReader {
         Ok(self.completed_bytes(transferred))
     }
 
-    /// Request cancellation and observe its completion before any borrowed I/O storage is freed.
-    pub(super) fn cancel_and_join(&mut self) -> io::Result<()> {
-        while self.pending {
-            self.cancel_and_join_bounded(1_000)?;
-        }
-        Ok(())
-    }
-
-    /// Return `Ok(false)` while a cancelled operation remains pending. The caller must retain
-    /// this entire owner and retry; dropping it would release kernel-borrowed storage.
-    pub(super) fn cancel_and_join_bounded(&mut self, wait_ms: u32) -> io::Result<bool> {
+    /// Observe completion without discarding bytes that won a race with cancellation.
+    /// An incomplete outcome requires the caller to retain this entire owner and retry.
+    pub(super) fn cancel_and_join_bounded(&mut self, wait_ms: u32) -> CancelRead {
         if !self.pending {
-            return Ok(true);
+            return CancelRead {
+                completed: true,
+                bytes: Vec::new(),
+                errors: Vec::new(),
+            };
         }
         // SAFETY: operation belongs to this handle and remains live until the completion query.
         let cancelled = unsafe { CancelIoEx(handle(&self.server), self.operation.as_ref()) };
-        let cancel_error = if cancelled == 0 {
+        let mut errors = Vec::new();
+        if cancelled == 0 {
             let error = io::Error::last_os_error();
-            (error.raw_os_error().map(|n| n as u32) != Some(ERROR_NOT_FOUND)).then_some(error)
-        } else {
-            None
-        };
+            if error.raw_os_error().map(|n| n as u32) != Some(ERROR_NOT_FOUND) {
+                errors.push(error);
+            }
+        }
         // SAFETY: this owner keeps the event and operation live for the bounded wait.
         let wait = unsafe { WaitForSingleObject(handle(&self.event), wait_ms) };
         if wait == WAIT_TIMEOUT {
-            return if let Some(error) = cancel_error {
-                Err(error)
-            } else {
-                Ok(false)
+            return CancelRead {
+                completed: false,
+                bytes: Vec::new(),
+                errors,
             };
         }
         if wait != WAIT_OBJECT_0 {
-            return Err(io::Error::last_os_error());
+            errors.push(io::Error::last_os_error());
+            return CancelRead {
+                completed: false,
+                bytes: Vec::new(),
+                errors,
+            };
         }
         let mut transferred = 0;
         // SAFETY: the event signaled and storage remains live for this completion query.
@@ -277,19 +287,31 @@ impl PipeReader {
         if completed == 0 {
             let error = io::Error::last_os_error();
             if error.raw_os_error().map(|n| n as u32) == Some(ERROR_IO_INCOMPLETE) {
-                return Ok(false);
+                return CancelRead {
+                    completed: false,
+                    bytes: Vec::new(),
+                    errors,
+                };
             }
             self.pending = false;
-            if error.raw_os_error().map(|n| n as u32) != Some(ERROR_OPERATION_ABORTED) {
-                return Err(error);
+            match error.raw_os_error().map(|n| n as u32) {
+                Some(ERROR_BROKEN_PIPE | ERROR_HANDLE_EOF | ERROR_NO_DATA) => self.eof = true,
+                Some(ERROR_OPERATION_ABORTED) => {}
+                _ => errors.push(error),
             }
-        } else {
-            self.pending = false;
+            return CancelRead {
+                completed: true,
+                bytes: Vec::new(),
+                errors,
+            };
         }
-        if let Some(error) = cancel_error {
-            return Err(error);
+        self.pending = false;
+        let bytes = self.completed_bytes(transferred);
+        CancelRead {
+            completed: true,
+            bytes,
+            errors,
         }
-        Ok(true)
     }
 
     fn completed_bytes(&mut self, transferred: u32) -> Vec<u8> {
@@ -373,10 +395,60 @@ mod tests {
             .expect("start overlapped read")
             .is_none());
         assert!(reader.is_pending());
-        reader
-            .cancel_and_join()
-            .expect("observe cancellation completion");
+        let outcome = reader.cancel_and_join_bounded(2_000);
+        assert!(outcome.completed, "cancellation did not complete");
+        assert!(
+            outcome.errors.is_empty(),
+            "cancellation errors: {:?}",
+            outcome.errors
+        );
+        assert!(outcome.bytes.is_empty());
         assert!(!reader.is_pending());
         assert!(!reader.reached_eof());
+    }
+
+    #[test]
+    fn cancellation_observes_completed_bytes_without_discarding_them() {
+        let (mut reader, child_end) = PipeReader::pair().expect("create pipe pair");
+        assert!(reader.start_read().unwrap().is_none());
+        let mut child = File::from(child_end);
+        child.write_all(&[0, 65, 255]).unwrap();
+        // SAFETY: the owned event remains live throughout this bounded wait.
+        assert_eq!(
+            unsafe { WaitForSingleObject(reader.event_handle(), 2_000) },
+            WAIT_OBJECT_0
+        );
+        let outcome = reader.cancel_and_join_bounded(2_000);
+        assert!(outcome.completed);
+        assert!(
+            outcome.errors.is_empty(),
+            "cancellation errors: {:?}",
+            outcome.errors
+        );
+        assert_eq!(outcome.bytes, [0, 65, 255]);
+        assert!(!reader.is_pending());
+        assert!(!reader.reached_eof());
+    }
+
+    #[test]
+    fn cancellation_observes_pipe_closure_as_eof() {
+        let (mut reader, child_end) = PipeReader::pair().expect("create pipe pair");
+        assert!(reader.start_read().unwrap().is_none());
+        drop(child_end);
+        // SAFETY: the owned event remains live throughout this bounded wait.
+        assert_eq!(
+            unsafe { WaitForSingleObject(reader.event_handle(), 2_000) },
+            WAIT_OBJECT_0
+        );
+        let outcome = reader.cancel_and_join_bounded(2_000);
+        assert!(outcome.completed);
+        assert!(
+            outcome.errors.is_empty(),
+            "EOF cancellation errors: {:?}",
+            outcome.errors
+        );
+        assert!(outcome.bytes.is_empty());
+        assert!(!reader.is_pending());
+        assert!(reader.reached_eof());
     }
 }

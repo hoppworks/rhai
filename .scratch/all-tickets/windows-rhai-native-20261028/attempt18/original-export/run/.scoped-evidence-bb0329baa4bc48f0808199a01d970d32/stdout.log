@@ -1,0 +1,199 @@
+RHAI_CARGO_LOW_MEMORY_PROFILE debug=0 incremental=0 codegen_units=256 jobs=1
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded ahash v0.8.12
+  Downloaded maybe-owned v0.3.4
+  Downloaded winx v0.36.4
+  Downloaded windows-targets v0.53.5
+  Downloaded version_check v0.9.5
+  Downloaded itoa v1.0.15
+  Downloaded fs-set-times v0.20.3
+  Downloaded const-random v0.1.18
+  Downloaded tiny-keccak v2.0.2
+  Downloaded thin-vec v0.2.19
+  Downloaded unicode-ident v1.0.22
+  Downloaded serde_derive v1.0.229
+  Downloaded serde_core v1.0.229
+  Downloaded once_cell v1.21.4
+  Downloaded serde v1.0.229
+  Downloaded cap-primitives v4.0.3
+  Downloaded num-traits v0.2.19
+  Downloaded io-extras v0.19.0
+  Downloaded serde_json v1.0.145
+  Downloaded getrandom v0.3.4
+  Downloaded portable-atomic v1.15.0
+  Downloaded bitflags v2.13.2
+  Downloaded proc-macro2 v1.0.103
+  Downloaded zerocopy v0.8.59
+  Downloaded memchr v2.8.3
+  Downloaded syn v3.0.6
+  Downloaded syn v2.0.106
+  Downloaded ryu v1.0.20
+  Downloaded rmp-serde v1.3.0
+  Downloaded getrandom v0.2.17
+  Downloaded smallvec v1.16.2
+  Downloaded rmp v0.8.14
+  Downloaded quote v1.0.41
+  Downloaded paste v1.0.15
+  Downloaded ipnet v2.12.2
+  Downloaded io-lifetimes v3.0.1
+  Downloaded io-lifetimes v2.0.4
+  Downloaded cap-std v4.0.3
+  Downloaded autocfg v1.5.1
+  Downloaded static_assertions v1.1.0
+  Downloaded smartstring v1.0.1
+  Downloaded const-random-macro v0.1.16
+  Downloaded byteorder v1.5.0
+  Downloaded crunchy v0.2.4
+  Downloaded ambient-authority v0.0.2
+  Downloaded cfg-if v1.0.5
+  Downloaded windows-targets v0.52.6
+  Downloaded windows-link v0.2.1
+  Downloaded windows_x86_64_msvc v0.52.6
+  Downloaded windows_x86_64_msvc v0.53.1
+  Downloaded windows-sys v0.59.0
+  Downloaded windows-sys v0.61.2
+  Downloaded windows-sys v0.60.2
+ Downloading crates ...
+  Downloaded libc v0.2.189
+ Downloading crates ...
+  Downloaded web-time v1.1.0
+   Compiling proc-macro2 v1.0.103
+   Compiling quote v1.0.41
+   Compiling unicode-ident v1.0.22
+   Compiling autocfg v1.5.1
+   Compiling windows_x86_64_msvc v0.52.6
+   Compiling windows_x86_64_msvc v0.53.1
+   Compiling crunchy v0.2.4
+   Compiling serde_core v1.0.229
+   Compiling version_check v0.9.5
+   Compiling windows-targets v0.52.6
+   Compiling io-lifetimes v2.0.4
+   Compiling tiny-keccak v2.0.2
+   Compiling io-lifetimes v3.0.1
+   Compiling windows-targets v0.53.5
+   Compiling windows-sys v0.59.0
+   Compiling syn v3.0.6
+   Compiling num-traits v0.2.19
+   Compiling serde v1.0.229
+   Compiling portable-atomic v1.15.0
+   Compiling cfg-if v1.0.5
+   Compiling io-extras v0.19.0
+   Compiling getrandom v0.2.17
+   Compiling serde_derive v1.0.229
+   Compiling windows-sys v0.60.2
+   Compiling cap-primitives v4.0.3
+   Compiling getrandom v0.3.4
+   Compiling once_cell v1.21.4
+   Compiling bitflags v2.13.2
+   Compiling zerocopy v0.8.59
+   Compiling winx v0.36.4
+   Compiling const-random-macro v0.1.16
+   Compiling fs-set-times v0.20.3
+   Compiling smartstring v1.0.1
+   Compiling ahash v0.8.12
+   Compiling paste v1.0.15
+   Compiling maybe-owned v0.3.4
+   Compiling serde_json v1.0.145
+   Compiling ipnet v2.12.2
+   Compiling ambient-authority v0.0.2
+   Compiling cap-std v4.0.3
+   Compiling const-random v0.1.18
+   Compiling syn v2.0.106
+   Compiling itoa v1.0.15
+   Compiling static_assertions v1.1.0
+   Compiling ryu v1.0.20
+   Compiling memchr v2.8.3
+   Compiling rhai v1.26.1 (C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-ef1eb288\run\scoped-bb0329baa4bc48f0808199a01d970d32)
+   Compiling windows-link v0.2.1
+   Compiling windows-sys v0.61.2
+   Compiling rhai_codegen v3.2.0 (C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-ef1eb288\run\scoped-bb0329baa4bc48f0808199a01d970d32\codegen)
+   Compiling smallvec v1.16.2
+   Compiling byteorder v1.5.0
+   Compiling thin-vec v0.2.19
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: method `cancel_and_join` is never used
+   --> src\packages\sys\process\windows\io.rs:234:19
+    |
+ 45 | impl PipeReader {
+    | --------------- method in this implementation
+...
+234 |     pub(super) fn cancel_and_join(&mut self) -> io::Result<()> {
+    |                   ^^^^^^^^^^^^^^^
+
+warning: `rhai` (lib) generated 2 warnings
+   Compiling rmp v0.8.14
+   Compiling rmp-serde v1.3.0
+warning: unused import: `PathBuf`
+ --> src\bin\rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 1m 20s
+  Executable tests\sys_process_report.rs (work\target\debug\deps\sys_process_report-d8dccb6d8676fb1e.exe)
+  Executable tests\sys_process_windows.rs (work\target\debug\deps\sys_process_windows-c2b310be195d180b.exe)
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: method `cancel_and_join` is never used
+   --> src\packages\sys\process\windows\io.rs:234:19
+    |
+ 45 | impl PipeReader {
+    | --------------- method in this implementation
+...
+234 |     pub(super) fn cancel_and_join(&mut self) -> io::Result<()> {
+    |                   ^^^^^^^^^^^^^^^
+
+warning: `rhai` (lib) generated 2 warnings
+warning: unused import: `PathBuf`
+ --> src\bin\rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 0.14s
+     Running tests\sys_process_windows.rs (work\target\debug\deps\sys_process_windows-c2b310be195d180b.exe)
+
+running 1 test
+windows_timeout_child_readback pid=2920 exit=1 exact_handle_signaled=true
+
+thread 'windows_run_raw_timeout_terminates_exact_child_and_retains_output' (6788) panicked at tests\sys_process_windows.rs:221:13:
+assertion failed: report.timed_out()
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test windows_run_raw_timeout_terminates_exact_child_and_retains_output ... FAILED
+
+failures:
+
+failures:
+    windows_run_raw_timeout_terminates_exact_child_and_retains_output
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 7 filtered out; finished in 5.02s
+
+error: test failed, to rerun pass `--test sys_process_windows`

@@ -1,0 +1,12 @@
+{
+  "nonce": "5cac6ebc2209265ceb215920655aaf60",
+  "iso_sha256": "6415e2ca54680c0bd20e5b96749b894e3b5e5ce17e9868888ebacc15a82a6670",
+  "all_domains_checked": [
+    "rhai-win11-quality",
+    "tauron-lane-wh-a-58a9dddac6c7"
+  ],
+  "host_stage_removed": true,
+  "host_media_removed": true,
+  "guest_scope_retained": true,
+  "runtime_removed": true
+}

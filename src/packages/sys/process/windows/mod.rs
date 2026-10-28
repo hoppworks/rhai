@@ -452,38 +452,28 @@ impl ProcessOwner {
     ) -> Result<ProcessReport, (ProcessCause, ProcessReport)> {
         let mut cause = None;
         loop {
-            let mut overflow = false;
-            for (reader, output) in [
-                (&mut self.stdout, &mut self.out),
-                (&mut self.stderr, &mut self.err),
-            ] {
-                if reader.is_pending() || reader.reached_eof() {
-                    continue;
-                }
-                match reader.start_read() {
-                    Ok(Some(bytes)) => overflow |= append_bounded(output, &bytes, limit),
-                    Ok(None) => {}
-                    Err(error) => {
-                        cause.get_or_insert_with(|| io_cause("read child output", program, &error));
-                    }
-                }
-            }
-            if overflow {
-                cause.get_or_insert_with(|| {
-                    ProcessCause::OutputLimit(format!(
-                        "output for `{program}` exceeded max_output of {limit} bytes"
-                    ))
-                });
-            }
-            if deadline.is_some_and(|end| Instant::now() >= end) {
-                cause.get_or_insert_with(|| {
-                    ProcessCause::Timeout(format!("process `{program}` exceeded its deadline"))
-                });
+            if cause.is_none() {
+                cause = observe_read_step(
+                    &mut [
+                        (&mut self.stdout, &mut self.out),
+                        (&mut self.stderr, &mut self.err),
+                    ],
+                    limit,
+                    deadline,
+                    program,
+                );
             }
             if cause.is_some()
                 || (self.exit.is_some() && self.stdout.reached_eof() && self.stderr.reached_eof())
             {
                 break;
+            }
+            // A synchronous read can leave its pipe ready for another read. Rearm it
+            // before waiting on other handles so a full child pipe cannot stall us.
+            if (!self.stdout.is_pending() && !self.stdout.reached_eof())
+                || (!self.stderr.is_pending() && !self.stderr.reached_eof())
+            {
+                continue;
             }
             let mut handles = Vec::with_capacity(3);
             if self.stdout.is_pending() {
@@ -590,22 +580,31 @@ impl ProcessOwner {
                 ));
             }
         }
-        for (name, reader) in [
-            ("cancel stdout", &mut self.stdout),
-            ("cancel stderr", &mut self.stderr),
+        for (name, reader, output) in [
+            ("cancel stdout", &mut self.stdout, &mut self.out),
+            ("cancel stderr", &mut self.stderr, &mut self.err),
         ] {
-            match reader.cancel_and_join_bounded(2_000) {
-                Ok(true) => {}
-                Ok(false) => self.diagnostics.push(ProcessDiagnostic::new(
+            let outcome = reader.cancel_and_join_bounded(2_000);
+            if append_bounded(output, &outcome.bytes, limit) {
+                cause.get_or_insert_with(|| {
+                    ProcessCause::OutputLimit(format!(
+                        "output for `{program}` exceeded max_output of {limit} bytes"
+                    ))
+                });
+            }
+            if !outcome.completed {
+                self.diagnostics.push(ProcessDiagnostic::new(
                     name,
                     Some(std_io::ErrorKind::TimedOut),
                     "overlapped operation remains pending after cancellation",
-                )),
-                Err(error) => self.diagnostics.push(ProcessDiagnostic::new(
+                ));
+            }
+            for error in outcome.errors {
+                self.diagnostics.push(ProcessDiagnostic::new(
                     name,
                     Some(error.kind()),
                     error.to_string(),
-                )),
+                ));
             }
         }
         let owned_work_pending =
@@ -696,6 +695,66 @@ fn append_bounded(output: &mut Vec<u8>, bytes: &[u8], limit: usize) -> bool {
     bytes.len() > space
 }
 
+/// Observe each ready read before committing an expired deadline, so overflow visible
+/// in the same step wins. A cause committed by an earlier step is never passed here.
+fn observe_read_step(
+    streams: &mut [(&mut PipeReader, &mut Vec<u8>)],
+    limit: usize,
+    deadline: Option<Instant>,
+    program: &str,
+) -> Option<ProcessCause> {
+    let mut overflow = false;
+    let mut read_error = None;
+    for (reader, output) in streams {
+        if !reader.is_pending() && !reader.reached_eof() {
+            match reader.start_read() {
+                Ok(Some(bytes)) => overflow |= append_bounded(output, &bytes, limit),
+                Ok(None) => {}
+                Err(error) => {
+                    read_error
+                        .get_or_insert_with(|| io_cause("read child output", program, &error));
+                }
+            }
+        }
+        if reader.is_pending() {
+            // SAFETY: the reader owns its live event for this nonblocking observation.
+            let wait = unsafe { WaitForSingleObject(reader.event_handle(), 0) };
+            if wait == WAIT_OBJECT_0 {
+                match reader.finish_read() {
+                    Ok(bytes) => overflow |= append_bounded(output, &bytes, limit),
+                    Err(error) => {
+                        read_error
+                            .get_or_insert_with(|| io_cause("read child output", program, &error));
+                    }
+                }
+            } else if wait != WAIT_TIMEOUT {
+                let error = if wait == WAIT_FAILED {
+                    std_io::Error::last_os_error()
+                } else {
+                    std_io::Error::new(
+                        std_io::ErrorKind::Other,
+                        format!("unexpected pipe event wait: {wait:#x}"),
+                    )
+                };
+                read_error.get_or_insert_with(|| io_cause("observe child output", program, &error));
+            }
+        }
+    }
+    if overflow {
+        Some(ProcessCause::OutputLimit(format!(
+            "output for `{program}` exceeded max_output of {limit} bytes"
+        )))
+    } else if read_error.is_some() {
+        read_error
+    } else if deadline.is_some_and(|end| Instant::now() >= end) {
+        Some(ProcessCause::Timeout(format!(
+            "process `{program}` exceeded its deadline"
+        )))
+    } else {
+        None
+    }
+}
+
 fn io_cause(op: &'static str, target: &str, error: &std_io::Error) -> ProcessCause {
     ProcessCause::Io {
         op,
@@ -708,6 +767,40 @@ fn io_cause(op: &'static str, target: &str, error: &std_io::Error) -> ProcessCau
 #[cfg(test)]
 mod tests {
     use super::*;
+    use std::fs::File;
+    use std::io::Write;
+
+    #[test]
+    fn windows_ready_overflow_wins_over_expired_deadline() {
+        let (mut reader, writer) = PipeReader::pair().expect("create native pipe");
+        assert!(reader.start_read().expect("start pending read").is_none());
+        let mut writer = File::from(writer);
+        writer.write_all(b"abcde").expect("write overflowing bytes");
+        // SAFETY: reader owns its event for the bounded readiness wait.
+        assert_eq!(
+            unsafe { WaitForSingleObject(reader.event_handle(), 2_000) },
+            WAIT_OBJECT_0
+        );
+        let mut captured = Vec::new();
+        let cause = observe_read_step(
+            &mut [(&mut reader, &mut captured)],
+            3,
+            Some(Instant::now()),
+            "fixture",
+        );
+        if std::env::var_os("RHAI_WINDOWS_OVERLAP_WRONG_EXPECTATION").is_some() {
+            assert!(
+                matches!(cause, Some(ProcessCause::Timeout(_))),
+                "deliberately wrong overlap expectation"
+            );
+        }
+        assert!(
+            matches!(cause, Some(ProcessCause::OutputLimit(_))),
+            "overflow must win at an expired deadline: {cause:?}"
+        );
+        assert_eq!(captured, b"abc");
+        assert!(!reader.is_pending());
+    }
 
     #[test]
     fn windows_deadline_overflow_is_denied() {
