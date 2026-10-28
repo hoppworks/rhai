@@ -300,8 +300,13 @@ fn engine_string_limit_keeps_ascii_and_reports_lossy_expansion_progress() {
 #[cfg(all(feature = "unchecked", not(feature = "no_index")))]
 #[test]
 fn unchecked_mode_keeps_the_host_receive_cap() {
+    let configured_limit = if std::env::var_os("RHAI_NET_UNCHECKED_WIDEN_CAP_CONTROL").is_some() {
+        8
+    } else {
+        2
+    };
     let actual = connected(
-        NetConfig::default().max_read_bytes(2),
+        NetConfig::default().max_read_bytes(configured_limit),
         |mut peer| {
             peer.write_all(b"abc").unwrap();
             peer.shutdown(std::net::Shutdown::Write).unwrap();
@@ -311,10 +316,15 @@ fn unchecked_mode_keeps_the_host_receive_cap() {
         |engine, port| {
             let mut scope = Scope::new();
             engine.run_with_scope(&mut scope, &format!(r#"let stream = connect("127.0.0.1", {port});"#)).unwrap();
-            engine.eval_with_scope::<String>(&mut scope, "stream.read_string(8)").unwrap()
+            engine.eval_with_scope::<String>(&mut scope, "stream.read_to_end_string(8)").unwrap()
         },
     );
-    assert_eq!(actual, "ab");
+    let expected = if std::env::var_os("RHAI_NET_UNCHECKED_WRONG_CAP_EXPECTATION").is_some() {
+        "abc"
+    } else {
+        "ab"
+    };
+    assert_eq!(actual, expected, "unchecked mode retains the host receive cap");
 }
 
 #[test]

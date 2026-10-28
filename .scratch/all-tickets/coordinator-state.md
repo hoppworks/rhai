@@ -2,7 +2,7 @@
 
 ## Mode
 
-Implementation active under the owner's autonomous all-ticket instruction. A–F, Ticket03 and release acceptance remain open; no completion claim.
+Implementation active by owner instruction. A–F, Ticket03 and release remain open.
 
 ## Decisions
 
@@ -10,11 +10,11 @@ Use current central agent-skills `d6024420` plus applicable local edits and proj
 
 ## Current step
 
-Fork-main is `20f1092d`, including reviewed Windows X35 contrasts and four macOS/Linux feature slices. The matching Linux `metadata,serde` package passed combined review and awaits commit. A–F/Ticket03/release remain open.
+Fork-main is `2cc58ed0`, including reviewed Windows X35 contrasts and five macOS/Linux feature slices. The POSIX combined `unchecked` package passed review after its EOF-driven receive-cap correction; it awaits commit. A–F/Ticket03/release remain open.
 
 ## Next action
 
-Commit/push the reviewed Linux `metadata,serde` package, verify remote head, then select the next native feature/MSRV gate or Managed fault contract. Retire guest scopes only after identity/inactivity checks.
+Commit/push the reviewed POSIX `unchecked` package, verify remote head, then select the next native feature/MSRV gate or Managed fault contract. Retire guest scopes only after identity/inactivity checks.
 
 ## Goal
 
@@ -34,7 +34,7 @@ Fork main contains accepted Windows sys policy/env/fs, net targets, Direct proce
 
 ## Accepted evidence
 
-MacOS27.2 arm64/Rust1.77.2 `testing-environ,sys,net,no_index,sync,metadata`: attempt01 compiled eight targets, passed six suites and combined filesystem wrong101, but stopped on a test-only `/bin/true` assumption. Attempt03's correction passed process/report 2/2+8/8 and exact process exit-code wrong101. Source/lock/profile applicability, cleanup and combined review PASS: `.scratch/all-tickets/release-matrix-20261028/proof.md`.
+MacOS27.2 arm64/Rust1.77.2 `no_index,sync,metadata`: six first-run suites and combined wrong101; corrected `/usr/bin/true` test passed process/report 2/2+8/8 and exit-code wrong101. Combined review PASS: `.scratch/all-tickets/release-matrix-20261028/proof.md`.
 
 MacOS27.2 arm64/Rust1.77.2 `testing-environ,sys,net,only_i32,no_float`: 11 targets compiled, combined wrong101, restored 135/0/1ignored, independent combined review PASS. Only named behaviors accepted; `.scratch/all-tickets/release-matrix-20261028/macos-onlyi32-nofloat-proof.md`.
 
@@ -43,6 +43,8 @@ Workhorse Linux7.2.11 x86_64/Rust1.77.2 matching integer-only profile: pinned so
 MacOS27.2 arm64/Rust1.77.2 combined `metadata,serde`: 11 targets 160/0/1ignored, host wrong101; targeted Dynamic JSON wrong101/restored Serde25/0. Source binding, cleanup, combined review/focused recheck PASS: `.scratch/all-tickets/release-matrix-20261028/macos-metadata-serde-proof.md`.
 
 Workhorse Linux7.2.11 x86_64/Rust1.77.2 combined `metadata,serde`: 12 targets compiled, host/Serde wrong101 each, restored 193/0/3ignored, combined review PASS. `.scratch/all-tickets/release-matrix-20261028/linux-metadata-serde-proof.md`.
+
+POSIX Rust1.77.2 combined `unchecked`: macOS 151/0/1ignored, Linux 160/0/3ignored across 11 targets, four wrong101 controls each. Review corrected a one-shot TCP cap oracle; EOF read plus widened-cap RED101 and restored `net_reads`7/7 passed on both. Combined review PASS: `.scratch/all-tickets/release-matrix-20261028/posix-unchecked-proof.md`.
 
 Attempts36–39 exposed false Job closure. Attempts50–58 cover batch injection/fix, exact membership, bounded retry, public Managed lifecycle, parent-CWD resolution, full 31-test Windows process target and assertion controls under their documented bindings. Attempt57 is diagnostic RED only. New attempt59 manifested a real missed exact-child fallback after a permanently refused Job exhausted the shared 30-second deadline. The correction preserves finite Job retry and grants at least five seconds each for exact-child and I/O fallback. Native Windows Rust/Cargo1.93.0, `testing-environ,sys,metadata`, manifest `34686903...`, lock `12084a90...`: synthetic permanent-refusal wrong101/restored GREEN0 with 299 refusals, exact child stopped and retained owner; two neighboring unit tests green. Attempt60 reused byte-identical source and passed public final-drop kill/retain wrong101/101 and GREEN0, with independent parent/worker/sentinel readbacks. Combined Terra review READY for the bounded package. Actual OS faults, live descendants under permanent refusal, other features/toolchains and release remain open. Proof: `.scratch/all-tickets/windows-rhai-native-20261028/attempt59/` and `attempt60/`.
 
@@ -62,7 +64,7 @@ Attempt18 false timeout unresolved; attempt26 expired before RED/GREEN; attempts
 
 ## Open escalations
 
-Managed closure Expert advised exact root/member handles and count-based fail-closed completion. Terra combined reviewer found and rechecked retry corrections. No new approval gate; no unresolved outcome decision.
+Managed closure requires exact handles and fail-closed completion; retry corrections were rechecked. No pending approval or outcome decision.
 
 ## Budgets
 

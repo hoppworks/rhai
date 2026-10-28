@@ -1,0 +1,111 @@
+{
+  "checkout_head": "2cc58ed009ed50dbeb609203decb90b517e8d404",
+  "archive_sha256": "3a671bbdeaebb068fc264e924f63af497eb8e94c4bffcf69e9fe63f000e9f26a",
+  "manifest_sha256": "ddbb88a05802f02e83d4d1c5a613b3a8040f3d7bf2007acb6955523d76868319",
+  "process_overlay_sha256": "cce4c03768a74cbb391fbc3369c4daf16b35a7f5a9b4eea071aca6b73a2ade31",
+  "serde_overlay_sha256": "377d9d1c055085557aff1f9c5951978f58ea9211182d8d4f355730bcac0fc305",
+  "net_reads_overlay_sha256": "6a8bb430ceef78277e2d884885f07510177bd41a54cc1f3c4f4b29543b6a2942",
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "runner_sha256": "70d7eae198977ef321cd7b10387727f6b637fb0ae69230a07674496bf325cfbb",
+  "features": "testing-environ,sys,net,unchecked",
+  "os": "Linux-7.2.11-ogc4.1.fc44.x86_64-x86_64-with-glibc2.43",
+  "machine": "x86_64",
+  "rustc": "rustc 1.77.2 (25ef9e3d8 2024-04-09)",
+  "cargo": "cargo 1.77.2 (e52e36006 2024-03-26)",
+  "capacity_before": {
+    "runtime_free_bytes": 499402596352,
+    "expected_additional_peak_bytes": 4294967296,
+    "estimate_source": "provisional private Cargo target/cache estimate"
+  },
+  "steps": [
+    {
+      "name": "compile",
+      "command": [
+        "cargo",
+        "+1.77.2",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys,net,unchecked",
+        "--test",
+        "net_reads",
+        "--no-run"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-unchecked-cap-20261028T2044Z-41e9/agent-build-cl6pi1_s/source",
+      "exit": 0,
+      "elapsed_seconds": 15.031,
+      "log_sha256": "c45d7b12f66f3be5b48302a9942c024cc300de580a5d869d7a877553b7562f9c",
+      "log_bytes": 12489
+    },
+    {
+      "name": "net-cap-wrong",
+      "command": [
+        "cargo",
+        "+1.77.2",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys,net,unchecked",
+        "--test",
+        "net_reads",
+        "unchecked_mode_keeps_the_host_receive_cap",
+        "--",
+        "--exact",
+        "--nocapture"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-unchecked-cap-20261028T2044Z-41e9/agent-build-cl6pi1_s/source",
+      "exit": 101,
+      "elapsed_seconds": 0.064,
+      "log_sha256": "6ca8ff305fbe337d0f23595d73052df950029c0426200b8659552eb630dea2f2",
+      "log_bytes": 9571
+    },
+    {
+      "name": "net-cap-widened",
+      "command": [
+        "cargo",
+        "+1.77.2",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys,net,unchecked",
+        "--test",
+        "net_reads",
+        "unchecked_mode_keeps_the_host_receive_cap",
+        "--",
+        "--exact",
+        "--nocapture"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-unchecked-cap-20261028T2044Z-41e9/agent-build-cl6pi1_s/source",
+      "exit": 101,
+      "elapsed_seconds": 0.064,
+      "log_sha256": "915aebb32e243e5a5681de85b2a022dd2aab2e6ffaec5252c44f4eaabb485fbf",
+      "log_bytes": 9571
+    },
+    {
+      "name": "suite",
+      "command": [
+        "cargo",
+        "+1.77.2",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys,net,unchecked",
+        "--test",
+        "net_reads",
+        "--",
+        "--test-threads=1",
+        "--nocapture"
+      ],
+      "cwd": "/var/roothome/.local/share/agent-builds/rhai/linux-unchecked-cap-20261028T2044Z-41e9/agent-build-cl6pi1_s/source",
+      "exit": 0,
+      "elapsed_seconds": 0.314,
+      "log_sha256": "e5e7e990ed9098c48862947991e94c848da76639531e0dc09ffeb8e942dd0066",
+      "log_bytes": 9632
+    }
+  ],
+  "capacity_after": {
+    "runtime_free_bytes": 499402006528,
+    "target_bytes": 230274779
+  },
+  "status": "passed"
+}

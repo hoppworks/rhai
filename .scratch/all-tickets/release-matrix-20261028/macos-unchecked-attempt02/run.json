@@ -1,0 +1,113 @@
+{
+  "checkout_head": "2cc58ed009ed50dbeb609203decb90b517e8d404",
+  "source_commit": "63f18b01bc8000492dc6c777462568c8ab9824c7",
+  "source_manifest_sha256": "ddbb88a05802f02e83d4d1c5a613b3a8040f3d7bf2007acb6955523d76868319",
+  "source_archive_sha256": "3a671bbdeaebb068fc264e924f63af497eb8e94c4bffcf69e9fe63f000e9f26a",
+  "source_overlays": {
+    "tests/sys_process.rs": "cce4c03768a74cbb391fbc3369c4daf16b35a7f5a9b4eea071aca6b73a2ade31",
+    "tests/serde.rs": "377d9d1c055085557aff1f9c5951978f58ea9211182d8d4f355730bcac0fc305",
+    "tests/net_reads.rs": "6a8bb430ceef78277e2d884885f07510177bd41a54cc1f3c4f4b29543b6a2942"
+  },
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "features": "testing-environ,sys,net,unchecked",
+  "os": "macOS-27.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "rustc": "rustc 1.77.2 (25ef9e3d8 2024-04-09)",
+  "cargo": "cargo 1.77.2 (e52e36006 2024-03-26)",
+  "capacity_before": {
+    "runtime_free_bytes": 170377621504,
+    "expected_additional_peak_bytes": 4294967296,
+    "estimate_source": "provisional private Cargo target/cache estimate"
+  },
+  "steps": [
+    {
+      "name": "compile",
+      "command": [
+        "cargo",
+        "+1.77.2",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys,net,unchecked",
+        "--test",
+        "net_reads",
+        "--no-run"
+      ],
+      "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/macos-unchecked-cap-20261028T2042Z-901a/agent-build-40yoa_6h/source",
+      "exit": 0,
+      "elapsed_seconds": 15.192,
+      "log_sha256": "368264bc41dbff9426ea11b1548599ab2ff1e6455eec2daa3000dd5401844e12",
+      "log_bytes": 11989
+    },
+    {
+      "name": "net-cap-wrong",
+      "command": [
+        "cargo",
+        "+1.77.2",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys,net,unchecked",
+        "--test",
+        "net_reads",
+        "unchecked_mode_keeps_the_host_receive_cap",
+        "--",
+        "--exact",
+        "--nocapture"
+      ],
+      "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/macos-unchecked-cap-20261028T2042Z-901a/agent-build-40yoa_6h/source",
+      "exit": 101,
+      "elapsed_seconds": 0.39,
+      "log_sha256": "efbae6cb23152daa98f583d8c455a1e01d305bef3b3f2d98126a69e0d4fa5237",
+      "log_bytes": 9188
+    },
+    {
+      "name": "net-cap-widened",
+      "command": [
+        "cargo",
+        "+1.77.2",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys,net,unchecked",
+        "--test",
+        "net_reads",
+        "unchecked_mode_keeps_the_host_receive_cap",
+        "--",
+        "--exact",
+        "--nocapture"
+      ],
+      "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/macos-unchecked-cap-20261028T2042Z-901a/agent-build-40yoa_6h/source",
+      "exit": 101,
+      "elapsed_seconds": 0.089,
+      "log_sha256": "311d9a9583facaa47fbfb8df3ecff69e5bd873896aea4c485e053f867969d0d6",
+      "log_bytes": 9188
+    },
+    {
+      "name": "suite",
+      "command": [
+        "cargo",
+        "+1.77.2",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys,net,unchecked",
+        "--test",
+        "net_reads",
+        "--",
+        "--test-threads=1",
+        "--nocapture"
+      ],
+      "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/macos-unchecked-cap-20261028T2042Z-901a/agent-build-40yoa_6h/source",
+      "exit": 0,
+      "elapsed_seconds": 0.363,
+      "log_sha256": "a327ff43f8401693cc2e1ee610c40a660c639492564517dedcff9fdc2af43f41",
+      "log_bytes": 9249
+    }
+  ],
+  "capacity_after": {
+    "runtime_free_bytes": 170135277568,
+    "target_bytes": 194127064
+  },
+  "status": "passed"
+}

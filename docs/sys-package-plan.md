@@ -1525,6 +1525,19 @@ intended assertions; the restored suite passed 193 top-level tests with three
 ignored. The combined independent review returned PASS for named paths.
 Exhaustive Serde behavior, other features/platforms and release remain open.
 
+The native macOS 27.2 arm64 and Workhorse Linux 7.2.11 x86_64/Rust-Cargo
+1.77.2 combined `testing-environ,sys,net,unchecked` slice is accepted for
+named paths at `.scratch/all-tickets/release-matrix-20261028/posix-unchecked-proof.md`.
+The first runs compiled 11 targets and restored suites passed 151/0/1ignored
+on macOS and 160/0/3ignored on Linux, with deliberate host-file, capped-file,
+TCP peer-write and receive-cap expectation failures. Independent review found
+that the original one-shot receive-cap oracle could pass from TCP packet
+splitting alone. Focused follow-ups replaced it with an EOF-driven read;
+wrong-expectation and widened-cap known-broken controls both failed as intended,
+and the affected `net_reads` target passed 7/7 on each OS. The combined review
+then returned PASS. The original one-shot cap result is superseded. Other
+unchecked bounds, Windows and full release acceptance remain open.
+
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance
 matrix or closure count. Historical implementation notes and estimates follow.
