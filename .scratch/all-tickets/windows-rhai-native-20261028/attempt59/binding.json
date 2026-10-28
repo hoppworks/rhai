@@ -1,0 +1,16 @@
+{
+  "nonce": "3d6e4701fab4530e3c3e8d68af3c882f",
+  "source_commit": "a3f7f21acc0685262d851d07b580ec4e4982192b",
+  "manifest_sha256": "34686903dc2bd18b5353b6d9ef231a276d82c1b5f35f7e731da1d80216b90b71",
+  "archive_sha256": "00ab58135c08c6dcccdb2dd653a0180e2ef1126d2dca6c6fc3c39d1924c540d2",
+  "file_count": 448,
+  "source_bytes": 5377004,
+  "expected": "native Windows persistent Job refusal wrong/green unit plus neighboring retry controls",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 260,
+  "export_seconds": 180,
+  "native_started": false,
+  "command_dispatched": false,
+  "product_test_started": false
+}

@@ -1,0 +1,33 @@
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (lib test) generated 1 warning
+    Finished `test` profile [unoptimized] target(s) in 0.14s
+     Running unittests src\lib.rs (work\target\debug\deps\rhai-e3fbbe91aa1ae520.exe)
+
+running 1 test
+windows_managed_permanent_refusal_readback attempts=299 exact_child_stopped=true owner_retained=true bounded=true
+
+thread 'packages::sys::process::windows::tests::windows_background_retains_owner_after_persistent_job_termination_refusal' (8128) panicked at src\packages\sys\process\windows\mod.rs:1701:13:
+assertion `left == right` failed: deliberately wrong permanent Job refusal expectation
+  left: 299
+ right: 0
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test packages::sys::process::windows::tests::windows_background_retains_owner_after_persistent_job_termination_refusal ... FAILED
+
+failures:
+
+failures:
+    packages::sys::process::windows::tests::windows_background_retains_owner_after_persistent_job_termination_refusal
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 24 filtered out; finished in 30.07s
+
+error: test failed, to rerun pass `--lib`

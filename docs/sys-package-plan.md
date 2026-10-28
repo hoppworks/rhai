@@ -1029,13 +1029,25 @@ correction/evidence rechecks accepted the exercised cases. Their
 source manifests, commands, original logs, hash-checked serial exports, journal
 CRCs and exact host cleanup are under
 `../.scratch/all-tickets/windows-rhai-native-20261028/attempt50/` through
-`attempt58/`. This adds named native Windows X34/X35/X37 lifecycle and batch
-rows plus the parent-CWD simple-program case of X33 only. Real OS termination refusals and accounting-query errors, permanent
-termination failure and incomplete-member paths,
+`attempt58/`. Attempt59 then exposed a real deadline bug: permanently refused
+Job termination consumed the entire 30-second background cleanup deadline,
+skipping the exact-child fallback. The correction gives the child and pending
+I/O finite time after the Job retry phase while retaining the owner on
+unverified closure. A native unit control with a live exact child rejected a
+wrong expectation (101), passed restored GREEN after 299 injected refusals,
+and passed two neighboring retry tests. Attempt60 reused its byte-identical
+source and passed the affected public Rhai/Engine/host final-drop test after
+both kill and retain wrong-expectation controls failed 101. Exact parent and
+worker handles and an independent sentinel were read back in both modes.
+The combined independent review accepted this bounded package; original
+manifest, logs, serial export, journal CRCs and host cleanup are under
+`../.scratch/all-tickets/windows-rhai-native-20261028/attempt59/` and
+`attempt60/`. This adds named native Windows X34/X35/X37 lifecycle and batch
+rows plus the parent-CWD simple-program case of X33 only. Actual OS termination refusals and accounting-query errors, live descendants under persistent failure and incomplete-member paths,
 short-lived capture races, the full Windows executable search order and
 remaining process/argument matrix,
 other feature/MSRV profiles, Ticket03 and release remain open. Attempts55–56
-are unit supplements, not public script acceptance for the fault paths.
+and 59 are unit supplements, not public script acceptance for the fault paths.
 
 No UI is part of Rhai's acceptance stack. The full path is script → real Engine →
 host package → OS. Storage proof is required for filesystem effects; independent

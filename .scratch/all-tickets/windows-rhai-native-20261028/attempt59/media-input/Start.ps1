@@ -1,0 +1,89 @@
+$ErrorActionPreference='Stop'
+$nonce='3d6e4701fab4530e3c3e8d68af3c882f'
+$id='rhai-native-'+$nonce
+$marker='rhai-native-'+$nonce+'.bundle'
+$mediaCandidates=@(('D:\','E:\','F:\')|Where-Object{
+ $drive=$_.Substring(0,1)
+ $null -ne (Get-PSDrive -Name $drive -PSProvider FileSystem -ErrorAction SilentlyContinue) -and
+ (Test-Path -LiteralPath (Join-Path $_ $marker) -PathType Leaf)
+})
+if($mediaCandidates.Count -ne 1){throw 'Expected exactly one immutable project-control medium.'}
+$media=$mediaCandidates[0]
+if((Get-Content -LiteralPath (Join-Path $media $marker) -Raw).Trim() -cne $id){throw 'Project-control medium identity differs.'}
+$archive=Join-Path $media 'rhai-source.zip'
+$manifestPath=Join-Path $media 'source-manifest.json'
+$control=Join-Path $media 'RunRhaiContractControl.ps1'
+$lock=Join-Path $media 'Cargo.lock'
+$contract=Join-Path $media 'RunRhaiContract.cmd'
+$attributeControl=Join-Path $media 'ClearOwnedWorkReadOnly.ps1'
+if((Get-FileHash -LiteralPath $archive).Hash.ToLowerInvariant() -cne '00ab58135c08c6dcccdb2dd653a0180e2ef1126d2dca6c6fc3c39d1924c540d2'){throw 'Frozen Rhai archive differs.'}
+if((Get-FileHash -LiteralPath $manifestPath).Hash.ToLowerInvariant() -cne '34686903dc2bd18b5353b6d9ef231a276d82c1b5f35f7e731da1d80216b90b71'){throw 'Frozen Rhai source manifest differs.'}
+if((Get-FileHash -LiteralPath $control).Hash.ToLowerInvariant() -cne '34dbe31a91fca60b9ebe6d6f8f316c88a51c7fd62f265a8b30d5f736cd8208aa'){throw 'Bounded native control differs.'}
+if((Get-FileHash -LiteralPath $lock).Hash.ToLowerInvariant() -cne '12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802'){throw 'Accepted lock differs.'}
+if((Get-FileHash -LiteralPath $contract).Hash.ToLowerInvariant() -cne '93cf81b1fd7b0dece4ca4c08ded6d7a460a72a61f196f2b1ca6434df9097ef0c'){throw 'Native Rhai contract differs.'}
+if((Get-FileHash -LiteralPath $attributeControl).Hash.ToLowerInvariant() -cne 'a4856c1c71d73dae91a1a7657eabcca9489b0cd6467522872806dc0983c1eba0'){throw 'Owned work attribute control differs.'}
+$tokens=$null;$parseErrors=$null;$null=[Management.Automation.Language.Parser]::ParseFile($control,[ref]$tokens,[ref]$parseErrors)
+if($parseErrors.Count -ne 0){throw ($parseErrors|Out-String)}
+$manifest=Get-Content -LiteralPath $manifestPath -Raw|ConvertFrom-Json
+if($manifest.source_commit -cne 'a3f7f21acc0685262d851d07b580ec4e4982192b' -or $manifest.file_count -ne 448 -or $manifest.total_source_bytes -ne 5377004 -or $manifest.archive_sha256 -cne '00ab58135c08c6dcccdb2dd653a0180e2ef1126d2dca6c6fc3c39d1924c540d2'){throw 'Frozen Rhai source identity differs.'}
+if($env:USERPROFILE -cne 'C:\Users\RhaiTest' -or $env:USERNAME -cne 'RhaiTest'){throw 'Wrong native guest owner.'}
+if((Get-PSDrive -Name C -PSProvider FileSystem).Free -lt 2147483648){throw 'Native guest free disk below2GiB launch floor.'}
+if(([long](Get-CimInstance Win32_OperatingSystem).FreePhysicalMemory*1024) -lt 3221225472){throw 'Native guest free physical memory below3GiB launch floor.'}
+$cargoProxy=(Get-Command cargo.exe -ErrorAction Stop).Source
+if($cargoProxy -cne 'C:\Users\RhaiTest\.cargo\bin\cargo.exe'){throw 'Guest Cargo proxy path differs.'}
+$rustcProxy=(Get-Command rustc.exe -ErrorAction Stop).Source
+if($rustcProxy -cne 'C:\Users\RhaiTest\.cargo\bin\rustc.exe'){throw 'Guest Rustc proxy path differs.'}
+$cargoVersion=& $cargoProxy --version
+$rustcVersion=& $rustcProxy --version
+if($cargoVersion -cne 'cargo 1.93.0 (083ac5135 2025-12-15)' -or $rustcVersion -cne 'rustc 1.93.0 (254b59607 2026-01-19)'){throw 'Exact guest Rust/Cargo toolchain differs.'}
+$cargoHash=(Get-FileHash -LiteralPath $cargoProxy).Hash.ToLowerInvariant()
+if($cargoHash -cne '6f4bef66261261fcb43131be8720bab817d403a09edec7455c371974b90bdb7e'){throw 'Guest Cargo proxy differs from independent preflight.'}
+if((Get-FileHash -LiteralPath $rustcProxy).Hash.ToLowerInvariant() -cne $cargoHash){throw 'Guest Rustc proxy differs from independent preflight.'}
+$private=Join-Path $env:USERPROFILE '.local\share\agent-builds\rhai'
+$session=Join-Path $private ('n-'+$nonce.Substring(0,8))
+$build=Join-Path $private 'public-refresh-e2047d40e48afb4426d07e2a1e881f19\run\monitor-source-e2047d40e48afb4426d07e2a1e881f19\build'
+if(!(Test-Path -LiteralPath $build -PathType Container)){throw 'Compatible native public build is absent.'}
+if((Get-FileHash -LiteralPath (Join-Path ([IO.Directory]::GetParent($build).FullName) 'build-manifest.txt')).Hash.ToLowerInvariant() -cne '8c625daf866e4bb5e30259b9fb3d27cafcb4e8e5ee813a5b07b6a5e4160ee0d1'){throw 'Retained public build manifest differs from accepted readback.'}
+if(Test-Path -LiteralPath $session){throw 'Own project scope already exists; preserve and inspect it.'}
+$cursor=[IO.Path]::GetFullPath($session)
+while($cursor){
+ if((Test-Path -LiteralPath $cursor) -and ((Get-Item -LiteralPath $cursor -Force).Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0){throw "Reparse ancestor refused: $cursor"}
+ $parent=[IO.Directory]::GetParent($cursor);$cursor=if($null -eq $parent){$null}else{$parent.FullName}
+}
+$source=Join-Path $session 'source'
+New-Item -ItemType Directory -Path $source|Out-Null
+Copy-Item -LiteralPath $manifestPath -Destination (Join-Path $session 'source-manifest.json')
+Expand-Archive -LiteralPath $archive -DestinationPath $source
+$sourcePrefix=[IO.Path]::GetFullPath($source).TrimEnd('\')+'\'
+$actual=@(Get-ChildItem -LiteralPath $source -File -Force -Recurse|ForEach-Object{$_.FullName.Substring($sourcePrefix.Length).Replace('\','/')}|Sort-Object)
+$expected=@($manifest.files.PSObject.Properties.Name|Sort-Object)
+if($actual.Count -ne 448 -or ($actual -join "`n") -cne ($expected -join "`n")){throw 'Expanded Rhai source inventory differs.'}
+foreach($entry in @(Get-ChildItem -LiteralPath $source -Force -Recurse)){if(($entry.Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0){throw 'Expanded Rhai source reparse point refused.'}}
+foreach($pin in $manifest.files.PSObject.Properties){
+ if($pin.Name -match '(^|/)\.\.(/|$)' -or $pin.Name -match '^[/\\]'){throw 'Source manifest traversal refused.'}
+ $path=[IO.Path]::GetFullPath((Join-Path $source $pin.Name.Replace('/','\')))
+ if(!$path.StartsWith($sourcePrefix,[StringComparison]::OrdinalIgnoreCase) -or (Get-FileHash -LiteralPath $path).Hash.ToLowerInvariant() -cne $pin.Value.sha256){throw "Expanded Rhai source differs: $($pin.Name)"}
+}
+Copy-Item -LiteralPath $cargoProxy -Destination (Join-Path $source 'cargo.exe')
+if((Get-FileHash -LiteralPath (Join-Path $source 'cargo.exe')).Hash.ToLowerInvariant() -cne $cargoHash){throw 'Private Cargo proxy copy differs.'}
+$cmdExe='C:\Windows\System32\cmd.exe'
+$cmdHash='15cd209c995b7d3009c91ca40892d5b8f1fb162f3e5f10716642ea278e8e0d7b'
+if((Get-FileHash -LiteralPath $cmdExe).Hash.ToLowerInvariant() -cne $cmdHash){throw 'Guest command interpreter differs.'}
+$fsutilExe='C:\Windows\System32\fsutil.exe'
+$fsutilHash='3fca44b7ce971031c08296647821e04dc7aa62c0f5846a3a0dc7015d5a4bc501'
+if((Get-FileHash -LiteralPath $fsutilExe).Hash.ToLowerInvariant() -cne $fsutilHash){throw 'Guest hardlink inventory utility differs.'}
+$powershellExe='C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe'
+$powershellHash='60c9b29843624dd8af6b6a7b26147753be6aeef65098b9a503cc50850afe410f'
+if($env:SystemRoot -ine 'C:\Windows' -or (Get-FileHash -LiteralPath $powershellExe).Hash.ToLowerInvariant() -cne $powershellHash){throw 'Guest PowerShell or SystemRoot differs.'}
+Copy-Item -LiteralPath $cmdExe -Destination (Join-Path $source 'cmd.exe')
+Copy-Item -LiteralPath $lock -Destination (Join-Path $source 'Cargo.lock')
+Copy-Item -LiteralPath $contract -Destination (Join-Path $source 'RunRhaiContract.cmd')
+Copy-Item -LiteralPath $attributeControl -Destination (Join-Path $source 'ClearOwnedWorkReadOnly.ps1')
+if((Get-FileHash -LiteralPath (Join-Path $source 'cmd.exe')).Hash.ToLowerInvariant() -cne $cmdHash -or (Get-FileHash -LiteralPath (Join-Path $source 'Cargo.lock')).Hash.ToLowerInvariant() -cne '12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802' -or (Get-FileHash -LiteralPath (Join-Path $source 'RunRhaiContract.cmd')).Hash.ToLowerInvariant() -cne '93cf81b1fd7b0dece4ca4c08ded6d7a460a72a61f196f2b1ca6434df9097ef0c' -or (Get-FileHash -LiteralPath (Join-Path $source 'ClearOwnedWorkReadOnly.ps1')).Hash.ToLowerInvariant() -cne 'a4856c1c71d73dae91a1a7657eabcca9489b0cd6467522872806dc0983c1eba0'){throw 'Private native contract inputs differ.'}
+$copiedCargo=Join-Path $source 'cargo.exe'
+if((& $copiedCargo --version) -cne $cargoVersion){throw 'Copied Cargo proxy resolved a different toolchain.'}
+$record=[ordered]@{id=$id;guest_user=$env:USERNAME;source_commit=$manifest.source_commit;source_manifest_sha256='34686903dc2bd18b5353b6d9ef231a276d82c1b5f35f7e731da1d80216b90b71';archive_sha256='00ab58135c08c6dcccdb2dd653a0180e2ef1126d2dca6c6fc3c39d1924c540d2';source_files=453;lock_sha256='12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802';contract_sha256='93cf81b1fd7b0dece4ca4c08ded6d7a460a72a61f196f2b1ca6434df9097ef0c';attribute_control_sha256='a4856c1c71d73dae91a1a7657eabcca9489b0cd6467522872806dc0983c1eba0';cmd_exe_sha256=$cmdHash;powershell_exe_sha256=$powershellHash;fsutil_exe_sha256=$fsutilHash;cargo_proxy=$cargoProxy;cargo_sha256=$cargoHash;cargo_version=$cargoVersion;rustc_proxy=$rustcProxy;rustc_proxy_sha256=$cargoHash;rustc_version=$rustcVersion;public_build_manifest_sha256='8c625daf866e4bb5e30259b9fb3d27cafcb4e8e5ee813a5b07b6a5e4160ee0d1';own_scope=$session}
+[IO.File]::WriteAllText((Join-Path $session 'preflight.json'),($record|ConvertTo-Json -Compress),[Text.UTF8Encoding]::new($false))
+Write-Output 'PROJECT_SOURCE_PREFLIGHT_OK'
+& ([scriptblock]::Create((Get-Content -LiteralPath $control -Raw))) -Session $session -SourceRoot $source -BuildRoot $build -Id $id -CargoSha256 $cargoHash
+Write-Output 'PROJECT_COMMAND_CONTROL_COMPLETE;guest originals retained for independent export/readback and exact cleanup'

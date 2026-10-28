@@ -1061,10 +1061,10 @@ impl ProcessOwner {
         }) {
             panic!("deliberate per-owner cleanup panic");
         }
-        let deadline = Instant::now() + Duration::from_secs(30);
+        let job_deadline = Instant::now() + Duration::from_secs(30);
         // Keep exact handles and the Job until both membership and termination
         // are proven. An irrecoverably incomplete capture is retained without spin.
-        while !self.job_closed && Instant::now() < deadline {
+        while !self.job_closed && Instant::now() < job_deadline {
             if !self.job_termination_requested {
                 let _ = self.request_job_termination();
             }
@@ -1089,7 +1089,11 @@ impl ProcessOwner {
                 Err(_) => break,
             }
         }
-        while self.exit.is_none() && Instant::now() < deadline {
+        // Even a permanently refused Job request must leave time to stop and
+        // reap the exact direct child. Keep the original deadline when it is
+        // still ahead, and grant this phase a finite fallback otherwise.
+        let child_deadline = job_deadline.max(Instant::now() + Duration::from_secs(5));
+        while self.exit.is_none() && Instant::now() < child_deadline {
             if let Ok(Some(status)) = self.child.try_wait() {
                 self.exit = Some(status);
                 break;
@@ -1104,11 +1108,12 @@ impl ProcessOwner {
                 }
             }
         }
+        let io_deadline = job_deadline.max(Instant::now() + Duration::from_secs(5));
         while self.stdout.is_pending()
             || self.stderr.is_pending()
             || self.stdin.as_ref().is_some_and(PipeWriter::is_pending)
         {
-            if Instant::now() >= deadline {
+            if Instant::now() >= io_deadline {
                 break;
             }
             if let Some(writer) = self.stdin.as_mut().filter(|writer| writer.is_pending()) {
@@ -1315,7 +1320,11 @@ mod tests {
         let Some(root) = std::env::var_os("RHAI_WINDOWS_CLEANUP_PANIC_FIXTURE") else { return; };
         let root = std::path::Path::new(&root);
         std::fs::write(root.join("ready"), format!("{}\n", std::process::id())).unwrap();
-        let deadline = Instant::now() + Duration::from_secs(20);
+        let fixture_seconds = std::env::var("RHAI_WINDOWS_CLEANUP_PANIC_FIXTURE_SECONDS")
+            .ok()
+            .map(|value| value.parse::<u64>().expect("fixture duration must be an integer"))
+            .unwrap_or(20);
+        let deadline = Instant::now() + Duration::from_secs(fixture_seconds);
         while Instant::now() < deadline {
             if root.join("release").exists() { return; }
             thread::sleep(Duration::from_millis(10));
@@ -1561,6 +1570,136 @@ mod tests {
         if std::env::var_os("RHAI_WINDOWS_MANAGED_RETRY_WRONG_EXPECTATION").is_some() {
             assert_eq!(attempts.load(Ordering::Acquire), 1,
                 "deliberately wrong managed termination retry expectation");
+        }
+    }
+
+    #[test]
+    fn windows_background_retains_owner_after_persistent_job_termination_refusal() {
+        let nonce = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap()
+            .as_nanos();
+        let root = std::env::temp_dir().join(format!(
+            "rhai-managed-permanent-refusal-{}-{nonce}",
+            std::process::id()
+        ));
+        std::fs::create_dir(&root).unwrap();
+        let child = Command::new(std::env::current_exe().unwrap())
+            .args([
+                "--exact",
+                "packages::sys::process::windows::tests::windows_cleanup_panic_fixture",
+                "--nocapture",
+                "--quiet",
+            ])
+            .env_clear()
+            .env("RHAI_WINDOWS_CLEANUP_PANIC_FIXTURE", &root)
+            .env("RHAI_WINDOWS_CLEANUP_PANIC_FIXTURE_SECONDS", "60")
+            .stdin(Stdio::null())
+            .stdout(Stdio::null())
+            .stderr(Stdio::null())
+            .spawn()
+            .expect("start gated Job fixture");
+        let mut pending = PendingFixtureSpawn {
+            child: Some(child),
+            root: root.clone(),
+        };
+        let child = pending.child.as_ref().unwrap();
+        let pid = child.id();
+        let mut duplicate = std::ptr::null_mut();
+        // SAFETY: the exact live child handle is duplicated for independent readback.
+        assert_ne!(unsafe {
+            DuplicateHandle(
+                GetCurrentProcess(),
+                child.as_raw_handle() as HANDLE,
+                GetCurrentProcess(),
+                &mut duplicate,
+                0,
+                0,
+                DUPLICATE_SAME_ACCESS,
+            )
+        }, 0);
+        let guard = CleanupFixtureGuard {
+            handle: Some(unsafe { OwnedHandle::from_raw_handle(duplicate as RawHandle) }),
+            root: root.clone(),
+        };
+        let job = Arc::new(job::ManagedJob::new().expect("create private managed Job"));
+        // SAFETY: the gated fixture has not created descendants before Job admission.
+        assert_ne!(unsafe {
+            AssignProcessToJobObject(job.handle(), child.as_raw_handle() as HANDLE)
+        }, 0);
+        let child = pending.child.take().unwrap();
+        drop(pending);
+        let ready_deadline = Instant::now() + Duration::from_secs(5);
+        loop {
+            match std::fs::read_to_string(root.join("ready")) {
+                Ok(value) => {
+                    assert_eq!(value.trim().parse::<u32>().unwrap(), pid);
+                    break;
+                }
+                Err(error)
+                    if error.kind() == std_io::ErrorKind::NotFound
+                        && Instant::now() < ready_deadline =>
+                {
+                    thread::sleep(Duration::from_millis(10));
+                }
+                Err(error) => panic!("Job fixture readiness: {error}"),
+            }
+        }
+        let exact = guard.handle.as_ref().unwrap().as_raw_handle() as HANDLE;
+        assert_eq!(unsafe { WaitForSingleObject(exact, 0) }, WAIT_TIMEOUT);
+        let (stdout, stdout_writer) = PipeReader::pair().unwrap();
+        let (stderr, stderr_writer) = PipeReader::pair().unwrap();
+        drop(stdout_writer);
+        drop(stderr_writer);
+        let attempts = Arc::new(AtomicUsize::new(0));
+        let mut owner = ProcessOwner::with_owned_child(
+            child.into(),
+            Some(job),
+            None,
+            stdout,
+            stderr,
+            ActivePermit::acquire().unwrap(),
+        );
+        owner.seed_managed_root().expect("capture exact root before cleanup");
+        owner.terminate_failures_remaining = usize::MAX;
+        owner.termination_attempts = Some(Arc::clone(&attempts));
+        let started = Instant::now();
+        let cell = retain_for_cleanup_inner(owner).expect("start bounded cleanup worker");
+        let retry_deadline = started + Duration::from_secs(5);
+        while attempts.load(Ordering::Acquire) < 2 && Instant::now() < retry_deadline {
+            thread::sleep(Duration::from_millis(10));
+        }
+        assert!(attempts.load(Ordering::Acquire) >= 2, "permanent refusal was not retried");
+        assert_eq!(unsafe { WaitForSingleObject(exact, 0) }, WAIT_TIMEOUT,
+            "the exact child must still be live while Job termination is refused");
+
+        let bounded_deadline = started + Duration::from_secs(45);
+        let mut retained = None;
+        while Instant::now() < bounded_deadline {
+            retained = cell.lock().unwrap_or_else(|p| p.into_inner()).take();
+            if retained.is_some() { break; }
+            thread::sleep(Duration::from_millis(20));
+        }
+        let mut owner = retained.expect("cleanup worker must return exact owner after bounded refusal");
+        let attempt_count = attempts.load(Ordering::Acquire);
+        assert!(attempt_count >= 2);
+        assert!(!owner.job_termination_requested && !owner.job_closed);
+        assert!(owner.has_pending_cleanup(), "failed Job termination cannot claim closure");
+        assert_eq!(owner.child.id(), pid);
+        assert_eq!(unsafe { WaitForSingleObject(exact, 0) }, WAIT_OBJECT_0,
+            "exact child must be stopped by bounded fallback cleanup");
+        assert!(owner.observe_job_closed().expect("prove exact Job closure"));
+        assert!(!owner.has_pending_cleanup());
+        retained_registry()
+            .lock()
+            .unwrap_or_else(|p| p.into_inner())
+            .retain(|entry| !Arc::ptr_eq(entry, &cell));
+        drop(owner);
+        drop(guard);
+        eprintln!("windows_managed_permanent_refusal_readback attempts={attempt_count} exact_child_stopped=true owner_retained=true bounded=true");
+        if std::env::var_os("RHAI_WINDOWS_PERMANENT_REFUSAL_WRONG_EXPECTATION").is_some() {
+            assert_eq!(attempt_count, 0,
+                "deliberately wrong permanent Job refusal expectation");
         }
     }
 

@@ -10,11 +10,11 @@ Use current central agent-skills `d6024420` plus applicable local edits and proj
 
 ## Current step
 
-Managed Windows WIP at fork-main base `c62a0a99113beb51601ee9ea39656367fe7b51c5` has completed a bounded native parent-CWD correction and full 31-test process suite. The combined Terra reviewer found no concrete blocker for the narrow package. It remains uncommitted until evidence/doc integration and exact fork-main readback. A–F/Ticket03/release remain open.
+Fork-main is `a3f7f21acc0685262d851d07b580ec4e4982192b` with only remote `main`. New Managed Windows background-deadline fix and its native attempt59/60 evidence have combined independent READY review. This coherent package is uncommitted; A–F/Ticket03/release remain open.
 
 ## Next action
 
-Validate the exact staged package and evidence scope, atomically commit as `hoppworks`, fast-forward the verified fork main and read back its remote head. Then continue Managed Windows permanent-failure/real-fault and remaining process/path/profile criteria without repeating accepted runs.
+Check staged source/docs/proof and exact fork-main head, commit as `hoppworks`, fast-forward fork `main`, and read back remote head. Then continue actual OS fault/descendant and remaining process/path/feature/MSRV criteria without repeating unaffected accepted runs.
 
 ## Goal
 
@@ -30,19 +30,19 @@ Close Managed Windows fault/lifecycle and remaining argument/IO cases; finish na
 
 ## Done steps
 
-Fork main contains accepted Windows sys policy/env/fs, six net targets, Direct raw/text process, input/timeout/spawn/drop, X32 quoted argv and X33 PATH/implicit exe. Earlier Linux/Darwin/core/WASM/MSRV accepted rows remain scoped in the plan and original proof folders. Managed attempt50 reproduced real batch injection; attempt51 fixed its named case with RED/GREEN/control and review.
+Fork main contains accepted Windows sys policy/env/fs, six net targets, Direct raw/text process, input/timeout/spawn/drop, X32 quoted argv, X33 PATH/implicit exe and the bounded Managed package through attempt58. Earlier Linux/Darwin/core/WASM/MSRV accepted rows retain their listed source/profile scopes in the plan and original proof folders.
 
 ## Accepted evidence
 
-Attempts36–39 exposed false Job closure. The current WIP seeds exact root/member handles, requires matching lifetime count and signaled handles, and retains custody on uncertainty. Attempts50–54 cover batch injection/fix, nine public Managed cases, background retry, full 29-test suite and deliberate wrong drop expectations. Attempts55–56 prove injected one-shot Job termination refusal and accounting-error retry with wrong RED and restored GREEN; the Terra reviewer accepted their narrow bindings. Attempt57 exercised public Managed parent-CWD old-source failure but its parser prevented strict Driver acceptance; diagnostic RED only. Attempt58 corrected the resolver, rejected deliberate wrong executable-path expectation (101), passed targeted GREEN and all 31 Windows process tests, independently read back the child-written executable path and unchanged controller CWD, and exported 202 frames/14 hash-checked files. Manifest `d65351e9...`, lock `12084a90...`, native Windows Rust/Cargo1.93.0, `testing-environ,sys,metadata`; observer accepted Driver0, journal REMOVED; combined Terra review found no blocker for this narrow package. Original proof under `.scratch/all-tickets/windows-rhai-native-20261028/attempt50/` through `attempt58/`. Real OS faults, permanent refusal, complete Windows search order and release remain open.
+Attempts36–39 exposed false Job closure. Attempts50–58 cover batch injection/fix, exact membership, bounded retry, public Managed lifecycle, parent-CWD resolution, full 31-test Windows process target and assertion controls under their documented bindings. Attempt57 is diagnostic RED only. New attempt59 manifested a real missed exact-child fallback after a permanently refused Job exhausted the shared 30-second deadline. The correction preserves finite Job retry and grants at least five seconds each for exact-child and I/O fallback. Native Windows Rust/Cargo1.93.0, `testing-environ,sys,metadata`, manifest `34686903...`, lock `12084a90...`: synthetic permanent-refusal wrong101/restored GREEN0 with 299 refusals, exact child stopped and retained owner; two neighboring unit tests green. Attempt60 reused byte-identical source and passed public final-drop kill/retain wrong101/101 and GREEN0, with independent parent/worker/sentinel readbacks. Observer Driver0 for both, 198/200 frames, 14 files each, eight CRC journal transitions through REMOVED, exact host cleanup. Combined Terra review READY for the bounded package. Actual OS faults, live descendants under permanent refusal, other features/toolchains and release remain open. Proof: `.scratch/all-tickets/windows-rhai-native-20261028/attempt59/` and `attempt60/`.
 
 ## Retained resources
 
-Workhorse VM `dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19` has original sdc restored; foreign sdb untouched. Native public BuildOnly expires 2026-10-30 12:00 UTC. Guest outer evidence scopes `n-dee8dccd`, `n-e9e999be`, `n-71fb632a`, `n-721a05f2`, `n-2c2b7a1d`, `n-879cb849`, `n-0cea30ae` remain; exact host ISOs/stages for attempts52–58 were removed after reference and fuser checks. Prior attempt36/48 guest runtimes remain until exact evidence-first retirement. Clean only proven owned inactive resources.
+Workhorse VM `dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19` has original sdc restored; foreign sdb untouched. Native public BuildOnly expires 2026-10-30 12:00 UTC. Guest outer evidence scopes `n-dee8dccd`, `n-e9e999be`, `n-71fb632a`, `n-721a05f2`, `n-2c2b7a1d`, `n-879cb849`, `n-0cea30ae`, `n-3d6e4701`, `n-e1fb33fd` remain; host ISO/stage for attempts52–60 removed after exact readback. Prior attempt36/48 guest runtimes require exact evidence-first retirement. Clean only proven owned inactive resources.
 
 ## Cause history
 
-Attempt18 false timeout cause unresolved; attempt26 expired before RED/GREEN; attempts36–39 exposed false Job closure; attempt48 expected RED incorrectly; attempt50 showed real injection. Review found background retry stopped too early under uncertain membership/accounting; corrections passed attempts55–56. Attempt57 reached product RED but the Driver parser searched the wrong log, so it is diagnostic only. Attempt58 corrected product CWD search and passed strict proof. Earlier causes/limits remain in original proof files and `.scratch/all-tickets/coordinator-history-20261015.md`.
+Attempt18 false timeout unresolved; attempt26 expired before RED/GREEN; attempts36–39 exposed false Job closure; attempt48 expected RED incorrectly; attempt50 showed batch injection. Review corrected background retry under uncertainty/accounting in attempts55–56. Attempt57 reached product RED but its Driver parser sought the wrong log; attempt58 corrected CWD search and passed strict proof. Attempt59 source review found the shared-deadline bug; the fixed synthetic control and public attempt60 final-drop now pass. Earlier causes and limits remain in original proof folders and `.scratch/all-tickets/coordinator-history-20261015.md`.
 
 ## Open escalations
 
@@ -50,7 +50,7 @@ Managed closure Expert advised exact root/member handles and count-based fail-cl
 
 ## Budgets
 
-Attempts52–58 used one Driver each: 97.601/109.868/74.480/59.097/141.689/diagnostic/68.427 seconds; attempt58 exported 202 frames and 14 hash-checked files with eight journal transitions. Earlier attempt50/51 and all prior consumption/limits remain in original proof folders; no budget reset. Future finite run limits derive from actual scope/capacity, not inherited fixed heavy slots.
+Attempts52–60 used one Driver each. Elapsed 52–56: 97.601/109.868/74.480/59.097/141.689 seconds; 57 diagnostic, 58 68.427, 59 121.908, 60 61.776. Attempt59/60 exported 198/200 frames and 14 hash-checked files each with eight valid journal transitions. Earlier consumption remains in proof folders; no budget reset. Future finite run limits derive from actual scope/capacity, not old fixed slots.
 
 ## History
 
@@ -59,6 +59,7 @@ Attempts52–58 used one Driver each: 97.601/109.868/74.480/59.097/141.689/diagn
 - Previous state: journal/state-36d9d212bc8f4fd9ba8357358d32cbd5.md
 - Previous state: journal/state-79ee5a69313a46528355cc548d34cdb5.md
 - Previous state: journal/state-ecb05fc1a10645dbbb818b951102673c.md
+- Previous state: journal/state-2080b890fbff42e48dc3f2e4c0da76e2.md
 
 ## Retrospective
 
