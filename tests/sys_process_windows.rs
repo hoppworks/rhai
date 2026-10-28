@@ -26,6 +26,7 @@ const STDIN_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_STDIN_WRONG_EXPECTATION"
 const STDIN_SCALAR_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_STDIN_SCALAR_WRONG_EXPECTATION";
 const STDIN_TIMEOUT_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_STDIN_TIMEOUT_WRONG_EXPECTATION";
 const SPAWN_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_SPAWN_WRONG_EXPECTATION";
+const CHILD_SNAPSHOT_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_CHILD_SNAPSHOT_WRONG_EXPECTATION";
 const SPAWN_KILL_RECORD_ENV: &str = "RHAI_WINDOWS_SPAWN_KILL_RECORD";
 const SPAWN_KILL_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_SPAWN_KILL_WRONG_EXPECTATION";
 const CHILD_DROP_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_CHILD_DROP_WRONG_EXPECTATION";
@@ -639,7 +640,13 @@ fn windows_spawn_child_can_be_polled_and_waited_through_clones() {
     assert_eq!(first["stderr"].clone().cast::<ImmutableString>().as_str(), "\u{fffd}B\0");
     assert_eq!(first["stdout"].clone().cast::<ImmutableString>(), second["stdout"].clone().cast::<ImmutableString>());
     assert_eq!(first["stderr"].clone().cast::<ImmutableString>(), second["stderr"].clone().cast::<ImmutableString>());
+    let third = engine.eval_with_scope::<Map>(&mut scope, r#"let result = child.wait(); result.code = 99; result.stdout = "altered"; sibling.wait()"#).unwrap();
+    assert_eq!(third["code"].as_int().unwrap(), 7, "mutating one result must not change the cached exit");
+    assert_eq!(third["stdout"].clone().cast::<ImmutableString>().as_str(), "\nrunning 1 test\n\0A\u{fffd}", "mutating one result must not change cached output");
     eprintln!("windows_spawn_os_readback pid={pid} exit={exit_code} exact_handle_signaled=true");
+    if std::env::var_os(CHILD_SNAPSHOT_WRONG_EXPECTATION_ENV).is_some() {
+        assert_eq!(third["code"].as_int().unwrap(), 99, "deliberately wrong cached snapshot expectation");
+    }
     if std::env::var_os(SPAWN_WRONG_EXPECTATION_ENV).is_some() {
         assert_eq!(exit_code, 8, "deliberately wrong spawned child exit expectation");
     }

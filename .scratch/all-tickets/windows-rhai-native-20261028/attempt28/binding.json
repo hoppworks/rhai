@@ -1,0 +1,15 @@
+{
+  "nonce": "4a7fd1930ec5db86067fdd3ed06fa69f",
+  "source_commit": "173b49e447ecb1e61b7c0e6670eff9e530e64a30",
+  "manifest_sha256": "d31ea18921d23311160816afec6d2ee280d1f66acec86f58c3d1e8ad3e032a98",
+  "archive_sha256": "86f9b43b58cc7fe412da047e7d52e75520d79105e75bb1b397eb9c4f6118b285",
+  "file_count": 441,
+  "source_bytes": 5213840,
+  "expected": "wrong cached exit RED then restored GREEN",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": true,
+  "dispatch_recorded_utc": "2026-10-28T10:00:09.263759+00:00"
+}

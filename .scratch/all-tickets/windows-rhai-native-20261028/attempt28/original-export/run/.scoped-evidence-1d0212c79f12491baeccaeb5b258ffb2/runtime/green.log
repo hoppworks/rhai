@@ -1,0 +1,76 @@
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: unused import: `PathBuf`
+ --> src\bin\rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 0.13s
+     Running tests\sys_process_report.rs (work\target\debug\deps\sys_process_report-d8dccb6d8676fb1e.exe)
+
+running 7 tests
+test prior_sys_error_variants_keep_display_and_classification ... ok
+test process_report_rust_accessors_cover_absent_code_signal_and_diagnostics ... ok
+test scope_defaults_and_builder ... ok
+test absent_and_signal_exit_are_readable_through_engine ... ok
+test script_mutating_copied_report_blobs_and_collections_does_not_change_snapshot ... ok
+test process_causes_retain_primary_classification_and_snapshot ... ok
+test old_error_variants_keep_rhai_classification_and_have_no_process_report ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests\sys_process_windows.rs (work\target\debug\deps\sys_process_windows-c2b310be195d180b.exe)
+
+running 17 tests
+test windows_child_drop_fixture ... ok
+test windows_process_fixture ... ok
+test windows_process_fast_probe ... ok
+timeout_range_child_record=None
+test windows_run_raw_rejects_timeout_outside_duration_range_before_spawn ... ok
+windows_process_os_readback pid=2312 exit=0 exact_handle_signaled=true
+windows_stdin_child_readback pid=6256 exit=0 exact_handle_signaled=true
+test windows_run_raw_transfers_blob_while_draining_both_streams ... ok
+windows_process_os_readback pid=3852 exit=7 exact_handle_signaled=true
+test windows_run_raw_captures_output_and_nonzero_exit ... ok
+test windows_run_rejects_decoded_text_expansion_with_original_raw_report ... ok
+windows_process_text_readback pid=4268 exit=0 exact_handle_signaled=true
+windows_process_text_readback pid=3700 exit=7 exact_handle_signaled=true
+test windows_run_returns_lossy_text_and_nonzero_exit ... ok
+test windows_spawn_blocked_input_fixture ... ok
+windows_scalar_stdin_readback mode=string pid=344 exit=0 bytes=41 exact_handle_signaled=true
+windows_scalar_stdin_readback mode=empty pid=3016 exit=0 bytes=0 exact_handle_signaled=true
+windows_spawn_os_readback pid=9208 exit=7 exact_handle_signaled=true
+test windows_spawn_child_can_be_polled_and_waited_through_clones ... ok
+windows_scalar_stdin_readback mode=unit pid=4692 exit=0 bytes=0 exact_handle_signaled=true
+test windows_run_string_empty_and_unit_stdin_reach_child_eof ... ok
+windows_child_drop_os_readback mode=kill pid=1732 exit=1 nonfinal_ack=true final_ack=false exact_handle_signaled=true
+windows_spawn_kill_os_readback pid=4196 exit=1 available=12288 exact_handle_signaled=true
+test windows_spawn_kill_stops_child_with_unread_buffered_input ... ok
+test windows_stdin_fixture ... ok
+test windows_timeout_fixture ... ok
+windows_child_drop_os_readback mode=retain pid=3332 exit=0 nonfinal_ack=true final_ack=true exact_handle_signaled=true
+test windows_spawn_child_drop_follows_host_policy ... ok
+windows_blocked_stdin_child_readback pid=3896 exit=1 exact_handle_signaled=true
+windows_blocked_stdin_report timed_out=true exit=Some(1) diagnostics=[]
+windows_timeout_child_readback pid=3244 exit=1 exact_handle_signaled=true
+windows_timeout_report timed_out=true stdout_complete=true stderr_complete=true exit=Some(1) diagnostics=[]
+windows_timeout_capture stdout_complete=true stderr_complete=true
+test windows_run_raw_timeout_terminates_exact_child_and_retains_output ... ok
+test windows_run_raw_times_out_with_unread_stdin ... ok
+
+test result: ok. 17 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 5.01s
+
