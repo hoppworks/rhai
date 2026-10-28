@@ -628,7 +628,16 @@ fn test_serde_json() -> serde_json::Result<()> {
 
     let mut m = d2.cast::<Map>();
 
-    assert_eq!(m["a"].as_int().unwrap(), 123);
+    let expected_a = if std::env::var_os("RHAI_SERDE_JSON_WRONG_EXPECTATION").is_some() {
+        124
+    } else {
+        123
+    };
+    assert_eq!(
+        m["a"].as_int().unwrap(),
+        expected_a,
+        "Dynamic JSON round-trip must preserve integer map values"
+    );
     assert!(m["c"].as_bool().unwrap());
 
     let a = m.remove("b").unwrap().cast::<Array>();

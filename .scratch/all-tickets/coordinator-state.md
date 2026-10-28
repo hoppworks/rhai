@@ -10,11 +10,11 @@ Use current central agent-skills `d6024420` plus applicable local edits and proj
 
 ## Current step
 
-Fork-main is `272c8a80`, including reviewed Windows X35 contrasts and macOS `no_index,sync,metadata` plus `only_i32,no_float` slices. The matching Workhorse Linux integer-only slice passed review and awaits commit. A–F/Ticket03/release remain open.
+Fork-main is `3e19f671`, including reviewed Windows X35 contrasts, macOS feature slices and Linux integer-only slice. The macOS `metadata,serde` package passed combined review and targeted Serde recheck; it awaits commit. A–F/Ticket03/release remain open.
 
 ## Next action
 
-Commit/push the reviewed Linux slice to fork main, verify remote head, then select the next native feature/MSRV gate or Managed fault contract. Retire guest scopes only after identity/inactivity checks.
+Commit/push the reviewed macOS `metadata,serde` package, verify remote head, then check the matching Linux gate. Retire guest scopes only after identity/inactivity checks.
 
 ## Goal
 
@@ -40,6 +40,8 @@ MacOS27.2 arm64/Rust1.77.2 `testing-environ,sys,net,only_i32,no_float`: 11 targe
 
 Workhorse Linux7.2.11 x86_64/Rust1.77.2 matching integer-only profile: pinned source/lock, compile0, combined wrong101, restored 135/0/2ignored, combined review PASS; owned stage/scope retired. `.scratch/all-tickets/release-matrix-20261028/linux-onlyi32-nofloat-proof.md`.
 
+MacOS27.2 arm64/Rust1.77.2 combined `metadata,serde`: 11 targets 160/0/1ignored, host wrong101; targeted Dynamic JSON wrong101/restored Serde25/0. Source binding, cleanup, combined review/focused recheck PASS: `.scratch/all-tickets/release-matrix-20261028/macos-metadata-serde-proof.md`.
+
 Attempts36–39 exposed false Job closure. Attempts50–58 cover batch injection/fix, exact membership, bounded retry, public Managed lifecycle, parent-CWD resolution, full 31-test Windows process target and assertion controls under their documented bindings. Attempt57 is diagnostic RED only. New attempt59 manifested a real missed exact-child fallback after a permanently refused Job exhausted the shared 30-second deadline. The correction preserves finite Job retry and grants at least five seconds each for exact-child and I/O fallback. Native Windows Rust/Cargo1.93.0, `testing-environ,sys,metadata`, manifest `34686903...`, lock `12084a90...`: synthetic permanent-refusal wrong101/restored GREEN0 with 299 refusals, exact child stopped and retained owner; two neighboring unit tests green. Attempt60 reused byte-identical source and passed public final-drop kill/retain wrong101/101 and GREEN0, with independent parent/worker/sentinel readbacks. Observer Driver0 for both, 198/200 frames, 14 files each, eight CRC journal transitions through REMOVED, exact host cleanup. Combined Terra review READY for the bounded package. Actual OS faults, live descendants under permanent refusal, other features/toolchains and release remain open. Proof: `.scratch/all-tickets/windows-rhai-native-20261028/attempt59/` and `attempt60/`.
 
 Attempt61 freezes current base plus X33 test (`160a37ef...`, same lock) and passes native Windows Managed child-PATH-over-parent-CWD wrong101/GREEN0, 31/31 suite and independent child executable readback. Observer Driver0 in 104.824s, 202 frames/14 hash-checked files, eight valid journal transitions through REMOVED; own host stage/ISO retired, guest outer scope retained. Combined independent review PASS. Proof: `.scratch/all-tickets/windows-rhai-native-20261028/attempt61/`.
@@ -62,7 +64,7 @@ Managed closure Expert advised exact root/member handles and count-based fail-cl
 
 ## Budgets
 
-Windows attempts52–62 each used one bounded Driver; elapsed times, exported frames/files and journal transitions remain in their original proof folders. Earlier consumption is not reset. Future finite run limits derive from actual scope/capacity, not old fixed slots. The macOS release slice used three 1200-second bounded scopes: attempt01 19 seconds, attempt02 16 seconds and attempt03 17 seconds of Cargo steps; all three runtimes and exact session scopes were retired.
+Windows attempts52–62 each used one bounded Driver; detailed consumption remains in original proof folders. No budget reset. Future limits derive from actual capacity. Release-profile attempts used finite owned scopes; their timings and cleanup are in their proof folders.
 
 ## History
 

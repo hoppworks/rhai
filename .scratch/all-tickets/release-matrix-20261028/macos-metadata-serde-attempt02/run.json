@@ -1,0 +1,90 @@
+{
+  "checkout_head": "3e19f6711110d06124e4407dd04496c4fc60ff22",
+  "source_commit": "63f18b01bc8000492dc6c777462568c8ab9824c7",
+  "source_manifest_sha256": "ddbb88a05802f02e83d4d1c5a613b3a8040f3d7bf2007acb6955523d76868319",
+  "source_archive_sha256": "3a671bbdeaebb068fc264e924f63af497eb8e94c4bffcf69e9fe63f000e9f26a",
+  "source_overlays": {
+    "tests/sys_process.rs": "cce4c03768a74cbb391fbc3369c4daf16b35a7f5a9b4eea071aca6b73a2ade31",
+    "tests/serde.rs": "377d9d1c055085557aff1f9c5951978f58ea9211182d8d4f355730bcac0fc305"
+  },
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "features": "testing-environ,sys,net,metadata,serde",
+  "os": "macOS-27.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "rustc": "rustc 1.77.2 (25ef9e3d8 2024-04-09)",
+  "cargo": "cargo 1.77.2 (e52e36006 2024-03-26)",
+  "capacity_before": {
+    "runtime_free_bytes": 170392039424,
+    "expected_additional_peak_bytes": 4294967296,
+    "estimate_source": "provisional private Cargo target/cache estimate"
+  },
+  "steps": [
+    {
+      "name": "compile",
+      "command": [
+        "cargo",
+        "+1.77.2",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys,net,metadata,serde",
+        "--test",
+        "serde",
+        "--no-run"
+      ],
+      "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/macos-serde-roundtrip-20261028T2027Z-73e0/agent-build-dg6jgk9u/source",
+      "exit": 0,
+      "elapsed_seconds": 17.393,
+      "log_sha256": "3ddb11cd6c346a6e910dac3605145eda387367324217d71b3cd1c9fa5db41d6e",
+      "log_bytes": 6779
+    },
+    {
+      "name": "serde-wrong",
+      "command": [
+        "cargo",
+        "+1.77.2",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys,net,metadata,serde",
+        "--test",
+        "serde",
+        "test_serde_json",
+        "--",
+        "--exact",
+        "--nocapture"
+      ],
+      "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/macos-serde-roundtrip-20261028T2027Z-73e0/agent-build-dg6jgk9u/source",
+      "exit": 101,
+      "elapsed_seconds": 0.443,
+      "log_sha256": "6bfc3994ca638573ae390e522cb8730a82fd4deba027dd1250e4c0af5fec8955",
+      "log_bytes": 3781
+    },
+    {
+      "name": "suite",
+      "command": [
+        "cargo",
+        "+1.77.2",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys,net,metadata,serde",
+        "--test",
+        "serde",
+        "--",
+        "--test-threads=1",
+        "--nocapture"
+      ],
+      "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/macos-serde-roundtrip-20261028T2027Z-73e0/agent-build-dg6jgk9u/source",
+      "exit": 0,
+      "elapsed_seconds": 0.145,
+      "log_sha256": "d0ebc619f93537ee412206fe55a34ad58aa6c9dc390ea66fb469dca201039283",
+      "log_bytes": 4465
+    }
+  ],
+  "capacity_after": {
+    "runtime_free_bytes": 170128166912,
+    "target_bytes": 212335116
+  },
+  "status": "passed"
+}

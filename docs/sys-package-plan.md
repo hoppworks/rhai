@@ -1505,6 +1505,17 @@ independent combined review returned PASS for named behavior. Metadata still
 ran zero tests; exhaustive integer/no-float semantics, Windows and remaining
 release rows are open.
 
+At fork-main `3e19f671`, native macOS 27.2 arm64/Rust-Cargo 1.77.2 passed
+the combined `testing-environ,sys,net,metadata,serde` slice:
+`.scratch/all-tickets/release-matrix-20261028/macos-metadata-serde-proof.md`.
+Eleven targets compiled, the combined host-readback wrong expectation failed
+as intended, and the restored suite passed 160 tests with one ignored,
+including two public TCP metadata tests. A targeted `serde` follow-up used an
+exact wrong-expectation control and passed all 25 Dynamic JSON tests. The
+combined independent review and focused recheck returned PASS for these
+named paths. Full script-level serialization, other platforms/features and
+release remain open.
+
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance
 matrix or closure count. Historical implementation notes and estimates follow.
