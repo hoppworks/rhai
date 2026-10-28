@@ -1,0 +1,810 @@
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: variable does not need to be mutable
+   --> src/packages/sys/process/unix.rs:678:13
+    |
+678 |         let mut wait_operation = "wait for child";
+    |             ----^^^^^^^^^^^^^^
+    |             |
+    |             help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` on by default
+
+warning: unused variable: `termination`
+    --> src/packages/sys/process/unix.rs:1118:22
+     |
+1118 |                 let (termination, _operation) = if self.managed {
+     |                      ^^^^^^^^^^^ help: if this is intentional, prefix it with an underscore: `_termination`
+     |
+     = note: `#[warn(unused_variables)]` on by default
+
+warning: unused variable: `faults`
+    --> src/packages/sys/process/unix.rs:2301:13
+     |
+2301 |     let mut faults = ExecutionFaults::take_for_execution();
+     |             ^^^^^^ help: if this is intentional, prefix it with an underscore: `_faults`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2301:9
+     |
+2301 |     let mut faults = ExecutionFaults::take_for_execution();
+     |         ----^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2378:9
+     |
+2378 |     let mut child =
+     |         ----^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> src/packages/sys/process/unix.rs:2721:9
+     |
+2721 |     let mut pending = input.unwrap_or_default();
+     |         ----^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variant `OnlyZombieLeader` is never constructed
+  --> src/packages/sys/process/unix.rs:51:5
+   |
+48 | enum GroupCloseOutcome {
+   |      ----------------- variant in this enum
+...
+51 |     OnlyZombieLeader,
+   |     ^^^^^^^^^^^^^^^^
+   |
+   = note: `GroupCloseOutcome` has derived impls for the traits `Clone` and `Debug`, but these are intentionally ignored during dead code analysis
+   = note: `#[warn(dead_code)]` on by default
+
+warning: methods `numeric_operations_probe`, `quarantine_observations_probe`, and `fail_reservation` are never used
+    --> src/packages/sys/process/unix.rs:1549:8
+     |
+1422 | impl ExecutionFaults {
+     | -------------------- methods in this implementation
+...
+1549 |     fn numeric_operations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1560 |     fn quarantine_observations_probe(&self) -> Option<Arc<AtomicUsize>> {
+     |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+1585 |     fn fail_reservation(&self) -> bool {
+     |        ^^^^^^^^^^^^^^^^
+
+warning: `rhai` (lib) generated 9 warnings (run `cargo fix --lib -p rhai` to apply 6 suggestions)
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:11:24
+   |
+11 | fn read_bounded_to_end(mut stream: &TcpStream, max_bytes: usize) -> Vec<u8> {
+   |                        ----^^^^^^
+   |                        |
+   |                        help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` on by default
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:62:10
+   |
+62 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+  --> tests/net_writes.rs:83:10
+   |
+83 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:208:10
+    |
+208 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:266:10
+    |
+266 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:285:9
+    |
+285 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:289:9
+    |
+289 |     let mut peer = TcpStream::connect(address.parse::<SocketAddr>().unwrap()).unwrap();
+    |         ----^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests/net_writes.rs:306:9
+    |
+306 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()).max_write_bytes(2));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: unused return value of `rhai::Scope::<'_>::remove` that must be used
+   --> tests/net_writes.rs:245:13
+    |
+245 |             scope.remove::<String>("payload");
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` on by default
+help: use `let _ = ...` to ignore the resulting value
+    |
+245 |             let _ = scope.remove::<String>("payload");
+    |             +++++++
+
+warning: `rhai` (test "net_writes") generated 9 warnings (run `cargo fix --test "net_writes"` to apply 8 suggestions)
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:1220:9
+     |
+1220 |     let mut holder = command.spawn().expect("start escaped captured-pipe holder");
+     |         ----^^^^^^
+     |         |
+     |         help: remove this `mut`
+     |
+     = note: `#[warn(unused_mut)]` on by default
+
+warning: value assigned to `incomplete` is never read
+    --> tests/sys_process.rs:1994:17
+     |
+1994 |         let mut incomplete = false;
+     |                 ^^^^^^^^^^
+     |
+     = help: maybe it is overwritten before being read?
+     = note: `#[warn(unused_assignments)]` on by default
+
+warning: unused variable: `state`
+    --> tests/sys_process.rs:2299:26
+     |
+2299 |                 Ok(Some((state, parent, group, start)))
+     |                          ^^^^^ help: if this is intentional, prefix it with an underscore: `_state`
+     |
+     = note: `#[warn(unused_variables)]` on by default
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:2930:9
+     |
+2930 |     let mut sentinel = managed_spawn_sentinel();
+     |         ----^^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:3038:9
+     |
+3038 |     let mut sentinel = managed_spawn_sentinel();
+     |         ----^^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:3230:9
+     |
+3230 |     let mut sentinel = Sentinel(
+     |         ----^^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:3366:9
+     |
+3366 |     let mut sentinel = managed_spawn_sentinel();
+     |         ----^^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:3538:9
+     |
+3538 |     let mut sentinel = Sentinel(
+     |         ----^^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> tests/sys_process.rs:3677:9
+     |
+3677 |     let mut sentinel = Sentinel(
+     |         ----^^^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: constant `DIRECT_DROP_RECORD_ENV` is never used
+  --> tests/sys_process.rs:40:7
+   |
+40 | const DIRECT_DROP_RECORD_ENV: &str = "RHAI_SYS_DIRECT_DROP_RECORD";
+   |       ^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: unused `Dynamic` that must be used
+   --> tests/fixtures/sys_process_shared_child_contract.rs:260:5
+    |
+260 |     engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("kill after completion is idempotent");
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` on by default
+help: use `let _ = ...` to ignore the resulting value
+    |
+260 |     let _ = engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("kill after completion is idempotent");
+    |     +++++++
+
+warning: unused `Dynamic` that must be used
+   --> tests/fixtures/sys_process_shared_child_contract.rs:261:5
+    |
+261 |     engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("repeated kill after completion is idempotent");
+    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+help: use `let _ = ...` to ignore the resulting value
+    |
+261 |     let _ = engine.eval_with_scope::<Dynamic>(&mut scope, "child.kill()").expect("repeated kill after completion is idempotent");
+    |     +++++++
+
+warning: `rhai` (test "sys_process") generated 12 warnings (run `cargo fix --test "sys_process"` to apply 8 suggestions)
+    Finished test [unoptimized] target(s) in 0.02s
+     Running tests/combined_sys_net.rs (/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/target/debug/deps/combined_sys_net-846ac8e43bdae287)
+
+running 1 test
+test sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/net_connect.rs (/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/target/debug/deps/net_connect-6afee2338c8b7c27)
+
+running 5 tests
+test authorized_connect_is_observed_and_clone_close_is_shared ... ok
+test denied_and_invalid_endpoints_do_not_reach_peer_and_errors_are_catchable ... ok
+test ipv6_connect_requires_the_exact_numeric_endpoint_and_delivers_peer_bytes ... ipv6_connect endpoint=[::1]:35017 denied_peer_absent=true exact_bytes=true eof=true
+ok
+test net_config_rejects_zero_deadline_and_invalid_handle_limits ... ok
+test open_handle_limit_is_shared_across_package_engines_and_released_on_close ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests/net_listen.rs (/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/target/debug/deps/net_listen-70c93c6b2587d7b7)
+
+running 8 tests
+test accepted_stream_uses_the_shared_package_quota_across_engines ... ok
+test authorized_listener_accepts_an_independent_peer ... ok
+test bind_failure_releases_listener_quota ... ok
+test denied_and_invalid_listener_endpoints_never_bind ... ok
+test ipv6_port_zero_listener_uses_its_own_grant_and_reports_real_peer_bytes ... closed IPv6 listener reconnect outcome: Err(Os { code: 111, kind: ConnectionRefused, message: "Connection refused" })
+ipv6_listen endpoint=[::1]:43471 peer_identity=true exact_bytes=true eof=true listener_closed=true
+ok
+test listener_clones_share_close_and_final_drop_releases_the_bind ... ok
+test no_client_accept_times_out_with_catchable_net_error ... ok
+test quota_retry_deadline_expires_under_a_real_saturated_handle_limit ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.12s
+
+     Running tests/net_metadata.rs (/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/target/debug/deps/net_metadata-126db6242a6a078d)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+     Running tests/net_reads.rs (/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/target/debug/deps/net_reads-419c59541a91027e)
+
+running 8 tests
+test accepted_stream_inherits_host_receive_cap ... ok
+test blob_reads_validate_lengths_return_exact_short_prefix_and_obey_host_cap ... ok
+test engine_string_limit_keeps_ascii_and_reports_lossy_expansion_progress ... ok
+test f32_float_timeout_arguments_reject_fractional_and_non_finite_values ... ok
+test no_data_read_times_out_and_bounded_eof_loop_reports_partial_progress ... ok
+test one_shot_read_returns_an_available_short_prefix_without_waiting_for_more ... ok
+test one_shot_text_read_replaces_a_utf8_character_cut_by_the_available_prefix ... ok
+test stream_read_string_returns_exact_lossy_text_from_peer_bytes ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.28s
+
+     Running tests/net_writes.rs (/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/target/debug/deps/net_writes-fc2fc70160745a4b)
+
+running 10 tests
+test accepted_stream_inherits_host_write_cap ... ok
+test accepted_stream_writes_are_read_back_by_the_peer ... ok
+test bounded_write_timeout_reports_partial_bytes_matching_peer_readback ... ok
+test engine_string_limit_rejects_write_before_peer_bytes ... ok
+test host_write_cap_rejects_oversize_input_without_peer_bytes ... ok
+test invalid_host_write_bounds_are_rejected ... ok
+test read_half_close_is_idempotent_and_keeps_stream_open_for_close ... ok
+test script_write_blob_preserves_exact_bytes ... ok
+test script_writes_string_and_write_all_report_real_peer_bytes ... ok
+test write_half_close_keeps_the_read_direction_and_is_idempotent ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+
+     Running tests/sys_env.rs (/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/target/debug/deps/sys_env-92ce1056901fb1a1)
+
+running 7 tests
+test test_cwd_matches_process ... ok
+test test_env_allow_list_unset_variable ... ok
+test test_env_allow_list_value ... ok
+test test_env_default_policy_hides_all ... ok
+test test_env_var_non_utf8 ... ok
+test test_env_var_set_and_unset ... ok
+test test_env_vars_all ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+
+     Running tests/sys_fs.rs (/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/target/debug/deps/sys_fs-49838898c6575c2c)
+
+running 35 tests
+test test_create_dir_cases ... ok
+test test_deep_tree_and_many_entries ... ok
+test test_empty_and_mixed_writes ... ok
+test test_file_handle_blob_read_respects_engine_array_limit ... ok
+test test_file_handle_read_blob_preserves_bytes_and_obeys_host_cap ... ok
+test test_file_handle_read_respects_engine_limit_below_host_cap ... ok
+test test_file_handle_read_string_advances_the_shared_cursor ... ok
+test test_file_handle_reads_fail_at_eof_and_on_write_only_handle ... ok
+test test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving ... ok
+test test_file_handle_string_read_requires_complete_utf8 ... ok
+test test_large_file_round_trip ... ok
+test test_metadata_symlink_and_readonly ... ok
+test test_no_handle_leak ... ok
+test test_non_utf8_file_name ... ok
+test test_open_file_checks_grants_before_mutation_and_stays_confined ... ok
+test test_open_file_default_preserves_contents_and_shares_cursor ... independent host readback: "original XYyload"
+ok
+test test_open_file_modes_and_exclusive_create ... ok
+test test_path_spellings ... ok
+test test_predicates_and_metadata ... ok
+test test_read_binary ... ok
+test test_read_dir_cases ... ok
+test test_read_file_cases ... ok
+test test_remove_cases ... ok
+test test_rename_and_copy ... ok
+test test_rename_overwrite_and_directory ... ok
+test test_unicode_names ... ok
+test test_unrestricted_missing_parents ... ok
+test test_unrestricted_relative_paths ... ok
+test test_unrestricted_relative_paths_after_cwd_is_unlinked ... ok
+test test_unrestricted_round_trip ... ok
+test test_unrestricted_symlink_then_parent_uses_host_resolution ... ok
+test test_unrestricted_symlinks_follow_host_semantics ... ok
+test test_write_append_blob ... ok
+test test_write_into_missing_parent ... ok
+test test_wrong_entry_kind ... ok
+
+test result: ok. 35 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.16s
+
+     Running tests/sys_policy.rs (/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/target/debug/deps/sys_policy-729889f89e4e230e)
+
+running 24 tests
+test test_absolute_path_through_symlinked_root_ancestor ... ok
+test test_absolute_path_with_parent_components ... ok
+test test_absolute_paths ... ok
+test test_config_builder ... ok
+test test_configured_root_symlink_then_parent_uses_os_resolution ... ok
+test test_copy_across_roots ... ok
+test test_default_config_denies_fs ... ok
+test test_env_allow_list ... ok
+test test_error_position ... ok
+test test_error_variants ... ok
+test test_errors_are_catchable ... ok
+test test_host_can_downcast ... ok
+test test_missing_root_fails_early ... ok
+test test_multiple_roots ... ok
+test test_nested_roots_longest_prefix ... ok
+test test_parent_traversal_is_denied ... ok
+test test_plain_engine_has_no_sys_functions ... ok
+test test_read_only_root ... ok
+test test_remove_dir_all_needs_delete_access ... ok
+test test_root_with_dot_components ... ok
+test test_static_module_and_sharing ... ok
+test test_symlink_escape_is_denied ... ok
+test test_symlinked_root ... ok
+test test_unrestricted_respects_access_level ... ok
+
+test result: ok. 24 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+     Running tests/sys_process.rs (/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/target/debug/deps/sys_process-3d15b6dae56ab3f9)
+
+running 65 tests
+test child_wait_preserves_decoded_expansion_reports_and_committed_primary_cause ... child_wait_expansion primary_limit=false raw_bytes=135 exact=true cloned_snapshot=true child_reaped=true
+child_wait_expansion primary_limit=true raw_bytes=239 exact=true cloned_snapshot=true child_reaped=true
+ok
+test default_and_nonmatching_process_policies_deny_public_run_without_starting_child ... denied child markers absent: default=true, allowlist-mismatch=true; allowed child record: child-pid=2361830 child-exit=0
+ok
+test direct_run_returns_with_pipe_closed_worker_live_control ... managed_pidfd_acquired pid=2361835 start=9987074 ppid=2361820 pgid=2358937
+managed_pidfd_acquired pid=2361837 start=9987074 ppid=2361835 pgid=2358937
+managed_pidfd_acquired pid=2361839 start=9987074 ppid=2361837 pgid=2358937
+managed_fixture_cleanup worker_pid=Some(2361837) worker_esrch=true leaf_pid=Some(2361839) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2361835) leader_esrch=true
+ok
+test direct_spawn_kill_on_drop_false_preserves_child_and_capture ... direct_drop_fixture_started root=/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/tmp/rhai-sys-test-2361820-direct_spawn_kill_on_drop_false_preserves_child_and_capture-4 test_pid=2361820 child_pid=2361844
+direct_drop_after_final_client_drop pid=2361844 alive=true challenge_ack=true completion_exists=false
+direct_drop_completion pid=2361844 record="pid=2361844 stdout_bytes=524288 stderr_bytes=524288 complete=true\n"
+direct_drop_terminal pid=2361844 esrch=true
+direct_drop_fixture_cleanup root=/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/tmp/rhai-sys-test-2361820-direct_spawn_kill_on_drop_false_preserves_child_and_capture-4 pid=2361844 esrch=true
+direct_drop_fixture_cleanup root=/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/tmp/rhai-sys-test-2361820-direct_spawn_kill_on_drop_false_preserves_child_and_capture-4 pid=2361844 esrch=true
+ok
+test direct_spawn_try_wait_returns_unit_until_child_exits ... x24_running pid=2361857 alive_before_try_wait=true result_is_unit=true
+x24_post_exit_try_wait pid=2361857 result_observed_before_wait=true code=0 success=true
+x24_finished pid=2361857 wait_code=0 try_wait_code=0 success=true reaped_esrch=true
+ok
+test f32_process_timeouts_validate_before_launch_and_preserve_host_output_bounds ... f32_process invalid_durations_no_child=5 finite_fractional_success=true host_cap=4 retained_prefix=abcd children_reaped=true
+ok
+test lossy_run_reports_engine_limit_expansion_without_returning_truncated_text ... ok
+test managed_child_kill_reports_group_closed_under_fixture_reaper ... 
+running 1 test
+
+running 1 test
+managed_pidfd_acquired pid=2361874 start=9987122 ppid=2361871 pgid=2361874
+managed_pidfd_acquired pid=2361876 start=9987122 ppid=2361874 pgid=2361874
+managed_pidfd_acquired pid=2361878 start=9987122 ppid=2361876 pgid=2361874
+managed_child_kill_live reaper=2361869 reaper_start=9987121 host=2361871 host_start=9987121 leader=2361874 leader_start=9987122 worker=2361876 worker_start=9987122 leaf=2361878 leaf_start=9987122 group=2361874 sentinel=2361868 sentinel_start=9987121 sentinel_pgid=2361868
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 64 filtered out; finished in 0.04s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 64 filtered out; finished in 0.04s
+
+managed-scope sentinel_cleanup pid=2361868 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_child_kill_boundary host_live_at_return=true reaper_live_at_return=true leader=2361874 leader_start=9987122 leader_record_start_matches_pidfd=true leader_absent=true worker=2361876 worker_start=9987122 worker_absent=true leaf=2361878 leaf_start=9987122 leaf_absent=true group=2361874 exact_descendants_reaped=true sentinel=2361868 sentinel_start=9987121 sentinel_pgid=2361868 sentinel_live_at_return=true sentinel_reaped_after_return=true api_bound=true report_returned=true killed_report=true capture_complete=true pidfds_exited=true reaper_ok=true host_absent_after_cleanup=true group_empty=true api="host=2361871 host_start=9987121 api_success=true api_outcome=child_report success=false code=None signal=Some(9) stdout_complete=true stderr_complete=true cause=none diagnostic=none\n" reaped="worker=2361876 start=9987122 pgid=2361874 reaped=true wait_status=9 leaf=2361878 start=9987122 pgid=2361874 reaped=true wait_status=9 complete=true\n" cleanup="pid=2361869 prompt=true host_status=0 worker=2361876 start=9987122 pgid=2361874 reaped=true wait_status=9 leaf=2361878 start=9987122 pgid=2361874 reaped=true wait_status=9 complete=true\n"
+managed_fixture_cleanup worker_pid=Some(2361876) worker_esrch=true leaf_pid=Some(2361878) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2361874) leader_esrch=true
+ok
+test managed_escaped_fixture_cleanup_signals_only_exact_process_identity ... managed_escaped_pipe_cleanup_signal_refused pid=2361882 expected=ManagedPipeProcessIdentity { pid: 2361882, pgid: 2361881, start: "9987125-wrong" } current=ManagedPipeProcessIdentity { pid: 2361882, pgid: 2361881, start: "9987125" }
+managed_escaped_pipe_cleanup_escalation member=leader pid=None exact_identity_signal=false
+managed_escaped_pipe_cleanup_escalation member=holder pid=Some(2361882) exact_identity_signal=true
+managed_escaped_pipe_cleanup root=/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/tmp/rhai-sys-test-2361820-managed_escaped_fixture_cleanup_signals_only_exact_process_identity-9 leader=None leader_esrch=false holder=Some(2361882) holder_esrch=false
+managed_pipe_exact_cleanup pid=2361882 pgid=2361881 refused_mismatch=true survived_mismatch=true exact_identity_signal=true holder_record=Some(2361882) absent_before_owner_reap=false target_sigkill=true target_esrch=true sentinel=2361881 sentinel_alive=true
+managed-scope sentinel_cleanup pid=2361881 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_escaped_pipe_cleanup_escalation member=leader pid=None exact_identity_signal=false
+managed_escaped_pipe_cleanup root=/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/tmp/rhai-sys-test-2361820-managed_escaped_fixture_cleanup_signals_only_exact_process_identity-9 leader=None leader_esrch=false holder=Some(2361882) holder_esrch=true
+ok
+test managed_false_drop_leader_fixture ... ok
+test managed_false_drop_leaf_fixture ... ok
+test managed_false_drop_worker_fixture ... ok
+test managed_run_closes_pipe_closed_worker_before_return ... managed_pidfd_acquired pid=2361889 start=9987181 ppid=2361820 pgid=2361889
+managed_pidfd_acquired pid=2361891 start=9987181 ppid=2361889 pgid=2361889
+managed_pidfd_acquired pid=2361893 start=9987181 ppid=2361891 pgid=2361889
+managed_fixture_cleanup worker_pid=Some(2361891) worker_esrch=true leaf_pid=Some(2361893) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2361889) leader_esrch=true
+ok
+test managed_run_closes_worker_after_leader_exit_and_preserves_sentinel ... managed_fixture_started root=/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/tmp/rhai-sys-test-2361820-managed_run_closes_worker_after_leader_exit_and_preserves_sentinel-11 test_pid=2361820 sentinel_pid=2361896
+managed_normal_leader pid=2361898 pgid=2361898 esrch=true
+managed_normal_worker_leaf worker_pid=2361900 worker_esrch=true leaf_pid=2361902 leaf_esrch=true
+managed_normal_sentinel pid=2361896 live=true
+managed-scope sentinel_cleanup pid=2361896 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(2361900) worker_esrch=true leaf_pid=Some(2361902) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2361898) leader_esrch=true
+ok
+test managed_run_deadline_cancels_escaped_pipe_holder_under_fixture_reaper ... 
+running 1 test
+
+running 1 test
+managed_pipe_pidfd_acquired pid=2361911 start=9987213 ppid=2361908 pgid=2361911
+managed_pipe_pidfd_acquired pid=2361913 start=9987213 ppid=2361911 pgid=2361905
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 64 filtered out; finished in 1.02s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 64 filtered out; finished in 1.03s
+
+managed-scope sentinel_cleanup pid=2361905 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_deadline_escaped_pipe_boundary host=2361908 host_start=9987213 reaper=2361906 reaper_start=9987213 leader=2361911 leader_start=9987213 leader_live=false leader_pidfd_exited=true managed_group=2361911 group_probe=-1 group_errno=3 holder=2361913 holder_start=9987213 holder_group=2361905 holder_live=true holder_pidfd_live=true host_live=true reaper_live=true sentinel=2361905 sentinel_start=9987212 sentinel_group=2361905 sentinel_live=true timeout_report=true partial_capture=true no_watchdog=true
+ api="host=2361908 host_start=9987213 api_success=true api_outcome=timeout_report success=Some(false) timed_out=Some(true) stdout_complete=Some(false) stderr_complete=Some(false) stdout_marker=true stderr_marker=true\n" challenge="pid=2361913 stdout_result=-1 stdout_error=32 stderr_result=-1 stderr_error=32\n" no_watchdog_through_challenge=true holder_reap="holder=2361913 start=9987213 pgid=2361905 reaped=true wait_status=25856\n" reaper_cleanup="pid=2361906 start=9987213 host_status=0 complete=true holder=2361913 start=9987213 pgid=2361905 reaped=true wait_status=25856\n" reaper_ok=true host_absent=true host_absence="not found" leader_absent=true leader_absence="not found" holder_absent=true holder_absence="not found" sentinel_absent=true sentinel_absence="not found" sentinel_group_probe=-1 sentinel_group_errno=3
+managed_fixture_cleanup worker_pid=None worker_esrch=false leaf_pid=None leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2361911) leader_esrch=true
+ok
+test managed_run_deadline_reaps_group_under_fixture_reaper ... 
+running 1 test
+
+running 1 test
+managed_pidfd_acquired pid=2361922 start=9987617 ppid=2361919 pgid=2361922
+managed_pidfd_acquired pid=2361924 start=9987617 ppid=2361922 pgid=2361922
+managed_pidfd_acquired pid=2361926 start=9987617 ppid=2361924 pgid=2361922
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 64 filtered out; finished in 0.77s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 64 filtered out; finished in 0.78s
+
+managed-scope sentinel_cleanup pid=2361916 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_deadline_group_boundary host=2361919 host_start=9987616 reaper=2361917 reaper_start=9987616 leader=2361922 leader_start=9987617 leader_absent=true worker=2361924 worker_start=9987617 worker_absent=true leaf=2361926 leaf_start=9987617 leaf_absent=true group=2361922 group_probe=-1 group_errno=3 host_live=true reaper_live=true sentinel=2361916 sentinel_start=9987616 sentinel_live=true timed_out=true captures_incomplete=true partial_output=true pidfds_exited=true cleanup_exact=true no_watchdog_cleanup_through_boundary=true
+ api="host=2361919 host_start=9987616 api_success=true api_outcome=timeout_report success=Some(false) timed_out=Some(true) stdout_complete=Some(false) stderr_complete=Some(false) stdout_marker=true stderr_marker=true\n" cleanup="worker=2361924 start=9987617 pgid=2361922 reaped=true wait_status=9 leaf=2361926 start=9987617 pgid=2361922 reaped=true wait_status=9 complete=true\n" reaper_ok=true sentinel_reaped=true no_watchdog_cleanup_after_reap=true
+managed_fixture_cleanup worker_pid=Some(2361924) worker_esrch=true leaf_pid=Some(2361926) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2361922) leader_esrch=true
+ok
+test managed_run_output_limit_reaps_group_under_fixture_reaper ... 
+running 1 test
+
+running 1 test
+managed_pidfd_acquired pid=2361935 start=9987695 ppid=2361932 pgid=2361935
+managed_pidfd_acquired pid=2361937 start=9987695 ppid=2361935 pgid=2361935
+managed_pidfd_acquired pid=2361939 start=9987695 ppid=2361937 pgid=2361935
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 64 filtered out; finished in 0.03s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 64 filtered out; finished in 0.04s
+
+managed-scope sentinel_cleanup pid=2361929 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_output_limit_group_boundary host=2361932 host_start=9987694 reaper=2361930 reaper_start=9987694 leader=2361935 leader_start=9987695 leader_absent=true worker=2361937 worker_start=9987695 worker_absent=true leaf=2361939 leaf_start=9987695 leaf_absent=true group=2361935 group_probe=-1 group_errno=3 host_live=true reaper_live=true sentinel=2361929 sentinel_start=9987694 sentinel_live=true output_limit=true prefix_preserved=true captures_honest=true pidfds_exited=true cleanup_exact=true no_watchdog_cleanup_through_boundary=true
+ api="host=2361932 host_start=9987694 api_success=false api_outcome=typed_output_limit stdout_len=4096 stdout_prefix_exact=true stdout_complete=false stderr_len=0 stderr_complete=false timed_out=false exit=None\n" cleanup="worker=2361937 start=9987695 pgid=2361935 reaped=true wait_status=9 leaf=2361939 start=9987695 pgid=2361935 reaped=true wait_status=9 complete=true\n" reaper_ok=true sentinel_reaped=true no_watchdog_cleanup_after_reap=true
+managed_fixture_cleanup worker_pid=Some(2361937) worker_esrch=true leaf_pid=Some(2361939) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2361935) leader_esrch=true
+ok
+test managed_run_reports_while_fixture_reaper_holds_stopped_zombies ... 
+running 1 test
+
+running 1 test
+managed_pidfd_acquired pid=2361947 start=9987699 ppid=2361944 pgid=2361947
+managed_pidfd_acquired pid=2361949 start=9987699 ppid=2361947 pgid=2361947
+managed_pidfd_acquired pid=2361951 start=9987699 ppid=2361949 pgid=2361947
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 64 filtered out; finished in 1.12s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 64 filtered out; finished in 1.13s
+
+managed_held_zombie_boundary host_live_at_return=true leader=2361947 leader_start=9987699 leader_reaped=true worker=2361949 worker_start=9987699 worker_state=Z worker_pgid=2361947 leaf=2361951 leaf_start=9987699 leaf_state=Z leaf_pgid=2361947 group=2361947 kill_zero_result=0 kill_zero_errno=0 capture_complete=true host=2361944 host_start=9987698 api_success=false api_outcome=typed_process_io cause_op=observe_process_group_closure cause_op_matches=true kind=TimedOut exit=Some(0) stdout_complete=true stderr_complete=true diagnostic=true cause_details=Some(Process { cause: Io { op: "observe process group closure", target: "/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/target/debug/deps/sys_process-3d15b6dae56ab3f9", kind: TimedOut, message: "managed process scope remained present after leader reap" }, report: ProcessReport { stdout: [10, 114, 117, 110, 110, 105, 110, 103, 32, 49, 32, 116, 101, 115, 116, 10, 46, 10, 116, 101, 115, 116, 32, 114, 101, 115, 117, 108, 116, 58, 32, 111, 107, 46, 32, 49, 32, 112, 97, 115, 115, 101, 100, 59, 32, 48, 32, 102, 97, 105, 108, 101, 100, 59, 32, 48, 32, 105, 103, 110, 111, 114, 101, 100, 59, 32, 48, 32, 109, 101, 97, 115, 117, 114, 101, 100, 59, 32, 54, 52, 32, 102, 105, 108, 116, 101, 114, 101, 100, 32, 111, 117, 116, 59, 32, 102, 105, 110, 105, 115, 104, 101, 100, 32, 105, 110, 32, 48, 46, 48, 49, 115, 10, 10], stderr: [], stdout_complete: true, stderr_complete: true, exit: Some(Code(0)), timed_out: false, cleanup_diagnostics: [ProcessDiagnostic { operation: "observe process group closure", io_kind: None, message: "managed scope remains present under retained process ownership" }] } }) cleanup_diagnostics=[ProcessDiagnostic { operation: "observe process group closure", io_kind: None, message: "managed scope remains present under retained process ownership" }]
+ held="pid=2361942 start=9987698 host_status=0 worker=Some(2361949) worker_start=Some(9987699) leaf=Some(2361951) leaf_start=Some(9987699) held_zombies=true\n" reaper_status=ExitStatus(unix_wait_status(0))
+managed_held_zombie_cleanup worker=2361949 reaped=true leaf=2361951 reaped=true
+managed_fixture_cleanup worker_pid=Some(2361949) worker_esrch=true leaf_pid=Some(2361951) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2361947) leader_esrch=true
+ok
+test managed_run_succeeds_after_fixture_reaper_reaps_descendants ... 
+running 1 test
+
+running 1 test
+managed_pidfd_acquired pid=2361960 start=9987812 ppid=2361957 pgid=2361960
+managed_pidfd_acquired pid=2361962 start=9987812 ppid=2361960 pgid=2361960
+managed_pidfd_acquired pid=2361964 start=9987812 ppid=2361962 pgid=2361960
+managed_prompt_reap_live_boundary reaper=2361955 reaper_start=9987812 host=2361957 host_start=9987812 leader=2361960 leader_start=9987812 worker=2361962 worker_start=9987812 leaf=2361964 leaf_start=9987812 group=2361960 sentinel=2361954 sentinel_start=9987812
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 64 filtered out; finished in 0.22s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 64 filtered out; finished in 0.22s
+
+managed-scope sentinel_cleanup pid=2361954 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_prompt_reap_success host=2361957 host_start=9987812 leader=2361960 leader_start=9987812 leader_absent=true worker=2361962 worker_start=9987812 worker_absent=true leaf=2361964 leaf_start=9987812 leaf_absent=true sentinel=2361954 sentinel_start=9987812 sentinel_live_at_return=true sentinel_reaped_after_return=true api_exit_zero_at_return=true captures_complete_at_return=true api=host=2361957 host_start=9987812 api_success=true api_outcome=success_report code=0 exit=Some(0) stdout_complete=true stderr_complete=true cause=none diagnostic=none
+ cleanup="worker=2361962 start=9987812 pgid=2361960 reaped=true wait_status=9 leaf=2361964 start=9987812 pgid=2361960 reaped=true wait_status=9 complete=true\n"
+managed_fixture_cleanup worker_pid=Some(2361962) worker_esrch=true leaf_pid=Some(2361964) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2361960) leader_esrch=true
+ok
+test managed_scope_escape_fixture ... ok
+test managed_scope_leader_fixture ... ok
+test managed_scope_leaf_fixture ... ok
+test managed_scope_retained_pipe_holder_fixture ... ok
+test managed_scope_retained_pipe_leader_fixture ... ok
+test managed_scope_spawn_leader_fixture ... ok
+test managed_scope_worker_fixture ... ok
+test managed_spawn_final_clone_drop_closes_group_under_fixture_reaper ... 
+running 1 test
+
+running 1 test
+managed_pidfd_acquired pid=2361980 start=9987835 ppid=2361977 pgid=2361980
+managed_pidfd_acquired pid=2361982 start=9987835 ppid=2361980 pgid=2361980
+managed_pidfd_acquired pid=2361984 start=9987835 ppid=2361982 pgid=2361980
+managed_final_drop_live reaper=2361975 reaper_start=9987834 host=2361977 host_start=9987835 leader=2361980 leader_start=9987835 worker=2361982 worker_start=9987835 leaf=2361984 leaf_start=9987835 group=2361980 sentinel=2361974 sentinel_start=9987834 sentinel_pgid=2361974
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 64 filtered out; finished in 0.14s
+
+.
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 64 filtered out; finished in 0.14s
+
+managed-scope sentinel_cleanup pid=2361974 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_final_drop_boundary nonfinal_preserved=true leader=2361980 leader_start=9987835 leader_record_start_matches_pidfd=true worker=2361982 worker_start=9987835 worker_record_start_matches_pidfd=true leaf=2361984 leaf_start=9987835 leaf_record_start_matches_pidfd=true worker_record_group_matches=true leaf_record_group_matches=true group=2361980 drop_return_recorded=true closure_observed=true exceptional_cleanup_not_started=true leader_absent=true worker_absent=true leaf_absent=true exact_reaped=true host_live_before_drop=true reaper_live_before_drop=true sentinel_live_before_drop=true host_live_through_closure=true reaper_live_through_closure=true sentinel_live_through_closure=true pidfds_exited=true final_members_live=false reaper_ok=true reaper_status=Some(ExitStatus(unix_wait_status(0))) host_absent_after_cleanup=true sentinel_reaped=true group_empty_after_closure=true observation_error=None api="host=2361977 host_start=9987835 final_drop_returned=true nonfinal_wait_unit=true\n" reaped="worker=2361982 start=9987835 pgid=2361980 reaped=true wait_status=9 leaf=2361984 start=9987835 pgid=2361980 reaped=true wait_status=9 complete=true\n" cleanup="pid=2361975 prompt=true host_status=0 worker=2361982 start=9987835 pgid=2361980 reaped=true wait_status=9 leaf=2361984 start=9987835 pgid=2361980 reaped=true wait_status=9 complete=true\n"
+managed_fixture_cleanup worker_pid=Some(2361982) worker_esrch=true leaf_pid=Some(2361984) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2361980) leader_esrch=true
+ok
+test managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not ... managed_spawn_drop_started root=/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/tmp/rhai-sys-test-2361820-managed_spawn_final_clone_drop_stops_group_but_nonfinal_drop_does_not-18 test_pid=2361820 sentinel_pid=2361987 sentinel_pgid=2361987 leader=2361989 worker=2361991 leaf=2361993 group=2361989
+managed_spawn_nonfinal_drop leader=2361989 leader_live=true worker=2361991 worker_live=true leaf=2361993 leaf_live=true all_live=true
+managed_spawn_final_drop leader=2361989 leader_esrch=true worker=2361991 worker_esrch=true leaf=2361993 leaf_esrch=true all_esrch=true sentinel=2361987 live=true
+managed-scope sentinel_cleanup pid=2361987 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(2361991) worker_esrch=true leaf_pid=Some(2361993) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2361989) leader_esrch=true
+ok
+test managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes ... managed_escaped_pipe_wait root=/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/tmp/rhai-sys-test-2361820-managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes-19 test_pid=2361820 leader=2361999 leader_pgid=2361999 leader_esrch=true holder=2362001 holder_pgid=2361997 holder_live_after_wait=true sentinel=2361997 sentinel_pgid=2361997 sentinel_live_after_wait=true wait_unit=false probe="pid=2362001 stdout_result=-1 stdout_error=32 stderr_result=-1 stderr_error=32\n" identity_ok=true
+managed_escaped_pipe_cleanup root=/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/tmp/rhai-sys-test-2361820-managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes-19 leader=Some(2361999) leader_esrch=true holder=Some(2362001) holder_esrch=true
+managed-scope sentinel_cleanup pid=2361997 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_escaped_pipe_terminal leader=Some(2361999) leader_esrch=true holder=Some(2362001) holder_esrch=true sentinel=2361997 sentinel_esrch=true
+managed_escaped_pipe_cleanup root=/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/tmp/rhai-sys-test-2361820-managed_spawn_kill_finishes_capture_when_escaped_descendant_holds_pipes-19 leader=Some(2361999) leader_esrch=true holder=Some(2362001) holder_esrch=true
+ok
+test managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit ... managed_false_drop_started root=/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/tmp/rhai-sys-test-2361820-managed_spawn_kill_on_drop_false_preserves_group_until_leader_exit-20 test_pid=2361820 sentinel_pid=2362007 sentinel_pgid=2362007 leader=2362009 worker=2362011 leaf=2362013 group=2362009
+managed_false_drop_after_final_client_drop leader=2362009 leader_live=true worker=2362011 worker_live=true leaf=2362013 leaf_live=true sentinel=2362007 sentinel_live=true
+managed_false_drop_live_challenge leader=2362009 worker=2362011 leaf=2362013 group=2362009 ack_count=3 ack_pids=[Some(2362009), Some(2362011), Some(2362013)] ack_groups=[Some(2362009), Some(2362009), Some(2362009)]
+managed_false_drop_after_leader_exit leader=2362009 leader_esrch=true worker=2362011 worker_esrch=true leaf=2362013 leaf_esrch=true sentinel=2362007 sentinel_live=true
+managed-scope sentinel_cleanup pid=2362007 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(2362011) worker_esrch=true leaf_pid=Some(2362013) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2362009) leader_esrch=true
+ok
+test managed_spawn_kill_stops_leader_worker_leaf_and_preserves_sentinel ... managed_spawn_kill_started root=/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/tmp/rhai-sys-test-2361820-managed_spawn_kill_stops_leader_worker_leaf_and_preserves_sentinel-21 test_pid=2361820 sentinel_pid=2362082 sentinel_pgid=2362082 leader=2362084 worker=2362086 leaf=2362088 group=2362084
+managed_spawn_kill leader=2362084 leader_esrch=true worker=2362086 worker_esrch=true leaf=2362088 leaf_esrch=true all_esrch=true sentinel=2362082 live=true wait_returned=true
+managed-scope sentinel_cleanup pid=2362082 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_fixture_cleanup worker_pid=Some(2362086) worker_esrch=true leaf_pid=Some(2362088) leaf_esrch=true
+managed_spawn_fixture_leader_cleanup leader_pid=Some(2362084) leader_esrch=true
+ok
+test managed_spawn_post_reap_cancel_bounds_escaped_capture ... managed_post_reap_ordinary_wait root=/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/tmp/rhai-sys-test-2361820-managed_spawn_post_reap_cancel_bounds_escaped_capture-22 test_pid=2361820 leader=2362093 holder=2362095 sentinel=2362091 wait_unit=true holder_live=true
+managed_post_reap_typed_error unexpected=None
+managed_post_reap_leader leader=2362093 exit_record_matches=true exit_record="pid=2362093 release_seen=true exit_intent=true\n" try_wait_unit=true try_wait_error=None ps_status=Ok("") leader_esrch=true holder=2362095 holder_live=true
+managed_post_reap_uncancelled_wait leader=2362093 wait_unit=true holder=2362095 holder_live=true sentinel=2362091 sentinel_live=true
+managed_escaped_pipe_cleanup root=/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/tmp/rhai-sys-test-2361820-managed_spawn_post_reap_cancel_bounds_escaped_capture-22 leader=Some(2362093) leader_esrch=true holder=Some(2362095) holder_esrch=true
+managed-scope sentinel_cleanup pid=2362091 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+managed_escaped_pipe_terminal leader=Some(2362093) leader_esrch=true holder=Some(2362095) holder_esrch=true sentinel=2362091 sentinel_esrch=true
+managed_post_reap_cancel root=/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/tmp/rhai-sys-test-2361820-managed_spawn_post_reap_cancel_bounds_escaped_capture-22 test_pid=2361820 leader=2362093 leader_esrch_before_kill=true leader_esrch=true holder=2362095 holder_live_after_cancel=true holder_esrch=true sentinel=2362091 sentinel_esrch=true probe="pid=2362095 stdout_result=-1 stdout_error=32 stderr_result=-1 stderr_error=32\n" wait_unit=false
+managed_escaped_pipe_cleanup root=/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/tmp/rhai-sys-test-2361820-managed_spawn_post_reap_cancel_bounds_escaped_capture-22 leader=Some(2362093) leader_esrch=true holder=Some(2362095) holder_esrch=true
+ok
+test managed_timeout_kills_leader_after_it_changes_process_group ... managed_escape_started root=/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/tmp/rhai-sys-test-2361820-managed_timeout_kills_leader_after_it_changes_process_group-23 test_pid=2361820 sentinel_pid=2362099 sentinel_pgid=2362099
+managed_escape_sentinel_live pid=2362099 live=true
+managed_escape_leader pid=2362101 original_pgid=2362101 escaped_pgid=2362099 esrch=true
+managed_escape_fixture_cleanup pid=Some(2362101) esrch=true
+managed-scope sentinel_cleanup pid=2362099 status=Some(ExitStatus(unix_wait_status(9))) esrch=true
+ok
+test missing_program_and_cwd_report_not_found_without_starting_child ... x2_x8_valid_control child_record="child-pid=2362105 child-exit=0" reap=ESRCH
+x2_missing_program io_kind=NotFound child_record_absent=true
+x8_missing_cwd io_kind=NotFound child_record_absent=true
+ok
+test process_cwd_uses_the_opened_filesystem_capability_after_root_replacement ... ok
+test process_fixture ... ok
+test process_output_limit_is_primary_and_retains_each_stream_prefix_at_n_plus_one ... ok
+test process_scope_overhead_measurement ... ignored, bounded POSIX process-scope overhead measurement; invoke with the dedicated driver
+test process_scope_retained_resource_census ... ignored, bounded Linux retained-resource census; invoke with the dedicated resource driver
+test process_script_output_option_cannot_raise_the_host_cap ... ok
+test process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps ... ok
+test repeated_public_run_calls_keep_fd_count_stable ... 
+running 1 test
+test repeated_public_run_calls_keep_fd_count_stable_isolated ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 64 filtered out; finished in 8.58s
+
+x30_process_run_fd_stability iterations=200 baseline_tasks=3 baseline_fds=4 baseline_cleanup_workers=1 after_tasks=3 after_fds=4 after_cleanup_workers=1
+ok
+test repeated_public_run_calls_keep_fd_count_stable_isolated ... ignored, run by the public X30 test in a fresh process for a stable /proc census
+test run_deadline_returns_bounded_partial_output_after_terminating_child ... ok
+test run_deadline_with_blocked_stdin_and_active_stdout_stderr ... ok
+test run_io_contract_blob_stdin_round_trip_with_concurrent_output ... x17_blob_stdin bytes=1048576 received_bytes=1048576 stdout_bytes=1310736 stderr_bytes=262144 exact_round_trip=true concurrent_streams=true child_record="child-pid=2362361 input-bytes=1048576 input-valid=true" child_reaped=true
+ok
+test run_io_contract_empty_output ... x14_empty_output stdout_len=0 stderr_len=0 child_record="child-pid=2362367\nchild-exit=0" child_reaped=true
+ok
+test run_io_contract_string_stdin_round_trip ... x16_string_stdin bytes=51 exact_round_trip=true child_record="child-pid=2362370\nchild-exit=0" child_reaped=true
+ok
+test run_preserves_argv_boundaries_without_shell_interpolation ... ok
+test run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data ... ok
+test run_removes_inherited_environment_variable_from_public_child ... x11_env_remove removed_child="child-pid=2362386 child-exit=0" removed_readback="variable=PATH present=false" control_child="child-pid=2362388 child-exit=0" control_readback="variable=PATH present=true" direct_children_reaped=ESRCH
+ok
+test run_reports_a_real_unix_child_signal_without_an_exit_code ... x22_signal_readback success=false code_unit=true signal=9 timed_out=false stdout_complete=true stderr_complete=true child_record="child-pid=2362392\n" child_pid=2362392 pid_probe=-1 pid_probe_errno=Some(3)
+ok
+test run_retains_error_when_child_closes_stdin_with_unsent_input ... stdin-closure-boundary child=2362397 child_start=9989152 child_pgid=2362397 capacity=65536 input_bytes=4194304 live_observed=true child_reaped=true group_empty=true host=2361820 host_start=9987058 host_live=true sentinel=2362394 sentinel_start=9989100 sentinel_pgid=2358937 sentinel_live_at_return=true sentinel_kill=Ok(()) sentinel_wait=Ok(ExitStatus(unix_wait_status(9))) sentinel_reaped=true timed_out=false stdout_complete=false stderr_complete=false stdout_marker=true stderr_marker=true cause=Some(Io { op: "write process stdin", target: "/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/target/debug/deps/sys_process-3d15b6dae56ab3f9", kind: BrokenPipe, message: "Broken pipe (os error 32)" }) stdout_capture=[10, 114, 117, 110, 110, 105, 110, 103, 32, 49, 32, 116, 101, 115, 116, 10, 101, 97, 114, 108, 121, 45, 99, 108, 111, 115, 101, 45, 115, 116, 100, 111, 117, 116, 10] stderr_capture=[101, 97, 114, 108, 121, 45, 99, 108, 111, 115, 101, 45, 115, 116, 100, 101, 114, 114, 10]
+managed-scope sentinel_cleanup pid=2362394 status=already-exited esrch=true
+ok
+test shared_child_contract::final_drop_honors_both_kill_on_drop_policies ... shared-child controller_started scenario=drop_false pid=2362400 root=/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/shared-child-fixture-2361820-0
+shared-child controller_reaped scenario=drop_false pid=2362400 status=exit status: 0
+shared-child controller_output scenario=drop_false stdout="\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 64 filtered out; finished in 0.02s\n\n" stderr="shared-child nonfinal-drop pid=2362403 child_record=ready operational_probe=one\nshared-child final-drop kill_on_drop=false pid=2362403 child_record=\"pid=2362403 state=exited code=0\\n\" eventual_reap=ESRCH\n"
+shared-child controller_esrch pid=2362400 verified=true
+shared-child outer-observation scenario=drop_false controller_pid=2362400 fixture_pid=2362403 fixture_record="pid=2362403 state=exited code=0" reap=ESRCH verified=true
+shared-child scenario=drop_false controller_pid=2362400 status=ok fixture_record=Some("pid=2362403 state=exited code=0\n")
+shared-child watchdog fixture_closure=verified pid=2362403 reap=ESRCH production_reap=true
+ok
+test shared_child_contract::fixture_entry ... ok
+test shared_child_contract::nonfinal_child_clone_drop_keeps_the_real_child_available ... shared-child controller_started scenario=drop_true pid=2362407 root=/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/shared-child-fixture-2361820-1
+shared-child controller_reaped scenario=drop_true pid=2362407 status=exit status: 0
+shared-child controller_output scenario=drop_true stdout="\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 64 filtered out; finished in 0.03s\n\n" stderr="shared-child nonfinal-drop pid=2362410 child_record=ready operational_probe=one\nshared-child final-drop kill_on_drop=true pid=2362410 reap=ESRCH\n"
+shared-child controller_esrch pid=2362407 verified=true
+shared-child outer-observation scenario=drop_true controller_pid=2362407 fixture_pid=2362410 fixture_record="pid=2362410 state=ready" reap=ESRCH verified=true
+shared-child scenario=drop_true controller_pid=2362407 status=ok fixture_record=Some("pid=2362410 state=ready\n")
+shared-child watchdog fixture_closure=verified pid=2362410 reap=ESRCH production_reap=true
+ok
+test shared_child_contract::panic_expectation_rejects_success_and_unrelated_panics ... shared-child controller_started scenario=drop_false pid=2362413 root=/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/shared-child-fixture-2361820-2
+shared-child controller_reaped scenario=drop_false pid=2362413 status=exit status: 0
+shared-child controller_output scenario=drop_false stdout="\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 64 filtered out; finished in 0.02s\n\n" stderr="shared-child nonfinal-drop pid=2362416 child_record=ready operational_probe=one\nshared-child final-drop kill_on_drop=false pid=2362416 child_record=\"pid=2362416 state=exited code=0\\n\" eventual_reap=ESRCH\n"
+shared-child controller_esrch pid=2362413 verified=true
+shared-child outer-observation scenario=drop_false controller_pid=2362413 fixture_pid=2362416 fixture_record="pid=2362416 state=exited code=0" reap=ESRCH verified=true
+thread 'shared_child_contract::panic_expectation_rejects_success_and_unrelated_panics' panicked at tests/fixtures/sys_process_shared_child_contract.rs:514:13:
+expected controller panic for scenario drop_false, but it succeeded
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+shared-child watchdog fixture_closure=verified pid=2362416 reap=ESRCH production_reap=true
+shared-child controller_started scenario=unrelated_panic_control pid=2362418 root=/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/shared-child-fixture-2361820-3
+shared-child controller_reaped scenario=unrelated_panic_control pid=2362418 status=exit status: 101
+shared-child controller_output scenario=unrelated_panic_control stdout="\nrunning 1 test\nF\nfailures:\n\nfailures:\n    shared_child_contract::scenario_entry\n\ntest result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 64 filtered out; finished in 0.03s\n\n" stderr="thread 'shared_child_contract::scenario_entry' panicked at tests/fixtures/sys_process_shared_child_contract.rs:323:5:\nunrelated controller panic control\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\nshared-child controller-panic-cleanup scenario=unrelated_panic_control payload=\"unrelated controller panic control\" fixture_pid=2362421 reap=ESRCH verified=true\n"
+shared-child controller_esrch pid=2362418 verified=true
+thread 'shared_child_contract::panic_expectation_rejects_success_and_unrelated_panics' panicked at tests/fixtures/sys_process_shared_child_contract.rs:493:21:
+controller did not report the intended panic payload:
+
+running 1 test
+F
+failures:
+
+failures:
+    shared_child_contract::scenario_entry
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 64 filtered out; finished in 0.03s
+
+thread 'shared_child_contract::scenario_entry' panicked at tests/fixtures/sys_process_shared_child_contract.rs:323:5:
+unrelated controller panic control
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+shared-child controller-panic-cleanup scenario=unrelated_panic_control payload="unrelated controller panic control" fixture_pid=2362421 reap=ESRCH verified=true
+
+shared-child watchdog fixture_closure=verified pid=2362421 reap=ESRCH production_reap=true
+ok
+test shared_child_contract::scenario_entry ... ok
+test shared_child_contract::scenario_panic_releases_and_reaps_the_owned_fixture ... shared-child controller_started scenario=panic_cleanup pid=2362425 root=/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/shared-child-fixture-2361820-4
+shared-child controller_reaped scenario=panic_cleanup pid=2362425 status=exit status: 101
+shared-child controller_output scenario=panic_cleanup stdout="\nrunning 1 test\nF\nfailures:\n\nfailures:\n    shared_child_contract::scenario_entry\n\ntest result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 64 filtered out; finished in 0.03s\n\n" stderr="thread 'shared_child_contract::scenario_entry' panicked at tests/fixtures/sys_process_shared_child_contract.rs:314:5:\nintentional scenario panic with an owned live fixture\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\nshared-child controller-panic-cleanup scenario=panic_cleanup payload=\"intentional scenario panic with an owned live fixture\" fixture_pid=2362428 reap=ESRCH verified=true\n"
+shared-child controller_esrch pid=2362425 verified=true
+shared-child panic-regression fixture_pid=2362428 production_reap=verified record="pid=2362428 state=exited code=0\n"
+shared-child watchdog fixture_closure=verified pid=2362428 reap=ESRCH production_reap=true
+ok
+test shared_child_contract::script_throw_drops_and_reaps_a_live_child ... shared-child controller_started scenario=script_throw_cleanup pid=2362431 root=/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/shared-child-fixture-2361820-5
+shared-child script-throw release fixture_pid=2362434 state=ready challenge_response=verified pid_present=true
+shared-child controller_reaped scenario=script_throw_cleanup pid=2362431 status=exit status: 0
+shared-child controller_output scenario=script_throw_cleanup stdout="\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 64 filtered out; finished in 0.01s\n\n" stderr="thread 'shared_child_contract::scenario_entry' panicked at tests/fixtures/sys_process_shared_child_contract.rs:352:5:\nunexpected evaluation error; expected \"__x29_wrong_expected_message_control__\": ErrorRuntime(\"intentional Rhai script throw with live child\", 7:9)\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\nshared-child script-throw evaluation_error=observed pre_throw_try_wait=unit wrong_expectation_rejected=true child_drop=expected\n"
+shared-child controller_esrch pid=2362431 verified=true
+shared-child outer-observation scenario=script_throw_cleanup controller_pid=2362431 fixture_pid=2362434 fixture_record="pid=2362434 state=ready" reap=ESRCH verified=true
+shared-child scenario=script_throw_cleanup controller_pid=2362431 status=ok fixture_record=Some("pid=2362434 state=ready\n")
+shared-child watchdog fixture_closure=verified pid=2362434 reap=ESRCH production_reap=true
+ok
+test shared_child_contract::spawn_returns_while_large_stdin_is_blocked_and_wait_snapshots_are_stable ... shared-child controller_started scenario=blocked_input_wait_snapshot pid=2362437 root=/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/shared-child-fixture-2361820-6
+shared-child controller_reaped scenario=blocked_input_wait_snapshot pid=2362437 status=exit status: 0
+shared-child controller_output scenario=blocked_input_wait_snapshot stdout="\nrunning 1 test\n.\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 64 filtered out; finished in 1.25s\n\n" stderr="shared-child blocked-stdin ready pid=2362440 spawn_elapsed_ms=2\nshared-child final pid=2362440 child_record=\"pid=2362440 state=exited code=17\\n\" reap=ESRCH stable-wait=1 stable-try-wait=1 repeated_post_completion_kill=2 cached_snapshot=unchanged\n"
+shared-child controller_esrch pid=2362437 verified=true
+shared-child outer-observation scenario=blocked_input_wait_snapshot controller_pid=2362437 fixture_pid=2362440 fixture_record="pid=2362440 state=exited code=17" reap=ESRCH verified=true
+shared-child scenario=blocked_input_wait_snapshot controller_pid=2362437 status=ok fixture_record=Some("pid=2362440 state=exited code=17\n")
+shared-child watchdog fixture_closure=verified pid=2362440 reap=ESRCH production_reap=true
+ok
+test spawn_retains_error_when_child_closes_stdin_with_unsent_input ... spawn-stdin-closure child=2362445 start=9989348 pgid=2362445 capacity=65536 input_bytes=4194304 executable=/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/target/debug/deps/sys_process-3d15b6dae56ab3f9 first=error=ErrorRuntime(rhai::packages::sys::error::SysError, 1:7) prefill="child-pid=2362445 child-start=9989348 child-pgid=2362445 stdin-prefill-bytes=65536 pipe-capacity=65536 input-bytes=4194304 ready-to-close=true\n" preclose_wait=Ok(()) preclose_identity_before_after=Ok(Some(('S', 2361820, 2362445, 9989348)))/Ok(Some(('S', 2361820, 2362445, 9989348))) preclose_fd0_before_after=true/true intent="child-pid=2362445 child-start=9989348 child-pgid=2362445 stdin-close-intent=true\n" pre_ack=Ok(Some(('S', 2361820, 2362445, 9989348))) fd0_before_absent_after=None fd0_absent_while_live=false kill=Ok(()) cleanup=error:ErrorRuntime(rhai::packages::sys::error::SysError, 1:10) repeated_wait=Err(ErrorRuntime(rhai::packages::sys::error::SysError, 1:10)) repeated_try_wait=Err(ErrorRuntime(rhai::packages::sys::error::SysError, 1:7)) repeated_kill=Ok(()) reaped=true group_empty=true host=2361820/('S', 2361664, 2358937, 9987058)/Ok(Some(('S', 2361664, 2358937, 9987058))) host_live=true sentinel=2362443/R/2361820/2358937/9989299 sentinel_live=true timed_out=Some(false) stdout_complete=true stderr_complete=true stdout_marker=true stderr_marker=true stdout="\nrunning 1 test\nearly-close-stdout\n" stderr="early-close-stderr\n"
+spawn-stdin-closure-final sentinel_kill=Ok(()) sentinel_wait=Ok(Some(ExitStatus(unix_wait_status(9)))) sentinel_reaped=true child=2362445/9989348/2362445 child_reaped=true group_empty=true host=2361820/9987058 sentinel_original=R/2361820/2358937/9989299
+managed-scope sentinel_cleanup pid=2362443 status=already-exited esrch=true
+ok
+test unit_stdin_means_immediate_eof ... ok
+test unit_timeout_disables_configured_default_deadline ... ok
+test zero_output_cap_reports_output_limit_with_an_empty_retained_prefix ... ok
+
+test result: ok. 62 passed; 0 failed; 3 ignored; 0 measured; 0 filtered out; finished in 23.33s
+
+     Running tests/sys_process_report.rs (/var/roothome/.local/share/agent-builds/rhai/linux-f32-float-20261028-d0f5/agent-build-3prtk5yr/target/debug/deps/sys_process_report-cbdbc0160d46f617)
+
+running 7 tests
+test absent_and_signal_exit_are_readable_through_engine ... ok
+test old_error_variants_keep_rhai_classification_and_have_no_process_report ... ok
+test prior_sys_error_variants_keep_display_and_classification ... ok
+test process_causes_retain_primary_classification_and_snapshot ... ok
+test process_report_rust_accessors_cover_absent_code_signal_and_diagnostics ... ok
+test scope_defaults_and_builder ... ok
+test script_mutating_copied_report_blobs_and_collections_does_not_change_snapshot ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+

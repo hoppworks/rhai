@@ -1538,6 +1538,18 @@ and the affected `net_reads` target passed 7/7 on each OS. The combined review
 then returned PASS. The original one-shot cap result is superseded. Other
 unchecked bounds, Windows and full release acceptance remain open.
 
+Native macOS 27.2 arm64 and Workhorse Linux 7.2.11 x86_64/Rust-Cargo 1.77.2
+also accept the named combined `testing-environ,sys,net,f32_float` duration
+and host-bound cases at `.scratch/all-tickets/release-matrix-20261028/posix-f32-float-proof.md`.
+Three deliberate assertion failures per OS exercised fresh host file readback,
+TCP timeout validation with a real peer, and process duration/output bounds
+with child-written records and reaping. The first Mac runner stopped after
+valid REDs because it expected text for Rust's byte-array assertion format;
+an identical-source follow-up passed its 11-target suite (159/0/1 ignored).
+Linux passed the same controls and 11-target suite (167/0/3 ignored) in one
+scope. Independent combined review returned PASS for the named paths.
+Other f32 values, Windows, other combinations and full release remain open.
+
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance
 matrix or closure count. Historical implementation notes and estimates follow.

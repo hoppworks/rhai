@@ -10,11 +10,11 @@ Use current central agent-skills `d6024420` plus applicable local edits and proj
 
 ## Current step
 
-Fork-main is `2cc58ed0`, including reviewed Windows X35 contrasts and five macOS/Linux feature slices. The POSIX combined `unchecked` package passed review after its EOF-driven receive-cap correction; it awaits commit. A–F/Ticket03/release remain open.
+Fork-main is `0cec8496`, including reviewed Windows X35 and six POSIX profile slices. The POSIX combined `f32_float` slice passed bounded macOS/Linux runs and independent review; it awaits commit. A–F/Ticket03/release remain open.
 
 ## Next action
 
-Commit/push the reviewed POSIX `unchecked` package, verify remote head, then select the next native feature/MSRV gate or Managed fault contract. Retire guest scopes only after identity/inactivity checks.
+Commit/push reviewed POSIX `f32_float`, verify fork-main head, then address the next native Windows/MSRV or Managed fault gate. Retire guest scopes only after identity/inactivity checks.
 
 ## Goal
 
@@ -46,13 +46,15 @@ Workhorse Linux7.2.11 x86_64/Rust1.77.2 combined `metadata,serde`: 12 targets co
 
 POSIX Rust1.77.2 combined `unchecked`: macOS 151/0/1ignored, Linux 160/0/3ignored across 11 targets, four wrong101 controls each. Review corrected a one-shot TCP cap oracle; EOF read plus widened-cap RED101 and restored `net_reads`7/7 passed on both. Combined review PASS: `.scratch/all-tickets/release-matrix-20261028/posix-unchecked-proof.md`.
 
+POSIX Rust1.77.2 combined `f32_float`: macOS and Linux three intended wrong101 assertions each; restored 11-target suites 159/0/1ignored and 167/0/3ignored. Mac attempt01 parser stopped after valid RED; same-source attempt02 passed GREEN. Combined review PASS: `.scratch/all-tickets/release-matrix-20261028/posix-f32-float-proof.md`.
+
 Attempts36–39 exposed false Job closure. Attempts50–58 cover batch injection/fix, exact membership, bounded retry, public Managed lifecycle, parent-CWD resolution, full 31-test Windows process target and assertion controls under their documented bindings. Attempt57 is diagnostic RED only. New attempt59 manifested a real missed exact-child fallback after a permanently refused Job exhausted the shared 30-second deadline. The correction preserves finite Job retry and grants at least five seconds each for exact-child and I/O fallback. Native Windows Rust/Cargo1.93.0, `testing-environ,sys,metadata`, manifest `34686903...`, lock `12084a90...`: synthetic permanent-refusal wrong101/restored GREEN0 with 299 refusals, exact child stopped and retained owner; two neighboring unit tests green. Attempt60 reused byte-identical source and passed public final-drop kill/retain wrong101/101 and GREEN0, with independent parent/worker/sentinel readbacks. Combined Terra review READY for the bounded package. Actual OS faults, live descendants under permanent refusal, other features/toolchains and release remain open. Proof: `.scratch/all-tickets/windows-rhai-native-20261028/attempt59/` and `attempt60/`.
 
 Attempt61 freezes current base plus X33 test (`160a37ef...`, same lock) and passes native Windows Managed child-PATH-over-parent-CWD wrong101/GREEN0, 31/31 suite and independent child executable readback. Observer Driver0 in 104.824s, 202 frames/14 hash-checked files, eight valid journal transitions through REMOVED; own host stage/ISO retired, guest outer scope retained. Combined independent review PASS. Proof: `.scratch/all-tickets/windows-rhai-native-20261028/attempt61/`.
 
 Attempt62 freezes `edfca43e` plus one test-only X35 run-closure control (`ec2e7eac...`, same lock). Native Windows1.93 `testing-environ,sys,metadata`: run descendant, run sentinel and spawn/wait closure wrong101 each, restored run/spawn GREEN0 with exact process-handle and sentinel readbacks. Driver0/85.052s, 208 frames/16 hash-checked files, eight valid journal transitions through REMOVED. Own host ISO/stage removed and original sdc restored; guest outer scope retained. Combined review PASS with a documentation precision correction. Proof: `.scratch/all-tickets/windows-rhai-native-20261028/attempt62/`.
 
-Attempt63 DirectChild test compiled but both invocations timed out before the intended assertion; Driver2/90.261s, 196 frames/13 files, eight valid journal transitions. Captured-handle inheritance was a plausible competing cause; a readiness-only draft was discarded unrun. Attempt64 conditionally clears/reads back fixture stdout/stderr inheritance, retains original 5/15s bounds and passes wrong101/GREEN0 with exact parent/worker and stop readback; Driver0/88.326s, 196 frames/13 files, eight valid journal transitions. Combined review PASS. Proof: `attempt63/` and `attempt64/` under the same Windows evidence root.
+Attempt63 DirectChild timed out before assertion; captured-handle inheritance remains a possible cause. Attempt64 clears/reads back fixture handle inheritance and passes wrong101/GREEN0 with parent/worker readback and valid custody journal. Review PASS: Windows `attempt63/` and `attempt64/` proof folders.
 
 ## Retained resources
 

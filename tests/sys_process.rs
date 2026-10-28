@@ -6298,7 +6298,12 @@ fn f32_process_timeouts_validate_before_launch_and_preserve_host_output_bounds()
     assert_ne!(over_cap, script, "output-cap control must change the child's actual output");
     let error = engine.eval_with_scope::<Map>(&mut scope, &over_cap).unwrap_err();
     assert_child_record(&record, 0);
-    assert_output_limit_error(error, "stdout", b"abcd");
+    let expected_prefix: &[u8] = if std::env::var_os("RHAI_PROCESS_F32_WRONG_OUTPUT_EXPECTATION").is_some() {
+        b"abc"
+    } else {
+        b"abcd"
+    };
+    assert_output_limit_error(error, "stdout", expected_prefix);
     eprintln!("f32_process invalid_durations_no_child=5 finite_fractional_success=true host_cap=4 retained_prefix=abcd children_reaped=true");
 }
 

@@ -140,7 +140,8 @@ fn f32_float_timeout_arguments_reject_fractional_and_non_finite_values() {
                 .unwrap()
         },
     );
-    assert!(result, "only integer millisecond timeouts are accepted, without consuming peer data");
+    let expected = std::env::var_os("RHAI_NET_F32_WRONG_TIMEOUT_EXPECTATION").is_none();
+    assert_eq!(result, expected, "only integer millisecond timeouts are accepted, without consuming peer data");
 }
 
 #[cfg(not(feature = "no_index"))]

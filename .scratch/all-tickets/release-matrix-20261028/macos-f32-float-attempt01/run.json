@@ -1,0 +1,129 @@
+{
+  "checkout_head": "0cec849682e177c8149f5f15dc28bcaedae6e59f",
+  "source_commit": "63f18b01bc8000492dc6c777462568c8ab9824c7",
+  "source_manifest_sha256": "ddbb88a05802f02e83d4d1c5a613b3a8040f3d7bf2007acb6955523d76868319",
+  "source_archive_sha256": "3a671bbdeaebb068fc264e924f63af497eb8e94c4bffcf69e9fe63f000e9f26a",
+  "source_overlays": {
+    "tests/sys_process.rs": "3758585e5038f70a01f22bb6cafaa12794375bc6ee42de64930991ccbc49cb08",
+    "tests/serde.rs": "377d9d1c055085557aff1f9c5951978f58ea9211182d8d4f355730bcac0fc305",
+    "tests/net_reads.rs": "7b3c8ded85dd0cd5259b4337b83b707efc65ead34592a40bc8fdebefeb70ec74"
+  },
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "features": "testing-environ,sys,net,f32_float",
+  "os": "macOS-27.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "rustc": "rustc 1.77.2 (25ef9e3d8 2024-04-09)",
+  "cargo": "cargo 1.77.2 (e52e36006 2024-03-26)",
+  "capacity_before": {
+    "runtime_free_bytes": 170362707968,
+    "expected_additional_peak_bytes": 4294967296,
+    "estimate_source": "provisional private Cargo target/cache estimate"
+  },
+  "steps": [
+    {
+      "name": "compile",
+      "command": [
+        "cargo",
+        "+1.77.2",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys,net,f32_float",
+        "--test",
+        "combined_sys_net",
+        "--test",
+        "sys_env",
+        "--test",
+        "sys_fs",
+        "--test",
+        "sys_policy",
+        "--test",
+        "net_connect",
+        "--test",
+        "net_listen",
+        "--test",
+        "net_reads",
+        "--test",
+        "net_writes",
+        "--test",
+        "net_metadata",
+        "--test",
+        "sys_process",
+        "--test",
+        "sys_process_report",
+        "--no-run"
+      ],
+      "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/macos-f32-float-20261028-a7c2/agent-build-vwox0l0h/source",
+      "exit": 0,
+      "elapsed_seconds": 42.291,
+      "log_sha256": "9b52f8add06f9a8ca599ee00099ebe290346a75f360645cd6c4fdccd4cab7bdc",
+      "log_bytes": 12989
+    },
+    {
+      "name": "combined-wrong",
+      "command": [
+        "cargo",
+        "+1.77.2",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys,net,f32_float",
+        "--test",
+        "combined_sys_net",
+        "sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors",
+        "--",
+        "--exact",
+        "--nocapture"
+      ],
+      "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/macos-f32-float-20261028-a7c2/agent-build-vwox0l0h/source",
+      "exit": 101,
+      "elapsed_seconds": 0.441,
+      "log_sha256": "2b67708422c88a9cd7bb79f9feb61e4a0f923987fc5eb6a54cbf9f2df26833ae",
+      "log_bytes": 4012
+    },
+    {
+      "name": "net-f32-wrong",
+      "command": [
+        "cargo",
+        "+1.77.2",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys,net,f32_float",
+        "--test",
+        "net_reads",
+        "f32_float_timeout_arguments_reject_fractional_and_non_finite_values",
+        "--",
+        "--exact",
+        "--nocapture"
+      ],
+      "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/macos-f32-float-20261028-a7c2/agent-build-vwox0l0h/source",
+      "exit": 101,
+      "elapsed_seconds": 0.445,
+      "log_sha256": "a00c29c884b2ac0f59838967a2915084af3141dc9808a8aa892ed8173a464ed7",
+      "log_bytes": 3962
+    },
+    {
+      "name": "process-f32-wrong",
+      "command": [
+        "cargo",
+        "+1.77.2",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys,net,f32_float",
+        "--test",
+        "sys_process",
+        "f32_process_timeouts_validate_before_launch_and_preserve_host_output_bounds",
+        "--",
+        "--exact",
+        "--nocapture"
+      ],
+      "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/macos-f32-float-20261028-a7c2/agent-build-vwox0l0h/source",
+      "exit": 101,
+      "elapsed_seconds": 0.548,
+      "log_sha256": "0482aa11a54daa61d801a92151bd7dbc6651b0b43f280959bf60f5d16c9d909e",
+      "log_bytes": 5838
+    }
+  ]
+}
