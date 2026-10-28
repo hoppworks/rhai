@@ -2,7 +2,7 @@
 
 ## Mode, decisions and next action
 
-Autonomous implementation remains active. A–F, Ticket03 and release are open. Windows direct-child raw, text, timeout and stdin slices pass at attempts14/17/19/21/22. Windows `spawn`/shared `Child` initial WIP is on fork main; native spawn/clone/wait RED/GREEN at attempts23/24 has combined review PASS. Attempt25 proves kill with unread buffered input, combined review PASS. **Next:** publish its evidence, then verify pending-write cancellation, drop and fault paths. Do not infer full process acceptance. The owner prefers Terra 6.1 for most delegated tasks and sparing Luna use.
+Autonomous implementation remains active. A–F, Ticket03 and release are open. Windows direct-child raw, text, timeout and stdin slices pass at attempts14/17/19/21/22. Spawn/clone/wait at attempts23/24 and kill with unread buffered input at attempt25 passed combined review and are on fork main. Attempt26 timed out during compilation; attempt27 passed native drop RED/GREEN and combined review. **Next:** publish this narrow proof, then verify pending-write, drop retirement and fault paths. Do not infer full process acceptance. The owner prefers Terra 6.1 for most delegated tasks and sparing Luna use.
 
 ## Owner boundaries and rules
 
@@ -10,7 +10,7 @@ Push/merge only to `https://github.com/hoppworks/rhai.git` main, never public up
 
 ## Accepted proof and applicability
 
-Fork main `3dcef0438` contains accepted Windows sys policy/env/fs, six net targets, raw/text process, the named timeout, 1MiB stdin and the narrow spawn/clone/wait slice; earlier Linux, Darwin, WASM/core and MSRV evidence remains scoped by `docs/sys-package-plan.md`. The Windows backend prerequisites are not product closure.
+Fork main `a82d90729` contains accepted Windows sys policy/env/fs, six net targets, raw/text process, the named timeout, 1MiB stdin, narrow spawn/clone/wait and kill with unread buffered input; earlier Linux, Darwin, WASM/core and MSRV evidence remains scoped by `docs/sys-package-plan.md`. The Windows backend prerequisites are not product closure.
 
 Attempt14 native raw process and timeout-boundary proof is in `.scratch/all-tickets/windows-rhai-native-20261026/attempt14/`; attempt11 normal proof remains accepted. Rust1.77.2 Windows-target check is compilation only; native MSRV remains open.
 
@@ -28,6 +28,10 @@ Attempt24: native wrong-exit RED and restored 7+13 GREEN for public spawn, clone
 
 Attempt25: native wrong-exit RED and restored 7+15 GREEN for public kill with 1 MiB stdin and 12,288 unread buffered bytes, exact child exit and repeated kill; Driver0 125.005s, 206 frames/13 hash-verified files and eight journal CRCs through REMOVED. `.scratch/all-tickets/windows-rhai-native-20261028/attempt25/proof.md`. This does not establish a pending overlapped write. Combined review PASS.
 
+Attempt26: Driver124 after 180.226s; recovered exact `compile.log` ends during compilation without Cargo completion, before the RED/GREEN commands. Four journal CRCs validate through LIFECYCLE; guest runtime and outer scope retained. `.scratch/all-tickets/windows-rhai-native-20261028/attempt26/failure.md`. No Drop product result or proven cause of slow compilation.
+
+Attempt27: two survival REDs and restored 7+17 GREEN for nonfinal/final drop policies with challenge acknowledgements and exact child exits. Driver0 98.788s; 213 frames/14 hash-verified files, eight journal CRCs through REMOVED. Combined review PASS; proof `.scratch/all-tickets/windows-rhai-native-20261028/attempt27/proof.md`. Supervisor/permit retirement remains open.
+
 ## Open product and release work
 
 Windows `run` overloads and stdin feature/profile rows beyond accepted slices, public pending-write cancellation and early close, `spawn`/Child, other timeout paths, output overflow/overlap, exceptional/descendant cleanup, managed Jobs, policy/quoting and feature profiles remain open. Ticket03 and strict native Linux/macOS/Windows feature/MSRV release matrix remain open. Preserve P/E/F/X/R and six-ticket requirements; use real script→Engine→host→OS and independent readback.
@@ -36,18 +40,6 @@ Windows `run` overloads and stdin feature/profile rows beyond accepted slices, p
 
 Workhorse VM UUID `dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19` is running; sdb untouched and sdc restored. Guest public BuildOnly `public-refresh-e2047d40...` expires 2026-10-30 12:00 UTC. Attempt13–22 host stages/ISOs retired after export and exact checks; guest scopes01–22 await evidence-first retirement, while successful inner runtimes are removed. Retire only proven own inactive resources; rejected earlier cleanup draft deleted nothing.
 
-Attempts11–14 consumed four native Drivers (117.434, 123.141, 79.550, 159.266 seconds) and one public build; older history and all approvals remain in prior state journal and `coordinator-history-20261015.md`. Attempts12/13 used an incorrect overflow premise; attempt14 passed.
+Attempts11–25 consumed 15 native Drivers; timings, accepted proofs, earlier approvals and causes remain in their proof directories, prior state journal and `coordinator-history-20261015.md`. Attempt18 had an undiagnosed false timeout; attempt20's real stdin failure was followed by a wrapper-marker failure. No budgets reset.
 
-Attempts15–17 used three Drivers (82.193, 81.646, 108.851 seconds); 15 failed before assertion on test array limit, 16 passed product checks but had a stale helper root, 17 passed.
-
-Attempts18–19 used two Drivers (91.093, 109.507 seconds); 18 observed false timeout after child exit without recording its exact cleanup cause, 19 corrected independent pipe defects and passed. Preserve original evidence and cumulative history; no budget resets.
-
-Attempts20/21 used two Drivers (113.324, 116.255 seconds). Attempt20 real missing-stdin failure was preserved, but its wrapper expected a hidden Debug message and did not complete; attempt21 passed. Keep original exports and cause history.
-
-Attempt22 used one Driver (86.931 seconds) and one export; it passed the expanded Blob and scalar tests without rebuilding the unchanged unit proof. Keep all original evidence and cumulative history.
-
-Attempt23 used one Driver (89.693 seconds) and one export. Its host ISO and stage were retired after readback, and sdc restored; guest outer scope remains. The original native test file and RED evidence are preserved as uncommitted work until the implementation package is verified.
-
-Attempt24 used one Driver (88.137 seconds) and one export. Its host ISO and stage were retired after readback, sdc restored and guest outer scope retained. The reviewed candidate is a narrow WIP; outstanding risk checks remain.
-
-Attempt25 used one Driver (125.005 seconds) and one export. Its host ISO and stage were retired after readback, sdc restored and guest outer scope retained.
+Attempt26 used one Driver (180.226s), one export and read-only compile-log recovery; its unfinished guest runtime and outer scope remain. Attempt27 used one Driver (98.788s), one export and two Cargo jobs following live capacity checks. Its host ISO/stage were retired, sdc restored and guest outer scope retained.

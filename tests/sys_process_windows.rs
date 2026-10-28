@@ -28,6 +28,8 @@ const STDIN_TIMEOUT_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_STDIN_TIMEOUT_WR
 const SPAWN_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_SPAWN_WRONG_EXPECTATION";
 const SPAWN_KILL_RECORD_ENV: &str = "RHAI_WINDOWS_SPAWN_KILL_RECORD";
 const SPAWN_KILL_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_SPAWN_KILL_WRONG_EXPECTATION";
+const CHILD_DROP_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_CHILD_DROP_WRONG_EXPECTATION";
+const CHILD_DROP_RECORD_ENV: &str = "RHAI_WINDOWS_CHILD_DROP_RECORD";
 const LIBTEST_QUIET_START: &[u8] = b"\nrunning 1 test\n";
 
 type Handle = *mut c_void;
@@ -35,6 +37,7 @@ const PROCESS_QUERY_LIMITED_INFORMATION: u32 = 0x1000;
 const PROCESS_TERMINATE: u32 = 0x0001;
 const SYNCHRONIZE: u32 = 0x0010_0000;
 const WAIT_OBJECT_0: u32 = 0;
+const WAIT_TIMEOUT: u32 = 258;
 
 #[link(name = "kernel32")]
 extern "system" {
@@ -193,6 +196,27 @@ fn windows_spawn_blocked_input_fixture() {
     std::fs::rename(&temporary, path).unwrap();
     while Instant::now() < deadline { thread::sleep(Duration::from_millis(20)); }
     panic!("parent did not terminate the child before its safety deadline");
+}
+
+/// A gated child acknowledges challenges after the parent drops each public handle.
+#[test]
+fn windows_child_drop_fixture() {
+    let Ok(record) = std::env::var(CHILD_DROP_RECORD_ENV) else { return; };
+    let path = std::path::Path::new(&record);
+    let temporary = path.with_extension("tmp");
+    std::fs::write(&temporary, format!("pid={}\n", process::id())).unwrap();
+    std::fs::rename(&temporary, path).unwrap();
+    let deadline = Instant::now() + Duration::from_secs(15);
+    while Instant::now() < deadline {
+        for mode in ["nonfinal", "final"] {
+            if path.with_extension(format!("{mode}-challenge")).exists() {
+                std::fs::write(path.with_extension(format!("{mode}-ack")), b"alive\n").unwrap();
+            }
+        }
+        if path.with_extension("release").exists() { process::exit(0); }
+        thread::sleep(Duration::from_millis(10));
+    }
+    panic!("parent did not complete drop challenge before its safety deadline");
 }
 
 /// Fill both output streams before reading input, so a blocking input writer deadlocks.
@@ -671,6 +695,64 @@ fn windows_spawn_kill_stops_child_with_unread_buffered_input() {
     eprintln!("windows_spawn_kill_os_readback pid={pid} exit={exit_code} available={available} exact_handle_signaled=true");
     if std::env::var_os(SPAWN_KILL_WRONG_EXPECTATION_ENV).is_some() {
         assert_eq!(exit_code, 0, "deliberately wrong killed child exit expectation");
+    }
+}
+
+/// Nonfinal clones preserve the child; the final drop follows the host policy.
+#[test]
+fn windows_spawn_child_drop_follows_host_policy() {
+    for kill_on_drop in [true, false] {
+        let mode = if kill_on_drop { "kill" } else { "retain" };
+        let engine = engine(SysConfig::default().programs(ProgramPolicy::Any).kill_on_drop(kill_on_drop));
+        let records = TempDir::new();
+        let record = records.path().join("drop-child.txt");
+        let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+        let script_record = record.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+        let script = format!(r#"spawn("{executable}", ["--exact", "windows_child_drop_fixture", "--nocapture", "--quiet"], #{{
+            env_clear: true, env: #{{ {CHILD_DROP_RECORD_ENV}: "{script_record}" }}, max_output: 1024
+        }})"#);
+        let child = engine.eval::<Dynamic>(&script).expect("spawn drop fixture");
+        let sibling = child.clone();
+        let deadline = Instant::now() + Duration::from_secs(5);
+        let text = loop {
+            match std::fs::read_to_string(&record) {
+                Ok(text) => break text,
+                Err(error) if error.kind() == std::io::ErrorKind::NotFound && Instant::now() < deadline => thread::sleep(Duration::from_millis(10)),
+                Err(error) => panic!("drop child readiness unavailable: {error}"),
+            }
+        };
+        let pid = text.split_whitespace().next().unwrap().strip_prefix("pid=").unwrap().parse::<u32>().unwrap();
+        let raw = unsafe { OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | PROCESS_TERMINATE | SYNCHRONIZE, 0, pid) };
+        assert!(!raw.is_null(), "open exact drop child {pid}: {}", std::io::Error::last_os_error());
+        let mut guard = TimeoutChildGuard { handle: OwnedProcessHandle(raw), pid, exit_observed: false };
+        let challenge = |phase: &str| {
+            std::fs::write(record.with_extension(format!("{phase}-challenge")), b"challenge\n").unwrap();
+            let deadline = Instant::now() + Duration::from_secs(4);
+            loop {
+                if std::fs::read(record.with_extension(format!("{phase}-ack"))).is_ok_and(|bytes| bytes == b"alive\n") { break; }
+                assert!(Instant::now() < deadline, "child did not acknowledge {phase} challenge");
+                thread::sleep(Duration::from_millis(10));
+            }
+        };
+        drop(child);
+        let nonfinal_wait = unsafe { WaitForSingleObject(guard.handle.0, 0) };
+        assert_eq!(nonfinal_wait, WAIT_TIMEOUT, "nonfinal clone drop must preserve child");
+        challenge("nonfinal");
+        drop(sibling);
+        if !kill_on_drop {
+            assert_eq!(unsafe { WaitForSingleObject(guard.handle.0, 0) }, WAIT_TIMEOUT, "false policy must preserve child after final drop");
+            challenge("final");
+            std::fs::write(record.with_extension("release"), b"release\n").unwrap();
+        }
+        assert_eq!(unsafe { WaitForSingleObject(guard.handle.0, 10_000) }, WAIT_OBJECT_0, "exact child did not exit after final drop");
+        let mut exit_code = u32::MAX;
+        assert_ne!(unsafe { GetExitCodeProcess(guard.handle.0, &mut exit_code) }, 0);
+        guard.exit_observed = true;
+        assert_eq!(exit_code == 0, !kill_on_drop, "exact child exit must follow final-drop policy");
+        eprintln!("windows_child_drop_os_readback mode={mode} pid={pid} exit={exit_code} nonfinal_ack=true final_ack={} exact_handle_signaled=true", !kill_on_drop);
+        if std::env::var(CHILD_DROP_WRONG_EXPECTATION_ENV).as_deref() == Ok(mode) {
+            assert!(!record.with_extension(if kill_on_drop { "nonfinal-ack" } else { "final-ack" }).exists(), "deliberately wrong child drop {mode} survival expectation");
+        }
     }
 }
 

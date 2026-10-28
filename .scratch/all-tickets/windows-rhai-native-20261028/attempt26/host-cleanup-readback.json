@@ -1,0 +1,10 @@
+{
+  "nonce": "60b79304df6f44f52cdd8c42dd536d29",
+  "iso_sha256": "1aa1c7d8f030a173a8040f654793c6e1f16680bc8758d5ee11a029fe8d292b88",
+  "all_domains_checked": 2,
+  "fuser_unused": true,
+  "host_stage_removed": true,
+  "host_media_removed": true,
+  "restored_sdc": true,
+  "guest_runtime_retained": true
+}

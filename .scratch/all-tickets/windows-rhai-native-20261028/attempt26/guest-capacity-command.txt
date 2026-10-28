@@ -1,0 +1,1 @@
+Get-PSDrive C | Select-Object Used,Free; Get-CimInstance Win32_OperatingSystem | Select-Object FreePhysicalMemory,TotalVisibleMemorySize

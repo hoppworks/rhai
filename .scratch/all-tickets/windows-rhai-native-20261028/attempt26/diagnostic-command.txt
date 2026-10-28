@@ -1,0 +1,1 @@
+Get-Content -LiteralPath 'C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-60b79304\run\scoped-be797a21e13a4a2395b749ba9df2c9fe\compile.log' -Tail 30

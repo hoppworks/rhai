@@ -1,0 +1,1 @@
+$b=[IO.File]::ReadAllBytes('C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-60b79304\run\scoped-be797a21e13a4a2395b749ba9df2c9fe\compile.log');if($b.Length -gt 1048576){throw 'TOO_LARGE'};$s=[IO.Ports.SerialPort]::new('COM1',115200);$s.Open();$s.WriteLine('RHAI_DIAG_60b79304 '+[Convert]::ToBase64String($b));$s.Close()
