@@ -1496,6 +1496,15 @@ as intended, and the restored suite passed 135 tests with one ignored. Its
 independent combined review returned PASS for the named behavior; exhaustive
 integer/float semantics, other feature/OS/MSRV rows and release remain open.
 
+The same combined integer-only profile now has a separate native Workhorse
+Linux kernel 7.2.11 x86_64/Rust-Cargo 1.77.2 slice at
+`.scratch/all-tickets/release-matrix-20261028/linux-onlyi32-nofloat-proof.md`.
+The pinned source/lock transfer and owned scope passed compile, an intentional
+host-readback wrong101 and restored 135/0/2ignored across 11 targets. One
+independent combined review returned PASS for named behavior. Metadata still
+ran zero tests; exhaustive integer/no-float semantics, Windows and remaining
+release rows are open.
+
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance
 matrix or closure count. Historical implementation notes and estimates follow.
