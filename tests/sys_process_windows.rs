@@ -531,6 +531,49 @@ fn windows_run_raw_rejects_timeout_outside_duration_range_before_spawn() {
     assert!(child_record.is_none(), "rejected timeout started a real child");
 }
 
+/// A child-local PATH resolves a name without `.exe` to the exact copied fixture.
+#[test]
+fn windows_path_probe_fixture() {
+    let Ok(record) = std::env::var("RHAI_WINDOWS_PATH_PROBE_RECORD") else { return; };
+    let executable = std::env::current_exe().expect("resolve running fixture executable");
+    std::fs::write(record, format!("pid={}\npath={}\n", process::id(), executable.display()))
+        .expect("write own PID and executable path");
+}
+
+#[test]
+fn windows_direct_run_resolves_child_path_and_implicit_exe() {
+    let records = TempDir::new();
+    let copied = records.path().join("rhai-path-fixture.exe");
+    let record = records.path().join("path-child.txt");
+    std::fs::copy(std::env::current_exe().unwrap(), &copied).expect("copy own path fixture");
+    let mut scope = Scope::new();
+    scope.push("fixture_path", records.path().to_string_lossy().into_owned());
+    scope.push("record", record.to_string_lossy().into_owned());
+    let engine = engine(SysConfig::default().programs(ProgramPolicy::AllowList(vec![
+        "rhai-path-fixture".into(),
+    ])));
+    let result = engine.eval_with_scope::<Map>(&mut scope, r#"
+        run_raw("rhai-path-fixture", ["--exact", "windows_path_probe_fixture", "--quiet"], #{
+            env_clear: true,
+            env: #{ PATH: fixture_path, RHAI_WINDOWS_PATH_PROBE_RECORD: record },
+            timeout: 15
+        })
+    "#).expect("public run resolves copied fixture through child PATH");
+    assert_eq!(result["code"].as_int().unwrap(), 0);
+    let observed = std::fs::read_to_string(&record).expect("independent child PID record");
+    let mut lines = observed.lines();
+    let pid = lines.next().unwrap().strip_prefix("pid=").unwrap().parse::<u32>().unwrap();
+    assert_ne!(pid, 0);
+    let actual = std::fs::canonicalize(lines.next().unwrap().strip_prefix("path=").unwrap()).unwrap();
+    let expected = std::fs::canonicalize(&copied).unwrap();
+    assert!(lines.next().is_none());
+    assert_eq!(actual, expected, "child must run the exact PATH fixture");
+    eprintln!("windows_child_path_readback pid={pid} exact_exe=true");
+    if std::env::var_os("RHAI_WINDOWS_PATH_WRONG_EXPECTATION").is_some() {
+        assert_ne!(actual, expected, "deliberately wrong child PATH expectation");
+    }
+}
+
 /// Public argument encoding is checked against a file written by a real PowerShell
 /// child, not against another copy of the parent-side quoting algorithm.
 #[test]

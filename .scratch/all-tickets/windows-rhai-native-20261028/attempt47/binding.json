@@ -1,0 +1,19 @@
+{
+  "nonce": "1d59b495ed0f35962edeabcf841666d3",
+  "source_commit": "0d361becc38c2d23558c1787aa7d774393ff4387",
+  "manifest_sha256": "ecd2a75ac79062478757ed4d1777d01ae90589be947136e05d2f30941027361b",
+  "archive_sha256": "262b463a4be81afb07de648fde5e8f780e852a63b4a33dcd7c58a3f28df8884d",
+  "file_count": 441,
+  "source_bytes": 5243443,
+  "expected": "HEAD plus isolated X33 Direct child PATH and implicit exe wrong control and restored GREEN",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": true,
+  "command_dispatched": true,
+  "product_test_started": true,
+  "dispatch_recorded_utc": "2026-10-28T14:05:31.068022+00:00",
+  "outcome": "Direct child PATH and implicit exe wrong RED and GREEN, child path matches fixture",
+  "driver_elapsed_seconds": 68.25372469999999
+}
