@@ -1,0 +1,8 @@
+2026-10-28: After Driver 2 and exact serial export, Rhai VM sdc was restored
+live to acceptance-20261008T125846Z-b7f83433/monitor-fixture02.iso.
+virsh domblklist retained system.qcow2 on sda and unchanged foreign
+work-retirement-bounds-20261009-c18e85827e6f4404.iso on sdb. The attempt63
+owned ISO was absent from the domain listing; fuser reported no open user.
+Its exact host stage had no symlinks and the temporary host-media scope was
+absent. The exact owned ISO and stage were removed with both absence checks.
+Guest outer n-c50a944f was retained for exact guest identity/inactivity review.

@@ -1,0 +1,14 @@
+Successfully updated media.
+{
+  "host_utc_before_enter": "2026-10-28T19:48:18.877038+00:00",
+  "original_expiry_utc": "2026-10-30T12:00:00+00:00",
+  "vm_uuid": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19",
+  "medium_sha256": "27b62827983ec31d521c84734d6aedecdc71286b14eccf31e830037ccacab412",
+  "start_sha256": "8ea42e7cb2e5a2f78aca3679abb5637afb0957a9f436bf43db25e5032fcbb793",
+  "serial_path": "/var/log/libvirt/qemu/rhai-win11-quality-serial0.log",
+  "serial_inode": 126819933,
+  "serial_offset": 1100023,
+  "host_free_var_bytes": 499352264704,
+  "source_review": "READY",
+  "native_started": false
+}

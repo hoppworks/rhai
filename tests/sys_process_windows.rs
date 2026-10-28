@@ -36,6 +36,8 @@ const MANAGED_ROOT_ENV: &str = "RHAI_WINDOWS_MANAGED_ROOT";
 const MANAGED_LEAF_ENV: &str = "RHAI_WINDOWS_MANAGED_LEAF";
 const MANAGED_WRONG_ENV: &str = "RHAI_WINDOWS_MANAGED_WRONG_EXPECTATION";
 const MANAGED_RUN_CLOSURE_WRONG_ENV: &str = "RHAI_WINDOWS_MANAGED_RUN_CLOSURE_WRONG_EXPECTATION";
+const DIRECT_RUN_SURVIVAL_WRONG_ENV: &str = "RHAI_WINDOWS_DIRECT_RUN_SURVIVAL_WRONG_EXPECTATION";
+const DIRECT_PIPE_CLOSED_ENV: &str = "RHAI_WINDOWS_DIRECT_PIPE_CLOSED_DESCENDANT";
 const MANAGED_BATCH_WRONG_ENV: &str = "RHAI_WINDOWS_MANAGED_BATCH_WRONG_EXPECTATION";
 const MANAGED_CWD_CONTROLLER_ENV: &str = "RHAI_WINDOWS_MANAGED_CWD_CONTROLLER";
 const MANAGED_CWD_WRONG_ENV: &str = "RHAI_WINDOWS_MANAGED_CWD_WRONG_EXPECTATION";
@@ -48,6 +50,7 @@ const PROCESS_TERMINATE: u32 = 0x0001;
 const SYNCHRONIZE: u32 = 0x0010_0000;
 const WAIT_OBJECT_0: u32 = 0;
 const WAIT_TIMEOUT: u32 = 258;
+const HANDLE_FLAG_INHERIT: u32 = 1;
 
 #[link(name = "kernel32")]
 extern "system" {
@@ -57,6 +60,8 @@ extern "system" {
     fn TerminateProcess(handle: Handle, exit_code: u32) -> i32;
     fn CloseHandle(handle: Handle) -> i32;
     fn GetStdHandle(kind: u32) -> Handle;
+    fn GetHandleInformation(handle: Handle, flags: *mut u32) -> i32;
+    fn SetHandleInformation(handle: Handle, mask: u32, flags: u32) -> i32;
     fn PeekNamedPipe(handle: Handle, buffer: *mut c_void, size: u32, read: *mut u32, available: *mut u32, left: *mut u32) -> i32;
     fn QueryInformationJobObject(job: Handle, class: i32, info: *mut c_void, length: u32, returned: *mut u32) -> i32;
 }
@@ -1203,6 +1208,22 @@ fn windows_managed_batch_argument_cannot_create_an_extra_file() {
 fn windows_managed_parent_fixture() {
     let Ok(root) = std::env::var(MANAGED_ROOT_ENV) else { return; };
     let root = std::path::Path::new(&root);
+    if std::env::var_os(DIRECT_PIPE_CLOSED_ENV).is_some() {
+        for kind in [(-11_i32) as u32, (-12_i32) as u32] {
+            let handle = unsafe { GetStdHandle(kind) };
+            assert!(!handle.is_null() && handle as isize != -1, "direct fixture captured stream handle");
+            let mut before = 0;
+            assert_ne!(unsafe { GetHandleInformation(handle, &mut before) }, 0,
+                "inspect captured stream inheritance: {}", std::io::Error::last_os_error());
+            assert_ne!(unsafe { SetHandleInformation(handle, HANDLE_FLAG_INHERIT, 0) }, 0,
+                "clear captured stream inheritance: {}", std::io::Error::last_os_error());
+            let mut after = u32::MAX;
+            assert_ne!(unsafe { GetHandleInformation(handle, &mut after) }, 0,
+                "read back captured stream inheritance: {}", std::io::Error::last_os_error());
+            assert_eq!(after & HANDLE_FLAG_INHERIT, 0);
+            eprintln!("windows_direct_pipe_flag kind={kind} before={before} after={after}");
+        }
+    }
     let leaf_record = root.join("worker.pid");
     let _leaf = OwnedFixture(Some(process::Command::new(std::env::current_exe().unwrap())
         .args(["--exact", "windows_managed_leaf_fixture", "--nocapture", "--quiet"])
@@ -1318,6 +1339,69 @@ fn open_fixture_guard(pid: u32) -> ManagedFixtureGuard {
     let raw = unsafe { OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | PROCESS_TERMINATE | SYNCHRONIZE, 0, pid) };
     assert!(!raw.is_null(), "open exact fixture {pid}: {}", std::io::Error::last_os_error());
     ManagedFixtureGuard { handle: Some(OwnedProcessHandle(raw)), pid, exit_observed: false }
+}
+
+/// DirectChild follows only its direct child; the worker remains live after normal parent exit.
+#[test]
+fn windows_direct_run_keeps_descendant_alive_after_normal_parent_exit() {
+    let mut records = ManagedRecords { directory: Some(TempDir::new()), safe_to_remove: false };
+    let record_root = records.directory.as_ref().unwrap().path().to_path_buf();
+    let (sender, receiver) = std::sync::mpsc::sync_channel(1);
+    let observer = thread::spawn({
+        let root = record_root.clone();
+        move || {
+            let deadline = Instant::now() + Duration::from_secs(5);
+            let worker_pid = wait_for_pid(&root.join("worker.pid"), deadline)?;
+            let worker = open_fixture_guard(worker_pid);
+            let parent_pid = wait_for_pid(&root.join("parent.pid"), deadline)?;
+            assert_ne!(parent_pid, worker_pid);
+            let parent = open_fixture_guard(parent_pid);
+            assert_eq!(unsafe { WaitForSingleObject(parent.handle(), 0) }, WAIT_TIMEOUT);
+            assert_eq!(unsafe { WaitForSingleObject(worker.handle(), 0) }, WAIT_TIMEOUT);
+            sender.send((parent, worker)).expect("deliver exact direct fixture handles");
+            std::fs::write(root.join("release"), b"release\n").unwrap();
+            Some(())
+        }
+    });
+    let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let root = record_root.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let script = format!(r#"run_raw("{executable}", ["--exact", "windows_managed_parent_fixture", "--nocapture", "--quiet"], #{{
+        env_clear: true, env: #{{ {MANAGED_ROOT_ENV}: "{root}", {DIRECT_PIPE_CLOSED_ENV}: "1" }}, max_output: 1024, timeout: 15
+    }})"#);
+    let result = engine(SysConfig::default().programs(ProgramPolicy::Any).process_scope(ProcessScope::DirectChild)).eval::<Map>(&script);
+    let handles = receiver.recv_timeout(Duration::from_secs(1)).ok();
+    let worker_live_at_return = handles.as_ref().map(|(_, worker)| unsafe { WaitForSingleObject(worker.handle(), 0) == WAIT_TIMEOUT }).unwrap_or(false);
+    let observation = observer.join().expect("join direct process observer");
+    let typed_error = result.as_ref().err().and_then(|error| match &**error {
+        EvalAltResult::ErrorRuntime(value, _) => value.clone().try_cast::<SysError>(),
+        _ => None,
+    });
+    eprintln!("windows_direct_diagnostic observation={} handles={} parent_record={:?} worker_record={:?} release={} typed_error={typed_error:?}",
+        observation.is_some(), handles.is_some(), std::fs::read_to_string(record_root.join("parent.pid")).ok(),
+        std::fs::read_to_string(record_root.join("worker.pid")).ok(), record_root.join("release").exists());
+    let result = result.unwrap_or_else(|error| panic!("Windows direct run must execute its parent: {error:?}"));
+    observation.expect("observe exact direct parent and descendant");
+    let (mut parent, mut worker) = handles.expect("retain exact direct parent and descendant handles");
+    assert!(worker_live_at_return, "direct descendant must remain live when run returns");
+    assert_eq!(unsafe { WaitForSingleObject(parent.handle(), 0) }, WAIT_OBJECT_0);
+    parent.exit_observed = true;
+    let mut parent_exit = u32::MAX;
+    assert_ne!(unsafe { GetExitCodeProcess(parent.handle(), &mut parent_exit) }, 0);
+    assert_eq!(parent_exit, 0);
+    assert_eq!(result["code"].as_int().unwrap(), 0);
+    assert!(result["success"].as_bool().unwrap());
+    std::fs::write(record_root.join("worker.stop"), b"stop\n").expect("stop exact direct worker");
+    assert_eq!(unsafe { WaitForSingleObject(worker.handle(), 10_000) }, WAIT_OBJECT_0,
+        "exact direct worker must exit after its own stop record");
+    worker.exit_observed = true;
+    let mut worker_exit = u32::MAX;
+    assert_ne!(unsafe { GetExitCodeProcess(worker.handle(), &mut worker_exit) }, 0);
+    assert_eq!(worker_exit, 0);
+    records.safe_to_remove = true;
+    eprintln!("windows_direct_os_readback parent={} worker={} parent_exit={parent_exit} worker_live_at_return={worker_live_at_return} worker_exit={worker_exit}", parent.pid, worker.pid);
+    if std::env::var_os(DIRECT_RUN_SURVIVAL_WRONG_ENV).is_some() {
+        assert!(!worker_live_at_return, "deliberately wrong direct descendant survival expectation");
+    }
 }
 
 /// A normal managed run closes the descendant job before success, without touching a sentinel.

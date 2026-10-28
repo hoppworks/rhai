@@ -10,11 +10,11 @@ Use current central agent-skills `d6024420` plus applicable local edits and proj
 
 ## Current step
 
-Fork-main contains reviewed X33 Managed child-PATH competition and prior Managed refusal/final-drop work. The reviewed X35 package adds only a Windows normal-closure assertion control, native attempt62 proof and tracking updates. A–F/Ticket03/release acceptance remain open.
+Fork-main contains the reviewed X35 Windows Managed normal-exit package at `63f18b01`. This package adds the reviewed DirectChild contrast with native attempt64 RED/GREEN. A–F/Ticket03/release acceptance remain open.
 
 ## Next action
 
-After integrating the reviewed X35 package on fork main with exact remote readback, inspect incomplete-membership or real-fault Managed contracts. Retire guest outer scopes only after current exact identity and inactivity checks.
+After exact fork-main readback, inspect Managed fault contracts. Retire guest scopes only after exact identity and inactivity checks.
 
 ## Goal
 
@@ -40,9 +40,11 @@ Attempt61 freezes current base plus X33 test (`160a37ef...`, same lock) and pass
 
 Attempt62 freezes `edfca43e` plus one test-only X35 run-closure control (`ec2e7eac...`, same lock). Native Windows1.93 `testing-environ,sys,metadata`: run descendant, run sentinel and spawn/wait closure wrong101 each, restored run/spawn GREEN0 with exact process-handle and sentinel readbacks. Driver0/85.052s, 208 frames/16 hash-checked files, eight valid journal transitions through REMOVED. Own host ISO/stage removed and original sdc restored; guest outer scope retained. Combined review PASS with a documentation precision correction. Proof: `.scratch/all-tickets/windows-rhai-native-20261028/attempt62/`.
 
+Attempt63 DirectChild test compiled but both invocations timed out before the intended assertion; Driver2/90.261s, 196 frames/13 files, eight valid journal transitions. Captured-handle inheritance was a plausible competing cause; a readiness-only draft was discarded unrun. Attempt64 conditionally clears/reads back fixture stdout/stderr inheritance, retains original 5/15s bounds and passes wrong101/GREEN0 with exact parent/worker and stop readback; Driver0/88.326s, 196 frames/13 files, eight valid journal transitions. Combined review PASS. Proof: `attempt63/` and `attempt64/` under the same Windows evidence root.
+
 ## Retained resources
 
-Workhorse VM `dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19` has original sdc restored; foreign sdb untouched. Native public BuildOnly expires 2026-10-30 12:00 UTC. Guest outer evidence scopes from attempts52–62 remain, including `n-f289af73` and `n-a90bb279`; exact host ISO/stages for attempts52–62 were removed. Prior attempt36/48 guest runtimes require exact evidence-first retirement. Clean only proven owned inactive resources; previous full scope list is in the state history.
+Workhorse VM `dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19` has original sdc restored; foreign sdb untouched. Native public BuildOnly expires 2026-10-30 12:00 UTC. Guest outer evidence scopes from attempts52–64 remain, including `n-c50a944f`/`n-87438574`; exact host stages/ISOs were removed. Prior attempt36/48 guest runtimes require exact evidence-first retirement. Clean only proven owned inactive resources; previous full scope list is in the state history.
 
 ## Cause history
 

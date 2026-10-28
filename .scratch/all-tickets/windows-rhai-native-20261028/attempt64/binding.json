@@ -1,0 +1,16 @@
+{
+  "nonce": "8743857428e410e845bd818740923a6d",
+  "source_commit": "63f18b01bc8000492dc6c777462568c8ab9824c7",
+  "manifest_sha256": "ddbb88a05802f02e83d4d1c5a613b3a8040f3d7bf2007acb6955523d76868319",
+  "archive_sha256": "3a671bbdeaebb068fc264e924f63af497eb8e94c4bffcf69e9fe63f000e9f26a",
+  "file_count": 448,
+  "source_bytes": 5385402,
+  "expected": "X35 native Windows public DirectChild normal-exit descendant-survival contrast RED/GREEN",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": true,
+  "command_dispatched": true,
+  "product_test_started": true
+}
