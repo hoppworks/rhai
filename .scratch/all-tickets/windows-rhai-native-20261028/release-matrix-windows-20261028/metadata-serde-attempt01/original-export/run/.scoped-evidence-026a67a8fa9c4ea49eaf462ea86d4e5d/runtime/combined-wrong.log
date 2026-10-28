@@ -1,0 +1,49 @@
+warning: the item `TryFrom` is imported redundantly
+   --> src\func\func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04\library\std\src\prelude\mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` on by default
+
+warning: `rhai` (lib) generated 2 warnings
+warning: unused import: `PathBuf`
+ --> src\bin\rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 0.16s
+     Running tests\combined_sys_net.rs (work\target\debug\deps\combined_sys_net-deb549655ab268cc.exe)
+
+running 1 test
+thread 'sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors' panicked at tests\combined_sys_net.rs:119:5:
+fresh host readback must match independent expected bytes; actual="filesystem-payload"; expected="incorrect filesystem expectation"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors ... FAILED
+
+failures:
+
+failures:
+    sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+error: test failed, to rerun pass `--test combined_sys_net`

@@ -1,0 +1,59 @@
+{
+  "attempt": "metadata-serde-attempt01",
+  "source_commit": "7019821fc9d7814d0632fea06de50933aa9e35ee",
+  "integrated_head_at_prepare": "b98ec4aa7b48d0e19eb1a6ad9b69e6edcec63da0",
+  "source_paths_unchanged_from_commit": false,
+  "nonce": "cfd3fcc28a036cc581399046b4347085",
+  "vm_uuid": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19",
+  "guest_scope": "n-cfd3fcc2",
+  "retained_toolchain_scope": "n-a7e54f39",
+  "retained_toolchain_expiry_utc": "2026-11-01T00:00:00Z",
+  "windows_sdk_inventory_lib": "10.0.26100.0",
+  "driver_deadline_seconds": 180,
+  "observer_deadline_seconds": 185,
+  "export_deadline_seconds": 180,
+  "planned_features": "testing-environ,sys,net,metadata,serde",
+  "media_files": {
+    "source-manifest.json": {
+      "sha256": "254d021566408f44b2b645551e2598f7cf9db5fee63c5e34bcc7ea20012ec9ba",
+      "bytes": 67878
+    },
+    "ClearOwnedWorkReadOnly.ps1": {
+      "sha256": "374ea819a5ae6c8ba7a7d6c0a49ad46bca3417729e784b0fbac91805ae5b06bf",
+      "bytes": 2906
+    },
+    "Start.ps1": {
+      "sha256": "c2a7e7f0df33a4b7905167d76ee82c1a27a721c6417b3fea12b875c01bbe4e0a",
+      "bytes": 10652
+    },
+    "Cargo.lock": {
+      "sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+      "bytes": 31602
+    },
+    "RunRhaiContract.cmd": {
+      "sha256": "625ef69b64723c77db1698184159204ba5b33fbf88c7239bf9c986844c1c9f85",
+      "bytes": 2705
+    },
+    "rhai-source.zip": {
+      "sha256": "0005b38a387b419802335e141cb259de86f1ec9424e6e4cf2b8bc3beaf30bdd7",
+      "bytes": 1157342
+    },
+    "rhai-native-cfd3fcc28a036cc581399046b4347085.bundle": {
+      "sha256": "e0f4f74384375a17d14786ef0bc62490201acccab831d43bc2f7f608a2ccbbc7",
+      "bytes": 45
+    },
+    "RunRhaiContractControl.ps1": {
+      "sha256": "95cce64e63a570e95ede1ba1c2e96ed7fb54ee9d47de2dbed44ebe52360c214c",
+      "bytes": 16501
+    }
+  },
+  "planned_target_count": 13,
+  "source_overlay": {
+    "path": "tests/sys_process_windows.rs",
+    "sha256": "b8340cf4c4a401f619542845bfc3d6ded296480c372cbbabcc12382175d54953"
+  },
+  "source_tree_matches_integrated_head": true,
+  "serde_wrong_control": true,
+  "console_helper_sha256": "cee8cf1139b8f817e2b49e99013c7ce7f93a5b4319875fa7cb4f4c31a8367929",
+  "iso_sha256": "c645276869d86449c46847e82ee2f14fc1a39f674294fd30cf692cab961624da"
+}

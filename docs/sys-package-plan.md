@@ -1581,6 +1581,16 @@ combined host-file RED101, restored twelve-target suite 124/0/0 ignored,
 review. `net_metadata` and Unix `sys_process` each ran zero tests; their
 behavior is not inferred from those targets. See
 `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/onlyi32-nofloat-attempt01/proof.md`.
+The byte-identical integrated source at fork-main `b98ec4aa...` then passed
+native Windows 11 Pro `10.0.26300` / Rust-Cargo 1.77.2 with
+`testing-environ,sys,net,metadata,serde`: thirteen target binaries,
+separate host-file and Dynamic JSON assertion RED101 controls, and restored
+suite 153/0/0 ignored. The source/lock, original sixteen-file export, eight
+CRC-valid custody states, exact guest/host cleanup and one combined independent
+review are bound in
+`.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/metadata-serde-attempt01/proof.md`.
+`net_metadata` ran two native TCP metadata tests and `serde` ran 25 tests;
+Unix-only `sys_process` ran zero. This accepts only the executed profile cases.
 The guest inventory found Windows Kit Lib `10.0.26100.0`, but the exact linker
 and SDK files used by Rust remain unbound. Remaining semantic profiles, fault
 breadth and the full release matrix still require separate evidence.

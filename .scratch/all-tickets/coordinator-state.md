@@ -10,11 +10,11 @@ Use current central agent-skills `d6024420` plus applicable local edits and proj
 
 ## Current step
 
-Fork-main includes reviewed Windows X35, POSIX `f32_float`, native Windows Rust/Cargo1.77.2, a combined sys/net case and the Windows `only_i32,no_float` profile. A–F/Ticket03/release remain open.
+Fork-main includes reviewed Windows X35, POSIX `f32_float`, native Windows1.77.2 sys/net, `only_i32,no_float`, and `metadata,serde` profiles. A–F/Ticket03/release remain open.
 
 ## Next action
 
-Run the next missing Windows feature/fault row under bounded custody, using the retained source/toolchain where applicable. Bind the exact linker/SDK files for full release; preserve accepted rows.
+Run the missing native Windows1.77.2 `unchecked` profile under bounded custody, reusing current source/toolchain. Bind exact linker/SDK files for full release; preserve accepted rows.
 
 ## Goal
 
@@ -50,9 +50,9 @@ POSIX Rust1.77.2 combined `f32_float`: macOS and Linux three intended wrong101 a
 
 Attempts36–39 exposed false Job closure; attempts50–58 covered batch injection, membership, retry, lifecycle and CWD search. Attempt59 fixed a missed exact-child fallback after permanent Job refusal: wrong101/GREEN0, 299 refusals, owner retained. Attempt60 reused identical source for final-drop wrong101/101 and GREEN0 with parent/worker/sentinel readbacks. Combined review READY. Actual OS faults, other features/toolchains and release remain open. Detailed source, lock and causes: Windows `attempt59/` and `attempt60/` proof folders.
 
-Attempt61 freezes current base plus X33 test (`160a37ef...`, same lock) and passes native Windows Managed child-PATH-over-parent-CWD wrong101/GREEN0, 31/31 suite and independent child executable readback. Observer Driver0 in 104.824s, 202 frames/14 hash-checked files, eight valid journal transitions through REMOVED; own host stage/ISO retired, guest outer scope retained. Combined independent review PASS. Proof: `.scratch/all-tickets/windows-rhai-native-20261028/attempt61/`.
+Attempt61: native Windows Managed X33 PATH precedence wrong101/GREEN0, child executable readback, Driver0, original export/custody and combined review PASS; guest outer scope retained. Proof: Windows `attempt61/`.
 
-Attempt62 freezes `edfca43e` plus one test-only X35 run-closure control (`ec2e7eac...`, same lock). Native Windows1.93 `testing-environ,sys,metadata`: run descendant, run sentinel and spawn/wait closure wrong101 each, restored run/spawn GREEN0 with exact process-handle and sentinel readbacks. Driver0/85.052s, 208 frames/16 hash-checked files, eight valid journal transitions through REMOVED. Own host ISO/stage removed and original sdc restored; guest outer scope retained. Combined review PASS with a documentation precision correction. Proof: `.scratch/all-tickets/windows-rhai-native-20261028/attempt62/`.
+Attempt62: native Windows1.93 X35 run/spawn closure, three wrong101 controls and restored GREEN0, exact process/sentinel readbacks, Driver0, original export/custody and combined review PASS. Guest scope retained; host media restored. Proof: Windows `attempt62/`.
 
 Attempt63 DirectChild timed out before assertion; captured-handle inheritance remains a possible cause. Attempt64 clears/reads back fixture handle inheritance and passes wrong101/GREEN0 with parent/worker readback and valid custody journal. Review PASS: Windows `attempt63/` and `attempt64/` proof folders.
 
@@ -61,6 +61,8 @@ Windows MSRV bootstrap attempt04: native Driver0, exact Rust/Cargo1.77.2, 36 ord
 Windows1.77.2 combined `testing-environ,sys,net`: same committed source/lock, native compile, host-file wrong101/GREEN0, independent TCP/file readback, Driver0, 203 frames/15 hash-checked files, eight valid journal records and combined review PASS. Own scope/ISO/stage retired; SDK and other rows open. `.scratch/all-tickets/windows-rhai-native-20261028/release-msrv-20261028/proof.md`.
 
 Windows1.77.2 `only_i32,no_float`: HEAD701 plus Windows test overlay, host-file wrong101, restored 12-target suite124/0/0ignored including 31 native process tests; two targets ran zero. Driver0/156.02s, rotated COM1 old/new segments reassembled to219 frames/15 hash-checked files, eight valid journal records. Review PASS; own scope/ISO/stage retired. Windows Kit Lib10.0.26100.0 inventoried; exact linker unknown. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/onlyi32-nofloat-attempt01/proof.md`.
+
+Windows1.77.2 `metadata,serde`: current HEADb98 source/lock, host-file and JSON wrong101, restored 13-target suite153/0/0ignored, Windows process32. Driver0/116.35s, 225 COM1 frames/16 hash-checked files, eight valid journal states. Combined review PASS after proof-link correction; guest/host scopes and ISO retired, original sdc restored. Windows11 Pro10.0.26300. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/metadata-serde-attempt01/proof.md`.
 
 ## Retained resources
 
