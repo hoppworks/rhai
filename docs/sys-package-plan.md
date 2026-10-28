@@ -1550,6 +1550,14 @@ Linux passed the same controls and 11-target suite (167/0/3 ignored) in one
 scope. Independent combined review returned PASS for the named paths.
 Other f32 values, Windows, other combinations and full release remain open.
 
+A native Windows guest inventory on 2026-10-28 ran `rustup toolchain list` in
+the existing `RhaiTest` session and showed only the default MSVC1.93.0
+toolchain; the screenshot and exact host-stage cleanup are recorded in
+`.scratch/all-tickets/windows-rhai-native-20261028/toolchain-inventory-20261028.md`.
+This is a current prerequisite finding, not a product or release acceptance
+result. The Windows Rust1.77.2 gate requires a bounded guest-owned toolchain
+bootstrap and source/lock/SDK binding before a native build.
+
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance
 matrix or closure count. Historical implementation notes and estimates follow.

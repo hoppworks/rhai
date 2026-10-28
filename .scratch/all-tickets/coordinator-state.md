@@ -14,7 +14,7 @@ Fork-main includes reviewed Windows X35 and the POSIX combined `f32_float` slice
 
 ## Next action
 
-Inventory installed toolchains inside the running Workhorse Windows guest through the existing bounded native custody path; determine whether Rust1.77.2 is present before selecting its release gate. Existing Windows proof pins only Rust1.93.0. Retire guest scopes only after identity/inactivity checks.
+Windows guest inventory found only MSVC1.93.0; see `windows-rhai-native-20261028/toolchain-inventory-20261028.md`. Prepare bounded guest-owned Rust1.77.2 bootstrap, bind source/lock/SDK, then run native release cases through the existing Job/monitor route. Retire guest scopes only after identity/inactivity checks.
 
 ## Goal
 
