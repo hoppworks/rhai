@@ -2,11 +2,13 @@ $ErrorActionPreference = 'Stop'
 $nonce = 'a7e54f39104e47c7ad826b2b9938365f'
 $id = 'rhai-msrv-bootstrap-' + $nonce
 $marker = $id + '.bundle'
-$media = @('D:\', 'E:\', 'F:\') | Where-Object {
-    Test-Path -LiteralPath (Join-Path $_ $marker) -PathType Leaf
-}
-if (@($media).Count -ne 1) { throw 'Expected exactly one owned bootstrap medium.' }
-$media = @($media)[0]
+$mediaCandidates = @(@('D:\', 'E:\', 'F:\') | Where-Object {
+    $drive = $_.Substring(0, 1)
+    $null -ne (Get-PSDrive -Name $drive -PSProvider FileSystem -ErrorAction SilentlyContinue) -and
+        (Test-Path -LiteralPath (Join-Path $_ $marker) -PathType Leaf)
+})
+if ($mediaCandidates.Count -ne 1) { throw 'Expected exactly one owned bootstrap medium.' }
+$media = $mediaCandidates[0]
 if ((Get-Content -LiteralPath (Join-Path $media $marker) -Raw).Trim() -cne $id) {
     throw 'Bootstrap medium identity differs.'
 }

@@ -10,11 +10,11 @@ Use current central agent-skills `d6024420` plus applicable local edits and proj
 
 ## Current step
 
-Fork-main includes reviewed Windows X35 and POSIX `f32_float` at `59a8754d`. Native Windows bootstrap source review is READY; its mounted medium passed the guest PowerShell parser without starting installation. A–F/Ticket03/release remain open.
+Fork-main includes reviewed Windows X35 and POSIX `f32_float`. Windows bootstrap attempt01 stopped during media discovery before scope/Driver/install; corrected attempt02 ISO and native parser now pass source review. A–F/Ticket03/release remain open.
 
 ## Next action
 
-Dispatch the hash-guarded `msrv-bootstrap-20261028/Start.ps1` once through native Job/monitor custody, export original receipts, verify toolchain and restore original sdc. Then bind source/lock/SDK for Windows1.77.2 release cases.
+Dispatch attempt02 hash-guarded `msrv-bootstrap-20261028/Start.ps1` through native Job/monitor custody; export/read back originals, verify toolchain and restore original sdc. Then bind source/lock/SDK for Windows1.77.2 release cases.
 
 ## Goal
 
@@ -58,11 +58,11 @@ Attempt63 DirectChild timed out before assertion; captured-handle inheritance re
 
 ## Retained resources
 
-Workhorse VM `dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19`: foreign sdb untouched; own ISO `rhai-msrv-bootstrap-a7e54f39...iso` temporarily on sdc, original `acceptance-20261008T125846Z-b7f83433/monitor-fixture02.iso` to restore after export. Own host stage `windows-msrv-bootstrap-a7e54f39...`; ISO build scope `windows-msrv-iso-20261028-c4d9` retired. Native public BuildOnly expires 2026-10-30 12:00 UTC. Planned retained guest home `C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-a7e54f39\toolchain-home`: owner Rhai coordinator, Rust1.77.2 MSVC release gate, rustup SHA `6f4bef...`, postrun ceiling2GiB, expiry 2026-11-01 00:00 UTC; no disk quota. Guest evidence scopes52–64 remain; old36/48 require exact retirement. Preserve foreign work and prior proof; detailed scopes in history.
+Workhorse VM `dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19`: foreign sdb untouched; corrected own ISO `rhai-msrv-bootstrap-a7e54f39...iso` temporarily on sdc, original `acceptance-20261008T125846Z-b7f83433/monitor-fixture02.iso` to restore after export. Own host stage `windows-msrv-bootstrap-a7e54f39...`; ISO build scopes c4d9/d5e0 retired. Native public BuildOnly expires 2026-10-30 12:00 UTC. Planned retained guest home `C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-a7e54f39\toolchain-home`: owner Rhai coordinator, Rust1.77.2 MSVC release gate, rustup SHA `6f4bef...`, postrun ceiling2GiB, expiry 2026-11-01 00:00 UTC; no disk quota. Guest evidence scopes52–64 remain; old36/48 require exact retirement. Preserve foreign work and prior proof; detailed scopes in history.
 
 ## Cause history
 
-Attempt18 false timeout unresolved; attempt26 expired before RED/GREEN; attempts36–39 exposed false Job closure; attempt48 expected RED incorrectly; attempt50 showed batch injection. Review corrected background retry under uncertainty/accounting in attempts55–56. Attempt57 reached product RED but its Driver parser sought the wrong log; attempt58 corrected CWD search and passed strict proof. Attempt59 source review found the shared-deadline bug; the fixed synthetic control and public attempt60 final-drop now pass. Earlier causes and limits remain in original proof folders and `.scratch/all-tickets/coordinator-history-20261015.md`.
+Attempt18 false timeout unresolved; attempt26 expired before RED/GREEN; attempts36–39 exposed false Job closure; attempt48 expected RED incorrectly; attempt50 showed batch injection. Review corrected background retry in attempts55–56. Attempt57 Driver parser sought the wrong log; attempt58 corrected it. Attempt59 fixed shared-deadline fallback; attempt60 final-drop passed. MSRV bootstrap attempt01 media scan failed on absent F: before scope/Driver; corrected guard reviewed, attempt02 parser passed. Earlier causes and limits remain in proof folders and `.scratch/all-tickets/coordinator-history-20261015.md`.
 
 ## Open escalations
 
