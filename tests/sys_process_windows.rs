@@ -4,7 +4,7 @@
 mod sys_support;
 
 use rhai::packages::sys::{ProgramPolicy, SysConfig, SysError};
-use rhai::{Blob, EvalAltResult, ImmutableString, Map};
+use rhai::{Blob, EvalAltResult, ImmutableString, Map, Scope};
 use std::ffi::c_void;
 use std::process;
 use std::thread;
@@ -19,6 +19,10 @@ const WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_PROCESS_WRONG_EXPECTATION";
 const TEXT_LIMIT_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_TEXT_LIMIT_WRONG_EXPECTATION";
 const TIMEOUT_RECORD_ENV: &str = "RHAI_WINDOWS_TIMEOUT_RECORD";
 const TIMEOUT_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_TIMEOUT_WRONG_EXPECTATION";
+const STDIN_RECORD_ENV: &str = "RHAI_WINDOWS_STDIN_RECORD";
+const STDIN_DATA_ENV: &str = "RHAI_WINDOWS_STDIN_DATA";
+const STDIN_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_STDIN_WRONG_EXPECTATION";
+const STDIN_TIMEOUT_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_STDIN_TIMEOUT_WRONG_EXPECTATION";
 const LIBTEST_QUIET_START: &[u8] = b"\nrunning 1 test\n";
 
 type Handle = *mut c_void;
@@ -158,12 +162,41 @@ fn windows_timeout_fixture() {
     panic!("parent did not terminate the child before its safety deadline");
 }
 
+/// Fill both output streams before reading input, so a blocking input writer deadlocks.
 #[test]
-fn windows_run_raw_timeout_terminates_exact_child_and_retains_output() {
-    use rhai::packages::sys::ProcessCause;
+fn windows_stdin_fixture() {
+    let Ok(record) = std::env::var(STDIN_RECORD_ENV) else {
+        return;
+    };
+    let record = std::path::Path::new(&record);
+    let temporary = record.with_extension("tmp");
+    std::fs::write(&temporary, format!("pid={}\n", process::id())).unwrap();
+    std::fs::rename(&temporary, record).unwrap();
+    let observed = record.with_extension("observed");
+    let deadline = Instant::now() + Duration::from_secs(20);
+    while !observed.exists() {
+        assert!(Instant::now() < deadline, "observer never acquired child handle");
+        thread::sleep(Duration::from_millis(10));
+    }
+    std::io::Write::write_all(&mut std::io::stdout(), &vec![b'S'; 65_536]).unwrap();
+    std::io::Write::flush(&mut std::io::stdout()).unwrap();
+    std::io::Write::write_all(&mut std::io::stderr(), &vec![b'E'; 65_536]).unwrap();
+    std::io::Write::flush(&mut std::io::stderr()).unwrap();
+    let mut input = Vec::new();
+    std::io::Read::read_to_end(&mut std::io::stdin(), &mut input).unwrap();
+    let data = std::env::var(STDIN_DATA_ENV).expect("input record path");
+    let data = std::path::Path::new(&data);
+    let temporary = data.with_extension("tmp");
+    std::fs::write(&temporary, input).unwrap();
+    std::fs::rename(&temporary, data).unwrap();
+    process::exit(0);
+}
 
+#[test]
+fn windows_run_raw_transfers_blob_while_draining_both_streams() {
     let records = TempDir::new();
-    let record = records.path().join("timeout-child.txt");
+    let record = records.path().join("stdin-child.txt");
+    let data = records.path().join("stdin-data.bin");
     let observed = record.with_extension("observed");
     let observer = thread::spawn({
         let record = record.clone();
@@ -172,28 +205,101 @@ fn windows_run_raw_timeout_terminates_exact_child_and_retains_output() {
             let text = loop {
                 match std::fs::read_to_string(&record) {
                     Ok(text) => break text,
-                    Err(error) if error.kind() == std::io::ErrorKind::NotFound && Instant::now() < deadline => {
-                        thread::sleep(Duration::from_millis(10));
-                    }
-                    Err(error) => panic!("timeout child readiness unavailable: {error}"),
+                    Err(error) if error.kind() == std::io::ErrorKind::NotFound && Instant::now() < deadline => thread::sleep(Duration::from_millis(10)),
+                    Err(error) if error.kind() == std::io::ErrorKind::NotFound => return None,
+                    Err(error) => panic!("stdin child readiness: {error}"),
                 }
             };
             let pid = text.trim().strip_prefix("pid=").unwrap().parse::<u32>().unwrap();
             let raw = unsafe { OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | PROCESS_TERMINATE | SYNCHRONIZE, 0, pid) };
-            assert!(!raw.is_null(), "open exact timeout child {pid}: {}", std::io::Error::last_os_error());
+            assert!(!raw.is_null(), "open exact stdin child {pid}: {}", std::io::Error::last_os_error());
             let mut guard = TimeoutChildGuard {
                 handle: OwnedProcessHandle(raw),
                 pid,
                 exit_observed: false,
             };
             std::fs::write(observed, b"handle acquired\n").unwrap();
-            let wait = unsafe { WaitForSingleObject(guard.handle.0, 15_000) };
-            assert_eq!(wait, WAIT_OBJECT_0, "exact timeout child {pid} did not terminate: {wait:#x}");
+            let wait = unsafe { WaitForSingleObject(guard.handle.0, 25_000) };
+            assert_eq!(wait, WAIT_OBJECT_0, "stdin child {pid} did not terminate: {wait:#x}");
             guard.exit_observed = true;
-            let mut exit_code = u32::MAX;
-            assert_ne!(unsafe { GetExitCodeProcess(guard.handle.0, &mut exit_code) }, 0, "query exact timeout child {pid}: {}", std::io::Error::last_os_error());
-            (pid, exit_code)
+            let mut exit = u32::MAX;
+            assert_ne!(unsafe { GetExitCodeProcess(guard.handle.0, &mut exit) }, 0);
+            Some((pid, exit))
         }
+    });
+    let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let record_literal = record.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let data_literal = data.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let input: Blob = (0..131_072).map(|n| (n % 251) as u8).collect();
+    let mut scope = Scope::new();
+    scope.push("input", input.clone());
+    let mut engine = engine(SysConfig::default().programs(ProgramPolicy::Any));
+    #[cfg(not(feature = "unchecked"))]
+    engine.set_max_array_size(1_048_576);
+    let script = format!(
+        r#"run_raw("{executable}", ["--exact", "windows_stdin_fixture", "--nocapture", "--quiet"], #{{
+            env_clear: true,
+            env: #{{ {STDIN_RECORD_ENV}: "{record_literal}", {STDIN_DATA_ENV}: "{data_literal}" }},
+            stdin: input, max_output: 262144, timeout: 15
+        }})"#
+    );
+    let result = engine.eval_with_scope::<Map>(&mut scope, &script);
+    let observation = observer.join().expect("join stdin child observer");
+    let result = result.unwrap_or_else(|error| panic!("stdin must support concurrent transfer: {error:?}; child_observed={}", observation.is_some()));
+    let (pid, exit) = observation.expect("exact child was independently observed");
+    eprintln!("windows_stdin_child_readback pid={pid} exit={exit} exact_handle_signaled=true");
+    assert_eq!(exit, 0);
+    assert!(result["success"].as_bool().unwrap());
+    let mut expected_stdout = LIBTEST_QUIET_START.to_vec();
+    expected_stdout.extend(vec![b'S'; 65_536]);
+    assert_eq!(result["stdout"].clone().try_cast::<Blob>().unwrap(), expected_stdout);
+    assert_eq!(result["stderr"].clone().try_cast::<Blob>().unwrap(), vec![b'E'; 65_536]);
+    let readback = std::fs::read(&data).expect("child-written input readback");
+    if std::env::var_os(STDIN_WRONG_EXPECTATION_ENV).is_some() {
+        assert!(readback != input, "deliberately wrong stdin round-trip expectation");
+    }
+    assert_eq!(readback, input);
+    assert_eq!(std::fs::read_to_string(&record).unwrap().trim(), format!("pid={pid}"));
+}
+
+fn observe_timeout_child(record: std::path::PathBuf) -> (u32, u32) {
+    let observed = record.with_extension("observed");
+    let deadline = Instant::now() + Duration::from_secs(4);
+    let text = loop {
+        match std::fs::read_to_string(&record) {
+            Ok(text) => break text,
+            Err(error) if error.kind() == std::io::ErrorKind::NotFound && Instant::now() < deadline => {
+                thread::sleep(Duration::from_millis(10));
+            }
+            Err(error) => panic!("timeout child readiness unavailable: {error}"),
+        }
+    };
+    let pid = text.trim().strip_prefix("pid=").unwrap().parse::<u32>().unwrap();
+    let raw = unsafe { OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | PROCESS_TERMINATE | SYNCHRONIZE, 0, pid) };
+    assert!(!raw.is_null(), "open exact timeout child {pid}: {}", std::io::Error::last_os_error());
+    let mut guard = TimeoutChildGuard {
+        handle: OwnedProcessHandle(raw),
+        pid,
+        exit_observed: false,
+    };
+    std::fs::write(observed, b"handle acquired\n").unwrap();
+    let wait = unsafe { WaitForSingleObject(guard.handle.0, 15_000) };
+    assert_eq!(wait, WAIT_OBJECT_0, "exact timeout child {pid} did not terminate: {wait:#x}");
+    guard.exit_observed = true;
+    let mut exit_code = u32::MAX;
+    assert_ne!(unsafe { GetExitCodeProcess(guard.handle.0, &mut exit_code) }, 0, "query exact timeout child {pid}: {}", std::io::Error::last_os_error());
+    (pid, exit_code)
+}
+
+#[test]
+fn windows_run_raw_timeout_terminates_exact_child_and_retains_output() {
+    use rhai::packages::sys::ProcessCause;
+
+    let records = TempDir::new();
+    let record = records.path().join("timeout-child.txt");
+    let observer = thread::spawn({
+        let record = record.clone();
+        move || observe_timeout_child(record)
     });
     let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
     let script_record = record.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
@@ -235,6 +341,52 @@ fn windows_run_raw_timeout_terminates_exact_child_and_retains_output() {
             assert!(report.cleanup_diagnostics().is_empty(), "cleanup diagnostics: {:?}", report.cleanup_diagnostics());
         }
         other => panic!("expected a timeout with a retained report, got {other:?}"),
+    }
+    assert_eq!(std::fs::read_to_string(&record).unwrap().trim(), format!("pid={pid}"));
+}
+
+#[test]
+fn windows_run_raw_times_out_with_unread_stdin() {
+    use rhai::packages::sys::ProcessCause;
+
+    let records = TempDir::new();
+    let record = records.path().join("blocked-stdin-child.txt");
+    let observer = thread::spawn({
+        let record = record.clone();
+        move || observe_timeout_child(record)
+    });
+    let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let script_record = record.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let mut scope = Scope::new();
+    scope.push("input", vec![0x5au8; 1_048_576]);
+    let mut engine = engine(SysConfig::default().programs(ProgramPolicy::Any));
+    #[cfg(not(feature = "unchecked"))]
+    engine.set_max_array_size(2_097_152);
+    let script = format!(
+        r#"run_raw("{executable}", ["--exact", "windows_timeout_fixture", "--nocapture", "--quiet"], #{{
+            env_clear: true, env: #{{ {TIMEOUT_RECORD_ENV}: "{script_record}" }},
+            stdin: input, max_output: 1024, timeout: 5
+        }})"#
+    );
+    let result = engine.eval_with_scope::<Map>(&mut scope, &script);
+    let (pid, observed_exit) = observer.join().expect("join blocked-input child observer");
+    eprintln!("windows_blocked_stdin_child_readback pid={pid} exit={observed_exit} exact_handle_signaled=true");
+    let error = result.expect_err("unread input must not bypass the deadline");
+    let sys_error = match *error {
+        EvalAltResult::ErrorRuntime(value, _) => value.try_cast::<SysError>().expect("typed process error"),
+        other => panic!("unexpected error: {other:?}"),
+    };
+    match sys_error {
+        SysError::Process { cause: ProcessCause::Timeout(_), report } => {
+            eprintln!("windows_blocked_stdin_report timed_out={} exit={:?} diagnostics={:?}", report.timed_out(), report.exit_code(), report.cleanup_diagnostics());
+            if std::env::var_os(STDIN_TIMEOUT_WRONG_EXPECTATION_ENV).is_some() {
+                assert!(!report.timed_out(), "deliberately wrong blocked stdin timeout expectation");
+            }
+            assert!(report.timed_out());
+            assert_eq!(report.exit_code().map(|code| code as u32), Some(observed_exit));
+            assert!(report.cleanup_diagnostics().is_empty(), "cleanup diagnostics: {:?}", report.cleanup_diagnostics());
+        }
+        other => panic!("expected blocked-input timeout, got {other:?}"),
     }
     assert_eq!(std::fs::read_to_string(&record).unwrap().trim(), format!("pid={pid}"));
 }

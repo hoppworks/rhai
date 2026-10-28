@@ -1,0 +1,11 @@
+{
+  "old_inode": 126706676,
+  "old_offset": 1931274,
+  "old_size": 2097152,
+  "new_inode": 126812416,
+  "new_bytes": 207144,
+  "reconstruction": "old[offset:EOF] followed by new[0:EOF]",
+  "frames": 222,
+  "serial_bytes": 373022,
+  "sha256": "1a74dd7c45b0149eff8947880a76b8f4a583f8b5031dea289d7fb19dacbe0bf0"
+}

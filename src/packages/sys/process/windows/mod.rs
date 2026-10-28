@@ -1,8 +1,10 @@
 //! Native Windows process execution with cancellable, bounded output capture.
 
 mod io;
+mod stdin;
 
 use self::io::PipeReader;
+use self::stdin::PipeWriter;
 use super::{ProcessCause, ProcessDiagnostic, ProcessExit, ProcessReport};
 use crate::packages::sys::{ProcessScope, SysError, SysState};
 #[cfg(not(feature = "no_index"))]
@@ -147,6 +149,7 @@ fn parse_args(args: Array) -> Res<Vec<String>> {
 struct Options {
     env: Vec<(String, String)>,
     env_clear: bool,
+    stdin: Option<Vec<u8>>,
     timeout: Option<Duration>,
     limit: usize,
 }
@@ -166,7 +169,7 @@ fn deadline_after(
 
 fn parse_options(state: &SysState, mut options: Map, engine_limit: usize) -> Res<Options> {
     for key in options.keys() {
-        if !["env", "env_clear", "timeout", "max_output"].contains(&key.as_str()) {
+        if !["env", "env_clear", "stdin", "timeout", "max_output"].contains(&key.as_str()) {
             return Err(
                 SysError::Denied(format!("unsupported Windows process option `{key}`")).into(),
             );
@@ -193,6 +196,11 @@ fn parse_options(state: &SysState, mut options: Map, engine_limit: usize) -> Res
                     })
             })
             .collect::<Res<Vec<_>>>()?,
+    };
+    let stdin = match options.remove("stdin") {
+        None => None,
+        Some(value) if value.is_unit() => None,
+        Some(value) => Some(parse_stdin(value)?),
     };
     let timeout = match options.remove("timeout") {
         None => state.config.default_timeout,
@@ -253,9 +261,29 @@ fn parse_options(state: &SysState, mut options: Map, engine_limit: usize) -> Res
     Ok(Options {
         env,
         env_clear,
+        stdin,
         timeout,
         limit,
     })
+}
+
+fn parse_stdin(value: Dynamic) -> Res<Vec<u8>> {
+    #[cfg(not(feature = "no_index"))]
+    let value = match value.try_cast_result::<crate::Blob>() {
+        Ok(bytes) => return Ok(bytes),
+        Err(value) => value,
+    };
+    value
+        .try_cast::<ImmutableString>()
+        .map(|text| text.as_bytes().to_vec())
+        .ok_or_else(|| {
+            let expected = if cfg!(feature = "no_index") {
+                "a string"
+            } else {
+                "a string or blob"
+            };
+            SysError::Denied(format!("process option `stdin` must be {expected}")).into()
+        })
 }
 
 fn run_map(
@@ -300,10 +328,18 @@ fn run_map(
         PipeReader::pair().map_err(|error| SysError::io("create stdout pipe", program, &error))?;
     let (stderr, stderr_child) =
         PipeReader::pair().map_err(|error| SysError::io("create stderr pipe", program, &error))?;
+    let (stdin, child_stdin) = match options.stdin {
+        Some(input) if !input.is_empty() => {
+            let (writer, child) = PipeWriter::pair(input)
+                .map_err(|error| SysError::io("create stdin pipe", program, &error))?;
+            (Some(writer), Stdio::from(child))
+        }
+        _ => (None, Stdio::null()),
+    };
     let mut command = Command::new(program);
     command
         .args(args)
-        .stdin(Stdio::null())
+        .stdin(child_stdin)
         .stdout(Stdio::from(stdout_child))
         .stderr(Stdio::from(stderr_child));
     if options.env_clear {
@@ -317,7 +353,7 @@ fn run_map(
         .spawn()
         .map_err(|error| SysError::io("spawn process", program, &error))?;
     drop(command);
-    let mut owner = ProcessOwner::new(child, stdout, stderr, permit);
+    let mut owner = ProcessOwner::new(child, stdin, stdout, stderr, permit);
     let supervised = catch_unwind(AssertUnwindSafe(|| {
         owner.supervise(deadline, options.limit, program)
     }));
@@ -390,6 +426,7 @@ fn run_map(
 struct ProcessOwner {
     _permit: ActivePermit,
     child: Child,
+    stdin: Option<PipeWriter>,
     stdout: PipeReader,
     stderr: PipeReader,
     out: Vec<u8>,
@@ -431,10 +468,17 @@ fn retain_for_cleanup(owner: ProcessOwner) -> std_io::Result<()> {
 }
 
 impl ProcessOwner {
-    fn new(child: Child, stdout: PipeReader, stderr: PipeReader, permit: ActivePermit) -> Self {
+    fn new(
+        child: Child,
+        stdin: Option<PipeWriter>,
+        stdout: PipeReader,
+        stderr: PipeReader,
+        permit: ActivePermit,
+    ) -> Self {
         Self {
             _permit: permit,
             child,
+            stdin,
             stdout,
             stderr,
             out: Vec::new(),
@@ -463,8 +507,21 @@ impl ProcessOwner {
                     program,
                 );
             }
+            if cause.is_none() {
+                if let Some(writer) = self.stdin.as_mut() {
+                    if let Err(error) = advance_stdin(writer) {
+                        cause = Some(io_cause("write child stdin", program, &error));
+                    }
+                }
+            }
+            if self.stdin.as_ref().is_some_and(PipeWriter::is_finished) {
+                self.stdin.take();
+            }
             if cause.is_some()
-                || (self.exit.is_some() && self.stdout.reached_eof() && self.stderr.reached_eof())
+                || (self.exit.is_some()
+                    && self.stdin.is_none()
+                    && self.stdout.reached_eof()
+                    && self.stderr.reached_eof())
             {
                 break;
             }
@@ -472,15 +529,22 @@ impl ProcessOwner {
             // before waiting on other handles so a full child pipe cannot stall us.
             if (!self.stdout.is_pending() && !self.stdout.reached_eof())
                 || (!self.stderr.is_pending() && !self.stderr.reached_eof())
+                || self
+                    .stdin
+                    .as_ref()
+                    .is_some_and(|writer| !writer.is_pending() && !writer.is_finished())
             {
                 continue;
             }
-            let mut handles = Vec::with_capacity(3);
+            let mut handles = Vec::with_capacity(4);
             if self.stdout.is_pending() {
                 handles.push(self.stdout.event_handle());
             }
             if self.stderr.is_pending() {
                 handles.push(self.stderr.event_handle());
+            }
+            if let Some(writer) = self.stdin.as_ref().filter(|writer| writer.is_pending()) {
+                handles.push(writer.event_handle());
             }
             if self.exit.is_none() {
                 handles.push(self.child.as_raw_handle() as HANDLE);
@@ -539,6 +603,19 @@ impl ProcessOwner {
                     }
                     Err(error) => cause = Some(io_cause("read child stderr", program, &error)),
                 }
+            } else if self
+                .stdin
+                .as_ref()
+                .is_some_and(|writer| writer.is_pending() && signaled == writer.event_handle())
+            {
+                if let Err(error) = self
+                    .stdin
+                    .as_mut()
+                    .expect("pending stdin owner")
+                    .finish_write()
+                {
+                    cause = Some(io_cause("write child stdin", program, &error));
+                }
             } else if self.exit.is_none() {
                 match self.child.try_wait() {
                     Ok(status) => self.exit = status,
@@ -553,6 +630,26 @@ impl ProcessOwner {
                     Some(error.kind()),
                     error.to_string(),
                 ));
+            }
+        }
+        if let Some(writer) = self.stdin.as_mut() {
+            let outcome = writer.cancel_and_join_bounded(2_000);
+            if !outcome.completed {
+                self.diagnostics.push(ProcessDiagnostic::new(
+                    "cancel stdin",
+                    Some(std_io::ErrorKind::TimedOut),
+                    "overlapped stdin operation remains pending after cancellation",
+                ));
+            }
+            for error in outcome.errors {
+                self.diagnostics.push(ProcessDiagnostic::new(
+                    "cancel stdin",
+                    Some(error.kind()),
+                    error.to_string(),
+                ));
+            }
+            if outcome.completed {
+                self.stdin.take();
             }
         }
         if self.exit.is_none() {
@@ -607,8 +704,7 @@ impl ProcessOwner {
                 ));
             }
         }
-        let owned_work_pending =
-            self.exit.is_none() || self.stdout.is_pending() || self.stderr.is_pending();
+        let owned_work_pending = self.has_pending_cleanup();
         if owned_work_pending {
             self.diagnostics.push(ProcessDiagnostic::new(
                 "retain cleanup custody",
@@ -659,7 +755,10 @@ impl ProcessOwner {
     }
 
     fn has_pending_cleanup(&self) -> bool {
-        self.exit.is_none() || self.stdout.is_pending() || self.stderr.is_pending()
+        self.exit.is_none()
+            || self.stdout.is_pending()
+            || self.stderr.is_pending()
+            || self.stdin.as_ref().is_some_and(PipeWriter::is_pending)
     }
 
     fn finish_in_background(&mut self) {
@@ -678,7 +777,13 @@ impl ProcessOwner {
                 }
             }
         }
-        while self.stdout.is_pending() || self.stderr.is_pending() {
+        while self.stdout.is_pending()
+            || self.stderr.is_pending()
+            || self.stdin.as_ref().is_some_and(PipeWriter::is_pending)
+        {
+            if let Some(writer) = self.stdin.as_mut().filter(|writer| writer.is_pending()) {
+                let _ = writer.cancel_and_join_bounded(1_000);
+            }
             if self.stdout.is_pending() {
                 let _ = self.stdout.cancel_and_join_bounded(1_000);
             }
@@ -687,6 +792,29 @@ impl ProcessOwner {
             }
         }
     }
+}
+
+fn advance_stdin(writer: &mut PipeWriter) -> std_io::Result<()> {
+    if !writer.is_pending() && !writer.is_finished() {
+        writer.start_write()?;
+    }
+    if writer.is_pending() {
+        // SAFETY: the writer owns its live event for this nonblocking observation.
+        let wait = unsafe { WaitForSingleObject(writer.event_handle(), 0) };
+        if wait == WAIT_OBJECT_0 {
+            writer.finish_write()?;
+        } else if wait != WAIT_TIMEOUT {
+            return Err(if wait == WAIT_FAILED {
+                std_io::Error::last_os_error()
+            } else {
+                std_io::Error::new(
+                    std_io::ErrorKind::Other,
+                    format!("unexpected stdin event wait: {wait:#x}"),
+                )
+            });
+        }
+    }
+    Ok(())
 }
 
 fn append_bounded(output: &mut Vec<u8>, bytes: &[u8], limit: usize) -> bool {

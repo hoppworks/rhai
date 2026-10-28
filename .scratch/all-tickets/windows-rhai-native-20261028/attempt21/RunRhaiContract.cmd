@@ -1,0 +1,82 @@
+@echo off
+setlocal EnableExtensions DisableDelayedExpansion
+cd /d "%~dp0"
+if errorlevel 1 exit /b 60
+set CARGO_PROFILE_TEST_DEBUG=0
+set CARGO_INCREMENTAL=0
+set CARGO_PROFILE_TEST_CODEGEN_UNITS=256
+set CARGO_BUILD_JOBS=1
+echo RHAI_CARGO_LOW_MEMORY_PROFILE debug=0 incremental=0 codegen_units=256 jobs=1
+"%~dp0cargo.exe" test --locked --features testing-environ,sys,metadata --lib --test sys_process_windows --test sys_process_report --no-run > compile.log 2>&1
+set COMPILE_EXIT=%ERRORLEVEL%
+type compile.log
+if not "%COMPILE_EXIT%"=="0" exit /b 59
+set RHAI_WINDOWS_STDIN_WRONG_EXPECTATION=1
+"%~dp0cargo.exe" test --locked --features testing-environ,sys,metadata --test sys_process_windows windows_run_raw_transfers_blob_while_draining_both_streams -- --exact --nocapture > red.log 2>&1
+set RED_EXIT=%ERRORLEVEL%
+set RHAI_WINDOWS_STDIN_WRONG_EXPECTATION=
+type red.log
+if not "%RED_EXIT%"=="101" exit /b 61
+findstr /C:"deliberately wrong stdin round-trip expectation" red.log > NUL
+if errorlevel 1 exit /b 62
+findstr /C:"test result: FAILED. 0 passed; 1 failed" red.log > NUL
+if errorlevel 1 exit /b 63
+findstr /C:"windows_run_raw_transfers_blob_while_draining_both_streams" red.log > NUL
+if errorlevel 1 exit /b 64
+echo RHAI_RED_EXPECTED_ASSERTION_CONFIRMED
+set RHAI_WINDOWS_STDIN_TIMEOUT_WRONG_EXPECTATION=1
+"%~dp0cargo.exe" test --locked --features testing-environ,sys,metadata --test sys_process_windows windows_run_raw_times_out_with_unread_stdin -- --exact --nocapture > stdin-timeout-red.log 2>&1
+set STDIN_TIMEOUT_RED_EXIT=%ERRORLEVEL%
+set RHAI_WINDOWS_STDIN_TIMEOUT_WRONG_EXPECTATION=
+type stdin-timeout-red.log
+if not "%STDIN_TIMEOUT_RED_EXIT%"=="101" exit /b 87
+findstr /C:"deliberately wrong blocked stdin timeout expectation" stdin-timeout-red.log > NUL
+if errorlevel 1 exit /b 88
+findstr /C:"test result: FAILED. 0 passed; 1 failed" stdin-timeout-red.log > NUL
+if errorlevel 1 exit /b 89
+findstr /C:"windows_run_raw_times_out_with_unread_stdin" stdin-timeout-red.log > NUL
+if errorlevel 1 exit /b 90
+echo RHAI_STDIN_TIMEOUT_RED_CONFIRMED
+set RHAI_WINDOWS_OVERLAP_WRONG_EXPECTATION=1
+"%~dp0cargo.exe" test --locked --features testing-environ,sys,metadata --lib windows_ready_overflow_wins_over_expired_deadline -- --nocapture > overlap-red.log 2>&1
+set OVERLAP_RED_EXIT=%ERRORLEVEL%
+set RHAI_WINDOWS_OVERLAP_WRONG_EXPECTATION=
+type overlap-red.log
+if not "%OVERLAP_RED_EXIT%"=="101" exit /b 81
+findstr /C:"deliberately wrong overlap expectation" overlap-red.log > NUL
+if errorlevel 1 exit /b 82
+findstr /C:"test result: FAILED. 0 passed; 1 failed" overlap-red.log > NUL
+if errorlevel 1 exit /b 83
+findstr /C:"windows_ready_overflow_wins_over_expired_deadline" overlap-red.log > NUL
+if errorlevel 1 exit /b 84
+echo RHAI_OVERLAP_RED_EXPECTED_ASSERTION_CONFIRMED
+"%~dp0cargo.exe" test --locked --features testing-environ,sys,metadata --lib packages::sys::process::windows:: -- --nocapture > unit-green.log 2>&1
+set UNIT_GREEN_EXIT=%ERRORLEVEL%
+type unit-green.log
+if not "%UNIT_GREEN_EXIT%"=="0" exit /b 85
+findstr /C:"test result: ok. 9 passed; 0 failed" unit-green.log > NUL
+if errorlevel 1 exit /b 86
+echo RHAI_WINDOWS_UNIT_GREEN_CONFIRMED
+"%~dp0cargo.exe" test --locked --features testing-environ,sys,metadata --test sys_process_windows --test sys_process_report -- --nocapture > green.log 2>&1
+set GREEN_EXIT=%ERRORLEVEL%
+type green.log
+if not "%GREEN_EXIT%"=="0" exit /b 65
+findstr /C:"windows_run_raw_transfers_blob_while_draining_both_streams ... ok" green.log > NUL
+if errorlevel 1 exit /b 66
+if /I not "%CARGO_HOME%"=="%AGENT_RUNTIME_DIR%\work\cargo-home" exit /b 68
+if /I not "%CARGO_TARGET_DIR%"=="%AGENT_RUNTIME_DIR%\work\target" exit /b 69
+"%~dp0cargo.exe" clean --locked > "%TEMP%\rhai-cargo-clean.log" 2>&1
+set CLEAN_EXIT=%ERRORLEVEL%
+type "%TEMP%\rhai-cargo-clean.log"
+if not "%CLEAN_EXIT%"=="0" exit /b 71
+if exist "%CARGO_TARGET_DIR%\debug\rhai-run.exe" exit /b 72
+if exist "%CARGO_TARGET_DIR%\debug\deps\rhai_run.exe" exit /b 73
+echo RHAI_CARGO_TARGET_CLEAN_CONFIRMED
+"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "%~dp0ClearOwnedWorkReadOnly.ps1" > "%TEMP%\rhai-attributes.log" 2>&1
+if errorlevel 1 (
+ type "%TEMP%\rhai-attributes.log"
+ exit /b 70
+)
+type "%TEMP%\rhai-attributes.log"
+echo RHAI_GREEN_HOST_READBACK_CONFIRMED
+exit /b 0

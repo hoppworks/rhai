@@ -52,90 +52,7 @@ unsafe impl Send for PipeReader {}
 
 impl PipeReader {
     pub(super) fn pair() -> io::Result<(Self, OwnedHandle)> {
-        let mut nonce = [0u8; 16];
-        // SAFETY: the system-preferred RNG accepts a null algorithm handle and this live buffer.
-        let status = unsafe {
-            BCryptGenRandom(
-                ptr::null_mut(),
-                nonce.as_mut_ptr(),
-                nonce.len() as u32,
-                BCRYPT_USE_SYSTEM_PREFERRED_RNG,
-            )
-        };
-        if status != 0 {
-            return Err(io::Error::new(
-                io::ErrorKind::Other,
-                format!("cannot allocate private pipe name: NTSTATUS {status:#x}"),
-            ));
-        }
-        let mut name = String::from(r"\\.\pipe\rhai-sys-");
-        for byte in nonce {
-            use std::fmt::Write;
-            write!(&mut name, "{byte:02x}").expect("writing to String cannot fail");
-        }
-        let wide: Vec<u16> = name.encode_utf16().chain(Some(0)).collect();
-        // SAFETY: `wide` is NUL-terminated and remains live for the call. The OS owns the
-        // returned handle until it is transferred to `OwnedHandle` below.
-        let server_raw = unsafe {
-            CreateNamedPipeW(
-                wide.as_ptr(),
-                PIPE_ACCESS_INBOUND | FILE_FLAG_OVERLAPPED | FILE_FLAG_FIRST_PIPE_INSTANCE,
-                PIPE_TYPE_BYTE | PIPE_READMODE_BYTE | PIPE_WAIT | PIPE_REJECT_REMOTE_CLIENTS,
-                1,
-                READ_CHUNK as u32,
-                READ_CHUNK as u32,
-                0,
-                ptr::null(),
-            )
-        };
-        let server = own_file_handle(server_raw)?;
-        // Only this process knows the random pipe name. `Command` will create the inheritable
-        // child-side duplicate when this owned endpoint becomes `Stdio`.
-        // SAFETY: `wide` and `server` remain live across the client open.
-        let client_raw = unsafe {
-            CreateFileW(
-                wide.as_ptr(),
-                GENERIC_WRITE,
-                0,
-                ptr::null(),
-                OPEN_EXISTING,
-                FILE_ATTRIBUTE_NORMAL,
-                ptr::null_mut(),
-            )
-        };
-        let client = own_file_handle(client_raw)?;
-        // SAFETY: the unnamed event has no borrowed security data and is owned on success.
-        let event_raw = unsafe { CreateEventW(ptr::null(), 1, 0, ptr::null()) };
-        let event = own_null_handle(event_raw)?;
-        let mut operation = Box::new(OVERLAPPED::default());
-        operation.hEvent = handle(&event);
-        // A client can connect between server creation and this call. That precise race is
-        // reported as ERROR_PIPE_CONNECTED and means the endpoint is ready for I/O.
-        // SAFETY: server, event and boxed OVERLAPPED remain live until the connection finishes.
-        let connected = unsafe { ConnectNamedPipe(handle(&server), operation.as_mut()) };
-        if connected == 0 {
-            let error = io::Error::last_os_error();
-            match error.raw_os_error().map(|n| n as u32) {
-                Some(ERROR_PIPE_CONNECTED) => {}
-                Some(ERROR_IO_PENDING) => {
-                    let mut transferred = 0;
-                    // SAFETY: this waits for the outstanding connection before reusing the
-                    // OVERLAPPED storage or releasing the event.
-                    if unsafe {
-                        GetOverlappedResult(
-                            handle(&server),
-                            operation.as_ref(),
-                            &mut transferred,
-                            1,
-                        )
-                    } == 0
-                    {
-                        return Err(io::Error::last_os_error());
-                    }
-                }
-                _ => return Err(error),
-            }
-        }
+        let (server, client, event, operation) = pipe_pair(PIPE_ACCESS_INBOUND, GENERIC_WRITE)?;
         Ok((
             Self {
                 server,
@@ -335,6 +252,93 @@ impl Drop for PipeReader {
 
 fn handle(value: &OwnedHandle) -> HANDLE {
     value.as_raw_handle() as HANDLE
+}
+
+/// Create a random private named pipe and complete its local connection before use.
+pub(super) fn pipe_pair(
+    server_access: u32,
+    child_access: u32,
+) -> io::Result<(OwnedHandle, OwnedHandle, OwnedHandle, Box<OVERLAPPED>)> {
+    let mut nonce = [0u8; 16];
+    // SAFETY: the system-preferred RNG accepts a null algorithm handle and this live buffer.
+    let status = unsafe {
+        BCryptGenRandom(
+            ptr::null_mut(),
+            nonce.as_mut_ptr(),
+            nonce.len() as u32,
+            BCRYPT_USE_SYSTEM_PREFERRED_RNG,
+        )
+    };
+    if status != 0 {
+        return Err(io::Error::new(
+            io::ErrorKind::Other,
+            format!("cannot allocate private pipe name: NTSTATUS {status:#x}"),
+        ));
+    }
+    let mut name = String::from(r"\\.\pipe\rhai-sys-");
+    for byte in nonce {
+        use std::fmt::Write;
+        write!(&mut name, "{byte:02x}").expect("writing to String cannot fail");
+    }
+    let wide: Vec<u16> = name.encode_utf16().chain(Some(0)).collect();
+    // SAFETY: `wide` is NUL-terminated and remains live for the call. The OS owns the
+    // returned handle until it is transferred to `OwnedHandle` below.
+    let server_raw = unsafe {
+        CreateNamedPipeW(
+            wide.as_ptr(),
+            server_access | FILE_FLAG_OVERLAPPED | FILE_FLAG_FIRST_PIPE_INSTANCE,
+            PIPE_TYPE_BYTE | PIPE_READMODE_BYTE | PIPE_WAIT | PIPE_REJECT_REMOTE_CLIENTS,
+            1,
+            READ_CHUNK as u32,
+            READ_CHUNK as u32,
+            0,
+            ptr::null(),
+        )
+    };
+    let server = own_file_handle(server_raw)?;
+    // Only this process knows the random pipe name. `Command` will create the inheritable
+    // child-side duplicate when this owned endpoint becomes `Stdio`.
+    // SAFETY: `wide` and `server` remain live across the client open.
+    let client_raw = unsafe {
+        CreateFileW(
+            wide.as_ptr(),
+            child_access,
+            0,
+            ptr::null(),
+            OPEN_EXISTING,
+            FILE_ATTRIBUTE_NORMAL,
+            ptr::null_mut(),
+        )
+    };
+    let client = own_file_handle(client_raw)?;
+    // SAFETY: the unnamed event has no borrowed security data and is owned on success.
+    let event_raw = unsafe { CreateEventW(ptr::null(), 1, 0, ptr::null()) };
+    let event = own_null_handle(event_raw)?;
+    let mut operation = Box::new(OVERLAPPED::default());
+    operation.hEvent = handle(&event);
+    // A client can connect between server creation and this call. That precise race is
+    // reported as ERROR_PIPE_CONNECTED and means the endpoint is ready for I/O.
+    // SAFETY: server, event and boxed OVERLAPPED remain live until the connection finishes.
+    let connected = unsafe { ConnectNamedPipe(handle(&server), operation.as_mut()) };
+    if connected == 0 {
+        let error = io::Error::last_os_error();
+        match error.raw_os_error().map(|n| n as u32) {
+            Some(ERROR_PIPE_CONNECTED) => {}
+            Some(ERROR_IO_PENDING) => {
+                let mut transferred = 0;
+                // SAFETY: this waits for the outstanding connection before reusing the
+                // OVERLAPPED storage or releasing the event.
+                if unsafe {
+                    GetOverlappedResult(handle(&server), operation.as_ref(), &mut transferred, 1)
+                } == 0
+                {
+                    return Err(io::Error::last_os_error());
+                }
+            }
+            _ => return Err(error),
+        }
+    }
+    Ok((server, client, event, operation))
 }
 
 fn own_file_handle(raw: HANDLE) -> io::Result<OwnedHandle> {
