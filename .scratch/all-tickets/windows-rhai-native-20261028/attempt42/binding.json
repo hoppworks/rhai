@@ -1,0 +1,19 @@
+{
+  "nonce": "a2acaef1e83f2b17389bb5b32034219d",
+  "source_commit": "879d4970dc15f6600e29e968b62338e5122414be",
+  "manifest_sha256": "54ebbd127909a7ae402c1fdd10a6d4cb5fb30db225d8612ded9f2aac4bcc74ba",
+  "archive_sha256": "5fc6c9e3082e619b884cf2c9b60ab1192d418a7ab18123826e1add877af9b0cb",
+  "file_count": 441,
+  "source_bytes": 5232729,
+  "expected": "HEAD plus isolated new X32 Direct test: wrong control and restored GREEN",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": true,
+  "command_dispatched": true,
+  "product_test_started": true,
+  "dispatch_recorded_utc": "2026-10-28T13:11:08.509856+00:00",
+  "outcome": "HEAD plus test wrong RED and GREEN; narrow PowerShell case",
+  "driver_elapsed_seconds": 75.6075582
+}

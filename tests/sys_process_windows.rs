@@ -531,6 +531,42 @@ fn windows_run_raw_rejects_timeout_outside_duration_range_before_spawn() {
     assert!(child_record.is_none(), "rejected timeout started a real child");
 }
 
+/// Public argument encoding is checked against a file written by a real PowerShell
+/// child, not against another copy of the parent-side quoting algorithm.
+#[test]
+fn windows_direct_run_preserves_embedded_quote_argument() {
+    let records = TempDir::new();
+    let script_file = records.path().join("read argument.ps1");
+    let record = records.path().join("argument.txt");
+    std::fs::write(
+        &script_file,
+        b"[IO.File]::WriteAllText($env:RHAI_WINDOWS_ARG_RECORD, [string]$args[0], [Text.UTF8Encoding]::new($false))\r\n",
+    )
+    .expect("write own PowerShell argument fixture");
+    let powershell = std::path::PathBuf::from(std::env::var_os("SystemRoot").expect("SystemRoot"))
+        .join(r"System32\WindowsPowerShell\v1.0\powershell.exe");
+    let argument = "before\"after";
+    let mut scope = Scope::new();
+    scope.push("program", powershell.to_string_lossy().into_owned());
+    scope.push("fixture", script_file.to_string_lossy().into_owned());
+    scope.push("argument", argument.to_owned());
+    scope.push("record", record.to_string_lossy().into_owned());
+    let result = engine(SysConfig::default().programs(ProgramPolicy::Any))
+        .eval_with_scope::<Map>(
+            &mut scope,
+            r#"run_raw(program, ["-NoProfile", "-NonInteractive", "-ExecutionPolicy", "Bypass", "-File", fixture, argument],
+                #{ env: #{ RHAI_WINDOWS_ARG_RECORD: record }, timeout: 15 })"#,
+        )
+        .expect("public run of argument fixture");
+    assert_eq!(result["code"].as_int().unwrap(), 0);
+    let observed = std::fs::read_to_string(&record).expect("independent child argument record");
+    eprintln!("windows_argument_readback={observed:?}");
+    if std::env::var_os("RHAI_WINDOWS_ARG_WRONG_EXPECTATION").is_some() {
+        assert_ne!(observed, argument, "deliberately wrong Windows argument expectation");
+    }
+    assert_eq!(observed, argument, "child must receive the embedded quote intact");
+}
+
 /// Public Windows run contract: raw streams, nonzero exit as data, and completion after the
 /// child-written pre-exit record, captured streams and exact OS process-handle termination
 /// are observed independently.
