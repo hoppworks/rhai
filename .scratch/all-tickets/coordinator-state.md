@@ -10,11 +10,11 @@ Use current central agent-skills `d6024420` plus applicable local edits and proj
 
 ## Current step
 
-Fork-main contains the reviewed Managed Windows persistent-refusal/final-drop package at `d5fbb6f6d576759a1d05fec54f364f3176c4a440`. X33 attempt61 now has native Windows wrong101/restored0, 31/31 process target, independent selected executable readback, complete scoped custody/export and combined independent PASS; integration to fork main is next. A–F/Ticket03/release acceptance remain open.
+Fork-main is `bf3c51015f005dbb172f5e55690cb9e57f695f04`, containing reviewed X33 Managed child-PATH competition and prior Managed refusal/final-drop work. Exact remote main readback matched; it is the only remote branch and this worktree is clean. A–F/Ticket03/release acceptance remain open.
 
 ## Next action
 
-Commit this reviewed X33 test/proof atomically and fast-forward fork main, verifying exact remote head and only `main`; then return to incomplete-membership/real-fault contracts. Retire guest outer scopes only after current exact identity and inactivity checks.
+Inspect the next incomplete-membership or real-fault Managed contract and select the smallest public/native test that closes a named open criterion. Reuse source-bound attempt59–61 proof. Retire guest outer scopes only after current exact identity and inactivity checks.
 
 ## Goal
 
@@ -30,7 +30,7 @@ Close Managed Windows fault/lifecycle and remaining argument/IO cases; finish na
 
 ## Done steps
 
-Fork main contains accepted Windows sys policy/env/fs, six net targets, Direct raw/text process, input/timeout/spawn/drop, X32 quoted argv, X33 Direct PATH/implicit exe and Managed CWD, and the bounded Managed package through attempt60. Attempt61's reviewed Managed PATH competition awaits fork-main integration. Earlier Linux/Darwin/core/WASM/MSRV rows retain their listed scopes.
+Fork main contains accepted Windows sys policy/env/fs, six net targets, Direct raw/text process, input/timeout/spawn/drop, X32 quoted argv, X33 Direct PATH/implicit exe and Managed CWD/child-PATH competition, and the bounded Managed package through attempt61. Earlier Linux/Darwin/core/WASM/MSRV rows retain their listed scopes.
 
 ## Accepted evidence
 
