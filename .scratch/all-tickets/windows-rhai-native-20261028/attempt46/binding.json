@@ -1,0 +1,19 @@
+{
+  "nonce": "9cb2383011c0d3f44f84003b3a0b5737",
+  "source_commit": "192b6af955b3b0ba0b04ff02ab01e8ddc9e5e256",
+  "manifest_sha256": "54cf341805f15e63649639be2d7b79b3ed8d19e8003ce928cb0719d2ff560b04",
+  "archive_sha256": "fcbd3aa6990d8974e26be411d5a3aaf2af9376e6a48b96f0da661f6c894788aa",
+  "file_count": 442,
+  "source_bytes": 5242167,
+  "expected": "isolated HEAD baseline RED, exact fix, custody wrong/green and pending mutant/green",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": true,
+  "command_dispatched": true,
+  "product_test_started": true,
+  "dispatch_recorded_utc": "2026-10-28T13:52:22.176542+00:00",
+  "outcome": "isolated baseline RED, exact fix, custody wrong/GREEN and pending mutant/GREEN",
+  "driver_elapsed_seconds": 107.4753738
+}

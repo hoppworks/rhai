@@ -1,0 +1,109 @@
+{
+  "id": "rhai-native-9cb2383011c0d3f44f84003b3a0b5737",
+  "frames": 208,
+  "files": {
+    "observer.json": {
+      "path": "observer.json",
+      "sha256": "02c0f963c2fca5c5c357609ca7feda800f6c2284de19169f7c41c3978c52d4da",
+      "length": 1286
+    },
+    "driver.stdout": {
+      "path": "driver.stdout",
+      "sha256": "f725e86ce5153c48e9b0166b847f551c17c5d9dcdddfde4013c1346935f3fdea",
+      "length": 512
+    },
+    "driver.stderr": {
+      "path": "driver.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "source-manifest.json": {
+      "path": "source-manifest.json",
+      "sha256": "54cf341805f15e63649639be2d7b79b3ed8d19e8003ce928cb0719d2ff560b04",
+      "length": 66382
+    },
+    "preflight.json": {
+      "path": "preflight.json",
+      "sha256": "7be96251153da13207edce1e3bf5b05798dc8f1ee6927b1beda8342a7fcf47f4",
+      "length": 1430
+    },
+    "build-manifest.txt": {
+      "path": "build-manifest.txt",
+      "sha256": "8c625daf866e4bb5e30259b9fb3d27cafcb4e8e5ee813a5b07b6a5e4160ee0d1",
+      "length": 1834
+    },
+    "run/.scoped-run-e0fb29a15b1f4c6eb39f83c3ae25790f.journal": {
+      "path": "run/.scoped-run-e0fb29a15b1f4c6eb39f83c3ae25790f.journal",
+      "sha256": "60a38053875d8045c3730e349c346d51179b1490dfb79c23a8225564e6b69075",
+      "length": 2354
+    },
+    "run/.scoped-evidence-51debaadd95a4b748b1517176aba3bef/stdout.log": {
+      "path": "run/.scoped-evidence-51debaadd95a4b748b1517176aba3bef/stdout.log",
+      "sha256": "2c76e08154da8f48f5d0197b8ebfe6bc4e3ae912dfacf0af5acc639d272185cb",
+      "length": 237
+    },
+    "run/.scoped-evidence-51debaadd95a4b748b1517176aba3bef/stderr.log": {
+      "path": "run/.scoped-evidence-51debaadd95a4b748b1517176aba3bef/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/.scoped-evidence-51debaadd95a4b748b1517176aba3bef/manifest.txt": {
+      "path": "run/.scoped-evidence-51debaadd95a4b748b1517176aba3bef/manifest.txt",
+      "sha256": "2d1cbd26276836dcd06a55c9ed31659d527d6931ceab271513ee902197bd9911",
+      "length": 82640
+    },
+    "run/.scoped-evidence-51debaadd95a4b748b1517176aba3bef/runtime/compile.log": {
+      "path": "run/.scoped-evidence-51debaadd95a4b748b1517176aba3bef/runtime/compile.log",
+      "sha256": "9d15efc505947469e2982406bfd1910bcc966895a04a8e01268308c6e3e2f0f6",
+      "length": 4387
+    },
+    "run/.scoped-evidence-51debaadd95a4b748b1517176aba3bef/runtime/baseline-red.log": {
+      "path": "run/.scoped-evidence-51debaadd95a4b748b1517176aba3bef/runtime/baseline-red.log",
+      "sha256": "6f113689dd6f98cda0fa0a05032a1e44048706bc927d360e7acb48fb39f716a2",
+      "length": 1415
+    },
+    "run/.scoped-evidence-51debaadd95a4b748b1517176aba3bef/runtime/fix.log": {
+      "path": "run/.scoped-evidence-51debaadd95a4b748b1517176aba3bef/runtime/fix.log",
+      "sha256": "babba17123e3026e6e3a656471abe1bfa4220a026d0c83ff0a2622ff7eabbe9c",
+      "length": 169
+    },
+    "run/.scoped-evidence-51debaadd95a4b748b1517176aba3bef/runtime/wrong.log": {
+      "path": "run/.scoped-evidence-51debaadd95a4b748b1517176aba3bef/runtime/wrong.log",
+      "sha256": "f3af69f2a03e8528c0824877c514892c27ed911f433bd1a0b5468a66601ac338",
+      "length": 1605
+    },
+    "run/.scoped-evidence-51debaadd95a4b748b1517176aba3bef/runtime/green.log": {
+      "path": "run/.scoped-evidence-51debaadd95a4b748b1517176aba3bef/runtime/green.log",
+      "sha256": "492a44b8d2819488fad0b961926a8462c534342f3372d59195cc4fd60a86d8f4",
+      "length": 1083
+    },
+    "run/.scoped-evidence-51debaadd95a4b748b1517176aba3bef/runtime/pending-red.log": {
+      "path": "run/.scoped-evidence-51debaadd95a4b748b1517176aba3bef/runtime/pending-red.log",
+      "sha256": "90997779971e79de87eea55892de75b2909ca91625a9acba2cc3f22085405d67",
+      "length": 1428
+    },
+    "run/.scoped-evidence-51debaadd95a4b748b1517176aba3bef/runtime/pending-green.log": {
+      "path": "run/.scoped-evidence-51debaadd95a4b748b1517176aba3bef/runtime/pending-green.log",
+      "sha256": "8599953c046008ef89d90f75c0fbaef5e13d486a058cbb87813b08a519707bd6",
+      "length": 924
+    }
+  },
+  "begin": {
+    "id": "rhai-native-9cb2383011c0d3f44f84003b3a0b5737",
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-9cb23830",
+    "accepted": true,
+    "exit": 0,
+    "driver_pid": 6860,
+    "driver_creation": 134376727591243388
+  },
+  "end": {
+    "guest_evidence_retained": true,
+    "accepted": true,
+    "files": 17,
+    "id": "rhai-native-9cb2383011c0d3f44f84003b3a0b5737",
+    "exit": 0
+  },
+  "bytes": 167686,
+  "serial_sha256": "8f2b7e469408f8147fc20e5a0cb90cede4b6a53189d3d3318b96277dfb358833",
+  "serial_bytes": 339786
+}

@@ -439,6 +439,8 @@ struct ProcessOwner {
     diagnostics: Vec<ProcessDiagnostic>,
     #[cfg(test)]
     retirement_probe: Option<Arc<child::PendingProbe>>,
+    #[cfg(test)]
+    retirement_panic_probe: Option<Arc<std::sync::atomic::AtomicBool>>,
 }
 
 type RetainedOwner = Arc<Mutex<Option<ProcessOwner>>>;
@@ -449,6 +451,10 @@ fn retained_registry() -> &'static Mutex<Vec<RetainedOwner>> {
 }
 
 fn retain_for_cleanup(owner: ProcessOwner) -> std_io::Result<()> {
+    retain_for_cleanup_inner(owner).map(|_| ())
+}
+
+fn retain_for_cleanup_inner(owner: ProcessOwner) -> std_io::Result<RetainedOwner> {
     let cell = Arc::new(Mutex::new(Some(owner)));
     retained_registry()
         .lock()
@@ -456,17 +462,29 @@ fn retain_for_cleanup(owner: ProcessOwner) -> std_io::Result<()> {
         .push(Arc::clone(&cell));
     // The registry holds the owner even if thread creation fails. Once started, the worker
     // exclusively owns it until both child and pending I/O reach observed completion.
+    let worker_cell = Arc::clone(&cell);
     thread::Builder::new()
         .name("rhai-windows-process-cleanup".into())
         .spawn(move || {
-            let mut owner = cell
+            let mut owner = worker_cell
                 .lock()
                 .unwrap_or_else(|poisoned| poisoned.into_inner())
                 .take()
                 .expect("retained cleanup owner missing");
             #[cfg(test)]
             let probe = owner.retirement_probe.clone();
-            owner.finish_in_background();
+            if catch_unwind(AssertUnwindSafe(|| owner.finish_in_background())).is_err() {
+                // Preserve the exact owner, including pending I/O, Job and permit, when
+                // cleanup cannot complete. Do not drop it or claim retirement after a panic.
+                let mut slot = worker_cell.lock().unwrap_or_else(|poisoned| poisoned.into_inner());
+                if slot.is_none() {
+                    *slot = Some(owner);
+                } else {
+                    // An unexpected competing owner must not cause either owner to be dropped.
+                    std::mem::forget(owner);
+                }
+                return;
+            }
             #[cfg(test)]
             {
                 drop(owner);
@@ -475,9 +493,9 @@ fn retain_for_cleanup(owner: ProcessOwner) -> std_io::Result<()> {
             retained_registry()
                 .lock()
                 .unwrap_or_else(|poisoned| poisoned.into_inner())
-                .retain(|entry| !Arc::ptr_eq(entry, &cell));
+                .retain(|entry| !Arc::ptr_eq(entry, &worker_cell));
         })
-        .map(|_| ())
+        .map(|_| cell)
 }
 
 impl ProcessOwner {
@@ -500,6 +518,8 @@ impl ProcessOwner {
             diagnostics: Vec::new(),
             #[cfg(test)]
             retirement_probe: None,
+            #[cfg(test)]
+            retirement_panic_probe: None,
         }
     }
 
@@ -825,6 +845,12 @@ impl ProcessOwner {
     }
 
     fn finish_in_background(&mut self) {
+        #[cfg(test)]
+        if self.retirement_panic_probe.as_ref().is_some_and(|probe| {
+            !probe.swap(true, Ordering::AcqRel)
+        }) {
+            panic!("deliberate per-owner cleanup panic");
+        }
         while self.exit.is_none() {
             if let Ok(Some(status)) = self.child.try_wait() {
                 self.exit = Some(status);
@@ -960,6 +986,137 @@ mod tests {
     use super::*;
     use std::fs::File;
     use std::io::Write;
+    use std::os::windows::io::{FromRawHandle, OwnedHandle, RawHandle};
+    use windows_sys::Win32::Foundation::{DuplicateHandle, DUPLICATE_SAME_ACCESS};
+    use windows_sys::Win32::System::Threading::{GetCurrentProcess, TerminateProcess};
+
+    #[test]
+    fn windows_cleanup_panic_fixture() {
+        let Some(root) = std::env::var_os("RHAI_WINDOWS_CLEANUP_PANIC_FIXTURE") else { return; };
+        let root = std::path::Path::new(&root);
+        std::fs::write(root.join("ready"), format!("{}\n", std::process::id())).unwrap();
+        let deadline = Instant::now() + Duration::from_secs(20);
+        while Instant::now() < deadline {
+            if root.join("release").exists() { return; }
+            thread::sleep(Duration::from_millis(10));
+        }
+        panic!("cleanup panic fixture was not released");
+    }
+
+    struct CleanupFixtureGuard {
+        handle: Option<OwnedHandle>,
+        root: std::path::PathBuf,
+    }
+
+    struct PendingFixtureSpawn {
+        child: Option<Child>,
+        root: std::path::PathBuf,
+    }
+
+    impl Drop for PendingFixtureSpawn {
+        fn drop(&mut self) {
+            let Some(mut child) = self.child.take() else { return; };
+            let raw = child.as_raw_handle() as HANDLE;
+            // SAFETY: the exact child remains owned through bounded termination.
+            if unsafe { WaitForSingleObject(raw, 0) } != WAIT_OBJECT_0 { let _ = child.kill(); }
+            if unsafe { WaitForSingleObject(raw, 10_000) } == WAIT_OBJECT_0 {
+                let _ = child.wait();
+                let _ = std::fs::remove_dir_all(&self.root);
+            } else {
+                eprintln!("unconfirmed cleanup fixture spawn; preserve exact handle and root");
+                std::mem::forget(child);
+            }
+        }
+    }
+
+    impl Drop for CleanupFixtureGuard {
+        fn drop(&mut self) {
+            let Some(handle) = self.handle.take() else { return; };
+            let raw = handle.as_raw_handle() as HANDLE;
+            // SAFETY: this guard owns the exact duplicated child handle.
+            if unsafe { WaitForSingleObject(raw, 0) } != WAIT_OBJECT_0 {
+                unsafe { TerminateProcess(raw, 1); }
+            }
+            if unsafe { WaitForSingleObject(raw, 10_000) } == WAIT_OBJECT_0 {
+                let _ = std::fs::remove_dir_all(&self.root);
+            } else {
+                eprintln!("cleanup panic fixture exit unconfirmed; preserve exact handle and root");
+                std::mem::forget(handle);
+            }
+        }
+    }
+
+    #[test]
+    fn windows_cleanup_panic_preserves_exact_owner_and_permit() {
+        let nonce = std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_nanos();
+        let root = std::env::temp_dir().join(format!("rhai-cleanup-panic-{}-{nonce}", std::process::id()));
+        std::fs::create_dir(&root).unwrap();
+        let child = Command::new(std::env::current_exe().unwrap())
+            .args(["--exact", "packages::sys::process::windows::tests::windows_cleanup_panic_fixture", "--nocapture", "--quiet"])
+            .env_clear().env("RHAI_WINDOWS_CLEANUP_PANIC_FIXTURE", &root)
+            .stdin(Stdio::null()).stdout(Stdio::null()).stderr(Stdio::null())
+            .spawn().expect("start gated cleanup panic fixture");
+        let mut pending = PendingFixtureSpawn { child: Some(child), root: root.clone() };
+        let child = pending.child.as_ref().unwrap();
+        let pid = child.id();
+        let mut duplicate = std::ptr::null_mut();
+        // SAFETY: child owns the original live handle; the duplicate is independently owned.
+        assert_ne!(unsafe { DuplicateHandle(GetCurrentProcess(), child.as_raw_handle() as HANDLE,
+            GetCurrentProcess(), &mut duplicate, 0, 0, DUPLICATE_SAME_ACCESS) }, 0);
+        let exact = unsafe { OwnedHandle::from_raw_handle(duplicate as RawHandle) };
+        let guard = CleanupFixtureGuard { handle: Some(exact), root: root.clone() };
+        let child = pending.child.take().unwrap();
+        drop(pending);
+        let deadline = Instant::now() + Duration::from_secs(5);
+        loop {
+            match std::fs::read_to_string(root.join("ready")) {
+                Ok(value) => { assert_eq!(value.trim().parse::<u32>().unwrap(), pid); break; }
+                Err(error) if error.kind() == std_io::ErrorKind::NotFound && Instant::now() < deadline => thread::sleep(Duration::from_millis(10)),
+                Err(error) => panic!("cleanup fixture readiness: {error}"),
+            }
+        }
+        assert_eq!(unsafe { WaitForSingleObject(guard.handle.as_ref().unwrap().as_raw_handle() as HANDLE, 0) }, WAIT_TIMEOUT);
+        let (stdout, stdout_writer) = PipeReader::pair().unwrap();
+        let (stderr, stderr_writer) = PipeReader::pair().unwrap();
+        drop(stdout_writer); drop(stderr_writer);
+        let probe = Arc::new(std::sync::atomic::AtomicBool::new(false));
+        let mut owner = ProcessOwner::new(child, None, stdout, stderr, ActivePermit::acquire().unwrap());
+        owner.retirement_panic_probe = Some(Arc::clone(&probe));
+        let cell = retain_for_cleanup_inner(owner).expect("start cleanup worker");
+        let deadline = Instant::now() + Duration::from_secs(3);
+        while !probe.load(Ordering::Acquire) && Instant::now() < deadline { thread::sleep(Duration::from_millis(10)); }
+        assert!(probe.load(Ordering::Acquire), "per-owner cleanup panic was not reached");
+        let mut retained = None;
+        while Instant::now() < deadline {
+            {
+                let registry = retained_registry().lock().unwrap_or_else(|p| p.into_inner());
+                if registry.iter().any(|entry| Arc::ptr_eq(entry, &cell)) {
+                    if let Some(owner) = cell.lock().unwrap_or_else(|p| p.into_inner()).take() {
+                        retained = Some(owner);
+                    }
+                }
+            }
+            if retained.is_some() { break; }
+            thread::sleep(Duration::from_millis(10));
+        }
+        let owner_was_retained = retained.is_some();
+        assert!(owner_was_retained, "cleanup worker must preserve exact owner and permit after panic");
+        let mut owner = retained.unwrap();
+        assert_eq!(owner.child.id(), pid);
+        assert_eq!(unsafe { WaitForSingleObject(guard.handle.as_ref().unwrap().as_raw_handle() as HANDLE, 0) }, WAIT_TIMEOUT);
+        owner.child.kill().expect("terminate exact retained child");
+        assert_eq!(unsafe { WaitForSingleObject(guard.handle.as_ref().unwrap().as_raw_handle() as HANDLE, 10_000) }, WAIT_OBJECT_0,
+            "exact retained child did not terminate");
+        owner.child.wait().expect("reap exact retained child");
+        assert_eq!(unsafe { WaitForSingleObject(guard.handle.as_ref().unwrap().as_raw_handle() as HANDLE, 0) }, WAIT_OBJECT_0);
+        retained_registry().lock().unwrap_or_else(|p| p.into_inner()).retain(|entry| !Arc::ptr_eq(entry, &cell));
+        drop(owner);
+        drop(guard);
+        eprintln!("windows_cleanup_panic_readback exact_child_reaped=true owner_retained=true");
+        if std::env::var_os("RHAI_WINDOWS_CLEANUP_PANIC_WRONG_EXPECTATION").is_some() {
+            assert!(!owner_was_retained, "deliberately wrong cleanup custody expectation");
+        }
+    }
 
     #[test]
     fn windows_ready_overflow_wins_over_expired_deadline() {

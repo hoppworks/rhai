@@ -1411,6 +1411,8 @@ applicable revision.
 | Process performance/diagnostics and resource safeguards | Accepted narrow Linux performance and lifecycle diagnostics remain with measurement scope; uncovered native requirements C/D/F. No duplicate benchmark solely for this revision. |
 | Owner boundaries and repository outcome | No arbitrary-untrusted sandbox claim, parent env mutation, unrelated features, Actions enablement or publishing. Verified integration only to hoppworks/rhai main, lowercase hoppworks attribution, foreign work preserved. The owner explicitly authorized atomic commit and push of this verified package to the fork; no public-upstream write is authorized. |
 
+Native Windows `testing-environ,sys,metadata` now has a narrow panic-before-cleanup custody RED/GREEN and affected pending-stdin cancellation regression, independently reviewed at `.scratch/all-tickets/windows-rhai-native-20261028/attempt46/proof.md`. Other panic points, abort semantics, managed-job closure and the release matrix remain open.
+
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance
 matrix or closure count. Historical implementation notes and estimates follow.
