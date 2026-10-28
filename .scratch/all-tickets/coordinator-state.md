@@ -10,11 +10,11 @@ Use current central agent-skills `d6024420` plus applicable local edits and proj
 
 ## Current step
 
-Fork-main is `a131c6c9`, including reviewed Windows X35 Managed normal-exit and DirectChild contrast. The current uncommitted macOS Rust1.77.2 combined `no_index,sync,metadata` slice passed a combined independent review. A–F/Ticket03/release acceptance remain open.
+Fork-main is `ac902e52`, including reviewed Windows X35 contrasts and native macOS Rust1.77.2 combined `no_index,sync,metadata`. The new macOS combined `only_i32,no_float` slice passed independent review and awaits commit. A–F/Ticket03/release acceptance remain open.
 
 ## Next action
 
-Commit and push the reviewed macOS slice to fork main, verify remote head, then select the next open native profile or Managed fault contract. Retire guest scopes only after identity/inactivity checks.
+Commit/push the reviewed `only_i32,no_float` slice to fork main, verify remote head, then check Workhorse capacity for its Linux profile. Retire guest scopes only after identity/inactivity checks.
 
 ## Goal
 
@@ -30,11 +30,13 @@ Close Managed Windows fault/lifecycle and remaining argument/IO cases; finish na
 
 ## Done steps
 
-Fork main contains accepted Windows sys policy/env/fs, six net targets, Direct raw/text process, input/timeout/spawn/drop, X32 quoted argv, X33 Direct PATH/implicit exe and Managed CWD/child-PATH competition, and the bounded Managed package through attempt61. Earlier Linux/Darwin/core/WASM/MSRV rows retain their listed scopes.
+Fork main contains accepted Windows sys policy/env/fs, net targets, Direct process/input/lifecycle, X32/X33 argument/search and bounded Managed cases. Earlier Linux/Darwin/core/WASM/MSRV rows retain listed scopes.
 
 ## Accepted evidence
 
 MacOS27.2 arm64/Rust1.77.2 `testing-environ,sys,net,no_index,sync,metadata`: attempt01 compiled eight targets, passed six suites and combined filesystem wrong101, but stopped on a test-only `/bin/true` assumption. Attempt03's correction passed process/report 2/2+8/8 and exact process exit-code wrong101. Source/lock/profile applicability, cleanup and combined review PASS: `.scratch/all-tickets/release-matrix-20261028/proof.md`.
+
+MacOS27.2 arm64/Rust1.77.2 `testing-environ,sys,net,only_i32,no_float`: 11 targets compiled, combined wrong101, restored 135/0/1ignored, independent combined review PASS. Only named behaviors accepted; `.scratch/all-tickets/release-matrix-20261028/macos-onlyi32-nofloat-proof.md`.
 
 Attempts36–39 exposed false Job closure. Attempts50–58 cover batch injection/fix, exact membership, bounded retry, public Managed lifecycle, parent-CWD resolution, full 31-test Windows process target and assertion controls under their documented bindings. Attempt57 is diagnostic RED only. New attempt59 manifested a real missed exact-child fallback after a permanently refused Job exhausted the shared 30-second deadline. The correction preserves finite Job retry and grants at least five seconds each for exact-child and I/O fallback. Native Windows Rust/Cargo1.93.0, `testing-environ,sys,metadata`, manifest `34686903...`, lock `12084a90...`: synthetic permanent-refusal wrong101/restored GREEN0 with 299 refusals, exact child stopped and retained owner; two neighboring unit tests green. Attempt60 reused byte-identical source and passed public final-drop kill/retain wrong101/101 and GREEN0, with independent parent/worker/sentinel readbacks. Observer Driver0 for both, 198/200 frames, 14 files each, eight CRC journal transitions through REMOVED, exact host cleanup. Combined Terra review READY for the bounded package. Actual OS faults, live descendants under permanent refusal, other features/toolchains and release remain open. Proof: `.scratch/all-tickets/windows-rhai-native-20261028/attempt59/` and `attempt60/`.
 

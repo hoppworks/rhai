@@ -1487,6 +1487,15 @@ returned PASS. The first eight-target invocation did not pass as a whole.
 Other profile combinations, Linux/Windows native rows and the full release
 matrix remain open.
 
+At fork-main `ac902e52`, native macOS 27.2 arm64/Rust-Cargo 1.77.2 also passed
+the combined `testing-environ,sys,net,only_i32,no_float` slice:
+`.scratch/all-tickets/release-matrix-20261028/macos-onlyi32-nofloat-proof.md`.
+Eleven targets compiled, the independent combined filesystem expectation failed
+as intended, and the restored suite passed 135 tests with one ignored. Its
+`net_metadata` target ran zero tests because `metadata` was disabled. One
+independent combined review returned PASS for the named behavior; exhaustive
+integer/float semantics, other feature/OS/MSRV rows and release remain open.
+
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance
 matrix or closure count. Historical implementation notes and estimates follow.
