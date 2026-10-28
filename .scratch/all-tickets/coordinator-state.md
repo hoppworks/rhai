@@ -10,11 +10,11 @@ Use current central agent-skills `d6024420` plus applicable local edits and proj
 
 ## Current step
 
-Fork-main is `3e19f671`, including reviewed Windows X35 contrasts, macOS feature slices and Linux integer-only slice. The macOS `metadata,serde` package passed combined review and targeted Serde recheck; it awaits commit. A–F/Ticket03/release remain open.
+Fork-main is `20f1092d`, including reviewed Windows X35 contrasts and four macOS/Linux feature slices. The matching Linux `metadata,serde` package passed combined review and awaits commit. A–F/Ticket03/release remain open.
 
 ## Next action
 
-Commit/push the reviewed macOS `metadata,serde` package, verify remote head, then check the matching Linux gate. Retire guest scopes only after identity/inactivity checks.
+Commit/push the reviewed Linux `metadata,serde` package, verify remote head, then select the next native feature/MSRV gate or Managed fault contract. Retire guest scopes only after identity/inactivity checks.
 
 ## Goal
 
@@ -42,7 +42,9 @@ Workhorse Linux7.2.11 x86_64/Rust1.77.2 matching integer-only profile: pinned so
 
 MacOS27.2 arm64/Rust1.77.2 combined `metadata,serde`: 11 targets 160/0/1ignored, host wrong101; targeted Dynamic JSON wrong101/restored Serde25/0. Source binding, cleanup, combined review/focused recheck PASS: `.scratch/all-tickets/release-matrix-20261028/macos-metadata-serde-proof.md`.
 
-Attempts36–39 exposed false Job closure. Attempts50–58 cover batch injection/fix, exact membership, bounded retry, public Managed lifecycle, parent-CWD resolution, full 31-test Windows process target and assertion controls under their documented bindings. Attempt57 is diagnostic RED only. New attempt59 manifested a real missed exact-child fallback after a permanently refused Job exhausted the shared 30-second deadline. The correction preserves finite Job retry and grants at least five seconds each for exact-child and I/O fallback. Native Windows Rust/Cargo1.93.0, `testing-environ,sys,metadata`, manifest `34686903...`, lock `12084a90...`: synthetic permanent-refusal wrong101/restored GREEN0 with 299 refusals, exact child stopped and retained owner; two neighboring unit tests green. Attempt60 reused byte-identical source and passed public final-drop kill/retain wrong101/101 and GREEN0, with independent parent/worker/sentinel readbacks. Observer Driver0 for both, 198/200 frames, 14 files each, eight CRC journal transitions through REMOVED, exact host cleanup. Combined Terra review READY for the bounded package. Actual OS faults, live descendants under permanent refusal, other features/toolchains and release remain open. Proof: `.scratch/all-tickets/windows-rhai-native-20261028/attempt59/` and `attempt60/`.
+Workhorse Linux7.2.11 x86_64/Rust1.77.2 combined `metadata,serde`: 12 targets compiled, host/Serde wrong101 each, restored 193/0/3ignored, combined review PASS. `.scratch/all-tickets/release-matrix-20261028/linux-metadata-serde-proof.md`.
+
+Attempts36–39 exposed false Job closure. Attempts50–58 cover batch injection/fix, exact membership, bounded retry, public Managed lifecycle, parent-CWD resolution, full 31-test Windows process target and assertion controls under their documented bindings. Attempt57 is diagnostic RED only. New attempt59 manifested a real missed exact-child fallback after a permanently refused Job exhausted the shared 30-second deadline. The correction preserves finite Job retry and grants at least five seconds each for exact-child and I/O fallback. Native Windows Rust/Cargo1.93.0, `testing-environ,sys,metadata`, manifest `34686903...`, lock `12084a90...`: synthetic permanent-refusal wrong101/restored GREEN0 with 299 refusals, exact child stopped and retained owner; two neighboring unit tests green. Attempt60 reused byte-identical source and passed public final-drop kill/retain wrong101/101 and GREEN0, with independent parent/worker/sentinel readbacks. Combined Terra review READY for the bounded package. Actual OS faults, live descendants under permanent refusal, other features/toolchains and release remain open. Proof: `.scratch/all-tickets/windows-rhai-native-20261028/attempt59/` and `attempt60/`.
 
 Attempt61 freezes current base plus X33 test (`160a37ef...`, same lock) and passes native Windows Managed child-PATH-over-parent-CWD wrong101/GREEN0, 31/31 suite and independent child executable readback. Observer Driver0 in 104.824s, 202 frames/14 hash-checked files, eight valid journal transitions through REMOVED; own host stage/ISO retired, guest outer scope retained. Combined independent review PASS. Proof: `.scratch/all-tickets/windows-rhai-native-20261028/attempt61/`.
 

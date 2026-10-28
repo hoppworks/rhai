@@ -1516,6 +1516,15 @@ combined independent review and focused recheck returned PASS for these
 named paths. Full script-level serialization, other platforms/features and
 release remain open.
 
+The matching native Workhorse Linux kernel 7.2.11 x86_64/Rust-Cargo 1.77.2
+combined `metadata,serde` profile also passed:
+`.scratch/all-tickets/release-matrix-20261028/linux-metadata-serde-proof.md`.
+Twelve targets compiled in one owned scope. The independent filesystem
+readback and Dynamic JSON round-trip wrong expectations both failed at their
+intended assertions; the restored suite passed 193 top-level tests with three
+ignored. The combined independent review returned PASS for named paths.
+Exhaustive Serde behavior, other features/platforms and release remain open.
+
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance
 matrix or closure count. Historical implementation notes and estimates follow.
