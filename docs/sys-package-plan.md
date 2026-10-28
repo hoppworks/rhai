@@ -1574,8 +1574,16 @@ wrong-expectation RED101 and restored GREEN0 with independent file and TCP
 readback, original export, native Job custody and combined review. Its exact
 scope and cleanup are recorded in
 `.scratch/all-tickets/windows-rhai-native-20261028/release-msrv-20261028/proof.md`.
-The Windows SDK identity, remaining semantic profiles, fault breadth and
-full release matrix still require separate evidence.
+The native guest then passed `testing-environ,sys,net,only_i32,no_float` on
+the same Rust/Cargo1.77.2 toolchain with one source-bound Windows test overlay,
+combined host-file RED101, restored twelve-target suite 124/0/0 ignored,
+31 native Windows process tests, original export, bounded custody and combined
+review. `net_metadata` and Unix `sys_process` each ran zero tests; their
+behavior is not inferred from those targets. See
+`.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/onlyi32-nofloat-attempt01/proof.md`.
+The guest inventory found Windows Kit Lib `10.0.26100.0`, but the exact linker
+and SDK files used by Rust remain unbound. Remaining semantic profiles, fault
+breadth and the full release matrix still require separate evidence.
 
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance

@@ -523,6 +523,8 @@ fn windows_run_raw_times_out_with_unread_stdin() {
     assert_eq!(std::fs::read_to_string(&record).unwrap().trim(), format!("pid={pid}"));
 }
 
+// This out-of-range value requires Rhai's floating-point duration input.
+#[cfg(not(feature = "no_float"))]
 #[test]
 fn windows_run_raw_rejects_timeout_outside_duration_range_before_spawn() {
     let records = TempDir::new();
@@ -854,7 +856,11 @@ fn windows_spawn_child_can_be_polled_and_waited_through_clones() {
     scope.push_dynamic("child", child.clone());
     scope.push_dynamic("sibling", child);
     assert!(engine.eval_with_scope::<Dynamic>(&mut scope, "child.try_wait()").unwrap().is_unit(), "gated child must still be running");
-    assert!(engine.eval_with_scope::<Dynamic>(&mut scope, "child.wait(0.0)").unwrap().is_unit(), "zero-time wait must not cancel the gated child");
+    #[cfg(feature = "no_float")]
+    let zero_wait_script = "child.wait(0)";
+    #[cfg(not(feature = "no_float"))]
+    let zero_wait_script = "child.wait(0.0)";
+    assert!(engine.eval_with_scope::<Dynamic>(&mut scope, zero_wait_script).unwrap().is_unit(), "zero-time wait must not cancel the gated child");
     std::fs::write(record.with_extension("release"), b"release\n").unwrap();
     let first = engine.eval_with_scope::<Map>(&mut scope, "child.wait()").unwrap();
     let second = engine.eval_with_scope::<Map>(&mut scope, "sibling.wait()").unwrap();
@@ -1630,7 +1636,7 @@ fn windows_managed_timeout_closes_descendant_and_preserves_sentinel() {
     let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
     let script_root = root.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
     let script = format!(r#"run_raw("{executable}", ["--exact", "windows_managed_parent_fixture", "--nocapture", "--quiet"], #{{
-        env_clear: true, env: #{{ {MANAGED_ROOT_ENV}: "{script_root}" }}, max_output: 1024, timeout: 6.0
+        env_clear: true, env: #{{ {MANAGED_ROOT_ENV}: "{script_root}" }}, max_output: 1024, timeout: 6
     }})"#);
     let result = engine(SysConfig::default().programs(ProgramPolicy::Any).process_scope(ProcessScope::Managed)).eval::<Map>(&script);
     let mut handles = receiver.try_recv().ok();

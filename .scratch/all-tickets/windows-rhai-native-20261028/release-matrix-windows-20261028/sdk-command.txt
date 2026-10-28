@@ -1,0 +1,1 @@
+Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows Kits\Installed Roots'|Select-Object KitsRoot10;Get-ChildItem 'C:\Program Files (x86)\Windows Kits\10\Lib' -Directory -EA 0|Select-Object -ExpandProperty Name

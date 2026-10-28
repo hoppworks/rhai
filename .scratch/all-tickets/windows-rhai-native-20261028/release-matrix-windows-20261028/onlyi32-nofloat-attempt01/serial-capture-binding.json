@@ -1,0 +1,17 @@
+{
+  "preflight_inode": 126819933,
+  "preflight_offset": 1821175,
+  "rotated_old_path": "/var/log/libvirt/qemu/rhai-win11-quality-serial0.log.0",
+  "rotated_old_inode": 126819933,
+  "rotated_old_file_bytes": 2097152,
+  "old_segment_bytes": 275977,
+  "old_segment_sha256": "c4c5a9c2fa6d1f020a1e365911c18aeb1188e66d0ae8d92406837aa017ec848d",
+  "new_log_path": "/var/log/libvirt/qemu/rhai-win11-quality-serial0.log",
+  "new_log_inode": 126867980,
+  "new_segment_bytes": 94998,
+  "new_segment_sha256": "0f0647ad4b29208d84c3d4ccef0f37de508077c792e79372c33c6af9bb65656c",
+  "combined_bytes": 370975,
+  "combined_sha256": "ce15dde05338315d2321266e3946adac17167a053a7ca1ba45c585c08dfbc401",
+  "frames": 219,
+  "end_seen": true
+}

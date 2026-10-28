@@ -1,0 +1,13 @@
+{
+  "vm_uuid": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19",
+  "guest_outer_scope_removed_readback": "guest-retirement.png:False",
+  "host_stage_removed": true,
+  "host_iso_removed": true,
+  "own_host_files_retired": 30,
+  "original_sdc_restored": true,
+  "foreign_sdb_preserved": true,
+  "active_and_persistent_xml_unreferenced": true,
+  "iso_exact_fuser_absent": true,
+  "stage_symlinks_absent": true,
+  "rotated_serial_original_sha256": "ce15dde05338315d2321266e3946adac17167a053a7ca1ba45c585c08dfbc401"
+}

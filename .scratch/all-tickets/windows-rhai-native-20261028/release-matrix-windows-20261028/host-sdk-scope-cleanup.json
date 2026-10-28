@@ -1,0 +1,10 @@
+{
+  "owned_host_scope_removed": true,
+  "file_sha256": {
+    "console-key-input.py": "cee8cf1139b8f817e2b49e99013c7ce7f93a5b4319875fa7cb4f4c31a8367929",
+    "sdk-command.txt": "5e4ba5d3982aa2e11e62f477bf16c3a7214437fa9e9948c4bf1e7fa3a34c0e33",
+    "sdk-result.png": "21c913a32714bd5b1b299f9e7f16820cf2b1969fd769299aab65619a181f05d8",
+    "vs-command.txt": "99b0d45db6577cae28234f29a98ee96053574ec86f48bf8e8be0b5736ead880d",
+    "vs-result.png": "b31aa71158f08a3e2822fb7bd9cf909f4c0f479ed7bd2301f687e55c8531a55f"
+  }
+}

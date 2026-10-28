@@ -10,11 +10,11 @@ Use current central agent-skills `d6024420` plus applicable local edits and proj
 
 ## Current step
 
-Fork-main includes reviewed Windows X35, POSIX `f32_float`, the native Windows Rust/Cargo1.77.2 toolchain prerequisite and one combined sys/net case with wrong101/GREEN0, independent readback and review. A–F/Ticket03/release remain open.
+Fork-main includes reviewed Windows X35, POSIX `f32_float`, native Windows Rust/Cargo1.77.2, a combined sys/net case and the Windows `only_i32,no_float` profile. A–F/Ticket03/release remain open.
 
 ## Next action
 
-Identify the native Windows SDK and run the next missing feature/fault row under bounded custody. Preserve accepted unchanged rows.
+Run the next missing Windows feature/fault row under bounded custody, using the retained source/toolchain where applicable. Bind the exact linker/SDK files for full release; preserve accepted rows.
 
 ## Goal
 
@@ -60,6 +60,8 @@ Windows MSRV bootstrap attempt04: native Driver0, exact Rust/Cargo1.77.2, 36 ord
 
 Windows1.77.2 combined `testing-environ,sys,net`: same committed source/lock, native compile, host-file wrong101/GREEN0, independent TCP/file readback, Driver0, 203 frames/15 hash-checked files, eight valid journal records and combined review PASS. Own scope/ISO/stage retired; SDK and other rows open. `.scratch/all-tickets/windows-rhai-native-20261028/release-msrv-20261028/proof.md`.
 
+Windows1.77.2 `only_i32,no_float`: HEAD701 plus Windows test overlay, host-file wrong101, restored 12-target suite124/0/0ignored including 31 native process tests; two targets ran zero. Driver0/156.02s, rotated COM1 old/new segments reassembled to219 frames/15 hash-checked files, eight valid journal records. Review PASS; own scope/ISO/stage retired. Windows Kit Lib10.0.26100.0 inventoried; exact linker unknown. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/onlyi32-nofloat-attempt01/proof.md`.
+
 ## Retained resources
 
 Workhorse VM `dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19`: original sdc restored, foreign sdb untouched; own bootstrap ISOs/stage and successful guest verification scope retired. Retained guest `C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-a7e54f39\toolchain-home`: Rhai coordinator, Windows1.77.2 release gate, 423,724,103 bytes, ceiling2GiB, expiry 2026-11-01 00:00 UTC; no quota. Public native BuildOnly expires 2026-10-30 12:00 UTC. Guest evidence scopes52–64 remain; old36/48 need exact retirement. Details in proof.
@@ -79,12 +81,7 @@ Windows attempts52–62 each used one bounded Driver; detailed consumption remai
 ## History
 
 `docs/sys-package-plan.md`, `.scratch/all-tickets/coordinator-history-20261015.md` and original attempt proof folders retain decisions, prior state, causes and accepted evidence.
-- Previous state: journal/state-bcabcf9b41cc471697b1ef6f9c7d838d.md
-- Previous state: journal/state-36d9d212bc8f4fd9ba8357358d32cbd5.md
-- Previous state: journal/state-79ee5a69313a46528355cc548d34cdb5.md
-- Previous state: journal/state-ecb05fc1a10645dbbb818b951102673c.md
-- Previous state: journal/state-2080b890fbff42e48dc3f2e4c0da76e2.md
-- Previous state: journal/state-a7c5e579478b4d88834ca4569117d9ec.md
+- Prior snapshots: `journal/state-*.md`.
 
 ## Retrospective
 

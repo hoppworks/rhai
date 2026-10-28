@@ -1,0 +1,1 @@
+Get-ChildItem 'C:\Program Files\Microsoft Visual Studio' -Directory -EA 0|Select-Object -ExpandProperty Name;Get-ChildItem 'C:\Program Files (x86)\Microsoft Visual Studio' -Directory -EA 0|Select-Object -ExpandProperty Name
