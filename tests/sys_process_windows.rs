@@ -21,7 +21,9 @@ const TIMEOUT_RECORD_ENV: &str = "RHAI_WINDOWS_TIMEOUT_RECORD";
 const TIMEOUT_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_TIMEOUT_WRONG_EXPECTATION";
 const STDIN_RECORD_ENV: &str = "RHAI_WINDOWS_STDIN_RECORD";
 const STDIN_DATA_ENV: &str = "RHAI_WINDOWS_STDIN_DATA";
+const STDIN_OUTPUT_ENV: &str = "RHAI_WINDOWS_STDIN_OUTPUT_BYTES";
 const STDIN_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_STDIN_WRONG_EXPECTATION";
+const STDIN_SCALAR_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_STDIN_SCALAR_WRONG_EXPECTATION";
 const STDIN_TIMEOUT_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_STDIN_TIMEOUT_WRONG_EXPECTATION";
 const LIBTEST_QUIET_START: &[u8] = b"\nrunning 1 test\n";
 
@@ -178,9 +180,11 @@ fn windows_stdin_fixture() {
         assert!(Instant::now() < deadline, "observer never acquired child handle");
         thread::sleep(Duration::from_millis(10));
     }
-    std::io::Write::write_all(&mut std::io::stdout(), &vec![b'S'; 65_536]).unwrap();
+    let output_bytes = std::env::var(STDIN_OUTPUT_ENV).ok().map(|value| value.parse::<usize>().unwrap()).unwrap_or(65_536);
+    assert!(output_bytes <= 262_144, "fixture output limit");
+    std::io::Write::write_all(&mut std::io::stdout(), &vec![b'S'; output_bytes]).unwrap();
     std::io::Write::flush(&mut std::io::stdout()).unwrap();
-    std::io::Write::write_all(&mut std::io::stderr(), &vec![b'E'; 65_536]).unwrap();
+    std::io::Write::write_all(&mut std::io::stderr(), &vec![b'E'; output_bytes]).unwrap();
     std::io::Write::flush(&mut std::io::stderr()).unwrap();
     let mut input = Vec::new();
     std::io::Read::read_to_end(&mut std::io::stdin(), &mut input).unwrap();
@@ -192,55 +196,57 @@ fn windows_stdin_fixture() {
     process::exit(0);
 }
 
+fn observe_stdin_child(record: std::path::PathBuf) -> Option<(u32, u32)> {
+    let observed = record.with_extension("observed");
+    let deadline = Instant::now() + Duration::from_secs(4);
+    let text = loop {
+        match std::fs::read_to_string(&record) {
+            Ok(text) => break text,
+            Err(error) if error.kind() == std::io::ErrorKind::NotFound && Instant::now() < deadline => thread::sleep(Duration::from_millis(10)),
+            Err(error) if error.kind() == std::io::ErrorKind::NotFound => return None,
+            Err(error) => panic!("stdin child readiness: {error}"),
+        }
+    };
+    let pid = text.trim().strip_prefix("pid=").unwrap().parse::<u32>().unwrap();
+    let raw = unsafe { OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | PROCESS_TERMINATE | SYNCHRONIZE, 0, pid) };
+    assert!(!raw.is_null(), "open exact stdin child {pid}: {}", std::io::Error::last_os_error());
+    let mut guard = TimeoutChildGuard {
+        handle: OwnedProcessHandle(raw),
+        pid,
+        exit_observed: false,
+    };
+    std::fs::write(observed, b"handle acquired\n").unwrap();
+    let wait = unsafe { WaitForSingleObject(guard.handle.0, 25_000) };
+    assert_eq!(wait, WAIT_OBJECT_0, "stdin child {pid} did not terminate: {wait:#x}");
+    guard.exit_observed = true;
+    let mut exit = u32::MAX;
+    assert_ne!(unsafe { GetExitCodeProcess(guard.handle.0, &mut exit) }, 0);
+    Some((pid, exit))
+}
+
 #[test]
 fn windows_run_raw_transfers_blob_while_draining_both_streams() {
     let records = TempDir::new();
     let record = records.path().join("stdin-child.txt");
     let data = records.path().join("stdin-data.bin");
-    let observed = record.with_extension("observed");
     let observer = thread::spawn({
         let record = record.clone();
-        move || {
-            let deadline = Instant::now() + Duration::from_secs(4);
-            let text = loop {
-                match std::fs::read_to_string(&record) {
-                    Ok(text) => break text,
-                    Err(error) if error.kind() == std::io::ErrorKind::NotFound && Instant::now() < deadline => thread::sleep(Duration::from_millis(10)),
-                    Err(error) if error.kind() == std::io::ErrorKind::NotFound => return None,
-                    Err(error) => panic!("stdin child readiness: {error}"),
-                }
-            };
-            let pid = text.trim().strip_prefix("pid=").unwrap().parse::<u32>().unwrap();
-            let raw = unsafe { OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | PROCESS_TERMINATE | SYNCHRONIZE, 0, pid) };
-            assert!(!raw.is_null(), "open exact stdin child {pid}: {}", std::io::Error::last_os_error());
-            let mut guard = TimeoutChildGuard {
-                handle: OwnedProcessHandle(raw),
-                pid,
-                exit_observed: false,
-            };
-            std::fs::write(observed, b"handle acquired\n").unwrap();
-            let wait = unsafe { WaitForSingleObject(guard.handle.0, 25_000) };
-            assert_eq!(wait, WAIT_OBJECT_0, "stdin child {pid} did not terminate: {wait:#x}");
-            guard.exit_observed = true;
-            let mut exit = u32::MAX;
-            assert_ne!(unsafe { GetExitCodeProcess(guard.handle.0, &mut exit) }, 0);
-            Some((pid, exit))
-        }
+        move || observe_stdin_child(record)
     });
     let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
     let record_literal = record.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
     let data_literal = data.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
-    let input: Blob = (0..131_072).map(|n| (n % 251) as u8).collect();
+    let input: Blob = (0..1_048_576).map(|n| (n % 251) as u8).collect();
     let mut scope = Scope::new();
     scope.push("input", input.clone());
     let mut engine = engine(SysConfig::default().programs(ProgramPolicy::Any));
     #[cfg(not(feature = "unchecked"))]
-    engine.set_max_array_size(1_048_576);
+    engine.set_max_array_size(2_097_152);
     let script = format!(
         r#"run_raw("{executable}", ["--exact", "windows_stdin_fixture", "--nocapture", "--quiet"], #{{
             env_clear: true,
-            env: #{{ {STDIN_RECORD_ENV}: "{record_literal}", {STDIN_DATA_ENV}: "{data_literal}" }},
-            stdin: input, max_output: 262144, timeout: 15
+            env: #{{ {STDIN_RECORD_ENV}: "{record_literal}", {STDIN_DATA_ENV}: "{data_literal}", {STDIN_OUTPUT_ENV}: "262144" }},
+            stdin: input, max_output: 524288, timeout: 15
         }})"#
     );
     let result = engine.eval_with_scope::<Map>(&mut scope, &script);
@@ -251,15 +257,67 @@ fn windows_run_raw_transfers_blob_while_draining_both_streams() {
     assert_eq!(exit, 0);
     assert!(result["success"].as_bool().unwrap());
     let mut expected_stdout = LIBTEST_QUIET_START.to_vec();
-    expected_stdout.extend(vec![b'S'; 65_536]);
-    assert_eq!(result["stdout"].clone().try_cast::<Blob>().unwrap(), expected_stdout);
-    assert_eq!(result["stderr"].clone().try_cast::<Blob>().unwrap(), vec![b'E'; 65_536]);
+    expected_stdout.extend(vec![b'S'; 262_144]);
+    let stdout = result["stdout"].clone().try_cast::<Blob>().unwrap();
+    let stderr = result["stderr"].clone().try_cast::<Blob>().unwrap();
+    assert!(stdout == expected_stdout, "stdout mismatch: {} bytes", stdout.len());
+    assert!(stderr == vec![b'E'; 262_144], "stderr mismatch: {} bytes", stderr.len());
     let readback = std::fs::read(&data).expect("child-written input readback");
     if std::env::var_os(STDIN_WRONG_EXPECTATION_ENV).is_some() {
         assert!(readback != input, "deliberately wrong stdin round-trip expectation");
     }
-    assert_eq!(readback, input);
+    assert!(readback == input, "child input mismatch: {} bytes", readback.len());
     assert_eq!(std::fs::read_to_string(&record).unwrap().trim(), format!("pid={pid}"));
+}
+
+#[test]
+fn windows_run_string_empty_and_unit_stdin_reach_child_eof() {
+    let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let engine = engine(SysConfig::default().programs(ProgramPolicy::Any));
+    let cases = [("string", Some("Rhai stdin: café, 東京, and a newline\n")), ("empty", Some("")), ("unit", None)];
+    for (mode, input) in cases {
+        let records = TempDir::new();
+        let record = records.path().join("scalar-stdin-child.txt");
+        let data = records.path().join("scalar-stdin-data.bin");
+        let observer = thread::spawn({
+            let record = record.clone();
+            move || observe_stdin_child(record)
+        });
+        let record_literal = record.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+        let data_literal = data.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+        let mut scope = Scope::new();
+        if let Some(input) = input {
+            scope.push("input", input.to_string());
+        } else {
+            scope.push_dynamic("input", rhai::Dynamic::UNIT);
+        }
+        let script = format!(
+            r#"run("{executable}", ["--exact", "windows_stdin_fixture", "--nocapture", "--quiet"], #{{
+                env_clear: true,
+                env: #{{ {STDIN_RECORD_ENV}: "{record_literal}", {STDIN_DATA_ENV}: "{data_literal}", {STDIN_OUTPUT_ENV}: "0" }},
+                stdin: input, max_output: 1024, timeout: 15
+            }})"#
+        );
+        let result = engine.eval_with_scope::<Map>(&mut scope, &script);
+        let observation = observer.join().expect("join scalar stdin child observer");
+        let result = result.unwrap_or_else(|error| panic!("{mode} stdin failed: {error:?}; child_observed={}", observation.is_some()));
+        let (pid, exit) = observation.expect("exact scalar child was independently observed");
+        let readback = std::fs::read(&data).expect("child-written input readback");
+        let expected = input.unwrap_or("").as_bytes();
+        eprintln!("windows_scalar_stdin_readback mode={mode} pid={pid} exit={exit} bytes={} exact_handle_signaled=true", readback.len());
+        if std::env::var(STDIN_SCALAR_WRONG_EXPECTATION_ENV).as_deref() == Ok(mode) {
+            assert!(readback != expected, "deliberately wrong scalar stdin {mode} expectation");
+        }
+        assert_eq!(readback, expected, "{mode} input differs");
+        assert_eq!(exit, 0);
+        assert!(result["success"].as_bool().unwrap());
+        assert_eq!(result["code"].as_int().unwrap(), 0);
+        assert!(result["stdout_complete"].as_bool().unwrap());
+        assert!(result["stderr_complete"].as_bool().unwrap());
+        assert_eq!(result["stdout"].clone().try_cast::<ImmutableString>().unwrap().as_str(), std::str::from_utf8(LIBTEST_QUIET_START).unwrap());
+        assert!(result["stderr"].clone().try_cast::<ImmutableString>().unwrap().is_empty());
+        assert_eq!(std::fs::read_to_string(&record).unwrap().trim(), format!("pid={pid}"));
+    }
 }
 
 fn observe_timeout_child(record: std::path::PathBuf) -> (u32, u32) {
