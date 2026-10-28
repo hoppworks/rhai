@@ -1,0 +1,2 @@
+Successfully updated media.
+{"owned_host_iso_removed": true, "owned_host_stage_removed": true, "original_sdc_restored": true, "foreign_sdb_untouched": true, "guest_incomplete_runtime_retained": "n-879cb849"}

@@ -1,0 +1,31 @@
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (lib test) generated 1 warning
+    Finished `test` profile [unoptimized] target(s) in 0.13s
+     Running unittests src\lib.rs (work\target\debug\deps\rhai-e3fbbe91aa1ae520.exe)
+
+running 1 test
+windows_member_capture_missing_readback unverified=true
+
+thread 'packages::sys::process::windows::members::tests::unobserved_lifetime_member_cannot_certify_candidate_closure' (1080) panicked at src\packages\sys\process\windows\members.rs:359:13:
+deliberately wrong uncaptured member expectation
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test packages::sys::process::windows::members::tests::unobserved_lifetime_member_cannot_certify_candidate_closure ... FAILED
+
+failures:
+
+failures:
+    packages::sys::process::windows::members::tests::unobserved_lifetime_member_cannot_certify_candidate_closure
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 17 filtered out; finished in 0.02s
+
+error: test failed, to rerun pass `--lib`

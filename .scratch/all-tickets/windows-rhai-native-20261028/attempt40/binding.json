@@ -1,0 +1,19 @@
+{
+  "nonce": "113a2b1359e580f2dd9c0b68bf0bc3f3",
+  "source_commit": "879d4970dc15f6600e29e968b62338e5122414be",
+  "manifest_sha256": "fa204ebb432bbf117bb24789c3d8a04ee9662c8689f4dcd718f22fbda813d95f",
+  "archive_sha256": "1a0ae473eff9c093abd386c25238bc0e53c466a6ad6545b09244bc66b0483bec",
+  "file_count": 448,
+  "source_bytes": 5318792,
+  "expected": "two deliberate wrong controls and three native member prototype unit tests; no product acceptance",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": true,
+  "command_dispatched": true,
+  "product_test_started": true,
+  "dispatch_recorded_utc": "2026-10-28T12:54:54.339572+00:00",
+  "outcome": "prototype controls RED and 3 unit GREEN; no public acceptance",
+  "driver_elapsed_seconds": 61.2714906
+}

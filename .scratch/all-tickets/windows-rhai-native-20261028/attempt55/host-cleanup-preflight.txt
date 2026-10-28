@@ -1,0 +1,1 @@
+{"vm_count": 2, "sdc_restored": true, "foreign_sdb_untouched": true, "iso_sha256": "8cf5482136bd96ccce5e227de8f8a92344db7118058a64dbb0568beb6fdc9788", "host_stage_file_count": 18, "all_domain_refs_absent": true, "all_owned_files_idle": true, "cleanup_ready": true}

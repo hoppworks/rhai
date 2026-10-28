@@ -1,0 +1,99 @@
+{
+  "id": "rhai-native-2cb45485c2606bf8824397e2a2aed6a4",
+  "frames": 246,
+  "files": {
+    "observer.json": {
+      "path": "observer.json",
+      "sha256": "f5ee0eeadfc94da40be3fb690a541809f004d8ed8d37ab653a4482c4cc8beda2",
+      "length": 1285
+    },
+    "driver.stdout": {
+      "path": "driver.stdout",
+      "sha256": "067622705a179a9d3ab406328dffdf0f70cfcf7a09336650115e55dd5cf14b43",
+      "length": 512
+    },
+    "driver.stderr": {
+      "path": "driver.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "source-manifest.json": {
+      "path": "source-manifest.json",
+      "sha256": "b54b50d2edd1ea1572af73c0dae51594c154a65d54046fd21474b1232fbc41f4",
+      "length": 67230
+    },
+    "preflight.json": {
+      "path": "preflight.json",
+      "sha256": "3507d2b6d650b80855cf797594d8c29441c34ee11af90595b7197137ee8070cd",
+      "length": 1430
+    },
+    "build-manifest.txt": {
+      "path": "build-manifest.txt",
+      "sha256": "8c625daf866e4bb5e30259b9fb3d27cafcb4e8e5ee813a5b07b6a5e4160ee0d1",
+      "length": 1834
+    },
+    "run/.scoped-run-0d3405408332492e8ad623a5b8b18426.journal": {
+      "path": "run/.scoped-run-0d3405408332492e8ad623a5b8b18426.journal",
+      "sha256": "95cb96696af6aa2f4945104a3d588c34c41f35fef5d0142a93734d086b9dec8e",
+      "length": 2356
+    },
+    "run/.scoped-evidence-195db372be4b4113b326b3dfad7e926a/stdout.log": {
+      "path": "run/.scoped-evidence-195db372be4b4113b326b3dfad7e926a/stdout.log",
+      "sha256": "f228ea45b46eaa54e8e099a42d7501ca73d403ed83220b7b6dcb26f95ef58c28",
+      "length": 25195
+    },
+    "run/.scoped-evidence-195db372be4b4113b326b3dfad7e926a/stderr.log": {
+      "path": "run/.scoped-evidence-195db372be4b4113b326b3dfad7e926a/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/.scoped-evidence-195db372be4b4113b326b3dfad7e926a/manifest.txt": {
+      "path": "run/.scoped-evidence-195db372be4b4113b326b3dfad7e926a/manifest.txt",
+      "sha256": "867707ef5f7589760f6e351319e8cf04cf0a086d7cfc6850d38bfabba3765de2",
+      "length": 83455
+    },
+    "run/.scoped-evidence-195db372be4b4113b326b3dfad7e926a/runtime/compile.log": {
+      "path": "run/.scoped-evidence-195db372be4b4113b326b3dfad7e926a/runtime/compile.log",
+      "sha256": "833968cfd6c30c17819c02c3327cd5a9de9584627083c5a3e7308fcbf7dd9971",
+      "length": 4838
+    },
+    "run/.scoped-evidence-195db372be4b4113b326b3dfad7e926a/runtime/suite-1.log": {
+      "path": "run/.scoped-evidence-195db372be4b4113b326b3dfad7e926a/runtime/suite-1.log",
+      "sha256": "d73a26b1fe0e3547adf434b08fc604e863220c6f2a917b57f8c6dda71adeb840",
+      "length": 5910
+    },
+    "run/.scoped-evidence-195db372be4b4113b326b3dfad7e926a/runtime/suite-2.log": {
+      "path": "run/.scoped-evidence-195db372be4b4113b326b3dfad7e926a/runtime/suite-2.log",
+      "sha256": "1d0c7dc9188c1aa67c805da7d549275877b810194b83601938e2ad07d4e2d1fe",
+      "length": 6574
+    },
+    "run/.scoped-evidence-195db372be4b4113b326b3dfad7e926a/runtime/suite-3.log": {
+      "path": "run/.scoped-evidence-195db372be4b4113b326b3dfad7e926a/runtime/suite-3.log",
+      "sha256": "070930724a732412700df1380b35306c551080c079f40b0657e404c0d08a69e4",
+      "length": 5897
+    },
+    "run/.scoped-evidence-195db372be4b4113b326b3dfad7e926a/runtime/suite-4.log": {
+      "path": "run/.scoped-evidence-195db372be4b4113b326b3dfad7e926a/runtime/suite-4.log",
+      "sha256": "96f955b265a3d173a307432e4cd612adae003981624c41d08fc1ae4524b37cbd",
+      "length": 6572
+    }
+  },
+  "begin": {
+    "id": "rhai-native-2cb45485c2606bf8824397e2a2aed6a4",
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-2cb45485",
+    "accepted": true,
+    "exit": 0,
+    "driver_pid": 1380,
+    "driver_creation": 134376681200382192
+  },
+  "end": {
+    "guest_evidence_retained": true,
+    "accepted": true,
+    "files": 15,
+    "id": "rhai-native-2cb45485c2606bf8824397e2a2aed6a4",
+    "exit": 0
+  },
+  "bytes": 213088,
+  "serial_sha256": "4ad455298bd5ee76715ec05b7f18f47951da66e753cbed341c68c8114a479430",
+  "serial_bytes": 428116
+}

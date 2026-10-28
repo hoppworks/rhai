@@ -1,0 +1,16 @@
+{
+  "nonce": "1da2f15ec840d2311ebd1769ddac14db",
+  "source_commit": "c62a0a99113beb51601ee9ea39656367fe7b51c5",
+  "manifest_sha256": "b7afdf42044ce14f76c70f3a8f33471b5b2b67c7cb89bf734c6faf929169541b",
+  "archive_sha256": "67934327fc8e7fc686cdfef6a50b402f0ca87424fddd4087b1d411792213f860",
+  "file_count": 448,
+  "source_bytes": 5347243,
+  "expected": "one bounded managed batch argument and no-argument GREEN plus wrong assertion RED",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": true,
+  "command_dispatched": true,
+  "product_test_started": false
+}

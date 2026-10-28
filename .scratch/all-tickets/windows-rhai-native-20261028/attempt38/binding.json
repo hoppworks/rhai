@@ -1,0 +1,18 @@
+{
+  "nonce": "3c96a0b66285128f0ceef7306660cd8c",
+  "source_commit": "879d4970dc15f6600e29e968b62338e5122414be",
+  "manifest_sha256": "bc0ac0831015fa6fd17df8a4433a9c4efc8f7f819b556ad45ee1e88dc586d6ae",
+  "archive_sha256": "9482f5cf0b9fe0ee9c72f5ed904cfd3cadfa009892b4cd60463be4901cad3fa2",
+  "file_count": 447,
+  "source_bytes": 5302336,
+  "expected": "four bounded suites with parent immediate Job membership and exact handle waits",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": true,
+  "command_dispatched": true,
+  "product_test_started": true,
+  "outcome": "diagnostic: complete parent/worker immediate job list in four suites; worker WAIT_TIMEOUT after wait in two",
+  "dispatch_recorded_utc": "2026-10-28T12:22:09.445842+00:00"
+}

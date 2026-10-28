@@ -1,0 +1,33 @@
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (lib test) generated 1 warning
+    Finished `test` profile [unoptimized] target(s) in 0.16s
+     Running unittests src\lib.rs (work\target\debug\deps\rhai-e3fbbe91aa1ae520.exe)
+
+running 1 test
+
+thread 'rhai-windows-process-cleanup' (480) panicked at src\packages\sys\process\windows\mod.rs:957:13:
+deliberate per-owner cleanup panic
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread 'packages::sys::process::windows::tests::windows_cleanup_panic_preserves_exact_owner_and_permit' (8964) panicked at src\packages\sys\process\windows\mod.rs:1245:9:
+cleanup worker must preserve exact owner and permit after panic
+test packages::sys::process::windows::tests::windows_cleanup_panic_preserves_exact_owner_and_permit ... FAILED
+
+failures:
+
+failures:
+    packages::sys::process::windows::tests::windows_cleanup_panic_preserves_exact_owner_and_permit
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 21 filtered out; finished in 3.02s
+
+error: test failed, to rerun pass `--lib`

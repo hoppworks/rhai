@@ -1,0 +1,1 @@
+{"owned_host_iso_removed": true, "owned_host_stage_removed": true, "original_sdc_restored": true, "guest_outer_evidence_retained": "n-721a05f2", "foreign_sdb_untouched": true}

@@ -1,0 +1,41 @@
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: unused import: `PathBuf`
+ --> src\bin\rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 0.13s
+     Running tests\sys_process_windows.rs (work\target\debug\deps\sys_process_windows-c2b310be195d180b.exe)
+
+running 1 test
+windows_managed_contract_denied_before_launch observation=false
+
+thread 'windows_managed_run_closes_descendant_on_normal_parent_exit' (4056) panicked at tests\sys_process_windows.rs:1037:48:
+Windows managed run must execute and close its descendant scope: ErrorRuntime(rhai::packages::sys::error::SysError, 1:1)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+preserving managed fixture directory C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-37a7f14e\run\scoped-82c83c9c3ea549f39a98dabd72988acc\work\temp\rhai-sys-test-2196-windows_managed_run_closes_descendant_on_normal_parent_exit-0 for outer job cleanup
+test windows_managed_run_closes_descendant_on_normal_parent_exit ... FAILED
+
+failures:
+
+failures:
+    windows_managed_run_closes_descendant_on_normal_parent_exit
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 19 filtered out; finished in 5.03s
+
+error: test failed, to rerun pass `--test sys_process_windows`

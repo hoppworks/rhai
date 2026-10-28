@@ -1,0 +1,19 @@
+{
+  "nonce": "113f2d02834996789b1ea5ba536e5703",
+  "source_commit": "192b6af955b3b0ba0b04ff02ab01e8ddc9e5e256",
+  "manifest_sha256": "52a1f76e21d3e3387cc7d23342a6edd0c7802ed2587a42c91e6abeb19527107d",
+  "archive_sha256": "a8b0620d1bc6a65226b5b7100b0c9d45b000c46cb01e41c74286c342c05d7e77",
+  "file_count": 448,
+  "source_bytes": 5336740,
+  "expected": "native retained-owner GREEN and wrong control plus pending-cancellation mutant/green regression",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": true,
+  "command_dispatched": true,
+  "product_test_started": true,
+  "dispatch_recorded_utc": "2026-10-28T13:41:19.143641+00:00",
+  "outcome": "panic custody wrong RED and GREEN; pending-cancellation mutant RED and GREEN",
+  "driver_elapsed_seconds": 64.9959528
+}

@@ -1,0 +1,19 @@
+{
+  "nonce": "3cbd910f81f7ed38c50015fd5347be5c",
+  "source_commit": "192b6af955b3b0ba0b04ff02ab01e8ddc9e5e256",
+  "manifest_sha256": "cd1d479bb68b17d88d066c51547fcb0810c2769e356c9216776dbc9f3e32535f",
+  "archive_sha256": "d0ff232ccc8b7ca388c9516c8f4e4cad0a90b3b20854e719041137151b9d0e95",
+  "file_count": 448,
+  "source_bytes": 5336110,
+  "expected": "native expected RED for retained owner panic custody; no product acceptance",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": true,
+  "command_dispatched": true,
+  "product_test_started": true,
+  "dispatch_recorded_utc": "2026-10-28T13:33:39.663809+00:00",
+  "outcome": "expected owner-custody RED after per-owner injected panic; no GREEN",
+  "driver_elapsed_seconds": 72.24757079999999
+}

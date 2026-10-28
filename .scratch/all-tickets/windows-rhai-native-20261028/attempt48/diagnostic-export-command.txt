@@ -1,0 +1,1 @@
+$p='C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-8d56e912\run\scoped-86bfcf86548f4edb8080d3e4864b7a4b';$s=[IO.Ports.SerialPort]::new('COM1',115200);$s.Open();'compile.log','red.log'|%{if(Test-Path "$p\$_"){$s.WriteLine('RHAI48 '+$_+' '+[Convert]::ToBase64String([IO.File]::ReadAllBytes("$p\$_")))}};$s.Close()

@@ -1,0 +1,19 @@
+{
+  "nonce": "8d56e91209f3cb7641d0c31020e9d248",
+  "source_commit": "c62a0a99113beb51601ee9ea39656367fe7b51c5",
+  "manifest_sha256": "18f1b3899913237930029a6d41ece2dc9def225c89393dca5ad82c5d996046c9",
+  "archive_sha256": "abed28dbeec203e2b70e32d6ea7b45c0756ca0056cb58192b955889805bdf2ab",
+  "file_count": 448,
+  "source_bytes": 5341665,
+  "expected": "native expected RED for explicitly allowed managed batch; default denial independently observed",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": true,
+  "command_dispatched": true,
+  "product_test_started": true,
+  "dispatch_recorded_utc": "2026-10-28T14:17:25.901204+00:00",
+  "outcome": "expected-RED harness failed because real allowed batch test passed; recovered original logs, no wrong control",
+  "driver_elapsed_seconds": 59.1589386
+}

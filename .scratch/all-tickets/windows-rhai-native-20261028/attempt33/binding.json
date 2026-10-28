@@ -1,0 +1,18 @@
+{
+  "nonce": "72a37db2a6d396199fc3f972181d8197",
+  "source_commit": "879d4970dc15f6600e29e968b62338e5122414be",
+  "manifest_sha256": "1dfd70b21485716d141cdd9986d146feb9257123e12fd3b85b58c4fbdd2a837e",
+  "archive_sha256": "83af2f2c4c3b2dac30b9f3b8faf3cd808eb3f922a3ef7b2e792f9c077551bbc2",
+  "file_count": 447,
+  "source_bytes": 5284431,
+  "expected": "spawn RED and managed run wrong/GREEN",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": true,
+  "command_dispatched": true,
+  "product_test_started": true,
+  "outcome": "spawn RED; managed run wrong control RED and GREEN; narrow review PASS",
+  "dispatch_recorded_utc": "2026-10-28T11:20:53.272985+00:00"
+}

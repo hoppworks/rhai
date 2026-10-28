@@ -1,0 +1,16 @@
+{
+  "nonce": "2c2b7a1d7501e41eae4a50966d1d290f",
+  "source_commit": "c62a0a99113beb51601ee9ea39656367fe7b51c5",
+  "manifest_sha256": "c3a500425e4135de44cd57a10cb93b313bde6ab6694cefa8e677542b01e1b730",
+  "archive_sha256": "27a238edfbb70146602fd38b51fcf21dcaaf155434874b3b155484521315f268",
+  "file_count": 448,
+  "source_bytes": 5365214,
+  "expected": "native Windows injected accounting-error retry with wrong and restored unit controls",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": false,
+  "command_dispatched": false,
+  "product_test_started": false
+}

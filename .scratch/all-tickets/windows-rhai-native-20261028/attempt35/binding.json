@@ -1,0 +1,18 @@
+{
+  "nonce": "c645f6f1bb21397c5d5d87d618b7c955",
+  "source_commit": "879d4970dc15f6600e29e968b62338e5122414be",
+  "manifest_sha256": "620dea465c1088edeff394d53ffb14eb32f0de558f857507e5756ae084dee429",
+  "archive_sha256": "a158028c6004f010293abe7e0d5b3c631531fcf30012d98edbf2d54f171e253c",
+  "file_count": 447,
+  "source_bytes": 5294074,
+  "expected": "managed kill and timeout wrong controls plus full 7+23 GREEN",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": true,
+  "command_dispatched": true,
+  "product_test_started": true,
+  "outcome": "kill and timeout wrong controls RED, full 7+23 GREEN; narrow review PASS",
+  "dispatch_recorded_utc": "2026-10-28T11:42:07.736855+00:00"
+}

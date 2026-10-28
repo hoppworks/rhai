@@ -1,0 +1,41 @@
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded winx v0.36.4
+  Downloaded crunchy v0.2.4
+  Downloaded ambient-authority v0.0.2
+  Downloaded ahash v0.8.12
+  Downloaded fs-set-times v0.20.3
+  Downloaded version_check v0.9.5
+  Downloaded itoa v1.0.18
+  Downloaded errno v0.3.14
+  Downloaded const-random-macro v0.1.16
+  Downloaded cfg-if v1.0.5
+  Downloaded const-random v0.1.18
+  Downloaded windows-targets v0.53.5
+  Downloaded windows-targets v0.52.6
+  Downloaded windows-link v0.2.1
+  Downloaded autocfg v1.5.1
+  Downloaded ipnet v2.12.2
+  Downloaded maybe-owned v0.3.4
+  Downloaded smartstring v1.0.1
+  Downloaded static_assertions v1.1.0
+  Downloaded io-lifetimes v3.0.1
+  Downloaded zmij v1.0.23
+  Downloaded tiny-keccak v2.0.2
+  Downloaded io-extras v0.19.0
+  Downloaded cap-std v4.0.3
+  Downloaded getrandom v0.2.17
+  Downloaded rmp-serde v1.3.1
+error: failed to download replaced source registry `crates-io`
+
+Caused by:
+  failed to parse manifest at `/Users/hoppworks/.local/share/agent-builds/rhai/windows-native-handle-20261028-d/agent-build-kh7auwth/cargo-home/registry/src/index.crates.io-6f17d22bba15001f/rmp-serde-1.3.1/Cargo.toml`
+
+Caused by:
+  feature `edition2024` is required
+
+  The package requires the Cargo feature called `edition2024`, but that feature is not stabilized in this version of Cargo (1.77.2 (e52e36006 2024-03-26)).
+  Consider trying a newer version of Cargo (this may require the nightly release).
+  See https://doc.rust-lang.org/nightly/cargo/reference/unstable.html#edition-2024 for more information about the status of this feature.

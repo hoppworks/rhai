@@ -1,0 +1,90 @@
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: unused import: `PathBuf`
+ --> src\bin\rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 0.14s
+     Running tests\sys_process_windows.rs (work\target\debug\deps\sys_process_windows-c8d32611208a0549.exe)
+
+running 24 tests
+test windows_child_drop_fixture ... ok
+test windows_managed_parent_fixture ... ok
+test windows_managed_leaf_fixture ... ok
+[DEBUG-owner38] phase=before parent=8672 job=0x164 complete=true assigned=2 listed=2 ids=[8672, 3412]
+[DEBUG-kill36] membership parent=5748 worker=1908 complete=true assigned=2 listed=2 ids=[5748, 1908]
+[DEBUG-owner38] phase=before parent=5748 job=0x1ec complete=true assigned=2 listed=2 ids=[5748, 1908]
+[DEBUG-owner38] phase=account parent=5748 job=0x1ec active=0 complete=true assigned=0 listed=0 ids=[]
+[DEBUG-owner38] phase=before parent=2860 job=0x1b0 complete=true assigned=2 listed=2 ids=[2860, 5840]
+[DEBUG-kill36] parent=5748 wait=0x0 error=None worker=1908 wait=0x0 error=None
+[DEBUG-owner38] phase=account parent=2860 job=0x1b0 active=0 complete=true assigned=0 listed=0 ids=[]
+[DEBUG-owner38] phase=before parent=6436 job=0x184 complete=true assigned=1 listed=1 ids=[2088]
+[DEBUG-owner38] phase=account parent=6436 job=0x184 active=0 complete=true assigned=0 listed=0 ids=[]
+[DEBUG-owner38] phase=account parent=8672 job=0x164 active=0 complete=true assigned=0 listed=0 ids=[]
+windows_managed_kill_os_readback parent=5748 worker=1908 sentinel=1424 sentinel_alive=true
+windows_managed_spawn_os_readback parent=8672 worker=3412 parent_exit=0
+test windows_managed_spawn_wait_closes_descendant_on_parent_exit ... ok
+test windows_managed_spawn_kill_closes_descendant_and_preserves_sentinel ... ok
+test windows_process_fast_probe ... ok
+test windows_process_fixture ... ok
+windows_managed_os_readback parent=6436 worker=2088 parent_exit=0 sentinel=4084 sentinel_alive=true
+test windows_managed_run_closes_descendant_on_normal_parent_exit ... ok
+windows_managed_drop_os_readback mode=kill parent=2860 worker=5840 parent_exit=1 sentinel=5640 sentinel_alive=true
+timeout_range_child_record=None
+test windows_run_raw_rejects_timeout_outside_duration_range_before_spawn ... ok
+windows_process_os_readback pid=3876 exit=0 exact_handle_signaled=true
+windows_process_os_readback pid=3088 exit=7 exact_handle_signaled=true
+test windows_run_raw_captures_output_and_nonzero_exit ... ok
+[DEBUG-owner38] phase=before parent=6280 job=0x250 complete=true assigned=1 listed=1 ids=[7632]
+[DEBUG-owner38] phase=account parent=6280 job=0x250 active=0 complete=true assigned=0 listed=0 ids=[]
+windows_managed_drop_os_readback mode=retain parent=6280 worker=7632 parent_exit=0 sentinel=4764 sentinel_alive=true
+test windows_managed_spawn_final_drop_follows_host_policy ... ok
+windows_stdin_child_readback pid=424 exit=0 exact_handle_signaled=true
+test windows_run_raw_transfers_blob_while_draining_both_streams ... ok
+test windows_run_rejects_decoded_text_expansion_with_original_raw_report ... ok
+windows_process_text_readback pid=2428 exit=0 exact_handle_signaled=true
+windows_process_text_readback pid=2892 exit=7 exact_handle_signaled=true
+test windows_run_returns_lossy_text_and_nonzero_exit ... ok
+windows_scalar_stdin_readback mode=string pid=2744 exit=0 bytes=41 exact_handle_signaled=true
+windows_scalar_stdin_readback mode=empty pid=1376 exit=0 bytes=0 exact_handle_signaled=true
+windows_scalar_stdin_readback mode=unit pid=3800 exit=0 bytes=0 exact_handle_signaled=true
+test windows_run_string_empty_and_unit_stdin_reach_child_eof ... ok
+test windows_spawn_blocked_input_fixture ... ok
+windows_spawn_os_readback pid=5340 exit=7 exact_handle_signaled=true
+test windows_spawn_child_can_be_polled_and_waited_through_clones ... ok
+windows_child_drop_os_readback mode=kill pid=576 exit=1 nonfinal_ack=true final_ack=false exact_handle_signaled=true
+windows_child_drop_os_readback mode=retain pid=6960 exit=0 nonfinal_ack=true final_ack=true exact_handle_signaled=true
+test windows_spawn_child_drop_follows_host_policy ... ok
+windows_spawn_kill_os_readback pid=1068 exit=1 available=12288 exact_handle_signaled=true
+test windows_spawn_kill_stops_child_with_unread_buffered_input ... ok
+test windows_stdin_fixture ... ok
+test windows_timeout_fixture ... ok
+windows_timeout_child_readback pid=2084 exit=1 exact_handle_signaled=true
+windows_timeout_report timed_out=true stdout_complete=true stderr_complete=true exit=Some(1) diagnostics=[]
+windows_timeout_capture stdout_complete=true stderr_complete=true
+test windows_run_raw_timeout_terminates_exact_child_and_retains_output ... ok
+windows_blocked_stdin_child_readback pid=1628 exit=1 exact_handle_signaled=true
+windows_blocked_stdin_report timed_out=true exit=Some(1) diagnostics=[]
+test windows_run_raw_times_out_with_unread_stdin ... ok
+[DEBUG-owner38] phase=before parent=7000 job=0x12c complete=true assigned=2 listed=2 ids=[7000, 8348]
+[DEBUG-owner38] phase=account parent=7000 job=0x12c active=0 complete=true assigned=0 listed=0 ids=[]
+windows_managed_timeout_os_readback parent=7000 worker=8348 sentinel=6156 sentinel_alive=true
+test windows_managed_timeout_closes_descendant_and_preserves_sentinel ... ok
+
+test result: ok. 24 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 6.12s
+

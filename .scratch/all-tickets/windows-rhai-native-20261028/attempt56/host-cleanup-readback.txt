@@ -1,0 +1,1 @@
+{"owned_host_iso_removed": true, "owned_host_stage_removed": true, "host_stage_file_count": 19, "all_domain_refs_absent": true, "all_owned_files_idle": true, "original_sdc_restored": true, "foreign_sdb_untouched": true, "guest_outer_evidence_retained": "n-2c2b7a1d"}

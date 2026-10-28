@@ -1,0 +1,19 @@
+{
+  "nonce": "623f36c773dc8f478681f5fd66d60c9b",
+  "source_commit": "192b6af955b3b0ba0b04ff02ab01e8ddc9e5e256",
+  "manifest_sha256": "a3ee2766e98c78a6e68e05661da8ebe55e737d047e1ff5f1edbfdb978c311cbd",
+  "archive_sha256": "82bf50223337e33ac7d268674c6f59a54bec1e524eafac8ae9bb3fc87d42f7b1",
+  "file_count": 448,
+  "source_bytes": 5328294,
+  "expected": "diagnostic CPU-limit job signal and held fixture handles, wrong control plus GREEN; not product acceptance",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": true,
+  "command_dispatched": true,
+  "product_test_started": true,
+  "dispatch_recorded_utc": "2026-10-28T13:21:54.222345+00:00",
+  "outcome": "two held-process handles signaled at job-limit signal; wrong RED and GREEN, prototype only",
+  "driver_elapsed_seconds": 69.8994936
+}

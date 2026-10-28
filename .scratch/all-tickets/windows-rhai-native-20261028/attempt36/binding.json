@@ -1,0 +1,18 @@
+{
+  "nonce": "2d1976a3c2af801780941d3085b6db40",
+  "source_commit": "879d4970dc15f6600e29e968b62338e5122414be",
+  "manifest_sha256": "132768fb4e8bd287ecfaf742c617e0799c90836963d2e77b26ffaf8dde395c4c",
+  "archive_sha256": "614bfaf9249288d7a40815f14fccbd5caf98567f608ff549ed195fe78b3648dd",
+  "file_count": 447,
+  "source_bytes": 5300231,
+  "expected": "managed final-drop kill and retain wrong controls plus full 7+24 GREEN",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": true,
+  "command_dispatched": true,
+  "product_test_started": true,
+  "outcome": "two expected wrong REDs; full 23 passed/1 failed managed kill; Driver2 and incomplete journal; original log recovered",
+  "dispatch_recorded_utc": "2026-10-28T11:52:14.780655+00:00"
+}

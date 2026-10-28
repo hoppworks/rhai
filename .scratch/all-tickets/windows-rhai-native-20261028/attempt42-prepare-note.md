@@ -1,0 +1,1 @@
+Initial local packaging stopped before any native run because the generator searched for the attempt40 marker in attempt41. Corrected the marker and retired only the exact incomplete local inventory. No test or guest command was started.

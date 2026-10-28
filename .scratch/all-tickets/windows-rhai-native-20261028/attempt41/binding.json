@@ -1,0 +1,19 @@
+{
+  "nonce": "1c02c386a9eff2b69dc6c7cceefe2d26",
+  "source_commit": "879d4970dc15f6600e29e968b62338e5122414be",
+  "manifest_sha256": "16c7d71c9a23ef505e4bd9c36c7c7140f3bbf7e1c55a1c23c0a153dc17ed8a60",
+  "archive_sha256": "a7f0af0d77c1dacbf43476800af40afec58d03813458e5c8731ac025047d8dda",
+  "file_count": 448,
+  "source_bytes": 5320747,
+  "expected": "one targeted public Direct Windows embedded quote wrong control and restored GREEN",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": true,
+  "command_dispatched": true,
+  "product_test_started": true,
+  "dispatch_recorded_utc": "2026-10-28T13:03:54.648083+00:00",
+  "outcome": "direct embedded-quote wrong RED and restored GREEN; narrow PowerShell case only",
+  "driver_elapsed_seconds": 75.9460297
+}

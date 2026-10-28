@@ -1,0 +1,16 @@
+{
+  "nonce": "71fb632adc42011e72eba4902ef0b516",
+  "source_commit": "c62a0a99113beb51601ee9ea39656367fe7b51c5",
+  "manifest_sha256": "2ae1321fc4a9153f33b558590279b497cdb51bcffc77491617b82b1ea6170c13",
+  "archive_sha256": "14fa34eb250326c13d17b86778bdf4dcce7c6e0abc02f09f54028d57081243e6",
+  "file_count": 448,
+  "source_bytes": 5352957,
+  "expected": "native kill/retain wrong controls and restored green on unchanged attempt53 source",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": false,
+  "command_dispatched": false,
+  "product_test_started": false
+}

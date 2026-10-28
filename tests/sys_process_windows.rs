@@ -3,9 +3,10 @@
 
 mod sys_support;
 
-use rhai::packages::sys::{ProgramPolicy, SysConfig, SysError};
+use rhai::packages::sys::{ProcessCause, ProcessScope, ProgramPolicy, SysConfig, SysError};
 use rhai::{Blob, Dynamic, EvalAltResult, ImmutableString, Map, Scope};
 use std::ffi::c_void;
+use std::os::windows::io::AsRawHandle;
 use std::process;
 use std::thread;
 use std::time::{Duration, Instant};
@@ -31,6 +32,12 @@ const SPAWN_KILL_RECORD_ENV: &str = "RHAI_WINDOWS_SPAWN_KILL_RECORD";
 const SPAWN_KILL_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_SPAWN_KILL_WRONG_EXPECTATION";
 const CHILD_DROP_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_CHILD_DROP_WRONG_EXPECTATION";
 const CHILD_DROP_RECORD_ENV: &str = "RHAI_WINDOWS_CHILD_DROP_RECORD";
+const MANAGED_ROOT_ENV: &str = "RHAI_WINDOWS_MANAGED_ROOT";
+const MANAGED_LEAF_ENV: &str = "RHAI_WINDOWS_MANAGED_LEAF";
+const MANAGED_WRONG_ENV: &str = "RHAI_WINDOWS_MANAGED_WRONG_EXPECTATION";
+const MANAGED_BATCH_WRONG_ENV: &str = "RHAI_WINDOWS_MANAGED_BATCH_WRONG_EXPECTATION";
+const MANAGED_CWD_CONTROLLER_ENV: &str = "RHAI_WINDOWS_MANAGED_CWD_CONTROLLER";
+const MANAGED_CWD_WRONG_ENV: &str = "RHAI_WINDOWS_MANAGED_CWD_WRONG_EXPECTATION";
 const LIBTEST_QUIET_START: &[u8] = b"\nrunning 1 test\n";
 
 type Handle = *mut c_void;
@@ -49,9 +56,13 @@ extern "system" {
     fn CloseHandle(handle: Handle) -> i32;
     fn GetStdHandle(kind: u32) -> Handle;
     fn PeekNamedPipe(handle: Handle, buffer: *mut c_void, size: u32, read: *mut u32, available: *mut u32, left: *mut u32) -> i32;
+    fn QueryInformationJobObject(job: Handle, class: i32, info: *mut c_void, length: u32, returned: *mut u32) -> i32;
 }
 
 struct OwnedProcessHandle(Handle);
+
+// SAFETY: this wrapper exclusively owns the Windows handle, which may be moved across threads.
+unsafe impl Send for OwnedProcessHandle {}
 
 impl Drop for OwnedProcessHandle {
     fn drop(&mut self) {
@@ -574,6 +585,104 @@ fn windows_direct_run_resolves_child_path_and_implicit_exe() {
     }
 }
 
+/// Only this child process changes its cwd; the parent test environment is untouched.
+#[test]
+fn windows_managed_cwd_controller() {
+    let Some(root) = std::env::var_os(MANAGED_CWD_CONTROLLER_ENV) else { return; };
+    let root = std::path::PathBuf::from(root);
+    std::env::set_current_dir(&root).expect("enter isolated controller cwd");
+    let mut scope = Scope::new();
+    scope.push("record", root.join("cwd-child.txt").to_string_lossy().into_owned());
+    let config = SysConfig::default()
+        .programs(ProgramPolicy::AllowList(vec!["rhai-managed-cwd-probe".into()]))
+        .process_scope(ProcessScope::Managed);
+    let report = engine(config)
+        .eval_with_scope::<Map>(&mut scope, r#"
+            run_raw("rhai-managed-cwd-probe", ["--exact", "windows_path_probe_fixture", "--quiet"], #{
+                env_clear: true,
+                env: #{ RHAI_WINDOWS_PATH_PROBE_RECORD: record },
+                timeout: 15
+            })
+        "#)
+        .expect("public Managed run must find a simple executable in parent cwd");
+    assert_eq!(report["code"].as_int().unwrap(), 0);
+}
+
+#[test]
+fn windows_managed_run_resolves_simple_program_from_parent_cwd() {
+    struct ControllerGuard {
+        child: Option<std::process::Child>,
+        root: Option<TempDir>,
+        root_safe_to_retire: bool,
+    }
+    impl Drop for ControllerGuard {
+        fn drop(&mut self) {
+            if let Some(mut child) = self.child.take() {
+                let exact = child.as_raw_handle() as Handle;
+                if unsafe { WaitForSingleObject(exact, 0) } != WAIT_OBJECT_0 {
+                    let _ = child.kill();
+                }
+                if unsafe { WaitForSingleObject(exact, 10_000) } != WAIT_OBJECT_0 {
+                    eprintln!("cwd controller exit unconfirmed; retain exact handle and fixture root");
+                    std::mem::forget(child);
+                    if let Some(root) = self.root.take() { std::mem::forget(root); }
+                    return;
+                }
+                let _ = child.wait();
+            }
+            if !self.root_safe_to_retire {
+                eprintln!("cwd controller did not prove fixture cleanup; retain root for scoped runner");
+                if let Some(root) = self.root.take() { std::mem::forget(root); }
+            }
+        }
+    }
+
+    let parent_cwd = std::env::current_dir().expect("read unchanged parent cwd");
+    let records = TempDir::new();
+    let root = records.path().to_path_buf();
+    let copied = root.join("rhai-managed-cwd-probe.exe");
+    std::fs::copy(std::env::current_exe().unwrap(), &copied)
+        .expect("copy executable into isolated controller cwd");
+    let out = std::fs::File::create(root.join("controller.out")).unwrap();
+    let err = std::fs::File::create(root.join("controller.err")).unwrap();
+    let child = std::process::Command::new(std::env::current_exe().unwrap())
+        .args(["--exact", "windows_managed_cwd_controller", "--quiet"])
+        .env_clear()
+        .env(MANAGED_CWD_CONTROLLER_ENV, &root)
+        .stdin(std::process::Stdio::null())
+        .stdout(out)
+        .stderr(err)
+        .spawn()
+        .expect("start isolated cwd controller");
+    let mut guard = ControllerGuard { child: Some(child), root: Some(records), root_safe_to_retire: false };
+    let deadline = Instant::now() + Duration::from_secs(30);
+    let status = loop {
+        if let Some(status) = guard.child.as_mut().unwrap().try_wait().expect("wait for cwd controller") {
+            break status;
+        }
+        assert!(Instant::now() < deadline, "isolated cwd controller exceeded 30 seconds");
+        thread::sleep(Duration::from_millis(10));
+    };
+    let stderr = std::fs::read_to_string(root.join("controller.err")).unwrap();
+    assert!(status.success(), "public Managed cwd controller failed: {status:?}; {stderr}");
+    let observed = std::fs::read_to_string(root.join("cwd-child.txt"))
+        .expect("fresh independent child-written executable record");
+    let mut lines = observed.lines();
+    let pid = lines.next().unwrap().strip_prefix("pid=").unwrap().parse::<u32>().unwrap();
+    let actual = std::fs::canonicalize(lines.next().unwrap().strip_prefix("path=").unwrap()).unwrap();
+    let expected = std::fs::canonicalize(&copied).unwrap();
+    assert!(lines.next().is_none());
+    assert_ne!(pid, 0);
+    assert_eq!(actual, expected, "Managed child must run the exact cwd executable");
+    assert_eq!(std::env::current_dir().unwrap(), parent_cwd, "parent test cwd changed");
+    guard.root_safe_to_retire = true;
+    drop(guard);
+    eprintln!("windows_managed_cwd_readback child_pid={pid} exact_cwd_exe=true parent_cwd_unchanged=true");
+    if std::env::var_os(MANAGED_CWD_WRONG_ENV).is_some() {
+        assert_ne!(actual, expected, "deliberately wrong Managed cwd executable expectation");
+    }
+}
+
 /// Public argument encoding is checked against a file written by a real PowerShell
 /// child, not against another copy of the parent-side quoting algorithm.
 #[test]
@@ -941,4 +1050,576 @@ fn windows_run_rejects_decoded_text_expansion_with_original_raw_report() {
         other => panic!("expected output-limit report, got {other:?}"),
     }
     assert!(std::fs::read_to_string(&record).unwrap().contains(&format!("pid={pid} exit=0")));
+}
+
+/// A leaf owned by either the managed task or the independently launched sentinel.
+#[test]
+fn windows_managed_leaf_fixture() {
+    let Ok(record) = std::env::var(MANAGED_LEAF_ENV) else { return; };
+    let record = std::path::Path::new(&record);
+    let temporary = record.with_extension("tmp");
+    std::fs::write(&temporary, format!("{}\n", process::id())).unwrap();
+    std::fs::rename(temporary, record).unwrap();
+    let deadline = Instant::now() + Duration::from_secs(25);
+    while Instant::now() < deadline {
+        if record.with_extension("stop").exists() { process::exit(0); }
+        for phase in ["nonfinal", "final"] {
+            let challenge = record.with_extension(format!("{phase}-challenge"));
+            let ack = record.with_extension(format!("{phase}-ack"));
+            if challenge.exists() && !ack.exists() {
+                std::fs::write(ack, b"alive\n").unwrap();
+            }
+        }
+        thread::sleep(Duration::from_millis(10));
+    }
+    panic!("managed leaf exceeded its safety deadline");
+}
+
+/// The owner may opt in to batch execution; Managed must still launch it inside
+/// its owned scope, and the host independently reads the child's output file.
+#[test]
+fn windows_managed_run_executes_explicitly_allowed_batch() {
+    let records = TempDir::new();
+    let batch = records.path().join("allowed fixture.cmd");
+    let record = records.path().join("batch-record.txt");
+    std::fs::write(&batch, b"@echo off\r\n>\"%RHAI_WINDOWS_BATCH_RECORD%\" echo managed-batch-ok\r\n")
+        .expect("write own batch fixture");
+    let program = batch.to_string_lossy().into_owned();
+    let mut scope = Scope::new();
+    scope.push("program", program.clone());
+    scope.push("record", record.to_string_lossy().into_owned());
+    let denied_config = SysConfig::default()
+        .programs(ProgramPolicy::AllowList(vec![program.clone()]))
+        .process_scope(ProcessScope::Managed);
+    let script = r#"run_raw(program, #{ env: #{ RHAI_WINDOWS_BATCH_RECORD: record }, timeout: 15 })"#;
+    let denied = engine(denied_config).eval_with_scope::<Map>(&mut scope, script)
+        .expect_err("batch execution is denied by default");
+    match *denied {
+        EvalAltResult::ErrorRuntime(value, _) => match value.try_cast::<SysError>() {
+            Some(SysError::Denied(reason)) => assert_eq!(reason, "batch files are not allowed by host configuration"),
+            other => panic!("expected batch-specific denial: {other:?}"),
+        },
+        other => panic!("expected typed batch denial: {other:?}"),
+    }
+    assert!(!record.exists(), "denied batch must not start");
+    eprintln!("windows_managed_batch_denial_readback batch_denied=true child_file_absent=true");
+    let config = SysConfig::default()
+        .programs(ProgramPolicy::AllowList(vec![program]))
+        .process_scope(ProcessScope::Managed)
+        .allow_batch_files(true);
+    let result = engine(config).eval_with_scope::<Map>(
+        &mut scope,
+        script,
+    );
+    let observed = std::fs::read_to_string(&record).ok();
+    assert!(result.is_ok(), "allowed managed batch must run: {result:?}; record={observed:?}");
+    let report = result.unwrap();
+    assert_eq!(report["code"].as_int().unwrap(), 0);
+    assert_eq!(observed.as_deref().map(str::trim), Some("managed-batch-ok"));
+    eprintln!("windows_managed_batch_readback allowed=true child_file=managed-batch-ok");
+    if std::env::var_os(MANAGED_BATCH_WRONG_ENV).is_some() {
+        assert_ne!(observed.as_deref().map(str::trim), Some("managed-batch-ok"),
+            "deliberately wrong managed batch expectation");
+    }
+}
+
+/// A script-supplied argument must not become an additional command when a host
+/// explicitly permits a managed batch file. All effects stay in this fixture root.
+#[test]
+fn windows_managed_batch_argument_cannot_create_an_extra_file() {
+    let records = TempDir::new();
+    let batch = records.path().join("safe-batch.cmd");
+    let record = records.path().join("expected.txt");
+    let injected = records.path().join("injected.txt");
+    assert!(injected.to_string_lossy().chars().all(|ch| ch.is_ascii_alphanumeric()
+        || matches!(ch, '\\' | ':' | '_' | '-' | '.')),
+        "fixture path must contain only safe ASCII path characters");
+    std::fs::write(&batch, b"@echo off\r\n>\"%RHAI_WINDOWS_BATCH_RECORD%\" echo batch-started\r\n")
+        .expect("write own batch fixture");
+    let program = batch.to_string_lossy().into_owned();
+    let mut scope = Scope::new();
+    scope.push("program", program.clone());
+    scope.push("record", record.to_string_lossy().into_owned());
+    scope.push("injected", injected.to_string_lossy().into_owned());
+    scope.push("argument", "safe&echo(INJECTED>%RHAI_WINDOWS_BATCH_INJECT%".to_owned());
+    let config = SysConfig::default().programs(ProgramPolicy::AllowList(vec![program]))
+        .process_scope(ProcessScope::Managed).allow_batch_files(true);
+    let result = engine(config).eval_with_scope::<Map>(
+        &mut scope,
+        r#"run_raw(program, [argument], #{ env: #{ RHAI_WINDOWS_BATCH_RECORD: record, RHAI_WINDOWS_BATCH_INJECT: injected }, timeout: 15 })"#,
+    );
+    let injected_exists = injected.exists();
+    eprintln!("windows_managed_batch_argument_readback injected={injected_exists} child_record={:?} result={result:?}", std::fs::read_to_string(&record).ok());
+    assert!(!injected_exists, "batch argument must not execute an extra command");
+    let report = result.expect("the allowed batch with this argument must run safely");
+    assert_eq!(report["code"].as_int().unwrap(), 0);
+    assert_eq!(std::fs::read_to_string(&record).unwrap().trim(), "batch-started");
+    if std::env::var_os("RHAI_WINDOWS_BATCH_INJECTION_WRONG_EXPECTATION").is_some() {
+        assert!(injected_exists, "deliberately wrong batch injection expectation");
+    }
+}
+
+/// The direct managed child starts a leaf, records both identities, and exits on release.
+#[test]
+fn windows_managed_parent_fixture() {
+    let Ok(root) = std::env::var(MANAGED_ROOT_ENV) else { return; };
+    let root = std::path::Path::new(&root);
+    let leaf_record = root.join("worker.pid");
+    let _leaf = OwnedFixture(Some(process::Command::new(std::env::current_exe().unwrap())
+        .args(["--exact", "windows_managed_leaf_fixture", "--nocapture", "--quiet"])
+        .env_clear().env(MANAGED_LEAF_ENV, &leaf_record)
+        .stdin(process::Stdio::null()).stdout(process::Stdio::null()).stderr(process::Stdio::null())
+        .spawn().expect("start managed descendant")));
+    let deadline = Instant::now() + Duration::from_secs(20);
+    while !leaf_record.exists() {
+        assert!(Instant::now() < deadline, "managed descendant did not become ready");
+        thread::sleep(Duration::from_millis(10));
+    }
+    if std::env::var_os("RHAI_DEBUG_JOB_MEMBERS").is_some() {
+        #[repr(C)]
+        struct ProcessList { assigned: u32, listed: u32, ids: [usize; 32] }
+        let mut members = ProcessList { assigned: 0, listed: 0, ids: [0; 32] };
+        // SAFETY: NULL selects this fixture's immediate job; the buffer is writable and aligned.
+        let ok = unsafe { QueryInformationJobObject(std::ptr::null_mut(), 3, &mut members as *mut _ as *mut c_void,
+            std::mem::size_of_val(&members) as u32, std::ptr::null_mut()) };
+        let detail = if ok == 0 {
+            format!("query_failed={} assigned={} listed={}", std::io::Error::last_os_error(), members.assigned, members.listed)
+        } else if members.listed <= members.ids.len() as u32 {
+            format!("complete={} assigned={} listed={} ids={:?}", members.assigned == members.listed,
+                members.assigned, members.listed, &members.ids[..members.listed as usize])
+        } else {
+            format!("inconsistent_counts assigned={} listed={}", members.assigned, members.listed)
+        };
+        std::fs::write(root.join("job-members.txt"), detail).unwrap();
+    }
+    let temporary = root.join("parent.tmp");
+    std::fs::write(&temporary, format!("{}\n", process::id())).unwrap();
+    std::fs::rename(temporary, root.join("parent.pid")).unwrap();
+    while Instant::now() < deadline {
+        if root.join("release").exists() { process::exit(0); }
+        for phase in ["nonfinal", "final"] {
+            let challenge = root.join(format!("parent-{phase}-challenge"));
+            let ack = root.join(format!("parent-{phase}-ack"));
+            if challenge.exists() && !ack.exists() {
+                std::fs::write(ack, b"alive\n").unwrap();
+            }
+        }
+        thread::sleep(Duration::from_millis(10));
+    }
+    panic!("managed parent was not released");
+}
+
+struct OwnedFixture(Option<process::Child>);
+impl OwnedFixture {
+    fn wait_bounded(&mut self) -> Option<process::ExitStatus> {
+        let child = self.0.as_mut()?;
+        let raw = child.as_raw_handle() as Handle;
+        if unsafe { WaitForSingleObject(raw, 10_000) } != WAIT_OBJECT_0 { return None; }
+        child.wait().ok()
+    }
+}
+impl Drop for OwnedFixture {
+    fn drop(&mut self) {
+        let Some(child) = self.0.as_ref() else { return; };
+        let raw = child.as_raw_handle() as Handle;
+        let pid = child.id();
+        if unsafe { WaitForSingleObject(raw, 0) } != WAIT_OBJECT_0 {
+            if unsafe { TerminateProcess(raw, 1) } == 0 {
+                eprintln!("failed to terminate exact fixture {pid}: {}", std::io::Error::last_os_error());
+            }
+        }
+        if self.wait_bounded().is_none() {
+            eprintln!("exact fixture {pid} exit remains unconfirmed; retaining handle for outer job cleanup");
+            if let Some(child) = self.0.take() { std::mem::forget(child); }
+        }
+    }
+}
+
+fn wait_for_pid(path: &std::path::Path, deadline: Instant) -> Option<u32> {
+    loop {
+        match std::fs::read_to_string(path) {
+            Ok(value) => return Some(value.trim().parse().expect("fixture PID")),
+            Err(error) if error.kind() == std::io::ErrorKind::NotFound && Instant::now() < deadline => thread::sleep(Duration::from_millis(10)),
+            Err(error) if error.kind() == std::io::ErrorKind::NotFound => return None,
+            Err(error) => panic!("fixture record {}: {error}", path.display()),
+        }
+    }
+}
+
+struct ManagedFixtureGuard { handle: Option<OwnedProcessHandle>, pid: u32, exit_observed: bool }
+impl ManagedFixtureGuard {
+    fn handle(&self) -> Handle { self.handle.as_ref().expect("owned fixture handle").0 }
+}
+impl Drop for ManagedFixtureGuard {
+    fn drop(&mut self) {
+        if self.exit_observed { return; }
+        let raw = self.handle();
+        if unsafe { WaitForSingleObject(raw, 0) } != WAIT_OBJECT_0 && unsafe { TerminateProcess(raw, 1) } == 0 {
+            eprintln!("failed to terminate exact managed fixture {}: {}", self.pid, std::io::Error::last_os_error());
+        }
+        if unsafe { WaitForSingleObject(raw, 10_000) } != WAIT_OBJECT_0 {
+            eprintln!("managed fixture {} exit remains unconfirmed; retaining handle for outer job cleanup", self.pid);
+            if let Some(handle) = self.handle.take() { std::mem::forget(handle); }
+        }
+    }
+}
+struct ManagedRecords { directory: Option<TempDir>, safe_to_remove: bool }
+impl Drop for ManagedRecords {
+    fn drop(&mut self) {
+        if !self.safe_to_remove {
+            if let Some(directory) = self.directory.take() {
+                eprintln!("preserving managed fixture directory {} for outer job cleanup", directory.path().display());
+                std::mem::forget(directory);
+            }
+        }
+    }
+}
+
+fn open_fixture_guard(pid: u32) -> ManagedFixtureGuard {
+    let raw = unsafe { OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | PROCESS_TERMINATE | SYNCHRONIZE, 0, pid) };
+    assert!(!raw.is_null(), "open exact fixture {pid}: {}", std::io::Error::last_os_error());
+    ManagedFixtureGuard { handle: Some(OwnedProcessHandle(raw)), pid, exit_observed: false }
+}
+
+/// A normal managed run closes the descendant job before success, without touching a sentinel.
+#[test]
+fn windows_managed_run_closes_descendant_on_normal_parent_exit() {
+    let mut records = ManagedRecords { directory: Some(TempDir::new()), safe_to_remove: false };
+    let record_root = records.directory.as_ref().unwrap().path().to_path_buf();
+    let sentinel_record = record_root.join("sentinel.pid");
+    let sentinel = process::Command::new(std::env::current_exe().unwrap())
+        .args(["--exact", "windows_managed_leaf_fixture", "--nocapture", "--quiet"])
+        .env_clear().env(MANAGED_LEAF_ENV, &sentinel_record)
+        .stdin(process::Stdio::null()).stdout(process::Stdio::null()).stderr(process::Stdio::null())
+        .spawn().expect("start independent sentinel");
+    let mut sentinel = OwnedFixture(Some(sentinel));
+    let sentinel_pid = wait_for_pid(&sentinel_record, Instant::now() + Duration::from_secs(5)).expect("sentinel ready");
+    assert_eq!(sentinel_pid, sentinel.0.as_ref().unwrap().id());
+    let (sender, receiver) = std::sync::mpsc::sync_channel(1);
+    let observer = thread::spawn({
+        let root = record_root.clone();
+        move || {
+            let deadline = Instant::now() + Duration::from_secs(5);
+            let worker_pid = wait_for_pid(&root.join("worker.pid"), deadline)?;
+            let worker = open_fixture_guard(worker_pid);
+            let parent_pid = wait_for_pid(&root.join("parent.pid"), deadline)?;
+            assert_ne!(parent_pid, worker_pid);
+            let parent = open_fixture_guard(parent_pid);
+            assert_eq!(unsafe { WaitForSingleObject(parent.handle(), 0) }, WAIT_TIMEOUT);
+            assert_eq!(unsafe { WaitForSingleObject(worker.handle(), 0) }, WAIT_TIMEOUT);
+            sender.send((parent, worker)).expect("deliver exact fixture handles");
+            std::fs::write(root.join("release"), b"release\n").unwrap();
+            Some(())
+        }
+    });
+    let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let root = record_root.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let script = format!(r#"run_raw("{executable}", ["--exact", "windows_managed_parent_fixture", "--nocapture", "--quiet"], #{{
+        env_clear: true, env: #{{ {MANAGED_ROOT_ENV}: "{root}" }}, max_output: 1024, timeout: 15
+    }})"#);
+    let result = engine(SysConfig::default().programs(ProgramPolicy::Any).process_scope(ProcessScope::Managed)).eval::<Map>(&script);
+    let mut handles = receiver.try_recv().ok();
+    let observed_closed_at_return = handles.as_ref().map(|(_, worker)| unsafe { WaitForSingleObject(worker.handle(), 0) == WAIT_OBJECT_0 }).unwrap_or(false);
+    if handles.is_none() { handles = receiver.recv_timeout(Duration::from_secs(6)).ok(); }
+    let observation = observer.join().expect("join managed process observer");
+    let sentinel_alive = sentinel.0.as_mut().unwrap().try_wait().unwrap().is_none();
+    std::fs::write(sentinel_record.with_extension("stop"), b"stop\n").unwrap();
+    let sentinel_exit = sentinel.wait_bounded().expect("sentinel must exit within its bound");
+    if let Err(ref error) = result {
+        if matches!(&**error, EvalAltResult::ErrorRuntime(value, _) if matches!(value.clone().try_cast::<SysError>(), Some(SysError::Denied(_)))) {
+            eprintln!("windows_managed_contract_denied_before_launch observation={}", observation.is_some());
+        }
+    }
+    let result = result.unwrap_or_else(|error| panic!("Windows managed run must execute and close its descendant scope: {error:?}"));
+    observation.expect("observe exact managed child and descendant");
+    let (mut parent, mut worker) = handles.expect("retain exact managed child and descendant handles");
+    assert!(observed_closed_at_return, "managed descendant must be stopped when run returns");
+    assert_eq!(unsafe { WaitForSingleObject(parent.handle(), 0) }, WAIT_OBJECT_0);
+    parent.exit_observed = true;
+    worker.exit_observed = true;
+    let (parent_pid, worker_pid) = (parent.pid, worker.pid);
+    let mut parent_exit = u32::MAX;
+    assert_ne!(unsafe { GetExitCodeProcess(parent.handle(), &mut parent_exit) }, 0);
+    assert_eq!(parent_exit, 0);
+    assert_eq!(result["code"].as_int().unwrap(), 0);
+    assert!(result["success"].as_bool().unwrap());
+    assert!(sentinel_alive && sentinel_exit.success(), "managed closure must preserve the independent sentinel");
+    records.safe_to_remove = true;
+    eprintln!("windows_managed_os_readback parent={parent_pid} worker={worker_pid} parent_exit={parent_exit} sentinel={sentinel_pid} sentinel_alive=true");
+    if std::env::var_os(MANAGED_WRONG_ENV).is_some() {
+        assert!(!sentinel_alive, "deliberately wrong managed sentinel expectation");
+    }
+}
+
+/// Waiting on a managed spawned child must not publish success while its leaf lives.
+#[test]
+fn windows_managed_spawn_wait_closes_descendant_on_parent_exit() {
+    let mut records = ManagedRecords { directory: Some(TempDir::new()), safe_to_remove: false };
+    let record_root = records.directory.as_ref().unwrap().path().to_path_buf();
+    let (sender, receiver) = std::sync::mpsc::sync_channel(1);
+    let observer = thread::spawn({
+        let root = record_root.clone();
+        move || {
+            let deadline = Instant::now() + Duration::from_secs(5);
+            let worker_pid = wait_for_pid(&root.join("worker.pid"), deadline)?;
+            let worker = open_fixture_guard(worker_pid);
+            let parent_pid = wait_for_pid(&root.join("parent.pid"), deadline)?;
+            assert_ne!(parent_pid, worker_pid);
+            let parent = open_fixture_guard(parent_pid);
+            assert_eq!(unsafe { WaitForSingleObject(parent.handle(), 0) }, WAIT_TIMEOUT);
+            assert_eq!(unsafe { WaitForSingleObject(worker.handle(), 0) }, WAIT_TIMEOUT);
+            sender.send((parent, worker)).expect("deliver exact fixture handles");
+            std::fs::write(root.join("release"), b"release\n").unwrap();
+            Some(())
+        }
+    });
+    let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let root = record_root.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let script = format!(r#"let child = spawn("{executable}", ["--exact", "windows_managed_parent_fixture", "--nocapture", "--quiet"], #{{
+        env_clear: true, env: #{{ {MANAGED_ROOT_ENV}: "{root}" }}, max_output: 1024
+    }}); child.wait()"#);
+    let result = engine(SysConfig::default().programs(ProgramPolicy::Any).process_scope(ProcessScope::Managed)).eval::<Map>(&script);
+    let mut handles = receiver.try_recv().ok();
+    let observed_closed_at_return = handles.as_ref().map(|(_, worker)| unsafe { WaitForSingleObject(worker.handle(), 0) == WAIT_OBJECT_0 }).unwrap_or(false);
+    if handles.is_none() { handles = receiver.recv_timeout(Duration::from_secs(6)).ok(); }
+    let observation = observer.join().expect("join managed spawn observer");
+    if let Err(ref error) = result {
+        if matches!(&**error, EvalAltResult::ErrorRuntime(value, _) if matches!(value.clone().try_cast::<SysError>(), Some(SysError::Denied(_)))) {
+            eprintln!("windows_managed_spawn_denied_before_launch observation={}", observation.is_some());
+        }
+    }
+    let result = result.unwrap_or_else(|error| panic!("Windows managed spawn must execute and close its descendant scope: {error:?}"));
+    observation.expect("observe exact managed spawn parent and descendant");
+    let (mut parent, mut worker) = handles.expect("retain exact managed spawn handles");
+    assert!(observed_closed_at_return, "managed descendant must stop before wait returns");
+    assert_eq!(unsafe { WaitForSingleObject(parent.handle(), 0) }, WAIT_OBJECT_0);
+    parent.exit_observed = true;
+    worker.exit_observed = true;
+    let mut parent_exit = u32::MAX;
+    assert_ne!(unsafe { GetExitCodeProcess(parent.handle(), &mut parent_exit) }, 0);
+    assert_eq!(parent_exit, 0);
+    assert_eq!(result["code"].as_int().unwrap(), 0);
+    assert!(result["success"].as_bool().unwrap());
+    records.safe_to_remove = true;
+    eprintln!("windows_managed_spawn_os_readback parent={} worker={} parent_exit={parent_exit}", parent.pid, worker.pid);
+    if std::env::var_os(MANAGED_WRONG_ENV).is_some() {
+        assert!(!observed_closed_at_return, "deliberately wrong managed spawn closure expectation");
+    }
+}
+
+/// An explicit script kill closes the managed scope and preserves an unrelated process.
+#[test]
+fn windows_managed_spawn_kill_closes_descendant_and_preserves_sentinel() {
+    let mut records = ManagedRecords { directory: Some(TempDir::new()), safe_to_remove: false };
+    let root = records.directory.as_ref().unwrap().path().to_path_buf();
+    let sentinel_record = root.join("sentinel.pid");
+    let sentinel = process::Command::new(std::env::current_exe().unwrap())
+        .args(["--exact", "windows_managed_leaf_fixture", "--nocapture", "--quiet"])
+        .env_clear().env(MANAGED_LEAF_ENV, &sentinel_record)
+        .stdin(process::Stdio::null()).stdout(process::Stdio::null()).stderr(process::Stdio::null())
+        .spawn().expect("start independent sentinel");
+    let mut sentinel = OwnedFixture(Some(sentinel));
+    let sentinel_pid = wait_for_pid(&sentinel_record, Instant::now() + Duration::from_secs(5)).expect("sentinel ready");
+    assert_eq!(sentinel_pid, sentinel.0.as_ref().unwrap().id());
+    let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let script_root = root.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let debug_env = if std::env::var_os("RHAI_DEBUG_JOB_MEMBERS").is_some() { ", RHAI_DEBUG_JOB_MEMBERS: \"1\"" } else { "" };
+    let script = format!(r#"spawn("{executable}", ["--exact", "windows_managed_parent_fixture", "--nocapture", "--quiet"], #{{
+        env_clear: true, env: #{{ {MANAGED_ROOT_ENV}: "{script_root}" {debug_env} }}, max_output: 1024
+    }})"#);
+    let engine = engine(SysConfig::default().programs(ProgramPolicy::Any).process_scope(ProcessScope::Managed));
+    let child = engine.eval::<Dynamic>(&script).expect("start managed child");
+    let deadline = Instant::now() + Duration::from_secs(5);
+    let worker_pid = wait_for_pid(&root.join("worker.pid"), deadline).expect("worker ready");
+    let mut worker = open_fixture_guard(worker_pid);
+    let parent_pid = wait_for_pid(&root.join("parent.pid"), deadline).expect("parent ready");
+    let mut parent = open_fixture_guard(parent_pid);
+    if !debug_env.is_empty() {
+        eprintln!("[DEBUG-kill36] membership parent={parent_pid} worker={worker_pid} {}", std::fs::read_to_string(root.join("job-members.txt")).expect("job membership diagnostic"));
+    }
+    assert_ne!(parent_pid, worker_pid);
+    assert_eq!(unsafe { WaitForSingleObject(parent.handle(), 0) }, WAIT_TIMEOUT);
+    assert_eq!(unsafe { WaitForSingleObject(worker.handle(), 0) }, WAIT_TIMEOUT);
+    let mut scope = Scope::new();
+    scope.push_dynamic("child", child);
+    engine.run_with_scope(&mut scope, "child.kill();").expect("request managed kill");
+    let result = engine.eval_with_scope::<Map>(&mut scope, "child.wait()").expect("managed kill cleanup");
+    let parent_wait = unsafe { WaitForSingleObject(parent.handle(), 0) };
+    let parent_error = (parent_wait == u32::MAX).then(std::io::Error::last_os_error);
+    let worker_wait = unsafe { WaitForSingleObject(worker.handle(), 0) };
+    let worker_error = (worker_wait == u32::MAX).then(std::io::Error::last_os_error);
+    let parent_stopped = parent_wait == WAIT_OBJECT_0;
+    let worker_stopped = worker_wait == WAIT_OBJECT_0;
+    eprintln!("[DEBUG-kill36] parent={parent_pid} wait={parent_wait:#x} error={parent_error:?} worker={worker_pid} wait={worker_wait:#x} error={worker_error:?}");
+    let sentinel_alive = sentinel.0.as_mut().unwrap().try_wait().unwrap().is_none();
+    std::fs::write(sentinel_record.with_extension("stop"), b"stop\n").unwrap();
+    let sentinel_exit = sentinel.wait_bounded().expect("sentinel exits within bound");
+    assert!(parent_stopped && worker_stopped,
+        "managed kill must stop both exact process handles before wait returns: parent_stopped={parent_stopped}, worker_stopped={worker_stopped}");
+    parent.exit_observed = true;
+    worker.exit_observed = true;
+    let mut parent_exit = u32::MAX;
+    assert_ne!(unsafe { GetExitCodeProcess(parent.handle(), &mut parent_exit) }, 0);
+    assert_eq!(result["code"].as_int().unwrap() as u32, parent_exit);
+    assert!(!result["success"].as_bool().unwrap());
+    assert!(sentinel_alive && sentinel_exit.success(), "managed kill must preserve the sentinel");
+    records.safe_to_remove = true;
+    eprintln!("windows_managed_kill_os_readback parent={parent_pid} worker={worker_pid} sentinel={sentinel_pid} sentinel_alive=true");
+    if std::env::var_os("RHAI_WINDOWS_MANAGED_KILL_WRONG_EXPECTATION").is_some() {
+        assert!(!worker_stopped, "deliberately wrong managed kill closure expectation");
+    }
+}
+
+/// A managed run deadline ends both owned processes and leaves the sentinel alive.
+#[test]
+fn windows_managed_timeout_closes_descendant_and_preserves_sentinel() {
+    let mut records = ManagedRecords { directory: Some(TempDir::new()), safe_to_remove: false };
+    let root = records.directory.as_ref().unwrap().path().to_path_buf();
+    let sentinel_record = root.join("sentinel.pid");
+    let sentinel = process::Command::new(std::env::current_exe().unwrap())
+        .args(["--exact", "windows_managed_leaf_fixture", "--nocapture", "--quiet"])
+        .env_clear().env(MANAGED_LEAF_ENV, &sentinel_record)
+        .stdin(process::Stdio::null()).stdout(process::Stdio::null()).stderr(process::Stdio::null())
+        .spawn().expect("start independent sentinel");
+    let mut sentinel = OwnedFixture(Some(sentinel));
+    let sentinel_pid = wait_for_pid(&sentinel_record, Instant::now() + Duration::from_secs(5)).expect("sentinel ready");
+    assert_eq!(sentinel_pid, sentinel.0.as_ref().unwrap().id());
+    let (sender, receiver) = std::sync::mpsc::sync_channel(1);
+    let observer = thread::spawn({
+        let root = root.clone();
+        move || {
+            let deadline = Instant::now() + Duration::from_secs(5);
+            let worker_pid = wait_for_pid(&root.join("worker.pid"), deadline)?;
+            let worker = open_fixture_guard(worker_pid);
+            let parent_pid = wait_for_pid(&root.join("parent.pid"), deadline)?;
+            let parent = open_fixture_guard(parent_pid);
+            assert_ne!(parent_pid, worker_pid);
+            assert_eq!(unsafe { WaitForSingleObject(parent.handle(), 0) }, WAIT_TIMEOUT);
+            assert_eq!(unsafe { WaitForSingleObject(worker.handle(), 0) }, WAIT_TIMEOUT);
+            sender.send((parent, worker)).expect("deliver exact timeout fixture handles");
+            Some(())
+        }
+    });
+    let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let script_root = root.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let script = format!(r#"run_raw("{executable}", ["--exact", "windows_managed_parent_fixture", "--nocapture", "--quiet"], #{{
+        env_clear: true, env: #{{ {MANAGED_ROOT_ENV}: "{script_root}" }}, max_output: 1024, timeout: 6.0
+    }})"#);
+    let result = engine(SysConfig::default().programs(ProgramPolicy::Any).process_scope(ProcessScope::Managed)).eval::<Map>(&script);
+    let mut handles = receiver.try_recv().ok();
+    let stopped_at_return = handles.as_ref().map(|(parent, worker)| unsafe {
+        WaitForSingleObject(parent.handle(), 0) == WAIT_OBJECT_0 && WaitForSingleObject(worker.handle(), 0) == WAIT_OBJECT_0
+    }).unwrap_or(false);
+    if handles.is_none() { handles = receiver.recv_timeout(Duration::from_secs(6)).ok(); }
+    observer.join().expect("join timeout observer").expect("observe exact managed timeout fixtures");
+    let (mut parent, mut worker) = handles.expect("retain exact timeout fixture handles");
+    let sentinel_alive = sentinel.0.as_mut().unwrap().try_wait().unwrap().is_none();
+    std::fs::write(sentinel_record.with_extension("stop"), b"stop\n").unwrap();
+    let sentinel_exit = sentinel.wait_bounded().expect("sentinel exits within bound");
+    assert!(stopped_at_return, "timeout must stop both exact process handles before returning");
+    parent.exit_observed = true;
+    worker.exit_observed = true;
+    let mut parent_exit = u32::MAX;
+    assert_ne!(unsafe { GetExitCodeProcess(parent.handle(), &mut parent_exit) }, 0);
+    let error = result.expect_err("managed run must report its deadline");
+    let sys_error = match *error {
+        EvalAltResult::ErrorRuntime(value, _) => value.try_cast::<SysError>().expect("typed process error"),
+        other => panic!("unexpected managed timeout error: {other:?}"),
+    };
+    match sys_error {
+        SysError::Process { cause: ProcessCause::Timeout(_), report } => {
+            assert!(report.timed_out(), "timeout must be verified after cleanup");
+            assert!(report.cleanup_diagnostics().is_empty());
+            assert_eq!(report.exit_code(), Some(parent_exit as i32));
+        }
+        other => panic!("expected managed timeout report, got {other:?}"),
+    }
+    assert!(sentinel_alive && sentinel_exit.success(), "managed timeout must preserve the sentinel");
+    records.safe_to_remove = true;
+    eprintln!("windows_managed_timeout_os_readback parent={} worker={} sentinel={sentinel_pid} sentinel_alive=true", parent.pid, worker.pid);
+    if std::env::var_os("RHAI_WINDOWS_MANAGED_TIMEOUT_WRONG_EXPECTATION").is_some() {
+        assert!(!stopped_at_return, "deliberately wrong managed timeout closure expectation");
+    }
+}
+
+/// Clones retain the entire managed task; final drop follows the host policy.
+#[test]
+fn windows_managed_spawn_final_drop_follows_host_policy() {
+    for kill_on_drop in [true, false] {
+        let mode = if kill_on_drop { "kill" } else { "retain" };
+        let mut records = ManagedRecords { directory: Some(TempDir::new()), safe_to_remove: false };
+        let root = records.directory.as_ref().unwrap().path().to_path_buf();
+        let sentinel_record = root.join("sentinel.pid");
+        let sentinel = process::Command::new(std::env::current_exe().unwrap())
+            .args(["--exact", "windows_managed_leaf_fixture", "--nocapture", "--quiet"])
+            .env_clear().env(MANAGED_LEAF_ENV, &sentinel_record)
+            .stdin(process::Stdio::null()).stdout(process::Stdio::null()).stderr(process::Stdio::null())
+            .spawn().expect("start independent sentinel");
+        let mut sentinel = OwnedFixture(Some(sentinel));
+        let sentinel_pid = wait_for_pid(&sentinel_record, Instant::now() + Duration::from_secs(5)).expect("sentinel ready");
+        assert_eq!(sentinel_pid, sentinel.0.as_ref().unwrap().id());
+        let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+        let script_root = root.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+        let script = format!(r#"spawn("{executable}", ["--exact", "windows_managed_parent_fixture", "--nocapture", "--quiet"], #{{
+            env_clear: true, env: #{{ {MANAGED_ROOT_ENV}: "{script_root}" }}, max_output: 1024
+        }})"#);
+        let engine = engine(SysConfig::default().programs(ProgramPolicy::Any).process_scope(ProcessScope::Managed).kill_on_drop(kill_on_drop));
+        let child = engine.eval::<Dynamic>(&script).expect("start managed drop fixture");
+        let sibling = child.clone();
+        let deadline = Instant::now() + Duration::from_secs(5);
+        let worker_pid = wait_for_pid(&root.join("worker.pid"), deadline).expect("worker ready");
+        let mut worker = open_fixture_guard(worker_pid);
+        let parent_pid = wait_for_pid(&root.join("parent.pid"), deadline).expect("parent ready");
+        let mut parent = open_fixture_guard(parent_pid);
+        assert_ne!(parent_pid, worker_pid);
+        let challenge = |phase: &str| {
+            let parent_request = root.join(format!("parent-{phase}-challenge"));
+            let parent_ack = root.join(format!("parent-{phase}-ack"));
+            let worker_record = root.join("worker.pid");
+            let worker_request = worker_record.with_extension(format!("{phase}-challenge"));
+            let worker_ack = worker_record.with_extension(format!("{phase}-ack"));
+            std::fs::write(parent_request, b"challenge\n").unwrap();
+            std::fs::write(worker_request, b"challenge\n").unwrap();
+            let deadline = Instant::now() + Duration::from_secs(4);
+            loop {
+                if std::fs::read(&parent_ack).is_ok_and(|b| b == b"alive\n")
+                    && std::fs::read(&worker_ack).is_ok_and(|b| b == b"alive\n") { break; }
+                assert!(Instant::now() < deadline, "managed {phase} challenge not acknowledged");
+                thread::sleep(Duration::from_millis(10));
+            }
+        };
+        drop(child);
+        assert_eq!(unsafe { WaitForSingleObject(parent.handle(), 0) }, WAIT_TIMEOUT);
+        assert_eq!(unsafe { WaitForSingleObject(worker.handle(), 0) }, WAIT_TIMEOUT);
+        challenge("nonfinal");
+        drop(sibling);
+        if !kill_on_drop {
+            assert_eq!(unsafe { WaitForSingleObject(parent.handle(), 0) }, WAIT_TIMEOUT);
+            assert_eq!(unsafe { WaitForSingleObject(worker.handle(), 0) }, WAIT_TIMEOUT);
+            challenge("final");
+            std::fs::write(root.join("release"), b"release\n").unwrap();
+        }
+        assert_eq!(unsafe { WaitForSingleObject(parent.handle(), 10_000) }, WAIT_OBJECT_0, "exact managed parent did not terminate");
+        assert_eq!(unsafe { WaitForSingleObject(worker.handle(), 10_000) }, WAIT_OBJECT_0, "exact managed worker did not terminate");
+        let mut exit = u32::MAX;
+        assert_ne!(unsafe { GetExitCodeProcess(parent.handle(), &mut exit) }, 0);
+        assert_eq!(exit == 0, !kill_on_drop);
+        parent.exit_observed = true;
+        worker.exit_observed = true;
+        let sentinel_alive = sentinel.0.as_mut().unwrap().try_wait().unwrap().is_none();
+        std::fs::write(sentinel_record.with_extension("stop"), b"stop\n").unwrap();
+        let sentinel_exit = sentinel.wait_bounded().expect("sentinel exits within bound");
+        assert!(sentinel_alive && sentinel_exit.success(), "managed final drop must preserve the sentinel");
+        records.safe_to_remove = true;
+        eprintln!("windows_managed_drop_os_readback mode={mode} parent={parent_pid} worker={worker_pid} parent_exit={exit} sentinel={sentinel_pid} sentinel_alive=true");
+        if std::env::var("RHAI_WINDOWS_MANAGED_DROP_WRONG_EXPECTATION").as_deref() == Ok(mode) {
+            if kill_on_drop {
+                assert_ne!(unsafe { WaitForSingleObject(worker.handle(), 0) }, WAIT_OBJECT_0,
+                    "deliberately wrong managed kill drop termination expectation");
+            } else {
+                assert!(!root.join("parent-final-ack").exists() && !root.join("worker.pid").with_extension("final-ack").exists(),
+                    "deliberately wrong managed retain drop survival expectation");
+            }
+        }
+    }
 }

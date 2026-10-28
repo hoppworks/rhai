@@ -1,0 +1,40 @@
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: unused import: `PathBuf`
+ --> src\bin\rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 0.13s
+     Running tests\sys_process_windows.rs (work\target\debug\deps\sys_process_windows-c8d32611208a0549.exe)
+
+running 1 test
+windows_managed_batch_argument_readback injected=false child_record=Some("batch-started\r\n") result=Ok({"code": 0, "signal": (), "stderr": [], "stderr_complete": true, "stdout": [], "stdout_complete": true, "success": true, "timed_out": false})
+
+thread 'windows_managed_batch_argument_cannot_create_an_extra_file' (2884) panicked at tests\sys_process_windows.rs:1058:9:
+deliberately wrong batch injection expectation
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test windows_managed_batch_argument_cannot_create_an_extra_file ... FAILED
+
+failures:
+
+failures:
+    windows_managed_batch_argument_cannot_create_an_extra_file
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 28 filtered out; finished in 0.03s
+
+error: test failed, to rerun pass `--test sys_process_windows`

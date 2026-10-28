@@ -403,11 +403,6 @@ fn spawn_inner(
     if !state.config.programs.allows(program) {
         return Err(SysError::Denied(format!("program `{program}` is not allowed")).into());
     }
-    if state.config.process_scope == ProcessScope::Managed {
-        return Err(
-            SysError::Denied("Windows managed process scope is not yet supported".into()).into(),
-        );
-    }
     if !state.config.allow_batch_files
         && [".bat", ".cmd"]
             .iter()
@@ -427,7 +422,12 @@ fn spawn_inner(
         let _ = ctx;
         0
     };
-    let options = parse_options(state, options, engine_limit)?;
+    let mut options = parse_options(state, options, engine_limit)?;
+    let managed_input = if state.config.process_scope == ProcessScope::Managed {
+        Some(super::managed_input(program, &args, &options)?)
+    } else {
+        None
+    };
     let permit = ActivePermit::acquire()?;
     #[allow(unused_mut)]
     let mut cancellation = Cancellation::new()
@@ -452,13 +452,13 @@ fn spawn_inner(
         PipeReader::pair().map_err(|error| SysError::io("create stdout pipe", program, &error))?;
     let (stderr, stderr_child) =
         PipeReader::pair().map_err(|error| SysError::io("create stderr pipe", program, &error))?;
-    let (stdin, child_stdin) = match options.stdin {
+    let (stdin, child_stdin) = match options.stdin.take() {
         Some(input) if !input.is_empty() => {
             let (writer, child) = PipeWriter::pair(input)
                 .map_err(|error| SysError::io("create stdin pipe", program, &error))?;
-            (Some(writer), Stdio::from(child))
+            (Some(writer), Some(child))
         }
-        _ => (None, Stdio::null()),
+        _ => (None, None),
     };
     let (sender, receiver) = mpsc::sync_channel::<(ProcessOwner, Arc<Control>, String, usize)>(1);
     thread::Builder::new()
@@ -506,30 +506,40 @@ fn spawn_inner(
             control.changed.notify_all();
         })
         .map_err(|error| SysError::io("start child supervisor", program, &error))?;
-    let mut command = Command::new(program);
-    command
-        .args(args)
-        .stdin(child_stdin)
-        .stdout(Stdio::from(stdout_child))
-        .stderr(Stdio::from(stderr_child));
-    if options.env_clear {
-        command.env_clear();
-    }
-    for (key, value) in options.env {
-        command.env(key, value);
-    }
-    let child = command
-        .spawn()
-        .map_err(|error| SysError::io("spawn process", program, &error))?;
-    let mut handoff = HandoffOwner(Some(ProcessOwner::new(
-        child, stdin, stdout, stderr, permit,
-    )));
+    let owner = if let Some((application, mut command_line, environment)) = managed_input {
+        let job = job::ManagedJob::new()
+            .map_err(|error| SysError::io("create managed job", program, &error))?;
+        let handles = launch::child_stdio(child_stdin, stdout_child, stderr_child)
+            .map_err(|error| SysError::io("prepare child handles", program, &error))?;
+        launch::create_suspended(job, handles, &application, &mut command_line, environment.as_deref(),
+            stdin, stdout, stderr, permit)
+            .and_then(launch::SuspendedOwner::resume)
+            .map_err(|error| SysError::io("start managed process", program, &error))?
+    } else {
+        let mut command = Command::new(program);
+        command
+            .args(args)
+            .stdin(child_stdin.map_or_else(Stdio::null, Stdio::from))
+            .stdout(Stdio::from(stdout_child))
+            .stderr(Stdio::from(stderr_child));
+        if options.env_clear {
+            command.env_clear();
+        }
+        for (key, value) in options.env {
+            command.env(key, value);
+        }
+        let child = command
+            .spawn()
+            .map_err(|error| SysError::io("spawn process", program, &error))?;
+        drop(command);
+        ProcessOwner::new(child, stdin, stdout, stderr, permit)
+    };
+    let mut handoff = HandoffOwner(Some(owner));
     #[cfg(test)]
     {
         handoff.0.as_mut().expect("child owner").retirement_probe =
             control.cancellation.probe.clone();
     }
-    drop(command);
     control.pid.store(
         handoff.0.as_ref().expect("child owner").child.id(),
         Ordering::Release,

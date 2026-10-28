@@ -1,0 +1,18 @@
+{
+  "nonce": "2cb45485c2606bf8824397e2a2aed6a4",
+  "source_commit": "879d4970dc15f6600e29e968b62338e5122414be",
+  "manifest_sha256": "b54b50d2edd1ea1572af73c0dae51594c154a65d54046fd21474b1232fbc41f4",
+  "archive_sha256": "46bc65a416a8abc913e6c594479effefb653f8b8c6d92256256adb6a4cc2b351",
+  "file_count": 447,
+  "source_bytes": 5304186,
+  "expected": "four bounded suites with child and supervisor job membership plus accounting probes",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": true,
+  "command_dispatched": true,
+  "product_test_started": true,
+  "outcome": "diagnostic: owner list contained parent/worker before termination, active=0 then worker WAIT_TIMEOUT in 2/4",
+  "dispatch_recorded_utc": "2026-10-28T12:35:02.937437+00:00"
+}

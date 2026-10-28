@@ -1,0 +1,22 @@
+--- red
++++ green
+@@ -509,7 +509,18 @@
+                 .expect("retained cleanup owner missing");
+             #[cfg(test)]
+             let probe = owner.retirement_probe.clone();
+-            owner.finish_in_background();
++            if catch_unwind(AssertUnwindSafe(|| owner.finish_in_background())).is_err() {
++                // Preserve the exact owner, including pending I/O, Job and permit, when
++                // cleanup cannot complete. Do not drop it or claim retirement after a panic.
++                let mut slot = worker_cell.lock().unwrap_or_else(|poisoned| poisoned.into_inner());
++                if slot.is_none() {
++                    *slot = Some(owner);
++                } else {
++                    // An unexpected competing owner must not cause either owner to be dropped.
++                    std::mem::forget(owner);
++                }
++                return;
++            }
+             #[cfg(test)]
+             {
+                 drop(owner);

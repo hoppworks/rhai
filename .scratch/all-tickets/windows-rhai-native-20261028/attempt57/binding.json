@@ -1,0 +1,16 @@
+{
+  "nonce": "879cb849992adcfeb8c0b059be9ae569",
+  "source_commit": "c62a0a99113beb51601ee9ea39656367fe7b51c5",
+  "manifest_sha256": "adb67924218a1679b8d49d45039d63a7c3ffe90db812885e4874a4934eafd3e4",
+  "archive_sha256": "dd9770cb7fddcfe40eaafd65c31f6121e66e36ba36e348548bda8f21ad20e90c",
+  "file_count": 448,
+  "source_bytes": 5370047,
+  "expected": "native expected RED for Managed simple executable in isolated parent cwd",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": false,
+  "command_dispatched": false,
+  "product_test_started": false
+}

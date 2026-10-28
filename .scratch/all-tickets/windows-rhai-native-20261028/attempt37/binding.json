@@ -1,0 +1,18 @@
+{
+  "nonce": "f604ca66e3b2866b43d6691edc0c731d",
+  "source_commit": "879d4970dc15f6600e29e968b62338e5122414be",
+  "manifest_sha256": "a556cb1842e5f30cddc2f8f98ebf654dd64d29ab13ff0676a7ebc6e4782d4700",
+  "archive_sha256": "7e19cdf904edcba84049dcfadb5fff358adfdfefba4c5a23956c2635e0bc5f01",
+  "file_count": 447,
+  "source_bytes": 5300710,
+  "expected": "four bounded diagnostic suites with exact handle wait values",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": true,
+  "command_dispatched": true,
+  "product_test_started": true,
+  "outcome": "diagnostic four suites: kill failed 3/4 with parent signaled and worker WAIT_TIMEOUT; run failed 1/4",
+  "dispatch_recorded_utc": "2026-10-28T12:08:43.657904+00:00"
+}

@@ -1,0 +1,47 @@
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: unused import: `PathBuf`
+ --> src\bin\rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 0.14s
+     Running tests\sys_process_windows.rs (work\target\debug\deps\sys_process_windows-c8d32611208a0549.exe)
+
+running 9 tests
+test windows_managed_batch_argument_cannot_create_an_extra_file ... windows_managed_batch_argument_readback injected=false child_record=Some("batch-started\r\n") result=Ok({"code": 0, "signal": (), "stderr": [], "stderr_complete": true, "stdout": [], "stdout_complete": true, "success": true, "timed_out": false})
+ok
+test windows_managed_leaf_fixture ... ok
+test windows_managed_parent_fixture ... ok
+test windows_managed_run_closes_descendant_on_normal_parent_exit ... windows_managed_os_readback parent=5972 worker=7796 parent_exit=0 sentinel=7760 sentinel_alive=true
+ok
+test windows_managed_run_executes_explicitly_allowed_batch ... windows_managed_batch_denial_readback batch_denied=true child_file_absent=true
+windows_managed_batch_readback allowed=true child_file=managed-batch-ok
+ok
+test windows_managed_spawn_final_drop_follows_host_policy ... windows_managed_drop_os_readback mode=kill parent=7576 worker=3912 parent_exit=1 sentinel=2652 sentinel_alive=true
+windows_managed_drop_os_readback mode=retain parent=7128 worker=2692 parent_exit=0 sentinel=7640 sentinel_alive=true
+ok
+test windows_managed_spawn_kill_closes_descendant_and_preserves_sentinel ... [DEBUG-kill36] parent=6224 wait=0x0 error=None worker=5072 wait=0x0 error=None
+windows_managed_kill_os_readback parent=6224 worker=5072 sentinel=5740 sentinel_alive=true
+ok
+test windows_managed_spawn_wait_closes_descendant_on_parent_exit ... windows_managed_spawn_os_readback parent=7324 worker=4008 parent_exit=0
+ok
+test windows_managed_timeout_closes_descendant_and_preserves_sentinel ... windows_managed_timeout_os_readback parent=6028 worker=4756 sentinel=6000 sentinel_alive=true
+ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 20 filtered out; finished in 6.43s
+

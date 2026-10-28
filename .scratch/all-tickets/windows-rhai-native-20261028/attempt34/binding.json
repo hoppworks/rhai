@@ -1,0 +1,18 @@
+{
+  "nonce": "18ebda9895886380691b77e134a6d309",
+  "source_commit": "879d4970dc15f6600e29e968b62338e5122414be",
+  "manifest_sha256": "cc7c9eb77c318d4a01e0796add40c21f65a2f8434de1c7b3cf382374b73998a6",
+  "archive_sha256": "a5f1fbf2d62db9bdad69e89ac082b6efe1bcbc6387bdd5120f33814a8dc0fcce",
+  "file_count": 447,
+  "source_bytes": 5285575,
+  "expected": "spawn wrong control and managed plus direct regression GREEN",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": true,
+  "command_dispatched": true,
+  "product_test_started": true,
+  "outcome": "spawn wrong-control RED and full 7+21 GREEN; narrow combined review PASS",
+  "dispatch_recorded_utc": "2026-10-28T11:30:33.318683+00:00"
+}

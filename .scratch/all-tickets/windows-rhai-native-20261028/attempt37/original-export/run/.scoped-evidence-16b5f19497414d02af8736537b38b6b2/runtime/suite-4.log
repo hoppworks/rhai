@@ -1,0 +1,87 @@
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: unused import: `PathBuf`
+ --> src\bin\rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 0.13s
+     Running tests\sys_process_windows.rs (work\target\debug\deps\sys_process_windows-c8d32611208a0549.exe)
+
+running 24 tests
+test windows_child_drop_fixture ... ok
+test windows_managed_leaf_fixture ... ok
+test windows_managed_parent_fixture ... ok
+windows_managed_drop_os_readback mode=kill parent=6088 worker=6512 parent_exit=1 sentinel=2100 sentinel_alive=true
+windows_managed_os_readback parent=8400 worker=7744 parent_exit=0 sentinel=9028 sentinel_alive=true
+test windows_managed_run_closes_descendant_on_normal_parent_exit ... ok
+[DEBUG-kill36] parent=5452 wait=0x0 error=None worker=8288 wait=0x102 error=None
+windows_managed_spawn_os_readback parent=5268 worker=7888 parent_exit=0
+
+thread 'windows_managed_spawn_kill_closes_descendant_and_preserves_sentinel' (1192) panicked at tests\sys_process_windows.rs:1171:5:
+managed kill must stop both exact process handles before wait returns: parent_stopped=true, worker_stopped=false
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+preserving managed fixture directory C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-f604ca66\run\scoped-16b5f19497414d02af8736537b38b6b2\work\temp\rhai-sys-test-2044-windows_managed_spawn_kill_closes_descendant_and_preserves_sentinel-2 for outer job cleanup
+test windows_managed_spawn_wait_closes_descendant_on_parent_exit ... ok
+test windows_managed_spawn_kill_closes_descendant_and_preserves_sentinel ... FAILED
+test windows_process_fast_probe ... ok
+test windows_process_fixture ... ok
+timeout_range_child_record=None
+test windows_run_raw_rejects_timeout_outside_duration_range_before_spawn ... ok
+windows_process_os_readback pid=4688 exit=0 exact_handle_signaled=true
+windows_process_os_readback pid=7136 exit=7 exact_handle_signaled=true
+test windows_run_raw_captures_output_and_nonzero_exit ... ok
+windows_managed_drop_os_readback mode=retain parent=4420 worker=7588 parent_exit=0 sentinel=9116 sentinel_alive=true
+test windows_managed_spawn_final_drop_follows_host_policy ... ok
+windows_stdin_child_readback pid=6420 exit=0 exact_handle_signaled=true
+test windows_run_raw_transfers_blob_while_draining_both_streams ... ok
+test windows_run_rejects_decoded_text_expansion_with_original_raw_report ... ok
+windows_process_text_readback pid=1740 exit=0 exact_handle_signaled=true
+windows_process_text_readback pid=2800 exit=7 exact_handle_signaled=true
+test windows_run_returns_lossy_text_and_nonzero_exit ... ok
+windows_scalar_stdin_readback mode=string pid=2820 exit=0 bytes=41 exact_handle_signaled=true
+windows_scalar_stdin_readback mode=empty pid=2244 exit=0 bytes=0 exact_handle_signaled=true
+windows_scalar_stdin_readback mode=unit pid=8336 exit=0 bytes=0 exact_handle_signaled=true
+test windows_run_string_empty_and_unit_stdin_reach_child_eof ... ok
+test windows_spawn_blocked_input_fixture ... ok
+windows_spawn_os_readback pid=5952 exit=7 exact_handle_signaled=true
+test windows_spawn_child_can_be_polled_and_waited_through_clones ... ok
+windows_child_drop_os_readback mode=kill pid=5176 exit=1 nonfinal_ack=true final_ack=false exact_handle_signaled=true
+windows_child_drop_os_readback mode=retain pid=8356 exit=0 nonfinal_ack=true final_ack=true exact_handle_signaled=true
+test windows_spawn_child_drop_follows_host_policy ... ok
+windows_spawn_kill_os_readback pid=2284 exit=1 available=12288 exact_handle_signaled=true
+test windows_spawn_kill_stops_child_with_unread_buffered_input ... ok
+test windows_stdin_fixture ... ok
+test windows_timeout_fixture ... ok
+windows_timeout_child_readback pid=1680 exit=1 exact_handle_signaled=true
+windows_timeout_report timed_out=true stdout_complete=true stderr_complete=true exit=Some(1) diagnostics=[]
+windows_timeout_capture stdout_complete=true stderr_complete=true
+test windows_run_raw_timeout_terminates_exact_child_and_retains_output ... ok
+windows_blocked_stdin_child_readback pid=3704 exit=1 exact_handle_signaled=true
+windows_blocked_stdin_report timed_out=true exit=Some(1) diagnostics=[]
+test windows_run_raw_times_out_with_unread_stdin ... ok
+windows_managed_timeout_os_readback parent=8468 worker=5868 sentinel=7040 sentinel_alive=true
+test windows_managed_timeout_closes_descendant_and_preserves_sentinel ... ok
+
+failures:
+
+failures:
+    windows_managed_spawn_kill_closes_descendant_and_preserves_sentinel
+
+test result: FAILED. 23 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 6.12s
+
+error: test failed, to rerun pass `--test sys_process_windows`

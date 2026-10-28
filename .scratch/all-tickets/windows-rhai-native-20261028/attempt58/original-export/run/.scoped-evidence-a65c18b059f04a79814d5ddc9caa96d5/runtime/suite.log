@@ -1,0 +1,59 @@
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: unused import: `PathBuf`
+ --> src\bin\rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 0.15s
+     Running tests\sys_process_windows.rs (work\target\debug\deps\sys_process_windows-c8d32611208a0549.exe)
+
+running 31 tests
+test windows_child_drop_fixture ... ok
+test windows_managed_cwd_controller ... ok
+test windows_managed_leaf_fixture ... ok
+test windows_managed_parent_fixture ... ok
+test windows_direct_run_resolves_child_path_and_implicit_exe ... ok
+test windows_managed_batch_argument_cannot_create_an_extra_file ... ok
+test windows_direct_run_preserves_embedded_quote_argument ... ok
+test windows_managed_run_executes_explicitly_allowed_batch ... ok
+test windows_managed_run_closes_descendant_on_normal_parent_exit ... ok
+test windows_managed_spawn_kill_closes_descendant_and_preserves_sentinel ... ok
+test windows_managed_spawn_wait_closes_descendant_on_parent_exit ... ok
+test windows_path_probe_fixture ... ok
+test windows_process_fast_probe ... ok
+test windows_process_fixture ... ok
+test windows_managed_spawn_final_drop_follows_host_policy ... ok
+test windows_run_raw_captures_output_and_nonzero_exit ... ok
+test windows_run_raw_rejects_timeout_outside_duration_range_before_spawn ... ok
+test windows_managed_run_resolves_simple_program_from_parent_cwd ... ok
+test windows_run_raw_transfers_blob_while_draining_both_streams ... ok
+test windows_run_rejects_decoded_text_expansion_with_original_raw_report ... ok
+test windows_run_returns_lossy_text_and_nonzero_exit ... ok
+test windows_run_string_empty_and_unit_stdin_reach_child_eof ... ok
+test windows_spawn_blocked_input_fixture ... ok
+test windows_spawn_child_can_be_polled_and_waited_through_clones ... ok
+test windows_spawn_child_drop_follows_host_policy ... ok
+test windows_spawn_kill_stops_child_with_unread_buffered_input ... ok
+test windows_stdin_fixture ... ok
+test windows_timeout_fixture ... ok
+test windows_run_raw_times_out_with_unread_stdin ... ok
+test windows_run_raw_timeout_terminates_exact_child_and_retains_output ... ok
+test windows_managed_timeout_closes_descendant_and_preserves_sentinel ... ok
+
+test result: ok. 31 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 6.43s
+

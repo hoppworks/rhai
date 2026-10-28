@@ -1,0 +1,1 @@
+if ((Get-FileHash E:\Start.ps1).Hash -eq 'EC838F73C4E3AFB3B57E8915E62C1B6C4241C1F8B0D34352D697BCBCD44544EE') { & ([scriptblock]::Create((Get-Content E:\Start.ps1 -Raw))) } else { throw 'SOURCE_MISMATCH' }

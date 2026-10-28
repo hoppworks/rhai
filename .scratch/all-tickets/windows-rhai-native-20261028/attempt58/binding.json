@@ -1,0 +1,16 @@
+{
+  "nonce": "0cea30ae755133c2a8c46753351e845e",
+  "source_commit": "c62a0a99113beb51601ee9ea39656367fe7b51c5",
+  "manifest_sha256": "d65351e9855e5f4ac8f56626aa058abda34629c8a7c0eb8378e10ae0192d9abf",
+  "archive_sha256": "2e7f0534640b09d554f0873f730be3e0cfb802d6bcecc669232f3855ae34ea05",
+  "file_count": 448,
+  "source_bytes": 5370423,
+  "expected": "native Windows public Managed cwd wrong/green plus full process target",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": false,
+  "command_dispatched": false,
+  "product_test_started": false
+}

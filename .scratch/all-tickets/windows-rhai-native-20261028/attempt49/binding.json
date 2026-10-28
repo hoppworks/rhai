@@ -1,0 +1,19 @@
+{
+  "nonce": "f49ac23989d4bc5c53f38ad8fbf06b11",
+  "source_commit": "c62a0a99113beb51601ee9ea39656367fe7b51c5",
+  "manifest_sha256": "997d9c11267ce7573ef846ce9078a15d0e94b438c056e4df39fedd92e5366fc1",
+  "archive_sha256": "7a6a2108c9f97dfa8aa2f287c8a86628873ff9a7e21f794efb3833d804f6db6b",
+  "file_count": 448,
+  "source_bytes": 5341665,
+  "expected": "managed batch default denial and explicitly allowed wrong control/GREEN; no general managed closure",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": true,
+  "command_dispatched": true,
+  "product_test_started": true,
+  "dispatch_recorded_utc": "2026-10-28T14:29:51.554358+00:00",
+  "outcome": "managed batch default denial and no-argument allowed case wrong RED/GREEN; no general closure",
+  "driver_elapsed_seconds": 58.928866
+}

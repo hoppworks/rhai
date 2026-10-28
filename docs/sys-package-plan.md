@@ -988,6 +988,55 @@ review PASS and host cleanup are in
 child-written input files were asserted but not exported. Other Windows
 features/toolchains and the broader process/lifecycle contracts remain open.
 
+The Managed Windows candidate has a bounded native
+normal-path result at base `c62a0a99`, Rust/Cargo 1.93.0,
+`testing-environ,sys,metadata`, lock SHA-256 `12084a90...`. Attempt50 first
+reproduced script-supplied `.cmd` argument injection through public `run_raw`;
+attempt51 passed the unchanged regression, default batch denial and a wrong
+expectation after the narrow encoding fix. Attempts36–39 showed that Job
+accounting could report zero active processes while an independently held exact
+worker handle remained unsignaled. The candidate now seeds the root handle
+before resume, captures exact Job members and refuses closure without a
+matching lifetime count and signaled handles. Native attempt52 passed nine
+public Managed cases with a wrong kill-closure control. Attempt53 changed only
+the background retry code and passed the full 29-test Windows process target
+plus five member unit tests, with exact parent/worker and sentinel readbacks.
+Attempt54 reused byte-identical source, rejected both deliberate final-drop
+kill/retain expectations and passed the restored test. Attempt55 changed only
+`windows/mod.rs` and added a native focused unit control: one injected Job
+termination refusal led to a second attempt, exact child termination and
+retained owner custody under uncertain membership; its wrong count expectation
+failed and the restored test passed. Attempt56 changed only `windows/mod.rs`
+and added a native unit control for one injected termination refusal followed
+by one injected accounting-observation error; it proved two termination
+attempts, exact child closure, owner retirement, deliberate wrong RED and
+restored GREEN. Attempt57 exercised a public Managed `run_raw` regression
+for a simple executable found only in the calling process's current directory.
+It failed at the intended missing-program assertion on the old resolver, but
+its Driver did not finish strict acceptance because the result parser looked
+for the controller panic in the outer test log. Treat it as diagnostic RED.
+The narrow resolver correction adds the parent current directory after the
+application directory and before Windows system directories. Attempt58 binds
+the corrected source and test to manifest `d65351e9...`, the same lock and
+feature profile; its deliberately wrong executable-path assertion failed 101,
+the restored public test passed, and the full Windows process target passed
+31/0. The child wrote its exact executable path to a fresh record, read back
+independently, and the controller verified its parent current directory had
+not changed. The native observer accepted Driver 0, its scoped journal ended
+at `REMOVED`, and the exact host ISO/stage were removed after original sdc
+restoration and foreign sdb readback. One combined independent review and focused
+correction/evidence rechecks accepted the exercised cases. Their
+source manifests, commands, original logs, hash-checked serial exports, journal
+CRCs and exact host cleanup are under
+`../.scratch/all-tickets/windows-rhai-native-20261028/attempt50/` through
+`attempt58/`. This adds named native Windows X34/X35/X37 lifecycle and batch
+rows plus the parent-CWD simple-program case of X33 only. Real OS termination refusals and accounting-query errors, permanent
+termination failure and incomplete-member paths,
+short-lived capture races, the full Windows executable search order and
+remaining process/argument matrix,
+other feature/MSRV profiles, Ticket03 and release remain open. Attempts55–56
+are unit supplements, not public script acceptance for the fault paths.
+
 No UI is part of Rhai's acceptance stack. The full path is script → real Engine →
 host package → OS. Storage proof is required for filesystem effects; independent
 peers and process observations replace storage writes for networking/process
@@ -1341,7 +1390,7 @@ row is closed by a source test alone or by an unreviewed/provisional result.
 | P2 | `tests/sys_process.rs::default_and_nonmatching_process_policies_deny_public_run_without_starting_child`; Linux proof in `.scratch/all-tickets/process-policy-proof/attempt-02/proof.md` | Partial: Workhorse Linux x86_64/Rust 1.96.0 proves public Engine denial under default policy and no child marker. Strict native OS/MSRV and feature-matrix rows remain open. The reviewed Linux package-minimum addendum `.scratch/rhai-wayfinder-replan-20261008/results/linux-process-minimum-20261008T201200Z-6e2ba1d7/proof.md` additionally accepts this exact public-Engine assertion at Rust/Cargo1.77.2, `testing-environ,sys`, with unchanged oracles, reused original RED controls and fresh native GREEN/readback/reap. Other uncovered native/feature rows remain open. |
 | P10 | Same public Engine test and proof; exact allow-list success control | Partial: Workhorse Linux x86_64/Rust 1.96.0 proves a nonmatching allow-list returns `Denied`, leaves its child marker absent, and has an exact-match success control. Strict native OS/MSRV and feature-matrix rows remain open. The reviewed Linux package-minimum addendum `.scratch/rhai-wayfinder-replan-20261008/results/linux-process-minimum-20261008T201200Z-6e2ba1d7/proof.md` additionally accepts this exact public-Engine assertion at Rust/Cargo1.77.2, `testing-environ,sys`, with unchanged oracles, reused original RED controls and fresh native GREEN/readback/reap. Other uncovered native/feature rows remain open. |
 | P11 | `process_cwd_uses_the_opened_filesystem_capability_after_root_replacement`; `linux-process-options-proof.md` | Partial: Linux capability-held cwd and denied symlink escape are accepted in named rows; escape denial proves no fixture record, not absence of every transient process, and does not cover every outside-root cwd form. |
-| P13 | `tests/sys_process_windows.rs` | Open: existing Windows test covers raw output/nonzero exit, not default `.bat`/`.cmd` denial. |
+| P13 | `tests/sys_process_windows.rs`; `.scratch/all-tickets/windows-rhai-native-20261028/attempt49/proof.md`; `attempt50/proof.md`; `attempt51/proof.md`; `attempt53/proof.md` | Partial: native Windows Rust/Cargo 1.93.0 with `testing-environ,sys,metadata` proves default `.bat`/`.cmd` denial with no child record and explicit no-argument opt-in. Attempt50's public script argument created an extra file; attempt51's unchanged assertion passed after the narrow encoding fix and rejected an inverted expectation. Attempt53 reran the named cases on the final normal-path candidate. Other metacharacters, batch argument reconstruction, `spawn`, feature/MSRV rows and general security acceptance remain open. |
 | X1 | `scalar_run_with_cwd_works_without_collections`; `linux-scalar-process-proof.md` | Accepted for named Linux feature rows: public Engine success, exit 0 and independent child record; no wider matrix follows. |
 | X2 | tests/sys_process.rs::missing_program_and_cwd_report_not_found_without_starting_child; .scratch/all-tickets/process-not-found-proof/proof.md | Partial: Workhorse Linux x86_64/Rust 1.93.0 proves public Engine run returns Io/NotFound for a missing program and the fixture record stays absent, with a valid-child control and independent reaping readback. Other OS, MSRV and feature rows remain open. The reviewed Linux package-minimum addendum `.scratch/rhai-wayfinder-replan-20261008/results/linux-process-minimum-20261008T201200Z-6e2ba1d7/proof.md` additionally accepts this exact public-Engine assertion at Rust/Cargo1.77.2, `testing-environ,sys`, with unchanged oracles, reused original RED controls and fresh native GREEN/readback/reap. Other uncovered native/feature rows remain open. |
 | X3 | `run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data`; `linux-process-options-proof.md`; native Windows `attempt14/proof.md` | Accepted for named Linux rows: exit 0/7 and exact raw bytes as result data. The native Windows direct-child `run_raw` slice additionally proves exit 0/7, raw capture and independent exact-handle reaping at `testing-environ,sys,metadata`, Rust/Cargo 1.93.0 with combined review. Managed scope, Windows MSRV, other profiles and broader process contracts remain open. |

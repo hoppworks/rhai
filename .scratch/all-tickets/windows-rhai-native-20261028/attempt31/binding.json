@@ -1,0 +1,15 @@
+{
+  "nonce": "37a7f14ee6a6d923591f92d5b67923d4",
+  "source_commit": "879d4970dc15f6600e29e968b62338e5122414be",
+  "manifest_sha256": "61f2d40de7c7797fd2b65b7266eef081fdab646ee0be0d8ada59332396d340a2",
+  "archive_sha256": "d74775ef42ed56900c087dd47a48b4b0af7cb33b9766caee12b5147e0f1fb073",
+  "file_count": 441,
+  "source_bytes": 5241236,
+  "expected": "managed normal exit denied baseline RED",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": true,
+  "dispatch_recorded_utc": "2026-10-28T10:38:22.528117+00:00"
+}

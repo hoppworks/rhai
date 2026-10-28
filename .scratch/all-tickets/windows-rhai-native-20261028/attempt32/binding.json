@@ -1,0 +1,18 @@
+{
+  "nonce": "94914036ac778e12246ea198233eae01",
+  "source_commit": "879d4970dc15f6600e29e968b62338e5122414be",
+  "manifest_sha256": "1273cc853375717c091a5fc2bca4fac2c8799ea350b43cf8a2ff4778e8a19e74",
+  "archive_sha256": "83af2f2c4c3b2dac30b9f3b8faf3cd808eb3f922a3ef7b2e792f9c077551bbc2",
+  "file_count": 447,
+  "source_bytes": 5284431,
+  "expected": "spawn RED and managed run wrong/GREEN",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": false,
+  "dispatch_recorded_utc": "2026-10-28T11:18:00.253870+00:00",
+  "command_dispatched": true,
+  "product_test_started": false,
+  "outcome": "preflight rejected: source-manifest total_source_bytes absent"
+}

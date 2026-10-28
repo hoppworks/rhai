@@ -1,0 +1,5 @@
+# Windows retained-cleanup panic baseline, attempt44
+
+At base `192b6af955b3b0ba0b04ff02ab01e8ddc9e5e256` plus uncommitted changes, frozen 448-file manifest `cd1d479bb68b17d88d066c51547fcb0810c2769e356c9216776dbc9f3e32535f`, lock `12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802`, native Windows Rust/Cargo 1.93.0 and `testing-environ,sys,metadata`: an owner-local forced panic immediately after registry take produced Exit101 with the exact custody assertion after 3.02s. This is real baseline RED, not an inverted-expectation control; the inherited observer field `wrong_expectation_rejected` is misnamed and `accepted` describes collection only.
+
+Driver0 72.248s with exact exit, drained pipes, no pending custody, inner runtime removed; 192 ordered frames/12 SHA-checked files and eight CRC/length-verified journal records through REMOVED. Original sdc restored; own ISO/stage retired with exact ownership, fuser and all-domain checks, readback recorded; guest outer scope retained. Independent evidence and fix review PASS; GREEN pending.

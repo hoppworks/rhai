@@ -1,0 +1,7 @@
+# Native Windows job CPU-limit signal prototype, attempt43
+
+At source base `192b6af955b3b0ba0b04ff02ab01e8ddc9e5e256` plus uncommitted changes, the 448-file manifest is `a3ee2766e98c78a6e68e05661da8ebe55e737d047e1ff5f1edbfdb978c311cbd`, with lock `12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802`. Windows Rust/Cargo 1.93.0, features `testing-environ,sys,metadata`, two jobs.
+
+The diagnostic creates a private job and two gated owned fixture processes. After configuring its end-of-job CPU limit, the exact job wait and both held exact process handles returned WAIT_OBJECT_0 in both executions. The intentionally inverted assertion returned 101 (1.78s), and the restored test passed (6.77s; bounded job wait 10s). These are two observations, not a general proof of ordering or a public Rhai acceptance. The limit may already have been reached before the helper burn gate; previous unobserved members, nested jobs, helper failure, late assignments and product custody remain unverified. A real host cannot assume its executable supports helper re-entry.
+
+Bounded Driver0 completed in 69.899s, exact exit and pipes confirmed, no pending custody or observer kill; inner runtime removed. Original serial export: 195 ordered frames, 13 hash-checked files; all eight journal records have valid CRC/length through REMOVED. VM original sdc restored and own host stage/ISO retired with identity, all-domain reference and fuser checks; host readback saved. Guest outer evidence scope retained. Independent source review READY and bounded diagnostic-result review PASS.

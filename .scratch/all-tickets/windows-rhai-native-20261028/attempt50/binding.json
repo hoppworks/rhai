@@ -1,0 +1,21 @@
+{
+  "nonce": "40183259d0ce4fad840e953ca5bcf415",
+  "source_commit": "c62a0a99113beb51601ee9ea39656367fe7b51c5",
+  "manifest_sha256": "d3414c9ec693af9f65836e16d584e820b6789fd4d7b21769ecf6e2061b017b8c",
+  "archive_sha256": "1470b2b2e04deea1362d07d739973d26191f7c9f2c355cdd3988373b91574f5c",
+  "file_count": 448,
+  "source_bytes": 5343889,
+  "expected": "bounded managed batch argument side-effect diagnostic; actual result classified after export",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": true,
+  "command_dispatched": true,
+  "product_test_started": true,
+  "product_test_outcome": "RED: injected extra file, exact named assertion failed",
+  "diagnostic_export_complete": true,
+  "wrong_control_run": false,
+  "host_media_restored": true,
+  "host_stage_retired": true
+}

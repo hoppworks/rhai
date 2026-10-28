@@ -1,0 +1,9 @@
+# Native Windows managed-process baseline
+
+The public Rhai `run_raw` call using host-selected `ProcessScope::Managed` returned the typed denial before the managed parent or descendant readiness appeared. The named contract test therefore failed with Cargo 101 at `Windows managed run must execute and close its descendant scope`; the independent sentinel was stopped and reaped before the assertion. This is a missing-behavior RED, not a Managed Job acceptance. The controlled test retained its fixture directory on failure; its exact path is in `managed-red.log`. Outer Job custody completed and the scoped runtime, including that own directory, was removed only through the runner's verified closure.
+
+The 441-file source manifest `61f2d40de7c7797fd2b65b7266eef081fdab646ee0be0d8ada59332396d340a2` binds commit `879d4970dc15f6600e29e968b62338e5122414be` plus the test change, lock `12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802`, and `testing-environ,sys,metadata`; native Windows Rust/Cargo was 1.93.0. Earlier Rust 1.77.2 Windows-target check preceded the final guard refinements; it is compilation only.
+
+Driver0 completed in 79.338s. Original export SHA-256 `b7c6d08dffe6511c50e5bb84f964f591ce7265e60a536b91aa8766599359005f` contains 195 ordered frames and 12 hash-verified files. Eight journal lengths and CRC32s verify through `REMOVED`; exact inner runtime removed. Original sdc medium was restored; exact owned host stage and ISO retired after hash, all-domain reference and fuser checks. Guest outer scope remains for evidence-first retirement.
+
+Normal parent exit must eventually establish exact descendant closure and preserve the sentinel. The test's immediate handle observation does not prove exact temporal linearization. Additional real setup-race, nested-job, explicit kill, timeout, drop, partial-failure and full job-accounting evidence remains required. No Managed GREEN or implementation exists yet.

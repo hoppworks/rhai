@@ -1,0 +1,16 @@
+{
+  "nonce": "dee8dccda0d9d086858b8878c2e5f6ab",
+  "source_commit": "c62a0a99113beb51601ee9ea39656367fe7b51c5",
+  "manifest_sha256": "6ec36e922398c961d9240ce1ee8a27dd5d32f8b9e42f8ca0dd4a45b50553681f",
+  "archive_sha256": "24d39a211ba287131a3d5505cad7db34c2521bbe547c4e52c17d9d1cdd50e48c",
+  "file_count": 448,
+  "source_bytes": 5352195,
+  "expected": "nine public managed native tests and one exact wrong-expectation control",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 240,
+  "export_seconds": 180,
+  "native_started": false,
+  "command_dispatched": false,
+  "product_test_started": false
+}

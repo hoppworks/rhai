@@ -1,12 +1,26 @@
 //! Native Windows process execution with cancellable, bounded output capture.
 
+#[allow(dead_code)]
+mod attributes;
+#[allow(dead_code)]
+mod encoding;
 mod io;
+#[allow(dead_code)]
+mod job;
+#[allow(dead_code)]
+mod launch;
+#[allow(dead_code)]
+mod members;
+mod native_child;
+#[allow(dead_code)]
+mod resolve;
 mod stdin;
 mod child;
 
 pub use child::ProcessChild;
 
 use self::io::PipeReader;
+use self::native_child::OwnedChild;
 use self::stdin::PipeWriter;
 use super::{ProcessCause, ProcessDiagnostic, ProcessExit, ProcessReport};
 use crate::packages::sys::{ProcessScope, SysError, SysState};
@@ -49,6 +63,41 @@ impl Drop for ActivePermit {
     fn drop(&mut self) {
         ACTIVE_WINDOWS_PROCESSES.fetch_sub(1, Ordering::AcqRel);
     }
+}
+
+/// Prepare both run and spawn through the same Windows argument boundary.
+/// A permitted batch file must use cmd.exe's quoting rules, while ordinary
+/// executables retain the CRT argument encoding.
+fn managed_input(
+    program: &str,
+    args: &[String],
+    options: &Options,
+) -> Res<(Vec<u16>, Vec<u16>, Option<Vec<u16>>)> {
+    let resolved = resolve::resolve_program(program, options)
+        .map_err(|error| SysError::io("resolve program", program, &error))?;
+    // Resolution may select `name.cmd.exe` for a requested `name.cmd` path.
+    // The interpreter choice follows the executable that will actually start.
+    let batch = matches!(
+        resolved.len().checked_sub(5).and_then(|start| resolved.get(start..)),
+        Some([46, 98 | 66, 97 | 65, 116 | 84, 0] | [46, 99 | 67, 109 | 77, 100 | 68, 0])
+    );
+    let (application, command_line) = if batch {
+        (
+            resolve::command_prompt()
+                .map_err(|error| SysError::io("resolve command prompt", program, &error))?,
+            encoding::batch_command_line(&resolved, args)
+                .map_err(|error| SysError::io("encode batch arguments", program, &error))?,
+        )
+    } else {
+        (
+            resolved,
+            encoding::command_line(program, args)
+                .map_err(|error| SysError::io("encode arguments", program, &error))?,
+        )
+    };
+    let environment = encoding::environment(options)
+        .map_err(|error| SysError::io("encode environment", program, &error))?;
+    Ok((application, command_line, environment))
 }
 
 pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
@@ -301,11 +350,6 @@ fn run_map(
     if !state.config.programs.allows(program) {
         return Err(SysError::Denied(format!("program `{program}` is not allowed")).into());
     }
-    if state.config.process_scope == ProcessScope::Managed {
-        return Err(
-            SysError::Denied("Windows managed process scope is not yet supported".into()).into(),
-        );
-    }
     if !state.config.allow_batch_files
         && [".bat", ".cmd"]
             .iter()
@@ -326,38 +370,55 @@ fn run_map(
         let _ = ctx;
         0
     };
-    let options = parse_options(state, options, engine_limit)?;
+    let mut options = parse_options(state, options, engine_limit)?;
+    let managed = state.config.process_scope == ProcessScope::Managed;
+    let managed_input = if managed {
+        Some(self::managed_input(program, &args, &options)?)
+    } else {
+        None
+    };
     let permit = ActivePermit::acquire()?;
     let (stdout, stdout_child) =
         PipeReader::pair().map_err(|error| SysError::io("create stdout pipe", program, &error))?;
     let (stderr, stderr_child) =
         PipeReader::pair().map_err(|error| SysError::io("create stderr pipe", program, &error))?;
-    let (stdin, child_stdin) = match options.stdin {
+    let (stdin, child_stdin) = match options.stdin.take() {
         Some(input) if !input.is_empty() => {
             let (writer, child) = PipeWriter::pair(input)
                 .map_err(|error| SysError::io("create stdin pipe", program, &error))?;
-            (Some(writer), Stdio::from(child))
+            (Some(writer), Some(child))
         }
-        _ => (None, Stdio::null()),
+        _ => (None, None),
     };
-    let mut command = Command::new(program);
-    command
-        .args(args)
-        .stdin(child_stdin)
-        .stdout(Stdio::from(stdout_child))
-        .stderr(Stdio::from(stderr_child));
-    if options.env_clear {
-        command.env_clear();
-    }
-    for (key, value) in options.env {
-        command.env(key, value);
-    }
     let deadline = deadline_after(Instant::now(), options.timeout)?;
-    let child = command
-        .spawn()
-        .map_err(|error| SysError::io("spawn process", program, &error))?;
-    drop(command);
-    let mut owner = ProcessOwner::new(child, stdin, stdout, stderr, permit);
+    let mut owner = if let Some((application, mut command_line, environment)) = managed_input {
+        let job = job::ManagedJob::new()
+            .map_err(|error| SysError::io("create managed job", program, &error))?;
+        let handles = launch::child_stdio(child_stdin, stdout_child, stderr_child)
+            .map_err(|error| SysError::io("prepare child handles", program, &error))?;
+        launch::create_suspended(job, handles, &application, &mut command_line, environment.as_deref(),
+            stdin, stdout, stderr, permit)
+            .and_then(launch::SuspendedOwner::resume)
+            .map_err(|error| SysError::io("start managed process", program, &error))?
+    } else {
+        let mut command = Command::new(program);
+        command
+            .args(args)
+            .stdin(child_stdin.map_or_else(Stdio::null, Stdio::from))
+            .stdout(Stdio::from(stdout_child))
+            .stderr(Stdio::from(stderr_child));
+        if options.env_clear {
+            command.env_clear();
+        }
+        for (key, value) in options.env {
+            command.env(key, value);
+        }
+        let child = command
+            .spawn()
+            .map_err(|error| SysError::io("spawn process", program, &error))?;
+        drop(command);
+        ProcessOwner::new(child, stdin, stdout, stderr, permit)
+    };
     let supervised = catch_unwind(AssertUnwindSafe(|| {
         owner.supervise(deadline, options.limit, program, None)
     }));
@@ -429,7 +490,12 @@ fn run_map(
 
 struct ProcessOwner {
     _permit: ActivePermit,
-    child: Child,
+    child: OwnedChild,
+    job: Option<Arc<job::ManagedJob>>,
+    members: Option<members::CapturedMembers>,
+    membership_uncertain: bool,
+    job_termination_requested: bool,
+    job_closed: bool,
     stdin: Option<PipeWriter>,
     stdout: PipeReader,
     stderr: PipeReader,
@@ -441,6 +507,14 @@ struct ProcessOwner {
     retirement_probe: Option<Arc<child::PendingProbe>>,
     #[cfg(test)]
     retirement_panic_probe: Option<Arc<std::sync::atomic::AtomicBool>>,
+    #[cfg(test)]
+    terminate_failures_remaining: usize,
+    #[cfg(test)]
+    termination_attempts: Option<Arc<AtomicUsize>>,
+    #[cfg(test)]
+    accounting_failures_remaining: usize,
+    #[cfg(test)]
+    accounting_failures_observed: Option<Arc<AtomicUsize>>,
 }
 
 type RetainedOwner = Arc<Mutex<Option<ProcessOwner>>>;
@@ -485,6 +559,14 @@ fn retain_for_cleanup_inner(owner: ProcessOwner) -> std_io::Result<RetainedOwner
                 }
                 return;
             }
+            if owner.has_pending_cleanup() {
+                // A missing lifetime member or an OS cleanup that did not finish
+                // cannot be turned into success by dropping the last Job handle.
+                // Retain custody without a permanently polling worker thread.
+                let mut slot = worker_cell.lock().unwrap_or_else(|poisoned| poisoned.into_inner());
+                *slot = Some(owner);
+                return;
+            }
             #[cfg(test)]
             {
                 drop(owner);
@@ -506,9 +588,30 @@ impl ProcessOwner {
         stderr: PipeReader,
         permit: ActivePermit,
     ) -> Self {
+        Self::with_owned_child(child.into(), None, stdin, stdout, stderr, permit)
+    }
+
+    // A managed launch transfers its exact process and job handles together before
+    // the suspended thread is resumed; an attached job is never presumed closed.
+    #[allow(dead_code)]
+    fn with_owned_child(
+        child: OwnedChild,
+        job: Option<Arc<job::ManagedJob>>,
+        stdin: Option<PipeWriter>,
+        stdout: PipeReader,
+        stderr: PipeReader,
+        permit: ActivePermit,
+    ) -> Self {
+        let job_closed = job.is_none();
+        let members = job.as_ref().map(|_| members::CapturedMembers::default());
         Self {
             _permit: permit,
             child,
+            job,
+            members,
+            membership_uncertain: false,
+            job_termination_requested: false,
+            job_closed,
             stdin,
             stdout,
             stderr,
@@ -520,7 +623,43 @@ impl ProcessOwner {
             retirement_probe: None,
             #[cfg(test)]
             retirement_panic_probe: None,
+            #[cfg(test)]
+            terminate_failures_remaining: 0,
+            #[cfg(test)]
+            termination_attempts: None,
+            #[cfg(test)]
+            accounting_failures_remaining: 0,
+            #[cfg(test)]
+            accounting_failures_observed: None,
         }
+    }
+
+    fn seed_managed_root(&mut self) -> std_io::Result<()> {
+        self.members
+            .as_mut()
+            .ok_or_else(|| std_io::Error::new(std_io::ErrorKind::Other, "managed capture missing"))?
+            .seed_root(self.child.id(), self.child.as_raw_handle() as HANDLE)
+    }
+
+    fn capture_managed_members(&mut self) -> std_io::Result<()> {
+        if self.membership_uncertain {
+            return Err(std_io::Error::new(
+                std_io::ErrorKind::Other,
+                "managed lifetime membership remains unverified",
+            ));
+        }
+        if let Some(job) = self.job.as_ref() {
+            let result = self
+                .members
+                .as_mut()
+                .ok_or_else(|| std_io::Error::new(std_io::ErrorKind::Other, "managed capture missing"))?
+                .capture(job);
+            if result.is_err() {
+                self.membership_uncertain = true;
+            }
+            result?;
+        }
+        Ok(())
     }
 
     fn supervise(
@@ -535,7 +674,24 @@ impl ProcessOwner {
             if cause.is_some() {
                 break;
             }
+            if self.job.is_some() && !self.job_termination_requested {
+                if let Err(error) = self.capture_managed_members() {
+                    cause = Some(io_cause("capture managed members", program, &error));
+                    break;
+                }
+            }
+            // A managed task ends when its direct child does, even when a descendant
+            // keeps an inherited pipe open. Stop the job before waiting for that EOF.
+            if self.exit.is_some() && self.job.is_some() && !self.job_termination_requested {
+                if let Err(error) = self.request_job_termination() {
+                    cause = Some(io_cause("terminate managed job", program, &error));
+                    break;
+                }
+            }
             if cancellation.is_some_and(child::Cancellation::requested) {
+                if self.job.is_some() {
+                    break;
+                }
                 if self.exit.is_none() {
                     match self.child.try_wait() {
                         Ok(Some(status)) => self.exit = Some(status),
@@ -581,6 +737,20 @@ impl ProcessOwner {
             }
             if self.stdin.as_ref().is_some_and(PipeWriter::is_finished) {
                 self.stdin.take();
+            }
+            // Ready I/O can otherwise continuously outrank the child handle. Preserve
+            // an already observed overflow/timeout before checking the exact child.
+            if cause.is_none() && self.job.is_some() && self.exit.is_none() {
+                match self.child.try_wait() {
+                    Ok(Some(status)) => {
+                        self.exit = Some(status);
+                        // Request job termination before a silent descendant can
+                        // leave the next wait blocked on inherited pipe handles.
+                        continue;
+                    }
+                    Ok(None) => {}
+                    Err(error) => cause = Some(io_cause("observe managed child", program, &error)),
+                }
             }
             if cause.is_some()
                 || (self.exit.is_some()
@@ -632,6 +802,9 @@ impl ProcessOwner {
                 .unwrap_or(u32::MAX);
             // A failed SetEvent must not strand a cancellation request indefinitely.
             let wait_ms = if cancellation.is_some() { wait_ms.min(1_000) } else { wait_ms };
+            // Observe new managed members even when the primary process and pipes
+            // remain quiet; the final count still detects members missed here.
+            let wait_ms = if self.job.is_some() { wait_ms.min(100) } else { wait_ms };
             // SAFETY: every waited handle remains owned and live across the wait.
             let wait = unsafe {
                 WaitForMultipleObjects(handles.len() as u32, handles.as_ptr(), 0, wait_ms)
@@ -695,7 +868,16 @@ impl ProcessOwner {
                 }
             }
         }
-        if cause.is_some() && self.exit.is_none() {
+        if self.job.is_some() && !self.job_termination_requested {
+            if let Err(error) = self.request_job_termination() {
+                self.diagnostics.push(ProcessDiagnostic::new(
+                    "terminate managed job",
+                    Some(error.kind()),
+                    error.to_string(),
+                ));
+            }
+        }
+        if cause.is_some() && self.exit.is_none() && self.job.is_none() {
             if let Err(error) = self.child.kill() {
                 self.diagnostics.push(ProcessDiagnostic::new(
                     "kill",
@@ -787,12 +969,39 @@ impl ProcessOwner {
                 ));
             }
         }
+        if self.job.is_some() {
+            let deadline = Instant::now() + Duration::from_secs(2);
+            loop {
+                match self.observe_job_closed() {
+                    Ok(true) => break,
+                    Ok(false) if Instant::now() < deadline => {
+                        thread::sleep(Duration::from_millis(10));
+                    }
+                    Ok(false) => {
+                        self.diagnostics.push(ProcessDiagnostic::new(
+                            "wait for managed job cleanup",
+                            Some(std_io::ErrorKind::TimedOut),
+                            "job still contains active processes after bounded cleanup",
+                        ));
+                        break;
+                    }
+                    Err(error) => {
+                        self.diagnostics.push(ProcessDiagnostic::new(
+                            "observe managed job cleanup",
+                            Some(error.kind()),
+                            error.to_string(),
+                        ));
+                        break;
+                    }
+                }
+            }
+        }
         let owned_work_pending = self.has_pending_cleanup();
         if owned_work_pending {
             self.diagnostics.push(ProcessDiagnostic::new(
                 "retain cleanup custody",
                 None,
-                "child or overlapped operation remains active; cleanup service retains ownership",
+                "child, managed job or overlapped operation remains active; cleanup service retains ownership",
             ));
             let report = self.snapshot(false);
             let primary = cause.unwrap_or_else(|| ProcessCause::Io {
@@ -839,6 +1048,7 @@ impl ProcessOwner {
 
     fn has_pending_cleanup(&self) -> bool {
         self.exit.is_none()
+            || !self.job_closed
             || self.stdout.is_pending()
             || self.stderr.is_pending()
             || self.stdin.as_ref().is_some_and(PipeWriter::is_pending)
@@ -851,7 +1061,35 @@ impl ProcessOwner {
         }) {
             panic!("deliberate per-owner cleanup panic");
         }
-        while self.exit.is_none() {
+        let deadline = Instant::now() + Duration::from_secs(30);
+        // Keep exact handles and the Job until both membership and termination
+        // are proven. An irrecoverably incomplete capture is retained without spin.
+        while !self.job_closed && Instant::now() < deadline {
+            if !self.job_termination_requested {
+                let _ = self.request_job_termination();
+            }
+            if self.membership_uncertain {
+                // Capture uncertainty bars a closure claim, but must not stop
+                // bounded retries of a failed termination request. Keep the
+                // exact Job and permit in the registry after this deadline.
+                if self.job_termination_requested {
+                    break;
+                }
+                thread::sleep(Duration::from_millis(100));
+                continue;
+            }
+            match self.observe_job_closed() {
+                Ok(true) => break,
+                Ok(false) => thread::sleep(Duration::from_millis(100)),
+                Err(_) if !self.job_termination_requested => {
+                    // A failed accounting read cannot suppress a still-needed
+                    // termination retry for a possibly live descendant.
+                    thread::sleep(Duration::from_millis(100));
+                }
+                Err(_) => break,
+            }
+        }
+        while self.exit.is_none() && Instant::now() < deadline {
             if let Ok(Some(status)) = self.child.try_wait() {
                 self.exit = Some(status);
                 break;
@@ -870,6 +1108,9 @@ impl ProcessOwner {
             || self.stderr.is_pending()
             || self.stdin.as_ref().is_some_and(PipeWriter::is_pending)
         {
+            if Instant::now() >= deadline {
+                break;
+            }
             if let Some(writer) = self.stdin.as_mut().filter(|writer| writer.is_pending()) {
                 let _ = writer.cancel_and_join_bounded(1_000);
             }
@@ -880,6 +1121,84 @@ impl ProcessOwner {
                 let _ = self.stderr.cancel_and_join_bounded(1_000);
             }
         }
+    }
+
+    fn request_job_termination(&mut self) -> std_io::Result<()> {
+        if let Some(job) = self.job.as_ref().map(Arc::clone) {
+            // Snapshot before termination removes members from the PID list.
+            // Capture failure does not prevent a best-effort termination request.
+            let capture_error = self.capture_managed_members().err();
+            #[cfg(feature = "testing-environ")]
+            if std::env::var_os("RHAI_DEBUG_JOB_MEMBERS").is_some() {
+                use std::io::Write;
+                let _ = writeln!(std::io::stderr().lock(), "[DEBUG-owner38] phase=before parent={} job={:?} {}", self.child.id(), job.handle(), job.diagnostic_members());
+            }
+            #[cfg(test)]
+            if let Some(attempts) = &self.termination_attempts {
+                attempts.fetch_add(1, Ordering::AcqRel);
+            }
+            #[cfg(test)]
+            let termination = if self.terminate_failures_remaining > 0 {
+                self.terminate_failures_remaining -= 1;
+                Err(std_io::Error::new(
+                    std_io::ErrorKind::PermissionDenied,
+                    "injected one-shot Job termination refusal",
+                ))
+            } else {
+                job.terminate()
+            };
+            #[cfg(not(test))]
+            let termination = job.terminate();
+            if termination.is_ok() {
+                self.job_termination_requested = true;
+            }
+            termination?;
+            if let Some(error) = capture_error {
+                return Err(error);
+            }
+        }
+        Ok(())
+    }
+
+    fn observe_job_closed(&mut self) -> std_io::Result<bool> {
+        if let Some(job) = self.job.as_ref() {
+            if self.membership_uncertain {
+                return Err(std_io::Error::new(
+                    std_io::ErrorKind::Other,
+                    "managed lifetime membership remains unverified",
+                ));
+            }
+            #[cfg(test)]
+            if self.accounting_failures_remaining > 0 {
+                self.accounting_failures_remaining -= 1;
+                if let Some(observed) = &self.accounting_failures_observed {
+                    observed.fetch_add(1, Ordering::AcqRel);
+                }
+                return Err(std_io::Error::new(
+                    std_io::ErrorKind::Other,
+                    "injected one-shot Job accounting observation error",
+                ));
+            }
+            let active = job.active_processes()?;
+            #[cfg(feature = "testing-environ")]
+            if std::env::var_os("RHAI_DEBUG_JOB_MEMBERS").is_some() {
+                use std::io::Write;
+                let _ = writeln!(std::io::stderr().lock(), "[DEBUG-owner38] phase=account parent={} job={:?} active={active} {}", self.child.id(), job.handle(), job.diagnostic_members());
+            }
+            let closed = self
+                .members
+                .as_ref()
+                .ok_or_else(|| std_io::Error::new(std_io::ErrorKind::Other, "managed capture missing"))?
+                .candidate_closed(job);
+            match closed {
+                Ok(closed) => self.job_closed = closed,
+                Err(error) => {
+                    self.membership_uncertain = true;
+                    return Err(error);
+                }
+            }
+        }
+        Ok(self.job_closed)
     }
 }
 
@@ -988,6 +1307,7 @@ mod tests {
     use std::io::Write;
     use std::os::windows::io::{FromRawHandle, OwnedHandle, RawHandle};
     use windows_sys::Win32::Foundation::{DuplicateHandle, DUPLICATE_SAME_ACCESS};
+    use windows_sys::Win32::System::JobObjects::AssignProcessToJobObject;
     use windows_sys::Win32::System::Threading::{GetCurrentProcess, TerminateProcess};
 
     #[test]
@@ -1115,6 +1435,251 @@ mod tests {
         eprintln!("windows_cleanup_panic_readback exact_child_reaped=true owner_retained=true");
         if std::env::var_os("RHAI_WINDOWS_CLEANUP_PANIC_WRONG_EXPECTATION").is_some() {
             assert!(!owner_was_retained, "deliberately wrong cleanup custody expectation");
+        }
+    }
+
+    #[test]
+    fn windows_background_retries_failed_job_termination_and_retains_uncertain_owner() {
+        let nonce = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap()
+            .as_nanos();
+        let root = std::env::temp_dir().join(format!(
+            "rhai-managed-retry-{}-{nonce}",
+            std::process::id()
+        ));
+        std::fs::create_dir(&root).unwrap();
+        let child = Command::new(std::env::current_exe().unwrap())
+            .args([
+                "--exact",
+                "packages::sys::process::windows::tests::windows_cleanup_panic_fixture",
+                "--nocapture",
+                "--quiet",
+            ])
+            .env_clear()
+            .env("RHAI_WINDOWS_CLEANUP_PANIC_FIXTURE", &root)
+            .stdin(Stdio::null())
+            .stdout(Stdio::null())
+            .stderr(Stdio::null())
+            .spawn()
+            .expect("start gated Job fixture");
+        let mut pending = PendingFixtureSpawn {
+            child: Some(child),
+            root: root.clone(),
+        };
+        let child = pending.child.as_ref().unwrap();
+        let mut duplicate = std::ptr::null_mut();
+        // SAFETY: the exact live child handle is duplicated for independent readback.
+        assert_ne!(unsafe {
+            DuplicateHandle(
+                GetCurrentProcess(),
+                child.as_raw_handle() as HANDLE,
+                GetCurrentProcess(),
+                &mut duplicate,
+                0,
+                0,
+                DUPLICATE_SAME_ACCESS,
+            )
+        }, 0);
+        let guard = CleanupFixtureGuard {
+            handle: Some(unsafe { OwnedHandle::from_raw_handle(duplicate as RawHandle) }),
+            root: root.clone(),
+        };
+        let job = Arc::new(job::ManagedJob::new().expect("create private managed Job"));
+        // SAFETY: the Job and exact fixture process handles are live; this fixture
+        // performs no descendant work before assignment.
+        assert_ne!(unsafe {
+            AssignProcessToJobObject(job.handle(), child.as_raw_handle() as HANDLE)
+        }, 0);
+        let child = pending.child.take().unwrap();
+        drop(pending);
+        let deadline = Instant::now() + Duration::from_secs(5);
+        loop {
+            match std::fs::read_to_string(root.join("ready")) {
+                Ok(value) => {
+                    assert_eq!(value.trim().parse::<u32>().unwrap(), child.id());
+                    break;
+                }
+                Err(error)
+                    if error.kind() == std_io::ErrorKind::NotFound && Instant::now() < deadline =>
+                {
+                    thread::sleep(Duration::from_millis(10));
+                }
+                Err(error) => panic!("Job fixture readiness: {error}"),
+            }
+        }
+        assert_eq!(unsafe {
+            WaitForSingleObject(guard.handle.as_ref().unwrap().as_raw_handle() as HANDLE, 0)
+        }, WAIT_TIMEOUT);
+        let (stdout, stdout_writer) = PipeReader::pair().unwrap();
+        let (stderr, stderr_writer) = PipeReader::pair().unwrap();
+        drop(stdout_writer);
+        drop(stderr_writer);
+        let attempts = Arc::new(AtomicUsize::new(0));
+        let mut owner = ProcessOwner::with_owned_child(
+            child.into(),
+            Some(job),
+            None,
+            stdout,
+            stderr,
+            ActivePermit::acquire().unwrap(),
+        );
+        owner.seed_managed_root().expect("capture exact root before cleanup");
+        owner.membership_uncertain = true;
+        owner.terminate_failures_remaining = 1;
+        owner.termination_attempts = Some(Arc::clone(&attempts));
+        let cell = retain_for_cleanup_inner(owner).expect("start bounded cleanup worker");
+        let deadline = Instant::now() + Duration::from_secs(5);
+        let mut retained = None;
+        while Instant::now() < deadline {
+            if attempts.load(Ordering::Acquire) >= 2 {
+                retained = cell.lock().unwrap_or_else(|p| p.into_inner()).take();
+                if retained.is_some() {
+                    break;
+                }
+            }
+            thread::sleep(Duration::from_millis(10));
+        }
+        let mut owner = retained.expect("uncertain owner remains in registry after bounded retry");
+        assert_eq!(attempts.load(Ordering::Acquire), 2);
+        assert!(owner.job_termination_requested);
+        assert!(!owner.job_closed && owner.membership_uncertain);
+        assert!(owner.has_pending_cleanup());
+        assert_eq!(unsafe {
+            WaitForSingleObject(guard.handle.as_ref().unwrap().as_raw_handle() as HANDLE, 0)
+        }, WAIT_OBJECT_0, "exact Job child must be stopped before readback");
+        owner.membership_uncertain = false;
+        assert!(owner.observe_job_closed().expect("verify exact Job closure"));
+        assert!(!owner.has_pending_cleanup());
+        retained_registry()
+            .lock()
+            .unwrap_or_else(|p| p.into_inner())
+            .retain(|entry| !Arc::ptr_eq(entry, &cell));
+        drop(owner);
+        drop(guard);
+        eprintln!("windows_managed_retry_readback attempts=2 exact_child_stopped=true owner_retained=true");
+        if std::env::var_os("RHAI_WINDOWS_MANAGED_RETRY_WRONG_EXPECTATION").is_some() {
+            assert_eq!(attempts.load(Ordering::Acquire), 1,
+                "deliberately wrong managed termination retry expectation");
+        }
+    }
+
+    #[test]
+    fn windows_background_retries_after_job_accounting_observation_error() {
+        let nonce = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap()
+            .as_nanos();
+        let root = std::env::temp_dir().join(format!(
+            "rhai-managed-accounting-{}-{nonce}",
+            std::process::id()
+        ));
+        std::fs::create_dir(&root).unwrap();
+        let child = Command::new(std::env::current_exe().unwrap())
+            .args([
+                "--exact",
+                "packages::sys::process::windows::tests::windows_cleanup_panic_fixture",
+                "--nocapture",
+                "--quiet",
+            ])
+            .env_clear()
+            .env("RHAI_WINDOWS_CLEANUP_PANIC_FIXTURE", &root)
+            .stdin(Stdio::null())
+            .stdout(Stdio::null())
+            .stderr(Stdio::null())
+            .spawn()
+            .expect("start gated Job fixture");
+        let mut pending = PendingFixtureSpawn {
+            child: Some(child),
+            root: root.clone(),
+        };
+        let child = pending.child.as_ref().unwrap();
+        let pid = child.id();
+        let mut duplicate = std::ptr::null_mut();
+        // SAFETY: the exact live child handle is duplicated for independent readback.
+        assert_ne!(unsafe {
+            DuplicateHandle(
+                GetCurrentProcess(),
+                child.as_raw_handle() as HANDLE,
+                GetCurrentProcess(),
+                &mut duplicate,
+                0,
+                0,
+                DUPLICATE_SAME_ACCESS,
+            )
+        }, 0);
+        let guard = CleanupFixtureGuard {
+            handle: Some(unsafe { OwnedHandle::from_raw_handle(duplicate as RawHandle) }),
+            root: root.clone(),
+        };
+        let job = Arc::new(job::ManagedJob::new().expect("create private managed Job"));
+        // SAFETY: both exact handles are live and the gated fixture creates no descendants.
+        assert_ne!(unsafe {
+            AssignProcessToJobObject(job.handle(), child.as_raw_handle() as HANDLE)
+        }, 0);
+        let child = pending.child.take().unwrap();
+        drop(pending);
+        let deadline = Instant::now() + Duration::from_secs(5);
+        loop {
+            match std::fs::read_to_string(root.join("ready")) {
+                Ok(value) => {
+                    assert_eq!(value.trim().parse::<u32>().unwrap(), pid);
+                    break;
+                }
+                Err(error)
+                    if error.kind() == std_io::ErrorKind::NotFound && Instant::now() < deadline =>
+                {
+                    thread::sleep(Duration::from_millis(10));
+                }
+                Err(error) => panic!("Job fixture readiness: {error}"),
+            }
+        }
+        assert_eq!(unsafe {
+            WaitForSingleObject(guard.handle.as_ref().unwrap().as_raw_handle() as HANDLE, 0)
+        }, WAIT_TIMEOUT);
+        let (stdout, stdout_writer) = PipeReader::pair().unwrap();
+        let (stderr, stderr_writer) = PipeReader::pair().unwrap();
+        drop(stdout_writer);
+        drop(stderr_writer);
+        let attempts = Arc::new(AtomicUsize::new(0));
+        let accounting_errors = Arc::new(AtomicUsize::new(0));
+        let mut owner = ProcessOwner::with_owned_child(
+            child.into(),
+            Some(job),
+            None,
+            stdout,
+            stderr,
+            ActivePermit::acquire().unwrap(),
+        );
+        owner.seed_managed_root().expect("capture exact root before cleanup");
+        owner.terminate_failures_remaining = 1;
+        owner.termination_attempts = Some(Arc::clone(&attempts));
+        owner.accounting_failures_remaining = 1;
+        owner.accounting_failures_observed = Some(Arc::clone(&accounting_errors));
+        let cell = retain_for_cleanup_inner(owner).expect("start bounded cleanup worker");
+        let deadline = Instant::now() + Duration::from_secs(5);
+        loop {
+            let retired = !retained_registry()
+                .lock()
+                .unwrap_or_else(|p| p.into_inner())
+                .iter()
+                .any(|entry| Arc::ptr_eq(entry, &cell));
+            if retired {
+                break;
+            }
+            assert!(Instant::now() < deadline, "Job owner did not finish bounded retry");
+            thread::sleep(Duration::from_millis(10));
+        }
+        assert_eq!(accounting_errors.load(Ordering::Acquire), 1);
+        assert_eq!(attempts.load(Ordering::Acquire), 2);
+        assert_eq!(unsafe {
+            WaitForSingleObject(guard.handle.as_ref().unwrap().as_raw_handle() as HANDLE, 0)
+        }, WAIT_OBJECT_0, "exact Job child must be stopped after retry");
+        drop(guard);
+        eprintln!("windows_managed_accounting_retry_readback attempts=2 accounting_errors=1 exact_child_stopped=true owner_retired=true");
+        if std::env::var_os("RHAI_WINDOWS_ACCOUNTING_RETRY_WRONG_EXPECTATION").is_some() {
+            assert_eq!(attempts.load(Ordering::Acquire), 1,
+                "deliberately wrong Job accounting retry expectation");
         }
     }
 

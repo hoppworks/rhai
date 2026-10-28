@@ -1,0 +1,16 @@
+{
+  "nonce": "721a05f238c3d0bea14df69d8a20cd72",
+  "source_commit": "c62a0a99113beb51601ee9ea39656367fe7b51c5",
+  "manifest_sha256": "240a5603ed49d8e57b4b4c98b4139023cb252dbd00f3d84c07ea58b2d319ac80",
+  "archive_sha256": "bef2924f13911f4306f21d0d18508d75a27e9a938312eba850f513e0b8fdf2fa",
+  "file_count": 448,
+  "source_bytes": 5359332,
+  "expected": "native Windows real Job one-shot retry with wrong and restored unit controls",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": false,
+  "command_dispatched": false,
+  "product_test_started": false
+}
