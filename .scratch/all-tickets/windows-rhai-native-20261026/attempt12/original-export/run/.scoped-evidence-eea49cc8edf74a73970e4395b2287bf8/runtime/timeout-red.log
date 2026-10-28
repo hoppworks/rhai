@@ -1,0 +1,49 @@
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: method `cancel_and_join` is never used
+   --> src\packages\sys\process\windows\io.rs:234:19
+    |
+ 45 | impl PipeReader {
+    | --------------- method in this implementation
+...
+234 |     pub(super) fn cancel_and_join(&mut self) -> io::Result<()> {
+    |                   ^^^^^^^^^^^^^^^
+
+warning: `rhai` (lib) generated 2 warnings
+warning: unused import: `PathBuf`
+ --> src\bin\rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 0.13s
+     Running tests\sys_process_windows.rs (work\target\debug\deps\sys_process_windows-c2b310be195d180b.exe)
+
+running 1 test
+timeout_range_child_record=Some("pid=6096\n")
+
+thread 'windows_run_raw_rejects_unrepresentable_timeout_before_spawn' (3980) panicked at tests\sys_process_windows.rs:122:24:
+nonrepresentable timeout must be rejected before spawn: {"code": 0, "signal": (), "stderr": [], "stderr_complete": true, "stdout": [0a72756e6e696e67 203120746573740a 2e0a746573742072 6573756c743a206f 6b2e203120706173 7365643b20302066 61696c65643b2030 2069676e6f726564 3b2030206d656173 757265643b203320 66696c7465726564 206f75743b206669 6e69736865642069 6e20302e3030730a 0a], "stdout_complete": true, "success": true, "timed_out": false}
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test windows_run_raw_rejects_unrepresentable_timeout_before_spawn ... FAILED
+
+failures:
+
+failures:
+    windows_run_raw_rejects_unrepresentable_timeout_before_spawn
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 3 filtered out; finished in 0.02s
+
+error: test failed, to rerun pass `--test sys_process_windows`

@@ -1,0 +1,44 @@
+{
+  "id": "rhai-public-refresh-47066f0d4e2a4f8bb45f1e62e8f7e5ad",
+  "frames": 21,
+  "files": {
+    "build-observer.json": {
+      "path": "build-observer.json",
+      "sha256": "2de2bc47ae25872d97661cd4a6bc5d80d50ea81bf4842d0c7fea2e7215d62ba9",
+      "length": 595
+    },
+    "project-readback.json": {
+      "path": "project-readback.json",
+      "sha256": "6891d8e6d5c97c3cf068fe57c86c23d3ae913e51140b2f3698c2b23641375993",
+      "length": 833
+    },
+    "bootstrap.stdout": {
+      "path": "bootstrap.stdout",
+      "sha256": "059c980c4f5dd0889318b4074cddf0017ee34e257bdd7c3dfc2a3007bee9258f",
+      "length": 1086
+    },
+    "bootstrap.stderr": {
+      "path": "bootstrap.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/monitor-source-47066f0d4e2a4f8bb45f1e62e8f7e5ad/run-result.txt": {
+      "path": "run/monitor-source-47066f0d4e2a4f8bb45f1e62e8f7e5ad/run-result.txt",
+      "sha256": "79c5b9102422b2f755e2aed8ef416a0a3ab0156de7c5ba4c85dbeda2e6ac6761",
+      "length": 124
+    },
+    "run/monitor-source-47066f0d4e2a4f8bb45f1e62e8f7e5ad/build-manifest.txt": {
+      "path": "run/monitor-source-47066f0d4e2a4f8bb45f1e62e8f7e5ad/build-manifest.txt",
+      "sha256": "63145b571f26bdfb4c482231259374557f87c1b9a1b48ddbd51b6f98377dab7c",
+      "length": 1834
+    }
+  },
+  "bytes": 4472,
+  "serial_sha256": "346adb03859eb0df6dea9715e9e44f9c68352b2456aa6e2642f6261e87ec7a03",
+  "serial_bytes": 12898,
+  "manifest_sha256": "63145b571f26bdfb4c482231259374557f87c1b9a1b48ddbd51b6f98377dab7c",
+  "binary_sha256": {
+    "ScopedRunner.exe": "0de44621e2ed2ec91f231ed26756fa5f85195f60e722f8b4215db88531189599",
+    "MonitorAcceptanceDriver.exe": "f68a45c63ab32fb25653138a13470efed0c1a72b098627e7c30aecc7b95820f0"
+  }
+}

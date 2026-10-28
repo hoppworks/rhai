@@ -1,0 +1,31 @@
+{
+  "source_manifest_sha256": "99fd445ee238abee7d2c5a0bcff4de3e5de2964801c80e9dcd6dad60cd78d599",
+  "source_files": 439,
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "public_build_manifest_sha256": "63145b571f26bdfb4c482231259374557f87c1b9a1b48ddbd51b6f98377dab7c",
+  "driver_exit": 0,
+  "driver_seconds": 117.43418419999999,
+  "journal_phases": [
+    "INTENT",
+    "IDENTITY",
+    "STAGED",
+    "LIFECYCLE",
+    "EVIDENCE",
+    "OUTCOME",
+    "REMOVE_INTENT",
+    "REMOVED"
+  ],
+  "journal_crc_count": 8,
+  "red": "intended wrong-exit assertion, exit 101 in Cargo output",
+  "green_summaries": [
+    7,
+    2
+  ],
+  "independent_os_exit_codes": [
+    0,
+    7
+  ],
+  "runtime_absence_from_guest_observer": true,
+  "serial_sha256": "116b72482ab15b538162cb9f384ae05953b83c0a691e5e80688dad14a6b4a9c1",
+  "original_export_readback_sha256": "528041f9311d9448b114c92095c18b70ad831a53fceecd82bbf9e9318e698e35"
+}

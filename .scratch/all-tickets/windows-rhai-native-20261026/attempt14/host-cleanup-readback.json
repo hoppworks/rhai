@@ -1,0 +1,23 @@
+{
+  "retired": [
+    {
+      "stage": "/var/roothome/.local/share/agent-builds/rhai/windows-public-refresh-e2047d40e48afb4426d07e2a1e881f19",
+      "medium": "/var/lib/libvirt/images/rhai-win11-quality/public-refresh-e2047d40e48afb4426d07e2a1e881f19.iso",
+      "iso_sha256": "a53108b8d69e4c86a3a4ec81dc91808610d06fe7fcc75e8066e730e70d78bee8",
+      "serial_sha256": "39a1be223ef96b2e4c4bcb34f074da8eab656dca5719b6d0ea40d0ce3d9639d8"
+    },
+    {
+      "stage": "/var/roothome/.local/share/agent-builds/rhai/windows-rhai-native-f3ffd1ef5775e316afec9c05663523b0",
+      "medium": "/var/lib/libvirt/images/rhai-win11-quality/rhai-native-f3ffd1ef5775e316afec9c05663523b0.iso",
+      "iso_sha256": "50d8017f8aba30d1edf5da62096376403617723fc8a87d41f2f128c3535e0923",
+      "serial_sha256": "c857517641d6f988ce95f02d5213e630a94a86a0ee71e60b8f7f78dcd965c2ef"
+    },
+    {
+      "stage": "/var/roothome/.local/share/agent-builds/rhai/windows-rhai-native-125661064694d9b32879b4e665dff275",
+      "medium": "/var/lib/libvirt/images/rhai-win11-quality/rhai-native-125661064694d9b32879b4e665dff275.iso",
+      "iso_sha256": "13de27c0dba744771a630760b23382ca3652f7a80fbd82aea4ca781c7f7d0359",
+      "serial_sha256": "c58a38aa6b7278691d32845b39217e6e28062ec1b4636aaf311441fcf162cf0b"
+    }
+  ],
+  "domain_media_references_absent": true
+}

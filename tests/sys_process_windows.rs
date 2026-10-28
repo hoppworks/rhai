@@ -3,8 +3,8 @@
 
 mod sys_support;
 
-use rhai::packages::sys::{ProgramPolicy, SysConfig};
-use rhai::{Blob, Map};
+use rhai::packages::sys::{ProgramPolicy, SysConfig, SysError};
+use rhai::{Blob, EvalAltResult, Map};
 use std::ffi::c_void;
 use std::process;
 use std::thread;
@@ -13,6 +13,7 @@ use sys_support::{engine, TempDir};
 
 const FIXTURE_CODE_ENV: &str = "RHAI_SYS_WINDOWS_PROCESS_CODE";
 const FIXTURE_RECORD_ENV: &str = "RHAI_SYS_WINDOWS_PROCESS_RECORD";
+const FIXTURE_FAST_RECORD_ENV: &str = "RHAI_SYS_WINDOWS_PROCESS_FAST_RECORD";
 const WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_PROCESS_WRONG_EXPECTATION";
 const LIBTEST_QUIET_START: &[u8] = b"\nrunning 1 test\n";
 
@@ -90,6 +91,40 @@ fn windows_process_fixture() {
     process::exit(code);
 }
 
+#[test]
+fn windows_process_fast_probe() {
+    let Ok(record) = std::env::var(FIXTURE_FAST_RECORD_ENV) else {
+        return;
+    };
+    std::fs::write(record, format!("pid={}\n", process::id())).expect("write fast child record");
+}
+
+#[test]
+fn windows_run_raw_rejects_timeout_outside_duration_range_before_spawn() {
+    let records = TempDir::new();
+    let record = records.path().join("fast-child-record.txt");
+    let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let script_record = record.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let script = format!(
+        r#"run_raw("{executable}", ["--exact", "windows_process_fast_probe", "--quiet"], #{{
+            env_clear: true,
+            env: #{{ {FIXTURE_FAST_RECORD_ENV}: "{script_record}" }},
+            timeout: 1.0e20
+        }})"#
+    );
+    let result = engine(SysConfig::default().programs(ProgramPolicy::Any)).eval::<Map>(&script);
+    let child_record = std::fs::read_to_string(&record).ok();
+    eprintln!("timeout_range_child_record={child_record:?}");
+    let error = result.expect_err("timeout outside Duration range must be rejected before spawn");
+    match *error {
+        EvalAltResult::ErrorRuntime(value, _) => {
+            assert!(matches!(value.try_cast::<SysError>(), Some(SysError::Denied(_))));
+        }
+        other => panic!("expected typed Denied error, got {other:?}"),
+    }
+    assert!(child_record.is_none(), "rejected timeout started a real child");
+}
+
 /// Public Windows run contract: raw streams, nonzero exit as data, and completion after the
 /// child-written pre-exit record, captured streams and exact OS process-handle termination
 /// are observed independently.
@@ -116,12 +151,10 @@ fn windows_run_raw_captures_output_and_nonzero_exit() {
             }})"#
         );
         let result = engine.eval::<Map>(&script);
-        if let Err(error) = &result {
-            eprintln!("windows public run_raw failed before OS observation: {error:?}");
-        }
-        let (observed_pid, observed_exit) = observer.join().expect("join independent OS observer");
+        let observation = observer.join();
+        let result = result.unwrap_or_else(|error| panic!("windows public run_raw failed before OS observation: {error:?}; child_observed={}", observation.is_ok()));
+        let (observed_pid, observed_exit) = observation.expect("join independent OS observer");
         eprintln!("windows_process_os_readback pid={observed_pid} exit={observed_exit} exact_handle_signaled=true");
-        let result = result.unwrap();
         assert_eq!(result["success"].as_bool().unwrap(), code == 0);
         assert_eq!(result["code"].as_int().unwrap(), rhai::INT::from(code));
         assert!(result["stdout_complete"].as_bool().unwrap());

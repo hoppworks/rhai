@@ -881,6 +881,42 @@ guest scope awaits exact retirement. This accepts these native target slices
 only; Windows process/policy, other feature/MSRV rows, Package D and release
 closure remain open.
 
+The first two-target native Windows process attempt (`sys_process_windows` and
+`sys_process_report`) compiled at test-only source `4f3e4cc`,
+`testing-environ,sys,metadata`, but stopped before its intended wrong-exit RED.
+The real Engine call produced no child readiness record. Current production
+`process::register` exposes execution only under `#[cfg(unix)]`; Windows has no
+`run_raw` entry. The independent review classifies this as a Windows product
+gap. Attempt10's 89-frame/nine-file original export and four-record failure
+journal are in `../.scratch/all-tickets/windows-rhai-native-20261025/attempt10/`.
+Neither a process contract nor runtime retirement was accepted. Implement a
+Windows process entry with owned cancellation/capture before repeating the
+targeted RED/GREEN; the unchanged test-only recipe cannot pass. This paragraph
+records the historical attempt10 gap, which the following narrow slice now
+partially resolves.
+
+The Windows direct-child `run_raw` entry now has native acceptance for normal
+success/nonzero exit, raw output, normal reaping and two timeout-boundary
+guards at the attempt14 source/lock under `testing-environ,sys,metadata` and
+native Rust/Cargo 1.93.0. The public Engine test checks child-written records,
+independent exact Windows process handles (exits 0 and 7) and absence of a
+child record for an out-of-`Duration` timeout. A focused native unit test covers
+the otherwise difficult-to-reach `Instant::checked_add` overflow branch. The
+wrong-exit and deadline wrong-expectation controls fail as intended; restored
+unit GREEN and integrated 7+4 GREEN pass. The Driver exits 0 with full custody,
+eight valid journal records and exact runtime removal. The 439-file source
+closure, original 214-frame/15-file export and combined independent review PASS
+are in `../.scratch/all-tickets/windows-rhai-native-20261026/attempt14/`.
+Attempt11's smaller normal-path result remains accepted. Attempt12's apparent
+RED and attempt13's failed GREEN used an incorrect `1.0e19` test assumption;
+neither proves an overflow bug at that input. Both are retained as cause history.
+The public BuildOnly was refreshed once with unchanged 21
+source inputs (`public-build-refresh2/`), finite reuse only through 2026-10-30
+12:00 UTC. Windows `run`, `spawn`, stdin, real timeout cancellation, output
+overflow, exceptional cleanup, managed Job scope, other feature profiles and
+release/MSRV acceptance remain open. Do not use this slice to close Ticket03 or
+the entire Windows process package.
+
 No UI is part of Rhai's acceptance stack. The full path is script → real Engine →
 host package → OS. Storage proof is required for filesystem effects; independent
 peers and process observations replace storage writes for networking/process
@@ -1237,7 +1273,7 @@ row is closed by a source test alone or by an unreviewed/provisional result.
 | P13 | `tests/sys_process_windows.rs` | Open: existing Windows test covers raw output/nonzero exit, not default `.bat`/`.cmd` denial. |
 | X1 | `scalar_run_with_cwd_works_without_collections`; `linux-scalar-process-proof.md` | Accepted for named Linux feature rows: public Engine success, exit 0 and independent child record; no wider matrix follows. |
 | X2 | tests/sys_process.rs::missing_program_and_cwd_report_not_found_without_starting_child; .scratch/all-tickets/process-not-found-proof/proof.md | Partial: Workhorse Linux x86_64/Rust 1.93.0 proves public Engine run returns Io/NotFound for a missing program and the fixture record stays absent, with a valid-child control and independent reaping readback. Other OS, MSRV and feature rows remain open. The reviewed Linux package-minimum addendum `.scratch/rhai-wayfinder-replan-20261008/results/linux-process-minimum-20261008T201200Z-6e2ba1d7/proof.md` additionally accepts this exact public-Engine assertion at Rust/Cargo1.77.2, `testing-environ,sys`, with unchanged oracles, reused original RED controls and fresh native GREEN/readback/reap. Other uncovered native/feature rows remain open. |
-| X3 | `run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data`; `linux-process-options-proof.md` | Accepted for named Linux rows: exit 0/7 and exact raw bytes as result data. |
+| X3 | `run_raw_captures_exact_stream_bytes_and_nonzero_exit_as_data`; `linux-process-options-proof.md`; native Windows `attempt14/proof.md` | Accepted for named Linux rows: exit 0/7 and exact raw bytes as result data. The native Windows direct-child `run_raw` slice additionally proves exit 0/7, raw capture and independent exact-handle reaping at `testing-environ,sys,metadata`, Rust/Cargo 1.93.0 with combined review. Managed scope, Windows MSRV, other profiles and broader process contracts remain open. |
 | X4 | `tests/sys_process.rs::run_preserves_argv_boundaries_without_shell_interpolation`; `.scratch/all-tickets/process-argv-evidence/attempt-01/proof.md` | Partial: Workhorse Linux x86_64/Rust 1.93.0 `testing-environ,sys` proves spaces and both quote kinds round-trip byte-for-byte through public `Engine::run` to a real child. Other OS, MSRV and feature rows remain open. The reviewed Linux package-minimum addendum `.scratch/rhai-wayfinder-replan-20261008/results/linux-process-minimum-20261008T201200Z-6e2ba1d7/proof.md` additionally accepts this exact public-Engine assertion at Rust/Cargo1.77.2, `testing-environ,sys`, with unchanged oracles, reused original RED controls and fresh native GREEN/readback/reap. Other uncovered native/feature rows remain open. |
 | X5 | Same test and proof | Partial: the named Linux row proves `$HOME`, `|`, `;`, `&&`, and a command-substitution payload remain literal; its marker is absent. Other OS, MSRV and feature rows remain open. The reviewed Linux package-minimum addendum `.scratch/rhai-wayfinder-replan-20261008/results/linux-process-minimum-20261008T201200Z-6e2ba1d7/proof.md` additionally accepts this exact public-Engine assertion at Rust/Cargo1.77.2, `testing-environ,sys`, with unchanged oracles, reused original RED controls and fresh native GREEN/readback/reap. Other uncovered native/feature rows remain open. |
 | X6 | Same test and proof | Partial: the named Linux row proves a trailing empty argument is preserved as a distinct NUL-delimited argv entry. Other OS, MSRV and feature rows remain open. The reviewed Linux package-minimum addendum `.scratch/rhai-wayfinder-replan-20261008/results/linux-process-minimum-20261008T201200Z-6e2ba1d7/proof.md` additionally accepts this exact public-Engine assertion at Rust/Cargo1.77.2, `testing-environ,sys`, with unchanged oracles, reused original RED controls and fresh native GREEN/readback/reap. Other uncovered native/feature rows remain open. |

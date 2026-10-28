@@ -1,0 +1,31 @@
+{
+  "nonce": "ee369f78f6c44ca8a5a7c9abe3a9ba99",
+  "source_commit": "6f052eb3835bd3fd5f2911dea9593c6b97c3085c",
+  "source_dirty": true,
+  "source_manifest_sha256": "a7b6c7c9c6a7243aff406bfdb6f62dbb8006ad70e9e86a283a59dc0d02d2d251",
+  "archive_sha256": "09e58d48725560bed1b7164bb0b930ddeeeda07eabc42f35a0c9e28d13d3c5ae",
+  "file_count": 439,
+  "total_source_bytes": 5130849,
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "start_sha256": "cfd109f29f18425833fe7b0125d396ddfa11f41e2df2b81c0d2d1114376e7828",
+  "control_sha256": "f3de5810880d000107447f95dff40b9c4f260c8cc01e965c7aa0ad7623f16583",
+  "attribute_control_sha256": "0615fa1d025fa9dce8deb4a4388550889f42ab4fd5403545eac4af8e2f2a5661",
+  "contract_sha256": "18fb77a0f08e9e14670d21ad76abaea7512cf7475bf6e4be4f9d5e8fae64cad9",
+  "iso_sha256": "de16baad5df299ce135e319706b584cbbf0dddb94ff6b4554f50ce913238e9a0",
+  "host_media": "/var/lib/libvirt/images/rhai-win11-quality/rhai-native-ee369f78f6c44ca8a5a7c9abe3a9ba99-r1.iso",
+  "dispatch_sha256": "e2d73cd7a57e1f63c9f552a9fe00bb1d21b4e0e688439c18168496854f1a3284",
+  "preflight_sha256": "dda1186a290f3fcade193409e61de0b6aa3a1346e99100d019ccd30439816736",
+  "public_build_manifest_sha256": "63145b571f26bdfb4c482231259374557f87c1b9a1b48ddbd51b6f98377dab7c",
+  "public_build_original_expiry_utc": "2026-10-26T11:40:00Z",
+  "planned": {
+    "native_drivers": 1,
+    "cargo_compile": 1,
+    "known_broken_timeout_red": 1
+  },
+  "limits": {
+    "guest_min_disk_bytes": 2147483648,
+    "guest_min_ram_bytes": 1073741824,
+    "host_min_free_bytes": 4294967296,
+    "public_build_lifetime_seconds_remaining_required": 210
+  }
+}

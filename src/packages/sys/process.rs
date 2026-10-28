@@ -5,6 +5,8 @@ use std::io;
 
 #[cfg(unix)]
 mod unix;
+#[cfg(windows)]
+mod windows;
 #[cfg(unix)]
 pub(super) use unix::CleanupService;
 #[cfg(unix)]
@@ -143,6 +145,8 @@ impl ProcessReport {
 pub(super) fn register(module: &mut Module, state: &crate::Shared<super::SysState>) {
     #[cfg(unix)]
     unix::register(module, state);
+    #[cfg(windows)]
+    windows::register(module, state);
 }
 
 /// Primary failure cause for an operation that produced a process report.

@@ -1,0 +1,55 @@
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: method `cancel_and_join` is never used
+   --> src\packages\sys\process\windows\io.rs:234:19
+    |
+ 45 | impl PipeReader {
+    | --------------- method in this implementation
+...
+234 |     pub(super) fn cancel_and_join(&mut self) -> io::Result<()> {
+    |                   ^^^^^^^^^^^^^^^
+
+warning: `rhai` (lib) generated 2 warnings
+warning: unused import: `PathBuf`
+ --> src\bin\rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run" -p rhai` to apply 1 suggestion)
+    Finished `test` profile [unoptimized] target(s) in 0.13s
+     Running tests\sys_process_report.rs (work\target\debug\deps\sys_process_report-d8dccb6d8676fb1e.exe)
+
+running 7 tests
+test prior_sys_error_variants_keep_display_and_classification ... ok
+test process_report_rust_accessors_cover_absent_code_signal_and_diagnostics ... ok
+test scope_defaults_and_builder ... ok
+test script_mutating_copied_report_blobs_and_collections_does_not_change_snapshot ... ok
+test absent_and_signal_exit_are_readable_through_engine ... ok
+test process_causes_retain_primary_classification_and_snapshot ... ok
+test old_error_variants_keep_rhai_classification_and_have_no_process_report ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests\sys_process_windows.rs (work\target\debug\deps\sys_process_windows-c2b310be195d180b.exe)
+
+running 3 tests
+test windows_process_fast_probe ... ok
+test windows_process_fixture ... ok
+windows_process_os_readback pid=2712 exit=0 exact_handle_signaled=true
+windows_process_os_readback pid=4172 exit=7 exact_handle_signaled=true
+test windows_run_raw_captures_output_and_nonzero_exit ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 0.05s
+

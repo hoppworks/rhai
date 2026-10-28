@@ -1,0 +1,15 @@
+{
+  "before_inode": 126692322,
+  "before_offset": 1753536,
+  "rotated_path": "/var/log/libvirt/qemu/rhai-win11-quality-serial0.log.0",
+  "rotated_inode": 126692322,
+  "rotated_size": 2097152,
+  "first_bytes": 343616,
+  "first_sha256": "5e7e79cf1c6c56e3bb4626427ee40c76a7c6f56639b0fe711f56ca28f8540f14",
+  "current_path": "/var/log/libvirt/qemu/rhai-win11-quality-serial0.log",
+  "current_inode": 126706676,
+  "second_bytes": 16461,
+  "second_sha256": "402a50229f136e034714a7bad019447cd1136831c92260230c2dc9033369d265",
+  "joined_bytes": 360077,
+  "joined_sha256": "bc084c83f6340e2868b5422e69b7a2534980633aab3022e305186336492eee55"
+}
