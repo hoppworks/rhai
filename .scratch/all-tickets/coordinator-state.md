@@ -10,11 +10,11 @@ Use current central agent-skills `d6024420` plus applicable local edits and proj
 
 ## Current step
 
-Fork-main includes reviewed Windows X35 and the POSIX combined `f32_float` slice at `59a8754d`. The latter passed native macOS/Linux runs and independent review. A–F/Ticket03/release remain open.
+Fork-main includes reviewed Windows X35 and POSIX `f32_float` at `59a8754d`. Native Windows bootstrap source review is READY; its mounted medium passed the guest PowerShell parser without starting installation. A–F/Ticket03/release remain open.
 
 ## Next action
 
-Windows guest inventory found only MSVC1.93.0; see `windows-rhai-native-20261028/toolchain-inventory-20261028.md`. Prepare bounded guest-owned Rust1.77.2 bootstrap, bind source/lock/SDK, then run native release cases through the existing Job/monitor route. Retire guest scopes only after identity/inactivity checks.
+Dispatch the hash-guarded `msrv-bootstrap-20261028/Start.ps1` once through native Job/monitor custody, export original receipts, verify toolchain and restore original sdc. Then bind source/lock/SDK for Windows1.77.2 release cases.
 
 ## Goal
 
@@ -48,7 +48,7 @@ POSIX Rust1.77.2 combined `unchecked`: macOS 151/0/1ignored, Linux 160/0/3ignore
 
 POSIX Rust1.77.2 combined `f32_float`: macOS and Linux three intended wrong101 assertions each; restored 11-target suites 159/0/1ignored and 167/0/3ignored. Mac attempt01 parser stopped after valid RED; same-source attempt02 passed GREEN. Combined review PASS: `.scratch/all-tickets/release-matrix-20261028/posix-f32-float-proof.md`.
 
-Attempts36–39 exposed false Job closure. Attempts50–58 cover batch injection/fix, exact membership, bounded retry, public Managed lifecycle, parent-CWD resolution, full 31-test Windows process target and assertion controls under their documented bindings. Attempt57 is diagnostic RED only. New attempt59 manifested a real missed exact-child fallback after a permanently refused Job exhausted the shared 30-second deadline. The correction preserves finite Job retry and grants at least five seconds each for exact-child and I/O fallback. Native Windows Rust/Cargo1.93.0, `testing-environ,sys,metadata`, manifest `34686903...`, lock `12084a90...`: synthetic permanent-refusal wrong101/restored GREEN0 with 299 refusals, exact child stopped and retained owner; two neighboring unit tests green. Attempt60 reused byte-identical source and passed public final-drop kill/retain wrong101/101 and GREEN0, with independent parent/worker/sentinel readbacks. Combined Terra review READY for the bounded package. Actual OS faults, live descendants under permanent refusal, other features/toolchains and release remain open. Proof: `.scratch/all-tickets/windows-rhai-native-20261028/attempt59/` and `attempt60/`.
+Attempts36–39 exposed false Job closure; attempts50–58 covered batch injection, membership, retry, lifecycle and CWD search. Attempt59 fixed a missed exact-child fallback after permanent Job refusal: wrong101/GREEN0, 299 refusals, owner retained. Attempt60 reused identical source for final-drop wrong101/101 and GREEN0 with parent/worker/sentinel readbacks. Combined review READY. Actual OS faults, other features/toolchains and release remain open. Detailed source, lock and causes: Windows `attempt59/` and `attempt60/` proof folders.
 
 Attempt61 freezes current base plus X33 test (`160a37ef...`, same lock) and passes native Windows Managed child-PATH-over-parent-CWD wrong101/GREEN0, 31/31 suite and independent child executable readback. Observer Driver0 in 104.824s, 202 frames/14 hash-checked files, eight valid journal transitions through REMOVED; own host stage/ISO retired, guest outer scope retained. Combined independent review PASS. Proof: `.scratch/all-tickets/windows-rhai-native-20261028/attempt61/`.
 
@@ -58,7 +58,7 @@ Attempt63 DirectChild timed out before assertion; captured-handle inheritance re
 
 ## Retained resources
 
-Workhorse VM `dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19` has original sdc restored; foreign sdb untouched. Native public BuildOnly expires 2026-10-30 12:00 UTC. Guest outer evidence scopes from attempts52–64 remain, including `n-c50a944f`/`n-87438574`; exact host stages/ISOs were removed. Prior attempt36/48 guest runtimes require exact evidence-first retirement. Clean only proven owned inactive resources; previous full scope list is in the state history.
+Workhorse VM `dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19`: foreign sdb untouched; own ISO `rhai-msrv-bootstrap-a7e54f39...iso` temporarily on sdc, original `acceptance-20261008T125846Z-b7f83433/monitor-fixture02.iso` to restore after export. Own host stage `windows-msrv-bootstrap-a7e54f39...`; ISO build scope `windows-msrv-iso-20261028-c4d9` retired. Native public BuildOnly expires 2026-10-30 12:00 UTC. Planned retained guest home `C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-a7e54f39\toolchain-home`: owner Rhai coordinator, Rust1.77.2 MSVC release gate, rustup SHA `6f4bef...`, postrun ceiling2GiB, expiry 2026-11-01 00:00 UTC; no disk quota. Guest evidence scopes52–64 remain; old36/48 require exact retirement. Preserve foreign work and prior proof; detailed scopes in history.
 
 ## Cause history
 
