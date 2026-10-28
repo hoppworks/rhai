@@ -10,11 +10,11 @@ Use current central agent-skills `d6024420` plus applicable local edits and proj
 
 ## Current step
 
-Fork-main is `0cec8496`, including reviewed Windows X35 and six POSIX profile slices. The POSIX combined `f32_float` slice passed bounded macOS/Linux runs and independent review; it awaits commit. A–F/Ticket03/release remain open.
+Fork-main includes reviewed Windows X35 and the POSIX combined `f32_float` slice at `59a8754d`. The latter passed native macOS/Linux runs and independent review. A–F/Ticket03/release remain open.
 
 ## Next action
 
-Commit/push reviewed POSIX `f32_float`, verify fork-main head, then address the next native Windows/MSRV or Managed fault gate. Retire guest scopes only after identity/inactivity checks.
+Inventory installed toolchains inside the running Workhorse Windows guest through the existing bounded native custody path; determine whether Rust1.77.2 is present before selecting its release gate. Existing Windows proof pins only Rust1.93.0. Retire guest scopes only after identity/inactivity checks.
 
 ## Goal
 
