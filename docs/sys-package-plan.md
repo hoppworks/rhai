@@ -912,10 +912,30 @@ RED and attempt13's failed GREEN used an incorrect `1.0e19` test assumption;
 neither proves an overflow bug at that input. Both are retained as cause history.
 The public BuildOnly was refreshed once with unchanged 21
 source inputs (`public-build-refresh2/`), finite reuse only through 2026-10-30
-12:00 UTC. Windows `run`, `spawn`, stdin, real timeout cancellation, output
-overflow, exceptional cleanup, managed Job scope, other feature profiles and
-release/MSRV acceptance remain open. Do not use this slice to close Ticket03 or
-the entire Windows process package.
+12:00 UTC. At that attempt14 binding, Windows `run`, `spawn`, stdin, real
+timeout cancellation, output overflow, exceptional cleanup, managed Job scope,
+other feature profiles and release/MSRV acceptance remained open. Do not use
+this slice to close Ticket03 or the entire Windows process package.
+
+The following bounded native Windows text slice now passes at the attempt17
+source/lock and `testing-environ,sys,metadata` on Cargo/Rust 1.93.0. The public
+four-argument `run(program, args, options)` returns lossy strings for invalid
+UTF-8, retains normal/nonzero exits and independent exact child-handle
+readbacks, selects the engine string limit rather than its array limit, and
+returns typed `OutputLimit` with the original raw report when decoded text
+expands beyond that limit. Wrong text-exit and wrong decoded-expansion controls
+each failed at their intended assertions; restored full-target GREEN passed
+7 + 6 tests. The same run also preserved the raw-path and deadline regressions.
+The native Driver exited 0 with exact custody, runtime removal and eight
+length/CRC-valid journal states. The 220-frame/16-file original export,
+combined independent review PASS and exact host media retirement are in
+`../.scratch/all-tickets/windows-rhai-native-20261028/attempt17/`. Attempt15's
+array-literal pre-assertion failure and attempt16's stale copied-helper cleanup
+failure are retained there as cause history; attempt16's product assertions
+passed, but its incomplete runner receipt is not the acceptance. Other
+overloads, native `no_index`, Windows 1.77.2, managed Jobs, `spawn`, stdin,
+real timeout cancellation, output overflow, exceptional/descendant cleanup,
+Ticket03 and release acceptance remain open.
 
 No UI is part of Rhai's acceptance stack. The full path is script → real Engine →
 host package → OS. Storage proof is required for filesystem effects; independent
@@ -1285,7 +1305,7 @@ row is closed by a source test alone or by an unreviewed/provisional result.
 | X12 | Raw capture and options proof | Accepted for named Linux rows: stdout and stderr are separately observed. |
 | X13 | `process_supervisor_handles_large_simultaneous_io_and_exact_per_stream_caps`; `linux-process-io-proof.md` | Accepted only for the two sensitivity-backed Linux claims and recorded feature rows; not a complete IO or platform matrix. |
 | X14 | `tests/sys_process.rs::run_io_contract_empty_output`; `.scratch/all-tickets/process-io-contract-evidence/attempt-01/proof.md`; `.scratch/all-tickets/darwin-io-contracts-20261008/attempt-01/proof.md` | Partial accepted: Workhorse Linux x86_64 and Darwin arm64/macOS 27.0.1, Rust/Cargo 1.93.0, `testing-environ,sys`. Both real public `run` cases return empty stdout/stderr and assert child exit/reaping; the combined review accepts reuse of the Linux wrong-output sensitivity control because the assertion source/helper are byte-identical. The zero-cap silent-output branch is distinct. Other OS, MSRV and feature rows remain open. |
-| X15 | Raw capture/options proof | Accepted for named Linux rows: exact raw bytes and lossy text behavior, including nonzero exit. |
+| X15 | Raw capture/options proof; native Windows `.scratch/all-tickets/windows-rhai-native-20261028/attempt17/proof.md` | Accepted for named Linux rows: exact raw bytes and lossy text behavior, including nonzero exit. The reviewed native Windows four-argument direct-child text slice additionally proves lossy stdout/stderr, exits 0/7, the array/string limit distinction and typed decoded-expansion `OutputLimit` with original raw report under `testing-environ,sys,metadata`/Rust 1.93.0. Other overloads, platforms/profiles and the broader process contract remain open. |
 | X16 | `tests/sys_process.rs::run_io_contract_string_stdin_round_trip`; `.scratch/all-tickets/process-io-contract-evidence/attempt-01/proof.md`; `.scratch/all-tickets/darwin-io-contracts-20261008/attempt-01/proof.md` | Partial accepted: Workhorse Linux x86_64 and Darwin arm64/macOS 27.0.1, Rust/Cargo 1.93.0, `testing-environ,sys`, prove the exact 51-byte string stdin round-trip through public `run`, child-written PID/exit record and direct-child reaping. Linux assertion-control reuse is covered by the combined review. Spawned stdin evidence is not applicable. Other OS, MSRV and feature rows remain open. |
 | X17 | `tests/sys_process.rs::run_io_contract_blob_stdin_round_trip_with_concurrent_output`; `.scratch/all-tickets/process-io-contract-evidence/attempt-01/proof.md`; `.scratch/all-tickets/darwin-io-contracts-20261008/attempt-01/proof.md` | Partial accepted: Workhorse Linux x86_64 and Darwin arm64/macOS 27.0.1, Rust/Cargo 1.93.0, `testing-environ,sys`, prove a varied 1 MiB `run_raw` Blob round-trip, exact concurrent 256 KiB child streams, child-written input readback and direct-child reaping. Linux assertion-control reuse is covered by the combined review. Other OS, MSRV and feature rows remain open. |
 | X18 | `unit_stdin_means_immediate_eof`; options proof; `.scratch/all-tickets/darwin-x18-unit-stdin-20261008/proof.md` | Partial accepted (combined review READY 2026-10-08): named Linux rows and Darwin arm64/macOS 27.0.1, Rust/Cargo 1.93.0, `testing-environ,sys` prove unit stdin produces immediate EOF through the public Engine and a real child, with expected RED/GREEN, child-record readback, and direct-child reaping. Other OS, feature, and MSRV rows remain open. |

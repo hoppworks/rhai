@@ -5,7 +5,9 @@ mod io;
 use self::io::PipeReader;
 use super::{ProcessCause, ProcessDiagnostic, ProcessExit, ProcessReport};
 use crate::packages::sys::{ProcessScope, SysError, SysState};
-use crate::{Array, Dynamic, ImmutableString, Map, Module, NativeCallContext, Shared, INT};
+#[cfg(not(feature = "no_index"))]
+use crate::Array;
+use crate::{Dynamic, ImmutableString, Map, Module, NativeCallContext, Shared, INT};
 use std::io as std_io;
 use std::os::windows::io::AsRawHandle;
 use std::panic::{catch_unwind, resume_unwind, AssertUnwindSafe};
@@ -45,8 +47,78 @@ impl Drop for ActivePermit {
 }
 
 pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
+    let st = state.clone();
+    crate::packages::sys::reg(
+        "run",
+        &["/// Run a child program and return lossy UTF-8 stdout and stderr."],
+    )
+    .set_into_module(
+        module,
+        move |ctx: NativeCallContext, program: &str| -> Res<Map> {
+            run_map(&ctx, &st, program, Vec::new(), Map::new(), false)
+        },
+    );
+    let st = state.clone();
+    crate::packages::sys::reg("run", &["/// Run a child program with options."]).set_into_module(
+        module,
+        move |ctx: NativeCallContext, program: &str, options: Map| -> Res<Map> {
+            run_map(&ctx, &st, program, Vec::new(), options, false)
+        },
+    );
     #[cfg(not(feature = "no_index"))]
     {
+        let st = state.clone();
+        crate::packages::sys::reg("run", &["/// Run a child program with arguments."])
+            .set_into_module(
+                module,
+                move |ctx: NativeCallContext, program: &str, args: Array| -> Res<Map> {
+                    run_map(&ctx, &st, program, parse_args(args)?, Map::new(), false)
+                },
+            );
+        let st = state.clone();
+        crate::packages::sys::reg(
+            "run",
+            &["/// Run a child program with arguments and options."],
+        )
+        .set_into_module(
+            module,
+            move |ctx: NativeCallContext, program: &str, args: Array, options: Map| -> Res<Map> {
+                run_map(&ctx, &st, program, parse_args(args)?, options, false)
+            },
+        );
+        let st = state.clone();
+        crate::packages::sys::reg(
+            "run_raw",
+            &["/// Run a program and capture raw output bytes."],
+        )
+        .set_into_module(
+            module,
+            move |ctx: NativeCallContext, program: &str| -> Res<Map> {
+                run_map(&ctx, &st, program, Vec::new(), Map::new(), true)
+            },
+        );
+        let st = state.clone();
+        crate::packages::sys::reg(
+            "run_raw",
+            &["/// Run a program with options and capture raw output bytes."],
+        )
+        .set_into_module(
+            module,
+            move |ctx: NativeCallContext, program: &str, options: Map| -> Res<Map> {
+                run_map(&ctx, &st, program, Vec::new(), options, true)
+            },
+        );
+        let st = state.clone();
+        crate::packages::sys::reg(
+            "run_raw",
+            &["/// Run a program with arguments and capture raw output bytes."],
+        )
+        .set_into_module(
+            module,
+            move |ctx: NativeCallContext, program: &str, args: Array| -> Res<Map> {
+                run_map(&ctx, &st, program, parse_args(args)?, Map::new(), true)
+            },
+        );
         let st = state.clone();
         crate::packages::sys::reg(
             "run_raw",
@@ -55,7 +127,7 @@ pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
         .set_into_module(
             module,
             move |ctx: NativeCallContext, program: &str, args: Array, options: Map| -> Res<Map> {
-                run_raw(&ctx, &st, program, parse_args(args)?, options)
+                run_map(&ctx, &st, program, parse_args(args)?, options, true)
             },
         );
     }
@@ -186,12 +258,13 @@ fn parse_options(state: &SysState, mut options: Map, engine_limit: usize) -> Res
     })
 }
 
-fn run_raw(
+fn run_map(
     ctx: &NativeCallContext,
     state: &Shared<SysState>,
     program: &str,
     args: Vec<String>,
     options: Map,
+    raw: bool,
 ) -> Res<Map> {
     if !state.config.programs.allows(program) {
         return Err(SysError::Denied(format!("program `{program}` is not allowed")).into());
@@ -211,7 +284,11 @@ fn run_raw(
         );
     }
     #[cfg(not(feature = "unchecked"))]
-    let engine_limit = ctx.engine().max_array_size();
+    let engine_limit = if raw {
+        ctx.engine().max_array_size()
+    } else {
+        ctx.engine().max_string_size()
+    };
     #[cfg(feature = "unchecked")]
     let engine_limit = {
         let _ = ctx;
@@ -258,6 +335,17 @@ fn run_raw(
         Ok(report) => report,
         Err((cause, report)) => return Err(SysError::Process { cause, report }.into()),
     };
+    if !raw && engine_limit > 0 {
+        if report.stdout().len() > engine_limit || report.stderr().len() > engine_limit {
+            return Err(SysError::Process {
+                cause: ProcessCause::OutputLimit(format!(
+                    "decoded process output exceeded the engine string limit of {engine_limit} bytes"
+                )),
+                report,
+            }
+            .into());
+        }
+    }
     let mut result = Map::new();
     result.insert(
         "success".into(),
@@ -282,11 +370,19 @@ fn run_raw(
     );
     result.insert(
         "stdout".into(),
-        Dynamic::from(report.stdout_bytes().to_vec()),
+        if raw {
+            Dynamic::from(report.stdout_bytes().to_vec())
+        } else {
+            Dynamic::from(ImmutableString::from(report.stdout()))
+        },
     );
     result.insert(
         "stderr".into(),
-        Dynamic::from(report.stderr_bytes().to_vec()),
+        if raw {
+            Dynamic::from(report.stderr_bytes().to_vec())
+        } else {
+            Dynamic::from(ImmutableString::from(report.stderr()))
+        },
     );
     Ok(result)
 }

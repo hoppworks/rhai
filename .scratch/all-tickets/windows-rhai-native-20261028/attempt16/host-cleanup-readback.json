@@ -1,0 +1,15 @@
+{
+  "nonce": "414156c57f5bd17a93bb70c05c54d5c1",
+  "stage": "/var/roothome/.local/share/agent-builds/rhai/windows-rhai-native-414156c57f5bd17a93bb70c05c54d5c1",
+  "media": "/var/lib/libvirt/images/rhai-win11-quality/rhai-native-414156c57f5bd17a93bb70c05c54d5c1.iso",
+  "iso_sha256": "156a6caf8dc2d0c43027f1e0b0fefe853a825e9343ccbd1ec604c2abf22664dd",
+  "all_domains_checked": [
+    "rhai-win11-quality",
+    "tauron-lane-wh-a-58a9dddac6c7"
+  ],
+  "guest_original_export_saved": true,
+  "guest_failed_scope_retained": true,
+  "public_build_retained": true,
+  "stage_removed": true,
+  "media_removed": true
+}
