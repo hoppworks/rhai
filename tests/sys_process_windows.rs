@@ -35,6 +35,7 @@ const CHILD_DROP_RECORD_ENV: &str = "RHAI_WINDOWS_CHILD_DROP_RECORD";
 const MANAGED_ROOT_ENV: &str = "RHAI_WINDOWS_MANAGED_ROOT";
 const MANAGED_LEAF_ENV: &str = "RHAI_WINDOWS_MANAGED_LEAF";
 const MANAGED_WRONG_ENV: &str = "RHAI_WINDOWS_MANAGED_WRONG_EXPECTATION";
+const MANAGED_RUN_CLOSURE_WRONG_ENV: &str = "RHAI_WINDOWS_MANAGED_RUN_CLOSURE_WRONG_EXPECTATION";
 const MANAGED_BATCH_WRONG_ENV: &str = "RHAI_WINDOWS_MANAGED_BATCH_WRONG_EXPECTATION";
 const MANAGED_CWD_CONTROLLER_ENV: &str = "RHAI_WINDOWS_MANAGED_CWD_CONTROLLER";
 const MANAGED_CWD_WRONG_ENV: &str = "RHAI_WINDOWS_MANAGED_CWD_WRONG_EXPECTATION";
@@ -1386,6 +1387,10 @@ fn windows_managed_run_closes_descendant_on_normal_parent_exit() {
     eprintln!("windows_managed_os_readback parent={parent_pid} worker={worker_pid} parent_exit={parent_exit} sentinel={sentinel_pid} sentinel_alive=true");
     if std::env::var_os(MANAGED_WRONG_ENV).is_some() {
         assert!(!sentinel_alive, "deliberately wrong managed sentinel expectation");
+    }
+    if std::env::var_os(MANAGED_RUN_CLOSURE_WRONG_ENV).is_some() {
+        assert!(!observed_closed_at_return,
+            "deliberately wrong managed run descendant closure expectation");
     }
 }
 

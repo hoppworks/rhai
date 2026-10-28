@@ -10,11 +10,11 @@ Use current central agent-skills `d6024420` plus applicable local edits and proj
 
 ## Current step
 
-Fork-main contains reviewed X33 Managed child-PATH competition at `bf3c51015f005dbb172f5e55690cb9e57f695f04` and prior Managed refusal/final-drop work. Exact remote main readback matched; it is the only remote branch and this worktree is clean. A–F/Ticket03/release acceptance remain open.
+Fork-main contains reviewed X33 Managed child-PATH competition and prior Managed refusal/final-drop work. The reviewed X35 package adds only a Windows normal-closure assertion control, native attempt62 proof and tracking updates. A–F/Ticket03/release acceptance remain open.
 
 ## Next action
 
-Inspect the next incomplete-membership or real-fault Managed contract and select the smallest public/native test that closes a named open criterion. Reuse source-bound attempt59–61 proof. Retire guest outer scopes only after current exact identity and inactivity checks.
+After integrating the reviewed X35 package on fork main with exact remote readback, inspect incomplete-membership or real-fault Managed contracts. Retire guest outer scopes only after current exact identity and inactivity checks.
 
 ## Goal
 
@@ -38,9 +38,11 @@ Attempts36–39 exposed false Job closure. Attempts50–58 cover batch injection
 
 Attempt61 freezes current base plus X33 test (`160a37ef...`, same lock) and passes native Windows Managed child-PATH-over-parent-CWD wrong101/GREEN0, 31/31 suite and independent child executable readback. Observer Driver0 in 104.824s, 202 frames/14 hash-checked files, eight valid journal transitions through REMOVED; own host stage/ISO retired, guest outer scope retained. Combined independent review PASS. Proof: `.scratch/all-tickets/windows-rhai-native-20261028/attempt61/`.
 
+Attempt62 freezes `edfca43e` plus one test-only X35 run-closure control (`ec2e7eac...`, same lock). Native Windows1.93 `testing-environ,sys,metadata`: run descendant, run sentinel and spawn/wait closure wrong101 each, restored run/spawn GREEN0 with exact process-handle and sentinel readbacks. Driver0/85.052s, 208 frames/16 hash-checked files, eight valid journal transitions through REMOVED. Own host ISO/stage removed and original sdc restored; guest outer scope retained. Combined review PASS with a documentation precision correction. Proof: `.scratch/all-tickets/windows-rhai-native-20261028/attempt62/`.
+
 ## Retained resources
 
-Workhorse VM `dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19` has original sdc restored; foreign sdb untouched. Native public BuildOnly expires 2026-10-30 12:00 UTC. Guest outer evidence scopes `n-dee8dccd`, `n-e9e999be`, `n-71fb632a`, `n-721a05f2`, `n-2c2b7a1d`, `n-879cb849`, `n-0cea30ae`, `n-3d6e4701`, `n-e1fb33fd`, `n-f289af73` remain; exact host ISO/stages for attempts52–61 were removed. Prior attempt36/48 guest runtimes require exact evidence-first retirement. Clean only proven owned inactive resources.
+Workhorse VM `dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19` has original sdc restored; foreign sdb untouched. Native public BuildOnly expires 2026-10-30 12:00 UTC. Guest outer evidence scopes from attempts52–62 remain, including `n-f289af73` and `n-a90bb279`; exact host ISO/stages for attempts52–62 were removed. Prior attempt36/48 guest runtimes require exact evidence-first retirement. Clean only proven owned inactive resources; previous full scope list is in the state history.
 
 ## Cause history
 
@@ -54,6 +56,7 @@ Managed closure Expert advised exact root/member handles and count-based fail-cl
 
 Attempts52–60 used one Driver each. Elapsed 52–56: 97.601/109.868/74.480/59.097/141.689 seconds; 57 diagnostic, 58 68.427, 59 121.908, 60 61.776. Attempt59/60 exported 198/200 frames and 14 hash-checked files each with eight valid journal transitions. Earlier consumption remains in proof folders; no budget reset. Future finite run limits derive from actual scope/capacity, not old fixed slots.
 Attempt61 used one Driver, 104.824s, 202 frames/14 hash-checked files and eight valid journal transitions. Earlier consumption remains in proof folders; no budget reset. Future finite run limits derive from actual scope/capacity, not old fixed slots.
+Attempt62 used one Driver, 85.052s, 208 frames/16 hash-checked files and eight valid journal transitions; pre-execution review corrected a missing run-descendant assertion control before any launch.
 
 ## History
 

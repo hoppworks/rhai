@@ -1,0 +1,12 @@
+2026-10-28: After the accepted native Driver exit, Rhai VM sdc was restored live to
+/var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/monitor-fixture02.iso.
+virsh domblklist readback showed sda system.qcow2, unchanged foreign sdb
+work-retirement-bounds-20261009-c18e85827e6f4404.iso, and original sdc.
+The owned a90bb2797c791644886326e73e5f70c8 ISO was absent from the domain
+listing, fuser reported no open user, and its SHA-256 before removal was
+0bce3175cb5a0875861e86eb224d4f2ea104ce5c7b394e6876099d91823e3a26.
+The exact owned host stage had no symlinks and its host-media scope was absent.
+The exact owned ISO and host stage were removed; both absence checks passed.
+The guest outer evidence scope n-a90bb279 remains for exact guest-side
+identity/inactivity review before any future retirement. Foreign media and
+other sessions' resources were not removed.

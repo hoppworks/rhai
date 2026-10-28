@@ -1,0 +1,16 @@
+{
+  "nonce": "a90bb2797c791644886326e73e5f70c8",
+  "source_commit": "edfca43e9dd3719ab1dcb23c49a0b432154c9963",
+  "manifest_sha256": "ec2e7eac173b382e00f390ecb89eff04b22068899b525f48ecc49db02f03be30",
+  "archive_sha256": "4c6b79e80bb13915e5f0b0f89c36e76d8bf3b73773530b608fc77adbc4217931",
+  "file_count": 448,
+  "source_bytes": 5379649,
+  "expected": "X35 native Windows public Managed run/spawn closure and sentinel controls with restored greens",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": true,
+  "command_dispatched": true,
+  "product_test_started": true
+}
