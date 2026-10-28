@@ -10,7 +10,7 @@ Use current central agent-skills `d6024420` plus applicable local edits and proj
 
 ## Current step
 
-Fork-main is `bf3c51015f005dbb172f5e55690cb9e57f695f04`, containing reviewed X33 Managed child-PATH competition and prior Managed refusal/final-drop work. Exact remote main readback matched; it is the only remote branch and this worktree is clean. A–F/Ticket03/release acceptance remain open.
+Fork-main contains reviewed X33 Managed child-PATH competition at `bf3c51015f005dbb172f5e55690cb9e57f695f04` and prior Managed refusal/final-drop work. Exact remote main readback matched; it is the only remote branch and this worktree is clean. A–F/Ticket03/release acceptance remain open.
 
 ## Next action
 
