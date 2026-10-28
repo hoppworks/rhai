@@ -38,6 +38,7 @@ const MANAGED_WRONG_ENV: &str = "RHAI_WINDOWS_MANAGED_WRONG_EXPECTATION";
 const MANAGED_BATCH_WRONG_ENV: &str = "RHAI_WINDOWS_MANAGED_BATCH_WRONG_EXPECTATION";
 const MANAGED_CWD_CONTROLLER_ENV: &str = "RHAI_WINDOWS_MANAGED_CWD_CONTROLLER";
 const MANAGED_CWD_WRONG_ENV: &str = "RHAI_WINDOWS_MANAGED_CWD_WRONG_EXPECTATION";
+const MANAGED_PATH_WRONG_ENV: &str = "RHAI_WINDOWS_MANAGED_PATH_WRONG_EXPECTATION";
 const LIBTEST_QUIET_START: &[u8] = b"\nrunning 1 test\n";
 
 type Handle = *mut c_void;
@@ -594,9 +595,13 @@ fn windows_managed_cwd_controller() {
     let mut scope = Scope::new();
     scope.push("record", root.join("cwd-child.txt").to_string_lossy().into_owned());
     let config = SysConfig::default()
-        .programs(ProgramPolicy::AllowList(vec!["rhai-managed-cwd-probe".into()]))
+        .programs(ProgramPolicy::AllowList(vec![
+            "rhai-managed-cwd-probe".into(),
+            "rhai-managed-path-probe".into(),
+        ]))
         .process_scope(ProcessScope::Managed);
-    let report = engine(config)
+    let engine = engine(config);
+    let report = engine
         .eval_with_scope::<Map>(&mut scope, r#"
             run_raw("rhai-managed-cwd-probe", ["--exact", "windows_path_probe_fixture", "--quiet"], #{
                 env_clear: true,
@@ -605,6 +610,18 @@ fn windows_managed_cwd_controller() {
             })
         "#)
         .expect("public Managed run must find a simple executable in parent cwd");
+    assert_eq!(report["code"].as_int().unwrap(), 0);
+    scope.push("selected_path", root.join("selected-path").to_string_lossy().into_owned());
+    scope.push("path_record", root.join("path-child.txt").to_string_lossy().into_owned());
+    let report = engine
+        .eval_with_scope::<Map>(&mut scope, r#"
+            run_raw("rhai-managed-path-probe", ["--exact", "windows_path_probe_fixture", "--quiet"], #{
+                env_clear: true,
+                env: #{ PATH: selected_path, RHAI_WINDOWS_PATH_PROBE_RECORD: path_record },
+                timeout: 15
+            })
+        "#)
+        .expect("public Managed run must prefer explicit child PATH over parent cwd");
     assert_eq!(report["code"].as_int().unwrap(), 0);
 }
 
@@ -643,6 +660,14 @@ fn windows_managed_run_resolves_simple_program_from_parent_cwd() {
     let copied = root.join("rhai-managed-cwd-probe.exe");
     std::fs::copy(std::env::current_exe().unwrap(), &copied)
         .expect("copy executable into isolated controller cwd");
+    let competing = root.join("rhai-managed-path-probe.exe");
+    let selected_dir = root.join("selected-path");
+    std::fs::create_dir(&selected_dir).expect("create isolated child PATH directory");
+    let selected = selected_dir.join("rhai-managed-path-probe.exe");
+    std::fs::copy(std::env::current_exe().unwrap(), &competing)
+        .expect("copy competing executable into isolated controller cwd");
+    std::fs::copy(std::env::current_exe().unwrap(), &selected)
+        .expect("copy selected executable into child PATH directory");
     let out = std::fs::File::create(root.join("controller.out")).unwrap();
     let err = std::fs::File::create(root.join("controller.err")).unwrap();
     let child = std::process::Command::new(std::env::current_exe().unwrap())
@@ -674,12 +699,25 @@ fn windows_managed_run_resolves_simple_program_from_parent_cwd() {
     assert!(lines.next().is_none());
     assert_ne!(pid, 0);
     assert_eq!(actual, expected, "Managed child must run the exact cwd executable");
+    let path_observed = std::fs::read_to_string(root.join("path-child.txt"))
+        .expect("fresh independent child PATH executable record");
+    let mut path_lines = path_observed.lines();
+    let path_pid = path_lines.next().unwrap().strip_prefix("pid=").unwrap().parse::<u32>().unwrap();
+    let path_actual = std::fs::canonicalize(path_lines.next().unwrap().strip_prefix("path=").unwrap()).unwrap();
+    let path_expected = std::fs::canonicalize(&selected).unwrap();
+    assert!(path_lines.next().is_none());
+    assert_ne!(path_pid, 0);
+    assert_eq!(path_actual, path_expected, "Managed child must select explicit child PATH before parent cwd");
     assert_eq!(std::env::current_dir().unwrap(), parent_cwd, "parent test cwd changed");
     guard.root_safe_to_retire = true;
     drop(guard);
     eprintln!("windows_managed_cwd_readback child_pid={pid} exact_cwd_exe=true parent_cwd_unchanged=true");
+    eprintln!("windows_managed_path_readback child_pid={path_pid} selected_child_path=true competing_parent_cwd=true");
     if std::env::var_os(MANAGED_CWD_WRONG_ENV).is_some() {
         assert_ne!(actual, expected, "deliberately wrong Managed cwd executable expectation");
+    }
+    if std::env::var_os(MANAGED_PATH_WRONG_ENV).is_some() {
+        assert_ne!(path_actual, path_expected, "deliberately wrong Managed child PATH precedence expectation");
     }
 }
 

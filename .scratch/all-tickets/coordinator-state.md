@@ -10,11 +10,11 @@ Use current central agent-skills `d6024420` plus applicable local edits and proj
 
 ## Current step
 
-Fork-main now contains the reviewed Managed Windows persistent-refusal/final-drop package at `d5fbb6f6d576759a1d05fec54f364f3176c4a440`; exact remote main readback matches and only remote `main` exists. Worktree is otherwise clean. A–F/Ticket03/release acceptance remain open.
+Fork-main contains the reviewed Managed Windows persistent-refusal/final-drop package at `d5fbb6f6d576759a1d05fec54f364f3176c4a440`. X33 attempt61 now has native Windows wrong101/restored0, 31/31 process target, independent selected executable readback, complete scoped custody/export and combined independent PASS; integration to fork main is next. A–F/Ticket03/release acceptance remain open.
 
 ## Next action
 
-Inspect the remaining Windows Managed incomplete-membership and real-fault contracts against existing proofs, then take the smallest public or native fault path that closes a named criterion. Reuse attempt59/60 source-bound results; retire their exact guest outer scopes only after evidence-first identity and inactivity checks. Do not repeat unaffected suites.
+Commit this reviewed X33 test/proof atomically and fast-forward fork main, verifying exact remote head and only `main`; then return to incomplete-membership/real-fault contracts. Retire guest outer scopes only after current exact identity and inactivity checks.
 
 ## Goal
 
@@ -30,15 +30,17 @@ Close Managed Windows fault/lifecycle and remaining argument/IO cases; finish na
 
 ## Done steps
 
-Fork main contains accepted Windows sys policy/env/fs, six net targets, Direct raw/text process, input/timeout/spawn/drop, X32 quoted argv, X33 PATH/implicit exe, and the bounded Managed package through attempt60. Earlier Linux/Darwin/core/WASM/MSRV accepted rows retain their listed source/profile scopes in the plan and original proof folders.
+Fork main contains accepted Windows sys policy/env/fs, six net targets, Direct raw/text process, input/timeout/spawn/drop, X32 quoted argv, X33 Direct PATH/implicit exe and Managed CWD, and the bounded Managed package through attempt60. Attempt61's reviewed Managed PATH competition awaits fork-main integration. Earlier Linux/Darwin/core/WASM/MSRV rows retain their listed scopes.
 
 ## Accepted evidence
 
 Attempts36–39 exposed false Job closure. Attempts50–58 cover batch injection/fix, exact membership, bounded retry, public Managed lifecycle, parent-CWD resolution, full 31-test Windows process target and assertion controls under their documented bindings. Attempt57 is diagnostic RED only. New attempt59 manifested a real missed exact-child fallback after a permanently refused Job exhausted the shared 30-second deadline. The correction preserves finite Job retry and grants at least five seconds each for exact-child and I/O fallback. Native Windows Rust/Cargo1.93.0, `testing-environ,sys,metadata`, manifest `34686903...`, lock `12084a90...`: synthetic permanent-refusal wrong101/restored GREEN0 with 299 refusals, exact child stopped and retained owner; two neighboring unit tests green. Attempt60 reused byte-identical source and passed public final-drop kill/retain wrong101/101 and GREEN0, with independent parent/worker/sentinel readbacks. Observer Driver0 for both, 198/200 frames, 14 files each, eight CRC journal transitions through REMOVED, exact host cleanup. Combined Terra review READY for the bounded package. Actual OS faults, live descendants under permanent refusal, other features/toolchains and release remain open. Proof: `.scratch/all-tickets/windows-rhai-native-20261028/attempt59/` and `attempt60/`.
 
+Attempt61 freezes current base plus X33 test (`160a37ef...`, same lock) and passes native Windows Managed child-PATH-over-parent-CWD wrong101/GREEN0, 31/31 suite and independent child executable readback. Observer Driver0 in 104.824s, 202 frames/14 hash-checked files, eight valid journal transitions through REMOVED; own host stage/ISO retired, guest outer scope retained. Combined independent review PASS. Proof: `.scratch/all-tickets/windows-rhai-native-20261028/attempt61/`.
+
 ## Retained resources
 
-Workhorse VM `dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19` has original sdc restored; foreign sdb untouched. Native public BuildOnly expires 2026-10-30 12:00 UTC. Guest outer evidence scopes `n-dee8dccd`, `n-e9e999be`, `n-71fb632a`, `n-721a05f2`, `n-2c2b7a1d`, `n-879cb849`, `n-0cea30ae`, `n-3d6e4701`, `n-e1fb33fd` remain; host ISO/stage for attempts52–60 removed after exact readback. Prior attempt36/48 guest runtimes require exact evidence-first retirement. Clean only proven owned inactive resources.
+Workhorse VM `dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19` has original sdc restored; foreign sdb untouched. Native public BuildOnly expires 2026-10-30 12:00 UTC. Guest outer evidence scopes `n-dee8dccd`, `n-e9e999be`, `n-71fb632a`, `n-721a05f2`, `n-2c2b7a1d`, `n-879cb849`, `n-0cea30ae`, `n-3d6e4701`, `n-e1fb33fd`, `n-f289af73` remain; exact host ISO/stages for attempts52–61 were removed. Prior attempt36/48 guest runtimes require exact evidence-first retirement. Clean only proven owned inactive resources.
 
 ## Cause history
 
@@ -51,6 +53,7 @@ Managed closure Expert advised exact root/member handles and count-based fail-cl
 ## Budgets
 
 Attempts52–60 used one Driver each. Elapsed 52–56: 97.601/109.868/74.480/59.097/141.689 seconds; 57 diagnostic, 58 68.427, 59 121.908, 60 61.776. Attempt59/60 exported 198/200 frames and 14 hash-checked files each with eight valid journal transitions. Earlier consumption remains in proof folders; no budget reset. Future finite run limits derive from actual scope/capacity, not old fixed slots.
+Attempt61 used one Driver, 104.824s, 202 frames/14 hash-checked files and eight valid journal transitions. Earlier consumption remains in proof folders; no budget reset. Future finite run limits derive from actual scope/capacity, not old fixed slots.
 
 ## History
 

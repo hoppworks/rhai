@@ -1,0 +1,16 @@
+{
+  "nonce": "f289af7361c080794e4688723f5dd0b1",
+  "source_commit": "bef5599fde293c133094510c308d56a21edde508",
+  "manifest_sha256": "160a37ef61866323e62b771643a0379e7b8b11ca6618b9d25b4d9e9d84d1e069",
+  "archive_sha256": "3da584536e9a444f9224a47a90a69dc8ee7f7dc4c7ba406d358e82b9ee3fdef2",
+  "file_count": 448,
+  "source_bytes": 5379356,
+  "expected": "native Windows public Managed child PATH precedence wrong/green plus full process target",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": false,
+  "command_dispatched": false,
+  "product_test_started": false
+}

@@ -1,0 +1,11 @@
+ Type   Device   Target   Source
+---------------------------------------------------------------------------------------------------------------------------------
+ file   disk     sda      /var/lib/libvirt/images/rhai-win11-quality/system.qcow2
+ file   cdrom    sdb      /var/lib/libvirt/images/rhai-win11-quality/work-retirement-bounds-20261009-c18e85827e6f4404.iso
+ file   cdrom    sdc      /var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/monitor-fixture02.iso
+
+ Type   Device   Target   Source
+--------------------------------------------------------------------------------------
+ file   disk     vda      /var/lib/tauron-lanes/runs/wh-a-58a9dddac6c7/overlay.qcow2
+ file   cdrom    sda      /var/lib/tauron-lanes/runs/wh-a-58a9dddac6c7/seed.iso
+
