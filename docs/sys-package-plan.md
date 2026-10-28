@@ -1474,6 +1474,19 @@ applicable revision.
 
 Native Windows `testing-environ,sys,metadata` now has a narrow panic-before-cleanup custody RED/GREEN and affected pending-stdin cancellation regression, independently reviewed at `.scratch/all-tickets/windows-rhai-native-20261028/attempt46/proof.md`. Other panic points, abort semantics, managed-job closure and the release matrix remain open.
 
+The native macOS 27.2 arm64/Rust-Cargo 1.77.2 combined profile
+`testing-environ,sys,net,no_index,sync,metadata` has a reviewed narrow
+acceptance slice at `.scratch/all-tickets/release-matrix-20261028/proof.md`.
+Attempt 01 compiled all eight named targets, passed six suites and the deliberate
+combined filesystem-readback RED, then stopped at a test-only `/bin/true` path
+assumption. A macOS `/usr/bin/true` correction and an exact process-exit
+wrong-expectation control passed in attempt 03 with the affected process/report
+targets (2/2 and 8/8). All other source files, lock and profile were bound to
+the original proof; one combined independent review and focused follow-up
+returned PASS. The first eight-target invocation did not pass as a whole.
+Other profile combinations, Linux/Windows native rows and the full release
+matrix remain open.
+
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance
 matrix or closure count. Historical implementation notes and estimates follow.

@@ -6908,9 +6908,19 @@ fn scalar_run_with_cwd_works_without_collections() {
 #[test]
 fn run_without_arguments_works_and_array_overloads_are_absent() {
     let engine = engine(SysConfig::permissive());
-    let result = engine.eval::<Map>(r#"run("/bin/true")"#).unwrap();
+    let true_program = if cfg!(target_os = "macos") {
+        "/usr/bin/true"
+    } else {
+        "/bin/true"
+    };
+    let result = engine.eval::<Map>(&format!(r#"run("{true_program}")"#)).unwrap();
     assert!(result["success"].as_bool().unwrap());
-    assert_eq!(result["code"].as_int().unwrap(), 0);
+    let expected_code = if std::env::var_os("RHAI_SYS_NO_INDEX_WRONG_EXPECTATION").is_some() {
+        1
+    } else {
+        0
+    };
+    assert_eq!(result["code"].as_int().unwrap(), expected_code, "public no-index run exit code");
     assert!(result["stdout_complete"].as_bool().unwrap());
     assert!(result["stderr_complete"].as_bool().unwrap());
     eprintln!("no-index run no-args success=true code=0 stdout_complete=true stderr_complete=true");

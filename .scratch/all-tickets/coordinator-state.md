@@ -10,11 +10,11 @@ Use current central agent-skills `d6024420` plus applicable local edits and proj
 
 ## Current step
 
-Fork-main contains the reviewed X35 Windows Managed normal-exit package at `63f18b01`. This package adds the reviewed DirectChild contrast with native attempt64 RED/GREEN. A–F/Ticket03/release acceptance remain open.
+Fork-main is `a131c6c9`, including reviewed Windows X35 Managed normal-exit and DirectChild contrast. The current uncommitted macOS Rust1.77.2 combined `no_index,sync,metadata` slice passed a combined independent review. A–F/Ticket03/release acceptance remain open.
 
 ## Next action
 
-After exact fork-main readback, inspect Managed fault contracts. Retire guest scopes only after exact identity and inactivity checks.
+Commit and push the reviewed macOS slice to fork main, verify remote head, then select the next open native profile or Managed fault contract. Retire guest scopes only after identity/inactivity checks.
 
 ## Goal
 
@@ -33,6 +33,8 @@ Close Managed Windows fault/lifecycle and remaining argument/IO cases; finish na
 Fork main contains accepted Windows sys policy/env/fs, six net targets, Direct raw/text process, input/timeout/spawn/drop, X32 quoted argv, X33 Direct PATH/implicit exe and Managed CWD/child-PATH competition, and the bounded Managed package through attempt61. Earlier Linux/Darwin/core/WASM/MSRV rows retain their listed scopes.
 
 ## Accepted evidence
+
+MacOS27.2 arm64/Rust1.77.2 `testing-environ,sys,net,no_index,sync,metadata`: attempt01 compiled eight targets, passed six suites and combined filesystem wrong101, but stopped on a test-only `/bin/true` assumption. Attempt03's correction passed process/report 2/2+8/8 and exact process exit-code wrong101. Source/lock/profile applicability, cleanup and combined review PASS: `.scratch/all-tickets/release-matrix-20261028/proof.md`.
 
 Attempts36–39 exposed false Job closure. Attempts50–58 cover batch injection/fix, exact membership, bounded retry, public Managed lifecycle, parent-CWD resolution, full 31-test Windows process target and assertion controls under their documented bindings. Attempt57 is diagnostic RED only. New attempt59 manifested a real missed exact-child fallback after a permanently refused Job exhausted the shared 30-second deadline. The correction preserves finite Job retry and grants at least five seconds each for exact-child and I/O fallback. Native Windows Rust/Cargo1.93.0, `testing-environ,sys,metadata`, manifest `34686903...`, lock `12084a90...`: synthetic permanent-refusal wrong101/restored GREEN0 with 299 refusals, exact child stopped and retained owner; two neighboring unit tests green. Attempt60 reused byte-identical source and passed public final-drop kill/retain wrong101/101 and GREEN0, with independent parent/worker/sentinel readbacks. Observer Driver0 for both, 198/200 frames, 14 files each, eight CRC journal transitions through REMOVED, exact host cleanup. Combined Terra review READY for the bounded package. Actual OS faults, live descendants under permanent refusal, other features/toolchains and release remain open. Proof: `.scratch/all-tickets/windows-rhai-native-20261028/attempt59/` and `attempt60/`.
 
@@ -56,9 +58,7 @@ Managed closure Expert advised exact root/member handles and count-based fail-cl
 
 ## Budgets
 
-Attempts52–60 used one Driver each. Elapsed 52–56: 97.601/109.868/74.480/59.097/141.689 seconds; 57 diagnostic, 58 68.427, 59 121.908, 60 61.776. Attempt59/60 exported 198/200 frames and 14 hash-checked files each with eight valid journal transitions. Earlier consumption remains in proof folders; no budget reset. Future finite run limits derive from actual scope/capacity, not old fixed slots.
-Attempt61 used one Driver, 104.824s, 202 frames/14 hash-checked files and eight valid journal transitions. Earlier consumption remains in proof folders; no budget reset. Future finite run limits derive from actual scope/capacity, not old fixed slots.
-Attempt62 used one Driver, 85.052s, 208 frames/16 hash-checked files and eight valid journal transitions; pre-execution review corrected a missing run-descendant assertion control before any launch.
+Windows attempts52–62 each used one bounded Driver; elapsed times, exported frames/files and journal transitions remain in their original proof folders. Earlier consumption is not reset. Future finite run limits derive from actual scope/capacity, not old fixed slots. The macOS release slice used three 1200-second bounded scopes: attempt01 19 seconds, attempt02 16 seconds and attempt03 17 seconds of Cargo steps; all three runtimes and exact session scopes were retired.
 
 ## History
 

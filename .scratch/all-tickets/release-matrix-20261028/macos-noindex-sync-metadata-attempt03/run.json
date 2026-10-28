@@ -1,0 +1,94 @@
+{
+  "checkout_head": "a131c6c9678f986c22b8ce2ea25bd81ccb5ab481",
+  "source_commit": "63f18b01bc8000492dc6c777462568c8ab9824c7",
+  "source_manifest_sha256": "ddbb88a05802f02e83d4d1c5a613b3a8040f3d7bf2007acb6955523d76868319",
+  "source_archive_sha256": "3a671bbdeaebb068fc264e924f63af497eb8e94c4bffcf69e9fe63f000e9f26a",
+  "source_overlay": {
+    "path": "tests/sys_process.rs",
+    "sha256": "cce4c03768a74cbb391fbc3369c4daf16b35a7f5a9b4eea071aca6b73a2ade31"
+  },
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "features": "testing-environ,sys,net,no_index,sync,metadata",
+  "os": "macOS-27.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "rustc": "rustc 1.77.2 (25ef9e3d8 2024-04-09)",
+  "cargo": "cargo 1.77.2 (e52e36006 2024-03-26)",
+  "capacity_before": {
+    "runtime_free_bytes": 170431860736,
+    "expected_additional_peak_bytes": 4294967296,
+    "estimate_source": "provisional private Cargo target/cache estimate"
+  },
+  "steps": [
+    {
+      "name": "compile",
+      "command": [
+        "cargo",
+        "+1.77.2",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys,net,no_index,sync,metadata",
+        "--test",
+        "sys_process",
+        "--test",
+        "sys_process_report",
+        "--no-run"
+      ],
+      "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/macos-release-20261028T2013Z-42bd/agent-build-2aia1kfj/source",
+      "exit": 0,
+      "elapsed_seconds": 16.168,
+      "log_sha256": "d95463688d2f34d2c8bd7a7d934d24f9f87a48efee27fb5de670bce047fdb3e6",
+      "log_bytes": 9865
+    },
+    {
+      "name": "process-wrong",
+      "command": [
+        "cargo",
+        "+1.77.2",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys,net,no_index,sync,metadata",
+        "--test",
+        "sys_process",
+        "run_without_arguments_works_and_array_overloads_are_absent",
+        "--",
+        "--exact",
+        "--nocapture"
+      ],
+      "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/macos-release-20261028T2013Z-42bd/agent-build-2aia1kfj/source",
+      "exit": 101,
+      "elapsed_seconds": 0.368,
+      "log_sha256": "9d213948f2c5a1e3f9383dbd221f325afd356538730943fd01418d70d1372068",
+      "log_bytes": 6768
+    },
+    {
+      "name": "suite",
+      "command": [
+        "cargo",
+        "+1.77.2",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys,net,no_index,sync,metadata",
+        "--test",
+        "sys_process",
+        "--test",
+        "sys_process_report",
+        "--",
+        "--test-threads=1",
+        "--nocapture"
+      ],
+      "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/macos-release-20261028T2013Z-42bd/agent-build-2aia1kfj/source",
+      "exit": 0,
+      "elapsed_seconds": 0.538,
+      "log_sha256": "8480ca6cdebec7e1e4899f2016b7e801b3a0e8e9a4ae10ca72f8e57a6d665259",
+      "log_bytes": 7427
+    }
+  ],
+  "capacity_after": {
+    "runtime_free_bytes": 170166648832,
+    "target_bytes": 212241791
+  },
+  "status": "passed"
+}

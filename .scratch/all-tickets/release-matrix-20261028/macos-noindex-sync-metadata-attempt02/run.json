@@ -1,0 +1,72 @@
+{
+  "checkout_head": "a131c6c9678f986c22b8ce2ea25bd81ccb5ab481",
+  "source_commit": "63f18b01bc8000492dc6c777462568c8ab9824c7",
+  "source_manifest_sha256": "ddbb88a05802f02e83d4d1c5a613b3a8040f3d7bf2007acb6955523d76868319",
+  "source_archive_sha256": "3a671bbdeaebb068fc264e924f63af497eb8e94c4bffcf69e9fe63f000e9f26a",
+  "source_overlay": {
+    "path": "tests/sys_process.rs",
+    "sha256": "11bedf5c9613a01e9f1b1a812c263b04bea5c840b0f11deb46fe3efa3be2e974"
+  },
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "features": "testing-environ,sys,net,no_index,sync,metadata",
+  "os": "macOS-27.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "rustc": "rustc 1.77.2 (25ef9e3d8 2024-04-09)",
+  "cargo": "cargo 1.77.2 (e52e36006 2024-03-26)",
+  "capacity_before": {
+    "runtime_free_bytes": 170439155712,
+    "expected_additional_peak_bytes": 4294967296,
+    "estimate_source": "provisional private Cargo target/cache estimate"
+  },
+  "steps": [
+    {
+      "name": "compile",
+      "command": [
+        "cargo",
+        "+1.77.2",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys,net,no_index,sync,metadata",
+        "--test",
+        "sys_process",
+        "--test",
+        "sys_process_report",
+        "--no-run"
+      ],
+      "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/macos-release-20261028T2008Z-9c28/agent-build-yt2xbvuo/source",
+      "exit": 0,
+      "elapsed_seconds": 14.85,
+      "log_sha256": "2f27c1c2f18ff38f281e29f9a719a469874f47dda380fe29f2b1fc676c61d5d3",
+      "log_bytes": 9865
+    },
+    {
+      "name": "suite",
+      "command": [
+        "cargo",
+        "+1.77.2",
+        "test",
+        "--locked",
+        "--features",
+        "testing-environ,sys,net,no_index,sync,metadata",
+        "--test",
+        "sys_process",
+        "--test",
+        "sys_process_report",
+        "--",
+        "--test-threads=1",
+        "--nocapture"
+      ],
+      "cwd": "/Users/hoppworks/.local/share/agent-builds/rhai/macos-release-20261028T2008Z-9c28/agent-build-yt2xbvuo/source",
+      "exit": 0,
+      "elapsed_seconds": 1.008,
+      "log_sha256": "217991e2499435b1c6f83b7420b49f1443c8a8e07fd6fe488bb7e5cd0b7803c4",
+      "log_bytes": 7427
+    }
+  ],
+  "capacity_after": {
+    "runtime_free_bytes": 170176540672,
+    "target_bytes": 212241651
+  },
+  "status": "passed"
+}
