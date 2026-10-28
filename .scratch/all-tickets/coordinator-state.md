@@ -10,11 +10,11 @@ Use current central agent-skills `d6024420` plus applicable local edits and proj
 
 ## Current step
 
-Fork-main is `a3f7f21acc0685262d851d07b580ec4e4982192b` with only remote `main`. New Managed Windows background-deadline fix and its native attempt59/60 evidence have combined independent READY review. This coherent package is uncommitted; A–F/Ticket03/release remain open.
+Fork-main now contains the reviewed Managed Windows persistent-refusal/final-drop package at `d5fbb6f6d576759a1d05fec54f364f3176c4a440`; exact remote main readback matches and only remote `main` exists. Worktree is otherwise clean. A–F/Ticket03/release acceptance remain open.
 
 ## Next action
 
-Check staged source/docs/proof and exact fork-main head, commit as `hoppworks`, fast-forward fork `main`, and read back remote head. Then continue actual OS fault/descendant and remaining process/path/feature/MSRV criteria without repeating unaffected accepted runs.
+Inspect the remaining Windows Managed incomplete-membership and real-fault contracts against existing proofs, then take the smallest public or native fault path that closes a named criterion. Reuse attempt59/60 source-bound results; retire their exact guest outer scopes only after evidence-first identity and inactivity checks. Do not repeat unaffected suites.
 
 ## Goal
 
@@ -30,7 +30,7 @@ Close Managed Windows fault/lifecycle and remaining argument/IO cases; finish na
 
 ## Done steps
 
-Fork main contains accepted Windows sys policy/env/fs, six net targets, Direct raw/text process, input/timeout/spawn/drop, X32 quoted argv, X33 PATH/implicit exe and the bounded Managed package through attempt58. Earlier Linux/Darwin/core/WASM/MSRV accepted rows retain their listed source/profile scopes in the plan and original proof folders.
+Fork main contains accepted Windows sys policy/env/fs, six net targets, Direct raw/text process, input/timeout/spawn/drop, X32 quoted argv, X33 PATH/implicit exe, and the bounded Managed package through attempt60. Earlier Linux/Darwin/core/WASM/MSRV accepted rows retain their listed source/profile scopes in the plan and original proof folders.
 
 ## Accepted evidence
 
@@ -60,6 +60,7 @@ Attempts52–60 used one Driver each. Elapsed 52–56: 97.601/109.868/74.480/59.
 - Previous state: journal/state-79ee5a69313a46528355cc548d34cdb5.md
 - Previous state: journal/state-ecb05fc1a10645dbbb818b951102673c.md
 - Previous state: journal/state-2080b890fbff42e48dc3f2e4c0da76e2.md
+- Previous state: journal/state-a7c5e579478b4d88834ca4569117d9ec.md
 
 ## Retrospective
 
