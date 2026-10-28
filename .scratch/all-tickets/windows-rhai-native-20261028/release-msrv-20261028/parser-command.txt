@@ -1,0 +1,1 @@
+foreach($f in 'Start.ps1','RunRhaiContractControl.ps1','ClearOwnedWorkReadOnly.ps1'){$e=$null;[Management.Automation.Language.Parser]::ParseFile(('E:\'+$f),[ref]$null,[ref]$e)|Out-Null;$f+' '+$e.Count}

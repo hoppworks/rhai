@@ -10,11 +10,11 @@ Use current central agent-skills `d6024420` plus applicable local edits and proj
 
 ## Current step
 
-Fork-main includes reviewed Windows X35 and POSIX `f32_float`. Native Windows Rust/Cargo1.77.2 toolchain prerequisite passed bounded Job verification, independent readback and combined review; disposable resources retired. This is no Rhai release row. A–F/Ticket03/release remain open.
+Fork-main includes reviewed Windows X35, POSIX `f32_float`, the native Windows Rust/Cargo1.77.2 toolchain prerequisite and one combined sys/net case with wrong101/GREEN0, independent readback and review. A–F/Ticket03/release remain open.
 
 ## Next action
 
-Bind the current integrated source, `Cargo.lock`, exact Windows SDK and retained Rust1.77.2 toolchain to one scoped native Windows release candidate; run cheap applicable compile/contract checks, then real matrix rows with wrong-assertion controls and independent readback. Preserve accepted unchanged rows.
+Identify the native Windows SDK and run the next missing feature/fault row under bounded custody. Preserve accepted unchanged rows.
 
 ## Goal
 
@@ -57,6 +57,8 @@ Attempt62 freezes `edfca43e` plus one test-only X35 run-closure control (`ec2e7e
 Attempt63 DirectChild timed out before assertion; captured-handle inheritance remains a possible cause. Attempt64 clears/reads back fixture handle inheritance and passes wrong101/GREEN0 with parent/worker readback and valid custody journal. Review PASS: Windows `attempt63/` and `attempt64/` proof folders.
 
 Windows MSRV bootstrap attempt04: native Driver0, exact Rust/Cargo1.77.2, 36 ordered COM1 frames/11 hash-checked originals, eight CRC-valid journal records through REMOVED, independent retained-binary hashes and runtime absence. Combined review PASS; current-source Cargo release tests open. `.scratch/all-tickets/windows-rhai-native-20261028/msrv-bootstrap-20261028/proof.md`.
+
+Windows1.77.2 combined `testing-environ,sys,net`: same committed source/lock, native compile, host-file wrong101/GREEN0, independent TCP/file readback, Driver0, 203 frames/15 hash-checked files, eight valid journal records and combined review PASS. Own scope/ISO/stage retired; SDK and other rows open. `.scratch/all-tickets/windows-rhai-native-20261028/release-msrv-20261028/proof.md`.
 
 ## Retained resources
 

@@ -1564,9 +1564,18 @@ A native Windows guest inventory on 2026-10-28 ran `rustup toolchain list` in
 the existing `RhaiTest` session and showed only the default MSVC1.93.0
 toolchain; the screenshot and exact host-stage cleanup are recorded in
 `.scratch/all-tickets/windows-rhai-native-20261028/toolchain-inventory-20261028.md`.
-This is a current prerequisite finding, not a product or release acceptance
-result. The Windows Rust1.77.2 gate requires a bounded guest-owned toolchain
-bootstrap and source/lock/SDK binding before a native build.
+This was a prerequisite finding, not a product or release acceptance result.
+The bounded guest-owned Rust/Cargo1.77.2 bootstrap subsequently passed, with
+its toolchain retained under an explicit expiry; see
+`.scratch/all-tickets/windows-rhai-native-20261028/msrv-bootstrap-20261028/proof.md`.
+At fork-main `15eb3c71`, the first native Windows1.77.2
+`testing-environ,sys,net` combined Engine/host/OS case also passed a
+wrong-expectation RED101 and restored GREEN0 with independent file and TCP
+readback, original export, native Job custody and combined review. Its exact
+scope and cleanup are recorded in
+`.scratch/all-tickets/windows-rhai-native-20261028/release-msrv-20261028/proof.md`.
+The Windows SDK identity, remaining semantic profiles, fault breadth and
+full release matrix still require separate evidence.
 
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance

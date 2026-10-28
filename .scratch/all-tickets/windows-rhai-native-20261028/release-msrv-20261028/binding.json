@@ -1,0 +1,47 @@
+{
+  "attempt": "release-msrv-20261028",
+  "source_commit": "15eb3c718153fc0642b0e1ca81de611f098b7d15",
+  "nonce": "a08d2c17c8ec4567b0b4f2d2e7124b92",
+  "vm_uuid": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19",
+  "guest_scope": "n-a08d2c17",
+  "retained_toolchain_scope": "n-a7e54f39",
+  "retained_toolchain_expiry_utc": "2026-11-01T00:00:00Z",
+  "driver_deadline_seconds": 180,
+  "observer_deadline_seconds": 185,
+  "export_deadline_seconds": 180,
+  "planned_cargo_command": "cargo test --locked --features testing-environ,sys,net --test combined_sys_net",
+  "media_files": {
+    "Cargo.lock": {
+      "sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+      "bytes": 31602
+    },
+    "ClearOwnedWorkReadOnly.ps1": {
+      "sha256": "9e6d9ea66fcb837f1a659e6c52528c1c846a812ab0c1dce512c4cde682ae6af1",
+      "bytes": 2906
+    },
+    "RunRhaiContract.cmd": {
+      "sha256": "41ec8d5ccd66196c062ca2f8e9afdd7cd164080c88a3af6f688d29d909609d52",
+      "bytes": 2218
+    },
+    "RunRhaiContractControl.ps1": {
+      "sha256": "e8783e9c4fb7faef3bc12c4f30b007f906016f2b35089f1619bf66276f545b11",
+      "bytes": 15737
+    },
+    "Start.ps1": {
+      "sha256": "7f8f1140a2eec0f68498eff843075394138f701377b4049ca422018ee3014f4a",
+      "bytes": 10652
+    },
+    "rhai-native-a08d2c17c8ec4567b0b4f2d2e7124b92.bundle": {
+      "sha256": "f93d266707b6fbdd66359f5b9df5742b71626b281dbf84acb602e2a4cb99eecb",
+      "bytes": 45
+    },
+    "rhai-source.zip": {
+      "sha256": "99d53135a62d53f8640376af939a1dc46556db89281f0c7dfe676c20cf24e4c8",
+      "bytes": 1157258
+    },
+    "source-manifest.json": {
+      "sha256": "01f4c77a5860a7bc4a8509af37806535b46b1198f20fe8cb29ae9c927f8173ee",
+      "bytes": 67725
+    }
+  }
+}
