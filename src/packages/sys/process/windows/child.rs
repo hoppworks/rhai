@@ -9,6 +9,8 @@ use windows_sys::Win32::System::Threading::{CreateEventW, SetEvent};
 pub(super) struct Cancellation {
     event: usize,
     requested: AtomicBool,
+    #[cfg(test)]
+    probe: Option<Arc<PendingProbe>>,
 }
 
 impl Cancellation {
@@ -21,6 +23,8 @@ impl Cancellation {
         Ok(Self {
             event: event as usize,
             requested: AtomicBool::new(false),
+            #[cfg(test)]
+            probe: None,
         })
     }
     pub(super) fn handle(&self) -> HANDLE {
@@ -29,12 +33,87 @@ impl Cancellation {
     pub(super) fn requested(&self) -> bool {
         self.requested.load(Ordering::Acquire)
     }
+    #[cfg(test)]
+    pub(super) fn probe(&self) -> Option<&PendingProbe> {
+        self.probe.as_deref()
+    }
     fn request(&self) {
         self.requested.store(true, Ordering::Release);
         // SAFETY: the Arc owning this event outlives this call and the supervisor wait.
         unsafe {
             SetEvent(self.handle());
         }
+    }
+}
+
+// Per-execution test-only synchronization; no process-wide hooks or product API.
+#[cfg(test)]
+#[derive(Default)]
+pub(super) struct PendingProbe {
+    state: Mutex<PendingProbeState>,
+    changed: Condvar,
+    skip_cancellation: AtomicBool,
+}
+
+#[cfg(test)]
+#[derive(Default)]
+struct PendingProbeState {
+    observed_unsignaled: bool,
+    parked: bool,
+    gate_timed_out: bool,
+    kill_requested_at_release: bool,
+    pending_at_release: bool,
+    released: bool,
+    cancellation_completed: bool,
+    owner_retired: bool,
+}
+
+#[cfg(test)]
+impl PendingProbe {
+    pub(super) fn skip_cancellation(&self) -> bool {
+        self.skip_cancellation.load(Ordering::Acquire)
+    }
+    pub(super) fn observe_and_gate(&self, writer: &PipeWriter, cancellation: &Cancellation) {
+        if !writer.is_pending()
+            || unsafe { WaitForSingleObject(writer.event_handle(), 0) } != WAIT_TIMEOUT
+        {
+            return;
+        }
+        let mut state = self.state.lock().unwrap_or_else(|p| p.into_inner());
+        if state.observed_unsignaled {
+            return;
+        }
+        state.observed_unsignaled = true;
+        state.parked = true;
+        self.changed.notify_all();
+        let deadline = Instant::now() + Duration::from_secs(10);
+        while !state.released {
+            let left = deadline.saturating_duration_since(Instant::now());
+            if left.is_zero() {
+                state.gate_timed_out = true;
+                break;
+            }
+            state = self
+                .changed
+                .wait_timeout(state, left)
+                .unwrap_or_else(|p| p.into_inner())
+                .0;
+        }
+        state.kill_requested_at_release = cancellation.requested();
+        state.pending_at_release = writer.is_pending()
+            && unsafe { WaitForSingleObject(writer.event_handle(), 0) } == WAIT_TIMEOUT;
+        state.parked = false;
+        self.changed.notify_all();
+    }
+    pub(super) fn completed(&self, completed: bool) {
+        let mut state = self.state.lock().unwrap_or_else(|p| p.into_inner());
+        state.cancellation_completed = completed;
+        self.changed.notify_all();
+    }
+    pub(super) fn retired(&self) {
+        let mut state = self.state.lock().unwrap_or_else(|p| p.into_inner());
+        state.owner_retired = true;
+        self.changed.notify_all();
     }
 }
 impl Drop for Cancellation {
@@ -302,6 +381,25 @@ fn spawn(
     args: Vec<String>,
     options: Map,
 ) -> Res<ProcessChild> {
+    spawn_inner(
+        ctx,
+        state,
+        program,
+        args,
+        options,
+        #[cfg(test)]
+        None,
+    )
+}
+
+fn spawn_inner(
+    ctx: &NativeCallContext,
+    state: &Shared<SysState>,
+    program: &str,
+    args: Vec<String>,
+    options: Map,
+    #[cfg(test)] probe: Option<Arc<PendingProbe>>,
+) -> Res<ProcessChild> {
     if !state.config.programs.allows(program) {
         return Err(SysError::Denied(format!("program `{program}` is not allowed")).into());
     }
@@ -331,8 +429,13 @@ fn spawn(
     };
     let options = parse_options(state, options, engine_limit)?;
     let permit = ActivePermit::acquire()?;
-    let cancellation = Cancellation::new()
+    #[allow(unused_mut)]
+    let mut cancellation = Cancellation::new()
         .map_err(|error| SysError::io("create child cancellation event", program, &error))?;
+    #[cfg(test)]
+    {
+        cancellation.probe = probe;
+    }
     let control = Arc::new(Control {
         cancellation,
         result: Mutex::new(None),
@@ -390,6 +493,14 @@ fn spawn(
             };
             if owner.has_pending_cleanup() {
                 let _ = retain_for_cleanup(owner);
+            } else {
+                #[cfg(test)]
+                {
+                    drop(owner);
+                    if let Some(probe) = control.cancellation.probe() {
+                        probe.retired();
+                    }
+                }
             }
             *control.result.lock().unwrap_or_else(|p| p.into_inner()) = Some(result);
             control.changed.notify_all();
@@ -413,6 +524,11 @@ fn spawn(
     let mut handoff = HandoffOwner(Some(ProcessOwner::new(
         child, stdin, stdout, stderr, permit,
     )));
+    #[cfg(test)]
+    {
+        handoff.0.as_mut().expect("child owner").retirement_probe =
+            control.cancellation.probe.clone();
+    }
     drop(command);
     control.pid.store(
         handoff.0.as_ref().expect("child owner").child.id(),
@@ -435,4 +551,300 @@ fn spawn(
         .into());
     }
     Ok(ProcessChild { lease })
+}
+
+#[cfg(all(test, not(feature = "no_index")))]
+mod pending_tests {
+    use super::*;
+    use crate::packages::sys::{ProgramPolicy, SysConfig};
+    use crate::{Engine, Scope};
+    use std::path::PathBuf;
+    use windows_sys::Win32::Foundation::WAIT_OBJECT_0;
+    use windows_sys::Win32::System::Threading::{
+        GetExitCodeProcess, OpenProcess, TerminateProcess, PROCESS_QUERY_LIMITED_INFORMATION,
+        PROCESS_TERMINATE,
+    };
+
+    const RECORD_ENV: &str = "RHAI_WINDOWS_PENDING_UNIT_RECORD";
+    const SYNCHRONIZE: u32 = 0x0010_0000;
+
+    #[test]
+    fn pending_fixture() {
+        let Ok(record) = std::env::var(RECORD_ENV) else {
+            return;
+        };
+        let path = std::path::Path::new(&record);
+        let temporary = path.with_extension("tmp");
+        std::fs::write(&temporary, format!("{}", std::process::id())).unwrap();
+        std::fs::rename(temporary, path).unwrap();
+        let deadline = Instant::now() + Duration::from_secs(30);
+        while Instant::now() < deadline {
+            thread::sleep(Duration::from_millis(20));
+        }
+        panic!("pending fixture exceeded its safety deadline");
+    }
+
+    struct ExactChild(HANDLE, Arc<AtomicBool>);
+    impl Drop for ExactChild {
+        fn drop(&mut self) {
+            // SAFETY: the guard owns the exact child handle until it closes it.
+            unsafe {
+                if WaitForSingleObject(self.0, 0) != WAIT_OBJECT_0 {
+                    if TerminateProcess(self.0, 1) == 0 {
+                        eprintln!(
+                            "failed to terminate exact pending fixture: {}",
+                            std_io::Error::last_os_error()
+                        );
+                    }
+                }
+                if WaitForSingleObject(self.0, 10_000) == WAIT_OBJECT_0 {
+                    self.1.store(true, Ordering::Release);
+                } else {
+                    eprintln!(
+                        "exact pending fixture exit was not confirmed; preserving its directory"
+                    );
+                }
+                CloseHandle(self.0);
+            }
+        }
+    }
+    struct ReleaseProbe(Arc<PendingProbe>);
+    impl Drop for ReleaseProbe {
+        fn drop(&mut self) {
+            let mut state = self.0.state.lock().unwrap_or_else(|p| p.into_inner());
+            state.released = true;
+            self.0.changed.notify_all();
+        }
+    }
+    struct RemoveDir(PathBuf, Arc<AtomicBool>);
+    impl Drop for RemoveDir {
+        fn drop(&mut self) {
+            if self.1.load(Ordering::Acquire) {
+                if let Err(error) = std::fs::remove_dir_all(&self.0) {
+                    eprintln!("failed to remove owned pending fixture directory: {error}");
+                }
+            } else {
+                eprintln!(
+                    "preserved pending fixture directory {} until exact child exit is confirmed",
+                    self.0.display()
+                );
+            }
+        }
+    }
+
+    #[test]
+    fn public_kill_cancels_an_observed_pending_stdin_write() {
+        let nonce = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .unwrap()
+            .as_nanos();
+        let root =
+            std::env::temp_dir().join(format!("rhai-win-pending-{}-{nonce}", std::process::id()));
+        std::fs::create_dir(&root).unwrap();
+        let exit_confirmed = Arc::new(AtomicBool::new(false));
+        let _directory = RemoveDir(root.clone(), Arc::clone(&exit_confirmed));
+        let record = root.join("child.pid");
+        let probe = Arc::new(PendingProbe::default());
+        if std::env::var_os("RHAI_WINDOWS_PENDING_SKIP_CANCEL").is_some() {
+            probe.skip_cancellation.store(true, Ordering::Release);
+        }
+        let gate = ReleaseProbe(Arc::clone(&probe));
+        let config = SysConfig::default().programs(ProgramPolicy::Any);
+        let fs = crate::packages::sys::fs::FsState::open(&config.fs).unwrap();
+        let state = Shared::new(SysState { config, fs });
+        let mut module = Module::new();
+        register(&mut module, &state);
+        let state_for_spawn = state.clone();
+        let probe_for_spawn = Arc::clone(&probe);
+        crate::packages::sys::reg(
+            "spawn",
+            &["/// Spawn a child with test-only pending observation."],
+        )
+        .set_into_module(
+            &mut module,
+            move |ctx: NativeCallContext,
+                  program: &str,
+                  args: Array,
+                  options: Map|
+                  -> Res<ProcessChild> {
+                spawn_inner(
+                    &ctx,
+                    &state_for_spawn,
+                    program,
+                    parse_args(args)?,
+                    options,
+                    Some(Arc::clone(&probe_for_spawn)),
+                )
+            },
+        );
+        module.build_index();
+        let mut engine = Engine::new();
+        #[cfg(not(feature = "unchecked"))]
+        engine.set_max_array_size(2_097_152);
+        engine.register_global_module(module.into());
+        let executable = std::env::current_exe()
+            .unwrap()
+            .to_string_lossy()
+            .replace('\\', "\\\\")
+            .replace('"', "\\\"");
+        let record_literal = record
+            .to_string_lossy()
+            .replace('\\', "\\\\")
+            .replace('"', "\\\"");
+        let mut scope = Scope::new();
+        scope.push("input", vec![0x5au8; 1_048_576]);
+        let script = format!(
+            r#"spawn("{executable}", ["--exact", "packages::sys::process::windows::child::pending_tests::pending_fixture", "--nocapture", "--quiet"], #{{env_clear: true, env: #{{ {RECORD_ENV}: "{record_literal}" }}, stdin: input, max_output: 1024}})"#
+        );
+        let child = engine
+            .eval_with_scope::<Dynamic>(&mut scope, &script)
+            .expect("public spawn returned a child");
+        let control = child
+            .clone()
+            .try_cast::<ProcessChild>()
+            .expect("public child type")
+            .lease
+            .control
+            .clone();
+        scope.push_dynamic("child", child);
+        let deadline = Instant::now() + Duration::from_secs(10);
+        let pid = loop {
+            match std::fs::read_to_string(&record) {
+                Ok(value) => break value.trim().parse::<u32>().unwrap(),
+                Err(error)
+                    if error.kind() == std_io::ErrorKind::NotFound && Instant::now() < deadline =>
+                {
+                    thread::sleep(Duration::from_millis(10))
+                }
+                Err(error) => panic!("pending fixture readiness: {error}"),
+            }
+        };
+        // SAFETY: the record was written by the gated live fixture; open an exact process handle.
+        let raw = unsafe {
+            OpenProcess(
+                PROCESS_QUERY_LIMITED_INFORMATION | PROCESS_TERMINATE | SYNCHRONIZE,
+                0,
+                pid,
+            )
+        };
+        assert!(
+            !raw.is_null(),
+            "open exact pending fixture: {}",
+            std_io::Error::last_os_error()
+        );
+        let exact = ExactChild(raw, Arc::clone(&exit_confirmed));
+        let mut observed = probe.state.lock().unwrap_or_else(|p| p.into_inner());
+        while !observed.observed_unsignaled {
+            let left = deadline.saturating_duration_since(Instant::now());
+            assert!(
+                !left.is_zero(),
+                "kernel-pending stdin write was not observed"
+            );
+            observed = probe
+                .changed
+                .wait_timeout(observed, left)
+                .unwrap_or_else(|p| p.into_inner())
+                .0;
+        }
+        assert_eq!(
+            unsafe { WaitForSingleObject(exact.0, 0) },
+            WAIT_TIMEOUT,
+            "exact child must still be live"
+        );
+        assert!(
+            observed.parked && !observed.gate_timed_out,
+            "worker must remain gated at the unsignaled write"
+        );
+        engine.run_with_scope(&mut scope, "child.kill();").unwrap();
+        assert!(
+            control.cancellation.requested(),
+            "public kill must set the real cancellation request"
+        );
+        observed.released = true;
+        probe.changed.notify_all();
+        drop(observed);
+        drop(gate);
+        let mut observed = probe.state.lock().unwrap_or_else(|p| p.into_inner());
+        let gate_deadline = Instant::now() + Duration::from_secs(10);
+        while observed.parked {
+            let left = gate_deadline.saturating_duration_since(Instant::now());
+            assert!(!left.is_zero(), "pending worker did not leave its gate");
+            observed = probe
+                .changed
+                .wait_timeout(observed, left)
+                .unwrap_or_else(|p| p.into_inner())
+                .0;
+        }
+        assert!(
+            observed.observed_unsignaled
+                && !observed.gate_timed_out
+                && observed.kill_requested_at_release
+                && observed.pending_at_release,
+            "kill must coincide with an unsignaled pending write"
+        );
+        drop(observed);
+        let result = engine.eval_with_scope::<Map>(&mut scope, "child.wait()");
+        assert_eq!(
+            unsafe { WaitForSingleObject(exact.0, 10_000) },
+            WAIT_OBJECT_0,
+            "exact child did not exit"
+        );
+        let mut exit = u32::MAX;
+        assert_ne!(unsafe { GetExitCodeProcess(exact.0, &mut exit) }, 0);
+        let mut observed = probe.state.lock().unwrap_or_else(|p| p.into_inner());
+        let retirement_deadline = Instant::now() + Duration::from_secs(10);
+        while !observed.owner_retired {
+            let left = retirement_deadline.saturating_duration_since(Instant::now());
+            assert!(!left.is_zero(), "exact pending owner did not retire");
+            observed = probe
+                .changed
+                .wait_timeout(observed, left)
+                .unwrap_or_else(|p| p.into_inner())
+                .0;
+        }
+        if probe.skip_cancellation() {
+            let error =
+                result.expect_err("suppressed initial cancellation must report incomplete cleanup");
+            let sys = match *error {
+                crate::EvalAltResult::ErrorRuntime(value, _) => {
+                    value.try_cast::<SysError>().expect("typed cleanup error")
+                }
+                other => panic!("unexpected incomplete-cleanup error: {other:?}"),
+            };
+            match sys {
+                SysError::Process { report, .. } => {
+                    assert!(report
+                        .cleanup_diagnostics()
+                        .iter()
+                        .any(|d| d.operation() == "cancel stdin"));
+                    assert!(report
+                        .cleanup_diagnostics()
+                        .iter()
+                        .any(|d| d.operation() == "retain cleanup custody"));
+                }
+                other => panic!("expected process cleanup error, got {other:?}"),
+            }
+            assert!(!observed.cancellation_completed && observed.owner_retired);
+            eprintln!("windows_pending_mutant_readback pid={pid} exit={exit} pending_at_kill=true incomplete_cleanup=true retained_owner_retired=true");
+            panic!("deliberately suppressed initial pending write cancellation");
+        }
+        let result = result.expect("pending write cancellation must finish");
+        assert_eq!(result["code"].as_int().unwrap() as u32, exit);
+        assert!(
+            observed.observed_unsignaled
+                && !observed.gate_timed_out
+                && observed.kill_requested_at_release
+                && observed.pending_at_release
+                && observed.cancellation_completed
+                && observed.owner_retired,
+            "pending, completion and owner-retirement proof must all be present"
+        );
+        eprintln!("windows_pending_public_kill_readback pid={pid} exit={exit} pending_unsignaled=true cancellation_complete=true owner_retired=true");
+        if std::env::var_os("RHAI_WINDOWS_PENDING_WRONG_EXPECTATION").is_some() {
+            assert!(
+                !observed.cancellation_completed,
+                "deliberately wrong pending cancellation completion expectation"
+            );
+        }
+    }
 }

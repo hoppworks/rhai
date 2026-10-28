@@ -1,0 +1,5 @@
+# Combined independent review: attempts29 and 30
+
+PASS for the scoped test-build pending-write/cancellation proof and the affected native production integration. The independent reviewer checked the shared source manifest and lock binding, the original incomplete-cleanup mutant RED and real cancellation GREEN with exact child-handle observations and owner drop, and the production-path snapshot RED and 7+17 integration GREEN. Both observer/custody records and host cleanup receipts match. The coordinator separately checked original export hashes, ordered frames and all eight journal CRCs for each run.
+
+The probe and mutation are per-child and compiled only under `cfg(test)`. The mutant simulates an incomplete first cleanup result, not an isolated `CancelIoEx` failure. Exact owner drop does not prove removal of the retained registry entry. Uninstrumented pending I/O, other fault and drop paths, managed Jobs, native MSRV and feature matrix remain open. Rust 1.77.2 Windows-target checking is compilation only. Both guest outer scopes are retained.

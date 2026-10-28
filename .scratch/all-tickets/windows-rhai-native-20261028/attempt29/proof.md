@@ -1,0 +1,11 @@
+# Native Windows pending stdin cancellation (test-build probe)
+
+A private per-execution `cfg(test)` probe gated the real Windows supervisor after it observed an unsignaled pending overlapped stdin write. A real child wrote its PID and did not read input; an independently opened exact process handle confirmed it was alive. The test requested `kill()` through the Rhai Engine and registered host function while holding the gate. Before releasing the worker, the probe rechecked both the request and the unsignaled writer event. In GREEN, the real cancellation/completion path returned a child result matching exact handle exit 1, and the exact owner was dropped after cleanup.
+
+The test-only mutant suppressed the initial stdin cancellation/completion call and reported incomplete cleanup. After the same pending and kill preconditions, it checked typed process diagnostics, exact child exit and the retained owner's eventual drop before failing with the deliberate marker and Cargo 101. This exercises handling of an incomplete first cleanup result; it does not isolate a failure of `CancelIoEx` itself or prove the retained registry entry was removed. The test-build Engine uses an injected per-child registration; it is not an independent production-binary proof.
+
+The 441-file source manifest `9b25196001a371c010018d5f0277614c4d6c613d6bf4627a15a072145755470d` binds commit `3ae3c4dbb74c2060c9fb2322d8c08fbe95c1376c` plus the test-probe source changes, lock `12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802`, and `testing-environ,sys,metadata`; native Windows Rust/Cargo was 1.93.0. Rust 1.77.2 Windows-target check is compile-only.
+
+Driver0 completed in 119.115s. Original export SHA-256 `110210995ec88cd6dbbe0e5292f331e28fb1684099266196ff00af12f6fc1a82` contains 199 ordered frames and 13 hash-verified files. Eight journal lengths and CRC32s verify through `REMOVED`; exact inner runtime removed. Original sdc medium was restored; exact owned host stage and ISO retired after hash, all-domain reference and fuser checks. Guest outer scope remains for evidence-first retirement.
+
+Combined independent review of attempts29/30 passed for this narrow package; see `../attempt30/combined-review.md`. Registry removal, native integration without the probe, other fault and drop paths, managed Jobs, feature/MSRV matrix and release remain open.

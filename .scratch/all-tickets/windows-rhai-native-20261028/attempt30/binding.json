@@ -1,0 +1,15 @@
+{
+  "nonce": "df708abd30fc2cc198ff04fe0bfddb8f",
+  "source_commit": "3ae3c4dbb74c2060c9fb2322d8c08fbe95c1376c",
+  "manifest_sha256": "9b25196001a371c010018d5f0277614c4d6c613d6bf4627a15a072145755470d",
+  "archive_sha256": "4235435d1be324391ddfd5a029524d0cc5c8e65b0b90894b3be37f64ad558781",
+  "file_count": 441,
+  "source_bytes": 5230774,
+  "expected": "production spawn snapshot wrong RED then integrated GREEN",
+  "cargo_jobs": 2,
+  "guest_free_ram_floor_bytes": 3221225472,
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": true,
+  "dispatch_recorded_utc": "2026-10-28T10:18:17.230143+00:00"
+}

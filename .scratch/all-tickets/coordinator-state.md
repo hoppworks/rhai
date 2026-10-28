@@ -2,7 +2,7 @@
 
 ## Mode, decisions and next action
 
-Autonomous implementation remains active. A–F, Ticket03 and release are open. Windows direct-child raw, text, timeout and stdin slices pass at attempts14/17/19/21/22. Spawn/clone/wait at attempts23/24, kill with unread buffered input at attempt25 and direct-child drop at attempt27 passed combined review and are on fork main. Attempt28 proves script mutation of cached code/stdout; combined review PASS. **Next:** publish this proof, then verify pending-write, drop retirement and fault paths. Do not infer full process acceptance. The owner prefers Terra 6.1 for most delegated tasks and sparing Luna use.
+Implementation active; A–F, Ticket03 and release open. Windows direct-child raw, text, timeout and stdin slices pass at attempts14/17/19/21/22. Spawn/clone/wait at attempts23/24, kill with unread buffered input at attempt25 and direct-child drop at attempt27 passed combined review and are on fork main. Attempt28 proves script mutation of cached code/stdout; combined review PASS and published. Attempt29 proves gated pending cancellation in a test build; attempt30 revalidated production integration; combined review PASS. **Next:** publish this package, then verify registry retirement, uninstrumented pending I/O, drop and fault paths. Full process acceptance remains open. The owner prefers Terra 6.1 for most delegated tasks and sparing Luna use.
 
 ## Owner boundaries and rules
 
@@ -10,7 +10,7 @@ Push/merge only to `https://github.com/hoppworks/rhai.git` main, never public up
 
 ## Accepted proof and applicability
 
-Fork main `173b49e44` contains accepted Windows sys policy/env/fs, six net targets, raw/text process, the named timeout, 1MiB stdin, narrow spawn/clone/wait, kill with unread buffered input and direct-child drop observations; earlier Linux, Darwin, WASM/core and MSRV evidence remains scoped by `docs/sys-package-plan.md`. The Windows backend prerequisites are not product closure.
+Fork main `3ae3c4dbb` contains accepted Windows sys policy/env/fs, six net targets, raw/text process, the named timeout, 1MiB stdin, narrow spawn/clone/wait, kill with unread buffered input and direct-child drop observations; earlier Linux, Darwin, WASM/core and MSRV evidence remains scoped by `docs/sys-package-plan.md`. The Windows backend prerequisites are not product closure.
 
 Attempt14 native raw process and timeout-boundary proof is in `.scratch/all-tickets/windows-rhai-native-20261026/attempt14/`; attempt11 normal proof remains accepted. Rust1.77.2 Windows-target check is compilation only; native MSRV remains open.
 
@@ -34,6 +34,8 @@ Attempt27: two survival REDs and restored 7+17 GREEN for nonfinal/final drop pol
 
 Attempt28: wrong cached-exit RED and restored 7+17 GREEN after Rhai script mutates `code`/`stdout` then rereads a cloned Child result. Driver0 119.985s; 207 frames/13 hash-verified files, eight journal CRCs through REMOVED. `.scratch/all-tickets/windows-rhai-native-20261028/attempt28/proof.md`; combined review PASS. Only named fields covered.
 
+Attempt29: native test-build public Rhai kill while a per-child probe confirms an unsignaled pending write; suppressed-first-cleanup mutant RED and actual cancellation GREEN, exact child exit and owner drop. Driver0 119.115s, 199 frames/13 hash-verified files and eight journal CRCs through REMOVED. `.scratch/all-tickets/windows-rhai-native-20261028/attempt29/proof.md`. No isolated CancelIoEx-fault or registry-removal proof. Combined review PASS. Attempt30 production integration RED and 7+17 GREEN used identical source manifest; Driver0 103.716s, 207 frames/13 files, eight valid journal CRCs. `.scratch/all-tickets/windows-rhai-native-20261028/attempt30/proof.md`.
+
 ## Open product and release work
 
 Windows `run` overloads and stdin feature/profile rows beyond accepted slices, public pending-write cancellation and early close, `spawn`/Child, other timeout paths, output overflow/overlap, exceptional/descendant cleanup, managed Jobs, policy/quoting and feature profiles remain open. Ticket03 and strict native Linux/macOS/Windows feature/MSRV release matrix remain open. Preserve P/E/F/X/R and six-ticket requirements; use real script→Engine→host→OS and independent readback.
@@ -46,4 +48,4 @@ Attempts11–25 consumed 15 native Drivers; timings, accepted proofs, earlier ap
 
 Attempt26 used one Driver (180.226s), one export and read-only compile-log recovery; its unfinished guest runtime and outer scope remain. Attempt27 used one Driver (98.788s), one export and two Cargo jobs following live capacity checks. Its host ISO/stage were retired, sdc restored and guest outer scope retained.
 
-Attempt28 used one Driver (119.985s) and one export. Host ISO/stage retired, sdc restored; guest outer scope retained. For real pending-write proof, use a private per-child `cfg(test)` probe at `ERROR_IO_PENDING`, observe an unsignaled event, gate the worker boundedly until public `kill`, then verify real cancellation and owner retirement; avoid global state or new production API.
+Attempts28–30 used one Driver each (119.985s/119.115s/103.716s) and one export each. Host ISOs/stages retired, sdc restored; guest outer scopes retained.

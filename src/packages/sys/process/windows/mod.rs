@@ -437,6 +437,8 @@ struct ProcessOwner {
     err: Vec<u8>,
     exit: Option<ExitStatus>,
     diagnostics: Vec<ProcessDiagnostic>,
+    #[cfg(test)]
+    retirement_probe: Option<Arc<child::PendingProbe>>,
 }
 
 type RetainedOwner = Arc<Mutex<Option<ProcessOwner>>>;
@@ -462,7 +464,14 @@ fn retain_for_cleanup(owner: ProcessOwner) -> std_io::Result<()> {
                 .unwrap_or_else(|poisoned| poisoned.into_inner())
                 .take()
                 .expect("retained cleanup owner missing");
+            #[cfg(test)]
+            let probe = owner.retirement_probe.clone();
             owner.finish_in_background();
+            #[cfg(test)]
+            {
+                drop(owner);
+                if let Some(probe) = probe { probe.retired(); }
+            }
             retained_registry()
                 .lock()
                 .unwrap_or_else(|poisoned| poisoned.into_inner())
@@ -489,6 +498,8 @@ impl ProcessOwner {
             err: Vec::new(),
             exit: None,
             diagnostics: Vec::new(),
+            #[cfg(test)]
+            retirement_probe: None,
         }
     }
 
@@ -539,6 +550,12 @@ impl ProcessOwner {
                 if let Some(writer) = self.stdin.as_mut() {
                     if let Err(error) = advance_stdin(writer) {
                         cause = Some(io_cause("write child stdin", program, &error));
+                    }
+                    #[cfg(test)]
+                    if let Some(control) = cancellation {
+                        if let Some(probe) = control.probe() {
+                            probe.observe_and_gate(writer, control);
+                        }
                     }
                 }
             }
@@ -668,7 +685,18 @@ impl ProcessOwner {
             }
         }
         if let Some(writer) = self.stdin.as_mut() {
+            #[cfg(not(test))]
             let outcome = writer.cancel_and_join_bounded(2_000);
+            #[cfg(test)]
+            let outcome = if cancellation.and_then(child::Cancellation::probe).is_some_and(child::PendingProbe::skip_cancellation) {
+                stdin::CancelWrite { completed: false, errors: Vec::new() }
+            } else {
+                writer.cancel_and_join_bounded(2_000)
+            };
+            #[cfg(test)]
+            if let Some(probe) = cancellation.and_then(child::Cancellation::probe) {
+                probe.completed(outcome.completed && outcome.errors.is_empty());
+            }
             if !outcome.completed {
                 self.diagnostics.push(ProcessDiagnostic::new(
                     "cancel stdin",
