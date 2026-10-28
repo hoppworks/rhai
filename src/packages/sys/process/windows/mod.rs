@@ -2,6 +2,9 @@
 
 mod io;
 mod stdin;
+mod child;
+
+pub use child::ProcessChild;
 
 use self::io::PipeReader;
 use self::stdin::PipeWriter;
@@ -49,6 +52,7 @@ impl Drop for ActivePermit {
 }
 
 pub(super) fn register(module: &mut Module, state: &Shared<SysState>) {
+    child::register(module, state);
     let st = state.clone();
     crate::packages::sys::reg(
         "run",
@@ -355,7 +359,7 @@ fn run_map(
     drop(command);
     let mut owner = ProcessOwner::new(child, stdin, stdout, stderr, permit);
     let supervised = catch_unwind(AssertUnwindSafe(|| {
-        owner.supervise(deadline, options.limit, program)
+        owner.supervise(deadline, options.limit, program, None)
     }));
     let supervised = match supervised {
         Ok(result) => result,
@@ -493,9 +497,33 @@ impl ProcessOwner {
         deadline: Option<Instant>,
         limit: usize,
         program: &str,
+        cancellation: Option<&child::Cancellation>,
     ) -> Result<ProcessReport, (ProcessCause, ProcessReport)> {
         let mut cause = None;
         loop {
+            if cause.is_some() {
+                break;
+            }
+            if cancellation.is_some_and(child::Cancellation::requested) {
+                if self.exit.is_none() {
+                    match self.child.try_wait() {
+                        Ok(Some(status)) => self.exit = Some(status),
+                        Ok(None) => {
+                            if let Err(error) = self.child.kill() {
+                                // The child may have exited between the observation and kill.
+                                match self.child.try_wait() {
+                                    Ok(Some(status)) => self.exit = Some(status),
+                                    _ => cause = Some(io_cause("kill child", program, &error)),
+                                }
+                            }
+                        }
+                        Err(error) => cause = Some(io_cause("observe child before kill", program, &error)),
+                    }
+                }
+                // Stop submitting I/O immediately. Descendants may retain pipe handles
+                // after the exact child exits, so cancellation must enter bounded cleanup.
+                break;
+            }
             if cause.is_none() {
                 cause = observe_read_step(
                     &mut [
@@ -549,6 +577,9 @@ impl ProcessOwner {
             if self.exit.is_none() {
                 handles.push(self.child.as_raw_handle() as HANDLE);
             }
+            if let Some(control) = cancellation {
+                handles.push(control.handle());
+            }
             if handles.is_empty() {
                 continue;
             }
@@ -562,6 +593,8 @@ impl ProcessOwner {
                     }
                 })
                 .unwrap_or(u32::MAX);
+            // A failed SetEvent must not strand a cancellation request indefinitely.
+            let wait_ms = if cancellation.is_some() { wait_ms.min(1_000) } else { wait_ms };
             // SAFETY: every waited handle remains owned and live across the wait.
             let wait = unsafe {
                 WaitForMultipleObjects(handles.len() as u32, handles.as_ptr(), 0, wait_ms)
@@ -616,6 +649,8 @@ impl ProcessOwner {
                 {
                     cause = Some(io_cause("write child stdin", program, &error));
                 }
+            } else if cancellation.is_some_and(|control| signaled == control.handle()) {
+                continue;
             } else if self.exit.is_none() {
                 match self.child.try_wait() {
                     Ok(status) => self.exit = status,

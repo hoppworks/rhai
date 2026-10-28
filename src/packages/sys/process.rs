@@ -11,6 +11,8 @@ mod windows;
 pub(super) use unix::CleanupService;
 #[cfg(unix)]
 pub use unix::ProcessChild as Child;
+#[cfg(windows)]
+pub use windows::ProcessChild as Child;
 
 /// Final status of a process when one is available.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

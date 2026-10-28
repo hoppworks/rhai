@@ -41,7 +41,7 @@ mod process;
 
 pub use config::{EnvPolicy, FsAccess, FsPolicy, FsRoot, ProcessScope, ProgramPolicy, SysConfig};
 pub use error::SysError;
-#[cfg(unix)]
+#[cfg(any(unix, windows))]
 pub use process::Child;
 pub use process::{ProcessCause, ProcessDiagnostic, ProcessExit, ProcessReport};
 

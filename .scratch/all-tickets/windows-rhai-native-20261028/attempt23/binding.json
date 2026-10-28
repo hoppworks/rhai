@@ -1,0 +1,13 @@
+{
+  "nonce": "baccbb8a78b49adab4017d4c3a37103a",
+  "source_commit": "797395b836b5ce33b79eb162e5bb8e25a2bcfe98",
+  "manifest_sha256": "f4fa142a2d74d69fe8bd821f890671f97ef3817bf04af74d03a77d461ea984e5",
+  "archive_sha256": "5001fe4bd61a488da3c9fb04ad518468cc7188f7523e0c968103c91321b5314f",
+  "file_count": 440,
+  "source_bytes": 5184893,
+  "expected": "missing spawn public function, Cargo exit 101",
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": true,
+  "dispatch_recorded_utc": "2026-10-28T09:18:48.409536+00:00"
+}

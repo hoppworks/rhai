@@ -4,7 +4,7 @@
 mod sys_support;
 
 use rhai::packages::sys::{ProgramPolicy, SysConfig, SysError};
-use rhai::{Blob, EvalAltResult, ImmutableString, Map, Scope};
+use rhai::{Blob, Dynamic, EvalAltResult, ImmutableString, Map, Scope};
 use std::ffi::c_void;
 use std::process;
 use std::thread;
@@ -25,6 +25,7 @@ const STDIN_OUTPUT_ENV: &str = "RHAI_WINDOWS_STDIN_OUTPUT_BYTES";
 const STDIN_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_STDIN_WRONG_EXPECTATION";
 const STDIN_SCALAR_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_STDIN_SCALAR_WRONG_EXPECTATION";
 const STDIN_TIMEOUT_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_STDIN_TIMEOUT_WRONG_EXPECTATION";
+const SPAWN_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_SPAWN_WRONG_EXPECTATION";
 const LIBTEST_QUIET_START: &[u8] = b"\nrunning 1 test\n";
 
 type Handle = *mut c_void;
@@ -523,6 +524,70 @@ fn windows_run_raw_captures_output_and_nonzero_exit() {
         if std::env::var_os(WRONG_EXPECTATION_ENV).is_some() {
             assert_eq!(observed_exit, code as u32 + 1, "deliberately wrong native process exit expectation");
         }
+    }
+}
+
+/// A spawned child remains observable through cloned script handles until its exact OS
+/// process exits; waiting twice returns the same completed snapshot.
+#[test]
+fn windows_spawn_child_can_be_polled_and_waited_through_clones() {
+    let engine = engine(SysConfig::default().programs(ProgramPolicy::Any));
+    let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let records = TempDir::new();
+    let record = records.path().join("spawn-child-record.txt");
+    let script_record = record.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let script = format!(
+        r#"spawn("{executable}", ["--exact", "windows_process_fixture", "--nocapture", "--quiet"], #{{
+            env_clear: true,
+            env: #{{ {FIXTURE_CODE_ENV}: "7", {FIXTURE_RECORD_ENV}: "{script_record}" }},
+            max_output: 1024
+        }})"#
+    );
+    let child = engine.eval::<Dynamic>(&script).unwrap_or_else(|error| {
+        if matches!(&*error, EvalAltResult::ErrorFunctionNotFound(name, _) if name.starts_with("spawn (")) {
+            eprintln!("windows_spawn_contract_missing_public_spawn");
+        }
+        panic!("Windows spawn must return a shared Child handle: {error:?}")
+    });
+    let deadline = Instant::now() + Duration::from_secs(5);
+    let text = loop {
+        match std::fs::read_to_string(&record) {
+            Ok(text) => break text,
+            Err(error) if error.kind() == std::io::ErrorKind::NotFound && Instant::now() < deadline => {
+                thread::sleep(Duration::from_millis(10));
+            }
+            Err(error) => panic!("spawned child readiness record unavailable: {error}"),
+        }
+    };
+    let pid = text.split_whitespace().next().unwrap().strip_prefix("pid=").unwrap().parse::<u32>().unwrap();
+    let raw = unsafe { OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | PROCESS_TERMINATE | SYNCHRONIZE, 0, pid) };
+    assert!(!raw.is_null(), "open exact spawned process {pid}: {}", std::io::Error::last_os_error());
+    let mut guard = TimeoutChildGuard { handle: OwnedProcessHandle(raw), pid, exit_observed: false };
+    let mut scope = Scope::new();
+    scope.push_dynamic("child", child.clone());
+    scope.push_dynamic("sibling", child);
+    assert!(engine.eval_with_scope::<Dynamic>(&mut scope, "child.try_wait()").unwrap().is_unit(), "gated child must still be running");
+    assert!(engine.eval_with_scope::<Dynamic>(&mut scope, "child.wait(0.0)").unwrap().is_unit(), "zero-time wait must not cancel the gated child");
+    std::fs::write(record.with_extension("release"), b"release\n").unwrap();
+    let first = engine.eval_with_scope::<Map>(&mut scope, "child.wait()").unwrap();
+    let second = engine.eval_with_scope::<Map>(&mut scope, "sibling.wait()").unwrap();
+    assert_eq!(unsafe { WaitForSingleObject(guard.handle.0, 10_000) }, WAIT_OBJECT_0, "exact spawned child did not exit");
+    let mut exit_code = u32::MAX;
+    assert_ne!(unsafe { GetExitCodeProcess(guard.handle.0, &mut exit_code) }, 0);
+    guard.exit_observed = true;
+    assert_eq!(exit_code, 7);
+    assert_eq!(first["code"].as_int().unwrap(), 7);
+    assert_eq!(second["code"].as_int().unwrap(), 7);
+    assert!(!first["success"].as_bool().unwrap());
+    assert!(first["stdout_complete"].as_bool().unwrap());
+    assert!(first["stderr_complete"].as_bool().unwrap());
+    assert_eq!(first["stdout"].clone().cast::<ImmutableString>().as_str(), "\nrunning 1 test\n\0A\u{fffd}");
+    assert_eq!(first["stderr"].clone().cast::<ImmutableString>().as_str(), "\u{fffd}B\0");
+    assert_eq!(first["stdout"].clone().cast::<ImmutableString>(), second["stdout"].clone().cast::<ImmutableString>());
+    assert_eq!(first["stderr"].clone().cast::<ImmutableString>(), second["stderr"].clone().cast::<ImmutableString>());
+    eprintln!("windows_spawn_os_readback pid={pid} exit={exit_code} exact_handle_signaled=true");
+    if std::env::var_os(SPAWN_WRONG_EXPECTATION_ENV).is_some() {
+        assert_eq!(exit_code, 8, "deliberately wrong spawned child exit expectation");
     }
 }
 

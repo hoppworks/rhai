@@ -1,0 +1,5 @@
+# Combined independent review
+
+PASS for the native spawn/clone/wait slice and integration as explicitly incomplete work. The independent reviewer checked the source changes, the 441 source hashes against the worktree, attempt23 missing-registration baseline, attempt24 wrong-exit RED, restored 7+13 GREEN, exact process-handle readbacks, stdout/stderr assertions, the 13 exported file hashes and lengths, serial SHA `f07920adb19a962648238b7d2a65a67dae28aa2792a034192168dac44900c8ef`, observer result, scoped custody and host cleanup receipt. The coordinator independently checked all eight journal lengths and CRC32s.
+
+The targeted follow-up source review confirmed bounded cancellation cleanup, first-cause preservation and guarded handoff, but these paths are not yet behaviorally accepted. Native cancellation with pending I/O and inherited pipes, final-drop policies, concurrent wait/kill, panic/handoff fault injection, managed Jobs, native MSRV and other features remain open. Rust 1.77.2 Windows-target checks are compilation only and preceded final test-only assertions.
