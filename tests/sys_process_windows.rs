@@ -26,6 +26,8 @@ const STDIN_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_STDIN_WRONG_EXPECTATION"
 const STDIN_SCALAR_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_STDIN_SCALAR_WRONG_EXPECTATION";
 const STDIN_TIMEOUT_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_STDIN_TIMEOUT_WRONG_EXPECTATION";
 const SPAWN_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_SPAWN_WRONG_EXPECTATION";
+const SPAWN_KILL_RECORD_ENV: &str = "RHAI_WINDOWS_SPAWN_KILL_RECORD";
+const SPAWN_KILL_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_SPAWN_KILL_WRONG_EXPECTATION";
 const LIBTEST_QUIET_START: &[u8] = b"\nrunning 1 test\n";
 
 type Handle = *mut c_void;
@@ -41,6 +43,8 @@ extern "system" {
     fn GetExitCodeProcess(handle: Handle, exit_code: *mut u32) -> i32;
     fn TerminateProcess(handle: Handle, exit_code: u32) -> i32;
     fn CloseHandle(handle: Handle) -> i32;
+    fn GetStdHandle(kind: u32) -> Handle;
+    fn PeekNamedPipe(handle: Handle, buffer: *mut c_void, size: u32, read: *mut u32, available: *mut u32, left: *mut u32) -> i32;
 }
 
 struct OwnedProcessHandle(Handle);
@@ -162,6 +166,32 @@ fn windows_timeout_fixture() {
     while Instant::now() < safety_deadline {
         thread::sleep(Duration::from_millis(20));
     }
+    panic!("parent did not terminate the child before its safety deadline");
+}
+
+/// Read one byte, then wait for a full input pipe without draining the rest.
+#[test]
+fn windows_spawn_blocked_input_fixture() {
+    let Ok(record) = std::env::var(SPAWN_KILL_RECORD_ENV) else { return; };
+    let mut first = [0u8; 1];
+    std::io::Read::read_exact(&mut std::io::stdin(), &mut first).unwrap();
+    assert_eq!(first, [0x5a]);
+    let input = unsafe { GetStdHandle((-10i32) as u32) };
+    assert!(!input.is_null());
+    let deadline = Instant::now() + Duration::from_secs(15);
+    let available = loop {
+        let mut available = 0u32;
+        let ok = unsafe { PeekNamedPipe(input, std::ptr::null_mut(), 0, std::ptr::null_mut(), &mut available, std::ptr::null_mut()) };
+        assert_ne!(ok, 0, "observe child stdin pipe: {}", std::io::Error::last_os_error());
+        if available >= 8_191 { break available; }
+        assert!(Instant::now() < deadline, "stdin pipe never reached the bounded buffer readiness condition");
+        thread::yield_now();
+    };
+    let path = std::path::Path::new(&record);
+    let temporary = path.with_extension("tmp");
+    std::fs::write(&temporary, format!("pid={} first=5a available={available}\n", process::id())).unwrap();
+    std::fs::rename(&temporary, path).unwrap();
+    while Instant::now() < deadline { thread::sleep(Duration::from_millis(20)); }
     panic!("parent did not terminate the child before its safety deadline");
 }
 
@@ -588,6 +618,59 @@ fn windows_spawn_child_can_be_polled_and_waited_through_clones() {
     eprintln!("windows_spawn_os_readback pid={pid} exit={exit_code} exact_handle_signaled=true");
     if std::env::var_os(SPAWN_WRONG_EXPECTATION_ENV).is_some() {
         assert_eq!(exit_code, 8, "deliberately wrong spawned child exit expectation");
+    }
+}
+
+/// Cancellation terminates a child with buffered, unread stdin and reaps the exact child.
+#[test]
+fn windows_spawn_kill_stops_child_with_unread_buffered_input() {
+    let records = TempDir::new();
+    let record = records.path().join("spawn-kill-child.txt");
+    let executable = std::env::current_exe().unwrap().to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let script_record = record.to_string_lossy().replace('\\', "\\\\").replace('"', "\\\"");
+    let mut engine = engine(SysConfig::default().programs(ProgramPolicy::Any));
+    #[cfg(not(feature = "unchecked"))]
+    engine.set_max_array_size(2_097_152);
+    let mut scope = Scope::new();
+    scope.push("input", vec![0x5au8; 1_048_576]);
+    let script = format!(r#"spawn("{executable}", ["--exact", "windows_spawn_blocked_input_fixture", "--nocapture", "--quiet"], #{{
+        env_clear: true, env: #{{ {SPAWN_KILL_RECORD_ENV}: "{script_record}" }}, stdin: input, max_output: 1024
+    }})"#);
+    let child = engine.eval_with_scope::<Dynamic>(&mut scope, &script).expect("spawn with large unread stdin must return a handle");
+    scope.push_dynamic("child", child.clone());
+    scope.push_dynamic("sibling", child);
+    let deadline = Instant::now() + Duration::from_secs(10);
+    let text = loop {
+        match std::fs::read_to_string(&record) {
+            Ok(text) => break text,
+            Err(error) if error.kind() == std::io::ErrorKind::NotFound && Instant::now() < deadline => thread::sleep(Duration::from_millis(10)),
+            Err(error) => panic!("blocked input child readiness unavailable: {error}"),
+        }
+    };
+    let fields: Vec<_> = text.split_whitespace().collect();
+    assert_eq!(fields.len(), 3, "child readiness: {text:?}");
+    let pid = fields[0].strip_prefix("pid=").unwrap().parse::<u32>().unwrap();
+    assert_eq!(fields[1], "first=5a");
+    let available = fields[2].strip_prefix("available=").unwrap().parse::<u32>().unwrap();
+    assert!(available >= 8_191);
+    let raw = unsafe { OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | PROCESS_TERMINATE | SYNCHRONIZE, 0, pid) };
+    assert!(!raw.is_null(), "open exact blocked-input process {pid}: {}", std::io::Error::last_os_error());
+    let mut guard = TimeoutChildGuard { handle: OwnedProcessHandle(raw), pid, exit_observed: false };
+    assert!(engine.eval_with_scope::<Dynamic>(&mut scope, "child.try_wait()").unwrap().is_unit());
+    engine.run_with_scope(&mut scope, "child.kill(); sibling.kill();").unwrap();
+    let first = engine.eval_with_scope::<Map>(&mut scope, "child.wait()").expect("kill must complete without a stdin write failure");
+    let second = engine.eval_with_scope::<Map>(&mut scope, "sibling.wait()").unwrap();
+    assert_eq!(unsafe { WaitForSingleObject(guard.handle.0, 10_000) }, WAIT_OBJECT_0, "exact blocked-input child did not exit");
+    let mut exit_code = u32::MAX;
+    assert_ne!(unsafe { GetExitCodeProcess(guard.handle.0, &mut exit_code) }, 0);
+    guard.exit_observed = true;
+    assert_eq!(first["code"].as_int().unwrap() as u32, exit_code);
+    assert_eq!(second["code"].as_int().unwrap() as u32, exit_code);
+    assert!(!first["success"].as_bool().unwrap());
+    engine.run_with_scope(&mut scope, "child.kill();").unwrap();
+    eprintln!("windows_spawn_kill_os_readback pid={pid} exit={exit_code} available={available} exact_handle_signaled=true");
+    if std::env::var_os(SPAWN_KILL_WRONG_EXPECTATION_ENV).is_some() {
+        assert_eq!(exit_code, 0, "deliberately wrong killed child exit expectation");
     }
 }
 

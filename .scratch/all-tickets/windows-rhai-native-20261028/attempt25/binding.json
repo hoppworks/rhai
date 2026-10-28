@@ -1,0 +1,13 @@
+{
+  "nonce": "9415bf24d8e92c551480f13b2ed45742",
+  "source_commit": "3dcef0438129b6d31a42aa750cbe27b22a475e96",
+  "manifest_sha256": "dc3974da778c1821d4f9e9c3121471c0d8e346f7bfc53af6a870cb6290a52327",
+  "archive_sha256": "99d0611b213d586aeea8b6ae040bd8ad329d375c1329769cf13936f25b66c627",
+  "file_count": 441,
+  "source_bytes": 5208122,
+  "expected": "wrong killed exit RED then restored GREEN",
+  "driver_seconds": 185,
+  "export_seconds": 180,
+  "native_started": true,
+  "dispatch_recorded_utc": "2026-10-28T09:34:56.221893+00:00"
+}
