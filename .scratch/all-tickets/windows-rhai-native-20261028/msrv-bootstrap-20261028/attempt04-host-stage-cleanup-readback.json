@@ -1,0 +1,8 @@
+{
+  "stage": "/var/roothome/.local/share/agent-builds/rhai/windows-msrv-bootstrap-a7e54f39104e47c7ad826b2b9938365f",
+  "file_count": 57,
+  "file_bytes": 13351875,
+  "pre_retirement_tree_sha256": "9798432ebd5ffc43549f68d8122d5f769c46830aa4c34623733482e123817ef7",
+  "no_symlinks_or_exact_file_users": true,
+  "stage_absent_after_retirement": true
+}

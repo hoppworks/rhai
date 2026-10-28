@@ -1,0 +1,12 @@
+{
+  "host_utc_before_enter": "2026-10-28T21:55:02.460622+00:00",
+  "public_build_expiry_utc": "2026-10-30T12:00:00+00:00",
+  "vm_uuid": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19",
+  "medium_sha256": "a7a3633608af61114f40978cdd37d38773982ff20ee5bc2747793baaf4914ea1",
+  "start_sha256": "3ce44fbe95b44b41f4a23ff5abd35d2592d888c35a58f09a87f35bb97c0b51eb",
+  "serial_inode": 126819933,
+  "serial_offset": 1434109,
+  "host_free_var_bytes": 499366502400,
+  "source_review": "READY",
+  "native_started": false
+}

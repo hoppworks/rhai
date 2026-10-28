@@ -1,0 +1,10 @@
+{
+  "iso_sha256": "a7a3633608af61114f40978cdd37d38773982ff20ee5bc2747793baaf4914ea1",
+  "iso_bytes": 399360,
+  "files": {
+    "Start.ps1": "3ce44fbe95b44b41f4a23ff5abd35d2592d888c35a58f09a87f35bb97c0b51eb",
+    "Check.ps1": "4703e65b1095180aa1866413516d4606d61386182907ab8f6d403dcc180b49e8",
+    "InstallAndVerify.cmd": "ad351600c96d10253a0be97aa8ca7aa810664064dec48fe18e19fbe50355b4d1",
+    "rhai-msrv-bootstrap-a7e54f39104e47c7ad826b2b9938365f.bundle": "22c68f677f8a81d9ef9434ff3fb897fb6db22585da2885b76810c139e5982e4e"
+  }
+}

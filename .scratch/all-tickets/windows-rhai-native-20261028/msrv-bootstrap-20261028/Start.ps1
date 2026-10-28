@@ -18,8 +18,36 @@ if ($env:USERNAME -cne 'RhaiTest' -or $env:USERPROFILE -cne 'C:\Users\RhaiTest')
 $freeBefore = [long](Get-PSDrive C -PSProvider FileSystem).Free
 if ($freeBefore -lt 20GB) { throw 'Guest disk cannot cover four GiB estimate plus sixteen GiB reserve.' }
 $private = Join-Path $env:USERPROFILE '.local\share\agent-builds\rhai'
-$session = Join-Path $private 'n-a7e54f39'
-if (Test-Path -LiteralPath $session) { throw 'Own bootstrap scope already exists; inspect it.' }
+$priorSession = Join-Path $private 'n-a7e54f39'
+$session = Join-Path $private 'n-a7e54f39-v'
+$resume = Test-Path -LiteralPath $priorSession
+if (!$resume) { throw 'Prior owned bootstrap scope is absent.' }
+if (@(Get-ChildItem -LiteralPath $private -Force | Where-Object {
+    $_.Name -ceq 'n-a7e54f39-v'
+}).Count -ne 0) { throw 'Verification session already exists; inspect it.' }
+$priorRun = Join-Path $priorSession 'run'
+if ($resume) {
+    if (((Get-Item -LiteralPath $priorSession -Force).Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) {
+        throw 'Prior owned bootstrap scope is redirected.'
+    }
+    foreach ($name in @('run', 'toolchain-home')) {
+        $priorPath = Join-Path $priorSession $name
+        if (!(Test-Path -LiteralPath $priorPath -PathType Container) -or
+            ((Get-Item -LiteralPath $priorPath -Force).Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0) {
+            throw "Prior owned path is absent or redirected: $name"
+        }
+    }
+    $priorPreflight = Join-Path $priorSession 'preflight.json'
+    if ((Get-FileHash -LiteralPath $priorPreflight).Hash.ToLowerInvariant() -cne
+        '34907dd6b5943fac0b8cdd9a01a9614103792148941d435156de2a4cd1abe360') {
+        throw 'Prior owned bootstrap preflight differs.'
+    }
+    $priorJournals = @(Get-ChildItem -LiteralPath $priorRun -File -Force -Filter '.scoped-run-*.journal')
+    if ($priorJournals.Count -ne 1 -or
+        !(Get-Content -LiteralPath $priorJournals[0].FullName -Tail 1).Contains('REMOVED')) {
+        throw 'Prior bounded native run has no terminal removal record.'
+    }
+}
 $cursor = [IO.Path]::GetFullPath($session)
 while ($cursor) {
     if ((Test-Path -LiteralPath $cursor) -and
@@ -56,16 +84,24 @@ if ((Get-FileHash -LiteralPath $cmdExe).Hash.ToLowerInvariant() -cne $cmdHash) {
     throw 'Guest command interpreter differs.'
 }
 $installCommand = Join-Path $media 'InstallAndVerify.cmd'
-$installCommandHash = '48ba32cf6e1ee2a71603ad86992313084a4e60b4f91c8d5a2ee6e30d6be23717'
+$installCommandHash = 'ad351600c96d10253a0be97aa8ca7aa810664064dec48fe18e19fbe50355b4d1'
 if ((Get-FileHash -LiteralPath $installCommand).Hash.ToLowerInvariant() -cne $installCommandHash) {
     throw 'Bootstrap install command differs.'
 }
 
-$source = Join-Path $session 'source'
-$bin = Join-Path $session 'bin'
-$run = Join-Path $session 'run'
-$toolchainHome = Join-Path $session 'toolchain-home'
-foreach ($path in @($source, $bin, $run, $toolchainHome)) {
+$suffix = ''
+$source = Join-Path $session ('source' + $suffix)
+$bin = Join-Path $session ('bin' + $suffix)
+$run = Join-Path $session ('run' + $suffix)
+$toolchainHome = Join-Path $priorSession 'toolchain-home'
+if ($resume -and !(Test-Path -LiteralPath $toolchainHome -PathType Container)) {
+    throw 'Prior owned toolchain home is absent.'
+}
+if ($resume -and @(Get-ChildItem -LiteralPath $toolchainHome -Force -Recurse | Where-Object {
+    ($_.Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0
+}).Count -ne 0) { throw 'Prior owned toolchain home contains a reparse point.' }
+foreach ($path in @($source, $bin, $run)) {
+    if (Test-Path -LiteralPath $path) { throw "New private path already exists: $path" }
     [IO.Directory]::CreateDirectory($path) | Out-Null
 }
 Copy-Item -LiteralPath $rustup -Destination (Join-Path $source 'rustup.exe')
@@ -101,12 +137,16 @@ $preflight = [ordered]@{
     live_free_disk_abort_bytes = 19327352832
     driver_deadline_ms = 180000; outer_deadline_ms = 185000
     driver_output_ceiling_per_stream_bytes = 4194304
+    resumed_prior_preflight_sha256 = if ($resume) {
+        '34907dd6b5943fac0b8cdd9a01a9614103792148941d435156de2a4cd1abe360'
+    } else { '' }
 }
-[IO.File]::WriteAllText((Join-Path $session 'preflight.json'),
+$preflightPath = Join-Path $session ('preflight' + $suffix + '.json')
+[IO.File]::WriteAllText($preflightPath,
     ($preflight | ConvertTo-Json -Compress -Depth 5), [Text.UTF8Encoding]::new($false))
 
-$driverOut = Join-Path $session 'driver.stdout'
-$driverErr = Join-Path $session 'driver.stderr'
+$driverOut = Join-Path $session ('driver' + $suffix + '.stdout')
+$driverErr = Join-Path $session ('driver' + $suffix + '.stderr')
 $driverExit = -1
 $outerTimeout = $false
 $started = $false
@@ -229,21 +269,30 @@ if ($null -ne $global:RhaiMsrvPendingCustody) {
     throw "Native bootstrap custody remains pending; retain exact handles and scope. $failure"
 }
 
-$driverText = if (Test-Path -LiteralPath $driverOut) { Get-Content -LiteralPath $driverOut -Raw } else { '' }
+$driverText = ''
+if (Test-Path -LiteralPath $driverOut) { $driverText = [IO.File]::ReadAllText($driverOut) }
 $installed = Join-Path $toolchainHome 'toolchains\1.77.2-x86_64-pc-windows-msvc'
 $rustc = Join-Path $installed 'bin\rustc.exe'
 $cargo = Join-Path $installed 'bin\cargo.exe'
 $evidenceDirectories = @(Get-ChildItem -LiteralPath $run -Directory -Force -Filter '.scoped-evidence-*')
-$payloadOutput = if ($evidenceDirectories.Count -eq 1 -and
-    (Test-Path -LiteralPath (Join-Path $evidenceDirectories[0].FullName 'stdout.log') -PathType Leaf)) {
-    Get-Content -LiteralPath (Join-Path $evidenceDirectories[0].FullName 'stdout.log') -Raw
-} else { '' }
-$rustcVersion = if ($payloadOutput.Contains('rustc 1.77.2 (25ef9e3d8 2024-04-09)')) {
-    'rustc 1.77.2 (25ef9e3d8 2024-04-09)'
-} else { '' }
-$cargoVersion = if ($payloadOutput.Contains('cargo 1.77.2 (e52e36006 2024-03-26)')) {
-    'cargo 1.77.2 (e52e36006 2024-03-26)'
-} else { '' }
+$payloadOutput = ''
+$rustcVersion = ''
+$cargoVersion = ''
+if ($evidenceDirectories.Count -eq 1) {
+    $evidenceRoot = $evidenceDirectories[0].FullName
+    $payloadLog = Join-Path $evidenceRoot 'stdout.log'
+    if (Test-Path -LiteralPath $payloadLog -PathType Leaf) {
+        $payloadOutput = [IO.File]::ReadAllText($payloadLog)
+    }
+    $rustcVersionPath = Join-Path $evidenceRoot 'runtime\rustc-version.txt'
+    $cargoVersionPath = Join-Path $evidenceRoot 'runtime\cargo-version.txt'
+    if (Test-Path -LiteralPath $rustcVersionPath -PathType Leaf) {
+        $rustcVersion = [IO.File]::ReadAllText($rustcVersionPath).Trim()
+    }
+    if (Test-Path -LiteralPath $cargoVersionPath -PathType Leaf) {
+        $cargoVersion = [IO.File]::ReadAllText($cargoVersionPath).Trim()
+    }
+}
 $retainedEntries = @(Get-ChildItem -LiteralPath $toolchainHome -Force -Recurse)
 $retainedReparsePoint = @($retainedEntries | Where-Object {
     ($_.Attributes -band [IO.FileAttributes]::ReparsePoint) -ne 0
@@ -282,23 +331,28 @@ $record = [ordered]@{
     toolchain_bytes = $bytes; retained_reparse_point = $retainedReparsePoint
     free_after_bytes = [long](Get-PSDrive C).Free
     retained_toolchain_home = $toolchainHome
+    resumed_prior_attempt = $resume
     product_acceptance = $false
 }
-[IO.File]::WriteAllText((Join-Path $session 'bootstrap.json'),
+$recordPath = Join-Path $session ('bootstrap' + $suffix + '.json')
+[IO.File]::WriteAllText($recordPath,
     ($record | ConvertTo-Json -Compress -Depth 5), [Text.UTF8Encoding]::new($false))
 
-$files = @((Get-Item -LiteralPath (Join-Path $session 'preflight.json')),
-    (Get-Item -LiteralPath (Join-Path $session 'bootstrap.json')),
+$files = @((Get-Item -LiteralPath $preflightPath),
+    (Get-Item -LiteralPath $recordPath),
     (Get-Item -LiteralPath (Join-Path $source 'InstallAndVerify.cmd')))
 foreach ($path in @($driverOut, $driverErr)) {
     if (Test-Path -LiteralPath $path -PathType Leaf) { $files += @(Get-Item -LiteralPath $path) }
 }
-$files += @(Get-ChildItem -LiteralPath $run -File -Force -Filter '.scoped-run-*.journal')
-foreach ($evidence in @(Get-ChildItem -LiteralPath $run -Directory -Force -Filter '.scoped-evidence-*')) {
+$exportRuns = @($run)
+foreach ($runPath in $exportRuns) {
+    $files += @(Get-ChildItem -LiteralPath $runPath -File -Force -Filter '.scoped-run-*.journal')
+    foreach ($evidence in @(Get-ChildItem -LiteralPath $runPath -Directory -Force -Filter '.scoped-evidence-*')) {
     foreach ($name in @('manifest.txt', 'stdout.log', 'stderr.log',
         'runtime\rustc-version.txt', 'runtime\cargo-version.txt')) {
         $path = Join-Path $evidence.FullName $name
         if (Test-Path -LiteralPath $path -PathType Leaf) { $files += @(Get-Item -LiteralPath $path) }
+    }
     }
 }
 if ($files.Count -gt 16 -or ($files | Measure-Object Length -Sum).Sum -gt 8MB) {
@@ -306,14 +360,14 @@ if ($files.Count -gt 16 -or ($files | Measure-Object Length -Sum).Sum -gt 8MB) {
 }
 $serial = [IO.Ports.SerialPort]::new('COM1', 115200)
 $serial.WriteTimeout = 2000
-$sequence = 0
+$script:sequence = 0
 $exportDeadline = [Diagnostics.Stopwatch]::StartNew()
 function Emit-Frame([string]$kind, [object]$value) {
     if ($exportDeadline.Elapsed.TotalSeconds -gt 120) { throw 'Bootstrap export deadline exceeded.' }
     $json = $value | ConvertTo-Json -Compress -Depth 6
     $encoded = [Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes($json))
     if ($encoded.Length -gt 3500) { throw 'Bootstrap export frame exceeds bound.' }
-    $serial.WriteLine("RHAI_BOOTSTRAP $id $sequence $kind $encoded")
+    $serial.WriteLine("RHAI_BOOTSTRAP $id $script:sequence $kind $encoded")
     $script:sequence++
 }
 try {

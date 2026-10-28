@@ -1,0 +1,3 @@
+driver failure: IOException: custody root must be <private-project-root>\<unique-session>\run
+cleanup failure (restoring fail-closed job custody): InvalidOperationException: cannot release controller job: exact client is not confirmed exited or active process count is not exactly the driver
+controller job retains kill-on-close custody until driver process teardown

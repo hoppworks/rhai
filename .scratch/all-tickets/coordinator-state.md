@@ -10,11 +10,11 @@ Use current central agent-skills `d6024420` plus applicable local edits and proj
 
 ## Current step
 
-Fork-main includes reviewed Windows X35 and POSIX `f32_float`. Windows bootstrap attempt01 stopped during media discovery before scope/Driver/install; corrected attempt02 ISO and native parser now pass source review. A–F/Ticket03/release remain open.
+Fork-main includes reviewed Windows X35 and POSIX `f32_float`. Native Windows Rust/Cargo1.77.2 toolchain prerequisite passed bounded Job verification, independent readback and combined review; disposable resources retired. This is no Rhai release row. A–F/Ticket03/release remain open.
 
 ## Next action
 
-Dispatch attempt02 hash-guarded `msrv-bootstrap-20261028/Start.ps1` through native Job/monitor custody; export/read back originals, verify toolchain and restore original sdc. Then bind source/lock/SDK for Windows1.77.2 release cases.
+Bind the current integrated source, `Cargo.lock`, exact Windows SDK and retained Rust1.77.2 toolchain to one scoped native Windows release candidate; run cheap applicable compile/contract checks, then real matrix rows with wrong-assertion controls and independent readback. Preserve accepted unchanged rows.
 
 ## Goal
 
@@ -56,13 +56,15 @@ Attempt62 freezes `edfca43e` plus one test-only X35 run-closure control (`ec2e7e
 
 Attempt63 DirectChild timed out before assertion; captured-handle inheritance remains a possible cause. Attempt64 clears/reads back fixture handle inheritance and passes wrong101/GREEN0 with parent/worker readback and valid custody journal. Review PASS: Windows `attempt63/` and `attempt64/` proof folders.
 
+Windows MSRV bootstrap attempt04: native Driver0, exact Rust/Cargo1.77.2, 36 ordered COM1 frames/11 hash-checked originals, eight CRC-valid journal records through REMOVED, independent retained-binary hashes and runtime absence. Combined review PASS; current-source Cargo release tests open. `.scratch/all-tickets/windows-rhai-native-20261028/msrv-bootstrap-20261028/proof.md`.
+
 ## Retained resources
 
-Workhorse VM `dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19`: foreign sdb untouched; corrected own ISO `rhai-msrv-bootstrap-a7e54f39...iso` temporarily on sdc, original `acceptance-20261008T125846Z-b7f83433/monitor-fixture02.iso` to restore after export. Own host stage `windows-msrv-bootstrap-a7e54f39...`; ISO build scopes c4d9/d5e0 retired. Native public BuildOnly expires 2026-10-30 12:00 UTC. Planned retained guest home `C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-a7e54f39\toolchain-home`: owner Rhai coordinator, Rust1.77.2 MSVC release gate, rustup SHA `6f4bef...`, postrun ceiling2GiB, expiry 2026-11-01 00:00 UTC; no disk quota. Guest evidence scopes52–64 remain; old36/48 require exact retirement. Preserve foreign work and prior proof; detailed scopes in history.
+Workhorse VM `dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19`: original sdc restored, foreign sdb untouched; own bootstrap ISOs/stage and successful guest verification scope retired. Retained guest `C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-a7e54f39\toolchain-home`: Rhai coordinator, Windows1.77.2 release gate, 423,724,103 bytes, ceiling2GiB, expiry 2026-11-01 00:00 UTC; no quota. Public native BuildOnly expires 2026-10-30 12:00 UTC. Guest evidence scopes52–64 remain; old36/48 need exact retirement. Details in proof.
 
 ## Cause history
 
-Attempt18 false timeout unresolved; attempt26 expired before RED/GREEN; attempts36–39 exposed false Job closure; attempt48 expected RED incorrectly; attempt50 showed batch injection. Review corrected background retry in attempts55–56. Attempt57 Driver parser sought the wrong log; attempt58 corrected it. Attempt59 fixed shared-deadline fallback; attempt60 final-drop passed. MSRV bootstrap attempt01 media scan failed on absent F: before scope/Driver; corrected guard reviewed, attempt02 parser passed. Earlier causes and limits remain in proof folders and `.scratch/all-tickets/coordinator-history-20261015.md`.
+Attempt18 false timeout unresolved; attempt26 expired before RED/GREEN; attempts36–39 exposed false Job closure; attempt48 expected RED incorrectly; attempt50 showed batch injection. Review corrected retry in attempts55–56. Attempt57 Driver parser sought wrong log; attempt58 corrected it. Attempt59 fixed shared-deadline fallback; attempt60 final-drop passed. MSRV bootstrap: attempt01 absent F: preflight; attempt02 `findstr` exit77 plus null parser; attempt03 invalid `run-verify` custody root; attempt04 passed with retained toolchain. Earlier causes/limits in proof folders/history.
 
 ## Open escalations
 
