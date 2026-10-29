@@ -1,0 +1,1 @@
+Test-Path E:\Start.ps1;Test-Path 'C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-e1534746';[Environment]::OSVersion.VersionString

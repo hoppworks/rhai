@@ -1,0 +1,8 @@
+The argument 'C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-e1534746\run\scoped-91438b7e07f44e57b12b6fbd0d49b10f\work\ClearOwnedWorkReadOnly.ps1' to the -File parameter does not exist. Provide the path to an existing '.ps1' file as an argument to the -File parameter.
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+PROBE_CL_EXIT=2
+PROBE_LINK_EXIT=
+PROBE_RUN_EXIT=
+PROBE_EXPORT_EXIT=0

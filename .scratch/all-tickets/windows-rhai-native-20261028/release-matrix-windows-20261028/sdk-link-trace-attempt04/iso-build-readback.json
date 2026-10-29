@@ -1,0 +1,18 @@
+{
+  "iso_sha256": "84a44b22ff78870e9cc786035519cc6b8ad9740b6716d2cc4184096708494d35",
+  "files": {
+    "source-manifest.json": "254d021566408f44b2b645551e2598f7cf9db5fee63c5e34bcc7ea20012ec9ba",
+    "ClearOwnedWorkReadOnly.ps1": "71d72bfb7ce0c5164c8f89b2d94eb8c4cfcc59281e60ffc864cc30ce104f468d",
+    "Start.ps1": "8dc4404639f74c025c893f7d9b5dcbc293fe9b35d3f29053ae5ad309763ac087",
+    "Cargo.lock": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+    "RunRhaiContract.cmd": "5d65a3efb1d181bf9c98bb8d0d9d8a146442331776b7118ed1d45e48bec828db",
+    "rhai-native-e1534746c0394e61a2defda7c3a79c08.bundle": "c41eae3741e39d1f4ba9fa6d124c4f32ae743a7ef14b49dc38d11b334d1b03ec",
+    "rhai-source.zip": "0005b38a387b419802335e141cb259de86f1ec9424e6e4cf2b8bc3beaf30bdd7",
+    "probe.c": "3eeee002440ddb233327857611fdb7daf7408a6d6add2614e9e89953d281e1ae",
+    "RunRhaiContractControl.ps1": "bc868bec4881088b407e50c6a2e08008f463e318c3557778d623593c92c0feb0"
+  },
+  "bytes": 1673216,
+  "scoped_runner_sha256": "25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e",
+  "scoped_runner_exit": 0,
+  "iso_scope_retired": true
+}

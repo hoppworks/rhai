@@ -14,7 +14,7 @@ Fork-main includes reviewed Windows X35, POSIX `f32_float`, native Windows1.77.2
 
 ## Next action
 
-SDK attempt03 failed before CL: CMD changed into source then required `runtime\work` (exit85). Correct the directory guard, emit a fresh probe run marker, and copy bounded linker evidence from work to runtime root before snapshot. Review, run one small supervised native control, then bind real Cargo-selected SDK inputs. Preserve accepted rows.
+SDK attempt04 reached CL but relative `%~dp0` followed `cd` into work; source/helper were absent (payload61). Freeze the validated runtime-root path before `cd`, require cleanup markers, and keep pre-retirement evidence export. Review and run one small control, then bind actual Cargo-selected SDK inputs. Preserve accepted rows.
 
 ## Goal
 
@@ -70,7 +70,8 @@ Windows1.77.2 `f32_float`: HEAD eea5 source/lock, host/f32 timeout wrong101, sui
 
 Windows1.77.2 SDK-link attempt01: HEAD9ff selected source/lock, native `cargo rustc --print=link-args` exited0; trace names MSVC14.44.35207 `link.exe`, post-run guest hash `A364AF80...`; `/VERBOSE:LIB` yielded no resolved SDK paths. Traced binary differs from host-file wrong101/GREEN0 control binary. Driver0/164.90s, 217 frames/15 checked files, journal8/8, exact guest/host cleanup; combined review PASS only for diagnostic. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt01/proof.md`.
 Windows1.77.2 SDK-link attempt02: installed linker lists `/LINKREPROFULLPATHRSP`; Cargo rustc exited0 and printed absolute option, but retained response file absent. Observer accepted=false; Driver0/148.87s, 218 frames/15 files, journal8, exact guest/host cleanup. Combined review: no SDK acceptance; cause unconfirmed. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt02/proof.md`.
-Windows SDK-link attempt03: tiny probe hit CMD directory guard before CL, payload85/Driver2; 181 rotated-log frames/10 hash-checked files, eight valid custody records, exact guest/host cleanup. Independent review traced work retirement before snapshot. No SDK/product acceptance. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt03/proof.md`.
+Windows SDK-link attempt03: CMD directory guard before CL, payload85/Driver2; 181 rotated-log frames/10 files, journal8, exact cleanup. Review traced work retirement before snapshot. No SDK/product acceptance. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt03/proof.md`.
+Windows SDK-link attempt04: CL C1083 for wrong `%~dp0` source after `cd`; payload61/Driver2, 185 frames/11 files, journal8, exact cleanup. Independent review confirms pre-link failure; no SDK/product acceptance. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt04/proof.md`.
 
 ## Retained resources
 
@@ -78,7 +79,7 @@ Workhorse VM `dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19`: original sdc restored, fore
 
 ## Cause history
 
-Attempt18 false timeout unresolved; attempt26 expired before RED/GREEN; attempts36–39 exposed false Job closure; attempt48 expected RED incorrectly; attempt50 showed batch injection. Review corrected retry in attempts55–56. Attempt57 Driver parser sought wrong log; attempt58 corrected it. Attempt59 fixed shared-deadline fallback; attempt60 final-drop passed. MSRV bootstrap: attempt01 absent F: preflight; attempt02 `findstr` exit77 plus null parser; attempt03 invalid `run-verify` custody root; attempt04 passed. SDK-link attempts01–02: no verbose resolution output, then no retained RSP; whether linker created it unconfirmed. Attempt03 guard exit85 before CL; work retirement precedes snapshot. Exact Cargo-selected SDK unknown. Earlier causes/limits in proof folders/history.
+Attempt18 false timeout unresolved; attempt26 expired before RED/GREEN; attempts36–39 exposed false Job closure; attempt48 expected RED incorrectly; attempt50 showed batch injection. Retry fixed55–56. Attempt57 Driver parser sought wrong log; attempt58 corrected it. Attempt59 fixed fallback; attempt60 final-drop passed. MSRV bootstrap: absent F:, `findstr`/null parser, invalid custody root, then pass. SDK-link: no verbose paths, unretained RSP, guard85, then `%~dp0` source/helper mispath61. Whether Cargo linker created the RSP remains unconfirmed; actual SDK selection unknown. Earlier causes/limits in proof folders/history.
 
 ## Open escalations
 

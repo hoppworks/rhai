@@ -1655,6 +1655,21 @@ control succeeds should one bounded real-target diagnostic use the same
 method and hash the SDK files it actually selected. The earlier feature and
 product results stay accepted; exact selected SDK files remain open.
 
+The corrected small control in attempt 04 again stopped before linking. CL's
+original `compile.log` shows C1083 for `runtime\work\probe.c`, and the payload
+stdout shows the cleanup helper also sought under `work`. The relative batch
+launch caused `%~dp0` to follow the current directory after `cd`; its two
+source references were therefore wrong. The original payload exited 61,
+Driver 2, in 5.69 seconds. The same-inode COM1 suffix recovered 185 ordered
+frames and 11 hash-checked files; eight valid custody states end in `REMOVED`.
+Exact guest/host cleanup and independent source/result review are recorded in
+`.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt04/proof.md`.
+This remains a pre-link infrastructure failure, not SDK or product acceptance.
+The next small control must freeze the validated runtime root before changing
+directory, use it for both source and cleanup helper, and require the helper's
+two success markers. No further full Cargo run is justified before that
+control passes and its response file is read back.
+
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance
 matrix or closure count. Historical implementation notes and estimates follow.
