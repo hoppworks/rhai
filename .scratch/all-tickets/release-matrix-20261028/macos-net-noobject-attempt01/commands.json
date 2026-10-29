@@ -1,0 +1,79 @@
+[
+  {
+    "label": "cargo-version",
+    "command": [
+      "cargo",
+      "+1.77.2",
+      "--version"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 0.013
+  },
+  {
+    "label": "rustc-version",
+    "command": [
+      "/Users/hoppworks/.rustup/toolchains/1.77.2-aarch64-apple-darwin/bin/rustc",
+      "--version"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 0.009
+  },
+  {
+    "label": "compile",
+    "command": [
+      "cargo",
+      "+1.77.2",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,net,no_object",
+      "--test",
+      "net_no_object",
+      "--no-run"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 13.557
+  },
+  {
+    "label": "wrong-peer",
+    "command": [
+      "cargo",
+      "+1.77.2",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,net,no_object",
+      "--test",
+      "net_no_object",
+      "registered_stream_functions_work_without_dot_syntax",
+      "--",
+      "--exact",
+      "--nocapture"
+    ],
+    "exit": 101,
+    "expected": 101,
+    "seconds": 0.367
+  },
+  {
+    "label": "suite",
+    "command": [
+      "cargo",
+      "+1.77.2",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,net,no_object",
+      "--test",
+      "net_no_object",
+      "--",
+      "--test-threads=1",
+      "--nocapture"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 0.103
+  }
+]

@@ -1,0 +1,23 @@
+{
+  "same_executable": "/Users/hoppworks/.local/share/agent-builds/rhai/macos-net-noobject-20261029-cc2976f1/agent-build-8alve155/target/debug/deps/net_no_object-1846bac3c27b594f",
+  "wrong_actual_bytes": "ping",
+  "wrong_expected_bytes": "pang",
+  "wrong_exit": 101,
+  "green_exit": 0,
+  "green_count": 3,
+  "outer_exit": 0,
+  "scope_absent": true,
+  "os": "ProductName:\t\tmacOS\nProductVersion:\t\t27.2\nBuildVersion:\t\t26B123",
+  "evidence_sha256": {
+    "run.py": "75245912c2dce0ad2b2ad96fa5e1bd8cab30ad1e21df3361b2c29ab540fbebf9",
+    "launch.sh": "9f29c2872e48c4c5204d89247323204d2674221e2b5036a0b21e7b0d9cc2b7f3",
+    "preflight.json": "58cd4a0cfc4986b6ee237a32518224f3281b1bfa7040a50fb48fb80ef8069bfe",
+    "commands.json": "68d3986655923be9d3d1a48a5ff9671a019eaccf10ab41c0c1beef44dc031c67",
+    "compile.log": "b4610a63b678fa5736c8fd09f76c5be32771bfd45bba4bb706529255bf513179",
+    "wrong-peer.log": "f529c3c1d393c93dce518fa8438ab8fca7e57249c9d370ce933eee07513a1487",
+    "suite.log": "0b9927ebff4bcf346a6619a430d09dbc838cd1efd9d2073ee13b3548f31cc3ac",
+    "result.json": "25a20167f92b858964dfa9f874dc4c0598d988a22f6cd42b727c1b718ff3befa",
+    "outer.log": "25a20167f92b858964dfa9f874dc4c0598d988a22f6cd42b727c1b718ff3befa",
+    "outer.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  }
+}

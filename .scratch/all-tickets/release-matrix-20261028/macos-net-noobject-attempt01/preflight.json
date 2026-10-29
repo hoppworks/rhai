@@ -1,0 +1,9 @@
+{
+  "current_head": "d8a3e77b27847b7f3ebea1a0623b0f746db125b5",
+  "manifest_files": 448,
+  "mismatches": [],
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "source_manifest_sha256": "b829308ab356d7aaaf7bf8d3acc9f65aab8fb316192d9b1b69e3365d78c834fd",
+  "run_sha256": "75245912c2dce0ad2b2ad96fa5e1bd8cab30ad1e21df3361b2c29ab540fbebf9",
+  "launch_sha256": "9f29c2872e48c4c5204d89247323204d2674221e2b5036a0b21e7b0d9cc2b7f3"
+}

@@ -1760,7 +1760,8 @@ tests with zero failed/ignored. The same `net_connect` executable ran RED and
 GREEN. Cargo clean and outer runner exited 0; exported logs and exact own
 session/stage cleanup passed independent readback and one combined review.
 See `.scratch/all-tickets/release-matrix-20261028/linux-net-alone-attempt01/proof.md`.
-The macOS net-only Rust1.77.2 row and other release criteria remain open.
+The macOS net-only Rust1.77.2 row was subsequently accepted below; other
+release criteria remain open.
 
 The macOS Rust/Cargo 1.77.2 `testing-environ,net` package-alone row exposed
 a test-fixture failure: after nonblocking listener acceptance, the IPv6 peer's
@@ -1790,6 +1791,19 @@ combined independent review passed; see
 These results close only the named package-alone and affected-test slices;
 other release features, process behaviors and full campaign acceptance remain
 open.
+
+Native macOS 27.2 arm64 also accepts the dedicated `testing-environ,net,no_object`
+script gate at Rust/Cargo 1.77.2. All 448 archived source files match current
+fork-main `d8a3e77b` byte-for-byte with the same exact lock. In one bounded
+owned scope, compilation succeeded, a deliberately wrong independent TCP peer
+expectation failed at its intended assertion (101), and the restored three
+public Engine/NetPackage tests passed (0). Independent readback bound the same
+test executable across compile, RED and GREEN, verified outer status 0 and
+retired the exact own scope. One combined independent review passed this named
+slice. See
+`.scratch/all-tickets/release-matrix-20261028/macos-net-noobject-attempt01/proof.md`.
+Linux/Windows `net,no_object`, other release gates and full A–F/Ticket03
+acceptance remain open.
 
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance

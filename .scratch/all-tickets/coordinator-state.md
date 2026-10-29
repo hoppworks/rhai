@@ -10,11 +10,11 @@ Use central agent-skills `d6024420` plus local edits and project `AGENTS.md`. Re
 
 ## Current step
 
-Fork-main includes reviewed Windows X35 and native Windows1.77.2 combined/profile slices. Native Rust1.77.2 Sys/Net package-alone rows now pass: Windows Sys+Net and Linux/macOS Net. The macOS peer-fixture regression is corrected; affected `net_connect` passes on all three OS with RED/GREEN and exact cleanup. Old Windows observer false negative remains recorded; current observer passes. A–F/Ticket03/release remain open. Proof: `macos-net-alone-attempt02/`, `linux-netconnect-overlay-attempt01/`, Windows `netconnect-overlay-attempt01/`.
+Fork-main includes reviewed Windows X35 and native Windows1.77.2 combined/profile slices. Native Rust1.77.2 Sys/Net package-alone rows pass: Windows Sys+Net and Linux/macOS Net. Corrected `net_connect` passes on all three OS. MacOS `net,no_object` now passes 3/3 after RED101 and review. Old Windows observer false negative remains recorded; current observer passes. A–F/Ticket03/release remain open.
 
 ## Next action
 
-Next: inspect the exact remaining optional-package release rows, then execute the first unproven current-source `net,no_object` script gate at Rust1.77.2 in one owned scope. Reuse unchanged profile proofs and exact source/lock binding. Attempt06's Runner-finalization cause remains unproven.
+Next: prove the unchanged current-source `net,no_object` script gate on native Linux Rust1.77.2, reusing the exact archive/lock and macOS assertion oracle. Windows remains a separate guest-custody run. Attempt06's Runner-finalization cause remains unproven.
 
 ## Goal
 
