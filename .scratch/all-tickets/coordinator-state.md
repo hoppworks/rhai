@@ -14,7 +14,7 @@ Fork-main includes reviewed Windows X35, POSIX `f32_float` and native Windows1.7
 
 ## Next action
 
-Publish the reviewed native Linux `no_index,sync,metadata` eleven-target proof to fork main with lowercase `hoppworks` attribution. Then select the smallest remaining release/Engine/OS criterion from the current coverage map, reusing accepted proofs. Attempt06's Driver2/journal4 remains an unproven Runner-finalization cause, not a reason to repeat completed SDK/product checks.
+Next: verify the live Windows VM/toolchain/public-Runner pins and prepare the current-source Rust1.77.2 sys-only and net-only Engine/real-OS package gates. The release proposal requires each package alone; the accepted combined profiles do not establish those Windows rows. Reuse the retained guest toolchain/public Runner while their recorded lifetimes hold. Preserve accepted proofs and exact custody/cleanup. Attempt06's Runner-finalization cause remains unproven and does not trigger a repeat.
 
 ## Goal
 
@@ -88,7 +88,7 @@ Managed closure requires exact handles and fail-closed completion; retry correct
 
 ## Budgets
 
-Windows attempts52–62 each used one bounded Driver; detailed consumption remains in original proof folders. No budget reset. Future limits derive from actual capacity. Release-profile attempts used finite owned scopes; their timings and cleanup are in their proof folders.
+Windows attempts52–62 each used one bounded Driver; detailed consumption remains in original proof folders. No budget reset. New Windows profile Driver took 62.318s; Linux profile used one 1200s outer allocation and 15.6s actual. Future limits derive from actual capacity; proof folders retain exact timings/cleanup.
 
 ## History
 
