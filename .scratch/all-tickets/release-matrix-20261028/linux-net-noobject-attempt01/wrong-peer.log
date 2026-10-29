@@ -1,0 +1,40 @@
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 0.03s
+     Running tests/net_no_object.rs (/var/roothome/.local/share/agent-builds/rhai/linux-net-noobject-20261029-5a13c2e8-scope/agent-build-acizwex4/target/debug/deps/net_no_object-02e1fcd63d3540f7)
+
+running 1 test
+thread 'registered_stream_functions_work_without_dot_syntax' panicked at tests/net_no_object.rs:78:9:
+assertion `left == right` failed: deliberately wrong independent peer expectation
+  left: [112, 105, 110, 103]
+ right: [112, 97, 110, 103]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test registered_stream_functions_work_without_dot_syntax ... FAILED
+
+failures:
+
+failures:
+    registered_stream_functions_work_without_dot_syntax
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 2 filtered out; finished in 0.00s
+
+error: test failed, to rerun pass `--test net_no_object`

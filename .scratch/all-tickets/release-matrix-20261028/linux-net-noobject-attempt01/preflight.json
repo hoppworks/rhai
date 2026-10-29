@@ -1,0 +1,10 @@
+{
+  "current_head": "4ae12a438684c89496eac603df90d668441c33b1",
+  "source_files": 448,
+  "source_mismatches": [],
+  "archive_sha256": "6ff82b95cbbf65ba919161932a63d74f668f8e6e6d88682418797eca93565384",
+  "source_manifest_sha256": "b829308ab356d7aaaf7bf8d3acc9f65aab8fb316192d9b1b69e3365d78c834fd",
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "run_sha256": "75245912c2dce0ad2b2ad96fa5e1bd8cab30ad1e21df3361b2c29ab540fbebf9",
+  "launch_sha256": "5a5e9fa8de0b37464ef9298d60c88a3a49b04f77e65fe6e1d5a1448f23a1ad53"
+}

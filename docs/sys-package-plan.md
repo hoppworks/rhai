@@ -1802,8 +1802,14 @@ test executable across compile, RED and GREEN, verified outer status 0 and
 retired the exact own scope. One combined independent review passed this named
 slice. See
 `.scratch/all-tickets/release-matrix-20261028/macos-net-noobject-attempt01/proof.md`.
-Linux/Windows `net,no_object`, other release gates and full A–F/Ticket03
-acceptance remain open.
+Native workhorse Linux x86_64/Rust1.77.2 now accepts the same
+`testing-environ,net,no_object` dedicated gate with an exact 448-file current
+source/lock match, wrong independent peer-byte RED101, and 3/3 restored
+Engine/real-TCP tests using the same executable. The bounded runner exited 0;
+export hashes, stage/scope absence and one combined independent review passed.
+See `.scratch/all-tickets/release-matrix-20261028/linux-net-noobject-attempt01/proof.md`.
+Windows `net,no_object`, other release gates and full A–F/Ticket03 acceptance
+remain open.
 
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance

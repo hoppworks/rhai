@@ -10,11 +10,11 @@ Use central agent-skills `d6024420` plus local edits and project `AGENTS.md`. Re
 
 ## Current step
 
-Fork-main includes reviewed Windows X35 and native Windows1.77.2 combined/profile slices. Native Rust1.77.2 Sys/Net package-alone rows pass: Windows Sys+Net and Linux/macOS Net. Corrected `net_connect` passes on all three OS. MacOS `net,no_object` now passes 3/3 after RED101 and review. Old Windows observer false negative remains recorded; current observer passes. A–F/Ticket03/release remain open.
+Fork-main includes reviewed Windows X35 and native Windows1.77.2 combined/profile slices. Native Rust1.77.2 Sys/Net package-alone rows pass: Windows Sys+Net and Linux/macOS Net. Corrected `net_connect` passes on all three OS. MacOS and Linux `net,no_object` now pass 3/3 each after RED101 and review. Old Windows observer false negative remains recorded; current observer passes. A–F/Ticket03/release remain open.
 
 ## Next action
 
-Next: prove the unchanged current-source `net,no_object` script gate on native Linux Rust1.77.2, reusing the exact archive/lock and macOS assertion oracle. Windows remains a separate guest-custody run. Attempt06's Runner-finalization cause remains unproven.
+Next: prove unchanged current-source `net,no_object` script gate on native Windows Rust1.77.2 with guest descendant custody, reusing exact archive/lock and assertion oracle. Attempt06's Runner-finalization cause remains unproven.
 
 ## Goal
 

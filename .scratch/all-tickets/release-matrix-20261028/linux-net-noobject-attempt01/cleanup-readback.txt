@@ -1,0 +1,3 @@
+owned_stage_absent=1
+owned_scope_absent=1
+Linux 7.2.11-ogc4.1.fc44.x86_64 x86_64 GNU/Linux
