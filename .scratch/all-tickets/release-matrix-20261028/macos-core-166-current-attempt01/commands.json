@@ -1,0 +1,96 @@
+[
+  {
+    "label": "cargo-version",
+    "command": [
+      "cargo",
+      "+1.66.0",
+      "--version"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 0.149,
+    "lock_sha256_after": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802"
+  },
+  {
+    "label": "rustc-version",
+    "command": [
+      "/Users/hoppworks/.rustup/toolchains/1.66.0-aarch64-apple-darwin/bin/rustc",
+      "--version"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 0.888,
+    "lock_sha256_after": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802"
+  },
+  {
+    "label": "core-check",
+    "command": [
+      "cargo",
+      "+1.66.0",
+      "check",
+      "--locked",
+      "--lib",
+      "--target",
+      "aarch64-apple-darwin"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 390.7,
+    "lock_sha256_after": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802"
+  },
+  {
+    "label": "engine-positive",
+    "command": [
+      "cargo",
+      "+1.66.0",
+      "run",
+      "--locked",
+      "--target",
+      "aarch64-apple-darwin",
+      "--example",
+      "core_current_msrv"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 8.042,
+    "lock_sha256_after": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802"
+  },
+  {
+    "label": "engine-wrong",
+    "command": [
+      "cargo",
+      "+1.66.0",
+      "run",
+      "--offline",
+      "--locked",
+      "--target",
+      "aarch64-apple-darwin",
+      "--example",
+      "core_current_msrv",
+      "--",
+      "--wrong"
+    ],
+    "exit": 101,
+    "expected": 101,
+    "seconds": 0.269,
+    "lock_sha256_after": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802"
+  },
+  {
+    "label": "engine-restored",
+    "command": [
+      "cargo",
+      "+1.66.0",
+      "run",
+      "--offline",
+      "--locked",
+      "--target",
+      "aarch64-apple-darwin",
+      "--example",
+      "core_current_msrv"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 0.245,
+    "lock_sha256_after": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802"
+  }
+]

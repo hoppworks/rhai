@@ -1,0 +1,28 @@
+{
+  "current_head": "ec157d40e0e0c192577551ea70c1834047aa3f6c",
+  "same_example_executable": "/Users/hoppworks/.local/share/agent-builds/rhai/macos-core-166-20261029-405f6e3a/agent-build-8afb5jpz/target/aarch64-apple-darwin/debug/examples/core_current_msrv",
+  "engine_actual": 42,
+  "wrong_expected": 43,
+  "wrong_exit": 101,
+  "restored_exit": 0,
+  "core_check_exit": 0,
+  "no_cap_std_or_windows_sys_in_core_check": true,
+  "lock_sha256_unchanged": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "outer_exit": 0,
+  "own_scope_absent": true,
+  "evidence_sha256": {
+    "run.py": "837ccc49f3be8d76970566c219a4c2d926fe634d18e673ff7a248788ac647680",
+    "launch.sh": "eb0fdbfc7d506319ef518f5ec1983c4a204d94096bec605bcd2ad4cfa3e0ff0e",
+    "preflight.json": "c9a125d1dae3e2a999daaab0a240bce07b7920ef5efbf245a81a19266d13226f",
+    "commands.json": "750f8534ab0a70f311d2f56b799a396db3a418f3037b45dc5cd9d3391145fc7e",
+    "cargo-version.log": "d0f178a8ad9f2715dc7c122403538b769b48c2deeb6a7326e8b16af453586354",
+    "rustc-version.log": "71aef20516158a4ce8c5ea59a94818941d54fe4eb5eb27a238cfc3e438b0f037",
+    "core-check.log": "2ef62fbce54b1f6fb97c6675051407a9a5c87d5b49d92c31d0bcc126ff957677",
+    "engine-positive.log": "31fabc30ea28b3e3e1a5fabde049dab3f24cd312e7c58f4267d9f5e885cc5e79",
+    "engine-wrong.log": "c6f44b754899af572b330c6b255bcd623999df40695359dde8e23e179f961cf1",
+    "engine-restored.log": "78c7e5a2ef36ac360ed74b02644bd4c9d4bd701e07f0d0a97c8faac60295bcea",
+    "result.json": "d84c777431d946e210385614c10008e00f0f9a15510d1f1bf995c726425a7d07",
+    "outer.log": "d84c777431d946e210385614c10008e00f0f9a15510d1f1bf995c726425a7d07",
+    "outer.status": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa"
+  }
+}

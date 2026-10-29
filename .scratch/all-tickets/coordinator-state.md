@@ -10,11 +10,11 @@ Use central agent-skills `d6024420` plus local edits and project `AGENTS.md`. Re
 
 ## Current step
 
-Fork-main includes reviewed Windows X35 and native Windows1.77.2 combined/profile slices. Native Rust1.77.2 Sys/Net package-alone rows pass: Windows Sys+Net and Linux/macOS Net. Corrected `net_connect` passes on all three OS. `net,no_object` now passes 3/3 on macOS, Linux and Windows after RED101, review and exact cleanup. Old Windows observer false negative remains recorded; current observer passes. A–F/Ticket03/release remain open.
+Fork-main includes reviewed Windows X35 and native Windows1.77.2 combined/profile slices. Native Rust1.77.2 Sys/Net package-alone rows pass: Windows Sys+Net and Linux/macOS Net. Corrected `net_connect` and `net,no_object` pass on all three OS after RED101, review and cleanup. Current-source macOS default core1.66 passes check/Engine RED101/GREEN0. Old Windows observer false negative remains recorded. A–F/Ticket03/release remain open.
 
 ## Next action
 
-Next: inspect remaining release gates for the first unproven source/feature/MSRV tuple; reuse valid three-OS `net,no_object` and package-alone results. Keep Windows guest custody for native runs. Attempt06's Runner-finalization cause remains unproven.
+Next: bind existing optional `sys,net` minimum and feature-interaction results to current source/lock, then run only the first materially unproven gate. Reuse valid core and three-OS Net evidence. Attempt06's Runner-finalization cause remains unproven.
 
 ## Goal
 

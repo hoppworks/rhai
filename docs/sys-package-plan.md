@@ -1818,6 +1818,18 @@ One independent combined review passed this named slice. See
 `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/noobject-attempt01/proof.md`.
 Other release gates and full A–F/Ticket03 acceptance remain open.
 
+At current fork-main `ec157d40e`, native macOS arm64/Rust-Cargo 1.66.0 also
+accepts the default-core `--lib` check and a real Engine example. The 448-file
+source archive and exact lock matched current source. Engine returned 42;
+the deliberate 43 expectation failed at its assertion (101), and the same
+executable then passed with restored 42. The example verified `spawn()` is
+reserved without sys. Every locked command, outer runner exit, exact owned
+scope cleanup and one combined independent review passed. The initial private
+Cargo index download dominated the bounded run. See
+`.scratch/all-tickets/release-matrix-20261028/macos-core-166-current-attempt01/proof.md`.
+This named result does not establish the full core test suite or the remaining
+optional/release gates.
+
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance
 matrix or closure count. Historical implementation notes and estimates follow.

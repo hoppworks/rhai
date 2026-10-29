@@ -1,0 +1,10 @@
+{
+  "current_head": "ec157d40e0e0c192577551ea70c1834047aa3f6c",
+  "source_files": 448,
+  "mismatches": [],
+  "source_manifest_sha256": "b829308ab356d7aaaf7bf8d3acc9f65aab8fb316192d9b1b69e3365d78c834fd",
+  "archive_sha256": "6ff82b95cbbf65ba919161932a63d74f668f8e6e6d88682418797eca93565384",
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "run_sha256": "837ccc49f3be8d76970566c219a4c2d926fe634d18e673ff7a248788ac647680",
+  "launch_sha256": "eb0fdbfc7d506319ef518f5ec1983c4a204d94096bec605bcd2ad4cfa3e0ff0e"
+}
