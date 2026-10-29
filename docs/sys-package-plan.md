@@ -1808,8 +1808,15 @@ source/lock match, wrong independent peer-byte RED101, and 3/3 restored
 Engine/real-TCP tests using the same executable. The bounded runner exited 0;
 export hashes, stage/scope absence and one combined independent review passed.
 See `.scratch/all-tickets/release-matrix-20261028/linux-net-noobject-attempt01/proof.md`.
-Windows `net,no_object`, other release gates and full A–F/Ticket03 acceptance
-remain open.
+Native Windows 11/Rust1.77.2 now also accepts `testing-environ,net,no_object`
+for the dedicated three Engine/real-TCP cases on the same 448-file current
+source and lock. A deliberately wrong independent peer expectation failed at
+the intended assertion (101); the same executable passed 3/3 restored tests.
+The bounded native Driver exited 0 with `accepted:true`; 16 exported originals,
+the eight-state `REMOVED` journal and exact guest/host retirement were checked.
+One independent combined review passed this named slice. See
+`.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/noobject-attempt01/proof.md`.
+Other release gates and full A–F/Ticket03 acceptance remain open.
 
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance

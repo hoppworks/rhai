@@ -1,0 +1,60 @@
+{
+  "attempt": "noobject-attempt01",
+  "nonce": "a542a6b8cc9d4ed6b8bbda30beee4922",
+  "integrated_head_at_prepare": "2856055a56f621067cb0944830dcd6efaf250bdf",
+  "source_commit": "7019821fc9d7814d0632fea06de50933aa9e35ee",
+  "source_manifest_sha256": "b829308ab356d7aaaf7bf8d3acc9f65aab8fb316192d9b1b69e3365d78c834fd",
+  "archive_sha256": "6ff82b95cbbf65ba919161932a63d74f668f8e6e6d88682418797eca93565384",
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "vm_uuid": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19",
+  "rust": "1.77.2-x86_64-pc-windows-msvc",
+  "profiles": [
+    "testing-environ,net,no_object"
+  ],
+  "targets": {
+    "net_no_object": [
+      "registered_stream_functions_work_without_dot_syntax",
+      "registered_listener_functions_work_with_explicit_handle_arguments",
+      "registered_error_getters_are_callable_with_explicit_arguments"
+    ]
+  },
+  "driver_deadline_seconds": 180,
+  "observer_deadline_seconds": 185,
+  "media_files": {
+    "source-manifest.json": {
+      "bytes": 68089,
+      "sha256": "b829308ab356d7aaaf7bf8d3acc9f65aab8fb316192d9b1b69e3365d78c834fd"
+    },
+    "ClearOwnedWorkReadOnly.ps1": {
+      "bytes": 2906,
+      "sha256": "a25e9858b0a46d0409c71b8d26cc31a3a1fb8619bc606275e94e15c817d580c9"
+    },
+    "Start.ps1": {
+      "bytes": 10704,
+      "sha256": "50882a7b691f5ecfa66def66ab64b6db79deac53a12d3e6cff7fb3e71b2f03d1"
+    },
+    "Cargo.lock": {
+      "bytes": 31602,
+      "sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802"
+    },
+    "rhai-native-a542a6b8cc9d4ed6b8bbda30beee4922.bundle": {
+      "bytes": 45,
+      "sha256": "e756f6f9a8e9c5ebfa8109916afae72872e43f5087566452b2ff20fbc5085851"
+    },
+    "RunRhaiContract.cmd": {
+      "bytes": 2482,
+      "sha256": "03161b01ed122386f69f758d9fd664656fc03c3a10f43bc9bc830206735ab522"
+    },
+    "rhai-source.zip": {
+      "bytes": 1157374,
+      "sha256": "6ff82b95cbbf65ba919161932a63d74f668f8e6e6d88682418797eca93565384"
+    },
+    "RunRhaiContractControl.ps1": {
+      "bytes": 15864,
+      "sha256": "ffbf55bf5774a81bb2e91fcd323283ba5b1e40bc1f1a07c3aa85d03b13e1897b"
+    }
+  },
+  "source_tree_matches_integrated_head": true,
+  "test_overlay_sha256": "715af9df54ce68df64cbf4d29b5479ef8201dbc6802f515cc820749cb42fdeb7",
+  "iso_sha256": "7f6fd0287b80ea5edae6a10a3c707d8e32fdcbe4bc1c3eda6c4e1852b77685bc"
+}

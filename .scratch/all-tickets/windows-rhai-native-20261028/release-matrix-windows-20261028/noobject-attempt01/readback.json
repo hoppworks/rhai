@@ -1,0 +1,30 @@
+{
+  "current_head": "2856055a56f621067cb0944830dcd6efaf250bdf",
+  "source_files_matching_current_head": 448,
+  "source_mismatches": [],
+  "source_manifest_sha256": "b829308ab356d7aaaf7bf8d3acc9f65aab8fb316192d9b1b69e3365d78c834fd",
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "same_executable": "work\\target\\debug\\deps\\net_no_object-ce87280ebee3f2dd.exe",
+  "wrong_actual_bytes": "ping",
+  "wrong_expected_bytes": "pang",
+  "wrong_exit": 101,
+  "green_passed": 3,
+  "driver_exit": 0,
+  "observer_accepted": true,
+  "driver_elapsed_seconds": 64.2220198,
+  "export_file_count": 16,
+  "export_hashes_valid": true,
+  "journal_records": 8,
+  "journal_terminal_removed": true,
+  "guest_retire_result_screenshot_sha256": "822e18c044b3876248dc9ad52049364734579efed9841fabaf3ab35ac362b036",
+  "guest_retire_confirm_screenshot_sha256": "568f7d0bf6279a44fac25dc7c759837bc09c371aa41fe77be24a7da1f8322be7",
+  "guest_exact_scope_absent_screen_readback": true,
+  "guest_named_runner_processes_absent_screen_readback": true,
+  "host_cleanup_readback": {
+    "owned_stage_absent": true,
+    "owned_iso_absent": true,
+    "original_sdc_live_and_inactive": true,
+    "foreign_sdb_live_and_inactive": true,
+    "vm_running": true
+  }
+}
