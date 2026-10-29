@@ -1,0 +1,51 @@
+{
+  "nonce": "8edc9965d4f64647b6e86849167df542",
+  "base_head": "6dc2565bebe137063c218cc90fa748d24559d1a5",
+  "overlay_sha256": "0039528cba8117ca93e488d8f093880b6974c9afd63ee95b03c63c3939216838",
+  "source_manifest_sha256": "4c9ea1ee5b52e5223bb5a810ff288d4b559d2603953b39fb5f9575b099326866",
+  "archive_sha256": "f0f749995c8e816f2d4eae3df1cb6512ba1fa4339cf316d558dc8f7e80609a6f",
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "features": "testing-environ,sys,net",
+  "target": "sys_process_windows_streams",
+  "test": "windows_stream_direct_run",
+  "media_files": {
+    "source-manifest.json": {
+      "bytes": 68249,
+      "sha256": "4c9ea1ee5b52e5223bb5a810ff288d4b559d2603953b39fb5f9575b099326866"
+    },
+    "ClearOwnedWorkReadOnly.ps1": {
+      "bytes": 2906,
+      "sha256": "6884ac4d19b271db01169d9277fc3e373fcc97666f8f2021e66d1aed267c7d42"
+    },
+    "Start.ps1": {
+      "bytes": 10669,
+      "sha256": "59791f882f529f6bc922cc9469e0ec86df8d0d476d7e3749269dd4d0a4aea2ef"
+    },
+    "Cargo.lock": {
+      "bytes": 31602,
+      "sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802"
+    },
+    "RunRhaiContract.cmd": {
+      "bytes": 9853,
+      "sha256": "8efdd8b029ff3075bc0910574a582812efac3d77ee30eb24e71f235099c01c66"
+    },
+    "rhai-source.zip": {
+      "bytes": 1171614,
+      "sha256": "f0f749995c8e816f2d4eae3df1cb6512ba1fa4339cf316d558dc8f7e80609a6f"
+    },
+    "rhai-native-8edc9965d4f64647b6e86849167df542.bundle": {
+      "bytes": 45,
+      "sha256": "e69a3881cb90ed2349dd3032fb6510bc5db7650ad94ed71c943ad2e99bdd2fab"
+    },
+    "RunRhaiContractControl.ps1": {
+      "bytes": 20561,
+      "sha256": "684e8d07f592de8042e535ec7f237ea36e7b341a685b47ab7a8ab521673c8403"
+    }
+  },
+  "driver_deadline_seconds": 180,
+  "observer_deadline_seconds": 185,
+  "export_deadline_seconds": 180,
+  "start_sha256": "59791f882f529f6bc922cc9469e0ec86df8d0d476d7e3749269dd4d0a4aea2ef",
+  "native_started": false,
+  "iso_sha256": "ea42811388e165c729644713d7124e6e53ba14c3c5a754377daf2564adbf1982"
+}

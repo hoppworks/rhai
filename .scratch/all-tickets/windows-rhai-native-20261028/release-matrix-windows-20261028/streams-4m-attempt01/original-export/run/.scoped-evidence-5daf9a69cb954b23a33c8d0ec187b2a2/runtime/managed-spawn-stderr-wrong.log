@@ -1,0 +1,49 @@
+warning: the item `TryFrom` is imported redundantly
+   --> src\func\func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04\library\std\src\prelude\mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` on by default
+
+warning: `rhai` (lib) generated 2 warnings
+warning: unused import: `PathBuf`
+ --> src\bin\rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 0.12s
+     Running tests\sys_process_windows_streams.rs (work\target\debug\deps\sys_process_windows_streams-f934496e2236e196.exe)
+
+running 1 test
+thread 'windows_stream_managed_spawn' panicked at tests\sys_process_windows_streams.rs:214:33:
+STREAM_CONTRACT managed-spawn: ErrorDataTooLarge("Length of string", 1:7)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test windows_stream_managed_spawn ... FAILED
+
+failures:
+
+failures:
+    windows_stream_managed_spawn
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 6 filtered out; finished in 0.06s
+
+error: test failed, to rerun pass `--test sys_process_windows_streams`
