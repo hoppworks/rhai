@@ -1844,6 +1844,22 @@ See `.scratch/all-tickets/release-matrix-20261028/posix-combined-default-proof.m
 This closes only these two executed default-profile slices. Windows broad
 combined suites, other profiles and full release acceptance remain open.
 
+Native Windows 11 `10.0.26300.0` now also accepts the current-source
+Rust/Cargo 1.77.2 default `testing-environ,sys,net` combined package slice.
+All 448 source files and the exact lock matched fork-main `ea56b03f9`; ten
+native targets compiled, the deliberate fresh host-file wrong expectation
+failed at its intended assertion (101), and restored suites passed 125 tests
+with zero failed or ignored, including 32 `sys_process_windows` cases. The
+combined RED and GREEN used the same executable. The bounded Driver exited
+zero in 121.49 seconds; 221 ordered COM1 frames reconstructed 16 hash-checked
+original files, and the eight-state journal ended at `REMOVED`. A separate
+guest readback found the own runtime and outer scope absent. Host readback
+confirmed the own ISO/stage retired, original `sdc` restored and foreign
+`sdb` preserved. One combined independent review passed this named slice:
+`.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/combined-default-attempt01/proof.md`.
+The observer's `product_acceptance:false` remains correct for unrun release
+criteria; other profiles and full A–F/Ticket03 acceptance remain open.
+
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance
 matrix or closure count. Historical implementation notes and estimates follow.

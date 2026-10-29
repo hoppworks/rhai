@@ -1,6 +1,6 @@
 # Independent combined Standards and Spec review
 
-Reviewer: `/root/sdk_link_combined_review`, read-only review of candidate fork-main `41070b3c69ac4210b64c701ed2790e9b51e8eb70` and the two native default Sys+Net proof folders on 2026-10-29. The reviewer reloaded the current central/project rules and relevant review instructions before inspecting the source and original evidence. No review build was run.
+An independent read-only review inspected candidate fork-main `41070b3c69ac4210b64c701ed2790e9b51e8eb70` and the two native default Sys+Net proof folders on 2026-10-29. Current central/project rules and relevant review instructions were loaded before inspecting the source and original evidence. No review build was run.
 
 Verdict: **PASS for the named executed macOS and Linux Rust 1.77.2 `testing-environ,sys,net` ten-target slices**. Standards and Spec each pass; no actionable correctness or regression finding was reported for the executed cases.
 

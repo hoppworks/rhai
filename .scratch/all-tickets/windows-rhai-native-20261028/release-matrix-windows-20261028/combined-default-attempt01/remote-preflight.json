@@ -1,0 +1,13 @@
+{
+  "stage_verified": true,
+  "media_file_count": 8,
+  "archive_sha256": "6ff82b95cbbf65ba919161932a63d74f668f8e6e6d88682418797eca93565384",
+  "source_manifest_sha256": "b829308ab356d7aaaf7bf8d3acc9f65aab8fb316192d9b1b69e3365d78c834fd",
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "dispatch_sha256": "7d698077eecd5a08f92313a6a88fd0bb8619c6b66900a4136b11b0d930dadde3",
+  "runner_sha256": "25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e",
+  "vm_running": true,
+  "original_sdc_live": true,
+  "foreign_sdb_live": true,
+  "free_var_bytes": 498759626752
+}

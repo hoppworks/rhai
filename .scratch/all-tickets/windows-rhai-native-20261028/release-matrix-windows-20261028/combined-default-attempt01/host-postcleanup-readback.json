@@ -1,0 +1,7 @@
+{
+  "stage_absent": true,
+  "iso_absent": true,
+  "original_sdc_live_inactive": true,
+  "foreign_sdb_live_inactive": true,
+  "vm_running": true
+}

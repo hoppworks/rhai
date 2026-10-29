@@ -1,0 +1,306 @@
+warning: the item `TryFrom` is imported redundantly
+   --> src\func\func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04\library\std\src\prelude\mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` on by default
+
+warning: `rhai` (lib) generated 2 warnings
+warning: unused import: `PathBuf`
+ --> src\bin\rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+warning: unused import: `std::ffi::OsString`
+ --> tests\sys_env.rs:7:5
+  |
+7 | use std::ffi::OsString;
+  |     ^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (test "sys_env") generated 1 warning (run `cargo fix --test "sys_env"` to apply 1 suggestion)
+warning: variable does not need to be mutable
+  --> tests\net_writes.rs:11:24
+   |
+11 | fn read_bounded_to_end(mut stream: &TcpStream, max_bytes: usize) -> Vec<u8> {
+   |                        ----^^^^^^
+   |                        |
+   |                        help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` on by default
+
+warning: variable does not need to be mutable
+  --> tests\net_writes.rs:62:10
+   |
+62 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+  --> tests\net_writes.rs:83:10
+   |
+83 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests\net_writes.rs:208:10
+    |
+208 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests\net_writes.rs:266:10
+    |
+266 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests\net_writes.rs:285:9
+    |
+285 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests\net_writes.rs:289:9
+    |
+289 |     let mut peer = TcpStream::connect(address.parse::<SocketAddr>().unwrap()).unwrap();
+    |         ----^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests\net_writes.rs:306:9
+    |
+306 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()).max_write_bytes(2));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: unused return value of `rhai::Scope::<'_>::remove` that must be used
+   --> tests\net_writes.rs:245:13
+    |
+245 |             scope.remove::<String>("payload");
+    |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_must_use)]` on by default
+help: use `let _ = ...` to ignore the resulting value
+    |
+245 |             let _ = scope.remove::<String>("payload");
+    |             +++++++
+
+warning: `rhai` (test "net_writes") generated 9 warnings (run `cargo fix --test "net_writes"` to apply 8 suggestions)
+    Finished test [unoptimized] target(s) in 0.13s
+     Running tests\combined_sys_net.rs (work\target\debug\deps\combined_sys_net-4c81ea365908cb78.exe)
+
+running 1 test
+test sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
+     Running tests\net_connect.rs (work\target\debug\deps\net_connect-35b0713fb4959038.exe)
+
+running 5 tests
+test authorized_connect_is_observed_and_clone_close_is_shared ... ok
+test denied_and_invalid_endpoints_do_not_reach_peer_and_errors_are_catchable ... ok
+test ipv6_connect_requires_the_exact_numeric_endpoint_and_delivers_peer_bytes ... ok
+test net_config_rejects_zero_deadline_and_invalid_handle_limits ... ok
+test open_handle_limit_is_shared_across_package_engines_and_released_on_close ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.18s
+
+     Running tests\net_listen.rs (work\target\debug\deps\net_listen-a17c627d632599c3.exe)
+
+running 8 tests
+test accepted_stream_uses_the_shared_package_quota_across_engines ... ok
+test authorized_listener_accepts_an_independent_peer ... ok
+test bind_failure_releases_listener_quota ... ok
+test denied_and_invalid_listener_endpoints_never_bind ... ok
+test ipv6_port_zero_listener_uses_its_own_grant_and_reports_real_peer_bytes ... ok
+test listener_clones_share_close_and_final_drop_releases_the_bind ... ok
+test no_client_accept_times_out_with_catchable_net_error ... ok
+test quota_retry_deadline_expires_under_a_real_saturated_handle_limit ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 2.16s
+
+     Running tests\net_reads.rs (work\target\debug\deps\net_reads-365e9daec0fe903b.exe)
+
+running 7 tests
+test accepted_stream_inherits_host_receive_cap ... ok
+test blob_reads_validate_lengths_return_exact_short_prefix_and_obey_host_cap ... ok
+test engine_string_limit_keeps_ascii_and_reports_lossy_expansion_progress ... ok
+test no_data_read_times_out_and_bounded_eof_loop_reports_partial_progress ... ok
+test one_shot_read_returns_an_available_short_prefix_without_waiting_for_more ... ok
+test one_shot_text_read_replaces_a_utf8_character_cut_by_the_available_prefix ... ok
+test stream_read_string_returns_exact_lossy_text_from_peer_bytes ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.36s
+
+     Running tests\net_writes.rs (work\target\debug\deps\net_writes-b5dbf78a795cc94c.exe)
+
+running 10 tests
+test accepted_stream_inherits_host_write_cap ... ok
+test accepted_stream_writes_are_read_back_by_the_peer ... ok
+test bounded_write_timeout_reports_partial_bytes_matching_peer_readback ... ok
+test engine_string_limit_rejects_write_before_peer_bytes ... ok
+test host_write_cap_rejects_oversize_input_without_peer_bytes ... ok
+test invalid_host_write_bounds_are_rejected ... ok
+test read_half_close_is_idempotent_and_keeps_stream_open_for_close ... ok
+test script_write_blob_preserves_exact_bytes ... ok
+test script_writes_string_and_write_all_report_real_peer_bytes ... ok
+test write_half_close_keeps_the_read_direction_and_is_idempotent ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.16s
+
+     Running tests\sys_env.rs (work\target\debug\deps\sys_env-36ce664df194a588.exe)
+
+running 6 tests
+test test_cwd_matches_process ... ok
+test test_env_allow_list_unset_variable ... ok
+test test_env_allow_list_value ... ok
+test test_env_default_policy_hides_all ... ok
+test test_env_var_set_and_unset ... ok
+test test_env_vars_all ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s
+
+     Running tests\sys_fs.rs (work\target\debug\deps\sys_fs-207717d7ca8f3552.exe)
+
+running 29 tests
+test test_create_dir_cases ... ok
+test test_deep_tree_and_many_entries ... ok
+test test_empty_and_mixed_writes ... ok
+test test_file_handle_blob_read_respects_engine_array_limit ... ok
+test test_file_handle_read_blob_preserves_bytes_and_obeys_host_cap ... ok
+test test_file_handle_read_respects_engine_limit_below_host_cap ... ok
+test test_file_handle_read_string_advances_the_shared_cursor ... ok
+test test_file_handle_reads_fail_at_eof_and_on_write_only_handle ... ok
+test test_file_handle_reads_obey_host_cap_and_reject_negative_lengths_without_moving ... ok
+test test_file_handle_string_read_requires_complete_utf8 ... ok
+test test_large_file_round_trip ... ok
+test test_open_file_checks_grants_before_mutation_and_stays_confined ... ok
+test test_open_file_default_preserves_contents_and_shares_cursor ... ok
+test test_open_file_modes_and_exclusive_create ... ok
+test test_path_spellings ... ok
+test test_predicates_and_metadata ... ok
+test test_read_binary ... ok
+test test_read_dir_cases ... ok
+test test_read_file_cases ... ok
+test test_remove_cases ... ok
+test test_rename_and_copy ... ok
+test test_unicode_names ... ok
+test test_unrestricted_missing_parents ... ok
+test test_unrestricted_relative_paths ... ok
+test test_unrestricted_round_trip ... ok
+test test_windows_paths ... ok
+test test_write_append_blob ... ok
+test test_write_into_missing_parent ... ok
+test test_wrong_entry_kind ... ok
+
+test result: ok. 29 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.48s
+
+     Running tests\sys_policy.rs (work\target\debug\deps\sys_policy-721473ea98abe1ae.exe)
+
+running 20 tests
+test test_absolute_path_with_parent_components ... ok
+test test_absolute_paths ... ok
+test test_config_builder ... ok
+test test_copy_across_roots ... ok
+test test_default_config_denies_fs ... ok
+test test_env_allow_list ... ok
+test test_error_position ... ok
+test test_error_variants ... ok
+test test_errors_are_catchable ... ok
+test test_host_can_downcast ... ok
+test test_missing_root_fails_early ... ok
+test test_multiple_roots ... ok
+test test_nested_roots_longest_prefix ... ok
+test test_parent_traversal_is_denied ... ok
+test test_plain_engine_has_no_sys_functions ... ok
+test test_read_only_root ... ok
+test test_remove_dir_all_needs_delete_access ... ok
+test test_root_with_dot_components ... ok
+test test_static_module_and_sharing ... ok
+test test_unrestricted_respects_access_level ... ok
+
+test result: ok. 20 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.10s
+
+     Running tests\sys_process_report.rs (work\target\debug\deps\sys_process_report-bdf88a06e6780f28.exe)
+
+running 7 tests
+test absent_and_signal_exit_are_readable_through_engine ... ok
+test old_error_variants_keep_rhai_classification_and_have_no_process_report ... ok
+test prior_sys_error_variants_keep_display_and_classification ... ok
+test process_causes_retain_primary_classification_and_snapshot ... ok
+test process_report_rust_accessors_cover_absent_code_signal_and_diagnostics ... ok
+test scope_defaults_and_builder ... ok
+test script_mutating_copied_report_blobs_and_collections_does_not_change_snapshot ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+     Running tests\sys_process_windows.rs (work\target\debug\deps\sys_process_windows-b3e5219af6d50bf7.exe)
+
+running 32 tests
+test windows_child_drop_fixture ... ok
+test windows_direct_run_keeps_descendant_alive_after_normal_parent_exit ... ok
+test windows_direct_run_preserves_embedded_quote_argument ... ok
+test windows_direct_run_resolves_child_path_and_implicit_exe ... ok
+test windows_managed_batch_argument_cannot_create_an_extra_file ... ok
+test windows_managed_cwd_controller ... ok
+test windows_managed_leaf_fixture ... ok
+test windows_managed_parent_fixture ... ok
+test windows_managed_run_closes_descendant_on_normal_parent_exit ... ok
+test windows_managed_run_executes_explicitly_allowed_batch ... ok
+test windows_managed_run_resolves_simple_program_from_parent_cwd ... ok
+test windows_managed_spawn_final_drop_follows_host_policy ... ok
+test windows_managed_spawn_kill_closes_descendant_and_preserves_sentinel ... ok
+test windows_managed_spawn_wait_closes_descendant_on_parent_exit ... ok
+test windows_managed_timeout_closes_descendant_and_preserves_sentinel ... ok
+test windows_path_probe_fixture ... ok
+test windows_process_fast_probe ... ok
+test windows_process_fixture ... ok
+test windows_run_raw_captures_output_and_nonzero_exit ... ok
+test windows_run_raw_rejects_timeout_outside_duration_range_before_spawn ... ok
+test windows_run_raw_timeout_terminates_exact_child_and_retains_output ... ok
+test windows_run_raw_times_out_with_unread_stdin ... ok
+test windows_run_raw_transfers_blob_while_draining_both_streams ... ok
+test windows_run_rejects_decoded_text_expansion_with_original_raw_report ... ok
+test windows_run_returns_lossy_text_and_nonzero_exit ... ok
+test windows_run_string_empty_and_unit_stdin_reach_child_eof ... ok
+test windows_spawn_blocked_input_fixture ... ok
+test windows_spawn_child_can_be_polled_and_waited_through_clones ... ok
+test windows_spawn_child_drop_follows_host_policy ... ok
+test windows_spawn_kill_stops_child_with_unread_buffered_input ... ok
+test windows_stdin_fixture ... ok
+test windows_timeout_fixture ... ok
+
+test result: ok. 32 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 17.76s
+
