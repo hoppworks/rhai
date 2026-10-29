@@ -1,0 +1,26 @@
+{
+  "accepted": true,
+  "source_manifest_sha256": "254d021566408f44b2b645551e2598f7cf9db5fee63c5e34bcc7ea20012ec9ba",
+  "archive_sha256": "0005b38a387b419802335e141cb259de86f1ec9424e6e4cf2b8bc3beaf30bdd7",
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "cargo": "cargo 1.77.2 (e52e36006 2024-03-26)",
+  "rustc": "rustc 1.77.2 (25ef9e3d8 2024-04-09)",
+  "rustc_path": "/root/.rustup/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+  "rustc_sha256": "c1bd86d51ed89c344fa4b394dcb116d48f5e3eeb121498c083b9b516624f55cd",
+  "features": "testing-environ,net",
+  "targets": [
+    "net_connect",
+    "net_listen",
+    "net_reads",
+    "net_writes"
+  ],
+  "wrong_exit": 101,
+  "suite_exit": 0,
+  "suite_passed_counts": [
+    5,
+    8,
+    7,
+    10
+  ],
+  "elapsed_seconds": 13.596
+}

@@ -1,0 +1,14 @@
+{
+  "candidate_head": "728230c9e528b0d03bab1135ef969ba04689193b",
+  "source_equivalent_head": "1fae293e9750ddc7243798c24a49d46589863e14",
+  "source_manifest_sha256": "254d021566408f44b2b645551e2598f7cf9db5fee63c5e34bcc7ea20012ec9ba",
+  "archive_sha256": "0005b38a387b419802335e141cb259de86f1ec9424e6e4cf2b8bc3beaf30bdd7",
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "runner_sha256": "25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e",
+  "run_sha256": "2918f258ed9bbd64b5fca4e4c01e85dc8d66ab0c69c330e37925415287413318",
+  "stage": "/var/roothome/.local/share/agent-builds/rhai/linux-net-alone-b1f047c8",
+  "session_scope": "/var/roothome/.local/share/agent-builds/rhai/linux-net-alone-b1f047c8-scope",
+  "outer_deadline_seconds": 600,
+  "features": "testing-environ,net",
+  "targets": ["net_connect", "net_listen", "net_reads", "net_writes"]
+}

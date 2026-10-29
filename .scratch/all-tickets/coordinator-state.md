@@ -10,11 +10,11 @@ Use central agent-skills `d6024420` plus local edits and project `AGENTS.md`. Re
 
 ## Current step
 
-Fork-main includes reviewed Windows X35 and native Windows1.77.2 combined/profile slices. New Windows1.77.2 sys-only and net-only suites pass with original RED/GREEN and exact cleanup; the original observer false negative is preserved. A–F/Ticket03/release remain open. Proof: `windows-rhai-native-20261028/release-matrix-windows-20261028/package-alone-attempt01/proof.md`.
+Fork-main includes reviewed Windows X35 and native Windows1.77.2 combined/profile slices. Windows1.77.2 sys-only/net-only and Linux1.77.2 net-only pass with RED/GREEN, readback, review and cleanup. Windows original observer false negative is preserved. A–F/Ticket03/release remain open. Proof: Windows `package-alone-attempt01/proof.md`; Linux `linux-net-alone-attempt01/proof.md`.
 
 ## Next action
 
-Next: verify whether native Linux/macOS net-only Rust1.77.2 Engine/real-OS proof already exists. If absent, execute the four net targets and one peer-byte RED/GREEN control in one owned POSIX scope, then review and integrate. Reuse accepted Windows package-alone proof; do not repeat it for the observer parser fault. Attempt06's Runner-finalization cause remains unproven.
+Next: execute the missing macOS Rust1.77.2 net-only Engine/real-OS slice with four targets and one peer-EOF RED/GREEN control in one owned POSIX scope, then review and integrate. Reuse accepted Linux/Windows standalone proofs; do not repeat the Windows observer parser fault. Attempt06's Runner-finalization cause remains unproven.
 
 ## Goal
 

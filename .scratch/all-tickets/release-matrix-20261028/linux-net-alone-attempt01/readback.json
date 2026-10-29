@@ -1,0 +1,21 @@
+{
+  "outer_exit": 0,
+  "compile_exit": 0,
+  "wrong_exit": 101,
+  "same_net_connect_executable": "/var/roothome/.local/share/agent-builds/rhai/linux-net-alone-b1f047c8-scope/agent-build-b5xg3ad6/target/debug/deps/net_connect-72d7b5d7285f5772",
+  "wrong_assertion_peer_eof": true,
+  "suite_exit": 0,
+  "suite_passed_counts": [
+    5,
+    8,
+    7,
+    10
+  ],
+  "total_passed": 30,
+  "cargo_clean_exit": 0,
+  "source_manifest_sha256": "254d021566408f44b2b645551e2598f7cf9db5fee63c5e34bcc7ea20012ec9ba",
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "rustc_sha256": "c1bd86d51ed89c344fa4b394dcb116d48f5e3eeb121498c083b9b516624f55cd",
+  "owned_session_scope_absent": true,
+  "accepted_named_slice": true
+}

@@ -1,0 +1,7 @@
+{
+  "stage": "/var/roothome/.local/share/agent-builds/rhai/linux-net-alone-b1f047c8",
+  "scope": "/var/roothome/.local/share/agent-builds/rhai/linux-net-alone-b1f047c8-scope",
+  "stage_absent": true,
+  "scope_absent": true,
+  "owned_file_count": 16
+}

@@ -1751,6 +1751,17 @@ This closes only the seven named package-alone target suites on native
 Windows; process cases, other feature/OS combinations, and full release
 acceptance remain open.
 
+Native Workhorse Linux Rust/Cargo 1.77.2 now also accepts the separate
+`testing-environ,net` package run at the same 448-file source and exact lock.
+One owned scoped invocation compiled `net_connect`, `net_listen`, `net_reads`
+and `net_writes`; the deliberate real-peer EOF expectation failed at the
+intended assertion (101), and the restored suites passed 5 + 8 + 7 + 10
+tests with zero failed/ignored. The same `net_connect` executable ran RED and
+GREEN. Cargo clean and outer runner exited 0; exported logs and exact own
+session/stage cleanup passed independent readback and one combined review.
+See `.scratch/all-tickets/release-matrix-20261028/linux-net-alone-attempt01/proof.md`.
+The macOS net-only Rust1.77.2 row and other release criteria remain open.
+
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance
 matrix or closure count. Historical implementation notes and estimates follow.
