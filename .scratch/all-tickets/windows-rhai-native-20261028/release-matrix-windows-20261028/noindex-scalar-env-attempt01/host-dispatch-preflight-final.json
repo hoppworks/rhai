@@ -1,0 +1,13 @@
+{
+  "host_utc_before_enter": "2026-10-29T11:10:06.133530+00:00",
+  "original_expiry_utc": "2026-10-30T12:00:00+00:00",
+  "vm_uuid": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19",
+  "medium_sha256": "4a8ed02158d2710090446650f7535872b6aecd4c3e22c950f794f5a7c975e6bf",
+  "start_sha256": "7d0cb55fe1b19aa768c7b8114422a28aaee97c504fc001bc4aa6f3471d7cdabc",
+  "serial_path": "/var/log/libvirt/qemu/rhai-win11-quality-serial0.log",
+  "serial_inode": 126912368,
+  "serial_offset": 1843302,
+  "host_free_var_bytes": 497115844608,
+  "source_review": "READY",
+  "native_started": false
+}

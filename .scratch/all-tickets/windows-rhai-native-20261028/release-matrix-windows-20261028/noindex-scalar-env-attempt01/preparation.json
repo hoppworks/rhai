@@ -1,0 +1,11 @@
+{
+  "nonce": "ed665e3968e2453db7cba4dd594abeb2",
+  "base_head": "e0ec6fae0161a743b1f7e8ede9892f4f89787c87",
+  "overlay_sha256": "c1a58015ab4704d5c34f7d3de70c51a00e4b47ab92109c0b07751eb99d7989f8",
+  "source_file_count": 449,
+  "other_files_match_committed_head": true,
+  "archive_sha256": "df38e99dd7f67f8556237155a124deb70dc2031eb6ba2bf8bb87076bbcbc5d36",
+  "manifest_sha256": "e131ad8c2811569e6485fb594207aa5f60cf8f86ebbb4a3c691a72e586aa5075",
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "native_run_started": false
+}

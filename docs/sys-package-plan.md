@@ -1928,6 +1928,10 @@ Native Windows Rust/Cargo 1.77.2 under `testing-environ,sys,net` now accepts the
 
 The preceding diagnostic observed incomplete lifetime-membership capture in an additional outer nested Managed controller; the final PATH test uses a different guarded controller and does not close that separate issue. Windows `no_index`, unexecuted OS/feature/MSRV rows, remaining process behavior, Ticket03 and full release acceptance remain open.
 
+### Windows no_index scalar process — 2026-10-29
+
+Native Windows Rust/Cargo 1.77.2 `testing-environ,sys,net,no_index` accepts named Direct/Managed scalar `run` hostname readback and typed `env_remove` denial with four intended wrong controls; the affected target passed 3/0/0. `run_raw` absence was observed without a separate wrong control. Source binding, custody, cleanup, review and limitations are in [the proof](../.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/noindex-scalar-env-attempt01/proof.md). This does not close independent process-lifecycle/no-spawn evidence, other feature/OS rows or R3/release.
+
 ### 6.9 Historical phases — retained, superseded as execution instructions
 
 | Phase | Deliverable | Exit criteria | Effort |

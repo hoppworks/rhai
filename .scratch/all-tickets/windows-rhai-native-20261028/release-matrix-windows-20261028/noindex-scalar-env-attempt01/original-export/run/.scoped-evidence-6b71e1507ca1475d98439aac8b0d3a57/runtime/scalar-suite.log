@@ -1,0 +1,53 @@
+warning: the item `TryFrom` is imported redundantly
+   --> src\func\func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04\library\std\src\prelude\mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` on by default
+
+warning: function `os_to_string` is never used
+   --> src\packages\sys\fs.rs:340:4
+    |
+340 | fn os_to_string(what: &str, s: std::ffi::OsString) -> Result<String, SysError> {
+    |    ^^^^^^^^^^^^
+
+warning: `rhai` (lib) generated 3 warnings
+warning: unused import: `PathBuf`
+ --> src\bin\rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 0.13s
+     Running tests\sys_process_windows_scalar.rs (work\target\debug\deps\sys_process_windows_scalar-5a6b1f1c3b624888.exe)
+
+running 3 tests
+test windows_scalar_does_not_register_raw_run ... windows_scalar_raw_unavailable error=ErrorFunctionNotFound("run_raw (&str | ImmutableString | String)", 1:1)
+ok
+test windows_scalar_rejects_unavailable_env_remove_option ... windows_scalar_env_remove_readback label=direct typed_error=Some(Denied("unsupported Windows process option `env_remove`"))
+windows_scalar_env_remove_readback label=managed typed_error=Some(Denied("unsupported Windows process option `env_remove`"))
+ok
+test windows_scalar_run_reports_native_hostname ... windows_scalar_hostname_readback label=direct host_api="RHAI-WIN11" child="RHAI-WIN11"
+windows_scalar_hostname_readback label=managed host_api="RHAI-WIN11" child="RHAI-WIN11"
+ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.04s
+
