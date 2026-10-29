@@ -1,0 +1,146 @@
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded ahash v0.8.12
+  Downloaded getrandom v0.3.4
+  Downloaded winx v0.36.4
+  Downloaded windows-targets v0.53.5
+  Downloaded itoa v1.0.15
+  Downloaded static_assertions v1.1.0
+  Downloaded tiny-keccak v2.0.2
+  Downloaded unicode-ident v1.0.22
+  Downloaded syn v2.0.106
+  Downloaded zerocopy v0.8.59
+  Downloaded windows_x86_64_msvc v0.53.1
+  Downloaded windows-sys v0.59.0
+  Downloaded windows-sys v0.61.2
+  Downloaded windows-sys v0.60.2
+  Downloaded windows_x86_64_msvc v0.52.6
+  Downloaded serde_json v1.0.145
+  Downloaded portable-atomic v1.15.0
+  Downloaded thin-vec v0.2.19
+  Downloaded serde v1.0.229
+  Downloaded proc-macro2 v1.0.103
+  Downloaded memchr v2.8.3
+  Downloaded cap-primitives v4.0.3
+  Downloaded bitflags v2.13.2
+  Downloaded smartstring v1.0.1
+  Downloaded smallvec v1.16.2
+  Downloaded serde_core v1.0.229
+  Downloaded ryu v1.0.20
+  Downloaded rmp-serde v1.3.0
+  Downloaded rmp v0.8.14
+  Downloaded quote v1.0.41
+  Downloaded once_cell v1.21.4
+  Downloaded num-traits v0.2.19
+  Downloaded ipnet v2.12.2
+  Downloaded io-extras v0.19.0
+  Downloaded cap-std v4.0.3
+  Downloaded paste v1.0.15
+  Downloaded io-lifetimes v3.0.1
+  Downloaded io-lifetimes v2.0.4
+  Downloaded getrandom v0.2.17
+  Downloaded byteorder v1.5.0
+  Downloaded autocfg v1.5.1
+  Downloaded windows-link v0.2.1
+  Downloaded version_check v0.9.5
+  Downloaded const-random v0.1.18
+  Downloaded windows-targets v0.52.6
+  Downloaded maybe-owned v0.3.4
+  Downloaded fs-set-times v0.20.3
+  Downloaded crunchy v0.2.4
+  Downloaded const-random-macro v0.1.16
+  Downloaded cfg-if v1.0.5
+  Downloaded ambient-authority v0.0.2
+ Downloading crates ...
+  Downloaded libc v0.2.189
+ Downloading crates ...
+  Downloaded web-time v1.1.0
+   Compiling windows_x86_64_msvc v0.52.6
+   Compiling autocfg v1.5.1
+   Compiling windows_x86_64_msvc v0.53.1
+   Compiling version_check v0.9.5
+   Compiling crunchy v0.2.4
+   Compiling windows-targets v0.52.6
+   Compiling proc-macro2 v1.0.103
+   Compiling io-lifetimes v3.0.1
+   Compiling io-lifetimes v2.0.4
+   Compiling cfg-if v1.0.5
+   Compiling tiny-keccak v2.0.2
+   Compiling windows-targets v0.53.5
+   Compiling windows-sys v0.59.0
+   Compiling num-traits v0.2.19
+   Compiling unicode-ident v1.0.22
+   Compiling io-extras v0.19.0
+   Compiling quote v1.0.41
+   Compiling portable-atomic v1.15.0
+   Compiling windows-sys v0.60.2
+   Compiling getrandom v0.2.17
+   Compiling serde_core v1.0.229
+   Compiling zerocopy v0.8.59
+   Compiling bitflags v2.13.2
+   Compiling getrandom v0.3.4
+   Compiling cap-primitives v4.0.3
+   Compiling once_cell v1.21.4
+   Compiling const-random-macro v0.1.16
+   Compiling winx v0.36.4
+   Compiling fs-set-times v0.20.3
+   Compiling smartstring v1.0.1
+   Compiling ahash v0.8.12
+   Compiling ipnet v2.12.2
+   Compiling ambient-authority v0.0.2
+   Compiling maybe-owned v0.3.4
+   Compiling cap-std v4.0.3
+   Compiling paste v1.0.15
+   Compiling syn v2.0.106
+   Compiling const-random v0.1.18
+   Compiling windows-link v0.2.1
+   Compiling serde v1.0.229
+   Compiling rhai v1.26.1 (C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-5913c765\run\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a)
+   Compiling static_assertions v1.1.0
+   Compiling windows-sys v0.61.2
+   Compiling rhai_codegen v3.2.0 (C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-5913c765\run\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\codegen)
+   Compiling serde_json v1.0.145
+   Compiling thin-vec v0.2.19
+   Compiling byteorder v1.5.0
+   Compiling smallvec v1.16.2
+   Compiling rmp v0.8.14
+   Compiling itoa v1.0.15
+   Compiling ryu v1.0.20
+   Compiling memchr v2.8.3
+   Compiling rmp-serde v1.3.0
+warning: the item `TryFrom` is imported redundantly
+   --> src\func\func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04\library\std\src\prelude\mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` on by default
+
+warning: `rhai` (lib) generated 2 warnings
+warning: unused import: `PathBuf`
+ --> src\bin\rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+"C:\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe" "/NOLOGO" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\temp\\rustc9giIg9\\symbols.o" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\combined_sys_net-c5510176c67b6571.combined_sys_net.87c0a942600f3d78-cgu.0.rcgu.o" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\combined_sys_net-c5510176c67b6571.combined_sys_net.87c0a942600f3d78-cgu.1.rcgu.o" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\combined_sys_net-c5510176c67b6571.combined_sys_net.87c0a942600f3d78-cgu.2.rcgu.o" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\combined_sys_net-c5510176c67b6571.combined_sys_net.87c0a942600f3d78-cgu.3.rcgu.o" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\combined_sys_net-c5510176c67b6571.combined_sys_net.87c0a942600f3d78-cgu.4.rcgu.o" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\combined_sys_net-c5510176c67b6571.4pgn425368o9cqmg.rcgu.o" "/LIBPATH:C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps" "/LIBPATH:C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\cargo-home\\registry\\src\\index.crates.io-6f17d22bba15001f\\windows_x86_64_msvc-0.52.6\\lib" "/LIBPATH:C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\cargo-home\\registry\\src\\index.crates.io-6f17d22bba15001f\\windows_x86_64_msvc-0.53.1\\lib" "/LIBPATH:C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-a7e54f39\\toolchain-home\\toolchains\\1.77.2-x86_64-pc-windows-msvc\\lib\\rustlib\\x86_64-pc-windows-msvc\\lib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-a7e54f39\\toolchain-home\\toolchains\\1.77.2-x86_64-pc-windows-msvc\\lib\\rustlib\\x86_64-pc-windows-msvc\\lib\\libtest-c2fe60067adef5b3.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-a7e54f39\\toolchain-home\\toolchains\\1.77.2-x86_64-pc-windows-msvc\\lib\\rustlib\\x86_64-pc-windows-msvc\\lib\\libgetopts-810e82277374a944.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-a7e54f39\\toolchain-home\\toolchains\\1.77.2-x86_64-pc-windows-msvc\\lib\\rustlib\\x86_64-pc-windows-msvc\\lib\\libunicode_width-b84590760dfe4952.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-a7e54f39\\toolchain-home\\toolchains\\1.77.2-x86_64-pc-windows-msvc\\lib\\rustlib\\x86_64-pc-windows-msvc\\lib\\librustc_std_workspace_std-ae2f7a1e4da74de6.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\librhai-6b2c2356685ad269.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\libsmartstring-3f475dd1f58fb305.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\libstatic_assertions-c1ffabc7593e0fba.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\libthin_vec-beedba90efeac301.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\libahash-d6abfb5ae3582996.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\libgetrandom-2ddbec271c3c4e37.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\libcfg_if-3099341bf1652bac.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\libzerocopy-edc6873f2dce6f39.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\libonce_cell-a11fcd2a4bd656d9.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\libportable_atomic-2bfa050c3e76692b.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\libnum_traits-c75115da1349e1ca.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\libwindows_sys-30a939063756963f.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\libwindows_link-64da0e1d3d6d32ad.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\libcap_std-4daeb97ae11d6e07.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\libio_extras-f7f2a7c0e03f2585.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\libcap_primitives-5e950f08f5cfa96d.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\libfs_set_times-7af9f76c464a13a8.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\libio_lifetimes-7168e94be5cbd11f.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\libipnet-a122902d206fbbce.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\libambient_authority-17448d6d435c6d20.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\libmaybe_owned-f998c6481efc307a.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\libwinx-1851e513381cdbc3.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\libwindows_sys-86f09d77ead8c85e.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\libwindows_targets-b3b2a202fcdd365f.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\libio_lifetimes-1f2c6c94f25478cb.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\libwindows_sys-c296fc840404aad6.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\libwindows_targets-e8667fbfe425c7c4.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\libsmallvec-adf210556476d87b.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\libbitflags-2e20bf41390d501b.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-a7e54f39\\toolchain-home\\toolchains\\1.77.2-x86_64-pc-windows-msvc\\lib\\rustlib\\x86_64-pc-windows-msvc\\lib\\libstd-7dd4d7539658daae.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-a7e54f39\\toolchain-home\\toolchains\\1.77.2-x86_64-pc-windows-msvc\\lib\\rustlib\\x86_64-pc-windows-msvc\\lib\\libpanic_unwind-d811fe9e4ee1ec6e.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-a7e54f39\\toolchain-home\\toolchains\\1.77.2-x86_64-pc-windows-msvc\\lib\\rustlib\\x86_64-pc-windows-msvc\\lib\\librustc_demangle-21f986c0d1d74c3d.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-a7e54f39\\toolchain-home\\toolchains\\1.77.2-x86_64-pc-windows-msvc\\lib\\rustlib\\x86_64-pc-windows-msvc\\lib\\libstd_detect-40edae9c87cd670a.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-a7e54f39\\toolchain-home\\toolchains\\1.77.2-x86_64-pc-windows-msvc\\lib\\rustlib\\x86_64-pc-windows-msvc\\lib\\libhashbrown-84fd9c832d53aa09.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-a7e54f39\\toolchain-home\\toolchains\\1.77.2-x86_64-pc-windows-msvc\\lib\\rustlib\\x86_64-pc-windows-msvc\\lib\\librustc_std_workspace_alloc-ba6a416cb8ef67f3.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-a7e54f39\\toolchain-home\\toolchains\\1.77.2-x86_64-pc-windows-msvc\\lib\\rustlib\\x86_64-pc-windows-msvc\\lib\\libunwind-215eeeeb693f4fe6.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-a7e54f39\\toolchain-home\\toolchains\\1.77.2-x86_64-pc-windows-msvc\\lib\\rustlib\\x86_64-pc-windows-msvc\\lib\\libcfg_if-438d037c41e5eb41.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-a7e54f39\\toolchain-home\\toolchains\\1.77.2-x86_64-pc-windows-msvc\\lib\\rustlib\\x86_64-pc-windows-msvc\\lib\\liblibc-e3e92d014b4dd0f2.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-a7e54f39\\toolchain-home\\toolchains\\1.77.2-x86_64-pc-windows-msvc\\lib\\rustlib\\x86_64-pc-windows-msvc\\lib\\liballoc-eee9535cce1065ff.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-a7e54f39\\toolchain-home\\toolchains\\1.77.2-x86_64-pc-windows-msvc\\lib\\rustlib\\x86_64-pc-windows-msvc\\lib\\librustc_std_workspace_core-957505cde0f9cb84.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-a7e54f39\\toolchain-home\\toolchains\\1.77.2-x86_64-pc-windows-msvc\\lib\\rustlib\\x86_64-pc-windows-msvc\\lib\\libcore-39d6ef42914d1672.rlib" "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-a7e54f39\\toolchain-home\\toolchains\\1.77.2-x86_64-pc-windows-msvc\\lib\\rustlib\\x86_64-pc-windows-msvc\\lib\\libcompiler_builtins-cf557b94021986d6.rlib" "kernel32.lib" "advapi32.lib" "windows.0.52.0.lib" "windows.0.53.0.lib" "kernel32.lib" "advapi32.lib" "bcrypt.lib" "kernel32.lib" "ntdll.lib" "userenv.lib" "ws2_32.lib" "kernel32.lib" "ws2_32.lib" "kernel32.lib" "ntdll.lib" "kernel32.lib" "msvcrt.lib" "/NXCOMPAT" "/LIBPATH:C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-a7e54f39\\toolchain-home\\toolchains\\1.77.2-x86_64-pc-windows-msvc\\lib\\rustlib\\x86_64-pc-windows-msvc\\lib" "/OUT:C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\target\\debug\\deps\\combined_sys_net-c5510176c67b6571.exe" "/OPT:REF,NOICF" "/DEBUG" "/NATVIS:C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-a7e54f39\\toolchain-home\\toolchains\\1.77.2-x86_64-pc-windows-msvc\\lib\\rustlib\\etc\\intrinsic.natvis" "/NATVIS:C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-a7e54f39\\toolchain-home\\toolchains\\1.77.2-x86_64-pc-windows-msvc\\lib\\rustlib\\etc\\liballoc.natvis" "/NATVIS:C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-a7e54f39\\toolchain-home\\toolchains\\1.77.2-x86_64-pc-windows-msvc\\lib\\rustlib\\etc\\libcore.natvis" "/NATVIS:C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-a7e54f39\\toolchain-home\\toolchains\\1.77.2-x86_64-pc-windows-msvc\\lib\\rustlib\\etc\\libstd.natvis" "/LINKREPROFULLPATHRSP:C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-5913c765\\run\\scoped-b23b8a7d5f6d4541be7bb2b443b6a26a\\work\\link-inputs.rsp"
+    Finished dev [unoptimized + debuginfo] target(s) in 1m 45s

@@ -14,7 +14,7 @@ Fork-main includes reviewed Windows X35, POSIX `f32_float`, native Windows1.77.2
 
 ## Next action
 
-Exact linker path and post-run hash are proved in `sdk-link-trace-attempt01`; SDK files remain unbound. Validate installed MSVC `/LINKREPROFULLPATHRSP` support and bounded output/export, then capture exact SDK inputs in one owned native scope. Preserve accepted rows; then target remaining criteria.
+Linker path/hash proved in attempt01; attempt02 did not retain `/LINKREPROFULLPATHRSP` output. Before another Cargo build, run one small supervised native linker control with pre-cleanup response-file readback and execution marker. Then bind exact SDK paths/hashes. Preserve accepted rows.
 
 ## Goal
 
@@ -36,17 +36,17 @@ Fork main contains accepted Windows sys policy/env/fs, net targets, Direct proce
 
 MacOS27.2/Rust1.77.2 `no_index,sync,metadata`: six suites, combined wrong101; corrected process/report2/2+8/8 and exit-code wrong101. Review PASS: `.scratch/all-tickets/release-matrix-20261028/proof.md`.
 
-MacOS27.2 arm64/Rust1.77.2 `testing-environ,sys,net,only_i32,no_float`: 11 targets compiled, combined wrong101, restored 135/0/1ignored, independent combined review PASS. Only named behaviors accepted; `.scratch/all-tickets/release-matrix-20261028/macos-onlyi32-nofloat-proof.md`.
+MacOS27.2/Rust1.77.2 `only_i32,no_float`: 11 targets, wrong101, suite135/0/1, review PASS; named cases only. `.scratch/all-tickets/release-matrix-20261028/macos-onlyi32-nofloat-proof.md`.
 
-Workhorse Linux7.2.11 x86_64/Rust1.77.2 matching integer-only profile: pinned source/lock, compile0, combined wrong101, restored 135/0/2ignored, combined review PASS; owned stage/scope retired. `.scratch/all-tickets/release-matrix-20261028/linux-onlyi32-nofloat-proof.md`.
+Linux7.2.11/Rust1.77.2 `only_i32,no_float`: wrong101, suite135/0/2, review PASS, own scope retired. `.scratch/all-tickets/release-matrix-20261028/linux-onlyi32-nofloat-proof.md`.
 
-MacOS27.2 arm64/Rust1.77.2 combined `metadata,serde`: 11 targets 160/0/1ignored, host wrong101; targeted Dynamic JSON wrong101/restored Serde25/0. Source binding, cleanup, combined review/focused recheck PASS: `.scratch/all-tickets/release-matrix-20261028/macos-metadata-serde-proof.md`.
+MacOS27.2/Rust1.77.2 `metadata,serde`: suite160/0/1, host/JSON wrong101, Serde25/0, review PASS. `.scratch/all-tickets/release-matrix-20261028/macos-metadata-serde-proof.md`.
 
-Workhorse Linux7.2.11 x86_64/Rust1.77.2 combined `metadata,serde`: 12 targets compiled, host/Serde wrong101 each, restored 193/0/3ignored, combined review PASS. `.scratch/all-tickets/release-matrix-20261028/linux-metadata-serde-proof.md`.
+Linux7.2.11/Rust1.77.2 `metadata,serde`: suite193/0/3, host/Serde wrong101, review PASS. `.scratch/all-tickets/release-matrix-20261028/linux-metadata-serde-proof.md`.
 
-POSIX Rust1.77.2 combined `unchecked`: macOS 151/0/1ignored, Linux 160/0/3ignored across 11 targets, four wrong101 controls each. Review corrected a one-shot TCP cap oracle; EOF read plus widened-cap RED101 and restored `net_reads`7/7 passed on both. Combined review PASS: `.scratch/all-tickets/release-matrix-20261028/posix-unchecked-proof.md`.
+POSIX Rust1.77.2 `unchecked`: macOS151/0/1, Linux160/0/3, wrong101 controls and corrected TCP cap oracle, review PASS. `.scratch/all-tickets/release-matrix-20261028/posix-unchecked-proof.md`.
 
-POSIX Rust1.77.2 combined `f32_float`: macOS and Linux three intended wrong101 assertions each; restored 11-target suites 159/0/1ignored and 167/0/3ignored. Mac attempt01 parser stopped after valid RED; same-source attempt02 passed GREEN. Combined review PASS: `.scratch/all-tickets/release-matrix-20261028/posix-f32-float-proof.md`.
+POSIX Rust1.77.2 `f32_float`: wrong101 controls; macOS159/0/1, Linux167/0/3, review PASS. `.scratch/all-tickets/release-matrix-20261028/posix-f32-float-proof.md`.
 
 Attempts36–39 exposed false Job closure; 50–58 covered batch, membership, retry and lifecycle. Attempt59 fixed exact-child fallback after 299 Job refusals; attempt60 verified final-drop/sentinel readbacks. Review READY; OS faults/release open. Details: Windows `attempt59/`, `attempt60/`.
 
@@ -69,6 +69,7 @@ Windows1.77.2 `unchecked`: HEAD26bf source/lock, host/cap wrong101, widened-cap0
 Windows1.77.2 `f32_float`: HEAD eea5 source/lock, host/f32 timeout wrong101, suite126/0/0. Driver0/106s, 223 frames/16 files, journal8, review PASS; owned resources retired, original sdc restored. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/f32-float-attempt01/proof.md`.
 
 Windows1.77.2 SDK-link attempt01: HEAD9ff selected source/lock, native `cargo rustc --print=link-args` exited0; trace names MSVC14.44.35207 `link.exe`, post-run guest hash `A364AF80...`; `/VERBOSE:LIB` yielded no resolved SDK paths. Traced binary differs from host-file wrong101/GREEN0 control binary. Driver0/164.90s, 217 frames/15 checked files, journal8/8, exact guest/host cleanup; combined review PASS only for diagnostic. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt01/proof.md`.
+Windows1.77.2 SDK-link attempt02: installed linker lists `/LINKREPROFULLPATHRSP`; Cargo rustc exited0 and printed absolute option, but retained response file absent. Observer accepted=false; Driver0/148.87s, 218 frames/15 files, journal8, exact guest/host cleanup. Combined review: no SDK acceptance; cause unconfirmed. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt02/proof.md`.
 
 ## Retained resources
 
@@ -76,7 +77,7 @@ Workhorse VM `dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19`: original sdc restored, fore
 
 ## Cause history
 
-Attempt18 false timeout unresolved; attempt26 expired before RED/GREEN; attempts36–39 exposed false Job closure; attempt48 expected RED incorrectly; attempt50 showed batch injection. Review corrected retry in attempts55–56. Attempt57 Driver parser sought wrong log; attempt58 corrected it. Attempt59 fixed shared-deadline fallback; attempt60 final-drop passed. MSRV bootstrap: attempt01 absent F: preflight; attempt02 `findstr` exit77 plus null parser; attempt03 invalid `run-verify` custody root; attempt04 passed with retained toolchain. SDK-link attempt01: successful Rust link suppressed `/VERBOSE:LIB` resolution output; exact SDK remains unknown. Earlier causes/limits in proof folders/history.
+Attempt18 false timeout unresolved; attempt26 expired before RED/GREEN; attempts36–39 exposed false Job closure; attempt48 expected RED incorrectly; attempt50 showed batch injection. Review corrected retry in attempts55–56. Attempt57 Driver parser sought wrong log; attempt58 corrected it. Attempt59 fixed shared-deadline fallback; attempt60 final-drop passed. MSRV bootstrap: attempt01 absent F: preflight; attempt02 `findstr` exit77 plus null parser; attempt03 invalid `run-verify` custody root; attempt04 passed with retained toolchain. SDK-link attempts01–02: no verbose resolution output, then no retained RSP despite printed option; cause unconfirmed, exact SDK unknown. Earlier causes/limits in proof folders/history.
 
 ## Open escalations
 

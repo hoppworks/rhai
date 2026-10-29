@@ -1,0 +1,1 @@
+& 'C:\BuildTools\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\link.exe' /? | Select-String LINKREPROFULLPATHRSP

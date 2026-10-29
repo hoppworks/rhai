@@ -1627,6 +1627,21 @@ capture and hash only the selected SDK files in a new owned native scope.
 Preserve the accepted matrix rows; remaining semantic profiles, fault breadth
 and the full release matrix still require separate evidence.
 
+The installed MSVC linker help did list `/LINKREPROFULLPATHRSP:filename`, but
+the first bounded Cargo diagnostic using it did not retain the requested
+response file. Its trace printed the absolute option and Cargo exited 0;
+the exported runtime snapshot lacked the file, and a later search after
+runtime removal found no retained copy. This does not establish whether the
+file existed during linking. The observer marked the diagnostic unaccepted;
+the 218-frame/15-file original export and eight valid custody states passed,
+and guest/host owned resources were retired. See
+`.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt02/proof.md`.
+Before another full Cargo run, perform a small supervised native linker
+control that independently proves invocation and checks the response file
+before runtime cleanup. Only if that succeeds should the real target reuse
+the method and export the resolved SDK paths and file hashes. The earlier
+feature and product results stay accepted; exact SDK files remain open.
+
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance
 matrix or closure count. Historical implementation notes and estimates follow.
