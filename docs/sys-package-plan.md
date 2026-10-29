@@ -1717,6 +1717,19 @@ after exact guest and host cleanup. See
 This closes only that combined feature-interaction slice. Other release rows,
 native behaviors and the whole A–F/Ticket03 campaign remain open.
 
+The same combined profile now also has a current-source native Workhorse Linux
+Rust/Cargo 1.77.2 result at fork-main `b93645f`: all 448 archive files and the
+exact lock were verified, 11 targets compiled, the combined host-file assertion
+failed on the deliberate wrong expectation (exit 101), and the restored suite
+passed 102 tests with zero failed/ignored. The combined test observes its real
+host file, OS-selected independent TCP peer and typed errors; `sys_process`
+executes only two enabled cases in this profile. The POSIX runner exited 0,
+retired its private runtime, and exact own scope/stage cleanup was read back.
+One combined independent review passed. See
+`.scratch/all-tickets/release-matrix-20261028/linux-noindex-sync-metadata-attempt01/proof.md`.
+This closes the executed Linux feature-interaction slice only; omitted cfg
+cases, other criteria and full release acceptance remain open.
+
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance
 matrix or closure count. Historical implementation notes and estimates follow.

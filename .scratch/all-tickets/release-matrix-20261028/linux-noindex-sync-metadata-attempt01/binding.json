@@ -1,0 +1,24 @@
+{
+  "attempt": "linux-noindex-sync-metadata-attempt01",
+  "checkout_head": "b93645f46a1262a0b4c7b83135ad29ea89e5d3fe",
+  "source_files_matching_head": 448,
+  "archive_sha256": "0005b38a387b419802335e141cb259de86f1ec9424e6e4cf2b8bc3beaf30bdd7",
+  "manifest_sha256": "254d021566408f44b2b645551e2598f7cf9db5fee63c5e34bcc7ea20012ec9ba",
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "features": "testing-environ,sys,net,no_index,sync,metadata",
+  "toolchain": "1.77.2-x86_64-unknown-linux-gnu",
+  "outer_timeout_seconds": 1200,
+  "targets": [
+    "combined_sys_net",
+    "sys_env",
+    "sys_fs",
+    "sys_policy",
+    "net_connect",
+    "net_listen",
+    "net_reads",
+    "net_writes",
+    "net_metadata",
+    "sys_process",
+    "sys_process_report"
+  ]
+}
