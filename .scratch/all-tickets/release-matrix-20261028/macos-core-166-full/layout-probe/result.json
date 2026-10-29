@@ -1,0 +1,16 @@
+[
+  {
+    "toolchain": "1.66.0-aarch64-apple-darwin",
+    "compile_exit": 0,
+    "compile_output": "",
+    "run_exit": 0,
+    "size": "56"
+  },
+  {
+    "toolchain": "stable-aarch64-apple-darwin",
+    "compile_exit": 0,
+    "compile_output": "",
+    "run_exit": 0,
+    "size": "48"
+  }
+]

@@ -6,11 +6,11 @@ Implementation active. A–F, Ticket03 and release remain open.
 
 ## Decisions
 
-Use agent-skills `d6024420` plus local edits and project `AGENTS.md`. Require real-OS proof, readback, assertion sensitivity and combined review. Push/merge only to `https://github.com/hoppworks/rhai.git` main, never upstream; author/committer `hoppworks`, configured email, no coauthors or task branches. Preserve foreign work, VM media, human limits and owned cleanup. No Linear. Capacity-based heavy runs; prefer Terra.
+Use agent-skills `d6024420` plus local edits and project `AGENTS.md`. Require real-OS proof, readback, assertion sensitivity and combined review. Push/merge only to `https://github.com/hoppworks/rhai.git` main, never upstream; author/committer `hoppworks`, configured email, no coauthors or task branches. Preserve foreign work and limits. No Linear. Capacity-based heavy runs; prefer Terra.
 
 ## Current step
 
-Fork-main includes reviewed Windows X35 and Windows1.77.2 profile slices. Sys/Net package-alone and three-OS `net,no_object` pass at recorded scopes; macOS core1.66 passes. Broad default `sys,net` passes macOS/Linux/Windows 157/165/125. POSIX Sys passes 126/134. Native Windows Managed kill/timeout/drop and overflow have reviewed RED/GREEN and cleanup; affected process suite passes 35/35. A–F/Ticket03/release remain open.
+Fork-main includes reviewed Windows X35 and Windows1.77.2 profile slices. Sys/Net package-alone and three-OS `net,no_object` pass at recorded scopes; macOS core1.66 default `--lib` passes, including the reviewed full test after a compiler-dependent LexError size assertion fix; see `release-matrix-20261028/macos-core-166-full/proof.md`. Broad default `sys,net` passes macOS/Linux/Windows 157/165/125. POSIX Sys passes 126/134. Windows Managed kill/timeout/drop/overflow RED/GREEN reviewed; process suite 35/35. A–F/release remain open.
 
 ## Next action
 
@@ -26,23 +26,23 @@ Every P/E/F/X/R and six-ticket criterion in `docs/sys-package-plan.md` has real-
 
 ## Steps
 
-Close Windows Managed faults and argument/IO gaps; finish native three-OS feature/MSRV matrix; integrate verified slices on fork main. Details remain in `docs/sys-package-plan.md`.
+Close Windows Managed faults and argument/IO gaps; finish native three-OS feature/MSRV matrix; integrate verified slices on fork main. See `docs/sys-package-plan.md`.
 
 ## Done steps
 
-Fork main contains accepted Windows sys policy/env/fs, net, Direct process/input/lifecycle, X32/X33 argument/search and bounded Managed cases. Other rows retain scope.
+Fork main contains accepted Windows sys policy/env/fs, net, Direct process/input/lifecycle, X32/X33 argument/search and bounded Managed cases. Other rows open.
 
 ## Accepted evidence
 
-MacOS27.2/Rust1.77.2 `no_index,sync,metadata`: six suites, combined wrong101; corrected process/report2/2+8/8 and exit-code wrong101. Review PASS: `.scratch/all-tickets/release-matrix-20261028/proof.md`.
+macOS/Rust1.77.2 `no_index,sync,metadata`: six suites, combined wrong101; corrected process/report2/2+8/8 and exit-code wrong101. Review PASS: `.scratch/all-tickets/release-matrix-20261028/proof.md`.
 
-MacOS27.2/Rust1.77.2 `only_i32,no_float`: 11 targets, wrong101, suite135/0/1, review PASS; named cases only. `.scratch/all-tickets/release-matrix-20261028/macos-onlyi32-nofloat-proof.md`.
+macOS/Rust1.77.2 `only_i32,no_float`: 11 targets, wrong101, suite135/0/1, review PASS; named cases only. `.scratch/all-tickets/release-matrix-20261028/macos-onlyi32-nofloat-proof.md`.
 
-Linux7.2.11/Rust1.77.2 `only_i32,no_float`: wrong101, suite135/0/2, review PASS, own scope retired. `.scratch/all-tickets/release-matrix-20261028/linux-onlyi32-nofloat-proof.md`.
+Linux/Rust1.77.2 `only_i32,no_float`: wrong101, suite135/0/2, review PASS, own scope retired. `.scratch/all-tickets/release-matrix-20261028/linux-onlyi32-nofloat-proof.md`.
 
-MacOS27.2/Rust1.77.2 `metadata,serde`: suite160/0/1, host/JSON wrong101, Serde25/0, review PASS. `.scratch/all-tickets/release-matrix-20261028/macos-metadata-serde-proof.md`.
+macOS/Rust1.77.2 `metadata,serde`: suite160/0/1, host/JSON wrong101, Serde25/0, review PASS. `.scratch/all-tickets/release-matrix-20261028/macos-metadata-serde-proof.md`.
 
-Linux7.2.11/Rust1.77.2 `metadata,serde`: suite193/0/3, host/Serde wrong101, review PASS. `.scratch/all-tickets/release-matrix-20261028/linux-metadata-serde-proof.md`.
+Linux/Rust1.77.2 `metadata,serde`: suite193/0/3, host/Serde wrong101, review PASS. `.scratch/all-tickets/release-matrix-20261028/linux-metadata-serde-proof.md`.
 
 POSIX Rust1.77.2 `unchecked`: macOS151/0/1, Linux160/0/3, wrong101 controls and corrected TCP cap oracle, review PASS. `.scratch/all-tickets/release-matrix-20261028/posix-unchecked-proof.md`.
 

@@ -1,0 +1,42 @@
+{
+  "source_commit": "8d8bf84febebb182ca65f2307f96676f05858eb2",
+  "source_files": 451,
+  "test_overlay_sha256": "3949a1ea368a1408ad9b410b0573194402146f5fd519f087728359ac62f942e2",
+  "source_manifest_sha256": "810a0f45abe7736e5299a5b6e5edc127a9bdc9f720b60b71a1a480959cd01d54",
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "runner_runtime": "/Users/hoppworks/.local/share/agent-builds/rhai/macos-core-166-full-20261029-48b96e21/agent-build-pjsbse8t",
+  "commands": [
+    {
+      "argv": [
+        "rustc",
+        "--version"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.132,
+      "sha256": "71aef20516158a4ce8c5ea59a94818941d54fe4eb5eb27a238cfc3e438b0f037"
+    },
+    {
+      "argv": [
+        "cargo",
+        "--version"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 0.041,
+      "sha256": "d0f178a8ad9f2715dc7c122403538b769b48c2deeb6a7326e8b16af453586354"
+    },
+    {
+      "argv": [
+        "cargo",
+        "test",
+        "--locked",
+        "--lib",
+        "--target",
+        "aarch64-apple-darwin"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 11.423,
+      "sha256": "32e420afc1d697f3ffcdb1b0b2885c00b9fb47266f5a59d8bb2929f4f9c29d88"
+    }
+  ],
+  "complete": true
+}

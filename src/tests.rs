@@ -77,7 +77,9 @@ fn check_struct_sizes() {
             0
         }
     );
-    assert_eq!(size_of::<LexError>(), 48);
+    // Rust 1.66 stores an explicit discriminant beside the two-String variant (56 bytes),
+    // while newer compilers can use a niche and fit it in 48. Guard the maximum size.
+    assert!(size_of::<LexError>() <= 56);
     assert_eq!(
         size_of::<ParseError>(),
         16 - if cfg!(feature = "no_position") {

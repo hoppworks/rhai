@@ -1,0 +1,89 @@
+ Downloading crates ...
+  Downloaded getrandom v0.2.17
+  Downloaded paste v1.0.15
+  Downloaded crunchy v0.2.4
+  Downloaded cfg-if v1.0.5
+  Downloaded byteorder v1.5.0
+  Downloaded autocfg v1.5.1
+  Downloaded smartstring v1.0.1
+  Downloaded quote v1.0.41
+  Downloaded rmp v0.8.14
+  Downloaded rmp-serde v1.3.0
+  Downloaded unicode-ident v1.0.22
+  Downloaded once_cell v1.21.4
+  Downloaded ahash v0.8.12
+  Downloaded smallvec v1.16.2
+  Downloaded getrandom v0.3.4
+  Downloaded serde_core v1.0.229
+  Downloaded thin-vec v0.2.19
+  Downloaded bitflags v2.13.2
+  Downloaded proc-macro2 v1.0.103
+  Downloaded num-traits v0.2.19
+  Downloaded serde v1.0.229
+  Downloaded memchr v2.8.3
+  Downloaded serde_json v1.0.145
+  Downloaded portable-atomic v1.15.0
+  Downloaded zerocopy v0.8.59
+  Downloaded syn v2.0.106
+  Downloaded libc v0.2.189
+   Compiling libc v0.2.189
+   Compiling autocfg v1.5.1
+   Compiling crunchy v0.2.4
+   Compiling version_check v0.9.5
+   Compiling tiny-keccak v2.0.2
+   Compiling serde_core v1.0.229
+   Compiling proc-macro2 v1.0.103
+   Compiling num-traits v0.2.19
+   Compiling cfg-if v1.0.5
+   Compiling quote v1.0.41
+   Compiling paste v1.0.15
+   Compiling portable-atomic v1.15.0
+   Compiling unicode-ident v1.0.22
+   Compiling getrandom v0.2.17
+   Compiling zerocopy v0.8.59
+   Compiling getrandom v0.3.4
+   Compiling once_cell v1.21.4
+   Compiling serde v1.0.229
+   Compiling const-random-macro v0.1.16
+   Compiling smartstring v1.0.1
+   Compiling ahash v0.8.12
+   Compiling serde_json v1.0.145
+   Compiling byteorder v1.5.0
+   Compiling rmp v0.8.14
+   Compiling syn v2.0.106
+   Compiling const-random v0.1.18
+   Compiling ryu v1.0.20
+   Compiling memchr v2.8.3
+   Compiling rhai v1.26.1 (/Users/hoppworks/.local/share/agent-builds/rhai/macos-core-166-full-20261029-48b96e21/agent-build-pjsbse8t/source)
+   Compiling itoa v1.0.15
+   Compiling static_assertions v1.1.0
+   Compiling rhai_codegen v3.2.0 (/Users/hoppworks/.local/share/agent-builds/rhai/macos-core-166-full-20261029-48b96e21/agent-build-pjsbse8t/source/codegen)
+   Compiling rmp-serde v1.3.0
+   Compiling bitflags v2.13.2
+   Compiling thin-vec v0.2.19
+   Compiling smallvec v1.16.2
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: associated function `get_script_fn_by_hash_mut` is never used
+    --> src/module/mod.rs:1358:19
+     |
+1358 |     pub(crate) fn get_script_fn_by_hash_mut(
+     |                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+     |
+     = note: `#[warn(dead_code)]` on by default
+
+warning: `rhai` (lib test) generated 2 warnings
+    Finished test [unoptimized] target(s) in 11.19s
+     Running unittests src/lib.rs (/Users/hoppworks/.local/share/agent-builds/rhai/macos-core-166-full-20261029-48b96e21/agent-build-pjsbse8t/target/aarch64-apple-darwin/debug/deps/rhai-3436f7f11ee6cea2)
+
+running 1 test
+test tests::check_struct_sizes ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
