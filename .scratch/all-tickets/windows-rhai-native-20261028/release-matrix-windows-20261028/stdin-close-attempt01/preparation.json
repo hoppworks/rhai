@@ -1,0 +1,12 @@
+{
+  "nonce": "4197aac65a57420ba09fa6855525c353",
+  "base_head": "421c4159de0ae47e9bfe05fc20a391b1f4da640b",
+  "test_overlay": "tests/sys_process_windows.rs",
+  "overlay_sha256": "96ce7de544d63c535c8f0a8e6046d69c1ec6cfc15550c853f888a3b2f914d053",
+  "source_file_count": 448,
+  "other_files_match_current_checkout": true,
+  "archive_sha256": "5bebb0f971098e8419f36836e4811572c4d6c61a1ea55a4986d8173e07dfbf63",
+  "manifest_sha256": "1d9670aa08353cd60257b712f7def8fc57b4ec08916d21e69b2a28e405b70e4a",
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "native_run_started": false
+}

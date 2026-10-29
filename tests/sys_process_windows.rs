@@ -30,6 +30,8 @@ const SPAWN_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_SPAWN_WRONG_EXPECTATION"
 const CHILD_SNAPSHOT_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_CHILD_SNAPSHOT_WRONG_EXPECTATION";
 const SPAWN_KILL_RECORD_ENV: &str = "RHAI_WINDOWS_SPAWN_KILL_RECORD";
 const SPAWN_KILL_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_SPAWN_KILL_WRONG_EXPECTATION";
+const STDIN_CLOSE_RECORD_ENV: &str = "RHAI_WINDOWS_STDIN_CLOSE_RECORD";
+const STDIN_CLOSE_WRONG_ENV: &str = "RHAI_WINDOWS_STDIN_CLOSE_WRONG_EXPECTATION";
 const CHILD_DROP_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_CHILD_DROP_WRONG_EXPECTATION";
 const CHILD_DROP_RECORD_ENV: &str = "RHAI_WINDOWS_CHILD_DROP_RECORD";
 const MANAGED_ROOT_ENV: &str = "RHAI_WINDOWS_MANAGED_ROOT";
@@ -215,6 +217,38 @@ fn windows_spawn_blocked_input_fixture() {
     std::fs::rename(&temporary, path).unwrap();
     while Instant::now() < deadline { thread::sleep(Duration::from_millis(20)); }
     panic!("parent did not terminate the child before its safety deadline");
+}
+
+/// A gated child closes its real stdin only after the parent observes a full pipe.
+#[test]
+fn windows_spawn_close_input_fixture() {
+    let Ok(record) = std::env::var(STDIN_CLOSE_RECORD_ENV) else { return; };
+    let mut first = [0u8; 1];
+    std::io::Read::read_exact(&mut std::io::stdin(), &mut first).unwrap();
+    assert_eq!(first, [0x5a]);
+    let input = unsafe { GetStdHandle((-10i32) as u32) };
+    assert!(!input.is_null());
+    let deadline = Instant::now() + Duration::from_secs(20);
+    let available = loop {
+        let mut available = 0u32;
+        let ok = unsafe { PeekNamedPipe(input, std::ptr::null_mut(), 0, std::ptr::null_mut(), &mut available, std::ptr::null_mut()) };
+        assert_ne!(ok, 0, "observe child stdin pipe: {}", std::io::Error::last_os_error());
+        if available >= 8_191 { break available; }
+        assert!(Instant::now() < deadline, "stdin pipe never reached the readiness condition");
+        thread::yield_now();
+    };
+    let path = std::path::Path::new(&record);
+    let temporary = path.with_extension("tmp");
+    std::fs::write(&temporary, format!("pid={} first=5a available={available}\n", process::id())).unwrap();
+    std::fs::rename(&temporary, path).unwrap();
+    while !path.with_extension("release").exists() {
+        assert!(Instant::now() < deadline, "parent did not release the observed child");
+        thread::sleep(Duration::from_millis(10));
+    }
+    std::fs::write(path.with_extension("intent"), b"close stdin\n").unwrap();
+    assert_ne!(unsafe { CloseHandle(input) }, 0, "close real child stdin: {}", std::io::Error::last_os_error());
+    while Instant::now() < deadline { thread::sleep(Duration::from_millis(20)); }
+    panic!("parent did not terminate the child after stdin closed");
 }
 
 /// A gated child acknowledges challenges after the parent drops each public handle.
@@ -941,6 +975,92 @@ fn windows_spawn_kill_stops_child_with_unread_buffered_input() {
     if std::env::var_os(SPAWN_KILL_WRONG_EXPECTATION_ENV).is_some() {
         assert_eq!(exit_code, 0, "deliberately wrong killed child exit expectation");
     }
+}
+
+/// Closing a live child's input with bytes outstanding retains the typed OS error.
+#[test]
+fn windows_spawn_retains_early_stdin_close_error() {
+    let records = TempDir::new();
+    let record = records.path().join("spawn-close-child.txt");
+    let executable = std::env::current_exe().unwrap().to_string_lossy().into_owned();
+    let mut engine = engine(SysConfig::default().programs(ProgramPolicy::Any));
+    #[cfg(not(feature = "unchecked"))]
+    engine.set_max_array_size(2_097_152);
+    let mut scope = Scope::new();
+    scope.push("program", executable.clone());
+    scope.push("record", record.to_string_lossy().into_owned());
+    scope.push("input", vec![0x5au8; 1_048_576]);
+    let child = engine.eval_with_scope::<Dynamic>(&mut scope, r#"
+        spawn(program, ["--exact", "windows_spawn_close_input_fixture", "--nocapture", "--quiet"],
+          #{ env_clear: true, env: #{ RHAI_WINDOWS_STDIN_CLOSE_RECORD: record }, stdin: input, max_output: 1024 })
+    "#).expect("spawn the gated stdin fixture");
+    scope.push_dynamic("child", child.clone());
+    scope.push_dynamic("sibling", child);
+    let deadline = Instant::now() + Duration::from_secs(10);
+    let text = loop {
+        match std::fs::read_to_string(&record) {
+            Ok(text) => break text,
+            Err(error) if error.kind() == std::io::ErrorKind::NotFound && Instant::now() < deadline => thread::sleep(Duration::from_millis(10)),
+            Err(error) => panic!("stdin-close child readiness unavailable: {error}"),
+        }
+    };
+    let fields: Vec<_> = text.split_whitespace().collect();
+    assert_eq!(fields.len(), 3, "child readiness: {text:?}");
+    let pid = fields[0].strip_prefix("pid=").unwrap().parse::<u32>().unwrap();
+    assert_eq!(fields[1], "first=5a");
+    let available = fields[2].strip_prefix("available=").unwrap().parse::<u32>().unwrap();
+    assert!(available >= 8_191);
+    let raw = unsafe { OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION | PROCESS_TERMINATE | SYNCHRONIZE, 0, pid) };
+    assert!(!raw.is_null(), "open exact stdin-close child {pid}: {}", std::io::Error::last_os_error());
+    let mut guard = TimeoutChildGuard { handle: OwnedProcessHandle(raw), pid, exit_observed: false };
+    assert_eq!(unsafe { WaitForSingleObject(guard.handle.0, 0) }, WAIT_TIMEOUT);
+    assert!(engine.eval_with_scope::<Dynamic>(&mut scope, "child.try_wait()").unwrap().is_unit());
+    std::fs::write(record.with_extension("release"), b"observed live child and buffered input\n").unwrap();
+    let result_deadline = Instant::now() + Duration::from_secs(5);
+    let first = loop {
+        let result = engine.eval_with_scope::<Dynamic>(&mut scope, "child.try_wait()");
+        if !result.as_ref().is_ok_and(Dynamic::is_unit) || Instant::now() >= result_deadline {
+            break result;
+        }
+        thread::sleep(Duration::from_millis(10));
+    };
+    let error = first.as_ref().err().and_then(|error| match error.as_ref() {
+        EvalAltResult::ErrorRuntime(value, _) => value.clone().try_cast::<SysError>(),
+        _ => None,
+    });
+    let retained = matches!(error.as_ref(), Some(SysError::Process {
+        cause: ProcessCause::Io { op: "write child stdin", kind: std::io::ErrorKind::BrokenPipe, .. }, ..
+    }));
+    if !retained { let _ = engine.run_with_scope(&mut scope, "sibling.kill();"); }
+    assert_eq!(unsafe { WaitForSingleObject(guard.handle.0, 10_000) }, WAIT_OBJECT_0, "exact stdin-close child did not exit");
+    let mut exit_code = u32::MAX;
+    assert_ne!(unsafe { GetExitCodeProcess(guard.handle.0, &mut exit_code) }, 0);
+    guard.exit_observed = true;
+    let intent = std::fs::read_to_string(record.with_extension("intent")).ok();
+    eprintln!("windows_stdin_close_readback pid={pid} available={available} intent={intent:?} retained={retained} exit={exit_code} exact_handle_signaled=true first={first:?}");
+    if std::env::var_os(STDIN_CLOSE_WRONG_ENV).is_some() {
+        assert!(!retained, "deliberately wrong stdin-close error expectation");
+    }
+    assert_eq!(intent.as_deref(), Some("close stdin\n"));
+    let error = error.expect("bounded wait must return a typed stdin error");
+    match error {
+        SysError::Process { cause: ProcessCause::Io { op, target, kind, message }, report } => {
+            assert_eq!(op, "write child stdin");
+            assert_eq!(target, executable);
+            assert_eq!(kind, std::io::ErrorKind::BrokenPipe);
+            assert!(!message.is_empty());
+            assert!(!report.timed_out());
+            assert_eq!(report.exit_code().map(|code| code as u32), Some(exit_code));
+            assert!(report.cleanup_diagnostics().is_empty(), "cleanup diagnostics: {:?}", report.cleanup_diagnostics());
+        }
+        other => panic!("expected retained stdin BrokenPipe, got {other:?}"),
+    }
+    let repeated = engine.eval_with_scope::<Dynamic>(&mut scope, "sibling.try_wait()").expect_err("cached stdin error must remain visible");
+    let repeated = match *repeated {
+        EvalAltResult::ErrorRuntime(value, _) => value.try_cast::<SysError>(),
+        _ => None,
+    };
+    assert!(matches!(repeated, Some(SysError::Process { cause: ProcessCause::Io { op: "write child stdin", kind: std::io::ErrorKind::BrokenPipe, .. }, .. })));
 }
 
 /// Nonfinal clones preserve the child; the final drop follows the host policy.

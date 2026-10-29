@@ -1893,6 +1893,19 @@ This closes only the named native Windows Managed behavior and controls;
 other Windows faults, argument/IO cases, feature combinations and the full
 A–F/Ticket03/release campaign remain open.
 
+Native Windows 11 / Rust-Cargo 1.77.2 also accepts one DirectChild
+early-stdin-close case at base `421c4159` plus the new test overlay. A real
+child observed 12,288 buffered bytes, then closed its stdin after the host
+opened its exact live process handle. Public `spawn`/`try_wait` retained the
+typed `write child stdin` BrokenPipe, a matching child exit and a cached error
+kind. The intended wrong-expectation control exited 101 and restored GREEN
+passed 1/1 on the same executable. The 206-frame/16-original export, eight
+journal records, exact guest/host cleanup and combined independent review
+PASS are recorded in
+`.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/stdin-close-attempt01/proof.md`.
+This is not a kernel-pending-write proof or closure of other feature and
+process fault cases, Ticket03 or release acceptance.
+
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance
 matrix or closure count. Historical implementation notes and estimates follow.

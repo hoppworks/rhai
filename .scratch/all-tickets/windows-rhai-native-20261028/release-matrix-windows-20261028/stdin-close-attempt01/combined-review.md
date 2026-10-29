@@ -1,0 +1,3 @@
+# Independent combined Standards and Spec review
+
+**PASS — Standards and Spec** for the named native Windows DirectChild early-stdin-close case. The reviewer verified the test overlay and lock binding, original intended RED and restored GREEN on the same executable, the real pipe/child readback, Driver and eight-record journal, and exact guest/host cleanup. No actionable finding. The review was read-only; no test or VM action was repeated. The proof limits its claims about cached error fields and an unobserved kernel-pending write. Other features, process faults and release acceptance remain open.
