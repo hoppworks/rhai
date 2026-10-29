@@ -6,7 +6,7 @@ Implementation active by owner instruction. A–F, Ticket03 and release remain o
 
 ## Decisions
 
-Use current central agent-skills `d6024420` plus applicable local edits and project `AGENTS.md`. Strict public Rhai→Engine→host→OS proof needs independent readback and assertion sensitivity. One combined independent review per coherent package with focused recheck of corrections. Push/merge only to `https://github.com/hoppworks/rhai.git` main, never upstream; author/committer exactly `hoppworks`, configured email, no coauthors/signatures or remote task branches. Preserve foreign work, original VM media, human limits and owned scoped cleanup. No Linear. Choose heavy runs from live capacity. Existing authorization persists; old pending labels do not revoke it. Prefer GPT-6.1 Terra for suitable new agent tasks; Luna rarely.
+Use central agent-skills `d6024420` plus local edits and project `AGENTS.md`. Require public Rhai→Engine→host→OS proof, independent readback, assertion sensitivity and one combined review per package. Push/merge only to `https://github.com/hoppworks/rhai.git` main, never upstream; author/committer `hoppworks`, configured email, no coauthors/signatures or task branches. Preserve foreign work, original VM media, human limits and owned cleanup. No Linear. Choose heavy runs from live capacity; prior authorization persists. Prefer Terra; Luna rarely.
 
 ## Current step
 
@@ -14,7 +14,7 @@ Fork-main includes reviewed Windows X35, POSIX `f32_float`, native Windows1.77.2
 
 ## Next action
 
-Bind exact Windows linker/SDK files for the release matrix using the current guest/toolchain; preserve accepted rows. Then target remaining criteria.
+Exact linker path and post-run hash are proved in `sdk-link-trace-attempt01`; SDK files remain unbound. Validate installed MSVC `/LINKREPROFULLPATHRSP` support and bounded output/export, then capture exact SDK inputs in one owned native scope. Preserve accepted rows; then target remaining criteria.
 
 ## Goal
 
@@ -34,7 +34,7 @@ Fork main contains accepted Windows sys policy/env/fs, net targets, Direct proce
 
 ## Accepted evidence
 
-MacOS27.2 arm64/Rust1.77.2 `no_index,sync,metadata`: six suites, combined wrong101; corrected process/report2/2+8/8 and exit-code wrong101. Review PASS: `.scratch/all-tickets/release-matrix-20261028/proof.md`.
+MacOS27.2/Rust1.77.2 `no_index,sync,metadata`: six suites, combined wrong101; corrected process/report2/2+8/8 and exit-code wrong101. Review PASS: `.scratch/all-tickets/release-matrix-20261028/proof.md`.
 
 MacOS27.2 arm64/Rust1.77.2 `testing-environ,sys,net,only_i32,no_float`: 11 targets compiled, combined wrong101, restored 135/0/1ignored, independent combined review PASS. Only named behaviors accepted; `.scratch/all-tickets/release-matrix-20261028/macos-onlyi32-nofloat-proof.md`.
 
@@ -60,13 +60,15 @@ Windows MSRV bootstrap attempt04: native Driver0, exact Rust/Cargo1.77.2, 36 ord
 
 Windows1.77.2 combined `testing-environ,sys,net`: same committed source/lock, native compile, host-file wrong101/GREEN0, independent TCP/file readback, Driver0, 203 frames/15 hash-checked files, eight valid journal records and combined review PASS. Own scope/ISO/stage retired; SDK and other rows open. `.scratch/all-tickets/windows-rhai-native-20261028/release-msrv-20261028/proof.md`.
 
-Windows1.77.2 `only_i32,no_float`: HEAD701 plus Windows test overlay, host-file wrong101, restored 12-target suite124/0/0ignored including 31 native process tests; two targets ran zero. Driver0/156.02s, rotated COM1 old/new segments reassembled to219 frames/15 hash-checked files, eight valid journal records. Review PASS; own scope/ISO/stage retired. Windows Kit Lib10.0.26100.0 inventoried; exact linker unknown. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/onlyi32-nofloat-attempt01/proof.md`.
+Windows1.77.2 `only_i32,no_float`: HEAD701 plus test overlay, host-file wrong101, suite124/0/0, process31; two targets zero. Driver0/156s, 219 frames/15 files, journal8, review PASS; owned resources retired. Kit Lib10.0.26100.0 inventory. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/onlyi32-nofloat-attempt01/proof.md`.
 
-Windows1.77.2 `metadata,serde`: current HEADb98 source/lock, host-file and JSON wrong101, restored 13-target suite153/0/0ignored, Windows process32. Driver0/116.35s, 225 COM1 frames/16 hash-checked files, eight valid journal states. Combined review PASS after proof-link correction; guest/host scopes and ISO retired, original sdc restored. Windows11 Pro10.0.26300. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/metadata-serde-attempt01/proof.md`.
+Windows1.77.2 `metadata,serde`: HEADb98 source/lock, host/JSON wrong101, suite153/0/0, process32. Driver0/116s, 225 frames/16 files, journal8, review PASS; owned resources retired, original sdc restored. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/metadata-serde-attempt01/proof.md`.
 
-Windows1.77.2 `unchecked`: same selected source/lock at HEAD26bf, host-file/cap wrong101, widened-cap positive0, restored 12-target suite121/0/0ignored. Driver0/146.48s, 255 COM1 frames/17 hash-checked files, eight valid journal states. Combined review PASS after exact guest-retirement recheck; own guest/host scopes and ISO retired, original sdc restored. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/unchecked-attempt01/proof.md`.
+Windows1.77.2 `unchecked`: HEAD26bf source/lock, host/cap wrong101, widened-cap0, suite121/0/0. Driver0/146s, 255 frames/17 files, journal8, review PASS; owned resources retired, original sdc restored. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/unchecked-attempt01/proof.md`.
 
-Windows1.77.2 `f32_float`: HEAD eea5 selected source/lock, host-file/f32 timeout wrong101, restored 12-target suite126/0/0ignored. Driver0/106.33s, 223 COM1 frames/16 hash-checked files, eight valid journal states. Combined review PASS; own guest/host scopes and ISO retired, original sdc restored. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/f32-float-attempt01/proof.md`.
+Windows1.77.2 `f32_float`: HEAD eea5 source/lock, host/f32 timeout wrong101, suite126/0/0. Driver0/106s, 223 frames/16 files, journal8, review PASS; owned resources retired, original sdc restored. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/f32-float-attempt01/proof.md`.
+
+Windows1.77.2 SDK-link attempt01: HEAD9ff selected source/lock, native `cargo rustc --print=link-args` exited0; trace names MSVC14.44.35207 `link.exe`, post-run guest hash `A364AF80...`; `/VERBOSE:LIB` yielded no resolved SDK paths. Traced binary differs from host-file wrong101/GREEN0 control binary. Driver0/164.90s, 217 frames/15 checked files, journal8/8, exact guest/host cleanup; combined review PASS only for diagnostic. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt01/proof.md`.
 
 ## Retained resources
 
@@ -74,7 +76,7 @@ Workhorse VM `dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19`: original sdc restored, fore
 
 ## Cause history
 
-Attempt18 false timeout unresolved; attempt26 expired before RED/GREEN; attempts36–39 exposed false Job closure; attempt48 expected RED incorrectly; attempt50 showed batch injection. Review corrected retry in attempts55–56. Attempt57 Driver parser sought wrong log; attempt58 corrected it. Attempt59 fixed shared-deadline fallback; attempt60 final-drop passed. MSRV bootstrap: attempt01 absent F: preflight; attempt02 `findstr` exit77 plus null parser; attempt03 invalid `run-verify` custody root; attempt04 passed with retained toolchain. Earlier causes/limits in proof folders/history.
+Attempt18 false timeout unresolved; attempt26 expired before RED/GREEN; attempts36–39 exposed false Job closure; attempt48 expected RED incorrectly; attempt50 showed batch injection. Review corrected retry in attempts55–56. Attempt57 Driver parser sought wrong log; attempt58 corrected it. Attempt59 fixed shared-deadline fallback; attempt60 final-drop passed. MSRV bootstrap: attempt01 absent F: preflight; attempt02 `findstr` exit77 plus null parser; attempt03 invalid `run-verify` custody root; attempt04 passed with retained toolchain. SDK-link attempt01: successful Rust link suppressed `/VERBOSE:LIB` resolution output; exact SDK remains unknown. Earlier causes/limits in proof folders/history.
 
 ## Open escalations
 

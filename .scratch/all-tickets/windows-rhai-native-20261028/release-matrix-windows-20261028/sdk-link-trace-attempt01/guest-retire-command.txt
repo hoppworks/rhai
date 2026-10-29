@@ -1,0 +1,1 @@
+$p='C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-7e51e9f2';if(@(Get-ChildItem -LiteralPath $p -Recurse -Force -Attributes ReparsePoint).Count -ne 0){throw 'REPARSE'};Remove-Item -LiteralPath $p -Recurse -Force;Test-Path $p

@@ -1610,9 +1610,22 @@ each ran zero. The 16-file original export, eight CRC-valid custody states,
 exact guest/host cleanup and one combined independent review are recorded in
 `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/f32-float-attempt01/proof.md`.
 Only the executed f32 cases are accepted; other bounds remain open.
-The guest inventory found Windows Kit Lib `10.0.26100.0`, but the exact linker
-and SDK files used by Rust remain unbound. Remaining semantic profiles, fault
-breadth and the full release matrix still require separate evidence.
+The guest inventory found Windows Kit Lib `10.0.26100.0`. A bounded native
+Rust/Cargo1.77.2 diagnostic at fork-main `9ff5dea42` subsequently recorded
+the exact MSVC linker invocation for one `combined_sys_net` test build:
+`C:\BuildTools\VC\Tools\MSVC\14.44.35207\bin\HostX64\x64\link.exe`.
+A post-run guest readback hashed the file at that path. Its `/VERBOSE:LIB`
+argument yielded no captured library-resolution output, so the exact SDK
+libraries are **still unbound**. The traced binary differs from the test
+binary used for the intended host-file RED101/restored GREEN0 control; the
+two invocations are not conflated. Original export, custody, guest/host
+cleanup and a combined independent review passed for this narrow diagnostic.
+See `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt01/proof.md`.
+For the remaining SDK binding, first validate installed-linker support for a
+bounded absolute-input-path record such as `/LINKREPROFULLPATHRSP`, then
+capture and hash only the selected SDK files in a new owned native scope.
+Preserve the accepted matrix rows; remaining semantic profiles, fault breadth
+and the full release matrix still require separate evidence.
 
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance

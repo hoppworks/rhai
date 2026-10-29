@@ -1,0 +1,19 @@
+{
+  "journal": "original-export/run/.scoped-run-e7d7e8ebbe514e86b8818316e581078a.journal",
+  "sha256": "82822edcac47a5217d19f8e4e0b4466ab5d87ff5ad5b5f2f35d21905a2011a2c",
+  "bytes": 2354,
+  "records": 8,
+  "states": [
+    "INTENT",
+    "IDENTITY",
+    "STAGED",
+    "LIFECYCLE",
+    "EVIDENCE",
+    "OUTCOME",
+    "REMOVE_INTENT",
+    "REMOVED"
+  ],
+  "crc32_and_length_valid": true,
+  "terminal_removed": true,
+  "payload_exit": "00000000"
+}

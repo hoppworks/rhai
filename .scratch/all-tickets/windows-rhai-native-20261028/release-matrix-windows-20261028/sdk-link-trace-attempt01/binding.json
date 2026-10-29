@@ -1,0 +1,57 @@
+{
+  "attempt": "sdk-link-trace-attempt01",
+  "source_commit": "7019821fc9d7814d0632fea06de50933aa9e35ee",
+  "integrated_head_at_prepare": "9ff5dea4208fcf15370a8141bb8ce7bf80236583",
+  "source_paths_unchanged_from_commit": false,
+  "nonce": "7e51e9f298df4665810426dcaaa288d9",
+  "vm_uuid": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19",
+  "guest_scope": "n-7e51e9f2",
+  "retained_toolchain_scope": "n-a7e54f39",
+  "retained_toolchain_expiry_utc": "2026-11-01T00:00:00Z",
+  "driver_deadline_seconds": 180,
+  "observer_deadline_seconds": 185,
+  "export_deadline_seconds": 180,
+  "planned_features": "testing-environ,sys,net",
+  "media_files": {
+    "source-manifest.json": {
+      "sha256": "254d021566408f44b2b645551e2598f7cf9db5fee63c5e34bcc7ea20012ec9ba",
+      "bytes": 67878
+    },
+    "ClearOwnedWorkReadOnly.ps1": {
+      "sha256": "234d5794fae97a2f2d009305cd7718fc225de4c31d47ecab9da3ce8cab18c36a",
+      "bytes": 2906
+    },
+    "Start.ps1": {
+      "sha256": "0d2a27dd07ef6670231db8573043261a833118a1ebc188f1cc720c51f8db7191",
+      "bytes": 10686
+    },
+    "Cargo.lock": {
+      "sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+      "bytes": 31602
+    },
+    "rhai-native-7e51e9f298df4665810426dcaaa288d9.bundle": {
+      "sha256": "4bc152fd89c768c5e0769138f104c4016842fca58ef1fd4dad3b7766b5ad26fc",
+      "bytes": 45
+    },
+    "RunRhaiContract.cmd": {
+      "sha256": "a02f1203f158583962b2cd312e29a8526719ddbd9b5eede1509c3e3e3775b317",
+      "bytes": 2278
+    },
+    "rhai-source.zip": {
+      "sha256": "0005b38a387b419802335e141cb259de86f1ec9424e6e4cf2b8bc3beaf30bdd7",
+      "bytes": 1157342
+    },
+    "RunRhaiContractControl.ps1": {
+      "sha256": "02a25d717f90350ae4d3b406fe1fe5a9ba9d2831465f3e75fe9a832d59ea8f55",
+      "bytes": 16185
+    }
+  },
+  "planned_target_count": 1,
+  "source_overlay": {
+    "path": "tests/sys_process_windows.rs",
+    "sha256": "b8340cf4c4a401f619542845bfc3d6ded296480c372cbbabcc12382175d54953"
+  },
+  "source_tree_matches_integrated_head": true,
+  "console_helper_sha256": "cee8cf1139b8f817e2b49e99013c7ce7f93a5b4319875fa7cb4f4c31a8367929",
+  "iso_sha256": "239325edf5de193323faf43ec2d140c82a60395fcc72b51a8eb630a7fcfcf8b7"
+}
