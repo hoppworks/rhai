@@ -1,0 +1,9 @@
+commit=202d01a8c260ed7547ba505ee701851d85282641
+Cargo.toml_sha256=62fc31d2eaf0d74aa9f631032606ded135ab910bbaf0ac09493427b975d47c81
+Cargo.lock_sha256=12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802
+test_source_original_sha256=3758585e5038f70a01f22bb6cafaa12794375bc6ee42de64930991ccbc49cb08
+uname=Linux lllm 7.2.0-ogc6.1.fc44.x86_64 #1 SMP PREEMPT_DYNAMIC Mon Aug 24 03:42:13 UTC 2026 x86_64 GNU/Linux
+cargo=cargo 1.77.2 (e52e36006 2024-03-26)
+rustc=rustc 1.77.2 (25ef9e3d8 2024-04-09)
+features=testing-environ,sys,unchecked
+test=repeated_public_run_calls_keep_fd_count_stable

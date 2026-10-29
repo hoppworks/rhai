@@ -1,0 +1,7 @@
+Existing-run evidence evaluation: PASS
+RED: mutant expected FD count +1; Cargo exit 101; intended assertion failed; observed left=6 right=7.
+GREEN: restored Cargo exit 0; exact isolated test passed; 200 public Engine run calls; tasks 3->3, FDs 4->4, cleanup workers 1->1.
+Binding: fork-main commit 202d01a8c260ed7547ba505ee701851d85282641; original tests/sys_process.rs SHA-256 3758585e5038f70a01f22bb6cafaa12794375bc6ee42de64930991ccbc49cb08; Cargo.toml and pinned Cargo.lock hashes match source-binding.txt; Rust/Cargo 1.77.2; Linux x86_64; features testing-environ,sys,unchecked.
+Outer run_scoped status 1 is not a test failure: run-x30.sh expected the outer harness name and ok on one line, while --nocapture interleaves the successful inner-test output. Actual GREEN log includes the exact isolated test ok line and one-passed harness summary. No rebuild is needed.
+Owned scope and private runtime were retired after verifying the scope was empty.
+Correction history: evaluation attempt01 reused one match variable and printed GREEN metric values 3/4 as RED values; raw red.log shows the actual assertion mismatch 6/7. The corrected report uses separate RED/GREEN matches; no test rerun.

@@ -1,0 +1,5 @@
+X30 unchecked attempt history
+
+The scoped cargo test invocations themselves returned the expected statuses: mutant RED 101 and restored GREEN 0. The run-scoped wrapper returned 1 only after both tests because run-x30.sh required the outer harness name and “ok” on one line. With --nocapture, the outer test emits the inner test output before its final outer “ok”, so that exact line was absent. The saved GREEN log contains the exact inner isolated-test “ok”, the one-passed outer harness summary and the 200-call census marker. The wrapper had already removed its private runtime; the owned session scope was empty and was retired exactly.
+
+The first evidence evaluator reused a match variable and printed GREEN task/FD values (3/4) in the RED summary. The raw RED log shows the intended assertion mismatch left=6, right=7. The corrected evaluator uses separate RED and GREEN matches and records 6/7 and the GREEN FD readback 4/4. No cargo test or build was repeated to correct either reporting issue.

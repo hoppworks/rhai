@@ -1,0 +1,4 @@
+RED command: cargo test --locked --features testing-environ,sys,unchecked --test sys_process repeated_public_run_calls_keep_fd_count_stable -- --exact --nocapture --test-threads=1
+red_exit=101
+GREEN command: cargo test --locked --features testing-environ,sys,unchecked --test sys_process repeated_public_run_calls_keep_fd_count_stable -- --exact --nocapture --test-threads=1
+green_exit=0
