@@ -1,0 +1,49 @@
+{
+  "attempt": "noindex-sync-metadata-attempt01",
+  "nonce": "5f7c712a24164bea996d8062417bd7a5",
+  "source_commit": "7019821fc9d7814d0632fea06de50933aa9e35ee",
+  "source_manifest_sha256": "254d021566408f44b2b645551e2598f7cf9db5fee63c5e34bcc7ea20012ec9ba",
+  "archive_sha256": "0005b38a387b419802335e141cb259de86f1ec9424e6e4cf2b8bc3beaf30bdd7",
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "vm_uuid": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19",
+  "rust": "1.77.2-x86_64-pc-windows-msvc",
+  "features": "testing-environ,sys,net,no_index,sync,metadata",
+  "target": "combined_sys_net",
+  "test": "sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors",
+  "driver_deadline_seconds": 180,
+  "observer_deadline_seconds": 185,
+  "media_files": {
+    "Cargo.lock": {
+      "bytes": 31602,
+      "sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802"
+    },
+    "ClearOwnedWorkReadOnly.ps1": {
+      "bytes": 2906,
+      "sha256": "1836358c21f96f985bb1b284c0535b42f5c41cba67878317e384db9ad25f0a16"
+    },
+    "RunRhaiContract.cmd": {
+      "bytes": 2454,
+      "sha256": "40bbe6cd078b3f94e4bdbbed368cef44721ff38fd50ffb8bd084a68b73fb658a"
+    },
+    "RunRhaiContractControl.ps1": {
+      "bytes": 15789,
+      "sha256": "1139c85a0a5762736c15862c133468f7ec960a35426054b19749828bc82e71d3"
+    },
+    "Start.ps1": {
+      "bytes": 10704,
+      "sha256": "82227025c9a05922d8498a8f973f2ff0623ff19d34b4e0d5c9706c7a61ddfc94"
+    },
+    "rhai-native-5f7c712a24164bea996d8062417bd7a5.bundle": {
+      "bytes": 45,
+      "sha256": "6136f37b097d4e631580a0377268ef30be591f6fc40838d6626f987fd9ea74f6"
+    },
+    "rhai-source.zip": {
+      "bytes": 1157342,
+      "sha256": "0005b38a387b419802335e141cb259de86f1ec9424e6e4cf2b8bc3beaf30bdd7"
+    },
+    "source-manifest.json": {
+      "bytes": 67878,
+      "sha256": "254d021566408f44b2b645551e2598f7cf9db5fee63c5e34bcc7ea20012ec9ba"
+    }
+  }
+}

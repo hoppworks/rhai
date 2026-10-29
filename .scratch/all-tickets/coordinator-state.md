@@ -10,11 +10,11 @@ Use central agent-skills `d6024420` plus local edits and project `AGENTS.md`. Re
 
 ## Current step
 
-Fork-main includes reviewed Windows X35, POSIX `f32_float` and native Windows1.77.2 sys/net, `only_i32,no_float`, `metadata,serde`, `unchecked`, `f32_float` profiles. SDK selection is diagnosed; A–F/Ticket03/release remain open.
+Fork-main includes reviewed Windows X35, POSIX `f32_float` and native Windows1.77.2 sys/net, `only_i32,no_float`, `metadata,serde`, `unchecked`, `f32_float` profiles. A native Windows `no_index,sync,metadata` combined test is now accepted as a source-bound profile slice; A–F/Ticket03/release remain open.
 
 ## Next action
 
-Attempt06 recovered the successful native Cargo link RSP and post-run hashes for six Kit10.0.26100.0 UM libraries plus MSVC `msvcrt.lib`/`link.exe`; combined review PASS only for SDK selection. Driver2/journal4 leaves Runner finalization incomplete; no product test ran. Next: inspect this exact post-Cargo failure from original journal/source and work inventory before any further full-target build. Guest/host cleanup complete; preserve accepted rows.
+Publish the reviewed native Windows `no_index,sync,metadata` combined proof to fork main with lowercase `hoppworks` attribution. Then inventory the remaining release rows and select the smallest missing real Engine/OS criterion, reusing accepted proofs. Attempt06's Driver2/journal4 remains an unproven Runner-finalization cause, not a reason to repeat completed SDK/product checks.
 
 ## Goal
 
@@ -67,6 +67,8 @@ Windows1.77.2 `metadata,serde`: HEADb98 source/lock, host/JSON wrong101, suite15
 Windows1.77.2 `unchecked`: HEAD26bf source/lock, host/cap wrong101, widened-cap0, suite121/0/0. Driver0/146s, 255 frames/17 files, journal8, review PASS; owned resources retired, original sdc restored. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/unchecked-attempt01/proof.md`.
 
 Windows1.77.2 `f32_float`: HEAD eea5 source/lock, host/f32 timeout wrong101, suite126/0/0. Driver0/106s, 223 frames/16 files, journal8, review PASS; owned resources retired, original sdc restored. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/f32-float-attempt01/proof.md`.
+
+Windows1.77.2 `no_index,sync,metadata` combined Engine/sys/net: current 448-file source, lock, wrong101/GREEN0, real host file/TCP peer, Driver0/62s, 208 frames/16 files, journal8, independent review PASS; own guest/host scopes retired. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/noindex-sync-metadata-attempt01/proof.md`.
 
 Windows SDK-link attempts01–04: linker path only, unretained Cargo RSP, guard85, then `%~dp0` mispath61. Original results, costs, cleanup and reviews: `docs/sys-package-plan.md` and original attempt01–04 proof folders.
 Windows SDK-link attempt05: native explicit-path probe and RSP PASS, Driver0/journal8, exact cleanup and review. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt05/proof.md`.

@@ -1697,10 +1697,25 @@ Its exact finalization failure is not yet established. The owned guest scope
 was manually retired after original export and SDK hash readback; original
 live/inactive VM media were restored and foreign media preserved. One combined
 review accepts only the SDK-selection diagnostic. Full native Runner custody,
-release acceptance and product tests remain open. Investigate this concrete
-post-Cargo finalization failure from the saved journal/source before another
-full-target build; do not repeat accepted profile tests or the SDK link merely
-because its Runner completion failed.
+release acceptance and product tests remain open. The precise attempt06 cause
+remains unproven. Its failure does not invalidate separately completed native
+Runner/product proofs; investigate it if a remaining active criterion encounters
+the same finalization mechanism. Do not repeat accepted profile tests or the SDK
+link merely because this diagnostic Runner completion failed.
+
+The subsequent native Windows Rust/Cargo 1.77.2
+`testing-environ,sys,net,no_index,sync,metadata` run accepted the named
+`combined_sys_net` real Engine/host/OS test. A wrong host-file expectation
+produced the intended RED101; the corrected expectation passed 1/1. The same
+test checks a fresh host readback, independent OS-selected TCP peer and typed
+errors. The 448-file source matched fork-main `fd931852`, exact lock and toolchain
+were bound, Cargo cleaned the owned target before retirement, Driver exited 0,
+and the original 208-frame export recovered 16 hash-checked files and an
+eight-state journal through `REMOVED`. The independent combined review passed
+after exact guest and host cleanup. See
+`.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/noindex-sync-metadata-attempt01/proof.md`.
+This closes only that combined feature-interaction slice. Other release rows,
+native behaviors and the whole A–F/Ticket03 campaign remain open.
 
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance
