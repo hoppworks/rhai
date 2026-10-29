@@ -1591,6 +1591,16 @@ review are bound in
 `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/metadata-serde-attempt01/proof.md`.
 `net_metadata` ran two native TCP metadata tests and `serde` ran 25 tests;
 Unix-only `sys_process` ran zero. This accepts only the executed profile cases.
+At fork-main `26bf9ef3...`, the same selected source/lock also passed native
+Windows1.77.2 `testing-environ,sys,net,unchecked`: twelve targets, combined
+host-file and real TCP receive-cap RED101 controls, a widened-cap positive
+GREEN0 control, and restored suite 121/0/0 ignored. `net_reads` ran seven
+tests and `sys_process_windows` ran 31; `net_metadata` and Unix-only
+`sys_process` each ran zero. The 17-file original export, eight CRC-valid
+custody states, exact guest/host cleanup and one combined independent review
+are recorded in
+`.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/unchecked-attempt01/proof.md`.
+Only the executed unchecked cases are accepted; other bounds remain open.
 The guest inventory found Windows Kit Lib `10.0.26100.0`, but the exact linker
 and SDK files used by Rust remain unbound. Remaining semantic profiles, fault
 breadth and the full release matrix still require separate evidence.

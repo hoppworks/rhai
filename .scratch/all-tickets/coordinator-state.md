@@ -10,11 +10,11 @@ Use current central agent-skills `d6024420` plus applicable local edits and proj
 
 ## Current step
 
-Fork-main includes reviewed Windows X35, POSIX `f32_float`, native Windows1.77.2 sys/net, `only_i32,no_float`, and `metadata,serde` profiles. A–F/Ticket03/release remain open.
+Fork-main includes reviewed Windows X35, POSIX `f32_float`, native Windows1.77.2 sys/net, `only_i32,no_float`, `metadata,serde` and `unchecked` profiles. A–F/Ticket03/release remain open.
 
 ## Next action
 
-Run the missing native Windows1.77.2 `unchecked` profile under bounded custody, reusing current source/toolchain. Bind exact linker/SDK files for full release; preserve accepted rows.
+Run native Windows1.77.2 `f32_float` under bounded custody with current source/toolchain. Bind exact linker/SDK files for full release; preserve accepted rows.
 
 ## Goal
 
@@ -48,7 +48,7 @@ POSIX Rust1.77.2 combined `unchecked`: macOS 151/0/1ignored, Linux 160/0/3ignore
 
 POSIX Rust1.77.2 combined `f32_float`: macOS and Linux three intended wrong101 assertions each; restored 11-target suites 159/0/1ignored and 167/0/3ignored. Mac attempt01 parser stopped after valid RED; same-source attempt02 passed GREEN. Combined review PASS: `.scratch/all-tickets/release-matrix-20261028/posix-f32-float-proof.md`.
 
-Attempts36–39 exposed false Job closure; attempts50–58 covered batch injection, membership, retry, lifecycle and CWD search. Attempt59 fixed a missed exact-child fallback after permanent Job refusal: wrong101/GREEN0, 299 refusals, owner retained. Attempt60 reused identical source for final-drop wrong101/101 and GREEN0 with parent/worker/sentinel readbacks. Combined review READY. Actual OS faults, other features/toolchains and release remain open. Detailed source, lock and causes: Windows `attempt59/` and `attempt60/` proof folders.
+Attempts36–39 exposed false Job closure; 50–58 covered batch, membership, retry, lifecycle and CWD search. Attempt59 fixed exact-child fallback after 299 permanent Job refusals; attempt60 verified final-drop and sentinel readbacks. Combined review READY. Actual OS faults and release remain open. Details: Windows `attempt59/` and `attempt60/`.
 
 Attempt61: native Windows Managed X33 PATH precedence wrong101/GREEN0, child executable readback, Driver0, original export/custody and combined review PASS; guest outer scope retained. Proof: Windows `attempt61/`.
 
@@ -63,6 +63,8 @@ Windows1.77.2 combined `testing-environ,sys,net`: same committed source/lock, na
 Windows1.77.2 `only_i32,no_float`: HEAD701 plus Windows test overlay, host-file wrong101, restored 12-target suite124/0/0ignored including 31 native process tests; two targets ran zero. Driver0/156.02s, rotated COM1 old/new segments reassembled to219 frames/15 hash-checked files, eight valid journal records. Review PASS; own scope/ISO/stage retired. Windows Kit Lib10.0.26100.0 inventoried; exact linker unknown. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/onlyi32-nofloat-attempt01/proof.md`.
 
 Windows1.77.2 `metadata,serde`: current HEADb98 source/lock, host-file and JSON wrong101, restored 13-target suite153/0/0ignored, Windows process32. Driver0/116.35s, 225 COM1 frames/16 hash-checked files, eight valid journal states. Combined review PASS after proof-link correction; guest/host scopes and ISO retired, original sdc restored. Windows11 Pro10.0.26300. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/metadata-serde-attempt01/proof.md`.
+
+Windows1.77.2 `unchecked`: same selected source/lock at HEAD26bf, host-file/cap wrong101, widened-cap positive0, restored 12-target suite121/0/0ignored. Driver0/146.48s, 255 COM1 frames/17 hash-checked files, eight valid journal states. Combined review PASS after exact guest-retirement recheck; own guest/host scopes and ISO retired, original sdc restored. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/unchecked-attempt01/proof.md`.
 
 ## Retained resources
 

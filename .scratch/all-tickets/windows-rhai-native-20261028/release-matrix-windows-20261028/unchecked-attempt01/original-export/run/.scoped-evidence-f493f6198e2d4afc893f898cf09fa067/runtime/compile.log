@@ -1,0 +1,413 @@
+    Updating git repository `https://github.com/schungx/rustyline`
+    Updating crates.io index
+    Updating git repository `https://gitlab.com/jD91mZM2/no-std-compat.git`
+ Downloading crates ...
+  Downloaded const-random-macro v0.1.16
+  Downloaded crunchy v0.2.4
+  Downloaded windows-targets v0.52.6
+  Downloaded windows-targets v0.53.5
+  Downloaded windows-link v0.2.1
+  Downloaded version_check v0.9.5
+  Downloaded winx v0.36.4
+  Downloaded unicode-ident v1.0.22
+  Downloaded thin-vec v0.2.19
+  Downloaded serde_json v1.0.145
+  Downloaded zerocopy v0.8.59
+  Downloaded windows_x86_64_msvc v0.53.1
+  Downloaded windows_x86_64_msvc v0.52.6
+  Downloaded syn v2.0.106
+  Downloaded portable-atomic v1.15.0
+  Downloaded smallvec v1.16.2
+  Downloaded windows-sys v0.61.2
+  Downloaded windows-sys v0.60.2
+  Downloaded windows-sys v0.59.0
+  Downloaded serde_core v1.0.229
+  Downloaded serde v1.0.229
+  Downloaded ryu v1.0.20
+  Downloaded rmp-serde v1.3.0
+  Downloaded proc-macro2 v1.0.103
+  Downloaded once_cell v1.21.4
+  Downloaded num-traits v0.2.19
+  Downloaded memchr v2.8.3
+  Downloaded ipnet v2.12.2
+  Downloaded io-extras v0.19.0
+  Downloaded getrandom v0.3.4
+  Downloaded getrandom v0.2.17
+  Downloaded cap-std v4.0.3
+  Downloaded bitflags v2.13.2
+  Downloaded ahash v0.8.12
+  Downloaded tiny-keccak v2.0.2
+  Downloaded static_assertions v1.1.0
+  Downloaded smartstring v1.0.1
+  Downloaded rmp v0.8.14
+  Downloaded quote v1.0.41
+  Downloaded paste v1.0.15
+  Downloaded io-lifetimes v3.0.1
+  Downloaded io-lifetimes v2.0.4
+  Downloaded cfg-if v1.0.5
+  Downloaded byteorder v1.5.0
+  Downloaded autocfg v1.5.1
+  Downloaded maybe-owned v0.3.4
+  Downloaded itoa v1.0.15
+  Downloaded fs-set-times v0.20.3
+  Downloaded const-random v0.1.18
+  Downloaded cap-primitives v4.0.3
+  Downloaded ambient-authority v0.0.2
+ Downloading crates ...
+  Downloaded libc v0.2.189
+ Downloading crates ...
+  Downloaded web-time v1.1.0
+   Compiling autocfg v1.5.1
+   Compiling windows_x86_64_msvc v0.52.6
+   Compiling windows_x86_64_msvc v0.53.1
+   Compiling version_check v0.9.5
+   Compiling crunchy v0.2.4
+   Compiling windows-targets v0.52.6
+   Compiling proc-macro2 v1.0.103
+   Compiling io-lifetimes v2.0.4
+   Compiling io-lifetimes v3.0.1
+   Compiling tiny-keccak v2.0.2
+   Compiling windows-targets v0.53.5
+   Compiling windows-sys v0.59.0
+   Compiling num-traits v0.2.19
+   Compiling unicode-ident v1.0.22
+   Compiling portable-atomic v1.15.0
+   Compiling io-extras v0.19.0
+   Compiling cfg-if v1.0.5
+   Compiling quote v1.0.41
+   Compiling getrandom v0.2.17
+   Compiling windows-sys v0.60.2
+   Compiling serde_core v1.0.229
+   Compiling bitflags v2.13.2
+   Compiling getrandom v0.3.4
+   Compiling zerocopy v0.8.59
+   Compiling cap-primitives v4.0.3
+   Compiling once_cell v1.21.4
+   Compiling const-random-macro v0.1.16
+   Compiling winx v0.36.4
+   Compiling fs-set-times v0.20.3
+   Compiling ahash v0.8.12
+   Compiling smartstring v1.0.1
+   Compiling cap-std v4.0.3
+   Compiling ipnet v2.12.2
+   Compiling ambient-authority v0.0.2
+   Compiling paste v1.0.15
+   Compiling maybe-owned v0.3.4
+   Compiling syn v2.0.106
+   Compiling const-random v0.1.18
+   Compiling serde v1.0.229
+   Compiling rhai v1.26.1 (C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-46e22a22\run\scoped-f493f6198e2d4afc893f898cf09fa067)
+   Compiling static_assertions v1.1.0
+   Compiling windows-link v0.2.1
+   Compiling windows-sys v0.61.2
+   Compiling rhai_codegen v3.2.0 (C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-46e22a22\run\scoped-f493f6198e2d4afc893f898cf09fa067\codegen)
+   Compiling thin-vec v0.2.19
+   Compiling byteorder v1.5.0
+   Compiling smallvec v1.16.2
+   Compiling serde_json v1.0.145
+   Compiling rmp v0.8.14
+warning: the item `TryFrom` is imported redundantly
+   --> src\func\func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04\library\std\src\prelude\mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: unused variable: `ctx`
+   --> src\packages\net\stream.rs:609:9
+    |
+609 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+    |
+    = note: `#[warn(unused_variables)]` on by default
+
+warning: unused variable: `ctx`
+   --> src\packages\net\stream.rs:624:9
+    |
+624 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src\packages\net\stream.rs:640:9
+    |
+640 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src\packages\net\stream.rs:655:9
+    |
+655 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src\packages\net\stream.rs:672:9
+    |
+672 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src\packages\net\stream.rs:688:9
+    |
+688 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src\packages\net\stream.rs:705:9
+    |
+705 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src\packages\net\stream.rs:721:9
+    |
+721 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src\packages\net\stream.rs:738:9
+    |
+738 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src\packages\net\stream.rs:754:9
+    |
+754 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src\packages\net\stream.rs:771:9
+    |
+771 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src\packages\net\stream.rs:787:9
+    |
+787 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src\packages\net\stream.rs:803:9
+    |
+803 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src\packages\net\stream.rs:818:9
+    |
+818 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src\packages\net\stream.rs:834:9
+    |
+834 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src\packages\net\stream.rs:849:9
+    |
+849 |         ctx: NativeCallContext,
+    |         ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src\packages\sys\fs.rs:566:36
+    |
+566 |     .set_into_module(module, move |ctx: NativeCallContext, file: FileHandle| -> Res<String> {
+    |                                    ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src\packages\sys\fs.rs:591:36
+    |
+591 |     .set_into_module(module, move |ctx: NativeCallContext, file: FileHandle, len: INT| -> Res<String> {
+    |                                    ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src\packages\sys\fs.rs:619:40
+    |
+619 |         .set_into_module(module, move |ctx: NativeCallContext, file: FileHandle| -> Res<crate::Blob> {
+    |                                        ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+warning: unused variable: `ctx`
+   --> src\packages\sys\fs.rs:636:40
+    |
+636 |         .set_into_module(module, move |ctx: NativeCallContext, file: FileHandle, len: INT| -> Res<crate::Blob> {
+    |                                        ^^^ help: if this is intentional, prefix it with an underscore: `_ctx`
+
+   Compiling itoa v1.0.15
+   Compiling ryu v1.0.20
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` on by default
+
+   Compiling memchr v2.8.3
+   Compiling rmp-serde v1.3.0
+warning: `rhai` (lib) generated 22 warnings (run `cargo fix --lib -p rhai` to apply 20 suggestions)
+warning: unused import: `PathBuf`
+ --> src\bin\rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: unused import: `NetError`
+ --> tests\net_reads.rs:3:38
+  |
+3 | use rhai::packages::net::{NetConfig, NetError, NetPackage};
+  |                                      ^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: unused import: `Dynamic`
+ --> tests\net_reads.rs:5:12
+  |
+5 | use rhai::{Dynamic, Engine, Scope};
+  |            ^^^^^^^
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+warning: unused import: `std::ffi::OsString`
+ --> tests\sys_env.rs:7:5
+  |
+7 | use std::ffi::OsString;
+  |     ^^^^^^^^^^^^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (test "sys_env") generated 1 warning (run `cargo fix --test "sys_env"` to apply 1 suggestion)
+warning: `rhai` (test "net_reads") generated 2 warnings (run `cargo fix --test "net_reads"` to apply 2 suggestions)
+warning: variable does not need to be mutable
+  --> tests\net_writes.rs:11:24
+   |
+11 | fn read_bounded_to_end(mut stream: &TcpStream, max_bytes: usize) -> Vec<u8> {
+   |                        ----^^^^^^
+   |                        |
+   |                        help: remove this `mut`
+   |
+   = note: `#[warn(unused_mut)]` on by default
+
+warning: variable does not need to be mutable
+  --> tests\net_writes.rs:62:10
+   |
+62 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+  --> tests\net_writes.rs:83:10
+   |
+83 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+   |          ----^^^^
+   |          |
+   |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests\net_writes.rs:208:10
+    |
+208 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests\net_writes.rs:266:10
+    |
+266 |         |mut peer| read_bounded_to_end(&peer, 20 * 1024 * 1024),
+    |          ----^^^^
+    |          |
+    |          help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests\net_writes.rs:285:9
+    |
+285 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests\net_writes.rs:289:9
+    |
+289 |     let mut peer = TcpStream::connect(address.parse::<SocketAddr>().unwrap()).unwrap();
+    |         ----^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests\net_writes.rs:306:9
+    |
+306 |     let mut engine = engine(NetConfig::default().allow_listen("127.0.0.1:0".parse().unwrap()).max_write_bytes(2));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: `rhai` (test "net_writes") generated 8 warnings (run `cargo fix --test "net_writes"` to apply 8 suggestions)
+warning: variable does not need to be mutable
+   --> tests\sys_process_windows.rs:316:9
+    |
+316 |     let mut engine = engine(SysConfig::default().programs(ProgramPolicy::Any));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+    |
+    = note: `#[warn(unused_mut)]` on by default
+
+warning: variable does not need to be mutable
+   --> tests\sys_process_windows.rs:494:9
+    |
+494 |     let mut engine = engine(SysConfig::default().programs(ProgramPolicy::Any));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+   --> tests\sys_process_windows.rs:900:9
+    |
+900 |     let mut engine = engine(SysConfig::default().programs(ProgramPolicy::Any));
+    |         ----^^^^^^
+    |         |
+    |         help: remove this `mut`
+
+warning: variable does not need to be mutable
+    --> tests\sys_process_windows.rs:1008:9
+     |
+1008 |     let mut engine = engine(SysConfig::default().programs(ProgramPolicy::Any));
+     |         ----^^^^^^
+     |         |
+     |         help: remove this `mut`
+
+warning: constant `TEXT_LIMIT_WRONG_EXPECTATION_ENV` is never used
+  --> tests\sys_process_windows.rs:20:7
+   |
+20 | const TEXT_LIMIT_WRONG_EXPECTATION_ENV: &str = "RHAI_WINDOWS_TEXT_LIMIT_WRONG_EXPECTATION";
+   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` on by default
+
+warning: `rhai` (test "sys_process_windows") generated 5 warnings (run `cargo fix --test "sys_process_windows"` to apply 4 suggestions)
+    Finished test [unoptimized] target(s) in 1m 08s
+  Executable tests\combined_sys_net.rs (work\target\debug\deps\combined_sys_net-a32114dddf57a8d1.exe)
+  Executable tests\net_connect.rs (work\target\debug\deps\net_connect-7cb7de80a6168970.exe)
+  Executable tests\net_listen.rs (work\target\debug\deps\net_listen-d17bb47abcf74153.exe)
+  Executable tests\net_metadata.rs (work\target\debug\deps\net_metadata-11c49efd0caace1d.exe)
+  Executable tests\net_reads.rs (work\target\debug\deps\net_reads-ced9aec199b58640.exe)
+  Executable tests\net_writes.rs (work\target\debug\deps\net_writes-1d7b609424aa92f3.exe)
+  Executable tests\sys_env.rs (work\target\debug\deps\sys_env-48691992e3394306.exe)
+  Executable tests\sys_fs.rs (work\target\debug\deps\sys_fs-97acc9269ba55df8.exe)
+  Executable tests\sys_policy.rs (work\target\debug\deps\sys_policy-14907493ef28d849.exe)
+  Executable tests\sys_process.rs (work\target\debug\deps\sys_process-679e9323f311eb54.exe)
+  Executable tests\sys_process_report.rs (work\target\debug\deps\sys_process_report-e107aad2ea2fed8e.exe)
+  Executable tests\sys_process_windows.rs (work\target\debug\deps\sys_process_windows-c83b7ed2b3ffdb2c.exe)
