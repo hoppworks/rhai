@@ -1601,6 +1601,15 @@ custody states, exact guest/host cleanup and one combined independent review
 are recorded in
 `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/unchecked-attempt01/proof.md`.
 Only the executed unchecked cases are accepted; other bounds remain open.
+At fork-main `eea5ef8b8...`, the unchanged selected source/lock also passed
+native Windows1.77.2 `testing-environ,sys,net,f32_float`: twelve targets,
+combined host-file and real TCP f32-timeout assertion RED101 controls, and
+restored suite 126/0/0 ignored. `net_reads` ran eight tests and
+`sys_process_windows` ran 32; `net_metadata` and Unix-only `sys_process`
+each ran zero. The 16-file original export, eight CRC-valid custody states,
+exact guest/host cleanup and one combined independent review are recorded in
+`.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/f32-float-attempt01/proof.md`.
+Only the executed f32 cases are accepted; other bounds remain open.
 The guest inventory found Windows Kit Lib `10.0.26100.0`, but the exact linker
 and SDK files used by Rust remain unbound. Remaining semantic profiles, fault
 breadth and the full release matrix still require separate evidence.

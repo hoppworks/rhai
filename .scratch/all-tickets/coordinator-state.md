@@ -10,11 +10,11 @@ Use current central agent-skills `d6024420` plus applicable local edits and proj
 
 ## Current step
 
-Fork-main includes reviewed Windows X35, POSIX `f32_float`, native Windows1.77.2 sys/net, `only_i32,no_float`, `metadata,serde` and `unchecked` profiles. A–F/Ticket03/release remain open.
+Fork-main includes reviewed Windows X35, POSIX `f32_float`, native Windows1.77.2 sys/net, `only_i32,no_float`, `metadata,serde`, `unchecked` and `f32_float` profiles. A–F/Ticket03/release remain open.
 
 ## Next action
 
-Run native Windows1.77.2 `f32_float` under bounded custody with current source/toolchain. Bind exact linker/SDK files for full release; preserve accepted rows.
+Bind exact Windows linker/SDK files for the release matrix using the current guest/toolchain; preserve accepted rows. Then target remaining criteria.
 
 ## Goal
 
@@ -34,7 +34,7 @@ Fork main contains accepted Windows sys policy/env/fs, net targets, Direct proce
 
 ## Accepted evidence
 
-MacOS27.2 arm64/Rust1.77.2 `no_index,sync,metadata`: six first-run suites and combined wrong101; corrected `/usr/bin/true` test passed process/report 2/2+8/8 and exit-code wrong101. Combined review PASS: `.scratch/all-tickets/release-matrix-20261028/proof.md`.
+MacOS27.2 arm64/Rust1.77.2 `no_index,sync,metadata`: six suites, combined wrong101; corrected process/report2/2+8/8 and exit-code wrong101. Review PASS: `.scratch/all-tickets/release-matrix-20261028/proof.md`.
 
 MacOS27.2 arm64/Rust1.77.2 `testing-environ,sys,net,only_i32,no_float`: 11 targets compiled, combined wrong101, restored 135/0/1ignored, independent combined review PASS. Only named behaviors accepted; `.scratch/all-tickets/release-matrix-20261028/macos-onlyi32-nofloat-proof.md`.
 
@@ -48,7 +48,7 @@ POSIX Rust1.77.2 combined `unchecked`: macOS 151/0/1ignored, Linux 160/0/3ignore
 
 POSIX Rust1.77.2 combined `f32_float`: macOS and Linux three intended wrong101 assertions each; restored 11-target suites 159/0/1ignored and 167/0/3ignored. Mac attempt01 parser stopped after valid RED; same-source attempt02 passed GREEN. Combined review PASS: `.scratch/all-tickets/release-matrix-20261028/posix-f32-float-proof.md`.
 
-Attempts36–39 exposed false Job closure; 50–58 covered batch, membership, retry, lifecycle and CWD search. Attempt59 fixed exact-child fallback after 299 permanent Job refusals; attempt60 verified final-drop and sentinel readbacks. Combined review READY. Actual OS faults and release remain open. Details: Windows `attempt59/` and `attempt60/`.
+Attempts36–39 exposed false Job closure; 50–58 covered batch, membership, retry and lifecycle. Attempt59 fixed exact-child fallback after 299 Job refusals; attempt60 verified final-drop/sentinel readbacks. Review READY; OS faults/release open. Details: Windows `attempt59/`, `attempt60/`.
 
 Attempt61: native Windows Managed X33 PATH precedence wrong101/GREEN0, child executable readback, Driver0, original export/custody and combined review PASS; guest outer scope retained. Proof: Windows `attempt61/`.
 
@@ -66,9 +66,11 @@ Windows1.77.2 `metadata,serde`: current HEADb98 source/lock, host-file and JSON 
 
 Windows1.77.2 `unchecked`: same selected source/lock at HEAD26bf, host-file/cap wrong101, widened-cap positive0, restored 12-target suite121/0/0ignored. Driver0/146.48s, 255 COM1 frames/17 hash-checked files, eight valid journal states. Combined review PASS after exact guest-retirement recheck; own guest/host scopes and ISO retired, original sdc restored. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/unchecked-attempt01/proof.md`.
 
+Windows1.77.2 `f32_float`: HEAD eea5 selected source/lock, host-file/f32 timeout wrong101, restored 12-target suite126/0/0ignored. Driver0/106.33s, 223 COM1 frames/16 hash-checked files, eight valid journal states. Combined review PASS; own guest/host scopes and ISO retired, original sdc restored. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/f32-float-attempt01/proof.md`.
+
 ## Retained resources
 
-Workhorse VM `dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19`: original sdc restored, foreign sdb untouched; own bootstrap ISOs/stage and successful guest verification scope retired. Retained guest `C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-a7e54f39\toolchain-home`: Rhai coordinator, Windows1.77.2 release gate, 423,724,103 bytes, ceiling2GiB, expiry 2026-11-01 00:00 UTC; no quota. Public native BuildOnly expires 2026-10-30 12:00 UTC. Guest evidence scopes52–64 remain; old36/48 need exact retirement. Details in proof.
+Workhorse VM `dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19`: original sdc restored, foreign sdb untouched; own bootstrap ISOs/stage and guest scope retired. Retained guest `C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-a7e54f39\toolchain-home`: Rhai coordinator, Windows1.77.2 release gate, 423,724,103 bytes, ceiling2GiB, expiry 2026-11-01 00:00 UTC; no quota. Public native BuildOnly expires 2026-10-30 12:00 UTC. Guest scopes52–64 remain; old36/48 need exact retirement. Details in proof.
 
 ## Cause history
 
