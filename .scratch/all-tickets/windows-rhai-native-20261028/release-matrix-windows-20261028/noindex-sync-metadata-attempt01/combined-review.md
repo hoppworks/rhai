@@ -3,7 +3,7 @@
 Result: **PASS for the single native Windows Rust/Cargo 1.77.2
 `testing-environ,sys,net,no_index,sync,metadata` combined Engine test**.
 
-The independent Terra reviewer checked the frozen 448-file source against the
+The independent reviewer checked the frozen 448-file source against the
 current candidate, media and ISO hashes, host protection guards, immediate
 preflight, original RED101 and GREEN0 logs, the fresh host-file and independent
 TCP peer assertions, the 16-file serial export, the eight-state valid journal,
