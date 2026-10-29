@@ -1,0 +1,12 @@
+{
+  "baseline_red": true,
+  "product_acceptance": false,
+  "test_exit": 101,
+  "driver_exit": 0,
+  "driver_seconds": 65.2489478,
+  "frames": 202,
+  "original_files": 15,
+  "journal_records": 8,
+  "serial_rotation_reconstructed": true,
+  "guest_and_host_cleanup_pending_at_readback": true
+}

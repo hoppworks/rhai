@@ -1,0 +1,21 @@
+{
+  "driver_exit": 2,
+  "payload_exit": 65,
+  "valid_controls": [
+    "removed",
+    "override",
+    "invalid"
+  ],
+  "parent_control": "test uses unsupported integer wait",
+  "suite_not_run": true,
+  "frames": 218,
+  "files": 18,
+  "journal_crc_records": 8,
+  "journal_removed": true,
+  "product_acceptance": false,
+  "cleanup_pending": false,
+  "guest_outer_scope_absent": true,
+  "host_stage_and_iso_absent": true,
+  "original_sdc_restored": true,
+  "foreign_sdb_unchanged": true
+}

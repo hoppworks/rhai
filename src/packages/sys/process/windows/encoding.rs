@@ -158,7 +158,7 @@ fn insert(entries: &mut Vec<Entry>, key: Vec<u16>, value: Vec<u16>) -> io::Resul
 
 /// `None` inherits unchanged; otherwise return a sorted, double-NUL-terminated block.
 pub(super) fn environment(options: &Options) -> io::Result<Option<Vec<u16>>> {
-    if !options.env_clear && options.env.is_empty() {
+    if !options.env_clear && options.env.is_empty() && options.env_remove.is_empty() {
         return Ok(None);
     }
     let mut entries = Vec::new();
@@ -169,6 +169,20 @@ pub(super) fn environment(options: &Options) -> io::Result<Option<Vec<u16>>> {
                 key.encode_wide().collect(),
                 value.encode_wide().collect(),
             )?;
+        }
+    }
+    for key in &options.env_remove {
+        if key.is_empty() || key.contains(['\0', '=']) {
+            return Err(io::Error::new(io::ErrorKind::InvalidInput, "invalid child environment key"));
+        }
+        let key: Vec<u16> = key.encode_utf16().collect();
+        let mut index = 0;
+        while index < entries.len() {
+            if compare(&entries[index].0, &key)? == Ordering::Equal {
+                entries.remove(index);
+                break;
+            }
+            index += 1;
         }
     }
     for (key, value) in &options.env {

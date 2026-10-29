@@ -1,0 +1,19 @@
+# Native Windows env_remove and host PATH search
+
+Status: **accepted for the named cases after combined independent review**, not full Ticket03 or release acceptance.
+
+## Candidate and native run
+
+Base `9a03f2ce9a1800293bf09b98e5ee6bc1d23c8c4b` plus the five overlays in [preparation.json](preparation.json); all other 443 archived files match the prior source. Lock SHA-256 `12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802`. Native Windows 10.0.26300.0, x86_64, Rust/Cargo 1.77.2, `testing-environ,sys,net`; the locked command and exact inputs are in [binding.json](binding.json) and [RunRhaiContract.cmd](media-input/RunRhaiContract.cmd). The one final supervised compile plus unfiltered `sys_process_windows` suite completed with **41 passed, 0 failed, 0 ignored** in 18.33s; Driver exit 0 in 92.7238621s, bounded by 180s/185s Driver/observer deadlines.
+
+The public Rhai Engine `run_raw` and `spawn`, DirectChild and Managed paths independently read child-written environment records: mixed-case removal of SystemRoot and PATH, PATH override, unchanged parent environment and exact child-handle exit. Invalid inputs return typed Denied with immediate absent marker; review confirms validation precedes launch, while the marker alone cannot exclude delayed starts. A separately isolated controller resolves a uniquely copied executable from host PATH when child PATH is removed, for Direct and Managed. Independent child records verify executable identity and missing PATH; exact handles and controller wait/reap are observed.
+
+The test and controller appear together in a complete live Job membership list (test PID 2752, controller PID 6012). Job marker checks alone do not identify the Driver Job; the scoped Driver launch/Job hierarchy, no-breakaway inherited descendant path, original runner journal and observer closure must be read together. The run exports 211 ordered frames and 15 hash-checked originals; the [journal](journal-readback.json) verifies eight length/CRC records through REMOVED and payload 0. [Observer](original-export/observer.json) reports exited/disposed Driver, no pending custody, no observer kill and stopped owned executables. This is a scope-bound runner result, not whole-product acceptance.
+
+## Controls and cause history
+
+The [baseline](../env-remove-baseline-attempt01/readback.json) reproduced the former typed `Denied` for unsupported `env_remove` at base source, exit 101; it did not establish acceptance. [Attempt01](../env-remove-fix-attempt01/failed-readback.json) reached intentionally wrong removal, override and invalid-input assertions in the first Direct case; the parent control failed earlier on a test-only unsupported integer `wait`. [Attempt02](../env-remove-fix-attempt02/failed-readback.json) reached the parent and Direct PATH wrong assertions; the Managed PATH check returned an opaque outer SysError and the suite did not run. [Attempt03](../env-remove-fix-attempt03/failed-readback.json) preserved both inner PATH readbacks and the unchanged Managed wrong assertion but the additional outer Managed job reported incomplete lifetime membership and retained custody. These controls are reused only at their reviewed scopes; the current outer controller differs, and attempt04 contains no new RED. The unresolved nested Managed membership result is not explained away by the final GREEN.
+
+## Cleanup and limits
+
+[Guest readback](guest-retire-result.png) shows the exact outer scope absent after the reparse guard. [Host cleanup](host-cleanup.json) and [independent readback](host-postcleanup-readback.json) confirm own stage/ISO absent, original live and inactive `sdc` restored, foreign `sdb` unchanged. Original evidence, result and attempt history remain outside the retired runtime. See [combined review](combined-review.md). Windows `no_index`, other source/feature/OS/MSRV combinations, nested Managed lifetime-membership behavior and full Ticket03/release remain open.

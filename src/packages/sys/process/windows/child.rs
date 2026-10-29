@@ -525,6 +525,9 @@ fn spawn_inner(
         if options.env_clear {
             command.env_clear();
         }
+        for key in &options.env_remove {
+            command.env_remove(key);
+        }
         for (key, value) in options.env {
             command.env(key, value);
         }

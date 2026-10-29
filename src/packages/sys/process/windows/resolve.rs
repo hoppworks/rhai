@@ -111,15 +111,17 @@ pub(super) fn resolve_program(program: &str, options: &Options) -> io::Result<Ve
         filename.push(".exe");
     }
     let parent_path = std::env::var_os("PATH");
-    let changed_env = options.env_clear || !options.env.is_empty();
+    let changed_env = options.env_clear || !options.env.is_empty() || !options.env_remove.is_empty();
     let explicit_path = options
         .env
         .iter()
         .rev()
         .find(|(key, _)| key.eq_ignore_ascii_case("PATH"))
         .map(|(_, value)| OsString::from(value));
-    let child_path =
-        explicit_path.or_else(|| (!options.env_clear).then(|| parent_path.clone()).flatten());
+    let path_removed = options.env_remove.iter().any(|key| key.eq_ignore_ascii_case("PATH"));
+    let child_path = explicit_path.or_else(|| {
+        (!options.env_clear && !path_removed).then(|| parent_path.clone()).flatten()
+    });
     let mut directories = Vec::new();
     if changed_env {
         if let Some(paths) = child_path.as_ref() {

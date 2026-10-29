@@ -1,0 +1,1 @@
+$p='C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-649d364d';if(@(Get-ChildItem -LiteralPath $p -Recurse -Force|Where-Object{($_.Attributes -band 1024) -ne 0}).Count -ne 0){throw 'REPARSE'};Remove-Item -LiteralPath $p -Recurse -Force;Test-Path $p

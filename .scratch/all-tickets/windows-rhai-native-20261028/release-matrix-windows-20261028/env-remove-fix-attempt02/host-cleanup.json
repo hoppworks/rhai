@@ -1,0 +1,12 @@
+{
+  "owned_host_stage": "/var/roothome/.local/share/agent-builds/rhai/windows-rhai-native-649d364d5e1244ffa522dea09490b2a0",
+  "owned_iso": "/var/lib/libvirt/images/rhai-win11-quality/rhai-native-649d364d5e1244ffa522dea09490b2a0.iso",
+  "iso_sha256": "7b061b88844006c5ed740f24109573165960ffb4a189ff10adaace4023bc4efd",
+  "stage_file_count": 44,
+  "stage_absent": true,
+  "iso_absent": true,
+  "original_sdc_restored": true,
+  "foreign_sdb_unchanged": true,
+  "live_and_inactive_vm_checked": true,
+  "exact_fuser_no_holder": true
+}

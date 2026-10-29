@@ -201,6 +201,7 @@ fn parse_args(args: Array) -> Res<Vec<String>> {
 
 struct Options {
     env: Vec<(String, String)>,
+    env_remove: Vec<String>,
     env_clear: bool,
     stdin: Option<Vec<u8>>,
     timeout: Option<Duration>,
@@ -221,8 +222,12 @@ fn deadline_after(
 }
 
 fn parse_options(state: &SysState, mut options: Map, engine_limit: usize) -> Res<Options> {
+    #[allow(unused_mut)]
+    let mut known = vec!["env", "env_clear", "stdin", "timeout", "max_output"];
+    #[cfg(not(feature = "no_index"))]
+    known.push("env_remove");
     for key in options.keys() {
-        if !["env", "env_clear", "stdin", "timeout", "max_output"].contains(&key.as_str()) {
+        if !known.contains(&key.as_str()) {
             return Err(
                 SysError::Denied(format!("unsupported Windows process option `{key}`")).into(),
             );
@@ -234,6 +239,25 @@ fn parse_options(state: &SysState, mut options: Map, engine_limit: usize) -> Res
             .try_cast::<bool>()
             .ok_or_else(|| SysError::Denied("process option `env_clear` must be a bool".into()))?,
     };
+    #[cfg(not(feature = "no_index"))]
+    let env_remove = match options.remove("env_remove") {
+        None => Vec::new(),
+        Some(value) => value
+            .try_cast::<Array>()
+            .ok_or_else(|| SysError::Denied("process option `env_remove` must be an array".into()))?
+            .into_iter()
+            .map(|value| -> Res<String> {
+                let text = value.try_cast::<ImmutableString>()
+                    .ok_or_else(|| SysError::Denied("env_remove entries must be strings".into()))?;
+                if text.is_empty() || text.contains(['\0', '=']) {
+                    return Err(SysError::Denied("invalid env_remove key".into()).into());
+                }
+                Ok(text.to_string())
+            })
+            .collect::<Res<Vec<_>>>()?,
+    };
+    #[cfg(feature = "no_index")]
+    let env_remove: Vec<String> = Vec::new();
     let env = match options.remove("env") {
         None => Vec::new(),
         Some(value) => value
@@ -313,6 +337,7 @@ fn parse_options(state: &SysState, mut options: Map, engine_limit: usize) -> Res
     };
     Ok(Options {
         env,
+        env_remove,
         env_clear,
         stdin,
         timeout,
@@ -409,6 +434,9 @@ fn run_map(
             .stderr(Stdio::from(stderr_child));
         if options.env_clear {
             command.env_clear();
+        }
+        for key in &options.env_remove {
+            command.env_remove(key);
         }
         for (key, value) in options.env {
             command.env(key, value);

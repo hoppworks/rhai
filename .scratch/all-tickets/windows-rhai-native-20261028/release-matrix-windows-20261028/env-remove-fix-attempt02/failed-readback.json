@@ -1,0 +1,28 @@
+{
+  "journal_sha256": "9287be538418415672a4f34af4bb0a284373319b18d15a2237258b105955a864",
+  "journal_states": [
+    "INTENT",
+    "IDENTITY",
+    "STAGED",
+    "LIFECYCLE",
+    "EVIDENCE",
+    "OUTCOME",
+    "REMOVE_INTENT",
+    "REMOVED"
+  ],
+  "crc_and_length_valid": true,
+  "payload_exit": 65,
+  "driver_exit": 2,
+  "runtime_removed": true,
+  "parent_wrong_assertion_reached": true,
+  "direct_path_wrong_assertion_reached": true,
+  "managed_path_wrong_assertion_reached": false,
+  "managed_error": "ErrorRuntime SysError, payload opaque; cause unconfirmed",
+  "suite_started": false,
+  "product_acceptance": false,
+  "guest_scope_cleanup_pending": false,
+  "guest_scope_absent": true,
+  "host_stage_absent": true,
+  "original_sdc_restored": true,
+  "foreign_sdb_unchanged": true
+}

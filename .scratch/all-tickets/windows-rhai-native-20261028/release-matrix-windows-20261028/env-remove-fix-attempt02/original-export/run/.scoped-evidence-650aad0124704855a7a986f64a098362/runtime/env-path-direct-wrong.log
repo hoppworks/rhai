@@ -1,0 +1,58 @@
+warning: the item `TryFrom` is imported redundantly
+   --> src\func\func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04\library\std\src\prelude\mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` on by default
+
+warning: `rhai` (lib) generated 2 warnings
+warning: unused import: `PathBuf`
+ --> src\bin\rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 0.13s
+     Running tests\sys_process_windows.rs (work\target\debug\deps\sys_process_windows-b3e5219af6d50bf7.exe)
+
+running 1 test
+windows_removed_path_readback label=direct pid=2192 exact_handle_signaled=true child_path_missing=true host_path_exe=true
+thread 'windows_removed_path_controller' panicked at tests\sys_process_windows.rs:455:13:
+assertion `left != right` failed: deliberately wrong removed PATH executable expectation
+  left: "\\\\?\\C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-649d364d\\run\\scoped-650aad0124704855a7a986f64a098362\\work\\temp\\rhai-sys-test-1376-windows_env_remove_path_keeps_host_program_search-0\\host-path\\rhai-env-path-probe.exe"
+ right: "\\\\?\\C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-649d364d\\run\\scoped-650aad0124704855a7a986f64a098362\\work\\temp\\rhai-sys-test-1376-windows_env_remove_path_keeps_host_program_search-0\\host-path\\rhai-env-path-probe.exe"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+thread 'windows_env_remove_path_keeps_host_program_search' panicked at tests\sys_process_windows.rs:489:5:
+assertion `left == right` failed: isolated PATH controller failed
+  left: 101
+ right: 0
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test windows_env_remove_path_keeps_host_program_search ... FAILED
+
+failures:
+
+failures:
+    windows_env_remove_path_keeps_host_program_search
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 40 filtered out; finished in 0.27s
+
+error: test failed, to rerun pass `--test sys_process_windows`

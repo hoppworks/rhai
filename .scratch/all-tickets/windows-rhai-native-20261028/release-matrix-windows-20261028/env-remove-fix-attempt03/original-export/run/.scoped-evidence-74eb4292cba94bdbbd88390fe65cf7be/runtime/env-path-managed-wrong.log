@@ -1,0 +1,51 @@
+warning: the item `TryFrom` is imported redundantly
+   --> src\func\func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04\library\std\src\prelude\mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` on by default
+
+warning: `rhai` (lib) generated 2 warnings
+warning: unused import: `PathBuf`
+ --> src\bin\rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 0.16s
+     Running tests\sys_process_windows.rs (work\target\debug\deps\sys_process_windows-b3e5219af6d50bf7.exe)
+
+running 1 test
+[DEBUG-envpath] typed_error=Process { cause: Io { op: "complete process cleanup", target: "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-7fdb1180\\run\\scoped-74eb4292cba94bdbbd88390fe65cf7be\\work\\target\\debug\\deps\\sys_process_windows-b3e5219af6d50bf7.exe", kind: Other, message: "native cleanup remains incomplete" }, report: ProcessReport { stdout: [10, 114, 117, 110, 110, 105, 110, 103, 32, 49, 32, 116, 101, 115, 116, 10, 70, 10, 102, 97, 105, 108, 117, 114, 101, 115, 58, 10, 10, 102, 97, 105, 108, 117, 114, 101, 115, 58, 10, 32, 32, 32, 32, 119, 105, 110, 100, 111, 119, 115, 95, 114, 101, 109, 111, 118, 101, 100, 95, 112, 97, 116, 104, 95, 99, 111, 110, 116, 114, 111, 108, 108, 101, 114, 10, 10, 116, 101, 115, 116, 32, 114, 101, 115, 117, 108, 116, 58, 32, 70, 65, 73, 76, 69, 68, 46, 32, 48, 32, 112, 97, 115, 115, 101, 100, 59, 32, 49, 32, 102, 97, 105, 108, 101, 100, 59, 32, 48, 32, 105, 103, 110, 111, 114, 101, 100, 59, 32, 48, 32, 109, 101, 97, 115, 117, 114, 101, 100, 59, 32, 52, 48, 32, 102, 105, 108, 116, 101, 114, 101, 100, 32, 111, 117, 116, 59, 32, 102, 105, 110, 105, 115, 104, 101, 100, 32, 105, 110, 32, 48, 46, 50, 54, 115, 10, 10], stderr: [119, 105, 110, 100, 111, 119, 115, 95, 114, 101, 109, 111, 118, 101, 100, 95, 112, 97, 116, 104, 95, 114, 101, 97, 100, 98, 97, 99, 107, 32, 108, 97, 98, 101, 108, 61, 100, 105, 114, 101, 99, 116, 32, 112, 105, 100, 61, 51, 51, 54, 52, 32, 101, 120, 97, 99, 116, 95, 104, 97, 110, 100, 108, 101, 95, 115, 105, 103, 110, 97, 108, 101, 100, 61, 116, 114, 117, 101, 32, 99, 104, 105, 108, 100, 95, 112, 97, 116, 104, 95, 109, 105, 115, 115, 105, 110, 103, 61, 116, 114, 117, 101, 32, 104, 111, 115, 116, 95, 112, 97, 116, 104, 95, 101, 120, 101, 61, 116, 114, 117, 101, 10, 119, 105, 110, 100, 111, 119, 115, 95, 114, 101, 109, 111, 118, 101, 100, 95, 112, 97, 116, 104, 95, 114, 101, 97, 100, 98, 97, 99, 107, 32, 108, 97, 98, 101, 108, 61, 109, 97, 110, 97, 103, 101, 100, 32, 112, 105, 100, 61, 53, 56, 54, 56, 32, 101, 120, 97, 99, 116, 95, 104, 97, 110, 100, 108, 101, 95, 115, 105, 103, 110, 97, 108, 101, 100, 61, 116, 114, 117, 101, 32, 99, 104, 105, 108, 100, 95, 112, 97, 116, 104, 95, 109, 105, 115, 115, 105, 110, 103, 61, 116, 114, 117, 101, 32, 104, 111, 115, 116, 95, 112, 97, 116, 104, 95, 101, 120, 101, 61, 116, 114, 117, 101, 10, 116, 104, 114, 101, 97, 100, 32, 39, 119, 105, 110, 100, 111, 119, 115, 95, 114, 101, 109, 111, 118, 101, 100, 95, 112, 97, 116, 104, 95, 99, 111, 110, 116, 114, 111, 108, 108, 101, 114, 39, 32, 112, 97, 110, 105, 99, 107, 101, 100, 32, 97, 116, 32, 116, 101, 115, 116, 115, 92, 115, 121, 115, 95, 112, 114, 111, 99, 101, 115, 115, 95, 119, 105, 110, 100, 111, 119, 115, 46, 114, 115, 58, 52, 53, 53, 58, 49, 51, 58, 10, 97, 115, 115, 101, 114, 116, 105, 111, 110, 32, 96, 108, 101, 102, 116, 32, 33, 61, 32, 114, 105, 103, 104, 116, 96, 32, 102, 97, 105, 108, 101, 100, 58, 32, 100, 101, 108, 105, 98, 101, 114, 97, 116, 101, 108, 121, 32, 119, 114, 111, 110, 103, 32, 114, 101, 109, 111, 118, 101, 100, 32, 80, 65, 84, 72, 32, 101, 120, 101, 99, 117, 116, 97, 98, 108, 101, 32, 101, 120, 112, 101, 99, 116, 97, 116, 105, 111, 110, 10, 32, 32, 108, 101, 102, 116, 58, 32, 34, 92, 92, 92, 92, 63, 92, 92, 67, 58, 92, 92, 85, 115, 101, 114, 115, 92, 92, 82, 104, 97, 105, 84, 101, 115, 116, 92, 92, 46, 108, 111, 99, 97, 108, 92, 92, 115, 104, 97, 114, 101, 92, 92, 97, 103, 101, 110, 116, 45, 98, 117, 105, 108, 100, 115, 92, 92, 114, 104, 97, 105, 92, 92, 110, 45, 55, 102, 100, 98, 49, 49, 56, 48, 92, 92, 114, 117, 110, 92, 92, 115, 99, 111, 112, 101, 100, 45, 55, 52, 101, 98, 52, 50, 57, 50, 99, 98, 97, 57, 52, 98, 100, 98, 98, 100, 56, 56, 51, 57, 48, 102, 101, 54, 53, 99, 102, 55, 98, 101, 92, 92, 119, 111, 114, 107, 92, 92, 116, 101, 109, 112, 92, 92, 114, 104, 97, 105, 45, 115, 121, 115, 45, 116, 101, 115, 116, 45, 51, 56, 55, 50, 45, 119, 105, 110, 100, 111, 119, 115, 95, 101, 110, 118, 95, 114, 101, 109, 111, 118, 101, 95, 112, 97, 116, 104, 95, 107, 101, 101, 112, 115, 95, 104, 111, 115, 116, 95, 112, 114, 111, 103, 114, 97, 109, 95, 115, 101, 97, 114, 99, 104, 45, 48, 92, 92, 104, 111, 115, 116, 45, 112, 97, 116, 104, 92, 92, 114, 104, 97, 105, 45, 101, 110, 118, 45, 112, 97, 116, 104, 45, 112, 114, 111, 98, 101, 46, 101, 120, 101, 34, 10, 32, 114, 105, 103, 104, 116, 58, 32, 34, 92, 92, 92, 92, 63, 92, 92, 67, 58, 92, 92, 85, 115, 101, 114, 115, 92, 92, 82, 104, 97, 105, 84, 101, 115, 116, 92, 92, 46, 108, 111, 99, 97, 108, 92, 92, 115, 104, 97, 114, 101, 92, 92, 97, 103, 101, 110, 116, 45, 98, 117, 105, 108, 100, 115, 92, 92, 114, 104, 97, 105, 92, 92, 110, 45, 55, 102, 100, 98, 49, 49, 56, 48, 92, 92, 114, 117, 110, 92, 92, 115, 99, 111, 112, 101, 100, 45, 55, 52, 101, 98, 52, 50, 57, 50, 99, 98, 97, 57, 52, 98, 100, 98, 98, 100, 56, 56, 51, 57, 48, 102, 101, 54, 53, 99, 102, 55, 98, 101, 92, 92, 119, 111, 114, 107, 92, 92, 116, 101, 109, 112, 92, 92, 114, 104, 97, 105, 45, 115, 121, 115, 45, 116, 101, 115, 116, 45, 51, 56, 55, 50, 45, 119, 105, 110, 100, 111, 119, 115, 95, 101, 110, 118, 95, 114, 101, 109, 111, 118, 101, 95, 112, 97, 116, 104, 95, 107, 101, 101, 112, 115, 95, 104, 111, 115, 116, 95, 112, 114, 111, 103, 114, 97, 109, 95, 115, 101, 97, 114, 99, 104, 45, 48, 92, 92, 104, 111, 115, 116, 45, 112, 97, 116, 104, 92, 92, 114, 104, 97, 105, 45, 101, 110, 118, 45, 112, 97, 116, 104, 45, 112, 114, 111, 98, 101, 46, 101, 120, 101, 34, 10, 110, 111, 116, 101, 58, 32, 114, 117, 110, 32, 119, 105, 116, 104, 32, 96, 82, 85, 83, 84, 95, 66, 65, 67, 75, 84, 82, 65, 67, 69, 61, 49, 96, 32, 101, 110, 118, 105, 114, 111, 110, 109, 101, 110, 116, 32, 118, 97, 114, 105, 97, 98, 108, 101, 32, 116, 111, 32, 100, 105, 115, 112, 108, 97, 121, 32, 97, 32, 98, 97, 99, 107, 116, 114, 97, 99, 101, 10], stdout_complete: true, stderr_complete: true, exit: Some(Code(101)), timed_out: false, cleanup_diagnostics: [ProcessDiagnostic { operation: "observe managed job cleanup", io_kind: Some(Other), message: "managed job lifetime membership was not completely captured" }, ProcessDiagnostic { operation: "retain cleanup custody", io_kind: None, message: "child, managed job or overlapped operation remains active; cleanup service retains ownership" }] } }
+[DEBUG-envpath] cause=Io { op: "complete process cleanup", target: "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-7fdb1180\\run\\scoped-74eb4292cba94bdbbd88390fe65cf7be\\work\\target\\debug\\deps\\sys_process_windows-b3e5219af6d50bf7.exe", kind: Other, message: "native cleanup remains incomplete" } exit=Some(101) timed_out=false stdout_complete=true stderr_complete=true cleanup=[ProcessDiagnostic { operation: "observe managed job cleanup", io_kind: Some(Other), message: "managed job lifetime membership was not completely captured" }, ProcessDiagnostic { operation: "retain cleanup custody", io_kind: None, message: "child, managed job or overlapped operation remains active; cleanup service retains ownership" }] stdout="\nrunning 1 test\nF\nfailures:\n\nfailures:\n    windows_removed_path_controller\n\ntest result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 40 filtered out; finished in 0.26s\n\n" stderr="windows_removed_path_readback label=direct pid=3364 exact_handle_signaled=true child_path_missing=true host_path_exe=true\nwindows_removed_path_readback label=managed pid=5868 exact_handle_signaled=true child_path_missing=true host_path_exe=true\nthread 'windows_removed_path_controller' panicked at tests\\sys_process_windows.rs:455:13:\nassertion `left != right` failed: deliberately wrong removed PATH executable expectation\n  left: \"\\\\\\\\?\\\\C:\\\\Users\\\\RhaiTest\\\\.local\\\\share\\\\agent-builds\\\\rhai\\\\n-7fdb1180\\\\run\\\\scoped-74eb4292cba94bdbbd88390fe65cf7be\\\\work\\\\temp\\\\rhai-sys-test-3872-windows_env_remove_path_keeps_host_program_search-0\\\\host-path\\\\rhai-env-path-probe.exe\"\n right: \"\\\\\\\\?\\\\C:\\\\Users\\\\RhaiTest\\\\.local\\\\share\\\\agent-builds\\\\rhai\\\\n-7fdb1180\\\\run\\\\scoped-74eb4292cba94bdbbd88390fe65cf7be\\\\work\\\\temp\\\\rhai-sys-test-3872-windows_env_remove_path_keeps_host_program_search-0\\\\host-path\\\\rhai-env-path-probe.exe\"\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n"
+thread 'windows_env_remove_path_keeps_host_program_search' panicked at tests\sys_process_windows.rs:494:13:
+isolated PATH controller failed before confirmed closure: ErrorRuntime(rhai::packages::sys::error::SysError, 2:9)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test windows_env_remove_path_keeps_host_program_search ... FAILED
+
+failures:
+
+failures:
+    windows_env_remove_path_keeps_host_program_search
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 40 filtered out; finished in 0.29s
+
+error: test failed, to rerun pass `--test sys_process_windows`

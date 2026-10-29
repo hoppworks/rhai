@@ -6,15 +6,15 @@ Implementation active by owner instruction. A–F, Ticket03 and release remain o
 
 ## Decisions
 
-Use central agent-skills `d6024420` plus local edits and project `AGENTS.md`. Require Rhai→Engine→host→OS proof, readback, assertion sensitivity and combined review. Push/merge only to `https://github.com/hoppworks/rhai.git` main, never upstream; author/committer `hoppworks`, configured email, no coauthors or task branches. Preserve foreign work, original VM media, human limits and owned cleanup. No Linear. Choose heavy runs from live capacity. Prefer Terra; Luna rarely.
+Use central agent-skills `d6024420` plus local edits and project `AGENTS.md`. Require real-OS proof, readback, assertion sensitivity and combined review. Push/merge only to `https://github.com/hoppworks/rhai.git` main, never upstream; author/committer `hoppworks`, configured email, no coauthors or task branches. Preserve foreign work, original VM media, human limits and owned cleanup. No Linear. Capacity-based heavy runs; prefer Terra.
 
 ## Current step
 
-Fork-main includes reviewed Windows X35 and Windows1.77.2 profile slices. Sys/Net package-alone and three-OS `net,no_object` pass at recorded scopes; macOS core1.66 passes. Broad default `sys,net` passes macOS/Linux/Windows 157/165/125. POSIX standalone Sys passes 126/134. Native Windows Managed kill/timeout/drop and overflow have reviewed RED/GREEN and cleanup; affected process suite passes 35/35. A–F/Ticket03/release remain open.
+Fork-main includes reviewed Windows X35 and Windows1.77.2 profile slices. Sys/Net package-alone and three-OS `net,no_object` pass at recorded scopes; macOS core1.66 passes. Broad default `sys,net` passes macOS/Linux/Windows 157/165/125. POSIX Sys passes 126/134. Native Windows Managed kill/timeout/drop and overflow have reviewed RED/GREEN and cleanup; affected process suite passes 35/35. A–F/Ticket03/release remain open.
 
 ## Next action
 
-Next: close remaining Windows Managed fault and process/IO criteria with applicable public-Engine evidence; reuse accepted feature and platform results. Full A–F/Ticket03/release acceptance remains open.
+Next: integrate reviewed Windows env_remove package on fork main; then address remaining Windows process options, nested Managed membership and native feature gaps. A–F/Ticket03/release remain open.
 
 ## Goal
 
@@ -69,8 +69,8 @@ Windows1.77.2 `unchecked`: HEAD26bf source/lock, host/cap wrong101, widened-cap0
 Windows1.77.2 `f32_float`: HEAD eea5 source/lock, host/f32 timeout wrong101, suite126/0/0. Driver0/106s, 223 frames/16 files, journal8, review PASS; owned resources retired, original sdc restored. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/f32-float-attempt01/proof.md`.
 
 Windows1.77.2 `no_index,sync,metadata` combined Engine/sys/net: wrong101/GREEN0, real host file/TCP peer, Driver0/62s, 208 frames/16 files, journal8, review PASS, own resources retired. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/noindex-sync-metadata-attempt01/proof.md`. Linux1.77.2 same profile: 11 targets/102 passed, combined wrong101, outer0, exact scope/stage retired, review PASS. `.scratch/all-tickets/release-matrix-20261028/linux-noindex-sync-metadata-attempt01/proof.md`.
-Windows1.77.2 current-source Managed kill/timeout/final-drop: four intended wrong101, suite32/0/0, OS readbacks, Driver0/154s, 225 frames/19 originals, journal8, review PASS, cleanup. Direct quote calibration reused. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/managed-controls-attempt01/proof.md`. DirectChild early stdin close: wrong101/GREEN0, child readback, Driver0/93s, review PASS, cleanup; `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/stdin-close-attempt01/proof.md`. Managed stdout overflow: wrong101, suite35/0/0, Driver0/107s, review PASS, cleanup; `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/managed-overflow-attempt01/proof.md`.
-Windows SDK-link attempts01–04: linker path only, unretained Cargo RSP, guard85, then `%~dp0` mispath61. Original results, costs, cleanup and reviews: `docs/sys-package-plan.md` and original attempt01–04 proof folders.
+Windows1.77.2 Managed kill/timeout/drop: four intended wrong101, suite32/0/0, OS readbacks, Driver0/154s, 225 frames/19 originals, journal8, review PASS, cleanup. Direct quote calibration reused. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/managed-controls-attempt01/proof.md`. DirectChild early stdin close: wrong101/GREEN0, child readback, Driver0/93s, review PASS, cleanup; `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/stdin-close-attempt01/proof.md`. Managed stdout overflow: wrong101, suite35/0/0, Driver0/107s, review PASS, cleanup; `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/managed-overflow-attempt01/proof.md`.
+Windows SDK-link attempts01–04: see plan/proofs.
 Windows SDK-link attempt05: native explicit-path probe and RSP PASS, Driver0/journal8, exact cleanup and review. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt05/proof.md`.
 Windows SDK-link attempt06: Cargo/RSP export0, 6 Kit+MSVC paths and post-run guest hashes recovered/independently reviewed; Driver2/106.736s, journal4, 378 work files/74 directories, later exact guest/host cleanup. Runner/release/product remain open. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt06/proof.md`.
 
@@ -80,21 +80,19 @@ Workhorse VM `dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19`: original sdc restored, fore
 
 ## Cause history
 
-Attempt18 false timeout unresolved; attempt26 expired before RED/GREEN; attempts36–39 exposed false Job closure; attempt48 expected RED incorrectly; attempt50 showed batch injection. Retry fixed55–56. Attempt57 Driver parser sought wrong log; attempt58 corrected it. Attempt59 fixed fallback; attempt60 final-drop passed. MSRV bootstrap: absent F:, `findstr`/null parser, invalid custody root, then pass. SDK-link: no verbose paths, unretained attempt02 RSP, guard85, `%~dp0` mispath61, control PASS05. Attempt06 Cargo link and SDK selection recovered, but Runner finalization failed before EVIDENCE; cause unproven. Mac net-only attempt01 peer read returned WouldBlock; attempt02 fixed accepted-peer mode. Windows current COM1 rotation was reconstructed. Earlier causes/limits remain in proof folders/history.
+Windows env_remove baseline reproduced Denied. Attempt01 removed/override/invalid wrong controls reached assertions; parent used unsupported integer wait, suite withheld. Test changed to bounded try_wait; review and GREEN pending. Own guest/host resources retired; original evidence: Windows `env-remove-*-attempt01/`. Attempt04 Windows env_remove suite 41/0, prior scoped REDs and combined review PASS. Attempt03 outer nested Managed reported incomplete membership; remains open. All own scopes retired; proof: Windows `env-remove-fix-attempt04/`. no_index remains open.
 
-## Open escalations
+Attempt18 timeout unresolved; attempt26 expired before RED/GREEN; attempts36–39 exposed false Job closure; attempt48 expected RED incorrectly; attempt50 showed batch injection. Retry fixed55–56. Attempt57 Driver parser sought wrong log; attempt58 corrected it. Attempt59 fixed fallback; attempt60 final-drop passed. MSRV bootstrap: absent F:, `findstr`/null parser, invalid custody root, then pass. SDK-link: no verbose paths, unretained attempt02 RSP, guard85, `%~dp0` mispath61, control PASS05. Attempt06 Cargo link and SDK selection recovered, but Runner finalization failed before EVIDENCE; cause unproven. Mac net-only attempt01 peer read returned WouldBlock; attempt02 fixed accepted-peer mode. Windows current COM1 rotation was reconstructed. Earlier causes/limits: proofs.
 
-Managed closure requires exact handles and fail-closed completion; retry corrections were rechecked. No pending approval or outcome decision.
+Managed closure requires exact handles and fail-closed completion.
 
 ## Budgets
 
-Windows attempts52–62 used bounded Drivers; no budget reset. Recent Windows package-alone Drivers took 85.161s and 100.847s. Linux net-only and overlay took 13.96s/12.97s; macOS net-only failed at 16.3s, then passed at 17s. Each had one bounded invocation; original proof folders retain limits, causes and cleanup.
+Windows attempts52–62 used bounded Drivers; no budget reset. Windows package-alone: 85.161s/100.847s. Linux net-only/overlay: 13.96s/12.97s; macOS net-only failed 16.3s, passed 17s. Limits, causes and cleanup: proofs.
 
 ## History
 
 `docs/sys-package-plan.md`, `.scratch/all-tickets/coordinator-history-20261015.md` and original attempt proof folders retain decisions, prior state, causes and accepted evidence.
 - Snapshots: `journal/state-*.md`.
 
-## Retrospective
-
-Campaign open. Timings above; aggregate cost unknown.
+Cost unknown.

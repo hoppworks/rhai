@@ -1,0 +1,58 @@
+{
+  "nonce": "649d364d5e1244ffa522dea09490b2a0",
+  "base_head": "9a03f2ce9a1800293bf09b98e5ee6bc1d23c8c4b",
+  "overlay_sha256": "ad610317341b6427d00e3bd8624927669c7d41b9b3e7035a4398ab784e16a297",
+  "source_overlays": {
+    "tests/sys_process_windows.rs": "ad610317341b6427d00e3bd8624927669c7d41b9b3e7035a4398ab784e16a297",
+    "src/packages/sys/process/windows/mod.rs": "10462a791f4f7f76d1942b6ae8ee3876a101bb05b8695069cfc674ed387c5990",
+    "src/packages/sys/process/windows/child.rs": "7c18d95165636561feb74c4d34fc2716a856a71f1dd8ba88914842ae788afc02",
+    "src/packages/sys/process/windows/encoding.rs": "f159e6aa3012dc358c104141802d929af222f742babcba447afe6ac8cadc92e1",
+    "src/packages/sys/process/windows/resolve.rs": "eb3c0fe424fdec9171fdd2a87c80feb51e16f49506e28cdf548bcd8c29f3648f"
+  },
+  "source_manifest_sha256": "07018196be3807efe21640cfa04dba3a8fe5d446c11a7418456a7add55ea7be4",
+  "archive_sha256": "51adf442d7dadedb848e7be03650bed4fcd777ff029cbb1af88cc91e5d32dad3",
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "features": "testing-environ,sys,net",
+  "target": "sys_process_windows",
+  "test": "windows_env_remove_preserves_parent_and_applies_overrides",
+  "media_files": {
+    "source-manifest.json": {
+      "bytes": 68243,
+      "sha256": "07018196be3807efe21640cfa04dba3a8fe5d446c11a7418456a7add55ea7be4"
+    },
+    "ClearOwnedWorkReadOnly.ps1": {
+      "bytes": 2906,
+      "sha256": "e40b9a4de52a6f07260fbfc196d15428eb3f2ad3c68e2db171712d1cbb2d6f3c"
+    },
+    "rhai-native-649d364d5e1244ffa522dea09490b2a0.bundle": {
+      "bytes": 45,
+      "sha256": "c383d938f6eae45f1bb31911c26fbe4a56474ccfcaddeda217f13a0ef5034742"
+    },
+    "Start.ps1": {
+      "bytes": 10652,
+      "sha256": "d61d9776bebbb7846be672119c1e9f8d9bbe1d2ab074ad383b51df1916095910"
+    },
+    "Cargo.lock": {
+      "bytes": 31602,
+      "sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802"
+    },
+    "RunRhaiContract.cmd": {
+      "bytes": 3787,
+      "sha256": "761792e035f03c61e9f6842764843b2552496d07f6810ef9a7a8aaf4e05fb86f"
+    },
+    "rhai-source.zip": {
+      "bytes": 1161483,
+      "sha256": "51adf442d7dadedb848e7be03650bed4fcd777ff029cbb1af88cc91e5d32dad3"
+    },
+    "RunRhaiContractControl.ps1": {
+      "bytes": 16541,
+      "sha256": "078aa06086199c6e567a927b403ba893f01d0cd5734a9f27a3383a5da289ec15"
+    }
+  },
+  "driver_deadline_seconds": 180,
+  "observer_deadline_seconds": 185,
+  "export_deadline_seconds": 180,
+  "start_sha256": "d61d9776bebbb7846be672119c1e9f8d9bbe1d2ab074ad383b51df1916095910",
+  "native_started": false,
+  "iso_sha256": "7b061b88844006c5ed740f24109573165960ffb4a189ff10adaace4023bc4efd"
+}

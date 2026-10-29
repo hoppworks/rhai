@@ -1,0 +1,29 @@
+{
+  "journal_sha256": "75c52136336e7b8aaf38a0a940eee7dc5f3d8de0ecd4c0052be75d9e40005f3d",
+  "journal_states": [
+    "INTENT",
+    "IDENTITY",
+    "STAGED",
+    "LIFECYCLE",
+    "EVIDENCE",
+    "OUTCOME",
+    "REMOVE_INTENT",
+    "REMOVED"
+  ],
+  "crc_and_length_valid": true,
+  "payload_exit": 65,
+  "driver_exit": 2,
+  "runtime_removed": true,
+  "inner_direct_and_managed_readbacks": true,
+  "inner_managed_wrong_assertion": true,
+  "outer_process_error": "native cleanup remains incomplete; lifetime membership was not completely captured; cleanup custody retained",
+  "outer_timeout": false,
+  "outer_exit": 101,
+  "suite_started": false,
+  "product_acceptance": false,
+  "guest_scope_cleanup_pending": false,
+  "guest_scope_absent": true,
+  "host_stage_absent": true,
+  "original_sdc_restored": true,
+  "foreign_sdb_unchanged": true
+}

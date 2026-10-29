@@ -1922,6 +1922,12 @@ All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ti
 remain represented. This crosswalk is a coverage plan, not an executed acceptance
 matrix or closure count. Historical implementation notes and estimates follow.
 
+### Windows process environment removal — 2026-10-29
+
+Native Windows Rust/Cargo 1.77.2 under `testing-environ,sys,net` now accepts the named public `env_remove` cases: case-insensitive removal, explicit override, unchanged parent, invalid-option denial and host-PATH search for DirectChild and Managed. A locked full `sys_process_windows` run passed 41/0/0, with real child records and applicable earlier assertion-sensitivity controls. The exact source, control limitations, Job and cleanup evidence, and independent combined review are in [the proof](../.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/env-remove-fix-attempt04/proof.md).
+
+The preceding diagnostic observed incomplete lifetime-membership capture in an additional outer nested Managed controller; the final PATH test uses a different guarded controller and does not close that separate issue. Windows `no_index`, unexecuted OS/feature/MSRV rows, remaining process behavior, Ticket03 and full release acceptance remain open.
+
 ### 6.9 Historical phases — retained, superseded as execution instructions
 
 | Phase | Deliverable | Exit criteria | Effort |

@@ -1,0 +1,17 @@
+{
+  "nonce": "7fdb1180cd7f40b48f389ef77d0e6aeb",
+  "base_head": "9a03f2ce9a1800293bf09b98e5ee6bc1d23c8c4b",
+  "source_overlays": {
+    "tests/sys_process_windows.rs": "12beff629244aafbb71dde6206c5052b49d972ff92a66bb64b5674dd9c4b0f1f",
+    "src/packages/sys/process/windows/mod.rs": "10462a791f4f7f76d1942b6ae8ee3876a101bb05b8695069cfc674ed387c5990",
+    "src/packages/sys/process/windows/child.rs": "7c18d95165636561feb74c4d34fc2716a856a71f1dd8ba88914842ae788afc02",
+    "src/packages/sys/process/windows/encoding.rs": "f159e6aa3012dc358c104141802d929af222f742babcba447afe6ac8cadc92e1",
+    "src/packages/sys/process/windows/resolve.rs": "eb3c0fe424fdec9171fdd2a87c80feb51e16f49506e28cdf548bcd8c29f3648f"
+  },
+  "source_file_count": 448,
+  "other_files_match_attempt02": true,
+  "archive_sha256": "14e7635784818e29544919a947b5bd5f91b384ba701de48e0719e49952e657f2",
+  "manifest_sha256": "cfdc93ada04931c662f48db9a69bccb095cdc40875e70432e6eb861a432ba871",
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "native_run_started": false
+}

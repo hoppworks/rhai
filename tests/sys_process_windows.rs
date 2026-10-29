@@ -58,6 +58,8 @@ const HANDLE_FLAG_INHERIT: u32 = 1;
 extern "system" {
     fn OpenProcess(access: u32, inherit: i32, pid: u32) -> Handle;
     fn WaitForSingleObject(handle: Handle, milliseconds: u32) -> u32;
+    fn GetCurrentProcess() -> Handle;
+    fn IsProcessInJob(process: Handle, job: Handle, result: *mut i32) -> i32;
     fn GetExitCodeProcess(handle: Handle, exit_code: *mut u32) -> i32;
     fn TerminateProcess(handle: Handle, exit_code: u32) -> i32;
     fn CloseHandle(handle: Handle) -> i32;
@@ -302,6 +304,306 @@ fn windows_stdin_fixture() {
     std::fs::write(&temporary, input).unwrap();
     std::fs::rename(&temporary, data).unwrap();
     process::exit(0);
+}
+
+/// The child records its environment before an independently observed exit.
+#[test]
+fn windows_env_remove_fixture() {
+    let Ok(record) = std::env::var("RHAI_WINDOWS_ENV_PID_RECORD") else { return; };
+    let data = std::env::var("RHAI_WINDOWS_ENV_DATA_RECORD").unwrap();
+    let value = |key: &str| std::env::var(key).unwrap_or_else(|_| "<missing>".into());
+    std::fs::write(&data, format!("systemroot={} path={}\n", value("SystemRoot"), value("PATH"))).unwrap();
+    let path = std::path::Path::new(&record);
+    let temporary = path.with_extension("tmp");
+    std::fs::write(&temporary, format!("pid={}\n", process::id())).unwrap();
+    std::fs::rename(temporary, path).unwrap();
+    let deadline = Instant::now() + Duration::from_secs(20);
+    while !path.with_extension("observed").exists() {
+        assert!(Instant::now() < deadline, "environment observer did not acquire child handle");
+        thread::sleep(Duration::from_millis(10));
+    }
+    process::exit(0);
+}
+
+#[test]
+fn windows_env_remove_preserves_parent_and_applies_overrides() {
+    let records = TempDir::new();
+    let keys = ["SystemRoot", "PATH", "ComSpec"];
+    let before: Vec<_> = keys.iter().map(std::env::var_os).collect();
+    assert!(before[0].is_some(), "Windows must supply the inherited SystemRoot fixture");
+    for (label, supervision, spawn) in [
+        ("direct-run", ProcessScope::DirectChild, false),
+        ("direct-spawn", ProcessScope::DirectChild, true),
+        ("managed-run", ProcessScope::Managed, false),
+        ("managed-spawn", ProcessScope::Managed, true),
+    ] {
+        let pid_record = records.path().join(format!("{label}.pid"));
+        let data_record = records.path().join(format!("{label}.data"));
+        let observer = thread::spawn({
+            let record = pid_record.clone();
+            move || observe_stdin_child(record)
+        });
+        let mut scope = Scope::new();
+        scope.push("program", std::env::current_exe().unwrap().to_string_lossy().into_owned());
+        scope.push("pid_record", pid_record.to_string_lossy().into_owned());
+        scope.push("data_record", data_record.to_string_lossy().into_owned());
+        let engine = engine(SysConfig::default().programs(ProgramPolicy::Any).process_scope(supervision));
+        let script = if spawn {
+            r#"spawn(program, ["--exact", "windows_env_remove_fixture", "--nocapture", "--quiet"],
+                #{ env_remove: ["sYsTeMrOoT", "pAtH"], env: #{ PATH: "rhai-child-path",
+                   RHAI_WINDOWS_ENV_PID_RECORD: pid_record, RHAI_WINDOWS_ENV_DATA_RECORD: data_record } })"#
+        } else {
+            r#"run_raw(program, ["--exact", "windows_env_remove_fixture", "--nocapture", "--quiet"],
+                #{ env_remove: ["sYsTeMrOoT", "pAtH"], env: #{ PATH: "rhai-child-path",
+                   RHAI_WINDOWS_ENV_PID_RECORD: pid_record, RHAI_WINDOWS_ENV_DATA_RECORD: data_record },
+                   timeout: 15 })"#
+        };
+        let started = engine.eval_with_scope::<Dynamic>(&mut scope, script);
+        let result = if spawn {
+            match started {
+                Err(error) => Err(error),
+                Ok(child) => {
+                    scope.push_dynamic("env_child", child);
+                    let deadline = Instant::now() + Duration::from_secs(15);
+                    loop {
+                        let result = engine.eval_with_scope::<Dynamic>(&mut scope, "env_child.try_wait()");
+                        if !result.as_ref().is_ok_and(Dynamic::is_unit) { break result; }
+                        if Instant::now() >= deadline {
+                            let _ = engine.run_with_scope(&mut scope, "env_child.kill();");
+                            break result;
+                        }
+                        thread::sleep(Duration::from_millis(10));
+                    }
+                }
+            }
+        } else { started };
+        let observation = observer.join().expect("join exact environment child observer");
+        let typed_error = result.as_ref().err().and_then(|error| match error.as_ref() {
+            EvalAltResult::ErrorRuntime(value, _) => value.clone().try_cast::<SysError>(),
+            _ => None,
+        });
+        eprintln!("windows_env_remove_diagnostic label={label} observation={observation:?} typed_error={typed_error:?}");
+        let report = result.unwrap_or_else(|error| panic!("ENV_REMOVE_CONTRACT {label}: {error:?}"))
+            .try_cast::<Map>().expect("environment child must complete before its deadline");
+        let (pid, exit) = observation.expect("observe exact environment child exit");
+        assert_eq!(exit, 0);
+        assert_eq!(report["code"].as_int().unwrap(), 0);
+        let observed = std::fs::read_to_string(&data_record).expect("fresh child environment record");
+        eprintln!("windows_env_remove_readback label={label} pid={pid} exit={exit} exact_handle_signaled=true data={observed:?}");
+        match std::env::var("RHAI_WINDOWS_ENV_REMOVE_WRONG_EXPECTATION").as_deref() {
+            Ok("removed") => assert!(!observed.contains("systemroot=<missing>"), "deliberately wrong removed-variable expectation"),
+            Ok("override") => assert!(!observed.contains("path=rhai-child-path"), "deliberately wrong child-override expectation"),
+            _ => {}
+        }
+        assert_eq!(observed, "systemroot=<missing> path=rhai-child-path\n", "{label} child environment");
+    }
+    let after: Vec<_> = keys.iter().map(std::env::var_os).collect();
+    assert_eq!(before, after, "parent environment must remain unchanged");
+    if std::env::var("RHAI_WINDOWS_ENV_REMOVE_WRONG_EXPECTATION").as_deref() == Ok("parent") {
+        assert_ne!(before, after, "deliberately wrong parent-environment expectation");
+    }
+}
+
+/// Runs only inside the isolated controller's copied executable.
+#[test]
+fn windows_removed_path_fixture() {
+    let Ok(record) = std::env::var("RHAI_WINDOWS_ENV_PID_RECORD") else { return; };
+    let data = std::env::var("RHAI_WINDOWS_ENV_DATA_RECORD").unwrap();
+    std::fs::write(&data, format!("path_missing={}\nexe={}\n", std::env::var_os("PATH").is_none(),
+        std::env::current_exe().unwrap().display())).unwrap();
+    let record = std::path::Path::new(&record);
+    let temporary = record.with_extension("tmp");
+    std::fs::write(&temporary, format!("pid={}\n", process::id())).unwrap();
+    std::fs::rename(temporary, record).unwrap();
+    let deadline = Instant::now() + Duration::from_secs(20);
+    while !record.with_extension("observed").exists() {
+        assert!(Instant::now() < deadline, "parent did not acquire the exact child handle");
+        thread::sleep(Duration::from_millis(10));
+    }
+}
+
+/// This process owns its PATH and cwd; the test harness environment is untouched.
+#[test]
+fn windows_removed_path_controller() {
+    let Some(root) = std::env::var_os("RHAI_WINDOWS_REMOVED_PATH_ROOT") else { return; };
+    let root = std::path::PathBuf::from(root);
+    let expected = std::fs::canonicalize(root.join("host-path").join("rhai-env-path-probe.exe")).unwrap();
+    let parent_path = std::env::var_os("PATH").expect("isolated controller PATH");
+    std::env::set_current_dir(&root).expect("enter isolated controller directory");
+    let deadline = Instant::now() + Duration::from_secs(15);
+    while !root.join("controller.observed").exists() {
+        assert!(Instant::now() < deadline, "controller membership observation timed out");
+        thread::sleep(Duration::from_millis(10));
+    }
+    for (label, supervision) in [("direct", ProcessScope::DirectChild), ("managed", ProcessScope::Managed)] {
+        let pid_record = root.join(format!("{label}.pid"));
+        let data_record = root.join(format!("{label}.data"));
+        std::env::set_var("RHAI_WINDOWS_ENV_PID_RECORD", &pid_record);
+        std::env::set_var("RHAI_WINDOWS_ENV_DATA_RECORD", &data_record);
+        let observer = thread::spawn(move || observe_stdin_child(pid_record));
+        let engine = engine(SysConfig::default().programs(ProgramPolicy::Any).process_scope(supervision));
+        let result = engine.eval::<Map>(r#"
+            run_raw("rhai-env-path-probe", ["--exact", "windows_removed_path_fixture", "--quiet"],
+                #{ env_remove: ["pAtH"], timeout: 15 })
+        "#);
+        let observed_child = observer.join().expect("join exact child observer");
+        let report = result.expect("host PATH must resolve the unique copied fixture");
+        assert_eq!(report["code"].as_int().unwrap(), 0);
+        let (pid, exit) = observed_child.expect("observe exact PATH fixture exit");
+        assert_eq!(exit, 0);
+        let data = std::fs::read_to_string(&data_record).expect("fresh child executable record");
+        let mut lines = data.lines();
+        assert_eq!(lines.next(), Some("path_missing=true"), "child PATH must be absent");
+        let actual = std::fs::canonicalize(lines.next().unwrap().strip_prefix("exe=").unwrap()).unwrap();
+        assert!(lines.next().is_none());
+        assert_eq!(actual, expected, "host PATH must select the unique fixture");
+        eprintln!("windows_removed_path_readback label={label} pid={pid} exact_handle_signaled=true child_path_missing=true host_path_exe=true");
+        if std::env::var("RHAI_WINDOWS_REMOVED_PATH_WRONG_EXPECTATION").as_deref() == Ok(label) {
+            assert_ne!(actual, expected, "deliberately wrong removed PATH executable expectation");
+        }
+    }
+    assert_eq!(std::env::var_os("PATH"), Some(parent_path), "isolated controller PATH changed");
+}
+
+#[test]
+fn windows_env_remove_path_keeps_host_program_search() {
+    struct ControllerGuard {
+        child: Option<std::process::Child>,
+        root: Option<TempDir>,
+        root_safe_to_retire: bool,
+    }
+    impl Drop for ControllerGuard {
+        fn drop(&mut self) {
+            if let Some(mut child) = self.child.take() {
+                let handle = child.as_raw_handle() as Handle;
+                if unsafe { WaitForSingleObject(handle, 0) } != WAIT_OBJECT_0 {
+                    let _ = child.kill();
+                }
+                if unsafe { WaitForSingleObject(handle, 10_000) } != WAIT_OBJECT_0 {
+                    eprintln!("PATH controller exit unconfirmed; retain exact handle and fixture");
+                    std::mem::forget(child);
+                    if let Some(root) = self.root.take() { std::mem::forget(root); }
+                    return;
+                }
+                if let Err(error) = child.wait() {
+                    eprintln!("PATH controller reap unconfirmed: {error}");
+                    self.root_safe_to_retire = false;
+                }
+            }
+            if !self.root_safe_to_retire {
+                // The enclosing native Driver retains custody of ordinary descendants.
+                if let Some(root) = self.root.take() { std::mem::forget(root); }
+            }
+        }
+    }
+    let original_path = std::env::var_os("PATH");
+    let records = TempDir::new();
+    let root = records.path().to_path_buf();
+    let host_path = root.join("host-path");
+    std::fs::create_dir(&host_path).unwrap();
+    let fixture = host_path.join("rhai-env-path-probe.exe");
+    std::fs::copy(std::env::current_exe().unwrap(), &fixture).unwrap();
+    let stdout = std::fs::File::create(root.join("controller.out")).unwrap();
+    let stderr = std::fs::File::create(root.join("controller.err")).unwrap();
+    let child = std::process::Command::new(std::env::current_exe().unwrap())
+        .args(["--exact", "windows_removed_path_controller", "--nocapture", "--quiet"])
+        .env("PATH", &host_path).env("RHAI_WINDOWS_REMOVED_PATH_ROOT", &root)
+        .stdin(std::process::Stdio::null()).stdout(stdout).stderr(stderr).spawn()
+        .expect("start isolated PATH controller");
+    let mut guard = ControllerGuard { child: Some(child), root: Some(records), root_safe_to_retire: false };
+    let mut parent_in_job = 0;
+    let mut controller_in_job = 0;
+    let controller_handle = guard.child.as_ref().unwrap().as_raw_handle() as Handle;
+    assert_ne!(unsafe { IsProcessInJob(GetCurrentProcess(), std::ptr::null_mut(), &mut parent_in_job) }, 0);
+    assert_ne!(unsafe { IsProcessInJob(controller_handle, std::ptr::null_mut(), &mut controller_in_job) }, 0);
+    eprintln!("windows_removed_path_job_readback parent_job={} controller_job={}", parent_in_job != 0, controller_in_job != 0);
+    if parent_in_job != 0 {
+        #[repr(C)]
+        struct ProcessList { assigned: u32, listed: u32, ids: [usize; 256] }
+        let mut members = ProcessList { assigned: 0, listed: 0, ids: [0; 256] };
+        let ok = unsafe { QueryInformationJobObject(std::ptr::null_mut(), 3, &mut members as *mut _ as *mut c_void,
+            std::mem::size_of_val(&members) as u32, std::ptr::null_mut()) };
+        assert_ne!(ok, 0, "query controller parent job: {}", std::io::Error::last_os_error());
+        assert_eq!(members.assigned, members.listed, "complete parent job membership required");
+        assert!((members.listed as usize) <= members.ids.len());
+        let ids = &members.ids[..members.listed as usize];
+        assert!(ids.contains(&(process::id() as usize)), "test absent from parent job");
+        assert!(ids.contains(&(guard.child.as_ref().unwrap().id() as usize)), "controller absent from parent job");
+        eprintln!("windows_removed_path_membership_readback complete=true parent_pid={} controller_pid={} assigned={}",
+            process::id(), guard.child.as_ref().unwrap().id(), members.assigned);
+    }
+    std::fs::write(root.join("controller.observed"), b"membership observed\n").unwrap();
+    let deadline = Instant::now() + Duration::from_secs(45);
+    let status = loop {
+        if let Some(status) = guard.child.as_mut().unwrap().try_wait().expect("poll PATH controller") { break status; }
+        assert!(Instant::now() < deadline, "isolated PATH controller exceeded deadline");
+        thread::sleep(Duration::from_millis(10));
+    };
+    let handle = guard.child.as_ref().unwrap().as_raw_handle() as Handle;
+    assert_eq!(unsafe { WaitForSingleObject(handle, 0) }, WAIT_OBJECT_0, "exact controller handle must signal");
+    let reaped = guard.child.as_mut().unwrap().wait().expect("reap exact PATH controller");
+    assert_eq!(reaped, status, "controller wait must preserve exit status");
+    let output = std::fs::read_to_string(root.join("controller.err")).unwrap();
+    eprintln!("{output}");
+    eprintln!("windows_removed_path_controller_readback exact_handle_signaled=true reaped=true exit={:?}", status.code());
+    assert!(status.success(), "isolated PATH controller failed: {status:?}");
+    let expected = std::fs::canonicalize(fixture).unwrap();
+    for label in ["direct", "managed"] {
+        let data = std::fs::read_to_string(root.join(format!("{label}.data"))).expect("independent child record");
+        let mut lines = data.lines();
+        assert_eq!(lines.next(), Some("path_missing=true"));
+        let actual = std::fs::canonicalize(lines.next().unwrap().strip_prefix("exe=").unwrap()).unwrap();
+        assert!(lines.next().is_none());
+        assert_eq!(actual, expected, "{label} selected executable");
+    }
+    assert_eq!(std::env::var_os("PATH"), original_path, "parent test PATH changed");
+    guard.root_safe_to_retire = true;
+}
+
+#[test]
+fn windows_env_remove_rejects_invalid_options_before_child_start() {
+    let records = TempDir::new();
+    for (mode, supervision, spawn) in [
+        ("direct-run", ProcessScope::DirectChild, false),
+        ("direct-spawn", ProcessScope::DirectChild, true),
+        ("managed-run", ProcessScope::Managed, false),
+        ("managed-spawn", ProcessScope::Managed, true),
+    ] {
+        for (label, invalid) in [
+            ("not-array", Dynamic::from_int(7)),
+            ("not-string", Dynamic::from_array(vec![Dynamic::from_int(7)])),
+            ("empty", Dynamic::from_array(vec![Dynamic::from("")])),
+            ("equals", Dynamic::from_array(vec![Dynamic::from("bad=name")])),
+            ("nul", Dynamic::from_array(vec![Dynamic::from("bad\0name")])),
+        ] {
+            let record = records.path().join(format!("{mode}-{label}.txt"));
+            let mut scope = Scope::new();
+            scope.push("program", std::env::current_exe().unwrap().to_string_lossy().into_owned());
+            scope.push("record", record.to_string_lossy().into_owned());
+            scope.push_dynamic("invalid", invalid);
+            let engine = engine(SysConfig::default().programs(ProgramPolicy::Any).process_scope(supervision));
+            let script = if spawn {
+                r#"spawn(program, ["--exact", "windows_path_probe_fixture", "--quiet"],
+                    #{ env_remove: invalid, env: #{ RHAI_WINDOWS_PATH_PROBE_RECORD: record } })"#
+            } else {
+                r#"run_raw(program, ["--exact", "windows_path_probe_fixture", "--quiet"],
+                    #{ env_remove: invalid, env: #{ RHAI_WINDOWS_PATH_PROBE_RECORD: record }, timeout: 10 })"#
+            };
+            let result = engine.eval_with_scope::<Dynamic>(&mut scope, script);
+            let error = result.expect_err("invalid env_remove must be rejected");
+            let error = match *error {
+                EvalAltResult::ErrorRuntime(value, _) => value.try_cast::<SysError>(),
+                _ => None,
+            };
+            assert!(matches!(error, Some(SysError::Denied(_))), "unexpected invalid-option error: {error:?}");
+            let started = record.exists();
+            eprintln!("windows_env_remove_invalid_readback mode={mode} case={label} child_record_exists={started}");
+            if std::env::var_os("RHAI_WINDOWS_ENV_REMOVE_INVALID_WRONG_EXPECTATION").is_some() {
+                assert!(started, "deliberately wrong invalid-option child-start expectation");
+            }
+            assert!(!started, "invalid env_remove must not start the child");
+        }
+    }
 }
 
 fn observe_stdin_child(record: std::path::PathBuf) -> Option<(u32, u32)> {
