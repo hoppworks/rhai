@@ -1680,6 +1680,28 @@ proven pre-retirement export method in one bounded real Cargo target diagnostic,
 then independently hash only SDK files actually selected by that invocation.
 Retain accepted feature/product results; do not rebuild them for this binding.
 
+Attempt 06 performed that one real-target diagnostic on native Windows 11 with
+Rust/Cargo 1.77.2, `testing-environ,sys,net`, and `combined_sys_net`. The original
+payload reports Cargo and response-file export exit 0; the recovered Cargo log
+prints the exact `link.exe` invocation and a finished link. The independently
+hash-verified UTF-16 response file identifies six unique Windows Kits
+10.0.26100.0 UM libraries (`advapi32`, `bcrypt`, `kernel32`, `ntdll`, `userenv`,
+`ws2_32`) and MSVC `msvcrt.lib`. A separate guest readback hashes those seven
+files and the selected linker **after** the link. This closes the narrow
+actual-Cargo-selected SDK input inventory, with that time-of-hash limit; see
+`.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt06/proof.md`.
+The Driver exited 2 after 106.736 seconds, and its original valid journal stops
+at `LIFECYCLE` (four states), before `EVIDENCE`, `OUTCOME` or `REMOVED`. The
+private work tree remained, with 378 files and 74 directories observed later.
+Its exact finalization failure is not yet established. The owned guest scope
+was manually retired after original export and SDK hash readback; original
+live/inactive VM media were restored and foreign media preserved. One combined
+review accepts only the SDK-selection diagnostic. Full native Runner custody,
+release acceptance and product tests remain open. Investigate this concrete
+post-Cargo finalization failure from the saved journal/source before another
+full-target build; do not repeat accepted profile tests or the SDK link merely
+because its Runner completion failed.
+
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance
 matrix or closure count. Historical implementation notes and estimates follow.

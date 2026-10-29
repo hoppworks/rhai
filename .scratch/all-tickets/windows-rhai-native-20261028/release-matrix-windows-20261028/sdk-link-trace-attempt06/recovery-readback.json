@@ -1,0 +1,22 @@
+{
+  "serial_sha256": "9c9d5b7ee90c3ab34f70bf71d61dccef6f135755c9ad157f42326b4b2a2304e0",
+  "files": {
+    "link-inputs.rsp": {
+      "bytes": 23488,
+      "sha256": "675379d3f282e579b24155053682b3f347fa2d880cafc5bfccca55cc20261bbc"
+    },
+    "cargo-link.log": {
+      "bytes": 17542,
+      "sha256": "4b1528f31a57a23ef0853c98370909b2995e84a1050f70f39790d82b0e590b7d"
+    },
+    "cargo-version.txt": {
+      "bytes": 36,
+      "sha256": "6112bcce75ab9a1c5d664eec9c11d98776a7c36c3be3c3402d871d72f1401b20"
+    },
+    "rustc-version.txt": {
+      "bytes": 36,
+      "sha256": "8d95dab8b988abfc08735506e13455043a0a2f910e0672f4fdd48f37cc0a2f83"
+    }
+  },
+  "all_hashes_match": true
+}

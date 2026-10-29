@@ -1,0 +1,66 @@
+{
+  "attempt": "sdk-link-trace-attempt06",
+  "source_commit": "7019821fc9d7814d0632fea06de50933aa9e35ee",
+  "integrated_head_at_prepare": "9d3753793a9de646dbcfcc1f54b858b663223bfe",
+  "source_tree_matches_integrated_head": true,
+  "nonce": "9dd1f408c6904bbe87d8cb18510b9029",
+  "vm_uuid": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19",
+  "guest_scope": "n-9dd1f408",
+  "retained_toolchain_scope": "n-a7e54f39",
+  "retained_toolchain_expiry_utc": "2026-11-01T00:00:00Z",
+  "driver_deadline_seconds": 180,
+  "observer_deadline_seconds": 185,
+  "export_deadline_seconds": 180,
+  "planned_features": "testing-environ,sys,net",
+  "planned_target": "combined_sys_net",
+  "planned_product_tests": 0,
+  "media_files": {
+    "Cargo.lock": {
+      "bytes": 31602,
+      "sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802"
+    },
+    "ClearOwnedWorkReadOnly.ps1": {
+      "bytes": 2906,
+      "sha256": "18487ea129980c246d75ec4591acc33a8cf0b6b37ee1301b0f82b2ee35f368d5"
+    },
+    "RunRhaiContract.cmd": {
+      "bytes": 2647,
+      "sha256": "9b07c6886fb08ff853b54a60af813c682cc712c05fc1e2febc159d64148d8722"
+    },
+    "RunRhaiContractControl.ps1": {
+      "bytes": 15017,
+      "sha256": "d4bdce16eb6c98aa88c088810133c0ebe7225fbff618227aedf05ec2c59caa13"
+    },
+    "Start.ps1": {
+      "bytes": 11960,
+      "sha256": "82eb7184c983580a898e2fe71f8f18842c082a91d8e16e59110d3daea0d5667d"
+    },
+    "probe.c": {
+      "bytes": 623,
+      "sha256": "3eeee002440ddb233327857611fdb7daf7408a6d6add2614e9e89953d281e1ae"
+    },
+    "rhai-native-9dd1f408c6904bbe87d8cb18510b9029.bundle": {
+      "bytes": 45,
+      "sha256": "4e1c0fd030e3dab61f302013069d6981289c44ee1fb2c8389a45ff864c420459"
+    },
+    "rhai-source.zip": {
+      "bytes": 1157342,
+      "sha256": "0005b38a387b419802335e141cb259de86f1ec9424e6e4cf2b8bc3beaf30bdd7"
+    },
+    "source-manifest.json": {
+      "bytes": 67878,
+      "sha256": "254d021566408f44b2b645551e2598f7cf9db5fee63c5e34bcc7ea20012ec9ba"
+    }
+  },
+  "source_overlay": {
+    "path": "tests/sys_process_windows.rs",
+    "sha256": "b8340cf4c4a401f619542845bfc3d6ded296480c372cbbabcc12382175d54953"
+  },
+  "cargo_lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "public_build_manifest_sha256": "8c625daf866e4bb5e30259b9fb3d27cafcb4e8e5ee813a5b07b6a5e4160ee0d1",
+  "link_input_option_help_observed": true,
+  "prior_explicit_path_control": "sdk-link-trace-attempt05/proof.md",
+  "iso_sha256": "644286a85b99ee2e3baf1a784688c2ef54be982abe23d298c1ffad8bbb0383e9",
+  "console_helper_sha256": "cee8cf1139b8f817e2b49e99013c7ce7f93a5b4319875fa7cb4f4c31a8367929",
+  "dispatch_sha256": "94aaff5c368e87bc77ed516c477ae43952eeef9dc1a052e50be7f84e84ac67c9"
+}

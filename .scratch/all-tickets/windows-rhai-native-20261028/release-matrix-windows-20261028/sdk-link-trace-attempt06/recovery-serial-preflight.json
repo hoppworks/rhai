@@ -1,0 +1,12 @@
+{
+  "path": "/var/log/libvirt/qemu/rhai-win11-quality-serial0.log",
+  "inode": 126869568,
+  "offset_start": 1036410,
+  "files": [
+    "link-inputs.rsp",
+    "cargo-link.log",
+    "cargo-version.txt",
+    "rustc-version.txt"
+  ],
+  "max_each_bytes": 1048576
+}

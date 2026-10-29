@@ -1,0 +1,15 @@
+{
+  "path": "/var/log/libvirt/qemu/rhai-win11-quality-serial0.log",
+  "inode": 126869568,
+  "offset_start": 1093563,
+  "expected_names": [
+    "advapi32",
+    "bcrypt",
+    "kernel32",
+    "ntdll",
+    "userenv",
+    "ws2_32",
+    "msvcrt.lib",
+    "link.exe"
+  ]
+}

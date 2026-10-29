@@ -1,0 +1,1 @@
+$ErrorActionPreference='Stop';$p='C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-9dd1f408';if(@(Get-Process MonitorAcceptanceDriver,ScopedRunner -ErrorAction SilentlyContinue).Count -ne 0){throw 'RUNNER_ACTIVE'};if(@(Get-ChildItem -LiteralPath $p -Recurse -Force -Attributes ReparsePoint).Count -ne 0){throw 'REPARSE'};Remove-Item -LiteralPath $p -Recurse -Force;Test-Path $p

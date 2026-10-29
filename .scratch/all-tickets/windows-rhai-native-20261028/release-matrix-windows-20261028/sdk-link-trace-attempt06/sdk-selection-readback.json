@@ -1,0 +1,57 @@
+{
+  "cargo_target": "combined_sys_net",
+  "features": "testing-environ,sys,net",
+  "cargo_link_success": true,
+  "sdk_library_paths": [
+    "C:\\Program Files (x86)\\Windows Kits\\10\\lib\\10.0.26100.0\\um\\x64\\advapi32.lib",
+    "C:\\Program Files (x86)\\Windows Kits\\10\\lib\\10.0.26100.0\\um\\x64\\bcrypt.lib",
+    "C:\\Program Files (x86)\\Windows Kits\\10\\lib\\10.0.26100.0\\um\\x64\\kernel32.lib",
+    "C:\\Program Files (x86)\\Windows Kits\\10\\lib\\10.0.26100.0\\um\\x64\\ntdll.lib",
+    "C:\\Program Files (x86)\\Windows Kits\\10\\lib\\10.0.26100.0\\um\\x64\\userenv.lib",
+    "C:\\Program Files (x86)\\Windows Kits\\10\\lib\\10.0.26100.0\\um\\x64\\ws2_32.lib"
+  ],
+  "msvc_library_paths": [
+    "C:\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\lib\\x64\\msvcrt.lib"
+  ],
+  "sdk_hashes": {
+    "advapi32.lib": {
+      "bytes": 178306,
+      "sha256": "a0ea53377e6de11c5fdc07e72af11d22d8fa613cecc6ccb1b6de43490392eadc"
+    },
+    "bcrypt.lib": {
+      "bytes": 14576,
+      "sha256": "9fe31df255d17b0339391ff80a71bf2c5d442cc301bd2fe6eeea00b626f10785"
+    },
+    "kernel32.lib": {
+      "bytes": 311908,
+      "sha256": "341c7d56125a03b458e4d5093e4c79b33123ccfdfd610fe236937b8e6f3134bb"
+    },
+    "ntdll.lib": {
+      "bytes": 517236,
+      "sha256": "a373f724ef6d8ea11a8b03de653ac1b4f111522f59a1f4b787ec9d93f31fe7c1"
+    },
+    "userenv.lib": {
+      "bytes": 19480,
+      "sha256": "2ae9d85e10d7536662b2657462ea6e4394c0143a187a75229e4e14599f6e4f2d"
+    },
+    "ws2_32.lib": {
+      "bytes": 260560,
+      "sha256": "a8a552a37d8935e272ff470e2620f55e05433b989707bd05e9911d2482f44134"
+    }
+  },
+  "msvc_hashes": {
+    "msvcrt.lib": {
+      "bytes": 8031888,
+      "sha256": "07670951a39739b6d1b50421ae61707ef23c8dff50cdf35f99408711478f3a7c"
+    },
+    "link.exe": {
+      "bytes": 3252616,
+      "sha256": "a364af801a8539e4324d9489313dbf001d959128451fc99a27b24676bbac058f"
+    }
+  },
+  "rsp_sha256": "675379d3f282e579b24155053682b3f347fa2d880cafc5bfccca55cc20261bbc",
+  "cargo_log_sha256": "4b1528f31a57a23ef0853c98370909b2995e84a1050f70f39790d82b0e590b7d",
+  "original_guest_serial_hashes_match": true,
+  "runner_complete": false,
+  "product_test_run": false
+}

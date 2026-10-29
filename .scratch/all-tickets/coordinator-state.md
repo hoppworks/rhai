@@ -10,11 +10,11 @@ Use central agent-skills `d6024420` plus local edits and project `AGENTS.md`. Re
 
 ## Current step
 
-Fork-main includes reviewed Windows X35, POSIX `f32_float`, native Windows1.77.2 sys/net, `only_i32,no_float`, `metadata,serde`, `unchecked` and `f32_float` profiles. A–F/Ticket03/release remain open.
+Fork-main includes reviewed Windows X35, POSIX `f32_float` and native Windows1.77.2 sys/net, `only_i32,no_float`, `metadata,serde`, `unchecked`, `f32_float` profiles. SDK selection is diagnosed; A–F/Ticket03/release remain open.
 
 ## Next action
 
-SDK attempt05 passed the small explicit-path native linker control: fresh executable marker, UTF-16 RSP naming owned object and supplied Kit `kernel32.lib`, Driver0, journal8, guest/host cleanup and combined review PASS. Actual Cargo-selected SDK inputs remain unbound. Next: one bounded real Cargo target diagnostic using the proven pre-retirement export, hash only selected SDK files, preserve accepted rows.
+Attempt06 recovered the successful native Cargo link RSP and post-run hashes for six Kit10.0.26100.0 UM libraries plus MSVC `msvcrt.lib`/`link.exe`; combined review PASS only for SDK selection. Driver2/journal4 leaves Runner finalization incomplete; no product test ran. Next: inspect this exact post-Cargo failure from original journal/source and work inventory before any further full-target build. Guest/host cleanup complete; preserve accepted rows.
 
 ## Goal
 
@@ -68,11 +68,9 @@ Windows1.77.2 `unchecked`: HEAD26bf source/lock, host/cap wrong101, widened-cap0
 
 Windows1.77.2 `f32_float`: HEAD eea5 source/lock, host/f32 timeout wrong101, suite126/0/0. Driver0/106s, 223 frames/16 files, journal8, review PASS; owned resources retired, original sdc restored. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/f32-float-attempt01/proof.md`.
 
-Windows1.77.2 SDK-link attempt01: HEAD9ff selected source/lock, native `cargo rustc --print=link-args` exited0; trace names MSVC14.44.35207 `link.exe`, post-run guest hash `A364AF80...`; `/VERBOSE:LIB` yielded no resolved SDK paths. Traced binary differs from host-file wrong101/GREEN0 control binary. Driver0/164.90s, 217 frames/15 checked files, journal8/8, exact guest/host cleanup; combined review PASS only for diagnostic. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt01/proof.md`.
-Windows1.77.2 SDK-link attempt02: installed linker lists `/LINKREPROFULLPATHRSP`; Cargo rustc exited0 and printed absolute option, but retained response file absent. Observer accepted=false; Driver0/148.87s, 218 frames/15 files, journal8, exact guest/host cleanup. Combined review: no SDK acceptance; cause unconfirmed. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt02/proof.md`.
-Windows SDK-link attempt03: CMD directory guard before CL, payload85/Driver2; 181 rotated-log frames/10 files, journal8, exact cleanup. Review traced work retirement before snapshot. No SDK/product acceptance. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt03/proof.md`.
-Windows SDK-link attempt04: CL C1083 for wrong `%~dp0` source after `cd`; payload61/Driver2, 185 frames/11 files, journal8, exact cleanup. Independent review confirms pre-link failure; no SDK/product acceptance. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt04/proof.md`.
-Windows SDK-link attempt05: explicit-path probe CL/LINK/run/helper0, fresh marker, UTF-16 RSP with owned object and supplied SDK kernel32.lib; Driver0/7.107s, 202 frames/16 files, journal8, exact guest/host cleanup and combined review PASS. Cargo-selected SDK/product remain open. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt05/proof.md`.
+Windows SDK-link attempts01–04: linker path only, unretained Cargo RSP, guard85, then `%~dp0` mispath61. Original results, costs, cleanup and reviews: `docs/sys-package-plan.md` and original attempt01–04 proof folders.
+Windows SDK-link attempt05: native explicit-path probe and RSP PASS, Driver0/journal8, exact cleanup and review. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt05/proof.md`.
+Windows SDK-link attempt06: Cargo/RSP export0, 6 Kit+MSVC paths and post-run guest hashes recovered/independently reviewed; Driver2/106.736s, journal4, 378 work files/74 directories, later exact guest/host cleanup. Runner/release/product remain open. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt06/proof.md`.
 
 ## Retained resources
 
@@ -80,7 +78,7 @@ Workhorse VM `dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19`: original sdc restored, fore
 
 ## Cause history
 
-Attempt18 false timeout unresolved; attempt26 expired before RED/GREEN; attempts36–39 exposed false Job closure; attempt48 expected RED incorrectly; attempt50 showed batch injection. Retry fixed55–56. Attempt57 Driver parser sought wrong log; attempt58 corrected it. Attempt59 fixed fallback; attempt60 final-drop passed. MSRV bootstrap: absent F:, `findstr`/null parser, invalid custody root, then pass. SDK-link: no verbose paths, unretained Cargo RSP, guard85, `%~dp0` mispath61, explicit-path control PASS05. Whether attempt02 Cargo linker created the RSP remains unconfirmed; actual Cargo SDK selection unknown. Earlier causes/limits in proof folders/history.
+Attempt18 false timeout unresolved; attempt26 expired before RED/GREEN; attempts36–39 exposed false Job closure; attempt48 expected RED incorrectly; attempt50 showed batch injection. Retry fixed55–56. Attempt57 Driver parser sought wrong log; attempt58 corrected it. Attempt59 fixed fallback; attempt60 final-drop passed. MSRV bootstrap: absent F:, `findstr`/null parser, invalid custody root, then pass. SDK-link: no verbose paths, unretained attempt02 RSP, guard85, `%~dp0` mispath61, control PASS05. Attempt06 Cargo link and SDK selection recovered, but Runner finalization failed before EVIDENCE; cause unproven. Earlier causes/limits in proof folders/history.
 
 ## Open escalations
 
