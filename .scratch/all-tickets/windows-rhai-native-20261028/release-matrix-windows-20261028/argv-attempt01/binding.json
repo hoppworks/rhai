@@ -1,0 +1,51 @@
+{
+  "nonce": "eebf1576031e4604bf85943c7b3b177a",
+  "base_head": "87d838e0ecae5de9a05cf0e29115506c58a780ed",
+  "overlay_sha256": "bb05e1168776c17e5b1480796a5f2d39317dd45a698800f2bbeb5af1b6426f14",
+  "source_manifest_sha256": "558e0766d99b4f3b55fce5e26df3781552f01ef73acf5ade203a0e0c5bbe6e18",
+  "archive_sha256": "23534105bcdab9147e42a684ede4a0951170c585307559889756b9b516f8fe5e",
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "features": "testing-environ,sys,net",
+  "target": "sys_process_windows_argv",
+  "test": "windows_process_arguments_reach_the_child_without_shell_interpretation",
+  "media_files": {
+    "source-manifest.json": {
+      "bytes": 68088,
+      "sha256": "558e0766d99b4f3b55fce5e26df3781552f01ef73acf5ade203a0e0c5bbe6e18"
+    },
+    "ClearOwnedWorkReadOnly.ps1": {
+      "bytes": 2906,
+      "sha256": "98bbac581bff5aed0dad5f5c54f6112dba617699779be6ed9a527db74e9a81f8"
+    },
+    "rhai-native-eebf1576031e4604bf85943c7b3b177a.bundle": {
+      "bytes": 45,
+      "sha256": "36c28665be306a7bd910e1a83f5e7957b524596de9cc92b0fba8e27391182b4f"
+    },
+    "Start.ps1": {
+      "bytes": 10669,
+      "sha256": "8c381569c2e5d3b626b494d91a582a049897f8548198b95818edbb224e67572b"
+    },
+    "Cargo.lock": {
+      "bytes": 31602,
+      "sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802"
+    },
+    "RunRhaiContract.cmd": {
+      "bytes": 5850,
+      "sha256": "eca96e2b2f60203743c4726cfcd31c14bbfd02a79f0c596cf8914fcda7ae341c"
+    },
+    "rhai-source.zip": {
+      "bytes": 1167738,
+      "sha256": "23534105bcdab9147e42a684ede4a0951170c585307559889756b9b516f8fe5e"
+    },
+    "RunRhaiContractControl.ps1": {
+      "bytes": 17913,
+      "sha256": "c1da19ad12bd942fc5af83238c55457b0f9210bc150cc5423a9f974e32633686"
+    }
+  },
+  "driver_deadline_seconds": 180,
+  "observer_deadline_seconds": 185,
+  "export_deadline_seconds": 180,
+  "start_sha256": "8c381569c2e5d3b626b494d91a582a049897f8548198b95818edbb224e67572b",
+  "native_started": false,
+  "iso_sha256": "37eb6560544083ffc8dd15dbb7dff4609c85fc698b13303fad079e5b89481d36"
+}

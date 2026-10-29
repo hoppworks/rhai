@@ -1,0 +1,47 @@
+warning: the item `TryFrom` is imported redundantly
+   --> src\func\func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04\library\std\src\prelude\mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` on by default
+
+warning: `rhai` (lib) generated 2 warnings
+warning: unused import: `PathBuf`
+ --> src\bin\rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 0.12s
+     Running tests\sys_process_windows_argv.rs (work\target\debug\deps\sys_process_windows_argv-91a1118dfc4d9993.exe)
+
+running 2 tests
+test windows_argv_child_fixture ... ok
+test windows_process_arguments_reach_the_child_without_shell_interpretation ... windows_argv_readback label=direct-run pid=8772 exit=0 exact_handle_signaled=true arguments=["plain", "two words", "quote\"inside", "trailing slash\\", "\\\"", "$HOME", "|", ";", "&&", "& echo injected > \"C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-eebf1576\\run\\scoped-e59b33c896314f80bc8d7695687cab60\\work\\temp\\rhai-sys-test-5056-windows_process_arguments_reach_the_child_without_shell_interpretation-0\\shell-injection-marker\"", "ümlaut 東京", ""]
+windows_argv_readback label=direct-raw pid=5124 exit=0 exact_handle_signaled=true arguments=["plain", "two words", "quote\"inside", "trailing slash\\", "\\\"", "$HOME", "|", ";", "&&", "& echo injected > \"C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-eebf1576\\run\\scoped-e59b33c896314f80bc8d7695687cab60\\work\\temp\\rhai-sys-test-5056-windows_process_arguments_reach_the_child_without_shell_interpretation-0\\shell-injection-marker\"", "ümlaut 東京", ""]
+windows_argv_readback label=direct-spawn pid=4712 exit=0 exact_handle_signaled=true arguments=["plain", "two words", "quote\"inside", "trailing slash\\", "\\\"", "$HOME", "|", ";", "&&", "& echo injected > \"C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-eebf1576\\run\\scoped-e59b33c896314f80bc8d7695687cab60\\work\\temp\\rhai-sys-test-5056-windows_process_arguments_reach_the_child_without_shell_interpretation-0\\shell-injection-marker\"", "ümlaut 東京", ""]
+windows_argv_readback label=managed-run pid=2060 exit=0 exact_handle_signaled=true arguments=["plain", "two words", "quote\"inside", "trailing slash\\", "\\\"", "$HOME", "|", ";", "&&", "& echo injected > \"C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-eebf1576\\run\\scoped-e59b33c896314f80bc8d7695687cab60\\work\\temp\\rhai-sys-test-5056-windows_process_arguments_reach_the_child_without_shell_interpretation-0\\shell-injection-marker\"", "ümlaut 東京", ""]
+windows_argv_readback label=managed-raw pid=3920 exit=0 exact_handle_signaled=true arguments=["plain", "two words", "quote\"inside", "trailing slash\\", "\\\"", "$HOME", "|", ";", "&&", "& echo injected > \"C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-eebf1576\\run\\scoped-e59b33c896314f80bc8d7695687cab60\\work\\temp\\rhai-sys-test-5056-windows_process_arguments_reach_the_child_without_shell_interpretation-0\\shell-injection-marker\"", "ümlaut 東京", ""]
+windows_argv_readback label=managed-spawn pid=7624 exit=0 exact_handle_signaled=true arguments=["plain", "two words", "quote\"inside", "trailing slash\\", "\\\"", "$HOME", "|", ";", "&&", "& echo injected > \"C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-eebf1576\\run\\scoped-e59b33c896314f80bc8d7695687cab60\\work\\temp\\rhai-sys-test-5056-windows_process_arguments_reach_the_child_without_shell_interpretation-0\\shell-injection-marker\"", "ümlaut 東京", ""]
+ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.17s
+
