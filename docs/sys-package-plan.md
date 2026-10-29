@@ -1665,10 +1665,20 @@ frames and 11 hash-checked files; eight valid custody states end in `REMOVED`.
 Exact guest/host cleanup and independent source/result review are recorded in
 `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt04/proof.md`.
 This remains a pre-link infrastructure failure, not SDK or product acceptance.
-The next small control must freeze the validated runtime root before changing
-directory, use it for both source and cleanup helper, and require the helper's
-two success markers. No further full Cargo run is justified before that
-control passes and its response file is read back.
+Attempt 05 passed that small native control at fork-main `3b71a3823`:
+the validated runtime root was frozen before `cd`, its absolute source and
+helper paths worked, and original helper/CL/LINK/executable/export exits were
+all zero. The fresh executable wrote its marker. The exported UTF-16 response
+file independently names the owned object and the explicitly supplied SDK
+`kernel32.lib` at Lib `10.0.26100.0`; it does not identify Cargo-selected
+inputs. Driver 0 in 7.107 seconds, 202 ordered COM1 frames/16 hash-checked
+files, eight valid journal states through `REMOVED`, exact guest/host cleanup
+and combined independent review PASS are bound in
+`.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt05/proof.md`.
+This is an infrastructure prerequisite, not product acceptance. Next use the
+proven pre-retirement export method in one bounded real Cargo target diagnostic,
+then independently hash only SDK files actually selected by that invocation.
+Retain accepted feature/product results; do not rebuild them for this binding.
 
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance

@@ -6,7 +6,7 @@ Implementation active by owner instruction. A–F, Ticket03 and release remain o
 
 ## Decisions
 
-Use central agent-skills `d6024420` plus local edits and project `AGENTS.md`. Require public Rhai→Engine→host→OS proof, independent readback, assertion sensitivity and one combined review per package. Push/merge only to `https://github.com/hoppworks/rhai.git` main, never upstream; author/committer `hoppworks`, configured email, no coauthors/signatures or task branches. Preserve foreign work, original VM media, human limits and owned cleanup. No Linear. Choose heavy runs from live capacity; prior authorization persists. Prefer Terra; Luna rarely.
+Use central agent-skills `d6024420` plus local edits and project `AGENTS.md`. Require Rhai→Engine→host→OS proof, readback, assertion sensitivity and combined review. Push/merge only to `https://github.com/hoppworks/rhai.git` main, never upstream; author/committer `hoppworks`, configured email, no coauthors or task branches. Preserve foreign work, original VM media, human limits and owned cleanup. No Linear. Choose heavy runs from live capacity. Prefer Terra; Luna rarely.
 
 ## Current step
 
@@ -14,15 +14,15 @@ Fork-main includes reviewed Windows X35, POSIX `f32_float`, native Windows1.77.2
 
 ## Next action
 
-SDK attempt04 reached CL but relative `%~dp0` followed `cd` into work; source/helper were absent (payload61). Freeze the validated runtime-root path before `cd`, require cleanup markers, and keep pre-retirement evidence export. Review and run one small control, then bind actual Cargo-selected SDK inputs. Preserve accepted rows.
+SDK attempt05 passed the small explicit-path native linker control: fresh executable marker, UTF-16 RSP naming owned object and supplied Kit `kernel32.lib`, Driver0, journal8, guest/host cleanup and combined review PASS. Actual Cargo-selected SDK inputs remain unbound. Next: one bounded real Cargo target diagnostic using the proven pre-retirement export, hash only selected SDK files, preserve accepted rows.
 
 ## Goal
 
-Implement all accepted Rhai sys/net/process/file/release ticket requirements on the fork.
+Implement accepted Rhai sys/net/process/file/release requirements on the fork.
 
 ## Done when
 
-Every P/E/F/X/R and six-ticket criterion in `docs/sys-package-plan.md` has applicable strict real-OS proof, independent review, source/feature/MSRV binding, safe cleanup and fork-main integration; production release remains a separate owner decision.
+Every P/E/F/X/R and six-ticket criterion in `docs/sys-package-plan.md` has real-OS proof, review, source/feature/MSRV binding, cleanup and fork-main integration; production release is separate.
 
 ## Steps
 
@@ -30,7 +30,7 @@ Close Windows Managed faults and argument/IO gaps; finish native three-OS featur
 
 ## Done steps
 
-Fork main contains accepted Windows sys policy/env/fs, net targets, Direct process/input/lifecycle, X32/X33 argument/search and bounded Managed cases. Earlier Linux/Darwin/core/WASM/MSRV rows retain listed scopes.
+Fork main contains accepted Windows sys policy/env/fs, net, Direct process/input/lifecycle, X32/X33 argument/search and bounded Managed cases. Other rows retain scope.
 
 ## Accepted evidence
 
@@ -72,14 +72,15 @@ Windows1.77.2 SDK-link attempt01: HEAD9ff selected source/lock, native `cargo ru
 Windows1.77.2 SDK-link attempt02: installed linker lists `/LINKREPROFULLPATHRSP`; Cargo rustc exited0 and printed absolute option, but retained response file absent. Observer accepted=false; Driver0/148.87s, 218 frames/15 files, journal8, exact guest/host cleanup. Combined review: no SDK acceptance; cause unconfirmed. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt02/proof.md`.
 Windows SDK-link attempt03: CMD directory guard before CL, payload85/Driver2; 181 rotated-log frames/10 files, journal8, exact cleanup. Review traced work retirement before snapshot. No SDK/product acceptance. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt03/proof.md`.
 Windows SDK-link attempt04: CL C1083 for wrong `%~dp0` source after `cd`; payload61/Driver2, 185 frames/11 files, journal8, exact cleanup. Independent review confirms pre-link failure; no SDK/product acceptance. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt04/proof.md`.
+Windows SDK-link attempt05: explicit-path probe CL/LINK/run/helper0, fresh marker, UTF-16 RSP with owned object and supplied SDK kernel32.lib; Driver0/7.107s, 202 frames/16 files, journal8, exact guest/host cleanup and combined review PASS. Cargo-selected SDK/product remain open. `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt05/proof.md`.
 
 ## Retained resources
 
-Workhorse VM `dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19`: original sdc restored, foreign sdb untouched; own bootstrap ISOs/stage and guest scope retired. Retained guest `C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-a7e54f39\toolchain-home`: Rhai coordinator, Windows1.77.2 release gate, 423,724,103 bytes, ceiling2GiB, expiry 2026-11-01 00:00 UTC; no quota. Public native BuildOnly expires 2026-10-30 12:00 UTC. Guest scopes52–64 remain; old36/48 need exact retirement. Details in proof.
+Workhorse VM `dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19`: original sdc restored, foreign sdb untouched; own ISO/stage/scope retired. Retained guest `C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-a7e54f39\toolchain-home`: Windows1.77.2 release gate, 423,724,103 bytes, ceiling2GiB, expiry 2026-11-01 00:00 UTC; Public BuildOnly expires 2026-10-30 12:00 UTC. Guest scopes52–64 remain; old36/48 need exact retirement. Details in proof.
 
 ## Cause history
 
-Attempt18 false timeout unresolved; attempt26 expired before RED/GREEN; attempts36–39 exposed false Job closure; attempt48 expected RED incorrectly; attempt50 showed batch injection. Retry fixed55–56. Attempt57 Driver parser sought wrong log; attempt58 corrected it. Attempt59 fixed fallback; attempt60 final-drop passed. MSRV bootstrap: absent F:, `findstr`/null parser, invalid custody root, then pass. SDK-link: no verbose paths, unretained RSP, guard85, then `%~dp0` source/helper mispath61. Whether Cargo linker created the RSP remains unconfirmed; actual SDK selection unknown. Earlier causes/limits in proof folders/history.
+Attempt18 false timeout unresolved; attempt26 expired before RED/GREEN; attempts36–39 exposed false Job closure; attempt48 expected RED incorrectly; attempt50 showed batch injection. Retry fixed55–56. Attempt57 Driver parser sought wrong log; attempt58 corrected it. Attempt59 fixed fallback; attempt60 final-drop passed. MSRV bootstrap: absent F:, `findstr`/null parser, invalid custody root, then pass. SDK-link: no verbose paths, unretained Cargo RSP, guard85, `%~dp0` mispath61, explicit-path control PASS05. Whether attempt02 Cargo linker created the RSP remains unconfirmed; actual Cargo SDK selection unknown. Earlier causes/limits in proof folders/history.
 
 ## Open escalations
 
@@ -92,8 +93,8 @@ Windows attempts52–62 each used one bounded Driver; detailed consumption remai
 ## History
 
 `docs/sys-package-plan.md`, `.scratch/all-tickets/coordinator-history-20261015.md` and original attempt proof folders retain decisions, prior state, causes and accepted evidence.
-- Prior snapshots: `journal/state-*.md`.
+- Snapshots: `journal/state-*.md`.
 
 ## Retrospective
 
-Pending campaign completion. Available per-run times are above; aggregate role cost/token usage is unknown.
+Campaign open. Timings above; aggregate cost unknown.

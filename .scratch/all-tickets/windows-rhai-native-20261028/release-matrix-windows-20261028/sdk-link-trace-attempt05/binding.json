@@ -1,0 +1,76 @@
+{
+  "attempt": "sdk-link-trace-attempt05",
+  "source_commit": "7019821fc9d7814d0632fea06de50933aa9e35ee",
+  "integrated_head_at_prepare": "3b71a382393c48038254c766a12331e0721247de",
+  "source_paths_unchanged_from_commit": false,
+  "nonce": "1743a38908f34db6a42d6e092c2b6655",
+  "vm_uuid": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19",
+  "guest_scope": "n-1743a389",
+  "retained_toolchain_scope": "n-a7e54f39",
+  "retained_toolchain_expiry_utc": "2026-11-01T00:00:00Z",
+  "driver_deadline_seconds": 180,
+  "observer_deadline_seconds": 185,
+  "export_deadline_seconds": 180,
+  "planned_features": "native-linker-control",
+  "media_files": {
+    "source-manifest.json": {
+      "bytes": 67878,
+      "sha256": "254d021566408f44b2b645551e2598f7cf9db5fee63c5e34bcc7ea20012ec9ba"
+    },
+    "ClearOwnedWorkReadOnly.ps1": {
+      "bytes": 2906,
+      "sha256": "c82abec1eb81ba01f104b5a3d23444782bb802e145292d0cbbfdc2dc7085cdb9"
+    },
+    "Start.ps1": {
+      "bytes": 11960,
+      "sha256": "333c1110664ead5e3c0fb4f610385f94bdc8bf1e1f9aced20036826935c4d47b"
+    },
+    "Cargo.lock": {
+      "bytes": 31602,
+      "sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802"
+    },
+    "rhai-native-1743a38908f34db6a42d6e092c2b6655.bundle": {
+      "bytes": 45,
+      "sha256": "2dcd99ca534defbcfd73135750ef5be15e4c38b5ea79bd3f064f3b7814c87951"
+    },
+    "RunRhaiContract.cmd": {
+      "bytes": 2783,
+      "sha256": "b458ed8772649727a1a291ca761e425183e888e6561a75b1685a05f48b37d9e8"
+    },
+    "rhai-source.zip": {
+      "bytes": 1157342,
+      "sha256": "0005b38a387b419802335e141cb259de86f1ec9424e6e4cf2b8bc3beaf30bdd7"
+    },
+    "probe.c": {
+      "bytes": 623,
+      "sha256": "3eeee002440ddb233327857611fdb7daf7408a6d6add2614e9e89953d281e1ae"
+    },
+    "RunRhaiContractControl.ps1": {
+      "bytes": 15396,
+      "sha256": "cc297a80b654c22fd1038303d5a05d4928136f8b14d312eb6ea8b28998f55507"
+    }
+  },
+  "planned_target_count": 0,
+  "source_overlay": {
+    "path": "tests/sys_process_windows.rs",
+    "sha256": "b8340cf4c4a401f619542845bfc3d6ded296480c372cbbabcc12382175d54953"
+  },
+  "source_tree_matches_integrated_head": true,
+  "console_helper_sha256": "cee8cf1139b8f817e2b49e99013c7ce7f93a5b4319875fa7cb4f4c31a8367929",
+  "iso_sha256": "a3b6d29c280eea3f3c9e42e06e96e1fa7b9be26dc570708c0a18bd4e10ae4516",
+  "link_input_option_help_observed": true,
+  "verified_guest_sdk_inputs": {
+    "kernel32.lib": {
+      "path": "C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.26100.0\\um\\x64\\kernel32.lib",
+      "sha256": "341c7d56125A03B458E4D5093E4C79B33123CCFDFD610FE236937B8E6F3134BB"
+    },
+    "cl.exe": {
+      "path": "C:\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\cl.exe",
+      "sha256": "FE251EF50A1545B1B0835EE17B1E785459712B38D79E45B5C1D3D28970A36619"
+    },
+    "link.exe": {
+      "path": "C:\\BuildTools\\VC\\Tools\\MSVC\\14.44.35207\\bin\\HostX64\\x64\\link.exe",
+      "sha256": "A364AF801A8539E4324D9489313DBF001D959128451FC99A27B24676BBAC058F"
+    }
+  }
+}

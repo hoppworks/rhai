@@ -1,0 +1,8 @@
+{
+  "serial_path": "/var/log/libvirt/qemu/rhai-win11-quality-serial0.log",
+  "inode": 126869568,
+  "offset_start": 555878,
+  "offset_end": 888128,
+  "bytes": 332250,
+  "sha256": "89d98a82e932cf6e0ed95751d42a785423d48578364444b0ffb6323006050a46"
+}
