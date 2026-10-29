@@ -1830,6 +1830,20 @@ Cargo index download dominated the bounded run. See
 This named result does not establish the full core test suite or the remaining
 optional/release gates.
 
+At fork-main `41070b3c6`, native macOS 27.2 arm64 and Workhorse Linux 7.2.11
+x86_64 also accept the current-source Rust/Cargo 1.77.2 default combined
+`testing-environ,sys,net` slice. Both machines verified the same 448 source
+files and exact lock, compiled ten public Engine/real-OS targets in one owned
+scope, failed the deliberate independent host-file readback expectation at
+the intended assertion (101), then passed the restored suites: 157 macOS and
+165 Linux tests. The combined RED/GREEN used the same executable per host.
+Original logs, Linux export hashes, exact own-resource cleanup and one
+independent Standards/Spec review passed. The macOS process target ignored one
+case and Linux ignored three; those cases retain their separate status.
+See `.scratch/all-tickets/release-matrix-20261028/posix-combined-default-proof.md`.
+This closes only these two executed default-profile slices. Windows broad
+combined suites, other profiles and full release acceptance remain open.
+
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance
 matrix or closure count. Historical implementation notes and estimates follow.

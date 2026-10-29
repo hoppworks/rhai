@@ -1,0 +1,268 @@
+[
+  {
+    "label": "cargo-version",
+    "command": [
+      "cargo",
+      "+1.77.2",
+      "--version"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 0.021
+  },
+  {
+    "label": "rustc-version",
+    "command": [
+      "/Users/hoppworks/.rustup/toolchains/1.77.2-aarch64-apple-darwin/bin/rustc",
+      "--version"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 0.054
+  },
+  {
+    "label": "compile",
+    "command": [
+      "cargo",
+      "+1.77.2",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys,net",
+      "--test",
+      "combined_sys_net",
+      "--test",
+      "sys_policy",
+      "--test",
+      "sys_env",
+      "--test",
+      "sys_fs",
+      "--test",
+      "sys_process",
+      "--test",
+      "sys_process_report",
+      "--test",
+      "net_connect",
+      "--test",
+      "net_listen",
+      "--test",
+      "net_reads",
+      "--test",
+      "net_writes",
+      "--no-run"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 19.004
+  },
+  {
+    "label": "wrong-host-readback",
+    "command": [
+      "cargo",
+      "+1.77.2",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys,net",
+      "--test",
+      "combined_sys_net",
+      "sys_and_net_packages_coexist_in_one_engine_with_os_readback_and_typed_errors",
+      "--",
+      "--exact",
+      "--nocapture"
+    ],
+    "exit": 101,
+    "expected": 101,
+    "seconds": 0.41
+  },
+  {
+    "label": "green-combined_sys_net",
+    "command": [
+      "cargo",
+      "+1.77.2",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys,net",
+      "--test",
+      "combined_sys_net",
+      "--",
+      "--test-threads=1",
+      "--nocapture"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 0.101
+  },
+  {
+    "label": "green-sys_policy",
+    "command": [
+      "cargo",
+      "+1.77.2",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys,net",
+      "--test",
+      "sys_policy",
+      "--",
+      "--test-threads=1",
+      "--nocapture"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 0.472
+  },
+  {
+    "label": "green-sys_env",
+    "command": [
+      "cargo",
+      "+1.77.2",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys,net",
+      "--test",
+      "sys_env",
+      "--",
+      "--test-threads=1",
+      "--nocapture"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 0.504
+  },
+  {
+    "label": "green-sys_fs",
+    "command": [
+      "cargo",
+      "+1.77.2",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys,net",
+      "--test",
+      "sys_fs",
+      "--",
+      "--test-threads=1",
+      "--nocapture"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 0.615
+  },
+  {
+    "label": "green-sys_process",
+    "command": [
+      "cargo",
+      "+1.77.2",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys,net",
+      "--test",
+      "sys_process",
+      "--",
+      "--test-threads=1",
+      "--nocapture"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 8.666
+  },
+  {
+    "label": "green-sys_process_report",
+    "command": [
+      "cargo",
+      "+1.77.2",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys,net",
+      "--test",
+      "sys_process_report",
+      "--",
+      "--test-threads=1",
+      "--nocapture"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 0.428
+  },
+  {
+    "label": "green-net_connect",
+    "command": [
+      "cargo",
+      "+1.77.2",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys,net",
+      "--test",
+      "net_connect",
+      "--",
+      "--test-threads=1",
+      "--nocapture"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 0.418
+  },
+  {
+    "label": "green-net_listen",
+    "command": [
+      "cargo",
+      "+1.77.2",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys,net",
+      "--test",
+      "net_listen",
+      "--",
+      "--test-threads=1",
+      "--nocapture"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 0.536
+  },
+  {
+    "label": "green-net_reads",
+    "command": [
+      "cargo",
+      "+1.77.2",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys,net",
+      "--test",
+      "net_reads",
+      "--",
+      "--test-threads=1",
+      "--nocapture"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 0.666
+  },
+  {
+    "label": "green-net_writes",
+    "command": [
+      "cargo",
+      "+1.77.2",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys,net",
+      "--test",
+      "net_writes",
+      "--",
+      "--test-threads=1",
+      "--nocapture"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 0.477
+  }
+]

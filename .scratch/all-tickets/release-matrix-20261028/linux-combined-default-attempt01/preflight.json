@@ -1,0 +1,12 @@
+{
+  "current_head": "41070b3c69ac4210b64c701ed2790e9b51e8eb70",
+  "source_files": 448,
+  "source_mismatches": [],
+  "archive_sha256": "6ff82b95cbbf65ba919161932a63d74f668f8e6e6d88682418797eca93565384",
+  "source_manifest_sha256": "b829308ab356d7aaaf7bf8d3acc9f65aab8fb316192d9b1b69e3365d78c834fd",
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "run_sha256": "5ea28d1c20e8ab056f1a27ff6a491c0327e0f86a09b9bafd7a64ea5c2b7eb7b9",
+  "launch_sha256": "41b246c3a0ce87e45caad42441a10d9b5265056dfe533f863f3d651dbdc49521",
+  "remote_stage": "/var/roothome/.local/share/agent-builds/rhai/linux-combined-default-20261029-b83d6e41",
+  "remote_scope": "/var/roothome/.local/share/agent-builds/rhai/linux-combined-default-20261029-b83d6e41-scope"
+}

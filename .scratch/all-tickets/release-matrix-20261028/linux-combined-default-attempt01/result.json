@@ -1,0 +1,79 @@
+{
+  "accepted": true,
+  "features": "testing-environ,sys,net",
+  "targets": [
+    "combined_sys_net",
+    "sys_policy",
+    "sys_env",
+    "sys_fs",
+    "sys_process",
+    "sys_process_report",
+    "net_connect",
+    "net_listen",
+    "net_reads",
+    "net_writes"
+  ],
+  "source_manifest_sha256": "b829308ab356d7aaaf7bf8d3acc9f65aab8fb316192d9b1b69e3365d78c834fd",
+  "archive_sha256": "6ff82b95cbbf65ba919161932a63d74f668f8e6e6d88682418797eca93565384",
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "rustc_path": "/root/.rustup/toolchains/1.77.2-x86_64-unknown-linux-gnu/bin/rustc",
+  "rustc_sha256": "c1bd86d51ed89c344fa4b394dcb116d48f5e3eeb121498c083b9b516624f55cd",
+  "cargo": "cargo 1.77.2 (e52e36006 2024-03-26)",
+  "rustc": "rustc 1.77.2 (25ef9e3d8 2024-04-09)",
+  "wrong_exit": 101,
+  "green_exit": 0,
+  "passed": {
+    "combined_sys_net": {
+      "passed": 1,
+      "ignored": 0,
+      "executable": "/var/roothome/.local/share/agent-builds/rhai/linux-combined-default-20261029-b83d6e41-scope/agent-build-iuuaa4p9/target/debug/deps/combined_sys_net-694adaf752d5affa"
+    },
+    "sys_policy": {
+      "passed": 24,
+      "ignored": 0,
+      "executable": "/var/roothome/.local/share/agent-builds/rhai/linux-combined-default-20261029-b83d6e41-scope/agent-build-iuuaa4p9/target/debug/deps/sys_policy-f6f093e8cb913eca"
+    },
+    "sys_env": {
+      "passed": 7,
+      "ignored": 0,
+      "executable": "/var/roothome/.local/share/agent-builds/rhai/linux-combined-default-20261029-b83d6e41-scope/agent-build-iuuaa4p9/target/debug/deps/sys_env-9917bf20be5f49b9"
+    },
+    "sys_fs": {
+      "passed": 35,
+      "ignored": 0,
+      "executable": "/var/roothome/.local/share/agent-builds/rhai/linux-combined-default-20261029-b83d6e41-scope/agent-build-iuuaa4p9/target/debug/deps/sys_fs-276da7b23e5fda2e"
+    },
+    "sys_process": {
+      "passed": 61,
+      "ignored": 3,
+      "executable": "/var/roothome/.local/share/agent-builds/rhai/linux-combined-default-20261029-b83d6e41-scope/agent-build-iuuaa4p9/target/debug/deps/sys_process-873c6afa1263752e"
+    },
+    "sys_process_report": {
+      "passed": 7,
+      "ignored": 0,
+      "executable": "/var/roothome/.local/share/agent-builds/rhai/linux-combined-default-20261029-b83d6e41-scope/agent-build-iuuaa4p9/target/debug/deps/sys_process_report-b9d8fd8c865a99fb"
+    },
+    "net_connect": {
+      "passed": 5,
+      "ignored": 0,
+      "executable": "/var/roothome/.local/share/agent-builds/rhai/linux-combined-default-20261029-b83d6e41-scope/agent-build-iuuaa4p9/target/debug/deps/net_connect-470acbfb4e745ccc"
+    },
+    "net_listen": {
+      "passed": 8,
+      "ignored": 0,
+      "executable": "/var/roothome/.local/share/agent-builds/rhai/linux-combined-default-20261029-b83d6e41-scope/agent-build-iuuaa4p9/target/debug/deps/net_listen-a91a9a6ba6684782"
+    },
+    "net_reads": {
+      "passed": 7,
+      "ignored": 0,
+      "executable": "/var/roothome/.local/share/agent-builds/rhai/linux-combined-default-20261029-b83d6e41-scope/agent-build-iuuaa4p9/target/debug/deps/net_reads-e59c119573143e28"
+    },
+    "net_writes": {
+      "passed": 10,
+      "ignored": 0,
+      "executable": "/var/roothome/.local/share/agent-builds/rhai/linux-combined-default-20261029-b83d6e41-scope/agent-build-iuuaa4p9/target/debug/deps/net_writes-287f12917b94a689"
+    }
+  },
+  "total_passed": 165,
+  "same_combined_executable": "/var/roothome/.local/share/agent-builds/rhai/linux-combined-default-20261029-b83d6e41-scope/agent-build-iuuaa4p9/target/debug/deps/combined_sys_net-694adaf752d5affa"
+}
