@@ -1,0 +1,52 @@
+warning: the item `TryFrom` is imported redundantly
+   --> src\func\func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04\library\std\src\prelude\mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` on by default
+
+warning: `rhai` (lib) generated 2 warnings
+warning: unused import: `PathBuf`
+ --> src\bin\rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 0.14s
+     Running tests\sys_fs.rs (work\target\debug\deps\sys_fs-779ff397661cb433.exe)
+
+running 1 test
+independent host readback: "original XYyload"
+thread 'test_open_file_default_preserves_contents_and_shares_cursor' panicked at tests\sys_fs.rs:42:5:
+assertion `left == right` failed
+  left: [111, 114, 105, 103, 105, 110, 97, 108, 32, 88, 89, 121, 108, 111, 97, 100]
+ right: [119, 114, 111, 110, 103, 32, 101, 120, 112, 101, 99, 116, 97, 116, 105, 111, 110]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test test_open_file_default_preserves_contents_and_shares_cursor ... FAILED
+
+failures:
+
+failures:
+    test_open_file_default_preserves_contents_and_shares_cursor
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 28 filtered out; finished in 0.01s
+
+error: test failed, to rerun pass `--test sys_fs`

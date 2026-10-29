@@ -1730,6 +1730,27 @@ One combined independent review passed. See
 This closes the executed Linux feature-interaction slice only; omitted cfg
 cases, other criteria and full release acceptance remain open.
 
+Native Windows Rust/Cargo 1.77.2 now also has separate
+`testing-environ,sys` and `testing-environ,net` package runs against all 448
+source files matching fork-main `1fae293e` and the same locked dependencies.
+The Sys file-handle wrong expectation failed at the intended assertion (101),
+its fresh host readback showed `original XYyload`, and the restored policy,
+environment and filesystem suites passed 6 + 29 + 20 tests. The Net peer-EOF
+wrong expectation failed at the intended assertion (101); the restored
+connect, listen, read and write suites passed 5 + 8 + 7 + 10 tests. Both
+profiles compiled independently; Cargo clean, Driver custody and the
+eight-state `REMOVED` journal completed. The original guest observer set
+`accepted:false` because it sought a literal `wrong expectation` in the Sys
+RED log, whereas the assertion printed those words as byte values. Corrected
+readback against the preserved original export and one combined independent
+review accept these executed profile results without rerunning them. Own guest
+and host scopes were retired, original `sdc` restored, and foreign `sdb`
+preserved. See
+`.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/package-alone-attempt01/proof.md`.
+This closes only the seven named package-alone target suites on native
+Windows; process cases, other feature/OS combinations, and full release
+acceptance remain open.
+
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance
 matrix or closure count. Historical implementation notes and estimates follow.
