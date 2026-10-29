@@ -1,0 +1,7 @@
+{
+  "stage": "/var/roothome/.local/share/agent-builds/rhai/linux-netconnect-overlay-d95b638e",
+  "scope": "/var/roothome/.local/share/agent-builds/rhai/linux-netconnect-overlay-d95b638e-scope",
+  "stage_absent": true,
+  "scope_absent": true,
+  "owned_file_count": 16
+}

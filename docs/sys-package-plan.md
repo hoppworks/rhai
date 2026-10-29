@@ -1762,6 +1762,35 @@ session/stage cleanup passed independent readback and one combined review.
 See `.scratch/all-tickets/release-matrix-20261028/linux-net-alone-attempt01/proof.md`.
 The macOS net-only Rust1.77.2 row and other release criteria remain open.
 
+The macOS Rust/Cargo 1.77.2 `testing-environ,net` package-alone row exposed
+a test-fixture failure: after nonblocking listener acceptance, the IPv6 peer's
+bounded `read_exact` returned `WouldBlock`. The original RED control, failed
+suite and cleanup are retained at
+`.scratch/all-tickets/release-matrix-20261028/macos-net-alone-attempt01/proof.md`.
+The accepted narrow correction sets the accepted peer socket to blocking mode
+before its two-second bounded read, preserving all script, peer, byte, EOF and
+denial assertions. With only that test overlay, the follow-up native macOS
+run passed the deliberate peer-EOF RED101 and all four restored Net suites
+(5 + 8 + 7 + 10). The previously failing IPv6 case reported exact peer bytes
+and EOF. Source/lock, export, scoped cleanup and combined review passed; see
+`.scratch/all-tickets/release-matrix-20261028/macos-net-alone-attempt02/proof.md`.
+
+The affected `net_connect` test source was also rechecked natively on Linux
+Rust1.77.2: RED101 and all five cases, including IPv6, passed with exact
+source/lock binding and owned cleanup
+(`.scratch/all-tickets/release-matrix-20261028/linux-netconnect-overlay-attempt01/proof.md`).
+The unchanged Linux Net target results remain applicable. Native Windows
+Rust1.77.2 rechecked the same overlay through separate Sys/Net package
+profiles: both wrong expectations failed (101), restored suites passed 55
+and 30 tests including IPv6, and the corrected observer reported accepted
+Driver0. The original export crossed a verified COM1 log rotation; 19 file
+hashes and the eight-state journal checked. Exact guest/host cleanup and one
+combined independent review passed; see
+`.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/netconnect-overlay-attempt01/proof.md`.
+These results close only the named package-alone and affected-test slices;
+other release features, process behaviors and full campaign acceptance remain
+open.
+
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance
 matrix or closure count. Historical implementation notes and estimates follow.

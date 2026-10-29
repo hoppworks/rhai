@@ -1,0 +1,16 @@
+{
+  "outer_exit": 0,
+  "compile_exit": 0,
+  "wrong_exit": 101,
+  "same_net_connect_executable": "/var/roothome/.local/share/agent-builds/rhai/linux-netconnect-overlay-d95b638e-scope/agent-build-c04j1bi7/target/debug/deps/net_connect-72d7b5d7285f5772",
+  "wrong_assertion_peer_eof": true,
+  "ipv6_case": "exact peer bytes and EOF",
+  "suite_exit": 0,
+  "suite_passed": 5,
+  "cargo_clean_exit": 0,
+  "source_manifest_sha256": "b829308ab356d7aaaf7bf8d3acc9f65aab8fb316192d9b1b69e3365d78c834fd",
+  "test_overlay_sha256": "715af9df54ce68df64cbf4d29b5479ef8201dbc6802f515cc820749cb42fdeb7",
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "owned_session_scope_absent": true,
+  "accepted_affected_target": true
+}

@@ -10,11 +10,11 @@ Use central agent-skills `d6024420` plus local edits and project `AGENTS.md`. Re
 
 ## Current step
 
-Fork-main includes reviewed Windows X35 and native Windows1.77.2 combined/profile slices. Windows1.77.2 sys-only/net-only and Linux1.77.2 net-only pass with RED/GREEN, readback, review and cleanup. Windows original observer false negative is preserved. A–F/Ticket03/release remain open. Proof: Windows `package-alone-attempt01/proof.md`; Linux `linux-net-alone-attempt01/proof.md`.
+Fork-main includes reviewed Windows X35 and native Windows1.77.2 combined/profile slices. Native Rust1.77.2 Sys/Net package-alone rows now pass: Windows Sys+Net and Linux/macOS Net. The macOS peer-fixture regression is corrected; affected `net_connect` passes on all three OS with RED/GREEN and exact cleanup. Old Windows observer false negative remains recorded; current observer passes. A–F/Ticket03/release remain open. Proof: `macos-net-alone-attempt02/`, `linux-netconnect-overlay-attempt01/`, Windows `netconnect-overlay-attempt01/`.
 
 ## Next action
 
-Next: execute the missing macOS Rust1.77.2 net-only Engine/real-OS slice with four targets and one peer-EOF RED/GREEN control in one owned POSIX scope, then review and integrate. Reuse accepted Linux/Windows standalone proofs; do not repeat the Windows observer parser fault. Attempt06's Runner-finalization cause remains unproven.
+Next: inspect the exact remaining optional-package release rows, then execute the first unproven current-source `net,no_object` script gate at Rust1.77.2 in one owned scope. Reuse unchanged profile proofs and exact source/lock binding. Attempt06's Runner-finalization cause remains unproven.
 
 ## Goal
 
@@ -80,7 +80,7 @@ Workhorse VM `dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19`: original sdc restored, fore
 
 ## Cause history
 
-Attempt18 false timeout unresolved; attempt26 expired before RED/GREEN; attempts36–39 exposed false Job closure; attempt48 expected RED incorrectly; attempt50 showed batch injection. Retry fixed55–56. Attempt57 Driver parser sought wrong log; attempt58 corrected it. Attempt59 fixed fallback; attempt60 final-drop passed. MSRV bootstrap: absent F:, `findstr`/null parser, invalid custody root, then pass. SDK-link: no verbose paths, unretained attempt02 RSP, guard85, `%~dp0` mispath61, control PASS05. Attempt06 Cargo link and SDK selection recovered, but Runner finalization failed before EVIDENCE; cause unproven. Earlier causes/limits in proof folders/history.
+Attempt18 false timeout unresolved; attempt26 expired before RED/GREEN; attempts36–39 exposed false Job closure; attempt48 expected RED incorrectly; attempt50 showed batch injection. Retry fixed55–56. Attempt57 Driver parser sought wrong log; attempt58 corrected it. Attempt59 fixed fallback; attempt60 final-drop passed. MSRV bootstrap: absent F:, `findstr`/null parser, invalid custody root, then pass. SDK-link: no verbose paths, unretained attempt02 RSP, guard85, `%~dp0` mispath61, control PASS05. Attempt06 Cargo link and SDK selection recovered, but Runner finalization failed before EVIDENCE; cause unproven. Mac net-only attempt01 peer read returned WouldBlock; attempt02 fixed accepted-peer mode. Windows current COM1 rotation was reconstructed. Earlier causes/limits remain in proof folders/history.
 
 ## Open escalations
 
@@ -88,7 +88,7 @@ Managed closure requires exact handles and fail-closed completion; retry correct
 
 ## Budgets
 
-Windows attempts52–62 each used one bounded Driver; detailed consumption remains in original proof folders. No budget reset. New Windows profile Driver took 62.318s; Linux profile used one 1200s outer allocation and 15.6s actual. Future limits derive from actual capacity; proof folders retain exact timings/cleanup.
+Windows attempts52–62 used bounded Drivers; no budget reset. Recent Windows package-alone Drivers took 85.161s and 100.847s. Linux net-only and overlay took 13.96s/12.97s; macOS net-only failed at 16.3s, then passed at 17s. Each had one bounded invocation; original proof folders retain limits, causes and cleanup.
 
 ## History
 

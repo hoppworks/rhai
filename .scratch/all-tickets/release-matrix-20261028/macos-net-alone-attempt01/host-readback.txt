@@ -1,0 +1,3 @@
+Darwin 27.2.0 arm64
+2026-10-29T05:08:19Z
+own-session-scope-absent

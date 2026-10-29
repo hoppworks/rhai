@@ -1,0 +1,13 @@
+{
+  "outer_exit": 1,
+  "compile_exit": 0,
+  "control_expected_red_exit": 101,
+  "suite_exit": 101,
+  "failed_test": "ipv6_connect_requires_the_exact_numeric_endpoint_and_delivers_peer_bytes",
+  "failure_line": "tests/net_connect.rs:86:37",
+  "failure_kind": "WouldBlock",
+  "passed_before_failure": 4,
+  "cargo_clean_exit": 0,
+  "session_scope_absent": true,
+  "classification": "test-fixture peer-read failure; cause hypothesis accepted socket remained nonblocking"
+}

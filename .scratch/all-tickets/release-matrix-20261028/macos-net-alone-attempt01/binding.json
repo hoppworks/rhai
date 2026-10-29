@@ -1,0 +1,14 @@
+{
+  "candidate_head": "09cda9223ad2a739dd740997ecbcf639afe733a2",
+  "source_equivalent_head": "1fae293e9750ddc7243798c24a49d46589863e14",
+  "source_manifest_sha256": "254d021566408f44b2b645551e2598f7cf9db5fee63c5e34bcc7ea20012ec9ba",
+  "archive_sha256": "0005b38a387b419802335e141cb259de86f1ec9424e6e4cf2b8bc3beaf30bdd7",
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "runner_sha256": "25d42cec15827652d08148f51d7f226aa23bbb58ee96ffd68594548044428c2e",
+  "run_sha256": "9d907b35ac094f1f184941f94b94c7d5799d1c953669df71890649ba75ed5d77",
+  "stage": "/Users/hoppworks/.local/share/agent-builds/rhai/macos-net-alone-4c76d812",
+  "session_scope": "/Users/hoppworks/.local/share/agent-builds/rhai/macos-net-alone-4c76d812-scope",
+  "outer_deadline_seconds": 600,
+  "features": "testing-environ,net",
+  "targets": ["net_connect", "net_listen", "net_reads", "net_writes"]
+}

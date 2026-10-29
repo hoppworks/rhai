@@ -1,0 +1,9 @@
+# macOS net-only attempt 01: fixture read failure
+
+Status: **not accepted**. This run is retained as the failing regression for the next candidate; the release row remains open.
+
+Native macOS 27.2 arm64 ran the 448-file source matching fork-main `09cda922` with exact `Cargo.lock`, Rust/Cargo 1.77.2 and `testing-environ,net`. The [bounded launch](launch.sh) used the unchanged scoped runner for at most 600 seconds, a private owned source/Cargo runtime, and the pinned input hashes in [binding.json](binding.json). A Python 3.9 incompatibility was found in pre-execution review and fixed in this attempt's staged script before launch; it did not consume a run.
+
+The [command record](commands.json) shows four targets compiled (0), the deliberate peer-EOF control failed at its intended assertion (101), then the restored suite failed (101) in `net_connect`. The [suite log](suite.log) records four cases passing and `ipv6_connect_requires_the_exact_numeric_endpoint_and_delivers_peer_bytes` failing at `tests/net_connect.rs:86:37`: its independent host `read_exact` returned `WouldBlock`. The [failure readback](failure-readback.json) classifies this as an observed test-fixture read failure. The cause hypothesis is that a socket accepted from the nonblocking listener remained nonblocking on macOS; the sibling Net read/write fixtures already explicitly reset accepted peers to blocking mode. No product defect is claimed from this result alone.
+
+`cargo clean` exited 0 and removed 502 generated files / 187.8 MiB. [Original export hashes](export.sha256) matched all copied logs, script and binding. The outer runner exited 1 as required for the unexpected suite result; the private session scope was absent. Only the exact owned 15-file stage was removed after export; [cleanup result](cleanup-result.json) and [fresh readback](cleanup-readback.txt) confirm it and the scope absent. No foreign process or resource was changed.

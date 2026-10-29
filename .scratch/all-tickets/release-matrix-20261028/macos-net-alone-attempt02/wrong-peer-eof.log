@@ -1,0 +1,40 @@
+warning: the item `TryFrom` is imported redundantly
+   --> src/func/func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04/library/std/src/prelude/mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (lib) generated 1 warning
+warning: unused import: `PathBuf`
+ --> src/bin/rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 0.06s
+     Running tests/net_connect.rs (/Users/hoppworks/.local/share/agent-builds/rhai/macos-net-alone-1b6310d4-scope/agent-build-293eltp5/target/debug/deps/net_connect-b6938e0800fee7dc)
+
+running 1 test
+thread 'authorized_connect_is_observed_and_clone_close_is_shared' panicked at tests/net_connect.rs:52:9:
+assertion `left != right` failed: deliberately wrong peer EOF expectation
+  left: 0
+ right: 0
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test authorized_connect_is_observed_and_clone_close_is_shared ... FAILED
+
+failures:
+
+failures:
+    authorized_connect_is_observed_and_clone_close_is_shared
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 4 filtered out; finished in 0.01s
+
+error: test failed, to rerun pass `--test net_connect`

@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/Users/hoppworks/.local/share/agent-builds/rhai/macos-net-alone-4c76d812/run.py", line 100, in <module>
+    suite = run("suite", base + ["--", "--test-threads=1", "--nocapture"])
+  File "/Users/hoppworks/.local/share/agent-builds/rhai/macos-net-alone-4c76d812/run.py", line 80, in run
+    assert code == expected_exit, record
+AssertionError: {'label': 'suite', 'command': ['cargo', '+1.77.2', 'test', '--locked', '--features', 'testing-environ,net', '--test', 'net_connect', '--test', 'net_listen', '--test', 'net_reads', '--test', 'net_writes', '--', '--test-threads=1', '--nocapture'], 'exit': 101, 'expected_exit': 0, 'elapsed_seconds': 0.101}

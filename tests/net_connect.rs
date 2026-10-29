@@ -22,7 +22,10 @@ fn wait_accept(listener: &TcpListener) -> TcpStream {
     let deadline = Instant::now() + Duration::from_secs(2);
     loop {
         match listener.accept() {
-            Ok((stream, _)) => return stream,
+            Ok((stream, _)) => {
+                stream.set_nonblocking(false).expect("accepted peer socket is blocking for bounded reads");
+                return stream;
+            }
             Err(error) if error.kind() == std::io::ErrorKind::WouldBlock => {
                 assert!(Instant::now() < deadline, "authorized connect was not accepted");
                 std::thread::yield_now();
