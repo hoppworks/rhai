@@ -10,11 +10,11 @@ Use central agent-skills `d6024420` plus local edits and project `AGENTS.md`. Re
 
 ## Current step
 
-Fork-main includes reviewed Windows X35 and native Windows1.77.2 profile slices. Rust1.77.2 package-alone Sys/Net and three-OS `net,no_object` rows pass at recorded scopes. Current-source macOS core1.66 passes. Broad default `sys,net` now passes macOS/Linux/Windows 157/165/125 after RED101, review and owned cleanup (POSIX proof and Windows `combined-default-attempt01/proof.md`). A–F/Ticket03/release remain open.
+Fork-main includes reviewed Windows X35 and native Windows1.77.2 profile slices. Rust1.77.2 package-alone Sys/Net and three-OS `net,no_object` rows pass at recorded scopes. Current-source macOS core1.66 passes. Broad default `sys,net` passes macOS/Linux/Windows 157/165/125. Current-source standalone Sys passes macOS/Linux 126/134 after RED101, review and owned cleanup (`release-matrix-20261028/posix-sys-alone-proof.md`). A–F/Ticket03/release remain open.
 
 ## Next action
 
-Next: source-bind standalone Sys macOS/Linux profiles to current source/lock; reuse applicable older proofs and run only affected missing targets. Preserve accepted three-OS combined default results. Attempt06's Runner-finalization cause remains unproven.
+Next: bind native Windows1.77.2 broad `sys_process_windows` GREEN and prior managed kill/timeout/final-drop RED controls to current source, assertions and feature scope; execute only missing controls. Preserve accepted broad/standalone package results. SDK attempt06's Runner cause remains historical and unproven; later native suites completed.
 
 ## Goal
 

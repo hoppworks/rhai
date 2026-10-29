@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/Users/hoppworks/.codex/worktrees/darwin-capture-cleanup/rhai/.scratch/all-tickets/release-matrix-20261028/macos-sys-alone-attempt01/run.py", line 128, in <module>
+    assert "test_open_file_default_preserves_contents_and_shares_cursor ... ok" in (out / "green-sys_fs.log").read_text(errors="replace")
+AssertionError

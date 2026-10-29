@@ -1,0 +1,163 @@
+[
+  {
+    "label": "cargo-version",
+    "command": [
+      "cargo",
+      "+1.77.2",
+      "--version"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 0.023
+  },
+  {
+    "label": "rustc-version",
+    "command": [
+      "/Users/hoppworks/.rustup/toolchains/1.77.2-aarch64-apple-darwin/bin/rustc",
+      "--version"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 0.056
+  },
+  {
+    "label": "compile",
+    "command": [
+      "cargo",
+      "+1.77.2",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys",
+      "--test",
+      "sys_policy",
+      "--test",
+      "sys_env",
+      "--test",
+      "sys_fs",
+      "--test",
+      "sys_process",
+      "--test",
+      "sys_process_report",
+      "--no-run"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 17.574
+  },
+  {
+    "label": "wrong-host-readback",
+    "command": [
+      "cargo",
+      "+1.77.2",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys",
+      "--test",
+      "sys_fs",
+      "test_open_file_default_preserves_contents_and_shares_cursor",
+      "--",
+      "--exact",
+      "--nocapture"
+    ],
+    "exit": 101,
+    "expected": 101,
+    "seconds": 0.398
+  },
+  {
+    "label": "green-sys_policy",
+    "command": [
+      "cargo",
+      "+1.77.2",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys",
+      "--test",
+      "sys_policy",
+      "--",
+      "--test-threads=1",
+      "--nocapture"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 0.443
+  },
+  {
+    "label": "green-sys_env",
+    "command": [
+      "cargo",
+      "+1.77.2",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys",
+      "--test",
+      "sys_env",
+      "--",
+      "--test-threads=1",
+      "--nocapture"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 0.441
+  },
+  {
+    "label": "green-sys_fs",
+    "command": [
+      "cargo",
+      "+1.77.2",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys",
+      "--test",
+      "sys_fs",
+      "--",
+      "--test-threads=1",
+      "--nocapture"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 0.25
+  },
+  {
+    "label": "green-sys_process",
+    "command": [
+      "cargo",
+      "+1.77.2",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys",
+      "--test",
+      "sys_process",
+      "--",
+      "--test-threads=1",
+      "--nocapture"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 8.678
+  },
+  {
+    "label": "green-sys_process_report",
+    "command": [
+      "cargo",
+      "+1.77.2",
+      "test",
+      "--locked",
+      "--features",
+      "testing-environ,sys",
+      "--test",
+      "sys_process_report",
+      "--",
+      "--test-threads=1",
+      "--nocapture"
+    ],
+    "exit": 0,
+    "expected": 0,
+    "seconds": 0.418
+  }
+]

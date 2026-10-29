@@ -1,0 +1,16 @@
+{
+  "accepted": false,
+  "features": "testing-environ,sys",
+  "targets": [
+    "sys_policy",
+    "sys_env",
+    "sys_fs",
+    "sys_process",
+    "sys_process_report"
+  ],
+  "source_manifest_sha256": "b829308ab356d7aaaf7bf8d3acc9f65aab8fb316192d9b1b69e3365d78c834fd",
+  "archive_sha256": "6ff82b95cbbf65ba919161932a63d74f668f8e6e6d88682418797eca93565384",
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "rustc_path": "/Users/hoppworks/.rustup/toolchains/1.77.2-aarch64-apple-darwin/bin/rustc",
+  "rustc_sha256": "8f0edcfc64f6a5e95d1dc653ef8d4cfddc4f56a91590911ace3f89e36f728a63"
+}

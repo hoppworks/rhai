@@ -1,0 +1,68 @@
+{
+  "accepted_original_cargo_results": true,
+  "outer_status": 1,
+  "outer_failure": "parser required the green test name and ok on one line despite --nocapture readback",
+  "preflight": {
+    "head": "669c10a783481845e9e4aa407574c4838a75ef42",
+    "source_files": 448,
+    "mismatches": [],
+    "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+    "archive_sha256": "6ff82b95cbbf65ba919161932a63d74f668f8e6e6d88682418797eca93565384",
+    "manifest_sha256": "b829308ab356d7aaaf7bf8d3acc9f65aab8fb316192d9b1b69e3365d78c834fd"
+  },
+  "features": "testing-environ,sys",
+  "targets": [
+    "sys_policy",
+    "sys_env",
+    "sys_fs",
+    "sys_process",
+    "sys_process_report"
+  ],
+  "wrong_exit": 101,
+  "green_exits": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "passed": {
+    "sys_policy": {
+      "passed": 26,
+      "ignored": 0
+    },
+    "sys_env": {
+      "passed": 7,
+      "ignored": 0
+    },
+    "sys_fs": {
+      "passed": 34,
+      "ignored": 0
+    },
+    "sys_process": {
+      "passed": 52,
+      "ignored": 1
+    },
+    "sys_process_report": {
+      "passed": 7,
+      "ignored": 0
+    }
+  },
+  "total_passed": 126,
+  "source_manifest_sha256": "b829308ab356d7aaaf7bf8d3acc9f65aab8fb316192d9b1b69e3365d78c834fd",
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "same_sys_fs_executable": "/Users/hoppworks/.local/share/agent-builds/rhai/macos-sys-alone-20261029-c9f8ab62/agent-build-9h0o529q/target/debug/deps/sys_fs-4a4c0c14c8bd844b",
+  "owned_scope_absent": true,
+  "original_hashes": {
+    "green-sys_policy.log": "c1a82ee8a729c5e244c896811a53a24a63414960ced7967042973a523d1e4572",
+    "green-sys_env.log": "a7f2798162a3cf0e0aaf3c16bbed16eb9894102e0f9f27358b23eae3ca4322f9",
+    "green-sys_fs.log": "856fef9619a9f828884308bb28a7dbe56369a5c78b2f841b5cacffb6f1deaa93",
+    "green-sys_process.log": "1248dbd84e144da6b081acdad60f62a0ed54717a2d3e13b713762af66cfb4c65",
+    "green-sys_process_report.log": "1ed97bc750211f03e746ac454334e7f6fe0f13731000ee1f960495239f68b400",
+    "compile.log": "b3b118a02cb721ae9fae86232a7360d6509a1d9b78d670371354fc0c2cb23fcf",
+    "wrong-host-readback.log": "eb35fbe5ddb39d7469754f89374a186080510af4eecc55aa6b7957a245400d7b",
+    "commands.json": "153d44dffe2825a0fa30bb706cbe04766623ac806fbe3ae2e797bab4282e50ff",
+    "outer.log": "38ff83a76c3a3f51a69df14bcef636a42ade5180ccf54890819c461c6ea2ff91",
+    "outer.status": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+  }
+}

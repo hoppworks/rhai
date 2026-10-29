@@ -1860,6 +1860,22 @@ confirmed the own ISO/stage retired, original `sdc` restored and foreign
 The observer's `product_acceptance:false` remains correct for unrun release
 criteria; other profiles and full A–F/Ticket03 acceptance remain open.
 
+The current-source standalone `testing-environ,sys` package gate now also
+passes on native macOS 27.2 arm64 and Workhorse Linux 7.2.11 x86_64 with
+Rust/Cargo 1.77.2. The same 448 source files and exact generated lock matched
+fork-main `669c10a78`; each host compiled five Sys integration targets, failed
+the deliberately wrong fresh host-file readback at the intended assertion
+(101), then passed all restored targets: 126 tests on macOS and 134 on Linux.
+The process targets retain one and three ignored cases respectively. macOS
+Cargo reported all valid results before a post-test helper parser rejected
+the `--nocapture` name/readback/`ok` line split; independent original-log
+readback accepted those results without another build. Linux's bounded outer
+runner returned zero and its original export hashes passed. Both own scopes,
+and the Linux stage, were retired. One independent combined Standards/Spec
+review passed these named slices. See
+`.scratch/all-tickets/release-matrix-20261028/posix-sys-alone-proof.md`.
+This does not close ignored tests, other feature rows or full release acceptance.
+
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance
 matrix or closure count. Historical implementation notes and estimates follow.

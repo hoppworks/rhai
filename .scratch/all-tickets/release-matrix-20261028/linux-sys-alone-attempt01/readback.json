@@ -1,0 +1,47 @@
+{
+  "accepted_original_results": true,
+  "head": "669c10a783481845e9e4aa407574c4838a75ef42",
+  "features": "testing-environ,sys",
+  "targets": [
+    "sys_policy",
+    "sys_env",
+    "sys_fs",
+    "sys_process",
+    "sys_process_report"
+  ],
+  "wrong_exit": 101,
+  "green_exits": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "passed": {
+    "sys_policy": {
+      "passed": 24,
+      "ignored": 0
+    },
+    "sys_env": {
+      "passed": 7,
+      "ignored": 0
+    },
+    "sys_fs": {
+      "passed": 35,
+      "ignored": 0
+    },
+    "sys_process": {
+      "passed": 61,
+      "ignored": 3
+    },
+    "sys_process_report": {
+      "passed": 7,
+      "ignored": 0
+    }
+  },
+  "total_passed": 134,
+  "same_sys_fs_executable": "/var/roothome/.local/share/agent-builds/rhai/linux-sys-alone-20261029-4d9bce21-scope/agent-build-cjbb8gi0/target/debug/deps/sys_fs-6399bc074f45fe03",
+  "export_file_count": 19,
+  "export_hashes_valid": true,
+  "owned_stage_and_scope_absent": true
+}
