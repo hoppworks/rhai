@@ -1,0 +1,1 @@
+Test-Path 'C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-32483e88';Get-Process MonitorAcceptanceDriver,ScopedRunner -ErrorAction SilentlyContinue

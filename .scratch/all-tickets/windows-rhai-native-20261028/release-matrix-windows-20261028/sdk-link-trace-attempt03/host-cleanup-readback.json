@@ -1,0 +1,14 @@
+{
+  "cleanup_script": "cleanup-host.py",
+  "cleanup_exit": 0,
+  "owned_host_stage": "/var/roothome/.local/share/agent-builds/rhai/windows-rhai-native-32483e8898a29b4e86f408e3748ef210",
+  "owned_iso": "/var/lib/libvirt/images/rhai-win11-quality/rhai-native-32483e8898a29b4e86f408e3748ef210.iso",
+  "iso_sha256_before_retirement": "b3ac50e6b9409e390d4f57271d0980b92733cea7817f72af4db004a37755bb0f",
+  "stage_file_count": 51,
+  "stage_absent": true,
+  "iso_absent": true,
+  "original_sdc_restored_live_and_inactive": "/var/lib/libvirt/images/rhai-win11-quality/acceptance-20261008T125846Z-b7f83433/monitor-fixture02.iso",
+  "foreign_sdb_unchanged_live_and_inactive": "/var/lib/libvirt/images/rhai-win11-quality/work-retirement-bounds-20261009-c18e85827e6f4404.iso",
+  "fuser_no_holder_before_iso_retirement": true,
+  "fresh_post_cleanup_domblklist_and_absence_check": true
+}

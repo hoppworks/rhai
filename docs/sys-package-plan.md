@@ -1636,11 +1636,24 @@ file existed during linking. The observer marked the diagnostic unaccepted;
 the 218-frame/15-file original export and eight valid custody states passed,
 and guest/host owned resources were retired. See
 `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt02/proof.md`.
-Before another full Cargo run, perform a small supervised native linker
-control that independently proves invocation and checks the response file
-before runtime cleanup. Only if that succeeds should the real target reuse
-the method and export the resolved SDK paths and file hashes. The earlier
-feature and product results stay accepted; exact SDK files remain open.
+The first small supervised linker control exposed a preparation error before
+compilation: its CMD changed into the staged source directory and then required
+the current directory to equal `runtime\work`. The original eight-record
+custody journal records payload exit 85, Driver exit 2 and clean removal;
+181 ordered COM1 frames recovered 10 hash-checked original files across a
+verified host-log rotation. The owned guest/host scopes and ISO were retired,
+and original VM media restored. The combined independent review also found
+that the native runner retires `work` before its evidence snapshot. Thus a
+response file left only there cannot appear in the snapshot, although attempt
+02 does not establish whether the linker ever created it. This is an
+infrastructure RED, with no product or SDK-link acceptance. See
+`.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/sdk-link-trace-attempt03/proof.md`.
+Correct the current-directory guard and explicitly export bounded linker
+evidence from private `work` to the runtime root before retirement. A fresh
+probe executable must emit an observed run marker. Only after a reviewed
+control succeeds should one bounded real-target diagnostic use the same
+method and hash the SDK files it actually selected. The earlier feature and
+product results stay accepted; exact selected SDK files remain open.
 
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance
