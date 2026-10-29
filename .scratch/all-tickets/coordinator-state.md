@@ -2,11 +2,11 @@
 
 ## Mode
 
-Implementation active by owner instruction. A–F, Ticket03 and release remain open.
+Implementation active. A–F, Ticket03 and release remain open.
 
 ## Decisions
 
-Use central agent-skills `d6024420` plus local edits and project `AGENTS.md`. Require real-OS proof, readback, assertion sensitivity and combined review. Push/merge only to `https://github.com/hoppworks/rhai.git` main, never upstream; author/committer `hoppworks`, configured email, no coauthors or task branches. Preserve foreign work, original VM media, human limits and owned cleanup. No Linear. Capacity-based heavy runs; prefer Terra.
+Use agent-skills `d6024420` plus local edits and project `AGENTS.md`. Require real-OS proof, readback, assertion sensitivity and combined review. Push/merge only to `https://github.com/hoppworks/rhai.git` main, never upstream; author/committer `hoppworks`, configured email, no coauthors or task branches. Preserve foreign work, VM media, human limits and owned cleanup. No Linear. Capacity-based heavy runs; prefer Terra.
 
 ## Current step
 
@@ -14,7 +14,7 @@ Fork-main includes reviewed Windows X35 and Windows1.77.2 profile slices. Sys/Ne
 
 ## Next action
 
-Next: integrate reviewed Windows env_remove package on fork main; then address remaining Windows process options, nested Managed membership and native feature gaps. A–F/Ticket03/release remain open.
+Next: find a supported Windows cwd identity binding and implement the public contract. `cwd-reparse-probe-attempt01/` confirms in-place junction redirection; `cwd-suspended-probe-attempt01/` rejected a hypothetical PEB handle offset before its intended control, with originals and cleanup saved. Neither is Rhai acceptance. Product cwd RED and nested Managed membership remain open. Windows X13 passed in `streams-4m-attempt02/`.
 
 ## Goal
 
@@ -80,7 +80,7 @@ Workhorse VM `dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19`: original sdc restored, fore
 
 ## Cause history
 
-Windows env_remove baseline reproduced Denied. Attempt01 removed/override/invalid wrong controls reached assertions; parent used unsupported integer wait, suite withheld. Test changed to bounded try_wait; review and GREEN pending. Own guest/host resources retired; original evidence: Windows `env-remove-*-attempt01/`. Attempt04 Windows env_remove suite 41/0, prior scoped REDs and combined review PASS. Attempt03 outer nested Managed reported incomplete membership; remains open. All own scopes retired; proof: Windows `env-remove-fix-attempt04/`. no_index remains open.
+Windows env_remove baseline reproduced Denied. Attempt01 wrong controls reached assertions; unsupported integer wait withheld the suite. Later bounded try_wait passed: env_remove 41/0, no_index scalar 3/0; scoped REDs and reviews PASS. Outer nested Managed membership remains open; own scopes retired. Proof: Windows `env-remove-fix-attempt04/`. Other no_index cases remain open.
 
 Attempt18 timeout unresolved; attempt26 expired before RED/GREEN; attempts36–39 exposed false Job closure; attempt48 expected RED incorrectly; attempt50 showed batch injection. Retry fixed55–56. Attempt57 Driver parser sought wrong log; attempt58 corrected it. Attempt59 fixed fallback; attempt60 final-drop passed. MSRV bootstrap: absent F:, `findstr`/null parser, invalid custody root, then pass. SDK-link: no verbose paths, unretained attempt02 RSP, guard85, `%~dp0` mispath61, control PASS05. Attempt06 Cargo link and SDK selection recovered, but Runner finalization failed before EVIDENCE; cause unproven. Mac net-only attempt01 peer read returned WouldBlock; attempt02 fixed accepted-peer mode. Windows current COM1 rotation was reconstructed. Earlier causes/limits: proofs.
 

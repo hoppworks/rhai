@@ -1,0 +1,44 @@
+warning: the item `TryFrom` is imported redundantly
+   --> src\func\func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04\library\std\src\prelude\mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` on by default
+
+warning: `rhai` (lib) generated 2 warnings
+warning: unused import: `PathBuf`
+ --> src\bin\rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 0.13s
+     Running tests\sys_windows_reparse_probe.rs (work\target\debug\deps\sys_windows_reparse_probe-8a7f962bf81c057f.exe)
+
+running 2 tests
+test pinned_directory_can_become_a_junction_before_child_start ... windows_reparse_probe_fixture_root=C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-c29b1276\run\scoped-43c30fc3290c45d08a4a4c190f35e9bd\work\temp\rhai-sys-test-8332-pinned_directory_can_become_a_junction_before_child_start-0
+windows_reparse_probe pinned=true before=[109, 105, 115, 115, 105, 110, 103] after=[111, 117, 116, 115, 105, 100, 101, 45, 111, 110, 108, 121] exact_child_waited=true
+windows_reparse_probe_cleanup exact_junction_removed=true
+ok
+test windows_reparse_child_fixture ... ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+

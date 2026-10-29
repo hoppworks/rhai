@@ -1,0 +1,51 @@
+{
+  "nonce": "c61eb47971c24dee985173da67278b42",
+  "base_head": "b2608fc7c0682c760a4e9599e2616318ad680563",
+  "overlay_sha256": "993bf902270fdc6de68144e043973339435e8fd235c6ad520ce04b1b7cf4b3eb",
+  "source_manifest_sha256": "0bdd16bc2739987f2834970c689b629890ee43c00c1bc0d74ac8fc96756bb948",
+  "archive_sha256": "69a96e095d6171cd5999976c35f02de3108bcb242d2bebc8beb91d89ad98ab8d",
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "features": "testing-environ,sys,net",
+  "target": "sys_windows_reparse_probe",
+  "test": "suspended_cwd_candidate_identity_and_reparse",
+  "media_files": {
+    "source-manifest.json": {
+      "bytes": 68403,
+      "sha256": "0bdd16bc2739987f2834970c689b629890ee43c00c1bc0d74ac8fc96756bb948"
+    },
+    "ClearOwnedWorkReadOnly.ps1": {
+      "bytes": 2906,
+      "sha256": "c99f7ae9be700e8c32aea3e14344696ca1e4377ef6ea5e5ebdbec1658231f60d"
+    },
+    "Start.ps1": {
+      "bytes": 10669,
+      "sha256": "09579fd8ebd88da991cf87fa7a4e0a273527869a999f4f7bb3cee10adcd7ae19"
+    },
+    "Cargo.lock": {
+      "bytes": 31602,
+      "sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802"
+    },
+    "rhai-native-c61eb47971c24dee985173da67278b42.bundle": {
+      "bytes": 45,
+      "sha256": "e12f6f8444d26eecac6b68b3f795a3faa1040c479bf0104a710300240d2aa4a1"
+    },
+    "RunRhaiContract.cmd": {
+      "bytes": 2792,
+      "sha256": "9b7d1184a4d12384306a67621a0cb137d7468c7c65bab578e7a3f8148916c8c0"
+    },
+    "rhai-source.zip": {
+      "bytes": 1176792,
+      "sha256": "69a96e095d6171cd5999976c35f02de3108bcb242d2bebc8beb91d89ad98ab8d"
+    },
+    "RunRhaiContractControl.ps1": {
+      "bytes": 16042,
+      "sha256": "49c3fed21ebb92919eeddfece6a9c5a561122debace67e3a981a2d5eab9f680b"
+    }
+  },
+  "driver_deadline_seconds": 180,
+  "observer_deadline_seconds": 185,
+  "export_deadline_seconds": 180,
+  "start_sha256": "09579fd8ebd88da991cf87fa7a4e0a273527869a999f4f7bb3cee10adcd7ae19",
+  "native_started": false,
+  "iso_sha256": "e030a40c157d319967661ed030fec6c5ec56a32fd6eb752a7394be6d09d03ddb"
+}

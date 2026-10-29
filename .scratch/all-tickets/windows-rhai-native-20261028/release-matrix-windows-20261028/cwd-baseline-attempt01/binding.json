@@ -1,0 +1,51 @@
+{
+  "nonce": "feb4ba1d87f14ddfb33d6f113e3964b6",
+  "base_head": "e0ec6fae0161a743b1f7e8ede9892f4f89787c87",
+  "overlay_sha256": "3b07ca627b2d5dd2f5e033d4a1a6a5797fb62f2cd021ae61fdf32b93c01163e2",
+  "source_manifest_sha256": "71b7fbb8345f68bd4397ef35cb86f602d7975bb99a96f7024227bbbeda51a53d",
+  "archive_sha256": "09517ad89de2d77e1b947e15c832d86153bc5078e1d5678dfdecccf9d7ab92a6",
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "features": "testing-environ,sys,net",
+  "target": "sys_process_windows",
+  "test": "windows_cwd_uses_allowed_directory_without_mutating_parent",
+  "media_files": {
+    "source-manifest.json": {
+      "bytes": 67772,
+      "sha256": "71b7fbb8345f68bd4397ef35cb86f602d7975bb99a96f7024227bbbeda51a53d"
+    },
+    "ClearOwnedWorkReadOnly.ps1": {
+      "bytes": 2906,
+      "sha256": "b42737023e744a9d9634d560db0887247f93780da912b858048492722594acbe"
+    },
+    "Start.ps1": {
+      "bytes": 10652,
+      "sha256": "87c999e4b8d438a9654e8c0dfff2a5dd19acf886e6331a58b62218258198dde1"
+    },
+    "Cargo.lock": {
+      "bytes": 31602,
+      "sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802"
+    },
+    "RunRhaiContract.cmd": {
+      "bytes": 2319,
+      "sha256": "54921e0d75ecbfc9e21d780bd7470054f175f5679a353406211d31d0745b547f"
+    },
+    "rhai-source.zip": {
+      "bytes": 1163558,
+      "sha256": "09517ad89de2d77e1b947e15c832d86153bc5078e1d5678dfdecccf9d7ab92a6"
+    },
+    "rhai-native-feb4ba1d87f14ddfb33d6f113e3964b6.bundle": {
+      "bytes": 45,
+      "sha256": "f815634c050b13817e02bd48f1201325f0fada8bd7f3aa6e973fa92c1310a9e1"
+    },
+    "RunRhaiContractControl.ps1": {
+      "bytes": 15541,
+      "sha256": "85c649e2553f5764bd8db1ba42f3e59006c74479a3302fdcbaf8cc4f1ae5b37c"
+    }
+  },
+  "driver_deadline_seconds": 180,
+  "observer_deadline_seconds": 185,
+  "export_deadline_seconds": 180,
+  "start_sha256": "87c999e4b8d438a9654e8c0dfff2a5dd19acf886e6331a58b62218258198dde1",
+  "native_started": false,
+  "iso_sha256": "8adafcfe69a9cddae171f0ab9b49ef33953cc2b08052265de377c3f69d092181"
+}

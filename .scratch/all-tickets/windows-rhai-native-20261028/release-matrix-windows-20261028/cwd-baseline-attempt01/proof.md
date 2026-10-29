@@ -1,0 +1,7 @@
+# Windows cwd baseline RED
+
+This is an expected failing contract test, not product acceptance. On native Windows 10.0.26300.0 x86_64 with Rust/Cargo 1.77.2 and `testing-environ,sys,net`, base `e0ec6fae0161a743b1f7e8ede9892f4f89787c87` plus the test overlay in [preparation.json](preparation.json) compiled and executed `windows_cwd_uses_allowed_directory_without_mutating_parent`. The first Direct `run_raw` case returned typed `Denied("unsupported Windows process option `cwd`")`, no child observation, and the test exited 101 at `CWD_CONTRACT direct-run`. The baseline does not prove other cases.
+
+[Original export](original-export/), [serial binding](serial-capture-binding.json), [observer](original-export/observer.json), and [journal readback](journal-readback.json) preserve 202 ordered frames, 15 hash-checked files and eight CRC-valid records through REMOVED. The Driver completed with exit 0 in 120.6454018 seconds because its narrow expected-RED contract succeeded; `product_acceptance` and `target_suite_complete` are false. The exact guest scope was removed after a reparse guard ([guest readback](guest-retire-result.png)); [host cleanup](host-cleanup.json) removed only the owned media/stage and restored original sdc while preserving foreign sdb.
+
+Windows launch still requires a race-safe link from filesystem capability to the child working directory. Native root replacement, reparse escape, missing/outside denial, assertion controls, final GREEN, feature rows and independent combined review remain open.

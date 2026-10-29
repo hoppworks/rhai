@@ -1,0 +1,1 @@
+Get-ChildItem -LiteralPath 'C:\Users\RhaiTest\.local\share\agent-builds\rhai\n-c61eb479\run' -Recurse -Filter suspended-wrong.log|ForEach-Object{Get-Content -LiteralPath $_.FullName -Tail 30}
