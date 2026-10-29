@@ -1383,6 +1383,12 @@ fn windows_managed_parent_fixture() {
     std::fs::rename(temporary, root.join("parent.pid")).unwrap();
     while Instant::now() < deadline {
         if root.join("release").exists() { process::exit(0); }
+        if root.join("overflow").exists() {
+            std::fs::write(root.join("overflow.started"), b"writing stdout\n").unwrap();
+            std::io::Write::write_all(&mut std::io::stdout(), &vec![b'X'; 16_384]).unwrap();
+            std::io::Write::flush(&mut std::io::stdout()).unwrap();
+            panic!("managed output limit did not stop the fixture");
+        }
         for phase in ["nonfinal", "final"] {
             let challenge = root.join(format!("parent-{phase}-challenge"));
             let ack = root.join(format!("parent-{phase}-ack"));
@@ -1792,6 +1798,82 @@ fn windows_managed_timeout_closes_descendant_and_preserves_sentinel() {
     eprintln!("windows_managed_timeout_os_readback parent={} worker={} sentinel={sentinel_pid} sentinel_alive=true", parent.pid, worker.pid);
     if std::env::var_os("RHAI_WINDOWS_MANAGED_TIMEOUT_WRONG_EXPECTATION").is_some() {
         assert!(!stopped_at_return, "deliberately wrong managed timeout closure expectation");
+    }
+}
+
+/// Overflow closes the managed task before exposing the retained output-limit error.
+#[test]
+fn windows_managed_output_limit_closes_descendant_and_preserves_sentinel() {
+    let mut records = ManagedRecords { directory: Some(TempDir::new()), safe_to_remove: false };
+    let root = records.directory.as_ref().unwrap().path().to_path_buf();
+    let sentinel_record = root.join("sentinel.pid");
+    let sentinel = process::Command::new(std::env::current_exe().unwrap())
+        .args(["--exact", "windows_managed_leaf_fixture", "--nocapture", "--quiet"])
+        .env_clear().env(MANAGED_LEAF_ENV, &sentinel_record)
+        .stdin(process::Stdio::null()).stdout(process::Stdio::null()).stderr(process::Stdio::null())
+        .spawn().expect("start independent sentinel");
+    let mut sentinel = OwnedFixture(Some(sentinel));
+    let sentinel_pid = wait_for_pid(&sentinel_record, Instant::now() + Duration::from_secs(5)).expect("sentinel ready");
+    assert_eq!(sentinel_pid, sentinel.0.as_ref().unwrap().id());
+    let mut scope = Scope::new();
+    scope.push("program", std::env::current_exe().unwrap().to_string_lossy().into_owned());
+    scope.push("root", root.to_string_lossy().into_owned());
+    let engine = engine(SysConfig::default().programs(ProgramPolicy::Any).process_scope(ProcessScope::Managed));
+    let child = engine.eval_with_scope::<Dynamic>(&mut scope, r#"
+        spawn(program, ["--exact", "windows_managed_parent_fixture", "--nocapture", "--quiet"],
+          #{ env_clear: true, env: #{ RHAI_WINDOWS_MANAGED_ROOT: root }, max_output: 1024 })
+    "#).expect("start managed overflow child");
+    scope.push_dynamic("child", child);
+    let deadline = Instant::now() + Duration::from_secs(5);
+    let worker_pid = wait_for_pid(&root.join("worker.pid"), deadline).expect("worker ready");
+    let mut worker = open_fixture_guard(worker_pid);
+    let parent_pid = wait_for_pid(&root.join("parent.pid"), deadline).expect("parent ready");
+    let mut parent = open_fixture_guard(parent_pid);
+    assert_ne!(parent_pid, worker_pid);
+    assert_eq!(unsafe { WaitForSingleObject(parent.handle(), 0) }, WAIT_TIMEOUT);
+    assert_eq!(unsafe { WaitForSingleObject(worker.handle(), 0) }, WAIT_TIMEOUT);
+    assert!(engine.eval_with_scope::<Dynamic>(&mut scope, "child.try_wait()").unwrap().is_unit());
+    std::fs::write(root.join("overflow"), b"overflow\n").expect("release observed child to exceed the cap");
+    let deadline = Instant::now() + Duration::from_secs(10);
+    let result = loop {
+        let result = engine.eval_with_scope::<Dynamic>(&mut scope, "child.try_wait()");
+        if !result.as_ref().is_ok_and(Dynamic::is_unit) || Instant::now() >= deadline { break result; }
+        thread::sleep(Duration::from_millis(10));
+    };
+    let parent_stopped = unsafe { WaitForSingleObject(parent.handle(), 0) } == WAIT_OBJECT_0;
+    let worker_stopped = unsafe { WaitForSingleObject(worker.handle(), 0) } == WAIT_OBJECT_0;
+    if !parent_stopped || !worker_stopped { let _ = engine.run_with_scope(&mut scope, "child.kill();"); }
+    let sentinel_alive = sentinel.0.as_mut().unwrap().try_wait().unwrap().is_none();
+    std::fs::write(sentinel_record.with_extension("stop"), b"stop\n").unwrap();
+    let sentinel_exit = sentinel.wait_bounded().expect("sentinel exits within bound");
+    let overflow_started = std::fs::read_to_string(root.join("overflow.started")).ok();
+    eprintln!("windows_managed_overflow_readback parent={parent_pid} worker={worker_pid} parent_stopped={parent_stopped} worker_stopped={worker_stopped} sentinel={sentinel_pid} sentinel_alive={sentinel_alive} overflow_started={overflow_started:?} result={result:?}");
+    assert!(parent_stopped && worker_stopped, "output limit must stop exact parent and worker before returning");
+    parent.exit_observed = true;
+    worker.exit_observed = true;
+    assert!(sentinel_alive && sentinel_exit.success(), "output limit must preserve the independent sentinel");
+    assert_eq!(overflow_started.as_deref(), Some("writing stdout\n"));
+    let mut parent_exit = u32::MAX;
+    assert_ne!(unsafe { GetExitCodeProcess(parent.handle(), &mut parent_exit) }, 0);
+    let error = result.expect_err("managed output overflow must report an error");
+    let error = match *error {
+        EvalAltResult::ErrorRuntime(value, _) => value.try_cast::<SysError>().expect("typed process error"),
+        other => panic!("unexpected error: {other:?}"),
+    };
+    match error {
+        SysError::Process { cause: ProcessCause::OutputLimit(_), report } => {
+            assert!(!report.timed_out());
+            assert_eq!(report.exit_code(), Some(parent_exit as i32));
+            assert!(report.stdout_bytes().len() <= 1024);
+            assert!(report.stdout_bytes().iter().filter(|byte| **byte == b'X').count() >= 800,
+                "report must retain bounded real child output");
+            assert!(report.cleanup_diagnostics().is_empty(), "cleanup diagnostics: {:?}", report.cleanup_diagnostics());
+        }
+        other => panic!("expected managed output-limit error, got {other:?}"),
+    }
+    records.safe_to_remove = true;
+    if std::env::var_os("RHAI_WINDOWS_MANAGED_OVERFLOW_WRONG_EXPECTATION").is_some() {
+        assert!(!worker_stopped, "deliberately wrong managed overflow closure expectation");
     }
 }
 

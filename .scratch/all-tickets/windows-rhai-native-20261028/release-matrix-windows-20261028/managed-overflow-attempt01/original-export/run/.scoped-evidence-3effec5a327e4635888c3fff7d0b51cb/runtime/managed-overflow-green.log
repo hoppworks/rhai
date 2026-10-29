@@ -1,0 +1,110 @@
+warning: the item `TryFrom` is imported redundantly
+   --> src\func\func_call.rs:291:21
+    |
+291 |                 use std::convert::TryFrom;
+    |                     ^^^^^^^^^^^^^^^^^^^^^
+   --> /rustc/25ef9e3d85d934b27d9dada2f9dd52b1dc63bb04\library\std\src\prelude\mod.rs:129:13
+    |
+    = note: the item `TryFrom` is already defined here
+    |
+    = note: `#[warn(unused_imports)]` on by default
+
+warning: method `open_process_cwd` is never used
+   --> src\packages\sys\fs.rs:311:19
+    |
+224 | impl FsState {
+    | ------------ method in this implementation
+...
+311 |     pub(super) fn open_process_cwd(&self, path: &str) -> Result<Dir, SysError> {
+    |                   ^^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` on by default
+
+warning: `rhai` (lib) generated 2 warnings
+warning: unused import: `PathBuf`
+ --> src\bin\rhai-run.rs:8:18
+  |
+8 |     path::{Path, PathBuf},
+  |                  ^^^^^^^
+  |
+  = note: `#[warn(unused_imports)]` on by default
+
+warning: `rhai` (bin "rhai-run") generated 1 warning (run `cargo fix --bin "rhai-run"` to apply 1 suggestion)
+    Finished test [unoptimized] target(s) in 0.13s
+     Running tests\sys_process_windows.rs (work\target\debug\deps\sys_process_windows-b3e5219af6d50bf7.exe)
+
+running 35 tests
+test windows_child_drop_fixture ... ok
+test windows_direct_run_keeps_descendant_alive_after_normal_parent_exit ... windows_direct_diagnostic observation=true handles=true parent_record=Some("7072\n") worker_record=Some("1548\n") release=true typed_error=None
+windows_direct_os_readback parent=7072 worker=1548 parent_exit=0 worker_live_at_return=true worker_exit=0
+ok
+test windows_direct_run_preserves_embedded_quote_argument ... windows_argument_readback="before\"after"
+ok
+test windows_direct_run_resolves_child_path_and_implicit_exe ... windows_child_path_readback pid=4384 exact_exe=true
+ok
+test windows_managed_batch_argument_cannot_create_an_extra_file ... windows_managed_batch_argument_readback injected=false child_record=Some("batch-started\r\n") result=Ok({"code": 0, "signal": (), "stderr": [], "stderr_complete": true, "stdout": [], "stdout_complete": true, "success": true, "timed_out": false})
+ok
+test windows_managed_cwd_controller ... ok
+test windows_managed_leaf_fixture ... ok
+test windows_managed_output_limit_closes_descendant_and_preserves_sentinel ... windows_managed_overflow_readback parent=1240 worker=7868 parent_stopped=true worker_stopped=true sentinel=8160 sentinel_alive=true overflow_started=Some("writing stdout\n") result=Err(ErrorRuntime(rhai::packages::sys::error::SysError, 1:7))
+ok
+test windows_managed_parent_fixture ... ok
+test windows_managed_run_closes_descendant_on_normal_parent_exit ... windows_managed_os_readback parent=7988 worker=8272 parent_exit=0 sentinel=2260 sentinel_alive=true
+ok
+test windows_managed_run_executes_explicitly_allowed_batch ... windows_managed_batch_denial_readback batch_denied=true child_file_absent=true
+windows_managed_batch_readback allowed=true child_file=managed-batch-ok
+ok
+test windows_managed_run_resolves_simple_program_from_parent_cwd ... windows_managed_cwd_readback child_pid=5896 exact_cwd_exe=true parent_cwd_unchanged=true
+windows_managed_path_readback child_pid=2240 selected_child_path=true competing_parent_cwd=true
+ok
+test windows_managed_spawn_final_drop_follows_host_policy ... windows_managed_drop_os_readback mode=kill parent=3596 worker=5156 parent_exit=1 sentinel=9208 sentinel_alive=true
+windows_managed_drop_os_readback mode=retain parent=8092 worker=8676 parent_exit=0 sentinel=5928 sentinel_alive=true
+ok
+test windows_managed_spawn_kill_closes_descendant_and_preserves_sentinel ... [DEBUG-kill36] parent=5536 wait=0x0 error=None worker=4880 wait=0x0 error=None
+windows_managed_kill_os_readback parent=5536 worker=4880 sentinel=1592 sentinel_alive=true
+ok
+test windows_managed_spawn_wait_closes_descendant_on_parent_exit ... windows_managed_spawn_os_readback parent=8240 worker=6484 parent_exit=0
+ok
+test windows_managed_timeout_closes_descendant_and_preserves_sentinel ... windows_managed_timeout_os_readback parent=3844 worker=7640 sentinel=3860 sentinel_alive=true
+ok
+test windows_path_probe_fixture ... ok
+test windows_process_fast_probe ... ok
+test windows_process_fixture ... ok
+test windows_run_raw_captures_output_and_nonzero_exit ... windows_process_os_readback pid=7604 exit=0 exact_handle_signaled=true
+windows_process_os_readback pid=1900 exit=7 exact_handle_signaled=true
+ok
+test windows_run_raw_rejects_timeout_outside_duration_range_before_spawn ... timeout_range_child_record=None
+ok
+test windows_run_raw_timeout_terminates_exact_child_and_retains_output ... windows_timeout_child_readback pid=8164 exit=1 exact_handle_signaled=true
+windows_timeout_report timed_out=true stdout_complete=true stderr_complete=true exit=Some(1) diagnostics=[]
+windows_timeout_capture stdout_complete=true stderr_complete=true
+ok
+test windows_run_raw_times_out_with_unread_stdin ... windows_blocked_stdin_child_readback pid=3972 exit=1 exact_handle_signaled=true
+windows_blocked_stdin_report timed_out=true exit=Some(1) diagnostics=[]
+ok
+test windows_run_raw_transfers_blob_while_draining_both_streams ... windows_stdin_child_readback pid=2584 exit=0 exact_handle_signaled=true
+ok
+test windows_run_rejects_decoded_text_expansion_with_original_raw_report ... ok
+test windows_run_returns_lossy_text_and_nonzero_exit ... windows_process_text_readback pid=264 exit=0 exact_handle_signaled=true
+windows_process_text_readback pid=8728 exit=7 exact_handle_signaled=true
+ok
+test windows_run_string_empty_and_unit_stdin_reach_child_eof ... windows_scalar_stdin_readback mode=string pid=8228 exit=0 bytes=41 exact_handle_signaled=true
+windows_scalar_stdin_readback mode=empty pid=7128 exit=0 bytes=0 exact_handle_signaled=true
+windows_scalar_stdin_readback mode=unit pid=4864 exit=0 bytes=0 exact_handle_signaled=true
+ok
+test windows_spawn_blocked_input_fixture ... ok
+test windows_spawn_child_can_be_polled_and_waited_through_clones ... windows_spawn_os_readback pid=1488 exit=7 exact_handle_signaled=true
+ok
+test windows_spawn_child_drop_follows_host_policy ... windows_child_drop_os_readback mode=kill pid=2504 exit=1 nonfinal_ack=true final_ack=false exact_handle_signaled=true
+windows_child_drop_os_readback mode=retain pid=1932 exit=0 nonfinal_ack=true final_ack=true exact_handle_signaled=true
+ok
+test windows_spawn_close_input_fixture ... ok
+test windows_spawn_kill_stops_child_with_unread_buffered_input ... windows_spawn_kill_os_readback pid=3052 exit=1 available=12288 exact_handle_signaled=true
+ok
+test windows_spawn_retains_early_stdin_close_error ... windows_stdin_close_readback pid=8376 available=12288 intent=Some("close stdin\n") retained=true exit=1 exact_handle_signaled=true first=Err(ErrorRuntime(rhai::packages::sys::error::SysError, 1:7))
+ok
+test windows_stdin_fixture ... ok
+test windows_timeout_fixture ... ok
+
+test result: ok. 35 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 17.93s
+

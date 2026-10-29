@@ -1,0 +1,14 @@
+{
+  "iso_sha256": "08e6aea9be8d50833888258584a85aef963398c3aea72617f14babd52694f659",
+  "files": {
+    "Cargo.lock": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+    "ClearOwnedWorkReadOnly.ps1": "648c5a07899fb58b4eae434dc5bb26d36af2b96ee9cdfb3a292dff13c5947579",
+    "RunRhaiContract.cmd": "2a8e2ec76f9216c9e3454e194b32b25024835e543978a64eae38985405ff2c17",
+    "RunRhaiContractControl.ps1": "e1467e05f9402a76d7331f4c50d08eadb44c1a7ab1b272111618de8b710545ef",
+    "Start.ps1": "9311cdbb28aba465cabd22ceafa3f63ca5e4c58a45ee3f5d6114bec7c6dd3458",
+    "rhai-native-996bad1b0372473bb01b3a7c2c770535.bundle": "b7d8cbaa0e6fd6d15da7a41c5843f33c39c3d70ca4fc1b2fcbabea728a6eae8f",
+    "rhai-source.zip": "f95cd94c95b2d1923ca689b49e5932fa7d24e1767862da4f0154e8d687b6a439",
+    "source-manifest.json": "44cdb6bb1301316ce309e1b6adb8798f3097afa944c83988979f5119db55b52d"
+  },
+  "bytes": 1671168
+}

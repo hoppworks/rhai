@@ -1906,6 +1906,18 @@ PASS are recorded in
 This is not a kernel-pending-write proof or closure of other feature and
 process fault cases, Ticket03 or release acceptance.
 
+Native Windows 11 / Rust-Cargo 1.77.2 now accepts one Managed stdout
+output-limit case at base `f7c42546` plus the new test overlay. After exact
+live parent/worker handle observation, the child exceeds a 1,024-byte cap;
+the public result retains `OutputLimit` and bounded child output while both
+owned processes stop and an independent sentinel survives. The wrong worker
+closure expectation failed 101; the restored full affected Windows process
+target passed 35/0/0. The 212-frame/16-original export, eight journal records,
+exact guest/host cleanup and independent combined review PASS are recorded in
+`.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/managed-overflow-attempt01/proof.md`.
+This closes only that named Managed case; other faults, profiles and full
+X34/Ticket03/release acceptance remain open.
+
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance
 matrix or closure count. Historical implementation notes and estimates follow.
