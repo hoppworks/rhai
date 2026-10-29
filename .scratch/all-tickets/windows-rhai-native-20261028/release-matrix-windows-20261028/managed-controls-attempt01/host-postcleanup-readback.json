@@ -1,0 +1,9 @@
+{
+  "stage_absent": true,
+  "iso_absent": true,
+  "live_original_sdc": true,
+  "inactive_original_sdc": true,
+  "live_foreign_sdb": true,
+  "inactive_foreign_sdb": true,
+  "vm_uuid": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19"
+}

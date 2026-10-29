@@ -1,0 +1,8 @@
+{
+  "vm_uuid": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19",
+  "own_iso": "/var/lib/libvirt/images/rhai-win11-quality/rhai-native-73bbed61f32a48679390d099b4c3a9f5.iso",
+  "iso_sha256": "628f5daaad1d6ec668f5632eb093f4ab4b3fe82a1e141eaf8db9baada99b1cbc",
+  "live_sdc_own": true,
+  "inactive_sdc_original": true,
+  "foreign_sdb_unchanged": true
+}

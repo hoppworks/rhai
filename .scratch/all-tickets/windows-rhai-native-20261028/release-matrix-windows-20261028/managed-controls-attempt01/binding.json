@@ -1,0 +1,67 @@
+{
+  "attempt": "managed-controls-attempt01",
+  "source_commit": "7019821fc9d7814d0632fea06de50933aa9e35ee",
+  "integrated_head_at_prepare": "7dacf2ae09ef657cfbb53d3a0b35b9bb7dc2f4ac",
+  "source_tree_matches_integrated_head": true,
+  "source_mismatches": [],
+  "nonce": "73bbed61f32a48679390d099b4c3a9f5",
+  "vm_uuid": "dc5b8fd5-1a0b-4d86-8b8f-aaa1bd492b19",
+  "guest_scope": "n-73bbed61",
+  "retained_toolchain_scope": "n-a7e54f39",
+  "retained_toolchain_expiry_utc": "2026-11-01T00:00:00Z",
+  "public_build_expiry_utc": "2026-10-30T12:00:00Z",
+  "driver_deadline_seconds": 180,
+  "observer_deadline_seconds": 185,
+  "export_deadline_seconds": 180,
+  "planned_features": "testing-environ,sys,net",
+  "planned_targets": [
+    "sys_process_windows"
+  ],
+  "planned_target_count": 1,
+  "planned_controls": [
+    "managed-kill-wrong",
+    "managed-timeout-wrong",
+    "managed-drop-kill-wrong",
+    "managed-drop-retain-wrong"
+  ],
+  "media_files": {
+    "source-manifest.json": {
+      "sha256": "b829308ab356d7aaaf7bf8d3acc9f65aab8fb316192d9b1b69e3365d78c834fd",
+      "bytes": 68089
+    },
+    "ClearOwnedWorkReadOnly.ps1": {
+      "sha256": "3a0766ec64f83135d1fd8a6dbae443dea07023c0aec94b6ee3130860de38440f",
+      "bytes": 2906
+    },
+    "Start.ps1": {
+      "sha256": "c574625f7c8b385c881d02c313c55e589f1a4d2aa4ac7c2bd36728a45df49e41",
+      "bytes": 10652
+    },
+    "Cargo.lock": {
+      "sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+      "bytes": 31602
+    },
+    "RunRhaiContract.cmd": {
+      "sha256": "34470cc6d296c9e02aba5a5779f7f3dccafc9577ada280ddad4f74b09aca41f5",
+      "bytes": 3725
+    },
+    "rhai-source.zip": {
+      "sha256": "6ff82b95cbbf65ba919161932a63d74f668f8e6e6d88682418797eca93565384",
+      "bytes": 1157374
+    },
+    "rhai-native-73bbed61f32a48679390d099b4c3a9f5.bundle": {
+      "sha256": "e4370c04d91a29389c7cc1be42f54fa87813c7ad989c1c75e25ae930ae4d34aa",
+      "bytes": 45
+    },
+    "RunRhaiContractControl.ps1": {
+      "sha256": "4c3c7ad0bb0ec0c714ee3aa2671b81577bd2f1300fe23f763c122b8593804409",
+      "bytes": 17587
+    }
+  },
+  "source_manifest_sha256": "b829308ab356d7aaaf7bf8d3acc9f65aab8fb316192d9b1b69e3365d78c834fd",
+  "archive_sha256": "6ff82b95cbbf65ba919161932a63d74f668f8e6e6d88682418797eca93565384",
+  "lock_sha256": "12084a90214418632e80bbaf95983925c2c3886f57f40e2a305b4a1ec353d802",
+  "dispatch_command_sha256": "c39f110b6dd104b4be94f5300f05764c9fd69d86322e0df7353865c0c89652b8",
+  "console_helper_sha256": "cee8cf1139b8f817e2b49e99013c7ce7f93a5b4319875fa7cb4f4c31a8367929",
+  "iso_sha256": "628f5daaad1d6ec668f5632eb093f4ab4b3fe82a1e141eaf8db9baada99b1cbc"
+}

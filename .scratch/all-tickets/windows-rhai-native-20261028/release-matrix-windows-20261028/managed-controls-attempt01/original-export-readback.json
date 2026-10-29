@@ -1,0 +1,119 @@
+{
+  "id": "rhai-native-73bbed61f32a48679390d099b4c3a9f5",
+  "frames": 225,
+  "files": {
+    "observer.json": {
+      "path": "observer.json",
+      "sha256": "00fa6baad62aa2387dd3c45a8fb3ca8d9adcfb04fe247a53cda6a001be7ba668",
+      "length": 1365
+    },
+    "driver.stdout": {
+      "path": "driver.stdout",
+      "sha256": "7b2552f6261653eccb2c084d29a456c79c5732b7a96bf605f59fab8e0a9e05b0",
+      "length": 512
+    },
+    "driver.stderr": {
+      "path": "driver.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "source-manifest.json": {
+      "path": "source-manifest.json",
+      "sha256": "b829308ab356d7aaaf7bf8d3acc9f65aab8fb316192d9b1b69e3365d78c834fd",
+      "length": 68089
+    },
+    "preflight.json": {
+      "path": "preflight.json",
+      "sha256": "82343e544261f090cf7018ff09bc798c9c3692039ff78fd069a6105758a761c8",
+      "length": 1788
+    },
+    "build-manifest.txt": {
+      "path": "build-manifest.txt",
+      "sha256": "8c625daf866e4bb5e30259b9fb3d27cafcb4e8e5ee813a5b07b6a5e4160ee0d1",
+      "length": 1834
+    },
+    "run/.scoped-run-1809959e910c45c3a6f024b1642b886b.journal": {
+      "path": "run/.scoped-run-1809959e910c45c3a6f024b1642b886b.journal",
+      "sha256": "10c1bef796e3817729b758f32e13f42b5d2ea6168a67c83a9d54d3640ac66b1c",
+      "length": 2354
+    },
+    "run/.scoped-evidence-bed00e2827c143939e406078d3462ba5/stdout.log": {
+      "path": "run/.scoped-evidence-bed00e2827c143939e406078d3462ba5/stdout.log",
+      "sha256": "da591efa8e4deb80d2f20fc41b0027b21fa73946a9c8ac8013ab7fb543865395",
+      "length": 325
+    },
+    "run/.scoped-evidence-bed00e2827c143939e406078d3462ba5/stderr.log": {
+      "path": "run/.scoped-evidence-bed00e2827c143939e406078d3462ba5/stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "length": 0
+    },
+    "run/.scoped-evidence-bed00e2827c143939e406078d3462ba5/manifest.txt": {
+      "path": "run/.scoped-evidence-bed00e2827c143939e406078d3462ba5/manifest.txt",
+      "sha256": "fe0eb3eb926b1480570b64a2f55d4a1f1314ec087766967c51d173590ccaae59",
+      "length": 84336
+    },
+    "run/.scoped-evidence-bed00e2827c143939e406078d3462ba5/runtime/compile.log": {
+      "path": "run/.scoped-evidence-bed00e2827c143939e406078d3462ba5/runtime/compile.log",
+      "sha256": "3c1c423fad1a249043f9de6d46c17160ad938ce39e69b8add3b7052929222a2c",
+      "length": 5051
+    },
+    "run/.scoped-evidence-bed00e2827c143939e406078d3462ba5/runtime/managed-kill-wrong.log": {
+      "path": "run/.scoped-evidence-bed00e2827c143939e406078d3462ba5/runtime/managed-kill-wrong.log",
+      "sha256": "883c3f9eb5edd9ab75f51913e7d35d8e93f281af65333d81f1654a5dc897ae2b",
+      "length": 2031
+    },
+    "run/.scoped-evidence-bed00e2827c143939e406078d3462ba5/runtime/managed-timeout-wrong.log": {
+      "path": "run/.scoped-evidence-bed00e2827c143939e406078d3462ba5/runtime/managed-timeout-wrong.log",
+      "sha256": "4e59095dfc3cfc6bf2de216e679d3f6a7d00e728e563edc82c57c019ffa0833a",
+      "length": 1949
+    },
+    "run/.scoped-evidence-bed00e2827c143939e406078d3462ba5/runtime/managed-drop-kill-wrong.log": {
+      "path": "run/.scoped-evidence-bed00e2827c143939e406078d3462ba5/runtime/managed-drop-kill-wrong.log",
+      "sha256": "ccae0c2fe59a2676c5abea2320eb91b5f2a81a798ca83039d42a69c5338db642",
+      "length": 1995
+    },
+    "run/.scoped-evidence-bed00e2827c143939e406078d3462ba5/runtime/managed-drop-retain-wrong.log": {
+      "path": "run/.scoped-evidence-bed00e2827c143939e406078d3462ba5/runtime/managed-drop-retain-wrong.log",
+      "sha256": "77209065ffca48917fab810a1a6c6352c95e7d8f13141cd1f83bf5de9b5b5ce8",
+      "length": 2057
+    },
+    "run/.scoped-evidence-bed00e2827c143939e406078d3462ba5/runtime/suite.log": {
+      "path": "run/.scoped-evidence-bed00e2827c143939e406078d3462ba5/runtime/suite.log",
+      "sha256": "dd34f3b586385177987a932642735e6b83e9e4db29896a4cb68bae24de4657f4",
+      "length": 6358
+    },
+    "run/.scoped-evidence-bed00e2827c143939e406078d3462ba5/runtime/cargo-clean.log": {
+      "path": "run/.scoped-evidence-bed00e2827c143939e406078d3462ba5/runtime/cargo-clean.log",
+      "sha256": "d3560e5084428bf90a43f4cb69db431cd5ad5d14771ff45249e2ac3195ba86a1",
+      "length": 39
+    },
+    "run/.scoped-evidence-bed00e2827c143939e406078d3462ba5/runtime/cargo-version.txt": {
+      "path": "run/.scoped-evidence-bed00e2827c143939e406078d3462ba5/runtime/cargo-version.txt",
+      "sha256": "6112bcce75ab9a1c5d664eec9c11d98776a7c36c3be3c3402d871d72f1401b20",
+      "length": 36
+    },
+    "run/.scoped-evidence-bed00e2827c143939e406078d3462ba5/runtime/rustc-version.txt": {
+      "path": "run/.scoped-evidence-bed00e2827c143939e406078d3462ba5/runtime/rustc-version.txt",
+      "sha256": "8d95dab8b988abfc08735506e13455043a0a2f910e0672f4fdd48f37cc0a2f83",
+      "length": 36
+    }
+  },
+  "begin": {
+    "id": "rhai-native-73bbed61f32a48679390d099b4c3a9f5",
+    "scope": "C:\\Users\\RhaiTest\\.local\\share\\agent-builds\\rhai\\n-73bbed61",
+    "accepted": true,
+    "exit": 0,
+    "driver_pid": 2812,
+    "driver_creation": 134377326713469257
+  },
+  "end": {
+    "guest_evidence_retained": true,
+    "accepted": true,
+    "files": 19,
+    "id": "rhai-native-73bbed61f32a48679390d099b4c3a9f5",
+    "exit": 0
+  },
+  "bytes": 180155,
+  "serial_sha256": "fdf3a536d0e4f5ca62af7425829f025124e1f0f52ea66f60ca0adaf204568019",
+  "serial_bytes": 366197
+}

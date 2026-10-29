@@ -1876,6 +1876,23 @@ review passed these named slices. See
 `.scratch/all-tickets/release-matrix-20261028/posix-sys-alone-proof.md`.
 This does not close ignored tests, other feature rows or full release acceptance.
 
+Native Windows 11 `10.0.26300.0` / Rust-Cargo 1.77.2 now also has a
+current-source `testing-environ,sys,net` Managed-process control run. The
+448 archived source files and Cargo.lock matched fork-main `7dacf2ae`.
+One compiled `sys_process_windows` executable produced four expected RED
+results (exit 101 with intended assertions) for Managed kill, timeout and
+both final-drop policies, then passed the restored 32-test suite with real
+Windows parent, worker and sentinel readbacks. The bounded Driver exited 0;
+225 ordered COM1 frames reconstructed 19 hash-checked originals, and the
+eight-record journal reached `REMOVED`. The exact own guest scope, host ISO
+and stage were retired; original `sdc` and foreign `sdb` were verified in
+live and inactive VM views. The independent combined Standards/Spec review
+passed this named slice.
+See `.scratch/all-tickets/windows-rhai-native-20261028/release-matrix-windows-20261028/managed-controls-attempt01/proof.md`.
+This closes only the named native Windows Managed behavior and controls;
+other Windows faults, argument/IO cases, feature combinations and the full
+A–F/Ticket03/release campaign remain open.
+
 All P1–P14, E1–E5, F1–F23, X1–X38, R1–R7 and the six accepted local ticket contracts
 remain represented. This crosswalk is a coverage plan, not an executed acceptance
 matrix or closure count. Historical implementation notes and estimates follow.

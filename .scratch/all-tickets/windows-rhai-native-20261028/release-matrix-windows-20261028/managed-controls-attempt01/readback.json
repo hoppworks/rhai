@@ -1,0 +1,24 @@
+{
+  "accepted_original_native_slice": true,
+  "source_head": "7dacf2ae09ef657cfbb53d3a0b35b9bb7dc2f4ac",
+  "features": "testing-environ,sys,net",
+  "target": "sys_process_windows",
+  "compile_exit": 0,
+  "four_wrong_exits": [
+    101,
+    101,
+    101,
+    101
+  ],
+  "green_exit": 0,
+  "green_passed": 32,
+  "same_compiled_executable": "work\\target\\debug\\deps\\sys_process_windows-b3e5219af6d50bf7.exe",
+  "driver_exit": 0,
+  "driver_elapsed_seconds": 153.982094,
+  "original_frame_count": 225,
+  "original_file_count": 19,
+  "journal_records": 8,
+  "inner_runtime_removed": true,
+  "guest_outer_scope_retired": false,
+  "host_iso_stage_retired": false
+}
